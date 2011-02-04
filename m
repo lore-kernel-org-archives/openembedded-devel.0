@@ -1,38 +1,35 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1PlMWG-00049N-TL
+	(envelope-from <cliff.brake@gmail.com>) id 1PlMd6-0004Hg-KL
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Feb 2011 15:20:17 +0100
-Received: by pvd12 with SMTP id 12so406614pvd.6
+	Fri, 04 Feb 2011 15:27:20 +0100
+Received: by pwi8 with SMTP id 8so434227pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Feb 2011 06:19:18 -0800 (PST)
+	Fri, 04 Feb 2011 06:26:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=15Nq6nW+34ppx0JuHL9cMK/YZhwiT+s2vIjYJXp7g0A=;
-	b=ltrWHAiVADoIEk1w4Ozei2TrxGEuHDypegDuISQS/iA8lS/WUXMdDirSjWahaXljZm
-	OKTmQAtqWVli4+zrw8n0l6f8L3EHtXjd1sMRFhQZR+NMWqXHIcIaCp97eE3TSVzrZCcD
-	wvA+dQEyb2j9htZnF1fNGV9TQR+yTBz/tkiuU=
+	:message-id:subject:from:to:content-type;
+	bh=r9yT/hgXL6uxuWlzOkCRkGD2P9jykAubpdO/ZOz7W2Q=;
+	b=seiuR4Hkydk7oXbUqtRmDfpTfI9eQIRMwhP/10X7WtQBcrcK4DoLZ0/AW4rmYNZV4t
+	2wafj/WiDqHNh/UVFlTV2Ehc9Ini2t0L1YpIscK+/YFozBBny6GoNlsXw0WNEWT+BNbd
+	AIbhf9wVcoOxr+M0sHeGpBmooplYBwdDA0RO8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=r13W+JZKWqnCpPOF+qwOyJaM+jfvr58nlHtWyr6vQY0sBR6T19x1guHGXJe7xjmTG6
-	8NOBTeEmMuoa46RU8vuw3qnWZjvDODaqw1d67XxjO3pNs8Vyu3CFfgrsdiTQEKBmF3sr
-	OkOSFS+lydD/JFiJwy+XwCa9P2AhA9ghYlW9E=
+	:content-type;
+	b=vzCXIeXBokdup6RtyAUk3VGvBk+9KVrc4JgJwprvNhLkYFJm7wEcClllrY8QtGRtWq
+	Nl8leVi41+a5mwVGbhu3na+4Z/3SBsX43fOjlJM/g51sP/GgzJEbX2i843EomwSUOrm7
+	zli6FQMxR5sHAsJHLhLDZa3ypIpC8/a64jizg=
 MIME-Version: 1.0
-Received: by 10.142.163.19 with SMTP id l19mr5508087wfe.202.1296829158208;
-	Fri, 04 Feb 2011 06:19:18 -0800 (PST)
-Received: by 10.142.155.8 with HTTP; Fri, 4 Feb 2011 06:19:18 -0800 (PST)
-In-Reply-To: <AANLkTimvM1WzjtxR+P759r=Yk5yi-hNeEbrt_168_mvw@mail.gmail.com>
-References: <AANLkTi=QkexH5odXt9-6a9SFe=hhyv=tsiBXOhHt-u9p@mail.gmail.com>
-	<AANLkTi==esXejD-tuPpKQxk6dR2UmVGBSiHwtYV_5QtC@mail.gmail.com>
-	<AANLkTinZgDRh9D6LRs4KSNufmBTqy5qjyQbgr6BfcO4R@mail.gmail.com>
-	<AANLkTimvM1WzjtxR+P759r=Yk5yi-hNeEbrt_168_mvw@mail.gmail.com>
-Date: Fri, 4 Feb 2011 09:19:18 -0500
-Message-ID: <AANLkTinYC+ht+nBKdb+6DyC5B5+D+z9i3YQb=u3PQUgT@mail.gmail.com>
+Received: by 10.142.203.2 with SMTP id a2mr11783330wfg.31.1296829581088; Fri,
+	04 Feb 2011 06:26:21 -0800 (PST)
+Received: by 10.142.155.8 with HTTP; Fri, 4 Feb 2011 06:26:21 -0800 (PST)
+In-Reply-To: <AANLkTinAbLLKzbMbcQNSkgh8dQj+FD7WtuVd+wQ1ZKmz@mail.gmail.com>
+References: <AANLkTinAbLLKzbMbcQNSkgh8dQj+FD7WtuVd+wQ1ZKmz@mail.gmail.com>
+Date: Fri, 4 Feb 2011 09:26:21 -0500
+Message-ID: <AANLkTik3N3mv2aO09vBnBx-XYxA0B9K6MB3fS0urGJ8c@mail.gmail.com>
 From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: testing branch 2011-02-03
+Subject: Re: oestats as automated testing reporting tool (Was: testing branch 2011-01-20)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,35 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Feb 2011 14:20:17 -0000
+X-List-Received-Date: Fri, 04 Feb 2011 14:27:20 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-2011/2/4 Anders T=F6rnqvist <a.tqvist@gmail.com>:
-> So then the results mailed out weekly and attached are the manually gathe=
-red
-> results from the wiki page?
+On Wed, Jan 26, 2011 at 5:04 PM, Yury Bushmelev <jay4mail@gmail.com> wrote:
+> I have spent some time to looking over oestats client and server code.
+> Below are some ideas.
 
-Yes, I copy the table into a OOo spreadsheet, sort, and copy-n-paste
-the entries that have the right date.  Its not bad, but still fairly
-painful.
+Thanks for looking into this.
 
-Automated reporting would be nice (like tinderbox), but no one has
-signed up to do the work yet.
+> P.S.: Do we really need this in perspective of merging with yocto? Or
+> may be just use e.g. some spreadsheet/form on google instead?
 
-> If so, then the build results are probably better since probably not all
-> successful builds are manually entered into the wiki table.
+I think long term, the OE testing effort will still be valuable as it
+has the potential to test way more combinations that Yocto or oe-core
+will support.  The goal is to provide users with a known working
+starting point for the target board/arch they are interested in.  I
+think there is also value in having multiple people involved as we end
+up covering more workstation distros.  However, I don't have a clear
+vision yet where things are going, so this may all change.
 
-Probably depends who you are.  The testing effort is designed to help
-new users find a stable starting point without knowing too much about
-OE.  It is also proving very useful at keeping lots of build
-combinations going.
-
-Thanks,
 Cliff
 
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+-- 
+=================
 http://bec-systems.com
 
 
