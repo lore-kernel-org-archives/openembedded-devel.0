@@ -1,31 +1,33 @@
-Received: from einhorn.in-berlin.de ([192.109.42.8] ident=root)
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PlNUf-00089k-Kb
+	(envelope-from <cliff.brake@gmail.com>) id 1PlNWg-0008En-Od
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Feb 2011 16:22:41 +0100
-X-Envelope-From: sledz@dresearch.de
-Received: from mobil-400-586.intern.dresearch.de
-	(p57A227EA.dip0.t-ipconnect.de [87.162.39.234])
-	(authenticated bits=0)
-	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
-	p14FLiYH001272
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
-	Fri, 4 Feb 2011 16:21:44 +0100
-Received: from mobil-400-586.intern.dresearch.de (localhost [IPv6:::1])
-	by mobil-400-586.intern.dresearch.de (Postfix) with ESMTP id 62FE92E97E;
-	Fri,  4 Feb 2011 16:21:43 +0100 (CET)
-Message-ID: <4D4C1986.8090908@dresearch.de>
-Date: Fri, 04 Feb 2011 16:21:42 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.16) Gecko/20101125 SUSE/3.0.11 Lightning/1.0b1
-	Thunderbird/3.0.11
+	Fri, 04 Feb 2011 16:24:48 +0100
+Received: by pvd12 with SMTP id 12so416963pvd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Feb 2011 07:23:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=UjgxW1UTyU21pKioZ+Ysou2DBykqGKu1Iy9DrxUyjNA=;
+	b=ZJ+5atROI63X/8j4PJRaLGpP8GJjSeh0+0fWFh1YayprnjBXGldBkhjBsKG3oXWz1+
+	/dLRs5YIyb3wDIyWbOFMywjm3six4S65zXLfox1WKbJOJouWCNNfhNiVbpZBVBotDRDz
+	uqJNIhQ9Nq+n3Ta2AYYgSDV3TVUx4Fetc286E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=GEaMyLI+VMOKKjaKl+65chIgW+th3loKWDIRfILl452/BuraQnyzwEiry0VmiutD8G
+	89AFIcFzkdSQGwFMJZAlSgxCLWcLUjzYchC3xGwG9qIn9L94g3wZ6Jhkcwt/Diw8p2nV
+	ORXCHXelao3d3H1IPTLKO+WADKn/1alxUP8Gs=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <AANLkTi=QkexH5odXt9-6a9SFe=hhyv=tsiBXOhHt-u9p@mail.gmail.com>
-In-Reply-To: <AANLkTi=QkexH5odXt9-6a9SFe=hhyv=tsiBXOhHt-u9p@mail.gmail.com>
-X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
-Subject: Re: testing branch 2011-02-03
+Received: by 10.142.163.19 with SMTP id l19mr40634wfe.202.1296833026391; Fri,
+	04 Feb 2011 07:23:46 -0800 (PST)
+Received: by 10.142.155.8 with HTTP; Fri, 4 Feb 2011 07:23:46 -0800 (PST)
+Date: Fri, 4 Feb 2011 10:23:46 -0500
+Message-ID: <AANLkTi=7rXwOkt7HybRDGbp+5xAo8hu0a6zKhD_5h2Wm@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: OE weekly changelog for org.openembedded.dev, 2011-01-24 to 2011-01-31
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,104 +41,246 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Feb 2011 15:22:41 -0000
-X-Groupsio-MsgNum: 28823
-Content-Type: multipart/mixed; boundary="------------060707010009000502050505"
+X-List-Received-Date: Fri, 04 Feb 2011 15:24:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
---------------060707010009000502050505
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+OE weekly changelog for org.openembedded.dev, 2011-01-24 to 2011-01-31
 
-On 02/04/2011 02:08 PM, Cliff Brake wrote:
-> master has been merged to testing-next and is ready for clean builds.
+Alessandro Sappia (1):
+  qt-demo-init: Corrected a typo in qtdemo-init script
 
-My first try with the new branch and minimal-image failed configuring libtool-native-2.2.6b-r28.1 with a perl version mismatch error (see attached log). :(
+Alex Ferguson (1):
+  midpath: Make sdl-fixes patch external
 
-Build Configuration:
-BB_VERSION        = "1.10.2"
-METADATA_BRANCH   = "testing-next"
-METADATA_REVISION = "f06b04c"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "hipox"
-DISTRO            = "angstrom"
-DISTRO_VERSION    = "2010.7-test-20110204"
-TARGET_FPU        = "soft"
+Andrea Adami (13):
+  linux-kexecboot: reset DEFAULT_PREFERENCE =3D "-1"
+  klibc: move to latest 1.5.21
+  MAINTAINERS: add committer's entry.     Signed-off-by: Andrea Adami <andr=
+ea.
+  initramfs-module-kexecboot: fix RDEPENDS after kexec-tools changes.
+  task-devimage: fix RDEPENDS on kexec-tools.
+  task-shr-feed: fix RDEPENDS on kexec-tools.
+  slugos-packages: Fix reference to kexec-tools package.
+  linux-kexecboot: add more Zaurus defconfigs for testing 2.6.37
+  linux-kexecboot: new round of cleaning for 2.6.37 Zaurus defconfigs
+  linux-kexecboot: move SRCREV and bump to 2.6.38-rc2
+  linux-kexecboot_git: refresh Zaurus defconfigs
+  linux-kexecboot_git: update Zaurus defconfigs for 2.6.38-rc2
+  linux-kexecboot_git: return to DEFAULT_PREFERENCE=3D"-2"
 
-openSUSE 11.3 32-bit
+Andreas Oberritter (25):
+  python-zopeinterface-3.5.1: fix packaging
+  module.bbclass: fix RDEPENDS version syntax
+  char-driver: fix RDEPENDS version syntax
+  gpio-event: fix RDEPENDS version syntax
+  hostap: fix RDEPENDS version syntax
+  klibc: fix RDEPENDS version syntax
+  madwifi: fix RDEPENDS version syntax
+  networkmanager: fix RDEPENDS version syntax
+  prism54: fix RDEPENDS version syntax
+  python: fix RDEPENDS version syntax
+  robostix: fix RDEPENDS version syntax
+  robostix-module: fix RDEPENDS version syntax
+  sablevm: fix RDEPENDS version syntax
+  shfs: fix RDEPENDS version syntax
+  wifistix: fix RDEPENDS version syntax
+  wireshark: fix RDEPENDS version syntax
+  char-driver: depend on kernel-${KERNEL_VERSION} instead of kernel (=3D ${=
+KERNE
+  gpio-event: depend on kernel-${KERNEL_VERSION} instead of kernel (=3D ${K=
+ERNEL
+  madwifi: depend on kernel-${KERNEL_VERSION} instead of kernel (=3D ${KERN=
+EL_VE
+  prism54: depend on kernel-${KERNEL_VERSION} instead of kernel (=3D ${KERN=
+EL_VE
+  robostix: depend on kernel-${KERNEL_VERSION} instead of kernel (=3D ${KER=
+NEL_V
+  robostix-module: depend on kernel-${KERNEL_VERSION} instead of kernel (=
+=3D ${K
+  wifistix: depend on kernel-${KERNEL_VERSION} instead of kernel (=3D ${KER=
+NEL_V
+  module.bbclass: depend on kernel-${KERNEL_VERSION} instead of kernel (=3D=
+ ${KE
+  kernel.bbclass: Add kernel-* to PACKAGES_DYNAMIC
 
-Steffen
+Chris Larson (8):
+  bitbake.conf: include bin dirs from BBPATH in PATH
+  Move stage-manager-* into bin/ rather than a recipe
+  Add install wrapper rather than coreutils-native
+  cml1: fix the case of the variables in menuconfig
+  siteinfo: add linux-gnu os
+  file: make 5.04 relocatable
+  bin/install: use '.' not source, and use -eq not =3D=3D
+  openswan: fix build with install wrapper
 
-PS: Unfortunately oe-stats did not mentioned the problem and stayed in status "Started".
+Denis 'GNUtoo' Carikli (2):
+  xfdesktop 4.6.2: fix compilation
+  xserver-xorg-conf: htcdream: switch to htcdream version of the US keyboar=
+d
+
+Frans Meulenbroeks (2):
+  tzcode: moved to 2011a
+  tzdata: updated to 2011a
+
+Jeff Lance (2):
+  matrix-gui-common: Support SVG icons
+  matrix-gui: Update to the latest SRCREV
+
+Khem Raj (17):
+  udev: Remove duplicate udev firmware loading rule
+  opkg-utils_svn.bb: Sync with yocto
+  classes/package_ipk.bbclass,classes/sourceipk.bbclass: Use opkg-utils-nat=
+ive
+  recipes/meta recipes/tasks: Replace ipkg-utils with opkg-utils
+  slugos.inc: Dont lock SRCDATE for ipkg, its not used anymore
+  ipkg-utils: Remove the recipes
+  classes: Replace ipkg-make-index with opkg-make-index
+  bitbake.conf,nylon.conf,openwrt-sdk.conf: Use opkg-build instead of ipkg-=
+bui
+  angstrom/personal-feed.sh,angstrom/sort.sh: Replace ipkg-make-index with =
+opk
+  stage-manager: Use opkg utilities
+  Recipes: Replace ipkg-utils with opkg-utils
+  uclibc: Add copysignl implementation for powerpc to uclibc
+  samba: Fix build issue on uclibc/arm/thumb
+  git: Upgrade recipes from 1.7.0.2 -> 1.7.3.5
+  libpng.inc: Fix unfetchable SRC_URI
+  glib-2.0-native_2.22.1.bb: It should not be used anymore after BBCLASSEXT=
+END
+  uclibc_git.bb: Remove patches applied upstream and update to latest git/m=
+ast
+
+Klaus Kurzmann (1):
+  task-shr-feed: add sflphone-common
+
+Koen Kooi (16):
+  linux-omap4: tweak panda defconfig a bit
+  htop: update to 0.9
+  xf86-video-omapfb: bump SRCREV a bit
+  xf86-video-omapfb: bump SRCREV to latest, apply patches to keep XV workin=
+g
+  opencv,opencv-samples: add 2.2
+  gstreamer: add 0.10.32
+  gst-plugins-base: add 0.10.32
+  gst-plugins-bad: add 0.10.21
+  omapfbplay: import 3 patches from git to fix playing weird sized videos
+  omapfbplay: fix patch dir
+  x-load-git: add header to beagle name patch
+  linux-omap 2.6.37: add Laurents ISP patchset
+  avahi: integrate python into main recipe
+  libgles-omap3: add 4.03.00.01 release
+  x-load git: bump SRCREV, refresh patches
+  u-boot git: move overo to 2010.12
+
+Leon Woestenberg (2):
+  p2020rdb: New Freescale QorQ P2 machine, based on p1020rdb (P1)
+  adb4000.conf: New machine, kernel and u-boot support.
+
+Martin Jansa (29):
+  libxp: move from 1.0.0 to 1.0.1
+  pixman: upgrade from 0.21.2 to 0.21.4
+  e-base: bump EFL_SRCREV a bit
+  libxi: upgrade from 1.4.0 to 1.4.1
+  xbiff: upgrade from 1.0.2 to 1.0.3
+  git-1.7.3.5: fix git-less-hardlinks.diff and rename files dir to git-1.7.=
+3.5
+  e-base: prepare for releases
+  efl: remove unused files/mkinstalldirs
+  places: remove patch with really old maxrev
+  e-wm: drop patches with really old maxrev
+  evas: introduce 1.0.0
+  edje: introduce 1.0.0
+  embryo: introduce 1.0.0
+  edbus: introduce 1.0.0
+  eet: introduce 1.4.0
+  eeze: introduce 1.0.0
+  efreet: introduce 1.0.0
+  ecore: introduce 1.0.0
+  eina: introduce 1.0.0
+  python-edbus: simplify recipe
+  esmart,eflpp,entrance: move to obsolete
+  ewl: move to obsolete
+  exml, enhance: move to obsolete
+  ecore: fix checksum
+  waker: fix build without ecore_string_init and ecore_string_shutdown
+  e-tasks: add patch for changed genlist_item_insert_before api
+  mplayer_git: bump SRCREV
+  MAINTAINERS: fix my entry
+  xserver-xorg: upgrade from 1.9.3.901 to 1.9.3.902 (1.9.4 RC2)
+
+Martin Panter (1):
+  Fail if the cpio command is missing (v3)
+
+Mike Westerhof (6):
+  SlugOS: slugos.inc, task-slugos.bb - Debugging improvements     Adds devs=
+hel
+  SlugOS: sysconf - pass along hostname to DHCP server     This change will=
+ re
+  SlugOS: slugos-init -- add boot/kexec script for kernel development     (=
+thi
+  SlugOS: Bump up to SlugOS 5.7 with kernel 2.6.29     - drop CONFIG_SYSFS_=
+DEP
+  SlugOS: sysconf - change cpio usage from "crc" format to "newc" format   =
+  (
+  SlugOS: initscripts - rework reboot for clean kexec     (Borrowed extensi=
+vel
+
+Ryan D Phillips (1):
+  bind: Add DISTRO_FEATURES support for ipv6
+
+Scott Garman (1):
+  sudo: upgrade to 1.7.4p6
+
+Simon Busch (10):
+  initscripts-shr: remove devtmpfs initscript for palmpre machine
+  shr-image: use default IMAGE_DEV_MANAGER and not devtmpfs
+  palmpre machine: add udev-compat preferred provider
+  udev-162: add udev-compat configuration for palmpre machine
+  linux-palmpre: adopt to new kernel version and bump SRCREV
+  palmpre machine: bump kernel PR
+  xserver-nodm-init: reorder xserver-nodm to start position 90 for shr dist=
+rib
+  palmpre machine: split MACHINE_EXTRA_DEPENDS into lines
+  palmpre machine: add compat-wireless-2.6-old to MACHINE_EXTRA_RDEPENDS
+  shr-autorev.inc: add libshr-glib
+
+Stefan Schmidt (5):
+  buglabs-ppp-scripts: Some scripts to enable BUG for different broadband p=
+rov
+  angstrom-jalimo.conf: Bump icedtea6-native version to 1.7.6
+  felix: Add recipes for the felix OSGi implementation
+  concierge: Add OSGi R3 implementation and service tracker
+  buglabs-osgi: BugLabs OSGi modules
+
+Tom Rini (7):
+  openssl.inc: Simplify our check for a 'linux' OS.
+  p2020rdb: Add xserver-xorg stuff
+  openswan: Fix a build race in libipsecconf
+  Revert "bind: Add DISTRO_FEATURES support for ipv6"
+  python-native: Mangle shebang-invoking scripts
+  slugos.inc: Use ?=3D on SOURCE_MIRROR_URL
+  base.bbclass: Update build_summary for bitbake 1.8.x
+
+V=EDctor Manuel J=E1quez Leal (3):
+  minimal.conf: inherit devshell task
+  python-scons_1.3.0: add missing dependencies
+  python-scons_1.3.0: fix licence type
 
 
---------------060707010009000502050505
-Content-Type: text/plain;
- name="log.do_configure.9630"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment;
- filename="log.do_configure.9630"
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+Bugs fixed:
+bug_id resolution        short_desc
+5498 FIXED       Problem with glib-2.0-native under distro minimal
 
-YXV0b21ha2UgKEdOVSBhdXRvbWFrZSkgMS4xMS4xCkNvcHlyaWdodCAoQykgMjAwOSBGcmVlIFNv
-ZnR3YXJlIEZvdW5kYXRpb24sIEluYy4KTGljZW5zZSBHUEx2Mis6IEdOVSBHUEwgdmVyc2lvbiAy
-IG9yIGxhdGVyIDxodHRwOi8vZ251Lm9yZy9saWNlbnNlcy9ncGwtMi4wLmh0bWw+ClRoaXMgaXMg
-ZnJlZSBzb2Z0d2FyZTogeW91IGFyZSBmcmVlIHRvIGNoYW5nZSBhbmQgcmVkaXN0cmlidXRlIGl0
-LgpUaGVyZSBpcyBOTyBXQVJSQU5UWSwgdG8gdGhlIGV4dGVudCBwZXJtaXR0ZWQgYnkgbGF3LgoK
-V3JpdHRlbiBieSBUb20gVHJvbWV5IDx0cm9tZXlAcmVkaGF0LmNvbT4KICAgICAgIGFuZCBBbGV4
-YW5kcmUgRHVyZXQtTHV0eiA8YWRsQGdudS5vcmc+LgpBVVRPViBpcyAxLjExCk5PVEU6IEV4ZWN1
-dGluZyBhdXRvcmVjb25mIC0tdmVyYm9zZSAtLWluc3RhbGwgLS1mb3JjZSAtLWV4Y2x1ZGU9bGli
-dG9vbGl6ZSAtSSAvaG9tZS9zbGVkei93b3JrL09FLXRlc3RpbmcvdG1wLjYvd29yay9pNjg2LWxp
-bnV4L2xpYnRvb2wtbmF0aXZlLTIuMi42Yi1yMjguMS9saWJ0b29sLTIuMi42Yi90ZXN0cy8gLUkv
-aG9tZS9zbGVkei93b3JrL09FLXRlc3RpbmcvdG1wLjYvc3lzcm9vdHMvaTY4Ni1saW51eC91c3Iv
-c2hhcmUvYWNsb2NhbC0xLjExIC1JIC9ob21lL3NsZWR6L3dvcmsvT0UtdGVzdGluZy90bXAuNi9z
-eXNyb290cy9pNjg2LWxpbnV4L3Vzci9zaGFyZS9hY2xvY2FsCmF1dG9yZWNvbmY6IEVudGVyaW5n
-IGRpcmVjdG9yeSBgLicKYXV0b3JlY29uZjogY29uZmlndXJlLmFjOiBub3QgdXNpbmcgR2V0dGV4
-dAphdXRvcmVjb25mOiBydW5uaW5nOiBhY2xvY2FsIC1JIC9ob21lL3NsZWR6L3dvcmsvT0UtdGVz
-dGluZy90bXAuNi93b3JrL2k2ODYtbGludXgvbGlidG9vbC1uYXRpdmUtMi4yLjZiLXIyOC4xL2xp
-YnRvb2wtMi4yLjZiL3Rlc3RzLyAtSSAvaG9tZS9zbGVkei93b3JrL09FLXRlc3RpbmcvdG1wLjYv
-c3lzcm9vdHMvaTY4Ni1saW51eC91c3Ivc2hhcmUvYWNsb2NhbC0xLjExIC1JIC9ob21lL3NsZWR6
-L3dvcmsvT0UtdGVzdGluZy90bXAuNi9zeXNyb290cy9pNjg2LWxpbnV4L3Vzci9zaGFyZS9hY2xv
-Y2FsIC1JIC9ob21lL3NsZWR6L3dvcmsvT0UtdGVzdGluZy90bXAuNi93b3JrL2k2ODYtbGludXgv
-bGlidG9vbC1uYXRpdmUtMi4yLjZiLXIyOC4xL2xpYnRvb2wtMi4yLjZiL3Rlc3RzLyAtSSAvaG9t
-ZS9zbGVkei93b3JrL09FLXRlc3RpbmcvdG1wLjYvc3lzcm9vdHMvaTY4Ni1saW51eC91c3Ivc2hh
-cmUvYWNsb2NhbC0xLjExIC1JIC9ob21lL3NsZWR6L3dvcmsvT0UtdGVzdGluZy90bXAuNi9zeXNy
-b290cy9pNjg2LWxpbnV4L3Vzci9zaGFyZS9hY2xvY2FsIC0tZm9yY2UgLUkgbGlibHRkbC9tNAph
-dXRvcmVjb25mOiBjb25maWd1cmUuYWM6IHRyYWNpbmcKYXV0b3JlY29uZjogcnVubmluZzogL2hv
-bWUvc2xlZHovd29yay9PRS10ZXN0aW5nL3RtcC42L3N5c3Jvb3RzL2k2ODYtbGludXgvdXNyL2Jp
-bi9hdXRvY29uZiAtLWluY2x1ZGU9L2hvbWUvc2xlZHovd29yay9PRS10ZXN0aW5nL3RtcC42L3dv
-cmsvaTY4Ni1saW51eC9saWJ0b29sLW5hdGl2ZS0yLjIuNmItcjI4LjEvbGlidG9vbC0yLjIuNmIv
-dGVzdHMvIC0taW5jbHVkZT0vaG9tZS9zbGVkei93b3JrL09FLXRlc3RpbmcvdG1wLjYvc3lzcm9v
-dHMvaTY4Ni1saW51eC91c3Ivc2hhcmUvYWNsb2NhbC0xLjExIC0taW5jbHVkZT0vaG9tZS9zbGVk
-ei93b3JrL09FLXRlc3RpbmcvdG1wLjYvc3lzcm9vdHMvaTY4Ni1saW51eC91c3Ivc2hhcmUvYWNs
-b2NhbCAtLWZvcmNlIC0td2FybmluZ3M9Y3Jvc3MKYXV0b3JlY29uZjogcnVubmluZzogL2hvbWUv
-c2xlZHovd29yay9PRS10ZXN0aW5nL3RtcC42L3N5c3Jvb3RzL2k2ODYtbGludXgvdXNyL2Jpbi9h
-dXRvaGVhZGVyIC0taW5jbHVkZT0vaG9tZS9zbGVkei93b3JrL09FLXRlc3RpbmcvdG1wLjYvd29y
-ay9pNjg2LWxpbnV4L2xpYnRvb2wtbmF0aXZlLTIuMi42Yi1yMjguMS9saWJ0b29sLTIuMi42Yi90
-ZXN0cy8gLS1pbmNsdWRlPS9ob21lL3NsZWR6L3dvcmsvT0UtdGVzdGluZy90bXAuNi9zeXNyb290
-cy9pNjg2LWxpbnV4L3Vzci9zaGFyZS9hY2xvY2FsLTEuMTEgLS1pbmNsdWRlPS9ob21lL3NsZWR6
-L3dvcmsvT0UtdGVzdGluZy90bXAuNi9zeXNyb290cy9pNjg2LWxpbnV4L3Vzci9zaGFyZS9hY2xv
-Y2FsIC0tZm9yY2UgLS13YXJuaW5ncz1jcm9zcwphdXRvcmVjb25mOiBydW5uaW5nOiBhdXRvbWFr
-ZSAtLWZvcmVpZ24gLS1hZGQtbWlzc2luZyAtLWNvcHkgLS1mb3JjZS1taXNzaW5nIC0td2Fybmlu
-Z3M9Y3Jvc3MKYXV0b21ha2U6IHVua25vd24gd2FybmluZyBjYXRlZ29yeSBgY3Jvc3MnCmF1dG9y
-ZWNvbmY6IHJ1bm5pbmc6IGdudS1jb25maWdpemUKUGVybCBsaWIgdmVyc2lvbiAoNS4xMC4xKSBk
-b2Vzbid0IG1hdGNoIGV4ZWN1dGFibGUgdmVyc2lvbiAodjUuMTIuMSkgYXQgL2hvbWUvc2xlZHov
-d29yay9PRS10ZXN0aW5nL3RtcC42L3N5c3Jvb3RzL2k2ODYtbGludXgvdXNyL2xpYi9wZXJsLzUu
-MTAuMS9Db25maWcucG0gbGluZSA1MC4KQ29tcGlsYXRpb24gZmFpbGVkIGluIHJlcXVpcmUgYXQg
-L2hvbWUvc2xlZHovd29yay9PRS10ZXN0aW5nL3RtcC42L3N5c3Jvb3RzL2k2ODYtbGludXgvdXNy
-L2xpYi9wZXJsLzUuMTAuMS9GaWxlL0NvcHkucG0gbGluZSAxNC4KQkVHSU4gZmFpbGVkLS1jb21w
-aWxhdGlvbiBhYm9ydGVkIGF0IC9ob21lL3NsZWR6L3dvcmsvT0UtdGVzdGluZy90bXAuNi9zeXNy
-b290cy9pNjg2LWxpbnV4L3Vzci9saWIvcGVybC81LjEwLjEvRmlsZS9Db3B5LnBtIGxpbmUgMTQu
-CkNvbXBpbGF0aW9uIGZhaWxlZCBpbiByZXF1aXJlIGF0IC9ob21lL3NsZWR6L3dvcmsvT0UtdGVz
-dGluZy90bXAuNi9zeXNyb290cy9pNjg2LWxpbnV4L3Vzci9zaGFyZS9hdXRvY29uZi9BdXRvbTR0
-ZS9GaWxlVXRpbHMucG0gbGluZSAxNjYuCkJFR0lOIGZhaWxlZC0tY29tcGlsYXRpb24gYWJvcnRl
-ZCBhdCAvaG9tZS9zbGVkei93b3JrL09FLXRlc3RpbmcvdG1wLjYvc3lzcm9vdHMvaTY4Ni1saW51
-eC91c3Ivc2hhcmUvYXV0b2NvbmYvQXV0b200dGUvRmlsZVV0aWxzLnBtIGxpbmUgMTY2LgpDb21w
-aWxhdGlvbiBmYWlsZWQgaW4gcmVxdWlyZSBhdCAvaG9tZS9zbGVkei93b3JrL09FLXRlc3Rpbmcv
-dG1wLjYvc3lzcm9vdHMvaTY4Ni1saW51eC91c3IvYmluL2dudS1jb25maWdpemUgbGluZSA0My4K
-QkVHSU4gZmFpbGVkLS1jb21waWxhdGlvbiBhYm9ydGVkIGF0IC9ob21lL3NsZWR6L3dvcmsvT0Ut
-dGVzdGluZy90bXAuNi9zeXNyb290cy9pNjg2LWxpbnV4L3Vzci9iaW4vZ251LWNvbmZpZ2l6ZSBs
-aW5lIDQzLgphdXRvcmVjb25mOiBnbnUtY29uZmlnaXplIGZhaWxlZCB3aXRoIGV4aXQgc3RhdHVz
-OiAyNTUKRkFUQUw6IGF1dG9yZWNvbmYgZXhlY3V0aW9uIGZhaWxlZC4KRVJST1I6IEZ1bmN0aW9u
-IGRvX2NvbmZpZ3VyZSBmYWlsZWQK
+Bugs opened:
+bug_id resolution        short_desc
 
---------------060707010009000502050505--
+
+--=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+http://bec-systems.com
+
+
