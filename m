@@ -1,35 +1,24 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1PlMd6-0004Hg-KL
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Feb 2011 15:27:20 +0100
-Received: by pwi8 with SMTP id 8so434227pwi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Feb 2011 06:26:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=r9yT/hgXL6uxuWlzOkCRkGD2P9jykAubpdO/ZOz7W2Q=;
-	b=seiuR4Hkydk7oXbUqtRmDfpTfI9eQIRMwhP/10X7WtQBcrcK4DoLZ0/AW4rmYNZV4t
-	2wafj/WiDqHNh/UVFlTV2Ehc9Ini2t0L1YpIscK+/YFozBBny6GoNlsXw0WNEWT+BNbd
-	AIbhf9wVcoOxr+M0sHeGpBmooplYBwdDA0RO8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=vzCXIeXBokdup6RtyAUk3VGvBk+9KVrc4JgJwprvNhLkYFJm7wEcClllrY8QtGRtWq
-	Nl8leVi41+a5mwVGbhu3na+4Z/3SBsX43fOjlJM/g51sP/GgzJEbX2i843EomwSUOrm7
-	zli6FQMxR5sHAsJHLhLDZa3ypIpC8/a64jizg=
-MIME-Version: 1.0
-Received: by 10.142.203.2 with SMTP id a2mr11783330wfg.31.1296829581088; Fri,
-	04 Feb 2011 06:26:21 -0800 (PST)
-Received: by 10.142.155.8 with HTTP; Fri, 4 Feb 2011 06:26:21 -0800 (PST)
-In-Reply-To: <AANLkTinAbLLKzbMbcQNSkgh8dQj+FD7WtuVd+wQ1ZKmz@mail.gmail.com>
-References: <AANLkTinAbLLKzbMbcQNSkgh8dQj+FD7WtuVd+wQ1ZKmz@mail.gmail.com>
-Date: Fri, 4 Feb 2011 09:26:21 -0500
-Message-ID: <AANLkTik3N3mv2aO09vBnBx-XYxA0B9K6MB3fS0urGJ8c@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PlMey-0004Me-Vy for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Feb 2011 15:29:17 +0100
+Received: from f053034071.adsl.alicedsl.de ([78.53.34.71]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PlMe5-0007rN-9z for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Feb 2011 14:28:21 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: oestats as automated testing reporting tool (Was: testing branch 2011-01-20)
+In-Reply-To: <1296469935-30638-1-git-send-email-fabian@progra.de>
+References: <1296209389-20272-1-git-send-email-fabian@progra.de>
+	<1296469935-30638-1-git-send-email-fabian@progra.de>
+Date: Fri, 04 Feb 2011 15:28:21 +0100
+Message-ID: <1296829701.3967.23.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: [PATCH v2] totem-pl-parser_2.30.0: fix configure without gobject introspection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,30 +32,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Feb 2011 14:27:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 04 Feb 2011 14:29:17 -0000
+X-Groupsio-MsgNum: 28819
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-5PvJN3t3c/qsx9gyaBQA"
 
-On Wed, Jan 26, 2011 at 5:04 PM, Yury Bushmelev <jay4mail@gmail.com> wrote:
-> I have spent some time to looking over oestats client and server code.
-> Below are some ideas.
+--=-5PvJN3t3c/qsx9gyaBQA
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thanks for looking into this.
+Am Montag, den 31.01.2011, 11:32 +0100 schrieb Fabian Ruff:
+> this bugfix removes the configure error:
+>   HAVE_INTROSPECTION does not appear in AM_CONDITIONAL
+>=20
+> Signed-off-by: Fabian Ruff <fabian@progra.de>
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+Tested-by: Paul Menzel <paulepanter@users.sourceforge.net>
+  `angstrom-2008.1` for `MACHINE =3D "beagleboard"`
 
-> P.S.: Do we really need this in perspective of merging with yocto? Or
-> may be just use e.g. some spreadsheet/form on google instead?
+[=E2=80=A6]
 
-I think long term, the OE testing effort will still be valuable as it
-has the potential to test way more combinations that Yocto or oe-core
-will support.  The goal is to provide users with a known working
-starting point for the target board/arch they are interested in.  I
-think there is also value in having multiple people involved as we end
-up covering more workstation distros.  However, I don't have a clear
-vision yet where things are going, so this may all change.
-
-Cliff
-
--- 
-=================
-http://bec-systems.com
+Someone else has to commit and push [1], since I have no commit access.
 
 
+Thanks,
+
+Paul
+
+
+PS: It would be nice if you could respond to my question in my last
+message.
+
+
+[1] http://patches.openembedded.org/patch/409/
+
+--=-5PvJN3t3c/qsx9gyaBQA
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk1MDQUACgkQPX1aK2wOHVhDcACfRQ1y3TFxGtfC83ZdG1WNUfVl
+FhIAoILR4x1e2MeOzDO+h//87EtYd9Hf
+=FpWZ
+-----END PGP SIGNATURE-----
+
+--=-5PvJN3t3c/qsx9gyaBQA--
