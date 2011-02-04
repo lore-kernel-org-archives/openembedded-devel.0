@@ -1,39 +1,34 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1PlSTq-0000fk-Vb
+	(envelope-from <raj.khem@gmail.com>) id 1PlTFF-0001b3-GW
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Feb 2011 21:42:11 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id A518D1100291
+	Fri, 04 Feb 2011 22:31:09 +0100
+Received: by gxk20 with SMTP id 20so1117160gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Feb 2011 21:41:14 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 87819110028D
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Feb 2011 21:41:13 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (g225074149.adsl.alicedsl.de
-	[92.225.74.149]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Feb 2011 21:41:13 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 9AB5F3C346; Fri,  4 Feb 2011 21:41:00 +0100 (CET)
-Date: Fri, 4 Feb 2011 21:41:00 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110204204100.GA18008@rhein.zuhause.netz>
-References: <AANLkTinrmZzz8L=1CY9=F9Rdcc4A9+-tK07VD2fA0bRG@mail.gmail.com>
+	Fri, 04 Feb 2011 13:30:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=A94LcbDPYbNseFZOGzgKpdl5RuoDl2ZxaWcGXNbLn8U=;
+	b=RDnpFz2fkLRg9SHVX2E97lQ2wj4x0fRH3HcIeFXOu9papInlRGgIoYBb7ArMZKpMwY
+	WVeHnfPuOUu7gsp8JHya44TxAYJEyIzEg/0ZlPfuYcYyR1kPQ0TrIWd0rG03yyCIWMU1
+	1IdIZDtG9+3pBuWCk+6HlFyIManAicTKiEOqk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=DbTBUo8GHfnzRShAJw+zOBQv4N3B3Bk+h0FzC7IoT4mr2cKppICYkxnWwGB6I2pI9r
+	DdaEBwqHu7uCqIeyLVrjmJnrjZRDEySpMMxVgYTjZVDpmFw/rAAIwoBJoby9E25muAJr
+	ckOXICcrj+EGgeYNYTGBPmM8iTWRvT36t3gOc=
+Received: by 10.90.51.20 with SMTP id y20mr16082712agy.115.1296855010308; Fri,
+	04 Feb 2011 13:30:10 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.90.32.12 with HTTP; Fri, 4 Feb 2011 13:29:50 -0800 (PST)
 In-Reply-To: <AANLkTinrmZzz8L=1CY9=F9Rdcc4A9+-tK07VD2fA0bRG@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
+References: <AANLkTinrmZzz8L=1CY9=F9Rdcc4A9+-tK07VD2fA0bRG@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 4 Feb 2011 13:29:50 -0800
+Message-ID: <AANLkTinTsExpckdjTm2=at-mmoUFTyfn7CjvSrNL6NG5@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: Build problem when generating a squashfs image for a uclibc target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,30 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Feb 2011 20:42:11 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 04 Feb 2011 21:31:09 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 04, 2011 at 02:27:54PM -0500, Michael Poole wrote:
+On Fri, Feb 4, 2011 at 11:27 AM, Michael Poole <mdpoole@troilus.org> wrote:
 > org.openembedded.dev/recipes/udev/attr_2.4.44.bb contains this line:
->   LDFLAGS_append_libc-uclibc += " -lintl"
-> 
+> =C2=A0LDFLAGS_append_libc-uclibc +=3D " -lintl"
+>
 > When generating a squashfs image, the build process apparently needs
 > attr-native (-2.4.44-r4 on my machine).
-> 
+>
 > My (Ubuntu x86_64) host machine doesn't have a libintl.so anywhere, or
 > any obvious package to install it, and the line suggests that it is
 > only meant to be added for uclibc builds.
-> 
+>
 > What is the best way to fix or work around this?
-> 
+
+Its already fixed
+
+commit 45fcdc2aeda16be66cf3fd5b68cd544f40a98679
+Author: Khem Raj <raj.khem@gmail.com>
+Date:   Sun Jan 23 19:24:14 2011 -0800
+
+    attr_2.4.44.bb: Dont add -lintl if doing native build and target is ucl=
+ibc
+
+    Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+
+How old is your snapshot ?
+
+
+>
 > Michael Poole
-> 
-
-Hi,
-
-libintl is build within oe. Either provided from gettext or from libintl-proxy.
-
-Bye Henning
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
