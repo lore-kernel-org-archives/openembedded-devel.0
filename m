@@ -1,35 +1,30 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PlTFF-0001b3-GW
+	(envelope-from <Tom_Rini@mentor.com>) id 1PlTyp-0002Va-N1
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Feb 2011 22:31:09 +0100
-Received: by gxk20 with SMTP id 20so1117160gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Feb 2011 13:30:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=A94LcbDPYbNseFZOGzgKpdl5RuoDl2ZxaWcGXNbLn8U=;
-	b=RDnpFz2fkLRg9SHVX2E97lQ2wj4x0fRH3HcIeFXOu9papInlRGgIoYBb7ArMZKpMwY
-	WVeHnfPuOUu7gsp8JHya44TxAYJEyIzEg/0ZlPfuYcYyR1kPQ0TrIWd0rG03yyCIWMU1
-	1IdIZDtG9+3pBuWCk+6HlFyIManAicTKiEOqk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=DbTBUo8GHfnzRShAJw+zOBQv4N3B3Bk+h0FzC7IoT4mr2cKppICYkxnWwGB6I2pI9r
-	DdaEBwqHu7uCqIeyLVrjmJnrjZRDEySpMMxVgYTjZVDpmFw/rAAIwoBJoby9E25muAJr
-	ckOXICcrj+EGgeYNYTGBPmM8iTWRvT36t3gOc=
-Received: by 10.90.51.20 with SMTP id y20mr16082712agy.115.1296855010308; Fri,
-	04 Feb 2011 13:30:10 -0800 (PST)
+	Fri, 04 Feb 2011 23:18:15 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PlTxs-0004HX-HV from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Feb 2011 14:17:16 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Fri, 4 Feb 2011 14:17:16 -0800
+Received: from [172.30.80.88] ([172.30.80.88]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 4 Feb 2011 15:17:15 -0700
+Message-ID: <4D4C7AE5.3010808@mentor.com>
+Date: Fri, 04 Feb 2011 15:17:09 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.90.32.12 with HTTP; Fri, 4 Feb 2011 13:29:50 -0800 (PST)
-In-Reply-To: <AANLkTinrmZzz8L=1CY9=F9Rdcc4A9+-tK07VD2fA0bRG@mail.gmail.com>
-References: <AANLkTinrmZzz8L=1CY9=F9Rdcc4A9+-tK07VD2fA0bRG@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 4 Feb 2011 13:29:50 -0800
-Message-ID: <AANLkTinTsExpckdjTm2=at-mmoUFTyfn7CjvSrNL6NG5@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Build problem when generating a squashfs image for a uclibc target
+X-OriginalArrivalTime: 04 Feb 2011 22:17:15.0370 (UTC)
+	FILETIME=[47421CA0:01CBC4B9]
+Subject: Write access for Paul Menzel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,45 +38,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Feb 2011 21:31:09 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 04 Feb 2011 22:18:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Feb 4, 2011 at 11:27 AM, Michael Poole <mdpoole@troilus.org> wrote:
-> org.openembedded.dev/recipes/udev/attr_2.4.44.bb contains this line:
-> =C2=A0LDFLAGS_append_libc-uclibc +=3D " -lintl"
->
-> When generating a squashfs image, the build process apparently needs
-> attr-native (-2.4.44-r4 on my machine).
->
-> My (Ubuntu x86_64) host machine doesn't have a libintl.so anywhere, or
-> any obvious package to install it, and the line suggests that it is
-> only meant to be added for uclibc builds.
->
-> What is the best way to fix or work around this?
+Hey all,
 
-Its already fixed
+Paul has been doing a good job finding problems, fixing and testing them 
+well.  Can we give him write access?  Thanks!
 
-commit 45fcdc2aeda16be66cf3fd5b68cd544f40a98679
-Author: Khem Raj <raj.khem@gmail.com>
-Date:   Sun Jan 23 19:24:14 2011 -0800
-
-    attr_2.4.44.bb: Dont add -lintl if doing native build and target is ucl=
-ibc
-
-    Signed-off-by: Khem Raj <raj.khem@gmail.com>
-
-
-How old is your snapshot ?
-
-
->
-> Michael Poole
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
