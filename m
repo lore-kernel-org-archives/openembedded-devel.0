@@ -1,36 +1,27 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PlM4i-0000Vo-9F
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1PlMFJ-00015T-C0
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Feb 2011 14:51:48 +0100
-Received: by iwn8 with SMTP id 8so2194111iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Feb 2011 05:50:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=enot8RUHuB6vmGNMBRvyc0Qy0GXJkUb2icx1vnbEmMs=;
-	b=RJfmVuSrTK9vGwqAm7uLnyAU6H6ZAHf8Z5cIOsvELy/zKNxwvcA86bQ/BVRwCu3m9p
-	gwZDyddLqGImXVLP24ljWzSpHO4JS5HWITV9UDlgZ0rZZwmIS0KDkgL0fBE3XlnmC20M
-	C86DtsMT2WffY0u5RKq/G/yWetOSMbwDQok4M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=jT/hu5obKe4cD9emmQX1ofxgXIfkQoXai6BBtAUwo1wMHKzuTxuwRn0iE1w9rIH87Y
-	2vf+xkQ911azZFdyUBruHhlLXeFIfNqj0MSZGDLyIqhHfBF9F/FOeApO6Nz02VKYYG0/
-	Ikg//3vemAQ3ILFgxgf/fihJZTpUg6GbqwO28=
-MIME-Version: 1.0
-Received: by 10.231.172.75 with SMTP id k11mr9874946ibz.133.1296827449883;
-	Fri, 04 Feb 2011 05:50:49 -0800 (PST)
-Received: by 10.231.36.68 with HTTP; Fri, 4 Feb 2011 05:50:49 -0800 (PST)
-In-Reply-To: <AANLkTi==esXejD-tuPpKQxk6dR2UmVGBSiHwtYV_5QtC@mail.gmail.com>
-References: <AANLkTi=QkexH5odXt9-6a9SFe=hhyv=tsiBXOhHt-u9p@mail.gmail.com>
-	<AANLkTi==esXejD-tuPpKQxk6dR2UmVGBSiHwtYV_5QtC@mail.gmail.com>
-Date: Fri, 4 Feb 2011 14:50:49 +0100
-Message-ID: <AANLkTinZgDRh9D6LRs4KSNufmBTqy5qjyQbgr6BfcO4R@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Fri, 04 Feb 2011 15:02:45 +0100
+Received: (qmail invoked by alias); 04 Feb 2011 14:01:47 -0000
+Received: from p4FE0FB3C.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.224.251.60]
+	by mail.gmx.net (mp057) with SMTP; 04 Feb 2011 15:01:47 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/hWyp3Zgnh80Hdsiym/QUkKU9J6uYdzmPBoPa+Vk
+	727g5zpEae4I5E
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: testing branch 2011-02-03
+Date: Fri, 4 Feb 2011 14:58:18 +0100
+User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
+References: <201101271038.18945.ml@vdm-design.de>
+	<AANLkTi=f0V2=U9rAZd9HTk8VdgqZbRC+2NJ8YE-4SZbw@mail.gmail.com>
+	<AANLkTi=7X86Wvps_HETYz7mkCSZbDKLxBHP1uW6NUbMN@mail.gmail.com>
+In-Reply-To: <AANLkTi=7X86Wvps_HETYz7mkCSZbDKLxBHP1uW6NUbMN@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201102041458.18471.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: bitbake does not fail when QA issues encountered
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,57 +35,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Feb 2011 13:51:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 04 Feb 2011 14:02:45 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-2011/2/4 Anders T=F6rnqvist <a.tqvist@gmail.com>:
-> These nice testing results, what are they?
-> Results from the oestats server of all the successful builds?
+On Friday 04 February 2011 14:10:33 Frans Meulenbroeks wrote:
+> 2011/2/4 Otavio Salvador <otavio@ossystems.com.br>:
+> > On Fri, Feb 4, 2011 at 09:57, Frans Meulenbroeks
+> > <fransmeulenbroeks@gmail.com> wrote:
+> >> Actually I did not react on the libtool forcing upon everyone, but on
+> >> the QA errors (where this thread was about).
+> >> That was also the cause of the ostrich remark (which was definitely
+> >> not aimed at you in person, but more a general comment, triggered by
+> >> the fact that I have some experience with projects being outsourced to
+> >> an unnamed country where a bug report also could be "repaired" by
+> >> removing the message or the the symptom instead of tackling the root
+> >> cause).
+> >>
+> >> What I see is a lack of interest in fixing the existing QA errors.
+> >> I've sent out a few error reports to the list a while ago, (on recipes
+> >> that I feel not comfortable with), but unfortunately that did not
+> >> result in any action :-(
+> >
+> > I think we ought to FAIL on QA errors. Distros can ignore the errors
+> > if they want but OE as a whole cannot do that.
+> 
+> I tend to agree with this.
+> Actually it would be nice if insane.bbclass would allow a way to
+> specify which tests you want to do.
+My suggestion: Run alI tests but make it configurable what causes just warnings 
+and what causes errors (not too many options e.g. all QA cause errors or 
+warning). There are different roles: OE-Users do not want the build to be 
+broken - images with QA errors might run without errors. OE developers might
+appreciate to get a hard error for the package currently working on or for test 
+builds.
 
-My (eFfeM) test results are from a run on our autobuilder (using Hudson).
-I manually go through the result log and update the wiki table accordingly.
+Andreas
 
-http://wiki.openembedded.org/index.php/Testing#Overview
-
-Frans.
->
-> /Anders
->
->
-> 2011/2/4 Cliff Brake <cliff.brake@gmail.com>
->
->> master has been merged to testing-next and is ready for clean builds.
->>
->> I realize I've been tardy in getting the testing-next going, so I'm
->> going to create a cron job now that does that weekly.
->>
->> Last week's testing results:
->>
->>
->> http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=3Dtested_2011=
--01-28
->>
->> For more information on OE testing, see:
->>
->> http://www.openembedded.org/index.php/Testing
->>
->> Thanks,
->> Cliff
->>
->> --
->> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> http://bec-systems.com
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
