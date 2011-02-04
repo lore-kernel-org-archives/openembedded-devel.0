@@ -1,27 +1,23 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1PlMFJ-00015T-C0
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Feb 2011 15:02:45 +0100
-Received: (qmail invoked by alias); 04 Feb 2011 14:01:47 -0000
-Received: from p4FE0FB3C.dip.t-dialin.net (EHLO localhost.localdomain)
-	[79.224.251.60]
-	by mail.gmx.net (mp057) with SMTP; 04 Feb 2011 15:01:47 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/hWyp3Zgnh80Hdsiym/QUkKU9J6uYdzmPBoPa+Vk
-	727g5zpEae4I5E
-From: Andreas Mueller <schnitzeltony@gmx.de>
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PlMI7-0001Bl-G9 for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Feb 2011 15:05:39 +0100
+Received: from f053034071.adsl.alicedsl.de ([78.53.34.71]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PlMHD-0006eh-Tr for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Feb 2011 14:04:44 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 4 Feb 2011 14:58:18 +0100
-User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
-References: <201101271038.18945.ml@vdm-design.de>
-	<AANLkTi=f0V2=U9rAZd9HTk8VdgqZbRC+2NJ8YE-4SZbw@mail.gmail.com>
-	<AANLkTi=7X86Wvps_HETYz7mkCSZbDKLxBHP1uW6NUbMN@mail.gmail.com>
-In-Reply-To: <AANLkTi=7X86Wvps_HETYz7mkCSZbDKLxBHP1uW6NUbMN@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <201102041458.18471.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: bitbake does not fail when QA issues encountered
+In-Reply-To: <1296324303.5925.26.camel@mattotaupa>
+References: <1296324303.5925.26.camel@mattotaupa>
+Date: Fri, 04 Feb 2011 15:04:43 +0100
+Message-ID: <1296828283.3967.19.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: [PATCH] xbmc: add `gperf-native` to `DEPENDS`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,43 +31,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Feb 2011 14:02:45 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 04 Feb 2011 14:05:39 -0000
+X-Groupsio-MsgNum: 28815
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-gF2woh6VADzo2a6ha0Re"
 
-On Friday 04 February 2011 14:10:33 Frans Meulenbroeks wrote:
-> 2011/2/4 Otavio Salvador <otavio@ossystems.com.br>:
-> > On Fri, Feb 4, 2011 at 09:57, Frans Meulenbroeks
-> > <fransmeulenbroeks@gmail.com> wrote:
-> >> Actually I did not react on the libtool forcing upon everyone, but on
-> >> the QA errors (where this thread was about).
-> >> That was also the cause of the ostrich remark (which was definitely
-> >> not aimed at you in person, but more a general comment, triggered by
-> >> the fact that I have some experience with projects being outsourced to
-> >> an unnamed country where a bug report also could be "repaired" by
-> >> removing the message or the the symptom instead of tackling the root
-> >> cause).
-> >>
-> >> What I see is a lack of interest in fixing the existing QA errors.
-> >> I've sent out a few error reports to the list a while ago, (on recipes
-> >> that I feel not comfortable with), but unfortunately that did not
-> >> result in any action :-(
-> >
-> > I think we ought to FAIL on QA errors. Distros can ignore the errors
-> > if they want but OE as a whole cannot do that.
-> 
-> I tend to agree with this.
-> Actually it would be nice if insane.bbclass would allow a way to
-> specify which tests you want to do.
-My suggestion: Run alI tests but make it configurable what causes just warnings 
-and what causes errors (not too many options e.g. all QA cause errors or 
-warning). There are different roles: OE-Users do not want the build to be 
-broken - images with QA errors might run without errors. OE developers might
-appreciate to get a hard error for the package currently working on or for test 
-builds.
+--=-gF2woh6VADzo2a6ha0Re
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Andreas
+Am Samstag, den 29.01.2011, 19:05 +0100 schrieb Paul Menzel:
+> Date: Mon Jan 24 08:19:04 2011 +0100
+>=20
+> Task `configure` fails otherwise with the following error.
+>=20
+>     configure: =3D=3D VDADecoder support manually disabled. =3D=3D
+>     checking OpenMAX/il/OMX_Types.h usability... no
+>     checking OpenMAX/il/OMX_Types.h presence... no
+>     checking for OpenMAX/il/OMX_Types.h... no
+>     =3D=3D Could not find libnvomx. OpenMax support disabled. =3D=3D
+>     checking for gawk... yes
+>     checking for cmake... yes
+>     checking for gperf... no
+>     configure: error: Could not find a required program. Please see the R=
+EADME f
+>     ERROR: Function do_configure failed
+>=20
+> This patch is build tested with `angstrom-2008.1` for `MACHINE =3D "beagl=
+eboard"`.
+>=20
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+
+Could someone please commit and push this patch [1].
 
 
+Thanks,
 
+Paul
+
+
+[1] http://patches.openembedded.org/patch/403/
+
+> ---
+>  recipes/xbmc/xbmc_svn.bb |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/recipes/xbmc/xbmc_svn.bb b/recipes/xbmc/xbmc_svn.bb
+> index 3689715..be2e34e 100644
+> --- a/recipes/xbmc/xbmc_svn.bb
+> +++ b/recipes/xbmc/xbmc_svn.bb
+> @@ -1,7 +1,7 @@
+>  DESCRIPTION =3D "XBMC Media Center"
+>  LICENSE =3D "xbmc"
+> =20
+> -DEPENDS =3D "libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl python=
+ libmodplug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-m=
+ixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo2 enc=
+a avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl j=
+asper zip-native zlib"
+> +DEPENDS =3D "gperf-native libxmu fribidi mpeg2dec ffmpeg samba fontconfi=
+g curl python libmodplug libmicrohttpd wavpack libmms cmake-native libsdl-i=
+mage libsdl-mixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre b=
+oost lzo2 enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 vir=
+tual/libsdl jasper zip-native zlib"
+>  require recipes/egl/egl.inc
+> =20
+>  SRCREV =3D "e2ab481ebe964321c358ab9d6402088c714adcbe"
+
+--=-gF2woh6VADzo2a6ha0Re
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk1MB3sACgkQPX1aK2wOHVh7ywCfa6K79yeUyBEUdZqDa0kMNEol
+xoAAnj1183Wsla3YU62Wmbv9hQc7BRLf
+=MdPV
+-----END PGP SIGNATURE-----
+
+--=-gF2woh6VADzo2a6ha0Re--
