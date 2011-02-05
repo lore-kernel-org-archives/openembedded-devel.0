@@ -1,30 +1,33 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PlTyp-0002Va-N1
+	(envelope-from <dp@xora.org.uk>) id 1PlcQY-0006r8-PL
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Feb 2011 23:18:15 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1PlTxs-0004HX-HV from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Feb 2011 14:17:16 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Fri, 4 Feb 2011 14:17:16 -0800
-Received: from [172.30.80.88] ([172.30.80.88]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 4 Feb 2011 15:17:15 -0700
-Message-ID: <4D4C7AE5.3010808@mentor.com>
-Date: Fri, 04 Feb 2011 15:17:09 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+	Sat, 05 Feb 2011 08:19:26 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id EDCE5A53D5
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  5 Feb 2011 07:18:28 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id FxIdzVFljepv
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  5 Feb 2011 07:18:27 +0000 (GMT)
+Received: from [192.168.0.83] (144.150-64-87.adsl-dyn.isp.belgacom.be
+	[87.64.150.144])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id AE2EBA53CB
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  5 Feb 2011 07:18:27 +0000 (GMT)
+Message-ID: <4D4CF9CA.40503@xora.org.uk>
+Date: Sat, 05 Feb 2011 07:18:34 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 04 Feb 2011 22:17:15.0370 (UTC)
-	FILETIME=[47421CA0:01CBC4B9]
-Subject: Write access for Paul Menzel
+References: <4D4C7AE5.3010808@mentor.com>
+In-Reply-To: <4D4C7AE5.3010808@mentor.com>
+Subject: Re: Write access for Paul Menzel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,17 +41,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Feb 2011 22:18:16 -0000
+X-List-Received-Date: Sat, 05 Feb 2011 07:19:26 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hey all,
+On 04/02/2011 22:17, Tom Rini wrote:
+> Hey all,
+>
+> Paul has been doing a good job finding problems, fixing and testing 
+> them well.  Can we give him write access?  Thanks!
+>
+Agreed, ack from me for this.
 
-Paul has been doing a good job finding problems, fixing and testing them 
-well.  Can we give him write access?  Thanks!
+Graeme
 
--- 
-Tom Rini
-Mentor Graphics Corporation
 
 
