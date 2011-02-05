@@ -1,35 +1,47 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PliFq-0005Lk-9Q
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PliJB-0005RT-E6
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Feb 2011 14:32:46 +0100
-Received: by iyj8 with SMTP id 8so636680iyj.6
+	Sat, 05 Feb 2011 14:36:13 +0100
+Received: by iwn8 with SMTP id 8so3107054iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Feb 2011 05:31:46 -0800 (PST)
+	Sat, 05 Feb 2011 05:35:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=2WZ05PbFbHhl1K82VBqEjytYtQgG1pDajdBN0omrCVQ=;
-	b=dyAZRCf6B/SRPqfwjbUsqF2d37Y5fJ+aKOLPp1NkxiTbiMer9zG/RFRgur387bWPa9
-	SFhtJwvoIPv++/LMZ7n4BlRa1b8T1OIeR+D4n1YlrAp+cmPUVL2TAOtVsf2MiCasG61h
-	zkJVCegTL3z0tY2rnH58h+CQOG4cxHmWFCB5Q=
+	:message-id:subject:from:to:content-type;
+	bh=9clOdFxcPv68bBlRwNZDZgbnTnDRHBCqxlvezYUZmIY=;
+	b=dgdYoeeax6KUzWSrZ1GR3D86qj5vR0Lw0dGwKS2u35cislwtjx01K9RETpeuVUnX8f
+	9joFowbeNnnagMAvjxhH5BZ4M3+1zcb+w7aRDnwtTl6KNTd3G/vhVgNzqSg2bLICgKGM
+	xyxQEb4EWet9mHi+NFKLQROZhK35GSNGgKmBg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=A6KvzWY0KruDfL7/3RWW1i0joYQ1zftbzFgZK4Vk9e/Lg9cVe8BJhk6x/LCsYv4FAo
-	dqJWNXV4DV1rnJFIA72kVhOWfburftDjmlBm5f0cT7zPgBFKX+Xt2YR2OEVGonEE7JCo
-	xpu+UbXEDX69oY2z0COKNQiU/jt+naj14HMDo=
+	:content-type;
+	b=MvWXc6qOPbN0x9aEg+yHzGv+eYTgdbM9vfe8iwcl/ztTxzfO+RwO19EycnmGc2/dWe
+	xjBBaertJxl+KkpgqNVdak6iONyKSTKP2wFTdz4rp+JMxgtZx8+1yJuBJy77S9xBOkwA
+	2y0sK0zXAVl9Ng8YUGBV7aesY7Drd8zFB5Rw0=
 MIME-Version: 1.0
-Received: by 10.42.175.9 with SMTP id ay9mr8331903icb.504.1296912705851; Sat,
-	05 Feb 2011 05:31:45 -0800 (PST)
-Received: by 10.231.36.68 with HTTP; Sat, 5 Feb 2011 05:31:45 -0800 (PST)
-In-Reply-To: <4D4C7AE5.3010808@mentor.com>
-References: <4D4C7AE5.3010808@mentor.com>
-Date: Sat, 5 Feb 2011 14:31:45 +0100
-Message-ID: <AANLkTimpQjdTbKp6e84goYCpjw52g=1+omket7wf72_T@mail.gmail.com>
+Received: by 10.231.40.12 with SMTP id i12mr1742739ibe.183.1296912914216; Sat,
+	05 Feb 2011 05:35:14 -0800 (PST)
+Received: by 10.231.36.68 with HTTP; Sat, 5 Feb 2011 05:35:14 -0800 (PST)
+In-Reply-To: <AANLkTimO7SQU7k=3ACn4K4wSOwRWkvoV-Tnvn2FFVW63@mail.gmail.com>
+References: <201101271038.18945.ml@vdm-design.de>
+	<AANLkTimy4Q0Y_3Y-=8=QCifqQUYwWmFx4T0DH+dNXPeZ@mail.gmail.com>
+	<4D418914.2030703@mentor.com> <20110203070901.GA11867@denix.org>
+	<4D4AE93E.2020509@mentor.com> <20110203222035.GA19477@denix.org>
+	<4D4B35A7.4040000@mentor.com>
+	<AANLkTinO257Uuh8bTQCb2LPXKFF1LtB+qN0KjM8aXZVN@mail.gmail.com>
+	<20110204081659.GQ4580@excalibur.local>
+	<AANLkTinrcXmdF=P8KUc8_cWfchPEM=q7UaDbCbQknteF@mail.gmail.com>
+	<20110204090348.GR4580@excalibur.local>
+	<AANLkTik5RVEsxh_jtXTjQRM3sKBrmwmOaWbqs2eKKop=@mail.gmail.com>
+	<4D4C1464.4030609@mentor.com>
+	<AANLkTi=o+QW-K2VG7WBFFTrshxhD1TDMbqx=EbTxDj5h@mail.gmail.com>
+	<AANLkTimO7SQU7k=3ACn4K4wSOwRWkvoV-Tnvn2FFVW63@mail.gmail.com>
+Date: Sat, 5 Feb 2011 14:35:14 +0100
+Message-ID: <AANLkTikXULU=UyfomMr_GVx5o1GieZrRxDZET3QF30px@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Write access for Paul Menzel
+Subject: Re: bitbake does not fail when QA issues encountered
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,17 +55,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Feb 2011 13:32:46 -0000
+X-List-Received-Date: Sat, 05 Feb 2011 13:36:13 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-2011/2/4 Tom Rini <tom_rini@mentor.com>:
-> Hey all,
+2011/2/4 Otavio Salvador <otavio@ossystems.com.br>:
+> On Fri, Feb 4, 2011 at 15:26, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+>> The recipes at hand are:
+> ...
+>> cups: there is someone bitching about that this is 1.2, but he
+>> apparently prefers bitching upon resolving the issue. Probably the
+>> best solution is to drop the DP = -1 from the 1.4.4 recipe
+> ...
 >
-> Paul has been doing a good job finding problems, fixing and testing them
-> well. =A0Can we give him write access? =A0Thanks!
+> I can work on cups next week (I am on VAC right now).
 
-Fine with me.
+Actually the cups thing is the one I would feel fairly comfortable with.
+The question here is mainly when/how to drop the DP = -1.
+A pinning of 1.4.4 is already in my local.conf for quite a while.
+
 Frans
 
 
