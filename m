@@ -1,32 +1,34 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Plk5G-0007wC-0N
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pllul-0001o8-2N
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Feb 2011 16:29:58 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Plk4H-00037A-QH from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Feb 2011 07:28:57 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Sat, 5 Feb 2011 07:28:56 -0800
-Received: from [172.30.80.88] ([172.30.80.88]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 5 Feb 2011 08:28:56 -0700
-Message-ID: <4D4D6CB1.9050008@mentor.com>
-Date: Sat, 05 Feb 2011 08:28:49 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Sat, 05 Feb 2011 18:27:15 +0100
+Received: by wwi17 with SMTP id 17so3231020wwi.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 05 Feb 2011 09:26:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:subject:date:message-id:x-mailer;
+	bh=VDAlOhCDtnfeeZhB/Js1sHfn6RTT2rtfXla/IA0YHkg=;
+	b=AQnNpE+V2GbNwCDlosh0s4x2CmTPogAarHJouZUdyI01KyHY8LMz6i1wgtT8AONtt8
+	uSAI3jrWb36D/C7Bi9r8+WkPT61Hi021f+sUpHjvf99w//fnudO5xRw31df71WCR3anO
+	ZsyX6YBHQUTONHkWTrD7NBSzO9V26REw+Adf8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer;
+	b=YhVduc656BTGwh5ONPOiMN8SNRPtIjMnVJqwtCOKIiIski52L4Qd3jge0iGKvxPVx5
+	PLUW1IEo3KN2K4DVirhvuuqi/pgO/wpe5joqJqKEyErCnb6SJ+sbO+8rP98VFdU/lXEg
+	CWp3dgNNddOeX3vSbG8vpzNfkGA/qb3/fFymo=
+Received: by 10.227.196.5 with SMTP id ee5mr10876372wbb.170.1296926775831;
+	Sat, 05 Feb 2011 09:26:15 -0800 (PST)
+Received: from localhost.localdomain (ns.tefnet.pl [188.165.206.204])
+	by mx.google.com with ESMTPS id a50sm1107431wer.42.2011.02.05.09.26.14
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 05 Feb 2011 09:26:15 -0800 (PST)
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTi=QkexH5odXt9-6a9SFe=hhyv=tsiBXOhHt-u9p@mail.gmail.com>
-In-Reply-To: <AANLkTi=QkexH5odXt9-6a9SFe=hhyv=tsiBXOhHt-u9p@mail.gmail.com>
-X-OriginalArrivalTime: 05 Feb 2011 15:28:56.0741 (UTC)
-	FILETIME=[6759BD50:01CBC549]
-Subject: Re: testing branch 2011-02-03
+Date: Sat,  5 Feb 2011 18:26:09 +0100
+Message-Id: <1296926769-2006-1-git-send-email-filip.zyzniewski@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] gnu-config: removed absolute perl binary paths from gnu-configize.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,35 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Feb 2011 15:29:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 05 Feb 2011 17:27:16 -0000
 
-On 02/04/2011 06:08 AM, Cliff Brake wrote:
-> master has been merged to testing-next and is ready for clean builds.
->
-> I realize I've been tardy in getting the testing-next going, so I'm
-> going to create a cron job now that does that weekly.
->
-> Last week's testing results:
->
-> http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=tested_2011-01-28
->
-> For more information on OE testing, see:
->
-> http://www.openembedded.org/index.php/Testing
+Related bugzilla entry: http://bugs.openembedded.org/show_bug.cgi?id=5510
+---
+ recipes/gnu-config/files/gnu-configize.in |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-Without be21179c5321bd0afb9221f020ac12ad75c86a3b all of mine (would 
-have) failed so I wont be reporting results on the table this week but I 
-am kicking things off on current top of tree.  I expect:
-- angstrom-2008.1 + qt4* to fail (reported earlier this week)
-- qt4* + arm + minimal-uclibc to fail (one of those __cxa_atexit things, 
-will report better)
-- qt4* + mips64 + minimal-uclibc to fail (don't have the log handy, will 
-report).
-
+diff --git a/recipes/gnu-config/files/gnu-configize.in b/recipes/gnu-config/files/gnu-configize.in
+index be8580c..adf9c0e 100755
+--- a/recipes/gnu-config/files/gnu-configize.in
++++ b/recipes/gnu-config/files/gnu-configize.in
+@@ -1,7 +1,7 @@
+-#! /usr/bin/perl -w
++#! /usr/bin/env perl
+ # -*- perl -*-
+ 
+-eval 'case $# in 0) exec /usr/bin/perl -S "$0";; *) exec /usr/bin/perl -S "$0" "$@";; esac'
++eval 'case $# in 0) exec perl -S "$0";; *) exec perl -S "$0" "$@";; esac'
+     if 0;
+ 
+ # gnu-configize - install the GNU config.guess / config.sub in a directory tree
 -- 
-Tom Rini
-Mentor Graphics Corporation
+1.7.1
+
 
 
