@@ -1,47 +1,24 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PliJB-0005RT-E6
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Feb 2011 14:36:13 +0100
-Received: by iwn8 with SMTP id 8so3107054iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Feb 2011 05:35:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=9clOdFxcPv68bBlRwNZDZgbnTnDRHBCqxlvezYUZmIY=;
-	b=dgdYoeeax6KUzWSrZ1GR3D86qj5vR0Lw0dGwKS2u35cislwtjx01K9RETpeuVUnX8f
-	9joFowbeNnnagMAvjxhH5BZ4M3+1zcb+w7aRDnwtTl6KNTd3G/vhVgNzqSg2bLICgKGM
-	xyxQEb4EWet9mHi+NFKLQROZhK35GSNGgKmBg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=MvWXc6qOPbN0x9aEg+yHzGv+eYTgdbM9vfe8iwcl/ztTxzfO+RwO19EycnmGc2/dWe
-	xjBBaertJxl+KkpgqNVdak6iONyKSTKP2wFTdz4rp+JMxgtZx8+1yJuBJy77S9xBOkwA
-	2y0sK0zXAVl9Ng8YUGBV7aesY7Drd8zFB5Rw0=
-MIME-Version: 1.0
-Received: by 10.231.40.12 with SMTP id i12mr1742739ibe.183.1296912914216; Sat,
-	05 Feb 2011 05:35:14 -0800 (PST)
-Received: by 10.231.36.68 with HTTP; Sat, 5 Feb 2011 05:35:14 -0800 (PST)
-In-Reply-To: <AANLkTimO7SQU7k=3ACn4K4wSOwRWkvoV-Tnvn2FFVW63@mail.gmail.com>
-References: <201101271038.18945.ml@vdm-design.de>
-	<AANLkTimy4Q0Y_3Y-=8=QCifqQUYwWmFx4T0DH+dNXPeZ@mail.gmail.com>
-	<4D418914.2030703@mentor.com> <20110203070901.GA11867@denix.org>
-	<4D4AE93E.2020509@mentor.com> <20110203222035.GA19477@denix.org>
-	<4D4B35A7.4040000@mentor.com>
-	<AANLkTinO257Uuh8bTQCb2LPXKFF1LtB+qN0KjM8aXZVN@mail.gmail.com>
-	<20110204081659.GQ4580@excalibur.local>
-	<AANLkTinrcXmdF=P8KUc8_cWfchPEM=q7UaDbCbQknteF@mail.gmail.com>
-	<20110204090348.GR4580@excalibur.local>
-	<AANLkTik5RVEsxh_jtXTjQRM3sKBrmwmOaWbqs2eKKop=@mail.gmail.com>
-	<4D4C1464.4030609@mentor.com>
-	<AANLkTi=o+QW-K2VG7WBFFTrshxhD1TDMbqx=EbTxDj5h@mail.gmail.com>
-	<AANLkTimO7SQU7k=3ACn4K4wSOwRWkvoV-Tnvn2FFVW63@mail.gmail.com>
-Date: Sat, 5 Feb 2011 14:35:14 +0100
-Message-ID: <AANLkTikXULU=UyfomMr_GVx5o1GieZrRxDZET3QF30px@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PljD3-0006UF-8v for openembedded-devel@lists.openembedded.org;
+	Sat, 05 Feb 2011 15:33:57 +0100
+Received: from f053034168.adsl.alicedsl.de ([78.53.34.168]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PljC8-0000je-Gv for openembedded-devel@lists.openembedded.org;
+	Sat, 05 Feb 2011 14:33:00 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: bitbake does not fail when QA issues encountered
+In-Reply-To: <4D49E878.2000703@xora.org.uk>
+References: <1296688442-22207-1-git-send-email-schnitzeltony@gmx.de>
+	<4D49E878.2000703@xora.org.uk>
+Date: Sat, 05 Feb 2011 15:32:59 +0100
+Message-ID: <1296916379.3692.10.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: =?UTF-8?B?d3JpdGUgYWNjZXNzIGZvciBBbmRyZWFzIE3DvGxsZXIgKHdhczogW1BBVENIXSBjbHV0dGVyLWdzdCBhZGQgMS4zLjQp?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,25 +32,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Feb 2011 13:36:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 05 Feb 2011 14:33:57 -0000
+X-Groupsio-MsgNum: 28844
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-xwLTuH+VrSkxc/DXGpME"
 
-2011/2/4 Otavio Salvador <otavio@ossystems.com.br>:
-> On Fri, Feb 4, 2011 at 15:26, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
->> The recipes at hand are:
-> ...
->> cups: there is someone bitching about that this is 1.2, but he
->> apparently prefers bitching upon resolving the issue. Probably the
->> best solution is to drop the DP = -1 from the 1.4.4 recipe
-> ...
->
-> I can work on cups next week (I am on VAC right now).
+--=-xwLTuH+VrSkxc/DXGpME
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Actually the cups thing is the one I would feel fairly comfortable with.
-The question here is mainly when/how to drop the DP = -1.
-A pinning of 1.4.4 is already in my local.conf for quite a while.
+Am Mittwoch, den 02.02.2011, 23:27 +0000 schrieb Graeme Gregory:
+> I think we should probably get Andreas tooled up with commit access.
 
-Frans
+Fine with me although I am no developer yet [1].
 
 
+Thanks,
+
+Paul
+
+
+[1] http://openembedded.org/index.php/New_Dev
+
+--=-xwLTuH+VrSkxc/DXGpME
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk1NX5QACgkQPX1aK2wOHVjR4wCeLkWgwdHbbo1iN4wIX8DOYZkN
+3A8AnRXtZ1ABKESUgSv1b6WpWxjO/MlB
+=wO3m
+-----END PGP SIGNATURE-----
+
+--=-xwLTuH+VrSkxc/DXGpME--
