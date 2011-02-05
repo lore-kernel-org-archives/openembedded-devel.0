@@ -1,39 +1,34 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PlckQ-00078X-72
+Received: from 15.74.mail-out.ovh.net ([178.33.46.144]
+	helo=74.mail-out.ovh.net) by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PldQ5-0007vy-8z
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Feb 2011 08:39:58 +0100
-Received: by bwz10 with SMTP id 10so3247552bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Feb 2011 23:38:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=IRncpKoyVn3W/bztAEYiw+trGAIrLtD3869Fn0YEG6s=;
-	b=xfordGhOp22mYk6JOJBxXQinZcpKwu2A68I9GH1OjpJJvYSG+BovzwfZi2RCxUVH40
-	12+XiaVxZ08HMfdI8ZlT6xRfdP63m66WoR1UsV+Cw+vSde9drUYSI17gPO72Xrnbd+zO
-	7IHrU+h7kXh68OgP5DbUOoEALKgQx1RhG0ZXw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Z2b0HWlACwy7GK3caWgcmkKyHpjio09i2riqaZnGP2bDMLh+UpwrsfoSbCiVrEZeY+
-	qs2RroM2a0tNG23FsYZUdX7+Q0a/GzrKil5AmwyiX2t/MZIOE+jKdK3mHniUcfuzHMqZ
-	NdWrfc6meHsvtmuBL+mQzD6iy+Zk7t3vxeOFw=
-Received: by 10.204.50.196 with SMTP id a4mr12339242bkg.213.1296891539390;
-	Fri, 04 Feb 2011 23:38:59 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id z18sm843117bkf.20.2011.02.04.23.38.57
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 04 Feb 2011 23:38:58 -0800 (PST)
-Date: Sat, 5 Feb 2011 08:39:18 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110205073918.GK3265@jama>
-References: <4D4C7AE5.3010808@mentor.com>
- <4D4CF9CA.40503@xora.org.uk>
+	Sat, 05 Feb 2011 09:23:01 +0100
+Received: (qmail 24840 invoked by uid 503); 5 Feb 2011 07:55:25 -0000
+Received: from 26.mail-out.ovh.net (91.121.27.225)
+	by 74.mail-out.ovh.net with SMTP; 5 Feb 2011 07:55:25 -0000
+Received: (qmail 1317 invoked by uid 503); 5 Feb 2011 07:58:43 -0000
+Received: from b6.ovh.net (HELO mail612.ha.ovh.net) (213.186.33.56)
+	by 26.mail-out.ovh.net with SMTP; 5 Feb 2011 07:58:43 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 5 Feb 2011 09:55:24 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 5 Feb 2011 09:55:23 +0200
+Message-ID: <4D4D026B.60100@eukrea.com>
+Date: Sat, 05 Feb 2011 08:55:23 +0100
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
-In-Reply-To: <4D4CF9CA.40503@xora.org.uk>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+To: openembedded-devel@lists.openembedded.org
+References: <4D4C7AE5.3010808@mentor.com> <4D4CF9CA.40503@xora.org.uk>
+	<20110205073918.GK3265@jama>
+In-Reply-To: <20110205073918.GK3265@jama>
+X-Ovh-Tracer-Id: 174233011761491273
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.500002/N
 Subject: Re: Write access for Paul Menzel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,40 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Feb 2011 07:39:58 -0000
-X-Groupsio-MsgNum: 28840
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="HTLCc13+3hfAZ6SL"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 05 Feb 2011 08:23:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---HTLCc13+3hfAZ6SL
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 05/02/2011 08:39, Martin Jansa wrote:
+> On Sat, Feb 05, 2011 at 07:18:34AM +0000, Graeme Gregory wrote:
+>> On 04/02/2011 22:17, Tom Rini wrote:
+>>> Hey all,
+>>>
+>>> Paul has been doing a good job finding problems, fixing and testing
+>>> them well.  Can we give him write access?  Thanks!
+>>>
+>> Agreed, ack from me for this.
+>
+> Another ack from me.
+>
+and a third one if 2 are not enough ;-)
 
-On Sat, Feb 05, 2011 at 07:18:34AM +0000, Graeme Gregory wrote:
-> On 04/02/2011 22:17, Tom Rini wrote:
-> > Hey all,
-> >
-> > Paul has been doing a good job finding problems, fixing and testing=20
-> > them well.  Can we give him write access?  Thanks!
-> >
-> Agreed, ack from me for this.
+Eric
 
-Another ack from me.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---HTLCc13+3hfAZ6SL
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk1M/qYACgkQN1Ujt2V2gBzJTACggHkhRqvD70n9U/XIMCrJI747
-HaQAmgKzUFKS0eze5zlz8dp6ZwMRxAb1
-=hiUf
------END PGP SIGNATURE-----
-
---HTLCc13+3hfAZ6SL--
