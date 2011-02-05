@@ -1,33 +1,34 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dp@xora.org.uk>) id 1PlmlC-0002vC-NR
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1PlrAy-0007me-Lr
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Feb 2011 19:21:26 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id E6DA8A541C
+	Sun, 06 Feb 2011 00:04:20 +0100
+Received: by wwi17 with SMTP id 17so3385378wwi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Feb 2011 18:20:28 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id CdCJkUyq09x9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Feb 2011 18:20:28 +0000 (GMT)
-Received: from [192.168.1.150] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id CB252A5017
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Feb 2011 18:20:27 +0000 (GMT)
-Message-ID: <4D4D94F3.7080702@xora.org.uk>
-Date: Sat, 05 Feb 2011 18:20:35 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Sat, 05 Feb 2011 15:03:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:subject:date:message-id:x-mailer;
+	bh=X1hQ+bwbfCMBBIhN34VGFVePGgZlw2NxYCQ2P4VwB7c=;
+	b=sQiEoXUP9ri5AirtujAl/hGClPeRNRzqKcr+dCyGJBmjCFzNznVH1wS9feYD7UPzZS
+	CsjBqY0cy4BlQSllphtot3C/hgLj8MZi7fczaYyEVZQMFaICNlbD4qBDVXRaUraFaMwA
+	3fAkh3Uqmn83wvjMWM52wpmKQMmy/31QBMTV4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer;
+	b=faBxEfHip3H8AzRcwPipA3cbwcWthCUNJC4uFn8aO0RdbculMQiu/kuXBlFMwl36k0
+	U2TOT9SRPYw28Ws79F0e/sbAbyIuKsdfDAV+umD8lrM/3s0T467WCL0m1ku5kTB0FXvn
+	Oa1FWPRDE+NEkZ3PUc8mLyb2jzyCHcsOfBzro=
+Received: by 10.216.173.82 with SMTP id u60mr12040708wel.0.1296947001311;
+	Sat, 05 Feb 2011 15:03:21 -0800 (PST)
+Received: from localhost.localdomain ([188.165.206.204])
+	by mx.google.com with ESMTPS id b54sm1271429wer.21.2011.02.05.15.03.19
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 05 Feb 2011 15:03:20 -0800 (PST)
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4D4D945C.8010305@xora.org.uk>
-In-Reply-To: <4D4D945C.8010305@xora.org.uk>
-Subject: Re: Wiki Anti Spam Problem
+Date: Sun,  6 Feb 2011 00:03:09 +0100
+Message-Id: <1296946989-20663-1-git-send-email-filip.zyzniewski@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] rootfs_deb.bbclass: removed $(( ... )) operator usage.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,27 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Feb 2011 18:21:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 05 Feb 2011 23:04:20 -0000
 
-On 05/02/2011 18:18, Graeme Gregory wrote:
-> It is a little too good these days, I get regularly the following 
-> message :-
->
-> To help protect against automated edit spam, please type the two words 
-> you see in the box below:
->
-> Input error: Invalid referer
->
-> Which makes it impossible for me to update the wiki at most times.
->
-> Graeme
->
-Ah, it could be issue with accessing the wiki via wiki.openembedded.net 
-instead of .org
+Bitbake's pyshlex.py cannot parse it raising NotImplementedError in
+line 295 (bitbake @ c8d8388ce9662574a390be3b849c07d1b044275d).
+---
+ classes/rootfs_deb.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Graeme
+diff --git a/classes/rootfs_deb.bbclass b/classes/rootfs_deb.bbclass
+index e077127..59072aa 100644
+--- a/classes/rootfs_deb.bbclass
++++ b/classes/rootfs_deb.bbclass
+@@ -35,7 +35,7 @@ fakeroot rootfs_deb_do_rootfs () {
+ 		echo "deb file:${DEPLOY_DIR_DEB}/$arch/ ./" >> ${STAGING_ETCDIR_NATIVE}/apt/sources.list.rev
+ 		(echo "Package: *"
+ 		echo "Pin: release l=$arch"
+-		echo "Pin-Priority: $((800 + $priority))"
++		echo "Pin-Priority: $(expr 800 + $priority)"
+ 		echo) >> ${STAGING_ETCDIR_NATIVE}/apt/preferences
+ 		priority=$(expr $priority + 5)
+ 	done
+-- 
+1.7.1
 
 
 
