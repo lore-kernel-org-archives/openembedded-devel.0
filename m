@@ -1,34 +1,35 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pm6zp-0002om-KC
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pm73E-0003HE-K0
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Feb 2011 16:57:53 +0100
-Received: by wyb40 with SMTP id 40so3730117wyb.6
+	Sun, 06 Feb 2011 17:01:24 +0100
+Received: by qyk8 with SMTP id 8so783615qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Feb 2011 07:56:53 -0800 (PST)
+	Sun, 06 Feb 2011 08:00:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:subject:date:message-id:x-mailer;
-	bh=5pIfnoz74QtYNA5v5x60XgDx364uoD8ysH0Mq2vXW5o=;
-	b=MzndXAu9NYZq2qFK3u6bPWvf9aGS5+BO3nxBbwwUXSem+JlvES/hUaj3tOu8579RCZ
-	O82WlezL0/yjhw7HqN0Kn5Yra2Bgc/EwNg9H5HTBUNwH7AgQDsfxU53ZU3/BJIR7W+wj
-	nwSDBLcw9rAeJ2Gz3WvGMaUiDosfjrh6JAcK0=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=qgvypap3lPeVCgPNIfzib2wc5mf49Lu4T3XhksjVvtw=;
+	b=nCsuJFCXOBIHP0VDW0rTMZF21zkvVffX6r4OZFwe2a9UFlrU+AbUwdyCBPhYVIGC8h
+	SHFmAEqLNUjJ25s24mLGzaCCmzl/7VpQvK+TjK/isJRrJYgLg6BnpwbwXd5NLdbrKt9U
+	RvP+NQbvJmiV4OoKzawNaCU2lxNdZdY0pl64I=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer;
-	b=Bu++i7kSGMlW4jXC4xZA0/MJsSkQ2CRJIf72bUY3qdXxbTyL3aSDoNA35iogaQCL62
-	oUBzC3RK6QdshRCQVvDFPs04x7j4GdiGBiHLA7itLLBxzHEfVcpI+BbsIctb3sOBCdrL
-	K6HAHD0Qv5VSZvXVKJ3tmZQORNrlMhiOxul4A=
-Received: by 10.216.30.137 with SMTP id k9mr13240588wea.31.1297007813273;
-	Sun, 06 Feb 2011 07:56:53 -0800 (PST)
-Received: from localhost.localdomain (ns.tefnet.pl [188.165.206.204])
-	by mx.google.com with ESMTPS id f52sm1630955wes.11.2011.02.06.07.56.52
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 06 Feb 2011 07:56:52 -0800 (PST)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Giti2ZCeM9FHAu/MrWEQdwB+e785TPhH4ik38DCrej0kYu90tghfTj0iEtbqZ84lq1
+	0y+HFKxPo7enr9pvd/CIUshUlltFxQlBXsRsN+bqF43c78Yd35gH4u13szNxUf9JnzLK
+	5JOuhu/uE394hVfplEj5Gw5v2nXkyRZV8wog4=
+MIME-Version: 1.0
+Received: by 10.229.27.80 with SMTP id h16mr10213307qcc.191.1297008024091;
+	Sun, 06 Feb 2011 08:00:24 -0800 (PST)
+Received: by 10.229.68.100 with HTTP; Sun, 6 Feb 2011 08:00:24 -0800 (PST)
+In-Reply-To: <1297007807-3333-1-git-send-email-filip.zyzniewski@gmail.com>
+References: <1297007807-3333-1-git-send-email-filip.zyzniewski@gmail.com>
+Date: Sun, 6 Feb 2011 17:00:24 +0100
+Message-ID: <AANLkTinus=X9r1hHCSPngOi=1onWeZJgp9KogpuCB9am@mail.gmail.com>
 From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  6 Feb 2011 16:56:47 +0100
-Message-Id: <1297007807-3333-1-git-send-email-filip.zyzniewski@gmail.com>
-X-Mailer: git-send-email 1.7.1
-Subject: [PATCH v2] apt_0.7.20.2: fixed compilation errors with gcc-4.4.
+Subject: Re: [PATCH v2] apt_0.7.20.2: fixed compilation errors with gcc-4.4.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,33 +43,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Feb 2011 15:57:53 -0000
+X-List-Received-Date: Sun, 06 Feb 2011 16:01:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Just like in apt-native_0.7.20.2.bb.
-Related bugzilla entry: http://bugs.openembedded.org/show_bug.cgi?id=5511
+On 2/6/11, Filip Zyzniewski <filip.zyzniewski@gmail.com> wrote:
+> Just like in apt-native_0.7.20.2.bb.
 
-Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
----
- recipes/apt/apt_0.7.20.2.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+Sorry for a separate thread, it was meant to go as a reply for
+AANLkTiknYT+Ds+0URZXr1+08=8LBD2ekiV2Ng3xP-QsV@mail.gmail.com, but I've
+somehow misconfigured git-send-email and it did not ask me for the
+message-id this time.
 
-diff --git a/recipes/apt/apt_0.7.20.2.bb b/recipes/apt/apt_0.7.20.2.bb
-index 7921a23..5c932a5 100644
---- a/recipes/apt/apt_0.7.20.2.bb
-+++ b/recipes/apt/apt_0.7.20.2.bb
-@@ -5,8 +5,9 @@ require apt.inc
- 
- SRC_URI += "file://no-doxygen.patch \
-             file://no-ko-translation.patch \
-+            file://fix-gcc-4.4-compile.patch \
-             file://use-host.patch "
--PR = "r2"
-+PR = "r3"
- 
- require apt-package.inc
- 
--- 
-1.7.1
-
+bye,
+Filip
 
 
