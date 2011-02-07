@@ -1,37 +1,34 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PmYls-0004QE-8u
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1PmZME-0005Fu-SV
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Feb 2011 22:37:20 +0100
-Received: by gwaa12 with SMTP id a12so1943377gwa.6
+	Mon, 07 Feb 2011 23:14:54 +0100
+Received: by wyb40 with SMTP id 40so4977936wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Feb 2011 13:36:18 -0800 (PST)
+	Mon, 07 Feb 2011 14:13:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=Q5QSud6vTkdu4chEUaa08MKSG18KL+Bi7VMU4vubHWE=;
-	b=jPBW5evF3k+Oi7ceG5xopxneLZB5PydRd+A1g1/95pr1fh4g+/UkSD4GgjKv3L0gDk
-	9WfKh/Wy5SdLNgdT/EpJHfgZaPsmtyoupDJOurxoATtBo/enhSaCWh5At12HdLfVXKbc
-	QoguSTd2So+Lcu3zjP1VhXutIOPkXPwzmuljs=
+	h=domainkey-signature:from:to:subject:date:message-id:x-mailer;
+	bh=ZnFD9fjexEzN/FWwPieMCWfDDpWJKhzMSpyvNtQLJe8=;
+	b=ar+1aK4/GZHV2RKyBAeMS1XYOVDVsYLNjC4BDtGHRijs9OvGmYZS0fwsr27m+T8n00
+	aeLTRJNonkzwUGSbknw/DwfxbXcVOLQzGGtD7rYIu4TL3XN6zPD6UV+pSlwXHYmgxLbP
+	7VSuO/2n2J9L1wuBBVN6za3/mv5cSXukveXKE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=FexSlTopAipnPLFpUbq2YD+ld2zToYtHLV0vziI/4f19Axp19lmxYOtnZDX5tr6YZ7
-	F0QVWQjJQegoXqXuhW+ug4lpMOdXnnaF2/6sjWtEIoE2Zk2VhQrawm1bHtjS1m0bhl5L
-	YDIvjB4N0YMiYsnWEg8ZpaaGWV1K+wJSsLv44=
-Received: by 10.90.84.2 with SMTP id h2mr9913800agb.7.1297114578107; Mon, 07
-	Feb 2011 13:36:18 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.32.12 with HTTP; Mon, 7 Feb 2011 13:35:57 -0800 (PST)
-In-Reply-To: <ly39nzk1bs.fsf@ensc-virt.intern.sigma-chemnitz.de>
-References: <1297093986-24331-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-	<AANLkTinsSoak9h=B+TQEzoUvWSP+MVELZQkTFRu3PTOQ@mail.gmail.com>
-	<ly39nzk1bs.fsf@ensc-virt.intern.sigma-chemnitz.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 7 Feb 2011 13:35:57 -0800
-Message-ID: <AANLkTinM02m9A04F+UrNY_E_HauTHD=SgS6=CeSkH_8V@mail.gmail.com>
+	h=from:to:subject:date:message-id:x-mailer;
+	b=sFVt2mekUmt4nk0EyV2jhajH+89jLNiwxUjOTBbSfpHKa7Bj108i69EWyqiSzg1AJF
+	et1TjhLJzZ5TAFviuKklNnBiGkNmwDIZBGwZEpq6GIzjQCks3v4quV+baUxqobGlWh9m
+	Na6nCpzu5Bej2iJ1jkE1wJvPF4xDHyuHF10F8=
+Received: by 10.227.155.73 with SMTP id r9mr16918335wbw.63.1297116832974;
+	Mon, 07 Feb 2011 14:13:52 -0800 (PST)
+Received: from localhost.localdomain ([188.165.206.204])
+	by mx.google.com with ESMTPS id h39sm2458090wes.5.2011.02.07.14.13.51
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 07 Feb 2011 14:13:52 -0800 (PST)
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] cortex-m3: adjusted target cflags
+Date: Mon,  7 Feb 2011 23:13:42 +0100
+Message-Id: <1297116822-30938-1-git-send-email-filip.zyzniewski@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] task-base: conditional wifi and bluetooth tasks in PACKAGES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,58 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Feb 2011 21:37:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 07 Feb 2011 22:14:55 -0000
 
-On Mon, Feb 7, 2011 at 12:59 PM, Enrico Scholz
-<enrico.scholz@sigma-chemnitz.de> wrote:
-> Khem Raj <raj.khem@gmail.com> writes:
->
->>> The '-mcpu=3Dcortex-m3' is shorter than '-march=3Darmv7-m -mtune=3Dcort=
-ex-m3'
->>> and enables workarounds like '-mfix-cortex-m3-ldrd'.
->>
->> Does -mcpu=3Dcortex-m3 also cause gcc to tune for cortex-m3 ?
->
-> Yes; logic in gcc/config/arm/arm.c is:
->
-> | =C2=A0 =C2=A0if (i =3D=3D ARM_OPT_SET_CPU || i =3D=3D ARM_OPT_SET_TUNE)
-> | =C2=A0 =C2=A0 =C2=A0arm_tune =3D (enum processor_type) (sel - ptr->proc=
-essors);
-> |
-> | =C2=A0 =C2=A0if (i =3D=3D ARM_OPT_SET_ARCH)
-> | =C2=A0 =C2=A0 =C2=A0target_arch_cpu =3D sel->core;
-> |
-> | =C2=A0 =C2=A0if (i =3D=3D ARM_OPT_SET_CPU)
-> | =C2=A0 =C2=A0 =C2=A0selected_cpu =3D (enum processor_type) (sel - ptr->=
-processors);
->
-> '-mcpu' causes the highest optimization level (both for the used instruct=
-ion
-> set (--> '-march') and the "soft" optimizations (--> '-mcpu')).
+This reduces amount of tasks for bootstrap-image from around 3400 to
+around 1600 for jlime.
 
-OK that seems better. Can you check what does gcc emits in an assembly file
-when using -mcpu=3Dcortex-m3 in your case. If it emits sdiv instruction or =
-not
+Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+---
+ recipes/tasks/task-base.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-int foo (long a, long b)
-{
-        return a/b;
-}
+diff --git a/recipes/tasks/task-base.bb b/recipes/tasks/task-base.bb
+index 32d871d..c8d6df7 100644
+--- a/recipes/tasks/task-base.bb
++++ b/recipes/tasks/task-base.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Merge machine and distro options to create a basic machine task/package"
+-PR = "r92"
++PR = "r93"
+ 
+ inherit task
+ 
+@@ -31,8 +31,8 @@ PACKAGES = ' \
+             ${@base_contains("MACHINE_FEATURES", "redboot", "task-base-redboot", "",d)} \
+             ${@base_contains("MACHINE_FEATURES", "apex", "task-base-apex", "",d)} \
+             \
+-            task-base-bluetooth \
+-            task-base-wifi \
++            ${@base_contains("MACHINE_FEATURES", "bluetooth", "task-base-bluetooth", "",d)} \
++            ${@base_contains("MACHINE_FEATURES", "wifi", "task-base-wifi", "",d)} \
+             \
+             ${@base_contains("DISTRO_FEATURES", "cramfs", "task-base-cramfs", "", d)} \
+             ${@base_contains("DISTRO_FEATURES", "ipsec", "task-base-ipsec", "", d)} \
+-- 
+1.7.1
 
-
-Acked-by: Khem Raj <raj.khem@gmail.com>
-
->
->
->
-> Enrico
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
