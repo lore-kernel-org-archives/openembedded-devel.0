@@ -1,33 +1,31 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1PmUnp-00024k-Hz
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1PmUrg-00033S-1o
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Feb 2011 18:23:08 +0100
-Received: by pxi17 with SMTP id 17so919130pxi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Feb 2011 09:21:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=cJnR4k8lsZuNogWqiAFB8H7gKv1CnWW6YHZAOqoqWFM=;
-	b=h9k8RU3AbMLWgy2thd49atYoAnM590tPOy42z7B5AmWsVQzE4ibf/ZAuY0RVxzXcP9
-	E5KDZVV1/cmrVMUoIzAN3tqy6gaD1sVRxfmZ6eBWOgbWO1NREMXtylz7psrn9oYn4Z1w
-	vwaHIanpHv2/abHy2Hff62A8m0HRuBSnfLIR8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=lhJpJ9EZc8h2VF8Kllo7rbC/HMNmY/xff3QlNbcFItaSj3WSGX0Hd1ElUIz7MrYztV
-	ZsU08NBw1b5aIixhdugVCr+rT3CrHp/sylF+IGtX6g4KK7LuWJahceVx62CimG2Re3l9
-	5oswjy5DUkmj4j7Kq2sfjuJ4eFLdO1ThgQlQ4=
-MIME-Version: 1.0
-Received: by 10.142.125.4 with SMTP id x4mr6169336wfc.88.1297099311063; Mon,
-	07 Feb 2011 09:21:51 -0800 (PST)
-Received: by 10.142.155.8 with HTTP; Mon, 7 Feb 2011 09:21:51 -0800 (PST)
-Date: Mon, 7 Feb 2011 12:21:51 -0500
-Message-ID: <AANLkTi=p3LAQsZ_F3hMqd27tDSYjv24Pz=UNeFgBH_0W@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: OE weekly changelog for org.openembedded.dev, 2011-01-31 to 2011-02-07
+	Mon, 07 Feb 2011 18:27:04 +0100
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with SMTP id p17HPx4h004864
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Mon, 7 Feb 2011 18:26:00 +0100
+Received: by ensc-virt.intern.sigma-chemnitz.de (sSMTP sendmail emulation);
+	Mon,  7 Feb 2011 18:25:59 +0100
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  7 Feb 2011 18:25:38 +0100
+Message-Id: <1297099538-25968-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+X-Mailer: git-send-email 1.7.4
+In-Reply-To: <1297093986-24331-2-git-send-email-enrico.scholz@sigma-chemnitz.de>
+References: <1297093986-24331-2-git-send-email-enrico.scholz@sigma-chemnitz.de>
+X-DSPAM-Result: Innocent
+X-DSPAM-Probability: 0
+X-DSPAM-Confidence: 0.925
+X-Spam-Score: -5.2
+X-Spam-Level: -----
+X-Spam-Tests: AWL,BAYES_00,SPF_NEUTRAL,T_RP_MATCHES_RCVD,DSPAM_INNOCENT
+X-Scanned-By: MIMEDefang 2.71 on 62.153.82.30
+Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Subject: [PATCH, v2] gcc-4.5: added thumb2 build patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,181 +39,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Feb 2011 17:23:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 07 Feb 2011 17:27:04 -0000
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
-OE weekly changelog for org.openembedded.dev, 2011-01-31 to 2011-02-07
+Fix for http://gcc.gnu.org/bugzilla/show_bug.cgi?id=43999 and is
+required to build gcc for Thumb2 only architectures (e.g. Cortex-M3).
 
-Andrea Adami (3):
-  linux-kexecboot: move SRCREV of git recipe to 2.6.38-rc3
-  linux-kexecboot: refresh Zaurus defconfigs for new SRCREV (2.6.38-rc3)
-  kexecboot: add --enable-delay=3D2 for collie too.
+Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+---
+ recipes/gcc/gcc-4.5.inc                |    3 ++-
+ recipes/gcc/gcc-4.5/thumb2-build.patch |   16 ++++++++++++++++
+ 2 files changed, 18 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/gcc/gcc-4.5/thumb2-build.patch
 
-Bernhard Guillon (1):
-  libglademm_2.4.1.bb: remove legacy staging, bump PR
+diff --git a/recipes/gcc/gcc-4.5.inc b/recipes/gcc/gcc-4.5.inc
+index b630528..9ba2e22 100644
+--- a/recipes/gcc/gcc-4.5.inc
++++ b/recipes/gcc/gcc-4.5.inc
+@@ -8,7 +8,7 @@ DEPENDS = "mpfr gmp libmpc libelf"
+ NATIVEDEPS = "mpfr-native gmp-native libmpc-native"
+ 
+ 
+-INC_PR = "r31"
++INC_PR = "r32"
+ 
+ SRCREV = "168622"
+ PV = "4.5"
+@@ -166,6 +166,7 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH} \
+ #	   file://linaro/gcc-4.5-linaro-r99457.patch \
+ 	   file://gcc-scalar-widening-pr45847.patch \
+ 	   file://gcc-arm-volatile-bitfield-fix.patch \
++	   file://thumb2-build.patch \
+ 	  "
+ 
+ SRC_URI_append_mips64 = " file://mips64-nomultilib.patch "
+diff --git a/recipes/gcc/gcc-4.5/thumb2-build.patch b/recipes/gcc/gcc-4.5/thumb2-build.patch
+new file mode 100644
+index 0000000..75e765e
+--- /dev/null
++++ b/recipes/gcc/gcc-4.5/thumb2-build.patch
+@@ -0,0 +1,16 @@
++Fix for http://gcc.gnu.org/bugzilla/show_bug.cgi?id=43999
++
++Patch was taken from comment #3 (Jing Yu) there; the patch attached
++to the named bugreport is wrong.
++
++Index: gcc/config/arm/lib1funcs.asm
++===================================================================
++--- a/gcc/config/arm/lib1funcs.asm	(revision 163231)
+++++ b/gcc/config/arm/lib1funcs.asm	(working copy)
++@@ -642,5 +642,5 @@
++ 	cmp	\dividend, #0			@ Early termination?
++-	do_it	hs, t
+++	do_it	ne, t
++ 	movnes	\curbit,   \curbit,  lsr #4	@ No, any more bits to do?
++ 	movne	\divisor,  \divisor, lsr #4
++ 	bne	1b
+-- 
+1.7.4
 
-Chris Larson (1):
-  autotools: use oe.utils.inherits
-
-Cliff Brake (2):
-  update-testing-branch.sh: script to do the weekly testing branch update
-  weekly-changelog-report.sh: remove Holger's branch
-
-Denis 'GNUtoo' Carikli (1):
-  nokia900.conf: added ubifs arguments
-
-Eric B=E9nard (2):
-  busybox-1.18.2: add latest fixes
-  busybox-1.18.2: add latest fixes
-
-Fabian Ruff (1):
-  totem-pl-parser_2.30.0: fix configure without gobject introspection
-
-Frans Meulenbroeks (1):
-  minimal.conf: removed pinning of perl 5.10.1 now it has become the defaul=
-t
-
-Graham Gower (1):
-  opkg.inc: bump SRCREV to pull in a couple of important fixes.
-
-Henning Heinold (12):
-  help2man: fix drag in of target perl for the native package
-  jikes: fix RDEPENDS, so the native package don't drag in classpath from t=
-arg
-  openjdk-6: remove one patch which is not needed anymore
-  openjdk-6: add version 1.8.5 with security fixes AND libtool2.4 support f=
-or
-  cacao-native: update to the latest hg version
-  libecj-bootstrap: delete versions that are not pinned
-  libecj-bootstrap: add version 3.6.1
-  jamvm-initial: fix legacy staging
-  jamvm-initial: remove version 1.5.0, version 1.4.5 is good enough for our=
- ne
-  update-rc.d.bbclass: set RDEPENDS_${PN} to nothing for virtclass-native
-  pango: set RRECOMMENDS_${PN} to nothing for virtclass-native
-  python-pygobject-native: set RDEPENDS to nothing
-
-Koen Kooi (9):
-  angstrom: point ANGSTROM_URI to feeds.a-d.org
-  angstrom-feed-configs: bump PR
-  clutter: add 1.4.2
-  contrib: point feed uploader to feed.a-d.org
-  angstrom-uboot-scripts: add some more scripts
-  libgles-omap3: catch up with devmem2 changes
-  angstrom source mirror: blacklist git2/ dir as well
-  libgles-omap3: fix other devmem2 references and remove stale comment abou=
-t n
-  angstrom source mirror: blacklist *.done as well
-
-Marek Sujak (2):
-  kernel: added support for vmx25 into recipe 2.6.35 kernel
-  barebox: add patch for vmx25
-
-Martin Jansa (9):
-  gnu-config: use /usr/bin/env perl instead of /usr/bin/perl in gnu-configi=
-ze.
-  gnu-config: update also bindir change to replace /usr/bin/env instead of =
-/us
-  xrdb: upgrade from 1.0.7 to 1.0.8
-  libpciaccess: upgrade from 0.12.0 to 0.12.1
-  navit: use .desktop and .png files from sources and remove those from OE =
-rep
-  efl-from-svn.inc: add include to use EFL from svn instead of released tar=
-bal
-  efreet: newer revisions have icon cache enabled by default and dropped ol=
-d c
-  efl-from-svn: make it more usefull
-  task-shr-feed: add samba
-
-Mike Westerhof (3):
-  SlugOS: slugos-pacakges.bb - change kexec back to kexec-tools     (DEPEND=
-S r
-  SlugOS: initscripts - simplify kexec handling in reboot, fix option order=
-ing
-  SlugOS: kernel -- make 2.6.37 the preferred kernel for SlugOS     and int=
-rod
-
-Norman Schleicher (1):
-  navit: fix QA issues in .desktop files
-
-Paul Menzel (1):
-  xbmc: add `gperf-native` to `DEPENDS`
-
-Stefan Schmidt (19):
-  connman: Add recipe for 0.68 release
-  wpa-supplicant_0.7.3: Enable the new DBUS API and bump PR.
-  connman_0.68: Update configure options and enable ofono plugin
-  angstrom-2008-preferred-versions: Bump wpa-supplicant version to 0.7.3
-  wpa-supplicant_0.7: Package dbus system-service activation files an bump =
-PR.
-  ofono: Add recipes from poky.
-  buglabs-apps: BugLabs java applications.
-  task-bug.bb: Add bug core tasks used in our images
-  task-bug-apps.bb: Add tasks for BugLabs applications
-  task-bug-feed-extra.bb: Add tasks for our feed
-  task-poky.bb: Add poky and sato tasks we are using in our images
-  bug-ramdisk: Add ramdisk image for QA testing
-  bug-image-production.bb: Add BugLabs production image shipped on our devi=
-ces
-  linux-bug20-linaro_2.6.35: Add experimental recipe
-  buglabs-autorev.inc: Add include file for BugLabs AUTOREV builds
-  com.buglabs.app.bugdash2: Bump for newer version
-  bug2v4l2: Add recipe bug20 v4l2 interface
-  connman: Don't prefer connman git version over the latest release in angs=
-tro
-  xserver-nodm-init: switch to ndm-init 2.0 to get a working matchbox sessi=
-on
-
-Steffen Sledz (2):
-  linux-2.6.24: enable oprofile support/modules for hipox machine
-  testscript.sh: update to bitbake 1.10.2
-
-Tom Rini (16):
-  qmake_base.bbclass: Add cases for linux-gnuspe/linux-uclibcspe
-  sh-common: Add postgresql info
-  site infos: Move ac_cv_sys_restartable_syscalls to common-linux
-  site info: Move ac_cv_conv_longlong_to_float to common-linux
-  perl: Drop 5.8.8, bump PR in all perl recipes
-  perl-native: Switch to userelocatableinc and not shared libperl
-  automake: Add perl-native as a dep rather than perl-runtime-native
-  autoconf: Add perl-native as a dep
-  bitbake.conf: Drop unused perl-native-runtime ASSUME_PROVIDED
-  postgresql: Pass --disable-spinlocks on SH4, use INC_PR
-  autoconf: Clean up slightly our mangle for /usr/bin/env
-  automake: Updates for taking advantage of our own perl
-  help2man: Update for using our perl-native
-  perl-rdepends_5.8.8.inc: Remove orphaned file
-  perl: Make this not be MACHINE-specific in pstaging+signatures
-  perl-native: Switch to using create_wrapper to make perl relocatable.
-
-Yuri Bushmelev (1):
-  oestats-client.bbclass: Fix oestats-client
-
-chase maupin (1):
-  sourceipk: fix race condition with compileconfigs/multi-kernel
-
-sujak.marek (3):
-  barebox: added recipe for barebox v 2010.10
-  VMX25: Add machine support for vmx25
-  barebox: update barebox 2010.10 to support vmx25
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
-Bugs fixed:
-bug_id resolution        short_desc
-
-Bugs opened:
-bug_id resolution        short_desc
-
-
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-http://bec-systems.com
 
 
