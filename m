@@ -1,34 +1,36 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1PmZME-0005Fu-SV
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1PmZZa-0005Tx-Na
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Feb 2011 23:14:54 +0100
-Received: by wyb40 with SMTP id 40so4977936wyb.6
+	Mon, 07 Feb 2011 23:28:42 +0100
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with SMTP id p17MRct0019324
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Feb 2011 14:13:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:subject:date:message-id:x-mailer;
-	bh=ZnFD9fjexEzN/FWwPieMCWfDDpWJKhzMSpyvNtQLJe8=;
-	b=ar+1aK4/GZHV2RKyBAeMS1XYOVDVsYLNjC4BDtGHRijs9OvGmYZS0fwsr27m+T8n00
-	aeLTRJNonkzwUGSbknw/DwfxbXcVOLQzGGtD7rYIu4TL3XN6zPD6UV+pSlwXHYmgxLbP
-	7VSuO/2n2J9L1wuBBVN6za3/mv5cSXukveXKE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer;
-	b=sFVt2mekUmt4nk0EyV2jhajH+89jLNiwxUjOTBbSfpHKa7Bj108i69EWyqiSzg1AJF
-	et1TjhLJzZ5TAFviuKklNnBiGkNmwDIZBGwZEpq6GIzjQCks3v4quV+baUxqobGlWh9m
-	Na6nCpzu5Bej2iJ1jkE1wJvPF4xDHyuHF10F8=
-Received: by 10.227.155.73 with SMTP id r9mr16918335wbw.63.1297116832974;
-	Mon, 07 Feb 2011 14:13:52 -0800 (PST)
-Received: from localhost.localdomain ([188.165.206.204])
-	by mx.google.com with ESMTPS id h39sm2458090wes.5.2011.02.07.14.13.51
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 07 Feb 2011 14:13:52 -0800 (PST)
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+	Mon, 7 Feb 2011 23:27:39 +0100
+Received: by ensc-virt.intern.sigma-chemnitz.de (sSMTP sendmail emulation);
+	Mon,  7 Feb 2011 23:27:38 +0100
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  7 Feb 2011 23:13:42 +0100
-Message-Id: <1297116822-30938-1-git-send-email-filip.zyzniewski@gmail.com>
-X-Mailer: git-send-email 1.7.1
-Subject: [PATCH] task-base: conditional wifi and bluetooth tasks in PACKAGES
+References: <1297093986-24331-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+	<AANLkTinsSoak9h=B+TQEzoUvWSP+MVELZQkTFRu3PTOQ@mail.gmail.com>
+	<ly39nzk1bs.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	<AANLkTinM02m9A04F+UrNY_E_HauTHD=SgS6=CeSkH_8V@mail.gmail.com>
+Date: Mon, 07 Feb 2011 23:27:38 +0100
+In-Reply-To: <AANLkTinM02m9A04F+UrNY_E_HauTHD=SgS6=CeSkH_8V@mail.gmail.com>
+	(Khem Raj's message of "Mon, 7 Feb 2011 13:35:57 -0800")
+Message-ID: <lyzkq7h44l.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+MIME-Version: 1.0
+X-DSPAM-Result: Innocent
+X-DSPAM-Probability: 0
+X-DSPAM-Confidence: 1
+X-Spam-Score: -5.2
+X-Spam-Level: -----
+X-Spam-Tests: AWL,BAYES_00,SPF_NEUTRAL,T_RP_MATCHES_RCVD,DSPAM_INNOCENT
+X-Scanned-By: MIMEDefang 2.71 on 62.153.82.30
+Subject: Re: [PATCH] cortex-m3: adjusted target cflags
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,40 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Feb 2011 22:14:55 -0000
+X-List-Received-Date: Mon, 07 Feb 2011 22:28:42 -0000
+Content-Type: text/plain; charset=us-ascii
 
-This reduces amount of tasks for bootstrap-image from around 3400 to
-around 1600 for jlime.
+Khem Raj <raj.khem@gmail.com> writes:
 
-Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
----
- recipes/tasks/task-base.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+> Can you check what does gcc emits in an assembly file when using
+> -mcpu=cortex-m3 in your case. If it emits sdiv instruction or not
+>
+> int foo (long a, long b)
+> {
+>         return a/b;
+> }
 
-diff --git a/recipes/tasks/task-base.bb b/recipes/tasks/task-base.bb
-index 32d871d..c8d6df7 100644
---- a/recipes/tasks/task-base.bb
-+++ b/recipes/tasks/task-base.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "Merge machine and distro options to create a basic machine task/package"
--PR = "r92"
-+PR = "r93"
- 
- inherit task
- 
-@@ -31,8 +31,8 @@ PACKAGES = ' \
-             ${@base_contains("MACHINE_FEATURES", "redboot", "task-base-redboot", "",d)} \
-             ${@base_contains("MACHINE_FEATURES", "apex", "task-base-apex", "",d)} \
-             \
--            task-base-bluetooth \
--            task-base-wifi \
-+            ${@base_contains("MACHINE_FEATURES", "bluetooth", "task-base-bluetooth", "",d)} \
-+            ${@base_contains("MACHINE_FEATURES", "wifi", "task-base-wifi", "",d)} \
-             \
-             ${@base_contains("DISTRO_FEATURES", "cramfs", "task-base-cramfs", "", d)} \
-             ${@base_contains("DISTRO_FEATURES", "ipsec", "task-base-ipsec", "", d)} \
--- 
-1.7.1
+$ arm-linux-uclibceabi-gcc -mthumb -mcpu=cortex-m3 -mfpu=vfp -mfloat-abi=softfp -O1 -c x.c
+$ arm-linux-uclibceabi-objdump -d x.o
+00000000 <foo>:
+   0:   fb90 f0f1       sdiv    r0, r0, r1
+   4:   4770            bx      lr
+   6:   bf00            nop
 
+
+
+Enrico
 
 
