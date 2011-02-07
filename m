@@ -1,31 +1,30 @@
-Received: from na3sys009aog102.obsmtp.com ([74.125.149.69])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <douglas.royds@taitradio.com>) id 1PmygP-00023r-Ak
+Received: from 18.68.mail-out.ovh.net ([178.33.249.149]
+	helo=68.mail-out.ovh.net) by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1Pn23r-0001JS-Kb
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 02:17:25 +0100
-Received: from source ([209.85.161.48]) (using TLSv1) by
-	na3sys009aob102.postini.com ([74.125.148.12]) with SMTP
-	ID DSNKTVHq5nO0wrap6iMiXEghqG0mf7wNIeNY@postini.com;
-	Tue, 08 Feb 2011 17:16:24 PST
-Received: by mail-fx0-f48.google.com with SMTP id 2so7077706fxm.35
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Feb 2011 17:16:22 -0800 (PST)
-Received: by 10.223.101.136 with SMTP id c8mr1423034fao.100.1297198751620;
-	Tue, 08 Feb 2011 12:59:11 -0800 (PST)
-Received: from [172.25.113.34] ([202.37.96.91])
-	by mx.google.com with ESMTPS id j12sm1936246fax.9.2011.02.08.12.59.09
-	(version=SSLv3 cipher=RC4-MD5); Tue, 08 Feb 2011 12:59:10 -0800 (PST)
-Message-ID: <4D51AEA4.4010702@taitradio.com>
-Date: Wed, 09 Feb 2011 09:59:16 +1300
-From: Douglas Royds <douglas.royds@taitradio.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Wed, 09 Feb 2011 05:53:51 +0100
+Received: (qmail 4391 invoked by uid 503); 7 Feb 2011 17:03:45 -0000
+Received: from 26.mail-out.ovh.net (91.121.27.225)
+	by 68.mail-out.ovh.net with SMTP; 7 Feb 2011 17:03:45 -0000
+Received: (qmail 11528 invoked by uid 503); 7 Feb 2011 16:56:21 -0000
+Received: from b9.ovh.net (HELO mail428.ha.ovh.net) (213.186.33.59)
+	by 26.mail-out.ovh.net with SMTP; 7 Feb 2011 16:56:21 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 7 Feb 2011 18:53:04 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 7 Feb 2011 18:53:02 +0200
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1297116822-30938-1-git-send-email-filip.zyzniewski@gmail.com>	<4D517D6C.3070604@mentor.com>
-	<iis1mg$tj9$1@dough.gmane.org>
-In-Reply-To: <iis1mg$tj9$1@dough.gmane.org>
-Subject: Re: [PATCH] task-base: conditional wifi and bluetooth tasks in PACKAGES
+Date: Mon,  7 Feb 2011 17:53:33 +0100
+Message-Id: <1297097613-6619-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 2552978039618841929
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: [PATCH] util-linux-ng: add 2.18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,101 +38,217 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Feb 2011 01:17:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 09 Feb 2011 04:53:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 09/02/11 07:23, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 08-02-11 18:29, Tom Rini wrote:
->> On 02/07/2011 03:13 PM, Filip Zyzniewski wrote:
->>> This reduces amount of tasks for bootstrap-image from around 3400 to
->>> around 1600 for jlime.
->>>
->>> Signed-off-by: Filip Zyzniewski<filip.zyzniewski@gmail.com>
->> Can some of the other distro folks chime in here?
-> Yeah, this patch is wrong, since task-base is supposed to drag in bt and
-> wifi when it's available which includes usb, pci, serial, etc.
+from the changelong, the most important update over 2.17
+is a memory leak fix in mount
 
-I believe Filip's patch is correct, in removing them from the PACKAGES 
-list when these features are not set.
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ .../util-linux-ng-2.18/fdiskbsdlabel.h-nios2.patch |   14 ++++
+ recipes/util-linux-ng/util-linux-ng-2.18/tls.patch |   70 ++++++++++++++++++++
+ .../util-linux-ng-2.18/uclibc-compile.patch        |   13 ++++
+ .../util-linux-ng-2.18/uclibc-nolargefile.patch    |   13 ++++
+ .../util-linux-ng-replace-siginterrupt.patch       |   23 +++++++
+ recipes/util-linux-ng/util-linux-ng_2.18.bb        |   17 +++++
+ 6 files changed, 150 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/util-linux-ng/util-linux-ng-2.18/fdiskbsdlabel.h-nios2.patch
+ create mode 100644 recipes/util-linux-ng/util-linux-ng-2.18/tls.patch
+ create mode 100644 recipes/util-linux-ng/util-linux-ng-2.18/uclibc-compile.patch
+ create mode 100644 recipes/util-linux-ng/util-linux-ng-2.18/uclibc-nolargefile.patch
+ create mode 100644 recipes/util-linux-ng/util-linux-ng-2.18/util-linux-ng-replace-siginterrupt.patch
+ create mode 100644 recipes/util-linux-ng/util-linux-ng_2.18.bb
 
-task-base already checks the MACHINE_FEATURES and DISTRO_FEATURES for 
-bluetooth and wifi:
-
-    RDEPENDS_task-base = "\
-         ...
-         ${@base_contains('COMBINED_FEATURES', 'bluetooth',
-    'task-base-bluetooth', '',d)} \
-         ${@base_contains('COMBINED_FEATURES', 'wifi', 'task-base-wifi',
-    '',d)} \
-         ...
-
-The dependency on usb, pci, etc. is implemented in a python __anonymous 
-function lower down in the file.
-
-
->>> ---
->>>    recipes/tasks/task-base.bb |    6 +++---
->>>    1 files changed, 3 insertions(+), 3 deletions(-)
->>>
->>> diff --git a/recipes/tasks/task-base.bb b/recipes/tasks/task-base.bb
->>> index 32d871d..c8d6df7 100644
->>> --- a/recipes/tasks/task-base.bb
->>> +++ b/recipes/tasks/task-base.bb
->>> @@ -1,5 +1,5 @@
->>>    DESCRIPTION = "Merge machine and distro options to create a basic
->>> machine task/package"
->>> -PR = "r92"
->>> +PR = "r93"
->>>
->>>    inherit task
->>>
->>> @@ -31,8 +31,8 @@ PACKAGES = ' \
->>>                ${@base_contains("MACHINE_FEATURES", "redboot",
->>> "task-base-redboot", "",d)} \
->>>                ${@base_contains("MACHINE_FEATURES", "apex",
->>> "task-base-apex", "",d)} \
->>>                \
->>> -            task-base-bluetooth \
->>> -            task-base-wifi \
->>> +            ${@base_contains("MACHINE_FEATURES", "bluetooth",
->>> "task-base-bluetooth", "",d)} \
->>> +            ${@base_contains("MACHINE_FEATURES", "wifi",
->>> "task-base-wifi", "",d)} \
->>>                \
->>>                ${@base_contains("DISTRO_FEATURES", "cramfs",
->>> "task-base-cramfs", "", d)} \
->>>                ${@base_contains("DISTRO_FEATURES", "ipsec",
->>> "task-base-ipsec", "", d)} \
->>
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFNUYoQMkyGM64RGpERAuFAAJ9Y5jiml8NdBJpg5XmD7b8BlwjjFQCfXL8H
-> xuKrNII4OscMLUu/S2dAejQ=
-> =j2V5
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-=======================================================================
-This email, including any attachments, is only for the intended
-addressee.  It is subject to copyright, is confidential and may be
-the subject of legal or other privilege, none of which is waived or
-lost by reason of this transmission.
-If the receiver is not the intended addressee, please accept our
-apologies, notify us by return, delete all copies and perform no
-other act on the email.
-Unfortunately, we cannot warrant that the email has not been
-altered or corrupted during transmission.
-=======================================================================
+diff --git a/recipes/util-linux-ng/util-linux-ng-2.18/fdiskbsdlabel.h-nios2.patch b/recipes/util-linux-ng/util-linux-ng-2.18/fdiskbsdlabel.h-nios2.patch
+new file mode 100644
+index 0000000..5b5051e
+--- /dev/null
++++ b/recipes/util-linux-ng/util-linux-ng-2.18/fdiskbsdlabel.h-nios2.patch
+@@ -0,0 +1,14 @@
++Index: util-linux-ng-2.17/fdisk/fdiskbsdlabel.h
++===================================================================
++--- util-linux-ng-2.17.orig/fdisk/fdiskbsdlabel.h	2010-07-07 14:13:04.073530165 +0200
+++++ util-linux-ng-2.17/fdisk/fdiskbsdlabel.h	2010-07-07 14:13:43.053535150 +0200
++@@ -48,7 +48,8 @@
++ 
++ #if defined (i386) || defined (__sparc__) || defined (__arm__) || \
++     defined (__mips__) || defined (__s390__) || defined (__sh__) || \
++-    defined(__x86_64__) || defined (__avr32__) || defined(__cris__)
+++    defined(__x86_64__) || defined (__avr32__) || defined(__cris__) || \
+++    defined (__nios2__)
++ #define BSD_LABELSECTOR   1
++ #define BSD_LABELOFFSET   0
++ #elif defined (__alpha__) || defined (__powerpc__) || defined (__ia64__) || defined (__hppa__)
+diff --git a/recipes/util-linux-ng/util-linux-ng-2.18/tls.patch b/recipes/util-linux-ng/util-linux-ng-2.18/tls.patch
+new file mode 100644
+index 0000000..bdb29ca
+--- /dev/null
++++ b/recipes/util-linux-ng/util-linux-ng-2.18/tls.patch
+@@ -0,0 +1,70 @@
++Index: util-linux-ng-2.16/m4/tls.m4
++===================================================================
++--- util-linux-ng-2.16.orig/m4/tls.m4	2009-07-04 01:20:03.000000000 +0200
+++++ util-linux-ng-2.16/m4/tls.m4	2009-07-30 01:57:30.151697033 +0200
++@@ -18,31 +18,26 @@
++ # version as well.
++ #
++ AC_DEFUN([AX_TLS], [
++-  AC_MSG_CHECKING(for thread local storage (TLS) class)
++-  AC_CACHE_VAL(ac_cv_tls, [
++-    ax_tls_keywords="__thread __declspec(thread) none"
++-    for ax_tls_keyword in $ax_tls_keywords; do
++-       case $ax_tls_keyword in
++-          none) ac_cv_tls=none ; break ;;
++-          *)
++-             AC_TRY_COMPILE(
++-                [#include <stdlib.h>
++-                 static void
++-                 foo(void) {
++-                 static ] $ax_tls_keyword [ int bar;
++-                 exit(1);
++-                 }],
++-                 [],
++-                 [ac_cv_tls=$ax_tls_keyword ; break],
++-                 ac_cv_tls=none
++-             )
++-          esac
++-    done
++-])
+++  AC_CACHE_CHECK([for thread local storage (TLS) class],
+++    ac_cv_tls,
+++    [AC_LINK_IFELSE([__thread int a; int b; int main() { return a = b; }],
+++	 [chktls_save_LDFLAGS="$LDFLAGS"
+++	  LDFLAGS="-shared -Wl,--no-undefined $LDFLAGS"
+++	  chktls_save_CFLAGS="$CFLAGS"
+++	  CFLAGS="-fPIC $CFLAGS"
+++	  dnl If -shared works, test if TLS works in a shared library.
+++	  AC_LINK_IFELSE([int f() { return 0; }],
+++	    AC_LINK_IFELSE([__thread int a; int b; int f() { return a = b; }],
+++	      [ac_cv_tls=yes],
+++	      [ac_cv_tls=no]),
+++	    [ac_cv_tls=yes])
+++	  CFLAGS="$chktls_save_CFLAGS"
+++	  LDFLAGS="$chktls_save_LDFLAGS"], [ac_cv_tls=no])
+++    ])
++ 
++-  if test "$ac_cv_tls" != "none"; then
++-    dnl AC_DEFINE([TLS], [], [If the compiler supports a TLS storage class define it to that here])
++-    AC_DEFINE_UNQUOTED([TLS], $ac_cv_tls, [If the compiler supports a TLS storage class define it to that here])
++-  fi
++-  AC_MSG_RESULT($ac_cv_tls)
+++  AS_IF([test "x$ac_cv_tls" = "xyes"],
+++    [AC_DEFINE([TLS], 1,
+++     [Define this if the compiler supports __thread for Thread-Local Storage])
+++     $1],
+++    [$2])
++ ])
++Index: util-linux-ng-2.16/shlibs/uuid/src/gen_uuid.c
++===================================================================
++--- util-linux-ng-2.16.orig/shlibs/uuid/src/gen_uuid.c	2009-07-30 02:31:48.518159459 +0200
+++++ util-linux-ng-2.16/shlibs/uuid/src/gen_uuid.c	2009-07-30 02:32:04.867871183 +0200
++@@ -99,7 +99,7 @@
++ #endif
++ 
++ #ifdef TLS
++-#define THREAD_LOCAL static TLS
+++#define THREAD_LOCAL static __thread
++ #else
++ #define THREAD_LOCAL static
++ #endif
+diff --git a/recipes/util-linux-ng/util-linux-ng-2.18/uclibc-compile.patch b/recipes/util-linux-ng/util-linux-ng-2.18/uclibc-compile.patch
+new file mode 100644
+index 0000000..b2e8a8b
+--- /dev/null
++++ b/recipes/util-linux-ng/util-linux-ng-2.18/uclibc-compile.patch
+@@ -0,0 +1,13 @@
++Index: util-linux-ng-2.16/misc-utils/cal.c
++===================================================================
++--- util-linux-ng-2.16.orig/misc-utils/cal.c	2009-07-03 16:20:01.000000000 -0700
+++++ util-linux-ng-2.16/misc-utils/cal.c	2009-07-18 23:21:37.000000000 -0700
++@@ -407,7 +407,7 @@
++   strcpy(day_headings,"");
++   strcpy(j_day_headings,"");
++ 
++-#ifdef HAVE_LANGINFO_H
+++#ifdef HAVE_LANGINFO_H && !defined(__UCLIBC__)
++ # define weekday(wd)	nl_langinfo(ABDAY_1+wd)
++ #else
++ # define weekday(wd)	_time_info->abbrev_wkday[wd]
+diff --git a/recipes/util-linux-ng/util-linux-ng-2.18/uclibc-nolargefile.patch b/recipes/util-linux-ng/util-linux-ng-2.18/uclibc-nolargefile.patch
+new file mode 100644
+index 0000000..2c0c1bd
+--- /dev/null
++++ b/recipes/util-linux-ng/util-linux-ng-2.18/uclibc-nolargefile.patch
+@@ -0,0 +1,13 @@
++Upstream: http://www.spinics.net/lists/util-linux-ng/msg03651.html
++
++--- util-linux-ng-2.17/shlibs/blkid/src/llseek.c.orig	2010-11-29 11:31:49.000000000 +1030
+++++ util-linux-ng-2.17/shlibs/blkid/src/llseek.c	2010-11-29 11:52:07.000000000 +1030
++@@ -28,7 +28,7 @@
++ 
++ #include "blkidP.h"
++ 
++-#ifdef __linux__
+++#if defined(__linux__) && !(defined(__UCLIBC__) && !defined(__USE_FILE_OFFSET64))
++ 
++ #if defined(HAVE_LSEEK64) && defined(HAVE_LSEEK64_PROTOTYPE) || defined(__UCLIBC__)
++ 
+diff --git a/recipes/util-linux-ng/util-linux-ng-2.18/util-linux-ng-replace-siginterrupt.patch b/recipes/util-linux-ng/util-linux-ng-2.18/util-linux-ng-replace-siginterrupt.patch
+new file mode 100644
+index 0000000..4b5eb73
+--- /dev/null
++++ b/recipes/util-linux-ng/util-linux-ng-2.18/util-linux-ng-replace-siginterrupt.patch
+@@ -0,0 +1,23 @@
++Index: util-linux-ng-2.14/login-utils/login.c
++===================================================================
++--- util-linux-ng-2.14.orig/login-utils/login.c	2008-05-28 16:01:02.000000000 -0700
+++++ util-linux-ng-2.14/login-utils/login.c	2009-03-04 18:31:42.000000000 -0800
++@@ -358,6 +358,7 @@
++     char *childArgv[10];
++     char *buff;
++     int childArgc = 0;
+++    struct sigaction act;
++ #ifdef HAVE_SECURITY_PAM_MISC_H
++     int retcode;
++     pam_handle_t *pamh = NULL;
++@@ -373,7 +374,9 @@
++     pid = getpid();
++ 
++     signal(SIGALRM, timedout);
++-    siginterrupt(SIGALRM,1);           /* we have to interrupt syscalls like ioclt() */
+++    (void) sigaction(SIGALRM, NULL, &act);
+++    act.sa_flags &= ~SA_RESTART;
+++    sigaction(SIGALRM, &act, NULL);
++     alarm((unsigned int)timeout);
++     signal(SIGQUIT, SIG_IGN);
++     signal(SIGINT, SIG_IGN);
+diff --git a/recipes/util-linux-ng/util-linux-ng_2.18.bb b/recipes/util-linux-ng/util-linux-ng_2.18.bb
+new file mode 100644
+index 0000000..d243836
+--- /dev/null
++++ b/recipes/util-linux-ng/util-linux-ng_2.18.bb
+@@ -0,0 +1,17 @@
++require util-linux-ng.inc
++
++PR = "${INC_PR}"
++
++SRC_URI += "file://uclibc-compile.patch \
++	    file://util-linux-ng-replace-siginterrupt.patch \
++	    file://fdiskbsdlabel.h-nios2.patch \
++	    file://uclibc-nolargefile.patch \
++           "
++
++# fallocate is glibc 2.10, fallocate64 is glibc 2.11
++# we need to disable it for older versions
++EXTRA_OECONF += "ac_cv_func_fallocate=no"
++EXTRA_OECONF_append_virtclass-native += "--disable-fallocate --disable-use-tty-group"
++
++SRC_URI[archive.md5sum] = "2f5f71e6af969d041d73ab778c141a77"
++SRC_URI[archive.sha256sum] = "b8c5c07c763888aa712b4585393346667a00793127c54cef0470cfa456b031cc"
+-- 
+1.7.0.4
 
 
 
