@@ -1,27 +1,29 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PmMEb-0001SU-Ov
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1PmTPy-0002vJ-JY
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Feb 2011 09:14:09 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id D125E49127F;
-	Mon,  7 Feb 2011 09:13:10 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Mon, 7 Feb 2011 09:13:10 +0100
-Message-ID: <4D4FA996.8090400@dresearch.de>
-Date: Mon, 07 Feb 2011 09:13:10 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Mon, 07 Feb 2011 16:54:22 +0100
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with SMTP id p17FrHHc025568
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Mon, 7 Feb 2011 16:53:18 +0100
+Received: by ensc-virt.intern.sigma-chemnitz.de (sSMTP sendmail emulation);
+	Mon,  7 Feb 2011 16:53:17 +0100
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTi=QkexH5odXt9-6a9SFe=hhyv=tsiBXOhHt-u9p@mail.gmail.com>	<4D4C1986.8090908@dresearch.de>
-	<AANLkTim9GhtKZHMbi_vdfcbM=PqSGuwVGf68i03DDKfE@mail.gmail.com>
-In-Reply-To: <AANLkTim9GhtKZHMbi_vdfcbM=PqSGuwVGf68i03DDKfE@mail.gmail.com>
-X-OriginalArrivalTime: 07 Feb 2011 08:13:10.0809 (UTC)
-	FILETIME=[DBFCA090:01CBC69E]
-Subject: Re: testing branch 2011-02-03
+Date: Mon,  7 Feb 2011 16:53:05 +0100
+Message-Id: <1297093986-24331-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+X-Mailer: git-send-email 1.7.4
+X-DSPAM-Result: Innocent
+X-DSPAM-Probability: 0
+X-DSPAM-Confidence: 0.995
+X-Spam-Score: -5.2
+X-Spam-Level: -----
+X-Spam-Tests: AWL,BAYES_00,SPF_NEUTRAL,T_RP_MATCHES_RCVD,DSPAM_INNOCENT
+X-Scanned-By: MIMEDefang 2.71 on 62.153.82.30
+Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Subject: [PATCH] cortex-m3: adjusted target cflags
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,53 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Feb 2011 08:14:09 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 07 Feb 2011 15:54:22 -0000
 
-Am 04.02.2011 19:07, schrieb Khem Raj:
-> On Fri, Feb 4, 2011 at 7:21 AM, Steffen Sledz <sledz@dresearch.de> wrot=
-e:
->> On 02/04/2011 02:08 PM, Cliff Brake wrote:
->>> master has been merged to testing-next and is ready for clean builds.
->>
->> My first try with the new branch and minimal-image failed configuring =
-libtool-native-2.2.6b-r28.1 with a perl version mismatch error (see attac=
-hed log). :(
->>
->> Build Configuration:
->> BB_VERSION        =3D "1.10.2"
->> METADATA_BRANCH   =3D "testing-next"
->> METADATA_REVISION =3D "f06b04c"
->> TARGET_ARCH       =3D "arm"
->> TARGET_OS         =3D "linux-gnueabi"
->> MACHINE           =3D "hipox"
->> DISTRO            =3D "angstrom"
->> DISTRO_VERSION    =3D "2010.7-test-20110204"
->> TARGET_FPU        =3D "soft"
->>
->> openSUSE 11.3 32-bit
->=20
-> I wonder for angstrom-2010 we use libtool 2.4 how come you end up with =
-2.2 ?
+Explicit '-mthumb' is required because Cortex-M3 does not support ARM
+instructions and actual flags cause gcc to fail with 'error: target CPU
+does not support ARM mode'.
 
-It isn't angstrom-2010 but angstrom-2008.1.
+The '-mcpu=cortex-m3' is shorter than '-march=armv7-m -mtune=cortex-m3'
+and enables workarounds like '-mfix-cortex-m3-ldrd'.
 
-For the =C3=85ngstr=C3=B6m version confusion see the other thread[1] i st=
-arted.
+Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+---
+ conf/machine/include/tune-cortexm3.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Steffen
-
-[1] <http://thread.gmane.org/gmane.comp.handhelds.openembedded/42208>
-
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+diff --git a/conf/machine/include/tune-cortexm3.inc b/conf/machine/include/tune-cortexm3.inc
+index 6da9aee..a66a33c 100644
+--- a/conf/machine/include/tune-cortexm3.inc
++++ b/conf/machine/include/tune-cortexm3.inc
+@@ -1,4 +1,4 @@
+ # valid options for -march: `armv7', `armv7-m'
+-TARGET_CC_ARCH = "-march=armv7-m -mtune=cortex-m3 -mfpu=vfp -mfloat-abi=softfp"
++TARGET_CC_ARCH = "-mthumb -mcpu=cortex-m3 -mfpu=vfp -mfloat-abi=softfp"
+ FEED_ARCH = "armv7"
+ BASE_PACKAGE_ARCH = "armv7"
+-- 
+1.7.4
 
 
 
