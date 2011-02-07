@@ -1,34 +1,26 @@
-Received: from mail.cvg.de ([62.153.82.30])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1PmYCd-0001nJ-Cs
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1PmYhK-0004HV-MY
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Feb 2011 22:00:55 +0100
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with SMTP id p17Kxp3H008401
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 7 Feb 2011 21:59:52 +0100
-Received: by ensc-virt.intern.sigma-chemnitz.de (sSMTP sendmail emulation);
-	Mon,  7 Feb 2011 21:59:51 +0100
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+	Mon, 07 Feb 2011 22:32:38 +0100
+Received: (qmail invoked by alias); 07 Feb 2011 21:31:34 -0000
+Received: from p5DE4812E.dip.t-dialin.net (EHLO localhost.localdomain)
+	[93.228.129.46]
+	by mail.gmx.net (mp012) with SMTP; 07 Feb 2011 22:31:34 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1+vW+ZKjQSvh4CTLtG+MAVWfSvtECN8wdmhA0agP5
+	hUI4zYDGSjt8et
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1297093986-24331-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-	<AANLkTinsSoak9h=B+TQEzoUvWSP+MVELZQkTFRu3PTOQ@mail.gmail.com>
-Date: Mon, 07 Feb 2011 21:59:51 +0100
-In-Reply-To: <AANLkTinsSoak9h=B+TQEzoUvWSP+MVELZQkTFRu3PTOQ@mail.gmail.com>
-	(Khem Raj's message of "Mon, 7 Feb 2011 11:33:49 -0800")
-Message-ID: <ly39nzk1bs.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+Date: Mon, 7 Feb 2011 22:28:04 +0100
+User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
+References: <1296768970-19738-1-git-send-email-schnitzeltony@gmx.de>
+	<20110203214655.GA14662@mail.familie-heinold.de>
+In-Reply-To: <20110203214655.GA14662@mail.familie-heinold.de>
 MIME-Version: 1.0
-X-DSPAM-Result: Innocent
-X-DSPAM-Probability: 0
-X-DSPAM-Confidence: 1
-X-Spam-Score: -5.2
-X-Spam-Level: -----
-X-Spam-Tests: AWL,BAYES_00,SPF_NEUTRAL,T_RP_MATCHES_RCVD,DSPAM_INNOCENT
-X-Scanned-By: MIMEDefang 2.71 on 62.153.82.30
-Subject: Re: [PATCH] cortex-m3: adjusted target cflags
+Message-Id: <201102072228.04796.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: [PATCH] clutter: fix broken clutter-gtk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,32 +34,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Feb 2011 21:00:55 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 07 Feb 2011 21:32:39 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Khem Raj <raj.khem@gmail.com> writes:
+On Thursday 03 February 2011 22:46:56 Henning Heinold wrote:
+> hm maybee its better to concentrate on clutter 1.6 release.
 
->> The '-mcpu=cortex-m3' is shorter than '-march=armv7-m -mtune=cortex-m3'
->> and enables workarounds like '-mfix-cortex-m3-ldrd'.
->
-> Does -mcpu=cortex-m3 also cause gcc to tune for cortex-m3 ?
+Just played with clutter 1.6.2 (released today) and got:
 
-Yes; logic in gcc/config/arm/arm.c is:
+| checking for GLIB - version >= 2.26.0... no
+| *** Could not run GLIB test program, checking why...
+| *** The test program failed to compile or link. See the file config.log for the
+| *** exact error that occured. This usually means GLIB is incorrectly installed.
+| configure: error: glib-2.0 is required
 
-|    if (i == ARM_OPT_SET_CPU || i == ARM_OPT_SET_TUNE)
-|      arm_tune = (enum processor_type) (sel - ptr->processors);
-|
-|    if (i == ARM_OPT_SET_ARCH)
-|      target_arch_cpu = sel->core;
-|
-|    if (i == ARM_OPT_SET_CPU)
-|      selected_cpu = (enum processor_type) (sel - ptr->processors);
+This seems at least a problem with angstrom-2008.1...
 
-'-mcpu' causes the highest optimization level (both for the used instruction
-set (--> '-march') and the "soft" optimizations (--> '-mcpu')).
-
-
-
-Enrico
+Andreas
 
 
