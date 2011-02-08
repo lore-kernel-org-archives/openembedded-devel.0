@@ -1,35 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PmsEl-0001x0-Qr for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Feb 2011 19:24:27 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PmsDn-00073L-2G for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Feb 2011 19:23:27 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Feb 2011 19:23:27 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Feb 2011 19:23:27 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <Tom_Rini@mentor.com>) id 1PmtNw-0003Lb-TB
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Feb 2011 20:38:01 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PmtMv-0004IB-I2 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Feb 2011 11:36:57 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Tue, 8 Feb 2011 11:36:56 -0800
+Received: from [172.30.80.130] ([172.30.80.130]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 8 Feb 2011 12:36:56 -0700
+Message-ID: <4D519B54.503@mentor.com>
+Date: Tue, 08 Feb 2011 12:36:52 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 08 Feb 2011 19:23:12 +0100
-Message-ID: <iis1mg$tj9$1@dough.gmane.org>
-References: <1297116822-30938-1-git-send-email-filip.zyzniewski@gmail.com>
-	<4D517D6C.3070604@mentor.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4D517D6C.3070604@mentor.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] task-base: conditional wifi and bluetooth tasks in PACKAGES
+References: <4D51566B.9060603@mentor.com>
+	<4D516F8B.4090703@gmail.com>	<4D517961.7020000@mentor.com>
+	<AANLkTimzzjRgbpJS-fXKYk=tOMUgCihB8=M=V7gLGyuP@mail.gmail.com>
+In-Reply-To: <AANLkTimzzjRgbpJS-fXKYk=tOMUgCihB8=M=V7gLGyuP@mail.gmail.com>
+X-OriginalArrivalTime: 08 Feb 2011 19:36:56.0524 (UTC)
+	FILETIME=[8BA1B0C0:01CBC7C7]
+Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,69 +42,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Feb 2011 18:24:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 08 Feb 2011 19:38:01 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 08-02-11 18:29, Tom Rini wrote:
-> On 02/07/2011 03:13 PM, Filip Zyzniewski wrote:
->> This reduces amount of tasks for bootstrap-image from around 3400 to
->> around 1600 for jlime.
+On 02/08/2011 10:33 AM, Khem Raj wrote:
+> On Tue, Feb 8, 2011 at 9:12 AM, Tom Rini<tom_rini@mentor.com>  wrote:
+>> On 02/08/2011 09:30 AM, Marco Cavallini wrote:
+>>>
+>>> Tom Rini ha scritto, Il 08/02/2011 15:42:
+>>>>
+>>>> Hey all,
+>>>>
+>>>> As March is fast approaching I want to gather the list of DISTRO /
+>>>> MACHINE / BBPKGS targets that the various distributions would like to
+>>>> see at least compile tested (volunteers for HW testing welcome!). Today,
+>>>> I have the following setup to be built:
+>>>>
+>>>> minimal / minimal-uclibc:
+>>>> qemux86/ppc/arm/mips/mips64/sh4/mipsel, mpc8315e-rdb, p2020ds, p2020rdb
+>>>> +
+>>>>
+>>>> nas-server-image/native-sdk-image/console-image/minimal-image/x11-image/meta-toolchain/qt4-x11-demo-image/qt4e-demo-image
+>>>>
+>>>>
+>>>> angstrom-2008.1 / angstrom-2010.x:
+>>>> hawkboard, mini2440, mini6410, beagleboard + console-image /
+>>>> qt4-x11-demo-image / qt4e-demo-image
+>>>>
+>>>> slugos / ucslug:
+>>>> nslu2be/le + slugos-image
+>>>>
+>>>> I'm building all of these for 32bit Ubuntu 8.04, RHEL5 and will be
+>>>> adding Ubuntu 10.04 for the next run.  What more do people want added?
+>>>> I'm looking to fill this matrix out to something that runs "over the
+>>>> weekend" and I've still got plenty of room to spare (which is why I've
+>>>> bcc'd everyone in the MAINTAINERS file with a Distro by their name).
+>>>>
+>>>> And of course if you wish to handle building what you care about
+>>>> yourself instead, that's great!  Please just take this as a gentle
+>>>> reminder that there's a release coming up so it's time to crank the
+>>>> builders up and make sure your stuff is working.
+>>>>
+>>>
+>>> Tom,
+>>> I periodically test the following with Debian Lenny 5.0 x86_64, but I'd
+>>> like to see them in your list too.
+>>>
+>>> DISTRO: kaeilos
+>>> MACHINE : ronetix-pm9263/at91sam9263ek
+>>> IMAGE: minimal-image/x11-image/meta-toolchain/qt4e-demo-image
 >>
->> Signed-off-by: Filip Zyzniewski<filip.zyzniewski@gmail.com>
-> 
-> Can some of the other distro folks chime in here?
-
-Yeah, this patch is wrong, since task-base is supposed to drag in bt and
-wifi when it's available which includes usb, pci, serial, etc.
-
-> 
->> ---
->>   recipes/tasks/task-base.bb |    6 +++---
->>   1 files changed, 3 insertions(+), 3 deletions(-)
+>> Added, thanks!
 >>
->> diff --git a/recipes/tasks/task-base.bb b/recipes/tasks/task-base.bb
->> index 32d871d..c8d6df7 100644
->> --- a/recipes/tasks/task-base.bb
->> +++ b/recipes/tasks/task-base.bb
->> @@ -1,5 +1,5 @@
->>   DESCRIPTION = "Merge machine and distro options to create a basic
->> machine task/package"
->> -PR = "r92"
->> +PR = "r93"
->>
->>   inherit task
->>
->> @@ -31,8 +31,8 @@ PACKAGES = ' \
->>               ${@base_contains("MACHINE_FEATURES", "redboot",
->> "task-base-redboot", "",d)} \
->>               ${@base_contains("MACHINE_FEATURES", "apex",
->> "task-base-apex", "",d)} \
->>               \
->> -            task-base-bluetooth \
->> -            task-base-wifi \
->> +            ${@base_contains("MACHINE_FEATURES", "bluetooth",
->> "task-base-bluetooth", "",d)} \
->> +            ${@base_contains("MACHINE_FEATURES", "wifi",
->> "task-base-wifi", "",d)} \
->>               \
->>               ${@base_contains("DISTRO_FEATURES", "cramfs",
->> "task-base-cramfs", "", d)} \
->>               ${@base_contains("DISTRO_FEATURES", "ipsec",
->> "task-base-ipsec", "", d)} \
-> 
-> 
+>
+> Tom
+>
+> You should create a wiki page like this
+>
+> http://wiki.openembedded.org/index.php/Release-2010.12
+>
+> and everyone who is building some combination for release is welcome
+> to populate the matrix with their combinations
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Good point, I've created 
+http://wiki.openembedded.org/index.php/Release-2011.03 to get us 
+started, but it's not populated with the table yet nor does it quite 
+have valid direction yet.
 
-iD8DBQFNUYoQMkyGM64RGpERAuFAAJ9Y5jiml8NdBJpg5XmD7b8BlwjjFQCfXL8H
-xuKrNII4OscMLUu/S2dAejQ=
-=j2V5
------END PGP SIGNATURE-----
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
