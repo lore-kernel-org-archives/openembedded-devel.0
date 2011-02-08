@@ -1,32 +1,24 @@
-Received: from 26.mail-out.ovh.net ([91.121.27.225])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PmuoK-0005ft-Ri
+Received: from gravedo.de ([85.214.79.159])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <morphis@gravedo.de>) id 1Pmuwx-0005tt-Ij
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Feb 2011 22:09:21 +0100
-Received: (qmail 8788 invoked by uid 503); 8 Feb 2011 21:11:35 -0000
-Received: from b6.ovh.net (HELO mail402.ha.ovh.net) (213.186.33.56)
-	by 26.mail-out.ovh.net with SMTP; 8 Feb 2011 21:11:35 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 8 Feb 2011 23:08:19 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 8 Feb 2011 23:08:18 +0200
-Message-ID: <4D51B0C1.6010505@eukrea.com>
-Date: Tue, 08 Feb 2011 22:08:17 +0100
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
-MIME-Version: 1.0
+	Tue, 08 Feb 2011 22:18:15 +0100
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 828A815E85DB; Tue,  8 Feb 2011 22:17:14 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h1108419.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.1 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from localhost (p5489C5FD.dip.t-dialin.net [84.137.197.253])
+	by gravedo.de (Postfix) with ESMTPSA id 573C715E8005;
+	Tue,  8 Feb 2011 22:17:08 +0100 (CET)
+From: Simon Busch <morphis@gravedo.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1297116822-30938-1-git-send-email-filip.zyzniewski@gmail.com>	<4D517D6C.3070604@mentor.com>
-	<iis1mg$tj9$1@dough.gmane.org>
-In-Reply-To: <iis1mg$tj9$1@dough.gmane.org>
-X-Ovh-Tracer-Id: 12736742696319954249
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH] task-base: conditional wifi and bluetooth tasks in PACKAGES
+Date: Tue,  8 Feb 2011 22:17:04 +0100
+Message-Id: <1297199824-3712-1-git-send-email-morphis@gravedo.de>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] evas: disable cpu neon support for palmpre machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,28 +32,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Feb 2011 21:09:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 08 Feb 2011 21:18:16 -0000
 
-Hi Koen,
+Neon support in evas is currently broken for the palmpre machine. If we enable neon
+support evas causes alignment trap errors and lets the device freeze in the end. This
+should be reverted after the bug in evas code is found and fixed.
 
-On 08/02/2011 19:23, Koen Kooi wrote:
-> On 08-02-11 18:29, Tom Rini wrote:
->> On 02/07/2011 03:13 PM, Filip Zyzniewski wrote:
->>> This reduces amount of tasks for bootstrap-image from around 3400 to
->>> around 1600 for jlime.
->>>
->>> Signed-off-by: Filip Zyzniewski<filip.zyzniewski@gmail.com>
->>
->> Can some of the other distro folks chime in here?
->
-> Yeah, this patch is wrong, since task-base is supposed to drag in bt and
-> wifi when it's available which includes usb, pci, serial, etc.
->
-what would be the correct way to disable inclusion of bt & wifi in the image ?
+Signed-off-by: Simon Busch <morphis@gravedo.de>
+---
+ recipes/efl1/evas.inc |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
 
-Thanks,
-Eric
+diff --git a/recipes/efl1/evas.inc b/recipes/efl1/evas.inc
+index eb64d7a..ad30eba 100644
+--- a/recipes/efl1/evas.inc
++++ b/recipes/efl1/evas.inc
+@@ -7,7 +7,7 @@ DEPENDS_virtclass-native = "freetype-native libxext-native libpng-native jpeg-na
+ inherit efl
+ 
+ BBCLASSEXTEND = "native"
+-INC_PR = "r0"
++INC_PR = "r1"
+ FILESPATHPKG =. "${BPN}-${PV}:${BPN}:"
+ 
+ python populate_packages_prepend () {
+@@ -83,6 +83,9 @@ EVAS_CPU_TWEAKS = ""
+ # Disabled for now, see http://thread.gmane.org/gmane.comp.window-managers.enlightenment.devel/25194
+ #EVAS_CPU_TWEAKS_armv7a = "--enable-cpu-neon"
+ 
++# Neon support for evas is broken on palmpre currently (causes the device to freeze)
++EVAS_CPU_TWEAKS_palmpre = "--disable-cpu-neon"
++
+ # common options
+ EVAS_OECONF = " \
+                 --x-includes=${STAGING_INCDIR}/X11 \
+-- 
+1.7.1
+
 
 
