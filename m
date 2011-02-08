@@ -1,37 +1,37 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PmrCp-0008MT-L3
+	(envelope-from <raj.khem@gmail.com>) id 1PmrE5-0008RD-I9
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Feb 2011 18:18:23 +0100
-Received: by ywi6 with SMTP id 6so2360992ywi.6
+	Tue, 08 Feb 2011 18:19:43 +0100
+Received: by yie16 with SMTP id 16so2363408yie.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Feb 2011 09:17:18 -0800 (PST)
+	Tue, 08 Feb 2011 09:18:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=1hNbyoCdaRA7cIAPMfAnPf1MFW34p/Sg8BMBUaEPbm0=;
-	b=bEHaOHd1+GilQKuWiap14AxMRjuk+CvC28hEfPq8a/necxBrY/LUTrs5OKpz7eXS9p
-	Q0lZPSltp/ZS5+usgvn2e3Z0bU/o0lUmTwG4ewlKLEae+jiQjbOT9zmQlj78LnhKkwIj
-	0Gv710cxP+CcZs82bw9QjBU/8fsn0xvYErGqs=
+	bh=XBCpKWssYjj8Airx1KJ2sdk9bpZoOYmHAsok9RSkbM4=;
+	b=gXFvLnWmMF+3AWjHYQsvu1fzmGqn1cVgjGx0V1Ofoth/7hKxx77Yy/YAs54R40uEg2
+	X0irr7NXbPHaAH7UJmx0oNqk4BCzFEawoQGAaJLMi33kghNFTS/9ek6Uuh6tt8u8JXWB
+	y6DqubsYdQrIEfpzkywSPa2gNTGAsxMVcQDhg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:cc:content-type:content-transfer-encoding;
-	b=LcxanlY3gCIJfcVCmirOAou41QWQI3xhss6gCM1WUctIwKzZ/9M8TdMlmVsp4PC6kK
-	rnXLSKgIaUhHmhO5bssX2nkmrXFxqgBlj9gI7vwbP/rBHugTFuLPpnlu8lXA96s8eqcN
-	nPTgNUv3wBjefTW2wlyNRtel0U1gpbytBdXw8=
-Received: by 10.90.89.18 with SMTP id m18mr209535agb.169.1297185437327; Tue,
-	08 Feb 2011 09:17:17 -0800 (PST)
+	b=UbqqSFcBZp3RmW7UZfStUCv6iKdRbxkrUIpOe+L/sazJfoJsKv3EyN3/3/X1UzTzFo
+	+xRMrGNmztAIXi57wKkMRwfeuVIdNlRRZT6ges79NhXpTMJ7/8izlvb6nx1tmNFkMSuu
+	9eBE1JbU0I10aPYkQGMGiaRfQfNLz96YI5GPI=
+Received: by 10.90.89.18 with SMTP id m18mr211120agb.169.1297185515916; Tue,
+	08 Feb 2011 09:18:35 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.90.32.12 with HTTP; Tue, 8 Feb 2011 09:16:57 -0800 (PST)
-In-Reply-To: <1297181802-18948-2-git-send-email-kergoth@gmail.com>
+Received: by 10.90.32.12 with HTTP; Tue, 8 Feb 2011 09:18:15 -0800 (PST)
+In-Reply-To: <1297181802-18948-3-git-send-email-kergoth@gmail.com>
 References: <1297181802-18948-1-git-send-email-kergoth@gmail.com>
-	<1297181802-18948-2-git-send-email-kergoth@gmail.com>
+	<1297181802-18948-3-git-send-email-kergoth@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 8 Feb 2011 09:16:57 -0800
-Message-ID: <AANLkTinYREhS_u+=NKE-DCSzH-XMZ3in98Z6n06dUg45@mail.gmail.com>
+Date: Tue, 8 Feb 2011 09:18:15 -0800
+Message-ID: <AANLkTi=zGLRdYGyQTsbhn1j5Din+k6_pz_40i_GTt4re@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Chris Larson <chris_larson@mentor.com>
-Subject: Re: [PATCH 2/4] autotools: split out a oe_autoreconf function
+Subject: Re: [PATCH 3/4] autotools: symlink where we can
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,147 +45,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Feb 2011 17:18:24 -0000
+X-List-Received-Date: Tue, 08 Feb 2011 17:19:44 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: quoted-printable
 
-T24gVHVlLCBGZWIgOCwgMjAxMSBhdCA4OjE2IEFNLCBDaHJpcyBMYXJzb24gPGtlcmdvdGhAZ21h
-aWwuY29tPiB3cm90ZToKPiBGcm9tOiBDaHJpcyBMYXJzb24gPGNocmlzX2xhcnNvbkBtZW50b3Iu
-Y29tPgo+Cj4gVGhpcyBmdW5jdGlvbmFsaXR5IGxvZ2ljYWxseSBiZWxvbmdzIGluIGl0cyBvd24g
-ZnVuY3Rpb24sIGFuZCBpdCBtYWtlcyBpdAo+IGVhc2llciB0byBleHBsaWNpdGx5IHJ1biBhZ2Fp
-bnN0IHN1YmRpcnMgaW4gY2VydGFpbiBjYXNlcy4KPgo+IFNpZ25lZC1vZmYtYnk6IENocmlzIExh
-cnNvbiA8Y2hyaXNfbGFyc29uQG1lbnRvci5jb20+CgoKQWNrZWQtYnk6IEtoZW0gUmFqIDxyYWou
-a2hlbUBnbWFpbC5jb20+Cgo+IC0tLQo+IMKgY2xhc3Nlcy9hdXRvdG9vbHMuYmJjbGFzcyB8IMKg
-IDk2ICsrKysrKysrKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLS0tLS0tCj4gwqAxIGZp
-bGVzIGNoYW5nZWQsIDUwIGluc2VydGlvbnMoKyksIDQ2IGRlbGV0aW9ucygtKQo+Cj4gZGlmZiAt
-LWdpdCBhL2NsYXNzZXMvYXV0b3Rvb2xzLmJiY2xhc3MgYi9jbGFzc2VzL2F1dG90b29scy5iYmNs
-YXNzCj4gaW5kZXggNGQ3YTY2Yi4uOTc0NDU4OSAxMDA2NDQKPiAtLS0gYS9jbGFzc2VzL2F1dG90
-b29scy5iYmNsYXNzCj4gKysrIGIvY2xhc3Nlcy9hdXRvdG9vbHMuYmJjbGFzcwo+IEBAIC0xMDgs
-NiArMTA4LDU1IEBAIG9lX3J1bmNvbmYgKCkgewo+IMKgIMKgIMKgIMKgZmkKPiDCoH0KPgo+ICtv
-ZV9hdXRvcmVjb25mICgpIHsKPiArIMKgIMKgIMKgIGlmIFsgeCIke2FjcGF0aHN9IiA9IHhkZWZh
-dWx0IF07IHRoZW4KPiArIMKgIMKgIMKgIMKgIMKgIMKgIMKgIGFjcGF0aHM9Cj4gKyDCoCDCoCDC
-oCDCoCDCoCDCoCDCoCBmb3IgaSBpbiBgZmluZCAke1N9IC1tYXhkZXB0aCAyIC1uYW1lIFwqLm00
-fGdyZXAgLXYgJ2FjbG9jYWwubTQnfCBcCj4gKyDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
-oCDCoCBncmVwIC12ICdhY2luY2x1ZGUubTQnIHwgc2VkIC1lICdzLFwoLiovXCkuKiQsXDEsJ3xz
-b3J0IC11YDsgZG8KPiArIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIGFjcGF0aHM9
-IiRhY3BhdGhzIC1JICRpIgo+ICsgwqAgwqAgwqAgwqAgwqAgwqAgwqAgZG9uZQo+ICsgwqAgwqAg
-wqAgZWxzZQo+ICsgwqAgwqAgwqAgwqAgwqAgwqAgwqAgYWNwYXRocz0iJHthY3BhdGhzfSIKPiAr
-IMKgIMKgIMKgIGZpCj4gKyDCoCDCoCDCoCBBVVRPVj1gYXV0b21ha2UgLS12ZXJzaW9uIHwgaGVh
-ZCAtbiAxIHwgc2VkICJzLy4qIC8vO3MvXC5bMC05XVwrJC8vImAKPiArIMKgIMKgIMKgIGluc3Rh
-bGwgLWQgJHtTVEFHSU5HX0RBVEFESVJ9L2FjbG9jYWwKPiArIMKgIMKgIMKgIGluc3RhbGwgLWQg
-JHtTVEFHSU5HX0RBVEFESVJ9L2FjbG9jYWwtJEFVVE9WCj4gKyDCoCDCoCDCoCBhY3BhdGhzPSIk
-YWNwYXRocyAtSSR7U1RBR0lOR19EQVRBRElSfS9hY2xvY2FsLSRBVVRPViAtSSAke1NUQUdJTkdf
-REFUQURJUn0vYWNsb2NhbCIKPiArIMKgIMKgIMKgICMgYXV0b3JlY29uZiBpcyB0b28gc2h5IHRv
-IG92ZXJ3cml0ZSBhY2xvY2FsLm00IGlmIGl0IGRvZXNuJ3QgbG9vawo+ICsgwqAgwqAgwqAgIyBs
-aWtlIGl0IHdhcyBhdXRvLWdlbmVyYXRlZC4gwqBXb3JrIGFyb3VuZCB0aGlzIGJ5IGJsb3dpbmcg
-aXQgYXdheQo+ICsgwqAgwqAgwqAgIyBieSBoYW5kLCB1bmxlc3MgdGhlIHBhY2thZ2Ugc3BlY2lm
-aWNhbGx5IGFza2VkIG5vdCB0byBydW4gYWNsb2NhbC4KPiArIMKgIMKgIMKgIGlmICEgZWNobyAk
-e0VYVFJBX0FVVE9SRUNPTkZ9IHwgZ3JlcCAtcSAiYWNsb2NhbCI7IHRoZW4KPiArIMKgIMKgIMKg
-IMKgIMKgIMKgIMKgIHJtIC1mIGFjbG9jYWwubTQKPiArIMKgIMKgIMKgIGZpCj4gKyDCoCDCoCDC
-oCBpZiBbIC1lIGNvbmZpZ3VyZS5pbiBdOyB0aGVuCj4gKyDCoCDCoCDCoCDCoCDCoCDCoCDCoCBD
-T05GSUdVUkVfQUM9Y29uZmlndXJlLmluCj4gKyDCoCDCoCDCoCBlbHNlCj4gKyDCoCDCoCDCoCDC
-oCDCoCDCoCDCoCBDT05GSUdVUkVfQUM9Y29uZmlndXJlLmFjCj4gKyDCoCDCoCDCoCBmaQo+ICsg
-wqAgwqAgwqAgaWYgZ3JlcCAiXltbOnNwYWNlOl1dKkFNX0dMSUJfR05VX0dFVFRFWFQiICRDT05G
-SUdVUkVfQUMgPi9kZXYvbnVsbDsgdGhlbgo+ICsgwqAgwqAgwqAgwqAgwqAgwqAgwqAgaWYgZ3Jl
-cCAic2VkLipQT1RGSUxFUyIgJENPTkZJR1VSRV9BQyA+L2Rldi9udWxsOyB0aGVuCj4gKyDCoCDC
-oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCA6IGRvIG5vdGhpbmcgLS0gd2Ugc3RpbGwgaGF2
-ZSBhbiBvbGQgdW5tb2RpZmllZCBjb25maWd1cmUuYWMKPiArIMKgIMKgIMKgIMKgIMKgIMKgIMKg
-IGVsc2UKPiArIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIGVjaG8gIm5vIiB8IGds
-aWItZ2V0dGV4dGl6ZSAtLWZvcmNlIC0tY29weQo+ICsgwqAgwqAgwqAgwqAgwqAgwqAgwqAgZmkK
-PiArIMKgIMKgIMKgIGVsc2UgaWYgZ3JlcCAiXltbOnNwYWNlOl1dKkFNX0dOVV9HRVRURVhUIiAk
-Q09ORklHVVJFX0FDID4vZGV2L251bGw7IHRoZW4KPiArIMKgIMKgIMKgIMKgIMKgIMKgIMKgIGlm
-IFsgLWUgJHtTVEFHSU5HX0RBVEFESVJ9L2dldHRleHQvY29uZmlnLnJwYXRoIF07IHRoZW4KPiAr
-IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIGNwICR7U1RBR0lOR19EQVRBRElSfS9n
-ZXR0ZXh0L2NvbmZpZy5ycGF0aCAke1N9Lwo+ICsgwqAgwqAgwqAgwqAgwqAgwqAgwqAgZWxzZQo+
-ICsgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgb2Vub3RlICR7U1RBR0lOR19EQVRB
-RElSfS9nZXR0ZXh0L2NvbmZpZy5ycGF0aCBub3QgZm91bmQuIGdldHRleHQgaXMgbm90IGluc3Rh
-bGxlZC4KPiArIMKgIMKgIMKgIMKgIMKgIMKgIMKgIGZpCj4gKyDCoCDCoCDCoCBmaQo+ICsKPiAr
-IMKgIMKgIMKgIGZpCj4gKyDCoCDCoCDCoCBmb3IgYXV4IGluIG00IGBzZWQgLW4gLWUgJy9eW1s6
-c3BhY2U6XV0qQUNfQ09ORklHX01BQ1JPX0RJUi9zfFteKF0qKFtbXSpcKFteXSldKlwpW11dKil8
-XDF8cCcgJENPTkZJR1VSRV9BQ2A7IGRvCj4gKyDCoCDCoCDCoCDCoCDCoCDCoCDCoCBta2RpciAt
-cCAke2F1eH0KPiArIMKgIMKgIMKgIGRvbmUKPiArIMKgIMKgIMKgIGF1dG9yZWNvbmYgLVdjcm9z
-cyAtLXZlcmJvc2UgLS1pbnN0YWxsIC0tZm9yY2UgJHtFWFRSQV9BVVRPUkVDT05GfSAkYWNwYXRo
-cyB8fCBvZWZhdGFsICJhdXRvcmVjb25mIGV4ZWN1dGlvbiBmYWlsZWQuIgo+ICsgwqAgwqAgwqAg
-aWYgZ3JlcCAiXltbOnNwYWNlOl1dKltBSV1bQ1RdX1BST0dfSU5UTFRPT0wiICRDT05GSUdVUkVf
-QUMgPi9kZXYvbnVsbDsgdGhlbgo+ICsgwqAgwqAgwqAgwqAgwqAgwqAgwqAgaW50bHRvb2xpemUg
-LS1jb3B5IC0tZm9yY2UgLS1hdXRvbWFrZQo+ICsgwqAgwqAgwqAgZmkKPiArfQo+ICsKPiDCoGF1
-dG90b29sc19kb19jb25maWd1cmUoKSB7Cj4gwqAgwqAgwqAgwqBjYXNlICR7UE59IGluCj4gwqAg
-wqAgwqAgwqBhdXRvY29uZip8YXV0b21ha2UqKQo+IEBAIC0xMjAsNTIgKzE2OSw3IEBAIGF1dG90
-b29sc19kb19jb25maWd1cmUoKSB7Cj4gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBpZiBbIC1lICR7
-U30vY29uZmlndXJlLmluIC1vIC1lICR7U30vY29uZmlndXJlLmFjIF07IHRoZW4KPiDCoCDCoCDC
-oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoG9sZGRpcj1gcHdkYAo+IMKgIMKgIMKgIMKgIMKg
-IMKgIMKgIMKgIMKgIMKgIMKgIMKgY2QgJHtTfQo+IC0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
-wqAgwqAgwqAgaWYgWyB4IiR7YWNwYXRoc30iID0geGRlZmF1bHQgXTsgdGhlbgo+IC0gwqAgwqAg
-wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgYWNwYXRocz0KPiAtIMKgIMKg
-IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIGZvciBpIGluIGBmaW5kICR7
-U30gLW1heGRlcHRoIDIgLW5hbWUgXCoubTR8Z3JlcCAtdiAnYWNsb2NhbC5tNCd8IFwKPiAtIMKg
-IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIGdy
-ZXAgLXYgJ2FjaW5jbHVkZS5tNCcgfCBzZWQgLWUgJ3MsXCguKi9cKS4qJCxcMSwnfHNvcnQgLXVg
-OyBkbwo+IC0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
-wqAgwqAgwqAgYWNwYXRocz0iJGFjcGF0aHMgLUkgJGkiCj4gLSDCoCDCoCDCoCDCoCDCoCDCoCDC
-oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCBkb25lCj4gLSDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
-oCDCoCDCoCDCoCBlbHNlCj4gLSDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
-oCDCoCDCoCBhY3BhdGhzPSIke2FjcGF0aHN9Igo+IC0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
-wqAgwqAgwqAgZmkKPiAtIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIEFVVE9WPWBh
-dXRvbWFrZSAtLXZlcnNpb24gfCBoZWFkIC1uIDEgfCBzZWQgInMvLiogLy87cy9cLlswLTldXCsk
-Ly8iYAo+IC0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgaW5zdGFsbCAtZCAke1NU
-QUdJTkdfREFUQURJUn0vYWNsb2NhbAo+IC0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
-wqAgaW5zdGFsbCAtZCAke1NUQUdJTkdfREFUQURJUn0vYWNsb2NhbC0kQVVUT1YKPiAtIMKgIMKg
-IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIGFjcGF0aHM9IiRhY3BhdGhzIC1JJHtTVEFHSU5H
-X0RBVEFESVJ9L2FjbG9jYWwtJEFVVE9WIC1JICR7U1RBR0lOR19EQVRBRElSfS9hY2xvY2FsIgo+
-IC0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgIyBhdXRvcmVjb25mIGlzIHRvbyBz
-aHkgdG8gb3ZlcndyaXRlIGFjbG9jYWwubTQgaWYgaXQgZG9lc24ndCBsb29rCj4gLSDCoCDCoCDC
-oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCAjIGxpa2UgaXQgd2FzIGF1dG8tZ2VuZXJhdGVkLiDC
-oFdvcmsgYXJvdW5kIHRoaXMgYnkgYmxvd2luZyBpdCBhd2F5Cj4gLSDCoCDCoCDCoCDCoCDCoCDC
-oCDCoCDCoCDCoCDCoCDCoCAjIGJ5IGhhbmQsIHVubGVzcyB0aGUgcGFja2FnZSBzcGVjaWZpY2Fs
-bHkgYXNrZWQgbm90IHRvIHJ1biBhY2xvY2FsLgo+IC0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
-wqAgwqAgwqAgaWYgISBlY2hvICR7RVhUUkFfQVVUT1JFQ09ORn0gfCBncmVwIC1xICJhY2xvY2Fs
-IjsgdGhlbgo+IC0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
-cm0gLWYgYWNsb2NhbC5tNAo+IC0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgZmkK
-PiAtIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIGlmIFsgLWUgY29uZmlndXJlLmlu
-IF07IHRoZW4KPiAtIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
-IENPTkZJR1VSRV9BQz1jb25maWd1cmUuaW4KPiAtIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
-IMKgIMKgIGVsc2UKPiAtIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
-IMKgIENPTkZJR1VSRV9BQz1jb25maWd1cmUuYWMKPiAtIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
-IMKgIMKgIMKgIGZpCj4gLSDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCBpZiBncmVw
-ICJeW1s6c3BhY2U6XV0qQU1fR0xJQl9HTlVfR0VUVEVYVCIgJENPTkZJR1VSRV9BQyA+L2Rldi9u
-dWxsOyB0aGVuCj4gLSDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
-oCBpZiBncmVwICJzZWQuKlBPVEZJTEVTIiAkQ09ORklHVVJFX0FDID4vZGV2L251bGw7IHRoZW4K
-PiAtIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
-IMKgIDogZG8gbm90aGluZyAtLSB3ZSBzdGlsbCBoYXZlIGFuIG9sZCB1bm1vZGlmaWVkIGNvbmZp
-Z3VyZS5hYwo+IC0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
-ZWxzZQo+IC0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
-wqAgwqAgwqAgZWNobyAibm8iIHwgZ2xpYi1nZXR0ZXh0aXplIC0tZm9yY2UgLS1jb3B5Cj4gLSDC
-oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCBmaQo+IC0gwqAgwqAg
-wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgZWxzZSBpZiBncmVwICJeW1s6c3BhY2U6XV0qQU1f
-R05VX0dFVFRFWFQiICRDT05GSUdVUkVfQUMgPi9kZXYvbnVsbDsgdGhlbgo+IC0gwqAgwqAgwqAg
-wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgaWYgWyAtZSAke1NUQUdJTkdfREFU
-QURJUn0vZ2V0dGV4dC9jb25maWcucnBhdGggXTsgdGhlbgo+IC0gwqAgwqAgwqAgwqAgwqAgwqAg
-wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgY3AgJHtTVEFHSU5HX0RBVEFE
-SVJ9L2dldHRleHQvY29uZmlnLnJwYXRoICR7U30vCj4gLSDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
-oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCBlbHNlCj4gLSDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
-oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCBvZW5vdGUgJHtTVEFHSU5HX0RBVEFESVJ9
-L2dldHRleHQvY29uZmlnLnJwYXRoIG5vdCBmb3VuZC4gZ2V0dGV4dCBpcyBub3QgaW5zdGFsbGVk
-Lgo+IC0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgZmkKPiAt
-IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIGZpCj4gLQo+IC0gwqAgwqAgwqAgwqAg
-wqAgwqAgwqAgwqAgwqAgwqAgwqAgZmkKPiAtIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
-IMKgIGZvciBhdXggaW4gbTQgYHNlZCAtbiAtZSAnL15bWzpzcGFjZTpdXSpBQ19DT05GSUdfTUFD
-Uk9fRElSL3N8W14oXSooW1tdKlwoW15dKV0qXClbXV0qKXxcMXxwJyAkQ09ORklHVVJFX0FDYDsg
-ZG8KPiAtIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIG1rZGly
-IC1wICR7YXV4fQo+IC0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgZG9uZQo+IC0g
-wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgYXV0b3JlY29uZiAtV2Nyb3NzIC0tdmVy
-Ym9zZSAtLWluc3RhbGwgLS1mb3JjZSAke0VYVFJBX0FVVE9SRUNPTkZ9ICRhY3BhdGhzIHx8IG9l
-ZmF0YWwgImF1dG9yZWNvbmYgZXhlY3V0aW9uIGZhaWxlZC4iCj4gLSDCoCDCoCDCoCDCoCDCoCDC
-oCDCoCDCoCDCoCDCoCDCoCBpZiBncmVwICJeW1s6c3BhY2U6XV0qW0FJXVtDVF1fUFJPR19JTlRM
-VE9PTCIgJENPTkZJR1VSRV9BQyA+L2Rldi9udWxsOyB0aGVuCj4gLSDCoCDCoCDCoCDCoCDCoCDC
-oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCBpbnRsdG9vbGl6ZSAtLWNvcHkgLS1mb3JjZSAt
-LWF1dG9tYWtlCj4gLSDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCBmaQo+ICsgwqAg
-wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgb2VfYXV0b3JlY29uZgo+IMKgIMKgIMKgIMKg
-IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgY2QgJG9sZGRpcgo+IMKgIMKgIMKgIMKgIMKgIMKgIMKg
-IMKgZmkKPiDCoCDCoCDCoCDCoDs7Cj4gLS0KPiAxLjcuMi4zCj4KPgo+IF9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gT3BlbmVtYmVkZGVkLWRldmVsIG1h
-aWxpbmcgbGlzdAo+IE9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnCj4g
-aHR0cDovL2xpc3RzLmxpbnV4dG9nby5vcmcvY2dpLWJpbi9tYWlsbWFuL2xpc3RpbmZvL29wZW5l
-bWJlZGRlZC1kZXZlbAo+Cg==
+On Tue, Feb 8, 2011 at 8:16 AM, Chris Larson <kergoth@gmail.com> wrote:
+> From: Chris Larson <chris_larson@mentor.com>
+>
+> Signed-off-by: Chris Larson <chris_larson@mentor.com>
+
+now that we will have symlinks will it have any impact on source
+package generation ?
+otherwise
+
+Acked-by: Khem Raj <raj.khem@gmail.com>
+
+> ---
+> =C2=A0classes/autotools.bbclass | =C2=A0 =C2=A08 ++++----
+> =C2=A01 files changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/classes/autotools.bbclass b/classes/autotools.bbclass
+> index 9744589..a88a4d1 100644
+> --- a/classes/autotools.bbclass
+> +++ b/classes/autotools.bbclass
+> @@ -137,11 +137,11 @@ oe_autoreconf () {
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if grep "sed.*POTF=
+ILES" $CONFIGURE_AC >/dev/null; then
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0: do nothing -- we still have an old unmodified configure.ac
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0else
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 echo "no" | glib-gettextize --force --copy
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 echo "no" | glib-gettextize --force
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0else if grep "^[[:space:]]*AM_GNU_GETTEXT" $CO=
+NFIGURE_AC >/dev/null; then
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if [ -e ${STAGING_=
+DATADIR}/gettext/config.rpath ]; then
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 cp ${STAGING_DATADIR}/gettext/config.rpath ${S}/
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 ln -sf ${STAGING_DATADIR}/gettext/config.rpath ${S}/
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0else
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0oenote ${STAGING_DATADIR}/gettext/config.rpath not found. gettext=
+ is not installed.
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
+> @@ -151,9 +151,9 @@ oe_autoreconf () {
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0for aux in m4 `sed -n -e '/^[[:space:]]*AC_CON=
+FIG_MACRO_DIR/s|[^(]*([[]*\([^])]*\)[]]*)|\1|p' $CONFIGURE_AC`; do
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0mkdir -p ${aux}
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0done
+> - =C2=A0 =C2=A0 =C2=A0 autoreconf -Wcross --verbose --install --force ${E=
+XTRA_AUTORECONF} $acpaths || oefatal "autoreconf execution failed."
+> + =C2=A0 =C2=A0 =C2=A0 autoreconf -Wcross --verbose --install --symlink -=
+-force ${EXTRA_AUTORECONF} $acpaths || oefatal "autoreconf execution failed=
+."
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0if grep "^[[:space:]]*[AI][CT]_PROG_INTLTOOL" =
+$CONFIGURE_AC >/dev/null; then
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 intltoolize --copy --f=
+orce --automake
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 intltoolize --force --=
+automake
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
+> =C2=A0}
+>
+> --
+> 1.7.2.3
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
