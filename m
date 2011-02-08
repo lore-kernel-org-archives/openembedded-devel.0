@@ -1,32 +1,36 @@
-Received: from 26.mail-out.ovh.net ([91.121.27.225])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Pmvua-0007Py-UO
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <coolaj86@gmail.com>) id 1PmwQn-0007tv-CL
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Feb 2011 23:19:53 +0100
-Received: (qmail 20695 invoked by uid 503); 8 Feb 2011 22:22:07 -0000
-Received: from b6.ovh.net (HELO mail402.ha.ovh.net) (213.186.33.56)
-	by 26.mail-out.ovh.net with SMTP; 8 Feb 2011 22:22:07 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 9 Feb 2011 00:18:52 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 9 Feb 2011 00:18:50 +0200
-Message-ID: <4D51C149.9050709@eukrea.com>
-Date: Tue, 08 Feb 2011 23:18:49 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Tue, 08 Feb 2011 23:53:09 +0100
+Received: by fxm17 with SMTP id 17so6590490fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 08 Feb 2011 14:52:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=MeiDlVE1R11x2TXYqtLjJ1th7cdjfIjtkjb6IHq9HEQ=;
+	b=ij9xPh34ogB4ZyVDocQ4AkLd34Iy+F3jQoDo/hqEP9mn2X8eMlmciGxzBbPTogjsWE
+	9MHArSzdqHXQPwldzKQqgh1/i8QmqRT2HMcuG18ZWxlD6F9JMBGlHfxpNvMK9Ccdqn9T
+	JOveSTO3VVbcR8kZ2COPCNp7bDJ3ky6Q2JnAM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=S5lojXprONhBpScrAVGMz2gkodmucX66CqZRUDzrjZcJ2ZTNurrg0WT5U+T+xqeCPh
+	OXpP64pwk2/hoXnoUtj7jbL6WRMlC8tVq9gM+LfuWru3hDnOLcFXN3atPOOvFr+lDHcQ
+	Pc6OvdGxc+/nSyzeor3xgcSoVUr+kErsEhZoE=
+Received: by 10.223.71.199 with SMTP id i7mr3520033faj.57.1297205526113; Tue,
+	08 Feb 2011 14:52:06 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.223.114.73 with HTTP; Tue, 8 Feb 2011 14:51:45 -0800 (PST)
+In-Reply-To: <4D51566B.9060603@mentor.com>
+References: <4D51566B.9060603@mentor.com>
+From: AJ ONeal <coolaj86@gmail.com>
+Date: Tue, 8 Feb 2011 15:51:45 -0700
+Message-ID: <AANLkTik=O8Pq202JH5qFLrO7fGEcBJjsRnScQoc7AvRO@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1297116822-30938-1-git-send-email-filip.zyzniewski@gmail.com>	<4D517D6C.3070604@mentor.com>	<iis1mg$tj9$1@dough.gmane.org>	<4D51B0C1.6010505@eukrea.com>
-	<iisfb2$fps$1@dough.gmane.org>
-In-Reply-To: <iisfb2$fps$1@dough.gmane.org>
-X-Ovh-Tracer-Id: 13927944799435533641
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH] task-base: conditional wifi and bluetooth tasks in PACKAGES
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,19 +44,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Feb 2011 22:19:53 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 08 Feb 2011 22:53:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 08/02/2011 23:16, Koen Kooi wrote:
-> On 08-02-11 22:08, Eric Bénard wrote:
->> what would be the correct way to disable inclusion of bt&  wifi in the
->> image ?
+I'd be happy to some hardware testing on Angstrom / Gumstix Overo +
+desktop-image (or just console-image) if you add it to the matrix.
+
+What all does the hardware testing entail?
+
+AJ ONeal
+
+On Tue, Feb 8, 2011 at 7:42 AM, Tom Rini <tom_rini@mentor.com> wrote:
+
+> Hey all,
 >
-> Use a different task, nobody is forcing you to use task-base
-
-ok that's indeed a solution ;-)
-
-Eric
-
+> As March is fast approaching I want to gather the list of DISTRO / MACHINE
+> / BBPKGS targets that the various distributions would like to see at least
+> compile tested (volunteers for HW testing welcome!). Today, I have the
+> following setup to be built:
+>
+> minimal / minimal-uclibc:
+> qemux86/ppc/arm/mips/mips64/sh4/mipsel, mpc8315e-rdb, p2020ds, p2020rdb +
+> nas-server-image/native-sdk-image/console-image/minimal-image/x11-image/meta-toolchain/qt4-x11-demo-image/qt4e-demo-image
+>
+> angstrom-2008.1 / angstrom-2010.x:
+> hawkboard, mini2440, mini6410, beagleboard + console-image /
+> qt4-x11-demo-image / qt4e-demo-image
+>
+> slugos / ucslug:
+> nslu2be/le + slugos-image
+>
+> I'm building all of these for 32bit Ubuntu 8.04, RHEL5 and will be adding
+> Ubuntu 10.04 for the next run.  What more do people want added? I'm looking
+> to fill this matrix out to something that runs "over the weekend" and I've
+> still got plenty of room to spare (which is why I've bcc'd everyone in the
+> MAINTAINERS file with a Distro by their name).
+>
+> And of course if you wish to handle building what you care about yourself
+> instead, that's great!  Please just take this as a gentle reminder that
+> there's a release coming up so it's time to crank the builders up and make
+> sure your stuff is working.
+>
+> --
+> Tom Rini
+> Mentor Graphics Corporation
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
