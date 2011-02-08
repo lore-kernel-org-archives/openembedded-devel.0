@@ -1,35 +1,32 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <coolaj86@gmail.com>) id 1PmwQn-0007tv-CL
+	(envelope-from <Tom_Rini@mentor.com>) id 1PmwZD-0008OL-Js
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Feb 2011 23:53:09 +0100
-Received: by fxm17 with SMTP id 17so6590490fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Feb 2011 14:52:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=MeiDlVE1R11x2TXYqtLjJ1th7cdjfIjtkjb6IHq9HEQ=;
-	b=ij9xPh34ogB4ZyVDocQ4AkLd34Iy+F3jQoDo/hqEP9mn2X8eMlmciGxzBbPTogjsWE
-	9MHArSzdqHXQPwldzKQqgh1/i8QmqRT2HMcuG18ZWxlD6F9JMBGlHfxpNvMK9Ccdqn9T
-	JOveSTO3VVbcR8kZ2COPCNp7bDJ3ky6Q2JnAM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=S5lojXprONhBpScrAVGMz2gkodmucX66CqZRUDzrjZcJ2ZTNurrg0WT5U+T+xqeCPh
-	OXpP64pwk2/hoXnoUtj7jbL6WRMlC8tVq9gM+LfuWru3hDnOLcFXN3atPOOvFr+lDHcQ
-	Pc6OvdGxc+/nSyzeor3xgcSoVUr+kErsEhZoE=
-Received: by 10.223.71.199 with SMTP id i7mr3520033faj.57.1297205526113; Tue,
-	08 Feb 2011 14:52:06 -0800 (PST)
+	Wed, 09 Feb 2011 00:01:51 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PmwYC-0002cO-CO from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Feb 2011 15:00:48 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Tue, 8 Feb 2011 15:00:47 -0800
+Received: from [172.30.80.130] ([172.30.80.130]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 8 Feb 2011 16:00:47 -0700
+Message-ID: <4D51CB1B.6020009@mentor.com>
+Date: Tue, 08 Feb 2011 16:00:43 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.223.114.73 with HTTP; Tue, 8 Feb 2011 14:51:45 -0800 (PST)
-In-Reply-To: <4D51566B.9060603@mentor.com>
-References: <4D51566B.9060603@mentor.com>
-From: AJ ONeal <coolaj86@gmail.com>
-Date: Tue, 8 Feb 2011 15:51:45 -0700
-Message-ID: <AANLkTik=O8Pq202JH5qFLrO7fGEcBJjsRnScQoc7AvRO@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+References: <4D51566B.9060603@mentor.com>
+	<AANLkTik=O8Pq202JH5qFLrO7fGEcBJjsRnScQoc7AvRO@mail.gmail.com>
+In-Reply-To: <AANLkTik=O8Pq202JH5qFLrO7fGEcBJjsRnScQoc7AvRO@mail.gmail.com>
+X-OriginalArrivalTime: 08 Feb 2011 23:00:47.0179 (UTC)
+	FILETIME=[05AB89B0:01CBC7E4]
 Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,54 +41,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Feb 2011 22:53:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 08 Feb 2011 23:01:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I'd be happy to some hardware testing on Angstrom / Gumstix Overo +
-desktop-image (or just console-image) if you add it to the matrix.
+On 02/08/2011 03:51 PM, AJ ONeal wrote:
+> I'd be happy to some hardware testing on Angstrom / Gumstix Overo +
+> desktop-image (or just console-image) if you add it to the matrix.
 
-What all does the hardware testing entail?
+Added.
 
-AJ ONeal
+> What all does the hardware testing entail?
 
-On Tue, Feb 8, 2011 at 7:42 AM, Tom Rini <tom_rini@mentor.com> wrote:
+At least booting to completion, and beyond that it's up to the person 
+doing the testing.  That said, it might be a tad difficult to distribute 
+binaries for testing, but I'll see what I can do.
 
-> Hey all,
->
-> As March is fast approaching I want to gather the list of DISTRO / MACHINE
-> / BBPKGS targets that the various distributions would like to see at least
-> compile tested (volunteers for HW testing welcome!). Today, I have the
-> following setup to be built:
->
-> minimal / minimal-uclibc:
-> qemux86/ppc/arm/mips/mips64/sh4/mipsel, mpc8315e-rdb, p2020ds, p2020rdb +
-> nas-server-image/native-sdk-image/console-image/minimal-image/x11-image/meta-toolchain/qt4-x11-demo-image/qt4e-demo-image
->
-> angstrom-2008.1 / angstrom-2010.x:
-> hawkboard, mini2440, mini6410, beagleboard + console-image /
-> qt4-x11-demo-image / qt4e-demo-image
->
-> slugos / ucslug:
-> nslu2be/le + slugos-image
->
-> I'm building all of these for 32bit Ubuntu 8.04, RHEL5 and will be adding
-> Ubuntu 10.04 for the next run.  What more do people want added? I'm looking
-> to fill this matrix out to something that runs "over the weekend" and I've
-> still got plenty of room to spare (which is why I've bcc'd everyone in the
-> MAINTAINERS file with a Distro by their name).
->
-> And of course if you wish to handle building what you care about yourself
-> instead, that's great!  Please just take this as a gentle reminder that
-> there's a release coming up so it's time to crank the builders up and make
-> sure your stuff is working.
->
-> --
-> Tom Rini
-> Mentor Graphics Corporation
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+-- 
+Tom Rini
+Mentor Graphics Corporation
+
 
