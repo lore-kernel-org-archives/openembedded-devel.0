@@ -1,40 +1,32 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1PmrKN-0000PX-Ix
+	(envelope-from <Tom_Rini@mentor.com>) id 1PmrOR-0000UX-9f
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Feb 2011 18:26:11 +0100
-Received: by wwi17 with SMTP id 17so5875898wwi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Feb 2011 09:25:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
-	:date:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	bh=wrik57xEzwWT3iWMckucjiLoUwarXylZ2XtmcMEph/I=;
-	b=GuGWaJmE+kFxyThy2w1rh9U/2XKxKDgd5eZ65YulboapLqEgMFzf47zYHiH30nOW0N
-	9v1KhfHFspkGzHmbIf/TFWnUvPVvuldnsDRnFY65mMfqXfaY94icxkS/TdvV99zCi0Br
-	tHFJILT44RrWdN37G7JVK8GG2g8wndzL/NV94=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=Sdeom3RAWNJhJHgUw2Ja5F+JCI4EkoUBf3VFEXEr2jLZ6fV4o/E6JmvRsi5IX5DCA3
-	PLq+1zgMBq5+RvZ2wyoGPAJdtLC3hod69Tipyuxn/RlFKzDFoO/fRtW+v5YE20JBnMDt
-	ASx5fuSFSF1Kkc2tBulShyhxyodn7FKDfGkTY=
-Received: by 10.227.141.85 with SMTP id l21mr4674845wbu.99.1297185909286; Tue,
-	08 Feb 2011 09:25:09 -0800 (PST)
+	Tue, 08 Feb 2011 18:30:23 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PmrNQ-0004nS-In from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Feb 2011 09:29:20 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Tue, 8 Feb 2011 09:29:20 -0800
+Received: from [172.30.80.130] ([172.30.80.130]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 8 Feb 2011 10:29:19 -0700
+Message-ID: <4D517D6C.3070604@mentor.com>
+Date: Tue, 08 Feb 2011 10:29:16 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.17.11 with HTTP; Tue, 8 Feb 2011 09:24:49 -0800 (PST)
-In-Reply-To: <AANLkTi=zGLRdYGyQTsbhn1j5Din+k6_pz_40i_GTt4re@mail.gmail.com>
-References: <1297181802-18948-1-git-send-email-kergoth@gmail.com>
-	<1297181802-18948-3-git-send-email-kergoth@gmail.com>
-	<AANLkTi=zGLRdYGyQTsbhn1j5Din+k6_pz_40i_GTt4re@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 8 Feb 2011 10:24:49 -0700
-X-Google-Sender-Auth: jE93iyDlB-3aNozL2dCSiYu93WQ
-Message-ID: <AANLkTim1k5bn0vXZULxKafENqv2aec828hPCnaZYKJ48@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Chris Larson <chris_larson@mentor.com>
-Subject: Re: [PATCH 3/4] autotools: symlink where we can
+References: <1297116822-30938-1-git-send-email-filip.zyzniewski@gmail.com>
+In-Reply-To: <1297116822-30938-1-git-send-email-filip.zyzniewski@gmail.com>
+X-OriginalArrivalTime: 08 Feb 2011 17:29:19.0529 (UTC)
+	FILETIME=[B7B4F990:01CBC7B5]
+Subject: Re: [PATCH] task-base: conditional wifi and bluetooth tasks in	PACKAGES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,27 +40,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Feb 2011 17:26:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 08 Feb 2011 17:30:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Feb 8, 2011 at 10:18 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Tue, Feb 8, 2011 at 8:16 AM, Chris Larson <kergoth@gmail.com> wrote:
->> From: Chris Larson <chris_larson@mentor.com>
->>
->> Signed-off-by: Chris Larson <chris_larson@mentor.com>
+On 02/07/2011 03:13 PM, Filip Zyzniewski wrote:
+> This reduces amount of tasks for bootstrap-image from around 3400 to
+> around 1600 for jlime.
 >
-> now that we will have symlinks will it have any impact on source
-> package generation ?
-> otherwise
->
-> Acked-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Filip Zyzniewski<filip.zyzniewski@gmail.com>
 
-Good point, I'll look into it, thanks.
+Can some of the other distro folks chime in here?
+
+> ---
+>   recipes/tasks/task-base.bb |    6 +++---
+>   1 files changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/recipes/tasks/task-base.bb b/recipes/tasks/task-base.bb
+> index 32d871d..c8d6df7 100644
+> --- a/recipes/tasks/task-base.bb
+> +++ b/recipes/tasks/task-base.bb
+> @@ -1,5 +1,5 @@
+>   DESCRIPTION = "Merge machine and distro options to create a basic machine task/package"
+> -PR = "r92"
+> +PR = "r93"
+>
+>   inherit task
+>
+> @@ -31,8 +31,8 @@ PACKAGES = ' \
+>               ${@base_contains("MACHINE_FEATURES", "redboot", "task-base-redboot", "",d)} \
+>               ${@base_contains("MACHINE_FEATURES", "apex", "task-base-apex", "",d)} \
+>               \
+> -            task-base-bluetooth \
+> -            task-base-wifi \
+> +            ${@base_contains("MACHINE_FEATURES", "bluetooth", "task-base-bluetooth", "",d)} \
+> +            ${@base_contains("MACHINE_FEATURES", "wifi", "task-base-wifi", "",d)} \
+>               \
+>               ${@base_contains("DISTRO_FEATURES", "cramfs", "task-base-cramfs", "", d)} \
+>               ${@base_contains("DISTRO_FEATURES", "ipsec", "task-base-ipsec", "", d)} \
+
+
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Tom Rini
+Mentor Graphics Corporation
 
 
