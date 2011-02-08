@@ -1,32 +1,27 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PmpR4-0003R6-Le
+	(envelope-from <jaap.dejong@nedap.com>) id 1PmptV-0003zI-7R
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Feb 2011 16:24:58 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PmpQ4-0003a8-31 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Feb 2011 07:23:56 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Tue, 8 Feb 2011 07:23:55 -0800
-Received: from [172.30.80.130] ([172.30.80.130]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 8 Feb 2011 08:23:54 -0700
-Message-ID: <4D516008.8080902@mentor.com>
-Date: Tue, 08 Feb 2011 08:23:52 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
+	Tue, 08 Feb 2011 16:54:21 +0100
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Tue, 8 Feb 2011 16:53:19 +0100
+X-TM-IMSS-Message-ID: <0cbc41bb00007256@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.0) id 0cbc41bb00007256 ;
+	Tue, 8 Feb 2011 16:53:18 +0100
+Message-ID: <4D5166EE.7040002@nedap.com>
+Date: Tue, 08 Feb 2011 16:53:18 +0100
+From: Jaap de Jong <jaap.dejong@nedap.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4D51566B.9060603@mentor.com>
-	<AANLkTi=YdcSebCFohPH4BXMHHOb81vznhtkoeotvHrmi@mail.gmail.com>
-In-Reply-To: <AANLkTi=YdcSebCFohPH4BXMHHOb81vznhtkoeotvHrmi@mail.gmail.com>
-X-OriginalArrivalTime: 08 Feb 2011 15:23:55.0130 (UTC)
-	FILETIME=[32D0CDA0:01CBC7A4]
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <4D51566B.9060603@mentor.com> <4D515B22.5090600@nedap.com>
+	<4D515F98.4070507@mentor.com>
+In-Reply-To: <4D515F98.4070507@mentor.com>
+X-OriginalArrivalTime: 08 Feb 2011 15:53:19.0230 (UTC)
+	FILETIME=[4E4D19E0:01CBC7A8]
 Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,26 +36,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Feb 2011 15:24:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 08 Feb 2011 15:54:21 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 02/08/2011 08:06 AM, Thom Nichols wrote:
-> I'd like to see angstrom-2008.1 and angstrom-2010.x console images built for
-> at91sam9g20ek.
+For me personally: console-image would do.
+I can run some builds here.
 
-Added.
-
-> I could run these builds on 64-bit Ubuntu if necessary.  I'm not familiar
-> with the acceptance processes - do you just verify that the builds succeed
-> and images boot?
-
-Today I only build-test things.  And like last time we'll either use or 
-have a page similar to http://wiki.openembedded.org/index.php/Testing 
-with a table, at least.
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+On 02/08/2011 04:22 PM, Tom Rini wrote:
+> On 02/08/2011 08:02 AM, Jaap de Jong wrote:
+>> Please add
+>> at91sam9263ek
+>> (angstrom-2008.1 / angstrom-2010.x)
+> Added (just console-image? Or do you want qt*demo-image too? Or some
+> other image?).
+>
 
 
