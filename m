@@ -1,39 +1,21 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PmZhO-0005fi-Ao
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Feb 2011 23:36:47 +0100
-Received: by gwaa12 with SMTP id a12so1967095gwa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Feb 2011 14:35:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=5zrm0+zuNMMnIEO52Aq1YZ6xTskFeQLC2Zc+0DiWvrw=;
-	b=wN5G/2T/ctW5QLFZRVlKam7f1HKnBMBz89jIRgNeRH5d8gqiE8TkNn5kZU4Lj5u1gc
-	aREw99+/YfcyVIa4kQbL0DDZq85pC39/W8DAtNoEYP1VoDUlKnFihainP7QjNd8TtA0n
-	fA6wofvLXGr0byccKH7furIaf3s3tKfqdAArk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=xIq+QVbzL/cngJYNQTI8jvNguBgV2yJbHJG6jg/aAk2h5ADJC/5Aln+o5zW+rkaxPm
-	ur0ioZOUrX7E4RzkFORtbtbEE5A0bXOMH3bOVjZjH90QQMfa7d3Rs+5Ybu56Hvsx47gH
-	6CxgvlXyYWz3lDSClOb4azIy6OOcGn7fMLsqY=
-Received: by 10.90.29.18 with SMTP id c18mr4650916agc.142.1297118143743; Mon,
-	07 Feb 2011 14:35:43 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.32.12 with HTTP; Mon, 7 Feb 2011 14:35:23 -0800 (PST)
-In-Reply-To: <lyzkq7h44l.fsf@ensc-virt.intern.sigma-chemnitz.de>
-References: <1297093986-24331-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-	<AANLkTinsSoak9h=B+TQEzoUvWSP+MVELZQkTFRu3PTOQ@mail.gmail.com>
-	<ly39nzk1bs.fsf@ensc-virt.intern.sigma-chemnitz.de>
-	<AANLkTinM02m9A04F+UrNY_E_HauTHD=SgS6=CeSkH_8V@mail.gmail.com>
-	<lyzkq7h44l.fsf@ensc-virt.intern.sigma-chemnitz.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 7 Feb 2011 14:35:23 -0800
-Message-ID: <AANLkTimt=N0B+fHYF=U2y6hWr=zPPBFMMfs1r4t7R+Rk@mail.gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pmb7z-0006WP-KF for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Feb 2011 01:08:19 +0100
+Received: from f053035241.adsl.alicedsl.de ([78.53.35.241]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pmb71-0002fE-VH for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Feb 2011 00:07:20 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] cortex-m3: adjusted target cflags
+Date: Tue, 08 Feb 2011 01:07:18 +0100
+Message-ID: <1297123638.3802.7.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: angstrom-2010.x: eglibc-2.12-r21.8+svnr12323: `/tmp/ccqyEDnv.s:33181: Error: can't resolve `.LBB491' {*UND* section} - `.Ltext0' {.text section}`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,43 +29,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Feb 2011 22:36:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 08 Feb 2011 00:08:19 -0000
+X-Groupsio-MsgNum: 28888
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Am7YKpv77fJxcRJ3Zit/"
+
+--=-Am7YKpv77fJxcRJ3Zit/
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 7, 2011 at 2:27 PM, Enrico Scholz
-<enrico.scholz@sigma-chemnitz.de> wrote:
-> Khem Raj <raj.khem@gmail.com> writes:
->
->> Can you check what does gcc emits in an assembly file when using
->> -mcpu=3Dcortex-m3 in your case. If it emits sdiv instruction or not
->>
->> int foo (long a, long b)
->> {
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 return a/b;
->> }
->
-> $ arm-linux-uclibceabi-gcc -mthumb -mcpu=3Dcortex-m3 -mfpu=3Dvfp -mfloat-=
-abi=3Dsoftfp -O1 -c x.c
-> $ arm-linux-uclibceabi-objdump -d x.o
-> 00000000 <foo>:
-> =C2=A0 0: =C2=A0 fb90 f0f1 =C2=A0 =C2=A0 =C2=A0 sdiv =C2=A0 =C2=A0r0, r0,=
- r1
-> =C2=A0 4: =C2=A0 4770 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bx =C2=A0 =
-=C2=A0 =C2=A0lr
-> =C2=A0 6: =C2=A0 bf00 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0nop
->
->
-
-thx
-
->
-> Enrico
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Dear OE folks,
 
 
+task `compile` with 82c07ebb and `angstrom-2010.x` for `MACHINE =3D
+"beagleboard"` fails with the following error.
+
+        In file included from dl-init.c:21:0:
+        ../ports/sysdeps/unix/sysv/linux/arm/ldsodefs.h:41:0: warning: "MOR=
+E_ELF_HEADER_DATA" redefined
+        ../sysdeps/unix/sysv/linux/ldsodefs.h:64:0: note: this is the locat=
+ion of the previous definition
+        arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 =
+-mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb dl-fini.c -c=
+ -std=3Dgnu99 -fgnu89-inline -O2 -Wall -Winline -Wwrite-strings -fexpensive=
+-optimizations -fmerge-all-constants -frename-registers -ggdb3 -Wstrict-pro=
+totypes  -fomit-frame-pointer    -I../include -I/oe/build-angstrom-next/ang=
+strom-dev/work/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/bu=
+ild-arm-angstrom-linux-gnueabi/elf @/oe/build-angstrom-next/angstrom-dev/wo=
+rk/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/build-arm-angs=
+trom-linux-gnueabi/includes -I.. -I../libio -I. -D_LIBC_REENTRANT -include =
+../include/libc-symbols.h       -o /oe/build-angstrom-next/angstrom-dev/wor=
+k/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/build-arm-angst=
+rom-linux-gnueabi/elf/dl-fini.o -MD -MP -MF /oe/build-angstrom-next/angstro=
+m-dev/work/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/build-=
+arm-angstrom-linux-gnueabi/elf/dl-fini.o.dt -MT /oe/build-angstrom-next/ang=
+strom-dev/work/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/bu=
+ild-arm-angstrom-linux-gnueabi/elf/dl-fini.o
+        arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 =
+-mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb dl-debug.c -=
+c -std=3Dgnu99 -fgnu89-inline -O2 -Wall -Winline -Wwrite-strings -fexpensiv=
+e-optimizations -fmerge-all-constants -frename-registers -ggdb3 -Wstrict-pr=
+ototypes  -fomit-frame-pointer    -I../include -I/oe/build-angstrom-next/an=
+gstrom-dev/work/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/b=
+uild-arm-angstrom-linux-gnueabi/elf @/oe/build-angstrom-next/angstrom-dev/w=
+ork/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/build-arm-ang=
+strom-linux-gnueabi/includes -I.. -I../libio -I. -D_LIBC_REENTRANT -include=
+ ../include/libc-symbols.h       -o /oe/build-angstrom-next/angstrom-dev/wo=
+rk/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/build-arm-angs=
+trom-linux-gnueabi/elf/dl-debug.o -MD -MP -MF /oe/build-angstrom-next/angst=
+rom-dev/work/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/buil=
+d-arm-angstrom-linux-gnueabi/elf/dl-debug.o.dt -MT /oe/build-angstrom-next/=
+angstrom-dev/work/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323=
+/build-arm-angstrom-linux-gnueabi/elf/dl-debug.o
+        In file included from dl-fini.c:23:0:
+        ../ports/sysdeps/unix/sysv/linux/arm/ldsodefs.h:41:0: warning: "MOR=
+E_ELF_HEADER_DATA" redefined
+        ../sysdeps/unix/sysv/linux/ldsodefs.h:64:0: note: this is the locat=
+ion of the previous definition
+        arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 =
+-mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb dl-misc.c -c=
+ -std=3Dgnu99 -fgnu89-inline -O2 -Wall -Winline -Wwrite-strings -fexpensive=
+-optimizations -fmerge-all-constants -frename-registers -ggdb3 -Wstrict-pro=
+totypes  -fomit-frame-pointer    -I../include -I/oe/build-angstrom-next/ang=
+strom-dev/work/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/bu=
+ild-arm-angstrom-linux-gnueabi/elf @/oe/build-angstrom-next/angstrom-dev/wo=
+rk/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/build-arm-angs=
+trom-linux-gnueabi/includes -I.. -I../libio -I. -D_LIBC_REENTRANT -include =
+../include/libc-symbols.h       -o /oe/build-angstrom-next/angstrom-dev/wor=
+k/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/build-arm-angst=
+rom-linux-gnueabi/elf/dl-misc.o -MD -MP -MF /oe/build-angstrom-next/angstro=
+m-dev/work/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/build-=
+arm-angstrom-linux-gnueabi/elf/dl-misc.o.dt -MT /oe/build-angstrom-next/ang=
+strom-dev/work/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/bu=
+ild-arm-angstrom-linux-gnueabi/elf/dl-misc.o
+        In file included from dl-misc.c:22:0:
+        ../ports/sysdeps/unix/sysv/linux/arm/ldsodefs.h:41:0: warning: "MOR=
+E_ELF_HEADER_DATA" redefined
+        ../sysdeps/unix/sysv/linux/ldsodefs.h:64:0: note: this is the locat=
+ion of the previous definition
+        In file included from dl-debug.c:21:0:
+        ../ports/sysdeps/unix/sysv/linux/arm/ldsodefs.h:41:0: warning: "MOR=
+E_ELF_HEADER_DATA" redefined
+        ../sysdeps/unix/sysv/linux/ldsodefs.h:64:0: note: this is the locat=
+ion of the previous definition
+        arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 =
+-mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb dl-version.c=
+ -c -std=3Dgnu99 -fgnu89-inline -O2 -Wall -Winline -Wwrite-strings -fexpens=
+ive-optimizations -fmerge-all-constants -frename-registers -ggdb3 -Wstrict-=
+prototypes  -fomit-frame-pointer    -I../include -I/oe/build-angstrom-next/=
+angstrom-dev/work/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323=
+/build-arm-angstrom-linux-gnueabi/elf @/oe/build-angstrom-next/angstrom-dev=
+/work/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/build-arm-a=
+ngstrom-linux-gnueabi/includes -I.. -I../libio -I. -D_LIBC_REENTRANT -inclu=
+de ../include/libc-symbols.h       -o /oe/build-angstrom-next/angstrom-dev/=
+work/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/build-arm-an=
+gstrom-linux-gnueabi/elf/dl-version.o -MD -MP -MF /oe/build-angstrom-next/a=
+ngstrom-dev/work/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/=
+build-arm-angstrom-linux-gnueabi/elf/dl-version.o.dt -MT /oe/build-angstrom=
+-next/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svn=
+r12323/build-arm-angstrom-linux-gnueabi/elf/dl-version.o
+        In file included from dl-version.c:26:0:
+        ../ports/sysdeps/unix/sysv/linux/arm/ldsodefs.h:41:0: warning: "MOR=
+E_ELF_HEADER_DATA" redefined
+        ../sysdeps/unix/sysv/linux/ldsodefs.h:64:0: note: this is the locat=
+ion of the previous definition
+        /tmp/ccqyEDnv.s: Assembler messages:
+        /tmp/ccqyEDnv.s:33181: Error: can't resolve `.LBB491' {*UND* sectio=
+n} - `.Ltext0' {.text section}
+        make[2]: *** [/oe/build-angstrom-next/angstrom-dev/work/armv7a-angs=
+trom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/build-arm-angstrom-linux-gnu=
+eabi/elf/dl-reloc.o] Error 1
+        make[2]: *** Waiting for unfinished jobs....
+        make[2]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/wo=
+rk/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/eglibc-2_12/li=
+bc/elf'
+        make[1]: *** [elf/subdir_lib] Error 2
+        make[1]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/wo=
+rk/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r21.8+svnr12323/eglibc-2_12/li=
+bc'
+        make: *** [all] Error 2
+        FATAL: oe_runmake failed
+        ERROR: Function do_compile failed
+
+I will try to reproduce the error.
+
+
+Thanks,
+
+Paul
+
+--=-Am7YKpv77fJxcRJ3Zit/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk1QiTEACgkQPX1aK2wOHVih4wCdEkKWlg0Ll4NeS440KhcHbRAR
+CtoAn2xNhnURP9kU1DeVyu1kx3Fmzki4
+=xd8w
+-----END PGP SIGNATURE-----
+
+--=-Am7YKpv77fJxcRJ3Zit/--
