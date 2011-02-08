@@ -1,23 +1,35 @@
-Received: from p3plsmtpa01-04.prod.phx3.secureserver.net ([72.167.82.84])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <mike@mwester.net>) id 1Pms8e-0001n5-Db
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Feb 2011 19:18:09 +0100
-Received: (qmail 5428 invoked from network); 8 Feb 2011 18:16:59 -0000
-Received: from unknown (209.242.7.132)
-	by p3plsmtpa01-04.prod.phx3.secureserver.net (72.167.82.84) with ESMTP;
-	08 Feb 2011 18:16:58 -0000
-Message-ID: <4D51888D.5050707@mwester.net>
-Date: Tue, 08 Feb 2011 12:16:45 -0600
-From: Mike Westerhof <mike@mwester.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
-MIME-Version: 1.0
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PmsEl-0001x0-Qr for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Feb 2011 19:24:27 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PmsDn-00073L-2G for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Feb 2011 19:23:27 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 08 Feb 2011 19:23:27 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 08 Feb 2011 19:23:27 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 08 Feb 2011 19:23:12 +0100
+Message-ID: <iis1mg$tj9$1@dough.gmane.org>
 References: <1297116822-30938-1-git-send-email-filip.zyzniewski@gmail.com>
 	<4D517D6C.3070604@mentor.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
 In-Reply-To: <4D517D6C.3070604@mentor.com>
-Subject: Re: [PATCH] task-base: conditional wifi and bluetooth tasks in	PACKAGES
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH] task-base: conditional wifi and bluetooth tasks in PACKAGES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,11 +43,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Feb 2011 18:18:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 08 Feb 2011 18:24:28 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 2/8/2011 11:29 AM, Tom Rini wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 08-02-11 18:29, Tom Rini wrote:
 > On 02/07/2011 03:13 PM, Filip Zyzniewski wrote:
 >> This reduces amount of tasks for bootstrap-image from around 3400 to
 >> around 1600 for jlime.
@@ -44,16 +59,10 @@ On 2/8/2011 11:29 AM, Tom Rini wrote:
 > 
 > Can some of the other distro folks chime in here?
 
-Er, yes.  The commit message lacks information on how this affects other
-distros.
+Yeah, this patch is wrong, since task-base is supposed to drag in bt and
+wifi when it's available which includes usb, pci, serial, etc.
 
-I'm just guessing, but I expect that this commit will require that
-distros expecting bluetooth and wifi support will need to ensure that
-the correct set of features are defined.  Is that a correct assumption?
-
--Mike (mwester)
-
-
+> 
 >> ---
 >>   recipes/tasks/task-base.bb |    6 +++---
 >>   1 files changed, 3 insertions(+), 3 deletions(-)
@@ -89,6 +98,14 @@ the correct set of features are defined.  Is that a correct assumption?
 >> "task-base-ipsec", "", d)} \
 > 
 > 
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNUYoQMkyGM64RGpERAuFAAJ9Y5jiml8NdBJpg5XmD7b8BlwjjFQCfXL8H
+xuKrNII4OscMLUu/S2dAejQ=
+=j2V5
+-----END PGP SIGNATURE-----
 
 
 
