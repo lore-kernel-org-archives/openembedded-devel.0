@@ -1,30 +1,31 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dp@xora.org.uk>) id 1Pmoy2-0002HB-BS
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pmp2b-0002QJ-Qy
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Feb 2011 15:54:58 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id E3260A55EE;
-	Tue,  8 Feb 2011 14:53:56 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id IkwOnsZuk9AR; Tue,  8 Feb 2011 14:53:56 +0000 (GMT)
-Received: from xora-build.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 5CAE7A55DC;
-	Tue,  8 Feb 2011 14:53:56 +0000 (GMT)
-Received: by xora-build.xora.org.uk (Postfix, from userid 500)
-	id 6DAEF4060E; Tue,  8 Feb 2011 14:53:56 +0000 (GMT)
-Date: Tue, 8 Feb 2011 14:53:56 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-To: Tom Rini <tom_rini@mentor.com>
-Message-ID: <20110208145355.GF2050@xora-build.xora.org.uk>
-References: <4D51566B.9060603@mentor.com>
+	Tue, 08 Feb 2011 15:59:42 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1Pmp1X-0004kk-Ho from Tom_Rini@mentor.com ;
+	Tue, 08 Feb 2011 06:58:35 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Tue, 8 Feb 2011 06:58:35 -0800
+Received: from [172.30.80.130] ([172.30.80.130]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 8 Feb 2011 07:58:34 -0700
+Message-ID: <4D515A17.3060203@mentor.com>
+Date: Tue, 08 Feb 2011 07:58:31 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-In-Reply-To: <4D51566B.9060603@mentor.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+To: Graeme Gregory <dp@xora.org.uk>
+References: <4D51566B.9060603@mentor.com>
+	<20110208145355.GF2050@xora-build.xora.org.uk>
+In-Reply-To: <20110208145355.GF2050@xora-build.xora.org.uk>
+X-OriginalArrivalTime: 08 Feb 2011 14:58:34.0548 (UTC)
+	FILETIME=[A87A6740:01CBC7A0]
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -40,22 +41,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Feb 2011 14:54:58 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 08 Feb 2011 14:59:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Feb 08, 2011 at 07:42:51AM -0700, Tom Rini wrote:
-> angstrom-2008.1 / angstrom-2010.x:
-> hawkboard, mini2440, mini6410, beagleboard + console-image /
-> qt4-x11-demo-image / qt4e-demo-image
-> 
-atngw100 should be added to angstrom 2008.1/2010.x this makes
-us a little less arm centric :-)
+On 02/08/2011 07:53 AM, Graeme Gregory wrote:
+> On Tue, Feb 08, 2011 at 07:42:51AM -0700, Tom Rini wrote:
+>> angstrom-2008.1 / angstrom-2010.x:
+>> hawkboard, mini2440, mini6410, beagleboard + console-image /
+>> qt4-x11-demo-image / qt4e-demo-image
+>>
+> atngw100 should be added to angstrom 2008.1/2010.x this makes
+> us a little less arm centric :-)
+>
+> atngw100 is uclibc so I only expect console-image to build without
+> error.
 
-atngw100 is uclibc so I only expect console-image to build without
-error. 
+Done.
 
-Graeme
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
