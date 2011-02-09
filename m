@@ -1,33 +1,24 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dp@xora.org.uk>) id 1Pn6O8-00068F-Ra
+	(envelope-from <javier.martin@vista-silicon.com>) id 1Pn6VS-0001ll-Fo
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 10:31:04 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id E878EA5671;
-	Wed,  9 Feb 2011 09:29:59 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id yLK7q8D4K-1f; Wed,  9 Feb 2011 09:29:59 +0000 (GMT)
-Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 0363EA50F6;
-	Wed,  9 Feb 2011 09:29:58 +0000 (GMT)
-Message-ID: <4D525ED2.7020000@xora.org.uk>
-Date: Wed, 09 Feb 2011 09:30:58 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
-To: Steffen Sledz <sledz@dresearch.de>
-References: <4D4BE849.9070704@dresearch.de> <4D5247CD.20700@dresearch.de>
-	<4D525A03.2020601@xora.org.uk> <4D525D27.5030902@dresearch.de>
-In-Reply-To: <4D525D27.5030902@dresearch.de>
-X-Enigmail-Version: 1.1.1
-Cc: openembedded-devel@lists.openembedded.org
-Subject: =?UTF-8?B?UmU6IMOFbmdzdHLDtm0gdmVyc2lvbnM/?=
+	Wed, 09 Feb 2011 10:38:38 +0100
+Received: by wyb40 with SMTP id 40so6534501wyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Feb 2011 01:37:35 -0800 (PST)
+Received: by 10.227.145.17 with SMTP id b17mr4817099wbv.152.1297244254939;
+	Wed, 09 Feb 2011 01:37:34 -0800 (PST)
+Received: from localhost.localdomain (58.50.18.95.dynamic.jazztel.es
+	[95.18.50.58])
+	by mx.google.com with ESMTPS id u9sm109430wbg.0.2011.02.09.01.37.33
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 09 Feb 2011 01:37:34 -0800 (PST)
+From: Javier Martin <javier.martin@vista-silicon.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  9 Feb 2011 10:37:10 +0100
+Message-Id: <1297244237-9508-1-git-send-email-javier.martin@vista-silicon.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH 0/7] Add support for Vista Silicon Visstrim_M10 boards.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,55 +32,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Feb 2011 09:31:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 09 Feb 2011 09:38:38 -0000
 
-On 09/02/2011 09:23, Steffen Sledz wrote:
-> Am 09.02.2011 10:10, schrieb Graeme Gregory:
->> On 09/02/2011 07:52, Steffen Sledz wrote:
->>> Am 04.02.2011 12:51, schrieb Steffen Sledz:
->>>> I'm a bit confused about the Angstrom versions.
->>>>
->>>> Setting in local.conf is
->>>>
->>>>   DISTRO =3D "angstrom-2008.1"
->>>>
->>>> but bitbake reports
->>>>
->>>>   Build Configuration:
->>>>   BB_VERSION        =3D "1.10.2"
->>>>   METADATA_BRANCH   =3D "testing-next"
->>>>   METADATA_REVISION =3D "3a7b93a"
->>>>   TARGET_ARCH       =3D "arm"
->>>>   TARGET_OS         =3D "linux-gnueabi"
->>>>   MACHINE           =3D "hipox"
->>>>   DISTRO            =3D "angstrom"
->>>>   DISTRO_VERSION    =3D "2010.7-test-20110204"
->>>>   TARGET_FPU        =3D "soft"
->>>>
->>>> Is this intented?
->>>>
->>>> BTW: Which is the suggested/released =C3=85ngstr=C3=B6m version? htt=
-p://www.angstrom-distribution.org/ seems to be not very helpful here. e.g=
-. the FAQ link results in an PAGE NOT FOUND. :(
->> 2008.1 is the "stable" version of Angstrom which has all the benefit o=
-f
->> our extensive toolchain testing.
->>
->> 2010.x is angstrom-next and is the in progress version moving to gcc 4=
-.5
->> blah blah blah.
-> OK, but why bitbake reports DISTRO_VERSION =3D "2010.7-test-20110204" i=
-f it is set to DISTRO =3D "angstrom-2008.1" ???
->
-Because thats the actual version of the DISTRO produced.
-
-We discovered if we rename the file people dont read emails or error
-messages and waste a week debugging non issues so we stopped renaming
-the file.
-
-Graeme
+Vista Silicon Visstrim_M10 boards are used for multimedia      
+streaming and access control. This series of patches
+allow to create a basic image to use Visstrim_M10 board
+as a decent development environment for custom applications.
 
 
 
