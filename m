@@ -1,22 +1,35 @@
-Received: from host4.kei.pl ([94.152.8.4] helo=smtp.host4.kei.pl)
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Pn6XG-0001r8-5l
+	(envelope-from <stefan@datenfreihafen.org>) id 1Pn6oD-0001ZG-9b
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 10:40:30 +0100
-Received: (qmail 19756 invoked by uid 2404007); 9 Feb 2011 09:39:27 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 89-73-120-20.dynamic.chello.pl (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@89.73.120.20)
-	by host4.kei.pl with ESMTPA; 9 Feb 2011 09:39:27 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Wed, 09 Feb 2011 10:58:09 +0100
+Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
+	id 1Pn6n2-0003Lr-Ob by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Feb 2011 10:56:51 +0100
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1Pn6mz-0005xg-LQ
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Feb 2011 10:56:45 +0100
+Date: Wed, 9 Feb 2011 10:56:45 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 9 Feb 2011 10:39:27 +0100
-User-Agent: KMail/1.13.6 (Linux/2.6.38-1-generic; KDE/4.6.0; x86_64; ; )
-References: <1297116822-30938-1-git-send-email-filip.zyzniewski@gmail.com>
-In-Reply-To: <1297116822-30938-1-git-send-email-filip.zyzniewski@gmail.com>
+Message-ID: <20110209095644.GE28019@excalibur.local>
+References: <4D519C83.9060502@mentor.com>
+	<09D9BE2AC4AA764DABAA8C91E48D819E011A79A329@DEMCHP99E35MSX.ww902.siemens.net>
 MIME-Version: 1.0
-Message-Id: <201102091039.27832.marcin@juszkiewicz.com.pl>
-Subject: Re: [PATCH] task-base: conditional wifi and bluetooth tasks in PACKAGES
+In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819E011A79A329@DEMCHP99E35MSX.ww902.siemens.net>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
+	autolearn=ham version=3.2.5
+Subject: Re: 2011.03 release testing, starts soon!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,76 +43,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Feb 2011 09:40:30 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 09 Feb 2011 09:58:13 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Dnia poniedzia=C5=82ek, 7 lutego 2011 o 23:13:42 Filip Zyzniewski napisa=C5=
-=82(a):
-> This reduces amount of tasks for bootstrap-image from around 3400 to
-> around 1600 for jlime.
->=20
-> Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
-> ---
->  recipes/tasks/task-base.bb |    6 +++---
->  1 files changed, 3 insertions(+), 3 deletions(-)
->=20
-> diff --git a/recipes/tasks/task-base.bb b/recipes/tasks/task-base.bb
-> index 32d871d..c8d6df7 100644
-> --- a/recipes/tasks/task-base.bb
-> +++ b/recipes/tasks/task-base.bb
-> @@ -1,5 +1,5 @@
->  DESCRIPTION =3D "Merge machine and distro options to create a basic mach=
-ine
-> task/package" -PR =3D "r92"
-> +PR =3D "r93"
->=20
->  inherit task
->=20
-> @@ -31,8 +31,8 @@ PACKAGES =3D ' \
->              ${@base_contains("MACHINE_FEATURES", "redboot",
-> "task-base-redboot", "",d)} \ ${@base_contains("MACHINE_FEATURES", "apex",
-> "task-base-apex", "",d)} \ \
-> -            task-base-bluetooth \
-> -            task-base-wifi \
-> +            ${@base_contains("MACHINE_FEATURES", "bluetooth",
-> "task-base-bluetooth", "",d)} \ +          =20
-> ${@base_contains("MACHINE_FEATURES", "wifi", "task-base-wifi", "",d)} \ \
->              ${@base_contains("DISTRO_FEATURES", "cramfs",
-> "task-base-cramfs", "", d)} \ ${@base_contains("DISTRO_FEATURES", "ipsec",
-> "task-base-ipsec", "", d)} \
+Hello.
 
-This change is bogus. You just remove building of BT/Wifi support for "bitb=
-ake=20
-bootstrap-image" for your machine not distro. Use DISTRO_FEATURES instead a=
-nd=20
-then remove "bluetooth wifi" from DISTRO_FEATURES in your distribution conf=
-ig=20
-file.
+On Wed, 2011-02-09 at 10:25, Aeschbacher, Fabrice wrote:
+> 
+> There are two things which could be useful (IMO) for OE users:
+> 
+> 1. a small README file (or wiki page) just highlighting the main
+>    changes since last release (2010.12), e.g. something like
+>    "Prominent features (the cool stuff)" on http://kernelnewbies.org/LinuxChanges
+>    This would help us OE users to decice whether it is worth rebasing on the latest
+>    release now, or if it can wait 
 
-Other way is to create own copy of task-base and boostrap-image recipes.=20
-Easiest way would to have jlime overlay with recipes/task-base-jlime.bb whi=
-ch=20
-would "require task-base.bb" + "PROVIDES =3D task-base" + define own PACKAG=
-ES=20
-variable - this will give you everything from task-base defined + your chan=
-ge=20
-above. You only need to select it in your distro config as preferred provid=
-er=20
-of task-base.
+Good point. Getting such a high level changelog in place would indeed be a good
+idea.
 
-task-base was created several years ago as attempt to get something better=
-=20
-then task-bootstrap which we used before. BT/Wifi part was done to have=20
-support for cf/usb/pci connected dongles/cards. And it worked fine but was =
-not=20
-perfect.=20
+> 2. Do not delete the release branch after 2011.03 will be released (just like
+>    it was done for 2010.12), but let it live and allow developpers committing
+>    bug-fixes (backporting choosen things?) reported back by OE users (some would
+>    would be happy to contribute this way)
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+That was already discussed. We make a tag with the release rev from which can be
+branched again _if_ people are stepping up to support this branch on a mid or
+long term base.
+
+The branch Tom is using until the release is pretty useless froma history point
+of view (all changes must be in master as well). When he thinks the release is
+good enough the tag gets added and the old branch deleted. For the last release
+nobody cared to support it afterwards with bugfixes so no release branch was
+created.
+
+I'm thinking about this for the upcoming release. If all works well we will base
+a product on it which I would like to support directly from such a release
+branch.
+
+The hard part is how people could decide on pooling resources on this. Defining
+goals for such a branch and stuff. E.g. only take serious fixes? What about
+package updates? Security fixes? changes on the toolchain or classes?
+
+This is up to the group who wants to support such a branch. Anyone else
+interested in doing this for 2011-03?
+
+My alternative would be to branch of from the tag and do the maintenance in a
+private branch.
+
+regards
+Stefan Schmidt
 
 
