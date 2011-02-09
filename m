@@ -1,32 +1,36 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PnDtw-0001M6-1S
+	(envelope-from <raj.khem@gmail.com>) id 1PnEbq-0006wX-J4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 18:32:24 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PnDss-0004MC-CV from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 09:31:18 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 9 Feb 2011 09:31:18 -0800
-Received: from [172.30.80.130] ([172.30.80.130]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 9 Feb 2011 10:31:17 -0700
-Message-ID: <4D52CF60.2080608@mentor.com>
-Date: Wed, 09 Feb 2011 10:31:12 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+	Wed, 09 Feb 2011 19:17:46 +0100
+Received: by yie16 with SMTP id 16so208879yie.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Feb 2011 10:16:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=rqGW+Qi+gRQQhYP4ByFCYjiqWbnz1vKI4/kQxx8YvLY=;
+	b=HDjDiVvfEES414qlOVdLe6fsn2APX757UWmmWZuhLeyGQ3BhIy7v2kHH1XxaXlay8S
+	9++MICyui7pvXSJoV/XLMDo/BvSF/vZjtXVZ2W8Zsu0NxHIC6y8/VvXZicokNMHK3tsV
+	XO16dDo6eG9tyw5/2oYb0OUAKgbEhaV7r/qsM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=eUPY2xKC6cqrqDnF0aZ3i02/QqhbKgAORhTqj5ecCdx74taVxYgKB4s6qque+FBJWv
+	95Gp4eM4+yMk9RvLixUz1RKY3EHFqKwnUN3hAcMVIS1jBDK74DL4Tn6Pfef/nEr4BWfs
+	tZAxWlB879gkEsN/c9DaxZ8QDSE4dtl5hWZIM=
+Received: by 10.90.51.20 with SMTP id y20mr1687062agy.115.1297275401170; Wed,
+	09 Feb 2011 10:16:41 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.90.32.12 with HTTP; Wed, 9 Feb 2011 10:16:05 -0800 (PST)
+In-Reply-To: <4D51B81D.8000800@mentor.com>
+References: <1297199824-3712-1-git-send-email-morphis@gravedo.de>
+	<4D51B81D.8000800@mentor.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 9 Feb 2011 10:16:05 -0800
+Message-ID: <AANLkTikbfyoZfnJq9k1fSkMVMkReNw0G8APuXjc_rTyY@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4D51566B.9060603@mentor.com>
-In-Reply-To: <4D51566B.9060603@mentor.com>
-X-OriginalArrivalTime: 09 Feb 2011 17:31:17.0281 (UTC)
-	FILETIME=[284E4110:01CBC87F]
-Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
+Subject: Re: [PATCH] evas: disable cpu neon support for palmpre machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,51 +44,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Feb 2011 17:32:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 09 Feb 2011 18:17:46 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 02/08/2011 07:42 AM, Tom Rini wrote:
-> Hey all,
+On Tue, Feb 8, 2011 at 1:39 PM, Tom Rini <tom_rini@mentor.com> wrote:
+> On 02/08/2011 02:17 PM, Simon Busch wrote:
+>>
+>> Neon support in evas is currently broken for the palmpre machine. If we
+>> enable neon
+>> support evas causes alignment trap errors and lets the device freeze in
+>> the end. This
+>> should be reverted after the bug in evas code is found and fixed.
+>>
+>> Signed-off-by: Simon Busch<morphis@gravedo.de>
+>> ---
+>> =C2=A0recipes/efl1/evas.inc | =C2=A0 =C2=A05 ++++-
+>> =C2=A01 files changed, 4 insertions(+), 1 deletions(-)
+>>
+>> diff --git a/recipes/efl1/evas.inc b/recipes/efl1/evas.inc
+>> index eb64d7a..ad30eba 100644
+>> --- a/recipes/efl1/evas.inc
+>> +++ b/recipes/efl1/evas.inc
+>> @@ -7,7 +7,7 @@ DEPENDS_virtclass-native =3D "freetype-native libxext-na=
+tive
+>> libpng-native jpeg-na
+>> =C2=A0inherit efl
+>>
+>> =C2=A0BBCLASSEXTEND =3D "native"
+>> -INC_PR =3D "r0"
+>> +INC_PR =3D "r1"
+>> =C2=A0FILESPATHPKG =3D. "${BPN}-${PV}:${BPN}:"
+>>
+>> =C2=A0python populate_packages_prepend () {
+>> @@ -83,6 +83,9 @@ EVAS_CPU_TWEAKS =3D ""
+>> =C2=A0# Disabled for now, see
+>> http://thread.gmane.org/gmane.comp.window-managers.enlightenment.devel/2=
+5194
+>> =C2=A0#EVAS_CPU_TWEAKS_armv7a =3D "--enable-cpu-neon"
+>>
+>> +# Neon support for evas is broken on palmpre currently (causes the devi=
+ce
+>> to freeze)
+>> +EVAS_CPU_TWEAKS_palmpre =3D "--disable-cpu-neon"
+>> +
+>> =C2=A0# common options
+>> =C2=A0EVAS_OECONF =3D " \
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0--x-includ=
+es=3D${STAGING_INCDIR}/X11 \
 >
-> As March is fast approaching I want to gather the list of DISTRO /
-> MACHINE / BBPKGS targets that the various distributions would like to
-> see at least compile tested (volunteers for HW testing welcome!). Today,
-> I have the following setup to be built:
->
-> minimal / minimal-uclibc:
-> qemux86/ppc/arm/mips/mips64/sh4/mipsel, mpc8315e-rdb, p2020ds, p2020rdb
-> +
-> nas-server-image/native-sdk-image/console-image/minimal-image/x11-image/meta-toolchain/qt4-x11-demo-image/qt4e-demo-image
->
->
-> angstrom-2008.1 / angstrom-2010.x:
-> hawkboard, mini2440, mini6410, beagleboard + console-image /
-> qt4-x11-demo-image / qt4e-demo-image
->
-> slugos / ucslug:
-> nslu2be/le + slugos-image
->
-> I'm building all of these for 32bit Ubuntu 8.04, RHEL5 and will be
-> adding Ubuntu 10.04 for the next run. What more do people want added?
-> I'm looking to fill this matrix out to something that runs "over the
-> weekend" and I've still got plenty of room to spare (which is why I've
-> bcc'd everyone in the MAINTAINERS file with a Distro by their name).
->
-> And of course if you wish to handle building what you care about
-> yourself instead, that's great! Please just take this as a gentle
-> reminder that there's a release coming up so it's time to crank the
-> builders up and make sure your stuff is working.
+> Shouldn't this be changing the armv7a EVAS_CPU_TWEAKS that's above yours =
+to
+> be uncommented and as a --disable?
 
-At this time would people that are going to be building things on their 
-own please fill out the table on
-http://wiki.openembedded.org/index.php/Release-2011.03 and list N/A for 
-the git hash?  I'll fill in the table of what I'm going to be building 
-after, lets say Friday as a deadline for getting requests in for the 
-first build round.
+that would disable neon for all armv7a machines probably not what is
+needed here. The patch seems ok but I think it will make this recipe
+machine specific if it already is not on the other hand punishing
+all armv7 will keep the recipe still generic
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+>
+> --
+> Tom Rini
+> Mentor Graphics Corporation
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
