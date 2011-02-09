@@ -1,37 +1,24 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from dd20204.kasserver.com ([85.13.140.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pn3CK-0006Zt-70
+	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1Pn3hj-00075K-UW
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 07:06:40 +0100
-Received: by qyk8 with SMTP id 8so1029350qyk.6
+	Wed, 09 Feb 2011 07:39:08 +0100
+Received: from [192.168.1.128] (188-195-80-208-dynip.superkabel.de
+	[188.195.80.208])
+	by dd20204.kasserver.com (Postfix) with ESMTP id C0E2F1804B5EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Feb 2011 22:05:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=wTGq9BOfMOocQQZCQ37sHTyHaKvh37X2PphjGf1koaY=;
-	b=q1rhF98S4Po+jGsdgQBM9c68FT8ea3I6NnUM/ulWENN1aQjG+AqCj5RwLuR5oreAl7
-	zTIxHwOqpup0x1wsKQSSN6ovInT19Ny/9K4QDLEZeXuZy4a8JSH6rBV4CMsG0qXTqWnS
-	igEIZxY33JDM6IiC+FBFhi7+XF465PQidFMzY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=l3Jz2GV1rrjVJuUQ0p4b8U2wMDHNFQasKSnta2uQ0m8JcAnHEXJZnet6W7wueN7ngN
-	J6EX6472JKPGsEMtq2PuGcOYA316hs73CiXNxxDAnmfEWLsX8V+qUv0uM1FSjagrunjy
-	MP8FUmMNa5B2mBuDqsfgXcjHdMlzU8Gea7FpU=
+	Wed,  9 Feb 2011 07:38:06 +0100 (CET)
+Message-ID: <4D523623.7030509@opensimpad.org>
+Date: Wed, 09 Feb 2011 07:37:23 +0100
+From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.229.91.2 with SMTP id k2mr4143216qcm.260.1297231536708; Tue,
-	08 Feb 2011 22:05:36 -0800 (PST)
-Received: by 10.229.193.10 with HTTP; Tue, 8 Feb 2011 22:05:36 -0800 (PST)
-In-Reply-To: <iisfb2$fps$1@dough.gmane.org>
-References: <1297116822-30938-1-git-send-email-filip.zyzniewski@gmail.com>
-	<4D517D6C.3070604@mentor.com> <iis1mg$tj9$1@dough.gmane.org>
-	<4D51B0C1.6010505@eukrea.com> <iisfb2$fps$1@dough.gmane.org>
-Date: Wed, 9 Feb 2011 07:05:36 +0100
-Message-ID: <AANLkTimzBvUFpqYgmWmn4t9_8-zR7FLr6FZZp3nQV-_b@mail.gmail.com>
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] task-base: conditional wifi and bluetooth tasks in PACKAGES
+References: <4D51566B.9060603@mentor.com>	<20110208145355.GF2050@xora-build.xora.org.uk>
+	<4D515A17.3060203@mentor.com>
+In-Reply-To: <4D515A17.3060203@mentor.com>
+Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,20 +32,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Feb 2011 06:06:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 09 Feb 2011 06:39:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-On 2/8/11, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+On 08.02.2011 15:58, Tom Rini wrote:
+> On 02/08/2011 07:53 AM, Graeme Gregory wrote:
+>> On Tue, Feb 08, 2011 at 07:42:51AM -0700, Tom Rini wrote:
+>>> angstrom-2008.1 / angstrom-2010.x:
+>>> hawkboard, mini2440, mini6410, beagleboard + console-image /
+>>> qt4-x11-demo-image / qt4e-demo-image
+>>>
+>> atngw100 should be added to angstrom 2008.1/2010.x this makes
+>> us a little less arm centric :-)
+>>
+>> atngw100 is uclibc so I only expect console-image to build without
+>> error.
+>
+> Done.
+>
 
-> Use a different task, nobody is forcing you to use task-base
+I have access to such a device and can test booting of console-image
 
-But bootstrap-image is hardwired to use task-base. Should we have our
-own version of bootstrap-image then?
+Best regards
+Bernhard Guillon
 
-I assume that bootstrap-image is: "a minimal set of software needed to
-be able to install packages from the internet".
-
-bye,
-Filip Zyzniewski
 
 
