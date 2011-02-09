@@ -1,33 +1,51 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from bear.ext.ti.com ([192.94.94.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PnG02-0000CL-PF
+	(envelope-from <chase.maupin@ti.com>) id 1PnGHT-0000tH-Tn
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 20:46:51 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1PnFz0-0000MO-SS from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 11:45:46 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 9 Feb 2011 11:45:45 -0800
-Received: from [172.30.80.130] ([172.30.80.130]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 9 Feb 2011 12:45:45 -0700
-Message-ID: <4D52EEE5.9030309@mentor.com>
-Date: Wed, 09 Feb 2011 12:45:41 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+	Wed, 09 Feb 2011 21:04:52 +0100
+Received: from dlep35.itg.ti.com ([157.170.170.118])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id p19K3kuZ000968
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 9 Feb 2011 14:03:46 -0600
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id p19K3kQs007259
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 9 Feb 2011 14:03:46 -0600 (CST)
+Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p19K3j1t006907
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 9 Feb 2011 14:03:46 -0600 (CST)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
+	([157.170.170.88]) with mapi; Wed, 9 Feb 2011 14:02:03 -0600
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 9 Feb 2011 14:02:01 -0600
+Thread-Topic: [oe] bitbake does not fail when QA issues encountered
+Thread-Index: AcvFOenMioGksNaARcSzFWPV/UQPFgDWh8VA
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F08032A3023DE@dlee06.ent.ti.com>
+References: <201101271038.18945.ml@vdm-design.de>
+	<AANLkTimy4Q0Y_3Y-=8=QCifqQUYwWmFx4T0DH+dNXPeZ@mail.gmail.com>
+	<4D418914.2030703@mentor.com> <20110203070901.GA11867@denix.org>
+	<4D4AE93E.2020509@mentor.com> <20110203222035.GA19477@denix.org>
+	<4D4B35A7.4040000@mentor.com>
+	<AANLkTinO257Uuh8bTQCb2LPXKFF1LtB+qN0KjM8aXZVN@mail.gmail.com>
+	<20110204081659.GQ4580@excalibur.local>
+	<AANLkTinrcXmdF=P8KUc8_cWfchPEM=q7UaDbCbQknteF@mail.gmail.com>
+	<20110204090348.GR4580@excalibur.local>
+	<AANLkTik5RVEsxh_jtXTjQRM3sKBrmwmOaWbqs2eKKop=@mail.gmail.com>
+	<4D4C1464.4030609@mentor.com>
+	<AANLkTi=o+QW-K2VG7WBFFTrshxhD1TDMbqx=EbTxDj5h@mail.gmail.com>
+	<AANLkTimO7SQU7k=3ACn4K4wSOwRWkvoV-Tnvn2FFVW63@mail.gmail.com>
+	<AANLkTikXULU=UyfomMr_GVx5o1GieZrRxDZET3QF30px@mail.gmail.com>
+In-Reply-To: <AANLkTikXULU=UyfomMr_GVx5o1GieZrRxDZET3QF30px@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1297199824-3712-1-git-send-email-morphis@gravedo.de>	<4D51B81D.8000800@mentor.com>	<AANLkTikbfyoZfnJq9k1fSkMVMkReNw0G8APuXjc_rTyY@mail.gmail.com>	<iium4d$gau$1@dough.gmane.org>
-	<20110209193129.GA15397@nirvana>
-In-Reply-To: <20110209193129.GA15397@nirvana>
-X-OriginalArrivalTime: 09 Feb 2011 19:45:45.0331 (UTC)
-	FILETIME=[F13CFC30:01CBC891]
-Subject: Re: [PATCH] evas: disable cpu neon support for palmpre machine
+Subject: Re: bitbake does not fail when QA issues encountered
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,78 +59,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Feb 2011 19:46:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 09 Feb 2011 20:04:52 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On 02/09/2011 12:31 PM, Simon Busch wrote:
-> On 02/09/11 at 07:24pm, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->
->> On 09-02-11 19:16, Khem Raj wrote:
->>> On Tue, Feb 8, 2011 at 1:39 PM, Tom Rini<tom_rini@mentor.com>  wrote:
->>>> On 02/08/2011 02:17 PM, Simon Busch wrote:
->>>>>
->>>>> Neon support in evas is currently broken for the palmpre machine. If we
->>>>> enable neon
->>>>> support evas causes alignment trap errors and lets the device freeze in
->>>>> the end. This
->>>>> should be reverted after the bug in evas code is found and fixed.
->>>>>
->>>>> Signed-off-by: Simon Busch<morphis@gravedo.de>
->>>>> ---
->>>>>   recipes/efl1/evas.inc |    5 ++++-
->>>>>   1 files changed, 4 insertions(+), 1 deletions(-)
->>>>>
->>>>> diff --git a/recipes/efl1/evas.inc b/recipes/efl1/evas.inc
->>>>> index eb64d7a..ad30eba 100644
->>>>> --- a/recipes/efl1/evas.inc
->>>>> +++ b/recipes/efl1/evas.inc
->>>>> @@ -7,7 +7,7 @@ DEPENDS_virtclass-native = "freetype-native libxext-native
->>>>> libpng-native jpeg-na
->>>>>   inherit efl
->>>>>
->>>>>   BBCLASSEXTEND = "native"
->>>>> -INC_PR = "r0"
->>>>> +INC_PR = "r1"
->>>>>   FILESPATHPKG =. "${BPN}-${PV}:${BPN}:"
->>>>>
->>>>>   python populate_packages_prepend () {
->>>>> @@ -83,6 +83,9 @@ EVAS_CPU_TWEAKS = ""
->>>>>   # Disabled for now, see
->>>>> http://thread.gmane.org/gmane.comp.window-managers.enlightenment.devel/25194
->>>>>   #EVAS_CPU_TWEAKS_armv7a = "--enable-cpu-neon"
->>>>>
->>>>> +# Neon support for evas is broken on palmpre currently (causes the device
->>>>> to freeze)
->>>>> +EVAS_CPU_TWEAKS_palmpre = "--disable-cpu-neon"
->>>>> +
->>>>>   # common options
->>>>>   EVAS_OECONF = " \
->>>>>                   --x-includes=${STAGING_INCDIR}/X11 \
->>>>
->>>> Shouldn't this be changing the armv7a EVAS_CPU_TWEAKS that's above yours to
->>>> be uncommented and as a --disable?
->>>
->>> that would disable neon for all armv7a machines probably not what is
->>> needed here.
->
->> Actually, that was how I did it :) The NEON code that was added doesn't
->> build with gcc 4.3.x and binutils 2.18.x, so I disabled it by not
->> enabling it. If it builds and works with gcc 4.3.x nowadays we should
->> enable it and find out why the palmpre breaks.
->
-> Evas builds fine these days with neon support enabled but it enables it by
-> default. I really need to find the cause of the breakage on the palmpre but
-> don't have too much time to debug it so this is a interim solution only
-> until the bug is found and fixed.
 
-My only concern is that are we sure other armv7a targets aren't also 
-having fatal problems?
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Frans Meulenbroeks
+> Sent: Saturday, February 05, 2011 7:35 AM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] bitbake does not fail when QA issues encountered
+>=20
+> 2011/2/4 Otavio Salvador <otavio@ossystems.com.br>:
+> > On Fri, Feb 4, 2011 at 15:26, Frans Meulenbroeks
+> > <fransmeulenbroeks@gmail.com> wrote:
+> >> The recipes at hand are:
+> > ...
+> >> cups: there is someone bitching about that this is 1.2, but he
+> >> apparently prefers bitching upon resolving the issue. Probably the
+> >> best solution is to drop the DP =3D -1 from the 1.4.4 recipe
+> > ...
+> >
+> > I can work on cups next week (I am on VAC right now).
+>=20
+> Actually the cups thing is the one I would feel fairly comfortable with.
+> The question here is mainly when/how to drop the DP =3D -1.
+> A pinning of 1.4.4 is already in my local.conf for quite a while.
+
+Frans,
+
+Have you already got a patch for version 1.2.12 to fix the desktop file QA =
+errors?  If not I was going to work on this because this is breaking my bui=
+ld scripts which check the return status of the build.
+
+Chase
+
+>=20
+> Frans
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
