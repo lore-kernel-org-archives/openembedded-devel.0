@@ -1,37 +1,35 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PnGi9-0001UV-Bw
+	(envelope-from <chasemaupin03@gmail.com>) id 1PnGno-0001dn-1B
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 21:32:25 +0100
-Received: by yie16 with SMTP id 16so266818yie.6
+	Wed, 09 Feb 2011 21:38:16 +0100
+Received: by gxk20 with SMTP id 20so267616gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Feb 2011 12:31:21 -0800 (PST)
+	Wed, 09 Feb 2011 12:37:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=7+P37DFuu8MrEP+qrJUi5qPSbbzLAboD/1O3it8IIIc=;
-	b=V3mr85jjr8/4dJfzNg5ZxQT1twyJE7Dq2rOvE04PpLBGulsVwSgMU9s/CGi0g/UX10
-	ylVoaQqEOVM8ZsXt43DrOTvsMlRuSyVV0aF54J1qDgTP1KGguxugIz2NN3FaU6606Zug
-	Ub7u6lEhGEGzco+5A8HP+HEPcAI8RKBu+MLJk=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=6ximikdP+9pM1o8ctgeOJVKB9Coc8Sr7MAW+5x6zRu8=;
+	b=TF7ElZceEssac+t+0uMXWnbC0lvdnyoo8Kz6Ub9bqnyPY1uqWHb5k0Sa9zYodktQoA
+	GUyZIkLDPC0o8g4HP2hDStLaynNHgFsT/6JFcigMzsVXahjtGMUtM1EWXNdcCA9K8ZFb
+	zZuSpxzlvivWk6ZMKMpqMt5B7swDNUXPWw++A=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=d9y8tpWVtcxY//dJkwCXRGb0/VuMw/LPxVNpJfD38afF3PFXIDbge31/NinsHXLCMl
-	42o5l2XEBWadv+GwzpyJ/tWsrmSvAfW8VWaHrTIeKc/NqQdqbMIRT8XT49M+A4PvR5gk
-	HCRIGZXn7ToJLuEavIQ90U1Thms6xMPrEighI=
-Received: by 10.91.1.2 with SMTP id d2mr217182agi.169.1297283479414; Wed, 09
-	Feb 2011 12:31:19 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.32.12 with HTTP; Wed, 9 Feb 2011 12:30:59 -0800 (PST)
-In-Reply-To: <iitplc$ago$1@dough.gmane.org>
-References: <4D519C83.9060502@mentor.com>
-	<09D9BE2AC4AA764DABAA8C91E48D819E011A79A329@DEMCHP99E35MSX.ww902.siemens.net>
-	<20110209095644.GE28019@excalibur.local> <iitplc$ago$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 9 Feb 2011 12:30:59 -0800
-Message-ID: <AANLkTinrp6netE73j_iQmHu+sA5T4sUDEJJbijL45dKR@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=k5ujavSkvlW3vduLXUEx+ocVgftwLBG95UnBN8Mg79+3TcXz+c6eEI7bxe7bkPtFik
+	uJRsKG6kOulxOorHYFLQ1Y65h4lHx5GhB+R2OnaV7vJvSL0tuT16FBeMNwk6E3Kd6Lmz
+	BBs0xOwR8lDqbxp6NvrsmTrtzXG+qdYPvGulw=
+Received: by 10.150.136.6 with SMTP id j6mr2152268ybd.142.1297283825072;
+	Wed, 09 Feb 2011 12:37:05 -0800 (PST)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id q31sm1144640yba.3.2011.02.09.12.37.03
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 09 Feb 2011 12:37:03 -0800 (PST)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: 2011.03 release testing, starts soon!
+Date: Wed,  9 Feb 2011 14:36:59 -0600
+Message-Id: <1297283819-15670-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: [PATCH] cups: fix desktop file QA issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,97 +43,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Feb 2011 20:32:25 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 09 Feb 2011 20:38:16 -0000
 
-On Wed, Feb 9, 2011 at 2:18 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote=
-:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 09-02-11 10:56, Stefan Schmidt wrote:
->
->>> 2. Do not delete the release branch after 2011.03 will be released (jus=
-t like
->>> =C2=A0 =C2=A0it was done for 2010.12), but let it live and allow develo=
-ppers committing
->>> =C2=A0 =C2=A0bug-fixes (backporting choosen things?) reported back by O=
-E users (some would
->>> =C2=A0 =C2=A0would be happy to contribute this way)
->>
->> That was already discussed. We make a tag with the release rev from whic=
-h can be
->> branched again _if_ people are stepping up to support this branch on a m=
-id or
->> long term base.
->>
->> The branch Tom is using until the release is pretty useless froma histor=
-y point
->> of view (all changes must be in master as well). When he thinks the rele=
-ase is
->> good enough the tag gets added and the old branch deleted. For the last =
-release
->> nobody cared to support it afterwards with bugfixes so no release branch=
- was
->> created.
->>
->> I'm thinking about this for the upcoming release. If all works well we w=
-ill base
->> a product on it which I would like to support directly from such a relea=
-se
->> branch.
->>
->> The hard part is how people could decide on pooling resources on this. D=
-efining
->> goals for such a branch and stuff. E.g. only take serious fixes? What ab=
-out
->> package updates? Security fixes? changes on the toolchain or classes?
->>
+* This patch fixes the QA issues with version 1.2.12 of cups.
+* The patch being applied was taken from
+  http://bugs.gentoo.org/show_bug.cgi?id=236706
+* Bump the PR
 
-I would suggest to take only bugfixes and refrain from infrastructure
-changes which usually
-happen metadata wide and toolchain and classes are biggest part of
-this and with time backports
-into long term branches become more and more complex and painful and
-it may be that you have to do
-entirely different patch to solve the same issue in this branch which
-has been fixed differently upstream
-I think if such a branch is to be created it should be created from
-the release tag after the release happens
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+---
+ .../0001-cups-desktop-fix-cups-desktop-file.patch  |   48 ++++++++++++++++++++
+ recipes/cups/cups_1.2.12.bb                        |    4 +-
+ 2 files changed, 51 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/cups/cups-1.2.12/0001-cups-desktop-fix-cups-desktop-file.patch
 
->> This is up to the group who wants to support such a branch. Anyone else
->> interested in doing this for 2011-03?
+diff --git a/recipes/cups/cups-1.2.12/0001-cups-desktop-fix-cups-desktop-file.patch b/recipes/cups/cups-1.2.12/0001-cups-desktop-fix-cups-desktop-file.patch
+new file mode 100644
+index 0000000..bb76d17
+--- /dev/null
++++ b/recipes/cups/cups-1.2.12/0001-cups-desktop-fix-cups-desktop-file.patch
+@@ -0,0 +1,48 @@
++From 85710dd8f749a447301e1522e6022b62e29d6f5d Mon Sep 17 00:00:00 2001
++From: Chase Maupin <Chase.Maupin@ti.com>
++Date: Wed, 9 Feb 2011 14:20:51 -0600
++Subject: [PATCH] cups desktop: fix cups desktop file
++
++* Fix the cups.desktop file to address issues reported by the
++  desktop-file-validate program.  This resolves QA error
++  issues generated by the insane class:
++    ERROR: QA Issue with cups: cups.desktop: warning: value
++        "Application;System;X-Red-Hat-Base;" for key "Categories" in group "
++        Desktop Entry" contains a deprecated value "Application"
++    ERROR: QA Issue with cups: cups.desktop: warning: key "Encoding" in group
++        "Desktop Entry" is deprecated
++    ERROR: QA Issue with cups: cups.desktop: warning: value "" for key
++        "Path" in group "Desktop Entry" does not look like an absolute path
++    ERROR: QA Issue with cups: cups.desktop: warning: key "TerminalOptions"
++        in group "Desktop Entry" is deprecated
++* This patch was obtained from http://bugs.gentoo.org/show_bug.cgi?id=236706
++  and thank to Pacho Ramos <pacho@gentoo.org> for the fix
++
++Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
++---
++ desktop/cups.desktop |    5 +----
++ 1 files changed, 1 insertions(+), 4 deletions(-)
++
++diff --git a/desktop/cups.desktop b/desktop/cups.desktop
++index dabfba3..28b98d9 100644
++--- a/desktop/cups.desktop
+++++ b/desktop/cups.desktop
++@@ -1,14 +1,11 @@
++ [Desktop Entry]
++-Categories=Application;System;X-Red-Hat-Base;
++-Encoding=UTF-8
+++Categories=System;X-Red-Hat-Base;
++ Exec=htmlview http://localhost:631/
++ GenericName=
++ Icon=cups
++ MimeType=
++-Path=
++ StartupNotify=false
++ Terminal=false
++-TerminalOptions=
++ Type=Application
++ X-DCOP-ServiceType=
++ X-KDE-SubstituteUID=false
++-- 
++1.7.0.4
++
+diff --git a/recipes/cups/cups_1.2.12.bb b/recipes/cups/cups_1.2.12.bb
+index 6df928a..167d353 100644
+--- a/recipes/cups/cups_1.2.12.bb
++++ b/recipes/cups/cups_1.2.12.bb
+@@ -1,5 +1,7 @@
+ require cups.inc
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.3"
++
++SRC_URI += "file://0001-cups-desktop-fix-cups-desktop-file.patch"
+ 
+ SRC_URI[md5sum] = "d410658468384b5ba5d04a808f6157fe"
+ SRC_URI[sha256sum] = "b4ff8e934da7db32d5654360ea9068faa0ed5a00fde02161ae53c2052510d00f"
+-- 
+1.7.0.4
 
-If such a branch is expected for long term then its better to decide
-its policies on patches
-from upstream pov all fixes that go into this branch should first go
-into master if its not
-a direct backport of some sort. That way we can be sure that we dont
-lose changes that should be in master.
-
->
-> I discussed this with Philip and Graeme and the idea is to retire
-> angstrom-2008.1.conf into that branch. I still have customers (you
-> indirectly :)) using that, so having it in that branch would be very neat=
-.
->
-> regards,
->
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFNUmnrMkyGM64RGpERAuT/AJ9mytn+0MD+p0r5wIHO9ZGZ+faHWwCfaok8
-> s2oPs47xZ2Ud4um/cqA8G4U=3D
-> =3DJpX4
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
