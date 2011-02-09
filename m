@@ -1,35 +1,34 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pn9eX-0007QE-Gf
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 14:00:13 +0100
-Received: by qwi2 with SMTP id 2so81590qwi.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PnA7Q-0007pq-M5 for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Feb 2011 14:30:04 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PnA6P-00030H-Cc for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Feb 2011 14:29:01 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Feb 2011 14:29:01 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Feb 2011 04:59:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=MCEDoKPuS7CDusFAUVnQ8eOU+LO2e+P8fjPOaia88ZI=;
-	b=bqCFjgOquKaGPvY6zK/apHm9G4YG26SpJR7ad3/9puOmbrOk+4Og9oFh49z0U1Z7f8
-	o+wVLmdxz1xJH07eqjdhR9ahGzade9CsuFyaCJu9x7E1F7ZE1z0sBe+JhWI4sMo8PjBT
-	i9vNKNSjWdy0LvTDca3bmaRQClWhk0qtHkTlE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=njvnQTuAN6TqETCxS+oxdpAeCnZAygs2VYIGrP1biPy0JMZrmA2pDRLbtGL2WLVsmY
-	LcVTSw3dzF72uXATttT0+BC5d8C5yBYv9pxlAJAtcjE03rharSLYZTAXoLxQ+/qNO5Sq
-	dKzACdmI+cUbbDtTNvkG5LXhXEFbZGInW/J7M=
-MIME-Version: 1.0
-Received: by 10.229.241.194 with SMTP id lf2mr14867791qcb.222.1297256349759;
-	Wed, 09 Feb 2011 04:59:09 -0800 (PST)
-Received: by 10.229.193.10 with HTTP; Wed, 9 Feb 2011 04:59:09 -0800 (PST)
-In-Reply-To: <201102091039.27832.marcin@juszkiewicz.com.pl>
-References: <1297116822-30938-1-git-send-email-filip.zyzniewski@gmail.com>
-	<201102091039.27832.marcin@juszkiewicz.com.pl>
-Date: Wed, 9 Feb 2011 13:59:09 +0100
-Message-ID: <AANLkTikDHBWTnf2S3j-P9_rpscdRQ7GZHVxrNLbLCXZW@mail.gmail.com>
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+	Wed, 09 Feb 2011 14:29:01 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 09 Feb 2011 14:28:43 +0100
+Message-ID: <iiu4qb$8st$1@dough.gmane.org>
+References: <1297116822-30938-1-git-send-email-filip.zyzniewski@gmail.com>	<201102091039.27832.marcin@juszkiewicz.com.pl>
+	<AANLkTikDHBWTnf2S3j-P9_rpscdRQ7GZHVxrNLbLCXZW@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <AANLkTikDHBWTnf2S3j-P9_rpscdRQ7GZHVxrNLbLCXZW@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
 Subject: Re: [PATCH] task-base: conditional wifi and bluetooth tasks in PACKAGES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,33 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Feb 2011 13:00:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 09 Feb 2011 13:30:04 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On 2/9/11, Marcin Juszkiewicz <marcin@juszkiewicz.com.pl> wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> This change is bogus. You just remove building of BT/Wifi support for
-> "bitbake
-> bootstrap-image" for your machine not distro. Use DISTRO_FEATURES instead
-> and
-> then remove "bluetooth wifi" from DISTRO_FEATURES in your distribution
-> config
-> file.
+On 09-02-11 13:59, Filip Zyzniewski wrote:
+> On 2/9/11, Marcin Juszkiewicz <marcin@juszkiewicz.com.pl> wrote:
+> 
+>> This change is bogus. You just remove building of BT/Wifi support for
+>> "bitbake
+>> bootstrap-image" for your machine not distro. Use DISTRO_FEATURES instead
+>> and
+>> then remove "bluetooth wifi" from DISTRO_FEATURES in your distribution
+>> config
+>> file.
+> 
+> The whole point of this patch is to make task-base honour features.
+> Without this change bluez (and in consequence avahi, gstreamer, gtk, x
+> libs) gets built regardless of features setting.
 
-The whole point of this patch is to make task-base honour features.
-Without this change bluez (and in consequence avahi, gstreamer, gtk, x
-libs) gets built regardless of features setting.
+That's the whole point of task-base, to get things built. You can then
+use machine_features to install them by default or not.
 
-> task-base was created several years ago as attempt to get something better
-> then task-bootstrap which we used before. BT/Wifi part was done to have
-> support for cf/usb/pci connected dongles/cards. And it worked fine but was
-> not
-> perfect.
+Again, noone is forcing you to use task-base, so no need to break it for
+everyone else like your patch is doing.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Sure, but why not build it only when the distro/machine has bluetooth
-in features?
+iD8DBQFNUpaKMkyGM64RGpERAh8jAJ4koJrmIpHfs5Eklx/gPg7xE/gMAACfTfTo
+kfLoxrXxxbVx4DU/u5P4TU4=
+=fOfI
+-----END PGP SIGNATURE-----
 
-bye,
-Filip Zyzniewski
 
 
