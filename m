@@ -1,33 +1,39 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PnGt7-0001ll-Qo
+	(envelope-from <raj.khem@gmail.com>) id 1PnGvA-0001pf-Pq
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 21:43:46 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PnGs5-0006Vz-Qs from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 12:42:41 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 9 Feb 2011 12:42:41 -0800
-Received: from [172.30.80.130] ([172.30.80.130]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 9 Feb 2011 13:42:39 -0700
-Message-ID: <4D52FC34.9020401@mentor.com>
-Date: Wed, 09 Feb 2011 13:42:28 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+	Wed, 09 Feb 2011 21:45:54 +0100
+Received: by yxd5 with SMTP id 5so271341yxd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Feb 2011 12:44:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=slQutXN5R8MH26Kp0lqN3kHPdauqxTH2ezVhQlftOHI=;
+	b=g7dZwOS5RnBYJQO/F8n+9YmAmNegAkopxsDvzsll1DMShYUhHqt7nkDk8SxifnikAG
+	FyKDl4ZZiu+nDE/eBAQlFZkOm5HvX1hrkiPuwqr6JRsfDjq0RcTfuUSWLSP8MYAzFgPm
+	YR/C2cZuz2zB0KdTSYpn4A5IK418Pf8zWxQFg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=pVtoe3bB4RK8gkkIvsZ+pPuQ+85ZFhh0AztXUwRu+nvXrmXPAgt5c5/P5qx/qPKHIF
+	tc73ZNVLXm6NPFLDqKze441h2VUWdD2s37iiF6hhbWh83Nbw3CjWUe12UqlqH7ag3Fnc
+	Kn9udoEQ4R7bxUm7jkvWQ6gwlhZ6j5sxKZDY8=
+Received: by 10.91.160.30 with SMTP id m30mr1895033ago.61.1297284288691; Wed,
+	09 Feb 2011 12:44:48 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.90.32.12 with HTTP; Wed, 9 Feb 2011 12:44:28 -0800 (PST)
+In-Reply-To: <4D52EEE5.9030309@mentor.com>
+References: <1297199824-3712-1-git-send-email-morphis@gravedo.de>
+	<4D51B81D.8000800@mentor.com>
+	<AANLkTikbfyoZfnJq9k1fSkMVMkReNw0G8APuXjc_rTyY@mail.gmail.com>
+	<iium4d$gau$1@dough.gmane.org> <20110209193129.GA15397@nirvana>
+	<4D52EEE5.9030309@mentor.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 9 Feb 2011 12:44:28 -0800
+Message-ID: <AANLkTin0nJfcj1wFiYcbXLyLa9tk_Dy8yn8Lp3=PGNHC@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1297187904-19841-1-git-send-email-coolaj86@gmail.com>	<4D52EEA1.6040503@mentor.com>
-	<iius8b$ke3$1@dough.gmane.org>
-In-Reply-To: <iius8b$ke3$1@dough.gmane.org>
-X-OriginalArrivalTime: 09 Feb 2011 20:42:40.0637 (UTC)
-	FILETIME=[E4EB52D0:01CBC899]
-Subject: Re: [PATCH v4] nodejs: updated recipe to v0.2.6
+Subject: Re: [PATCH] evas: disable cpu neon support for palmpre machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,67 +47,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Feb 2011 20:43:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 09 Feb 2011 20:45:54 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 02/09/2011 01:08 PM, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+On Wed, Feb 9, 2011 at 11:45 AM, Tom Rini <tom_rini@mentor.com> wrote:
+> On 02/09/2011 12:31 PM, Simon Busch wrote:
+>>
+>> On 02/09/11 at 07:24pm, Koen Kooi wrote:
+>>>
+>>> -----BEGIN PGP SIGNED MESSAGE-----
+>>> Hash: SHA1
+>>
+>>> On 09-02-11 19:16, Khem Raj wrote:
+>>>>
+>>>> On Tue, Feb 8, 2011 at 1:39 PM, Tom Rini<tom_rini@mentor.com> =C2=A0wr=
+ote:
+>>>>>
+>>>>> On 02/08/2011 02:17 PM, Simon Busch wrote:
+>>>>>>
+>>>>>> Neon support in evas is currently broken for the palmpre machine. If
+>>>>>> we
+>>>>>> enable neon
+>>>>>> support evas causes alignment trap errors and lets the device freeze
+>>>>>> in
+>>>>>> the end. This
+>>>>>> should be reverted after the bug in evas code is found and fixed.
+>>>>>>
+>>>>>> Signed-off-by: Simon Busch<morphis@gravedo.de>
+>>>>>> ---
+>>>>>> =C2=A0recipes/efl1/evas.inc | =C2=A0 =C2=A05 ++++-
+>>>>>> =C2=A01 files changed, 4 insertions(+), 1 deletions(-)
+>>>>>>
+>>>>>> diff --git a/recipes/efl1/evas.inc b/recipes/efl1/evas.inc
+>>>>>> index eb64d7a..ad30eba 100644
+>>>>>> --- a/recipes/efl1/evas.inc
+>>>>>> +++ b/recipes/efl1/evas.inc
+>>>>>> @@ -7,7 +7,7 @@ DEPENDS_virtclass-native =3D "freetype-native
+>>>>>> libxext-native
+>>>>>> libpng-native jpeg-na
+>>>>>> =C2=A0inherit efl
+>>>>>>
+>>>>>> =C2=A0BBCLASSEXTEND =3D "native"
+>>>>>> -INC_PR =3D "r0"
+>>>>>> +INC_PR =3D "r1"
+>>>>>> =C2=A0FILESPATHPKG =3D. "${BPN}-${PV}:${BPN}:"
+>>>>>>
+>>>>>> =C2=A0python populate_packages_prepend () {
+>>>>>> @@ -83,6 +83,9 @@ EVAS_CPU_TWEAKS =3D ""
+>>>>>> =C2=A0# Disabled for now, see
+>>>>>>
+>>>>>> http://thread.gmane.org/gmane.comp.window-managers.enlightenment.dev=
+el/25194
+>>>>>> =C2=A0#EVAS_CPU_TWEAKS_armv7a =3D "--enable-cpu-neon"
+>>>>>>
+>>>>>> +# Neon support for evas is broken on palmpre currently (causes the
+>>>>>> device
+>>>>>> to freeze)
+>>>>>> +EVAS_CPU_TWEAKS_palmpre =3D "--disable-cpu-neon"
+>>>>>> +
+>>>>>> =C2=A0# common options
+>>>>>> =C2=A0EVAS_OECONF =3D " \
+>>>>>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0--x-in=
+cludes=3D${STAGING_INCDIR}/X11 \
+>>>>>
+>>>>> Shouldn't this be changing the armv7a EVAS_CPU_TWEAKS that's above
+>>>>> yours to
+>>>>> be uncommented and as a --disable?
+>>>>
+>>>> that would disable neon for all armv7a machines probably not what is
+>>>> needed here.
+>>
+>>> Actually, that was how I did it :) The NEON code that was added doesn't
+>>> build with gcc 4.3.x and binutils 2.18.x, so I disabled it by not
+>>> enabling it. If it builds and works with gcc 4.3.x nowadays we should
+>>> enable it and find out why the palmpre breaks.
+>>
+>> Evas builds fine these days with neon support enabled but it enables it =
+by
+>> default. I really need to find the cause of the breakage on the palmpre
+>> but
+>> don't have too much time to debug it so this is a interim solution only
+>> until the bug is found and fixed.
+
+that would be nice because once we add machine override it can become
+a common escape for other machines
+and changing this to be a machine specific recipe is not desired
+unless absolutely needed
+
 >
-> On 09-02-11 20:44, Tom Rini wrote:
->> On 02/08/2011 10:58 AM, AJ ONeal wrote:
->>> * added version number to patches
->>> * libev-cross-cc_0.2.6.patch - turns off execution so that
->>> cross-compile succeeds
->>> * node-cross-cc_0.2.6.patch - enables cross-compiling of v8 for x86,
->>> x86_64, arm, and mips
->>
->> I didn't touch it in patchwork but (and I see these aren't all new issues):
->>
->>> diff --git a/recipes/nodejs/nodejs_0.2.6.bb
->>> b/recipes/nodejs/nodejs_0.2.6.bb
->>> new file mode 100644
->>> index 0000000..560adc6
->>> --- /dev/null
->>> +++ b/recipes/nodejs/nodejs_0.2.6.bb
->>> @@ -0,0 +1,32 @@
->>> +DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
->>> +HOMEPAGE = "http://nodejs.org"
->>> +LICENSE = "MIT"
->>> +
->>> +DEPENDS = "openssl"
->>> +
->>> +SRC_URI = " \
->>> +  http://nodejs.org/dist/node-v${PV}.tar.gz \
->>> +  file://libev-cross-cc-v${PV}.patch \
->>> +  file://node-cross-cc-v${PV}.patch \
->>> +"
->>> +SRC_URI[md5sum] = "b1c50ceb43bee1b221be210b7bc7a216"
->>> +SRC_URI[sha256sum] =
->>> "e97fe9c81ff4b569ae9a0d46e64a0572a1f171293573a5b5290bcc3996a19701"
->>> +
->>> +S = "${WORKDIR}/node-v${PV}"
->>> +
->>> +# v8 errors out if you have set CCACHE
->>> +CCACHE = ""
->>> +
->>> +do_configure () {
->>> +  ./configure --prefix=${prefix} --without-snapshot
->>> +}
->>
->> Why isn't this just EXTRA_OECONF = "--without-snapshot" and using the
->> default do_configure, compile and install?
+> My only concern is that are we sure other armv7a targets aren't also havi=
+ng
+> fatal problems?
+
+we don't fix what we don't know is broken
+
 >
-> It's one of those python abominations that try to look like autotools :(
-> And as usual, it has even more bugs than autotools when you try to
-> crosscompile
-
-Retch.  So, unless someone pops up within the next 24h and says why they 
-did something in patchwork or otherwise objects, I'll push this.  Thanks!
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+> --
+> Tom Rini
+> Mentor Graphics Corporation
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
