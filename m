@@ -1,36 +1,33 @@
-Received: from goliath.siemens.de ([192.35.17.28])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1Pn6JQ-0005vP-Ly
+	(envelope-from <dp@xora.org.uk>) id 1Pn6O8-00068F-Ra
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 10:26:12 +0100
-Received: from mail2.siemens.de (localhost [127.0.0.1])
-	by goliath.siemens.de (8.13.6/8.13.6) with ESMTP id p199PBCN008281
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 9 Feb 2011 10:25:11 +0100
-Received: from DEMCHP99ET0MSX.ww902.siemens.net
-	(demchp99et0msx.ww902.siemens.net [139.25.131.181])
-	by mail2.siemens.de (8.13.6/8.13.6) with ESMTP id p199PBIH031080
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 9 Feb 2011 10:25:11 +0100
-Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.227]) by
-	DEMCHP99ET0MSX.ww902.siemens.net ([139.25.131.181]) with mapi;
-	Wed, 9 Feb 2011 10:25:11 +0100
-From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 9 Feb 2011 10:25:10 +0100
-Thread-Topic: [oe] 2011.03 release testing, starts soon!
-Thread-Index: AcvHyNmr7RcRmmGYSnWN2ZFgaWL8TgAbtOtQ
-Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819E011A79A329@DEMCHP99E35MSX.ww902.siemens.net>
-References: <4D519C83.9060502@mentor.com>
-In-Reply-To: <4D519C83.9060502@mentor.com>
-Accept-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: de-DE
+	Wed, 09 Feb 2011 10:31:04 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id E878EA5671;
+	Wed,  9 Feb 2011 09:29:59 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id yLK7q8D4K-1f; Wed,  9 Feb 2011 09:29:59 +0000 (GMT)
+Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 0363EA50F6;
+	Wed,  9 Feb 2011 09:29:58 +0000 (GMT)
+Message-ID: <4D525ED2.7020000@xora.org.uk>
+Date: Wed, 09 Feb 2011 09:30:58 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Subject: Re: 2011.03 release testing, starts soon!
+To: Steffen Sledz <sledz@dresearch.de>
+References: <4D4BE849.9070704@dresearch.de> <4D5247CD.20700@dresearch.de>
+	<4D525A03.2020601@xora.org.uk> <4D525D27.5030902@dresearch.de>
+In-Reply-To: <4D525D27.5030902@dresearch.de>
+X-Enigmail-Version: 1.1.1
+Cc: openembedded-devel@lists.openembedded.org
+Subject: =?UTF-8?B?UmU6IMOFbmdzdHLDtm0gdmVyc2lvbnM/?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,60 +41,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Feb 2011 09:26:13 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Wed, 09 Feb 2011 09:31:04 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi all,=20
+On 09/02/2011 09:23, Steffen Sledz wrote:
+> Am 09.02.2011 10:10, schrieb Graeme Gregory:
+>> On 09/02/2011 07:52, Steffen Sledz wrote:
+>>> Am 04.02.2011 12:51, schrieb Steffen Sledz:
+>>>> I'm a bit confused about the Angstrom versions.
+>>>>
+>>>> Setting in local.conf is
+>>>>
+>>>>   DISTRO =3D "angstrom-2008.1"
+>>>>
+>>>> but bitbake reports
+>>>>
+>>>>   Build Configuration:
+>>>>   BB_VERSION        =3D "1.10.2"
+>>>>   METADATA_BRANCH   =3D "testing-next"
+>>>>   METADATA_REVISION =3D "3a7b93a"
+>>>>   TARGET_ARCH       =3D "arm"
+>>>>   TARGET_OS         =3D "linux-gnueabi"
+>>>>   MACHINE           =3D "hipox"
+>>>>   DISTRO            =3D "angstrom"
+>>>>   DISTRO_VERSION    =3D "2010.7-test-20110204"
+>>>>   TARGET_FPU        =3D "soft"
+>>>>
+>>>> Is this intented?
+>>>>
+>>>> BTW: Which is the suggested/released =C3=85ngstr=C3=B6m version? htt=
+p://www.angstrom-distribution.org/ seems to be not very helpful here. e.g=
+. the FAQ link results in an PAGE NOT FOUND. :(
+>> 2008.1 is the "stable" version of Angstrom which has all the benefit o=
+f
+>> our extensive toolchain testing.
+>>
+>> 2010.x is angstrom-next and is the in progress version moving to gcc 4=
+.5
+>> blah blah blah.
+> OK, but why bitbake reports DISTRO_VERSION =3D "2010.7-test-20110204" i=
+f it is set to DISTRO =3D "angstrom-2008.1" ???
+>
+Because thats the actual version of the DISTRO produced.
 
-There are two things which could be useful (IMO) for OE users:
+We discovered if we rename the file people dont read emails or error
+messages and waste a week debugging non issues so we stopped renaming
+the file.
 
-1. a small README file (or wiki page) just highlighting the main
-   changes since last release (2010.12), e.g. something like
-   "Prominent features (the cool stuff)" on http://kernelnewbies.org/LinuxC=
-hanges
-   This would help us OE users to decice whether it is worth rebasing on th=
-e latest
-   release now, or if it can wait=20
+Graeme
 
-2. Do not delete the release branch after 2011.03 will be released (just li=
-ke
-   it was done for 2010.12), but let it live and allow developpers committi=
-ng
-   bug-fixes (backporting choosen things?) reported back by OE users (some =
-would
-   would be happy to contribute this way)
-  =20
-With kind regards,
-Fabrice Aeschbacher
-
-
-> -----Urspr=FCngliche Nachricht-----
-> Im Auftrag von Tom Rini
-> Gesendet: Dienstag, 8. Februar 2011 20:42
-> Betreff: [oe] 2011.03 release testing, starts soon!
->=20
-> Hey all,
->=20
-> I'd like to start getting a testing branch for the 2011.03=20
-> release going=20
-> in place of the usual testing-next branch.  My plan is to use the=20
-> testing-release-2011.03 branch for this and go weekly for the=20
-> 10th and=20
-> 17th and then "play it by ear" and see if we need to update=20
-> maybe twice=20
-> a week until early march.
->=20
-> As I just mentioned in another email, I've created=20
-> http://wiki.openembedded.org/index.php/Release-2011.03 which=20
-> is where we=20
-> can store who tested what (and against what hash).
->=20
-> Thanks all!
->=20
-> --=20
-> Tom Rini
-> Mentor Graphics Corporation
 
 
