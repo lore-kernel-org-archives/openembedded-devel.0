@@ -1,35 +1,51 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PnGMP-00012m-2d for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 21:09:57 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PnGLP-0005so-Jf for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 21:08:55 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Feb 2011 21:08:55 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <chase.maupin@ti.com>) id 1PnGQa-0001Ap-Ie
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Feb 2011 21:14:17 +0100
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id p19KDBiV006384
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Feb 2011 21:08:55 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 09 Feb 2011 21:08:43 +0100
-Message-ID: <iius8b$ke3$1@dough.gmane.org>
-References: <1297187904-19841-1-git-send-email-coolaj86@gmail.com>
-	<4D52EEA1.6040503@mentor.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4D52EEA1.6040503@mentor.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH v4] nodejs: updated recipe to v0.2.6
+	Wed, 9 Feb 2011 14:13:11 -0600
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id p19KDBTk020639
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 9 Feb 2011 14:13:11 -0600 (CST)
+Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p19KDBEj011468
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 9 Feb 2011 14:13:11 -0600 (CST)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
+	([157.170.170.8]) with mapi; Wed, 9 Feb 2011 14:13:11 -0600
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 9 Feb 2011 14:13:09 -0600
+Thread-Topic: [oe] bitbake does not fail when QA issues encountered
+Thread-Index: AcvFOenMioGksNaARcSzFWPV/UQPFgDWqKnw
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F08032A3023F0@dlee06.ent.ti.com>
+References: <201101271038.18945.ml@vdm-design.de>
+	<AANLkTimy4Q0Y_3Y-=8=QCifqQUYwWmFx4T0DH+dNXPeZ@mail.gmail.com>
+	<4D418914.2030703@mentor.com> <20110203070901.GA11867@denix.org>
+	<4D4AE93E.2020509@mentor.com> <20110203222035.GA19477@denix.org>
+	<4D4B35A7.4040000@mentor.com>
+	<AANLkTinO257Uuh8bTQCb2LPXKFF1LtB+qN0KjM8aXZVN@mail.gmail.com>
+	<20110204081659.GQ4580@excalibur.local>
+	<AANLkTinrcXmdF=P8KUc8_cWfchPEM=q7UaDbCbQknteF@mail.gmail.com>
+	<20110204090348.GR4580@excalibur.local>
+	<AANLkTik5RVEsxh_jtXTjQRM3sKBrmwmOaWbqs2eKKop=@mail.gmail.com>
+	<4D4C1464.4030609@mentor.com>
+	<AANLkTi=o+QW-K2VG7WBFFTrshxhD1TDMbqx=EbTxDj5h@mail.gmail.com>
+	<AANLkTimO7SQU7k=3ACn4K4wSOwRWkvoV-Tnvn2FFVW63@mail.gmail.com>
+	<AANLkTikXULU=UyfomMr_GVx5o1GieZrRxDZET3QF30px@mail.gmail.com>
+In-Reply-To: <AANLkTikXULU=UyfomMr_GVx5o1GieZrRxDZET3QF30px@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+Subject: Re: bitbake does not fail when QA issues encountered
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,67 +59,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Feb 2011 20:09:57 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 09 Feb 2011 20:14:17 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-On 09-02-11 20:44, Tom Rini wrote:
-> On 02/08/2011 10:58 AM, AJ ONeal wrote:
->> * added version number to patches
->> * libev-cross-cc_0.2.6.patch - turns off execution so that
->> cross-compile succeeds
->> * node-cross-cc_0.2.6.patch - enables cross-compiling of v8 for x86,
->> x86_64, arm, and mips
-> 
-> I didn't touch it in patchwork but (and I see these aren't all new issues):
-> 
->> diff --git a/recipes/nodejs/nodejs_0.2.6.bb
->> b/recipes/nodejs/nodejs_0.2.6.bb
->> new file mode 100644
->> index 0000000..560adc6
->> --- /dev/null
->> +++ b/recipes/nodejs/nodejs_0.2.6.bb
->> @@ -0,0 +1,32 @@
->> +DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
->> +HOMEPAGE = "http://nodejs.org"
->> +LICENSE = "MIT"
->> +
->> +DEPENDS = "openssl"
->> +
->> +SRC_URI = " \
->> +  http://nodejs.org/dist/node-v${PV}.tar.gz \
->> +  file://libev-cross-cc-v${PV}.patch \
->> +  file://node-cross-cc-v${PV}.patch \
->> +"
->> +SRC_URI[md5sum] = "b1c50ceb43bee1b221be210b7bc7a216"
->> +SRC_URI[sha256sum] =
->> "e97fe9c81ff4b569ae9a0d46e64a0572a1f171293573a5b5290bcc3996a19701"
->> +
->> +S = "${WORKDIR}/node-v${PV}"
->> +
->> +# v8 errors out if you have set CCACHE
->> +CCACHE = ""
->> +
->> +do_configure () {
->> +  ./configure --prefix=${prefix} --without-snapshot
->> +}
-> 
-> Why isn't this just EXTRA_OECONF = "--without-snapshot" and using the
-> default do_configure, compile and install?
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Frans Meulenbroeks
+> Sent: Saturday, February 05, 2011 7:35 AM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] bitbake does not fail when QA issues encountered
+>=20
+> 2011/2/4 Otavio Salvador <otavio@ossystems.com.br>:
+> > On Fri, Feb 4, 2011 at 15:26, Frans Meulenbroeks
+> > <fransmeulenbroeks@gmail.com> wrote:
+> >> The recipes at hand are:
+> > ...
+> >> cups: there is someone bitching about that this is 1.2, but he
+> >> apparently prefers bitching upon resolving the issue. Probably the
+> >> best solution is to drop the DP =3D -1 from the 1.4.4 recipe
+> > ...
+> >
+> > I can work on cups next week (I am on VAC right now).
+>=20
+> Actually the cups thing is the one I would feel fairly comfortable with.
+> The question here is mainly when/how to drop the DP =3D -1.
+> A pinning of 1.4.4 is already in my local.conf for quite a while.
 
-It's one of those python abominations that try to look like autotools :(
-And as usual, it has even more bugs than autotools when you try to
-crosscompile
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+In fact, as a quick fix applying something like http://bugs.gentoo.org/atta=
+chment.cgi?id=3D164569 should work for version 1.2.12.  I ran desktop-file-=
+validate against the cups.desktop file in version 1.4.4 of cups and it has =
+a whole different set of errors:
 
-iD8DBQFNUvRLMkyGM64RGpERAqflAJ9qHXDkf6jGOs1y/x+FtJ5VOEFD3gCfXaYW
-NV5mosMuAhYDfZVMEzXGYjE=
-=pRYh
------END PGP SIGNATURE-----
+desktop/cups.desktop: error: (will be fatal in the future): value "Printing=
+" in key "Categories" in group "Desktop Entry" requires another category to=
+ be present among the following categories: HardwareSettings;Settings
+desktop/cups.desktop: error: (will be fatal in the future): value "Hardware=
+Settings" in key "Categories" in group "Desktop Entry" requires another cat=
+egory to be present among the following categories: Settings
 
+>=20
+> Frans
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
