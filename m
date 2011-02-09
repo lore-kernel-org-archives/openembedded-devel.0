@@ -1,32 +1,35 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <coolaj86@gmail.com>) id 1PnEcU-0006xJ-SV
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 19:18:26 +0100
-Received: by fxm17 with SMTP id 17so475810fxm.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PnEjN-0007CF-0y for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Feb 2011 19:25:33 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PnEiH-0004M1-So for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Feb 2011 19:24:25 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Feb 2011 19:24:25 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Feb 2011 10:17:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:from:date:message-id:subject:to
-	:content-type; bh=PDcu50fXHs3CN3PG1mdWq3KT+ahQG4JsqW1bWCxQ55I=;
-	b=tRv6/hNIAsSjIx1tTp0bNMK0PK8WrZQj6sN/eNxKT+PN91WeRl2slKlys2MDmBiX76
-	CbL2cvVpqN3GeOKG7sPE0E1FKjSi62bPFVnCNbmxxSMW6ze0TfNuDvW6VvoP7HXys4ki
-	RTTaOjI304sBnkiE1zfCgFRrtIeEYiZzt9WPo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=CZJavY+AWnyoz9A5DAmUugbgQk58QOottDstjuHWiO5oRE1tyZmc0K5XabtQzeNJl2
-	wDRFY19G6+ojYir+WMFdf6SWCoQYF5Qz1Fw9v89a+Px7TqRi0FdGB0ZySIrNIV2uZsln
-	2FTng5R+V3bAqAgfNtmA5qkNA5iVrhz75lhhY=
-Received: by 10.223.101.206 with SMTP id d14mr2277176fao.134.1297275443456;
-	Wed, 09 Feb 2011 10:17:23 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.223.114.73 with HTTP; Wed, 9 Feb 2011 10:17:02 -0800 (PST)
-From: AJ ONeal <coolaj86@gmail.com>
-Date: Wed, 9 Feb 2011 11:17:02 -0700
-Message-ID: <AANLkTikX=pzTPrtHcekt_R=Xd9s16yiA0=5FqNQ6TPTs@mail.gmail.com>
+	Wed, 09 Feb 2011 19:24:25 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Ack or Nak? [was] [PATCH v4] nodejs: updated recipe to v0.2.6
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 09 Feb 2011 19:24:12 +0100
+Message-ID: <iium4d$gau$1@dough.gmane.org>
+References: <1297199824-3712-1-git-send-email-morphis@gravedo.de>	<4D51B81D.8000800@mentor.com>
+	<AANLkTikbfyoZfnJq9k1fSkMVMkReNw0G8APuXjc_rTyY@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <AANLkTikbfyoZfnJq9k1fSkMVMkReNw0G8APuXjc_rTyY@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH] evas: disable cpu neon support for palmpre machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,226 +43,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Feb 2011 18:18:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 09 Feb 2011 18:25:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-I didn't get an ACK or NAK on this, but it has been removed from patchwork
-and I don't see it in org.openembedded.dev.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Clarification please.
+On 09-02-11 19:16, Khem Raj wrote:
+> On Tue, Feb 8, 2011 at 1:39 PM, Tom Rini <tom_rini@mentor.com> wrote:
+>> On 02/08/2011 02:17 PM, Simon Busch wrote:
+>>>
+>>> Neon support in evas is currently broken for the palmpre machine. If we
+>>> enable neon
+>>> support evas causes alignment trap errors and lets the device freeze in
+>>> the end. This
+>>> should be reverted after the bug in evas code is found and fixed.
+>>>
+>>> Signed-off-by: Simon Busch<morphis@gravedo.de>
+>>> ---
+>>>  recipes/efl1/evas.inc |    5 ++++-
+>>>  1 files changed, 4 insertions(+), 1 deletions(-)
+>>>
+>>> diff --git a/recipes/efl1/evas.inc b/recipes/efl1/evas.inc
+>>> index eb64d7a..ad30eba 100644
+>>> --- a/recipes/efl1/evas.inc
+>>> +++ b/recipes/efl1/evas.inc
+>>> @@ -7,7 +7,7 @@ DEPENDS_virtclass-native = "freetype-native libxext-native
+>>> libpng-native jpeg-na
+>>>  inherit efl
+>>>
+>>>  BBCLASSEXTEND = "native"
+>>> -INC_PR = "r0"
+>>> +INC_PR = "r1"
+>>>  FILESPATHPKG =. "${BPN}-${PV}:${BPN}:"
+>>>
+>>>  python populate_packages_prepend () {
+>>> @@ -83,6 +83,9 @@ EVAS_CPU_TWEAKS = ""
+>>>  # Disabled for now, see
+>>> http://thread.gmane.org/gmane.comp.window-managers.enlightenment.devel/25194
+>>>  #EVAS_CPU_TWEAKS_armv7a = "--enable-cpu-neon"
+>>>
+>>> +# Neon support for evas is broken on palmpre currently (causes the device
+>>> to freeze)
+>>> +EVAS_CPU_TWEAKS_palmpre = "--disable-cpu-neon"
+>>> +
+>>>  # common options
+>>>  EVAS_OECONF = " \
+>>>                  --x-includes=${STAGING_INCDIR}/X11 \
+>>
+>> Shouldn't this be changing the armv7a EVAS_CPU_TWEAKS that's above yours to
+>> be uncommented and as a --disable?
+> 
+> that would disable neon for all armv7a machines probably not what is
+> needed here.
 
-AJ ONeal
+Actually, that was how I did it :) The NEON code that was added doesn't
+build with gcc 4.3.x and binutils 2.18.x, so I disabled it by not
+enabling it. If it builds and works with gcc 4.3.x nowadays we should
+enable it and find out why the palmpre breaks.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNUtvMMkyGM64RGpERApZsAKCqED8JCVCdRqPtGfZ8gAZ+uCk0swCcD96s
+9LMHSgBQMcskY+N/zSOAvc4=
+=lI+a
+-----END PGP SIGNATURE-----
 
 
-On Tue, Feb 8, 2011 at 10:58 AM, AJ ONeal <coolaj86@gmail.com> wrote:
-
-> * added version number to patches
-> * libev-cross-cc_0.2.6.patch - turns off execution so that cross-compile
-> succeeds
-> * node-cross-cc_0.2.6.patch - enables cross-compiling of v8 for x86,
-> x86_64, arm, and mips
->
-> Signed-off-by: AJ ONeal <coolaj86@gmail.com>
-> ---
->  recipes/nodejs/files/libev-cross-cc.patch       |   18 ------------
->  recipes/nodejs/files/libev-cross-cc_0.2.6.patch |   13 +++++++++
->  recipes/nodejs/files/node-cross-cc.patch        |   14 ---------
->  recipes/nodejs/files/node-cross-cc_0.2.6.patch  |   19 +++++++++++++
->  recipes/nodejs/nodejs_0.2.1.bb                  |   34
-> -----------------------
->  recipes/nodejs/nodejs_0.2.6.bb                  |   32
-> +++++++++++++++++++++
->  6 files changed, 64 insertions(+), 66 deletions(-)
->  delete mode 100644 recipes/nodejs/files/libev-cross-cc.patch
->  create mode 100644 recipes/nodejs/files/libev-cross-cc_0.2.6.patch
->  delete mode 100644 recipes/nodejs/files/node-cross-cc.patch
->  create mode 100644 recipes/nodejs/files/node-cross-cc_0.2.6.patch
->  delete mode 100644 recipes/nodejs/nodejs_0.2.1.bb
->  create mode 100644 recipes/nodejs/nodejs_0.2.6.bb
->
-> diff --git a/recipes/nodejs/files/libev-cross-cc.patch
-> b/recipes/nodejs/files/libev-cross-cc.patch
-> deleted file mode 100644
-> index 4dd34f4..0000000
-> --- a/recipes/nodejs/files/libev-cross-cc.patch
-> +++ /dev/null
-> @@ -1,18 +0,0 @@
-> -diff --git node-v0.2.1/deps/libev/wscript.orig
-> node-v0.2.1/deps/libev/wscript
-> -index 19e7bb2..f0a3d3b 100644
-> ---- node-v0.2.1/deps/libev/wscript.orig
-> -+++ node-v0.2.1/deps/libev/wscript
-> -@@ -52,7 +52,12 @@ def configure(conf):
-> -           return 0;
-> -       }
-> -   """
-> --  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL",
-> execute=True,
-> -+  # TODO determine this dynamically
-> -+  CROSS = True
-> -+  execute = True
-> -+  if CROSS:
-> -+    execute = False
-> -+  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL",
-> execute=execute,
-> -                 msg="Checking for SYS_clock_gettime")
-> -
-> -   have_librt = conf.check(lib='rt', uselib_store='RT')
-> diff --git a/recipes/nodejs/files/libev-cross-cc_0.2.6.patch
-> b/recipes/nodejs/files/libev-cross-cc_0.2.6.patch
-> new file mode 100644
-> index 0000000..13ce4d8
-> --- /dev/null
-> +++ b/recipes/nodejs/files/libev-cross-cc_0.2.6.patch
-> @@ -0,0 +1,13 @@
-> +diff --git node-v0.2.6/deps/libev/wscript.orig
-> node-v0.2.6/deps/libev/wscript
-> +index 19e7bb2..5ec9143 100644
-> +--- node-v0.2.6/deps/libev/wscript.orig
-> ++++ node-v0.2.6/deps/libev/wscript
-> +@@ -52,7 +52,7 @@ def configure(conf):
-> +           return 0;
-> +       }
-> +   """
-> +-  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL",
-> execute=True,
-> ++  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL",
-> execute=False,
-> +                 msg="Checking for SYS_clock_gettime")
-> +
-> +   have_librt = conf.check(lib='rt', uselib_store='RT')
-> diff --git a/recipes/nodejs/files/node-cross-cc.patch
-> b/recipes/nodejs/files/node-cross-cc.patch
-> deleted file mode 100644
-> index 0d15afc..0000000
-> --- a/recipes/nodejs/files/node-cross-cc.patch
-> +++ /dev/null
-> @@ -1,14 +0,0 @@
-> -diff --git node-v0.2.1/wscript.orig node-v0.2.1/wscript
-> -index 9c4243c..3cf6689 100644
-> ---- node-v0.2.1/wscript.orig
-> -+++ node-v0.2.1/wscript
-> -@@ -326,6 +326,9 @@ def v8_cmd(bld, variant):
-> -   arch = ""
-> -   if bld.env['DEST_CPU'] == 'x86_64':
-> -     arch = "arch=x64"
-> -+  # XXX Better support cross-compilation
-> -+  else:
-> -+    arch = "arch=" + bld.env['DEST_CPU']
-> -
-> -   if variant == "default":
-> -     mode = "release"
-> diff --git a/recipes/nodejs/files/node-cross-cc_0.2.6.patch
-> b/recipes/nodejs/files/node-cross-cc_0.2.6.patch
-> new file mode 100644
-> index 0000000..1087ce2
-> --- /dev/null
-> +++ b/recipes/nodejs/files/node-cross-cc_0.2.6.patch
-> @@ -0,0 +1,19 @@
-> +diff --git node-v0.2.6/wscript.orig node-v0.2.6/wscript
-> +index a6bade2..566bf5e 100644
-> +--- node-v0.2.6/wscript.orig
-> ++++ node-v0.2.6/wscript
-> +@@ -338,6 +338,14 @@ def v8_cmd(bld, variant):
-> +   arch = ""
-> +   if bld.env['DEST_CPU'] == 'x86_64':
-> +     arch = "arch=x64"
-> ++  elif bld.env['DEST_CPU'] == 'x86':
-> ++    arch = "arch=x86"
-> ++  elif bld.env['DEST_CPU'] == 'arm':
-> ++    arch = "arch=arm"
-> ++  elif bld.env['DEST_CPU'] == 'mips':
-> ++    arch = "arch=mips"
-> ++  else:
-> ++    raise Exception(bld.env['DEST_CPU'], "is not one of these supported
-> architectures: x86, x86_64, arm, mips")
-> +
-> +   if variant == "default":
-> +     mode = "release"
-> diff --git a/recipes/nodejs/nodejs_0.2.1.bb b/recipes/nodejs/
-> nodejs_0.2.1.bb
-> deleted file mode 100644
-> index c2e9c41..0000000
-> --- a/recipes/nodejs/nodejs_0.2.1.bb
-> +++ /dev/null
-> @@ -1,34 +0,0 @@
-> -DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
-> -HOMEPAGE = "http://nodejs.org"
-> -LICENSE = "MIT"
-> -
-> -PR = "r1"
-> -
-> -DEPENDS = "openssl"
-> -
-> -SRC_URI = " \
-> -  http://nodejs.org/dist/node-v${PV}.tar.gz \
-> -  file://libev-cross-cc.patch \
-> -  file://node-cross-cc.patch \
-> -"
-> -SRC_URI[md5sum] = "c6051dd216817bf0f95bea80c42cf262"
-> -SRC_URI[sha256sum] =
-> "5bb7d084b2138ce43fcb34739ed894379c450a1dd569a1c710405bc39d2861c2"
-> -
-> -S = "${WORKDIR}/node-v${PV}"
-> -
-> -# v8 errors out if you have set CCACHE
-> -CCACHE = ""
-> -
-> -do_configure () {
-> -  ./configure --prefix=${prefix} --without-snapshot
-> -}
-> -
-> -do_compile () {
-> -  make
-> -}
-> -
-> -do_install () {
-> -  DESTDIR=${D} oe_runmake install
-> -}
-> -
-> -BBCLASSEXTEND = "native"
-> diff --git a/recipes/nodejs/nodejs_0.2.6.bb b/recipes/nodejs/
-> nodejs_0.2.6.bb
-> new file mode 100644
-> index 0000000..560adc6
-> --- /dev/null
-> +++ b/recipes/nodejs/nodejs_0.2.6.bb
-> @@ -0,0 +1,32 @@
-> +DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
-> +HOMEPAGE = "http://nodejs.org"
-> +LICENSE = "MIT"
-> +
-> +DEPENDS = "openssl"
-> +
-> +SRC_URI = " \
-> +  http://nodejs.org/dist/node-v${PV}.tar.gz \
-> +  file://libev-cross-cc-v${PV}.patch \
-> +  file://node-cross-cc-v${PV}.patch \
-> +"
-> +SRC_URI[md5sum] = "b1c50ceb43bee1b221be210b7bc7a216"
-> +SRC_URI[sha256sum] =
-> "e97fe9c81ff4b569ae9a0d46e64a0572a1f171293573a5b5290bcc3996a19701"
-> +
-> +S = "${WORKDIR}/node-v${PV}"
-> +
-> +# v8 errors out if you have set CCACHE
-> +CCACHE = ""
-> +
-> +do_configure () {
-> +  ./configure --prefix=${prefix} --without-snapshot
-> +}
-> +
-> +do_compile () {
-> +  make
-> +}
-> +
-> +do_install () {
-> +  DESTDIR=${D} oe_runmake install
-> +}
-> +
-> +BBCLASSEXTEND = "native"
-> --
-> 1.7.0.4
->
->
 
