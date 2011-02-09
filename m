@@ -1,26 +1,26 @@
 Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <javier.martin@vista-silicon.com>) id 1Pn6VU-0001ll-FM
+	(envelope-from <javier.martin@vista-silicon.com>) id 1Pn6VX-0001ll-ID
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 10:38:40 +0100
+	Wed, 09 Feb 2011 10:38:43 +0100
 Received: by mail-wy0-f175.google.com with SMTP id 40so6534501wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Feb 2011 01:37:39 -0800 (PST)
-Received: by 10.227.151.65 with SMTP id b1mr4919162wbw.163.1297244258912;
-	Wed, 09 Feb 2011 01:37:38 -0800 (PST)
+	Wed, 09 Feb 2011 01:37:42 -0800 (PST)
+Received: by 10.227.153.202 with SMTP id l10mr15073648wbw.173.1297244261963;
+	Wed, 09 Feb 2011 01:37:41 -0800 (PST)
 Received: from localhost.localdomain (58.50.18.95.dynamic.jazztel.es
 	[95.18.50.58])
-	by mx.google.com with ESMTPS id u9sm109430wbg.0.2011.02.09.01.37.37
+	by mx.google.com with ESMTPS id u9sm109430wbg.0.2011.02.09.01.37.39
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 09 Feb 2011 01:37:38 -0800 (PST)
+	Wed, 09 Feb 2011 01:37:40 -0800 (PST)
 From: Javier Martin <javier.martin@vista-silicon.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Feb 2011 10:37:12 +0100
-Message-Id: <1297244237-9508-3-git-send-email-javier.martin@vista-silicon.com>
+Date: Wed,  9 Feb 2011 10:37:13 +0100
+Message-Id: <1297244237-9508-4-git-send-email-javier.martin@vista-silicon.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1297244237-9508-1-git-send-email-javier.martin@vista-silicon.com>
 References: <1297244237-9508-1-git-send-email-javier.martin@vista-silicon.com>
-Subject: [PATCH 2/7] Add custom fstab and profile for Visstrim_M10 board.
+Subject: [PATCH 3/7] Add custom init dropbear script and image for Visstrim_M10.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,89 +34,171 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Feb 2011 09:38:40 -0000
+X-List-Received-Date: Wed, 09 Feb 2011 09:38:43 -0000
 
+Custom init script is needed since "/" is mounted as read-only
+but "/etc" is mounted as read-write in Visstrim_M10 boards.
+This case is not supported by default init script.
 
 Signed-off-by: Javier Martin <javier.martin@vista-silicon.com>
 ---
- recipes/base-files/base-files/visstrim_m10/fstab   |    9 +++++
- recipes/base-files/base-files/visstrim_m10/profile |   34 ++++++++++++++++++++
- recipes/base-files/base-files_3.0.14.bb            |    5 +++
- 3 files changed, 48 insertions(+), 0 deletions(-)
- create mode 100644 recipes/base-files/base-files/visstrim_m10/fstab
- create mode 100644 recipes/base-files/base-files/visstrim_m10/profile
+ recipes/dropbear/dropbear/visstrim_m10/init |   91 +++++++++++++++++++++++++++
+ recipes/images/micro-image-visstrim.bb      |   48 ++++++++++++++
+ 2 files changed, 139 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/dropbear/dropbear/visstrim_m10/init
+ create mode 100644 recipes/images/micro-image-visstrim.bb
 
-diff --git a/recipes/base-files/base-files/visstrim_m10/fstab b/recipes/base-files/base-files/visstrim_m10/fstab
+diff --git a/recipes/dropbear/dropbear/visstrim_m10/init b/recipes/dropbear/dropbear/visstrim_m10/init
 new file mode 100644
-index 0000000..c50280c
+index 0000000..72ca918
 --- /dev/null
-+++ b/recipes/base-files/base-files/visstrim_m10/fstab
-@@ -0,0 +1,9 @@
-+# Visstrim_M10 fstab
++++ b/recipes/dropbear/dropbear/visstrim_m10/init
+@@ -0,0 +1,91 @@
++#!/bin/sh
++#
++# Do not configure this file. Edit /etc/default/dropbear instead!
++#
 +
-+proc                 /proc                proc       defaults              0  0
-+sys                  /sys                 sysfs      defaults              0  0
-+usbfs                /proc/bus/usb        usbfs      defaults              0  0
-+tmpfs                /media/ram           tmpfs      defaults              0  0
-+devpts               /dev/pts             devpts     defaults              0  0
++PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
++DAEMON=/usr/sbin/dropbear
++NAME=dropbear
++DESC="Dropbear SSH server"
++PIDFILE=/var/run/dropbear.pid
 +
-+/dev/mmcblk0p1       /opt                 auto       defaults,sync,noauto  0  0
-diff --git a/recipes/base-files/base-files/visstrim_m10/profile b/recipes/base-files/base-files/visstrim_m10/profile
-new file mode 100644
-index 0000000..7ae3dfb
---- /dev/null
-+++ b/recipes/base-files/base-files/visstrim_m10/profile
-@@ -0,0 +1,34 @@
-+# /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
-+# and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
++DROPBEAR_PORT=22
++DROPBEAR_EXTRA_ARGS=
++NO_START=0
 +
-+PATH="/opt/usr/bin:/opt/bin:/opt/sbin:/usr/local/bin:/usr/bin:/bin"
-+EDITOR="/bin/vi"			# needed for packages like cron
-+test -z "$TERM" && TERM="vt100"	# Basic terminal capab. For screen etc.
++test ! -r /etc/default/dropbear || . /etc/default/dropbear
++test "$NO_START" = "0" || exit 0
++test -x "$DAEMON" || exit 0
++test ! -h /var/service/dropbear || exit 0
 +
-+if [ ! -e /etc/localtime -a ! -e /etc/TZ ]; then
-+	TZ="UTC"		# Time Zone. Look at http://theory.uwinnipeg.ca/gnu/glibc/libc_303.html
-+				# for an explanation of how to set this to your local timezone.
-+	export TZ
-+fi
++# Allows comma-separated list of addresses/ports
++DROPBEAR_PORT=`echo $DROPBEAR_PORT | sed "s/,/ -p /g"`
++DROPBEAR_RSAKEY_DEFAULT="/etc/dropbear/dropbear_rsa_host_key"
++DROPBEAR_DSSKEY_DEFAULT="/etc/dropbear/dropbear_dss_host_key"
 +
-+if [ "`id -u`" -eq 0 ]; then
-+   PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
-+fi
-+if [ "$PS1" ]; then
-+# works for bash and ash (no other shells known to be in use here)
-+   PS1='\u@\h:\w\$ '
-+fi
 +
-+if [ -d /etc/profile.d ]; then
-+  for i in /etc/profile.d/*.sh; do
-+    if [ -r $i ]; then
-+      . $i
-+    fi
-+  done
-+  unset i
-+fi
++test -z "$DROPBEAR_BANNER" || \
++  DROPBEAR_EXTRA_ARGS="$DROPBEAR_EXTRA_ARGS -b $DROPBEAR_BANNER"
++test -n "$DROPBEAR_RSAKEY" || \
++  DROPBEAR_RSAKEY=$DROPBEAR_RSAKEY_DEFAULT
++test -n "$DROPBEAR_DSSKEY" || \
++  DROPBEAR_DSSKEY=$DROPBEAR_DSSKEY_DEFAULT
++test -n "$DROPBEAR_KEYTYPES" || \
++  DROPBEAR_KEYTYPES="rsa"
 +
-+export PATH PS1 OPIEDIR QPEDIR QTDIR EDITOR TERM
-+
-+umask 022
-+
-diff --git a/recipes/base-files/base-files_3.0.14.bb b/recipes/base-files/base-files_3.0.14.bb
-index 2d6d926..302f68d 100644
---- a/recipes/base-files/base-files_3.0.14.bb
-+++ b/recipes/base-files/base-files_3.0.14.bb
-@@ -165,6 +165,11 @@ do_install_append_tb5200l() {
- 	ln -s var/tmp ${D}/tmp
- }
- 
-+do_install_append_visstrim_m10() {
-+	mkdir -p ${D}/opt
-+	mkdir -p ${D}/mnt/jffs2
-+	mkdir -p ${D}/mnt/defaults/etc
++gen_keys() {
++for t in $DROPBEAR_KEYTYPES; do
++  case $t in
++    rsa)
++	if [ ! -f $DROPBEAR_RSAKEY ]; then
++	    echo "Creating $DESC RSA host key."
++	    dropbearkey -t rsa -f $DROPBEAR_RSAKEY
++	fi
++	;;
++    dsa)
++	if [ ! -f $DROPBEAR_DSSKEY ]; then
++	    echo "Creating $DESC DSA host key."
++	    dropbearkey -t dss -f $DROPBEAR_DSSKEY
++	fi
++	;;
++  esac
++done
 +}
- 
- PACKAGES = "${PN}-dbg ${PN}-doc ${PN}"
- FILES_${PN} = "/*"
++
++case "$1" in
++  start)
++	gen_keys
++	echo -n "Starting $DESC: "
++	KEY_ARGS=""
++	test -f $DROPBEAR_DSSKEY && KEY_ARGS="$KEY_ARGS -d $DROPBEAR_DSSKEY"
++	test -f $DROPBEAR_RSAKEY && KEY_ARGS="$KEY_ARGS -r $DROPBEAR_RSAKEY"
++	start-stop-daemon -S -p $PIDFILE \
++	  -x "$DAEMON" -- $KEY_ARGS \
++	    -p $DROPBEAR_PORT $DROPBEAR_EXTRA_ARGS
++	echo "$NAME."
++	;;
++  stop)
++	echo -n "Stopping $DESC: "
++	start-stop-daemon -K -x "$DAEMON" -p $PIDFILE
++	echo "$NAME."
++	;;
++  restart|force-reload)
++	echo -n "Restarting $DESC: "
++	start-stop-daemon -K -x "$DAEMON" -p $PIDFILE
++	sleep 1
++	KEY_ARGS=""
++	test -f $DROPBEAR_DSSKEY && KEY_ARGS="$KEY_ARGS -d $DROPBEAR_DSSKEY"
++	test -f $DROPBEAR_RSAKEY && KEY_ARGS="$KEY_ARGS -r $DROPBEAR_RSAKEY"
++	start-stop-daemon -S -p $PIDFILE \
++	  -x "$DAEMON" -- $KEY_ARGS \
++	    -p $DROPBEAR_PORT $DROPBEAR_EXTRA_ARGS
++	echo "$NAME."
++	;;
++  *)
++	N=/etc/init.d/$NAME
++	echo "Usage: $N {start|stop|restart|force-reload}" >&2
++	exit 1
++	;;
++esac
++
++exit 0
+diff --git a/recipes/images/micro-image-visstrim.bb b/recipes/images/micro-image-visstrim.bb
+new file mode 100644
+index 0000000..a53b076
+--- /dev/null
++++ b/recipes/images/micro-image-visstrim.bb
+@@ -0,0 +1,48 @@
++# micro-image-visstrim
++#
++# This image is based on micro-image and contains basic packages that are needed
++# to boot Visstrim_M10 boards and use jffs2+squashfs power cut safe schema.
++#
++# The image is tested to build and run succesfully with the following machines:
++#
++#	* visstrim_m10
++#
++# Maintainer: Javier Martin <javier.martin@vista-silicon.com>
++#
++
++DISTRO_SSH_DAEMON ?= "dropbear"
++
++# Install basic files only
++IMAGE_INSTALL = "base-files \
++		 visstrim-m10-utils \
++		 base-passwd \
++		 netbase \
++                 u-boot-utils \
++		 ${DISTRO_SSH_DAEMON}"
++
++IMAGE_LINGUAS = ""
++
++# Use busybox as login manager
++IMAGE_LOGIN_MANAGER = "busybox"
++
++# Include minimum init and init scripts
++IMAGE_DEV_MANAGER = ""
++IMAGE_INIT_MANAGER = "sysvinit sysvinit-pidof"
++IMAGE_INITSCRIPTS = ""
++
++inherit image
++
++fso_rootfs_postprocess() {
++	curdir=$PWD
++	cd ${DEPLOY_DIR_IMAGE}
++	mkdir -p tmp/config0
++	mkdir -p tmp/config1
++	cp -a ${IMAGE_ROOTFS}/etc tmp/config0/
++	cp -a ${IMAGE_ROOTFS}/etc tmp/config1/
++	mkfs.jffs2 -r ./tmp -s 0x800 -e 0x20000 -o ${MACHINE}-config.jffs2 --pad=0x200000
++	rm -rf ./tmp
++	cd $curdir
++}
++
++ROOTFS_POSTPROCESS_COMMAND += "fso_rootfs_postprocess"
++
 -- 
 1.7.0.4
 
