@@ -1,38 +1,33 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1PnALj-00084L-EJ
+	(envelope-from <Tom_Rini@mentor.com>) id 1PnBLi-00048e-El
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 14:44:51 +0100
-Received: by qyk36 with SMTP id 36so115069qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Feb 2011 05:43:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=/VsOfNLFzOh69WOM4GP5pTB9Wb2xm+U/7FEK1jbOTqc=;
-	b=MXfG51pZfBoTH/sxnj4meoKg8aO4+UTAIeekpg25xU4P3reP6kAd9baHQY+KeuovJs
-	+XelpmS8hrYwjF6iZbzS1vMzszElCMnL2yDU9qTV4+WhoZ+s40w9VVNv/u9uPJ7NsO5q
-	JMpJVTDdvR1CBcMTpDvIyrINkOsrWxekE1XEI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Acv9f0UPCdqhQt//srbWFcH/hNT5wLsT64l5x6ByxJeEzuI6kZlMh64w+c//3AYe/w
-	KrRLJ4J3uZ/cuSb+4nir71/zFef1BR4EB82/wEWltLZXz7+dp0hlXSgVzyUED4oefO06
-	AeB6wuH99AN4eXyFKyFcgB6ZHCTFRPjzM5t8c=
+	Wed, 09 Feb 2011 15:48:54 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PnBKf-0005Zv-Pk from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Feb 2011 06:47:49 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 9 Feb 2011 06:47:49 -0800
+Received: from [172.30.80.130] ([172.30.80.130]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 9 Feb 2011 07:47:48 -0700
+Message-ID: <4D52A910.4060407@mentor.com>
+Date: Wed, 09 Feb 2011 07:47:44 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.229.6.207 with SMTP id a15mr14872080qca.298.1297259027540;
-	Wed, 09 Feb 2011 05:43:47 -0800 (PST)
-Received: by 10.229.193.10 with HTTP; Wed, 9 Feb 2011 05:43:47 -0800 (PST)
-In-Reply-To: <iiu4qb$8st$1@dough.gmane.org>
-References: <1297116822-30938-1-git-send-email-filip.zyzniewski@gmail.com>
-	<201102091039.27832.marcin@juszkiewicz.com.pl>
-	<AANLkTikDHBWTnf2S3j-P9_rpscdRQ7GZHVxrNLbLCXZW@mail.gmail.com>
-	<iiu4qb$8st$1@dough.gmane.org>
-Date: Wed, 9 Feb 2011 14:43:47 +0100
-Message-ID: <AANLkTimFD+VWpjv4vatsaFOWZFRN1DKDM5Wg07RvDKE9@mail.gmail.com>
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] task-base: conditional wifi and bluetooth tasks in PACKAGES
+References: <4D519C83.9060502@mentor.com>
+	<09D9BE2AC4AA764DABAA8C91E48D819E011A79A329@DEMCHP99E35MSX.ww902.siemens.net>
+In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819E011A79A329@DEMCHP99E35MSX.ww902.siemens.net>
+X-OriginalArrivalTime: 09 Feb 2011 14:47:48.0752 (UTC)
+	FILETIME=[51F78100:01CBC868]
+Subject: Re: 2011.03 release testing, starts soon!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,25 +41,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Feb 2011 13:44:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 09 Feb 2011 14:48:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 2/9/11, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-
-> That's the whole point of task-base, to get things built. You can then
-> use machine_features to install them by default or not.
+On 02/09/2011 02:25 AM, Aeschbacher, Fabrice wrote:
+> Hi all,
 >
-> Again, noone is forcing you to use task-base, so no need to break it for
-> everyone else like your patch is doing.
+> There are two things which could be useful (IMO) for OE users:
+>
+> 1. a small README file (or wiki page) just highlighting the main
+>     changes since last release (2010.12), e.g. something like
+>     "Prominent features (the cool stuff)" on http://kernelnewbies.org/LinuxChanges
+>     This would help us OE users to decice whether it is worth rebasing on the latest
+>     release now, or if it can wait
 
-Ok, thanks for the discussion. I still do not agree with the outcome,
-but it is not a big problem - I think we will just keep building the
-bigger
-set to avoid messing stuff up.
+Great idea!  I've added a place-holder to the wiki page for the release.
 
-Should I mark the patch on patchwork as rejected?
+> 2. Do not delete the release branch after 2011.03 will be released (just like
+>     it was done for 2010.12), but let it live and allow developpers committing
+>     bug-fixes (backporting choosen things?) reported back by OE users (some would
+>     would be happy to contribute this way)
 
-bye,
-Filip Zyzniewski
+My _hope_ is to not have to make a branch to take from, but we shall 
+see.  Beyond that, I see the discussion about keeping something that's 
+not just top of tree alive as an important but only related discussion. 
+  Starting from the release tag is probably the best bet, should 
+something want to happen in that direction.
+
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
