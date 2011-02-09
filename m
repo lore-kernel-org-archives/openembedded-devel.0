@@ -1,35 +1,33 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chasemaupin03@gmail.com>) id 1PnGno-0001dn-1B
+	(envelope-from <Tom_Rini@mentor.com>) id 1PnGt7-0001ll-Qo
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Feb 2011 21:38:16 +0100
-Received: by gxk20 with SMTP id 20so267616gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Feb 2011 12:37:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=6ximikdP+9pM1o8ctgeOJVKB9Coc8Sr7MAW+5x6zRu8=;
-	b=TF7ElZceEssac+t+0uMXWnbC0lvdnyoo8Kz6Ub9bqnyPY1uqWHb5k0Sa9zYodktQoA
-	GUyZIkLDPC0o8g4HP2hDStLaynNHgFsT/6JFcigMzsVXahjtGMUtM1EWXNdcCA9K8ZFb
-	zZuSpxzlvivWk6ZMKMpqMt5B7swDNUXPWw++A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=k5ujavSkvlW3vduLXUEx+ocVgftwLBG95UnBN8Mg79+3TcXz+c6eEI7bxe7bkPtFik
-	uJRsKG6kOulxOorHYFLQ1Y65h4lHx5GhB+R2OnaV7vJvSL0tuT16FBeMNwk6E3Kd6Lmz
-	BBs0xOwR8lDqbxp6NvrsmTrtzXG+qdYPvGulw=
-Received: by 10.150.136.6 with SMTP id j6mr2152268ybd.142.1297283825072;
-	Wed, 09 Feb 2011 12:37:05 -0800 (PST)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id q31sm1144640yba.3.2011.02.09.12.37.03
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 09 Feb 2011 12:37:03 -0800 (PST)
-From: Chase Maupin <chasemaupin03@gmail.com>
+	Wed, 09 Feb 2011 21:43:46 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PnGs5-0006Vz-Qs from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Feb 2011 12:42:41 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 9 Feb 2011 12:42:41 -0800
+Received: from [172.30.80.130] ([172.30.80.130]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 9 Feb 2011 13:42:39 -0700
+Message-ID: <4D52FC34.9020401@mentor.com>
+Date: Wed, 09 Feb 2011 13:42:28 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Feb 2011 14:36:59 -0600
-Message-Id: <1297283819-15670-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH] cups: fix desktop file QA issues
+References: <1297187904-19841-1-git-send-email-coolaj86@gmail.com>	<4D52EEA1.6040503@mentor.com>
+	<iius8b$ke3$1@dough.gmane.org>
+In-Reply-To: <iius8b$ke3$1@dough.gmane.org>
+X-OriginalArrivalTime: 09 Feb 2011 20:42:40.0637 (UTC)
+	FILETIME=[E4EB52D0:01CBC899]
+Subject: Re: [PATCH v4] nodejs: updated recipe to v0.2.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,89 +41,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Feb 2011 20:38:16 -0000
+X-List-Received-Date: Wed, 09 Feb 2011 20:43:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-* This patch fixes the QA issues with version 1.2.12 of cups.
-* The patch being applied was taken from
-  http://bugs.gentoo.org/show_bug.cgi?id=236706
-* Bump the PR
+On 02/09/2011 01:08 PM, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 09-02-11 20:44, Tom Rini wrote:
+>> On 02/08/2011 10:58 AM, AJ ONeal wrote:
+>>> * added version number to patches
+>>> * libev-cross-cc_0.2.6.patch - turns off execution so that
+>>> cross-compile succeeds
+>>> * node-cross-cc_0.2.6.patch - enables cross-compiling of v8 for x86,
+>>> x86_64, arm, and mips
+>>
+>> I didn't touch it in patchwork but (and I see these aren't all new issues):
+>>
+>>> diff --git a/recipes/nodejs/nodejs_0.2.6.bb
+>>> b/recipes/nodejs/nodejs_0.2.6.bb
+>>> new file mode 100644
+>>> index 0000000..560adc6
+>>> --- /dev/null
+>>> +++ b/recipes/nodejs/nodejs_0.2.6.bb
+>>> @@ -0,0 +1,32 @@
+>>> +DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
+>>> +HOMEPAGE = "http://nodejs.org"
+>>> +LICENSE = "MIT"
+>>> +
+>>> +DEPENDS = "openssl"
+>>> +
+>>> +SRC_URI = " \
+>>> +  http://nodejs.org/dist/node-v${PV}.tar.gz \
+>>> +  file://libev-cross-cc-v${PV}.patch \
+>>> +  file://node-cross-cc-v${PV}.patch \
+>>> +"
+>>> +SRC_URI[md5sum] = "b1c50ceb43bee1b221be210b7bc7a216"
+>>> +SRC_URI[sha256sum] =
+>>> "e97fe9c81ff4b569ae9a0d46e64a0572a1f171293573a5b5290bcc3996a19701"
+>>> +
+>>> +S = "${WORKDIR}/node-v${PV}"
+>>> +
+>>> +# v8 errors out if you have set CCACHE
+>>> +CCACHE = ""
+>>> +
+>>> +do_configure () {
+>>> +  ./configure --prefix=${prefix} --without-snapshot
+>>> +}
+>>
+>> Why isn't this just EXTRA_OECONF = "--without-snapshot" and using the
+>> default do_configure, compile and install?
+>
+> It's one of those python abominations that try to look like autotools :(
+> And as usual, it has even more bugs than autotools when you try to
+> crosscompile
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
----
- .../0001-cups-desktop-fix-cups-desktop-file.patch  |   48 ++++++++++++++++++++
- recipes/cups/cups_1.2.12.bb                        |    4 +-
- 2 files changed, 51 insertions(+), 1 deletions(-)
- create mode 100644 recipes/cups/cups-1.2.12/0001-cups-desktop-fix-cups-desktop-file.patch
+Retch.  So, unless someone pops up within the next 24h and says why they 
+did something in patchwork or otherwise objects, I'll push this.  Thanks!
 
-diff --git a/recipes/cups/cups-1.2.12/0001-cups-desktop-fix-cups-desktop-file.patch b/recipes/cups/cups-1.2.12/0001-cups-desktop-fix-cups-desktop-file.patch
-new file mode 100644
-index 0000000..bb76d17
---- /dev/null
-+++ b/recipes/cups/cups-1.2.12/0001-cups-desktop-fix-cups-desktop-file.patch
-@@ -0,0 +1,48 @@
-+From 85710dd8f749a447301e1522e6022b62e29d6f5d Mon Sep 17 00:00:00 2001
-+From: Chase Maupin <Chase.Maupin@ti.com>
-+Date: Wed, 9 Feb 2011 14:20:51 -0600
-+Subject: [PATCH] cups desktop: fix cups desktop file
-+
-+* Fix the cups.desktop file to address issues reported by the
-+  desktop-file-validate program.  This resolves QA error
-+  issues generated by the insane class:
-+    ERROR: QA Issue with cups: cups.desktop: warning: value
-+        "Application;System;X-Red-Hat-Base;" for key "Categories" in group "
-+        Desktop Entry" contains a deprecated value "Application"
-+    ERROR: QA Issue with cups: cups.desktop: warning: key "Encoding" in group
-+        "Desktop Entry" is deprecated
-+    ERROR: QA Issue with cups: cups.desktop: warning: value "" for key
-+        "Path" in group "Desktop Entry" does not look like an absolute path
-+    ERROR: QA Issue with cups: cups.desktop: warning: key "TerminalOptions"
-+        in group "Desktop Entry" is deprecated
-+* This patch was obtained from http://bugs.gentoo.org/show_bug.cgi?id=236706
-+  and thank to Pacho Ramos <pacho@gentoo.org> for the fix
-+
-+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-+---
-+ desktop/cups.desktop |    5 +----
-+ 1 files changed, 1 insertions(+), 4 deletions(-)
-+
-+diff --git a/desktop/cups.desktop b/desktop/cups.desktop
-+index dabfba3..28b98d9 100644
-+--- a/desktop/cups.desktop
-++++ b/desktop/cups.desktop
-+@@ -1,14 +1,11 @@
-+ [Desktop Entry]
-+-Categories=Application;System;X-Red-Hat-Base;
-+-Encoding=UTF-8
-++Categories=System;X-Red-Hat-Base;
-+ Exec=htmlview http://localhost:631/
-+ GenericName=
-+ Icon=cups
-+ MimeType=
-+-Path=
-+ StartupNotify=false
-+ Terminal=false
-+-TerminalOptions=
-+ Type=Application
-+ X-DCOP-ServiceType=
-+ X-KDE-SubstituteUID=false
-+-- 
-+1.7.0.4
-+
-diff --git a/recipes/cups/cups_1.2.12.bb b/recipes/cups/cups_1.2.12.bb
-index 6df928a..167d353 100644
---- a/recipes/cups/cups_1.2.12.bb
-+++ b/recipes/cups/cups_1.2.12.bb
-@@ -1,5 +1,7 @@
- require cups.inc
--PR = "${INC_PR}.2"
-+PR = "${INC_PR}.3"
-+
-+SRC_URI += "file://0001-cups-desktop-fix-cups-desktop-file.patch"
- 
- SRC_URI[md5sum] = "d410658468384b5ba5d04a808f6157fe"
- SRC_URI[sha256sum] = "b4ff8e934da7db32d5654360ea9068faa0ed5a00fde02161ae53c2052510d00f"
 -- 
-1.7.0.4
-
+Tom Rini
+Mentor Graphics Corporation
 
 
