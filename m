@@ -1,32 +1,42 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Pndc4-00072t-60
+	(envelope-from <kristoffer.ericson@gmail.com>) id 1PndgU-00023h-0k
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Feb 2011 21:59:40 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Pndb0-0001lg-NK from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Feb 2011 12:58:34 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Thu, 10 Feb 2011 12:58:34 -0800
-Received: from [172.30.80.144] ([172.30.80.144]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 10 Feb 2011 13:58:33 -0700
-Message-ID: <4D545173.8080904@mentor.com>
-Date: Thu, 10 Feb 2011 13:58:27 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+	Thu, 10 Feb 2011 22:04:14 +0100
+Received: by fxm17 with SMTP id 17so1850672fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Feb 2011 13:03:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:cc:subject:message-id:reply-to
+	:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=i2Qq1JWArlzx3tKYmEfXurpxZOfLEQiOyyLaBjcILiI=;
+	b=A6V/wPF8uqRcmB/RPQGTR5D0bTtlKJv4Md3nP1o8YYw2gPVKFFXXKMuBRG8SLS63AP
+	0QVMjznYZHpXquPmocEpz+cNABwMpNf6cUe6oSegCc/+hLR07h0bnNyHPyInNDvLvSnf
+	tdfIbvqN9MMqxmj9DDCFqt4/G2h8zu2tz42Zw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:reply-to:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=gTpYPgDZD59cCrzMy7ODiPvUBNBIJGcb7mMQi1uxcPA6NNOSyvsMCQV7Li8oaZ7Ss9
+	xDA9+a0hTQhiEezSbiwtobCiYzW+7YoDFixcqEU2TCdVhlL0gwjWQLlSL/DVHD0w09Hh
+	OPaU+E+2kBTqUvpSYv6Q12Y5hXw57u/5UDYnw=
+Received: by 10.223.110.77 with SMTP id m13mr7090540fap.86.1297371789276;
+	Thu, 10 Feb 2011 13:03:09 -0800 (PST)
+Received: from localhost (c-5fdbe555.010-30-6c6b7012.cust.bredbandsbolaget.se
+	[85.229.219.95])
+	by mx.google.com with ESMTPS id j12sm30755fax.9.2011.02.10.13.03.06
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 10 Feb 2011 13:03:07 -0800 (PST)
+Date: Thu, 10 Feb 2011 23:05:06 +0100
+From: Kristoffer Ericson <kristoffer.ericson@gmail.com>
+To: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+Message-ID: <20110210220506.GA11237@BoggieMan>
+References: <1297282989-7580-1-git-send-email-filip.zyzniewski@gmail.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4D544976.6010800@drewtech.com>
-In-Reply-To: <4D544976.6010800@drewtech.com>
-X-OriginalArrivalTime: 10 Feb 2011 20:58:33.0672 (UTC)
-	FILETIME=[4762AC80:01CBC965]
-Subject: Re: openembedded with a prebuilt external toolchain
+In-Reply-To: <1297282989-7580-1-git-send-email-filip.zyzniewski@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] base-files: update fstab for jornada7xx
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,67 +50,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Feb 2011 20:59:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Feb 2011 21:04:14 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-On 02/10/2011 01:24 PM, Joey Oravec wrote:
-> Hi,
->
-> I'm trying to use openembedded with an external prebuilt toolchain. The
-> docs at http://docs.openembedded.org/usermanual/usermanual.html mark
-> this as TODO so maybe we can "do" that in this email chain. :)
->
-> Marvell provides a *.tar.gz with gcc and C libraries, which I've
-> uncompressed somewhere in my home directory. My goal is to build a root
-> filesystem with some assortment of packages, but at this point I'm just
-> trying "bitbake nano" which is the very first example in the Getting
-> Started. That seems like a logical start to board bring-up.
->
-> I'm assuming that I need to add some lines to build/conf/local.conf that
-> tell OE to make no attempt at building its own compiler or C library (it
-> can't anyway, it doesn't know my chip!) and to call my pre-built one
-> instead. It looks like I'd want to add a few lines about TOOLCHAIN_*,
-> but that uses a recipe for external toolchain, which assumes that it has
-> some meta toolchain, and I'm floundering and getting nowhere. Couldn't
-> find any of these magic variables documented in the usermanual so I've
-> been digging through recipes to learn any of this.
->
-> Is it possible to add a few lines that tell OE the path and filename of
-> my compiler? Or is it more complicated than that?
+On Wed, Feb 09, 2011 at 09:23:09PM +0100, Filip Zyzniewski wrote:
+> We use the scsi subsystem for PCMCIA ATA access, so device files are
+> /dev/sda*, not /dev/hda*.
+> See recipes/linux/linux-jlime-jornada7xx-2.6.34+git/defconf_jlime:702.
 
-We talked about this a little on IRC and I provided the example of how 
-to use the CodeSourcery recipes that exist today.  The marvell toolchain 
-however will need it's own special love.  To start with, using the CSL 
-recipe is roughly:
-### CSL public ARM does <arch>-none-linux, so fill in the -none.
-#TOOLCHAIN_VENDOR = "-none"
-### CSL public ia32 does i686-pc-linux, so fill in the -pc.
-#TOOLCHAIN_VENDOR = "-pc"
+Applied, Thx
 
-#### Bring in external-toolchain-csl.bb
-#TOOLCHAIN_BRAND = "csl"
-#TOOLCHAIN_TYPE = "external"
-
-### Where the CSL version is installed.
-#TOOLCHAIN_PATH = "/scratch/ia32-2010.09"
-### Where inside the CSL install the target libraries exist.
-#TOOLCHAIN_SYSPATH = "${TOOLCHAIN_PATH}/i686-pc-linux-gnu"
-### Add tools to the PATH automatically.
-#PATH_prepend = "${TOOLCHAIN_PATH}/bin:"
-
-Now what you'll want to do is make an external-toolchain-marvell.bb and 
-set TOOLCHAIN_BRAND to "marvell" and tweak TOOLCHAIN_VENDOR such that we 
-go from what OE normally says TARGET_SYS is to what your tools actually 
-say it is.  Then it's a matter of tweaking the contents of 
-external-toolchain-marvell.bb to copy the right things out of the 
-marvell install and into where OE wants them.  In this regard, the -csl 
-recipe may be more instructive than the -generic recipe as the -generic 
-recipe (along with external-toolchain.bb) are targeted at toolchains 
-exported by OE and thus require little mangling to work.
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+> 
+> Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+> ---
+>  recipes/base-files/base-files/jornada7xx/fstab |    6 +++---
+>  1 files changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/recipes/base-files/base-files/jornada7xx/fstab b/recipes/base-files/base-files/jornada7xx/fstab
+> index f0c23d9..a06a1b6 100644
+> --- a/recipes/base-files/base-files/jornada7xx/fstab
+> +++ b/recipes/base-files/base-files/jornada7xx/fstab
+> @@ -1,7 +1,7 @@
+>  proc		/proc	proc	defaults	        0  0
+> -/dev/hda2       /       ext2    defaults                0  0
+> -/dev/hda1	/mnt/cf	auto	defaults,sync,noauto	0  0
+> -/dev/hda3       none    swap    sw                      0  0
+> +/dev/sda2       /       ext2    defaults                0  0
+> +/dev/sda1	/mnt/cf	auto	defaults,sync,noauto	0  0
+> +/dev/sda3       none    swap    sw                      0  0
+>  tmpfs		/var/volatiles	tmpfs	defaults	        0  0
+>  tmpfs		/mnt/ram	tmpfs	defaults	0  0
+>  tmpfs                /dev/shm             tmpfs      mode=0777             0  0
+> -- 
+> 1.7.1
 
 
