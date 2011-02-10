@@ -1,27 +1,40 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PnRB3-0005J7-Eo
+	(envelope-from <martin.jansa@gmail.com>) id 1PnRoy-00068d-JT
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Feb 2011 08:42:57 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 50D7D49128D;
-	Thu, 10 Feb 2011 08:41:55 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 10 Feb 2011 08:41:55 +0100
-Message-ID: <4D5396BF.6070700@dresearch.de>
-Date: Thu, 10 Feb 2011 08:41:51 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+	Thu, 10 Feb 2011 09:24:12 +0100
+Received: by fxm17 with SMTP id 17so1140702fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Feb 2011 00:23:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=7MSJdCjVgy8uMZ5AIZEsXzypFFPbT8fYrQuvMaQJSMc=;
+	b=h2e04zey6Lxk+sDpevZoi0ytrrTfLj2sCYLb/06URIIAjpnTxkTZUSnC+pDo1ctt34
+	LI8CyQcQUCok/KIkYL3vjYpMH0NC+HfSGpVf8QHJAAC2mN+LSvBsiXFt1vpsVwiNtmub
+	D5MsjCe6jSG1pLfRKal03Db2YdCahRQgF6lB4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=eV12T876I3cuffo6FNErFX5eOwUwqVvOk5QMyUOCmUpLXprBvy6fA/hkXJLqUXxkbF
+	mmBDJ1CqtFrh4pKT00GfICarcD1OUmIoU6KhlsI+KgOx2rV5HMHnepC5TpdU5C2aVPPj
+	ih9KYhSM9KnwQBJW3nXmx6xoPZubZ/wEPLubo=
+Received: by 10.223.71.195 with SMTP id i3mr10959376faj.149.1297326188648;
+	Thu, 10 Feb 2011 00:23:08 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id b7sm551040faa.42.2011.02.10.00.23.06
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 10 Feb 2011 00:23:07 -0800 (PST)
+Date: Thu, 10 Feb 2011 09:23:41 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Tom Rini <tom_rini@mentor.com>
+Message-ID: <20110210082340.GA10554@jama>
+References: <4D51566B.9060603@mentor.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <AANLkTi=QkexH5odXt9-6a9SFe=hhyv=tsiBXOhHt-u9p@mail.gmail.com>	<4D4C1986.8090908@dresearch.de>	<4D52472F.3010305@dresearch.de>
-	<4D52AC99.1030202@mentor.com>
-In-Reply-To: <4D52AC99.1030202@mentor.com>
-X-OriginalArrivalTime: 10 Feb 2011 07:41:55.0342 (UTC)
-	FILETIME=[FD5C52E0:01CBC8F5]
-Subject: Re: testing branch 2011-02-03
+In-Reply-To: <4D51566B.9060603@mentor.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,51 +48,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Feb 2011 07:42:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 10 Feb 2011 08:24:12 -0000
+X-Groupsio-MsgNum: 28992
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="mP3DRpeJDSE+ciuQ"
+Content-Disposition: inline
+
+--mP3DRpeJDSE+ciuQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Am 09.02.2011 16:02, schrieb Tom Rini:
-> On 02/09/2011 12:50 AM, Steffen Sledz wrote:
->> Am 04.02.2011 16:21, schrieb Steffen Sledz:
->>> On 02/04/2011 02:08 PM, Cliff Brake wrote:
->>>> master has been merged to testing-next and is ready for clean builds=
-.
->>>
->>> My first try with the new branch and minimal-image failed configuring=
- libtool-native-2.2.6b-r28.1 with a perl version mismatch error (see atta=
-ched log). :(
->>>
->>> Build Configuration:
->>> BB_VERSION        =3D "1.10.2"
->>> METADATA_BRANCH   =3D "testing-next"
->>> METADATA_REVISION =3D "f06b04c"
->>> TARGET_ARCH       =3D "arm"
->>> TARGET_OS         =3D "linux-gnueabi"
->>> MACHINE           =3D "hipox"
->>> DISTRO            =3D "angstrom"
->>> DISTRO_VERSION    =3D "2010.7-test-20110204"
->>> TARGET_FPU        =3D "soft"
->>>
->>> openSUSE 11.3 32-bit
->>
->> Ping!
+On Tue, Feb 08, 2011 at 07:42:51AM -0700, Tom Rini wrote:
+> Hey all,
 >=20
-> Have you tried current for anything?  Martin fixed this problem shortly=
- after the tag I believe.
+> As March is fast approaching I want to gather the list of DISTRO /=20
+> MACHINE / BBPKGS targets that the various distributions would like to=20
+> see at least compile tested (volunteers for HW testing welcome!).=20
+> Today, I have the following setup to be built:
+>=20
+> minimal / minimal-uclibc:
+> qemux86/ppc/arm/mips/mips64/sh4/mipsel, mpc8315e-rdb, p2020ds, p2020rdb=
+=20
+> +=20
+> nas-server-image/native-sdk-image/console-image/minimal-image/x11-image/m=
+eta-toolchain/qt4-x11-demo-image/qt4e-demo-image
+>=20
+> angstrom-2008.1 / angstrom-2010.x:
+> hawkboard, mini2440, mini6410, beagleboard + console-image /=20
+> qt4-x11-demo-image / qt4e-demo-image
+>=20
+> slugos / ucslug:
+> nslu2be/le + slugos-image
 
-OK, it seems to be fixed in current.
+I'll try to test/build it myself, but if you have some spare cpu power
+then please add:
 
-Steffen
+Distro: shr
+Machine: om-gta02, nokia900
+Image: shr-image
+
+Thanks!
 
 --=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--mP3DRpeJDSE+ciuQ
+Content-Type: application/pgp-signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
 
+iEYEARECAAYFAk1ToIwACgkQN1Ujt2V2gBxx/gCdEtXPWdQag6z7yoGFty2N2/+C
+9YoAoJpgN+QxmPifboy2jTo72vboSpsz
+=o3yj
+-----END PGP SIGNATURE-----
+
+--mP3DRpeJDSE+ciuQ--
