@@ -1,25 +1,37 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PnWgS-0003mL-G8
+	(envelope-from <kergoth@gmail.com>) id 1PnWtz-00040o-2A
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Feb 2011 14:35:44 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 04DAE491295
+	Thu, 10 Feb 2011 14:49:43 +0100
+Received: by wwi17 with SMTP id 17so1294987wwi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Feb 2011 14:34:42 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 10 Feb 2011 14:34:42 +0100
-Message-ID: <4D53E971.5090109@dresearch.de>
-Date: Thu, 10 Feb 2011 14:34:41 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+	Thu, 10 Feb 2011 05:48:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
+	:date:x-google-sender-auth:message-id:subject:to:content-type;
+	bh=JwoP6gfyEfH4M6lr5UOEfbHSPcDdjexgSiIG3Vx7bCg=;
+	b=uRLc/gRUdHQ675hKoG8Xss1ds8lVgMdw4rnoUaiR5rmMevjNCx/A7VCdzQK9ZvGTVk
+	DbIXMpgn6y79WCBdwb7I0PRBGXmBAHhhqgR4JeIRByrIv48PTTEBmmUQdO3Sm8aT6BaN
+	xN8yY1ueEqscEpR7xL5KNE62UfzTFpPNMMnDs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=ikXazed/HJng73UgXm6heY0tPL8yGgNuy5lBoqDrn1sDEEhF7Pw+NZrGuB+tKpsrVB
+	5jVXVzemL0FAJfWxUBWKO2Raj+2BdxQjJME6zvALR2iZe5Qj3bYeMAXpFcyMBxoCgkFm
+	6B+0bbNDQaXnlZbtDirQAqZW85WXQ2GD3t3fM=
+Received: by 10.216.19.207 with SMTP id n57mr20950132wen.30.1297345710995;
+	Thu, 10 Feb 2011 05:48:30 -0800 (PST)
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 10 Feb 2011 13:34:42.0021 (UTC)
-	FILETIME=[45AF3950:01CBC927]
-Subject: different access rights for oe branches?
+Sender: kergoth@gmail.com
+Received: by 10.216.17.11 with HTTP; Thu, 10 Feb 2011 05:48:10 -0800 (PST)
+In-Reply-To: <4D53E971.5090109@dresearch.de>
+References: <4D53E971.5090109@dresearch.de>
+From: Chris Larson <clarson@kergoth.com>
+Date: Thu, 10 Feb 2011 06:48:10 -0700
+X-Google-Sender-Auth: tIqQYDXkOqPELBFpss2Z80P67wI
+Message-ID: <AANLkTimEYm1sDsLob7rwkZy8GshO2KxihZAQBm4azB5e@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: different access rights for oe branches?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,28 +45,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Feb 2011 13:35:44 -0000
+X-List-Received-Date: Thu, 10 Feb 2011 13:49:43 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-We like to create a branch specific for our hipox machine.
+On Thu, Feb 10, 2011 at 6:34 AM, Steffen Sledz <sledz@dresearch.de> wrote:
+> We like to create a branch specific for our hipox machine.
+>
+> Is it possible to define access rights different to the dev-branch here?
+>
+> We would like to give write access to some of our developers which do not have/need write access do dev. In opposite it would be nice to limit the write access to these maintainers.
 
-Is it possible to define access rights different to the dev-branch here?
-
-We would like to give write access to some of our developers which do not=
- have/need write access do dev. In opposite it would be nice to limit the=
- write access to these maintainers.
-
-Steffen
-
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
-
+We use gitolite now, which can indeed exert control over branch access
+for the users, afaik.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
