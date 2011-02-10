@@ -1,40 +1,38 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PnRoy-00068d-JT
+	(envelope-from <stefan@datenfreihafen.org>) id 1PnRx9-0002EQ-7a
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Feb 2011 09:24:12 +0100
-Received: by fxm17 with SMTP id 17so1140702fxm.6
+	Thu, 10 Feb 2011 09:32:39 +0100
+Received: from [2001:638:602:1183:9903:4c2c:3413:de08] (helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
+	id 1PnRw6-0001fx-Ht by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Feb 2011 00:23:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=7MSJdCjVgy8uMZ5AIZEsXzypFFPbT8fYrQuvMaQJSMc=;
-	b=h2e04zey6Lxk+sDpevZoi0ytrrTfLj2sCYLb/06URIIAjpnTxkTZUSnC+pDo1ctt34
-	LI8CyQcQUCok/KIkYL3vjYpMH0NC+HfSGpVf8QHJAAC2mN+LSvBsiXFt1vpsVwiNtmub
-	D5MsjCe6jSG1pLfRKal03Db2YdCahRQgF6lB4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=eV12T876I3cuffo6FNErFX5eOwUwqVvOk5QMyUOCmUpLXprBvy6fA/hkXJLqUXxkbF
-	mmBDJ1CqtFrh4pKT00GfICarcD1OUmIoU6KhlsI+KgOx2rV5HMHnepC5TpdU5C2aVPPj
-	ih9KYhSM9KnwQBJW3nXmx6xoPZubZ/wEPLubo=
-Received: by 10.223.71.195 with SMTP id i3mr10959376faj.149.1297326188648;
-	Thu, 10 Feb 2011 00:23:08 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id b7sm551040faa.42.2011.02.10.00.23.06
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 10 Feb 2011 00:23:07 -0800 (PST)
-Date: Thu, 10 Feb 2011 09:23:41 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Tom Rini <tom_rini@mentor.com>
-Message-ID: <20110210082340.GA10554@jama>
-References: <4D51566B.9060603@mentor.com>
+	Thu, 10 Feb 2011 09:31:37 +0100
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1PnRw5-0001cv-CQ
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Feb 2011 09:31:33 +0100
+Date: Thu, 10 Feb 2011 09:31:33 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110210083133.GL28019@excalibur.local>
+References: <4D519C83.9060502@mentor.com>
+	<09D9BE2AC4AA764DABAA8C91E48D819E011A79A329@DEMCHP99E35MSX.ww902.siemens.net>
+	<20110209095644.GE28019@excalibur.local>
+	<iitplc$ago$1@dough.gmane.org>
+	<AANLkTinrp6netE73j_iQmHu+sA5T4sUDEJJbijL45dKR@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <4D51566B.9060603@mentor.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
+In-Reply-To: <AANLkTinrp6netE73j_iQmHu+sA5T4sUDEJJbijL45dKR@mail.gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
+	autolearn=ham version=3.2.5
+Subject: Re: 2011.03 release testing, starts soon!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,60 +46,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Feb 2011 08:24:12 -0000
-X-Groupsio-MsgNum: 28992
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="mP3DRpeJDSE+ciuQ"
+X-List-Received-Date: Thu, 10 Feb 2011 08:32:39 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
---mP3DRpeJDSE+ciuQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello.
 
-On Tue, Feb 08, 2011 at 07:42:51AM -0700, Tom Rini wrote:
-> Hey all,
->=20
-> As March is fast approaching I want to gather the list of DISTRO /=20
-> MACHINE / BBPKGS targets that the various distributions would like to=20
-> see at least compile tested (volunteers for HW testing welcome!).=20
-> Today, I have the following setup to be built:
->=20
-> minimal / minimal-uclibc:
-> qemux86/ppc/arm/mips/mips64/sh4/mipsel, mpc8315e-rdb, p2020ds, p2020rdb=
-=20
-> +=20
-> nas-server-image/native-sdk-image/console-image/minimal-image/x11-image/m=
-eta-toolchain/qt4-x11-demo-image/qt4e-demo-image
->=20
-> angstrom-2008.1 / angstrom-2010.x:
-> hawkboard, mini2440, mini6410, beagleboard + console-image /=20
-> qt4-x11-demo-image / qt4e-demo-image
->=20
-> slugos / ucslug:
-> nslu2be/le + slugos-image
+On Wed, 2011-02-09 at 12:30, Khem Raj wrote:
+> On Wed, Feb 9, 2011 at 2:18 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> > On 09-02-11 10:56, Stefan Schmidt wrote:
+> >
+> >>> 2. Do not delete the release branch after 2011.03 will be released (just like
+> >>>    it was done for 2010.12), but let it live and allow developpers committing
+> >>>    bug-fixes (backporting choosen things?) reported back by OE users (some would
+> >>>    would be happy to contribute this way)
+> >>
+> >> That was already discussed. We make a tag with the release rev from which can be
+> >> branched again _if_ people are stepping up to support this branch on a mid or
+> >> long term base.
+> >>
+> >> The branch Tom is using until the release is pretty useless froma history point
+> >> of view (all changes must be in master as well). When he thinks the release is
+> >> good enough the tag gets added and the old branch deleted. For the last release
+> >> nobody cared to support it afterwards with bugfixes so no release branch was
+> >> created.
+> >>
+> >> I'm thinking about this for the upcoming release. If all works well we will base
+> >> a product on it which I would like to support directly from such a release
+> >> branch.
+> >>
+> >> The hard part is how people could decide on pooling resources on this. Defining
+> >> goals for such a branch and stuff. E.g. only take serious fixes? What about
+> >> package updates? Security fixes? changes on the toolchain or classes?
+> >>
+> 
+> I would suggest to take only bugfixes and refrain from infrastructure
+> changes which usually
+> happen metadata wide and toolchain and classes are biggest part of
+> this and with time backports
+> into long term branches become more and more complex and painful and
+> it may be that you have to do
+> entirely different patch to solve the same issue in this branch which
+> has been fixed differently upstream
 
-I'll try to test/build it myself, but if you have some spare cpu power
-then please add:
+Staying away from infrastructure and toolchain changes is something I really
+want to see for such a branch.
 
-Distro: shr
-Machine: om-gta02, nokia900
-Image: shr-image
+From my BugLabs side I would expect bug fixes but also some package updates.
+That would be stuff based on the java/osgi framework we are deploying so
+hopefully it would not make problems for anyone else. I don't expect to much
+problems with that.
 
-Thanks!
+With regards to the lifetime I don't see this as a several years branch fo our
+product (thinking about oe-core for the next release). Obviously it is still
+fine for other people to use it that long. The current stable branch is a good
+example for this. It is still used and different companies/people are happy with
+it having no updates at all for some time. :)
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+I would expect something else for the branch on top of the 2011-03 release. Some
+more changes in the begining while fixing problems that poped up after the tag
+was created but commits will slow down after some months.
 
---mP3DRpeJDSE+ciuQ
-Content-Type: application/pgp-signature
+> I think if such a branch is to be created it should be created from
+> the release tag after the release happens
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
+Agreed.
 
-iEYEARECAAYFAk1ToIwACgkQN1Ujt2V2gBxx/gCdEtXPWdQag6z7yoGFty2N2/+C
-9YoAoJpgN+QxmPifboy2jTo72vboSpsz
-=o3yj
------END PGP SIGNATURE-----
+> >> This is up to the group who wants to support such a branch. Anyone else
+> >> interested in doing this for 2011-03?
+> 
+> If such a branch is expected for long term then its better to decide
+> its policies on patches
+> from upstream pov all fixes that go into this branch should first go
+> into master if its not
+> a direct backport of some sort. That way we can be sure that we dont
+> lose changes that should be in master.
 
---mP3DRpeJDSE+ciuQ--
+Agreed as well. It gets a mess if we start fixing stuff in the release branch
+only.
+
+regards
+Stefan Schmidt
+
+
