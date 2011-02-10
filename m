@@ -1,31 +1,32 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mark.hatle@windriver.com>) id 1PnXaX-0004zh-5t
+	(envelope-from <Tom_Rini@mentor.com>) id 1PnXvK-0005Io-UZ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Feb 2011 15:33:41 +0100
-Received: from ALA-MAIL03.corp.ad.wrs.com (ala-mail03 [147.11.57.144])
-	by mail.windriver.com (8.14.3/8.14.3) with ESMTP id p1AEWVKn024829;
-	Thu, 10 Feb 2011 06:32:32 -0800 (PST)
-Received: from ala-mail06.corp.ad.wrs.com ([147.11.57.147]) by
-	ALA-MAIL03.corp.ad.wrs.com with Microsoft SMTPSVC(6.0.3790.1830); 
-	Thu, 10 Feb 2011 06:32:31 -0800
-Received: from Macintosh-5.local ([172.25.36.226]) by
-	ala-mail06.corp.ad.wrs.com with Microsoft SMTPSVC(6.0.3790.1830); 
-	Thu, 10 Feb 2011 06:32:31 -0800
-Message-ID: <4D53F6FE.80604@windriver.com>
-Date: Thu, 10 Feb 2011 08:32:30 -0600
-From: Mark Hatle <mark.hatle@windriver.com>
-Organization: Wind River Systems
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
+	Thu, 10 Feb 2011 15:55:11 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PnXuE-0004Z1-Km from Tom_Rini@mentor.com ;
+	Thu, 10 Feb 2011 06:54:02 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Thu, 10 Feb 2011 06:54:02 -0800
+Received: from [172.30.80.144] ([172.30.80.144]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 10 Feb 2011 07:54:01 -0700
+Message-ID: <4D53FC03.6090104@mentor.com>
+Date: Thu, 10 Feb 2011 07:53:55 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4D53C412.9090804@dresearch.de>
-	<1297339435.2178.23.camel@phil-desktop>
-In-Reply-To: <1297339435.2178.23.camel@phil-desktop>
-X-OriginalArrivalTime: 10 Feb 2011 14:32:31.0393 (UTC)
-	FILETIME=[59976110:01CBC92F]
-Subject: Re: base-files vs. FHS-2.3
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <4D51566B.9060603@mentor.com> <20110210082340.GA10554@jama>
+In-Reply-To: <20110210082340.GA10554@jama>
+X-OriginalArrivalTime: 10 Feb 2011 14:54:01.0423 (UTC)
+	FILETIME=[5A8255F0:01CBC932]
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,60 +40,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Feb 2011 14:33:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 10 Feb 2011 14:55:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 2/10/11 6:03 AM, Phil Blundell wrote:
-> On Thu, 2011-02-10 at 11:55 +0100, Steffen Sledz wrote:
->> While dealing with the /var subdirs i hit some differences between Filesystem Hierarchy Standard (current FHS-2.3) and the base-files package.
+On 02/10/2011 01:23 AM, Martin Jansa wrote:
+> On Tue, Feb 08, 2011 at 07:42:51AM -0700, Tom Rini wrote:
+>> Hey all,
 >>
->> One point is that /var/tmp is symlinked to volatile/tmp but according to the standard this dir contains "Temporary files *preserved between system reboots* ".
+>> As March is fast approaching I want to gather the list of DISTRO /
+>> MACHINE / BBPKGS targets that the various distributions would like to
+>> see at least compile tested (volunteers for HW testing welcome!).
+>> Today, I have the following setup to be built:
 >>
->> Also /var/cache is symlinked to volatile/cache but the standard describes "The data must remain valid between invocations of the application *and rebooting the system.* " what i would read in the way that /var/cache should be persistent too.
+>> minimal / minimal-uclibc:
+>> qemux86/ppc/arm/mips/mips64/sh4/mipsel, mpc8315e-rdb, p2020ds, p2020rdb
+>> +
+>> nas-server-image/native-sdk-image/console-image/minimal-image/x11-image/meta-toolchain/qt4-x11-demo-image/qt4e-demo-image
 >>
->> May be there are other differences.
+>> angstrom-2008.1 / angstrom-2010.x:
+>> hawkboard, mini2440, mini6410, beagleboard + console-image /
+>> qt4-x11-demo-image / qt4e-demo-image
 >>
->> In my opinion the symlinking in base-files is buggy and should be fixed. Or am i wrong here?
-> 
-> It probably would be good to have a version of base-files which was
-> fully FHS conformant.  But there are a significant number of OE target
-> systems where it is simply impossible to comply with these requirements
-> since there is no persistent read/write storage available: the only
-> choice is between flash (persistent but read-only) and ramdisk
-> (read-write but volatile).  
-> 
-> Clearly, placing /var/tmp or /var/cache in a readonly location is
-> unlikely to produce any useful results so linking them into volatile/ is
-> the least bad option in that situation.  Any change to base-files would
-> need to be done with some level of care in order to not break those
-> kinds of setups which do work today.  I guess it should be a DISTRO
-> decision whether or not to adhere to the FHS in this area.
+>> slugos / ucslug:
+>> nslu2be/le + slugos-image
+>
+> I'll try to test/build it myself, but if you have some spare cpu power
+> then please add:
+>
+> Distro: shr
+> Machine: om-gta02, nokia900
+> Image: shr-image
 
-I echo this.  In my experiences the default filesystem should be FHS compliant,
-but there must be a variant that works for specific embedded projects that
-simply do not have writable storage.
+Added.
 
-The ramifications of this are that /var/tmp, /var/cache are both transient over
-reboots.  Almost all applications will deal with this gracefully, so it's not
-really an issue.  It is something to be aware of though when doing software
-integration and validation that the problems must be able to create tmp and
-cache files over again if the data is not already on the system.
-
-The important things when following the FHS really are R/O vs R/W support, as
-well a boot vs run-time.  (i.e. things required on '/' vs things that should
-live in '/usr'...)
-
---Mark
-
-> p.
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
