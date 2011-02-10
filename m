@@ -1,44 +1,24 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kristoffer.ericson@gmail.com>) id 1PndhM-00026I-OC
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Feb 2011 22:05:08 +0100
-Received: by fxm17 with SMTP id 17so1851458fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Feb 2011 13:04:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id:reply-to
-	:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=/3y60Pc6/5pRQlfUCTCNIqexnBYKuRRWzG9d2X7SXhQ=;
-	b=kmt6ksgEXMT4NZ4smUfbgtPtOkuyJdvH2oyLkv819UnGGnkrUAQ8R6nF9xnTybWntb
-	sM9U68k41sYyjWqDX8Hgm3d5dDpcDb3pliTdqmudOhG6B0jrFuTTb3Bvo16kXxbtAQhU
-	P9TdT8I5smTaB7ihhjtOhPRaEnuoATyTayzWs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:reply-to:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=iclhPm1kl1SME51gszw9RhX+A/InrdvM6MwsN2yxPCzT+kA6BnNAr6eZGEC26f3mvb
-	anl98M0NlG1A36Qx9VPYjk/5MUGeoK/O3Ak7pFZAAlUQjMjhOWNzAXpd41u8fXtxhGjK
-	uB3EIXaflrVcg4wYxMMmAg7x0BwlwBKYRjcOA=
-Received: by 10.223.95.203 with SMTP id e11mr19507856fan.60.1297371844246;
-	Thu, 10 Feb 2011 13:04:04 -0800 (PST)
-Received: from localhost (c-5fdbe555.010-30-6c6b7012.cust.bredbandsbolaget.se
-	[85.229.219.95])
-	by mx.google.com with ESMTPS id y3sm25787fai.38.2011.02.10.13.04.02
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 10 Feb 2011 13:04:03 -0800 (PST)
-Date: Thu, 10 Feb 2011 23:06:02 +0100
-From: Kristoffer Ericson <kristoffer.ericson@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20110210220602.GC11237@BoggieMan>
-References: <1297282989-7580-1-git-send-email-filip.zyzniewski@gmail.com>
-	<AANLkTinDhX0fSSTNa9CuiFv7Ty_4D=5bOhvfHo8OgzQi@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <AANLkTinDhX0fSSTNa9CuiFv7Ty_4D=5bOhvfHo8OgzQi@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] base-files: update fstab for jornada7xx
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PneiF-0006Aj-0p for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Feb 2011 23:10:07 +0100
+Received: from f053040180.adsl.alicedsl.de ([78.53.40.180]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PnehE-0005h1-5d for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Feb 2011 22:09:04 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1297370653.3877.26.camel@mattotaupa>
+References: <1297363922.3877.24.camel@mattotaupa>
+	<1297370653.3877.26.camel@mattotaupa>
+Date: Thu, 10 Feb 2011 23:09:03 +0100
+Message-ID: <1297375743.3877.29.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: libsdl-mixer_1.2.11: task compile fails with `/bin/sed: can't read =/usr/lib/libts.la: No such file or directory`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,58 +32,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Feb 2011 21:05:08 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 10 Feb 2011 22:10:07 -0000
+X-Groupsio-MsgNum: 29021
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-tUReP1byADX4dLAytLXU"
 
-On Thu, Feb 10, 2011 at 09:29:34AM -0800, Khem Raj wrote:
-> On Wed, Feb 9, 2011 at 12:23 PM, Filip Zyzniewski
-> <filip.zyzniewski@gmail.com> wrote:
-> > We use the scsi subsystem for PCMCIA ATA access, so device files are
-> > /dev/sda*, not /dev/hda*.
-> > See recipes/linux/linux-jlime-jornada7xx-2.6.34+git/defconf_jlime:702.
-> 
-> is this always going to be the case ? IOW what if someone does not use
-> inux-jlime-jornada7xx-2.6.34+git recipe
-> 
+--=-tUReP1byADX4dLAytLXU
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Yes, theres no advantage in using hdX for the j7xx and the vanilla
-kernel should work fine unless using very old kernel which also has no advantage.
-It will therefore work fine for vanilla users also.
+Am Donnerstag, den 10.02.2011, 21:44 +0100 schrieb Paul Menzel:
+> Am Donnerstag, den 10.02.2011, 19:52 +0100 schrieb Paul Menzel:
+>=20
+> > task compile of `libsdl-mixer_1.2.11.bb` fails with the following error
+> > message using `angstrom-2010.x` for `MACHINE=3D"beagleboard"`.
+> >=20
+> >         NOTE: make -j4 SDL_LIBS=3D-lSDL -lpthread   -Wl,-rpath-link,/oe=
+/build-angstrom-next/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/us=
+r/lib
+> >         /bin/sh ./build-scripts/mkinstalldirs build
+> >        =20
+> >         [=E2=80=A6]
+> >        =20
+> >         libtool: compile:  arm-angstrom-linux-gnueabi-gcc -march=3Darmv=
+7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork =
+-mno-thumb -isystem/oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-ang=
+strom-linux-gnueabi/usr/include -fexpensive-optimizations -fomit-frame-poin=
+ter -frename-registers -O2 -ggdb2 -isystem/oe/build-angstrom-next/angstrom-=
+dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -D_GNU_SOURCE=3D1 -D=
+_GNU_SOURCE=3D1 -D_REENTRANT -I/oe/build-angstrom-next/angstrom-dev/sysroot=
+s/armv7a-angstrom-linux-gnueabi/usr/include/SDL -DHAVE_FORK -DCMD_MUSIC -DW=
+AV_MUSIC -DMOD_MUSIC -pthread -D_REENTRANT -DMOD_DYNAMIC=3D\"libmikmod.so.2=
+\" -DMID_MUSIC -DUSE_TIMIDITY_MIDI -I./timidity -DFLAC_MUSIC -DFLAC_DYNAMIC=
+=3D\"libFLAC.so.8\" -DMP3_MAD_MUSIC -MMD -MT build/playwave.lo -c playwave.=
+c -o build/playwave.o >/dev/null 2>&1
+> >         libtool: compile:  arm-angstrom-linux-gnueabi-gcc -march=3Darmv=
+7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork =
+-mno-thumb -isystem/oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-ang=
+strom-linux-gnueabi/usr/include -fexpensive-optimizations -fomit-frame-poin=
+ter -frename-registers -O2 -ggdb2 -isystem/oe/build-angstrom-next/angstrom-=
+dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -D_GNU_SOURCE=3D1 -D=
+_GNU_SOURCE=3D1 -D_REENTRANT -I/oe/build-angstrom-next/angstrom-dev/sysroot=
+s/armv7a-angstrom-linux-gnueabi/usr/include/SDL -DHAVE_FORK -DCMD_MUSIC -DW=
+AV_MUSIC -DMOD_MUSIC -pthread -D_REENTRANT -DMOD_DYNAMIC=3D\"libmikmod.so.2=
+\" -DMID_MUSIC -DUSE_TIMIDITY_MIDI -I./timidity -DFLAC_MUSIC -DFLAC_DYNAMIC=
+=3D\"libFLAC.so.8\" -DMP3_MAD_MUSIC -MMD -MT build/playmus.lo -c playmus.c =
+-o build/playmus.o >/dev/null 2>&1
+> >         libtool: link: warning: library `/oe/build-angstrom-next/angstr=
+om-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libSDL.la' was moved.
+> >         ./libtool: line 6399: cd: =3D/usr/lib: No such file or director=
+y
+> >         libtool: link: warning: cannot determine absolute directory nam=
+e of `=3D/usr/lib'
+> >         /bin/grep: =3D/usr/lib/libts.la: No such file or directory
+> >         /bin/sed: can't read =3D/usr/lib/libts.la: No such file or dire=
+ctory
+> >         libtool: link: `=3D/usr/lib/libts.la' is not a valid libtool ar=
+chive
+> >         make: *** [build/libSDL_mixer.la] Error 1
+> >         make: *** Waiting for unfinished jobs....
+> >         FATAL: oe_runmake failed
+> >         ERROR: Function do_compile failed
+> >=20
+> > I suspect that commit 024e010e [1] has to do with it, but I have not
+> > bisected it. If you need a bisection please tell me.
+> >=20
+> > Henning, do you know if this might be related?
 
-> >
-> > Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
-> 
-> 
-> 
-> > ---
-> >  recipes/base-files/base-files/jornada7xx/fstab |    6 +++---
-> >  1 files changed, 3 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/recipes/base-files/base-files/jornada7xx/fstab b/recipes/base-files/base-files/jornada7xx/fstab
-> > index f0c23d9..a06a1b6 100644
-> > --- a/recipes/base-files/base-files/jornada7xx/fstab
-> > +++ b/recipes/base-files/base-files/jornada7xx/fstab
-> > @@ -1,7 +1,7 @@
-> >  proc           /proc   proc    defaults                0  0
-> > -/dev/hda2       /       ext2    defaults                0  0
-> > -/dev/hda1      /mnt/cf auto    defaults,sync,noauto    0  0
-> > -/dev/hda3       none    swap    sw                      0  0
-> > +/dev/sda2       /       ext2    defaults                0  0
-> > +/dev/sda1      /mnt/cf auto    defaults,sync,noauto    0  0
-> > +/dev/sda3       none    swap    sw                      0  0
-> >  tmpfs          /var/volatiles  tmpfs   defaults                0  0
-> >  tmpfs          /mnt/ram        tmpfs   defaults        0  0
-> >  tmpfs                /dev/shm             tmpfs      mode=0777             0  0
-> > --
-> > 1.7.1
-> >
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
+I verified, that commit 024e010e indeed is the culprit. The recipe
+builds just fine with d6e5809d [2].
+
+> `libsdl-mixer_1.2.11.bb` builds fine using `angstrom-2008.1`. So it
+> seems to be a Libtool issue.
 
 
+Thanks,
+
+Paul
+
+
+> > [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D024=
+e010e93704c5e6ba8276602b77b5ea59e40c5
+[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dd6e5809=
+d0874902ba951eb4b92338bbd61ecd533
+
+--=-tUReP1byADX4dLAytLXU
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk1UYf8ACgkQPX1aK2wOHVgLlACfUitbu5/51zKvFXBcbH02BitS
+zQoAoINYbYa458J7J/nHI/hQ275fTSUA
+=UzAP
+-----END PGP SIGNATURE-----
+
+--=-tUReP1byADX4dLAytLXU--
