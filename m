@@ -1,20 +1,23 @@
-Received: from drewtech.com ([66.36.241.150] helo=server.drewtech.com)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <joravec@drewtech.com>) id 1PndBP-0006Za-Us
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Feb 2011 21:32:08 +0100
-Received: (qmail 17405 invoked from network); 10 Feb 2011 15:27:56 -0500
-Received: from adsl-75-58-206-177.dsl.sfldmi.sbcglobal.net (HELO
-	?192.168.0.152?) (75.58.206.177)
-	by drewtech.com with SMTP; 10 Feb 2011 15:27:55 -0500
-Message-ID: <4D544976.6010800@drewtech.com>
-Date: Thu, 10 Feb 2011 15:24:22 -0500
-From: Joey Oravec <joravec@drewtech.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
-	rv:1.9.2.14) Gecko/20110123 Thunderbird/3.1.8
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PndO9-0006nl-GA for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Feb 2011 21:45:17 +0100
+Received: from f053040180.adsl.alicedsl.de ([78.53.40.180]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PndN8-0002iM-Nr for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Feb 2011 20:44:14 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: openembedded with a prebuilt external toolchain
+In-Reply-To: <1297363922.3877.24.camel@mattotaupa>
+References: <1297363922.3877.24.camel@mattotaupa>
+Date: Thu, 10 Feb 2011 21:44:13 +0100
+Message-ID: <1297370653.3877.26.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: libsdl-mixer_1.2.11: task compile fails with `/bin/sed: can't read =/usr/lib/libts.la: No such file or directory`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,34 +31,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Feb 2011 20:32:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Feb 2011 20:45:17 -0000
+X-Groupsio-MsgNum: 29017
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-mVtswagyCShwb6ObYVtp"
 
-Hi,
+--=-mVtswagyCShwb6ObYVtp
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I'm trying to use openembedded with an external prebuilt toolchain. The 
-docs at http://docs.openembedded.org/usermanual/usermanual.html mark 
-this as TODO so maybe we can "do" that in this email chain. :)
+Am Donnerstag, den 10.02.2011, 19:52 +0100 schrieb Paul Menzel:
 
-Marvell provides a *.tar.gz with gcc and C libraries, which I've 
-uncompressed somewhere in my home directory. My goal is to build a root 
-filesystem with some assortment of packages, but at this point I'm just 
-trying "bitbake nano" which is the very first example in the Getting 
-Started. That seems like a logical start to board bring-up.
+> task compile of `libsdl-mixer_1.2.11.bb` fails with the following error
+> message using `angstrom-2010.x` for `MACHINE=3D"beagleboard"`.
+>=20
+>         NOTE: make -j4 SDL_LIBS=3D-lSDL -lpthread   -Wl,-rpath-link,/oe/b=
+uild-angstrom-next/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/=
+lib
+>         /bin/sh ./build-scripts/mkinstalldirs build
+>        =20
+>         [=E2=80=A6]
+>        =20
+>         libtool: compile:  arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-=
+a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -m=
+no-thumb -isystem/oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-angst=
+rom-linux-gnueabi/usr/include -fexpensive-optimizations -fomit-frame-pointe=
+r -frename-registers -O2 -ggdb2 -isystem/oe/build-angstrom-next/angstrom-de=
+v/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -D_GNU_SOURCE=3D1 -D_G=
+NU_SOURCE=3D1 -D_REENTRANT -I/oe/build-angstrom-next/angstrom-dev/sysroots/=
+armv7a-angstrom-linux-gnueabi/usr/include/SDL -DHAVE_FORK -DCMD_MUSIC -DWAV=
+_MUSIC -DMOD_MUSIC -pthread -D_REENTRANT -DMOD_DYNAMIC=3D\"libmikmod.so.2\"=
+ -DMID_MUSIC -DUSE_TIMIDITY_MIDI -I./timidity -DFLAC_MUSIC -DFLAC_DYNAMIC=
+=3D\"libFLAC.so.8\" -DMP3_MAD_MUSIC -MMD -MT build/playwave.lo -c playwave.=
+c -o build/playwave.o >/dev/null 2>&1
+>         libtool: compile:  arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-=
+a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -m=
+no-thumb -isystem/oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-angst=
+rom-linux-gnueabi/usr/include -fexpensive-optimizations -fomit-frame-pointe=
+r -frename-registers -O2 -ggdb2 -isystem/oe/build-angstrom-next/angstrom-de=
+v/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -D_GNU_SOURCE=3D1 -D_G=
+NU_SOURCE=3D1 -D_REENTRANT -I/oe/build-angstrom-next/angstrom-dev/sysroots/=
+armv7a-angstrom-linux-gnueabi/usr/include/SDL -DHAVE_FORK -DCMD_MUSIC -DWAV=
+_MUSIC -DMOD_MUSIC -pthread -D_REENTRANT -DMOD_DYNAMIC=3D\"libmikmod.so.2\"=
+ -DMID_MUSIC -DUSE_TIMIDITY_MIDI -I./timidity -DFLAC_MUSIC -DFLAC_DYNAMIC=
+=3D\"libFLAC.so.8\" -DMP3_MAD_MUSIC -MMD -MT build/playmus.lo -c playmus.c =
+-o build/playmus.o >/dev/null 2>&1
+>         libtool: link: warning: library `/oe/build-angstrom-next/angstrom=
+-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libSDL.la' was moved.
+>         ./libtool: line 6399: cd: =3D/usr/lib: No such file or directory
+>         libtool: link: warning: cannot determine absolute directory name =
+of `=3D/usr/lib'
+>         /bin/grep: =3D/usr/lib/libts.la: No such file or directory
+>         /bin/sed: can't read =3D/usr/lib/libts.la: No such file or direct=
+ory
+>         libtool: link: `=3D/usr/lib/libts.la' is not a valid libtool arch=
+ive
+>         make: *** [build/libSDL_mixer.la] Error 1
+>         make: *** Waiting for unfinished jobs....
+>         FATAL: oe_runmake failed
+>         ERROR: Function do_compile failed
+>=20
+> I suspect that commit 024e010e [1] has to do with it, but I have not
+> bisected it. If you need a bisection please tell me.
+>=20
+> Henning, do you know if this might be related?
 
-I'm assuming that I need to add some lines to build/conf/local.conf that 
-tell OE to make no attempt at building its own compiler or C library (it 
-can't anyway, it doesn't know my chip!) and to call my pre-built one 
-instead. It looks like I'd want to add a few lines about TOOLCHAIN_*, 
-but that uses a recipe for external toolchain, which assumes that it has 
-some meta toolchain, and I'm floundering and getting nowhere. Couldn't 
-find any of these magic variables documented in the usermanual so I've 
-been digging through recipes to learn any of this.
-
-Is it possible to add a few lines that tell OE the path and filename of 
-my compiler? Or is it more complicated than that?
-
--joey
+`libsdl-mixer_1.2.11.bb` builds fine using `angstrom-2008.1`. So it
+seems to be a Libtool issue.
 
 
+Thanks,
+
+Paul
+
+
+> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D024e0=
+10e93704c5e6ba8276602b77b5ea59e40c5
+
+--=-mVtswagyCShwb6ObYVtp
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk1UTh0ACgkQPX1aK2wOHVjq7ACeLT67+dGOyoUb0XtPxWkCh8rs
+4cEAn1Ct4KNX4WSdkYJ5YuBfF8I8YVQg
+=fTvU
+-----END PGP SIGNATURE-----
+
+--=-mVtswagyCShwb6ObYVtp--
