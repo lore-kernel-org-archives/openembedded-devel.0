@@ -1,22 +1,18 @@
-Received: from drewtech.com ([66.36.241.150] helo=server.drewtech.com)
+Received: from hsvwanfw1-nat.mentorg.com ([139.181.24.34] helo=alm.mentorg.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <joravec@drewtech.com>) id 1Pnfrf-0006nK-SV
+	(envelope-from <tom_rini@mentor.com>) id 1Pnfsy-0006pa-MC
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 00:23:56 +0100
-Received: (qmail 25644 invoked from network); 10 Feb 2011 18:26:24 -0500
-Received: from adsl-75-58-206-177.dsl.sfldmi.sbcglobal.net (HELO
-	?192.168.0.152?) (75.58.206.177)
-	by j2534-2.com with SMTP; 10 Feb 2011 18:26:24 -0500
-Message-ID: <4D54734B.7060705@drewtech.com>
-Date: Thu, 10 Feb 2011 18:22:51 -0500
-From: Joey Oravec <joravec@drewtech.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
-	rv:1.9.2.14) Gecko/20110123 Thunderbird/3.1.8
-MIME-Version: 1.0
+	Fri, 11 Feb 2011 00:25:18 +0100
+Received: from localhost.localdomain ([134.86.97.17])
+	by alm.mentorg.com (8.12.10/8.12.10) with ESMTP id p1ANOA1l008017
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Feb 2011 17:24:10 -0600
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4D544976.6010800@drewtech.com> <4D545173.8080904@mentor.com>
-In-Reply-To: <4D545173.8080904@mentor.com>
-Subject: Re: openembedded with a prebuilt external toolchain
+Date: Thu, 10 Feb 2011 16:24:10 -0700
+Message-Id: <1297380250-22567-1-git-send-email-tom_rini@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH] postgresql: Update from 8.4.4 to 8.4.7, drop 8.1.x, 8.2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,38 +26,172 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Feb 2011 23:23:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Feb 2011 23:25:18 -0000
 
-On 2/10/2011 3:58 PM, Tom Rini wrote:
-> We talked about this a little on IRC and I provided the example of how 
-> to use the CodeSourcery recipes that exist today.  The marvell 
-> toolchain however will need it's own special love.
+We update SHR to pinning 8.4.7 (safe upgrade) and drop
+8.1.x (EOL) and 8.2.x (un-pinned and EOL this year).
 
-Yes! Much appreciated!
+Signed-off-by: Tom Rini <tom_rini@mentor.com>
+---
+ conf/distro/include/preferred-shr-versions.inc     |    2 +-
+ .../remove.autoconf.version.check.patch            |   15 ---------------
+ .../remove.autoconf.version.check.patch            |   15 +++++++++++++++
+ recipes/postgresql/postgresql.inc                  |    2 +-
+ recipes/postgresql/postgresql_8.1.4.bb             |    6 ------
+ recipes/postgresql/postgresql_8.1.8.bb             |    6 ------
+ recipes/postgresql/postgresql_8.2.4.bb             |   10 ----------
+ recipes/postgresql/postgresql_8.4.4.bb             |   11 -----------
+ recipes/postgresql/postgresql_8.4.7.bb             |    8 ++++++++
+ 9 files changed, 25 insertions(+), 50 deletions(-)
+ delete mode 100644 recipes/postgresql/postgresql-8.4.4/remove.autoconf.version.check.patch
+ create mode 100644 recipes/postgresql/postgresql-8.4.7/remove.autoconf.version.check.patch
+ delete mode 100644 recipes/postgresql/postgresql_8.1.4.bb
+ delete mode 100644 recipes/postgresql/postgresql_8.1.8.bb
+ delete mode 100644 recipes/postgresql/postgresql_8.2.4.bb
+ delete mode 100644 recipes/postgresql/postgresql_8.4.4.bb
+ create mode 100644 recipes/postgresql/postgresql_8.4.7.bb
 
-> Now what you'll want to do is make an external-toolchain-marvell.bb 
-> and set TOOLCHAIN_BRAND to "marvell" and tweak TOOLCHAIN_VENDOR such 
-> that we go from what OE normally says TARGET_SYS is to what your tools 
-> actually say it is.  Then it's a matter of tweaking the contents of 
-> external-toolchain-marvell.bb to copy the right things out of the 
-> marvell install and into where OE wants them.  In this regard, the 
-> -csl recipe may be more instructive than the -generic recipe as the 
-> -generic recipe (along with external-toolchain.bb) are targeted at 
-> toolchains exported by OE and thus require little mangling to work.
-
-Both the -csl.bb and -generic.bb copy a bunch of stuff to STAGING_DIR in 
-do_stage(). Of course in the long-run I need for the recipe to copy C 
-libraries, but for now I should be able to leave the body blank. At 
-least it'll use my compiler and run to completion. Right?
-
-That's what I did and it seems to be ok. The "bitbake nano" example 
-failed, looks like it wasn't linking ncurses. Another attempt with 
-"bitbake busybox" worked and I saw some packages in the output folder. 
-Looks good so far!
-
--joey
+diff --git a/conf/distro/include/preferred-shr-versions.inc b/conf/distro/include/preferred-shr-versions.inc
+index eede319..2709102 100644
+--- a/conf/distro/include/preferred-shr-versions.inc
++++ b/conf/distro/include/preferred-shr-versions.inc
+@@ -29,7 +29,7 @@ PREFERRED_VERSION_perl = "5.10.1"
+ PREFERRED_VERSION_perl-native = "5.10.1"
+ UDEV_GE_141 = "1"
+ 
+-PREFERRED_VERSION_postgresql = "8.4.4"
++PREFERRED_VERSION_postgresql = "8.4.7"
+ ANGSTROM_QT_VERSION ?= "4.7.1"
+ PREFERRED_VERSION_qt4-tools-native = "${ANGSTROM_QT_VERSION}"
+ PREFERRED_VERSION_qt4-tools-sdk = "${ANGSTROM_QT_VERSION}"
+diff --git a/recipes/postgresql/postgresql-8.4.4/remove.autoconf.version.check.patch b/recipes/postgresql/postgresql-8.4.4/remove.autoconf.version.check.patch
+deleted file mode 100644
+index d027061..0000000
+--- a/recipes/postgresql/postgresql-8.4.4/remove.autoconf.version.check.patch
++++ /dev/null
+@@ -1,15 +0,0 @@
+-Index: postgresql-8.4.4/configure.in
+-===================================================================
+---- postgresql-8.4.4.orig/configure.in
+-+++ postgresql-8.4.4/configure.in
+-@@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch un
+- 
+- AC_INIT([PostgreSQL], [8.4.4], [pgsql-bugs@postgresql.org])
+- 
+--m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.61], [], [m4_fatal([Autoconf version 2.61 is required.
+--Untested combinations of 'autoconf' and PostgreSQL versions are not
+--recommended.  You can remove the check from 'configure.in' but it is then
+--your responsibility whether the result works or not.])])
+- AC_COPYRIGHT([Copyright (c) 1996-2009, PostgreSQL Global Development Group])
+- AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
+- AC_CONFIG_AUX_DIR(config)
+diff --git a/recipes/postgresql/postgresql-8.4.7/remove.autoconf.version.check.patch b/recipes/postgresql/postgresql-8.4.7/remove.autoconf.version.check.patch
+new file mode 100644
+index 0000000..514a9aa
+--- /dev/null
++++ b/recipes/postgresql/postgresql-8.4.7/remove.autoconf.version.check.patch
+@@ -0,0 +1,15 @@
++Index: postgresql-8.4.7/configure.in
++===================================================================
++--- postgresql-8.4.7.orig/configure.in
+++++ postgresql-8.4.7/configure.in
++@@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch un
++ 
++ AC_INIT([PostgreSQL], [8.4.7], [pgsql-bugs@postgresql.org])
++ 
++-m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.61], [], [m4_fatal([Autoconf version 2.61 is required.
++-Untested combinations of 'autoconf' and PostgreSQL versions are not
++-recommended.  You can remove the check from 'configure.in' but it is then
++-your responsibility whether the result works or not.])])
++ AC_COPYRIGHT([Copyright (c) 1996-2009, PostgreSQL Global Development Group])
++ AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
++ AC_CONFIG_AUX_DIR(config)
+diff --git a/recipes/postgresql/postgresql.inc b/recipes/postgresql/postgresql.inc
+index e8cf561..53c38df 100644
+--- a/recipes/postgresql/postgresql.inc
++++ b/recipes/postgresql/postgresql.inc
+@@ -8,7 +8,7 @@ ARM_INSTRUCTION_SET = "arm"
+ 
+ #WARNING: this recipe assumes you have the timezone compiler present in /usr/sbin/zic
+ 
+-SRC_URI = "ftp://ftp-archives.postgresql.org/pub/source/v${PV}/${P}.tar.bz2"
++SRC_URI = "ftp://ftp.postgresql.org/pub/source/v${PV}/${P}.tar.bz2"
+ 
+ LEAD_SONAME = "libpq.so"
+ 
+diff --git a/recipes/postgresql/postgresql_8.1.4.bb b/recipes/postgresql/postgresql_8.1.4.bb
+deleted file mode 100644
+index 8a1db3a..0000000
+--- a/recipes/postgresql/postgresql_8.1.4.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require postgresql.inc
+-
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[md5sum] = "a65bdc5d833169d28bf6fbaaa8d57fcf"
+-SRC_URI[sha256sum] = "ac7e7d311b07abd27b084041bcc943398df303bc86601f281891537bdf1a4e0b"
+diff --git a/recipes/postgresql/postgresql_8.1.8.bb b/recipes/postgresql/postgresql_8.1.8.bb
+deleted file mode 100644
+index ae9ac69..0000000
+--- a/recipes/postgresql/postgresql_8.1.8.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require postgresql.inc
+-
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[md5sum] = "b05e1d7f0cac9cc4e096aa21409dee55"
+-SRC_URI[sha256sum] = "91f75eb29c07271fcbfa2082c8300690efe4a72f2fbf35dace98108b0c6f7ba3"
+diff --git a/recipes/postgresql/postgresql_8.2.4.bb b/recipes/postgresql/postgresql_8.2.4.bb
+deleted file mode 100644
+index f4162ab..0000000
+--- a/recipes/postgresql/postgresql_8.2.4.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require postgresql.inc
+-
+-PR = "${INC_PR}.0"
+-
+-DEFAULT_PREFERENCE = "-1"
+-
+-SRC_URI += "file://no-ecpg-test.patch"
+-
+-SRC_URI[md5sum] = "af7ec100a33c41bfb8d87b5e0ec2f44a"
+-SRC_URI[sha256sum] = "8ff6afab743e894c0d96e668dcf9b3d3c1044719d6def45ef7390c64b54ed268"
+diff --git a/recipes/postgresql/postgresql_8.4.4.bb b/recipes/postgresql/postgresql_8.4.4.bb
+deleted file mode 100644
+index d9bf58e..0000000
+--- a/recipes/postgresql/postgresql_8.4.4.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-require postgresql.inc
+-
+-PR = "${INC_PR}.0"
+-
+-DEFAULT_PREFERENCE = "-1"
+-
+-SRC_URI = "ftp://ftp.postgresql.org/pub/source/v${PV}/${P}.tar.bz2 \
+-           file://remove.autoconf.version.check.patch"
+-
+-SRC_URI[md5sum] = "4bf2448ad965bca3940df648c02194df"
+-SRC_URI[sha256sum] = "e66b398d565f7fb16d8ae58ae72881dcd3dbb1b88f532bbe1c2d1284812be37e"
+diff --git a/recipes/postgresql/postgresql_8.4.7.bb b/recipes/postgresql/postgresql_8.4.7.bb
+new file mode 100644
+index 0000000..696cfd9
+--- /dev/null
++++ b/recipes/postgresql/postgresql_8.4.7.bb
+@@ -0,0 +1,8 @@
++require postgresql.inc
++
++PR = "${INC_PR}.0"
++
++SRC_URI += "file://remove.autoconf.version.check.patch"
++
++SRC_URI[md5sum] = "689397187bb1dfe9b5cbde99538311c3"
++SRC_URI[sha256sum] = "08032849da121e67e318f7ff4e68d3ac88f29050e242641f717c4270839b597b"
+-- 
+1.7.0.4
 
 
 
