@@ -1,39 +1,32 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <coolaj86@gmail.com>) id 1Pnbq2-0003cT-M1
+	(envelope-from <coolaj86@gmail.com>) id 1Pnc95-0003xa-KL
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Feb 2011 20:05:58 +0100
-Received: by fxm17 with SMTP id 17so1735506fxm.6
+	Thu, 10 Feb 2011 20:25:39 +0100
+Received: by fxm17 with SMTP id 17so1753648fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Feb 2011 11:04:54 -0800 (PST)
+	Thu, 10 Feb 2011 11:24:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=koLzrxjhonoSq3mfjJoO/cuxHxwrmME/6i1bw1x+GSE=;
-	b=PkNHSaOu3PofQ8PKvs2ii8BljflCIRiPS4t6gTCgByBHrLPjzQTXCkzPgihYvAGFkz
-	KSWRExJ9RXnb57vfaYeTzzq0qRoNGdbiZcHgC4c4evtPrCcCFQ0rYpohlw3CSSxBEtwi
-	RHIh8giZmBE4OG6dvvfDKICtnmwJaF0BJXQsg=
+	h=domainkey-signature:mime-version:from:date:message-id:subject:to
+	:content-type; bh=uga9Ye2wQmWtDFkAvK8UNPsc5uzY5KfZpJiyTP4qcMI=;
+	b=SZ93HYagB0/gT3sBflC50tvqX/vKliTiE+PqFimOy1cbTAArlWCUEK9KfegsDejOUh
+	hMImTLjhe0ZbBtPFsNzwWO7r5MIXvDroRn9xRFW9uzrZJf2iZ82XzJuLNnV97rMmHaT6
+	AMtzusrCKxA1pHNrT+EVirAcbbWMNBUZrpb68=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=Qw+Vg9srzb2obCTtcSbAYVwDblyBPQrS+Zv8Yvo/iXWXp+o2MgGcGphh8G26/rvE7M
-	+izZb7D+M9XWWaMXEydzXlV7NSlVQO8vw6qU0ognnNVzHD2zHCgwh6JtJi4+nSHcl3a2
-	4bZ2erNx8gvG2EEF08BdPuDLxR7L/s2Xs78Fk=
-Received: by 10.223.72.12 with SMTP id k12mr16560435faj.114.1297364693810;
-	Thu, 10 Feb 2011 11:04:53 -0800 (PST)
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=GMWfhnX1t2VQK8NettCLyEqvpqIkEscOIoCUkBptO7Dh/vGXbmtD3PU+hv5zX3nro+
+	J4ktJ8HukYk9GT4+sqFSSpaG/UuiRK9IJGxKs3jLZVr1n7SVz9tCWhbZXeyZpcBjFn8Z
+	fwIZs53ThBqO+fx8PJ7AT6PkwOb5pK5j2Ld8M=
+Received: by 10.223.96.67 with SMTP id g3mr14770907fan.19.1297365874843; Thu,
+	10 Feb 2011 11:24:34 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.223.114.73 with HTTP; Thu, 10 Feb 2011 11:04:33 -0800 (PST)
-In-Reply-To: <AANLkTikmVwN3h-3vatTGdWr-AmgqQho0ao1UvRjUguPt@mail.gmail.com>
-References: <1297187904-19841-1-git-send-email-coolaj86@gmail.com>
-	<4D52EEA1.6040503@mentor.com> <iius8b$ke3$1@dough.gmane.org>
-	<4D52FC34.9020401@mentor.com>
-	<AANLkTikmVwN3h-3vatTGdWr-AmgqQho0ao1UvRjUguPt@mail.gmail.com>
+Received: by 10.223.114.73 with HTTP; Thu, 10 Feb 2011 11:24:14 -0800 (PST)
 From: AJ ONeal <coolaj86@gmail.com>
-Date: Thu, 10 Feb 2011 12:04:33 -0700
-Message-ID: <AANLkTi=D_Rqe5qdd4oVobBkcEp_FVWtBKHXASow_krKb@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Feb 2011 12:24:14 -0700
+Message-ID: <AANLkTinb5Yueix_q94X84VpwHbAUBJ09myVj9DCTbE86@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH v4] nodejs: updated recipe to v0.2.6
+Subject: how to add multiple versions?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,98 +40,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Feb 2011 19:05:58 -0000
+X-List-Received-Date: Thu, 10 Feb 2011 19:25:39 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Oops... hold on.
+I've got
 
-Forgive me, but it does not compile. I mixed up a hyphen and underscore in
-this commit.
+nodejs-0.2.6.bb
+and
+nodejs-0.4.0.bb
 
-I'll resubmit in a few minutes...
+If I do
+  `bitbake nodejs-0.2.6`
+it builds 0.4.0 anyway with this message
+
+ERROR: Multiple .bb files are due to be built which each provide nodejs
+(/home/coolaj86/overo-oe/org.openembedded.dev/recipes/nodejs/nodejs_0.2.6.bb/home/coolaj86/overo-oe/org.openembedded.dev/recipes/nodejs/
+nodejs_0.4.0.bb).
+ This usually means one provides something the other doesn't and should
+
+How do I make the file such that it knows one is different from the other?
+
+There's api breakage, so current users may want to continue using the 0.2.x
+branch. I don't want to remove that in favor of 0.4.0 quite yet.
 
 AJ ONeal
-
-On Wed, Feb 9, 2011 at 6:37 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> On Wed, Feb 9, 2011 at 12:42 PM, Tom Rini <tom_rini@mentor.com> wrote:
-> > On 02/09/2011 01:08 PM, Koen Kooi wrote:
-> >>
-> >> -----BEGIN PGP SIGNED MESSAGE-----
-> >> Hash: SHA1
-> >>
-> >> On 09-02-11 20:44, Tom Rini wrote:
-> >>>
-> >>> On 02/08/2011 10:58 AM, AJ ONeal wrote:
-> >>>>
-> >>>> * added version number to patches
-> >>>> * libev-cross-cc_0.2.6.patch - turns off execution so that
-> >>>> cross-compile succeeds
-> >>>> * node-cross-cc_0.2.6.patch - enables cross-compiling of v8 for x86,
-> >>>> x86_64, arm, and mips
-> >>>
-> >>> I didn't touch it in patchwork but (and I see these aren't all new
-> >>> issues):
-> >>>
-> >>>> diff --git a/recipes/nodejs/nodejs_0.2.6.bb
-> >>>> b/recipes/nodejs/nodejs_0.2.6.bb
-> >>>> new file mode 100644
-> >>>> index 0000000..560adc6
-> >>>> --- /dev/null
-> >>>> +++ b/recipes/nodejs/nodejs_0.2.6.bb
-> >>>> @@ -0,0 +1,32 @@
-> >>>> +DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
-> >>>> +HOMEPAGE = "http://nodejs.org"
-> >>>> +LICENSE = "MIT"
-> >>>> +
-> >>>> +DEPENDS = "openssl"
-> >>>> +
-> >>>> +SRC_URI = " \
-> >>>> +  http://nodejs.org/dist/node-v${PV}.tar.gz \
-> >>>> +  file://libev-cross-cc-v${PV}.patch \
-> >>>> +  file://node-cross-cc-v${PV}.patch \
-> >>>> +"
-> >>>> +SRC_URI[md5sum] = "b1c50ceb43bee1b221be210b7bc7a216"
-> >>>> +SRC_URI[sha256sum] =
-> >>>> "e97fe9c81ff4b569ae9a0d46e64a0572a1f171293573a5b5290bcc3996a19701"
-> >>>> +
-> >>>> +S = "${WORKDIR}/node-v${PV}"
-> >>>> +
-> >>>> +# v8 errors out if you have set CCACHE
-> >>>> +CCACHE = ""
-> >>>> +
-> >>>> +do_configure () {
-> >>>> +  ./configure --prefix=${prefix} --without-snapshot
-> >>>> +}
-> >>>
-> >>> Why isn't this just EXTRA_OECONF = "--without-snapshot" and using the
-> >>> default do_configure, compile and install?
-> >>
-> >> It's one of those python abominations that try to look like autotools :(
-> >> And as usual, it has even more bugs than autotools when you try to
-> >> crosscompile
-> >
-> > Retch.  So, unless someone pops up within the next 24h and says why they
-> did
-> > something in patchwork or otherwise objects, I'll push this.  Thanks!
-> >
->
-> This patch has addressed the review comments. So please go ahead.
-> However this should be versioned for clarity if a patch is resent
->
-> > --
-> > Tom Rini
-> > Mentor Graphics Corporation
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
