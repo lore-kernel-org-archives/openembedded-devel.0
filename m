@@ -1,25 +1,22 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1PnevU-0005ZS-Sc
+Received: from drewtech.com ([66.36.241.150] helo=server.drewtech.com)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <joravec@drewtech.com>) id 1Pnfrf-0006nK-SV
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Feb 2011 23:23:49 +0100
-Received: (qmail invoked by alias); 10 Feb 2011 22:22:42 -0000
-Received: from p5DE48E6E.dip.t-dialin.net (EHLO localhost.localdomain)
-	[93.228.142.110]
-	by mail.gmx.net (mp071) with SMTP; 10 Feb 2011 23:22:42 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19q9wcnOWxqtza5ch0+mBuMVFwKrt+rWzR+4mCdn+
-	KmC/wK6kLVKckF
-From: Andreas Mueller <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Feb 2011 23:18:26 +0100
-User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
-References: <1296688442-22207-1-git-send-email-schnitzeltony@gmx.de>
-In-Reply-To: <1296688442-22207-1-git-send-email-schnitzeltony@gmx.de>
+	Fri, 11 Feb 2011 00:23:56 +0100
+Received: (qmail 25644 invoked from network); 10 Feb 2011 18:26:24 -0500
+Received: from adsl-75-58-206-177.dsl.sfldmi.sbcglobal.net (HELO
+	?192.168.0.152?) (75.58.206.177)
+	by j2534-2.com with SMTP; 10 Feb 2011 18:26:24 -0500
+Message-ID: <4D54734B.7060705@drewtech.com>
+Date: Thu, 10 Feb 2011 18:22:51 -0500
+From: Joey Oravec <joravec@drewtech.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.14) Gecko/20110123 Thunderbird/3.1.8
 MIME-Version: 1.0
-Message-Id: <201102102318.26832.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: [PATCH] clutter-gst add 1.3.4
+To: openembedded-devel@lists.openembedded.org
+References: <4D544976.6010800@drewtech.com> <4D545173.8080904@mentor.com>
+In-Reply-To: <4D545173.8080904@mentor.com>
+Subject: Re: openembedded with a prebuilt external toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,49 +30,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Feb 2011 22:23:49 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 10 Feb 2011 23:23:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Thursday 03 February 2011 00:14:02 Andreas Mueller wrote:
-> * clutter 1.4.2 broke clutter-gst and made it necessary to have a recipe from
-> * development snapshot sources
-> *
-> * Build tested with
-> * BB_VERSION        = "1.10.2"
-> * METADATA_BRANCH   = "master"
-> * METADATA_REVISION = "2049a96"
-> * TARGET_ARCH       = "arm"
-> * TARGET_OS         = "linux-gnueabi"
-> * MACHINE           = "overo"
-> * DISTRO            = "angstrom"
-> * DISTRO_VERSION    = "2010.7-test-20110202"
-> * TARGET_FPU        = "hard"
-> 
-> Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
-> ---
->  recipes/clutter/clutter-gst_1.3.4.bb |    9 +++++++++
->  1 files changed, 9 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/clutter/clutter-gst_1.3.4.bb
-> 
-> diff --git a/recipes/clutter/clutter-gst_1.3.4.bb b/recipes/clutter/clutter-gst_1.3.4.bb
-> new file mode 100644
-> index 0000000..426cae2
-> --- /dev/null
-> +++ b/recipes/clutter/clutter-gst_1.3.4.bb
-> @@ -0,0 +1,9 @@
-> +require clutter-gst.inc
-> +
-> +PR = "${INC_PR}.0"
-> +
-> +SRC_URI = "http://source.clutter-project.org/sources/clutter-gst/1.3/clutter-gst-${PV}.tar.bz2 \
-> +          "
-> +
-> +SRC_URI[md5sum] = "4f74f78df215cba54444dd6256a29bd4"
-> +SRC_URI[sha256sum] = "de4ce6d3313be3074c6afc6f20276ef06f1a460b3a6755fc5c6e048685de137a"
-> 
+On 2/10/2011 3:58 PM, Tom Rini wrote:
+> We talked about this a little on IRC and I provided the example of how 
+> to use the CodeSourcery recipes that exist today.  The marvell 
+> toolchain however will need it's own special love.
 
-ping
+Yes! Much appreciated!
+
+> Now what you'll want to do is make an external-toolchain-marvell.bb 
+> and set TOOLCHAIN_BRAND to "marvell" and tweak TOOLCHAIN_VENDOR such 
+> that we go from what OE normally says TARGET_SYS is to what your tools 
+> actually say it is.  Then it's a matter of tweaking the contents of 
+> external-toolchain-marvell.bb to copy the right things out of the 
+> marvell install and into where OE wants them.  In this regard, the 
+> -csl recipe may be more instructive than the -generic recipe as the 
+> -generic recipe (along with external-toolchain.bb) are targeted at 
+> toolchains exported by OE and thus require little mangling to work.
+
+Both the -csl.bb and -generic.bb copy a bunch of stuff to STAGING_DIR in 
+do_stage(). Of course in the long-run I need for the recipe to copy C 
+libraries, but for now I should be able to leave the body blank. At 
+least it'll use my compiler and run to completion. Right?
+
+That's what I did and it seems to be ok. The "bitbake nano" example 
+failed, looks like it wasn't linking ncurses. Another attempt with 
+"bitbake busybox" worked and I saw some packages in the output folder. 
+Looks good so far!
+
+-joey
+
 
 
