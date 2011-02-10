@@ -1,38 +1,35 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PnRx9-0002EQ-7a
+	(envelope-from <andrea.adami@gmail.com>) id 1PnSRN-00030L-KJ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Feb 2011 09:32:39 +0100
-Received: from [2001:638:602:1183:9903:4c2c:3413:de08] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1PnRw6-0001fx-Ht by authid <stefan@sostec.de> with cram_md5
+	Thu, 10 Feb 2011 10:03:53 +0100
+Received: by wwi17 with SMTP id 17so1053187wwi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Feb 2011 09:31:37 +0100
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1PnRw5-0001cv-CQ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Feb 2011 09:31:33 +0100
-Date: Thu, 10 Feb 2011 09:31:33 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110210083133.GL28019@excalibur.local>
-References: <4D519C83.9060502@mentor.com>
-	<09D9BE2AC4AA764DABAA8C91E48D819E011A79A329@DEMCHP99E35MSX.ww902.siemens.net>
-	<20110209095644.GE28019@excalibur.local>
-	<iitplc$ago$1@dough.gmane.org>
-	<AANLkTinrp6netE73j_iQmHu+sA5T4sUDEJJbijL45dKR@mail.gmail.com>
+	Thu, 10 Feb 2011 01:02:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=6caLFfXeIXJI+b8joqznoh+UJi2qBRyfFDVKm5dnlrw=;
+	b=f6JKOWNJLa0JAM3+/b/Kt0X84n+5fGEtGnnsKeJokBr1PkihGpDRECFP2G6V7YMhks
+	LFGeOoK0kEmtKq57zo/cEjG5F277gLk79wB8bJf62j8iFc0WM58K7R6j9u/7Dqd5jTJ4
+	H3YFc0nCartG8uWY8a6QwMxTBB44fdnngpiNI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=ofSKuQwkqDHzk2xF0oseRs9EAuMRnHgtrE0008m2fZZudBYwVxdt7qe6OFt2Jb8ZlY
+	jk6QS4oX/DU8h9S2j2fN6ak6KLBVmtKlf7rY6EtJ2A7rOo150wGY0cWcwa1AINEdypdK
+	IHH+qSXTQxjGa7RBTVWhlMz1gGU1dEmxtjfsY=
 MIME-Version: 1.0
-In-Reply-To: <AANLkTinrp6netE73j_iQmHu+sA5T4sUDEJJbijL45dKR@mail.gmail.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
-	autolearn=ham version=3.2.5
-Subject: Re: 2011.03 release testing, starts soon!
+Received: by 10.227.137.19 with SMTP id u19mr16589552wbt.51.1297328568913;
+	Thu, 10 Feb 2011 01:02:48 -0800 (PST)
+Received: by 10.227.141.139 with HTTP; Thu, 10 Feb 2011 01:02:48 -0800 (PST)
+In-Reply-To: <AANLkTik+8d-hWG+ndtvSP7cKbbHhfyXq3tLxw1Fyi-=6@mail.gmail.com>
+References: <AANLkTik+8d-hWG+ndtvSP7cKbbHhfyXq3tLxw1Fyi-=6@mail.gmail.com>
+Date: Thu, 10 Feb 2011 10:02:48 +0100
+Message-ID: <AANLkTimK3FuqXj-Ybf4v+X7RxCbHs1XXsS5J=Yvrmo-0@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Problem with makedevs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,87 +43,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Feb 2011 08:32:39 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 10 Feb 2011 09:03:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hello.
+On Wed, Feb 9, 2011 at 10:54 PM, Filip Zyzniewski
+<filip.zyzniewski@gmail.com> wrote:
+> Hi,
+>
+> I think there is a problem with makedevs scripts. When I build
+> bootstrap-image for jlime-2010.1.conf, the makedevs binary is a
+> symlink to busybox.
+>
+> During bootup it complains about the way it's called from /etc/init.d/devices:
+>
+> /sbin/makedevs -r / -D /etc/device_table
+>
+> The proper way for this binary is:
+>
+> /sbin/makedevs -d /etc/device_table /
+>
+> It surprises me that nobody has noticed this before - is my
+> configuration somehow unique? Jlime config file isn't overriding much
+> here...
+>
+> What is a proper fix for this?
+>
+> bye,
+> Filip Zyzniewski
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-On Wed, 2011-02-09 at 12:30, Khem Raj wrote:
-> On Wed, Feb 9, 2011 at 2:18 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> > On 09-02-11 10:56, Stefan Schmidt wrote:
-> >
-> >>> 2. Do not delete the release branch after 2011.03 will be released (just like
-> >>>    it was done for 2010.12), but let it live and allow developpers committing
-> >>>    bug-fixes (backporting choosen things?) reported back by OE users (some would
-> >>>    would be happy to contribute this way)
-> >>
-> >> That was already discussed. We make a tag with the release rev from which can be
-> >> branched again _if_ people are stepping up to support this branch on a mid or
-> >> long term base.
-> >>
-> >> The branch Tom is using until the release is pretty useless froma history point
-> >> of view (all changes must be in master as well). When he thinks the release is
-> >> good enough the tag gets added and the old branch deleted. For the last release
-> >> nobody cared to support it afterwards with bugfixes so no release branch was
-> >> created.
-> >>
-> >> I'm thinking about this for the upcoming release. If all works well we will base
-> >> a product on it which I would like to support directly from such a release
-> >> branch.
-> >>
-> >> The hard part is how people could decide on pooling resources on this. Defining
-> >> goals for such a branch and stuff. E.g. only take serious fixes? What about
-> >> package updates? Security fixes? changes on the toolchain or classes?
-> >>
-> 
-> I would suggest to take only bugfixes and refrain from infrastructure
-> changes which usually
-> happen metadata wide and toolchain and classes are biggest part of
-> this and with time backports
-> into long term branches become more and more complex and painful and
-> it may be that you have to do
-> entirely different patch to solve the same issue in this branch which
-> has been fixed differently upstream
+Filip,
 
-Staying away from infrastructure and toolchain changes is something I really
-want to see for such a branch.
+reading your post I remember now I had a related issue creating initramfs:
 
-From my BugLabs side I would expect bug fixes but also some package updates.
-That would be stuff based on the java/osgi framework we are deploying so
-hopefully it would not make problems for anyone else. I don't expect to much
-problems with that.
+[20100624 00:31:46]	<ant___>  	in the rootfs of myimages there is any
+/dev/input/event, even though is listed in device-tables-minimal
+[20100624 00:32:21]	<ant___>  	I mean before launching udev
+[20100624 00:32:37]	<ant___>  	or in my case in an initramfs
+[20100624 00:33:02]	<ant___>  	seems an issue with makedevs
 
-With regards to the lifetime I don't see this as a several years branch fo our
-product (thinking about oe-core for the next release). Obviously it is still
-fine for other people to use it that long. The current stable branch is a good
-example for this. It is still used and different companies/people are happy with
-it having no updates at all for some time. :)
+[20100624 00:35:42]	<ant___>  	the command in image.bbclass is:
+makedevs -r ${IMAGE_ROOTFS} -D $devtable
+[20100624 01:09:38]	<ant___>  	I fear makedevs.c cannot create files in subdirs
+[20100624 01:11:04]	<ant___>  	there is more: initscripts have their
+device-table :(
 
-I would expect something else for the branch on top of the 2011-03 release. Some
-more changes in the begining while fixing problems that poped up after the tag
-was created but commits will slow down after some months.
+FYI see related http://bugs.openembedded.net/show_bug.cgi?id=3593
 
-> I think if such a branch is to be created it should be created from
-> the release tag after the release happens
 
-Agreed.
+[20100624 01:16:10]	<ant___>  	too late now to inspect makedevs.c
+[20100624 01:16:33]	<ant___>  	perhaps tomorrow
 
-> >> This is up to the group who wants to support such a branch. Anyone else
-> >> interested in doing this for 2011-03?
-> 
-> If such a branch is expected for long term then its better to decide
-> its policies on patches
-> from upstream pov all fixes that go into this branch should first go
-> into master if its not
-> a direct backport of some sort. That way we can be sure that we dont
-> lose changes that should be in master.
+...and then I forgot and moved to other things :/
+(For our initramfs-kexecboot image, we solved drastically deleting and
+recreating the devices one by one with mknod.)
 
-Agreed as well. It gets a mess if we start fixing stuff in the release branch
-only.
+So, yes, maybe it's a new syntax.
+I'll test asap.
 
-regards
-Stefan Schmidt
+Regards
+Andrea
 
 
