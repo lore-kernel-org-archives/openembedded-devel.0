@@ -1,23 +1,20 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1PnbBW-0002fs-6x
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Feb 2011 19:24:06 +0100
-Received: (qmail 7093 invoked by uid 1003); 10 Feb 2011 18:23:00 -0000
-Received: from unknown (HELO ?192.168.1.167?)
-	(philip@opensdr.com@74.107.167.114)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	10 Feb 2011 18:23:00 -0000
-Message-ID: <4D542D02.1020003@balister.org>
-Date: Thu, 10 Feb 2011 13:22:58 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Thunderbird/3.1.7
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	openembedded-members@lists.openembedded.org
-Subject: TSC Announcement
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pnbda-00033W-1M for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Feb 2011 19:53:06 +0100
+Received: from f053040180.adsl.alicedsl.de ([78.53.40.180]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PnbcZ-0006sC-9j; Thu, 10 Feb 2011 18:52:03 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Feb 2011 19:52:02 +0100
+Message-ID: <1297363922.3877.24.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: libsdl-mixer_1.2.11: task compile fails with `/bin/sed: can't read =/usr/lib/libts.la: No such file or directory`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,37 +28,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Feb 2011 18:24:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Feb 2011 18:53:06 -0000
+X-Groupsio-MsgNum: 29011
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-8QvxsOmyjr3CKCaIx8y/"
 
-On behalf of the board I would like to announce that due to the current
-situation with TSC and collaboration with Yocto we have decided to
-nominate a interim TSC until we can hold the elections to elect a new TSC.
+--=-8QvxsOmyjr3CKCaIx8y/
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This interim TSC will operate for 2 months when we shall start elections
-at two month intervals for the 5 positions on the TSC. The new elected
-TSC members will operate under the charter detailed on the wiki here
-http://wiki.openembedded.org/index.php/TSCCharter.
-
-As each TSC position is elected the interim TSC will lose one position
-until on final election the final two members of the interim TSC shall
-leave. The TSC will then operate under the new charter with elections
-called under the rules of that charter.
-
-For the interim TSC the board has selected to choose all developers who
-publically showed an interest as well as the one existing member of the
-old TSC. So the Intereim TSC shall consist of
-
-1) Khem Raj
-2) Koen Kooi
-3) Mark Hatle
-4) Richard Purdie
-5) Stefan Schmidt
-6) Tom Rini
-
-The interim TSC will operate under the rights and responsibilities as
-listed in the charter. It will focus on the collaboration with the Yocto
-project.
+Dear OE folks,
 
 
+task compile of `libsdl-mixer_1.2.11.bb` fails with the following error
+message using `angstrom-2010.x` for `MACHINE=3D"beagleboard"`.
+
+        NOTE: make -j4 SDL_LIBS=3D-lSDL -lpthread   -Wl,-rpath-link,/oe/bui=
+ld-angstrom-next/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/li=
+b
+        /bin/sh ./build-scripts/mkinstalldirs build
+       =20
+        [=E2=80=A6]
+       =20
+        libtool: compile:  arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-a =
+-mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno=
+-thumb -isystem/oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-angstro=
+m-linux-gnueabi/usr/include -fexpensive-optimizations -fomit-frame-pointer =
+-frename-registers -O2 -ggdb2 -isystem/oe/build-angstrom-next/angstrom-dev/=
+sysroots/armv7a-angstrom-linux-gnueabi/usr/include -D_GNU_SOURCE=3D1 -D_GNU=
+_SOURCE=3D1 -D_REENTRANT -I/oe/build-angstrom-next/angstrom-dev/sysroots/ar=
+mv7a-angstrom-linux-gnueabi/usr/include/SDL -DHAVE_FORK -DCMD_MUSIC -DWAV_M=
+USIC -DMOD_MUSIC -pthread -D_REENTRANT -DMOD_DYNAMIC=3D\"libmikmod.so.2\" -=
+DMID_MUSIC -DUSE_TIMIDITY_MIDI -I./timidity -DFLAC_MUSIC -DFLAC_DYNAMIC=3D\=
+"libFLAC.so.8\" -DMP3_MAD_MUSIC -MMD -MT build/playwave.lo -c playwave.c -o=
+ build/playwave.o >/dev/null 2>&1
+        libtool: compile:  arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-a =
+-mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno=
+-thumb -isystem/oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-angstro=
+m-linux-gnueabi/usr/include -fexpensive-optimizations -fomit-frame-pointer =
+-frename-registers -O2 -ggdb2 -isystem/oe/build-angstrom-next/angstrom-dev/=
+sysroots/armv7a-angstrom-linux-gnueabi/usr/include -D_GNU_SOURCE=3D1 -D_GNU=
+_SOURCE=3D1 -D_REENTRANT -I/oe/build-angstrom-next/angstrom-dev/sysroots/ar=
+mv7a-angstrom-linux-gnueabi/usr/include/SDL -DHAVE_FORK -DCMD_MUSIC -DWAV_M=
+USIC -DMOD_MUSIC -pthread -D_REENTRANT -DMOD_DYNAMIC=3D\"libmikmod.so.2\" -=
+DMID_MUSIC -DUSE_TIMIDITY_MIDI -I./timidity -DFLAC_MUSIC -DFLAC_DYNAMIC=3D\=
+"libFLAC.so.8\" -DMP3_MAD_MUSIC -MMD -MT build/playmus.lo -c playmus.c -o b=
+uild/playmus.o >/dev/null 2>&1
+        libtool: link: warning: library `/oe/build-angstrom-next/angstrom-d=
+ev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libSDL.la' was moved.
+        ./libtool: line 6399: cd: =3D/usr/lib: No such file or directory
+        libtool: link: warning: cannot determine absolute directory name of=
+ `=3D/usr/lib'
+        /bin/grep: =3D/usr/lib/libts.la: No such file or directory
+        /bin/sed: can't read =3D/usr/lib/libts.la: No such file or director=
+y
+        libtool: link: `=3D/usr/lib/libts.la' is not a valid libtool archiv=
+e
+        make: *** [build/libSDL_mixer.la] Error 1
+        make: *** Waiting for unfinished jobs....
+        FATAL: oe_runmake failed
+        ERROR: Function do_compile failed
+
+I suspect that commit 024e010e [1] has to do with it, but I have not
+bisected it. If you need a bisection please tell me.
+
+Henning, do you know if this might be related?
+
+
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D024e010=
+e93704c5e6ba8276602b77b5ea59e40c5
+
+--=-8QvxsOmyjr3CKCaIx8y/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk1UM8wACgkQPX1aK2wOHVjKbACfS0so7Qab3UHO4G34SDEICGf3
+GpEAoIRjHZHMM0p42l0V3VkeGsifdeAe
+=10ZD
+-----END PGP SIGNATURE-----
+
+--=-8QvxsOmyjr3CKCaIx8y/--
