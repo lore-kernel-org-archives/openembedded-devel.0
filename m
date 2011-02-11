@@ -1,41 +1,23 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from smtp-out21.han.skanova.net ([195.67.226.208])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1Pnp8V-00041r-6y
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1PnpyQ-0003PX-U3
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 10:17:55 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 3EFC01100427
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 10:16:45 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 1CD5A110040B
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 10:16:44 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (g225074009.adsl.alicedsl.de
-	[92.225.74.9]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 10:16:43 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id E2C2F3C346; Fri, 11 Feb 2011 10:16:02 +0100 (CET)
-Date: Fri, 11 Feb 2011 10:16:02 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@lists.openembedded.org
-Message-ID: <20110211091602.GA3508@rhein.zuhause.netz>
-References: <1297363922.3877.24.camel@mattotaupa>
+	Fri, 11 Feb 2011 11:11:35 +0100
+Received: from [10.175.196.250] (94.254.124.83) by smtp-out21.han.skanova.net
+	(8.5.133) (authenticated as u82406562)
+	id 4D07517101491595 for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Feb 2011 11:10:26 +0100
+Message-ID: <4D550B17.6000607@atmel.com>
+Date: Fri, 11 Feb 2011 11:10:31 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; sv-SE;
+	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
 MIME-Version: 1.0
-In-Reply-To: <1297363922.3877.24.camel@mattotaupa>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: libsdl-mixer_1.2.11: task compile fails with `/bin/sed: can't read =/usr/lib/libts.la: No such file or directory`
+To: openembedded-devel@lists.openembedded.org
+References: <4D51566B.9060603@mentor.com>
+	<20110209100249.GG28019@excalibur.local>
+In-Reply-To: <20110209100249.GG28019@excalibur.local>
+Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,14 +31,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 09:17:55 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 11 Feb 2011 10:11:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+Stefan Schmidt skrev 2011-02-09 11:02:
+> Hello.
+>
+> On Tue, 2011-02-08 at 07:42, Tom Rini wrote:
+>>
+>> As March is fast approaching I want to gather the list of DISTRO /
+>> MACHINE / BBPKGS targets that the various distributions would like
+>> to see at least compile tested (volunteers for HW testing welcome!).
+>
+> I will do compile and runtime testing on bug20 (omap3). Targets would be
+> console-, minimal- and bug-image-production. The later one includes the complete
+> oenjdk-6 stuff with zero as JIT, the osgi recipes and much of the normal X and
+> linux stuff.
+>
 
-should be fixed now in master.
+I think that for the AT91 the three most important targets are:
 
-Bye Henning
+AT91SAM9M10EKES
+AT91SAM9G20EK
+AT91SAM9263EK
+
+I noted that when I added the gpe-mini-browser2
+to my image, the boot fails.
+
+
+BR
+Ulf Samuelsson
+
+> regards
+> Stefan Schmidt
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
