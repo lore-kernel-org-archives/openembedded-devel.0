@@ -1,23 +1,35 @@
-Received: from smtp-out21.han.skanova.net ([195.67.226.208])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1PnpyQ-0003PX-U3
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 11:11:35 +0100
-Received: from [10.175.196.250] (94.254.124.83) by smtp-out21.han.skanova.net
-	(8.5.133) (authenticated as u82406562)
-	id 4D07517101491595 for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 11:10:26 +0100
-Message-ID: <4D550B17.6000607@atmel.com>
-Date: Fri, 11 Feb 2011 11:10:31 +0100
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; sv-SE;
-	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Pnq3X-0003YE-Ij for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Feb 2011 11:16:51 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Pnq2S-0006c1-Ad for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Feb 2011 11:15:44 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Feb 2011 11:15:44 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Feb 2011 11:15:44 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4D51566B.9060603@mentor.com>
-	<20110209100249.GG28019@excalibur.local>
-In-Reply-To: <20110209100249.GG28019@excalibur.local>
-Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 11 Feb 2011 11:15:32 +0100
+Message-ID: <ij3284$ugp$1@dough.gmane.org>
+References: <20110203093253.GG4580@excalibur.local>	<201102031054.08764.ml@vdm-design.de>
+	<20110203101242.GF3265@jama>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <20110203101242.GF3265@jama>
+X-Enigmail-Version: 1.0.1
+Subject: Re: libnl vs. libnl2 madness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,45 +43,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 10:11:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 11 Feb 2011 10:16:51 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Stefan Schmidt skrev 2011-02-09 11:02:
-> Hello.
->
-> On Tue, 2011-02-08 at 07:42, Tom Rini wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 03-02-11 11:12, Martin Jansa wrote:
+> On Thu, Feb 03, 2011 at 10:54:08AM +0100, Thomas Zimmermann wrote:
+>> On Thursday 03 February 2011 10:32:53 Stefan Schmidt wrote:
+>>> Hello.
+>>>
+>>> The last hours I was trying to compile wpa_supplicant with nl80211 support.
+>>> That needs netlink support through libnl or libnl2.
+>>>
+>>> Enabling the option to use libnl2, not that easy to find, still breaks with
+>>> missing header files. Checking the libnl2 source shows that they are
+>>> provided. After some head on the table banging I found:
+>>>
+>>> commit 880e00d3b7ccf66d9421a06bc28e553e07842b59
+>>> Author: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+>>> Date:   Tue Nov 24 16:33:06 2009 +0000
+>>>
+>>>     libnl2: change includedir to not step over libnl1; also convert to new
+>>> staging
 >>
->> As March is fast approaching I want to gather the list of DISTRO /
->> MACHINE / BBPKGS targets that the various distributions would like
->> to see at least compile tested (volunteers for HW testing welcome!).
->
-> I will do compile and runtime testing on bug20 (omap3). Targets would be
-> console-, minimal- and bug-image-production. The later one includes the complete
-> oenjdk-6 stuff with zero as JIT, the osgi recipes and much of the normal X and
-> linux stuff.
->
+>> At that time there was just one recipe depending on libnl2 and that was FSO2.
+>> I think one month ago JaMa has build the first SHR image without libnl(1), 
+> 
+> yes after couple of changes
+> http://git.openembedded.org/cgit.cgi/openembedded/log/?h=org.openembedded.dev&qt=grep&q=libnl
+> 
+>> until then it was impossible because of some important parts. I'm not sure but 
+>> i think the main blocker was bluez4 (Can't check now).
+> 
+> Yes older bluez4 with nl plugin (which was removed later).
+> 
+> and:
+> http://gitorious.org/~jama/angstrom/jama-shr-experimental/commit/70b13d30b335b8fd67116d3bc0834382a77bc319
 
-I think that for the AT91 the three most important targets are:
+> 85	ANGSTROM_BLACKLIST_pn-iw = "iw depends on libnl we want libnl2"
 
-AT91SAM9M10EKES
-AT91SAM9G20EK
-AT91SAM9263EK
+That one was fixed
 
-I noted that when I added the gpe-mini-browser2
-to my image, the boot fails.
+> 90	ANGSTROM_BLACKLIST_pn-rfkill = "rfkill depends on libnl we want libnl2"
 
+That one was fixed as well
 
-BR
-Ulf Samuelsson
+regards,
 
-> regards
-> Stefan Schmidt
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNVQxEMkyGM64RGpERAtyqAJ9RH01ASiC4/BebDfkW4Vj/BdQiHACePQBQ
+chy6qKs4vwoz7joQk0u/x9E=
+=H06U
+-----END PGP SIGNATURE-----
 
 
 
