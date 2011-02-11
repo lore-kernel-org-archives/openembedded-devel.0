@@ -1,37 +1,37 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1PnxEk-0006K8-TR
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1PnxP6-0006qO-8g
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 18:56:55 +0100
-Received: by qyk8 with SMTP id 8so3238902qyk.6
+	Fri, 11 Feb 2011 19:07:36 +0100
+Received: by ewy28 with SMTP id 28so1397875ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 09:55:48 -0800 (PST)
+	Fri, 11 Feb 2011 10:06:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=daHVvTXdMCx+rcOdkVi9Mzl8Yn9azwuyYDItsM2jx2U=;
-	b=siHLsuhdxEKC+Iv+bfIu0CfBa7NiVMFvhHsK1Sz/UznwSdurUFS5lvAH/iuNVCNe4k
-	YD8FzCCnB6bZdq1uD1F/vx8LLtIcgbYUXFr24BsAi/ngN4ocHDlBsfjCMGm2r62i5kYO
-	H30xtYYLq7vglGZX0kzaG0ur2vRWS5+g7Dvvk=
+	h=domainkey-signature:from:to:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=T0xlRbF2dplIgwrGvbdOHwS4e9gjSIz3IwskPfCcwxo=;
+	b=AQ8d9zDvrr/P0toax752r4jD8t5WeE5brpzLIRmKtJevmwILGYiGkyQ6Cj38i900An
+	ifE92/kkw6/i7NcN3xk49z9Pti9pmC3rskc+Dp30kNcXODRas3K7ZyI5b7Y6xY1AWvzF
+	T4mYWb+OLvZxWXlTa6nw14RsmLGTNPKTOKnDI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=hk/zrDxsgf/TWnfkkFdEGH8FD3gfYH1H/ljqFisepT2CPlCjdNqJ9Wd8Cek4pIp/UB
-	5y6Lehs1jen4AEvtgnY8JDHN6BwbArNCfPa9RGeDFOMwFF0Y3VfrnyGttDy9fdHElHfB
-	kOXFDRfWSz6wBhIfZc2zY4chn3VA5kXsOsUak=
-MIME-Version: 1.0
-Received: by 10.229.6.207 with SMTP id a15mr823109qca.298.1297446948168; Fri,
-	11 Feb 2011 09:55:48 -0800 (PST)
-Received: by 10.229.193.10 with HTTP; Fri, 11 Feb 2011 09:55:48 -0800 (PST)
-In-Reply-To: <4D554A28.5040201@mentor.com>
-References: <1297282989-7580-1-git-send-email-filip.zyzniewski@gmail.com>
-	<AANLkTinrY3g2RLOnHWZ-sborNsFjET8-uE_OoU-LQ2Hf@mail.gmail.com>
-	<4D554A28.5040201@mentor.com>
-Date: Fri, 11 Feb 2011 18:55:48 +0100
-Message-ID: <AANLkTike=O5Kf-RHYCVGr9tOy_8EbCDFx+z0WQ73tWXY@mail.gmail.com>
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=DL7IUDHjtc+uGI4JSWsNkfV8t4zA8ZPErKtbq8LfzEWlNdPupXv1X5nzN/QR7uT1+8
+	5by9HZw3KWZvy3BNkej0FCWSlnDgMe7qTJTcJDwJADh9HgnPVeIdYJmIFAH7TgLRbSpS
+	o2QdfYz2+JSOGSSEsp13e8xT9OJtZNg7EP1+U=
+Received: by 10.103.226.13 with SMTP id d13mr538881mur.114.1297447590429;
+	Fri, 11 Feb 2011 10:06:30 -0800 (PST)
+Received: from localhost.localdomain (ns.tefnet.pl [188.165.206.204])
+	by mx.google.com with ESMTPS id l3sm521015fan.0.2011.02.11.10.06.28
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 11 Feb 2011 10:06:29 -0800 (PST)
 From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] base-files: update fstab for jornada7xx
+Date: Fri, 11 Feb 2011 19:06:19 +0100
+Message-Id: <1297447579-5311-1-git-send-email-filip.zyzniewski@gmail.com>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <AANLkTik+8d-hWG+ndtvSP7cKbbHhfyXq3tLxw1Fyi-=6@mail.gmail.com>
+References: <AANLkTik+8d-hWG+ndtvSP7cKbbHhfyXq3tLxw1Fyi-=6@mail.gmail.com>
+Subject: [PATCH] initscripts: handle busybox version of makedevs properly.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,38 +45,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 17:56:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 11 Feb 2011 18:07:36 -0000
 
-Ah thanks, must have missed it somehow :).
+Makedevs from busybox has a different command line syntax.
 
-bye,
-Filip Zyzniewski
+Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+---
+ recipes/initscripts/initscripts-1.0/devices |    8 +++++++-
+ 1 files changed, 7 insertions(+), 1 deletions(-)
 
-On 2/11/11, Tom Rini <tom_rini@mentor.com> wrote:
-> On 02/11/2011 06:44 AM, Filip Zyzniewski wrote:
->> On 2/9/11, Filip Zyzniewski<filip.zyzniewski@gmail.com>  wrote:
->>> We use the scsi subsystem for PCMCIA ATA access, so device files are
->>> /dev/sda*, not /dev/hda*.
->>> See recipes/linux/linux-jlime-jornada7xx-2.6.34+git/defconf_jlime:702.
->>>
->>> Signed-off-by: Filip Zyzniewski<filip.zyzniewski@gmail.com>
->>
->> Is there a reason for this patch to be absent from
->> http://patches.openembedded.org ?
->>
->> Should I add it there by hand?
->
-> They're absent since I applied this and archived it back on the 9th :)
->
-> --
-> Tom Rini
-> Mentor Graphics Corporation
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/recipes/initscripts/initscripts-1.0/devices b/recipes/initscripts/initscripts-1.0/devices
+index 67a2ec8..4059628 100755
+--- a/recipes/initscripts/initscripts-1.0/devices
++++ b/recipes/initscripts/initscripts-1.0/devices
+@@ -56,7 +56,13 @@ else
+ 	done
+ 	ln -sf /proc/self/fd /dev/fd
+ 	ln -sf /proc/kcore /dev/core
+-	/sbin/makedevs -r / -D /etc/device_table
++
++	if test `readlink -f "/sbin/makedevs"` = "/bin/busybox"; then
++		MAKEDEV_ARGS="-d /etc/device_table /"
++	else
++		MAKEDEV_ARGS="-r / -D /etc/device_table"
++	fi
++	/sbin/makedevs $MAKEDEV_ARGS
+ 	if test $? -ne 0; then
+ 		if test "$VERBOSE" != "no"; then echo "failed"; fi
+ 	else
+-- 
+1.7.1
+
 
 
