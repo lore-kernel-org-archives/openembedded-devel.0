@@ -1,30 +1,31 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1Pnsfg-00054E-2g
+	(envelope-from <cliff.brake@gmail.com>) id 1Pnsgi-0005WM-15
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 14:04:28 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 995DB314D9EA
+	Fri, 11 Feb 2011 14:05:28 +0100
+Received: by wwi17 with SMTP id 17so2379013wwi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 14:03:16 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id OL28RKJThf6a
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 14:03:07 +0100 (CET)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 32790314D9FD
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 14:03:06 +0100 (CET)
-Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Fri, 11 Feb 2011 13:03:06 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Feb 2011 13:03:06 +0000
-Message-Id: <1297429386-5688-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.2.3
-Subject: [PATCH] gst-plugins-base-0.10.32: use integer-based resampling without FPU
+	Fri, 11 Feb 2011 05:04:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=haVPjlsrtY+EGTJa86ugQ1Cj//G6Na3dgmxPEZ2RXuI=;
+	b=ku760SVMzx3s7Ek0031Vxx87rfPkRA9FitO7B5LTZrB1RS8ybNFdcXuA3eGVLVF8Jy
+	l8+SdM2DsbU9beJpty9q3Z3Q/N0DQUIppC7Yd+ngtjXNTuHLtvnqye0mjcdHuq8UxR48
+	HsfaKuPSmgDnIU7y9aNOWF3MMkfSMFsGVj+Rs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=xKpsH6y2Ts8cLcwguXtfUn12HsdyGYj6/7wU5R84VHWdJ513oNkjv6BmXgFX080ho8
+	5qUIV899VHNsx3jGz0IqihFloZQfeltXQFU5b4uovt/Mu+QRYfcqw3FdwZGw3Mp8xhfl
+	Llk6MLCurdiWOXzJndWbHHhf5T+ZrcWAT/IGc=
+MIME-Version: 1.0
+Received: by 10.216.59.143 with SMTP id s15mr423134wec.49.1297429462543; Fri,
+	11 Feb 2011 05:04:22 -0800 (PST)
+Received: by 10.216.254.137 with HTTP; Fri, 11 Feb 2011 05:04:22 -0800 (PST)
+Date: Fri, 11 Feb 2011 08:04:22 -0500
+Message-ID: <AANLkTikzcmcDMM4SouUkXAeXaus3AyiJq48Puj+mK6d1@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: testing branch suspended over next couple weeks during release testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,43 +39,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 13:04:32 -0000
+X-List-Received-Date: Fri, 11 Feb 2011 13:05:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
----
- recipes/gstreamer/gst-plugins-base_0.10.32.bb |    9 +++++++--
- 1 files changed, 7 insertions(+), 2 deletions(-)
+We will not be running our weekly testing branch cycles over the next
+couple weeks in favor of re-directing resources toward release
+testing.
 
-diff --git a/recipes/gstreamer/gst-plugins-base_0.10.32.bb b/recipes/gstreamer/gst-plugins-base_0.10.32.bb
-index f30c4f9..025b589 100644
---- a/recipes/gstreamer/gst-plugins-base_0.10.32.bb
-+++ b/recipes/gstreamer/gst-plugins-base_0.10.32.bb
-@@ -7,7 +7,7 @@ SRC_URI += " \
- SRC_URI[archive.md5sum] = "2920af2b3162f3d9fbaa7fabc8ed4d38"
- SRC_URI[archive.sha256sum] = "e9aabfac83f6480896da0686e9c911989f896fbad634821b7771ed84a446172b"
- 
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- PROVIDES += "gst-plugins"
- 
-@@ -17,8 +17,13 @@ PROVIDES += "gst-plugins"
- # a missing alsa plugin
- DEPENDS += "udev cdparanoia pango libtheora alsa-lib libsm virtual/libx11 freetype gnome-vfs libxv libxrandr gtk+"
- 
-+def get_gstreamer_fpu_setting(bb, d):
-+    if bb.data.getVar('TARGET_FPU', d, 1) in [ 'soft' ]:
-+        return "--with-audioresample-format=int"
-+    return ""
-+
- # Needs a udev that enabled gudev, which isn't the default
--EXTRA_OECONF += " --with-gudev --disable-gnome_vfs"
-+EXTRA_OECONF += "--with-gudev --disable-gnome_vfs ${@get_gstreamer_fpu_setting(bb, d)}"
- 
- do_configure_prepend() {
- 	sed -i -e s:QtGui:NoQtGui:g ${S}/configure.ac
+Thanks,
+Cliff
+
 -- 
-1.7.2.3
-
+=================
+http://bec-systems.com
 
 
