@@ -1,24 +1,34 @@
-Received: from vms173003pub.verizon.net ([206.46.173.3])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1Pnynr-0000bp-Ag
+	(envelope-from <gdalex@gmail.com>) id 1PnzRY-0001aN-QE
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 20:37:15 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.49.88])
-	by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LGG00J82X3DUAX3@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	11 Feb 2011 13:35:48 -0600 (CST)
-Received: from elrond.denix.org (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id CA17914AF6C; Fri,
-	11 Feb 2011 14:35:36 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+	Fri, 11 Feb 2011 21:18:18 +0100
+Received: by qwi2 with SMTP id 2so1748850qwi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Feb 2011 12:17:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=VV1VD0qwyCY4DL/MT/JzoquflSGbn9VtFzKL3l07Yt0=;
+	b=R8Oh+QmI6xPOY4o491g32Lya04TcS9KzI2ize5IUb0hLVQ0ngSB4yQ2FDPrjEafbDf
+	6PWGU71xYS2yFnReWcz32gJnu+LVMcQ0azO3He2yHWKzP5oyZXWUurMLjBng/lrGQBWy
+	G2LN3UvvvvQTWmL9WlsEwlYnnmKgEDL6/vdLE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=CP8iclRh0q0Qr647Woez6bXXMuWGq32UYTmFVY+3mhL0DAG7YDwa23ZarpGsq1H+LL
+	vB5pvj5so4yFWtegj4aJtimKKup9Kp0RECkm4FqGtRRn4mnZcd5fEpag6SvOZVQ5zan/
+	9xLqWaDviMzamha4C5o5tWoSlKsRikO4OZfAI=
+Received: by 10.224.89.6 with SMTP id c6mr1022322qam.206.1297455428764;
+	Fri, 11 Feb 2011 12:17:08 -0800 (PST)
+Received: from localhost.localdomain (mail.paradox.com [206.41.90.173])
+	by mx.google.com with ESMTPS id q12sm809384qcu.30.2011.02.11.12.17.07
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 11 Feb 2011 12:17:08 -0800 (PST)
+From: George Alexandru Dorobantu <gdalex@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Feb 2011 14:35:31 -0500
-Message-id: <1297452931-19486-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.7.4
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [PATCH] udev: also use /proc/devices to invalidate devcache
+Date: Fri, 11 Feb 2011 15:17:36 -0500
+Message-Id: <1297455456-21706-1-git-send-email-gdalex@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] libtomcrypt: updated download link
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,314 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 19:37:15 -0000
+X-List-Received-Date: Fri, 11 Feb 2011 20:18:18 -0000
 
-From: Denys Dmytriyenko <denys@ti.com>
+* updated the download link; libtomcrypt has moved to google code and the old link is dead
 
-* Besides checking for kernel version, bootargs or cmdline changes between
-reboots, also consider changes in /proc/devices to invalidate device cache.
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: George Alexandru Dorobantu <gdalex@gmail.com>
 ---
- recipes/udev/udev-141/cache |    2 ++
- recipes/udev/udev-141/init  |    2 ++
- recipes/udev/udev-151/cache |    2 ++
- recipes/udev/udev-151/init  |    2 ++
- recipes/udev/udev-154/cache |    2 ++
- recipes/udev/udev-154/init  |    2 ++
- recipes/udev/udev-162/cache |    2 ++
- recipes/udev/udev-162/init  |    2 ++
- recipes/udev/udev-165/cache |    2 ++
- recipes/udev/udev-165/init  |    2 ++
- recipes/udev/udev_141.bb    |    3 ++-
- recipes/udev/udev_151.bb    |    3 ++-
- recipes/udev/udev_154.bb    |    3 ++-
- recipes/udev/udev_162.bb    |    3 ++-
- recipes/udev/udev_165.bb    |    3 ++-
- 15 files changed, 30 insertions(+), 5 deletions(-)
+ recipes/libtomcrypt/libtomcrypt_1.17.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/udev/udev-141/cache b/recipes/udev/udev-141/cache
-index c0d400b..6936170 100644
---- a/recipes/udev/udev-141/cache
-+++ b/recipes/udev/udev-141/cache
-@@ -11,11 +11,13 @@ if [ "$DEVCACHE" != "" ]; then
- 	(cd /; tar cf $DEVCACHE dev)
- 	mv /tmp/uname /etc/udev/saved.uname
- 	mv /tmp/cmdline /etc/udev/saved.cmdline
-+	mv /tmp/devices /etc/udev/saved.devices
- 	mv /tmp/atags /etc/udev/saved.atags
- 	echo
- else
- 	rm -f /tmp/uname
- 	rm -f /tmp/cmdline
-+	rm -f /tmp/devices
- 	rm -f /tmp/atags
- fi
+diff --git a/recipes/libtomcrypt/libtomcrypt_1.17.bb b/recipes/libtomcrypt/libtomcrypt_1.17.bb
+index 9fc9fd0..2f82e36 100644
+--- a/recipes/libtomcrypt/libtomcrypt_1.17.bb
++++ b/recipes/libtomcrypt/libtomcrypt_1.17.bb
+@@ -9,7 +9,7 @@ PRIORITY = "optional"
+ LICENSE = "PD"
+ PR = "r0"
  
-diff --git a/recipes/udev/udev-141/init b/recipes/udev/udev-141/init
-index 4dcb241..c0ecdfc 100644
---- a/recipes/udev/udev-141/init
-+++ b/recipes/udev/udev-141/init
-@@ -39,10 +39,12 @@ if [ "$DEVCACHE" != "" ]; then
- 	# Invalidate udev cache if the kernel or its bootargs/cmdline have changed
- 	[ -x /bin/uname ] && /bin/uname -mrspv > /tmp/uname || touch /tmp/uname
- 	[ -r /proc/cmdline ] && cat /proc/cmdline > /tmp/cmdline || touch /tmp/cmdline
-+	[ -r /proc/devices ] && cat /proc/devices > /tmp/devices || touch /tmp/devices
- 	[ -r /proc/atags ] && cat /proc/atags > /tmp/atags || touch /tmp/atags
- 	if [ -e $DEVCACHE ] && \
- 	   cmp -s /tmp/uname /etc/udev/saved.uname && \
- 	   cmp -s /tmp/cmdline /etc/udev/saved.cmdline && \
-+	   cmp -s /tmp/devices /etc/udev/saved.devices && \
- 	   cmp -s /tmp/atags /etc/udev/saved.atags; then
- 		(cd /; tar xf $DEVCACHE > /dev/null 2>&1)
- 		not_first_boot=1
-diff --git a/recipes/udev/udev-151/cache b/recipes/udev/udev-151/cache
-index c0d400b..6936170 100644
---- a/recipes/udev/udev-151/cache
-+++ b/recipes/udev/udev-151/cache
-@@ -11,11 +11,13 @@ if [ "$DEVCACHE" != "" ]; then
- 	(cd /; tar cf $DEVCACHE dev)
- 	mv /tmp/uname /etc/udev/saved.uname
- 	mv /tmp/cmdline /etc/udev/saved.cmdline
-+	mv /tmp/devices /etc/udev/saved.devices
- 	mv /tmp/atags /etc/udev/saved.atags
- 	echo
- else
- 	rm -f /tmp/uname
- 	rm -f /tmp/cmdline
-+	rm -f /tmp/devices
- 	rm -f /tmp/atags
- fi
+-SRC_URI = "http://libtom.org/files/crypt-${PV}.tar.bz2"
++SRC_URI = "http://libtomcrypt.googlecode.com/files/crypt-${PV}.tar.bz2"
  
-diff --git a/recipes/udev/udev-151/init b/recipes/udev/udev-151/init
-index 4dcb241..c0ecdfc 100644
---- a/recipes/udev/udev-151/init
-+++ b/recipes/udev/udev-151/init
-@@ -39,10 +39,12 @@ if [ "$DEVCACHE" != "" ]; then
- 	# Invalidate udev cache if the kernel or its bootargs/cmdline have changed
- 	[ -x /bin/uname ] && /bin/uname -mrspv > /tmp/uname || touch /tmp/uname
- 	[ -r /proc/cmdline ] && cat /proc/cmdline > /tmp/cmdline || touch /tmp/cmdline
-+	[ -r /proc/devices ] && cat /proc/devices > /tmp/devices || touch /tmp/devices
- 	[ -r /proc/atags ] && cat /proc/atags > /tmp/atags || touch /tmp/atags
- 	if [ -e $DEVCACHE ] && \
- 	   cmp -s /tmp/uname /etc/udev/saved.uname && \
- 	   cmp -s /tmp/cmdline /etc/udev/saved.cmdline && \
-+	   cmp -s /tmp/devices /etc/udev/saved.devices && \
- 	   cmp -s /tmp/atags /etc/udev/saved.atags; then
- 		(cd /; tar xf $DEVCACHE > /dev/null 2>&1)
- 		not_first_boot=1
-diff --git a/recipes/udev/udev-154/cache b/recipes/udev/udev-154/cache
-index c0d400b..6936170 100644
---- a/recipes/udev/udev-154/cache
-+++ b/recipes/udev/udev-154/cache
-@@ -11,11 +11,13 @@ if [ "$DEVCACHE" != "" ]; then
- 	(cd /; tar cf $DEVCACHE dev)
- 	mv /tmp/uname /etc/udev/saved.uname
- 	mv /tmp/cmdline /etc/udev/saved.cmdline
-+	mv /tmp/devices /etc/udev/saved.devices
- 	mv /tmp/atags /etc/udev/saved.atags
- 	echo
- else
- 	rm -f /tmp/uname
- 	rm -f /tmp/cmdline
-+	rm -f /tmp/devices
- 	rm -f /tmp/atags
- fi
+ inherit autotools
  
-diff --git a/recipes/udev/udev-154/init b/recipes/udev/udev-154/init
-index 4dcb241..c0ecdfc 100644
---- a/recipes/udev/udev-154/init
-+++ b/recipes/udev/udev-154/init
-@@ -39,10 +39,12 @@ if [ "$DEVCACHE" != "" ]; then
- 	# Invalidate udev cache if the kernel or its bootargs/cmdline have changed
- 	[ -x /bin/uname ] && /bin/uname -mrspv > /tmp/uname || touch /tmp/uname
- 	[ -r /proc/cmdline ] && cat /proc/cmdline > /tmp/cmdline || touch /tmp/cmdline
-+	[ -r /proc/devices ] && cat /proc/devices > /tmp/devices || touch /tmp/devices
- 	[ -r /proc/atags ] && cat /proc/atags > /tmp/atags || touch /tmp/atags
- 	if [ -e $DEVCACHE ] && \
- 	   cmp -s /tmp/uname /etc/udev/saved.uname && \
- 	   cmp -s /tmp/cmdline /etc/udev/saved.cmdline && \
-+	   cmp -s /tmp/devices /etc/udev/saved.devices && \
- 	   cmp -s /tmp/atags /etc/udev/saved.atags; then
- 		(cd /; tar xf $DEVCACHE > /dev/null 2>&1)
- 		not_first_boot=1
-diff --git a/recipes/udev/udev-162/cache b/recipes/udev/udev-162/cache
-index c0d400b..6936170 100644
---- a/recipes/udev/udev-162/cache
-+++ b/recipes/udev/udev-162/cache
-@@ -11,11 +11,13 @@ if [ "$DEVCACHE" != "" ]; then
- 	(cd /; tar cf $DEVCACHE dev)
- 	mv /tmp/uname /etc/udev/saved.uname
- 	mv /tmp/cmdline /etc/udev/saved.cmdline
-+	mv /tmp/devices /etc/udev/saved.devices
- 	mv /tmp/atags /etc/udev/saved.atags
- 	echo
- else
- 	rm -f /tmp/uname
- 	rm -f /tmp/cmdline
-+	rm -f /tmp/devices
- 	rm -f /tmp/atags
- fi
- 
-diff --git a/recipes/udev/udev-162/init b/recipes/udev/udev-162/init
-index 4dcb241..c0ecdfc 100644
---- a/recipes/udev/udev-162/init
-+++ b/recipes/udev/udev-162/init
-@@ -39,10 +39,12 @@ if [ "$DEVCACHE" != "" ]; then
- 	# Invalidate udev cache if the kernel or its bootargs/cmdline have changed
- 	[ -x /bin/uname ] && /bin/uname -mrspv > /tmp/uname || touch /tmp/uname
- 	[ -r /proc/cmdline ] && cat /proc/cmdline > /tmp/cmdline || touch /tmp/cmdline
-+	[ -r /proc/devices ] && cat /proc/devices > /tmp/devices || touch /tmp/devices
- 	[ -r /proc/atags ] && cat /proc/atags > /tmp/atags || touch /tmp/atags
- 	if [ -e $DEVCACHE ] && \
- 	   cmp -s /tmp/uname /etc/udev/saved.uname && \
- 	   cmp -s /tmp/cmdline /etc/udev/saved.cmdline && \
-+	   cmp -s /tmp/devices /etc/udev/saved.devices && \
- 	   cmp -s /tmp/atags /etc/udev/saved.atags; then
- 		(cd /; tar xf $DEVCACHE > /dev/null 2>&1)
- 		not_first_boot=1
-diff --git a/recipes/udev/udev-165/cache b/recipes/udev/udev-165/cache
-index c0d400b..6936170 100644
---- a/recipes/udev/udev-165/cache
-+++ b/recipes/udev/udev-165/cache
-@@ -11,11 +11,13 @@ if [ "$DEVCACHE" != "" ]; then
- 	(cd /; tar cf $DEVCACHE dev)
- 	mv /tmp/uname /etc/udev/saved.uname
- 	mv /tmp/cmdline /etc/udev/saved.cmdline
-+	mv /tmp/devices /etc/udev/saved.devices
- 	mv /tmp/atags /etc/udev/saved.atags
- 	echo
- else
- 	rm -f /tmp/uname
- 	rm -f /tmp/cmdline
-+	rm -f /tmp/devices
- 	rm -f /tmp/atags
- fi
- 
-diff --git a/recipes/udev/udev-165/init b/recipes/udev/udev-165/init
-index 4dcb241..c0ecdfc 100644
---- a/recipes/udev/udev-165/init
-+++ b/recipes/udev/udev-165/init
-@@ -39,10 +39,12 @@ if [ "$DEVCACHE" != "" ]; then
- 	# Invalidate udev cache if the kernel or its bootargs/cmdline have changed
- 	[ -x /bin/uname ] && /bin/uname -mrspv > /tmp/uname || touch /tmp/uname
- 	[ -r /proc/cmdline ] && cat /proc/cmdline > /tmp/cmdline || touch /tmp/cmdline
-+	[ -r /proc/devices ] && cat /proc/devices > /tmp/devices || touch /tmp/devices
- 	[ -r /proc/atags ] && cat /proc/atags > /tmp/atags || touch /tmp/atags
- 	if [ -e $DEVCACHE ] && \
- 	   cmp -s /tmp/uname /etc/udev/saved.uname && \
- 	   cmp -s /tmp/cmdline /etc/udev/saved.cmdline && \
-+	   cmp -s /tmp/devices /etc/udev/saved.devices && \
- 	   cmp -s /tmp/atags /etc/udev/saved.atags; then
- 		(cd /; tar xf $DEVCACHE > /dev/null 2>&1)
- 		not_first_boot=1
-diff --git a/recipes/udev/udev_141.bb b/recipes/udev/udev_141.bb
-index 80b7cc7..9a0a7be 100644
---- a/recipes/udev/udev_141.bb
-+++ b/recipes/udev/udev_141.bb
-@@ -7,7 +7,7 @@ DEFAULT_PREFERENCE = "-1"
- 
- require udev.inc
- 
--PR = "${INC_PR}.5"
-+PR = "${INC_PR}.6"
- 
- SRC_URI += "file://mount.blacklist \
- 	    file://run.rules \
-@@ -73,6 +73,7 @@ do_install () {
- 
- 	touch ${D}${sysconfdir}/udev/saved.uname
- 	touch ${D}${sysconfdir}/udev/saved.cmdline
-+	touch ${D}${sysconfdir}/udev/saved.devices
- 	touch ${D}${sysconfdir}/udev/saved.atags
- 
- 	install -d ${D}${sysconfdir}/udev/scripts/
-diff --git a/recipes/udev/udev_151.bb b/recipes/udev/udev_151.bb
-index 32ab909..393fcc7 100644
---- a/recipes/udev/udev_151.bb
-+++ b/recipes/udev/udev_151.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
- the hotplug package and requires a kernel not older than 2.6.12."
- LICENSE = "GPLv2+"
- 
--PR = "r23"
-+PR = "r24"
- 
- # Untested
- DEFAULT_PREFERENCE = "-1"
-@@ -135,6 +135,7 @@ do_install () {
- 
- 	touch ${D}${sysconfdir}/udev/saved.uname
- 	touch ${D}${sysconfdir}/udev/saved.cmdline
-+	touch ${D}${sysconfdir}/udev/saved.devices
- 	touch ${D}${sysconfdir}/udev/saved.atags
- 
- 	install -d ${D}${sysconfdir}/udev/scripts/
-diff --git a/recipes/udev/udev_154.bb b/recipes/udev/udev_154.bb
-index 4a358d3..44d7b13 100644
---- a/recipes/udev/udev_154.bb
-+++ b/recipes/udev/udev_154.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
- the hotplug package and requires a kernel not older than 2.6.12."
- LICENSE = "GPLv2+"
- 
--PR = "r7"
-+PR = "r8"
- 
- # Untested
- DEFAULT_PREFERENCE = "-1"
-@@ -128,6 +128,7 @@ do_install () {
- 
- 	touch ${D}${sysconfdir}/udev/saved.uname
- 	touch ${D}${sysconfdir}/udev/saved.cmdline
-+	touch ${D}${sysconfdir}/udev/saved.devices
- 	touch ${D}${sysconfdir}/udev/saved.atags
- 
- 	install -d ${D}${sysconfdir}/udev/scripts/
-diff --git a/recipes/udev/udev_162.bb b/recipes/udev/udev_162.bb
-index e344065..8f23f08 100644
---- a/recipes/udev/udev_162.bb
-+++ b/recipes/udev/udev_162.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
- the hotplug package and requires a kernel not older than 2.6.12."
- LICENSE = "GPLv2+"
- 
--PR = "r10"
-+PR = "r11"
- 
- # Untested
- #DEFAULT_PREFERENCE = "-1"
-@@ -140,6 +140,7 @@ do_install () {
- 
- 	touch ${D}${sysconfdir}/udev/saved.uname
- 	touch ${D}${sysconfdir}/udev/saved.cmdline
-+	touch ${D}${sysconfdir}/udev/saved.devices
- 	touch ${D}${sysconfdir}/udev/saved.atags
- 
- 	install -d ${D}${sysconfdir}/udev/scripts/
-diff --git a/recipes/udev/udev_165.bb b/recipes/udev/udev_165.bb
-index 55eccb0..1f57a46 100644
---- a/recipes/udev/udev_165.bb
-+++ b/recipes/udev/udev_165.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
- the hotplug package and requires a kernel not older than 2.6.12."
- LICENSE = "GPLv2+"
- 
--PR = "r1"
-+PR = "r2"
- 
- # Untested
- DEFAULT_PREFERENCE = "-1"
-@@ -137,6 +137,7 @@ do_install () {
- 
- 	touch ${D}${sysconfdir}/udev/saved.uname
- 	touch ${D}${sysconfdir}/udev/saved.cmdline
-+	touch ${D}${sysconfdir}/udev/saved.devices
- 	touch ${D}${sysconfdir}/udev/saved.atags
- 
- 	install -d ${D}${sysconfdir}/udev/scripts/
 -- 
-1.7.0.4
+1.7.1
 
 
 
