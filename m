@@ -1,34 +1,40 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Po17o-00041v-0B
+	(envelope-from <kergoth@gmail.com>) id 1Po1P5-0004Hb-Qo
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 23:06:00 +0100
-Received: by fxm17 with SMTP id 17so3074956fxm.6
+	Fri, 11 Feb 2011 23:23:51 +0100
+Received: by wyb40 with SMTP id 40so2884606wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 14:04:54 -0800 (PST)
+	Fri, 11 Feb 2011 14:22:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:subject:date:message-id:x-mailer;
-	bh=YysIeB4nhhrnbtRdkjW3CHTbwhyv/p5YudjOntP3K9o=;
-	b=lGOA/EjNVqqI60nV2mwzP7itiBLEmPXtN11fqHqffZihFeiW0dgUiBb/mLnEe60+tR
-	AeZGDqkkJrav0iwPs7TKGAjakDcs7dP4EErNPYiffMwO66ARILV3OjUNTQvOJdy1cqEY
-	qvc79b+vI8/UrUmI0XVkekapPUpiHjlwriHLY=
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
+	:date:x-google-sender-auth:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	bh=8mv4Dh5HVgvcMcijZeIEKfua03Qm5Ujpi2IYuWFbQT8=;
+	b=YPsWBZC3ThqN4v2GOFsNfM7XMDkKHHO59kUajJ2nomAWNqPX47Wy0OS/56Vba8Bdxi
+	F7upqm9X86HtHKOXTsmNxR++xRDv3h8EpvULDQgzVW2lU9X0ipL243hBljHWTTJW9wfg
+	n2bgHOKm4oCjCSgdatvI8kEHrBJiWvk3vbSqk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer;
-	b=dsOViaD4V3mDAehteipGB6rm+RBPxPYQDal7ZSRDue0dodHeawxb4YJBhlQhMenoyw
-	HcaTwtl6UcC222z4212rGjwVM05K+RiYgtdkH4ghj3GvcDC7py7IyOyoEYs+emw4huqF
-	iKN0MKucT+rUVYL1AOuWbqwCkreFgNEijoZhk=
-Received: by 10.223.98.204 with SMTP id r12mr1115240fan.102.1297461894141;
-	Fri, 11 Feb 2011 14:04:54 -0800 (PST)
-Received: from localhost.localdomain ([188.165.206.204])
-	by mx.google.com with ESMTPS id 21sm638689fav.17.2011.02.11.14.04.52
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 11 Feb 2011 14:04:53 -0800 (PST)
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	b=pIGZhUwQaNAA0L+ulJnJFwAE1l8EJf2vOLcW8vUv9YuuMfA0MH5+eIJRxjfze5+15A
+	LGleCgyV+GVRaNjGxJPwIWHZpnM7XcvfnKwWldhnvTEUMg8+M88LBL3SlAnvLfhA4jY0
+	ZtomeZ3hFu5GRHzCQrHtXlsbhZNyhoY8gnn70=
+Received: by 10.216.169.202 with SMTP id n52mr1243896wel.15.1297462965872;
+	Fri, 11 Feb 2011 14:22:45 -0800 (PST)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.216.17.11 with HTTP; Fri, 11 Feb 2011 14:22:25 -0800 (PST)
+In-Reply-To: <1297428703-2330-1-git-send-email-obi@opendreambox.org>
+References: <1297428703-2330-1-git-send-email-obi@opendreambox.org>
+From: Chris Larson <clarson@kergoth.com>
+Date: Fri, 11 Feb 2011 15:22:25 -0700
+X-Google-Sender-Auth: PhiiXEhxP6ZQpT0uB9zFp-qjUTM
+Message-ID: <AANLkTi=yDi-TRMa7kR7vmkwoEa-u+W7_w6ECwmkRRaPf@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Feb 2011 23:04:42 +0100
-Message-Id: <1297461882-5965-1-git-send-email-filip.zyzniewski@gmail.com>
-X-Mailer: git-send-email 1.7.1
-Subject: [PATCH] distro/jlime-2010.1.conf: cleaned up RDEPENDS, beefed up FEATURES.
+Cc: Chris Larson <chris_larson@mentor.com>
+Subject: Re: [PATCH 1/4] utils.bbclass: restore previous implementation of explode_deps()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,41 +48,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 22:06:00 -0000
+X-List-Received-Date: Fri, 11 Feb 2011 22:23:51 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-tslib and dialog should be pulled in by appropiate dependencies and
-wireless-tools comes from wifi in DISTRO_FEATURES.
+On Fri, Feb 11, 2011 at 5:51 AM, Andreas Oberritter
+<obi@opendreambox.org> wrote:
+> * explode_deps() changed its behavior to omit version information
+> =C2=A0when the function was removed from OE in favor of BitBake's
+> =C2=A0implementation in March 2010. Since then, packages didn't contain
+> =C2=A0versioned runtime dependencies.
+>
+> =C2=A0See commit 89b7e433719f43f1c36c76cb8856d559014e99bc
+>
+> * This patch restores the previous implementation of explode_deps(),
+> =C2=A0thus fixing the generation of versioned runtime dependencies.
+>
+> * Reimplementing explode_deps() using bb.utils.explode_dep_versions()
+> =C2=A0didn't work, because it choked upon parsing inline python code, e.g=
+.
+> =C2=A0on update-modules_1.0.bb
+>
+> 's RDEPENDS_${PN} field.
+>
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> CC: Chris Larson <chris_larson@mentor.com>
 
-Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
----
- conf/distro/jlime-2010.1.conf |    5 ++---
- 1 files changed, 2 insertions(+), 3 deletions(-)
+Acked-by: Chris Larson <chris_larson@mentor.com>
 
-diff --git a/conf/distro/jlime-2010.1.conf b/conf/distro/jlime-2010.1.conf
-index 7af9106..8673ffa 100644
---- a/conf/distro/jlime-2010.1.conf
-+++ b/conf/distro/jlime-2010.1.conf
-@@ -23,8 +23,7 @@ OVERRIDES .= ":jlime"
- #
- # What we want on the bootstrap image (extra) 
- #
--DISTRO_EXTRA_RDEPENDS = "wireless-tools nano keymaps tslib-calibrate \
--			 console-tools tslib-tests dialog apt"
-+DISTRO_EXTRA_RDEPENDS = "nano keymaps console-tools apt"
- 
- #
- # Our Image files should look abit better.
-@@ -68,7 +67,7 @@ TARGET_FPU_armeb = "soft"
- TARGET_FPU_mipsel = "soft"
- TARGET_FPU_mips = "soft"
- 
--DISTRO_FEATURES += " eabi "
-+DISTRO_FEATURES += "eabi wifi pcmcia"
- 
- LIBC ?= "eglibc"
- PREFERRED_PROVIDER_virtual/libc = "${LIBC}"
--- 
-1.7.1
-
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
