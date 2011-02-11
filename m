@@ -1,35 +1,34 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1PntJw-0000IB-LM
+	(envelope-from <stefan@datenfreihafen.org>) id 1Pnu5p-0006qA-Q8
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 14:46:00 +0100
-Received: by qwi2 with SMTP id 2so1479067qwi.6
+	Fri, 11 Feb 2011 15:35:33 +0100
+Received: from p5b035f5a.dip.t-dialin.net ([91.3.95.90] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
+	id 1Pnu4h-0006Zm-LA by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 05:44:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=+sUva+Fib/vr7kn3GteujJwInF2WHIxFTQJzljUDiIU=;
-	b=kqvOF3OUw3c6+vcaiSnhhnEgAGpeEXvceII4rGWskRmzDVyJYm+4Mr5PTe8wtS+4Zh
-	rLtUOtPjXzhQBBigMiQvBeQbLxsQcaiPxzB9WEybQD2wtTdJfZ/Oe1X43bI9oo6xnJKL
-	pI9NI+lMJRqEYlm+CwfmC0ni0W+cRBxk0XA28=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=QOhkJxv5HTzAzTUME1cvXXHnkUXdDv3kwV7C1bQahn0TAfm+vdF3xx+LhEvXmw8edY
-	Ii9snjAmeoTtxhDpFT1lCArJGkWHKaWa/eSo1DT64NYn06ZzOrZXQVF8EBwUxCK6Aq45
-	ZDrxgM3X2kp5ij6NJSoCefDlr0lqUr+xDd6dI=
-MIME-Version: 1.0
-Received: by 10.229.230.17 with SMTP id jk17mr549883qcb.184.1297431893966;
-	Fri, 11 Feb 2011 05:44:53 -0800 (PST)
-Received: by 10.229.193.10 with HTTP; Fri, 11 Feb 2011 05:44:53 -0800 (PST)
-In-Reply-To: <1297282989-7580-1-git-send-email-filip.zyzniewski@gmail.com>
-References: <1297282989-7580-1-git-send-email-filip.zyzniewski@gmail.com>
-Date: Fri, 11 Feb 2011 14:44:53 +0100
-Message-ID: <AANLkTinrY3g2RLOnHWZ-sborNsFjET8-uE_OoU-LQ2Hf@mail.gmail.com>
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+	Fri, 11 Feb 2011 15:34:26 +0100
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1Pnu4h-0004kM-6j
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Feb 2011 15:34:19 +0100
+Date: Fri, 11 Feb 2011 15:34:19 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] base-files: update fstab for jornada7xx
+Message-ID: <20110211143419.GG9652@excalibur.local>
+References: <1297429080-3986-1-git-send-email-obi@opendreambox.org>
+MIME-Version: 1.0
+In-Reply-To: <1297429080-3986-1-git-send-email-obi@opendreambox.org>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.1 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Subject: Re: [PATCH 1/5] wpa-supplicant-0.7.3: remove unused files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,22 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 13:46:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 11 Feb 2011 14:35:34 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 2/9/11, Filip Zyzniewski <filip.zyzniewski@gmail.com> wrote:
-> We use the scsi subsystem for PCMCIA ATA access, so device files are
-> /dev/sda*, not /dev/hda*.
-> See recipes/linux/linux-jlime-jornada7xx-2.6.34+git/defconf_jlime:702.
->
-> Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+Hello.
 
-Is there a reason for this patch to be absent from
-http://patches.openembedded.org ?
+On Fri, 2011-02-11 at 12:57, Andreas Oberritter wrote:
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> ---
+>  .../wpa-supplicant/wpa-supplicant-0.7.3/defconfig  |  157 ----------------
+>  .../wpa-supplicant/wpa-supplicant-0.7.3/init.sh    |   50 ------
+>  .../wpa_supplicant-0.5.7-always-scan.patch         |   12 --
+>  ...a_supplicant-fix-deprecated-dbus-function.patch |  187 --------------------
+>  .../wpa_supplicant_default.conf                    |   13 --
+>  5 files changed, 0 insertions(+), 419 deletions(-)
+>  delete mode 100644 recipes/wpa-supplicant/wpa-supplicant-0.7.3/defconfig
+>  delete mode 100644 recipes/wpa-supplicant/wpa-supplicant-0.7.3/init.sh
+>  delete mode 100644 recipes/wpa-supplicant/wpa-supplicant-0.7.3/wpa_supplicant-0.5.7-always-scan.patch
+>  delete mode 100644 recipes/wpa-supplicant/wpa-supplicant-0.7.3/wpa_supplicant-fix-deprecated-dbus-function.patch
+>  delete mode 100644 recipes/wpa-supplicant/wpa-supplicant-0.7.3/wpa_supplicant_default.conf
 
-Should I add it there by hand?
+Thanks for cleaning this up.
 
-bye,
-Filip Zyzniewski
+Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
+
+regards
+Stefan Schmidt
 
 
