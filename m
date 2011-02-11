@@ -1,26 +1,34 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1PnzUl-0001e4-Gg
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 21:21:36 +0100
-Received: (qmail 22275 invoked by uid 1003); 11 Feb 2011 20:20:27 -0000
-Received: from unknown (HELO ?192.168.1.167?)
-	(philip@opensdr.com@74.107.167.114)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	11 Feb 2011 20:20:27 -0000
-Message-ID: <4D559A0A.5090907@balister.org>
-Date: Fri, 11 Feb 2011 15:20:26 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Thunderbird/3.1.7
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PnzVh-0001gb-8D for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Feb 2011 21:22:33 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PnzUf-0000CB-AH for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Feb 2011 21:21:29 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Feb 2011 21:21:29 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Feb 2011 21:21:29 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4D51566B.9060603@mentor.com>	<4D516F8B.4090703@gmail.com>	<4D517961.7020000@mentor.com>	<AANLkTimzzjRgbpJS-fXKYk=tOMUgCihB8=M=V7gLGyuP@mail.gmail.com>	<4D519B54.503@mentor.com>
-	<4D557ADB.8090307@atmel.com>
-In-Reply-To: <4D557ADB.8090307@atmel.com>
-Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 11 Feb 2011 21:21:18 +0100
+Message-ID: <ij45nu$678$1@dough.gmane.org>
+References: <1297452931-19486-1-git-send-email-denis@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1297452931-19486-1-git-send-email-denis@denix.org>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH] udev: also use /proc/devices to invalidate devcache
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,38 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 20:21:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 11 Feb 2011 20:22:33 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 02/11/2011 01:07 PM, Ulf Samuelsson wrote:
->
->>>
->>> Tom
->>>
->>> You should create a wiki page like this
->>>
->>> http://wiki.openembedded.org/index.php/Release-2010.12
->>>
->>> and everyone who is building some combination for release is welcome
->>> to populate the matrix with their combinations
->>
->> Good point, I've created
->> http://wiki.openembedded.org/index.php/Release-2011.03 to get us
->> started, but it's not populated with the table yet nor does it quite
->> have valid direction yet.
->>
->
-> Why no direct link from the front page.
-> I think a link to "Releases" under "Distributions and Devices" would
-> make sense.
-> I would do it myself, except I do not have write access to the front page.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I'd rather the link go under developers.
+On 11-02-11 20:35, Denys Dmytriyenko wrote:
+> From: Denys Dmytriyenko <denys@ti.com>
+> 
+> * Besides checking for kernel version, bootargs or cmdline changes between
+> reboots, also consider changes in /proc/devices to invalidate device cache.
+> 
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-There is already enough confusion between OpenEmbedded and distributions 
-built with OpenEmbedded already.
+Acked-by: Koen Kooi <k-kooi@ti.com>
 
-Philip
+FWIW, to make everything work properly newer udevs might need a change
+in the trigger script to explicitly use --action=add, but I need to run
+some more tests.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNVZo+MkyGM64RGpERAj97AJ9G4UOkQ9suecrPe0GvI7en+sRq0wCfbIX+
+FieAuvTwv3YKyCBJk9ckaU4=
+=iC0+
+-----END PGP SIGNATURE-----
+
 
 
