@@ -1,35 +1,37 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Pnx0x-00063B-NG
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1PnxEk-0006K8-TR
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 18:42:39 +0100
-Received: by iwn8 with SMTP id 8so2593318iwn.6
+	Fri, 11 Feb 2011 18:56:55 +0100
+Received: by qyk8 with SMTP id 8so3238902qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 09:41:32 -0800 (PST)
+	Fri, 11 Feb 2011 09:55:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:date
 	:message-id:subject:from:to:content-type;
-	bh=/BixxrUCu6RIFRZgtb6NYVin0a/iJSF7Mi5IzghIuPY=;
-	b=HsXYAaXckyWs6TdP6JEzh2fl79g88VWupW4Ak1vts3aKM6F1PJBG32Inh1Dat7sU0r
-	1LwaKji25590PSFreZfrplgtYa8A1vDRrVaA3xh4hApJ/h3ZLo1Q8B45sTwotfhbw2Xf
-	qetOlH4Miqdtk94IYexV3JISukE3yXNmNhoSU=
+	bh=daHVvTXdMCx+rcOdkVi9Mzl8Yn9azwuyYDItsM2jx2U=;
+	b=siHLsuhdxEKC+Iv+bfIu0CfBa7NiVMFvhHsK1Sz/UznwSdurUFS5lvAH/iuNVCNe4k
+	YD8FzCCnB6bZdq1uD1F/vx8LLtIcgbYUXFr24BsAi/ngN4ocHDlBsfjCMGm2r62i5kYO
+	H30xtYYLq7vglGZX0kzaG0ur2vRWS5+g7Dvvk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=FSIGRQOSXdX2SCavts9Jq3v9m3V+uvUPn42VvCfZpgIUypstjaTIAoeHLXolEcCnzb
-	EaUiX4pag45Zp6o7CGsN5fWDlRKNVRnlKPFVwRu1b08X121lwXeAKdtyzGSrkNFj9EZ/
-	GhVl2f6RrEQ45+bDkQ6cHh0ErS00sdKKgaB/w=
+	b=hk/zrDxsgf/TWnfkkFdEGH8FD3gfYH1H/ljqFisepT2CPlCjdNqJ9Wd8Cek4pIp/UB
+	5y6Lehs1jen4AEvtgnY8JDHN6BwbArNCfPa9RGeDFOMwFF0Y3VfrnyGttDy9fdHElHfB
+	kOXFDRfWSz6wBhIfZc2zY4chn3VA5kXsOsUak=
 MIME-Version: 1.0
-Received: by 10.42.7.129 with SMTP id e1mr940233ice.500.1297446092704; Fri, 11
-	Feb 2011 09:41:32 -0800 (PST)
-Received: by 10.231.30.73 with HTTP; Fri, 11 Feb 2011 09:41:32 -0800 (PST)
-In-Reply-To: <AANLkTikzcmcDMM4SouUkXAeXaus3AyiJq48Puj+mK6d1@mail.gmail.com>
-References: <AANLkTikzcmcDMM4SouUkXAeXaus3AyiJq48Puj+mK6d1@mail.gmail.com>
-Date: Fri, 11 Feb 2011 18:41:32 +0100
-Message-ID: <AANLkTikHTA9NDzU5q3Tcwh8hZ9ZrWy=vAHTTTgGPaEAV@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.229.6.207 with SMTP id a15mr823109qca.298.1297446948168; Fri,
+	11 Feb 2011 09:55:48 -0800 (PST)
+Received: by 10.229.193.10 with HTTP; Fri, 11 Feb 2011 09:55:48 -0800 (PST)
+In-Reply-To: <4D554A28.5040201@mentor.com>
+References: <1297282989-7580-1-git-send-email-filip.zyzniewski@gmail.com>
+	<AANLkTinrY3g2RLOnHWZ-sborNsFjET8-uE_OoU-LQ2Hf@mail.gmail.com>
+	<4D554A28.5040201@mentor.com>
+Date: Fri, 11 Feb 2011 18:55:48 +0100
+Message-ID: <AANLkTike=O5Kf-RHYCVGr9tOy_8EbCDFx+z0WQ73tWXY@mail.gmail.com>
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: testing branch suspended over next couple weeks during release testing
+Subject: Re: [PATCH] base-files: update fstab for jornada7xx
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,21 +45,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 17:42:39 -0000
+X-List-Received-Date: Fri, 11 Feb 2011 17:56:55 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2011/2/11 Cliff Brake <cliff.brake@gmail.com>:
-> We will not be running our weekly testing branch cycles over the next
-> couple weeks in favor of re-directing resources toward release
-> testing.
->
-> Thanks,
-> Cliff
->
->
-Thanks for the info.
-Can you still consolidate the last round of testing?
+Ah thanks, must have missed it somehow :).
 
-Frans
+bye,
+Filip Zyzniewski
+
+On 2/11/11, Tom Rini <tom_rini@mentor.com> wrote:
+> On 02/11/2011 06:44 AM, Filip Zyzniewski wrote:
+>> On 2/9/11, Filip Zyzniewski<filip.zyzniewski@gmail.com>  wrote:
+>>> We use the scsi subsystem for PCMCIA ATA access, so device files are
+>>> /dev/sda*, not /dev/hda*.
+>>> See recipes/linux/linux-jlime-jornada7xx-2.6.34+git/defconf_jlime:702.
+>>>
+>>> Signed-off-by: Filip Zyzniewski<filip.zyzniewski@gmail.com>
+>>
+>> Is there a reason for this patch to be absent from
+>> http://patches.openembedded.org ?
+>>
+>> Should I add it there by hand?
+>
+> They're absent since I applied this and archived it back on the 9th :)
+>
+> --
+> Tom Rini
+> Mentor Graphics Corporation
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
