@@ -1,30 +1,37 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PnsUe-0001IB-EL
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PnsW9-0001Q8-Tr
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 13:53:00 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 3A6C1314D9F1;
-	Fri, 11 Feb 2011 13:51:54 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id oQdPpey16JlB; Fri, 11 Feb 2011 13:51:48 +0100 (CET)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id F2470314D9FC;
-	Fri, 11 Feb 2011 13:51:46 +0100 (CET)
-Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Fri, 11 Feb 2011 12:51:46 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
+	Fri, 11 Feb 2011 13:54:34 +0100
+Received: by iyj8 with SMTP id 8so2356146iyj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Feb 2011 04:53:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=DtK6MLROM9DxtuUEcP+JVnhxXo0UoBXzb8fHHKxbJoQ=;
+	b=M7oFaRzO97tyNeQ/IwYn+ipVeVU7d23p4O7qHz6lkpd3ysOrXqSnniqT9ZZscHekfx
+	0nVIpclKJJVQn6p7EfHYVUcaEok/zf2EfHePSnVcOFNiwaNJzT/HkHO81S+MS9iQRGO4
+	rZI6Vie1ADi8qDGJeM8vIAuwn1JakJ4YuNFcE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=J0KXuhx7cC7khr2d/M8ctljaxSPtbyylsAojhsGMEf5XJi8Ybst6LBR/hdjeRpmdUG
+	yp2MWwVuA+KgsrA44npO5hfzoVTMPotCzFX4RlySqSwWYjgC8IH1cRWOpXEBgmB9dZ7r
+	vxvAFPsGjAOSw/9TpKTFTMez8nauPfOxIkCGc=
+MIME-Version: 1.0
+Received: by 10.231.39.201 with SMTP id h9mr325992ibe.147.1297428806643; Fri,
+	11 Feb 2011 04:53:26 -0800 (PST)
+Received: by 10.231.30.73 with HTTP; Fri, 11 Feb 2011 04:53:26 -0800 (PST)
+In-Reply-To: <4D550B17.6000607@atmel.com>
+References: <4D51566B.9060603@mentor.com>
+	<20110209100249.GG28019@excalibur.local>
+	<4D550B17.6000607@atmel.com>
+Date: Fri, 11 Feb 2011 13:53:26 +0100
+Message-ID: <AANLkTinxsHq86KY7xBBd4=iJmG3Xcz_8nx3Ex0hHHM=P@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Feb 2011 12:51:43 +0000
-Message-Id: <1297428703-2330-4-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <1297428703-2330-1-git-send-email-obi@opendreambox.org>
-References: <1297428703-2330-1-git-send-email-obi@opendreambox.org>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 4/4] gitpkgv.bbclass: rename git_drop_tag_prefix to fix conflict
+Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,41 +45,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 12:53:00 -0000
+X-List-Received-Date: Fri, 11 Feb 2011 12:54:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* fixes ERROR: Error Method already seen: git_drop_tag_prefix in
-  'gitver.bbclass' now in 'gitpkgv.bbclass'
+2011/2/11 Ulf Samuelsson <ulf.samuelsson@atmel.com>:
+> Stefan Schmidt skrev 2011-02-09 11:02:
+>>
+>> Hello.
+>>
+>> On Tue, 2011-02-08 at 07:42, Tom Rini wrote:
+>>>
+>>> As March is fast approaching I want to gather the list of DISTRO /
+>>> MACHINE / BBPKGS targets that the various distributions would like
+>>> to see at least compile tested (volunteers for HW testing welcome!).
+>>
+>> I will do compile and runtime testing on bug20 (omap3). Targets would be
+>> console-, minimal- and bug-image-production. The later one includes the
+>> complete
+>> oenjdk-6 stuff with zero as JIT, the osgi recipes and much of the normal X
+>> and
+>> linux stuff.
+>>
+>
+> I think that for the AT91 the three most important targets are:
+>
+> AT91SAM9M10EKES
+> AT91SAM9G20EK
+> AT91SAM9263EK
+>
+> I noted that when I added the gpe-mini-browser2
+> to my image, the boot fails.
+>
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-CC: Otavio Salvador <otavio@ossystems.com.br>
----
- classes/gitpkgv.bbclass |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+If there is room left, we have interest in:
 
-diff --git a/classes/gitpkgv.bbclass b/classes/gitpkgv.bbclass
-index d4b8287..bedceb9 100644
---- a/classes/gitpkgv.bbclass
-+++ b/classes/gitpkgv.bbclass
-@@ -40,7 +40,7 @@
- GITPKGV = "${@get_git_pkgv(d, False)}"
- GITPKGVTAG = "${@get_git_pkgv(d, True)}"
- 
--def git_drop_tag_prefix(version):
-+def gitpkgv_drop_tag_prefix(version):
-     import re
-     if re.match("v\d", version):
-         return version[1:]
-@@ -71,7 +71,7 @@ def get_git_pkgv(d, use_tags):
- 
- 			if use_tags:
- 				try:
--					ver = git_drop_tag_prefix(bb.fetch.runfetchcmd("git describe %s 2>/dev/null" % rev, d, quiet=True).strip())
-+					ver = gitpkgv_drop_tag_prefix(bb.fetch.runfetchcmd("git describe %s 2>/dev/null" % rev, d, quiet=True).strip())
- 				except Exception:
- 					ver = "0.0-%s-g%s" % (commits, rev[:7])
- 			else:
--- 
-1.7.2.3
+calamari/minimal/console-image
+mpc8313e-rdb/minimal/console-image
+nslu2le/slugos/slugos-image
+nslu2be/slugos/slugos-image
 
+I'l try to set up something here as well, but not sure how often I can
+run it (and check the results).
+(it would be nice if the QA issues in the first two images are solved,
+because then I can use the result of bitbake  to check, now I need to
+fetch all the logs)
+
+Best regards, Frans
 
 
