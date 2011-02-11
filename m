@@ -1,33 +1,33 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Pnhgd-0005gy-H4
+	(envelope-from <martin.jansa@gmail.com>) id 1PnnBh-0006YZ-Be
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 02:20:39 +0100
-Received: by gxk20 with SMTP id 20so857500gxk.6
+	Fri, 11 Feb 2011 08:13:05 +0100
+Received: by ywi6 with SMTP id 6so945647ywi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Feb 2011 17:19:33 -0800 (PST)
+	Thu, 10 Feb 2011 23:11:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=krZwOK2URkwECsJSoArr+vuiExZpPsJ3BjyA3Sesopo=;
-	b=hgQrG7p1K1Pk3sujLt1QyiIVhsmywRDgYhkNrEcXGOG6+yQRkFZ6Cx+Q4pCuOWk+ZW
-	6/wgsA3gSckGv60wqfnbFTcpE5XEWDd+rs2lDb93eY2u9LTCELCCO/k37DZhAM3Wna6y
-	pi3YhxmKfeLEe534ZNonk231I+HsaghTscO30=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=a0AYHG9bI4TQYL1O1czcuSNNrDD1kFiWUAosfp4j8O4=;
+	b=e99fVrowyaJQzTIByrvKP7PjZ/nJ0oBktd2Ep4qpp9k47yYO348tmoLmi6pERG6P3U
+	En5VpAlNxz7qfT0giK3SW07QlhQGLr3Ao/xrf2BQLzNKwWcFJuQ6H4ZM8i2H7s0DLk5E
+	gOVSpi6gyQj/9jWF7NwanWg20+7U8chXqVMDY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=M4FNOwkc5EwwRrzt2+V1Rgc7T8g1jJ1P7rpbckFwVaPMiczfDu4cPd6UCWuKmNiu9U
-	88OQaKUdQp9qpp3xsiBmDGJHDPAhMhcpyRfZht9aIIyjJ+0hBxoYLN64o+KLo0vJxNOO
-	CAPMZV1kLi0yTxbLLSGmxiwYlclDFEXjavy9I=
-Received: by 10.90.74.14 with SMTP id w14mr97818aga.34.1297387170814; Thu, 10
-	Feb 2011 17:19:30 -0800 (PST)
+	b=ID0/lVUxeeNyDngdtyP6d4e7o5okhMriB0ww6/jyoQU1gCjUOpbFYwzZN468Aq/kFl
+	nXidFF56PiLvGyGspBj1ZfFT1PwOlNsHLlVbnoIbpiQ7XEAzYiTxtfzQrkSun5+fL4cA
+	nskJ02BZIVlNTonUU5F+pQsBdvzuCD3BBkz0w=
 MIME-Version: 1.0
-Received: by 10.90.32.12 with HTTP; Thu, 10 Feb 2011 17:19:10 -0800 (PST)
+Received: by 10.151.45.12 with SMTP id x12mr173294ybj.307.1297408319394; Thu,
+	10 Feb 2011 23:11:59 -0800 (PST)
+Received: by 10.147.41.14 with HTTP; Thu, 10 Feb 2011 23:11:59 -0800 (PST)
 In-Reply-To: <1297380250-22567-1-git-send-email-tom_rini@mentor.com>
 References: <1297380250-22567-1-git-send-email-tom_rini@mentor.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 10 Feb 2011 17:19:10 -0800
-Message-ID: <AANLkTi=T_6gGjwF0Z__asPfwPvVm5Roc21LFfMb+L12Z@mail.gmail.com>
+Date: Fri, 11 Feb 2011 08:11:59 +0100
+Message-ID: <AANLkTinaB68OaFFkH2Pvh60u8zLM0ZBXf7SkY8QhKwSD@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH] postgresql: Update from 8.4.4 to 8.4.7, drop 8.1.x, 8.2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -43,47 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 01:20:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 11 Feb 2011 07:13:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 10, 2011 at 3:24 PM, Tom Rini <tom_rini@mentor.com> wrote:
+On Fri, Feb 11, 2011 at 12:24 AM, Tom Rini <tom_rini@mentor.com> wrote:
 > We update SHR to pinning 8.4.7 (safe upgrade) and drop
 > 8.1.x (EOL) and 8.2.x (un-pinned and EOL this year).
 >
 > Signed-off-by: Tom Rini <tom_rini@mentor.com>
-
-Acked-by: Khem Raj <raj.khem@gmail.com>
-
 > ---
-> =C2=A0conf/distro/include/preferred-shr-versions.inc =C2=A0 =C2=A0 | =C2=
-=A0 =C2=A02 +-
-> =C2=A0.../remove.autoconf.version.check.patch =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0| =C2=A0 15 ---------------
-> =C2=A0.../remove.autoconf.version.check.patch =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0| =C2=A0 15 +++++++++++++++
-> =C2=A0recipes/postgresql/postgresql.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A02 +-
-> =C2=A0recipes/postgresql/postgresql_8.1.4.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 | =C2=A0 =C2=A06 ------
-> =C2=A0recipes/postgresql/postgresql_8.1.8.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 | =C2=A0 =C2=A06 ------
-> =C2=A0recipes/postgresql/postgresql_8.2.4.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 | =C2=A0 10 ----------
-> =C2=A0recipes/postgresql/postgresql_8.4.4.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 | =C2=A0 11 -----------
-> =C2=A0recipes/postgresql/postgresql_8.4.7.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 | =C2=A0 =C2=A08 ++++++++
-> =C2=A09 files changed, 25 insertions(+), 50 deletions(-)
-> =C2=A0delete mode 100644 recipes/postgresql/postgresql-8.4.4/remove.autoc=
-onf.version.check.patch
-> =C2=A0create mode 100644 recipes/postgresql/postgresql-8.4.7/remove.autoc=
-onf.version.check.patch
-> =C2=A0delete mode 100644 recipes/postgresql/postgresql_8.1.4.bb
-> =C2=A0delete mode 100644 recipes/postgresql/postgresql_8.1.8.bb
-> =C2=A0delete mode 100644 recipes/postgresql/postgresql_8.2.4.bb
-> =C2=A0delete mode 100644 recipes/postgresql/postgresql_8.4.4.bb
-> =C2=A0create mode 100644 recipes/postgresql/postgresql_8.4.7.bb
+> =A0conf/distro/include/preferred-shr-versions.inc =A0 =A0 | =A0 =A02 +-
+
+Feel free to remove P_V_postgresql completely from
+preferred-shr-versions.inc now
+
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+> =A0.../remove.autoconf.version.check.patch =A0 =A0 =A0 =A0 =A0 =A0| =A0 1=
+5 ---------------
+> =A0.../remove.autoconf.version.check.patch =A0 =A0 =A0 =A0 =A0 =A0| =A0 1=
+5 +++++++++++++++
+> =A0recipes/postgresql/postgresql.inc =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0|=
+ =A0 =A02 +-
+> =A0recipes/postgresql/postgresql_8.1.4.bb =A0 =A0 =A0 =A0 =A0 =A0 | =A0 =
+=A06 ------
+> =A0recipes/postgresql/postgresql_8.1.8.bb =A0 =A0 =A0 =A0 =A0 =A0 | =A0 =
+=A06 ------
+> =A0recipes/postgresql/postgresql_8.2.4.bb =A0 =A0 =A0 =A0 =A0 =A0 | =A0 1=
+0 ----------
+> =A0recipes/postgresql/postgresql_8.4.4.bb =A0 =A0 =A0 =A0 =A0 =A0 | =A0 1=
+1 -----------
+> =A0recipes/postgresql/postgresql_8.4.7.bb =A0 =A0 =A0 =A0 =A0 =A0 | =A0 =
+=A08 ++++++++
+> =A09 files changed, 25 insertions(+), 50 deletions(-)
+> =A0delete mode 100644 recipes/postgresql/postgresql-8.4.4/remove.autoconf=
+.version.check.patch
+> =A0create mode 100644 recipes/postgresql/postgresql-8.4.7/remove.autoconf=
+.version.check.patch
+> =A0delete mode 100644 recipes/postgresql/postgresql_8.1.4.bb
+> =A0delete mode 100644 recipes/postgresql/postgresql_8.1.8.bb
+> =A0delete mode 100644 recipes/postgresql/postgresql_8.2.4.bb
+> =A0delete mode 100644 recipes/postgresql/postgresql_8.4.4.bb
+> =A0create mode 100644 recipes/postgresql/postgresql_8.4.7.bb
 >
 > diff --git a/conf/distro/include/preferred-shr-versions.inc b/conf/distro=
 /include/preferred-shr-versions.inc
@@ -91,14 +93,14 @@ onf.version.check.patch
 > --- a/conf/distro/include/preferred-shr-versions.inc
 > +++ b/conf/distro/include/preferred-shr-versions.inc
 > @@ -29,7 +29,7 @@ PREFERRED_VERSION_perl =3D "5.10.1"
-> =C2=A0PREFERRED_VERSION_perl-native =3D "5.10.1"
-> =C2=A0UDEV_GE_141 =3D "1"
+> =A0PREFERRED_VERSION_perl-native =3D "5.10.1"
+> =A0UDEV_GE_141 =3D "1"
 >
 > -PREFERRED_VERSION_postgresql =3D "8.4.4"
 > +PREFERRED_VERSION_postgresql =3D "8.4.7"
-> =C2=A0ANGSTROM_QT_VERSION ?=3D "4.7.1"
-> =C2=A0PREFERRED_VERSION_qt4-tools-native =3D "${ANGSTROM_QT_VERSION}"
-> =C2=A0PREFERRED_VERSION_qt4-tools-sdk =3D "${ANGSTROM_QT_VERSION}"
+> =A0ANGSTROM_QT_VERSION ?=3D "4.7.1"
+> =A0PREFERRED_VERSION_qt4-tools-native =3D "${ANGSTROM_QT_VERSION}"
+> =A0PREFERRED_VERSION_qt4-tools-sdk =3D "${ANGSTROM_QT_VERSION}"
 > diff --git a/recipes/postgresql/postgresql-8.4.4/remove.autoconf.version.=
 check.patch b/recipes/postgresql/postgresql-8.4.4/remove.autoconf.version.c=
 heck.patch
@@ -121,8 +123,8 @@ atch
 > --m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.61], [], [m4_fatal([Autoconf ve=
 rsion 2.61 is required.
 > --Untested combinations of 'autoconf' and PostgreSQL versions are not
-> --recommended. =C2=A0You can remove the check from 'configure.in' but it =
-is then
+> --recommended. =A0You can remove the check from 'configure.in' but it is =
+then
 > --your responsibility whether the result works or not.])])
 > - AC_COPYRIGHT([Copyright (c) 1996-2009, PostgreSQL Global Development Gr=
 oup])
@@ -150,8 +152,8 @@ atch
 > +-m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.61], [], [m4_fatal([Autoconf ve=
 rsion 2.61 is required.
 > +-Untested combinations of 'autoconf' and PostgreSQL versions are not
-> +-recommended. =C2=A0You can remove the check from 'configure.in' but it =
-is then
+> +-recommended. =A0You can remove the check from 'configure.in' but it is =
+then
 > +-your responsibility whether the result works or not.])])
 > + AC_COPYRIGHT([Copyright (c) 1996-2009, PostgreSQL Global Development Gr=
 oup])
@@ -164,14 +166,14 @@ resql.inc
 > +++ b/recipes/postgresql/postgresql.inc
 > @@ -8,7 +8,7 @@ ARM_INSTRUCTION_SET =3D "arm"
 >
-> =C2=A0#WARNING: this recipe assumes you have the timezone compiler presen=
-t in /usr/sbin/zic
+> =A0#WARNING: this recipe assumes you have the timezone compiler present i=
+n /usr/sbin/zic
 >
 > -SRC_URI =3D "ftp://ftp-archives.postgresql.org/pub/source/v${PV}/${P}.ta=
 r.bz2"
 > +SRC_URI =3D "ftp://ftp.postgresql.org/pub/source/v${PV}/${P}.tar.bz2"
 >
-> =C2=A0LEAD_SONAME =3D "libpq.so"
+> =A0LEAD_SONAME =3D "libpq.so"
 >
 > diff --git a/recipes/postgresql/postgresql_8.1.4.bb b/recipes/postgresql/=
 postgresql_8.1.4.bb
@@ -233,8 +235,7 @@ postgresql_8.4.4.bb
 > -DEFAULT_PREFERENCE =3D "-1"
 > -
 > -SRC_URI =3D "ftp://ftp.postgresql.org/pub/source/v${PV}/${P}.tar.bz2 \
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://remove.autoconf.version.check=
-.patch"
+> - =A0 =A0 =A0 =A0 =A0 file://remove.autoconf.version.check.patch"
 > -
 > -SRC_URI[md5sum] =3D "4bf2448ad965bca3940df648c02194df"
 > -SRC_URI[sha256sum] =3D "e66b398d565f7fb16d8ae58ae72881dcd3dbb1b88f532bbe=
