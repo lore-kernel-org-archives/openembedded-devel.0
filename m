@@ -1,34 +1,33 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Po0sd-0003Kz-95
+	(envelope-from <Tom_Rini@mentor.com>) id 1Po0zs-0003VX-LY
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 22:50:19 +0100
-Received: by bwz10 with SMTP id 10so3469035bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 13:49:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:subject:date:message-id:x-mailer;
-	bh=qqRQkmbC+NEw5nZ5bYpivFubx+IcvKd4blYShyTrZg8=;
-	b=Xr/ZI76+9WjIt+gDYnNlpP2aQD16JIIBZ1eKhZohoIXw8qXJ3v2R5Sy+dU60RDFq6w
-	qSH5O/KtWW7BM0qkWMu0szySmakBCQzC4pa2Arj8rNqMr06Lh2HeMcvRtCSJSLzez3l3
-	nXtWGqNlgaqBjaUXrH4n5vKK29KqlSjHzzJlk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer;
-	b=tY9UWtd0FB2/wl7nA37rSxOv4MfXcO+SoBjIcMq/Jpxc63KG6JLB/pr+knKfRkZ6BR
-	8wkEYABbW9qXvy6EgNSBKxe1fd8ajXMV4N9hmKOFmNkEWnIi1UtQKPI35WGiflsIFHya
-	gwwydkRQqAvQv8hYhpu9d02UpioUSZ5+NAMSc=
-Received: by 10.204.119.75 with SMTP id y11mr950516bkq.18.1297460953257;
-	Fri, 11 Feb 2011 13:49:13 -0800 (PST)
-Received: from localhost.localdomain ([188.165.206.204])
-	by mx.google.com with ESMTPS id v25sm796794bkt.18.2011.02.11.13.49.11
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 11 Feb 2011 13:49:12 -0800 (PST)
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+	Fri, 11 Feb 2011 22:57:48 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1Po0yo-0001VD-8u from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Feb 2011 13:56:42 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Fri, 11 Feb 2011 13:56:42 -0800
+Received: from [172.30.80.144] ([172.30.80.144]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 11 Feb 2011 14:56:41 -0700
+Message-ID: <4D55B08E.3030203@mentor.com>
+Date: Fri, 11 Feb 2011 14:56:30 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Feb 2011 22:49:01 +0100
-Message-Id: <1297460941-5797-1-git-send-email-filip.zyzniewski@gmail.com>
-X-Mailer: git-send-email 1.7.1
-Subject: [PATCH] dpkg: add perl modules package
+References: <AANLkTik+8d-hWG+ndtvSP7cKbbHhfyXq3tLxw1Fyi-=6@mail.gmail.com>
+	<1297447579-5311-1-git-send-email-filip.zyzniewski@gmail.com>
+In-Reply-To: <1297447579-5311-1-git-send-email-filip.zyzniewski@gmail.com>
+X-OriginalArrivalTime: 11 Feb 2011 21:56:41.0323 (UTC)
+	FILETIME=[9099BBB0:01CBCA36]
+Subject: Re: [PATCH] initscripts: handle busybox version of makedevs properly.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,35 +41,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 21:50:19 -0000
+X-List-Received-Date: Fri, 11 Feb 2011 21:57:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-dpkg contains of perl modules as well, we need to provide these for
-example for update-alternatives.
+On 02/11/2011 11:06 AM, Filip Zyzniewski wrote:
+> Makedevs from busybox has a different command line syntax.
+>
+> Signed-off-by: Filip Zyzniewski<filip.zyzniewski@gmail.com>
+> ---
+>   recipes/initscripts/initscripts-1.0/devices |    8 +++++++-
+>   1 files changed, 7 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/initscripts/initscripts-1.0/devices b/recipes/initscripts/initscripts-1.0/devices
+> index 67a2ec8..4059628 100755
+> --- a/recipes/initscripts/initscripts-1.0/devices
+> +++ b/recipes/initscripts/initscripts-1.0/devices
+> @@ -56,7 +56,13 @@ else
+>   	done
+>   	ln -sf /proc/self/fd /dev/fd
+>   	ln -sf /proc/kcore /dev/core
+> -	/sbin/makedevs -r / -D /etc/device_table
+> +
+> +	if test `readlink -f "/sbin/makedevs"` = "/bin/busybox"; then
+> +		MAKEDEV_ARGS="-d /etc/device_table /"
+> +	else
+> +		MAKEDEV_ARGS="-r / -D /etc/device_table"
+> +	fi
+> +	/sbin/makedevs $MAKEDEV_ARGS
+>   	if test $? -ne 0; then
+>   		if test "$VERBOSE" != "no"; then echo "failed"; fi
+>   	else
 
-Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
----
- recipes/dpkg/dpkg.inc |    6 +++++-
- 1 files changed, 5 insertions(+), 1 deletions(-)
+Thanks for digging into this, applied.
 
-diff --git a/recipes/dpkg/dpkg.inc b/recipes/dpkg/dpkg.inc
-index 133eff3..06c269a 100644
---- a/recipes/dpkg/dpkg.inc
-+++ b/recipes/dpkg/dpkg.inc
-@@ -10,7 +10,11 @@ S = "${WORKDIR}/dpkg-${PV}"
- 
- DEPENDS_${PN} += "update-alternatives"
- 
--RDEPENDS_${PN} += "perl perl-module-base perl-module-carp perl-module-cwd perl-module-english perl-module-exporter perl-module-exporter-heavy perl-module-fcntl perl-module-file-spec-unix perl-module-file-temp perl-module-io perl-module-io-handle perl-module-posix perl-module-strict perl-module-vars perl-module-warnings perl-module-warnings-register perl-module-autoloader perl-module-config perl-module-constant perl-module-errno perl-module-file-basename perl-module-file-path perl-module-file-spec perl-module-overload perl-module-selectsaver perl-module-symbol perl-module-xsloader"
-+RDEPENDS_${PN} += "perl perl-module-base perl-module-carp perl-module-cwd perl-module-english perl-module-exporter perl-module-exporter-heavy perl-module-fcntl perl-module-file-spec-unix perl-module-file-temp perl-module-io perl-module-io-handle perl-module-posix perl-module-strict perl-module-vars perl-module-warnings perl-module-warnings-register perl-module-autoloader perl-module-config perl-module-constant perl-module-errno perl-module-file-basename perl-module-file-path perl-module-file-spec perl-module-overload perl-module-selectsaver perl-module-symbol perl-module-xsloader ${PN}-perl"
-+
-+PACKAGES += "${PN}-perl"
-+
-+FILES_${PN}-perl = "${libdir}"
- 
- PARALLEL_MAKE = ""
- 
 -- 
-1.7.1
-
+Tom Rini
+Mentor Graphics Corporation
 
 
