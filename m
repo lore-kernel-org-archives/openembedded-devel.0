@@ -1,39 +1,24 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Po1eZ-0006yA-Jo
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 23:39:51 +0100
-Received: by qyk8 with SMTP id 8so29687qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 14:38:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=KRnqc5DtmvH5SCBxMiiLatsBgb9JO9VJoOKN31ZIJFk=;
-	b=JH9tVaK0PumhyqZkxKFnOP6v96UQRQrpE5zR4GrZvzl2NlLu+zWBXjqhCT3r1zWWcH
-	+Z9DIUO7Cqc9iRJrZbarRF8uUd+6HgsCCDx22IixZI+petVnrsEam3u08jvWEZSKBCbM
-	slffHV2HvkJa2efA3l6veFEhpMQtgzFGhXgbU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=PxCXFiZ64miIRLM+A/i54C/R5XlmmyPSZTg6QrmVLQJvPiH7Etk0j10vmEAY3a6L6a
-	04K+uyV8xYQtQ7tbv4MAGL3b2jwBRWiGX9zlic2EyOBW8Wm6nBbtO7+8Ut538+bq4x+2
-	oMwY8pzWXItpzBOn2A3Z96pYcV3TH34QFM2Ys=
-MIME-Version: 1.0
-Received: by 10.229.230.17 with SMTP id jk17mr1082512qcb.184.1297463924948;
-	Fri, 11 Feb 2011 14:38:44 -0800 (PST)
-Received: by 10.229.193.10 with HTTP; Fri, 11 Feb 2011 14:38:44 -0800 (PST)
-In-Reply-To: <4D55B139.4020503@mwester.net>
-References: <AANLkTik+8d-hWG+ndtvSP7cKbbHhfyXq3tLxw1Fyi-=6@mail.gmail.com>
-	<1297447579-5311-1-git-send-email-filip.zyzniewski@gmail.com>
-	<4D557DED.5070606@mentor.com>
-	<AANLkTinpBmx9F9ftYrkC2t6GUEKN8_MVXM2aa=Mn=3eo@mail.gmail.com>
-	<4D55B139.4020503@mwester.net>
-Date: Fri, 11 Feb 2011 23:38:44 +0100
-Message-ID: <AANLkTikCZMbMLmgqhK5UXh+AzQxO6H5Ed-Mrv1-tWG=r@mail.gmail.com>
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Po21b-0007bd-3y for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Feb 2011 00:03:39 +0100
+Received: from f053036141.adsl.alicedsl.de ([78.53.36.141]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Po20Z-0004Lq-0H for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Feb 2011 23:02:35 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] initscripts: handle busybox version of makedevs properly.
+In-Reply-To: <20110211091602.GA3508@rhein.zuhause.netz>
+References: <1297363922.3877.24.camel@mattotaupa>
+	<20110211091602.GA3508@rhein.zuhause.netz>
+Date: Sat, 12 Feb 2011 00:02:33 +0100
+Message-ID: <1297465353.12032.2.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: libsdl-mixer_1.2.11: task compile fails with libtool 2.2.x: `Version mismatch error. This is libtool 2.2.6, but the definition of this LT_INIT comes from libtool 2.2.6b.`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,23 +32,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 22:39:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 11 Feb 2011 23:03:39 -0000
+X-Groupsio-MsgNum: 29101
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-L4QMg84APMMATL1NqhRS"
 
-On 2/11/11, Mike Westerhof <mike@mwester.net> wrote:
+--=-L4QMg84APMMATL1NqhRS
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> Hmmm... perhaps this means that the more correct fix would be to create
-> a patch for busybox that would bring it into line with the syntax of the
-> real application?
-
-Or the other way around - it could be simpler for us as makedevs.c is
-in the OE tree.
-I didn't want to stir up things too much, so I chose the 'safer' way.
-
-I did it similarly to the way it's done in
-recipes/slugos-init/files/turnup.
-
-bye,
-Filip Zyzniewski
+Dear Henning,
 
 
+Am Freitag, den 11.02.2011, 10:16 +0100 schrieb Henning Heinold:
+
+> should be fixed now in master.
+
+I am sorry to bother you again. After your commit it now breaks with
+`angstrom-2008.1` for `MACHINE =3D "beagleboard"`.
+
+	NOTE: make -j4
+	/bin/sh ./build-scripts/mkinstalldirs build
+	/bin/sh ./arm-angstrom-linux-gnueabi-libtool --mode=3Dcompile arm-angstrom=
+-linux-gnueabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat=
+-abi=3Dsoftfp -mthumb-interwork -mno-thumb -isystem/oe/build/angstrom-dev/s=
+ysroots/armv7a-angstrom-linux-gnueabi/usr/include -fexpensive-optimizations=
+ -frename-registers -fomit-frame-pointer -O2 -ggdb2 -isystem/oe/build/angst=
+rom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -D_GNU_SOURCE=3D=
+1 -D_GNU_SOURCE=3D1 -D_REENTRANT -I/oe/build/angstrom-dev/sysroots/armv7a-a=
+ngstrom-linux-gnueabi/usr/include/SDL   -DHAVE_FORK -DCMD_MUSIC -DWAV_MUSIC=
+ -DMOD_MUSIC -pthread -D_REENTRANT -DMOD_DYNAMIC=3D\"libmikmod.so.2\" -DMID=
+_MUSIC -DUSE_TIMIDITY_MIDI -I./timidity -DFLAC_MUSIC -DFLAC_DYNAMIC=3D\"lib=
+FLAC.so.8\" -DMP3_MAD_MUSIC -MMD -MT build/effect_position.lo -c effect_pos=
+ition.c -o build/effect_position.lo=20
+	/bin/sh ./arm-angstrom-linux-gnueabi-libtool --mode=3Dcompile arm-angstrom=
+-linux-gnueabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat=
+-abi=3Dsoftfp -mthumb-interwork -mno-thumb -isystem/oe/build/angstrom-dev/s=
+ysroots/armv7a-angstrom-linux-gnueabi/usr/include -fexpensive-optimizations=
+ -frename-registers -fomit-frame-pointer -O2 -ggdb2 -isystem/oe/build/angst=
+rom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -D_GNU_SOURCE=3D=
+1 -D_GNU_SOURCE=3D1 -D_REENTRANT -I/oe/build/angstrom-dev/sysroots/armv7a-a=
+ngstrom-linux-gnueabi/usr/include/SDL   -DHAVE_FORK -DCMD_MUSIC -DWAV_MUSIC=
+ -DMOD_MUSIC -pthread -D_REENTRANT -DMOD_DYNAMIC=3D\"libmikmod.so.2\" -DMID=
+_MUSIC -DUSE_TIMIDITY_MIDI -I./timidity -DFLAC_MUSIC -DFLAC_DYNAMIC=3D\"lib=
+FLAC.so.8\" -DMP3_MAD_MUSIC -MMD -MT build/effect_stereoreverse.lo -c effec=
+t_stereoreverse.c -o build/effect_stereoreverse.lo=20
+	/bin/sh ./arm-angstrom-linux-gnueabi-libtool --mode=3Dcompile arm-angstrom=
+-linux-gnueabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat=
+-abi=3Dsoftfp -mthumb-interwork -mno-thumb -isystem/oe/build/angstrom-dev/s=
+ysroots/armv7a-angstrom-linux-gnueabi/usr/include -fexpensive-optimizations=
+ -frename-registers -fomit-frame-pointer -O2 -ggdb2 -isystem/oe/build/angst=
+rom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -D_GNU_SOURCE=3D=
+1 -D_GNU_SOURCE=3D1 -D_REENTRANT -I/oe/build/angstrom-dev/sysroots/armv7a-a=
+ngstrom-linux-gnueabi/usr/include/SDL   -DHAVE_FORK -DCMD_MUSIC -DWAV_MUSIC=
+ -DMOD_MUSIC -pthread -D_REENTRANT -DMOD_DYNAMIC=3D\"libmikmod.so.2\" -DMID=
+_MUSIC -DUSE_TIMIDITY_MIDI -I./timidity -DFLAC_MUSIC -DFLAC_DYNAMIC=3D\"lib=
+FLAC.so.8\" -DMP3_MAD_MUSIC -MMD -MT build/effects_internal.lo -c effects_i=
+nternal.c -o build/effects_internal.lo=20
+	mkdir -p -- build
+	arm-angstrom-linux-gnueabi-libtool: Version mismatch error.  This is libto=
+ol 2.2.6, but the
+	arm-angstrom-linux-gnueabi-libtool: definition of this LT_INIT comes from =
+libtool 2.2.6b.
+	arm-angstrom-linux-gnueabi-libtool: You should recreate aclocal.m4 with ma=
+cros from libtool 2.2.6
+	arm-angstrom-linux-gnueabi-libtool: and run autoconf again.
+	/bin/sh ./arm-angstrom-linux-gnueabi-libtool --mode=3Dcompile arm-angstrom=
+-linux-gnueabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat=
+-abi=3Dsoftfp -mthumb-interwork -mno-thumb -isystem/oe/build/angstrom-dev/s=
+ysroots/armv7a-angstrom-linux-gnueabi/usr/include -fexpensive-optimizations=
+ -frename-registers -fomit-frame-pointer -O2 -ggdb2 -isystem/oe/build/angst=
+rom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -D_GNU_SOURCE=3D=
+1 -D_GNU_SOURCE=3D1 -D_REENTRANT -I/oe/build/angstrom-dev/sysroots/armv7a-a=
+ngstrom-linux-gnueabi/usr/include/SDL   -DHAVE_FORK -DCMD_MUSIC -DWAV_MUSIC=
+ -DMOD_MUSIC -pthread -D_REENTRANT -DMOD_DYNAMIC=3D\"libmikmod.so.2\" -DMID=
+_MUSIC -DUSE_TIMIDITY_MIDI -I./timidity -DFLAC_MUSIC -DFLAC_DYNAMIC=3D\"lib=
+FLAC.so.8\" -DMP3_MAD_MUSIC -MMD -MT build/load_aiff.lo -c load_aiff.c -o b=
+uild/load_aiff.lo=20
+	arm-angstrom-linux-gnueabi-libtool: Version mismatch error.  This is libto=
+ol 2.2.6, but the
+	arm-angstrom-linux-gnueabi-libtool: definition of this LT_INIT comes from =
+libtool 2.2.6b.
+	arm-angstrom-linux-gnueabi-libtool: You should recreate aclocal.m4 with ma=
+cros from libtool 2.2.6
+	arm-angstrom-linux-gnueabi-libtool: and run autoconf again.
+	make: *** [build/effect_position.lo] Error 63
+	make: *** Waiting for unfinished jobs....
+	make: *** [build/effect_stereoreverse.lo] Error 63
+	arm-angstrom-linux-gnueabi-libtool: Version mismatch error.  This is libto=
+ol 2.2.6, but the
+	arm-angstrom-linux-gnueabi-libtool: definition of this LT_INIT comes from =
+libtool 2.2.6b.
+	arm-angstrom-linux-gnueabi-libtool: You should recreate aclocal.m4 with ma=
+cros from libtool 2.2.6
+	arm-angstrom-linux-gnueabi-libtool: and run autoconf again.
+	make: *** [build/effects_internal.lo] Error 63
+	arm-angstrom-linux-gnueabi-libtool: Version mismatch error.  This is libto=
+ol 2.2.6, but the
+	arm-angstrom-linux-gnueabi-libtool: definition of this LT_INIT comes from =
+libtool 2.2.6b.
+	arm-angstrom-linux-gnueabi-libtool: You should recreate aclocal.m4 with ma=
+cros from libtool 2.2.6
+	arm-angstrom-linux-gnueabi-libtool: and run autoconf again.
+	make: *** [build/load_aiff.lo] Error 63
+	FATAL: oe_runmake failed
+	ERROR: Function do_compile failed
+
+
+Thanks,
+
+Paul
+
+--=-L4QMg84APMMATL1NqhRS
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk1VwAMACgkQPX1aK2wOHVh2xQCcCSHpD7vnCON3AbxK+x5/6w08
+e6QAnRZ6FZlG3QWpgC/ZI1mIZW+4F/ba
+=e7F8
+-----END PGP SIGNATURE-----
+
+--=-L4QMg84APMMATL1NqhRS--
