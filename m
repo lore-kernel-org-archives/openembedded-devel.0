@@ -1,33 +1,39 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Po1Si-0004TW-54
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1Po1eZ-0006yA-Jo
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 23:27:36 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Po1Rc-0003lZ-Ah from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 14:26:28 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Fri, 11 Feb 2011 14:26:27 -0800
-Received: from [172.30.80.144] ([172.30.80.144]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 11 Feb 2011 15:26:27 -0700
-Message-ID: <4D55B78C.2030203@mentor.com>
-Date: Fri, 11 Feb 2011 15:26:20 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+	Fri, 11 Feb 2011 23:39:51 +0100
+Received: by qyk8 with SMTP id 8so29687qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Feb 2011 14:38:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=KRnqc5DtmvH5SCBxMiiLatsBgb9JO9VJoOKN31ZIJFk=;
+	b=JH9tVaK0PumhyqZkxKFnOP6v96UQRQrpE5zR4GrZvzl2NlLu+zWBXjqhCT3r1zWWcH
+	+Z9DIUO7Cqc9iRJrZbarRF8uUd+6HgsCCDx22IixZI+petVnrsEam3u08jvWEZSKBCbM
+	slffHV2HvkJa2efA3l6veFEhpMQtgzFGhXgbU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=PxCXFiZ64miIRLM+A/i54C/R5XlmmyPSZTg6QrmVLQJvPiH7Etk0j10vmEAY3a6L6a
+	04K+uyV8xYQtQ7tbv4MAGL3b2jwBRWiGX9zlic2EyOBW8Wm6nBbtO7+8Ut538+bq4x+2
+	oMwY8pzWXItpzBOn2A3Z96pYcV3TH34QFM2Ys=
 MIME-Version: 1.0
+Received: by 10.229.230.17 with SMTP id jk17mr1082512qcb.184.1297463924948;
+	Fri, 11 Feb 2011 14:38:44 -0800 (PST)
+Received: by 10.229.193.10 with HTTP; Fri, 11 Feb 2011 14:38:44 -0800 (PST)
+In-Reply-To: <4D55B139.4020503@mwester.net>
+References: <AANLkTik+8d-hWG+ndtvSP7cKbbHhfyXq3tLxw1Fyi-=6@mail.gmail.com>
+	<1297447579-5311-1-git-send-email-filip.zyzniewski@gmail.com>
+	<4D557DED.5070606@mentor.com>
+	<AANLkTinpBmx9F9ftYrkC2t6GUEKN8_MVXM2aa=Mn=3eo@mail.gmail.com>
+	<4D55B139.4020503@mwester.net>
+Date: Fri, 11 Feb 2011 23:38:44 +0100
+Message-ID: <AANLkTikCZMbMLmgqhK5UXh+AzQxO6H5Ed-Mrv1-tWG=r@mail.gmail.com>
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1296688442-22207-1-git-send-email-schnitzeltony@gmx.de>
-	<201102102318.26832.schnitzeltony@gmx.de>
-In-Reply-To: <201102102318.26832.schnitzeltony@gmx.de>
-X-OriginalArrivalTime: 11 Feb 2011 22:26:27.0349 (UTC)
-	FILETIME=[B927AC50:01CBCA3A]
-Subject: Re: [PATCH] clutter-gst add 1.3.4
+Subject: Re: [PATCH] initscripts: handle busybox version of makedevs properly.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,55 +47,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 22:27:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 11 Feb 2011 22:39:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 02/10/2011 03:18 PM, Andreas Mueller wrote:
-> On Thursday 03 February 2011 00:14:02 Andreas Mueller wrote:
->> * clutter 1.4.2 broke clutter-gst and made it necessary to have a recipe from
->> * development snapshot sources
->> *
->> * Build tested with
->> * BB_VERSION        = "1.10.2"
->> * METADATA_BRANCH   = "master"
->> * METADATA_REVISION = "2049a96"
->> * TARGET_ARCH       = "arm"
->> * TARGET_OS         = "linux-gnueabi"
->> * MACHINE           = "overo"
->> * DISTRO            = "angstrom"
->> * DISTRO_VERSION    = "2010.7-test-20110202"
->> * TARGET_FPU        = "hard"
->>
->> Signed-off-by: Andreas Mueller<schnitzeltony@gmx.de>
->> ---
->>   recipes/clutter/clutter-gst_1.3.4.bb |    9 +++++++++
->>   1 files changed, 9 insertions(+), 0 deletions(-)
->>   create mode 100644 recipes/clutter/clutter-gst_1.3.4.bb
->>
->> diff --git a/recipes/clutter/clutter-gst_1.3.4.bb b/recipes/clutter/clutter-gst_1.3.4.bb
->> new file mode 100644
->> index 0000000..426cae2
->> --- /dev/null
->> +++ b/recipes/clutter/clutter-gst_1.3.4.bb
->> @@ -0,0 +1,9 @@
->> +require clutter-gst.inc
->> +
->> +PR = "${INC_PR}.0"
->> +
->> +SRC_URI = "http://source.clutter-project.org/sources/clutter-gst/1.3/clutter-gst-${PV}.tar.bz2 \
->> +          "
->> +
->> +SRC_URI[md5sum] = "4f74f78df215cba54444dd6256a29bd4"
->> +SRC_URI[sha256sum] = "de4ce6d3313be3074c6afc6f20276ef06f1a460b3a6755fc5c6e048685de137a"
->>
->
-> ping
+On 2/11/11, Mike Westerhof <mike@mwester.net> wrote:
 
-Applied, thanks for your patience.
+> Hmmm... perhaps this means that the more correct fix would be to create
+> a patch for busybox that would bring it into line with the syntax of the
+> real application?
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Or the other way around - it could be simpler for us as makedevs.c is
+in the OE tree.
+I didn't want to stir up things too much, so I chose the 'safer' way.
+
+I did it similarly to the way it's done in
+recipes/slugos-init/files/turnup.
+
+bye,
+Filip Zyzniewski
 
 
