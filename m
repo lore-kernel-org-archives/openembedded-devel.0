@@ -1,34 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PnzVh-0001gb-8D for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 21:22:33 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PnzUf-0000CB-AH for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 21:21:29 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 21:21:29 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 21:21:29 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pnzm9-00021E-86
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Feb 2011 21:39:33 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Pnzl4-0002fp-IR from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Feb 2011 12:38:26 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Fri, 11 Feb 2011 12:38:25 -0800
+Received: from [172.30.80.144] ([172.30.80.144]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 11 Feb 2011 13:38:25 -0700
+Message-ID: <4D559E3A.9070000@mentor.com>
+Date: Fri, 11 Feb 2011 13:38:18 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 11 Feb 2011 21:21:18 +0100
-Message-ID: <ij45nu$678$1@dough.gmane.org>
-References: <1297452931-19486-1-git-send-email-denis@denix.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1297452931-19486-1-git-send-email-denis@denix.org>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] udev: also use /proc/devices to invalidate devcache
+References: <1297455456-21706-1-git-send-email-gdalex@gmail.com>
+In-Reply-To: <1297455456-21706-1-git-send-email-gdalex@gmail.com>
+X-OriginalArrivalTime: 11 Feb 2011 20:38:25.0598 (UTC)
+	FILETIME=[A1BAF5E0:01CBCA2B]
+Subject: Re: [PATCH] libtomcrypt: updated download link
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,33 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 20:22:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 11 Feb 2011 20:39:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 02/11/2011 01:17 PM, George Alexandru Dorobantu wrote:
+> * updated the download link; libtomcrypt has moved to google code and the old link is dead
+>
+> Signed-off-by: George Alexandru Dorobantu<gdalex@gmail.com>
+> ---
+>   recipes/libtomcrypt/libtomcrypt_1.17.bb |    2 +-
+>   1 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/libtomcrypt/libtomcrypt_1.17.bb b/recipes/libtomcrypt/libtomcrypt_1.17.bb
+> index 9fc9fd0..2f82e36 100644
+> --- a/recipes/libtomcrypt/libtomcrypt_1.17.bb
+> +++ b/recipes/libtomcrypt/libtomcrypt_1.17.bb
+> @@ -9,7 +9,7 @@ PRIORITY = "optional"
+>   LICENSE = "PD"
+>   PR = "r0"
+>
+> -SRC_URI = "http://libtom.org/files/crypt-${PV}.tar.bz2"
+> +SRC_URI = "http://libtomcrypt.googlecode.com/files/crypt-${PV}.tar.bz2"
+>
+>   inherit autotools
+>
 
-On 11-02-11 20:35, Denys Dmytriyenko wrote:
-> From: Denys Dmytriyenko <denys@ti.com>
-> 
-> * Besides checking for kernel version, bootargs or cmdline changes between
-> reboots, also consider changes in /proc/devices to invalidate device cache.
-> 
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Applied, thanks!
 
-Acked-by: Koen Kooi <k-kooi@ti.com>
-
-FWIW, to make everything work properly newer udevs might need a change
-in the trigger script to explicitly use --action=add, but I need to run
-some more tests.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNVZo+MkyGM64RGpERAj97AJ9G4UOkQ9suecrPe0GvI7en+sRq0wCfbIX+
-FieAuvTwv3YKyCBJk9ckaU4=
-=iC0+
------END PGP SIGNATURE-----
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
