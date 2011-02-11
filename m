@@ -1,35 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Pnq3X-0003YE-Ij for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 11:16:51 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Pnq2S-0006c1-Ad for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 11:15:44 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 11:15:44 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <sledz@dresearch.de>) id 1PnrOp-00051O-Qn
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Feb 2011 12:42:55 +0100
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 4406E49128C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 11:15:44 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 11 Feb 2011 12:41:52 +0100 (CET)
+Received: from fsc-480-012-88.intern.dresearch.de ([10.32.10.177]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
+	Fri, 11 Feb 2011 12:41:52 +0100
+Received: by fsc-480-012-88.intern.dresearch.de (Postfix, from userid 10000)
+	id 5A3F17208C; Fri, 11 Feb 2011 12:41:50 +0100 (CET)
+From: Steffen Sledz <sledz@dresearch.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 11 Feb 2011 11:15:32 +0100
-Message-ID: <ij3284$ugp$1@dough.gmane.org>
-References: <20110203093253.GG4580@excalibur.local>	<201102031054.08764.ml@vdm-design.de>
-	<20110203101242.GF3265@jama>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <20110203101242.GF3265@jama>
-X-Enigmail-Version: 1.0.1
-Subject: Re: libnl vs. libnl2 madness
+Date: Fri, 11 Feb 2011 12:41:33 +0100
+Message-Id: <1297424493-25116-1-git-send-email-sledz@dresearch.de>
+X-Mailer: git-send-email 1.7.1
+X-OriginalArrivalTime: 11 Feb 2011 11:41:52.0414 (UTC)
+	FILETIME=[AD18EBE0:01CBC9E0]
+Subject: [PATCH] testscript.sh: be able to use branches other that testing-next
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,64 +34,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 10:16:51 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 11 Feb 2011 11:42:56 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+---
+ contrib/testing/testscript.sh |   22 ++++++++++++++--------
+ 1 files changed, 14 insertions(+), 8 deletions(-)
 
-On 03-02-11 11:12, Martin Jansa wrote:
-> On Thu, Feb 03, 2011 at 10:54:08AM +0100, Thomas Zimmermann wrote:
->> On Thursday 03 February 2011 10:32:53 Stefan Schmidt wrote:
->>> Hello.
->>>
->>> The last hours I was trying to compile wpa_supplicant with nl80211 support.
->>> That needs netlink support through libnl or libnl2.
->>>
->>> Enabling the option to use libnl2, not that easy to find, still breaks with
->>> missing header files. Checking the libnl2 source shows that they are
->>> provided. After some head on the table banging I found:
->>>
->>> commit 880e00d3b7ccf66d9421a06bc28e553e07842b59
->>> Author: Michael 'Mickey' Lauer <mickey@vanille-media.de>
->>> Date:   Tue Nov 24 16:33:06 2009 +0000
->>>
->>>     libnl2: change includedir to not step over libnl1; also convert to new
->>> staging
->>
->> At that time there was just one recipe depending on libnl2 and that was FSO2.
->> I think one month ago JaMa has build the first SHR image without libnl(1), 
-> 
-> yes after couple of changes
-> http://git.openembedded.org/cgit.cgi/openembedded/log/?h=org.openembedded.dev&qt=grep&q=libnl
-> 
->> until then it was impossible because of some important parts. I'm not sure but 
->> i think the main blocker was bluez4 (Can't check now).
-> 
-> Yes older bluez4 with nl plugin (which was removed later).
-> 
-> and:
-> http://gitorious.org/~jama/angstrom/jama-shr-experimental/commit/70b13d30b335b8fd67116d3bc0834382a77bc319
-
-> 85	ANGSTROM_BLACKLIST_pn-iw = "iw depends on libnl we want libnl2"
-
-That one was fixed
-
-> 90	ANGSTROM_BLACKLIST_pn-rfkill = "rfkill depends on libnl we want libnl2"
-
-That one was fixed as well
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNVQxEMkyGM64RGpERAtyqAJ9RH01ASiC4/BebDfkW4Vj/BdQiHACePQBQ
-chy6qKs4vwoz7joQk0u/x9E=
-=H06U
------END PGP SIGNATURE-----
+diff --git a/contrib/testing/testscript.sh b/contrib/testing/testscript.sh
+index 7ae2bd5..23c244b 100755
+--- a/contrib/testing/testscript.sh
++++ b/contrib/testing/testscript.sh
+@@ -1,21 +1,27 @@
+ # this script can be used for testing purposes.
+ # see also http://wiki.openembedded.net/index.php/TestingScript
+ 
+-# you can define your machine/distro/recipe below (remove the #) 
+-# or you can pick them up from the environment
+-#MACHINE="beagleboard"
+-#DISTRO="minimal"
+-#TARGET_RECIPE="console-image"
++# you can set your machine/distro/recipe/branch in the environment
++# or use these defaults
++[ -n "${MACHINE}" ] || MACHINE="beagleboard"
++[ -n "${DISTRO}" ] || DISTRO="minimal"
++[ -n "${TARGET_RECIPE}" ] || TARGET_RECIPE="console-image"
++[ -n "${TESTING_BRANCH}" ] || TESTING_BRANCH="testing-next"
+ 
+ # test if we have an openembedded dir, clone it if it does not exist
+ if [ ! -d openembedded ]
+ then
+     (git clone git://git.openembedded.org/openembedded)
+-    (cd openembedded; git checkout -b testing-next origin/testing-next)
++else
++    # fetch latest objects and refs
++    (cd openembedded; git fetch)
+ fi
+ 
++# create local testing branch if it does not exist yet
++(cd openembedded; git branch --set-upstream ${TESTING_BRANCH} origin/${TESTING_BRANCH})
++
+ # switch to the testing branch
+-(cd openembedded; git checkout testing-next)
++(cd openembedded; git checkout ${TESTING_BRANCH})
+ 
+ # test if bitbake exist; if not; fetch it and untar it
+ if [ ! -d bitbake-1.10.2 ]
+@@ -80,7 +86,7 @@ export BBPATH=${TOPDIR}/openembedded
+ rm -rf ${TOPDIR}/tmp
+ 
+ # add an echo about the vars so we can see what has been done in a log file
+-echo $MACHINE $DISTRO $TARGET_RECIPE
++echo ${MACHINE} ${DISTRO} ${TARGET_RECIPE} ${TESTING_BRANCH} `(cd openembedded;git --no-pager log --max-count=1 --pretty=format:%H)`
+ 
+ # and do the actual work.
+ bitbake ${TARGET_RECIPE}
+-- 
+1.7.1
 
 
 
