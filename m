@@ -1,33 +1,37 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Pnukd-0002H0-Dw
+Received: from sirius.lasnet.de ([78.47.116.19])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <stefan@datenfreihafen.org>) id 1PnumI-0002Jt-JL
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 16:17:39 +0100
-Received: (qmail 6860 invoked by uid 503); 11 Feb 2011 15:58:41 -0000
-Received: from b6.ovh.net (HELO mail408.ha.ovh.net) (213.186.33.56)
-	by 63.mail-out.ovh.net with SMTP; 11 Feb 2011 15:58:40 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 11 Feb 2011 17:16:35 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 11 Feb 2011 17:16:34 +0200
-Message-ID: <4D5552D1.6040805@eukrea.com>
-Date: Fri, 11 Feb 2011 16:16:33 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Fri, 11 Feb 2011 16:19:22 +0100
+Received: from p5b033464.dip.t-dialin.net ([91.3.52.100] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
+	id 1PnulF-0007B0-4m by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Feb 2011 16:18:19 +0100
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1PnulE-0004rM-KC
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Feb 2011 16:18:16 +0100
+Date: Fri, 11 Feb 2011 16:18:16 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110211151816.GM9652@excalibur.local>
+References: <1297429080-3986-1-git-send-email-obi@opendreambox.org>
+	<1297429080-3986-5-git-send-email-obi@opendreambox.org>
+	<20110211144100.GK9652@excalibur.local>
+	<4D554D97.2050208@opendreambox.org>
 MIME-Version: 1.0
-To: Andreas Oberritter <obi@opendreambox.org>
-References: <1297428596-27694-1-git-send-email-obi@opendreambox.org>
-	<1297428596-27694-2-git-send-email-obi@opendreambox.org>
-In-Reply-To: <1297428596-27694-2-git-send-email-obi@opendreambox.org>
-X-Ovh-Tracer-Id: 5967832458332974485
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/2] busybox: create busybox-inetd package
+In-Reply-To: <4D554D97.2050208@opendreambox.org>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.1 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Subject: Re: [PATCH 5/5] wpa-supplicant-0.7.3: depend on openssl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,27 +45,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 15:17:39 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 11 Feb 2011 15:19:22 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi Andreas,
+Hello.
 
-On 11/02/2011 13:49, Andreas Oberritter wrote:
-> * Create package if CONFIG_INETD=y.
-> * Use update-alternatives with priority 50.
-> * Install initscript and inetd.conf.
-> * RPROVIDE inetd
->
-> Signed-off-by: Andreas Oberritter<obi@opendreambox.org>
-> CC: Eric Bénard<eric@eukrea.com>
-> ---
-Acked-by: Eric Bénard <eric@eukrea.com>
+On Fri, 2011-02-11 at 15:54, Andreas Oberritter wrote:
+> 
+> On 02/11/2011 03:41 PM, Stefan Schmidt wrote:
+> > On Fri, 2011-02-11 at 12:58, Andreas Oberritter wrote:
+> >> * let defconfig decide which crypto library to use
+> >>
+> >> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> >> ---
+> >>  recipes/wpa-supplicant/wpa-supplicant-0.7.inc |    2 +-
+> >>  1 files changed, 1 insertions(+), 1 deletions(-)
+> >>
+> >> diff --git a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+> >> index f64eb79..e01d1ef 100644
+> >> --- a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+> >> +++ b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+> >> @@ -6,7 +6,7 @@ LICENSE = "GPLv2 | BSD"
+> >>  LIC_FILES_CHKSUM = "file://../COPYING;md5=c54ce9345727175ff66d17b67ff51f58 \
+> >>                      file://../README;md5=54cfc88015d3ce83f7156e63c6bb1738 \
+> >>                      file://wpa_supplicant.c;beginline=1;endline=17;md5=acdc5a4b0d6345f21f136eace747260e"
+> >> -DEPENDS = "gnutls dbus libnl2 ${@base_contains("COMBINED_FEATURES", "madwifi", "madwifi-ng", "",d)}"
+> >> +DEPENDS = "gnutls dbus libnl2 openssl ${@base_contains("COMBINED_FEATURES", "madwifi", "madwifi-ng", "",d)}"
+> >>  RRECOMMENDS_${PN} = "wpa-supplicant-passphrase wpa-supplicant-cli"
+> > 
+> > Hmm, that one I don't really like. We now build gnutls _and_ openssl even if we
+> > only need one of it. As the config may be overriden for distros/machines I have
+> > no good idea how to check for it during dependency calculation though. Anyone
+> > else an idea?
+> 
+> In general, in OE we build a whole lot of packages that aren't required
+> by the target image. Here, we already build dbus, even though it might
+> be disabled by an overridden config. Since both gnutls and openssl are
+> likely to be used by other packages, this adds no cost at all for many
+> targets, especially because only the library that actually gets linked
+> to is going to end up in RDEPENDS_${PN}.
 
-Not tested yet, can you push it as I'm preparing busybox 1.18.3 update so I 
-would like to test it with your patch ?
+You have very valid pount here about dbus. I still would like to have better
+solution that sets the dependency from the given config but thats a bit dreaming
+I think. So:
 
-Thanks,
-Eric
+Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
+
+regards
+Stefan Schmidt
 
 
