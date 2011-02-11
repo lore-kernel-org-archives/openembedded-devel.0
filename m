@@ -1,41 +1,30 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Pnsfj-000540-OL
+	(envelope-from <obi@opendreambox.org>) id 1Pnsfg-00054E-2g
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 14:04:29 +0100
-Received: by bwz10 with SMTP id 10so2988116bwz.6
+	Fri, 11 Feb 2011 14:04:28 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 995DB314D9EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 05:03:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=fRsH4jez4YY3QwCfOrVFGChu4b7mvfJmW2+/n1VkTLU=;
-	b=aBQOQz4zFqPvTytH0xu12TuO1gdYKaNgx1dFDNVElRwSXPnQBykqKjfIvc/ZFJxT+k
-	XrGn83zWd5cb5HSExo08Tv89BtVfsYUhOfEzDaS/YsADvUZIA/eGmXRQDeSTurv9H1Yn
-	U7mrqXUkemkL4wHpVMGF2T1yseOTpheEp3RK0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=hAmSUx83ittG4JhDz1TZqrjByRVSUIj66mpFwYT0y5omqxuaM8x9gjWj7jKPdxNkMc
-	m5+BnG3AGZuDdiHVulg5FNYGvO7inXVoihk9AjEsF8WUTF7F+ZlDvg1o672O8ReDVJe/
-	8IPwtMMhYtdX2U1vhZNsYNa2hABh9TPiUC0lg=
-MIME-Version: 1.0
-Received: by 10.204.60.17 with SMTP id n17mr1021886bkh.190.1297429386705; Fri,
-	11 Feb 2011 05:03:06 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.56.135 with HTTP; Fri, 11 Feb 2011 05:03:06 -0800 (PST)
-In-Reply-To: <1297428703-2330-4-git-send-email-obi@opendreambox.org>
-References: <1297428703-2330-1-git-send-email-obi@opendreambox.org>
-	<1297428703-2330-4-git-send-email-obi@opendreambox.org>
+	Fri, 11 Feb 2011 14:03:16 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id OL28RKJThf6a
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Feb 2011 14:03:07 +0100 (CET)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id 32790314D9FD
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Feb 2011 14:03:06 +0100 (CET)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Fri, 11 Feb 2011 13:03:06 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
+To: openembedded-devel@lists.openembedded.org
 Date: Fri, 11 Feb 2011 13:03:06 +0000
-X-Google-Sender-Auth: 6CjTfrDbwekX3631hemeMbYqnBI
-Message-ID: <AANLkTi=NyuTs44uL5G0xytxM=m9nqvdccoG1Nuv_kGUb@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Andreas Oberritter <obi@opendreambox.org>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 4/4] gitpkgv.bbclass: rename git_drop_tag_prefix to fix conflict
+Message-Id: <1297429386-5688-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.2.3
+Subject: [PATCH] gst-plugins-base-0.10.32: use integer-based resampling without FPU
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,24 +39,42 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 11 Feb 2011 13:04:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 11, 2011 at 12:51, Andreas Oberritter <obi@opendreambox.org> wr=
-ote:
-> * fixes ERROR: Error Method already seen: git_drop_tag_prefix in
-> =A0'gitver.bbclass' now in 'gitpkgv.bbclass'
->
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> CC: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ recipes/gstreamer/gst-plugins-base_0.10.32.bb |    9 +++++++--
+ 1 files changed, 7 insertions(+), 2 deletions(-)
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+diff --git a/recipes/gstreamer/gst-plugins-base_0.10.32.bb b/recipes/gstreamer/gst-plugins-base_0.10.32.bb
+index f30c4f9..025b589 100644
+--- a/recipes/gstreamer/gst-plugins-base_0.10.32.bb
++++ b/recipes/gstreamer/gst-plugins-base_0.10.32.bb
+@@ -7,7 +7,7 @@ SRC_URI += " \
+ SRC_URI[archive.md5sum] = "2920af2b3162f3d9fbaa7fabc8ed4d38"
+ SRC_URI[archive.sha256sum] = "e9aabfac83f6480896da0686e9c911989f896fbad634821b7771ed84a446172b"
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ PROVIDES += "gst-plugins"
+ 
+@@ -17,8 +17,13 @@ PROVIDES += "gst-plugins"
+ # a missing alsa plugin
+ DEPENDS += "udev cdparanoia pango libtheora alsa-lib libsm virtual/libx11 freetype gnome-vfs libxv libxrandr gtk+"
+ 
++def get_gstreamer_fpu_setting(bb, d):
++    if bb.data.getVar('TARGET_FPU', d, 1) in [ 'soft' ]:
++        return "--with-audioresample-format=int"
++    return ""
++
+ # Needs a udev that enabled gudev, which isn't the default
+-EXTRA_OECONF += " --with-gudev --disable-gnome_vfs"
++EXTRA_OECONF += "--with-gudev --disable-gnome_vfs ${@get_gstreamer_fpu_setting(bb, d)}"
+ 
+ do_configure_prepend() {
+ 	sed -i -e s:QtGui:NoQtGui:g ${S}/configure.ac
+-- 
+1.7.2.3
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
 
 
