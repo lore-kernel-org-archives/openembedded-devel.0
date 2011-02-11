@@ -1,37 +1,31 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from smtprelay-b12.telenor.se ([62.127.194.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1PnxP6-0006qO-8g
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1PnxPz-0006rU-7F
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 19:07:36 +0100
-Received: by ewy28 with SMTP id 28so1397875ewy.6
+	Fri, 11 Feb 2011 19:08:31 +0100
+Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
+	by smtprelay-b12.telenor.se (Postfix) with ESMTP id 4CF97C261
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 10:06:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=T0xlRbF2dplIgwrGvbdOHwS4e9gjSIz3IwskPfCcwxo=;
-	b=AQ8d9zDvrr/P0toax752r4jD8t5WeE5brpzLIRmKtJevmwILGYiGkyQ6Cj38i900An
-	ifE92/kkw6/i7NcN3xk49z9Pti9pmC3rskc+Dp30kNcXODRas3K7ZyI5b7Y6xY1AWvzF
-	T4mYWb+OLvZxWXlTa6nw14RsmLGTNPKTOKnDI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=DL7IUDHjtc+uGI4JSWsNkfV8t4zA8ZPErKtbq8LfzEWlNdPupXv1X5nzN/QR7uT1+8
-	5by9HZw3KWZvy3BNkej0FCWSlnDgMe7qTJTcJDwJADh9HgnPVeIdYJmIFAH7TgLRbSpS
-	o2QdfYz2+JSOGSSEsp13e8xT9OJtZNg7EP1+U=
-Received: by 10.103.226.13 with SMTP id d13mr538881mur.114.1297447590429;
-	Fri, 11 Feb 2011 10:06:30 -0800 (PST)
-Received: from localhost.localdomain (ns.tefnet.pl [188.165.206.204])
-	by mx.google.com with ESMTPS id l3sm521015fan.0.2011.02.11.10.06.28
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 11 Feb 2011 10:06:29 -0800 (PST)
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+	Fri, 11 Feb 2011 19:07:24 +0100 (CET)
+X-SENDER-IP: [83.227.56.243]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AggSAM4JVU1T4zjzPGdsb2JhbAAMl0qOKQEBAQE1iF+yVYVdBIt8
+X-IronPort-AV: E=Sophos;i="4.60,456,1291590000"; d="scan'208";a="173742430"
+Received: from c-f338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.244]) ([83.227.56.243])
+	by ipb1.telenor.se with ESMTP; 11 Feb 2011 19:07:24 +0100
+Message-ID: <4D557ADB.8090307@atmel.com>
+Date: Fri, 11 Feb 2011 19:07:23 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Feb 2011 19:06:19 +0100
-Message-Id: <1297447579-5311-1-git-send-email-filip.zyzniewski@gmail.com>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <AANLkTik+8d-hWG+ndtvSP7cKbbHhfyXq3tLxw1Fyi-=6@mail.gmail.com>
-References: <AANLkTik+8d-hWG+ndtvSP7cKbbHhfyXq3tLxw1Fyi-=6@mail.gmail.com>
-Subject: [PATCH] initscripts: handle busybox version of makedevs properly.
+References: <4D51566B.9060603@mentor.com>	<4D516F8B.4090703@gmail.com>	<4D517961.7020000@mentor.com>	<AANLkTimzzjRgbpJS-fXKYk=tOMUgCihB8=M=V7gLGyuP@mail.gmail.com>
+	<4D519B54.503@mentor.com>
+In-Reply-To: <4D519B54.503@mentor.com>
+Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,36 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 18:07:36 -0000
+X-List-Received-Date: Fri, 11 Feb 2011 18:08:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Makedevs from busybox has a different command line syntax.
 
-Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
----
- recipes/initscripts/initscripts-1.0/devices |    8 +++++++-
- 1 files changed, 7 insertions(+), 1 deletions(-)
+>>
+>> Tom
+>>
+>> You should create a wiki page like this
+>>
+>> http://wiki.openembedded.org/index.php/Release-2010.12
+>>
+>> and everyone who is building some combination for release is welcome
+>> to populate the matrix with their combinations
+>
+> Good point, I've created 
+> http://wiki.openembedded.org/index.php/Release-2011.03 to get us 
+> started, but it's not populated with the table yet nor does it quite 
+> have valid direction yet.
+>
 
-diff --git a/recipes/initscripts/initscripts-1.0/devices b/recipes/initscripts/initscripts-1.0/devices
-index 67a2ec8..4059628 100755
---- a/recipes/initscripts/initscripts-1.0/devices
-+++ b/recipes/initscripts/initscripts-1.0/devices
-@@ -56,7 +56,13 @@ else
- 	done
- 	ln -sf /proc/self/fd /dev/fd
- 	ln -sf /proc/kcore /dev/core
--	/sbin/makedevs -r / -D /etc/device_table
-+
-+	if test `readlink -f "/sbin/makedevs"` = "/bin/busybox"; then
-+		MAKEDEV_ARGS="-d /etc/device_table /"
-+	else
-+		MAKEDEV_ARGS="-r / -D /etc/device_table"
-+	fi
-+	/sbin/makedevs $MAKEDEV_ARGS
- 	if test $? -ne 0; then
- 		if test "$VERBOSE" != "no"; then echo "failed"; fi
- 	else
+Why no direct link from the front page.
+I think a link to "Releases" under "Distributions and Devices" would 
+make sense.
+I would do it myself, except I do not have write access to the front page.
+
 -- 
-1.7.1
+Best Regards
+Ulf Samuelsson
 
 
 
