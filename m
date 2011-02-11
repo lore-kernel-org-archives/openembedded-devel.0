@@ -1,37 +1,28 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PnsW9-0001Q8-Tr
+	(envelope-from <obi@opendreambox.org>) id 1Pnsae-0001pW-1H
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 13:54:34 +0100
-Received: by iyj8 with SMTP id 8so2356146iyj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 04:53:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=DtK6MLROM9DxtuUEcP+JVnhxXo0UoBXzb8fHHKxbJoQ=;
-	b=M7oFaRzO97tyNeQ/IwYn+ipVeVU7d23p4O7qHz6lkpd3ysOrXqSnniqT9ZZscHekfx
-	0nVIpclKJJVQn6p7EfHYVUcaEok/zf2EfHePSnVcOFNiwaNJzT/HkHO81S+MS9iQRGO4
-	rZI6Vie1ADi8qDGJeM8vIAuwn1JakJ4YuNFcE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=J0KXuhx7cC7khr2d/M8ctljaxSPtbyylsAojhsGMEf5XJi8Ybst6LBR/hdjeRpmdUG
-	yp2MWwVuA+KgsrA44npO5hfzoVTMPotCzFX4RlySqSwWYjgC8IH1cRWOpXEBgmB9dZ7r
-	vxvAFPsGjAOSw/9TpKTFTMez8nauPfOxIkCGc=
-MIME-Version: 1.0
-Received: by 10.231.39.201 with SMTP id h9mr325992ibe.147.1297428806643; Fri,
-	11 Feb 2011 04:53:26 -0800 (PST)
-Received: by 10.231.30.73 with HTTP; Fri, 11 Feb 2011 04:53:26 -0800 (PST)
-In-Reply-To: <4D550B17.6000607@atmel.com>
-References: <4D51566B.9060603@mentor.com>
-	<20110209100249.GG28019@excalibur.local>
-	<4D550B17.6000607@atmel.com>
-Date: Fri, 11 Feb 2011 13:53:26 +0100
-Message-ID: <AANLkTinxsHq86KY7xBBd4=iJmG3Xcz_8nx3Ex0hHHM=P@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Fri, 11 Feb 2011 13:59:12 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id BFA65314DA02;
+	Fri, 11 Feb 2011 13:58:08 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id fj1Re-V1VeNN; Fri, 11 Feb 2011 13:58:01 +0100 (CET)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id 24685314D877;
+	Fri, 11 Feb 2011 13:58:00 +0100 (CET)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Fri, 11 Feb 2011 12:58:00 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
+Date: Fri, 11 Feb 2011 12:57:56 +0000
+Message-Id: <1297429080-3986-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.2.3
+Cc: Stefan Schmidt <stefan@buglabs.net>
+Subject: [PATCH 1/5] wpa-supplicant-0.7.3: remove unused files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,51 +36,473 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 12:54:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 11 Feb 2011 12:59:12 -0000
 
-2011/2/11 Ulf Samuelsson <ulf.samuelsson@atmel.com>:
-> Stefan Schmidt skrev 2011-02-09 11:02:
->>
->> Hello.
->>
->> On Tue, 2011-02-08 at 07:42, Tom Rini wrote:
->>>
->>> As March is fast approaching I want to gather the list of DISTRO /
->>> MACHINE / BBPKGS targets that the various distributions would like
->>> to see at least compile tested (volunteers for HW testing welcome!).
->>
->> I will do compile and runtime testing on bug20 (omap3). Targets would be
->> console-, minimal- and bug-image-production. The later one includes the
->> complete
->> oenjdk-6 stuff with zero as JIT, the osgi recipes and much of the normal X
->> and
->> linux stuff.
->>
->
-> I think that for the AT91 the three most important targets are:
->
-> AT91SAM9M10EKES
-> AT91SAM9G20EK
-> AT91SAM9263EK
->
-> I noted that when I added the gpe-mini-browser2
-> to my image, the boot fails.
->
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ .../wpa-supplicant/wpa-supplicant-0.7.3/defconfig  |  157 ----------------
+ .../wpa-supplicant/wpa-supplicant-0.7.3/init.sh    |   50 ------
+ .../wpa_supplicant-0.5.7-always-scan.patch         |   12 --
+ ...a_supplicant-fix-deprecated-dbus-function.patch |  187 --------------------
+ .../wpa_supplicant_default.conf                    |   13 --
+ 5 files changed, 0 insertions(+), 419 deletions(-)
+ delete mode 100644 recipes/wpa-supplicant/wpa-supplicant-0.7.3/defconfig
+ delete mode 100644 recipes/wpa-supplicant/wpa-supplicant-0.7.3/init.sh
+ delete mode 100644 recipes/wpa-supplicant/wpa-supplicant-0.7.3/wpa_supplicant-0.5.7-always-scan.patch
+ delete mode 100644 recipes/wpa-supplicant/wpa-supplicant-0.7.3/wpa_supplicant-fix-deprecated-dbus-function.patch
+ delete mode 100644 recipes/wpa-supplicant/wpa-supplicant-0.7.3/wpa_supplicant_default.conf
 
-If there is room left, we have interest in:
+diff --git a/recipes/wpa-supplicant/wpa-supplicant-0.7.3/defconfig b/recipes/wpa-supplicant/wpa-supplicant-0.7.3/defconfig
+deleted file mode 100644
+index c165343..0000000
+--- a/recipes/wpa-supplicant/wpa-supplicant-0.7.3/defconfig
++++ /dev/null
+@@ -1,157 +0,0 @@
+-# This file lists the configuration options that are used when building the
+-# hostapd binary. All lines starting with # are ignored. Configuration option
+-# lines must be commented out complete, if they are not to be included, i.e.,
+-# just setting VARIABLE=n is not disabling that variable.
+-#
+-# This file is included in Makefile, so variables like CFLAGS and LIBS can also
+-# be modified from here. In most cass, these lines should use += in order not
+-# to override previous values of the variables.
+-
+-CFLAGS = $(TARGET_CFLAGS) -I../hostapd -I../utils -I../driver/modules -Wall -MMD
+-
+-# for wpa_supplicant, wpa_cli
+-LIBS = $(TARGET_LDFLAGS)
+-
+-# for wpa_passphrase:
+-LIBS_p = $(TARGET_LDFLAGS)
+-
+-
+-# Uncomment following two lines and fix the paths if you have installed openssl
+-# in non-default location
+-#CFLAGS += -I/usr/local/openssl/include
+-#LIBS += -L/usr/local/openssl/lib
+-
+-# Example configuration for various cross-compilation platforms
+-
+-#### sveasoft (e.g., for Linksys WRT54G) ######################################
+-#CC=mipsel-uclibc-gcc
+-#CC=/opt/brcm/hndtools-mipsel-uclibc/bin/mipsel-uclibc-gcc
+-#CFLAGS += -Os
+-#CPPFLAGS += -I../src/include -I../../src/router/openssl/include
+-#LIBS += -L/opt/brcm/hndtools-mipsel-uclibc-0.9.19/lib -lssl
+-###############################################################################
+-
+-#### openwrt (e.g., for Linksys WRT54G) #######################################
+-#CC=mipsel-uclibc-gcc
+-#CC=/opt/brcm/hndtools-mipsel-uclibc/bin/mipsel-uclibc-gcc
+-#CFLAGS += -Os
+-#CPPFLAGS=-I../src/include -I../openssl-0.9.7d/include \
+-#	-I../WRT54GS/release/src/include
+-#LIBS = -lssl
+-###############################################################################
+-
+-
+-# Driver interface for Host AP driver
+-CONFIG_DRIVER_HOSTAP=y
+-
+-# Driver interface for Agere driver
+-CONFIG_DRIVER_HERMES=y
+-
+-# Driver interface for madwifi driver
+-#CONFIG_DRIVER_MADWIFI=y
+-# Change include directories to match with the local setup
+-#CFLAGS += -I../madwifi/wpa
+-
+-# Driver interface for Prism54 driver
+-#CONFIG_DRIVER_PRISM54=y
+-
+-# Driver interface for ndiswrapper
+-#CONFIG_DRIVER_NDISWRAPPER=y
+-
+-# Driver interface for Atmel driver
+-#CONFIG_DRIVER_ATMEL=y
+-
+-# Driver interface for Broadcom driver
+-#CONFIG_DRIVER_BROADCOM=y
+-# Example path for wlioctl.h; change to match your configuration
+-#CFLAGS += -I/opt/WRT54GS/release/src/include
+-
+-# Driver interface for Intel ipw2100 driver
+-#CONFIG_DRIVER_IPW2100=y
+-
+-# Driver interface for generic Linux wireless extensions
+-CONFIG_DRIVER_WEXT=y
+-
+-# Driver interface for FreeBSD net80211 layer (e.g., Atheros driver)
+-#CONFIG_DRIVER_BSD=y
+-#CFLAGS += -I/usr/local/include
+-#LIBS += -L/usr/local/lib
+-
+-# Driver interface for Windows NDIS
+-#CONFIG_DRIVER_NDIS=y
+-#CFLAGS += -I/usr/include/w32api/ddk
+-#LIBS += -L/usr/local/lib
+-# For native build using mingw
+-#CONFIG_NATIVE_WINDOWS=y
+-# Additional directories for cross-compilation on Linux host for mingw target
+-#CFLAGS += -I/opt/mingw/mingw32/include/ddk
+-#LIBS += -L/opt/mingw/mingw32/lib
+-#CC=mingw32-gcc
+-
+-# Driver interface for development testing
+-#CONFIG_DRIVER_TEST=y
+-
+-# Enable IEEE 802.1X Supplicant (automatically included if any EAP method is
+-# included)
+-CONFIG_IEEE8021X_EAPOL=y
+-
+-# EAP-MD5 (automatically included if EAP-TTLS is enabled)
+-CONFIG_EAP_MD5=y
+-
+-# EAP-MSCHAPv2 (automatically included if EAP-PEAP is enabled)
+-CONFIG_EAP_MSCHAPV2=y
+-
+-# EAP-TLS
+-CONFIG_EAP_TLS=y
+-
+-# EAL-PEAP
+-CONFIG_EAP_PEAP=y
+-
+-# EAP-TTLS
+-CONFIG_EAP_TTLS=y
+-
+-# EAP-GTC
+-CONFIG_EAP_GTC=y
+-
+-# EAP-OTP
+-CONFIG_EAP_OTP=y
+-
+-# EAP-SIM (enable CONFIG_PCSC, if EAP-SIM is used)
+-#CONFIG_EAP_SIM=y
+-
+-# EAP-PSK (experimental; this is _not_ needed for WPA-PSK)
+-#CONFIG_EAP_PSK=y
+-
+-# LEAP
+-CONFIG_EAP_LEAP=y
+-
+-# EAP-AKA (enable CONFIG_PCSC, if EAP-AKA is used)
+-#CONFIG_EAP_AKA=y
+-
+-# PKCS#12 (PFX) support (used to read private key and certificate file from
+-# a file that usually has extension .p12 or .pfx)
+-CONFIG_PKCS12=y
+-
+-# PC/SC interface for smartcards (USIM, GSM SIM)
+-# Enable this if EAP-SIM or EAP-AKA is included
+-#CONFIG_PCSC=y
+-
+-# Development testing
+-#CONFIG_EAPOL_TEST=y
+-
+-# Replace native Linux implementation of packet sockets with libdnet/libpcap.
+-# This will be automatically set for non-Linux OS.
+-#CONFIG_DNET_PCAP=y
+-
+-# Include control interface for external programs, e.g, wpa_cli
+-CONFIG_CTRL_IFACE=y
+-
+-# Include interface for using external supplicant (Xsupplicant) for EAP
+-# authentication
+-#CONFIG_XSUPPLICANT_IFACE=y
+-
+-# Include support for GNU Readline and History Libraries in wpa_cli.
+-# When building a wpa_cli binary for distribution, please note that these
+-# libraries are licensed under GPL and as such, BSD license may not apply for
+-# the resulting binary.
+-#CONFIG_READLINE=y
+diff --git a/recipes/wpa-supplicant/wpa-supplicant-0.7.3/init.sh b/recipes/wpa-supplicant/wpa-supplicant-0.7.3/init.sh
+deleted file mode 100644
+index bc7ee91..0000000
+--- a/recipes/wpa-supplicant/wpa-supplicant-0.7.3/init.sh
++++ /dev/null
+@@ -1,50 +0,0 @@
+-#!/bin/sh
+-
+-PATH=/sbin:/bin:/usr/sbin:/usr/bin
+-
+-DAEMON=/usr/sbin/wpa_supplicant
+-CONFIG="/etc/wpa_supplicant.conf"
+-PNAME="wpa_supplicant"
+-
+-# insane defaults
+-OPTIONS=""
+-
+-test -f /etc/default/wpa && . /etc/default/wpa
+-
+-if [ ! -f $CONFIG ]; then
+-	echo "No configuration file found, not starting."
+-	exit 1
+-fi
+-
+-test -f $DAEMON || exit 0
+-
+-case "$1" in
+-	start)
+-		echo -n "Starting wpa_supplicant: "
+-		start-stop-daemon -S -b -x $DAEMON -- -Bw -c $CONFIG $OPTIONS >/dev/null
+-		echo "done."
+-		;;
+-	stop)
+-		echo -n "Stopping wpa_supplicant: "
+-		start-stop-daemon -K -n $PNAME >/dev/null
+-		echo "done."
+-		;;
+-	reload|force-reload)
+-		echo -n "Reloading wpa_supplicant: "
+-		killall -HUP $PNAME
+-		echo "done."
+-		;;
+-	restart)
+-		echo -n "Restarting wpa_supplicant: "
+-		start-stop-daemon -K -n $PNAME >/dev/null
+-		sleep 1
+-		start-stop-daemon -S -b -x $DAEMON -- -Bw -c $CONFIG $OPTIONS >/dev/null
+-		echo "done."
+-		;;
+-	*)
+-		echo "Usage: $0 {start|stop|restart|reload|force-reload}" >&2
+-		exit 1
+-		;;
+-esac
+-
+-exit 0
+diff --git a/recipes/wpa-supplicant/wpa-supplicant-0.7.3/wpa_supplicant-0.5.7-always-scan.patch b/recipes/wpa-supplicant/wpa-supplicant-0.7.3/wpa_supplicant-0.5.7-always-scan.patch
+deleted file mode 100644
+index 25afd07..0000000
+--- a/recipes/wpa-supplicant/wpa-supplicant-0.7.3/wpa_supplicant-0.5.7-always-scan.patch
++++ /dev/null
+@@ -1,12 +0,0 @@
+-diff -up wpa_supplicant-0.5.7/wpa_supplicant.c.always-scan wpa_supplicant-0.5.7/wpa_supplicant.c
+---- wpa_supplicant-0.5.7/wpa_supplicant.c.always-scan	2007-09-25 15:51:35.000000000 -0400
+-+++ wpa_supplicant-0.5.7/wpa_supplicant.c	2007-09-25 16:31:27.000000000 -0400
+-@@ -972,7 +972,7 @@ static void wpa_supplicant_scan(void *el
+- 	struct wpa_ssid *ssid;
+- 	int enabled, scan_req = 0, ret;
+- 
+--	if (wpa_s->disconnected)
+-+	if (wpa_s->disconnected && !wpa_s->scan_req)
+- 		return;
+- 
+- 	enabled = 0;
+diff --git a/recipes/wpa-supplicant/wpa-supplicant-0.7.3/wpa_supplicant-fix-deprecated-dbus-function.patch b/recipes/wpa-supplicant/wpa-supplicant-0.7.3/wpa_supplicant-fix-deprecated-dbus-function.patch
+deleted file mode 100644
+index dbd5e4e..0000000
+--- a/recipes/wpa-supplicant/wpa-supplicant-0.7.3/wpa_supplicant-fix-deprecated-dbus-function.patch
++++ /dev/null
+@@ -1,187 +0,0 @@
+---- dbus_dict_helpers.c.array-fix	2006-12-18 12:31:11.000000000 -0500
+-+++ dbus_dict_helpers.c	2006-12-20 03:17:08.000000000 -0500
+-@@ -629,36 +629,55 @@ dbus_bool_t wpa_dbus_dict_open_read(DBus
+- }
+- 
+- 
+-+#define BYTE_ARRAY_CHUNK_SIZE 34
+-+#define BYTE_ARRAY_ITEM_SIZE (sizeof (char))
+-+
+- static dbus_bool_t _wpa_dbus_dict_entry_get_byte_array(
+--	DBusMessageIter *iter, int array_len, int array_type,
+-+	DBusMessageIter *iter, int array_type,
+- 	struct wpa_dbus_dict_entry *entry)
+- {
+--	dbus_uint32_t i = 0;
+-+	dbus_uint32_t count = 0;
+- 	dbus_bool_t success = FALSE;
+--	char byte;
+-+	char * buffer;
+- 
+--	/* Zero-length arrays are valid. */
+--	if (array_len == 0) {
+--		entry->bytearray_value = NULL;
+--		entry->array_type = DBUS_TYPE_BYTE;
+--		success = TRUE;
+--		goto done;
+--	}
+-+	entry->bytearray_value = NULL;
+-+	entry->array_type = DBUS_TYPE_BYTE;
+- 
+--	entry->bytearray_value = wpa_zalloc(array_len * sizeof(char));
+--	if (!entry->bytearray_value) {
+-+	buffer = wpa_zalloc(BYTE_ARRAY_ITEM_SIZE * BYTE_ARRAY_CHUNK_SIZE);
+-+	if (!buffer) {
+- 		perror("_wpa_dbus_dict_entry_get_byte_array[dbus]: out of "
+- 		       "memory");
+- 		goto done;
+- 	}
+- 
+--	entry->array_type = DBUS_TYPE_BYTE;
+--	entry->array_len = array_len;
+-+	entry->bytearray_value = buffer;
+-+	entry->array_len = 0;
+- 	while (dbus_message_iter_get_arg_type(iter) == DBUS_TYPE_BYTE) {
+-+		char byte;
+-+
+-+		if ((count % BYTE_ARRAY_CHUNK_SIZE) == 0 && count != 0) {
+-+			buffer = realloc(buffer, BYTE_ARRAY_ITEM_SIZE * (count + BYTE_ARRAY_CHUNK_SIZE));
+-+			if (buffer == NULL) {
+-+				perror("_wpa_dbus_dict_entry_get_byte_array["
+-+				       "dbus] out of memory trying to "
+-+				       "retrieve the string array");
+-+				goto done;
+-+			}
+-+		}
+-+		entry->bytearray_value = buffer;
+-+
+- 		dbus_message_iter_get_basic(iter, &byte);
+--		entry->bytearray_value[i++] = byte;
+-+		entry->bytearray_value[count] = byte;
+-+		entry->array_len = ++count;
+- 		dbus_message_iter_next(iter);
+- 	}
+-+
+-+	/* Zero-length arrays are valid. */
+-+	if (entry->array_len == 0) {
+-+		free(entry->bytearray_value);
+-+		entry->strarray_value = NULL;
+-+	}
+-+
+- 	success = TRUE;
+- 
+- done:
+-@@ -666,8 +685,11 @@ done:
+- }
+- 
+- 
+-+#define STR_ARRAY_CHUNK_SIZE 8
+-+#define STR_ARRAY_ITEM_SIZE (sizeof (char *))
+-+
+- static dbus_bool_t _wpa_dbus_dict_entry_get_string_array(
+--	DBusMessageIter *iter, int array_len, int array_type,
+-+	DBusMessageIter *iter, int array_type,
+- 	struct wpa_dbus_dict_entry *entry)
+- {
+- 	dbus_uint32_t count = 0;
+-@@ -677,13 +699,7 @@ static dbus_bool_t _wpa_dbus_dict_entry_
+- 	entry->strarray_value = NULL;
+- 	entry->array_type = DBUS_TYPE_STRING;
+- 
+--	/* Zero-length arrays are valid. */
+--	if (array_len == 0) {
+--		success = TRUE;
+--		goto done;
+--	}
+--
+--	buffer = wpa_zalloc(sizeof (char *) * 8);
+-+	buffer = wpa_zalloc(STR_ARRAY_ITEM_SIZE * STR_ARRAY_CHUNK_SIZE);
+- 	if (buffer == NULL) {
+- 		perror("_wpa_dbus_dict_entry_get_string_array[dbus] out of "
+- 		       "memory trying to retrieve a string array");
+-@@ -696,18 +712,14 @@ static dbus_bool_t _wpa_dbus_dict_entry_
+- 		const char *value;
+- 		char *str;
+- 
+--		if ((count % 8) == 0 && count != 0) {
+--			char **tmp;
+--			tmp = realloc(buffer, sizeof(char *) * (count + 8));
+--			if (tmp == NULL) {
+-+		if ((count % STR_ARRAY_CHUNK_SIZE) == 0 && count != 0) {
+-+			buffer = realloc(buffer, STR_ARRAY_ITEM_SIZE * (count + STR_ARRAY_CHUNK_SIZE));
+-+			if (buffer == NULL) {
+- 				perror("_wpa_dbus_dict_entry_get_string_array["
+- 				       "dbus] out of memory trying to "
+- 				       "retrieve the string array");
+--				free(buffer);
+--				buffer = NULL;
+- 				goto done;
+- 			}
+--			buffer = tmp;
+- 		}
+- 		entry->strarray_value = buffer;
+- 
+-@@ -723,6 +735,13 @@ static dbus_bool_t _wpa_dbus_dict_entry_
+- 		entry->array_len = ++count;
+- 		dbus_message_iter_next(iter);
+- 	}
+-+
+-+	/* Zero-length arrays are valid. */
+-+	if (entry->array_len == 0) {
+-+		free(entry->strarray_value);
+-+		entry->strarray_value = NULL;
+-+	}
+-+
+- 	success = TRUE;
+- 
+- done:
+-@@ -734,7 +753,6 @@ static dbus_bool_t _wpa_dbus_dict_entry_
+- 	DBusMessageIter *iter_dict_val, struct wpa_dbus_dict_entry *entry)
+- {
+- 	int array_type = dbus_message_iter_get_element_type(iter_dict_val);
+--	int array_len;
+- 	dbus_bool_t success = FALSE;
+- 	DBusMessageIter iter_array;
+- 
+-@@ -743,20 +761,14 @@ static dbus_bool_t _wpa_dbus_dict_entry_
+- 
+- 	dbus_message_iter_recurse(iter_dict_val, &iter_array);
+- 
+-- 	array_len = dbus_message_iter_get_array_len(&iter_array);
+--	if (array_len < 0)
+--		return FALSE;
+--
+-  	switch (array_type) {
+- 	case DBUS_TYPE_BYTE:
+- 		success = _wpa_dbus_dict_entry_get_byte_array(&iter_array,
+--							      array_len,
+- 							      array_type,
+- 							      entry);
+- 		break;
+- 	case DBUS_TYPE_STRING:
+- 		success = _wpa_dbus_dict_entry_get_string_array(&iter_array,
+--								array_len,
+- 								array_type,
+- 								entry);
+- 		break;
+-@@ -943,9 +955,17 @@ void wpa_dbus_dict_entry_clear(struct wp
+- 		break;
+- 	case DBUS_TYPE_ARRAY:
+- 		switch (entry->array_type) {
+--		case DBUS_TYPE_BYTE:
+--			free(entry->bytearray_value);
+--			break;
+-+		case DBUS_TYPE_BYTE: {
+-+				free(entry->bytearray_value);
+-+				break;
+-+			}
+-+		case DBUS_TYPE_STRING: {
+-+				int i;
+-+				for (i = 0; i < entry->array_len; i++)
+-+					free (entry->strarray_value[i]);
+-+				free (entry->strarray_value);
+-+				break;
+-+			}
+- 		}
+- 		break;
+- 	}
+diff --git a/recipes/wpa-supplicant/wpa-supplicant-0.7.3/wpa_supplicant_default.conf b/recipes/wpa-supplicant/wpa-supplicant-0.7.3/wpa_supplicant_default.conf
+deleted file mode 100644
+index 8eebdeb..0000000
+--- a/recipes/wpa-supplicant/wpa-supplicant-0.7.3/wpa_supplicant_default.conf
++++ /dev/null
+@@ -1,13 +0,0 @@
+-# This is a basic configuration for WPA with pre-shared keys (WPA-PSK)
+-
+-ctrl_interface=/var/run/wpa_supplicant
+-ctrl_interface_group=0
+-eapol_version=1
+-ap_scan=1
+-network={
+-	ssid="YOUR_SSID"
+-	psk="YOUR WPA PASSWORD IN HEX OR ASCII"
+-	key_mgmt=WPA-PSK
+-	pairwise=CCMP
+-	priority=5
+-}
+-- 
+1.7.2.3
 
-calamari/minimal/console-image
-mpc8313e-rdb/minimal/console-image
-nslu2le/slugos/slugos-image
-nslu2be/slugos/slugos-image
-
-I'l try to set up something here as well, but not sure how often I can
-run it (and check the results).
-(it would be nice if the QA issues in the first two images are solved,
-because then I can use the result of bitbake  to check, now I need to
-fetch all the logs)
-
-Best regards, Frans
 
 
