@@ -1,26 +1,26 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Pnu8c-0000jj-57
+	(envelope-from <stefan@datenfreihafen.org>) id 1Pnu9u-0000ob-JW
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 15:38:24 +0100
+	Fri, 11 Feb 2011 15:39:43 +0100
 Received: from p5b035f5a.dip.t-dialin.net ([91.3.95.90] helo=excalibur.local)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1Pnu7X-0006co-E1 by authid <stefan@sostec.de> with cram_md5
+	id 1Pnu8e-0006dj-2F by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 15:37:18 +0100
+	Fri, 11 Feb 2011 15:38:26 +0100
 Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1Pnu7X-0004kY-1D
+	(envelope-from <stefan@excalibur.local>) id 1Pnu8d-0004kd-Ll
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Feb 2011 15:37:15 +0100
-Date: Fri, 11 Feb 2011 15:37:15 +0100
+	Fri, 11 Feb 2011 15:38:23 +0100
+Date: Fri, 11 Feb 2011 15:38:23 +0100
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110211143714.GI9652@excalibur.local>
+Message-ID: <20110211143823.GJ9652@excalibur.local>
 References: <1297429080-3986-1-git-send-email-obi@opendreambox.org>
-	<1297429080-3986-3-git-send-email-obi@opendreambox.org>
+	<1297429080-3986-4-git-send-email-obi@opendreambox.org>
 MIME-Version: 1.0
-In-Reply-To: <1297429080-3986-3-git-send-email-obi@opendreambox.org>
+In-Reply-To: <1297429080-3986-4-git-send-email-obi@opendreambox.org>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -29,7 +29,7 @@ X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.1 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
 	autolearn=ham version=3.2.5
-Subject: Re: [PATCH 3/5] wpa-supplicant-0.7.3: install only required files for dbus support
+Subject: Re: [PATCH 4/5] wpa-supplicant-0.7.3: enable madwifi support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,7 +43,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Feb 2011 14:38:36 -0000
+X-List-Received-Date: Fri, 11 Feb 2011 14:39:43 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
@@ -52,41 +52,31 @@ Hello.
 On Fri, 2011-02-11 at 12:57, Andreas Oberritter wrote:
 > Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 > ---
->  recipes/wpa-supplicant/wpa-supplicant-0.7.inc |   18 +++++++++++++-----
->  1 files changed, 13 insertions(+), 5 deletions(-)
+>  recipes/wpa-supplicant/wpa-supplicant-0.7.inc |    6 +++++-
+>  1 files changed, 5 insertions(+), 1 deletions(-)
 > 
 > diff --git a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
-> index b56d37c..ca7751c 100644
+> index ca7751c..f64eb79 100644
 > --- a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
 > +++ b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
-> @@ -58,11 +58,19 @@ do_install () {
->  	cd ${D}${sysconfdir}/network/ && \
->  	ln -sf ../if-pre-up.d/wpa-supplicant if-post-down.d/wpa-supplicant
+> @@ -6,7 +6,7 @@ LICENSE = "GPLv2 | BSD"
+>  LIC_FILES_CHKSUM = "file://../COPYING;md5=c54ce9345727175ff66d17b67ff51f58 \
+>                      file://../README;md5=54cfc88015d3ce83f7156e63c6bb1738 \
+>                      file://wpa_supplicant.c;beginline=1;endline=17;md5=acdc5a4b0d6345f21f136eace747260e"
+> -DEPENDS = "gnutls dbus libnl2"
+> +DEPENDS = "gnutls dbus libnl2 ${@base_contains("COMBINED_FEATURES", "madwifi", "madwifi-ng", "",d)}"
+>  RRECOMMENDS_${PN} = "wpa-supplicant-passphrase wpa-supplicant-cli"
 >  
-> -	install -d ${D}/${sysconfdir}/dbus-1/system.d
-> -	install -m 644 ${S}/dbus/dbus-wpa_supplicant.conf ${D}/${sysconfdir}/dbus-1/system.d
-> -	install -d ${D}/${datadir}/dbus-1/system-services
-> -	sed -i -e s:${base_sbindir}:${sbindir}:g ${S}/dbus/*.service
-> -	install -m 644 ${S}/dbus/*.service ${D}/${datadir}/dbus-1/system-services
-> +	if grep -q ^CONFIG_CTRL_IFACE_DBUS=y .config || grep -q ^CONFIG_CTRL_IFACE_DBUS_NEW=y .config; then
-> +		install -d ${D}/${sysconfdir}/dbus-1/system.d
-> +		install -m 644 ${S}/dbus/dbus-wpa_supplicant.conf ${D}/${sysconfdir}/dbus-1/system.d
-> +		install -d ${D}/${datadir}/dbus-1/system-services
-> +		if grep -q ^CONFIG_CTRL_IFACE_DBUS=y .config; then
-> +			sed -i -e s:/sbin:${sbindir}:g ${S}/dbus/fi.epitest.hostap.WPASupplicant.service
-> +			install -m 644 ${S}/dbus/fi.epitest.hostap.WPASupplicant.service ${D}/${datadir}/dbus-1/system-services
-> +		fi
-> +		if grep -q ^CONFIG_CTRL_IFACE_DBUS_NEW=y .config; then
-> +			sed -i -e s:/sbin:${sbindir}:g ${S}/dbus/fi.w1.wpa_supplicant1.service
-> +			install -m 644 ${S}/dbus/fi.w1.wpa_supplicant1.service ${D}/${datadir}/dbus-1/system-services
-> +		fi
+>  SRC_URI = "http://hostap.epitest.fi/releases/wpa_supplicant-${PV}.tar.gz \
+> @@ -31,6 +31,10 @@ FILES_${PN} += " /usr/share/dbus-1/system-services/*"
+>  
+>  do_configure () {
+>  	install -m 0755 ${WORKDIR}/defconfig .config
+> +	if [ "${@base_contains('COMBINED_FEATURES', 'madwifi', 1, 0, d)}" = "1" ]; then
+> +		echo "CONFIG_DRIVER_MADWIFI=y" >> .config
+> +		echo "CFLAGS += -I${STAGING_INCDIR}/madwifi-ng" >> .config
 > +	fi
->  
->  	install -d ${D}/etc/default/volatiles
->  	install -m 0644 ${WORKDIR}/99_wpa_supplicant ${D}/etc/default/volatiles
-
-I like it. Even checking for different dbus config options before installing the
-service files. Good work.
+>  }
 
 Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
 
