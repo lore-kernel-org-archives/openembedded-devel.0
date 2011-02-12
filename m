@@ -1,35 +1,33 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PoETP-0003kL-I8 for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Feb 2011 13:21:11 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PoESK-0001Dd-MH for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Feb 2011 13:20:04 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Feb 2011 13:20:04 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Feb 2011 13:20:04 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <Tom_Rini@mentor.com>) id 1PoH15-0002tz-8O
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Feb 2011 16:04:07 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PoGzz-0007e1-Dm from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Feb 2011 07:02:59 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Sat, 12 Feb 2011 07:02:59 -0800
+Received: from [172.30.80.144] ([172.30.80.144]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 12 Feb 2011 08:02:58 -0700
+Message-ID: <4D56A11A.9050703@mentor.com>
+Date: Sat, 12 Feb 2011 08:02:50 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 12 Feb 2011 13:16:56 +0100
-Message-ID: <ij5tno$9u6$2@dough.gmane.org>
-References: <1297509134-31435-1-git-send-email-Martin.Jansa@gmail.com>
-	<1297509134-31435-2-git-send-email-Martin.Jansa@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1297509134-31435-2-git-send-email-Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH 2/2] eject: use u-a for /usr/bin/volname
+References: <1297244237-9508-1-git-send-email-javier.martin@vista-silicon.com>
+	<1297244237-9508-7-git-send-email-javier.martin@vista-silicon.com>
+In-Reply-To: <1297244237-9508-7-git-send-email-javier.martin@vista-silicon.com>
+X-OriginalArrivalTime: 12 Feb 2011 15:02:58.0470 (UTC)
+	FILETIME=[EF70B460:01CBCAC5]
+Subject: Re: [PATCH 6/7] Add new specific package for Visstrim_M10 board.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,61 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Feb 2011 12:21:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 12 Feb 2011 15:04:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 02/09/2011 02:37 AM, Javier Martin wrote:
+> This visstrim-m10-utils package includes a preinit script for
+> Visstrim_M10 boards and the commands "save_config" and
+> "default_config" which write volatile directories to a
+> non volatile storage.
+[snip]
 
-On 12-02-11 12:12, Martin Jansa wrote:
-> * resolves conflict with latest busybox
-> 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Acked-by: Koen Kooi <koen@openembedded.org>
+> +++ b/recipes/visstrim-m10-utils/visstrim-m10-utils_0.1.bb
+> @@ -0,0 +1,34 @@
+> +DESCRIPTION = "Visstrim_m10 set of scripts to allow squashfs+jffs2 schema"
+> +SECTION = "base"
+> +PRIORITY = "required"
+> +LICENSE = "TODO"
 
-> ---
->  recipes/eject/eject_2.1.5.bb |   16 +++++++++++++---
->  1 files changed, 13 insertions(+), 3 deletions(-)
-> 
-> diff --git a/recipes/eject/eject_2.1.5.bb b/recipes/eject/eject_2.1.5.bb
-> index 7c46432..06328dc 100644
-> --- a/recipes/eject/eject_2.1.5.bb
-> +++ b/recipes/eject/eject_2.1.5.bb
-> @@ -2,12 +2,22 @@ DESCRIPTION = "Eject allows removable media (typically a CD-ROM, floppy disk, ta
->  HOMEPAGE = "http://eject.sourceforge.net/"
->  LICENSE = "GPLv2"
->  
-> -inherit autotools gettext
-> +PR = "r1"
->  
-> -SRC_URI = "http://sources.openembedded.org/eject-2.1.5.tar.gz"
-> +inherit autotools gettext update-alternatives
->  
-> -S = "${WORKDIR}/${PN}"
-> +ALTERNATIVE_NAME = "volname"
-> +ALTERNATIVE_LINK = "${bindir}/volname"
-> +ALTERNATIVE_PATH = "${bindir}/volname.${PN}"
-> +ALTERNATIVE_PRIORITY = "100"
->  
-> +SRC_URI = "http://sources.openembedded.org/${P}.tar.gz"
->  
->  SRC_URI[md5sum] = "b96a6d4263122f1711db12701d79f738"
->  SRC_URI[sha256sum] = "ef9f7906484cfde4ba223b2682a37058f9a3c7d3bb1adda7a34a67402e2ffe55"
-> +
-> +do_install_append() {
-> +  mv ${D}/${bindir}/volname ${D}/${bindir}/volname.${PN}
-> +}
-> +
-> +S = "${WORKDIR}/${PN}"
+Please re-submit with a valid license field here.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+> +FILES_${PN} = "/"
 
-iD8DBQFNVno4MkyGM64RGpERAshlAJ4oAJzSTfXQVAqil/IFhAqz6zbomQCgsYA2
-F1wpuukUUqbH7AfKomMU/uE=
-=iZKg
------END PGP SIGNATURE-----
+This shouldn't be needed as /sbin and /usr/sbin are in the default glob.
 
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
