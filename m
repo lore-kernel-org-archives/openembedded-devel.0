@@ -1,41 +1,41 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Po2yd-0000R1-IR
+	(envelope-from <raj.khem@gmail.com>) id 1Po321-0000Xb-3Z
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Feb 2011 01:04:40 +0100
-Received: by pxi17 with SMTP id 17so489502pxi.6
+	Sat, 12 Feb 2011 01:08:09 +0100
+Received: by gwaa12 with SMTP id a12so1290438gwa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 16:03:32 -0800 (PST)
+	Fri, 11 Feb 2011 16:07:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:date:from:to:cc:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=MuXfXb7cTpc8x0yVmDd0cuA0WvTwuuVIaAKg4Emf600=;
-	b=VaULfqREAQ8IDX7bwIDDcNG/vv4YEBomjq7u3tpPBzuRV2CQiHWsodzGUwMRiRLE8N
-	r8yuBfFFORzEVYBMNIApq05Hjvt51+/Vd8ObUXyU6BXVyOhMlZZQ2hFLpMD6Dk1EzblE
-	TdnM5gNMSTdCLlTy3yFpN/ONPX73N81XXnYdU=
+	:user-agent; bh=0tl92kN8ru+S7ahETtXCUWwkQcFMuE1ZInObKaU4SDM=;
+	b=nyLmiXcur2GSBY4huUid+a7SQG+wjXi7/GvM26EMmcRbYzGl6+QSJFceHjPtHm7k97
+	Eu7o0zgPuo6PcGYeNP+2kCfnAGNrqldxcleXTfW0WQVfVYapaUBjykSxTtn+S3mg5qd1
+	4VrBMnv3UVGocOQ3xAiBiCWR61Mp7PEsKQQzM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=nQgQGlYMsDxsIpBg4isMDKXLH120rxprO1DN5zfncWSFqktXO6nKhrUavMRJFZubKR
-	FmbZcfMf5IU+byHZqwEttK+y9Qj5M9iwXXUz7ZsyXHHIUKVrY2jKufTuj0dHrf3h3iKx
-	3D573pUiTIsT8UMKn6NqR8gZ+DQDGFsvIgX/0=
-Received: by 10.142.231.4 with SMTP id d4mr808538wfh.428.1297469011127;
-	Fri, 11 Feb 2011 16:03:31 -0800 (PST)
+	b=fuxhzzWhLfDNlsJywTzJOscYnmhkOwr1dY4Wi2LN1FMbrBiFbqiXo30YhasLS8gR2l
+	KPWfJ/BfUoRU2v4T7bsJ5iggH4MNfyKnckDPQ++oR5+fI390q3octMy45cpHeH0fpVmk
+	PfDLlQO17I+sbRAipDkLGwnhgG1X171xIcdl8=
+Received: by 10.151.148.11 with SMTP id a11mr1362464ybo.3.1297469222292;
+	Fri, 11 Feb 2011 16:07:02 -0800 (PST)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id f5sm1700876wfo.16.2011.02.11.16.03.29
+	by mx.google.com with ESMTPS id j3sm926319ybe.23.2011.02.11.16.07.00
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 11 Feb 2011 16:03:30 -0800 (PST)
-Date: Fri, 11 Feb 2011 16:03:22 -0800
+	Fri, 11 Feb 2011 16:07:01 -0800 (PST)
+Date: Fri, 11 Feb 2011 16:06:53 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110212000322.GD1010@gmail.com>
-References: <1296507563-5509-1-git-send-email-ulf.samuelsson@atmel.com>
+Message-ID: <20110212000653.GE1010@gmail.com>
+References: <1296512140-16744-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <1296507563-5509-1-git-send-email-ulf.samuelsson@atmel.com>
+In-Reply-To: <1296512140-16744-1-git-send-email-Chase.Maupin@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Subject: Re: [PATCH v2] Add support for at91sam9m10 H/W video decoder
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: Re: [PATCH] sourceipk: fix race condition with compileconfigs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,245 +49,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Feb 2011 00:04:40 -0000
+X-List-Received-Date: Sat, 12 Feb 2011 00:08:09 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (31/01/11 21:59), Ulf Samuelsson wrote:
+On (31/01/11 16:15), Chase Maupin wrote:
+> * This patch adds an empty compileconfigs function to the
+>   sourceipk class.
+> * This is required because when making a sourceipk of a
+>   package using the multi-kernel.inc functionality you will
+>   have a race condition between the compileconfigs of the
+>   multi-kernel file building the kernel and sourceipk trying
+>   to copy and patch the sources.  The resulting conditions
+>   can then occur:
+>     - You will package some interim build files, yielding
+>       a sourceipk that is not consistent between builds
+>     - You will try to copy interim build files as they are
+>       being deleted which will result in an error and break
+>       the build.
+> * The empty compileconfigs function is overwritten by the
+>   real compileconfigs function when the multi-kernel.inc file
+>   is used.
 > 
-> Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+
+Acked-by: Khem Raj <raj.khem@gmail.com>
+
 > ---
->  .../at91sam9m10-vdec/gst-plugin-on2-8170_1.0.bb    |   41 ++++++++
->  recipes/at91sam9m10-vdec/on2-8170-libs_1.0.bb      |   49 ++++++++++
->  recipes/images/x11-at91sam9m10-image.bb            |  102 ++++++++++++++++++++
->  3 files changed, 192 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/at91sam9m10-vdec/gst-plugin-on2-8170_1.0.bb
->  create mode 100644 recipes/at91sam9m10-vdec/on2-8170-libs_1.0.bb
->  create mode 100644 recipes/images/x11-at91sam9m10-image.bb
+>  classes/sourceipk.bbclass |   13 ++++++++++++-
+>  1 files changed, 12 insertions(+), 1 deletions(-)
 > 
-> diff --git a/recipes/at91sam9m10-vdec/gst-plugin-on2-8170_1.0.bb b/recipes/at91sam9m10-vdec/gst-plugin-on2-8170_1.0.bb
-> new file mode 100644
-> index 0000000..8010bd4
-> --- /dev/null
-> +++ b/recipes/at91sam9m10-vdec/gst-plugin-on2-8170_1.0.bb
-> @@ -0,0 +1,41 @@
-> +# This is the support library for AT91SAM9M10 On2 8170 video decoder.
-> +DESCRIPTION = "Library for AT91SAM9M10 On2 8170 video decoder"
-> +SECTION = "libs"
-> +PRIORITY = "optional"
-> +LICENSE = ""
-> +
-> +COMPATIBLE_MACHINE = (at91sam9m10ekes|at91sam9m10g45ek)
-> +
-> +PR = "r1"
-> +
-> +DEPENDS = "glib-2.0 gstreamer on2-8170-libs"
-> +CFLAGS += "-I${STAGING_INCDIR}/glib-2.0 -I${STAGING_INCDIR}/gstreamer-0.10 -I${STAGING_INCDIR}/libxml2/"
-> +GST_MAJORMINOR=0.10
-> +PROVIDES += "gstx170"
-> +
-> +SRC_URI = "ftp://ftp.linux4sam.org/pub/demo/linux4sam_1.9/codec/gst-plugin-x170-${PV}.tar.gz"
-> +S = ${WORKDIR}/gst-plugin-x170-${PV}
-> +
-> +inherit autotools
-> +
-> +FILES_${PN} = " \
-> +	${libdir}/gstreamer-${GST_MAJORMINOR}/*.so \
-> +	"
-> +
-> +FILES_${PN}-dev = " \
-> +	${libdir}/gstreamer-${GST_MAJORMINOR}/*.so \
-> +	${libdir}/gstreamer-${GST_MAJORMINOR}/*.a \
-> +	${libdir}/gstreamer-${GST_MAJORMINOR}/*.la \
-> +	"
-> +
-> +do_stage() {
-> +	echo staging ...
-> +	oe_libinstall -s -a -C ${S}/src/.libs libgstx170   ${STAGING_LIBDIR}
-> +	install -m 0644  ${S}/src/gstx170.h  ${STAGING_INCDIR}/
+> diff --git a/classes/sourceipk.bbclass b/classes/sourceipk.bbclass
+> index 8a92115..1b4a318 100644
+> --- a/classes/sourceipk.bbclass
+> +++ b/classes/sourceipk.bbclass
+> @@ -144,7 +144,18 @@ EXPORT_FUNCTIONS do_create_srcipk
+>  
+>  do_create_srcipk[deptask] = "do_patch"
+>  
+> -addtask create_srcipk after do_patch before do_configure
+> +# Add a blank compileconfigs task.  This allows the sourceipk to schedule
+> +# its copy of the sources for kernels using the multi-kernel functionality
+> +# before the compileconfigs task.  Failure to do this results in a race
+> +# condition where in the best case the sources packaged may contain binary
+> +# builds and in the worst case binary files being cleaned cause an error
+> +# in the copy command for the sourceipk.
+> +do_compileconfigs() {
+> +    :
 > +}
+> +addtask compileconfigs after do_patch before do_configure
 > +
-> +do_install() {
-> +	echo install ...
-> +	install -d ${D}/${libdir}/gstreamer-${GST_MAJORMINOR}
-> +	oe_libinstall -s -C ${S}/src/.libs/ libgstx170   ${D}/${libdir}/gstreamer-${GST_MAJORMINOR}
-> +}
-> diff --git a/recipes/at91sam9m10-vdec/on2-8170-libs_1.0.bb b/recipes/at91sam9m10-vdec/on2-8170-libs_1.0.bb
-> new file mode 100644
-> index 0000000..7fa95aa
-> --- /dev/null
-> +++ b/recipes/at91sam9m10-vdec/on2-8170-libs_1.0.bb
-> @@ -0,0 +1,49 @@
-> +# This is the support library for Hantro X170 video decoder.
-> +DESCRIPTION = "Library for Hantro X170 video decoder"
-> +SECTION = "libs"
-> +PRIORITY = "optional"
-> +
-> +COMPATIBLE_MACHINE = (at91sam9m10ekes|at91sam9m10g45ek)
-> +
-> +PR = "r1"
-> +PROVIDES += "hantro-libs"
-> +SRC_URI ="ftp://ftp.linux4sam.org/pub/demo/linux4sam_1.9/codec/on2-8170-libs-1.0.tar.gz"
-> +
-> +inherit autotools
-> +S = ${WORKDIR}/on2-8170-libs-${PV}
-> +
-> +FILES_${PN} = " \
-> +	${libdir}/*.so \
-> +	"
-> +
-> +FILES_${PN}-dev = " \
-> +	${libdir}/*.so \
-> +	${libdir}/*.a  \
-> +	${libdir}/*.la \
-> +	${includedir}/*.h  \
-> +	"
-> +
-> +
-> +SRC_URI_append = ""
-> +
-> +do_stage() {
-> +	oe_libinstall -s -a -C ${S}   libdwlx170   ${STAGING_LIBDIR}
-> +	oe_libinstall -s -a -C ${S}   libdecx170h  ${STAGING_LIBDIR}
-> +	oe_libinstall -s -a -C ${S}   libx170j     ${STAGING_LIBDIR}
-> +	oe_libinstall -s -a -C ${S}   libdecx170m2 ${STAGING_LIBDIR}
-> +	oe_libinstall -s -a -C ${S}   libdecx170m  ${STAGING_LIBDIR}
-> +	oe_libinstall -s -a -C ${S}   libdecx170p  ${STAGING_LIBDIR}
-> +	oe_libinstall -s -a -C ${S}   libdecx170v  ${STAGING_LIBDIR}
-> +	
-> +	install -m 0644 ${S}/*.h ${STAGING_INCDIR}/
-> +}
-
-
-do_stage is obsolete get rid of it.
-
-> +
-> +do_install() {
-> +	oe_libinstall -s  -C ${S}  libdwlx170   ${D}/${libdir}/
-> +	oe_libinstall -s  -C ${S}  libdecx170h  ${D}/${libdir}/
-> +	oe_libinstall -s  -C ${S}  libx170j     ${D}/${libdir}/
-> +	oe_libinstall -s  -C ${S}  libdecx170m2 ${D}/${libdir}/
-> +	oe_libinstall -s  -C ${S}  libdecx170m  ${D}/${libdir}/
-> +	oe_libinstall -s  -C ${S}  libdecx170p  ${D}/${libdir}/
-> +	oe_libinstall -s  -C ${S}  libdecx170v  ${D}/${libdir}/
-> +}
-> diff --git a/recipes/images/x11-at91sam9m10-image.bb b/recipes/images/x11-at91sam9m10-image.bb
-> new file mode 100644
-> index 0000000..416ae63
-> --- /dev/null
-> +++ b/recipes/images/x11-at91sam9m10-image.bb
-> @@ -0,0 +1,102 @@
-> +#Angstrom X11 at91sam9 image
-> +
-> +XSERVER ?= ""
-> +	
-> +ANGSTROM_EXTRA_INSTALL += " \
-> +	gpe-irc \
-> +	gpe-sketchbook \
-> +	gpe-filemanager \
-> +	gpe-tetris \
-> +	gpe-go \
-> +	gpe-calendar \
-> +	gpe-contacts \
-> +	gpe-edit \
-> +	gpe-gallery \
-> +	gpe-calculator \
-> +	gpe-clock \
-> +	gpe-terminal \
-> +	gpe-watch \
-> +	matchbox-panel-hacks \
-> +	gpe-scap \
-> +	gpe-windowlist \
-> +	gpe-mixer \
-> +	usbview \
-> +	mplayer \
-> +	thttpd \
-> +	madplay \
-> +	alsa-utils-aplay \
-> +	alsa-utils-amixer \
-> +	iperf \
-> +	dosfstools \
-> +	mtd-utils \
-> +#	nbench-byte \
-> +	gpe-mini-browser \
-> +	pointercal \
-> +	gstreamer \
-> +	gst-plugins-base \
-> +	gst-plugins-good \
-> +	gst-plugins-bad \
-> +	gst-plugins-ugly \
-> +	gst-plugin-avi \
-> +	gst-plugin-mpegstream \
-> +	gst-plugin-qtdemux \
-> +	gst-plugin-mpegvideoparse \
-> +	gst-plugin-asf \
-> +	gst-plugin-alsa \
-> +	gst-plugin-ossaudio \
-> +	gst-plugin-audioresample \
-> +	gst-plugin-audioconvert \
-> +	gst-plugin-ximagesink \
-> +	gst-plugin-fbdevsink \
-> +	gst-plugin-faad \
-> +	gst-plugin-mad \    
-> +	gst-plugin-playbin \
-> +	gst-plugin-decodebin \
-> +	gst-plugin-typefindfunctions \
-> +	gst-ffmpeg \
-> +	gst-plugin-on2-8170 \
-> +	on2-8170-libs \
-> +	owl-wifi \
-
-
-Not all distros might use ANGSTROM_EXTRA_INSTALL
-just to let you know. If you are supporting angstrom distro
-then locking packages in machine config as you do might 
-conflict with angtrom's policies make sure those conglicts
-with respect to patches dont happen.
-	"
-> +
-> +export IMAGE_BASENAME = "x11-at91sam9m10-image"
-> +
-> +DEPENDS = "task-base"
-> +IMAGE_INSTALL = "\
-> +    ${XSERVER} \
-> +    task-base-extended \
-> +    angstrom-x11-base-depends \
-> +    angstrom-gpe-task-base \
-> +    angstrom-gpe-task-settings \
-> +    ${ANGSTROM_EXTRA_INSTALL}"
-> +
-> +IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
-> +
-> +at91sam9m10_rootfs_postprocess() {
-> +   curdir=$PWD
-> +   cd ${IMAGE_ROOTFS}
-> +
-> +   # add init script to cratee hantro modules /dev files
-> +   echo 'MAJOR=`cat /proc/devices |grep hx170|cut -f1 -d\ `' >> ${IMAGE_ROOTFS}//etc/init.d/hantro
-> +   echo 'mknod /dev/hx170 c $MAJOR 0' >> ${IMAGE_ROOTFS}/etc/init.d/hantro
-> +   echo 'MAJOR=`cat /proc/devices |grep memalloc|cut -f1 -d\ `' >> ${IMAGE_ROOTFS}//etc/init.d/hantro
-> +   echo 'mknod /dev/memalloc c $MAJOR 0' >> ${IMAGE_ROOTFS}/etc/init.d/hantro
-> +   chmod a+x  ${IMAGE_ROOTFS}/etc/init.d/hantro
-> +   cd ${IMAGE_ROOTFS}/etc/rc5.d
-> +   ln -s ../init.d/hantro S51hantro
-> +
-> +   # back on track
-> +   cd $curdir
-> +}
-> +
-> +#zap root password for release images
-> +ROOTFS_POSTPROCESS_COMMAND += '${@base_conditional("DISTRO_TYPE", "release", "zap_root_password; ", "",d)}'
-> +ROOTFS_POSTPROCESS_COMMAND += "set_image_autologin; "
-> +
-> +#we dont need the kernel in the image
-> +ROOTFS_POSTPROCESS_COMMAND += "rm -f ${IMAGE_ROOTFS}/boot/*Image*; "
-> +
-> +#load sam9m10 vdec modules and create file descriptor at boot
-> +ROOTFS_POSTPROCESS_COMMAND += "at91sam9m10_rootfs_postprocess; "
-> +
-> +inherit image
+> +addtask create_srcipk after do_patch before do_compileconfigs
+>  
+>  #Add source packages to list of packages OE knows about
+>  PACKAGES_DYNAMIC += "${PN}-src"
 > -- 
-> 1.6.3.3
+> 1.7.0.4
 > 
 > 
 > _______________________________________________
