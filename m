@@ -1,41 +1,40 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Po3Ge-0000sY-ME
+	(envelope-from <raj.khem@gmail.com>) id 1Po3Wc-0001A7-FB
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Feb 2011 01:23:16 +0100
-Received: by iwn8 with SMTP id 8so2899941iwn.6
+	Sat, 12 Feb 2011 01:39:46 +0100
+Received: by yxd5 with SMTP id 5so1299093yxd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Feb 2011 16:22:10 -0800 (PST)
+	Fri, 11 Feb 2011 16:38:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id:references
+	h=domainkey-signature:date:from:to:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=qbziElQp6vONIlQHfrfYhoLdEfNfKuAj0oEJUksM7jE=;
-	b=RYPZ0T0RgLxZry7VNvX0BJF+EfTzCgH1DeqsgWt6or852jru4mcYVOMxsdVxFuJ8NG
-	9E0lBtgPbw3S7D1SHmJYiK1I3rT3KfkvhEM46AQEXutVO0aZhbijlfpvbaDU5Fp1DpjS
-	vOEd2kjTAFMMj6tcLaghqsc1l1UAd3q/vZ2uo=
+	:user-agent; bh=5E9+dtBEMtMNGcSXIoutWA92p4ZW4WlL7UOIrRxn2rw=;
+	b=K/4BLOTQ6eaDH7FWT8VCgvjqqVsazPjKgN0QGniV4FmUiFt1VgAiSqbnpb+Z87BYPy
+	jEBo+Gqxb7RB9D+hV+OGzgd+MVccXjaWTcoHryJkZxdSGwoIQp1bpYkziyMu0quleiAL
+	zufXlmee2eQjgmE53jwN3AOljETqWvnlVsCJs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
+	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=pXVsCK2KxtgFcBBcDTYaeqiHVQa4WSfjYsx6rEdxo7aUpnvjykLmK+xPhkEHAbvwdD
-	eqzZs9cOnxwBQe2UmqhkRZKbw/TDyWF/jmCw0FxKo0T1l9/nAaoc5SNq0XrVVbXqEyvk
-	zIem9NufX8WXoPy8+6ICthbSpS2dyQ+f5qWuI=
-Received: by 10.42.164.201 with SMTP id h9mr1445018icy.301.1297470130095;
-	Fri, 11 Feb 2011 16:22:10 -0800 (PST)
+	b=Y91EVgV0psKCj6saGdx9QDjFAU5TXm7fVU+ipUW4x5FU0n1F1DhO/l2qoN9ugYhVIE
+	ywM1o7Wp2snVWYx7xzeID1DZRbEwkSWhkqJKveq7vC5c07OjnpJxFWW6aL4YDgZwPWXO
+	YmOzXNNC4T+YWGMmFw+X3gSsnAUG1udstSCR4=
+Received: by 10.151.116.4 with SMTP id t4mr1321450ybm.355.1297471119582;
+	Fri, 11 Feb 2011 16:38:39 -0800 (PST)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id d21sm1082371ibg.15.2011.02.11.16.22.08
+	by mx.google.com with ESMTPS id q31sm943226yba.6.2011.02.11.16.38.38
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 11 Feb 2011 16:22:09 -0800 (PST)
-Date: Fri, 11 Feb 2011 16:22:01 -0800
+	Fri, 11 Feb 2011 16:38:38 -0800 (PST)
+Date: Fri, 11 Feb 2011 16:38:30 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110212002201.GG1010@gmail.com>
-References: <1296657327-11166-1-git-send-email-stefan@buglabs.net>
+Message-ID: <20110212003830.GJ1010@gmail.com>
+References: <1296716421-19240-1-git-send-email-denis@denix.org>
 MIME-Version: 1.0
-In-Reply-To: <1296657327-11166-1-git-send-email-stefan@buglabs.net>
+In-Reply-To: <1296716421-19240-1-git-send-email-denis@denix.org>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Stefan Schmidt <stefan@buglabs.net>
-Subject: Re: [PATCH] angstrom-2008-preferred-versions: Bump wpa-supplicant version to 0.7.3
+Subject: Re: [PATCH] insane.bbclass: fix the check for bad RPATH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,40 +48,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Feb 2011 00:23:16 -0000
+X-List-Received-Date: Sat, 12 Feb 2011 00:39:46 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (02/02/11 15:35), Stefan Schmidt wrote:
-> This allows the use of the new DBUS API which is needed by connman 0.68 and
-> higher.
+On (03/02/11 02:00), Denys Dmytriyenko wrote:
+> * Variable 'sane' is boolean, so adding to it breaks the error condition
+> * Fixes previous commit 6aa31074 ported from Yocto
 > 
-> Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
-
-I dont know if angstrom-2008 is still taking package verison upgrades but
-nonetheless
+> Signed-off-by: Denys Dmytriyenko <denis@denix.org>
 
 Acked-by: Khem Raj <raj.khem@gmail.com>
 
 > ---
->  .../include/angstrom-2008-preferred-versions.inc   |    2 +-
+>  classes/insane.bbclass |    2 +-
 >  1 files changed, 1 insertions(+), 1 deletions(-)
 > 
-> diff --git a/conf/distro/include/angstrom-2008-preferred-versions.inc b/conf/distro/include/angstrom-2008-preferred-versions.inc
-> index c5e1a42..77e5e00 100644
-> --- a/conf/distro/include/angstrom-2008-preferred-versions.inc
-> +++ b/conf/distro/include/angstrom-2008-preferred-versions.inc
-> @@ -61,7 +61,7 @@ PREFERRED_VERSION_udev_libc-uclibc = "141"
->  UDEV_GE_141 = "1"
+> diff --git a/classes/insane.bbclass b/classes/insane.bbclass
+> index 50752b5..a846832 100644
+> --- a/classes/insane.bbclass
+> +++ b/classes/insane.bbclass
+> @@ -174,7 +174,7 @@ def package_qa_check_rpath(file,name,d, elf):
+>          for dir in bad_dirs:
+>              if dir in line:
+>                  error_msg = "package %s contains bad RPATH %s in file %s" % (name, line, file)
+> -                sane = sane + package_qa_handle_error(1, error_msg, name, file, d)
+> +                sane = package_qa_handle_error(1, error_msg, name, file, d)
 >  
->  PREFERRED_VERSION_usbutils = "0.86"
-> -PREFERRED_VERSION_wpa-supplicant = "0.6.9"
-> +PREFERRED_VERSION_wpa-supplicant = "0.7.3"
->  PREFERRED_VERSION_wget = "1.11.4"
->  PREFERRED_VERSION_xserver-common = "1.33"
->  PREFERRED_VERSION_xserver-kdrive = "1.4.0.90"
+>      return sane
+>  
 > -- 
-> 1.7.2.3
+> 1.7.4
 > 
 > 
 > _______________________________________________
