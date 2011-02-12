@@ -1,24 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PoBF2-0001YB-M4 for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Feb 2011 09:54:08 +0100
-Received: from f053043157.adsl.alicedsl.de ([78.53.43.157]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PoBE0-0003Sc-5W for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Feb 2011 08:53:04 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20110211091602.GA3508@rhein.zuhause.netz>
-References: <1297363922.3877.24.camel@mattotaupa>
-	<20110211091602.GA3508@rhein.zuhause.netz>
-Date: Sat, 12 Feb 2011 09:53:03 +0100
-Message-ID: <1297500783.6433.10.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: libsdl-mixer_1.2.11: task compile fails with `/bin/sed: can't read =/usr/lib/libts.la: No such file or directory`
+	(envelope-from <stefan@datenfreihafen.org>) id 1PoBeP-0002Cd-Vv
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Feb 2011 10:20:22 +0100
+Received: from p5b033464.dip.t-dialin.net ([91.3.52.100] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
+	id 1PoBdK-0002Ab-TM by authid <stefan@sostec.de> with cram_md5;
+	Sat, 12 Feb 2011 10:19:17 +0100
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>)
+	id 1PoBdI-0001sn-Up; Sat, 12 Feb 2011 10:19:12 +0100
+Date: Sat, 12 Feb 2011 10:19:12 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20110212091912.GA6582@excalibur.local>
+References: <1296657327-11166-1-git-send-email-stefan@buglabs.net>
+	<20110212002201.GG1010@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <20110212002201.GG1010@gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.1 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Cc: openembedded-devel@lists.openembedded.org,
+	Stefan Schmidt <stefan@buglabs.net>
+Subject: Re: [PATCH] angstrom-2008-preferred-versions: Bump wpa-supplicant version to 0.7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,50 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Feb 2011 08:54:08 -0000
-X-Groupsio-MsgNum: 29116
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-+RNAWMSP1U0RFhdxIhDE"
+X-List-Received-Date: Sat, 12 Feb 2011 09:20:22 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=-+RNAWMSP1U0RFhdxIhDE
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hello.
 
-Dear Henning,
+On Fri, 2011-02-11 at 16:22, Khem Raj wrote:
+> On (02/02/11 15:35), Stefan Schmidt wrote:
+> > This allows the use of the new DBUS API which is needed by connman 0.68 and
+> > higher.
+> > 
+> > Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
+> 
+> I dont know if angstrom-2008 is still taking package verison upgrades but
+> nonetheless
+> 
+> Acked-by: Khem Raj <raj.khem@gmail.com>
 
+Yes, they do. Koen acked this one in private as he had no mail access durin a
+trip. Patch is already pushed and of course I forgot to have a look at
+patchwork. Totally my fault. Will go through it now.
 
-Am Freitag, den 11.02.2011, 10:16 +0100 schrieb Henning Heinold:
-
-> should be fixed now in master.
-
-another issues I noticed is, that the library `SDL_mixer` is not found
-when compiling `xbmc_svn.bb` with `angstrom-2008.1` for `MACHINE =3D
-"beagleboard"`.
-
-        | checking for main in -lsmbclient... yes
-        | checking for main in -lSDL_mixer... no
-        | configure: error: Could not find a required library. Please see t=
-he README for your platform.
-        | ERROR: Function do_configure failed
-        NOTE: package xbmc-10.05-r11+gitr0+e2ab481ebe964321c358ab9d6402088c=
-714adcbe: task do_configure: Failed
+regards
+Stefan Schmidt
 
 
-Thanks,
-
-Paul
-
---=-+RNAWMSP1U0RFhdxIhDE
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk1WSm8ACgkQPX1aK2wOHViQsACeNhx9Ag1QN1wkmL37ig9IEDgP
-vPIAmgPtzWL09dZf9ujqBc9u/hIhz/5L
-=WN7m
------END PGP SIGNATURE-----
-
---=-+RNAWMSP1U0RFhdxIhDE--
