@@ -1,33 +1,32 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PokZY-0008E0-NH
+	(envelope-from <dp@xora.org.uk>) id 1PokZy-0008EM-Jw
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Feb 2011 23:37:40 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PokYR-0002tR-3K from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Feb 2011 14:36:31 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Sun, 13 Feb 2011 14:36:30 -0800
-Received: from [172.30.80.148] ([172.30.80.148]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 13 Feb 2011 15:36:29 -0700
-Message-ID: <4D585CE4.9090807@mentor.com>
-Date: Sun, 13 Feb 2011 15:36:20 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+	Sun, 13 Feb 2011 23:38:06 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 490B21C262
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 13 Feb 2011 22:36:59 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id sq0JfmE7KGSp
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 13 Feb 2011 22:36:58 +0000 (GMT)
+Received: from [192.168.80.189] (unknown [210.253.152.135])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id B6CA21C088
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 13 Feb 2011 22:36:57 +0000 (GMT)
+Message-ID: <4D585D07.70305@xora.org.uk>
+Date: Sun, 13 Feb 2011 22:36:55 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <201102131650.17611.schnitzeltony@gmx.de>
-	<AANLkTindNuCayWTyNrhSoaaVy4P9KhXnaJ2Lae_EX13V@mail.gmail.com>
-In-Reply-To: <AANLkTindNuCayWTyNrhSoaaVy4P9KhXnaJ2Lae_EX13V@mail.gmail.com>
-X-OriginalArrivalTime: 13 Feb 2011 22:36:29.0705 (UTC)
-	FILETIME=[75036790:01CBCBCE]
-Subject: Re: [PATCH] insane.bbclass: fix the check for bad RPATH
+References: <ij8d1t$cd9$1@dough.gmane.org>
+In-Reply-To: <ij8d1t$cd9$1@dough.gmane.org>
+Subject: Re: TSC agenda items for the next meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,48 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Feb 2011 22:37:40 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 13 Feb 2011 22:38:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 02/13/2011 01:33 PM, Khem Raj wrote:
-> On Sun, Feb 13, 2011 at 7:50 AM, Andreas Mueller<schnitzeltony@gmx.de>  wrote:
->> Hi OE folks,
->>
->> Yesterday I merged latest head into my working branch and started a fresh build for xfce46-image. I get
->>
->> ERROR: QA Issue with db: package db contains bad RPATH /home/Superandi/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib in file /home/Superandi/tmp/work/armv7a-angstrom-linux-gnueabi/db-5.0.21-r3/packages-split/db/usr/lib/libdb-5.0.so
->> ERROR: QA Issue with db: package db contains bad RPATH /home/Superandi/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib in file /home/Superandi/tmp/work/armv7a-angstrom-linux-gnueabi/db-5.0.21-r3/packages-split/db/usr/lib/libdb-5.0.so
->> ERROR: QA Issue with db-bin: package db-bin contains bad RPATH /home/Superandi/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib in file /home/Superandi/tmp/work/armv7a-angstrom-linux-gnueabi/db-5.0.21-r3/packages-split/db-bin/usr/bin/db_checkpoint
->> ERROR: QA Issue with db-bin: package db-bin contains bad RPATH /home/Superandi/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib in file /home/Superandi/tmp/work/armv7a-angstrom-linux-gnueabi/db-5.0.21-r3/packages-split/db-bin/usr/bin/db_checkpoint
->> ...
->> FATAL: QA run found fatal errors. Please consider fixing them.
->> ERROR: Error in executing python function in: /home/Superandi/data/OpenEmbedded/gumstix-oe/recipes/db/db_5.0.21.bb
->> ERROR: Exception:<type 'exceptions.SystemExit'>  Message:1
->> ERROR: Printing the environment of the function
->> ERROR: Function do_package_qa failed
->>
->> Without having further checks I think commit 14f7dd0965f14a09169dc5a2df18ff0b06f8bad5 causes this behaviour.
->>
->> What makes me wondering:
->>
->> - even in case I use the -k option the build aborts at the same position. Is that intended?
->> - Commit 6aa31074adaccffcfd3080e8390065ab5abda2a6 brings up many undetected RPATH cases which have to be fixed. With the current situation it is not possible to check which there are.
->>
->> How about creating a list (I know Frans did already - but I think it was before the latest RPATH commit) listing the packages with QA errors / the type of QA error / and (to prevent double efforts)  a person willing to take care. (Although I know nobody uses it :-) I take a look for clutter-box2d which has RPATH error)
->>
->> Or is there something ongoing I have missed?
->>
+On 13/02/2011 10:50, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> hmm I think there are too many QA errors now it is reporting as errors
-> and bailing out build. While we should fix
-> the QA errors but I think we should not be that strict yet
+> Hi,
+>
+> The new TSC is holding a meeting next week and we wanted to see if
+> anyone wants to suggest items we put in the agenda for the meeting.
+>
+> If you have such items, please let us know by replying to this mail.
+>
+> regards,
+>
+> Koen
+Re-inforcement of the "don't delete all old versions" policy, make sure 
+this is in the wiki somewhere.
 
-I think we should see how many of these we can easily pull a fix out of 
-from poky.
+Rough Yocto integration plan.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Start to think about the Policies section on wiki and whether it is 
+relevant/correct now, and also what needs to change going forward to Yocto.
+
+Graeme
+
 
 
