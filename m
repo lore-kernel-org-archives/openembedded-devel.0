@@ -1,51 +1,47 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PoMVj-0007uk-EP
+	(envelope-from <raj.khem@gmail.com>) id 1PoPox-0004J4-6T
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Feb 2011 21:56:07 +0100
-Received: by pzk12 with SMTP id 12so591893pzk.6
+	Sun, 13 Feb 2011 01:28:11 +0100
+Received: by gxk20 with SMTP id 20so1572331gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Feb 2011 12:54:59 -0800 (PST)
+	Sat, 12 Feb 2011 16:27:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:date:from:to:subject:message-id:references
 	:mime-version:content-type:content-disposition
 	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=S/wVhEb01Yo3KCMQM0V/4Z2WuAPiTJitW+ER6vmly/s=;
-	b=aQl3dpgmL/0p9JKHgmZXUkTVUbqGecIWBKiAc7FHVB3tFuSupkw0Y/4bn0CloSYdF1
-	GEWM1dk3yrDl5TiHBZNE1N+Ow+j31g58sKr194ugHZkBmEswQOt4SPubS0r8zqVf18Tt
-	KPxvZy6jDIN8wuvh7MvTjDyTje9CDd6cqQ4pk=
+	bh=PPJ1PtFR4Gb55g9QG9Jwd2F/ZeBGheMZvrjbDbzvegQ=;
+	b=rzrhRd2IP360Agni2ywtAijUHn6DbHl6Bb6mb8X8Byp2fYTADSb/G/TsNrO5oSD1s/
+	HcDrgqZtZVlGxlfQNuGglSOz9ChFugCe3078l5q6lhtiYT5CWSUGW/PMp6Ly6XRuIHUy
+	dB+Cxth7R+y9nGa79/lZ/iSo8+HZ8hwKyDHO0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:content-transfer-encoding
 	:in-reply-to:user-agent;
-	b=uZMlfyBNp8O+ppy887pJaBEy537i9JF4Jis/JytKGaT7ElDB0cnDECwj+VGv3/Ia6b
-	HgWpGnuFPBeigK8IHdXiN2p/s2WbZIvfpNV74BzhRhzw9d4fecXRay4P7RkrLEc0K4sm
-	E92Zn8VGuB3qFMzVAY90RlhOaQZTm/toRjM4g=
-Received: by 10.142.203.18 with SMTP id a18mr1582957wfg.328.1297544099166;
-	Sat, 12 Feb 2011 12:54:59 -0800 (PST)
+	b=t6t4y2+5AW0ElEznyDULGTPDnDA0S8fZFZIwhUzReTg8bnFe6JnUJAbQYgXs/xiXo+
+	XQRFmsOkrVpVucqn6Ki3bwIlMISgBH9ezivSGmpusZvavk08bFY2RZRqw2G9kiMoGtQc
+	wQ5ldBQwRpII7dv/ffWH6tJWCzrkqlSNfOhBE=
+Received: by 10.90.90.18 with SMTP id n18mr2586084agb.101.1297556822343;
+	Sat, 12 Feb 2011 16:27:02 -0800 (PST)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id x18sm1346118wfa.23.2011.02.12.12.54.55
+	by mx.google.com with ESMTPS id 35sm1329204ano.31.2011.02.12.16.27.00
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 12 Feb 2011 12:54:56 -0800 (PST)
-Date: Sat, 12 Feb 2011 12:54:48 -0800
+	Sat, 12 Feb 2011 16:27:01 -0800 (PST)
+Date: Sat, 12 Feb 2011 16:26:48 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110212205448.GA5098@gmail.com>
-References: <AANLkTin86VuRC4KSVfY=zAqnV+EXEmVh37mwiJ0X4BRU@mail.gmail.com>
-	<1295798887.12751.6.camel@mattotaupa>
-	<1295812624.3570.13.camel@mattotaupa>
-	<AANLkTi=0vr9MZ28ZtvzvpSGK0k39BjoXC-sH-fJZs4j_@mail.gmail.com>
-	<1295832268.7645.54.camel@mattotaupa>
-	<1296232598.21132.21.camel@mattotaupa>
-	<1296495309.3819.0.camel@mattotaupa>
-	<1297381611.3877.37.camel@mattotaupa>
-	<AANLkTi=Ta_fk1kzBtKSqyXykNJdM1=Hqsv4QyGsW1ZyL@mail.gmail.com>
-	<1297497230.6433.3.camel@mattotaupa>
+Message-ID: <20110213002648.GA6178@gmail.com>
+References: <1292667009.12094.13.camel@mattotaupa>
+	<4D0C8BCC.9050800@eukrea.com>
+	<AANLkTik2cV=NMv1=Xj1gd6pBaL-kVVo7=tUH9gmqTxCE@mail.gmail.com>
+	<1292859750.1713.3.camel@mattotaupa>
+	<AANLkTinTz=s4K7zbkFKh22HJWRjMDDW0iP5CKxV0HrOX@mail.gmail.com>
+	<1297437306.3785.39.camel@mattotaupa>
 MIME-Version: 1.0
-In-Reply-To: <1297497230.6433.3.camel@mattotaupa>
+In-Reply-To: <1297437306.3785.39.camel@mattotaupa>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: vdr: minimal-uclibc: task `compile` fails with `undefined reference to `_nl_msg_cat_cntr'`
+Subject: Re: minimal{, -uclibc}: linux-omap-psp_2.6.32: task `do_compileconfigs` fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,138 +55,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Feb 2011 20:56:07 -0000
+X-List-Received-Date: Sun, 13 Feb 2011 00:28:11 -0000
+X-Groupsio-MsgNum: 29128
+Content-Type: multipart/mixed; boundary="OXfL5xGRrasGEqWY"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+
+--OXfL5xGRrasGEqWY
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
-On (12/02/11 08:53), Paul Menzel wrote:
-> Am Freitag, den 11.02.2011, 09:37 -0800 schrieb Khem Raj:
-> > On Thu, Feb 10, 2011 at 3:46 PM, Paul Menzel wrote:
-> > > Am Montag, den 31.01.2011, 18:35 +0100 schrieb Paul Menzel:
-> > >> Am Freitag, den 28.01.2011, 17:36 +0100 schrieb Paul Menzel:
-> > >> > Am Montag, den 24.01.2011, 02:24 +0100 schrieb Paul Menzel:
-> > >> > > Am Sonntag, den 23.01.2011, 14:09 -0800 schrieb Khem Raj:
-> > >> > > > On Sun, Jan 23, 2011 at 11:57 AM, Paul Menzel wrote:
-> > >> > > > > Am Sonntag, den 23.01.2011, 17:08 +0100 schrieb Paul Menzel:
-> > >> > > > >> Am Samstag, den 22.01.2011, 11:48 -0800 schrieb Khem Raj:
-> > >> > > > >> > On Sat, Jan 22, 2011 at 10:23 AM, Paul Menzel wrote:
-> > >> > > > >> > > The commit since when building fails is a88aca1d [6].
-> > >> > > > >> > >
-> > >> > > > >> > >        commit a88aca1d7dfa3a08957dd49cb61bac850f197106
-> > >> > > > >> > >        Author: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-> > >> > > > >> > >        Date:   Wed Jan 12 20:34:55 2011 +0100
-> > >> > > > >> > >
-> > >> > > > >> > >            autotools.bbclass: pass distro_imposed_configure_flags
-> > >> > > > >> > >
-> > >> > > > >> > >            Acked-by: Khem Raj <raj.khem@gmail.com>
-> > >> > > > >> > >            Acked-by: Tom Rini <tom_rini@mentor.com>
-> > >> > > > >> > >            Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-> > >> > > > >> > >
-> > >> > > > >> > > Any idea?
-> > >> > > > >> >
-> > >> > > > >> > I see. I think its to do with enable-ipv6 or somesuch. Can you run
-> > >> > > > >> > do_configure for vdr before and after this commit and port
-> > >> > > > >> > the contents of line invoking configure.
-> > >> > > > >>
-> > >> > > > >> Strange. VDR just uses a plain Makefile and no Autotools. Since this
-> > >> > > > >> commit, it seems that `-lintl` is not passed.
-> > >> > > > >>
-> > >> > > > >> ### works
-> > >> > > > >>
-> > >> > > > >>       arm-oe-linux-uclibceabi-g++ -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb -isystem/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -fpermissive -fvisibility-inlines-hidden -rdynamic -Wl,-O1 -Wl,--hash-style=gnu audio.o channels.o ci.o config.o cutter.o device.o diseqc.o dvbdevice.o dvbci.o dvbplayer.o dvbspu.o dvbsubtitle.o eit.o eitscan.o epg.o filter.o font.o i18n.o interface.o keys.o lirc.o menu.o menuitems.o nit.o osdbase.o osd.o pat.o player.o plugin.o rcu.o receiver.o recorder.o recording.o remote.o remux.o ringbuffer.o sdt.o sections.o shutdown.o skinclassic.o skins.o skinsttng.o sourceparams.o sources.o spu.o status.o svdrp.o themes.o thread.o timers.o tools.o transfer.o vdr.o videodir.o -ljpeg -lpthread -ldl -lcap -lrt -lfreetype -lfontconfig -lintl  ./libsi/libsi.a -o vdr
-> > >> > > > >>
-> > >> > > > >> ### fails
-> > >> > > > >>
-> > >> > > > >>       arm-oe-linux-uclibceabi-g++ -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb -isystem/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe -fpermissive -fvisibility-inlines-hidden -rdynamic -Wl,-O1 -Wl,--hash-style=gnu audio.o channels.o ci.o config.o cutter.o device.o diseqc.o dvbdevice.o dvbci.o dvbplayer.o dvbspu.o dvbsubtitle.o eit.o eitscan.o epg.o filter.o font.o i18n.o interface.o keys.o lirc.o menu.o menuitems.o nit.o osdbase.o osd.o pat.o player.o plugin.o rcu.o receiver.o recorder.o recording.o remote.o remux.o ringbuffer.o sdt.o sections.o shutdown.o skinclassic.o skins.o skinsttng.o sourceparams.o sources.o spu.o status.o svdrp.o themes.o thread.o timers.o tools.o transfer.o vdr.o videodir.o -ljpeg -lpthread -ldl -lcap -lrt -lfreetype -lfontconfig  ./libsi/libsi.a -o vdr
-> > >> > > > >>
-> > >> > > > >>       $ wdiff log.do_compile.*
-> > >> > > > >>       arm-oe-linux-uclibceabi-g++ -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb -isystem/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os [--pipe-] -fpermissive -fvisibility-inlines-hidden -rdynamic -Wl,-O1 -Wl,--hash-style=gnu audio.o channels.o ci.o config.o cutter.o device.o diseqc.o dvbdevice.o dvbci.o dvbplayer.o dvbspu.o dvbsubtitle.o eit.o eitscan.o epg.o filter.o font.o i18n.o interface.o keys.o lirc.o menu.o menuitems.o nit.o osdbase.o osd.o pat.o player.o plugin.o rcu.o receiver.o recorder.o recording.o remote.o remux.o ringbuffer.o sdt.o sections.o shutdown.o skinclassic.o skins.o skinsttng.o sourceparams.o sources.o spu.o status.o svdrp.o themes.o thread.o timers.o tools.o transfer.o vdr.o videodir.o -ljpeg -lpthread -ldl -lcap -lrt -lfreetype -lfontconfig {+-lintl+}  ./libsi/libsi.a -o vdr
-> > >> > > > >>
-> > >> > > > >> Now the question is why is the patch not applied [7] and why did it start breaking with this commit.
-> > >> > > > >
-> > >> > > > > Ok, I am sorry, my last report was messed up. I did not reset to
-> > >> > > > > a88aca1d but 49891de0 [8], where 7190532c [9]
-> > >> > > > >
-> > >> > > > >        commit 7190532c5a810ef886e8607ce042a319020f06c6
-> > >> > > > >        Author: Tom Rini <tom_rini@mentor.com>
-> > >> > > > >        Date:   Tue Jan 18 17:58:02 2011 -0700
-> > >> > > > >
-> > >> > > > >            vdr: Switch to libc-uclibc
-> > >> > > > >
-> > >> > > > >            Signed-off-by: Tom Rini <tom_rini@mentor.com>
-> > >> > > > >
-> > >> > > > > is applied, which seems to be the reason the patch is not applied and
-> > >> > > > > therefore `-lintl` not added.
-> > >> > > >
-> > >> > > > I have fixed a typo in it.
-> > >> > >
-> > >> > > Thank you for fixing this in cb23dffd [10].
-> > >> > >
-> > >> > > > Please retry latest master.
-> > >> > >
-> > >> > > Unfortunately the build still fails.
-> > >> > >
-> > >> > > I also tried to disable the features `largefile` and (second run
-> > >> > > additionally) `ipv6` in `conf/distro/minimal-uclibc.conf` and run
-> > >> > > `bitbake -k vdr` from scratch each time, but it failed too.
-> > >> > >
-> > >> > > Was that the right way to debug this? Do you have any other ideas?
-> > >> >
-> > >> > I encounter a strange thing from clean builds.
-> > >> >
-> > >> >         bitbake -k vdr # fails
-> > >> >         bitbake -k console-image # works
-> > >> >         bitbake -k x11-image # works
-> > >> >         USE_NLS="yes" bitbake -k # fails
-> > >> >
-> > >> > I have no clue what could cause this. I guess that `console-image` or
-> > >> > `x11-image` force some different options to the internationalization
-> > >> > programs and that this got changed with the `autotools.bbclass` change.
-> > >> >
-> > >> > Does anyone have a hint?
-> > >>
-> > >> Just a breadcrumb please? ;-)
+On (11/02/11 16:15), Paul Menzel wrote:
+> Am Montag, den 20.12.2010, 10:39 -0800 schrieb Khem Raj:
+> > On Mon, Dec 20, 2010 at 7:42 AM, Paul Menzel wrote:
+> > > Am Samstag, den 18.12.2010, 22:46 -0800 schrieb Khem Raj:
+> > >> On Sat, Dec 18, 2010 at 2:24 AM, Eric Bénard <eric@eukrea.com> wrote:
 > > >
-> > > Bernhard, have you had time to take a look?
+> > >> > On 18/12/2010 11:10, Paul Menzel wrote:
+> > >> >>
+> > >> >> Error: selected processor does not support ARM mode `smc #0'
+> > >> >
+> > >> > this seems to be a known problem with gcc 4.5 :
+> > >> > https://bugs.launchpad.net/ubuntu/+source/gcc-4.5/+bug/669912
+> > >>
+> > >> Its not a gcc problem to clarify. Its just that older compilers did
+> > >> not differentiate security extentions presence.
+> > >> http://kernel.ubuntu.com/git?p=ubuntu/ubuntu-natty.git;a=commitdiff;h=1ebe13dea156358f1044a7a755f02945ad3890e4;hp=f31ff7673ef77d04e74e1a1e45bb2940781f35f0
+> > >>
+> > >> http://kernel.ubuntu.com/git?p=ubuntu/ubuntu-natty.git;a=commitdiff;h=99340d7b23f3df75d9b752fb25088a10064cd0a6;hp=9523bd6810e0229a8147e8c3d6498e2f40b38974
+> > >>
+> > >> are the fixes you should apply to kernel.
+> > >
+> > > I just wanted to add that `linux-omap-psp_2.6.32` builds fine with
+> > > `angstrom-2010.x` (without the above mentioned patches) which uses the
+> > > following toolchain.
+> > >
+> > >        conf/distro/angstrom-2010.x.conf:ANGSTROM_GCC_VERSION                     ?= "4.5"
+> > >        conf/distro/angstrom-2010.x.conf:ANGSTROM_BINUTILS_VERSION                ?= "2.20.1"
 > > 
-> > vdr built fine on minimal-uclibc/qemuarm on latest oe/master
+> > yes it will work with binutils < 2.21 the patch I previously implied
+> > is in assembler.
 > 
-> I did too with a clean build directory and `minimal-uclibc`.
+> Víctor committed these patches in 4f24435f [1] for
+> `linux-omap4_2.6.35.3.bb`. I tried to backport these patches to
+> `linux-omap-psp_2.6.32.bb` but I am not successful. A lot seems to have
+> changed between Linux 2.6.32 and 2.6.35.
 > 
-> 	MACHINE = "qemuarm" bitbake -k vdr
+> After the adaptations to `arch/arm/mach-omap2/Makefile` I am now getting
+> the next error message.
 > 
-> It failed for me again.
+>         |   LDS     arch/arm/kernel/vmlinux.lds
+>         | /tmp/ccpCEAjJ.s: Assembler messages:
+>         | /tmp/ccpCEAjJ.s:306: Error: selected processor does not support ARM mode `smc #0'
+>         | /tmp/ccpCEAjJ.s:346: Error: selected processor does not support ARM mode `smc #0'
 > 
-> > unless its reproducible what you are seeing
-> > It will be hard to fix it.
-> 
-> I can reproduce this every time when I build from a clean build
-> directory (`rm -rf minimal-uclibc-dev`).
+> But I do not know how to adapt that. Is there an easier way to configure
+> these security extensions?
 
-I see I think its due to catch 22 of gettext and libintl probably. Let me
-see if it can be reproduced here. As it builds fine into familiar images
-its
-not that critical
-> 
-> As written above I cannot reproduce this when having built
-> `console-image` or `x11-image` before. So I am wondering what “language
-> specific options” they set or pass to the recipes.
-> 
-> 
-> Thanks,
-> 
-> Paul
-> 
-> 
-> > >> > > [10] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=cb23dffdbe3c3a7432c2e2eb19742c254163c05a
+yes there are cases where its used in inline assembly and compiler does not
+have knob for security extentions. Here is one patch that will work with
+binutils >= 2.21 but be away that it will NOT work with older binutils and
+infact will render kernel uncompilable if you are not using binutils
+atleast at version 2.21
+
+Enjoy
+
+-Khem
 
 
 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+--OXfL5xGRrasGEqWY
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment; filename="ARM-add-sec-attribute-to-inline-asm.patch"
+
+Compiling with binutils 2.21 needs to have this sec arch_extention
+gcc does not know march=armv7-a+sec and if we use -Wa,-march=armv7-a+sec
+then assembler does not honor it because march=armv7-a when specfied to
+gcc driver adds march=armv7-a *before*  -Wa,-march=armv7-a+sec when calling
+assembler. There is no way getting around that :(
+
+So what do we do ? We take the fight to the beast
+ We add the .arch_extention where its added in inline
+assembly.
+
+This file is added by one of local OE patches these patches are not
+(upstream _yet_ or discarded) dont know
+
+-Khem
 
 
+Index: git/arch/arm/kernel/sysfs_v7.c
+===================================================================
+--- git.orig/arch/arm/kernel/sysfs_v7.c
++++ git/arch/arm/kernel/sysfs_v7.c
+@@ -76,7 +76,8 @@ static ssize_t aux_ctl_store(struct sys_
+ 	asm ("mrc p15, 0, %0, c1, c0, 1" : "=r"(val));
+ 	SETBITS(val, 0xff8, new);
+ 	val &= ~2;
+-	asm ("mov r0,  %0	\n\t"
++	asm (".arch_extension sec\n\t"
++	     "mov r0,  %0	\n\t"
+ 	     "mov r12, #3	\n\t"
+ 	     "smc #0		\n\t"
+ 	     :: "r"(val) : "r0", "r12");
+@@ -107,7 +108,8 @@ static ssize_t l2_aux_ctl_store(struct s
+ 
+ 	asm ("mrc p15, 1, %0, c9, c0, 2" : "=r"(val));
+ 	SETBITS(val, 0xbc00000, new);
+-	asm ("mov r0,  %0	\n\t"
++	asm (".arch_extension sec\n\t"
++	     "mov r0,  %0	\n\t"
+ 	     "mov r12, #2	\n\t"
+ 	     "smc #0		\n\t"
+ 	     :: "r"(val) : "r0", "r12");
 
+--OXfL5xGRrasGEqWY--
