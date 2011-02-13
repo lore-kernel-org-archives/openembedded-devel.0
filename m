@@ -1,34 +1,34 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1PoceN-0001o0-0R
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1Poe9L-0001cW-48
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Feb 2011 15:10:08 +0100
-Received: by fxm17 with SMTP id 17so4101339fxm.6
+	Sun, 13 Feb 2011 16:46:11 +0100
+Received: by fxm17 with SMTP id 17so4147010fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Feb 2011 06:08:59 -0800 (PST)
+	Sun, 13 Feb 2011 07:45:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:subject:date:message-id:x-mailer;
-	bh=jZEgZHkQ4QLJMFQzOWoIcWkqlVOAPa3TKEPYlrMp39E=;
-	b=U/myqfaxdkUVetEe0O2L1ipbQFiNf6C78cyWZ4GQZtblLePUyJuw8z6XA1S8hYCjz5
-	MwVkRO50T4XkcqRKQ1WBxW9wM63NNf6RftYKJ0MeLQGm0M7hNxgrtPJyLKm1czri/uoR
-	oGt0nSxTqsnQ+aF2ZBvLxn41lUK2DSR200ZuU=
+	bh=nmriNZOAgsSc9cUel/dKcu9S/DM+TtveAv6+2UeDBCo=;
+	b=GtF9Re7DFbivyrSZwDGuO6zRboDEnluZf/SI0KLpz8WamxM8BxEq4a2C6HBAvnLXLO
+	O4fPXgbn0RJHw0YYpTgVZ6jdDjNv2cs1C+aZn1OS8eYiFSwr6JmFvbI+N/HYiFU4ZXME
+	YZ0xpH0Q7IF0CiGfe7KENTrUmmUxjZFhhDcMc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer;
-	b=JHTJvoKCNzHCMJKYdaxRP47cR4CM6qVhn81urUawtFRAWIW/R3NdvW7h37kg72vdUV
-	j3fVdYy7wJojOilC0vUTDN0FfRBnFlBJ56wkERpQCqFDrSd2sR6rv9lqKbxfwIqY6tnP
-	xc9JQf2/j3euBYpopBhNwue049nSh8bHNfH9g=
-Received: by 10.223.96.67 with SMTP id g3mr2267397fan.114.1297606138642;
-	Sun, 13 Feb 2011 06:08:58 -0800 (PST)
+	b=aplQcvQ6MCi5lEg4knRDZ27fiBbDBjeAp220rvvJ35HDJnmKPD88H74/Pl6XR1Okym
+	3t9pFaq9MsV8cfpB9MS1oCyky1plCRf6hHlnqM52rk93G4q/UtWYip5RUvsN/xre33gh
+	TrSXvc1RkCHyl647xsgaskSKY5F12cxQCvzJ8=
+Received: by 10.223.101.129 with SMTP id c1mr570412fao.25.1297611903084;
+	Sun, 13 Feb 2011 07:45:03 -0800 (PST)
 Received: from localhost.localdomain (ns.tefnet.pl [188.165.206.204])
-	by mx.google.com with ESMTPS id 5sm594086fak.23.2011.02.13.06.08.57
+	by mx.google.com with ESMTPS id a2sm625362faw.46.2011.02.13.07.45.01
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 13 Feb 2011 06:08:57 -0800 (PST)
+	Sun, 13 Feb 2011 07:45:02 -0800 (PST)
 From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Feb 2011 15:08:52 +0100
-Message-Id: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
+Date: Sun, 13 Feb 2011 16:44:55 +0100
+Message-Id: <1297611895-21729-1-git-send-email-filip.zyzniewski@gmail.com>
 X-Mailer: git-send-email 1.7.1
-Subject: [PATCH] linux-firmware: split into bus specific packages.
+Subject: [PATCH] image.bbclass: move insert_feed_uris() to rootfs_ipk.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,180 +42,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Feb 2011 14:10:08 -0000
+X-List-Received-Date: Sun, 13 Feb 2011 15:46:11 -0000
 
-The whole reposotiry is about 24MB in size and it's rarely needed
-whole. It is now splitted into bus specific subpackages (and some
-device-specific for devices on a bus like SPI or SBUS) all depended
-on by the linux-firmware package.
+This function generates feed configuration for opkg and as such
+should be used only for images using ipk, not rpm or deb.
 
 Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 ---
- recipes/linux-firmware/linux-firmware_git.bb |  144 +++++++++++++++++++++++++-
- 1 files changed, 142 insertions(+), 2 deletions(-)
+ classes/image.bbclass      |   31 -------------------------------
+ classes/rootfs_ipk.bbclass |   31 +++++++++++++++++++++++++++++++
+ 2 files changed, 31 insertions(+), 31 deletions(-)
 
-diff --git a/recipes/linux-firmware/linux-firmware_git.bb b/recipes/linux-firmware/linux-firmware_git.bb
-index 7bff379..1b22c79 100644
---- a/recipes/linux-firmware/linux-firmware_git.bb
-+++ b/recipes/linux-firmware/linux-firmware_git.bb
-@@ -1,7 +1,8 @@
- DESCRIPTION = "Firmware files for use with Linux kernel"
+diff --git a/classes/image.bbclass b/classes/image.bbclass
+index db13dd0..9621614 100644
+--- a/classes/image.bbclass
++++ b/classes/image.bbclass
+@@ -172,8 +172,6 @@ fakeroot do_rootfs () {
  
-+PR = "r1"
- PR_append = "+gitr${SRCREV}"
--SRCREV = "80a203275fc368db0a5f166c42dd35a4a22f2453"
-+SRCREV = "2fab48391fda8a914b55c8ac265eb3b6ee10ace8"
+ 	rootfs_${IMAGE_PKGTYPE}_do_rootfs
  
- SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/dwmw2/linux-firmware.git;protocol=git"
+-	insert_feed_uris
+-
+ 	${IMAGE_PREPROCESS_COMMAND}
  
-@@ -16,7 +17,146 @@ do_install() {
- 	cp -RpP * ${D}/lib/firmware/
+ 	ROOTFS_SIZE=`du -ks ${IMAGE_ROOTFS}|awk '{size = ${IMAGE_EXTRA_SPACE} + $1; print (size > ${IMAGE_ROOTFS_SIZE} ? size : ${IMAGE_ROOTFS_SIZE}) }'`
+@@ -193,35 +191,6 @@ do_deploy_to () {
+ 	cp "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.${IMAGE_FSTYPES}" ${DEPLOY_TO}
  }
  
--FILES_${PN} += "/lib/firmware/*"
-+SUBPACKAGES = "${PN}-i2c \
-+	${PN}-isa \
-+	${PN}-pci \
-+	${PN}-pcmcia \
-+	${PN}-sdio \
-+	${PN}-usb \
-+	${PN}-agere \
-+	${PN}-dsp56k \
-+	${PN}-gspi8682 \
-+	${PN}-gspi8686 \
-+	${PN}-gspi8688 \
-+	${PN}-myri-sbus \
-+	${PN}-qlogicpti \
-+	${PN}-wl12xx \
-+	${PN}-yam"
-+
-+RDEPENDS += "${SUBPACKAGES}"
-+PACKAGES += "${SUBPACKAGES}"
-+
- PACKAGE_ARCH = "all"
+-insert_feed_uris () {
+-
+-	echo "Building feeds for [${DISTRO}].."
+-
+-	for line in ${FEED_URIS}
+-	do
+-		# strip leading and trailing spaces/tabs, then split into name and uri
+-		line_clean="`echo "$line"|sed 's/^[ \t]*//;s/[ \t]*$//'`"
+-		feed_name="`echo "$line_clean" | sed -n 's/\(.*\)##\(.*\)/\1/p'`"
+-		feed_uri="`echo "$line_clean" | sed -n 's/\(.*\)##\(.*\)/\2/p'`"
+-
+-		echo "Added $feed_name feed with URL $feed_uri"
+-
+-		# insert new feed-sources
+-		echo "src/gz $feed_name $feed_uri" >> ${IMAGE_ROOTFS}/etc/opkg/${feed_name}-feed.conf
+-	done
+-
+-	# Allow to use package deploy directory contents as quick devel-testing
+-	# feed. This creates individual feed configs for each arch subdir of those
+-	# specified as compatible for the current machine.
+-	# NOTE: Development-helper feature, NOT a full-fledged feed.
+-	if [ -n "${FEED_DEPLOYDIR_BASE_URI}" ]; then
+-	    for arch in ${PACKAGE_ARCHS}
+-	    do
+-		echo "src/gz local-$arch ${FEED_DEPLOYDIR_BASE_URI}/$arch" >> ${IMAGE_ROOTFS}/etc/opkg/local-$arch-feed.conf
+-	    done
+-	fi
+-}
+-
+ log_check() {
+ 	set +x
+ 	for target in $*
+diff --git a/classes/rootfs_ipk.bbclass b/classes/rootfs_ipk.bbclass
+index 92f521d..8fab7af 100644
+--- a/classes/rootfs_ipk.bbclass
++++ b/classes/rootfs_ipk.bbclass
+@@ -104,6 +104,37 @@ fakeroot rootfs_ipk_do_rootfs () {
  
-+RDEPENDS_${PN}-pci += "${PN}-agere ${PN}-i2c"
-+RDEPENDS_${PN}-pcmcia += "${PN}-agere"
-+RDEPENDS_${PN}-sdio += "${PN}-gspi8686 ${PN}-wl12xx"
-+RDEPENDS_${PN}-usb += "${PN}-agere ${PN}-i2c"
+ 	log_check rootfs 	
+ 	rm -rf ${IPKG_TMP_DIR}
 +
++	rootfs_ipk_insert_feed_uris
++}
 +
-+FILES_${PN}-i2c = "/lib/firmware/dvb-fe-xc5000-1.6.114.fw \
-+	/lib/firmware/lgs8g75.fw"
++rootfs_ipk_insert_feed_uris () {
 +
-+FILES_${PN}-isa = "/lib/firmware/sb16 \
-+	/lib/firmware/tr_smctr.bin \
-+	/lib/firmware/yamaha/yss225_registers.bin"
++	echo "Building feeds for [${DISTRO}].."
 +
-+FILES_${PN}-pci = "/lib/firmware/3com \
-+	/lib/firmware/RTL8192E \
-+	/lib/firmware/acenic \
-+	/lib/firmware/adaptec \
-+	/lib/firmware/advansys \
-+	/lib/firmware/atmsar11.fw \
-+	/lib/firmware/av7110 \
-+	/lib/firmware/bnx2 \
-+	/lib/firmware/bnx2x*.fw \
-+	/lib/firmware/brcm/bcm43xx*.fw \
-+	/lib/firmware/cxgb3 \
-+	/lib/firmware/e100 \
-+	/lib/firmware/ess/maestro3_*.fw \
-+	/lib/firmware/intelliport2.bin \
-+	/lib/firmware/iwlwifi-*.ucode \
-+	/lib/firmware/korg/k1212.dsp \
-+	/lib/firmware/matrox \
-+	/lib/firmware/mwl8335_duplex.fw \
-+	/lib/firmware/mwl8k \
-+	/lib/firmware/phanfw.bin \
-+	/lib/firmware/ql2*_fw.bin \
-+	/lib/firmware/qlogic/1040.bin \
-+	/lib/firmware/qlogic/12160.bin \
-+	/lib/firmware/qlogic/1280.bin \
-+	/lib/firmware/qlogic/sd7220.fw \
-+	/lib/firmware/r128 \
-+	/lib/firmware/radeon \
-+	/lib/firmware/rt2561.bin \
-+	/lib/firmware/rt2561s.bin \
-+	/lib/firmware/rt2661.bin \
-+	/lib/firmware/rt2860.bin \
-+	/lib/firmware/rt3090.bin \
-+	/lib/firmware/rtl_nic/rtl8168d-*.fw \
-+	/lib/firmware/rtlwifi/rtl8192defw.bin \
-+	/lib/firmware/rtlwifi/rtl8192sefw.bin \
-+	/lib/firmware/slicoss \
-+	/lib/firmware/sun/cassini.bin \
-+	/lib/firmware/sxg \
-+	/lib/firmware/tehuti \
-+	/lib/firmware/tigon/tg3*.bin \
-+	/lib/firmware/tlg2300_firmware.bin \
-+	/lib/firmware/v4l-cx23418-*.fw \
-+	/lib/firmware/v4l-cx23885-*.fw \
-+	/lib/firmware/v4l-cx25840.fw \
-+	/lib/firmware/vxge/X3fw*.ncf \
-+	/lib/firmware/yamaha/ds1*.fw"
++	for line in ${FEED_URIS}
++	do
++		# strip leading and trailing spaces/tabs, then split into name and uri
++		line_clean="`echo "$line"|sed 's/^[ \t]*//;s/[ \t]*$//'`"
++		feed_name="`echo "$line_clean" | sed -n 's/\(.*\)##\(.*\)/\1/p'`"
++		feed_uri="`echo "$line_clean" | sed -n 's/\(.*\)##\(.*\)/\2/p'`"
 +
-+FILES_${PN}-pcmcia = "/lib/firmware/cis \
-+	/lib/firmware/libertas/cf8385*.bin \
-+	/lib/firmware/ositech/Xilinx7OD.bin"
++		echo "Added $feed_name feed with URL $feed_uri"
 +
-+FILES_${PN}-sdio = "/lib/firmware/brcm/bcm4329-fullmac-4-218-248-5.bin \
-+	/lib/firmware/libertas/sd*.bin"
++		# insert new feed-sources
++		echo "src/gz $feed_name $feed_uri" >> ${IMAGE_ROOTFS}/etc/opkg/${feed_name}-feed.conf
++	done
 +
-+FILES_${PN}-usb ="/lib/firmware/ar7010.fw \
-+	/lib/firmware/ar7010_1_1.fw \
-+	/lib/firmware/ar9170-*.fw \
-+	/lib/firmware/ar9271.fw \
-+	/lib/firmware/ath3k-*.fw \
-+	/lib/firmware/cpia2 \
-+	/lib/firmware/dabusb \
-+	/lib/firmware/dvb-usb-dib0700-1.20.fw \
-+	/lib/firmware/edgeport \
-+	/lib/firmware/emi26 \
-+	/lib/firmware/emi62 \
-+	/lib/firmware/f2255usb.bin \
-+	/lib/firmware/i2400m-fw-usb-*.sbcf \
-+	/lib/firmware/i6050-fw-usb-1.5.sbcf \
-+	/lib/firmware/kaweth \
-+	/lib/firmware/keyspan \
-+	/lib/firmware/keyspan_pda \
-+	/lib/firmware/libertas/usb*.bin \
-+	/lib/firmware/mts_*.fw \
-+	/lib/firmware/rt2870.bin \
-+	/lib/firmware/rt3070.bin \
-+	/lib/firmware/rt3071.bin \
-+	/lib/firmware/rt73.bin \
-+	/lib/firmware/rtlwifi/rtl8192cfw.bin \
-+	/lib/firmware/rtlwifi/rtl8192cufw.bin \
-+	/lib/firmware/rtlwifi/rtl8712u.bin \
-+	/lib/firmware/s2250*.fw \
-+	/lib/firmware/ti_3410.fw \
-+	/lib/firmware/ti_5052.fw \
-+	/lib/firmware/ttusb-budget \	
-+	/lib/firmware/ueagle-atm \
-+	/lib/firmware/usbdux_firmware.bin \
-+	/lib/firmware/usbduxfast_firmware.bin \
-+	/lib/firmware/v4l-cx231xx-avcore-01.fw \
-+	/lib/firmware/vicam/firmware.fw \
-+	/lib/firmware/vntwusb.fw \
-+	/lib/firmware/whiteheat*.fw"
-+
-+FILES_${PN}-agere = "/lib/firmware/agere_*_fw.bin"
-+
-+FILES_${PN}-dsp56k = "/lib/firmware/dsp56k/bootstrap.bin"
-+
-+FILES_${PN}-gspi8682 = "/lib/firmware/libertas/gspi8682*.bin"
-+
-+FILES_${PN}-gspi8686 = "/lib/firmware/libertas/gspi8686*.bin"
-+
-+FILES_${PN}-gspi8688 = "/lib/firmware/libertas/gspi8688*.bin" 
-+
-+FILES_${PN}-myri-sbus = "/lib/firmware/myricom/lanai.bin"
-+
-+FILES_${PN}-qlogicpti = "/lib/firmware/qlogic/isp1000.bin"
-+
-+FILES_${PN}-wl12xx = "/lib/firmware/ti-connectivity/wl1271-*.bin"
++	# Allow to use package deploy directory contents as quick devel-testing
++	# feed. This creates individual feed configs for each arch subdir of those
++	# specified as compatible for the current machine.
++	# NOTE: Development-helper feature, NOT a full-fledged feed.
++	if [ -n "${FEED_DEPLOYDIR_BASE_URI}" ]; then
++	    for arch in ${PACKAGE_ARCHS}
++	    do
++		echo "src/gz local-$arch ${FEED_DEPLOYDIR_BASE_URI}/$arch" >> ${IMAGE_ROOTFS}/etc/opkg/local-$arch-feed.conf
++	    done
++	fi
+ }
  
-+FILES_${PN}-yam = "/lib/firmware/yam"
+ rootfs_ipk_log_check() {
 -- 
 1.7.1
 
