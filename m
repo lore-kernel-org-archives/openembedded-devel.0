@@ -1,36 +1,32 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1PoY8H-0002wc-4k
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Feb 2011 10:20:43 +0100
-Received: by qwi2 with SMTP id 2so2354147qwi.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PoZYX-00046n-Vx for openembedded-devel@lists.openembedded.org;
+	Sun, 13 Feb 2011 11:51:54 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PoZXT-000764-V2 for openembedded-devel@lists.openembedded.org;
+	Sun, 13 Feb 2011 11:50:47 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 13 Feb 2011 11:50:47 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Feb 2011 01:19:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=TlZuPBzDzQiBU3hGZ/Tcf/K1Dps4DsQu66E6WhMNFvE=;
-	b=NR7ju7IiXHYoW79OJg6rOnuOQRTb/madqxprHGwRNp1bfde7CJKyt54Hjg06Z11Elx
-	UuwdAy/bq4/i0a4ycZx2DDR5afdmDyLjd6+wUEP0dawBdADb6kG5OUWc496gCZ1dgNoz
-	CH6IrWYqnzrMHFDpuqIN8QzcbaonzB76MwAEg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=XoPx+yAGdcM8hP1KGLp7MQDREG9V3PItT5mMFN141xVE+AJfLZRhs2MofwsvdmsTWh
-	2l6N11xFdBrh9Idsdu52mkSnRgmFO7hqsjvEKT8MEU6y+Q9emTGqcv8cshzLqdBHI1RS
-	y6UzQbCuQaQkx0n5lnUlk2WOWQeeGcVF3QyS4=
-MIME-Version: 1.0
-Received: by 10.229.230.17 with SMTP id jk17mr1908394qcb.184.1297588772832;
-	Sun, 13 Feb 2011 01:19:32 -0800 (PST)
-Received: by 10.229.193.10 with HTTP; Sun, 13 Feb 2011 01:19:32 -0800 (PST)
-In-Reply-To: <20110213060646.GA19259@localhost.jama.net>
-References: <1297538818-30102-1-git-send-email-filip.zyzniewski@gmail.com>
-	<20110213060646.GA19259@localhost.jama.net>
-Date: Sun, 13 Feb 2011 10:19:32 +0100
-Message-ID: <AANLkTinHjooHBo-FQQH3ot2D+xhtMuAu96nUBdWs-48g@mail.gmail.com>
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+	Sun, 13 Feb 2011 11:50:47 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] deb packages support: switch from /var/dpkg to /var/lib/dpkg
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 13 Feb 2011 11:50:37 +0100
+Message-ID: <ij8d1t$cd9$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+X-Enigmail-Version: 1.0.1
+Subject: TSC agenda items for the next meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,27 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Feb 2011 09:20:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 13 Feb 2011 10:51:54 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On 2/13/11, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Sat, Feb 12, 2011 at 08:26:58PM +0100, Filip Zyzniewski wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> I'm not using dpkg with OE, so personally I don't care, but be aware
-> that this change breaks upgrade path for every-package which is using
-> u-a. You need another hack moving /var/dpkg/alternatives content to
-> /var/lib/dpkg/alternatives, before first alternative is
-> reinstalled/upgraded, otherwise it will use alternative with lower
-> priority even when there is alternative with higher.
+Hi,
 
+The new TSC is holding a meeting next week and we wanted to see if
+anyone wants to suggest items we put in the agenda for the meeting.
 
-DPKG support was not functional until recently (my patches are an
-attempt to get it back to working state), so I don't think there is
-any distro/system I would break by these.
+If you have such items, please let us know by replying to this mail.
 
-Is it still a concern in this case?
+regards,
 
-bye,
-Filip Zyzniewski
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNV7d9MkyGM64RGpERAmPtAKCkcHyI3zTsPLl7EoEYBICnq+7VSgCfQ3/F
+zaj+whHN6SofeY2+4Vyv17w=
+=1+fn
+-----END PGP SIGNATURE-----
+
 
 
