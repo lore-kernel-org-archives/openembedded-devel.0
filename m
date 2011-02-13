@@ -1,23 +1,23 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1PoeT7-0002Lr-CB
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Feb 2011 17:06:43 +0100
-Received: (qmail invoked by alias); 13 Feb 2011 16:05:26 -0000
-Received: from p5DE48C50.dip.t-dialin.net (EHLO localhost.localdomain)
-	[93.228.140.80]
-	by mail.gmx.net (mp049) with SMTP; 13 Feb 2011 17:05:26 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19aEgAQXXZaltkJOSVilXa36tgclsbhVfdkPiPEdX
-	cvHv0ajDYmr7NE
-From: Andreas Mueller <schnitzeltony@gmx.de>
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Poh5v-00052U-Ul for openembedded-devel@lists.openembedded.org;
+	Sun, 13 Feb 2011 19:54:54 +0100
+Received: from f053041221.adsl.alicedsl.de ([78.53.41.221]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Poh4s-000703-0v for openembedded-devel@lists.openembedded.org;
+	Sun, 13 Feb 2011 18:53:46 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Feb 2011 17:01:18 +0100
-User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
-MIME-Version: 1.0
-Message-Id: <201102131701.18687.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: OE Wiki/Git/Patchwork not reachable
+In-Reply-To: <201102131701.18687.schnitzeltony@gmx.de>
+References: <201102131701.18687.schnitzeltony@gmx.de>
+Date: Sun, 13 Feb 2011 19:53:44 +0100
+Message-ID: <1297623224.4169.0.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: [solved] OE Wiki/Git/Patchwork not reachable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,13 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Feb 2011 16:06:45 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 13 Feb 2011 18:54:54 -0000
+X-Groupsio-MsgNum: 29136
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-2VzauPBTYr+XLp7k4S2X"
 
-If it is intended/already known: sorry for the noise
+--=-2VzauPBTYr+XLp7k4S2X
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Andreas
+Am Sonntag, den 13.02.2011, 17:01 +0100 schrieb Andreas Mueller:
+> If it is intended/already known: sorry for the noise
+
+I had the same problem and it is working now for me again.
 
 
+Thanks,
+
+Paul
+
+--=-2VzauPBTYr+XLp7k4S2X
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk1YKLIACgkQPX1aK2wOHVjjSQCfW/pbeyprWyMjVfK0PSaM1WoF
+lCIAnjyFf+JXaEnvLN8K74PNaclo7irg
+=/IOg
+-----END PGP SIGNATURE-----
+
+--=-2VzauPBTYr+XLp7k4S2X--
