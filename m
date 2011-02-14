@@ -1,29 +1,34 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1Pp3zf-0005OD-TR
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pp45S-0007Tb-Kn
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 20:21:56 +0100
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id E8FE81660297; Mon, 14 Feb 2011 12:11:32 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00,
-	URIBL_RED autolearn=ham version=3.3.1
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 919F416601DC;
-	Mon, 14 Feb 2011 12:11:30 -0700 (MST)
-Message-ID: <4D597E62.9030301@mlbassoc.com>
-Date: Mon, 14 Feb 2011 12:11:30 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc13
-	Thunderbird/3.1.7
-MIME-Version: 1.0
+	Mon, 14 Feb 2011 20:27:55 +0100
+Received: by fxm17 with SMTP id 17so5246054fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Feb 2011 11:26:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:subject:date:message-id:x-mailer;
+	bh=wsGcsMnI8DVu0XBLdfb6GYynxvdEEvgM+K/dZZ1SM2w=;
+	b=A22D4kxPcI3UaJvn7p4nY1K54LyaOwgom7J2BdYkUCwIigYWaKFoNnoLVbcK0O+IMQ
+	4FTXDnkTwDKV3wq6O+IZWHtI9CQHPigmyu17EkG4z8LQ3XGPttcj1/ZliLazmAXsK3We
+	5SERTpmyjPGgMd0LCUe6gUkWLVZ7akJ4tPPHA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer;
+	b=RczgQW8qycXWV4uxwnsGrXMvowpYxByYjFMEp07+2th1lW1Osstm7Kv+MFxC4URIcd
+	5LJQvOwjVsbR7K4qgQ72IAsv86MuY0w7Ph7/g0fla8TBKWSD7InSnphcY7sgP2Ui+HZi
+	DUUTUnkT96fC/lgMJcP/A+ehROuPJsVj3RPfk=
+Received: by 10.223.101.206 with SMTP id d14mr5021383fao.134.1297711393269;
+	Mon, 14 Feb 2011 11:23:13 -0800 (PST)
+Received: from localhost.localdomain (ns.tefnet.pl [188.165.206.204])
+	by mx.google.com with ESMTPS id n3sm1257147faa.5.2011.02.14.11.23.11
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 14 Feb 2011 11:23:12 -0800 (PST)
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4D5961E8.3090801@mentor.com>
-In-Reply-To: <4D5961E8.3090801@mentor.com>
-Subject: Re: Run-time testing of testing-release-2011.1
+Date: Mon, 14 Feb 2011 20:23:04 +0100
+Message-Id: <1297711384-8582-1-git-send-email-filip.zyzniewski@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] package_deb.bbclass: depend on apt, not dpkg.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,37 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 19:21:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 14 Feb 2011 19:27:55 -0000
 
-On 02/14/2011 10:10 AM, Tom Rini wrote:
-> Hey all,
->
-> If you have a machine that's listed over here with a blue icon, please contact me off list if you would like to perform run-time testing of any image(s), along with how you want me
-> to share them with you:
-> http://i.imgur.com/Cbakj.png
->
-> (And I'll post pastebin'ing failure logs for stuff I can't easily fixup myself throughout the day, then updating the wiki page, but as you can see, it's a large dataset).
->
+Both package_deb.bbclass and rootfs_deb.bbclass use apt-get.
 
-I'd be glad to test any beagleboard combo.  I can give you
-an FTP site to download images or pull them from you.
+Without apt system cannot be bootstrapped because there is no optimal
+way to fetch new packages. Apt depends on dpkg, so switching from dpkg
+to apt in EXTRA_DEPENDS provides both.
 
-BTW, I tried to build MACHINE=beagleboard/DISTRO=ansgtrom-2010.x
-which failed.  I looked at
-   http://wiki.openembedded.net/index.php/Release-2011.03
-but it wasn't obvious where/how to report the failure.  Also
-that page doesn't seem to be very current?
+Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+---
+ classes/package_deb.bbclass |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-n.b. I know I didn't volunteer to do any testing as I wasn't
-sure what kind of resources I could dedicate to this, but I
-would like to fill in some as possible.
-
+diff --git a/classes/package_deb.bbclass b/classes/package_deb.bbclass
+index 837efd8..a98ec9d 100644
+--- a/classes/package_deb.bbclass
++++ b/classes/package_deb.bbclass
+@@ -4,8 +4,8 @@
+ 
+ inherit package
+ 
+-BOOTSTRAP_EXTRA_RDEPENDS += "dpkg"
+-DISTRO_EXTRA_RDEPENDS += "dpkg"
++BOOTSTRAP_EXTRA_RDEPENDS += "apt"
++DISTRO_EXTRA_RDEPENDS += "apt"
+ IMAGE_PKGTYPE ?= "deb"
+ 
+ # Map TARGET_ARCH to Debian's ideas about architectures
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+1.7.1
+
 
 
