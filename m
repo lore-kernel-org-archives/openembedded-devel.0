@@ -1,37 +1,24 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from drewtech.com ([66.36.241.150] helo=server.drewtech.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pp4Zl-0002oX-Sk
+	(envelope-from <joravec@drewtech.com>) id 1Pp4ps-0005Sd-1v
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 20:59:13 +0100
-Received: by eya28 with SMTP id 28so2312863eya.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 11:58:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=J02h8hLDbphiQX8+WaVjOio/ZJz1p3qo/QBZX17bSXk=;
-	b=WXjPe6P0rp1JxojcASlsxjOfyqEaaFJGAomBGql1PxxCVdBraSHlGdqnz4XmhHUngF
-	hTsgX7A/T0csEa1Hluj3dlxLyEfsOXXiOsG41MwF6fhzhW+mrXSKdBlwVpsKVb/nO6+b
-	/2WiODntB5Wn1gogE9UuIvv1lVer6+Kw2z6x8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=l4FbBnbOE6qNznCLn7yCZf9G5tp+kftBAKBIWrQiIEqHbniEO2954KWn8itWIvee9h
-	5Qm0+rDhb1N6cP+ACuUPmJTuQqnoCPqIT8t+A8cxelykyp/1rQYZM2qu1Cpi3OZbRG6P
-	ks9iX19FKgBbD2AVRorVHoKYNH5Vw0PbX9naA=
-Received: by 10.204.98.65 with SMTP id p1mr25744346bkn.198.1297713484701;
-	Mon, 14 Feb 2011 11:58:04 -0800 (PST)
-Received: from localhost.localdomain ([188.165.206.204])
-	by mx.google.com with ESMTPS id b6sm2047509bkb.22.2011.02.14.11.58.03
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 14 Feb 2011 11:58:03 -0800 (PST)
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+	Mon, 14 Feb 2011 21:15:52 +0100
+Received: (qmail 8096 invoked from network); 14 Feb 2011 15:18:20 -0500
+Received: from adsl-75-58-206-177.dsl.sfldmi.sbcglobal.net (HELO
+	?192.168.0.152?) (75.58.206.177)
+	by j2534-3.com with SMTP; 14 Feb 2011 15:18:20 -0500
+Message-ID: <4D598D30.3080506@drewtech.com>
+Date: Mon, 14 Feb 2011 15:14:40 -0500
+From: Joey Oravec <joravec@drewtech.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.14) Gecko/20110207 Thunderbird/3.1.8
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Feb 2011 20:57:54 +0100
-Message-Id: <1297713474-8677-1-git-send-email-filip.zyzniewski@gmail.com>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1297709521-6650-1-git-send-email-filip.zyzniewski@gmail.com>
-References: <1297709521-6650-1-git-send-email-filip.zyzniewski@gmail.com>
-Subject: [PATCH] package_deb.bbclass: remove double DISTRO_PR from the package version.
+References: <4D544976.6010800@drewtech.com>
+	<4D545173.8080904@mentor.com>	<4D54734B.7060705@drewtech.com>
+	<4D547643.2020600@mentor.com>
+In-Reply-To: <4D547643.2020600@mentor.com>
+Subject: Re: openembedded with a prebuilt external toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,33 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 19:59:14 -0000
+X-List-Received-Date: Mon, 14 Feb 2011 20:15:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-PKGR already contains DISTRO_PR, so no need to add it twice.
+On 2/10/2011 6:35 PM, Tom Rini wrote:
+>> Both the -csl.bb and -generic.bb copy a bunch of stuff to STAGING_DIR in
+>> do_stage(). Of course in the long-run I need for the recipe to copy C
+>> libraries, but for now I should be able to leave the body blank. At
+>> least it'll use my compiler and run to completion. Right?
+>
+> Well, as you saw, it fails in some cases.  This is because, yeah, 
+> we're telling the toolchain stuff lives ...here now, and it doesn't.
 
-Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
----
- classes/package_deb.bbclass |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+Thanks for the additional help on chat! This followup is to share my 
+results with the mailing list.
 
-diff --git a/classes/package_deb.bbclass b/classes/package_deb.bbclass
-index 1f36246..60e759d 100644
---- a/classes/package_deb.bbclass
-+++ b/classes/package_deb.bbclass
-@@ -146,9 +146,9 @@ python do_package_deb () {
-         fields = []
-         pe = bb.data.getVar('PE', d, 1)
-         if pe and int(pe) > 0:
--            fields.append(["Version: %s:%s-%s%s\n", ['PE', 'PKGV', 'PKGR', 'DISTRO_PR']])
-+            fields.append(["Version: %s:%s-%s\n", ['PE', 'PKGV', 'PKGR']])
-         else:
--            fields.append(["Version: %s-%s%s\n", ['PKGV', 'PKGR', 'DISTRO_PR']])
-+            fields.append(["Version: %s-%s\n", ['PKGV', 'PKGR']])
-         fields.append(["Description: %s\n", ['DESCRIPTION']])
-         fields.append(["Section: %s\n", ['SECTION']])
-         fields.append(["Priority: %s\n", ['PRIORITY']])
--- 
-1.7.1
+Regarding my "bitbake nano" failure, that was a symptom of a sysroot 
+issue. An external cross compiler has some default sysroot where it 
+looks for libraries. By default it looks like OE passes nothing to 
+change this. As a result do_configure() didn't look for libraries in 
+staging dir, decided that ncurses didn't exist, and the build failed. 
+One solution is to add:
 
+TOOLCHAIN_OPTIONS = " --sysroot=${STAGING_DIR_TARGET}"
+
+to your build/conf/local.conf and make sure your compiler's default 
+sysroot (libc, etc) gets copied into the staging dir. That way you can 
+call *-gcc from somewhere in your path but it'll look for everything 
+under OE's staging directory.
+
+-joey
 
 
