@@ -1,37 +1,35 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Povav-0000zG-0X
+	(envelope-from <obi@opendreambox.org>) id 1PovnO-0001rH-4s
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 11:23:49 +0100
-Received: by bwz10 with SMTP id 10so5045918bwz.6
+	Mon, 14 Feb 2011 11:36:42 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 287AC314D9B9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 02:22:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:mime-version
-	:content-type:content-disposition:user-agent;
-	bh=lxar1CQmizrT2eacnw7fQPu7m0PN7kHIXTqA0zDmeDY=;
-	b=lQHMpHxyPT2DjtSrXzwtl729GoirdHX2C+9Tz55ZNE09m0FfYivbosy90/WGOeebCb
-	K0JUHBGdmdq50qUdwVmUsqa+hXy46ispwcrZY4+iryFm6EsUJFU7YcV0GUcjF3KvLG7J
-	DciX1HUls/avFsJGPKOviMqs3FcocYhadalYo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	b=pouPTulolvpTM+AUtvZ8wenQfmyHfXe9wMJDjyPZ5FS2ojPV83dNvN7oVxJn3jIqmq
-	bwE7YBbsIYkpDvshp8IM7BCz29iZVkULMzFsThZM+myLaV/gd2sUGpPbOdARO7qVjSzy
-	5NWoXwdHOxNBXKcsa6BOX1x1cDlD4jjBVJRg8=
-Received: by 10.204.72.207 with SMTP id n15mr3246080bkj.62.1297678960153;
-	Mon, 14 Feb 2011 02:22:40 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id j11sm1668032bka.0.2011.02.14.02.22.38
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 14 Feb 2011 02:22:39 -0800 (PST)
-Date: Mon, 14 Feb 2011 11:22:32 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110214102232.GB8619@localhost.jama.net>
+	Mon, 14 Feb 2011 11:35:32 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id WSyEGG29ot1Z
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Feb 2011 11:35:26 +0100 (CET)
+Received: from [172.22.22.61] (ip-94-79-168-47.unitymediagroup.de
+	[94.79.168.47])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 29BE0314C47C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Feb 2011 11:35:26 +0100 (CET)
+Message-ID: <4D59056C.8000602@opendreambox.org>
+Date: Mon, 14 Feb 2011 11:35:24 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.14) Gecko/20110208 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: debian.bbclass issues when some package is substring of another
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTikP8CNgvex==mnJY8McTouY0n-QzcUQjaFZRV8X@mail.gmail.com>
+In-Reply-To: <AANLkTikP8CNgvex==mnJY8McTouY0n-QzcUQjaFZRV8X@mail.gmail.com>
+Subject: Re: Problem with dependencies in packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,123 +43,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 10:23:49 -0000
-X-Groupsio-MsgNum: 29155
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Pd0ReVV5GZGQvF3a"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 14 Feb 2011 10:36:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---Pd0ReVV5GZGQvF3a
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 02/13/2011 11:50 PM, Filip Zyzniewski wrote:
+> Hi,
+> 
+> I think I have found a problem with versioned dependencies (or I don't
+> unserstand something).
+> 
+> I am trying to switch the jlime distribution from ipk to deb packages.
+> When debugging do_rootfs problems I stumbled upon this:
+> 
+> The following packages have unmet dependencies:
+>   libncursesw5: Depends: libtinfo5 (>= 5.7+20110115) but 5.7-r16 is to
+> be installed
+> E: Broken packages
+> 
+> The Depends line in deb package control file comes from
+> classes/package_deb.bbclass:do_package_deb():
+> 
+> rdepends = explode_deps(unicode(bb.data.getVar("RDEPENDS", localdata, 1) or ""))
+> [...]
+> ctrlfile.write(u"Depends: %s\n" % ", ".join(rdepends))
+> 
+> 
+> The dependency string comes from classes/package.bbclass:766:
+> dep = "%s (>= %s)" % (dep_pkg, ver_needed)
+> 
+> ver_needed comes (in case of ncurses) from .ver files in the build
+> tree, generated by the same function a bit earlier using pkgver
+> variable set in lines 657-661:
+> 
+>                 pkgver = bb.data.getVar('PKGV_' + pkg, d, True)
+>                 if not pkgver:
+>                         pkgver = bb.data.getVar('PV_' + pkg, d, True)
+>                 if not pkgver:
+>                         pkgver = ver
+> 
+> and in ncurses_5.7.bb we have:
+> 
+> PATCHDATE = "20110115"
+> PKGV = "${PV}+${PATCHDATE}"
+> 
+> 
+> Isn't this an incosistency that ncurses_5.7-r16 depends on
+> libtinfo5_5.7+20110115 ? Shouldn't it depend on libtinfo5_5.7-r16?
+> 
+> What's the reason for this situation? Does opkg somehow compare these
+> versions in another way causing the problem to be invisible?
 
-After last rebuild from scratch I got
-Package libncursesw (5.7+20110115-r16.6)
-instead of expected
-Package libncursesw5 (5.7+20110115-r16.6)
-which I had before (and which is _still_ in depends of packages needing
-it - like ie screen)
+It looks like deb packages currently use PV where PKGV should be used
+instead:
 
-I started to debug debian.bbclass to see why
-libncursesw is no longer renamed to libncursesw5 and found that it's
-because also libncurses exists and it's replaced in both and then
-replacement for libncursesw doesn't match anymore. Same issue with
-libtic/libticw.
+package_ipk.bbclass:
+fields.append(["Version: %s:%s-%s\n", ['PE', 'PKGV', 'PKGR']])
 
-Problem is that when checking libtic:
-=2E/log:DEBUG: LIBNAMES: pkg ncurses-libtic socrunc ('libtic5', 'libtic')
-=2E/log:DEBUG: LIBNAMES: pkgname libtic5 devname libtic
+package_deb.bbclass:
+fields.append(["Version: %s:%s-%s%s\n", ['PE', 'PV', 'PR',  'DISTRO_PR']])
 
-=2E/log:DEBUG: LIBNAMES: pkg ncurses-libtic =3D=3D orig_pkg ncurses-libtic
-=2E/log:DEBUG: LIBNAMES: pkgname libtic5 devname libtic pkg ncurses-libtic =
-orig_pkg ncurses-libtic debian_pn None newpkg libtic5
-=2E/log:DEBUG: setVar PKG_ncurses-libtic, libtic5
-but also
-=2E/log:DEBUG: LIBNAMES: else pkg ncurses-libticw.replace(ncurses-libtic,li=
-btic)
-=2E/log:DEBUG: LIBNAMES: pkgname libtic5 devname libtic pkg ncurses-libticw=
- orig_pkg ncurses-libtic debian_pn None newpkg libticw
-=2E/log:DEBUG: setVar PKG_ncurses-libticw, libticw
+Maybe it's worth factoring out common code for deb and ipk into a new
+file to avoid future bit rot.
 
-so later when checking libticw
-=2E/log:DEBUG: LIBNAMES: pkg ncurses-libticw socrunc ('libticw5','libticw')
-=2E/log:DEBUG: LIBNAMES: pkgname libticw5 devname libticw
-it won't find ncurses-libticw to replace it with libticw5 (because it's
-already named libticw)
-
-So can someone explain why we need that 'newpkg =3D pkg.replace(orig_pkg, d=
-evname, 1)' in else?
-
-Or any hint which change caused this (as debian.bbclass wasn't changed in t=
-his aspect).
-
-Reordering PACKAGES seems like really error prone and even not really possi=
-ble with dynamic packages etc.
-
-Here is added debug I've used to find it:
-
-diff --git a/classes/debian.bbclass b/classes/debian.bbclass
-index 1a2c7da..9239631 100644
---- a/classes/debian.bbclass
-+++ b/classes/debian.bbclass
-@@ -84,10 +84,13 @@ python debian_package_name_hook () {
-                        else:
-                                bb.note("Multiple libraries (%s) found and =
-LEAD_SONAME not defined" % ", ".join(sonames))
-
-+               bb.debug(1, 'LIBNAMES: pkg %s soname %s' % (orig_pkg, sonam=
-e))
-                if has_libs and not has_bins and soname:
-                        soname_result =3D socrunch(soname)
-+                       bb.debug(1, 'LIBNAMES: pkg %s socrunc %s' % (orig_p=
-kg, soname_result))
-                        if soname_result:
-                                (pkgname, devname) =3D soname_result
-+                               bb.debug(1, 'LIBNAMES: pkgname %s devname %=
-s' % (pkgname, devname))
-                                for pkg in packages.split():
-                                        if (bb.data.getVar('PKG_' + pkg, d)=
- or bb.data.getVar('DEBIAN_NOAUTONAME_' + pkg, d)):
-                                                continue
-@@ -95,11 +98,15 @@ python debian_package_name_hook () {
-                                        if debian_pn:
-                                                newpkg =3D debian_pn
-                                        elif pkg =3D=3D orig_pkg:
-+                                               bb.debug(1, 'LIBNAMES: pkg =
-%s =3D=3D orig_pkg %s' % (pkg, orig_pkg))
-                                                newpkg =3D pkgname
-                                        else:
-+                                               bb.debug(1, 'LIBNAMES: else=
- pkg %s.replace(%s, %s)' % (pkg, orig_pkg, devname))
-                                                newpkg =3D pkg.replace(orig=
-_pkg, devname, 1)
-+                                       bb.debug(1, 'LIBNAMES: pkgname %s d=
-evname %s pkg %s orig_pkg %s debian_pn %s newpkg %s' % (pkgname, devname, p=
-kg, orig_pkg, debian_pn, newpkg))
-                                        if newpkg !=3D pkg:
-                                                bb.data.setVar('PKG_' + pkg=
-, newpkg, d)
-+                                               bb.debug(1, 'setVar PKG_%s,=
- %s' % (pkg, newpkg))
-
-        for pkg in (bb.data.getVar('AUTO_LIBNAME_PKGS', d, 1) or "").split(=
-):
-                auto_libname(packages, pkg)
+Regards,
+Andreas
 
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---Pd0ReVV5GZGQvF3a
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk1ZAmgACgkQN1Ujt2V2gBzpAQCeMTLtRfohgT+Rk2Hx5u9MSFS1
-TYkAn0AbS+5zL/FqV5CQYlUBmtUsl4PR
-=/Rx2
------END PGP SIGNATURE-----
-
---Pd0ReVV5GZGQvF3a--
