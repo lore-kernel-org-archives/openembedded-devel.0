@@ -1,40 +1,31 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pp2to-0003dA-IA
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pp31h-0003nz-VW
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 19:11:48 +0100
-Received: by qwi2 with SMTP id 2so3159571qwi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 10:10:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=Vd4EIR22ix4xQYSp2gq2Tob64S/DuX2cbTqyecq8Bq8=;
-	b=tiQmb8zaBuo6WqeUeWbwbW09RWQ+lg1fSsMO+9EB6QxwhACNCtciq4dEsjAdGAz3Ry
-	buFnj9hlAJQuXI0qNEc0vkHhal4bmho5/kCeUKZd2qK9fv7gVRZfAyYJuV8OJRnn2I09
-	djs5o/ZNFBM+DoI54RY79mMY+PuKiSPpOviNM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Tgc1NLM8dQMXAV1Q0LqJMxLbSZ8ix73hTD0R0bYAz8qDAqXWeS61eNGM0nA/qMPdd+
-	D9qHInlIumozxrMOKcAg4MzWS1V8Jz8b4Wii5nxtmF2k2dR3KMDCqfKVYnuGQLFYUI/f
-	6PqiDVwXbuAQPtl0+wrDJkjcwrfUGPrbQinC4=
+	Mon, 14 Feb 2011 19:19:58 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1Pp30a-0007hN-5V from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Feb 2011 10:18:48 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 14 Feb 2011 10:18:47 -0800
+Received: from [172.30.80.148] ([172.30.80.148]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 14 Feb 2011 11:18:46 -0700
+Message-ID: <4D5971FB.9070701@mentor.com>
+Date: Mon, 14 Feb 2011 11:18:35 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.224.19.196 with SMTP id c4mr3546317qab.184.1297707028664; Mon,
-	14 Feb 2011 10:10:28 -0800 (PST)
-Received: by 10.229.193.10 with HTTP; Mon, 14 Feb 2011 10:10:28 -0800 (PST)
-In-Reply-To: <1297705231.2178.104.camel@phil-desktop>
-References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
-	<AANLkTi=XjCgstGxtHd2jTmp5Kmm8wyQzOjJrxnnAhJU9@mail.gmail.com>
-	<AANLkTikjvqTZcOiYHRsXdE9otGaJTavGKZ8iWtuN7GVu@mail.gmail.com>
-	<AANLkTi=7XnywEHPjEReDvY68TNd-3fzr7FtREJ-6hp3T@mail.gmail.com>
-	<AANLkTinXm+YcGS_uadbA6ddezRRtZB0r6Tqcgt7GyOh4@mail.gmail.com>
-	<4D59677E.2040004@mentor.com>
-	<1297705231.2178.104.camel@phil-desktop>
-Date: Mon, 14 Feb 2011 19:10:28 +0100
-Message-ID: <AANLkTimu=72wQjT_m_ECes1C8rOfPD37trVY1KPkWNAT@mail.gmail.com>
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
+In-Reply-To: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
+X-OriginalArrivalTime: 14 Feb 2011 18:18:46.0462 (UTC)
+	FILETIME=[9E9D85E0:01CBCC73]
 Subject: Re: [PATCH] linux-firmware: split into bus specific packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -49,21 +40,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 18:11:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 14 Feb 2011 18:19:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 2/14/11, Phil Blundell <philb@gnu.org> wrote:
-> Yeah, agreed.  Or even a split down to individual devices/drivers since
-> each of the Ralink firmware binaries is quite large in itself.
+On 02/13/2011 07:08 AM, Filip Zyzniewski wrote:
+> The whole reposotiry is about 24MB in size and it's rarely needed
+> whole. It is now splitted into bus specific subpackages (and some
+> device-specific for devices on a bus like SPI or SBUS) all depended
+> on by the linux-firmware package.
+[snip]
+> +RDEPENDS += "${SUBPACKAGES}"
 
-Yeah, I agree it is a good idea, it just isn't needed for us.
+Given the previous threads, I think we still have a problem, which is 
+that this should be
+RDEPENDS_${PN} += "${SUBPACKAGES}"
+so that there's a valid upgrade path.
 
-So could this be done in two steps:
-1) this patch (by me) - split into buses;
-2) second patch (by whoever needs this) - furtherly split bus packages
-by devices?
-
-bye,
-Filip Zyzniewski
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
