@@ -1,40 +1,36 @@
-Received: from thoth.sbs.de ([192.35.17.2])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1Pp1um-0001Cn-5j
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pp1vQ-0001Em-4k
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 18:08:44 +0100
-Received: from mail3.siemens.de (localhost [127.0.0.1])
-	by thoth.sbs.de (8.13.6/8.13.6) with ESMTP id p1EH5hwI022500
+	Mon, 14 Feb 2011 18:09:24 +0100
+Received: by qwi2 with SMTP id 2so3109385qwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 18:05:44 +0100
-Received: from DEMCHP99ET2MSX.ww902.siemens.net
-	(demchp99et2msx.ww902.siemens.net [139.25.131.241])
-	by mail3.siemens.de (8.13.6/8.13.6) with ESMTP id p1EH5hsw008478
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 18:05:43 +0100
-Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.227]) by
-	DEMCHP99ET2MSX.ww902.siemens.net ([139.25.131.241]) with mapi;
-	Mon, 14 Feb 2011 18:05:43 +0100
-From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 Feb 2011 18:05:42 +0100
-Thread-Topic: [oe] libpcre not compiling
-Thread-Index: AcvMYi4IHgGemttUQKCExe7k33+AogABwmEA
-Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819E011A8B5C16@DEMCHP99E35MSX.ww902.siemens.net>
-References: <09D9BE2AC4AA764DABAA8C91E48D819ED682EC06@DEMCHP99E35MSX.ww902.siemens.net>
-	<AANLkTimzYvPnN7tt54jcQVYUmBQFpQsO0LYFoRVh5Q8x@mail.gmail.com>
-	<09D9BE2AC4AA764DABAA8C91E48D819ED682ECBB@DEMCHP99E35MSX.ww902.siemens.net>
-	<09D9BE2AC4AA764DABAA8C91E48D819E011A8B5ACA@DEMCHP99E35MSX.ww902.siemens.net>
-	<4D594F61.4010700@vollmann.ch>
-In-Reply-To: <4D594F61.4010700@vollmann.ch>
-Accept-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: de-DE
+	Mon, 14 Feb 2011 09:08:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=k+ZUmpnZcgt/4IpMF8TicPIThC3vNkUk/9Udt+V6kI0=;
+	b=p3AYxWNRb+1BaoYZWW3yBMTUR6LHwCLtLdGgLSq9wyO+rVaHBSEmHiwcqOSOiytx0r
+	IRqFxThY0QnzzDY4MeTBD4fsA112Iz0Zoh1669tzt1bKvSADrTzMBr4/ShZqkleJ4B/Q
+	UFnzzpQCsyat+ZYXW30JT9PcO/p9+VacBJb0Q=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=fLP8x1yJeVEWlZHbOKvDtb5ihPnfWGIvX3wEmaB5XeceZgxgYV3hnZdxFCL+lsxIHM
+	C9MDwyGXML1V9KHuTBI7pwjSxN9JYJqLC12Xk39T3uu8k9zwjuEfJeh134Iy2AyxBzyJ
+	AZ0AWbPVHREEexjgml/IDxqy4c7xeML96e9SI=
 MIME-Version: 1.0
-Subject: Re: libpcre not compiling
+Received: by 10.229.6.207 with SMTP id a15mr2999072qca.298.1297703293974; Mon,
+	14 Feb 2011 09:08:13 -0800 (PST)
+Received: by 10.229.193.10 with HTTP; Mon, 14 Feb 2011 09:08:13 -0800 (PST)
+In-Reply-To: <AANLkTi=XjCgstGxtHd2jTmp5Kmm8wyQzOjJrxnnAhJU9@mail.gmail.com>
+References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
+	<AANLkTi=XjCgstGxtHd2jTmp5Kmm8wyQzOjJrxnnAhJU9@mail.gmail.com>
+Date: Mon, 14 Feb 2011 18:08:13 +0100
+Message-ID: <AANLkTikjvqTZcOiYHRsXdE9otGaJTavGKZ8iWtuN7GVu@mail.gmail.com>
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] linux-firmware: split into bus specific packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,64 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 17:08:44 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 14 Feb 2011 17:09:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Solved.
+On 2/14/11, Otavio Salvador <otavio@ossystems.com.br> wrote:
 
-Problem was: issue with packaged-staging
+> I agree that this ought to be split but I think that it should be done
+> by vendor:
+> realtek, ralink and so on.
 
-- For some (unknown) reason, something in my pstage dir was corrupt (and su=
-rprisingly at the same time, for the 4 MACHINES for which I was building).
+What would be the point of such split?
 
-- As my pstage dir is outside from build dir, just deleting the latter was =
-not enough.
+I have split it by buses, because currently having full support for
+PCMCIA devices on my Jornada 720, I have to install 13MB of PCI
+firmwares and 8.5MB of USB firmwares, which I will never use (because
+I have neither PCI nor USB bus on it) just to have available the 200kB
+of PCMCIA firmwares.
 
-- After deleting the pstage dir and rebuilding all from scratch, the proble=
-m disappeared.
+Most of the firmwares in the repository are for removable devices - we
+(as the OE/distrubution maintainers) are by definition not able to
+know whose products will the user plug in.
 
-- After deleting all but pstage dir, libpcre and gnutls compiled fine too.
-
-With kind regards,
-Fabrice Aeschbacher
-
-
-> -----Urspr=FCngliche Nachricht-----
-> Von: openembedded-devel-bounces@lists.openembedded.org=20
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] Im=20
-> Auftrag von Detlef Vollmann
-> Gesendet: Montag, 14. Februar 2011 16:51
-> An: openembedded-devel@lists.openembedded.org
-> Betreff: Re: [oe] libpcre not compiling
->=20
-> On 02/14/11 11:43, Aeschbacher, Fabrice wrote:
-> > I already reported that libpcre (7.6-r8) does not compile=20
-> in released version 2010.12 :
-> >
-> > | /bin/grep: /usr/lib/libstdc++.la: No such file or directory
-> > |=20
-> /srv/oe-2010/build/at91sam9g20ek/sysroots/x86_64-linux/usr/bin
-/sed: can't read /usr/lib/libstdc++.la: No such file or directory
-> > | arm-angstrom-linux-gnueabi-libtool: link:=20
-> `/usr/lib/libstdc++.la' is not a valid libtool archive
-> >
-> > Now I just figured out that neither does gnutls-2.10.2-r10.1 :
-> >
-> > |=20
-> /srv/oe-2010/build/at91sam9g20ek/sysroots/x86_64-linux/usr/bin
-/sed: can't read /usr/lib/libstdc++.la: No such file or directory
-> > | arm-angstrom-linux-gnueabi-libtool: link:=20
-> `/usr/lib/libstdc++.la' is not a valid libtool archive
-> >
-> > This seems to be pretty much the same issue.
-> > Any idea?
-> These are not -native packages, correct?
-> Then libtool shouldn't look for /usr/lib/libstdc++.la.
-> I have the feeling that something in the libtool setup is wrong.
->=20
-> Regards,
->    Detlef
+bye,
+Filip Zyzniewski
 
 
