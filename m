@@ -1,37 +1,33 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PozVQ-0008VT-C9
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pozwl-0001BI-1P
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 15:34:24 +0100
-Received: by mail-bw0-f47.google.com with SMTP id 10so5249326bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 06:33:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=ZMyCEj6byJoq8OAGLcvCraAwhmul6HKH7AcccgIIG6E=;
-	b=iBM2B7vviDFDDrZKTRRBGEsZujbJjwgtwyeQzIg8wgtVz0l8ULhJvbf9ZQtQdSsDTB
-	M/VMtGZyPxtmED+zgahwN1K8EWr8JtNCOBS9m4dW/BObbjveBjkevFY26Oetkn1LNAoz
-	+a1Nl9fxRGDw4zGFqtzWwOwLR5VqAHnGBSUAY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=E/Svl08aOeM/QBs0wduDDctjpg8HXGBxXRdQ7Ot+nBJlS2RwXFKrAxugTBfIOIF8kn
-	gYApHu8xljBtjIPyQOwLGC2uN59UrXp8+fCzk4nQ6KBEZAkn2sAvIMHL2B0xzK+NNEyN
-	oggKcG65TRAFcbftXo+vJqqwaMXP/x/uZpGJ4=
-Received: by 10.204.73.78 with SMTP id p14mr3462171bkj.47.1297693997495;
-	Mon, 14 Feb 2011 06:33:17 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id rc9sm1820702bkb.2.2011.02.14.06.33.16
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 14 Feb 2011 06:33:16 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 14 Feb 2011 16:02:39 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1Pozvd-0005my-70 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Feb 2011 07:01:29 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 14 Feb 2011 07:01:29 -0800
+Received: from [172.30.80.148] ([172.30.80.148]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 14 Feb 2011 08:01:28 -0700
+Message-ID: <4D5943BD.9040701@mentor.com>
+Date: Mon, 14 Feb 2011 08:01:17 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Feb 2011 15:32:38 +0100
-Message-Id: <1297693958-25388-5-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <1297693958-25388-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1297693958-25388-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH 5/5] python: generate-manifest-2.6.py, update few entries
+References: <4D58D5EF.6000807@dresearch.de>	<AANLkTi=4i_m8J4qFCwntdo-qb4CHn98UH+kuz4O=zcgT@mail.gmail.com>
+	<4D59066F.1040805@dresearch.de>
+In-Reply-To: <4D59066F.1040805@dresearch.de>
+X-OriginalArrivalTime: 14 Feb 2011 15:01:28.0198 (UTC)
+	FILETIME=[0E75CA60:01CBCC58]
+Subject: Re: bitbake exit codes? (testing-release-2011.03 build results)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,64 +41,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 14:34:24 -0000
+X-List-Received-Date: Mon, 14 Feb 2011 15:02:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-* config was in python-dev as well as python-distutils, keep in
-  distutils
-* linecache.* was in python-core as well as python-lang, keep in core
+On 02/14/2011 03:39 AM, Steffen Sledz wrote:
+> Am 14.02.2011 09:11, schrieb Frans Meulenbroeks:
+>> 2011/2/14 Steffen Sledz<sledz@dresearch.de>:
+>>> While setting up Jenkins/Hudson jobs for the testing-release-2011.03 branch based on the testscript.sh from the contrib subdir i hit the following problem.
+>>>
+>>> bitbake (1.10.2) finally reports "NOTE: Task Summary: Attempted 1217 tasks of which 0 didn't need to be rerun and 0 failed.". So it seems that the build was successful. But bitbake did not return 0 but 1. So Jenkins marks the build as failed.
+>>>
+>>> I guess the exit code 1 is coming from some QA Issues. How do we handle that if if my guess is right?
+>>>
+>>> Do we mark such a build run as successful in our test matrix?
+>>>
+>>> Has bitbake a defined set of exit codes that we can evaluate in the testscript.sh?
+>>>
+>>> Steffen
+>>
+>> There have been a few threads on this in the past.
+>> One of the ways (and maybe the best one) to get around this is to fix
+>> the QA errors.
+>
+> Of course. You are right.
+>
+> But for the moment the question is: "Do we mark such a builds as successful in our test matrix or not?"
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- contrib/python/generate-manifest-2.6.py |    4 ++--
- recipes/python/python-2.6-manifest.inc  |    4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+Well, as the code stands today (post tag) the change to make those 
+failures kill the build have been merged.
 
-diff --git a/contrib/python/generate-manifest-2.6.py b/contrib/python/generate-manifest-2.6.py
-index 6d7bee9..28a7226 100755
---- a/contrib/python/generate-manifest-2.6.py
-+++ b/contrib/python/generate-manifest-2.6.py
-@@ -165,7 +165,7 @@ if __name__ == "__main__":
-     "config/.debug lib-dynload/.debug ${bindir}/.debug ${libdir}/.debug" )
- 
-     m.addPackage( "${PN}-dev", "Python Development Package", "${PN}-core",
--    "${includedir} ${libdir}/libpython2.6.so config" ) # package
-+    "${includedir} ${libdir}/libpython2.6.so" ) # package
- 
-     m.addPackage( "${PN}-idle", "Python Integrated Development Environment", "${PN}-core ${PN}-tkinter",
-     "${bindir}/idle idlelib" ) # package
-@@ -257,7 +257,7 @@ if __name__ == "__main__":
-     "lib-dynload/_bisect.so lib-dynload/_collections.so lib-dynload/_heapq.so lib-dynload/_weakref.so lib-dynload/_functools.so " +
-     "lib-dynload/array.so lib-dynload/itertools.so lib-dynload/operator.so lib-dynload/parser.so " +
-     "atexit.* bisect.* code.* codeop.* collections.* dis.* functools.* heapq.* inspect.* keyword.* opcode.* symbol.* repr.* token.* " +
--    "tokenize.* traceback.* linecache.* weakref.*" )
-+    "tokenize.* traceback.* weakref.*" )
- 
-     m.addPackage( "${PN}-logging", "Python Logging Support", "${PN}-core ${PN}-io ${PN}-lang ${PN}-pickle ${PN}-stringold",
-     "logging" ) # package
-diff --git a/recipes/python/python-2.6-manifest.inc b/recipes/python/python-2.6-manifest.inc
-index 65ba9b8..89c9be4 100644
---- a/recipes/python/python-2.6-manifest.inc
-+++ b/recipes/python/python-2.6-manifest.inc
-@@ -67,7 +67,7 @@ FILES_${PN}-debugger="${libdir}/python2.6/bdb.* ${libdir}/python2.6/pdb.* "
- 
- DESCRIPTION_${PN}-dev="Python Development Package"
- RDEPENDS_${PN}-dev="${PN}-core"
--FILES_${PN}-dev="${includedir} ${libdir}/libpython2.6.so ${libdir}/python2.6/config "
-+FILES_${PN}-dev="${includedir} ${libdir}/libpython2.6.so "
- 
- DESCRIPTION_${PN}-difflib="Python helpers for computing deltas between objects."
- RDEPENDS_${PN}-difflib="${PN}-lang ${PN}-re"
-@@ -123,7 +123,7 @@ FILES_${PN}-json="${libdir}/python2.6/json "
- 
- DESCRIPTION_${PN}-lang="Python Low-Level Language Support"
- RDEPENDS_${PN}-lang="${PN}-core"
--FILES_${PN}-lang="${libdir}/python2.6/lib-dynload/_bisect.so ${libdir}/python2.6/lib-dynload/_collections.so ${libdir}/python2.6/lib-dynload/_heapq.so ${libdir}/python2.6/lib-dynload/_weakref.so ${libdir}/python2.6/lib-dynload/_functools.so ${libdir}/python2.6/lib-dynload/array.so ${libdir}/python2.6/lib-dynload/itertools.so ${libdir}/python2.6/lib-dynload/operator.so ${libdir}/python2.6/lib-dynload/parser.so ${libdir}/python2.6/atexit.* ${libdir}/python2.6/bisect.* ${libdir}/python2.6/code.* ${libdir}/python2.6/codeop.* ${libdir}/python2.6/collections.* ${libdir}/python2.6/dis.* ${libdir}/python2.6/functools.* ${libdir}/python2.6/heapq.* ${libdir}/python2.6/inspect.* ${libdir}/python2.6/keyword.* ${libdir}/python2.6/opcode.* ${libdir}/python2.6/symbol.* ${libdir}/python2.6/repr.* ${libdir}/python2.6/token.* ${libdir}/python2.6/tokenize.* ${libdir}/python2.6/traceback.* ${libdir}/python2.6/linecache.* ${libdir}/python2.6/weakref.* "
-+FILES_${PN}-lang="${libdir}/python2.6/lib-dynload/_bisect.so ${libdir}/python2.6/lib-dynload/_collections.so ${libdir}/python2.6/lib-dynload/_heapq.so ${libdir}/python2.6/lib-dynload/_weakref.so ${libdir}/python2.6/lib-dynload/_functools.so ${libdir}/python2.6/lib-dynload/array.so ${libdir}/python2.6/lib-dynload/itertools.so ${libdir}/python2.6/lib-dynload/operator.so ${libdir}/python2.6/lib-dynload/parser.so ${libdir}/python2.6/atexit.* ${libdir}/python2.6/bisect.* ${libdir}/python2.6/code.* ${libdir}/python2.6/codeop.* ${libdir}/python2.6/collections.* ${libdir}/python2.6/dis.* ${libdir}/python2.6/functools.* ${libdir}/python2.6/heapq.* ${libdir}/python2.6/inspect.* ${libdir}/python2.6/keyword.* ${libdir}/python2.6/opcode.* ${libdir}/python2.6/symbol.* ${libdir}/python2.6/repr.* ${libdir}/python2.6/token.* ${libdir}/python2.6/tokenize.* ${libdir}/python2.6/traceback.* ${libdir}/python2.6/weakref.* "
- 
- DESCRIPTION_${PN}-logging="Python Logging Support"
- RDEPENDS_${PN}-logging="${PN}-core ${PN}-io ${PN}-lang ${PN}-pickle ${PN}-stringold"
 -- 
-1.7.4.1
-
+Tom Rini
+Mentor Graphics Corporation
 
 
