@@ -1,34 +1,31 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Pp6fL-0008DH-Kv
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 23:13:07 +0100
-Received: from p5b036204.dip.t-dialin.net ([91.3.98.4] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1Pp6e3-0000iw-0T by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 23:11:49 +0100
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1Pp6e1-0008Aj-6M
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 23:11:45 +0100
-Date: Mon, 14 Feb 2011 23:11:44 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110214221144.GJ14931@excalibur.local>
-References: <1297717608-30480-1-git-send-email-schnitzeltony@gmx.de>
+	(envelope-from <cdhmanning@gmail.com>) id 1Pp6kP-0008Jr-Ka
+	for Openembedded-devel@lists.openembedded.org;
+	Mon, 14 Feb 2011 23:18:21 +0100
+Received: by fxm17 with SMTP id 17so5404551fxm.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Feb 2011 14:17:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=cnbrr4SSGDeoCnfM7eEmllsoUdrLV9iIKQC7Y8wZbtI=;
+	b=IBMl7Lc0rA+VGRNpL09hOFbKz+QwyDvAtAJutVS1lJx6jChW3xyr4BISJGeuuF4W4W
+	GKMqFgf4dXpLNquTN6Iy3tfSIuQZ52BSJqGMEu8zf22exGs+qJx6hxI1zJJPq0pq9S+v
+	NN8v39PwqheJZ2F4/okYKrwVesfSUM40pBHGM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=qDEUrBVQgRNdm/31uoDHSdMNfwoWJa1rgjht3kVyWTQ2Jr5QgZxbc6Vu2K84B3y593
+	izFAg73adFRVz3YYZGBXx4siO2Iyhnuw0X+Cqx+Pur4yo/Y789rFbusGFpeQZx8Vjb+a
+	mdUizibHkoq55Bfif8DCru5FdllcHPzil+pwY=
 MIME-Version: 1.0
-In-Reply-To: <1297717608-30480-1-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.1 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Subject: Re: [PATCH] Add a small helper script listing all recipes with QA errors.
+Received: by 10.223.71.197 with SMTP id i5mr5283390faj.127.1297721831667; Mon,
+	14 Feb 2011 14:17:11 -0800 (PST)
+Received: by 10.223.93.205 with HTTP; Mon, 14 Feb 2011 14:17:11 -0800 (PST)
+Date: Tue, 15 Feb 2011 11:17:11 +1300
+Message-ID: <AANLkTikLpJU9q7woyJrpTVWaAXK_m557J1uXAF-HLBCs@mail.gmail.com>
+From: Charles Manning <cdhmanning@gmail.com>
+To: Openembedded-devel@lists.openembedded.org
+Subject: Which recipe to get EFL into SDK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,21 +39,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 22:13:07 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 14 Feb 2011 22:18:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hello.
+Hello
 
-On Mon, 2011-02-14 at 22:06, Andreas Mueller wrote:
-> 
-> Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
+I am building an SDK and have managed to get everything added to it
+that I want except for EFL.
 
-Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
+Any hints as to what recipe to use to add EFL to the SDK?
 
-Thanks for cooking this up.
+Thanks
 
-regards
-Stefan Schmidt
+Charles
 
 
