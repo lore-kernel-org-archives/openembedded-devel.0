@@ -1,39 +1,30 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Pp0qM-0003UE-AW
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pp0zE-0003nY-KJ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 17:00:06 +0100
-Received: by bwz10 with SMTP id 10so5330005bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 07:58:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=AYgJm96ZJ3Fx5+gbWM5hm9ZgqKe5XtCOJS2q4VuDo5Q=;
-	b=tjHfF/EIp6Fl0MwMVtikk4MIPOOMpce/r0hD4t+L2sSqQxfZryYnT79WTGCvHDPmkR
-	TqsETbRyoRFwsQZe99vEt/KLwLh1V18xZrED2F25w7kL78On5q9l1QCChrQ8HRJ2kRF5
-	56RSnaP19FWf2hu7VfshoP0wOIH+d7ubn4ojc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=TEz/t+QY7Bsra37wTIoRWYgDsqJYFZ2UL22+UJ6C/gCWlSo35kMb+xTR5ktrp9/zgp
-	pIOwWA12WrHcDC12woITpcuWQaY81mHPURiS+Rh9bOMxWXAba3bWJ+1mwxJs3T/ZPQiq
-	RYACYtMD38lqgbr3QGpbPjFfSKNOom4dnx//8=
+	Mon, 14 Feb 2011 17:09:16 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1Pp0y6-0006bC-Aw from Tom_Rini@mentor.com ;
+	Mon, 14 Feb 2011 08:08:06 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 14 Feb 2011 08:08:05 -0800
+Received: from [172.30.80.148] ([172.30.80.148]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 14 Feb 2011 09:08:04 -0700
+Message-ID: <4D59535A.1010602@mentor.com>
+Date: Mon, 14 Feb 2011 09:07:54 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.204.50.196 with SMTP id a4mr25119810bkg.213.1297699136436;
-	Mon, 14 Feb 2011 07:58:56 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.119.207 with HTTP; Mon, 14 Feb 2011 07:58:56 -0800 (PST)
-In-Reply-To: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
-References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
-Date: Mon, 14 Feb 2011 15:58:56 +0000
-X-Google-Sender-Auth: oL3up5nHWTxpz6tcyql9TKITJDQ
-Message-ID: <AANLkTi=XjCgstGxtHd2jTmp5Kmm8wyQzOjJrxnnAhJU9@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] linux-firmware: split into bus specific packages.
+To: Jaap de Jong <jaap.dejong@nedap.com>, 
+	openembedded-devel@lists.openembedded.org
+X-OriginalArrivalTime: 14 Feb 2011 16:08:05.0045 (UTC)
+	FILETIME=[5CC43E50:01CBCC61]
+Subject: testing-release-2011.1 failure: at91sam9263ek
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,26 +38,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 16:00:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 14 Feb 2011 16:09:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sun, Feb 13, 2011 at 14:08, Filip Zyzniewski
-<filip.zyzniewski@gmail.com> wrote:
-> The whole reposotiry is about 24MB in size and it's rarely needed
-> whole. It is now splitted into bus specific subpackages (and some
-> device-specific for devices on a bus like SPI or SBUS) all depended
-> on by the linux-firmware package.
+Hey all,
 
-I agree that this ought to be split but I think that it should be done
-by vendor:
-realtek, ralink and so on.
+Here are the failures I see building for at91sam9263ek:
+angstrom-2010.x (all images): http://pastebin.com/7g7wNWQj
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Perhaps this will be fixed when Ulf pushes updates for a newer version 
+of u-boot?  The error itself is easily fixable but there may be run-time 
+problems still.
+
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
