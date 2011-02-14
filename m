@@ -1,33 +1,22 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Pozwl-0001BI-1P
+	(envelope-from <philb@gnu.org>) id 1Pp0KU-0002Cc-KA
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 16:02:39 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1Pozvd-0005my-70 from Tom_Rini@mentor.com 
+	Mon, 14 Feb 2011 16:27:10 +0100
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Pp0JP-0008Rf-M9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 07:01:29 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Mon, 14 Feb 2011 07:01:29 -0800
-Received: from [172.30.80.148] ([172.30.80.148]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 14 Feb 2011 08:01:28 -0700
-Message-ID: <4D5943BD.9040701@mentor.com>
-Date: Mon, 14 Feb 2011 08:01:17 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Mon, 14 Feb 2011 16:26:03 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-References: <4D58D5EF.6000807@dresearch.de>	<AANLkTi=4i_m8J4qFCwntdo-qb4CHn98UH+kuz4O=zcgT@mail.gmail.com>
-	<4D59066F.1040805@dresearch.de>
-In-Reply-To: <4D59066F.1040805@dresearch.de>
-X-OriginalArrivalTime: 14 Feb 2011 15:01:28.0198 (UTC)
-	FILETIME=[0E75CA60:01CBCC58]
-Subject: Re: bitbake exit codes? (testing-release-2011.03 build results)
+In-Reply-To: <20110214102232.GB8619@localhost.jama.net>
+References: <20110214102232.GB8619@localhost.jama.net>
+Date: Mon, 14 Feb 2011 15:27:23 +0000
+Message-ID: <1297697243.2178.97.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: debian.bbclass issues when some package is substring of another
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,38 +30,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 15:02:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 14 Feb 2011 15:27:10 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On 02/14/2011 03:39 AM, Steffen Sledz wrote:
-> Am 14.02.2011 09:11, schrieb Frans Meulenbroeks:
->> 2011/2/14 Steffen Sledz<sledz@dresearch.de>:
->>> While setting up Jenkins/Hudson jobs for the testing-release-2011.03 branch based on the testscript.sh from the contrib subdir i hit the following problem.
->>>
->>> bitbake (1.10.2) finally reports "NOTE: Task Summary: Attempted 1217 tasks of which 0 didn't need to be rerun and 0 failed.". So it seems that the build was successful. But bitbake did not return 0 but 1. So Jenkins marks the build as failed.
->>>
->>> I guess the exit code 1 is coming from some QA Issues. How do we handle that if if my guess is right?
->>>
->>> Do we mark such a build run as successful in our test matrix?
->>>
->>> Has bitbake a defined set of exit codes that we can evaluate in the testscript.sh?
->>>
->>> Steffen
->>
->> There have been a few threads on this in the past.
->> One of the ways (and maybe the best one) to get around this is to fix
->> the QA errors.
->
-> Of course. You are right.
->
-> But for the moment the question is: "Do we mark such a builds as successful in our test matrix or not?"
+On Mon, 2011-02-14 at 11:22 +0100, Martin Jansa wrote:
+> So can someone explain why we need that 'newpkg = pkg.replace(orig_pkg, devname, 1)' in else?
 
-Well, as the code stands today (post tag) the change to make those 
-failures kill the build have been merged.
+If that line was removed altogether then the -dev packages (and -doc,
+-bin, ...) would stop being renamed, which wouldn't be a very good
+thing.  In other words, you'd get libncurses5 but ncurses-dev (not
+libncurses5-dev) etc.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+However you're right that the logic as it stands does look fairly
+broken.  Two ways of fixing it come to mind:
+
+a) have it explicitly search for (and rename) [orig_pkg]-dev,
+[orig_pkg]-doc etc, and remove the catch-all altogether; or
+
+b) switch to a two-phase approach where it first renames all the
+libraries themselves, then uses some heuristic to match the remaining
+packages against the libraries and apply an appropriate renaming to
+them.  Probably just matching on longest substring would be good enough
+here.
+
+I think (b) is probably a better solution although it would be a little
+harder to implement.
+
+p.
+
+
 
 
