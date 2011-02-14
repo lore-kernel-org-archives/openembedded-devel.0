@@ -1,22 +1,39 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1Pp0KU-0002Cc-KA
+	(envelope-from <otavio.salvador@gmail.com>) id 1Pp0qM-0003UE-AW
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 16:27:10 +0100
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Pp0JP-0008Rf-M9
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 16:26:03 +0100
-From: Phil Blundell <philb@gnu.org>
+	Mon, 14 Feb 2011 17:00:06 +0100
+Received: by bwz10 with SMTP id 10so5330005bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Feb 2011 07:58:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=AYgJm96ZJ3Fx5+gbWM5hm9ZgqKe5XtCOJS2q4VuDo5Q=;
+	b=tjHfF/EIp6Fl0MwMVtikk4MIPOOMpce/r0hD4t+L2sSqQxfZryYnT79WTGCvHDPmkR
+	TqsETbRyoRFwsQZe99vEt/KLwLh1V18xZrED2F25w7kL78On5q9l1QCChrQ8HRJ2kRF5
+	56RSnaP19FWf2hu7VfshoP0wOIH+d7ubn4ojc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=TEz/t+QY7Bsra37wTIoRWYgDsqJYFZ2UL22+UJ6C/gCWlSo35kMb+xTR5ktrp9/zgp
+	pIOwWA12WrHcDC12woITpcuWQaY81mHPURiS+Rh9bOMxWXAba3bWJ+1mwxJs3T/ZPQiq
+	RYACYtMD38lqgbr3QGpbPjFfSKNOom4dnx//8=
+MIME-Version: 1.0
+Received: by 10.204.50.196 with SMTP id a4mr25119810bkg.213.1297699136436;
+	Mon, 14 Feb 2011 07:58:56 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.119.207 with HTTP; Mon, 14 Feb 2011 07:58:56 -0800 (PST)
+In-Reply-To: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
+References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
+Date: Mon, 14 Feb 2011 15:58:56 +0000
+X-Google-Sender-Auth: oL3up5nHWTxpz6tcyql9TKITJDQ
+Message-ID: <AANLkTi=XjCgstGxtHd2jTmp5Kmm8wyQzOjJrxnnAhJU9@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20110214102232.GB8619@localhost.jama.net>
-References: <20110214102232.GB8619@localhost.jama.net>
-Date: Mon, 14 Feb 2011 15:27:23 +0000
-Message-ID: <1297697243.2178.97.camel@phil-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: debian.bbclass issues when some package is substring of another
+Subject: Re: [PATCH] linux-firmware: split into bus specific packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,35 +47,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 15:27:10 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 14 Feb 2011 16:00:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2011-02-14 at 11:22 +0100, Martin Jansa wrote:
-> So can someone explain why we need that 'newpkg = pkg.replace(orig_pkg, devname, 1)' in else?
+On Sun, Feb 13, 2011 at 14:08, Filip Zyzniewski
+<filip.zyzniewski@gmail.com> wrote:
+> The whole reposotiry is about 24MB in size and it's rarely needed
+> whole. It is now splitted into bus specific subpackages (and some
+> device-specific for devices on a bus like SPI or SBUS) all depended
+> on by the linux-firmware package.
 
-If that line was removed altogether then the -dev packages (and -doc,
--bin, ...) would stop being renamed, which wouldn't be a very good
-thing.  In other words, you'd get libncurses5 but ncurses-dev (not
-libncurses5-dev) etc.
+I agree that this ought to be split but I think that it should be done
+by vendor:
+realtek, ralink and so on.
 
-However you're right that the logic as it stands does look fairly
-broken.  Two ways of fixing it come to mind:
-
-a) have it explicitly search for (and rename) [orig_pkg]-dev,
-[orig_pkg]-doc etc, and remove the catch-all altogether; or
-
-b) switch to a two-phase approach where it first renames all the
-libraries themselves, then uses some heuristic to match the remaining
-packages against the libraries and apply an appropriate renaming to
-them.  Probably just matching on longest substring would be good enough
-here.
-
-I think (b) is probably a better solution although it would be a little
-harder to implement.
-
-p.
-
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
