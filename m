@@ -1,36 +1,30 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pp1vQ-0001Em-4k
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pp1xK-0001Kr-Py
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 18:09:24 +0100
-Received: by qwi2 with SMTP id 2so3109385qwi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 09:08:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=k+ZUmpnZcgt/4IpMF8TicPIThC3vNkUk/9Udt+V6kI0=;
-	b=p3AYxWNRb+1BaoYZWW3yBMTUR6LHwCLtLdGgLSq9wyO+rVaHBSEmHiwcqOSOiytx0r
-	IRqFxThY0QnzzDY4MeTBD4fsA112Iz0Zoh1669tzt1bKvSADrTzMBr4/ShZqkleJ4B/Q
-	UFnzzpQCsyat+ZYXW30JT9PcO/p9+VacBJb0Q=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=fLP8x1yJeVEWlZHbOKvDtb5ihPnfWGIvX3wEmaB5XeceZgxgYV3hnZdxFCL+lsxIHM
-	C9MDwyGXML1V9KHuTBI7pwjSxN9JYJqLC12Xk39T3uu8k9zwjuEfJeh134Iy2AyxBzyJ
-	AZ0AWbPVHREEexjgml/IDxqy4c7xeML96e9SI=
+	Mon, 14 Feb 2011 18:11:23 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Pp1wC-0006gB-7f from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Feb 2011 09:10:12 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 14 Feb 2011 09:10:12 -0800
+Received: from [172.30.80.148] ([172.30.80.148]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 14 Feb 2011 10:10:10 -0700
+Message-ID: <4D5961E8.3090801@mentor.com>
+Date: Mon, 14 Feb 2011 10:10:00 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.229.6.207 with SMTP id a15mr2999072qca.298.1297703293974; Mon,
-	14 Feb 2011 09:08:13 -0800 (PST)
-Received: by 10.229.193.10 with HTTP; Mon, 14 Feb 2011 09:08:13 -0800 (PST)
-In-Reply-To: <AANLkTi=XjCgstGxtHd2jTmp5Kmm8wyQzOjJrxnnAhJU9@mail.gmail.com>
-References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
-	<AANLkTi=XjCgstGxtHd2jTmp5Kmm8wyQzOjJrxnnAhJU9@mail.gmail.com>
-Date: Mon, 14 Feb 2011 18:08:13 +0100
-Message-ID: <AANLkTikjvqTZcOiYHRsXdE9otGaJTavGKZ8iWtuN7GVu@mail.gmail.com>
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] linux-firmware: split into bus specific packages.
+X-OriginalArrivalTime: 14 Feb 2011 17:10:11.0120 (UTC)
+	FILETIME=[09AE2B00:01CBCC6A]
+Subject: Run-time testing of testing-release-2011.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,28 +38,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 17:09:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 14 Feb 2011 17:11:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 2/14/11, Otavio Salvador <otavio@ossystems.com.br> wrote:
+Hey all,
 
-> I agree that this ought to be split but I think that it should be done
-> by vendor:
-> realtek, ralink and so on.
+If you have a machine that's listed over here with a blue icon, please 
+contact me off list if you would like to perform run-time testing of any 
+image(s), along with how you want me to share them with you:
+http://i.imgur.com/Cbakj.png
 
-What would be the point of such split?
+(And I'll post pastebin'ing failure logs for stuff I can't easily fixup 
+myself throughout the day, then updating the wiki page, but as you can 
+see, it's a large dataset).
 
-I have split it by buses, because currently having full support for
-PCMCIA devices on my Jornada 720, I have to install 13MB of PCI
-firmwares and 8.5MB of USB firmwares, which I will never use (because
-I have neither PCI nor USB bus on it) just to have available the 200kB
-of PCMCIA firmwares.
-
-Most of the firmwares in the repository are for removable devices - we
-(as the OE/distrubution maintainers) are by definition not able to
-know whose products will the user plug in.
-
-bye,
-Filip Zyzniewski
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
