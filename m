@@ -1,28 +1,37 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1Potrt-0000bq-B7
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pou0t-00014L-7T
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 09:33:13 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id C8074491286;
-	Mon, 14 Feb 2011 09:32:04 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Mon, 14 Feb 2011 09:32:04 +0100
-Message-ID: <4D58E883.8030606@dresearch.de>
-Date: Mon, 14 Feb 2011 09:32:03 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+	Mon, 14 Feb 2011 09:42:31 +0100
+Received: by qwi2 with SMTP id 2so2774059qwi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Feb 2011 00:41:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=i7DkY09FmGpnQiWk6Xfw0QowG+LNaxJvRTSk06Jbui8=;
+	b=a6vm1tk4aZ5q9bc9DnaKiX3+i/eRywH4UQ98WgAGqwULSrAsWR5hM2UCy19JKMDeoU
+	Zd/7t9H2gqazlFji/HQQpg6+ftyd3v0uGbiADbIJ+Hn8Hio8wJS5VwDaml/LC/xwB3+U
+	QCULNuIz/mI0eFKXy/rVIUZpERxG1tLyyUSfo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=L5YHBjpm1KVEcbocYoUkYfWQIB1wC+YVPkvIYA8twoBZJKgNzPAsMwRyqB5mmZYQC+
+	3k2va849WTv+CKjr+38DjMlWhSuL8CLcY4LEttCOb8Oh5siEv97QudO0dzHZ4NmWJgxT
+	Bin2IxbptrWoc4HXAGsDSLDynUcBXH6zm0jwg=
 MIME-Version: 1.0
+Received: by 10.229.91.2 with SMTP id k2mr2484794qcm.260.1297672881963; Mon,
+	14 Feb 2011 00:41:21 -0800 (PST)
+Received: by 10.229.193.10 with HTTP; Mon, 14 Feb 2011 00:41:21 -0800 (PST)
+In-Reply-To: <AANLkTin6yU9dhM1oE9C2jahVg-qkHcHtKEpauZv6Qs9w@mail.gmail.com>
+References: <AANLkTikP8CNgvex==mnJY8McTouY0n-QzcUQjaFZRV8X@mail.gmail.com>
+	<AANLkTimuHfSAgfYK5V6zPAEG=MBCi_Am1_9rMq=M9xur@mail.gmail.com>
+	<AANLkTin6yU9dhM1oE9C2jahVg-qkHcHtKEpauZv6Qs9w@mail.gmail.com>
+Date: Mon, 14 Feb 2011 09:41:21 +0100
+Message-ID: <AANLkTino7hjrF51Jb6UWEL5A+teV963cDsgBhCqVZZwF@mail.gmail.com>
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1285777033-19478-1-git-send-email-t.fromm@dresearch.de>	<AANLkTikWLrAZaejWvnBGf4hn0CdKV2FgYiMxLEkDn+Wi@mail.gmail.com>	<4CA46AD8.2070205@dresearch.de>	<AANLkTimOEDXH3=OrROehD+sVtNdihoO8Q3P6Vy0oJscQ@mail.gmail.com>	<4CA5B348.1000404@dresearch.de>	<AANLkTinw6Tz0fDEGPBDyvv85KRk4w3v+ygeNemSHceh2@mail.gmail.com>	<AANLkTimviE5VqivppJTVZvhspZtsiUNpqVjGD4=p=No+@mail.gmail.com>	<4CA98B66.3060404@dresearch.de>
-	<AANLkTi=mw3h2vqEav+yz2begWJVR++V6823_QmjdNqAg@mail.gmail.com>
-In-Reply-To: <AANLkTi=mw3h2vqEav+yz2begWJVR++V6823_QmjdNqAg@mail.gmail.com>
-X-OriginalArrivalTime: 14 Feb 2011 08:32:04.0818 (UTC)
-	FILETIME=[A8CCEB20:01CBCC21]
-Cc: Thilo Fromm <t.fromm@DResearch.de>
-Subject: Re: [PATCH] libunwind: force gcc to be built first
+Subject: Re: Problem with dependencies in packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,68 +45,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 08:33:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 14 Feb 2011 08:42:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Am 04.10.2010 18:00, schrieb Khem Raj:
-> On Mon, Oct 4, 2010 at 1:08 AM, Thilo Fromm <t.fromm@dresearch.de> wrot=
-e:
->> Hello Frans,
->>
->>>>> I tracked it down - libunwind publishes unwind.h, and gcc uses an
->>>>> internal
->>>>> file of the same name while being built.
->>>>
->>>> Yes gcc has its own version of libunwind which it used unless
->>>> configured with --with-system-libunwind
->>>> IIUC the problem happens with target gcc not with cross-gcc. target
->>>> gcc is built using cross-gcc and
->>>> <sysroot>/use/include could be preferred over the location of
->>>> libunwind.h which is in gcc sources
->>>> If thats the case then we need to fix gcc build to not look into
->>>> standard sysroot/usr/include but prefer
->>>> the local unwind.h when its using internal libunwind. The problem
->>>> would not show up if the libunwind versions
->>>> were matching but that may not be the case always and I dont know of
->>>> hand how we can fix the gcc configury/build
->>>> to ignore installed unwind.h
->>>>
->>>> You workaround would only work if build sequence was followed if som=
-e
->>>> one just cleaned gcc and rebuild it
->>>> the problem will resurface.
->>>>
->>> Thanks for the analysis Khem.
->>> This is indeed more or less what I had expected.
->>>
->>> For me this patch gets a NAK as it does only masks the problvem in
->>> some cases but not really solves it.
->>
->> You're right with this analysis; however, the patch enables Openembedd=
-ed to
->> be built *at all*. If you care less about whether you're able to actua=
-lly
->> build and if you have the time to wait until someone ventures deep int=
-o the
->> gcc build and fixes the cause, then this is the way to go.
->>
->> For us, however, this patch is a valid workaround. It will make Openem=
-bedded
->> work for us until the original issue is fixed.
->=20
-> I think we should try to fix it in right way.
+On 2/14/11, Graham Gower <graham.gower@gmail.com> wrote:
 
-Ping!
+> In fact the dependency shouldn't be satisfied here. Opkg should fail
+> the same way as dpkg is failing.
 
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+What should be done then? Should the ncurses recipe be fixed or package.bbclass?
 
+bye,
+Filip Zyzniewski
 
 
