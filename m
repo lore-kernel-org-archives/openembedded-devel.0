@@ -1,37 +1,37 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pp3Sz-0004Nt-AY
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pp3Xy-0004UZ-6b
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 19:48:09 +0100
-Received: by bwz10 with SMTP id 10so5494307bwz.6
+	Mon, 14 Feb 2011 19:53:18 +0100
+Received: by eya28 with SMTP id 28so2270858eya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 10:47:00 -0800 (PST)
+	Mon, 14 Feb 2011 10:52:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:subject:date:message-id:x-mailer
 	:in-reply-to:references;
-	bh=wx7psAuMK45ivBvo94hkVBaxZskPW5665f/KoL/Hbo8=;
-	b=lO2+3eGHpHe59AQYGvT71Ff+3rfs+m5Rv3H4xaRn/XmoEMnrBcTJNJ6sgYciiX8nN6
-	S+B7YsSenr4WNcg0Tjb/wx+Gn4dEXL6ATZyKkAn9CnrE4PbWBHzf+ESlhxCb8avIVHUD
-	bIePZY6oD0suqIHcuxhc/Jhb8WUfpas9XWDlM=
+	bh=2vkFrL/Yz9qUkvV89+SCCOvyzkz3P0OO4Gg+z9iYZF0=;
+	b=ZsR6CPDuRfkL+R2F0949r2egnRfvX9lRg3dHu5pUKecG8pdCBZGRNHLmSMd8+1ntyY
+	Dx9BKD5f2+y+CHaztIRl3wy1t1gevOtQNsPeCpD0wuW3+W12IzKL1Kc4hCOqz31ese49
+	6XK5h1yl095nje74VpEFl2963DtT+7V9gXVwo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=lkSdvKBQ/rYSeu83M9QJLVtIWfNnxzuefXMxjS5ikS6hLsRJf/8tmetWurRVV06WBt
-	35CiUjw3hG2zjDAyOW9RWz5IXrfHI/lU/4ddUui+8omZ2vTjbw1xCBdIxFnob8QFGe8N
-	F+TAhiSReWaAxTXofr0jwVDeIITiUPGO+C+iM=
-Received: by 10.204.126.87 with SMTP id b23mr2951613bks.203.1297709219345;
-	Mon, 14 Feb 2011 10:46:59 -0800 (PST)
+	b=TF57Ux0yaoMZMr3dM6stcWN94jvWJvztFYIZx+bE2KEVuU8OdHH9lJnlsAwQNodRQM
+	1EZf5LhYwQvyab6tU486WQGcw6uP5ZbcMAutd7kmgQr0tY4yIydrYw/xtlfUYDFBf5hG
+	HohEo/D8TPLtNBadrLlan8Hn8lQWPzXLUR2ic=
+Received: by 10.223.86.135 with SMTP id s7mr5012095fal.70.1297709528537;
+	Mon, 14 Feb 2011 10:52:08 -0800 (PST)
 Received: from localhost.localdomain (ns.tefnet.pl [188.165.206.204])
-	by mx.google.com with ESMTPS id u23sm1999262bkw.9.2011.02.14.10.46.57
+	by mx.google.com with ESMTPS id z1sm1237765fau.21.2011.02.14.10.52.07
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 14 Feb 2011 10:46:58 -0800 (PST)
+	Mon, 14 Feb 2011 10:52:07 -0800 (PST)
 From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Feb 2011 19:46:49 +0100
-Message-Id: <1297709209-6602-1-git-send-email-filip.zyzniewski@gmail.com>
+Date: Mon, 14 Feb 2011 19:52:01 +0100
+Message-Id: <1297709521-6650-1-git-send-email-filip.zyzniewski@gmail.com>
 X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
-References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
-Subject: [PATCHv2] linux-firmware: split into bus specific packages.
+In-Reply-To: <4D59056C.8000602@opendreambox.org>
+References: <4D59056C.8000602@opendreambox.org>
+Subject: [PATCH] package_deb.bbclass: Use PKGV/PKGR variables where applicable.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,184 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 18:48:09 -0000
+X-List-Received-Date: Mon, 14 Feb 2011 18:53:18 -0000
 
-The whole reposotiry is about 24MB in size and it's rarely needed
-whole. It is now splitted into bus specific subpackages (and some
-device-specific for devices on a bus like SPI or SBUS) all depended
-on by the linux-firmware package.
-
-Suggested improvement - split bus packages furtherly into device
-packages (so that we can either pull in a whole bus or just one
-device).
+Using PV/PR causes problems like libncursesw5_5.7-r16 depending on
+libtinfo5 (>= 5.7+20110115).
 
 Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 ---
- recipes/linux-firmware/linux-firmware_git.bb |  144 +++++++++++++++++++++++++-
- 1 files changed, 142 insertions(+), 2 deletions(-)
+ classes/package_deb.bbclass |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/linux-firmware/linux-firmware_git.bb b/recipes/linux-firmware/linux-firmware_git.bb
-index 7bff379..14dc1b6 100644
---- a/recipes/linux-firmware/linux-firmware_git.bb
-+++ b/recipes/linux-firmware/linux-firmware_git.bb
-@@ -1,7 +1,8 @@
- DESCRIPTION = "Firmware files for use with Linux kernel"
- 
-+PR = "r1"
- PR_append = "+gitr${SRCREV}"
--SRCREV = "80a203275fc368db0a5f166c42dd35a4a22f2453"
-+SRCREV = "2fab48391fda8a914b55c8ac265eb3b6ee10ace8"
- 
- SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/dwmw2/linux-firmware.git;protocol=git"
- 
-@@ -16,7 +17,146 @@ do_install() {
- 	cp -RpP * ${D}/lib/firmware/
- }
- 
--FILES_${PN} += "/lib/firmware/*"
-+SUBPACKAGES = "${PN}-i2c \
-+	${PN}-isa \
-+	${PN}-pci \
-+	${PN}-pcmcia \
-+	${PN}-sdio \
-+	${PN}-usb \
-+	${PN}-agere \
-+	${PN}-dsp56k \
-+	${PN}-gspi8682 \
-+	${PN}-gspi8686 \
-+	${PN}-gspi8688 \
-+	${PN}-myri-sbus \
-+	${PN}-qlogicpti \
-+	${PN}-wl12xx \
-+	${PN}-yam"
-+
-+RDEPENDS_${PN} += "${SUBPACKAGES}"
-+PACKAGES += "${SUBPACKAGES}"
-+
- PACKAGE_ARCH = "all"
- 
-+RDEPENDS_${PN}-pci += "${PN}-agere ${PN}-i2c"
-+RDEPENDS_${PN}-pcmcia += "${PN}-agere"
-+RDEPENDS_${PN}-sdio += "${PN}-gspi8686 ${PN}-wl12xx"
-+RDEPENDS_${PN}-usb += "${PN}-agere ${PN}-i2c"
-+
-+
-+FILES_${PN}-i2c = "/lib/firmware/dvb-fe-xc5000-1.6.114.fw \
-+	/lib/firmware/lgs8g75.fw"
-+
-+FILES_${PN}-isa = "/lib/firmware/sb16 \
-+	/lib/firmware/tr_smctr.bin \
-+	/lib/firmware/yamaha/yss225_registers.bin"
-+
-+FILES_${PN}-pci = "/lib/firmware/3com \
-+	/lib/firmware/RTL8192E \
-+	/lib/firmware/acenic \
-+	/lib/firmware/adaptec \
-+	/lib/firmware/advansys \
-+	/lib/firmware/atmsar11.fw \
-+	/lib/firmware/av7110 \
-+	/lib/firmware/bnx2 \
-+	/lib/firmware/bnx2x*.fw \
-+	/lib/firmware/brcm/bcm43xx*.fw \
-+	/lib/firmware/cxgb3 \
-+	/lib/firmware/e100 \
-+	/lib/firmware/ess/maestro3_*.fw \
-+	/lib/firmware/intelliport2.bin \
-+	/lib/firmware/iwlwifi-*.ucode \
-+	/lib/firmware/korg/k1212.dsp \
-+	/lib/firmware/matrox \
-+	/lib/firmware/mwl8335_duplex.fw \
-+	/lib/firmware/mwl8k \
-+	/lib/firmware/phanfw.bin \
-+	/lib/firmware/ql2*_fw.bin \
-+	/lib/firmware/qlogic/1040.bin \
-+	/lib/firmware/qlogic/12160.bin \
-+	/lib/firmware/qlogic/1280.bin \
-+	/lib/firmware/qlogic/sd7220.fw \
-+	/lib/firmware/r128 \
-+	/lib/firmware/radeon \
-+	/lib/firmware/rt2561.bin \
-+	/lib/firmware/rt2561s.bin \
-+	/lib/firmware/rt2661.bin \
-+	/lib/firmware/rt2860.bin \
-+	/lib/firmware/rt3090.bin \
-+	/lib/firmware/rtl_nic/rtl8168d-*.fw \
-+	/lib/firmware/rtlwifi/rtl8192defw.bin \
-+	/lib/firmware/rtlwifi/rtl8192sefw.bin \
-+	/lib/firmware/slicoss \
-+	/lib/firmware/sun/cassini.bin \
-+	/lib/firmware/sxg \
-+	/lib/firmware/tehuti \
-+	/lib/firmware/tigon/tg3*.bin \
-+	/lib/firmware/tlg2300_firmware.bin \
-+	/lib/firmware/v4l-cx23418-*.fw \
-+	/lib/firmware/v4l-cx23885-*.fw \
-+	/lib/firmware/v4l-cx25840.fw \
-+	/lib/firmware/vxge/X3fw*.ncf \
-+	/lib/firmware/yamaha/ds1*.fw"
-+
-+FILES_${PN}-pcmcia = "/lib/firmware/cis \
-+	/lib/firmware/libertas/cf8385*.bin \
-+	/lib/firmware/ositech/Xilinx7OD.bin"
-+
-+FILES_${PN}-sdio = "/lib/firmware/brcm/bcm4329-fullmac-4-218-248-5.bin \
-+	/lib/firmware/libertas/sd*.bin"
-+
-+FILES_${PN}-usb ="/lib/firmware/ar7010.fw \
-+	/lib/firmware/ar7010_1_1.fw \
-+	/lib/firmware/ar9170-*.fw \
-+	/lib/firmware/ar9271.fw \
-+	/lib/firmware/ath3k-*.fw \
-+	/lib/firmware/cpia2 \
-+	/lib/firmware/dabusb \
-+	/lib/firmware/dvb-usb-dib0700-1.20.fw \
-+	/lib/firmware/edgeport \
-+	/lib/firmware/emi26 \
-+	/lib/firmware/emi62 \
-+	/lib/firmware/f2255usb.bin \
-+	/lib/firmware/i2400m-fw-usb-*.sbcf \
-+	/lib/firmware/i6050-fw-usb-1.5.sbcf \
-+	/lib/firmware/kaweth \
-+	/lib/firmware/keyspan \
-+	/lib/firmware/keyspan_pda \
-+	/lib/firmware/libertas/usb*.bin \
-+	/lib/firmware/mts_*.fw \
-+	/lib/firmware/rt2870.bin \
-+	/lib/firmware/rt3070.bin \
-+	/lib/firmware/rt3071.bin \
-+	/lib/firmware/rt73.bin \
-+	/lib/firmware/rtlwifi/rtl8192cfw.bin \
-+	/lib/firmware/rtlwifi/rtl8192cufw.bin \
-+	/lib/firmware/rtlwifi/rtl8712u.bin \
-+	/lib/firmware/s2250*.fw \
-+	/lib/firmware/ti_3410.fw \
-+	/lib/firmware/ti_5052.fw \
-+	/lib/firmware/ttusb-budget \	
-+	/lib/firmware/ueagle-atm \
-+	/lib/firmware/usbdux_firmware.bin \
-+	/lib/firmware/usbduxfast_firmware.bin \
-+	/lib/firmware/v4l-cx231xx-avcore-01.fw \
-+	/lib/firmware/vicam/firmware.fw \
-+	/lib/firmware/vntwusb.fw \
-+	/lib/firmware/whiteheat*.fw"
-+
-+FILES_${PN}-agere = "/lib/firmware/agere_*_fw.bin"
-+
-+FILES_${PN}-dsp56k = "/lib/firmware/dsp56k/bootstrap.bin"
-+
-+FILES_${PN}-gspi8682 = "/lib/firmware/libertas/gspi8682*.bin"
-+
-+FILES_${PN}-gspi8686 = "/lib/firmware/libertas/gspi8686*.bin"
-+
-+FILES_${PN}-gspi8688 = "/lib/firmware/libertas/gspi8688*.bin" 
-+
-+FILES_${PN}-myri-sbus = "/lib/firmware/myricom/lanai.bin"
-+
-+FILES_${PN}-qlogicpti = "/lib/firmware/qlogic/isp1000.bin"
-+
-+FILES_${PN}-wl12xx = "/lib/firmware/ti-connectivity/wl1271-*.bin"
- 
-+FILES_${PN}-yam = "/lib/firmware/yam"
+diff --git a/classes/package_deb.bbclass b/classes/package_deb.bbclass
+index a98ec9d..1f36246 100644
+--- a/classes/package_deb.bbclass
++++ b/classes/package_deb.bbclass
+@@ -146,9 +146,9 @@ python do_package_deb () {
+         fields = []
+         pe = bb.data.getVar('PE', d, 1)
+         if pe and int(pe) > 0:
+-            fields.append(["Version: %s:%s-%s%s\n", ['PE', 'PV', 'PR', 'DISTRO_PR']])
++            fields.append(["Version: %s:%s-%s%s\n", ['PE', 'PKGV', 'PKGR', 'DISTRO_PR']])
+         else:
+-            fields.append(["Version: %s-%s%s\n", ['PV', 'PR', 'DISTRO_PR']])
++            fields.append(["Version: %s-%s%s\n", ['PKGV', 'PKGR', 'DISTRO_PR']])
+         fields.append(["Description: %s\n", ['DESCRIPTION']])
+         fields.append(["Section: %s\n", ['SECTION']])
+         fields.append(["Priority: %s\n", ['PRIORITY']])
 -- 
 1.7.1
 
