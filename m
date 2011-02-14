@@ -1,39 +1,37 @@
-Received: from goliath.siemens.de ([192.35.17.28])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1PoyDe-0005Uy-73
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PoySF-0006AZ-TV
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 14:11:58 +0100
-Received: from mail3.siemens.de (localhost [127.0.0.1])
-	by goliath.siemens.de (8.13.6/8.13.6) with ESMTP id p1EDAnE6002636
+	Mon, 14 Feb 2011 14:27:04 +0100
+Received: by iyj8 with SMTP id 8so4767402iyj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 14:10:49 +0100
-Received: from DEMCHP99ET0MSX.ww902.siemens.net
-	(demchp99et0msx.ww902.siemens.net [139.25.131.181])
-	by mail3.siemens.de (8.13.6/8.13.6) with ESMTP id p1EDAmJf027062
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 14:10:49 +0100
-Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.227]) by
-	DEMCHP99ET0MSX.ww902.siemens.net ([139.25.131.181]) with mapi;
-	Mon, 14 Feb 2011 14:10:48 +0100
-From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 Feb 2011 14:10:47 +0100
-Thread-Topic: [oe] libpcre not compiling
-Thread-Index: Acu+VVkM/+aBUgC7RzqwU8O5aZlNzQAa20cQA1yCDBAABUVqAA==
-Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819E011A8B5B49@DEMCHP99E35MSX.ww902.siemens.net>
-References: <09D9BE2AC4AA764DABAA8C91E48D819ED682EC06@DEMCHP99E35MSX.ww902.siemens.net>
-	<AANLkTimzYvPnN7tt54jcQVYUmBQFpQsO0LYFoRVh5Q8x@mail.gmail.com>
-	<09D9BE2AC4AA764DABAA8C91E48D819ED682ECBB@DEMCHP99E35MSX.ww902.siemens.net>
-	<09D9BE2AC4AA764DABAA8C91E48D819E011A8B5ACA@DEMCHP99E35MSX.ww902.siemens.net>
-In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819E011A8B5ACA@DEMCHP99E35MSX.ww902.siemens.net>
-Accept-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: de-DE
+	Mon, 14 Feb 2011 05:25:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=P7UTc5yJ+TVj091NxIMbY2UgtJuc5qcieUlZhPxP6kA=;
+	b=cDEZPycBppekOquO+TDV/K02ZIfVRtMxLlGAmMk+p5DM6zO56bGBjy0vMuDLBtPig9
+	jeerdd21zfvO155fdetIMX3q7pOKJ3lVT1BtGqAXzSR9a4gV9zTNZ+y5RJAzzg++k8ZV
+	aojN1gfnM1rY10kPgPBzpy99yHtJIdobnDjdk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=GMbChzdQAicwG8WTtd3Rpsx9VLgK7sLjCouirOrQ2W1dEQOl3c7ZgYnRg9bBJcWGjp
+	UOQckmTmyrFtCNFCFoSknosejRE5bnI8s6qNr5CbjsOrz8kIwCpNaEzkta2tpQEUl+cr
+	I9J21eMs8NAHO4dnDQKX/KYoCoR9zLPzsjU5o=
 MIME-Version: 1.0
-Subject: Re: libpcre not compiling
+Received: by 10.231.157.211 with SMTP id c19mr2867335ibx.172.1297689953888;
+	Mon, 14 Feb 2011 05:25:53 -0800 (PST)
+Received: by 10.231.30.73 with HTTP; Mon, 14 Feb 2011 05:25:53 -0800 (PST)
+In-Reply-To: <4D59066F.1040805@dresearch.de>
+References: <4D58D5EF.6000807@dresearch.de>
+	<AANLkTi=4i_m8J4qFCwntdo-qb4CHn98UH+kuz4O=zcgT@mail.gmail.com>
+	<4D59066F.1040805@dresearch.de>
+Date: Mon, 14 Feb 2011 14:25:53 +0100
+Message-ID: <AANLkTimzn89oYdKca8VQAaDMvjsNtT9vvqNioiN7OTU7@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: bitbake exit codes? (testing-release-2011.03 build results)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,70 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 13:11:58 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 14 Feb 2011 13:27:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Searching in the list's archives, I found that a very similar problem has a=
-lready been fixed 10 moths ago by Richard Purdie (was for abiword):
+2011/2/14 Steffen Sledz <sledz@dresearch.de>:
+> Am 14.02.2011 09:11, schrieb Frans Meulenbroeks:
+>> 2011/2/14 Steffen Sledz <sledz@dresearch.de>:
+>>> While setting up Jenkins/Hudson jobs for the testing-release-2011.03 branch based on the testscript.sh from the contrib subdir i hit the following problem.
+>>>
+>>> bitbake (1.10.2) finally reports "NOTE: Task Summary: Attempted 1217 tasks of which 0 didn't need to be rerun and 0 failed.". So it seems that the build was successful. But bitbake did not return 0 but 1. So Jenkins marks the build as failed.
+>>>
+>>> I guess the exit code 1 is coming from some QA Issues. How do we handle that if if my guess is right?
+>>>
+>>> Do we mark such a build run as successful in our test matrix?
+>>>
+>>> Has bitbake a defined set of exit codes that we can evaluate in the testscript.sh?
+>>>
+>>> Steffen
+>>
+>> There have been a few threads on this in the past.
+>> One of the ways (and maybe the best one) to get around this is to fix
+>> the QA errors.
+>
+> Of course. You are right.
+>
+> But for the moment the question is: "Do we mark such a builds as successful in our test matrix or not?"
+>
+> Steffen
+>
 
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-May/019536.htm=
-l
+Personally I'm inclined to say no. Marking them as unsuccessful
+increases the chance of getting them fixed.
+Then again others may think differently & I don't know exactly how
+many QA errors we're talking about.
+(I seem to recall that my console-image build had four, for cups I saw
+a patch, binutils is being looked at or maybe already resolved by
+Khem, no idea about the other two).
 
-In that mail, Richard said:
-  > this commit should fix it (reproduced and tested locally):
-  >
-  > http://git.openembedded.net/cgit.cgi/openembedded/commit/?h=3Drpurdie/w=
-ork-in-progress&id=3Dbb53e48f79dab0877c8b8ce487a051d29cae31e3
-
-Unfortunately, the link is bad and neither can I found a commit with this i=
-d in git.
-
-Richard, do you remember your fix?
-
-With kind regards,
-  Fabrice
-
-> -----Urspr=FCngliche Nachricht-----
-> Von: openembedded-devel-bounces@lists.openembedded.org=20
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] Im=20
-> Auftrag von Aeschbacher, Fabrice
-> Gesendet: Montag, 14. Februar 2011 11:43
-> An: openembedded-devel@lists.openembedded.org
-> Betreff: Re: [oe] libpcre not compiling
->=20
-> Hi,
->=20
-> I already reported that libpcre (7.6-r8) does not compile in=20
-> released version 2010.12 :
->=20
-> | /bin/grep: /usr/lib/libstdc++.la: No such file or directory
-> |=20
-> /srv/oe-2010/build/at91sam9g20ek/sysroots/x86_64-linux/usr/bin
-> /sed: can't read /usr/lib/libstdc++.la: No such file or directory
-> | arm-angstrom-linux-gnueabi-libtool: link:=20
-> `/usr/lib/libstdc++.la' is not a valid libtool archive
->=20
-> Now I just figured out that neither does gnutls-2.10.2-r10.1 :
->=20
-> |=20
-> /srv/oe-2010/build/at91sam9g20ek/sysroots/x86_64-linux/usr/bin
-> /sed: can't read /usr/lib/libstdc++.la: No such file or directory
-> | arm-angstrom-linux-gnueabi-libtool: link:=20
-> `/usr/lib/libstdc++.la' is not a valid libtool archive
->=20
-> This seems to be pretty much the same issue.
-> Any idea?
->=20
-> With kind regards,
-> Fabrice Aeschbacher
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> =
+Best regards, Frans.
 
 
