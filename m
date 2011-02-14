@@ -1,36 +1,35 @@
 Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PotVO-0007sy-H5
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PotY5-00083J-QC
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 09:09:58 +0100
-Received: by iyj8 with SMTP id 8so4521626iyj.6
+	Mon, 14 Feb 2011 09:12:46 +0100
+Received: by iyj8 with SMTP id 8so4523477iyj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 00:08:49 -0800 (PST)
+	Mon, 14 Feb 2011 00:11:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:date
 	:message-id:subject:from:to:content-type;
-	bh=FMKeaubG4UyKbh1miWZMKgQEpEiLbHQGxoetC4Dtj3U=;
-	b=yDKcc4IJCbwYyCfJY5gudT6lpyZ4BBfhTMx+nmT9lT68Bu7lVpVPYVu/NEyEnveJKZ
-	vPaPCdTiIuocEYqgWtoyk6BNlwePWQW76lsVkcOSqHxor3oov48s2sThaY7SG/O93r1s
-	szsc0MNP1YlqgwBMdTKD3iq9+lw16YnQaxhug=
+	bh=kmkWfMuHLKxN0C1IC7XlP+PVoZlkPxMPppZXQfh5CAk=;
+	b=K2sj87U/7QufVRRhvEp8LXuvT4OSUPtaOhFOs/+3V/QxKBLLOk54oXARizpAwsjGo4
+	tpWVORjby2bFrc12MXiMicBxm25NKQVlmYFhA9yvUCo+k38DUMzIJXEmeLJdyNDV7IX2
+	twZGoWqBqGvaJeOkxBrQGEd1L5YWM9liKmhGc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=eTbX9xv6bzAPT7We0PyPbkfEnpgvST+18NCknZof7X6LAgT4uRKwY0apbtFV6ABtin
-	mHIPMngE8w81Ykm9YyzhXNpenHW2sK2+0VNLDgDvTcdpdu6BzJoVuTjoy2xAzIhWDhvR
-	79vI9KLyvA4ZrcUTH4eqjukgsOW7bNpMf1lek=
+	b=sx5SWmQG6aHn2E/NAbWLgmBDJaHR5JVioBjflo4NENwBweBodJFnqbXumPO4zpI+LE
+	XYAU3YzF6/+nXYOUIWvBGZm8lcLK80aUCp26NUBqvWuCRfYxAtbqhoF8F3C+3ydkqUQr
+	WCeyVNmCTmM039scTVV5SfTA1jVLZ5YngR6qw=
 MIME-Version: 1.0
-Received: by 10.42.170.70 with SMTP id e6mr4497465icz.299.1297670927693; Mon,
-	14 Feb 2011 00:08:47 -0800 (PST)
-Received: by 10.231.30.73 with HTTP; Mon, 14 Feb 2011 00:08:47 -0800 (PST)
-In-Reply-To: <4D585D07.70305@xora.org.uk>
-References: <ij8d1t$cd9$1@dough.gmane.org>
-	<4D585D07.70305@xora.org.uk>
-Date: Mon, 14 Feb 2011 09:08:47 +0100
-Message-ID: <AANLkTi=FjYGco4xmNaE_2hFdWMr9Br3b3wCG1zZ_f4YB@mail.gmail.com>
+Received: by 10.231.10.200 with SMTP id q8mr2685207ibq.122.1297671096301; Mon,
+	14 Feb 2011 00:11:36 -0800 (PST)
+Received: by 10.231.30.73 with HTTP; Mon, 14 Feb 2011 00:11:36 -0800 (PST)
+In-Reply-To: <4D58D5EF.6000807@dresearch.de>
+References: <4D58D5EF.6000807@dresearch.de>
+Date: Mon, 14 Feb 2011 09:11:36 +0100
+Message-ID: <AANLkTi=4i_m8J4qFCwntdo-qb4CHn98UH+kuz4O=zcgT@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: TSC agenda items for the next meeting
+Subject: Re: bitbake exit codes?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,62 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 08:09:58 -0000
+X-List-Received-Date: Mon, 14 Feb 2011 08:12:46 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2011/2/13 Graeme Gregory <dp@xora.org.uk>:
-> On 13/02/2011 10:50, Koen Kooi wrote:
->>
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> Hi,
->>
->> The new TSC is holding a meeting next week and we wanted to see if
->> anyone wants to suggest items we put in the agenda for the meeting.
->>
->> If you have such items, please let us know by replying to this mail.
->>
->> regards,
->>
->> Koen
+2011/2/14 Steffen Sledz <sledz@dresearch.de>:
+> While setting up Jenkins/Hudson jobs for the testing-release-2011.03 branch based on the testscript.sh from the contrib subdir i hit the following problem.
 >
-> Re-inforcement of the "don't delete all old versions" policy, make sure this
-> is in the wiki somewhere.
-
-Not sure what you mean with re-inforcement and what policy you are referring to.
-This topic has been discussed and decided by the TSC last may. See
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-May/020047.html
-For now I haven't really heard reasons to deviate from it, and I think
-there are more important things requiring the TSCs attention (like the
-ones you mention below).
-But I feel it is a good plan to make this policy more explicit in the
-wiki, it is now somewhat hidden.
-
-Then again if we work more towards releases the reasons for keeping
-old versions might be less relevant.
-and of course we could also decide to keep old versions in a separate layer.
-
-What I QA wise would like to see is that all recipes (also old
-versions) fetch and are building (for the archs/distros they are
-intended for).
-Non building recipes create a bad impression quite quickly.
+> bitbake (1.10.2) finally reports "NOTE: Task Summary: Attempted 1217 tasks of which 0 didn't need to be rerun and 0 failed.". So it seems that the build was successful. But bitbake did not return 0 but 1. So Jenkins marks the build as failed.
+>
+> I guess the exit code 1 is coming from some QA Issues. How do we handle that if if my guess is right?
+>
+> Do we mark such a build run as successful in our test matrix?
+>
+> Has bitbake a defined set of exit codes that we can evaluate in the testscript.sh?
+>
+> Steffen
+>
+>
+There have been a few threads on this in the past.
+One of the ways (and maybe the best one) to get around this is to fix
+the QA errors.
 
 Frans
-
->
-> Rough Yocto integration plan.
->
-> Start to think about the Policies section on wiki and whether it is
-> relevant/correct now, and also what needs to change going forward to Yocto.
->
-> Graeme
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
