@@ -1,32 +1,38 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Pp1oL-0002XB-IR
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Pp1qd-00010u-9i
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 18:02:24 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1Pp1n9-0005Mn-Kc from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 09:00:51 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Mon, 14 Feb 2011 09:00:51 -0800
-Received: from [172.30.80.148] ([172.30.80.148]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 14 Feb 2011 10:00:50 -0700
-Message-ID: <4D595FB7.7000802@mentor.com>
-Date: Mon, 14 Feb 2011 10:00:39 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+	Mon, 14 Feb 2011 18:04:27 +0100
+Received: by iwn8 with SMTP id 8so4938082iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Feb 2011 09:03:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=Vp/i4Wv9dUjcKrjA0UkilGlqkk6e1giG5sLek5Kc7WM=;
+	b=Ll73HOeBzuS7WtDoqvdeAZ69fPJItBjtApWkhoAuAj5NCvUxIxjQ0Ktv8PPJkUqNqO
+	5kzVgFJPvG53eP0N7aTxeZLocPLgPeT36ulj1k/UM9u8MNxRJutYWjzMHp7YKzboM5BN
+	s1e4ExJAxeXOkz2OJqhaMCYC1zPHjYCR6ZnTk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=tS2+CHZ0XB1od/jjqilKaAw1KwU/gqGTlhO7FHKXxDx5DUCx1IFwEUnvbgbS5rh6XG
+	ZOoSQIdtZH1j3iukHomMrQAsznPgG/EGmIU/emdAzZ1vVMFwO/XtrRAPY6nf6lEVM21n
+	KnJJS0UJ2Aa5eVLZ4mmZ0rYrWIrXpL3900P0U=
 MIME-Version: 1.0
+Received: by 10.231.157.211 with SMTP id c19mr3077417ibx.172.1297702672370;
+	Mon, 14 Feb 2011 08:57:52 -0800 (PST)
+Received: by 10.231.30.73 with HTTP; Mon, 14 Feb 2011 08:57:51 -0800 (PST)
+In-Reply-To: <4D59543B.50506@mentor.com>
+References: <4D51566B.9060603@mentor.com>
+	<20110208145355.GF2050@xora-build.xora.org.uk>
+	<4D515A17.3060203@mentor.com> <4D523623.7030509@opensimpad.org>
+	<4D59543B.50506@mentor.com>
+Date: Mon, 14 Feb 2011 17:57:51 +0100
+Message-ID: <AANLkTikCsSry215+voCYt4ekMpE_kbM7cE7Jn+zPE3po@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4D59535A.1010602@mentor.com> <4D595503.20409@eukrea.com>
-In-Reply-To: <4D595503.20409@eukrea.com>
-X-OriginalArrivalTime: 14 Feb 2011 17:00:50.0610 (UTC)
-	FILETIME=[BB972120:01CBCC68]
-Subject: Re: testing-release-2011.1 failure: at91sam9263ek
+Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,32 +46,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 17:02:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 14 Feb 2011 17:04:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 02/14/2011 09:14 AM, Eric Bénard wrote:
-> Hi Tom,
->
-> On 14/02/2011 17:07, Tom Rini wrote:
->> Here are the failures I see building for at91sam9263ek:
->> angstrom-2010.x (all images): http://pastebin.com/7g7wNWQj
->>
->> Perhaps this will be fixed when Ulf pushes updates for a newer version of
->> u-boot? The error itself is easily fixable but there may be run-time
->> problems
->> still.
->>
-> there is a patch in 2009.08 which fix this error, maybe it can apply to
-> 2009.01 :
-> recipes/u-boot/u-boot-2009.08/dont-inline-weak-symbols.patch
+Tom, if you are still taking requests.
 
-I think that, plus one other (or, what I did for the mini2440 a few 
-weeks back which had both patches I found for weak symbols combined) 
-would make this build, but perhaps not run.
+A collegue asked whether it would also be possible to add
+neek/minimal/minimal-image to the test set
+(console-image for it failed on a QA issue last time I tried it).
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Best regards, Frans
 
 
