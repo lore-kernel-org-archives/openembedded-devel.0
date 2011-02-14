@@ -1,33 +1,37 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Pp32B-0003of-Rd
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pp3Sz-0004Nt-AY
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 19:20:28 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1Pp314-0007mn-C5 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 10:19:18 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Mon, 14 Feb 2011 10:19:18 -0800
-Received: from [172.30.80.148] ([172.30.80.148]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 14 Feb 2011 11:19:17 -0700
-Message-ID: <4D59721B.6060103@mentor.com>
-Date: Mon, 14 Feb 2011 11:19:07 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Mon, 14 Feb 2011 19:48:09 +0100
+Received: by bwz10 with SMTP id 10so5494307bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Feb 2011 10:47:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=wx7psAuMK45ivBvo94hkVBaxZskPW5665f/KoL/Hbo8=;
+	b=lO2+3eGHpHe59AQYGvT71Ff+3rfs+m5Rv3H4xaRn/XmoEMnrBcTJNJ6sgYciiX8nN6
+	S+B7YsSenr4WNcg0Tjb/wx+Gn4dEXL6ATZyKkAn9CnrE4PbWBHzf+ESlhxCb8avIVHUD
+	bIePZY6oD0suqIHcuxhc/Jhb8WUfpas9XWDlM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=lkSdvKBQ/rYSeu83M9QJLVtIWfNnxzuefXMxjS5ikS6hLsRJf/8tmetWurRVV06WBt
+	35CiUjw3hG2zjDAyOW9RWz5IXrfHI/lU/4ddUui+8omZ2vTjbw1xCBdIxFnob8QFGe8N
+	F+TAhiSReWaAxTXofr0jwVDeIITiUPGO+C+iM=
+Received: by 10.204.126.87 with SMTP id b23mr2951613bks.203.1297709219345;
+	Mon, 14 Feb 2011 10:46:59 -0800 (PST)
+Received: from localhost.localdomain (ns.tefnet.pl [188.165.206.204])
+	by mx.google.com with ESMTPS id u23sm1999262bkw.9.2011.02.14.10.46.57
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 14 Feb 2011 10:46:58 -0800 (PST)
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>	<AANLkTi=XjCgstGxtHd2jTmp5Kmm8wyQzOjJrxnnAhJU9@mail.gmail.com>	<AANLkTikjvqTZcOiYHRsXdE9otGaJTavGKZ8iWtuN7GVu@mail.gmail.com>	<AANLkTi=7XnywEHPjEReDvY68TNd-3fzr7FtREJ-6hp3T@mail.gmail.com>	<AANLkTinXm+YcGS_uadbA6ddezRRtZB0r6Tqcgt7GyOh4@mail.gmail.com>	<4D59677E.2040004@mentor.com>	<1297705231.2178.104.camel@phil-desktop>
-	<AANLkTimu=72wQjT_m_ECes1C8rOfPD37trVY1KPkWNAT@mail.gmail.com>
-In-Reply-To: <AANLkTimu=72wQjT_m_ECes1C8rOfPD37trVY1KPkWNAT@mail.gmail.com>
-X-OriginalArrivalTime: 14 Feb 2011 18:19:17.0320 (UTC)
-	FILETIME=[B1021480:01CBCC73]
-Subject: Re: [PATCH] linux-firmware: split into bus specific packages.
+Date: Mon, 14 Feb 2011 19:46:49 +0100
+Message-Id: <1297709209-6602-1-git-send-email-filip.zyzniewski@gmail.com>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
+References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
+Subject: [PATCHv2] linux-firmware: split into bus specific packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,27 +45,186 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 18:20:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 14 Feb 2011 18:48:09 -0000
 
-On 02/14/2011 11:10 AM, Filip Zyzniewski wrote:
-> On 2/14/11, Phil Blundell<philb@gnu.org>  wrote:
->> Yeah, agreed.  Or even a split down to individual devices/drivers since
->> each of the Ralink firmware binaries is quite large in itself.
->
-> Yeah, I agree it is a good idea, it just isn't needed for us.
->
-> So could this be done in two steps:
-> 1) this patch (by me) - split into buses;
-> 2) second patch (by whoever needs this) - furtherly split bus packages
-> by devices?
+The whole reposotiry is about 24MB in size and it's rarely needed
+whole. It is now splitted into bus specific subpackages (and some
+device-specific for devices on a bus like SPI or SBUS) all depended
+on by the linux-firmware package.
 
-I think that's fine. See my other email just now and we'll push v2, 
-assuming I'm remembering how upgrades work, right :)
+Suggested improvement - split bus packages furtherly into device
+packages (so that we can either pull in a whole bus or just one
+device).
 
+Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+---
+ recipes/linux-firmware/linux-firmware_git.bb |  144 +++++++++++++++++++++++++-
+ 1 files changed, 142 insertions(+), 2 deletions(-)
+
+diff --git a/recipes/linux-firmware/linux-firmware_git.bb b/recipes/linux-firmware/linux-firmware_git.bb
+index 7bff379..14dc1b6 100644
+--- a/recipes/linux-firmware/linux-firmware_git.bb
++++ b/recipes/linux-firmware/linux-firmware_git.bb
+@@ -1,7 +1,8 @@
+ DESCRIPTION = "Firmware files for use with Linux kernel"
+ 
++PR = "r1"
+ PR_append = "+gitr${SRCREV}"
+-SRCREV = "80a203275fc368db0a5f166c42dd35a4a22f2453"
++SRCREV = "2fab48391fda8a914b55c8ac265eb3b6ee10ace8"
+ 
+ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/dwmw2/linux-firmware.git;protocol=git"
+ 
+@@ -16,7 +17,146 @@ do_install() {
+ 	cp -RpP * ${D}/lib/firmware/
+ }
+ 
+-FILES_${PN} += "/lib/firmware/*"
++SUBPACKAGES = "${PN}-i2c \
++	${PN}-isa \
++	${PN}-pci \
++	${PN}-pcmcia \
++	${PN}-sdio \
++	${PN}-usb \
++	${PN}-agere \
++	${PN}-dsp56k \
++	${PN}-gspi8682 \
++	${PN}-gspi8686 \
++	${PN}-gspi8688 \
++	${PN}-myri-sbus \
++	${PN}-qlogicpti \
++	${PN}-wl12xx \
++	${PN}-yam"
++
++RDEPENDS_${PN} += "${SUBPACKAGES}"
++PACKAGES += "${SUBPACKAGES}"
++
+ PACKAGE_ARCH = "all"
+ 
++RDEPENDS_${PN}-pci += "${PN}-agere ${PN}-i2c"
++RDEPENDS_${PN}-pcmcia += "${PN}-agere"
++RDEPENDS_${PN}-sdio += "${PN}-gspi8686 ${PN}-wl12xx"
++RDEPENDS_${PN}-usb += "${PN}-agere ${PN}-i2c"
++
++
++FILES_${PN}-i2c = "/lib/firmware/dvb-fe-xc5000-1.6.114.fw \
++	/lib/firmware/lgs8g75.fw"
++
++FILES_${PN}-isa = "/lib/firmware/sb16 \
++	/lib/firmware/tr_smctr.bin \
++	/lib/firmware/yamaha/yss225_registers.bin"
++
++FILES_${PN}-pci = "/lib/firmware/3com \
++	/lib/firmware/RTL8192E \
++	/lib/firmware/acenic \
++	/lib/firmware/adaptec \
++	/lib/firmware/advansys \
++	/lib/firmware/atmsar11.fw \
++	/lib/firmware/av7110 \
++	/lib/firmware/bnx2 \
++	/lib/firmware/bnx2x*.fw \
++	/lib/firmware/brcm/bcm43xx*.fw \
++	/lib/firmware/cxgb3 \
++	/lib/firmware/e100 \
++	/lib/firmware/ess/maestro3_*.fw \
++	/lib/firmware/intelliport2.bin \
++	/lib/firmware/iwlwifi-*.ucode \
++	/lib/firmware/korg/k1212.dsp \
++	/lib/firmware/matrox \
++	/lib/firmware/mwl8335_duplex.fw \
++	/lib/firmware/mwl8k \
++	/lib/firmware/phanfw.bin \
++	/lib/firmware/ql2*_fw.bin \
++	/lib/firmware/qlogic/1040.bin \
++	/lib/firmware/qlogic/12160.bin \
++	/lib/firmware/qlogic/1280.bin \
++	/lib/firmware/qlogic/sd7220.fw \
++	/lib/firmware/r128 \
++	/lib/firmware/radeon \
++	/lib/firmware/rt2561.bin \
++	/lib/firmware/rt2561s.bin \
++	/lib/firmware/rt2661.bin \
++	/lib/firmware/rt2860.bin \
++	/lib/firmware/rt3090.bin \
++	/lib/firmware/rtl_nic/rtl8168d-*.fw \
++	/lib/firmware/rtlwifi/rtl8192defw.bin \
++	/lib/firmware/rtlwifi/rtl8192sefw.bin \
++	/lib/firmware/slicoss \
++	/lib/firmware/sun/cassini.bin \
++	/lib/firmware/sxg \
++	/lib/firmware/tehuti \
++	/lib/firmware/tigon/tg3*.bin \
++	/lib/firmware/tlg2300_firmware.bin \
++	/lib/firmware/v4l-cx23418-*.fw \
++	/lib/firmware/v4l-cx23885-*.fw \
++	/lib/firmware/v4l-cx25840.fw \
++	/lib/firmware/vxge/X3fw*.ncf \
++	/lib/firmware/yamaha/ds1*.fw"
++
++FILES_${PN}-pcmcia = "/lib/firmware/cis \
++	/lib/firmware/libertas/cf8385*.bin \
++	/lib/firmware/ositech/Xilinx7OD.bin"
++
++FILES_${PN}-sdio = "/lib/firmware/brcm/bcm4329-fullmac-4-218-248-5.bin \
++	/lib/firmware/libertas/sd*.bin"
++
++FILES_${PN}-usb ="/lib/firmware/ar7010.fw \
++	/lib/firmware/ar7010_1_1.fw \
++	/lib/firmware/ar9170-*.fw \
++	/lib/firmware/ar9271.fw \
++	/lib/firmware/ath3k-*.fw \
++	/lib/firmware/cpia2 \
++	/lib/firmware/dabusb \
++	/lib/firmware/dvb-usb-dib0700-1.20.fw \
++	/lib/firmware/edgeport \
++	/lib/firmware/emi26 \
++	/lib/firmware/emi62 \
++	/lib/firmware/f2255usb.bin \
++	/lib/firmware/i2400m-fw-usb-*.sbcf \
++	/lib/firmware/i6050-fw-usb-1.5.sbcf \
++	/lib/firmware/kaweth \
++	/lib/firmware/keyspan \
++	/lib/firmware/keyspan_pda \
++	/lib/firmware/libertas/usb*.bin \
++	/lib/firmware/mts_*.fw \
++	/lib/firmware/rt2870.bin \
++	/lib/firmware/rt3070.bin \
++	/lib/firmware/rt3071.bin \
++	/lib/firmware/rt73.bin \
++	/lib/firmware/rtlwifi/rtl8192cfw.bin \
++	/lib/firmware/rtlwifi/rtl8192cufw.bin \
++	/lib/firmware/rtlwifi/rtl8712u.bin \
++	/lib/firmware/s2250*.fw \
++	/lib/firmware/ti_3410.fw \
++	/lib/firmware/ti_5052.fw \
++	/lib/firmware/ttusb-budget \	
++	/lib/firmware/ueagle-atm \
++	/lib/firmware/usbdux_firmware.bin \
++	/lib/firmware/usbduxfast_firmware.bin \
++	/lib/firmware/v4l-cx231xx-avcore-01.fw \
++	/lib/firmware/vicam/firmware.fw \
++	/lib/firmware/vntwusb.fw \
++	/lib/firmware/whiteheat*.fw"
++
++FILES_${PN}-agere = "/lib/firmware/agere_*_fw.bin"
++
++FILES_${PN}-dsp56k = "/lib/firmware/dsp56k/bootstrap.bin"
++
++FILES_${PN}-gspi8682 = "/lib/firmware/libertas/gspi8682*.bin"
++
++FILES_${PN}-gspi8686 = "/lib/firmware/libertas/gspi8686*.bin"
++
++FILES_${PN}-gspi8688 = "/lib/firmware/libertas/gspi8688*.bin" 
++
++FILES_${PN}-myri-sbus = "/lib/firmware/myricom/lanai.bin"
++
++FILES_${PN}-qlogicpti = "/lib/firmware/qlogic/isp1000.bin"
++
++FILES_${PN}-wl12xx = "/lib/firmware/ti-connectivity/wl1271-*.bin"
+ 
++FILES_${PN}-yam = "/lib/firmware/yam"
 -- 
-Tom Rini
-Mentor Graphics Corporation
+1.7.1
+
 
 
