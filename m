@@ -1,24 +1,22 @@
-Received: from drewtech.com ([66.36.241.150] helo=server.drewtech.com)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <joravec@drewtech.com>) id 1Pp4ps-0005Sd-1v
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1Pp5iE-0006dQ-MO
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 21:15:52 +0100
-Received: (qmail 8096 invoked from network); 14 Feb 2011 15:18:20 -0500
-Received: from adsl-75-58-206-177.dsl.sfldmi.sbcglobal.net (HELO
-	?192.168.0.152?) (75.58.206.177)
-	by j2534-3.com with SMTP; 14 Feb 2011 15:18:20 -0500
-Message-ID: <4D598D30.3080506@drewtech.com>
-Date: Mon, 14 Feb 2011 15:14:40 -0500
-From: Joey Oravec <joravec@drewtech.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
-	rv:1.9.2.14) Gecko/20110207 Thunderbird/3.1.8
-MIME-Version: 1.0
+	Mon, 14 Feb 2011 22:12:02 +0100
+Received: (qmail invoked by alias); 14 Feb 2011 21:10:53 -0000
+Received: from p4FE0F918.dip.t-dialin.net (EHLO
+	localhost.localdomain.localdomain) [79.224.249.24]
+	by mail.gmx.net (mp007) with SMTP; 14 Feb 2011 22:10:53 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX18jSNVRoJcjBL+Ctq6r6yybigLgiEwzBQkmLxCh/o
+	ZAfQopskJkBL9l
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4D544976.6010800@drewtech.com>
-	<4D545173.8080904@mentor.com>	<4D54734B.7060705@drewtech.com>
-	<4D547643.2020600@mentor.com>
-In-Reply-To: <4D547643.2020600@mentor.com>
-Subject: Re: openembedded with a prebuilt external toolchain
+Date: Mon, 14 Feb 2011 22:06:48 +0100
+Message-Id: <1297717608-30480-1-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.2.3
+X-Y-GMX-Trusted: 0
+Subject: [PATCH] Add a small helper script listing all recipes with QA errors.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,36 +30,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 20:15:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 14 Feb 2011 21:12:02 -0000
 
-On 2/10/2011 6:35 PM, Tom Rini wrote:
->> Both the -csl.bb and -generic.bb copy a bunch of stuff to STAGING_DIR in
->> do_stage(). Of course in the long-run I need for the recipe to copy C
->> libraries, but for now I should be able to leave the body blank. At
->> least it'll use my compiler and run to completion. Right?
->
-> Well, as you saw, it fails in some cases.  This is because, yeah, 
-> we're telling the toolchain stuff lives ...here now, and it doesn't.
 
-Thanks for the additional help on chat! This followup is to share my 
-results with the mailing list.
+Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
+---
+ contrib/qa/collect-qa-errors.sh |   26 ++++++++++++++++++++++++++
+ 1 files changed, 26 insertions(+), 0 deletions(-)
+ create mode 100755 contrib/qa/collect-qa-errors.sh
 
-Regarding my "bitbake nano" failure, that was a symptom of a sysroot 
-issue. An external cross compiler has some default sysroot where it 
-looks for libraries. By default it looks like OE passes nothing to 
-change this. As a result do_configure() didn't look for libraries in 
-staging dir, decided that ncurses didn't exist, and the build failed. 
-One solution is to add:
+diff --git a/contrib/qa/collect-qa-errors.sh b/contrib/qa/collect-qa-errors.sh
+new file mode 100755
+index 0000000..45a7283
+--- /dev/null
++++ b/contrib/qa/collect-qa-errors.sh
+@@ -0,0 +1,26 @@
++#!/bin/bash
++
++# A little script outputting information on all recipes with QA errors
++
++bb_tmp_dir=$(bitbake -e | grep 'TMPDIR="' | sed -e s/TMPDIR=// \
++                                                -e s/\"//g)
++
++# each temp dir is checked
++for log_dir in ${bb_tmp_dir}/work/*/*/temp ; do
++	# checked only log files
++	for log_file in ${log_dir}/log.do_* ; do
++		if [ -e  $log_file ] ; then
++			qa_err=$(grep 'ERROR: QA' $log_file)
++			if [[ -n  $qa_err ]] ; then
++				# Bingo
++				str=${log_file%/*}
++				str=${str%/*}
++				echo $str
++				# output only one occurance per recipe
++				break
++			fi
++		fi
++	done
++done
++
++
+-- 
+1.7.2.3
 
-TOOLCHAIN_OPTIONS = " --sysroot=${STAGING_DIR_TARGET}"
-
-to your build/conf/local.conf and make sure your compiler's default 
-sysroot (libc, etc) gets copied into the staging dir. That way you can 
-call *-gcc from somewhere in your path but it'll look for everything 
-under OE's staging directory.
-
--joey
 
 
