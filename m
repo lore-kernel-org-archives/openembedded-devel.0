@@ -1,38 +1,33 @@
-Received: from david.siemens.de ([192.35.17.14])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1Povv4-0002AU-5e
+	(envelope-from <dp@xora.org.uk>) id 1Pow6k-0002PP-LT
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 11:44:38 +0100
-Received: from mail3.siemens.de (localhost [127.0.0.1])
-	by david.siemens.de (8.13.6/8.13.6) with ESMTP id p1EAhVfI027451
+	Mon, 14 Feb 2011 11:56:42 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 5C0BDA579F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 11:43:31 +0100
-Received: from DEMCHP99ET2MSX.ww902.siemens.net
-	(demchp99et2msx.ww902.siemens.net [139.25.131.241])
-	by mail3.siemens.de (8.13.6/8.13.6) with ESMTP id p1EAhVPY030224
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 14 Feb 2011 10:55:34 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id SCPeNIsb+gwn
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 11:43:31 +0100
-Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.227]) by
-	DEMCHP99ET2MSX.ww902.siemens.net ([139.25.131.241]) with mapi;
-	Mon, 14 Feb 2011 11:43:31 +0100
-From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 Feb 2011 11:43:30 +0100
-Thread-Topic: [oe] libpcre not compiling
-Thread-Index: Acu+VVkM/+aBUgC7RzqwU8O5aZlNzQAa20cQA1yCDBA=
-Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819E011A8B5ACA@DEMCHP99E35MSX.ww902.siemens.net>
-References: <09D9BE2AC4AA764DABAA8C91E48D819ED682EC06@DEMCHP99E35MSX.ww902.siemens.net>
-	<AANLkTimzYvPnN7tt54jcQVYUmBQFpQsO0LYFoRVh5Q8x@mail.gmail.com>
-	<09D9BE2AC4AA764DABAA8C91E48D819ED682ECBB@DEMCHP99E35MSX.ww902.siemens.net>
-In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819ED682ECBB@DEMCHP99E35MSX.ww902.siemens.net>
-Accept-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: de-DE
+	Mon, 14 Feb 2011 10:55:33 +0000 (GMT)
+Received: from [61.125.130.189] (unknown [61.125.130.189])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id E62C1A5796
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Feb 2011 10:55:32 +0000 (GMT)
+Message-ID: <4D590A22.80504@xora.org.uk>
+Date: Mon, 14 Feb 2011 19:55:30 +0900
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
 MIME-Version: 1.0
-Subject: Re: libpcre not compiling
+To: openembedded-devel@lists.openembedded.org
+References: <ij8d1t$cd9$1@dough.gmane.org>
+	<20110214094810.GE14931@excalibur.local>
+In-Reply-To: <20110214094810.GE14931@excalibur.local>
+Subject: Re: TSC agenda items for the next meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,34 +41,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 10:44:38 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 14 Feb 2011 10:56:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 14/02/2011 18:48, Stefan Schmidt wrote:
+> Hello.
+>
+> On Sun, 2011-02-13 at 11:50, Koen Kooi wrote:
+>> The new TSC is holding a meeting next week and we wanted to see if
+>> anyone wants to suggest items we put in the agenda for the meeting.
+>>
+>> If you have such items, please let us know by replying to this mail.
+> All items brought up here until now should be available in the final agenda now.
+> Please see the attchment for it.
+>
+> Sometimes items may cover parts of the same topic. I did not work them into one
+> to keep the original text of the submitters. Not sure if this is a good way to
+> deal with this overlaps.
+>
+> With 18 items this is a lot of topics and I'm not ure we can cover this all in
+> one meeting. We are aiming for weekly but shorter meetings to keep thins moving
+> and not pilling up to much.
+>
+> regards
+> Stefan Schmidt
+>
+Thanks Stefan, that is a good list to keep you guys busy :-)
 
-I already reported that libpcre (7.6-r8) does not compile in released versi=
-on 2010.12 :
-
-| /bin/grep: /usr/lib/libstdc++.la: No such file or directory
-| /srv/oe-2010/build/at91sam9g20ek/sysroots/x86_64-linux/usr/bin/sed: can't=
- read /usr/lib/libstdc++.la: No such file or directory
-| arm-angstrom-linux-gnueabi-libtool: link: `/usr/lib/libstdc++.la' is not =
-a valid libtool archive
-
-Now I just figured out that neither does gnutls-2.10.2-r10.1 :
-
-| /srv/oe-2010/build/at91sam9g20ek/sysroots/x86_64-linux/usr/bin/sed: can't=
- read /usr/lib/libstdc++.la: No such file or directory
-| arm-angstrom-linux-gnueabi-libtool: link: `/usr/lib/libstdc++.la' is not =
-a valid libtool archive
-
-This seems to be pretty much the same issue.
-Any idea?
-
-With kind regards,
-Fabrice Aeschbacher
+Graeme
 
 
 
