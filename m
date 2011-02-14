@@ -1,38 +1,32 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pp29K-0001ql-4R
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pp2Cd-00021g-9L
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 18:23:46 +0100
-Received: by qwi2 with SMTP id 2so3120833qwi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 09:22:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=AlTjlHDFjyxuu5B6GGR+HxYSbHr66Ukgk5esB1LAjdM=;
-	b=b68I4cuLsO1gvpkTyPbL2yr2dwZjIuWELUDGUkaGRooUEV6HLC9Ot9l47PinQHs1JE
-	ErpAzAr3fMOtOJpgCztk0zCMGP5GJ6FTn8tvnHdE2wRE2rddTtHQwA06RIYb0qSyuYMc
-	fh6zHX1JFI7dj5P4KHUZ2F2iiucTQtLdky4LI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=t7zUUqHYEAg6S8xfsDvxOLLd3feU6WlGvoVhRjp+wvaDOFif+HbNx9EiZ+UCBWH7QW
-	W0cz2FJJSy9WU0bbvye7fUbIgr5VgvhoHP1S66lx28ZJd93CiI5xja0x9yw1F+OniKsz
-	/dBXWLzwoqRPLvegejNHFj+IElOSTiR94Qe6M=
+	Mon, 14 Feb 2011 18:27:11 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1Pp2BV-00011u-Rb from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Feb 2011 09:26:01 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 14 Feb 2011 09:25:51 -0800
+Received: from [172.30.80.148] ([172.30.80.148]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 14 Feb 2011 10:25:50 -0700
+Message-ID: <4D596594.5020907@mentor.com>
+Date: Mon, 14 Feb 2011 10:25:40 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.229.241.194 with SMTP id lf2mr3027364qcb.222.1297704156297;
-	Mon, 14 Feb 2011 09:22:36 -0800 (PST)
-Received: by 10.229.193.10 with HTTP; Mon, 14 Feb 2011 09:22:36 -0800 (PST)
-In-Reply-To: <AANLkTi=7XnywEHPjEReDvY68TNd-3fzr7FtREJ-6hp3T@mail.gmail.com>
-References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
-	<AANLkTi=XjCgstGxtHd2jTmp5Kmm8wyQzOjJrxnnAhJU9@mail.gmail.com>
-	<AANLkTikjvqTZcOiYHRsXdE9otGaJTavGKZ8iWtuN7GVu@mail.gmail.com>
-	<AANLkTi=7XnywEHPjEReDvY68TNd-3fzr7FtREJ-6hp3T@mail.gmail.com>
-Date: Mon, 14 Feb 2011 18:22:36 +0100
-Message-ID: <AANLkTinXm+YcGS_uadbA6ddezRRtZB0r6Tqcgt7GyOh4@mail.gmail.com>
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] linux-firmware: split into bus specific packages.
+References: <1297667657-24563-1-git-send-email-schnitzeltony@gmx.de>
+In-Reply-To: <1297667657-24563-1-git-send-email-schnitzeltony@gmx.de>
+X-OriginalArrivalTime: 14 Feb 2011 17:25:51.0037 (UTC)
+	FILETIME=[39EA1ED0:01CBCC6C]
+Subject: Re: [PATCH] clutter: get dependency to json-glib to work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,20 +40,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 17:23:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 14 Feb 2011 17:27:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 2/14/11, Otavio Salvador <otavio@ossystems.com.br> wrote:
+On 02/14/2011 12:14 AM, Andreas Mueller wrote:
+> * Error on fresh tmp build was
+> * | checking for installed JSON-GLib... configure: error: not found
+> * | ERROR: Function do_configure failed
+>
+> Signed-off-by: Andreas Mueller<schnitzeltony@gmx.de>
+> ---
+>   recipes/clutter/clutter_1.4.2.bb |    2 +-
+>   1 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/clutter/clutter_1.4.2.bb b/recipes/clutter/clutter_1.4.2.bb
+> index 12b6eb5..08e52d5 100644
+> --- a/recipes/clutter/clutter_1.4.2.bb
+> +++ b/recipes/clutter/clutter_1.4.2.bb
+> @@ -1,6 +1,6 @@
+>   require clutter.inc
+>
+> -DEPENDS += "json-glib"
+> +STDDEPENDS += "json-glib"
+>
+>   PR = "${INC_PR}.1"
+>
 
-> Right but usually we'll have drivers/modules for one, two or three
-> vendors that are used or demanded to be supported and then those
-> firmware needs to be supported as well.
+Applied, thanks.
 
-Can you give an example?
-If you are building a distro for a device with USB host - on what
-basis do you choose whose products to support?
-
-bye,
-Filip Zyzniewski
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
