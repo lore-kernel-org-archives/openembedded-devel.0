@@ -1,34 +1,37 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Pov3c-00043F-OE
+	(envelope-from <martin.jansa@gmail.com>) id 1Povav-0000zG-0X
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 10:49:24 +0100
-Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1Pov2V-00086g-VH by authid <stefan@sostec.de> with cram_md5
+	Mon, 14 Feb 2011 11:23:49 +0100
+Received: by bwz10 with SMTP id 10so5045918bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 10:48:18 +0100
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1Pov2Q-0006G0-Mh
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 10:48:10 +0100
-Date: Mon, 14 Feb 2011 10:48:10 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Mon, 14 Feb 2011 02:22:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id:mime-version
+	:content-type:content-disposition:user-agent;
+	bh=lxar1CQmizrT2eacnw7fQPu7m0PN7kHIXTqA0zDmeDY=;
+	b=lQHMpHxyPT2DjtSrXzwtl729GoirdHX2C+9Tz55ZNE09m0FfYivbosy90/WGOeebCb
+	K0JUHBGdmdq50qUdwVmUsqa+hXy46ispwcrZY4+iryFm6EsUJFU7YcV0GUcjF3KvLG7J
+	DciX1HUls/avFsJGPKOviMqs3FcocYhadalYo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=pouPTulolvpTM+AUtvZ8wenQfmyHfXe9wMJDjyPZ5FS2ojPV83dNvN7oVxJn3jIqmq
+	bwE7YBbsIYkpDvshp8IM7BCz29iZVkULMzFsThZM+myLaV/gd2sUGpPbOdARO7qVjSzy
+	5NWoXwdHOxNBXKcsa6BOX1x1cDlD4jjBVJRg8=
+Received: by 10.204.72.207 with SMTP id n15mr3246080bkj.62.1297678960153;
+	Mon, 14 Feb 2011 02:22:40 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id j11sm1668032bka.0.2011.02.14.02.22.38
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 14 Feb 2011 02:22:39 -0800 (PST)
+Date: Mon, 14 Feb 2011 11:22:32 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110214094810.GE14931@excalibur.local>
-References: <ij8d1t$cd9$1@dough.gmane.org>
+Message-ID: <20110214102232.GB8619@localhost.jama.net>
 MIME-Version: 1.0
-In-Reply-To: <ij8d1t$cd9$1@dough.gmane.org>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
-	autolearn=ham version=3.2.5
-Subject: Re: TSC agenda items for the next meeting
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: debian.bbclass issues when some package is substring of another
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,119 +45,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 09:49:24 -0000
-X-Groupsio-MsgNum: 29154
-Content-Type: multipart/mixed; boundary="uAKRQypu60I7Lcqm"
+X-List-Received-Date: Mon, 14 Feb 2011 10:23:49 -0000
+X-Groupsio-MsgNum: 29155
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Pd0ReVV5GZGQvF3a"
 Content-Disposition: inline
 
---uAKRQypu60I7Lcqm
+--Pd0ReVV5GZGQvF3a
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Hello.
+After last rebuild from scratch I got
+Package libncursesw (5.7+20110115-r16.6)
+instead of expected
+Package libncursesw5 (5.7+20110115-r16.6)
+which I had before (and which is _still_ in depends of packages needing
+it - like ie screen)
 
-On Sun, 2011-02-13 at 11:50, Koen Kooi wrote:
-> 
-> The new TSC is holding a meeting next week and we wanted to see if
-> anyone wants to suggest items we put in the agenda for the meeting.
-> 
-> If you have such items, please let us know by replying to this mail.
+I started to debug debian.bbclass to see why
+libncursesw is no longer renamed to libncursesw5 and found that it's
+because also libncurses exists and it's replaced in both and then
+replacement for libncursesw doesn't match anymore. Same issue with
+libtic/libticw.
 
-All items brought up here until now should be available in the final agenda now.
-Please see the attchment for it.
+Problem is that when checking libtic:
+=2E/log:DEBUG: LIBNAMES: pkg ncurses-libtic socrunc ('libtic5', 'libtic')
+=2E/log:DEBUG: LIBNAMES: pkgname libtic5 devname libtic
 
-Sometimes items may cover parts of the same topic. I did not work them into one
-to keep the original text of the submitters. Not sure if this is a good way to
-deal with this overlaps.
+=2E/log:DEBUG: LIBNAMES: pkg ncurses-libtic =3D=3D orig_pkg ncurses-libtic
+=2E/log:DEBUG: LIBNAMES: pkgname libtic5 devname libtic pkg ncurses-libtic =
+orig_pkg ncurses-libtic debian_pn None newpkg libtic5
+=2E/log:DEBUG: setVar PKG_ncurses-libtic, libtic5
+but also
+=2E/log:DEBUG: LIBNAMES: else pkg ncurses-libticw.replace(ncurses-libtic,li=
+btic)
+=2E/log:DEBUG: LIBNAMES: pkgname libtic5 devname libtic pkg ncurses-libticw=
+ orig_pkg ncurses-libtic debian_pn None newpkg libticw
+=2E/log:DEBUG: setVar PKG_ncurses-libticw, libticw
 
-With 18 items this is a lot of topics and I'm not ure we can cover this all in
-one meeting. We are aiming for weekly but shorter meetings to keep thins moving
-and not pilling up to much.
+so later when checking libticw
+=2E/log:DEBUG: LIBNAMES: pkg ncurses-libticw socrunc ('libticw5','libticw')
+=2E/log:DEBUG: LIBNAMES: pkgname libticw5 devname libticw
+it won't find ncurses-libticw to replace it with libticw5 (because it's
+already named libticw)
 
-regards
-Stefan Schmidt
+So can someone explain why we need that 'newpkg =3D pkg.replace(orig_pkg, d=
+evname, 1)' in else?
 
---uAKRQypu60I7Lcqm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: attachment; filename="TSC-2011-02-14-Agenda.txt"
+Or any hint which change caused this (as debian.bbclass wasn't changed in t=
+his aspect).
 
-Agenda 2011-02-14 meeting
--------------------------
+Reordering PACKAGES seems like really error prone and even not really possi=
+ble with dynamic packages etc.
 
-01) Agree on meeting date, time and meeting lead. [Proposed: Stefan]
+Here is added debug I've used to find it:
 
-02) Setup oe-core repo and import yocto with history but without bitbake.
-    Decide who will take this action item. [Proposed: Koen, Khem]
+diff --git a/classes/debian.bbclass b/classes/debian.bbclass
+index 1a2c7da..9239631 100644
+--- a/classes/debian.bbclass
++++ b/classes/debian.bbclass
+@@ -84,10 +84,13 @@ python debian_package_name_hook () {
+                        else:
+                                bb.note("Multiple libraries (%s) found and =
+LEAD_SONAME not defined" % ", ".join(sonames))
 
-03) Discuss how we get OE metadata into the oe-core repo without loosing to
-    much histroy and credits of the original authors. [Proposed: Stefan]
++               bb.debug(1, 'LIBNAMES: pkg %s soname %s' % (orig_pkg, sonam=
+e))
+                if has_libs and not has_bins and soname:
+                        soname_result =3D socrunch(soname)
++                       bb.debug(1, 'LIBNAMES: pkg %s socrunc %s' % (orig_p=
+kg, soname_result))
+                        if soname_result:
+                                (pkgname, devname) =3D soname_result
++                               bb.debug(1, 'LIBNAMES: pkgname %s devname %=
+s' % (pkgname, devname))
+                                for pkg in packages.split():
+                                        if (bb.data.getVar('PKG_' + pkg, d)=
+ or bb.data.getVar('DEBIAN_NOAUTONAME_' + pkg, d)):
+                                                continue
+@@ -95,11 +98,15 @@ python debian_package_name_hook () {
+                                        if debian_pn:
+                                                newpkg =3D debian_pn
+                                        elif pkg =3D=3D orig_pkg:
++                                               bb.debug(1, 'LIBNAMES: pkg =
+%s =3D=3D orig_pkg %s' % (pkg, orig_pkg))
+                                                newpkg =3D pkgname
+                                        else:
++                                               bb.debug(1, 'LIBNAMES: else=
+ pkg %s.replace(%s, %s)' % (pkg, orig_pkg, devname))
+                                                newpkg =3D pkg.replace(orig=
+_pkg, devname, 1)
++                                       bb.debug(1, 'LIBNAMES: pkgname %s d=
+evname %s pkg %s orig_pkg %s debian_pn %s newpkg %s' % (pkgname, devname, p=
+kg, orig_pkg, debian_pn, newpkg))
+                                        if newpkg !=3D pkg:
+                                                bb.data.setVar('PKG_' + pkg=
+, newpkg, d)
++                                               bb.debug(1, 'setVar PKG_%s,=
+ %s' % (pkg, newpkg))
 
-04) Access model for OE core and other layers [Proposed: Koen]
+        for pkg in (bb.data.getVar('AUTO_LIBNAME_PKGS', d, 1) or "").split(=
+):
+                auto_libname(packages, pkg)
 
-05) Guidelines for layers, e.g. encourage distro layers or not [Proposed: Koen]
 
-06) Timeline for changes, e.g. OE releases, yocto milestones, etc [Proposed:
-    Koen]
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-07) Definition of OE core [Proposed: Koen]
+--Pd0ReVV5GZGQvF3a
+Content-Type: application/pgp-signature
 
-08) OE goals and guarantees for OE-core, which distros and machines to we
-    recommend and 'test'? [Proposed: Koen]
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
 
-09) Quickly discuss if we are fine with having the IRC meeting (read-only) open
-    for interested community member. (Interest expressed from several ones)
-    [Proposed: Stefan]
+iEYEARECAAYFAk1ZAmgACgkQN1Ujt2V2gBzpAQCeMTLtRfohgT+Rk2Hx5u9MSFS1
+TYkAn0AbS+5zL/FqV5CQYlUBmtUsl4PR
+=/Rx2
+-----END PGP SIGNATURE-----
 
-10) Definitive guidelines for creating board support packages. This should address:
-    1) Where to define toolchains and versions.
-    2) How to create kernel bb files. (Per board, or per kernel version)
-    3) Same for u-boot, how to pin u-boot versions for BSP's.
-
-    Basically, we should identify all the BSP's issues that create
-    discussions on the list and work out a best practices document so we can
-    have more consistency.
-
-    A similar set of guidelines defining what a a distro's responsibility
-    would also be good. [Proposed: Philip Balister]
-
-11) Re-inforcement of the "don't delete all old versions" policy, make sure
-    this is in the wiki somewhere. [Proposed: Graeme]
-
-12) Rough Yocto integration plan. [Proposed: Graeme]
-
-13) Start to think about the Policies section on wiki and whether it is
-    relevant/correct now, and also what needs to change going forward to Yocto.
-    [Proposed: Graeme]
-
-14) Come to a set of minimal quality requirements for our recipes/packages
-    (e.g. must fetch, minimal required headers etc).
-    My proposal would be to use the yocto requirements as a starter
-
-15) Splitting our metadata into multiple layers
-    I can think of the following:
-    - oe core layer (shared with yocto
-    - oe layer (or oe extra's or whatever you want to call it; containing
-    recipes that are generic, not in oe-core and considered to be of
-    common use)
-    - maybe oe-old or so layer (recipes that are not maintained any more)
-    - layer per distro for distro specific stuff
-    - layer per machine (or maybe soc family, I can imagine it makes sense
-    to keep BB and BB-XM together; similarly for the kirkwoord variants)
-    - vendor specific layers (if needed), e.g. ti (although maybe that
-    stuff could also go into a machine layer)
-    Rationale is that users can pull in only those layers that they need. [Proposed:
-    Frans]
-
-16) Consider a version based release mechanism
-    yocto has a release model, intermediate versions are aiming to build
-    but are considered to be less mature.
-    If our core recipes follow this model, I can imagine it is a good
-    strategy to follow in oe too. [Proposed: Frans]
-
-17) Discuss future of our infrastructure (oestats, autobuilder,run-time testing)
-    [Proposed: Yury]
-
-18) What immediate infrastructure changes are needed to work on integrating
-    better with Yocto. [Proposed: Tom King]
-
---uAKRQypu60I7Lcqm--
+--Pd0ReVV5GZGQvF3a--
