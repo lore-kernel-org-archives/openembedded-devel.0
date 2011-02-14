@@ -1,37 +1,25 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pou0t-00014L-7T
+	(envelope-from <jay@jay-tech.ru>) id 1PouYY-0002rd-QG
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 09:42:31 +0100
-Received: by qwi2 with SMTP id 2so2774059qwi.6
+	Mon, 14 Feb 2011 10:17:18 +0100
+Received: by vws6 with SMTP id 6so2785579vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 00:41:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=i7DkY09FmGpnQiWk6Xfw0QowG+LNaxJvRTSk06Jbui8=;
-	b=a6vm1tk4aZ5q9bc9DnaKiX3+i/eRywH4UQ98WgAGqwULSrAsWR5hM2UCy19JKMDeoU
-	Zd/7t9H2gqazlFji/HQQpg6+ftyd3v0uGbiADbIJ+Hn8Hio8wJS5VwDaml/LC/xwB3+U
-	QCULNuIz/mI0eFKXy/rVIUZpERxG1tLyyUSfo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=L5YHBjpm1KVEcbocYoUkYfWQIB1wC+YVPkvIYA8twoBZJKgNzPAsMwRyqB5mmZYQC+
-	3k2va849WTv+CKjr+38DjMlWhSuL8CLcY4LEttCOb8Oh5siEv97QudO0dzHZ4NmWJgxT
-	Bin2IxbptrWoc4HXAGsDSLDynUcBXH6zm0jwg=
+	Mon, 14 Feb 2011 01:16:09 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.229.91.2 with SMTP id k2mr2484794qcm.260.1297672881963; Mon,
-	14 Feb 2011 00:41:21 -0800 (PST)
-Received: by 10.229.193.10 with HTTP; Mon, 14 Feb 2011 00:41:21 -0800 (PST)
-In-Reply-To: <AANLkTin6yU9dhM1oE9C2jahVg-qkHcHtKEpauZv6Qs9w@mail.gmail.com>
-References: <AANLkTikP8CNgvex==mnJY8McTouY0n-QzcUQjaFZRV8X@mail.gmail.com>
-	<AANLkTimuHfSAgfYK5V6zPAEG=MBCi_Am1_9rMq=M9xur@mail.gmail.com>
-	<AANLkTin6yU9dhM1oE9C2jahVg-qkHcHtKEpauZv6Qs9w@mail.gmail.com>
-Date: Mon, 14 Feb 2011 09:41:21 +0100
-Message-ID: <AANLkTino7hjrF51Jb6UWEL5A+teV963cDsgBhCqVZZwF@mail.gmail.com>
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+Received: by 10.220.176.2 with SMTP id bc2mr596241vcb.193.1297674969203; Mon,
+	14 Feb 2011 01:16:09 -0800 (PST)
+Sender: jay@jay-tech.ru
+Received: by 10.220.193.9 with HTTP; Mon, 14 Feb 2011 01:16:09 -0800 (PST)
+X-Originating-IP: [95.29.105.18]
+In-Reply-To: <ij8d1t$cd9$1@dough.gmane.org>
+References: <ij8d1t$cd9$1@dough.gmane.org>
+Date: Mon, 14 Feb 2011 12:16:09 +0300
+X-Google-Sender-Auth: QvDmlhlJBfIYLIsdJo3u6KlY9EI
+Message-ID: <AANLkTinhqAs43Z3ATMK2Gqc13Y0DOOMaqNd3naFSa3yC@mail.gmail.com>
+From: Yury Bushmelev <jay4mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Problem with dependencies in packages
+Subject: Re: TSC agenda items for the next meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,17 +33,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 08:42:31 -0000
+X-List-Received-Date: Mon, 14 Feb 2011 09:17:19 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On 2/14/11, Graham Gower <graham.gower@gmail.com> wrote:
+2011/2/13 Koen Kooi <k.kooi@student.utwente.nl>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+>
+> The new TSC is holding a meeting next week and we wanted to see if
+> anyone wants to suggest items we put in the agenda for the meeting.
+>
+> If you have such items, please let us know by replying to this mail.
 
-> In fact the dependency shouldn't be satisfied here. Opkg should fail
-> the same way as dpkg is failing.
+- may be discuss future of our infrastructure (oestats, autobuilder,
+run-time testing)
 
-What should be done then? Should the ncurses recipe be fixed or package.bbclass?
-
-bye,
-Filip Zyzniewski
+-- 
+Yury Bushmelev
 
 
