@@ -1,24 +1,31 @@
-Received: from mailrelay04.sunrise.ch ([194.158.229.47]
-	helo=smtp-be-02.be08.sunrise.ch)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dv@vollmann.ch>) id 1Pp0zj-0003oz-BB
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pp110-0003t0-HO
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Feb 2011 17:09:47 +0100
-Received: from [192.168.26.14] (212-98-43-140.static.adslpremium.ch
-	[212.98.43.140])
-	by smtp-be-02.be08.sunrise.ch (8.13.1/8.12.10) with ESMTP id
-	p1EFov6I019535; Mon, 14 Feb 2011 16:50:57 +0100
-Message-ID: <4D594F61.4010700@vollmann.ch>
-Date: Mon, 14 Feb 2011 16:50:57 +0100
-From: Detlef Vollmann <dv@vollmann.ch>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+	Mon, 14 Feb 2011 17:11:06 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Pp0zp-0006nG-J0 from Tom_Rini@mentor.com ;
+	Mon, 14 Feb 2011 08:09:53 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 14 Feb 2011 08:09:52 -0800
+Received: from [172.30.80.148] ([172.30.80.148]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 14 Feb 2011 09:09:52 -0700
+Message-ID: <4D5953C5.3080605@mentor.com>
+Date: Mon, 14 Feb 2011 09:09:41 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <09D9BE2AC4AA764DABAA8C91E48D819ED682EC06@DEMCHP99E35MSX.ww902.siemens.net>	<AANLkTimzYvPnN7tt54jcQVYUmBQFpQsO0LYFoRVh5Q8x@mail.gmail.com>	<09D9BE2AC4AA764DABAA8C91E48D819ED682ECBB@DEMCHP99E35MSX.ww902.siemens.net>
-	<09D9BE2AC4AA764DABAA8C91E48D819E011A8B5ACA@DEMCHP99E35MSX.ww902.siemens.net>
-In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819E011A8B5ACA@DEMCHP99E35MSX.ww902.siemens.net>
-Subject: Re: libpcre not compiling
+References: <4D51566B.9060603@mentor.com> <4D516F8B.4090703@gmail.com>
+In-Reply-To: <4D516F8B.4090703@gmail.com>
+X-OriginalArrivalTime: 14 Feb 2011 16:09:52.0509 (UTC)
+	FILETIME=[9CD1F2D0:01CBCC61]
+Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,29 +39,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Feb 2011 16:09:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 14 Feb 2011 16:11:06 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 02/14/11 11:43, Aeschbacher, Fabrice wrote:
-> I already reported that libpcre (7.6-r8) does not compile in released version 2010.12 :
+On 02/08/2011 09:30 AM, Marco Cavallini wrote:
+> Tom Rini ha scritto, Il 08/02/2011 15:42:
+>> Hey all,
+>>
+>> As March is fast approaching I want to gather the list of DISTRO /
+>> MACHINE / BBPKGS targets that the various distributions would like to
+>> see at least compile tested (volunteers for HW testing welcome!). Today,
+>> I have the following setup to be built:
+>>
+>> minimal / minimal-uclibc:
+>> qemux86/ppc/arm/mips/mips64/sh4/mipsel, mpc8315e-rdb, p2020ds, p2020rdb
+>> +
+>> nas-server-image/native-sdk-image/console-image/minimal-image/x11-image/meta-toolchain/qt4-x11-demo-image/qt4e-demo-image
+>>
+>>
+>> angstrom-2008.1 / angstrom-2010.x:
+>> hawkboard, mini2440, mini6410, beagleboard + console-image /
+>> qt4-x11-demo-image / qt4e-demo-image
+>>
+>> slugos / ucslug:
+>> nslu2be/le + slugos-image
+>>
+>> I'm building all of these for 32bit Ubuntu 8.04, RHEL5 and will be
+>> adding Ubuntu 10.04 for the next run.  What more do people want added?
+>> I'm looking to fill this matrix out to something that runs "over the
+>> weekend" and I've still got plenty of room to spare (which is why I've
+>> bcc'd everyone in the MAINTAINERS file with a Distro by their name).
+>>
+>> And of course if you wish to handle building what you care about
+>> yourself instead, that's great!  Please just take this as a gentle
+>> reminder that there's a release coming up so it's time to crank the
+>> builders up and make sure your stuff is working.
+>>
 >
-> | /bin/grep: /usr/lib/libstdc++.la: No such file or directory
-> | /srv/oe-2010/build/at91sam9g20ek/sysroots/x86_64-linux/usr/bin/sed: can't read /usr/lib/libstdc++.la: No such file or directory
-> | arm-angstrom-linux-gnueabi-libtool: link: `/usr/lib/libstdc++.la' is not a valid libtool archive
+> Tom,
+> I periodically test the following with Debian Lenny 5.0 x86_64, but I'd
+> like to see them in your list too.
 >
-> Now I just figured out that neither does gnutls-2.10.2-r10.1 :
->
-> | /srv/oe-2010/build/at91sam9g20ek/sysroots/x86_64-linux/usr/bin/sed: can't read /usr/lib/libstdc++.la: No such file or directory
-> | arm-angstrom-linux-gnueabi-libtool: link: `/usr/lib/libstdc++.la' is not a valid libtool archive
->
-> This seems to be pretty much the same issue.
-> Any idea?
-These are not -native packages, correct?
-Then libtool shouldn't look for /usr/lib/libstdc++.la.
-I have the feeling that something in the libtool setup is wrong.
+> DISTRO: kaeilos
+> MACHINE : ronetix-pm9263/at91sam9263ek
+> IMAGE: minimal-image/x11-image/meta-toolchain/qt4e-demo-image
 
-Regards,
-   Detlef
+qt4e-demo-image fails in both cases due to the image not being happy 
+with qt4-4.6.x and only 4.7.x (see my emails to the list the other week).
+
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
