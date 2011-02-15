@@ -1,36 +1,36 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cdhmanning@gmail.com>) id 1PpBsZ-0007rI-6T
+	(envelope-from <cliff.brake@gmail.com>) id 1PpC61-0008Q4-Kk
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Feb 2011 04:47:07 +0100
-Received: by fxm17 with SMTP id 17so5624393fxm.6
+	Tue, 15 Feb 2011 05:01:01 +0100
+Received: by wwi18 with SMTP id 18so2610104wwi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 19:45:57 -0800 (PST)
+	Mon, 14 Feb 2011 19:59:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:date
 	:message-id:subject:from:to:content-type;
-	bh=KCLtXpbXdPGCxmhTnH4X7KnER4w/XeCRhGXI6ebHIXc=;
-	b=xSaCVUQ0zlox3EXFxq4pzGMY0GUdVtwB5nOFvoyHv9zFD1G97Q+nVd293UnVg/s4vh
-	uLfaqX1F9uIITMvQEva9efnxO4CrmnKH99zg1zf7NatcU6FsTCw9XG3VfWR+MMj5+n5h
-	siS9oBngeaX9FtI0+6BM5pdfpiE2kl5JvOnOs=
+	bh=fr74bUHV3g2KtL7rW7I2oDdjoM0yOda34TDALmPMGRc=;
+	b=YIIHMOdTmq7Gffu3A5MqwYD8WX8ymUzjvmKNTzEkC4sUgLKUGl/uQIjne8Ydpf7szb
+	PFBDNsU+YahnoNMfLXmBKjm5JZfK0AlZft9MTC35j1g96yZWDbji+Lm86p10v09I43Yb
+	WmcBXlfXcJiqHl4dwyFBBMxLG+I12CVwNRCRs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=K13o5cM0ZS54PxTqyOFKHk1IVFaH7FZ3bkNnVeKx/rmYvCVP5JD+r0Pnn38wmrunVk
-	rdyofc/AQiJwunXS7u6k1Y/+xTEofruQwIOwq4Nu2vsZX7LryqH2qUYVC3/8L82g79YC
-	pGsgrqFXhrizMBIjs6y9JeoT2AaPd739+TZKY=
+	b=TbkFm18k5LhG0MFmfpdJNJZ3KAopEwpITEkbpEei4kaLpGRrgftL39JyZAojRf+mA5
+	Xf5ens1OHwwnSLEv+ZG4JjGPlB4hOEnfnudmZwRQoD9B72bz/cp6nzvcq+LV8i3RSP98
+	LnH1HBa3+LInsHtMFNL+YWBG7P4zIeddDpX4w=
 MIME-Version: 1.0
-Received: by 10.223.86.135 with SMTP id s7mr5588777fal.70.1297741557693; Mon,
-	14 Feb 2011 19:45:57 -0800 (PST)
-Received: by 10.223.93.205 with HTTP; Mon, 14 Feb 2011 19:45:57 -0800 (PST)
-In-Reply-To: <20110214223458.GB20605@sakrah.homelinux.org>
-References: <AANLkTikLpJU9q7woyJrpTVWaAXK_m557J1uXAF-HLBCs@mail.gmail.com>
-	<20110214223458.GB20605@sakrah.homelinux.org>
-Date: Tue, 15 Feb 2011 16:45:57 +1300
-Message-ID: <AANLkTintqz33=N42JHjm=7HtP4hF8WUFvxuL0i=B71Qo@mail.gmail.com>
-From: Charles Manning <cdhmanning@gmail.com>
+Received: by 10.216.50.133 with SMTP id z5mr321318web.19.1297742038630; Mon,
+	14 Feb 2011 19:53:58 -0800 (PST)
+Received: by 10.216.254.137 with HTTP; Mon, 14 Feb 2011 19:53:58 -0800 (PST)
+In-Reply-To: <AANLkTikHTA9NDzU5q3Tcwh8hZ9ZrWy=vAHTTTgGPaEAV@mail.gmail.com>
+References: <AANLkTikzcmcDMM4SouUkXAeXaus3AyiJq48Puj+mK6d1@mail.gmail.com>
+	<AANLkTikHTA9NDzU5q3Tcwh8hZ9ZrWy=vAHTTTgGPaEAV@mail.gmail.com>
+Date: Mon, 14 Feb 2011 22:53:58 -0500
+Message-ID: <AANLkTi=MBnzbnUMu5E-+TLgmqP330HEo_7opJfDcPgh1@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Which recipe to get EFL into SDK
+Subject: Re: testing branch suspended over next couple weeks during release testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,25 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Feb 2011 03:47:07 -0000
+X-List-Received-Date: Tue, 15 Feb 2011 04:01:01 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, Feb 15, 2011 at 11:34 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> On (15/02/11 11:17), Charles Manning wrote:
->> Hello
+On Fri, Feb 11, 2011 at 12:41 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> 2011/2/11 Cliff Brake <cliff.brake@gmail.com>:
+>> We will not be running our weekly testing branch cycles over the next
+>> couple weeks in favor of re-directing resources toward release
+>> testing.
 >>
->> I am building an SDK and have managed to get everything added to it
->> that I want except for EFL.
+>> Thanks,
+>> Cliff
 >>
->> Any hints as to what recipe to use to add EFL to the SDK?
-> there is a meta task
-> task-efl.bb in recipes/tasks that might be a good starting point
->
+>>
+> Thanks for the info.
+> Can you still consolidate the last round of testing?
 
-I am confused.
+Hi Frans,
 
-Are you suggesting that I should be able to include task-efl.bb or are
-you suggesting I should
-be able to make a lib building version of task-efl.bb?
+Done: http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=tested_2010-02-03
+
+Thanks for your testing.
+
+Cliff
+
+-- 
+=================
+http://bec-systems.com
 
 
