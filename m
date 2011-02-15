@@ -1,32 +1,32 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PpM3P-0006rr-9O
+	(envelope-from <Tom_Rini@mentor.com>) id 1PpM4U-0007oh-N2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Feb 2011 15:38:59 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	Tue, 15 Feb 2011 15:40:06 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
 	by relay1.mentorg.com with esmtp 
-	id 1PpM2D-0000gR-Hf from Tom_Rini@mentor.com 
+	id 1PpM3L-0000pU-Rk from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Feb 2011 06:37:45 -0800
+	Tue, 15 Feb 2011 06:38:55 -0800
 Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Tue, 15 Feb 2011 06:37:44 -0800
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Tue, 15 Feb 2011 06:38:55 -0800
 Received: from [172.30.80.148] ([172.30.80.148]) by na2-mail.mgc.mentorg.com
 	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 15 Feb 2011 07:37:44 -0700
-Message-ID: <4D5A8FAC.5020001@mentor.com>
-Date: Tue, 15 Feb 2011 07:37:32 -0700
+	Tue, 15 Feb 2011 07:38:54 -0700
+Message-ID: <4D5A8FF2.2010200@mentor.com>
+Date: Tue, 15 Feb 2011 07:38:42 -0700
 From: Tom Rini <tom_rini@mentor.com>
 Organization: Mentor Graphics Corporation
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4D5A5871.7000005@dresearch.de> <4D5A89CD.803@opendreambox.org>
-In-Reply-To: <4D5A89CD.803@opendreambox.org>
-X-OriginalArrivalTime: 15 Feb 2011 14:37:44.0367 (UTC)
-	FILETIME=[E8342BF0:01CBCD1D]
-Subject: Re: linux-libc-headers version (reloaded)
+References: <AANLkTi=bPrL+J+sA6wR+BEK9GuLxbMJRohVAPie-_u_i@mail.gmail.com>
+In-Reply-To: <AANLkTi=bPrL+J+sA6wR+BEK9GuLxbMJRohVAPie-_u_i@mail.gmail.com>
+X-OriginalArrivalTime: 15 Feb 2011 14:38:54.0673 (UTC)
+	FILETIME=[121C0410:01CBCD1E]
+Subject: Re: git head: build of rpm-native fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,24 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Feb 2011 14:38:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 15 Feb 2011 14:40:07 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 02/15/2011 07:12 AM, Andreas Oberritter wrote:
-> On 02/15/2011 11:41 AM, Steffen Sledz wrote:
->> "Kernel headers are backwards compatible, but not forwards compatible.  This
->> means that a program built against a C library using older kernel headers
->> should run on a newer kernel (although it may not have access to new
->> features), but a program built against newer kernel headers may not work on an
->> older kernel."[2]
+On 02/14/2011 11:48 PM, Frans Meulenbroeks wrote:
+> Hi,
 >
-> Isn't this what the variable OLDEST_KERNEL is good for, when compiling
-> glibc?
+> Yesterday I tried whether I could cross compile a helloworld.rpm to
+> try on a fedora-arm box, but I failed in building rpm-native.
+> This issue was verified by Jay. His log:
+> http://tinderbox.openembedded.net/public/logs/task/25555153.txt
+>
+> apparently this is the failing part is:
+>
+> file -C -m ./magic.mime
+> ./magic.mime, 187: Warning: string extension `B' invalid
+> ./magic.mime, 401: Warning: string extension `B' invalid
+> ./magic.mime, 618: Warning: string extension `B' invalid
+> ./magic.mime, 623: Warning: string extension `B' invalid
+> ./magic.mime, 627: Warning: string extension `B' invalid
+> ./magic.mime, 628: Warning: string extension `B' invalid
+> ./magic.mime, 672: Warning: no need to escape `#'
+> ./magic.mime, 674: Warning: no need to escape `#'
+> file: could not find any magic files!
+> make[4]: *** [magic.mime.mgc] ÐžÑˆÐ¸Ð±ÐºÐ° 1
+> make[4]: *** ÐžÐ¶Ð¸Ð´Ð°Ð½Ð¸Ðµ Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¸Ñ Ð·Ð°Ð´Ð°Ð½Ð¸Ð¹..
+>
+> I tried the command in a devshell and there it also fails, but I have
+> not really an idea what is wrong (and I don't know too much about RPM
+> anyway)
+> Suggestions? Fixes ?
 
-Right.  But other things can start to rely on the kernel interfaces 
-(where it's allowed to) as well, and often don't do the various hoops to 
-be forwards compatible at run time.
+rpm depends on having a specific version of file around and there's 
+probably a mis-match.
 
 -- 
 Tom Rini
