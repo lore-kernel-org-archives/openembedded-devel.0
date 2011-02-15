@@ -1,37 +1,24 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PpHRP-00074E-1P
+	(envelope-from <holger+oe@freyther.de>) id 1PpHkg-0003ri-9Y
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Feb 2011 10:43:27 +0100
-Received: by bwz10 with SMTP id 10so239288bwz.6
+	Tue, 15 Feb 2011 11:03:22 +0100
+Received: from [192.168.0.101] (91-64-83-241-dynip.superkabel.de
+	[91.64.83.241])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id D2A431B10C05
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Feb 2011 01:42:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=iqmuvO36GO755uhPzeY6XS4Y6tNA+1L9FAxD+qseZBM=;
-	b=TRxA6172BHhgnIJbcX6AKB+L3vD+mf9893CTuLbxHMfd739NWsKn5T+fmtfwwsXu9W
-	L5ha3JMna0fzY33HHw7AUSNZzcf1+eXA7H/no237WTgDDcnpTSnsBT89EiSonvC3v7xb
-	XzDBwugRtVfe4Mef176VO+GMT+8USnnGFQScY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=Zihd1ijUjgkotDZC4+AGl/XTih3ekWoQQ0o6g4Cuce3xn9pqAb0JVP0JVua9rK8HRG
-	6g7wKNrKytU4dbmx/B8wn/4v17bV/CuINCQVDgrCNp0ipgGB3VKOR4QCF3h25M48dQ0b
-	gkNTQTOCibDP6sGzNbWKcNEnZeWDCNyh/LGUM=
-Received: by 10.204.1.132 with SMTP id 4mr40475bkf.41.1297762934109;
-	Tue, 15 Feb 2011 01:42:14 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id q18sm2442002bka.15.2011.02.15.01.42.12
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 15 Feb 2011 01:42:13 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 15 Feb 2011 10:12:53 +0000 (UTC)
+Message-ID: <4D5A4F23.1030607@freyther.de>
+Date: Tue, 15 Feb 2011 11:02:11 +0100
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Feb 2011 10:42:05 +0100
-Message-Id: <1297762925-4503-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <20110215091517.GD8619@localhost.jama.net>
-References: <20110215091517.GD8619@localhost.jama.net>
-Subject: [PATCH] debian.bbclass: call auto_libname in reverse sorted AUTO_LIBNAME_PKGS
+References: <AANLkTinN1b=egyKPv6N3rHq1HODKDyK15B22=1qBZcMZ@mail.gmail.com>
+In-Reply-To: <AANLkTinN1b=egyKPv6N3rHq1HODKDyK15B22=1qBZcMZ@mail.gmail.com>
+Subject: Re: [RFH] qt4-tools-sdk not providing right values
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,36 +32,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Feb 2011 09:43:27 -0000
+X-List-Received-Date: Tue, 15 Feb 2011 10:03:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-* see comment for reason why we need this
-* more info:
-  http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-February/029877.html
----
- classes/debian.bbclass |    8 +++++++-
- 1 files changed, 7 insertions(+), 1 deletions(-)
+On 02/15/2011 01:15 AM, Otavio Salvador wrote:
+> Hello,
+> 
+> CMake (that is being used more and more for qt applications) depends
+> on qmake -query values to "detect" qt and headers. Do someone know how
+> we can address it so a fully working Qt SDK that works with qmake can
+> be done?
+> 
 
-diff --git a/classes/debian.bbclass b/classes/debian.bbclass
-index 1a2c7da..7cdb6d2 100644
---- a/classes/debian.bbclass
-+++ b/classes/debian.bbclass
-@@ -101,7 +101,13 @@ python debian_package_name_hook () {
- 					if newpkg != pkg:
- 						bb.data.setVar('PKG_' + pkg, newpkg, d)
- 
--	for pkg in (bb.data.getVar('AUTO_LIBNAME_PKGS', d, 1) or "").split():
-+	# reversed sort is needed when some package is substring of another
-+	# ie in ncurses we get without reverse sort: 
-+	# DEBUG: LIBNAMES: pkgname libtic5 devname libtic pkg ncurses-libtic orig_pkg ncurses-libtic debian_pn None newpkg libtic5
-+	# and later
-+	# DEBUG: LIBNAMES: pkgname libtic5 devname libtic pkg ncurses-libticw orig_pkg ncurses-libtic debian_pn None newpkg libticw
-+	# so we need to handle ncurses-libticw->libticw5 before ncurses-libtic->libtic5
-+	for pkg in sorted((bb.data.getVar('AUTO_LIBNAME_PKGS', d, 1) or "").split(), reverse=True):
- 		auto_libname(packages, pkg)
- }
- 
--- 
-1.7.4.1
-
+What does it output? What is wrong with it? does it find the qt.conf?
 
 
