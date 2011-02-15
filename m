@@ -1,32 +1,42 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gdalex@gmail.com>) id 1PpIyF-0005DE-VK
+	(envelope-from <otavio.salvador@gmail.com>) id 1PpKMG-0001nI-Si
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Feb 2011 12:21:28 +0100
-Received: by bwz10 with SMTP id 10so304268bwz.6
+	Tue, 15 Feb 2011 13:50:20 +0100
+Received: by bwz10 with SMTP id 10so371516bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Feb 2011 03:20:18 -0800 (PST)
+	Tue, 15 Feb 2011 04:49:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=rxlv+IsP5WX8whl04aaGeZOzQP3l1P2hq/t8A0kKtpQ=;
-	b=h+KvT9j5tsa1CQCpLNJbzFaHHcu83symmcE5K7MKMYYNCTW8xJX4d5o0ep2vYfpduP
-	aNkXEhk7VLWSWUgWazguLV/ewT8mNxhHOzqDu/5tdVe9wiOmRGVahCPJzwW+TJu71xzc
-	IqMAL1rtN2yMoeK5m8HSbKtNyk80DGASNpa+k=
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=UgcxGqq/uRxTfpJQaUWUgQLS3hGVYGd5J0NCKvolDzE=;
+	b=muCIXT1D1B+0BGAws/uNZzOryGUx4GJZ/gBBPq8WIbUTb/jzIRZ9RYWNtasqNe6+Nd
+	VuyrHim14JHNcASC1j3Dz7uxoruGDoDXaxJCnFcassNQR8SlJqCrE/Lu2+5eqQggKj24
+	bZ4e2gr561me3g+LO/JP3lBLHZyFEr1zadCOU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=NAZ5tmD5D+khJ9JZ3hz5RXRupipx7fl2oQPrjWGmt/T/wiJd19owVHU/2xHhzu6vfP
-	oaIDQ4OH5R/0pLVi+ewOohf3gDcxQ8HniTL8biOJ4C0frL3X5oeQy3xFTi6hLS78maTf
-	09YLa3PsFgg/S3aKNqTD2twVm6+LV2KJxXdMU=
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=ps9TMrpOkKspPTMgQCmyw+Sid47oDxpyuPIAPS3eagwr0vPJ5B8mVCFHpu1megNxdB
+	WIt9nTbUffIfLjfmhsQhavrHybYOQd3xTaq/VhnVAUb+fHkcXL9tNy9NLhbKIkrvzzK3
+	Fxd4jCXL0POa82H0W6zz7xGsA3XzPlquprYys=
 MIME-Version: 1.0
-Received: by 10.204.138.130 with SMTP id a2mr14404374bku.211.1297768817851;
-	Tue, 15 Feb 2011 03:20:17 -0800 (PST)
-Received: by 10.204.120.133 with HTTP; Tue, 15 Feb 2011 03:20:17 -0800 (PST)
-Date: Tue, 15 Feb 2011 06:20:17 -0500
-Message-ID: <AANLkTimE1MUCjZx+dRSna8+38OHy+cZ0GdQDL+EN+it7@mail.gmail.com>
-From: George Alexandru Dorobantu <gdalex@gmail.com>
+Received: by 10.204.122.198 with SMTP id m6mr26068294bkr.186.1297774148288;
+	Tue, 15 Feb 2011 04:49:08 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.119.207 with HTTP; Tue, 15 Feb 2011 04:49:08 -0800 (PST)
+In-Reply-To: <AANLkTi=OFf7JB6bYsEXCNG1MVNWTP6mFwdj+EhFHLMvb@mail.gmail.com>
+References: <AANLkTinN1b=egyKPv6N3rHq1HODKDyK15B22=1qBZcMZ@mail.gmail.com>
+	<4D5A4E56.7040209@eukrea.com>
+	<AANLkTinHw3SXsx89qis6NeYSxjhKjK278-VgKHXpbw7j@mail.gmail.com>
+	<AANLkTi=OFf7JB6bYsEXCNG1MVNWTP6mFwdj+EhFHLMvb@mail.gmail.com>
+Date: Tue, 15 Feb 2011 12:49:08 +0000
+X-Google-Sender-Auth: _qhzSt2VDwbsNCnrH_x6MNC5KXY
+Message-ID: <AANLkTi=+ydSoGjJHkzO1FWNCDhUY0UZZ3PZZn60VqEj=@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: linux-libc-headers and eglibc having circular dependency
+Subject: Re: [RFH] qt4-tools-sdk not providing right values
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,37 +50,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Feb 2011 11:21:28 -0000
+X-List-Received-Date: Tue, 15 Feb 2011 12:50:21 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello guys,
+The biggest improvement I got was adding the following to my
+meta-toolchain-sdk recipe:
 
-I've just started a new building and I got this error:
+    cat > ${SDK_OUTPUT}/${SDK_PATH}/bin/qt.conf <<EOF
+[Paths]
+Prefix =3D ${SDK_PATH}
+Headers =3D ${TARGET_SYS}/include/qt4/
+Libraries =3D ${TARGET_SYS}/lib
+Plugins =3D ${TARGET_SYS}/lib/qt4/plugins/
+EOF
 
-g@g-home:/media/500GB/oe/openembedded$ bitbake qt4e-base-image
-NOTE: Handling BitBake files: - (7318/7318) [100 %]
-Parsing of 7318 .bb files complete (6892 cached, 426 parsed). 7596 targets,
-357 skipped, 0 masked, 0 errors.
+Now it fails to find the X11 libs. Looking at it.
 
-Build Configuration:
-BB_VERSION        = "1.10.2"
-METADATA_BRANCH   = "org.openembedded.dev"
-METADATA_REVISION = "b4a8a11"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "qemuarm"
-DISTRO            = "angstrom"
-DISTRO_VERSION    = "v20110215"
-TARGET_FPU        = "soft"
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
-NOTE: Resolving any missing task queue dependencies
-FATAL: Task /media/500GB/oe/openembedded/recipes/linux-libc-headers/
-linux-libc-headers_2.6.32.bb (do_package) has circular dependency on
-/media/500GB/oe/openembedded/recipes/eglibc/eglibc_2.12.bb (do_package)
-
-
-Can anyone help me with this?
-
-Thank you
-George A. Dorobantu
 
