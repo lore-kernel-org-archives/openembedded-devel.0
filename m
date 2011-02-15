@@ -1,37 +1,35 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-bw0-f51.google.com ([209.85.214.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PpSQJ-0005a8-U9
+	(envelope-from <otavio.salvador@gmail.com>) id 1PpSQh-0005aV-Ka
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Feb 2011 22:27:04 +0100
-Received: by eya28 with SMTP id 28so452743eya.6
+	Tue, 15 Feb 2011 22:27:27 +0100
+Received: by bwz10 with SMTP id 10so869129bwz.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Feb 2011 13:25:53 -0800 (PST)
+	Tue, 15 Feb 2011 13:26:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=fDrmHrwVzWD6dUPNnztoUgnpV7aCgNm40rGZ8Y4tNoo=;
-	b=er5Umxndr/g4LShN57E7TsclMn9Lnbl803zLC7JV7uTyINUWJT7opHP0+dERhtVT51
-	M3K4VcRhfWDC1/g/jH+Us/GSvOOZWQ72Vp4gg+TexJCChWE2xvkrHsRsrkkcB2Pt/EIy
-	XkXrFxG0RwvxipRQ9ZaDYCn/rfA9NHqzqr7ew=
+	h=domainkey-signature:mime-version:sender:date:x-google-sender-auth
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=6phUeuAYWD+WiUJKeSTZ4BoOlMkCLBmd0lmuzi15OY0=;
+	b=ip7T5jl7FSlIBWSDQSXBkvw3zbuPBINWqSL4/OU0SshfhKCOHD1olNjnd9UfVUNe8y
+	1u5dcNxJZjW+V7mzFvinJbfpcRgUzDtKIe4MY5PURDt94k5lf14xY9TcQ1Fo8lOX5NCW
+	XeNJY5Hjg+8FnFUuvo68/Be6p4uEnrfjpPZ0U=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=RDDBb46qUpS0o81H0c5ok9F280KA/5IqQTWhwbq/w7BwnWaVb9JQUl5Vs54sRv+JQ1
-	02QH5Ed1pAQh1h7Pt6BJhws5NTqlDk7gkdI/fQUPi0n2TSbjU34u4k0WdVyKMBN2Arrj
-	dYMPQNvyimUtSiaH4szSNud345fDEEHhS0n7c=
-Received: by 10.103.243.10 with SMTP id v10mr1308547mur.55.1297805150422;
-	Tue, 15 Feb 2011 13:25:50 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id l3sm1710248fan.0.2011.02.15.13.25.48
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 15 Feb 2011 13:25:49 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Feb 2011 22:25:45 +0100
-Message-Id: <1297805145-18638-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <1297803782-8395-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1297803782-8395-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCHv2] glib-2.0: add 2.28.0, needed by newer libsoup
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	b=qszYwp6Ch5y16xcfyVAHQ0GPn16rjbC9U8XZfAvG6tdkSD/yXnnJr5NnvjlAVsUumU
+	PkYaB6Vsv+HQ1w/ts7BYmt4n3J8CVk2dVPBeFZ0kcuqTB32m6//Lu5/guVSGAosUpgcs
+	it1yWbrJfrooz+4a+xHQSEJAr4uLkvgm8wKQc=
+MIME-Version: 1.0
+Received: by 10.204.50.196 with SMTP id a4mr108517bkg.213.1297805171408; Tue,
+	15 Feb 2011 13:26:11 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.119.207 with HTTP; Tue, 15 Feb 2011 13:26:11 -0800 (PST)
+Date: Tue, 15 Feb 2011 21:26:11 +0000
+X-Google-Sender-Auth: JAIGXcH-IYNGJQWJZpfQFopBxXM
+Message-ID: <AANLkTimSjWURf8gMrVZGd==xCH3jnWEG_=G8EMfsdbW1@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Pull request from O.S. Systems tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,340 +43,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Feb 2011 21:27:04 -0000
+X-List-Received-Date: Tue, 15 Feb 2011 21:27:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../60_wait-longer-for-threads-to-die.patch        |   26 ++++++
- .../glib-2.0/glib-2.0-2.28.0/configure-ipv6.patch  |   92 ++++++++++++++++++++
- .../glib-2.0-2.28.0/configure-libtool.patch        |   30 +++++++
- .../glib-2.0-2.28.0/g_once_init_enter.patch        |   11 +++
- .../gatomic-proper-pointer-get-cast.patch          |   12 +++
- ...b2-fix-compilation-with-no-builtin-atomic.patch |   25 ++++++
- recipes/glib-2.0/glib-2.0_2.28.0.bb                |   74 ++++++++++++++++
- 7 files changed, 270 insertions(+), 0 deletions(-)
- create mode 100644 recipes/glib-2.0/glib-2.0-2.28.0/60_wait-longer-for-threads-to-die.patch
- create mode 100644 recipes/glib-2.0/glib-2.0-2.28.0/configure-ipv6.patch
- create mode 100644 recipes/glib-2.0/glib-2.0-2.28.0/configure-libtool.patch
- create mode 100644 recipes/glib-2.0/glib-2.0-2.28.0/g_once_init_enter.patch
- create mode 100644 recipes/glib-2.0/glib-2.0-2.28.0/gatomic-proper-pointer-get-cast.patch
- create mode 100644 recipes/glib-2.0/glib-2.0-2.28.0/libglib2-fix-compilation-with-no-builtin-atomic.patch
- create mode 100644 recipes/glib-2.0/glib-2.0_2.28.0.bb
+Hello,
 
-diff --git a/recipes/glib-2.0/glib-2.0-2.28.0/60_wait-longer-for-threads-to-die.patch b/recipes/glib-2.0/glib-2.0-2.28.0/60_wait-longer-for-threads-to-die.patch
-new file mode 100644
-index 0000000..02fe9ff
---- /dev/null
-+++ b/recipes/glib-2.0/glib-2.0-2.28.0/60_wait-longer-for-threads-to-die.patch
-@@ -0,0 +1,26 @@
-+--- glib/tests/threadpool-test.c.old	2008-02-12 06:11:21.000000000 +0100
-++++ glib/tests/threadpool-test.c	2008-02-12 06:11:52.000000000 +0100
-+@@ -5,8 +5,8 @@
-+ 
-+ #include <glib.h>
-+ 
-+-#define DEBUG_MSG(x)
-+-/* #define DEBUG_MSG(args) g_printerr args ; g_printerr ("\n");  */
-++/* #define DEBUG_MSG(x) */
-++#define DEBUG_MSG(args) g_printerr args ; g_printerr ("\n");
-+ 
-+ #define WAIT                5    /* seconds */
-+ #define MAX_THREADS         10
-+@@ -124,10 +124,10 @@
-+    DEBUG_MSG (("[unused] stopping unused threads"));
-+    g_thread_pool_stop_unused_threads ();
-+ 
-+-   DEBUG_MSG (("[unused] waiting ONE second for threads to die"));
-++   DEBUG_MSG (("[unused] waiting FIVE second for threads to die"));
-+ 
-+    /* Some time for threads to die. */
-+-   g_usleep (G_USEC_PER_SEC);
-++   g_usleep (5 * G_USEC_PER_SEC);
-+ 
-+    DEBUG_MSG (("[unused] stopped idle threads, %d remain, %d threads still exist",
-+ 	       g_thread_pool_get_num_unused_threads (),
-diff --git a/recipes/glib-2.0/glib-2.0-2.28.0/configure-ipv6.patch b/recipes/glib-2.0/glib-2.0-2.28.0/configure-ipv6.patch
-new file mode 100644
-index 0000000..548e0dc
---- /dev/null
-+++ b/recipes/glib-2.0/glib-2.0-2.28.0/configure-ipv6.patch
-@@ -0,0 +1,92 @@
-+From a619a217e3e5aa5345db631213aec5a3684a3001 Mon Sep 17 00:00:00 2001
-+Subject: [PATCH] autodetect in6addr_{any,loopback} availability
-+
-+Fixes linking error on systems which choose not to support ipv6:
-+./.libs/libgio-2.0.so: undefined reference to `in6addr_loopback'
-+./.libs/libgio-2.0.so: undefined reference to `in6addr_any'
-+
-+Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-+---
-+ configure.ac       |   31 +++++++++++++++++++++++++++++++
-+ gio/ginetaddress.c |   16 ++++++++++++++--
-+ 2 files changed, 45 insertions(+), 2 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 7114014..023db49 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -1019,6 +1019,37 @@ if test $glib_native_win32 = no; then
-+   AC_SUBST(LIBASYNCNS_LIBADD)
-+ fi
-+ 
-++dnl handle --disable-ipv6
-++AC_ARG_ENABLE(ipv6, AC_HELP_STRING([--disable-ipv6],[Disable IPv6 support]))
-++if test "$ipv6" != "no"; then
-++  AC_DEFINE(HAVE_IPV6, 1, [Define if IPv6 is available])
-++
-++  AC_MSG_CHECKING([for struct in6addr_any])
-++  AC_TRY_LINK(
-++   [#define IN_AUTOCONF
-++     #include <sys/types.h>
-++     #include <sys/socket.h>
-++     #include <netinet/in.h>],
-++   [struct in6_addr a = in6addr_any;
-++    return a.s6_addr[0];],
-++   [AC_MSG_RESULT(yes)
-++    AC_DEFINE(HAVE_IN6ADDR_ANY, 1, [Define if in6addr_any is available])],
-++   [AC_MSG_RESULT(no)]
-++  )
-++  AC_MSG_CHECKING([for struct in6addr_loopback])
-++  AC_TRY_LINK(
-++   [#define IN_AUTOCONF
-++     #include <sys/types.h>
-++     #include <sys/socket.h>
-++     #include <netinet/in.h>],
-++   [struct in6_addr a = in6addr_loopback;
-++    return a.s6_addr[0];],
-++   [AC_MSG_RESULT(yes)
-++    AC_DEFINE(HAVE_IN6ADDR_LOOPBACK, 1, [Define if in6addr_loopback is available])],
-++   [AC_MSG_RESULT(no)]
-++  )
-++fi
-++
-+ case $host in
-+   *-*-solaris* )
-+      AC_DEFINE(_XOPEN_SOURCE_EXTENDED, 1, Needed to get declarations for msg_control and msg_controllen on Solaris)
-+diff --git a/gio/ginetaddress.c b/gio/ginetaddress.c
-+index 0f67e4f..ed29be2 100644
-+--- a/gio/ginetaddress.c
-++++ b/gio/ginetaddress.c
-+@@ -484,7 +484,13 @@ g_inet_address_new_loopback (GSocketFamily family)
-+       return g_inet_address_new_from_bytes (addr, family);
-+     }
-+   else
-+-    return g_inet_address_new_from_bytes (in6addr_loopback.s6_addr, family);
-++    {
-++#ifdef HAVE_IN6ADDR_LOOPBACK
-++      return g_inet_address_new_from_bytes (in6addr_loopback.s6_addr, family);
-++#else
-++      return NULL;
-++#endif
-++    }
-+ }
-+ 
-+ /**
-+@@ -511,7 +517,13 @@ g_inet_address_new_any (GSocketFamily family)
-+       return g_inet_address_new_from_bytes (addr, family);
-+     }
-+   else
-+-    return g_inet_address_new_from_bytes (in6addr_any.s6_addr, family);
-++    {
-++#ifdef HAVE_IN6ADDR_ANY
-++      return g_inet_address_new_from_bytes (in6addr_any.s6_addr, family);
-++#else
-++      return NULL;
-++#endif
-++    }
-+ }
-+ 
-+ 
-+-- 
-+1.7.2.3
-+
-diff --git a/recipes/glib-2.0/glib-2.0-2.28.0/configure-libtool.patch b/recipes/glib-2.0/glib-2.0-2.28.0/configure-libtool.patch
-new file mode 100644
-index 0000000..e4e9d21
---- /dev/null
-+++ b/recipes/glib-2.0/glib-2.0-2.28.0/configure-libtool.patch
-@@ -0,0 +1,30 @@
-+diff -uNr glib-2.28.0.orig//configure.ac glib-2.28.0/configure.ac
-+--- glib-2.28.0.orig//configure.ac	2011-02-08 05:53:25.000000000 +0100
-++++ glib-2.28.0/configure.ac	2011-02-15 15:07:54.683976837 +0100
-+@@ -1378,7 +1378,7 @@
-+   G_MODULE_LDFLAGS=
-+ else
-+   export SED
-+-  G_MODULE_LDFLAGS=`(./libtool --config; echo eval echo \\$export_dynamic_flag_spec) | sh`
-++  G_MODULE_LDFLAGS=`($host_alias-libtool --config; echo eval echo \\$export_dynamic_flag_spec) | sh`
-+ fi
-+ dnl G_MODULE_IMPL= don't reset, so cmd-line can override
-+ G_MODULE_NEED_USCORE=0
-+@@ -1443,7 +1443,7 @@
-+ 	LDFLAGS="$LDFLAGS $G_MODULE_LDFLAGS"
-+ dnl *** check for OSF1/5.0 RTLD_GLOBAL brokenness
-+ 	echo "void glib_plugin_test(void) { }" > plugin.c
-+-	${SHELL} ./libtool --mode=compile ${CC} -shared \
-++	${SHELL} $host_alias-libtool --mode=compile ${CC} -shared \
-+ 		-export-dynamic -o plugin.o plugin.c 2>&1 >/dev/null
-+ 	AC_CACHE_CHECK([for RTLD_GLOBAL brokenness],
-+ 		glib_cv_rtldglobal_broken,[
-+@@ -1517,7 +1517,7 @@
-+ 
-+ AC_MSG_CHECKING(for the suffix of module shared libraries)
-+ export SED
-+-shrext_cmds=`./libtool --config | grep '^shrext_cmds='`
-++shrext_cmds=`$host_alias-libtool --config | grep '^shrext_cmds='`
-+ eval $shrext_cmds
-+ module=yes eval std_shrext=$shrext_cmds
-+ # chop the initial dot
-diff --git a/recipes/glib-2.0/glib-2.0-2.28.0/g_once_init_enter.patch b/recipes/glib-2.0/glib-2.0-2.28.0/g_once_init_enter.patch
-new file mode 100644
-index 0000000..58e4108
---- /dev/null
-+++ b/recipes/glib-2.0/glib-2.0-2.28.0/g_once_init_enter.patch
-@@ -0,0 +1,11 @@
-+--- glib-2.22.1/glib/gthread.h.orig	2009-10-13 22:53:23.000000000 +0200
-++++ glib-2.22.1/glib/gthread.h	2009-10-13 23:34:59.000000000 +0200
-+@@ -341,7 +341,7 @@
-+ G_INLINE_FUNC gboolean
-+ g_once_init_enter (volatile gsize *value_location)
-+ {
-+-  if G_LIKELY ((gpointer) g_atomic_pointer_get (value_location) != NULL)
-++  if G_LIKELY ((gpointer) g_atomic_pointer_get ((volatile gpointer *)value_location) != NULL)
-+     return FALSE;
-+   else
-+     return g_once_init_enter_impl (value_location);
-diff --git a/recipes/glib-2.0/glib-2.0-2.28.0/gatomic-proper-pointer-get-cast.patch b/recipes/glib-2.0/glib-2.0-2.28.0/gatomic-proper-pointer-get-cast.patch
-new file mode 100644
-index 0000000..5a8e37d
---- /dev/null
-+++ b/recipes/glib-2.0/glib-2.0-2.28.0/gatomic-proper-pointer-get-cast.patch
-@@ -0,0 +1,12 @@
-+diff -uri glib-2.26.1.orig/glib/gatomic.h glib-2.26.1/glib/gatomic.h
-+--- glib-2.26.1.orig/glib/gatomic.h	2010-07-11 05:56:45.000000000 +0200
-++++ glib-2.26.1/glib/gatomic.h	2010-12-01 16:20:33.140009635 +0100
-+@@ -70,7 +70,7 @@
-+   (g_atomic_int_set) ((volatile gint G_GNUC_MAY_ALIAS *) (volatile void *) (atomic), (newval)))
-+ # define g_atomic_pointer_get(atomic) \
-+  ((void) sizeof (gchar [sizeof (*(atomic)) == sizeof (gpointer) ? 1 : -1]), \
-+-  (g_atomic_pointer_get) ((volatile gpointer G_GNUC_MAY_ALIAS *) (volatile void *) (atomic)))
-++  (g_atomic_pointer_get) ((volatile gpointer G_GNUC_MAY_ALIAS *) (volatile void G_GNUC_MAY_ALIAS *) (atomic)))
-+ # define g_atomic_pointer_set(atomic, newval) \
-+  ((void) sizeof (gchar [sizeof (*(atomic)) == sizeof (gpointer) ? 1 : -1]), \
-+   (g_atomic_pointer_set) ((volatile gpointer G_GNUC_MAY_ALIAS *) (volatile void *) (atomic), (newval)))
-diff --git a/recipes/glib-2.0/glib-2.0-2.28.0/libglib2-fix-compilation-with-no-builtin-atomic.patch b/recipes/glib-2.0/glib-2.0-2.28.0/libglib2-fix-compilation-with-no-builtin-atomic.patch
-new file mode 100644
-index 0000000..39c0510
---- /dev/null
-+++ b/recipes/glib-2.0/glib-2.0-2.28.0/libglib2-fix-compilation-with-no-builtin-atomic.patch
-@@ -0,0 +1,25 @@
-+From 58096320ea0888c4fbbff318839017a4d2e82703 Mon Sep 17 00:00:00 2001
-+From: Lionel Landwerlin <llandwerlin@gmail.com>
-+Date: Sat, 6 Nov 2010 14:56:15 +0100
-+Subject: [PATCH] glib: fix compilation with no builtin atomic operations compilers
-+
-+Signed-off-by: Lionel Landwerlin <llandwerlin@gmail.com>
-+---
-+ glib/gatomic.c |    1 +
-+ 1 files changed, 1 insertions(+), 0 deletions(-)
-+
-+diff --git a/glib/gatomic.c b/glib/gatomic.c
-+index 845c866..01468ce 100644
-+--- a/glib/gatomic.c
-++++ b/glib/gatomic.c
-+@@ -881,6 +881,7 @@ g_atomic_pointer_compare_and_exchange (volatile gpointer G_GNUC_MAY_ALIAS *atomi
-+ #endif /* DEFINE_WITH_WIN32_INTERLOCKED */
-+ 
-+ #ifdef DEFINE_WITH_MUTEXES
-++# include "gthread.h"
-+ /* We have to use the slow, but safe locking method */
-+ static GMutex *g_atomic_mutex; 
-+ 
-+-- 
-+1.7.2.3
-+
-diff --git a/recipes/glib-2.0/glib-2.0_2.28.0.bb b/recipes/glib-2.0/glib-2.0_2.28.0.bb
-new file mode 100644
-index 0000000..efc09c3
---- /dev/null
-+++ b/recipes/glib-2.0/glib-2.0_2.28.0.bb
-@@ -0,0 +1,74 @@
-+DESCRIPTION = "GLib is a general-purpose utility library, \
-+which provides many useful data types, macros, \
-+type conversions, string utilities, file utilities, a main \
-+loop abstraction, and so on. It works on many \
-+UNIX-like platforms, Windows, OS/2 and BeOS."
-+LICENSE = "LGPLv2+"
-+SECTION = "libs"
-+PRIORITY = "optional"
-+DEPENDS = "glib-2.0-native gtk-doc zlib"
-+DEPENDS_virtclass-native = "gettext-native gtk-doc-native \
-+                            pkgconfig-native"
-+
-+SRC_URI = "\
-+  http://ftp.gnome.org/pub/GNOME/sources/glib/2.28/glib-${PV}.tar.bz2;name=archive \
-+  file://glibconfig-sysdefs.h \
-+  file://configure-libtool.patch \
-+  file://g_once_init_enter.patch \
-+  file://gatomic-proper-pointer-get-cast.patch \
-+  file://60_wait-longer-for-threads-to-die.patch \
-+  file://libglib2-fix-compilation-with-no-builtin-atomic.patch \
-+  file://configure-ipv6.patch \
-+"
-+
-+SRC_URI[archive.md5sum] = "51dbe36bc03a29a1f9bf6b74fb4a6926"
-+SRC_URI[archive.sha256sum] = "0605f538e5c022c237c97a34496979ba71d33c7b10b8d8edb84435498a651fb3"
-+
-+inherit autotools gettext
-+
-+S = "${WORKDIR}/glib-${PV}"
-+
-+EXTRA_OECONF = "--disable-debug "
-+
-+# Add and entry for your favourite arch if your (g)libc has a sane printf
-+EXTRA_OECONF_append_glibc_arm = "  --enable-included-printf=no "
-+
-+do_configure_prepend () {
-+	install -m 0644 ${WORKDIR}/glibconfig-sysdefs.h .
-+	sed -i -e "s:TEST_PROGS += gdbus-serialization::g"  ${S}/gio/tests/Makefile.am
-+}
-+
-+do_install_append() {
-+	sed -i -e s:${STAGING_BINDIR_NATIVE}:${bindir}:g ${D}${bindir}/glib-mkenums || true
-+}
-+
-+EXTRA_OECONF_virtclass-native = ""
-+
-+do_configure_prepend_virtclass-native() {
-+    if [ -e ${S}/${TARGET_SYS}-libtool ] ; then
-+                echo "${TARGET_SYS}-libtool already present"
-+    else
-+        cp ${STAGING_BINDIR}/${TARGET_SYS}-libtool ${S}
-+    fi
-+
-+}
-+
-+BBCLASSEXTEND = "native"
-+
-+PACKAGES =+ "gobject-2.0 gmodule-2.0 gthread-2.0 gio-2.0 glib-2.0-utils "
-+LEAD_SONAME = "libglib-2.0.*"
-+FILES_glib-2.0-utils = "${bindir}/*"
-+FILES_${PN} = "${libdir}/lib*so.* ${libdir}/gio/modules/*.so"
-+FILES_${PN}-dev += "${libdir}/glib-2.0 ${datadir}/glib-2.0 ${libdir}/gio/modules/*.la"
-+FILES_${PN}-dbg += "${libdir}/gio/modules/.debug"
-+FILES_gmodule-2.0 = "${libdir}/libgmodule-2.0.so.*"
-+FILES_gobject-2.0 = "${libdir}/libgobject-2.0.so.*"
-+FILES_gio-2.0 = "${libdir}/libgio-2.0.so.*"
-+FILES_gthread-2.0 = "${libdir}/libgthread-2.0.so.*"
-+
-+# Let various glib components end up in glib package
-+# for compatibility (with binary packages from Maemo).
-+FILES_gthread-2.0_chinook-compat = ""
-+FILES_gmodule-2.0_chinook-compat = ""
-+FILES_gobject-2.0_chinook-compat = ""
-+FILES_gio-2.0_chinook-compat = ""
--- 
-1.7.4.1
+We have been working forward to get our required changes into OE and
+currently following ones are queued up for merging. Those fix/improve
+the issues we found while working in our layer and have been in use
+for some time without problems.
 
+The following changes since commit 5f3bc5b423e00089e97c7a1657760f67bf20aa34=
+:
+
+  spojegui: bump SRCREV and remove upstream applied desktop file fixes
+for QA issues (2011-02-15 16:57:05 +0100)
+
+are available in the git repository at:
+  git://projetos.ossystems.com.br/git/users/otavio/org.openembedded.dev.git
+master
+
+Otavio Salvador (13):
+      xkeyboard-config: avoid recipe code duplication and depends on
+intltool-native
+      python-dbus: update to 0.83.2 and fix rpath to use absolute path
+      cups: drop unused versions
+      cups: merge cups.inc into cups 1.2.12 recipe
+      cups: merge cups14.inc into cups 1.4.4 recipe
+      cups: add textonly filter and split packages
+      libinih: add
+      cdparanoia (svn): use build variables to fix packaging when
+using empty prefix
+      sdk.bbclass: cache ${libdir} as ${target_libdir}
+      qt4-tools-sdk: use host include headers for dbus
+      cmake: drop 2.6.4 as it is not used by any distro
+      cmake: update from 2.8.2 to 2.8.3
+      distro/micro.conf: drop exec_prefix_native since it is unused
+
+ classes/sdk.bbclass                                |    1 +
+ conf/distro/micro.conf                             |    1 -
+ recipes/cdparanoia/cdparanoia_svn.bb               |    8 +-
+ .../fix_fortify_source_compilation.patch           |   32 -----
+ .../dont-run-cross-binaries.patch                  |    0
+ recipes/cmake/cmake-native_2.6.4.bb                |   10 --
+ ...cmake-native_2.8.2.bb =3D> cmake-native_2.8.3.bb} |    4 +-
+ .../{cmake-sdk_2.8.2.bb =3D> cmake-sdk_2.8.3.bb}     |    4 +-
+ recipes/cmake/cmake_2.6.4.bb                       |   11 --
+ recipes/cmake/{cmake_2.8.2.bb =3D> cmake_2.8.3.bb}   |    6 +-
+ recipes/cups/cups-1.1.23/strftime_fix.patch        |   26 ----
+ .../cups/cups-1.3.8/use_echo_only_in_init.patch    |   11 --
+ recipes/cups/cups-1.4.3/configure.patch            |  117 ----------------=
+--
+ recipes/cups/cups-1.4.3/skip_tools.patch           |   51 --------
+ .../cups/cups-1.4.3/use_echo_only_in_init.patch    |   11 --
+ recipes/cups/cups-1.4.4/text.convs                 |    6 +
+ recipes/cups/cups-1.4.4/textonly                   |  124 ++++++++++++++++=
+++++
+ recipes/cups/cups-1.4.4/textonly.ppd               |   47 ++++++++
+ recipes/cups/cups.inc                              |   89 --------------
+ recipes/cups/cups14.inc                            |   83 -------------
+ recipes/cups/cups_1.1.23.bb                        |   51 --------
+ recipes/cups/cups_1.2.12.bb                        |   92 ++++++++++++++-
+ recipes/cups/cups_1.2.7.bb                         |   80 -------------
+ recipes/cups/cups_1.3.8.bb                         |   11 --
+ recipes/cups/cups_1.4.3.bb                         |   15 ---
+ recipes/cups/cups_1.4.4.bb                         |  122 ++++++++++++++++=
++--
+ recipes/libinih/libinih_git.bb                     |   14 +++
+ ...python-dbus_0.83.0.bb =3D> python-dbus_0.83.2.bb} |   10 +-
+ recipes/qt4/qt4-tools-sdk.inc                      |    8 +-
+ recipes/xkeyboard-config/xkeyboard-config.inc      |   18 +++
+ recipes/xkeyboard-config/xkeyboard-config_1.4.bb   |   18 +---
+ recipes/xkeyboard-config/xkeyboard-config_1.8.bb   |   18 +---
+ recipes/xkeyboard-config/xkeyboard-config_git.bb   |   17 +---
+ 33 files changed, 441 insertions(+), 675 deletions(-)
+ delete mode 100644
+recipes/cmake/cmake-2.6.4/fix_fortify_source_compilation.patch
+ rename recipes/cmake/{cmake-2.8.2 =3D>
+cmake-2.8.3}/dont-run-cross-binaries.patch (100%)
+ delete mode 100644 recipes/cmake/cmake-native_2.6.4.bb
+ rename recipes/cmake/{cmake-native_2.8.2.bb =3D> cmake-native_2.8.3.bb} (5=
+6%)
+ rename recipes/cmake/{cmake-sdk_2.8.2.bb =3D> cmake-sdk_2.8.3.bb} (56%)
+ delete mode 100644 recipes/cmake/cmake_2.6.4.bb
+ rename recipes/cmake/{cmake_2.8.2.bb =3D> cmake_2.8.3.bb} (91%)
+ delete mode 100644 recipes/cups/cups-1.1.23/strftime_fix.patch
+ delete mode 100644 recipes/cups/cups-1.3.8/use_echo_only_in_init.patch
+ delete mode 100644 recipes/cups/cups-1.4.3/configure.patch
+ delete mode 100644 recipes/cups/cups-1.4.3/skip_tools.patch
+ delete mode 100644 recipes/cups/cups-1.4.3/use_echo_only_in_init.patch
+ create mode 100644 recipes/cups/cups-1.4.4/text.convs
+ create mode 100644 recipes/cups/cups-1.4.4/textonly
+ create mode 100644 recipes/cups/cups-1.4.4/textonly.ppd
+ delete mode 100644 recipes/cups/cups.inc
+ delete mode 100644 recipes/cups/cups14.inc
+ delete mode 100644 recipes/cups/cups_1.1.23.bb
+ delete mode 100644 recipes/cups/cups_1.2.7.bb
+ delete mode 100644 recipes/cups/cups_1.3.8.bb
+ delete mode 100644 recipes/cups/cups_1.4.3.bb
+ create mode 100644 recipes/libinih/libinih_git.bb
+ rename recipes/python/{python-dbus_0.83.0.bb =3D> python-dbus_0.83.2.bb} (=
+71%)
+ create mode 100644 recipes/xkeyboard-config/xkeyboard-config.inc
+
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
