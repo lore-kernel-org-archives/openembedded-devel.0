@@ -1,35 +1,36 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mwatkins.ti@gmail.com>) id 1PpQvY-0004hL-Mg
+	(envelope-from <cliff.brake@gmail.com>) id 1PpRrm-0003z9-EH
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Feb 2011 20:51:12 +0100
-Received: by ywi6 with SMTP id 6so269411ywi.6
+	Tue, 15 Feb 2011 21:51:22 +0100
+Received: by wwi17 with SMTP id 17so589654wwi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Feb 2011 11:50:01 -0800 (PST)
+	Tue, 15 Feb 2011 12:50:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=NNvuk059FVOFrhq4Ndx/GtBdYPVr5nj3NSHTFjFLsH8=;
-	b=dQ1MFMk8ms232UuoR0k9ruvkY65y9FMUZneGibl8/FMG7K+o/MMUcDs9YnPkrh+p5W
-	u6fIjMO52xkTtGOVyY9Z9USK8ixseIc49G4VfthiBNsfYZ1YJ/LyKOPeMitKtVqjYZLg
-	/5UsAiWkYMh9XdeiyRqg75ZbrGsD7uzYqPRCk=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=RHa03b8dTh/5nR0nH9GaWvKxgHRDnifjOL8geSFWUb8=;
+	b=erVo2e9DKlbTMFbNKn9vKBxoj2ijaYnHLgcrzAlapFHXqkEVdx9kXBBiOwgTL4c0bF
+	YlPppMId6ITiyD9E6uRXJQJNrZIVc8CVzdkWZEGMDwiGLx59kDvOskuImhVr9j5tHRj9
+	WIcaDTz6REOmgAp4H/F4r5Ew75Rgp3JBTFVJM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=Z17yRgM7K1esXfKia1gIX1RjWVBpq8qR/TP9n+1FlUkGm39ctHtgPplSqyyVGmkEG0
-	G/KasUGdTpA3hfhtVOQyOtfCXpr2ZekBEVTGCgWdGErbcKZWWifsBGWDpA5k6qb740SI
-	IX5f3IS0pvW1AhHkWXqgYPPKoFa/qZosunUic=
-Received: by 10.150.198.3 with SMTP id v3mr6516280ybf.316.1297799400434;
-	Tue, 15 Feb 2011 11:50:00 -0800 (PST)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id g2sm2563522yhc.28.2011.02.15.11.49.59
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 15 Feb 2011 11:49:59 -0800 (PST)
-From: Melissa Watkins <mwatkins.ti@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=jYR0DAMIa4KuOJVpbdHcbTJpeyGmTaDmR4X5S/ikOUgvxDTh8RWSAtJzVrnA22O20+
+	wbZrAXsPhAwuXo0T+Rp4lmz7kK/DdyDkZNm4zROVo3upe3pXu+384YBy4wRgVTouCs1t
+	kOZGYF4I/bKgUdXkKQbCPUdbewPGWTwkO/jzk=
+MIME-Version: 1.0
+Received: by 10.216.3.200 with SMTP id 50mr1182723weh.34.1297803011385; Tue,
+	15 Feb 2011 12:50:11 -0800 (PST)
+Received: by 10.216.254.137 with HTTP; Tue, 15 Feb 2011 12:50:10 -0800 (PST)
+In-Reply-To: <4D5953C5.3080605@mentor.com>
+References: <4D51566B.9060603@mentor.com> <4D516F8B.4090703@gmail.com>
+	<4D5953C5.3080605@mentor.com>
+Date: Tue, 15 Feb 2011 15:50:10 -0500
+Message-ID: <AANLkTik8Wpc9ejLHmYoe4q6QD0K9Wot9REeGXW=g2eOS@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Feb 2011 10:20:36 -0600
-Message-Id: <1297786836-18313-1-git-send-email-m-watkins@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: Melissa Watkins <m-watkins@ti.com>
-Subject: [PATCH] ti-pru-sw: Update SRC_REV to 24
+Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,75 +44,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Feb 2011 19:51:12 -0000
+X-List-Received-Date: Tue, 15 Feb 2011 20:51:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-For the ti-pru-sw-examples, ti-pru-sw-app-loader, ti-pru-sw-edma-driver,
-ti-pru-sw-edma-library:
+On Mon, Feb 14, 2011 at 11:09 AM, Tom Rini <tom_rini@mentor.com> wrote:
+> qt4e-demo-image fails in both cases due to the image not being happy with
+> qt4-4.6.x and only 4.7.x (see my emails to the list the other week).
 
-* Update SRC_REV to 24
+qt 4.7.1 demo images built fine for me on the release branch.  Does
+angstrom want to consider using 4.7.1 for the release?  Does anyone
+still require 4.6.x?
 
-Signed-off-by: Melissa Watkins <m-watkins@ti.com>
----
- recipes/ti/ti-pru-sw-app-loader_1.00.00.bb   |    2 +-
- recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb  |    2 +-
- recipes/ti/ti-pru-sw-edma-library_1.00.00.bb |    2 +-
- recipes/ti/ti-pru-sw-examples_1.00.00.bb     |    2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+Thanks,
+Cliff
 
-diff --git a/recipes/ti/ti-pru-sw-app-loader_1.00.00.bb b/recipes/ti/ti-pru-sw-app-loader_1.00.00.bb
-index 142c1bc..394c3ab 100644
---- a/recipes/ti/ti-pru-sw-app-loader_1.00.00.bb
-+++ b/recipes/ti/ti-pru-sw-app-loader_1.00.00.bb
-@@ -7,7 +7,7 @@ COMPATIBLE_MACHINE = "omapl138"
- 
- SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
- 
--SRCREV = "23"
-+SRCREV = "24"
- S = "${WORKDIR}/trunk/app_loader"
- 
- TARGET_CC_ARCH += "${LDFLAGS}"
-diff --git a/recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb b/recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb
-index 1d3676f..bb8fca2 100644
---- a/recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb
-+++ b/recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb
-@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "omapl138"
- 
- SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
- 
--SRCREV = "23"
-+SRCREV = "24"
- S = "${WORKDIR}/trunk/peripheral_lib/edma_driver/module"
- 
- PACKAGE_STRIP = "no"
-diff --git a/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb b/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb
-index 02961c7..1a03597 100644
---- a/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb
-+++ b/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb
-@@ -10,7 +10,7 @@ COMPATIBLE_MACHINE = "omapl138"
- 
- SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
- 
--SRCREV = "23"
-+SRCREV = "24"
- S = "${WORKDIR}/trunk/peripheral_lib/edma_driver/interface"
- 
- do_compile () {
-diff --git a/recipes/ti/ti-pru-sw-examples_1.00.00.bb b/recipes/ti/ti-pru-sw-examples_1.00.00.bb
-index d53a288..f5fa8d5 100644
---- a/recipes/ti/ti-pru-sw-examples_1.00.00.bb
-+++ b/recipes/ti/ti-pru-sw-examples_1.00.00.bb
-@@ -9,7 +9,7 @@ COMPATIBLE_MACHINE = "omapl138"
- 
- SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
- 
--SRCREV = "23"
-+SRCREV = "24"
- S = "${WORKDIR}/trunk"
- 
- do_compile () {
 -- 
-1.7.0.4
-
+=================
+http://bec-systems.com
 
 
