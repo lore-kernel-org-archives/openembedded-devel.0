@@ -1,21 +1,40 @@
-Received: from mrqout3.tiscali.it ([195.130.225.13])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <l.bolognini@tiscali.it>) id 1PpGhF-000698-1h
+	(envelope-from <martin.jansa@gmail.com>) id 1PpH1U-0006jl-8F
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Feb 2011 09:55:45 +0100
-Received: from [10.39.115.21] by mrq-3 with esmtp (Exim)
-	id 1PpGg7-0006Aq-Bg; Tue, 15 Feb 2011 09:54:35 +0100
-Received: from ps-wm4 (10.39.75.204) by mail-1.mail.tiscali.sys (8.5.134)
-	id 4D3EB05B0086D9AF; Tue, 15 Feb 2011 09:51:44 +0100
-Message-ID: <1802836.185231297759904253.JavaMail.defaultUser@defaultHost>
-Date: Tue, 15 Feb 2011 09:51:44 +0100 (CET)
-From: Luca Bolognini <l.bolognini@tiscali.it>
-To: Arago Mailing List <arago-devel@gforge.ti.com>, 
-	Open Embedded Mailing List <openembedded-devel@lists.openembedded.org>
+	Tue, 15 Feb 2011 10:16:40 +0100
+Received: by bwz10 with SMTP id 10so223035bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Feb 2011 01:15:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=lUD0MZTohjrFkXRbcMpOdKhpwzUtniCd68fvWSm+0vQ=;
+	b=n7qrdfPU7QUjJO9CKmBcrhLSblKrYx9DKgV7LPDUs4Bm7Pw4XN4ZLkerjUns+a29qH
+	+ehRlcUA7+OfJZ13kCdAs4tgx9pUTZMnUkf3lXmKoQBvyGHdoCteZfhxuBohellFb3fO
+	gvutEDjYWlpOsMhvDDg5JGkbiDLWRX+LhcFBk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=JXpYxs5DPeS1QatiAGBxEZ1c01wkaLJs3GJOMfxVaC3J0R8x25gmJeYyME/Dmqrg0x
+	wksvhlaRgnOfG9+4K1wkkuqjUOhWzp/IpOnrT9I+OJf0UwRdfFtf5QqOr70arKQcqya0
+	78UBdOfR9YiU4f0VxgIWM6kpIM1QtZTIU/NsY=
+Received: by 10.204.75.142 with SMTP id y14mr1660130bkj.114.1297761328060;
+	Tue, 15 Feb 2011 01:15:28 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id q18sm2426407bka.3.2011.02.15.01.15.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 15 Feb 2011 01:15:26 -0800 (PST)
+Date: Tue, 15 Feb 2011 10:15:17 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110215091517.GD8619@localhost.jama.net>
+References: <20110214102232.GB8619@localhost.jama.net>
+	<1297697243.2178.97.camel@phil-desktop>
 MIME-Version: 1.0
-xOriginalSenderIP: 78.6.111.196
-Cc: lamiaposta71@gmail.com
-Subject: apache2+php5 on Arago
+In-Reply-To: <1297697243.2178.97.camel@phil-desktop>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: debian.bbclass issues when some package is substring of another
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,55 +48,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Feb 2011 08:55:45 -0000
-Content-Type: text/plain;charset="UTF-8"
+X-List-Received-Date: Tue, 15 Feb 2011 09:16:40 -0000
+X-Groupsio-MsgNum: 29221
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="n/aVsWSeQ4JHkrmm"
+Content-Disposition: inline
+
+--n/aVsWSeQ4JHkrmm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Yesterday I had an exchange of emails with Raffaele Recalcati, it was=20
-in italian then I'll try to resume briefly so that everyone can read.
-I=20
-was asking Raffaele (by the way, thank you for your prompt reply) if he=20
-had some news about the Apache2+php5 segmentation faults that occurred=20
-in Arago distros.
-I'm currently developing for beagleboard and TI816x-
-evm.
-Raffaele pointed out that he had investigated for some time the=20
-crash in Arago=20
-( https://gforge.ti.com/gf/project/arago/mailman/?
-_forum_action=3DForumMessageBrowse&thread_id=3D3792&action=3DListThreads&ma=
-ilman_id=3D39=20
-)
-but at length he had chosen to compile the two packages with a "pure"=20
-OE environment, without Arago overlay.
-With this choice, he said that=20
-Apache2 is able to open php pages without problems.
-It seems rather=20
-strange, as recipes are more or less the same (Raffaele added some=20
-customizations but they honestly seem not relevant) and tar.gz source=20
-files are identical.
-What can Arago have introduced to produces such=20
-troubles? It's difficult to say.
-It's quite annoying to use Arago for=20
-all packages of my custom filesystem and then switch to OE only for=20
-apache2 and modphp; all my scripting stuff is concerned with Arago,=20
-it's would be great to have everything confined inside Arago layer.
+On Mon, Feb 14, 2011 at 03:27:23PM +0000, Phil Blundell wrote:
+> On Mon, 2011-02-14 at 11:22 +0100, Martin Jansa wrote:
+> > So can someone explain why we need that 'newpkg =3D pkg.replace(orig_pk=
+g, devname, 1)' in else?
+>=20
+> If that line was removed altogether then the -dev packages (and -doc,
+> -bin, ...) would stop being renamed, which wouldn't be a very good
+> thing.  In other words, you'd get libncurses5 but ncurses-dev (not
+> libncurses5-dev) etc.
 
-Denys told he would have postponed some further investigations on the=20
-topic, maybe now he has some good news?
-Now however I'm going to make=20
-the same tests of Raffaele, that is have the two packages compiled with=20
-"pure" OE; in the meantime, if someone has any ideas...
-Thank you,
-bye
+That's not really what you get currently, but ok I see your point in keeping
+that "else".
 
+Currently you would get libncurses-dev without 5, because it replaces
+with devname not pkgname.
 
-Luca
+>=20
+> However you're right that the logic as it stands does look fairly
+> broken.  Two ways of fixing it come to mind:
+>=20
+> a) have it explicitly search for (and rename) [orig_pkg]-dev,
+> [orig_pkg]-doc etc, and remove the catch-all altogether; or
+>=20
+> b) switch to a two-phase approach where it first renames all the
+> libraries themselves, then uses some heuristic to match the remaining
+> packages against the libraries and apply an appropriate renaming to
+> them.  Probably just matching on longest substring would be good enough
+> here.
+>=20
+> I think (b) is probably a better solution although it would be a little
+> harder to implement.
 
+I'll try (b), but imho you have same problem there (if you have
+-dev/-dbg for such package names and they are in wrong order, even worse ie:
+PKG_ncurses-libncurses-dev, libncurses-dev    <=3D ok
+PKG_ncurses-libncursesw-dev, libncursesw-dev  <=3D works only because
+  ncurses-libncursesw is mapped to libncursesw which is the same like
+  s/ncurses-libncurses/libncurses
 
+but if you imagine stranger situation with SONAMES which are not
+substrings of each other in package names which are substrings, like:
+ncurses-libncurses > libncurses
+ncurses-libncursesw > libwidecurses
 
-Supera i limiti: raddoppia la velocit=C3=A0 da 10 a 20 Mega!   Risparmia co=
-n Tutto Incluso: telefono + adsl 20 mega a soli 29,95 =E2=82=AC al mese per=
- due anni!  SCONTO DI 240 EURO!  http://abbonati.tiscali.it/telefono-adsl/p=
-rodotti/tc/tuttoincluso/?WT.mc_id=3D01fw 
+then still
+PKG_ncurses-libncurses-dev, libncurses-dev    <=3D ok
+PKG_ncurses-libncursesw-dev, libncursesw-dev  <=3D bad, because libwidecurs=
+es-dev was expected=20
 
+and later you won't find ncurses-libncursesw-dev to replace
+ncurses-libncursesw with libwidecurses
 
+Regards,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--n/aVsWSeQ4JHkrmm
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
+
+iEYEARECAAYFAk1aRCQACgkQN1Ujt2V2gByglACfaLYPWVAPVXPtoUz27McrTjJy
+KXoAn00VDk7wjSQnAtFPx5oDoNAoHFQ2
+=pH65
+-----END PGP SIGNATURE-----
+
+--n/aVsWSeQ4JHkrmm--
