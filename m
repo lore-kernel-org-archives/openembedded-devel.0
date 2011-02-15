@@ -1,36 +1,36 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PpSHt-0003Va-K3
+	(envelope-from <raj.khem@gmail.com>) id 1PpSIW-0003WA-0y
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Feb 2011 22:18:21 +0100
-Received: by fxm17 with SMTP id 17so620396fxm.6
+	Tue, 15 Feb 2011 22:19:00 +0100
+Received: by fxm17 with SMTP id 17so620907fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Feb 2011 13:17:11 -0800 (PST)
+	Tue, 15 Feb 2011 13:17:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=fvoMF9Te255Tj91OmsZrDehfMdrFRlXQNnBgj1O+lyU=;
-	b=NJ9D6XVTGr6DlAjnthoTHQS9t2juGjGRkLJcTd9xaKas5XyDoyl/dx+HA9QK41sUZ0
-	RYnGbkqpRqPHZ09+bdS+9rEupKvNCsz7Nmv2/dQ4P59gp9KE9zbov4ARrU29qYZGypJW
-	ntsIJ/mmJ61TZzaUkLynZeBVYdf72dgnLUVJc=
+	bh=9Z6ojMVP3c68DoKct+rYMFGRvFnwx5P4VI8ZIHHMhis=;
+	b=eUwRqCIT9lfOyYvhus96sYjIEeV+MpeNm1YT/gEecGl1o8M76LM4KSV10eey8lGsWJ
+	S37L70ObZ7wpxvWLDV9Sz4L6U929NHqPDFc5552+MeVqE46nFEaPGQtrc2HpcXdxvoJk
+	H+XZYdqEP/qXmwf+0WusKO1QYNS3vP60aYeFk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=OL7h/bKYlqiWWAnOKFgnprDn0lCxUfa0QTu8BS+I4zCF4co+e3j6qGKl7EuVMi+aAQ
-	WG5FBAtFBUNhGE+sZCz1opim32qpn1AnwVynXXrhcxmc8dkm/UtOLUo4w2P3lDpTm5qa
-	r+/kOaiCdfrbrzUzMzXCvuQ38IgTt6ScS0HKY=
-Received: by 10.223.83.7 with SMTP id d7mr4002482fal.82.1297804631087; Tue, 15
-	Feb 2011 13:17:11 -0800 (PST)
+	b=Vq3/wHuiMU1X47cvKXTyp3jyHz4bcWrJHaijLtt9RAGwKtqGrGIIYrEa68QFH8k0x1
+	c07HsjjG4tVt4kYxtjC5a3Uzy/VdFCLv9ucm1dQQN5B+Nr/vKzKwWui4bOLNB0tNItNw
+	eRJg8gSLyd5PxVXC+37v3BNt75wzmW4Ymfm4s=
+Received: by 10.223.79.74 with SMTP id o10mr1116896fak.63.1297804668471; Tue,
+	15 Feb 2011 13:17:48 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.223.66.22 with HTTP; Tue, 15 Feb 2011 13:16:38 -0800 (PST)
-In-Reply-To: <1297803782-8395-2-git-send-email-Martin.Jansa@gmail.com>
+Received: by 10.223.66.22 with HTTP; Tue, 15 Feb 2011 13:17:25 -0800 (PST)
+In-Reply-To: <1297803782-8395-3-git-send-email-Martin.Jansa@gmail.com>
 References: <1297803782-8395-1-git-send-email-Martin.Jansa@gmail.com>
-	<1297803782-8395-2-git-send-email-Martin.Jansa@gmail.com>
+	<1297803782-8395-3-git-send-email-Martin.Jansa@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 15 Feb 2011 13:16:38 -0800
-Message-ID: <AANLkTi=it6Wcu_=WPSZHm5YpijEUu8kBuSMvR66h2WMk@mail.gmail.com>
+Date: Tue, 15 Feb 2011 13:17:25 -0800
+Message-ID: <AANLkTinEtCdGgO1m=MzzfFvCgdNSwoO7biLRkLtHKgc6@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/4] SHR: drop P_V for glib-2.0 (upgrades from 2.26.1 to 2.28.0)
+Subject: Re: [PATCH 3/4] libsoup-2.4: add 2.33.6 version needed for newer webkit-efl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,35 +44,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Feb 2011 21:18:21 -0000
+X-List-Received-Date: Tue, 15 Feb 2011 21:19:00 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 15, 2011 at 1:02 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+On Tue, Feb 15, 2011 at 1:03 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
 e:
 > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+Can you also fix license field while at it
 
 Acked-by: Khem Raj <raj.khem@gmail.com>
 
 > ---
-> =C2=A0conf/distro/include/preferred-shr-versions.inc | =C2=A0 =C2=A02 --
-> =C2=A01 files changed, 0 insertions(+), 2 deletions(-)
+> =C2=A0recipes/gnome/libsoup-2.4_2.33.6.bb | =C2=A0 18 ++++++++++++++++++
+> =C2=A01 files changed, 18 insertions(+), 0 deletions(-)
+> =C2=A0create mode 100644 recipes/gnome/libsoup-2.4_2.33.6.bb
 >
-> diff --git a/conf/distro/include/preferred-shr-versions.inc b/conf/distro=
-/include/preferred-shr-versions.inc
-> index 206d270..c0099b8 100644
-> --- a/conf/distro/include/preferred-shr-versions.inc
-> +++ b/conf/distro/include/preferred-shr-versions.inc
-> @@ -21,8 +21,6 @@ PREFERRED_VERSION_xserver-common =3D "1.33"
-> =C2=A0PREFERRED_VERSION_xserver-nodm-init =3D "2.0"
-> =C2=A0PREFERRED_VERSION_hal =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D "0.5.1=
-3"
-> =C2=A0PREFERRED_VERSION_wpa-supplicant =3D "0.6.9"
-> -PREFERRED_VERSION_glib-2.0 =C2=A0 =C2=A0 =C2=A0=3D "2.26.1"
-> -PREFERRED_VERSION_glib-2.0-native =3D "2.26.1"
-> =C2=A0PREFERRED_VERSION_openssl =3D "1.0.0c"
-> =C2=A0PREFERRED_VERSION_openssl-native =3D "1.0.0c"
-> =C2=A0PREFERRED_VERSION_perl =3D "5.10.1"
+> diff --git a/recipes/gnome/libsoup-2.4_2.33.6.bb b/recipes/gnome/libsoup-=
+2.4_2.33.6.bb
+> new file mode 100644
+> index 0000000..e2dcb36
+> --- /dev/null
+> +++ b/recipes/gnome/libsoup-2.4_2.33.6.bb
+> @@ -0,0 +1,18 @@
+> +DESCRIPTION =3D "An HTTP library implementation in C"
+> +SECTION =3D "x11/gnome/libs"
+> +LICENSE =3D "GPL"
+> +DEPENDS =3D "libproxy glib-2.0 gnutls libxml2 sqlite3 gnome-keyring"
+> +
+> +inherit gnome
+> +
+> +SRC_URI =3D "${GNOME_MIRROR}/libsoup/${@gnome_verdir("${PV}")}/libsoup-$=
+{PV}.tar.bz2;name=3Dlibsoup"
+> +SRC_URI[libsoup.md5sum] =3D "3a7219057d289dd7dcdd67681d27eebe"
+> +SRC_URI[libsoup.sha256sum] =3D "988f7897fe125a77a5946b2fd6d47d7374fd94a1=
+406e810482cfff6a52a6a923"
+> +
+> +S =3D "${WORKDIR}/libsoup-${PV}"
+> +
+> +PACKAGES =3D+ "libsoup-gnome"
+> +FILES_libsoup-gnome =3D "${libdir}/libsoup-gnome*.so.*"
+> +FILES_${PN} =3D "${libdir}/libsoup-2*.so.*"
+> +FILES_${PN}-dev =3D "${includedir}/ ${libdir}/"
+> +FILES_${PN}-doc =3D "${datadir}/"
 > --
 > 1.7.4.1
 >
