@@ -1,33 +1,32 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from einhorn.in-berlin.de ([192.109.42.8] ident=root)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PpEil-0005zh-RZ
+	(envelope-from <sledz@dresearch.de>) id 1PpFiY-00073i-9m
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Feb 2011 07:49:12 +0100
-Received: by iwn8 with SMTP id 8so5547929iwn.6
+	Tue, 15 Feb 2011 08:53:02 +0100
+X-Envelope-From: sledz@dresearch.de
+X-Envelope-To: <openembedded-devel@lists.openembedded.org>
+Received: from mobil-400-586.intern.dresearch.de
+	(p57A2239F.dip0.t-ipconnect.de [87.162.35.159])
+	(authenticated bits=0)
+	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
+	p1F7psTu013826
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Feb 2011 22:48:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=0EK7iZQ0ya1sUd8pprhtLgNY9mxBn/b3tPCMMYr22SM=;
-	b=WgIT/orl3ibETGiLtVKHtXZPFHO6UjIc9kG/ao9hc21ZQvMdHsOb/x9a9S895+E86Y
-	gPT0awS31vzApLg7cBowz4wxgtfHNnTTtAoX6ND1B7kk4jt+xosx+fedfUMZ5QZonPud
-	KiJxmpFM9liB+ZmzJsBoTNbypI9JBhady3FQ8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=ZoWxwZzzXJn9EvO+7L/oYivwtDFbAn+pSam+gC4G80htWUfOTlvyUYFXhnPtzZ839Y
-	DyTx/5cSr4K5jKmcgh/eFIkBaXdeV8v2SOWcRhUSrYgMdrcUqxWRD1muHBZpuPL3CDll
-	g+ffKXB44RfGIXh6yL5zkV50LlPjx8qjGCu3M=
+	Tue, 15 Feb 2011 08:51:54 +0100
+Received: from mobil-400-586.intern.dresearch.de (localhost [IPv6:::1])
+	by mobil-400-586.intern.dresearch.de (Postfix) with ESMTP id 3BFA637B31
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Feb 2011 08:51:53 +0100 (CET)
+Message-ID: <4D5A3098.8060102@dresearch.de>
+Date: Tue, 15 Feb 2011 08:51:52 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.16) Gecko/20101125 SUSE/3.0.11 Lightning/1.0b1
+	Thunderbird/3.0.11
 MIME-Version: 1.0
-Received: by 10.42.180.131 with SMTP id bu3mr6119127icb.366.1297752481484;
-	Mon, 14 Feb 2011 22:48:01 -0800 (PST)
-Received: by 10.231.30.73 with HTTP; Mon, 14 Feb 2011 22:48:01 -0800 (PST)
-Date: Tue, 15 Feb 2011 07:48:01 +0100
-Message-ID: <AANLkTi=bPrL+J+sA6wR+BEK9GuLxbMJRohVAPie-_u_i@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: git head: build of rpm-native fails
+X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
+Subject: do_rootfs failure (angstrom-x-image testing-release-2011.03)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,42 +40,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Feb 2011 06:49:12 -0000
+X-List-Received-Date: Tue, 15 Feb 2011 07:53:02 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Hi,
+| Collected errors:
+|  * check_data_file_clashes: Package xfce4-notifyd wants to install file /var/lib/jenkins/jobs/OE-testing/workspace/tmp/rootfs/angstrom-x-image/usr/share/dbus-1/services/org.freedesktop.Notifications.service
+| 	But that file is already provided by package  * notification-daemon
+|  * opkg_install_cmd: Cannot install package task-xfce46-extras.
+|  * resolve_conffiles: Existing conffile /var/lib/jenkins/jobs/OE-testing/workspace/tmp/rootfs/angstrom-x-image/etc/device_table is different from the conffile in the new package. The new conffile will be placed at /var/lib/jenkins/jobs/OE-testing/workspace/tmp/rootfs/angstrom-x-image/etc/device_table-opkg.
+NOTE: package angstrom-x-image-1.0-r0: task do_rootfs: Failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /var/lib/jenkins/jobs/OE-testing/workspace/openembedded/recipes/images/angstrom-x-image.bb do_rootfs failed
 
-Yesterday I tried whether I could cross compile a helloworld.rpm to
-try on a fedora-arm box, but I failed in building rpm-native.
-This issue was verified by Jay. His log:
-http://tinderbox.openembedded.net/public/logs/task/25555153.txt
-
-apparently this is the failing part is:
-
-file -C -m ./magic.mime
-./magic.mime, 187: Warning: string extension `B' invalid
-./magic.mime, 401: Warning: string extension `B' invalid
-./magic.mime, 618: Warning: string extension `B' invalid
-./magic.mime, 623: Warning: string extension `B' invalid
-./magic.mime, 627: Warning: string extension `B' invalid
-./magic.mime, 628: Warning: string extension `B' invalid
-./magic.mime, 672: Warning: no need to escape `#'
-./magic.mime, 674: Warning: no need to escape `#'
-file: could not find any magic files!
-make[4]: *** [magic.mime.mgc] =C3=90=C5=BE=C3=91=CB=86=C3=90=C2=B8=C3=90=C2=
-=B1=C3=90=C2=BA=C3=90=C2=B0 1
-make[4]: *** =C3=90=C5=BE=C3=90=C2=B6=C3=90=C2=B8=C3=90=C2=B4=C3=90=C2=B0=
-=C3=90=C2=BD=C3=90=C2=B8=C3=90=C2=B5 =C3=90=C2=B7=C3=90=C2=B0=C3=90=C2=B2=
-=C3=90=C2=B5=C3=91=E2=82=AC=C3=91=CB=86=C3=90=C2=B5=C3=90=C2=BD=C3=90=C2=B8=
-=C3=91=C2=8F =C3=90=C2=B7=C3=90=C2=B0=C3=90=C2=B4=C3=90=C2=B0=C3=90=C2=BD=
-=C3=90=C2=B8=C3=90=C2=B9..
-
-I tried the command in a devshell and there it also fails, but I have
-not really an idea what is wrong (and I don't know too much about RPM
-anyway)
-Suggestions? Fixes ?
-
-Frans
+Build Configuration:
+BB_VERSION        = "1.10.2"
+METADATA_BRANCH   = "testing-release-2011.03"
+METADATA_REVISION = "af8541c"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "hipox"
+DISTRO            = "angstrom"
+DISTRO_VERSION    = "2010.7-test-20110214"
+TARGET_FPU        = "soft"
 
 
