@@ -1,39 +1,37 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PpTv8-0000Pz-He
+	(envelope-from <gdalex@gmail.com>) id 1PpUfe-00023C-WE
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Feb 2011 00:02:58 +0100
-Received: by fxm17 with SMTP id 17so721316fxm.6
+	Wed, 16 Feb 2011 00:51:04 +0100
+Received: by bwz10 with SMTP id 10so1013959bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Feb 2011 15:01:44 -0800 (PST)
+	Tue, 15 Feb 2011 15:49:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=GS8+1wxfZ7Ux7LyQwkHaLSPnmtHRF94qDjQgZMPKs5E=;
-	b=UvwYbTC1REtgUwJn75H2YORLa3zNPcxDUh4GEw6fK9tzV7L9kUd4FVAEsZs4NJve2A
-	0Ru1nhVCuwKYAmvQl9WEQGsyrAneRdXB+RenaR43pBAWY/rbYBWbq6GA4+r9Zb2tR468
-	0KjiEQ3+RWYYHHPseOoTdEYJaLROaKFAdi1wE=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=/JWwU/rQG9TEJSDAq/mdZlKXjSk92jp1TUfqAPwtqrE=;
+	b=MvrtAU+MEKXPR267o1ugWuuwcpY/aRwFWrfPutE6aHqAEaQhHmHXxSrY5rdBH7ml0O
+	rMSfLL5mr9O2NMrx6Ez1mcWjoz4KHTxYYXmo/NRGbRgic0JnmBmYOUe2NQ0oNw4Rn5Lo
+	ZnAvJk7PwYQw67ABVlUFlEnB9i5t6dkZMTND8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=C9sefioUNbg3ehBe+5ZLRTQMXbQC0q/H8BwF6FFwv9Jxq6wOBY+Iqjwf5vAELuUhLT
-	ZHOa2hoT252SPVQuD2aVTEOTNRDczf5el8VUB8dfqE6Fj8C9LzocQfWN/0gSnqNqbaJY
-	5Q3teivoyCRiqMAF0Gf8mWSRbtF3IDDf9Mzc8=
-Received: by 10.223.79.14 with SMTP id n14mr1309317fak.19.1297810904817;
-	Tue, 15 Feb 2011 15:01:44 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id n1sm1972053fam.16.2011.02.15.15.01.43
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 15 Feb 2011 15:01:43 -0800 (PST)
-Date: Wed, 16 Feb 2011 00:01:37 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110215230136.GE3335@localhost.jama.net>
-References: <1297726335-25317-1-git-send-email-raj.khem@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=P3E3M3CzC6qYYSQvyedLpt7xFs9IxmAbv3VdAJeYarqaDu676JBKA4nTPtMg1bqUSk
+	xC85Bfb1RueFD1iu92QZ+nE68WG0ydvkIPrTyjQ3T91mznOwAYKE0t9a8KQmyg1/BSoN
+	gn15qSssVJ38Fa0u9cFrCCB+9izSBwHwnWIwA=
 MIME-Version: 1.0
-In-Reply-To: <1297726335-25317-1-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] gcc-4.5: Bring latest from linaro 4.5 and bump svn SRCREV for upstream
+Received: by 10.204.152.22 with SMTP id e22mr9415bkw.103.1297813792270; Tue,
+	15 Feb 2011 15:49:52 -0800 (PST)
+Received: by 10.204.120.133 with HTTP; Tue, 15 Feb 2011 15:49:52 -0800 (PST)
+In-Reply-To: <4D5A8AD3.2050901@mentor.com>
+References: <AANLkTimE1MUCjZx+dRSna8+38OHy+cZ0GdQDL+EN+it7@mail.gmail.com>
+	<4D5A8AD3.2050901@mentor.com>
+Date: Tue, 15 Feb 2011 18:49:52 -0500
+Message-ID: <AANLkTi=hEZq-Ow8DVi16tZtEzDy3cHC4gqgPbrcPpd57@mail.gmail.com>
+From: George Alexandru Dorobantu <gdalex@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: linux-libc-headers and eglibc having circular dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,66 +45,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Feb 2011 23:02:58 -0000
-X-Groupsio-MsgNum: 29268
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Rgf3q3z9SdmXC6oT"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 15 Feb 2011 23:51:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---Rgf3q3z9SdmXC6oT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Here it is http://pastebin.com/YGbdjX1Q
 
-On Mon, Feb 14, 2011 at 03:32:15PM -0800, Khem Raj wrote:
-> Please test this patch out in your respective combinations and report
-> and regressions you see.=20
+Thank you
+George A. Dorobantu
 
-My tests looks OK on (spitz,om-gta02,nokia900)
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+On Tue, Feb 15, 2011 at 9:16 AM, Tom Rini <tom_rini@mentor.com> wrote:
 
->=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  recipes/gcc/gcc-4.5.inc                            |   13 +-
->  recipes/gcc/gcc-4.5/arm-bswapsi2.patch             |   13 -
->  .../gcc-4.5/gcc-arm-volatile-bitfield-fix.patch    |    6 +-
->  .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99448.patch |  147 -
->  .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99456.patch | 3163 ---------------
->  .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99457.patch | 4236 --------------=
-------
->  .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99464.patch |  157 +
->  .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99465.patch |   94 +
->  .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99466.patch |   38 +
->  .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99468.patch |  811 ++++
->  .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99473.patch |  409 ++
->  .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99474.patch | 3346 ++++++++++++++=
-++
->  .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99475.patch | 4217 ++++++++++++++=
-+++++
->  13 files changed, 9083 insertions(+), 7567 deletions(-)
->  delete mode 100644 recipes/gcc/gcc-4.5/arm-bswapsi2.patch
->  delete mode 100644 recipes/gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99448.patch
->  delete mode 100644 recipes/gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99456.patch
->  delete mode 100644 recipes/gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99457.patch
->  create mode 100644 recipes/gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99464.patch
->  create mode 100644 recipes/gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99465.patch
->  create mode 100644 recipes/gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99466.patch
->  create mode 100644 recipes/gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99468.patch
->  create mode 100644 recipes/gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99473.patch
->  create mode 100644 recipes/gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99474.patch
->  create mode 100644 recipes/gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99475.patch
+> On 02/15/2011 04:20 AM, George Alexandru Dorobantu wrote:
+>
+>> Hello guys,
+>>
+>> I've just started a new building and I got this error:
+>>
+>> g@g-home:/media/500GB/oe/openembedded$ bitbake qt4e-base-image
+>> NOTE: Handling BitBake files: - (7318/7318) [100 %]
+>> Parsing of 7318 .bb files complete (6892 cached, 426 parsed). 7596
+>> targets,
+>> 357 skipped, 0 masked, 0 errors.
+>>
+>> Build Configuration:
+>> BB_VERSION        = "1.10.2"
+>> METADATA_BRANCH   = "org.openembedded.dev"
+>> METADATA_REVISION = "b4a8a11"
+>> TARGET_ARCH       = "arm"
+>> TARGET_OS         = "linux-gnueabi"
+>> MACHINE           = "qemuarm"
+>> DISTRO            = "angstrom"
+>> DISTRO_VERSION    = "v20110215"
+>> TARGET_FPU        = "soft"
+>>
+>> NOTE: Resolving any missing task queue dependencies
+>> FATAL: Task /media/500GB/oe/openembedded/recipes/linux-libc-headers/
+>> linux-libc-headers_2.6.32.bb (do_package) has circular dependency on
+>> /media/500GB/oe/openembedded/recipes/eglibc/eglibc_2.12.bb (do_package)
+>>
+>>
+>> Can anyone help me with this?
+>>
+>
+> Can you please put your local.conf into pastebin.com and give us a link?
+>  We don't usually see this kind of problem, thanks!
+>
+> --
+> Tom Rini
+> Mentor Graphics Corporation
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
---Rgf3q3z9SdmXC6oT
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk1bBdAACgkQN1Ujt2V2gBxh2wCeNsEdn4e2s402wwtm2rmIst1N
-YRoAnRTSthn+gA9i5sSJqvGHJiqnltnZ
-=nya6
------END PGP SIGNATURE-----
-
---Rgf3q3z9SdmXC6oT--
