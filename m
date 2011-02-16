@@ -1,36 +1,36 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PpihP-0003DX-Df
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PpiiQ-0003Em-Rl
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Feb 2011 15:49:47 +0100
-Received: by iwn8 with SMTP id 8so1363824iwn.6
+	Wed, 16 Feb 2011 15:50:51 +0100
+Received: by iyj8 with SMTP id 8so1276783iyj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Feb 2011 06:48:35 -0800 (PST)
+	Wed, 16 Feb 2011 06:49:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:date
 	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=V4CBjhvhjJlEl3UrpRhFUiBFeg1Do2ppOTZT8jgK2vA=;
-	b=nTpzfO21lWUXxCvpn+o0qZJWuaN7Hpu+0sKB6CIS59rCfq3k6cO8h74rNIN8HFLeX0
-	Z6aLByk64DmIECo0TC/644o0t7BrcniQjZPcd/fLjBjXPIFOWdM/hoJ5o+xmtXswDKdm
-	W83P5DO8cEvIO1ubrptDp7FAcHn0vrRWTkxCE=
+	bh=WcmyL6Vm16LeO9tkOLDU1w4tLeLdHMiG5xkzFEzQcVM=;
+	b=V+O+JespvIOAQR5EbP3I6KDY/ISuL44p/h3Tucpt645EvfMJ7kyUc1Rw8dSZ/hJ8Ea
+	HtyHoEDl5xEidk3y3RVPiMO+7S9PW+JdJW/Fge07Yk9NRRMHVazXJ0U5ZB2ioTGr0Dju
+	Nef+o+irdB9gsd/KhoK6lTz2CKiDSbmmjsGBc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=cDCcov0TEaZ5WxBpC3UWrgp4Y6nqeq2djlNQd7ixcURSXMlhm709qsHQO4hRpR35xM
-	W4BRXEdhCVPRf/kLW/uWouYI3BP2mJSLcjGbIMrgWdICWqlJPvxxgAHj1fPjxINsPD5A
-	WEQriuTVww2aulMt9DzjI/vWVNR0MLdzVVxx4=
+	b=UoUSyNsv+YNvWmFwuGsZxbeejLVvVfunSNnD3bL5vf2U7TBiKPXbU6IKeku8fUwdJL
+	fwln/Pu/FchByq2eIa/oGwUZ7n+EVLWWEGKIsndIPDYG3oPKXgRzi7PxBtcIuPOail/r
+	VLPbfZCo9H2tV3JbMC8DyO2DX+2hCXUP6tftY=
 MIME-Version: 1.0
-Received: by 10.231.10.200 with SMTP id q8mr530696ibq.122.1297867715496; Wed,
-	16 Feb 2011 06:48:35 -0800 (PST)
-Received: by 10.231.30.73 with HTTP; Wed, 16 Feb 2011 06:48:35 -0800 (PST)
-In-Reply-To: <1297855134-19216-8-git-send-email-otavio@ossystems.com.br>
+Received: by 10.231.35.200 with SMTP id q8mr529485ibd.147.1297867778752; Wed,
+	16 Feb 2011 06:49:38 -0800 (PST)
+Received: by 10.231.30.73 with HTTP; Wed, 16 Feb 2011 06:49:38 -0800 (PST)
+In-Reply-To: <1297855134-19216-11-git-send-email-otavio@ossystems.com.br>
 References: <1297855134-19216-1-git-send-email-otavio@ossystems.com.br>
-	<1297855134-19216-8-git-send-email-otavio@ossystems.com.br>
-Date: Wed, 16 Feb 2011 15:48:35 +0100
-Message-ID: <AANLkTim7Ra8AMGXAvVH-v5biPJqE1tFCuVuWyMOmnZdr@mail.gmail.com>
+	<1297855134-19216-11-git-send-email-otavio@ossystems.com.br>
+Date: Wed, 16 Feb 2011 15:49:38 +0100
+Message-ID: <AANLkTimvGXthCVaN1y9mSe2mdajN1RHioHDri4oy5iS5@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 08/13] cdparanoia (svn): use build variables to fix packaging when using empty prefix
+Subject: Re: [PATCH 11/13] cmake: drop 2.6.4 as it is not used by any distro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,87 +44,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Feb 2011 14:49:47 -0000
+X-List-Received-Date: Wed, 16 Feb 2011 14:50:51 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
 2011/2/16 Otavio Salvador <otavio@ossystems.com.br>:
 > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 > ---
-> =A0recipes/cdparanoia/cdparanoia_svn.bb | =A0 =A08 ++++----
-> =A01 files changed, 4 insertions(+), 4 deletions(-)
+> =A0.../fix_fortify_source_compilation.patch =A0 =A0 =A0 =A0 =A0 | =A0 32 =
+--------------------
+> =A0recipes/cmake/cmake-native_2.6.4.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =
+=A0 10 ------
+> =A0recipes/cmake/cmake_2.6.4.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 | =A0 11 -------
+> =A03 files changed, 0 insertions(+), 53 deletions(-)
+> =A0delete mode 100644 recipes/cmake/cmake-2.6.4/fix_fortify_source_compil=
+ation.patch
+> =A0delete mode 100644 recipes/cmake/cmake-native_2.6.4.bb
+> =A0delete mode 100644 recipes/cmake/cmake_2.6.4.bb
 >
-> diff --git a/recipes/cdparanoia/cdparanoia_svn.bb b/recipes/cdparanoia/cd=
-paranoia_svn.bb
-> index c40d979..a845e49 100644
-> --- a/recipes/cdparanoia/cdparanoia_svn.bb
-> +++ b/recipes/cdparanoia/cdparanoia_svn.bb
-> @@ -4,7 +4,7 @@
->
-> =A0HOMEPAGE =3D "http://www.xiph.org/paranoia/"
-> =A0DESCRIPTION =3D "Audio CD digital audio extraction application"
-> -PR =3D "r0"
-> +PR =3D "r1"
-> =A0LICENSE =3D "GPLv2"
->
-> =A0PV =3D "10.2+svnr${SRCPV}"
-> @@ -37,8 +37,8 @@ FILES_libcdparanoia-dev =3D "${includedir} ${libdir}/li=
-b*${SOLIBSDEV}"
-> =A0FILES_libcdparanoia-static =3D "${libdir}/*.a"
->
-> =A0do_install() {
-> - =A0 =A0 =A0 oe_runmake BINDIR=3D"${D}/usr/bin" MANDIR=3D"${D}/usr/share=
-/man/" \
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0INCLUDEDIR=3D"${D}/usr/include/" LIB=
-DIR=3D"${D}/usr/lib" \
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0PKGCONFIGDIR=3D"${D}/usr/lib/pkgconf=
-ig" \
-> + =A0 =A0 =A0 oe_runmake BINDIR=3D"${D}${bindir}" MANDIR=3D"${D}${datadir=
-}/man/" \
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0INCLUDEDIR=3D"${D}${includedir}" LIB=
-DIR=3D"${D}${libdir}" \
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0PKGCONFIGDIR=3D"${D}${libdir}/pkgcon=
-fig" \
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 install
-> =A0}
+> diff --git a/recipes/cmake/cmake-2.6.4/fix_fortify_source_compilation.pat=
+ch b/recipes/cmake/cmake-2.6.4/fix_fortify_source_compilation.patch
+> deleted file mode 100644
+> index 316ab0c..0000000
+> --- a/recipes/cmake/cmake-2.6.4/fix_fortify_source_compilation.patch
+> +++ /dev/null
+> @@ -1,32 +0,0 @@
+> -upstream: http://public.kitware.com/mantis/view.php?id=3D9267
+> -status: pending
+> -origin: http://sisyphus.ru/ru/srpm/Sisyphus/cmake/patches/0
+> -comment: fix cmake building when FORTIFY_SOURCE is enabled
+> ---- a/Source/kwsys/SystemInformation.cxx
+> -+++ b/Source/kwsys/SystemInformation.cxx
+> -@@ -1896,9 +1896,14 @@
+> - =A0 =A0 =A0 =A0 =A0 =A0 case 5: sprintf (this->ChipID.ProcessorName,"Pe=
+ntium II (0.25 micron)"); break;
+> - =A0 =A0 =A0 =A0 =A0 =A0 case 6: sprintf (this->ChipID.ProcessorName,"Pe=
+ntium II With On-Die L2 Cache"); break;
+> - =A0 =A0 =A0 =A0 =A0 =A0 case 7: sprintf (this->ChipID.ProcessorName,"Pe=
+ntium III (0.25 micron)"); break;
+> -+/*
+> - =A0 =A0 =A0 =A0 =A0 =A0 case 8: sprintf (this->ChipID.ProcessorName,"Pe=
+ntium III (0.18 micron) With 256 KB On-Die L2 Cache "); break;
+> - =A0 =A0 =A0 =A0 =A0 =A0 case 0xa: sprintf (this->ChipID.ProcessorName,"=
+Pentium III (0.18 micron) With 1 Or 2 MB On-Die L2 Cache "); break;
+> - =A0 =A0 =A0 =A0 =A0 =A0 case 0xb: sprintf (this->ChipID.ProcessorName,"=
+Pentium III (0.13 micron) With 256 Or 512 KB On-Die L2 Cache "); break;
+> -+*/
+> -+ =A0 =A0 =A0 =A0 =A0 =A0case 8: sprintf (this->ChipID.ProcessorName,"Pe=
+ntium III (0.18 micron) With 256 KB L2 Cache "); break;
+> -+ =A0 =A0 =A0 =A0 =A0 =A0case 0xa: sprintf (this->ChipID.ProcessorName,"=
+Pentium III (0.18 micron), 1/2 MB L2 Cache "); break;
+> -+ =A0 =A0 =A0 =A0 =A0 =A0case 0xb: sprintf (this->ChipID.ProcessorName,"=
+Pentium III (0.13 micron), 256/512 KB L2 Cache "); break;
+> - =A0 =A0 =A0 =A0 =A0 =A0 default: sprintf (this->ChipID.ProcessorName,"U=
+nknown P6 family"); return false;
+> - =A0 =A0 =A0 =A0 =A0 =A0 }
+> - =A0 =A0 =A0 =A0 =A0 break;
+> ---- a/Utilities/cmtar/encode.c
+> -+++ b/Utilities/cmtar/encode.c
+> -@@ -32,7 +32,7 @@ th_finish(TAR *t)
+> - =A0 int i, sum =3D 0;
+> -
+> - =A0 if (t->options & TAR_GNU)
+> -- =A0 =A0strncpy(t->th_buf.magic, "ustar =A0", 8);
+> -+ =A0 =A0memcpy(t->th_buf.magic, "ustar =A0", 8);
+> - =A0 else
+> - =A0 {
+> - =A0 =A0 strncpy(t->th_buf.version, TVERSION, TVERSLEN);
+> diff --git a/recipes/cmake/cmake-native_2.6.4.bb b/recipes/cmake/cmake-na=
+tive_2.6.4.bb
+> deleted file mode 100644
+> index aab6b62..0000000
+> --- a/recipes/cmake/cmake-native_2.6.4.bb
+> +++ /dev/null
+> @@ -1,10 +0,0 @@
+> -inherit native
+> -require cmake.inc
+> -
+> -do_install() {
+> - =A0 =A0 =A0 oe_runmake install
+> -}
+> -
+> -SRC_URI +=3D "file://fix_fortify_source_compilation.patch"
+> -SRC_URI[md5sum] =3D "50f387d0436696c4a68b5512a72c9cde"
+> -SRC_URI[sha256sum] =3D "9cdd2152e37b05d0d40d334a1bb2dfc0250021797360f971=
+c6ea3d457ac9fdf2"
+> diff --git a/recipes/cmake/cmake_2.6.4.bb b/recipes/cmake/cmake_2.6.4.bb
+> deleted file mode 100644
+> index b5a47a8..0000000
+> --- a/recipes/cmake/cmake_2.6.4.bb
+> +++ /dev/null
+> @@ -1,11 +0,0 @@
+> -require cmake.inc
+> -
+> -inherit cmake
+> -
+> -do_configure_append() {
+> - =A0 =A0 =A0 sed -i -e 's,HAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT-ADVANCED:=
+INTERNAL=3D1,HAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT-ADVANCED:INTERNAL=3D0,' C=
+MakeCache.txt
+> -}
+> -
+> -SRC_URI +=3D "file://fix_fortify_source_compilation.patch"
+> -SRC_URI[md5sum] =3D "50f387d0436696c4a68b5512a72c9cde"
+> -SRC_URI[sha256sum] =3D "9cdd2152e37b05d0d40d334a1bb2dfc0250021797360f971=
+c6ea3d457ac9fdf2"
 > --
 > 1.7.2.3
 >
-
-Thanks!
-Pushed.
-
-Did a quick check. We have 24 other recipes that refer to ${D}/usr/bin:
-
-frans@frans-desktop:~/workspace/openembedded/recipes$ grep '${D}/usr/bin' *=
-/* -l
-bt-gps/bt-gps.bb
-cdparanoia/cdparanoia_10.2.bb
-ctorrent/ctcs_1.4.1.bb
-cxcrypt/cxcrypt_1.0.bb
-dvd+rw-tools/dvd+rw-tools_7.1.bb
-elvis/elvis_2.2.0.bb
-emelfm2/emelfm2_0.0.8.bb
-fortune-mod/fortune-mod_1.99.1.bb
-gphoto2/ptp-gadget_git.bb
-gstreamer/gst-player_svn.bb
-mokoeightball/mokoeightball_svn.bb
-mped/mped_5.1.3.bb
-networkmanager/networkmanager-0.7.inc
-networkmanager/networkmanager.inc
-networkmanager/networkmanager-pre0.7.inc
-openmoko-3rdparty/openmoko-gps_0.0.1+svnr9.bb
-pmtools/pmtools_20050926.bb
-podget/podget_0.5.8.bb
-postmark/postmark_1.51.bb
-rox/rox-filer_2.5.bb
-skype/skype_2.0.0.72.bb
-sms-sentry/sms-sentry.bb
-ttyrec/ttyrec_1.0.8.bb
-vnc/vnc_3.3.7.bb
-
-Guess ideally these should all be fixed
-
-Frans
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
