@@ -1,41 +1,44 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Ppqhj-0004ih-Gt
+	(envelope-from <otavio.salvador@gmail.com>) id 1PpqkI-0004s6-Ks
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Feb 2011 00:22:39 +0100
-Received: by bwz10 with SMTP id 10so2008927bwz.6
+	Thu, 17 Feb 2011 00:25:18 +0100
+Received: by bwz10 with SMTP id 10so2011034bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Feb 2011 15:21:28 -0800 (PST)
+	Wed, 16 Feb 2011 15:24:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
 	:content-transfer-encoding;
-	bh=96QUr//K7VLoO/EZ8vHLKG/6BvCwJ2RMjGlEprILeHg=;
-	b=qHdTf68CGJxEs5L2BxjOXYK/+KSKvEO7GhyypDD2CwlbSUXnV5JSBmD4TNiMcb298v
-	K+aZlM6MbkRlwiVIyvjlSjAH3FHjOKX4YD34vxFLCQglT4/L9nCPURgS/YtHZ3J5o2fv
-	Nc6Ddr2NeF6eX4engWrdr99XknZVGirGWMnCQ=
+	bh=6XsNic8fMaPunm0N+6NIdx7SChIdiRajk0Wr4tfkXw8=;
+	b=v7j5aUKjciGnve4YE8BzJeTtDOwNp2z2rOewejfhN2kw1OT8k8iN5y//5QGrnGLKX6
+	UfiffcBppA5ZGyzajLCHVz1p6WST/5En1qs5aLLJW2b3dOxCFpWGYAnFjBoLKRGo1nX9
+	8vRyPgoUeJwCpkPLW5lRTaOpqOKaCCV8uUy00=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
 	:content-transfer-encoding;
-	b=tE+cqKRkHh9gJWXd8V7zw+OZVpczfYhnV3RP8C562zZ8D5pkr5KWUB/T9cT5PwqRNW
-	wKxepauMlJTMq+tANfFM77wcIcW7C0VNQ+c1WoIyMuga3xA87KIk8jM2dnHVeWpmy3FK
-	z80nln9uQwn6uM5APApCEG58ME64B2JEMhhsU=
+	b=FNAL3+shrzKSOwg5o+MoxXTta5nkA5MehpR1JXTpwL77P6FI/TEqmi2LJQB8X0KiFN
+	MhIoVMuftxVtp5GGlFwyRvnkPMiZ6uilBK2LPccEdoKDf8uFeih2Cy40ZWj/pTq4kzQb
+	ZlQB4CKjnvkuy8UjI3tbgbDbo/KcJkjIBB+wg=
 MIME-Version: 1.0
-Received: by 10.204.15.83 with SMTP id j19mr981503bka.105.1297898486545; Wed,
-	16 Feb 2011 15:21:26 -0800 (PST)
+Received: by 10.204.46.210 with SMTP id k18mr976904bkf.159.1297898646838; Wed,
+	16 Feb 2011 15:24:06 -0800 (PST)
 Sender: otavio.salvador@gmail.com
-Received: by 10.204.119.207 with HTTP; Wed, 16 Feb 2011 15:21:26 -0800 (PST)
-In-Reply-To: <20110216230320.GP14525@sakrah.homelinux.org>
+Received: by 10.204.119.207 with HTTP; Wed, 16 Feb 2011 15:24:06 -0800 (PST)
+In-Reply-To: <20110216231845.GX14525@sakrah.homelinux.org>
 References: <1297855134-19216-1-git-send-email-otavio@ossystems.com.br>
-	<20110216230320.GP14525@sakrah.homelinux.org>
-Date: Wed, 16 Feb 2011 23:21:26 +0000
-X-Google-Sender-Auth: 0aIwRM0RF1iMTiqSAuf19hF_IG0
-Message-ID: <AANLkTi=0f4K-azrbSEdD1UDJBqLFypDMQE4pMwLddv3L@mail.gmail.com>
+	<1297855134-19216-2-git-send-email-otavio@ossystems.com.br>
+	<20110216230438.GQ14525@sakrah.homelinux.org>
+	<AANLkTi=3FiQZFfdXX0jxRm=EN3qEqDGdG9X5SU9=p4aP@mail.gmail.com>
+	<20110216231845.GX14525@sakrah.homelinux.org>
+Date: Wed, 16 Feb 2011 23:24:06 +0000
+X-Google-Sender-Auth: 1Jk4UAg8PBlFNsktGMsEBYqR8yU
+Message-ID: <AANLkTikf1LFop3zN4xX5BhtT0h5Ga3ea1MvKf4Sq4soW@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org, 
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [PATCH 01/13] xkeyboard-config: avoid recipe code duplication and depends on intltool-native
+To: Otavio Salvador <otavio@ossystems.com.br>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 02/13] python-dbus: update to 0.83.2 and fix rpath to use absolute path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,17 +52,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Feb 2011 23:22:39 -0000
+X-List-Received-Date: Wed, 16 Feb 2011 23:25:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 16, 2011 at 23:03, Khem Raj <raj.khem@gmail.com> wrote:
-> whynot use meta vars for datadir instead of hardcoding /usr/share ?
-> like below :)
+On Wed, Feb 16, 2011 at 23:18, Khem Raj <raj.khem@gmail.com> wrote:
+> On (16/02/11 23:14), Otavio Salvador wrote:
+>> On Wed, Feb 16, 2011 at 23:04, Khem Raj <raj.khem@gmail.com> wrote:
+>> > why is PR different then 'mlX'
+>>
+>> Any specific reason to use mlX? Most recipes use rX so I changed it whil=
+e on it.
+>
+> thats been python's lingua I will leave that to it still it should have
+> started at 0
 
-Good point. Fixed locally.
+Changed it to:
 
-Except for it, ack?
+PR =3D "ml0"
+
+Seems OK otherwise?
 
 --=20
 Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
