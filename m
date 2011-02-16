@@ -1,41 +1,28 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PpjKp-0004zY-PI
+	(envelope-from <philip@balister.org>) id 1Ppjcs-00067e-5u
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Feb 2011 16:30:32 +0100
-Received: by bwz10 with SMTP id 10so1583425bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Feb 2011 07:29:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=DpPqqzaPJXAk9MZYXvb2n7sgjwF6gjm7onqFe/fOEu4=;
-	b=SVs6se5DHv2q0v21kQ3r8/gh9FRbTWsQFJBrEMjfKJGzsFG4BJsaEj+bBE7qFnRsnH
-	ULEQltYebd8bIj3QD7HuT4IpAl4mZIM4Ducd3qF6t+AS6ScOH2zQOx7RRv+murRQfEmC
-	QJmFpieBz4sjieTXJUN4fdGT2CWnhK8HjqL7Y=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=lAWA1MbGoX7kjkcC2UfSf3kAjvkTD5aW6pS2CaBMaYf4UtReztJ3L3UL3LYMmMJvGC
-	3rCQgeBKNlXFX662GzSjv0IumJDypmySRYrQ1GYaY7OevXr/rJ6ODpf7JBDkVKCPAZFq
-	2X60S9UxvQdYaM/PFug1YmpfmWe16HRtyyyH8=
+	Wed, 16 Feb 2011 16:49:10 +0100
+Received: (qmail 21348 invoked by uid 1003); 16 Feb 2011 15:47:54 -0000
+Received: from unknown (HELO ?192.168.1.167?)
+	(philip@opensdr.com@74.107.167.114)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	16 Feb 2011 15:47:54 -0000
+Message-ID: <4D5BF1A9.5040809@balister.org>
+Date: Wed, 16 Feb 2011 10:47:53 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.204.15.83 with SMTP id j19mr583105bka.105.1297870155987; Wed,
-	16 Feb 2011 07:29:15 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.119.207 with HTTP; Wed, 16 Feb 2011 07:29:15 -0800 (PST)
-In-Reply-To: <AANLkTim7Ra8AMGXAvVH-v5biPJqE1tFCuVuWyMOmnZdr@mail.gmail.com>
-References: <1297855134-19216-1-git-send-email-otavio@ossystems.com.br>
-	<1297855134-19216-8-git-send-email-otavio@ossystems.com.br>
-	<AANLkTim7Ra8AMGXAvVH-v5biPJqE1tFCuVuWyMOmnZdr@mail.gmail.com>
-Date: Wed, 16 Feb 2011 15:29:15 +0000
-X-Google-Sender-Auth: StnWjKVJrPvyO23j2JQgJNiWVNg
-Message-ID: <AANLkTinqrwAjKLk3rDNXNVdt1sAJd+J1R-xdAjtD2Dzg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 08/13] cdparanoia (svn): use build variables to fix packaging when using empty prefix
+To: openembedded-members@lists.openembedded.org
+References: <1297794731.4945.312.camel@rex>
+	<AANLkTimD+Cbd-CYCDYRAcEBHdMWW9Q9sEU-WoA6cBB2q@mail.gmail.com>
+In-Reply-To: <AANLkTimD+Cbd-CYCDYRAcEBHdMWW9Q9sEU-WoA6cBB2q@mail.gmail.com>
+Cc: tsc <tsc@www.linuxtogo.org>,
+	Richard Purdie <richard.purdie@linuxfoundation.org>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: OE TSC Meeting 2011/02/14 Minutes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,24 +36,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Feb 2011 15:30:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 16 Feb 2011 15:49:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Feb 16, 2011 at 14:48, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-...
-> Did a quick check. We have 24 other recipes that refer to ${D}/usr/bin:
-...
+On 02/16/2011 10:05 AM, Frans Meulenbroeks wrote:
+> Richard,
+>
+> Thanks for the excellent minutes.
+>
+> There are two things I would like to mention though, wrt this comment:
+>
+>> (21:13:55) _koen_: if people really wanted to be involved, they should have stepped up
+>
+> 1. The board never asked for people to step up.
+> 2. I have informed the board on Feb 1 by email that I was available.
+> Literally quoting: "If desired by the board I am available to
+> participate in the interim
+> TSC". As such I feel I have stepped up. Unfortunately my email has
+> apparently been ignored by the board. That is: no action has been
+> taken based upon it and I never got a reply.
+>
+> Just want to avoid the impression that I (and perhaps others) were not
+> willing to get involved.
 
-Yes; they all need fixing otherwise micro based devices are going to
-fail to use them.
+Before this gets any further, the email Frans is referring to was sent 
+to the board. It was a long email and the line he is referring was after 
+my patience reading email expired (note, in my case, the email was 
+received during travel and I was reading email fast).
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Florian, Graeme, and myself met at FOSDEM to make a decision on the TSC 
+situation. We had 5 strong candidates who had publically shown interest. 
+The meeting location was outside a building, without access to a 
+computer, so we could not review Frans' email. We already had one too 
+many candidates and needed to make a decision so we did.
+
+Thanks,
+
+Philip
 
 
