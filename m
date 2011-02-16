@@ -1,38 +1,36 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>)
-	id 1Ppodd-0008MK-KB; Wed, 16 Feb 2011 22:10:17 +0100
-Received: by iwn8 with SMTP id 8so1720224iwn.6
-	for <multiple recipients>; Wed, 16 Feb 2011 13:09:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=rYoj/FuQoyUeO8LZomO+iXoYUBQEWapyi7pds8fXBoE=;
-	b=sI1OwMYGYOCJxUMFaBcn+KpySVhYoXHpIvBYVLIM51JepZ4DKbj5Ql3YZqfg29z6jZ
-	1Nj/bZQuRbESGkUd0IuW8QLlWsgkhdMgcFD123vtapkNJ6mfRiFWO2TuwP4UtApNU3rX
-	RZ34MtFKAlRY29D9BHDCzOaUFj5DHkWl2UG34=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	b=or1wY2aTEGTjLmlgfnuRqmAghsnm6JuW0EoxT9Ch7zcRqqyFkagR7ET0/9Qbn4vKq6
-	hQIKTUg3PcmLQDwFrBIaKQy0bT9lpFEvqa4xfal8DFD/91lMxyQIYDVqIcnxiW6kCcFE
-	5a/ALvGTRdLk/vMTt5a6qv5zSpdKyxGEofnEY=
+Received: from mail-out.m-online.net ([212.18.0.10])
+	by linuxtogo.org with esmtp (Exim 4.72) (envelope-from <wd@denx.de>)
+	id 1Ppoml-0008WP-AV for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Feb 2011 22:19:43 +0100
+Received: from frontend1.mail.m-online.net (frontend1.mail.intern.m-online.net
+	[192.168.8.180])
+	by mail-out.m-online.net (Postfix) with ESMTP id 6B7DD188A17E;
+	Wed, 16 Feb 2011 22:10:30 +0100 (CET)
+X-Auth-Info: HZZSlJgQV/tZnR4jWKJr9jaD085UVMawAm2S9Zj7u2Q=
+Received: from diddl.denx.de (host-80-81-18-216.customer.m-online.net
+	[80.81.18.216])
+	by smtp-auth.mnet-online.de (Postfix) with ESMTPA id 5A3731C0019C;
+	Wed, 16 Feb 2011 22:10:30 +0100 (CET)
+Received: from gemini.denx.de (unknown [10.0.0.2])
+	by diddl.denx.de (Postfix) with ESMTP id 421DD3096C20;
+	Wed, 16 Feb 2011 22:10:30 +0100 (CET)
+Received: from gemini.denx.de (localhost.localdomain [127.0.0.1])
+	by gemini.denx.de (Postfix) with ESMTP id 2CF731539C5;
+	Wed, 16 Feb 2011 22:10:30 +0100 (CET)
+To: "Sledz, Steffen" <sledz@dresearch.de>
+From: Wolfgang Denk <wd@denx.de>
 MIME-Version: 1.0
-Received: by 10.42.170.70 with SMTP id e6mr1609131icz.299.1297890544264; Wed,
-	16 Feb 2011 13:09:04 -0800 (PST)
-Received: by 10.231.30.73 with HTTP; Wed, 16 Feb 2011 13:09:04 -0800 (PST)
-In-Reply-To: <4D5BF1A9.5040809@balister.org>
-References: <1297794731.4945.312.camel@rex>
-	<AANLkTimD+Cbd-CYCDYRAcEBHdMWW9Q9sEU-WoA6cBB2q@mail.gmail.com>
-	<4D5BF1A9.5040809@balister.org>
-Date: Wed, 16 Feb 2011 22:09:04 +0100
-Message-ID: <AANLkTimmnQpEb1zoD5vN97kokNYpLOLNZg7hg0gheHEZ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: Philip Balister <philip@balister.org>
-Cc: tsc <tsc@www.linuxtogo.org>, openembedded-members@lists.openembedded.org,
-	Richard Purdie <richard.purdie@linuxfoundation.org>,
+In-reply-to: <DB561678F08F554EB0D9F21B70E268A505AFA8@exchange.intern.dresearch.de>
+References: <DB561678F08F554EB0D9F21B70E268A5056575@exchange.intern.dresearch.de>
+	<20110216183403.763A31539C5@gemini.denx.de>
+	<DB561678F08F554EB0D9F21B70E268A505AFA8@exchange.intern.dresearch.de>
+Comments: In-reply-to "Sledz, Steffen" <sledz@dresearch.de>
+	message dated "Wed, 16 Feb 2011 21:19:04 +0100."
+Date: Wed, 16 Feb 2011 22:10:30 +0100
+Message-Id: <20110216211030.2CF731539C5@gemini.denx.de>
+Cc: "Schuknecht, Mario" <m.schuknecht@DResearch.de>,
 	openembedded-devel@lists.openembedded.org
-Subject: Re: OE TSC Meeting 2011/02/14 Minutes
+Subject: Re: [PATCH] u-boot-2009.03: Fix sector table direction for AMIC (hipox machine only)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,59 +44,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Feb 2011 21:10:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 16 Feb 2011 21:19:43 -0000
+Content-type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-2011/2/16 Philip Balister <philip@balister.org>:
-> On 02/16/2011 10:05 AM, Frans Meulenbroeks wrote:
->>
->> Richard,
->>
->> Thanks for the excellent minutes.
->>
->> There are two things I would like to mention though, wrt this comment:
->>
->>> (21:13:55) _koen_: if people really wanted to be involved, they should
->>> have stepped up
->>
->> 1. The board never asked for people to step up.
->> 2. I have informed the board on Feb 1 by email that I was available.
->> Literally quoting: "If desired by the board I am available to
->> participate in the interim
->> TSC". As such I feel I have stepped up. Unfortunately my email has
->> apparently been ignored by the board. That is: no action has been
->> taken based upon it and I never got a reply.
->>
->> Just want to avoid the impression that I (and perhaps others) were not
->> willing to get involved.
+Dear "Sledz, Steffen",
+
+In message <DB561678F08F554EB0D9F21B70E268A505AFA8@exchange.intern.dresea=
+rch.de> you wrote:
 >
-> Before this gets any further, the email Frans is referring to was sent to
-> the board. It was a long email and the line he is referring was after my
-> patience reading email expired (note, in my case, the email was received
-> during travel and I was reading email fast).
+> > No, it has NOT been applied in mainline yet.
+> > See http://patchwork.ozlabs.org/patch/82763/ - status is still NEW.
+>=20
+> Your right. I'm sure that Mario meant "suggested" instead of "applied".
+>=20
+> BTW@Wolfgang: Any chance that it will be applied? We had no feedback
+> (good or bad) in the u-boot ml for nearly a week.
 
-I'm not really sure what you want to say here. I already mentioned
-that the email was to the board.
-And I  just ran wc on the email. 736 bytes making 128 words and 23
-lines, (of which 7 were empty)
-Not really what I consider long.And there were 3 more board members
-that got the email (5 or 6 days before the FOSDEM meeting).
->
-> Florian, Graeme, and myself met at FOSDEM to make a decision on the TSC
-> situation. We had 5 strong candidates who had publically shown interest. The
-> meeting location was outside a building, without access to a computer, so we
-> could not review Frans' email. We already had one too many candidates and
-> needed to make a decision so we did.
+No news is usually good news.
 
-That tells a lot about the care taken by the board in important
-matters like this. :-(
+It would have been a good idea to Cc: the responsible maintainer,
+though.
 
-Anyway, I'm not complaining that I am not invited for the interim TSC.
-I really don't care. I have indicated I am available and if it was
-decided not to accept this offer, fine with me.
-However I do oppose to the suggestion that outside the current TSC
-people did not want to be involved (as was suggested on IRC by Koen).
+Best regards,
 
-Best regards, Frans.
+Wolfgang Denk
+
+--=20
+DENX Software Engineering GmbH,     MD: Wolfgang Denk & Detlev Zundel
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-10 Fax: (+49)-8142-66989-80 Email: wd@denx.de
+The thing is, as you progress in the Craft,  you'll  learn  there  is
+another rule... When you break rules, break 'em good and hard.
+                                    - Terry Pratchett, _Wyrd Sisters_
 
 
