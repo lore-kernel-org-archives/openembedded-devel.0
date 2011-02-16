@@ -1,46 +1,44 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PpprA-00025p-46
+	(envelope-from <raj.khem@gmail.com>) id 1PpqHa-0002WA-2e
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Feb 2011 23:28:20 +0100
-Received: by gyd8 with SMTP id 8so826894gyd.6
+	Wed, 16 Feb 2011 23:55:38 +0100
+Received: by pzk12 with SMTP id 12so260867pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Feb 2011 14:27:07 -0800 (PST)
+	Wed, 16 Feb 2011 14:54:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id
+	h=domainkey-signature:date:from:to:subject:message-id
 	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:in-reply-to:user-agent;
-	bh=/9NX0m4S4xLCX0N56gXqcZrxFyYP7tq0098lyZEamn8=;
-	b=ppiD+eAXe4uSgVxgxot/2gJ/HlKLLZycVSgI+mrg6Bx7vUnGoCbh0gKKSJ+Ke2O0nI
-	+RGgqkp3Xg8h2Ai4hlz+VS8xXaBI/e5HYbrJLa76HoqmyB3655xJ2O8k8eQjHuzSMzrv
-	0WzXj4OfYIw7yyvWjiX3UxbwjkMWPAUDA0tLI=
+	:content-disposition:content-transfer-encoding:in-reply-to
+	:user-agent; bh=U2d6znye0pXrayxVZ8np00/Wy9GT/IjI4yFws4MxxO8=;
+	b=xdKVflyxuAujOnEsLmWVdWFlOUkugyVrbUJlmxKBF6oW7y1ZmgWHZAy1JRy3aqdXjv
+	Z2Suc/xp3E0DOJHcUbB8wv65gvrNQq6J0SOHkusXGVZ167C8WuE/yYJU3JUgYybPhu0D
+	BLOPWICyq4wBhWVZ176GjvvP6FDZ7XB8ewytg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	b=VVsQl35tVtU0fWfYiM0aR0E8ou6gfNBksmGAagrHBBelENKsvMAiH0//CGlEXDsuw5
-	5RTEUIugPjSXmGuV2BUzYZRI14ZvcYr3Fw2EY3rPZRHrno/Yt8RmoKoO/YgkWILM6A1m
-	qB6pYWCIC+3miPb3eSSIFFTj0QJcoWxDAIc/0=
-Received: by 10.90.187.7 with SMTP id k7mr1465957agf.20.1297895226298;
-	Wed, 16 Feb 2011 14:27:06 -0800 (PST)
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	b=spveBwAkVChq2SXv2M/T0hx4PXJoQDK1I3PMPEBsZp96w5cUlCnAfebGehWK79ZSH6
+	67/wJO2+qjUzHT3Zr9Qbk51j7v23MN0z+E8qvZCQkOx2hBxaSUCPCd1WV5lsKSspX/Vs
+	toxpvotKDjkUVtR336pwxKnJHm0S7pJfYlKgE=
+Received: by 10.142.43.12 with SMTP id q12mr868794wfq.226.1297896864185;
+	Wed, 16 Feb 2011 14:54:24 -0800 (PST)
 Received: from sakrah.homelinux.org
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id 35sm261759ano.31.2011.02.16.14.27.04
+	by mx.google.com with ESMTPS id x35sm333679wfd.1.2011.02.16.14.54.22
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 16 Feb 2011 14:27:05 -0800 (PST)
-Date: Wed, 16 Feb 2011 14:27:07 -0800
+	Wed, 16 Feb 2011 14:54:22 -0800 (PST)
+Date: Wed, 16 Feb 2011 14:54:26 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110216222707.GF14525@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org,
-	Chris Larson <chris_larson@mentor.com>
-References: <1297894063-27374-1-git-send-email-kergoth@gmail.com>
-	<1297894063-27374-4-git-send-email-kergoth@gmail.com>
+Message-ID: <20110216225426.GH14525@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1297852433-31160-1-git-send-email-eric@eukrea.com>
+	<1297852433-31160-2-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-In-Reply-To: <1297894063-27374-4-git-send-email-kergoth@gmail.com>
+In-Reply-To: <1297852433-31160-2-git-send-email-eric@eukrea.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Chris Larson <chris_larson@mentor.com>
-Subject: Re: [PATCH 4/4] autotools: avoid special casing autoconf/automake/help2man
+Subject: Re: [PATCH 02/10] gnokii-0.6.14: fix download link
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,133 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Feb 2011 22:28:20 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 16 Feb 2011 22:55:38 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On (16/02/11 15:07), Chris Larson wrote:
-> From: Chris Larson <chris_larson@mentor.com>
-> 
-> Signed-off-by: Chris Larson <chris_larson@mentor.com>
-
-we need to document INHIBIT_AUTOTOOLS_BOOTSTRAP
+On (16/02/11 11:33), Eric Bénard wrote:
+> Signed-off-by: Eric Bénard <eric@eukrea.com>
 
 Acked-by: Khem Raj <raj.khem@gmail.com>
 
 > ---
->  classes/autotools.bbclass           |    6 +-----
->  recipes/autoconf/autoconf.inc       |    3 ++-
->  recipes/automake/automake.inc       |    4 +---
->  recipes/help2man/help2man_1.36.4.bb |    6 +-----
->  recipes/help2man/help2man_1.38.2.bb |    6 +-----
->  5 files changed, 6 insertions(+), 19 deletions(-)
+>  recipes/gnokii/gnokii_0.6.14.bb |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
 > 
-> diff --git a/classes/autotools.bbclass b/classes/autotools.bbclass
-> index dd52e03..eaeca7f 100644
-> --- a/classes/autotools.bbclass
-> +++ b/classes/autotools.bbclass
-> @@ -13,13 +13,9 @@ def autotools_deps(d):
->      if oe.data.typed_value('INHIBIT_AUTOTOOLS_BOOTSTRAP', d):
->          return deps
+> diff --git a/recipes/gnokii/gnokii_0.6.14.bb b/recipes/gnokii/gnokii_0.6.14.bb
+> index 569d9a2..f3e968a 100644
+> --- a/recipes/gnokii/gnokii_0.6.14.bb
+> +++ b/recipes/gnokii/gnokii_0.6.14.bb
+> @@ -1,6 +1,6 @@
+>  LICENSE = "GPL"
+>  DESCRIPTION = "Cellphone tools and driver software"
+> -SRC_URI = "http://www.gnokii.org/download/gnokii/gnokii-${PV}.tar.bz2 \
+> +SRC_URI = "http://www.gnokii.org/download/gnokii/0.6.x/gnokii-${PV}.tar.bz2 \
+>  	file://configure.patch"
 >  
-> -    pn = bb.data.getVar('PN', d, 1)
-> -    if pn in ['autoconf-native', 'automake-native', 'help2man-native']:
-> -        return deps
-> -
->      deps += ' autoconf-native automake-native help2man-native'
->  
-> -    if pn not in ['libtool', 'libtool-native', 'libtool-cross']:
-> +    if d.getVar('BPN', True) != 'libtool':
->          deps += ' libtool-native'
->          if (not oe.utils.inherits(d, 'native', 'nativesdk', 'cross',
->                                    'sdk') and
-> diff --git a/recipes/autoconf/autoconf.inc b/recipes/autoconf/autoconf.inc
-> index 7f22c2b..d13b61e 100644
-> --- a/recipes/autoconf/autoconf.inc
-> +++ b/recipes/autoconf/autoconf.inc
-> @@ -5,8 +5,9 @@ HOMEPAGE = "http://www.gnu.org/software/autoconf/"
->  SECTION = "devel"
->  DEPENDS += "m4-native perl-native"
->  RDEPENDS_${PN} = "m4 perl gnu-config"
-> -DEPENDS_virtclass-native = "m4-native gnu-config-native perl-native"
-> +DEPENDS_virtclass-native = "m4-native perl-native"
->  RDEPENDS_${PN}_virtclass-native = "m4-native gnu-config-native perl-native"
-> +INHIBIT_AUTOTOOLS_BOOTSTRAP_virtclass-native = "true"
->  
->  INC_PR = "r13"
->  
-> diff --git a/recipes/automake/automake.inc b/recipes/automake/automake.inc
-> index de4df34..6ed21cd 100644
-> --- a/recipes/automake/automake.inc
-> +++ b/recipes/automake/automake.inc
-> @@ -28,6 +28,7 @@ RDEPENDS_automake += "\
->      perl-module-strict \
->      perl-module-text-parsewords \
->      perl-module-vars "
-> +INHIBIT_AUTOTOOLS_BOOTSTRAP_virtclass-native = "true"
->  SRC_URI = "${GNU_MIRROR}/automake/automake-${PV}.tar.bz2;name=automake"
->  INC_PR = "r4"
->  AUTOMAKE_API = "${@".".join(bb.data.getVar("PV",d,1).split(".")[0:2])}"
-> @@ -36,9 +37,6 @@ inherit autotools
->  
->  FILES_${PN} += "${datadir}/automake* ${datadir}/aclocal*"
->  
-> -do_configure_append() {
-> -}
-> -
->  do_install_append () {
->  	autotools_do_install
->  	# replace paths to STAGING_BINDIR_NATIVE/perl with ${bindir}/perl
-> diff --git a/recipes/help2man/help2man_1.36.4.bb b/recipes/help2man/help2man_1.36.4.bb
-> index 8cb5530..8cd4475 100644
-> --- a/recipes/help2man/help2man_1.36.4.bb
-> +++ b/recipes/help2man/help2man_1.36.4.bb
-> @@ -5,6 +5,7 @@ LICENSE     = "GPLv2"
->  DEPENDS     = "gettext-native perl-native liblocale-gettext-perl-native"
->  DEPENDS_virtclass-native = "perl-native autoconf-native automake-native"
->  RDEPENDS_${PN}    = "gettext perl liblocale-gettext-perl"
-> +INHIBIT_AUTOTOOLS_BOOTSTRAP = "true"
->  
->  TARGET_CC_ARCH += "${LDFLAGS}"
->  
-> @@ -16,11 +17,6 @@ BBCLASSEXTEND = "native"
->  
->  PR = "r3"
->  
-> -# We don't want to reconfigure things
-> -do_configure() {
-> -	oe_runconf
-> -}
-> -
->  do_install_append () {
->  	# Make sure we use /usr/bin/env perl
->  	sed -i -e "1s:#!.*:#! /usr/bin/env perl:" ${D}${bindir}/help2man
-> diff --git a/recipes/help2man/help2man_1.38.2.bb b/recipes/help2man/help2man_1.38.2.bb
-> index ab06186..795bad6 100644
-> --- a/recipes/help2man/help2man_1.38.2.bb
-> +++ b/recipes/help2man/help2man_1.38.2.bb
-> @@ -5,6 +5,7 @@ DEPENDS = "gettext-native perl-native liblocale-gettext-perl-native"
->  DEPENDS_virtclass-native = "perl-native autoconf-native automake-native"
->  RDEPENDS_${PN} = "gettext perl liblocale-gettext-perl"
->  RDEPENDS_${PN}_virtclass-native = ""
-> +INHIBIT_AUTOTOOLS_BOOTSTRAP = "true"
->  PR = "r2"
->  
->  SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
-> @@ -18,11 +19,6 @@ EXTRA_OECONF = "--disable-nls"
->  
->  BBCLASSEXTEND = "native"
->  
-> -# We don't want to reconfigure things
-> -do_configure() {
-> -	oe_runconf
-> -}
-> -
->  do_install_append () {
->  	# Make sure we use /usr/bin/env perl
->  	sed -i -e "1s:#!.*:#! /usr/bin/env perl:" ${D}${bindir}/help2man
+>  DEPENDS = "libxpm gtk+"
 > -- 
-> 1.7.2.3
+> 1.7.0.4
 > 
 > 
 > _______________________________________________
