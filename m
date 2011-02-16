@@ -1,39 +1,27 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gdalex@gmail.com>) id 1PpWMh-0005Bz-3e
+	(envelope-from <obi@opendreambox.org>) id 1PpXh5-0000ML-07
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Feb 2011 02:39:35 +0100
-Received: by bwz10 with SMTP id 10so1080915bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Feb 2011 17:38:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=0Gn7IuYjc9BSguhOE9+rytVWUi1K45gfogYAm9KXcGY=;
-	b=o9QObdc0xysO/ngPpir/j9+8nlp1clTx9WXvhqPAYssQ13P11Y37LH8QRDDamETc7D
-	PDb+J5yYrP3+4A3FmwtIl3GfepafNUyfmPsfr6GN3QhTXzfVXzQYiVSB5M5I59vvituS
-	MOpmu3k8g4DPS8/d4mMNs8TLU0/eMOX+20Bls=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=g0vRnFH3mhB9tylgPs5nXKaf9Stnp5vahaZCS4o5nXLJJnZhgrEj6p1KkiA8VAeGRF
-	idazNJ7ULjgmBAv1ZR65WcXmrCdB9kgDNDBwJAhGSs0+9e2UbhmFH2D73pBbW4OjU/+0
-	rUzGHwh6CMCv+DPD6/naz2XRNu6jmNZe2K00s=
-MIME-Version: 1.0
-Received: by 10.204.69.73 with SMTP id y9mr81816bki.76.1297820303576; Tue, 15
-	Feb 2011 17:38:23 -0800 (PST)
-Received: by 10.204.120.133 with HTTP; Tue, 15 Feb 2011 17:38:23 -0800 (PST)
-In-Reply-To: <4D5B2586.5070105@mentor.com>
-References: <AANLkTimE1MUCjZx+dRSna8+38OHy+cZ0GdQDL+EN+it7@mail.gmail.com>
-	<4D5A8AD3.2050901@mentor.com>
-	<AANLkTi=hEZq-Ow8DVi16tZtEzDy3cHC4gqgPbrcPpd57@mail.gmail.com>
-	<4D5B2586.5070105@mentor.com>
-Date: Tue, 15 Feb 2011 20:38:23 -0500
-Message-ID: <AANLkTikBifZRV6Q5hf1DNK0tE8eyynMvuwMGTpD8SzeD@mail.gmail.com>
-From: George Alexandru Dorobantu <gdalex@gmail.com>
+	Wed, 16 Feb 2011 04:04:43 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 603CF314DA85;
+	Wed, 16 Feb 2011 04:03:34 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id Qixm4a7o4UvU; Wed, 16 Feb 2011 04:03:26 +0100 (CET)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id 4A243314D70D;
+	Wed, 16 Feb 2011 04:03:25 +0100 (CET)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Wed, 16 Feb 2011 03:03:24 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: linux-libc-headers and eglibc having circular dependency
+Date: Wed, 16 Feb 2011 03:03:24 +0000
+Message-Id: <1297825404-20674-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.2.3
+Subject: [PATCH] wpa-supplicant-0.7.3: use MACHINE_ARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,96 +35,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Feb 2011 01:39:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 16 Feb 2011 03:04:43 -0000
 
-Yes, you're right, I saw that message
-I believe it was gcc complaining about the missing gettext
+* Because of madwifi, wpa-supplicant depends on COMBINED_FEATURES.
+  Thus, PACKAGE_ARCH must be set to MACHINE_ARCH.
+* Use INC_PR and bump it.
 
-it's working now
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+CC: Stefan Schmidt <stefan@datenfreihafen.org>
+---
+ recipes/wpa-supplicant/wpa-supplicant-0.7.inc  |    3 +++
+ recipes/wpa-supplicant/wpa-supplicant_0.7.3.bb |    2 +-
+ 2 files changed, 4 insertions(+), 1 deletions(-)
 
-Thank you
-George A. Dorobantu
+diff --git a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+index e01d1ef..b4e996a 100644
+--- a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
++++ b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://../COPYING;md5=c54ce9345727175ff66d17b67ff51f58 \
+                     file://wpa_supplicant.c;beginline=1;endline=17;md5=acdc5a4b0d6345f21f136eace747260e"
+ DEPENDS = "gnutls dbus libnl2 openssl ${@base_contains("COMBINED_FEATURES", "madwifi", "madwifi-ng", "",d)}"
+ RRECOMMENDS_${PN} = "wpa-supplicant-passphrase wpa-supplicant-cli"
++INC_PR = "r5"
+ 
+ SRC_URI = "http://hostap.epitest.fi/releases/wpa_supplicant-${PV}.tar.gz \
+            file://defconfig \
+@@ -80,6 +81,8 @@ do_install () {
+ 	install -m 0644 ${WORKDIR}/99_wpa_supplicant ${D}/etc/default/volatiles
+ }
+ 
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
+ pkg_postinst_wpa-supplicant () {
+ 	# can't do this offline
+ 	if [ "x$D" != "x" ]; then
+diff --git a/recipes/wpa-supplicant/wpa-supplicant_0.7.3.bb b/recipes/wpa-supplicant/wpa-supplicant_0.7.3.bb
+index 03bd937..60a4791 100644
+--- a/recipes/wpa-supplicant/wpa-supplicant_0.7.3.bb
++++ b/recipes/wpa-supplicant/wpa-supplicant_0.7.3.bb
+@@ -1,6 +1,6 @@
+ require wpa-supplicant-0.7.inc
+ 
+-PR = "r4"
++PR = "${INC_PR}.0"
+ 
+ SRC_URI[md5sum] = "f516f191384a9a546e3f5145c08addda"
+ SRC_URI[sha256sum] = "d0cd50caa85346ccc376dcda5ed3c258eef19a93b3cade39d25760118ad59443"
+-- 
+1.7.2.3
 
-On Tue, Feb 15, 2011 at 8:16 PM, Tom Rini <tom_rini@mentor.com> wrote:
 
-> On 02/15/2011 04:49 PM, George Alexandru Dorobantu wrote:
->
->  Here it is http://pastebin.com/YGbdjX1Q
->>
->
-> Ah ha!  INHERIT += "gettext" doesn't belong in there.  If it's brought in
-> globally, you get circular deps as you've found.  I assume you saw a message
-> about missing inherit gettext in your build previously and thought this
-> would fix it, yes?  I think that means we need to clarify the message a
-> bit...
->
->
->
->> Thank you
->> George A. Dorobantu
->>
->>
->> On Tue, Feb 15, 2011 at 9:16 AM, Tom Rini<tom_rini@mentor.com>  wrote:
->>
->>  On 02/15/2011 04:20 AM, George Alexandru Dorobantu wrote:
->>>
->>>  Hello guys,
->>>>
->>>> I've just started a new building and I got this error:
->>>>
->>>> g@g-home:/media/500GB/oe/openembedded$ bitbake qt4e-base-image
->>>> NOTE: Handling BitBake files: - (7318/7318) [100 %]
->>>> Parsing of 7318 .bb files complete (6892 cached, 426 parsed). 7596
->>>> targets,
->>>> 357 skipped, 0 masked, 0 errors.
->>>>
->>>> Build Configuration:
->>>> BB_VERSION        = "1.10.2"
->>>> METADATA_BRANCH   = "org.openembedded.dev"
->>>> METADATA_REVISION = "b4a8a11"
->>>> TARGET_ARCH       = "arm"
->>>> TARGET_OS         = "linux-gnueabi"
->>>> MACHINE           = "qemuarm"
->>>> DISTRO            = "angstrom"
->>>> DISTRO_VERSION    = "v20110215"
->>>> TARGET_FPU        = "soft"
->>>>
->>>> NOTE: Resolving any missing task queue dependencies
->>>> FATAL: Task /media/500GB/oe/openembedded/recipes/linux-libc-headers/
->>>> linux-libc-headers_2.6.32.bb (do_package) has circular dependency on
->>>> /media/500GB/oe/openembedded/recipes/eglibc/eglibc_2.12.bb (do_package)
->>>>
->>>>
->>>> Can anyone help me with this?
->>>>
->>>>
->>> Can you please put your local.conf into pastebin.com and give us a link?
->>>  We don't usually see this kind of problem, thanks!
->>>
->>> --
->>> Tom Rini
->>> Mentor Graphics Corporation
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>
->>>  _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->>
->
-> --
-> Tom Rini
-> Mentor Graphics Corporation
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
