@@ -1,44 +1,44 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PpqJN-0002Y9-1g
+	(envelope-from <raj.khem@gmail.com>) id 1PpqKW-0002ca-N8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Feb 2011 23:57:30 +0100
-Received: by pzk12 with SMTP id 12so261104pzk.6
+	Wed, 16 Feb 2011 23:58:40 +0100
+Received: by yie16 with SMTP id 16so835669yie.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Feb 2011 14:56:16 -0800 (PST)
+	Wed, 16 Feb 2011 14:57:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:date:from:to:subject:message-id
 	:mail-followup-to:references:mime-version:content-type
 	:content-disposition:content-transfer-encoding:in-reply-to
-	:user-agent; bh=gQwWrVi6iO6lg6TEhnlF+yonFrZf8Xl6rjZGkzq8TKY=;
-	b=VFw/Wz7aHU5Usrd1yllMUlsPOX6hwCX+mVPnkCmUVyyri1WV+bTCVq0DAPx6KNtSRo
-	VV1jdhe9eJQSfD9vuX4uUjauVWeiPGNYQf9ELvcxDhEiHFsONkM+pfeU4FFhbAiouIn2
-	BHqnB6yh9ELWjGpfqaxGFAFx66XrRKBB0I/bs=
+	:user-agent; bh=lbQJp+PYq14oP10+2wt3MqK4xPRM3yGnQjIfvXy4WBw=;
+	b=ZUjlE/F4dgNYBrgk/57q7hRkbdODrr+XwYYuI1c3lVsU0de+aWWi19/wYBvS9RsjUK
+	uwBF5w0/ibIlVuda3foU/xhL+8n+jR+KchWsjjAOWjWGzb5MH023IE1Y+3bEoIJijJUS
+	8f6M5qg9z6HNEX4lPcI/KRTEAauXDCHdOc0SI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:mail-followup-to:references
 	:mime-version:content-type:content-disposition
 	:content-transfer-encoding:in-reply-to:user-agent;
-	b=cpxkPzS7nA30ahzsbLsfDWm3ldkUcMfGQPhQcOAusTyter4J4JYAta1K6Cggtfjb5F
-	4F3D40hzPjXBCmepwjfmBXUNB9otPclIOpSEJ8GlztFpwg7xT52ueT79sDeL0zHxK7Ny
-	l9o6ujSZCYHnkH6oz1w45RswIRHySVvaw2YAY=
-Received: by 10.142.13.16 with SMTP id 16mr917421wfm.373.1297896975996;
-	Wed, 16 Feb 2011 14:56:15 -0800 (PST)
+	b=CHdIQ46kL8NPB6z3KDEAabQXf1Q4xYgvp600VdRyG0aDZcz3rYY/NzqS2x2eZa+8vl
+	y4n+JYNthpEz3zJ2wpA/nRfsVPVq0LFVOutD6HHccrwfjZLAXii9FKSv4DfwgToNRguc
+	aBVwDElkK/kR6PmIBTr3Pt9MGR0PwM9SdRJqI=
+Received: by 10.90.18.5 with SMTP id 5mr1477724agr.204.1297897045614;
+	Wed, 16 Feb 2011 14:57:25 -0800 (PST)
 Received: from sakrah.homelinux.org
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id m10sm59247wfl.11.2011.02.16.14.56.13
+	by mx.google.com with ESMTPS id d15sm288503ana.35.2011.02.16.14.57.24
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 16 Feb 2011 14:56:14 -0800 (PST)
-Date: Wed, 16 Feb 2011 14:56:17 -0800
+	Wed, 16 Feb 2011 14:57:24 -0800 (PST)
+Date: Wed, 16 Feb 2011 14:57:27 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110216225617.GJ14525@sakrah.homelinux.org>
+Message-ID: <20110216225727.GK14525@sakrah.homelinux.org>
 Mail-Followup-To: openembedded-devel@lists.openembedded.org
 References: <1297852433-31160-1-git-send-email-eric@eukrea.com>
-	<1297852433-31160-4-git-send-email-eric@eukrea.com>
+	<1297852433-31160-5-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-In-Reply-To: <1297852433-31160-4-git-send-email-eric@eukrea.com>
+In-Reply-To: <1297852433-31160-5-git-send-email-eric@eukrea.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH 04/10] gnokii: remove old recipes
+Subject: Re: [PATCH 05/10] nodejs: add 0.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,123 +52,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Feb 2011 22:57:30 -0000
+X-List-Received-Date: Wed, 16 Feb 2011 22:58:41 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
 On (16/02/11 11:33), Eric Bénard wrote:
+> compile tested for armv5, previous node-cross-cc_0.2.6.patch
+> doesn't seems anymore necessary unless I made a mistake, AJ may
+> you please check this point ?
+> 
 > Signed-off-by: Eric Bénard <eric@eukrea.com>
+> Cc: AJ ONeal <coolaj86@gmail.com>
+
+in general looks fine if AJ does not find anything
 
 Acked-by: Khem Raj <raj.khem@gmail.com>
+
 > ---
->  recipes/gnokii/gnokii/configure.patch |   21 ---------------------
->  recipes/gnokii/gnokii_0.6.14.bb       |   29 -----------------------------
->  recipes/gnokii/gnokii_0.6.4.bb        |   31 -------------------------------
->  3 files changed, 0 insertions(+), 81 deletions(-)
->  delete mode 100644 recipes/gnokii/gnokii/configure.patch
->  delete mode 100644 recipes/gnokii/gnokii_0.6.14.bb
->  delete mode 100644 recipes/gnokii/gnokii_0.6.4.bb
+>  recipes/nodejs/files/libev-cross-cc_0.4.0.patch |   13 +++++++++
+>  recipes/nodejs/nodejs_0.4.0.bb                  |   32 +++++++++++++++++++++++
+>  2 files changed, 45 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/nodejs/files/libev-cross-cc_0.4.0.patch
+>  create mode 100644 recipes/nodejs/nodejs_0.4.0.bb
 > 
-> diff --git a/recipes/gnokii/gnokii/configure.patch b/recipes/gnokii/gnokii/configure.patch
-> deleted file mode 100644
-> index 0cc3cb4..0000000
-> --- a/recipes/gnokii/gnokii/configure.patch
-> +++ /dev/null
-> @@ -1,21 +0,0 @@
-> ---- gnokii-0.6.4/configure.in.old	2005-01-09 20:15:53.000000000 +0000
-> -+++ gnokii-0.6.4/configure.in	2005-01-09 20:15:55.000000000 +0000
-> -@@ -379,11 +379,16 @@
-> -       AC_MSG_WARN(Cannot find library libX11.)
-> -       AC_MSG_WARN(Disabling xgnokii.)
-> -    else
-> -+      if test "x$x_libraries" != "x"; then
-> -+          l_x_libraries="-L$x_libraries"
-> -+      else
-> -+          l_x_libraries=""
-> -+      fi
-> -       AC_CHECK_LIB(Xpm, XpmWriteFileFromXpmImage,
-> --            [ XPM_CFLAGS="$XINCL" XPM_LIBS="-L$x_libraries -lXpm -lX11"
-> -+            [ XPM_CFLAGS="$XINCL" XPM_LIBS="$l_x_libraries -lXpm -lX11"
-> -               AC_DEFINE(XPM) ],
-> -             AC_MSG_WARN(Cannot found library libXpm - disabling XPM support.),
-> --            [ -L$x_libraries -lX11 ]
-> -+            [ $l_x_libraries -lX11 ]
-> -       )
-> - 
-> -       if test "x$PTHREAD_LIBS" = xerror; then
-> diff --git a/recipes/gnokii/gnokii_0.6.14.bb b/recipes/gnokii/gnokii_0.6.14.bb
-> deleted file mode 100644
-> index f3e968a..0000000
-> --- a/recipes/gnokii/gnokii_0.6.14.bb
-> +++ /dev/null
-> @@ -1,29 +0,0 @@
-> -LICENSE = "GPL"
-> -DESCRIPTION = "Cellphone tools and driver software"
-> -SRC_URI = "http://www.gnokii.org/download/gnokii/0.6.x/gnokii-${PV}.tar.bz2 \
-> -	file://configure.patch"
-> -
-> -DEPENDS = "libxpm gtk+"
-> -
-> -inherit autotools pkgconfig
-> -
-> -PARALLEL_MAKE = ""
-> -
-> -PACKAGES += "libgnokii libgnokii-dev"
-> -
-> -FILES_${PN} = "${bindir} ${sbindir}"
-> -FILES_libgnokii-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la \
-> -                ${libdir}/*.a ${libdir}/*.o ${libdir}/pkgconfig \
-> -	        /lib/*.a /lib/*.o ${datadir}/aclocal"
-> -FILES_${PN}-dev = ""
-> -FILES_libgnokii = "${libdir}/libgnokii.so.*"
-> -
-> -do_stage() {
-> -	autotools_stage_includes
-> -
-> -	oe_libinstall -C common -so libgnokii ${STAGING_LIBDIR}
-> -}
-> -
-> -
-> -SRC_URI[md5sum] = "89449d613c7a7e765a0d8da57ef1bb88"
-> -SRC_URI[sha256sum] = "cea63cddf79864d306198c7a84091af0b4685816b352ae253a3e2bfac5e67cb7"
-> diff --git a/recipes/gnokii/gnokii_0.6.4.bb b/recipes/gnokii/gnokii_0.6.4.bb
-> deleted file mode 100644
-> index 2389980..0000000
-> --- a/recipes/gnokii/gnokii_0.6.4.bb
-> +++ /dev/null
-> @@ -1,31 +0,0 @@
-> -LICENSE = "GPL"
-> -DESCRIPTION = "Cellphone tools and driver software"
-> -SRC_URI = "http://www.gnokii.org/download/gnokii/0.6.x/gnokii-${PV}.tar.bz2 \
-> -	file://configure.patch"
-> -
-> -DEPENDS = "libxpm"
-> -
-> -inherit autotools pkgconfig
-> -
-> -PACKAGES += "libgnokii libgnokii-dev"
-> -
-> -FILES_${PN} = "${bindir} ${sbindir}"
-> -FILES_libgnokii-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la \
-> -                ${libdir}/*.a ${libdir}/*.o ${libdir}/pkgconfig \
-> -	        /lib/*.a /lib/*.o ${datadir}/aclocal"
-> -FILES_${PN}-dev = ""
-> -FILES_libgnokii = "${libdir}/libgnokii.so.*"
-> -
-> -do_compile_prepend() {
-> -	sed -i s:foo::g Makefile.global
-> -}
-> -
-> -do_stage() {
-> -	autotools_stage_includes
-> -
-> -	oe_libinstall -C common -so libgnokii ${STAGING_LIBDIR}
-> -}
-> -
-> -
-> -SRC_URI[md5sum] = "7f2a8cee97e62ebfa284363dc93b3178"
-> -SRC_URI[sha256sum] = "9605f7aee1b8d58cac10dd514c2bdfa340089d85b149db828816d18ac3ebaff8"
+> diff --git a/recipes/nodejs/files/libev-cross-cc_0.4.0.patch b/recipes/nodejs/files/libev-cross-cc_0.4.0.patch
+> new file mode 100644
+> index 0000000..2b9838f
+> --- /dev/null
+> +++ b/recipes/nodejs/files/libev-cross-cc_0.4.0.patch
+> @@ -0,0 +1,13 @@
+> +diff --git a/deps/libev/wscript b/deps/libev/wscript
+> +index 4f6c9a8..1796749 100644
+> +--- a/deps/libev/wscript
+> ++++ b/deps/libev/wscript
+> +@@ -58,7 +58,7 @@ def configure(conf):
+> +           return 0;
+> +       }
+> +   """
+> +-  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=True,
+> ++  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=False,
+> +                 msg="Checking for SYS_clock_gettime")
+> + 
+> +   have_librt = conf.check(lib='rt', uselib_store='RT')
+> diff --git a/recipes/nodejs/nodejs_0.4.0.bb b/recipes/nodejs/nodejs_0.4.0.bb
+> new file mode 100644
+> index 0000000..be3d23e
+> --- /dev/null
+> +++ b/recipes/nodejs/nodejs_0.4.0.bb
+> @@ -0,0 +1,32 @@
+> +DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
+> +HOMEPAGE = "http://nodejs.org"
+> +LICENSE = "MIT"
+> +
+> +DEPENDS = "openssl"
+> +
+> +SRC_URI = " \
+> +  http://nodejs.org/dist/node-v${PV}.tar.gz \
+> +  file://libev-cross-cc_${PV}.patch \
+> +"
+> +
+> +SRC_URI[md5sum] = "18f89256751f9b8e27dee8494f508171"
+> +SRC_URI[sha256sum] = "4a30bd9963373cb86a994479bdd451ab3b6f2124f0089493366315da79d3408e"
+> +
+> +S = "${WORKDIR}/node-v${PV}"
+> +
+> +# v8 errors out if you have set CCACHE
+> +CCACHE = ""
+> +
+> +do_configure () {
+> +  ./configure --prefix=${prefix} --without-snapshot
+> +}
+> +
+> +do_compile () {
+> +  make
+> +}
+> +
+> +do_install () {
+> +  DESTDIR=${D} oe_runmake install
+> +}
+> +
+> +BBCLASSEXTEND = "native"
 > -- 
 > 1.7.0.4
 > 
