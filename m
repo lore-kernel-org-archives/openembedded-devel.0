@@ -1,40 +1,29 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PpeiJ-0000we-Vz
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1Ppeia-0000xC-JS
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Feb 2011 11:34:28 +0100
-Received: by bwz10 with SMTP id 10so1347404bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Feb 2011 02:33:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=zwaUbH/EYxh3c/ANf+UNIEcIbQ2D5w5w30NjhZz/smU=;
-	b=cv/3MA+Qw61/R1GnbAOcNvgUkpVHOyDusC4rUEGrNHNhp6orFqPAy/q11LPJ0xXLRL
-	VRpTtLQRrfxFVcW3qohApFOjIE5+ojQ/vBvYus7kHUrOMf4ClR+X4g3wqsd+faN7AslD
-	EdPkn5ezR6jii7vxoif+5pP5ZyiAJ/DUGdJk8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=djO8Os7KJcn7GXtZBrH+djCntaPCcL4Glf1VIS+OnrFqjRhMtFOPQYimis59HF9udx
-	aFdAg3OsmRWM7zuRGMahnizsCygc5q0v4uXzkAGSvLzvHSdubI7b7A1fSUK6srcWonWi
-	bdvw0bvOlSarmbnzLjCb/Zx6NhxxotIto9o+0=
-MIME-Version: 1.0
-Received: by 10.204.15.83 with SMTP id j19mr324419bka.105.1297852392745; Wed,
-	16 Feb 2011 02:33:12 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.119.207 with HTTP; Wed, 16 Feb 2011 02:33:12 -0800 (PST)
-In-Reply-To: <201102161030.43048.marcin@juszkiewicz.com.pl>
-References: <1297825404-20674-1-git-send-email-obi@opendreambox.org>
-	<201102161030.43048.marcin@juszkiewicz.com.pl>
-Date: Wed, 16 Feb 2011 10:33:12 +0000
-X-Google-Sender-Auth: BdjsL-sJR50ytbrVSSc4aq_rlcY
-Message-ID: <AANLkTi=oE+H2+p36z4qYOpV2p7JOcEbDpjdW1kYxEWX-@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Wed, 16 Feb 2011 11:34:44 +0100
+Received: (qmail 19753 invoked by uid 503); 16 Feb 2011 11:16:16 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 16 Feb 2011 11:16:16 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 16 Feb 2011 12:33:35 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 16 Feb 2011 12:33:34 +0200
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] wpa-supplicant-0.7.3: use MACHINE_ARCH
+Date: Wed, 16 Feb 2011 11:33:47 +0100
+Message-Id: <1297852433-31160-3-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1297852433-31160-1-git-send-email-eric@eukrea.com>
+References: <1297852433-31160-1-git-send-email-eric@eukrea.com>
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 12105112849527516491
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: [PATCH 03/10] gnokii: add latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,29 +37,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Feb 2011 10:34:28 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 16 Feb 2011 10:34:44 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, Feb 16, 2011 at 09:30, Marcin Juszkiewicz
-<marcin@juszkiewicz.com.pl> wrote:
-> Dnia =B6roda, 16 lutego 2011 o 04:03:24 Andreas Oberritter napisa=B3(a):
->> * Because of madwifi, wpa-supplicant depends on COMBINED_FEATURES.
->> =A0 Thus, PACKAGE_ARCH must be set to MACHINE_ARCH.
->> * Use INC_PR and bump it.
->
-> What about setting PACKAGE_ARCH=3DMACHINE_ARCH only for machines with mad=
-wifi?
-> Most of out targets does not support madwifi.
+- build tested for armv5 with PARALLEL_MAKE="-j8" so I removed
+PARALLEL_MAKE = "" which was set in previous recipes.
 
-Well but not having it is also an "option" so it seems the right is to
-have it globaly.
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes/gnokii/gnokii_0.6.30.bb |   28 ++++++++++++++++++++++++++++
+ 1 files changed, 28 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/gnokii/gnokii_0.6.30.bb
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+diff --git a/recipes/gnokii/gnokii_0.6.30.bb b/recipes/gnokii/gnokii_0.6.30.bb
+new file mode 100644
+index 0000000..0f82c5d
+--- /dev/null
++++ b/recipes/gnokii/gnokii_0.6.30.bb
+@@ -0,0 +1,28 @@
++LICENSE = "GPL"
++DESCRIPTION = "Cellphone tools and driver software"
++SRC_URI = "http://www.gnokii.org/download/gnokii/gnokii-${PV}.tar.bz2 \
++	"
++
++DEPENDS = "libxpm gtk+"
++
++inherit autotools pkgconfig
++
++PACKAGES += "libgnokii libgnokii-dev"
++
++FILES_${PN} = "${bindir} ${sbindir}"
++FILES_libgnokii-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la \
++                ${libdir}/*.a ${libdir}/*.o ${libdir}/pkgconfig \
++	        /lib/*.a /lib/*.o ${datadir}/aclocal"
++FILES_${PN}-dev = ""
++FILES_libgnokii = "${libdir}/libgnokii.so.*"
++
++do_stage() {
++	autotools_stage_includes
++
++	oe_libinstall -C common -so libgnokii ${STAGING_LIBDIR}
++}
++
++
++SRC_URI[md5sum] = "c90137d403febbc16712d64f0eb196de"
++SRC_URI[sha256sum] = "337c75369901cc6665219e3b92e29949fc83823e8d63608979230d72fe2e1dd4"
++
+-- 
+1.7.0.4
+
 
 
