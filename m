@@ -1,39 +1,49 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1PppYg-0001H2-HZ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Feb 2011 23:09:14 +0100
-Received: by gyd8 with SMTP id 8so819289gyd.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Feb 2011 14:07:59 -0800 (PST)
+	(envelope-from <raj.khem@gmail.com>)
+	id 1PppdG-0001XZ-Uy; Wed, 16 Feb 2011 23:13:59 +0100
+Received: by pzk12 with SMTP id 12so256022pzk.6
+	for <multiple recipients>; Wed, 16 Feb 2011 14:12:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=j5hm53Vu4Ffp0UeTXgrT8dBorywmB9sXlTNmPlQ+BMo=;
-	b=QzFc9oqqgRwSV7qcbRtcB4UFdstmh5ivczZy2UPRubC9D1xlZVhi6Vr7NvuusNUWd6
-	P0fFBm7EEHWTOVlInp4NWzP+Bq5xBQGCmUnOMU+HV9zZvDDa2oHAKwrmdW8ZAbMVoh+G
-	iK6rxrXkgDev+M4lDC4abYCvO0Ehg9c7hAlto=
+	h=domainkey-signature:date:from:to:cc:subject:message-id
+	:mail-followup-to:references:mime-version:content-type
+	:content-disposition:in-reply-to:user-agent;
+	bh=sRV8+kXBkj3g74Zp1krSbBcEecKTDr7ZZhNh0fT51zg=;
+	b=W2UUAiVvLeXZoAlboPLcJqTMVi6pHE+BdN9QGj5+9ahsDHGmEsiTq87VQsBksbuR1E
+	QqXKpi9BA9E+wwuOlft2B5/WrkwDThm8xDFmZntxqnuiLS9jungswvw0mKWGbcf2q78F
+	ZepO4LDMnh8+E7qVOu6iKj1VxtIa+AEOTfHzY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=sc4BDLHtupBii4smpZVV+CYWOeHcPq1UrSmK7gztt7PFM9GF2IXS6bJI7/40MPcpDQ
-	ccPBcpA3CKQK2qIzfBBRT46DMNIzFGX/7y7vD4dBo699cTCqFwSFmosnjx8Mu/09enXT
-	+6tFlxZInYfo9yz+oCxLTF1cO3dsv6loy+Fhg=
-Received: by 10.151.112.3 with SMTP id p3mr1398378ybm.227.1297894078965;
-	Wed, 16 Feb 2011 14:07:58 -0800 (PST)
-Received: from localhost.localdomain (ip24-251-170-95.ph.ph.cox.net
-	[24.251.170.95])
-	by mx.google.com with ESMTPS id u27sm399093yba.3.2011.02.16.14.07.56
+	h=date:from:to:cc:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	b=trURcfQdeZ22EGFQ7IJcm4tvsAT9X6KEF9JYyL1Aj+Mfi2xDNJIIGmTB8rlu15MbJQ
+	6LfJiCuA8Q9d72b8JZN59zpIysolvPzK6ML1DB8yP7/5Vt+4r8anYNsD8zIgUpvS7RGP
+	6qjnVtrdcL0U1jDahtG75I3wwtlk1qBYjh1zI=
+Received: by 10.142.49.16 with SMTP id w16mr886553wfw.218.1297894365386;
+	Wed, 16 Feb 2011 14:12:45 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id f5sm272519wfo.16.2011.02.16.14.12.42
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 16 Feb 2011 14:07:58 -0800 (PST)
-From: Chris Larson <kergoth@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Feb 2011 15:07:42 -0700
-Message-Id: <1297894063-27374-3-git-send-email-kergoth@gmail.com>
-X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <1297894063-27374-1-git-send-email-kergoth@gmail.com>
-References: <1297894063-27374-1-git-send-email-kergoth@gmail.com>
-Cc: Chris Larson <chris_larson@mentor.com>
-Subject: [PATCH 3/4] autotools: add INHIBIT_AUTOTOOLS_BOOTSTRAP
+	Wed, 16 Feb 2011 14:12:43 -0800 (PST)
+Date: Wed, 16 Feb 2011 14:12:41 -0800
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-members@lists.openembedded.org
+Message-ID: <20110216221241.GA14525@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-members@lists.openembedded.org,
+	Philip Balister <philip@balister.org>, tsc <tsc@www.linuxtogo.org>,
+	Richard Purdie <richard.purdie@linuxfoundation.org>,
+	openembedded-devel@lists.openembedded.org
+References: <1297794731.4945.312.camel@rex>
+	<AANLkTimD+Cbd-CYCDYRAcEBHdMWW9Q9sEU-WoA6cBB2q@mail.gmail.com>
+	<4D5BF1A9.5040809@balister.org>
+	<AANLkTimmnQpEb1zoD5vN97kokNYpLOLNZg7hg0gheHEZ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTimmnQpEb1zoD5vN97kokNYpLOLNZg7hg0gheHEZ@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: tsc <tsc@www.linuxtogo.org>, openembedded-devel@lists.openembedded.org,
+	Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: Re: OE TSC Meeting 2011/02/14 Minutes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,88 +57,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Feb 2011 22:09:14 -0000
+X-List-Received-Date: Wed, 16 Feb 2011 22:13:59 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: Chris Larson <chris_larson@mentor.com>
+On (16/02/11 22:09), Frans Meulenbroeks wrote:
+> 2011/2/16 Philip Balister <philip@balister.org>:
+> > On 02/16/2011 10:05 AM, Frans Meulenbroeks wrote:
+> >>
+> >> Richard,
+> >>
+> >> Thanks for the excellent minutes.
+> >>
+> >> There are two things I would like to mention though, wrt this comment:
+> >>
+> >>> (21:13:55) _koen_: if people really wanted to be involved, they should
+> >>> have stepped up
+> >>
+> >> 1. The board never asked for people to step up.
+> >> 2. I have informed the board on Feb 1 by email that I was available.
+> >> Literally quoting: "If desired by the board I am available to
+> >> participate in the interim
+> >> TSC". As such I feel I have stepped up. Unfortunately my email has
+> >> apparently been ignored by the board. That is: no action has been
+> >> taken based upon it and I never got a reply.
+> >>
+> >> Just want to avoid the impression that I (and perhaps others) were not
+> >> willing to get involved.
 
-Setting this variable to a true value (obeying the semantics of the 'boolean'
-type in oe.types) will result in not running autoreconf, and not depending on
-the things which the autoreconf requires.  Note that the
-config.guess/config.sub files are still updated when using
-INHIBIT_AUTOTOOLS_BOOTSTRAP, and these are updated directly via a find+ln
-rather than through gnu-configize usage in order to avoid the dependency upon
-autoconf/automake (gnu-configize is included with gnu-config, but requires the
-perl modules from the other recipes).
+Its a good sign and everyones involvement is appreaciated and I dont
+think there is any impression that no one stepped up at all. There is lot
+of work we need to do that is irrespective of TSC and I would encourage
+every one on community to participate in the project and contribute to
+its future. There were lot of action items from the meeting and someone
+owning to those action items would be a cohesive step.
 
-Signed-off-by: Chris Larson <chris_larson@mentor.com>
----
- classes/autotools.bbclass |   29 ++++++++++++++++++++++-------
- 1 files changed, 22 insertions(+), 7 deletions(-)
+> >
+> > Before this gets any further, the email Frans is referring to was sent to
+> > the board. It was a long email and the line he is referring was after my
+> > patience reading email expired (note, in my case, the email was received
+> > during travel and I was reading email fast).
+> 
+> I'm not really sure what you want to say here. I already mentioned
+> that the email was to the board.
+> And I  just ran wc on the email. 736 bytes making 128 words and 23
+> lines, (of which 7 were empty)
+> Not really what I consider long.And there were 3 more board members
+> that got the email (5 or 6 days before the FOSDEM meeting).
+> >
+> > Florian, Graeme, and myself met at FOSDEM to make a decision on the TSC
+> > situation. We had 5 strong candidates who had publically shown interest. The
+> > meeting location was outside a building, without access to a computer, so we
+> > could not review Frans' email. We already had one too many candidates and
+> > needed to make a decision so we did.
+> 
+> That tells a lot about the care taken by the board in important
+> matters like this. :-(
 
-diff --git a/classes/autotools.bbclass b/classes/autotools.bbclass
-index 3c124ae..dd52e03 100644
---- a/classes/autotools.bbclass
-+++ b/classes/autotools.bbclass
-@@ -2,26 +2,31 @@ require classes/autotools/staging.inc
- require classes/autotools/bootstrap.inc
- require classes/autotools/configure.inc
- 
-+INHIBIT_AUTOTOOLS_BOOTSTRAP ?= "false"
-+INHIBIT_AUTOTOOLS_BOOTSTRAP[type] = "boolean"
-+
- def autotools_deps(d):
-     if bb.data.getVar('INHIBIT_AUTOTOOLS_DEPS', d, 1):
-         return ''
- 
--    pn = bb.data.getVar('PN', d, 1)
--    deps = ''
-+    deps = 'gnu-config-native'
-+    if oe.data.typed_value('INHIBIT_AUTOTOOLS_BOOTSTRAP', d):
-+        return deps
- 
-+    pn = bb.data.getVar('PN', d, 1)
-     if pn in ['autoconf-native', 'automake-native', 'help2man-native']:
-         return deps
- 
--    deps += 'autoconf-native automake-native help2man-native '
-+    deps += ' autoconf-native automake-native help2man-native'
- 
-     if pn not in ['libtool', 'libtool-native', 'libtool-cross']:
--        deps += 'libtool-native '
-+        deps += ' libtool-native'
-         if (not oe.utils.inherits(d, 'native', 'nativesdk', 'cross',
-                                   'sdk') and
-             not d.getVar('INHIBIT_DEFAULT_DEPS', True)):
--            deps += 'libtool-cross '
-+            deps += ' libtool-cross'
- 
--    return deps + ' gnu-config-native'
-+    return deps
- 
- AUTOTOOLS_DEPENDS = "${@autotools_deps(d)}"
- 
-@@ -29,8 +34,18 @@ DEPENDS_prepend = "${AUTOTOOLS_DEPENDS} "
- DEPENDS_virtclass-native_prepend = "${AUTOTOOLS_DEPENDS} "
- DEPENDS_virtclass-nativesdk_prepend = "${AUTOTOOLS_DEPENDS} "
- 
-+_INHIBITED = "${@base_ifelse(oe.data.typed_value('INHIBIT_AUTOTOOLS_BOOTSTRAP', \
-+                                                 d), \
-+                             'y', 'n')}"
- autotools_do_configure () {
--    autotools_do_bootstrap
-+    if [ "${_INHIBITED}" = "n" ]; then
-+        autotools_do_bootstrap
-+    else
-+        find ${S} -name config.guess -exec \
-+            ln -sf ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess "{}" \;
-+        find ${S} -name config.sub -exec \
-+            ln -sf ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub "{}" \;
-+    fi
- 
-     if [ -e ${S}/configure ]; then
-         oe_runconf $@
+I think decisions board makes are for betterment of OE and in its interest 
+One doesnt have to agree to every decision however its more important that one
+agrees to disagree and participate in the project with the value add one
+brings to it and focus on it that way help the board, TSC and project as
+a whole
+
+> 
+> Anyway, I'm not complaining that I am not invited for the interim TSC.
+> I really don't care. I have indicated I am available and if it was
+> decided not to accept this offer, fine with me.
+> However I do oppose to the suggestion that outside the current TSC
+> people did not want to be involved (as was suggested on IRC by Koen).
+> 
+I did not get this impression, thats one downside of interpretation
+sometimes contexts are different in what statements are made and then
+its left upto interpretation.
+
+As far as I can acertain everyone on TSC is fully committed to cause of
+OE and are spending their efforts to make the project successful from
+technical standpoint
+
 -- 
-1.7.2.3
-
+-Khem
 
 
