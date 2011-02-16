@@ -1,25 +1,32 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1PpfuU-00040e-23
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1Ppg1T-00047u-MQ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Feb 2011 12:51:06 +0100
-Received: by wyb40 with SMTP id 40so1193770wyb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Feb 2011 03:49:54 -0800 (PST)
+	Wed, 16 Feb 2011 12:58:19 +0100
+Received: (qmail 12303 invoked by uid 503); 16 Feb 2011 12:39:52 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 16 Feb 2011 12:39:52 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 16 Feb 2011 13:57:10 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 16 Feb 2011 13:57:08 +0200
+Message-ID: <4D5BBB94.3010904@eukrea.com>
+Date: Wed, 16 Feb 2011 12:57:08 +0100
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.216.3.200 with SMTP id 50mr399007weh.34.1297856994688; Wed, 16
-	Feb 2011 03:49:54 -0800 (PST)
-Received: by 10.216.246.69 with HTTP; Wed, 16 Feb 2011 03:49:54 -0800 (PST)
-In-Reply-To: <1297852433-31160-8-git-send-email-eric@eukrea.com>
-References: <1297852433-31160-1-git-send-email-eric@eukrea.com>
-	<1297852433-31160-8-git-send-email-eric@eukrea.com>
-Date: Wed, 16 Feb 2011 12:49:54 +0100
-Message-ID: <AANLkTikiF9jz+OcGkDFwh1aNHK=HzhO0=bYMBhka9vxF@mail.gmail.com>
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: Koen Kooi <koen@openembedded.org>,
-	openembedded-devel@lists.openembedded.org
+To: openembedded-devel@lists.openembedded.org
+References: <1297852433-31160-1-git-send-email-eric@eukrea.com>	<1297852433-31160-8-git-send-email-eric@eukrea.com>
+	<AANLkTikiF9jz+OcGkDFwh1aNHK=HzhO0=bYMBhka9vxF@mail.gmail.com>
+In-Reply-To: <AANLkTikiF9jz+OcGkDFwh1aNHK=HzhO0=bYMBhka9vxF@mail.gmail.com>
+X-Ovh-Tracer-Id: 13516428383225294153
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Cc: Koen Kooi <koen@dominion.thruhere.net>
 Subject: Re: [PATCH 08/10] angstrom-2010: prefer busybox-1.18.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,41 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Feb 2011 11:51:06 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 16 Feb 2011 11:58:19 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Acked-by: Koen Kooi <koen@openembedded.org>
+On 16/02/2011 12:49, Koen Kooi wrote:
+> Acked-by: Koen Kooi <koen@openembedded.org <mailto:koen@openembedded.org>>
+>
+> I must admit the busybox churn is getting a bit much, how many days till .4?
+>
+for 1.18 :
+22/11/2010 : 1.18.0 (unstable)
+21/12/2010 : 1.18.1
+16/01/2011 : 1.18.2
+08/02/2011 : 1.18.3
 
-I must admit the busybox churn is getting a bit much, how many days till .4=
-?
+for 1.17 :
+06/07/2010 : 1.17.0 (unstable)
+25/07/2010 : 1.17.1
+25/08/2010 : 1.17.2
+09/10/2010 : 1.17.3
+22/11/2010 : 1.17.4
 
-2011/2/16 Eric B=C3=A9nard <eric@eukrea.com>
+so we can expect at least a 1.18.4 (as there are fixes for 1.18.3)
 
-> this is the latest stable version
->
-> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
-> Cc: Koen Kooi <koen@openembedded.org>
-> ---
->  .../include/angstrom-2010-preferred-versions.inc   |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/conf/distro/include/angstrom-2010-preferred-versions.inc
-> b/conf/distro/include/angstrom-2010-preferred-versions.inc
-> index 5532f29..006dc74 100644
-> --- a/conf/distro/include/angstrom-2010-preferred-versions.inc
-> +++ b/conf/distro/include/angstrom-2010-preferred-versions.inc
-> @@ -12,7 +12,7 @@ PREFERRED_VERSION_autoconf =3D "2.65"
->  PREFERRED_VERSION_autoconf-native =3D "2.65"
->  PREFERRED_VERSION_automake =3D "1.11.1"
->  PREFERRED_VERSION_automake-native =3D "1.11.1"
-> -PREFERRED_VERSION_busybox      =3D "1.18.2"
-> +PREFERRED_VERSION_busybox      =3D "1.18.3"
->  PREFERRED_VERSION_cairo                =3D "1.10.0"
->  PREFERRED_VERSION_dbus                 =3D "1.2.24"
->  PREFERRED_VERSION_dropbear      =3D "0.52"
-> --
-> 1.7.0.4
->
->
+For 1.19, I think I'll wait .2 or .3 before annoying distro maintainers :-)
+
+Eric
+
 
