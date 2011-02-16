@@ -1,9 +1,9 @@
 Received: from 63.mail-out.ovh.net ([91.121.185.56])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Ppeic-0000xR-Hg
+	(envelope-from <eric@eukrea.com>) id 1Ppeic-0000xQ-SB
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Feb 2011 11:34:46 +0100
-Received: (qmail 19887 invoked by uid 503); 16 Feb 2011 11:16:18 -0000
+	Wed, 16 Feb 2011 11:34:47 +0100
+Received: (qmail 19882 invoked by uid 503); 16 Feb 2011 11:16:18 -0000
 Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
 	by 63.mail-out.ovh.net with SMTP; 16 Feb 2011 11:16:18 -0000
 Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
@@ -13,17 +13,18 @@ Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
 	by ns0.ovh.net with SMTP; 16 Feb 2011 12:33:36 +0200
 From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Feb 2011 11:33:53 +0100
-Message-Id: <1297852433-31160-9-git-send-email-eric@eukrea.com>
+Date: Wed, 16 Feb 2011 11:33:52 +0100
+Message-Id: <1297852433-31160-8-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1297852433-31160-1-git-send-email-eric@eukrea.com>
 References: <1297852433-31160-1-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 12105675799480937809
+X-Ovh-Tracer-Id: 12105675799480937808
 X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
 X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
 X-Spam-Check: DONE|U 0.5/N
-Subject: [PATCH 09/10] slugos: prefer busybox 1.18.3
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [PATCH 08/10] angstrom-2010: prefer busybox-1.18.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,29 +38,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Feb 2011 10:34:46 -0000
+X-List-Received-Date: Wed, 16 Feb 2011 10:34:47 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+this is the latest stable version
+
 Signed-off-by: Eric Bénard <eric@eukrea.com>
-Cc: Mike Westerhof <mike@mwester.net>
+Cc: Koen Kooi <koen@openembedded.org>
 ---
- conf/distro/include/preferred-slugos-versions.inc |    2 +-
+ .../include/angstrom-2010-preferred-versions.inc   |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/conf/distro/include/preferred-slugos-versions.inc b/conf/distro/include/preferred-slugos-versions.inc
-index 4b0edb8..cde3eb0 100644
---- a/conf/distro/include/preferred-slugos-versions.inc
-+++ b/conf/distro/include/preferred-slugos-versions.inc
-@@ -26,7 +26,7 @@ PREFERRED_VERSION_autoconf			?= "2.65"
- PREFERRED_VERSION_autoconf-native		?= "2.65"
- PREFERRED_VERSION_automake			?= "1.11.1"
- PREFERRED_VERSION_automake-native		?= "1.11.1"
--PREFERRED_VERSION_busybox			?= "1.18.2"
-+PREFERRED_VERSION_busybox			?= "1.18.3"
- PREFERRED_VERSION_dbus				?= "1.4.1"
- PREFERRED_VERSION_glib-2.0			?= "2.26.1"
- PREFERRED_VERSION_glib-2.0-native		?= "2.26.1"
+diff --git a/conf/distro/include/angstrom-2010-preferred-versions.inc b/conf/distro/include/angstrom-2010-preferred-versions.inc
+index 5532f29..006dc74 100644
+--- a/conf/distro/include/angstrom-2010-preferred-versions.inc
++++ b/conf/distro/include/angstrom-2010-preferred-versions.inc
+@@ -12,7 +12,7 @@ PREFERRED_VERSION_autoconf = "2.65"
+ PREFERRED_VERSION_autoconf-native = "2.65"
+ PREFERRED_VERSION_automake = "1.11.1"
+ PREFERRED_VERSION_automake-native = "1.11.1"
+-PREFERRED_VERSION_busybox 	= "1.18.2"
++PREFERRED_VERSION_busybox 	= "1.18.3"
+ PREFERRED_VERSION_cairo		= "1.10.0"
+ PREFERRED_VERSION_dbus 		= "1.2.24"
+ PREFERRED_VERSION_dropbear      = "0.52"
 -- 
 1.7.0.4
 
