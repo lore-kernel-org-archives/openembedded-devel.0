@@ -1,48 +1,41 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PpqgA-0004ae-ER
+	(envelope-from <otavio.salvador@gmail.com>) id 1Ppqhj-0004ih-Gt
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Feb 2011 00:21:02 +0100
-Received: by iwn8 with SMTP id 8so1834137iwn.6
+	Thu, 17 Feb 2011 00:22:39 +0100
+Received: by bwz10 with SMTP id 10so2008927bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Feb 2011 15:19:47 -0800 (PST)
+	Wed, 16 Feb 2011 15:21:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id
-	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:in-reply-to:user-agent;
-	bh=+9APrzvkuNCvvooWALvQRCgzG4Cfmk3uhJq/dy3pfyw=;
-	b=sOw4AlArDIkrBo1umZOCSHb9HKNzgb8O8OXPtWstOpf+GKJ7i2cVK56oGwlZek3a4A
-	7ce17rTyxKEks2CT4ebIqtVP+X83OL8nhS1vD9TnXtIyhrX7VZDNHU9azGTP+h1Z2Eoj
-	JzOAYPCYk9N+Xv2BBLRfen1/PPeI73ar1wjRU=
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=96QUr//K7VLoO/EZ8vHLKG/6BvCwJ2RMjGlEprILeHg=;
+	b=qHdTf68CGJxEs5L2BxjOXYK/+KSKvEO7GhyypDD2CwlbSUXnV5JSBmD4TNiMcb298v
+	K+aZlM6MbkRlwiVIyvjlSjAH3FHjOKX4YD34vxFLCQglT4/L9nCPURgS/YtHZ3J5o2fv
+	Nc6Ddr2NeF6eX4engWrdr99XknZVGirGWMnCQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	b=uN/AZrFFFfcohWn0T+BzPcKU6paIz3xuZ0KS182y8Be0Bw0e2WuECCSoJoRfIE3elz
-	yaK8F63YXdRcXGuT+91TZFtdojZgyo2qV1pSoyzBK2jsLqcTYYZfnzLFyq6Q3Ns1zvn/
-	0AeW1jMDJ6ZarLy4U9vjqlq9X9HZ6W4SX9Zgc=
-Received: by 10.42.61.131 with SMTP id u3mr84440ich.514.1297898386984;
-	Wed, 16 Feb 2011 15:19:46 -0800 (PST)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id y8sm162007ica.14.2011.02.16.15.19.45
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 16 Feb 2011 15:19:46 -0800 (PST)
-Date: Wed, 16 Feb 2011 15:19:49 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: Otavio Salvador <otavio@ossystems.com.br>
-Message-ID: <20110216231949.GY14525@sakrah.homelinux.org>
-Mail-Followup-To: Otavio Salvador <otavio@ossystems.com.br>,
-	openembedded-devel@lists.openembedded.org
-References: <1297855134-19216-1-git-send-email-otavio@ossystems.com.br>
-	<1297855134-19216-9-git-send-email-otavio@ossystems.com.br>
-	<20110216230953.GT14525@sakrah.homelinux.org>
-	<AANLkTikZ1DpDSnj0gPwZVA4uZHTB1uR3B5dM+haW_VWh@mail.gmail.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=tE+cqKRkHh9gJWXd8V7zw+OZVpczfYhnV3RP8C562zZ8D5pkr5KWUB/T9cT5PwqRNW
+	wKxepauMlJTMq+tANfFM77wcIcW7C0VNQ+c1WoIyMuga3xA87KIk8jM2dnHVeWpmy3FK
+	z80nln9uQwn6uM5APApCEG58ME64B2JEMhhsU=
 MIME-Version: 1.0
-In-Reply-To: <AANLkTikZ1DpDSnj0gPwZVA4uZHTB1uR3B5dM+haW_VWh@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 09/13] sdk.bbclass: cache ${libdir} as ${target_libdir}
+Received: by 10.204.15.83 with SMTP id j19mr981503bka.105.1297898486545; Wed,
+	16 Feb 2011 15:21:26 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.119.207 with HTTP; Wed, 16 Feb 2011 15:21:26 -0800 (PST)
+In-Reply-To: <20110216230320.GP14525@sakrah.homelinux.org>
+References: <1297855134-19216-1-git-send-email-otavio@ossystems.com.br>
+	<20110216230320.GP14525@sakrah.homelinux.org>
+Date: Wed, 16 Feb 2011 23:21:26 +0000
+X-Google-Sender-Auth: 0aIwRM0RF1iMTiqSAuf19hF_IG0
+Message-ID: <AANLkTi=0f4K-azrbSEdD1UDJBqLFypDMQE4pMwLddv3L@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org, 
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [PATCH 01/13] xkeyboard-config: avoid recipe code duplication and depends on intltool-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,23 +49,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Feb 2011 23:21:02 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 16 Feb 2011 23:22:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On (16/02/11 23:15), Otavio Salvador wrote:
-> On Wed, Feb 16, 2011 at 23:09, Khem Raj <raj.khem@gmail.com> wrote:
-> ...
-> >> +target_libdir := "${libdir}"
-> >
-> > could you explain more why this is needed
-> 
-> Used on the qt-native-sdk change.
+On Wed, Feb 16, 2011 at 23:03, Khem Raj <raj.khem@gmail.com> wrote:
+> whynot use meta vars for datadir instead of hardcoding /usr/share ?
+> like below :)
 
-Could you revert this and see if it fixes your i586 gcc-cross-sdk issue
-?
+Good point. Fixed locally.
 
--- 
--Khem
+Except for it, ack?
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
