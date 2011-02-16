@@ -1,44 +1,44 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PpqKW-0002ca-N8
+	(envelope-from <raj.khem@gmail.com>) id 1PpqLn-0002jm-Vq
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Feb 2011 23:58:40 +0100
-Received: by yie16 with SMTP id 16so835669yie.6
+	Thu, 17 Feb 2011 00:00:01 +0100
+Received: by iyj8 with SMTP id 8so1737879iyj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Feb 2011 14:57:25 -0800 (PST)
+	Wed, 16 Feb 2011 14:58:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:date:from:to:subject:message-id
 	:mail-followup-to:references:mime-version:content-type
 	:content-disposition:content-transfer-encoding:in-reply-to
-	:user-agent; bh=lbQJp+PYq14oP10+2wt3MqK4xPRM3yGnQjIfvXy4WBw=;
-	b=ZUjlE/F4dgNYBrgk/57q7hRkbdODrr+XwYYuI1c3lVsU0de+aWWi19/wYBvS9RsjUK
-	uwBF5w0/ibIlVuda3foU/xhL+8n+jR+KchWsjjAOWjWGzb5MH023IE1Y+3bEoIJijJUS
-	8f6M5qg9z6HNEX4lPcI/KRTEAauXDCHdOc0SI=
+	:user-agent; bh=+FDxcnNR4jt8QWKKGtM073PoOpYMpOHbx+18FvugGpU=;
+	b=iFZXmnZrL6mXAt1sWAt0LsUkjlVCVSouVnWs8/FHWI2VaxxG0ZOP3jNwXdxrcXc0Fc
+	ztuzqNV8bocfZ6gs3ZY2Ru4Zpy5Wcmoi1HOnuVciCsFN4Vc3sPtCrNf7hzsrXsCqzEbo
+	mCNDv6H5flWiBd/E+etemtJrB2AQOEIZmrWE0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:mail-followup-to:references
 	:mime-version:content-type:content-disposition
 	:content-transfer-encoding:in-reply-to:user-agent;
-	b=CHdIQ46kL8NPB6z3KDEAabQXf1Q4xYgvp600VdRyG0aDZcz3rYY/NzqS2x2eZa+8vl
-	y4n+JYNthpEz3zJ2wpA/nRfsVPVq0LFVOutD6HHccrwfjZLAXii9FKSv4DfwgToNRguc
-	aBVwDElkK/kR6PmIBTr3Pt9MGR0PwM9SdRJqI=
-Received: by 10.90.18.5 with SMTP id 5mr1477724agr.204.1297897045614;
-	Wed, 16 Feb 2011 14:57:25 -0800 (PST)
+	b=Cx9GFQCmNvFsGgYeRW2HCK6XRcjTOAqQFu91NCWwj32j9bhQp58hHXNRK9aMgNnWCW
+	oDr5QT+hCCRqllcFTivDvTEM11rhYq+qA1yGGJIAjfpYmoBN6i7qwpXhosDXuxVkL3nU
+	SEVQemMmPsNB+rDGbFMyBrqBJex5gczEFJ7eI=
+Received: by 10.42.227.3 with SMTP id iy3mr1730844icb.435.1297897127037;
+	Wed, 16 Feb 2011 14:58:47 -0800 (PST)
 Received: from sakrah.homelinux.org
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id d15sm288503ana.35.2011.02.16.14.57.24
+	by mx.google.com with ESMTPS id i16sm178579ibl.6.2011.02.16.14.58.44
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 16 Feb 2011 14:57:24 -0800 (PST)
-Date: Wed, 16 Feb 2011 14:57:27 -0800
+	Wed, 16 Feb 2011 14:58:45 -0800 (PST)
+Date: Wed, 16 Feb 2011 14:58:48 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110216225727.GK14525@sakrah.homelinux.org>
+Message-ID: <20110216225848.GL14525@sakrah.homelinux.org>
 Mail-Followup-To: openembedded-devel@lists.openembedded.org
 References: <1297852433-31160-1-git-send-email-eric@eukrea.com>
-	<1297852433-31160-5-git-send-email-eric@eukrea.com>
+	<1297852433-31160-6-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-In-Reply-To: <1297852433-31160-5-git-send-email-eric@eukrea.com>
+In-Reply-To: <1297852433-31160-6-git-send-email-eric@eukrea.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH 05/10] nodejs: add 0.4.0
+Subject: Re: [PATCH 06/10] busybox: add group to -passwd package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,87 +52,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Feb 2011 22:58:41 -0000
+X-List-Received-Date: Wed, 16 Feb 2011 23:00:02 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
 On (16/02/11 11:33), Eric Bénard wrote:
-> compile tested for armv5, previous node-cross-cc_0.2.6.patch
-> doesn't seems anymore necessary unless I made a mistake, AJ may
-> you please check this point ?
-> 
+> From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+> Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 > Signed-off-by: Eric Bénard <eric@eukrea.com>
-> Cc: AJ ONeal <coolaj86@gmail.com>
-
-in general looks fine if AJ does not find anything
+> Acked-by: Tom Rini <tom_rini@mentor.com>
 
 Acked-by: Khem Raj <raj.khem@gmail.com>
 
 > ---
->  recipes/nodejs/files/libev-cross-cc_0.4.0.patch |   13 +++++++++
->  recipes/nodejs/nodejs_0.4.0.bb                  |   32 +++++++++++++++++++++++
->  2 files changed, 45 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/nodejs/files/libev-cross-cc_0.4.0.patch
->  create mode 100644 recipes/nodejs/nodejs_0.4.0.bb
+>  recipes/busybox/busybox.inc      |    6 +++++-
+>  recipes/busybox/busybox_1.1x.inc |    1 +
+>  recipes/busybox/files/group      |   12 ++++++++++++
+>  recipes/busybox/files/passwd     |    3 ---
+>  recipes/busybox/files/shadow     |    3 ---
+>  5 files changed, 18 insertions(+), 7 deletions(-)
+>  create mode 100644 recipes/busybox/files/group
 > 
-> diff --git a/recipes/nodejs/files/libev-cross-cc_0.4.0.patch b/recipes/nodejs/files/libev-cross-cc_0.4.0.patch
+> diff --git a/recipes/busybox/busybox.inc b/recipes/busybox/busybox.inc
+> index 9c0bddc..dc97c5f 100644
+> --- a/recipes/busybox/busybox.inc
+> +++ b/recipes/busybox/busybox.inc
+> @@ -19,6 +19,7 @@ SRC_URI = "\
+>    file://busybox-udhcpd \
+>    file://default.script file://simple.script \
+>    file://dhcp-hostname.patch \
+> +  file://group \
+>    file://hwclock.sh \
+>    file://hwclock-default \
+>    file://ifupdown-spurious-environ.patch \
+> @@ -56,7 +57,7 @@ RPROVIDES_${PN}-inetd = "inetd"
+>  FILES_${PN}-httpd = "${sysconfdir}/init.d/busybox-httpd /srv/www"
+>  FILES_${PN}-inetd = "${sysconfdir}/init.d/inetd.${PN} \
+>                       ${sysconfdir}/inetd.conf"
+> -FILES_${PN}-passwd = "${sysconfdir}/passwd.${PN}"
+> +FILES_${PN}-passwd = "${sysconfdir}/passwd.${PN} ${sysconfdir}/group.${PN}"
+>  FILES_${PN}-shadow = "${sysconfdir}/shadow.${PN}"
+>  FILES_${PN}-syslog = "${sysconfdir}/init.d/syslog.${PN} \
+>                        ${sysconfdir}/default/busybox-syslog"
+> @@ -196,6 +197,7 @@ do_install () {
+>  
+>  	if grep -q "CONFIG_PASSWD=y" ${WORKDIR}/defconfig; then
+>  	    install -m 0644 ${WORKDIR}/passwd ${D}${sysconfdir}/passwd.${PN}
+> +	    install -m 0644 ${WORKDIR}/group ${D}${sysconfdir}/group.${PN}
+>  	    if grep -q "CONFIG_FEATURE_SHADOWPASSWDS=y" ${WORKDIR}/defconfig; then
+>  	        install -m 0640 ${WORKDIR}/shadow ${D}${sysconfdir}/shadow.${PN}
+>              fi
+> @@ -293,9 +295,11 @@ pkg_prerm_${PN}-mountall () {
+>  
+>  pkg_postinst_${PN}-passwd () {
+>  	update-alternatives --install ${sysconfdir}/passwd default_passwd passwd.${PN} 50
+> +	update-alternatives --install ${sysconfdir}/group default_group group.${PN} 50
+>  }
+>  pkg_prerm_${PN}-passwd () {
+>  	update-alternatives --remove default_passwd passwd.${PN}
+> +	update-alternatives --remove default_group group.${PN}
+>  }
+>  
+>  pkg_postinst_${PN}-shadow () {
+> diff --git a/recipes/busybox/busybox_1.1x.inc b/recipes/busybox/busybox_1.1x.inc
+> index 763b324..7623944 100644
+> --- a/recipes/busybox/busybox_1.1x.inc
+> +++ b/recipes/busybox/busybox_1.1x.inc
+> @@ -13,6 +13,7 @@ SRC_URI = "\
+>    file://busybox-httpd \
+>    file://busybox-udhcpd \
+>    file://default.script file://simple.script \
+> +  file://group \
+>    file://hwclock.sh \
+>    file://hwclock-default \
+>    file://inetd \
+> diff --git a/recipes/busybox/files/group b/recipes/busybox/files/group
 > new file mode 100644
-> index 0000000..2b9838f
+> index 0000000..3dd8cdd
 > --- /dev/null
-> +++ b/recipes/nodejs/files/libev-cross-cc_0.4.0.patch
-> @@ -0,0 +1,13 @@
-> +diff --git a/deps/libev/wscript b/deps/libev/wscript
-> +index 4f6c9a8..1796749 100644
-> +--- a/deps/libev/wscript
-> ++++ b/deps/libev/wscript
-> +@@ -58,7 +58,7 @@ def configure(conf):
-> +           return 0;
-> +       }
-> +   """
-> +-  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=True,
-> ++  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=False,
-> +                 msg="Checking for SYS_clock_gettime")
-> + 
-> +   have_librt = conf.check(lib='rt', uselib_store='RT')
-> diff --git a/recipes/nodejs/nodejs_0.4.0.bb b/recipes/nodejs/nodejs_0.4.0.bb
-> new file mode 100644
-> index 0000000..be3d23e
-> --- /dev/null
-> +++ b/recipes/nodejs/nodejs_0.4.0.bb
-> @@ -0,0 +1,32 @@
-> +DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
-> +HOMEPAGE = "http://nodejs.org"
-> +LICENSE = "MIT"
-> +
-> +DEPENDS = "openssl"
-> +
-> +SRC_URI = " \
-> +  http://nodejs.org/dist/node-v${PV}.tar.gz \
-> +  file://libev-cross-cc_${PV}.patch \
-> +"
-> +
-> +SRC_URI[md5sum] = "18f89256751f9b8e27dee8494f508171"
-> +SRC_URI[sha256sum] = "4a30bd9963373cb86a994479bdd451ab3b6f2124f0089493366315da79d3408e"
-> +
-> +S = "${WORKDIR}/node-v${PV}"
-> +
-> +# v8 errors out if you have set CCACHE
-> +CCACHE = ""
-> +
-> +do_configure () {
-> +  ./configure --prefix=${prefix} --without-snapshot
-> +}
-> +
-> +do_compile () {
-> +  make
-> +}
-> +
-> +do_install () {
-> +  DESTDIR=${D} oe_runmake install
-> +}
-> +
-> +BBCLASSEXTEND = "native"
+> +++ b/recipes/busybox/files/group
+> @@ -0,0 +1,12 @@
+> +root:x:0:
+> +daemon:x:1:
+> +bin:x:2:
+> +sys:x:3:
+> +tty:x:5:
+> +disk:x:6:
+> +mail:x:8:
+> +man:x:12:
+> +www-data:x:33:
+> +utmp:x:43:
+> +nogroup:x:65534:
+> +users:x:100:
+> diff --git a/recipes/busybox/files/passwd b/recipes/busybox/files/passwd
+> index 64c9ab6..34921c3 100644
+> --- a/recipes/busybox/files/passwd
+> +++ b/recipes/busybox/files/passwd
+> @@ -2,10 +2,7 @@ root:x:0:0:root:/root:/bin/sh
+>  daemon:x:1:1:daemon:/usr/sbin:/bin/sh
+>  bin:x:2:2:bin:/bin:/bin/sh
+>  sys:x:3:3:sys:/dev:/bin/sh
+> -sync:x:4:65534:sync:/bin:/bin/sync
+>  man:x:6:12:man:/var/cache/man:/bin/sh
+>  mail:x:8:8:mail:/var/mail:/bin/sh
+>  www-data:x:33:33:www-data:/var/www:/bin/sh
+> -backup:x:34:34:backup:/var/backups:/bin/sh
+> -irc:x:39:39:ircd:/var/run/ircd:/bin/sh
+>  nobody:x:65534:65534:nobody:/nonexistent:/bin/sh
+> diff --git a/recipes/busybox/files/shadow b/recipes/busybox/files/shadow
+> index 25df693..e64a964 100644
+> --- a/recipes/busybox/files/shadow
+> +++ b/recipes/busybox/files/shadow
+> @@ -2,10 +2,7 @@ root::14741:0:99999:7:::
+>  daemon:*:14741:0:99999:7:::
+>  bin:*:14741:0:99999:7:::
+>  sys:*:14741:0:99999:7:::
+> -sync:*:14741:0:99999:7:::
+>  man:*:14741:0:99999:7:::
+>  mail:*:14741:0:99999:7:::
+>  www-data:*:14741:0:99999:7:::
+> -backup:*:14741:0:99999:7:::
+> -irc:*:14741:0:99999:7:::
+>  nobody:*:14741:0:99999:7:::
 > -- 
 > 1.7.0.4
 > 
