@@ -1,40 +1,27 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PpeXN-0000bf-A2
+	(envelope-from <sledz@dresearch.de>) id 1Ppeaw-0000gv-Ok
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Feb 2011 11:23:09 +0100
-Received: by bwz10 with SMTP id 10so1340633bwz.6
+	Wed, 16 Feb 2011 11:26:50 +0100
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 9A2AB491282
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Feb 2011 02:21:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=9TOxhzzzxx00ClRfZs9/0jgPht/y5R59BjZxjZ/YLaY=;
-	b=RUOmriBJXwSz7CRE0c19PaCzLje+TJ5hqK8fqjGbwvRzrS7EhGwLHFpPk5EIgneObc
-	1hq7PCR436SGxQN8s+7S1s7B/hQBGSiwEChWes0AOv9idEObm3s45NR8e+Kg4KpJtT8d
-	ki7odEsfdJ01cY/LCk6S3xXuMdrk4tHwhKbwM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=xdATC14xPERjjUmzOb8LaRhaKkzpbX+2q2oZzuDL8aK14HmhfOhfYYZhrC6Zv5bptU
-	lf0T0eR9Nfhyy1VL1r64FMhRM/Kt5Dcc+AJdJPL0m7/mrOvt0AGkah6+Tt/8h8k04U8K
-	gt9wxTs12PfqNEOmiMt0SiteeDvtiQoletfKw=
+	Wed, 16 Feb 2011 11:25:41 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Wed, 16 Feb 2011 11:25:41 +0100
+Message-ID: <4D5BA625.1000209@dresearch.de>
+Date: Wed, 16 Feb 2011 11:25:41 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.204.77.18 with SMTP id e18mr318936bkk.78.1297851716368; Wed,
-	16 Feb 2011 02:21:56 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.119.207 with HTTP; Wed, 16 Feb 2011 02:21:56 -0800 (PST)
-In-Reply-To: <AANLkTimPz8ji6Lo-Yh2DmRUc0=A-EwePxre6GiTss2=V@mail.gmail.com>
-References: <AANLkTimSjWURf8gMrVZGd==xCH3jnWEG_=G8EMfsdbW1@mail.gmail.com>
-	<AANLkTimPz8ji6Lo-Yh2DmRUc0=A-EwePxre6GiTss2=V@mail.gmail.com>
-Date: Wed, 16 Feb 2011 10:21:56 +0000
-X-Google-Sender-Auth: LvldzxbEPQS5eNGJ8C3aO3xvWnA
-Message-ID: <AANLkTi=P1xjkWFg=JpFXU3a=LeU+nWxgw=ScxoBZ1E5_@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Pull request from O.S. Systems tree
+References: <4D5A3098.8060102@dresearch.de>
+In-Reply-To: <4D5A3098.8060102@dresearch.de>
+X-OriginalArrivalTime: 16 Feb 2011 10:25:41.0614 (UTC)
+	FILETIME=[DCC0F0E0:01CBCDC3]
+Subject: Re: do_rootfs failure (angstrom-x-image testing-release-2011.03)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,46 +35,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Feb 2011 10:23:09 -0000
+X-List-Received-Date: Wed, 16 Feb 2011 10:26:50 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 16, 2011 at 07:45, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> Otavio, thanks for your contributions.
->
-> One remark:
-> - what about going to a newer version of cups. i seem to recall
-> meta-oe or poky has 1.4.6
+Am 15.02.2011 08:51, schrieb Steffen Sledz:
+> | Collected errors:
+> |  * check_data_file_clashes: Package xfce4-notifyd wants to install fi=
+le /var/lib/jenkins/jobs/OE-testing/workspace/tmp/rootfs/angstrom-x-image=
+/usr/share/dbus-1/services/org.freedesktop.Notifications.service
+> | 	But that file is already provided by package  * notification-daemon
+> |  * opkg_install_cmd: Cannot install package task-xfce46-extras.
+> |  * resolve_conffiles: Existing conffile /var/lib/jenkins/jobs/OE-test=
+ing/workspace/tmp/rootfs/angstrom-x-image/etc/device_table is different f=
+rom the conffile in the new package. The new conffile will be placed at /=
+var/lib/jenkins/jobs/OE-testing/workspace/tmp/rootfs/angstrom-x-image/etc=
+/device_table-opkg.
+> NOTE: package angstrom-x-image-1.0-r0: task do_rootfs: Failed
+> ERROR: TaskFailed event exception, aborting
+> ERROR: Build of /var/lib/jenkins/jobs/OE-testing/workspace/openembedded=
+/recipes/images/angstrom-x-image.bb do_rootfs failed
+>=20
+> Build Configuration:
+> BB_VERSION        =3D "1.10.2"
+> METADATA_BRANCH   =3D "testing-release-2011.03"
+> METADATA_REVISION =3D "af8541c"
+> TARGET_ARCH       =3D "arm"
+> TARGET_OS         =3D "linux-gnueabi"
+> MACHINE           =3D "hipox"
+> DISTRO            =3D "angstrom"
+> DISTRO_VERSION    =3D "2010.7-test-20110214"
+> TARGET_FPU        =3D "soft"
 
-Sure. This is easy and I can do. I just wanted to get this part merged
-before doing it.
+Ping!
 
-> And one request (or maybe discussion point for the community).
-> Would it be possible to post patches. That makes it much easier to review=
- them.
+Would be nice to fix this before Tom updates the testing-release-2011.03 =
+branch.
 
-Sure I can. It is at
-https://projetos.ossystems.com.br/git/?p=3Dusers/otavio/org.openembedded.de=
-v.git;a=3Dsummary
-
-> (alternately maybe links to web browsable patches would be nice).
-> pull requests are somewhat harder to review (at least for me)
-
-Well ... not really. You can copy the line from the pull-request and
-merge it into a temporary branch and check it there. You don't have to
-add the remote for it. Just:
-
-git checkout -b review-otavio
-git pull git://projetos.ossystems.com.br/git/users/otavio/org.openembedded.=
-dev.git
-master
+Steffen
 
 --=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@DResearch.de
+Fax: +49 30 515932-299
+Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
+
 
 
