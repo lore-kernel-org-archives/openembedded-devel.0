@@ -1,42 +1,43 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Ppqb3-0004GH-Qv
+	(envelope-from <raj.khem@gmail.com>) id 1Ppqbu-0004J0-Uv
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Feb 2011 00:15:45 +0100
-Received: by bwz10 with SMTP id 10so2003605bwz.6
+	Thu, 17 Feb 2011 00:16:39 +0100
+Received: by iwn8 with SMTP id 8so1830787iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Feb 2011 15:14:33 -0800 (PST)
+	Wed, 16 Feb 2011 15:15:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=68zTQ+8vOYUj/QZI3lxM73UYXyGPayLgRWqJS9BXZVc=;
-	b=dJqchsKopvXCwrE7z5RGc8NybqgEgZqIHZpb6IaoSWTMfqm4IAo3RGIkIzi5pnPLkL
-	NdS4VJwVADQBOWUJ0L55B2AK0ej/Pyl7o34qMwavnbthPxiZaHq+LbpLFO894/v5dDWr
-	ZCmLmhpxnI4q8+rWafB1TqYiJL/ZzIxDz5KqU=
+	h=domainkey-signature:date:from:to:subject:message-id
+	:mail-followup-to:references:mime-version:content-type
+	:content-disposition:in-reply-to:user-agent;
+	bh=xn8C6Z0wmx1Dj2FzeiIMdQOxeX7PwjYy22q1pvm/378=;
+	b=uk8fXC54/TJ9U1hmte3G7dHHv+7JTq/Wg/+YpncO8hBBw6KpTWqQqxbjkzASN0Ghxf
+	QWvUaDyNUusU12H0tp0fVnBTXEIyHFm0+2e2xnjTgddRuQk5v4h0Me4LLDOYeBnrUPTU
+	WaToWHvRqJODxFSptbIgzpp87VJd14q2/k/mc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=Jk8vrVwRgxnpl82s+4ln41ebITYctlPeameYPkIzSIpH80LM0rCXeqS5yPQduKw2ax
-	IogNZHrbqWvSFHKe7YDhhhf9EDVyNdE566pZeWltIcHBze1LGptFi2viXFYj+TIr8F+t
-	bN5HUmInM9lata/dYPQM2Eb5RLUntVYD3Wg3Y=
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	b=IkiZp9JM/VsamSVqhnRoeS0rINrwRA5wNsQDyWLVJga4rMNxnfWsujSBdOIe95XVkg
+	wJJyhPsXmaxkoBqH3o/0JT96mH6Jd4Tybs0stD+RO+S9Kw28CtIgUQwJqzSNHuGaoSm1
+	PvppXxv02sCfP6fzUnIYd9s0nY7JAbEhxB8Uw=
+Received: by 10.42.220.199 with SMTP id hz7mr1803838icb.238.1297898126526;
+	Wed, 16 Feb 2011 15:15:26 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id y8sm159735ica.14.2011.02.16.15.15.24
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 16 Feb 2011 15:15:25 -0800 (PST)
+Date: Wed, 16 Feb 2011 15:15:29 -0800
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110216231529.GW14525@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <003901cbce20$08538e00$18faaa00$@slingshot.co.nz>
 MIME-Version: 1.0
-Received: by 10.204.47.227 with SMTP id o35mr972333bkf.132.1297898073846; Wed,
-	16 Feb 2011 15:14:33 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.119.207 with HTTP; Wed, 16 Feb 2011 15:14:33 -0800 (PST)
-In-Reply-To: <20110216230438.GQ14525@sakrah.homelinux.org>
-References: <1297855134-19216-1-git-send-email-otavio@ossystems.com.br>
-	<1297855134-19216-2-git-send-email-otavio@ossystems.com.br>
-	<20110216230438.GQ14525@sakrah.homelinux.org>
-Date: Wed, 16 Feb 2011 23:14:33 +0000
-X-Google-Sender-Auth: g2_1xG5Hsqh1P4n5LT6zbXnJb8A
-Message-ID: <AANLkTi=3FiQZFfdXX0jxRm=EN3qEqDGdG9X5SU9=p4aP@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org, 
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [PATCH 02/13] python-dbus: update to 0.83.2 and fix rpath to use absolute path
+In-Reply-To: <003901cbce20$08538e00$18faaa00$@slingshot.co.nz>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH] wvstreams 4.6.1 with context patch for ARM architectures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,21 +51,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Feb 2011 23:15:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 16 Feb 2011 23:16:39 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, Feb 16, 2011 at 23:04, Khem Raj <raj.khem@gmail.com> wrote:
-> why is PR different then 'mlX'
+On (17/02/11 10:25), R U Local wrote:
+> Dear List,
+> 
+> Attached is a patch which gets wvdial working on ARM devices.
+> 
+> Wvdial or more precisely wvstreams thows an exception on ARM devices as
+> get/set context isn't supported.
 
-Any specific reason to use mlX? Most recipes use rX so I changed it while o=
-n it.
+Thank you. Can you follow the patch guidelines and resend the patch for
+inclusion
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+http://wiki.openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmbedded
+
+> 
+>  
+> 
+> Cheers Mike.
+> 
+>  
+> 
+>  
+> 
+
+
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+-- 
+-Khem
 
 
