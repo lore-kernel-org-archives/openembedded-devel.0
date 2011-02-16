@@ -1,36 +1,35 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PpbzI-0000Ro-7x
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ppc5j-0003ve-KH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Feb 2011 08:39:48 +0100
-Received: by iwn8 with SMTP id 8so1012972iwn.6
+	Wed, 16 Feb 2011 08:46:29 +0100
+Received: by iwn8 with SMTP id 8so1016766iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Feb 2011 23:38:36 -0800 (PST)
+	Tue, 15 Feb 2011 23:45:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:date
 	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=SgAY6+iN8Slq7+jBuJW/DnjYQedMlkW5f/svsekask8=;
-	b=XvGBbDRmgW9Gn71PHYRiOmkZWC7+gqpzG0iC5NE//vCVaEGCGXdK2OBcmv1kmrhZVS
-	zwwswT8hntkcYEaWRKrijXaTDolzXmqvnS1qQYa1hoxio+4IbdfcmFYomtO90ez/LWCW
-	9Cz4W8G5cCyv0AX8DEC4J4A/Gz2LsjbniwyFI=
+	bh=/bkcJu1W6EI7A+g1fjfzpOIwIcrm9pqnULlyxYZZkzE=;
+	b=dTlTMoQsEvqWmwgcj8kXyuyxbTP2sVGeaQpFLurIbQAOMT8V/+egMijHQeGYMlY2m4
+	PuuJTQzEoBAUIlt8NhR5eq6nSBpakvsZMHNuVa0jOCXbmKyUbZq553HEb9jwB+7DJ/KX
+	sYq36EjVIMgATqzli8jUW9qLChAJbylFp8MMA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=AoVsoTBwgtBp8//Zzm8w4Ih8X//N5NqY2Wq0FLu0VGCjJEuicJTtI4wuwzMNe2x1fh
-	PKX5DSAlndCn81q+bKFhBc7X3gKY7IjnjQEcRrw0ivoZ+XnT57rEYAHHa0D1eNaI56Aw
-	9jfJ8+SY2w4BAP7gH6mGJI6Z4bJWumV/uzHsE=
+	b=YwrokXqVexLhqdjjrpDueAB3ZQdwDavwshyXpLGrWBj3JE8BjfAHaYXg42Q+rmePkC
+	G0ZFinN3B5n85tt4OzdZh9lEMWFb4dcqrhknGSYM+vrhn+DUx5TeuSzOlqL0zOsUqf4X
+	ub4kcMTOsyPOM1nDBymfTU2nyzDS/pVTQd/WU=
 MIME-Version: 1.0
-Received: by 10.231.205.194 with SMTP id fr2mr185825ibb.197.1297841916132;
-	Tue, 15 Feb 2011 23:38:36 -0800 (PST)
-Received: by 10.231.30.73 with HTTP; Tue, 15 Feb 2011 23:38:35 -0800 (PST)
-In-Reply-To: <4D5A8FF2.2010200@mentor.com>
-References: <AANLkTi=bPrL+J+sA6wR+BEK9GuLxbMJRohVAPie-_u_i@mail.gmail.com>
-	<4D5A8FF2.2010200@mentor.com>
-Date: Wed, 16 Feb 2011 08:38:35 +0100
-Message-ID: <AANLkTikybh5rueE=YwrG-RoOYgWo9XXGA9BnDJp8Kf2h@mail.gmail.com>
+Received: by 10.231.35.200 with SMTP id q8mr192697ibd.147.1297842316188; Tue,
+	15 Feb 2011 23:45:16 -0800 (PST)
+Received: by 10.231.30.73 with HTTP; Tue, 15 Feb 2011 23:45:16 -0800 (PST)
+In-Reply-To: <AANLkTimSjWURf8gMrVZGd==xCH3jnWEG_=G8EMfsdbW1@mail.gmail.com>
+References: <AANLkTimSjWURf8gMrVZGd==xCH3jnWEG_=G8EMfsdbW1@mail.gmail.com>
+Date: Wed, 16 Feb 2011 08:45:16 +0100
+Message-ID: <AANLkTimPz8ji6Lo-Yh2DmRUc0=A-EwePxre6GiTss2=V@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: git head: build of rpm-native fails
+Subject: Re: Pull request from O.S. Systems tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,58 +43,161 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Feb 2011 07:39:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 16 Feb 2011 07:46:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2011/2/15 Tom Rini <tom_rini@mentor.com>:
-> On 02/14/2011 11:48 PM, Frans Meulenbroeks wrote:
->>
->> Hi,
->>
->> Yesterday I tried whether I could cross compile a helloworld.rpm to
->> try on a fedora-arm box, but I failed in building rpm-native.
->> This issue was verified by Jay. His log:
->> http://tinderbox.openembedded.net/public/logs/task/25555153.txt
->>
->> apparently this is the failing part is:
->>
->> file -C -m ./magic.mime
->> ./magic.mime, 187: Warning: string extension `B' invalid
->> ./magic.mime, 401: Warning: string extension `B' invalid
->> ./magic.mime, 618: Warning: string extension `B' invalid
->> ./magic.mime, 623: Warning: string extension `B' invalid
->> ./magic.mime, 627: Warning: string extension `B' invalid
->> ./magic.mime, 628: Warning: string extension `B' invalid
->> ./magic.mime, 672: Warning: no need to escape `#'
->> ./magic.mime, 674: Warning: no need to escape `#'
->> file: could not find any magic files!
->> make[4]: *** [magic.mime.mgc] =C3=90=C5=BE=C3=91=CB=86=C3=90=C2=B8=C3=90=
-=C2=B1=C3=90=C2=BA=C3=90=C2=B0 1
->> make[4]: *** =C3=90=C5=BE=C3=90=C2=B6=C3=90=C2=B8=C3=90=C2=B4=C3=90=C2=
-=B0=C3=90=C2=BD=C3=90=C2=B8=C3=90=C2=B5 =C3=90=C2=B7=C3=90=C2=B0=C3=90=C2=
-=B2=C3=90=C2=B5=C3=91=E2=82=AC=C3=91=CB=86=C3=90=C2=B5=C3=90=C2=BD=C3=90=C2=
-=B8=C3=91 =C2=A0=C3=90=C2=B7=C3=90=C2=B0=C3=90=C2=B4=C3=90=C2=B0=C3=90=C2=
-=BD=C3=90=C2=B8=C3=90=C2=B9..
->>
->> I tried the command in a devshell and there it also fails, but I have
->> not really an idea what is wrong (and I don't know too much about RPM
->> anyway)
->> Suggestions? Fixes ?
->
-> rpm depends on having a specific version of file around and there's proba=
-bly
-> a mis-match.
+Otavio, thanks for your contributions.
 
-Guess so.
-Note that this is not host related as the file used is build by OE (file-na=
-tive)
+One remark:
+- what about going to a newer version of cups. i seem to recall
+meta-oe or poky has 1.4.6
 
-Actually maybe we should move to a newer version of rpm. Ours is at
-4.4.2.3, latest stable is 4.8.1
-and file on oe is 5.04, mainstream is 5.05, but I guess that will have
-less impact.
+And one request (or maybe discussion point for the community).
+Would it be possible to post patches. That makes it much easier to review t=
+hem.
+
+(alternately maybe links to web browsable patches would be nice).
+pull requests are somewhat harder to review (at least for me)
 
 Frans
+
+2011/2/15 Otavio Salvador <otavio@ossystems.com.br>:
+> Hello,
+>
+> We have been working forward to get our required changes into OE and
+> currently following ones are queued up for merging. Those fix/improve
+> the issues we found while working in our layer and have been in use
+> for some time without problems.
+>
+> The following changes since commit 5f3bc5b423e00089e97c7a1657760f67bf20aa=
+34:
+>
+> =A0spojegui: bump SRCREV and remove upstream applied desktop file fixes
+> for QA issues (2011-02-15 16:57:05 +0100)
+>
+> are available in the git repository at:
+> =A0git://projetos.ossystems.com.br/git/users/otavio/org.openembedded.dev.=
+git
+> master
+>
+> Otavio Salvador (13):
+> =A0 =A0 =A0xkeyboard-config: avoid recipe code duplication and depends on
+> intltool-native
+> =A0 =A0 =A0python-dbus: update to 0.83.2 and fix rpath to use absolute pa=
+th
+> =A0 =A0 =A0cups: drop unused versions
+> =A0 =A0 =A0cups: merge cups.inc into cups 1.2.12 recipe
+> =A0 =A0 =A0cups: merge cups14.inc into cups 1.4.4 recipe
+> =A0 =A0 =A0cups: add textonly filter and split packages
+> =A0 =A0 =A0libinih: add
+> =A0 =A0 =A0cdparanoia (svn): use build variables to fix packaging when
+> using empty prefix
+> =A0 =A0 =A0sdk.bbclass: cache ${libdir} as ${target_libdir}
+> =A0 =A0 =A0qt4-tools-sdk: use host include headers for dbus
+> =A0 =A0 =A0cmake: drop 2.6.4 as it is not used by any distro
+> =A0 =A0 =A0cmake: update from 2.8.2 to 2.8.3
+> =A0 =A0 =A0distro/micro.conf: drop exec_prefix_native since it is unused
+>
+> =A0classes/sdk.bbclass =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0| =A0 =A01 +
+> =A0conf/distro/micro.conf =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 | =A0 =A01 -
+> =A0recipes/cdparanoia/cdparanoia_svn.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0=
+ =A08 +-
+> =A0.../fix_fortify_source_compilation.patch =A0 =A0 =A0 =A0 =A0 | =A0 32 =
+-----
+> =A0.../dont-run-cross-binaries.patch =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0|=
+ =A0 =A00
+> =A0recipes/cmake/cmake-native_2.6.4.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =
+=A0 10 --
+> =A0...cmake-native_2.8.2.bb =3D> cmake-native_2.8.3.bb} | =A0 =A04 +-
+> =A0.../{cmake-sdk_2.8.2.bb =3D> cmake-sdk_2.8.3.bb} =A0 =A0 | =A0 =A04 +-
+> =A0recipes/cmake/cmake_2.6.4.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 | =A0 11 --
+> =A0recipes/cmake/{cmake_2.8.2.bb =3D> cmake_2.8.3.bb} =A0 | =A0 =A06 +-
+> =A0recipes/cups/cups-1.1.23/strftime_fix.patch =A0 =A0 =A0 =A0| =A0 26 --=
+--
+> =A0.../cups/cups-1.3.8/use_echo_only_in_init.patch =A0 =A0| =A0 11 --
+> =A0recipes/cups/cups-1.4.3/configure.patch =A0 =A0 =A0 =A0 =A0 =A0| =A011=
+7 ------------------
+> =A0recipes/cups/cups-1.4.3/skip_tools.patch =A0 =A0 =A0 =A0 =A0 | =A0 51 =
+--------
+> =A0.../cups/cups-1.4.3/use_echo_only_in_init.patch =A0 =A0| =A0 11 --
+> =A0recipes/cups/cups-1.4.4/text.convs =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =
+=A0 =A06 +
+> =A0recipes/cups/cups-1.4.4/textonly =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 |=
+ =A0124 ++++++++++++++++++++
+> =A0recipes/cups/cups-1.4.4/textonly.ppd =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0=
+ 47 ++++++++
+> =A0recipes/cups/cups.inc =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0| =A0 89 --------------
+> =A0recipes/cups/cups14.inc =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0| =A0 83 -------------
+> =A0recipes/cups/cups_1.1.23.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0| =A0 51 --------
+> =A0recipes/cups/cups_1.2.12.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0| =A0 92 ++++++++++++++-
+> =A0recipes/cups/cups_1.2.7.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 | =A0 80 -------------
+> =A0recipes/cups/cups_1.3.8.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 | =A0 11 --
+> =A0recipes/cups/cups_1.4.3.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 | =A0 15 ---
+> =A0recipes/cups/cups_1.4.4.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 | =A0122 +++++++++++++++++--
+> =A0recipes/libinih/libinih_git.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ | =A0 14 +++
+> =A0...python-dbus_0.83.0.bb =3D> python-dbus_0.83.2.bb} | =A0 10 +-
+> =A0recipes/qt4/qt4-tools-sdk.inc =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0| =A0 =A08 +-
+> =A0recipes/xkeyboard-config/xkeyboard-config.inc =A0 =A0 =A0| =A0 18 +++
+> =A0recipes/xkeyboard-config/xkeyboard-config_1.4.bb =A0 | =A0 18 +---
+> =A0recipes/xkeyboard-config/xkeyboard-config_1.8.bb =A0 | =A0 18 +---
+> =A0recipes/xkeyboard-config/xkeyboard-config_git.bb =A0 | =A0 17 +---
+> =A033 files changed, 441 insertions(+), 675 deletions(-)
+> =A0delete mode 100644
+> recipes/cmake/cmake-2.6.4/fix_fortify_source_compilation.patch
+> =A0rename recipes/cmake/{cmake-2.8.2 =3D>
+> cmake-2.8.3}/dont-run-cross-binaries.patch (100%)
+> =A0delete mode 100644 recipes/cmake/cmake-native_2.6.4.bb
+> =A0rename recipes/cmake/{cmake-native_2.8.2.bb =3D> cmake-native_2.8.3.bb=
+} (56%)
+> =A0rename recipes/cmake/{cmake-sdk_2.8.2.bb =3D> cmake-sdk_2.8.3.bb} (56%=
+)
+> =A0delete mode 100644 recipes/cmake/cmake_2.6.4.bb
+> =A0rename recipes/cmake/{cmake_2.8.2.bb =3D> cmake_2.8.3.bb} (91%)
+> =A0delete mode 100644 recipes/cups/cups-1.1.23/strftime_fix.patch
+> =A0delete mode 100644 recipes/cups/cups-1.3.8/use_echo_only_in_init.patch
+> =A0delete mode 100644 recipes/cups/cups-1.4.3/configure.patch
+> =A0delete mode 100644 recipes/cups/cups-1.4.3/skip_tools.patch
+> =A0delete mode 100644 recipes/cups/cups-1.4.3/use_echo_only_in_init.patch
+> =A0create mode 100644 recipes/cups/cups-1.4.4/text.convs
+> =A0create mode 100644 recipes/cups/cups-1.4.4/textonly
+> =A0create mode 100644 recipes/cups/cups-1.4.4/textonly.ppd
+> =A0delete mode 100644 recipes/cups/cups.inc
+> =A0delete mode 100644 recipes/cups/cups14.inc
+> =A0delete mode 100644 recipes/cups/cups_1.1.23.bb
+> =A0delete mode 100644 recipes/cups/cups_1.2.7.bb
+> =A0delete mode 100644 recipes/cups/cups_1.3.8.bb
+> =A0delete mode 100644 recipes/cups/cups_1.4.3.bb
+> =A0create mode 100644 recipes/libinih/libinih_git.bb
+> =A0rename recipes/python/{python-dbus_0.83.0.bb =3D> python-dbus_0.83.2.b=
+b} (71%)
+> =A0create mode 100644 recipes/xkeyboard-config/xkeyboard-config.inc
+>
+>
+> --
+> Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0O.S. Systems
+> E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+> Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.oss=
+ystems.com.br
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
