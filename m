@@ -1,31 +1,32 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pq9EV-0004HW-8U
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pq9Jg-0003e5-7d
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Feb 2011 20:09:48 +0100
-Received: by qwi2 with SMTP id 2so2617643qwi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Feb 2011 11:08:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=r74hWQBxDVnzpxHhViUNih07ms0CsQkiyrxjwYRBSKc=;
-	b=Nr6I/wDggJ0U24msVYJI1U2a6k+huO/0b7PcEcbL5cW5s7lA7FNEaDRlAY+Vnnq0tD
-	2cQoqbeWsR2aQlZJ4kBPIb9h6ywPS9s5Hm0v2u6sIvmEDFPEg7qtLJQaOe3VcYch3jRJ
-	H7mMs8nPEL+TAciYblzfUmsDGWvxYSqIee3HU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Y12ZU6lgtFKVORJ9fVYwq1sUW4bYrDe9fgn29GSNKdCA+bln8CE/dPDjBlVdFNYA+a
-	PZauwDDgQPZcptRi/xb2GmMgshoJEmryBrU/moELD6wFM8mNkYqIVfWYA1+fXn+fW4Tx
-	mqbgh2irGmDmAkhA3vyU/uMz61K6ChlVkNshs=
+	Thu, 17 Feb 2011 20:15:04 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1Pq9IU-0007Yp-Mn from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Feb 2011 11:13:50 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Thu, 17 Feb 2011 11:13:50 -0800
+Received: from [172.30.80.148] ([172.30.80.148]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 17 Feb 2011 12:13:49 -0700
+Message-ID: <4D5D7369.6090309@mentor.com>
+Date: Thu, 17 Feb 2011 12:13:45 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.229.241.194 with SMTP id lf2mr2667128qcb.222.1297969704834;
-	Thu, 17 Feb 2011 11:08:24 -0800 (PST)
-Received: by 10.229.193.10 with HTTP; Thu, 17 Feb 2011 11:08:24 -0800 (PST)
-Date: Thu, 17 Feb 2011 20:08:24 +0100
-Message-ID: <AANLkTikjzq=jS=+RTpZ=uxeA_5++CfZT3RetB9et29nS@mail.gmail.com>
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Broken kernel module dependencies
+References: <E1Pq9De-0007GV-Ap@melo.openembedded.org>
+In-Reply-To: <E1Pq9De-0007GV-Ap@melo.openembedded.org>
+X-OriginalArrivalTime: 17 Feb 2011 19:13:49.0508 (UTC)
+	FILETIME=[CE9F9840:01CBCED6]
+Subject: Re: [oe-commits] Eric BENARD : bitbake.conf: export LC_ALL = "C"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,45 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Feb 2011 19:09:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 17 Feb 2011 19:15:04 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi,
+On 02/17/2011 12:08 PM, git version control wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 2471584764deb2384512a767f5c6439b0b8aac37
+> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=2471584764deb2384512a767f5c6439b0b8aac37
+>
+> Author: Eric BENARD<eric@eukrea.com>
+> Date:   Tue Jan 11 05:33:45 2011 +0000
+>
+> bitbake.conf: export LC_ALL = "C"
+>
+> * thus the build system language won't create troubles during builds
+> (example : perl is hacking some generated files' content but only
+> supports english outputs).
+>
+> * this problem is only met when using bitbake master
+>
+> Signed-off-by: Eric Bénard<eric@eukrea.com>
+> Signed-off-by: Tom Rini<tom_rini@mentor.com>
 
-lately I have noticed that the bootstrap image I build contains the
-orinoco-cs.ko kernel module, but doesn't contain orinoco.ko (which is
-depended on by orinoco-cs.ko).
+FYI, I acked this after noticing that Richard did the same thing to poky 
+recently (and I had delegated this patch to myself in patchwork this 
+past weekend with a mental TODO to bug RP about it..).
 
-The problem is that package has only these dependencies:
-update-modules, kernel-2.6.34
-
-AFAIK dependencies between modules are retrieved by parse_depmod()
-from kernel.bbclass.
-
-Here it returns things like:
-
-{ 'kernel/drivers/net/wireless/orinoco/orinoco_cs.ko':
-  ['kernel/drivers/net/wireless/orinoco/orinoco.ko',
-    'kernel/net/wireless/cfg80211.ko'],
-}
-
-It is later used by get_dependencies() in the same file.
-This function does something like this:
-
-file = file.replace(bb.data.getVar('PKGD', d, 1) or '', '', 1)
-if module_deps.has_key(file):
-[...]
-
-File value in my case (after replacing) is:
-/lib/modules/2.6.34/kernel/drivers/net/wireless/orinoco/orinoco_cs.ko
-
-Of course  'kernel/drivers/net/wireless/orinoco/orinoco_cs.ko' !=
-'/lib/modules/2.6.34/kernel/drivers/net/wireless/orinoco/orinoco_cs.ko'
-which causes my problem.
-
-What can be done to fix this? How did it get broken (last week or so)?
-
-bye,
-Filip Zyzniewski
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
