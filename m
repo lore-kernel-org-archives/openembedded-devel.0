@@ -1,36 +1,30 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PqCUU-0005VL-7Y
+	(envelope-from <Tom_Rini@mentor.com>) id 1PqDQr-0005gf-Ii
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Feb 2011 23:38:26 +0100
-Received: by fxm17 with SMTP id 17so2967502fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Feb 2011 14:37:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=FiY7jrgxn9EQa+tUxEKfCXtsvpjQhIy+bma01pEqE2U=;
-	b=t3sEooLscSjdqyLBEytekS4PrNb1WvZlxJQQ0Orud1l1RbTbuLwanf++yF7bSu1PzF
-	VDklFXTuPKLVTQnNRK7CtTmmzmWCFPJYUaz1rBX1him6UCNIrmEQAlSLjh1YoBXm9yJy
-	VT/bTLQIu6CuZ8BtczsUJOI9NMXdvxqjvUoq0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=t1E45njkdw30atypH/ios7ZC8Vix5mudu5jngWB6HXGcCSYGQ0NUlx1oqmc15JmqZt
-	cRVg+G4nzvv9DCMRuDkM+B8WR6VSZ369lT3frXthJBE6Mz9TXaN6Q5DxOQQSRESwULsv
-	U0o0HySreiofZe4W+kJ7+bh+Xr/dje0uaCtrI=
-Received: by 10.223.79.74 with SMTP id o10mr3156188fak.63.1297982233606; Thu,
-	17 Feb 2011 14:37:13 -0800 (PST)
+	Fri, 18 Feb 2011 00:38:45 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PqDPg-0001RS-0O from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Feb 2011 15:37:32 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Thu, 17 Feb 2011 15:37:31 -0800
+Received: from [172.30.80.148] ([172.30.80.148]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 17 Feb 2011 16:37:30 -0700
+Message-ID: <4D5DB136.9080407@mentor.com>
+Date: Thu, 17 Feb 2011 16:37:26 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.223.66.22 with HTTP; Thu, 17 Feb 2011 14:36:51 -0800 (PST)
-In-Reply-To: <1297973356-24903-1-git-send-email-filip.zyzniewski@gmail.com>
-References: <AANLkTikjzq=jS=+RTpZ=uxeA_5++CfZT3RetB9et29nS@mail.gmail.com>
-	<1297973356-24903-1-git-send-email-filip.zyzniewski@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 17 Feb 2011 14:36:51 -0800
-Message-ID: <AANLkTimgvFGYV9CAb4Ats8GG4ikmXK7Dkgu_e4+XntMb@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] kernel.bbclass: fix retrieving dependencies between modules.
+X-OriginalArrivalTime: 17 Feb 2011 23:37:31.0069 (UTC)
+	FILETIME=[A50236D0:01CBCEFB]
+Subject: Release-2011.03: Let the testing contiue!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,58 +38,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Feb 2011 22:38:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Feb 2011 23:38:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Feb 17, 2011 at 12:09 PM, Filip Zyzniewski
-<filip.zyzniewski@gmail.com> wrote:
-> get_dependencies() searched for a filename key in dependencies
-> directory with the /lib/modules/kernel_version prefix while
-> the directory had entries stripped of it.
->
-> Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+Hey all,
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+I've updated the testing-release-2011.03 branch exist now and we're 
+ready for more testing.  As a reminder, please update the table on 
+http://wiki.openembedded.org/index.php?title=Release-2011.03 with your 
+results and the githash you're on.
 
-> ---
-> =C2=A0classes/kernel.bbclass | =C2=A0 =C2=A07 ++++++-
-> =C2=A01 files changed, 6 insertions(+), 1 deletions(-)
->
-> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-> index e22211d..3642a53 100644
-> --- a/classes/kernel.bbclass
-> +++ b/classes/kernel.bbclass
-> @@ -385,7 +385,12 @@ python populate_packages_prepend () {
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return deps
->
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0def get_dependencies(file, pattern, format):
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file =3D file.replace(=
-bb.data.getVar('PKGD', d, 1) or '', '', 1)
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 prefix =3D os.path.nor=
-mpath(os.path.join(
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 os.path.join(bb.data.getVar('PKGD', d, 1) or ''),
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 'lib/modules',
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 bb.data.getVar('KERNEL_VERSION', d, 1)
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 )) + '/'
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file =3D file.replace(=
-prefix, '', 1)
->
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if module_deps.has=
-_key(file):
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0import re
-> --
-> 1.7.1
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Also, we expect this to be very bumpy as the RPATH QA issue will bite on 
+a lot of images.  I've got some plans here but fixing some of them is a 
+bit harder than I had hoped.
+
+Thanks again all!
+
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
