@@ -1,28 +1,32 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1Pq1xM-000699-2M
+Received: from 29.mail-out.ovh.net ([87.98.216.213])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1Pq41g-0000AT-Ny
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Feb 2011 12:23:32 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id E53F5491286;
-	Thu, 17 Feb 2011 12:22:19 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 17 Feb 2011 12:22:20 +0100
-Message-ID: <4D5D04EB.2020300@dresearch.de>
-Date: Thu, 17 Feb 2011 12:22:19 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+	Thu, 17 Feb 2011 14:36:09 +0100
+Received: (qmail 1946 invoked by uid 503); 17 Feb 2011 13:34:02 -0000
+Received: from b9.ovh.net (HELO mail644.ha.ovh.net) (213.186.33.59)
+	by 29.mail-out.ovh.net with SMTP; 17 Feb 2011 13:34:02 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 17 Feb 2011 15:34:57 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 17 Feb 2011 15:34:56 +0200
+Message-ID: <4D5D2400.4060202@eukrea.com>
+Date: Thu, 17 Feb 2011 14:34:56 +0100
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4D5CCE87.1040204@dresearch.de>
-	<1297937814.3959.0.camel@mattotaupa>
-In-Reply-To: <1297937814.3959.0.camel@mattotaupa>
-X-OriginalArrivalTime: 17 Feb 2011 11:22:20.0106 (UTC)
-	FILETIME=[F0D36AA0:01CBCE94]
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
-Subject: Re: git.openembedded.org down?
+References: <1297852433-31160-1-git-send-email-eric@eukrea.com>	<1297852433-31160-3-git-send-email-eric@eukrea.com>
+	<20110216225543.GI14525@sakrah.homelinux.org>
+In-Reply-To: <20110216225543.GI14525@sakrah.homelinux.org>
+X-Ovh-Tracer-Id: 2594073385628839241
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: Re: [PATCH 03/10] gnokii: add latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,31 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Feb 2011 11:23:32 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Feb 2011 13:36:10 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Am 17.02.2011 11:16, schrieb Paul Menzel:
-> Am Donnerstag, den 17.02.2011, 08:30 +0100 schrieb Steffen Sledz:
->> sledz@fsc-480-012-88:~/work/openembedded> git fetch upstream
->> ssh: connect to host git.openembedded.org port 22: Connection timed ou=
-t
->> fatal: The remote end hung up unexpectedly
->=20
-> <git://git.openembedded.org/openembedded.git> works fine for me.
+On 16/02/2011 23:55, Khem Raj wrote:
+> On (16/02/11 11:33), Eric Bénard wrote:
+>> - build tested for armv5 with PARALLEL_MAKE="-j8" so I removed
+>> PARALLEL_MAKE = "" which was set in previous recipes.
+>>
+>> Signed-off-by: Eric Bénard<eric@eukrea.com>
+>> ---
+>>   recipes/gnokii/gnokii_0.6.30.bb |   28 ++++++++++++++++++++++++++++
+>>   1 files changed, 28 insertions(+), 0 deletions(-)
+>>   create mode 100644 recipes/gnokii/gnokii_0.6.30.bb
+>>
+>> diff --git a/recipes/gnokii/gnokii_0.6.30.bb b/recipes/gnokii/gnokii_0.6.30.bb
+>> new file mode 100644
+>> index 0000000..0f82c5d
+>> --- /dev/null
+>> +++ b/recipes/gnokii/gnokii_0.6.30.bb
+>> @@ -0,0 +1,28 @@
+>> +LICENSE = "GPL"
+>
+> which version of GPL ?
+>
+GPLv2, fixed int he version I'm going to push.
 
-It seems to be back again.
-
-Steffen
-
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
-
+Eric
 
 
