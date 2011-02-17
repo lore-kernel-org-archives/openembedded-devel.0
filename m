@@ -1,20 +1,32 @@
-Received: from hsvwanfw1-nat.mentorg.com ([139.181.24.34] helo=alm.mentorg.com)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom_rini@mentor.com>) id 1Pq5jh-0006Gr-Er
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pq5kk-0006IZ-RV
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Feb 2011 16:25:41 +0100
-Received: from sb-ubuntu-1004.alm.mentorg.com ([134.86.97.236])
-	by alm.mentorg.com (8.12.10/8.12.10) with ESMTP id p1HFOQ1m030696
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Feb 2011 09:24:26 -0600
+	Thu, 17 Feb 2011 16:26:47 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Pq5jZ-0002Q9-0n from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Feb 2011 07:25:33 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Thu, 17 Feb 2011 07:25:32 -0800
+Received: from [172.30.80.148] ([172.30.80.148]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 17 Feb 2011 08:25:31 -0700
+Message-ID: <4D5D3DE7.2020604@mentor.com>
+Date: Thu, 17 Feb 2011 08:25:27 -0700
 From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Feb 2011 08:24:26 -0700
-Message-Id: <1297956266-30032-2-git-send-email-tom_rini@mentor.com>
-X-Mailer: git-send-email 1.7.3.5
-In-Reply-To: <1297956266-30032-1-git-send-email-tom_rini@mentor.com>
-References: <1297956266-30032-1-git-send-email-tom_rini@mentor.com>
-Subject: [PATCH 2/2] gettext: Pass --disable-rpath on target
+References: <1297925304-12171-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1297925304-12171-1-git-send-email-raj.khem@gmail.com>
+X-OriginalArrivalTime: 17 Feb 2011 15:25:31.0924 (UTC)
+	FILETIME=[EA3A2540:01CBCEB6]
+Subject: Re: [PATCH] contrib/testing/testscript.sh: Dont define BBMASK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,40 +40,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Feb 2011 15:25:42 -0000
+X-List-Received-Date: Thu, 17 Feb 2011 15:26:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-We disable rpath stuff as this casues problems with libtool 2.2
-and 2.4 is fine.
+On 02/16/2011 11:48 PM, Khem Raj wrote:
+> * BBMASK is set in bitbake.conf by default and it
+>    skips nonworking and obsolete recipes which is
+>    what we want emptying it here could cause redundant
+>    parse of the graveyards
+>
+> Signed-off-by: Khem Raj<raj.khem@gmail.com>
+> ---
+>   contrib/testing/testscript.sh |    3 ---
+>   1 files changed, 0 insertions(+), 3 deletions(-)
+>
+> diff --git a/contrib/testing/testscript.sh b/contrib/testing/testscript.sh
+> index 992b02e..3c3927f 100755
+> --- a/contrib/testing/testscript.sh
+> +++ b/contrib/testing/testscript.sh
+> @@ -49,9 +49,6 @@ TMPDIR = "${TOPDIR}/tmp"
+>   BBFILES = "${TOPDIR}/openembedded/recipes/*/*.bb"
+>   ENABLE_BINARY_LOCALE_GENERATION = "0"
+>
+> -# Which files do we want to parse:
+> -BBMASK = ""
+> -
+>   # ccache always overfill $HOME....
+>   CCACHE=""
 
-Signed-off-by: Tom Rini <tom_rini@mentor.com>
----
- recipes/gettext/gettext_0.18.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+Acked-by: Tom Rini <tom_rini@mentor.com>
 
-diff --git a/recipes/gettext/gettext_0.18.bb b/recipes/gettext/gettext_0.18.bb
-index e9e613e..850b269 100644
---- a/recipes/gettext/gettext_0.18.bb
-+++ b/recipes/gettext/gettext_0.18.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "The GNU internationalization library."
- HOMEPAGE = "http://www.gnu.org/software/gettext/gettext.html"
- SECTION = "libs"
- LICENSE = "GPLv3"
--PR = "r4"
-+PR = "r5"
- DEPENDS = "gettext-native virtual/libiconv ncurses expat"
- DEPENDS_virtclass-native = "libxml2-native"
- PROVIDES = "virtual/libintl"
-@@ -26,7 +26,7 @@ PARALLEL_MAKE = ""
- 
- inherit autotools
- 
--NATIVECONF = ""
-+NATIVECONF = "--disable-rpath"
- NATIVECONF_virtclass-native += "--enable-relocatable --disable-curses"
- 
- EXTRA_OECONF += "--without-lispdir \
 -- 
-1.7.3.5
-
+Tom Rini
+Mentor Graphics Corporation
 
 
