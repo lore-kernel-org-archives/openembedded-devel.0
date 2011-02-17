@@ -1,26 +1,32 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <thebohemian@gmx.net>) id 1PqAEg-0007yZ-Cx
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <coolaj86@gmail.com>) id 1PqAJM-0000q8-4s
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Feb 2011 21:13:58 +0100
-Received: (qmail invoked by alias); 17 Feb 2011 20:12:45 -0000
-Received: from 167.163.71-86.rev.gaoland.net (EHLO [192.168.1.72])
-	[86.71.163.167]
-	by mail.gmx.net (mp006) with SMTP; 17 Feb 2011 21:12:45 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/SO+YFAFTSnztUyKcs3j6MMuu/33CkaU46d9EuSi
-	3adT6k3U8eKOS3
-Message-ID: <4D5D813C.6040605@gmx.net>
-Date: Thu, 17 Feb 2011 21:12:44 +0100
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+	Thu, 17 Feb 2011 21:18:48 +0100
+Received: by fxm17 with SMTP id 17so2844099fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Feb 2011 12:17:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:from:date:message-id:subject:to
+	:content-type; bh=BoDO2sXr5XJvpPgHhYhbE/n8cJF38yJaYsUKGTzeuEk=;
+	b=WLIKVGV+YuZQrG+ZTN7HQzgGRyw5/uRSulv+93jY03zjY5yM6ZQuXUnOFA5ckBlNIo
+	vI0uUzjxCxvuqEJY0W8Elml+MNQ+6wg/71xlqnFIgYT3r34q5qR7exlVitCrTBuDdJNx
+	rR3hOHWaXVo9mptB1XL0sjlsp8vfx69weBD1Y=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=lZVaZKm/8F6dvVSdN/2toagMKUMCAHEV3azhOJEzBsb19TU+QqsXAAgky+tTTmLuyp
+	u/Vje72HR1wMqLmPfPICDk0h/JgX5JaTBsTftIa9u2WtK8i25frFEBzel4/qVWLjAUq8
+	G38YwkVpAdcF7OjqYsH2ph3eHmbVCMhYOPC+k=
+Received: by 10.223.79.14 with SMTP id n14mr576451fak.19.1297973774418; Thu,
+	17 Feb 2011 12:16:14 -0800 (PST)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	openembedded-members@lists.openembedded.org
-X-Enigmail-Version: 1.1.2
-X-Y-GMX-Trusted: 0
-Subject: OE@CeBIT - free tickets and helpers needed
+Received: by 10.223.114.73 with HTTP; Thu, 17 Feb 2011 12:15:43 -0800 (PST)
+From: AJ ONeal <coolaj86@gmail.com>
+Date: Thu, 17 Feb 2011 13:15:43 -0700
+Message-ID: <AANLkTinKjwaC=aqTE2ouKF1VN-iHccUdOSwLG7CnV=ET@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: is there a virtual/sysvinit to prevent hard-depends on sysvinit?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,51 +40,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Feb 2011 20:13:58 -0000
-X-Groupsio-MsgNum: 29399
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig9AAE6AAAACF2153F37C4E4C4"
+X-List-Received-Date: Thu, 17 Feb 2011 20:18:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---------------enig9AAE6AAAACF2153F37C4E4C4
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: quoted-printable
+Is there a virtual/sysvinit?
 
-Hi,
-OpenEmbedded's participation at CeBIT is confirmed and the venue starts
-soon. We will have a booth from March 1st to the 5h.
+task-proper-tools depends on sysvinit, which conflicts with upstart.
 
-At the moment there is only Mickey Lauer and me who are manning the
-booth. We really need some more support otherwise this going to be quite
-exhausting for us. :)
+How could I specify that it should depend on a virtual package?
 
-Furthermore for those who are planning to come to the event and want to
-save some money. The CeBIT organizers gave us a bunch of free tickets. I
-don't know yet what kind of information we need to register a ticket for
-you. However if you leave your name and email address on this[1] page
-I'll see what we can do.
+AJ ONeal
 
-The very same page is also used for general organization of the stand.
-So please add yourself as a helper. :)
-
-Regards,
-Robert
-
-[0] - http://wiki.openembedded.org/index.php/CeBIT_2011
-
-
---------------enig9AAE6AAAACF2153F37C4E4C4
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iEYEARECAAYFAk1dgTwACgkQG9cfwmwwEtpDnwCeKKGNqTwslA38jT4cwhB6o1tG
-eNcAn25fjOx4HUFnsh/y9AfYgyutbGYu
-=vxMN
------END PGP SIGNATURE-----
-
---------------enig9AAE6AAAACF2153F37C4E4C4--
