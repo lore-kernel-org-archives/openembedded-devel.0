@@ -1,25 +1,23 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PpyKk-0001dV-2X
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Feb 2011 08:31:26 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 2A52B49127F
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Feb 2011 08:30:16 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 17 Feb 2011 08:30:16 +0100
-Message-ID: <4D5CCE87.1040204@dresearch.de>
-Date: Thu, 17 Feb 2011 08:30:15 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 17 Feb 2011 07:30:16.0401 (UTC)
-	FILETIME=[85A6A410:01CBCE74]
-Subject: git.openembedded.org down?
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pq0w3-00026b-H2 for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Feb 2011 11:18:08 +0100
+Received: from f053032084.adsl.alicedsl.de ([78.53.32.84]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pq0uv-0006GB-6n for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Feb 2011 10:16:57 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4D5CCE87.1040204@dresearch.de>
+References: <4D5CCE87.1040204@dresearch.de>
+Date: Thu, 17 Feb 2011 11:16:54 +0100
+Message-ID: <1297937814.3959.0.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: git.openembedded.org down?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,22 +31,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Feb 2011 07:31:26 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 17 Feb 2011 10:18:08 -0000
+X-Groupsio-MsgNum: 29375
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-o1KsFyg+Mnzs0VAAUfkx"
+
+--=-o1KsFyg+Mnzs0VAAUfkx
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-sledz@fsc-480-012-88:~/work/openembedded> git fetch upstream
-ssh: connect to host git.openembedded.org port 22: Connection timed out
-fatal: The remote end hung up unexpectedly
+Am Donnerstag, den 17.02.2011, 08:30 +0100 schrieb Steffen Sledz:
+> sledz@fsc-480-012-88:~/work/openembedded> git fetch upstream
+> ssh: connect to host git.openembedded.org port 22: Connection timed out
+> fatal: The remote end hung up unexpectedly
 
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+<git://git.openembedded.org/openembedded.git> works fine for me.
 
 
+Thanks,
 
+Paul
+
+
+--=-o1KsFyg+Mnzs0VAAUfkx
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk1c9ZEACgkQPX1aK2wOHVhoagCfYXdNBluFNlMkxta1gJif+5RM
+PUEAnjTblES9o1jQBgYb37TPWtelI3o2
+=k4Ha
+-----END PGP SIGNATURE-----
+
+--=-o1KsFyg+Mnzs0VAAUfkx--
