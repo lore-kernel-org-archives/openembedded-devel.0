@@ -1,38 +1,35 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Ppvxi-0003mf-Ic
+	(envelope-from <raj.khem@gmail.com>) id 1PpxgM-0003nz-Lr
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Feb 2011 05:59:30 +0100
-Received: by fxm17 with SMTP id 17so2096065fxm.6
+	Thu, 17 Feb 2011 07:49:42 +0100
+Received: by pxi17 with SMTP id 17so306322pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Feb 2011 20:58:18 -0800 (PST)
+	Wed, 16 Feb 2011 22:48:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=IfrRbvbZ8cIL6dAwkWCnKYyPweF4qFtwjvb+u8Jea1g=;
-	b=hW7FmunM0QrVTTrnJ5mlbmzfjjKY30xJskvECncIih0tbpQ8/SV35FWTuUgp08SRSz
-	H5PgB9gaITQtIIeIRjZvVtLcApijpQUcWcd+ShCe6AXAlpndoSu2ukfpiF4L84Yn+Jid
-	k6wwj+FvLKOJitG5mTZ/0UQ9DfJC1eZcVLN8I=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=63tdd9AdYOav1xRrfrOt/6gXkZCig8MOxjbKJWl5BJk=;
+	b=WdYGyn4nkecFq4JGWCpkih44ivOhLxgfsRcZ1gGjs17GggtLfRxfsypRy4rOQHbrgb
+	W5N7/aaG8o4RXkZOYwUkj443m1nFYx+YIJeMblifc0EGWiLZ6xsm+ydjoHldqBYsQMPT
+	Vw9V7Ki8cWaYe2zhXZD/0rL3NTTTbeEemk56g=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=ks32nOOFu3n0ov4dW8Eb53Yfti9h4dlp8pPBVkZsqhBbP8k7OVJbetOjOzIMk882AD
-	h9bqeL5n/sgGdEzWoCjZfONTm3fNznSvPCcbHl9jXRXVmuQVrep7ZQ3Pk0qn6A6BjGrS
-	FmK0eIFVe69FfnXNweUN/VuvOIYxnkaOrpdKg=
-Received: by 10.223.104.71 with SMTP id n7mr1771769fao.120.1297918698279; Wed,
-	16 Feb 2011 20:58:18 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.223.66.22 with HTTP; Wed, 16 Feb 2011 20:49:51 -0800 (PST)
-In-Reply-To: <AANLkTi=0f4K-azrbSEdD1UDJBqLFypDMQE4pMwLddv3L@mail.gmail.com>
-References: <1297855134-19216-1-git-send-email-otavio@ossystems.com.br>
-	<20110216230320.GP14525@sakrah.homelinux.org>
-	<AANLkTi=0f4K-azrbSEdD1UDJBqLFypDMQE4pMwLddv3L@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=h4GXvDO89o+YkeP7obNxQdueTeQfyc0leVJmCFnt8Rsczk2J/6vd+vf0Wnomd4czpM
+	k1FEGhDZQ+4DnJf3Q8a2aJc7nVl0dLah+eK9Nwn+SyfbNCU32dQ8R8hbs+UdHhFtkraY
+	/475nG4poO5JIZXdWcUaoirrRQvCBvp+AaYA0=
+Received: by 10.142.170.13 with SMTP id s13mr1238841wfe.109.1297925309674;
+	Wed, 16 Feb 2011 22:48:29 -0800 (PST)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id f5sm819521wfo.4.2011.02.16.22.48.27
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 16 Feb 2011 22:48:28 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 16 Feb 2011 20:49:51 -0800
-Message-ID: <AANLkTimtTWF0SAOX=UnbY6yzVg+ykGDZ-=YX_kbUYKks@mail.gmail.com>
-To: Otavio Salvador <otavio@ossystems.com.br>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 01/13] xkeyboard-config: avoid recipe code duplication and depends on intltool-native
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 16 Feb 2011 22:48:24 -0800
+Message-Id: <1297925304-12171-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.2.3
+Subject: [PATCH] contrib/testing/testscript.sh: Dont define BBMASK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,29 +43,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Feb 2011 04:59:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Feb 2011 06:49:42 -0000
 
-On Wed, Feb 16, 2011 at 3:21 PM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Wed, Feb 16, 2011 at 23:03, Khem Raj <raj.khem@gmail.com> wrote:
->> whynot use meta vars for datadir instead of hardcoding /usr/share ?
->> like below :)
->
-> Good point. Fixed locally.
->
-> Except for it, ack?
+* BBMASK is set in bitbake.conf by default and it
+  skips nonworking and obsolete recipes which is
+  what we want emptying it here could cause redundant
+  parse of the graveyards
 
-yes
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ contrib/testing/testscript.sh |    3 ---
+ 1 files changed, 0 insertions(+), 3 deletions(-)
 
->
-> --
-> Otavio Salvador=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0O.S. Systems
-> E-mail: otavio@ossystems.com.br=C2=A0 http://www.ossystems.com.br
-> Mobile: +55 53 9981-7854=C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0http://projetos.ossystems.com.br
->
+diff --git a/contrib/testing/testscript.sh b/contrib/testing/testscript.sh
+index 992b02e..3c3927f 100755
+--- a/contrib/testing/testscript.sh
++++ b/contrib/testing/testscript.sh
+@@ -49,9 +49,6 @@ TMPDIR = "${TOPDIR}/tmp"
+ BBFILES = "${TOPDIR}/openembedded/recipes/*/*.bb"
+ ENABLE_BINARY_LOCALE_GENERATION = "0"
+ 
+-# Which files do we want to parse:
+-BBMASK = ""
+-
+ # ccache always overfill $HOME....
+ CCACHE=""
+ 
+-- 
+1.7.2.3
+
 
 
