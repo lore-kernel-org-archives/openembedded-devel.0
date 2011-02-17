@@ -1,32 +1,26 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koansoftware@gmail.com>) id 1Pq6hH-0008Vq-EL
+	(envelope-from <philb@gnu.org>) id 1Pq6mB-0000F6-9q
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Feb 2011 17:27:15 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 6BB362C821
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Feb 2011 16:25:05 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hs3zjyZn43lW
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Feb 2011 16:25:01 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 0F7122C7D7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Feb 2011 16:25:00 +0000 (UTC)
-Message-ID: <4D5D4C10.6060704@gmail.com>
-Date: Thu, 17 Feb 2011 17:25:52 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini
-User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
-MIME-Version: 1.0
+	Thu, 17 Feb 2011 17:32:19 +0100
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Pq6l3-0002Dp-09
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Feb 2011 17:31:09 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1297956266-30032-1-git-send-email-tom_rini@mentor.com>
-	<1297956266-30032-2-git-send-email-tom_rini@mentor.com>
-In-Reply-To: <1297956266-30032-2-git-send-email-tom_rini@mentor.com>
-Subject: Re: [PATCH 2/2] gettext: Pass --disable-rpath on target
+In-Reply-To: <20110215103626.GF8619@localhost.jama.net>
+References: <20110214102232.GB8619@localhost.jama.net>
+	<1297697243.2178.97.camel@phil-desktop>
+	<20110215091517.GD8619@localhost.jama.net>
+	<1297765171.2178.109.camel@phil-desktop>
+	<20110215103626.GF8619@localhost.jama.net>
+Date: Thu, 17 Feb 2011 16:33:19 +0000
+Message-ID: <1297960399.2178.216.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: debian.bbclass issues when some package is substring of another
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,56 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Feb 2011 16:27:15 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Feb 2011 16:32:19 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Tom Rini ha scritto, Il 17/02/2011 16:24:
-> We disable rpath stuff as this casues problems with libtool 2.2
-> and 2.4 is fine.
->=20
-> Signed-off-by: Tom Rini <tom_rini@mentor.com>
-> ---
->  recipes/gettext/gettext_0.18.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/recipes/gettext/gettext_0.18.bb b/recipes/gettext/gettext_=
-0.18.bb
-> index e9e613e..850b269 100644
-> --- a/recipes/gettext/gettext_0.18.bb
-> +++ b/recipes/gettext/gettext_0.18.bb
-> @@ -2,7 +2,7 @@ DESCRIPTION =3D "The GNU internationalization library."
->  HOMEPAGE =3D "http://www.gnu.org/software/gettext/gettext.html"
->  SECTION =3D "libs"
->  LICENSE =3D "GPLv3"
-> -PR =3D "r4"
-> +PR =3D "r5"
->  DEPENDS =3D "gettext-native virtual/libiconv ncurses expat"
->  DEPENDS_virtclass-native =3D "libxml2-native"
->  PROVIDES =3D "virtual/libintl"
-> @@ -26,7 +26,7 @@ PARALLEL_MAKE =3D ""
-> =20
->  inherit autotools
-> =20
-> -NATIVECONF =3D ""
-> +NATIVECONF =3D "--disable-rpath"
->  NATIVECONF_virtclass-native +=3D "--enable-relocatable --disable-curse=
-s"
-> =20
->  EXTRA_OECONF +=3D "--without-lispdir \
+On Tue, 2011-02-15 at 11:36 +0100, Martin Jansa wrote:
+> Ah sorry, I didn't read your (b) properly, now I see last sentence about
+> "longest substring".
+> 
+> But that's mostly what reverse sorted patch does now, isn't it? Longer
+> patterns are replaced before their shorter substrings (which then
+> matches only to their proper packages, because longer were already
+> replaced while handling longer pattern and "normally" doesn't match
+> anymore).
 
+Yeah, I think that's probably true.  I haven't managed to convince
+myself entirely that the reverse sorting patch is safe in all
+situations, but neither have I been able to think of a case that my
+algorithm would get right and yours would get wrong.  So I think you
+might as well go ahead and check in your patch, and we can revisit it in
+the future if further problems do pop up.
 
-ACK
+p.
 
-
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-   Atmel third party certified consultant
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
-        http://www.KaeilOS.com
 
 
 
