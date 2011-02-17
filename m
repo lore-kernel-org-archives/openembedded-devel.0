@@ -1,32 +1,31 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <coolaj86@gmail.com>) id 1PqAJM-0000q8-4s
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1PqBbP-0004s5-7X
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Feb 2011 21:18:48 +0100
-Received: by fxm17 with SMTP id 17so2844099fxm.6
+	Thu, 17 Feb 2011 22:41:31 +0100
+Received: by qwi2 with SMTP id 2so2731667qwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Feb 2011 12:17:35 -0800 (PST)
+	Thu, 17 Feb 2011 13:40:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:from:date:message-id:subject:to
-	:content-type; bh=BoDO2sXr5XJvpPgHhYhbE/n8cJF38yJaYsUKGTzeuEk=;
-	b=WLIKVGV+YuZQrG+ZTN7HQzgGRyw5/uRSulv+93jY03zjY5yM6ZQuXUnOFA5ckBlNIo
-	vI0uUzjxCxvuqEJY0W8Elml+MNQ+6wg/71xlqnFIgYT3r34q5qR7exlVitCrTBuDdJNx
-	rR3hOHWaXVo9mptB1XL0sjlsp8vfx69weBD1Y=
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=EAOA6r/PNelgBp7hmQYkosyVSNezZoxhpeeRWcw0Cy0=;
+	b=mRGX8GxiulS2ORMXbp/HIxxa9hnWwHcZVheFNrI2Vj7vo7QYbshDGulvlP8pZekAl4
+	VxUsaPrWMd//yPRMaL2+zZsOpNq6eWcA7zssbXd013KnpiwmoaVwWE90VoLJe2zrfA9m
+	2r/riawxRbxnRU9w3g6Y1DvDJNMmHVPLGFg3E=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=lZVaZKm/8F6dvVSdN/2toagMKUMCAHEV3azhOJEzBsb19TU+QqsXAAgky+tTTmLuyp
-	u/Vje72HR1wMqLmPfPICDk0h/JgX5JaTBsTftIa9u2WtK8i25frFEBzel4/qVWLjAUq8
-	G38YwkVpAdcF7OjqYsH2ph3eHmbVCMhYOPC+k=
-Received: by 10.223.79.14 with SMTP id n14mr576451fak.19.1297973774418; Thu,
-	17 Feb 2011 12:16:14 -0800 (PST)
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=YGEDfgTOosWvpvVG+iWOraNpOnkq61y4YMiRQtIur/xQ9jlzlBdK0qnUlztKQ2v542
+	nN/2YFsM2zCoSSu0EZIlwx7mivpc8VGZJr+vMOOaouzbAYBgtNTp2jFD1pwUYL0jwIw/
+	4eZIwBajV8ikS4EFReHDpHcgjyJX4VTW2ezgE=
 MIME-Version: 1.0
-Received: by 10.223.114.73 with HTTP; Thu, 17 Feb 2011 12:15:43 -0800 (PST)
-From: AJ ONeal <coolaj86@gmail.com>
-Date: Thu, 17 Feb 2011 13:15:43 -0700
-Message-ID: <AANLkTinKjwaC=aqTE2ouKF1VN-iHccUdOSwLG7CnV=ET@mail.gmail.com>
+Received: by 10.229.241.194 with SMTP id lf2mr2830843qcb.222.1297978817442;
+	Thu, 17 Feb 2011 13:40:17 -0800 (PST)
+Received: by 10.229.193.10 with HTTP; Thu, 17 Feb 2011 13:40:17 -0800 (PST)
+Date: Thu, 17 Feb 2011 22:40:17 +0100
+Message-ID: <AANLkTinr=zf_zn16kQrx4h=ZTVnJnZyQVE46oLjN+v-Q@mail.gmail.com>
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: is there a virtual/sysvinit to prevent hard-depends on sysvinit?
+Subject: deb packages architecture problem.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,14 +39,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Feb 2011 20:18:48 -0000
+X-List-Received-Date: Thu, 17 Feb 2011 21:41:31 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Is there a virtual/sysvinit?
+Hi,
 
-task-proper-tools depends on sysvinit, which conflicts with upstart.
+there is a problem with deb packages.
 
-How could I specify that it should depend on a virtual package?
+When installing packages on the target system dpkg complains:
+"package architecture (arm) does not match system (armel)"
 
-AJ ONeal
+The question is - should we convince dpkg that the architecture is
+arm, or build the packages so that their architecture is armel?
+
+First solution may cause some problems with dpkg not expecting this
+value on a particular system, the second means potential bugs
+resulting from a deeper change in OpenEmbedded.
+
+What do you think?
+
+bye,
+Filip Zyzniewski
+
 
