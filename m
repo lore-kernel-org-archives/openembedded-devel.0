@@ -1,31 +1,35 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cdhmanning@gmail.com>) id 1PptnO-00085l-5n
+	(envelope-from <raj.khem@gmail.com>) id 1PpuSb-0000U4-6A
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Feb 2011 03:40:42 +0100
-Received: by fxm17 with SMTP id 17so2017079fxm.6
+	Thu, 17 Feb 2011 04:23:17 +0100
+Received: by fxm17 with SMTP id 17so2043444fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Feb 2011 18:39:30 -0800 (PST)
+	Wed, 16 Feb 2011 19:22:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=vTH4YhjeRcH3iqZxJiVBGFwYP4A6Vu63aCvyZFH+T5U=;
-	b=HA0D9qK9OnZvNsSkWZ29U9NzCVpPu11C2VfiYcwfYOI7i6kgbjT9ql6i+FhFj+Q8kI
-	yeoW/hWwxNQ/1pUh7615p8F9Vbqa8Ba9TtgCRR8v3m6T8czN+TchSn3ahevfcv8HR/F2
-	irnuzSJkLKmWojZU8akXjjuk+0BfkfoQGV6go=
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=avILaJ2TmcPe0hwkuT/2zlouFg0i/Ue9fNPv27H46sE=;
+	b=nA0cXVN8dfgrGKpNUWO5Iy2jcA5AJFqrvgyg0W6TnzCrIzGDr1zLvJfz205LT4l2n0
+	4nns0sjwIwCGrJ3nHeJBtWgyk4zaYP/aSmq7wh72d8JHJtHPKey14eEdahAWtlt8S39F
+	1oQFmsSPQHs7bha5n6O9IzcN5HyrlOdSuzlQo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=WkaDxsvBjkyzmSaQ8+WJ5Cak86yH/20zN6EywNiPWn2l+qDnzAhnsEkuAPEyeBfuJv
-	lggd5ZW+OOK81b+oNtrQ5j4c6RA232s81z0oHnTyPmTP3OJToQ1OxK034eB9Ie6O6fcS
-	Bf3/vGxGCu6iV0I33ZsCFKuCG59k5L2y97qhg=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	b=ALOtcA00kmGlHPHw/cEDSwBcZspqSMy+5GdNa3O5pCyAPscBMQIcP1eghURTnFii1i
+	y0HS2NaM+iFDk5MgAxxPq32oJjrgbpI18+ppwzHobuDWwpU0NgRlmNPlC39PyZ1i1MEu
+	SkvaKpPmpF5qJFz0CSqHAroIPbaBdMhq3uHmA=
+Received: by 10.223.96.199 with SMTP id i7mr1712305fan.101.1297912925517; Wed,
+	16 Feb 2011 19:22:05 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.223.71.197 with SMTP id i5mr1668839faj.127.1297910370285; Wed,
-	16 Feb 2011 18:39:30 -0800 (PST)
-Received: by 10.223.93.205 with HTTP; Wed, 16 Feb 2011 18:39:30 -0800 (PST)
-Date: Thu, 17 Feb 2011 15:39:30 +1300
-Message-ID: <AANLkTimNyeGr3j55MSUs3gtuEXoCRwDGm7m2BhqSrH3t@mail.gmail.com>
-From: Charles Manning <cdhmanning@gmail.com>
+Received: by 10.223.66.22 with HTTP; Wed, 16 Feb 2011 19:21:45 -0800 (PST)
+In-Reply-To: <201102170226.53460.schnitzeltony@gmx.de>
+References: <201102170226.53460.schnitzeltony@gmx.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 16 Feb 2011 19:21:45 -0800
+Message-ID: <AANLkTinefnq9o6Ygep829mGNOjeXqVMsn1hO_c8zXcRk@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Where are the xxx-dev recipes for Enlightenment Foundation Libraries?
+Subject: Re: QA RPATH error for c++ packages?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,18 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Feb 2011 02:40:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 17 Feb 2011 03:23:17 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hello
+On Wed, Feb 16, 2011 at 5:26 PM, Andreas Mueller <schnitzeltony@gmx.de> wrote:
+> Good evening OE folks,
+>
+> have started to investigate QA RPATH error for clutter-box2d. More or less
+> accidental I fell over the following lines in 'clutter-box2d-0.10.0-
+> r2.0+git4e72b9c135a9439b82d801c62422531db611f98b/git/clutter-
+> box2d/.libs/libclutter-box2d-0.10.lai':
 
-There is a task-efl.bb which builds Enlightenment Foundation Library, but
-there does not seem to be any xxx-dev recipes to get EFL into an SDK.
 
-Does task-efl.bb actually do this? If so, how should it be used?
-
-Thanks
-
-Charles
+Is this recipe using its own version of libtool ? IOW is it overriding
+do_configure
+that it gets from autotools
 
 
