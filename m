@@ -1,23 +1,24 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Pq5Ll-0005gA-JZ
+	(envelope-from <stefan@datenfreihafen.org>) id 1Pq5MB-0005gp-Ve
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Feb 2011 16:00:57 +0100
+	Thu, 17 Feb 2011 16:01:24 +0100
 Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1Pq5Ka-0004B7-GQ by authid <stefan@sostec.de> with cram_md5;
-	Thu, 17 Feb 2011 15:59:46 +0100
+	id 1Pq5L0-0004DV-Ci by authid <stefan@sostec.de> with cram_md5;
+	Thu, 17 Feb 2011 16:00:13 +0100
 Received: from stefan by excalibur.local with local (Exim 4.72)
 	(envelope-from <stefan@excalibur.local>)
-	id 1Pq5KX-0005KF-Ja; Thu, 17 Feb 2011 15:59:41 +0100
-Date: Thu, 17 Feb 2011 15:59:41 +0100
+	id 1Pq5Kx-0005L5-Nw; Thu, 17 Feb 2011 16:00:07 +0100
+Date: Thu, 17 Feb 2011 16:00:07 +0100
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
-Message-ID: <20110217145941.GR14931@excalibur.local>
+Message-ID: <20110217150007.GS14931@excalibur.local>
 References: <1297953548-26589-1-git-send-email-GNUtoo@no-log.org>
+	<1297953548-26589-2-git-send-email-GNUtoo@no-log.org>
 MIME-Version: 1.0
-In-Reply-To: <1297953548-26589-1-git-send-email-GNUtoo@no-log.org>
+In-Reply-To: <1297953548-26589-2-git-send-email-GNUtoo@no-log.org>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -28,7 +29,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
 	autolearn=ham version=3.2.5
 Cc: openembedded-devel@lists.openembedded.org,
 	Stefan Schmidt <stefan@buglabs.net>
-Subject: Re: [PATCH 1/4] hostapd 0.7.3: convert to libnl2
+Subject: Re: [PATCH 2/4] bug20: add MACHINE_EXTRA_RRECOMMENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,7 +43,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Feb 2011 15:00:57 -0000
+X-List-Received-Date: Thu, 17 Feb 2011 15:01:24 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
@@ -52,8 +53,6 @@ On Thu, 2011-02-17 at 15:39, Denis 'GNUtoo' Carikli wrote:
 > Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 
 Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
-
-Thanks for helping with the libnl2 stuff.
 
 regards
 Stefan Schmidt
