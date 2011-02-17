@@ -1,25 +1,24 @@
 Received: from mail-out.m-online.net ([212.18.0.10])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mok@mnet-online.de>) id 1PqC5c-0004sC-S1
+	(envelope-from <mok@mnet-online.de>) id 1PqC7Z-0004wQ-5y
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Feb 2011 23:12:44 +0100
+	Thu, 17 Feb 2011 23:14:45 +0100
 Received: from frontend1.mail.m-online.net (frontend1.mail.intern.m-online.net
 	[192.168.8.180])
-	by mail-out.m-online.net (Postfix) with ESMTP id 82902188A193
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Feb 2011 23:11:33 +0100 (CET)
-Received: from gonzales.localnet (ppp-188-174-64-167.dynamic.mnet-online.de
+	by mail-out.m-online.net (Postfix) with ESMTP id 1701F188A164;
+	Thu, 17 Feb 2011 23:08:18 +0100 (CET)
+Received: from kallare.istmein.de (ppp-188-174-64-167.dynamic.mnet-online.de
 	[188.174.64.167])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.mnet-online.de (Postfix) with ESMTPS id A8EE91C0009B
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Feb 2011 23:11:33 +0100 (CET)
+	by mail.mnet-online.de (Postfix) with ESMTP id 27CA41C0009B;
+	Thu, 17 Feb 2011 23:08:18 +0100 (CET)
+Received: from gonzales.palutemo by kallare.istmein.de with esmtp
+	(emil_sZsZX/dTTR8I9); Thu, 17 Feb 2011 23:08:16 +0100
+From: mok@mnet-online.de
 To: openembedded-devel@lists.openembedded.org
-From: Klaus Kurzmann <mok@mnet-online.de>
-Date: Thu, 17 Feb 2011 23:11:51 +0100
-MIME-Version: 1.0
-Message-Id: <201102172311.51801.mok@mnet-online.de>
+Date: Thu, 17 Feb 2011 23:08:23 +0100
+Message-Id: <1297980503-27676-1-git-send-email-mok@mnet-online.de>
+X-Mailer: git-send-email 1.7.4.1
+Cc: Klaus Kurzmann <mok@fluxnetz.de>
 Subject: [PATCH] udev_151/162/165.bb: add missing PACKAGE_ARCH for nokia900
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,10 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Feb 2011 22:12:44 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 17 Feb 2011 22:14:45 -0000
 
 From: Klaus Kurzmann <mok@fluxnetz.de>
 
@@ -52,8 +48,7 @@ diff --git a/recipes/udev/udev_151.bb b/recipes/udev/udev_151.bb
 index 393fcc7..d31d99a 100644
 --- a/recipes/udev/udev_151.bb
 +++ b/recipes/udev/udev_151.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and 
-removes device nod
+@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
  the hotplug package and requires a kernel not older than 2.6.12."
  LICENSE = "GPLv2+"
  
@@ -84,8 +79,7 @@ diff --git a/recipes/udev/udev_162.bb b/recipes/udev/udev_162.bb
 index 8f23f08..2991b28 100644
 --- a/recipes/udev/udev_162.bb
 +++ b/recipes/udev/udev_162.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and 
-removes device nod
+@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
  the hotplug package and requires a kernel not older than 2.6.12."
  LICENSE = "GPLv2+"
  
@@ -116,8 +110,7 @@ diff --git a/recipes/udev/udev_165.bb b/recipes/udev/udev_165.bb
 index 1f57a46..63e62f1 100644
 --- a/recipes/udev/udev_165.bb
 +++ b/recipes/udev/udev_165.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and 
-removes device nod
+@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
  the hotplug package and requires a kernel not older than 2.6.12."
  LICENSE = "GPLv2+"
  
@@ -147,8 +140,5 @@ removes device nod
 -- 
 1.7.4.1
 
-
--- 
-Klaus 'mrmoku' Kurzmann
 
 
