@@ -1,20 +1,20 @@
 Received: from smtp202.alice.it ([82.57.200.98])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <GNUtoo@no-log.org>) id 1Pq54Z-00016H-8G
+	(envelope-from <GNUtoo@no-log.org>) id 1Pq54Z-00016F-7b
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 17 Feb 2011 15:43:11 +0100
 Received: from localhost.localdomain (95.232.143.186) by smtp202.alice.it
 	(8.5.124.08) (authenticated as editempo@alice.it)
-	id 4CC7FB5F01DE6F48; Thu, 17 Feb 2011 15:39:20 +0100
+	id 4CC7FB5F01DE6F3F; Thu, 17 Feb 2011 15:39:19 +0100
 From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 To: Stefan Schmidt <stefan@buglabs.net>
-Date: Thu, 17 Feb 2011 15:39:07 +0100
-Message-Id: <1297953548-26589-3-git-send-email-GNUtoo@no-log.org>
+Date: Thu, 17 Feb 2011 15:39:06 +0100
+Message-Id: <1297953548-26589-2-git-send-email-GNUtoo@no-log.org>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1297953548-26589-1-git-send-email-GNUtoo@no-log.org>
 References: <1297953548-26589-1-git-send-email-GNUtoo@no-log.org>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 3/4] task-bug: make it compatible with bug 1.x, machine arch ${PN}
+Subject: [PATCH 2/4] bug20: add MACHINE_EXTRA_RRECOMMENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,50 +30,24 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 17 Feb 2011 14:43:11 -0000
 
-Some packages like bug2v4l2 are specific to bug 2.0, so we need
-  to machine arch the package depending on them.
-We also need to
-
 Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 ---
- recipes/tasks/task-bug.bb |    9 +++++----
- 1 files changed, 5 insertions(+), 4 deletions(-)
+ conf/machine/bug20.conf |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/tasks/task-bug.bb b/recipes/tasks/task-bug.bb
-index 2fbcb6d..1317a6e 100644
---- a/recipes/tasks/task-bug.bb
-+++ b/recipes/tasks/task-bug.bb
-@@ -1,12 +1,14 @@
- # Copyright (C) 2011 Bug Labs, Inc
+diff --git a/conf/machine/bug20.conf b/conf/machine/bug20.conf
+index 7b71629..a9441bd 100644
+--- a/conf/machine/bug20.conf
++++ b/conf/machine/bug20.conf
+@@ -13,6 +13,8 @@ XSERVER = "xserver-xorg \
+            xf86-video-omapfb \
+            xf86-input-keyboard"
  
--PR = "r87"
-+PR = "r88"
- 
- ALLOW_EMPTY = "1"
- 
- PACKAGES += "${PN}-java ${PN}-java-osgi ${PN}-audio ${PN}-devlangs ${PN}-x11 ${PN}-network ${PN}-x11-debug ${PN}-debug"
- 
--RDEPENDS_${PN} = "kernel-modules \
-+PACKAGE_ARCH_${PN} = "${MACHINE_ARCH}"
++MACHINE_EXTRA_RRECOMMENDS = "marvell-gspi-fw marvell-sdio-fw kernel-modules"
 +
-+RDEPENDS_${PN} = "${MACHINE_EXTRA_RRECOMMENDS} \
-                   bug-udev \
-                   repo-feed-configs \
-                   diffutils \
-@@ -19,12 +21,11 @@ RDEPENDS_${PN} = "kernel-modules \
-                   nano \
-                   lsof \
-                   file \
--                  bug2v4l2 \
- "
-+RDEPENDS_${PN}_append_bug20 = "bug2v4l2"
+ # Only has DVI connector for external screen
+ GUI_MACHINE_CLASS = "bigscreen"
  
- RDEPENDS_${PN}-network = "\
-                   dnsmasq \
--                  marvell-sdio-fw \
-                   hostap-daemon \
-                   iptables \
-                   eject \
 -- 
 1.7.0.4
 
