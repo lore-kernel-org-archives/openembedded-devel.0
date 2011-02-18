@@ -1,40 +1,40 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PqUOM-0007ES-1p
+	(envelope-from <otavio.salvador@gmail.com>) id 1PqUOM-0007Da-NF
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Feb 2011 18:45:18 +0100
-Received: by gyd8 with SMTP id 8so1654063gyd.6
+	Fri, 18 Feb 2011 18:45:20 +0100
+Received: by mail-yw0-f47.google.com with SMTP id 41so337920ywl.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Feb 2011 09:44:04 -0800 (PST)
+	Fri, 18 Feb 2011 09:44:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
 	:x-mailer:in-reply-to:references;
-	bh=4uz5jf2PwCuDaxM6y1uKIoSZ38OujE799n/1q95I+uY=;
-	b=UcvPT6e+vxTLZ87POPjCGRxgA/k9DoQ1ab/4XHSVaKMdcZ2oHuLJHctduKL0ZW3WLC
-	rDRGzFpXGAMrLSPjdnICQ4YSc9KSNXqoNuZ1qPtJk/hawbh7dzDeLtPSOpyjkCH0inx8
-	Xl+5KvxBTK4i8wgwkHnTWYhOyx3gdR5d0vvwI=
+	bh=laKLM/6+M9MfSXOpAXpLuczwmKf0CMPjclPECdMJWko=;
+	b=vIOOHhi4Bu2vrV6BS8/wDZfDWMWc87ylavgCcC2Fy2gbJHWcRqlySnNVC8yRbBfmvV
+	Gk/edBhMbcuU12hsvbFmCxF3iZx7qAZ/NeOy8cPYEqmrKhW4PLdlbplVBq2+XMVrnyuB
+	q6O7U6f49T/0KEbKfi49DJLSnhakmIgrSwVSc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=SPGkodb2Gmi9/30ATGn9lxTR+490fXuVPgOokGpJIS5fkP2HPafRrAluWYRv6HnRvT
-	DOCDFZa8rXl819QMi0i2L7BRTrtgWcFBERw3Ixhkz4U9zayC7tHv0lAthe39BwA9DAuz
-	C6U7AnsnKTv7dvSaI4fYhYlKWzyLIN75dYakI=
-Received: by 10.150.177.16 with SMTP id z16mr1391689ybe.422.1298051043946;
-	Fri, 18 Feb 2011 09:44:03 -0800 (PST)
+	b=acZElGCXkjSYKN9R0hJBqWHwBKCTDLttOtelwkGNjfU5GmjlBORtTePTdBotC9WVwv
+	T+0H7WlBXm6UGwvQh7zfnPmiX09DwY6VjJ5grqcTF2N0MUbGXOShBeap5BtpDRB2eQRf
+	KzlP1YKKWqKciqN7CgwKxvFO95KV3MCtxghJc=
+Received: by 10.150.239.21 with SMTP id m21mr1394463ybh.424.1298051046979;
+	Fri, 18 Feb 2011 09:44:06 -0800 (PST)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id 23sm1480538yhl.23.2011.02.18.09.44.01
+	by mx.google.com with ESMTPS id 23sm1480538yhl.23.2011.02.18.09.44.04
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 18 Feb 2011 09:44:02 -0800 (PST)
+	Fri, 18 Feb 2011 09:44:05 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Feb 2011 17:43:22 +0000
-Message-Id: <1298051011-10445-8-git-send-email-otavio@ossystems.com.br>
+Date: Fri, 18 Feb 2011 17:43:23 +0000
+Message-Id: <1298051011-10445-9-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.3
 In-Reply-To: <1298051011-10445-1-git-send-email-otavio@ossystems.com.br>
 References: <1298051011-10445-1-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 07/16] libinih: add
+Subject: [PATCH 08/16] sdk.bbclass: cache ${libdir} as ${target_libdir}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,38 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Feb 2011 17:45:18 -0000
-
-This provides a C and C++ INI library that can be statically linked
-into projects.
+X-List-Received-Date: Fri, 18 Feb 2011 17:45:20 -0000
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-Acked-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes/libinih/libinih_git.bb |   14 ++++++++++++++
- 1 files changed, 14 insertions(+), 0 deletions(-)
- create mode 100644 recipes/libinih/libinih_git.bb
+ classes/sdk.bbclass |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/libinih/libinih_git.bb b/recipes/libinih/libinih_git.bb
-new file mode 100644
-index 0000000..e9f811f
---- /dev/null
-+++ b/recipes/libinih/libinih_git.bb
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "C and C++ INI Library"
-+PRIORITY = "optional"
-+PV = "0.0+gitr${SRCPV}"
-+PKGV = "${GITPKGVTAG}"
-+PR = "r0"
-+LICENSE = "BSD"
-+RDEPENDS_${PN}-dev = ""
-+
-+SRCREV = "${AUTOREV}"
-+SRC_URI = "git://projetos.ossystems.com.br/git/libinih.git;protocol=git"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit gitpkgv cmake
+diff --git a/classes/sdk.bbclass b/classes/sdk.bbclass
+index 4fe17b8..bf77744 100644
+--- a/classes/sdk.bbclass
++++ b/classes/sdk.bbclass
+@@ -7,6 +7,7 @@
+ # or indirectly via dependency.  No need to be in 'world'.
+ EXCLUDE_FROM_WORLD = "1"
+ target_includedir := "${includedir}"
++target_libdir := "${libdir}"
+ 
+ # Save MULTIMACH_ARCH
+ OLD_MULTIMACH_ARCH := "${MULTIMACH_ARCH}"
 -- 
 1.7.2.3
 
