@@ -1,37 +1,33 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1PqXiQ-00034U-Gw
+	(envelope-from <Tom_Rini@mentor.com>) id 1PqYF1-0003oJ-5R
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Feb 2011 22:18:15 +0100
-Received: by fxm17 with SMTP id 17so4004821fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Feb 2011 13:17:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=/YgJD8B4/9lzarBZawGpme9qWN5cEJvoNp8ZR1BDo3c=;
-	b=vJ+bV8IOJvfwQrCvJDkAN3xuGG5FEXJw8QYW6PuG/1Em+Il0vPLKA9nMY1D5eqDKL4
-	mTLY7dpNvQZMySgJDCLKxCY3rAotikNDzcAzDWOn/nU5EFHattTgpYsUnEsxCefSlWGN
-	1hveGMFGec5b77g7yKwI0dQMF3Q6aBYlYtzvI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=PwmoAJ7Sr7r5STbcqGFylKDLCM0vxUAnHnJQFwXT1R7WR2BN3snT2iJCUWHBsn7OFy
-	AG3g/0Gocln+gVBEiDDrWR9LdF3FRgBu+HHf/FA/2LgrWRv2ggM73k5s4o51lZGehLpG
-	vVUgOpD/Fg6VoqTyEgFrVQ4D70nFynWSLam68=
-Received: by 10.223.119.68 with SMTP id y4mr1611058faq.104.1298063785702;
-	Fri, 18 Feb 2011 13:16:25 -0800 (PST)
-Received: from localhost.localdomain (ns.tefnet.pl [188.165.206.204])
-	by mx.google.com with ESMTPS id f24sm1316470fak.0.2011.02.18.13.16.24
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 18 Feb 2011 13:16:24 -0800 (PST)
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+	Fri, 18 Feb 2011 22:51:55 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PqYDo-0006tx-3K from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Feb 2011 13:50:40 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Fri, 18 Feb 2011 13:50:39 -0800
+Received: from [172.30.80.150] ([172.30.80.150]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 18 Feb 2011 14:50:38 -0700
+Message-ID: <4D5EE9A9.10205@mentor.com>
+Date: Fri, 18 Feb 2011 14:50:33 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Feb 2011 22:16:16 +0100
-Message-Id: <1298063776-2260-1-git-send-email-filip.zyzniewski@gmail.com>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <4D5E45C1.7010504@opendreambox.org>
 References: <4D5E45C1.7010504@opendreambox.org>
-Subject: [PATCH] package_deb.bbclass: armel architecture name for eabi systems.
+	<1298063776-2260-1-git-send-email-filip.zyzniewski@gmail.com>
+In-Reply-To: <1298063776-2260-1-git-send-email-filip.zyzniewski@gmail.com>
+X-OriginalArrivalTime: 18 Feb 2011 21:50:38.0885 (UTC)
+	FILETIME=[E1765550:01CBCFB5]
+Subject: Re: [PATCH] package_deb.bbclass: armel architecture name for eabi	systems.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,30 +41,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Feb 2011 21:18:15 -0000
+X-List-Received-Date: Fri, 18 Feb 2011 21:51:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-For dpkg EABI system architecture is called armel, not arm.
+On 02/18/2011 02:16 PM, Filip Zyzniewski wrote:
+> For dpkg EABI system architecture is called armel, not arm.
+>
+> Signed-off-by: Filip Zyzniewski<filip.zyzniewski@gmail.com>
+> ---
+>   classes/package_deb.bbclass |    2 ++
+>   1 files changed, 2 insertions(+), 0 deletions(-)
+>
+> diff --git a/classes/package_deb.bbclass b/classes/package_deb.bbclass
+> index 60e759d..87f31fa 100644
+> --- a/classes/package_deb.bbclass
+> +++ b/classes/package_deb.bbclass
+> @@ -15,6 +15,8 @@ DPKG_ARCH_i486 ?= "i386"
+>   DPKG_ARCH_i586 ?= "i386"
+>   DPKG_ARCH_i686 ?= "i386"
+>   DPKG_ARCH_pentium ?= "i386"
+> +DPKG_ARCH_linux-gnueabi ?= "armel"
+> +DPKG_ARCH_linux-uclibceabi ?= "armel"
+>
+>   python package_deb_fn () {
+>       bb.data.setVar('PKGFN', bb.data.getVar('PKG',d), d)
 
-Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
----
- classes/package_deb.bbclass |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+I'm a little puzzled. So little endian gnueabi ARM is armel, little 
+endian OABI ARM is arm.  What about big endian ARM cases?  Thanks!
 
-diff --git a/classes/package_deb.bbclass b/classes/package_deb.bbclass
-index 60e759d..87f31fa 100644
---- a/classes/package_deb.bbclass
-+++ b/classes/package_deb.bbclass
-@@ -15,6 +15,8 @@ DPKG_ARCH_i486 ?= "i386"
- DPKG_ARCH_i586 ?= "i386"
- DPKG_ARCH_i686 ?= "i386"
- DPKG_ARCH_pentium ?= "i386"
-+DPKG_ARCH_linux-gnueabi ?= "armel"
-+DPKG_ARCH_linux-uclibceabi ?= "armel"
- 
- python package_deb_fn () {
-     bb.data.setVar('PKGFN', bb.data.getVar('PKG',d), d)
 -- 
-1.7.1
-
+Tom Rini
+Mentor Graphics Corporation
 
 
