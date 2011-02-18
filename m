@@ -1,32 +1,39 @@
-Received: from 64.mail-out.ovh.net ([91.121.185.65])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PqSTo-0006tz-Ra
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <raj.khem@gmail.com>) id 1PqSiN-0006v0-RQ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Feb 2011 16:42:48 +0100
-Received: (qmail 20511 invoked by uid 503); 18 Feb 2011 15:19:19 -0000
-Received: from b6.ovh.net (HELO mail240.ha.ovh.net) (213.186.33.56)
-	by 64.mail-out.ovh.net with SMTP; 18 Feb 2011 15:19:19 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 18 Feb 2011 17:41:36 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 18 Feb 2011 17:41:36 +0200
-Message-ID: <4D5E932F.1000907@eukrea.com>
-Date: Fri, 18 Feb 2011 16:41:35 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Fri, 18 Feb 2011 16:57:52 +0100
+Received: by fxm17 with SMTP id 17so3713041fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Feb 2011 07:56:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type:content-transfer-encoding;
+	bh=jzHIQWgJqLHuF1fkK1ytTfow6uYw7+3DLc5G043bOzs=;
+	b=tEvXYycovFBlYeRDF+w9aiXevfL+ZuMTC1wkZ//LJtJytGkeuzXUk8zxzm66QhRPs+
+	zNDojhSUHHuFM5hOMksIgwoXF3C9XKmFqjL6Va8uZqrWjqX8lkh8rmKDJArYT+NrLLao
+	ew0TYALXqhGXP63ytVBb9zqzqda1hhSMEKi48=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=OVdULNSE5kkjralskUjI0VrYBnu98RE0lO1cQUST7QkignumhaLb5kHWsNen+ftKJA
+	O2Cp0fs19IkeAWIu05HLuslQlw+BCZy2lyTAEaACfF7hgtAFzDP9Jt/IdT3FGiIvSptp
+	s3zaWpCN4c3C9MGNHlJxTQjTGc1YUdOW4avEU=
+Received: by 10.223.53.68 with SMTP id l4mr1166243fag.44.1298044007648; Fri,
+	18 Feb 2011 07:46:47 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.223.66.22 with HTTP; Fri, 18 Feb 2011 07:46:01 -0800 (PST)
+In-Reply-To: <4D5E90B0.2020006@mentor.com>
+References: <4D51566B.9060603@mentor.com>
+	<20110208145355.GF2050@xora-build.xora.org.uk>
+	<4D515A17.3060203@mentor.com> <4D523623.7030509@opensimpad.org>
+	<4D59543B.50506@mentor.com> <4D5D9706.80504@opensimpad.org>
+	<4D5E90B0.2020006@mentor.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 18 Feb 2011 07:46:01 -0800
+Message-ID: <AANLkTinx+zH=e+XJmceXo1DiR4mCSSx7rB=mmT5yApMX@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1298026721-16036-1-git-send-email-eric@eukrea.com>
-	<AANLkTimXo8+3vOcq79Ttn7=Cf7i3wcepNHNJotU1+jLw@mail.gmail.com>
-In-Reply-To: <AANLkTimXo8+3vOcq79Ttn7=Cf7i3wcepNHNJotU1+jLw@mail.gmail.com>
-X-Ovh-Tracer-Id: 10605977123745803593
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH v2] oestats-client: only send report when task has failed
+Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,50 +47,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Feb 2011 15:42:48 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 18 Feb 2011 15:57:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi Khem,
-
-On 18/02/2011 16:35, Khem Raj wrote:
-> On Fri, Feb 18, 2011 at 2:58 AM, Eric Bénard<eric@eukrea.com>  wrote:
->> actual behaviour is to send a report for *each* task runned by bitbake
->> this is ok for one personnal oestat server but doesn't scale well when
->> dozen of peoples are running test builders which all send reports to
->> the OE's infrastructure.
+On Fri, Feb 18, 2011 at 7:30 AM, Tom Rini <tom_rini@mentor.com> wrote:
+> On 02/17/2011 02:45 PM, Bernhard Guillon wrote:
 >>
->> Signed-off-by: Eric Bénard<eric@eukrea.com>
->> ---
->> v2: cleaner way to handle the problem as per pb&  Jay2 suggestion
+>> On 14.02.2011 17:11, Tom Rini wrote:
+>>>
+>>> On 02/08/2011 11:37 PM, Bernhard Guillon wrote:
+>>>>
+>>>>
+>>>> I have access to such a device and can test booting of console-image
+>>>
+>>> Fails to build with: http://pastebin.com/rjsmt0M9
+>>>
 >>
->>   classes/oestats-client.bbclass |    6 ++++--
->>   1 files changed, 4 insertions(+), 2 deletions(-)
->>
->> diff --git a/classes/oestats-client.bbclass b/classes/oestats-client.bbclass
->> index 4233d4a..f9ac88f 100644
->> --- a/classes/oestats-client.bbclass
->> +++ b/classes/oestats-client.bbclass
->> @@ -202,8 +202,10 @@ python oestats_eventhandler () {
->>                 oestats_stop(server, e.data, e.getFailures())
->>         elif getName(e) == 'TaskStarted':
->>                 bb.data.setVar('OESTATS_STAMP', repr(time.time()), e.data)
->> -       elif getName(e) == 'TaskSucceeded':
->> -               oestats_task(server, e.data, e.task, 'Succeeded')
->> +       # Temporary disable sending sucess report as this generates to much trafic
->> +       # for the oestat server
->> +       # elif getName(e) == 'TaskSucceeded':
->> +       #       oestats_task(server, e.data, e.task, 'Succeeded')
->>         elif getName(e) == 'TaskFailed':
->>                 oestats_task(server, e.data, e.task, 'Failed')
->>   }
+>> Hi,
+>> I just build a console-image and it booted fine on my atngw100.
 >
+> Hmm. =C2=A0How do you force it to linux-uclibc? =C2=A0I had assumed I jus=
+t needed to
+> say MACHINE=3Datngw100 DISTRO=3Dansgtrom-2010.x and it would work, but I =
+get a
+> linux not linux-uclibc build and binutils can't configure.
+
+in angstrom you would need ANGSTROMLIBC=3D"uclibc" also to be defined along
+since default is eglibc
+
 >
-> will this mean that only failed packages show up on tinderbox ?
-
-exactly. this is a temporary solution and I think this is better than no more 
-having tinderbox running.
-
-Eric
+> --
+> Tom Rini
+> Mentor Graphics Corporation
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
