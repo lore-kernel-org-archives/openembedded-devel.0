@@ -1,29 +1,32 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PqR6v-0004bT-5f
+	(envelope-from <Tom_Rini@mentor.com>) id 1PqRKt-0004yu-2w
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Feb 2011 15:15:05 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 97B17491283
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Feb 2011 15:13:51 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Fri, 18 Feb 2011 15:13:51 +0100
-Message-ID: <4D5E7E9F.40408@dresearch.de>
-Date: Fri, 18 Feb 2011 15:13:51 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+	Fri, 18 Feb 2011 15:29:31 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PqRJg-0001XR-89 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Feb 2011 06:28:16 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Fri, 18 Feb 2011 06:28:15 -0800
+Received: from [172.30.80.148] ([172.30.80.148]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 18 Feb 2011 07:28:14 -0700
+Message-ID: <4D5E81F9.5060605@mentor.com>
+Date: Fri, 18 Feb 2011 07:28:09 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-To: Steffen Sledz <sledz@dresearch.de>
-References: <DB561678F08F554EB0D9F21B70E268A5056575@exchange.intern.dresearch.de>
-	<1298038322-20481-1-git-send-email-sledz@dresearch.de>
-In-Reply-To: <1298038322-20481-1-git-send-email-sledz@dresearch.de>
-X-OriginalArrivalTime: 18 Feb 2011 14:13:51.0749 (UTC)
-	FILETIME=[11894350:01CBCF76]
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH v2] u-boot-2009.03: use AMD fixups for AMIC too
+To: openembedded-devel@lists.openembedded.org
+References: <1298028729-10564-1-git-send-email-eric@eukrea.com>
+In-Reply-To: <1298028729-10564-1-git-send-email-eric@eukrea.com>
+X-OriginalArrivalTime: 18 Feb 2011 14:28:15.0033 (UTC)
+	FILETIME=[1417F290:01CBCF78]
+Subject: Re: [PATCH] acl: fix build problems with rpath on older libtool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,28 +40,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Feb 2011 14:15:05 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 18 Feb 2011 14:29:31 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Am 18.02.2011 15:12, schrieb Steffen Sledz:
-> From: Mario Schuknecht <m.schuknecht@dresearch.de>
->=20
-> * AMIC flashes are AMD clones and need the same fixups.
+On 02/18/2011 04:32 AM, Eric Bénard wrote:
+> * bump INC_PR
+>
+> Signed-off-by: Eric Bénard<eric@eukrea.com>
+> ---
+>   recipes/udev/acl_2.2.49.bb |    5 ++++-
+>   1 files changed, 4 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/udev/acl_2.2.49.bb b/recipes/udev/acl_2.2.49.bb
+> index 5a37c57..20f94db 100644
+> --- a/recipes/udev/acl_2.2.49.bb
+> +++ b/recipes/udev/acl_2.2.49.bb
+> @@ -1,7 +1,7 @@
+>   DESCRIPTION = "Commands for Manipulating POSIX Access Control Lists"
+>   LICENSE = "GPLv2"
+>
+> -PR = "r3"
+> +PR = "r4"
+>
+>   DEPENDS = "attr"
+>
+> @@ -20,6 +20,9 @@ EXTRA_OECONF = " --enable-gettext=yes \
+>   do_configure_append() {
+>       # gettext hack
+>       echo "#define _(str) str">>  ${S}/include/config.h
+> +    # use same fix as libiconv
+> +    sed -i -e  s/^hardcode_libdir_flag_spec/#hardcode_libdir_flag_spec/ \
+> +           -e s/^runpath_var/#runpath_var/ ${S}/*-libtool
+>   }
+>
+>   do_configure_prepend() {
 
-I made some modifications to the patch to make it available at least for =
-all u-boot-2009.03 users.
+I've actually got something similar, but based on how poky fixed this 
+queued up, and while I was in there I cleaned up the paths a bit too. 
+But you got it posted first, so do you have a preference?
 
-Steffen
-
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
