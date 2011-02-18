@@ -1,40 +1,27 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1PqNiN-0005pN-A3
+Received: from 64.mail-out.ovh.net ([91.121.185.65])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PqNrS-0005y2-61
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Feb 2011 11:37:31 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 431B91100427
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Feb 2011 11:36:19 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id E8A95110009B
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Feb 2011 11:36:17 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (g225146062.adsl.alicedsl.de
-	[92.225.146.62]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Feb 2011 11:36:17 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 03EFA3C34C; Fri, 18 Feb 2011 11:35:36 +0100 (CET)
-Date: Fri, 18 Feb 2011 11:35:36 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Fri, 18 Feb 2011 11:46:54 +0100
+Received: (qmail 25517 invoked by uid 503); 18 Feb 2011 10:23:25 -0000
+Received: from b6.ovh.net (HELO mail240.ha.ovh.net) (213.186.33.56)
+	by 64.mail-out.ovh.net with SMTP; 18 Feb 2011 10:23:25 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 18 Feb 2011 12:45:42 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 18 Feb 2011 12:45:41 +0200
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110218103535.GB22771@rhein.zuhause.netz>
-References: <AANLkTinKjwaC=aqTE2ouKF1VN-iHccUdOSwLG7CnV=ET@mail.gmail.com>
+Date: Fri, 18 Feb 2011 11:46:06 +0100
+Message-Id: <1298025966-5116-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
-In-Reply-To: <AANLkTinKjwaC=aqTE2ouKF1VN-iHccUdOSwLG7CnV=ET@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: is there a virtual/sysvinit to prevent hard-depends on sysvinit?
+X-Ovh-Tracer-Id: 5608388911684169033
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.500001/N
+Subject: [PATCH] oestats-client: only send report when task has failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,24 +35,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Feb 2011 10:37:31 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 18 Feb 2011 10:46:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Feb 17, 2011 at 01:15:43PM -0700, AJ ONeal wrote:
-> Is there a virtual/sysvinit?
-> 
-> task-proper-tools depends on sysvinit, which conflicts with upstart.
-> 
-> How could I specify that it should depend on a virtual package?
-> 
-> AJ ONeal
+actual behaviour is to send a report for *each* task runned by bitbake
+this is ok for one personnal oestat server but doesn't scale well when
+dozen of peoples are running test builders which all send reports to
+the OE's infrastructure.
 
-Hi,
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ classes/oestats-client.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-obi(Andreas Oberriter) is working on a upstart. You can find his tree here
-http://git.opendreambox.org/?p=obi/openembedded.git;a=log;h=refs/heads/upstart
+diff --git a/classes/oestats-client.bbclass b/classes/oestats-client.bbclass
+index 4233d4a..b568442 100644
+--- a/classes/oestats-client.bbclass
++++ b/classes/oestats-client.bbclass
+@@ -172,8 +172,8 @@ def oestats_task(server, d, task, status):
+ 	# send report
+ 	# FIXME: resend on http/url error?
+ 	try:
+-		response = oestats_send(d, server, "/tasks/", vars, files)
+ 		if status == 'Failed':
++			response = oestats_send(d, server, "/tasks/", vars, files)
+ 			bb.warn("oestats: task failed, see %s%s" % (server, response))
+ 	except:
+ 		bb.warn("oestats: error sending task (%s), disabling stats" % get_exc_info())
+-- 
+1.7.0.4
 
-Bye Henning
 
 
