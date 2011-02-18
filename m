@@ -1,37 +1,36 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PqSMF-0006Ua-95
+	(envelope-from <raj.khem@gmail.com>) id 1PqSPK-0006gE-2j
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Feb 2011 16:34:59 +0100
-Received: by bwz10 with SMTP id 10so3573045bwz.6
+	Fri, 18 Feb 2011 16:38:10 +0100
+Received: by fxm17 with SMTP id 17so3694442fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Feb 2011 07:33:45 -0800 (PST)
+	Fri, 18 Feb 2011 07:36:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=J6RFpzLxSLbaO18u+4leRbWsqfQRoIlKaNCjJK64nFg=;
-	b=ThkAJ230IA3VkhUh1YqMCSVI44dJVhjFtRYi4VXNcNSi513FUDEkDwtTCDj/OoYYVa
-	7c5y+l9xiXwdgpRqlet6eob3mzc/ooPgvXW+YptUtLLAgfuEOihPExLZvJUUy4TmR/TR
-	GqYlrxcIyHwbjtRMMSOHz0LIXdZF9CHcw+Abg=
+	bh=lzUJc3t7zOgRJB6wiqmHWTcJeFsU467zle/ji5MiwtM=;
+	b=BH6KgFidh09P8P1rLP/aTYgj7+4q1pzpP8wVoabwVUHEgLP9NRVGXtx5mr9xTbTKc+
+	+xHVFeQam8FGwhOOxda4q9knSA4ouec6HsnrnsYrEab2hx0VnLfXj3MWO5Pvrq93TRW2
+	BRNEFWPDdSWLXZsVS7MsO6rwmNyqeEFhsZ9A8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:cc:content-type:content-transfer-encoding;
-	b=lWrzecBUboSHY7as9Egb/ryo5G9kst0HJGB0JcB7u4rrDXSUrfw7eK8WSei8t3uz5U
-	u7c1HyaunNn2nzJvS/p5fcaje37J6eygkqEWnYjQxemceb7y7yEpAr0OLVYLotYUmf59
-	exF9TRDr2Q3PCEoMWYUe9h0nDTGwknhq98H8g=
-Received: by 10.223.101.129 with SMTP id c1mr124309fao.25.1298043225262; Fri,
-	18 Feb 2011 07:33:45 -0800 (PST)
+	b=R3fkXTe8Whih+54srpqfWmb8LID/GWl5SLkx1oijUK06swo0jWZ4MgfQPNwx5FEYGn
+	UjfOg396S6Eqa1kTuxFdSyneju6bmNhgPW5VBnFuN/bIY4ieJa/kZEEwj+V8iFISwLOj
+	qThk3ZSZle16+ZnmdYwyoaC2b5MMUDv1kmDwo=
+Received: by 10.223.79.74 with SMTP id o10mr979463fak.63.1298043342797; Fri,
+	18 Feb 2011 07:35:42 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.223.66.22 with HTTP; Fri, 18 Feb 2011 07:33:07 -0800 (PST)
-In-Reply-To: <4D5E856C.5080301@eukrea.com>
-References: <1298032254-26236-1-git-send-email-eric@eukrea.com>
-	<4D5E8268.901@mentor.com> <4D5E856C.5080301@eukrea.com>
+Received: by 10.223.66.22 with HTTP; Fri, 18 Feb 2011 07:35:15 -0800 (PST)
+In-Reply-To: <1298026721-16036-1-git-send-email-eric@eukrea.com>
+References: <1298026721-16036-1-git-send-email-eric@eukrea.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 18 Feb 2011 07:33:07 -0800
-Message-ID: <AANLkTinAMmhHVq9_ZpZhSHyOGqmuN3g0atAEoXpDJ+0O@mail.gmail.com>
+Date: Fri, 18 Feb 2011 07:35:15 -0800
+Message-ID: <AANLkTimXo8+3vOcq79Ttn7=Cf7i3wcepNHNJotU1+jLw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-Subject: Re: [PATCH] shadow: fix rpath issues
+Subject: Re: [PATCH v2] oestats-client: only send report when task has failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,33 +44,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Feb 2011 15:34:59 -0000
+X-List-Received-Date: Fri, 18 Feb 2011 15:38:10 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 18, 2011 at 6:42 AM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
-> On 18/02/2011 15:30, Tom Rini wrote:
->>
->> The equiv I found in poky is:
->> do_configure_append() {
->> # Fix RPATH issues.
->> sed -i ${S}/config.status -e s,^\\\(hardcode_into_libs=3D\\\).*$,\\1\'no=
-\',
->> ${S}/config.status
->> }
->>
->> Any preference? Aside from I think we should be internally consistent in
->> these
->> fixes, so long as it's fixed...
-
-
-poky one is better IMO since its not hacking into generated libtool script
->>
-> yes, in fact I copied the fix from Henning's fix in flac so it can be see=
-n
-> as consistent ;-)
+On Fri, Feb 18, 2011 at 2:58 AM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
+> actual behaviour is to send a report for *each* task runned by bitbake
+> this is ok for one personnal oestat server but doesn't scale well when
+> dozen of peoples are running test builders which all send reports to
+> the OE's infrastructure.
 >
-> Eric
+> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+> ---
+> v2: cleaner way to handle the problem as per pb & Jay2 suggestion
+>
+> =C2=A0classes/oestats-client.bbclass | =C2=A0 =C2=A06 ++++--
+> =C2=A01 files changed, 4 insertions(+), 2 deletions(-)
+>
+> diff --git a/classes/oestats-client.bbclass b/classes/oestats-client.bbcl=
+ass
+> index 4233d4a..f9ac88f 100644
+> --- a/classes/oestats-client.bbclass
+> +++ b/classes/oestats-client.bbclass
+> @@ -202,8 +202,10 @@ python oestats_eventhandler () {
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0oestats_stop(serve=
+r, e.data, e.getFailures())
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0elif getName(e) =3D=3D 'TaskStarted':
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bb.data.setVar('OE=
+STATS_STAMP', repr(time.time()), e.data)
+> - =C2=A0 =C2=A0 =C2=A0 elif getName(e) =3D=3D 'TaskSucceeded':
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 oestats_task(server, e=
+.data, e.task, 'Succeeded')
+> + =C2=A0 =C2=A0 =C2=A0 # Temporary disable sending sucess report as this =
+generates to much trafic
+> + =C2=A0 =C2=A0 =C2=A0 # for the oestat server
+> + =C2=A0 =C2=A0 =C2=A0 # elif getName(e) =3D=3D 'TaskSucceeded':
+> + =C2=A0 =C2=A0 =C2=A0 # =C2=A0 =C2=A0 =C2=A0 oestats_task(server, e.data=
+, e.task, 'Succeeded')
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0elif getName(e) =3D=3D 'TaskFailed':
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0oestats_task(serve=
+r, e.data, e.task, 'Failed')
+> =C2=A0}
+
+
+will this mean that only failed packages show up on tinderbox ?
+> --
+> 1.7.0.4
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
