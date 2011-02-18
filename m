@@ -1,32 +1,28 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <srinredplano@gmail.com>) id 1PqEBP-00033J-Re
+	(envelope-from <sledz@dresearch.de>) id 1PqN5H-00044V-NZ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Feb 2011 01:26:52 +0100
-Received: by vws6 with SMTP id 6so1530568vws.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Feb 2011 16:25:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to:cc
-	:content-type; bh=sxMnQ1idSsgSLi+DVOHrKfaK4CMKIHey9CCxrnMtzUE=;
-	b=DAYRRcCzZq77TL9c0CO5U0EaWVVqHtVUJGB2h8wXCf3QoZJXOIZ22QYpbMaF/wJ8Cn
-	evxKJN8m+HGW1mo0guJyJpPFUbAcvDvbkWFLrrtV4zHGcQX76Ap7Xd/lR2ts9TpWjF8G
-	0v3JnT7AibMcuT657VZNPu5PxUFYlZvUSxEIc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:cc:content-type;
-	b=Qxnoq9JDbK5XnTSKj0Lt5hMdk6Eiqhho7e0c/7CUS0ewDVZcMbKw8zDEUKZ+DxobmB
-	+J8kA6SLdVqvv1+byDFh7BNYCO4P5y6rVpP0gBTNW3QDaBj/FYhGX6xiBiTJFX2pulif
-	CMLx15jl9e0ymTKZz1fouNrzJx9QhDtYAJSBI=
+	Fri, 18 Feb 2011 10:57:07 +0100
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 24966491284;
+	Fri, 18 Feb 2011 10:55:56 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Fri, 18 Feb 2011 10:55:56 +0100
+Message-ID: <4D5E422B.3040703@dresearch.de>
+Date: Fri, 18 Feb 2011 10:55:55 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.52.166.7 with SMTP id zc7mr130713vdb.66.1297988306948; Thu, 17
-	Feb 2011 16:18:26 -0800 (PST)
-Received: by 10.220.118.139 with HTTP; Thu, 17 Feb 2011 16:18:26 -0800 (PST)
-Date: Thu, 17 Feb 2011 16:18:26 -0800
-Message-ID: <AANLkTinNYGTxNkd=MOGBbNkDNYs7Xx=HJ1Cq7gi9svSg@mail.gmail.com>
-From: srinredplano SP <srinredplano@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: arago-devel@gforge.ti.com
-Subject: how to use other package headers from sysroots while compiling myrecipe
+References: <4D5A5871.7000005@dresearch.de> <4D5A89CD.803@opendreambox.org>
+	<4D5A92BC.1010906@dresearch.de>
+In-Reply-To: <4D5A92BC.1010906@dresearch.de>
+X-OriginalArrivalTime: 18 Feb 2011 09:55:56.0303 (UTC)
+	FILETIME=[097399F0:01CBCF52]
+Cc: koen@openembedded.org
+Subject: Re: linux-libc-headers version (reloaded)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,51 +36,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Feb 2011 00:26:52 -0000
+X-List-Received-Date: Fri, 18 Feb 2011 09:57:07 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hi All,
+Am 15.02.2011 15:50, schrieb Steffen Sledz:
+> Am 15.02.2011 15:12, schrieb Andreas Oberritter:
+>> On 02/15/2011 11:41 AM, Steffen Sledz wrote:
+>>> "Kernel headers are backwards compatible, but not forwards compatible=
+.  This
+>>> means that a program built against a C library using older kernel hea=
+ders
+>>> should run on a newer kernel (although it may not have access to new
+>>> features), but a program built against newer kernel headers may not w=
+ork on an
+>>> older kernel."[2]
+>>
+>> Isn't this what the variable OLDEST_KERNEL is good for, when compiling
+>> glibc?
+>=20
+> If i'm right this goes to the --enable-kernel=3DVERSION configure optio=
+n of glibc just to optimize the library.
+>=20
+> "the configure option --enable-kernel=3DX.Y.Z allows to strip out compa=
+tibility for kernel versions before X.Y.Z."
+>=20
+> Imho it is not legitimately to follow that glibc has compatibility code=
+ for all kernels greater or equal X.Y.Z.
+>=20
+> Another question is the handling in other libc implementations.
+>=20
+> And finally there are a lot of programs using userland kernel headers d=
+irectly.
 
-I want to use the headers of liboil-0.3.17-r1 which are in " ....
-sysroots/armv7a-none-linux-gnueabi/usr/include/liboil-0.3/ "  for
-compiling   my gstreamer.bb  file
-I have modified  gstreamer.bb  file as show below . But still i could
-not see the  the liboil headers path getting included while compiling
-my gstreamer package .
-Was able to compile by adding  the path to CFALGS_append
+Ping!
 
-gstreamer.bb
-##=======================================================
-require gstreamer-ti.inc
-PV = "svnr${SRCREV}"
-S = "${WORKDIR}/gst-dmai-plugins"
-SRCREV = "1037"
+If i interpret responses from Tom and Phil right they agree with me (or a=
+t least do not disagree). ;-)
 
+But i miss reactions from the distro maintainers (especially =C5ngstr=F6m=
+).
 
-DEPENDS += " virtual/kernel liboil "
+Regards,
+Steffen
 
+--=20
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@DResearch.de
+Fax: +49 30 515932-299
+Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
-#CPPFLAGS_append = " -I${STAGING_KERNEL_DIR}
--I${STAGING_KERNEL_DIR}/include -L${STAGING_KERNEL_DIR}/lib
--I${STAGING_DIR_TARGET}/usr/include/liboil-0.3 "
-
-
-EXTRA_OECONF += " --with-liboil=${STAGING_DIR_TARGET}/usr/include/liboil-0.3 "
-
-
-SRC_URI = "my path xxxxxxxx" \
-file://xyz.patch \
-"
-do_install_prepend () {
-
-    install -d ${D}/${installdir}/gst/${PLATFORM}
-
-    # delete .svn files
-    find ${D}/${installdir}/gst -name .svn -type d | xargs rm -rf
-    chmod 0755 ${D}/${installdir}/gst -R
-
-    install -d ${D}${sysconfdir}/init.d/
-}
-##=======================================================
 
 
