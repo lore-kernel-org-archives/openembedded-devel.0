@@ -1,25 +1,30 @@
-Received: from vms173017pub.verizon.net ([206.46.173.17])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1PqWPf-000162-1l
+Received: from 2.26.mail-out.ovh.net ([178.33.107.8] helo=26.mail-out.ovh.net)
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PqWQZ-00017K-GQ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Feb 2011 20:54:47 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.49.88])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LGT003IJWKZCYM0@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	18 Feb 2011 13:53:24 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 1697514AF6D; Fri,
-	18 Feb 2011 14:53:23 -0500 (EST)
-Date: Fri, 18 Feb 2011 14:53:23 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Fri, 18 Feb 2011 20:55:43 +0100
+Received: (qmail 7514 invoked by uid 503); 18 Feb 2011 19:22:09 -0000
+Received: from b9.ovh.net (HELO mail95.ha.ovh.net) (213.186.33.59)
+	by 26.mail-out.ovh.net with SMTP; 18 Feb 2011 19:22:08 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 18 Feb 2011 21:54:31 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 18 Feb 2011 21:54:30 +0200
+Message-ID: <4D5ECE76.8030308@eukrea.com>
+Date: Fri, 18 Feb 2011 20:54:30 +0100
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20110218195323.GB11390@denix.org>
 References: <1298057187-2466-1-git-send-email-tom_rini@mentor.com>
-	<4D5ECA4D.4090309@mentor.com>
-MIME-version: 1.0
-In-reply-to: <4D5ECA4D.4090309@mentor.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
+In-Reply-To: <1298057187-2466-1-git-send-email-tom_rini@mentor.com>
+X-Ovh-Tracer-Id: 14877078420561440073
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
 Subject: Re: [PATCH] insane.bbclass: Make RPATH a non-fatal error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,32 +39,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Feb 2011 19:54:47 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 18 Feb 2011 19:55:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Fri, Feb 18, 2011 at 12:36:45PM -0700, Tom Rini wrote:
-> On 02/18/2011 12:26 PM, Tom Rini wrote:
->> In order to make the user experience better we now use bb.warn
->> on non-fatal QA errors and bb.error on fatal errors.
+On 18/02/2011 20:26, Tom Rini wrote:
+> In order to make the user experience better we now use bb.warn
+> on non-fatal QA errors and bb.error on fatal errors.
 >
-> Part of my motivation here is that after looking at poky, this error is 
-> _not_ fatal there yet (none are), and until we can kill libtool 2.2.x 
-> (which won't be until oe-core I believe) this is going to be a big problem 
-> to solve, generally involving a libtool hack.  I think we can best spend 
-> our time here on fixing RPATH issues that still show up once we're all 
-> using libtool 2.4 (as there will still be a few in 'odd' packages, but most 
-> will now be correct automatically).
->
-> I'm going to push this into my simplify-target-flags branch as well and see 
-> what falls out now (doing so already for smaller test cases).
+> Signed-off-by: Tom Rini<tom_rini@mentor.com>
+Acked-by: Eric Bénard <eric@eukrea.com>
 
-Since our own Arago overlay still uses libtool 2.2 (disabling RPATH check 
-locally), I fully support this change in OE until everyone adopts libtool 2.4
-
-Acked-by: Denys Dmytriyenko <denys@ti.com>
-
--- 
-Denys
 
 
