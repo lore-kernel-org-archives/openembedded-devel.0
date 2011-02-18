@@ -1,27 +1,27 @@
-Received: from 64.mail-out.ovh.net ([91.121.185.65])
+Received: from mailout-de.gmx.net ([213.165.64.23])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PqPUu-0002HM-6X
+	(envelope-from <schnitzeltony@gmx.de>) id 1PqPtU-0002hr-Us
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Feb 2011 13:31:44 +0100
-Received: (qmail 18450 invoked by uid 503); 18 Feb 2011 12:08:13 -0000
-Received: from b6.ovh.net (HELO mail240.ha.ovh.net) (213.186.33.56)
-	by 64.mail-out.ovh.net with SMTP; 18 Feb 2011 12:08:13 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 18 Feb 2011 14:30:29 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 18 Feb 2011 14:30:28 +0200
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+	Fri, 18 Feb 2011 13:57:09 +0100
+Received: (qmail invoked by alias); 18 Feb 2011 12:55:50 -0000
+Received: from p5DE480C9.dip.t-dialin.net (EHLO localhost.localdomain)
+	[93.228.128.201]
+	by mail.gmx.net (mp007) with SMTP; 18 Feb 2011 13:55:50 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX19TuKxrrehTmMKVWG5FxIIXmOSyiU+HZrwkt/+rSi
+	ZDOCveTeRgK4X7
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Feb 2011 13:30:54 +0100
-Message-Id: <1298032254-26236-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.0.4
+Date: Fri, 18 Feb 2011 13:51:06 +0100
+User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
+References: <201102170226.53460.schnitzeltony@gmx.de>
+	<201102171808.51219.schnitzeltony@gmx.de>
+	<4D5E5568.5020308@eukrea.com>
+In-Reply-To: <4D5E5568.5020308@eukrea.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 7378022090262555977
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: [PATCH] shadow: fix rpath issues
+Message-Id: <201102181351.06282.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: QA RPATH error for c++ packages?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,55 +35,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Feb 2011 12:31:44 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 18 Feb 2011 12:57:09 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-* add --disable-rpath (not enough with angstrom 2008.1)
-* fix build problems with rpath on older libtool
-* bump INC_PR
+On Friday 18 February 2011 12:18:00 Eric B=E9nard wrote:
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- recipes/shadow/shadow.inc |    9 ++++++++-
- 1 files changed, 8 insertions(+), 1 deletions(-)
+> I confirm this also works for angstrom 2008.1 where I met a qa problem in
+> gnutlsxx.
+yes another victim...
 
-diff --git a/recipes/shadow/shadow.inc b/recipes/shadow/shadow.inc
-index 1b105c5..d688064 100644
---- a/recipes/shadow/shadow.inc
-+++ b/recipes/shadow/shadow.inc
-@@ -13,7 +13,7 @@ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
- 
- PACKAGE_ARCH_${PN} = "${MACHINE_ARCH}"
- 
--INC_PR = "r18"
-+INC_PR = "r19"
- 
- # Additional Policy files for PAM
- PAM_SRC_URI = " \
-@@ -39,6 +39,7 @@ EXTRA_OECONF += "\
-     --without-audit \
-     --without-selinux \
-     --without-libcrack \
-+    --disable-rpath \
-     ${@base_contains('DISTRO_FEATURES', 'pam', '--with-libpam', '--without-libpam', d)} \
- "
- 
-@@ -70,6 +71,12 @@ shadow_cv_passwd_dir=${bindir}
- END
- }
- 
-+do_configure_append () {
-+    # use same fix as libiconv
-+    sed -i -e  s/^hardcode_libdir_flag_spec/#hardcode_libdir_flag_spec/ \
-+           -e s/^runpath_var/#runpath_var/ ${S}/*-libtool
-+}
-+
- do_install_append() {
-   # Ensure that /etc/skel is created so any default files that we want copied into new users home
-   # dirs can be put in there later (ideal for .xinitrc for example).
--- 
-1.7.0.4
+I think this issue is fixed by removing ${STAGING_DIR_TARGET} at the end of=
+=20
+cross.bbclass.
 
+I will prepare a patch on that but first wait for results on clean build...
+
+Andreas
 
 
