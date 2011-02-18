@@ -1,33 +1,43 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PqW29-0000RW-52
+	(envelope-from <raj.khem@gmail.com>) id 1PqW6A-0000Zb-MF
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Feb 2011 20:30:29 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PqW0w-0002EN-V2 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Feb 2011 11:29:14 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Fri, 18 Feb 2011 11:29:14 -0800
-Received: from [172.30.80.150] ([172.30.80.150]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 18 Feb 2011 12:29:13 -0700
-Message-ID: <4D5EC884.5060701@mentor.com>
-Date: Fri, 18 Feb 2011 12:29:08 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Fri, 18 Feb 2011 20:34:38 +0100
+Received: by pwj9 with SMTP id 9so22927pwj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Feb 2011 11:33:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id
+	:mail-followup-to:references:mime-version:content-type
+	:content-disposition:in-reply-to:user-agent;
+	bh=RCbZU3ka5Ff5uto0LVEmSGcDo3zTsCjXZzPsmEFWzww=;
+	b=d0+YxQQOiCU+9G+svsj0Bsdjjy75CGUPCKiVXHpdfDh/LYwSWHwHV1kqos5WBxCtdM
+	Vfm/olAQX4ZHASV/d+XJpVmoG2Oaz+ChBTV1Y96rK1bPBzQhgxtbnjDkbeHYQKCalL30
+	rnEP/R+A4MnSimsc8pKM2KZkRLYBYjruD6rx0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	b=P+3Xx145IbCBi0fNjxAs0PAUMH7rOLlp2cSN+cx3oTu/KV5K0CXckhlJgNHcSKLIwt
+	MpEV0T+wQA53C9Xr7Ui6JJDF8Z+VVBW7P25kJtcm8nr9u25MlqhbvFshaMer8a1ZwOmj
+	D6OMXNBEhUbuc1lL3KfW0TJzkTdassD9DS5vY=
+Received: by 10.142.143.19 with SMTP id q19mr818932wfd.230.1298057603842;
+	Fri, 18 Feb 2011 11:33:23 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id w32sm4389wfh.19.2011.02.18.11.33.21
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 18 Feb 2011 11:33:22 -0800 (PST)
+Date: Fri, 18 Feb 2011 11:33:18 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTi=bPrL+J+sA6wR+BEK9GuLxbMJRohVAPie-_u_i@mail.gmail.com>	<4D5A8FF2.2010200@mentor.com>
-	<AANLkTikybh5rueE=YwrG-RoOYgWo9XXGA9BnDJp8Kf2h@mail.gmail.com>
-In-Reply-To: <AANLkTikybh5rueE=YwrG-RoOYgWo9XXGA9BnDJp8Kf2h@mail.gmail.com>
-X-OriginalArrivalTime: 18 Feb 2011 19:29:13.0851 (UTC)
-	FILETIME=[1FFCE4B0:01CBCFA2]
-Subject: Re: git head: build of rpm-native fails
+Message-ID: <20110218193318.GA5650@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1298057187-2466-1-git-send-email-tom_rini@mentor.com>
+MIME-Version: 1.0
+In-Reply-To: <1298057187-2466-1-git-send-email-tom_rini@mentor.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH] insane.bbclass: Make RPATH a non-fatal error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,60 +51,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Feb 2011 19:30:29 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 18 Feb 2011 19:34:38 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 02/16/2011 12:38 AM, Frans Meulenbroeks wrote:
-> 2011/2/15 Tom Rini<tom_rini@mentor.com>:
->> On 02/14/2011 11:48 PM, Frans Meulenbroeks wrote:
->>>
->>> Hi,
->>>
->>> Yesterday I tried whether I could cross compile a helloworld.rpm to
->>> try on a fedora-arm box, but I failed in building rpm-native.
->>> This issue was verified by Jay. His log:
->>> http://tinderbox.openembedded.net/public/logs/task/25555153.txt
->>>
->>> apparently this is the failing part is:
->>>
->>> file -C -m ./magic.mime
->>> ./magic.mime, 187: Warning: string extension `B' invalid
->>> ./magic.mime, 401: Warning: string extension `B' invalid
->>> ./magic.mime, 618: Warning: string extension `B' invalid
->>> ./magic.mime, 623: Warning: string extension `B' invalid
->>> ./magic.mime, 627: Warning: string extension `B' invalid
->>> ./magic.mime, 628: Warning: string extension `B' invalid
->>> ./magic.mime, 672: Warning: no need to escape `#'
->>> ./magic.mime, 674: Warning: no need to escape `#'
->>> file: could not find any magic files!
->>> make[4]: *** [magic.mime.mgc] ÐžÑˆÐ¸Ð±ÐºÐ° 1
->>> make[4]: *** ÐžÐ¶Ð¸Ð´Ð°Ð½Ð¸Ðµ Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¸Ñ  Ð·Ð°Ð´Ð°Ð½Ð¸Ð¹..
->>>
->>> I tried the command in a devshell and there it also fails, but I have
->>> not really an idea what is wrong (and I don't know too much about RPM
->>> anyway)
->>> Suggestions? Fixes ?
->>
->> rpm depends on having a specific version of file around and there's probably
->> a mis-match.
->
-> Guess so.
-> Note that this is not host related as the file used is build by OE (file-native)
->
-> Actually maybe we should move to a newer version of rpm. Ours is at
-> 4.4.2.3, latest stable is 4.8.1
-> and file on oe is 5.04, mainstream is 5.05, but I guess that will have
-> less impact.
+On (18/02/11 12:26), Tom Rini wrote:
+> In order to make the user experience better we now use bb.warn
+> on non-fatal QA errors and bb.error on fatal errors.
+> 
+> Signed-off-by: Tom Rini <tom_rini@mentor.com>
 
-In terms of doing anything with rpm, the best bet is to look at what 
-poky has done as Mark Hatle has spent a lot of time making rpm usable 
-and useful there.  Or better yet, start working on oe-core where we've 
-inherited those benefits out of the box.  I say this since rpm is a 
-complex beast and it's a non-trivial thing to make it "just work".
+I really would like to get these issues fixed but I guess from grand
+scheme of things for now
+
+Acked-by: Khem Raj <raj.khem@gmail.com>
+
+> ---
+>  classes/insane.bbclass |   12 +++++++++---
+>  1 files changed, 9 insertions(+), 3 deletions(-)
+> 
+> diff --git a/classes/insane.bbclass b/classes/insane.bbclass
+> index a846832..3b042c9 100644
+> --- a/classes/insane.bbclass
+> +++ b/classes/insane.bbclass
+> @@ -116,7 +116,7 @@ def package_qa_make_fatal_error(error_class, name, path,d):
+>  
+>      TODO: Load a whitelist of known errors
+>      """
+> -    return not error_class in [0, 5, 7]
+> +    return not error_class in [0, 1, 5, 7]
+>  
+>  def package_qa_write_error(error_class, name, path, d):
+>      """
+> @@ -145,10 +145,16 @@ def package_qa_write_error(error_class, name, path, d):
+>               (ERROR_NAMES[error_class], name, package_qa_clean_path(path,d))
+>      f.close()
+>  
+> +# Returns False is there was a fatal problem and True if we did not hit a fatal
+> +# error
+>  def package_qa_handle_error(error_class, error_msg, name, path, d):
+> -    bb.error("QA Issue with %s: %s" % (name, error_msg))
+> +    fatal = package_qa_make_fatal_error(error_class, name, path, d)
+>      package_qa_write_error(error_class, name, path, d)
+> -    return not package_qa_make_fatal_error(error_class, name, path, d)
+> +    if fatal:
+> +        bb.error("QA Issue with %s: %s" % (name, error_msg))
+> +    else:
+> +        bb.warn("QA Issue with %s: %s" % (name, error_msg))
+> +    return not fatal
+>  
+>  def package_qa_check_rpath(file,name,d, elf):
+>      """
+> -- 
+> 1.7.3.5
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 -- 
-Tom Rini
-Mentor Graphics Corporation
+-Khem
 
 
