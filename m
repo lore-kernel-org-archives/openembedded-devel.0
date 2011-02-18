@@ -1,40 +1,40 @@
 Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PqUOX-0007E5-9t
+	(envelope-from <otavio.salvador@gmail.com>) id 1PqUOb-0007E5-RI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Feb 2011 18:45:29 +0100
+	Fri, 18 Feb 2011 18:45:35 +0100
 Received: by mail-gw0-f47.google.com with SMTP id 18so96740gwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Feb 2011 09:44:17 -0800 (PST)
+	Fri, 18 Feb 2011 09:44:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
 	:x-mailer:in-reply-to:references;
-	bh=GmGZX1AeFfZg3E6dcYD9LHARz1J2eCecmNXFED86HQQ=;
-	b=JLtlawFvsjUsbkTKA2wiKhAX31Re2QCdHS0hToQcBFvcHEDQuFaCmheueH0kdzuBQu
-	MH5C8leP5O4VD/eml1YvJhUG98zpJDhplKRmZuySG9ZnvDnmX3gUCZv5TQKPHJG/pnLv
-	HCGbU8y8DsU628uEeLlXk0YlCJgv5NFMU8wqc=
+	bh=SL5+bnnuhVcAJ8ttGY6sZGHBPiPbCqkoGNvLCyejwLg=;
+	b=BdDyPwSZONW8cVqaD1RE2JUBKZ5UNx/NqFqesG33ee5vkNpwg1Jdzoekw7pNK7Rh+4
+	tlxffE0cR8teb2pS77j2SriuZPY+qf4WH39cW1twzhoZfKoEyC4hN7lacV0An+CvMIep
+	FgT84mNZSd3eMd4JgQ207Pqf173gQuv/fKkRw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=ArEkeaSzMo8zp2mPtjYYBHsS0lZd3twNAHhcqXP+BNFzCHfN+fQMUsNGNjp/gVI5eS
-	KfFYmaaA7Ql3h/n+38qpbvhqRj1JvWi8ScW0aKXXAusKH8qzM95R8eRPDfOr/rSU0eqE
-	zYAWnh4VxbC24k3Jk3ombK8sgKLmDFkCA/deU=
-Received: by 10.150.7.2 with SMTP id 2mr941707ybg.437.1298051056808;
-	Fri, 18 Feb 2011 09:44:16 -0800 (PST)
+	b=mu5TpJq0B1bARVzI6Gdv2ja9IZRP9G9237BjQ61mYcQgzNmP63I9PoueSyIEiQsunF
+	2aMQleRMzOr0f6Mc5rQDdxplLaLghDA8CSsHxO58w2KHfNPBLUYR5SJ4+wBwECgrLnPx
+	QJdUIzBxB2ya5Sjok0VyVl8Lf6VSNMrfX/YTM=
+Received: by 10.236.109.12 with SMTP id r12mr1869214yhg.32.1298051059127;
+	Fri, 18 Feb 2011 09:44:19 -0800 (PST)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id 23sm1480538yhl.23.2011.02.18.09.44.14
+	by mx.google.com with ESMTPS id 23sm1480538yhl.23.2011.02.18.09.44.17
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 18 Feb 2011 09:44:15 -0800 (PST)
+	Fri, 18 Feb 2011 09:44:18 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Feb 2011 17:43:27 +0000
-Message-Id: <1298051011-10445-13-git-send-email-otavio@ossystems.com.br>
+Date: Fri, 18 Feb 2011 17:43:28 +0000
+Message-Id: <1298051011-10445-14-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.3
 In-Reply-To: <1298051011-10445-1-git-send-email-otavio@ossystems.com.br>
 References: <1298051011-10445-1-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 12/16] cmake: update from 2.8.2 to 2.8.3
+Subject: [PATCH 13/16] cmake: add OE qt4-tools-{native,sdk} support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,242 +48,168 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Feb 2011 17:45:29 -0000
+X-List-Received-Date: Fri, 18 Feb 2011 17:45:35 -0000
+
+ * make it find qmake2, moc4 and others
+ * convert to INC_PR
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- .../cmake-2.8.2/dont-run-cross-binaries.patch      |   13 ------
- .../cmake-2.8.3/dont-run-cross-binaries.patch      |   13 ++++++
- recipes/cmake/cmake-native_2.8.2.bb                |   12 -----
- recipes/cmake/cmake-native_2.8.3.bb                |   12 +++++
- recipes/cmake/cmake-sdk_2.8.2.bb                   |   12 -----
- recipes/cmake/cmake-sdk_2.8.3.bb                   |   12 +++++
- recipes/cmake/cmake_2.8.2.bb                       |   46 --------------------
- recipes/cmake/cmake_2.8.3.bb                       |   46 ++++++++++++++++++++
- 8 files changed, 83 insertions(+), 83 deletions(-)
- delete mode 100644 recipes/cmake/cmake-2.8.2/dont-run-cross-binaries.patch
- create mode 100644 recipes/cmake/cmake-2.8.3/dont-run-cross-binaries.patch
- delete mode 100644 recipes/cmake/cmake-native_2.8.2.bb
- create mode 100644 recipes/cmake/cmake-native_2.8.3.bb
- delete mode 100644 recipes/cmake/cmake-sdk_2.8.2.bb
- create mode 100644 recipes/cmake/cmake-sdk_2.8.3.bb
- delete mode 100644 recipes/cmake/cmake_2.8.2.bb
- create mode 100644 recipes/cmake/cmake_2.8.3.bb
+ .../cmake-2.8.3/support-oe-qt4-tools-names.patch   |   85 ++++++++++++++++++++
+ recipes/cmake/cmake-native_2.8.3.bb                |    2 +-
+ recipes/cmake/cmake-sdk_2.8.3.bb                   |    2 +-
+ recipes/cmake/cmake.inc                            |    5 +-
+ recipes/cmake/cmake_2.8.3.bb                       |    2 +
+ 5 files changed, 92 insertions(+), 4 deletions(-)
+ create mode 100644 recipes/cmake/cmake-2.8.3/support-oe-qt4-tools-names.patch
 
-diff --git a/recipes/cmake/cmake-2.8.2/dont-run-cross-binaries.patch b/recipes/cmake/cmake-2.8.2/dont-run-cross-binaries.patch
-deleted file mode 100644
-index 4a006f9..0000000
---- a/recipes/cmake/cmake-2.8.2/dont-run-cross-binaries.patch
-+++ /dev/null
-@@ -1,13 +0,0 @@
--diff -ru cmake-2.8.2.orig/CMakeLists.txt cmake-2.8.2/CMakeLists.txt
----- cmake-2.8.2.orig/CMakeLists.txt	2010-07-28 00:48:42.000000000 +0200
--+++ cmake-2.8.2/CMakeLists.txt	2010-07-28 01:05:17.000000000 +0200
--@@ -518,7 +518,8 @@
-- 
-- # build the remaining subdirectories
-- ADD_SUBDIRECTORY(Source)
---ADD_SUBDIRECTORY(Utilities)
--+# Come on! Running the cross-binaries on host is not a good idea.
--+#ADD_SUBDIRECTORY(Utilities)
-- ADD_SUBDIRECTORY(Tests)
-- 
-- # add a test
-diff --git a/recipes/cmake/cmake-2.8.3/dont-run-cross-binaries.patch b/recipes/cmake/cmake-2.8.3/dont-run-cross-binaries.patch
+diff --git a/recipes/cmake/cmake-2.8.3/support-oe-qt4-tools-names.patch b/recipes/cmake/cmake-2.8.3/support-oe-qt4-tools-names.patch
 new file mode 100644
-index 0000000..4a006f9
+index 0000000..b456923
 --- /dev/null
-+++ b/recipes/cmake/cmake-2.8.3/dont-run-cross-binaries.patch
-@@ -0,0 +1,13 @@
-+diff -ru cmake-2.8.2.orig/CMakeLists.txt cmake-2.8.2/CMakeLists.txt
-+--- cmake-2.8.2.orig/CMakeLists.txt	2010-07-28 00:48:42.000000000 +0200
-++++ cmake-2.8.2/CMakeLists.txt	2010-07-28 01:05:17.000000000 +0200
-+@@ -518,7 +518,8 @@
++++ b/recipes/cmake/cmake-2.8.3/support-oe-qt4-tools-names.patch
+@@ -0,0 +1,85 @@
++--- a/Modules/FindQt4.cmake
+++++ b/Modules/FindQt4.cmake
++@@ -461,7 +461,7 @@
++ # check for qmake
++ # Debian uses qmake-qt4
++ # macports' Qt uses qmake-mac
++-FIND_PROGRAM(QT_QMAKE_EXECUTABLE NAMES qmake qmake4 qmake-qt4 qmake-mac PATHS
+++FIND_PROGRAM(QT_QMAKE_EXECUTABLE NAMES qmake qmake2 qmake4 qmake-qt4 qmake-mac PATHS
++   "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\4.0.0;InstallDir]/bin"
++   "[HKEY_CURRENT_USER\\Software\\Trolltech\\Versions\\4.0.0;InstallDir]/bin"
++   "[HKEY_CURRENT_USER\\Software\\Trolltech\\Versions\\${qt_install_version};InstallDir]/bin"
++@@ -988,13 +988,13 @@
++   ENDIF(QT_QMAKE_CHANGED)
++   
++   FIND_PROGRAM(QT_MOC_EXECUTABLE
++-    NAMES moc-qt4 moc
+++    NAMES moc-qt4 moc4 moc
++     PATHS ${QT_BINARY_DIR}
++     NO_DEFAULT_PATH
++     )
 + 
-+ # build the remaining subdirectories
-+ ADD_SUBDIRECTORY(Source)
-+-ADD_SUBDIRECTORY(Utilities)
-++# Come on! Running the cross-binaries on host is not a good idea.
-++#ADD_SUBDIRECTORY(Utilities)
-+ ADD_SUBDIRECTORY(Tests)
++   FIND_PROGRAM(QT_UIC_EXECUTABLE
++-    NAMES uic-qt4 uic
+++    NAMES uic-qt4 uic4 uic
++     PATHS ${QT_BINARY_DIR}
++     NO_DEFAULT_PATH
++     )
++@@ -1006,49 +1006,49 @@
++     )
 + 
-+ # add a test
-diff --git a/recipes/cmake/cmake-native_2.8.2.bb b/recipes/cmake/cmake-native_2.8.2.bb
-deleted file mode 100644
-index c7b3d80..0000000
---- a/recipes/cmake/cmake-native_2.8.2.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--inherit native
--require cmake.inc
--
--PR = "r1"
--
--SRC_URI[md5sum] = "8c967d5264657a798f22ee23976ff0d9"
--SRC_URI[sha256sum] = "766ff169af798599d7dd42e41e9f4533d73942a2bb928235115412dce5b81406"
--
--do_configure_append () {
--        sed -e 's/BUILD_CursesDialog:BOOL=ON/BUILD_CursesDialog:BOOL=OFF/' \
--                -i CMakeCache.txt
--}
++   FIND_PROGRAM(QT_RCC_EXECUTABLE 
++-    NAMES rcc
+++    NAMES rcc4 rcc
++     PATHS ${QT_BINARY_DIR}
++     NO_DEFAULT_PATH
++     )
++ 
++   FIND_PROGRAM(QT_DBUSCPP2XML_EXECUTABLE 
++-    NAMES qdbuscpp2xml
+++    NAMES qdbuscpp2xml4 qdbuscpp2xml
++     PATHS ${QT_BINARY_DIR}
++     NO_DEFAULT_PATH
++     )
++ 
++   FIND_PROGRAM(QT_DBUSXML2CPP_EXECUTABLE 
++-    NAMES qdbusxml2cpp
+++    NAMES qdbusxml2cpp4 qdbusxml2cpp
++     PATHS ${QT_BINARY_DIR}
++     NO_DEFAULT_PATH
++     )
++ 
++   FIND_PROGRAM(QT_LUPDATE_EXECUTABLE
++-    NAMES lupdate-qt4 lupdate
+++    NAMES lupdate-qt4 lupdate4 lupdate
++     PATHS ${QT_BINARY_DIR}
++     NO_DEFAULT_PATH
++     )
++ 
++   FIND_PROGRAM(QT_LRELEASE_EXECUTABLE
++-    NAMES lrelease-qt4 lrelease
+++    NAMES lrelease-qt4 lrelease4 lrelease
++     PATHS ${QT_BINARY_DIR}
++     NO_DEFAULT_PATH
++     )
++ 
++   FIND_PROGRAM(QT_QCOLLECTIONGENERATOR_EXECUTABLE
++-    NAMES qcollectiongenerator-qt4 qcollectiongenerator
+++    NAMES qcollectiongenerator-qt4 qcollectiongenerator4 qcollectiongenerator
++     PATHS ${QT_BINARY_DIR}
++     NO_DEFAULT_PATH
++     )
++ 
++   FIND_PROGRAM(QT_DESIGNER_EXECUTABLE
++-    NAMES designer-qt4 designer
+++    NAMES designer-qt4 designer4 designer
++     PATHS ${QT_BINARY_DIR}
++     NO_DEFAULT_PATH
++     )
++ 
++   FIND_PROGRAM(QT_LINGUIST_EXECUTABLE
++-    NAMES linguist-qt4 linguist
+++    NAMES linguist-qt4 linguist4 linguist
++     PATHS ${QT_BINARY_DIR}
++     NO_DEFAULT_PATH
++     )
 diff --git a/recipes/cmake/cmake-native_2.8.3.bb b/recipes/cmake/cmake-native_2.8.3.bb
-new file mode 100644
-index 0000000..e04885f
---- /dev/null
+index e04885f..fa5e160 100644
+--- a/recipes/cmake/cmake-native_2.8.3.bb
 +++ b/recipes/cmake/cmake-native_2.8.3.bb
-@@ -0,0 +1,12 @@
-+inherit native
-+require cmake.inc
-+
-+PR = "r1"
-+
-+SRC_URI[md5sum] = "a76a44b93acf5e3badda9de111385921"
-+SRC_URI[sha256sum] = "689ed02786b5cefa5515c7716784ee82a82e8ece6be5a3d629ac3cc0c05fc288"
-+
-+do_configure_append () {
-+        sed -e 's/BUILD_CursesDialog:BOOL=ON/BUILD_CursesDialog:BOOL=OFF/' \
-+                -i CMakeCache.txt
-+}
-diff --git a/recipes/cmake/cmake-sdk_2.8.2.bb b/recipes/cmake/cmake-sdk_2.8.2.bb
-deleted file mode 100644
-index 2c51a49..0000000
---- a/recipes/cmake/cmake-sdk_2.8.2.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--inherit sdk
--require cmake.inc
--
+@@ -1,7 +1,7 @@
+ inherit native
+ require cmake.inc
+ 
 -PR = "r1"
--
--SRC_URI[md5sum] = "8c967d5264657a798f22ee23976ff0d9"
--SRC_URI[sha256sum] = "766ff169af798599d7dd42e41e9f4533d73942a2bb928235115412dce5b81406"
--
--do_configure_append () {
--        sed -e 's/BUILD_CursesDialog:BOOL=ON/BUILD_CursesDialog:BOOL=OFF/' \
--                -i CMakeCache.txt
--}
++PR = "${INC_PR}.0"
+ 
+ SRC_URI[md5sum] = "a76a44b93acf5e3badda9de111385921"
+ SRC_URI[sha256sum] = "689ed02786b5cefa5515c7716784ee82a82e8ece6be5a3d629ac3cc0c05fc288"
 diff --git a/recipes/cmake/cmake-sdk_2.8.3.bb b/recipes/cmake/cmake-sdk_2.8.3.bb
-new file mode 100644
-index 0000000..5035b81
---- /dev/null
+index 5035b81..2dd7a17 100644
+--- a/recipes/cmake/cmake-sdk_2.8.3.bb
 +++ b/recipes/cmake/cmake-sdk_2.8.3.bb
-@@ -0,0 +1,12 @@
-+inherit sdk
-+require cmake.inc
-+
-+PR = "r1"
-+
-+SRC_URI[md5sum] = "a76a44b93acf5e3badda9de111385921"
-+SRC_URI[sha256sum] = "689ed02786b5cefa5515c7716784ee82a82e8ece6be5a3d629ac3cc0c05fc288"
-+
-+do_configure_append () {
-+        sed -e 's/BUILD_CursesDialog:BOOL=ON/BUILD_CursesDialog:BOOL=OFF/' \
-+                -i CMakeCache.txt
-+}
-diff --git a/recipes/cmake/cmake_2.8.2.bb b/recipes/cmake/cmake_2.8.2.bb
-deleted file mode 100644
-index 41ba813..0000000
---- a/recipes/cmake/cmake_2.8.2.bb
-+++ /dev/null
-@@ -1,46 +0,0 @@
--require cmake.inc
--
--inherit cmake
--
--DEPENDS += "curl expat zlib"
--
--SRC_URI += "file://dont-run-cross-binaries.patch"
--
--# Strip ${prefix} from ${docdir}, set result into docdir_stripped
--python () {
--    prefix=bb.data.getVar("prefix", d, 1)
--    docdir=bb.data.getVar("docdir", d, 1)
--
--    if not docdir.startswith(prefix):
--	raise bb.build.FuncFailed('docdir must contain prefix as its prefix')
--
--    docdir_stripped = docdir[len(prefix):]
--    if len(docdir_stripped) > 0 and docdir_stripped[0] == '/':
--	docdir_stripped = docdir_stripped[1:]
--
--    bb.data.setVar("docdir_stripped", docdir_stripped, d)
--}
--
--EXTRA_OECMAKE=" \
--# Override default "doc" (this is relative to ${prefix})
--    -DCMAKE_DOC_DIR=${docdir_stripped}/cmake-2.8 \
--# Using system libs spares us some cmake cross trouble.
--    -DCMAKE_USE_SYSTEM_LIBRARIES=1 \
--# This is compiler & target dependant, but it seems cmake does not in fact use this value.
--    -DKWSYS_CHAR_IS_SIGNED=1 \
--# This disables large file support. Hopefully nobody processes >2G files on the target.
--# If you want to enable this, add -DWKSYS_LFS_WORKS=1
--    -DKWSYS_LFS_DISABLE=1 \
--"
--
--SRC_URI[md5sum] = "8c967d5264657a798f22ee23976ff0d9"
--SRC_URI[sha256sum] = "766ff169af798599d7dd42e41e9f4533d73942a2bb928235115412dce5b81406"
--
--FILES_${PN} += "${datadir}/cmake-2.8"
--
--# The doc is quite... absent. Just the licensing information is there.
--# Real doc was nuked by dont-run-cross-binaries.patch. Fixing the doc
--# generation would be quite complicated, as cmake build process innovatively
--# runs the generated binaries to extract help contained in them.
--# -> Fixing this is probably not worth it.
--FILES_${PN}-doc += "${docdir}/cmake-2.8"
+@@ -1,7 +1,7 @@
+ inherit sdk
+ require cmake.inc
+ 
+-PR = "r1"
++PR = "${INC_PR}.0"
+ 
+ SRC_URI[md5sum] = "a76a44b93acf5e3badda9de111385921"
+ SRC_URI[sha256sum] = "689ed02786b5cefa5515c7716784ee82a82e8ece6be5a3d629ac3cc0c05fc288"
+diff --git a/recipes/cmake/cmake.inc b/recipes/cmake/cmake.inc
+index ef6f5aa..814743e 100644
+--- a/recipes/cmake/cmake.inc
++++ b/recipes/cmake/cmake.inc
+@@ -5,10 +5,11 @@ DESCRIPTION = "A cross-platform, open-source make system"
+ HOMEPAGE = "http://www.cmake.org/"
+ LICENSE = "Berkeley-style license"
+ SECTION = "console/utils"
+-PR = "r2"
++INC_PR = "r2"
+ 
+ CMAKE_MAJOR_VERSION = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
+-SRC_URI = "http://www.cmake.org/files/v${CMAKE_MAJOR_VERSION}/cmake-${PV}.tar.gz"
++SRC_URI = "http://www.cmake.org/files/v${CMAKE_MAJOR_VERSION}/cmake-${PV}.tar.gz \
++           file://support-oe-qt4-tools-names.patch"
+ 
+ inherit autotools
+ 
 diff --git a/recipes/cmake/cmake_2.8.3.bb b/recipes/cmake/cmake_2.8.3.bb
-new file mode 100644
-index 0000000..8c96388
---- /dev/null
+index 8c96388..cb5f7f7 100644
+--- a/recipes/cmake/cmake_2.8.3.bb
 +++ b/recipes/cmake/cmake_2.8.3.bb
-@@ -0,0 +1,46 @@
-+require cmake.inc
+@@ -1,5 +1,7 @@
+ require cmake.inc
+ 
++PR = "${INC_PR}.0"
 +
-+inherit cmake
-+
-+DEPENDS += "curl expat zlib"
-+
-+SRC_URI[md5sum] = "a76a44b93acf5e3badda9de111385921"
-+SRC_URI[sha256sum] = "689ed02786b5cefa5515c7716784ee82a82e8ece6be5a3d629ac3cc0c05fc288"
-+
-+SRC_URI += "file://dont-run-cross-binaries.patch"
-+
-+# Strip ${prefix} from ${docdir}, set result into docdir_stripped
-+python () {
-+    prefix=bb.data.getVar("prefix", d, 1)
-+    docdir=bb.data.getVar("docdir", d, 1)
-+
-+    if not docdir.startswith(prefix):
-+	raise bb.build.FuncFailed('docdir must contain prefix as its prefix')
-+
-+    docdir_stripped = docdir[len(prefix):]
-+    if len(docdir_stripped) > 0 and docdir_stripped[0] == '/':
-+	docdir_stripped = docdir_stripped[1:]
-+
-+    bb.data.setVar("docdir_stripped", docdir_stripped, d)
-+}
-+
-+EXTRA_OECMAKE=" \
-+# Override default "doc" (this is relative to ${prefix})
-+    -DCMAKE_DOC_DIR=${docdir_stripped}/cmake-2.8 \
-+# Using system libs spares us some cmake cross trouble.
-+    -DCMAKE_USE_SYSTEM_LIBRARIES=1 \
-+# This is compiler & target dependant, but it seems cmake does not in fact use this value.
-+    -DKWSYS_CHAR_IS_SIGNED=1 \
-+# This disables large file support. Hopefully nobody processes >2G files on the target.
-+# If you want to enable this, add -DWKSYS_LFS_WORKS=1
-+    -DKWSYS_LFS_DISABLE=1 \
-+"
-+
-+FILES_${PN} += "${datadir}/cmake-2.8"
-+
-+# The doc is quite... absent. Just the licensing information is there.
-+# Real doc was nuked by dont-run-cross-binaries.patch. Fixing the doc
-+# generation would be quite complicated, as cmake build process innovatively
-+# runs the generated binaries to extract help contained in them.
-+# -> Fixing this is probably not worth it.
-+FILES_${PN}-doc += "${docdir}/cmake-2.8"
+ inherit cmake
+ 
+ DEPENDS += "curl expat zlib"
 -- 
 1.7.2.3
 
