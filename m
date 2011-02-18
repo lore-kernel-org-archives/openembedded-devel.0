@@ -1,32 +1,26 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from dd20204.kasserver.com ([85.13.140.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PqUUs-0007Pv-3C
+	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1PqVPr-0001YX-0y
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Feb 2011 18:52:02 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PqUTg-0001zz-2r from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Feb 2011 09:50:48 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Fri, 18 Feb 2011 09:50:47 -0800
-Received: from [172.30.80.150] ([172.30.80.150]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 18 Feb 2011 10:50:46 -0700
-Message-ID: <4D5EB171.1000808@mentor.com>
-Date: Fri, 18 Feb 2011 10:50:41 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
+	Fri, 18 Feb 2011 19:50:55 +0100
+Received: from [192.168.1.128] (95-90-73-27-dynip.superkabel.de [95.90.73.27])
+	by dd20204.kasserver.com (Postfix) with ESMTP id 085F01805A1CE;
+	Fri, 18 Feb 2011 19:49:42 +0100 (CET)
+Message-ID: <4D5EBF16.5040602@opensimpad.org>
+Date: Fri, 18 Feb 2011 19:48:54 +0100
+From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1298049536.11289.3126.camel@rex>
-In-Reply-To: <1298049536.11289.3126.camel@rex>
-X-OriginalArrivalTime: 18 Feb 2011 17:50:47.0078 (UTC)
-	FILETIME=[5F46DC60:01CBCF94]
-Subject: Re: Bitbake 1.12.0 released!
+To: Khem Raj <raj.khem@gmail.com>
+References: <4D51566B.9060603@mentor.com>
+	<20110208145355.GF2050@xora-build.xora.org.uk>
+	<4D515A17.3060203@mentor.com> <4D523623.7030509@opensimpad.org>
+	<4D59543B.50506@mentor.com> <4D5D9706.80504@opensimpad.org>
+	<AANLkTin27UL+v4PxngkBc94RN3Ni9QpRzogof74cek_W@mail.gmail.com>
+In-Reply-To: <AANLkTin27UL+v4PxngkBc94RN3Ni9QpRzogof74cek_W@mail.gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: OpenEmbedded 2011.3 Release: Request for targets!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,26 +34,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Feb 2011 17:52:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 18 Feb 2011 18:50:55 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-On 02/18/2011 10:18 AM, Richard Purdie wrote:
-> Bitbake 1.12.0 has been released.
+On 17.02.2011 23:35, Khem Raj wrote:
+> On Thu, Feb 17, 2011 at 1:45 PM, Bernhard Guillon
+> <Bernhard.Guillon@opensimpad.org>  wrote:
 >
-> http://prdownload.berlios.de/bitbake/bitbake-1.12.0.tar.gz
+>> Hi,
+>> I just build a console-image and it booted fine on my atngw100.
+> great so you can try avr stuff. I see that avr now supports gcc 4.4
+> and binutils 2.20.1
+> would you test if toolchain was upgrade (ofcource after release)
 >
-> This release has many cleanups and improvements to the bitbake core. The
-> biggest and most user visible change is the parallel parsing work which
-> is the driving reason for the release.
->
-> A git log of the differences between 1.10 and 1.12 follows.
 
-Thanks for getting the release out Richard.  And thanks to everyone that 
-spent a lot of time in bitbake recently!
+Yes, please send me a reminder after the upgrade.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+
+>> I had one issue with libpam. Libpam requires libprelude and libprelude=
+ did
+>> not build for me (see log attached). I added --disable-prelude to
+> this error seems to be gcc related to me. Somehow C++ header inclusion
+> is not ok it seems
+>
+
+Hm, yes I will try to dig deeper next week if time permits :/
+
+
+Best regards
+Bernhard
+
 
 
