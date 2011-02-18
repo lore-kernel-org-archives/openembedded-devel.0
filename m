@@ -1,40 +1,40 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PqUOM-0007Da-NF
+	(envelope-from <otavio.salvador@gmail.com>) id 1PqUOP-0007E5-1K
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Feb 2011 18:45:20 +0100
-Received: by mail-yw0-f47.google.com with SMTP id 41so337920ywl.6
+	Fri, 18 Feb 2011 18:45:21 +0100
+Received: by mail-gw0-f47.google.com with SMTP id 18so96740gwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Feb 2011 09:44:07 -0800 (PST)
+	Fri, 18 Feb 2011 09:44:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
 	:x-mailer:in-reply-to:references;
-	bh=laKLM/6+M9MfSXOpAXpLuczwmKf0CMPjclPECdMJWko=;
-	b=vIOOHhi4Bu2vrV6BS8/wDZfDWMWc87ylavgCcC2Fy2gbJHWcRqlySnNVC8yRbBfmvV
-	Gk/edBhMbcuU12hsvbFmCxF3iZx7qAZ/NeOy8cPYEqmrKhW4PLdlbplVBq2+XMVrnyuB
-	q6O7U6f49T/0KEbKfi49DJLSnhakmIgrSwVSc=
+	bh=rszztLN9hSRw8sKM8E/O08JrQxK6pIvOJ84Ci08Dr5k=;
+	b=yHF/bkA9iyezLzZJadH1jh7PYKFJwTlXC09qz8qgje0md3tgMzgI8ooHEyY4yimgUu
+	ZfwopGP7SKUcYdHO2in8HftT/Xg4msf7fEcBh3YQS8amfm4b4X2zMZwebwzo2sQ0+dS8
+	JDuojdimVY2NbobSfA+b2Gvf9b7bkaoUVTeqg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=acZElGCXkjSYKN9R0hJBqWHwBKCTDLttOtelwkGNjfU5GmjlBORtTePTdBotC9WVwv
-	T+0H7WlBXm6UGwvQh7zfnPmiX09DwY6VjJ5grqcTF2N0MUbGXOShBeap5BtpDRB2eQRf
-	KzlP1YKKWqKciqN7CgwKxvFO95KV3MCtxghJc=
-Received: by 10.150.239.21 with SMTP id m21mr1394463ybh.424.1298051046979;
-	Fri, 18 Feb 2011 09:44:06 -0800 (PST)
+	b=E6je35i9+YUWBt95MA+z3tWpAdYrAA+dl5EsjAsTljnJhSvAnBp/Xw2w6JNEiRjbqh
+	KPIerCPUgmm/oOvG9cVVhMnnqdc6Ek+UFZVdvyB9WksrdylYqDlRhjhDUmuzGw8dVeQ9
+	y43MhyJnJr3D5svlVedADjvRQZpinULA3cOY4=
+Received: by 10.151.77.13 with SMTP id e13mr1383025ybl.426.1298051049295;
+	Fri, 18 Feb 2011 09:44:09 -0800 (PST)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id 23sm1480538yhl.23.2011.02.18.09.44.04
+	by mx.google.com with ESMTPS id 23sm1480538yhl.23.2011.02.18.09.44.07
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 18 Feb 2011 09:44:05 -0800 (PST)
+	Fri, 18 Feb 2011 09:44:08 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Feb 2011 17:43:23 +0000
-Message-Id: <1298051011-10445-9-git-send-email-otavio@ossystems.com.br>
+Date: Fri, 18 Feb 2011 17:43:24 +0000
+Message-Id: <1298051011-10445-10-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.3
 In-Reply-To: <1298051011-10445-1-git-send-email-otavio@ossystems.com.br>
 References: <1298051011-10445-1-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 08/16] sdk.bbclass: cache ${libdir} as ${target_libdir}
+Subject: [PATCH 09/16] qt4-tools-sdk: use host include headers for dbus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,25 +48,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Feb 2011 17:45:20 -0000
+X-List-Received-Date: Fri, 18 Feb 2011 17:45:21 -0000
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Acked-by: Khem Raj <raj.khem@gmail.com>
 ---
- classes/sdk.bbclass |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+ recipes/qt4/qt4-tools-sdk.inc |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/classes/sdk.bbclass b/classes/sdk.bbclass
-index 4fe17b8..bf77744 100644
---- a/classes/sdk.bbclass
-+++ b/classes/sdk.bbclass
-@@ -7,6 +7,7 @@
- # or indirectly via dependency.  No need to be in 'world'.
- EXCLUDE_FROM_WORLD = "1"
- target_includedir := "${includedir}"
-+target_libdir := "${libdir}"
+diff --git a/recipes/qt4/qt4-tools-sdk.inc b/recipes/qt4/qt4-tools-sdk.inc
+index ad896e4..bd70046 100644
+--- a/recipes/qt4/qt4-tools-sdk.inc
++++ b/recipes/qt4/qt4-tools-sdk.inc
+@@ -5,7 +5,7 @@ HOMEPAGE = "http://www.trolltech.com"
+ PRIORITY = "optional"
+ LICENSE = "LGPLv2.1 GPLv3"
  
- # Save MULTIMACH_ARCH
- OLD_MULTIMACH_ARCH := "${MULTIMACH_ARCH}"
+-INC_PR = "r2"
++INC_PR = "r3"
+ 
+ FILESPATHPKG =. "qt-${PV}:"
+ inherit sdk
+@@ -32,9 +32,9 @@ EXTRA_OECONF = "-prefix ${prefix} \
+                 -verbose -release -fast -static \
+                 -embedded -no-freetype -no-glib -no-iconv \
+                 -qt3support \
+-                -I${STAGING_DIR_NATIVE}/usr/include \
+-                -I${STAGING_DIR_NATIVE}/usr/include/dbus-1.0 \
+-                -I${STAGING_DIR_NATIVE}/usr/lib/dbus-1.0/include"
++                -I${STAGING_DIR}/${HOST_SYS}${target_includedir} \
++                -I${STAGING_DIR}/${HOST_SYS}${target_includedir}/dbus-1.0 \
++                -I${STAGING_DIR}/${HOST_SYS}${target_libdir}/dbus-1.0/include"
+ 
+ # yank default -e, otherwise we get the following error:
+ # moc_qbuffer.cpp: No such file or directory
 -- 
 1.7.2.3
 
