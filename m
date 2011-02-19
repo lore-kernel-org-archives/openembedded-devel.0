@@ -1,34 +1,37 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pqt0a-0007uR-As
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1PqwHg-0002gh-2M
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Feb 2011 21:02:24 +0100
-Received: by fxm8 with SMTP id 8so377074fxm.6
+	Sun, 20 Feb 2011 00:32:16 +0100
+Received: by bwz10 with SMTP id 10so881270bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Feb 2011 12:01:08 -0800 (PST)
+	Sat, 19 Feb 2011 15:31:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:subject:date:message-id:x-mailer;
-	bh=todMwo5XlwaC6JbTSe4SjxfGdRInzMtQ/6q05aic8m0=;
-	b=ZvN+J6JT13M0F7rU4lFRYUWekJ8FcM220MmWGsrIGVvFYMcWdN9PPNIH4GJCMziCvl
-	xATPHHyOaa1f4ezSP8EWGNwLK9jumN2Ww4bLsiHcByJmSwRc/HQKqVhAoFK0J2q/iuVh
-	QjFZ+L9ePwMrsXtMYDZkqrZfdYgkVi1EOMQGE=
+	h=domainkey-signature:from:to:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=bWFMdokY/DDokUSxdHA6L8QGSSBV+ID2iJHhPVwv6Jk=;
+	b=cNVEvlXRhRg/5hthMk3rya1cM2uHKXd2IAA5/jgPqwStVkKjVQhiEgDrBxfNvfKu7L
+	nLDw77BxH0piQkPUXSoToTCSpAjxYUKx2p03tDdw4iBpbKyMgGqG0lxttmJkBiD2HbXb
+	uPcDdDYNoy85P3p/4RMFnIAbMr53VvCkQ8vyg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer;
-	b=ZT/0PBPHdYRcbeEoik8OkCxg85+HlNY9f68AfeHOOglMrD8hf50siXHn3+pi38HCbw
-	/rbQ5rR2aUS7zym49tgKV+OjFCK5SRh7d8lJAdK9wd74Sift1wQiz5m3QHoYFjJ544W7
-	Qar/mgRnkD/+T153X5TrSthXsUAqkBDoiFQDs=
-Received: by 10.223.96.68 with SMTP id g4mr1506598fan.33.1298145668675;
-	Sat, 19 Feb 2011 12:01:08 -0800 (PST)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=VH0WYSn9MSrFLeL3+yjc+g0/k88nyCYXgOawcf6sNd5FTreBWr7uDlPv7XMl928C8a
+	+/TVnN55h4G/4Okdwapr88nUZbo3xdY5EqWuJ3njNsSSJAjK7K+fTthit8aoGz54/XUA
+	bHXOeAU7sdcRrxXSGk5C0qKgPxZBX1QguXcT4=
+Received: by 10.204.4.212 with SMTP id 20mr2051060bks.172.1298158259979;
+	Sat, 19 Feb 2011 15:30:59 -0800 (PST)
 Received: from localhost.localdomain (ns.tefnet.pl [188.165.206.204])
-	by mx.google.com with ESMTPS id f24sm1691864fak.24.2011.02.19.12.01.07
+	by mx.google.com with ESMTPS id b6sm2608923bkb.10.2011.02.19.15.30.58
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 19 Feb 2011 12:01:07 -0800 (PST)
+	Sat, 19 Feb 2011 15:30:59 -0800 (PST)
 From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 Feb 2011 21:00:59 +0100
-Message-Id: <1298145659-23468-1-git-send-email-filip.zyzniewski@gmail.com>
+Date: Sun, 20 Feb 2011 00:30:49 +0100
+Message-Id: <1298158249-10217-1-git-send-email-filip.zyzniewski@gmail.com>
 X-Mailer: git-send-email 1.7.1
-Subject: [PATCH] less_436.bb: provide absolute path in ALTERNATIVE_PATH.
+In-Reply-To: <1298063776-2260-1-git-send-email-filip.zyzniewski@gmail.com>
+References: <1298063776-2260-1-git-send-email-filip.zyzniewski@gmail.com>
+Subject: [PATCHv2] package_deb.bbclass/apt: armel architecture name for eabi systems.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,37 +45,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Feb 2011 20:02:24 -0000
+X-List-Received-Date: Sat, 19 Feb 2011 23:32:16 -0000
 
-Relative path causes dpkg's update-alternatives to ignore this
-alternative.
+For dpkg EABI system architecture is called armel, not arm.
+Reference: http://wiki.debian.org/ArmEabiPort
 
 Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 ---
- recipes/less/less_436.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ classes/package_deb.bbclass |    2 ++
+ recipes/apt/apt_0.7.20.2.bb |   13 ++++++++++++-
+ 2 files changed, 14 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/less/less_436.bb b/recipes/less/less_436.bb
-index 711abfd..c62c821 100644
---- a/recipes/less/less_436.bb
-+++ b/recipes/less/less_436.bb
-@@ -5,6 +5,7 @@ HOMEPAGE = "http://www.greenwoodsoftware.com/"
- SECTION = "console/utils"
- LICENSE = "BSD"
- DEPENDS = "ncurses"
-+PR = "r1"
+diff --git a/classes/package_deb.bbclass b/classes/package_deb.bbclass
+index 60e759d..87f31fa 100644
+--- a/classes/package_deb.bbclass
++++ b/classes/package_deb.bbclass
+@@ -15,6 +15,8 @@ DPKG_ARCH_i486 ?= "i386"
+ DPKG_ARCH_i586 ?= "i386"
+ DPKG_ARCH_i686 ?= "i386"
+ DPKG_ARCH_pentium ?= "i386"
++DPKG_ARCH_linux-gnueabi ?= "armel"
++DPKG_ARCH_linux-uclibceabi ?= "armel"
  
- SRC_URI = "http://www.greenwoodsoftware.com/less/less-${PV}.tar.gz"
+ python package_deb_fn () {
+     bb.data.setVar('PKGFN', bb.data.getVar('PKG',d), d)
+diff --git a/recipes/apt/apt_0.7.20.2.bb b/recipes/apt/apt_0.7.20.2.bb
+index 5c932a5..c8a3516 100644
+--- a/recipes/apt/apt_0.7.20.2.bb
++++ b/recipes/apt/apt_0.7.20.2.bb
+@@ -7,12 +7,23 @@ SRC_URI += "file://no-doxygen.patch \
+             file://no-ko-translation.patch \
+             file://fix-gcc-4.4-compile.patch \
+             file://use-host.patch "
+-PR = "r3"
++PR = "r4"
  
-@@ -16,7 +17,7 @@ do_install () {
- }
+ require apt-package.inc
  
- ALTERNATIVE_NAME = "less"
--ALTERNATIVE_PATH = "less.${PN}"
-+ALTERNATIVE_PATH = "${bindir}/less.${PN}"
- ALTERNATIVE_PRIORITY = "100"
+ FILES_${PN} += "${bindir}/apt-key"
  
- SRC_URI[md5sum] = "817bf051953ad2dea825a1cdf460caa4"
++do_configure_append_linux-gnueabi() {
++	sed -i \
++	's:^#define COMMON_ARCH "arm"$:#define COMMON_ARCH "armel":' \
++		${S}/include/config.h
++}
++
++do_configure_append_linux-uclibceabi() {
++	do_configure_append_linux-gnueabi()
++}
++
++
+ do_stage() {
+ 	install -d ${STAGING_LIBDIR} ${STAGING_INCDIR}/apt-pkg
+ 	eval `cat environment.mak | grep ^GLIBC_VER | sed -e's, = ,=,'`
 -- 
 1.7.1
 
