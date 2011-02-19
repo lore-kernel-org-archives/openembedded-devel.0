@@ -1,42 +1,32 @@
-Received: from mail-bw0-f51.google.com ([209.85.214.51])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Pqmqm-0002LG-3w
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1Pqnwg-0002Co-4T
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Feb 2011 14:27:52 +0100
-Received: by bwz10 with SMTP id 10so630106bwz.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Feb 2011 05:26:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=pGMUenv8XutKr0zTEbU0f4Lwf6d7mU2DCktFgqBxkls=;
-	b=YXW7r6v0D10MKn9poPBNKrShH0YHl4Awku74132BxsMig8ZAdRQuFsjLZyRQ05GWWX
-	4XD/1fhWfjQyQWaTTlHbt1AlPdiNUOxl/22bIc3ZCixczBgoJWVqS063lrNonxY8BsK2
-	gdO+9jIfaYgG8RIxQaoA3zJ0tJkvyZfZEtF4c=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=DHWueugBZaKzj733maQaciVOfzjvI+MQvGkepiXU5lFPgdeRlvf9G+CUZBZunRvVmJ
-	Btc7aAZByYpj8MxZKihzpbQNFYfYrwFjLN4+Y/Lzb6NuYjsc8jmwP7iZXanHF3Yzu+G0
-	u/4nXuNF3JyDhLXcKC9Obd9qEU66jZnyYcOTE=
+	Sat, 19 Feb 2011 15:38:11 +0100
+Received: (qmail 27814 invoked by uid 503); 19 Feb 2011 15:19:50 -0000
+Received: from b6.ovh.net (HELO mail176.ha.ovh.net) (213.186.33.56)
+	by 63.mail-out.ovh.net with SMTP; 19 Feb 2011 15:19:50 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 19 Feb 2011 16:36:44 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 19 Feb 2011 16:36:43 +0200
+Message-ID: <4D5FD57B.30208@eukrea.com>
+Date: Sat, 19 Feb 2011 15:36:43 +0100
+From: Eric Benard <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.204.122.198 with SMTP id m6mr1639561bkr.186.1298121992064;
-	Sat, 19 Feb 2011 05:26:32 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.119.207 with HTTP; Sat, 19 Feb 2011 05:26:32 -0800 (PST)
-In-Reply-To: <201102191252.05388.schnitzeltony@gmx.de>
-References: <1298057187-2466-1-git-send-email-tom_rini@mentor.com>
-	<4D5ED835.7040800@eukrea.com>
-	<AANLkTimfZ4vp-8RPHxTWPfo5m_0zfTwM611Q+d+jWuK8@mail.gmail.com>
-	<201102191252.05388.schnitzeltony@gmx.de>
-Date: Sat, 19 Feb 2011 13:26:32 +0000
-X-Google-Sender-Auth: e6L_MLmTWcBd5jj2sN4LV-FIqfs
-Message-ID: <AANLkTinfrqy3eSJajojfDiAJcPcMM9MbTZo94YVGz+ba@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] insane.bbclass: Make RPATH a non-fatal error
+References: <1298032254-26236-1-git-send-email-eric@eukrea.com>
+	<4D5E8268.901@mentor.com>
+In-Reply-To: <4D5E8268.901@mentor.com>
+X-Ovh-Tracer-Id: 15382888953175977289
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: Re: [PATCH] shadow: fix rpath issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,40 +40,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Feb 2011 13:27:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 19 Feb 2011 14:38:11 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Sat, Feb 19, 2011 at 11:52, Andreas Mueller <schnitzeltony@gmx.de> wrote=
-:
-> On Saturday 19 February 2011 10:45:38 Frans Meulenbroeks wrote:
->> I am fine with the patch, but perhaps a better solution would be to
->> introduce a var to decide whether it is a fatal or not.
->> That way people distro's that use libtool 2.4 can decide to make it a
->> fatal. (or individual users in their local.conf)
+Hi Tom,
+
+On 18/02/2011 15:30, Tom Rini wrote:
+> On 02/18/2011 05:30 AM, Eric Bénard wrote:
+>> * add --disable-rpath (not enough with angstrom 2008.1)
+>> * fix build problems with rpath on older libtool
+>> * bump INC_PR
 >>
->> Frans
-> How comes that I sometimes feel handled as spammer ;-) ?
+>> Signed-off-by: Eric Bénard<eric@eukrea.com>>>
+>> +do_configure_append () {
+>> + # use same fix as libiconv
+>> + sed -i -e s/^hardcode_libdir_flag_spec/#hardcode_libdir_flag_spec/ \
+>> + -e s/^runpath_var/#runpath_var/ ${S}/*-libtool
+>> +}
+>> +
+>> do_install_append() {
+>> # Ensure that /etc/skel is created so any default files that we want copied
+>> into new users home
+>> # dirs can be put in there later (ideal for .xinitrc for example).
 >
-> see http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-
-> February/029534.html
+> The equiv I found in poky is:
+> do_configure_append() {
+> # Fix RPATH issues.
+> sed -i ${S}/config.status -e s,^\\\(hardcode_into_libs=\\\).*$,\\1\'no\',
+> ${S}/config.status
+> }
 >
-> anyway - treating RPATH errors as fatal has lead to many QA fixes and fur=
-ther
-> will follow...
+> Any preference? Aside from I think we should be internally consistent in these
+> fixes, so long as it's fixed...
 >
-> my opinion now: keep RPATH errors fatal as developer's =A0whip :-)
+after testing this one, it doesn't work for shadow (angstrom 2008.1 , armv5
+target).
 
-I agree about keeping it configurable.
+And poky's shadow is not fixed for rpath :
+http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta/recipes-extended/shadow/shadow.inc
 
-Besides I think that we ought to keep it fatal until quite near of
-release since we'll be "forced" to fix most of many of them.
-
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Eric
 
 
