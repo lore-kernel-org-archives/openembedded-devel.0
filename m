@@ -1,37 +1,35 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pqr0E-0005Ou-Gt
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pqr0m-0005PG-Cr
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Feb 2011 18:53:54 +0100
-Received: by qwi2 with SMTP id 2so3934254qwi.6
+	Sat, 19 Feb 2011 18:54:28 +0100
+Received: by fxm8 with SMTP id 8so318778fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Feb 2011 09:52:38 -0800 (PST)
+	Sat, 19 Feb 2011 09:53:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=pXD4Y1pItyhjS5nDKpzfZ6Pf+Xo9LIViYquwteLdGjU=;
-	b=rkWJGCl21cgAMC+waaL0zRx5OrOf6iHI/dV+CV/Lio3ci5AWicKDGzFcHglqzY7r8I
-	69PF4+wnxpHmZPOcZGxBvkEaViUf6pf6fNKBlMJkchQGIlWG3c3R9BP36H1+7+EZgFma
-	h4ZuCIXnNNJ7ZNrp3xAhDcfqqu3mmDB2xg4SU=
+	h=domainkey-signature:from:to:subject:date:message-id:x-mailer;
+	bh=V5nTi/goQ9eiwU0O9LcQwpFewyjAristAsDmIP103fo=;
+	b=vtF2ZY3SMcIF9dMSNuW9kLm+++4ivPDoXFIalr1wPNCoBXqsBMBxh1v4RL7OZe8nPA
+	3dcGDxB9H9SzVcTp018pN/dSyPCQldctzWOhQeZCyuT7AyJlIkZRwlqjjPsM7MTikky2
+	u312WTZJaBK0Dynq/5XswGvS3RYZLlAZA9fuk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=lXWgHpCTzotldMlHd76E0R8Zb7WUuubKgsZZEmSaihx3+1orN6JhqFoi+n3/T7SHRq
-	xg63LZxHGQb9Dg0GktOHsENnSdgUYGFL6pNKnkPvQNPxMTZ1v9OwBF+Hs/oj3VSAJXaq
-	NwdfoSmVoTgyhUexCrl6A93ffyZTmyOVVG+jg=
-MIME-Version: 1.0
-Received: by 10.229.91.2 with SMTP id k2mr1537852qcm.260.1298137957666; Sat,
-	19 Feb 2011 09:52:37 -0800 (PST)
-Received: by 10.229.193.10 with HTTP; Sat, 19 Feb 2011 09:52:37 -0800 (PST)
-In-Reply-To: <4D5EE9A9.10205@mentor.com>
-References: <4D5E45C1.7010504@opendreambox.org>
-	<1298063776-2260-1-git-send-email-filip.zyzniewski@gmail.com>
-	<4D5EE9A9.10205@mentor.com>
-Date: Sat, 19 Feb 2011 18:52:37 +0100
-Message-ID: <AANLkTi=THJbX1YVpd28sXXz1JuCS8WQq5P9vj6S1=UE1@mail.gmail.com>
+	h=from:to:subject:date:message-id:x-mailer;
+	b=tp90cOmL3pefUDicJ/gUIpNyzWzI0G6hyzz7W3IT+act3f+YV4HgPD/a2JMi+l9XHe
+	jFTKS9/lqQkS7zUpEz5HBmIGff1PsAQcl+XZZGCI/OCyGtWH8qiFeOC9vKgJIy7wBKSD
+	uUJwjEEeovkzSVfBkOpRTLMCFkhbem9kU2Cv0=
+Received: by 10.223.72.202 with SMTP id n10mr1856155faj.74.1298137993405;
+	Sat, 19 Feb 2011 09:53:13 -0800 (PST)
+Received: from localhost.localdomain (ns.tefnet.pl [188.165.206.204])
+	by mx.google.com with ESMTPS id b7sm1645386faa.42.2011.02.19.09.53.12
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 19 Feb 2011 09:53:12 -0800 (PST)
 From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] package_deb.bbclass: armel architecture name for eabi systems.
+To: openembedded-devel@lists.openembedded.org,
+	kristoffer.ericson@gmail.com
+Date: Sat, 19 Feb 2011 18:53:04 +0100
+Message-Id: <1298137984-9839-1-git-send-email-filip.zyzniewski@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] jornada6xx/jornada7xx/mp900c: increase amount of used VTs.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,24 +43,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Feb 2011 17:53:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 19 Feb 2011 17:54:28 -0000
 
-On 2/18/11, Tom Rini <tom_rini@mentor.com> wrote:
 
-> I'm a little puzzled. So little endian gnueabi ARM is armel, little
-> endian OABI ARM is arm.  What about big endian ARM cases?  Thanks!
+Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+---
+ conf/machine/jornada6xx.conf |    2 ++
+ conf/machine/jornada7xx.conf |    2 ++
+ conf/machine/mp900c.conf     |    2 ++
+ 3 files changed, 6 insertions(+), 0 deletions(-)
 
-According to http://wiki.debian.org/ArmEabiPort:
+diff --git a/conf/machine/jornada6xx.conf b/conf/machine/jornada6xx.conf
+index 734cacd..0b32184 100644
+--- a/conf/machine/jornada6xx.conf
++++ b/conf/machine/jornada6xx.conf
+@@ -18,3 +18,5 @@ PREFERRED_VERSION_xserver-kdrive = "1.3.0.0"
+ XSERVER = "xserver-kdrive-fbdev"
+ 
+ PCMCIA_MANAGER = "pcmciautils"
++
++SYSVINIT_ENABLED_GETTYS = "1 2"
+diff --git a/conf/machine/jornada7xx.conf b/conf/machine/jornada7xx.conf
+index 5b46056..d444cb9 100644
+--- a/conf/machine/jornada7xx.conf
++++ b/conf/machine/jornada7xx.conf
+@@ -19,3 +19,5 @@ XSERVER = "xserver-kdrive-fbdev"
+ MACHINE_GUI_CLASS = "smallscreen"
+ MACHINE_DISPLAY_WIDTH_PIXELS = "640"
+ MACHINE_DISPLAY_HEIGHT_PIXELS = "240"
++
++SYSVINIT_ENABLED_GETTYS = "1 2 3 4 5 6"
+diff --git a/conf/machine/mp900c.conf b/conf/machine/mp900c.conf
+index 38b70a2..7b597cf 100644
+--- a/conf/machine/mp900c.conf
++++ b/conf/machine/mp900c.conf
+@@ -10,3 +10,5 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-jlime-mobilepro900"
+ PCMCIA_MANAGER = "pcmciautils"
+ MACHINE_FEATURES = "kernel26 apm alsa pcmcia irda keyboard touchscreen screen"
+ MACHINE_EXTRA_RDEPENDS = "kernel-modules"
++
++SYSVINIT_ENABLED_GETTYS = "1 2 3 4 5 6"
+-- 
+1.7.1
 
-==================
-At the Extremadura emdebian meeting, 12-16 April 2006, the name
-"armel" was chosen. If a bigendian arm EABI port will be created, it
-will be called "armeb", and it will replace the previous oldabi-based
-"armeb" port effort.
-==================
-
-bye,
-Filip Zyzniewski
 
 
