@@ -1,24 +1,37 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <holger+oe@freyther.de>) id 1Pqqi8-00057S-FM
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pqr0E-0005Ou-Gt
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Feb 2011 18:35:12 +0100
-Received: from [192.168.0.101] (91-64-83-241-dynip.superkabel.de
-	[91.64.83.241])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id 6833F1B10C0E
+	Sat, 19 Feb 2011 18:53:54 +0100
+Received: by qwi2 with SMTP id 2so3934254qwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Feb 2011 17:45:00 +0000 (UTC)
-Message-ID: <4D5FFF05.5050603@freyther.de>
-Date: Sat, 19 Feb 2011 18:33:57 +0100
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b2 Thunderbird/3.1.7
+	Sat, 19 Feb 2011 09:52:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=pXD4Y1pItyhjS5nDKpzfZ6Pf+Xo9LIViYquwteLdGjU=;
+	b=rkWJGCl21cgAMC+waaL0zRx5OrOf6iHI/dV+CV/Lio3ci5AWicKDGzFcHglqzY7r8I
+	69PF4+wnxpHmZPOcZGxBvkEaViUf6pf6fNKBlMJkchQGIlWG3c3R9BP36H1+7+EZgFma
+	h4ZuCIXnNNJ7ZNrp3xAhDcfqqu3mmDB2xg4SU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=lXWgHpCTzotldMlHd76E0R8Zb7WUuubKgsZZEmSaihx3+1orN6JhqFoi+n3/T7SHRq
+	xg63LZxHGQb9Dg0GktOHsENnSdgUYGFL6pNKnkPvQNPxMTZ1v9OwBF+Hs/oj3VSAJXaq
+	NwdfoSmVoTgyhUexCrl6A93ffyZTmyOVVG+jg=
 MIME-Version: 1.0
+Received: by 10.229.91.2 with SMTP id k2mr1537852qcm.260.1298137957666; Sat,
+	19 Feb 2011 09:52:37 -0800 (PST)
+Received: by 10.229.193.10 with HTTP; Sat, 19 Feb 2011 09:52:37 -0800 (PST)
+In-Reply-To: <4D5EE9A9.10205@mentor.com>
+References: <4D5E45C1.7010504@opendreambox.org>
+	<1298063776-2260-1-git-send-email-filip.zyzniewski@gmail.com>
+	<4D5EE9A9.10205@mentor.com>
+Date: Sat, 19 Feb 2011 18:52:37 +0100
+Message-ID: <AANLkTi=THJbX1YVpd28sXXz1JuCS8WQq5P9vj6S1=UE1@mail.gmail.com>
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1298057187-2466-1-git-send-email-tom_rini@mentor.com>
-In-Reply-To: <1298057187-2466-1-git-send-email-tom_rini@mentor.com>
-Subject: Re: [PATCH] insane.bbclass: Make RPATH a non-fatal error
+Subject: Re: [PATCH] package_deb.bbclass: armel architecture name for eabi systems.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,19 +45,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Feb 2011 17:35:12 -0000
+X-List-Received-Date: Sat, 19 Feb 2011 17:53:54 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-On 02/18/2011 08:26 PM, Tom Rini wrote:
-> In order to make the user experience better we now use bb.warn
-> on non-fatal QA errors and bb.error on fatal errors.
+On 2/18/11, Tom Rini <tom_rini@mentor.com> wrote:
 
+> I'm a little puzzled. So little endian gnueabi ARM is armel, little
+> endian OABI ARM is arm.  What about big endian ARM cases?  Thanks!
 
-hmm. for every binary with a bad RPATH in your distribution your product can
-get bad press very fast. I think the commit message should reflect this in a
-way that we are aware of this and don't care.
+According to http://wiki.debian.org/ArmEabiPort:
 
-holger
+==================
+At the Extremadura emdebian meeting, 12-16 April 2006, the name
+"armel" was chosen. If a bigendian arm EABI port will be created, it
+will be called "armeb", and it will replace the previous oldabi-based
+"armeb" port effort.
+==================
+
+bye,
+Filip Zyzniewski
 
 
