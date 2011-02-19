@@ -1,25 +1,36 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pqile-00036O-0A for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Feb 2011 10:06:18 +0100
-Received: from f053032181.adsl.alicedsl.de ([78.53.32.181]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PqikT-0000Cl-KK for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Feb 2011 09:05:05 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PqjOw-0006XZ-4X
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 19 Feb 2011 10:46:54 +0100
+Received: by iwn10 with SMTP id 10so425810iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 19 Feb 2011 01:45:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=bc1hQBfWNHwv8SCtKxG1AnAn4U/vkwJXmwfk0cd85hk=;
+	b=YASPvw59GE2gNAt3EHk0m9VUSpqDXfqXrY8Y38MLcLeOhszT99ETyuPFBwzp2vRjOC
+	zkZGpX+0Wsh4qRImRNBNVjTL5xpRl9EID/Pb4BIl4dAw79ZvzEPrh3NrRrK8A/vFjsIk
+	lMrkdRMYLLf5C/+eg6h6f/IBCR4mjo5vhFdwY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=nr7V5U3x1NFHQPM9ys2TUw+wehfu2+K8xFjN5M0414I8oKBi2LVgLBUB1Lj4OT+wqB
+	XhsqiE4VNyofbt7ia17GvEZ9NJs4JGIgJVov9j1anPorpPFvATE1Fbecrioh/GlZHmNr
+	myil1JHSC6nR+b39n62u+SQL1sHj9v+f55lbc=
+MIME-Version: 1.0
+Received: by 10.42.7.129 with SMTP id e1mr2049515ice.500.1298108738888; Sat,
+	19 Feb 2011 01:45:38 -0800 (PST)
+Received: by 10.231.30.73 with HTTP; Sat, 19 Feb 2011 01:45:38 -0800 (PST)
+In-Reply-To: <4D5ED835.7040800@eukrea.com>
+References: <1298057187-2466-1-git-send-email-tom_rini@mentor.com>
+	<4D5ED835.7040800@eukrea.com>
+Date: Sat, 19 Feb 2011 10:45:38 +0100
+Message-ID: <AANLkTimfZ4vp-8RPHxTWPfo5m_0zfTwM611Q+d+jWuK8@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4D5F68F2.205@dresearch.de>
-References: <DB561678F08F554EB0D9F21B70E268A5056575@exchange.intern.dresearch.de>
-	<1298038322-20481-1-git-send-email-sledz@dresearch.de>
-	<1298069307.3776.7.camel@mattotaupa>  <4D5F68F2.205@dresearch.de>
-Date: Sat, 19 Feb 2011 10:05:04 +0100
-Message-ID: <1298106304.8521.1.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: [PATCH v2] u-boot-2009.03: use AMD fixups for AMIC too
+Subject: Re: [PATCH] insane.bbclass: Make RPATH a non-fatal error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,49 +44,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Feb 2011 09:06:18 -0000
-X-Groupsio-MsgNum: 29475
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-hrbKBeCXP/QHZQEphi8T"
+X-List-Received-Date: Sat, 19 Feb 2011 09:46:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-hrbKBeCXP/QHZQEphi8T
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+I am fine with the patch, but perhaps a better solution would be to
+introduce a var to decide whether it is a fatal or not.
+That way people distro's that use libtool 2.4 can decide to make it a
+fatal. (or individual users in their local.conf)
 
-Am Samstag, den 19.02.2011, 07:53 +0100 schrieb Steffen Sledz:
-> On 02/18/2011 11:48 PM, Paul Menzel wrote:
-
-[=E2=80=A6]
-
-> > If you build for `hipox` is not your fix applied twice? Or am I
-> > mistaken?
->=20
-> Your mistaken. ;-)
-
-I should have seen that the =C2=BB+=C2=AB are on different levels. I always=
- get
-confused by patches to patches.
-
-Sorry for the noise.
-
-[=E2=80=A6]
+Frans
 
 
-Thanks,
-
-Paul
-
---=-hrbKBeCXP/QHZQEphi8T
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk1fh64ACgkQPX1aK2wOHVjuUgCfQj/TLx0bYpXEBIAHiHUnA0TX
-aPAAoIm6Zwj7P3kdIXwnp7uhPXYxZpfc
-=ymVk
------END PGP SIGNATURE-----
-
---=-hrbKBeCXP/QHZQEphi8T--
