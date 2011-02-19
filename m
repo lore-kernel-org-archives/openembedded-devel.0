@@ -1,36 +1,34 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PqreO-0006HA-Qu
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pqt0a-0007uR-As
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Feb 2011 19:35:24 +0100
-Received: by iyj8 with SMTP id 8so4541625iyj.6
+	Sat, 19 Feb 2011 21:02:24 +0100
+Received: by fxm8 with SMTP id 8so377074fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Feb 2011 10:34:07 -0800 (PST)
+	Sat, 19 Feb 2011 12:01:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=ezWOrCzXQ5cQ+ske4B00ZG+apUy8E9kRhGpKhPLp3vQ=;
-	b=b6F4SuVUPc8yQ/vmKNB7JynKSjxo9QxxpDs0oBO42ePA5Bc2gLIbXjRVtE++mGDMY3
-	WnKYIZpV+K3ZU8rcRLnLfpiKHeItyfTpTKt6cpQNFhsW9BI/oTDGUzHVfVFXre0nIOWn
-	+WD7LfJkSiLYrowjEJAkmiS63lhZ+TLXJsrYE=
+	h=domainkey-signature:from:to:subject:date:message-id:x-mailer;
+	bh=todMwo5XlwaC6JbTSe4SjxfGdRInzMtQ/6q05aic8m0=;
+	b=ZvN+J6JT13M0F7rU4lFRYUWekJ8FcM220MmWGsrIGVvFYMcWdN9PPNIH4GJCMziCvl
+	xATPHHyOaa1f4ezSP8EWGNwLK9jumN2Ww4bLsiHcByJmSwRc/HQKqVhAoFK0J2q/iuVh
+	QjFZ+L9ePwMrsXtMYDZkqrZfdYgkVi1EOMQGE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=g0HBT9XnphTmQk/Z1ADcFcZY9Tc0GhtwhLytPsp/tGGQJGHLDyX4yNHBaeJtDXHM4g
-	iQs0IOS2ZXNSX5T+TAZyld2eeAIP41LmSU5HzPANw2jBrn2wjj14Bx5uwivg+/xypotV
-	qbGlNbQ/Gx1tkCdOsW6rl9mStUhF8YpoxV3ks=
-MIME-Version: 1.0
-Received: by 10.231.157.211 with SMTP id c19mr1520508ibx.172.1298140071277;
-	Sat, 19 Feb 2011 10:27:51 -0800 (PST)
-Received: by 10.231.30.73 with HTTP; Sat, 19 Feb 2011 10:27:51 -0800 (PST)
-In-Reply-To: <4D5FFF05.5050603@freyther.de>
-References: <1298057187-2466-1-git-send-email-tom_rini@mentor.com>
-	<4D5FFF05.5050603@freyther.de>
-Date: Sat, 19 Feb 2011 19:27:51 +0100
-Message-ID: <AANLkTinHKrUjZu=09=wotnxzYmZFczV76PcQBE-6knM+@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=from:to:subject:date:message-id:x-mailer;
+	b=ZT/0PBPHdYRcbeEoik8OkCxg85+HlNY9f68AfeHOOglMrD8hf50siXHn3+pi38HCbw
+	/rbQ5rR2aUS7zym49tgKV+OjFCK5SRh7d8lJAdK9wd74Sift1wQiz5m3QHoYFjJ544W7
+	Qar/mgRnkD/+T153X5TrSthXsUAqkBDoiFQDs=
+Received: by 10.223.96.68 with SMTP id g4mr1506598fan.33.1298145668675;
+	Sat, 19 Feb 2011 12:01:08 -0800 (PST)
+Received: from localhost.localdomain (ns.tefnet.pl [188.165.206.204])
+	by mx.google.com with ESMTPS id f24sm1691864fak.24.2011.02.19.12.01.07
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 19 Feb 2011 12:01:07 -0800 (PST)
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] insane.bbclass: Make RPATH a non-fatal error
+Date: Sat, 19 Feb 2011 21:00:59 +0100
+Message-Id: <1298145659-23468-1-git-send-email-filip.zyzniewski@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] less_436.bb: provide absolute path in ALTERNATIVE_PATH.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,24 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Feb 2011 18:35:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 19 Feb 2011 20:02:24 -0000
 
-2011/2/19 Holger Freyther <holger+oe@freyther.de>:
-> On 02/18/2011 08:26 PM, Tom Rini wrote:
->> In order to make the user experience better we now use bb.warn
->> on non-fatal QA errors and bb.error on fatal errors.
->
->
-> hmm. for every binary with a bad RPATH in your distribution your product can
-> get bad press very fast. I think the commit message should reflect this in a
-> way that we are aware of this and don't care.
->
-> holger
->
-That's why I suggested to at least make it user/distro configurable,
-so those of us who do care can easily enable it.
+Relative path causes dpkg's update-alternatives to ignore this
+alternative.
 
-Frans
+Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+---
+ recipes/less/less_436.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+
+diff --git a/recipes/less/less_436.bb b/recipes/less/less_436.bb
+index 711abfd..c62c821 100644
+--- a/recipes/less/less_436.bb
++++ b/recipes/less/less_436.bb
+@@ -5,6 +5,7 @@ HOMEPAGE = "http://www.greenwoodsoftware.com/"
+ SECTION = "console/utils"
+ LICENSE = "BSD"
+ DEPENDS = "ncurses"
++PR = "r1"
+ 
+ SRC_URI = "http://www.greenwoodsoftware.com/less/less-${PV}.tar.gz"
+ 
+@@ -16,7 +17,7 @@ do_install () {
+ }
+ 
+ ALTERNATIVE_NAME = "less"
+-ALTERNATIVE_PATH = "less.${PN}"
++ALTERNATIVE_PATH = "${bindir}/less.${PN}"
+ ALTERNATIVE_PRIORITY = "100"
+ 
+ SRC_URI[md5sum] = "817bf051953ad2dea825a1cdf460caa4"
+-- 
+1.7.1
+
 
 
