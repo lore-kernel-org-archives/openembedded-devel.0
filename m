@@ -1,35 +1,26 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PqjOw-0006XZ-4X
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1PqlRg-0000FV-6C
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Feb 2011 10:46:54 +0100
-Received: by iwn10 with SMTP id 10so425810iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Feb 2011 01:45:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=bc1hQBfWNHwv8SCtKxG1AnAn4U/vkwJXmwfk0cd85hk=;
-	b=YASPvw59GE2gNAt3EHk0m9VUSpqDXfqXrY8Y38MLcLeOhszT99ETyuPFBwzp2vRjOC
-	zkZGpX+0Wsh4qRImRNBNVjTL5xpRl9EID/Pb4BIl4dAw79ZvzEPrh3NrRrK8A/vFjsIk
-	lMrkdRMYLLf5C/+eg6h6f/IBCR4mjo5vhFdwY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=nr7V5U3x1NFHQPM9ys2TUw+wehfu2+K8xFjN5M0414I8oKBi2LVgLBUB1Lj4OT+wqB
-	XhsqiE4VNyofbt7ia17GvEZ9NJs4JGIgJVov9j1anPorpPFvATE1Fbecrioh/GlZHmNr
-	myil1JHSC6nR+b39n62u+SQL1sHj9v+f55lbc=
-MIME-Version: 1.0
-Received: by 10.42.7.129 with SMTP id e1mr2049515ice.500.1298108738888; Sat,
-	19 Feb 2011 01:45:38 -0800 (PST)
-Received: by 10.231.30.73 with HTTP; Sat, 19 Feb 2011 01:45:38 -0800 (PST)
-In-Reply-To: <4D5ED835.7040800@eukrea.com>
+	Sat, 19 Feb 2011 12:57:52 +0100
+Received: (qmail invoked by alias); 19 Feb 2011 11:56:37 -0000
+Received: from p4FE0EDBB.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.224.237.187]
+	by mail.gmx.net (mp005) with SMTP; 19 Feb 2011 12:56:37 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1+E+4tdGHyEC1QzNbgm9sRyc2tTlx6ZZCINgsDHoA
+	fZ88XgxxfOUvjq
+From: Andreas Mueller <schnitzeltony@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 19 Feb 2011 12:52:05 +0100
+User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
 References: <1298057187-2466-1-git-send-email-tom_rini@mentor.com>
 	<4D5ED835.7040800@eukrea.com>
-Date: Sat, 19 Feb 2011 10:45:38 +0100
-Message-ID: <AANLkTimfZ4vp-8RPHxTWPfo5m_0zfTwM611Q+d+jWuK8@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	<AANLkTimfZ4vp-8RPHxTWPfo5m_0zfTwM611Q+d+jWuK8@mail.gmail.com>
+In-Reply-To: <AANLkTimfZ4vp-8RPHxTWPfo5m_0zfTwM611Q+d+jWuK8@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201102191252.05388.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
 Subject: Re: [PATCH] insane.bbclass: Make RPATH a non-fatal error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,14 +35,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Feb 2011 09:46:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 19 Feb 2011 11:57:52 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-I am fine with the patch, but perhaps a better solution would be to
-introduce a var to decide whether it is a fatal or not.
-That way people distro's that use libtool 2.4 can decide to make it a
-fatal. (or individual users in their local.conf)
+On Saturday 19 February 2011 10:45:38 Frans Meulenbroeks wrote:
+> I am fine with the patch, but perhaps a better solution would be to
+> introduce a var to decide whether it is a fatal or not.
+> That way people distro's that use libtool 2.4 can decide to make it a
+> fatal. (or individual users in their local.conf)
+> 
+> Frans
+How comes that I sometimes feel handled as spammer ;-) ?
 
-Frans
+see http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-
+February/029534.html
+
+anyway - treating RPATH errors as fatal has lead to many QA fixes and further 
+will follow...
+
+my opinion now: keep RPATH errors fatal as developer's  whip :-) 
+
+Andreas
 
 
