@@ -1,31 +1,35 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PqlgU-0000v7-5d
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PqmVD-0001uK-Ls
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Feb 2011 13:13:10 +0100
-Received: (qmail 1832 invoked by uid 503); 19 Feb 2011 12:55:02 -0000
-Received: from b6.ovh.net (HELO mail176.ha.ovh.net) (213.186.33.56)
-	by 63.mail-out.ovh.net with SMTP; 19 Feb 2011 12:55:01 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 19 Feb 2011 14:11:57 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 19 Feb 2011 14:11:56 +0200
-Message-ID: <4D5FB38C.3010009@eukrea.com>
-Date: Sat, 19 Feb 2011 13:11:56 +0100
-From: Eric Benard <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Sat, 19 Feb 2011 14:05:35 +0100
+Received: by iwn10 with SMTP id 10so518972iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 19 Feb 2011 05:04:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=9Q2NN7sYg/NoJ+0GPYpZA7OC+tqtY+TqhL6Frhz1QDA=;
+	b=Cj5t9L/v1ybvu53VFCfOHJt/iUEtvoDwx/eLtTI5pTWB41DWdB654Vevaq2tu0c8Zx
+	9FN1npI7UlvjsSHkpRvB0roK42vu77aD7Q9tK1+l++IkToqozPjfQo9fKq0IcLbcMxyl
+	1Lv9nJ5b5O9yVitLECIApJUm4aqLRvZVi1oyA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=JvLyvuge8xyWt3IdoL2LHIaQBHt9eODhiYDnj2pnU6PFOORgLnRTyFeEwZwY3UajnN
+	lTC/Ti8IUNbLVH6GzqRWKsyMX+s6ogT4czzcc0VrOfPwBLUa/YtOzdxcTobsU8+tceek
+	zQk6HclKxV8+Hm4AV+uCxuzd1SfTQM08ZV+FM=
 MIME-Version: 1.0
+Received: by 10.231.157.211 with SMTP id c19mr1341062ibx.172.1298120660319;
+	Sat, 19 Feb 2011 05:04:20 -0800 (PST)
+Received: by 10.231.30.73 with HTTP; Sat, 19 Feb 2011 05:04:20 -0800 (PST)
+In-Reply-To: <1298051011-10445-1-git-send-email-otavio@ossystems.com.br>
+References: <1298051011-10445-1-git-send-email-otavio@ossystems.com.br>
+Date: Sat, 19 Feb 2011 14:04:20 +0100
+Message-ID: <AANLkTinwo=chD6eARn_EQeJuRPwbUYsnkx0EBVLtbCvL@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1298116419-18277-1-git-send-email-schnitzeltony@gmx.de>
-In-Reply-To: <1298116419-18277-1-git-send-email-schnitzeltony@gmx.de>
-X-Ovh-Tracer-Id: 12937715830501846345
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH] cross.bbclass: Fix many QA RPATH errors for distros preferring libtool-2.2
+Subject: Re: Patchset pending for merging from O.S. Systems tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,27 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Feb 2011 12:13:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 19 Feb 2011 13:05:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi Andreas,
-
-> index 1a6d906..50c0f63 100644
-> --- a/classes/cross.bbclass
-> +++ b/classes/cross.bbclass
-> @@ -75,6 +75,6 @@ sysroot_stage_all() {
+2011/2/18 Otavio Salvador <otavio@ossystems.com.br>:
 >
->   #
->   # Cross .la files have more path issues we have to correct only for libtool<  2.4
-> -SYSROOTEXTRALIBDIRSED_OLD = " -e \"/^libdir=/s,.*,libdir=${STAGING_DIR_TARGET}${target_libdir},g\" -e \"/^dependency_libs=/s,\([[:space:]']\)-L${STAGING_LIBDIR_NATIVE},,g\""
-> +SYSROOTEXTRALIBDIRSED_OLD = " -e \"/^libdir=/s,.*,libdir=${target_libdir},g\" -e \"/^dependency_libs=/s,\([[:space:]']\)-L${STAGING_LIBDIR_NATIVE},,g\""
+> Hello,
 >
->   SYSROOTEXTRALIBDIRSED = "${@["${SYSROOTEXTRALIBDIRSED_OLD}",""][("${LIBTOOL_HAS_SYSROOT}" == "yes")]}"
+> Those patches are the ones I sent some days ago, with the requested
+> fixes and also with the acked-bys already given plus some new ones
+> that have been cooked here afterwards.
+>
+> I've done a full build from scratch using those and it seems safe to
+> get those in. Please ack/nack and push according.
+>
+> TIA,
+>
+> _______________________________________________
+>
+Applied the first 10 and the last patch.
+Thanks for contributing.
 
-I was just finishing to test a similar fix and this seems to be the right 
-direction. Now testing your fix which is cleaner.
+I did not push the cmake patches as they have no acks yet and I feel
+not comfortable with cmake.
 
-Eric
+Enjoy, Frans.
 
 
