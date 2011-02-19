@@ -1,33 +1,24 @@
-Received: from einhorn.in-berlin.de ([192.109.42.8] ident=root)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PqgiS-0000Ql-94
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Feb 2011 07:54:52 +0100
-X-Envelope-From: sledz@dresearch.de
-Received: from mobil-400-586.intern.dresearch.de (recycler-gw.in-dsl.de
-	[217.197.85.167]) (authenticated bits=0)
-	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
-	p1J6rc0f027295
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
-	Sat, 19 Feb 2011 07:53:39 +0100
-Received: from mobil-400-586.intern.dresearch.de (localhost [IPv6:::1])
-	by mobil-400-586.intern.dresearch.de (Postfix) with ESMTP id 62A0F23926;
-	Sat, 19 Feb 2011 07:53:38 +0100 (CET)
-Message-ID: <4D5F68F2.205@dresearch.de>
-Date: Sat, 19 Feb 2011 07:53:38 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.16) Gecko/20101125 SUSE/3.0.11 Lightning/1.0b1
-	Thunderbird/3.0.11
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pqile-00036O-0A for openembedded-devel@lists.openembedded.org;
+	Sat, 19 Feb 2011 10:06:18 +0100
+Received: from f053032181.adsl.alicedsl.de ([78.53.32.181]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PqikT-0000Cl-KK for openembedded-devel@lists.openembedded.org;
+	Sat, 19 Feb 2011 09:05:05 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <DB561678F08F554EB0D9F21B70E268A5056575@exchange.intern.dresearch.de>	<1298038322-20481-1-git-send-email-sledz@dresearch.de>
-	<1298069307.3776.7.camel@mattotaupa>
-In-Reply-To: <1298069307.3776.7.camel@mattotaupa>
-X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
-X-MIME-Autoconverted: from 8bit to quoted-printable by einhorn.in-berlin.de id
-	p1J6rc0f027295
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+In-Reply-To: <4D5F68F2.205@dresearch.de>
+References: <DB561678F08F554EB0D9F21B70E268A5056575@exchange.intern.dresearch.de>
+	<1298038322-20481-1-git-send-email-sledz@dresearch.de>
+	<1298069307.3776.7.camel@mattotaupa>  <4D5F68F2.205@dresearch.de>
+Date: Sat, 19 Feb 2011 10:05:04 +0100
+Message-ID: <1298106304.8521.1.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
 Subject: Re: [PATCH v2] u-boot-2009.03: use AMD fixups for AMIC too
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,43 +33,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Feb 2011 06:54:52 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 19 Feb 2011 09:06:18 -0000
+X-Groupsio-MsgNum: 29475
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-hrbKBeCXP/QHZQEphi8T"
+
+--=-hrbKBeCXP/QHZQEphi8T
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On 02/18/2011 11:48 PM, Paul Menzel wrote:
-> Am Freitag, den 18.02.2011, 15:12 +0100 schrieb Steffen Sledz:
->> From: Mario Schuknecht <m.schuknecht@dresearch.de>
->>
->> * AMIC flashes are AMD clones and need the same fixups.
+Am Samstag, den 19.02.2011, 07:53 +0100 schrieb Steffen Sledz:
+> On 02/18/2011 11:48 PM, Paul Menzel wrote:
+
+[=E2=80=A6]
+
+> > If you build for `hipox` is not your fix applied twice? Or am I
+> > mistaken?
 >=20
-> =E2=80=A6 otherwise the uBoot command `saveenv` does not work.
->=20
-> Please add in the commit message or in the patch file that this patch
-> has been sent upstream [1].
->=20
-> [1] http://patchwork.ozlabs.org/patch/82763/
+> Your mistaken. ;-)
 
-Added.
+I should have seen that the =C2=BB+=C2=AB are on different levels. I always=
+ get
+confused by patches to patches.
 
-> If you build for `hipox` is not your fix applied twice? Or am I
-> mistaken?
+Sorry for the noise.
 
-Your mistaken. ;-)
-
-> If I am and with the changes requested in the beginning,
->=20
-> Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
-
-Pushed.
-
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+[=E2=80=A6]
 
 
+Thanks,
+
+Paul
+
+--=-hrbKBeCXP/QHZQEphi8T
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk1fh64ACgkQPX1aK2wOHVjuUgCfQj/TLx0bYpXEBIAHiHUnA0TX
+aPAAoIm6Zwj7P3kdIXwnp7uhPXYxZpfc
+=ymVk
+-----END PGP SIGNATURE-----
+
+--=-hrbKBeCXP/QHZQEphi8T--
