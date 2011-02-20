@@ -1,36 +1,37 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Pr5nS-0000Uc-Ql
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pr6Q8-0001OT-8y
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Feb 2011 10:41:43 +0100
-Received: by iyj8 with SMTP id 8so4902083iyj.6
+	Sun, 20 Feb 2011 11:21:40 +0100
+Received: by bwz10 with SMTP id 10so1050326bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Feb 2011 01:40:26 -0800 (PST)
+	Sun, 20 Feb 2011 02:20:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=nfXqVOzBSTErjAQIADqS5wAIwqatlxwRkZRxlYGimxw=;
-	b=ekAFOhkWvJSB7t9H4sV/iaJaYrHJPV443ogSIjEa0Lhhq0/WaP+EFDdT18jzqZNngt
-	k+Qlm9tx5IEMpSzC/EKbr6Bftu9oyXdD5ieFxCoFiqMgux8jNXv0I4S3y79lcAPkx5ml
-	Ucx1/J7Kbu94aotCHzL9GiuONK6sQH1EsjZLI=
+	h=domainkey-signature:from:to:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=lMJqQIi/ZIm5Dmg7LLxw1KXaxcmuUKm8N9nZBe7T0xY=;
+	b=p18YDm+V/XhZxShWOEyI8unzEX7rtA7D15+RJ6/NStM8QxO7CwMsU+Wzmh5r3HYkU+
+	PmxHCX90wN59lPz74LujjGjmKiplubRdADt1gA4EW51OvwVAwibTjWamGOxCJklBPU19
+	nVbmwtgV9/pSaD1EKXACDmojKAqaZnwD438Zw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=F3pok9t+pWJrvCHdGnTqfCitDj9b99UArj42IgC5XdKN7EjT+fNgPN4l7kaEGJc2no
-	07m5eqacpVY23l02VSBVOy0IOEoot9nlsIdp38EHpcImKiQK8qfHhRpCjxn1wmZBuwkt
-	LJnLeSZVNmCdsBEImD19n401UhmjxvjSHfeTo=
-MIME-Version: 1.0
-Received: by 10.231.35.200 with SMTP id q8mr172391ibd.147.1298194674808; Sun,
-	20 Feb 2011 01:37:54 -0800 (PST)
-Received: by 10.231.30.73 with HTTP; Sun, 20 Feb 2011 01:37:54 -0800 (PST)
-In-Reply-To: <1298051011-10445-8-git-send-email-otavio@ossystems.com.br>
-References: <1298051011-10445-1-git-send-email-otavio@ossystems.com.br>
-	<1298051011-10445-8-git-send-email-otavio@ossystems.com.br>
-Date: Sun, 20 Feb 2011 10:37:54 +0100
-Message-ID: <AANLkTik89-uYd5sOW80+ef_wL4=2HQ0XUTBZm=70Myu=@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=TY8NiDRt3eYEwzX6rPNUOkMJ4zovnk9Ndob8oWQi9vjTNf4wAe/VYGp/VOP3wgLrJX
+	i4+GYh8PYgNNA0ed13ZfB629jF0PELVbuJ08F95+FL1wrOFhEy1+eOBGbE7AXkhklvhl
+	9I9UN1/do/ffvEpLrm7vWcO63YdR8sQn/fwcs=
+Received: by 10.204.54.147 with SMTP id q19mr203436bkg.145.1298197219337;
+	Sun, 20 Feb 2011 02:20:19 -0800 (PST)
+Received: from localhost.localdomain (ns.tefnet.pl [188.165.206.204])
+	by mx.google.com with ESMTPS id x38sm2846411bkj.13.2011.02.20.02.20.17
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 20 Feb 2011 02:20:18 -0800 (PST)
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 07/16] libinih: add
+Date: Sun, 20 Feb 2011 11:20:12 +0100
+Message-Id: <1298197212-22266-1-git-send-email-filip.zyzniewski@gmail.com>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <20110220011124.GA3451@sakrah.homelinux.org>
+References: <20110220011124.GA3451@sakrah.homelinux.org>
+Subject: [PATCHv3] package_deb.bbclass/apt: armel architecture name for eabi systems.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,62 +45,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Feb 2011 09:41:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 20 Feb 2011 10:21:40 -0000
 
-2011/2/18 Otavio Salvador <otavio@ossystems.com.br>:
-> This provides a C and C++ INI library that can be statically linked
-> into projects.
->
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> Acked-by: Khem Raj <raj.khem@gmail.com>
+For dpkg EABI system architecture is called armel, not arm.
+Reference: http://wiki.debian.org/ArmEabiPort
 
-I pushed this recipe yesterday, but apparently it seems to break the
-build, so I reverted it.
-Guess this is the bad guy:
-SRCREV =3D "${AUTOREV}"
-anyway using autorev is not really desired (didn't realize it when pushing)
+Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+---
+ classes/package_deb.bbclass |    2 ++
+ recipes/apt/apt_0.7.20.2.bb |   21 ++++++++++++---------
+ 2 files changed, 14 insertions(+), 9 deletions(-)
 
-Otavio can you come with a better version?
+diff --git a/classes/package_deb.bbclass b/classes/package_deb.bbclass
+index 60e759d..87f31fa 100644
+--- a/classes/package_deb.bbclass
++++ b/classes/package_deb.bbclass
+@@ -15,6 +15,8 @@ DPKG_ARCH_i486 ?= "i386"
+ DPKG_ARCH_i586 ?= "i386"
+ DPKG_ARCH_i686 ?= "i386"
+ DPKG_ARCH_pentium ?= "i386"
++DPKG_ARCH_linux-gnueabi ?= "armel"
++DPKG_ARCH_linux-uclibceabi ?= "armel"
+ 
+ python package_deb_fn () {
+     bb.data.setVar('PKGFN', bb.data.getVar('PKG',d), d)
+diff --git a/recipes/apt/apt_0.7.20.2.bb b/recipes/apt/apt_0.7.20.2.bb
+index 5c932a5..e17d593 100644
+--- a/recipes/apt/apt_0.7.20.2.bb
++++ b/recipes/apt/apt_0.7.20.2.bb
+@@ -13,15 +13,18 @@ require apt-package.inc
+ 
+ FILES_${PN} += "${bindir}/apt-key"
+ 
+-do_stage() {
+-	install -d ${STAGING_LIBDIR} ${STAGING_INCDIR}/apt-pkg
+-	eval `cat environment.mak | grep ^GLIBC_VER | sed -e's, = ,=,'`
+-	oe_libinstall -so -C bin libapt-pkg$GLIBC_VER-6 ${STAGING_LIBDIR}/
+-	ln -sf libapt-pkg$GLIBC_VER-6.so ${STAGING_LIBDIR}/libapt-pkg.so
+-	oe_libinstall -so -C bin libapt-inst$GLIBC_VER-6 ${STAGING_LIBDIR}/
+-	ln -sf libapt-inst$GLIBC_VER-6.so ${STAGING_LIBDIR}/libapt-inst.so
+-
+-	install -m 0644 include/apt-pkg/*.h ${STAGING_INCDIR}/apt-pkg/
++fix_eabi_architecture() {
++	sed -i \
++	's:^#define COMMON_ARCH "arm"$:#define COMMON_ARCH "armel":' \
++		${S}/include/config.h
++}
++
++do_configure_append_linux-gnueabi() {
++	fix_eabi_architecture
++}
++
++do_configure_append_linux-uclibceabi() {
++	fix_eabi_architecture
+ }
+ 
+ SRC_URI[md5sum] = "e6ee1b594f6ed5fab5cb593ee46cfc21"
+-- 
+1.7.1
 
-Frans
-
-> ---
-> =A0recipes/libinih/libinih_git.bb | =A0 14 ++++++++++++++
-> =A01 files changed, 14 insertions(+), 0 deletions(-)
-> =A0create mode 100644 recipes/libinih/libinih_git.bb
->
-> diff --git a/recipes/libinih/libinih_git.bb b/recipes/libinih/libinih_git=
-.bb
-> new file mode 100644
-> index 0000000..e9f811f
-> --- /dev/null
-> +++ b/recipes/libinih/libinih_git.bb
-> @@ -0,0 +1,14 @@
-> +DESCRIPTION =3D "C and C++ INI Library"
-> +PRIORITY =3D "optional"
-> +PV =3D "0.0+gitr${SRCPV}"
-> +PKGV =3D "${GITPKGVTAG}"
-> +PR =3D "r0"
-> +LICENSE =3D "BSD"
-> +RDEPENDS_${PN}-dev =3D ""
-> +
-> +SRCREV =3D "${AUTOREV}"
-> +SRC_URI =3D "git://projetos.ossystems.com.br/git/libinih.git;protocol=3D=
-git"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit gitpkgv cmake
-> --
-> 1.7.2.3
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
