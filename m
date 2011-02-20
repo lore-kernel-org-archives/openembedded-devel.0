@@ -1,33 +1,43 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PqxyW-0004eq-5B
+	(envelope-from <raj.khem@gmail.com>) id 1Pqxzs-0004gP-1J
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Feb 2011 02:20:36 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1PqxxD-0002vr-NS from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Feb 2011 17:19:15 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Sat, 19 Feb 2011 17:19:15 -0800
-Received: from [172.30.80.150] ([172.30.80.150]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 19 Feb 2011 18:19:14 -0700
-Message-ID: <4D606C0B.5080508@mentor.com>
-Date: Sat, 19 Feb 2011 18:19:07 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Sun, 20 Feb 2011 02:22:00 +0100
+Received: by pwj9 with SMTP id 9so156057pwj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 19 Feb 2011 17:20:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id
+	:mail-followup-to:references:mime-version:content-type
+	:content-disposition:in-reply-to:user-agent;
+	bh=N+RsbfAYF72YxBAp23BrY2F6GZm9tvmqNjreOQR7UPo=;
+	b=QHnOeTLnNl2lu7524aCD/pbpmRuZfIouHwWMyw+cMdW/q2nJmDYjVrSaGPLRDZJpxT
+	UrNM1CNzmSt4MU3pYLldZPtShH+bPq8kdcicy9NbZfIIbx5HEHSkfUmZ4xaiUW7qAtps
+	pSOrKrNfIpAfPuLNVciDeExhKP1srLp+ub7SA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	b=peus7PioS5+VqkaEI2gBbup25kaIyIvxn5N7gMpnRSf0y69umSS9TrMhEw/McIoYs+
+	htF60O0dgfJZ0sVdu/2cbi4xPyQDpa9I/R2h7Gr1Vew4v+iMsEC0m074pQZTTGK4YVla
+	74tiGCGttCCqcOZ7N5hD4Qc2EEjV8TFi4HqRQ=
+Received: by 10.143.34.8 with SMTP id m8mr1851746wfj.121.1298164842915;
+	Sat, 19 Feb 2011 17:20:42 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id s41sm573745wfc.15.2011.02.19.17.20.40
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 19 Feb 2011 17:20:41 -0800 (PST)
+Date: Sat, 19 Feb 2011 17:20:38 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1298057187-2466-1-git-send-email-tom_rini@mentor.com>
-	<4D5FFF05.5050603@freyther.de>
-In-Reply-To: <4D5FFF05.5050603@freyther.de>
-X-OriginalArrivalTime: 20 Feb 2011 01:19:14.0384 (UTC)
-	FILETIME=[2FB1AD00:01CBD09C]
-Subject: Re: [PATCH] insane.bbclass: Make RPATH a non-fatal error
+Message-ID: <20110220012038.GB3451@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <4D5EEE4A.5030002@freyther.de>
+MIME-Version: 1.0
+In-Reply-To: <4D5EEE4A.5030002@freyther.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: Build issues on natty
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,24 +51,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Feb 2011 01:20:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 20 Feb 2011 01:22:00 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 02/19/2011 10:33 AM, Holger Freyther wrote:
-> On 02/18/2011 08:26 PM, Tom Rini wrote:
->> In order to make the user experience better we now use bb.warn
->> on non-fatal QA errors and bb.error on fatal errors.
->
->
-> hmm. for every binary with a bad RPATH in your distribution your product can
-> get bad press very fast. I think the commit message should reflect this in a
-> way that we are aware of this and don't care.
+On (18/02/11 23:10), Holger Freyther wrote:
+> Hi all,
+> 
+> I am still hitting two build issues on natty and could need a hand on fixing
+> this in OpenEmbedded.
+> 
+> 1.) openssl-native. We apply a patch to make openssl link with local objects
+> so that an upgrade from openssl 0.9.x to 1.0.0 is going to work. With
+> something in gcc 4.5, latest binutils... something changed
+> 
+> 
+> 2.) curl-native. This is actually somehow weird. We disable GNUTLS on build
+> but something links to gnutls indireclty and it takes the system gnutls but
+> the local gcrypt and stuff goes wrong. Building without ldap support seems to
+> fix that.
 
-Agreed, I will update the RPATH wording when I push this.  Thanks!
+I use natty and dont see any of these issues. I dont have anything in
+ASSUME_PROVIDED
+
+> 
+> cheers
+> 	holger
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 -- 
-Tom Rini
-Mentor Graphics Corporation
+-Khem
 
 
