@@ -1,32 +1,35 @@
-Received: from 2.27.mail-out.ovh.net ([46.105.37.238] helo=27.mail-out.ovh.net)
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PrBC8-0007Pr-Pv
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Feb 2011 16:27:33 +0100
-Received: (qmail 14030 invoked by uid 503); 20 Feb 2011 15:52:27 -0000
-Received: from b9.ovh.net (HELO mail625.ha.ovh.net) (213.186.33.59)
-	by 27.mail-out.ovh.net with SMTP; 20 Feb 2011 15:52:21 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 20 Feb 2011 16:59:32 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 20 Feb 2011 16:59:31 +0200
-Message-ID: <4D612C52.1040003@eukrea.com>
-Date: Sun, 20 Feb 2011 15:59:30 +0100
-From: Eric Benard <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
-MIME-Version: 1.0
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PrBFn-0007XK-Lo for openembedded-devel@lists.openembedded.org;
+	Sun, 20 Feb 2011 16:31:19 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PrBEb-00047f-NN for openembedded-devel@lists.openembedded.org;
+	Sun, 20 Feb 2011 16:30:05 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 Feb 2011 16:30:05 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 Feb 2011 16:30:05 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1298057187-2466-1-git-send-email-tom_rini@mentor.com>	<4D5ED835.7040800@eukrea.com>	<AANLkTimfZ4vp-8RPHxTWPfo5m_0zfTwM611Q+d+jWuK8@mail.gmail.com>	<201102191252.05388.schnitzeltony@gmx.de>	<AANLkTinfrqy3eSJajojfDiAJcPcMM9MbTZo94YVGz+ba@mail.gmail.com>	<4D5FF708.90903@mentor.com>	<AANLkTim-b=vO2vD5sgTo5bKduF=OYqAczS7f3YYdgPUy@mail.gmail.com>
-	<4D612958.70402@mentor.com>
-In-Reply-To: <4D612958.70402@mentor.com>
-X-Ovh-Tracer-Id: 3193896562378911049
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH] insane.bbclass: Make RPATH a non-fatal error
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 20 Feb 2011 16:20:22 +0100
+Message-ID: <ijrbfm$3gb$2@dough.gmane.org>
+References: <1298214559-9650-1-git-send-email-tom_rini@mentor.com>
+	<1298214559-9650-2-git-send-email-tom_rini@mentor.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1298214559-9650-2-git-send-email-tom_rini@mentor.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH 1/4] angstrom-2008: Pin gvfs at 1.6.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,25 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Feb 2011 15:27:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sun, 20 Feb 2011 15:31:20 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi Tom,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On 20/02/2011 15:46, Tom Rini wrote:
-> - minimal fails everywhere else with:
-> ERROR: QA Issue with staging: libsupc++.la failed sanity test (workdir) in
-> path
-> /var/hudson/workspace/sb_openembedded_autobuilder/BBPKGS/native-sdk-image/DISTRO/minimal/MACHINE/neek/label/sb-u1004/tmp/sysroots/nios2-linux/usr/lib
->
-> ERROR: QA Issue with staging: libstdc++.la failed sanity test (workdir) in
-> path
-> /var/hudson/workspace/sb_openembedded_autobuilder/BBPKGS/native-sdk-image/DISTRO/minimal/MACHINE/neek/label/sb-u1004/tmp/sysroots/nios2-linux/usr/lib
->
-can you try with this patch  ?
-http://patches.openembedded.org/patch/719/
+On 20-02-11 16:09, Tom Rini wrote:
+> We're doing this since glib-2.0 is pinned.
+> 
+> Signed-off-by: Tom Rini <tom_rini@mentor.com>
 
-Eric
+Acked-by: Koen Kooi <koen@dominion.thruhere.net>
+
+> ---
+>  .../include/angstrom-2008-preferred-versions.inc   |    1 +
+>  1 files changed, 1 insertions(+), 0 deletions(-)
+> 
+> diff --git a/conf/distro/include/angstrom-2008-preferred-versions.inc b/conf/distro/include/angstrom-2008-preferred-versions.inc
+> index 85d9a07..feaa2a7 100644
+> --- a/conf/distro/include/angstrom-2008-preferred-versions.inc
+> +++ b/conf/distro/include/angstrom-2008-preferred-versions.inc
+> @@ -19,6 +19,7 @@ PREFERRED_VERSION_gst-pulse 	= "0.9.7"
+>  PREFERRED_VERSION_gtk+		= "2.20.1"
+>  PREFERRED_VERSION_gtk+-native	= "2.20.1"
+>  PREFERRED_VERSION_gtkmm		= "2.20.0"
+> +PREFERRED_VERSION_gvfs		= "1.6.6"
+>  PREFERRED_VERSION_hal		= "0.5.14"
+>  PREFERRED_VERSION_libgemwidget	= "1.0"
+>  PREFERRED_VERSION_libgpephone	= "0.4"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNYTE2MkyGM64RGpERAsARAJ9vx5/alDXPAmfMdCTnipv+mTV0vACgpZ9h
+LQneVTso2HCGyRI+e5Spdgs=
+=awsI
+-----END PGP SIGNATURE-----
+
 
 
