@@ -1,37 +1,34 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pr6We-0001Xd-0f
+	(envelope-from <dp@xora.org.uk>) id 1Pr6jC-0001tF-6o
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Feb 2011 11:28:24 +0100
-Received: by bwz10 with SMTP id 10so1052398bwz.6
+	Sun, 20 Feb 2011 11:41:22 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id B8777A5BA7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Feb 2011 02:27:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=CbjT5oiUeR1xQxZu6a0b32PQaTT6/qHSUp8UVYVbAbE=;
-	b=RgRmPqxE2sii16Aw0cJ++Jmm0hwU2it9xlWHQXYyNCnUA42h5z45B0o5a1yLXGJKoN
-	0Io6FmnVi6ZesZKGaMPx+JUd/Fu7WfcG3Q3UnW2IcAOaoaLPtI6qj8Yx4BKBGZarHN1Q
-	/5iC10G/CZFJZNvV52Ei11+eNescuhdqAxf9Y=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=E8yfq1m4X7AgaWCLK083sfcp8iX3nm+n3ycbrYCJe1+9k02fMHu341SILXH6H5N7H0
-	lRJURMYSYebdW/KN+8dTt6Bk0NSrkuN5970jPyspfv3YkEKF3lJUyG2jkzF2ity5XfHh
-	0Su9mBXUViytEgrTaWU29G9qhnOrAztZRjY6E=
-Received: by 10.204.65.83 with SMTP id h19mr213048bki.101.1298197625097;
-	Sun, 20 Feb 2011 02:27:05 -0800 (PST)
-Received: from localhost.localdomain (ns.tefnet.pl [188.165.206.204])
-	by mx.google.com with ESMTPS id f20sm2853890bkf.4.2011.02.20.02.27.03
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 20 Feb 2011 02:27:04 -0800 (PST)
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+	Sun, 20 Feb 2011 10:40:04 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id hPMV0i9N89FL
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 Feb 2011 10:40:03 +0000 (GMT)
+Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id C1FC2A5B96
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 Feb 2011 10:40:03 +0000 (GMT)
+Message-ID: <4D60EF84.3070705@xora.org.uk>
+Date: Sun, 20 Feb 2011 10:40:04 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 Feb 2011 11:27:00 +0100
-Message-Id: <1298197620-22313-1-git-send-email-filip.zyzniewski@gmail.com>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <AANLkTim8Ati0-iYJwm6ePhHxU6+-iFhe9-zM_pAJcP_4@mail.gmail.com>
-References: <AANLkTim8Ati0-iYJwm6ePhHxU6+-iFhe9-zM_pAJcP_4@mail.gmail.com>
-Subject: [PATCHv4] package_deb.bbclass/apt: armel architecture name for eabi systems.
+References: <E1Pr64K-0003ub-00.nyrl-mail-ru@f253.mail.ru>
+In-Reply-To: <E1Pr64K-0003ub-00.nyrl-mail-ru@f253.mail.ru>
+X-Enigmail-Version: 1.1.1
+Subject: Re: MACHINE_KERNEL_PR overrides PR for modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,70 +42,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Feb 2011 10:28:24 -0000
+X-List-Received-Date: Sun, 20 Feb 2011 10:41:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-For dpkg EABI system architecture is called armel, not arm.
-Reference: http://wiki.debian.org/ArmEabiPort
+I think this patch is actually an indication that we need to rethink how
+PR is generated and how it is abused
+to contain SRCREV.
 
-Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
----
- classes/package_deb.bbclass |    2 ++
- recipes/apt/apt_0.7.20.2.bb |   21 ++++++++++++---------
- 2 files changed, 14 insertions(+), 9 deletions(-)
+Graeme
 
-diff --git a/classes/package_deb.bbclass b/classes/package_deb.bbclass
-index 60e759d..87f31fa 100644
---- a/classes/package_deb.bbclass
-+++ b/classes/package_deb.bbclass
-@@ -15,6 +15,8 @@ DPKG_ARCH_i486 ?= "i386"
- DPKG_ARCH_i586 ?= "i386"
- DPKG_ARCH_i686 ?= "i386"
- DPKG_ARCH_pentium ?= "i386"
-+DPKG_ARCH_linux-gnueabi ?= "armel"
-+DPKG_ARCH_linux-uclibceabi ?= "armel"
- 
- python package_deb_fn () {
-     bb.data.setVar('PKGFN', bb.data.getVar('PKG',d), d)
-diff --git a/recipes/apt/apt_0.7.20.2.bb b/recipes/apt/apt_0.7.20.2.bb
-index 5c932a5..ca0787c 100644
---- a/recipes/apt/apt_0.7.20.2.bb
-+++ b/recipes/apt/apt_0.7.20.2.bb
-@@ -7,21 +7,24 @@ SRC_URI += "file://no-doxygen.patch \
-             file://no-ko-translation.patch \
-             file://fix-gcc-4.4-compile.patch \
-             file://use-host.patch "
--PR = "r3"
-+PR = "r4"
- 
- require apt-package.inc
- 
- FILES_${PN} += "${bindir}/apt-key"
- 
--do_stage() {
--	install -d ${STAGING_LIBDIR} ${STAGING_INCDIR}/apt-pkg
--	eval `cat environment.mak | grep ^GLIBC_VER | sed -e's, = ,=,'`
--	oe_libinstall -so -C bin libapt-pkg$GLIBC_VER-6 ${STAGING_LIBDIR}/
--	ln -sf libapt-pkg$GLIBC_VER-6.so ${STAGING_LIBDIR}/libapt-pkg.so
--	oe_libinstall -so -C bin libapt-inst$GLIBC_VER-6 ${STAGING_LIBDIR}/
--	ln -sf libapt-inst$GLIBC_VER-6.so ${STAGING_LIBDIR}/libapt-inst.so
-+fix_eabi_architecture() {
-+	sed -i \
-+	's:^#define COMMON_ARCH "arm"$:#define COMMON_ARCH "armel":' \
-+		${S}/include/config.h
-+}
-+
-+do_configure_append_linux-gnueabi() {
-+	fix_eabi_architecture
-+}
- 
--	install -m 0644 include/apt-pkg/*.h ${STAGING_INCDIR}/apt-pkg/
-+do_configure_append_linux-uclibceabi() {
-+	fix_eabi_architecture
- }
- 
- SRC_URI[md5sum] = "e6ee1b594f6ed5fab5cb593ee46cfc21"
--- 
-1.7.1
+On 20/02/2011 09:59, Denis Dydychkin wrote:
+>
+> When recipe inherits module.bbclass, it will get its PR overwritten if
+> MACHINE_KERNEL_PR is defined. The outcome is that bumping PR within recipe has
+> no effect, as well as SRCREV does not work anymore, which is especially
+> important when working with latest version from repos.
+>
+> The following patch fixes this problem by appending MACHINE_KERNEL_PR to PR
+> instead of replacing it. "+k" is added to get resulting PR looks like "r1+kr22"
+> or "r1+svnr222+kr33" since MACHINE_KERNEL_PR is usually defined as "rXX".
+>
+>
+> --- classes/module-base.bbclass 2011-02-17 16:14:45.792425264 +0300
+> +++ classes/module-base.bbclass 2011-02-17 16:36:00.088425246 +0300
+> @@ -11,7 +11,8 @@
+>      machine_kernel_pr = bb.data.getVar('MACHINE_KERNEL_PR', d, True)
+>
+>      if machine_kernel_pr:
+> -       bb.data.setVar('PR', machine_kernel_pr, d)
+> +       pr = bb.data.getVar('PR', d, True) + "+k" + machine_kernel_pr
+> +       bb.data.setVar('PR', pr, d)
+>  }
+>
+>  export KERNEL_VERSION = "${@base_read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
