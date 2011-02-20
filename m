@@ -1,44 +1,20 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Pqy2J-0004n7-Lc
+Received: from smtpauth02.prod.mesa1.secureserver.net ([64.202.165.182])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <mike@mwester.net>) id 1Pr2EP-0004dV-Po
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Feb 2011 02:24:31 +0100
-Received: by pvd12 with SMTP id 12so685594pvd.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Feb 2011 17:23:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id
-	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:in-reply-to:user-agent;
-	bh=oPZIATYSJ6XKAG2TKNUWRJzRFNXj4WOKZbk9pJ+SFjU=;
-	b=SlQuGQPPPSkMLeVStog1IAILyD1vxNe+fLVccW7yaaxxss20OvW6rH4fMn99vFQE82
-	Vs/EYJ1bfb2j4jjKwB4UDoyzaW8G1dhhUm8KS70YxHwIBysPCwzEiJjVEOiSKB7HBivK
-	4EJYjB5gsnpxzILbEhIbSsl1EwZwc/lpQlS60=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	b=TsJfnFWtP7JDuOc38fy6tDf3QHFYYNBzpRKikHtyXAbeRvh+hmW29Dralufha4Z+bh
-	3+VzFrcRE7E+mJ4SJSHbKO+w0lRiNaPgpky68JetluHlOl7uFHs5z94Z1NhQQwfvlWd3
-	bCoinc1T/sDo/4Mx2QJfJCZo9hQdGFfRw2EDA=
-Received: by 10.142.245.10 with SMTP id s10mr1814497wfh.130.1298164993977;
-	Sat, 19 Feb 2011 17:23:13 -0800 (PST)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id z1sm5236243wfd.21.2011.02.19.17.23.12
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 19 Feb 2011 17:23:12 -0800 (PST)
-Date: Sat, 19 Feb 2011 17:23:10 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110220012310.GC3451@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1298116419-18277-1-git-send-email-schnitzeltony@gmx.de>
-	<4D5FB38C.3010009@eukrea.com>
+	Sun, 20 Feb 2011 06:53:18 +0100
+Received: (qmail 16653 invoked from network); 20 Feb 2011 05:52:01 -0000
+Received: from unknown (209.242.7.132)
+	by smtpauth02.prod.mesa1.secureserver.net (64.202.165.182) with ESMTP;
+	20 Feb 2011 05:52:01 -0000
+Message-ID: <4D60AC02.2070605@mwester.net>
+Date: Sat, 19 Feb 2011 23:52:02 -0600
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-In-Reply-To: <4D5FB38C.3010009@eukrea.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH] cross.bbclass: Fix many QA RPATH errors for distros preferring libtool-2.2
+To: openembedded-devel@lists.openembedded.org
+Subject: Parsing stalls at libinih
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,38 +28,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Feb 2011 01:24:31 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 20 Feb 2011 05:53:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On (19/02/11 13:11), Eric Benard wrote:
-> Hi Andreas,
-> 
-> >index 1a6d906..50c0f63 100644
-> >--- a/classes/cross.bbclass
-> >+++ b/classes/cross.bbclass
-> >@@ -75,6 +75,6 @@ sysroot_stage_all() {
-> >
-> >  #
-> >  # Cross .la files have more path issues we have to correct only for libtool<  2.4
-> >-SYSROOTEXTRALIBDIRSED_OLD = " -e \"/^libdir=/s,.*,libdir=${STAGING_DIR_TARGET}${target_libdir},g\" -e \"/^dependency_libs=/s,\([[:space:]']\)-L${STAGING_LIBDIR_NATIVE},,g\""
-> >+SYSROOTEXTRALIBDIRSED_OLD = " -e \"/^libdir=/s,.*,libdir=${target_libdir},g\" -e \"/^dependency_libs=/s,\([[:space:]']\)-L${STAGING_LIBDIR_NATIVE},,g\""
-> >
-> >  SYSROOTEXTRALIBDIRSED = "${@["${SYSROOTEXTRALIBDIRSED_OLD}",""][("${LIBTOOL_HAS_SYSROOT}" == "yes")]}"
-> 
-> I was just finishing to test a similar fix and this seems to be the
-> right direction. Now testing your fix which is cleaner.
+Parsing stalled.  Debugging shows its stuck on parsing libinih:
 
-Also try meta-toolchain targets 
-> 
-> Eric
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+PV = "0.0+gitr${SRCPV}"
+PKGV = "${GITPKGVTAG}"
 
--- 
--Khem
+I think we had decided some time ago that OE recipes were to be nailed
+down in some fashion such that one should be able to parse all the
+recipes, at least, without a network connection.
+
+Have I missed setting something for my distro so that the above lines
+don't have to go to the libinih git repo for every parse?
+
+For now, I've fixed it by masking out that recipe in my local.conf -- I
+have no need for it.  Is that the correct solution for recipes that do this?
+
+
+Thanks,
+-Mike (mwester)
 
 
