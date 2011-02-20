@@ -1,37 +1,33 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from fallback1.mail.ru ([94.100.176.18])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pr6Q8-0001OT-8y
+	(envelope-from <nyrl@mail.ru>) id 1Pr6Qg-0001Oz-DH
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Feb 2011 11:21:40 +0100
-Received: by bwz10 with SMTP id 10so1050326bwz.6
+	Sun, 20 Feb 2011 11:22:14 +0100
+Received: from f253.mail.ru (f253.mail.ru [217.69.128.178])
+	by fallback1.mail.ru (mPOP.Fallback_MX) with ESMTP id CF06A297D2D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Feb 2011 02:20:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=lMJqQIi/ZIm5Dmg7LLxw1KXaxcmuUKm8N9nZBe7T0xY=;
-	b=p18YDm+V/XhZxShWOEyI8unzEX7rtA7D15+RJ6/NStM8QxO7CwMsU+Wzmh5r3HYkU+
-	PmxHCX90wN59lPz74LujjGjmKiplubRdADt1gA4EW51OvwVAwibTjWamGOxCJklBPU19
-	nVbmwtgV9/pSaD1EKXACDmojKAqaZnwD438Zw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=TY8NiDRt3eYEwzX6rPNUOkMJ4zovnk9Ndob8oWQi9vjTNf4wAe/VYGp/VOP3wgLrJX
-	i4+GYh8PYgNNA0ed13ZfB629jF0PELVbuJ08F95+FL1wrOFhEy1+eOBGbE7AXkhklvhl
-	9I9UN1/do/ffvEpLrm7vWcO63YdR8sQn/fwcs=
-Received: by 10.204.54.147 with SMTP id q19mr203436bkg.145.1298197219337;
-	Sun, 20 Feb 2011 02:20:19 -0800 (PST)
-Received: from localhost.localdomain (ns.tefnet.pl [188.165.206.204])
-	by mx.google.com with ESMTPS id x38sm2846411bkj.13.2011.02.20.02.20.17
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 20 Feb 2011 02:20:18 -0800 (PST)
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 Feb 2011 11:20:12 +0100
-Message-Id: <1298197212-22266-1-git-send-email-filip.zyzniewski@gmail.com>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <20110220011124.GA3451@sakrah.homelinux.org>
-References: <20110220011124.GA3451@sakrah.homelinux.org>
-Subject: [PATCHv3] package_deb.bbclass/apt: armel architecture name for eabi systems.
+	Sun, 20 Feb 2011 13:04:13 +0300 (MSK)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
+	s=mail; 
+	h=Message-Id:Content-Type:Reply-To:Date:Mime-Version:Subject:To:From;
+	bh=3fuoDTc5A81xXWbnr3lCbHtXUWrNlprHisceF4hLwG4=; 
+	b=uZhESP+WCWNtNpx5UsHy/dHf24MKhTDgzj0RiV44Ar27QWrEYRMGJ7bl1fgajdt7yNPQ8f8l6TNtV8nFMJFdUS+CSJUbvrYuws00+DCn97zdA7hnIPqEL37RYaE3afaA;
+Received: from mail by f253.mail.ru with local id 1Pr64K-0003ub-00
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 20 Feb 2011 12:59:08 +0300
+Received: from [92.100.199.230] by win.mail.ru with HTTP;
+	Sun, 20 Feb 2011 12:59:08 +0300
+From: Denis Dydychkin <nyrl@mail.ru>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0
+X-Mailer: mPOP Web-Mail 2.19
+X-Originating-IP: [92.100.199.230]
+Date: Sun, 20 Feb 2011 12:59:08 +0300
+Message-Id: <E1Pr64K-0003ub-00.nyrl-mail-ru@f253.mail.ru>
+X-Spam: Not detected
+X-Mras: Ok
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: MACHINE_KERNEL_PR overrides PR for modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,64 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Feb 2011 10:21:40 -0000
+X-List-Received-Date: Sun, 20 Feb 2011 10:22:14 -0000
+Content-Type: text/plain; charset=koi8-r
+Content-Transfer-Encoding: quoted-printable
 
-For dpkg EABI system architecture is called armel, not arm.
-Reference: http://wiki.debian.org/ArmEabiPort
 
-Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
----
- classes/package_deb.bbclass |    2 ++
- recipes/apt/apt_0.7.20.2.bb |   21 ++++++++++++---------
- 2 files changed, 14 insertions(+), 9 deletions(-)
 
-diff --git a/classes/package_deb.bbclass b/classes/package_deb.bbclass
-index 60e759d..87f31fa 100644
---- a/classes/package_deb.bbclass
-+++ b/classes/package_deb.bbclass
-@@ -15,6 +15,8 @@ DPKG_ARCH_i486 ?= "i386"
- DPKG_ARCH_i586 ?= "i386"
- DPKG_ARCH_i686 ?= "i386"
- DPKG_ARCH_pentium ?= "i386"
-+DPKG_ARCH_linux-gnueabi ?= "armel"
-+DPKG_ARCH_linux-uclibceabi ?= "armel"
- 
- python package_deb_fn () {
-     bb.data.setVar('PKGFN', bb.data.getVar('PKG',d), d)
-diff --git a/recipes/apt/apt_0.7.20.2.bb b/recipes/apt/apt_0.7.20.2.bb
-index 5c932a5..e17d593 100644
---- a/recipes/apt/apt_0.7.20.2.bb
-+++ b/recipes/apt/apt_0.7.20.2.bb
-@@ -13,15 +13,18 @@ require apt-package.inc
- 
- FILES_${PN} += "${bindir}/apt-key"
- 
--do_stage() {
--	install -d ${STAGING_LIBDIR} ${STAGING_INCDIR}/apt-pkg
--	eval `cat environment.mak | grep ^GLIBC_VER | sed -e's, = ,=,'`
--	oe_libinstall -so -C bin libapt-pkg$GLIBC_VER-6 ${STAGING_LIBDIR}/
--	ln -sf libapt-pkg$GLIBC_VER-6.so ${STAGING_LIBDIR}/libapt-pkg.so
--	oe_libinstall -so -C bin libapt-inst$GLIBC_VER-6 ${STAGING_LIBDIR}/
--	ln -sf libapt-inst$GLIBC_VER-6.so ${STAGING_LIBDIR}/libapt-inst.so
--
--	install -m 0644 include/apt-pkg/*.h ${STAGING_INCDIR}/apt-pkg/
-+fix_eabi_architecture() {
-+	sed -i \
-+	's:^#define COMMON_ARCH "arm"$:#define COMMON_ARCH "armel":' \
-+		${S}/include/config.h
-+}
-+
-+do_configure_append_linux-gnueabi() {
-+	fix_eabi_architecture
-+}
-+
-+do_configure_append_linux-uclibceabi() {
-+	fix_eabi_architecture
+When recipe inherits module.bbclass, it will get its PR overwritten if
+MACHINE_KERNEL_PR is defined. The outcome is that bumping PR within recip=
+e has
+no effect, as well as SRCREV does not work anymore, which is especially
+important when working with latest version from repos.
+
+The following patch fixes this problem by appending MACHINE_KERNEL_PR to =
+PR
+instead of replacing it. "+k" is added to get resulting PR looks like "r1=
++kr22"
+or "r1+svnr222+kr33" since MACHINE_KERNEL_PR is usually defined as "rXX".
+
+
+--- classes/module-base.bbclass 2011-02-17 16:14:45.792425264 +0300
++++ classes/module-base.bbclass 2011-02-17 16:36:00.088425246 +0300
+@@ -11,7 +11,8 @@
+     machine_kernel_pr =3D bb.data.getVar('MACHINE_KERNEL_PR', d, True)
+
+     if machine_kernel_pr:
+-       bb.data.setVar('PR', machine_kernel_pr, d)
++       pr =3D bb.data.getVar('PR', d, True) + "+k" + machine_kernel_pr
++       bb.data.setVar('PR', pr, d)
  }
- 
- SRC_URI[md5sum] = "e6ee1b594f6ed5fab5cb593ee46cfc21"
--- 
-1.7.1
+
+ export KERNEL_VERSION =3D "${@base_read_file('${STAGING_KERNEL_DIR}/kern=
+el-abiversion')}"
+
 
 
 
