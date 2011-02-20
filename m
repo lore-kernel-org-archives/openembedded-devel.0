@@ -1,36 +1,36 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Pr5h9-0000L3-Ln
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Pr5nS-0000Uc-Ql
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Feb 2011 10:35:12 +0100
-Received: by iwn10 with SMTP id 10so1058057iwn.6
+	Sun, 20 Feb 2011 10:41:43 +0100
+Received: by iyj8 with SMTP id 8so4902083iyj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Feb 2011 01:33:54 -0800 (PST)
+	Sun, 20 Feb 2011 01:40:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:date
 	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=nSY0wFUfUyPMtN/IanCvkbH3IWfhlRyPHjVuOkVOnCM=;
-	b=jf14TQq5sCYTAWj9ssjkB527QDCYWY4rNNy9+QrKSxAPclpmZoOQJY+MbkMNjl8fqa
-	JnfR1Zo8G1QbZI3+SpOf1Cbmtt8/nVpi4XOr/LqM2p1XF3PtAmqDCAi4ezlfRmSJrHrK
-	FDV/0VHyc7GmXL8i4pQ+9HhJ0potlNG2g51h8=
+	bh=nfXqVOzBSTErjAQIADqS5wAIwqatlxwRkZRxlYGimxw=;
+	b=ekAFOhkWvJSB7t9H4sV/iaJaYrHJPV443ogSIjEa0Lhhq0/WaP+EFDdT18jzqZNngt
+	k+Qlm9tx5IEMpSzC/EKbr6Bftu9oyXdD5ieFxCoFiqMgux8jNXv0I4S3y79lcAPkx5ml
+	Ucx1/J7Kbu94aotCHzL9GiuONK6sQH1EsjZLI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=AHiTE0ypqEAEXtK4BmYOuYR+mqoG5iq+ZYGf6kDpeLrrkQfoPMcLwGPc4IG7gZSySl
-	LZc8cnNW0ZJrpqgl+tbYI4mbjwwbSNhuof2FDWHWttWpwWChfXF8d8YMLUqx3NUyZTBn
-	ir0x2Sx3RybvAgzQ29LXw23+ub+dpBZADMt88=
+	b=F3pok9t+pWJrvCHdGnTqfCitDj9b99UArj42IgC5XdKN7EjT+fNgPN4l7kaEGJc2no
+	07m5eqacpVY23l02VSBVOy0IOEoot9nlsIdp38EHpcImKiQK8qfHhRpCjxn1wmZBuwkt
+	LJnLeSZVNmCdsBEImD19n401UhmjxvjSHfeTo=
 MIME-Version: 1.0
-Received: by 10.231.157.211 with SMTP id c19mr167742ibx.172.1298194433892;
-	Sun, 20 Feb 2011 01:33:53 -0800 (PST)
-Received: by 10.231.30.73 with HTTP; Sun, 20 Feb 2011 01:33:53 -0800 (PST)
-In-Reply-To: <AANLkTinxjgtVKeZMj0t_E1JhiDT3iq1ohhHt56wf7JkQ@mail.gmail.com>
-References: <4D60AC02.2070605@mwester.net>
-	<AANLkTinxjgtVKeZMj0t_E1JhiDT3iq1ohhHt56wf7JkQ@mail.gmail.com>
-Date: Sun, 20 Feb 2011 10:33:53 +0100
-Message-ID: <AANLkTinYgRnQSeXAh2rtQpexKixSnXQvVWM9qfZz9Xi0@mail.gmail.com>
+Received: by 10.231.35.200 with SMTP id q8mr172391ibd.147.1298194674808; Sun,
+	20 Feb 2011 01:37:54 -0800 (PST)
+Received: by 10.231.30.73 with HTTP; Sun, 20 Feb 2011 01:37:54 -0800 (PST)
+In-Reply-To: <1298051011-10445-8-git-send-email-otavio@ossystems.com.br>
+References: <1298051011-10445-1-git-send-email-otavio@ossystems.com.br>
+	<1298051011-10445-8-git-send-email-otavio@ossystems.com.br>
+Date: Sun, 20 Feb 2011 10:37:54 +0100
+Message-ID: <AANLkTik89-uYd5sOW80+ef_wL4=2HQ0XUTBZm=70Myu=@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Parsing stalls at libinih
+Subject: Re: [PATCH 07/16] libinih: add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,47 +44,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Feb 2011 09:35:12 -0000
+X-List-Received-Date: Sun, 20 Feb 2011 09:41:43 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2011/2/20 Khem Raj <raj.khem@gmail.com>:
-> On Sat, Feb 19, 2011 at 9:52 PM, Mike Westerhof <mike@mwester.net> wrote:
->> Parsing stalled. =A0Debugging shows its stuck on parsing libinih:
->>
->> PV =3D "0.0+gitr${SRCPV}"
->> PKGV =3D "${GITPKGVTAG}"
->>
->> I think we had decided some time ago that OE recipes were to be nailed
->> down in some fashion such that one should be able to parse all the
->> recipes, at least, without a network connection.
->>
->> Have I missed setting something for my distro so that the above lines
->> don't have to go to the libinih git repo for every parse?
+2011/2/18 Otavio Salvador <otavio@ossystems.com.br>:
+> This provides a C and C++ INI library that can be statically linked
+> into projects.
 >
-> hmmm the problem seems to be because its using AUTOREV
->
-> there are few other recipes which are using autorev
-> recipes/libinih/libinih_git.bb:SRCREV =3D "${AUTOREV}"
-> recipes/linux/linux-jlime-ben-nanonote_2.6.36.bb:SRCREV =3D "${AUTOREV}"
-> recipes/linux/linux-jlime-jornada6xx_2.6.32.bb:SRCREV =3D "${AUTOREV}"
-> recipes/linux/linux-mini2440_2.6.30+git.bb:SRCREV =3D "${AUTOREV}"
-> recipes/nonworking/linux/linux-jlime-jornada6xx_2.6.25.bb:SRCREV =3D "${A=
-UTOREV}"
->
-> I think if AUTOREV are not used in recipes directly
-> but instead collected in a conf file then this issue
-> may be avoided.
->
->>
->> For now, I've fixed it by masking out that recipe in my local.conf -- I
->> have no need for it. =A0Is that the correct solution for recipes that do=
- this?
->>
->>
->> Thanks,
->> -Mike (mwester)
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> Acked-by: Khem Raj <raj.khem@gmail.com>
 
-I'm looking into this.
+I pushed this recipe yesterday, but apparently it seems to break the
+build, so I reverted it.
+Guess this is the bad guy:
+SRCREV =3D "${AUTOREV}"
+anyway using autorev is not really desired (didn't realize it when pushing)
+
+Otavio can you come with a better version?
+
+Frans
+
+> ---
+> =A0recipes/libinih/libinih_git.bb | =A0 14 ++++++++++++++
+> =A01 files changed, 14 insertions(+), 0 deletions(-)
+> =A0create mode 100644 recipes/libinih/libinih_git.bb
+>
+> diff --git a/recipes/libinih/libinih_git.bb b/recipes/libinih/libinih_git=
+.bb
+> new file mode 100644
+> index 0000000..e9f811f
+> --- /dev/null
+> +++ b/recipes/libinih/libinih_git.bb
+> @@ -0,0 +1,14 @@
+> +DESCRIPTION =3D "C and C++ INI Library"
+> +PRIORITY =3D "optional"
+> +PV =3D "0.0+gitr${SRCPV}"
+> +PKGV =3D "${GITPKGVTAG}"
+> +PR =3D "r0"
+> +LICENSE =3D "BSD"
+> +RDEPENDS_${PN}-dev =3D ""
+> +
+> +SRCREV =3D "${AUTOREV}"
+> +SRC_URI =3D "git://projetos.ossystems.com.br/git/libinih.git;protocol=3D=
+git"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +inherit gitpkgv cmake
+> --
+> 1.7.2.3
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
