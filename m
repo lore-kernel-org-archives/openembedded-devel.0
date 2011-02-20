@@ -1,31 +1,36 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PrGup-00060w-UZ
+	(envelope-from <pespin.shar@gmail.com>) id 1PrH5q-0006L7-GU
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Feb 2011 22:34:04 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PrGtb-00009L-FH from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Feb 2011 13:32:47 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Sun, 20 Feb 2011 13:32:47 -0800
-Received: from [172.30.80.150] ([172.30.80.150]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 20 Feb 2011 14:32:46 -0700
-Message-ID: <4D618876.7020302@mentor.com>
-Date: Sun, 20 Feb 2011 14:32:38 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+	Sun, 20 Feb 2011 22:45:26 +0100
+Received: by qwi2 with SMTP id 2so4390077qwi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 Feb 2011 13:44:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=FRBBjyfj0476kKIgq8Cg3VOS4qjsbFpjGxib+hMOoM4=;
+	b=IgpYVS9+kMDPYeLkMdY8KhdZEyfIaLeaeIHTbivpJO6mhC+G7PcQe77QI1TwP64aed
+	0q80KgZvND06uvPMuOlt1FbJIesOzB51jUDozVFgDZRJDJ+1FmDKbfSGjLEk40qNvaVq
+	LxlWflNbzrOLMsyYI1LTfe8DhlCBY6AFWi3pQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Sqa4YyOZnktj/rBcns50XiaVnRPcrHlrTDnHGDmKwjeo0kKjNPzVutzRFMENeqWkHe
+	Nat+lE5sqZlHPo7w/vJkWz0oOaE3Yk7o2X0kFc07VytJHrilDGywx6oGJTh8XhSG+ALM
+	/cU6Xe+78Oo9yG0i4RNt3oH/RGH5jTLgheesM=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.229.249.203 with SMTP id ml11mr461974qcb.199.1298238249248;
+	Sun, 20 Feb 2011 13:44:09 -0800 (PST)
+Received: by 10.229.91.142 with HTTP; Sun, 20 Feb 2011 13:44:09 -0800 (PST)
+In-Reply-To: <4D618876.7020302@mentor.com>
 References: <1298232756-24526-1-git-send-email-pespin.shar@gmail.com>
-In-Reply-To: <1298232756-24526-1-git-send-email-pespin.shar@gmail.com>
-X-OriginalArrivalTime: 20 Feb 2011 21:32:46.0199 (UTC)
-	FILETIME=[B6EAF070:01CBD145]
+	<4D618876.7020302@mentor.com>
+Date: Sun, 20 Feb 2011 22:44:09 +0100
+Message-ID: <AANLkTimHMnAddtD7M-G1OJ7==+JFzTy1rojaYTUz10vD@mail.gmail.com>
+From: Pau Espin Pedrol <pespin.shar@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [PATCH] libacpi: SET OE LDFLAGS in recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,37 +45,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Feb 2011 21:34:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 20 Feb 2011 21:45:26 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 02/20/2011 01:12 PM, Pau Espin Pedrol wrote:
-> Fixes ld problem related to GNU_HASH
-> ---
->   recipes/libacpi/libacpi_0.2.bb |    2 ++
->   1 files changed, 2 insertions(+), 0 deletions(-)
 >
-> diff --git a/recipes/libacpi/libacpi_0.2.bb b/recipes/libacpi/libacpi_0.2.bb
-> index 458fc30..77d266b 100644
-> --- a/recipes/libacpi/libacpi_0.2.bb
-> +++ b/recipes/libacpi/libacpi_0.2.bb
-> @@ -14,6 +14,8 @@ FILES_${PN}-bin = "${bindir}"
 >
->   COMPATIBLE_HOST = '(x86_64|i.86.*)-(linux|freebsd.*)'
+> Note, in the future please see
+> http://wiki.openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmbeddedand be sure to included a Signed-off-by line.  Thanks again for your
+> contribution!
 >
-> +EXTRA_OEMAKE = "LDFLAGS='${LDFLAGS}'"
-> +
->   do_install() {
->   	oe_runmake install DESTDIR=${D} PREFIX=${exec_prefix}
->   }
+>
+Ouch, I forgot, I'll try to remember next time ;)
+Thanks for applying it so fast!
 
-Note, in the future please see 
-http://wiki.openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmbedded 
-and be sure to included a Signed-off-by line.  Thanks again for your 
-contribution!
+
+
+
+> --
+> Tom Rini
+> Mentor Graphics Corporation
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
 
 -- 
-Tom Rini
-Mentor Graphics Corporation
-
+Pau Espin Pedrol
+mail/jabber: pespin.shar@gmail.com
+http://blog.espeweb.net
 
