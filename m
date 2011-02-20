@@ -1,33 +1,37 @@
-Received: from fallback1.mail.ru ([94.100.176.18])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <nyrl@mail.ru>) id 1Pr6Qg-0001Oz-DH
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1Pr6TE-0001R9-DU
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Feb 2011 11:22:14 +0100
-Received: from f253.mail.ru (f253.mail.ru [217.69.128.178])
-	by fallback1.mail.ru (mPOP.Fallback_MX) with ESMTP id CF06A297D2D7
+	Sun, 20 Feb 2011 11:24:52 +0100
+Received: by qyk35 with SMTP id 35so561650qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Feb 2011 13:04:13 +0300 (MSK)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
-	s=mail; 
-	h=Message-Id:Content-Type:Reply-To:Date:Mime-Version:Subject:To:From;
-	bh=3fuoDTc5A81xXWbnr3lCbHtXUWrNlprHisceF4hLwG4=; 
-	b=uZhESP+WCWNtNpx5UsHy/dHf24MKhTDgzj0RiV44Ar27QWrEYRMGJ7bl1fgajdt7yNPQ8f8l6TNtV8nFMJFdUS+CSJUbvrYuws00+DCn97zdA7hnIPqEL37RYaE3afaA;
-Received: from mail by f253.mail.ru with local id 1Pr64K-0003ub-00
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Feb 2011 12:59:08 +0300
-Received: from [92.100.199.230] by win.mail.ru with HTTP;
-	Sun, 20 Feb 2011 12:59:08 +0300
-From: Denis Dydychkin <nyrl@mail.ru>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Mime-Version: 1.0
-X-Mailer: mPOP Web-Mail 2.19
-X-Originating-IP: [92.100.199.230]
-Date: Sun, 20 Feb 2011 12:59:08 +0300
-Message-Id: <E1Pr64K-0003ub-00.nyrl-mail-ru@f253.mail.ru>
-X-Spam: Not detected
-X-Mras: Ok
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: MACHINE_KERNEL_PR overrides PR for modules
+	Sun, 20 Feb 2011 02:23:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=17wWItwBcKoNfUDmFdzh6UMVb4aBHwfeWeNFMaBsxz0=;
+	b=K0Lpf7bHJ2r7QiaipoBJYGqeCC2sgwb32ISM2YVhkqKEy6uzzw/WuAKo//mDXpLO8V
+	td2/bQof8/SReCX5MnQHgPQVBvMoHCGN3KY8QaQF0JIN0qyS6j8sGOYjYZhUPhxT0TH3
+	OFwAqKgg0jbAUbObcZhuymF70cDaoZ1547jzA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=dmU3oaHI+FTRZWSNSl+LwsQwL39HzFTxQH6TSNj6gysivO4DFt6GuqL0IU68/vglgy
+	EKvVreg/sEFQjkEgNa00f+YlZxt0t+lMyCV7teZBKMSMmk2nRSplynC6Pg3mpOitD0aQ
+	VP8LGHfQWNs9+5mHKNIaeZoCYMsQb8tnOq708=
+MIME-Version: 1.0
+Received: by 10.229.6.207 with SMTP id a15mr124704qca.298.1298197415863; Sun,
+	20 Feb 2011 02:23:35 -0800 (PST)
+Received: by 10.229.193.10 with HTTP; Sun, 20 Feb 2011 02:23:35 -0800 (PST)
+In-Reply-To: <20110220011124.GA3451@sakrah.homelinux.org>
+References: <1298063776-2260-1-git-send-email-filip.zyzniewski@gmail.com>
+	<1298158249-10217-1-git-send-email-filip.zyzniewski@gmail.com>
+	<20110220011124.GA3451@sakrah.homelinux.org>
+Date: Sun, 20 Feb 2011 11:23:35 +0100
+Message-ID: <AANLkTim8Ati0-iYJwm6ePhHxU6+-iFhe9-zM_pAJcP_4@mail.gmail.com>
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCHv2] package_deb.bbclass/apt: armel architecture name for eabi systems.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,39 +45,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Feb 2011 10:22:14 -0000
-Content-Type: text/plain; charset=koi8-r
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 20 Feb 2011 10:24:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
+On 2/20/11, Khem Raj <raj.khem@gmail.com> wrote:
 
+> did you test the above calls ? I think these append should be defined
+> individually i.e. duplicate them
 
-When recipe inherits module.bbclass, it will get its PR overwritten if
-MACHINE_KERNEL_PR is defined. The outcome is that bumping PR within recip=
-e has
-no effect, as well as SRCREV does not work anymore, which is especially
-important when working with latest version from repos.
+I've changed it to be symmetrical (both call a separate function) so
+that I can verify it on my build and avoid duplication of code.
 
-The following patch fixes this problem by appending MACHINE_KERNEL_PR to =
-PR
-instead of replacing it. "+k" is added to get resulting PR looks like "r1=
-+kr22"
-or "r1+svnr222+kr33" since MACHINE_KERNEL_PR is usually defined as "rXX".
+> while at it please get rid of do_stage
 
+I've removed it and resulting package has the same contents, so removed it is.
 
---- classes/module-base.bbclass 2011-02-17 16:14:45.792425264 +0300
-+++ classes/module-base.bbclass 2011-02-17 16:36:00.088425246 +0300
-@@ -11,7 +11,8 @@
-     machine_kernel_pr =3D bb.data.getVar('MACHINE_KERNEL_PR', d, True)
+I have just realised that I've skipped increasing PR, I'll send a
+fixed one in a minute.
 
-     if machine_kernel_pr:
--       bb.data.setVar('PR', machine_kernel_pr, d)
-+       pr =3D bb.data.getVar('PR', d, True) + "+k" + machine_kernel_pr
-+       bb.data.setVar('PR', pr, d)
- }
-
- export KERNEL_VERSION =3D "${@base_read_file('${STAGING_KERNEL_DIR}/kern=
-el-abiversion')}"
-
-
+bye,
+Filip Zyzniewski
 
 
