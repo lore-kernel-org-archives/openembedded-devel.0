@@ -1,34 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PrBAx-0007Lz-Cf for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Feb 2011 16:26:19 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PrB9l-000288-Nw for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Feb 2011 16:25:05 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Feb 2011 16:25:05 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Feb 2011 16:25:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from 2.27.mail-out.ovh.net ([46.105.37.238] helo=27.mail-out.ovh.net)
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PrBC8-0007Pr-Pv
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 20 Feb 2011 16:27:33 +0100
+Received: (qmail 14030 invoked by uid 503); 20 Feb 2011 15:52:27 -0000
+Received: from b9.ovh.net (HELO mail625.ha.ovh.net) (213.186.33.59)
+	by 27.mail-out.ovh.net with SMTP; 20 Feb 2011 15:52:21 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 20 Feb 2011 16:59:32 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 20 Feb 2011 16:59:31 +0200
+Message-ID: <4D612C52.1040003@eukrea.com>
+Date: Sun, 20 Feb 2011 15:59:30 +0100
+From: Eric Benard <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 20 Feb 2011 16:24:15 +0100
-Message-ID: <ijrbmv$53p$1@dough.gmane.org>
-References: <1298049536.11289.3126.camel@rex>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1298049536.11289.3126.camel@rex>
-X-Enigmail-Version: 1.0.1
-Subject: Re: Bitbake 1.12.0 released!
+References: <1298057187-2466-1-git-send-email-tom_rini@mentor.com>	<4D5ED835.7040800@eukrea.com>	<AANLkTimfZ4vp-8RPHxTWPfo5m_0zfTwM611Q+d+jWuK8@mail.gmail.com>	<201102191252.05388.schnitzeltony@gmx.de>	<AANLkTinfrqy3eSJajojfDiAJcPcMM9MbTZo94YVGz+ba@mail.gmail.com>	<4D5FF708.90903@mentor.com>	<AANLkTim-b=vO2vD5sgTo5bKduF=OYqAczS7f3YYdgPUy@mail.gmail.com>
+	<4D612958.70402@mentor.com>
+In-Reply-To: <4D612958.70402@mentor.com>
+X-Ovh-Tracer-Id: 3193896562378911049
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: Re: [PATCH] insane.bbclass: Make RPATH a non-fatal error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,35 +40,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Feb 2011 15:26:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 20 Feb 2011 15:27:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi Tom,
 
-On 18-02-11 18:18, Richard Purdie wrote:
-> Bitbake 1.12.0 has been released.
-> 
-> http://prdownload.berlios.de/bitbake/bitbake-1.12.0.tar.gz
-> 
-> This release has many cleanups and improvements to the bitbake core. The
-> biggest and most user visible change is the parallel parsing work which
-> is the driving reason for the release.
+On 20/02/2011 15:46, Tom Rini wrote:
+> - minimal fails everywhere else with:
+> ERROR: QA Issue with staging: libsupc++.la failed sanity test (workdir) in
+> path
+> /var/hudson/workspace/sb_openembedded_autobuilder/BBPKGS/native-sdk-image/DISTRO/minimal/MACHINE/neek/label/sb-u1004/tmp/sysroots/nios2-linux/usr/lib
+>
+> ERROR: QA Issue with staging: libstdc++.la failed sanity test (workdir) in
+> path
+> /var/hudson/workspace/sb_openembedded_autobuilder/BBPKGS/native-sdk-image/DISTRO/minimal/MACHINE/neek/label/sb-u1004/tmp/sysroots/nios2-linux/usr/lib
+>
+can you try with this patch  ?
+http://patches.openembedded.org/patch/719/
 
-Thanks for making this release! Is a 1.12 branch planned for things like
-bugfixes from master?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNYTIfMkyGM64RGpERAiZYAJ92xwVqQ8speWnphjbqDNlp1GXasgCfd2LI
-dCc2V8HWt253p+elU/UrAds=
-=R+A+
------END PGP SIGNATURE-----
-
+Eric
 
 
