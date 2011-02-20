@@ -1,20 +1,35 @@
-Received: from smtpauth02.prod.mesa1.secureserver.net ([64.202.165.182])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <mike@mwester.net>) id 1Pr2EP-0004dV-Po
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <raj.khem@gmail.com>) id 1Pr5CQ-0008Kf-4r
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Feb 2011 06:53:18 +0100
-Received: (qmail 16653 invoked from network); 20 Feb 2011 05:52:01 -0000
-Received: from unknown (209.242.7.132)
-	by smtpauth02.prod.mesa1.secureserver.net (64.202.165.182) with ESMTP;
-	20 Feb 2011 05:52:01 -0000
-Message-ID: <4D60AC02.2070605@mwester.net>
-Date: Sat, 19 Feb 2011 23:52:02 -0600
-From: Mike Westerhof <mike@mwester.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
+	Sun, 20 Feb 2011 10:03:26 +0100
+Received: by fxm8 with SMTP id 8so616597fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 Feb 2011 01:02:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type:content-transfer-encoding;
+	bh=z7NyPvtRrrlb/4yK3X4Cv7DzDlp9xz7ztVkJnsddudo=;
+	b=RD3o6YmJijtEolIhQPwdX0xmwbohC7X9DrQmsEsUeJ8v1QTMYPmVlwAauLViUvq3Ki
+	4ahJJGhRpBvGIM90VBll/B7sU9BP552oPCyjxcH6CP2Mp71wBZ/rOdToh6qH/roXtIjU
+	2+NKgCKksIGOae2oLr0l5OOmbwoZC3B+rrMls=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=jC5TI3G8uwQhLsmQJSh/ZoTsQZj2FL+9aBCUp1IIivGdmoTXgTRrXiLPwRzPh5Jp3v
+	CRqXKKXQJhwGa7Vyr5D2GIo+CFk8tYgtoESQIKiHWZNrMQsEZ1Tc4hpPAw8LASOi0sne
+	G53nPlrYTpoDSbJo//nI1wzDPxtWGbMVCmFdg=
+Received: by 10.223.79.74 with SMTP id o10mr232150fak.63.1298192530091; Sun,
+	20 Feb 2011 01:02:10 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.223.66.22 with HTTP; Sun, 20 Feb 2011 01:01:50 -0800 (PST)
+In-Reply-To: <4D60AC02.2070605@mwester.net>
+References: <4D60AC02.2070605@mwester.net>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 20 Feb 2011 01:01:50 -0800
+Message-ID: <AANLkTinxjgtVKeZMj0t_E1JhiDT3iq1ohhHt56wf7JkQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Parsing stalls at libinih
+Subject: Re: Parsing stalls at libinih
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,27 +43,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Feb 2011 05:53:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 20 Feb 2011 09:03:26 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Parsing stalled.  Debugging shows its stuck on parsing libinih:
+On Sat, Feb 19, 2011 at 9:52 PM, Mike Westerhof <mike@mwester.net> wrote:
+> Parsing stalled. =C2=A0Debugging shows its stuck on parsing libinih:
+>
+> PV =3D "0.0+gitr${SRCPV}"
+> PKGV =3D "${GITPKGVTAG}"
+>
+> I think we had decided some time ago that OE recipes were to be nailed
+> down in some fashion such that one should be able to parse all the
+> recipes, at least, without a network connection.
+>
+> Have I missed setting something for my distro so that the above lines
+> don't have to go to the libinih git repo for every parse?
 
-PV = "0.0+gitr${SRCPV}"
-PKGV = "${GITPKGVTAG}"
+hmmm the problem seems to be because its using AUTOREV
 
-I think we had decided some time ago that OE recipes were to be nailed
-down in some fashion such that one should be able to parse all the
-recipes, at least, without a network connection.
+there are few other recipes which are using autorev
+recipes/libinih/libinih_git.bb:SRCREV =3D "${AUTOREV}"
+recipes/linux/linux-jlime-ben-nanonote_2.6.36.bb:SRCREV =3D "${AUTOREV}"
+recipes/linux/linux-jlime-jornada6xx_2.6.32.bb:SRCREV =3D "${AUTOREV}"
+recipes/linux/linux-mini2440_2.6.30+git.bb:SRCREV =3D "${AUTOREV}"
+recipes/nonworking/linux/linux-jlime-jornada6xx_2.6.25.bb:SRCREV =3D "${AUT=
+OREV}"
 
-Have I missed setting something for my distro so that the above lines
-don't have to go to the libinih git repo for every parse?
+I think if AUTOREV are not used in recipes directly
+but instead collected in a conf file then this issue
+may be avoided.
 
-For now, I've fixed it by masking out that recipe in my local.conf -- I
-have no need for it.  Is that the correct solution for recipes that do this?
-
-
-Thanks,
--Mike (mwester)
+>
+> For now, I've fixed it by masking out that recipe in my local.conf -- I
+> have no need for it. =C2=A0Is that the correct solution for recipes that =
+do this?
+>
+>
+> Thanks,
+> -Mike (mwester)
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
