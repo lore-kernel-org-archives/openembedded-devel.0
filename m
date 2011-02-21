@@ -1,35 +1,31 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PrRFD-0003l8-9g
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Feb 2011 09:35:47 +0100
-Received: by fxm8 with SMTP id 8so1225278fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Feb 2011 00:34:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=muGUDhlRQVbX+vD7+/Dgk/JPkasodNdB0G3XyGAyg3U=;
-	b=s47057uNScsMpiAc363X6xKV4r6uV3WiOPsXZilHdAx9neV2vZcvyZwnstg6CpQKd1
-	q+guIoafisIpWg5ym43hUcIf6SIrHqmKTgr3stqi7H42AayaqThLGASPbrXEke/RH590
-	vq53XkPgqDVcEwEfG0nlxwnNXb6O8ddNBZhAs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=YHbwyYzYg8B2wjvxrDZJoZCJCFjT8SP0oZHipNeItdMiBbOdpMz5SJ6GR0o89JGe7k
-	T3f2/Cd6maZc9hsaQOgFFT2U+I4jx03b6Od6+iWKn/Bw52KJ2rJsUV9J6c436KCrYIcy
-	Nen8oDF2HPqwjHq6Wuq23dz33mMxWnQ4hCRHg=
-Received: by 10.223.71.199 with SMTP id i7mr1536360faj.57.1298277270556; Mon,
-	21 Feb 2011 00:34:30 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.223.30.151 with HTTP; Mon, 21 Feb 2011 00:34:08 -0800 (PST)
-In-Reply-To: <4D61CA73.7000306@mwester.net>
-References: <4D61CA73.7000306@mwester.net>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 21 Feb 2011 00:34:08 -0800
-Message-ID: <AANLkTimUMs9CBky1JmzY7BUMQTdHfUsyRqdMa7JvgufX@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] squid: fix references to host headers and libs
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <rpurdie@rpsys.net>)
+	id 1PrUxH-0001Bj-0X; Mon, 21 Feb 2011 13:33:31 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p1LCW8vY016119;
+	Mon, 21 Feb 2011 12:32:08 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 15692-07; Mon, 21 Feb 2011 12:32:04 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p1LCW1YV016113
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Mon, 21 Feb 2011 12:32:01 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Steffen Sledz <sledz@dresearch.de>
+In-Reply-To: <4D60DA13.5070806@dresearch.de>
+References: <1298049536.11289.3126.camel@rex> <4D60DA13.5070806@dresearch.de>
+Date: Mon, 21 Feb 2011 12:31:59 +0000
+Message-ID: <1298291519.11289.3167.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: openembedded-devel <openembedded-devel@openembedded.org>,
+	bitbake-dev <bitbake-dev@lists.berlios.de>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: Bitbake 1.12.0 released! - ImportError: No module named ply
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,56 +39,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Feb 2011 08:35:47 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 21 Feb 2011 12:33:31 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Sun, Feb 20, 2011 at 6:14 PM, Mike Westerhof <mike@mwester.net> wrote:
-> This patch changes hard-coded references to /usr and /opt in the various
-> squid config.test scripts to point to the correct sysroot paths.
->
-> Signed-off-by: Mike Westerhof <mike@mwester.net>
-> ---
-> diff --git a/recipes/squid/squid_3.1.9.bb b/recipes/squid/squid_3.1.9.bb
-> index 713b1ea..ecd6fdc 100644
-> --- a/recipes/squid/squid_3.1.9.bb
-> +++ b/recipes/squid/squid_3.1.9.bb
-> @@ -1,4 +1,4 @@
-> -PR =3D "${INC_PR}.0"
-> +PR =3D "${INC_PR}.1"
->
-> =C2=A0include squid.inc
->
-> @@ -18,6 +18,11 @@ do_configure_prepend() {
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0export ac_cv_epoll_ctl=3Dyes
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0export ac_cv_epoll_works=3Dyes
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0export ac_cv_func_setresuid=3Dyes
-> + =C2=A0 =C2=A0 =C2=A0 # Patch up the various config scripts to refer to =
-sysroot
-> + =C2=A0 =C2=A0 =C2=A0 for i in `find ${S} -name config.test`; do
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sed -i -e 's|/usr|${STAGING_DIR_HOST=
-}/usr|g' \
+On Sun, 2011-02-20 at 10:08 +0100, Steffen Sledz wrote:
+> Trying bitbake 1.12.0 together with the testscript from contrib
+> results in an error for me (openSUSE 11.3 32bit, bitbake 1.10.2 works
+> fine):
+> 
+> sledz@mobil-400-586:~/tmp/xy> MACHINE=hipox TARGET_RECIPE=minimal-image DISTRO=angstrom-2008.1 TESTING_BRANCH=testing-release-2011.03 BB_MIN_VERSION=1.12.0 ~/work/openembedded/contrib/testing/testscript.sh
+> Branch testing-release-2011.03 set up to track remote branch testing-release-2011.03 from origin.
+> Already on 'testing-release-2011.03'
+> Already up-to-date.
+> hipox angstrom-2008.1 minimal-image testing-release-2011.03 72a088f7e1cf2eb0b50f285301478278c616c1cd
+> Traceback (most recent call last):
+>   File "/home/sledz/tmp/xy/bitbake-1.12.0/bin/bitbake", line 35, in <module>
+>     import bb
+>   File "/home/sledz/tmp/xy/bitbake-1.12.0/lib/bb/__init__.py", line 138, in <module>
+>     deprecate_import(__name__, "bb.fetch", ("MalformedUrl", "encodeurl", "decodeurl"))
+>   File "/home/sledz/tmp/xy/bitbake-1.12.0/lib/bb/__init__.py", line 126, in deprecate_import
+>     module = __import__(modulename, fromlist = fromlist)
+>   File "/home/sledz/tmp/xy/bitbake-1.12.0/lib/bb/fetch/__init__.py", line 32, in <module>
+>     from   bb import data
+>   File "/home/sledz/tmp/xy/bitbake-1.12.0/lib/bb/data.py", line 48, in <module>
+>     from bb import data_smart
+>   File "/home/sledz/tmp/xy/bitbake-1.12.0/lib/bb/data_smart.py", line 34, in <module>
+>     import bb, bb.codeparser
+>   File "/home/sledz/tmp/xy/bitbake-1.12.0/lib/bb/codeparser.py", line 7, in <module>
+>     from pysh import pyshyacc, pyshlex
+>   File "/home/sledz/tmp/xy/bitbake-1.12.0/lib/bb/pysh/pyshyacc.py", line 13, in <module>
+>     import pyshlex
+>   File "/home/sledz/tmp/xy/bitbake-1.12.0/lib/bb/pysh/pyshlex.py", line 22, in <module>
+>     from ply import lex
+> ImportError: No module named ply
 
-I dont know if this works for say micro distro. May be using
- STAGING_EXECPREFIXDIR instead of ${STAGING_DIR_HOST}/usr
+Did you try installing python-ply or whatever the name of the ply module
+for python is on openSUSE?
 
-or using
+Cheers,
 
- ${STAGING_DIR_HOST}${exec_prefix}
+Richard
 
-would be more portable
-
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0-e 's|/op=
-t|${STAGING_DIR_HOST}/opt|g' "$i"
-> + =C2=A0 =C2=A0 =C2=A0 done
-> =C2=A0}
->
-> =C2=A0do_install_append() {
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
