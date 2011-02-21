@@ -1,31 +1,29 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1PrVaE-0002CU-Ra
+	(envelope-from <sledz@dresearch.de>) id 1PrVqf-0002Rn-Jp
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Feb 2011 14:13:46 +0100
-Received: by fxm8 with SMTP id 8so1436816fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Feb 2011 05:12:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=hyvIOCjOTY9lXclWcH55pk0KIgtUNf1brEFL9mespUM=;
-	b=l6u5hBTlIahVNWaKET+xpsdWUOoze9k7KCGsvjJlHrUcmNse6q+aPkbQgnGSAuR4mL
-	rq7dIlWhGMwzr+MdJrf/1Tc1Y+7caSt/GKYUqRbslNY/5dwQyxO3Sl+OxEtlHTBkygBH
-	sr4t4DGBxCGbeCc3y9bOodFRjcUbxNgGZHAMY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=KaNPnSnlR2dTMd4lYbpVg/LA/47CYVWOLKy9ZCTR8QifjYAnczRUo4Mz+nDdimMVFS
-	FVPmjRpvjpo325G+tistPOrh7zd/avoN66AfdMbtCLDisbE8CX3sP4C1m3JEuSg2WLVi
-	iheqgy8FQecVaZl4HQmM1nagQKPPnpYYEC7LI=
+	Mon, 21 Feb 2011 14:30:45 +0100
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 8BC89491282;
+	Mon, 21 Feb 2011 14:29:30 +0100 (CET)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Received: by 10.223.115.75 with SMTP id h11mr1772725faq.119.1298293865396;
-	Mon, 21 Feb 2011 05:11:05 -0800 (PST)
-Received: by 10.223.108.83 with HTTP; Mon, 21 Feb 2011 05:11:05 -0800 (PST)
-Date: Mon, 21 Feb 2011 14:11:05 +0100
-Message-ID: <AANLkTi=7va_AHVV0zYoPqPf2dFUS4QrLMVCW7iYMr_dg@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Please mention "why" in the commit messages
+Date: Mon, 21 Feb 2011 14:28:40 +0100
+Message-ID: <DB561678F08F554EB0D9F21B70E268A505AFB3@exchange.intern.dresearch.de>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Bitbake 1.12.0 released! - ImportError: No module named ply
+Thread-Index: AcvRxnWqRAeGs12RTj+CAtI9ux8ZYQABMrRI
+References: <1298049536.11289.3126.camel@rex><4D60DA13.5070806@dresearch.de>
+	<1298291519.11289.3167.camel@rex>
+From: "Sledz, Steffen" <sledz@dresearch.de>
+To: "Richard Purdie" <rpurdie@rpsys.net>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: openembedded-devel <openembedded-devel@openembedded.org>,
+	bitbake-dev <bitbake-dev@lists.berlios.de>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: Bitbake 1.12.0 released! - ImportError: No module named ply
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,25 +37,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Feb 2011 13:13:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 21 Feb 2011 13:30:45 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Hello all,
+> Did you try installing python-ply or whatever the name of the ply =
+module
+> for python is on openSUSE?
 
-I am continuously running into build errors that relate to recent
-commits and I try to find fixes for them.
+See other subthread.
 
-However, the trend is that recent commit messages do not always tell
-_why_ the change was needed., i.e. what does the commit solve?
+Steffen
 
-Therefore, a kind request to summarize this in your commits:
-
-1) tell _what_ has changed.
-2) tell _why_ is has changed, i.e. what does the commit solve?
-
-
-Regards,
--- 
-Leon
 
 
