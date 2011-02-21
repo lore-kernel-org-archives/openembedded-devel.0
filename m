@@ -1,32 +1,24 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rpurdie@rpsys.net>) id 1PrWtq-0005Du-Si
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <philb@gnu.org>) id 1PrXPD-0006EN-Kt
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Feb 2011 15:38:07 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p1LEanWK017212
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Feb 2011 14:36:49 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 16741-08 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Feb 2011 14:36:45 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p1LEaiiJ017206
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Feb 2011 14:36:45 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Mon, 21 Feb 2011 16:10:31 +0100
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1PrXO0-0004eF-Qx
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Feb 2011 16:09:16 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ijrbmv$53p$1@dough.gmane.org>
-References: <1298049536.11289.3126.camel@rex> <ijrbmv$53p$1@dough.gmane.org>
-Date: Mon, 21 Feb 2011 14:36:41 +0000
-Message-ID: <1298299001.11289.3168.camel@rex>
+In-Reply-To: <4D5EE9A9.10205@mentor.com>
+References: <4D5E45C1.7010504@opendreambox.org>
+	<1298063776-2260-1-git-send-email-filip.zyzniewski@gmail.com>
+	<4D5EE9A9.10205@mentor.com>
+Date: Mon, 21 Feb 2011 15:12:32 +0000
+Message-ID: <1298301152.2178.375.camel@phil-desktop>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Bitbake 1.12.0 released!
+X-Mailer: Evolution 2.30.3 
+Subject: Re: [PATCH] package_deb.bbclass: armel architecture name for eabi	systems.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,31 +32,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Feb 2011 14:38:07 -0000
+X-List-Received-Date: Mon, 21 Feb 2011 15:10:31 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2011-02-20 at 16:24 +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> On 18-02-11 18:18, Richard Purdie wrote:
-> > Bitbake 1.12.0 has been released.
-> > 
-> > http://prdownload.berlios.de/bitbake/bitbake-1.12.0.tar.gz
-> > 
-> > This release has many cleanups and improvements to the bitbake core. The
-> > biggest and most user visible change is the parallel parsing work which
-> > is the driving reason for the release.
-> 
-> Thanks for making this release! Is a 1.12 branch planned for things like
-> bugfixes from master?
+On Fri, 2011-02-18 at 14:50 -0700, Tom Rini wrote:
+> I'm a little puzzled. So little endian gnueabi ARM is armel, little 
+> endian OABI ARM is arm.  What about big endian ARM cases?  Thanks!
 
-There wasn't a branch created but that is the plan and it exists now.
+Debian has never had big-endian ARM as an officially supported
+architecture, so to that extent there's no precedent to follow in this
+area.  
 
-Cheers,
+The natural name for a big-endian gnueabi port would obviously be
+"armeb".  That does leave big-endian OABI somewhat out in the cold but,
+given that OABI has been obsolescent for the best part of a decade, this
+doesn't seem totally unreasonable.  If anybody did want to use dpkg with
+such a thing (and wanted to avoid colliding with armeb) then I guess
+they'd have to name it "armob" or something.
 
-Richard
+p.
+
 
 
 
