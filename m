@@ -1,45 +1,23 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PrbLQ-0006g8-S7
+	(envelope-from <mickey@vanille-media.de>) id 1PrbLk-0006ga-WB
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Feb 2011 20:22:53 +0100
-Received: by pxi17 with SMTP id 17so154198pxi.6
+	Mon, 21 Feb 2011 20:23:13 +0100
+Received: from [192.168.2.2] (e180149189.adsl.alicedsl.de [85.180.149.189])
+	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id 08996584083
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Feb 2011 11:21:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id
-	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:in-reply-to:user-agent;
-	bh=tCQHw3LeNUcK/68TXeqyoxWhUfgVSggclWuzaWML/Ak=;
-	b=Mrn3Z8e2G0MeSVRXtTg/OFQLO0cPSo7R10wUuPhe49ugm8sJADi5rgsCWBl8ME/ZmM
-	V3sNT1dYpwj3i5An/lFunN8Jd2FkdjIoQ1J+N+k7DthOlLvVDLYpSHfMAy2q4Kpb+t7V
-	qJwIsxEXfENnUY7+YCv2QINRLG9JO4Fixn4Ro=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	b=rlQkIdck4UW7ZTQUcpJNR2tZvC4oesjlUC4kC92fHyWKo6DY1vf74gisMQ8CmJ8EEb
-	iwhy93LcqHMfEN8uRPlZMQG/4u+kLPwHN3+CQ3ngdh0S0x+LsOU6yVZBEQA3IbI5mNG1
-	1D14WvgLM10sBCOuLXUSY/P7FCfi+G+4OJcvU=
-Received: by 10.142.14.15 with SMTP id 15mr1445686wfn.141.1298316092981;
-	Mon, 21 Feb 2011 11:21:32 -0800 (PST)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id w19sm4075095wfd.8.2011.02.21.11.21.30
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 21 Feb 2011 11:21:31 -0800 (PST)
-Date: Mon, 21 Feb 2011 11:21:39 -0800
-From: Khem Raj <raj.khem@gmail.com>
+	Mon, 21 Feb 2011 20:41:13 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110221192139.GC10070@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <4D61CA73.7000306@mwester.net>
-	<AANLkTimUMs9CBky1JmzY7BUMQTdHfUsyRqdMa7JvgufX@mail.gmail.com>
-	<4D627669.5010605@mwester.net>
-MIME-Version: 1.0
-In-Reply-To: <4D627669.5010605@mwester.net>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH] squid: fix references to host headers and libs
+In-Reply-To: <AANLkTi=rTuT81+QVpNo4oL_J53nKbs5tnEh+=asqgE6a@mail.gmail.com>
+References: <AANLkTi=rTuT81+QVpNo4oL_J53nKbs5tnEh+=asqgE6a@mail.gmail.com>
+Organization: Vanille-Media
+Date: Mon, 21 Feb 2011 20:25:39 +0100
+Message-ID: <1298316339.16999.32.camel@saphir>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: minimal-image starts dragging in GTK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,95 +31,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Feb 2011 19:22:53 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 21 Feb 2011 19:23:13 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On (21/02/11 08:27), Mike Westerhof wrote:
-> On 2/21/2011 2:34 AM, Khem Raj wrote:
-> > On Sun, Feb 20, 2011 at 6:14 PM, Mike Westerhof <mike@mwester.net> wrote:
-> >> This patch changes hard-coded references to /usr and /opt in the various
-> >> squid config.test scripts to point to the correct sysroot paths.
-> >>
-> >> Signed-off-by: Mike Westerhof <mike@mwester.net>
-> >> ---
-> >> diff --git a/recipes/squid/squid_3.1.9.bb b/recipes/squid/squid_3.1.9.bb
-> >> index 713b1ea..ecd6fdc 100644
-> >> --- a/recipes/squid/squid_3.1.9.bb
-> >> +++ b/recipes/squid/squid_3.1.9.bb
-> >> @@ -1,4 +1,4 @@
-> >> -PR = "${INC_PR}.0"
-> >> +PR = "${INC_PR}.1"
-> >>
-> >>  include squid.inc
-> >>
-> >> @@ -18,6 +18,11 @@ do_configure_prepend() {
-> >>        export ac_cv_epoll_ctl=yes
-> >>        export ac_cv_epoll_works=yes
-> >>        export ac_cv_func_setresuid=yes
-> >> +       # Patch up the various config scripts to refer to sysroot
-> >> +       for i in `find ${S} -name config.test`; do
-> >> +           sed -i -e 's|/usr|${STAGING_DIR_HOST}/usr|g' \
-> > 
-> > I dont know if this works for say micro distro. May be using
-> >  STAGING_EXECPREFIXDIR instead of ${STAGING_DIR_HOST}/usr
-> > 
-> > or using
-> > 
-> >  ${STAGING_DIR_HOST}${exec_prefix}
-> > 
-> > would be more portable
+Am Montag, den 21.02.2011, 18:53 +0100 schrieb Leon Woestenberg:
+> Hello all,
 > 
-> Does micro actually change the structure of the *staging*
-> directories, then?
 > 
-> What I'm trying to do here is perhaps best expressed by example.
-> Here's a few lines from one of those config.test files:
+> since recently, minimal-image starts dragging in GTK. I have tracked
+> it down to this commit:
 > 
-> if [ -f /usr/include/db.h ] && grep dbopen /usr/include/db.h; then
->     exit 0
-> fi
-> exit 1
+> avahi: integrate python into main recipe
+> * this doesn't introduce spurious rdepends like enabling gtk did in the past
 > 
-> I'm simply prefixing those paths with the correct path to the
-> sysroot, so it becomes:
+> Signed-off-by: Koen Kooi <koen@openembedded.org>
+> 
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=70e46e545095a2b2dac634d484eb1c331a1bff34
+> 
+> 
+> This seems a hard-dependency, indepent of "+AVAHI_GTK ?= "-disable-gtk""
 
-hmmm that wont work then. This would need patching the sourcecode to use
-$includedir instead of /usr/include
-
-
-> 
-> if [ -f /r/slug/tmp/sysroots/armv5te-oe-linux-gnueabi/usr/include/db.h ] && grep dbopen /r/slug/tmp/sysroots/armv5te-oe-linux-gnueabi/usr/include/db.h; then
->     exit 0
-> fi
-> exit 1
-> 
-> Would these paths be different for micro, then?
-> 
-> -Mike (mwester)
-> 
-> > 
-> >> +                  -e 's|/opt|${STAGING_DIR_HOST}/opt|g' "$i"
-> >> +       done
-> >>  }
-> >>
-> >>  do_install_append() {
-> >>
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >>
-> > 
-> > 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+This looks like a typo (missing -), in any case.
 
 -- 
--Khem
+:M:
+
 
 
