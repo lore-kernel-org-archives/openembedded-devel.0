@@ -1,22 +1,31 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <roman@khimov.ru>) id 1PrwAl-0001si-Hj
+Received: from 2.27.mail-out.ovh.net ([46.105.37.238] helo=27.mail-out.ovh.net)
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PrwRO-0000u7-3x
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Feb 2011 18:38:26 +0100
-Received: from [93.100.16.104] (helo=mate.hex)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>)
-	id 1Prw9R-0007aN-PV; Tue, 22 Feb 2011 20:35:56 +0300
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Feb 2011 20:35:51 +0300
-User-Agent: KMail/1.13.5 (Linux/2.6.34.7-0.7-desktop; KDE/4.4.4; x86_64; ; )
-References: <4D62B96F.3010908@mwester.net>
-	<20110222063404.GA13792@sakrah.homelinux.org>
-In-Reply-To: <20110222063404.GA13792@sakrah.homelinux.org>
+	Tue, 22 Feb 2011 18:54:26 +0100
+Received: (qmail 22077 invoked by uid 503); 22 Feb 2011 18:46:02 -0000
+Received: from b9.ovh.net (HELO mail194.ha.ovh.net) (213.186.33.59)
+	by 27.mail-out.ovh.net with SMTP; 22 Feb 2011 18:45:56 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 22 Feb 2011 19:53:02 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 22 Feb 2011 19:53:00 +0200
+Message-ID: <4D63F7F9.7000804@eukrea.com>
+Date: Tue, 22 Feb 2011 18:52:57 +0100
+From: Eric Benard <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
-Message-Id: <201102222035.52584.roman@khimov.ru>
-Subject: Re: [PATCH v2] squid: fix references to host headers and libs
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTimy_TtONvPFjaGCUV0qxaM7qF0ENBx7A6wzRnPZ@mail.gmail.com>
+In-Reply-To: <AANLkTimy_TtONvPFjaGCUV0qxaM7qF0ENBx7A6wzRnPZ@mail.gmail.com>
+X-Ovh-Tracer-Id: 17869157423459118409
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: Re: Weird behaviour with PPP
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,50 +39,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Feb 2011 17:38:51 -0000
-X-Groupsio-MsgNum: 29573
-Content-Type: multipart/signed; boundary="nextPart2013847.8FbdO7Yi2M";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Tue, 22 Feb 2011 17:54:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
---nextPart2013847.8FbdO7Yi2M
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 22 =D1=84=D0=B5=D0=B2=D1=80=D0=
-=B0=D0=BB=D1=8F 2011 09:34:04 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Khem Raj =D0=
-=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> On (21/02/11 13:13), Mike Westerhof wrote:
-> > This patch changes hard-coded references to /usr and /opt in the various
-> > squid config.test scripts to point to the correct sysroot paths.
-> > This version accommodates the strange staging dir layout used by micro.
-> >=20
-> > Signed-off-by: Mike Westerhof <mike@mwester.net>
->=20
-> this patch is good. It does not break micro more than what it would be
-> without this patch
->=20
-> Acked-by: Khem Raj <raj.khem@gmail.com>
+On 22/02/2011 18:22, Mickael Chazaux wrote:
+> I have a hard time figuring out why bitbake seems to mix versions of
+> ppp... Any ideas?
+>
+strange, which distro, git tag, bitbake version are you using ?
 
-Acked-by: Roman I Khimov <khimov@altell.ru>
+Both bitbake ppp-2.4.5 & bitbake -b openembedded/recipes/ppp/ppp_2.4.5.bb work 
+fine here (angstrom 2008.1, armv5 target, bitbake 1.12.0).
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+Eric
 
---nextPart2013847.8FbdO7Yi2M
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.15 (GNU/Linux)
-
-iEYEABECAAYFAk1j8/gACgkQXJ70z+XgVcMFEwCcCs19oAbdRnNBBtc+PLgO8INi
-LmwAoNA1uNzrc/Ji5a9uy4+D96GxuD8X
-=NxPY
------END PGP SIGNATURE-----
-
---nextPart2013847.8FbdO7Yi2M--
