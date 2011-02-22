@@ -1,30 +1,35 @@
-Received: from 2.27.mail-out.ovh.net ([46.105.37.238] helo=27.mail-out.ovh.net)
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PrwRO-0000u7-3x
+Received: from mail.multimedia-labs.de ([82.149.226.172])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <obi@opendreambox.org>) id 1Prwvn-0004bQ-Fw
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Feb 2011 18:54:26 +0100
-Received: (qmail 22077 invoked by uid 503); 22 Feb 2011 18:46:02 -0000
-Received: from b9.ovh.net (HELO mail194.ha.ovh.net) (213.186.33.59)
-	by 27.mail-out.ovh.net with SMTP; 22 Feb 2011 18:45:56 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 22 Feb 2011 19:53:02 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 22 Feb 2011 19:53:00 +0200
-Message-ID: <4D63F7F9.7000804@eukrea.com>
-Date: Tue, 22 Feb 2011 18:52:57 +0100
-From: Eric Benard <eric@eukrea.com>
+	Tue, 22 Feb 2011 19:25:51 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id A753D314DF57
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Feb 2011 19:24:34 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id SfS4swIwJzEL
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Feb 2011 19:24:29 +0100 (CET)
+Received: from [172.22.22.61] (ip-94-79-168-47.unitymediagroup.de
+	[94.79.168.47])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 53A1D314DF4C
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Feb 2011 19:24:29 +0100 (CET)
+Message-ID: <4D63FF5C.30400@opendreambox.org>
+Date: Tue, 22 Feb 2011 19:24:28 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	rv:1.9.2.14) Gecko/20110208 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <AANLkTimy_TtONvPFjaGCUV0qxaM7qF0ENBx7A6wzRnPZ@mail.gmail.com>
-In-Reply-To: <AANLkTimy_TtONvPFjaGCUV0qxaM7qF0ENBx7A6wzRnPZ@mail.gmail.com>
-X-Ovh-Tracer-Id: 17869157423459118409
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
+	<4D63F7F9.7000804@eukrea.com>
+In-Reply-To: <4D63F7F9.7000804@eukrea.com>
 Subject: Re: Weird behaviour with PPP
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,21 +44,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Feb 2011 17:54:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 22 Feb 2011 18:25:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
 Hi,
 
-On 22/02/2011 18:22, Mickael Chazaux wrote:
-> I have a hard time figuring out why bitbake seems to mix versions of
-> ppp... Any ideas?
->
-strange, which distro, git tag, bitbake version are you using ?
+On 02/22/2011 06:52 PM, Eric Benard wrote:
+> On 22/02/2011 18:22, Mickael Chazaux wrote:
+>> I have a hard time figuring out why bitbake seems to mix versions of
+>> ppp... Any ideas?
+>>
+> strange, which distro, git tag, bitbake version are you using ?
+> 
+> Both bitbake ppp-2.4.5 & bitbake -b
+> openembedded/recipes/ppp/ppp_2.4.5.bb work fine here (angstrom 2008.1,
+> armv5 target, bitbake 1.12.0).
 
-Both bitbake ppp-2.4.5 & bitbake -b openembedded/recipes/ppp/ppp_2.4.5.bb work 
-fine here (angstrom 2008.1, armv5 target, bitbake 1.12.0).
+I don't think this has anything to do with ppp. I faced the same issue
+with a local recipe, of which an older version had been built before.
+When packaging, the old version was used. A new workdir was created for
+the old version during this step and the resulting packages were empty.
+No recipe existed for this old version at that time, i.e. PR had already
+been increased to 1.0, but 0.0 was used by bitbake.
 
-Eric
+In the end, I deleted bitbake's cache and all files matching the
+package's name to get rid of the annoying problem. I think there were
+pstage packages of the old version lying around.
+
+Versions used were bitbake master and oe master of one or two weeks ago
+(opendreambox distro / mipsel).
+
+Regards,
+Andreas
+
 
 
