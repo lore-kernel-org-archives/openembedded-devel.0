@@ -1,22 +1,24 @@
 Received: from static.88-198-71-155.clients.your-server.de ([88.198.71.155]
 	helo=socrates.bennee.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kernel-hacker@bennee.com>) id 1PrpOR-0005Fk-KA
+	(envelope-from <kernel-hacker@bennee.com>) id 1PrpOU-0005K2-Qy
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Feb 2011 11:23:02 +0100
+	Tue, 22 Feb 2011 11:23:08 +0100
 Received: from localhost ([127.0.0.1] helo=sloy.cambridgebroadband.com)
 	by socrates.bennee.com with esmtp (Exim 4.72)
-	(envelope-from <kernel-hacker@bennee.com>) id 1PrpNW-0006RI-JO
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Feb 2011 11:21:58 +0100
+	(envelope-from <kernel-hacker@bennee.com>)
+	id 1PrpNZ-0006RI-Q4; Tue, 22 Feb 2011 11:22:01 +0100
 From: kernel-hacker@bennee.com
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Feb 2011 10:21:30 +0000
-Message-Id: <1298370092-31915-1-git-send-email-kernel-hacker@bennee.com>
+Date: Tue, 22 Feb 2011 10:21:32 +0000
+Message-Id: <1298370092-31915-3-git-send-email-kernel-hacker@bennee.com>
 X-Mailer: git-send-email 1.7.4.1
+In-Reply-To: <1298370092-31915-1-git-send-email-kernel-hacker@bennee.com>
+References: <1298370092-31915-1-git-send-email-kernel-hacker@bennee.com>
 X-SA-Exim-Connect-IP: 127.0.0.1
 X-SA-Exim-Mail-From: kernel-hacker@bennee.com
 X-SA-Exim-Scanned: No (on socrates.bennee.com); SAEximRunCond expanded to false
-Subject: RFC PATCHES for libnet and lmsensors
+Cc: Alex Bennee <ajb@cbnl.com>
+Subject: [PATCH 2/2] libsensors: Remove clashing header definition from package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,15 +33,37 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 22 Feb 2011 10:23:12 -0000
-X-List-Received-Date: Tue, 22 Feb 2011 10:23:12 -0000
 
-The following two patches are speculative. The libnet one has been
-causing me headaches for a while and is very much in the works for me
-category. Neater solutions welcome.
+From: Alex Bennee <ajb@cbnl.com>
 
-The second patch was a result of a suggestion on #oe.
+libsensors attempts to install:
 
-[PATCH 1/2] libnet: fake a libnet pkg to allow libnet-dev to be in SDK
-[PATCH 2/2] libsensors: Remove clashing header definition from package
+    /usr/include/linux/i2c-dev.h
+
+Which clashes with the libc definition. This patch removes it
+from the build (as suggested by _pb on #oe).
+
+Signed-off-by: Alex Bennee <ajb@cbnl.com>
+---
+ recipes/lm_sensors/lmsensors-apps_2.10.8.bb |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
+
+diff --git a/recipes/lm_sensors/lmsensors-apps_2.10.8.bb b/recipes/lm_sensors/lmsensors-apps_2.10.8.bb
+index dcc33ac..266f1b8 100644
+--- a/recipes/lm_sensors/lmsensors-apps_2.10.8.bb
++++ b/recipes/lm_sensors/lmsensors-apps_2.10.8.bb
+@@ -29,6 +29,9 @@ do_install() {
+ 	install -d ${D}${mandir}
+ 	rm -rf ${D}${mandir}/*
+ 	mv ${D}/usr/man/* ${D}${mandir}
++
++	# Remove clashing headers, libc packages i2c-dev.h
++	rm ${D}/usr/include/linux/i2c-dev.h
+ }
+ 
+ do_stage() {
+-- 
+1.7.4.1
+
 
 
