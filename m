@@ -1,41 +1,31 @@
-Received: from mail-bw0-f50.google.com ([209.85.214.50])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PrvZ9-0007EC-Qt
+	(envelope-from <mickael.chazaux@gmail.com>) id 1Prvy1-0004bc-I6
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Feb 2011 17:58:23 +0100
-Received: by bwz2 with SMTP id 2so2470863bwz.9
+	Tue, 22 Feb 2011 18:24:05 +0100
+Received: by vws4 with SMTP id 4so1456959vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Feb 2011 08:57:02 -0800 (PST)
+	Tue, 22 Feb 2011 09:22:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=164As6yp+DOpAZDV074FZiFL9nBy6kcIq/A6ViZZzOI=;
-	b=GlG6MmtJEuWCRoftPxN/Z+PuztCwI7Hmc0Fui58WLq20TCoi8/hI5cawY+phKji5K0
-	8fsBqRg8UcMaNDFoLtcy2bKyI9goBwF+/JXDXaNF862NgcdiljNQpxLgE0nkXk4BZH+/
-	OK58iwDgqsMv4wTuTSMttYOaqbaYBWOza1GVA=
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=5qPQnsCsceJgEMgCr3wyUJC1RccBZYxqe14LKc1AplY=;
+	b=P/KQsBPL7fGRddBYqXKhQWzkCw1taV7GCRJGggkSQrtOSeMDkMRToLFgoE2rM7fdcj
+	kjtsravGGX37cTKlx04Dq8zPdKd5Q9dl+WYpbC83BOfkAiW1uqEc2L145ne/cmzIlCCp
+	v5dMpitOfeGIN1douZbtgJE0qnmofHtSFJ2C0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=ffCei6hP3tUXRUtXRcp2eLVEPkyKOcSqoqEyTBX//qpzaRbeAlN8bq1o0wZ8ClilM3
-	bt6YhdN6zbxOa8Dmf2nMOU/jGGMwFVllR7dBWS6HaF037HnTsGNP3iXOU32UZU81fsct
-	y+K8b8lBYzGQzK8TaokJ9PSWj5eYicH5aiHWU=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=GZWFadmi+4XyTkLYPnTNhRHPjvaY7kxc4PenJojhIoRRXeqR2VyJPxqLT6eF6C4Xrc
+	D65F9kcLJ4tO8j+ulCnVop6gNd2F7wfWOd9mzCRZEeVQ4f3guET+3lVp1YgJO5gOlnCJ
+	3fhHzZtlJzmgAdgP8H0eUiWljess/EJLyn8/o=
 MIME-Version: 1.0
-Received: by 10.204.51.145 with SMTP id d17mr2774970bkg.24.1298393820434; Tue,
-	22 Feb 2011 08:57:00 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.119.207 with HTTP; Tue, 22 Feb 2011 08:57:00 -0800 (PST)
-In-Reply-To: <AANLkTik89-uYd5sOW80+ef_wL4=2HQ0XUTBZm=70Myu=@mail.gmail.com>
-References: <1298051011-10445-1-git-send-email-otavio@ossystems.com.br>
-	<1298051011-10445-8-git-send-email-otavio@ossystems.com.br>
-	<AANLkTik89-uYd5sOW80+ef_wL4=2HQ0XUTBZm=70Myu=@mail.gmail.com>
-Date: Tue, 22 Feb 2011 16:57:00 +0000
-X-Google-Sender-Auth: qS5DWF5kpusFKfsX2wYh_tDgytw
-Message-ID: <AANLkTi=mJRO+LNORNc=zcoc-im8M4Vjz0makUy0VzDQb@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by 10.52.167.42 with SMTP id zl10mr4320056vdb.299.1298395366132;
+	Tue, 22 Feb 2011 09:22:46 -0800 (PST)
+Received: by 10.220.180.7 with HTTP; Tue, 22 Feb 2011 09:22:46 -0800 (PST)
+Date: Tue, 22 Feb 2011 18:22:46 +0100
+Message-ID: <AANLkTimy_TtONvPFjaGCUV0qxaM7qF0ENBx7A6wzRnPZ@mail.gmail.com>
+From: Mickael Chazaux <mickael.chazaux@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 07/16] libinih: add
+Subject: Weird behaviour with PPP
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,30 +39,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Feb 2011 16:58:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 22 Feb 2011 17:24:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Sun, Feb 20, 2011 at 09:37, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-...
-> I pushed this recipe yesterday, but apparently it seems to break the
-> build, so I reverted it.
-> Guess this is the bad guy:
-> SRCREV =3D "${AUTOREV}"
-> anyway using autorev is not really desired (didn't realize it when pushin=
-g)
->
-> Otavio can you come with a better version?
-...
+Hi,
 
-Yes; I will address it.
+I have a hard time figuring out why bitbake seems to mix versions of
+ppp... Any ideas?
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Regards,
+
+Mickael
+
+mc@ubuntu:~/OE/openembedded/recipes/ppp$ bitbake -b ppp_2.4.5.bb
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Removing stamps: /home/mc/OE/tmp/stamps/i686-angstrom-linux/ppp-2.4.5-r1.*
+NOTE: Running task 1 of 19 (ID: 11,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb, do_setscene)
+NOTE: Running task 2 of 19 (ID: 9,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb, do_fetch)
+NOTE: Running task 3 of 19 (ID: 0,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb, do_unpack)
+NOTE: Running task 4 of 19 (ID: 15,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb,
+do_distribute_sources)
+NOTE: Unpacking ../../../sources/ppp-2.4.5.tar.gz to
+../../../tmp/work/i686-angstrom-linux/ppp-2.4.5-r1/
+NOTE: Unpacking files/pon to ../../../tmp/work/i686-angstrom-linux/ppp-2.4.5-r1/
+NOTE: Unpacking files/poff to
+../../../tmp/work/i686-angstrom-linux/ppp-2.4.5-r1/
+NOTE: Unpacking files/init to
+../../../tmp/work/i686-angstrom-linux/ppp-2.4.5-r1/
+NOTE: Unpacking files/ip-up to
+../../../tmp/work/i686-angstrom-linux/ppp-2.4.5-r1/
+NOTE: Unpacking files/ip-down to
+../../../tmp/work/i686-angstrom-linux/ppp-2.4.5-r1/
+NOTE: Unpacking files/08setupdns to
+../../../tmp/work/i686-angstrom-linux/ppp-2.4.5-r1/
+NOTE: Unpacking files/92removedns to
+../../../tmp/work/i686-angstrom-linux/ppp-2.4.5-r1/
+NOTE: Running task 5 of 19 (ID: 1,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb, do_patch)
+NOTE: Applying patch 'ppp-2.4.4-mppe-mppc.1.1.patch'
+(ppp-2.4.5/ppp-2.4.4-mppe-mppc.1.1.patch)
+NOTE: Applying patch 'makefile.patch' (ppp-2.4.5/makefile.patch)
+NOTE: Applying patch 'cifdefroute.patch' (ppp-2.4.5/cifdefroute.patch)
+NOTE: Applying patch 'pppd-resolv-varrun.patch'
+(ppp-2.4.5/pppd-resolv-varrun.patch)
+NOTE: Applying patch 'enable-ipv6.patch' (ppp-2.4.5/enable-ipv6.patch)
+NOTE: Applying patch 'makefile-remove-hard-usr-reference.patch'
+(ppp-2.4.5/makefile-remove-hard-usr-reference.patch)
+NOTE: Applying patch 'ldflags.patch' (ppp-2.4.5/ldflags.patch)
+NOTE: Running task 6 of 19 (ID: 12,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb, do_configure)
+NOTE: Running task 7 of 19 (ID: 13,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb, do_qa_configure)
+NOTE: Running task 8 of 19 (ID: 14,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb, do_compile)
+NOTE: Running task 9 of 19 (ID: 2,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb, do_install)
+NOTE: Running task 10 of 19 (ID: 16,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb, do_package)
+NOTE: Running task 11 of 19 (ID: 3,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb,
+do_populate_sysroot)
+cp: cannot create regular file
+`/home/mc/OE/tmp/sysroots/i686-angstrom-linux/usr/lib/pppd/2.4.5/pppol2tp.so':
+Permission denied
+cp: cannot create regular file
+`/home/mc/OE/tmp/sysroots/i686-angstrom-linux/usr/lib/pppd/2.4.5/rp-pppoe.so':
+Permission denied
+cp: cannot create regular file
+`/home/mc/OE/tmp/sysroots/i686-angstrom-linux/usr/lib/pppd/2.4.5/pppoatm.so':
+Permission denied
+cp: cannot create regular file
+`/home/mc/OE/tmp/sysroots/i686-angstrom-linux/usr/lib/pppd/2.4.5/openl2tp.so':
+Permission denied
+cp: cannot create regular file
+`/home/mc/OE/tmp/sysroots/i686-angstrom-linux/usr/share/man/man8/pppd.8':
+Permission denied
+cp: cannot create regular file
+`/home/mc/OE/tmp/sysroots/i686-angstrom-linux/usr/share/man/man8/pppstats.8':
+Permission denied
+cp: cannot create regular file
+`/home/mc/OE/tmp/sysroots/i686-angstrom-linux/usr/share/man/man8/pppdump.8':
+Permission denied
+cp: cannot create regular file
+`/home/mc/OE/tmp/sysroots/i686-angstrom-linux/usr/share/man/man8/pppd-radius.8':
+Permission denied
+cp: cannot create regular file
+`/home/mc/OE/tmp/sysroots/i686-angstrom-linux/usr/share/man/man8/pppd-radattr.8':
+Permission denied
+NOTE: Running task 12 of 19 (ID: 4,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb, do_qa_staging)
+NOTE: the following files were installed but not shipped in any package:
+NOTE:   /usr/lib/pppd/2.4.5/pppol2tp.so
+NOTE:   /usr/lib/pppd/2.4.5/openl2tp.so
+NOTE: Running task 13 of 19 (ID: 17,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb,
+do_package_write_ipk)
+NOTE: Not creating empty archive for ppp-oa-2.4.3-r10.6
+NOTE: Not creating empty archive for ppp-oe-2.4.3-r10.6
+NOTE: Not creating empty archive for ppp-radius-2.4.3-r10.6
+NOTE: Not creating empty archive for ppp-winbind-2.4.3-r10.6
+NOTE: Not creating empty archive for ppp-minconn-2.4.3-r10.6
+NOTE: Not creating empty archive for ppp-password-2.4.3-r10.6
+NOTE: Not creating empty archive for ppp-tools-2.4.3-r10.6
+Packaged contents of ppp-dbg into
+/home/mc/OE/tmp/deploy/glibc/ipk/i686/ppp-dbg_2.4.3-r10.6_i686.ipk
+NOTE: Not creating empty archive for ppp-2.4.3-r10.6
+NOTE: Not creating empty archive for ppp-doc-2.4.3-r10.6
+Packaged contents of ppp-dev into
+/home/mc/OE/tmp/deploy/glibc/ipk/i686/ppp-dev_2.4.3-r10.6_i686.ipk
+NOTE: Not creating empty archive for ppp-static-2.4.3-r10.6
+NOTE: Not creating empty archive for ppp-locale-2.4.3-r10.6
+NOTE: Running task 14 of 19 (ID: 5,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb, do_package_write)
+NOTE: Running task 15 of 19 (ID: 6,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb, do_package_stage)
+NOTE: Running task 16 of 19 (ID: 7,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb,
+do_package_stage_all)
+NOTE: Running task 17 of 19 (ID: 10,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb, do_build)
+NOTE: Running task 18 of 19 (ID: 18,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb, do_rm_work)
+NOTE: Running task 19 of 19 (ID: 8,
+/home/mc/OE/openembedded/recipes/ppp/ppp_2.4.5.bb, do_rm_work_all)
+NOTE: Tasks Summary: Attempted 19 tasks of which 0 didn't need to be
+rerun and 0 failed.
 
 
