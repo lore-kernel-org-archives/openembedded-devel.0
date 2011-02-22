@@ -1,36 +1,36 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PriMj-0005AM-TP
+	(envelope-from <raj.khem@gmail.com>) id 1Prlet-0003uX-Ko
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Feb 2011 03:52:41 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 738E3314DEDF
+	Tue, 22 Feb 2011 07:23:39 +0100
+Received: by fxm8 with SMTP id 8so2225966fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Feb 2011 03:51:26 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id 4aOwu6iQUm9L
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Feb 2011 03:51:21 +0100 (CET)
-Received: from [172.22.22.61] (ip-94-79-168-47.unitymediagroup.de
-	[94.79.168.47])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 89B4D314DEDC
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Feb 2011 03:51:21 +0100 (CET)
-Message-ID: <4D6324A7.5060102@opendreambox.org>
-Date: Tue, 22 Feb 2011 03:51:19 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.14) Gecko/20110208 Lightning/1.0b2 Thunderbird/3.1.8
+	Mon, 21 Feb 2011 22:22:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type:content-transfer-encoding;
+	bh=s0Q2oTsVgcRzRB76bEkhWfRg8SVoboF1WEIUkYu9V8E=;
+	b=SWyIGLdCb43agiV8Bwi5oN2lA1tSIhHAoI7h9MuE7g5T2aCn5NoX7OK0VikdLRLEhb
+	koE460zs74iXgxDsfBIVwnQS1/iTIfD7JwjeTVJu1PL99uarppITCuVUygHQoo1RFuwn
+	m5au55TgMgAksxkz8F4GNnz1Avx0WKmz4IYEI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=teYpall9EiwAqMstZ1bLe2GOiRVYMI0rZbLlTLxkwEOIa4hSP+tQznkCQ/nrsj6cFt
+	1Rs+EJGkw7BT6vsSuEY3eFsD5Shd/2dxFtvQJeFN5Uhbt0UUeu3CQ6KoyfsXKvJYJu1q
+	Nas0UUoUE8gZR0ghuxrWfBOht8l2hkqafzF0g=
+Received: by 10.223.71.199 with SMTP id i7mr3058063faj.57.1298355738444; Mon,
+	21 Feb 2011 22:22:18 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.223.30.151 with HTTP; Mon, 21 Feb 2011 22:21:12 -0800 (PST)
+In-Reply-To: <1298337246-11794-2-git-send-email-tom_rini@mentor.com>
+References: <1298337246-11794-1-git-send-email-tom_rini@mentor.com>
+	<1298337246-11794-2-git-send-email-tom_rini@mentor.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 21 Feb 2011 22:21:12 -0800
+Message-ID: <AANLkTin-fKddL80Sn4m08AwayH4t0+EGmFMof72Rwueq@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1297429349-5526-1-git-send-email-obi@opendreambox.org>	<ij3cut$mts$1@dough.gmane.org>	<4D5538BE.1080309@opendreambox.org>	<4D630677.7090507@opendreambox.org>
-	<4D6318A4.9050702@mentor.com>
-In-Reply-To: <4D6318A4.9050702@mentor.com>
-Subject: Re: [PATCH] kernel.bbclass: provide virtual/kernel-${PV}
+Subject: Re: [PATCH] bitbake.conf: Simplify TARGET_CPPFLAGS/LDFLAGS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,70 +44,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Feb 2011 02:52:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Feb 2011 06:23:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 02/22/2011 03:00 AM, Tom Rini wrote:
-> On 02/21/2011 05:42 PM, Andreas Oberritter wrote:
->> Ping. Is there any reason not to apply this patch? Is there a better way
->> to solve the problem?
->>
->> On 02/11/2011 02:25 PM, Andreas Oberritter wrote:
->>> On 02/11/2011 02:18 PM, Koen Kooi wrote:
->>>> On 11-02-11 14:02, Andreas Oberritter wrote:
->>>>> * Allow precompiled modules to depend on a specific kernel version.
->>>>
->>>>> Signed-off-by: Andreas Oberritter<obi@opendreambox.org>
->>>>> ---
->>>>>   classes/kernel.bbclass |    2 +-
->>>>>   1 files changed, 1 insertions(+), 1 deletions(-)
->>>>
->>>>> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
->>>>> index 0d1b4ad..55e3ca0 100644
->>>>> --- a/classes/kernel.bbclass
->>>>> +++ b/classes/kernel.bbclass
->>>>> @@ -1,6 +1,6 @@
->>>>>   inherit linux-kernel-base module_strip
->>>>
->>>>> -PROVIDES += "virtual/kernel"
->>>>> +PROVIDES += "virtual/kernel virtual/kernel-${PV}"
->>>>>   DEPENDS += "virtual/${TARGET_PREFIX}gcc
->>>>> virtual/${TARGET_PREFIX}depmod-${@get_kernelmajorversion('${PV}')}
->>>>> virtual/${TARGET_PREFIX}gcc${KERNEL_CCSUFFIX} update-modules
->>>>> bluez-dtl1-workaround"
->>>>
->>>>>   # we include gcc above, we dont need virtual/libc
->>>>
->>>> How is PV know before the kernel is built? The line below has a
->>>> workaround for that, so I guess it also needs one in PROVIDES, no?
->>>
->>> KERNEL_VERSION is what's unknown until after the build. PV is the
->>> version set by the recipe. The line below uses PV to derive 2.4 or 2.6
->>> from that.
-> 
-> Does this mean we sometimes create package files with unresolvable /
-> incorrect deps?  Or just that it's a bit tricky looking at times?
+On Mon, Feb 21, 2011 at 5:14 PM, Tom Rini <tom_rini@mentor.com> wrote:
+> This is based on poky's ba2e1f4d933c37b372d6749d64614f2510ee9d7b, which
+> simplifies TARGET_CPPFLAGS (and thus CFLAGS) and TARGET_LDFLAGS
+> based on gcc any company having --sysroot
+>
+> Signed-off-by: Tom Rini <tom_rini@mentor.com>
 
-I'd like to package the same set of modules precompiled for different
-kernel versions. In order to do that, a module's recipe needs a way to
-depend on a kernel version, e.g. by using the kernel's PN. Otherwise,
-the recipe of the module of the newest kernel will always get selected,
-even for older kernel versions.
-
-In the module's recipe, you can then derive kernel source and binary
-versions from the recipe's PN. I'm using the following for
-dreambox-dvb-modules_2.6.18-7.4-dm8000-20101215.bb and
-dreambox-dvb-modules_2.6.38-2.3-dm8000-20110203.bb.
-
-DEPENDS += "virtual/kernel-${DM_KERNEL_VERSION}"
-RDEPENDS_${PN} += "kernel-${DM_LOCALVERSION}"
-
-DM_LOCALVERSION = "${@'-'.join('${PV}'.split('-')[:-1])}"
-DM_KERNEL_VERSION = "${@'${PV}'.split('-')[0]}"
-
-Regards,
-Andreas
-
+Acked-by:Khem Raj <raj.khem@gmail.com>
+> ---
+> =C2=A0conf/bitbake.conf | =C2=A0 =C2=A04 ++--
+> =C2=A01 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+> index f005658..ec20332 100644
+> --- a/conf/bitbake.conf
+> +++ b/conf/bitbake.conf
+> @@ -502,7 +502,7 @@ PATCHRESOLVE =3D 'noop'
+>
+> =C2=A0export BUILD_CPPFLAGS =3D "-isystem${STAGING_INCDIR_NATIVE}"
+> =C2=A0export CPPFLAGS =3D "${TARGET_CPPFLAGS}"
+> -export TARGET_CPPFLAGS =3D "-isystem${STAGING_DIR_TARGET}${includedir}"
+> +export TARGET_CPPFLAGS =3D ""
+> =C2=A0export SDK_CPPFLAGS =3D "-isystem${STAGING_DIR_SDK}${includedir} -i=
+system${STAGING_DIR_HOST}${includedir}"
+>
+> =C2=A0export BUILD_CFLAGS =3D "${BUILD_CPPFLAGS} ${BUILD_OPTIMIZATION}"
+> @@ -520,7 +520,7 @@ export BUILD_LDFLAGS =3D "-L${STAGING_LIBDIR_NATIVE} =
+\
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 -Wl,-rpath,${STAGING_LIBDIR_NATIVE} -Wl,-O1"
+>
+> =C2=A0export LDFLAGS =3D "${TARGET_LDFLAGS}"
+> -export TARGET_LDFLAGS =3D '${@["-L${STAGING_DIR_TARGET}${libdir} -Wl,-rp=
+ath-link,${STAGING_DIR_TARGET}${libdir} -Wl,-O1 ${TARGET_LINK_HASH_STYLE}",=
+ "-Wl,-O1 ${TARGET_LINK_HASH_STYLE}"][bb.data.getVar('LIBTOOL_HAS_SYSROOT',=
+ d, 1) =3D=3D "yes"]}'
+> +export TARGET_LDFLAGS =3D "-Wl,-O1 ${TARGET_LINK_HASH_STYLE}"
+>
+> =C2=A0export SDK_LDFLAGS =3D "-L${STAGING_DIR_SDK}${libdir} \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0-Wl,-rpath-link,${STAGING_DIR_SDK}${libdir} \
+> --
+> 1.7.0.4
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
