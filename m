@@ -1,33 +1,35 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Prtk0-0003Pg-T2
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Feb 2011 16:01:29 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Prtik-0002qX-AW from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Feb 2011 07:00:10 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Tue, 22 Feb 2011 07:00:09 -0800
-Received: from [172.30.80.151] ([172.30.80.151]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 22 Feb 2011 08:00:08 -0700
-Message-ID: <4D63CF6F.4080000@mentor.com>
-Date: Tue, 22 Feb 2011 07:59:59 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PruRk-0004sH-1y for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Feb 2011 16:46:40 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PruQS-0003uN-N5 for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Feb 2011 16:45:20 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Feb 2011 16:45:20 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Feb 2011 16:45:20 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1298116419-18277-1-git-send-email-schnitzeltony@gmx.de>	<4D5FB38C.3010009@eukrea.com>	<20110220012310.GC3451@sakrah.homelinux.org>
-	<4D631509.30602@mentor.com>
-In-Reply-To: <4D631509.30602@mentor.com>
-X-OriginalArrivalTime: 22 Feb 2011 15:00:09.0041 (UTC)
-	FILETIME=[32956410:01CBD2A1]
-Subject: Re: [PATCH] cross.bbclass: Fix many QA RPATH errors for distros preferring libtool-2.2
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 22 Feb 2011 16:45:06 +0100
+Message-ID: <ik0lm2$u8f$1@dough.gmane.org>
+References: <1298370092-31915-1-git-send-email-kernel-hacker@bennee.com>
+	<1298370092-31915-2-git-send-email-kernel-hacker@bennee.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1298370092-31915-2-git-send-email-kernel-hacker@bennee.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH 1/2] libnet: fake a libnet pkg to allow libnet-dev to be in SDK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,60 +43,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Feb 2011 15:01:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 22 Feb 2011 15:46:40 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 02/21/2011 06:44 PM, Tom Rini wrote:
-> On 02/19/2011 06:23 PM, Khem Raj wrote:
->> On (19/02/11 13:11), Eric Benard wrote:
->>> Hi Andreas,
->>>
->>>> index 1a6d906..50c0f63 100644
->>>> --- a/classes/cross.bbclass
->>>> +++ b/classes/cross.bbclass
->>>> @@ -75,6 +75,6 @@ sysroot_stage_all() {
->>>>
->>>> #
->>>> # Cross .la files have more path issues we have to correct only for
->>>> libtool< 2.4
->>>> -SYSROOTEXTRALIBDIRSED_OLD = " -e
->>>> \"/^libdir=/s,.*,libdir=${STAGING_DIR_TARGET}${target_libdir},g\" -e
->>>> \"/^dependency_libs=/s,\([[:space:]']\)-L${STAGING_LIBDIR_NATIVE},,g\""
->>>> +SYSROOTEXTRALIBDIRSED_OLD = " -e
->>>> \"/^libdir=/s,.*,libdir=${target_libdir},g\" -e
->>>> \"/^dependency_libs=/s,\([[:space:]']\)-L${STAGING_LIBDIR_NATIVE},,g\""
->>>>
->>>> SYSROOTEXTRALIBDIRSED =
->>>> "${@["${SYSROOTEXTRALIBDIRSED_OLD}",""][("${LIBTOOL_HAS_SYSROOT}" ==
->>>> "yes")]}"
->>>
->>> I was just finishing to test a similar fix and this seems to be the
->>> right direction. Now testing your fix which is cleaner.
->>
->> Also try meta-toolchain targets
->
-> I'm kicking off a subset of my normal matrix with this change applied
-> and hope to report back results in the morning (-0700).
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Results look good.  The results are at http://i.imgur.com/3zmKi.png and 
-the failures here are:
-- qemux86 + libpcap2 + current kheaders aren't happy
-- A lot of failures like:
-| checking host system type...
-| configure: error: invalid value of canonical host
-NOTE: package xextproto-1_7.1.2-r2.0: task do_configure: Failed
-ERROR: Function 'do_configure' failed (see 
-/var/hudson/workspace/sb_openembedded_autobuilder_quicktest/BBPKGS/qt4e-demo-image/DISTRO/minimal/MACHINE/qemush4/label/sb-u1004/tmp/work/sh4-oe-linux/xextproto-1_7.1.2-r2.0/temp/log.do_configure.13916 
-for further information)
-ERROR: Task 2867 
-(/var/hudson/workspace/sb_openembedded_autobuilder_quicktest/BBPKGS/qt4e-demo-image/DISTRO/minimal/MACHINE/qemush4/label/sb-u1004/recipes/xorg-proto/xextproto_7.1.2.bb, 
-do_configure) failed with exit code '1'
+On 22-02-11 11:21, kernel-hacker@bennee.com wrote:
+> From: Alex Bennee <ajb@cbnl.com>
+> 
+> I'm sure there is a better way than this but this works for now.
+> By default libnet-dev has a dependancy on libnet, however this is
+> not built as libnet is a static package. This makes it impossible
+> to add libnet-dev to a SDK.
+> 
+> Commenting out the FILES_${PN} for libnet means it does get built
+> and together with the -dev package can be added to the SDK
+> 
+> Signed-off-by: Alex Bennee <ajb@cbnl.com>
+> ---
+>  recipes/libnet/libnet_1.1.2.1.bb |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+> 
+> diff --git a/recipes/libnet/libnet_1.1.2.1.bb b/recipes/libnet/libnet_1.1.2.1.bb
+> index b09f56e..94c0418 100644
+> --- a/recipes/libnet/libnet_1.1.2.1.bb
+> +++ b/recipes/libnet/libnet_1.1.2.1.bb
+> @@ -32,7 +32,7 @@ do_install_append () {
+>  }
+>  
+>  #static build
+> -FILES_${PN} = ""
+> +#FILES_${PN} = ""
+>  FILES_${PN}-dev += "${bindir}/libnet-config"
+>  
+>  CPPFLAGS_prepend = "-I${S}/libnet/include "
 
-Which I need to dig into.
+setting ALLOW_EMPTY to '1' and bumping PR would be a better fix IMO
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNY9oCMkyGM64RGpERAke4AJ9qOy+UbwMMBg+6cRzdgkmxFW6ZgACfRbwt
+l64XgWXekQ4Rs3/0uwmjbqQ=
+=Lay7
+-----END PGP SIGNATURE-----
+
 
 
