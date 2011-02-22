@@ -1,24 +1,40 @@
-Received: from static.88-198-71-155.clients.your-server.de ([88.198.71.155]
-	helo=socrates.bennee.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kernel-hacker@bennee.com>) id 1PrpOU-0005Iw-5Q
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1PrtX8-0002lu-FD
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Feb 2011 11:23:08 +0100
-Received: from localhost ([127.0.0.1] helo=sloy.cambridgebroadband.com)
-	by socrates.bennee.com with esmtp (Exim 4.72)
-	(envelope-from <kernel-hacker@bennee.com>)
-	id 1PrpNY-0006RI-Qu; Tue, 22 Feb 2011 11:22:00 +0100
-From: kernel-hacker@bennee.com
+	Tue, 22 Feb 2011 15:48:11 +0100
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 0962311001BA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Feb 2011 15:46:51 +0100 (CET)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 246F91100104
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Feb 2011 15:46:49 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from rhein.familie-heinold.de (f052064075.adsl.alicedsl.de
+	[78.52.64.75]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Feb 2011 15:46:49 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id B33AE3C34D; Tue, 22 Feb 2011 15:46:18 +0100 (CET)
+Date: Tue, 22 Feb 2011 15:46:18 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Feb 2011 10:21:31 +0000
-Message-Id: <1298370092-31915-2-git-send-email-kernel-hacker@bennee.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <1298370092-31915-1-git-send-email-kernel-hacker@bennee.com>
-References: <1298370092-31915-1-git-send-email-kernel-hacker@bennee.com>
-X-SA-Exim-Connect-IP: 127.0.0.1
-X-SA-Exim-Mail-From: kernel-hacker@bennee.com
-X-SA-Exim-Scanned: No (on socrates.bennee.com); SAEximRunCond expanded to false
-Cc: Alex Bennee <ajb@cbnl.com>
-Subject: [PATCH 1/2] libnet: fake a libnet pkg to allow libnet-dev to be in SDK
+Message-ID: <20110222144617.GA27321@rhein.zuhause.netz>
+References: <4D637B79.4060503@nedap.com>
+MIME-Version: 1.0
+In-Reply-To: <4D637B79.4060503@nedap.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: findclass failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,38 +48,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Feb 2011 10:23:12 -0000
+X-List-Received-Date: Tue, 22 Feb 2011 14:48:11 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: Alex Bennee <ajb@cbnl.com>
+Hi Jaap,
 
-I'm sure there is a better way than this but this works for now.
-By default libnet-dev has a dependancy on libnet, however this is
-not built as libnet is a static package. This makes it impossible
-to add libnet-dev to a SDK.
+better ask on the cacao-ml. Thats no oe specific.
 
-Commenting out the FILES_${PN} for libnet means it does get built
-and together with the -dev package can be added to the SDK
-
-Signed-off-by: Alex Bennee <ajb@cbnl.com>
----
- recipes/libnet/libnet_1.1.2.1.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/libnet/libnet_1.1.2.1.bb b/recipes/libnet/libnet_1.1.2.1.bb
-index b09f56e..94c0418 100644
---- a/recipes/libnet/libnet_1.1.2.1.bb
-+++ b/recipes/libnet/libnet_1.1.2.1.bb
-@@ -32,7 +32,7 @@ do_install_append () {
- }
- 
- #static build
--FILES_${PN} = ""
-+#FILES_${PN} = ""
- FILES_${PN}-dev += "${bindir}/libnet-config"
- 
- CPPFLAGS_prepend = "-I${S}/libnet/include "
--- 
-1.7.4.1
-
+Bye Henning
 
 
