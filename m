@@ -1,35 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f50.google.com ([209.85.214.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PruRk-0004sH-1y for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Feb 2011 16:46:40 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PruQS-0003uN-N5 for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Feb 2011 16:45:20 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Feb 2011 16:45:20 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1PrvZ9-0007EC-Qt
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Feb 2011 17:58:23 +0100
+Received: by bwz2 with SMTP id 2so2470863bwz.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Feb 2011 16:45:20 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 22 Feb 2011 08:57:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=164As6yp+DOpAZDV074FZiFL9nBy6kcIq/A6ViZZzOI=;
+	b=GlG6MmtJEuWCRoftPxN/Z+PuztCwI7Hmc0Fui58WLq20TCoi8/hI5cawY+phKji5K0
+	8fsBqRg8UcMaNDFoLtcy2bKyI9goBwF+/JXDXaNF862NgcdiljNQpxLgE0nkXk4BZH+/
+	OK58iwDgqsMv4wTuTSMttYOaqbaYBWOza1GVA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=ffCei6hP3tUXRUtXRcp2eLVEPkyKOcSqoqEyTBX//qpzaRbeAlN8bq1o0wZ8ClilM3
+	bt6YhdN6zbxOa8Dmf2nMOU/jGGMwFVllR7dBWS6HaF037HnTsGNP3iXOU32UZU81fsct
+	y+K8b8lBYzGQzK8TaokJ9PSWj5eYicH5aiHWU=
+MIME-Version: 1.0
+Received: by 10.204.51.145 with SMTP id d17mr2774970bkg.24.1298393820434; Tue,
+	22 Feb 2011 08:57:00 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.119.207 with HTTP; Tue, 22 Feb 2011 08:57:00 -0800 (PST)
+In-Reply-To: <AANLkTik89-uYd5sOW80+ef_wL4=2HQ0XUTBZm=70Myu=@mail.gmail.com>
+References: <1298051011-10445-1-git-send-email-otavio@ossystems.com.br>
+	<1298051011-10445-8-git-send-email-otavio@ossystems.com.br>
+	<AANLkTik89-uYd5sOW80+ef_wL4=2HQ0XUTBZm=70Myu=@mail.gmail.com>
+Date: Tue, 22 Feb 2011 16:57:00 +0000
+X-Google-Sender-Auth: qS5DWF5kpusFKfsX2wYh_tDgytw
+Message-ID: <AANLkTi=mJRO+LNORNc=zcoc-im8M4Vjz0makUy0VzDQb@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 22 Feb 2011 16:45:06 +0100
-Message-ID: <ik0lm2$u8f$1@dough.gmane.org>
-References: <1298370092-31915-1-git-send-email-kernel-hacker@bennee.com>
-	<1298370092-31915-2-git-send-email-kernel-hacker@bennee.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1298370092-31915-2-git-send-email-kernel-hacker@bennee.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH 1/2] libnet: fake a libnet pkg to allow libnet-dev to be in SDK
+Subject: Re: [PATCH 07/16] libinih: add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,52 +49,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Feb 2011 15:46:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Feb 2011 16:58:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Sun, Feb 20, 2011 at 09:37, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+...
+> I pushed this recipe yesterday, but apparently it seems to break the
+> build, so I reverted it.
+> Guess this is the bad guy:
+> SRCREV =3D "${AUTOREV}"
+> anyway using autorev is not really desired (didn't realize it when pushin=
+g)
+>
+> Otavio can you come with a better version?
+...
 
-On 22-02-11 11:21, kernel-hacker@bennee.com wrote:
-> From: Alex Bennee <ajb@cbnl.com>
-> 
-> I'm sure there is a better way than this but this works for now.
-> By default libnet-dev has a dependancy on libnet, however this is
-> not built as libnet is a static package. This makes it impossible
-> to add libnet-dev to a SDK.
-> 
-> Commenting out the FILES_${PN} for libnet means it does get built
-> and together with the -dev package can be added to the SDK
-> 
-> Signed-off-by: Alex Bennee <ajb@cbnl.com>
-> ---
->  recipes/libnet/libnet_1.1.2.1.bb |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
-> 
-> diff --git a/recipes/libnet/libnet_1.1.2.1.bb b/recipes/libnet/libnet_1.1.2.1.bb
-> index b09f56e..94c0418 100644
-> --- a/recipes/libnet/libnet_1.1.2.1.bb
-> +++ b/recipes/libnet/libnet_1.1.2.1.bb
-> @@ -32,7 +32,7 @@ do_install_append () {
->  }
->  
->  #static build
-> -FILES_${PN} = ""
-> +#FILES_${PN} = ""
->  FILES_${PN}-dev += "${bindir}/libnet-config"
->  
->  CPPFLAGS_prepend = "-I${S}/libnet/include "
+Yes; I will address it.
 
-setting ALLOW_EMPTY to '1' and bumping PR would be a better fix IMO
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNY9oCMkyGM64RGpERAke4AJ9qOy+UbwMMBg+6cRzdgkmxFW6ZgACfRbwt
-l64XgWXekQ4Rs3/0uwmjbqQ=
-=Lay7
------END PGP SIGNATURE-----
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
