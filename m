@@ -1,20 +1,26 @@
-Received: from mrqout3.tiscali.it ([195.130.225.13])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <l.bolognini@tiscali.it>) id 1ProNC-0008Mc-1P
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1Pror4-0000Dl-Uq
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Feb 2011 10:17:34 +0100
-Received: from [10.39.115.22] by mrq-3 with esmtp (Exim)
-	id 1ProLn-0007Gg-7s; Tue, 22 Feb 2011 10:16:07 +0100
-Received: from ps-wm6 (10.39.75.206) by mail-2.mail.tiscali.sys (8.5.134)
-	id 4D3EB05B00B4DAAE for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Feb 2011 10:16:03 +0100
-Message-ID: <12689458.696811298366163560.JavaMail.defaultUser@defaultHost>
-Date: Tue, 22 Feb 2011 10:16:03 +0100 (CET)
-From: Luca Bolognini <l.bolognini@tiscali.it>
-To: Open Embedded Mailing List <openembedded-devel@lists.openembedded.org>
+	Tue, 22 Feb 2011 10:48:27 +0100
+Received: from nat-dem.mentorg.com ([195.212.93.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1Propk-0004BB-Rn from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Feb 2011 01:47:05 -0800
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-xOriginalSenderIP: 78.6.111.196
-Subject: External toolchain
+Date: Tue, 22 Feb 2011 10:47:01 +0100
+Message-ID: <989A078976CDAD4CB2DC976EEF70E2A5051FA815@eu2-mail.mgc.mentorg.com>
+In-Reply-To: <12689458.696811298366163560.JavaMail.defaultUser@defaultHost>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] External toolchain
+Thread-Index: AcvSdBtK8anw49SLQQyTpueRAPzsogAAGtmg
+References: <12689458.696811298366163560.JavaMail.defaultUser@defaultHost>
+From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: External toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,82 +34,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Feb 2011 09:17:34 -0000
-Content-Type: text/plain;charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 22 Feb 2011 09:48:27 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="UTF-8"
+Content-Transfer-Encoding: base64
 
-Hi,
-I would like to use an external toolchain (CodeSourcery2009q1) to=20
-cross-compile some packages for my beagleboard (more or less the same=20
-that happens in Arago) and then I expect not to download glibc package=20
-and cross-compile again libc, libpthread and so on. I would like to use=20
-the libraries inside my external CodeSourcery SDK.
-I followed some=20
-hints by Denys and Tom ( http://lists.linuxtogo.
-org/pipermail/openembedded-devel/2010-April/019521.html ) and I put=20
-
-#=20
-LUCA
-TARGET_VENDOR =3D "-none"
-TOOLCHAIN_TYPE ?=3D "external"
-
-TOOLCHAIN_BRAND ?=3D "csl"
-TOOLCHAIN_PATH =3D "/opt/ti/codesourcery"
-
-TOOLCHAIN_SYSPATH =3D "${TOOLCHAIN_PATH}/arm-none-linux-gnueabi"
-
-PATH_prepend =3D "${TOOLCHAIN_PATH}/bin:"
-require=20
-conf/distro/include/toolchain-external.inc
-
-inside my=20
-openembedded/conf/distro/angstrom-2008.1.conf
-
-As you know, cross-
-compiler provided by CodeSoucery is arm-none-linux-gnueabi-gcc but I=20
-get the following error with libtool-cross_2.2.6b.bb:
-Build=20
-Configuration:
-BB_VERSION        =3D "1.8.19"
-METADATA_BRANCH   =3D=20
-"release-2010.12"
-METADATA_REVISION =3D "dec3967"
-TARGET_ARCH       =3D=20
-"arm"
-TARGET_OS         =3D "linux-gnueabi"
-MACHINE           =3D=20
-"beagleboard"
-DISTRO            =3D "angstrom"
-DISTRO_VERSION    =3D=20
-"2010.7-test-20110221"
-TARGET_FPU        =3D "hard"
-[...]
-| checking for=20
-arm-angstrom-linux-gnueabi-gcc... arm-angstrom-linux-gnueabi-gcc -
-march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthum=
-b-
-interwork -mno-thumb
-| checking whether the C compiler works... no
-|=20
-configure: error: in `/home/bolognini/diskp2/diskp2.4/pure-
-oe/build/tmp/work/armv7a-angstrom-linux-gnueabi/libtool-cross-2.2.6b-
-r27.1/libtool-2.2.6b':
-| configure: error: C compiler cannot create=20
-executables
-
-Obviously OE doesn't have to find arm-angstrom-linux-
-gnueabi-gcc, but why does it search for arm-angstrom-linux-gnueabi-gcc=20
-instead of arm-none-linux-gnueabi-gcc ?
-What's wrong inside angstrom-
-2008.1.conf or what am I missing?
-
-Thank you for your support
-Luca
-
-
-Supera i limiti: raddoppia la velocit=C3=A0 da 10 a 20 Mega!   Risparmia co=
-n Tutto Incluso: telefono + adsl 20 mega a soli 29,95 =E2=82=AC al mese per=
- due anni!  SCONTO DI 240 EURO!  http://abbonati.tiscali.it/telefono-adsl/p=
-rodotti/tc/tuttoincluso/?WT.mc_id=3D01fw 
+SGVsbG8gTHVjYSwNCg0KUHJvYmFibHkgeW91IG5lZWQgdG8gY3JlYXRlIHN5bWJvbGljIGxpbmtz
+IG9mIGFybS1hbmdzdHJvbS1saW51eC0NCmdudWVhYmktZ2NjIHRvIGFybS1ub25lLWxpbnV4LWdu
+dWVhYmktZ2NjLiBPRSBhc3N1bWVzIHRoYXQgdGhlIGNvbXBpbGVyIG5hbWUgaXMgYXJtLWFuZ3N0
+cm9tLWxpbnV4LWdudWVhYmktZ2NjLiBZb3UgY2FuIHNlZSB0aGUgIkNDIiB2YXJpYWJsZSB2YWx1
+ZSBieSB0YWtlIGVudmlyb25tZW50IG9mIGxpYnRvb2wtY3Jvc3MgKHVzaW5nIC1lIG9wdGlvbnMp
+IHRoYXQgaG93IE9FIGlzIGNyZWF0aW5nIHRoZSBuYW1lIG9mIGNvbXBpbGVyLg0KDQpSZWdhcmRz
+LA0KTm9vcg0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogb3BlbmVtYmVkZGVk
+LWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyBbbWFpbHRvOm9wZW5lbWJlZGRl
+ZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddIE9uIEJlaGFsZiBPZiBMdWNh
+IEJvbG9nbmluaQ0KU2VudDogVHVlc2RheSwgRmVicnVhcnkgMjIsIDIwMTEgMjoxNiBQTQ0KVG86
+IE9wZW4gRW1iZWRkZWQgTWFpbGluZyBMaXN0DQpTdWJqZWN0OiBbb2VdIEV4dGVybmFsIHRvb2xj
+aGFpbg0KDQpIaSwNCkkgd291bGQgbGlrZSB0byB1c2UgYW4gZXh0ZXJuYWwgdG9vbGNoYWluIChD
+b2RlU291cmNlcnkyMDA5cTEpIHRvIA0KY3Jvc3MtY29tcGlsZSBzb21lIHBhY2thZ2VzIGZvciBt
+eSBiZWFnbGVib2FyZCAobW9yZSBvciBsZXNzIHRoZSBzYW1lIA0KdGhhdCBoYXBwZW5zIGluIEFy
+YWdvKSBhbmQgdGhlbiBJIGV4cGVjdCBub3QgdG8gZG93bmxvYWQgZ2xpYmMgcGFja2FnZSANCmFu
+ZCBjcm9zcy1jb21waWxlIGFnYWluIGxpYmMsIGxpYnB0aHJlYWQgYW5kIHNvIG9uLiBJIHdvdWxk
+IGxpa2UgdG8gdXNlIA0KdGhlIGxpYnJhcmllcyBpbnNpZGUgbXkgZXh0ZXJuYWwgQ29kZVNvdXJj
+ZXJ5IFNESy4NCkkgZm9sbG93ZWQgc29tZSANCmhpbnRzIGJ5IERlbnlzIGFuZCBUb20gKCBodHRw
+Oi8vbGlzdHMubGludXh0b2dvLg0Kb3JnL3BpcGVybWFpbC9vcGVuZW1iZWRkZWQtZGV2ZWwvMjAx
+MC1BcHJpbC8wMTk1MjEuaHRtbCApIGFuZCBJIHB1dCANCg0KIyANCkxVQ0ENClRBUkdFVF9WRU5E
+T1IgPSAiLW5vbmUiDQpUT09MQ0hBSU5fVFlQRSA/PSAiZXh0ZXJuYWwiDQoNClRPT0xDSEFJTl9C
+UkFORCA/PSAiY3NsIg0KVE9PTENIQUlOX1BBVEggPSAiL29wdC90aS9jb2Rlc291cmNlcnkiDQoN
+ClRPT0xDSEFJTl9TWVNQQVRIID0gIiR7VE9PTENIQUlOX1BBVEh9L2FybS1ub25lLWxpbnV4LWdu
+dWVhYmkiDQoNClBBVEhfcHJlcGVuZCA9ICIke1RPT0xDSEFJTl9QQVRIfS9iaW46Ig0KcmVxdWly
+ZSANCmNvbmYvZGlzdHJvL2luY2x1ZGUvdG9vbGNoYWluLWV4dGVybmFsLmluYw0KDQppbnNpZGUg
+bXkgDQpvcGVuZW1iZWRkZWQvY29uZi9kaXN0cm8vYW5nc3Ryb20tMjAwOC4xLmNvbmYNCg0KQXMg
+eW91IGtub3csIGNyb3NzLQ0KY29tcGlsZXIgcHJvdmlkZWQgYnkgQ29kZVNvdWNlcnkgaXMgYXJt
+LW5vbmUtbGludXgtZ251ZWFiaS1nY2MgYnV0IEkgDQpnZXQgdGhlIGZvbGxvd2luZyBlcnJvciB3
+aXRoIGxpYnRvb2wtY3Jvc3NfMi4yLjZiLmJiOg0KQnVpbGQgDQpDb25maWd1cmF0aW9uOg0KQkJf
+VkVSU0lPTiAgICAgICAgPSAiMS44LjE5Ig0KTUVUQURBVEFfQlJBTkNIICAgPSANCiJyZWxlYXNl
+LTIwMTAuMTIiDQpNRVRBREFUQV9SRVZJU0lPTiA9ICJkZWMzOTY3Ig0KVEFSR0VUX0FSQ0ggICAg
+ICAgPSANCiJhcm0iDQpUQVJHRVRfT1MgICAgICAgICA9ICJsaW51eC1nbnVlYWJpIg0KTUFDSElO
+RSAgICAgICAgICAgPSANCiJiZWFnbGVib2FyZCINCkRJU1RSTyAgICAgICAgICAgID0gImFuZ3N0
+cm9tIg0KRElTVFJPX1ZFUlNJT04gICAgPSANCiIyMDEwLjctdGVzdC0yMDExMDIyMSINClRBUkdF
+VF9GUFUgICAgICAgID0gImhhcmQiDQpbLi4uXQ0KfCBjaGVja2luZyBmb3IgDQphcm0tYW5nc3Ry
+b20tbGludXgtZ251ZWFiaS1nY2MuLi4gYXJtLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmktZ2NjIC0N
+Cm1hcmNoPWFybXY3LWEgLW10dW5lPWNvcnRleC1hOCAtbWZwdT1uZW9uIC1tZmxvYXQtYWJpPXNv
+ZnRmcCAtbXRodW1iLQ0KaW50ZXJ3b3JrIC1tbm8tdGh1bWINCnwgY2hlY2tpbmcgd2hldGhlciB0
+aGUgQyBjb21waWxlciB3b3Jrcy4uLiBubw0KfCANCmNvbmZpZ3VyZTogZXJyb3I6IGluIGAvaG9t
+ZS9ib2xvZ25pbmkvZGlza3AyL2Rpc2twMi40L3B1cmUtDQpvZS9idWlsZC90bXAvd29yay9hcm12
+N2EtYW5nc3Ryb20tbGludXgtZ251ZWFiaS9saWJ0b29sLWNyb3NzLTIuMi42Yi0NCnIyNy4xL2xp
+YnRvb2wtMi4yLjZiJzoNCnwgY29uZmlndXJlOiBlcnJvcjogQyBjb21waWxlciBjYW5ub3QgY3Jl
+YXRlIA0KZXhlY3V0YWJsZXMNCg0KT2J2aW91c2x5IE9FIGRvZXNuJ3QgaGF2ZSB0byBmaW5kIGFy
+bS1hbmdzdHJvbS1saW51eC0NCmdudWVhYmktZ2NjLCBidXQgd2h5IGRvZXMgaXQgc2VhcmNoIGZv
+ciBhcm0tYW5nc3Ryb20tbGludXgtZ251ZWFiaS1nY2MgDQppbnN0ZWFkIG9mIGFybS1ub25lLWxp
+bnV4LWdudWVhYmktZ2NjID8NCldoYXQncyB3cm9uZyBpbnNpZGUgYW5nc3Ryb20tDQoyMDA4LjEu
+Y29uZiBvciB3aGF0IGFtIEkgbWlzc2luZz8NCg0KVGhhbmsgeW91IGZvciB5b3VyIHN1cHBvcnQN
+Ckx1Y2ENCg0KDQpTdXBlcmEgaSBsaW1pdGk6IHJhZGRvcHBpYSBsYSB2ZWxvY2l0w6AgZGEgMTAg
+YSAyMCBNZWdhISAgIFJpc3Bhcm1pYSBjb24gVHV0dG8gSW5jbHVzbzogdGVsZWZvbm8gKyBhZHNs
+IDIwIG1lZ2EgYSBzb2xpIDI5LDk1IOKCrCBhbCBtZXNlIHBlciBkdWUgYW5uaSEgIFNDT05UTyBE
+SSAyNDAgRVVSTyEgIGh0dHA6Ly9hYmJvbmF0aS50aXNjYWxpLml0L3RlbGVmb25vLWFkc2wvcHJv
+ZG90dGkvdGMvdHV0dG9pbmNsdXNvLz9XVC5tY19pZD0wMWZ3IA0KDQpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KT3BlbmVtYmVkZGVkLWRldmVsIG1haWxp
+bmcgbGlzdA0KT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCmh0dHA6
+Ly9saXN0cy5saW51eHRvZ28ub3JnL2NnaS1iaW4vbWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRk
+ZWQtZGV2ZWwNCg==
 
 
