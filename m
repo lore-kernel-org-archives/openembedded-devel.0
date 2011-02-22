@@ -1,36 +1,27 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PrgM5-0001CN-6P
+	(envelope-from <Tom_Rini@mentor.com>) id 1Prgqo-0004tB-Dx
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Feb 2011 01:43:53 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id BD984314DEC4
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Feb 2011 01:42:37 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id kW0fekUz-Obf
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Feb 2011 01:42:32 +0100 (CET)
-Received: from [172.22.22.61] (ip-94-79-168-47.unitymediagroup.de
-	[94.79.168.47])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 4A634314DEC2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Feb 2011 01:42:32 +0100 (CET)
-Message-ID: <4D630677.7090507@opendreambox.org>
-Date: Tue, 22 Feb 2011 01:42:31 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.14) Gecko/20110208 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
+	Tue, 22 Feb 2011 02:15:38 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PrgpY-0007NW-Eb from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Feb 2011 17:14:20 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 21 Feb 2011 17:14:20 -0800
+Received: from localhost.localdomain ([172.30.80.151]) by
+	na2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 21 Feb 2011 18:14:18 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1297429349-5526-1-git-send-email-obi@opendreambox.org>	<ij3cut$mts$1@dough.gmane.org>
-	<4D5538BE.1080309@opendreambox.org>
-In-Reply-To: <4D5538BE.1080309@opendreambox.org>
-Subject: Re: [PATCH] kernel.bbclass: provide virtual/kernel-${PV}
+Date: Mon, 21 Feb 2011 18:14:05 -0700
+Message-Id: <1298337246-11794-1-git-send-email-tom_rini@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+X-OriginalArrivalTime: 22 Feb 2011 01:14:18.0755 (UTC)
+	FILETIME=[D44FC530:01CBD22D]
+Subject: [PATCH 0/1] bitbake.conf: Simplify TARGET_CPPFLAGS/LDFLAGS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,50 +35,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Feb 2011 00:43:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Feb 2011 01:15:38 -0000
 
-Ping. Is there any reason not to apply this patch? Is there a better way
-to solve the problem?
+As part of my looking into RPATH QA errors I noticed that we pass it
+in _everywhere_ on non-libtool 2.4 distributions and looked around
+a little.  I noticed that poky had dropped this change long ago on
+the grounds that it's not needed with gcc & company obeying --sysroot
+(rather than libtool).  This doesn't appear to have had the giant
+fixing of RPATH issues that I had hoped for (but I can spot check if
+people ask).  This change was tested in the trini/simplify-target-flags
+branch and over the weekend I got the following results:
+http://dl.dropbox.com/u/3284539/feb18matrix_withsimplifyflags.pdf
 
-On 02/11/2011 02:25 PM, Andreas Oberritter wrote:
-> On 02/11/2011 02:18 PM, Koen Kooi wrote:
->> On 11-02-11 14:02, Andreas Oberritter wrote:
->>> * Allow precompiled modules to depend on a specific kernel version.
->>
->>> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
->>> ---
->>>  classes/kernel.bbclass |    2 +-
->>>  1 files changed, 1 insertions(+), 1 deletions(-)
->>
->>> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
->>> index 0d1b4ad..55e3ca0 100644
->>> --- a/classes/kernel.bbclass
->>> +++ b/classes/kernel.bbclass
->>> @@ -1,6 +1,6 @@
->>>  inherit linux-kernel-base module_strip
->>
->>> -PROVIDES += "virtual/kernel"
->>> +PROVIDES += "virtual/kernel virtual/kernel-${PV}"
->>>  DEPENDS += "virtual/${TARGET_PREFIX}gcc virtual/${TARGET_PREFIX}depmod-${@get_kernelmajorversion('${PV}')} virtual/${TARGET_PREFIX}gcc${KERNEL_CCSUFFIX} update-modules bluez-dtl1-workaround"
->>
->>>  # we include gcc above, we dont need virtual/libc
->>
->> How is PV know before the kernel is built? The line below has a
->> workaround for that, so I guess it also needs one in PROVIDES, no?
-> 
-> KERNEL_VERSION is what's unknown until after the build. PV is the
-> version set by the recipe. The line below uses PV to derive 2.4 or 2.6
-> from that.
-> 
-> Regards,
-> Andreas
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+I've spot-checked the failures and the only unexpected to me ones are
+related to hitting the bitbake cache unexpectedly locked bug and the gvfs
+glib-2.0 version conflict.
 
 
 
