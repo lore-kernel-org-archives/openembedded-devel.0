@@ -1,26 +1,31 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1Pror4-0000Dl-Uq
+Received: from 2.26.mail-out.ovh.net ([178.33.107.8] helo=26.mail-out.ovh.net)
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1Prp9V-0000uE-Sx
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Feb 2011 10:48:27 +0100
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1Propk-0004BB-Rn from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Feb 2011 01:47:05 -0800
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Tue, 22 Feb 2011 11:07:29 +0100
+Received: (qmail 5918 invoked by uid 503); 22 Feb 2011 07:47:03 -0000
+Received: from b9.ovh.net (HELO mail425.ha.ovh.net) (213.186.33.59)
+	by 26.mail-out.ovh.net with SMTP; 22 Feb 2011 07:47:03 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 22 Feb 2011 10:19:29 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 22 Feb 2011 10:19:27 +0200
+Message-ID: <4D63718E.2090404@eukrea.com>
+Date: Tue, 22 Feb 2011 09:19:26 +0100
+From: Eric Benard <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
-Date: Tue, 22 Feb 2011 10:47:01 +0100
-Message-ID: <989A078976CDAD4CB2DC976EEF70E2A5051FA815@eu2-mail.mgc.mentorg.com>
-In-Reply-To: <12689458.696811298366163560.JavaMail.defaultUser@defaultHost>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] External toolchain
-Thread-Index: AcvSdBtK8anw49SLQQyTpueRAPzsogAAGtmg
-References: <12689458.696811298366163560.JavaMail.defaultUser@defaultHost>
-From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: External toolchain
+To: openembedded-devel@lists.openembedded.org
+References: <1298116419-18277-1-git-send-email-schnitzeltony@gmx.de>
+In-Reply-To: <1298116419-18277-1-git-send-email-schnitzeltony@gmx.de>
+X-Ovh-Tracer-Id: 8182759048187260233
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: Re: [PATCH] cross.bbclass: Fix many QA RPATH errors for distros preferring libtool-2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,67 +39,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Feb 2011 09:48:27 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 22 Feb 2011 10:07:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-SGVsbG8gTHVjYSwNCg0KUHJvYmFibHkgeW91IG5lZWQgdG8gY3JlYXRlIHN5bWJvbGljIGxpbmtz
-IG9mIGFybS1hbmdzdHJvbS1saW51eC0NCmdudWVhYmktZ2NjIHRvIGFybS1ub25lLWxpbnV4LWdu
-dWVhYmktZ2NjLiBPRSBhc3N1bWVzIHRoYXQgdGhlIGNvbXBpbGVyIG5hbWUgaXMgYXJtLWFuZ3N0
-cm9tLWxpbnV4LWdudWVhYmktZ2NjLiBZb3UgY2FuIHNlZSB0aGUgIkNDIiB2YXJpYWJsZSB2YWx1
-ZSBieSB0YWtlIGVudmlyb25tZW50IG9mIGxpYnRvb2wtY3Jvc3MgKHVzaW5nIC1lIG9wdGlvbnMp
-IHRoYXQgaG93IE9FIGlzIGNyZWF0aW5nIHRoZSBuYW1lIG9mIGNvbXBpbGVyLg0KDQpSZWdhcmRz
-LA0KTm9vcg0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogb3BlbmVtYmVkZGVk
-LWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyBbbWFpbHRvOm9wZW5lbWJlZGRl
-ZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddIE9uIEJlaGFsZiBPZiBMdWNh
-IEJvbG9nbmluaQ0KU2VudDogVHVlc2RheSwgRmVicnVhcnkgMjIsIDIwMTEgMjoxNiBQTQ0KVG86
-IE9wZW4gRW1iZWRkZWQgTWFpbGluZyBMaXN0DQpTdWJqZWN0OiBbb2VdIEV4dGVybmFsIHRvb2xj
-aGFpbg0KDQpIaSwNCkkgd291bGQgbGlrZSB0byB1c2UgYW4gZXh0ZXJuYWwgdG9vbGNoYWluIChD
-b2RlU291cmNlcnkyMDA5cTEpIHRvIA0KY3Jvc3MtY29tcGlsZSBzb21lIHBhY2thZ2VzIGZvciBt
-eSBiZWFnbGVib2FyZCAobW9yZSBvciBsZXNzIHRoZSBzYW1lIA0KdGhhdCBoYXBwZW5zIGluIEFy
-YWdvKSBhbmQgdGhlbiBJIGV4cGVjdCBub3QgdG8gZG93bmxvYWQgZ2xpYmMgcGFja2FnZSANCmFu
-ZCBjcm9zcy1jb21waWxlIGFnYWluIGxpYmMsIGxpYnB0aHJlYWQgYW5kIHNvIG9uLiBJIHdvdWxk
-IGxpa2UgdG8gdXNlIA0KdGhlIGxpYnJhcmllcyBpbnNpZGUgbXkgZXh0ZXJuYWwgQ29kZVNvdXJj
-ZXJ5IFNESy4NCkkgZm9sbG93ZWQgc29tZSANCmhpbnRzIGJ5IERlbnlzIGFuZCBUb20gKCBodHRw
-Oi8vbGlzdHMubGludXh0b2dvLg0Kb3JnL3BpcGVybWFpbC9vcGVuZW1iZWRkZWQtZGV2ZWwvMjAx
-MC1BcHJpbC8wMTk1MjEuaHRtbCApIGFuZCBJIHB1dCANCg0KIyANCkxVQ0ENClRBUkdFVF9WRU5E
-T1IgPSAiLW5vbmUiDQpUT09MQ0hBSU5fVFlQRSA/PSAiZXh0ZXJuYWwiDQoNClRPT0xDSEFJTl9C
-UkFORCA/PSAiY3NsIg0KVE9PTENIQUlOX1BBVEggPSAiL29wdC90aS9jb2Rlc291cmNlcnkiDQoN
-ClRPT0xDSEFJTl9TWVNQQVRIID0gIiR7VE9PTENIQUlOX1BBVEh9L2FybS1ub25lLWxpbnV4LWdu
-dWVhYmkiDQoNClBBVEhfcHJlcGVuZCA9ICIke1RPT0xDSEFJTl9QQVRIfS9iaW46Ig0KcmVxdWly
-ZSANCmNvbmYvZGlzdHJvL2luY2x1ZGUvdG9vbGNoYWluLWV4dGVybmFsLmluYw0KDQppbnNpZGUg
-bXkgDQpvcGVuZW1iZWRkZWQvY29uZi9kaXN0cm8vYW5nc3Ryb20tMjAwOC4xLmNvbmYNCg0KQXMg
-eW91IGtub3csIGNyb3NzLQ0KY29tcGlsZXIgcHJvdmlkZWQgYnkgQ29kZVNvdWNlcnkgaXMgYXJt
-LW5vbmUtbGludXgtZ251ZWFiaS1nY2MgYnV0IEkgDQpnZXQgdGhlIGZvbGxvd2luZyBlcnJvciB3
-aXRoIGxpYnRvb2wtY3Jvc3NfMi4yLjZiLmJiOg0KQnVpbGQgDQpDb25maWd1cmF0aW9uOg0KQkJf
-VkVSU0lPTiAgICAgICAgPSAiMS44LjE5Ig0KTUVUQURBVEFfQlJBTkNIICAgPSANCiJyZWxlYXNl
-LTIwMTAuMTIiDQpNRVRBREFUQV9SRVZJU0lPTiA9ICJkZWMzOTY3Ig0KVEFSR0VUX0FSQ0ggICAg
-ICAgPSANCiJhcm0iDQpUQVJHRVRfT1MgICAgICAgICA9ICJsaW51eC1nbnVlYWJpIg0KTUFDSElO
-RSAgICAgICAgICAgPSANCiJiZWFnbGVib2FyZCINCkRJU1RSTyAgICAgICAgICAgID0gImFuZ3N0
-cm9tIg0KRElTVFJPX1ZFUlNJT04gICAgPSANCiIyMDEwLjctdGVzdC0yMDExMDIyMSINClRBUkdF
-VF9GUFUgICAgICAgID0gImhhcmQiDQpbLi4uXQ0KfCBjaGVja2luZyBmb3IgDQphcm0tYW5nc3Ry
-b20tbGludXgtZ251ZWFiaS1nY2MuLi4gYXJtLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmktZ2NjIC0N
-Cm1hcmNoPWFybXY3LWEgLW10dW5lPWNvcnRleC1hOCAtbWZwdT1uZW9uIC1tZmxvYXQtYWJpPXNv
-ZnRmcCAtbXRodW1iLQ0KaW50ZXJ3b3JrIC1tbm8tdGh1bWINCnwgY2hlY2tpbmcgd2hldGhlciB0
-aGUgQyBjb21waWxlciB3b3Jrcy4uLiBubw0KfCANCmNvbmZpZ3VyZTogZXJyb3I6IGluIGAvaG9t
-ZS9ib2xvZ25pbmkvZGlza3AyL2Rpc2twMi40L3B1cmUtDQpvZS9idWlsZC90bXAvd29yay9hcm12
-N2EtYW5nc3Ryb20tbGludXgtZ251ZWFiaS9saWJ0b29sLWNyb3NzLTIuMi42Yi0NCnIyNy4xL2xp
-YnRvb2wtMi4yLjZiJzoNCnwgY29uZmlndXJlOiBlcnJvcjogQyBjb21waWxlciBjYW5ub3QgY3Jl
-YXRlIA0KZXhlY3V0YWJsZXMNCg0KT2J2aW91c2x5IE9FIGRvZXNuJ3QgaGF2ZSB0byBmaW5kIGFy
-bS1hbmdzdHJvbS1saW51eC0NCmdudWVhYmktZ2NjLCBidXQgd2h5IGRvZXMgaXQgc2VhcmNoIGZv
-ciBhcm0tYW5nc3Ryb20tbGludXgtZ251ZWFiaS1nY2MgDQppbnN0ZWFkIG9mIGFybS1ub25lLWxp
-bnV4LWdudWVhYmktZ2NjID8NCldoYXQncyB3cm9uZyBpbnNpZGUgYW5nc3Ryb20tDQoyMDA4LjEu
-Y29uZiBvciB3aGF0IGFtIEkgbWlzc2luZz8NCg0KVGhhbmsgeW91IGZvciB5b3VyIHN1cHBvcnQN
-Ckx1Y2ENCg0KDQpTdXBlcmEgaSBsaW1pdGk6IHJhZGRvcHBpYSBsYSB2ZWxvY2l0w6AgZGEgMTAg
-YSAyMCBNZWdhISAgIFJpc3Bhcm1pYSBjb24gVHV0dG8gSW5jbHVzbzogdGVsZWZvbm8gKyBhZHNs
-IDIwIG1lZ2EgYSBzb2xpIDI5LDk1IOKCrCBhbCBtZXNlIHBlciBkdWUgYW5uaSEgIFNDT05UTyBE
-SSAyNDAgRVVSTyEgIGh0dHA6Ly9hYmJvbmF0aS50aXNjYWxpLml0L3RlbGVmb25vLWFkc2wvcHJv
-ZG90dGkvdGMvdHV0dG9pbmNsdXNvLz9XVC5tY19pZD0wMWZ3IA0KDQpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KT3BlbmVtYmVkZGVkLWRldmVsIG1haWxp
-bmcgbGlzdA0KT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCmh0dHA6
-Ly9saXN0cy5saW51eHRvZ28ub3JnL2NnaS1iaW4vbWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRk
-ZWQtZGV2ZWwNCg==
+On 19/02/2011 12:53, Andreas Mueller wrote:
+> * This patch removes the absolute path in sysroots/<arch>/usr/lib/libstdc++.la
+> *
+> * It was build tested wih clean tmp for xfce46-image. Additional known
+> * QA-RPATH-error-candidates were checked for successful build:
+> *
+> * aspell-0.60.6-r0
+> * curl-7.21.2-r4.0
+> * clutter-box2d-0.10.0-r2.0+git4e72b9c135a9439b82d801c62422531db611f98b
+> * enchant-1.6.0-r2
+> * gnome-vfs-2.24.1-r3
+> * libcdio-0.82-r3.0
+> * libsoup-2.2.100-r1:
+> * neon-0.25.5-r4
+> * schroedinger-1.0.9-r0
+> * tiff-3.9.4+4.0.0beta6-r0
+> *
+> * Build environment was (RPATH QA errors treated as fatal / acl fixed manually)
+> *
+> * BB_VERSION        = "1.10.2"
+> * METADATA_BRANCH   = "cross-bbclass-test"
+> * METADATA_REVISION = "a44300e"
+> * TARGET_ARCH       = "arm"
+> * TARGET_OS         = "linux-gnueabi"
+> * MACHINE           = "overo"
+> * DISTRO            = "angstrom"
+> * DISTRO_VERSION    = "2010.7-test-20110219"
+> * TARGET_FPU        = "hard"
+> *
+> * Notes:
+> * - To have effect, gcc-cross has to be rebuild (changing all gcc packed
+> *   was not an option)
+> * - This patch does not affect libtool-2.4 distos
+> * - The story is found at
+> *   http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-February/030115.html
+>
+> Signed-off-by: Andreas Mueller<schnitzeltony@gmx.de>
+Acked-by: Eric Bénard <eric@eukrea.com>
 
 
