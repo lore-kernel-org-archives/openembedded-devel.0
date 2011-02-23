@@ -1,40 +1,31 @@
-Received: from mail-bw0-f50.google.com ([209.85.214.50])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PsDvw-0008J8-C5
+	(envelope-from <mickael.chazaux@gmail.com>) id 1PsE9q-0000Bm-Hc
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 13:35:08 +0100
-Received: by bwz2 with SMTP id 2so3654bwz.9
+	Wed, 23 Feb 2011 13:49:30 +0100
+Received: by vxd7 with SMTP id 7so3326988vxd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 04:33:49 -0800 (PST)
+	Wed, 23 Feb 2011 04:48:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=VtFhVULTX0U/5k91RYfnakmsZKXsBCT5QUBSPYKoeKc=;
-	b=XWopPuZbulbIB8hLehYCKQgDIqTh3E8RA9PQXUlB+ZyVmEiJwZSLX1va5W77Kudacj
-	Pl4ZH94QVQOCUVu6VTvFSB9nfTitKYHbxkd1kXaRqC50reyMXGNVTuHQqlVW8tNPYkER
-	hxl8rYRL1eHabIxiRUdidTZg19BVA1Slr7C4Q=
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=Nlh/2mgogqM5RzQoiE3NWZSfTeaLeuheHG1X7MNphek=;
+	b=iQrtSMnSmd1lxsuwR0JIdcwvEIlB9t6uI8Ehlv2oJXv1CPRYmLJwWAnNldB7Cm/8os
+	F92yQ3g00kuROqAOSXBv5AOpVTa67pcsfkPn5EeI3ohjE30ZDZH23K2mSI1VRRCJ9k5Q
+	gI+6If4+CqnOTjMMsrrWxmAbaqcPc4HHdJ+Xk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=f8QPZqmhXOI5JUAMEb/LaeWfWKGN6quo3SzpYJPKyzeA1UgZlyivvdnAqTDQiWqZre
-	UYzSp3KwkXB3O+QwzQ6itYYHZsHCQvLhpMmuSw9CswF224o2E7emw/B3X/V6tGX/i1Q6
-	h2KYwgyhGf7CfMKNq3AkB9INAOUMwh6rBhAiU=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=D6LA4woj/gwBcXMd829lOsgJ+3/KqKiHxtxhlo0eOyQxUBW9CW4iEXqANeuZWPbqzN
+	djEXiZmFXP5wZawf6jCJutukjhqG2sjXpQDCiMP/LCvoZBYEjpE3eDmcOoA2l49iNTxr
+	DpmzWU9FHGuZDvjQejH+majdsOWiuiS7HtVWc=
 MIME-Version: 1.0
-Received: by 10.204.50.196 with SMTP id a4mr3559231bkg.213.1298464429234; Wed,
-	23 Feb 2011 04:33:49 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.119.207 with HTTP; Wed, 23 Feb 2011 04:33:49 -0800 (PST)
-In-Reply-To: <20110223093217.GA28556@mi.fu-berlin.de>
-References: <AANLkTimGuqfEAYzvk3+4aH=rPWHb=Q2gNY4zWLwhAuRi@mail.gmail.com>
-	<20110223093217.GA28556@mi.fu-berlin.de>
-Date: Wed, 23 Feb 2011 12:33:49 +0000
-X-Google-Sender-Auth: CdHYtvFnYdq6Hbl6GvVY_-5hu-k
-Message-ID: <AANLkTinjgb5wCLs=zgaTNcJN+7ZSdwS5rYDdK8byzNtq@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by 10.52.157.70 with SMTP id wk6mr5936945vdb.219.1298465290380; Wed,
+	23 Feb 2011 04:48:10 -0800 (PST)
+Received: by 10.220.180.7 with HTTP; Wed, 23 Feb 2011 04:48:10 -0800 (PST)
+Date: Wed, 23 Feb 2011 13:48:10 +0100
+Message-ID: <AANLkTinD5vHUrhcuB1McLOkG4M+K7T5zAvCX276Xti8a@mail.gmail.com>
+From: Mickael Chazaux <mickael.chazaux@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: libcap2 build failure
+Subject: VMware disk image type
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,28 +39,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2011 12:35:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 23 Feb 2011 12:49:30 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, Feb 23, 2011 at 09:32, Henning Heinold <heinold@inf.fu-berlin.de> w=
-rote:
-> On Wed, Feb 23, 2011 at 02:54:02AM +0000, Otavio Salvador wrote:
-...
-> gnutoo hitting this too. It's a problem with the kernelheaders, because l=
-ibpcap includes a kernelheader
-> but some how not the types definition header. But dont know offhand if he=
- solved it.
+Hi,
 
-I am looking into that, after talking to gnutoo.
+I see there is a vmware.conf in conf/machine, but it does not generate
+vmdk (vmware virtual disk files) files. Here are the steps I take to
+do that:
 
-Cheers,
+- create an empty file the size wanted (with dd),
+- format it to ext3 (mkfs.ext3 myfile)
+- mount it loopback (mount -o loop myfile /mnt)
+- untar the OE-generated rootfs in /mnt
+- create a /boot/extlinux.conf [1],
+- install extlinux in /boot (extlinux -i /mnt/boot)
+- umount,
+- convert to vmdk (using qemu-img -O vmdk myfile myfile.vmdk)
+- boot it in vmware.
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Is it possible to add a "vmdk" image to openembedded to do this automatically?
+
+Regards,
+
+Mickael
+
+[1]
+/boot/extlinux.conf contents :
+
+label a
+kernel /boot/bzImage
+append root=/dev/sda rw
 
 
