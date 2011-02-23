@@ -1,37 +1,35 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PsFYa-0004kD-Vf
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 15:19:08 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id CDB6D314DFE6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PsFij-0008LH-EA for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Feb 2011 15:29:38 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PsFhN-00018z-JU for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Feb 2011 15:28:13 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Feb 2011 15:28:13 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 15:17:51 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id 8behMnfGzEgy
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 15:17:46 +0100 (CET)
-Received: from [172.22.22.61] (ip-94-79-168-47.unitymediagroup.de
-	[94.79.168.47])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id EE0E6314DFC5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 15:17:45 +0100 (CET)
-Message-ID: <4D651709.3070909@opendreambox.org>
-Date: Wed, 23 Feb 2011 15:17:45 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.14) Gecko/20110208 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
+	Wed, 23 Feb 2011 15:28:13 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTimy_TtONvPFjaGCUV0qxaM7qF0ENBx7A6wzRnPZ@mail.gmail.com>	<4D63F7F9.7000804@eukrea.com>
-	<4D63FF5C.30400@opendreambox.org>
-	<20110222201107.GB3970@localhost.jama.net>
-In-Reply-To: <20110222201107.GB3970@localhost.jama.net>
-Subject: Re: Weird behaviour with PPP
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 23 Feb 2011 15:28:01 +0100
+Message-ID: <ik35hh$oll$1@dough.gmane.org>
+References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>	<1297709209-6602-1-git-send-email-filip.zyzniewski@gmail.com>	<ik29om$8m7$1@dough.gmane.org>	<AANLkTimvzFij9bx0J8PbaWv1+_9TG4p4+vHPQH2DZnvV@mail.gmail.com>	<4D64CAC1.8050100@eukrea.com>
+	<AANLkTi=2a4s-CfSktJ8P3MHSSg78ZU0CrFYqK+YuxiKq@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <AANLkTi=2a4s-CfSktJ8P3MHSSg78ZU0CrFYqK+YuxiKq@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCHv2] linux-firmware: split into bus specific packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,47 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2011 14:19:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 23 Feb 2011 14:29:38 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi Martin,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On 02/22/2011 09:11 PM, Martin Jansa wrote:
-> On Tue, Feb 22, 2011 at 07:24:28PM +0100, Andreas Oberritter wrote:
->> Hi,
->>
->> On 02/22/2011 06:52 PM, Eric Benard wrote:
->>> On 22/02/2011 18:22, Mickael Chazaux wrote:
->>>> I have a hard time figuring out why bitbake seems to mix versions of
->>>> ppp... Any ideas?
->>>>
->>> strange, which distro, git tag, bitbake version are you using ?
->>>
->>> Both bitbake ppp-2.4.5 & bitbake -b
->>> openembedded/recipes/ppp/ppp_2.4.5.bb work fine here (angstrom 2008.1,
->>> armv5 target, bitbake 1.12.0).
->>
->> I don't think this has anything to do with ppp. I faced the same issue
->> with a local recipe, of which an older version had been built before.
->> When packaging, the old version was used. A new workdir was created for
->> the old version during this step and the resulting packages were empty.
->> No recipe existed for this old version at that time, i.e. PR had already
->> been increased to 1.0, but 0.0 was used by bitbake.
->>
->> In the end, I deleted bitbake's cache and all files matching the
->> package's name to get rid of the annoying problem. I think there were
->> pstage packages of the old version lying around.
+On 23-02-11 14:26, Filip Zyzniewski wrote:
+> On 2/23/11, Eric Benard <eric@eukrea.com> wrote:
+>> As already said before, there is an other version of this recipe in
+>> recipes/firmwares/linux-firmware.inc
+>> which is already splitted in small packages for some firmware such as :
+>> firmware-atheros-ar9271.bb
+>> firmware-marvell-sd8688_10.38.1-p25.bb
 > 
-> This wrong behavior is quite common ie after changing PACKAGE_ARCH, see:
-> http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg04280.html
+> So you suggest removing recipes/linux-firmware altogether?
+> If so, recipes/firmwares/linux-firmware.inc would need a lot of
+> reshaping to provide what I need (bus specific packages).
 
-In that thread, if I understood correctly, Richard suggested that
-packaged staging could solve the problem. But that doesn't seem to be
-the case. Do you know why?
+I have no strong opinion on that, but I need a wl12xx package before the
+end of the week due to deadlines, so I added that to the existing
+linux-firmware recipe.
 
-Regards,
-Andreas
+FWIW, if the split goes thru, proper licensing info needs to get added
+to the subpackages as well.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNZRlxMkyGM64RGpERAnZiAJ9zUQNuUAMJ/BCnUNQ7j9SoIMFjRACaAtVR
+/crz6+iArTErc59iLcP/yUA=
+=idnZ
+-----END PGP SIGNATURE-----
 
 
 
