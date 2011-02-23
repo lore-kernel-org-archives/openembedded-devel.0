@@ -1,34 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ps8Jv-0000SS-0X for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 07:35:31 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ps8If-0002eI-J6 for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 07:34:13 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 07:34:13 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1Ps8vA-0001WQ-EP
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Feb 2011 08:14:00 +0100
+Received: by qyk27 with SMTP id 27so2479088qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 07:34:13 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 23 Feb 2011 07:33:58 +0100
-Message-ID: <ik29om$8m7$1@dough.gmane.org>
+	Tue, 22 Feb 2011 23:12:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=VUcthY7mx7J7B9PtCkSzIPV2jxYk4piB/glyfizV76E=;
+	b=W+jVvVNnZxrngcMZP6uVxbE27oTfwTK35XuFbsHIHty5toqsbF2pU+7gmsBC6v4uuO
+	U6T7e74+FyDxxayyc1zQ+q8DPTme9JTPUbUJ7yCHmIj0M1PhlxfFqMizpE9BCtJtar1I
+	F+xyhYf4vLBJHdj7pN74jSQnx8kjWZjG541kQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=UjCS2AuFpcJGL/nwYORxyxUgecg5W0gh8MWSy7c+dydjJrlQhZD5dFx49sn6202KG4
+	lbT19k8KGVw/ad4kfGxCo0bW6HOVoE+6DXI7ld2wTlmlviD/FTd3M0hlQ9veVCd4MPIu
+	qigkva4876bbaT0wlBn2GcdqOG4hTkOtNoXC8=
+MIME-Version: 1.0
+Received: by 10.229.241.194 with SMTP id lf2mr2707071qcb.222.1298445160264;
+	Tue, 22 Feb 2011 23:12:40 -0800 (PST)
+Received: by 10.229.193.10 with HTTP; Tue, 22 Feb 2011 23:12:39 -0800 (PST)
+In-Reply-To: <ik29om$8m7$1@dough.gmane.org>
 References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
 	<1297709209-6602-1-git-send-email-filip.zyzniewski@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1297709209-6602-1-git-send-email-filip.zyzniewski@gmail.com>
-X-Enigmail-Version: 1.0.1
+	<ik29om$8m7$1@dough.gmane.org>
+Date: Wed, 23 Feb 2011 08:12:39 +0100
+Message-ID: <AANLkTimvzFij9bx0J8PbaWv1+_9TG4p4+vHPQH2DZnvV@mail.gmail.com>
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCHv2] linux-firmware: split into bus specific packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,44 +45,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2011 06:35:31 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 23 Feb 2011 07:14:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 2/23/11, Koen Kooi <k.kooi@student.utwente.nl> wrote:
 
-On 14-02-11 19:46, Filip Zyzniewski wrote:
-> The whole reposotiry is about 24MB in size and it's rarely needed
-> whole. It is now splitted into bus specific subpackages (and some
-> device-specific for devices on a bus like SPI or SBUS) all depended
-> on by the linux-firmware package.
-> 
-> Suggested improvement - split bus packages furtherly into device
-> packages (so that we can either pull in a whole bus or just one
-> device).
-> 
-> Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
-> ---
->  recipes/linux-firmware/linux-firmware_git.bb |  144 +++++++++++++++++++++++++-
->  1 files changed, 142 insertions(+), 2 deletions(-)
+> The wl12xx files need to go into /lib/firmware, not
+> /lib/firmware/ti-connectivity
 
-> +
-> +FILES_${PN}-wl12xx = "/lib/firmware/ti-connectivity/wl1271-*.bin"
+This layout is copied verbatim from the linux-firmware git repository.
+Maybe I'll just report it upstream?
 
-The wl12xx files need to go into /lib/firmware, not
-/lib/firmware/ti-connectivity
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNZKpWMkyGM64RGpERAgnPAKC4Yxrzomw/SWENX3F7t329lYvW8ACePhwJ
-ttjmMyrgkry0bjZh5Derjp0=
-=9TpP
------END PGP SIGNATURE-----
-
+bye,
+Filip Zyzniewski
 
 
