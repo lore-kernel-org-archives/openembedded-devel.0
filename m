@@ -1,38 +1,33 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from einhorn.in-berlin.de ([192.109.42.8])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1Ps95K-0001wE-Dk
+	(envelope-from <sledz@dresearch.de>) id 1Ps9g3-0007i3-0B
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 08:24:30 +0100
-Received: by qwi2 with SMTP id 2so1770506qwi.6
+	Wed, 23 Feb 2011 09:02:27 +0100
+X-Envelope-From: sledz@dresearch.de
+X-Envelope-To: <openembedded-devel@lists.openembedded.org>
+Received: from mobil-400-586.intern.dresearch.de
+	(p57A20787.dip0.t-ipconnect.de [87.162.7.135]) (authenticated bits=0)
+	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
+	p1N7tB65003919
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Feb 2011 23:23:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=lrvPmWHHtKEdlkduS9tf7r41k9g2MsupP/pZiRDQ+5w=;
-	b=QHgNnhn0g1AvUVhUGN9L4jY8q20I932hGh+lzQ2DtrEoC9ikHzCRbwJc7xWUZb8588
-	5+DNXqFrEpWC/xtWatgczobqF2up1Bv1Yn4At/kDTD9OFZ4IQw7KMyopy6ipBFtN2QvN
-	nUzNGqJvTsVeU805xAWkvwWoTA4lcuZHbMKXE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	b=RiTzi187vyzi5gql4Ak0Qd2G2GHIho4EVKvBfaM31es8EeAdqShO02Sp1U1PP7rMIK
-	mfS7yjugD7hofgsr8bojzQxUCShtc2aie1YiZhrNCtbyh+10b8E+rAqLIjFOGk3l3oKy
-	hL9GGJncCGTIiPn2qmC0LXqXLKs4YGIPJHQdo=
+	Wed, 23 Feb 2011 08:55:12 +0100
+Received: from mobil-400-586.intern.dresearch.de (localhost [IPv6:::1])
+	by mobil-400-586.intern.dresearch.de (Postfix) with ESMTP id 65BD6217B7
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Feb 2011 08:55:11 +0100 (CET)
+Message-ID: <4D64BD5E.6040805@dresearch.de>
+Date: Wed, 23 Feb 2011 08:55:10 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.16) Gecko/20101125 SUSE/3.0.11 Lightning/1.0b1
+	Thunderbird/3.0.11
 MIME-Version: 1.0
-Received: by 10.229.78.160 with SMTP id l32mr2100843qck.298.1298445790574;
-	Tue, 22 Feb 2011 23:23:10 -0800 (PST)
-Received: by 10.229.193.10 with HTTP; Tue, 22 Feb 2011 23:23:10 -0800 (PST)
-In-Reply-To: <ik29om$8m7$1@dough.gmane.org>
-References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
-	<1297709209-6602-1-git-send-email-filip.zyzniewski@gmail.com>
-	<ik29om$8m7$1@dough.gmane.org>
-Date: Wed, 23 Feb 2011 08:23:10 +0100
-Message-ID: <AANLkTi=rHvkbehQGEMgBdeO_7wFgGH-8EO+z-VVHcr3n@mail.gmail.com>
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
-To: David Woodhouse <David.Woodhouse@intel.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCHv2] linux-firmware: split into bus specific packages.
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
+X-MIME-Autoconverted: from 8bit to quoted-printable by einhorn.in-berlin.de id
+	p1N7tB65003919
+Subject: net-snmp-svn-r7.0 do_compile failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,36 +41,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2011 07:24:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 23 Feb 2011 08:02:27 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Again a clean build:
 
-we've come across this issue with linux-firmware:
+OE:hipox sledz@mobil-400-586:~/work/openembedded> bitbake net-snmp
+...
 
----------- Forwarded message ----------
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 23 Feb 2011 07:33:58 +0100
-Subject: Re: [oe] [PATCHv2] linux-firmware: split into bus specific packages.
-To: openembedded-devel@lists.openembedded.org
+Build Configuration:
+BB_VERSION        =3D "1.12.0"
+METADATA_BRANCH   =3D "org.openembedded.dev"
+METADATA_REVISION =3D "8e4bd2f"
+TARGET_ARCH       =3D "arm"
+TARGET_OS         =3D "linux-gnueabi"
+MACHINE           =3D "hipox"
+DISTRO            =3D "angstrom"
+DISTRO_VERSION    =3D "2010.7-test-20110223"
+TARGET_FPU        =3D "soft"
 
-The wl12xx files need to go into /lib/firmware, not
-/lib/firmware/ti-connectivity
------------------------------------------------------
+...
+libtool: link: arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te -mtune=3Da=
+rm926ej-s -Wl,-rpath-link -Wl,/home/sledz/work/OE-testing/tmp.6/sysroots/=
+armv5te-angstrom-linux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=3Dgnu -mt=
+humb-interwork -mno-thumb -DNETSNMP_ENABLE_IPV6 -isystem/home/sledz/work/=
+OE-testing/tmp.6/sysroots/armv5te-angstrom-linux-gnueabi/usr/include -fex=
+pensive-optimizations -frename-registers -fomit-frame-pointer -O2 -ggdb2 =
+-Ulinux -Dlinux=3Dlinux -Wall -Winline -Wstrict-prototypes -Wwrite-string=
+s -Wcast-qual -Wno-char-subscripts -o .libs/snmpd .libs/snmpd.o -Wl,-rpat=
+h-link -Wl,/home/sledz/work/OE-testing/tmp.6/sysroots/armv5te-angstrom-li=
+nux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=3Dgnu  -L/home/sledz/work/OE=
+-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/net-=
+snmp/agent/.libs -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstro=
+m-linux-gnueabi/net-snmp-svn-r7.0/net-snmp/agent/helpers/.libs
+-L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/n=
+et-snmp-svn-r7.0/net-snmp/snmplib/.libs -L/home/sledz/work/OE-testing/tmp=
+.6/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib -L/home/sledz/work/OE-=
+testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/net-s=
+nmp/snmplib -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-lin=
+ux-gnueabi/net-snmp-svn-r7.0/net-snmp/agent/helpers ./.libs/libnetsnmpage=
+nt.so helpers/.libs/libnetsnmphelpers.so ./.libs/libnetsnmpmibs.so /home/=
+sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-=
+svn-r7.0/net-snmp/agent/helpers/.libs/libnetsnmphelpers.so /home/sledz/wo=
+rk/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0=
+/net-snmp/agent/.libs/libnetsnmpagent.so /home/sledz/work/OE-testing/tmp.=
+6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/net-snmp/snmplib/=
+.libs/libnetsnmp.so -ldl ../snmplib/.libs/libnetsnmp.so -lcrypto -lssl
+./.libs/libnetsnmpmibs.so: undefined reference to `pthread_create'
+collect2: ld returned 1 exit status
+make[1]: *** [snmpd] Error 1
 
-Grepping through kernel sources shows that that's the case:
-
-filip.zyzniewski@jlime:/home/git/linux-hpc/drivers$ grep -r 'wl12.*\.bin' .
-./net/wireless/wl1251/wl1251.h:#define WL1251_FW_NAME "wl1251-fw.bin"
-./net/wireless/wl1251/wl1251.h:#define WL1251_NVS_NAME "wl1251-nvs.bin"
-./net/wireless/wl12xx/wl1271.h:#define WL1271_FW_NAME "wl1271-fw.bin"
-./net/wireless/wl12xx/wl1271.h:#define WL1271_NVS_NAME "wl1271-nvs.bin"
-filip.zyzniewski@jlime:/home/git/linux-hpc/drivers$
-
-Could you move these files to a location requested by the kernel?
-
-
-bye,
-Filip Zyzniewski
+--=20
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@DResearch.de
+Fax: +49 30 515932-299
+Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
