@@ -1,35 +1,49 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PsFij-0008LH-EA for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 15:29:38 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PsFhN-00018z-JU for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 15:28:13 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 15:28:13 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1PsFuI-0000FA-G8
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Feb 2011 15:41:34 +0100
+Received: by fxm8 with SMTP id 8so3641247fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 15:28:13 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 23 Feb 2011 06:40:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=UIn10hLIeBPm43XklY8BFn6tw7QDn+uS8ZvtRqr4syY=;
+	b=dJnvqERMqCQXSIbzwfog6NgUhxpO7LoSZ/wc3rKWyj/JayQ0b192nOYdlbQA5s2BgG
+	ziQnn9NcdBQkjcDyh9sasFZ59utWa7GxVm8fJfkHWbiIJVB9pcwvVEdsSDs7/fk36d1Y
+	E5Z+hV+uHVNqqTAMq/I2M1vRB6X5zwJFi/Bro=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=nLqBP3Ccpib/u9ltQYqj7c4/C7TwEFE9/tyrW5S5v/fuQiyb3eLxPmey+pR+1suoGA
+	tRuSUuukxNzmsqFMLx8F/s6CdRIoDkjbEmM/84h24w5WjR+4/fu1gAz3u0NOTXvTNKz0
+	bGeOgUEcXnJQkZyyFTy/tJpCQtaLLsYuC9/R0=
+Received: by 10.223.86.16 with SMTP id q16mr5227403fal.58.1298471649948;
+	Wed, 23 Feb 2011 06:34:09 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id n1sm3662027fam.40.2011.02.23.06.34.08
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 23 Feb 2011 06:34:08 -0800 (PST)
+Date: Wed, 23 Feb 2011 15:34:02 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 23 Feb 2011 15:28:01 +0100
-Message-ID: <ik35hh$oll$1@dough.gmane.org>
-References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>	<1297709209-6602-1-git-send-email-filip.zyzniewski@gmail.com>	<ik29om$8m7$1@dough.gmane.org>	<AANLkTimvzFij9bx0J8PbaWv1+_9TG4p4+vHPQH2DZnvV@mail.gmail.com>	<4D64CAC1.8050100@eukrea.com>
-	<AANLkTi=2a4s-CfSktJ8P3MHSSg78ZU0CrFYqK+YuxiKq@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <AANLkTi=2a4s-CfSktJ8P3MHSSg78ZU0CrFYqK+YuxiKq@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCHv2] linux-firmware: split into bus specific packages.
+Message-ID: <20110223143402.GD3478@jama.jama.net>
+References: <1298466445-16486-5-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-6-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-7-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-8-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-9-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-10-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-11-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-12-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-13-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-14-git-send-email-otavio@ossystems.com.br>
+MIME-Version: 1.0
+In-Reply-To: <1298466445-16486-14-git-send-email-otavio@ossystems.com.br>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [PATCH 13/14] linux (2.6.37): add 2.6.37.1 stable patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,42 +57,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2011 14:29:38 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 23 Feb 2011 14:41:34 -0000
+X-Groupsio-MsgNum: 29624
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="kvUQC+jR9YzypDnK"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--kvUQC+jR9YzypDnK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 23-02-11 14:26, Filip Zyzniewski wrote:
-> On 2/23/11, Eric Benard <eric@eukrea.com> wrote:
->> As already said before, there is an other version of this recipe in
->> recipes/firmwares/linux-firmware.inc
->> which is already splitted in small packages for some firmware such as :
->> firmware-atheros-ar9271.bb
->> firmware-marvell-sd8688_10.38.1-p25.bb
-> 
-> So you suggest removing recipes/linux-firmware altogether?
-> If so, recipes/firmwares/linux-firmware.inc would need a lot of
-> reshaping to provide what I need (bus specific packages).
+On Wed, Feb 23, 2011 at 01:07:24PM +0000, Otavio Salvador wrote:
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>  recipes/linux/linux_2.6.37.bb |    5 ++++-
+>  1 files changed, 4 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/recipes/linux/linux_2.6.37.bb b/recipes/linux/linux_2.6.37.bb
+> index 39c0c08..e11af81 100644
+> --- a/recipes/linux/linux_2.6.37.bb
+> +++ b/recipes/linux/linux_2.6.37.bb
+> @@ -1,6 +1,6 @@
+>  require linux.inc
+> =20
+> -PR =3D "r2"
+> +PR =3D "r3"
+> =20
+>  # Mark archs/machines that this kernel supports
+>  DEFAULT_PREFERENCE =3D "-1"
+> @@ -20,6 +20,7 @@ DEFAULT_PREFERENCE_visstrim_m10 =3D "1"
+>  # DEFAULT_PREFERENCE_om-gta01 =3D "1"
+> =20
+>  SRC_URI =3D "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.b=
+z2;name=3Dkernel \
+> +           ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/patch-${PV}.1.bz2;a=
+pply=3Dyes;name=3Dstablepatch \
+>             file://defconfig "
+> =20
+>  SRC_URI_append_om-gta02 =3D " \
+> @@ -33,3 +34,5 @@ SRC_URI_append_om-gta01 =3D " \
+> =20
+>  SRC_URI[kernel.md5sum] =3D "c8ee37b4fdccdb651e0603d35350b434"
+>  SRC_URI[kernel.sha256sum] =3D "edbf091805414739cf57a3bbfeba9e87f5e74f97e=
+38f04d12060e9e0c71e383a"
+> +SRC_URI[stablepatch.md5sum] =3D "7693d1d32ed39346cc988e0f027e5890"
+> +SRC_URI[stablepatch.sha256sum] =3D "c33bfa59828a9ff6916993ec008967a8c1d7=
+1a18b743ee15f4280e773ef4baaf"
 
-I have no strong opinion on that, but I need a wl12xx package before the
-end of the week due to deadlines, so I added that to the existing
-linux-firmware recipe.
+I'll push mine then :).
 
-FWIW, if the split goes thru, proper licensing info needs to get added
-to the subpackages as well.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-regards,
+--kvUQC+jR9YzypDnK
+Content-Type: application/pgp-signature
 
-Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v2.0.17 (GNU/Linux)
 
-iD8DBQFNZRlxMkyGM64RGpERAnZiAJ9zUQNuUAMJ/BCnUNQ7j9SoIMFjRACaAtVR
-/crz6+iArTErc59iLcP/yUA=
-=idnZ
+iEYEARECAAYFAk1lGtkACgkQN1Ujt2V2gBx06QCdGcIhI+LdOfvYAmZPZv1Gx6Cw
+yL4An1MO7rZikBclG0beWQmj9fxL6g6l
+=D6pn
 -----END PGP SIGNATURE-----
 
-
-
+--kvUQC+jR9YzypDnK--
