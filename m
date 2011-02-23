@@ -1,32 +1,32 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PsMS7-0000dJ-3R
+	(envelope-from <Tom_Rini@mentor.com>) id 1PsMUq-0002Ak-ON
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 22:40:55 +0100
+	Wed, 23 Feb 2011 22:43:44 +0100
 Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
 	by relay1.mentorg.com with esmtp 
-	id 1PsMQo-0003z0-I5 from Tom_Rini@mentor.com 
+	id 1PsMTY-0004GJ-Rt from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 13:39:34 -0800
+	Wed, 23 Feb 2011 13:42:24 -0800
 Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
 	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 23 Feb 2011 13:39:34 -0800
+	SMTPSVC(6.0.3790.4675); Wed, 23 Feb 2011 13:42:24 -0800
 Received: from [172.30.80.151] ([172.30.80.151]) by na2-mail.mgc.mentorg.com
 	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 23 Feb 2011 14:39:33 -0700
-Message-ID: <4D657E89.9050706@mentor.com>
-Date: Wed, 23 Feb 2011 14:39:21 -0700
+	Wed, 23 Feb 2011 14:42:23 -0700
+Message-ID: <4D657F34.5050200@mentor.com>
+Date: Wed, 23 Feb 2011 14:42:12 -0700
 From: Tom Rini <tom_rini@mentor.com>
 Organization: Mentor Graphics Corporation
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4D64BD5E.6040805@dresearch.de>
-In-Reply-To: <4D64BD5E.6040805@dresearch.de>
-X-OriginalArrivalTime: 23 Feb 2011 21:39:33.0357 (UTC)
-	FILETIME=[28D791D0:01CBD3A2]
-Subject: Re: net-snmp-svn-r7.0 do_compile failed
+References: <AANLkTinD5vHUrhcuB1McLOkG4M+K7T5zAvCX276Xti8a@mail.gmail.com>
+In-Reply-To: <AANLkTinD5vHUrhcuB1McLOkG4M+K7T5zAvCX276Xti8a@mail.gmail.com>
+X-OriginalArrivalTime: 23 Feb 2011 21:42:23.0679 (UTC)
+	FILETIME=[8E5CA4F0:01CBD3A2]
+Subject: Re: VMware disk image type
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,35 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2011 21:40:56 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 23 Feb 2011 21:43:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 02/23/2011 12:55 AM, Steffen Sledz wrote:
-> Again a clean build:
+On 02/23/2011 05:48 AM, Mickael Chazaux wrote:
+> Hi,
 >
-> OE:hipox sledz@mobil-400-586:~/work/openembedded>  bitbake net-snmp
-> ...
+> I see there is a vmware.conf in conf/machine, but it does not generate
+> vmdk (vmware virtual disk files) files. Here are the steps I take to
+> do that:
 >
-> Build Configuration:
-> BB_VERSION        = "1.12.0"
-> METADATA_BRANCH   = "org.openembedded.dev"
-> METADATA_REVISION = "8e4bd2f"
-> TARGET_ARCH       = "arm"
-> TARGET_OS         = "linux-gnueabi"
-> MACHINE           = "hipox"
-> DISTRO            = "angstrom"
-> DISTRO_VERSION    = "2010.7-test-20110223"
-> TARGET_FPU        = "soft"
+> - create an empty file the size wanted (with dd),
+> - format it to ext3 (mkfs.ext3 myfile)
+> - mount it loopback (mount -o loop myfile /mnt)
+> - untar the OE-generated rootfs in /mnt
+> - create a /boot/extlinux.conf [1],
+> - install extlinux in /boot (extlinux -i /mnt/boot)
+> - umount,
+> - convert to vmdk (using qemu-img -O vmdk myfile myfile.vmdk)
+> - boot it in vmware.
 >
-> ...
-> libtool: link: arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s -Wl,-rpath-link -Wl,/home/sledz/work/OE-testing/tmp.6/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=gnu -mthumb-interwork -mno-thumb -DNETSNMP_ENABLE_IPV6 -isystem/home/sledz/work/OE-testing/tmp.6/sysroots/armv5te-angstrom-linux-gnueabi/usr/include -fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2 -ggdb2 -Ulinux -Dlinux=linux -Wall -Winline -Wstrict-prototypes -Wwrite-strings -Wcast-qual -Wno-char-subscripts -o .libs/snmpd .libs/snmpd.o -Wl,-rpath-link -Wl,/home/sledz/work/OE-testing/tmp.6/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=gnu  -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/net-snmp/agent/.libs -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/net-snmp/agent/helpers/.libs
-> -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/net-snmp/snmplib/.libs -L/home/sledz/work/OE-testing/tmp.6/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/net-snmp/snmplib -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/net-snmp/agent/helpers ./.libs/libnetsnmpagent.so helpers/.libs/libnetsnmphelpers.so ./.libs/libnetsnmpmibs.so /home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/net-snmp/agent/helpers/.libs/libnetsnmphelpers.so /home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/net-snmp/agent/.libs/libnetsnmpagent.so /home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/net-snmp/snmplib/.libs/libnetsnmp.so -ldl ../snmplib/.libs/libnetsnmp.so -lcrypto -lssl
-> ./.libs/libnetsnmpmibs.so: undefined reference to `pthread_create'
-> collect2: ld returned 1 exit status
-> make[1]: *** [snmpd] Error 1
+> Is it possible to add a "vmdk" image to openembedded to do this automatically?
 
-Does log.do_configure say anything about pthreads?
+Yes, patches would be welcome.  This would reside in conf/bitbake.conf. 
+  See the ubi/ubifs image examples for how to generate slightly complex 
+images like this.  And I would recommend adding vmdk.ext[234] as the 
+image names (and supply at least one of them, someone else might step up 
+and do the regex for the others if you don't).  Thanks!
 
 -- 
 Tom Rini
