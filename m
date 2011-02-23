@@ -1,37 +1,37 @@
 Received: from mail-gw0-f50.google.com ([74.125.83.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PsETE-0000sE-HW
+	(envelope-from <otavio.salvador@gmail.com>) id 1PsETR-0000sC-16
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 14:09:33 +0100
-Received: by gwaa20 with SMTP id a20so1107697gwa.9
+	Wed, 23 Feb 2011 14:09:45 +0100
+Received: by mail-gw0-f50.google.com with SMTP id a20so1107689gwa.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 05:08:07 -0800 (PST)
+	Wed, 23 Feb 2011 05:08:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
 	:x-mailer:in-reply-to:references;
-	bh=HJQ0De1gIjh9NzlZrgbg3zM0YwLZ+2bNby1piars68c=;
-	b=WeBXwNCGwgmr057G8eTV9QzKw9N2flouPbJjkmmT7ncvUBs8gRHa+LncQh6r/m/SW4
-	f0ajW0NXiivI3dNwHmzDkms9HcSQOJYlZ2bwBBjZLHh3/QU3kFDgYtrL08SwLMhguL/l
-	M+i4yLlzTMoBSSCZarBwkHAboFvCGzTr7Wz78=
+	bh=yJG27rRfOas1Yb40A2+OWsDQArlQx4iyzMIij9lpqMY=;
+	b=mBVsLQwwsNNyqfjIlcteMTqVmL/H+aiR47ILfjTjGU92+LTdvAzzEBxuWfIaCM2rz1
+	Z6uwL3kvqTQ75h3pEYy59z0Mj5IBrAed4Lif4msNC4b3Cn3r1wMAQwdV96W1oEh6luF9
+	rv8Bmq6vlZ98yaN7d3+WRaE52Rn8iII9V8V/c=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=Xc0CAheYpFjBsLFBhFdNJcG24XB+Q19OkAgKhsogDasJouN3ELs7fe5odA/XyJYUoc
-	GAoPKr9Ehq8QtkHSW0ZrSexYr7cbvBSgjS58w9eHoJ3EdTHj+iCy3bGXsgX8WXakBnHm
-	Kdb5cpsaj8ZFk53C+Bh2Ny2b2/ZfNc8jSAXag=
-Received: by 10.236.195.6 with SMTP id o6mr3038574yhn.33.1298466487059;
-	Wed, 23 Feb 2011 05:08:07 -0800 (PST)
+	b=qjOuer6umw8aLyMydxNX35euOp9aCjr/XhSVyivBppNxnek58rsWnAXwNdFtX7dYZ5
+	MU68vw3Xhflu5pXxISmc+9IBcG8ltdQ5MLlQ1dP9Vh5Bge5o8ZKJMQOIMTVhV9FD/GoO
+	1RNAMJSYiUORG6WvYZjh8jldXcZf1azLqwiJc=
+Received: by 10.150.73.35 with SMTP id v35mr544yba.22.1298466507835;
+	Wed, 23 Feb 2011 05:08:27 -0800 (PST)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id n10sm2276929yhb.38.2011.02.23.05.08.04
+	by mx.google.com with ESMTPS id n10sm2276929yhb.38.2011.02.23.05.08.13
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 23 Feb 2011 05:08:06 -0800 (PST)
+	Wed, 23 Feb 2011 05:08:26 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Feb 2011 13:07:19 +0000
-Message-Id: <1298466445-16486-9-git-send-email-otavio@ossystems.com.br>
+Date: Wed, 23 Feb 2011 13:07:21 +0000
+Message-Id: <1298466445-16486-11-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <1298466445-16486-8-git-send-email-otavio@ossystems.com.br>
+In-Reply-To: <1298466445-16486-10-git-send-email-otavio@ossystems.com.br>
 References: <1298466445-16486-1-git-send-email-otavio@ossystems.com.br>
 	<1298466445-16486-2-git-send-email-otavio@ossystems.com.br>
 	<1298466445-16486-3-git-send-email-otavio@ossystems.com.br>
@@ -40,8 +40,10 @@ References: <1298466445-16486-1-git-send-email-otavio@ossystems.com.br>
 	<1298466445-16486-6-git-send-email-otavio@ossystems.com.br>
 	<1298466445-16486-7-git-send-email-otavio@ossystems.com.br>
 	<1298466445-16486-8-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-9-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-10-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 08/14] syslinux: add isolinux and chain packages
+Subject: [PATCH 10/14] contrib/openembedded-essential (debian): depends on chrpath
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,59 +57,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2011 13:09:33 -0000
-
-This syncs the package recipe with the O.S. Systems tree adding more
-packages and fixing GNU_HASH issues.
+X-List-Received-Date: Wed, 23 Feb 2011 13:09:45 -0000
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- recipes/syslinux/syslinux_3.82.bb |   11 +++++++----
- 1 files changed, 7 insertions(+), 4 deletions(-)
+ .../debian/openembedded-essential/debian/changelog |    6 ++++++
+ .../debian/openembedded-essential/debian/control   |    2 +-
+ 2 files changed, 7 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/syslinux/syslinux_3.82.bb b/recipes/syslinux/syslinux_3.82.bb
-index f899d9f..fcb066d 100644
---- a/recipes/syslinux/syslinux_3.82.bb
-+++ b/recipes/syslinux/syslinux_3.82.bb
-@@ -1,5 +1,5 @@
- # syslinux OE build file
--# Copyright (C) 2009, O.S. Systems Software Ltda.  All Rights Reserved
-+# Copyright (C) 2009, 2011, O.S. Systems Software Ltda.  All Rights Reserved
- # Released under the MIT license (see packages/COPYING)
+diff --git a/contrib/distro-packages/debian/openembedded-essential/debian/changelog b/contrib/distro-packages/debian/openembedded-essential/debian/changelog
+index 8485f3e..afd198a 100644
+--- a/contrib/distro-packages/debian/openembedded-essential/debian/changelog
++++ b/contrib/distro-packages/debian/openembedded-essential/debian/changelog
+@@ -1,3 +1,9 @@
++openembedded-essential (1.5) unstable; urgency=low
++
++  * add chrpath as dependency.
++
++ -- Otavio Salvador <otavio@ossystems.com.br>  Fri, 18 Feb 2011 02:00:59 +0000
++
+ openembedded-essential (1.4) unstable; urgency=low
  
- DESCRIPTION = "A multi-purpose linux bootloader"
-@@ -7,7 +7,7 @@ HOMEPAGE = "http://syslinux.zytor.com/"
- LICENSE = "GPL"
- DEPENDS = "nasm-native"
- RRECOMMENDS_${PN} = "mtools"
--PR = "r0"
-+PR = "r3"
+   * remove gfortran from dependency after a5c7b007eaa675cc904f5285291d2f8a597efc84 caused controversy.
+diff --git a/contrib/distro-packages/debian/openembedded-essential/debian/control b/contrib/distro-packages/debian/openembedded-essential/debian/control
+index 9f1e095..f751672 100644
+--- a/contrib/distro-packages/debian/openembedded-essential/debian/control
++++ b/contrib/distro-packages/debian/openembedded-essential/debian/control
+@@ -7,7 +7,7 @@ Standards-Version: 3.7.3
  
- SRC_URI = "${KERNELORG_MIRROR}/pub/linux/utils/boot/syslinux/syslinux-${PV}.tar.bz2 "
- 
-@@ -27,17 +27,20 @@ do_configure() {
- do_compile() {
- 	# Rebuild only the installer; keep precompiled bootloaders
- 	# as per author's request (doc/distrib.txt)
--	oe_runmake CC="${CC}" installer
-+	oe_runmake CC="${CC}" LDFLAGS="${LDFLAGS}" installer
- }
- 
- do_install() {
- 	oe_runmake install INSTALLROOT="${D}"
- }
- 
--PACKAGES =+ "${PN}-extlinux ${PN}-mbr"
-+PACKAGES =+ "${PN}-extlinux ${PN}-mbr ${PN}-chain ${PN}-pxelinux ${PN}-isolinux"
- FILES_${PN} = "${bindir}/syslinux"
- FILES_${PN}-extlinux = "${base_sbindir}/extlinux"
- FILES_${PN}-mbr = "${datadir}/${PN}/mbr.bin"
-+FILES_${PN}-chain = "${datadir}/${PN}/chain.c32"
-+FILES_${PN}-isolinux = "${datadir}/${PN}/isolinux.bin"
-+FILES_${PN}-pxelinux = "${datadir}/${PN}/pxelinux.0"
- FILES_${PN}-dev += "${datadir}/${PN}/com32"
- 
- SRC_URI[md5sum] = "c9f4e73e385c86b3a8faf9b615a04836"
+ Package: openembedded-essential
+ Architecture: all
+-Depends: python (>= 2.3), ccache, build-essential, quilt, bison, wget, cvs, subversion, git-core, monotone, coreutils, unzip, texi2html, texinfo, libsdl1.2-dev, docbook-utils, gawk, bc, python-pysqlite2, help2man
++Depends: python (>= 2.3), ccache, build-essential, quilt, bison, wget, cvs, subversion, git-core, monotone, coreutils, unzip, texi2html, texinfo, libsdl1.2-dev, docbook-utils, gawk, bc, python-pysqlite2, help2man, chrpath
+ Description: Metapackage to install all needed packages to start using OpenEmbedded
+  OpenEmbedded is a full-featured development environment allowing users to
+  target a wide variety of devices. Supporting multiple build, release paths and
 -- 
 1.7.2.3
 
