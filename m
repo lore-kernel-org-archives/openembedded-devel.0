@@ -1,35 +1,35 @@
-Received: from mail-bw0-f50.google.com ([209.85.214.50])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Ps4st-0007mr-BI
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 03:55:23 +0100
-Received: by bwz2 with SMTP id 2so3044597bwz.9
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ps8Jv-0000SS-0X for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Feb 2011 07:35:31 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ps8If-0002eI-J6 for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Feb 2011 07:34:13 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Feb 2011 07:34:13 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Feb 2011 18:54:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:date:x-google-sender-auth
-	:message-id:subject:from:to:content-type;
-	bh=gIbKX9zPHfzOfVh0+DSuWnybs0OvB+1mS/j/FSGnnbM=;
-	b=YQAAuHrj04JcXk9XawuPzx4pfKBsSujgHaoM+7+xx38TIc+6m70wZFZJ1+ov0mCDlr
-	NrCYUYU70Kjst2qtVRuD8HlNgvvTIK87jjp8j/cXMlMW/Gh8xiH2vGobUzukZo4XZ6QH
-	ZUZyhI8BDz/ZzPYTBXK2mIXChz60CVR4emB18=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	b=CO/NK0FF24sR7/Ew3u4OElN0yn2O5r1r2uFE0o/wqO8nLxoSqposHLzBYIxmQ/lKgW
-	vcM9SyJa2lXM2EzLW6x4GVES1lLNqZx7HacHWS8txssf+4rni1HuBaiBhgSxPt5Dw2tj
-	69fqEzLsgBpIlfJeXrv18z2bpzJKBDOC20+ig=
-MIME-Version: 1.0
-Received: by 10.204.15.83 with SMTP id j19mr3077194bka.105.1298429642751; Tue,
-	22 Feb 2011 18:54:02 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.119.207 with HTTP; Tue, 22 Feb 2011 18:54:02 -0800 (PST)
-Date: Wed, 23 Feb 2011 02:54:02 +0000
-X-Google-Sender-Auth: B6MHkK5bZ0X62GjQrMCmU6RqD8k
-Message-ID: <AANLkTimGuqfEAYzvk3+4aH=rPWHb=Q2gNY4zWLwhAuRi@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: libcap2 build failure
+	Wed, 23 Feb 2011 07:34:13 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 23 Feb 2011 07:33:58 +0100
+Message-ID: <ik29om$8m7$1@dough.gmane.org>
+References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
+	<1297709209-6602-1-git-send-email-filip.zyzniewski@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1297709209-6602-1-git-send-email-filip.zyzniewski@gmail.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCHv2] linux-firmware: split into bus specific packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,135 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2011 02:55:23 -0000
-X-Groupsio-MsgNum: 29581
-Content-Type: multipart/mixed; boundary=00032555adf29f3fbc049cea354c
+X-List-Received-Date: Wed, 23 Feb 2011 06:35:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---00032555adf29f3fbc049cea354c
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Hello,
+On 14-02-11 19:46, Filip Zyzniewski wrote:
+> The whole reposotiry is about 24MB in size and it's rarely needed
+> whole. It is now splitted into bus specific subpackages (and some
+> device-specific for devices on a bus like SPI or SBUS) all depended
+> on by the linux-firmware package.
+> 
+> Suggested improvement - split bus packages furtherly into device
+> packages (so that we can either pull in a whole bus or just one
+> device).
+> 
+> Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+> ---
+>  recipes/linux-firmware/linux-firmware_git.bb |  144 +++++++++++++++++++++++++-
+>  1 files changed, 142 insertions(+), 2 deletions(-)
 
-Today I tryed to build from scratch with current OE and found this:
+> +
+> +FILES_${PN}-wl12xx = "/lib/firmware/ti-connectivity/wl1271-*.bin"
+
+The wl12xx files need to go into /lib/firmware, not
+/lib/firmware/ti-connectivity
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNZKpWMkyGM64RGpERAgnPAKC4Yxrzomw/SWENX3F7t329lYvW8ACePhwJ
+ttjmMyrgkry0bjZh5Derjp0=
+=9TpP
+-----END PGP SIGNATURE-----
 
 
-| i586-oe-linux-gcc -march=3Dpentium -fexpensive-optimizations
--fomit-frame-pointer -frename-registers -Os
--I/home/otavio/hacking/embedded-linux/tmp/work/i586-oe-linux/libcap2-2.16-r=
-3/libcap-2.16/libcap/include
--Dlinux -fPIC -Wall -Wwrite-strings -Wpointer-arith -Wcast-qual
--Wcast-align -Wstrict-prototypes -Wmissing-prototypes -Wnested-externs
--Winline -Wshadow -g
--I/home/otavio/hacking/embedded-linux/tmp/work/i586-oe-linux/libcap2-2.16-r=
-3/libcap-2.16/libcap/include
--I/home/otavio/hacking/embedded-linux/tmp/work/i586-oe-linux/libcap2-2.16-r=
-3/libcap-2.16/libcap/include
--Dlinux -fPIC -Wall -Wwrite-strings -Wpointer-arith -Wcast-qual
--Wcast-align -Wstrict-prototypes -Wmissing-prototypes -Wnested-externs
--Winline -Wshadow -g
--I/home/otavio/hacking/embedded-linux/tmp/work/i586-oe-linux/libcap2-2.16-r=
-3/libcap-2.16/progs/../libcap/include
--I/home/otavio/hacking/embedded-linux/tmp/work/i586-oe-linux/libcap2-2.16-r=
-3/libcap-2.16/progs/../libcap/include
--c capsh.c -o capsh.o
-| In file included from
-/home/otavio/hacking/embedded-linux/tmp/sysroots/i586-oe-linux/usr/include/=
-bits/sigcontext.h:28:0,
-|                  from
-/home/otavio/hacking/embedded-linux/tmp/sysroots/i586-oe-linux/usr/include/=
-signal.h:339,
-|                  from
-/home/otavio/hacking/embedded-linux/tmp/sysroots/i586-oe-linux/usr/include/=
-sys/wait.h:31,
-|                  from capsh.c:19:
-| /home/otavio/hacking/embedded-linux/tmp/sysroots/i586-oe-linux/usr/includ=
-e/asm/sigcontext.h:28:2:
-error: expected specifier-qualifier-list before '__u64'
-| /home/otavio/hacking/embedded-linux/tmp/sysroots/i586-oe-linux/usr/includ=
-e/asm/sigcontext.h:191:2:
-error: expected specifier-qualifier-list before '__u64'
-| make[1]: *** [capsh.o] Error 1
-| make[1]: Leaving directory
-`/home/otavio/hacking/embedded-linux/tmp/work/i586-oe-linux/libcap2-2.16-r3=
-/libcap-2.16/progs'
 
-I am attaching the full log. Someone has any clue?
-
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
-
---00032555adf29f3fbc049cea354c
-Content-Type: application/octet-stream; name="log.do_compile.8294"
-Content-Disposition: attachment; filename="log.do_compile.8294"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_gkhngppx0
-
-KyBkb19jb21waWxlCisgYmFzZV9kb19jb21waWxlCisgJ1snIC1lIE1ha2VmaWxlIC1vIC1lIG1h
-a2VmaWxlIC1vIC1lIEdOVW1ha2VmaWxlICddJworIG9lX3J1bm1ha2UKKyBvZW5vdGUgbWFrZSAt
-aiA0IFNZU1RFTV9IRUFERVJTPS9ob21lL290YXZpby9oYWNraW5nL2VtYmVkZGVkLWxpbnV4L3Rt
-cC9zeXNyb290cy9pNTg2LW9lLWxpbnV4L3Vzci9pbmNsdWRlCisgZWNobyBOT1RFOiAnbWFrZSAt
-aiA0IFNZU1RFTV9IRUFERVJTPS9ob21lL290YXZpby9oYWNraW5nL2VtYmVkZGVkLWxpbnV4L3Rt
-cC9zeXNyb290cy9pNTg2LW9lLWxpbnV4L3Vzci9pbmNsdWRlJwpOT1RFOiBtYWtlIC1qIDQgU1lT
-VEVNX0hFQURFUlM9L2hvbWUvb3RhdmlvL2hhY2tpbmcvZW1iZWRkZWQtbGludXgvdG1wL3N5c3Jv
-b3RzL2k1ODYtb2UtbGludXgvdXNyL2luY2x1ZGUKKyBtYWtlIC1qIDQgU1lTVEVNX0hFQURFUlM9
-L2hvbWUvb3RhdmlvL2hhY2tpbmcvZW1iZWRkZWQtbGludXgvdG1wL3N5c3Jvb3RzL2k1ODYtb2Ut
-bGludXgvdXNyL2luY2x1ZGUKbWFrZSAtQyBsaWJjYXAgYWxsCm1ha2VbMV06IEVudGVyaW5nIGRp
-cmVjdG9yeSBgL2hvbWUvb3RhdmlvL2hhY2tpbmcvZW1iZWRkZWQtbGludXgvdG1wL3dvcmsvaTU4
-Ni1vZS1saW51eC9saWJjYXAyLTIuMTYtcjMvbGliY2FwLTIuMTYvbGliY2FwJwptYWtlWzFdOiBO
-b3RoaW5nIHRvIGJlIGRvbmUgZm9yIGBhbGwnLgptYWtlWzFdOiBMZWF2aW5nIGRpcmVjdG9yeSBg
-L2hvbWUvb3RhdmlvL2hhY2tpbmcvZW1iZWRkZWQtbGludXgvdG1wL3dvcmsvaTU4Ni1vZS1saW51
-eC9saWJjYXAyLTIuMTYtcjMvbGliY2FwLTIuMTYvbGliY2FwJwptYWtlIC1DIHBhbV9jYXAgYWxs
-Cm1ha2VbMV06IEVudGVyaW5nIGRpcmVjdG9yeSBgL2hvbWUvb3RhdmlvL2hhY2tpbmcvZW1iZWRk
-ZWQtbGludXgvdG1wL3dvcmsvaTU4Ni1vZS1saW51eC9saWJjYXAyLTIuMTYtcjMvbGliY2FwLTIu
-MTYvcGFtX2NhcCcKbWFrZSB0ZXN0Y29tcGlsZQptYWtlWzJdOiBFbnRlcmluZyBkaXJlY3Rvcnkg
-YC9ob21lL290YXZpby9oYWNraW5nL2VtYmVkZGVkLWxpbnV4L3RtcC93b3JrL2k1ODYtb2UtbGlu
-dXgvbGliY2FwMi0yLjE2LXIzL2xpYmNhcC0yLjE2L3BhbV9jYXAnCm1ha2VbMl06IGB0ZXN0Y29t
-cGlsZScgaXMgdXAgdG8gZGF0ZS4KbWFrZVsyXTogTGVhdmluZyBkaXJlY3RvcnkgYC9ob21lL290
-YXZpby9oYWNraW5nL2VtYmVkZGVkLWxpbnV4L3RtcC93b3JrL2k1ODYtb2UtbGludXgvbGliY2Fw
-Mi0yLjE2LXIzL2xpYmNhcC0yLjE2L3BhbV9jYXAnCm1ha2VbMV06IExlYXZpbmcgZGlyZWN0b3J5
-IGAvaG9tZS9vdGF2aW8vaGFja2luZy9lbWJlZGRlZC1saW51eC90bXAvd29yay9pNTg2LW9lLWxp
-bnV4L2xpYmNhcDItMi4xNi1yMy9saWJjYXAtMi4xNi9wYW1fY2FwJwptYWtlIC1DIHByb2dzIGFs
-bAptYWtlWzFdOiBFbnRlcmluZyBkaXJlY3RvcnkgYC9ob21lL290YXZpby9oYWNraW5nL2VtYmVk
-ZGVkLWxpbnV4L3RtcC93b3JrL2k1ODYtb2UtbGludXgvbGliY2FwMi0yLjE2LXIzL2xpYmNhcC0y
-LjE2L3Byb2dzJwppNTg2LW9lLWxpbnV4LWdjYyAtbWFyY2g9cGVudGl1bSAtZmV4cGVuc2l2ZS1v
-cHRpbWl6YXRpb25zIC1mb21pdC1mcmFtZS1wb2ludGVyIC1mcmVuYW1lLXJlZ2lzdGVycyAtT3Mg
-LUkvaG9tZS9vdGF2aW8vaGFja2luZy9lbWJlZGRlZC1saW51eC90bXAvd29yay9pNTg2LW9lLWxp
-bnV4L2xpYmNhcDItMi4xNi1yMy9saWJjYXAtMi4xNi9saWJjYXAvaW5jbHVkZSAtRGxpbnV4IC1m
-UElDIC1XYWxsIC1Xd3JpdGUtc3RyaW5ncyAtV3BvaW50ZXItYXJpdGggLVdjYXN0LXF1YWwgLVdj
-YXN0LWFsaWduIC1Xc3RyaWN0LXByb3RvdHlwZXMgLVdtaXNzaW5nLXByb3RvdHlwZXMgLVduZXN0
-ZWQtZXh0ZXJucyAtV2lubGluZSAtV3NoYWRvdyAtZyAgLUkvaG9tZS9vdGF2aW8vaGFja2luZy9l
-bWJlZGRlZC1saW51eC90bXAvd29yay9pNTg2LW9lLWxpbnV4L2xpYmNhcDItMi4xNi1yMy9saWJj
-YXAtMi4xNi9saWJjYXAvaW5jbHVkZSAtSS9ob21lL290YXZpby9oYWNraW5nL2VtYmVkZGVkLWxp
-bnV4L3RtcC93b3JrL2k1ODYtb2UtbGludXgvbGliY2FwMi0yLjE2LXIzL2xpYmNhcC0yLjE2L2xp
-YmNhcC9pbmNsdWRlIC1EbGludXggLWZQSUMgLVdhbGwgLVd3cml0ZS1zdHJpbmdzIC1XcG9pbnRl
-ci1hcml0aCAtV2Nhc3QtcXVhbCAtV2Nhc3QtYWxpZ24gLVdzdHJpY3QtcHJvdG90eXBlcyAtV21p
-c3NpbmctcHJvdG90eXBlcyAtV25lc3RlZC1leHRlcm5zIC1XaW5saW5lIC1Xc2hhZG93IC1nICAt
-SS9ob21lL290YXZpby9oYWNraW5nL2VtYmVkZGVkLWxpbnV4L3RtcC93b3JrL2k1ODYtb2UtbGlu
-dXgvbGliY2FwMi0yLjE2LXIzL2xpYmNhcC0yLjE2L3Byb2dzLy4uL2xpYmNhcC9pbmNsdWRlIC1J
-L2hvbWUvb3RhdmlvL2hhY2tpbmcvZW1iZWRkZWQtbGludXgvdG1wL3dvcmsvaTU4Ni1vZS1saW51
-eC9saWJjYXAyLTIuMTYtcjMvbGliY2FwLTIuMTYvcHJvZ3MvLi4vbGliY2FwL2luY2x1ZGUgLWMg
-Y2Fwc2guYyAtbyBjYXBzaC5vCkluIGZpbGUgaW5jbHVkZWQgZnJvbSAvaG9tZS9vdGF2aW8vaGFj
-a2luZy9lbWJlZGRlZC1saW51eC90bXAvc3lzcm9vdHMvaTU4Ni1vZS1saW51eC91c3IvaW5jbHVk
-ZS9iaXRzL3NpZ2NvbnRleHQuaDoyODowLAogICAgICAgICAgICAgICAgIGZyb20gL2hvbWUvb3Rh
-dmlvL2hhY2tpbmcvZW1iZWRkZWQtbGludXgvdG1wL3N5c3Jvb3RzL2k1ODYtb2UtbGludXgvdXNy
-L2luY2x1ZGUvc2lnbmFsLmg6MzM5LAogICAgICAgICAgICAgICAgIGZyb20gL2hvbWUvb3Rhdmlv
-L2hhY2tpbmcvZW1iZWRkZWQtbGludXgvdG1wL3N5c3Jvb3RzL2k1ODYtb2UtbGludXgvdXNyL2lu
-Y2x1ZGUvc3lzL3dhaXQuaDozMSwKICAgICAgICAgICAgICAgICBmcm9tIGNhcHNoLmM6MTk6Ci9o
-b21lL290YXZpby9oYWNraW5nL2VtYmVkZGVkLWxpbnV4L3RtcC9zeXNyb290cy9pNTg2LW9lLWxp
-bnV4L3Vzci9pbmNsdWRlL2FzbS9zaWdjb250ZXh0Lmg6Mjg6MjogZXJyb3I6IGV4cGVjdGVkIHNw
-ZWNpZmllci1xdWFsaWZpZXItbGlzdCBiZWZvcmUgJ19fdTY0JwovaG9tZS9vdGF2aW8vaGFja2lu
-Zy9lbWJlZGRlZC1saW51eC90bXAvc3lzcm9vdHMvaTU4Ni1vZS1saW51eC91c3IvaW5jbHVkZS9h
-c20vc2lnY29udGV4dC5oOjE5MToyOiBlcnJvcjogZXhwZWN0ZWQgc3BlY2lmaWVyLXF1YWxpZmll
-ci1saXN0IGJlZm9yZSAnX191NjQnCm1ha2VbMV06ICoqKiBbY2Fwc2gub10gRXJyb3IgMQptYWtl
-WzFdOiBMZWF2aW5nIGRpcmVjdG9yeSBgL2hvbWUvb3RhdmlvL2hhY2tpbmcvZW1iZWRkZWQtbGlu
-dXgvdG1wL3dvcmsvaTU4Ni1vZS1saW51eC9saWJjYXAyLTIuMTYtcjMvbGliY2FwLTIuMTYvcHJv
-Z3MnCm1ha2U6ICoqKiBbYWxsXSBFcnJvciAyCisgZGllICdvZV9ydW5tYWtlIGZhaWxlZCcKKyBv
-ZWZhdGFsICdvZV9ydW5tYWtlIGZhaWxlZCcKKyBlY2hvIEZBVEFMOiAnb2VfcnVubWFrZSBmYWls
-ZWQnCkZBVEFMOiBvZV9ydW5tYWtlIGZhaWxlZAorIGV4aXQgMQo=
-
---00032555adf29f3fbc049cea354c--
