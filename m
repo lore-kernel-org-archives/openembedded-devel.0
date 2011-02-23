@@ -1,33 +1,38 @@
-Received: from einhorn.in-berlin.de ([192.109.42.8] ident=root)
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1Ps93Q-0001rV-3s
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1Ps95K-0001wE-Dk
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 08:22:32 +0100
-X-Envelope-From: sledz@dresearch.de
-X-Envelope-To: <openembedded-devel@lists.openembedded.org>
-Received: from mobil-400-586.intern.dresearch.de
-	(p57A20787.dip0.t-ipconnect.de [87.162.7.135]) (authenticated bits=0)
-	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
-	p1N7LBaa002214
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	Wed, 23 Feb 2011 08:24:30 +0100
+Received: by qwi2 with SMTP id 2so1770506qwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 08:21:11 +0100
-Received: from mobil-400-586.intern.dresearch.de (localhost [IPv6:::1])
-	by mobil-400-586.intern.dresearch.de (Postfix) with ESMTP id B3BDB217B7
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 08:21:10 +0100 (CET)
-Message-ID: <4D64B565.3040006@dresearch.de>
-Date: Wed, 23 Feb 2011 08:21:09 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.16) Gecko/20101125 SUSE/3.0.11 Lightning/1.0b1
-	Thunderbird/3.0.11
+	Tue, 22 Feb 2011 23:23:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=lrvPmWHHtKEdlkduS9tf7r41k9g2MsupP/pZiRDQ+5w=;
+	b=QHgNnhn0g1AvUVhUGN9L4jY8q20I932hGh+lzQ2DtrEoC9ikHzCRbwJc7xWUZb8588
+	5+DNXqFrEpWC/xtWatgczobqF2up1Bv1Yn4At/kDTD9OFZ4IQw7KMyopy6ipBFtN2QvN
+	nUzNGqJvTsVeU805xAWkvwWoTA4lcuZHbMKXE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	b=RiTzi187vyzi5gql4Ak0Qd2G2GHIho4EVKvBfaM31es8EeAdqShO02Sp1U1PP7rMIK
+	mfS7yjugD7hofgsr8bojzQxUCShtc2aie1YiZhrNCtbyh+10b8E+rAqLIjFOGk3l3oKy
+	hL9GGJncCGTIiPn2qmC0LXqXLKs4YGIPJHQdo=
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
-X-MIME-Autoconverted: from 8bit to quoted-printable by einhorn.in-berlin.de id
-	p1N7LBaa002214
-Subject: NetworkManager-0.8.1 do_compile failed
+Received: by 10.229.78.160 with SMTP id l32mr2100843qck.298.1298445790574;
+	Tue, 22 Feb 2011 23:23:10 -0800 (PST)
+Received: by 10.229.193.10 with HTTP; Tue, 22 Feb 2011 23:23:10 -0800 (PST)
+In-Reply-To: <ik29om$8m7$1@dough.gmane.org>
+References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
+	<1297709209-6602-1-git-send-email-filip.zyzniewski@gmail.com>
+	<ik29om$8m7$1@dough.gmane.org>
+Date: Wed, 23 Feb 2011 08:23:10 +0100
+Message-ID: <AANLkTi=rHvkbehQGEMgBdeO_7wFgGH-8EO+z-VVHcr3n@mail.gmail.com>
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+To: David Woodhouse <David.Woodhouse@intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [PATCHv2] linux-firmware: split into bus specific packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,101 +46,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2011 07:22:32 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 23 Feb 2011 07:24:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Trying a clean build:
+Hi,
 
-OE:hipox sledz@mobil-400-586:~/work/openembedded> bitbake networkmanager
-...
+we've come across this issue with linux-firmware:
 
-Build Configuration:
-BB_VERSION        =3D "1.12.0"
-METADATA_BRANCH   =3D "org.openembedded.dev"
-METADATA_REVISION =3D "8e4bd2f"
-TARGET_ARCH       =3D "arm"
-TARGET_OS         =3D "linux-gnueabi"
-MACHINE           =3D "hipox"
-DISTRO            =3D "angstrom"
-DISTRO_VERSION    =3D "2010.7-test-20110223"
-TARGET_FPU        =3D "soft"
+---------- Forwarded message ----------
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 23 Feb 2011 07:33:58 +0100
+Subject: Re: [oe] [PATCHv2] linux-firmware: split into bus specific packages.
+To: openembedded-devel@lists.openembedded.org
 
-...
-NetworkManager-nm-device-ethernet.o: In function `ip4_match_config':
-/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
-workmanager-0.8.1-r2/NetworkManager-0.8.1/src/nm-device-ethernet.c:1624: =
-undefined reference to `rtnl_addr_alloc_cache'
-NetworkManager-nm-device-ethernet.o: In function `check_one_address':
-/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
-workmanager-0.8.1-r2/NetworkManager-0.8.1/src/nm-device-ethernet.c:1571: =
-undefined reference to `rtnl_addr_get_ifindex'
-/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
-workmanager-0.8.1-r2/NetworkManager-0.8.1/src/nm-device-ethernet.c:1573: =
-undefined reference to `rtnl_addr_get_family'
-/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
-workmanager-0.8.1-r2/NetworkManager-0.8.1/src/nm-device-ethernet.c:1576: =
-undefined reference to `rtnl_addr_get_prefixlen'
-/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
-workmanager-0.8.1-r2/NetworkManager-0.8.1/src/nm-device-ethernet.c:1579: =
-undefined reference to `rtnl_addr_get_local'
-...
-<some more errors of the kind>
-...
-./backends/.libs/libnmbackend.a(libnmbackend_la-NetworkManagerGeneric.o):=
- In function `nm_generic_enable_loopback':
-/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
-workmanager-0.8.1-r2/NetworkManager-0.8.1/src/backends/NetworkManagerGene=
-ric.c:70: undefined reference to `rtnl_addr_alloc'
-/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
-workmanager-0.8.1-r2/NetworkManager-0.8.1/src/backends/NetworkManagerGene=
-ric.c:78: undefined reference to `rtnl_addr_set_local'
-/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
-workmanager-0.8.1-r2/NetworkManager-0.8.1/src/backends/NetworkManagerGene=
-ric.c:85: undefined reference to `rtnl_addr_set_broadcast'
-/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
-workmanager-0.8.1-r2/NetworkManager-0.8.1/src/backends/NetworkManagerGene=
-ric.c:88: undefined reference to `rtnl_addr_set_prefixlen'
-/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
-workmanager-0.8.1-r2/NetworkManager-0.8.1/src/backends/NetworkManagerGene=
-ric.c:89: undefined reference to `rtnl_addr_set_ifindex'
-/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
-workmanager-0.8.1-r2/NetworkManager-0.8.1/src/backends/NetworkManagerGene=
-ric.c:90: undefined reference to `rtnl_addr_set_scope'
-/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
-workmanager-0.8.1-r2/NetworkManager-0.8.1/src/backends/NetworkManagerGene=
-ric.c:91: undefined reference to `rtnl_addr_set_label'
-/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
-workmanager-0.8.1-r2/NetworkManager-0.8.1/src/backends/NetworkManagerGene=
-ric.c:93: undefined reference to `rtnl_addr_add'
-/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
-workmanager-0.8.1-r2/NetworkManager-0.8.1/src/backends/NetworkManagerGene=
-ric.c:100: undefined reference to `rtnl_addr_put'
-collect2: ld returned 1 exit status
-make[4]: *** [NetworkManager] Error 1
-make[4]: Leaving directory `/home/sledz/work/OE-testing/tmp.6/work/armv5t=
-e-angstrom-linux-gnueabi/networkmanager-0.8.1-r2/NetworkManager-0.8.1/src=
-'
-make[3]: *** [all-recursive] Error 1
-make[3]: Leaving directory `/home/sledz/work/OE-testing/tmp.6/work/armv5t=
-e-angstrom-linux-gnueabi/networkmanager-0.8.1-r2/NetworkManager-0.8.1/src=
-'
-make[2]: *** [all] Error 2
-make[2]: Leaving directory `/home/sledz/work/OE-testing/tmp.6/work/armv5t=
-e-angstrom-linux-gnueabi/networkmanager-0.8.1-r2/NetworkManager-0.8.1/src=
-'
-make[1]: *** [all-recursive] Error 1
-make[1]: Leaving directory `/home/sledz/work/OE-testing/tmp.6/work/armv5t=
-e-angstrom-linux-gnueabi/networkmanager-0.8.1-r2/NetworkManager-0.8.1'
-make: *** [all] Error 2
+The wl12xx files need to go into /lib/firmware, not
+/lib/firmware/ti-connectivity
+-----------------------------------------------------
 
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+Grepping through kernel sources shows that that's the case:
+
+filip.zyzniewski@jlime:/home/git/linux-hpc/drivers$ grep -r 'wl12.*\.bin' .
+./net/wireless/wl1251/wl1251.h:#define WL1251_FW_NAME "wl1251-fw.bin"
+./net/wireless/wl1251/wl1251.h:#define WL1251_NVS_NAME "wl1251-nvs.bin"
+./net/wireless/wl12xx/wl1271.h:#define WL1271_FW_NAME "wl1271-fw.bin"
+./net/wireless/wl12xx/wl1271.h:#define WL1271_NVS_NAME "wl1271-nvs.bin"
+filip.zyzniewski@jlime:/home/git/linux-hpc/drivers$
+
+Could you move these files to a location requested by the kernel?
+
+
+bye,
+Filip Zyzniewski
 
 
