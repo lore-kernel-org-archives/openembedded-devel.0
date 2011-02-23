@@ -1,33 +1,34 @@
-Received: from einhorn.in-berlin.de ([192.109.42.8])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1Ps9g3-0007i3-0B
+	(envelope-from <martin.jansa@gmail.com>) id 1PsAJE-0000eR-2O
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 09:02:27 +0100
-X-Envelope-From: sledz@dresearch.de
-X-Envelope-To: <openembedded-devel@lists.openembedded.org>
-Received: from mobil-400-586.intern.dresearch.de
-	(p57A20787.dip0.t-ipconnect.de [87.162.7.135]) (authenticated bits=0)
-	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
-	p1N7tB65003919
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	Wed, 23 Feb 2011 09:42:56 +0100
+Received: by fxm8 with SMTP id 8so3362243fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 08:55:12 +0100
-Received: from mobil-400-586.intern.dresearch.de (localhost [IPv6:::1])
-	by mobil-400-586.intern.dresearch.de (Postfix) with ESMTP id 65BD6217B7
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 08:55:11 +0100 (CET)
-Message-ID: <4D64BD5E.6040805@dresearch.de>
-Date: Wed, 23 Feb 2011 08:55:10 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.16) Gecko/20101125 SUSE/3.0.11 Lightning/1.0b1
-	Thunderbird/3.0.11
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
-X-MIME-Autoconverted: from 8bit to quoted-printable by einhorn.in-berlin.de id
-	p1N7tB65003919
-Subject: net-snmp-svn-r7.0 do_compile failed
+	Wed, 23 Feb 2011 00:41:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=NAl6lvX9ptOeVAVWej1wGcL3jb78pA4H5YL2b9PHjt4=;
+	b=vtowdFnrCW0srSTgPufqNTs87Sp62Lh54GFh3TFTX8jfbSczLq1V+Dw6MWudaOkKpx
+	abJhGyB5MdwhwOgkwowHDIeoEIbOTEan93JV0H4Isc5FAiu/V1TKZOulUiZl4OmcxIqG
+	B0rozlXfQDOYw7D7cg3hf3ANMqYVwKQnjRIIk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=U5vrJCn2aEULqnNhDCZ+PZXfhGgMv1zJPLWkOOsOmK6iBPQjohL8t0aejODDWS4jHu
+	aD/XQkgptAQHHDlhMNa5CY+4SBDM8tidZ3znl/kB57UQ+VaJz2axFsUPf8m+vID1B7mc
+	kuUtHYQ9hwXv+3r41tRKM8OEteZEakQXDAuYU=
+Received: by 10.223.72.15 with SMTP id k15mr4755160faj.54.1298450428262;
+	Wed, 23 Feb 2011 00:40:28 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id n2sm1059042fam.28.2011.02.23.00.40.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 23 Feb 2011 00:40:27 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 23 Feb 2011 09:40:17 +0100
+Message-Id: <1298450417-28211-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [PATCH] linux-2.6.37: upgrade to 2.6.37.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,64 +42,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2011 08:02:27 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 23 Feb 2011 08:42:56 -0000
 
-Again a clean build:
+* update om-gta0* defconfigs like
+  8e4bd2fd4cbf1c75acd30adbd3aaa074c3175a3e and
+  1516588acd3c4b4dd4add71d06ab8ce0d1bafa02
 
-OE:hipox sledz@mobil-400-586:~/work/openembedded> bitbake net-snmp
-...
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes/linux/linux-2.6.37/om-gta01/defconfig |    9 ++++-----
+ recipes/linux/linux-2.6.37/om-gta02/defconfig |    9 ++++-----
+ recipes/linux/linux_2.6.37.bb                 |    5 ++++-
+ 3 files changed, 12 insertions(+), 11 deletions(-)
 
-Build Configuration:
-BB_VERSION        =3D "1.12.0"
-METADATA_BRANCH   =3D "org.openembedded.dev"
-METADATA_REVISION =3D "8e4bd2f"
-TARGET_ARCH       =3D "arm"
-TARGET_OS         =3D "linux-gnueabi"
-MACHINE           =3D "hipox"
-DISTRO            =3D "angstrom"
-DISTRO_VERSION    =3D "2010.7-test-20110223"
-TARGET_FPU        =3D "soft"
+diff --git a/recipes/linux/linux-2.6.37/om-gta01/defconfig b/recipes/linux/linux-2.6.37/om-gta01/defconfig
+index 22427bb..4f8e4e5 100644
+--- a/recipes/linux/linux-2.6.37/om-gta01/defconfig
++++ b/recipes/linux/linux-2.6.37/om-gta01/defconfig
+@@ -1,7 +1,7 @@
+ #
+ # Automatically generated make config: don't edit
+-# Linux/arm 2.6.37 Kernel Configuration
+-# Mon Jan 10 16:05:41 2011
++# Linux/arm 2.6.37.1 Kernel Configuration
++# Tue Feb 22 11:01:17 2011
+ #
+ CONFIG_ARM=y
+ CONFIG_HAVE_PWM=y
+@@ -1217,7 +1217,7 @@ CONFIG_HW_CONSOLE=y
+ CONFIG_VT_HW_CONSOLE_BINDING=y
+ # CONFIG_DEVKMEM is not set
+ # CONFIG_SERIAL_NONSTANDARD is not set
+-# CONFIG_N_GSM is not set
++CONFIG_N_GSM=m
+ 
+ #
+ # Serial drivers
+@@ -2189,7 +2189,6 @@ CONFIG_BKL=y
+ # CONFIG_SPARSE_RCU_POINTER is not set
+ CONFIG_DEBUG_BUGVERBOSE=y
+ # CONFIG_DEBUG_MEMORY_INIT is not set
+-CONFIG_FRAME_POINTER=y
+ # CONFIG_SYSCTL_SYSCALL_CHECK is not set
+ CONFIG_HAVE_FUNCTION_TRACER=y
+ CONFIG_HAVE_DYNAMIC_FTRACE=y
+@@ -2200,7 +2199,7 @@ CONFIG_TRACING_SUPPORT=y
+ # CONFIG_SAMPLES is not set
+ CONFIG_HAVE_ARCH_KGDB=y
+ # CONFIG_STRICT_DEVMEM is not set
+-# CONFIG_ARM_UNWIND is not set
++CONFIG_ARM_UNWIND=y
+ # CONFIG_DEBUG_USER is not set
+ # CONFIG_OC_ETM is not set
+ CONFIG_DEBUG_S3C_UART=2
+diff --git a/recipes/linux/linux-2.6.37/om-gta02/defconfig b/recipes/linux/linux-2.6.37/om-gta02/defconfig
+index 89f7081..a0541cc 100644
+--- a/recipes/linux/linux-2.6.37/om-gta02/defconfig
++++ b/recipes/linux/linux-2.6.37/om-gta02/defconfig
+@@ -1,7 +1,7 @@
+ #
+ # Automatically generated make config: don't edit
+-# Linux/arm 2.6.37 Kernel Configuration
+-# Mon Jan 10 16:08:20 2011
++# Linux/arm 2.6.37.1 Kernel Configuration
++# Tue Feb 22 10:58:18 2011
+ #
+ CONFIG_ARM=y
+ CONFIG_HAVE_PWM=y
+@@ -1225,7 +1225,7 @@ CONFIG_HW_CONSOLE=y
+ CONFIG_VT_HW_CONSOLE_BINDING=y
+ # CONFIG_DEVKMEM is not set
+ # CONFIG_SERIAL_NONSTANDARD is not set
+-# CONFIG_N_GSM is not set
++CONFIG_N_GSM=m
+ 
+ #
+ # Serial drivers
+@@ -2205,7 +2205,6 @@ CONFIG_BKL=y
+ # CONFIG_SPARSE_RCU_POINTER is not set
+ CONFIG_DEBUG_BUGVERBOSE=y
+ # CONFIG_DEBUG_MEMORY_INIT is not set
+-CONFIG_FRAME_POINTER=y
+ # CONFIG_SYSCTL_SYSCALL_CHECK is not set
+ CONFIG_HAVE_FUNCTION_TRACER=y
+ CONFIG_HAVE_DYNAMIC_FTRACE=y
+@@ -2216,7 +2215,7 @@ CONFIG_TRACING_SUPPORT=y
+ # CONFIG_SAMPLES is not set
+ CONFIG_HAVE_ARCH_KGDB=y
+ # CONFIG_STRICT_DEVMEM is not set
+-# CONFIG_ARM_UNWIND is not set
++CONFIG_ARM_UNWIND=y
+ # CONFIG_DEBUG_USER is not set
+ # CONFIG_OC_ETM is not set
+ CONFIG_DEBUG_S3C_UART=2
+diff --git a/recipes/linux/linux_2.6.37.bb b/recipes/linux/linux_2.6.37.bb
+index 39c0c08..e11af81 100644
+--- a/recipes/linux/linux_2.6.37.bb
++++ b/recipes/linux/linux_2.6.37.bb
+@@ -1,6 +1,6 @@
+ require linux.inc
+ 
+-PR = "r2"
++PR = "r3"
+ 
+ # Mark archs/machines that this kernel supports
+ DEFAULT_PREFERENCE = "-1"
+@@ -20,6 +20,7 @@ DEFAULT_PREFERENCE_visstrim_m10 = "1"
+ # DEFAULT_PREFERENCE_om-gta01 = "1"
+ 
+ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=kernel \
++           ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/patch-${PV}.1.bz2;apply=yes;name=stablepatch \
+            file://defconfig "
+ 
+ SRC_URI_append_om-gta02 = " \
+@@ -33,3 +34,5 @@ SRC_URI_append_om-gta01 = " \
+ 
+ SRC_URI[kernel.md5sum] = "c8ee37b4fdccdb651e0603d35350b434"
+ SRC_URI[kernel.sha256sum] = "edbf091805414739cf57a3bbfeba9e87f5e74f97e38f04d12060e9e0c71e383a"
++SRC_URI[stablepatch.md5sum] = "7693d1d32ed39346cc988e0f027e5890"
++SRC_URI[stablepatch.sha256sum] = "c33bfa59828a9ff6916993ec008967a8c1d71a18b743ee15f4280e773ef4baaf"
+-- 
+1.7.4.1
 
-...
-libtool: link: arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te -mtune=3Da=
-rm926ej-s -Wl,-rpath-link -Wl,/home/sledz/work/OE-testing/tmp.6/sysroots/=
-armv5te-angstrom-linux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=3Dgnu -mt=
-humb-interwork -mno-thumb -DNETSNMP_ENABLE_IPV6 -isystem/home/sledz/work/=
-OE-testing/tmp.6/sysroots/armv5te-angstrom-linux-gnueabi/usr/include -fex=
-pensive-optimizations -frename-registers -fomit-frame-pointer -O2 -ggdb2 =
--Ulinux -Dlinux=3Dlinux -Wall -Winline -Wstrict-prototypes -Wwrite-string=
-s -Wcast-qual -Wno-char-subscripts -o .libs/snmpd .libs/snmpd.o -Wl,-rpat=
-h-link -Wl,/home/sledz/work/OE-testing/tmp.6/sysroots/armv5te-angstrom-li=
-nux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=3Dgnu  -L/home/sledz/work/OE=
--testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/net-=
-snmp/agent/.libs -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstro=
-m-linux-gnueabi/net-snmp-svn-r7.0/net-snmp/agent/helpers/.libs
--L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/n=
-et-snmp-svn-r7.0/net-snmp/snmplib/.libs -L/home/sledz/work/OE-testing/tmp=
-.6/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib -L/home/sledz/work/OE-=
-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/net-s=
-nmp/snmplib -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-lin=
-ux-gnueabi/net-snmp-svn-r7.0/net-snmp/agent/helpers ./.libs/libnetsnmpage=
-nt.so helpers/.libs/libnetsnmphelpers.so ./.libs/libnetsnmpmibs.so /home/=
-sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-=
-svn-r7.0/net-snmp/agent/helpers/.libs/libnetsnmphelpers.so /home/sledz/wo=
-rk/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0=
-/net-snmp/agent/.libs/libnetsnmpagent.so /home/sledz/work/OE-testing/tmp.=
-6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/net-snmp/snmplib/=
-.libs/libnetsnmp.so -ldl ../snmplib/.libs/libnetsnmp.so -lcrypto -lssl
-./.libs/libnetsnmpmibs.so: undefined reference to `pthread_create'
-collect2: ld returned 1 exit status
-make[1]: *** [snmpd] Error 1
-
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
 
 
