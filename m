@@ -1,34 +1,35 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <filip.zyzniewski@gmail.com>) id 1PsLjd-00044D-DU
+	(envelope-from <raj.khem@gmail.com>) id 1PsMHh-0001Vj-IG
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 21:54:57 +0100
-Received: by bwz10 with SMTP id 10so614749bwz.6
+	Wed, 23 Feb 2011 22:30:10 +0100
+Received: by fxm8 with SMTP id 8so4046834fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 12:53:37 -0800 (PST)
+	Wed, 23 Feb 2011 13:28:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:subject:date:message-id:x-mailer;
-	bh=4iYzFiYaPtNaZgeid00sKuiSfrJHkPEZn8NLmxevNM4=;
-	b=wOsVodnFtZ2+4ePqNnVlF/Ih7t4dJw0ATT6jW92f1XMr3MNHKXaZ8CqAe4nFRiz82M
-	DVAm5z1SFZrRe8zvfD9RvVl7CvzeqS5it46hXCYnjGIGY/cUh6HsKQONmM0H9UbXOphI
-	WfUF8LAwBo4JY0JOQ0LniHZ0s+Ea909+ple6o=
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type:content-transfer-encoding;
+	bh=p5SR7laONmtY/qty9RONdlDcgDmhc200d3AAJ1g4r+k=;
+	b=ZQM3yw8e9FvAh/uQqxM6EG58esmrIUFW5pHznj9P4rvhFfNQq1fHjf61DJ8xTNgkhP
+	SYJOO2LnNpuXj2jUDgwPGPvZP7u769vpDbKQJKphPWG86YolUotsmRwYcwwk1d/wkL+q
+	r9XLjNpQI708HIq4fPER5ceZi6AvumefjUFko=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer;
-	b=ds9C+8NgHpMKC5455BAEdLpwgNQeRA5B5ZqOjq5kr+iKKa9mQ7d9DgOwxis9iFcywx
-	gHoz6mLseaR/vFIHl4BMj81Phbvs+nKCIG7AMvw9Ytua/Oan4nBJh2na0aPTh/mUsgKX
-	prAIA+Uw4KxzJauFVtcBNm+bYE7XjC1sdunGc=
-Received: by 10.223.83.144 with SMTP id f16mr5676599fal.4.1298493755355;
-	Wed, 23 Feb 2011 12:42:35 -0800 (PST)
-Received: from localhost.localdomain (ns.tefnet.pl [188.165.206.204])
-	by mx.google.com with ESMTPS id o12sm1257560fav.6.2011.02.23.12.42.33
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 23 Feb 2011 12:42:34 -0800 (PST)
-From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=eOECOc2wOSbjbAmUqloufzlZ5ed9kUINH3wjttJR5yr76sn551t4Ke6ESkBWawknZy
+	mHIl43J4zQtvXpbUcCeukG+nzG2TcWmMTTE9J6wIOtXMo3lujjRDjRCWY7s8VDRh1/Lc
+	3Ernxpvx2y3bmEW7abNmYrX411f37uQx+olqg=
+Received: by 10.223.71.199 with SMTP id i7mr6440faj.57.1298496240382; Wed, 23
+	Feb 2011 13:24:00 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.223.30.151 with HTTP; Wed, 23 Feb 2011 13:20:36 -0800 (PST)
+In-Reply-To: <1298492246-18066-1-git-send-email-fransmeulenbroeks@gmail.com>
+References: <1298492246-18066-1-git-send-email-fransmeulenbroeks@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 23 Feb 2011 13:20:36 -0800
+Message-ID: <AANLkTinynUv=Lm45maSHB9kyTDnrqCJV+MS_yNtjiCge@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Feb 2011 21:42:28 +0100
-Message-Id: <1298493748-32496-1-git-send-email-filip.zyzniewski@gmail.com>
-X-Mailer: git-send-email 1.7.1
-Subject: [PATCH] package_deb.bbclass: create a proper package_update_index_deb task.
+Subject: Re: [PATCH] gcc 4.1.2: fix dependency_libs for libstdc++ and libsupc++
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,70 +43,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2011 20:54:57 -0000
+X-List-Received-Date: Wed, 23 Feb 2011 21:30:10 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Until now the Packages.gz generation was hardcoded in rootfs_deb_do_rootfs.
+On Wed, Feb 23, 2011 at 12:17 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> This fixes a QA issue in gcc 4.1.2.
+> The patch is identical to what is done in gcc 4.2.2 and 4.2.4
+> The issues caused neek compilations to fail
+>
+> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
-Signed-off-by: Filip Zyzniewski <filip.zyzniewski@gmail.com>
----
- classes/package_deb.bbclass |   28 ++++++++++++++++++++++++++++
- classes/rootfs_deb.bbclass  |    5 -----
- 2 files changed, 28 insertions(+), 5 deletions(-)
+Looks ok can you look at
 
-diff --git a/classes/package_deb.bbclass b/classes/package_deb.bbclass
-index f94771c..9f2a342 100644
---- a/classes/package_deb.bbclass
-+++ b/classes/package_deb.bbclass
-@@ -276,3 +276,31 @@ python do_package_write_deb () {
- do_package_write_deb[dirs] = "${D}"
- addtask package_write_deb before do_package_write after do_package
- 
-+do_package_update_index_deb[lockfiles] = "${DEPLOY_DIR_DEB}.lock"
-+do_package_update_index_deb[nostamp] = "1"
-+do_package_update_index_deb[recrdeptask] += "do_package_write_deb"
-+do_package_update_index_deb[depends] += "dpkg-native:do_populate_sysroot"
-+
-+do_package_update_index_deb () {
-+	set -x
-+
-+	if [ ! -z "${DEPLOY_KEEP_PACKAGES}" ]; then
-+		return
-+	fi
-+
-+	cd "${DEPLOY_DIR_DEB}"
-+	for arch in ${PACKAGE_ARCHS}; do
-+		if [ -e "$arch" ] ; then 
-+    			dpkg-scanpackages "$arch" | gzip > "$arch/Packages.gz"
-+		fi
-+		if [ -e "${BUILD_ARCH}-$arch-sdk" ] ; then 
-+			dpkg-scanpackages "${BUILD_ARCH}-$arch-sdk" | gzip > "${BUILD_ARCH}-$arch-sdk/Packages.gz"
-+		fi
-+		if [ -e "${SDK_SYS}-sdk-$arch" ] ; then
-+			dpkg-scanpackages "${SDK_SYS}-sdk-$arch" | gzip > "${SDK_SYS}-sdk-$arch/Packages.gz"
-+		fi
-+	done
-+	cd -
-+}
-+
-+addtask package_update_index_deb before do_rootfs
-diff --git a/classes/rootfs_deb.bbclass b/classes/rootfs_deb.bbclass
-index 2130ad6..d5db816 100644
---- a/classes/rootfs_deb.bbclass
-+++ b/classes/rootfs_deb.bbclass
-@@ -24,11 +24,6 @@ fakeroot rootfs_deb_do_rootfs () {
- 			continue;
- 		fi
- 		cd ${DEPLOY_DIR_DEB}/$arch
--		rm -f Packages.gz Packages Packages.bz2
--
--		# apt-native ignores Packages.bz2 unless /bin/bzip2 exists
--		# on the build host, so stick with gzip
--		dpkg-scanpackages . | gzip > Packages.gz
- 
- 		echo "Label: $arch" > Release
- 
--- 
-1.7.1
+commit 457d5b9818e21492a1425d8b6811cf57702394eb
+Author: Khem Raj <raj.khem@gmail.com>
+Date:   Sun Jun 6 10:40:01 2010 -0700
 
+    gcc-4.2.4: Fix libstdc++ build failures with new sysrooted staging.
+
+    * New sysrooted staging exposed few problems in GCC configury
+      which were latent previously.
+
+    Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+and do those changes for 4.1.x
+
+> ---
+>
+> NOTE: gcc 4.1.0 4.1.1 4.2.1 4.2.3 are also missing this patch.
+> Can't easily test those now so not submitting a patch for these.
+> and maybe the patch is also needed for gcc 4.0.*
+> No idea about gcc3.
+>
+> =C2=A0recipes/gcc/gcc-4.1.2.inc | =C2=A0 15 ++++++++++++++-
+> =C2=A01 files changed, 14 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/gcc/gcc-4.1.2.inc b/recipes/gcc/gcc-4.1.2.inc
+> index 36b45db..9df67e2 100644
+> --- a/recipes/gcc/gcc-4.1.2.inc
+> +++ b/recipes/gcc/gcc-4.1.2.inc
+> @@ -5,7 +5,7 @@ NATIVEDEPS =3D "mpfr-native gmp-native"
+>
+> =C2=A0COMPATIBLE_TARGET_SYS =3D "."
+>
+> -INC_PR =3D "r27"
+> +INC_PR =3D "r28"
+>
+> =C2=A0SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=3Da=
+rchive \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0file://100-uclibc-conf.patch \
+> @@ -60,6 +60,19 @@ do_compile_prepend_avr32() {
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0ln -sf ${S}/libstdc++-v3/config/os/uclibc/ ${S=
+}/libstdc++-v3/config/os/uclibc-linux
+> =C2=A0}
+>
+> +# with sysroot this change is not needed for gcc 4.3+ but its needed
+> +# for older compilers because of bug in libtool as well as this PR
+> +# http://gcc.gnu.org/bugzilla/show_bug.cgi?id=3D5291
+> +# we append the .la munging specially for libstdc++ and libsupc++ here
+> +# This change if needed for other compilers in use should be put
+> +# in there specific inc file.
+> +
+> +do_install_append () {
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0for d in ${target_libdir} ${target_libdir}/n=
+of; do
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sed -i "s|depend=
+ency_libs\s*=3D\s*.*|dependency_libs=3D'-lm '|" ${D}$d/libsupc++.la || true
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sed -i "s|depend=
+ency_libs\s*=3D\s*.*|dependency_libs=3D'-lm '|" ${D}$d/libstdc++.la || true
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0done
+> +}
+>
+> =C2=A0# Language Overrides
+> =C2=A0FORTRAN =3D ""
+> --
+> 1.7.1
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
