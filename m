@@ -1,44 +1,39 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PsEZl-0001g3-D2
+	(envelope-from <filip.zyzniewski@gmail.com>) id 1PsEky-0002Q8-9F
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 14:16:17 +0100
-Received: by yxn22 with SMTP id 22so1124937yxn.6
+	Wed, 23 Feb 2011 14:27:52 +0100
+Received: by qyk35 with SMTP id 35so2978635qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 05:14:56 -0800 (PST)
+	Wed, 23 Feb 2011 05:26:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
-	:x-mailer:in-reply-to:references;
-	bh=0NaNa3oZW4OhekZukqJJxD0w6MxJZu1Cwi6DJj75ssE=;
-	b=Bi+1hhq59hrntjpQtnCqhezveKvVcJ8vj2CFRVU4JJSz54O5S3Js7eNPLv1pRw15pB
-	1QT9BqXRDmj6VBffz3pBzrgO29/u8YEo7mNhlIFoab7X5ism3Il13KEQ108wLibO5HWx
-	U9Iq8Q3KL3KKQnhpYxZz1zTeaznOLnDqwgvgA=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=px6o6yUqQHXMUERPYNhjLWiM/+BgOIXP1crII7UoyjM=;
+	b=V1/JYBY3LHGGEqIeSAwnrnYMhTXHqO9RkFtjtZU6IbXDlX2pwz4qXhoqTWdhxyo+cP
+	nkPNKOJIQJIrC/nDLPkU/1l0nxe10y3zisfv4LnGHO7vZdqCNI4OibhbsxFzCDQAmQ1V
+	kelRRydHICM/zzWFGPYkUWNqt9lDm5mn4cuuo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references;
-	b=s/fqEwUCtU0fRcZADOd5OF6sowyPN3wYRQ0lz8uEFsLua+nwbujQSP1sJ/euVklGYf
-	XIWyNoi7eoK01T1I0779JZ5s8otILqSPNNZkM2Zniq8p37q9aPj4r+wprhZKhhUrtZTT
-	EvSg01j7xaeyyrpT8KGrm18HKlY35uMb7WcyM=
-Received: by 10.236.110.133 with SMTP id u5mr7240065yhg.26.1298466478804;
-	Wed, 23 Feb 2011 05:07:58 -0800 (PST)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id n10sm2276929yhb.38.2011.02.23.05.07.55
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 23 Feb 2011 05:07:57 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=LtKYWnpZnKghk3yhqfHi6uQ6dZrgQzwqZe9ghpNq34wVuBfY5zzImAhk0fFxFA/nL0
+	UmpxPUU4nEGByYAgZPtz5EY+QYrWxxdSYEdFrh3waqhRSra6n2uU4IdIO4FLbIJYo7g/
+	nbT7pOH1i+W/tZQu9gOS2CsW1683M+q4pQZKs=
+MIME-Version: 1.0
+Received: by 10.229.78.160 with SMTP id l32mr2371942qck.298.1298467591990;
+	Wed, 23 Feb 2011 05:26:31 -0800 (PST)
+Received: by 10.229.193.10 with HTTP; Wed, 23 Feb 2011 05:26:31 -0800 (PST)
+In-Reply-To: <4D64CAC1.8050100@eukrea.com>
+References: <1297606132-19861-1-git-send-email-filip.zyzniewski@gmail.com>
+	<1297709209-6602-1-git-send-email-filip.zyzniewski@gmail.com>
+	<ik29om$8m7$1@dough.gmane.org>
+	<AANLkTimvzFij9bx0J8PbaWv1+_9TG4p4+vHPQH2DZnvV@mail.gmail.com>
+	<4D64CAC1.8050100@eukrea.com>
+Date: Wed, 23 Feb 2011 14:26:31 +0100
+Message-ID: <AANLkTi=2a4s-CfSktJ8P3MHSSg78ZU0CrFYqK+YuxiKq@mail.gmail.com>
+From: Filip Zyzniewski <filip.zyzniewski@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Feb 2011 13:07:16 +0000
-Message-Id: <1298466445-16486-6-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <1298466445-16486-5-git-send-email-otavio@ossystems.com.br>
-References: <1298466445-16486-1-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-2-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-3-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-4-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-5-git-send-email-otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 05/14] cmake.bbclass: use 2.8 modules
+Subject: Re: [PATCHv2] linux-firmware: split into bus specific packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,28 +47,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2011 13:16:17 -0000
+X-List-Received-Date: Wed, 23 Feb 2011 13:27:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- classes/cmake.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+On 2/23/11, Eric Benard <eric@eukrea.com> wrote:
+> As already said before, there is an other version of this recipe in
+> recipes/firmwares/linux-firmware.inc
+> which is already splitted in small packages for some firmware such as :
+> firmware-atheros-ar9271.bb
+> firmware-marvell-sd8688_10.38.1-p25.bb
 
-diff --git a/classes/cmake.bbclass b/classes/cmake.bbclass
-index 29248e6..97347f2 100644
---- a/classes/cmake.bbclass
-+++ b/classes/cmake.bbclass
-@@ -43,7 +43,7 @@ cmake_do_generate_toolchain_file() {
-   echo "set( CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY )" >> ${WORKDIR}/toolchain.cmake
-   echo "set( CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY )" >> ${WORKDIR}/toolchain.cmake
- # Use native cmake modules
--  echo "set( CMAKE_MODULE_PATH ${STAGING_DIR_NATIVE}/usr/share/cmake-2.6/Modules/ )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_MODULE_PATH ${STAGING_DIR_NATIVE}/usr/share/cmake-2.8/Modules/ )" >> ${WORKDIR}/toolchain.cmake
- }
- 
- addtask generate_toolchain_file after do_patch before do_configure
--- 
-1.7.2.3
+So you suggest removing recipes/linux-firmware altogether?
+If so, recipes/firmwares/linux-firmware.inc would need a lot of
+reshaping to provide what I need (bus specific packages).
 
+bye,
+Filip Zyzniewski
 
 
