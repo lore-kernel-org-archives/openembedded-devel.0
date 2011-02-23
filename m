@@ -1,46 +1,37 @@
-Received: from mail-bw0-f50.google.com ([209.85.214.50])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PsF4o-0003QN-6b
+	(envelope-from <obi@opendreambox.org>) id 1PsFYa-0004kD-Vf
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 14:48:22 +0100
-Received: by bwz2 with SMTP id 2so82307bwz.9
+	Wed, 23 Feb 2011 15:19:08 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id CDB6D314DFE6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 05:47:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=59BWWJGk4BHC+HrtZdXeQENOmcivmXzY5WfOYjuwPpk=;
-	b=A4Zw1lNoWFAEE5KwE2BCZhTYpo4CPY2/3xuz2w59aXH0VxZlBfc3bKdAPDfh8NUleN
-	lNnseDPLrEdiDMPzfQ1NKkEEPsFS+9AAEDLRVtHz0IBkIRIrUzMK+tFxEFayFP6oKDNN
-	e76Apq519RHtcMQXv8pTiWzoHWMG9s59U/zIU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=BEx0T6wFIbVXgAmmhEMHWl8F3yudvi+Q6LfJrxbI8LRu7qUiSX95oTNPQhWYeuY4MR
-	p5VWzASsN+eS4hIVRVCoiAvVkPqQ+Slp70oVsHyLvbshTXB8dF+oJv/FuiI5SNA2SdUb
-	/5DQ6XFoooStDehMAWl6aKtJlPqFswq1kxelM=
+	Wed, 23 Feb 2011 15:17:51 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id 8behMnfGzEgy
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Feb 2011 15:17:46 +0100 (CET)
+Received: from [172.22.22.61] (ip-94-79-168-47.unitymediagroup.de
+	[94.79.168.47])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id EE0E6314DFC5
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Feb 2011 15:17:45 +0100 (CET)
+Message-ID: <4D651709.3070909@opendreambox.org>
+Date: Wed, 23 Feb 2011 15:17:45 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.14) Gecko/20110208 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-Received: by 10.204.47.227 with SMTP id o35mr3595652bkf.132.1298468822890;
-	Wed, 23 Feb 2011 05:47:02 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.119.207 with HTTP; Wed, 23 Feb 2011 05:47:02 -0800 (PST)
-In-Reply-To: <1298468511.2178.430.camel@phil-desktop>
-References: <1298466445-16486-1-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-2-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-3-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-4-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-5-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-6-git-send-email-otavio@ossystems.com.br>
-	<1298468511.2178.430.camel@phil-desktop>
-Date: Wed, 23 Feb 2011 13:47:02 +0000
-X-Google-Sender-Auth: 7_39RlRlYBQQCPOcuOZQQVqCenQ
-Message-ID: <AANLkTim1EdeGgyy3siyL99ugY-v=uqW_v4MRHJV0evq6@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Phil Blundell <philb@gnu.org>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 05/14] cmake.bbclass: use 2.8 modules
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTimy_TtONvPFjaGCUV0qxaM7qF0ENBx7A6wzRnPZ@mail.gmail.com>	<4D63F7F9.7000804@eukrea.com>
+	<4D63FF5C.30400@opendreambox.org>
+	<20110222201107.GB3970@localhost.jama.net>
+In-Reply-To: <20110222201107.GB3970@localhost.jama.net>
+Subject: Re: Weird behaviour with PPP
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,37 +45,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2011 13:48:22 -0000
+X-List-Received-Date: Wed, 23 Feb 2011 14:19:09 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Wed, Feb 23, 2011 at 13:41, Phil Blundell <philb@gnu.org> wrote:
-> On Wed, 2011-02-23 at 13:07 +0000, Otavio Salvador wrote:
->> - =A0echo "set( CMAKE_MODULE_PATH ${STAGING_DIR_NATIVE}/usr/share/cmake-=
-2.6/Modules/ )" >> ${WORKDIR}/toolchain.cmake
->> + =A0echo "set( CMAKE_MODULE_PATH ${STAGING_DIR_NATIVE}/usr/share/cmake-=
-2.8/Modules/ )" >> ${WORKDIR}/toolchain.cmake
->
-> This seems a bit fragile (and, presumably, is bad news for anybody who
-> is still using cmake 2.6 for any reason). =A0Isn't there any way to
-> automatically select the version that matches
-> ${STAGING_BINDIR_NATIVE}/cmake or whatever?
+Hi Martin,
 
-I see noone using cmake 2.6.
+On 02/22/2011 09:11 PM, Martin Jansa wrote:
+> On Tue, Feb 22, 2011 at 07:24:28PM +0100, Andreas Oberritter wrote:
+>> Hi,
+>>
+>> On 02/22/2011 06:52 PM, Eric Benard wrote:
+>>> On 22/02/2011 18:22, Mickael Chazaux wrote:
+>>>> I have a hard time figuring out why bitbake seems to mix versions of
+>>>> ppp... Any ideas?
+>>>>
+>>> strange, which distro, git tag, bitbake version are you using ?
+>>>
+>>> Both bitbake ppp-2.4.5 & bitbake -b
+>>> openembedded/recipes/ppp/ppp_2.4.5.bb work fine here (angstrom 2008.1,
+>>> armv5 target, bitbake 1.12.0).
+>>
+>> I don't think this has anything to do with ppp. I faced the same issue
+>> with a local recipe, of which an older version had been built before.
+>> When packaging, the old version was used. A new workdir was created for
+>> the old version during this step and the resulting packages were empty.
+>> No recipe existed for this old version at that time, i.e. PR had already
+>> been increased to 1.0, but 0.0 was used by bitbake.
+>>
+>> In the end, I deleted bitbake's cache and all files matching the
+>> package's name to get rid of the annoying problem. I think there were
+>> pstage packages of the old version lying around.
+> 
+> This wrong behavior is quite common ie after changing PACKAGE_ARCH, see:
+> http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg04280.html
 
-In any case cmake will know the "internal" modules directory by itself
-so it works even if this value doesn't match. This is where it is
-going to look as fallback and I was using 2.8 without 2.6 for long
-time without noticing any issue.
+In that thread, if I understood correctly, Richard suggested that
+packaged staging could solve the problem. But that doesn't seem to be
+the case. Do you know why?
 
-This seems safe. We could drop the CMAKE_MODULE_PATH if preferred. I
-just fixed it to 2.8 to reflect the current default one.
+Regards,
+Andreas
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
 
 
