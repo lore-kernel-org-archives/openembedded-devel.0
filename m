@@ -1,50 +1,20 @@
-Received: from mail-bw0-f50.google.com ([209.85.214.50])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PsHVL-00013N-2I
+Received: from smtpauth17.prod.mesa1.secureserver.net ([64.202.165.29])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <mike@mwester.net>) id 1PsJiQ-0005uT-4q
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 17:23:55 +0100
-Received: by bwz2 with SMTP id 2so288326bwz.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 08:22:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=x2u6rVphT/4dgi6iupzEHuqhEyEFe02DsgnEKpWfAV0=;
-	b=VLOvtkDGlLouG/b2LirzG0dtTCFDY+nkvXjlmGA0t02iaF61yPAY3/4HGA9hmWfR2g
-	IbMr3VbTW2vifEVHwNjEt2lfRjOsKSGKeOxt6HWrPZ14QSZicKn2mJyj47XmykOT2cOh
-	NJ0CsQdniJ1tdm30xE4Ccc46LLSYHTuB5R0GQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=ibVUw94xhv1HuiI8GO26evw+lrtGDgbtyVPFyO2aaq0TPoxdw8fV33SOhcbOC3e+m6
-	6p3ynLlUHuPNh1ZYp111+D8ZzJbVbBUj41xu/TNa3hgO9+Y+S550YRgJKQ27F/YeEup9
-	vJevOT3/HZ5ksM6FuA0PDr9MtOQDuV9w0tfbs=
+	Wed, 23 Feb 2011 19:45:36 +0100
+Received: (qmail 29093 invoked from network); 23 Feb 2011 18:22:41 -0000
+Received: from unknown (209.242.7.132)
+	by smtpauth17.prod.mesa1.secureserver.net (64.202.165.29) with ESMTP;
+	23 Feb 2011 18:22:41 -0000
+Message-ID: <4D65557C.3020709@mwester.net>
+Date: Wed, 23 Feb 2011 12:44:12 -0600
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-Received: by 10.204.50.196 with SMTP id a4mr3829397bkg.213.1298478155481; Wed,
-	23 Feb 2011 08:22:35 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.119.207 with HTTP; Wed, 23 Feb 2011 08:22:35 -0800 (PST)
-In-Reply-To: <20110223143402.GD3478@jama.jama.net>
-References: <1298466445-16486-5-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-6-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-7-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-8-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-9-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-10-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-11-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-12-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-13-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-14-git-send-email-otavio@ossystems.com.br>
-	<20110223143402.GD3478@jama.jama.net>
-Date: Wed, 23 Feb 2011 16:22:35 +0000
-X-Google-Sender-Auth: b41fxIOtwGALXck0zYRS3DS0rrg
-Message-ID: <AANLkTik+fXB97HaMgmbhtO31H5uhP6DLp+tEcfLT2Za1@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 13/14] linux (2.6.37): add 2.6.37.1 stable patch
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] groff - fix do_install failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,22 +28,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2011 16:23:55 -0000
+X-List-Received-Date: Wed, 23 Feb 2011 18:45:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-\On Wed, Feb 23, 2011 at 14:34, Martin Jansa <martin.jansa@gmail.com> wrote=
-:
-> On Wed, Feb 23, 2011 at 01:07:24PM +0000, Otavio Salvador wrote:
->> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Bitbaking groff fails in the do_install step, complaining that img/pic* does
+not exist.  Normally, these files would be created by groff itself during the
+build process, but since we are cross-compiling, the old recipe replaces the
+invocation of groff and troff with echo commands.  However, echo does not
+create the output files, which eventually results in the do_install failure.
 
-Sure. Please do.
+This patch makes groff dependent on groff-native, and instead of using echo,
+it instructs the build process to use the staged groff binaries.
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Signed-off-by: Mike Westerhof <mike@mwester.net>
+
+---
+diff --git a/recipes/groff/groff_1.20.1.bb b/recipes/groff/groff_1.20.1.bb
+index 6ea87dc..5869ff7 100644
+--- a/recipes/groff/groff_1.20.1.bb
++++ b/recipes/groff/groff_1.20.1.bb
+@@ -1,7 +1,10 @@
+ DESCRIPTION = "GNU roff"
+ SECTION = "base"
+ LICENSE = "GPL"
+-PR = "r2"
++PR = "r3"
++
++DEPENDS = "groff-native"
++DEPENDS_virtclass-native = ""
+
+ SRC_URI = "http://ftp.gnu.org/gnu/groff/groff-${PV}.tar.gz \
+           "
+@@ -15,10 +18,10 @@ PARALLEL_MAKE = ""
+ do_configure_prepend(){
+        if [ "${BUILD_SYS}" != "${HOST_SYS}" ]; then
+                sed -i \
+-                   -e '/^GROFFBIN=/s:=.*:=echo:' \
+-                   -e '/^TROFFBIN=/s:=.*:=echo:' \
+-                   -e '/^GROFF_BIN_PATH=/s:=.*:=:' \
+-                   -e '/^GROFF_BIN_DIR=/s:=.*:=:' \
++                   -e '/^GROFFBIN=/s:=.*:=${STAGING_BINDIR_NATIVE}/groff:' \
++                   -e '/^TROFFBIN=/s:=.*:=${STAGING_BINDIR_NATIVE}/troff:' \
++                   -e '/^GROFF_BIN_PATH=/s:=.*:=${STAGING_BINDIR_NATIVE}:' \
++                   -e '/^GROFF_BIN_DIR=/s:=.*:=${STAGING_BINDIR_NATIVE}:' \
+                    ${S}/contrib/*/Makefile.sub \
+                    ${S}/doc/Makefile.in \
+                    ${S}/doc/Makefile.sub
 
 
