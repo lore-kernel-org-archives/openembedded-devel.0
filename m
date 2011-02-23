@@ -1,24 +1,39 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <morphis@gravedo.de>) id 1PsDGh-00050z-BH
+	(envelope-from <mickael.chazaux@gmail.com>) id 1PsDZG-0005u6-8v
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Feb 2011 12:52:31 +0100
-Received: by gravedo.de (Postfix, from userid 5001)
-	id 475EB799025; Wed, 23 Feb 2011 12:51:10 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h1108419.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.5 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from localhost (dslb-088-071-242-144.pools.arcor-ip.net
-	[88.71.242.144]) by gravedo.de (Postfix) with ESMTPSA id 811C3798D67;
-	Wed, 23 Feb 2011 12:51:05 +0100 (CET)
-From: Simon Busch <morphis@gravedo.de>
+	Wed, 23 Feb 2011 13:11:42 +0100
+Received: by vxd7 with SMTP id 7so3305844vxd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Feb 2011 04:10:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=yiNygVRL013WMKjAETgtOBwqHWO9jLXxQyKE8jWzXY4=;
+	b=MbzNfhC8JrNLGcumYbkqqMh9DtOD0vGeTkYhb55SJNiOZQZdq+X7+M8M3TFXqSFg7s
+	6mKCVlylcrcUBgsviXzJHp0J6ik6Tn47tAG+k8ggxVDGWVkb/B3a7MMY3WG0CtjW41aD
+	p+h2w2TwwHPJGCdenNagD0JWQ7+qoQ2uCiAhE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=aTyoXUtnJ/xoud6rjSwqJVRZVf54Tf6ty+sH/noWneHSb++b9y4NFHowKliFGlUbLf
+	7ZMd3I2krD1eG3dkM97+nB9yqS5ZY/S3B+StUFn1QkVDmeiRZMQx8ccZNbgg3Oj+DS1O
+	K/yWi6iG/D/6B4FIT7qNKd8necUyRGuAkCkPI=
+MIME-Version: 1.0
+Received: by 10.52.167.42 with SMTP id zl10mr5850893vdb.299.1298463022279;
+	Wed, 23 Feb 2011 04:10:22 -0800 (PST)
+Received: by 10.220.180.7 with HTTP; Wed, 23 Feb 2011 04:10:22 -0800 (PST)
+In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819E011A91BF89@DEMCHP99E35MSX.ww902.siemens.net>
+References: <AANLkTimy_TtONvPFjaGCUV0qxaM7qF0ENBx7A6wzRnPZ@mail.gmail.com>
+	<4D63F7F9.7000804@eukrea.com> <4D63FF5C.30400@opendreambox.org>
+	<20110222201107.GB3970@localhost.jama.net>
+	<AANLkTi=E2wEw8oCD8r8fzuD9GykdaJiz3JDehbiAR3sY@mail.gmail.com>
+	<09D9BE2AC4AA764DABAA8C91E48D819E011A91BF89@DEMCHP99E35MSX.ww902.siemens.net>
+Date: Wed, 23 Feb 2011 13:10:22 +0100
+Message-ID: <AANLkTimtTwTX47GshHbym-xCKsMDNPo=B734WV49xLLS@mail.gmail.com>
+From: Mickael Chazaux <mickael.chazaux@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Feb 2011 12:51:01 +0100
-Message-Id: <1298461861-12737-1-git-send-email-morphis@gravedo.de>
-X-Mailer: git-send-email 1.7.1
-Subject: [PATCH] e-module: introduce INC_PR and use it in all depending recipes
+Subject: Re: Weird behaviour with PPP
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,182 +47,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2011 11:52:31 -0000
+X-List-Received-Date: Wed, 23 Feb 2011 12:11:42 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-We set INC_PR initially to r5 as some of the dependencies already defined a PR which max
-was r4.
+Hi,
 
-Signed-off-by: Simon Busch <morphis@gravedo.de>
----
- recipes/e17/cpu_svn.bb          |    1 +
- recipes/e17/diskio_svn.bb       |    1 +
- recipes/e17/e-module.inc        |    1 +
- recipes/e17/efm-path_svn.bb     |    1 +
- recipes/e17/efm-pathbar_svn.bb  |    3 ++-
- recipes/e17/flame_svn.bb        |    1 +
- recipes/e17/forecasts_svn.bb    |    1 +
- recipes/e17/news_svn.bb         |    1 +
- recipes/e17/notification_svn.bb |    1 +
- recipes/e17/places_svn.bb       |    3 +--
- recipes/e17/rain_svn.bb         |    1 +
- recipes/e17/screenshot_svn.bb   |    1 +
- recipes/e17/uptime_svn.bb       |    1 +
- 13 files changed, 14 insertions(+), 3 deletions(-)
+2011/2/23 Aeschbacher, Fabrice <Fabrice.Aeschbacher@siemens.com>:
+>> -----Urspr=C3=BCngliche Nachricht-----
+>> Von: openembedded-devel-bounces@lists.openembedded.org
+>> [mailto:openembedded-devel-bounces@lists.openembedded.org] Im
+>> Auftrag von Mickael Chazaux
+>> Gesendet: Mittwoch, 23. Februar 2011 10:19
+>> An: openembedded-devel@lists.openembedded.org
+>> Betreff: Re: [oe] Weird behaviour with PPP
+>>
+>> Hi,
+>>
+>> 2011/2/22 Martin Jansa <martin.jansa@gmail.com>:
+>> > On Tue, Feb 22, 2011 at 07:24:28PM +0100, Andreas Oberritter wrote:
+>> >> Hi,
+>> >>
+>> >> On 02/22/2011 06:52 PM, Eric Benard wrote:
+>> >> > On 22/02/2011 18:22, Mickael Chazaux wrote:
+>> >> >> I have a hard time figuring out why bitbake seems to
+>> mix versions of
+>> >> >> ppp... Any ideas?
+>> >> >>
+>> >> > strange, which distro, git tag, bitbake version are you using ?
+>> >> >
+>> >> > Both bitbake ppp-2.4.5 & bitbake -b
+>> >> > openembedded/recipes/ppp/ppp_2.4.5.bb work fine here
+>> (angstrom 2008.1,
+>> >> > armv5 target, bitbake 1.12.0).
+>> >>
+>> >> I don't think this has anything to do with ppp. I faced
+>> the same issue
+>> >> with a local recipe, of which an older version had been
+>> built before.
+>> >> When packaging, the old version was used. A new workdir
+>> was created for
+>> >> the old version during this step and the resulting
+>> packages were empty.
+>> >> No recipe existed for this old version at that time, i.e.
+>> PR had already
+>> >> been increased to 1.0, but 0.0 was used by bitbake.
+>> >>
+>> >> In the end, I deleted bitbake's cache and all files matching the
+>> >> package's name to get rid of the annoying problem. I think
+>> there were
+>> >> pstage packages of the old version lying around.
+>> >
+>> > This wrong behavior is quite common ie after changing
+>> PACKAGE_ARCH, see:
+>> >
+>> http://www.mail-archive.com/openembedded-devel@lists.openembed
+>> ded.org/msg04280.html
+>> >
+>> As I often switch architectures (arm, x86) to work on different
+>> boards, should I use a different TMPDIR for each?
+>
+> I am using one different TMPDIR for each MACHINE:
+> =C2=A0build/mach1, build/mach2, ...
+>
+> I still have to find a way to make two different machines with same arch =
+(hence same cross-toolchain) share the same pstage, so that the toolchain d=
+oes not get built twice
+>
 
-diff --git a/recipes/e17/cpu_svn.bb b/recipes/e17/cpu_svn.bb
-index 3dc049d..ccc6e7e 100644
---- a/recipes/e17/cpu_svn.bb
-+++ b/recipes/e17/cpu_svn.bb
-@@ -1,4 +1,5 @@
- LICENSE = "MIT"
- PV = "0.0.1+svnr${SRCREV}"
-+PR = "${INC_PR}.0"
- 
- require e-module.inc
-diff --git a/recipes/e17/diskio_svn.bb b/recipes/e17/diskio_svn.bb
-index 0e854ba..f748a29 100644
---- a/recipes/e17/diskio_svn.bb
-+++ b/recipes/e17/diskio_svn.bb
-@@ -1,5 +1,6 @@
- LICENSE = "MIT"
- PV = "0.0.1+svnr${SRCPV}"
-+PR = "${INC_PR}.0"
- 
- require e-module.inc
- 
-diff --git a/recipes/e17/e-module.inc b/recipes/e17/e-module.inc
-index 185c841..3834a2e 100644
---- a/recipes/e17/e-module.inc
-+++ b/recipes/e17/e-module.inc
-@@ -3,6 +3,7 @@ SECTION = "x11/multimedia"
- DEPENDS = "e-wm"
- 
- SRCREV = "${EFL_SRCREV}"
-+INC_PR = "r5"
- 
- SRCNAME = "E-MODULES-EXTRA/${PN}"
- 
-diff --git a/recipes/e17/efm-path_svn.bb b/recipes/e17/efm-path_svn.bb
-index ecfd838..685513f 100644
---- a/recipes/e17/efm-path_svn.bb
-+++ b/recipes/e17/efm-path_svn.bb
-@@ -1,5 +1,6 @@
- LICENSE = "MIT"
- PV = "0.0.1+svnr${SRCPV}"
-+PR = "${INC_PR}.0"
- 
- require e-module.inc
- 
-diff --git a/recipes/e17/efm-pathbar_svn.bb b/recipes/e17/efm-pathbar_svn.bb
-index d7666fd..54c5a0b 100644
---- a/recipes/e17/efm-pathbar_svn.bb
-+++ b/recipes/e17/efm-pathbar_svn.bb
-@@ -1,5 +1,6 @@
- LICENSE = "MIT"
- PV = "0.0.1+svnr${SRCPV}"
-+PR = "${INC_PR}.0"
- 
- require e-module.inc
- 
-@@ -11,4 +12,4 @@ do_configure_prepend() {
- }
- 
- FILES_${PN}-dbg += "${libdir}/enlightenment/modules/*/*/.debug/"
--FILES_${PN} += "${libdir}/enlightenment/modules/"
-\ No newline at end of file
-+FILES_${PN} += "${libdir}/enlightenment/modules/"
-diff --git a/recipes/e17/flame_svn.bb b/recipes/e17/flame_svn.bb
-index c46314c..11769c6 100644
---- a/recipes/e17/flame_svn.bb
-+++ b/recipes/e17/flame_svn.bb
-@@ -1,5 +1,6 @@
- LICENSE = "MIT"
- PV = "0.0.3+svnr${SRCPV}"
-+PR = "${INC_PR}.0"
- 
- require e-module.inc
- 
-diff --git a/recipes/e17/forecasts_svn.bb b/recipes/e17/forecasts_svn.bb
-index 676945e..a6316ed 100644
---- a/recipes/e17/forecasts_svn.bb
-+++ b/recipes/e17/forecasts_svn.bb
-@@ -1,5 +1,6 @@
- LICENSE = "MIT"
- PV = "0.2.0+svnr${SRCREV}"
-+PR = "${INC_PR}.0"
- 
- require e-module.inc
- 
-diff --git a/recipes/e17/news_svn.bb b/recipes/e17/news_svn.bb
-index c72fbb5..1e429e7 100644
---- a/recipes/e17/news_svn.bb
-+++ b/recipes/e17/news_svn.bb
-@@ -1,5 +1,6 @@
- LICENSE = "MIT"
- PV = "0.1.0+svnr${SRCPV}"
-+PR = "${INC_PR}.0"
- 
- require e-module.inc
- 
-diff --git a/recipes/e17/notification_svn.bb b/recipes/e17/notification_svn.bb
-index a8c53a5..1f4567a 100644
---- a/recipes/e17/notification_svn.bb
-+++ b/recipes/e17/notification_svn.bb
-@@ -1,5 +1,6 @@
- LICENSE = "MIT"
- PV = "0.2.0+svnr${SRCPV}"
-+PR = "${INC_PR}.0"
- 
- require e-module.inc
- 
-diff --git a/recipes/e17/places_svn.bb b/recipes/e17/places_svn.bb
-index 0956fa0..3476a59 100644
---- a/recipes/e17/places_svn.bb
-+++ b/recipes/e17/places_svn.bb
-@@ -1,7 +1,6 @@
- LICENSE = "BSD"
- PV = "0.1.0+svnr${SRCPV}"
--
--PR = "r4"
-+PR = "${INC_PR}.4"
- 
- require e-module.inc
- 
-diff --git a/recipes/e17/rain_svn.bb b/recipes/e17/rain_svn.bb
-index e9ab9de..8738f35 100644
---- a/recipes/e17/rain_svn.bb
-+++ b/recipes/e17/rain_svn.bb
-@@ -1,5 +1,6 @@
- LICENSE = "MIT"
- PV = "0.0.3+svnr${SRCPV}"
-+PR = "${INC_PR}.0"
- 
- require e-module.inc
- 
-diff --git a/recipes/e17/screenshot_svn.bb b/recipes/e17/screenshot_svn.bb
-index dc8acc3..0cd0d8b 100644
---- a/recipes/e17/screenshot_svn.bb
-+++ b/recipes/e17/screenshot_svn.bb
-@@ -1,5 +1,6 @@
- LICENSE = "MIT"
- PV = "0.3.0+svnr${SRCREV}"
-+PR = "${INC_PR}.0"
- 
- require e-module.inc
- 
-diff --git a/recipes/e17/uptime_svn.bb b/recipes/e17/uptime_svn.bb
-index 42c0d72..c6d7434 100644
---- a/recipes/e17/uptime_svn.bb
-+++ b/recipes/e17/uptime_svn.bb
-@@ -1,5 +1,6 @@
- LICENSE = "MIT"
- PV = "0.0.2+svnr${SRCREV}"
-+PR = "${INC_PR}.0"
- 
- require e-module.inc
- 
--- 
-1.7.1
+Thanks for all the help. A fresh rebuild in a new TMPDIR builds the
+right version of PPP.
 
+Regards,
+
+Mickael
 
 
