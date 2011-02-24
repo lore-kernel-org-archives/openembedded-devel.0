@@ -1,25 +1,23 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from vms173005pub.verizon.net ([206.46.173.5])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Psk7G-0000ox-3S for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Feb 2011 23:56:58 +0100
-Received: from f053042033.adsl.alicedsl.de ([78.53.42.33]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Psk5z-00058M-KE for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Feb 2011 22:55:39 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <denis@denix.org>) id 1PskLf-0001S0-5D
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Feb 2011 00:11:55 +0100
+Received: from gandalf.denix.org ([unknown] [71.251.49.88])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LH5004L39OPNU72@vms173005.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	24 Feb 2011 17:10:07 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 85FE314AF6D; Thu,
+	24 Feb 2011 18:10:01 -0500 (EST)
+Date: Thu, 24 Feb 2011 18:10:01 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4D668554.4050307@mentor.com>
-References: <1298490534.26736.52.camel@rex>
-	<AANLkTim-WprzRfvaYnFMjoR4=19hj96qp3NioMjY0Axi@mail.gmail.com>
-	<4D668554.4050307@mentor.com>
-Date: Thu, 24 Feb 2011 23:55:38 +0100
-Message-ID: <1298588138.26090.38.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: OT: pull requests, merges and bisection (was: OE TSC Meeting 2011/02/21 Minutes)
+Message-id: <20110224231001.GC11390@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: US OEDEM/OEDAM in April?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,71 +31,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Feb 2011 22:56:58 -0000
-X-Groupsio-MsgNum: 29664
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-CpNvmY+NxLRKAlQ8oEcU"
+X-List-Received-Date: Thu, 24 Feb 2011 23:11:55 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
---=-CpNvmY+NxLRKAlQ8oEcU
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+All,
 
-Dear OE folks,
+We had previously discussed the possibility of holding US-based OEDEM (or is
+it called OEDAM then?) in addition to our regular Fall OEDEM in Europe. Is
+there still any interest in this?
 
+There is Embedded Linux Conference in San Francisco coming up in April, along
+with few other Linux Foundation sponsored or organized events right before or
+right after ELC. As some of the OE developers are planning on coming to ELC,
+should we try to schedule a day or two for OEDEM and try to resolve some of
+the pending organizational and technical issues face to face?
 
-it is great that the minutes of the meetings get published. Thank you.
+Please speak up. Thanks.
 
-
-Am Donnerstag, den 24.02.2011, 09:20 -0700 schrieb Tom Rini:
-
-[=E2=80=A6]
-
-> Not clear in the summary but from the logs is that we want to, as part=
-=20
-> of making this be transparent, publish guidelines for how this will=20
-> work, based on what poky is doing now.  The high level plan is to follow=
-=20
-> the contrib tree model that poky has which means sending pull requests=
-=20
-> (which in turn also post the patches to the ML for review).
->=20
-> For changes that don't have a tree to pull from, someone with write=20
-> access would need to pick them up.
-
-XBMC is using also an approach with pull requests. The Linux kernel is
-doing that also. Is there documentation on how pull requests, merges and
-bisecting works together?
-
-My problem is that pull requests are based on a certain commit in
-origin/master. After the request is sent most of the time several
-commits are pushed to origin/master in the mean time, so a merge is
-necessary =E2=80=9Cpolluting=E2=80=9D the commit history.
-
-With my current knowledge I find it very difficult to track down bad
-commits especially if commits break the builds in between. Does `git
-bisect` take care of that itself? How do the Linux developers deal with
-that problem, especially merge conflicts?
-
-Currently I like rebasing (fast fowarding) very much, but that puts
-strain on developers too because they always need to update their
-patches/commit to latest master.
+--
+Denys
 
 
-Thanks,
-
-Paul
-
---=-CpNvmY+NxLRKAlQ8oEcU
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk1m4eoACgkQPX1aK2wOHVgvIACeN0J/rqSqFKq3+2tFM/9CMPao
-xuUAnio+Tjbk4pI3WvAp+on3wkJjW4zG
-=70Og
------END PGP SIGNATURE-----
-
---=-CpNvmY+NxLRKAlQ8oEcU--
