@@ -1,27 +1,27 @@
-Received: from vms173019pub.verizon.net ([206.46.173.19])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1PskoD-00025u-NE
+	(envelope-from <mark.hatle@windriver.com>) id 1Pskxp-0002N8-6p
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Feb 2011 00:41:21 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.49.88])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LH5009KJB1U3Q23@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	24 Feb 2011 17:39:36 -0600 (CST)
-Received: from elrond.denix.org (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 96DAE14AF6A; Thu,
-	24 Feb 2011 18:39:30 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Feb 2011 18:39:17 -0500
-Message-id: <1298590758-8843-2-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.7.4
-In-reply-to: <1298590758-8843-1-git-send-email-denis@denix.org>
-References: <4D668BB8.1090707@mentor.com>
-	<1298590758-8843-1-git-send-email-denis@denix.org>
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [PATCH 2/3] ffmpeg: pass --sysroot to configure script directly
+	Fri, 25 Feb 2011 00:51:17 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
+	by mail.windriver.com (8.14.3/8.14.3) with ESMTP id p1ONnr4T028528
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 24 Feb 2011 15:49:53 -0800 (PST)
+Received: from Macintosh-5.local (172.25.36.227) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.1.255.0;
+	Thu, 24 Feb 2011 15:49:53 -0800
+Message-ID: <4D66EE9F.8@windriver.com>
+Date: Thu, 24 Feb 2011 17:49:51 -0600
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <20110224231001.GC11390@denix.org>
+In-Reply-To: <20110224231001.GC11390@denix.org>
+X-Originating-IP: [172.25.36.227]
+Subject: Re: US OEDEM/OEDAM in April?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,86 +35,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Feb 2011 23:41:21 -0000
+X-List-Received-Date: Thu, 24 Feb 2011 23:51:17 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
-From: Denys Dmytriyenko <denys@ti.com>
+On 2/24/11 5:10 PM, Denys Dmytriyenko wrote:
+> All,
+> 
+> We had previously discussed the possibility of holding US-based OEDEM (or is
+> it called OEDAM then?) in addition to our regular Fall OEDEM in Europe. Is
+> there still any interest in this?
+> 
+> There is Embedded Linux Conference in San Francisco coming up in April, along
+> with few other Linux Foundation sponsored or organized events right before or
+> right after ELC. As some of the OE developers are planning on coming to ELC,
+> should we try to schedule a day or two for OEDEM and try to resolve some of
+> the pending organizational and technical issues face to face?
+> 
+> Please speak up. Thanks.
 
-ffmpeg's custom configure script fails some checks for specific headers, even
-though we pass --sysroot through CFLAGS. Use configure's specific --sysroot
-option to fix that.
+I am planning on being there at ELC in April.  I hope there is enough of an OE
+group be be able to do an OEDEM/OEDAM.. ;)
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes/ffmpeg/ffmpeg_0.5.bb   |    3 ++-
- recipes/ffmpeg/ffmpeg_0.6.1.bb |    3 ++-
- recipes/ffmpeg/ffmpeg_git.bb   |    3 ++-
- 3 files changed, 6 insertions(+), 3 deletions(-)
+--Mark
 
-diff --git a/recipes/ffmpeg/ffmpeg_0.5.bb b/recipes/ffmpeg/ffmpeg_0.5.bb
-index f3a6d21..623c369 100644
---- a/recipes/ffmpeg/ffmpeg_0.5.bb
-+++ b/recipes/ffmpeg/ffmpeg_0.5.bb
-@@ -2,7 +2,7 @@ require ffmpeg.inc
- 
- DEPENDS += "schroedinger libgsm"
- 
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
- 
- DEFAULT_PREFERENCE = "1"
- 
-@@ -47,6 +47,7 @@ EXTRA_OECONF = " \
-         --enable-cross-compile \
-         --extra-cflags="${TARGET_CFLAGS} ${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}" \
-         --extra-ldflags="${TARGET_LDFLAGS} ${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}" \
-+        --sysroot="${STAGING_DIR_TARGET}" \
-         --enable-hardcoded-tables \
-         ${EXTRA_FFCONF} \
- "
-diff --git a/recipes/ffmpeg/ffmpeg_0.6.1.bb b/recipes/ffmpeg/ffmpeg_0.6.1.bb
-index fb941a5..74a1161 100644
---- a/recipes/ffmpeg/ffmpeg_0.6.1.bb
-+++ b/recipes/ffmpeg/ffmpeg_0.6.1.bb
-@@ -2,7 +2,7 @@ require ffmpeg.inc
- 
- LICENSE = "LGPLv2.1+"
- DEPENDS += "schroedinger libgsm"
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- SRC_URI = "http://ffmpeg.org/releases/ffmpeg-${PV}.tar.bz2"
- SRC_URI[md5sum] = "4f5d732d25eedfb072251b5314ba2093"
-@@ -26,6 +26,7 @@ EXTRA_OECONF = " \
-         --enable-swscale \
-         --extra-cflags="${TARGET_CFLAGS} ${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}" \
-         --extra-ldflags="${TARGET_LDFLAGS}" \
-+        --sysroot="${STAGING_DIR_TARGET}" \
-         --prefix=${prefix}/ \
-         --target-os=linux \
-         ${EXTRA_FFCONF} \
-diff --git a/recipes/ffmpeg/ffmpeg_git.bb b/recipes/ffmpeg/ffmpeg_git.bb
-index 27e88ea..24c81ea 100644
---- a/recipes/ffmpeg/ffmpeg_git.bb
-+++ b/recipes/ffmpeg/ffmpeg_git.bb
-@@ -6,7 +6,7 @@ DEPENDS += "virtual/libsdl schroedinger libgsm libvpx"
- SRCREV = "a4f5af13fb00d7f55946470bb0f52e1dbf5f3c6a"
- 
- PV = "0.6.1+${PR}+gitr${SRCPV}"
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- DEFAULT_PREFERENCE = "-1"
- DEFAULT_PREFERENCE_angstrom = "1"
-@@ -47,6 +47,7 @@ EXTRA_OECONF = " \
-         --enable-cross-compile \
-         --extra-cflags="${TARGET_CFLAGS} ${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}" \
-         --extra-ldflags="${TARGET_LDFLAGS}" \
-+        --sysroot="${STAGING_DIR_TARGET}" \
-         --enable-hardcoded-tables \
-         ${EXTRA_FFCONF} \
- "
--- 
-1.7.0.4
+> --
+> Denys
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
