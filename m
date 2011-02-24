@@ -1,34 +1,33 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PsdDv-0006qO-GM
+	(envelope-from <Tom_Rini@mentor.com>) id 1Psdam-0002Zy-4U
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Feb 2011 16:35:23 +0100
-Received: by fxm8 with SMTP id 8so609979fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Feb 2011 07:34:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=QgAT6V8jfOUhlwgvb64BkFspBf6dG0P0IpWoL/iej0U=;
-	b=xGruLUr+bOf50ZP+Qhg91j7/czZMhU/aUxtXvTyj6XPjxO82qTwq/aUb5z6hh5DDwo
-	HRJ8rZyMB8KiD9UB/CS1OAuUXNA/rsD86uFuwn5P6sgbyGoe+l+PIXZbNHuJWd1gvmQY
-	oBKmB3YnFWMEZsdZXfIe5ehZ3csDycFTm5oxU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=SKlLTwCScE76pJTiPws1D9JctGVUp5plrxDdsXZL2ELDq5QDtnAgA6cgfXwRP7kdyw
-	9U7Gv5S5JXf/MDeIMDqDdy3cQtsyq7eBWMp2fE+ib9zPsvyEHHTcPHQ5W19iPYOhdYzt
-	Wu8aExSo6KWRYzKCRW49Gn0UYyGuEHyLhucSA=
-Received: by 10.223.112.1 with SMTP id u1mr1188646fap.109.1298561167256;
-	Thu, 24 Feb 2011 07:26:07 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id f24sm1079839fak.0.2011.02.24.07.26.04
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 24 Feb 2011 07:26:05 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 24 Feb 2011 16:59:00 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PsdZS-0006I9-Ei from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Feb 2011 07:57:38 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Thu, 24 Feb 2011 07:57:38 -0800
+Received: from [172.30.80.151] ([172.30.80.151]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 24 Feb 2011 08:57:37 -0700
+Message-ID: <4D667FDF.30309@mentor.com>
+Date: Thu, 24 Feb 2011 08:57:19 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Feb 2011 16:25:56 +0100
-Message-Id: <1298561156-21514-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-Subject: [PATCH] bitbake.conf: define shared PERSISTENT_DIR
+References: <1298337246-11794-1-git-send-email-tom_rini@mentor.com>	<1298337246-11794-2-git-send-email-tom_rini@mentor.com>	<AANLkTin-fKddL80Sn4m08AwayH4t0+EGmFMof72Rwueq@mail.gmail.com>
+	<20110224043707.GC17536@denix.org>
+In-Reply-To: <20110224043707.GC17536@denix.org>
+X-OriginalArrivalTime: 24 Feb 2011 15:57:37.0239 (UTC)
+	FILETIME=[8EB22670:01CBD43B]
+Subject: Re: [PATCH] bitbake.conf: Simplify TARGET_CPPFLAGS/LDFLAGS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,44 +41,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Feb 2011 15:35:23 -0000
+X-List-Received-Date: Thu, 24 Feb 2011 15:59:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-* import from poky
-  commit 6a11cf7dfe930461a6660e3b783b546fa2634900
-  Author: Richard Purdie <rpurdie@linux.intel.com>
-  Date:   Sun May 31 22:23:30 2009 +0100
-* we had CACHE var pointing to machine specific dir since
-  commit caf077679022f37ce55d758101f130e4e93bd7b5
-  Author: Richard Purdie <rpurdie@rpsys.net>
-  Date:   Mon Nov 20 17:40:20 2006 +0000
+On 02/23/2011 09:37 PM, Denys Dmytriyenko wrote:
+> On Mon, Feb 21, 2011 at 10:21:12PM -0800, Khem Raj wrote:
+>> On Mon, Feb 21, 2011 at 5:14 PM, Tom Rini<tom_rini@mentor.com>  wrote:
+>>> This is based on poky's ba2e1f4d933c37b372d6749d64614f2510ee9d7b, which
+>>> simplifies TARGET_CPPFLAGS (and thus CFLAGS) and TARGET_LDFLAGS
+>>> based on gcc any company having --sysroot
+>>>
+>>> Signed-off-by: Tom Rini<tom_rini@mentor.com>
+>>
+>> Acked-by:Khem Raj<raj.khem@gmail.com>
+>
+> Tom, Khem,
+>
+> This change seems to break external-toolchains, e.g. CodeSourcery Lite, at
+> least 2009q1 (gcc-4.3 based)...
+>
+> I'm seeing issues like this in libxau:
+>
+> | ./include/X11/Xauth.h:48:31: error: X11/Xfuncproto.h: No such file or directory
+> | ./include/X11/Xauth.h:49:27: error: X11/Xfuncs.h: No such file or directory
+>
+> It cannot find standard X headers from OE sysroot.
+>
+> Do I need to pass an extra --sysroot to CSL? Any other pointers?
 
-* current bitbake is looking for cache dir like this:
-  cachedir = (bb.data.getVar("PERSISTENT_DIR", d, True) or
-              bb.data.getVar("CACHE", d, True))
-  which without PERSISTENT_DIR defined picks machine-specific CACHE dir
-  so LOCALCOUNT numbers in SRCPV keeps rolling with every MACHINE switch
-  in same builddir :/
+I've never not had to set:
+TOOLCHAIN_OPTIONS = " --sysroot=${STAGING_DIR_TARGET}"
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- conf/bitbake.conf |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+And then clear it on native/etc.  What's going on is that the CSL 
+toolchain (and any other) was only finding stuff since we were spelling 
+out where to look, and now we need to pass that information in again.
 
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index dcc5c70..53bb7b7 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -294,6 +294,8 @@ FILESDIR = "${@bb.which(d.getVar('FILESPATH', 1), '.')}"
- 
- TMPDIR = "${TOPDIR}/tmp"
- CACHE = "${TMPDIR}/cache${@['', '/' + str(bb.data.getVar('MACHINE', d, 1))][bool(bb.data.getVar('MACHINE', d, 1))]}"
-+# The persistent cache should be shared by all builds
-+PERSISTENT_DIR = "${TMPDIR}/cache"
- CO_DIR = "${DL_DIR}"
- CVSDIR = "${CO_DIR}/cvs"
- SVNDIR = "${CO_DIR}/svn"
 -- 
-1.7.4.1
-
+Tom Rini
+Mentor Graphics Corporation
 
 
