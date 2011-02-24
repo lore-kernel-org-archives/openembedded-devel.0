@@ -1,30 +1,24 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from vms173011pub.verizon.net ([206.46.173.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PsQdI-0005yz-T4
+	(envelope-from <denis@denix.org>) id 1PsR1E-0000j0-0x
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Feb 2011 03:08:44 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 60E20314DC81
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Feb 2011 03:07:27 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id pwqyH9wOctni
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Feb 2011 03:07:21 +0100 (CET)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id DF5AA314CA15
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Feb 2011 03:07:20 +0100 (CET)
-Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Thu, 24 Feb 2011 02:07:20 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
+	Thu, 24 Feb 2011 03:33:28 +0100
+Received: from gandalf.denix.org ([unknown] [71.251.49.88])
+	by vms173011.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LH3002FMLKVCB81@vms173011.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	23 Feb 2011 19:31:49 -0600 (CST)
+Received: from elrond.denix.org (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 11E7614AF6A; Wed,
+	23 Feb 2011 20:31:43 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Feb 2011 02:07:20 +0000
-Message-Id: <1298513240-2010-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.2.3
-Subject: [PATCH resend] netkit-base-0.17: use update-alternatives
+Date: Wed, 23 Feb 2011 20:31:41 -0500
+Message-id: <1298511101-5170-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.7.4
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [PATCH] busybox: fix udhcp check for NFS rootfs for new style /proc/mounts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,56 +32,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Feb 2011 02:08:45 -0000
+X-List-Received-Date: Thu, 24 Feb 2011 02:33:28 -0000
 
-* Give netkit-inetd a priority of 70.
-* Add inetd.conf to CONFFILES_${PN}.
-* RPROVIDE inetd.
+From: Denys Dmytriyenko <denys@ti.com>
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+* Newer kernels change the format of /proc/mounts slightly when rootfs is
+mounted over NFS.
+
+* Old style:
+/dev/root / nfs <options> 0 0
+
+* New style:
+<server>:<mount> / nfs <options> 0 0
+
+* The regexp in grep can be simplified and rolled into one, but may become
+less strict...
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
-Last time, this patch didn't make it into patchwork. The patch to
-create an inetd package for busybox has already been merged.
+ .../busybox-1.13.2/udhcpc-new-nfsroot.patch        |   16 ++++++++++++++++
+ .../busybox-1.18.3/udhcpc-new-nfsroot.patch        |   16 ++++++++++++++++
+ recipes/busybox/busybox_1.13.2.bb                  |    2 +-
+ recipes/busybox/busybox_1.18.3.bb                  |    2 +-
+ recipes/busybox/busybox_1.1x.inc                   |    1 +
+ 5 files changed, 35 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/busybox/busybox-1.13.2/udhcpc-new-nfsroot.patch
+ create mode 100644 recipes/busybox/busybox-1.18.3/udhcpc-new-nfsroot.patch
 
- recipes/netkit-base/netkit-base_0.17.bb |   13 +++++++++++--
- 1 files changed, 11 insertions(+), 2 deletions(-)
-
-diff --git a/recipes/netkit-base/netkit-base_0.17.bb b/recipes/netkit-base/netkit-base_0.17.bb
-index 8ab8935..19fdaee 100644
---- a/recipes/netkit-base/netkit-base_0.17.bb
-+++ b/recipes/netkit-base/netkit-base_0.17.bb
-@@ -1,7 +1,8 @@
- SECTION = "base"
- DESCRIPTION = "netkit-base includes the inetd daemon."
- LICENSE = "BSD"
--PR = "r2"
-+RPROVIDES_${PN} = "inetd"
-+PR = "r3"
+diff --git a/recipes/busybox/busybox-1.13.2/udhcpc-new-nfsroot.patch b/recipes/busybox/busybox-1.13.2/udhcpc-new-nfsroot.patch
+new file mode 100644
+index 0000000..46aaab9
+--- /dev/null
++++ b/recipes/busybox/busybox-1.13.2/udhcpc-new-nfsroot.patch
+@@ -0,0 +1,16 @@
++diff -uNr busybox-1.13.2.orig/examples/udhcp/simple.script busybox-1.13.2/examples/udhcp/simple.script
++--- busybox-1.13.2.orig/examples/udhcp/simple.script	2011-02-23 00:30:32.000000000 -0500
+++++ busybox-1.13.2/examples/udhcp/simple.script	2011-02-23 17:05:37.873381763 -0500
++@@ -10,7 +10,12 @@
++ 
++ # return 0 if root is mounted on a network filesystem
++ root_is_nfs() {
+++	# old style mounts
++ 	grep -qe '^/dev/root.*\(nfs\|smbfs\|ncp\|coda\) .*' /proc/mounts
+++	if ! $? ; then
+++		# new style mounts
+++		grep -qe '^.*:.* / \(nfs\|smbfs\|ncp\|coda\) .*' /proc/mounts
+++	fi
++ }
++ 
++ case "$1" in
+diff --git a/recipes/busybox/busybox-1.18.3/udhcpc-new-nfsroot.patch b/recipes/busybox/busybox-1.18.3/udhcpc-new-nfsroot.patch
+new file mode 100644
+index 0000000..46aaab9
+--- /dev/null
++++ b/recipes/busybox/busybox-1.18.3/udhcpc-new-nfsroot.patch
+@@ -0,0 +1,16 @@
++diff -uNr busybox-1.13.2.orig/examples/udhcp/simple.script busybox-1.13.2/examples/udhcp/simple.script
++--- busybox-1.13.2.orig/examples/udhcp/simple.script	2011-02-23 00:30:32.000000000 -0500
+++++ busybox-1.13.2/examples/udhcp/simple.script	2011-02-23 17:05:37.873381763 -0500
++@@ -10,7 +10,12 @@
++ 
++ # return 0 if root is mounted on a network filesystem
++ root_is_nfs() {
+++	# old style mounts
++ 	grep -qe '^/dev/root.*\(nfs\|smbfs\|ncp\|coda\) .*' /proc/mounts
+++	if ! $? ; then
+++		# new style mounts
+++		grep -qe '^.*:.* / \(nfs\|smbfs\|ncp\|coda\) .*' /proc/mounts
+++	fi
++ }
++ 
++ case "$1" in
+diff --git a/recipes/busybox/busybox_1.13.2.bb b/recipes/busybox/busybox_1.13.2.bb
+index ef20c62..fca3e93 100644
+--- a/recipes/busybox/busybox_1.13.2.bb
++++ b/recipes/busybox/busybox_1.13.2.bb
+@@ -1,5 +1,5 @@
+ require busybox_1.1x.inc
+-PR = "${INC_PR}.3"
++PR = "${INC_PR}.4"
  
- SRC_URI = "ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/netkit-base-${PV}.tar.gz \
-            file://configure.patch \
-@@ -28,10 +29,18 @@ do_compile () {
- do_install () {
- 	install -d ${D}${sysconfdir}/init.d ${D}${sbindir}
- 	install -m 0755 inetd/inetd ${D}${sbindir}/inetd
--	install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/inetd
-+	install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/inetd.${PN}
- 	install -m 0644 ${WORKDIR}/inetd.conf ${D}${sysconfdir}
- }
+ SRC_URI += "\
+   file://busybox-1.13.2-awk.patch \
+diff --git a/recipes/busybox/busybox_1.18.3.bb b/recipes/busybox/busybox_1.18.3.bb
+index 633b70b..f85de86 100644
+--- a/recipes/busybox/busybox_1.18.3.bb
++++ b/recipes/busybox/busybox_1.18.3.bb
+@@ -1,5 +1,5 @@
+ require busybox_1.1x.inc
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
  
-+pkg_prerm_${PN} () {
-+        update-alternatives --remove inetd-init inetd.${PN}
-+}
-+pkg_postinst_${PN} () {
-+        update-alternatives --install ${sysconfdir}/init.d/inetd inetd-init inetd.${PN} 70
-+}
-+
-+CONFFILES_${PN} = "${sysconfdir}/inetd.conf"
- 
- SRC_URI[md5sum] = "1f0193358e92559ec0f598b09ccbc0ec"
- SRC_URI[sha256sum] = "16dd81625ebfc8f5dcb0dfd2e6bac223aad325a9405d66a556fe349446b3c332"
+ SRC_URI += " \
+ 	http://busybox.net/downloads/fixes-1.18.3/busybox-1.18.3-buildsys.patch;name=patch01 \
+diff --git a/recipes/busybox/busybox_1.1x.inc b/recipes/busybox/busybox_1.1x.inc
+index 7623944..aefa57f 100644
+--- a/recipes/busybox/busybox_1.1x.inc
++++ b/recipes/busybox/busybox_1.1x.inc
+@@ -5,6 +5,7 @@ SRC_URI = "\
+   file://fdisk_nios2.patch \
+   file://udhcpscript.patch \
+   file://udhcpc-fix-nfsroot.patch \
++  file://udhcpc-new-nfsroot.patch \
+   file://B921600.patch \
+   file://get_header_tar.patch \
+   file://busybox-appletlib-dependency.patch \
 -- 
-1.7.2.3
+1.7.0.4
 
 
 
