@@ -1,35 +1,30 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <graham.gower@gmail.com>) id 1PsQB6-0005Er-Kf
+	(envelope-from <obi@opendreambox.org>) id 1PsQZ4-0005sb-0Y
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Feb 2011 02:39:36 +0100
-Received: by wwe15 with SMTP id 15so40497wwe.24
+	Thu, 24 Feb 2011 03:04:43 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 49CC2314DC81
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 17:38:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=KS93RV+1+piGofxM9GqjnP8uebv88Z0lSg5ZTY8pI0w=;
-	b=xcn1fevYGR0pMBhUKazrPel1wrRdScUuhNcCTMvqMxMFu8t/obZXMEwesCqJEJEm2y
-	JaNYBByC2AAzfybbZh3nXmNUGL505Dr7T/jAMo/RMSjHZdL2UC7GKrANRLauzC/hBAb4
-	Qd86Ltr6DmPKEmMX/ixcuhcns0hNIlzW1yVVs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=EbEJxVGYgrcOdlwrW2Gf7nydy5r6gWv/X1Kpilztq9RNprXjmXvd7CoiDRliSTkHXa
-	DqCjlUB2IcPPAJgaGgSYSb3Wnu6IeWk5cdAj4+joiOdOFqkwnobS6ANt1lWaw65G+hK0
-	Guw6QzozOMkser87Tqdh9EimWVdXowmSTH2UM=
-MIME-Version: 1.0
-Received: by 10.227.165.6 with SMTP id g6mr150376wby.181.1298511494727; Wed,
-	23 Feb 2011 17:38:14 -0800 (PST)
-Received: by 10.227.142.149 with HTTP; Wed, 23 Feb 2011 17:38:14 -0800 (PST)
-In-Reply-To: <1298506369-3417-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-References: <1298506369-3417-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-Date: Thu, 24 Feb 2011 12:08:14 +1030
-Message-ID: <AANLkTikNyU2y6XAnyAQ1h5BwjidKackphAWg_BuN4Q-r@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+	Thu, 24 Feb 2011 03:03:01 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id 375Zl33jzXoF
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Feb 2011 03:02:55 +0100 (CET)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id C3D2D314CA15
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Feb 2011 03:02:54 +0100 (CET)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Thu, 24 Feb 2011 02:02:54 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] opkg-utils: convert mtime to int before comparing it
+Date: Thu, 24 Feb 2011 02:02:54 +0000
+Message-Id: <1298512974-1229-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.2.3
+Subject: [PATCH] python-2.6: python-xml depends on python-elementtree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,30 +38,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Feb 2011 01:39:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 24 Feb 2011 02:04:45 -0000
 
-On 24 February 2011 10:42, Enrico Scholz
-<enrico.scholz@sigma-chemnitz.de> wrote:
-> The st_mtime attribute (which is a float) is compared against a value
-> from the timestamp database, which was stored as an integer there.
->
-> When working on a filesystem with precise timestamps the comparision
-> will fail nearly everytime hence.
->
-> Although it might be possible to enhance the database to store the
-> fractional part too, this will complicate things more than we would
-> gain by this change.
->
-> This patch was applied as 49e11b32906fc1becd9218bb3125f6fc8fa03fa4 to
-> old ipkg-utils already.
+* Fixes the following error:
 
-Have any of the other patches to ipkg-utils been missed?
-http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/ipkg-utils/ipkg-utils?h=5bd4e2057db8d67139d49dcec1cb705329ac9041
+  import xml.etree.cElementTree
+  File "/usr/lib/python2.6/xml/etree/cElementTree.py", line 3, in <module>
+  from _elementtree import *
+  ImportError: No module named _elementtree
 
->
-> Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ contrib/python/generate-manifest-2.6.py |    4 ++--
+ recipes/python/python-2.6-manifest.inc  |    4 ++--
+ recipes/python/python_2.6.6.bb          |    2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-Acked-By: Graham Gower <graham.gower@gmail.com>
+diff --git a/contrib/python/generate-manifest-2.6.py b/contrib/python/generate-manifest-2.6.py
+index 28a7226..1b11266 100755
+--- a/contrib/python/generate-manifest-2.6.py
++++ b/contrib/python/generate-manifest-2.6.py
+@@ -12,7 +12,7 @@ import time
+ VERSION = "2.6.6"
+ 
+ __author__ = "Michael 'Mickey' Lauer <mlauer@vanille-media.de>"
+-__version__ = "20110214"
++__version__ = "20110222"
+ 
+ class MakefileMaker:
+ 
+@@ -347,7 +347,7 @@ if __name__ == "__main__":
+     m.addPackage( "${PN}-unixadmin", "Python Unix Administration Support", "${PN}-core",
+     "lib-dynload/nis.so lib-dynload/grp.so lib-dynload/pwd.so getpass.*" )
+ 
+-    m.addPackage( "${PN}-xml", "Python basic XML support.", "${PN}-core ${PN}-re",
++    m.addPackage( "${PN}-xml", "Python basic XML support.", "${PN}-core ${PN}-elementtree ${PN}-re",
+     "lib-dynload/pyexpat.so xml xmllib.*" ) # package
+ 
+     m.addPackage( "${PN}-xmlrpc", "Python XMLRPC Support", "${PN}-core ${PN}-xml ${PN}-netserver ${PN}-lang",
+diff --git a/recipes/python/python-2.6-manifest.inc b/recipes/python/python-2.6-manifest.inc
+index 89c9be4..febaaa2 100644
+--- a/recipes/python/python-2.6-manifest.inc
++++ b/recipes/python/python-2.6-manifest.inc
+@@ -1,6 +1,6 @@
+ 
+ # WARNING: This file is AUTO GENERATED: Manual edits will be lost next time I regenerate the file.
+-# Generator: '../../contrib/python/generate-manifest-2.6.py' Version 20110214 (C) 2002-2010 Michael 'Mickey' Lauer <mlauer@vanille-media.de>
++# Generator: 'contrib/python/generate-manifest-2.6.py' Version 20110222 (C) 2002-2010 Michael 'Mickey' Lauer <mlauer@vanille-media.de>
+ # Visit the Python for Embedded Systems Site => http://www.Vanille.de/projects/python.spy
+ 
+  
+@@ -254,7 +254,7 @@ RDEPENDS_${PN}-unixadmin="${PN}-core"
+ FILES_${PN}-unixadmin="${libdir}/python2.6/lib-dynload/nis.so ${libdir}/python2.6/lib-dynload/grp.so ${libdir}/python2.6/lib-dynload/pwd.so ${libdir}/python2.6/getpass.* "
+ 
+ DESCRIPTION_${PN}-xml="Python basic XML support."
+-RDEPENDS_${PN}-xml="${PN}-core ${PN}-re"
++RDEPENDS_${PN}-xml="${PN}-core ${PN}-elementtree ${PN}-re"
+ FILES_${PN}-xml="${libdir}/python2.6/lib-dynload/pyexpat.so ${libdir}/python2.6/xml ${libdir}/python2.6/xmllib.* "
+ 
+ DESCRIPTION_${PN}-xmlrpc="Python XMLRPC Support"
+diff --git a/recipes/python/python_2.6.6.bb b/recipes/python/python_2.6.6.bb
+index c8d1c56..3c054bb 100644
+--- a/recipes/python/python_2.6.6.bb
++++ b/recipes/python/python_2.6.6.bb
+@@ -3,7 +3,7 @@ DEPENDS = "python-native db gdbm openssl readline sqlite3 tcl zlib\
+            ${@base_contains('DISTRO_FEATURES', 'tk', 'tk', '', d)}"
+ DEPENDS_sharprom = "python-native db readline zlib gdbm openssl"
+ # set to .0 on every increase of INC_PR
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ SRC_URI = "\
+   http://www.python.org/ftp/python/${PV}/Python-${PV}.tar.bz2 \
+-- 
+1.7.2.3
+
 
 
