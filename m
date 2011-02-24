@@ -1,38 +1,34 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PsceG-00061A-Vz
+	(envelope-from <martin.jansa@gmail.com>) id 1PsdDv-0006qO-GM
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Feb 2011 15:58:33 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id D2EDD314E0A3
+	Thu, 24 Feb 2011 16:35:23 +0100
+Received: by fxm8 with SMTP id 8so609979fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Feb 2011 15:57:12 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id Y5lZ+JRKtMcz
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Feb 2011 15:57:07 +0100 (CET)
-Received: from [172.22.22.61] (ip-94-79-168-47.unitymediagroup.de
-	[94.79.168.47])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 25A2A314E0A5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Feb 2011 15:57:07 +0100 (CET)
-Message-ID: <4D6671C2.7060604@opendreambox.org>
-Date: Thu, 24 Feb 2011 15:57:06 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
+	Thu, 24 Feb 2011 07:34:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=QgAT6V8jfOUhlwgvb64BkFspBf6dG0P0IpWoL/iej0U=;
+	b=xGruLUr+bOf50ZP+Qhg91j7/czZMhU/aUxtXvTyj6XPjxO82qTwq/aUb5z6hh5DDwo
+	HRJ8rZyMB8KiD9UB/CS1OAuUXNA/rsD86uFuwn5P6sgbyGoe+l+PIXZbNHuJWd1gvmQY
+	oBKmB3YnFWMEZsdZXfIe5ehZ3csDycFTm5oxU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=SKlLTwCScE76pJTiPws1D9JctGVUp5plrxDdsXZL2ELDq5QDtnAgA6cgfXwRP7kdyw
+	9U7Gv5S5JXf/MDeIMDqDdy3cQtsyq7eBWMp2fE+ib9zPsvyEHHTcPHQ5W19iPYOhdYzt
+	Wu8aExSo6KWRYzKCRW49Gn0UYyGuEHyLhucSA=
+Received: by 10.223.112.1 with SMTP id u1mr1188646fap.109.1298561167256;
+	Thu, 24 Feb 2011 07:26:07 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id f24sm1079839fak.0.2011.02.24.07.26.04
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 24 Feb 2011 07:26:05 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4D5A5871.7000005@dresearch.de>
-	<4D5A89CD.803@opendreambox.org>	<4D5A92BC.1010906@dresearch.de>
-	<4D5E422B.3040703@dresearch.de>	<AANLkTi=+vnLLOeP2umN3kdK3YzZBgLAwQgAvEKSjqd5f@mail.gmail.com>
-	<4D665D92.7000100@dresearch.de>
-In-Reply-To: <4D665D92.7000100@dresearch.de>
-Subject: Re: linux-libc-headers version (reloaded)
+Date: Thu, 24 Feb 2011 16:25:56 +0100
+Message-Id: <1298561156-21514-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [PATCH] bitbake.conf: define shared PERSISTENT_DIR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,106 +42,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Feb 2011 14:58:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 24 Feb 2011 15:35:23 -0000
 
-On 02/24/2011 02:30 PM, Steffen Sledz wrote:
-> On 02/18/2011 04:30 PM, Khem Raj wrote:
->> On Fri, Feb 18, 2011 at 1:55 AM, Steffen Sledz <sledz@dresearch.de> wr=
-ote:
->>> Am 15.02.2011 15:50, schrieb Steffen Sledz:
->>>> Am 15.02.2011 15:12, schrieb Andreas Oberritter:
->>>>> On 02/15/2011 11:41 AM, Steffen Sledz wrote:
->>>>>> "Kernel headers are backwards compatible, but not forwards compati=
-ble.  This
->>>>>> means that a program built against a C library using older kernel =
-headers
->>>>>> should run on a newer kernel (although it may not have access to n=
-ew
->>>>>> features), but a program built against newer kernel headers may no=
-t work on an
->>>>>> older kernel."[2]
->>>>>
->>>>> Isn't this what the variable OLDEST_KERNEL is good for, when compil=
-ing
->>>>> glibc?
->>>>
->>>> If i'm right this goes to the --enable-kernel=3DVERSION configure op=
-tion of glibc just to optimize the library.
->>>>
->>>> "the configure option --enable-kernel=3DX.Y.Z allows to strip out co=
-mpatibility for kernel versions before X.Y.Z."
->>>>
->>>> Imho it is not legitimately to follow that glibc has compatibility c=
-ode for all kernels greater or equal X.Y.Z.
->>>>
->>>> Another question is the handling in other libc implementations.
->>>>
->>>> And finally there are a lot of programs using userland kernel header=
-s directly.
->>>
->>> Ping!
->>>
->>> If i interpret responses from Tom and Phil right they agree with me (=
-or at least do not disagree). ;-)
->>>
->>> But i miss reactions from the distro maintainers (especially =C3=85ng=
-str=C3=B6m).
->>>
->>
->> I think we should make sure that linux version chosen for a build is
->> equal or newer than linux-libc-headers for that build. Another option
->> is that linux-libc-headers are driven out
->> of selected virtual/kernel too but this may be a bit clunky since it
->> would mean that
->> every machine will have them different and we share sysroots e.g. two
->> armv5te may use
->> same sysroot
->=20
-> I like to force the discussion/work/decision on this problem because we=
-'re one of the mourners (we're forced to use 2.6.24 kernel by out hardwar=
-e vendor :( ).
->=20
-> I also see the multi-machine problem (the shared sysroot at build time =
-and the feed problem too).
->=20
-> So what options do we (our =C3=85ngstr=C3=B6m) have?
->=20
-> (1) Do not support kernel older than 2.6.31 (which is the current LINUX=
-_LIBC_HEADERS_VERSION).
->=20
-> (2) Set LINUX_LIBC_HEADERS_VERSION to 2.6.16 (which is the current OLDE=
-ST_KERNEL).
->=20
-> (3) Support machine specific distro incarnations (incl. special feeds).
->=20
-> May be some more. Option (1) would be really bad for us. I believe (2) =
-would be bad for a lot of users because of a potential loss of functional=
-ity.
+* import from poky
+  commit 6a11cf7dfe930461a6660e3b783b546fa2634900
+  Author: Richard Purdie <rpurdie@linux.intel.com>
+  Date:   Sun May 31 22:23:30 2009 +0100
+* we had CACHE var pointing to machine specific dir since
+  commit caf077679022f37ce55d758101f130e4e93bd7b5
+  Author: Richard Purdie <rpurdie@rpsys.net>
+  Date:   Mon Nov 20 17:40:20 2006 +0000
 
-I'm still not convinced that requiring older headers is a good way to
-go. If applications are using new syscalls directly, they need to handle
-ENOSYS. If the applications already contain code to be compatible across
-various kernel versions at compile time, then it won't be that hard to
-change those applications to detect available interfaces at runtime.
+* current bitbake is looking for cache dir like this:
+  cachedir = (bb.data.getVar("PERSISTENT_DIR", d, True) or
+              bb.data.getVar("CACHE", d, True))
+  which without PERSISTENT_DIR defined picks machine-specific CACHE dir
+  so LOCALCOUNT numbers in SRCPV keeps rolling with every MACHINE switch
+  in same builddir :/
 
-IIRC, the kernel policy is to disallow incompatible changes to user
-interfaces, so applications compiled against new headers generally don't
-magically start to use new interfaces, unless their code gets adapted to
-them.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ conf/bitbake.conf |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-Can you please shed some light on which kernel interfaces are actually
-causing problems?
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index dcc5c70..53bb7b7 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -294,6 +294,8 @@ FILESDIR = "${@bb.which(d.getVar('FILESPATH', 1), '.')}"
+ 
+ TMPDIR = "${TOPDIR}/tmp"
+ CACHE = "${TMPDIR}/cache${@['', '/' + str(bb.data.getVar('MACHINE', d, 1))][bool(bb.data.getVar('MACHINE', d, 1))]}"
++# The persistent cache should be shared by all builds
++PERSISTENT_DIR = "${TMPDIR}/cache"
+ CO_DIR = "${DL_DIR}"
+ CVSDIR = "${CO_DIR}/cvs"
+ SVNDIR = "${CO_DIR}/svn"
+-- 
+1.7.4.1
 
-Btw.: The availability of syscalls not only depends on the kernel
-version but on the kernel configuration, too. For example, if you
-compile a kernel without CONFIG_EPOLL, epoll will still be available in
-the kernel headers and will be found by autotools etc. But it will
-alwyas return ENOSYS. We certainly can't provide matching
-linux-libc-headers to avoid that.
-
-Regards,
-Andreas
 
 
