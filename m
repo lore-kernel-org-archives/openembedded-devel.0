@@ -1,36 +1,35 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PsR7s-0000ru-Ue
+	(envelope-from <obi@opendreambox.org>) id 1PsRS1-0001SW-CL
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Feb 2011 03:40:20 +0100
-Received: by fxm8 with SMTP id 8so107044fxm.6
+	Thu, 24 Feb 2011 04:01:09 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id C861B314E040
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 18:39:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=XItxlDjyY1j1+S6INapFyQK5o7u3NKtAyu2ISACgx+o=;
-	b=M00oAHdFvK/23MwhbJycPYGEzEcBj/acC656FSyDd/1zJ+88YEtW9/gMMj1RiZ7ig7
-	g61/OXSJuXfjHQxWjvxMuBatxQwNY28F4pnW3b1HWUHwpbJpzlZOXJV76Ap24S9Qw7kK
-	3sDfOS+idELjcp2ys8gyBz68g8jyv/WiQpS8o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=RAPR9L0q3sI6PDTnwfHHpABHAaaHr9Lexkc31vic3REvrN/ec5y4p/wU7/AWtzwD5g
-	Z7b9yfCcN8zcQ5PKCzN5dvAcliKLkr2SQ0GpdHLQgbBfbXpqIP022RPGVesuDxw6v6l0
-	NZhfFVurQmLkxu5FKxPiL9+mkyxIj3y4WqF48=
-Received: by 10.223.83.6 with SMTP id d6mr302846fal.95.1298515141071; Wed, 23
-	Feb 2011 18:39:01 -0800 (PST)
+	Thu, 24 Feb 2011 03:59:49 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id OdpoHzdIx960
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Feb 2011 03:59:44 +0100 (CET)
+Received: from [172.22.22.61] (ip-94-79-168-47.unitymediagroup.de
+	[94.79.168.47])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 99E73314E03F
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Feb 2011 03:59:44 +0100 (CET)
+Message-ID: <4D65C99F.5060909@opendreambox.org>
+Date: Thu, 24 Feb 2011 03:59:43 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.14) Gecko/20110208 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-Received: by 10.223.30.151 with HTTP; Wed, 23 Feb 2011 18:38:41 -0800 (PST)
-In-Reply-To: <87r5blzcgl.fsf@gmail.com>
-References: <87r5blzcgl.fsf@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 23 Feb 2011 18:38:41 -0800
-Message-ID: <AANLkTi=t3WkLFmE8GF9DNbbzX1G8j1qA==pg3BEypg9c@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Andrey Smirnov <andrew.smirnov@gmail.com>
-Subject: Re: Ada(GNAT) support in OE
+References: <1298511101-5170-1-git-send-email-denis@denix.org>
+In-Reply-To: <1298511101-5170-1-git-send-email-denis@denix.org>
+Subject: Re: [PATCH] busybox: fix udhcp check for NFS rootfs for new style /proc/mounts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,69 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Feb 2011 02:40:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 24 Feb 2011 03:01:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Sun, Feb 6, 2011 at 2:16 AM, Andrey Smirnov <andrew.smirnov@gmail.com> w=
-rote:
-> Hi, everyone!
->
-> Bitbake-1.10.2 and OE from git here and I am trying to add some
-> rudimentary support of Ada language(GNAT) to OE(for now it is just
-> building a cross compiler)
+Hello Denys,
 
-OK
+On 02/24/2011 02:31 AM, Denys Dmytriyenko wrote:
+> diff --git a/recipes/busybox/busybox-1.13.2/udhcpc-new-nfsroot.patch b/recipes/busybox/busybox-1.13.2/udhcpc-new-nfsroot.patch
+> new file mode 100644
+> index 0000000..46aaab9
+> --- /dev/null
+> +++ b/recipes/busybox/busybox-1.13.2/udhcpc-new-nfsroot.patch
+> @@ -0,0 +1,16 @@
+> +diff -uNr busybox-1.13.2.orig/examples/udhcp/simple.script busybox-1.13.2/examples/udhcp/simple.script
+> +--- busybox-1.13.2.orig/examples/udhcp/simple.script	2011-02-23 00:30:32.000000000 -0500
+> ++++ busybox-1.13.2/examples/udhcp/simple.script	2011-02-23 17:05:37.873381763 -0500
+> +@@ -10,7 +10,12 @@
+> + 
+> + # return 0 if root is mounted on a network filesystem
+> + root_is_nfs() {
+> ++	# old style mounts
+> + 	grep -qe '^/dev/root.*\(nfs\|smbfs\|ncp\|coda\) .*' /proc/mounts
+> ++	if ! $? ; then
+> ++		# new style mounts
+> ++		grep -qe '^.*:.* / \(nfs\|smbfs\|ncp\|coda\) .*' /proc/mounts
+> ++	fi
 
->
-> As of this moment I managed to build some semblance of a cross compiler
-> (it builds simple "hello world" executable) by creating a verbatim copy
-> of gcc-cross_4.4.4.bb, all files it depends upon to my local recipes
-> directory and making slight modification to gcc-configure-common.inc
-> (see modifications.patch) but this rises a couple of questions:
->
-> =C2=A0- Would anyone be interested in adding such changes? If so, am I go=
-ing
-> =C2=A0 in right direction or is there another more elegant and preferred =
-way
-> =C2=A0 to add compiler support?
->
+Would "grep -qe '^\S\+ / \(nfs\|smbfs\|ncp\|coda\) ' /proc/mounts" work
+for both cases?
 
-it would be interesting however I think this should be a default
-optout feature with possibility to optin
-so probably what you have is an ok approach. Somehow we should have a
-global knob controlled
-by distros to specify what language environments to enable
+> diff --git a/recipes/busybox/busybox_1.1x.inc b/recipes/busybox/busybox_1.1x.inc
+> index 7623944..aefa57f 100644
+> --- a/recipes/busybox/busybox_1.1x.inc
+> +++ b/recipes/busybox/busybox_1.1x.inc
+> @@ -5,6 +5,7 @@ SRC_URI = "\
+>    file://fdisk_nios2.patch \
+>    file://udhcpscript.patch \
+>    file://udhcpc-fix-nfsroot.patch \
+> +  file://udhcpc-new-nfsroot.patch \
 
-> =C2=A0- Ada compiler bootstrapping process requires host system to have
-> =C2=A0 working Ada compiler implementation, how can this, and should it a=
-ll
-> =C2=A0 be reflected in the recipe?
+Should the two patches above be merged into a single patch?
 
-yeah those are complications either you can demand those from build distro
-by adding them to required_software in sanity class or you can provide a -n=
-ative
-recipe and then DEPEND on that one first one would be easier
-
->
-> =C2=A0- Provided I am successful in my endeavor, writing BitBake recipe f=
-or
-> =C2=A0 Ada program would require gnatmake, gnatbind, gnatlink tools to be
-> =C2=A0 accessible through some variables(the same way C compiler is
-> =C2=A0 available via CC) how can this be implemented?
-
-they would be in bitbake.conf or base class.
-
->
-> Thanks in advance for answering!
->
-> Andrey Smirnov
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+Regards,
+Andreas
 
 
