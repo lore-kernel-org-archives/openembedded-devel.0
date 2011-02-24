@@ -1,39 +1,32 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from einhorn.in-berlin.de ([192.109.42.8] ident=root)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PsUrx-0008KJ-0X
+	(envelope-from <sledz@dresearch.de>) id 1PsVGh-0000at-Fm
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Feb 2011 07:40:09 +0100
-Received: by fxm8 with SMTP id 8so220430fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Feb 2011 22:38:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=6CZ2ksI+u5ecfr4viuAKfOibca/sXGP6VYpxU64KtS4=;
-	b=k6UKNncy0IaPHWmC1QYGsPqqS8sj/cd/JLkRgKQhA6SubPr8UgK4NNnNH7AWJodcJx
-	9QlNDatEaUNiICpGKFeH7ytLrmgj/SWsHz7fMTP4F0p1ao+NI5ii32ahxJ2NZtwnb378
-	SZRXjkKrWdr5VF5+uiJoEyrRXrVPqe92lBAlA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=rWP95loNXE2lxeFQbRLOQMexBo82g5KCI52ztW+yxZNBXCBZPSJ6NmU0XbOijRg6wO
-	x8iymQUPsKGFgMjyg5vQrb63KPHYrp/gY1IebQP6sMho3qI4K2VFfvSIiSkWZAkRFLRy
-	zZXLNS+Sy++Bl1yoStKAcIyTP6UivbI2S5MAo=
-Received: by 10.223.83.7 with SMTP id d7mr509483fal.82.1298529527077;
-	Wed, 23 Feb 2011 22:38:47 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id z1sm383331fau.21.2011.02.23.22.38.45
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 23 Feb 2011 22:38:46 -0800 (PST)
-Date: Thu, 24 Feb 2011 07:38:40 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110224063839.GG3478@jama.jama.net>
-References: <1298512974-1229-1-git-send-email-obi@opendreambox.org>
+	Thu, 24 Feb 2011 08:05:43 +0100
+X-Envelope-From: sledz@dresearch.de
+Received: from mobil-400-586.intern.dresearch.de
+	(p57A205C7.dip0.t-ipconnect.de [87.162.5.199]) (authenticated bits=0)
+	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
+	p1O74OAx007554
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
+	Thu, 24 Feb 2011 08:04:24 +0100
+Received: from mobil-400-586.intern.dresearch.de (localhost [IPv6:::1])
+	by mobil-400-586.intern.dresearch.de (Postfix) with ESMTP id 111BC2A23F;
+	Thu, 24 Feb 2011 08:04:25 +0100 (CET)
+Message-ID: <4D6602F8.2040702@dresearch.de>
+Date: Thu, 24 Feb 2011 08:04:24 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.16) Gecko/20101125 SUSE/3.0.11 Lightning/1.0b1
+	Thunderbird/3.0.11
 MIME-Version: 1.0
-In-Reply-To: <1298512974-1229-1-git-send-email-obi@opendreambox.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] python-2.6: python-xml depends on python-elementtree
+To: openembedded-devel@lists.openembedded.org
+References: <4D64BD5E.6040805@dresearch.de> <4D657E89.9050706@mentor.com>
+In-Reply-To: <4D657E89.9050706@mentor.com>
+X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
+X-MIME-Autoconverted: from 8bit to quoted-printable by einhorn.in-berlin.de id
+	p1O74OAx007554
+Subject: Re: net-snmp-svn-r7.0 do_compile failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,43 +40,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Feb 2011 06:40:09 -0000
-X-Groupsio-MsgNum: 29648
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="3607uds81ZQvwCD0"
-Content-Disposition: inline
-
---3607uds81ZQvwCD0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 24 Feb 2011 07:05:43 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 24, 2011 at 02:02:54AM +0000, Andreas Oberritter wrote:
-> * Fixes the following error:
+On 02/23/2011 10:39 PM, Tom Rini wrote:
+> On 02/23/2011 12:55 AM, Steffen Sledz wrote:
+>> Again a clean build:
+>>
+>> OE:hipox sledz@mobil-400-586:~/work/openembedded>  bitbake net-snmp
+>> ...
+>>
+>> Build Configuration:
+>> BB_VERSION        =3D "1.12.0"
+>> METADATA_BRANCH   =3D "org.openembedded.dev"
+>> METADATA_REVISION =3D "8e4bd2f"
+>> TARGET_ARCH       =3D "arm"
+>> TARGET_OS         =3D "linux-gnueabi"
+>> MACHINE           =3D "hipox"
+>> DISTRO            =3D "angstrom"
+>> DISTRO_VERSION    =3D "2010.7-test-20110223"
+>> TARGET_FPU        =3D "soft"
+>>
+>> ...
+>> libtool: link: arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te
+>> -mtune=3Darm926ej-s -Wl,-rpath-link
+>> -Wl,/home/sledz/work/OE-testing/tmp.6/sysroots/armv5te-angstrom-linux-=
+gnueabi/usr/lib
+>> -Wl,-O1 -Wl,--hash-style=3Dgnu -mthumb-interwork -mno-thumb
+>> -DNETSNMP_ENABLE_IPV6
+>> -isystem/home/sledz/work/OE-testing/tmp.6/sysroots/armv5te-angstrom-li=
+nux-gnueabi/usr/include
+>> -fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2
+>> -ggdb2 -Ulinux -Dlinux=3Dlinux -Wall -Winline -Wstrict-prototypes
+>> -Wwrite-strings -Wcast-qual -Wno-char-subscripts -o .libs/snmpd
+>> .libs/snmpd.o -Wl,-rpath-link
+>> -Wl,/home/sledz/work/OE-testing/tmp.6/sysroots/armv5te-angstrom-linux-=
+gnueabi/usr/lib
+>> -Wl,-O1 -Wl,--hash-style=3Dgnu=20
+>> -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueab=
+i/net-snmp-svn-r7.0/net-snmp/agent/.libs
+>> -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueab=
+i/net-snmp-svn-r7.0/net-snmp/agent/helpers/.libs
+>>
+>> -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueab=
+i/net-snmp-svn-r7.0/net-snmp/snmplib/.libs
+>> -L/home/sledz/work/OE-testing/tmp.6/sysroots/armv5te-angstrom-linux-gn=
+ueabi/usr/lib
+>> -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueab=
+i/net-snmp-svn-r7.0/net-snmp/snmplib
+>> -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueab=
+i/net-snmp-svn-r7.0/net-snmp/agent/helpers
+>> ./.libs/libnetsnmpagent.so helpers/.libs/libnetsnmphelpers.so
+>> ./.libs/libnetsnmpmibs.so
+>> /home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/=
+net-snmp-svn-r7.0/net-snmp/agent/helpers/.libs/libnetsnmphelpers.so
+>> /home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/=
+net-snmp-svn-r7.0/net-snmp/agent/.libs/libnetsnmpagent.so
+>> /home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/=
+net-snmp-svn-r7.0/net-snmp/snmplib/.libs/libnetsnmp.so
+>> -ldl ../snmplib/.libs/libnetsnmp.so -lcrypto -lssl
+>> ./.libs/libnetsnmpmibs.so: undefined reference to `pthread_create'
+>> collect2: ld returned 1 exit status
+>> make[1]: *** [snmpd] Error 1
 >=20
->   import xml.etree.cElementTree
->   File "/usr/lib/python2.6/xml/etree/cElementTree.py", line 3, in <module>
->   from _elementtree import *
->   ImportError: No module named _elementtree
->=20
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> ---
->  contrib/python/generate-manifest-2.6.py |    4 ++--
->  recipes/python/python-2.6-manifest.inc  |    4 ++--
->  recipes/python/python_2.6.6.bb          |    2 +-
->  3 files changed, 5 insertions(+), 5 deletions(-)
+> Does log.do_configure say anything about pthreads?
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+Nothing special:
 
---3607uds81ZQvwCD0
-Content-Type: application/pgp-signature
+OE:hipox sledz@mobil-400-586:~/work/OE-testing> grep -u pthread /home/sle=
+dz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn=
+-r7.0/temp/log.do_configure*
+/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
+-snmp-svn-r7.0/temp/log.do_configure:checking pthread.h usability... yes
+/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
+-snmp-svn-r7.0/temp/log.do_configure:checking pthread.h presence... yes
+/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
+-snmp-svn-r7.0/temp/log.do_configure:checking for pthread.h... yes
+/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
+-snmp-svn-r7.0/temp/log.do_configure.19195:checking pthread.h usability..=
+. yes
+/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
+-snmp-svn-r7.0/temp/log.do_configure.19195:checking pthread.h presence...=
+ yes
+/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net=
+-snmp-svn-r7.0/temp/log.do_configure.19195:checking for pthread.h... yes
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
+Steffen
 
-iEYEARECAAYFAk1l/O8ACgkQN1Ujt2V2gBxnCwCfVGVE6ytSsaYSDOYLFAsUXsSb
-1E8An15Mc176raSWXxQDp+0I2s5MbFOE
-=JbkP
------END PGP SIGNATURE-----
+--=20
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@DResearch.de
+Fax: +49 30 515932-299
+Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
---3607uds81ZQvwCD0--
+
