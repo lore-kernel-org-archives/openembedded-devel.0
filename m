@@ -1,38 +1,34 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefro.net@gmail.com>) id 1PsnEK-0005Vv-Jv
+	(envelope-from <raj.khem@gmail.com>) id 1Pso12-0006Js-26
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Feb 2011 03:16:28 +0100
-Received: by fxm8 with SMTP id 8so1193577fxm.6
+	Fri, 25 Feb 2011 04:06:48 +0100
+Received: by fxm8 with SMTP id 8so1218858fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Feb 2011 18:15:07 -0800 (PST)
+	Thu, 24 Feb 2011 19:05:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=VYGyOEOJY6kjBweOoQVAfRK0va38+tNfJAbz4QxORe0=;
-	b=mUejJqm9WB73TJEjeHaOER5ZEID1EHklgED7LYVeP8N+o06ve5FRkJ47nEWFO7ttPZ
-	WcUjL9mT2J1lmsIRiCon6dh3MoWT02nNo6H3/vGYRUIDycufAELH9sFou1qBZjBhwrjf
-	emIVImGvOcr0jl+sYXe1GfF42OQK7/nY/Ah4Y=
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=UcvOEEvYnUnbQoDQ6oQIBiG9TfTEtn8RTw1oDSF8xdg=;
+	b=x0CkjX3wsHbyZlJhWxOMDy2XzId3b877fSPc+nxSDvuiQMrN1PUR7B9HEin/izykdA
+	JC4f6HmFRzooXTlRgbkaguXHfwfe718mxQLE8AT0GMN90Dbvxxs8iLOVz9d+Sl13K6y7
+	T5GvhJ3nSBezMepRE+AWh/ZEqZDpYsJfStUMs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	b=UpgtD1wqiYC/at9YAHd5naT/InZK+tItyn53rnsWfoJEw1zHB4lC1dEqAF9hEIqNi3
-	uoR26hDCgsX/OXcY7VY0elT4ZDxYwzu3ZL8uFpEE155+Gm5FtupWqK3ZPlYcmgiu2aGa
-	xY7VOshxKXoIARrhPRL0LiyIHJNhlh/PmfIsI=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	b=j814k5BSBhFG+lVFLC9v4xnITpvPu+xIc405jdipVIjq4O+d2OdwkitFnCHmfi0byw
+	8jwYykLyokMj4DcDMdD0QilSLzdCPwrxEIzkox+mqXJc+eIzgPyjHkpqK5yam9ffFJ0+
+	Y5bIuHYrigb6+XXv1qzRhjBssA9fxpIO54Kg0=
+Received: by 10.223.93.140 with SMTP id v12mr745695fam.96.1298603127141; Thu,
+	24 Feb 2011 19:05:27 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.223.74.143 with SMTP id u15mr1917389faj.27.1298600107340; Thu,
-	24 Feb 2011 18:15:07 -0800 (PST)
-Sender: jefro.net@gmail.com
-Received: by 10.223.58.15 with HTTP; Thu, 24 Feb 2011 18:15:07 -0800 (PST)
-In-Reply-To: <4D66EE9F.8@windriver.com>
+Received: by 10.223.30.151 with HTTP; Thu, 24 Feb 2011 19:05:06 -0800 (PST)
+In-Reply-To: <20110224231001.GC11390@denix.org>
 References: <20110224231001.GC11390@denix.org>
-	<4D66EE9F.8@windriver.com>
-Date: Thu, 24 Feb 2011 18:15:07 -0800
-X-Google-Sender-Auth: sFhd-xvEKbhu_sEAzf2IWlpb2WU
-Message-ID: <AANLkTinHu7PocZEDz-=PWDjXPoye7znNGo6nKdme3RBR@mail.gmail.com>
-From: Jeff Osier-Mixon <jefro@jefro.net>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 24 Feb 2011 19:05:06 -0800
+Message-ID: <AANLkTik4vad6NM_jhszJ4Qd1kgcMJ3VnXd4hMsubYdGd@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: US OEDEM/OEDAM in April?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,30 +43,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Feb 2011 02:16:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 25 Feb 2011 03:06:48 -0000
+Content-Type: text/plain; charset=UTF-8
 
-> On 2/24/11 5:10 PM, Denys Dmytriyenko wrote:
-> > All,
-> >
-> > We had previously discussed the possibility of holding US-based OEDEM (or
-> is
-> > it called OEDAM then?) in addition to our regular Fall OEDEM in Europe.
-> Is
-> > there still any interest in this?
+On Thu, Feb 24, 2011 at 3:10 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> All,
+>
+> We had previously discussed the possibility of holding US-based OEDEM (or is
+> it called OEDAM then?) in addition to our regular Fall OEDEM in Europe. Is
+> there still any interest in this?
+>
+> There is Embedded Linux Conference in San Francisco coming up in April, along
+> with few other Linux Foundation sponsored or organized events right before or
+> right after ELC. As some of the OE developers are planning on coming to ELC,
+> should we try to schedule a day or two for OEDEM and try to resolve some of
+> the pending organizational and technical issues face to face?
+>
+> Please speak up. Thanks.
+
+good idea. I will be there mostly may not be every day
+
+>
+> --
+> Denys
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
-Hi all
-
-There is a weekend between Collab and ELC this year.  I would be happy to
-talk to the Linux Foundation on behalf of OE to see if we can capture a
-conference room for those two days.
-
-I have also submitted a proposal for a Yocto BoF, but that is just a 2-hr
-meet and greet, not a time to get real work done. However, I'd be pleased to
-welcome OE folks there as well.
-
--- 
-Jeff Osier-Mixon
-Yocto Community Manager @Intel
 
