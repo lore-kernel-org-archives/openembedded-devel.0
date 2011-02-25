@@ -1,40 +1,36 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Pswba-0002Op-CR
+	(envelope-from <otavio.salvador@gmail.com>) id 1Pswcf-0002RE-Ol
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Feb 2011 13:17:06 +0100
-Received: by ywg8 with SMTP id 8so421708ywg.6
+	Fri, 25 Feb 2011 13:18:14 +0100
+Received: by gyg13 with SMTP id 13so688005gyg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Feb 2011 04:14:50 -0800 (PST)
+	Fri, 25 Feb 2011 04:16:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
-	:x-mailer:in-reply-to:references;
-	bh=Z+63EvYfm9Hqkc4SVmWJFeZGNHb8oz9fL/prbnrXLe4=;
-	b=efryw04EIg9pAoUc4Ns+ADQRWhNrU4S0HGSI1p7SAlb3WosnwnrEGhaoblaZHSyEcd
-	ME3bUftIC51m0NZ2WbAdzzw7jUzp+owgyGS4QfZv/qmYlgAqpwfyZnTRvc0sJgjFUrp2
-	CeYbePDiIF68qNeCtKzMRpxCnrwRgsBF7+428=
+	:x-mailer; bh=ECV4JWV0E1Cv+1jAWomFSuTevqJh52yeJBqNep1jkho=;
+	b=P7YorIMiQD3aO9lnXx+nN7msAt648Rg5LajIlmTtqeznjCfO35GhxGHLciRPTZ2e/T
+	dOaUqt4We66xTYPFDZPHizMAwFPM5maU1twyKQWQEzETwBHpN4CUYOYSmIw/2AfP31lc
+	6+jgnlV/CM0qaSCUPlHS+i2vw+FmhxCLmlTRg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references;
-	b=HMDY5L8f567O6awYjhlszqa7clV1nI30FFXKpaLu+aVkUKVh/6WOm6dd794WXykyYB
-	gR6W4o0uK6JG0xEjc6LmaFGkT8h9VeG/iaWIZVO2lGaSzgodghkXFZn0+baWyjnXvrbk
-	haUF1l26qpohMj8v8p2Sln14cq0MGfLIQpZts=
-Received: by 10.151.158.1 with SMTP id k1mr3405164ybo.431.1298636090249;
-	Fri, 25 Feb 2011 04:14:50 -0800 (PST)
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=BK8DqMEtQEOrY1iDzf68lbEzRLGzyjoz7HfDPld9bk5HZv3rDl6GXDEfwqMyh7Zs3I
+	9lfOxMfVurYcxyzI9EsPNMWaugSvV26ov67PDMDeRb4c3mNr+QNJigtJW7DgRuJPsSOG
+	MAbrNcbCFw7JolPJFQOhFwIY6Kmml7/vZmzLA=
+Received: by 10.236.197.73 with SMTP id s49mr3971539yhn.88.1298636087801;
+	Fri, 25 Feb 2011 04:14:47 -0800 (PST)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id u45sm358919yhn.9.2011.02.25.04.14.47
+	by mx.google.com with ESMTPS id u45sm358919yhn.9.2011.02.25.04.14.45
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 25 Feb 2011 04:14:49 -0800 (PST)
+	Fri, 25 Feb 2011 04:14:46 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Feb 2011 12:14:35 +0000
-Message-Id: <1298636075-26972-2-git-send-email-otavio@ossystems.com.br>
+Date: Fri, 25 Feb 2011 12:14:34 +0000
+Message-Id: <1298636075-26972-1-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <1298636075-26972-1-git-send-email-otavio@ossystems.com.br>
-References: <1298636075-26972-1-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 2/2] src_distribute.bbclass: distribute only SRC_DISTRIBUTE_LICENSES
+Subject: [PATCH 1/2] freerdp: bump SRCREV and change license to Apache-2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,42 +44,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Feb 2011 12:17:06 -0000
-
-A distro can require conf/licenses.conf or set SRC_DISTRIBUTE_LICENSES
-selecting which licenses are wanted to be distributed. In case it is
-empty or undefined we default to distribute all licenses to not break
-backward compatibility.
+X-List-Received-Date: Fri, 25 Feb 2011 12:18:14 -0000
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- classes/src_distribute.bbclass |    6 ++++--
- 1 files changed, 4 insertions(+), 2 deletions(-)
+ recipes/freerdp/freerdp.inc    |    4 ++--
+ recipes/freerdp/freerdp_git.bb |    8 +++-----
+ 2 files changed, 5 insertions(+), 7 deletions(-)
 
-diff --git a/classes/src_distribute.bbclass b/classes/src_distribute.bbclass
-index 242d70c..f3d3cba 100644
---- a/classes/src_distribute.bbclass
-+++ b/classes/src_distribute.bbclass
-@@ -16,6 +16,7 @@ python do_distribute_sources () {
- 	dldir = os.path.realpath(d.getVar("DL_DIR", 1) or "")
+diff --git a/recipes/freerdp/freerdp.inc b/recipes/freerdp/freerdp.inc
+index 0b9c9ac..c75175e 100644
+--- a/recipes/freerdp/freerdp.inc
++++ b/recipes/freerdp/freerdp.inc
+@@ -5,9 +5,9 @@ DESCRIPTION = "FreeRDP RDP client"
+ HOMEPAGE = "http://freerdp.sourceforge.net"
+ DEPENDS = "virtual/libx11 openssl libxcursor cups alsa-lib"
+ SECTION = "x11/network"
+-LICENSE = "GPL"
++LICENSE = "Apache-2.0"
  
- 	licenses = (bb.data.getVar('LICENSE', d, 1) or "unknown").split()
-+	distribute_licenses = (bb.data.getVar('SRC_DISTRIBUTE_LICENSES', d, 1) or "All").split()
- 	urldatadict = bb.fetch.init(d.getVar("SRC_URI", True).split(), d, True)
- 	src_uri = oe.data.typed_value("SRC_URI", d)
- 	if not src_uri:
-@@ -33,8 +34,9 @@ python do_distribute_sources () {
- 		bb.data.setVar('SRC', os.path.abspath(local), d)
- 		for license in licenses:
- 			for entry in license.split("|"):
--				bb.data.setVar('LIC', entry, d)
--				bb.build.exec_func('SRC_DISTRIBUTECOMMAND', d)
-+				if entry in distribute_licenses or "All" in distribute_licenses:
-+					bb.data.setVar('LIC', entry, d)
-+					bb.build.exec_func('SRC_DISTRIBUTECOMMAND', d)
- }
+-INC_PR = "r4"
++INC_PR = "r5"
  
- addtask distribute_sources_all after do_distribute_sources
+ inherit pkgconfig autotools
+ 
+diff --git a/recipes/freerdp/freerdp_git.bb b/recipes/freerdp/freerdp_git.bb
+index 37d0041..1ed2a19 100644
+--- a/recipes/freerdp/freerdp_git.bb
++++ b/recipes/freerdp/freerdp_git.bb
+@@ -7,11 +7,9 @@ inherit gitpkgv
+ 
+ PV = "gitr${SRCPV}"
+ PKGV = "${GITPKGVTAG}"
++PR = "${INC_PR}.0"
+ 
+-SRCREV = "aec5dd5807dbcd0989bb15124dcac157bb0412bc"
+-PR = "${INC_PR}.4"
++SRCREV = "6f7eb2abb077d60a09eeb66a10ad97d102336d3c"
++SRC_URI = "git://freerdp.git.sourceforge.net/gitroot/freerdp/freerdp.git;protocol=git"
+ 
+ S = "${WORKDIR}/git"
+-
+-
+-SRC_URI = "git://freerdp.git.sourceforge.net/gitroot/freerdp/freerdp.git;protocol=git"
 -- 
 1.7.2.3
 
