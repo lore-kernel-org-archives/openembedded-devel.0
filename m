@@ -1,33 +1,27 @@
 Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1Psspm-0006ZB-7a
+	(envelope-from <sledz@dresearch.de>) id 1PstP6-000746-AP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Feb 2011 09:15:30 +0100
+	Fri, 25 Feb 2011 09:52:00 +0100
 Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
 	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 24B82491278;
-	Fri, 25 Feb 2011 09:14:08 +0100 (CET)
+	by mail.dresearch.de (Postfix) with ESMTP id 14263491283;
+	Fri, 25 Feb 2011 09:50:41 +0100 (CET)
 Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Fri, 25 Feb 2011 09:14:08 +0100
-Message-ID: <4D6764CF.7050305@dresearch.de>
-Date: Fri, 25 Feb 2011 09:14:07 +0100
+	Microsoft SMTPSVC(6.0.3790.4675); Fri, 25 Feb 2011 09:50:41 +0100
+Message-ID: <4D676D60.1040909@dresearch.de>
+Date: Fri, 25 Feb 2011 09:50:40 +0100
 From: Steffen Sledz <sledz@dresearch.de>
 User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
 	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-To: Khem Raj <raj.khem@gmail.com>
-References: <4D5A5871.7000005@dresearch.de> <4D5A89CD.803@opendreambox.org>
-	<4D5A92BC.1010906@dresearch.de> <4D5E422B.3040703@dresearch.de>
-	<AANLkTi=+vnLLOeP2umN3kdK3YzZBgLAwQgAvEKSjqd5f@mail.gmail.com>
-	<4D665D92.7000100@dresearch.de> <4D6671C2.7060604@opendreambox.org>
-	<4D675D08.6050301@dresearch.de>
-	<AANLkTikv_D9xz3MYHwz0=eoJ+Q_p8TsCJC9k2Ps0SBw7@mail.gmail.com>
-In-Reply-To: <AANLkTikv_D9xz3MYHwz0=eoJ+Q_p8TsCJC9k2Ps0SBw7@mail.gmail.com>
-X-OriginalArrivalTime: 25 Feb 2011 08:14:08.0340 (UTC)
-	FILETIME=[F9B6A940:01CBD4C3]
-Cc: Koen Kooi <koen@openembedded.org>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: linux-libc-headers version (reloaded)
+To: openembedded-devel@lists.openembedded.org
+References: <4D53C412.9090804@dresearch.de>	<1297339435.2178.23.camel@phil-desktop>
+	<4D53F6FE.80604@windriver.com>
+In-Reply-To: <4D53F6FE.80604@windriver.com>
+X-OriginalArrivalTime: 25 Feb 2011 08:50:41.0281 (UTC)
+	FILETIME=[14CEE710:01CBD4C9]
+Subject: Re: base-files vs. FHS-2.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,138 +35,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Feb 2011 08:15:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 25 Feb 2011 08:52:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Am 25.02.2011 08:51, schrieb Khem Raj:
-> On Thu, Feb 24, 2011 at 11:40 PM, Steffen Sledz <sledz@dresearch.de> wr=
-ote:
->> On 02/24/2011 03:57 PM, Andreas Oberritter wrote:
->>> On 02/24/2011 02:30 PM, Steffen Sledz wrote:
->>>> On 02/18/2011 04:30 PM, Khem Raj wrote:
->>>>> On Fri, Feb 18, 2011 at 1:55 AM, Steffen Sledz <sledz@dresearch.de>=
- wrote:
->>>>>> Am 15.02.2011 15:50, schrieb Steffen Sledz:
->>>>>>> Am 15.02.2011 15:12, schrieb Andreas Oberritter:
->>>>>>>> On 02/15/2011 11:41 AM, Steffen Sledz wrote:
->>>>>>>>> "Kernel headers are backwards compatible, but not forwards comp=
-atible.  This
->>>>>>>>> means that a program built against a C library using older kern=
-el headers
->>>>>>>>> should run on a newer kernel (although it may not have access t=
-o new
->>>>>>>>> features), but a program built against newer kernel headers may=
- not work on an
->>>>>>>>> older kernel."[2]
->>>>>>>>
->>>>>>>> Isn't this what the variable OLDEST_KERNEL is good for, when com=
-piling
->>>>>>>> glibc?
->>>>>>>
->>>>>>> If i'm right this goes to the --enable-kernel=3DVERSION configure=
- option of glibc just to optimize the library.
->>>>>>>
->>>>>>> "the configure option --enable-kernel=3DX.Y.Z allows to strip out=
- compatibility for kernel versions before X.Y.Z."
->>>>>>>
->>>>>>> Imho it is not legitimately to follow that glibc has compatibilit=
-y code for all kernels greater or equal X.Y.Z.
->>>>>>>
->>>>>>> Another question is the handling in other libc implementations.
->>>>>>>
->>>>>>> And finally there are a lot of programs using userland kernel hea=
-ders directly.
->>>>>>
->>>>>> Ping!
->>>>>>
->>>>>> If i interpret responses from Tom and Phil right they agree with m=
-e (or at least do not disagree). ;-)
->>>>>>
->>>>>> But i miss reactions from the distro maintainers (especially =C3=85=
-ngstr=C3=B6m).
->>>>>>
->>>>>
->>>>> I think we should make sure that linux version chosen for a build i=
-s
->>>>> equal or newer than linux-libc-headers for that build. Another opti=
-on
->>>>> is that linux-libc-headers are driven out
->>>>> of selected virtual/kernel too but this may be a bit clunky since i=
-t
->>>>> would mean that
->>>>> every machine will have them different and we share sysroots e.g. t=
-wo
->>>>> armv5te may use
->>>>> same sysroot
->>>>
->>>> I like to force the discussion/work/decision on this problem because=
- we're one of the mourners (we're forced to use 2.6.24 kernel by out hard=
-ware vendor :( ).
->>>>
->>>> I also see the multi-machine problem (the shared sysroot at build ti=
-me and the feed problem too).
->>>>
->>>> So what options do we (our =C3=85ngstr=C3=B6m) have?
->>>>
->>>> (1) Do not support kernel older than 2.6.31 (which is the current LI=
-NUX_LIBC_HEADERS_VERSION).
->>>>
->>>> (2) Set LINUX_LIBC_HEADERS_VERSION to 2.6.16 (which is the current O=
-LDEST_KERNEL).
->>>>
->>>> (3) Support machine specific distro incarnations (incl. special feed=
-s).
->>>>
->>>> May be some more. Option (1) would be really bad for us. I believe (=
-2) would be bad for a lot of users because of a potential loss of functio=
-nality.
+Am 10.02.2011 15:32, schrieb Mark Hatle:
+> On 2/10/11 6:03 AM, Phil Blundell wrote:
+>> On Thu, 2011-02-10 at 11:55 +0100, Steffen Sledz wrote:
+>>> While dealing with the /var subdirs i hit some differences between Fi=
+lesystem Hierarchy Standard (current FHS-2.3) and the base-files package.
 >>>
->>> I'm still not convinced that requiring older headers is a good way to
->>> go. If applications are using new syscalls directly, they need to han=
-dle
->>> ENOSYS. If the applications already contain code to be compatible acr=
-oss
->>> various kernel versions at compile time, then it won't be that hard t=
-o
->>> change those applications to detect available interfaces at runtime.
+>>> One point is that /var/tmp is symlinked to volatile/tmp but according=
+ to the standard this dir contains "Temporary files *preserved between sy=
+stem reboots* ".
+>>>
+>>> Also /var/cache is symlinked to volatile/cache but the standard descr=
+ibes "The data must remain valid between invocations of the application *=
+and rebooting the system.* " what i would read in the way that /var/cache=
+ should be persistent too.
+>>>
+>>> May be there are other differences.
+>>>
+>>> In my opinion the symlinking in base-files is buggy and should be fix=
+ed. Or am i wrong here?
 >>
->> At first i believe that practically it is not possible for us to guara=
-ntee that all apps do this in the right way. But second i'm not sure if t=
-his is the only problem.
+>> It probably would be good to have a version of base-files which was
+>> fully FHS conformant.  But there are a significant number of OE target
+>> systems where it is simply impossible to comply with these requirement=
+s
+>> since there is no persistent read/write storage available: the only
+>> choice is between flash (persistent but read-only) and ramdisk
+>> (read-write but volatile). =20
 >>
->> The kernel docu (what's the primary docu for me) itself says "but a pr=
-ogram built against newer kernel headers may not work on an older kernel.=
-" (see top of this post).
->>
->> This should be reason enough to avoid newer kernel headers (like all o=
-ther linux distros do)!
+>> Clearly, placing /var/tmp or /var/cache in a readonly location is
+>> unlikely to produce any useful results so linking them into volatile/ =
+is
+>> the least bad option in that situation.  Any change to base-files woul=
+d
+>> need to be done with some level of care in order to not break those
+>> kinds of setups which do work today.  I guess it should be a DISTRO
+>> decision whether or not to adhere to the FHS in this area.
 >=20
-> Well one way is to have kernel headers per machine which means you can
-> not share target packages anymore since they have to build per machine
-> but it would be much integrated solution and we could generate the
-> kernel headers from the kernel recipe itself so we are sure that the
-> .config of kernel headers match the .config of  kernel itself
-> downside is it will defeat the multimachine sharing packages a bit.
+> I echo this.  In my experiences the default filesystem should be FHS co=
+mpliant,
+> but there must be a variant that works for specific embedded projects t=
+hat
+> simply do not have writable storage.
+>=20
+> The ramifications of this are that /var/tmp, /var/cache are both transi=
+ent over
+> reboots.  Almost all applications will deal with this gracefully, so it=
+'s not
+> really an issue.  It is something to be aware of though when doing soft=
+ware
+> integration and validation that the problems must be able to create tmp=
+ and
+> cache files over again if the data is not already on the system.
+>=20
+> The important things when following the FHS really are R/O vs R/W suppo=
+rt, as
+> well a boot vs run-time.  (i.e. things required on '/' vs things that s=
+hould
+> live in '/usr'...)
 
-That would definitely be my preferred solution. I hope the distro maintai=
-ners can handle this.
-
-> Second solution is to use the older or equal to oldest kernel of all
-> multimachines for kernel headers. the problem Andreas described of
-> differen defconfigs will still be there
-> but it will work *mostly*
-
-Just my second choice.
-
-Steffen
+Ping!
 
 --=20
 DResearch Fahrzeugelektronik GmbH
 Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
 Tel: +49 30 515932-237 mailto:sledz@DResearch.de
 Fax: +49 30 515932-299
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
+Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
 Amtsgericht Berlin Charlottenburg; HRB 130120 B;
 Ust.-IDNr. DE273952058
 
