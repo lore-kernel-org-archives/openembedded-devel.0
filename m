@@ -1,39 +1,40 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PswX7-0002JJ-01
+	(envelope-from <otavio.salvador@gmail.com>) id 1Pswba-0002Op-CR
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Feb 2011 13:12:29 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id C4DE8314E12E
+	Fri, 25 Feb 2011 13:17:06 +0100
+Received: by ywg8 with SMTP id 8so421708ywg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Feb 2011 13:11:09 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id hAQSfSCeh7jO
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Feb 2011 13:11:00 +0100 (CET)
-Received: from [172.22.22.61] (ip-94-79-168-47.unitymediagroup.de
-	[94.79.168.47])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id B08B5314DDD8
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Feb 2011 13:11:00 +0100 (CET)
-Message-ID: <4D679C54.9060202@opendreambox.org>
-Date: Fri, 25 Feb 2011 13:11:00 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
+	Fri, 25 Feb 2011 04:14:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
+	:x-mailer:in-reply-to:references;
+	bh=Z+63EvYfm9Hqkc4SVmWJFeZGNHb8oz9fL/prbnrXLe4=;
+	b=efryw04EIg9pAoUc4Ns+ADQRWhNrU4S0HGSI1p7SAlb3WosnwnrEGhaoblaZHSyEcd
+	ME3bUftIC51m0NZ2WbAdzzw7jUzp+owgyGS4QfZv/qmYlgAqpwfyZnTRvc0sJgjFUrp2
+	CeYbePDiIF68qNeCtKzMRpxCnrwRgsBF7+428=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references;
+	b=HMDY5L8f567O6awYjhlszqa7clV1nI30FFXKpaLu+aVkUKVh/6WOm6dd794WXykyYB
+	gR6W4o0uK6JG0xEjc6LmaFGkT8h9VeG/iaWIZVO2lGaSzgodghkXFZn0+baWyjnXvrbk
+	haUF1l26qpohMj8v8p2Sln14cq0MGfLIQpZts=
+Received: by 10.151.158.1 with SMTP id k1mr3405164ybo.431.1298636090249;
+	Fri, 25 Feb 2011 04:14:50 -0800 (PST)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id u45sm358919yhn.9.2011.02.25.04.14.47
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 25 Feb 2011 04:14:49 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-References: <4D5A5871.7000005@dresearch.de>
-	<4D5A89CD.803@opendreambox.org>	<4D5A92BC.1010906@dresearch.de>
-	<4D5E422B.3040703@dresearch.de>	<AANLkTi=+vnLLOeP2umN3kdK3YzZBgLAwQgAvEKSjqd5f@mail.gmail.com>	<4D665D92.7000100@dresearch.de>
-	<4D6671C2.7060604@opendreambox.org>	<4D675D08.6050301@dresearch.de>
-	<AANLkTikv_D9xz3MYHwz0=eoJ+Q_p8TsCJC9k2Ps0SBw7@mail.gmail.com>
-In-Reply-To: <AANLkTikv_D9xz3MYHwz0=eoJ+Q_p8TsCJC9k2Ps0SBw7@mail.gmail.com>
-Subject: Re: linux-libc-headers version (reloaded)
+Date: Fri, 25 Feb 2011 12:14:35 +0000
+Message-Id: <1298636075-26972-2-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.3
+In-Reply-To: <1298636075-26972-1-git-send-email-otavio@ossystems.com.br>
+References: <1298636075-26972-1-git-send-email-otavio@ossystems.com.br>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [PATCH 2/2] src_distribute.bbclass: distribute only SRC_DISTRIBUTE_LICENSES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,31 +48,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Feb 2011 12:12:29 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 25 Feb 2011 12:17:06 -0000
 
-On 02/25/2011 08:51 AM, Khem Raj wrote:
-> Well one way is to have kernel headers per machine which means you can
-> not share target packages anymore since they have to build per machine
-> but it would be much integrated solution and we could generate the
-> kernel headers from the kernel recipe itself so we are sure that the
-> .config of kernel headers match the .config of  kernel itself
-> downside is it will defeat the multimachine sharing packages a bit.
+A distro can require conf/licenses.conf or set SRC_DISTRIBUTE_LICENSES
+selecting which licenses are wanted to be distributed. In case it is
+empty or undefined we default to distribute all licenses to not break
+backward compatibility.
 
-The .config does not have any influence on the generated
-linux-libc-headers by definition. linux-libc-headers must not contain
-any CONFIG_* statements, because they are meant to be independent of it.
-The kernel config is not available to linux-libc-headers after all.
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ classes/src_distribute.bbclass |    6 ++++--
+ 1 files changed, 4 insertions(+), 2 deletions(-)
 
-The point I was trying to make is that feature detection at compile time
-is impossible, if the feature can be disabled by the kernel config
-(which is the case for epoll and inotify, which in turn were the
-examples discussed on the mailing list in May 2010). You need to do
-runtime tests in programs intended to be portable.
-
-Regards,
-Andreas
+diff --git a/classes/src_distribute.bbclass b/classes/src_distribute.bbclass
+index 242d70c..f3d3cba 100644
+--- a/classes/src_distribute.bbclass
++++ b/classes/src_distribute.bbclass
+@@ -16,6 +16,7 @@ python do_distribute_sources () {
+ 	dldir = os.path.realpath(d.getVar("DL_DIR", 1) or "")
+ 
+ 	licenses = (bb.data.getVar('LICENSE', d, 1) or "unknown").split()
++	distribute_licenses = (bb.data.getVar('SRC_DISTRIBUTE_LICENSES', d, 1) or "All").split()
+ 	urldatadict = bb.fetch.init(d.getVar("SRC_URI", True).split(), d, True)
+ 	src_uri = oe.data.typed_value("SRC_URI", d)
+ 	if not src_uri:
+@@ -33,8 +34,9 @@ python do_distribute_sources () {
+ 		bb.data.setVar('SRC', os.path.abspath(local), d)
+ 		for license in licenses:
+ 			for entry in license.split("|"):
+-				bb.data.setVar('LIC', entry, d)
+-				bb.build.exec_func('SRC_DISTRIBUTECOMMAND', d)
++				if entry in distribute_licenses or "All" in distribute_licenses:
++					bb.data.setVar('LIC', entry, d)
++					bb.build.exec_func('SRC_DISTRIBUTECOMMAND', d)
+ }
+ 
+ addtask distribute_sources_all after do_distribute_sources
+-- 
+1.7.2.3
 
 
 
