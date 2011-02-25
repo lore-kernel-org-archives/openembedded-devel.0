@@ -1,35 +1,25 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Pso12-0006Js-26
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1Pss60-0005VG-6A
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Feb 2011 04:06:48 +0100
-Received: by fxm8 with SMTP id 8so1218858fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Feb 2011 19:05:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=UcvOEEvYnUnbQoDQ6oQIBiG9TfTEtn8RTw1oDSF8xdg=;
-	b=x0CkjX3wsHbyZlJhWxOMDy2XzId3b877fSPc+nxSDvuiQMrN1PUR7B9HEin/izykdA
-	JC4f6HmFRzooXTlRgbkaguXHfwfe718mxQLE8AT0GMN90Dbvxxs8iLOVz9d+Sl13K6y7
-	T5GvhJ3nSBezMepRE+AWh/ZEqZDpYsJfStUMs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	b=j814k5BSBhFG+lVFLC9v4xnITpvPu+xIc405jdipVIjq4O+d2OdwkitFnCHmfi0byw
-	8jwYykLyokMj4DcDMdD0QilSLzdCPwrxEIzkox+mqXJc+eIzgPyjHkpqK5yam9ffFJ0+
-	Y5bIuHYrigb6+XXv1qzRhjBssA9fxpIO54Kg0=
-Received: by 10.223.93.140 with SMTP id v12mr745695fam.96.1298603127141; Thu,
-	24 Feb 2011 19:05:27 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.223.30.151 with HTTP; Thu, 24 Feb 2011 19:05:06 -0800 (PST)
-In-Reply-To: <20110224231001.GC11390@denix.org>
-References: <20110224231001.GC11390@denix.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 24 Feb 2011 19:05:06 -0800
-Message-ID: <AANLkTik4vad6NM_jhszJ4Qd1kgcMJ3VnXd4hMsubYdGd@mail.gmail.com>
+	Fri, 25 Feb 2011 08:28:12 +0100
+Received: (qmail invoked by alias); 25 Feb 2011 07:20:10 -0000
+Received: from p5B0A0F52.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.15.82]
+	by mail.gmx.net (mp026) with SMTP; 25 Feb 2011 08:20:10 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX19WcpNFkVVWUlrF33eYUvnBH8HM+JXnqD2MZfp78F
+	mjFCujzHd7l4XB
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: US OEDEM/OEDAM in April?
+Date: Fri, 25 Feb 2011 08:14:22 +0100
+User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
+References: <4D66E88B.6040506@mentor.com>
+In-Reply-To: <4D66E88B.6040506@mentor.com>
+MIME-Version: 1.0
+Message-Id: <201102250814.22232.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: Release-2011.03: Let the testing continue again!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,34 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Feb 2011 03:06:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 25 Feb 2011 07:28:12 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Feb 24, 2011 at 3:10 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> All,
->
-> We had previously discussed the possibility of holding US-based OEDEM (or is
-> it called OEDAM then?) in addition to our regular Fall OEDEM in Europe. Is
-> there still any interest in this?
->
-> There is Embedded Linux Conference in San Francisco coming up in April, along
-> with few other Linux Foundation sponsored or organized events right before or
-> right after ELC. As some of the OE developers are planning on coming to ELC,
-> should we try to schedule a day or two for OEDEM and try to resolve some of
-> the pending organizational and technical issues face to face?
->
-> Please speak up. Thanks.
-
-good idea. I will be there mostly may not be every day
-
->
-> --
-> Denys
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+On Friday 25 February 2011 00:23:55 Tom Rini wrote:
+> Hey all,
+> 
+> I've updated the testing-release-2011.03 branch exist now and we're
+> ready for more testing.  As a reminder, please update the table on
+> http://wiki.openembedded.org/index.php?title=Release-2011.03 with your
+> results and the githash you're on.
+> 
+> This go-around should be much less bumpy as we've both fixed a number of
+> RPATH issues and made the error non-fatal.  I've also pushed a small
+> number of fixes for issues I hit in my builder but once again need to
+> add one more thing locally to confirm or rule out an occasional bug (the
+> config.sub failure I reported earlier in testing out the cross.bbclass
+> patch for RPATH stuff).
+I saw your results for cross.bbclass and thought 'well the affected are ok - fine 
+I have no time left over anyway'. 
+Can you name a (quick building please - I have a very weak environment here) 
+setup distro/machine/image so I hope to have a look on it at the weekend...
+> 
+> If all goes well, I plan to make a temporary branch Tuesday, add in (and
+> then revert from master at Khem's request)
+> http://patches.openembedded.org/patch/256/ since it is needed for
+> SHR/shr-image to work.  Get one last go-round and then call it a release.
+> 
+> Thanks again all!
 
 
