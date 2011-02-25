@@ -1,26 +1,24 @@
-Received: from vms173009pub.verizon.net ([206.46.173.9])
+Received: from vms173005pub.verizon.net ([206.46.173.5])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1PslkU-0003Qc-Qj
+	(envelope-from <denis@denix.org>) id 1Psll9-0003RE-BD
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Feb 2011 01:41:35 +0100
+	Fri, 25 Feb 2011 01:42:15 +0100
 Received: from gandalf.denix.org ([unknown] [71.251.49.88])
-	by vms173009.mailsrvcs.net
+	by vms173005.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LH500B7BB1TMV31@vms173009.mailsrvcs.net> for
+	2009)) with ESMTPA id <0LH5001LHDVUW9R2@vms173005.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Thu,
-	24 Feb 2011 17:39:29 -0600 (CST)
+	24 Feb 2011 18:40:43 -0600 (CST)
 Received: from elrond.denix.org (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id DD76314AF6A; Thu,
-	24 Feb 2011 18:39:28 -0500 (EST)
+	by gandalf.denix.org (Postfix) with ESMTP id BBDAA14AF6A; Thu,
+	24 Feb 2011 19:40:42 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Feb 2011 18:39:16 -0500
-Message-id: <1298590758-8843-1-git-send-email-denis@denix.org>
+Date: Thu, 24 Feb 2011 19:40:38 -0500
+Message-id: <1298594438-8997-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.7.4
-In-reply-to: <4D668BB8.1090707@mentor.com>
-References: <4D668BB8.1090707@mentor.com>
 Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [PATCH 1/3] bitbake.conf, native*.bbclass: pass --sysroot to TOOLCHAIN_OPTIONS
+Subject: [PATCH 1/3][resend] bitbake.conf, native*.bbclass: pass --sysroot to TOOLCHAIN_OPTIONS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,7 +32,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Feb 2011 00:41:35 -0000
+X-List-Received-Date: Fri, 25 Feb 2011 00:42:15 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
