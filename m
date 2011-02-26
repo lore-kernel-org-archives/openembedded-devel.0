@@ -1,20 +1,19 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from ibawizard.net ([82.208.49.253] helo=mengele.ibawizard.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ynezz@true.cz>) id 1PtODS-0006fO-ET
+	(envelope-from <ynezz@true.cz>) id 1PtODS-0006fW-Lf
 	for openembedded-devel@openembedded.org; Sat, 26 Feb 2011 18:46:02 +0100
 Received: from localhost.localdomain (localhost [127.0.0.1])
-	by mengele.ibawizard.net (Postfix) with ESMTP id A87811D360AA;
-	Sat, 26 Feb 2011 18:44:13 +0100 (CET)
+	by mengele.ibawizard.net (Postfix) with ESMTP id 2198B1D360A9;
+	Sat, 26 Feb 2011 18:44:33 +0100 (CET)
 From: =?UTF-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
 To: openembedded-devel@openembedded.org
-Date: Sat, 26 Feb 2011 18:44:14 +0100
-Message-Id: <1298742255-23389-2-git-send-email-ynezz@true.cz>
+Date: Sat, 26 Feb 2011 18:44:15 +0100
+Message-Id: <1298742255-23389-3-git-send-email-ynezz@true.cz>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1298742255-23389-1-git-send-email-ynezz@true.cz>
 References: <1298742255-23389-1-git-send-email-ynezz@true.cz>
 MIME-Version: 1.0
-Subject: [PATCH] minimal-uclibc: add xattr to distro features to fix build failure of libcap2
+Subject: [PATCH 2/2] minimal-uclibc: add xattr to distro features to fix build failure of libcap2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
