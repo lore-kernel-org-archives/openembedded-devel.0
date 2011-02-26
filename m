@@ -1,18 +1,20 @@
 Received: from ibawizard.net
 	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ynezz@true.cz>) id 1PtHoO-0007qN-0U
-	for openembedded-devel@openembedded.org; Sat, 26 Feb 2011 11:55:45 +0100
+	(envelope-from <ynezz@true.cz>) id 1PtHoR-0007qV-0Q
+	for openembedded-devel@openembedded.org; Sat, 26 Feb 2011 11:55:47 +0100
 Received: from localhost.localdomain (localhost [127.0.0.1])
-	by mengele.ibawizard.net (Postfix) with ESMTP id 5B41C1D360A9;
-	Sat, 26 Feb 2011 11:49:05 +0100 (CET)
+	by mengele.ibawizard.net (Postfix) with ESMTP id 8525D1D360AA;
+	Sat, 26 Feb 2011 11:49:07 +0100 (CET)
 From: =?UTF-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
 To: openembedded-devel@openembedded.org
-Date: Sat, 26 Feb 2011 11:49:06 +0100
-Message-Id: <1298717347-19637-1-git-send-email-ynezz@true.cz>
+Date: Sat, 26 Feb 2011 11:49:07 +0100
+Message-Id: <1298717347-19637-2-git-send-email-ynezz@true.cz>
 X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1298717347-19637-1-git-send-email-ynezz@true.cz>
+References: <1298717347-19637-1-git-send-email-ynezz@true.cz>
 MIME-Version: 1.0
-Subject: [PATCH 1/2] jack: fix wrong configure check on the build host
+Subject: [PATCH 2/2] jack: remove old versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,134 +28,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Feb 2011 10:55:45 -0000
+X-List-Received-Date: Sat, 26 Feb 2011 10:55:47 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-| checking existing, conflicting JACK installs...
-| You appear to have at least one existing installation of JACK.
-| Complete or partial JACK installs exist in: /usr/lib
-
-[...]
-
-NOTE: package jack-0.118.0-r2: task do_configure: Failed
+The jack is not pinned anywhere and according to the git log it seems, th=
+at
+just the latest stable version is maintained and used.
 
 Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
 ---
- recipes/jack/files/remove-wrong-host-test.patch |   66 +++++++++++++++++=
-++++++
- recipes/jack/jack_0.118.0.bb                    |    6 ++-
- 2 files changed, 70 insertions(+), 2 deletions(-)
- create mode 100644 recipes/jack/files/remove-wrong-host-test.patch
+ recipes/jack/jack_0.103.0.bb |   30 ------------------------------
+ recipes/jack/jack_0.116.2.bb |   32 --------------------------------
+ 2 files changed, 0 insertions(+), 62 deletions(-)
+ delete mode 100644 recipes/jack/jack_0.103.0.bb
+ delete mode 100644 recipes/jack/jack_0.116.2.bb
 
-diff --git a/recipes/jack/files/remove-wrong-host-test.patch b/recipes/ja=
-ck/files/remove-wrong-host-test.patch
-new file mode 100644
-index 0000000..54c4a83
---- /dev/null
-+++ b/recipes/jack/files/remove-wrong-host-test.patch
-@@ -0,0 +1,66 @@
-+| checking existing, conflicting JACK installs...
-+|=20
-+| !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-+| You appear to have at least one existing installation of JACK.
-+| Complete or partial JACK installs exist in: /usr/lib
-+
-+[...]
-+
-+NOTE: package jack-0.118.0-r2: task do_configure: Failed
-+
-+Index: RELEASE_0_118_0/configure.ac
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+--- RELEASE_0_118_0.orig/configure.ac	2011-02-26 06:54:25.711716288 +010=
-0
-++++ RELEASE_0_118_0/configure.ac	2011-02-26 06:54:47.061718126 +0100
-+@@ -3,51 +3,6 @@
-+=20
-+ AC_INIT(jackd/jackd.c)
-+=20
-+-
-+-dnl
-+-dnl Check for existing JACK installs
-+-dnl=20
-+-
-+-AC_MSG_CHECKING([existing, conflicting JACK installs])
-+-not_overwriting=3D0
-+-installs=3D
-+-for dir in /usr/lib /usr/local/lib /opt/lib ; do
-+-    if test -d $dir ; then
-+-	if test $(find $dir/ -name 'libjack.*' 2>/dev/null | wc -l) -gt 0 ; th=
-en
-+-	    if echo $prefix/lib | grep -vs $dir >/dev/null 2>&1 ; then
-+-		not_overwriting=3D$(expr $not_overwriting + 1)
-+-	    fi
-+-	    installs=3D"$installs $dir"
-+-	fi	   =20
-+-    fi
-+-done
-+-
-+-if test $not_overwriting -gt 0 ; then
-+-    echo=20
-+-    echo
-+-    echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!=
-!"
-+-    echo "You appear to have at least one existing installation of JACK=
-."
-+-    echo
-+-    echo "Complete or partial JACK installs exist in:$installs"
-+-    echo=20
-+-    echo "Installing this version will leave at least one of these"
-+-    echo "existing installations installed and this will probably break=
-"
-+-    echo "JACK on your machine. "
-+-    echo
-+-    echo "Before building, you should first remove the existing JACK"
-+-    echo "installation(s). "
-+-    echo
-+-    echo "Alternatively use ./configure --prefix=3D... to force overwri=
-ting"
-+-    echo "the existing install."
-+-    echo
-+-    echo "WARNING: ON ANY DEBIAN-DERIVED DISTRIBUTION (Debian, Ubuntu e=
-tc)"
-+-    echo "CHANGING THE INSTALLATION PREFIX WILL NOT PRODUCE A WORKING J=
-ACK"
-+-    echo "INSTALL. Please contact the distribution packager for JACK an=
-d"
-+-    echo "ask them to fix their packaging."
-+-    echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!=
-!"
-+-    exit 1
-+-fi
-+-
-+ AC_CONFIG_AUX_DIR(config)
-+ AC_CANONICAL_TARGET
-+=20
-diff --git a/recipes/jack/jack_0.118.0.bb b/recipes/jack/jack_0.118.0.bb
-index 5ca9d65..e979c7a 100644
---- a/recipes/jack/jack_0.118.0.bb
-+++ b/recipes/jack/jack_0.118.0.bb
-@@ -8,11 +8,13 @@ LICENSE =3D "GPLv2 LGPLv2.1"
-=20
- DEPENDS =3D "alsa-lib"
-=20
--PR =3D "r2"
-+PR =3D "r3"
-=20
- SVNPV =3D "${@'${PV}'.replace('.', '_')}"
- SRCREV =3D "4084"
--SRC_URI =3D "svn://subversion.jackaudio.org/jack/tags;module=3DRELEASE_$=
-{SVNPV};proto=3Dhttp"
-+SRC_URI =3D "svn://subversion.jackaudio.org/jack/tags;module=3DRELEASE_$=
-{SVNPV};proto=3Dhttp \
-+           file://remove-wrong-host-test.patch \
-+           "
-=20
- # This is not omap3 specific, but there is a strong correlation between =
-using twl4030 and using omap3
- SRC_URI_append_omap3 =3D " file://jack_fix_TWL4030_alsa_capture.patch"
+diff --git a/recipes/jack/jack_0.103.0.bb b/recipes/jack/jack_0.103.0.bb
+deleted file mode 100644
+index f7bd62a..0000000
+--- a/recipes/jack/jack_0.103.0.bb
++++ /dev/null
+@@ -1,30 +0,0 @@
+-DESCRIPTION =3D "JACK is a low-latency audio server. It can \
+-connect a number of different applications to an audio \
+-device, as well as allowing them to share audio between \
+-themselves."
+-SECTION =3D "libs/multimedia"
+-PRIORITY =3D "optional"
+-LICENSE =3D "GPL LGPL"
+-PR =3D "r0"
+-
+-DEPENDS =3D "alsa-lib"
+-
+-SRC_URI =3D "${SOURCEFORGE_MIRROR}/jackit/jack-audio-connection-kit-${PV=
+}.tar.gz"
+-S =3D "${WORKDIR}/jack-audio-connection-kit-${PV}"
+-
+-inherit autotools pkgconfig
+-
+-EXTRA_OECONF =3D "--enable-timestamps --disable-capabilities --disable-o=
+ldtrans \
+-		--disable-portaudio --disable-coreaudio --enable-oss --enable-alsa"
+-
+-EXTRA_OEMAKE =3D 'transform=3D"s,^,,"'
+-LDFLAGS_append =3D " -ldl -L${STAGING_LIBDIR}"
+-
+-PACKAGES =3D+ "libjack jack-server jack-examples"
+-
+-FILES_libjack =3D "${libdir}/*.so.* ${libdir}/jack/*.so"
+-FILES_jack-server =3D "${bindir}/jackd"
+-FILES_jack-examples =3D "${bindir}/*"
+-
+-SRC_URI[md5sum] =3D "03a0f63b997ce7b83a1eeaa6b80f4388"
+-SRC_URI[sha256sum] =3D "a5d9fd696d7ee4a1c7679b5a688155bc1e0abbdf5f144d67=
+62dbbee874df235f"
+diff --git a/recipes/jack/jack_0.116.2.bb b/recipes/jack/jack_0.116.2.bb
+deleted file mode 100644
+index d97043a..0000000
+--- a/recipes/jack/jack_0.116.2.bb
++++ /dev/null
+@@ -1,32 +0,0 @@
+-DESCRIPTION =3D "JACK is a low-latency audio server. It can \
+-connect a number of different applications to an audio \
+-device, as well as allowing them to share audio between \
+-themselves."
+-SECTION =3D "libs/multimedia"
+-PRIORITY =3D "optional"
+-LICENSE =3D "GPL LGPL"
+-PR =3D "r1"
+-
+-DEPENDS =3D "alsa-lib"
+-
+-SRC_URI =3D "http://jackaudio.org/downloads/jack-audio-connection-kit-${=
+PV}.tar.gz"
+-S =3D "${WORKDIR}/jack-audio-connection-kit-${PV}"
+-
+-inherit autotools
+-
+-EXTRA_OECONF =3D "--enable-timestamps --disable-capabilities --disable-o=
+ldtrans \
+-		--disable-portaudio --disable-coreaudio --enable-oss --enable-alsa"
+-
+-EXTRA_OEMAKE =3D 'transform=3D"s,^,,"'
+-LDFLAGS_append =3D " -ldl -L${STAGING_LIBDIR}"
+-
+-PACKAGES =3D+ "libjack jack-server jack-examples"
+-
+-FILES_libjack =3D "${libdir}/*.so.* ${libdir}/jack/*.so"
+-FILES_jack-server =3D "${bindir}/jackd"
+-FILES_jack-examples =3D "${bindir}/*"
+-FILES_${PN}-doc +=3D " ${datadir}/jack-audio-connection-kit/reference/ht=
+ml/* "
+-
+-
+-SRC_URI[md5sum] =3D "9c0ae9880e9b6e081f1a238fe6a28bd5"
+-SRC_URI[sha256sum] =3D "ce6e1f61a3b003137af56b749e5ed4274584167c0877ea9e=
+f2d83f47b11c8d3d"
 --=20
 1.7.0.4
 
