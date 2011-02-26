@@ -1,21 +1,19 @@
 Received: from ibawizard.net ([82.208.49.253] helo=mengele.ibawizard.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1PtP4u-0008QC-J4
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1PtPOQ-0000kV-J7
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Feb 2011 19:41:16 +0100
+	Sat, 26 Feb 2011 20:01:26 +0100
 Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id A4BD91D360AA; Sat, 26 Feb 2011 19:39:49 +0100 (CET)
-Date: Sat, 26 Feb 2011 19:39:49 +0100
+	id B1FEF1D360AA; Sat, 26 Feb 2011 19:59:59 +0100 (CET)
+Date: Sat, 26 Feb 2011 19:59:59 +0100
 From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20110226183949.GB10042@ibawizard.net>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110226185959.GC10042@ibawizard.net>
 References: <1298742255-23389-1-git-send-email-ynezz@true.cz>
-	<AANLkTimdkiR3Kf_1980OZ5tn9SfDVCnz0=tzkQvpwxw8@mail.gmail.com>
+	<1298745578.3818.7.camel@lenovo.internal.reciva.com>
 MIME-Version: 1.0
-In-Reply-To: <AANLkTimdkiR3Kf_1980OZ5tn9SfDVCnz0=tzkQvpwxw8@mail.gmail.com>
+In-Reply-To: <1298745578.3818.7.camel@lenovo.internal.reciva.com>
 User-Agent: Mutt/1.5.18 (2008-05-17)
-Cc: openembedded-devel@openembedded.org,
-	openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH 1/2] micro-uclibc: add xattr to distro features to	fix build failure of libcap2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,24 +28,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Feb 2011 18:41:16 -0000
+X-List-Received-Date: Sat, 26 Feb 2011 19:01:26 -0000
 Content-Type: text/plain; charset=iso-8859-2
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Khem Raj <raj.khem@gmail.com> [2011-02-26 10:06:31]:
+Phil Blundell <philb@gnu.org> [2011-02-26 18:39:38]:
 
-> On Sat, Feb 26, 2011 at 9:44 AM, Petr =A9tetiar <ynezz@true.cz> wrote:
+> On Sat, 2011-02-26 at 18:44 +0100, Petr =A9tetiar wrote:
 > > cap_file.c:8:23: fatal error: sys/xattr.h: No such file or directory
-> >
-> > Signed-off-by: Petr =A9tetiar <ynezz@true.cz>
 >=20
-> looks good although I dont know if enabling this is intended as micro
-> should be small
+> Are you really using POSIX.1e caps on micro?  If yes then I guess this
+> is fine, though it would be interesting to know what the code size
+> impact is.
 
-I see and agree, but what do you propose as the way to fix the libcap2 bu=
-ild
-failure with uclibc? Thanks.
+I don't use micro at all, I've just added it as another test target for
+2011.03 release and the build of console-image failed on libcap2 so I've =
+tried
+to fix it. That's all behind it.
 
 -- ynezz
 
