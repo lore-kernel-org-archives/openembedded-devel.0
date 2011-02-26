@@ -1,20 +1,40 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ynezz@true.cz>) id 1PtHoR-0007qV-0Q
-	for openembedded-devel@openembedded.org; Sat, 26 Feb 2011 11:55:47 +0100
-Received: from localhost.localdomain (localhost [127.0.0.1])
-	by mengele.ibawizard.net (Postfix) with ESMTP id 8525D1D360AA;
-	Sat, 26 Feb 2011 11:49:07 +0100 (CET)
-From: =?UTF-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
-To: openembedded-devel@openembedded.org
-Date: Sat, 26 Feb 2011 11:49:07 +0100
-Message-Id: <1298717347-19637-2-git-send-email-ynezz@true.cz>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1298717347-19637-1-git-send-email-ynezz@true.cz>
-References: <1298717347-19637-1-git-send-email-ynezz@true.cz>
+	(envelope-from <obi@opendreambox.org>) id 1PtJZk-0001IL-1t
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Feb 2011 13:48:44 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 91865314E1B2;
+	Sat, 26 Feb 2011 13:47:18 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id a+D5hdEiur6X; Sat, 26 Feb 2011 13:47:13 +0100 (CET)
+Received: from [172.22.22.61] (ip-81-210-156-22.unitymediagroup.de
+	[81.210.156.22])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 5CA36314E1AF;
+	Sat, 26 Feb 2011 13:47:13 +0100 (CET)
+Message-ID: <4D68F651.80908@opendreambox.org>
+Date: Sat, 26 Feb 2011 13:47:13 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-Subject: [PATCH 2/2] jack: remove old versions
+To: Khem Raj <raj.khem@gmail.com>
+References: <4D5A5871.7000005@dresearch.de> <4D5A89CD.803@opendreambox.org>
+	<4D5A92BC.1010906@dresearch.de> <4D5E422B.3040703@dresearch.de>
+	<AANLkTi=+vnLLOeP2umN3kdK3YzZBgLAwQgAvEKSjqd5f@mail.gmail.com>
+	<4D665D92.7000100@dresearch.de> <4D6671C2.7060604@opendreambox.org>
+	<4D675D08.6050301@dresearch.de>
+	<AANLkTikv_D9xz3MYHwz0=eoJ+Q_p8TsCJC9k2Ps0SBw7@mail.gmail.com>
+	<4D679C54.9060202@opendreambox.org>
+	<AANLkTi=7ZpNFo+7+g4ymwHFRwAWx5PGUqOYRHeGN4XD8@mail.gmail.com>
+In-Reply-To: <AANLkTi=7ZpNFo+7+g4ymwHFRwAWx5PGUqOYRHeGN4XD8@mail.gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: linux-libc-headers version (reloaded)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,105 +48,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Feb 2011 10:55:47 -0000
+X-List-Received-Date: Sat, 26 Feb 2011 12:48:44 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-The jack is not pinned anywhere and according to the git log it seems, th=
-at
-just the latest stable version is maintained and used.
+On 02/25/2011 06:28 PM, Khem Raj wrote:
+> On Fri, Feb 25, 2011 at 4:11 AM, Andreas Oberritter
+> <obi@opendreambox.org> wrote:
+>> On 02/25/2011 08:51 AM, Khem Raj wrote:
+>>> Well one way is to have kernel headers per machine which means you can
+>>> not share target packages anymore since they have to build per machine
+>>> but it would be much integrated solution and we could generate the
+>>> kernel headers from the kernel recipe itself so we are sure that the
+>>> .config of kernel headers match the .config of  kernel itself
+>>> downside is it will defeat the multimachine sharing packages a bit.
+>>
+>> The .config does not have any influence on the generated
+> 
+> yes thats right
+> 
+>> linux-libc-headers by definition. linux-libc-headers must not contain
+>> any CONFIG_* statements, because they are meant to be independent of it.
+>> The kernel config is not available to linux-libc-headers after all.
+>>
+>> The point I was trying to make is that feature detection at compile time
+>> is impossible, if the feature can be disabled by the kernel config
+>> (which is the case for epoll and inotify, which in turn were the
+>> examples discussed on the mailing list in May 2010). You need to do
+>> runtime tests in programs intended to be portable.
+> 
+> which may not be easy to do for cross compiled packages unless they are patches
+> to make this test dynamic
 
-Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
----
- recipes/jack/jack_0.103.0.bb |   30 ------------------------------
- recipes/jack/jack_0.116.2.bb |   32 --------------------------------
- 2 files changed, 0 insertions(+), 62 deletions(-)
- delete mode 100644 recipes/jack/jack_0.103.0.bb
- delete mode 100644 recipes/jack/jack_0.116.2.bb
+That doesn't make any sense. Runtime tests aren't affected by any cross
+compilation issues. Runtime tests are dynamic by nature.
 
-diff --git a/recipes/jack/jack_0.103.0.bb b/recipes/jack/jack_0.103.0.bb
-deleted file mode 100644
-index f7bd62a..0000000
---- a/recipes/jack/jack_0.103.0.bb
-+++ /dev/null
-@@ -1,30 +0,0 @@
--DESCRIPTION =3D "JACK is a low-latency audio server. It can \
--connect a number of different applications to an audio \
--device, as well as allowing them to share audio between \
--themselves."
--SECTION =3D "libs/multimedia"
--PRIORITY =3D "optional"
--LICENSE =3D "GPL LGPL"
--PR =3D "r0"
--
--DEPENDS =3D "alsa-lib"
--
--SRC_URI =3D "${SOURCEFORGE_MIRROR}/jackit/jack-audio-connection-kit-${PV=
-}.tar.gz"
--S =3D "${WORKDIR}/jack-audio-connection-kit-${PV}"
--
--inherit autotools pkgconfig
--
--EXTRA_OECONF =3D "--enable-timestamps --disable-capabilities --disable-o=
-ldtrans \
--		--disable-portaudio --disable-coreaudio --enable-oss --enable-alsa"
--
--EXTRA_OEMAKE =3D 'transform=3D"s,^,,"'
--LDFLAGS_append =3D " -ldl -L${STAGING_LIBDIR}"
--
--PACKAGES =3D+ "libjack jack-server jack-examples"
--
--FILES_libjack =3D "${libdir}/*.so.* ${libdir}/jack/*.so"
--FILES_jack-server =3D "${bindir}/jackd"
--FILES_jack-examples =3D "${bindir}/*"
--
--SRC_URI[md5sum] =3D "03a0f63b997ce7b83a1eeaa6b80f4388"
--SRC_URI[sha256sum] =3D "a5d9fd696d7ee4a1c7679b5a688155bc1e0abbdf5f144d67=
-62dbbee874df235f"
-diff --git a/recipes/jack/jack_0.116.2.bb b/recipes/jack/jack_0.116.2.bb
-deleted file mode 100644
-index d97043a..0000000
---- a/recipes/jack/jack_0.116.2.bb
-+++ /dev/null
-@@ -1,32 +0,0 @@
--DESCRIPTION =3D "JACK is a low-latency audio server. It can \
--connect a number of different applications to an audio \
--device, as well as allowing them to share audio between \
--themselves."
--SECTION =3D "libs/multimedia"
--PRIORITY =3D "optional"
--LICENSE =3D "GPL LGPL"
--PR =3D "r1"
--
--DEPENDS =3D "alsa-lib"
--
--SRC_URI =3D "http://jackaudio.org/downloads/jack-audio-connection-kit-${=
-PV}.tar.gz"
--S =3D "${WORKDIR}/jack-audio-connection-kit-${PV}"
--
--inherit autotools
--
--EXTRA_OECONF =3D "--enable-timestamps --disable-capabilities --disable-o=
-ldtrans \
--		--disable-portaudio --disable-coreaudio --enable-oss --enable-alsa"
--
--EXTRA_OEMAKE =3D 'transform=3D"s,^,,"'
--LDFLAGS_append =3D " -ldl -L${STAGING_LIBDIR}"
--
--PACKAGES =3D+ "libjack jack-server jack-examples"
--
--FILES_libjack =3D "${libdir}/*.so.* ${libdir}/jack/*.so"
--FILES_jack-server =3D "${bindir}/jackd"
--FILES_jack-examples =3D "${bindir}/*"
--FILES_${PN}-doc +=3D " ${datadir}/jack-audio-connection-kit/reference/ht=
-ml/* "
--
--
--SRC_URI[md5sum] =3D "9c0ae9880e9b6e081f1a238fe6a28bd5"
--SRC_URI[sha256sum] =3D "ce6e1f61a3b003137af56b749e5ed4274584167c0877ea9e=
-f2d83f47b11c8d3d"
---=20
-1.7.0.4
-
+Regards,
+Andreas
 
 
