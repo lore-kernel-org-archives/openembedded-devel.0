@@ -1,28 +1,30 @@
-Received: from ppsw-52.csi.cam.ac.uk ([131.111.8.152])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jic23@cam.ac.uk>) id 1Ptj5O-0005gi-OQ
-	for openembedded-devel@openembedded.org; Sun, 27 Feb 2011 17:03:06 +0100
-X-Cam-AntiVirus: no malware found
-X-Cam-SpamDetails: not scanned
-X-Cam-ScannerInfo: http://www.cam.ac.uk/cs/email/scanner/
-Received: from arcturus.eng.cam.ac.uk ([129.169.154.73]:34187)
-	by ppsw-52.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.159]:25)
-	with esmtpsa (PLAIN:jic23) (TLSv1:DHE-RSA-CAMELLIA256-SHA:256)
-	id 1Ptief-0003KG-Et (Exim 4.72)
-	(return-path <jic23@cam.ac.uk>); Sun, 27 Feb 2011 15:35:29 +0000
-Message-ID: <4D6A6F66.7050400@cam.ac.uk>
-Date: Sun, 27 Feb 2011 15:36:06 +0000
-From: Jonathan Cameron <jic23@cam.ac.uk>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20110122 Lightning/1.0b3pre Thunderbird/3.1.7
+	(envelope-from <Tom_Rini@mentor.com>) id 1Ptkfi-0001Oq-Ii
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 27 Feb 2011 18:44:42 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PtkeL-0004nE-HF from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 27 Feb 2011 09:43:17 -0800
+Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Sun, 27 Feb 2011 09:43:17 -0800
+Received: from [172.30.80.189] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
+	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
+	Sun, 27 Feb 2011 09:43:16 -0800
+Message-ID: <4D6A8D24.2060000@mentor.com>
+Date: Sun, 27 Feb 2011 10:43:00 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-To: Richard Purdie <rpurdie@rpsys.net>
-References: <1298049536.11289.3126.camel@rex>
-In-Reply-To: <1298049536.11289.3126.camel@rex>
-X-Enigmail-Version: 1.1.2
-Cc: openembedded-devel <openembedded-devel@openembedded.org>,
-	bitbake-dev <bitbake-dev@lists.berlios.de>
-Subject: Re: Bitbake 1.12.0 released!
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 27 Feb 2011 17:43:17.0347 (UTC)
+	FILETIME=[D0EF1B30:01CBD6A5]
+Subject: Preliminary agenda for 2011-02-29 TSC meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,40 +38,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Feb 2011 16:03:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 27 Feb 2011 17:44:42 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Sorry for repeat copies, wasn't subscribed to openembedded-devel with this account so
-it bounced the first time.
+Please reply if you have any suggestions for new agenda items, thanks!
 
-On 02/18/11 17:18, Richard Purdie wrote:
-> Bitbake 1.12.0 has been released.
-> 
-> http://prdownload.berlios.de/bitbake/bitbake-1.12.0.tar.gz
-> 
-> This release has many cleanups and improvements to the bitbake core. The
-> biggest and most user visible change is the parallel parsing work which
-> is the driving reason for the release.
-> 
-> A git log of the differences between 1.10 and 1.12 follows.
-> 
-It's a dumb question, but what are the intended restrictions on python version
-for running bitbake?  1.10 seems to work fine with python2.7 whereas I can
-only get 1.12 to work with python2.6.
+-------- Original Message --------
+Subject: Preliminary agenda for 2011-02-29 TSC meeting
+Date: Fri, 25 Feb 2011 15:19:42 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+To: tsc@lists.openembedded.org
 
-Issue is:
+Hi all,
 
-Traceback (most recent call last):
-  File "./bitbake", line 43, in <module>
-    from bb.server.process import ProcessServer, ServerCommunicator
-ImportError: No module named process
+I've taken the liberty to compile a preliminary agenda for the Feb 28
+meeting (and yes, I edited Koen's message from last week as my starting
+point):
 
-I'm not having a great deal of luck tracking down why that happens but then
-I haven't put all that much effort into it as yet!
+Agenda 2011-02-28 meeting
+-------------------------
 
-Jonathan
+01) Agree on meeting chair
 
+02) Status report on oe-core
 
+03) Status report on pull model, contrib repo and guidelines
+
+04) Status report on board support layer guidelines
+
+05) Status report on version retention policy and interaction with
+oe-core / meta-oe / $distro layers
+    (This was: Re-inforcement of the "don't delete all old versions"
+     policy, make sure this is in the wiki somewhere. [Proposed: Graeme])
+
+06) Status on Yocto / OpenEmbedded integration plan in oe-core
+
+07) Start to think about the Policies section on wiki and whether it is
+     relevant/correct now, and also what needs to change going forward
+to Yocto.
+     [Proposed: Graeme]
+
+08) Come to a set of minimal quality requirements for our recipes/packages
+     (e.g. must fetch, minimal required headers etc).
+     My proposal would be to use the yocto requirements as a starter
+
+09) Splitting our metadata into multiple layers
+     I can think of the following:
+     - oe core layer (shared with yocto
+     - oe layer (or oe extra's or whatever you want to call it; containing
+     recipes that are generic, not in oe-core and considered to be of
+     common use)
+     - maybe oe-old or so layer (recipes that are not maintained any more)
+     - layer per distro for distro specific stuff
+     - layer per machine (or maybe soc family, I can imagine it makes sense
+     to keep BB and BB-XM together; similarly for the kirkwoord variants)
+     - vendor specific layers (if needed), e.g. ti (although maybe that
+     stuff could also go into a machine layer)
+     Rationale is that users can pull in only those layers that they
+need. [Proposed:
+     Frans]
+
+10) Consider a version based release mechanism
+     yocto has a release model, intermediate versions are aiming to build
+     but are considered to be less mature.
+     If our core recipes follow this model, I can imagine it is a good
+     strategy to follow in oe too. [Proposed: Frans]
+
+11) Discuss future of our infrastructure (oestats, autobuilder,run-time
+testing)
+     [Proposed: Yury]
+
+12) What immediate infrastructure changes are needed to work on integrating
+     better with Yocto. [Proposed: Tom King]
 
 
