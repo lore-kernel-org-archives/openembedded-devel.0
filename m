@@ -1,29 +1,36 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PtqWm-0004JQ-Hu
+	(envelope-from <marc.reilly@gmail.com>) id 1Ptr03-0005Dy-0L
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 00:59:53 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1PtqVP-0006hC-Ou from Tom_Rini@mentor.com ;
-	Sun, 27 Feb 2011 15:58:27 -0800
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Sun, 27 Feb 2011 15:58:27 -0800
-Received: from [172.30.80.189] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
-	with Microsoft SMTP Server id 14.1.270.1;
-	Sun, 27 Feb 2011 15:58:26 -0800
-Message-ID: <4D6AE512.1070009@mentor.com>
-Date: Sun, 27 Feb 2011 16:58:10 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 27 Feb 2011 23:58:27.0439 (UTC)
-	FILETIME=[39FE8FF0:01CBD6DA]
-Subject: openjdk-6 sources moved
+	Mon, 28 Feb 2011 01:30:07 +0100
+Received: by pzk12 with SMTP id 12so522194pzk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 27 Feb 2011 16:28:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:sender:from:to:subject:date:message-id:x-mailer; 
+	bh=cK7ygivO3JMxdynQiKh2J1gTFyJyW/QFjdhjkQ1f7iM=;
+	b=SFmxGhhw5UDD/XFp8ZG2qRm7oDoEGIVVKXhRfKips1Jb4EslEp2yW4GS5Nf4FXC/do
+	55cMEz1fOJEyvv63j2GFIDOB+ssWiCR/8poGuYMQidXRp0yrCiyPrRBSjjJ0okaGepSR
+	ULohkBGtWcjnCXWXzfNSrC4wSbwkR8DxWKsGA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	b=n3sdGmLSwhLgLRotQjeXw1WPD0EMdjo5ZJNVJIp9XqOlbv1fAZMLoSzJWzGuQXGrKe
+	+FX8UHjC+HwB7zL4YC/k8+Nv+caNYOGSV/m0y4QYSt7sXU5LRuw8Jw4D/NLxn0k68uhY
+	NJcPS8LHqzH9dtxH5TFi+PIyckfu9JxPDZR4I=
+Received: by 10.142.75.6 with SMTP id x6mr3827006wfa.229.1298852918344;
+	Sun, 27 Feb 2011 16:28:38 -0800 (PST)
+Received: from localhost.localdomain (220-244-174-13.static.tpgi.com.au
+	[220.244.174.13])
+	by mx.google.com with ESMTPS id w32sm5135372wfh.7.2011.02.27.16.28.36
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 27 Feb 2011 16:28:37 -0800 (PST)
+Sender: Marc Reilly <marc.reilly@gmail.com>
+From: Marc Reilly <marc@cpdesign.com.au>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 28 Feb 2011 10:27:56 +1100
+Message-Id: <1298849277-29164-1-git-send-email-marc@cpdesign.com.au>
+X-Mailer: git-send-email 1.7.1
+Subject: qt-4.7.1 phonon/gstreamer RGB fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,19 +44,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Feb 2011 23:59:53 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 28 Feb 2011 00:30:07 -0000
 
-Hey all,
+Hi,
 
-I was looking into fixing the current open security issues for openjdk 
-and ran into the problem that as part of java.net re-org, the SRC_URIs 
-don't fetch anymore.  Real quick poking on my part didn't reveal where 
-to, so I've punted on fixing CVE-2010-4476, CVE-2010-4476, and CVE-2009-3555
+This fixes a colour issue with video playback via phonon on ARM system.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Cheers
+Marc
+
 
 
