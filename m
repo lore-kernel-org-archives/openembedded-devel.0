@@ -1,37 +1,35 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1PtTiy-00063u-0c
+	(envelope-from <hvontres@gmail.com>) id 1PtbNB-0001h8-RB
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Feb 2011 00:38:56 +0100
-Received: by wwb29 with SMTP id 29so551436wwb.0
+	Sun, 27 Feb 2011 08:48:57 +0100
+Received: by wwe15 with SMTP id 15so3134946wwe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Feb 2011 15:37:32 -0800 (PST)
+	Sat, 26 Feb 2011 23:47:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
-	:date:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	bh=HI3+p0LksY38R87+O0S5jWIBlrusJUgIkVpY53KA/Ck=;
-	b=uZVO6nN/RhkkV421oXjWT+WZtvWoJqgpivr9d+AlpygjemwQAMHf2U0aoA/m5og6C2
-	kyzLTH4fLIxkWONcH0qDOUgmI2fdo9DPpV0mH0IDzi05WGfdVoB6pyVCjZ7/mauIKz1P
-	LhKtTgtRNxUIGQMe3KLtuZTxe0KCI4FaqUQQ8=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=IO1Me2U085imLJw2l1y83C/QCfFhnoQXk1iwo2XEBEk=;
+	b=huDjBOd7X/7T3m1jCtFbskiewjRVwokFlCJU4UZzBsaYSS8fyRG02pNsZmDN/B6hxA
+	TpY/aSom2nE0Gytm+jL3rV3dK2uEd+/TaYTxbcuaOmi2/0Kl3Sxh04DweszP+vlLgxFE
+	f7jlX0sKI6dowokrk/k3t005805KwbyAHAnZk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=JV+CnOQXJuM/MU7dsBgFRKxq+NN0pH1wAbeFX1/OEv0xuY9v5eqYaExSNRRoHqjxjx
-	6JJqL5r5jb1Rz6lUXm55Xl7T7hJZ9rUInmfDqjYV8IirwgDjiS+5zcYF1BO4PQAhfccT
-	laFDRcQft1ST8Nj004HUeHPm6+FohEv+fYx+4=
-Received: by 10.216.18.83 with SMTP id k61mr3241870wek.91.1298763452332; Sat,
-	26 Feb 2011 15:37:32 -0800 (PST)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=EYVWck9JsVZNTtmN1+I7nqEtkcexRDhvJBVHqTXuLyuXr6amE7QXk6V9eoYjAGABTT
+	0pxWi4+99ktvaM3ezdMWRAPD7NlIjYFpcgLxrB7wEvkC2z7IuobCBcFoL3ZM27i9r394
+	g+HQYPsw/5psajfY+eTKCCWzLyrGz2HDkAsH8=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.246.11 with HTTP; Sat, 26 Feb 2011 15:37:12 -0800 (PST)
-In-Reply-To: <AANLkTikzpcKBzgiQxkMTV75-+a27HE1juKSvitqjLrg3@mail.gmail.com>
-References: <AANLkTikzpcKBzgiQxkMTV75-+a27HE1juKSvitqjLrg3@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Sat, 26 Feb 2011 16:37:12 -0700
-X-Google-Sender-Auth: gdxpfRFSbO1okAbnG-k4lqcbwBs
-Message-ID: <AANLkTikZPPi0j40cDv3tzJSWfJ-gnnrrrSCMO7ioz5eo@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: Any good bitbake front-ends out there?
+Received: by 10.216.87.130 with SMTP id y2mr3689846wee.58.1298792851297; Sat,
+	26 Feb 2011 23:47:31 -0800 (PST)
+Received: by 10.216.174.21 with HTTP; Sat, 26 Feb 2011 23:47:31 -0800 (PST)
+In-Reply-To: <AANLkTimD1wN43i3WW1qBmfZamxiz3HGkoebOa4dxWyGB@mail.gmail.com>
+References: <AANLkTimD1wN43i3WW1qBmfZamxiz3HGkoebOa4dxWyGB@mail.gmail.com>
+Date: Sat, 26 Feb 2011 23:47:31 -0800
+Message-ID: <AANLkTinzJHmo-ycPSP3cgUh8azLpbMG1=k1VP8heu69K@mail.gmail.com>
+From: Hans Henry von Tresckow <hvontres@gmail.com>
+To: oe-devel <openembedded-devel@lists.openembedded.org>
+Subject: Problem with autotools and host=armv5teb-oe-linux-gnueabi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,20 +43,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Feb 2011 23:38:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 27 Feb 2011 07:48:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Sat, Feb 26, 2011 at 3:38 PM, Hans Henry von Tresckow
-<hvontres@gmail.com> wrote:
-> I was curious if anybody on the list has any recomendations for a
-> bitbake front-end.
+I am trying to get a recipie for apcupsd working with the latest
+openembedded. I had this recipie working a couple of weeks ago, but
+now I get the following errors:
 
-bitbake -u goggle foo # assuming bitbake 1.12.0 or newer
+
+configure: loading site script /home/henry/oe/openembedded/site/endian-big
+configure: loading site script /home/henry/oe/openembedded/site/arm-common
+configure: loading site script /home/henry/oe/openembedded/site/common-linux
+configure: loading site script /home/henry/oe/openembedded/site/common-glibc
+configure: loading site script /home/henry/oe/openembedded/site/armeb-linux
+configure: loading site script /home/henry/oe/openembedded/site/common
+checking for true... /home/henry/oe/slug/tmp/sysroots/x86_64-linux/usr/bin/true
+checking for false...
+/home/henry/oe/slug/tmp/sysroots/x86_64-linux/usr/bin/false
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... Invalid configuration
+`armeb-oe-linux-gnueabi': machine `armeb-oe' not recognized
+configure: error: /bin/sh
+/home/henry/oe/slug/tmp/work/armv5teb-oe-linux-gnueabi/apcupsd-3.14.8-r0/apcupsd-3.14.8/autoconf/config.sub
+armeb-oe-linux-gnueabi failed
+
+This was working with the host set to armv5teb-linux-gnueabi.
+
+Here is the recipie for reference:
+
+inherit autotools
+DEPENDS = "gd"
+
+SRC_URI = "${SOURCEFORGE_MIRROR}/project/apcupsd/apcupsd%20-%20Stable/${PV}/apcupsd-${PV}.tar.gz;name=archive"
+
+SRC_URI[archive.md5sum] ="cd17f0a903dc2220e55ed54e242359d2"
+SRC_URI[archive.sha256sum] =
+"8e7f2574d3abaf6637da3e790860c3f9ba64fab1ec7e50bb080de4439441c5a7"
+
+EXTRA_OECONF= " --enable-usb --enable-install-distdir --enable-test"
+LD=${CXX}
+STRIP =. " -s --strip-program="
+
+
+--
+Henry von Tresckow (hvontres)
+
+
+
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Henry von Tresckow (hvontres)
 
 
