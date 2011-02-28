@@ -1,33 +1,34 @@
-Received: from einhorn.in-berlin.de ([192.109.42.8] ident=root)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PtxUF-0003Pz-UG
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 08:25:44 +0100
-X-Envelope-From: sledz@dresearch.de
-X-Envelope-To: <openembedded-devel@lists.openembedded.org>
-Received: from mobil-400-586.intern.dresearch.de
-	(p57A2064B.dip0.t-ipconnect.de [87.162.6.75]) (authenticated bits=0)
-	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
-	p1S7OKAb010030
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Pty6f-0007eU-FZ for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Feb 2011 09:05:25 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Pty5K-0003LC-Kf for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Feb 2011 09:04:02 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Feb 2011 09:04:02 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Feb 2011 08:24:20 +0100
-Received: from mobil-400-586.intern.dresearch.de (localhost [IPv6:::1])
-	by mobil-400-586.intern.dresearch.de (Postfix) with ESMTP id 161852338A
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Feb 2011 08:24:18 +0100 (CET)
-Message-ID: <4D6B4DA1.8060101@dresearch.de>
-Date: Mon, 28 Feb 2011 08:24:17 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.16) Gecko/20101125 SUSE/3.0.11 Lightning/1.0b1
-	Thunderbird/3.0.11
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
-X-MIME-Autoconverted: from 8bit to quoted-printable by einhorn.in-berlin.de id
-	p1S7OKAb010030
-Subject: Release-2011.03/ac9745f angstrom-x-image-1.0-r0: task do_rootfs: Failed
+	Mon, 28 Feb 2011 09:04:02 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 28 Feb 2011 09:03:51 +0100
+Message-ID: <ikfkt7$b9f$1@dough.gmane.org>
+References: <4D6AE3CD.5070508@mentor.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <4D6AE3CD.5070508@mentor.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: RFC: Remove old avahi versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,41 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2011 07:25:44 -0000
+X-List-Received-Date: Mon, 28 Feb 2011 08:05:25 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-| Collected errors:
-|  * check_data_file_clashes: Package xfce4-notifyd wants to install file=
- /var/lib/jenkins/jobs/OE-testing/workspace/tmp/rootfs/angstrom-x-image/u=
-sr/share/dbus-1/services/org.freedesktop.Notifications.service
-| 	But that file is already provided by package  * notification-daemon
-|  * opkg_install_cmd: Cannot install package task-xfce46-extras.
-|  * resolve_conffiles: Existing conffile /var/lib/jenkins/jobs/OE-testin=
-g/workspace/tmp/rootfs/angstrom-x-image/etc/device_table is different fro=
-m the conffile in the new package. The new conffile will be placed at /va=
-r/lib/jenkins/jobs/OE-testing/workspace/tmp/rootfs/angstrom-x-image/etc/d=
-evice_table-opkg.
-NOTE: package angstrom-x-image-1.0-r0: task do_rootfs: Failed
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Build Configuration:
-BB_VERSION        =3D "1.12.0"
-METADATA_BRANCH   =3D "testing-release-2011.03"
-METADATA_REVISION =3D "ac9745f"
-TARGET_ARCH       =3D "arm"
-TARGET_OS         =3D "linux-gnueabi"
-MACHINE           =3D "hipox"
-DISTRO            =3D "angstrom"
-DISTRO_VERSION    =3D "2010.7-test-20110227"
-TARGET_FPU        =3D "soft"
+On 28-02-11 00:52, Tom Rini wrote:
+> Hey all,
+> 
+> As part of fixing CVE-2011-1002 I see that no one is pinning avahi
+> except maemo/chinook compat recipes so I would like to delete
+> 0.6.{19,21,22,23,24} and avahi-ui 0.6.21.
 
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+Sounds good to me.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNa1bnMkyGM64RGpERAgSJAJ0cps/yoTCxlLq2j30mCwHb9x7MBACeN+e3
+Dwe2hro47+iOGYnbYgf3oO4=
+=ysCU
+-----END PGP SIGNATURE-----
+
 
 
