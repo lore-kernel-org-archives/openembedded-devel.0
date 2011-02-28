@@ -1,34 +1,33 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Pty6f-0007eU-FZ for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 09:05:25 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Pty5K-0003LC-Kf for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 09:04:02 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Feb 2011 09:04:02 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
+	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1PtzLK-0000ss-3v
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Feb 2011 10:24:38 +0100
+Received: (qmail 19443 invoked from network); 28 Feb 2011 10:23:12 +0100
+Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
+	by leibniz.math.fu-berlin.de with SMTP; 28 Feb 2011 10:23:12 +0100
+X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
+Received: from math.fu-berlin.de ([160.45.40.10])
+	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
+	port 10024) with SMTP id qVsCSk9avBXI
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Feb 2011 09:04:02 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 28 Feb 2011 09:03:51 +0100
-Message-ID: <ikfkt7$b9f$1@dough.gmane.org>
-References: <4D6AE3CD.5070508@mentor.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4D6AE3CD.5070508@mentor.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: RFC: Remove old avahi versions
+	Mon, 28 Feb 2011 10:23:09 +0100 (CET)
+Received: (Qmail 19425 invoked from network); 28 Feb 2011 10:23:09 +0100
+Received: From andorra.imp.fu-berlin.de (160.45.42.84)
+	by leibniz.math.fu-berlin.de with SMTP; 28 Feb 2011 09:23:09 -0000
+Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.72 #1
+	(Debian)) id 1PtzJt-0007LY-61; Mon, 28 Feb 2011 10:23:09 +0100
+Date: Mon, 28 Feb 2011 10:23:09 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: Tom Rini <tom_rini@mentor.com>
+Message-ID: <20110228092308.GA28024@mi.fu-berlin.de>
+References: <4D6AE512.1070009@mentor.com>
+MIME-Version: 1.0
+In-Reply-To: <4D6AE512.1070009@mentor.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: openjdk-6 sources moved
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,29 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2011 08:05:25 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 28 Feb 2011 09:24:38 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 28-02-11 00:52, Tom Rini wrote:
+On Sun, Feb 27, 2011 at 04:58:10PM -0700, Tom Rini wrote:
 > Hey all,
-> 
-> As part of fixing CVE-2011-1002 I see that no one is pinning avahi
-> except maemo/chinook compat recipes so I would like to delete
-> 0.6.{19,21,22,23,24} and avahi-ui 0.6.21.
+>
+> I was looking into fixing the current open security issues for openjdk  
+> and ran into the problem that as part of java.net re-org, the SRC_URIs  
+> don't fetch anymore.  Real quick poking on my part didn't reveal where  
+> to, so I've punted on fixing CVE-2010-4476, CVE-2010-4476, and 
+> CVE-2009-3555
+>
+> -- 
+> Tom Rini
+> Mentor Graphics Corporation
 
-Sounds good to me.
+Hi Tom,
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+could you wait, we are getting contracted from buglabs, to do this
+and other stuff on openjdk.
 
-iD8DBQFNa1bnMkyGM64RGpERAgSJAJ0cps/yoTCxlLq2j30mCwHb9x7MBACeN+e3
-Dwe2hro47+iOGYnbYgf3oO4=
-=ysCU
------END PGP SIGNATURE-----
-
+Bye Henning
 
 
