@@ -1,34 +1,22 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Pu9nn-0007YZ-0d
+Received: from rrcs-24-227-36-211.se.biz.rr.com ([24.227.36.211]
+	helo=mail.eoimaging.com) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <nharris@eoimaging.com>) id 1PuA2I-0000qn-Fy
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 21:34:43 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Pu9mO-00007J-B6 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 12:33:16 -0800
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Mon, 28 Feb 2011 12:33:15 -0800
-Received: from [172.30.80.189] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
-	with Microsoft SMTP Server id 14.1.270.1;
-	Mon, 28 Feb 2011 12:33:15 -0800
-Message-ID: <4D6C067A.5020202@mentor.com>
-Date: Mon, 28 Feb 2011 13:32:58 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+	Mon, 28 Feb 2011 21:49:42 +0100
+Received: from [192.168.0.194] ([::ffff:192.168.0.194]) (AUTH: LOGIN nharris)
+	by mail.eoimaging.com with esmtp; Mon, 28 Feb 2011 15:48:18 -0500
+	id 0020864B.4D6C0A12.00004D45
+Message-ID: <4D6C0A15.1040406@eoimaging.com>
+Date: Mon, 28 Feb 2011 15:48:21 -0500
+From: Nathan Harris <nharris@eoimaging.com>
+Organization: Electro-Optical Imaging, Inc.
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <4D6BC0EA.4000207@mentor.com>
-	<20110228160659.GG5886@jama.jama.net>	<20110228161328.GH5886@jama.jama.net>
-	<4D6BD384.90002@mentor.com> <20110228200440.GI5886@jama.jama.net>
-In-Reply-To: <20110228200440.GI5886@jama.jama.net>
-X-OriginalArrivalTime: 28 Feb 2011 20:33:15.0663 (UTC)
-	FILETIME=[BA0461F0:01CBD786]
-Subject: Re: shr-image failure
+To: openembedded-devel@lists.openembedded.org
+References: <4D6BAE92.1080409@eoimaging.com> <4D6BEEDA.3000203@mentor.com>
+In-Reply-To: <4D6BEEDA.3000203@mentor.com>
+Subject: Re: QA issues with libvmime
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,65 +30,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2011 20:34:43 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+X-List-Received-Date: Mon, 28 Feb 2011 20:49:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 02/28/2011 01:04 PM, Martin Jansa wrote:
-> On Mon, Feb 28, 2011 at 09:55:32AM -0700, Tom Rini wrote:
->> On 02/28/2011 09:13 AM, Martin Jansa wrote:
->>> On Mon, Feb 28, 2011 at 05:06:59PM +0100, Martin Jansa wrote:
->>>> On Mon, Feb 28, 2011 at 08:36:10AM -0700, Tom Rini wrote:
->>>>> Hey all,
->>>>>
->>>>> Trying to build shr/shr-image/nokia900 fails with the following:
->>>>> http://pastebin.com/Z13aYd2Z which seems odd in that we're building:
->>>>>
->>>>> NOTE: Running task 5802 of 10948 (ID: 2141,
->>>>> /var/hudson/workspace/sb_openembedded_autobuilder/BBPKGS/shr-image/DISTRO/shr/MACHINE/nokia900/label/sb-u804/recipes/efl1/elementary_svn.bb,
->>>>> do_setscene)
->>>>> NOTE: package elementary-2_0.7.0+svnr56372-r11: task do_setscene: Started
->>>>>
->>>>> And it's already past do_populate_sysroot before this starts.  I do see
->>>>> some svn complaining (and not doing something...) earlier on in the
->>>>> do_configure here.
->>>>
->>>> This looks like related to
->>>> http://www.mail-archive.com/bitbake-dev@lists.berlios.de/msg00880.html
->>>>
->>>> which was resolved later with scmdata=keep param
->>>> http://git.openembedded.org/cgit.cgi/bitbake/commit/?id=05cbc1d1a01c667c77688f36fbc5b61c5f452a3a
->>>>
->>>> but that patch didn't make it to bitbake-1.10.2 release, but neither did
->>>> patch causing this in master/1.12
->>>> http://git.openembedded.org/cgit.cgi/bitbake/commit/?id=f264cb6d43472525ad787b0887764ea696ec52ba
->>>>
->>>> Can you try that svnversion call in your checkout to get thath svn
->>>> error? It seems to be working here fine.
->>>
->>> $ mkdir test&&   cd test
->>> $ tar xzvf ../downloads/elementary_svn.enlightenment.org_.svn.e.trunk_56372_.tar.gz
->>> $ cd elementary
->>> $ (svnversion . | grep -v export || echo 0) | awk -F : '{printf("%s\n",$1);}' | tr -d ':MSP\n'
->>> 56372$
+On 2/28/2011 1:52 PM, Tom Rini wrote:
+> On 02/28/2011 07:17 AM, Nathan Harris wrote:
+>> I am working on a recipe for the VMime library (http://www.vmime.org/).
+>> My target environment is the Overo (Gumstix). Currently, bitbake is
+>> failing during the final QA. My recipe, patch and bitbake output are
+>> below. Hopefully, this error is familiar to someone. Thanks!
+> [snip]
+>> inherit scons
+> [snip]
+>> ERROR: QA Issue with staging: vmime.pc failed sanity test (tmpdir) in
+>> path
+>> /home/ppeimany/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/pkgconfig 
 >>
->> The error is that the svn version is too old for the checkout.  Is there
->> a way we can figure this out without calling svn?
 >
-> I guess you have subversion<  1.6
-> and 1.6 changed the format, so if efl repo was upgraded then it needs
-> newer svn client
+> So, what this means it that vmime.pc wasn't properly cleaned.  If you 
+> add pkgconfig to the inherit list (which brings in 
+> classes/pkgconfig.bbclass, take a peek at what it's doing) this will 
+> go away.
 >
-> http://subversion.apache.org/docs/release-notes/1.6.html
+> Arguably we should make the error clearer and say, like the gettext 
+> one something about missing inherit pkgconfig in the recipe.
 >
-> Maybe it's time to force subversion-native as there were issues before
-> ie with -trust-server-cert.
+Thanks for the help.  Looking at the vmime.pc file, I can see that the 
+paths are wrong.
 
-Stupid question.  Why aren't we just using ${SRCREV} ?  Or is this 
-really bitbake calling out svn to do something?
+Unfortunately, when I added pkgconfg to my inherit list, cleaned the 
+package and then re-bitbaked, I still get the same error message.  I 
+verified that vmime.pc is removed during the clean process (along with 
+the other temp files).
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+I changed the inherit line of my recipe to read:
+inherit scons pkgconfig
+
+Here's what my vmime.pc file looks like after bitbake:
+
+prefix=/home/ppeimany/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/libvmime-0.9.1-r1/image/usr
+exec_prefix=/home/ppeimany/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/libvmime-0.9.1-r1/image/usr
+libdir=/home/ppeimany/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/libvmime-0.9.1-r1/image/usr/lib
+includedir=/home/ppeimany/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/libvmime-0.9.1-r1/image/usr/include
+
+Name: VMime Library
+Description: VMime C++ Mail Library (http://www.vmime.org)
+Version: 0.9.1
+Requires: libgsasl
+Libs: -L${libdir} -lvmime -lgsasl
+Cflags: -I${includedir}/
+
+
 
 
