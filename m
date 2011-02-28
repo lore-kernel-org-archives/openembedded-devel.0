@@ -1,41 +1,30 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Pu6ZE-0005I9-Jn
+	(envelope-from <philb@gnu.org>) id 1Pu6em-0005Tv-Lh
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 18:07:28 +0100
-Received: by bwz10 with SMTP id 10so3838582bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Feb 2011 09:06:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=wcUbvuScE7SxgqKvt4WiUSY70xehhL2jdfdT2Eb+kOY=;
-	b=C8GhNhdFn170aClSH4VnLrWkmEp9cDHiIdnd/RyIk2/u1bLiysNPQxT9nY+A6v292X
-	GXEuoJXky02FjKxSfQt76oCsF2iUOj0EuSaKoBkY8rOKeRfjAZjN1+MEz0ySyxSX9Vm9
-	9j9BzE3mfeOppalbsOp7dzHgwnR5eBk9LFA5M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=YnZ8J8egp0yqpTLknW8jOMnSdzIVzxv9twASCSXHfygW/ZEGwxYzUQNh0eDIaK8DY3
-	Wti0FVfLbJHU+ShwG0TD/H27ysxh9YYYz6EFLWwz2Y0iiJFm8z/18eR54lNHAoqn/pPF
-	E1ybFZfpmJ/1lV5thgKrNOWKgZPX5s4F70pno=
-MIME-Version: 1.0
-Received: by 10.204.33.72 with SMTP id g8mr2544237bkd.16.1298912760431; Mon,
-	28 Feb 2011 09:06:00 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.119.207 with HTTP; Mon, 28 Feb 2011 09:06:00 -0800 (PST)
-In-Reply-To: <1298912130.23547.8.camel@phil-desktop>
-References: <1298899606-9139-1-git-send-email-otavio@ossystems.com.br>
-	<1298912130.23547.8.camel@phil-desktop>
-Date: Mon, 28 Feb 2011 17:06:00 +0000
-X-Google-Sender-Auth: i-EvBqGecz5XkQBv5zb1NES0z_0
-Message-ID: <AANLkTikgZ7sTSN2N_a4RaGnJm9G-iyDwSmUQcZfwMnSs@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Phil Blundell <philb@gnu.org>
+	Mon, 28 Feb 2011 18:13:12 +0100
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>)
+	id 1Pu6dR-0006RE-OD; Mon, 28 Feb 2011 18:11:49 +0100
+From: Phil Blundell <philb@gnu.org>
+To: Otavio Salvador <otavio@ossystems.com.br>
+In-Reply-To: <AANLkTimyU4bSm9tM2LO5bMoqiFQqZXxt5Js7fg0B_HhJ@mail.gmail.com>
+References: <AANLkTiknqQ6xLj8LFv4=17ymwSbVhD3C9kVe2qkviXhX@mail.gmail.com>
+	<1298664057.3818.0.camel@lenovo.internal.reciva.com>
+	<AANLkTin2WuKF=f_aOzi=28FmVTaxFVJa0uNb9TjfL2SB@mail.gmail.com>
+	<1298666406.3818.4.camel@lenovo.internal.reciva.com>
+	<AANLkTinUjtis22ZnLaP7uc0fa9nzxvhWod2uv43ZcJH=@mail.gmail.com>
+	<1298669695.3818.5.camel@lenovo.internal.reciva.com>
+	<AANLkTi=afktV1HC4Jdq_ammNdA+h4iMAWdJT809s+LMv@mail.gmail.com>
+	<1298905700.23547.6.camel@phil-desktop>
+	<AANLkTimyU4bSm9tM2LO5bMoqiFQqZXxt5Js7fg0B_HhJ@mail.gmail.com>
+Date: Mon, 28 Feb 2011 17:17:02 +0000
+Message-ID: <1298913422.23547.20.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/2] freerdp: rdpepends on xprop
+Subject: Re: Missing GLIBC_<version> tags on binaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,24 +38,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2011 17:07:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 28 Feb 2011 17:13:12 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Mon, Feb 28, 2011 at 16:55, Phil Blundell <philb@gnu.org> wrote:
-> On Mon, 2011-02-28 at 13:26 +0000, Otavio Salvador wrote:
->> +RDEPENDS +=3D "xprop"
->
-> I'm surprised that recipe_sanity didn't object to that. =A0Is this really
-> what you want?
+On Mon, 2011-02-28 at 16:49 +0000, Otavio Salvador wrote:
+> On Mon, Feb 28, 2011 at 15:08, Phil Blundell <philb@gnu.org> wrote:
+> ...
+> > It looks at first inspection as though this might be a linker bug,
+> > though I can't immediately see anything very special about freerdp that
+> > looks like it would be causing things to go wrong.  Some further
+> > debugging needed, though it'd be interesting to know whether it works
+> > any better with gold for example.
+> 
+> How could I make it to use gold? I am stuck on that issue since it is
+> block us to advance on the development of a product :-(
 
-Why? I failed to see why it is wrong. Mind to clarify?
+Good question.  For local testing, I think it might be sufficient to
+add:
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+EXTRA_OECONF += "--enable-gold=default"
+
+to your binutils-cross recipe.  You can verify whether it's worked by
+running "i586-oe-linux-ld --version" and checking to see whether it
+claims to be gold or not.
+
+That's definitely not a patch that you ought to check in, though.  For
+wider consumption I guess there ought to be some kind of knob that
+DISTROs can tweak to select the linker of their choice.  As far as I
+know there isn't any such mechanism at present.
+
+p.
+
+
 
 
