@@ -1,22 +1,46 @@
-Received: from rrcs-24-227-36-211.se.biz.rr.com ([24.227.36.211]
-	helo=mail.eoimaging.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <nharris@eoimaging.com>) id 1PuA2I-0000qn-Fy
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <raj.khem@gmail.com>) id 1PuBSi-00083U-J6
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 21:49:42 +0100
-Received: from [192.168.0.194] ([::ffff:192.168.0.194]) (AUTH: LOGIN nharris)
-	by mail.eoimaging.com with esmtp; Mon, 28 Feb 2011 15:48:18 -0500
-	id 0020864B.4D6C0A12.00004D45
-Message-ID: <4D6C0A15.1040406@eoimaging.com>
-Date: Mon, 28 Feb 2011 15:48:21 -0500
-From: Nathan Harris <nharris@eoimaging.com>
-Organization: Electro-Optical Imaging, Inc.
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+	Mon, 28 Feb 2011 23:21:04 +0100
+Received: by fxm8 with SMTP id 8so4031706fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Feb 2011 14:19:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type:content-transfer-encoding;
+	bh=XE554riPHUiZrvedxvQZ9c6RRspNPpY7jZmhDfu6nEw=;
+	b=bfv2uy36Gw7Rri8SP38lQNCtwZgV7OeS3r7tYyOVskWKW5vVs6aAPPsffyFSMctD3+
+	MbPObM8PLXM+/YK4maUOMYg8kRpqVFv8YZ7sx7FjrhKKTkgpSVMfOfhdfdiXLdmaD5hT
+	pXT2myE5bktFvV8lhVqTblMF/H5M83q8nBRJE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=GddKfyW6teesRmFIn8KSQOi9SpW2RYCmXuXQRRi9RzbrpTJh0iYWyQjS0rC/c6nGcV
+	VMAYTOXJ/xiEEMnvP0Go0kdIJ2lpOd09FFIJU9ontQHE7qc8Rkgd9ZfkN3vBExiEb0fu
+	JIy8aSilV+kMD7lMrojuRY8EQLHKzcFOLD2F8=
+Received: by 10.223.101.206 with SMTP id d14mr7175043fao.134.1298931578094;
+	Mon, 28 Feb 2011 14:19:38 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.223.30.151 with HTTP; Mon, 28 Feb 2011 14:19:18 -0800 (PST)
+In-Reply-To: <AANLkTimomznky1rBn5QTqzS16O6Lk3VxHUx1pG+ULe3v@mail.gmail.com>
+References: <AANLkTiknqQ6xLj8LFv4=17ymwSbVhD3C9kVe2qkviXhX@mail.gmail.com>
+	<1298664057.3818.0.camel@lenovo.internal.reciva.com>
+	<AANLkTin2WuKF=f_aOzi=28FmVTaxFVJa0uNb9TjfL2SB@mail.gmail.com>
+	<1298666406.3818.4.camel@lenovo.internal.reciva.com>
+	<AANLkTinUjtis22ZnLaP7uc0fa9nzxvhWod2uv43ZcJH=@mail.gmail.com>
+	<1298669695.3818.5.camel@lenovo.internal.reciva.com>
+	<AANLkTi=afktV1HC4Jdq_ammNdA+h4iMAWdJT809s+LMv@mail.gmail.com>
+	<1298905700.23547.6.camel@phil-desktop>
+	<AANLkTimyU4bSm9tM2LO5bMoqiFQqZXxt5Js7fg0B_HhJ@mail.gmail.com>
+	<1298913422.23547.20.camel@phil-desktop>
+	<AANLkTimomznky1rBn5QTqzS16O6Lk3VxHUx1pG+ULe3v@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 28 Feb 2011 14:19:18 -0800
+Message-ID: <AANLkTikRm=aL7sgc2wNftMGhNsOiXbSyoaht4Yk_2uqZ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4D6BAE92.1080409@eoimaging.com> <4D6BEEDA.3000203@mentor.com>
-In-Reply-To: <4D6BEEDA.3000203@mentor.com>
-Subject: Re: QA issues with libvmime
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: Missing GLIBC_<version> tags on binaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,57 +54,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2011 20:49:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 28 Feb 2011 22:21:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 2/28/2011 1:52 PM, Tom Rini wrote:
-> On 02/28/2011 07:17 AM, Nathan Harris wrote:
->> I am working on a recipe for the VMime library (http://www.vmime.org/).
->> My target environment is the Overo (Gumstix). Currently, bitbake is
->> failing during the final QA. My recipe, patch and bitbake output are
->> below. Hopefully, this error is familiar to someone. Thanks!
-> [snip]
->> inherit scons
-> [snip]
->> ERROR: QA Issue with staging: vmime.pc failed sanity test (tmpdir) in
->> path
->> /home/ppeimany/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/pkgconfig 
->>
+On Mon, Feb 28, 2011 at 11:33 AM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> On Mon, Feb 28, 2011 at 17:17, Phil Blundell <philb@gnu.org> wrote:
+> ...
+>> That's definitely not a patch that you ought to check in, though. =C2=A0=
+For
+>> wider consumption I guess there ought to be some kind of knob that
+>> DISTROs can tweak to select the linker of their choice. =C2=A0As far as =
+I
+>> know there isn't any such mechanism at present.
 >
-> So, what this means it that vmime.pc wasn't properly cleaned.  If you 
-> add pkgconfig to the inherit list (which brings in 
-> classes/pkgconfig.bbclass, take a peek at what it's doing) this will 
-> go away.
+> One interesting way to "fix" the issue is to explicitly link against
+> -lpthread however it seems *wrong*.
 >
-> Arguably we should make the error clearer and say, like the gettext 
-> one something about missing inherit pkgconfig in the recipe.
+> It seems to be a gcc bug since -pthread is suppose to handle all the
+> needed background for it to work and seems to be doing it wrong.
 >
-Thanks for the help.  Looking at the vmime.pc file, I can see that the 
-paths are wrong.
 
-Unfortunately, when I added pkgconfg to my inherit list, cleaned the 
-package and then re-bitbaked, I still get the same error message.  I 
-verified that vmime.pc is removed during the clean process (along with 
-the other temp files).
+Does -pthread get passed to linking step too or not. if it does then
+it might the order at which libpthread appears and linker picks the
+symbols from.
 
-I changed the inherit line of my recipe to read:
-inherit scons pkgconfig
-
-Here's what my vmime.pc file looks like after bitbake:
-
-prefix=/home/ppeimany/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/libvmime-0.9.1-r1/image/usr
-exec_prefix=/home/ppeimany/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/libvmime-0.9.1-r1/image/usr
-libdir=/home/ppeimany/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/libvmime-0.9.1-r1/image/usr/lib
-includedir=/home/ppeimany/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/libvmime-0.9.1-r1/image/usr/include
-
-Name: VMime Library
-Description: VMime C++ Mail Library (http://www.vmime.org)
-Version: 0.9.1
-Requires: libgsasl
-Libs: -L${libdir} -lvmime -lgsasl
-Cflags: -I${includedir}/
-
-
+> --
+> Otavio Salvador=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0O.S. Systems
+> E-mail: otavio@ossystems.com.br=C2=A0 http://www.ossystems.com.br
+> Mobile: +55 53 9981-7854=C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =
+=C2=A0http://projetos.ossystems.com.br
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
