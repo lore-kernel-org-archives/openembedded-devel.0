@@ -1,29 +1,32 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PuBq8-0000al-9V
+	(envelope-from <otavio.salvador@gmail.com>) id 1PuBtk-0000hZ-9S
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 23:45:16 +0100
-Received: by fxm8 with SMTP id 8so4051716fxm.6
+	Mon, 28 Feb 2011 23:49:00 +0100
+Received: by bwz10 with SMTP id 10so4125637bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Feb 2011 14:43:51 -0800 (PST)
+	Mon, 28 Feb 2011 14:47:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=Onqz91TulIBETKZtBPC6pcHuGiB7kuQWJn6WrCx88dg=;
-	b=Q+xYvbVWw0SNhjtar99U4QrLuysMcSw4qnekk5KzpdNyCyvR5oLSzMUkqjCbVCJPsM
-	X49ghRNY698gHXuNxgJ0imG+28Nn++tvMi1s1gyOOVJ9ndQUAJerB379Yw7z2DAn9e+1
-	IoRXtO7bGX5g59UxUUuw+zVfLnfcKsRgr0fOU=
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=8lJYHxBoXtnzZCq2H4QKKG18lmSxaDjQdADh76vFaO4=;
+	b=k/xa8hzn8mGTJ4cMavCoR6hLTuDujrWmaJfMZBXvLhJ5R3rvD+uu8vGQMUwdDk7Uzw
+	5ino1aiRnPxCRn0f33LCP68YiaubRthn2mb2RgZCSwAHOXpxbf5OUbWq6WPLLLW/s6oA
+	v4kWL0sCjb0pX7XIBO5yQE+13Ytkm5vLakwaY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=m5mXa+00cVgZYSk0v/I3U5TZEm+zNgyZNgx5SPuAF+9XNV+Opeh0ZKpV57myv5DmQL
-	KZ/dPUbY0IfGUYaV3qnO5gVnIy5uhAxEOAKlCkuV5YImfEwVf4d1qKJ17d3IsaeEwo8f
-	HWpfKEm48SzzBHu6PTR5HldQmMaScXHyQQHts=
-Received: by 10.223.100.2 with SMTP id w2mr7124579fan.115.1298933031084; Mon,
-	28 Feb 2011 14:43:51 -0800 (PST)
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=oNVV1fl7pb6brclvgvcMkvGnxsgHTMu0IksA93mVAFIBVz3W4lxeQXG5uKAkj0J+Ma
+	FdGsbmIJAwJ+46ZfbeyzfNXbhGqv6vzgTdtsiGWbF9ejJV80/6uBu+Xq4rHMkTHoaJKu
+	fgRUw0xisRcA6Ml8pYXni3aEGn5DfVIw14mhs=
 MIME-Version: 1.0
-Received: by 10.223.30.151 with HTTP; Mon, 28 Feb 2011 14:43:31 -0800 (PST)
-In-Reply-To: <AANLkTin2MszEwNwiNQuZ+uWBFE5Gd_Coq08AfRLF1dqc@mail.gmail.com>
+Received: by 10.204.179.203 with SMTP id br11mr5321468bkb.178.1298933252657;
+	Mon, 28 Feb 2011 14:47:32 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.119.207 with HTTP; Mon, 28 Feb 2011 14:47:32 -0800 (PST)
+In-Reply-To: <AANLkTin+kSSQr8FHwGHA0znzWDxUfQoY-=-0K8Fv0PKj@mail.gmail.com>
 References: <AANLkTiknqQ6xLj8LFv4=17ymwSbVhD3C9kVe2qkviXhX@mail.gmail.com>
 	<1298664057.3818.0.camel@lenovo.internal.reciva.com>
 	<AANLkTin2WuKF=f_aOzi=28FmVTaxFVJa0uNb9TjfL2SB@mail.gmail.com>
@@ -37,10 +40,12 @@ References: <AANLkTiknqQ6xLj8LFv4=17ymwSbVhD3C9kVe2qkviXhX@mail.gmail.com>
 	<AANLkTimomznky1rBn5QTqzS16O6Lk3VxHUx1pG+ULe3v@mail.gmail.com>
 	<AANLkTikRm=aL7sgc2wNftMGhNsOiXbSyoaht4Yk_2uqZ@mail.gmail.com>
 	<AANLkTin2MszEwNwiNQuZ+uWBFE5Gd_Coq08AfRLF1dqc@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Feb 2011 14:43:31 -0800
-Message-ID: <AANLkTin+kSSQr8FHwGHA0znzWDxUfQoY-=-0K8Fv0PKj@mail.gmail.com>
-To: Otavio Salvador <otavio@ossystems.com.br>
+	<AANLkTin+kSSQr8FHwGHA0znzWDxUfQoY-=-0K8Fv0PKj@mail.gmail.com>
+Date: Mon, 28 Feb 2011 22:47:32 +0000
+X-Google-Sender-Auth: i1NFVRycYtrWxjLZ9NpYg_-t8SU
+Message-ID: <AANLkTimSCzQgKRND_CaH+52nSdDzVkiu4wsdZRnvg+Z6@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Missing GLIBC_<version> tags on binaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -56,32 +61,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2011 22:45:16 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 28 Feb 2011 22:49:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 28, 2011 at 2:27 PM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Mon, Feb 28, 2011 at 22:19, Khem Raj <raj.khem@gmail.com> wrote:
-> ...
->> Does -pthread get passed to linking step too or not. if it does then
->> it might the order at which libpthread appears and linker picks the
->> symbols from.
+On Mon, Feb 28, 2011 at 22:43, Khem Raj <raj.khem@gmail.com> wrote:
+> On Mon, Feb 28, 2011 at 2:27 PM, Otavio Salvador
+> <otavio@ossystems.com.br> wrote:
+>> On Mon, Feb 28, 2011 at 22:19, Khem Raj <raj.khem@gmail.com> wrote:
+>> ...
+>>> Does -pthread get passed to linking step too or not. if it does then
+>>> it might the order at which libpthread appears and linker picks the
+>>> symbols from.
+>>
+>> It is done as suggested by gcc docs. It is passed on CFLAGS and
+>> supposely gcc ought to take care of adding it to linking flags
+>> automatically. No?
 >
-> It is done as suggested by gcc docs. It is passed on CFLAGS and
-> supposely gcc ought to take care of adding it to linking flags
-> automatically. No?
+> gcc could be used for linking too and then it should consider the LDFLAGS
+> CFLAGS are for compiling.
 
-gcc could be used for linking too and then it should consider the LDFLAGS
-CFLAGS are for compiling.
+From gcc manpage:
 
->
-> --
-> Otavio Salvador=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0O.S. Systems
-> E-mail: otavio@ossystems.com.br=C2=A0 http://www.ossystems.com.br
-> Mobile: +55 53 9981-7854=C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0http://projetos.ossystems.com.br
->
+       -pthread
+           Adds support for multithreading with the pthreads library.
+This option sets flags for both the preprocessor and linker.
+
+It seems to me that it sets both automatically, in this case.
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
