@@ -1,43 +1,47 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1Pu6HF-0004Fd-D4
+	(envelope-from <otavio.salvador@gmail.com>) id 1Pu6JY-0004Ie-NO
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 17:48:53 +0100
-Received: by wwe15 with SMTP id 15so4310154wwe.24
+	Mon, 28 Feb 2011 17:51:16 +0100
+Received: by bwz10 with SMTP id 10so3823644bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Feb 2011 08:47:28 -0800 (PST)
+	Mon, 28 Feb 2011 08:49:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
-	:date:x-google-sender-auth:message-id:subject:to:cc:content-type
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
 	:content-transfer-encoding;
-	bh=9YXw4t99GU1YR1yahHEcBSF87HrawqG4RyodRxJLFUA=;
-	b=V56XqU/M9UlQ7STEpXYa2qyh5YsTceDnFcwysn/2B47HH5n9JKJKy1DaJMXuj6SeOt
-	kLqJIjrXubxRSGfWw1lN40fwo+f7OxqdvKeNJbd9zBVvjCG+ITA2vu6VZhaVlgMAKeyZ
-	wuMB34rFMS5rP0zi/K9h8Hc7+gnrLtSAyvDF8=
+	bh=t2ZxSucRSKhW9I/xWC2Z5rfFMDi7vTZLojdG6JbEmx0=;
+	b=Jw2LhK9tffLSaTwxqJrj9/cpwBeHZSljpOKgm4Xi5/cKVh+JmGX6uOQqo3Fc0AL33w
+	b92uS5yGP/G7qv3CCNT1mlcsLzJ4mZVDZjmMlLjESKYgDtFaS5/xQxhnhN97xA5BTTOk
+	sYsZnx9juQzOWdqEmHzwazym9WdkT2UGjnhAk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
 	:content-transfer-encoding;
-	b=DrSLhkhFC0RJ0Eeqwu7c37M3dxDeRQzLZuXzP3jW2J00rdeYex+Uf6mMDuwa4v+NDL
-	eCUrT3996ouu4VPbA9kh07hU90lL/iZWRJs/qR2Y24EArz6A9CoATVVlwFoK7F8AZJzG
-	MwmtEuLEL9U1Synfto7gyTNfY4qPxGmCq2OUU=
-Received: by 10.216.162.84 with SMTP id x62mr4747974wek.106.1298911648189;
-	Mon, 28 Feb 2011 08:47:28 -0800 (PST)
+	b=MSSxWeEEKrv+D7Y9VZcsKqIuXdjJWrVYR2DBJQT4aJh6fUvfU9YQEL4Fcyg2yKeUv7
+	ZDkkPFZhjeoGojZe+++fUxpVY4VNN+eAxLP5xaQOjaWGkXfLM2sMRsQOcWmTTd1W4QzR
+	ZOM0NWwESKhukkq+mSQL8VocE5ro8p+gQ3c2M=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.246.11 with HTTP; Mon, 28 Feb 2011 08:47:07 -0800 (PST)
-In-Reply-To: <AANLkTimUqDu1nptPT9CrKrA5f8AHg3=V2OPNR2ne4ZgY@mail.gmail.com>
-References: <1298049536.11289.3126.camel@rex> <4D6A5FB2.4070604@cam.ac.uk>
-	<4D6A6DFA.5040305@mwester.net>
-	<AANLkTinKqrKRpQd=ALYjjGOLyWmWEOGZobsHrsHxQi_j@mail.gmail.com>
-	<AANLkTimUqDu1nptPT9CrKrA5f8AHg3=V2OPNR2ne4ZgY@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 28 Feb 2011 09:47:07 -0700
-X-Google-Sender-Auth: 3j5B-qJOb4H0EBdl7IM7urDOCJY
-Message-ID: <AANLkTikZph2WuATGjfvc_P+R=sqjJurtuzysU7OAokzj@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
-Subject: Re: Bitbake 1.12.0 released!
+Received: by 10.204.59.76 with SMTP id k12mr5157416bkh.70.1298911786449; Mon,
+	28 Feb 2011 08:49:46 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.119.207 with HTTP; Mon, 28 Feb 2011 08:49:46 -0800 (PST)
+In-Reply-To: <1298905700.23547.6.camel@phil-desktop>
+References: <AANLkTiknqQ6xLj8LFv4=17ymwSbVhD3C9kVe2qkviXhX@mail.gmail.com>
+	<1298664057.3818.0.camel@lenovo.internal.reciva.com>
+	<AANLkTin2WuKF=f_aOzi=28FmVTaxFVJa0uNb9TjfL2SB@mail.gmail.com>
+	<1298666406.3818.4.camel@lenovo.internal.reciva.com>
+	<AANLkTinUjtis22ZnLaP7uc0fa9nzxvhWod2uv43ZcJH=@mail.gmail.com>
+	<1298669695.3818.5.camel@lenovo.internal.reciva.com>
+	<AANLkTi=afktV1HC4Jdq_ammNdA+h4iMAWdJT809s+LMv@mail.gmail.com>
+	<1298905700.23547.6.camel@phil-desktop>
+Date: Mon, 28 Feb 2011 16:49:46 +0000
+X-Google-Sender-Auth: D41UdcNKywaRjKqm6oKVJvfyJe8
+Message-ID: <AANLkTimyU4bSm9tM2LO5bMoqiFQqZXxt5Js7fg0B_HhJ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Phil Blundell <philb@gnu.org>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Missing GLIBC_<version> tags on binaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,31 +55,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2011 16:48:53 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 28 Feb 2011 16:51:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Feb 27, 2011 at 3:15 PM, Chris Larson <clarson@kergoth.com> wrote:
-> https://github.com/kergoth/bitbake/compare/master...f12-hang
->
-> https://github.com/kergoth/bitbake/commit/12d9095
->
->
-> This fixes the parsing hang on Fedora 12 for me. =C2=A0Note that I'm not
-> sure about the version check. =C2=A0We could just use this version of
-> _bootstrap all the time, but I'd rather avoid this for future
-> versions, as we could miss fixes. =C2=A0We should determine if this fix w=
-as
-> in python 2.6.3.
+On Mon, Feb 28, 2011 at 15:08, Phil Blundell <philb@gnu.org> wrote:
+...
+> It looks at first inspection as though this might be a linker bug,
+> though I can't immediately see anything very special about freerdp that
+> looks like it would be causing things to go wrong. =A0Some further
+> debugging needed, though it'd be interesting to know whether it works
+> any better with gold for example.
 
-Verified that the fix is in 2.6.3.  If someone other than me could
-confirm that the above commit resolves their issues, I'd appreciate it
-:)
+How could I make it to use gold? I am stuck on that issue since it is
+block us to advance on the development of a product :-(
+
 --=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
