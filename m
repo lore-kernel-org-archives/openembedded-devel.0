@@ -1,33 +1,35 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Pu4Cu-0004tK-9S
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 15:36:19 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1Pu4BT-0005t9-El from Tom_Rini@mentor.com ;
-	Mon, 28 Feb 2011 06:34:47 -0800
-Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Mon, 28 Feb 2011 06:34:47 -0800
-Received: from [172.30.80.189] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
-	Mon, 28 Feb 2011 06:34:46 -0800
-Message-ID: <4D6BB274.1070708@mentor.com>
-Date: Mon, 28 Feb 2011 07:34:28 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
-To: Henning Heinold <heinold@inf.fu-berlin.de>
-References: <4D6AE512.1070009@mentor.com>
-	<20110228092308.GA28024@mi.fu-berlin.de>
-In-Reply-To: <20110228092308.GA28024@mi.fu-berlin.de>
-X-OriginalArrivalTime: 28 Feb 2011 14:34:47.0300 (UTC)
-	FILETIME=[A608A440:01CBD754]
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: openjdk-6 sources moved
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Pu4cn-0000Nq-Tx for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Feb 2011 16:03:01 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Pu4bP-0007OW-6e for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Feb 2011 16:01:35 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Feb 2011 16:01:35 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Feb 2011 16:01:35 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 28 Feb 2011 16:01:24 +0100
+Message-ID: <ikgdc4$j5n$1@dough.gmane.org>
+References: <1298899606-9139-1-git-send-email-otavio@ossystems.com.br>
+	<1298899606-9139-2-git-send-email-otavio@ossystems.com.br>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1298899606-9139-2-git-send-email-otavio@ossystems.com.br>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH 2/2] conf/bitbake.conf: add DISTRO_ARCH and MACHINE_DISTRO_ARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,36 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2011 14:36:21 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+X-List-Received-Date: Mon, 28 Feb 2011 15:03:02 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 02/28/2011 02:23 AM, Henning Heinold wrote:
-> On Sun, Feb 27, 2011 at 04:58:10PM -0700, Tom Rini wrote:
->> Hey all,
->>
->> I was looking into fixing the current open security issues for openjdk
->> and ran into the problem that as part of java.net re-org, the SRC_URIs
->> don't fetch anymore.  Real quick poking on my part didn't reveal where
->> to, so I've punted on fixing CVE-2010-4476, CVE-2010-4476, and
->> CVE-2009-3555
->>
->> --
->> Tom Rini
->> Mentor Graphics Corporation
->
-> Hi Tom,
->
-> could you wait, we are getting contracted from buglabs, to do this
-> and other stuff on openjdk.
->
-> Bye Henning
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-That's fine.  But it'd be real nice if 2011.03 has fetchable openjdk, if 
-you know how to fixup the SRC_URI already.  Thanks!
+What does it do and why is it needed?
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+On 28-02-11 14:26, Otavio Salvador wrote:
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>  conf/bitbake.conf |    4 +++-
+>  1 files changed, 3 insertions(+), 1 deletions(-)
+> 
+> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+> index 1002c01..b018f08 100644
+> --- a/conf/bitbake.conf
+> +++ b/conf/bitbake.conf
+> @@ -132,7 +132,9 @@ PACKAGE_ARCH = "${BASE_PACKAGE_ARCH}"
+>  PACKAGE_EXTRA_ARCHS ?= ""
+>  MACHINE_ARCH = "${@oe.utils.ifelse(bool(d.getVar('MACHINE', True)), '${MACHINE}', \
+>                                     'BASE_PACKAGE_ARCH')}"
+> -PACKAGE_ARCHS = "all any noarch ${TARGET_ARCH} ${PACKAGE_EXTRA_ARCHS} ${MACHINE}"
+> +DISTRO_ARCH = "${TARGET_ARCH}-${DISTRO}"
+> +MACHINE_DISTRO_ARCH = "${MACHINE_ARCH}-${DISTRO}"
+> +PACKAGE_ARCHS = "all any noarch ${TARGET_ARCH} ${PACKAGE_EXTRA_ARCHS} ${DISTRO_ARCH} ${MACHINE_DISTRO_ARCH} ${MACHINE}"
+>  
+>  MULTIMACH_ARCH = "${PACKAGE_ARCH}"
+>  MULTIMACH_TARGET_SYS = "${MULTIMACH_ARCH}${TARGET_VENDOR}-${TARGET_OS}"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNa7jDMkyGM64RGpERAlXgAJsF7DlPyuZo8XyGq0U5TOYt3bLxhQCgtsS5
+rfWBVwGPaGgjvc84OCecAqw=
+=HD2X
+-----END PGP SIGNATURE-----
+
 
 
