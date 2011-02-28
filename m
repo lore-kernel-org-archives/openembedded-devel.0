@@ -1,33 +1,26 @@
-Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
-	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1PtzLK-0000ss-3v
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <sledz@dresearch.de>) id 1Pu2kS-000711-9L
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 10:24:38 +0100
-Received: (qmail 19443 invoked from network); 28 Feb 2011 10:23:12 +0100
-Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
-	by leibniz.math.fu-berlin.de with SMTP; 28 Feb 2011 10:23:12 +0100
-X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
-Received: from math.fu-berlin.de ([160.45.40.10])
-	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
-	port 10024) with SMTP id qVsCSk9avBXI
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Feb 2011 10:23:09 +0100 (CET)
-Received: (Qmail 19425 invoked from network); 28 Feb 2011 10:23:09 +0100
-Received: From andorra.imp.fu-berlin.de (160.45.42.84)
-	by leibniz.math.fu-berlin.de with SMTP; 28 Feb 2011 09:23:09 -0000
-Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.72 #1
-	(Debian)) id 1PtzJt-0007LY-61; Mon, 28 Feb 2011 10:23:09 +0100
-Date: Mon, 28 Feb 2011 10:23:09 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: Tom Rini <tom_rini@mentor.com>
-Message-ID: <20110228092308.GA28024@mi.fu-berlin.de>
-References: <4D6AE512.1070009@mentor.com>
+	Mon, 28 Feb 2011 14:02:48 +0100
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 5A642491278;
+	Mon, 28 Feb 2011 14:01:23 +0100 (CET)
+Received: from [10.32.10.2] ([10.32.10.2]) by exchange.intern.dresearch.de
+	with Microsoft SMTPSVC(6.0.3790.4675); 
+	Mon, 28 Feb 2011 14:01:23 +0100
+Message-ID: <4D6B9C9D.7080107@dresearch.de>
+Date: Mon, 28 Feb 2011 14:01:17 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-In-Reply-To: <4D6AE512.1070009@mentor.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: openjdk-6 sources moved
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 28 Feb 2011 13:01:23.0323 (UTC)
+	FILETIME=[99CD9CB0:01CBD747]
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: udev, udev-compat and old kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,28 +34,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2011 09:24:38 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 28 Feb 2011 13:02:48 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, Feb 27, 2011 at 04:58:10PM -0700, Tom Rini wrote:
-> Hey all,
->
-> I was looking into fixing the current open security issues for openjdk  
-> and ran into the problem that as part of java.net re-org, the SRC_URIs  
-> don't fetch anymore.  Real quick poking on my part didn't reveal where  
-> to, so I've punted on fixing CVE-2010-4476, CVE-2010-4476, and 
-> CVE-2009-3555
->
-> -- 
-> Tom Rini
-> Mentor Graphics Corporation
+In our local development branch we've set
 
-Hi Tom,
+ PREFERRED_VERSION_udev =3D "141"
 
-could you wait, we are getting contracted from buglabs, to do this
-and other stuff on openjdk.
+in angstrom-2008-preferred-versions.inc to force udev-141 for our old ker=
+nel (2.6.24) at hipox machine. But i'm nearly sure that's not the correct=
+ way to do this. ;-)
 
-Bye Henning
+So what's the right way to handle this?
+
+Looking around i found the udev-compat141_141.bb recipe. In my understand=
+ing this package adds some rules to newer udev packages (e.g. udev-151) t=
+o be able to work with older kernels, so that it is possible to use newer=
+ udev versions. Right?
+
+In this case it should be enough to add some lines to conf/machine/hipox.=
+conf, recipes/udev/udev.inc, recipes/udev/udev_{151,154,162,165}.bb simil=
+ar to poodle machine. Right?
+
+Steffen
+
+--=20
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@DResearch.de
+Fax: +49 30 515932-299
+Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
