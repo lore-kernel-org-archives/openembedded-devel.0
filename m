@@ -1,34 +1,42 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Pu6Uc-00058N-GE
+	(envelope-from <otavio.salvador@gmail.com>) id 1Pu6Xj-0005EG-8M
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 18:02:42 +0100
-Received: from [89.204.137.77] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1Pu6TE-0000MT-Nf by authid <stefan@sostec.de> with cram_md5
+	Mon, 28 Feb 2011 18:05:55 +0100
+Received: by bwz10 with SMTP id 10so3837200bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Feb 2011 18:01:19 +0100
-Received: from stefan by excalibur.local with local (Exim 4.74)
-	(envelope-from <stefan@excalibur.local>) id 1Pu6TA-0001Kr-IE
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 18:01:12 +0100
-Date: Mon, 28 Feb 2011 18:01:11 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110228170111.GB4192@excalibur.local>
-References: <4D6BBFDE.2090406@mentor.com>
+	Mon, 28 Feb 2011 09:04:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=rZIIi5ZQLyu8LL1Q+unQAhPeCPgZQNZm78lThyttlzQ=;
+	b=nhEDuh2ns4TVgWY5UNwAAZmzJg128Aw7JaQmj1lWt6rExJxKD2Gluy2a+solme3LDZ
+	u4zSSblr7BiqjLcvy72kyer6B1XvGu01sQTsdfWm9rX89Od2Ow8/lg9w1XyopUDzbBrW
+	g+CyZQrkNzBbW3J9gEJ9DsskVxAXFPjU6DIqU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=aqfcIwYyPfT2xkAJZNeCYT5GZM4HVvQ3mwgw2fZm+nxlwB4Ui+N57Qquc6Rbs+y8Xw
+	5tZGeuT+qKTnZZYgd6ac708HkcFQOAjn+a1EHw4yt66S1FoHxGoZLujv4PHK4DWUeeUn
+	6cEaOeWOgHNBoxsVRGgt7fEhCnMZTx0gGzQvg=
 MIME-Version: 1.0
-In-Reply-To: <4D6BBFDE.2090406@mentor.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Subject: Re: Release-2011.03 status
+Received: by 10.204.64.139 with SMTP id e11mr5033288bki.97.1298912669631; Mon,
+	28 Feb 2011 09:04:29 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.119.207 with HTTP; Mon, 28 Feb 2011 09:04:29 -0800 (PST)
+In-Reply-To: <1298912239.23547.10.camel@phil-desktop>
+References: <1298899606-9139-1-git-send-email-otavio@ossystems.com.br>
+	<1298899606-9139-2-git-send-email-otavio@ossystems.com.br>
+	<1298912239.23547.10.camel@phil-desktop>
+Date: Mon, 28 Feb 2011 17:04:29 +0000
+X-Google-Sender-Auth: gqOQvJ-RoFuU5kYrsT9mPEw_FEw
+Message-ID: <AANLkTi=fohQFaxQnTP-VxoNh+P8np9uXCsvChtdT2ORT@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Phil Blundell <philb@gnu.org>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 2/2] conf/bitbake.conf: add DISTRO_ARCH and MACHINE_DISTRO_ARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,25 +50,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2011 17:02:42 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 28 Feb 2011 17:05:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello.
+On Mon, Feb 28, 2011 at 16:57, Phil Blundell <philb@gnu.org> wrote:
+> On Mon, 2011-02-28 at 13:26 +0000, Otavio Salvador wrote:
+>> -PACKAGE_ARCHS =3D "all any noarch ${TARGET_ARCH} ${PACKAGE_EXTRA_ARCHS}=
+ ${MACHINE}"
+>> +DISTRO_ARCH =3D "${TARGET_ARCH}-${DISTRO}"
+>> +MACHINE_DISTRO_ARCH =3D "${MACHINE_ARCH}-${DISTRO}"
+>> +PACKAGE_ARCHS =3D "all any noarch ${TARGET_ARCH} ${PACKAGE_EXTRA_ARCHS}=
+ ${DISTRO_ARCH} ${MACHINE_DISTRO_ARCH} ${MACHINE}"
+>
+> This seems a bit weird. =A0Any given package feed (or TMPDIR) is, more or
+> less by definition, going to correspond to a single DISTRO so I can't
+> see any situation in which these extra archs would be useful. =A0What's
+> the use-case for this?
 
-On Mon, 2011-02-28 at 08:31, Tom Rini wrote:
-> 
-> So, my current plan of attack is to do what I've said before and
-> merge the libvpx work-around, tag, revert the libvpx work-around
-> (per Khem's request).  And I plan to do this tomorrow unless people
-> shout about wanting to fix something they know is broken and need a
-> little more time.
+We have a set of products that reuse a common distro definition but
+has different needs on a small set of packages. To avoid having them
+all rebuild we set those to DISTRO_ARCH and the ones that depends on
+machine and distro to MACHINE_DISTRO_ARCH avoiding a lot of rebuilding
+and CPU time.
 
-For llvm and thus openjdk-6 we need the patch merged I posted today. I'm not
-completely sure that it is the best solutions thats why I posted it instead of
-just commit it.
-
-regards
-Stefan Schmidt
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
