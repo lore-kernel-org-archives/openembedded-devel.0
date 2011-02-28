@@ -1,26 +1,36 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1Pu2kS-000711-9L
+	(envelope-from <otavio.salvador@gmail.com>) id 1Pu39D-0002wY-ES
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 14:02:48 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 5A642491278;
-	Mon, 28 Feb 2011 14:01:23 +0100 (CET)
-Received: from [10.32.10.2] ([10.32.10.2]) by exchange.intern.dresearch.de
-	with Microsoft SMTPSVC(6.0.3790.4675); 
-	Mon, 28 Feb 2011 14:01:23 +0100
-Message-ID: <4D6B9C9D.7080107@dresearch.de>
-Date: Mon, 28 Feb 2011 14:01:17 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 28 Feb 2011 13:01:23.0323 (UTC)
-	FILETIME=[99CD9CB0:01CBD747]
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: udev, udev-compat and old kernel
+	Mon, 28 Feb 2011 14:28:23 +0100
+Received: by yia13 with SMTP id 13so1538165yia.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Feb 2011 05:26:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
+	:x-mailer; bh=ClA5u+z/lpggTzswkblJlTP76lWwb1A7L2XGkh/ligg=;
+	b=xM8KFg1erJIA/tdjCZW2qDiRlnp0sLCl+G1MrCqmXc9SxyZxwNmf1O0nEXP6/yYaHy
+	8W99Ao9BVg3YxWJ4Y2EOUEtQuQngbQJ8DJN2byqiVIKyHNEVfPt1xvX7ntMm9lxgChvj
+	o3CiAKzD+gRRAjGwfe7blAs9OE45hMB6E6DA8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=fczthV7mDmfiR+3Mw56Lu5ln6yNLGhby0n4pzumgwciSHOqIBU9rVjkSlJKNiaAesC
+	dMp2K/rWMYee2F6j63UqvIlsDnnGvJCayZmd6uHWaAAvh57J/w0Zpwdm+j9RlSNd4vYt
+	KtuzAhhQ3q3gojQtVpqiWn5B/9ia1pjqXmsXc=
+Received: by 10.100.191.7 with SMTP id o7mr2304727anf.198.1298899618027;
+	Mon, 28 Feb 2011 05:26:58 -0800 (PST)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id b28sm117412ana.0.2011.02.28.05.26.55
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 28 Feb 2011 05:26:57 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 28 Feb 2011 13:26:45 +0000
+Message-Id: <1298899606-9139-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.3
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [PATCH 1/2] freerdp: rdpepends on xprop
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,38 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2011 13:02:48 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 28 Feb 2011 13:28:24 -0000
 
-In our local development branch we've set
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ recipes/freerdp/freerdp.inc |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
- PREFERRED_VERSION_udev =3D "141"
+diff --git a/recipes/freerdp/freerdp.inc b/recipes/freerdp/freerdp.inc
+index c75175e..d1375fd 100644
+--- a/recipes/freerdp/freerdp.inc
++++ b/recipes/freerdp/freerdp.inc
+@@ -4,10 +4,11 @@
+ DESCRIPTION = "FreeRDP RDP client"
+ HOMEPAGE = "http://freerdp.sourceforge.net"
+ DEPENDS = "virtual/libx11 openssl libxcursor cups alsa-lib"
++RDEPENDS += "xprop"
+ SECTION = "x11/network"
+ LICENSE = "Apache-2.0"
+ 
+-INC_PR = "r5"
++INC_PR = "r6"
+ 
+ inherit pkgconfig autotools
+ 
+-- 
+1.7.2.3
 
-in angstrom-2008-preferred-versions.inc to force udev-141 for our old ker=
-nel (2.6.24) at hipox machine. But i'm nearly sure that's not the correct=
- way to do this. ;-)
-
-So what's the right way to handle this?
-
-Looking around i found the udev-compat141_141.bb recipe. In my understand=
-ing this package adds some rules to newer udev packages (e.g. udev-151) t=
-o be able to work with older kernels, so that it is possible to use newer=
- udev versions. Right?
-
-In this case it should be enough to add some lines to conf/machine/hipox.=
-conf, recipes/udev/udev.inc, recipes/udev/udev_{151,154,162,165}.bb simil=
-ar to poodle machine. Right?
-
-Steffen
-
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
 
 
