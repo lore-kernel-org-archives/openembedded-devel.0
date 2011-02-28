@@ -1,28 +1,30 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1Pu4eG-0005bH-EC
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pu56D-0003qd-OF
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 16:04:32 +0100
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>)
-	id 1Pu4cv-0006Mh-9I; Mon, 28 Feb 2011 16:03:09 +0100
-From: Phil Blundell <philb@gnu.org>
-To: Otavio Salvador <otavio@ossystems.com.br>
-In-Reply-To: <AANLkTi=afktV1HC4Jdq_ammNdA+h4iMAWdJT809s+LMv@mail.gmail.com>
-References: <AANLkTiknqQ6xLj8LFv4=17ymwSbVhD3C9kVe2qkviXhX@mail.gmail.com>
-	<1298664057.3818.0.camel@lenovo.internal.reciva.com>
-	<AANLkTin2WuKF=f_aOzi=28FmVTaxFVJa0uNb9TjfL2SB@mail.gmail.com>
-	<1298666406.3818.4.camel@lenovo.internal.reciva.com>
-	<AANLkTinUjtis22ZnLaP7uc0fa9nzxvhWod2uv43ZcJH=@mail.gmail.com>
-	<1298669695.3818.5.camel@lenovo.internal.reciva.com>
-	<AANLkTi=afktV1HC4Jdq_ammNdA+h4iMAWdJT809s+LMv@mail.gmail.com>
-Date: Mon, 28 Feb 2011 15:08:20 +0000
-Message-ID: <1298905700.23547.6.camel@phil-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Missing GLIBC_<version> tags on binaries
+	Mon, 28 Feb 2011 16:33:25 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Pu54q-0003Ys-Dg from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Feb 2011 07:32:00 -0800
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 28 Feb 2011 07:31:59 -0800
+Received: from [172.30.80.189] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
+	with Microsoft SMTP Server id 14.1.270.1;
+	Mon, 28 Feb 2011 07:31:59 -0800
+Message-ID: <4D6BBFDE.2090406@mentor.com>
+Date: Mon, 28 Feb 2011 08:31:42 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 28 Feb 2011 15:31:59.0710 (UTC)
+	FILETIME=[A3E8D7E0:01CBD75C]
+Subject: Release-2011.03 status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,30 +38,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2011 15:04:32 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 28 Feb 2011 15:33:26 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Sat, 2011-02-26 at 13:43 +0000, Otavio Salvador wrote:
-> On Fri, Feb 25, 2011 at 21:34, Phil Blundell <philb@gnu.org> wrote:
-> > Is it actually including -lpthread during final link?  Failing to do
-> > that is the most obvious reason for not getting the right version
-> > information.
-> 
-> It does -pthread that supposelly does it plus -D_REENTRANT IIRC.
+Hey all,
 
-Yeah, it does seem to be doing the right thing there.  And indeed some
-of the sem_ symbols are getting correctly versioned, it's just a couple
-(sem_post and sem_wait I think) which are not.
+Over at http://dl.dropbox.com/u/3284539/ac9745f0fe_results.pdf you can 
+see the results of my build over the weekend.  It's a bit scary but...
 
-It looks at first inspection as though this might be a linker bug,
-though I can't immediately see anything very special about freerdp that
-looks like it would be causing things to go wrong.  Some further
-debugging needed, though it'd be interesting to know whether it works
-any better with gold for example.
+Fixed:
+- minimal-uclibc/*/* was broken due to needing xattr in DISTRO_FEATURES
+- ucslug/sheevaplug/* was broken due to TARGET_ARCH in distro.conf
 
-p.
+Not fixed:
+antgw100: Needs the linux/socket.h > sys/socket.h thing someone else 
+mentioned.
+various/angstrom*/angstrom-gnome-image: evince needs various docbook 
+things installed that we don't build, don't force the host to have and 
+isn't 100% trivial to switch to building (I've started on this path but 
+haven't gotten it quite right).
+- various/shr/shr-image: The libvpx work-around 
+(http://patches.openembedded.org/patch/256/) to link.
+- qemux86/minimal*/*: A hard RPATH issue where we're getting away, 
+usually, with libXrandr from the host, but this build host is really 
+stripped down.  I bisected this down to when we fixed RPATH stuff in 
+9432df5a1c96f7b2e625abba0e011ad45d5aef92 and it's a bug in some recipe.
+- various/shr/shr-image: A problem with python-elementary/elementary 
+disagreeing on version stuff, will post later.
 
+So, my current plan of attack is to do what I've said before and merge 
+the libvpx work-around, tag, revert the libvpx work-around (per Khem's 
+request).  And I plan to do this tomorrow unless people shout about 
+wanting to fix something they know is broken and need a little more time.
 
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
