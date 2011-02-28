@@ -1,40 +1,20 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Pu39I-0002wa-De
+Received: from rrcs-24-227-36-211.se.biz.rr.com ([24.227.36.211]
+	helo=mail.eoimaging.com) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <nharris@eoimaging.com>) id 1Pu41T-0004AN-Kl
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 14:28:28 +0100
-Received: by ywg8 with SMTP id 8so1253795ywg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Feb 2011 05:27:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
-	:x-mailer:in-reply-to:references;
-	bh=WBZenz44nEvc2qjyBM4mNa/BnwuusLAIpdlFE2+Bh/E=;
-	b=ir40cb0+R7iK6D0miyw6ATKZ3a36tm0lB9td0R6o1u2OEwy3LMQdWRcGm1rxk2Aoc4
-	YiPsqCziUI+A/ugGqsoezg+G8+955j5nZ/SjCL1J1BsjGUA+RHKy9Lh/BMholBDCPDPA
-	zeh0v9Tl6w+I5M/h82UxsMW/MYwoUNal3g0x4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references;
-	b=x7Cr8M66Z2pg83YhtHDLG+yRX/FjQmO6IhTJ2zxnhg4RNJ6+I757cPxIvIHPtufiEN
-	Bi0fG4BnSVkTKhQCg3cmrUmmh7ZsOSUaUnB5CU8yrtRlVqN/XE2p4KMModVidut1JyCg
-	yE4n2lmSKAAy4YJFti7YYZ4rA/kfzv91pyMZU=
-Received: by 10.90.248.36 with SMTP id v36mr1470904agh.33.1298899620265;
-	Mon, 28 Feb 2011 05:27:00 -0800 (PST)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id b28sm117412ana.0.2011.02.28.05.26.58
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 28 Feb 2011 05:26:59 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Mon, 28 Feb 2011 15:24:28 +0100
+Received: from [192.168.0.194] ([::ffff:192.168.0.194]) (AUTH: LOGIN nharris)
+	by mail.eoimaging.com with esmtp; Mon, 28 Feb 2011 09:17:55 -0500
+	id 0020864D.4D6BAE93.0000378F
+Message-ID: <4D6BAE92.1080409@eoimaging.com>
+Date: Mon, 28 Feb 2011 09:17:54 -0500
+From: Nathan Harris <nharris@eoimaging.com>
+Organization: Electro-Optical Imaging, Inc.
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Feb 2011 13:26:46 +0000
-Message-Id: <1298899606-9139-2-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <1298899606-9139-1-git-send-email-otavio@ossystems.com.br>
-References: <1298899606-9139-1-git-send-email-otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 2/2] conf/bitbake.conf: add DISTRO_ARCH and MACHINE_DISTRO_ARCH
+Subject: QA issues with libvmime
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,30 +28,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2011 13:28:28 -0000
+X-List-Received-Date: Mon, 28 Feb 2011 14:24:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- conf/bitbake.conf |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+I am working on a recipe for the VMime library (http://www.vmime.org/).  
+My target environment is the Overo (Gumstix).  Currently, bitbake is 
+failing during the final QA.  My recipe, patch and bitbake output are 
+below.  Hopefully, this error is familiar to someone.  Thanks!
 
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index 1002c01..b018f08 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -132,7 +132,9 @@ PACKAGE_ARCH = "${BASE_PACKAGE_ARCH}"
- PACKAGE_EXTRA_ARCHS ?= ""
- MACHINE_ARCH = "${@oe.utils.ifelse(bool(d.getVar('MACHINE', True)), '${MACHINE}', \
-                                    'BASE_PACKAGE_ARCH')}"
--PACKAGE_ARCHS = "all any noarch ${TARGET_ARCH} ${PACKAGE_EXTRA_ARCHS} ${MACHINE}"
-+DISTRO_ARCH = "${TARGET_ARCH}-${DISTRO}"
-+MACHINE_DISTRO_ARCH = "${MACHINE_ARCH}-${DISTRO}"
-+PACKAGE_ARCHS = "all any noarch ${TARGET_ARCH} ${PACKAGE_EXTRA_ARCHS} ${DISTRO_ARCH} ${MACHINE_DISTRO_ARCH} ${MACHINE}"
- 
- MULTIMACH_ARCH = "${PACKAGE_ARCH}"
- MULTIMACH_TARGET_SYS = "${MULTIMACH_ARCH}${TARGET_VENDOR}-${TARGET_OS}"
--- 
-1.7.2.3
+Here's my recipe:
+
+DESCRIPTION = "VMime is a free mail library for C++"
+HOMEPAGE = "http://www.vmime.org/"
+DEPENDS = "libgsasl gnutls"
+PR = "r1"
+
+SRC_URI = "${SOURCEFORGE_MIRROR}/vmime/${PN}-${PV}.tar.bz2"
+SRC_URI[md5sum] = "d5b6de44f7f9ca0e4cefe597d1905605"
+SRC_URI[sha256sum] = 
+"3b66cb76d9bc7da80ef1f271cc29d3a183b5ff8b560ef60e85ff006bffb4d1ae"
+
+SRC_URI += "file://sendmail_disable.patch"
+
+# Older internal Libtool doesn't work
+EXTRA_OEMAKE += "LIBTOOL='${HOST_SYS}-libtool'"
+
+#S = ${WORKDIR}/${PN}-${PV}
+#EXTRA_OECONF = "--disable-largefile --disable-rpath 
+--with-included-readline=no 
+--with-libgsasl-prefix=${STAGING_DIR}/${HOST_SYS} --with-gnutls-prefix=$
+{STAGING_DIR}/${HOST_SYS}"
+
+inherit scons
+
+Here's my patch which disables sendmail from the build:
+
+--- libvmime-0.9.1/SConstruct.orig      2011-02-24 15:46:44.185617415 -0500
++++ libvmime-0.9.1/SConstruct   2011-02-24 15:38:51.249617495 -0500
+@@ -691,7 +691,7 @@
+                         Exit(1)
+
+  # Sendmail transport is only available on POSIX platforms
+-if os.name != 'posix':
++if os.name == 'posix':
+         if IsProtocolSupported(messaging_protocols, 'sendmail'):
+                 print "WARNING: ignoring 'sendmail' support (only 
+available on POSIX platforms)\n"
+
+
+Here's the bitbake error:
+
+NOTE: package libvmime-0.9.1-r1: task do_qa_staging: Started
+ERROR: QA Issue with staging: vmime.pc failed sanity test (tmpdir) in 
+path 
+/home/ppeimany/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/pkgconfig
+FATAL: QA staging was broken by the package built above
+ERROR: Error in executing python function in: 
+/home/ppeimany/overo-oe/org.openembedded.dev/recipes/libvmime/libvmime_0.9.1.bb
+ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
+ERROR: Printing the environment of the function
+ERROR: Function do_qa_staging failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of 
+/home/ppeimany/overo-oe/org.openembedded.dev/recipes/libvmime/libvmime_0.9.1.bb 
+do_qa_staging failed
+ERROR: QA Issue with staging: vmime.pc failed sanity test (tmpdir) in 
+path 
+/home/ppeimany/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/pkgconfig
+ERROR: Task 4 
+(/home/ppeimany/overo-oe/org.openembedded.dev/recipes/libvmime/libvmime_0.9.1.bb, 
+do_qa_staging) failed with 256
+ERROR: 
+'/home/ppeimany/overo-oe/org.openembedded.dev/recipes/libvmime/libvmime_0.9.1.bb' 
+failed
+FATAL: QA staging was broken by the package built above
+ERROR: 
+'/home/ppeimany/overo-oe/org.openembedded.dev/recipes/libvmime/libvmime_0.9.1.bb' 
+failed
 
 
 
