@@ -1,39 +1,43 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Pu5kN-0003Y4-Bt
+	(envelope-from <kergoth@gmail.com>) id 1Pu6HF-0004Fd-D4
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 17:14:55 +0100
-Received: by fxm8 with SMTP id 8so3656711fxm.6
+	Mon, 28 Feb 2011 17:48:53 +0100
+Received: by wwe15 with SMTP id 15so4310154wwe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Feb 2011 08:13:30 -0800 (PST)
+	Mon, 28 Feb 2011 08:47:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=HGbuCmBB3+1qmRYI5w75lwsigWaRv9wEgXDUFG9io/4=;
-	b=RdOZ8UCZtdK0UIBubxkeSQCLXjj/1XT49WmHORmtcdtUXnSYZ6B8/tZfOc+N2z4HB2
-	a0m/Aw/GIVBWyKb7bdU2gNe4FedHMzayqkljh8lSgCPsdkMkAu7plMkYK40O7Wxfh8y6
-	h3RIRAA3UvTupMjx+HnRVwY2L+vQyzstUKP40=
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
+	:date:x-google-sender-auth:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	bh=9YXw4t99GU1YR1yahHEcBSF87HrawqG4RyodRxJLFUA=;
+	b=V56XqU/M9UlQ7STEpXYa2qyh5YsTceDnFcwysn/2B47HH5n9JKJKy1DaJMXuj6SeOt
+	kLqJIjrXubxRSGfWw1lN40fwo+f7OxqdvKeNJbd9zBVvjCG+ITA2vu6VZhaVlgMAKeyZ
+	wuMB34rFMS5rP0zi/K9h8Hc7+gnrLtSAyvDF8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Sv20fE+1Xmf8mSdbOGn6Gby05HYAaLoarfZiRw1oEbXHExqQ4k0fGmwJKkkqYhCrUi
-	YUG3pkV2T/RjVT3LFM1BzaesIZVNAel2b6imZyvj8oAXyJhHE1ZrC4oOlmdwmm3aP8bl
-	nVBbryU7Oyw1gO2JrwOC8iUuBV23zs6a+qBS0=
-Received: by 10.223.114.209 with SMTP id f17mr6803388faq.136.1298909610384;
-	Mon, 28 Feb 2011 08:13:30 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id o17sm3189fal.25.2011.02.28.08.13.29
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 28 Feb 2011 08:13:29 -0800 (PST)
-Date: Mon, 28 Feb 2011 17:13:28 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110228161328.GH5886@jama.jama.net>
-References: <4D6BC0EA.4000207@mentor.com> <20110228160659.GG5886@jama.jama.net>
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	b=DrSLhkhFC0RJ0Eeqwu7c37M3dxDeRQzLZuXzP3jW2J00rdeYex+Uf6mMDuwa4v+NDL
+	eCUrT3996ouu4VPbA9kh07hU90lL/iZWRJs/qR2Y24EArz6A9CoATVVlwFoK7F8AZJzG
+	MwmtEuLEL9U1Synfto7gyTNfY4qPxGmCq2OUU=
+Received: by 10.216.162.84 with SMTP id x62mr4747974wek.106.1298911648189;
+	Mon, 28 Feb 2011 08:47:28 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20110228160659.GG5886@jama.jama.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: shr-image failure
+Sender: kergoth@gmail.com
+Received: by 10.216.246.11 with HTTP; Mon, 28 Feb 2011 08:47:07 -0800 (PST)
+In-Reply-To: <AANLkTimUqDu1nptPT9CrKrA5f8AHg3=V2OPNR2ne4ZgY@mail.gmail.com>
+References: <1298049536.11289.3126.camel@rex> <4D6A5FB2.4070604@cam.ac.uk>
+	<4D6A6DFA.5040305@mwester.net>
+	<AANLkTinKqrKRpQd=ALYjjGOLyWmWEOGZobsHrsHxQi_j@mail.gmail.com>
+	<AANLkTimUqDu1nptPT9CrKrA5f8AHg3=V2OPNR2ne4ZgY@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Mon, 28 Feb 2011 09:47:07 -0700
+X-Google-Sender-Auth: 3j5B-qJOb4H0EBdl7IM7urDOCJY
+Message-ID: <AANLkTikZph2WuATGjfvc_P+R=sqjJurtuzysU7OAokzj@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
+Subject: Re: Bitbake 1.12.0 released!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,71 +51,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2011 16:14:55 -0000
-X-Groupsio-MsgNum: 29767
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="FUaywKC54iCcLzqT"
-Content-Disposition: inline
-
---FUaywKC54iCcLzqT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 28 Feb 2011 16:48:53 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 28, 2011 at 05:06:59PM +0100, Martin Jansa wrote:
-> On Mon, Feb 28, 2011 at 08:36:10AM -0700, Tom Rini wrote:
-> > Hey all,
-> >=20
-> > Trying to build shr/shr-image/nokia900 fails with the following:=20
-> > http://pastebin.com/Z13aYd2Z which seems odd in that we're building:
-> >=20
-> > NOTE: Running task 5802 of 10948 (ID: 2141,=20
-> > /var/hudson/workspace/sb_openembedded_autobuilder/BBPKGS/shr-image/DIST=
-RO/shr/MACHINE/nokia900/label/sb-u804/recipes/efl1/elementary_svn.bb,=20
-> > do_setscene)
-> > NOTE: package elementary-2_0.7.0+svnr56372-r11: task do_setscene: Start=
-ed
-> >=20
-> > And it's already past do_populate_sysroot before this starts.  I do see=
-=20
-> > some svn complaining (and not doing something...) earlier on in the=20
-> > do_configure here.
->=20
-> This looks like related to
-> http://www.mail-archive.com/bitbake-dev@lists.berlios.de/msg00880.html
->=20
-> which was resolved later with scmdata=3Dkeep param
-> http://git.openembedded.org/cgit.cgi/bitbake/commit/?id=3D05cbc1d1a01c667=
-c77688f36fbc5b61c5f452a3a
->=20
-> but that patch didn't make it to bitbake-1.10.2 release, but neither did
-> patch causing this in master/1.12
-> http://git.openembedded.org/cgit.cgi/bitbake/commit/?id=3Df264cb6d4347252=
-5ad787b0887764ea696ec52ba
->=20
-> Can you try that svnversion call in your checkout to get thath svn
-> error? It seems to be working here fine.
+On Sun, Feb 27, 2011 at 3:15 PM, Chris Larson <clarson@kergoth.com> wrote:
+> https://github.com/kergoth/bitbake/compare/master...f12-hang
+>
+> https://github.com/kergoth/bitbake/commit/12d9095
+>
+>
+> This fixes the parsing hang on Fedora 12 for me. =C2=A0Note that I'm not
+> sure about the version check. =C2=A0We could just use this version of
+> _bootstrap all the time, but I'd rather avoid this for future
+> versions, as we could miss fixes. =C2=A0We should determine if this fix w=
+as
+> in python 2.6.3.
 
-$ mkdir test && cd test
-$ tar xzvf ../downloads/elementary_svn.enlightenment.org_.svn.e.trunk_56372=
-_.tar.gz
-$ cd elementary
-$ (svnversion . | grep -v export || echo 0) | awk -F : '{printf("%s\n",$1);=
-}' | tr -d ':MSP\n'
-56372$
-
+Verified that the fix is in 2.6.3.  If someone other than me could
+confirm that the above commit resolves their issues, I'd appreciate it
+:)
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
---FUaywKC54iCcLzqT
-Content-Type: application/pgp-signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk1ryagACgkQN1Ujt2V2gBxE8ACgiFe9OIrPyCuQhFHcbgfGdBtt
-fNwAn3q66oFGfHx+gjCBP2g9Y6bzd1yf
-=RxcU
------END PGP SIGNATURE-----
-
---FUaywKC54iCcLzqT--
