@@ -1,37 +1,37 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Pu5eC-0003PH-ET
+	(envelope-from <martin.jansa@gmail.com>) id 1Pu5kN-0003Y4-Bt
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 17:08:32 +0100
-Received: by fxm8 with SMTP id 8so3650779fxm.6
+	Mon, 28 Feb 2011 17:14:55 +0100
+Received: by fxm8 with SMTP id 8so3656711fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Feb 2011 08:07:07 -0800 (PST)
+	Mon, 28 Feb 2011 08:13:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:date:from:to:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=y14fdmINEH87nna0diQ0VsPqml8E38qezAtL+Q4beSc=;
-	b=xLJKGc3PEhdAEZfkjQRpsjIIICARvu9qAtwzXe7X6FDCgNZhWa9B6/3bV6h9YjH+AN
-	fl/bjAQZWh7J0WK7Qag1+pXJwWaY/3hVTsc77mSxPSzB0Kyhtpi3uojF76HiVdbJiApD
-	0dINZmLJydIOZzUFt5ZEfU+KvwWepPJoofKKs=
+	:user-agent; bh=HGbuCmBB3+1qmRYI5w75lwsigWaRv9wEgXDUFG9io/4=;
+	b=RdOZ8UCZtdK0UIBubxkeSQCLXjj/1XT49WmHORmtcdtUXnSYZ6B8/tZfOc+N2z4HB2
+	a0m/Aw/GIVBWyKb7bdU2gNe4FedHMzayqkljh8lSgCPsdkMkAu7plMkYK40O7Wxfh8y6
+	h3RIRAA3UvTupMjx+HnRVwY2L+vQyzstUKP40=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=iY43cmm+2RgNDSBchpQP7dOk8mkdSwjFghqL24W9z1etQtULaPvCSgkV8A90BBi1Zv
-	pGqDsRIMm3q5j/v4moXpUqefjkiRPH91s8wwUiznUE03Zf7IKt99SF3J1kLwnl3r5SJp
-	sP1hfOdpqQbfRYq7dlrk9lAoo60HPnrXy2d4w=
-Received: by 10.223.29.28 with SMTP id o28mr2524601fac.61.1298909227347;
-	Mon, 28 Feb 2011 08:07:07 -0800 (PST)
+	b=Sv20fE+1Xmf8mSdbOGn6Gby05HYAaLoarfZiRw1oEbXHExqQ4k0fGmwJKkkqYhCrUi
+	YUG3pkV2T/RjVT3LFM1BzaesIZVNAel2b6imZyvj8oAXyJhHE1ZrC4oOlmdwmm3aP8bl
+	nVBbryU7Oyw1gO2JrwOC8iUuBV23zs6a+qBS0=
+Received: by 10.223.114.209 with SMTP id f17mr6803388faq.136.1298909610384;
+	Mon, 28 Feb 2011 08:13:30 -0800 (PST)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id n2sm1634415fam.4.2011.02.28.08.07.04
+	by mx.google.com with ESMTPS id o17sm3189fal.25.2011.02.28.08.13.29
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 28 Feb 2011 08:07:05 -0800 (PST)
-Date: Mon, 28 Feb 2011 17:06:59 +0100
+	Mon, 28 Feb 2011 08:13:29 -0800 (PST)
+Date: Mon, 28 Feb 2011 17:13:28 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110228160659.GG5886@jama.jama.net>
-References: <4D6BC0EA.4000207@mentor.com>
+Message-ID: <20110228161328.GH5886@jama.jama.net>
+References: <4D6BC0EA.4000207@mentor.com> <20110228160659.GG5886@jama.jama.net>
 MIME-Version: 1.0
-In-Reply-To: <4D6BC0EA.4000207@mentor.com>
+In-Reply-To: <20110228160659.GG5886@jama.jama.net>
 User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: shr-image failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -47,63 +47,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2011 16:08:32 -0000
-X-Groupsio-MsgNum: 29766
+X-List-Received-Date: Mon, 28 Feb 2011 16:14:55 -0000
+X-Groupsio-MsgNum: 29767
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="j2AXaZ4YhVcLc+PQ"
+	protocol="application/pgp-signature"; boundary="FUaywKC54iCcLzqT"
 Content-Disposition: inline
 
---j2AXaZ4YhVcLc+PQ
+--FUaywKC54iCcLzqT
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 28, 2011 at 08:36:10AM -0700, Tom Rini wrote:
-> Hey all,
->=20
-> Trying to build shr/shr-image/nokia900 fails with the following:=20
-> http://pastebin.com/Z13aYd2Z which seems odd in that we're building:
->=20
-> NOTE: Running task 5802 of 10948 (ID: 2141,=20
-> /var/hudson/workspace/sb_openembedded_autobuilder/BBPKGS/shr-image/DISTRO=
-/shr/MACHINE/nokia900/label/sb-u804/recipes/efl1/elementary_svn.bb,=20
-> do_setscene)
-> NOTE: package elementary-2_0.7.0+svnr56372-r11: task do_setscene: Started
->=20
-> And it's already past do_populate_sysroot before this starts.  I do see=
+On Mon, Feb 28, 2011 at 05:06:59PM +0100, Martin Jansa wrote:
+> On Mon, Feb 28, 2011 at 08:36:10AM -0700, Tom Rini wrote:
+> > Hey all,
+> >=20
+> > Trying to build shr/shr-image/nokia900 fails with the following:=20
+> > http://pastebin.com/Z13aYd2Z which seems odd in that we're building:
+> >=20
+> > NOTE: Running task 5802 of 10948 (ID: 2141,=20
+> > /var/hudson/workspace/sb_openembedded_autobuilder/BBPKGS/shr-image/DIST=
+RO/shr/MACHINE/nokia900/label/sb-u804/recipes/efl1/elementary_svn.bb,=20
+> > do_setscene)
+> > NOTE: package elementary-2_0.7.0+svnr56372-r11: task do_setscene: Start=
+ed
+> >=20
+> > And it's already past do_populate_sysroot before this starts.  I do see=
 =20
-> some svn complaining (and not doing something...) earlier on in the=20
-> do_configure here.
+> > some svn complaining (and not doing something...) earlier on in the=20
+> > do_configure here.
+>=20
+> This looks like related to
+> http://www.mail-archive.com/bitbake-dev@lists.berlios.de/msg00880.html
+>=20
+> which was resolved later with scmdata=3Dkeep param
+> http://git.openembedded.org/cgit.cgi/bitbake/commit/?id=3D05cbc1d1a01c667=
+c77688f36fbc5b61c5f452a3a
+>=20
+> but that patch didn't make it to bitbake-1.10.2 release, but neither did
+> patch causing this in master/1.12
+> http://git.openembedded.org/cgit.cgi/bitbake/commit/?id=3Df264cb6d4347252=
+5ad787b0887764ea696ec52ba
+>=20
+> Can you try that svnversion call in your checkout to get thath svn
+> error? It seems to be working here fine.
 
-This looks like related to
-http://www.mail-archive.com/bitbake-dev@lists.berlios.de/msg00880.html
-
-which was resolved later with scmdata=3Dkeep param
-http://git.openembedded.org/cgit.cgi/bitbake/commit/?id=3D05cbc1d1a01c667c7=
-7688f36fbc5b61c5f452a3a
-
-but that patch didn't make it to bitbake-1.10.2 release, but neither did
-patch causing this in master/1.12
-http://git.openembedded.org/cgit.cgi/bitbake/commit/?id=3Df264cb6d43472525a=
-d787b0887764ea696ec52ba
-
-Can you try that svnversion call in your checkout to get thath svn
-error? It seems to be working here fine.
-
-Regards,
+$ mkdir test && cd test
+$ tar xzvf ../downloads/elementary_svn.enlightenment.org_.svn.e.trunk_56372=
+_.tar.gz
+$ cd elementary
+$ (svnversion . | grep -v export || echo 0) | awk -F : '{printf("%s\n",$1);=
+}' | tr -d ':MSP\n'
+56372$
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---j2AXaZ4YhVcLc+PQ
+--FUaywKC54iCcLzqT
 Content-Type: application/pgp-signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.17 (GNU/Linux)
 
-iEYEARECAAYFAk1ryCMACgkQN1Ujt2V2gByXAwCePfWjAdRsqTtqEQNxtp9q7/XJ
-IpYAnRtrAgJEQPrOtM/+cqIsBX3j9yV1
-=jB+f
+iEYEARECAAYFAk1ryagACgkQN1Ujt2V2gBxE8ACgiFe9OIrPyCuQhFHcbgfGdBtt
+fNwAn3q66oFGfHx+gjCBP2g9Y6bzd1yf
+=RxcU
 -----END PGP SIGNATURE-----
 
---j2AXaZ4YhVcLc+PQ--
+--FUaywKC54iCcLzqT--
