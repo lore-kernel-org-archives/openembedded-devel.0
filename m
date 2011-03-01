@@ -1,47 +1,40 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PuNX7-0000LS-Vv
+	(envelope-from <otavio.salvador@gmail.com>) id 1PuNZr-0000O5-Rm
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Mar 2011 12:14:26 +0100
-Received: by bwz10 with SMTP id 10so4448409bwz.6
+	Tue, 01 Mar 2011 12:17:15 +0100
+Received: by bwz10 with SMTP id 10so4450074bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Mar 2011 03:12:59 -0800 (PST)
+	Tue, 01 Mar 2011 03:15:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
 	:content-transfer-encoding;
-	bh=dFjHA9e3vHXPK2QVq99Vn2m0wjZAclc9YfUkPQOwafk=;
-	b=Sq5Le4KTGe0OaIWFASRQhMLs0j35n46m/O34CrmtYVjrEIt6MKnl3o201KaplYWcyM
-	vdJVvtSNEWi6NcqtWMoVMe7DZu3T76L+yQ2IJf5zTkiv9YF9F7xIVR/s0CAFHOn2pYps
-	ctn8pMbN9WVwH4a8YTMmQZGXLhfXb3vbQemVI=
+	bh=ZZDjxeNqa704JD+fr1xFMrXVnGx1jBtsRQR2bWJ2IG0=;
+	b=Xp8Y/mPTUxux3I0Dmw8ccD1EMVSyAz0H+CNfLo/SerH+rryjSxjKtpeV0PQnfrfO1U
+	F2p6ihuV/j/DNVNTviyeUbs6TUCYxQSDCHgi+v/q0aPbgUSun2ATx+tablXscr7/787z
+	KIvvgsbQlagg/LMfDFqP6bo87Wh/Om9PuTcGI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
 	:content-transfer-encoding;
-	b=gj6lLWa9XRb3KXw15ViZMHG0KZb0siYmAmu9lJmng1VHXnLVVTguoUwdH3TQDmOI2e
-	HhTrQd1Land+uzdPN/TWjCNInhGF3LBWBJQaFrK2h1lG7oTF5jaEGc1BdWmsKgzqhfw8
-	15lzYgOSfRlk4Hdkj+w9UJYK6eiTLgxjE7X1Q=
+	b=xwjh0iDizlCnDopU2bFSFWQrNNOXiRVVpdb9nPHKemUVCScbKrpPrIUw/nxPdnbDyZ
+	lnZG18i5HSHdbA7CkE+S8oxfvdn9bH3jvIF1bZJ1VXL5NflDReqWzAtZy7mX8NEcO1vA
+	MvaOWOCEwu55kwB/v9/fZJrqKdec9O06KBp5A=
 MIME-Version: 1.0
-Received: by 10.204.140.208 with SMTP id j16mr5870340bku.151.1298977977435;
-	Tue, 01 Mar 2011 03:12:57 -0800 (PST)
+Received: by 10.204.140.208 with SMTP id j16mr5873616bku.151.1298978147077;
+	Tue, 01 Mar 2011 03:15:47 -0800 (PST)
 Sender: otavio.salvador@gmail.com
-Received: by 10.204.119.207 with HTTP; Tue, 1 Mar 2011 03:12:57 -0800 (PST)
-In-Reply-To: <20110301024025.GB651@sakrah.homelinux.org>
-References: <1298466445-16486-1-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-2-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-3-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-4-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-5-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-6-git-send-email-otavio@ossystems.com.br>
-	<1298468511.2178.430.camel@phil-desktop>
-	<AANLkTim1EdeGgyy3siyL99ugY-v=uqW_v4MRHJV0evq6@mail.gmail.com>
-	<20110301024025.GB651@sakrah.homelinux.org>
-Date: Tue, 1 Mar 2011 11:12:57 +0000
-X-Google-Sender-Auth: x_FYIpFFw9R9fUM5__C8IrjdB0M
-Message-ID: <AANLkTikY6D008fHAkOh2zR7N+9a++5kOAB3S3bP2VWz9@mail.gmail.com>
+Received: by 10.204.119.207 with HTTP; Tue, 1 Mar 2011 03:15:47 -0800 (PST)
+In-Reply-To: <1298970609-4974-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1298970609-4974-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue, 1 Mar 2011 11:15:47 +0000
+X-Google-Sender-Auth: pD6RRUYsl-IXNrfZYjhCUotbm0c
+Message-ID: <AANLkTint_kzkuCC1xMfF1T16u0DkzB6s77Lax_Ogz+Vy@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org, Phil Blundell <philb@gnu.org>
-Subject: Re: [PATCH 05/14] cmake.bbclass: use 2.8 modules
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [PATCH] sane-toolchain-*: add -g to FULL_OPTIMIZATION to make -dbg packages more usefull
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,26 +48,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Mar 2011 11:14:26 -0000
+X-List-Received-Date: Tue, 01 Mar 2011 11:17:15 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 1, 2011 at 02:40, Khem Raj <raj.khem@gmail.com> wrote:
-> On (23/02/11 13:47), Otavio Salvador wrote:
-...
->> I see noone using cmake 2.6.
->>
->> In any case cmake will know the "internal" modules directory by itself
->> so it works even if this value doesn't match. This is where it is
->> going to look as fallback and I was using 2.8 without 2.6 for long
->> time without noticing any issue.
->>
->> This seems safe. We could drop the CMAKE_MODULE_PATH if preferred. I
->> just fixed it to 2.8 to reflect the current default one.
->
-> yeah make it portable for future if no one is using cmake 2.6
+On Tue, Mar 1, 2011 at 09:10, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+> =A0conf/distro/include/sane-toolchain-eglibc.inc =A0 =A0 =A0| =A0 12 ++++=
+++------
+> =A0conf/distro/include/sane-toolchain-glibc.inc =A0 =A0 =A0 | =A0 10 ++++=
++-----
+> =A0conf/distro/include/sane-toolchain-uclibc.inc =A0 =A0 =A0| =A0 =A06 ++=
++---
+> =A0.../include/sane-toolchain-uclinux-uclibc.inc =A0 =A0 =A0| =A0 =A02 +-
+> =A04 files changed, 15 insertions(+), 15 deletions(-)
 
-I did not understand what you meant. You mean to drop CMAKE_MODULE_PATH?
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
 --=20
 Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
