@@ -1,27 +1,32 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PuR0I-0000r1-Gh
+	(envelope-from <Tom_Rini@mentor.com>) id 1PuS87-0008GD-U6
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Mar 2011 15:56:46 +0100
-Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1PuQyt-0007dI-MY by authid <stefan@sostec.de> with cram_md5;
-	Tue, 01 Mar 2011 15:55:22 +0100
-Received: from stefan by excalibur.local with local (Exim 4.74)
-	(envelope-from <stefan@excalibur.local>)
-	id 1PuQyq-0002t2-9a; Tue, 01 Mar 2011 15:55:16 +0100
-From: Stefan Schmidt <stefan@buglabs.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Mar 2011 15:55:14 +0100
-Message-Id: <1298991314-11065-1-git-send-email-stefan@buglabs.net>
-X-Mailer: git-send-email 1.7.4.1
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
-	autolearn=ham version=3.2.5
-Cc: Stefan Schmidt <stefan@buglabs.net>
-Subject: [PATCH] angstrom-jalimo.conf: Bump openjdk version to include security and build fixes
+	Tue, 01 Mar 2011 17:08:56 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PuS6i-00009e-QC from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Mar 2011 08:07:28 -0800
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Tue, 1 Mar 2011 08:07:28 -0800
+Received: from [172.30.80.189] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
+	with Microsoft SMTP Server id 14.1.270.1;
+	Tue, 1 Mar 2011 08:07:27 -0800
+Message-ID: <4D6D19AD.5010505@mentor.com>
+Date: Tue, 1 Mar 2011 09:07:09 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1298970609-4974-1-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1298970609-4974-1-git-send-email-Martin.Jansa@gmail.com>
+X-OriginalArrivalTime: 01 Mar 2011 16:07:28.0649 (UTC)
+	FILETIME=[C344E790:01CBD82A]
+Subject: Re: [PATCH] sane-toolchain-*: add -g to FULL_OPTIMIZATION to make	-dbg packages more usefull
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,29 +40,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Mar 2011 14:56:46 -0000
+X-List-Received-Date: Tue, 01 Mar 2011 16:08:56 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
+On 03/01/2011 02:10 AM, Martin Jansa wrote:
+> Signed-off-by: Martin Jansa<Martin.Jansa@gmail.com>
+> ---
+>   conf/distro/include/sane-toolchain-eglibc.inc      |   12 ++++++------
+>   conf/distro/include/sane-toolchain-glibc.inc       |   10 +++++-----
+>   conf/distro/include/sane-toolchain-uclibc.inc      |    6 +++---
+>   .../include/sane-toolchain-uclinux-uclibc.inc      |    2 +-
+>   4 files changed, 15 insertions(+), 15 deletions(-)
 
-Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
----
- conf/distro/include/angstrom-jalimo.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+While we're in here, we should look at what the angstrom ones do 
+correctly which is that BUILD_OPTIMIZATION is only for -native recipes.
 
-diff --git a/conf/distro/include/angstrom-jalimo.conf b/conf/distro/include/angstrom-jalimo.conf
-index 76cd5f1..9ba4c70 100644
---- a/conf/distro/include/angstrom-jalimo.conf
-+++ b/conf/distro/include/angstrom-jalimo.conf
-@@ -22,7 +22,7 @@ PREFERRED_VERSION_jamvm = "1.5.2"
- PREFERRED_PROVIDER_swt3.4-gtk = "swt3.4-gtk"
- PREFERRED_PROVIDER_classpath = "classpath"
- 
--PREFERRED_VERSION_openjdk-6-jre = "6b18-1.8"
-+PREFERRED_VERSION_openjdk-6-jre = "6b18-1.8.5"
- PREFERRED_VERSION_icedtea6-native = "1.7.6"
- 
- # Stage JAR files not into ARCH related dirs
+And personally I'd like to see the -g flag (for both target and the 
+rest) be a variable that can be tweaked as needed (for more or less 
+debug in the area).
+
 -- 
-1.7.4.1
-
+Tom Rini
+Mentor Graphics Corporation
 
 
