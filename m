@@ -1,53 +1,49 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PuBtk-0000hZ-9S
+	(envelope-from <raj.khem@gmail.com>) id 1PuE6F-0006nw-VI
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Feb 2011 23:49:00 +0100
-Received: by bwz10 with SMTP id 10so4125637bwz.6
+	Tue, 01 Mar 2011 02:10:04 +0100
+Received: by pzk12 with SMTP id 12so695208pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Feb 2011 14:47:33 -0800 (PST)
+	Mon, 28 Feb 2011 17:08:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=8lJYHxBoXtnzZCq2H4QKKG18lmSxaDjQdADh76vFaO4=;
-	b=k/xa8hzn8mGTJ4cMavCoR6hLTuDujrWmaJfMZBXvLhJ5R3rvD+uu8vGQMUwdDk7Uzw
-	5ino1aiRnPxCRn0f33LCP68YiaubRthn2mb2RgZCSwAHOXpxbf5OUbWq6WPLLLW/s6oA
-	v4kWL0sCjb0pX7XIBO5yQE+13Ytkm5vLakwaY=
+	h=domainkey-signature:date:from:to:subject:message-id
+	:mail-followup-to:references:mime-version:content-type
+	:content-disposition:in-reply-to:user-agent;
+	bh=BFBHJlo0Q105rukAB8ltNb2eIN1V3LlSTteYp8IPnOY=;
+	b=lJ92FT0diHKWdNVZpAtIf3DACkRZzL2PoYihcRMAfA3MyHp6BjcTeow2xDhNSgUfv+
+	CO0KbfDA9gF6y2RlZY98qb7zxcY+ztD7pdAJLk2ih9cpf4igy9Sn4bKT1kD2HKIs4qvX
+	7xjICarrLCz9Ks4u1+fBdL2X2qWWHyoblNFC4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=oNVV1fl7pb6brclvgvcMkvGnxsgHTMu0IksA93mVAFIBVz3W4lxeQXG5uKAkj0J+Ma
-	FdGsbmIJAwJ+46ZfbeyzfNXbhGqv6vzgTdtsiGWbF9ejJV80/6uBu+Xq4rHMkTHoaJKu
-	fgRUw0xisRcA6Ml8pYXni3aEGn5DfVIw14mhs=
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	b=YYsYSuSZcVhLB05Q6yXXqTggl3ZltkXhornOIl5F98V9/rWhsNphGFxHAbWP2kB23X
+	mtaHE6aifi03YYmEPD9NsnbfvlXeSJmBh7XKRp18zrHnkG/1ExrjENZ//iiOHuFJ3zzj
+	fOlnziPuAYNn0mu4ErOlpQvB2VLnqGvoa2JJY=
+Received: by 10.142.188.8 with SMTP id l8mr4873979wff.272.1298941717142;
+	Mon, 28 Feb 2011 17:08:37 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id w19sm6717711wfd.20.2011.02.28.17.08.34
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 28 Feb 2011 17:08:35 -0800 (PST)
+Date: Mon, 28 Feb 2011 17:09:25 -0800
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110301010925.GA30622@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <4D51B81D.8000800@mentor.com>
+	<AANLkTikbfyoZfnJq9k1fSkMVMkReNw0G8APuXjc_rTyY@mail.gmail.com>
+	<iium4d$gau$1@dough.gmane.org> <20110209193129.GA15397@nirvana>
+	<4D52EEE5.9030309@mentor.com>
+	<AANLkTin0nJfcj1wFiYcbXLyLa9tk_Dy8yn8Lp3=PGNHC@mail.gmail.com>
+	<4D53272F.1020400@mentor.com> <1298454891.3892.3.camel@mattotaupa>
+	<20110224053346.GA15439@nirvana> <ik541d$nb4$1@dough.gmane.org>
 MIME-Version: 1.0
-Received: by 10.204.179.203 with SMTP id br11mr5321468bkb.178.1298933252657;
-	Mon, 28 Feb 2011 14:47:32 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.119.207 with HTTP; Mon, 28 Feb 2011 14:47:32 -0800 (PST)
-In-Reply-To: <AANLkTin+kSSQr8FHwGHA0znzWDxUfQoY-=-0K8Fv0PKj@mail.gmail.com>
-References: <AANLkTiknqQ6xLj8LFv4=17ymwSbVhD3C9kVe2qkviXhX@mail.gmail.com>
-	<1298664057.3818.0.camel@lenovo.internal.reciva.com>
-	<AANLkTin2WuKF=f_aOzi=28FmVTaxFVJa0uNb9TjfL2SB@mail.gmail.com>
-	<1298666406.3818.4.camel@lenovo.internal.reciva.com>
-	<AANLkTinUjtis22ZnLaP7uc0fa9nzxvhWod2uv43ZcJH=@mail.gmail.com>
-	<1298669695.3818.5.camel@lenovo.internal.reciva.com>
-	<AANLkTi=afktV1HC4Jdq_ammNdA+h4iMAWdJT809s+LMv@mail.gmail.com>
-	<1298905700.23547.6.camel@phil-desktop>
-	<AANLkTimyU4bSm9tM2LO5bMoqiFQqZXxt5Js7fg0B_HhJ@mail.gmail.com>
-	<1298913422.23547.20.camel@phil-desktop>
-	<AANLkTimomznky1rBn5QTqzS16O6Lk3VxHUx1pG+ULe3v@mail.gmail.com>
-	<AANLkTikRm=aL7sgc2wNftMGhNsOiXbSyoaht4Yk_2uqZ@mail.gmail.com>
-	<AANLkTin2MszEwNwiNQuZ+uWBFE5Gd_Coq08AfRLF1dqc@mail.gmail.com>
-	<AANLkTin+kSSQr8FHwGHA0znzWDxUfQoY-=-0K8Fv0PKj@mail.gmail.com>
-Date: Mon, 28 Feb 2011 22:47:32 +0000
-X-Google-Sender-Auth: i1NFVRycYtrWxjLZ9NpYg_-t8SU
-Message-ID: <AANLkTimSCzQgKRND_CaH+52nSdDzVkiu4wsdZRnvg+Z6@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Missing GLIBC_<version> tags on binaries
+In-Reply-To: <ik541d$nb4$1@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH] evas: disable cpu neon support for palmpre machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,39 +57,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2011 22:49:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 01 Mar 2011 01:10:04 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Mon, Feb 28, 2011 at 22:43, Khem Raj <raj.khem@gmail.com> wrote:
-> On Mon, Feb 28, 2011 at 2:27 PM, Otavio Salvador
-> <otavio@ossystems.com.br> wrote:
->> On Mon, Feb 28, 2011 at 22:19, Khem Raj <raj.khem@gmail.com> wrote:
->> ...
->>> Does -pthread get passed to linking step too or not. if it does then
->>> it might the order at which libpthread appears and linker picks the
->>> symbols from.
->>
->> It is done as suggested by gcc docs. It is passed on CFLAGS and
->> supposely gcc ought to take care of adding it to linking flags
->> automatically. No?
->
-> gcc could be used for linking too and then it should consider the LDFLAGS
-> CFLAGS are for compiling.
+On (24/02/11 09:14), Koen Kooi wrote:
+> > I already saw Koen's commit but nevertheless someone should try to find out 
+> > why Neon makes such troubles on our arm targets. 
+> 
+> In my case, the ASM is written with gcc 4.5 and binutils 2.20 in mind,
+> so the constraints are a bit different, resulting in misrendered buttons.
+> I can't say what your problem with the palm is, probably a buggy kernel.
+> 
 
-From gcc manpage:
+hmm I can have a look at the code if you like.
 
-       -pthread
-           Adds support for multithreading with the pthreads library.
-This option sets flags for both the preprocessor and linker.
-
-It seems to me that it sets both automatically, in this case.
-
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+-- 
+-Khem
 
 
