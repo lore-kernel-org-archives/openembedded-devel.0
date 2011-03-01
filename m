@@ -1,32 +1,47 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PuMyN-0007wf-Jk
+	(envelope-from <otavio.salvador@gmail.com>) id 1PuNX7-0000LS-Vv
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Mar 2011 11:38:31 +0100
-Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1PuMwz-0004KG-LY by authid <stefan@sostec.de> with cram_md5
+	Tue, 01 Mar 2011 12:14:26 +0100
+Received: by bwz10 with SMTP id 10so4448409bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Mar 2011 11:37:07 +0100
-Received: from stefan by excalibur.local with local (Exim 4.74)
-	(envelope-from <stefan@excalibur.local>) id 1PuMwy-00039E-DD
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Mar 2011 11:37:04 +0100
-Date: Tue, 1 Mar 2011 11:37:04 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110301103704.GC6918@excalibur.local>
+	Tue, 01 Mar 2011 03:12:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=dFjHA9e3vHXPK2QVq99Vn2m0wjZAclc9YfUkPQOwafk=;
+	b=Sq5Le4KTGe0OaIWFASRQhMLs0j35n46m/O34CrmtYVjrEIt6MKnl3o201KaplYWcyM
+	vdJVvtSNEWi6NcqtWMoVMe7DZu3T76L+yQ2IJf5zTkiv9YF9F7xIVR/s0CAFHOn2pYps
+	ctn8pMbN9WVwH4a8YTMmQZGXLhfXb3vbQemVI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=gj6lLWa9XRb3KXw15ViZMHG0KZb0siYmAmu9lJmng1VHXnLVVTguoUwdH3TQDmOI2e
+	HhTrQd1Land+uzdPN/TWjCNInhGF3LBWBJQaFrK2h1lG7oTF5jaEGc1BdWmsKgzqhfw8
+	15lzYgOSfRlk4Hdkj+w9UJYK6eiTLgxjE7X1Q=
 MIME-Version: 1.0
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
-	autolearn=ham version=3.2.5
-Subject: Recent problems with host library leakage into the build
+Received: by 10.204.140.208 with SMTP id j16mr5870340bku.151.1298977977435;
+	Tue, 01 Mar 2011 03:12:57 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.119.207 with HTTP; Tue, 1 Mar 2011 03:12:57 -0800 (PST)
+In-Reply-To: <20110301024025.GB651@sakrah.homelinux.org>
+References: <1298466445-16486-1-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-2-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-3-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-4-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-5-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-6-git-send-email-otavio@ossystems.com.br>
+	<1298468511.2178.430.camel@phil-desktop>
+	<AANLkTim1EdeGgyy3siyL99ugY-v=uqW_v4MRHJV0evq6@mail.gmail.com>
+	<20110301024025.GB651@sakrah.homelinux.org>
+Date: Tue, 1 Mar 2011 11:12:57 +0000
+X-Google-Sender-Auth: x_FYIpFFw9R9fUM5__C8IrjdB0M
+Message-ID: <AANLkTikY6D008fHAkOh2zR7N+9a++5kOAB3S3bP2VWz9@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org, Phil Blundell <philb@gnu.org>
+Subject: Re: [PATCH 05/14] cmake.bbclass: use 2.8 modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,41 +55,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Mar 2011 10:38:31 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 01 Mar 2011 11:14:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello.
+On Tue, Mar 1, 2011 at 02:40, Khem Raj <raj.khem@gmail.com> wrote:
+> On (23/02/11 13:47), Otavio Salvador wrote:
+...
+>> I see noone using cmake 2.6.
+>>
+>> In any case cmake will know the "internal" modules directory by itself
+>> so it works even if this value doesn't match. This is where it is
+>> going to look as fallback and I was using 2.8 without 2.6 for long
+>> time without noticing any issue.
+>>
+>> This seems safe. We could drop the CMAKE_MODULE_PATH if preferred. I
+>> just fixed it to 2.8 to reflect the current default one.
+>
+> yeah make it portable for future if no one is using cmake 2.6
 
-I just stumbled over two problems in the testing-release bracnh that have wrong
-path to the libs while linking the binaries and fail due to ld not being happy
-to link x86_64 with ARM :)
+I did not understand what you meant. You mean to drop CMAKE_MODULE_PATH?
 
-openjdk-6_6b18-1.8:
-
-| arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon
--mfloat-abi=softfp -mthumb-interwork -mno-thumb
---sysroot=/home/stefan/oe-dev/build/tmp/sysroots/armv7a-angstrom-linux-gnueabi
--shared  -Wl,--whole-archive ../../src/fdlibm/.libs/libfdlibm.a
-../../src/mm/.libs/libmm.a ../../src/native/.libs/libnative.a
-../../src/threads/.libs/libthreads.a ../../src/toolbox/.libs/libtoolbox.a
-../../src/vm/.libs/libvm.a ../../src/vmcore/.libs/libvmcore.a
--Wl,--no-whole-archive  -L/usr/lib -lz -lpthread -ldl  -march=armv7-a
--mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb
--Wl,--version-script=../../contrib/mapfile-vers-product -Wl,-O1
--Wl,--hash-style=gnu -Wl,-soname -Wl,libjvm.so -o .libs/libjvm.so
-| /usr/lib/libz.so: file not recognized: File format not recognized
-| collect2: ld returned 1 exit status
-| libtool: install: error: relink `libjvm.la' with the above command before
-installing it
-
-I imagine that I have seen something similar for freetype, but I can't reproduce
-it right now.
-
-Anyone an idea what causes this? If not I'm going to bisect it. Its just
-painful as openjdk needs tons of time to build.
-
-regards
-Stefan Schmidt
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
