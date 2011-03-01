@@ -1,43 +1,23 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PuTk8-0004Ed-5J
+	(envelope-from <philb@gnu.org>) id 1PuTmg-0004Jz-3A
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Mar 2011 18:52:16 +0100
-Received: by bwz10 with SMTP id 10so4783718bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Mar 2011 09:50:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=V3K9civ61YOJgRntWsHbc3Yu+785xlAsErIK5vB+cZE=;
-	b=aSNCnByn3nXoTvf7m3UP18QcIjQb/0CFtF27fuRUksbYKIhvUY2f03drhpqzXwd6qG
-	PjnyCBwzPNJhTogPGAzMcgpYxw5UiaCXkCyLxNs6IA7MnsOG9u1CPrnbk9sv0o5k0QOL
-	fbSd3g+7lyPyVIpxKzXr6RO5J1gyNbCV/15UE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=JvmduLQAhu7D5dy5ap1AL6X4OfSJh89Tww1Ax90EtXkbe+7SPOvIIFqnKccrpEgSA4
-	T/gjs89TuVlvYcbW3pBGA1ZG7+ypGr8c1Zarviec2mp/PEsEs8t5TP2qg0lmQ2Ix7E2M
-	V/QWHwsIzu0q2ZBCBnHRpPAZA5LgE0yq15LQo=
-MIME-Version: 1.0
-Received: by 10.204.81.72 with SMTP id w8mr6357689bkk.205.1299001848129; Tue,
-	01 Mar 2011 09:50:48 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.119.207 with HTTP; Tue, 1 Mar 2011 09:50:46 -0800 (PST)
-In-Reply-To: <4D6D2F3F.7060403@mentor.com>
-References: <1298970609-4974-1-git-send-email-Martin.Jansa@gmail.com>
-	<4D6D19AD.5010505@mentor.com>
-	<AANLkTinXnoSaJDqBSMHp2V0xA1Wbku1ktx3UKh37KV8=@mail.gmail.com>
-	<4D6D2F3F.7060403@mentor.com>
-Date: Tue, 1 Mar 2011 17:50:46 +0000
-X-Google-Sender-Auth: YFONF0kcGm25i9SaM35FtpXyBGA
-Message-ID: <AANLkTik7Cm2P6KL5aRDVf4sOUGsnAbpACyS+PucRpHiX@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Tom Rini <tom_rini@mentor.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] sane-toolchain-*: add -g to FULL_OPTIMIZATION to make -dbg packages more usefull
+	Tue, 01 Mar 2011 18:54:54 +0100
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1PuTlJ-0007MT-TE
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Mar 2011 18:53:30 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1299001532-3260-2-git-send-email-GNUtoo@no-log.org>
+References: <1299001532-3260-1-git-send-email-GNUtoo@no-log.org>
+	<1299001532-3260-2-git-send-email-GNUtoo@no-log.org>
+Date: Tue, 01 Mar 2011 17:58:59 +0000
+Message-ID: <1299002339.23547.117.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: [PATCH] netbase and opkg: reorder init scripts to make networking come up at first boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,30 +31,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Mar 2011 17:52:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 01 Mar 2011 17:54:54 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 1, 2011 at 17:39, Tom Rini <tom_rini@mentor.com> wrote:
-> On 03/01/2011 10:03 AM, Otavio Salvador wrote:
->> Having -g shouldn't hurt since the debugging symbols end up on the
->> -dbg packages. Why having it "disabled" by default?
->
-> In the case of host packages, I disable debug symbols (don't want, takes =
-up
-> space when shipping). =A0In the case of target stuff, we may want more de=
-bug
-> info to be available. =A0Or one may want to have less because again, it t=
-akes
-> up space when shipping.
+On Tue, 2011-03-01 at 18:45 +0100, Denis 'GNUtoo' Carikli wrote:
+> Without that fix, usb0 doesn't come up at first boot
+>   (tested on the bug machine, with Angstrom on a console-image).
+> 
+> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 
-I see but this could be overriden by distro, couldn't it?
+That sounds like it's just papering over some kind of problem in
+netbase.  What exactly stops usb0 from working with the previous
+arrangement?
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+p.
+
+
 
 
