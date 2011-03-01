@@ -1,51 +1,39 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PuFWL-00007R-E3
+	(envelope-from <jefro.net@gmail.com>) id 1PuG7B-0000pR-Oi
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Mar 2011 03:41:05 +0100
-Received: by pvc30 with SMTP id 30so704021pvc.6
+	Tue, 01 Mar 2011 04:19:09 +0100
+Received: by fxm8 with SMTP id 8so4218318fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Feb 2011 18:39:34 -0800 (PST)
+	Mon, 28 Feb 2011 19:17:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id
-	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:content-transfer-encoding:in-reply-to
-	:user-agent; bh=4i3GlOvMDBbempjFdi0lOOMQz7Jik5b28ELchiZBC7g=;
-	b=xIr36sxxm4KKaqt2WDc/jLtRta6GoT2Bf8807BpZyBOg1ITws58tPKN8qI0bQM1JS7
-	g1PAhTFlKMZVKJjkxazfay+WQBLwM+32DKzEmQsmCv4zEeiLJaK74XogWGIeiBM/0eET
-	3S8zKpJrW76k9SB0FbICbX3kmHSoWNaWeSjDc=
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=oK1qaNDEBQ+LNT2jbCgGOwehUpru4js8urFojLFJILk=;
+	b=IZK/+vGSb/qGotQPoZQoZ49DoZuU0LvIkZmXFZWt8+nZyd7ilPHdsjEnpeEv4Hm0iI
+	Q3oUEruRVXqin1Yi/e7cBRfAeAw7ym23rZKs3QBAVrA0yErLr3YBuEcSfEBtGeF3dOxT
+	gD/H2QA+sNOOSbDRPnFOloB5B3DTq2iUjrpSg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	b=an+4Ra8YOlM+Vf7WRzs4e8AICIQSvctKUWcxnne6e5ui1+nS90/QvsDpSzJoJfvfrM
-	Yfag/gznYnGQHB6rH2c4fkcl0oZgqbhTK4vUXZdAWXZW5F1zA/jL1nUnodrsGStA83mp
-	NW3rQfVUsjDGkci4twrgbczAg5MoXUJRdeExw=
-Received: by 10.142.245.1 with SMTP id s1mr4952965wfh.135.1298947173036;
-	Mon, 28 Feb 2011 18:39:33 -0800 (PST)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id w32sm6810956wfh.7.2011.02.28.18.39.30
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 28 Feb 2011 18:39:31 -0800 (PST)
-Date: Mon, 28 Feb 2011 18:40:25 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110301024025.GB651@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org,
-	Phil Blundell <philb@gnu.org>
-References: <1298466445-16486-1-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-2-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-3-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-4-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-5-git-send-email-otavio@ossystems.com.br>
-	<1298466445-16486-6-git-send-email-otavio@ossystems.com.br>
-	<1298468511.2178.430.camel@phil-desktop>
-	<AANLkTim1EdeGgyy3siyL99ugY-v=uqW_v4MRHJV0evq6@mail.gmail.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	b=UwcljSRYWMKknHvFXIOXPLiOev4q2o++OGild+iLaLgLOVJUKCK7jtXtc1vMJXusH1
+	HplN3qlexH6JQ/b3MKoM2nKKeQuRhXEFCUYP/cki43l47iOcaQTUXGJJHsXFXQkQpAxF
+	chdXusTE899o+UdMDBInSrekfC5i7uGsZDEG0=
 MIME-Version: 1.0
-In-Reply-To: <AANLkTim1EdeGgyy3siyL99ugY-v=uqW_v4MRHJV0evq6@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH 05/14] cmake.bbclass: use 2.8 modules
+Received: by 10.223.83.8 with SMTP id d8mr7459325fal.94.1298949463448; Mon, 28
+	Feb 2011 19:17:43 -0800 (PST)
+Sender: jefro.net@gmail.com
+Received: by 10.223.108.194 with HTTP; Mon, 28 Feb 2011 19:17:43 -0800 (PST)
+In-Reply-To: <ik7sp2$9g$2@dough.gmane.org>
+References: <20110224231001.GC11390@denix.org>
+	<ik7sp2$9g$2@dough.gmane.org>
+Date: Mon, 28 Feb 2011 19:17:43 -0800
+X-Google-Sender-Auth: 8jNTgJ-t7H_LfuTrTrHnczni8V0
+Message-ID: <AANLkTincPsSAJ11+Avg1mjurqzt28V5ZOtijrVYHqmA7@mail.gmail.com>
+From: Jeff Osier-Mixon <jefro@jefro.net>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: US OEDEM/OEDAM in April?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,46 +47,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Mar 2011 02:41:05 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 01 Mar 2011 03:19:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On (23/02/11 13:47), Otavio Salvador wrote:
-> On Wed, Feb 23, 2011 at 13:41, Phil Blundell <philb@gnu.org> wrote:
-> > On Wed, 2011-02-23 at 13:07 +0000, Otavio Salvador wrote:
-> >> -  echo "set( CMAKE_MODULE_PATH ${STAGING_DIR_NATIVE}/usr/share/cmake-2.6/Modules/ )" >> ${WORKDIR}/toolchain.cmake
-> >> +  echo "set( CMAKE_MODULE_PATH ${STAGING_DIR_NATIVE}/usr/share/cmake-2.8/Modules/ )" >> ${WORKDIR}/toolchain.cmake
+Hi all - I have asked the Linux Foundation if there is a conference room
+available over the weekend between Collab and ELC in case a OEDAM happens.
+ I'll report back when I hear a response.
+
+The Yocto BoF that is planned for ELC could also be a Yocto/ELC BoF although
+it would not be a working meeting.
+
+On Fri, Feb 25, 2011 at 1:29 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
+
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 25-02-11 00:10, Denys Dmytriyenko wrote:
+> > All,
 > >
-> > This seems a bit fragile (and, presumably, is bad news for anybody who
-> > is still using cmake 2.6 for any reason).  Isn't there any way to
-> > automatically select the version that matches
-> > ${STAGING_BINDIR_NATIVE}/cmake or whatever?
-> 
-> I see noone using cmake 2.6.
-> 
-> In any case cmake will know the "internal" modules directory by itself
-> so it works even if this value doesn't match. This is where it is
-> going to look as fallback and I was using 2.8 without 2.6 for long
-> time without noticing any issue.
-> 
-> This seems safe. We could drop the CMAKE_MODULE_PATH if preferred. I
-> just fixed it to 2.8 to reflect the current default one.
-
-yeah make it portable for future if no one is using cmake 2.6
-
-> 
-> -- 
-> Otavio Salvador                             O.S. Systems
-> E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-> Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
-> 
+> > We had previously discussed the possibility of holding US-based OEDEM (or
+> is
+> > it called OEDAM then?) in addition to our regular Fall OEDEM in Europe.
+> Is
+> > there still any interest in this?
+> >
+> > There is Embedded Linux Conference in San Francisco coming up in April,
+> along
+> > with few other Linux Foundation sponsored or organized events right
+> before or
+> > right after ELC. As some of the OE developers are planning on coming to
+> ELC,
+> > should we try to schedule a day or two for OEDEM and try to resolve some
+> of
+> > the pending organizational and technical issues face to face?
+>
+> The TSC is trying to plan a meetup around Collab/ELC, so a OEDAM would
+> be good to have as well.
+>
+> regards,
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFNZ3ZiMkyGM64RGpERAs2HAKCXZnqyUEHDM+WOcObi1pX8RiOE6ACfQwZa
+> 3LHdOKIpzeru6xnKFaTaa38=
+> =KDoC
+> -----END PGP SIGNATURE-----
+>
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
 
 -- 
--Khem
-
+Jeff Osier-Mixon
+Yocto Community Manager @Intel
 
