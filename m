@@ -1,49 +1,51 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PuE6F-0006nw-VI
+	(envelope-from <raj.khem@gmail.com>) id 1PuFWL-00007R-E3
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Mar 2011 02:10:04 +0100
-Received: by pzk12 with SMTP id 12so695208pzk.6
+	Tue, 01 Mar 2011 03:41:05 +0100
+Received: by pvc30 with SMTP id 30so704021pvc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Feb 2011 17:08:37 -0800 (PST)
+	Mon, 28 Feb 2011 18:39:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id
+	h=domainkey-signature:date:from:to:cc:subject:message-id
 	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:in-reply-to:user-agent;
-	bh=BFBHJlo0Q105rukAB8ltNb2eIN1V3LlSTteYp8IPnOY=;
-	b=lJ92FT0diHKWdNVZpAtIf3DACkRZzL2PoYihcRMAfA3MyHp6BjcTeow2xDhNSgUfv+
-	CO0KbfDA9gF6y2RlZY98qb7zxcY+ztD7pdAJLk2ih9cpf4igy9Sn4bKT1kD2HKIs4qvX
-	7xjICarrLCz9Ks4u1+fBdL2X2qWWHyoblNFC4=
+	:content-disposition:content-transfer-encoding:in-reply-to
+	:user-agent; bh=4i3GlOvMDBbempjFdi0lOOMQz7Jik5b28ELchiZBC7g=;
+	b=xIr36sxxm4KKaqt2WDc/jLtRta6GoT2Bf8807BpZyBOg1ITws58tPKN8qI0bQM1JS7
+	g1PAhTFlKMZVKJjkxazfay+WQBLwM+32DKzEmQsmCv4zEeiLJaK74XogWGIeiBM/0eET
+	3S8zKpJrW76k9SB0FbICbX3kmHSoWNaWeSjDc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	b=YYsYSuSZcVhLB05Q6yXXqTggl3ZltkXhornOIl5F98V9/rWhsNphGFxHAbWP2kB23X
-	mtaHE6aifi03YYmEPD9NsnbfvlXeSJmBh7XKRp18zrHnkG/1ExrjENZ//iiOHuFJ3zzj
-	fOlnziPuAYNn0mu4ErOlpQvB2VLnqGvoa2JJY=
-Received: by 10.142.188.8 with SMTP id l8mr4873979wff.272.1298941717142;
-	Mon, 28 Feb 2011 17:08:37 -0800 (PST)
+	h=date:from:to:cc:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	b=an+4Ra8YOlM+Vf7WRzs4e8AICIQSvctKUWcxnne6e5ui1+nS90/QvsDpSzJoJfvfrM
+	Yfag/gznYnGQHB6rH2c4fkcl0oZgqbhTK4vUXZdAWXZW5F1zA/jL1nUnodrsGStA83mp
+	NW3rQfVUsjDGkci4twrgbczAg5MoXUJRdeExw=
+Received: by 10.142.245.1 with SMTP id s1mr4952965wfh.135.1298947173036;
+	Mon, 28 Feb 2011 18:39:33 -0800 (PST)
 Received: from sakrah.homelinux.org
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id w19sm6717711wfd.20.2011.02.28.17.08.34
+	by mx.google.com with ESMTPS id w32sm6810956wfh.7.2011.02.28.18.39.30
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 28 Feb 2011 17:08:35 -0800 (PST)
-Date: Mon, 28 Feb 2011 17:09:25 -0800
+	Mon, 28 Feb 2011 18:39:31 -0800 (PST)
+Date: Mon, 28 Feb 2011 18:40:25 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110301010925.GA30622@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <4D51B81D.8000800@mentor.com>
-	<AANLkTikbfyoZfnJq9k1fSkMVMkReNw0G8APuXjc_rTyY@mail.gmail.com>
-	<iium4d$gau$1@dough.gmane.org> <20110209193129.GA15397@nirvana>
-	<4D52EEE5.9030309@mentor.com>
-	<AANLkTin0nJfcj1wFiYcbXLyLa9tk_Dy8yn8Lp3=PGNHC@mail.gmail.com>
-	<4D53272F.1020400@mentor.com> <1298454891.3892.3.camel@mattotaupa>
-	<20110224053346.GA15439@nirvana> <ik541d$nb4$1@dough.gmane.org>
+Message-ID: <20110301024025.GB651@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org,
+	Phil Blundell <philb@gnu.org>
+References: <1298466445-16486-1-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-2-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-3-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-4-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-5-git-send-email-otavio@ossystems.com.br>
+	<1298466445-16486-6-git-send-email-otavio@ossystems.com.br>
+	<1298468511.2178.430.camel@phil-desktop>
+	<AANLkTim1EdeGgyy3siyL99ugY-v=uqW_v4MRHJV0evq6@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <ik541d$nb4$1@dough.gmane.org>
+In-Reply-To: <AANLkTim1EdeGgyy3siyL99ugY-v=uqW_v4MRHJV0evq6@mail.gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH] evas: disable cpu neon support for palmpre machine
+Subject: Re: [PATCH 05/14] cmake.bbclass: use 2.8 modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,20 +59,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Mar 2011 01:10:04 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 01 Mar 2011 02:41:05 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On (24/02/11 09:14), Koen Kooi wrote:
-> > I already saw Koen's commit but nevertheless someone should try to find out 
-> > why Neon makes such troubles on our arm targets. 
+On (23/02/11 13:47), Otavio Salvador wrote:
+> On Wed, Feb 23, 2011 at 13:41, Phil Blundell <philb@gnu.org> wrote:
+> > On Wed, 2011-02-23 at 13:07 +0000, Otavio Salvador wrote:
+> >> -  echo "set( CMAKE_MODULE_PATH ${STAGING_DIR_NATIVE}/usr/share/cmake-2.6/Modules/ )" >> ${WORKDIR}/toolchain.cmake
+> >> +  echo "set( CMAKE_MODULE_PATH ${STAGING_DIR_NATIVE}/usr/share/cmake-2.8/Modules/ )" >> ${WORKDIR}/toolchain.cmake
+> >
+> > This seems a bit fragile (and, presumably, is bad news for anybody who
+> > is still using cmake 2.6 for any reason).  Isn't there any way to
+> > automatically select the version that matches
+> > ${STAGING_BINDIR_NATIVE}/cmake or whatever?
 > 
-> In my case, the ASM is written with gcc 4.5 and binutils 2.20 in mind,
-> so the constraints are a bit different, resulting in misrendered buttons.
-> I can't say what your problem with the palm is, probably a buggy kernel.
+> I see noone using cmake 2.6.
 > 
+> In any case cmake will know the "internal" modules directory by itself
+> so it works even if this value doesn't match. This is where it is
+> going to look as fallback and I was using 2.8 without 2.6 for long
+> time without noticing any issue.
+> 
+> This seems safe. We could drop the CMAKE_MODULE_PATH if preferred. I
+> just fixed it to 2.8 to reflect the current default one.
 
-hmm I can have a look at the code if you like.
+yeah make it portable for future if no one is using cmake 2.6
+
+> 
+> -- 
+> Otavio Salvador                             O.S. Systems
+> E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+> Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 -- 
 -Khem
