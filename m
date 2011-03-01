@@ -1,34 +1,33 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PuTWh-0003xy-Qd for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Mar 2011 18:38:23 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PuTVK-0000kv-7j for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Mar 2011 18:36:58 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Mar 2011 18:36:58 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Mar 2011 18:36:58 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 01 Mar 2011 18:36:46 +0100
-Message-ID: <ikjare$nk1$1@dough.gmane.org>
-References: <1298991314-11065-1-git-send-email-stefan@buglabs.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1298991314-11065-1-git-send-email-stefan@buglabs.net>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] angstrom-jalimo.conf: Bump openjdk version to include security and build fixes
+	(envelope-from <Tom_Rini@mentor.com>) id 1PuTZB-00041h-Pt
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Mar 2011 18:40:57 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PuTXm-0005U9-G9 from Tom_Rini@mentor.com ;
+	Tue, 01 Mar 2011 09:39:30 -0800
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Tue, 1 Mar 2011 09:39:30 -0800
+Received: from [172.30.80.189] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
+	with Microsoft SMTP Server id 14.1.270.1;
+	Tue, 1 Mar 2011 09:39:29 -0800
+Message-ID: <4D6D2F3F.7060403@mentor.com>
+Date: Tue, 1 Mar 2011 10:39:11 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
+To: Otavio Salvador <otavio@ossystems.com.br>
+References: <1298970609-4974-1-git-send-email-Martin.Jansa@gmail.com>	<4D6D19AD.5010505@mentor.com>
+	<AANLkTinXnoSaJDqBSMHp2V0xA1Wbku1ktx3UKh37KV8=@mail.gmail.com>
+In-Reply-To: <AANLkTinXnoSaJDqBSMHp2V0xA1Wbku1ktx3UKh37KV8=@mail.gmail.com>
+X-OriginalArrivalTime: 01 Mar 2011 17:39:30.0317 (UTC)
+	FILETIME=[9E7093D0:01CBD837]
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] sane-toolchain-*: add -g to FULL_OPTIMIZATION to make -dbg packages more usefull
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,44 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Mar 2011 17:38:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 01 Mar 2011 17:40:58 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 03/01/2011 10:03 AM, Otavio Salvador wrote:
+> On Tue, Mar 1, 2011 at 16:07, Tom Rini<tom_rini@mentor.com>  wrote:
+>> On 03/01/2011 02:10 AM, Martin Jansa wrote:
+> ...
+>> And personally I'd like to see the -g flag (for both target and the rest) be
+>> a variable that can be tweaked as needed (for more or less debug in the
+>> area).
+>
+> Having -g shouldn't hurt since the debugging symbols end up on the
+> -dbg packages. Why having it "disabled" by default?
 
-On 01-03-11 15:55, Stefan Schmidt wrote:
-> 
-> Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
+In the case of host packages, I disable debug symbols (don't want, takes 
+up space when shipping).  In the case of target stuff, we may want more 
+debug info to be available.  Or one may want to have less because again, 
+it takes up space when shipping.
 
-Acked-by: Koen Kooi <koen@dominion.thruhere.net>
-
-> ---
->  conf/distro/include/angstrom-jalimo.conf |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
-> 
-> diff --git a/conf/distro/include/angstrom-jalimo.conf b/conf/distro/include/angstrom-jalimo.conf
-> index 76cd5f1..9ba4c70 100644
-> --- a/conf/distro/include/angstrom-jalimo.conf
-> +++ b/conf/distro/include/angstrom-jalimo.conf
-> @@ -22,7 +22,7 @@ PREFERRED_VERSION_jamvm = "1.5.2"
->  PREFERRED_PROVIDER_swt3.4-gtk = "swt3.4-gtk"
->  PREFERRED_PROVIDER_classpath = "classpath"
->  
-> -PREFERRED_VERSION_openjdk-6-jre = "6b18-1.8"
-> +PREFERRED_VERSION_openjdk-6-jre = "6b18-1.8.5"
->  PREFERRED_VERSION_icedtea6-native = "1.7.6"
->  
->  # Stage JAR files not into ARCH related dirs
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNbS6tMkyGM64RGpERApIpAJ9Wm910RBhAKlsbPWFasi55GykyTQCgnHQA
-Hxo73vFcdPPs8eZIrLnGqpI=
-=VtmY
------END PGP SIGNATURE-----
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
