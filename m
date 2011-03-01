@@ -1,24 +1,27 @@
-Received: from bay0-omc4-s14.bay0.hotmail.com ([65.54.190.216])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <salehusman@hotmail.com>) id 1PuQx8-0006nc-8I
+	(envelope-from <stefan@datenfreihafen.org>) id 1PuR0I-0000r1-Gh
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Mar 2011 15:53:30 +0100
-Received: from BAY127-W20 ([65.54.190.199]) by bay0-omc4-s14.bay0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.4675); 
-	Tue, 1 Mar 2011 06:50:09 -0800
-Message-ID: <BAY127-W206420CDF3284BCE4FAF0CD8C10@phx.gbl>
-X-Originating-IP: [203.82.49.5]
-From: saleh usman <salehusman@hotmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-Date: Tue, 1 Mar 2011 19:50:09 +0500
-Importance: Normal
-In-Reply-To: <BAY127-W1192DA5D5640002E5C3260D8DE0@phx.gbl>
-References: <BAY127-W1192DA5D5640002E5C3260D8DE0@phx.gbl>
-MIME-Version: 1.0
-X-OriginalArrivalTime: 01 Mar 2011 14:50:09.0240 (UTC)
-	FILETIME=[F5F74580:01CBD81F]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: linux-libc-headers do fetch Failed
+	Tue, 01 Mar 2011 15:56:46 +0100
+Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
+	id 1PuQyt-0007dI-MY by authid <stefan@sostec.de> with cram_md5;
+	Tue, 01 Mar 2011 15:55:22 +0100
+Received: from stefan by excalibur.local with local (Exim 4.74)
+	(envelope-from <stefan@excalibur.local>)
+	id 1PuQyq-0002t2-9a; Tue, 01 Mar 2011 15:55:16 +0100
+From: Stefan Schmidt <stefan@buglabs.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  1 Mar 2011 15:55:14 +0100
+Message-Id: <1298991314-11065-1-git-send-email-stefan@buglabs.net>
+X-Mailer: git-send-email 1.7.4.1
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
+	autolearn=ham version=3.2.5
+Cc: Stefan Schmidt <stefan@buglabs.net>
+Subject: [PATCH] angstrom-jalimo.conf: Bump openjdk version to include security and build fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,51 +35,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Mar 2011 14:53:30 -0000
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 01 Mar 2011 14:56:46 -0000
 
 
+Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
+---
+ conf/distro/include/angstrom-jalimo.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/conf/distro/include/angstrom-jalimo.conf b/conf/distro/include/angstrom-jalimo.conf
+index 76cd5f1..9ba4c70 100644
+--- a/conf/distro/include/angstrom-jalimo.conf
++++ b/conf/distro/include/angstrom-jalimo.conf
+@@ -22,7 +22,7 @@ PREFERRED_VERSION_jamvm = "1.5.2"
+ PREFERRED_PROVIDER_swt3.4-gtk = "swt3.4-gtk"
+ PREFERRED_PROVIDER_classpath = "classpath"
+ 
+-PREFERRED_VERSION_openjdk-6-jre = "6b18-1.8"
++PREFERRED_VERSION_openjdk-6-jre = "6b18-1.8.5"
+ PREFERRED_VERSION_icedtea6-native = "1.7.6"
+ 
+ # Stage JAR files not into ARCH related dirs
+-- 
+1.7.4.1
 
 
-
-
-
-Hi
-I am building console-image and having problem while fetching liunx-libc-he=
-aders. Its giving an error of checksum mismatch. Kindly guide me how to res=
-olve this issue.console log follows
-
-NOTE: Running task 16 of 4329 (ID: 678=2C virtual:native:/oe/openembedded/r=
-ecipes/linux-libc-headers/linux-libc-headers_2.6.31.bb=2C do_fetch)
-NOTE: package linux-libc-headers-native-2.6.31-r6: task do_fetch: Started
-FATAL: linux-libc-headers-native-2.6.31: http://kernel.org/pub/linux/kernel=
-/v2.6/linux-2.6.31.tar.bz2 cannot check archive integrity
-ERROR: Error in executing python function in: /oe/openembedded/recipes/linu=
-x-libc-headers/linux-libc-headers_2.6.31.bb
-ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
-ERROR: Printing the environment of the function
-ERROR: Function base_do_fetch failed
-ERROR: TaskFailed event exception=2C aborting
-ERROR: Build of virtual:native:/oe/openembedded/recipes/linux-libc-headers/=
-linux-libc-headers_2.6.31.bb do_fetch failed
-NOTE: The checksums for '/oe/openembedded/sources/linux-2.6.31.tar.bz2' did=
- not match.
-Expected MD5: '84c077a37684e4cbfa67b18154390d8a' and Got: '9244b699b966804d=
-fc2e243c89b3ead4'
-Expected SHA256: '0acd83f7b85db7ee18c2b0b7505e1ba6fd722c36f49a8870a831c8516=
-60e3512' and Got: 'c522e06dc9639473f9962ed49b038ef5577e5d10cd2f4d9e4c62cdf3=
-223de089'
-NOTE: Your checksums:
-SRC_URI[md5sum] =3D "9244b699b966804dfc2e243c89b3ead4"
-SRC_URI[sha256sum] =3D "c522e06dc9639473f9962ed49b038ef5577e5d10cd2f4d9e4c6=
-2cdf3223de089"
-
-FATAL: linux-libc-headers-native-2.6.31: http://kernel.org/pub/linux/kernel=
-/v2.6/linux-2.6.31.tar.bz2 cannot check archive integrity
-
-Saelh Usman
-
-
- 		 	   		  =
 
