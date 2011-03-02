@@ -1,40 +1,37 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefro.net@gmail.com>) id 1PuqrR-00045g-Gt
+	(envelope-from <martin.jansa@gmail.com>) id 1PusBW-0002iN-KV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Mar 2011 19:33:23 +0100
-Received: by fxm8 with SMTP id 8so287228fxm.6
+	Wed, 02 Mar 2011 20:58:12 +0100
+Received: by fxm8 with SMTP id 8so377580fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Mar 2011 10:31:45 -0800 (PST)
+	Wed, 02 Mar 2011 11:56:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=9i/H6EOjzW6aAmRlRSB+O/5bnYo9uc2MSia5fBuWPYk=;
-	b=DtKJtiJzmXtyMFOzyQmiBCC8q6pcCt4oVfiPW6sBfd5yl+RfnB6pwD/1fm0IFmP3BQ
-	O937BdxjrvVgch1wn6vEKTFN5sVjmzA+JWgdnmf+U39v3DCh3mPbueJhErUUHom7g3wz
-	mnZZBlwN25bSPhUk2yB11Jx4xbydGx1kfD5ds=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=WnguIJJN/B/7zsFWmjhBsBON2GYazjwGCYenBHhiy1g=;
+	b=F1RofdDM2rmiZLxBvB+iSruORZh4WcXnqNAVVxa2YG3D4hzVgn9n0DGN5mzCRAGaoP
+	aL/epG5yS2uEiUimnU25nMIKFzyU/tv1Fsbt6CJdVDfFGhpyXI0jRjRe8AGEoAAts6r8
+	PFmJihg4BE/4Eo6iWf9g43NVa2/oacYXknNy0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	b=LuPQctCyB0NhmPV5vlIWknfTe9kDE5hUJzNnhsEKXS2OmgLRkFMaNlQUZG1epGy5Xj
-	5lQQx9vTWgjbe4NVdGzatb6XSGShPfMEiyeUYkMuDWDnAGZCILTZiu5UWh/rvlIagrfL
-	pKUt43JOFL+a0AgUZPz7rH1PAuZ4Iz8+Simew=
-MIME-Version: 1.0
-Received: by 10.223.86.12 with SMTP id q12mr285158fal.18.1299090686209; Wed,
-	02 Mar 2011 10:31:26 -0800 (PST)
-Sender: jefro.net@gmail.com
-Received: by 10.223.108.194 with HTTP; Wed, 2 Mar 2011 10:31:26 -0800 (PST)
-In-Reply-To: <20110302160006.GB10330@denix.org>
-References: <20110224231001.GC11390@denix.org> <ik7sp2$9g$2@dough.gmane.org>
-	<AANLkTincPsSAJ11+Avg1mjurqzt28V5ZOtijrVYHqmA7@mail.gmail.com>
-	<20110302160006.GB10330@denix.org>
-Date: Wed, 2 Mar 2011 10:31:26 -0800
-X-Google-Sender-Auth: EBuzuE-ZS7gMQ-0nSxm7iKGlmSM
-Message-ID: <AANLkTinQvXd+RXSD28MNGVgh5Z72mNQv7eeTffb8+sqA@mail.gmail.com>
-From: Jeff Osier-Mixon <jefro@jefro.net>
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=RMpOFYq1D7AJblS2loybr6pT+l04zpX2B6oC4BaQj7y2gNjsw3nSGvikVTOr4ud3QX
+	gT7Dk69OOd8cnDVxTppTq5rOLyujmLcsT5birK8xgtYUkVwrwwFGRZ9sWcBi1mnesthz
+	K9mRlB8E4xvBXTreinGP7fRWk4kxQQ+lTj3SU=
+Received: by 10.223.83.203 with SMTP id g11mr322094fal.137.1299095761335;
+	Wed, 02 Mar 2011 11:56:01 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id y3sm189191fai.38.2011.03.02.11.55.58
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 02 Mar 2011 11:55:58 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: US OEDEM/OEDAM in April?
+Date: Wed,  2 Mar 2011 20:55:53 +0100
+Message-Id: <1299095753-324-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+In-Reply-To: <1298970609-4974-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1298970609-4974-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [PATCHv2] sane-toolchain-*: define DEBUG_FLAGS and add it to FULL_OPTIMIZATION to make -dbg packages more usefull
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,106 +45,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Mar 2011 18:33:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 02 Mar 2011 19:58:13 -0000
 
-Hi Denys - OE now has a room at the conference on Sunday from 12-5,
-ostensibly for a TSC meeting but I expect it to be more of a general
-gathering, at least for part of the time.  There will also be a combined
-Yocto/OE BoF at ELC, but the schedule has not yet been finalized.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ conf/bitbake.conf                                  |    5 +++--
+ conf/distro/include/sane-toolchain-eglibc.inc      |   12 ++++++------
+ conf/distro/include/sane-toolchain-glibc.inc       |   10 +++++-----
+ conf/distro/include/sane-toolchain-uclibc.inc      |    6 +++---
+ .../include/sane-toolchain-uclinux-uclibc.inc      |    2 +-
+ 5 files changed, 18 insertions(+), 17 deletions(-)
 
-
-On Wed, Mar 2, 2011 at 8:00 AM, Denys Dmytriyenko <denis@denix.org> wrote:
-
-> On Mon, Feb 28, 2011 at 07:17:43PM -0800, Jeff Osier-Mixon wrote:
-> > Hi all - I have asked the Linux Foundation if there is a conference room
-> > available over the weekend between Collab and ELC in case a OEDAM
-> happens.
-> >  I'll report back when I hear a response.
->
-> Jeff,
->
-> Thanks for looking into it! Please let us know what you find out about the
-> conference room.
->
-> --
-> Denys
->
->
-> > The Yocto BoF that is planned for ELC could also be a Yocto/ELC BoF
-> although
-> > it would not be a working meeting.
-> >
-> > On Fri, Feb 25, 2011 at 1:29 AM, Koen Kooi <k.kooi@student.utwente.nl
-> >wrote:
-> >
-> > > -----BEGIN PGP SIGNED MESSAGE-----
-> > > Hash: SHA1
-> > >
-> > > On 25-02-11 00:10, Denys Dmytriyenko wrote:
-> > > > All,
-> > > >
-> > > > We had previously discussed the possibility of holding US-based OEDEM
-> (or
-> > > is
-> > > > it called OEDAM then?) in addition to our regular Fall OEDEM in
-> Europe.
-> > > Is
-> > > > there still any interest in this?
-> > > >
-> > > > There is Embedded Linux Conference in San Francisco coming up in
-> April,
-> > > along
-> > > > with few other Linux Foundation sponsored or organized events right
-> > > before or
-> > > > right after ELC. As some of the OE developers are planning on coming
-> to
-> > > ELC,
-> > > > should we try to schedule a day or two for OEDEM and try to resolve
-> some
-> > > of
-> > > > the pending organizational and technical issues face to face?
-> > >
-> > > The TSC is trying to plan a meetup around Collab/ELC, so a OEDAM would
-> > > be good to have as well.
-> > >
-> > > regards,
-> > >
-> > > Koen
-> > > -----BEGIN PGP SIGNATURE-----
-> > > Version: GnuPG v1.4.5 (Darwin)
-> > >
-> > > iD8DBQFNZ3ZiMkyGM64RGpERAs2HAKCXZnqyUEHDM+WOcObi1pX8RiOE6ACfQwZa
-> > > 3LHdOKIpzeru6xnKFaTaa38=
-> > > =KDoC
-> > > -----END PGP SIGNATURE-----
-> > >
-> > >
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> > >
-> >
-> >
-> >
-> > --
-> > Jeff Osier-Mixon
-> > Yocto Community Manager @Intel
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-
-
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index 0c11cdb..f23dd05 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -543,10 +543,11 @@ EXTRA_OEMAKE_prepend_task-compile = "${PARALLEL_MAKE} "
+ # Optimization flags.
+ ##################################################################
+ 
++DEBUG_FLAGS = "-g"
+ FULL_OPTIMIZATION = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2"
+-DEBUG_OPTIMIZATION = "-O -fno-omit-frame-pointer -g"
++DEBUG_OPTIMIZATION = "-O -fno-omit-frame-pointer ${DEBUG_FLAGS}"
+ SELECTED_OPTIMIZATION = "${@bb.data.getVar(['FULL_OPTIMIZATION', 'DEBUG_OPTIMIZATION'][bb.data.getVar('DEBUG_BUILD', d, 1) == '1'], d, 1)}"
+-BUILD_OPTIMIZATION = "-O2 -g"
++BUILD_OPTIMIZATION = "-O2 ${DEBUG_FLAGS}"
+ 
+ ##################################################################
+ # Bootstrap stuff.
+diff --git a/conf/distro/include/sane-toolchain-eglibc.inc b/conf/distro/include/sane-toolchain-eglibc.inc
+index daab0f8..d38ca5d 100644
+--- a/conf/distro/include/sane-toolchain-eglibc.inc
++++ b/conf/distro/include/sane-toolchain-eglibc.inc
+@@ -3,20 +3,20 @@
+ # eglibc:
+ # [23:00] oxo: glibc (any version) on sparc does not like (repeat me) "-Os"
+ 
+-FULL_OPTIMIZATION = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os"
+-FULL_OPTIMIZATION_pn-perl = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O1"
+-FULL_OPTIMIZATION_sparc = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2"
++FULL_OPTIMIZATION = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os ${DEBUG_FLAGS}"
++FULL_OPTIMIZATION_pn-perl = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O1 ${DEBUG_FLAGS}"
++FULL_OPTIMIZATION_sparc = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 ${DEBUG_FLAGS}"
+ 
+ # gcc 4.4 and 4.5 has a problem with 'leakage' into libgcc.a with -Os
+-FULL_OPTIMIZATION_powerpc = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2"
++FULL_OPTIMIZATION_powerpc = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 ${DEBUG_FLAGS}"
+ 
+ # JaMa: I promise to report bug upstream, but as it can take a while to fix it, I'll switch to -O2 here
+ # Tested with gcc-4.4.2 and gcc-4.4.3 on armv4t and armv5te and it fails with -Os, with gcc-4.3.3 it works OK with -Os
+ # Here is testcase, but you have to rebuild whole libqtxml to test it
+ # http://lists.shr-project.org/pipermail/shr-devel/2010-February/002169.html
+-FULL_OPTIMIZATION_pn-qt4-x11-free = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2"
++FULL_OPTIMIZATION_pn-qt4-x11-free = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 ${DEBUG_FLAGS}"
+ # This I've seen only on armv4t, it segfaults when called from pisi, but whole test unit suite can pass
+-FULL_OPTIMIZATION_pn-libsyncml = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2"
++FULL_OPTIMIZATION_pn-libsyncml = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 ${DEBUG_FLAGS}"
+ 
+ BUILD_OPTIMIZATION_pn-perl = "-O1"
+ BUILD_OPTIMIZATION_sparc = "-O2"
+diff --git a/conf/distro/include/sane-toolchain-glibc.inc b/conf/distro/include/sane-toolchain-glibc.inc
+index 770aa87..29c201b 100644
+--- a/conf/distro/include/sane-toolchain-glibc.inc
++++ b/conf/distro/include/sane-toolchain-glibc.inc
+@@ -7,14 +7,14 @@
+ # perl has some problems, see http://bugs.openembedded.net/show_bug.cgi?id=1616
+ # [23:00] oxo: glibc (any version) on sparc does not like (repeat me) "-Os"
+ 
+-FULL_OPTIMIZATION = "-fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2"
++FULL_OPTIMIZATION = "-fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2 ${DEBUG_FLAGS}"
+ 
+-FULL_OPTIMIZATION_pn-perl = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O1"
+-FULL_OPTIMIZATION_pn-glibc = "-fexpensive-optimizations -fomit-frame-pointer -O2"
+-FULL_OPTIMIZATION_sparc = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2"
++FULL_OPTIMIZATION_pn-perl = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O1 ${DEBUG_FLAGS}"
++FULL_OPTIMIZATION_pn-glibc = "-fexpensive-optimizations -fomit-frame-pointer -O2 ${DEBUG_FLAGS}"
++FULL_OPTIMIZATION_sparc = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 ${DEBUG_FLAGS}"
+ 
+ # gcc 4.4 and 4.5 has a problem with 'leakage' into libgcc.a with -Os
+-FULL_OPTIMIZATION_powerpc = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2"
++FULL_OPTIMIZATION_powerpc = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 ${DEBUG_FLAGS}"
+ 
+ BUILD_OPTIMIZATION_pn-perl = "-O1"
+ BUILD_OPTIMIZATION_pn-glibc = "-O2"
+diff --git a/conf/distro/include/sane-toolchain-uclibc.inc b/conf/distro/include/sane-toolchain-uclibc.inc
+index b61ee36..b51cdaf 100644
+--- a/conf/distro/include/sane-toolchain-uclibc.inc
++++ b/conf/distro/include/sane-toolchain-uclibc.inc
+@@ -23,12 +23,12 @@ PREFERRED_VERSION_uclibc-cross-intermediate ?= "${PREFERRED_UCLIBC_VERSION}"
+ 
+ #mess with compiler flags to use -Os instead of -O2
+ #Please see http://free-electrons.com/doc/embedded_linux_optimizations/img47.html for some more info
+-FULL_OPTIMIZATION = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe"
++FULL_OPTIMIZATION = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe ${DEBUG_FLAGS}"
+ BUILD_OPTIMIZATION += "-pipe"
+ 
+ # -Os compiled root file system does not boot for powerpc, root cause it still at large
+ # we use -O2 meanwhile
+-FULL_OPTIMIZATION_powerpc = "-O2 -pipe"
++FULL_OPTIMIZATION_powerpc = "-O2 -pipe ${DEBUG_FLAGS}"
+ 
+ #Gcc will die with 'internal consistency error when using the above optimizations
+ #with gcc-4.2.1-atmel.1.0.3 (and probably most other avr32 gcc ports).
+@@ -38,7 +38,7 @@ FULL_OPTIMIZATION_powerpc = "-O2 -pipe"
+ #it was removed while debugging an issue that ultimately turned out to be due
+ #to the ICE fixed by gcc-pr32889.patch.  It needs to be tested again. 
+ #Note that this testing was done without the gcc-pr32889.patch.
+-FULL_OPTIMIZATION_avr32 = "-Os -fomit-frame-pointer"
++FULL_OPTIMIZATION_avr32 = "-Os -fomit-frame-pointer ${DEBUG_FLAGS}"
+ 
+ TARGET_LINK_HASH_STYLE = "${@['-Wl,--hash-style=gnu',''][bb.data.getVar('TARGET_ARCH',d,1) in ['mips', 'mipsel', 'mips64', 'mips64el', 'avr32']]}"
+ 
+diff --git a/conf/distro/include/sane-toolchain-uclinux-uclibc.inc b/conf/distro/include/sane-toolchain-uclinux-uclibc.inc
+index a1e7df0..8ebaf15 100644
+--- a/conf/distro/include/sane-toolchain-uclinux-uclibc.inc
++++ b/conf/distro/include/sane-toolchain-uclinux-uclibc.inc
+@@ -9,7 +9,7 @@ USE_NLS_gcc-cross = "no"
+ 
+ #mess with compiler flags to use -Os instead of -O2
+ #Please see http://free-electrons.com/doc/embedded_linux_optimizations/img47.html for some more info
+-FULL_OPTIMIZATION = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe"
++FULL_OPTIMIZATION = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe ${DEBUG_FLAGS}"
+ BUILD_OPTIMIZATION = "-Os"
+ 
+ #Gcc will die with 'internal consistency error when using the above optimizations
 -- 
-Jeff Osier-Mixon
-Yocto Community Manager @Intel
+1.7.4.1
+
+
 
