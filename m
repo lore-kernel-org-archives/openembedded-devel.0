@@ -1,28 +1,34 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PuiKH-0003F4-Nk
+	(envelope-from <pespin.shar@gmail.com>) id 1PumES-0008MQ-45
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Mar 2011 10:26:33 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 7E502491278;
-	Wed,  2 Mar 2011 10:25:08 +0100 (CET)
-Received: from [10.32.10.2] ([10.32.10.2]) by exchange.intern.dresearch.de
-	with Microsoft SMTPSVC(6.0.3790.4675); 
-	Wed, 2 Mar 2011 10:25:08 +0100
-Message-ID: <4D6E0CF4.4040005@dresearch.de>
-Date: Wed, 02 Mar 2011 10:25:08 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.14) Gecko/20110221 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
+	Wed, 02 Mar 2011 14:36:48 +0100
+Received: by bwz10 with SMTP id 10so137508bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 02 Mar 2011 05:35:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=4HyKlgkGVIwwBPIFrABK/Jag7RVLuw7DpME+WG9elz8=;
+	b=IAGiCIpGGZrYgJrl4zas6uOiHWj1d35T6SexpHFfqOnpjD7WzeGiW6ycwaFyC+10L2
+	0ai2NrAQ09X2c4jDGgjBm2wtyD5L4MqKa2dK1RRtyMWp0kClhVvdgCgs6Q7G5lMm0Dnb
+	dSazHbqxPTPsMCgDi2J/HiTiSLM9jJYDJbTag=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=MKwphMG6pAlphJ+7JN860LyBDmKSseTAEt+/fYEjpN/eDpOtRlecpL/zEQzYLeeqLx
+	9nTED2YmNH0QAckMOLNMJN6WLIN44i55po7gr7as2wlTlkc4hjhjhmfBGj1lEtxYoczw
+	6Qs6+2Uq9m7fMEHhGK/XJ7D8qgPWq8RuWbXgU=
+Received: by 10.204.36.88 with SMTP id s24mr7380449bkd.68.1299072920767;
+	Wed, 02 Mar 2011 05:35:20 -0800 (PST)
+Received: from localhost.localdomain ([90.163.57.54])
+	by mx.google.com with ESMTPS id z18sm4163436bkf.20.2011.03.02.05.35.19
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 02 Mar 2011 05:35:20 -0800 (PST)
+From: Pau Espin Pedrol <pespin.shar@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4D64BD5E.6040805@dresearch.de> <4D6DF124.2080607@dresearch.de>
-	<AANLkTi=sJanB_o6LGmg=3-96=iDD8VMrM-DLp4EC+zBr@mail.gmail.com>
-In-Reply-To: <AANLkTi=sJanB_o6LGmg=3-96=iDD8VMrM-DLp4EC+zBr@mail.gmail.com>
-X-OriginalArrivalTime: 02 Mar 2011 09:25:08.0579 (UTC)
-	FILETIME=[B9144B30:01CBD8BB]
-Subject: Re: net-snmp-svn-r7.0 do_compile failed
+Date: Wed,  2 Mar 2011 14:35:26 +0100
+Message-Id: <1299072929-4465-1-git-send-email-pespin.shar@gmail.com>
+X-Mailer: git-send-email 1.7.2
+Subject: [PATCH 1/4] exocpslate.conf: add support for exoPC Slate tablet machine.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,103 +42,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Mar 2011 09:26:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 02 Mar 2011 13:36:48 -0000
 
-Am 02.03.2011 09:01, schrieb Khem Raj:
-> On Tue, Mar 1, 2011 at 11:26 PM, Steffen Sledz <sledz@dresearch.de> wro=
-te:
->> Am 23.02.2011 08:55, schrieb Steffen Sledz:
->>> Again a clean build:
->>>
->>> OE:hipox sledz@mobil-400-586:~/work/openembedded> bitbake net-snmp
->>> ...
->>>
->>> Build Configuration:
->>> BB_VERSION        =3D "1.12.0"
->>> METADATA_BRANCH   =3D "org.openembedded.dev"
->>> METADATA_REVISION =3D "8e4bd2f"
->>> TARGET_ARCH       =3D "arm"
->>> TARGET_OS         =3D "linux-gnueabi"
->>> MACHINE           =3D "hipox"
->>> DISTRO            =3D "angstrom"
->>> DISTRO_VERSION    =3D "2010.7-test-20110223"
->>> TARGET_FPU        =3D "soft"
->>>
->>> ...
->>> libtool: link: arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te -mtune=
-=3Darm926ej-s -Wl,-rpath-link -Wl,/home/sledz/work/OE-testing/tmp.6/sysro=
-ots/armv5te-angstrom-linux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=3Dgnu=
- -mthumb-interwork -mno-thumb -DNETSNMP_ENABLE_IPV6 -isystem/home/sledz/w=
-ork/OE-testing/tmp.6/sysroots/armv5te-angstrom-linux-gnueabi/usr/include =
--fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2 -gg=
-db2 -Ulinux -Dlinux=3Dlinux -Wall -Winline -Wstrict-prototypes -Wwrite-st=
-rings -Wcast-qual -Wno-char-subscripts -o .libs/snmpd .libs/snmpd.o -Wl,-=
-rpath-link -Wl,/home/sledz/work/OE-testing/tmp.6/sysroots/armv5te-angstro=
-m-linux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=3Dgnu  -L/home/sledz/wor=
-k/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/=
-net-snmp/agent/.libs -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-ang=
-strom-linux-gnueabi/net-snmp-svn-r7.0/net-snmp/agent/helpers/.libs
->>> -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnuea=
-bi/net-snmp-svn-r7.0/net-snmp/snmplib/.libs -L/home/sledz/work/OE-testing=
-/tmp.6/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib -L/home/sledz/work=
-/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/n=
-et-snmp/snmplib -L/home/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom=
--linux-gnueabi/net-snmp-svn-r7.0/net-snmp/agent/helpers ./.libs/libnetsnm=
-pagent.so helpers/.libs/libnetsnmphelpers.so ./.libs/libnetsnmpmibs.so /h=
-ome/sledz/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-s=
-nmp-svn-r7.0/net-snmp/agent/helpers/.libs/libnetsnmphelpers.so /home/sled=
-z/work/OE-testing/tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-=
-r7.0/net-snmp/agent/.libs/libnetsnmpagent.so /home/sledz/work/OE-testing/=
-tmp.6/work/armv5te-angstrom-linux-gnueabi/net-snmp-svn-r7.0/net-snmp/snmp=
-lib/.libs/libnetsnmp.so -ldl ../snmplib/.libs/libnetsnmp.so -lcrypto -lss=
-l
->>> ./.libs/libnetsnmpmibs.so: undefined reference to `pthread_create'
->>> collect2: ld returned 1 exit status
->>> make[1]: *** [snmpd] Error 1
->>
->> I did some research in this. This is a bug fixed upstream with svn rev=
-ision 18721[1].
->>
->> How can we handle this? Should we increase the SRCREV to a newer versi=
-on (which one)?
->>
->> Or should we create a patch backporting the fix? Then we need someone =
-who is more familiar with autotools (i failed here).
->=20
-> for svn recipe you can bump rev up
+Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com>
+---
+ conf/machine/exopcslate.conf |   42 ++++++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 42 insertions(+), 0 deletions(-)
+ create mode 100644 conf/machine/exopcslate.conf
 
-I tried to bump to some newer revs (19399/5.6, 19787/5.6.1, 20047/HEAD) b=
-ut ended up in some undefined referrence errors (nl_handle_destroy and nl=
-_handle_alloc) in all cases. :(
+diff --git a/conf/machine/exopcslate.conf b/conf/machine/exopcslate.conf
+new file mode 100644
+index 0000000..d7eb86b
+--- /dev/null
++++ b/conf/machine/exopcslate.conf
+@@ -0,0 +1,42 @@
++#@TYPE: Machine
++#@NAME: exocpslate
++#@DESCRIPTION: Machine configuration for the ExoPC Slate machine
++
++
++TARGET_ARCH = "i686"
++
++PREFERRED_VERSION_linux = "2.6.37"
++PREFERRED_PROVIDER_virtual/kernel = "linux"
++PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
++XSERVER = "xserver-xorg \
++        xserver-xorg-extension-glx \
++        xserver-xorg-extension-dri \
++        xf86-input-tslib \
++        xf86-input-evdev \
++        xf86-input-evtouch \
++        xf86-input-mouse \
++        xf86-input-keyboard \
++        xf86-video-fbdev \
++"
++
++
++KERNEL_IMAGETYPE = "bzImage"
++
++GLIBC_ADDONS = "nptl"
++GLIBC_EXTRA_OECONF = "--with-tls"
++
++IMAGE_FSTYPES ?= "tar.gz"
++IMAGE_DEVICE_TABLES = " \   
++  files/device_table-minimal.txt \
++  files/device_table_add-loop.txt \
++  files/device_table_add-scsi.txt \
++"
++
++MACHINE_FEATURES = "kernel26 apm alsa bluetooth wifi vfat phone screen touchscreen keyboard pci usbhost acpi ext2 ext3 ext4 x86"
++MACHINE_EXTRA_RRECOMMENDS = " kernel-modules"
++
++module_autoload_hci_usb = "hci_usb"
++module_autoload_g_ether = "g_ether"
++
++require conf/machine/include/tune-atom.inc
++
+-- 
+1.7.2
 
-So this needs some more attention.
-
-Jamie, you're listed as net-snmp maintainer. Can you look into this pleas=
-e.
-
-> and for others you can backport the
-> fix and you can backport it as it is ideally that patch should
-> have changed configure.ac and regenerated configure but they patched
-> configure instead. but its ok to patch configure here since
-> we do not regenerate configure for net-snmp recipe.
-
-As mentioned before i failed trying this. The patch does not apply withou=
-t modifications. :(
-
-Steffen
-
->> [1] http://net-snmp.svn.sourceforge.net/viewvc/net-snmp?view=3Drevisio=
-n&revision=3D18721
-
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
 
 
