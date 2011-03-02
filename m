@@ -1,46 +1,23 @@
-Received: from na3sys009aog114.obsmtp.com ([74.125.149.211])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <bengardiner@nanometrics.ca>) id 1PupxR-0003bi-Ry
+	(envelope-from <philb@gnu.org>) id 1Puq7n-0003oH-A3
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Mar 2011 18:35:30 +0100
-Received: from source ([209.85.220.179]) (using TLSv1) by
-	na3sys009aob114.postini.com ([74.125.148.12]) with SMTP
-	ID DSNKTW5/iQ5hYwlaZf+htak063ckPHTXenoG@postini.com;
-	Wed, 02 Mar 2011 09:34:04 PST
-Received: by mail-vx0-f179.google.com with SMTP id 38so154409vxc.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Mar 2011 09:34:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=nanometrics.ca; s=google;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=qDjflBPm5YcRb1ul4f9LTlZ783QIAo1iZOsh8Kvv4qQ=;
-	b=enjObq5ZfXqb1QNW8eH7CWbQvynh5VfFyhghNxziCq63XzaRknnY8kF6VsSXp9hJ95
-	WVfaoM0zS+Dp72LElSy67gFiRibfyN8WLc6Hv9UeJFt9A42tA5YXiVeHy2NQiedPR+Yi
-	o2mRhZ4wISwm9PLKHPIFEBwSKgaT8lEeZSXq0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=nanometrics.ca; s=google;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	b=M1f4byas6h1Z23wy1PnUXidtj+5WNbhKG2oT5Qvamn2Ts68cu6s9baTtnLYqeAltDE
-	oNs/mjluvk9+4JBiNbdx6a+tuOd3fNRJpqtb/WoRnTmoC15Dmiyt721eQ4rsW09zOVCe
-	BRgqz7YK3Z22wq3tEwOXPAn4qrSaVLzn8p1b8=
-MIME-Version: 1.0
-Received: by 10.52.88.225 with SMTP id bj1mr50238vdb.224.1299086705198; Wed,
-	02 Mar 2011 09:25:05 -0800 (PST)
-Received: by 10.52.167.193 with HTTP; Wed, 2 Mar 2011 09:25:05 -0800 (PST)
-In-Reply-To: <20110302171602.GO27067@edge>
+	Wed, 02 Mar 2011 18:46:11 +0100
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Puq6Q-0001EC-5H
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 02 Mar 2011 18:44:46 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <9a9ee76e6057e7dfe38af1d77b4ed7ffc9ff3775.1299076392.git.bengardiner@nanometrics.ca>
 References: <cover.1299076392.git.bengardiner@nanometrics.ca>
-	<4D6E75BD.7050005@mentor.com>
-	<AANLkTimwptJ9rS1mdDUcXxSwV5CXpgNH5O7hLtY2x5UF@mail.gmail.com>
-	<4D6E7A16.9000608@mentor.com> <20110302171602.GO27067@edge>
-Date: Wed, 2 Mar 2011 12:25:05 -0500
-Message-ID: <AANLkTi=KRdAKpTp_M9w++Z2nmLFSZVbq-YBWMPqsVyx6@mail.gmail.com>
-From: Ben Gardiner <bengardiner@nanometrics.ca>
-To: Denys Dmytriyenko <denys@ti.com>, Tom Rini <tom_rini@mentor.com>
-Cc: Andrea Galbusera <gizero@gmail.com>, Koen Kooi <koen@openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2 0/2] allow linux-lib-headers with external-toolchain-csl
+	<9a9ee76e6057e7dfe38af1d77b4ed7ffc9ff3775.1299076392.git.bengardiner@nanometrics.ca>
+Date: Wed, 02 Mar 2011 17:50:33 +0000
+Message-ID: <1299088233.23547.236.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: [PATCH v2 2/2] external-toolchain-csl: allow linux-libc-headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,50 +31,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Mar 2011 17:35:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 02 Mar 2011 17:46:11 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hi Tom and Denys,
+On Wed, 2011-03-02 at 10:05 -0500, Ben Gardiner wrote:
+> -	cp -a ${TOOLCHAIN_PATH}/${TARGET_SYS}/libc/usr/include/* ${STAGING_INCDIR}
+> +	rsync -a ${RSYNC_OPTS} ${TOOLCHAIN_PATH}/${TARGET_SYS}/libc/usr/include/* ${STAGING_INCDIR}
 
-On Wed, Mar 2, 2011 at 12:10 PM, Tom Rini <tom_rini@mentor.com> wrote:
->
-> It's all in now (and this spurred me to push something else I've been
-> meaning to for a while, adding in gdbserver and dropping do_stage)[...]
+If you want to exclude some files then it's probably better to use
+something like tar --exclude ... -cf - | tar -xf -.  (I think the
+--exclude option is in POSIX so any reasonable version of tar ought to
+have it.)  Or you could use some sort of "find | grep -v .. | xargs cp"
+construct to make a list of the files that you do want to copy.  Either
+of those is probably a better option than rsync.
 
-Ok, no worries then. I'm really glad that you found it useful, Tom and
-it's making its way to upstream, thanks.
+p.
 
-On Wed, Mar 2, 2011 at 12:10 PM, Tom Rini <tom_rini@mentor.com> wrote:
-> [...]but in
-> short, we just cp -a like before but now will rm -rf as needed.
-On Wed, Mar 2, 2011 at 12:12 PM, Denys Dmytriyenko <denys@ti.com> wrote:
-> Looks good to me, except:
->
-> 1. Why use rsync instead of cp? I think it's less portable that way.
 
-I had an inkling that my selection of rsync should have been defended
-in the commit messages :)
-
-In my own defense, I was concerned that the cp followed by an rm could
-remove from staging other headers that were installed into the correct
-locations -- rsync is my go-to for copying with exclusions.
-
-I'll remember that it is not portable enough next time around.
-
-On Wed, Mar 2, 2011 at 12:12 PM, Denys Dmytriyenko <denys@ti.com> wrote:
-> 2. I saw several linux-lib-headers instead of linux-libc-headers (missing 'c')
-On Wed, Mar 2, 2011 at 12:16 PM, Denys Dmytriyenko <denys@ti.com> wrote:
-> Argh, you left one linux-lib-headers in the comment... :)
-
-Oops. Sorry about that.
-
-Thanks again for picking up this patch.
-
-Best Regards,
-Ben Gardiner
-
----
-Nanometrics Inc.
-http://www.nanometrics.ca
 
 
