@@ -1,20 +1,38 @@
-Received: from rrcs-24-227-36-211.se.biz.rr.com ([24.227.36.211]
-	helo=mail.eoimaging.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <nharris@eoimaging.com>) id 1PusRo-0004aS-DE
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <raj.khem@gmail.com>) id 1Pusws-0007Ke-CF
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Mar 2011 21:15:00 +0100
-Received: from [192.168.0.194] ([::ffff:192.168.0.194]) (AUTH: LOGIN nharris)
-	by mail.eoimaging.com with esmtp; Wed, 02 Mar 2011 15:13:33 -0500
-	id 00208643.4D6EA4ED.0000646D
-Message-ID: <4D6EA4EC.8050000@eoimaging.com>
-Date: Wed, 02 Mar 2011 15:13:32 -0500
-From: Nathan Harris <nharris@eoimaging.com>
-Organization: Electro-Optical Imaging, Inc.
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+	Wed, 02 Mar 2011 21:47:06 +0100
+Received: by fxm8 with SMTP id 8so428000fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 02 Mar 2011 12:45:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=k49gOyriThdQ8R6EgIJ4TvfX5ExPfms0o8fYT93hdSc=;
+	b=i1WLCZ9Z4lx5oNCqUhi+JevqvEqBsknbuMdQmhNhwdWxHZp6NErIHZ06FKBdXSvD1R
+	WD4TMlwALlkdY8OkaVFeHJhioxyA/nxvGwVD8vHSuJmKENS7s/5nsj0/0ywlv1m8J4x4
+	bsoVn/mze8GcDYR+f8OdjEC+qXWf+oQyKgUCk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	b=I64u7QTSVJ12L4U4PhezUk/2Hz5IfhcA22c9gUwkGG11gFgaHbAjyRrwRzRZi5SDCX
+	6NC6gH+Cd+WckcM6GAPqbFbGDDvR6SHs82ERtwvbP/sFFlCNvNux5pbk5jeSTXRkTP1l
+	6PrCFCq7HDPYVWhM4MoFQvj6ekOJ4XtpqeMsM=
+Received: by 10.223.96.195 with SMTP id i3mr434728fan.77.1299098739067; Wed,
+	02 Mar 2011 12:45:39 -0800 (PST)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: libvmime recipe (static library)
+Received: by 10.223.30.151 with HTTP; Wed, 2 Mar 2011 12:45:19 -0800 (PST)
+In-Reply-To: <4D6E0CF4.4040005@dresearch.de>
+References: <4D64BD5E.6040805@dresearch.de> <4D6DF124.2080607@dresearch.de>
+	<AANLkTi=sJanB_o6LGmg=3-96=iDD8VMrM-DLp4EC+zBr@mail.gmail.com>
+	<4D6E0CF4.4040005@dresearch.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 2 Mar 2011 12:45:19 -0800
+Message-ID: <AANLkTi=UYfsdZQvvQzLMBkZ21wFpPQK-p7pdbSy1F-_H@mail.gmail.com>
+To: Steffen Sledz <sledz@dresearch.de>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: net-snmp-svn-r7.0 do_compile failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,65 +46,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Mar 2011 20:15:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 02 Mar 2011 20:47:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-I have a "working" recipe for VMime.  So far, I can only get the static 
-version of the library to compile and get successfully packaged.  When I 
-try to link against this static library with another recipe, the linker 
-says "skipping incompatible 
-/home/ppeimany/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libvmime.a 
-when searching for -lvmime".
+On Wed, Mar 2, 2011 at 1:25 AM, Steffen Sledz <sledz@dresearch.de> wrote:
+> failed here).
+>>
+>> for svn recipe you can bump rev up
+>
+> I tried to bump to some newer revs (19399/5.6, 19787/5.6.1, 20047/HEAD) but ended up in some undefined referrence errors (nl_handle_destroy and nl_handle_alloc) in all cases. :(
+>
+> So this needs some more attention.
 
-Here is the recipe and patch.
+--disable-nls in EXTRA_OECONF does that help ?
 
+>
+> Jamie, you're listed as net-snmp maintainer. Can you look into this please.
+>
+>> and for others you can backport the
+>> fix and you can backport it as it is ideally that patch should
+>> have changed configure.ac and regenerated configure but they patched
+>> configure instead. but its ok to patch configure here since
+>> we do not regenerate configure for net-snmp recipe.
+>
+> As mentioned before i failed trying this. The patch does not apply without modifications. :(
+>
 
-libvmime_0.9.1.bb:
-===============
-
-DESCRIPTION = "VMime is a free mail library for C++"
-HOMEPAGE = "http://www.vmime.org/"
-DEPENDS = "libgsasl gnutls"
-PR = "r1"
-
-SRC_URI = "${SOURCEFORGE_MIRROR}/vmime/${PN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "d5b6de44f7f9ca0e4cefe597d1905605"
-SRC_URI[sha256sum] = 
-"3b66cb76d9bc7da80ef1f271cc29d3a183b5ff8b560ef60e85ff006bffb4d1ae"
-
-SRC_URI += "file://SConstruct.patch"
-
-# Workaround for vmime which creates .pc inside install
-do_install_append () {
-
-for i in `find ${S}/ ${D}/${libdir}/pkgconfig -name "*.pc" -type f` ; do \
-             sed -i -e 's:${D}::g' $i
-         done
-}
-
-inherit scons pkgconfig
-
-
-
-libvmime-0.9.1/SConstruct.patch:
-=========================
-
---- libvmime-0.9.1/SConstruct.orig      2011-03-02 13:33:14.871718344 -0500
-+++ libvmime-0.9.1/SConstruct   2011-03-02 14:39:23.699720558 -0500
-@@ -500,7 +500,7 @@
-                     + 'This option has no effect if "with_messaging" is 
-not activated.\n'
-                     + 'Separate protocols with spaces; string must be 
-quoted with ".\n'
-                     + 'Currently available protocols: pop3, smtp, imap, 
-maildir, sendmail.',
--               '"pop3 smtp imap maildir sendmail"'
-+               '"pop3 smtp imap maildir"'
-         ),
-         (
-                 'with_platforms',
-
-
+hmmm I cant promise but if I have time I can look into it
 
 
