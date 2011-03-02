@@ -1,27 +1,43 @@
-Received: from vms173011pub.verizon.net ([206.46.173.11])
+Received: from na3sys009aog101.obsmtp.com ([74.125.149.67])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1PuoWq-0001N4-TA
+	(envelope-from <bengardiner@nanometrics.ca>) id 1Puohc-00082a-J4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Mar 2011 17:03:58 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.48.61])
-	by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LHF009IPTVH7LG3@vms173011.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	02 Mar 2011 10:02:11 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 07AA414AF6A; Wed,
-	02 Mar 2011 11:02:05 -0500 (EST)
-Date: Wed, 02 Mar 2011 11:02:05 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20110302160205.GC10330@denix.org>
-References: <4D544976.6010800@drewtech.com> <4D545173.8080904@mentor.com>
-	<4D54734B.7060705@drewtech.com> <4D547643.2020600@mentor.com>
-	<4D598D30.3080506@drewtech.com>
-MIME-version: 1.0
-In-reply-to: <4D598D30.3080506@drewtech.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: openembedded with a prebuilt external toolchain
+	Wed, 02 Mar 2011 17:17:08 +0100
+Received: from source ([209.85.210.182]) (using TLSv1) by
+	na3sys009aob101.postini.com ([74.125.148.12]) with SMTP
+	ID DSNKTW5srnBxyfUg2BPdKXv+0VqxGNfk2HbL@postini.com;
+	Wed, 02 Mar 2011 08:13:39 PST
+Received: by mail-iy0-f182.google.com with SMTP id 12so76323iyj.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 02 Mar 2011 08:13:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=nanometrics.ca; s=google;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=/eJ6XOyouLxBlf/kuNCyx7jNXhnhvQsuaEuQaKDc7S0=;
+	b=a0G2N3K+17f5y0Ug4Hmt+gal/5+QRFCnGe5K8sQcTF+9hWQ3Cz+Kqzlz6mS6CTGynZ
+	b0bRKDuH8r9hki7/vixNGaeN6l5kDWaEKkjOs5th4qK6FXhGruvygwn8pWBm8hH5LXQ1
+	jP41YRi7sWrj9CPNF72SndmAg1dOt814iH1kc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=nanometrics.ca; s=google;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=qTWuFckjWczrusa7VbP9MQlPYKdY69sCfdlJU4iL/MKab73L858a3MB2X2jwKNEO4s
+	M+1NuwSYr/hyn4PbaWBxWeWdqUbhIfsdB7qJxpX/V3Aw9/r7Xuux74bB0+fAF1kW3LHk
+	be7EIwyGZ+QEVoysT8CYBV+MzJbosKVVbchSc=
+Received: by 10.42.228.3 with SMTP id jc3mr8362170icb.307.1299078320155;
+	Wed, 02 Mar 2011 07:05:20 -0800 (PST)
+Received: from localhost.localdomain ([206.191.47.130])
+	by mx.google.com with ESMTPS id z4sm17934ibg.19.2011.03.02.07.05.18
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 02 Mar 2011 07:05:19 -0800 (PST)
+From: Ben Gardiner <bengardiner@nanometrics.ca>
+To: openembedded-devel@lists.openembedded.org, Denys Dmytriyenko <denys@ti.com>
+Date: Wed,  2 Mar 2011 10:05:13 -0500
+Message-Id: <a3ce82b2cf61bfced06945832d70aacedfb6ab7b.1299076392.git.bengardiner@nanometrics.ca>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <cover.1299076392.git.bengardiner@nanometrics.ca>
+References: <cover.1299076392.git.bengardiner@nanometrics.ca>
+Cc: Andrea Galbusera <gizero@gmail.com>, Koen Kooi <koen@openembedded.org>
+Subject: [PATCH v2 1/2] external-toolchain: allow override of linux-libc-headers provider
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,41 +51,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Mar 2011 16:03:58 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 02 Mar 2011 16:17:48 -0000
 
-On Mon, Feb 14, 2011 at 03:14:40PM -0500, Joey Oravec wrote:
-> On 2/10/2011 6:35 PM, Tom Rini wrote:
->>> Both the -csl.bb and -generic.bb copy a bunch of stuff to STAGING_DIR in
->>> do_stage(). Of course in the long-run I need for the recipe to copy C
->>> libraries, but for now I should be able to leave the body blank. At
->>> least it'll use my compiler and run to completion. Right?
->>
->> Well, as you saw, it fails in some cases.  This is because, yeah, we're 
->> telling the toolchain stuff lives ...here now, and it doesn't.
->
-> Thanks for the additional help on chat! This followup is to share my 
-> results with the mailing list.
->
-> Regarding my "bitbake nano" failure, that was a symptom of a sysroot issue. 
-> An external cross compiler has some default sysroot where it looks for 
-> libraries. By default it looks like OE passes nothing to change this. As a 
-> result do_configure() didn't look for libraries in staging dir, decided 
-> that ncurses didn't exist, and the build failed. One solution is to add:
->
-> TOOLCHAIN_OPTIONS = " --sysroot=${STAGING_DIR_TARGET}"
+only set PREFERRED_PROVIDER_linux-libc-headers if it is not
+already assigned a value.
 
-That is the default now in conf/bitbake.conf:
+Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+Tested-by: Andrea Galbusera <gizero@gmail.com>
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?h=org.openembedded.dev&id=ebd905685a339814c36bf658a8e58bf8f457f14e
+---
 
-> to your build/conf/local.conf and make sure your compiler's default sysroot 
-> (libc, etc) gets copied into the staging dir. That way you can call *-gcc 
-> from somewhere in your path but it'll look for everything under OE's 
-> staging directory.
+Changes since v1:
+ * rebased to 3dc72c4ca0a9ce677f6c3a56517626984b5eaaa0 of
+   git://git.openembedded.org/openembedded#master
+ * added Tested-by: Andrea Galbusera <gizero@gmail.com>
 
+---
+ conf/distro/include/toolchain-external.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/conf/distro/include/toolchain-external.inc b/conf/distro/include/toolchain-external.inc
+index ab50308..12dc454 100644
+--- a/conf/distro/include/toolchain-external.inc
++++ b/conf/distro/include/toolchain-external.inc
+@@ -4,7 +4,7 @@ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-initial = "external-toolchain-${T
+ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-intermediate = "external-toolchain-${TOOLCHAIN_BRAND}"
+ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc = "external-toolchain-${TOOLCHAIN_BRAND}"
+ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}g++ = "external-toolchain-${TOOLCHAIN_BRAND}"
+-PREFERRED_PROVIDER_linux-libc-headers = "external-toolchain-${TOOLCHAIN_BRAND}"
++PREFERRED_PROVIDER_linux-libc-headers ?= "external-toolchain-${TOOLCHAIN_BRAND}"
+ 
+ TOOLCHAIN_VENDOR ?= "${TARGET_VENDOR}"
+ TARGET_VENDOR := "${TOOLCHAIN_VENDOR}"
 -- 
-Denys
+1.7.1
+
 
 
