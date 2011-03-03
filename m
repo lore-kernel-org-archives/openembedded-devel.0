@@ -1,31 +1,27 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from vms173001pub.verizon.net ([206.46.173.1])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PvDbB-0005WT-SR
+	(envelope-from <denis@denix.org>) id 1PvEBl-0006SN-J6
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Mar 2011 19:50:06 +0100
-Received: by iwn10 with SMTP id 10so1315530iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Mar 2011 10:48:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=Iwr9bDrCA9iOkU/IE40P7dGWKKpW6DKMbTudlyigISc=;
-	b=LsqjeAirY5/ErDwNE5dV6oo9WQADsSZIS35t4NPHQtpL1QTX0mjhxfm7VwFXXwPH/0
-	EYrW/stZ2t/Ww52Z9nyKJPS7nFCjLcI4nUhEvTCM+M/Q/6WyKG97RPmZbV05jH6Ip9KP
-	5h8rfpXqq1UG3acyvJDjj4BMxlSkeMgZTXoNU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=nZGa82jSy2w//gLQxVcLoxWMcwKib8ky6bhpcHUoMX64CqvV0nLiQ4KZdsDeTUXh1n
-	nsKzdhkqDiMehHPvgJIrwIabJCiqTg27xoCSBAwf1eLzXRbAchxEV80upxkQcBfSR5Ir
-	ljW/F+7jAP+Aadup8xjsikTHjiJ8tegJJKqp0=
-MIME-Version: 1.0
-Received: by 10.231.191.129 with SMTP id dm1mr1154676ibb.173.1299178110490;
-	Thu, 03 Mar 2011 10:48:30 -0800 (PST)
-Received: by 10.231.11.201 with HTTP; Thu, 3 Mar 2011 10:48:30 -0800 (PST)
-Date: Thu, 3 Mar 2011 19:48:30 +0100
-Message-ID: <AANLkTinrZHXCyA2USHeuOijx0KrZrNVY7K3uhqwpLaao@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: gcc ICE (gcc 4.1.2, nios2), test program included
+	Thu, 03 Mar 2011 20:27:53 +0100
+Received: from gandalf.denix.org ([unknown] [71.251.48.61])
+	by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LHH005EVV69GB12@vms173001.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	03 Mar 2011 12:25:21 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id D678D14AF6A; Thu,
+	03 Mar 2011 13:25:20 -0500 (EST)
+Date: Thu, 03 Mar 2011 13:25:20 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: Ben Gardiner <bengardiner@nanometrics.ca>
+Message-id: <20110303182520.GC16888@denix.org>
+References: <20110303173224.GA16888@denix.org>
+	<1299176333-16449-1-git-send-email-bengardiner@nanometrics.ca>
+MIME-version: 1.0
+In-reply-to: <1299176333-16449-1-git-send-email-bengardiner@nanometrics.ca>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Cc: arago-devel@gforge.ti.com, openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH v2] external-toolchain-csl: allow gdbserver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,58 +35,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Mar 2011 18:50:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 03 Mar 2011 19:27:53 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Dear all,
+On Thu, Mar 03, 2011 at 01:18:53PM -0500, Ben Gardiner wrote:
+> If PREFERRED_PROVIDER_gdbserver is not empty then don't PROVIDE or
+> install the gdbserver packaged with the CSL toolchain.
+> 
+> Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+> 
+> ---
+> 
+> Changes since v1:
+>  * test whether PREFERRED_PROVIDER_gdbserver is blank, not
+>    whether it is set to external-toolchain-csl. The latter results
+>    in a circular dependency when nothing is set, as it is in oe
+>    master w/o arago
 
-I've bumped onto an issue that I seem unable to resolv.
-With gcc 4.1.2, target nios2, I get an ICE when compiling dbus:
+NAK. external-toolchain-csl should not depend on external gdbserver, if it 
+doesn't package it's own. That's how I have it in my patch, which I'm pushing 
+now, after testing it with different setups.
 
-I've reduced the failing program to a 16 line test program (using
-repeated calls to delta and some hand reduction):
-
-typedef struct DBusCredentials DBusCredentials;
-typedef struct { } DBusAuthStateData;
-typedef struct
-{
-  const DBusAuthStateData *state;
-  DBusCredentials *authorized_identity;
-} DBusAuth;
-static const DBusAuthStateData common_state_authenticated = { };
-_dbus_auth_set_credentials (DBusAuth *auth)
-{
-    if (auth->state == &common_state_authenticated)
-    {
-      return auth->authorized_identity;
-    }
-    return auth->authorized_identity;
-}
-
-This gives (when compiled):
-
-frans@frans-desktop:/tmp$
-/home/frans/workspace/tmp/sysroots/x86_64-linux/usr/nios2/bin/nios2-linux-gcc
--fPIC -O2 -o tst.o tst.c
-tst.c: In function '_dbus_auth_set_credentials':
-tst.c:13: warning: return makes integer from pointer without a cast
-tst.c:15: warning: return makes integer from pointer without a cast
-tst.c:16: error: Attempt to delete prologue/epilogue insn:
-(insn 55 54 56 0 (set:SI (reg:SI 22 r22)
-        (mem/c:SI (plus:SI (reg/f:SI 27 sp)
-                (const_int 0 [0x0])) [6 S4 A32])) -1 (nil)
-    (nil))
-tst.c:16: internal compiler error: in propagate_one_insn, at flow.c:1699
-Please submit a full bug report,
-with preprocessed source if appropriate.
-See <URL:http://gcc.gnu.org/bugs.html> for instructions.
+-- 
+Denys
 
 
-Anyone an idea on how to tackle this.
-
-BTW: this applies with the nios code for gcc in OE, I have also tried
-it with the latest altera version and I get the same problem.
-
-Best regards, Frans.
+> 
+> This fixes the arago build
+> rm -rf arago-tmp ; MACHINE=da850-omapl138-evm bitbake
+> arago-console-image
+> 
+> on the following checkouts:
+> arago: d6634b5366be96e1d4c7ce12411e2058183d26cb
+> arago-oe-dev: (merge of 414823a3c0a88a3c6ff0f3b0187626b1905bfca4 from
+> git://git.openembedded.org/openembedded  into
+> 0d7feb26d6d16da8327c258deb3260ac423813cd)
+> arago-bitbake: 789382350344a40a3d7c094b5a96bee2a69d01fa
+> 
+> The arago distro uses a specific
+> version of gdbserver and hence has PREFERRED_PROVIDER_gdbserver =
+> "gdbserver". Changing the PREFERRED_PROVIDER_gdbserver to external-
+> toolchain-csl does not fix the problem:
+> 
+> | Collected errors:
+> |  * resolve_conffiles: Existing conffile
+> /media/unixdata/src/oe-helios-next/arago-tmp/rootfs/arago-console-image/etc/device_table
+> is different from the conffile in the new package. The new conffile
+> will be placed at
+> /media/unixdata/src/oe-helios-next/arago-tmp/rootfs/arago-console-image/etc/device_table-opkg.
+> |  * file_md5sum_alloc: Failed to open file
+> /media/unixdata/src/oe-helios-next/arago-tmp/rootfs/arago-console-image/etc/opkg/*:
+> No such file or directory.
+> |  * file_md5sum_alloc: Failed to open file
+> /media/unixdata/src/oe-helios-next/arago-tmp/rootfs/arago-console-image/etc/opkg/angstrom/*:
+> No such file or directory.
+> |  * satisfy_dependencies_for: Cannot satisfy the following
+> dependencies for task-arago-console:
+> |  *    gdbserver *
+> |  * opkg_install_cmd: Cannot install package task-arago-console.
+> | ERROR: Function do_rootfs failed
+> ---
+>  recipes/meta/external-toolchain-csl.bb |   12 ++++++++----
+>  1 files changed, 8 insertions(+), 4 deletions(-)
+> 
+> diff --git a/recipes/meta/external-toolchain-csl.bb b/recipes/meta/external-toolchain-csl.bb
+> index e56b74f..b0f482b 100644
+> --- a/recipes/meta/external-toolchain-csl.bb
+> +++ b/recipes/meta/external-toolchain-csl.bb
+> @@ -1,4 +1,4 @@
+> -PR = "r9"
+> +PR = "r10"
+>  
+>  INHIBIT_DEFAULT_DEPS = "1"
+>  
+> @@ -23,10 +23,13 @@ PROVIDES = "\
+>  	virtual/libiconv \
+>  	glibc-thread-db \
+>  	${@base_conditional('PREFERRED_PROVIDER_linux-libc-headers', 'external-toolchain-csl', 'linux-libc-headers', '', d)} \
+> -	gdbserver \
+> +	${@base_conditional('PREFERRED_PROVIDER_gdbserver', 'gdbserver', '', 'gdbserver', d)} \
+>  "
+>  
+> -DEPENDS = "${@base_conditional('PREFERRED_PROVIDER_linux-libc-headers', 'external-toolchain-csl', '', 'linux-libc-headers', d)}"
+> +DEPENDS = "\
+> +	${@base_conditional('PREFERRED_PROVIDER_linux-libc-headers', 'external-toolchain-csl', '', 'linux-libc-headers', d)} \
+> +	${@base_conditional('PREFERRED_PROVIDER_gdbserver', 'gdbserver', 'gdbserver', '', d)} \
+> +"
+>  RPROVIDES_glibc-dev += "libc-dev libc6-dev virtual-libc-dev"
+>  PACKAGES_DYNAMIC += "glibc-gconv-*"
+>  PACKAGES_DYNAMIC += "glibc-locale-*"
+> @@ -46,7 +49,7 @@ PACKAGES = "\
+>  	nscd \
+>  	ldd \
+>  	localedef \
+> -	gdbserver \
+> +	${@base_conditional('PREFERRED_PROVIDER_gdbserver', 'gdbserver', '', 'gdbserver', d)} \
+>  	glibc-utils \
+>  	glibc-dev \
+>  	glibc-locale \
+> @@ -230,6 +233,7 @@ do_install() {
+>  		|| true
+>  	cp -a ${TOOLCHAIN_PATH}/${TARGET_SYS}/libc/usr/* ${D}/usr
+>  	${@base_conditional('PREFERRED_PROVIDER_linux-libc-headers', 'external-toolchain-csl', '', 'rm -rf ${D}/usr/include/linux', d)}
+> +	${@base_conditional('PREFERRED_PROVIDER_gsbserver', 'gdbserver', 'rm -rf ${D}${FILES_gdbserver}', '', d)}
+>  	cp -a ${TOOLCHAIN_PATH}/${TARGET_SYS}/include/* ${D}/usr/include
+>  
+>  	rm -rf ${D}${sysconfdir}/rpc
+> -- 
+> 1.7.1
+> 
 
 
