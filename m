@@ -1,40 +1,34 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Pv2zk-0000Mc-GZ
+	(envelope-from <dp@xora.org.uk>) id 1Pv3EC-0000bv-I1
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Mar 2011 08:30:44 +0100
-Received: by fxm8 with SMTP id 8so833892fxm.6
+	Thu, 03 Mar 2011 08:45:40 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 9CECCA4663
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Mar 2011 23:29:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=zC3Tg6t4ebEAGPf4RXieQ9voCtmxNGOWCZs6kG0K9bc=;
-	b=eeReGs1yznhWEHjNDS9+DiyOXaE7JndR8ppaWpntWZKXt+hTgbjKph0YAMOkM0SYYY
-	JD+uJBGwohc6QMFX3041QlspbQ+L+MnWbM5UK/eLJa2TLTMHrpuElVu4dTzK7seHQztP
-	7BQXJklZu5lAYS8Fdclu238w8a/AirTXjsR48=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=VmKf1BLeLEliKV3Hk0DmfHVuLT8J5bQssSCxXJYWaHCAXAqyMjAcsxRVLXzqslHYSn
-	Xm4/4sgKOZI2CuNBvy+GNbe8D1gRSDZ3ECm3s16jkGA7v8uREqlx70XGXECINlKS9eep
-	MdzVDo2VbeiIjQzb2DiciWWfI+uYa5EML0mQI=
-Received: by 10.223.96.195 with SMTP id i3mr1044582fan.77.1299137267286;
-	Wed, 02 Mar 2011 23:27:47 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id o12sm389499fav.6.2011.03.02.23.27.45
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 02 Mar 2011 23:27:46 -0800 (PST)
-Date: Thu, 3 Mar 2011 08:27:45 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110303072744.GB419@jama.jama.net>
-References: <20110224164519.GA12581@jama.jama.net>
-	<1298647636-13022-1-git-send-email-Martin.Jansa@gmail.com>
+	Thu,  3 Mar 2011 07:44:13 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id ojY4nuLjEqr8
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  3 Mar 2011 07:44:09 +0000 (GMT)
+Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 61586A4660
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  3 Mar 2011 07:44:09 +0000 (GMT)
+Message-ID: <4D6F470F.4070709@xora.org.uk>
+Date: Thu, 03 Mar 2011 07:45:19 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.14) Gecko/20110221 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-In-Reply-To: <1298647636-13022-1-git-send-email-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] bitbake.conf: define shared PERSISTENT_DIR and point it outside TMPDIR
+To: openembedded-devel@lists.openembedded.org
+References: <1299108818-9224-1-git-send-email-tom_rini@mentor.com>
+In-Reply-To: <1299108818-9224-1-git-send-email-tom_rini@mentor.com>
+X-Enigmail-Version: 1.1.1
+Subject: Re: [PATCH] samba: Add avahi to DEPEND / EXTRA_OECONF
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,107 +42,181 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Mar 2011 07:30:44 -0000
-X-Groupsio-MsgNum: 29893
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="98e8jtXdkpgskNou"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 03 Mar 2011 07:45:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---98e8jtXdkpgskNou
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Acked-by: Graeme Gregory <dp@xora.org.uk>
 
-On Fri, Feb 25, 2011 at 04:27:16PM +0100, Martin Jansa wrote:
-> * import from poky 6a11cf7dfe930461a6660e3b783b546fa2634900
-> * we had CACHE var pointing to machine specific dir since 2006
->   caf077679022f37ce55d758101f130e4e93bd7b5
-> * current bitbake is looking for cache dir like this:
->   cachedir =3D (bb.data.getVar("PERSISTENT_DIR", d, True) or
->               bb.data.getVar("CACHE", d, True))
->   which without PERSISTENT_DIR defined picks machine-specific CACHE dir
->   so LOCALCOUNT numbers in SRCPV keeps rolling with every MACHINE switch
->   in same builddir :/
-
-ping?
-
->=20
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+On 02/03/2011 23:33, Tom Rini wrote:
+> avahi is currently an 'auto' thing so we should spell it out to
+> be clear, set to on.
+>
+> Signed-off-by: Tom Rini <tom_rini@mentor.com>
 > ---
->  classes/sanity.bbclass |   12 ++++++++++++
->  conf/bitbake.conf      |    2 ++
->  conf/sanity.conf       |    1 +
->  3 files changed, 15 insertions(+), 0 deletions(-)
->=20
-> diff --git a/classes/sanity.bbclass b/classes/sanity.bbclass
-> index 1e6b170..ffe3a49 100644
-> --- a/classes/sanity.bbclass
-> +++ b/classes/sanity.bbclass
-> @@ -189,6 +189,18 @@ def check_sanity(e):
->  	if messages !=3D "":
->  		raise_sanity_error(messages)
-> =20
-> +	#
-> +	# Check there isn't old persistent cache
-> +	#
-> +	cache =3D data.getVar('CACHE', e.data, True)
-> +	persistent_dir =3D data.getVar('PERSISTENT_DIR', e.data, True)
-> +	persistent_cache_filename =3D data.getVar('SANITY_PERSIST_DATA_FILE', e=
-=2Edata, True)
-> +	if os.path.exists(cache + '/' + persistent_cache_filename):
-> +		messages =3D messages + "Error, persistent cache file '%s' exists in o=
-ld location '%s', please migrate it to new location '%s' and merge them tog=
-ether if you have one for each MACHINE.\n" % (persistent_cache_filename, ca=
-che, persistent_dir)
-> +
-> +	if messages !=3D "":
-> +		raise_sanity_error(messages)
-> +
->  python check_sanity_eventhandler() {
->      if isinstance(e, bb.event.BuildStarted):
->          check_sanity(e)
-> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-> index 88ad2ba..0c11cdb 100644
-> --- a/conf/bitbake.conf
-> +++ b/conf/bitbake.conf
-> @@ -294,6 +294,8 @@ FILESDIR =3D "${@bb.which(d.getVar('FILESPATH', 1), '=
-=2E')}"
-> =20
->  TMPDIR =3D "${TOPDIR}/tmp"
->  CACHE =3D "${TMPDIR}/cache${@['', '/' + str(bb.data.getVar('MACHINE', d,=
- 1))][bool(bb.data.getVar('MACHINE', d, 1))]}"
-> +# The persistent cache should be shared by all builds
-> +PERSISTENT_DIR =3D "${TOPDIR}/conf/persistent"
->  CO_DIR =3D "${DL_DIR}"
->  CVSDIR =3D "${CO_DIR}/cvs"
->  SVNDIR =3D "${CO_DIR}/svn"
-> diff --git a/conf/sanity.conf b/conf/sanity.conf
-> index e9902f6..c1ac332 100644
-> --- a/conf/sanity.conf
-> +++ b/conf/sanity.conf
-> @@ -7,5 +7,6 @@ BB_MIN_VERSION =3D "1.10.2"
-> =20
->  SANITY_ABIFILE =3D "${TMPDIR}/abi_version"
->  SANITY_PRFILE =3D "${TMPDIR}/distro_pr"
-> +SANITY_PERSIST_DATA_FILE =3D "bb_persist_data.sqlite3"
-> =20
->  INHERIT +=3D "sanity"
-> --=20
-> 1.7.4.1
->=20
+>  recipes/samba/samba-ads_3.2.15.bb       |    2 +-
+>  recipes/samba/samba-ads_3.3.9.bb        |    2 +-
+>  recipes/samba/samba-ads_3.5.6.bb        |    2 +-
+>  recipes/samba/samba-essential_3.0.20.bb |    2 +-
+>  recipes/samba/samba.inc                 |    3 ++-
+>  recipes/samba/samba_3.0.23c.bb          |    2 +-
+>  recipes/samba/samba_3.0.34.bb           |    2 +-
+>  recipes/samba/samba_3.2.15.bb           |    2 +-
+>  recipes/samba/samba_3.3.0.bb            |    2 +-
+>  recipes/samba/samba_3.3.9.bb            |    2 +-
+>  recipes/samba/samba_3.5.6.bb            |    2 +-
+>  11 files changed, 12 insertions(+), 11 deletions(-)
+>
+> diff --git a/recipes/samba/samba-ads_3.2.15.bb b/recipes/samba/samba-ads_3.2.15.bb
+> index 002bed7..1579f2c 100644
+> --- a/recipes/samba/samba-ads_3.2.15.bb
+> +++ b/recipes/samba/samba-ads_3.2.15.bb
+> @@ -2,7 +2,7 @@ require samba.inc
+>  require samba-ads.inc
+>  LICENSE = "GPLv3"
+>  
+> -PR = "r2"
+> +PR = "r3"
+>  SRC_URI += "file://config-lfs.patch \
+>              file://quota.patch;striplevel=0 \
+>              file://configure-3.2.8.patch \
+> diff --git a/recipes/samba/samba-ads_3.3.9.bb b/recipes/samba/samba-ads_3.3.9.bb
+> index a498918..d28b0c9 100644
+> --- a/recipes/samba/samba-ads_3.3.9.bb
+> +++ b/recipes/samba/samba-ads_3.3.9.bb
+> @@ -2,7 +2,7 @@ require samba.inc
+>  require samba-ads.inc
+>  LICENSE = "GPLv3"
+>  
+> -PR = "r3"
+> +PR = "r4"
+>  SRC_URI += "file://config-lfs.patch \
+>              file://quota.patch;striplevel=0 \
+>              file://configure-3.3.0.patch \
+> diff --git a/recipes/samba/samba-ads_3.5.6.bb b/recipes/samba/samba-ads_3.5.6.bb
+> index 1119c1b..cbbd7ac 100644
+> --- a/recipes/samba/samba-ads_3.5.6.bb
+> +++ b/recipes/samba/samba-ads_3.5.6.bb
+> @@ -2,7 +2,7 @@ require samba.inc
+>  require samba-ads.inc
+>  LICENSE = "GPLv3"
+>  
+> -PR = "r3"
+> +PR = "r4"
+>  SRC_URI += "file://config-lfs.patch \
+>              file://quota.patch;striplevel=0 \
+>              file://configure-3.3.0.patch \
+> diff --git a/recipes/samba/samba-essential_3.0.20.bb b/recipes/samba/samba-essential_3.0.20.bb
+> index b775080..7b169e0 100644
+> --- a/recipes/samba/samba-essential_3.0.20.bb
+> +++ b/recipes/samba/samba-essential_3.0.20.bb
+> @@ -1,7 +1,7 @@
+>  require samba-essential.inc
+>  inherit update-rc.d
+>  
+> -PR = "r8"
+> +PR = "r9"
+>  
+>  SRC_URI = "file://config-lfs.patch \
+>  	   file://init-essential \
+> diff --git a/recipes/samba/samba.inc b/recipes/samba/samba.inc
+> index e5fa06e..3c38de9 100644
+> --- a/recipes/samba/samba.inc
+> +++ b/recipes/samba/samba.inc
+> @@ -1,6 +1,6 @@
+>  SECTION = "console/network"
+>  LICENSE = "GPL"
+> -DEPENDS = "readline virtual/libiconv talloc"
+> +DEPENDS = "readline virtual/libiconv talloc avahi"
+>  
+>  SRC_URI = "http://samba.org/samba/ftp/stable/samba-${PV}.tar.gz \
+>             file://volatiles.03_samba \
+> @@ -28,6 +28,7 @@ EXTRA_OECONF='--disable-cups \
+>                --with-readline=${STAGING_LIBDIR}/.. \
+>                --with-libiconv=${STAGING_LIBDIR}/.. \
+>                --without-automount \
+> +              --enable-avahi \
+>                --with-configdir=${sysconfdir}/samba \
+>                --with-privatedir=${sysconfdir}/samba/private \
+>                --with-lockdir=${localstatedir}/lock \
+> diff --git a/recipes/samba/samba_3.0.23c.bb b/recipes/samba/samba_3.0.23c.bb
+> index 27ff058..7c5d738 100644
+> --- a/recipes/samba/samba_3.0.23c.bb
+> +++ b/recipes/samba/samba_3.0.23c.bb
+> @@ -4,7 +4,7 @@ require samba-basic.inc
+>  SRC_URI += "file://configure.patch \
+>              file://cifs.patch"
+>  
+> -PR = "r7"
+> +PR = "r8"
+>  
+>  EXTRA_OECONF += "\
+>  	--with-smbmount \
+> diff --git a/recipes/samba/samba_3.0.34.bb b/recipes/samba/samba_3.0.34.bb
+> index a5f9b26..05a4159 100644
+> --- a/recipes/samba/samba_3.0.34.bb
+> +++ b/recipes/samba/samba_3.0.34.bb
+> @@ -5,7 +5,7 @@ SRC_URI += "file://configure.patch \
+>              "
+>  SRC_URI_append_libc-uclibc        = "file://uclibc-strlcpy-strlcat.patch"
+>  
+> -PR = "r6"
+> +PR = "r7"
+>  
+>  PACKAGES =+ " smbfs smbfs-doc"
+>  
+> diff --git a/recipes/samba/samba_3.2.15.bb b/recipes/samba/samba_3.2.15.bb
+> index 214de58..fb35fe9 100644
+> --- a/recipes/samba/samba_3.2.15.bb
+> +++ b/recipes/samba/samba_3.2.15.bb
+> @@ -9,7 +9,7 @@ SRC_URI += "file://configure-3.2.8.patch \
+>  SRC_URI[md5sum] = "5a3bcc4927c9643b9f42970d0815b18f"
+>  SRC_URI[sha256sum] = "84281fd1faeffee8558e49dff865dd382abbf78bc1be00f8cb5aa70aeea67d46"
+>  
+> -PR = "r4"
+> +PR = "r5"
+>  
+>  EXTRA_OECONF += "\
+>  	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
+> diff --git a/recipes/samba/samba_3.3.0.bb b/recipes/samba/samba_3.3.0.bb
+> index 6fab7dd..6385227 100644
+> --- a/recipes/samba/samba_3.3.0.bb
+> +++ b/recipes/samba/samba_3.3.0.bb
+> @@ -13,7 +13,7 @@ SRC_URI += "file://configure-3.3.0.patch \
+>              file://mtab.patch \
+>              file://tdbheaderfix.patch "
+>  
+> -PR = "r3"
+> +PR = "r4"
+>  
+>  EXTRA_OECONF += "\
+>  	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
+> diff --git a/recipes/samba/samba_3.3.9.bb b/recipes/samba/samba_3.3.9.bb
+> index f8870ac..73c4cc9 100644
+> --- a/recipes/samba/samba_3.3.9.bb
+> +++ b/recipes/samba/samba_3.3.9.bb
+> @@ -13,7 +13,7 @@ SRC_URI += "file://configure-3.3.0.patch \
+>              file://mtab.patch \
+>              file://tdbheaderfix.patch "
+>  
+> -PR = "r4"
+> +PR = "r5"
+>  
+>  EXTRA_OECONF += "\
+>  	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
+> diff --git a/recipes/samba/samba_3.5.6.bb b/recipes/samba/samba_3.5.6.bb
+> index 72bada9..23134a0 100644
+> --- a/recipes/samba/samba_3.5.6.bb
+> +++ b/recipes/samba/samba_3.5.6.bb
+> @@ -12,7 +12,7 @@ DEFAULT_PREFERENCE = "-1"
+>  SRC_URI += "file://config-h.patch \
+>              file://tdbheaderfix.patch;apply=no"
+>  
+> -PR = "r0"
+> +PR = "r1"
+>  
+>  EXTRA_OECONF += "\
+>  	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---98e8jtXdkpgskNou
-Content-Type: application/pgp-signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk1vQvAACgkQN1Ujt2V2gBw+UgCcCMFXCk7BWMwTtI9+o6L52d85
-1qgAoJRRYFYERFUpVRXGSXvUdnsP1eCx
-=ZlF1
------END PGP SIGNATURE-----
-
---98e8jtXdkpgskNou--
