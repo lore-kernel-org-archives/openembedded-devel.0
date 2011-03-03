@@ -1,43 +1,29 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Pv0Ze-0001qV-7o
+	(envelope-from <sledz@dresearch.de>) id 1Pv2p0-0000Ct-DX
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Mar 2011 05:55:38 +0100
-Received: by gyg13 with SMTP id 13so281281gyg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Mar 2011 20:54:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id
-	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:content-transfer-encoding:in-reply-to
-	:user-agent; bh=c+GwwBWMePsN9IyJs1oMI9nwMS7yxiQamdjJnlxSxtg=;
-	b=cHtXm1WauDMDvFUNuFF2n906HKXgSgolAQ4rhS9/jBFIowElEohSgqgyjHmWL35jYW
-	xJDQJ1+w8pVikc048VDzruIV5qyxP26TJW255i8LU1blBWeS/xQebEoEOtoXWyxP+cCn
-	ZyH2Pp9F+y0+X1cVKaoeSvP/Iarg9nyKXEQhg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	b=mBj03qbg+LCw2jCLdpn/D+KpBMnQN8driPr/wZFuRrz2mvQkqU6GoQOGgBNCCrW50f
-	erizY6FA71J1g8kTQ/h/ORSMnRUyQ2lWi2Ec4L5SWKVw1nMOsmXBW3Ix1/7RvWvBLfOg
-	FkEHCfpWD/sGWa02Onln7sk44b/VqKJhfIcTE=
-Received: by 10.236.182.135 with SMTP id o7mr177538yhm.31.1299127644252;
-	Wed, 02 Mar 2011 20:47:24 -0800 (PST)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id u49sm516763yhn.37.2011.03.02.20.47.22
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 02 Mar 2011 20:47:23 -0800 (PST)
-Date: Wed, 2 Mar 2011 20:47:19 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110303044719.GD2692@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1299101202-1735-1-git-send-email-eric@eukrea.com>
+	Thu, 03 Mar 2011 08:19:39 +0100
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 0EE0049127F;
+	Thu,  3 Mar 2011 08:18:12 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Thu, 3 Mar 2011 08:18:12 +0100
+Message-ID: <4D6F40A9.2060606@dresearch.de>
+Date: Thu, 03 Mar 2011 08:18:01 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.14) Gecko/20110221 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-In-Reply-To: <1299101202-1735-1-git-send-email-eric@eukrea.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH] busybox-1.18.3: add last fix
+To: openembedded-devel@lists.openembedded.org
+References: <4D64BD5E.6040805@dresearch.de> <4D6DF124.2080607@dresearch.de>
+	<AANLkTi=sJanB_o6LGmg=3-96=iDD8VMrM-DLp4EC+zBr@mail.gmail.com>
+	<4D6E0CF4.4040005@dresearch.de>
+	<AANLkTi=UYfsdZQvvQzLMBkZ21wFpPQK-p7pdbSy1F-_H@mail.gmail.com>
+In-Reply-To: <AANLkTi=UYfsdZQvvQzLMBkZ21wFpPQK-p7pdbSy1F-_H@mail.gmail.com>
+X-OriginalArrivalTime: 03 Mar 2011 07:18:12.0211 (UTC)
+	FILETIME=[27C88430:01CBD973]
+Subject: Re: net-snmp-svn-r7.0 do_compile failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,55 +37,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Mar 2011 04:55:38 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 03 Mar 2011 07:19:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On (02/03/11 22:26), Eric Bénard wrote:
-> Signed-off-by: Eric Bénard <eric@eukrea.com>
+Am 02.03.2011 21:45, schrieb Khem Raj:
+> On Wed, Mar 2, 2011 at 1:25 AM, Steffen Sledz <sledz@dresearch.de> wrot=
+e:
+>> failed here).
+>>>
+>>> for svn recipe you can bump rev up
+>>
+>> I tried to bump to some newer revs (19399/5.6, 19787/5.6.1, 20047/HEAD=
+) but ended up in some undefined referrence errors (nl_handle_destroy and=
+ nl_handle_alloc) in all cases. :(
+>>
+>> So this needs some more attention.
+>=20
+> --disable-nls in EXTRA_OECONF does that help ?
 
-hmmm is it the last fix for 1.18.3 and then its EOL or did you mean
-recent most fix ?
+Nope.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  recipes/busybox/busybox_1.18.3.bb |    5 ++++-
->  1 files changed, 4 insertions(+), 1 deletions(-)
-> 
-> diff --git a/recipes/busybox/busybox_1.18.3.bb b/recipes/busybox/busybox_1.18.3.bb
-> index f85de86..59e817d 100644
-> --- a/recipes/busybox/busybox_1.18.3.bb
-> +++ b/recipes/busybox/busybox_1.18.3.bb
-> @@ -1,10 +1,11 @@
->  require busybox_1.1x.inc
-> -PR = "${INC_PR}.1"
-> +PR = "${INC_PR}.2"
->  
->  SRC_URI += " \
->  	http://busybox.net/downloads/fixes-1.18.3/busybox-1.18.3-buildsys.patch;name=patch01 \
->  	http://busybox.net/downloads/fixes-1.18.3/busybox-1.18.3-modutils24.patch;name=patch02 \
->  	http://busybox.net/downloads/fixes-1.18.3/busybox-1.18.3-wget.patch;name=patch03 \
-> +        http://busybox.net/downloads/fixes-1.18.3/busybox-1.18.3-menuconfig.patch;name=patch04 \
->  	"
->  
->  SRC_URI[md5sum] = "660af4d44661d32b22025a66f4f78df2"
-> @@ -15,3 +16,5 @@ SRC_URI[patch02.md5sum] = "ce7c3421c87088a7f779278680563bff"
->  SRC_URI[patch02.sha256sum] = "134ed86867784348f484810464df5bc97589e7aa41079c90e35b8d12b9284df8"
->  SRC_URI[patch03.md5sum] = "abe065069fed8458eedbdad48c115e1f"
->  SRC_URI[patch03.sha256sum] = "22538ebee96f66916104b8143cfd16e21568da4c5a89128b9daa60d83a59120b"
-> +SRC_URI[patch04.md5sum] = "d12d997b66669451bd8c4cc494162a80"
-> +SRC_URI[patch04.sha256sum] = "f3f8466432088248492fc44631a765ed0a95a8b7d14e37483fae25158d07dc68"
-> -- 
-> 1.7.0.4
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>> Jamie, you're listed as net-snmp maintainer. Can you look into this pl=
+ease.
+>>
+>>> and for others you can backport the
+>>> fix and you can backport it as it is ideally that patch should
+>>> have changed configure.ac and regenerated configure but they patched
+>>> configure instead. but its ok to patch configure here since
+>>> we do not regenerate configure for net-snmp recipe.
+>>
+>> As mentioned before i failed trying this. The patch does not apply wit=
+hout modifications. :(
+>=20
+> hmmm I cant promise but if I have time I can look into it
 
--- 
--Khem
+Would be really great.
+
+Steffen
+
+PS: And i'm willing to lern, so i'm looking forward excitedly to your sol=
+ution. ;-)
+
+--=20
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@DResearch.de
+Fax: +49 30 515932-299
+Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
+
 
 
