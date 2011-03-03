@@ -1,27 +1,54 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PuvZn-000895-Vw
+	(envelope-from <raj.khem@gmail.com>) id 1Pv00w-0001Qb-FR
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Mar 2011 00:35:28 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1PuvYN-0007a5-Rr from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Mar 2011 15:33:59 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 2 Mar 2011 15:33:59 -0800
-Received: from localhost.localdomain ([172.30.80.189]) by
-	na2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 2 Mar 2011 16:33:58 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Thu, 03 Mar 2011 05:19:46 +0100
+Received: by iyb26 with SMTP id 26so643142iyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 02 Mar 2011 20:18:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:cc:subject:message-id
+	:mail-followup-to:references:mime-version:content-type
+	:content-disposition:in-reply-to:user-agent;
+	bh=QoxHesPTueT2vZyGxjQnHue47MHiDzaHM3wbp6BHUpY=;
+	b=U0mvh77Lnyc30IgAZgRV42hh8Gbns3qtyjckFkJFL65UyhboTADgIcyzk9SxFptFlO
+	LhiZiyFBFqWc5neMMtj2nnKHtl2IxkD9Jd55LLVY7uWUSKDN9XQkBU5ViAdYeNqKivL9
+	/6y25vUz1psBY2WFICYb1ldYINi77GLxF2sqU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	b=IjWBIX7ULvt4pB6r5nNtj9bX/nFuiH0cZPi1q0tZHU9cG7I0SPXDCrOYMGTB8g1RYn
+	6wXvfZALiEHWmxBiqQja1+Ul7MZXfIuUCWY8nHvTD8gFc8Dpj3g1tqwhcYA9Scycu9kM
+	F7lWqFuMBQsDjKwR56yF0W+68sYD8q+XAS6Ek=
+Received: by 10.42.241.68 with SMTP id ld4mr894812icb.447.1299125897389;
+	Wed, 02 Mar 2011 20:18:17 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id gy41sm535255ibb.17.2011.03.02.20.18.14
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 02 Mar 2011 20:18:15 -0800 (PST)
+Date: Wed, 2 Mar 2011 20:18:07 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Mar 2011 16:33:38 -0700
-Message-Id: <1299108818-9224-1-git-send-email-tom_rini@mentor.com>
-X-Mailer: git-send-email 1.7.0.4
-X-OriginalArrivalTime: 02 Mar 2011 23:33:58.0418 (UTC)
-	FILETIME=[4DA0FF20:01CBD932]
-Subject: [PATCH] samba: Add avahi to DEPEND / EXTRA_OECONF
+Message-ID: <20110303041807.GA2692@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org,
+	Otavio Salvador <otavio@ossystems.com.br>
+References: <AANLkTinUjtis22ZnLaP7uc0fa9nzxvhWod2uv43ZcJH=@mail.gmail.com>
+	<1298669695.3818.5.camel@lenovo.internal.reciva.com>
+	<AANLkTi=afktV1HC4Jdq_ammNdA+h4iMAWdJT809s+LMv@mail.gmail.com>
+	<1298905700.23547.6.camel@phil-desktop>
+	<AANLkTimyU4bSm9tM2LO5bMoqiFQqZXxt5Js7fg0B_HhJ@mail.gmail.com>
+	<1298913422.23547.20.camel@phil-desktop>
+	<AANLkTimomznky1rBn5QTqzS16O6Lk3VxHUx1pG+ULe3v@mail.gmail.com>
+	<1298979308.23547.67.camel@phil-desktop>
+	<AANLkTimk6cXCRROwcD5cOkfarJuMkvg=A0cM_Um6oOSZ@mail.gmail.com>
+	<1299080486.23547.230.camel@phil-desktop>
+MIME-Version: 1.0
+In-Reply-To: <1299080486.23547.230.camel@phil-desktop>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: Missing GLIBC_<version> tags on binaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,178 +62,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Mar 2011 23:35:28 -0000
+X-List-Received-Date: Thu, 03 Mar 2011 04:19:46 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-avahi is currently an 'auto' thing so we should spell it out to
-be clear, set to on.
+On (02/03/11 15:41), Phil Blundell wrote:
+> On Tue, 2011-03-01 at 11:47 +0000, Otavio Salvador wrote:
+> > On Tue, Mar 1, 2011 at 11:35, Phil Blundell <philb@gnu.org> wrote:
+> > > On Mon, 2011-02-28 at 19:33 +0000, Otavio Salvador wrote:
+> > >> On Mon, Feb 28, 2011 at 17:17, Phil Blundell <philb@gnu.org> wrote:
+> > > I just tried linking xfreerdp by hand with gold and the resulting binary
+> > > seemed to come out fine.  So I think this is indeed a bug in GNU ld.
+> > 
+> > Personally I think we need to trace it down (we as project) since it
+> > can lead to broken and difficult to trace behaviour. It took 3 days
+> > until I managed to identify the symbol failure.
+> 
+> Yeah, that might be true.  Or we could maybe just switch the default
+> linker to be gold, at least on targets that it supports. 
 
-Signed-off-by: Tom Rini <tom_rini@mentor.com>
----
- recipes/samba/samba-ads_3.2.15.bb       |    2 +-
- recipes/samba/samba-ads_3.3.9.bb        |    2 +-
- recipes/samba/samba-ads_3.5.6.bb        |    2 +-
- recipes/samba/samba-essential_3.0.20.bb |    2 +-
- recipes/samba/samba.inc                 |    3 ++-
- recipes/samba/samba_3.0.23c.bb          |    2 +-
- recipes/samba/samba_3.0.34.bb           |    2 +-
- recipes/samba/samba_3.2.15.bb           |    2 +-
- recipes/samba/samba_3.3.0.bb            |    2 +-
- recipes/samba/samba_3.3.9.bb            |    2 +-
- recipes/samba/samba_3.5.6.bb            |    2 +-
- 11 files changed, 12 insertions(+), 11 deletions(-)
+Yes I have been doing this slowly for ARM. but probably it will be
+better with gcc 4.6 where linker will be selectable with options
 
-diff --git a/recipes/samba/samba-ads_3.2.15.bb b/recipes/samba/samba-ads_3.2.15.bb
-index 002bed7..1579f2c 100644
---- a/recipes/samba/samba-ads_3.2.15.bb
-+++ b/recipes/samba/samba-ads_3.2.15.bb
-@@ -2,7 +2,7 @@ require samba.inc
- require samba-ads.inc
- LICENSE = "GPLv3"
- 
--PR = "r2"
-+PR = "r3"
- SRC_URI += "file://config-lfs.patch \
-             file://quota.patch;striplevel=0 \
-             file://configure-3.2.8.patch \
-diff --git a/recipes/samba/samba-ads_3.3.9.bb b/recipes/samba/samba-ads_3.3.9.bb
-index a498918..d28b0c9 100644
---- a/recipes/samba/samba-ads_3.3.9.bb
-+++ b/recipes/samba/samba-ads_3.3.9.bb
-@@ -2,7 +2,7 @@ require samba.inc
- require samba-ads.inc
- LICENSE = "GPLv3"
- 
--PR = "r3"
-+PR = "r4"
- SRC_URI += "file://config-lfs.patch \
-             file://quota.patch;striplevel=0 \
-             file://configure-3.3.0.patch \
-diff --git a/recipes/samba/samba-ads_3.5.6.bb b/recipes/samba/samba-ads_3.5.6.bb
-index 1119c1b..cbbd7ac 100644
---- a/recipes/samba/samba-ads_3.5.6.bb
-+++ b/recipes/samba/samba-ads_3.5.6.bb
-@@ -2,7 +2,7 @@ require samba.inc
- require samba-ads.inc
- LICENSE = "GPLv3"
- 
--PR = "r3"
-+PR = "r4"
- SRC_URI += "file://config-lfs.patch \
-             file://quota.patch;striplevel=0 \
-             file://configure-3.3.0.patch \
-diff --git a/recipes/samba/samba-essential_3.0.20.bb b/recipes/samba/samba-essential_3.0.20.bb
-index b775080..7b169e0 100644
---- a/recipes/samba/samba-essential_3.0.20.bb
-+++ b/recipes/samba/samba-essential_3.0.20.bb
-@@ -1,7 +1,7 @@
- require samba-essential.inc
- inherit update-rc.d
- 
--PR = "r8"
-+PR = "r9"
- 
- SRC_URI = "file://config-lfs.patch \
- 	   file://init-essential \
-diff --git a/recipes/samba/samba.inc b/recipes/samba/samba.inc
-index e5fa06e..3c38de9 100644
---- a/recipes/samba/samba.inc
-+++ b/recipes/samba/samba.inc
-@@ -1,6 +1,6 @@
- SECTION = "console/network"
- LICENSE = "GPL"
--DEPENDS = "readline virtual/libiconv talloc"
-+DEPENDS = "readline virtual/libiconv talloc avahi"
- 
- SRC_URI = "http://samba.org/samba/ftp/stable/samba-${PV}.tar.gz \
-            file://volatiles.03_samba \
-@@ -28,6 +28,7 @@ EXTRA_OECONF='--disable-cups \
-               --with-readline=${STAGING_LIBDIR}/.. \
-               --with-libiconv=${STAGING_LIBDIR}/.. \
-               --without-automount \
-+              --enable-avahi \
-               --with-configdir=${sysconfdir}/samba \
-               --with-privatedir=${sysconfdir}/samba/private \
-               --with-lockdir=${localstatedir}/lock \
-diff --git a/recipes/samba/samba_3.0.23c.bb b/recipes/samba/samba_3.0.23c.bb
-index 27ff058..7c5d738 100644
---- a/recipes/samba/samba_3.0.23c.bb
-+++ b/recipes/samba/samba_3.0.23c.bb
-@@ -4,7 +4,7 @@ require samba-basic.inc
- SRC_URI += "file://configure.patch \
-             file://cifs.patch"
- 
--PR = "r7"
-+PR = "r8"
- 
- EXTRA_OECONF += "\
- 	--with-smbmount \
-diff --git a/recipes/samba/samba_3.0.34.bb b/recipes/samba/samba_3.0.34.bb
-index a5f9b26..05a4159 100644
---- a/recipes/samba/samba_3.0.34.bb
-+++ b/recipes/samba/samba_3.0.34.bb
-@@ -5,7 +5,7 @@ SRC_URI += "file://configure.patch \
-             "
- SRC_URI_append_libc-uclibc        = "file://uclibc-strlcpy-strlcat.patch"
- 
--PR = "r6"
-+PR = "r7"
- 
- PACKAGES =+ " smbfs smbfs-doc"
- 
-diff --git a/recipes/samba/samba_3.2.15.bb b/recipes/samba/samba_3.2.15.bb
-index 214de58..fb35fe9 100644
---- a/recipes/samba/samba_3.2.15.bb
-+++ b/recipes/samba/samba_3.2.15.bb
-@@ -9,7 +9,7 @@ SRC_URI += "file://configure-3.2.8.patch \
- SRC_URI[md5sum] = "5a3bcc4927c9643b9f42970d0815b18f"
- SRC_URI[sha256sum] = "84281fd1faeffee8558e49dff865dd382abbf78bc1be00f8cb5aa70aeea67d46"
- 
--PR = "r4"
-+PR = "r5"
- 
- EXTRA_OECONF += "\
- 	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
-diff --git a/recipes/samba/samba_3.3.0.bb b/recipes/samba/samba_3.3.0.bb
-index 6fab7dd..6385227 100644
---- a/recipes/samba/samba_3.3.0.bb
-+++ b/recipes/samba/samba_3.3.0.bb
-@@ -13,7 +13,7 @@ SRC_URI += "file://configure-3.3.0.patch \
-             file://mtab.patch \
-             file://tdbheaderfix.patch "
- 
--PR = "r3"
-+PR = "r4"
- 
- EXTRA_OECONF += "\
- 	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
-diff --git a/recipes/samba/samba_3.3.9.bb b/recipes/samba/samba_3.3.9.bb
-index f8870ac..73c4cc9 100644
---- a/recipes/samba/samba_3.3.9.bb
-+++ b/recipes/samba/samba_3.3.9.bb
-@@ -13,7 +13,7 @@ SRC_URI += "file://configure-3.3.0.patch \
-             file://mtab.patch \
-             file://tdbheaderfix.patch "
- 
--PR = "r4"
-+PR = "r5"
- 
- EXTRA_OECONF += "\
- 	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
-diff --git a/recipes/samba/samba_3.5.6.bb b/recipes/samba/samba_3.5.6.bb
-index 72bada9..23134a0 100644
---- a/recipes/samba/samba_3.5.6.bb
-+++ b/recipes/samba/samba_3.5.6.bb
-@@ -12,7 +12,7 @@ DEFAULT_PREFERENCE = "-1"
- SRC_URI += "file://config-h.patch \
-             file://tdbheaderfix.patch;apply=no"
- 
--PR = "r0"
-+PR = "r1"
- 
- EXTRA_OECONF += "\
- 	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
+> 
+> > I am far from an expert on linking and GNU ld. For debugging it I'd
+> > need guidance.
+> 
+> I think the place to start looking would be _bfd_elf_merge_symbol(),
+> which is in bfd/elflink.c.  This gets called by
+> elf_link_add_object_symbols() to record the syms that it finds and I
+> suspect that one or other of those functions is probably doing the wrong
+> thing.
+> 
+> Or, if you don't want to debug it yourself, you could try to create a
+> testcase that shows the problem and then file a bug report with binutils
+> upstream.
+> 
+> p.
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 -- 
-1.7.0.4
-
+-Khem
 
 
