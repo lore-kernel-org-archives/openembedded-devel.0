@@ -1,43 +1,43 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Pv0Ob-0001hL-BE
+	(envelope-from <raj.khem@gmail.com>) id 1Pv0VW-0001mm-UC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Mar 2011 05:44:13 +0100
-Received: by iwn10 with SMTP id 10so682411iwn.6
+	Thu, 03 Mar 2011 05:51:23 +0100
+Received: by pvc30 with SMTP id 30so102260pvc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Mar 2011 20:42:44 -0800 (PST)
+	Wed, 02 Mar 2011 20:49:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:date:from:to:subject:message-id
 	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:content-transfer-encoding:in-reply-to
-	:user-agent; bh=AVAvmlE8+F8CkXVMyyhSIrdeinhOE9ulI1sverLth1Q=;
-	b=g0gQe2i+YfP6aHjHc//qdyVOWztYdhOXAUtsFRq6tf8Kc+7mYccixxVQBoI1gq7eGL
-	xZuorhutA2VWMw1xBPI7vrq9ybStfg+t41G5xa7BwdZRnUJSUH16wkF3O1l702lNbysQ
-	HOeojd84rJuAZJ4OuraHV/oh7e+rNhqwP01Z4=
+	:content-disposition:in-reply-to:user-agent;
+	bh=Qwi8aAIO/5zBbj1kJCj+Kcgt6cTwOmsDvO52q6KcwhU=;
+	b=kQHFZy9yCbgWRFSQ+fgWSVuErw+xiwvA9S1Umri0MT66HRS5Kueo0VDwWgGKnYk8Z6
+	plkL5SKdXpRV1OHbF9Nyr2CYa/u8sQUZugUz+idJw16HSPPFSem3qRwbatlWMRlsKgOW
+	bHZb4Ep6hXmFIEl39YMYvgKSRclyp4/mNooa4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	b=itY+nMrv6wNfwJXVt+lRuQmjK+M13fjaITIJ6krSLbScHKs4L4uZvZxwtT/cfbyfXc
-	WQj2AmGDnLHIQ+Ut6PwT/pMiLD5nB60KEP4KIIImetPHRwoBcFmvudVipeEEE/JLDz95
-	6/8dieri4yZt7Cc//LAky1Q70k0yl/WYmUGfs=
-Received: by 10.231.12.68 with SMTP id w4mr620030ibw.50.1299127364821;
-	Wed, 02 Mar 2011 20:42:44 -0800 (PST)
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	b=Q67tyj4nDNvE+JLvgZ12dnko5wLmiAKCWPbasMayP/p4jeStZU0UdENqOz4tnQSEH8
+	Z0cbkAEsGaDjNcw1FITfuFp+unwgisfk59AMOk2FtHinXaIq3ZkSZHRvoD4bwOr+VmAT
+	BvGtyaNlYY8zoMC+3lmfonden8i1dt44hnzkA=
+Received: by 10.142.44.17 with SMTP id r17mr490933wfr.223.1299127793457;
+	Wed, 02 Mar 2011 20:49:53 -0800 (PST)
 Received: from sakrah.homelinux.org
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id z4sm558352ibg.13.2011.03.02.20.42.42
+	by mx.google.com with ESMTPS id m10sm890257wfl.23.2011.03.02.20.49.51
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 02 Mar 2011 20:42:43 -0800 (PST)
-Date: Wed, 2 Mar 2011 20:42:39 -0800
+	Wed, 02 Mar 2011 20:49:52 -0800 (PST)
+Date: Wed, 2 Mar 2011 20:49:49 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110303044239.GC2692@sakrah.homelinux.org>
+Message-ID: <20110303044949.GE2692@sakrah.homelinux.org>
 Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1299076864.3857.46.camel@mattotaupa>
+References: <1299108818-9224-1-git-send-email-tom_rini@mentor.com>
 MIME-Version: 1.0
-In-Reply-To: <1299076864.3857.46.camel@mattotaupa>
+In-Reply-To: <1299108818-9224-1-git-send-email-tom_rini@mentor.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: minimal-uclibc: alsa-utils_1.0.24.2: task compile fails with `warning: incompatible implicit declaration of built-in function 'exp10'`
+Subject: Re: [PATCH] samba: Add avahi to DEPEND / EXTRA_OECONF
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,89 +51,192 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Mar 2011 04:44:13 -0000
+X-List-Received-Date: Thu, 03 Mar 2011 04:51:23 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On (02/03/11 15:41), Paul Menzel wrote:
-> Dear OE folks,
->=20
->=20
->=20
-> task compile of `alsa-utils_1.0.24.2` committed in 679b4bb0 [1] fails
-> with the following error message using `minimal-uclibc` for
-> `MACHINE=3D"beagleboard"`.
->=20
-> 	arm-oe-linux-uclibceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3D=
-neon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=3D/oe/buil=
-d-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DH=
-AVE_CONFIG_H -I. -I../include    -I/oe/build-minimal-uclibc/minimal-uclibc-=
-dev/sysroots/i686-linux/usr/include -I/oe/build-minimal-uclibc/minimal-ucli=
-bc-dev/sysroots/i686-linux/usr/include/ncurses -DCURSESINC=3D"<ncurses.h>" =
--fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe=
- -I/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
-ibceabi/usr/include -MT utils.o -MD -MP -MF .deps/utils.Tpo -c -o utils.o u=
-tils.c
-> 	arm-oe-linux-uclibceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3D=
-neon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=3D/oe/buil=
-d-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DH=
-AVE_CONFIG_H -I. -I../include    -I/oe/build-minimal-uclibc/minimal-uclibc-=
-dev/sysroots/i686-linux/usr/include -I/oe/build-minimal-uclibc/minimal-ucli=
-bc-dev/sysroots/i686-linux/usr/include/ncurses -DCURSESINC=3D"<ncurses.h>" =
--fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe=
- -I/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
-ibceabi/usr/include -MT volume_mapping.o -MD -MP -MF .deps/volume_mapping.T=
-po -c -o volume_mapping.o volume_mapping.c
-> 	volume_mapping.c: In function 'get_normalized_volume':
-> 	volume_mapping.c:112:15: warning: incompatible implicit declaration of b=
-uilt-in function 'exp10'
-> 	volume_mapping.c: In function 'set_normalized_volume':
-> 	volume_mapping.c:147:14: warning: incompatible implicit declaration of b=
-uilt-in function 'exp10'
-> 	mv -f .deps/mixer_widget.Tpo .deps/mixer_widget.Po
-> 	arm-oe-linux-uclibceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3D=
-neon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=3D/oe/buil=
-d-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DH=
-AVE_CONFIG_H -I. -I../include    -I/oe/build-minimal-uclibc/minimal-uclibc-=
-dev/sysroots/i686-linux/usr/include -I/oe/build-minimal-uclibc/minimal-ucli=
-bc-dev/sysroots/i686-linux/usr/include/ncurses -DCURSESINC=3D"<ncurses.h>" =
--fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe=
- -I/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
-ibceabi/usr/include -MT widget.o -MD -MP -MF .deps/widget.Tpo -c -o widget.=
-o widget.c
-> 	mv -f .deps/utils.Tpo .deps/utils.Po
-> 	mv -f .deps/volume_mapping.Tpo .deps/volume_mapping.Po
-> 	mv -f .deps/widget.Tpo .deps/widget.Po
-> 	mv -f .deps/mixer_display.Tpo .deps/mixer_display.Po
-> 	arm-oe-linux-uclibceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3D=
-neon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=3D/oe/buil=
-d-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -I/=
-oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/i686-linux/usr/include =
--I/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/i686-linux/usr/inclu=
-de/ncurses -DCURSESINC=3D"<ncurses.h>" -fexpensive-optimizations -fomit-fra=
-me-pointer -frename-registers -Os -pipe -I/oe/build-minimal-uclibc/minimal-=
-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi/usr/include  -Wl,-O1 -Wl,--h=
-ash-style=3Dgnu  -L/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/arm=
-v7a-oe-linux-uclibceabi/usr/lib -o alsamixer card_select.o cli.o colors.o d=
-evice_name.o die.o mainloop.o mem.o mixer_controls.o mixer_display.o mixer_=
-widget.o proc_files.o textbox.o utils.o volume_mapping.o widget.o -L/oe/bui=
-ld-minimal-uclibc/minimal-uclibc-dev/sysroots/i686-linux/usr/lib -lform -lm=
-enu -lpanel -lncurses -ltinfo -lasound -L/oe/build-minimal-uclib
-> c/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi/usr/lib -lm -ldl=
- -lpthread
-> 	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
-ibceabi/usr/lib/libasound.so: warning: gethostbyname is obsolescent, use ge=
-tnameinfo() instead.
-> 	volume_mapping.o: In function `get_normalized_volume':
-> 	volume_mapping.c:(.text+0x124): undefined reference to `exp10'
-> 	volume_mapping.c:(.text+0x154): undefined reference to `exp10'
-> 	volume_mapping.o: In function `set_normalized_volume':
-> 	volume_mapping.c:(.text+0x2d4): undefined reference to `exp10'
-> 	collect2: ld returned 1 exit status
+On (02/03/11 16:33), Tom Rini wrote:
+> avahi is currently an 'auto' thing so we should spell it out to
+> be clear, set to on.
+> 
+> Signed-off-by: Tom Rini <tom_rini@mentor.com>
 
-exp10 and pow10 are unimplemented in uclibc
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
+> ---
+>  recipes/samba/samba-ads_3.2.15.bb       |    2 +-
+>  recipes/samba/samba-ads_3.3.9.bb        |    2 +-
+>  recipes/samba/samba-ads_3.5.6.bb        |    2 +-
+>  recipes/samba/samba-essential_3.0.20.bb |    2 +-
+>  recipes/samba/samba.inc                 |    3 ++-
+>  recipes/samba/samba_3.0.23c.bb          |    2 +-
+>  recipes/samba/samba_3.0.34.bb           |    2 +-
+>  recipes/samba/samba_3.2.15.bb           |    2 +-
+>  recipes/samba/samba_3.3.0.bb            |    2 +-
+>  recipes/samba/samba_3.3.9.bb            |    2 +-
+>  recipes/samba/samba_3.5.6.bb            |    2 +-
+>  11 files changed, 12 insertions(+), 11 deletions(-)
+> 
+> diff --git a/recipes/samba/samba-ads_3.2.15.bb b/recipes/samba/samba-ads_3.2.15.bb
+> index 002bed7..1579f2c 100644
+> --- a/recipes/samba/samba-ads_3.2.15.bb
+> +++ b/recipes/samba/samba-ads_3.2.15.bb
+> @@ -2,7 +2,7 @@ require samba.inc
+>  require samba-ads.inc
+>  LICENSE = "GPLv3"
+>  
+> -PR = "r2"
+> +PR = "r3"
+>  SRC_URI += "file://config-lfs.patch \
+>              file://quota.patch;striplevel=0 \
+>              file://configure-3.2.8.patch \
+> diff --git a/recipes/samba/samba-ads_3.3.9.bb b/recipes/samba/samba-ads_3.3.9.bb
+> index a498918..d28b0c9 100644
+> --- a/recipes/samba/samba-ads_3.3.9.bb
+> +++ b/recipes/samba/samba-ads_3.3.9.bb
+> @@ -2,7 +2,7 @@ require samba.inc
+>  require samba-ads.inc
+>  LICENSE = "GPLv3"
+>  
+> -PR = "r3"
+> +PR = "r4"
+>  SRC_URI += "file://config-lfs.patch \
+>              file://quota.patch;striplevel=0 \
+>              file://configure-3.3.0.patch \
+> diff --git a/recipes/samba/samba-ads_3.5.6.bb b/recipes/samba/samba-ads_3.5.6.bb
+> index 1119c1b..cbbd7ac 100644
+> --- a/recipes/samba/samba-ads_3.5.6.bb
+> +++ b/recipes/samba/samba-ads_3.5.6.bb
+> @@ -2,7 +2,7 @@ require samba.inc
+>  require samba-ads.inc
+>  LICENSE = "GPLv3"
+>  
+> -PR = "r3"
+> +PR = "r4"
+>  SRC_URI += "file://config-lfs.patch \
+>              file://quota.patch;striplevel=0 \
+>              file://configure-3.3.0.patch \
+> diff --git a/recipes/samba/samba-essential_3.0.20.bb b/recipes/samba/samba-essential_3.0.20.bb
+> index b775080..7b169e0 100644
+> --- a/recipes/samba/samba-essential_3.0.20.bb
+> +++ b/recipes/samba/samba-essential_3.0.20.bb
+> @@ -1,7 +1,7 @@
+>  require samba-essential.inc
+>  inherit update-rc.d
+>  
+> -PR = "r8"
+> +PR = "r9"
+>  
+>  SRC_URI = "file://config-lfs.patch \
+>  	   file://init-essential \
+> diff --git a/recipes/samba/samba.inc b/recipes/samba/samba.inc
+> index e5fa06e..3c38de9 100644
+> --- a/recipes/samba/samba.inc
+> +++ b/recipes/samba/samba.inc
+> @@ -1,6 +1,6 @@
+>  SECTION = "console/network"
+>  LICENSE = "GPL"
+> -DEPENDS = "readline virtual/libiconv talloc"
+> +DEPENDS = "readline virtual/libiconv talloc avahi"
+>  
+>  SRC_URI = "http://samba.org/samba/ftp/stable/samba-${PV}.tar.gz \
+>             file://volatiles.03_samba \
+> @@ -28,6 +28,7 @@ EXTRA_OECONF='--disable-cups \
+>                --with-readline=${STAGING_LIBDIR}/.. \
+>                --with-libiconv=${STAGING_LIBDIR}/.. \
+>                --without-automount \
+> +              --enable-avahi \
+>                --with-configdir=${sysconfdir}/samba \
+>                --with-privatedir=${sysconfdir}/samba/private \
+>                --with-lockdir=${localstatedir}/lock \
+> diff --git a/recipes/samba/samba_3.0.23c.bb b/recipes/samba/samba_3.0.23c.bb
+> index 27ff058..7c5d738 100644
+> --- a/recipes/samba/samba_3.0.23c.bb
+> +++ b/recipes/samba/samba_3.0.23c.bb
+> @@ -4,7 +4,7 @@ require samba-basic.inc
+>  SRC_URI += "file://configure.patch \
+>              file://cifs.patch"
+>  
+> -PR = "r7"
+> +PR = "r8"
+>  
+>  EXTRA_OECONF += "\
+>  	--with-smbmount \
+> diff --git a/recipes/samba/samba_3.0.34.bb b/recipes/samba/samba_3.0.34.bb
+> index a5f9b26..05a4159 100644
+> --- a/recipes/samba/samba_3.0.34.bb
+> +++ b/recipes/samba/samba_3.0.34.bb
+> @@ -5,7 +5,7 @@ SRC_URI += "file://configure.patch \
+>              "
+>  SRC_URI_append_libc-uclibc        = "file://uclibc-strlcpy-strlcat.patch"
+>  
+> -PR = "r6"
+> +PR = "r7"
+>  
+>  PACKAGES =+ " smbfs smbfs-doc"
+>  
+> diff --git a/recipes/samba/samba_3.2.15.bb b/recipes/samba/samba_3.2.15.bb
+> index 214de58..fb35fe9 100644
+> --- a/recipes/samba/samba_3.2.15.bb
+> +++ b/recipes/samba/samba_3.2.15.bb
+> @@ -9,7 +9,7 @@ SRC_URI += "file://configure-3.2.8.patch \
+>  SRC_URI[md5sum] = "5a3bcc4927c9643b9f42970d0815b18f"
+>  SRC_URI[sha256sum] = "84281fd1faeffee8558e49dff865dd382abbf78bc1be00f8cb5aa70aeea67d46"
+>  
+> -PR = "r4"
+> +PR = "r5"
+>  
+>  EXTRA_OECONF += "\
+>  	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
+> diff --git a/recipes/samba/samba_3.3.0.bb b/recipes/samba/samba_3.3.0.bb
+> index 6fab7dd..6385227 100644
+> --- a/recipes/samba/samba_3.3.0.bb
+> +++ b/recipes/samba/samba_3.3.0.bb
+> @@ -13,7 +13,7 @@ SRC_URI += "file://configure-3.3.0.patch \
+>              file://mtab.patch \
+>              file://tdbheaderfix.patch "
+>  
+> -PR = "r3"
+> +PR = "r4"
+>  
+>  EXTRA_OECONF += "\
+>  	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
+> diff --git a/recipes/samba/samba_3.3.9.bb b/recipes/samba/samba_3.3.9.bb
+> index f8870ac..73c4cc9 100644
+> --- a/recipes/samba/samba_3.3.9.bb
+> +++ b/recipes/samba/samba_3.3.9.bb
+> @@ -13,7 +13,7 @@ SRC_URI += "file://configure-3.3.0.patch \
+>              file://mtab.patch \
+>              file://tdbheaderfix.patch "
+>  
+> -PR = "r4"
+> +PR = "r5"
+>  
+>  EXTRA_OECONF += "\
+>  	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
+> diff --git a/recipes/samba/samba_3.5.6.bb b/recipes/samba/samba_3.5.6.bb
+> index 72bada9..23134a0 100644
+> --- a/recipes/samba/samba_3.5.6.bb
+> +++ b/recipes/samba/samba_3.5.6.bb
+> @@ -12,7 +12,7 @@ DEFAULT_PREFERENCE = "-1"
+>  SRC_URI += "file://config-h.patch \
+>              file://tdbheaderfix.patch;apply=no"
+>  
+> -PR = "r0"
+> +PR = "r1"
+>  
+>  EXTRA_OECONF += "\
+>  	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
+> -- 
+> 1.7.0.4
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+-- 
 -Khem
 
 
