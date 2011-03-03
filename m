@@ -1,28 +1,26 @@
-Received: from smtpfb1-g21.free.fr ([212.27.42.9])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Pv46e-0007at-Hb
+	(envelope-from <sledz@dresearch.de>) id 1Pv7Eo-0002Xs-Rx
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Mar 2011 09:41:56 +0100
-Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
-	by smtpfb1-g21.free.fr (Postfix) with ESMTP id AE71377C885
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Mar 2011 09:13:21 +0100 (CET)
-Received: from [192.168.1.15] (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 0740E4B0212
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Mar 2011 09:13:16 +0100 (CET)
-Message-ID: <4D6F4D9B.8020506@eukrea.com>
-Date: Thu, 03 Mar 2011 09:13:15 +0100
-From: Eric Benard <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Thu, 03 Mar 2011 13:02:35 +0100
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 7A97349127F;
+	Thu,  3 Mar 2011 13:01:05 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Thu, 3 Mar 2011 13:01:05 +0100
+Message-ID: <4D6F8301.2030605@dresearch.de>
+Date: Thu, 03 Mar 2011 13:01:05 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.14) Gecko/20110221 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1299101202-1735-1-git-send-email-eric@eukrea.com>
-	<20110303044719.GD2692@sakrah.homelinux.org>
-In-Reply-To: <20110303044719.GD2692@sakrah.homelinux.org>
-Subject: Re: [PATCH] busybox-1.18.3: add last fix
+References: <4D6B9C9D.7080107@dresearch.de>
+In-Reply-To: <4D6B9C9D.7080107@dresearch.de>
+X-OriginalArrivalTime: 03 Mar 2011 12:01:05.0700 (UTC)
+	FILETIME=[ACC56640:01CBD99A]
+Subject: Re: udev, udev-compat and old kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,21 +34,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Mar 2011 08:41:56 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 03 Mar 2011 12:02:35 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi Khem,
+Am 28.02.2011 14:01, schrieb Steffen Sledz:
+> In our local development branch we've set
+>=20
+>  PREFERRED_VERSION_udev =3D "141"
+>=20
+> in angstrom-2008-preferred-versions.inc to force udev-141 for our old k=
+ernel (2.6.24) at hipox machine. But i'm nearly sure that's not the corre=
+ct way to do this. ;-)
+>=20
+> So what's the right way to handle this?
+>=20
+> Looking around i found the udev-compat141_141.bb recipe. In my understa=
+nding this package adds some rules to newer udev packages (e.g. udev-151)=
+ to be able to work with older kernels, so that it is possible to use new=
+er udev versions. Right?
+>=20
+> In this case it should be enough to add some lines to conf/machine/hipo=
+x.conf, recipes/udev/udev.inc, recipes/udev/udev_{151,154,162,165}.bb sim=
+ilar to poodle machine. Right?
 
-On 03/03/2011 05:47, Khem Raj wrote:
-> On (02/03/11 22:26), Eric B=C3=A9nard wrote:
->> Signed-off-by: Eric B=C3=A9nard<eric@eukrea.com>
->
-> hmmm is it the last fix for 1.18.3 and then its EOL or did you mean
-> recent most fix ?
->
-that's the latest as of yesterday but maybe not the last one
+Ping!
 
-Eric
+It would be helpful if someone could help here to clarify things. The doc=
+umentation on that is not very clear.
+
+Thx,
+Steffen
+
+--=20
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@DResearch.de
+Fax: +49 30 515932-299
+Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
+
 
 
