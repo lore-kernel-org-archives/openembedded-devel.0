@@ -1,25 +1,42 @@
-Received: from vms173001pub.verizon.net ([206.46.173.1])
+Received: from na3sys009aog105.obsmtp.com ([74.125.149.75])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1PvEBl-0006SN-J6
+	(envelope-from <bengardiner@nanometrics.ca>) id 1PvEGR-0006Xm-M2
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Mar 2011 20:27:53 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.48.61])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LHH005EVV69GB12@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	03 Mar 2011 12:25:21 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id D678D14AF6A; Thu,
-	03 Mar 2011 13:25:20 -0500 (EST)
-Date: Thu, 03 Mar 2011 13:25:20 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Ben Gardiner <bengardiner@nanometrics.ca>
-Message-id: <20110303182520.GC16888@denix.org>
+	Thu, 03 Mar 2011 20:32:44 +0100
+Received: from source ([209.85.220.170]) (using TLSv1) by
+	na3sys009aob105.postini.com ([74.125.148.12]) with SMTP
+	ID DSNKTW/sdSar0zgfWkLjCwjqsE5p8+b91BUQ@postini.com;
+	Thu, 03 Mar 2011 11:31:17 PST
+Received: by mail-vx0-f170.google.com with SMTP id 39so1312271vxb.29
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 03 Mar 2011 11:31:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=nanometrics.ca; s=google;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=73xzihe6xIgUYyBP50iF9eaQ39uRgz7rEpe+sXOSceI=;
+	b=Cz6hn4uwVAoagz7ovPgdys7otf2CoTTcCe6KiwpS7v73Ioh/mCLSjaV9AzuN+U72yf
+	WSIiIH0wYzRmbICQn2qu41RkcgIdBzh9ppYo8WvPeLlvpO2/yMOpSrRC4bgO1u9As8e4
+	9Q43yS5OByfhPELOlV5KhA+aI6Fmz9NYmwexM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=nanometrics.ca; s=google;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=O9HyiT0IIELWE0AV8IqQpuVO4npMoCyzLdXkaU0MKnemNhPh8RN9AptBwbv1FDQKu0
+	MZX86ncCeSe0jExyUVL76DDYNnjmbCZZ3HkdcZT+klhvM8ksaDh112CXvLQ38x4x6V+Y
+	qFiM2bFS0morFg9sXjnedwe6aKQsBV/1P93As=
+MIME-Version: 1.0
+Received: by 10.52.160.8 with SMTP id xg8mr2195044vdb.264.1299180349917; Thu,
+	03 Mar 2011 11:25:49 -0800 (PST)
+Received: by 10.52.167.193 with HTTP; Thu, 3 Mar 2011 11:25:49 -0800 (PST)
+In-Reply-To: <20110303182520.GC16888@denix.org>
 References: <20110303173224.GA16888@denix.org>
 	<1299176333-16449-1-git-send-email-bengardiner@nanometrics.ca>
-MIME-version: 1.0
-In-reply-to: <1299176333-16449-1-git-send-email-bengardiner@nanometrics.ca>
-User-Agent: Mutt/1.5.16 (2007-06-09)
+	<20110303182520.GC16888@denix.org>
+Date: Thu, 3 Mar 2011 14:25:49 -0500
+Message-ID: <AANLkTikjGSdeiGh97330QhoUoVJ4CsC38n6WAdrpOpUf@mail.gmail.com>
+From: Ben Gardiner <bengardiner@nanometrics.ca>
+To: Denys Dmytriyenko <denis@denix.org>
 Cc: arago-devel@gforge.ti.com, openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH v2] external-toolchain-csl: allow gdbserver
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -35,115 +52,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Mar 2011 19:27:53 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 03 Mar 2011 19:32:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 03, 2011 at 01:18:53PM -0500, Ben Gardiner wrote:
-> If PREFERRED_PROVIDER_gdbserver is not empty then don't PROVIDE or
-> install the gdbserver packaged with the CSL toolchain.
-> 
-> Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
-> 
-> ---
-> 
-> Changes since v1:
->  * test whether PREFERRED_PROVIDER_gdbserver is blank, not
->    whether it is set to external-toolchain-csl. The latter results
->    in a circular dependency when nothing is set, as it is in oe
->    master w/o arago
+Hi Denys,
 
-NAK. external-toolchain-csl should not depend on external gdbserver, if it 
-doesn't package it's own. That's how I have it in my patch, which I'm pushing 
-now, after testing it with different setups.
+On Thu, Mar 3, 2011 at 1:25 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> On Thu, Mar 03, 2011 at 01:18:53PM -0500, Ben Gardiner wrote:
+>> If PREFERRED_PROVIDER_gdbserver is not empty then don't PROVIDE or
+>> install the gdbserver packaged with the CSL toolchain.
+>>
+>> Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+>>
+>> ---
+>>
+>> Changes since v1:
+>> =A0* test whether PREFERRED_PROVIDER_gdbserver is blank, not
+>> =A0 =A0whether it is set to external-toolchain-csl. The latter results
+>> =A0 =A0in a circular dependency when nothing is set, as it is in oe
+>> =A0 =A0master w/o arago
+>
+> NAK. external-toolchain-csl should not depend on external gdbserver, if i=
+t
+> doesn't package it's own. That's how I have it in my patch, which I'm pus=
+hing
+> now, after testing it with different setups.
 
--- 
-Denys
+Good idea.
 
+I tested your commit df59f77a2eb37d9807c6d9167488110e92601d7b in arago
+and openembedded master -- builds are successful in both.
 
-> 
-> This fixes the arago build
-> rm -rf arago-tmp ; MACHINE=da850-omapl138-evm bitbake
-> arago-console-image
-> 
-> on the following checkouts:
-> arago: d6634b5366be96e1d4c7ce12411e2058183d26cb
-> arago-oe-dev: (merge of 414823a3c0a88a3c6ff0f3b0187626b1905bfca4 from
-> git://git.openembedded.org/openembedded  into
-> 0d7feb26d6d16da8327c258deb3260ac423813cd)
-> arago-bitbake: 789382350344a40a3d7c094b5a96bee2a69d01fa
-> 
-> The arago distro uses a specific
-> version of gdbserver and hence has PREFERRED_PROVIDER_gdbserver =
-> "gdbserver". Changing the PREFERRED_PROVIDER_gdbserver to external-
-> toolchain-csl does not fix the problem:
-> 
-> | Collected errors:
-> |  * resolve_conffiles: Existing conffile
-> /media/unixdata/src/oe-helios-next/arago-tmp/rootfs/arago-console-image/etc/device_table
-> is different from the conffile in the new package. The new conffile
-> will be placed at
-> /media/unixdata/src/oe-helios-next/arago-tmp/rootfs/arago-console-image/etc/device_table-opkg.
-> |  * file_md5sum_alloc: Failed to open file
-> /media/unixdata/src/oe-helios-next/arago-tmp/rootfs/arago-console-image/etc/opkg/*:
-> No such file or directory.
-> |  * file_md5sum_alloc: Failed to open file
-> /media/unixdata/src/oe-helios-next/arago-tmp/rootfs/arago-console-image/etc/opkg/angstrom/*:
-> No such file or directory.
-> |  * satisfy_dependencies_for: Cannot satisfy the following
-> dependencies for task-arago-console:
-> |  *    gdbserver *
-> |  * opkg_install_cmd: Cannot install package task-arago-console.
-> | ERROR: Function do_rootfs failed
-> ---
->  recipes/meta/external-toolchain-csl.bb |   12 ++++++++----
->  1 files changed, 8 insertions(+), 4 deletions(-)
-> 
-> diff --git a/recipes/meta/external-toolchain-csl.bb b/recipes/meta/external-toolchain-csl.bb
-> index e56b74f..b0f482b 100644
-> --- a/recipes/meta/external-toolchain-csl.bb
-> +++ b/recipes/meta/external-toolchain-csl.bb
-> @@ -1,4 +1,4 @@
-> -PR = "r9"
-> +PR = "r10"
->  
->  INHIBIT_DEFAULT_DEPS = "1"
->  
-> @@ -23,10 +23,13 @@ PROVIDES = "\
->  	virtual/libiconv \
->  	glibc-thread-db \
->  	${@base_conditional('PREFERRED_PROVIDER_linux-libc-headers', 'external-toolchain-csl', 'linux-libc-headers', '', d)} \
-> -	gdbserver \
-> +	${@base_conditional('PREFERRED_PROVIDER_gdbserver', 'gdbserver', '', 'gdbserver', d)} \
->  "
->  
-> -DEPENDS = "${@base_conditional('PREFERRED_PROVIDER_linux-libc-headers', 'external-toolchain-csl', '', 'linux-libc-headers', d)}"
-> +DEPENDS = "\
-> +	${@base_conditional('PREFERRED_PROVIDER_linux-libc-headers', 'external-toolchain-csl', '', 'linux-libc-headers', d)} \
-> +	${@base_conditional('PREFERRED_PROVIDER_gdbserver', 'gdbserver', 'gdbserver', '', d)} \
-> +"
->  RPROVIDES_glibc-dev += "libc-dev libc6-dev virtual-libc-dev"
->  PACKAGES_DYNAMIC += "glibc-gconv-*"
->  PACKAGES_DYNAMIC += "glibc-locale-*"
-> @@ -46,7 +49,7 @@ PACKAGES = "\
->  	nscd \
->  	ldd \
->  	localedef \
-> -	gdbserver \
-> +	${@base_conditional('PREFERRED_PROVIDER_gdbserver', 'gdbserver', '', 'gdbserver', d)} \
->  	glibc-utils \
->  	glibc-dev \
->  	glibc-locale \
-> @@ -230,6 +233,7 @@ do_install() {
->  		|| true
->  	cp -a ${TOOLCHAIN_PATH}/${TARGET_SYS}/libc/usr/* ${D}/usr
->  	${@base_conditional('PREFERRED_PROVIDER_linux-libc-headers', 'external-toolchain-csl', '', 'rm -rf ${D}/usr/include/linux', d)}
-> +	${@base_conditional('PREFERRED_PROVIDER_gsbserver', 'gdbserver', 'rm -rf ${D}${FILES_gdbserver}', '', d)}
->  	cp -a ${TOOLCHAIN_PATH}/${TARGET_SYS}/include/* ${D}/usr/include
->  
->  	rm -rf ${D}${sysconfdir}/rpc
-> -- 
-> 1.7.1
-> 
+Thanks for the mention in your commit message and especially for your
+continued maintenance and direction of the arago project.
+
+Best Regards,
+Ben Gardiner
+
+---
+Nanometrics Inc.
+http://www.nanometrics.ca
 
 
