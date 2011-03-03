@@ -1,54 +1,43 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Pv00w-0001Qb-FR
+	(envelope-from <raj.khem@gmail.com>) id 1Pv0Ob-0001hL-BE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Mar 2011 05:19:46 +0100
-Received: by iyb26 with SMTP id 26so643142iyb.6
+	Thu, 03 Mar 2011 05:44:13 +0100
+Received: by iwn10 with SMTP id 10so682411iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Mar 2011 20:18:17 -0800 (PST)
+	Wed, 02 Mar 2011 20:42:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id
+	h=domainkey-signature:date:from:to:subject:message-id
 	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:in-reply-to:user-agent;
-	bh=QoxHesPTueT2vZyGxjQnHue47MHiDzaHM3wbp6BHUpY=;
-	b=U0mvh77Lnyc30IgAZgRV42hh8Gbns3qtyjckFkJFL65UyhboTADgIcyzk9SxFptFlO
-	LhiZiyFBFqWc5neMMtj2nnKHtl2IxkD9Jd55LLVY7uWUSKDN9XQkBU5ViAdYeNqKivL9
-	/6y25vUz1psBY2WFICYb1ldYINi77GLxF2sqU=
+	:content-disposition:content-transfer-encoding:in-reply-to
+	:user-agent; bh=AVAvmlE8+F8CkXVMyyhSIrdeinhOE9ulI1sverLth1Q=;
+	b=g0gQe2i+YfP6aHjHc//qdyVOWztYdhOXAUtsFRq6tf8Kc+7mYccixxVQBoI1gq7eGL
+	xZuorhutA2VWMw1xBPI7vrq9ybStfg+t41G5xa7BwdZRnUJSUH16wkF3O1l702lNbysQ
+	HOeojd84rJuAZJ4OuraHV/oh7e+rNhqwP01Z4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	b=IjWBIX7ULvt4pB6r5nNtj9bX/nFuiH0cZPi1q0tZHU9cG7I0SPXDCrOYMGTB8g1RYn
-	6wXvfZALiEHWmxBiqQja1+Ul7MZXfIuUCWY8nHvTD8gFc8Dpj3g1tqwhcYA9Scycu9kM
-	F7lWqFuMBQsDjKwR56yF0W+68sYD8q+XAS6Ek=
-Received: by 10.42.241.68 with SMTP id ld4mr894812icb.447.1299125897389;
-	Wed, 02 Mar 2011 20:18:17 -0800 (PST)
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	b=itY+nMrv6wNfwJXVt+lRuQmjK+M13fjaITIJ6krSLbScHKs4L4uZvZxwtT/cfbyfXc
+	WQj2AmGDnLHIQ+Ut6PwT/pMiLD5nB60KEP4KIIImetPHRwoBcFmvudVipeEEE/JLDz95
+	6/8dieri4yZt7Cc//LAky1Q70k0yl/WYmUGfs=
+Received: by 10.231.12.68 with SMTP id w4mr620030ibw.50.1299127364821;
+	Wed, 02 Mar 2011 20:42:44 -0800 (PST)
 Received: from sakrah.homelinux.org
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id gy41sm535255ibb.17.2011.03.02.20.18.14
+	by mx.google.com with ESMTPS id z4sm558352ibg.13.2011.03.02.20.42.42
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 02 Mar 2011 20:18:15 -0800 (PST)
-Date: Wed, 2 Mar 2011 20:18:07 -0800
+	Wed, 02 Mar 2011 20:42:43 -0800 (PST)
+Date: Wed, 2 Mar 2011 20:42:39 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110303041807.GA2692@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org,
-	Otavio Salvador <otavio@ossystems.com.br>
-References: <AANLkTinUjtis22ZnLaP7uc0fa9nzxvhWod2uv43ZcJH=@mail.gmail.com>
-	<1298669695.3818.5.camel@lenovo.internal.reciva.com>
-	<AANLkTi=afktV1HC4Jdq_ammNdA+h4iMAWdJT809s+LMv@mail.gmail.com>
-	<1298905700.23547.6.camel@phil-desktop>
-	<AANLkTimyU4bSm9tM2LO5bMoqiFQqZXxt5Js7fg0B_HhJ@mail.gmail.com>
-	<1298913422.23547.20.camel@phil-desktop>
-	<AANLkTimomznky1rBn5QTqzS16O6Lk3VxHUx1pG+ULe3v@mail.gmail.com>
-	<1298979308.23547.67.camel@phil-desktop>
-	<AANLkTimk6cXCRROwcD5cOkfarJuMkvg=A0cM_Um6oOSZ@mail.gmail.com>
-	<1299080486.23547.230.camel@phil-desktop>
+Message-ID: <20110303044239.GC2692@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1299076864.3857.46.camel@mattotaupa>
 MIME-Version: 1.0
-In-Reply-To: <1299080486.23547.230.camel@phil-desktop>
+In-Reply-To: <1299076864.3857.46.camel@mattotaupa>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: Missing GLIBC_<version> tags on binaries
+Subject: Re: minimal-uclibc: alsa-utils_1.0.24.2: task compile fails with `warning: incompatible implicit declaration of built-in function 'exp10'`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -62,52 +51,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Mar 2011 04:19:46 -0000
+X-List-Received-Date: Thu, 03 Mar 2011 04:44:13 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On (02/03/11 15:41), Phil Blundell wrote:
-> On Tue, 2011-03-01 at 11:47 +0000, Otavio Salvador wrote:
-> > On Tue, Mar 1, 2011 at 11:35, Phil Blundell <philb@gnu.org> wrote:
-> > > On Mon, 2011-02-28 at 19:33 +0000, Otavio Salvador wrote:
-> > >> On Mon, Feb 28, 2011 at 17:17, Phil Blundell <philb@gnu.org> wrote:
-> > > I just tried linking xfreerdp by hand with gold and the resulting binary
-> > > seemed to come out fine.  So I think this is indeed a bug in GNU ld.
-> > 
-> > Personally I think we need to trace it down (we as project) since it
-> > can lead to broken and difficult to trace behaviour. It took 3 days
-> > until I managed to identify the symbol failure.
-> 
-> Yeah, that might be true.  Or we could maybe just switch the default
-> linker to be gold, at least on targets that it supports. 
+On (02/03/11 15:41), Paul Menzel wrote:
+> Dear OE folks,
+>=20
+>=20
+>=20
+> task compile of `alsa-utils_1.0.24.2` committed in 679b4bb0 [1] fails
+> with the following error message using `minimal-uclibc` for
+> `MACHINE=3D"beagleboard"`.
+>=20
+> 	arm-oe-linux-uclibceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3D=
+neon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=3D/oe/buil=
+d-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DH=
+AVE_CONFIG_H -I. -I../include    -I/oe/build-minimal-uclibc/minimal-uclibc-=
+dev/sysroots/i686-linux/usr/include -I/oe/build-minimal-uclibc/minimal-ucli=
+bc-dev/sysroots/i686-linux/usr/include/ncurses -DCURSESINC=3D"<ncurses.h>" =
+-fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe=
+ -I/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
+ibceabi/usr/include -MT utils.o -MD -MP -MF .deps/utils.Tpo -c -o utils.o u=
+tils.c
+> 	arm-oe-linux-uclibceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3D=
+neon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=3D/oe/buil=
+d-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DH=
+AVE_CONFIG_H -I. -I../include    -I/oe/build-minimal-uclibc/minimal-uclibc-=
+dev/sysroots/i686-linux/usr/include -I/oe/build-minimal-uclibc/minimal-ucli=
+bc-dev/sysroots/i686-linux/usr/include/ncurses -DCURSESINC=3D"<ncurses.h>" =
+-fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe=
+ -I/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
+ibceabi/usr/include -MT volume_mapping.o -MD -MP -MF .deps/volume_mapping.T=
+po -c -o volume_mapping.o volume_mapping.c
+> 	volume_mapping.c: In function 'get_normalized_volume':
+> 	volume_mapping.c:112:15: warning: incompatible implicit declaration of b=
+uilt-in function 'exp10'
+> 	volume_mapping.c: In function 'set_normalized_volume':
+> 	volume_mapping.c:147:14: warning: incompatible implicit declaration of b=
+uilt-in function 'exp10'
+> 	mv -f .deps/mixer_widget.Tpo .deps/mixer_widget.Po
+> 	arm-oe-linux-uclibceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3D=
+neon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=3D/oe/buil=
+d-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DH=
+AVE_CONFIG_H -I. -I../include    -I/oe/build-minimal-uclibc/minimal-uclibc-=
+dev/sysroots/i686-linux/usr/include -I/oe/build-minimal-uclibc/minimal-ucli=
+bc-dev/sysroots/i686-linux/usr/include/ncurses -DCURSESINC=3D"<ncurses.h>" =
+-fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe=
+ -I/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
+ibceabi/usr/include -MT widget.o -MD -MP -MF .deps/widget.Tpo -c -o widget.=
+o widget.c
+> 	mv -f .deps/utils.Tpo .deps/utils.Po
+> 	mv -f .deps/volume_mapping.Tpo .deps/volume_mapping.Po
+> 	mv -f .deps/widget.Tpo .deps/widget.Po
+> 	mv -f .deps/mixer_display.Tpo .deps/mixer_display.Po
+> 	arm-oe-linux-uclibceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3D=
+neon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=3D/oe/buil=
+d-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -I/=
+oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/i686-linux/usr/include =
+-I/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/i686-linux/usr/inclu=
+de/ncurses -DCURSESINC=3D"<ncurses.h>" -fexpensive-optimizations -fomit-fra=
+me-pointer -frename-registers -Os -pipe -I/oe/build-minimal-uclibc/minimal-=
+uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi/usr/include  -Wl,-O1 -Wl,--h=
+ash-style=3Dgnu  -L/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/arm=
+v7a-oe-linux-uclibceabi/usr/lib -o alsamixer card_select.o cli.o colors.o d=
+evice_name.o die.o mainloop.o mem.o mixer_controls.o mixer_display.o mixer_=
+widget.o proc_files.o textbox.o utils.o volume_mapping.o widget.o -L/oe/bui=
+ld-minimal-uclibc/minimal-uclibc-dev/sysroots/i686-linux/usr/lib -lform -lm=
+enu -lpanel -lncurses -ltinfo -lasound -L/oe/build-minimal-uclib
+> c/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi/usr/lib -lm -ldl=
+ -lpthread
+> 	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
+ibceabi/usr/lib/libasound.so: warning: gethostbyname is obsolescent, use ge=
+tnameinfo() instead.
+> 	volume_mapping.o: In function `get_normalized_volume':
+> 	volume_mapping.c:(.text+0x124): undefined reference to `exp10'
+> 	volume_mapping.c:(.text+0x154): undefined reference to `exp10'
+> 	volume_mapping.o: In function `set_normalized_volume':
+> 	volume_mapping.c:(.text+0x2d4): undefined reference to `exp10'
+> 	collect2: ld returned 1 exit status
 
-Yes I have been doing this slowly for ARM. but probably it will be
-better with gcc 4.6 where linker will be selectable with options
+exp10 and pow10 are unimplemented in uclibc
 
-> 
-> > I am far from an expert on linking and GNU ld. For debugging it I'd
-> > need guidance.
-> 
-> I think the place to start looking would be _bfd_elf_merge_symbol(),
-> which is in bfd/elflink.c.  This gets called by
-> elf_link_add_object_symbols() to record the syms that it finds and I
-> suspect that one or other of those functions is probably doing the wrong
-> thing.
-> 
-> Or, if you don't want to debug it yourself, you could try to create a
-> testcase that shows the problem and then file a bug report with binutils
-> upstream.
-> 
-> p.
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
--- 
 -Khem
 
 
