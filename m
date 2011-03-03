@@ -1,29 +1,40 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1Pv2p0-0000Ct-DX
+	(envelope-from <martin.jansa@gmail.com>) id 1Pv2zk-0000Mc-GZ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Mar 2011 08:19:39 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 0EE0049127F;
-	Thu,  3 Mar 2011 08:18:12 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 3 Mar 2011 08:18:12 +0100
-Message-ID: <4D6F40A9.2060606@dresearch.de>
-Date: Thu, 03 Mar 2011 08:18:01 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.14) Gecko/20110221 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
+	Thu, 03 Mar 2011 08:30:44 +0100
+Received: by fxm8 with SMTP id 8so833892fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 02 Mar 2011 23:29:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=zC3Tg6t4ebEAGPf4RXieQ9voCtmxNGOWCZs6kG0K9bc=;
+	b=eeReGs1yznhWEHjNDS9+DiyOXaE7JndR8ppaWpntWZKXt+hTgbjKph0YAMOkM0SYYY
+	JD+uJBGwohc6QMFX3041QlspbQ+L+MnWbM5UK/eLJa2TLTMHrpuElVu4dTzK7seHQztP
+	7BQXJklZu5lAYS8Fdclu238w8a/AirTXjsR48=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=VmKf1BLeLEliKV3Hk0DmfHVuLT8J5bQssSCxXJYWaHCAXAqyMjAcsxRVLXzqslHYSn
+	Xm4/4sgKOZI2CuNBvy+GNbe8D1gRSDZ3ECm3s16jkGA7v8uREqlx70XGXECINlKS9eep
+	MdzVDo2VbeiIjQzb2DiciWWfI+uYa5EML0mQI=
+Received: by 10.223.96.195 with SMTP id i3mr1044582fan.77.1299137267286;
+	Wed, 02 Mar 2011 23:27:47 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id o12sm389499fav.6.2011.03.02.23.27.45
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 02 Mar 2011 23:27:46 -0800 (PST)
+Date: Thu, 3 Mar 2011 08:27:45 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4D64BD5E.6040805@dresearch.de> <4D6DF124.2080607@dresearch.de>
-	<AANLkTi=sJanB_o6LGmg=3-96=iDD8VMrM-DLp4EC+zBr@mail.gmail.com>
-	<4D6E0CF4.4040005@dresearch.de>
-	<AANLkTi=UYfsdZQvvQzLMBkZ21wFpPQK-p7pdbSy1F-_H@mail.gmail.com>
-In-Reply-To: <AANLkTi=UYfsdZQvvQzLMBkZ21wFpPQK-p7pdbSy1F-_H@mail.gmail.com>
-X-OriginalArrivalTime: 03 Mar 2011 07:18:12.0211 (UTC)
-	FILETIME=[27C88430:01CBD973]
-Subject: Re: net-snmp-svn-r7.0 do_compile failed
+Message-ID: <20110303072744.GB419@jama.jama.net>
+References: <20110224164519.GA12581@jama.jama.net>
+	<1298647636-13022-1-git-send-email-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1298647636-13022-1-git-send-email-Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH] bitbake.conf: define shared PERSISTENT_DIR and point it outside TMPDIR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,56 +48,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Mar 2011 07:19:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 03 Mar 2011 07:30:44 -0000
+X-Groupsio-MsgNum: 29893
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="98e8jtXdkpgskNou"
+Content-Disposition: inline
+
+--98e8jtXdkpgskNou
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Am 02.03.2011 21:45, schrieb Khem Raj:
-> On Wed, Mar 2, 2011 at 1:25 AM, Steffen Sledz <sledz@dresearch.de> wrot=
-e:
->> failed here).
->>>
->>> for svn recipe you can bump rev up
->>
->> I tried to bump to some newer revs (19399/5.6, 19787/5.6.1, 20047/HEAD=
-) but ended up in some undefined referrence errors (nl_handle_destroy and=
- nl_handle_alloc) in all cases. :(
->>
->> So this needs some more attention.
+On Fri, Feb 25, 2011 at 04:27:16PM +0100, Martin Jansa wrote:
+> * import from poky 6a11cf7dfe930461a6660e3b783b546fa2634900
+> * we had CACHE var pointing to machine specific dir since 2006
+>   caf077679022f37ce55d758101f130e4e93bd7b5
+> * current bitbake is looking for cache dir like this:
+>   cachedir =3D (bb.data.getVar("PERSISTENT_DIR", d, True) or
+>               bb.data.getVar("CACHE", d, True))
+>   which without PERSISTENT_DIR defined picks machine-specific CACHE dir
+>   so LOCALCOUNT numbers in SRCPV keeps rolling with every MACHINE switch
+>   in same builddir :/
+
+ping?
+
 >=20
-> --disable-nls in EXTRA_OECONF does that help ?
-
-Nope.
-
->> Jamie, you're listed as net-snmp maintainer. Can you look into this pl=
-ease.
->>
->>> and for others you can backport the
->>> fix and you can backport it as it is ideally that patch should
->>> have changed configure.ac and regenerated configure but they patched
->>> configure instead. but its ok to patch configure here since
->>> we do not regenerate configure for net-snmp recipe.
->>
->> As mentioned before i failed trying this. The patch does not apply wit=
-hout modifications. :(
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  classes/sanity.bbclass |   12 ++++++++++++
+>  conf/bitbake.conf      |    2 ++
+>  conf/sanity.conf       |    1 +
+>  3 files changed, 15 insertions(+), 0 deletions(-)
 >=20
-> hmmm I cant promise but if I have time I can look into it
-
-Would be really great.
-
-Steffen
-
-PS: And i'm willing to lern, so i'm looking forward excitedly to your sol=
-ution. ;-)
+> diff --git a/classes/sanity.bbclass b/classes/sanity.bbclass
+> index 1e6b170..ffe3a49 100644
+> --- a/classes/sanity.bbclass
+> +++ b/classes/sanity.bbclass
+> @@ -189,6 +189,18 @@ def check_sanity(e):
+>  	if messages !=3D "":
+>  		raise_sanity_error(messages)
+> =20
+> +	#
+> +	# Check there isn't old persistent cache
+> +	#
+> +	cache =3D data.getVar('CACHE', e.data, True)
+> +	persistent_dir =3D data.getVar('PERSISTENT_DIR', e.data, True)
+> +	persistent_cache_filename =3D data.getVar('SANITY_PERSIST_DATA_FILE', e=
+=2Edata, True)
+> +	if os.path.exists(cache + '/' + persistent_cache_filename):
+> +		messages =3D messages + "Error, persistent cache file '%s' exists in o=
+ld location '%s', please migrate it to new location '%s' and merge them tog=
+ether if you have one for each MACHINE.\n" % (persistent_cache_filename, ca=
+che, persistent_dir)
+> +
+> +	if messages !=3D "":
+> +		raise_sanity_error(messages)
+> +
+>  python check_sanity_eventhandler() {
+>      if isinstance(e, bb.event.BuildStarted):
+>          check_sanity(e)
+> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+> index 88ad2ba..0c11cdb 100644
+> --- a/conf/bitbake.conf
+> +++ b/conf/bitbake.conf
+> @@ -294,6 +294,8 @@ FILESDIR =3D "${@bb.which(d.getVar('FILESPATH', 1), '=
+=2E')}"
+> =20
+>  TMPDIR =3D "${TOPDIR}/tmp"
+>  CACHE =3D "${TMPDIR}/cache${@['', '/' + str(bb.data.getVar('MACHINE', d,=
+ 1))][bool(bb.data.getVar('MACHINE', d, 1))]}"
+> +# The persistent cache should be shared by all builds
+> +PERSISTENT_DIR =3D "${TOPDIR}/conf/persistent"
+>  CO_DIR =3D "${DL_DIR}"
+>  CVSDIR =3D "${CO_DIR}/cvs"
+>  SVNDIR =3D "${CO_DIR}/svn"
+> diff --git a/conf/sanity.conf b/conf/sanity.conf
+> index e9902f6..c1ac332 100644
+> --- a/conf/sanity.conf
+> +++ b/conf/sanity.conf
+> @@ -7,5 +7,6 @@ BB_MIN_VERSION =3D "1.10.2"
+> =20
+>  SANITY_ABIFILE =3D "${TMPDIR}/abi_version"
+>  SANITY_PRFILE =3D "${TMPDIR}/distro_pr"
+> +SANITY_PERSIST_DATA_FILE =3D "bb_persist_data.sqlite3"
+> =20
+>  INHERIT +=3D "sanity"
+> --=20
+> 1.7.4.1
+>=20
 
 --=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--98e8jtXdkpgskNou
+Content-Type: application/pgp-signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
 
+iEYEARECAAYFAk1vQvAACgkQN1Ujt2V2gBw+UgCcCMFXCk7BWMwTtI9+o6L52d85
+1qgAoJRRYFYERFUpVRXGSXvUdnsP1eCx
+=ZlF1
+-----END PGP SIGNATURE-----
+
+--98e8jtXdkpgskNou--
