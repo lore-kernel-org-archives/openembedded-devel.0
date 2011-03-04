@@ -1,34 +1,31 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1Pvcs3-0002AF-3p
+	(envelope-from <leon.woestenberg@gmail.com>) id 1PvdlB-0008PT-2a
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Mar 2011 22:49:11 +0100
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.3])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Pvcqd-0006Aw-Ck
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Mar 2011 22:47:43 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4D711947.4030104@gmail.com>
-References: <AANLkTinUjtis22ZnLaP7uc0fa9nzxvhWod2uv43ZcJH=@mail.gmail.com>
-	<1298669695.3818.5.camel@lenovo.internal.reciva.com>
-	<AANLkTi=afktV1HC4Jdq_ammNdA+h4iMAWdJT809s+LMv@mail.gmail.com>
-	<1298905700.23547.6.camel@phil-desktop>
-	<AANLkTimyU4bSm9tM2LO5bMoqiFQqZXxt5Js7fg0B_HhJ@mail.gmail.com>
-	<1298913422.23547.20.camel@phil-desktop>
-	<AANLkTimomznky1rBn5QTqzS16O6Lk3VxHUx1pG+ULe3v@mail.gmail.com>
-	<1298979308.23547.67.camel@phil-desktop>
-	<AANLkTimk6cXCRROwcD5cOkfarJuMkvg=A0cM_Um6oOSZ@mail.gmail.com>
-	<1299080486.23547.230.camel@phil-desktop>
-	<20110303041807.GA2692@sakrah.homelinux.org>
-	<1299254943.23547.334.camel@phil-desktop> <4D711947.4030104@gmail.com>
-Date: Fri, 04 Mar 2011 21:47:37 +0000
-Message-ID: <1299275257.3930.23.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: Missing GLIBC_<version> tags on binaries
+	Fri, 04 Mar 2011 23:46:09 +0100
+Received: by fxm8 with SMTP id 8so2641728fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Mar 2011 14:44:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=Zmff6qC0M2TkW+zBmAFoDaOQ/kQqnyMojR7IXps3+1c=;
+	b=X/GmP5TLu8miC/gR90Wj7DunMaNUc8TxX5sjbYvFVB6ZR+b1LMWPuWIc7WnOlSNL6j
+	Yflt8csv6/M9S95WJTU05QRGJiJ5CNAU6uvDlKDj9014QgjkZJRg542ZpK9fAK4McNFn
+	/tAZN16KLljwi0I9P6LXVpdzIHqGIN90W6z6w=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=Lua0x+nuSZMh1VMSHNwnrZouX63nsreDWaZg/ZKTqhknPpNdC/SIbw6raKZDsWGvYA
+	GktihnrH1arpFpC6LQl1mpN2p2yPTBmN5d6zi4ZvgFM+o8LoxSVChXbNdTz5nueOoUfz
+	JBisAUI5yMgXqdqo7lwJ4bnRcVOLpTZ8WuFi8=
+MIME-Version: 1.0
+Received: by 10.223.16.148 with SMTP id o20mr1468931faa.149.1299278677450;
+	Fri, 04 Mar 2011 14:44:37 -0800 (PST)
+Received: by 10.223.156.193 with HTTP; Fri, 4 Mar 2011 14:44:37 -0800 (PST)
+Date: Fri, 4 Mar 2011 23:44:37 +0100
+Message-ID: <AANLkTi=zMn-PrjAFc6JTiJRhHHPodvtYDV5kakKdd0bu@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [BRANCH REMOVAL REQUEST] likewise/nios2 and nios2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,21 +39,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Mar 2011 21:49:11 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 04 Mar 2011 22:46:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, 2011-03-04 at 08:54 -0800, Khem Raj wrote:
-> I am talking about --with-linker option
+Hello all,
 
-Does that make much of a difference here?  I would have thought that any
-given DISTRO would probably want to use either gold or ld.bfd as the
-default and they could manage that by just configuring binutils
-appropriately, and/or by installing a wrapper script for ld.  It's not
-totally obvious to me that --with-linker solves any significant problem.
+please remove these branches started by me. These contain work started
+by Walter Goossens to commit NIOS2 support to OE. As I lost access to
+actual hardware, I could not finish the merge. Frans Meulenbroeks has
+followed up the commit and test effort independently.
 
-p.
+These branches have therefore become useless:
 
+remotes/origin/likewise/nios2
+remotes/origin/nios2
 
+Thanks,
+-- 
+Leon
 
 
