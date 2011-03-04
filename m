@@ -1,30 +1,32 @@
-Received: from moutng.kundenserver.de ([212.227.126.186])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eng1@koblersystems.de>) id 1PvUOO-00073r-HB
+	(envelope-from <obi@opendreambox.org>) id 1PvUpk-000329-RV
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Mar 2011 13:46:00 +0100
-Received: from [192.168.1.34] (p57B40AF4.dip0.t-ipconnect.de [87.180.10.244])
-	by mrelayeu.kundenserver.de (node=mrbap1) with ESMTP (Nemesis)
-	id 0Lj4zW-1QYNp43Jks-00dUi0; Fri, 04 Mar 2011 13:44:21 +0100
-Message-ID: <4D70DEA2.6080100@koblersystems.de>
-Date: Fri, 04 Mar 2011 13:44:18 +0100
-From: Jan Kobler <eng1@koblersystems.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20110120 Lightning/1.0b3pre Thunderbird/3.1.7
-MIME-Version: 1.0
-To: Marc Reilly <marc@cpdesign.com.au>
-References: <1298984498-27148-1-git-send-email-eng1@koblersystems.de>
-	<201103030924.09980.marc@cpdesign.com.au>
-	<4D70B652.7010706@koblersystems.de>
-	<201103042209.44904.marc@cpdesign.com.au>
-In-Reply-To: <201103042209.44904.marc@cpdesign.com.au>
-X-Provags-ID: V02:K0:WkrQkJHmNLE7hsTq+jw5u85XlI4uSg+sSP0yp0540+B
-	9N/g/Ys+gtiI6powZY0LTbw9FTO325p0FDQn0y4h4PT0qO/ys+
-	o1cvxuLtqUKGiBUHjOsMXLaHUvYYtMDvLdgOvBjLmJ3IYXQgWj
-	JWSI+iRXV7Ecz8oQfbBCmM9hfMGG7V6NodD7Bn1V9w6QXWhAI3
-	8eYbigkGazfdo6fEZ3GfQ==
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [pcm043 1/2] New machine pcm043 Phytec phyCORE-i.MX35
+	Fri, 04 Mar 2011 14:14:16 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 300E2314E686
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  4 Mar 2011 14:12:48 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id OmbU42I5rgKX
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  4 Mar 2011 14:12:40 +0100 (CET)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id D2E16314E68B
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  4 Mar 2011 14:12:39 +0100 (CET)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Fri, 04 Mar 2011 13:12:39 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  4 Mar 2011 13:12:39 +0000
+Message-Id: <1299244359-5345-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.2.3
+In-Reply-To: <4D705C07.20508@freescale.com>
+References: <4D705C07.20508@freescale.com>
+Subject: [PATCH] mrouted-3.9.4: intitial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,37 +40,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Mar 2011 12:46:00 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 04 Mar 2011 13:14:16 -0000
 
-Hi Marc,
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+This was only compile-tested. It would be nice to get some feedback.
 
-> 
-> I was hoping to look at the libgles recipe and do something similar with the 
-> OpenVG stuff..
-> 
->>
->> 4. Are you trying to create an image, where libgles-mx31 is missing?
-> 
-> No, but video playback is quite slow, so I was looking for a cheap fix to 
-> speed it up :)
-> 
+ recipes/mrouted/mrouted_3.9.4.bb |   23 +++++++++++++++++++++++
+ 1 files changed, 23 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/mrouted/mrouted_3.9.4.bb
 
-I have searched on the web page of Freescale and have found this:
+diff --git a/recipes/mrouted/mrouted_3.9.4.bb b/recipes/mrouted/mrouted_3.9.4.bb
+new file mode 100644
+index 0000000..4ba4111
+--- /dev/null
++++ b/recipes/mrouted/mrouted_3.9.4.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "DVMRP multicast routing daemon"
++HOMEPAGE = "http://troglobit.com/mrouted.shtml"
++SECTION = "network"
++LICENSE = "BSD"
++
++SRC_URI = "ftp://ftp.vmlinux.org/pub/People/jocke/mrouted/mrouted-${PV}.tar.bz2"
++SRC_URI[md5sum] = "688b74fc42919d588f262e6b3c9c6d4c"
++SRC_URI[sha256sum] = "c697549b2e506a380575f7adb67e87288ef2295b97241b3a1aeb0e88b827a3e1"
++
++EXTRA_OEMAKE = " \
++        datadir=${datadir} \
++        mandir=${mandir} \
++        prefix=${prefix} \
++        sysconfdir=${sysconfdir} \
++        DESTDIR=${D} \
++"
++
++do_compile() {
++        oe_runmake
++}
++do_install() {
++        oe_runmake install
++}
+-- 
+1.7.2.3
 
-MBX’s OpenGL/Open VG v3.4 driver for Linux 2.6.24
-http://cache.freescale.com/files/microcontrollers/software/device_drivers/BIN_MBX3.4_OpenGL_VG_DRV_LNX.tar.gz
-
-AN3975 : i.MX35 Accelerated 2D Graphics
-This application note describes optimizing 2D graphics with OpenVG™ and
-i.MX35.
-http://cache.freescale.com/files/dsp/doc/app_note/AN3975.pdf
-
-I don't have time to test it right now.
-
-Best regards
-
-Jan
 
 
