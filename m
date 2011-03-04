@@ -1,33 +1,31 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Pva7e-0004mQ-Dg
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Mar 2011 19:53:06 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Pva6E-00056P-7z from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Mar 2011 10:51:38 -0800
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Fri, 4 Mar 2011 10:51:37 -0800
-Received: from [172.30.80.235] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
-	with Microsoft SMTP Server id 14.1.270.1;
-	Fri, 4 Mar 2011 10:51:37 -0800
-Message-ID: <4D7134B7.7070209@mentor.com>
-Date: Fri, 4 Mar 2011 11:51:35 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+	(envelope-from <raj.khem@gmail.com>) id 1PvaLW-0005Lx-Pf
+	for Openembedded-devel@lists.openembedded.org;
+	Fri, 04 Mar 2011 20:07:26 +0100
+Received: by fxm8 with SMTP id 8so2466816fxm.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Mar 2011 11:05:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:from:date:message-id:subject:to
+	:content-type; bh=OjCnd4iMOvXrj5F1DiPHc1VHJe1uu6gbqkXN9BLO1R4=;
+	b=QEWTzXwc4dQolroewZU5FKH2BeViB/WpXJ7fZIZlmexuuIz6G6UUKL0vjyfatfZT6W
+	0LzN38xfuJwvfSOhSInRajxaBWPuel+msUXqIAgrjJqZ+fafjns+uSOqo1ceEvEDGrDF
+	nb1ADk9/dQ3lxm/BpLy1kjAsHcnMGCwcaTxs4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=MJM8oVQPvx47Y7vPMK/H1SkhcI0X9AQefRTFf4N2pT2KbPzcwvkfpFbKfjIsVvswQi
+	jyLmYyUSm2w1NXmqhY9SNVqUglLjNNvDYrNGQCWD7rY5gZNvOEl6j1Zpa79WU18Xw/u8
+	jSyEROfV/5vk/LxWAmxhJpsbSLcM+GFe3jXwE=
+Received: by 10.223.115.8 with SMTP id g8mr394561faq.55.1299265557079; Fri, 04
+	Mar 2011 11:05:57 -0800 (PST)
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <4D705C07.20508@freescale.com>	<1299244359-5345-1-git-send-email-obi@opendreambox.org>	<4D7107F9.90008@gmail.com>	<1299255257.3830.37.camel@mattotaupa>
-	<4D7122B1.3080609@opendreambox.org>
-In-Reply-To: <4D7122B1.3080609@opendreambox.org>
-X-OriginalArrivalTime: 04 Mar 2011 18:51:37.0341 (UTC)
-	FILETIME=[30C94AD0:01CBDA9D]
-Subject: Re: [PATCH] mrouted-3.9.4: intitial recipe
+Received: by 10.223.30.151 with HTTP; Fri, 4 Mar 2011 11:05:15 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 4 Mar 2011 11:05:15 -0800
+Message-ID: <AANLkTinJ=gHz5m_gE8H_Vfcm22whb1q09FndjrbkdpZ-@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: SCALE 9x report
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,34 +39,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Mar 2011 18:53:06 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 04 Mar 2011 19:07:26 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 03/04/2011 10:34 AM, Andreas Oberritter wrote:
-> On 03/04/2011 05:14 PM, Paul Menzel wrote:
->> Am Freitag, den 04.03.2011, 07:40 -0800 schrieb Khem Raj:
->>> On 3/4/2011 5:12 AM, Andreas Oberritter wrote:
->>>> Signed-off-by: Andreas Oberritter<obi@opendreambox.org>
->>>> ---
->>>> This was only compile-tested. It would be nice to get some feedback.
->>>
->>> Looks ok to me. Does it need any deps? May be building it from scratch
->>> will detect it if not otherwise
->>>
->>> Acked-by: Khem Raj<raj.khem@gmail.com>
->>
->> With the dependencies addressed and …
->
-> Other than using bison, there are no dependencies that I know of.
-> Binutils already depends on bison, so it's always available to cross
-> recipes. Should it be mentioned in mrouted explicitly, or is this a case
-> like binutils, gcc and libc, which never need to be mentioned in DEPENDS?
+Hello
 
-You should always spell out bison-native and flex-native.
+I was manning the OE booth at SCALE 9x in Los Angeles last Week
+Saturday and Sunday. This was my first time at expo so I could not
+compare how it has been in past years
+but from hearing people who have been there before it is ever
+increasing in its attendees and visitors. I being the lone soul at OE
+booth had less time to go around and visit the
+expo but I was relieved periodically thanks to Hunyue and Mike
+Frysinger who would relieve me for some moments. Expo gives right mix
+for corporations and opensource projects
+in the exhibits.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+We had a demo of qt4e-demo-image running on QEMU ARM. Another demo was
+running console-image on 6 different qemu images for ARM x86 PPC MIPS
+MIPS64 and SH4 and each one of them being connected over Ethernet. A
+fantastic demo was arranged by Hunyue at the Spot where he displayed
+custom designed Tablet built on beagleboard
+running angstrom and this little device brought more than expected
+people visiting our booth. I could not show off the demo on efikaMX
+that I had since we could not arrange for a display with HDMI. Many of
+the visitors did not know OE but they knew devices which were powered
+by
+OE. They were very happy at the technology show case and learning the
+technology behind those devices. Webos Internals had a lot bigger
+booth and lot more people visiting them
+they also displayed the OE powered logo (old one) on their banner
+which I thought was cool. Many of the visitors to the booth were
+essentially interested in Embedded Linux and how it goes into devices
+and learning the process and technologies deployed to do it. There
+were few visitors who have worked on OE directly or indirectly.
+
+I met folks that I have been working with for years for first time. It
+was nice to meet them and discuss things face to face. I talked to
+Libreoffice folks and discussed having a mobile version of Libreoffice
+and they were interested to take it back to their mailing lists and
+discuss more.
+
+I would like to thank Cliff Brake for working hard and devoting time
+for revamping the OE poster and sponsoring it. Florian, Mickey,
+Marcin, Leon, Philip, Robert sharing the material
+and their past booth organising experiences. Hunyue Yau for helping me
+through out the expo. Tom King for making it all happen and arrange
+the OE booth at the Expo.
+
+I hope that more of OE people can make it to this expo next year and
+we could become regular attendees at SCALE
+
+Thanks
+-Khem
 
 
