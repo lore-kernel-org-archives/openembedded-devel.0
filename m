@@ -1,27 +1,29 @@
-Received: from 7.26.mail-out.ovh.net ([46.105.40.147] helo=26.mail-out.ovh.net)
+Received: from 2.26.mail-out.ovh.net ([178.33.107.8] helo=26.mail-out.ovh.net)
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Pvz9v-0001dw-Dp
+	(envelope-from <eric@eukrea.com>) id 1PvzzW-0003ys-2S
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Mar 2011 22:37:07 +0100
-Received: (qmail 20534 invoked by uid 503); 5 Mar 2011 20:56:19 -0000
+	Sat, 05 Mar 2011 23:30:26 +0100
+Received: (qmail 20532 invoked by uid 503); 5 Mar 2011 20:56:19 -0000
 Received: from b9.ovh.net (HELO mail407.ha.ovh.net) (213.186.33.59)
 	by 26.mail-out.ovh.net with SMTP; 5 Mar 2011 20:56:18 -0000
 Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 5 Mar 2011 23:28:54 +0200
+	by b0.ovh.net with SMTP; 5 Mar 2011 23:28:55 +0200
 Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
 	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
 	by ns0.ovh.net with SMTP; 5 Mar 2011 23:28:54 +0200
 From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  5 Mar 2011 22:30:02 +0100
-Message-Id: <1299360603-24687-1-git-send-email-eric@eukrea.com>
+Date: Sat,  5 Mar 2011 22:30:03 +0100
+Message-Id: <1299360603-24687-2-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1299360603-24687-1-git-send-email-eric@eukrea.com>
+References: <1299360603-24687-1-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 12328041031501458761
+X-Ovh-Tracer-Id: 12328041031501458762
 X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
 X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
 X-Spam-Check: DONE|U 0.5/N
-Subject: [PATCH 1/2] dropbear: add 0.53.1
+Subject: [PATCH 2/2] qt4: add 4.7.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,181 +37,466 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Mar 2011 21:37:07 -0000
+X-List-Received-Date: Sat, 05 Mar 2011 22:30:26 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* 0.53.1 brings some improvements over 0.52 which was released
-more than 2 years ago. For more details, check the changelog here :
-http://matt.ucc.asn.au/dropbear/CHANGES
-* Please note that DROPBEAR_SMALL_CODEis now disabled which may
-increase the size of the binaries.
+* details on the 4.7.2 release are available here :
+http://qt.nokia.com/developer/changes/changes-4.7.2/
+
+* please note that x11 versions are not yet tested
 
 Signed-off-by: Eric Bénard <eric@eukrea.com>
 ---
- recipes/dropbear/dropbear-0.53.1/allow-nopw.patch  |   40 ++++++++++++++++++++
- recipes/dropbear/dropbear-0.53.1/configure.patch   |   27 +++++++++++++
- .../dropbear/dropbear-0.53.1/fix-2kb-keys.patch    |   12 ++++++
- .../dropbear/dropbear-0.53.1/no-host-lookup.patch  |   12 ++++++
- .../urandom-xauth-changes-to-options.h.patch       |   13 ++++++
- recipes/dropbear/dropbear_0.53.1.bb                |    9 ++++
- 6 files changed, 113 insertions(+), 0 deletions(-)
- create mode 100644 recipes/dropbear/dropbear-0.53.1/allow-nopw.patch
- create mode 100644 recipes/dropbear/dropbear-0.53.1/configure.patch
- create mode 100644 recipes/dropbear/dropbear-0.53.1/fix-2kb-keys.patch
- create mode 100644 recipes/dropbear/dropbear-0.53.1/no-host-lookup.patch
- create mode 100644 recipes/dropbear/dropbear-0.53.1/urandom-xauth-changes-to-options.h.patch
- create mode 100644 recipes/dropbear/dropbear_0.53.1.bb
+ recipes/qt4/qt-4.7.2.inc                           |   72 ++++++++++++++++++++
+ .../0001-Added-Openembedded-crossarch-option.patch |   44 ++++++++++++
+ .../0010-phonon-gstreamer-rgb-endianess.patch      |   23 ++++++
+ recipes/qt4/qt-4.7.2/g++.conf                      |   60 ++++++++++++++++
+ recipes/qt4/qt-4.7.2/hack-out-pg2-4.7.0.patch      |   19 +++++
+ recipes/qt4/qt-4.7.2/linux.conf                    |   66 ++++++++++++++++++
+ recipes/qt4/qt4-embedded_4.7.2.bb                  |   14 ++++
+ recipes/qt4/qt4-tools-native_4.7.2.bb              |   21 ++++++
+ recipes/qt4/qt4-tools-sdk_4.7.2.bb                 |    8 ++
+ recipes/qt4/qt4-x11-free-gles_4.7.2.bb             |   17 +++++
+ recipes/qt4/qt4-x11-free_4.7.2.bb                  |   15 ++++
+ 11 files changed, 359 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/qt4/qt-4.7.2.inc
+ create mode 100644 recipes/qt4/qt-4.7.2/0001-Added-Openembedded-crossarch-option.patch
+ create mode 100644 recipes/qt4/qt-4.7.2/0010-phonon-gstreamer-rgb-endianess.patch
+ create mode 100644 recipes/qt4/qt-4.7.2/g++.conf
+ create mode 100644 recipes/qt4/qt-4.7.2/hack-out-pg2-4.7.0.patch
+ create mode 100644 recipes/qt4/qt-4.7.2/linux.conf
+ create mode 100644 recipes/qt4/qt4-embedded_4.7.2.bb
+ create mode 100644 recipes/qt4/qt4-tools-native_4.7.2.bb
+ create mode 100644 recipes/qt4/qt4-tools-sdk_4.7.2.bb
+ create mode 100644 recipes/qt4/qt4-x11-free-gles_4.7.2.bb
+ create mode 100644 recipes/qt4/qt4-x11-free_4.7.2.bb
 
-diff --git a/recipes/dropbear/dropbear-0.53.1/allow-nopw.patch b/recipes/dropbear/dropbear-0.53.1/allow-nopw.patch
+diff --git a/recipes/qt4/qt-4.7.2.inc b/recipes/qt4/qt-4.7.2.inc
 new file mode 100644
-index 0000000..3f3e8b1
+index 0000000..282bc82
 --- /dev/null
-+++ b/recipes/dropbear/dropbear-0.53.1/allow-nopw.patch
-@@ -0,0 +1,40 @@
-+Index: dropbear-0.51/svr-auth.c
-+===================================================================
-+--- dropbear-0.51.orig/svr-auth.c
-++++ dropbear-0.51/svr-auth.c
-+@@ -270,7 +270,7 @@ static int checkusername(unsigned char *
-+ 		send_msg_userauth_failure(0, 1);
-+ 		return DROPBEAR_FAILURE;
-+ 	}
-+-
-++#ifdef DISALLOW_EMPTY_PW
-+ 	/* check for an empty password */
-+ 	if (ses.authstate.pw_passwd[0] == '\0') {
-+ 		TRACE(("leave checkusername: empty pword"))
-+@@ -279,7 +279,7 @@ static int checkusername(unsigned char *
-+ 		send_msg_userauth_failure(0, 1);
-+ 		return DROPBEAR_FAILURE;
-+ 	}
-+-
-++#endif
-+ 	TRACE(("shell is %s", ses.authstate.pw_shell))
-+ 
-+ 	/* check that the shell is set */
-+Index: dropbear-0.51/svr-authpasswd.c
-+===================================================================
-+--- dropbear-0.51.orig/svr-authpasswd.c
-++++ dropbear-0.51/svr-authpasswd.c
-+@@ -64,9 +64,13 @@ void svr_auth_password() {
-+ 	 * since the shadow password may differ to that tested
-+ 	 * in auth.c */
-+ 	if (passwdcrypt[0] == '\0') {
-++#ifdef DISALLOW_EMPTY_PW
-+ 		dropbear_log(LOG_WARNING, "user '%s' has blank password, rejected",
-+ 				ses.authstate.pw_name);
-+ 		send_msg_userauth_failure(0, 1);
-++#else
-++		send_msg_userauth_success();
-++#endif
-+ 		return;
-+ 	}
-+ 
-diff --git a/recipes/dropbear/dropbear-0.53.1/configure.patch b/recipes/dropbear/dropbear-0.53.1/configure.patch
++++ b/recipes/qt4/qt-4.7.2.inc
+@@ -0,0 +1,72 @@
++DEFAULT_PREFERENCE = "-1"
++LICENSE = "LGPLv2.1 GPLv3"
++
++FILESPATHPKG =. "qt-${PV}:"
++
++SRC_URI = "\
++	ftp://ftp.trolltech.com/qt/source/qt-everywhere-opensource-src-${PV}.tar.gz \
++	file://0004-no-qmake.patch \
++    file://hack-out-pg2-4.7.0.patch \
++	file://0006-freetype-host-includes.patch \
++	file://0001-Added-Openembedded-crossarch-option.patch \
++	file://0010-phonon-gstreamer-rgb-endianess.patch \
++	file://g++.conf \
++	file://linux.conf \
++           "
++# Set necessary variables in the profile
++SRC_URI += "file://qte.sh"
++
++S = "${WORKDIR}/qt-everywhere-opensource-src-${PV}"
++
++FILES_${QT_BASE_NAME}-tools                += "${bindir}/qml"
++
++do_configure_prepend() {
++    for pro in $(find ${S} -name "*.pro") ; do
++        sed -i 's:$$QT_BUILD_TREE/bin/lrelease:${OE_QMAKE_LRELEASE}:g' $pro
++    done
++
++    sed -i s:SEDME:${S}: ${WORKDIR}/linux.conf
++    sed -i \
++    -e /QMAKE_MOC\ /d \
++    -e /QMAKE_UIC\ /d \
++    -e /QMAKE_UIC3\ /d \
++    -e /QMAKE_RCC\ /d \
++    ${S}/configure
++}
++
++do_configure_append() {
++    sed -e '/QMAKE_TARGET /d' -e '/TARGET /d' -i ${S}/translations/Makefile
++}
++
++QT_GLFLAGS ?= ""
++QT_CONFIG_FLAGS += " -javascript-jit -script -scripttools -declarative -xmlpatterns -no-rpath -qt3support -reduce-relocations -silent ${QT_GLFLAGS}"
++
++do_compile() {
++    # Fixup missing wsegl header in some SGX SDKs
++    if ! [ -e ${STAGING_INCDIR}/wsegl.h ] ; then
++        cp src/3rdparty/powervr/wsegl.h src/plugins/gfxdrivers/powervr/QWSWSEGL/
++    fi
++
++    unset CFLAGS CXXFLAGS
++    install -m 0755 ${STAGING_BINDIR_NATIVE}/rcc4 ${S}/bin/rcc
++    install -m 0755 ${STAGING_BINDIR_NATIVE}/moc4 ${S}/bin/moc
++    install -m 0755 ${STAGING_BINDIR_NATIVE}/uic4 ${S}/bin/uic
++    install -m 0755 ${STAGING_BINDIR_NATIVE}/lrelease4 ${S}/bin/lrelease
++
++    oe_runmake ${EXTRA_ENV}
++}
++
++do_install_append() {
++	install -d ${D}${bindir}
++	for i in rcc uic moc ; do
++		install -m 0755 ${S}/bin/$i ${D}${bindir}/
++	done
++
++        #Append an E to the qtdemo file
++        if [ -n "${QT_LIBINFIX}" ] ; then
++                mv ${D}${bindir}/qtdemo ${D}${bindir}/qtdemo${QT_LIBINFIX}
++        fi
++}
++
++SRC_URI[md5sum] = "66b992f5c21145df08c99d21847f4fdb"
++SRC_URI[sha256sum] = "d4783b524b90bcd270ccf6e7a30d5fb51696c47eb5de49ebc2d553cd3eb49336"
+diff --git a/recipes/qt4/qt-4.7.2/0001-Added-Openembedded-crossarch-option.patch b/recipes/qt4/qt-4.7.2/0001-Added-Openembedded-crossarch-option.patch
 new file mode 100644
-index 0000000..fa24efc
+index 0000000..71a04a5
 --- /dev/null
-+++ b/recipes/dropbear/dropbear-0.53.1/configure.patch
-@@ -0,0 +1,27 @@
-+Index: dropbear-0.50/configure.in
-+===================================================================
-+--- dropbear-0.50.orig/configure.in
-++++ dropbear-0.50/configure.in
-+@@ -164,14 +164,20 @@ AC_ARG_ENABLE(openpty,
-+ 			AC_MSG_NOTICE(Not using openpty)
-+ 		else
-+ 			AC_MSG_NOTICE(Using openpty if available)
-+-			AC_SEARCH_LIBS(openpty, util, [AC_DEFINE(HAVE_OPENPTY,,Have openpty() function)])
-++			AC_SEARCH_LIBS(openpty, util, [dropbear_cv_func_have_openpty=yes])
-+ 		fi
-+ 	],
-+ 	[
-+ 		AC_MSG_NOTICE(Using openpty if available)
-+-		AC_SEARCH_LIBS(openpty, util, [AC_DEFINE(HAVE_OPENPTY)])
-++		AC_SEARCH_LIBS(openpty, util, [dropbear_cv_func_have_openpty=yes])
-+ 	]
-+ )
++++ b/recipes/qt4/qt-4.7.2/0001-Added-Openembedded-crossarch-option.patch
+@@ -0,0 +1,44 @@
++From b1ba119f6a824dc01bd42ee00dba4a1653867b72 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Matthias=20G=C3=BCnther?= <matgnt@gmail.com>
++Date: Wed, 12 May 2010 16:52:45 +0200
++Subject: [PATCH 1/9] Added Openembedded "-crossarch" option
++
++---
++ configure |    7 ++++++-
++ 1 files changed, 6 insertions(+), 1 deletions(-)
++
++diff --git a/configure b/configure
++index facd192..9d15136 100755
++--- a/configure
+++++ b/configure
++@@ -954,7 +954,7 @@ while [ "$#" -gt 0 ]; do
++         shift
++         VAL=$1
++         ;;
++-    -prefix|-docdir|-headerdir|-plugindir|-importdir|-datadir|-libdir|-bindir|-translationdir|-sysconfdir|-examplesdir|-demosdir|-depths|-make|-nomake|-platform|-xplatform|-buildkey|-sdk|-arch|-host-arch|-mysql_config)
+++    -prefix|-docdir|-headerdir|-plugindir|-importdir|-datadir|-libdir|-bindir|-translationdir|-sysconfdir|-examplesdir|-demosdir|-depths|-make|-nomake|-platform|-xplatform|-buildkey|-sdk|-arch|-host-arch|-mysql_config|-crossarch)
++         VAR=`echo $1 | sed "s,^-\(.*\),\1,"`
++         shift
++         VAL="$1"
++@@ -1443,6 +1443,9 @@ while [ "$#" -gt 0 ]; do
++     xplatform)
++         XPLATFORM="$VAL"
++         ;;
+++	crossarch)
+++		CROSSARCH="$VAL"
+++		;;
++     debug-and-release)
++         if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
++             CFG_DEBUG_RELEASE="$VAL"
++@@ -2918,6 +2921,8 @@ elif [ "$PLATFORM_MAC" = "yes" ] || [ -z "$CFG_ARCH" ]; then
++     CFG_ARCH=$CFG_HOST_ARCH
++ fi
++ 
+++CFG_ARCH="$CROSSARCH"
 ++
-++if test "x$dropbear_cv_func_have_openpty" = "xyes"; then
-++	AC_DEFINE(HAVE_OPENPTY,,Have openpty() function)
-++	no_ptc_check=yes
-++	no_ptmx_check=yes
-++fi
-+ 		
-+ 
-+ AC_ARG_ENABLE(syslog,
-diff --git a/recipes/dropbear/dropbear-0.53.1/fix-2kb-keys.patch b/recipes/dropbear/dropbear-0.53.1/fix-2kb-keys.patch
++ if [ -d "$relpath/src/corelib/arch/$CFG_ARCH" ]; then
++     if [ "$OPT_VERBOSE" = "yes" ]; then
++         echo "    '$CFG_ARCH' is supported"
++-- 
++1.7.0.4
++
+diff --git a/recipes/qt4/qt-4.7.2/0010-phonon-gstreamer-rgb-endianess.patch b/recipes/qt4/qt-4.7.2/0010-phonon-gstreamer-rgb-endianess.patch
 new file mode 100644
-index 0000000..bb7a4d3
+index 0000000..d43366c
 --- /dev/null
-+++ b/recipes/dropbear/dropbear-0.53.1/fix-2kb-keys.patch
-@@ -0,0 +1,12 @@
-+Index: dropbear-0.50/kex.h
++++ b/recipes/qt4/qt-4.7.2/0010-phonon-gstreamer-rgb-endianess.patch
+@@ -0,0 +1,23 @@
++--- a/src/3rdparty/phonon/gstreamer/qwidgetvideosink.cpp
+++++ b/src/3rdparty/phonon/gstreamer/qwidgetvideosink.cpp
++@@ -18,6 +18,7 @@
++ #include <QApplication>
++ #include "videowidget.h"
++ #include "qwidgetvideosink.h"
+++#include <gst/video/video.h>
++ 
++ QT_BEGIN_NAMESPACE
++ 
++@@ -106,11 +107,7 @@ static GstStaticPadTemplate template_factory_rgb =
++     GST_STATIC_PAD_TEMPLATE("sink",
++                             GST_PAD_SINK,
++                             GST_PAD_ALWAYS,
++-                            GST_STATIC_CAPS("video/x-raw-rgb, "
++-                                            "framerate = (fraction) [ 0, MAX ], "
++-                                            "width = (int) [ 1, MAX ], "
++-                                            "height = (int) [ 1, MAX ],"
++-                                            "bpp = (int) 32"));
+++                            GST_STATIC_CAPS(GST_VIDEO_CAPS_xRGB_HOST_ENDIAN));
++ 
++ template <VideoFormat FMT>
++ struct template_factory; 
+diff --git a/recipes/qt4/qt-4.7.2/g++.conf b/recipes/qt4/qt-4.7.2/g++.conf
+new file mode 100644
+index 0000000..80f925c
+--- /dev/null
++++ b/recipes/qt4/qt-4.7.2/g++.conf
+@@ -0,0 +1,60 @@
++#
++# qmake configuration for common gcc
++#
++
++QMAKE_CC       = $(OE_QMAKE_CC)
++QMAKE_CFLAGS       += -pipe $(OE_QMAKE_CFLAGS)
++QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += $(OE_QMAKE_CFLAGS)
++QMAKE_CFLAGS_DEPS	+= -M
++QMAKE_CFLAGS_WARN_ON	+= -Wall -W
++QMAKE_CFLAGS_WARN_OFF	+= -w
++QMAKE_CFLAGS_RELEASE	+=
++QMAKE_CFLAGS_DEBUG	+= -g
++QMAKE_CFLAGS_SHLIB	+= -fPIC
++QMAKE_CFLAGS_STATIC_LIB	+= -fPIC
++QMAKE_CFLAGS_YACC	+= -Wno-unused -Wno-parentheses
++QMAKE_CFLAGS_HIDESYMS   += -fvisibility=hidden
++QMAKE_CFLAGS_PRECOMPILE += -x c-header -c ${QMAKE_PCH_INPUT} -o ${QMAKE_PCH_OUTPUT}
++QMAKE_CFLAGS_USE_PRECOMPILE += -include ${QMAKE_PCH_OUTPUT_BASE}
++
++QMAKE_CXX      = $(OE_QMAKE_CXX)
++QMAKE_CXXFLAGS     += $$QMAKE_CFLAGS $(OE_QMAKE_CXXFLAGS)
++QMAKE_CXXFLAGS_DEPS	+= $$QMAKE_CFLAGS_DEPS
++QMAKE_CXXFLAGS_WARN_ON	+= $$QMAKE_CFLAGS_WARN_ON
++QMAKE_CXXFLAGS_WARN_OFF	+= $$QMAKE_CFLAGS_WARN_OFF
++QMAKE_CXXFLAGS_RELEASE	+= $$QMAKE_CFLAGS_RELEASE
++QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO += $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO
++QMAKE_CXXFLAGS_DEBUG	+= $$QMAKE_CFLAGS_DEBUG
++QMAKE_CXXFLAGS_SHLIB	+= $$QMAKE_CFLAGS_SHLIB
++QMAKE_CXXFLAGS_STATIC_LIB += $$QMAKE_CFLAGS_STATIC_LIB
++QMAKE_CXXFLAGS_YACC	+= $$QMAKE_CFLAGS_YACC
++QMAKE_CXXFLAGS_HIDESYMS += $$QMAKE_CFLAGS_HIDESYMS -fvisibility-inlines-hidden
++QMAKE_CXXFLAGS_PRECOMPILE += -x c++-header -c ${QMAKE_PCH_INPUT} -o ${QMAKE_PCH_OUTPUT}
++QMAKE_CXXFLAGS_USE_PRECOMPILE = $$QMAKE_CFLAGS_USE_PRECOMPILE
++
++QMAKE_LINK     = $(OE_QMAKE_LINK)
++QMAKE_LINK_SHLIB   = $(OE_QMAKE_LINK)
++QMAKE_LINK_C		= $(OE_QMAKE_LINK)
++QMAKE_LINK_C_SHLIB	= $(OE_QMAKE_LINK)
++QMAKE_LFLAGS       += $(OE_QMAKE_LDFLAGS)
++QMAKE_LFLAGS_RELEASE	+=
++QMAKE_LFLAGS_DEBUG	+=
++QMAKE_LFLAGS_APP	+=
++QMAKE_LFLAGS_SHLIB	+= -shared
++QMAKE_LFLAGS_PLUGIN	+= $$QMAKE_LFLAGS_SHLIB
++QMAKE_LFLAGS_SONAME	+= -Wl,-soname,
++QMAKE_LFLAGS_THREAD	+=
++QMAKE_LFLAGS_NOUNDEF	+= -Wl,--no-undefined
++QMAKE_LFLAGS_RPATH        = -Wl,-rpath-link,
++
++QMAKE_PCH_OUTPUT_EXT    = .gch
++
++# -Bsymbolic-functions (ld) support
++QMAKE_LFLAGS_BSYMBOLIC_FUNC = -Wl,-Bsymbolic-functions
++QMAKE_LFLAGS_DYNAMIC_LIST = -Wl,--dynamic-list,
++
++# some linking helper...
++CONFIG += rpath_libdirs
++
++# for the SDK
++isEmpty(QMAKE_QT_CONFIG):QMAKE_QT_CONFIG = $(OE_QMAKE_QT_CONFIG)
+diff --git a/recipes/qt4/qt-4.7.2/hack-out-pg2-4.7.0.patch b/recipes/qt4/qt-4.7.2/hack-out-pg2-4.7.0.patch
+new file mode 100644
+index 0000000..5c588ff
+--- /dev/null
++++ b/recipes/qt4/qt-4.7.2/hack-out-pg2-4.7.0.patch
+@@ -0,0 +1,19 @@
++Index: qt-everywhere-opensource-src-4.7.0/configure
 +===================================================================
-+--- dropbear-0.50.orig/kex.h
-++++ dropbear-0.50/kex.h
-+@@ -59,6 +59,6 @@ struct KEXState {
-+ 
-+ };
-+ 
-+-#define MAX_KEXHASHBUF 2000
-++#define MAX_KEXHASHBUF 3000
-+ 
-+ #endif /* _KEX_H_ */
-diff --git a/recipes/dropbear/dropbear-0.53.1/no-host-lookup.patch b/recipes/dropbear/dropbear-0.53.1/no-host-lookup.patch
++--- qt-everywhere-opensource-src-4.7.0.orig/configure	2010-09-22 15:43:51.191162141 -0400
+++++ qt-everywhere-opensource-src-4.7.0/configure	2010-09-22 15:44:35.179981232 -0400
++@@ -4921,10 +4921,10 @@
++         psql)
++             if [ "$CFG_SQL_psql" != "no" ]; then
++                 # Be careful not to use native pg_config when cross building.
++-                if [ "$XPLATFORM_MINGW" != "yes" ] && "$WHICH" pg_config >/dev/null 2>&1; then
++-                    QT_CFLAGS_PSQL=`pg_config --includedir 2>/dev/null`
++-                    QT_LFLAGS_PSQL=`pg_config --libdir 2>/dev/null`
++-                fi
+++#                if [ "$XPLATFORM_MINGW" != "yes" ] && "$WHICH" pg_config >/dev/null 2>&1; then
+++#                    QT_CFLAGS_PSQL=`pg_config --includedir 2>/dev/null`
+++#                    QT_LFLAGS_PSQL=`pg_config --libdir 2>/dev/null`
+++#                fi
++                 [ -z "$QT_CFLAGS_PSQL" ] || QT_CFLAGS_PSQL="-I$QT_CFLAGS_PSQL"
++                 [ -z "$QT_LFLAGS_PSQL" ] || QT_LFLAGS_PSQL="-L$QT_LFLAGS_PSQL"
++                 # But, respect PSQL_LIBS if set
+diff --git a/recipes/qt4/qt-4.7.2/linux.conf b/recipes/qt4/qt-4.7.2/linux.conf
 new file mode 100644
-index 0000000..d7c2ccd
+index 0000000..a541355
 --- /dev/null
-+++ b/recipes/dropbear/dropbear-0.53.1/no-host-lookup.patch
-@@ -0,0 +1,12 @@
-+diff -urN dropbear-0.51/options.h dropbear-0.51.new/options.h
-+--- dropbear-0.51/options.h	2008-03-27 14:34:39.000000000 +0100
-++++ dropbear-0.51.new/options.h	2008-06-22 00:22:09.000000000 +0200
-+@@ -112,7 +112,7 @@
-+ /* #define DSS_PROTOK */
-+ 
-+ /* Whether to do reverse DNS lookups. */
-+-#define DO_HOST_LOOKUP
-++/* #define DO_HOST_LOOKUP */
-+ 
-+ /* Whether to print the message of the day (MOTD). This doesn't add much code
-+  * size */
-diff --git a/recipes/dropbear/dropbear-0.53.1/urandom-xauth-changes-to-options.h.patch b/recipes/dropbear/dropbear-0.53.1/urandom-xauth-changes-to-options.h.patch
++++ b/recipes/qt4/qt-4.7.2/linux.conf
+@@ -0,0 +1,66 @@
++#
++# qmake configuration for common linux
++#
++
++QMAKE_CFLAGS_THREAD	+= -D_REENTRANT
++QMAKE_CXXFLAGS_THREAD	+= $$QMAKE_CFLAGS_THREAD
++
++QMAKE_INCDIR          =
++QMAKE_LIBDIR          =
++QMAKE_INCDIR_X11      =
++QMAKE_LIBDIR_X11      =
++QMAKE_INCDIR_QT       = $(OE_QMAKE_INCDIR_QT)
++QMAKE_LIBDIR_QT       = $(OE_QMAKE_LIBDIR_QT)
++QMAKE_INCDIR_OPENGL   =
++QMAKE_LIBDIR_OPENGL   =
++QMAKE_INCDIR_OPENGL_ES1 = $$QMAKE_INCDIR_OPENGL
++QMAKE_LIBDIR_OPENGL_ES1 = $$QMAKE_LIBDIR_OPENGL
++QMAKE_INCDIR_OPENGL_ES2 = $$QMAKE_INCDIR_OPENGL
++QMAKE_LIBDIR_OPENGL_ES2 = $$QMAKE_LIBDIR_OPENGL
++QMAKE_INCDIR_EGL      =
++QMAKE_LIBDIR_EGL      =
++QMAKE_INCDIR_OPENVG   =
++QMAKE_LIBDIR_OPENVG   =
++
++
++QMAKE_LIBS            =
++QMAKE_LIBS_DYNLOAD    = -ldl
++QMAKE_LIBS_X11        = $(OE_QMAKE_LIBS_X11)
++QMAKE_LIBS_X11SM      = $(OE_QMAKE_LIBS_X11SM)
++QMAKE_LIBS_NIS        = -lnsl
++QMAKE_LIBS_EGL        = -lEGL
++QMAKE_LIBS_OPENGL     = -lGLU -lGL
++QMAKE_LIBS_OPENGL_QT  = -lGL
++QMAKE_LIBS_OPENGL_ES1 = -lGLES_CM
++QMAKE_LIBS_OPENGL_ES2 = -lGLESv2
++QMAKE_LIBS_OPENVG     = -lOpenVG
++QMAKE_LIBS_THREAD     = -lpthread
++
++QMAKE_MOC             = $(OE_QMAKE_MOC)
++QMAKE_UIC             = $(OE_QMAKE_UIC)
++QMAKE_UIC3            = $(OE_QMAKE_UIC3)
++QMAKE_RCC             = $(OE_QMAKE_RCC)
++QMAKE_QDBUSCPP2XML    = $(OE_QMAKE_QDBUSCPP2XML)
++QMAKE_QDBUSXML2CPP    = $(OE_QMAKE_QDBUSXML2CPP)
++
++QMAKE_AR              = $(OE_QMAKE_AR) cqs
++QMAKE_OBJCOPY         = objcopy
++QMAKE_RANLIB          =
++
++QMAKE_TAR             = tar -cf
++QMAKE_GZIP            = gzip -9f
++
++QMAKE_COPY            = cp -f
++QMAKE_COPY_FILE       = $(COPY)
++QMAKE_COPY_DIR        = $(COPY) -r
++QMAKE_MOVE            = mv -f
++QMAKE_DEL_FILE        = rm -f
++QMAKE_DEL_DIR         = rmdir
++QMAKE_STRIP           = $(OE_QMAKE_STRIP)
++QMAKE_STRIPFLAGS_LIB += --strip-unneeded
++QMAKE_CHK_DIR_EXISTS  = test -d
++QMAKE_MKDIR           = mkdir -p
++QMAKE_INSTALL_FILE    = install -m 644 -p
++QMAKE_INSTALL_PROGRAM = install -m 755 -p
++
++include(unix.conf)
+diff --git a/recipes/qt4/qt4-embedded_4.7.2.bb b/recipes/qt4/qt4-embedded_4.7.2.bb
 new file mode 100644
-index 0000000..bd1657d
+index 0000000..1cd43a6
 --- /dev/null
-+++ b/recipes/dropbear/dropbear-0.53.1/urandom-xauth-changes-to-options.h.patch
-@@ -0,0 +1,13 @@
-+diff --git a/options.h b/options.h
-+index d309ab4..7fbe97b 100644
-+--- a/options.h
-++++ b/options.h
-+@@ -236,7 +236,7 @@ much traffic. */
-+ /* The command to invoke for xauth when using X11 forwarding.
-+  * "-q" for quiet */
-+ #ifndef XAUTH_COMMAND
-+-#define XAUTH_COMMAND "/usr/bin/X11/xauth -q"
-++#define XAUTH_COMMAND "xauth -q"
-+ #endif
-+ 
-+ /* if you want to enable running an sftp server (such as the one included with
-diff --git a/recipes/dropbear/dropbear_0.53.1.bb b/recipes/dropbear/dropbear_0.53.1.bb
-new file mode 100644
-index 0000000..fd6b970
---- /dev/null
-+++ b/recipes/dropbear/dropbear_0.53.1.bb
-@@ -0,0 +1,9 @@
-+require dropbear.inc
++++ b/recipes/qt4/qt4-embedded_4.7.2.bb
+@@ -0,0 +1,14 @@
++DEFAULT_PREFERENCE = "-1"
++
++require qt4-embedded.inc
++
 +PR = "${INC_PR}.0"
 +
-+SRC_URI += "file://no-host-lookup.patch"
++QT_CONFIG_FLAGS_append_armv6 = " -no-neon "
++
++require qt-${PV}.inc
++
++QT_CONFIG_FLAGS += " \
++ -exceptions \
++"
++
+diff --git a/recipes/qt4/qt4-tools-native_4.7.2.bb b/recipes/qt4/qt4-tools-native_4.7.2.bb
+new file mode 100644
+index 0000000..7dbb569
+--- /dev/null
++++ b/recipes/qt4/qt4-tools-native_4.7.2.bb
+@@ -0,0 +1,21 @@
++DEFAULT_PREFERENCE = "-1"
++
++require qt4-tools-native.inc
++LICENSE = "LGPLv2.1 GPLv3"
++
++PR = "${INC_PR}.0"
++
++# Find the g++.conf/linux.conf in the right directory.
++FILESPATHPKG =. "qt-${PV}:"
++SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-everywhere-opensource-src-${PV}.tar.gz \
++           file://qt-config.patch \
++           file://g++.conf \
++           file://linux.conf"
++S = "${WORKDIR}/qt-everywhere-opensource-src-${PV}"
++
++EXTRA_OECONF += " -no-fast -silent -no-rpath"
++
++TOBUILD := "src/tools/bootstrap ${TOBUILD}"
++
++SRC_URI[md5sum] = "66b992f5c21145df08c99d21847f4fdb"
++SRC_URI[sha256sum] = "d4783b524b90bcd270ccf6e7a30d5fb51696c47eb5de49ebc2d553cd3eb49336"
+diff --git a/recipes/qt4/qt4-tools-sdk_4.7.2.bb b/recipes/qt4/qt4-tools-sdk_4.7.2.bb
+new file mode 100644
+index 0000000..c86ac2a
+--- /dev/null
++++ b/recipes/qt4/qt4-tools-sdk_4.7.2.bb
+@@ -0,0 +1,8 @@
++require qt4-tools-sdk.inc
++
++PR = "${INC_PR}.0"
 +
 +DEFAULT_PREFERENCE = "-1"
 +
-+SRC_URI[md5sum] = "0284ea239083f04c8b874e08e1aca243"
-+SRC_URI[sha256sum] = "e24d3cbecd3bc850b2b336b8eb50c845a285ceef8e22544938a582e163d36393"
++SRC_URI[md5sum] = "66b992f5c21145df08c99d21847f4fdb"
++SRC_URI[sha256sum] = "d4783b524b90bcd270ccf6e7a30d5fb51696c47eb5de49ebc2d553cd3eb49336"
+diff --git a/recipes/qt4/qt4-x11-free-gles_4.7.2.bb b/recipes/qt4/qt4-x11-free-gles_4.7.2.bb
+new file mode 100644
+index 0000000..70699ce
+--- /dev/null
++++ b/recipes/qt4/qt4-x11-free-gles_4.7.2.bb
+@@ -0,0 +1,17 @@
++require qt4-x11-free.inc
++PR = "${INC_PR}.0"
++
++QT_GLFLAGS = "-opengl es2 -depths 16,24,32 "
++
++require qt-${PV}.inc
++
++QT_CONFIG_FLAGS += " \
++ -no-embedded \
++ -xrandr \
++ -x11"
++
++FILESPATHPKG .= ":qt4-x11-free-${PV}:qt4-x11-free"
++
++DEPENDS += "virtual/egl"
++require recipes/egl/egl.inc
++PROVIDES += "qt4-x11-free"
+diff --git a/recipes/qt4/qt4-x11-free_4.7.2.bb b/recipes/qt4/qt4-x11-free_4.7.2.bb
+new file mode 100644
+index 0000000..79a765e
+--- /dev/null
++++ b/recipes/qt4/qt4-x11-free_4.7.2.bb
+@@ -0,0 +1,15 @@
++DEFAULT_PREFERENCE = "-1"
++
++require qt4-x11-free.inc
++
++PR = "${INC_PR}.0"
++
++QT_CONFIG_FLAGS_append_armv6 = " -no-neon "
++
++require qt-${PV}.inc
++
++QT_CONFIG_FLAGS += " \
++ -no-embedded \
++ -xrandr \
++ -x11"
++
 -- 
 1.7.0.4
 
