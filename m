@@ -1,47 +1,27 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Pvels-0000eX-Li
+Received: from 7.26.mail-out.ovh.net ([46.105.40.147] helo=26.mail-out.ovh.net)
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1Pvz9v-0001dw-Dp
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Mar 2011 00:50:56 +0100
-Received: by fxm8 with SMTP id 8so2676967fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Mar 2011 15:49:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=qiB33d+yj5yHPo7vyqDb5oWJSN3uNr5kXAUkUWZ8gMw=;
-	b=XGzdG2zaTw1WbuzKYlivw+rnZlAWozI8hdQDWGn8YEfAez5nhPqXzmPNY8wy5c6mtA
-	lagXqYHXMu0zIiYehzY7SQ5w/pZlr8XSIp/+11g9OgUYn4eaDYkl4pm6MrS2GfVZdh6K
-	H5D4VDvpTQ4+igPIwfPOiAQDAj51Xy+lAyYmY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=NIzAmWMKRL+woxVTR7AyXGCfR/uGS0HN4Kfq5Ux0G1BecXISwZdlN7IGJ8TSxhkpo+
-	+iBXbF0G25b7XLtdzHBMdBYJpof8AvXxc6JQd+Y0klBb2IvEjrhol09IyCxbaMmAhdFa
-	GnlDaq6YQgyP4g2Dmh9ACV8dS46W4Nhj25mew=
-Received: by 10.223.75.1 with SMTP id w1mr1460867faj.17.1299282563805; Fri, 04
-	Mar 2011 15:49:23 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.223.30.151 with HTTP; Fri, 4 Mar 2011 15:48:52 -0800 (PST)
-In-Reply-To: <1299275257.3930.23.camel@lenovo.internal.reciva.com>
-References: <AANLkTinUjtis22ZnLaP7uc0fa9nzxvhWod2uv43ZcJH=@mail.gmail.com>
-	<1298669695.3818.5.camel@lenovo.internal.reciva.com>
-	<AANLkTi=afktV1HC4Jdq_ammNdA+h4iMAWdJT809s+LMv@mail.gmail.com>
-	<1298905700.23547.6.camel@phil-desktop>
-	<AANLkTimyU4bSm9tM2LO5bMoqiFQqZXxt5Js7fg0B_HhJ@mail.gmail.com>
-	<1298913422.23547.20.camel@phil-desktop>
-	<AANLkTimomznky1rBn5QTqzS16O6Lk3VxHUx1pG+ULe3v@mail.gmail.com>
-	<1298979308.23547.67.camel@phil-desktop>
-	<AANLkTimk6cXCRROwcD5cOkfarJuMkvg=A0cM_Um6oOSZ@mail.gmail.com>
-	<1299080486.23547.230.camel@phil-desktop>
-	<20110303041807.GA2692@sakrah.homelinux.org>
-	<1299254943.23547.334.camel@phil-desktop> <4D711947.4030104@gmail.com>
-	<1299275257.3930.23.camel@lenovo.internal.reciva.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 4 Mar 2011 15:48:52 -0800
-Message-ID: <AANLkTi=K+z6zmHcw3CwaAxQ=fvrXODMw-=FbH5YOGk0Q@mail.gmail.com>
+	Sat, 05 Mar 2011 22:37:07 +0100
+Received: (qmail 20534 invoked by uid 503); 5 Mar 2011 20:56:19 -0000
+Received: from b9.ovh.net (HELO mail407.ha.ovh.net) (213.186.33.59)
+	by 26.mail-out.ovh.net with SMTP; 5 Mar 2011 20:56:18 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 5 Mar 2011 23:28:54 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 5 Mar 2011 23:28:54 +0200
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Missing GLIBC_<version> tags on binaries
+Date: Sat,  5 Mar 2011 22:30:02 +0100
+Message-Id: <1299360603-24687-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 12328041031501458761
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: [PATCH 1/2] dropbear: add 0.53.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,36 +35,183 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Mar 2011 23:50:56 -0000
+X-List-Received-Date: Sat, 05 Mar 2011 21:37:07 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Fri, Mar 4, 2011 at 1:47 PM, Phil Blundell <philb@gnu.org> wrote:
-> On Fri, 2011-03-04 at 08:54 -0800, Khem Raj wrote:
->> I am talking about --with-linker option
->
-> Does that make much of a difference here? =C2=A0I would have thought that=
- any
-> given DISTRO would probably want to use either gold or ld.bfd as the
-> default and they could manage that by just configuring binutils
-> appropriately, and/or by installing a wrapper script for ld. =C2=A0It's n=
-ot
-> totally obvious to me that --with-linker solves any significant problem.
->
+* 0.53.1 brings some improvements over 0.52 which was released
+more than 2 years ago. For more details, check the changelog here :
+http://matt.ucc.asn.au/dropbear/CHANGES
+* Please note that DROPBEAR_SMALL_CODEis now disabled which may
+increase the size of the binaries.
 
-I think there is more to integration of gold in 4.6 since in local
-setups I have got trunk/4.6 working well with gold but not 4.5
-since trunk worked for me I really did not dig deeper why it would not
-work on 4.5
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes/dropbear/dropbear-0.53.1/allow-nopw.patch  |   40 ++++++++++++++++++++
+ recipes/dropbear/dropbear-0.53.1/configure.patch   |   27 +++++++++++++
+ .../dropbear/dropbear-0.53.1/fix-2kb-keys.patch    |   12 ++++++
+ .../dropbear/dropbear-0.53.1/no-host-lookup.patch  |   12 ++++++
+ .../urandom-xauth-changes-to-options.h.patch       |   13 ++++++
+ recipes/dropbear/dropbear_0.53.1.bb                |    9 ++++
+ 6 files changed, 113 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/dropbear/dropbear-0.53.1/allow-nopw.patch
+ create mode 100644 recipes/dropbear/dropbear-0.53.1/configure.patch
+ create mode 100644 recipes/dropbear/dropbear-0.53.1/fix-2kb-keys.patch
+ create mode 100644 recipes/dropbear/dropbear-0.53.1/no-host-lookup.patch
+ create mode 100644 recipes/dropbear/dropbear-0.53.1/urandom-xauth-changes-to-options.h.patch
+ create mode 100644 recipes/dropbear/dropbear_0.53.1.bb
 
-> p.
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/recipes/dropbear/dropbear-0.53.1/allow-nopw.patch b/recipes/dropbear/dropbear-0.53.1/allow-nopw.patch
+new file mode 100644
+index 0000000..3f3e8b1
+--- /dev/null
++++ b/recipes/dropbear/dropbear-0.53.1/allow-nopw.patch
+@@ -0,0 +1,40 @@
++Index: dropbear-0.51/svr-auth.c
++===================================================================
++--- dropbear-0.51.orig/svr-auth.c
+++++ dropbear-0.51/svr-auth.c
++@@ -270,7 +270,7 @@ static int checkusername(unsigned char *
++ 		send_msg_userauth_failure(0, 1);
++ 		return DROPBEAR_FAILURE;
++ 	}
++-
+++#ifdef DISALLOW_EMPTY_PW
++ 	/* check for an empty password */
++ 	if (ses.authstate.pw_passwd[0] == '\0') {
++ 		TRACE(("leave checkusername: empty pword"))
++@@ -279,7 +279,7 @@ static int checkusername(unsigned char *
++ 		send_msg_userauth_failure(0, 1);
++ 		return DROPBEAR_FAILURE;
++ 	}
++-
+++#endif
++ 	TRACE(("shell is %s", ses.authstate.pw_shell))
++ 
++ 	/* check that the shell is set */
++Index: dropbear-0.51/svr-authpasswd.c
++===================================================================
++--- dropbear-0.51.orig/svr-authpasswd.c
+++++ dropbear-0.51/svr-authpasswd.c
++@@ -64,9 +64,13 @@ void svr_auth_password() {
++ 	 * since the shadow password may differ to that tested
++ 	 * in auth.c */
++ 	if (passwdcrypt[0] == '\0') {
+++#ifdef DISALLOW_EMPTY_PW
++ 		dropbear_log(LOG_WARNING, "user '%s' has blank password, rejected",
++ 				ses.authstate.pw_name);
++ 		send_msg_userauth_failure(0, 1);
+++#else
+++		send_msg_userauth_success();
+++#endif
++ 		return;
++ 	}
++ 
+diff --git a/recipes/dropbear/dropbear-0.53.1/configure.patch b/recipes/dropbear/dropbear-0.53.1/configure.patch
+new file mode 100644
+index 0000000..fa24efc
+--- /dev/null
++++ b/recipes/dropbear/dropbear-0.53.1/configure.patch
+@@ -0,0 +1,27 @@
++Index: dropbear-0.50/configure.in
++===================================================================
++--- dropbear-0.50.orig/configure.in
+++++ dropbear-0.50/configure.in
++@@ -164,14 +164,20 @@ AC_ARG_ENABLE(openpty,
++ 			AC_MSG_NOTICE(Not using openpty)
++ 		else
++ 			AC_MSG_NOTICE(Using openpty if available)
++-			AC_SEARCH_LIBS(openpty, util, [AC_DEFINE(HAVE_OPENPTY,,Have openpty() function)])
+++			AC_SEARCH_LIBS(openpty, util, [dropbear_cv_func_have_openpty=yes])
++ 		fi
++ 	],
++ 	[
++ 		AC_MSG_NOTICE(Using openpty if available)
++-		AC_SEARCH_LIBS(openpty, util, [AC_DEFINE(HAVE_OPENPTY)])
+++		AC_SEARCH_LIBS(openpty, util, [dropbear_cv_func_have_openpty=yes])
++ 	]
++ )
+++
+++if test "x$dropbear_cv_func_have_openpty" = "xyes"; then
+++	AC_DEFINE(HAVE_OPENPTY,,Have openpty() function)
+++	no_ptc_check=yes
+++	no_ptmx_check=yes
+++fi
++ 		
++ 
++ AC_ARG_ENABLE(syslog,
+diff --git a/recipes/dropbear/dropbear-0.53.1/fix-2kb-keys.patch b/recipes/dropbear/dropbear-0.53.1/fix-2kb-keys.patch
+new file mode 100644
+index 0000000..bb7a4d3
+--- /dev/null
++++ b/recipes/dropbear/dropbear-0.53.1/fix-2kb-keys.patch
+@@ -0,0 +1,12 @@
++Index: dropbear-0.50/kex.h
++===================================================================
++--- dropbear-0.50.orig/kex.h
+++++ dropbear-0.50/kex.h
++@@ -59,6 +59,6 @@ struct KEXState {
++ 
++ };
++ 
++-#define MAX_KEXHASHBUF 2000
+++#define MAX_KEXHASHBUF 3000
++ 
++ #endif /* _KEX_H_ */
+diff --git a/recipes/dropbear/dropbear-0.53.1/no-host-lookup.patch b/recipes/dropbear/dropbear-0.53.1/no-host-lookup.patch
+new file mode 100644
+index 0000000..d7c2ccd
+--- /dev/null
++++ b/recipes/dropbear/dropbear-0.53.1/no-host-lookup.patch
+@@ -0,0 +1,12 @@
++diff -urN dropbear-0.51/options.h dropbear-0.51.new/options.h
++--- dropbear-0.51/options.h	2008-03-27 14:34:39.000000000 +0100
+++++ dropbear-0.51.new/options.h	2008-06-22 00:22:09.000000000 +0200
++@@ -112,7 +112,7 @@
++ /* #define DSS_PROTOK */
++ 
++ /* Whether to do reverse DNS lookups. */
++-#define DO_HOST_LOOKUP
+++/* #define DO_HOST_LOOKUP */
++ 
++ /* Whether to print the message of the day (MOTD). This doesn't add much code
++  * size */
+diff --git a/recipes/dropbear/dropbear-0.53.1/urandom-xauth-changes-to-options.h.patch b/recipes/dropbear/dropbear-0.53.1/urandom-xauth-changes-to-options.h.patch
+new file mode 100644
+index 0000000..bd1657d
+--- /dev/null
++++ b/recipes/dropbear/dropbear-0.53.1/urandom-xauth-changes-to-options.h.patch
+@@ -0,0 +1,13 @@
++diff --git a/options.h b/options.h
++index d309ab4..7fbe97b 100644
++--- a/options.h
+++++ b/options.h
++@@ -236,7 +236,7 @@ much traffic. */
++ /* The command to invoke for xauth when using X11 forwarding.
++  * "-q" for quiet */
++ #ifndef XAUTH_COMMAND
++-#define XAUTH_COMMAND "/usr/bin/X11/xauth -q"
+++#define XAUTH_COMMAND "xauth -q"
++ #endif
++ 
++ /* if you want to enable running an sftp server (such as the one included with
+diff --git a/recipes/dropbear/dropbear_0.53.1.bb b/recipes/dropbear/dropbear_0.53.1.bb
+new file mode 100644
+index 0000000..fd6b970
+--- /dev/null
++++ b/recipes/dropbear/dropbear_0.53.1.bb
+@@ -0,0 +1,9 @@
++require dropbear.inc
++PR = "${INC_PR}.0"
++
++SRC_URI += "file://no-host-lookup.patch"
++
++DEFAULT_PREFERENCE = "-1"
++
++SRC_URI[md5sum] = "0284ea239083f04c8b874e08e1aca243"
++SRC_URI[sha256sum] = "e24d3cbecd3bc850b2b336b8eb50c845a285ceef8e22544938a582e163d36393"
+-- 
+1.7.0.4
+
 
 
