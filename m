@@ -1,25 +1,33 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <thebohemian@gmx.net>) id 1PwVcH-0001lp-JW
+Received: from einhorn.in-berlin.de ([192.109.42.8] ident=root)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <sledz@dresearch.de>) id 1PwWBm-00027Y-C3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Mar 2011 09:16:33 +0100
-Received: (qmail invoked by alias); 07 Mar 2011 08:14:57 -0000
-Received: from 168.163.71-86.rev.gaoland.net (EHLO [192.168.42.71])
-	[86.71.163.168]
-	by mail.gmx.net (mp016) with SMTP; 07 Mar 2011 09:14:57 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+eXxEYlIiey9gOutBCropXBLwYGXFo57jlrpI4uk
-	iT4Ez4mSH68Lvk
-Message-ID: <4D7493FB.2040906@gmx.net>
-Date: Mon, 07 Mar 2011 09:14:51 +0100
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
+	Mon, 07 Mar 2011 09:53:14 +0100
+X-Envelope-From: sledz@dresearch.de
+Received: from mobil-400-586.intern.dresearch.de
+	(p57A20496.dip0.t-ipconnect.de [87.162.4.150]) (authenticated bits=0)
+	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
+	p278phUL011475
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
+	Mon, 7 Mar 2011 09:51:43 +0100
+Received: from mobil-400-586.intern.dresearch.de (localhost [IPv6:::1])
+	by mobil-400-586.intern.dresearch.de (Postfix) with ESMTP id 9A84225FDD;
+	Mon,  7 Mar 2011 09:51:41 +0100 (CET)
+Message-ID: <4D749C9D.3020600@dresearch.de>
+Date: Mon, 07 Mar 2011 09:51:41 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.16) Gecko/20101125 SUSE/3.0.11 Lightning/1.0b1
+	Thunderbird/3.0.11
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 1.1.2
-X-Y-GMX-Trusted: 0
-Subject: openssl-native 1.0.0d fails to build
+References: <4D6D0340.9090109@dresearch.de>
+In-Reply-To: <4D6D0340.9090109@dresearch.de>
+X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
+X-MIME-Autoconverted: from 8bit to quoted-printable by einhorn.in-berlin.de id
+	p278phUL011475
+Cc: Michael Lauer <mickey@vanille-media.de>
+Subject: Re: Release-2011.03 gupnp-0.13.4-r0: task do_compile: Failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,101 +41,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Mar 2011 08:16:33 -0000
-X-Groupsio-MsgNum: 29948
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enigD3D1B4BDA74BA235EF093D33"
-
---------------enigD3D1B4BDA74BA235EF093D33
-Content-Type: text/plain; charset=ISO-8859-15
+X-List-Received-Date: Mon, 07 Mar 2011 08:53:14 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
-I'm building angstrom-2010.x for omapp4430-panda on an amd64 box running
-Ubunutu 10.04. While building the console-image it gets to the point
-where openssl-native has to be compiled and there is see strange errors.
-do_configure completes without error but the log.do_configure looks like
-this:
+On 03/01/2011 03:31 PM, Steffen Sledz wrote:
+> Clean build: bitbake gupnp
+>=20
+> | make[3]: Entering directory `/SCRATCH/SSZ/HydraIP/OE/tmp.6/work/armv5=
+te-angstrom-linux-gnueabi/gupnp-0.13.4-r0/gupnp-0.13.4/libgupnp'
+> |   CC     http-headers.lo
+> |   CC     gupnp-context-manager.lo
+> |   CC     gupnp-unix-context-manager.lo
+> |   CC     gupnp-context.lo
+> |   CC     gupnp-control-point.lo
+> |   CC     gupnp-device.lo
+> |   CC     gupnp-device-info.lo
+> |   CC     gupnp-device-proxy.lo
+> |   CC     gupnp-error.lo
+> |   CC     gupnp-resource-factory.lo
+> |   CC     gupnp-root-device.lo
+> |   CC     gupnp-service.lo
+> |   CC     gupnp-service-info.lo
+> |   CC     gupnp-service-proxy.lo
+> |   CC     gupnp-service-introspection.lo
+> |   CC     gupnp-xml-doc.lo
+> |   CC     gupnp-types.lo
+> |   CC     gvalue-util.lo
+> |   CC     xml-util.lo
+> |   CC     gupnp-marshal.lo
+> |   CCLD   libgupnp-1.0.la
+> |   GEN    GUPnP-1.0.gir
+> | Couldn't find include 'Soup-2.4.gir' (search path: ['/SCRATCH/SSZ/Hyd=
+raIP/OE/tmp.6/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/gir-1.0',=
+ '/SCRATCH/SSZ/HydraIP/OE/tmp.6/sysroots/x86_64-linux/usr/share/gir-1.0',=
+ '/usr/share/gir-1.0', '/SCRATCH/SSZ/HydraIP/OE/tmp.6/sysroots/x86_64-lin=
+ux/usr/share/gir-1.0'])
+> | make[3]: *** [GUPnP-1.0.gir] Error 1
+>=20
+> Build Configuration:
+> BB_VERSION        =3D "1.10.2"
+> METADATA_BRANCH   =3D "testing-release-2011.03"
+> METADATA_REVISION =3D "62bf073"
+> TARGET_ARCH       =3D "arm"
+> TARGET_OS         =3D "linux-gnueabi"
+> MACHINE           =3D "hipox"
+> DISTRO            =3D "angstrom"
+> DISTRO_VERSION    =3D "2010.7-test-20110301"
+> TARGET_FPU        =3D "soft"
 
-Configuring for linux-x86_64
-    no-gmp          [default]  OPENSSL_NO_GMP (skip dir)
-    no-jpake        [experimental] OPENSSL_NO_JPAKE (skip dir)
-    no-krb5         [krb5-flavor not specified] OPENSSL_NO_KRB5
-    no-md2          [default]  OPENSSL_NO_MD2 (skip dir)
-    no-rc5          [default]  OPENSSL_NO_RC5 (skip dir)
-    no-rfc3779      [default]  OPENSSL_NO_RFC3779 (skip dir)
-    no-store        [experimental] OPENSSL_NO_STORE (skip dir)
-    no-zlib         [default]
-    no-zlib-dynamic [default]
-IsMK1MF=3D0
-CC            =3Dgcc
-CFLAG         =3D-fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT
--DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN 	-DTERMIO   -Wall
--Wa,--noexecstack -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DSHA1_ASM
--DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DAES_ASM -DWHIRLPOOL_ASM
-EX_LIBS       =3D-ldl
-CPUID_OBJ     =3Dx86_64cpuid.o
-BN_ASM        =3Dx86_64-gcc.o x86_64-mont.o
-DES_ENC       =3Ddes_enc.o fcrypt_b.o
-AES_ENC       =3Daes-x86_64.o
-BF_ENC        =3Dbf_enc.o
-CAST_ENC      =3Dc_enc.o
-RC4_ENC       =3Drc4-x86_64.o
-RC5_ENC       =3Drc5_enc.o
-MD5_OBJ_ASM   =3Dmd5-x86_64.o
-SHA1_OBJ_ASM  =3Dsha1-x86_64.o sha256-x86_64.o sha512-x86_64.o
-RMD160_OBJ_ASM=3D
-CMLL_ENC=3D     =3Dcmll-x86_64.o cmll_misc.o
-PROCESSOR     =3D
-RANLIB        =3Dranlib
-ARFLAGS       =3D
-PERL          =3D/home/rschus/oe/panda/tmp/sysroots/x86_64-linux/usr/bin/=
-perl
-SIXTY_FOUR_BIT_LONG mode
-DES_UNROLL used
-DES_INT used
-RC4_CHUNK is unsigned long
-Makefile is older than Makefile.org, Configure or config.
-Reconfigure the source tree (via './config' or 'perl Configure'), please.=
+It seems that the compile stage of gupnp uses gobject-introspection from =
+the host system. :(
 
-make: *** [Makefile] Error 1
+The mentioned error occurs, if this is not installed there. If i install =
+the package (called gir-repository at openSUSE 11.3), there error changes=
+ to
 
-Since the error at the end does not show up in bitbake the build
-continues (=3D it goes into do_compile). However the compilation stops
-immediately and the log only contains this output:
+|   GEN    GUPnP-1.0.gir
+| /usr/share/gir-1.0/Soup-2.4.gir: Incompatible version 1.0 (supported: 1=
+.2)
 
-NOTE: make -e MAKEFLAGS=3D
-Makefile is older than Makefile.org, Configure or config.
-Reconfigure the source tree (via './config' or 'perl Configure'), please.=
+In general i think it's not a good idea to depend on a gir aka gobject-in=
+trospection installation at the build host but use a gir-native oe packag=
+e. Is such a package available yet?
 
-make: *** [Makefile] Error 1
-FATAL: oe_runmake failed
-ERROR: Function do_compile failed
+Steffen
 
-Manual workaround is to go into the workdir and run 'touch Makefile'.
-After that the build continues just fine.
-
-I did not investigate the problem further yet but would do so if nobody
-has an idea of what the problem in the recipe might be. Does this
-problem occur on other's machines too?
-
-Regards,
-Robert
+--=20
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@DResearch.de
+Fax: +49 30 515932-299
+Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
---------------enigD3D1B4BDA74BA235EF093D33
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iEYEARECAAYFAk10k/4ACgkQG9cfwmwwEtqoQgCgnQpcTetmOMe4Mh61jveYuSID
-oscAn0vdVR2TiT3/+rCllbEBStZ5qg6A
-=C9J8
------END PGP SIGNATURE-----
-
---------------enigD3D1B4BDA74BA235EF093D33--
