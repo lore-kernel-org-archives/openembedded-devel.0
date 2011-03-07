@@ -1,23 +1,25 @@
-Received: from kcmailp05.birch.net ([216.212.0.100] helo=mx01.birch.net)
+Received: from mail-gw0-f50.google.com ([74.125.83.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dick@softplc.com>) id 1PwfDf-00036X-Kq
+	(envelope-from <dick@softplc.com>) id 1PwfGv-0003A9-3m
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Mar 2011 19:31:48 +0100
-Received: (qmail 17367 invoked from network); 7 Mar 2011 18:23:34 -0000
-Received: by simscan 1.0.8 ppid: 17362, pid: 17364, t: 0.0761s scanners:none
-Received: from unknown (HELO [192.100.100.3]) ([65.16.135.194])
-	(envelope-sender <dick@softplc.com>)
-	by mx01.birch.net (qmail-ldap-1.03) with SMTP
+	Mon, 07 Mar 2011 19:35:09 +0100
+Received: by gwaa20 with SMTP id a20so2660825gwa.9
 	for <openembedded-devel@lists.openembedded.org>;
-	7 Mar 2011 18:23:34 -0000
-Message-ID: <4D7522A6.7020303@softplc.com>
-Date: Mon, 07 Mar 2011 12:23:34 -0600
+	Mon, 07 Mar 2011 10:33:35 -0800 (PST)
+Received: by 10.236.19.72 with SMTP id m48mr4022963yhm.9.1299522815152;
+	Mon, 07 Mar 2011 10:33:35 -0800 (PST)
+Received: from localhost.localdomain (host65-16-135-194.birch.net
+	[65.16.135.194])
+	by mx.google.com with ESMTPS id 66sm1934327yhl.46.2011.03.07.10.33.33
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 07 Mar 2011 10:33:34 -0800 (PST)
 From: Dick Hollenbeck <dick@softplc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
-MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] gcc internal executables have debug information attached
+Date: Mon,  7 Mar 2011 12:33:31 -0600
+Message-Id: <1299522811-2065-1-git-send-email-dick@softplc.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: Dick Hollenbeck <dick@softplc.com>
+Subject: [PATCH] cc1 and cc1plus had about 20 mbytes of debug information each, in the final redistributable form. This patch strips those two binaries yielding a savings of about 40 mbytes per SDK.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,30 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Mar 2011 18:31:48 -0000
-X-Groupsio-MsgNum: 29967
-Content-Type: multipart/mixed; boundary="------------000403060402070303060205"
-
---------------000403060402070303060205
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-
-
-
---------------000403060402070303060205
-Content-Type: text/x-patch;
- name="0001-cc1-and-cc1plus-had-about-20-mbytes-of-debug-informa.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename*0="0001-cc1-and-cc1plus-had-about-20-mbytes-of-debug-informa.pa";
- filename*1="tch"
-
-From 75515b7abc69c9161c7acef0d2630cb94eabb05f Mon Sep 17 00:00:00 2001
-From: Dick Hollenbeck <dick@softplc.com>
-Date: Mon, 7 Mar 2011 12:12:48 -0600
-Subject: [PATCH] cc1 and cc1plus had about 20 mbytes of debug information each, in the
- final redistributable form.  This patch strips those two binaries
- yielding a savings of about 40 mbytes per SDK.
+X-List-Received-Date: Mon, 07 Mar 2011 18:35:09 -0000
 
 Signed-off-by: Dick Hollenbeck <dick@softplc.com>
 ---
@@ -94,4 +73,4 @@ index 438c314..2a415be 100644
 1.7.0.4
 
 
---------------000403060402070303060205--
+
