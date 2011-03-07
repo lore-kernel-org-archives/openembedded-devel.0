@@ -1,24 +1,36 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PwXRY-0007ev-I7
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PwXdD-0001BW-OD
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Mar 2011 11:13:37 +0100
-Received: from [192.168.1.15] (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 3D97D4B0477
+	Mon, 07 Mar 2011 11:25:39 +0100
+Received: by iyb26 with SMTP id 26so4050200iyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Mar 2011 11:12:02 +0100 (CET)
-Message-ID: <4D74AF71.4070105@eukrea.com>
-Date: Mon, 07 Mar 2011 11:12:01 +0100
-From: Eric Benard <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Mon, 07 Mar 2011 02:24:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=PtTm4fASYDOUs8mWRLQdlF4fwibePp4TL4BU/1YWeAw=;
+	b=CYIrF9fzo5KheZ9Hu8YPavAfV2/ORKpPgWwOxiWYvjkc67ECc5DTBGflqhIn0TLYIi
+	z9Ko+ZcddIj6cigqA/enubV2Z0JpyHyKk7K+uxSFU+ucUljB7FBvX+aB5wXXbq1hY6/I
+	m//lNgmGP/8zV8oEUq+3tMciLYVXW/UQRtwLs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=r035+WXIkOqmqpaBgmZ4JLbbmzmFTqRSKCQ8IVzJI27L7DIn48A4uAddPDosYdR14Q
+	/tExTC2Y4zIIdWa+5QGanUUw2PQ1Uy+ye5KhCGbxZOUMIdnHzFWUUOtY+d5TphYOCuO3
+	Q4gAbpVSP7NaoGVYQAMZh3CxGNP3iDNc5jvFA=
 MIME-Version: 1.0
+Received: by 10.231.194.195 with SMTP id dz3mr2937186ibb.148.1299493446223;
+	Mon, 07 Mar 2011 02:24:06 -0800 (PST)
+Received: by 10.231.19.5 with HTTP; Mon, 7 Mar 2011 02:24:06 -0800 (PST)
+In-Reply-To: <1299188687.17920.150.camel@lenovo.internal.reciva.com>
+References: <AANLkTinrZHXCyA2USHeuOijx0KrZrNVY7K3uhqwpLaao@mail.gmail.com>
+	<1299188687.17920.150.camel@lenovo.internal.reciva.com>
+Date: Mon, 7 Mar 2011 11:24:06 +0100
+Message-ID: <AANLkTinT-GUhvmLxh80M-41SOAW7c8suBTg9ZR+Pmntq@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1299360603-24687-1-git-send-email-eric@eukrea.com>	<AANLkTikWU836s9FM0e0XKdZPuYb=cZs9c0Z3t9nvbZZh@mail.gmail.com>	<4D74AA7F.6060506@eukrea.com>
-	<1299491850.2132.12.camel@phil-desktop>
-In-Reply-To: <1299491850.2132.12.camel@phil-desktop>
-Subject: Re: [PATCH 1/2] dropbear: add 0.53.1
+Subject: Re: gcc ICE (gcc 4.1.2, nios2), test program included
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,52 +44,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Mar 2011 10:13:37 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 07 Mar 2011 10:25:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hi Phil,
-
-On 07/03/2011 10:57, Phil Blundell wrote:
-> On Mon, 2011-03-07 at 10:50 +0100, Eric Benard wrote:
->> Hi Khem,
+2011/3/3 Phil Blundell <philb@gnu.org>:
+> On Thu, 2011-03-03 at 19:48 +0100, Frans Meulenbroeks wrote:
+>> Dear all,
 >>
->> On 06/03/2011 00:08, Khem Raj wrote:
->>> On Sat, Mar 5, 2011 at 1:30 PM, Eric B=C3=A9nard<eric@eukrea.com>   w=
-rote:
->>>> * 0.53.1 brings some improvements over 0.52 which was released
->>>> more than 2 years ago. For more details, check the changelog here :
->>>> http://matt.ucc.asn.au/dropbear/CHANGES
->>>> * Please note that DROPBEAR_SMALL_CODEis now disabled which may
->>>> increase the size of the binaries.
->>>
->>> can you compare the sizes of .52 and .53.1 so we know how much it wil=
-l be
->>>>
->> for an armv5 target :
->> 0.53.1 : 228112
->> 0.53.1 + DROPBEAR_SMALL_CODE : 178960
->> 0.52 : 183008
+>> I've bumped onto an issue that I seem unable to resolv.
+>> With gcc 4.1.2, target nios2, I get an ICE when compiling dbus:
+>>
+>> [...]
+>>
+>> Anyone an idea on how to tackle this.
 >
-> Looks like DROPBEAR_SMALL_CODE is still worth having then.  Why was it
-> disabled?
+> I'm not sure there's much to say about this really. =A0An ICE is, more or
+> less by definition, a compiler bug in gcc, and the version you're
+> testing with is quite old now (by normal standards if not in the Altera
+> world). =A0So your options would seem to be:
 >
-the changelog doesn't say it but the comment in option.h says :
-/* Set this if you want to use the DROPBEAR_SMALL_CODE option. This can s=
-ave
-several kB in binary size, however will make the symmetrical ciphers (AES=
-, DES
-etc) slower (perhaps by 50%). Recommended for most small systems. */
+> a) find a newer gcc and hope that it fixes the bug;
 
-so maybe they prefered to get performance by default instead of saving 50=
-kB.
+Unfortunately there isn't one.
+>
+> b) debug the failure for yourself (see the gcc manual and/or mailing
+> list for advice); or
 
-We can keep this option by adding this to the recipe :
-+do_configure_prepend() {
-+       echo "#define DROPBEAR_SMALL_CODE" >>${S}/options.h
-+}
-+
+Guess that is the road to travel. Maybe someone has some pointers on
+how to get started with this.
+>
+> c) persuade someone else, presumably one of the nios2 gcc maintainers,
+> to debug it.
 
-Eric
+Unfortunately such maintainer does not seem to exist.
+The nios2 port was done by windriver. I'm speculating that this was
+contract work for Altera. There does not seem to be an active
+maintainer. That is probably also why there is no newer version.
+
+I've encountered the error in dbus; there I managed to develop a patch
+to dbus that avoids triggering the bug.
+However with bitbake -k console-image I see the problem also occurs in
+jasper and tiff:
+
+jpc_t1cod.c: In function 'jpc_getmagctxno':
+jpc_t1cod.c:447: error: Attempt to delete prologue/epilogue insn:
+(insn 76 75 77 0 jpc_t1cod.c:436 (set (reg:SI 22 r22)
+        (plus:SI (reg:SI 22 r22)
+            (reg:SI 8 r8))) -1 (nil)
+    (nil))
+jpc_t1cod.c:447: internal compiler error: in propagate_one_insn, at flow.c:=
+1699
+
+
+tif_ojpeg.c:2078: error: Attempt to delete prologue/epilogue insn:
+(insn 171 170 172 8 tif_ojpeg.c:2078 (set:SI (reg:SI 22 r22)
+        (mem/c:SI (plus:SI (reg/f:SI 27 sp)
+                (const_int 8 [0x8])) [110 S4 A32])) -1 (nil)
+    (nil))
+tif_ojpeg.c:2078: internal compiler error: in propagate_one_insn, at flow.c=
+:1699
+
+Frans.
 
 
