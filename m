@@ -1,36 +1,23 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from kcmailp07.birch.net ([216.212.0.102] helo=mx01.birch.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PwgIY-0004fI-IS
+	(envelope-from <dick@softplc.com>) id 1Pwgzv-0005m1-NW
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Mar 2011 20:40:54 +0100
-Received: by fxm8 with SMTP id 8so4441782fxm.6
+	Mon, 07 Mar 2011 21:25:44 +0100
+Received: (qmail 70715 invoked from network); 7 Mar 2011 19:57:30 -0000
+Received: by simscan 1.0.8 ppid: 70709, pid: 70713, t: 0.0607s scanners:none
+Received: from unknown (HELO [192.100.100.3]) ([65.16.135.194])
+	(envelope-sender <dick@softplc.com>)
+	by mx01.birch.net (qmail-ldap-1.03) with SMTP
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Mar 2011 11:39:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=KJVcRRRCNAbFCVMi9BvtF+wQRfvX1ksN+Bj4JKD63go=;
-	b=HGi/PoAXn8oE0f9kINe/AcKn0pn3xOJO4Y5l5qmPyvAznrXhdB+6qkg0eCRjohCsin
-	oVgLL4ehawPCWDxxdrwVynbyXC0hWUCYUz+oMvCu4sJ1MpHHxI65sgVPeVv/8sKboMPk
-	TN2XTUKmE1A5bHVpnhGev77I54bQ6PcghdpHE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=M6/efO+o4W5JybNnR8rz/JfPZiPv8yNxMrNiZTdTTO8PIWAgtwsx7mk6HXQ5krou1J
-	5oI6iBQPHtialzBIJESCuH3YlxgisEkktLs5/GRkxL5mb72H9wlw8AdHQmQvJtJcZaPX
-	ORO3kqc/LuT0M9O/dXmtkaMlp6EFptcAWOui4=
-Received: by 10.223.76.147 with SMTP id c19mr1543436fak.55.1299526758217; Mon,
-	07 Mar 2011 11:39:18 -0800 (PST)
+	7 Mar 2011 19:57:30 -0000
+Message-ID: <4D7538A9.3050803@softplc.com>
+Date: Mon, 07 Mar 2011 13:57:29 -0600
+From: Dick Hollenbeck <dick@softplc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
 MIME-Version: 1.0
-Received: by 10.223.30.151 with HTTP; Mon, 7 Mar 2011 11:38:48 -0800 (PST)
-In-Reply-To: <1299524617-7212-1-git-send-email-tom_rini@mentor.com>
-References: <1299524617-7212-1-git-send-email-tom_rini@mentor.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 7 Mar 2011 11:38:48 -0800
-Message-ID: <AANLkTikS8xArUAz6mGf=uF=aCffOU78AQ07+iB=90N9p@mail.gmail.com>
-To: Tom Rini <tom_rini@mentor.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] gettext.bbclass: Drop target gettext from DEPENDS.
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] cc1 and cc1plus had about 20 mbytes of debug information each, in the final redistributable form. This patch strips those two binaries yielding a savings of about 40 mbytes per SDK.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,40 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Mar 2011 19:40:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 07 Mar 2011 20:25:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Mon, Mar 7, 2011 at 11:03 AM, Tom Rini <tom_rini@mentor.com> wrote:
-> This should be handled via virtual/libintl already.
->
-> Signed-off-by: Tom Rini <tom_rini@mentor.com>
+> Signed-off-by: Dick Hollenbeck<dick at softplc.com
+<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>>
 
-you have to do some uclibc x11 image build from scratch to check for fallou=
-ts
+>We recently added logic to conf/distro/include/sane-toolchain-* to 
+>handle the debug level via DEBUG_LEVEL.  Would you mind adding a 
+>DEBUG_LEVEL_HOST to conf/bitbake.conf and making BUILD_OPTIMIZATION obey 
+>that instead so that we can drop debug info from all of them?  Thanks.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
-> ---
-> =C2=A0classes/gettext.bbclass | =C2=A0 =C2=A02 +-
-> =C2=A01 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/classes/gettext.bbclass b/classes/gettext.bbclass
-> index 968531b..6c480b5 100644
-> --- a/classes/gettext.bbclass
-> +++ b/classes/gettext.bbclass
-> @@ -11,7 +11,7 @@ python () {
-> =C2=A0 =C2=A0 gettext_after_parse(d)
-> =C2=A0}
->
-> -DEPENDS_GETTEXT =3D "gettext gettext-native virtual/libiconv virtual/lib=
-intl"
-> +DEPENDS_GETTEXT =3D "gettext-native virtual/libiconv virtual/libintl"
->
-> =C2=A0DEPENDS =3D+ "${DEPENDS_GETTEXT}"
-> =C2=A0EXTRA_OECONF +=3D "--enable-nls"
-> --
-> 1.7.0.4
->
->
+
+Tom,
+
+Thanks.  On this one, please just take it over.  I am still coming up to
+speed, and am not able to decipher what you want in a way that will make you
+happy.
+
+I know its only a few lines, and you'll want it done a certain way anyway.
+
+Thanks tons.   The disk savings is substantial and worth your time.
+
+Next time I'll be better positioned to help.
+
+Dick
+
+
+
 
 
