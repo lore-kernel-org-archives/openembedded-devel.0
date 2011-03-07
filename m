@@ -1,38 +1,25 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PwYZq-0004kV-Jj
+	(envelope-from <philb@gnu.org>) id 1PwYfG-0004op-JF
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Mar 2011 12:26:14 +0100
-Received: by iyb26 with SMTP id 26so4088282iyb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Mar 2011 03:24:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=9zQCO+7/LkvvHpMsqgItQUYjts9dnc3EVIjdr1Swj6U=;
-	b=I11PMkJF5RSvx1lTYvk5+OsTLZa7nzljAeKcwIwShz6QdIPSBUNwyG9ZODiQtKR6hz
-	Z0A/YGUGcu7nW80XvJgD0Jp004jRru+3au/DOksfYujCQrISlTDk2z5Kqyjobgg+As1R
-	Pmr50l5z8Ltff0WI3k/CnDqCQhtXCMglq8Ius=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=fjjlxknmyXac5f18gqqgeTfncsjQ4jxOwZfpXSOk2e6dvwpcRDXPn8V2qJ54RO5GIl
-	NghH5o4rr0gXNCJ8rHmHh3pS9Pol0xRUMNKCtCYJcz6CA8vYMNuD2gyyXK3fdxmgSkq4
-	at6dzhEn+0mhMcmNAHTRD76VXX+OIsk3WXj00=
-MIME-Version: 1.0
-Received: by 10.231.39.135 with SMTP id g7mr2787726ibe.173.1299497080824; Mon,
-	07 Mar 2011 03:24:40 -0800 (PST)
-Received: by 10.231.19.5 with HTTP; Mon, 7 Mar 2011 03:24:40 -0800 (PST)
-In-Reply-To: <1299495229.2132.19.camel@phil-desktop>
-References: <AANLkTinrZHXCyA2USHeuOijx0KrZrNVY7K3uhqwpLaao@mail.gmail.com>
-	<1299188687.17920.150.camel@lenovo.internal.reciva.com>
-	<AANLkTinT-GUhvmLxh80M-41SOAW7c8suBTg9ZR+Pmntq@mail.gmail.com>
-	<1299495229.2132.19.camel@phil-desktop>
-Date: Mon, 7 Mar 2011 12:24:40 +0100
-Message-ID: <AANLkTikf1SibvHoA5TzEmEpsg3a+Wob5RbDY1-CJHf0e@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 07 Mar 2011 12:31:50 +0100
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1PwYdo-00011Q-0Z
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 07 Mar 2011 12:30:20 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: gcc ICE (gcc 4.1.2, nios2), test program included
+In-Reply-To: <4D74AF71.4070105@eukrea.com>
+References: <1299360603-24687-1-git-send-email-eric@eukrea.com>
+	<AANLkTikWU836s9FM0e0XKdZPuYb=cZs9c0Z3t9nvbZZh@mail.gmail.com>
+	<4D74AA7F.6060506@eukrea.com> <1299491850.2132.12.camel@phil-desktop>
+	<4D74AF71.4070105@eukrea.com>
+Date: Mon, 07 Mar 2011 11:31:00 +0000
+Message-ID: <1299497460.2132.21.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: [PATCH 1/2] dropbear: add 0.53.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,31 +33,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Mar 2011 11:26:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 07 Mar 2011 11:31:50 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-2011/3/7 Phil Blundell <philb@gnu.org>:
-> On Mon, 2011-03-07 at 11:24 +0100, Frans Meulenbroeks wrote:
->> > b) debug the failure for yourself (see the gcc manual and/or mailing
->> > list for advice); or
->>
->> Guess that is the road to travel. Maybe someone has some pointers on
->> how to get started with this.
->
-> I guess the obvious places to start would be the GCC internals manual:
->
-> http://gcc.gnu.org/onlinedocs/gccint/
->
-> and the GCC wiki:
->
-> http://gcc.gnu.org/wiki/
->
-> In particular http://gcc.gnu.org/wiki/DebuggingGCC has some tips for
-> running the compiler under the debugger.
+On Mon, 2011-03-07 at 11:12 +0100, Eric Benard wrote:
+> the changelog doesn't say it but the comment in option.h says :
+> /* Set this if you want to use the DROPBEAR_SMALL_CODE option. This can save
+> several kB in binary size, however will make the symmetrical ciphers (AES, DES
+> etc) slower (perhaps by 50%). Recommended for most small systems. */
+> 
+> so maybe they prefered to get performance by default instead of saving 50kB.
+> 
+> We can keep this option by adding this to the recipe :
+> +do_configure_prepend() {
+> +       echo "#define DROPBEAR_SMALL_CODE" >>${S}/options.h
+> +}
+> +
 
-Thanks, I hope that'll get me started. Actually ofc I know the
-internals doc but was not aware of the wiki debugging page.
+Sounds like a good idea to me.  I guess the performance might be an
+issue if you are doing lots of transfers with scp on a slow machine, but
+I've never heard anybody complaining about it.  So I think we should
+stick with SMALL_CODE if possible.
 
-Frans
+p.
+
+
 
 
