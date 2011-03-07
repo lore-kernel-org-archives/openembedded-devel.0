@@ -1,23 +1,27 @@
-Received: from kcmailp07.birch.net ([216.212.0.102] helo=mx01.birch.net)
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dick@softplc.com>) id 1Pwgzv-0005m1-NW
+	(envelope-from <gary@mlbassoc.com>) id 1Pwk5x-0001Wm-U7
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Mar 2011 21:25:44 +0100
-Received: (qmail 70715 invoked from network); 7 Mar 2011 19:57:30 -0000
-Received: by simscan 1.0.8 ppid: 70709, pid: 70713, t: 0.0607s scanners:none
-Received: from unknown (HELO [192.100.100.3]) ([65.16.135.194])
-	(envelope-sender <dick@softplc.com>)
-	by mx01.birch.net (qmail-ldap-1.03) with SMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	7 Mar 2011 19:57:30 -0000
-Message-ID: <4D7538A9.3050803@softplc.com>
-Date: Mon, 07 Mar 2011 13:57:29 -0600
-From: Dick Hollenbeck <dick@softplc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
+	Tue, 08 Mar 2011 00:44:10 +0100
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 111171660513; Mon,  7 Mar 2011 16:42:37 -0700 (MST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2-r929478 (2010-03-31) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2-r929478
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 616AF16604F5;
+	Mon,  7 Mar 2011 16:42:35 -0700 (MST)
+Message-ID: <4D756D6B.9020108@mlbassoc.com>
+Date: Mon, 07 Mar 2011 16:42:35 -0700
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc13
+	Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] cc1 and cc1plus had about 20 mbytes of debug information each, in the final redistributable form. This patch strips those two binaries yielding a savings of about 40 mbytes per SDK.
+Subject: Can't build gstreamer-ti
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,34 +35,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Mar 2011 20:25:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 07 Mar 2011 23:44:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-> Signed-off-by: Dick Hollenbeck<dick at softplc.com
-<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>>
+Using org.openembedded.dev (mainline) 569c6db89e7bf06882bd581aa3c4e2862d0eb93d
+   DISTRO = "angstrom-2010.x"
+   MACHINE = "beagleboard"
 
->We recently added logic to conf/distro/include/sane-toolchain-* to 
->handle the debug level via DEBUG_LEVEL.  Would you mind adding a 
->DEBUG_LEVEL_HOST to conf/bitbake.conf and making BUILD_OPTIMIZATION obey 
->that instead so that we can drop debug info from all of them?  Thanks.
+bitbake gstreamer-ti fails with:
+   | /bin/sh ../arm-angstrom-linux-gnueabi-libtool --tag=CC   --mode=link arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp 
+-mthumb-interwork -mno-thumb --sysroot=/work/local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi -pthread 
+-I/work/local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gstreamer-0.10 
+-I/work/local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0 
+-I/work/local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/include 
+-I/work/local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libxml2    -Wall  -march=armv5t 
+-I"/work/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/gstreamer-ti-svnr822-r83+r100/gstreamer_ti/ti_build/ticodecplugin/src" 
+-I"/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-xdctools-tree/packages" 
+-I"/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-dsplink-tree" 
+-I"/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-framework-components-tree/packages" 
+-I"/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-codec-engine-tree/packages" 
+-I"/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-xdais-tree/packages" 
+-I"/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-codecs-tree/packages" 
+-I"/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-linuxutils-tree/packages" 
+-I"/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-dmai-tree/packages" 
+-I"/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-local-power-manager-tree/packages" 
+-I"/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-edma3lld-tree/packages" 
+-I"/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-c6accel-tree/soc/c6accelw" 
+-I"/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-c6accel-tree/soc/packages" 
+-I"/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-xdctools-tree/packages" 
+-I"/work/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/gstreamer-ti-svnr822-r83+r100/gstreamer_ti/ti_build/ticodecplugin/src/gstticodecplugin_omap3530/.." 
+  -Dxdc_target_types__="gnu/targets/arm/std.h" -Dxdc_target_name__=GCArmv5T 
+-Dxdc_cfg__header__="/work/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/gstreamer-ti-svnr822-r83+r100/gstreamer_ti/ti_build/ticodecplugin/src/gstticodecplugin_omap3530/package/cfg/gstticodecplugin_omap3530_xv5T.h" 
+-I/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/kernel/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 -ggdb2 
+-module -avoid-version -export-symbols-regex _*\(gst_\|Gst\|GST_\).* -Wl,-T,gstticodecplugin_omap3530/linker.cmd 
+-Wl,/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-c6accel-tree/soc/c6accelw/lib/c6accelw_omap3530.a470MV -Wl,-O1 
+-Wl,--hash-style=gnu -o libgstticodecplugin.la -rpath /usr/lib/gstreamer-0.10 libgstticodecplugin_la-gstticodecplugin.lo libgstticodecplugin_la-gsttiauddec1.lo 
+libgstticodecplugin_la-gsttividdec2.lo libgstticodecplugin_la-gsttiimgenc1.lo libgstticodecplugin_la-gsttiimgdec1.lo libgstticodecplugin_la-gsttidmaibuffertransport.lo 
+libgstticodecplugin_la-gsttidmaibuftab.lo libgstticodecplugin_la-gstticircbuffer.lo libgstticodecplugin_la-gsttidmaivideosink.lo libgstticodecplugin_la-gstticodecs.lo 
+libgstticodecplugin_la-gstticodecs_platform.lo libgstticodecplugin_la-gsttiquicktime_aac.lo libgstticodecplugin_la-gsttiquicktime_h264.lo libgstticodecplugin_la-gsttividenc1.lo 
+libgstticodecplugin_la-gsttiaudenc1.lo libgstticodecplugin_la-gstticommonutils.lo libgstticodecplugin_la-gsttividresize.lo libgstticodecplugin_la-gsttidmaiperf.lo 
+libgstticodecplugin_la-gsttiquicktime_mpeg4.lo libgstticodecplugin_la-gsttic6xcolorspace.lo libgstticodecplugin_la-omapfb.lo yuv.lo -pthread -lgstreamer-0.10 -lgobject-2.0 
+-lgmodule-2.0 -lxml2 -lgthread-2.0 -lrt -lglib-2.0   -pthread -lgstbase-0.10 -lgstreamer-0.10 -lgobject-2.0 -lgmodule-2.0 -lxml2 -lgthread-2.0 -lrt -lglib-2.0    -lgstvideo-0.10 
+-lgstaudio-0.10 -lm  -lX11
+   | arm-angstrom-linux-gnueabi-libtool: link: warning: library `/work/local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libgstbase-0.10.la' was moved.
+   | /bin/grep: /work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/lib/libgstreamer-0.10.la: No such file or directory
+   | /bin/sed: can't read /work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/lib/libgstreamer-0.10.la: No such file or directory
+   | arm-angstrom-linux-gnueabi-libtool: link: `/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/lib/libgstreamer-0.10.la' is not a valid 
+libtool archive
 
+Any ideas how to fix this?
 
-Tom,
+Thanks
 
-Thanks.  On this one, please just take it over.  I am still coming up to
-speed, and am not able to decipher what you want in a way that will make you
-happy.
-
-I know its only a few lines, and you'll want it done a certain way anyway.
-
-Thanks tons.   The disk savings is substantial and worth your time.
-
-Next time I'll be better positioned to help.
-
-Dick
-
-
-
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
