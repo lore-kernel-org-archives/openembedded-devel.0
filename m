@@ -1,27 +1,23 @@
-Received: from smtpfb2-g21.free.fr ([212.27.42.10])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PwX7J-0008Do-EH
+	(envelope-from <philb@gnu.org>) id 1PwXCj-0002zF-QI
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Mar 2011 10:52:41 +0100
-Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
-	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 61B37CA9D85
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Mar 2011 10:51:05 +0100 (CET)
-Received: from [192.168.1.15] (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 14AD14B0446;
-	Mon,  7 Mar 2011 10:50:56 +0100 (CET)
-Message-ID: <4D74AA7F.6060506@eukrea.com>
-Date: Mon, 07 Mar 2011 10:50:55 +0100
-From: Eric Benard <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
-MIME-Version: 1.0
-To: Khem Raj <raj.khem@gmail.com>
+	Mon, 07 Mar 2011 10:58:22 +0100
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1PwXBH-0000yu-AW
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 07 Mar 2011 10:56:47 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4D74AA7F.6060506@eukrea.com>
 References: <1299360603-24687-1-git-send-email-eric@eukrea.com>
 	<AANLkTikWU836s9FM0e0XKdZPuYb=cZs9c0Z3t9nvbZZh@mail.gmail.com>
-In-Reply-To: <AANLkTikWU836s9FM0e0XKdZPuYb=cZs9c0Z3t9nvbZZh@mail.gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
+	<4D74AA7F.6060506@eukrea.com>
+Date: Mon, 07 Mar 2011 09:57:30 +0000
+Message-ID: <1299491850.2132.12.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
 Subject: Re: [PATCH 1/2] dropbear: add 0.53.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,29 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Mar 2011 09:52:41 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 07 Mar 2011 09:58:23 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Khem,
-
-On 06/03/2011 00:08, Khem Raj wrote:
-> On Sat, Mar 5, 2011 at 1:30 PM, Eric B=C3=A9nard<eric@eukrea.com>  wrot=
+On Mon, 2011-03-07 at 10:50 +0100, Eric Benard wrote:
+> Hi Khem,
+>=20
+> On 06/03/2011 00:08, Khem Raj wrote:
+> > On Sat, Mar 5, 2011 at 1:30 PM, Eric B=C3=A9nard<eric@eukrea.com>  wrot=
 e:
->> * 0.53.1 brings some improvements over 0.52 which was released
->> more than 2 years ago. For more details, check the changelog here :
->> http://matt.ucc.asn.au/dropbear/CHANGES
->> * Please note that DROPBEAR_SMALL_CODEis now disabled which may
->> increase the size of the binaries.
->
-> can you compare the sizes of .52 and .53.1 so we know how much it will =
+> >> * 0.53.1 brings some improvements over 0.52 which was released
+> >> more than 2 years ago. For more details, check the changelog here :
+> >> http://matt.ucc.asn.au/dropbear/CHANGES
+> >> * Please note that DROPBEAR_SMALL_CODEis now disabled which may
+> >> increase the size of the binaries.
+> >
+> > can you compare the sizes of .52 and .53.1 so we know how much it will =
 be
->>
-for an armv5 target :
-0.53.1 : 228112
-0.53.1 + DROPBEAR_SMALL_CODE : 178960
-0.52 : 183008
+> >>
+> for an armv5 target :
+> 0.53.1 : 228112
+> 0.53.1 + DROPBEAR_SMALL_CODE : 178960
+> 0.52 : 183008
 
-Eric
+Looks like DROPBEAR_SMALL_CODE is still worth having then.  Why was it
+disabled?
+
+p.
+
+
 
 
