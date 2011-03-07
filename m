@@ -1,31 +1,33 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cdhmanning@gmail.com>) id 1Pweib-00027x-QL
-	for Openembedded-devel@lists.openembedded.org;
-	Mon, 07 Mar 2011 18:59:41 +0100
-Received: by fxm8 with SMTP id 8so4331840fxm.6
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Mar 2011 09:58:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=g5maonEgl8dcYij8RqOBYszUXESPFw5UgAJ4anSZqeM=;
-	b=he+KZEq4rRLpfnPzAcC6gSkAMz6xKbQ3w1YScd4Bvjj9GM+XzJ4aO85liXqBc+YsTT
-	kZy/agEUik4L9vMLIJg7CtXy0ARxIOymvdNET4g/j481C7Jwp8ZMYDbqFkexeA1Nxkvx
-	ttIqgbSWQvRZSO0O1s9zEAjj0TAY7OV/N22GQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=QRMOBXysTMvmAmS7T8XjK4hBmfLg/idbgkG7R+eZBbg3wiSB3LLYTSrVZuCLiueH5D
-	SxVeKVwO72//M0DNnlj4ugLd6dDqncl+fpdfKR3hdeZHFMoY8DYAjiHQF3X56aiJfdAx
-	sHKj5vO9LM1YWl7ZNwjOv9LomTBSyYAilbvcs=
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pwek9-0002X0-6a
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 07 Mar 2011 19:01:17 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Pweie-00026X-MV from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 07 Mar 2011 09:59:44 -0800
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 7 Mar 2011 09:59:43 -0800
+Received: from [172.30.80.238] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
+	with Microsoft SMTP Server id 14.1.270.1;
+	Mon, 7 Mar 2011 09:59:43 -0800
+Message-ID: <4D751D09.6000808@mentor.com>
+Date: Mon, 7 Mar 2011 10:59:37 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-Received: by 10.223.30.66 with SMTP id t2mr5175778fac.16.1299520688647; Mon,
-	07 Mar 2011 09:58:08 -0800 (PST)
-Received: by 10.223.151.6 with HTTP; Mon, 7 Mar 2011 09:58:08 -0800 (PST)
-Date: Tue, 8 Mar 2011 06:58:08 +1300
-Message-ID: <AANLkTikzk175mvsX+JCC7Mfm_gt=xdxG67NR4v5WF8x9@mail.gmail.com>
-From: Charles Manning <cdhmanning@gmail.com>
-To: Openembedded-devel@lists.openembedded.org
-Subject: How does oe handle rebuilds?
+To: <openembedded-devel@lists.openembedded.org>
+References: <1299515323-2246-1-git-send-email-sledz@dresearch.de>	<1299516187-27151-1-git-send-email-sledz@dresearch.de>
+	<1299517044.2132.203.camel@phil-desktop>
+In-Reply-To: <1299517044.2132.203.camel@phil-desktop>
+X-OriginalArrivalTime: 07 Mar 2011 17:59:43.0627 (UTC)
+	FILETIME=[701B7DB0:01CBDCF1]
+Subject: Re: [PATCH v2] gupnp_0.13.4/gupnp-av_0.5.9: disable introspection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,24 +41,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Mar 2011 17:59:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 07 Mar 2011 18:01:17 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I find I often have problems when using oe that changing a recipe does
-not result in dependent packages being rebuilt. A bit of Googling
-suggests that many experience this issue and take manual steps to
-force rebuilding.
+On 03/07/2011 09:57 AM, Phil Blundell wrote:
+> On Mon, 2011-03-07 at 17:43 +0100, Steffen Sledz wrote:
+>> --- a/recipes/upnp/gupnp_0.13.4.bb
+>> +++ b/recipes/upnp/gupnp_0.13.4.bb
+>> @@ -2,13 +2,14 @@ LICENSE = "LGPL"
+>>   DEPENDS = "e2fsprogs gssdp libsoup-2.4 libxml2 gtk-doc-native libgee"
+>>
+>>   require gupnp.inc
+>> +PR = "1"
 
-For example, changing the kernel requires rebuilding various libraries
-(tslib etc) and rebuilding the image.
+"r1"
 
-1.Should oe be able to handle that automatically or is this oe's
-"killer defect" (ie. opposite of "killer feature").
-2. Is there something missing in recipes to show the correct dependencies?
-3. What is the best way to manage these stale dependencies?
+>>
+>>   SRC_URI[md5sum] = "0d562f5f02534c70c3743b2c514db8ba"
+>>   SRC_URI[sha256sum] = "7974953f38a41236c875c3df509abc43e8218b5925fdc18212a73b1ae0d0e7e8"
+>>
+>>   inherit autotools pkgconfig
+>>
+>> -EXTRA_OECONF = "--disable-gtk-doc"
+>> +EXTRA_OECONF = "--disable-gtk-doc --enable-introspection=no"
+>
+> I can't help thinking that there must be a better place to put this,
+> maybe even autotools.bbclass.  We basically want those options for all
+> packages that will take them, right?
 
-Thanks
+Usually this is just in "gnome" stuff and gnome or gnomebase does handle 
+this.  But indeed, perhaps this is something that should be more widely 
+passed in to avoid semi-random breakage.
 
-Charles
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
