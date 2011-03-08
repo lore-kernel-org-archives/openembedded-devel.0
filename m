@@ -1,31 +1,25 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cdhmanning@gmail.com>) id 1PwmyS-0004T1-J1
-	for Openembedded-devel@lists.openembedded.org;
-	Tue, 08 Mar 2011 03:48:36 +0100
-Received: by fxm8 with SMTP id 8so4755669fxm.6
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Mar 2011 18:47:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=f6TMZcByjpFYph++/dvZ+xIK/tla/JS5bx+2tZCEElE=;
-	b=SgymeaGfXwpBTXZCFvJXCkzNZ/6vWcen0ix5qpYB4rl0VI3pkpXmbqYpV/5AjpreZd
-	5dlfb+5QlmebO20focAyopIWkFK3uEQchitX+NesWd96YRzS4gzIkW07OdSvf+qbQPTm
-	LPznTWHCgC43CR3/wfFdBQT/bSrnIr7aGhEv4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=m11tlkfqSNa5uxJ50q0G3zLjl1IaAQOQfkhbQEtGEX845oRe3EJKq/milrZUfVN6a4
-	2qpJKJSeL7l0R2OllP3S0TLnvTPaHUGHHDys2IhxYNOrNTD6oqRJA+M2lca1IlP52PMg
-	ELdcXCYNmpDQkURU0qFPdfjBusWAfTUAdJvfk=
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <thebohemian@gmx.net>) id 1Pwqlw-0003cv-SW
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Mar 2011 07:51:56 +0100
+Received: (qmail invoked by alias); 08 Mar 2011 06:50:20 -0000
+Received: from 168.163.71-86.rev.gaoland.net (EHLO [192.168.42.71])
+	[86.71.163.168]
+	by mail.gmx.net (mp022) with SMTP; 08 Mar 2011 07:50:20 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19HokABe7ZHUq/BBXI5IwFqLRPBxhbkGoOvHSsEDG
+	GtoUalXPTpIKAD
+Message-ID: <4D75D1A7.9040103@gmx.net>
+Date: Tue, 08 Mar 2011 07:50:15 +0100
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
 MIME-Version: 1.0
-Received: by 10.223.54.213 with SMTP id r21mr3454274fag.54.1299552421504; Mon,
-	07 Mar 2011 18:47:01 -0800 (PST)
-Received: by 10.223.151.6 with HTTP; Mon, 7 Mar 2011 18:47:01 -0800 (PST)
-Date: Tue, 8 Mar 2011 15:47:01 +1300
-Message-ID: <AANLkTik9UybhDf+RjdLcm-TBjiT6Ur36sDoyoA4VX65m@mail.gmail.com>
-From: Charles Manning <cdhmanning@gmail.com>
-To: Openembedded-devel@lists.openembedded.org
-Subject: What does PACKAGES_DYNAMIC do?
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 1.1.2
+X-Y-GMX-Trusted: 0
+Subject: libffi-native 3.0.9 fails to build on at least x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,11 +33,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Mar 2011 02:48:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 08 Mar 2011 06:51:57 -0000
+X-Groupsio-MsgNum: 29977
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig27FD46ED17881757C132238B"
 
-What is the rationale behind PACKAGES_DYNAMIC.
+--------------enig27FD46ED17881757C132238B
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
 
-I tried to RTFM, but that's in one of the Todo sections :-(.
+Hi,
+I tried building libffi-native on an Ubuntu 10.04 amd64 box (during
+angstrom build for pandaboard) and it fails. Investigation found out
+that during libffi's configure it will symlink 'src/x86/ffitarget.h' to
+'include/ffitarget.h'. Unfortunately this will create a broken softlink
+because 'src' and 'include' are on the same directory level. I manually
+corrected the softlink to '../src/x86/ffitarget.h' and then I could
+continue the build.
+
+Clearly this is not what should happen. Anyone an idea why ffi does that?=
 
 
+(For testing purposes I tried brand new libffi 3.0.10rc8 and it shows
+exactly the same error).
+
+Regards,
+Robert
+
+
+--------------enig27FD46ED17881757C132238B
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAk110aoACgkQG9cfwmwwEtrOqgCglU/dsdonjj0iQZ6AvLxc9/v0
+XwwAn3MMcpXNihuyaoQ6lsOeUi33nHH5
+=dFUq
+-----END PGP SIGNATURE-----
+
+--------------enig27FD46ED17881757C132238B--
