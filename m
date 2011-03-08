@@ -1,20 +1,30 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from mail2.eads.net ([80.156.45.114] helo=mail.eads.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1PwsQi-0005oJ-3T
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Mar 2011 09:38:08 +0100
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id 35F0B1D360AB; Tue,  8 Mar 2011 09:36:33 +0100 (CET)
-Date: Tue, 8 Mar 2011 09:36:33 +0100
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110308083632.GE18143@ibawizard.net>
-References: <4D75D1A7.9040103@gmx.net> <4D75E0CF.1040209@gmx.net>
+	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
+	id 1PwtOf-0006u8-47 for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Mar 2011 10:40:05 +0100
+Received: from gsx3071-vs5.mxchg.m.corp ([53.147.176.148])
+	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id p289ccO8024455
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 8 Mar 2011 10:38:39 +0100
+Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
+	gsx3071-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Tue, 8 Mar 2011 10:38:31 +0100
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-In-Reply-To: <4D75E0CF.1040209@gmx.net>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: libffi-native 3.0.9 fails to build on at least x86_64	[solved, problem on my side]
+Date: Tue, 8 Mar 2011 10:38:31 +0100
+Message-ID: <01DC65355775654EB4BECCE3C4522F0D08155650@GSX300A.mxchg.m.corp>
+In-Reply-To: <AANLkTikzk175mvsX+JCC7Mfm_gt=xdxG67NR4v5WF8x9@mail.gmail.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] How does oe handle rebuilds?
+Thread-Index: Acvc89BRM7u0kKmQS06H4NvAprwrJAAgD/Uw
+References: <AANLkTikzk175mvsX+JCC7Mfm_gt=xdxG67NR4v5WF8x9@mail.gmail.com>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 08 Mar 2011 09:38:31.0885 (UTC)
+	FILETIME=[965D8FD0:01CBDD74]
+Subject: Re: How does oe handle rebuilds?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,22 +38,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Mar 2011 08:38:08 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 08 Mar 2011 09:40:05 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Robert Schuster <thebohemian@gmx.net> [2011-03-08 08:54:55]:
+As I see it is recommended by the community to do a build "from scratch" =
+if main features as e.g. kernel version has changed.
 
-> I moved the whole OE directory (bitbake, oe, configdir) to a new
-> location and made it available through the same path using a symlink. As
-> it looks OE does not like that at all.
+Removing the temporary directory and do an overnight build is the =
+easiest and cleanest resolution.
 
-In OE manual, in Getting started section there's information about
-OEBASE/TOPDIR: "You must choose a location with _no symlinks above it_."
+Regards
+Wolfgang
+=20
+-----Urspr=FCngliche Nachricht-----
+Von: openembedded-devel-bounces@lists.openembedded.org =
+[mailto:openembedded-devel-bounces@lists.openembedded.org] Im Auftrag =
+von Charles Manning
+Gesendet: Montag, 7. M=E4rz 2011 18:58
+An: Openembedded-devel@lists.openembedded.org
+Betreff: [oe] How does oe handle rebuilds?
 
-It's some problem with handling of symlinks in the path in Python or something
-like that. 
+I find I often have problems when using oe that changing a recipe does
+not result in dependent packages being rebuilt. A bit of Googling
+suggests that many experience this issue and take manual steps to
+force rebuilding.
 
--- ynezz
+For example, changing the kernel requires rebuilding various libraries
+(tslib etc) and rebuilding the image.
+
+1.Should oe be able to handle that automatically or is this oe's
+"killer defect" (ie. opposite of "killer feature").
+2. Is there something missing in recipes to show the correct =
+dependencies?
+3. What is the best way to manage these stale dependencies?
+
+Thanks
+
+Charles
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
