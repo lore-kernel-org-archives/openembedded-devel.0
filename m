@@ -1,28 +1,37 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail-gw0-f50.google.com ([74.125.83.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PwzSE-0002vj-O5
+	(envelope-from <kergoth@gmail.com>) id 1PwzbN-00037k-7b
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Mar 2011 17:08:11 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 6BC96491282
+	Tue, 08 Mar 2011 17:17:37 +0100
+Received: by gwaa20 with SMTP id a20so3196948gwa.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Mar 2011 16:37:27 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Tue, 8 Mar 2011 16:37:27 +0100
-Message-ID: <4D764D37.9000401@dresearch.de>
-Date: Tue, 08 Mar 2011 16:37:27 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.15) Gecko/20110303 Lightning/1.0b2 Thunderbird/3.1.9
+	Tue, 08 Mar 2011 08:15:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
+	:date:x-google-sender-auth:message-id:subject:to:cc:content-type;
+	bh=zYxkDsUPTI6VYmIWfS7L+VQ4yGW+4+z2d2CZubBlLh0=;
+	b=W7B7baCwoKVhlB8uTAUoL4/X3/c7UYQEsFev0WMNJnfVuBpaJpEcZnDuYeWIat+F47
+	sspJISsVDllXc0ISiPSp5mvRq7TXDA0XeNdpHxvmJIgMKwWbeh2FAEHOai5KNixZM0Kb
+	hefCE8KpPvmj+fUDyxvdu8+ZBDjVSvhi2p/uM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type;
+	b=sd+xPJj29aZnth7LjnFqvryjfD4GG5WEUnyJ9pJlWxFFrZyuf/xWYm0YjChkib6DDz
+	ocVZq58PMiyszYxQ1TpUCUO0kjQjGvb1M22vlNV7SOol+8MO89sMpjOcPx33NVZyBT24
+	YwZG1iH6MNjDiT/QZlFhLHNMWw+7UcYz7lvEY=
+Received: by 10.43.44.197 with SMTP id uh5mr6661423icb.276.1299600958047; Tue,
+	08 Mar 2011 08:15:58 -0800 (PST)
 MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.42.141.8 with HTTP; Tue, 8 Mar 2011 08:15:38 -0800 (PST)
+In-Reply-To: <AANLkTik9UybhDf+RjdLcm-TBjiT6Ur36sDoyoA4VX65m@mail.gmail.com>
+References: <AANLkTik9UybhDf+RjdLcm-TBjiT6Ur36sDoyoA4VX65m@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Tue, 8 Mar 2011 09:15:38 -0700
+X-Google-Sender-Auth: aqe-VYvQvf9FSgVb-oBz2FJZVbk
+Message-ID: <AANLkTikPOKkShDF841y3xR=uj3YTigf1nEQv0fezFka2@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <il56eoMAN_POSIXLY_CORRECT=1@dough.gmane.org>	<1299588887-18797-1-git-send-email-sledz@dresearch.de>
-	<il5eqa$fkr$1@dough.gmane.org>
-In-Reply-To: <il5eqa$fkr$1@dough.gmane.org>
-X-OriginalArrivalTime: 08 Mar 2011 15:37:27.0427 (UTC)
-	FILETIME=[BA8C7D30:01CBDDA6]
-Subject: Re: [PATCH v3] gupnp_0.13.4/gupnp-av_0.5.9: disable introspection
+Subject: Re: What does PACKAGES_DYNAMIC do?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,38 +45,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Mar 2011 16:08:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 08 Mar 2011 16:17:37 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Am 08.03.2011 15:34, schrieb Koen Kooi:
-> On 08-03-11 13:54, Steffen Sledz wrote:
->> Introspection uses host tools within compile stage. Missing tools or
->> tools of wrong version result in errors like
->=20
->> |   GEN    GUPnP-1.0.gir
->> | Couldn't find include 'Soup-2.4.gir' (search path: ...)
->=20
->> or
->=20
->> |   GEN    GUPnP-1.0.gir
->> | /usr/share/gir-1.0/Soup-2.4.gir: Incompatible version 1.0 (supported=
-: 1.2)
->=20
->> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
->=20
-> Acked-by: Koen Kooi <koen@dominion.thruhere.net>
+On Mon, Mar 7, 2011 at 7:47 PM, Charles Manning <cdhmanning@gmail.com> wrote:
+> What is the rationale behind PACKAGES_DYNAMIC.
+>
+> I tried to RTFM, but that's in one of the Todo sections :-(.
 
-pushed
-
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
-
+It informs bitbake about the emission of binary packages when we don't
+know what packages will be emitted until runtime (e.g. the locale
+packages, kernel modules, etc.  Note kernel.bbclass sets
+PACKAGES_DYNAMIC += "kernel-module-*").
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
