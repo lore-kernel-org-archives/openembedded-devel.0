@@ -1,37 +1,33 @@
-Received: from mail-gw0-f50.google.com ([74.125.83.50])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1PwzbN-00037k-7b
+	(envelope-from <Tom_Rini@mentor.com>) id 1Px0fQ-0006aO-L9
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Mar 2011 17:17:37 +0100
-Received: by gwaa20 with SMTP id a20so3196948gwa.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Mar 2011 08:15:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
-	:date:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	bh=zYxkDsUPTI6VYmIWfS7L+VQ4yGW+4+z2d2CZubBlLh0=;
-	b=W7B7baCwoKVhlB8uTAUoL4/X3/c7UYQEsFev0WMNJnfVuBpaJpEcZnDuYeWIat+F47
-	sspJISsVDllXc0ISiPSp5mvRq7TXDA0XeNdpHxvmJIgMKwWbeh2FAEHOai5KNixZM0Kb
-	hefCE8KpPvmj+fUDyxvdu8+ZBDjVSvhi2p/uM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=sd+xPJj29aZnth7LjnFqvryjfD4GG5WEUnyJ9pJlWxFFrZyuf/xWYm0YjChkib6DDz
-	ocVZq58PMiyszYxQ1TpUCUO0kjQjGvb1M22vlNV7SOol+8MO89sMpjOcPx33NVZyBT24
-	YwZG1iH6MNjDiT/QZlFhLHNMWw+7UcYz7lvEY=
-Received: by 10.43.44.197 with SMTP id uh5mr6661423icb.276.1299600958047; Tue,
-	08 Mar 2011 08:15:58 -0800 (PST)
+	Tue, 08 Mar 2011 18:25:52 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Px0dt-0001u2-BY from Tom_Rini@mentor.com ;
+	Tue, 08 Mar 2011 09:24:17 -0800
+Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Tue, 8 Mar 2011 09:24:16 -0800
+Received: from [172.30.80.238] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
+	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
+	Tue, 8 Mar 2011 09:24:16 -0800
+Message-ID: <4D766639.4060004@mentor.com>
+Date: Tue, 8 Mar 2011 10:24:09 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.42.141.8 with HTTP; Tue, 8 Mar 2011 08:15:38 -0800 (PST)
-In-Reply-To: <AANLkTik9UybhDf+RjdLcm-TBjiT6Ur36sDoyoA4VX65m@mail.gmail.com>
-References: <AANLkTik9UybhDf+RjdLcm-TBjiT6Ur36sDoyoA4VX65m@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 8 Mar 2011 09:15:38 -0700
-X-Google-Sender-Auth: aqe-VYvQvf9FSgVb-oBz2FJZVbk
-Message-ID: <AANLkTikPOKkShDF841y3xR=uj3YTigf1nEQv0fezFka2@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: What does PACKAGES_DYNAMIC do?
+To: Khem Raj <raj.khem@gmail.com>
+References: <1299524617-7212-1-git-send-email-tom_rini@mentor.com>
+	<AANLkTikS8xArUAz6mGf=uF=aCffOU78AQ07+iB=90N9p@mail.gmail.com>
+In-Reply-To: <AANLkTikS8xArUAz6mGf=uF=aCffOU78AQ07+iB=90N9p@mail.gmail.com>
+X-OriginalArrivalTime: 08 Mar 2011 17:24:16.0242 (UTC)
+	FILETIME=[A6800D20:01CBDDB5]
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] gettext.bbclass: Drop target gettext from DEPENDS.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,23 +41,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Mar 2011 16:17:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 08 Mar 2011 17:25:52 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Mar 7, 2011 at 7:47 PM, Charles Manning <cdhmanning@gmail.com> wrote:
-> What is the rationale behind PACKAGES_DYNAMIC.
+On 03/07/2011 12:38 PM, Khem Raj wrote:
+> On Mon, Mar 7, 2011 at 11:03 AM, Tom Rini<tom_rini@mentor.com>  wrote:
+>> This should be handled via virtual/libintl already.
+>>
+>> Signed-off-by: Tom Rini<tom_rini@mentor.com>
 >
-> I tried to RTFM, but that's in one of the Todo sections :-(.
+> you have to do some uclibc x11 image build from scratch to check for fallouts
 
-It informs bitbake about the emission of binary packages when we don't
-know what packages will be emitted until runtime (e.g. the locale
-packages, kernel modules, etc.  Note kernel.bbclass sets
-PACKAGES_DYNAMIC += "kernel-module-*").
+Did a quick drop back on alsa-utils to get that building (unrelated 
+failure, the exp10 thing) and minimal-uclibc+qemuarm+x11-image built, 
+pushed.  Thanks!
+
+>
+> Acked-by: Khem Raj<raj.khem@gmail.com>
+>> ---
+>>   classes/gettext.bbclass |    2 +-
+>>   1 files changed, 1 insertions(+), 1 deletions(-)
+>>
+>> diff --git a/classes/gettext.bbclass b/classes/gettext.bbclass
+>> index 968531b..6c480b5 100644
+>> --- a/classes/gettext.bbclass
+>> +++ b/classes/gettext.bbclass
+>> @@ -11,7 +11,7 @@ python () {
+>>      gettext_after_parse(d)
+>>   }
+>>
+>> -DEPENDS_GETTEXT = "gettext gettext-native virtual/libiconv virtual/libintl"
+>> +DEPENDS_GETTEXT = "gettext-native virtual/libiconv virtual/libintl"
+>>
+>>   DEPENDS =+ "${DEPENDS_GETTEXT}"
+>>   EXTRA_OECONF += "--enable-nls"
+>> --
+>> 1.7.0.4
+>>
+>>
+
+
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Tom Rini
+Mentor Graphics Corporation
 
 
