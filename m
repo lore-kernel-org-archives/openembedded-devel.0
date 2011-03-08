@@ -1,21 +1,21 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pwx29-0007rP-QR for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Mar 2011 14:33:05 +0100
+	id 1Pwx5T-0007vY-Ra for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Mar 2011 14:36:31 +0100
 Received: from f053034177.adsl.alicedsl.de ([78.53.34.177]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pwx0f-0001yW-Ow for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Mar 2011 13:31:33 +0000
+	id 1Pwx40-0001z4-2Z for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Mar 2011 13:35:00 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 08 Mar 2011 14:31:32 +0100
-Message-ID: <1299591092.3785.121.camel@mattotaupa>
+Date: Tue, 08 Mar 2011 14:34:58 +0100
+Message-ID: <1299591298.3785.126.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.2 
-Subject: [PATCH] xfce4-session_4.6.{1,2}: add `libwnck` to `DEPENDS`
+Subject: xfce4-session: task configure fails with `checking for iceauth... no`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,102 +29,134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Mar 2011 13:33:05 -0000
-X-Groupsio-MsgNum: 29987
+X-List-Received-Date: Tue, 08 Mar 2011 13:36:31 -0000
+X-Groupsio-MsgNum: 29988
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-d2WvxvfTyDx8NchN4Czq"
+	boundary="=-AB+dzMqcv+3BsjIqQ0C8"
 
---=-d2WvxvfTyDx8NchN4Czq
+--=-AB+dzMqcv+3BsjIqQ0C8
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Date: Tue, 8 Mar 2011 12:27:26 +0100
+Dear OE folks,
 
-Task `configure` fails with the following error.
 
-	checking for pkg-config >=3D 0.9.0... 0.23
-	checking for libxfce4util-1.0 >=3D 4.6.0... 4.6.2
-	checking LIBXFCE4UTIL_CFLAGS... -I/oe/build/angstrom-dev/sysroots/armv7a-a=
-ngstrom-linux-gnueabi/usr/include/xfce4 -I/oe/build/angstrom-dev/sysroots/a=
-rmv7a-angstrom-linux-gnueabi/usr/include/glib-2.0 -I/oe/build/angstrom-dev/=
-sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/include
-	checking LIBXFCE4UTIL_LIBS... -lxfce4util -lglib-2.0
-	checking for libxfcegui4-1.0 >=3D 4.6.0... 4.6.4
-	checking LIBXFCEGUI4_CFLAGS... -pthread -I/oe/build/angstrom-dev/sysroots/=
-armv7a-angstrom-linux-gnueabi/usr/include/xfce4 -I/oe/build/angstrom-dev/sy=
-sroots/armv7a-angstrom-linux-gnueabi/usr/include/gtk-2.0 -I/oe/build/angstr=
-om-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/gtk-2.0/include -I/oe=
-/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/pang=
-o-1.0 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/i=
-nclude/glib-2.0 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnu=
-eabi/usr/lib/glib-2.0/include -I/oe/build/angstrom-dev/sysroots/armv7a-angs=
-trom-linux-gnueabi/usr/include/cairo -I/oe/build/angstrom-dev/sysroots/armv=
-7a-angstrom-linux-gnueabi/usr/include/pixman-1 -I/oe/build/angstrom-dev/sys=
-roots/armv7a-angstrom-linux-gnueabi/usr/include/freetype2 -I/oe/build/angst=
-rom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libpng12 -I/oe/b=
-uild/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/atk-1.=
-0
-	checking LIBXFCEGUI4_LIBS... -pthread -lxfcegui4 -lgtk-x11-2.0 -lxfce4util=
- -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0 -lpangoc=
-airo-1.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lgmodul=
-e-2.0 -lgthread-2.0 -lrt -lglib-2.0
-	checking for libwnck-1.0 >=3D 2.12... not found
-	*** The required package libwnck-1.0 was not found on your system.
-	*** Please install libwnck-1.0 (atleast version 2.12) or adjust
-	*** the PKG_CONFIG_PATH environment variable if you
-	*** installed the package in a nonstandard prefix so that
-	*** pkg-config is able to find it.
+task configure of `xfce4-session_4.6.2.bb` fails with the following
+error message using any distribution (`minimal`, `angstrom-2008.1`).
 
-Adding `libwnck` to `DEPENDS` makes this error go away.
+        checking if the linker (arm-oe-linux-gnueabi-ld --sysroot=3D/oe/bui=
+ld-minimal-eglibc/minimal-dev/sysroots/armv5te-oe-linux-gnueabi) is GNU ld.=
+.. (cached) yes
+        checking whether to build with profiling support... no
+        checking whether to compile with coverage profiling instrumentation=
+... no
+        checking whether to disable assertions... no
+        checking whether to build final version... yes
+        checking whether arm-oe-linux-gnueabi-ld --sysroot=3D/oe/build-mini=
+mal-eglibc/minimal-dev/sysroots/armv5te-oe-linux-gnueabi accepts -O1... yes
+        checking for iceauth... no
+        configure: error: iceauth missing, please check your X11 installati=
+on
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
-`xfce4-session_4.4.2.bb` does not seem to require `libwnck`.
----
- recipes/xfce-base/xfce4-session_4.6.1.bb |    2 +-
- recipes/xfce-base/xfce4-session_4.6.2.bb |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+In my build directory I get the following hits for =C2=BB*iceauth*=C2=AB.
 
-diff --git a/recipes/xfce-base/xfce4-session_4.6.1.bb b/recipes/xfce-base/x=
-fce4-session_4.6.1.bb
-index de07fb3..72b58d3 100644
---- a/recipes/xfce-base/xfce4-session_4.6.1.bb
-+++ b/recipes/xfce-base/xfce4-session_4.6.1.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION =3D "xfce4-session is a sessionmanager for Xfce 4 Desktop  Env=
-ironment"
--DEPENDS =3D "libxfcegui4 libxfce4util dbus iceauth xfce-utils"
-+DEPENDS =3D "libwnck libxfcegui4 libxfce4util dbus iceauth xfce-utils"
- SECTION =3D "x11"
-=20
- PR =3D "r4"
-diff --git a/recipes/xfce-base/xfce4-session_4.6.2.bb b/recipes/xfce-base/x=
-fce4-session_4.6.2.bb
-index c85bb8c..d7f768a 100644
---- a/recipes/xfce-base/xfce4-session_4.6.2.bb
-+++ b/recipes/xfce-base/xfce4-session_4.6.2.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION =3D "xfce4-session is a session manager for Xfce 4 Desktop Env=
-ironment"
--DEPENDS =3D "libxfcegui4 libxfce4util dbus iceauth xfce-utils"
-+DEPENDS =3D "libwnck libxfcegui4 libxfce4util dbus iceauth xfce-utils"
- SECTION =3D "x11"
-=20
- PR =3D "r0"
---=20
-1.7.4.1
+        $ find . -iname *iceauth*
+        ./minimal-dev/deploy/sources/MIT-X/iceauth
+        ./minimal-dev/deploy/sources/MIT-X/iceauth/iceauth-1.0.4.tar.bz2
+        ./minimal-dev/deploy/ipk/armv5te/iceauth-dbg_1.0.4-r5.0_armv5te.ipk
+        ./minimal-dev/deploy/ipk/armv5te/iceauth-dev_1.0.4-r5.0_armv5te.ipk
+        ./minimal-dev/deploy/ipk/armv5te/iceauth-doc_1.0.4-r5.0_armv5te.ipk
+        ./minimal-dev/deploy/ipk/armv5te/iceauth_1.0.4-r5.0_armv5te.ipk
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_patch
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_package_stage
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_configure
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_unpack
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_setscene
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_compile
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_rm_work
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_package_stage_all
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_fetch
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_package_write
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_qa_configure
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_build
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_install
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_qa_staging
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_package
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_distribute_sources
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_package_write_ipk
+        ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0.=
+do_populate_sysroot
+        ./minimal-dev/pstage/minimaleglibc/staging-iceauth-armv5te-oe-linux=
+-gnueabi_1.0.4-r5.0_armv5te-linux-gnueabi.ipk
+        ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/iceauth
+        ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth.pack=
+aged
+        ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth-doc
+        ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth-dbg.=
+packaged
+        ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth-dev
+        ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth
+        ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth-dbg
+        ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth-doc.=
+packaged
+        ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth-loca=
+le
+        ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth-dev.=
+packaged
+        ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth-stat=
+ic
+        ./minimal-dev/sysroots/armv5te-oe-linux-gnueabi/usr/share/man/man1/=
+iceauth.1
+        ./minimal-dev/work/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0
+        ./minimal-dev/usr/lib/opkg/info/staging-iceauth-armv5te-oe-linux-gn=
+ueabi.control
+        ./minimal-dev/usr/lib/opkg/info/staging-iceauth-armv5te-oe-linux-gn=
+ueabi.list=20
 
---=-d2WvxvfTyDx8NchN4Czq
+So nothing is in the `sysroot`. Building without `INHERIT +=3D "rm_work"`
+I find the following.
+
+        $ ls -l minimal-dev/work/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r=
+5.0/package/usr/bin/iceauth=20
+        -rwxr-xr-x 1 x x 16264 Mar  7 11:55 minimal-dev/work/armv5te-oe-lin=
+ux-gnueabi/iceauth-1_1.0.4-r5.0/package/usr/bin/iceauth
+
+Does anyone have an idea how this can be solved. `git grep iceauth`
+indicates that only `xfce4-session_4.*` depends on `iceauth`.
+
+
+Thanks,
+
+Paul
+
+--=-AB+dzMqcv+3BsjIqQ0C8
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk12L6MACgkQPX1aK2wOHVj6owCZAVxru6emKIzZgjs9IZYPuh+l
-7XMAn3WhEK5Ml6UOaSUacNGSf3yhvFE7
-=0Ocn
+iEYEABECAAYFAk12MIIACgkQPX1aK2wOHVgjGwCggDwQBssgMM4WiM8sCcOmdVMh
+rPwAoIiDDqGrndpvbaPOZkj96go1d5Rn
+=0SSf
 -----END PGP SIGNATURE-----
 
---=-d2WvxvfTyDx8NchN4Czq--
+--=-AB+dzMqcv+3BsjIqQ0C8--
