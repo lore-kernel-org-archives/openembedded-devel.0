@@ -1,40 +1,20 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PwsFH-0005gu-JB
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1PwsQi-0005oJ-3T
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Mar 2011 09:26:19 +0100
-Received: by bwz10 with SMTP id 10so4186625bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Mar 2011 00:24:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=nd68qW3n0QpPiA8xp3/wryT2VG6aZt8V/0ESn12QM40=;
-	b=MiYAL3etLOjOd9jSYiCbthoLh5/tQRpt70CJSRtoz/xFNFMsZU48XEPmRYrbQyXCYK
-	J9DLXBPz3E6zT77KEtocvFc6JS9Lb5prmFlp5hVNwWC1Lpm+JVsf77iKyUF2JzENTyUx
-	dJ5SBhTk//yNLpYJxdDr4DRzywLpa/A4lv6+M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=U9Es9pos6eG7TYU2uea0Q1WatkpY9ILEuomVzUg1AzDAatCQG/ucrw3x+E5aFL1TEr
-	kZ5oq6tpJWGFihlqq8St+84CsbaLfIb4xmMhALrHzgZI4U8KI2O1g/aanNOmu64jUUbw
-	8dhDbYoJwRo8wdmfpzQ3CE9Pd3GOkk9dxpk60=
-Received: by 10.204.164.2 with SMTP id c2mr315388bky.85.1299572682498;
-	Tue, 08 Mar 2011 00:24:42 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id b7sm296530bkb.18.2011.03.08.00.24.40
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 08 Mar 2011 00:24:41 -0800 (PST)
-Date: Tue, 8 Mar 2011 09:24:34 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 08 Mar 2011 09:38:08 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id 35F0B1D360AB; Tue,  8 Mar 2011 09:36:33 +0100 (CET)
+Date: Tue, 8 Mar 2011 09:36:33 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110308082434.GC3547@jama.jama.net>
-References: <4D75D1A7.9040103@gmx.net>
- <4D75E0CF.1040209@gmx.net>
+Message-ID: <20110308083632.GE18143@ibawizard.net>
+References: <4D75D1A7.9040103@gmx.net> <4D75E0CF.1040209@gmx.net>
 MIME-Version: 1.0
 In-Reply-To: <4D75E0CF.1040209@gmx.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: libffi-native 3.0.9 fails to build on at least x86_64 [solved, problem on my side]
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: libffi-native 3.0.9 fails to build on at least x86_64	[solved, problem on my side]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,42 +28,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Mar 2011 08:26:19 -0000
-X-Groupsio-MsgNum: 29980
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="i7F3eY7HS/tUJxUd"
-Content-Disposition: inline
-
---i7F3eY7HS/tUJxUd
+X-List-Received-Date: Tue, 08 Mar 2011 08:38:08 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 08, 2011 at 08:54:55AM +0100, Robert Schuster wrote:
-> Hi,
+Robert Schuster <thebohemian@gmx.net> [2011-03-08 08:54:55]:
+
 > I moved the whole OE directory (bitbake, oe, configdir) to a new
 > location and made it available through the same path using a symlink. As
 > it looks OE does not like that at all.
 
-Hi,
+In OE manual, in Getting started section there's information about
+OEBASE/TOPDIR: "You must choose a location with _no symlinks above it_."
 
-that's why I use mount --bind instead of symlinks/hardlinks (ie tmp/work po=
-inting
-to different partition/md).
+It's some problem with handling of symlinks in the path in Python or something
+like that. 
 
-Regards,
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- ynezz
 
---i7F3eY7HS/tUJxUd
-Content-Type: application/pgp-signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk1158IACgkQN1Ujt2V2gBwRjwCgsCbICmTRBHmVedNKM20AwFh2
-vQgAn0XVppib1u32bhAITLn3hgO3Qt9y
-=wxNb
------END PGP SIGNATURE-----
-
---i7F3eY7HS/tUJxUd--
