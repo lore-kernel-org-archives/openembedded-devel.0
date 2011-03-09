@@ -1,19 +1,30 @@
-Received: from smtp205.alice.it ([82.57.200.101])
+Received: from exprod5og105.obsmtp.com ([64.18.0.180])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <GNUtoo@no-log.org>) id 1PxK9l-0002tJ-B8
+	(envelope-from <martyn.welch@ge.com>) id 1PxLpb-00057M-Nq
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Mar 2011 15:14:29 +0100
-Received: from [192.168.1.178] (79.50.207.190) by smtp205.alice.it
-	(8.5.124.08) (authenticated as editempo)
-	id 4D0D003806EE5662 for openembedded-devel@lists.openembedded.org;
-	Wed, 9 Mar 2011 15:12:54 +0100
-From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+	Wed, 09 Mar 2011 17:01:48 +0100
+Received: from source ([4.79.213.129]) (using TLSv1) by
+	exprod5ob105.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKTXekCKNJ4qgzWB0LYLDGAn+ql+KsqWnq@postini.com;
+	Wed, 09 Mar 2011 08:00:14 PST
+Received: from unknown (HELO alpmlef06.e2k.ad.ge.com) ([3.159.18.15])
+	by Alpmlip05.e2k.ad.ge.com with ESMTP; 09 Mar 2011 08:12:40 -0500
+Received: from [3.138.54.92] ([3.138.54.92]) by alpmlef06.e2k.ad.ge.com with
+	Microsoft SMTPSVC(6.0.3790.4675); Wed, 9 Mar 2011 08:12:15 -0500
+Message-ID: <4D777CC5.6090303@ge.com>
+Date: Wed, 09 Mar 2011 13:12:37 +0000
+From: Martyn Welch <martyn.welch@ge.com>
+Organization: GE Intelligent Platforms
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 09 Mar 2011 15:12:34 +0100
-Message-ID: <1299679954.22332.8.camel@gnutoo-laptop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-Subject: fennec build problem
+References: <4D7759A1.4060802@dresearch.de>
+In-Reply-To: <4D7759A1.4060802@dresearch.de>
+X-Enigmail-Version: 1.1.2
+X-OriginalArrivalTime: 09 Mar 2011 13:12:16.0072 (UTC)
+	FILETIME=[9C96F480:01CBDE5B]
+Subject: Re: u-boot-utils and UBOOT_MACHINE?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,59 +38,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Mar 2011 14:14:29 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 09 Mar 2011 16:01:48 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi,
-I never succeeded to build Fennec because I never had the time and the
-will to fix it (the Mozilla build system seem complicated...), but
-dcordes_ on #oe On Freenode on irc really wanted  fennec.
-So I decided to give a try because it didn't compile for him for another
-reason.
+On 09/03/11 10:42, Steffen Sledz wrote:
+> The current recipe for the u-boot-utils (u-boot-utils_1.2.0.bb) contains this:
+> 
+> ------------------->snip<--------------------
+> do_configure() {
+>         oe_runmake Sandpoint8240_config
+> }
+> ------------------->snip<--------------------
+> 
+> This seems to be very machine specific.
+> 
+> I'm not a u-boot-tools specialist. If the tools are not machine specific and the above line is just a placeholder, this should be documented.
+> 
 
-Here is the build error:
-| make[5]: *** No rule to make target `-lgconf-2', needed by
-`libmozgnome.so'.  Stop.
-| make[5]: *** Waiting for unfinished jobs....
-[...]
-| make[5]: Leaving directory
-`/home/gnutoo/embedded/oe/oetmps/nokia900/work/armv7a-oe-linux-gnueabi/fennec-1_2.0+4.0b3pre-r0/mozilla-central/objdir/xulrunner/toolkit/system/gnome'
-| make[4]: *** [libs_tier_platform] Error 2
+It's been a while since I looked at u-boot-utils, I think the tools are
+generic but the build scripts need a config to run.
 
-here's a grep for -lgconf-2:
-gnutoo@gnutoo-laptop:~/embedded/oe/oetmps/nokia900/work/armv7a-oe-linux-gnueabi/fennec-1_2.0+4.0b3pre-r0/mozilla-central/objdir/xulrunner$ grep "\-lgconf-2" -r *
+> But if the tools itself are machine specific i believe there should be something like
+> 
+> ------------------->snip<--------------------
+> do_configure() {
+>         oe_runmake ${UBOOT_MACHINE}
+> }
+> ------------------->snip<--------------------
+> 
 
-config/autoconf.mk:MOZ_GNOMEUI_LIBS = -pthread -lgnomeui-2 -lSM -lICE
--lbonoboui-2 -lgnomevfs-2 -lgnomecanvas-2 -lgnome-2 -lpopt -lbonobo-2
--lbonobo-activation -lORBit-2 -lart_lgpl_2 -lgtk-x11-2.0 -lgdk-x11-2.0
--latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0
--lcairo -lpango-1.0 -lfreetype -lfontconfig -lgconf-2 -lgmodule-2.0
--lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0
+I guess you mean "oe_runmake ${UBOOT_MACHINE}_config" :-)
 
-config/autoconf.mk:MOZ_GNOMEVFS_LIBS = -pthread -lgnomevfs-2 -lgconf-2
--lgmodule-2.0 -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0
+I doubt I'm the only one who uses OE to generate Linux images without having a
+suitable U-Boot machine that could be used to satisfy that. We could put
+Sandpoint8240 in each such machine conf and document why there. I also assume
+that there are machine confs that currently lack a UBOOT_MACHINE variable
+which could cause problems building the U-Boot tools if this change is made,
+especially for machines that might exist in an overlay (more likely now with
+OE-core?).
 
-config/autoconf.mk:MOZ_GCONF_LIBS = -pthread -lgconf-2 -lgobject-2.0
--lgthread-2.0 -lrt -lglib-2.0
+> and package build should go into machine specific workdir. Right?
+> 
 
-config.status:s%@MOZ_GNOMEVFS_LIBS@%-pthread -lgnomevfs-2 -lgconf-2
--lgmodule-2.0 -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0%g
+I think they are generic, though I'm no expert.
 
-config.status:s%@MOZ_GCONF_LIBS@%-pthread -lgconf-2 -lgobject-2.0
--lgthread-2.0 -lrt -lglib-2.0%g
+Martyn
 
-config.status:s%@MOZ_GNOMEUI_LIBS@%-pthread -lgnomeui-2 -lSM -lICE
--lbonoboui-2 -lgnomevfs-2 -lgnomecanvas-2 -lgnome-2 -lpopt -lbonobo-2
--lbonobo-activation -lORBit-2 -lart_lgpl_2 -lgtk-x11-2.0 -lgdk-x11-2.0
--latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0
--lcairo -lpango-1.0 -lfreetype -lfontconfig -lgconf-2 -lgmodule-2.0
--lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0%g
-
-Note that it need a modified autoconf.inc, that I will send for
-review(as it's core).
-
-Denis
-
+-- 
+Martyn Welch (Principal Software Engineer) | Registered in England and
+GE Intelligent Platforms                   | Wales (3828642) at 100
+T +44(0)127322748                          | Barbirolli Square, Manchester,
+E martyn.welch@ge.com                      | M2 3AB  VAT:GB 927559189
 
 
