@@ -1,27 +1,31 @@
-Received: from 7.27.mail-out.ovh.net ([46.105.34.120] helo=27.mail-out.ovh.net)
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Px553-0000RR-Ds
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <andrea.adami@gmail.com>) id 1Px745-0002G4-JD
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Mar 2011 23:08:37 +0100
-Received: (qmail 1606 invoked by uid 503); 8 Mar 2011 22:33:48 -0000
-Received: from b6.ovh.net (HELO mail195.ha.ovh.net) (213.186.33.56)
-	by 27.mail-out.ovh.net with SMTP; 8 Mar 2011 22:33:42 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 8 Mar 2011 23:40:18 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 8 Mar 2011 23:40:16 +0200
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Mar 2011 22:41:34 +0100
-Message-Id: <1299620494-25930-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.0.4
+	Wed, 09 Mar 2011 01:15:45 +0100
+Received: by vws4 with SMTP id 4so6970vws.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 08 Mar 2011 16:14:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=fq2/DssahqdFPCizqPGU81jqsXJQ3tYxG9rNPSMRhbw=;
+	b=Y3rjgJuwFj2VNGvi8DhDDD4ug88pT/Qvj1MUnmu5pX8JvnrScau3b4qWtPoN/4EUtb
+	Hr0nfSfHOpezPTBDI6zkWLp5BZYfftJz/m+dVC5HjTBeMDx41fkteqFaJ5XEJplgUISx
+	BwCsQ9ArmbtOIkUkMrfiL/kM7ibr1IK2EAc8s=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=MukXcENUsYM0U0n985IilFQAw5H3K7z9M+XknQWcLK/uBW7zckEB1o2a+3fe5HT8ny
+	Eko2s88zM+7XMw0Q9WPVkxgIy5leqXTBSrIyAPJDI3/0uVVhVkzRiPyhvoJPtU8SvBQ/
+	QoikGUvImBNV2zbJp/wuC5uR09nyC71f6ni5s=
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 11691344633463549257
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: [PATCH] busybox: add latest fix
+Received: by 10.52.159.3 with SMTP id wy3mr8361196vdb.289.1299629650406; Tue,
+	08 Mar 2011 16:14:10 -0800 (PST)
+Received: by 10.52.164.39 with HTTP; Tue, 8 Mar 2011 16:14:10 -0800 (PST)
+Date: Wed, 9 Mar 2011 01:14:10 +0100
+Message-ID: <AANLkTikBSTnFxn-h+BgD1fcuOmKPsP6Q8bVZ+R7_HUkW@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: mtd-utils - issues with flash_eraseall -j
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,43 +39,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Mar 2011 22:08:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 09 Mar 2011 00:15:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-klogd: fix the problem of delayed handling of ^C and SIGTERM
+Hello,
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- recipes/busybox/busybox_1.18.3.bb |    5 ++++-
- 1 files changed, 4 insertions(+), 1 deletions(-)
+with the previous mtd-utils-1.3.1 I could do ' flash_eraseall -j
+/dev/mtd3' on my Zaurus/armv5te.
 
-diff --git a/recipes/busybox/busybox_1.18.3.bb b/recipes/busybox/busybox_1.18.3.bb
-index 59e817d..55b7de2 100644
---- a/recipes/busybox/busybox_1.18.3.bb
-+++ b/recipes/busybox/busybox_1.18.3.bb
-@@ -1,11 +1,12 @@
- require busybox_1.1x.inc
--PR = "${INC_PR}.2"
-+PR = "${INC_PR}.3"
- 
- SRC_URI += " \
- 	http://busybox.net/downloads/fixes-1.18.3/busybox-1.18.3-buildsys.patch;name=patch01 \
- 	http://busybox.net/downloads/fixes-1.18.3/busybox-1.18.3-modutils24.patch;name=patch02 \
- 	http://busybox.net/downloads/fixes-1.18.3/busybox-1.18.3-wget.patch;name=patch03 \
-         http://busybox.net/downloads/fixes-1.18.3/busybox-1.18.3-menuconfig.patch;name=patch04 \
-+	http://busybox.net/downloads/fixes-1.18.3/busybox-1.18.3-klogd.patch;name=patch05 \
- 	"
- 
- SRC_URI[md5sum] = "660af4d44661d32b22025a66f4f78df2"
-@@ -18,3 +19,5 @@ SRC_URI[patch03.md5sum] = "abe065069fed8458eedbdad48c115e1f"
- SRC_URI[patch03.sha256sum] = "22538ebee96f66916104b8143cfd16e21568da4c5a89128b9daa60d83a59120b"
- SRC_URI[patch04.md5sum] = "d12d997b66669451bd8c4cc494162a80"
- SRC_URI[patch04.sha256sum] = "f3f8466432088248492fc44631a765ed0a95a8b7d14e37483fae25158d07dc68"
-+SRC_URI[patch05.md5sum] = "f2277e7a31d04295bd9d56a98ff1535b"
-+SRC_URI[patch05.sha256sum] = "4c7ab0e7d940a4aaf54a0b6fd21f00ab025eaf025d47f2e085a6269e1842016c"
--- 
-1.7.0.4
+With v. 1.4.1 (and 1.4.2 fwiw) I see following errors:
 
+...
+flash_erase: error!: /dev/mtd3: MTD writeoob failure
+                        error 22 (Invalid argument)
+Erasing 16 Kibyte @ 43f0000 -- 99% complete libmtd: error!: unaligned address 7
+1237640, mtd3 page size is 512
+flash_erase: error!: /dev/mtd3: MTD writeoob failure
+                        error 22 (Invalid argument)
+Erasing 16 Kibyte @ 43f4000 -- 99% complete libmtd: error!: unaligned address 7
+1254024, mtd3 page size is 512
+...
+
+Anybody can confirm the issue?
+
+Regards
+
+Andrea
 
 
