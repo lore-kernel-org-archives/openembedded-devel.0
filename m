@@ -1,30 +1,29 @@
-Received: from exprod5og105.obsmtp.com ([64.18.0.180])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martyn.welch@ge.com>) id 1PxLpb-00057M-Nq
+	(envelope-from <gary@mlbassoc.com>) id 1PxMhB-0005wD-0R
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Mar 2011 17:01:48 +0100
-Received: from source ([4.79.213.129]) (using TLSv1) by
-	exprod5ob105.postini.com ([64.18.4.12]) with SMTP
-	ID DSNKTXekCKNJ4qgzWB0LYLDGAn+ql+KsqWnq@postini.com;
-	Wed, 09 Mar 2011 08:00:14 PST
-Received: from unknown (HELO alpmlef06.e2k.ad.ge.com) ([3.159.18.15])
-	by Alpmlip05.e2k.ad.ge.com with ESMTP; 09 Mar 2011 08:12:40 -0500
-Received: from [3.138.54.92] ([3.138.54.92]) by alpmlef06.e2k.ad.ge.com with
-	Microsoft SMTPSVC(6.0.3790.4675); Wed, 9 Mar 2011 08:12:15 -0500
-Message-ID: <4D777CC5.6090303@ge.com>
-Date: Wed, 09 Mar 2011 13:12:37 +0000
-From: Martyn Welch <martyn.welch@ge.com>
-Organization: GE Intelligent Platforms
+	Wed, 09 Mar 2011 17:57:09 +0100
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 51F151660448; Wed,  9 Mar 2011 09:55:31 -0700 (MST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2-r929478 (2010-03-31) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2-r929478
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 8BDF21660448;
+	Wed,  9 Mar 2011 09:55:29 -0700 (MST)
+Message-ID: <4D77B101.4040204@mlbassoc.com>
+Date: Wed, 09 Mar 2011 09:55:29 -0700
+From: Gary Thomas <gary@mlbassoc.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc13
+	Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4D7759A1.4060802@dresearch.de>
-In-Reply-To: <4D7759A1.4060802@dresearch.de>
-X-Enigmail-Version: 1.1.2
-X-OriginalArrivalTime: 09 Mar 2011 13:12:16.0072 (UTC)
-	FILETIME=[9C96F480:01CBDE5B]
-Subject: Re: u-boot-utils and UBOOT_MACHINE?
+References: <4D756D6B.9020108@mlbassoc.com> <4D77210E.8040602@gmail.com>
+In-Reply-To: <4D77210E.8040602@gmail.com>
+Subject: Re: Can't build gstreamer-ti
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,57 +37,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Mar 2011 16:01:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 09 Mar 2011 16:57:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 09/03/11 10:42, Steffen Sledz wrote:
-> The current recipe for the u-boot-utils (u-boot-utils_1.2.0.bb) contains this:
-> 
-> ------------------->snip<--------------------
-> do_configure() {
->         oe_runmake Sandpoint8240_config
-> }
-> ------------------->snip<--------------------
-> 
-> This seems to be very machine specific.
-> 
-> I'm not a u-boot-tools specialist. If the tools are not machine specific and the above line is just a placeholder, this should be documented.
-> 
+On 03/08/11 23:41, Khem Raj wrote:
+>> | arm-angstrom-linux-gnueabi-libtool: link: warning: library
+>> `/work/local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libgstbase-0.10.la'
+>> was moved.
+>> | /bin/grep:
+>> /work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/lib/libgstreamer-0.10.la:
+>> No such file or directory
+>> | /bin/sed: can't read
+>> /work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/lib/libgstreamer-0.10.la:
+>> No such file or directory
+>> | arm-angstrom-linux-gnueabi-libtool: link:
+>> `/work/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/lib/libgstreamer-0.10.la'
+>> is not a valid libtool archive
+>>
+>> Any ideas how to fix this?
+>
+> seems libtool is looking in machine sysroot where as it should be looking in arch sysroot
+>
+> could you try adding EXTRA_OECONF += "--with-libtool-sysroot=${STAGING_DIR_TARGET}" to corresponding recipe and see if that helps ?
 
-It's been a while since I looked at u-boot-utils, I think the tools are
-generic but the build scripts need a config to run.
-
-> But if the tools itself are machine specific i believe there should be something like
-> 
-> ------------------->snip<--------------------
-> do_configure() {
->         oe_runmake ${UBOOT_MACHINE}
-> }
-> ------------------->snip<--------------------
-> 
-
-I guess you mean "oe_runmake ${UBOOT_MACHINE}_config" :-)
-
-I doubt I'm the only one who uses OE to generate Linux images without having a
-suitable U-Boot machine that could be used to satisfy that. We could put
-Sandpoint8240 in each such machine conf and document why there. I also assume
-that there are machine confs that currently lack a UBOOT_MACHINE variable
-which could cause problems building the U-Boot tools if this change is made,
-especially for machines that might exist in an overlay (more likely now with
-OE-core?).
-
-> and package build should go into machine specific workdir. Right?
-> 
-
-I think they are generic, though I'm no expert.
-
-Martyn
+No change, sorry.
 
 -- 
-Martyn Welch (Principal Software Engineer) | Registered in England and
-GE Intelligent Platforms                   | Wales (3828642) at 100
-T +44(0)127322748                          | Barbirolli Square, Manchester,
-E martyn.welch@ge.com                      | M2 3AB  VAT:GB 927559189
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
