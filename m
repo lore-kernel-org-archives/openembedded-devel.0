@@ -1,33 +1,32 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PxRQO-0005pM-Tm
+	(envelope-from <Tom_Rini@mentor.com>) id 1PxS3P-0006Rv-OX
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Mar 2011 23:00:09 +0100
+	Wed, 09 Mar 2011 23:40:27 +0100
 Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
 	by relay1.mentorg.com with esmtp 
-	id 1PxROm-0004N3-Od from Tom_Rini@mentor.com 
+	id 1PxS1t-0007kK-NB from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Mar 2011 13:58:28 -0800
-Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
+	Wed, 09 Mar 2011 14:38:53 -0800
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
 	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 9 Mar 2011 13:58:28 -0800
-Received: from [172.30.80.238] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
-	Wed, 9 Mar 2011 13:58:28 -0800
-Message-ID: <4D77F7FB.70308@mentor.com>
-Date: Wed, 9 Mar 2011 14:58:19 -0700
+	SMTPSVC(6.0.3790.4675); Wed, 9 Mar 2011 14:38:53 -0800
+Received: from [172.30.80.238] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
+	with Microsoft SMTP Server id 14.1.270.1;
+	Wed, 9 Mar 2011 14:38:52 -0800
+Message-ID: <4D780174.2010303@mentor.com>
+Date: Wed, 9 Mar 2011 15:38:44 -0700
 From: Tom Rini <tom_rini@mentor.com>
 Organization: Mentor Graphics Corporation
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
 To: <openembedded-devel@lists.openembedded.org>
-References: <1299679954.22332.8.camel@gnutoo-laptop>
-	<4D77E827.3090400@gmail.com>
-In-Reply-To: <4D77E827.3090400@gmail.com>
-X-OriginalArrivalTime: 09 Mar 2011 21:58:28.0578 (UTC)
-	FILETIME=[1F450C20:01CBDEA5]
-Subject: Re: fennec build problem
+References: <1299591092.3785.121.camel@mattotaupa>
+In-Reply-To: <1299591092.3785.121.camel@mattotaupa>
+X-OriginalArrivalTime: 09 Mar 2011 22:38:53.0390 (UTC)
+	FILETIME=[C491FEE0:01CBDEAA]
+Subject: Re: [PATCH] xfce4-session_4.6.{1, 2}: add `libwnck` to `DEPENDS`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,57 +40,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Mar 2011 22:00:09 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+X-List-Received-Date: Wed, 09 Mar 2011 22:40:28 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 03/09/2011 01:50 PM, Jan Paesmans wrote:
-> As far as I know, it seems like a missing dependency, gconf2 is provided
-> by the gconf recipe but I didn't find any immediate dependencies on
-> gconf. Or maybe there is something wrong in the configuration step for
-> fennec that should disable the use of gconf.
-> Looking at the rest of the libraries used, there might the more missing
-> dependencies or missing disables in the configuration step of fennec.
+On 03/08/2011 06:31 AM, Paul Menzel wrote:
+> Date: Tue, 8 Mar 2011 12:27:26 +0100
+>
+> Task `configure` fails with the following error.
+>
+> 	checking for pkg-config>= 0.9.0... 0.23
+> 	checking for libxfce4util-1.0>= 4.6.0... 4.6.2
+> 	checking LIBXFCE4UTIL_CFLAGS... -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/xfce4 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/include
+> 	checking LIBXFCE4UTIL_LIBS... -lxfce4util -lglib-2.0
+> 	checking for libxfcegui4-1.0>= 4.6.0... 4.6.4
+> 	checking LIBXFCEGUI4_CFLAGS... -pthread -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/xfce4 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gtk-2.0 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/gtk-2.0/include -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/pango-1.0 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/include -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/cairo -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/pixman-1 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/freetype2 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libpng12 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/atk-1.0
+> 	checking LIBXFCEGUI4_LIBS... -pthread -lxfcegui4 -lgtk-x11-2.0 -lxfce4util -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 -lrt -lglib-2.0
+> 	checking for libwnck-1.0>= 2.12... not found
+> 	*** The required package libwnck-1.0 was not found on your system.
+> 	*** Please install libwnck-1.0 (atleast version 2.12) or adjust
+> 	*** the PKG_CONFIG_PATH environment variable if you
+> 	*** installed the package in a nonstandard prefix so that
+> 	*** pkg-config is able to find it.
+>
+> Adding `libwnck` to `DEPENDS` makes this error go away.
+>
+> Signed-off-by: Paul Menzel<paulepanter@users.sourceforge.net>
 
-Thinking back to
-679a2367acde02f76f43f446c56c1eefed4e69c0 last year, I would be 
-unsurprised if there weren't more implicit deps in both firefox and fennec.
+Acked-by: Tom Rini <tom_rini@mentor.com>
 
-[snip]
->> here's a grep for -lgconf-2:
->> gnutoo@gnutoo-laptop:~/embedded/oe/oetmps/nokia900/work/armv7a-oe-linux-gnueabi/fennec-1_2.0+4.0b3pre-r0/mozilla-central/objdir/xulrunner$ grep "\-lgconf-2" -r *
->>
->> config/autoconf.mk:MOZ_GNOMEUI_LIBS = -pthread -lgnomeui-2 -lSM -lICE
->> -lbonoboui-2 -lgnomevfs-2 -lgnomecanvas-2 -lgnome-2 -lpopt -lbonobo-2
->> -lbonobo-activation -lORBit-2 -lart_lgpl_2 -lgtk-x11-2.0 -lgdk-x11-2.0
->> -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0
->> -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgconf-2 -lgmodule-2.0
->> -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0
->>
->> config/autoconf.mk:MOZ_GNOMEVFS_LIBS = -pthread -lgnomevfs-2 -lgconf-2
->> -lgmodule-2.0 -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0
->>
->> config/autoconf.mk:MOZ_GCONF_LIBS = -pthread -lgconf-2 -lgobject-2.0
->> -lgthread-2.0 -lrt -lglib-2.0
->>
->> config.status:s%@MOZ_GNOMEVFS_LIBS@%-pthread -lgnomevfs-2 -lgconf-2
->> -lgmodule-2.0 -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0%g
->>
->> config.status:s%@MOZ_GCONF_LIBS@%-pthread -lgconf-2 -lgobject-2.0
->> -lgthread-2.0 -lrt -lglib-2.0%g
->>
->> config.status:s%@MOZ_GNOMEUI_LIBS@%-pthread -lgnomeui-2 -lSM -lICE
->> -lbonoboui-2 -lgnomevfs-2 -lgnomecanvas-2 -lgnome-2 -lpopt -lbonobo-2
->> -lbonobo-activation -lORBit-2 -lart_lgpl_2 -lgtk-x11-2.0 -lgdk-x11-2.0
->> -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0
->> -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgconf-2 -lgmodule-2.0
->> -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0%g
->>
->> Note that it need a modified autoconf.inc, that I will send for
->> review(as it's core).
+> ---
+> `xfce4-session_4.4.2.bb` does not seem to require `libwnck`.
+> ---
+>   recipes/xfce-base/xfce4-session_4.6.1.bb |    2 +-
+>   recipes/xfce-base/xfce4-session_4.6.2.bb |    2 +-
+>   2 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/recipes/xfce-base/xfce4-session_4.6.1.bb b/recipes/xfce-base/xfce4-session_4.6.1.bb
+> index de07fb3..72b58d3 100644
+> --- a/recipes/xfce-base/xfce4-session_4.6.1.bb
+> +++ b/recipes/xfce-base/xfce4-session_4.6.1.bb
+> @@ -1,5 +1,5 @@
+>   DESCRIPTION = "xfce4-session is a sessionmanager for Xfce 4 Desktop  Environment"
+> -DEPENDS = "libxfcegui4 libxfce4util dbus iceauth xfce-utils"
+> +DEPENDS = "libwnck libxfcegui4 libxfce4util dbus iceauth xfce-utils"
+>   SECTION = "x11"
+>
+>   PR = "r4"
+> diff --git a/recipes/xfce-base/xfce4-session_4.6.2.bb b/recipes/xfce-base/xfce4-session_4.6.2.bb
+> index c85bb8c..d7f768a 100644
+> --- a/recipes/xfce-base/xfce4-session_4.6.2.bb
+> +++ b/recipes/xfce-base/xfce4-session_4.6.2.bb
+> @@ -1,5 +1,5 @@
+>   DESCRIPTION = "xfce4-session is a session manager for Xfce 4 Desktop Environment"
+> -DEPENDS = "libxfcegui4 libxfce4util dbus iceauth xfce-utils"
+> +DEPENDS = "libwnck libxfcegui4 libxfce4util dbus iceauth xfce-utils"
+>   SECTION = "x11"
+>
+>   PR = "r0"
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Most of these should be pretty easily mappable to recipes and made sure 
-we have explicit deps for them.
 
 -- 
 Tom Rini
