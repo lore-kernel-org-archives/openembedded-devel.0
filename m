@@ -1,42 +1,39 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jan.paesmans@gmail.com>) id 1PxQMs-0002PC-ML
+	(envelope-from <otavio.salvador@gmail.com>) id 1PxQkq-00085t-Mz
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Mar 2011 21:52:26 +0100
-Received: by wwb17 with SMTP id 17so973883wwb.24
+	Wed, 09 Mar 2011 22:17:12 +0100
+Received: by eye27 with SMTP id 27so248234eye.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Mar 2011 12:50:50 -0800 (PST)
+	Wed, 09 Mar 2011 13:15:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
 	:content-transfer-encoding;
-	bh=crjOqisE0A8iD0rKbg//HxCbT4SRCd4/qgoP9ERFlHc=;
-	b=ZPewch8AueOW9nJwkMe8Q/D9dH1U9il+lf1oW6xn9nZfQXhYAcQ/xvAwHF+0Sy3yzM
-	v4anUAnV89TQxbhkEEhTRtlt5TGLnWRoT30olH+i4KHIYOYUhDO+1/ozFRHnH6ZPLirK
-	MBHU3BhRBj6K+f4UdJ/jV7dIzrvEDVr39kW10=
+	bh=PU7ob3vcgEWvBBBgT7KjYRsg5gtx+PHxbCzwoQZV62g=;
+	b=TE4/dPc1zBxwhdtbwLi0KcMX5M1q7D8zOSurX55OJ8B6dDNYI5ZJD9hvLltAbVxhBA
+	ULaYOE5fbSEyH6w0i0w8L1iTkAZkcKRmvcA2ZzxT1ngKoTlnMS/xHijwq585B38OQCxa
+	TeKowx3Ze2mR16p68prQWQ+f7jJ6PipASNdIg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=oLKhj6ai0PK0NIQ5QuLD9UwY/JkrliUOvI6VPgv+DO9Y1sGB9ONvVth4SdEbmMp4Xu
-	bfCiT1rmhL04szmy2YMLbYE985PmXwXd1BUO1pi6gbBXhz5Pwai3s1fX2T1jw49TQI8r
-	1JX71NgNXLiR64jyKyWkM+jmSgvU89qlmPW0M=
-Received: by 10.216.133.199 with SMTP id q49mr390148wei.17.1299703850626;
-	Wed, 09 Mar 2011 12:50:50 -0800 (PST)
-Received: from [192.168.1.103] (189.44-240-81.adsl-dyn.isp.belgacom.be
-	[81.240.44.189])
-	by mx.google.com with ESMTPS id n78sm1122379weq.27.2011.03.09.12.50.49
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 09 Mar 2011 12:50:49 -0800 (PST)
-Message-ID: <4D77E827.3090400@gmail.com>
-Date: Wed, 09 Mar 2011 21:50:47 +0100
-From: Jan Paesmans <jan.paesmans@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20110131 Thunderbird/3.1.7
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=inpPlk90h2OBxqwK1+zjdC4u8PYV2jo2AfyV7up1W1ByrrXcDrlRikVjXMHcaolbAr
+	tAYjDcDyRz7u7YBZlTAUoUAOOu2SWmCxFDzugkH4cNeFObOVOSo5X9EK8qE+N9r8ral4
+	lSmhuB7o6PHGCMR0aoItyQXPLfneiK7iXcltk=
 MIME-Version: 1.0
+Received: by 10.216.46.135 with SMTP id r7mr5081306web.21.1299705336254; Wed,
+	09 Mar 2011 13:15:36 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.216.35.81 with HTTP; Wed, 9 Mar 2011 13:15:36 -0800 (PST)
+In-Reply-To: <4D70D51C.5000608@balister.org>
+References: <4D70D51C.5000608@balister.org>
+Date: Wed, 9 Mar 2011 21:15:36 +0000
+X-Google-Sender-Auth: VOXsU3emlv0L7NdGx5WjLZiz5Cc
+Message-ID: <AANLkTikVxyov6x+HZwJ=XygmWEWau1Xk5LTo=C5ubby8@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-References: <1299679954.22332.8.camel@gnutoo-laptop>
-In-Reply-To: <1299679954.22332.8.camel@gnutoo-laptop>
-Subject: Re: fennec build problem
+Subject: Re: cmake build failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,78 +47,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Mar 2011 20:52:27 -0000
+X-List-Received-Date: Wed, 09 Mar 2011 21:17:12 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-As far as I know, it seems like a missing dependency, gconf2 is provided
-by the gconf recipe but I didn't find any immediate dependencies on
-gconf. Or maybe there is something wrong in the configuration step for
-fennec that should disable the use of gconf.
-Looking at the rest of the libraries used, there might the more missing
-dependencies or missing disables in the configuration step of fennec.
+On Fri, Mar 4, 2011 at 12:03, Philip Balister <philip@balister.org> wrote:
+> I tried building cmake (not cmake-native) last night and it failed becaus=
+e
+> it couldn't find LibArchive. This used to work. The build failure was
+> confirmed in #oe.
 
-Hope this helps,
+I'll take a look on that since most probably it is my fault ;-)
 
-Regards,
-
-Jan
-> Hi,
-> I never succeeded to build Fennec because I never had the time and the
-> will to fix it (the Mozilla build system seem complicated...), but
-> dcordes_ on #oe On Freenode on irc really wanted  fennec.
-> So I decided to give a try because it didn't compile for him for another
-> reason.
->
-> Here is the build error:
-> | make[5]: *** No rule to make target `-lgconf-2', needed by
-> `libmozgnome.so'.  Stop.
-> | make[5]: *** Waiting for unfinished jobs....
-> [...]
-> | make[5]: Leaving directory
-> `/home/gnutoo/embedded/oe/oetmps/nokia900/work/armv7a-oe-linux-gnueabi/fennec-1_2.0+4.0b3pre-r0/mozilla-central/objdir/xulrunner/toolkit/system/gnome'
-> | make[4]: *** [libs_tier_platform] Error 2
->
-> here's a grep for -lgconf-2:
-> gnutoo@gnutoo-laptop:~/embedded/oe/oetmps/nokia900/work/armv7a-oe-linux-gnueabi/fennec-1_2.0+4.0b3pre-r0/mozilla-central/objdir/xulrunner$ grep "\-lgconf-2" -r *
->
-> config/autoconf.mk:MOZ_GNOMEUI_LIBS = -pthread -lgnomeui-2 -lSM -lICE
-> -lbonoboui-2 -lgnomevfs-2 -lgnomecanvas-2 -lgnome-2 -lpopt -lbonobo-2
-> -lbonobo-activation -lORBit-2 -lart_lgpl_2 -lgtk-x11-2.0 -lgdk-x11-2.0
-> -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0
-> -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgconf-2 -lgmodule-2.0
-> -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0
->
-> config/autoconf.mk:MOZ_GNOMEVFS_LIBS = -pthread -lgnomevfs-2 -lgconf-2
-> -lgmodule-2.0 -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0
->
-> config/autoconf.mk:MOZ_GCONF_LIBS = -pthread -lgconf-2 -lgobject-2.0
-> -lgthread-2.0 -lrt -lglib-2.0
->
-> config.status:s%@MOZ_GNOMEVFS_LIBS@%-pthread -lgnomevfs-2 -lgconf-2
-> -lgmodule-2.0 -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0%g
->
-> config.status:s%@MOZ_GCONF_LIBS@%-pthread -lgconf-2 -lgobject-2.0
-> -lgthread-2.0 -lrt -lglib-2.0%g
->
-> config.status:s%@MOZ_GNOMEUI_LIBS@%-pthread -lgnomeui-2 -lSM -lICE
-> -lbonoboui-2 -lgnomevfs-2 -lgnomecanvas-2 -lgnome-2 -lpopt -lbonobo-2
-> -lbonobo-activation -lORBit-2 -lart_lgpl_2 -lgtk-x11-2.0 -lgdk-x11-2.0
-> -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0
-> -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgconf-2 -lgmodule-2.0
-> -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0%g
->
-> Note that it need a modified autoconf.inc, that I will send for
-> review(as it's core).
->
-> Denis
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
