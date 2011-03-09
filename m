@@ -1,26 +1,36 @@
-Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1PxIZr-0002xv-71
+Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
+	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1PxJvO-0000wW-QH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Mar 2011 13:33:24 +0100
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Wed, 9 Mar 2011 13:31:44 +0100
-X-TM-IMSS-Message-ID: <112a217600006b04@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.0) id 112a217600006b04 ;
-	Wed, 9 Mar 2011 13:31:44 +0100
-Message-ID: <4D77732F.1000005@nedap.com>
-Date: Wed, 09 Mar 2011 13:31:43 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
+	Wed, 09 Mar 2011 14:59:39 +0100
+Received: (qmail 12805 invoked from network); 9 Mar 2011 14:58:05 +0100
+Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
+	by leibniz.math.fu-berlin.de with SMTP; 9 Mar 2011 14:58:05 +0100
+X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
+Received: from math.fu-berlin.de ([160.45.40.10])
+	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
+	port 10024) with SMTP id wUIkr8Bk4MAt
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  9 Mar 2011 14:58:02 +0100 (CET)
+Received: (Qmail 12794 invoked from network); 9 Mar 2011 14:58:02 +0100
+Received: From andorra.imp.fu-berlin.de (160.45.42.84)
+	by leibniz.math.fu-berlin.de with SMTP; 9 Mar 2011 13:58:02 -0000
+Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.72 #1
+	(Debian)) id 1PxJtq-0007tA-Dm
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Mar 2011 14:58:02 +0100
+Date: Wed, 9 Mar 2011 14:58:02 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4D773276.1040907@nedap.com>	<AANLkTinccRRrmRgcLkf0=cP_eA4Grm2HyyWrDPbT-CFw@mail.gmail.com>
+Message-ID: <20110309135802.GA29723@mi.fu-berlin.de>
+References: <4D773276.1040907@nedap.com>
+	<AANLkTinccRRrmRgcLkf0=cP_eA4Grm2HyyWrDPbT-CFw@mail.gmail.com>
 	<20110309113959.GA22507@mi.fu-berlin.de>
-In-Reply-To: <20110309113959.GA22507@mi.fu-berlin.de>
-X-OriginalArrivalTime: 09 Mar 2011 12:31:44.0163 (UTC)
-	FILETIME=[F30F1730:01CBDE55]
+	<4D77732F.1000005@nedap.com>
+MIME-Version: 1.0
+In-Reply-To: <4D77732F.1000005@nedap.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
 Subject: Re: release-2011.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,25 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Mar 2011 12:33:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 09 Mar 2011 13:59:39 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-
->>> If I use DISTRO=angstrom-2010.x and start a complete new fresh build, I get
->>>
->> Seems like a different bitbake must be used. You better start from the
->> Angstrom web site Getting Started notes as that's the only place where
->> this is up-to-date.
-Don't know what went wrong in the previous attempt but a new fresh start 
-helped a lot...
-
-> and please use uclibc-git, they other versions dont have nptl support.
+On Wed, Mar 09, 2011 at 01:31:43PM +0100, Jaap de Jong wrote:
 >
-How should I accomplish that?
+>>>> If I use DISTRO=angstrom-2010.x and start a complete new fresh build, I get
+>>>>
+>>> Seems like a different bitbake must be used. You better start from the
+>>> Angstrom web site Getting Started notes as that's the only place where
+>>> this is up-to-date.
+> Don't know what went wrong in the previous attempt but a new fresh start  
+> helped a lot...
+>
+>> and please use uclibc-git, they other versions dont have nptl support.
+>>
+> How should I accomplish that?
+>
+>
+> Thanks!
+> Jaap
+>
 
 
-Thanks!
-Jaap
+Either remove the DEFAUL_PREF = "-1" from uclibc git or
+set in local.conf PREFFERED_VERSION_uclibc-initial = "git" and PREFFERED_VERSION_uclibc = "git"
+
+Bye Henning
 
 
