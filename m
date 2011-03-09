@@ -1,24 +1,35 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PxGsJ-00016X-Si
+Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
+	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1PxHls-00028f-FW
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Mar 2011 11:44:15 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id B432B27C403;
-	Wed,  9 Mar 2011 11:42:41 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Wed, 9 Mar 2011 11:42:41 +0100
-Message-ID: <4D7759A1.4060802@dresearch.de>
-Date: Wed, 09 Mar 2011 11:42:41 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.15) Gecko/20110303 Lightning/1.0b2 Thunderbird/3.1.9
+	Wed, 09 Mar 2011 12:41:40 +0100
+Received: (qmail 41 invoked from network); 9 Mar 2011 12:40:03 +0100
+Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
+	by leibniz.math.fu-berlin.de with SMTP; 9 Mar 2011 12:40:03 +0100
+X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
+Received: from math.fu-berlin.de ([160.45.40.10])
+	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
+	port 10024) with SMTP id 5XxwaVDIzgLb
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  9 Mar 2011 12:40:00 +0100 (CET)
+Received: (Qmail 29993 invoked from network); 9 Mar 2011 12:40:00 +0100
+Received: From andorra.imp.fu-berlin.de (160.45.42.84)
+	by leibniz.math.fu-berlin.de with SMTP; 9 Mar 2011 11:40:00 -0000
+Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.72 #1
+	(Debian)) id 1PxHkF-0006Ib-V3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Mar 2011 12:40:00 +0100
+Date: Wed, 9 Mar 2011 12:39:59 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110309113959.GA22507@mi.fu-berlin.de>
+References: <4D773276.1040907@nedap.com>
+	<AANLkTinccRRrmRgcLkf0=cP_eA4Grm2HyyWrDPbT-CFw@mail.gmail.com>
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 09 Mar 2011 10:42:41.0801 (UTC)
-	FILETIME=[B781DF90:01CBDE46]
-Subject: u-boot-utils and UBOOT_MACHINE?
+In-Reply-To: <AANLkTinccRRrmRgcLkf0=cP_eA4Grm2HyyWrDPbT-CFw@mail.gmail.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+Subject: Re: release-2011.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,45 +43,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Mar 2011 10:44:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 09 Mar 2011 11:41:40 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-The current recipe for the u-boot-utils (u-boot-utils_1.2.0.bb) contains =
-this:
+On Wed, Mar 09, 2011 at 09:44:42AM +0100, Leon Woestenberg wrote:
+> Hello Jaap,
+> 
+> On Wed, Mar 9, 2011 at 8:55 AM, Jaap de Jong <jaap.dejong@nedap.com> wrote:
+> > If I use DISTRO=angstrom-2010.x and start a complete new fresh build, I get
+> >
+> Seems like a different bitbake must be used. You better start from the
+> Angstrom web site Getting Started notes as that's the only place where
+> this is up-to-date.
+> 
+> There are different requirements to all the different releases. Also
+> note the heads up for the newest Angstrom to use the oe-core approach.
 
-------------------->snip<--------------------
-do_configure() {
-        oe_runmake Sandpoint8240_config
-}
-------------------->snip<--------------------
+and please use uclibc-git, they other versions dont have nptl support.
 
-This seems to be very machine specific.
-
-I'm not a u-boot-tools specialist. If the tools are not machine specific =
-and the above line is just a placeholder, this should be documented.
-
-But if the tools itself are machine specific i believe there should be so=
-mething like
-
-------------------->snip<--------------------
-do_configure() {
-        oe_runmake ${UBOOT_MACHINE}
-}
-------------------->snip<--------------------
-
-and package build should go into machine specific workdir. Right?
-
-Steffen
-
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
-
+Bye Henning
 
 
