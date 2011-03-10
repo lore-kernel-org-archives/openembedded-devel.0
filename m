@@ -1,31 +1,32 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1Pxc50-0006jm-EV
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Mar 2011 10:22:46 +0100
-Received: by iyb26 with SMTP id 26so1432295iyb.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Pxd6u-0005HV-R6 for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Mar 2011 11:28:48 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Pxd4Z-0007Cw-Db for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Mar 2011 11:26:23 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Mar 2011 11:26:23 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Mar 2011 01:21:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=IAvEk60LY7srfggcnri6RNrhUONC8bwAR2rOfUgRurA=;
-	b=p4THXhZY2A6KvCKWShEHRbE3flAdAR1j+sXogmJycsmLLaYJ1Kzb5xp1IxG2IREJDu
-	cQHcT0r/oDwNi6yLdXbqDWeug2e3Pf5Q2FkCIvGDsSZ67ZnU8deuCQSV35ejLp1/Oi4O
-	VwijzslWn4vktANg/wJuSBHrWCDlQSBJXgEEA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=nTBzYy67+hujQQtt6xnZD9EhYPweSqIiKG1f/1cvvgKjW9xLy3S9PgTwEAQ4v6JT1V
-	bzfUDWRlDT3FR2st1VxiLDlv3jkapxomVpvatz/SuL92BLzN+YQJKbgox9z1WycNylU2
-	J5pgWUBTdzo+vJ6f29gOjfNLLio03OdbDMMZ0=
-MIME-Version: 1.0
-Received: by 10.42.168.131 with SMTP id w3mr5097869icy.122.1299748860195; Thu,
-	10 Mar 2011 01:21:00 -0800 (PST)
-Received: by 10.42.117.138 with HTTP; Thu, 10 Mar 2011 01:21:00 -0800 (PST)
-Date: Thu, 10 Mar 2011 10:21:00 +0100
-Message-ID: <AANLkTik1GhO_ZX_oP3_TB6JR_73QPmM7t3jzxd4vbOkW@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Thu, 10 Mar 2011 11:26:23 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: [RFC] cpio.lzma compression level in bitbake.conf
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 10 Mar 2011 11:26:07 +0100
+Message-ID: <ila904$dhj$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+X-Enigmail-Version: 1.0.1
+Subject: [2011.03-maintenance] Pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,33 +40,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Mar 2011 09:22:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 10 Mar 2011 10:28:48 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-in bitbake.conf we use the maximum lzma compression level (-c -9) for
-the initramfs:
+Tom,
 
-IMAGE_CMD_cpio.lzma = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} &&
-(find . | cpio -o -H newc | lzma -c -9
->${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma)
-${EXTRA_IMAGECMD}"
+Please pull the 3 commits from here:
 
-This makes decompressor fail on devices with 32Mb RAM (see
-http://paste.debian.net/110203/ ).
-Same kernel boots with compression set to -7.
+URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+Branch: 2011.03-maintenance
 
-Some figures can be obtained here:
-http://www.gsp.com/cgi-bin/man.cgi?section=1&topic=lzcat
+Koen Kooi (3):
+      angstrom feed scripts: Upload to the EU mirror by default
+      x-load: fall back to xM when detecting beagleboard revisions
+      xmms: bandaid some more host path leakage
 
-It was suggested we should introduce something like
-LZMA_COMPRESSION_LEVEL or use internal tables to find better level
-from targets memory amount.
-In the meanwhile I think we should change the defaults in bitbake.conf.
+You can view the branch online at
+http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance
 
-Opinions?
+The first patch is some housekeeping to have the angstrom autobuilders
+upload to the correct location, a modified backport.
 
-Andrea
+The second patch is to make the new beagleboard xM revision C boot,
+plain cherry-pick from .dev.
+
+And the third patch is to fix -L/usr/lib breakage I noticed when doing a
+build from scratch, plain cherry-pick from .dev.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNeKc/MkyGM64RGpERAu6pAJ9S0OOiLyGu6O+nb5kSjhNeCYw43gCfcITQ
+DMrIblovVJgpNDH14H14JSU=
+=UOGx
+-----END PGP SIGNATURE-----
+
 
 
