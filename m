@@ -1,21 +1,32 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pxh4L-0000YV-Jy for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Mar 2011 15:42:25 +0100
-Received: from f053036145.adsl.alicedsl.de ([78.53.36.145]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pxh2p-0006p7-Ao for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Mar 2011 14:40:51 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Mar 2011 15:40:51 +0100
-Message-ID: <1299768051.3853.21.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: help2man-native: task configure fails with `configure: error: perl module Locale::gettext required`
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pxh6r-0000gH-7D
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Mar 2011 15:45:01 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1Pxh5D-0006Tq-Og from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Mar 2011 06:43:19 -0800
+Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Thu, 10 Mar 2011 06:42:18 -0800
+Received: from [172.30.80.238] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
+	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
+	Thu, 10 Mar 2011 06:42:17 -0800
+Message-ID: <4D78E340.9090403@mentor.com>
+Date: Thu, 10 Mar 2011 07:42:08 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <ila904$dhj$1@dough.gmane.org>
+In-Reply-To: <ila904$dhj$1@dough.gmane.org>
+X-OriginalArrivalTime: 10 Mar 2011 14:42:18.0391 (UTC)
+	FILETIME=[5B092A70:01CBDF31]
+Subject: Re: [2011.03-maintenance] Pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,60 +40,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Mar 2011 14:42:25 -0000
-X-Groupsio-MsgNum: 30030
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-SK1aNb0ZrVdnOpA/hAj1"
+X-List-Received-Date: Thu, 10 Mar 2011 14:45:01 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---=-SK1aNb0ZrVdnOpA/hAj1
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 03/10/2011 03:26 AM, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Tom,
+>
+> Please pull the 3 commits from here:
+>
+> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+> Branch: 2011.03-maintenance
+>
+> Koen Kooi (3):
+>        angstrom feed scripts: Upload to the EU mirror by default
+>        x-load: fall back to xM when detecting beagleboard revisions
+>        xmms: bandaid some more host path leakage
+>
+> You can view the branch online at
+> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance
+>
+> The first patch is some housekeeping to have the angstrom autobuilders
+> upload to the correct location, a modified backport.
+>
+> The second patch is to make the new beagleboard xM revision C boot,
+> plain cherry-pick from .dev.
+>
+> And the third patch is to fix -L/usr/lib breakage I noticed when doing a
+> build from scratch, plain cherry-pick from .dev.
 
-Dear OE folks,
+Applied, thanks.
+
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
-some recent commit indirectly seems to have broken `help2man-native` and
-task configure fails.
-
-    checking whether gcc accepts -g... yes
-    checking for gcc option to accept ISO C89... none needed
-    checking for library containing dlsym... -ldl
-    checking for library containing bindtextdomain... none required
-    configure: error: perl module Locale::gettext required
-
-Adding `liblocale-gettext-perl-native` to `DEPENDS_virtclass-native`
-does not fix the problem but causes a dependency loop.
-
-I do not understand the dependency for the native package anyway.
-
-        DEPENDS =3D "gettext-native perl-native liblocale-gettext-perl-nati=
-ve"
-        DEPENDS_virtclass-native =3D "perl-native autoconf-native automake-=
-native"
-        RDEPENDS_${PN} =3D "gettext perl liblocale-gettext-perl"
-        RDEPENDS_${PN}_virtclass-native =3D ""
-
-I though that `DEPENDS_virtclass-native` has `DEPENDS` as a subset
-automatically.
-
-Any ideas?
-
-
-Thanks,
-
-Paul
-
---=-SK1aNb0ZrVdnOpA/hAj1
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk144vMACgkQPX1aK2wOHVjd6wCdGnSbQ669wQKx6hTvn6gVCkTN
-IwAAn3aK6+4suF2zLmVAeeoKGTWwgVrN
-=0UNn
------END PGP SIGNATURE-----
-
---=-SK1aNb0ZrVdnOpA/hAj1--
