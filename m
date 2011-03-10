@@ -1,30 +1,22 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from bsmtp5.bon.at ([195.3.86.187] helo=bsmtp.bon.at)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koansoftware@gmail.com>) id 1Pxhkv-0002FS-LX
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Mar 2011 16:26:25 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id BFDBE2C810
+	(envelope-from <pgsellmann@portner-elektronik.at>)
+	id 1PxhlK-0002GY-Mx for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Mar 2011 16:26:50 +0100
+Received: from aspire.localdomain (unknown [88.116.171.82])
+	by bsmtp.bon.at (Postfix) with ESMTP id 60FDFCDF87
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Mar 2011 15:23:13 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NYuVHyJ4sHVF
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Mar 2011 15:23:09 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 00A332C7D7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Mar 2011 15:23:08 +0000 (UTC)
-Message-ID: <4D78ED36.40703@gmail.com>
-Date: Thu, 10 Mar 2011 16:24:38 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini
-User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
-MIME-Version: 1.0
+	Thu, 10 Mar 2011 16:25:09 +0100 (CET)
+From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+Organization: PORTNER Elektronik
 To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Mar 2011 16:25:10 +0100
+User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
+	)
 References: <1299768051.3853.21.camel@mattotaupa>
 In-Reply-To: <1299768051.3853.21.camel@mattotaupa>
+MIME-Version: 1.0
+Message-Id: <201103101625.11388.pgsellmann@portner-elektronik.at>
 Subject: Re: help2man-native: task configure fails with `configure: error: perl module Locale::gettext required`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,134 +31,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Mar 2011 15:26:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Mar 2011 15:26:51 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
+Content-Transfer-Encoding: quoted-printable
 
-Paul Menzel ha scritto, Il 10/03/2011 15:40:
+Am Donnerstag, 10. M=E4rz 2011, 15:40:51 schrieb Paul Menzel:
 > Dear OE folks,
-> 
-> 
+>=20
+>=20
 > some recent commit indirectly seems to have broken `help2man-native` and
 > task configure fails.
-> 
+>=20
 >     checking whether gcc accepts -g... yes
 >     checking for gcc option to accept ISO C89... none needed
 >     checking for library containing dlsym... -ldl
 >     checking for library containing bindtextdomain... none required
 >     configure: error: perl module Locale::gettext required
-> 
+>=20
 > Adding `liblocale-gettext-perl-native` to `DEPENDS_virtclass-native`
 > does not fix the problem but causes a dependency loop.
-> 
+>=20
 > I do not understand the dependency for the native package anyway.
-> 
->         DEPENDS = "gettext-native perl-native liblocale-gettext-perl-native"
->         DEPENDS_virtclass-native = "perl-native autoconf-native automake-native"
->         RDEPENDS_${PN} = "gettext perl liblocale-gettext-perl"
->         RDEPENDS_${PN}_virtclass-native = ""
-> 
+>=20
+>         DEPENDS =3D "gettext-native perl-native liblocale-gettext-perl-na=
+tive"
+>         DEPENDS_virtclass-native =3D "perl-native autoconf-native automak=
+e-native"
+>         RDEPENDS_${PN} =3D "gettext perl liblocale-gettext-perl"
+>         RDEPENDS_${PN}_virtclass-native =3D ""
+>=20
 > I though that `DEPENDS_virtclass-native` has `DEPENDS` as a subset
 > automatically.
-> 
+>=20
 > Any ideas?
-> 
-> 
-> Thanks,
-> 
-> Paul
-> 
-> 
-> ------------------------------------------------------------------------
+>=20
+After removing perl-native from ASSUME_PROVIDED and adding help2man-native =
+it worked for me.
+But this is only work-around, no solution.
 
-
-Same problem here.
-
-
-
-$ bitbake meta-toolchain
-
-
-Build Configuration:
-BB_VERSION        = "1.10.2"
-METADATA_BRANCH   = "master"
-METADATA_REVISION = "40a8506"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "ronetix-pm9263"
-DISTRO            = "angstrom"
-DISTRO_VERSION    = "2010.7-test-20110310"
-TARGET_FPU        = "soft"
-
-WARNING: oestats: exception <class 'urllib2.HTTPError'>, value HTTP
-Error 404: Not Found
-WARNING: oestats: error starting build, disabling stats
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-...
-NOTE: Running task 273 of 1027 (ID: 541,
-/home/koan/devel/openembedded/recipes/gcc/gcc-cross-sdk_4.3.3.bb,
-do_setscene)
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-virtual:native:/home/koan/devel/openembedded/recipes/help2man/help2man_1.38.2.bb
-do_configure failed
-NOTE: package gcc-cross-sdk-4.3.3-r23.4: task do_setscene: Started
-NOTE: package gcc-cross-sdk-4.3.3-r23.4: task do_setscene: Succeeded
-ERROR: Task 320
-(virtual:native:/home/koan/devel/openembedded/recipes/help2man/help2man_1.38.2.bb,
-do_configure) failed with 256
-ERROR: Function do_configure failed
-NOTE: Task failed: ('function do_configure failed',
-'/home/koan/devel/build/angstrom/tmp/work/x86_64-linux/help2man-native-1.38.2-r2/temp/log.do_configure.9893')
-ERROR: Logfile of failure stored in:
-/home/koan/devel/build/angstrom/tmp/work/x86_64-linux/help2man-native-1.38.2-r2/temp/log.do_configure.9893
-Log data follows:
-| configure: WARNING: unrecognized options: --enable-largefile,
---enable-ipv6
-| checking for perl... perl
-| checking for module Locale::gettext... no
-| checking for msgfmt... /usr/bin/msgfmt
-| checking for x86_64-linux-gcc... gcc
-| checking whether the C compiler works... yes
-| checking for C compiler default output file name... a.out
-| checking for suffix of executables...
-| checking whether we are cross compiling... no
-| checking for suffix of object files... o
-| checking whether we are using the GNU C compiler... yes
-| checking whether gcc accepts -g... yes
-| checking for gcc option to accept ISO C89... none needed
-| checking for library containing dlsym... -ldl
-| checking for library containing bindtextdomain... none required
-| configure: error: perl module Locale::gettext required
-| ERROR: Function do_configure failed
-NOTE: package help2man-native-1.38.2-r2: task do_configure: Failed
-ERROR: TaskFailed event exception, aborting
-NOTE: Running task 274 of 1027 (ID: 539,
-/home/koan/devel/openembedded/recipes/gcc/gcc-cross-sdk_4.3.3.bb, do_fetch)
-ERROR: Build of
-virtual:native:/home/koan/devel/openembedded/recipes/help2man/help2man_1.38.2.bb
-do_configure failed
-ERROR: Task 320
-(virtual:native:/home/koan/devel/openembedded/recipes/help2man/help2man_1.38.2.bb,
-do_configure) failed with 256
-NOTE: package gcc-cross-sdk-4.3.3-r23.4: task do_fetch: Started
-Waiting for 1 active tasks to finish:
-1: gcc-cross-sdk-4.3.3-r23.4 do_fetch (pid 10169)
-ERROR:
-'virtual:native:/home/koan/devel/openembedded/recipes/help2man/help2man_1.38.2.bb'
-failed
-NOTE: package gcc-cross-sdk-4.3.3-r23.4: task do_fetch: Succeeded
-ERROR:
-'virtual:native:/home/koan/devel/openembedded/recipes/help2man/help2man_1.38.2.bb'
-failed
-ERROR:
-'virtual:native:/home/koan/devel/openembedded/recipes/help2man/help2man_1.38.2.bb'
-failed
-
-
---
-Marco
+Peter
 
 
