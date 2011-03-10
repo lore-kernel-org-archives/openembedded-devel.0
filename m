@@ -1,32 +1,31 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PxS3P-0006Rv-OX
+	(envelope-from <andrea.adami@gmail.com>) id 1Pxc50-0006jm-EV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Mar 2011 23:40:27 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1PxS1t-0007kK-NB from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Mar 2011 14:38:53 -0800
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 9 Mar 2011 14:38:53 -0800
-Received: from [172.30.80.238] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
-	with Microsoft SMTP Server id 14.1.270.1;
-	Wed, 9 Mar 2011 14:38:52 -0800
-Message-ID: <4D780174.2010303@mentor.com>
-Date: Wed, 9 Mar 2011 15:38:44 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+	Thu, 10 Mar 2011 10:22:46 +0100
+Received: by iyb26 with SMTP id 26so1432295iyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Mar 2011 01:21:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=IAvEk60LY7srfggcnri6RNrhUONC8bwAR2rOfUgRurA=;
+	b=p4THXhZY2A6KvCKWShEHRbE3flAdAR1j+sXogmJycsmLLaYJ1Kzb5xp1IxG2IREJDu
+	cQHcT0r/oDwNi6yLdXbqDWeug2e3Pf5Q2FkCIvGDsSZ67ZnU8deuCQSV35ejLp1/Oi4O
+	VwijzslWn4vktANg/wJuSBHrWCDlQSBJXgEEA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=nTBzYy67+hujQQtt6xnZD9EhYPweSqIiKG1f/1cvvgKjW9xLy3S9PgTwEAQ4v6JT1V
+	bzfUDWRlDT3FR2st1VxiLDlv3jkapxomVpvatz/SuL92BLzN+YQJKbgox9z1WycNylU2
+	J5pgWUBTdzo+vJ6f29gOjfNLLio03OdbDMMZ0=
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1299591092.3785.121.camel@mattotaupa>
-In-Reply-To: <1299591092.3785.121.camel@mattotaupa>
-X-OriginalArrivalTime: 09 Mar 2011 22:38:53.0390 (UTC)
-	FILETIME=[C491FEE0:01CBDEAA]
-Subject: Re: [PATCH] xfce4-session_4.6.{1, 2}: add `libwnck` to `DEPENDS`
+Received: by 10.42.168.131 with SMTP id w3mr5097869icy.122.1299748860195; Thu,
+	10 Mar 2011 01:21:00 -0800 (PST)
+Received: by 10.42.117.138 with HTTP; Thu, 10 Mar 2011 01:21:00 -0800 (PST)
+Date: Thu, 10 Mar 2011 10:21:00 +0100
+Message-ID: <AANLkTik1GhO_ZX_oP3_TB6JR_73QPmM7t3jzxd4vbOkW@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [RFC] cpio.lzma compression level in bitbake.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,75 +39,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Mar 2011 22:40:28 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Mar 2011 09:22:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 03/08/2011 06:31 AM, Paul Menzel wrote:
-> Date: Tue, 8 Mar 2011 12:27:26 +0100
->
-> Task `configure` fails with the following error.
->
-> 	checking for pkg-config>= 0.9.0... 0.23
-> 	checking for libxfce4util-1.0>= 4.6.0... 4.6.2
-> 	checking LIBXFCE4UTIL_CFLAGS... -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/xfce4 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/include
-> 	checking LIBXFCE4UTIL_LIBS... -lxfce4util -lglib-2.0
-> 	checking for libxfcegui4-1.0>= 4.6.0... 4.6.4
-> 	checking LIBXFCEGUI4_CFLAGS... -pthread -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/xfce4 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gtk-2.0 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/gtk-2.0/include -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/pango-1.0 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/include -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/cairo -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/pixman-1 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/freetype2 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libpng12 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/atk-1.0
-> 	checking LIBXFCEGUI4_LIBS... -pthread -lxfcegui4 -lgtk-x11-2.0 -lxfce4util -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 -lrt -lglib-2.0
-> 	checking for libwnck-1.0>= 2.12... not found
-> 	*** The required package libwnck-1.0 was not found on your system.
-> 	*** Please install libwnck-1.0 (atleast version 2.12) or adjust
-> 	*** the PKG_CONFIG_PATH environment variable if you
-> 	*** installed the package in a nonstandard prefix so that
-> 	*** pkg-config is able to find it.
->
-> Adding `libwnck` to `DEPENDS` makes this error go away.
->
-> Signed-off-by: Paul Menzel<paulepanter@users.sourceforge.net>
+Hello,
 
-Acked-by: Tom Rini <tom_rini@mentor.com>
+in bitbake.conf we use the maximum lzma compression level (-c -9) for
+the initramfs:
 
-> ---
-> `xfce4-session_4.4.2.bb` does not seem to require `libwnck`.
-> ---
->   recipes/xfce-base/xfce4-session_4.6.1.bb |    2 +-
->   recipes/xfce-base/xfce4-session_4.6.2.bb |    2 +-
->   2 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/recipes/xfce-base/xfce4-session_4.6.1.bb b/recipes/xfce-base/xfce4-session_4.6.1.bb
-> index de07fb3..72b58d3 100644
-> --- a/recipes/xfce-base/xfce4-session_4.6.1.bb
-> +++ b/recipes/xfce-base/xfce4-session_4.6.1.bb
-> @@ -1,5 +1,5 @@
->   DESCRIPTION = "xfce4-session is a sessionmanager for Xfce 4 Desktop  Environment"
-> -DEPENDS = "libxfcegui4 libxfce4util dbus iceauth xfce-utils"
-> +DEPENDS = "libwnck libxfcegui4 libxfce4util dbus iceauth xfce-utils"
->   SECTION = "x11"
->
->   PR = "r4"
-> diff --git a/recipes/xfce-base/xfce4-session_4.6.2.bb b/recipes/xfce-base/xfce4-session_4.6.2.bb
-> index c85bb8c..d7f768a 100644
-> --- a/recipes/xfce-base/xfce4-session_4.6.2.bb
-> +++ b/recipes/xfce-base/xfce4-session_4.6.2.bb
-> @@ -1,5 +1,5 @@
->   DESCRIPTION = "xfce4-session is a session manager for Xfce 4 Desktop Environment"
-> -DEPENDS = "libxfcegui4 libxfce4util dbus iceauth xfce-utils"
-> +DEPENDS = "libwnck libxfcegui4 libxfce4util dbus iceauth xfce-utils"
->   SECTION = "x11"
->
->   PR = "r0"
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+IMAGE_CMD_cpio.lzma = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} &&
+(find . | cpio -o -H newc | lzma -c -9
+>${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma)
+${EXTRA_IMAGECMD}"
 
+This makes decompressor fail on devices with 32Mb RAM (see
+http://paste.debian.net/110203/ ).
+Same kernel boots with compression set to -7.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Some figures can be obtained here:
+http://www.gsp.com/cgi-bin/man.cgi?section=1&topic=lzcat
+
+It was suggested we should introduce something like
+LZMA_COMPRESSION_LEVEL or use internal tables to find better level
+from targets memory amount.
+In the meanwhile I think we should change the defaults in bitbake.conf.
+
+Opinions?
+
+Andrea
 
 
