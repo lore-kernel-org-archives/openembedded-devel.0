@@ -1,40 +1,40 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PxguM-00074P-61
+	(envelope-from <otavio.salvador@gmail.com>) id 1PxguX-0007FG-IL
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 10 Mar 2011 15:32:40 +0100
-Received: by ywg8 with SMTP id 8so684004ywg.6
+Received: by yia13 with SMTP id 13so663335yia.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Mar 2011 06:30:29 -0800 (PST)
+	Thu, 10 Mar 2011 06:30:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
 	:x-mailer:in-reply-to:references;
-	bh=+s85qUdluPzeQyHPqp+id1OQFoosc79ZttprRaS+xMM=;
-	b=LqRu+dxo6M+A1sBx+i8/gZPpqZJyKO6+4I1SaDKUbOt6nXddwM+FiAwbAfQNourB4N
-	OKPFz0Id38xWQbF7k9rb3wdL5a6TTV5WYDSfyEgSAEf6DBDLWwBewOMSLhG4lrSyFy8j
-	aLQEmiF3QjtLYnU6ywsC1ZYYCxjzWASjWTLRY=
+	bh=/0tIYzbxPU1TiyG4JbYKXbWrWKfBLO+rphm3AVLoH80=;
+	b=XktVQi2c56tFu9njaNqiTTMhJSzyJjiMh6razBcmkh/lKL0B6wnwATTD/pT2w3DwbO
+	8dXzKHTAXgD7GqDX/c1GDfrB2p5GVOH4PX5skI7xiqysul1HQKV7YOQ856i+BazVHIhn
+	VRslXQY1VFzBSJp9RoSKAlFUP788w0zijSyMI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=hYZcde4YO4ziuhdu5nQEy9WRju+OQThnE4IZZZ7UoO4WadIFTsO3GPg+xdHKpWiLn9
-	OhjvES6vUUJcYwjyU315jvLj4NDCTLnGUVSXnuO95Xt8KYdRHp8K17KO7EhHXsK4YQ6f
-	wz05i8oSlP9ZCw+9ePwQycAAMmT/mhjJ4PNcM=
-Received: by 10.150.93.15 with SMTP id q15mr1119537ybb.211.1299767429541;
-	Thu, 10 Mar 2011 06:30:29 -0800 (PST)
+	b=qjtGqCRPnQFcp1192NDOkIZHKe0FqCgZrvxAcXgs/T8H3+r7mD1e9rqREX3lfb2Fb3
+	LRm2DlGUX2em8ssEkoQ+hlfiyqlnFNFArAHIkovWovOaECV6v6s9iLkJEYTvVVhG98OM
+	XAC4xKN79xXGJVSp3/JBIYGknsgvs9Lk97P+U=
+Received: by 10.150.115.2 with SMTP id n2mr1137641ybc.225.1299767436441;
+	Thu, 10 Mar 2011 06:30:36 -0800 (PST)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id w6sm3962040anf.26.2011.03.10.06.30.27
+	by mx.google.com with ESMTPS id w6sm3962040anf.26.2011.03.10.06.30.34
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 10 Mar 2011 06:30:28 -0800 (PST)
+	Thu, 10 Mar 2011 06:30:35 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Mar 2011 14:30:05 +0000
-Message-Id: <1299767410-969-3-git-send-email-otavio@ossystems.com.br>
+Date: Thu, 10 Mar 2011 14:30:08 +0000
+Message-Id: <1299767410-969-6-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.3
 In-Reply-To: <1299767410-969-1-git-send-email-otavio@ossystems.com.br>
 References: <1299767410-969-1-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 3/8] cmake.bbclass: drop CMAKE_MODULE_PATH as it works fine without it
+Subject: [PATCH 6/8] xkeyboard-config: use --with-xkb-rules-symlink=xorg option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,22 +52,34 @@ X-List-Received-Date: Thu, 10 Mar 2011 14:32:43 -0000
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- classes/cmake.bbclass |    2 --
- 1 files changed, 0 insertions(+), 2 deletions(-)
+ recipes/xkeyboard-config/xkeyboard-config.inc |    9 +++------
+ 1 files changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/classes/cmake.bbclass b/classes/cmake.bbclass
-index d2d1c66..40fadea 100644
---- a/classes/cmake.bbclass
-+++ b/classes/cmake.bbclass
-@@ -42,8 +42,6 @@ cmake_do_generate_toolchain_file() {
-   echo "set( CMAKE_FIND_ROOT_PATH_MODE_PROGRAM ONLY )" >> ${WORKDIR}/toolchain.cmake
-   echo "set( CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY )" >> ${WORKDIR}/toolchain.cmake
-   echo "set( CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY )" >> ${WORKDIR}/toolchain.cmake
--# Use native cmake modules
--  echo "set( CMAKE_MODULE_PATH ${STAGING_DIR_NATIVE}/usr/share/cmake-2.8/Modules/ )" >> ${WORKDIR}/toolchain.cmake
- # Use qt.conf settings
-   echo "set( ENV{QT_CONF_PATH} ${WORKDIR}/qt.conf )" >> ${WORKDIR}/toolchain.cmake
- }
+diff --git a/recipes/xkeyboard-config/xkeyboard-config.inc b/recipes/xkeyboard-config/xkeyboard-config.inc
+index b8aab8c..787e641 100644
+--- a/recipes/xkeyboard-config/xkeyboard-config.inc
++++ b/recipes/xkeyboard-config/xkeyboard-config.inc
+@@ -2,17 +2,14 @@ DESCRIPTION = "Common X11 Keyboard layouts"
+ LICENSE = "MIT"
+ DEPENDS = "intltool-native xkbcomp-native"
+ RDEPENDS_${PN} = "xkbcomp"
+-INC_PR = "r6"
++INC_PR = "r7"
+ 
+ SRC_URI = "http://xlibs.freedesktop.org/xkbdesc/xkeyboard-config-${PV}.tar.bz2"
+ 
+ S = "${WORKDIR}/${PN}-${PV}"
+ 
+-inherit autotools
++EXTRA_OECONF += "--with-xkb-rules-symlink=xorg"
+ 
+-do_install_append () {
+-    install -d ${D}${datadir}/X11/xkb/compiled
+-    cd ${D}${datadir}/X11/xkb/rules && ln -sf base xorg
+-}
++inherit autotools
+ 
+ FILES_${PN} += "${datadir}/X11/xkb"
 -- 
 1.7.2.3
 
