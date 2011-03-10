@@ -1,33 +1,27 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Pxiuv-0003y1-8J
+	(envelope-from <Tom_Rini@mentor.com>) id 1PxjpZ-0001Xs-Br
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Mar 2011 17:40:49 +0100
+	Thu, 10 Mar 2011 18:39:21 +0100
 Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
 	by relay1.mentorg.com with esmtp 
-	id 1PxitL-0001fc-TI from Tom_Rini@mentor.com 
+	id 1Pxjo2-0004vR-76 from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Mar 2011 08:39:11 -0800
-Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
+	Thu, 10 Mar 2011 09:37:46 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
 	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Thu, 10 Mar 2011 08:39:11 -0800
-Received: from [172.30.80.238] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
-	Thu, 10 Mar 2011 08:39:11 -0800
-Message-ID: <4D78FEA5.6040205@mentor.com>
-Date: Thu, 10 Mar 2011 09:39:01 -0700
+	SMTPSVC(6.0.3790.4675); Thu, 10 Mar 2011 09:37:45 -0800
+Received: from localhost.localdomain ([172.30.80.238]) by
+	na2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 10 Mar 2011 10:37:43 -0700
 From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1299768051.3853.21.camel@mattotaupa>
-	<4D78E882.5040307@mentor.com> <4D78F0F4.9000908@gmail.com>
-In-Reply-To: <4D78F0F4.9000908@gmail.com>
-X-OriginalArrivalTime: 10 Mar 2011 16:39:11.0709 (UTC)
-	FILETIME=[AF4C90D0:01CBDF41]
-Subject: Re: help2man-native: task configure fails with `configure: error: perl module Locale::gettext required`
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Mar 2011 10:37:34 -0700
+Message-Id: <1299778654-14912-1-git-send-email-tom_rini@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+X-OriginalArrivalTime: 10 Mar 2011 17:37:43.0723 (UTC)
+	FILETIME=[DC9F5FB0:01CBDF49]
+Subject: [PATCH] gettext.bbclass: Add virtclass DEPENDS prepends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,36 +35,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Mar 2011 16:40:49 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Mar 2011 17:39:21 -0000
 
-On 03/10/2011 08:40 AM, Marco Cavallini wrote:
-> Tom Rini ha scritto, Il 10/03/2011 16:04:
->
->>
->> Is this a uclibc target perhaps?
->>
->
-> Hi Tom,
->
-> Not mine, is this
->
-> Build Configuration:
-> BB_VERSION        = "1.10.2"
-> METADATA_BRANCH   = "master"
-> METADATA_REVISION = "40a8506"
-> TARGET_ARCH       = "arm"
-> TARGET_OS         = "linux-gnueabi"
-> MACHINE           = "ronetix-pm9263"
-> DISTRO            = "angstrom"
-> DISTRO_VERSION    = "2010.7-test-20110310"
-> TARGET_FPU        = "soft"
+With BBCLASSEXTEND recipes which also modify DEPENDS_virtclass-native
+gettext.bbclass is otherwise not working and gettext-native isn't
+added.  So we need to have a DEPENDS_virtclass-$foo_prepend to
+make sure GETTEXT_DEPENDS gets in.
 
-Blarg.  I guess this will finally teach me my lesson.  Reverted.
+Signed-off-by: Tom Rini <tom_rini@mentor.com>
+---
+ classes/gettext.bbclass |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
+diff --git a/classes/gettext.bbclass b/classes/gettext.bbclass
+index 6c480b5..2303311 100644
+--- a/classes/gettext.bbclass
++++ b/classes/gettext.bbclass
+@@ -14,4 +14,7 @@ python () {
+ DEPENDS_GETTEXT = "gettext-native virtual/libiconv virtual/libintl"
+ 
+ DEPENDS =+ "${DEPENDS_GETTEXT}"
++DEPENDS_virtclass-native_prepend = "${DEPENDS_GETTEXT} "
++DEPENDS_virtclass-nativesdk_prepend = "${DEPENDS_GETTEXT} "
++DEPENDS_virtclass-cross_prepend = "${DEPENDS_GETTEXT} "
+ EXTRA_OECONF += "--enable-nls"
 -- 
-Tom Rini
-Mentor Graphics Corporation
+1.7.0.4
+
 
 
