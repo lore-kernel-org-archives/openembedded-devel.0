@@ -1,32 +1,23 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from bsmtp3.bon.at ([213.33.87.17] helo=lbmfmo03.bon.at)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PxhS3-0001lc-Tb
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Mar 2011 16:06:56 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PxhQX-00028J-34 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Mar 2011 07:05:21 -0800
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 10 Mar 2011 07:04:43 -0800
-Received: from [172.30.80.238] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
-	with Microsoft SMTP Server id 14.1.270.1;
-	Thu, 10 Mar 2011 07:04:43 -0800
-Message-ID: <4D78E882.5040307@mentor.com>
-Date: Thu, 10 Mar 2011 08:04:34 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+	(envelope-from <pgsellmann@portner-elektronik.at>)
+	id 1Pxheo-00025m-6b for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Mar 2011 16:20:06 +0100
+Received: from bsmtp.bon.at (unknown [192.168.181.108])
+	by lbmfmo03.bon.at (Postfix) with ESMTP id 39E61CE49A
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Mar 2011 15:53:42 +0100 (CET)
+Received: from aspire.localdomain (unknown [88.116.171.82])
+	by bsmtp.bon.at (Postfix) with ESMTP id D2098130054
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Mar 2011 15:53:28 +0100 (CET)
+From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+Organization: PORTNER Elektronik
+Date: Thu, 10 Mar 2011 15:53:27 +0100
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1299768051.3853.21.camel@mattotaupa>
-In-Reply-To: <1299768051.3853.21.camel@mattotaupa>
-X-OriginalArrivalTime: 10 Mar 2011 15:04:43.0836 (UTC)
-	FILETIME=[7CFBC7C0:01CBDF34]
-Subject: Re: help2man-native: task configure fails with `configure: error: perl module Locale::gettext required`
+Message-Id: <201103101553.27407.pgsellmann@portner-elektronik.at>
+Subject: [PATCH] vsftpd-2.0.5: added dependency for correct build order
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,42 +31,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Mar 2011 15:06:56 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+X-List-Received-Date: Thu, 10 Mar 2011 15:20:06 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 03/10/2011 07:40 AM, Paul Menzel wrote:
-> Dear OE folks,
->
->
-> some recent commit indirectly seems to have broken `help2man-native` and
-> task configure fails.
->
->      checking whether gcc accepts -g... yes
->      checking for gcc option to accept ISO C89... none needed
->      checking for library containing dlsym... -ldl
->      checking for library containing bindtextdomain... none required
->      configure: error: perl module Locale::gettext required
->
-> Adding `liblocale-gettext-perl-native` to `DEPENDS_virtclass-native`
-> does not fix the problem but causes a dependency loop.
->
-> I do not understand the dependency for the native package anyway.
->
->          DEPENDS = "gettext-native perl-native liblocale-gettext-perl-native"
->          DEPENDS_virtclass-native = "perl-native autoconf-native automake-native"
->          RDEPENDS_${PN} = "gettext perl liblocale-gettext-perl"
->          RDEPENDS_${PN}_virtclass-native = ""
->
-> I though that `DEPENDS_virtclass-native` has `DEPENDS` as a subset
-> automatically.
->
-> Any ideas?
+vsftpd needs the cap_* functions; if the library libcap is not built before vsftpd, an error occurs.
 
-Is this a uclibc target perhaps?
+Signed-off-by: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+---
+ recipes/vsftpd/vsftpd_2.0.5.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
+diff --git a/recipes/vsftpd/vsftpd_2.0.5.bb b/recipes/vsftpd/vsftpd_2.0.5.bb
+index 518628e..2486744 100644
+--- a/recipes/vsftpd/vsftpd_2.0.5.bb
++++ b/recipes/vsftpd/vsftpd_2.0.5.bb
+@@ -3,6 +3,8 @@ SECTION = "console/network"
+ LICENSE = "GPL"
+ PR = "r2"
+ 
++DEPENDS = "libcap"
++
+ SRC_URI = "ftp://vsftpd.beasts.org/users/cevans/vsftpd-${PV}.tar.gz \
+            file://makefile.patch \
+            file://nopam.patch \
+@@ -20,7 +22,7 @@ do_configure() {
+ }
+ 
+ do_compile() {
+-        oe_runmake "LIBS=-lcrypt -L${STAGING_LIBDIR}"
++        oe_runmake "LIBS=-L${STAGING_LIBDIR} -lcrypt -lcap"
+ }
+ 
+ do_install() {
 -- 
-Tom Rini
-Mentor Graphics Corporation
+1.7.2.3
+
 
 
