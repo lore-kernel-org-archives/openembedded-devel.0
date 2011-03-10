@@ -1,34 +1,24 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from einhorn.in-berlin.de ([192.109.42.8] ident=root)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PxjsD-0003LC-6z
+	(envelope-from <sledz@dresearch.de>) id 1PxjyO-0005tK-61
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Mar 2011 18:42:05 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Pxjqf-0005jX-RD from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Mar 2011 09:40:29 -0800
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Thu, 10 Mar 2011 09:40:29 -0800
-Received: from [172.30.80.238] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
-	with Microsoft SMTP Server id 14.1.270.1;
-	Thu, 10 Mar 2011 09:40:29 -0800
-Message-ID: <4D790D04.5050409@mentor.com>
-Date: Thu, 10 Mar 2011 10:40:20 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1299768051.3853.21.camel@mattotaupa>	<4D78E882.5040307@mentor.com>
-	<4D78F0F4.9000908@gmail.com>
-	<201103101722.55323.pgsellmann@portner-elektronik.at>
-In-Reply-To: <201103101722.55323.pgsellmann@portner-elektronik.at>
-X-OriginalArrivalTime: 10 Mar 2011 17:40:29.0428 (UTC)
-	FILETIME=[3F63F340:01CBDF4A]
-Subject: Re: help2man-native: task configure fails with `configure:	error: perl module Locale::gettext required`
+	Thu, 10 Mar 2011 18:48:28 +0100
+X-Envelope-From: sledz@dresearch.de
+Received: from mobil-400-586.intern.dresearch.de
+	(p57A201FA.dip0.t-ipconnect.de [87.162.1.250]) (authenticated bits=0)
+	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
+	p2AHkqql009066
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
+	Thu, 10 Mar 2011 18:46:52 +0100
+Received: by mobil-400-586.intern.dresearch.de (Postfix, from userid 1000)
+	id 1D1A8296E6; Thu, 10 Mar 2011 18:46:51 +0100 (CET)
+From: Steffen Sledz <sledz@dresearch.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Mar 2011 18:46:27 +0100
+Message-Id: <1299779187-17515-1-git-send-email-sledz@dresearch.de>
+X-Mailer: git-send-email 1.7.1
+X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
+Subject: [PATCH] linux-2.6.24: add support for AMIC flashes (e.g. A29L160AT)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,50 +32,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Mar 2011 17:42:06 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 10 Mar 2011 17:48:28 -0000
 
-On 03/10/2011 09:22 AM, Peter Gsellmann wrote:
-> Am Donnerstag, 10. März 2011, 16:40:36 schrieb Marco Cavallini:
->> Tom Rini ha scritto, Il 10/03/2011 16:04:
->>
->>>
->>> Is this a uclibc target perhaps?
->>>
->>
->> Hi Tom,
->>
->> Not mine, is this
->>
->> Build Configuration:
->> BB_VERSION        = "1.10.2"
->> METADATA_BRANCH   = "master"
->> METADATA_REVISION = "40a8506"
->> TARGET_ARCH       = "arm"
->> TARGET_OS         = "linux-gnueabi"
->> MACHINE           = "ronetix-pm9263"
->> DISTRO            = "angstrom"
->> DISTRO_VERSION    = "2010.7-test-20110310"
->> TARGET_FPU        = "soft"
->>
->
-> here also glibc-2.9
->
-> Found this: reverting patch bccf626b1428d7087d261bf4ad91744b5b5d5418 helped.
->
-> 'inherit gettext' is not a full replacement for DEPENDS = "gettext-native"
->
-> Same problem and solution for packages e2fsprogs, classpath, util-linux-ng
+Similar patch is on its way to the mainline kernel:
+http://thread.gmane.org/gmane.linux.kernel/1111144
 
-OK, I've dug a bit more (sorry for all the breakage) and e2fsprogs / 
-classpath should be fine already, but not util-linux-ng (due to 
-modifying DEPENDS_virtclass-native).  I've posted a patch I think will 
-fix this as it's a real problem and gettext.bbclass _should_ be a 
-replacement for DEPENDS = "gettext-native".
+Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+---
+ recipes/linux/linux-2.6.24/cfi-amic.patch |   22 ++++++++++++++++++++++
+ recipes/linux/linux_2.6.24.bb             |    3 ++-
+ 2 files changed, 24 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/linux/linux-2.6.24/cfi-amic.patch
 
+diff --git a/recipes/linux/linux-2.6.24/cfi-amic.patch b/recipes/linux/linux-2.6.24/cfi-amic.patch
+new file mode 100644
+index 0000000..feb673f
+--- /dev/null
++++ b/recipes/linux/linux-2.6.24/cfi-amic.patch
+@@ -0,0 +1,22 @@
++diff -Nurd linux-2.6.24.orig//drivers/mtd/chips/cfi_cmdset_0002.c linux-2.6.24/drivers/mtd/chips/cfi_cmdset_0002.c
++--- linux-2.6.24.orig//drivers/mtd/chips/cfi_cmdset_0002.c	2011-03-10 17:05:22.868634509 +0100
+++++ linux-2.6.24/drivers/mtd/chips/cfi_cmdset_0002.c	2011-03-10 17:06:58.723636256 +0100
++@@ -219,6 +219,7 @@
++ static struct cfi_fixup cfi_fixup_table[] = {
++ #ifdef AMD_BOOTLOC_BUG
++ 	{ CFI_MFR_AMD, CFI_ID_ANY, fixup_amd_bootblock, NULL },
+++	{ CFI_MFR_AMIC, CFI_ID_ANY, fixup_amd_bootblock, NULL },
++ #endif
++ 	{ CFI_MFR_AMD, 0x0050, fixup_use_secsi, NULL, },
++ 	{ CFI_MFR_AMD, 0x0053, fixup_use_secsi, NULL, },
++diff -Nurd linux-2.6.24.orig//include/linux/mtd/cfi.h linux-2.6.24/include/linux/mtd/cfi.h
++--- linux-2.6.24.orig//include/linux/mtd/cfi.h	2011-03-10 17:05:19.584884614 +0100
+++++ linux-2.6.24/include/linux/mtd/cfi.h	2011-03-10 17:08:03.886636402 +0100
++@@ -485,6 +485,7 @@
++ #define CFI_ID_ANY  0xffff
++ 
++ #define CFI_MFR_AMD 0x0001
+++#define CFI_MFR_AMIC 0x0037
++ #define CFI_MFR_ATMEL 0x001F
++ #define CFI_MFR_ST  0x0020 	/* STMicroelectronics */
++ 
+diff --git a/recipes/linux/linux_2.6.24.bb b/recipes/linux/linux_2.6.24.bb
+index d03d2b7..5c05593 100644
+--- a/recipes/linux/linux_2.6.24.bb
++++ b/recipes/linux/linux_2.6.24.bb
+@@ -11,13 +11,14 @@ DEFAULT_PREFERENCE_hipox = "1"
+ DEFAULT_PREFERENCE_cs-e9302 = "1"
+ DEFAULT_PREFERENCE_smartq5 = "1"
+ 
+-PR = "r35"
++PR = "r36"
+ 
+ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-2.6.24.tar.bz2;name=kernel \
+            ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/patch-${PV}.7.bz2;apply=yes;name=stablepatch \
+            file://squashfs-lzma-2.6.24.patch \
+            file://ubifs-v2.6.24.patch \
+            file://ubifs-v2.6.24-silent-get-sb.patch \
++           file://cfi-amic.patch \
+            file://defconfig"
+ 
+ # Moved away temporarely until committed properly (work in progress).
 -- 
-Tom Rini
-Mentor Graphics Corporation
+1.7.1
+
 
 
