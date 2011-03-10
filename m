@@ -1,32 +1,17 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp202.alice.it ([82.57.200.98])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Pxd6u-0005HV-R6 for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Mar 2011 11:28:48 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Pxd4Z-0007Cw-Db for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Mar 2011 11:26:23 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Mar 2011 11:26:23 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Mar 2011 11:26:23 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <GNUtoo@no-log.org>) id 1PxffS-0001gj-E7
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Mar 2011 14:12:38 +0100
+Received: from localhost.localdomain (79.25.134.226) by smtp202.alice.it
+	(8.5.124.08) (authenticated as editempo@alice.it)
+	id 4CC7FB5F02395BAD; Thu, 10 Mar 2011 14:11:03 +0100
+From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 10 Mar 2011 11:26:07 +0100
-Message-ID: <ila904$dhj$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-X-Enigmail-Version: 1.0.1
-Subject: [2011.03-maintenance] Pull request
+Date: Thu, 10 Mar 2011 14:10:56 +0100
+Message-Id: <1299762656-4872-1-git-send-email-GNUtoo@no-log.org>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH] autoconf.inc: check if files exist before using sed on them
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,47 +25,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Mar 2011 10:28:48 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Mar 2011 13:12:38 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Without the that fix we have
+  | + sed -i '-es,^SUBDIRS = .*,SUBDIRS = bin . lib,' .../work/x86_64-linux/autoconf213-native-2.13-r14.0/autoconf-2.13/Makefile.am
+  | sed: can't read .../work/x86_64-linux/autoconf213-native-2.13-r14.0/autoconf-2.13/Makefile.am: No such file or directory
+and:
+  | + sed -i -e '1s:#!.*:#! /usr/bin/env perl:' '.../work/x86_64-linux/autoconf213-native-2.13-r14.0/autoconf-2.13/bin/*.in'
+  | sed: can't read .../work/x86_64-linux/autoconf213-native-2.13-r14.0/autoconf-2.13/bin/*.in: No such file or directory
+  NOTE: package autoconf213-native-2.13-r14.0: task do_configure: Failed
 
-Tom,
+Thanks a lot for all help in #oe on Freenode on irc for telling me
+  which command to use for the *.in at the end pb__ found the best command:
+<pb__> or ls ${S} | grep -q '\.in$'
 
-Please pull the 3 commits from here:
+Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+---
+ recipes/autoconf/autoconf.inc |   14 ++++++++++----
+ 1 files changed, 10 insertions(+), 4 deletions(-)
 
-URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-Branch: 2011.03-maintenance
-
-Koen Kooi (3):
-      angstrom feed scripts: Upload to the EU mirror by default
-      x-load: fall back to xM when detecting beagleboard revisions
-      xmms: bandaid some more host path leakage
-
-You can view the branch online at
-http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance
-
-The first patch is some housekeeping to have the angstrom autobuilders
-upload to the correct location, a modified backport.
-
-The second patch is to make the new beagleboard xM revision C boot,
-plain cherry-pick from .dev.
-
-And the third patch is to fix -L/usr/lib breakage I noticed when doing a
-build from scratch, plain cherry-pick from .dev.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNeKc/MkyGM64RGpERAu6pAJ9S0OOiLyGu6O+nb5kSjhNeCYw43gCfcITQ
-DMrIblovVJgpNDH14H14JSU=
-=UOGx
------END PGP SIGNATURE-----
+diff --git a/recipes/autoconf/autoconf.inc b/recipes/autoconf/autoconf.inc
+index 7f22c2b..e0eecd3 100644
+--- a/recipes/autoconf/autoconf.inc
++++ b/recipes/autoconf/autoconf.inc
+@@ -8,7 +8,7 @@ RDEPENDS_${PN} = "m4 perl gnu-config"
+ DEPENDS_virtclass-native = "m4-native gnu-config-native perl-native"
+ RDEPENDS_${PN}_virtclass-native = "m4-native gnu-config-native perl-native"
+ 
+-INC_PR = "r13"
++INC_PR = "r14"
+ 
+ SRC_URI = "${GNU_MIRROR}/autoconf/autoconf-${PV}.tar.bz2;name=autoconf \
+ 	   file://program_prefix.patch"
+@@ -25,13 +25,19 @@ do_configure_prepend () {
+ 		export ac_cv_path_M4="${ac_cv_path_M4=${bindir}/m4}"
+ 		export ac_cv_prog_gnu_m4="${ac_cv_prog_gnu_m4=yes}"
+ 	fi
+-
+-	sed -i -e's,^SUBDIRS = .*,SUBDIRS = ${SUBDIRS},' ${S}/Makefile.am
++	if [ -e ${S}/Makefile.am ]
++	then
++		sed -i -e's,^SUBDIRS = .*,SUBDIRS = ${SUBDIRS},' ${S}/Makefile.am
++	fi
+ }
+ 
+ do_configure_append() {
+ 	# replace paths to STAGING_BINDIR_NATIVE/perl with ${bindir}/perl
+-	sed -i -e "1s:#!.*:#! /usr/bin/env perl:" ${S}/bin/*.in
++	ls ${S} | grep -q '\.in$'
++	if [ $? -eq 0 ]
++	then
++		sed -i -e "1s:#!.*:#! /usr/bin/env perl:" ${S}/bin/*.in
++	fi
+ }
+ 
+ PARALLEL_MAKE = ""
+-- 
+1.7.0.4
 
 
 
