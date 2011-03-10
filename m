@@ -1,36 +1,29 @@
-Received: from mail-px0-f178.google.com ([209.85.212.178])
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <zach.frey@gmail.com>) id 1PxhhM-00029v-0X
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Mar 2011 16:22:44 +0100
-Received: by pxi1 with SMTP id 1so446662pxi.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Mar 2011 07:21:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:date:x-google-sender-auth
-	:message-id:subject:from:to:content-type;
-	bh=DrPTVy8j/U+mAdTIxJoMysGrX5bFtishtV+S0ea1M60=;
-	b=Qz0Y1NcJ8XkjnVB6YA9UU8OA7xvVigQWpIz7yn9zF+iDYh8kv2wktqk5pfWwtL2r0W
-	WLsERbB+BkmiYe5EKoXF5+1dxQMG2ny4GLH3phqt7LffPAvnOK6MFHpXt9D95IE+K99v
-	0e1wfCVTEsWLDqsXNi++BW/86Afa0BmsMF7qQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	b=bgkpqxhEZrXlpj8JxQRUG3jG42Sc5Xvs2zeSumd/yFdFgEP8Q9Zk+NV8uQuEFpu785
-	mcKMjiEFdwXGEEoIBIU511gDzid/XmRngbnnhwnN0wsGL3DKBnjY7A7PxNbMaNWAaz4P
-	oV3k+79vI/NPW2lvdPGyn6HoOulzuHKQMJjP8=
+	(envelope-from <koansoftware@gmail.com>) id 1PxhjI-0002CQ-DZ
+	for Openembedded-devel@lists.openembedded.org;
+	Thu, 10 Mar 2011 16:25:26 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id C3A842C810
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Mar 2011 15:21:10 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id SLxOiwMC1VIa
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Mar 2011 15:21:06 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 1E7FA2C7D7
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Mar 2011 15:21:05 +0000 (UTC)
+Message-ID: <4D78ECBF.7010907@gmail.com>
+Date: Thu, 10 Mar 2011 16:22:39 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini
+User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
 MIME-Version: 1.0
-Received: by 10.143.157.1 with SMTP id j1mr6483901wfo.407.1299770462786; Thu,
-	10 Mar 2011 07:21:02 -0800 (PST)
-Sender: zach.frey@gmail.com
-Received: by 10.143.31.21 with HTTP; Thu, 10 Mar 2011 07:21:02 -0800 (PST)
-Date: Thu, 10 Mar 2011 10:21:02 -0500
-X-Google-Sender-Auth: LeBaO8sDLf7emPX9aGqwQ4gvkc8
-Message-ID: <AANLkTikdwVG8D6v20mDMEfLcLbgLOHUHdYSVp9_LVxDU@mail.gmail.com>
-From: Zach Frey <zach@znfrey.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: dbus-1.4.1 do_fetch fails
+To: Openembedded-devel@lists.openembedded.org
+Subject: help2man fails due to configure: error: perl module Locale::gettext required
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,73 +37,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Mar 2011 15:22:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 10 Mar 2011 15:25:26 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Hello
+I am building Angstrom on a Debian Lenny machine the latest OE main tree
+but I am facing to the following error.
+How can I solve it?
+Any hint would be appreciated.
+TIA
 
-I'm seeing the following with today's pull:
+
+$ bitbake meta-toolchain
+
 
 Build Configuration:
-BB_VERSION        = "1.10.2"
-METADATA_BRANCH   = "master"
-METADATA_REVISION = "40a8506"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "omapzoom2"
-DISTRO            = "angstrom"
-DISTRO_VERSION    = "v20110310"
-TARGET_FPU        = "hard"
+BB_VERSION        =3D "1.10.2"
+METADATA_BRANCH   =3D "master"
+METADATA_REVISION =3D "40a8506"
+TARGET_ARCH       =3D "arm"
+TARGET_OS         =3D "linux-gnueabi"
+MACHINE           =3D "ronetix-pm9263"
+DISTRO            =3D "angstrom"
+DISTRO_VERSION    =3D "2010.7-test-20110310"
+TARGET_FPU        =3D "soft"
+
+WARNING: oestats: exception <class 'urllib2.HTTPError'>, value HTTP
+Error 404: Not Found
+WARNING: oestats: error starting build, disabling stats
 NOTE: Resolving any missing task queue dependencies
 NOTE: Preparing runqueue
 NOTE: Executing runqueue
-FATAL: dbus-native-1.4.1:
-http://dbus.freedesktop.org/releases/dbus/dbus-1.4.1.tar.gz cannot check
-archive integrity
-ERROR: Error in executing python function in:
-/home/PHOENIX/frey/OE/openembedded/recipes/dbus/dbus_1.4.1.bb
-ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
-ERROR: Printing the environment of the function
-ERROR: Function base_do_fetch failed
+...
+NOTE: Running task 273 of 1027 (ID: 541,
+/home/koan/devel/openembedded/recipes/gcc/gcc-cross-sdk_4.3.3.bb,
+do_setscene)
 ERROR: TaskFailed event exception, aborting
 ERROR: Build of
-virtual:native:/home/PHOENIX/frey/OE/openembedded/recipes/dbus/dbus_1.4.1.bbdo_fetch
+virtual:native:/home/koan/devel/openembedded/recipes/help2man/help2man_1.=
+38.2.bb
+do_configure failed
+NOTE: package gcc-cross-sdk-4.3.3-r23.4: task do_setscene: Started
+NOTE: package gcc-cross-sdk-4.3.3-r23.4: task do_setscene: Succeeded
+ERROR: Task 320
+(virtual:native:/home/koan/devel/openembedded/recipes/help2man/help2man_1=
+.38.2.bb,
+do_configure) failed with 256
+ERROR: Function do_configure failed
+NOTE: Task failed: ('function do_configure failed',
+'/home/koan/devel/build/angstrom/tmp/work/x86_64-linux/help2man-native-1.=
+38.2-r2/temp/log.do_configure.9893')
+ERROR: Logfile of failure stored in:
+/home/koan/devel/build/angstrom/tmp/work/x86_64-linux/help2man-native-1.3=
+8.2-r2/temp/log.do_configure.9893
+Log data follows:
+| configure: WARNING: unrecognized options: --enable-largefile,
+--enable-ipv6
+| checking for perl... perl
+| checking for module Locale::gettext... no
+| checking for msgfmt... /usr/bin/msgfmt
+| checking for x86_64-linux-gcc... gcc
+| checking whether the C compiler works... yes
+| checking for C compiler default output file name... a.out
+| checking for suffix of executables...
+| checking whether we are cross compiling... no
+| checking for suffix of object files... o
+| checking whether we are using the GNU C compiler... yes
+| checking whether gcc accepts -g... yes
+| checking for gcc option to accept ISO C89... none needed
+| checking for library containing dlsym... -ldl
+| checking for library containing bindtextdomain... none required
+| configure: error: perl module Locale::gettext required
+| ERROR: Function do_configure failed
+NOTE: package help2man-native-1.38.2-r2: task do_configure: Failed
+ERROR: TaskFailed event exception, aborting
+NOTE: Running task 274 of 1027 (ID: 539,
+/home/koan/devel/openembedded/recipes/gcc/gcc-cross-sdk_4.3.3.bb, do_fetc=
+h)
+ERROR: Build of
+virtual:native:/home/koan/devel/openembedded/recipes/help2man/help2man_1.=
+38.2.bb
+do_configure failed
+ERROR: Task 320
+(virtual:native:/home/koan/devel/openembedded/recipes/help2man/help2man_1=
+.38.2.bb,
+do_configure) failed with 256
+NOTE: package gcc-cross-sdk-4.3.3-r23.4: task do_fetch: Started
+Waiting for 1 active tasks to finish:
+1: gcc-cross-sdk-4.3.3-r23.4 do_fetch (pid 10169)
+ERROR:
+'virtual:native:/home/koan/devel/openembedded/recipes/help2man/help2man_1=
+.38.2.bb'
 failed
-NOTE: Running task 748 of 8673 (ID: 8190,
-virtual:native:/home/PHOENIX/frey/OE/openembedded/recipes/dbus/dbus_1.4.1.bb,
-do_fetch)
-ERROR: Task 8190
-(virtual:native:/home/PHOENIX/frey/OE/openembedded/recipes/dbus/
-dbus_1.4.1.bb, do_fetch) failed with 256
-ERROR: 'virtual:native:/home/PHOENIX/frey/OE/openembedded/recipes/dbus/
-dbus_1.4.1.bb' failed
-NOTE: package dbus-native-1.4.1-r20.0: task do_fetch: Started
-NOTE: The checksums for
-'/home/PHOENIX/frey/OE/build/tmp/downloads/dbus-1.4.1.tar.gz' did not match.
-Expected MD5: '99cb057700c0455fb68f8d57902f77ac' and Got:
-'4f3cb09d463197535a7934eff8d0eea8'
-Expected SHA256:
-'caa1a0ded2d0f2e95c1d4ec7e3c8bd44834928c5b0ed41a7189963f3593983bd' and Got:
-'c8dea9aa33ea3669ad5fb3ff277332e380f70fc768c7e39c8b2a1e278eeec66b'
-NOTE: Your checksums:
-SRC_URI[md5sum] = "4f3cb09d463197535a7934eff8d0eea8"
-SRC_URI[sha256sum] =
-"c8dea9aa33ea3669ad5fb3ff277332e380f70fc768c7e39c8b2a1e278eeec66b"
-
-FATAL: dbus-native-1.4.1:
-http://dbus.freedesktop.org/releases/dbus/dbus-1.4.1.tar.gz cannot check
-archive integrity
-ERROR: 'virtual:native:/home/PHOENIX/frey/OE/openembedded/recipes/dbus/
-dbus_1.4.1.bb' failed
+NOTE: package gcc-cross-sdk-4.3.3-r23.4: task do_fetch: Succeeded
+ERROR:
+'virtual:native:/home/koan/devel/openembedded/recipes/help2man/help2man_1=
+.38.2.bb'
+failed
+ERROR:
+'virtual:native:/home/koan/devel/openembedded/recipes/help2man/help2man_1=
+.38.2.bb'
+failed
 
 
-Downloading http://dbus.freedesktop.org/releases/dbus/dbus-1.4.1.tar.gzdirectly
-and doing untar/configure/make seems to indicate that the source
-archive isn't corrupted.
 
-What is the next step?  Is there anything more I should report for this
-error?
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
 
-Thanks,
-Zach
+
 
