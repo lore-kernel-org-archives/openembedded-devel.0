@@ -1,32 +1,34 @@
-Received: from ns.awellconnected.net ([83.167.180.132]
-	helo=edison.awellconnected.net)
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lukas@htc-linux.org>) id 1PxzI4-0005Af-QI
+	(envelope-from <dp@xora.org.uk>) id 1PxzJl-0005C0-Tx
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 11:09:49 +0100
-Received: from ip-80-226-0-1.vodafone-net.de ([80.226.0.1] helo=[10.225.64.94])
-	by edison.awellconnected.net with esmtp (Exim 4.69)
-	(envelope-from <lukas@htc-linux.org>) id 1PxzGT-0008J2-TU
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 10:08:10 +0000
-From: Lukas-David Gorris <lukas@htc-linux.org>
+	Fri, 11 Mar 2011 11:11:33 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 657BBA4702
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Mar 2011 09:58:45 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id WYQT1cUuJ-Zu
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Mar 2011 09:58:44 +0000 (GMT)
+Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 9BBADA4700
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Mar 2011 09:58:44 +0000 (GMT)
+Message-ID: <4D79F2A5.6060406@xora.org.uk>
+Date: Fri, 11 Mar 2011 10:00:05 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.15) Gecko/20110303 Lightning/1.0b2 Thunderbird/3.1.9
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1299805602.5437.32.camel@computer>
-References: <1299805602.5437.32.camel@computer>
-Date: Fri, 11 Mar 2011 11:08:04 +0100
-Message-ID: <1299838084.2321.3.camel@computer>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - edison.awellconnected.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - htc-linux.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: Re: [PATCH] transmission: add recipe for 2.22 version
+References: <20110311081950.GG7353@excalibur.local>
+In-Reply-To: <20110311081950.GG7353@excalibur.local>
+X-Enigmail-Version: 1.1.1
+Subject: Re: OE Bugzilla Future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,57 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2011 10:09:49 -0000
-X-Groupsio-MsgNum: 30060
-Content-Type: multipart/mixed; boundary="=-4+B1KR3MS4N8Pevg3Qzs"
-
---=-4+B1KR3MS4N8Pevg3Qzs
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 11 Mar 2011 10:11:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-> Depends on the the previously sent libevent bump.
-> 
-> From: Lukas-David Gorris <lukas.gorris@gmail.com>
-> Date: Fri, 11 Mar 2011 02:00:56 +0100
-> Subject: [oe] [PATCH] transmission: add recipe for 2.22 version
+On 11/03/2011 08:19, Stefan Schmidt wrote:
+> Comments? Volunteers?
+>
+Is there any newer bug tracking systems which should be considering?
 
-Sorry for the corrupted patch. Resent in attachment.
+If we keep bugzilla then we are still running a system where people do
+everything twice. They email patches to OE mailing list for review and
+also have to file them into bugzilla. If we could somehow combine the
+two functions. Effectively integrate patchwork and bug tracker into one
+system. I have no idea if such a bug tracker exists.
 
-Best,
-Lukas
+Also I might suggest we shift to launchpad or another hosted solution.
+That way we can lesson the load on the admin team.
 
+Im happy to step up and be a bug massager if we decide to run with a
+bugtracker, but I think we need to decide if that is the correct
+workflow for us first.
 
---=-4+B1KR3MS4N8Pevg3Qzs
-Content-Disposition: attachment; filename="transmission-bump.diff"
-Content-Type: text/x-patch; name="transmission-bump.diff"; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-
-From: Lukas-David Gorris <lukas.gorris@gmail.com>
-Date: Fri, 11 Mar 2011 02:00:56 +0100
-Subject: [oe][PATCH] transmission: add recipe for 2.22 version
-
----
- recipes/transmission/transmission_2.22.bb |    9 +++++++++
- 1 files changed, 9 insertions(+), 0 deletions(-)
- create mode 100644 recipes/transmission/transmission_2.22.bb
-
-diff --git a/recipes/transmission/transmission_2.22.bb b/recipes/transmission/transmission_2.22.bb
-new file mode 100644
-index 0000000..e9a7891
---- /dev/null
-+++ b/recipes/transmission/transmission_2.22.bb
-@@ -0,0 +1,9 @@
-+require transmission.inc
-+
-+DEPENDS += "libevent"
-+
-+PR = ${INC_PR}.1
-+
-+SRC_URI[archive.md5sum] = "6499986bf769276310b00bda1090090d"
-+SRC_URI[archive.sha256sum] = "5a4079194f45260c143f21ea6f33ce2660d89fca02ad8f1e65169968d365e4d4"
-+
--- 
-1.7.1
+Graeme
 
 
---=-4+B1KR3MS4N8Pevg3Qzs--
+
