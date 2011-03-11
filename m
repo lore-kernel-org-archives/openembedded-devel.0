@@ -1,32 +1,27 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from smtpfb2-g21.free.fr ([212.27.42.10])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PyBCJ-0001tp-6T
+	(envelope-from <eric@eukrea.com>) id 1PyBTl-0005MT-3i
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 23:52:39 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PyBAk-0004BT-E8 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 14:51:02 -0800
-Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Fri, 11 Mar 2011 14:50:06 -0800
-Received: from [172.30.80.238] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
-	Fri, 11 Mar 2011 14:50:05 -0800
-Message-ID: <4D7AA712.8080003@mentor.com>
-Date: Fri, 11 Mar 2011 15:49:54 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+	Sat, 12 Mar 2011 00:10:42 +0100
+Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
+	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 0258ACA8B59
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 12 Mar 2011 00:09:01 +0100 (CET)
+Received: from [192.168.2.15] (unknown [82.233.81.124])
+	by smtp3-g21.free.fr (Postfix) with ESMTP id BE2B6A6249
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 12 Mar 2011 00:08:54 +0100 (CET)
+Message-ID: <4D7AAB85.8020102@eukrea.com>
+Date: Sat, 12 Mar 2011 00:08:53 +0100
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1299879658-10136-1-git-send-email-eric@eukrea.com>
-	<1299879658-10136-3-git-send-email-eric@eukrea.com>
-In-Reply-To: <1299879658-10136-3-git-send-email-eric@eukrea.com>
-X-OriginalArrivalTime: 11 Mar 2011 22:50:06.0235 (UTC)
-	FILETIME=[AA717EB0:01CBE03E]
+To: openembedded-devel@lists.openembedded.org
+References: <1299879658-10136-1-git-send-email-eric@eukrea.com>	<1299879658-10136-3-git-send-email-eric@eukrea.com>
+	<4D7AA712.8080003@mentor.com>
+In-Reply-To: <4D7AA712.8080003@mentor.com>
 Subject: Re: [PATCH 3/3] qt4: remove 4.7.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,18 +36,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2011 22:52:39 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 11 Mar 2011 23:10:42 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-On 03/11/2011 02:40 PM, Eric Bénard wrote:
-> now that 4.7.2 is prefered for shr&  minimal
+On 11/03/2011 23:49, Tom Rini wrote:
+> On 03/11/2011 02:40 PM, Eric B=C3=A9nard wrote:
+>> now that 4.7.2 is prefered for shr& minimal
+>>
 >
+> Have the X11 images been tested to some degree now?
+>
+as angstrom-2010 and kaeilos have switched to qt 4.7.2 I assume that's th=
+e case.
 
-Have the X11 images been tested to some degree now?
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+Eric
 
 
