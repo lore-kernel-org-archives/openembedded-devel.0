@@ -1,24 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Py1Gs-0003en-Pc for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 13:16:42 +0100
-Received: from f053042227.adsl.alicedsl.de ([78.53.42.227]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Py1FK-0000mF-QI for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 12:15:07 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Py1JF-0003j8-2y for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Mar 2011 13:19:09 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Py1Hd-0003TA-8x for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Mar 2011 13:17:29 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Mar 2011 13:17:29 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Mar 2011 13:17:29 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1299838084.2321.3.camel@computer>
-References: <1299805602.5437.32.camel@computer>
-	<1299838084.2321.3.camel@computer>
-Date: Fri, 11 Mar 2011 13:15:05 +0100
-Message-ID: <1299845705.4137.43.camel@mattotaupa>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 11 Mar 2011 13:17:16 +0100
+Message-ID: <ild3sc$enc$1@dough.gmane.org>
+References: <20110311081950.GG7353@excalibur.local>	<ilcokq$g5i$1@dough.gmane.org>
+	<20110311101752.GI7353@excalibur.local>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH] transmission: add recipe for 2.22 version
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <20110311101752.GI7353@excalibur.local>
+X-Enigmail-Version: 1.0.1
+Subject: Re: OE Bugzilla Future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,48 +43,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2011 12:16:42 -0000
-X-Groupsio-MsgNum: 30066
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-4oTE5dW7JC0NXKlL8LW2"
+X-List-Received-Date: Fri, 11 Mar 2011 12:19:09 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-4oTE5dW7JC0NXKlL8LW2
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am Freitag, den 11.03.2011, 11:08 +0100 schrieb Lukas-David Gorris:
-> > Depends on the the previously sent libevent bump.
-> >=20
-> > From: Lukas-David Gorris <lukas.gorris@gmail.com>
-> > Date: Fri, 11 Mar 2011 02:00:56 +0100
-> > Subject: [oe] [PATCH] transmission: add recipe for 2.22 version
->=20
-> Sorry for the corrupted patch. Resent in attachment.
+On 11-03-11 11:17, Stefan Schmidt wrote:
+> Hello.
+> 
+> On Fri, 2011-03-11 at 10:05, Koen Kooi wrote:
+>> On 11-03-11 09:19, Stefan Schmidt wrote:
+>>>
+>>> This topic has come up several times now and it did come up again during a TSC
+>>> meeting yesterday.
+>>>
+>>> It feels like the current OE bugzilla is not in really good shape. The question
+>>> is how we are going to handle this. On the one hand it might be good to remove
+>>> as it holds a lot outdated informations and it seems developers are not using it
+>>> at all.
+>>>
+>>> On the other hand this would cut off a service for atcual users of OE.
+>>>
+>>> If we can find a group of people that is willing to clean the current bugzilla
+>>> up improve it and make sure that problems in it are actually worked on it still
+>>> have a chance to stay. We need a clear maintainership for it and bugs need
+>>> atcually be worked.
+>>>
+>>> Comments? Volunteers?
+>>
+>> Just kill it already, for OE-core we can use the yocto bugzilla which
+>> has dedicated maintainers.
+> 
+> That leaves still a big part of the metadat without bugzilla coverage.
+> meta-openembedded. If we find a group of people maintaining it I don't see a
+> problem with the OE bugzilla to stay.
 
-I am sorry. My comments in my previous answer [1] still apply.
+I stopped using OE bugzilla when the maintainer at that time was closing
+bugs because patches were posted to the mailinglist for review instead
+of attached to bugzilla.
+So if the new maintainers are crazy like that bugzilla will be useless.
 
-Please resend as =C2=BB[PATCH v2]=C2=AB.
+Maybe we can use something like trac or redmine to have it more
+integrated with the SCM. Hell, we could even abuse patchwork as
+bugtracker :)
 
+regards,
 
-Thanks,
-
-Paul
-
-
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-March/0307=
-93.html
-
---=-4oTE5dW7JC0NXKlL8LW2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAk16EkkACgkQPX1aK2wOHVhPtgCfQ0FWJuvTV1gKdl3S04iNVDAd
-GYMAoIgqZmc60ZhYCF3mfulRNAhtHSFF
-=r9Yq
+iD8DBQFNehLMMkyGM64RGpERAnZeAJ9I/A43aBEZmAQB2vYbVDdwEKGTkQCfQFT+
+NBTU7ROL4oul5LWGnIIACwA=
+=OEJI
 -----END PGP SIGNATURE-----
 
---=-4oTE5dW7JC0NXKlL8LW2--
+
+
