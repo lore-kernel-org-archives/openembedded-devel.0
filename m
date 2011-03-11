@@ -1,24 +1,29 @@
-Received: from smtp3-g21.free.fr ([212.27.42.3])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PyC0K-0002fs-Mf
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PyC8L-0002rG-IO
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Mar 2011 00:44:21 +0100
-Received: from [192.168.2.15] (unknown [82.233.81.124])
-	by smtp3-g21.free.fr (Postfix) with ESMTP id 40774A6214
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Mar 2011 00:42:41 +0100 (CET)
-Message-ID: <4D7AB370.2060008@eukrea.com>
-Date: Sat, 12 Mar 2011 00:42:40 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
-MIME-Version: 1.0
+	Sat, 12 Mar 2011 00:52:40 +0100
+Received: (qmail 12353 invoked by uid 503); 12 Mar 2011 00:29:39 -0000
+Received: from b9.ovh.net (HELO mail179.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 12 Mar 2011 00:29:39 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 12 Mar 2011 01:44:00 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 12 Mar 2011 01:43:59 +0200
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1299879658-10136-1-git-send-email-eric@eukrea.com>	<1299879658-10136-3-git-send-email-eric@eukrea.com>	<4D7AA712.8080003@mentor.com>	<4D7AAB85.8020102@eukrea.com>
-	<ileat6$gdk$2@dough.gmane.org>
+Date: Sat, 12 Mar 2011 00:45:26 +0100
+Message-Id: <1299887126-24886-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <ileat6$gdk$2@dough.gmane.org>
-Subject: Re: [PATCH 3/3] qt4: remove 4.7.1
+References: <ileat6$gdk$2@dough.gmane.org>
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 12952071054280928585
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: [PATCH] angstrom-20101: prefer qt 4.7.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,34 +37,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2011 23:44:21 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 11 Mar 2011 23:52:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 12/03/2011 00:23, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 12-03-11 00:08, Eric B=C3=A9nard wrote:
->> On 11/03/2011 23:49, Tom Rini wrote:
->>> On 03/11/2011 02:40 PM, Eric B=C3=A9nard wrote:
->>>> now that 4.7.2 is prefered for shr&  minimal
->>>>
->>>
->>> Have the X11 images been tested to some degree now?
->>>
->> as angstrom-2010 and kaeilos have switched to qt 4.7.2 I assume that's
->> the case.
->
-> Really?
-> http://cgit.openembedded.org/cgit.cgi/openembedded/tree/conf/distro/inc=
-lude/angstrom-2010-preferred-versions.inc
-> shows 4.7.1 still.
->
-> I will accept patches to change that to 4.7.2, though :)
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ .../include/angstrom-2010-preferred-versions.inc   |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-stupid me, I forget that I upgraded angstrom to 4.7.2 locally :)
+diff --git a/conf/distro/include/angstrom-2010-preferred-versions.inc b/conf/distro/include/angstrom-2010-preferred-versions.inc
+index 7a19f2d..2ec92ec 100644
+--- a/conf/distro/include/angstrom-2010-preferred-versions.inc
++++ b/conf/distro/include/angstrom-2010-preferred-versions.inc
+@@ -1,5 +1,5 @@
+ ANGSTROM_MESA_VERSION = "7.9.1"
+-ANGSTROM_QT_VERSION ?= "4.7.1"
++ANGSTROM_QT_VERSION ?= "4.7.2"
+ ANGSTROM_LIBTOOL_VERSION = "2.4"
+ # Use new sysroot feature
+ LIBTOOL_HAS_SYSROOT = "yes"
+-- 
+1.7.0.4
 
-Eric
 
 
