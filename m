@@ -1,18 +1,18 @@
 Received: from edison.awellconnected.net ([83.167.180.132])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lukas@htc-linux.org>) id 1Pxqw6-0005Vg-7a
+	(envelope-from <lukas@htc-linux.org>) id 1PxrBP-0005kr-Kx
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 02:14:34 +0100
+	Fri, 11 Mar 2011 02:30:23 +0100
 Received: from ip-80-226-0-1.vodafone-net.de ([80.226.0.1]
-	helo=[10.225.64.244])
+	helo=[10.225.79.228])
 	by edison.awellconnected.net with esmtp (Exim 4.69)
-	(envelope-from <lukas@htc-linux.org>) id 1PxquQ-0005mG-CB
+	(envelope-from <lukas@htc-linux.org>) id 1Pxqbk-0004P9-3M
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 01:12:50 +0000
+	Fri, 11 Mar 2011 00:53:32 +0000
 From: Lukas-David Gorris <lukas@htc-linux.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Mar 2011 02:06:42 +0100
-Message-ID: <1299805602.5437.32.camel@computer>
+Date: Fri, 11 Mar 2011 01:53:28 +0100
+Message-ID: <1299804808.5437.22.camel@computer>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.3 
 X-AntiAbuse: This header was added to track abuse,
@@ -24,7 +24,7 @@ X-AntiAbuse: Sender Address Domain - htc-linux.org
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-Subject: [PATCH] transmission: add recipe for 2.22 version
+Subject: [PATCH] libevent: recipe for 2.0.10-stable version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,41 +38,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2011 01:14:34 -0000
+X-List-Received-Date: Fri, 11 Mar 2011 01:30:24 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Depends on the the previously sent libevent bump.
-
 From: Lukas-David Gorris <lukas.gorris@gmail.com>
-Date: Fri, 11 Mar 2011 02:00:56 +0100
-Subject: [oe] [PATCH] transmission: add recipe for 2.22 version
+Date: Fri, 11 Mar 2011 01:47:24 +0100
+Subject: [PATCH 3/3] libevent: add recipe for 2.0.10-stable version
 
 ---
- recipes/transmission/transmission_2.22.bb |    9 +++++++++
- 1 files changed, 9 insertions(+), 0 deletions(-)
- create mode 100644 recipes/transmission/transmission_2.22.bb
+ recipes/libevent/libevent_2.0.10-stable.bb |   16 ++++++++++++++++
+ 1 files changed, 16 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/libevent/libevent_2.0.10-stable.bb
 
-diff --git a/recipes/transmission/transmission_2.22.bb
-b/recipes/transmission/transmission_2.22.bb
+diff --git a/recipes/libevent/libevent_2.0.10-stable.bb
+b/recipes/libevent/libevent_2.0.10-stable.bb
 new file mode 100644
-index 0000000..e9a7891
+index 0000000..fa656dc
 --- /dev/null
-+++ b/recipes/transmission/transmission_2.22.bb
-@@ -0,0 +1,9 @@
-+require transmission.inc
++++ b/recipes/libevent/libevent_2.0.10-stable.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "The libevent API provides a mechanism to execute a
+callback function \
++when a specific event occurs on a file descriptor or after a timeout
+has been reached. \
++Furthermore, libevent also support callbacks due to signals or regular
+timeouts."
++HOMEPAGE = "http://www.monkey.org/~provos/libevent/"
++SECTION = "libs"
++AUTHOR = "Niels Provos <provos@citi.umich.edu>"
++LICENSE = "BSD"
++PR = "r0"
 +
-+DEPENDS += "libevent"
++SRC_URI = "http://monkey.org/~provos/libevent-${PV}.tar.gz"
 +
-+PR = ${INC_PR}.1
++inherit autotools
 +
-+SRC_URI[archive.md5sum] = "6499986bf769276310b00bda1090090d"
-+SRC_URI[archive.sha256sum] =
-"5a4079194f45260c143f21ea6f33ce2660d89fca02ad8f1e65169968d365e4d4"
++SRC_URI[md5sum] = "a37401d26cbbf28185211d582741a3d4"
++SRC_URI[sha256sum] =
+"a4b55810a9e21e9991b86ba5e82dbc9280598cc070544c4ecef4ab91b93dfc55"
 +
 -- 
 1.7.1
-
 
 
 
