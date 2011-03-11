@@ -1,37 +1,23 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1Pxz8p-00052p-Em
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 11:00:16 +0100
-Received: by iwn10 with SMTP id 10so2618021iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Mar 2011 01:58:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=lYA55P0yVL9SJ5iHJUfMuquKV/sqB3EPk3HqvmgrL/s=;
-	b=u1pHft5JhOGqORsUiSRtSGWWbCKWaXvAwDkzEBggIoc+znHq6UtMLr0+Ny292Ys2Rz
-	8kz1OgZHHEPntIpB5rH8XLuj196ivcDl8/SY0yFOXJ479fLCR1H0utHs+6UogzzfZjCM
-	+kbXRHmQSP/M1guQo+Ux3yno+OdwrGp9UKDBE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=WMQXtfPpg+Y3AiVfeuxWXboWvz+Kh99ISXdDkkcF609Eib4OdPFNABkFPys8kTwkNn
-	ade1uHzigSFUGMKSmblVIccDLLd3mwpox2dMgQ5Ht8Q+E25W9WGI/Ng0vJ9szZReZz/9
-	Jb9RDrZqdvMfdPOiVY9MAuPEpoLTpBxTb47ek=
-MIME-Version: 1.0
-Received: by 10.43.65.83 with SMTP id xl19mr8985003icb.55.1299837083957; Fri,
-	11 Mar 2011 01:51:23 -0800 (PST)
-Received: by 10.42.117.138 with HTTP; Fri, 11 Mar 2011 01:51:23 -0800 (PST)
-In-Reply-To: <AANLkTimLqGc2snJHw4Oymfz9q+t+GDWF+ErL46eTzJB5@mail.gmail.com>
-References: <AANLkTik1GhO_ZX_oP3_TB6JR_73QPmM7t3jzxd4vbOkW@mail.gmail.com>
-	<20110311080427.GB2478@sakrah.homelinux.org>
-	<AANLkTimLqGc2snJHw4Oymfz9q+t+GDWF+ErL46eTzJB5@mail.gmail.com>
-Date: Fri, 11 Mar 2011 10:51:23 +0100
-Message-ID: <AANLkTinGAS+x7q=RVynv8QVV9gCD9RC_Yd+msyzYm=_m@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PxzB4-00055X-9a for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Mar 2011 11:02:34 +0100
+Received: from f053042227.adsl.alicedsl.de ([78.53.42.227]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pxz9W-0008GJ-Rr for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Mar 2011 10:00:59 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] cpio.lzma compression level in bitbake.conf
+In-Reply-To: <1299805412.5437.31.camel@computer>
+References: <1299805412.5437.31.camel@computer>
+Date: Fri, 11 Mar 2011 11:00:57 +0100
+Message-ID: <1299837657.4137.23.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH] transmission: add recipe for 2.22 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,47 +31,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2011 10:00:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 11 Mar 2011 10:02:34 -0000
+X-Groupsio-MsgNum: 30058
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-k5EfT7XWg3Mr9SqJoudf"
+
+--=-k5EfT7XWg3Mr9SqJoudf
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 11, 2011 at 10:49 AM, Andrea Adami <andrea.adami@gmail.com> wro=
-te:
->> I think this is something we can encapsulate in machine.conf files
->> so unless the general value in bitbake.conf does not fail for almost
->> all cases I would suggest to keep it and instead introduce a new
->> variable to control the level
->> -Khem
->
-> Ok, but then we need a weak assignment in bitbake.conf to allow the
-> setting =A0in machine conf.
->
-> So, in bitbake.conf
->
-> -IMAGE_CMD_cpio.lzma =3D "type cpio >/dev/null; cd ${IMAGE_ROOTFS} &&
-> (find . | cpio -o -H newc | lzma -c -9
->>${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma)
-> ${EXTRA_IMAGECMD}"
->
-> + LZMA_COMPRESSION_LEVEL ?=3D "-9"
-> +IMAGE_CMD_cpio.lzma =3D "type cpio >/dev/null; cd ${IMAGE_ROOTFS} &&
-> (find . | cpio -o -H newc | lzma -c ${LZMA_COMPRESSION_LEVEL}
->>${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma)
-> ${EXTRA_IMAGECMD}"
->
-> And in machine.conf e.g.
-> + LZMA_COMPRESSION_LEVEL ?=3D "-7"
-
-Copy and paste is for the lazy..obviously I meant
-+ LZMA_COMPRESSION_LEVEL =3D "-7"
+Dear Lukas-David,
 
 
->
-> Acceptable?
->
-> Regards
->
-> Andrea
->
+Am Freitag, den 11.03.2011, 02:03 +0100 schrieb Lukas-David Gorris:
+> Depends on the the previously sent libevent bump.
+
+Using `git format-patch -2 -s` you can create patches where the
+dependencies are shown in the subject, e. g. [PATCH 1/2] and [PATCH
+2/2].
+
+> From: Lukas-David Gorris <lukas.gorris@gmail.com>
+> Date: Fri, 11 Mar 2011 02:00:56 +0100
+> Subject: [oe] [PATCH] transmission: add recipe for 2.22 version
+
+As already written in another thread, your MUA mangled the patches.
+Please turn off automatic line wrapping (normal to preformatted) or
+using `git send-email`.
+
+Your Signed-off-by line is also missing as demanded by the commit policy
+[1].
+
+Secondly, I would appreciate if you could add to the commit message,
+what build configuration you tested your new recipe/patch with and if
+all operations worked when running it.
+
+> ---
+>  recipes/transmission/transmission_2.22.bb |    9 +++++++++
+>  1 files changed, 9 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/transmission/transmission_2.22.bb
+>=20
+> diff --git a/recipes/transmission/transmission_2.22.bb
+> b/recipes/transmission/transmission_2.22.bb
+> new file mode 100644
+> index 0000000..e9a7891
+> --- /dev/null
+> +++ b/recipes/transmission/transmission_2.22.bb
+> @@ -0,0 +1,9 @@
+> +require transmission.inc
+> +
+> +DEPENDS +=3D "libevent"
+> +
+> +PR =3D ${INC_PR}.1
+
+You should start at 0.
+
+> +SRC_URI[archive.md5sum] =3D "6499986bf769276310b00bda1090090d"
+> +SRC_URI[archive.sha256sum] =3D "5a4079194f45260c143f21ea6f33ce2660d89fca=
+02ad8f1e65169968d365e4d4"
 
 
+Thanks,
+
+Paul
+
+
+[1] http://openembedded.org/index.php/Commit_Policy
+
+--=-k5EfT7XWg3Mr9SqJoudf
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk158tQACgkQPX1aK2wOHVjoWgCgiEsh6hzC78k/H0w6pg/A/+WR
+r/YAn0oKmNzvz9s6K+2JlYgFKJOFqLVW
+=fXu9
+-----END PGP SIGNATURE-----
+
+--=-k5EfT7XWg3Mr9SqJoudf--
