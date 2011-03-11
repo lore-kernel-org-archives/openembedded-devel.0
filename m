@@ -1,23 +1,34 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Py1Qi-0003xD-6M for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 13:26:52 +0100
-Received: from f053042227.adsl.alicedsl.de ([78.53.42.227]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Py1PA-00016J-VQ for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 12:25:17 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Py24F-0005BX-Ce for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Mar 2011 14:07:58 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Py225-0007ac-S6 for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Mar 2011 14:05:29 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Mar 2011 14:05:29 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Mar 2011 14:05:29 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201103111138.38493.pgsellmann@portner-elektronik.at>
-References: <201103111138.38493.pgsellmann@portner-elektronik.at>
-Date: Fri, 11 Mar 2011 13:25:15 +0100
-Message-ID: <1299846315.4137.48.camel@mattotaupa>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 11 Mar 2011 14:05:14 +0100
+Message-ID: <ild6ma$ton$1@dough.gmane.org>
+References: <1299841477-23487-1-git-send-email-sledz@dresearch.de>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH] gsoap_2.7.13 build errors
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1299841477-23487-1-git-send-email-sledz@dresearch.de>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH] net-snmp: disable libnl use
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,109 +42,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2011 12:26:52 -0000
-X-Groupsio-MsgNum: 30068
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-tfJtzuTMVwaG7y3sH/6w"
+X-List-Received-Date: Fri, 11 Mar 2011 13:07:58 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-tfJtzuTMVwaG7y3sH/6w
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Dear Peter,
+On 11-03-11 12:04, Steffen Sledz wrote:
+> Fixes compile error
+> 
+> | ./.libs/libnetsnmpmibs.so: undefined reference to `nl_handle_destroy'
+> | ./.libs/libnetsnmpmibs.so: undefined reference to `nl_handle_alloc'
+> 
+> which occurred sometimes depending on build order (not in clean package
+> only builds).
 
+What features do we loose when disabling netlink support? I'd rather get
+the libnl recipe fixed (e.g. static lib only) instead of hacking the
+dependants.
 
-Am Freitag, den 11.03.2011, 11:38 +0100 schrieb Peter Gsellmann:
-> There is a compiler error about an impossible cast from QUIRKS* to const =
-QUIRKS*
-> The patches are from Fedora12 which has the exact same gsoap-version
-> They can be found at http://archive.fedoraproject.org/pub/archive/fedora/=
-linux/releases/12/Everything/source/SRPMS/gsoap-2.7.13-2.fc12.src.rpm
->=20
-> In the native package, the generated binary is installed in STAGING_BINDI=
-R_NATIVE where expected by the gsoap-package
->=20
-> Otherwise the gsoap-package uses a soapcpp2 delivered as 32bit-executable=
- in the source-package! This fails on x86_64 hosts.
+regards,
 
-smaller patches would it make easier to review in my opinion. (If it
-were possible.)
+Koen
 
-On what did you test this patch?
-
-> Signed-off-by: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+> 
+> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
 > ---
->  recipes/gsoap/gsoap-2.7.13/gsoap-2.7-openssl.patch |   17 +++++
->  recipes/gsoap/gsoap-2.7.13/unused_args.patch       |   39 +++++++++++
->  .../gsoap/gsoap-2.7.13/use_libtool-2.7.12.patch    |   72 ++++++++++++++=
-++++++
->  recipes/gsoap/gsoap-native_2.7.13.bb               |    3 +-
->  recipes/gsoap/gsoap_2.7.13.inc                     |    4 +-
->  5 files changed, 133 insertions(+), 2 deletions(-)
->  create mode 100644 recipes/gsoap/gsoap-2.7.13/gsoap-2.7-openssl.patch
->  create mode 100644 recipes/gsoap/gsoap-2.7.13/unused_args.patch
->  create mode 100644 recipes/gsoap/gsoap-2.7.13/use_libtool-2.7.12.patch
-
-[=E2=80=A6]
-
-> diff --git a/recipes/gsoap/gsoap-native_2.7.13.bb b/recipes/gsoap/gsoap-n=
-ative_2.7.13.bb
-> index 3e905e7..83c2329 100644
-> --- a/recipes/gsoap/gsoap-native_2.7.13.bb
-> +++ b/recipes/gsoap/gsoap-native_2.7.13.bb
-> @@ -6,8 +6,9 @@ EXTRA_OEMAKE =3D ""
-> =20
->  inherit native
-> =20
-> +
-
-Not needed?
-
->  do_install() {
-> -	:
-> +	install -m 0755 ${S}/gsoap/src/soapcpp2 ${STAGING_BINDIR_NATIVE}/
->  }
-> =20
->=20
-> diff --git a/recipes/gsoap/gsoap_2.7.13.inc b/recipes/gsoap/gsoap_2.7.13.=
-inc
-> index 877e1d1..c3ab3c4 100644
-> --- a/recipes/gsoap/gsoap_2.7.13.inc
-> +++ b/recipes/gsoap/gsoap_2.7.13.inc
-> @@ -3,7 +3,9 @@ for the development of SOAP Web Services and clients."
->  SECTION =3D "devel"
->  LICENSE =3D "GPL"
-> =20
-> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.tar.gz"
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.tar.gz	\
-> +	file://gsoap-2.7-openssl.patch	\
-
-Use spaces instead of tabulators before =C2=BB\=C2=AB?
-
-> +	file://unused_args.patch"
-
-Maybe you can move the quote =C2=BB"=C2=AB on a new line, so that future pa=
-tches
-will not create a difference for that line.
-
->  inherit autotools
-
-
-Thanks,
-
-Paul
-
---=-tfJtzuTMVwaG7y3sH/6w
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+>  recipes/net-snmp/net-snmp_svn.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes/net-snmp/net-snmp_svn.bb b/recipes/net-snmp/net-snmp_svn.bb
+> index 2a75722..c53c91f 100644
+> --- a/recipes/net-snmp/net-snmp_svn.bb
+> +++ b/recipes/net-snmp/net-snmp_svn.bb
+> @@ -1,7 +1,7 @@
+>  require net-snmp.inc
+>  DEPENDS += "libtool libtool-native libtool-cross"
+>  SRCREV = "20069"
+> -PR = "${INC_PR}.0"
+> +PR = "${INC_PR}.1"
+>  
+>  S = "${WORKDIR}/net-snmp"
+>  
+> @@ -10,7 +10,7 @@ SRC_URI = "svn://net-snmp.svn.sourceforge.net/svnroot/net-snmp/trunk;module=net-
+>          file://snmpd.conf \
+>          file://snmptrapd.conf"
+>  
+> -EXTRA_OECONF += "--disable-embedded-perl --with-perl-modules=no GREP=/bin/grep SED=/bin/sed"
+> +EXTRA_OECONF += "--disable-embedded-perl --with-perl-modules=no --without-nl GREP=/bin/grep SED=/bin/sed"
+>  EXTRA_OEMAKE = "INSTALL_PREFIX=${D}"
+>  
+>  CCACHE = ""
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAk16FKsACgkQPX1aK2wOHVjF5ACfeR+XoOYptRkDeGOwLc59b6IL
-7OMAnRUzUXICXB9vQrRU53uiHG84JM/E
-=Htcm
+iD8DBQFNeh4JMkyGM64RGpERAoHZAJ9qMCGgy94d0SRjWn8BYytVOgRTxwCgj+GR
+tioY8TZybHS74EH8FMVubQ0=
+=euaE
 -----END PGP SIGNATURE-----
 
---=-tfJtzuTMVwaG7y3sH/6w--
+
+
