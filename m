@@ -1,24 +1,24 @@
-Received: from einhorn.in-berlin.de ([192.109.42.8] ident=root)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1Py0Ap-0002A2-9J
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 12:06:23 +0100
-X-Envelope-From: sledz@dresearch.de
-Received: from mobil-400-586.intern.dresearch.de
-	(p57A201FA.dip0.t-ipconnect.de [87.162.1.250]) (authenticated bits=0)
-	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
-	p2BB4kO4030778
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
-	Fri, 11 Mar 2011 12:04:47 +0100
-Received: by mobil-400-586.intern.dresearch.de (Postfix, from userid 1000)
-	id B1AB5296E6; Fri, 11 Mar 2011 12:04:46 +0100 (CET)
-From: Steffen Sledz <sledz@dresearch.de>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Py1Gs-0003en-Pc for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Mar 2011 13:16:42 +0100
+Received: from f053042227.adsl.alicedsl.de ([78.53.42.227]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Py1FK-0000mF-QI for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Mar 2011 12:15:07 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Mar 2011 12:04:37 +0100
-Message-Id: <1299841477-23487-1-git-send-email-sledz@dresearch.de>
-X-Mailer: git-send-email 1.7.1
-X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
-Subject: [PATCH] net-snmp: disable libnl use
+In-Reply-To: <1299838084.2321.3.camel@computer>
+References: <1299805602.5437.32.camel@computer>
+	<1299838084.2321.3.camel@computer>
+Date: Fri, 11 Mar 2011 13:15:05 +0100
+Message-ID: <1299845705.4137.43.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH] transmission: add recipe for 2.22 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,45 +32,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2011 11:06:23 -0000
+X-List-Received-Date: Fri, 11 Mar 2011 12:16:42 -0000
+X-Groupsio-MsgNum: 30066
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-4oTE5dW7JC0NXKlL8LW2"
 
-Fixes compile error
+--=-4oTE5dW7JC0NXKlL8LW2
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-| ./.libs/libnetsnmpmibs.so: undefined reference to `nl_handle_destroy'
-| ./.libs/libnetsnmpmibs.so: undefined reference to `nl_handle_alloc'
+Am Freitag, den 11.03.2011, 11:08 +0100 schrieb Lukas-David Gorris:
+> > Depends on the the previously sent libevent bump.
+> >=20
+> > From: Lukas-David Gorris <lukas.gorris@gmail.com>
+> > Date: Fri, 11 Mar 2011 02:00:56 +0100
+> > Subject: [oe] [PATCH] transmission: add recipe for 2.22 version
+>=20
+> Sorry for the corrupted patch. Resent in attachment.
 
-which occurred sometimes depending on build order (not in clean package
-only builds).
+I am sorry. My comments in my previous answer [1] still apply.
 
-Signed-off-by: Steffen Sledz <sledz@dresearch.de>
----
- recipes/net-snmp/net-snmp_svn.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes/net-snmp/net-snmp_svn.bb b/recipes/net-snmp/net-snmp_svn.bb
-index 2a75722..c53c91f 100644
---- a/recipes/net-snmp/net-snmp_svn.bb
-+++ b/recipes/net-snmp/net-snmp_svn.bb
-@@ -1,7 +1,7 @@
- require net-snmp.inc
- DEPENDS += "libtool libtool-native libtool-cross"
- SRCREV = "20069"
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- S = "${WORKDIR}/net-snmp"
- 
-@@ -10,7 +10,7 @@ SRC_URI = "svn://net-snmp.svn.sourceforge.net/svnroot/net-snmp/trunk;module=net-
-         file://snmpd.conf \
-         file://snmptrapd.conf"
- 
--EXTRA_OECONF += "--disable-embedded-perl --with-perl-modules=no GREP=/bin/grep SED=/bin/sed"
-+EXTRA_OECONF += "--disable-embedded-perl --with-perl-modules=no --without-nl GREP=/bin/grep SED=/bin/sed"
- EXTRA_OEMAKE = "INSTALL_PREFIX=${D}"
- 
- CCACHE = ""
--- 
-1.7.1
+Please resend as =C2=BB[PATCH v2]=C2=AB.
 
 
+Thanks,
 
+Paul
+
+
+[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-March/0307=
+93.html
+
+--=-4oTE5dW7JC0NXKlL8LW2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk16EkkACgkQPX1aK2wOHVhPtgCfQ0FWJuvTV1gKdl3S04iNVDAd
+GYMAoIgqZmc60ZhYCF3mfulRNAhtHSFF
+=r9Yq
+-----END PGP SIGNATURE-----
+
+--=-4oTE5dW7JC0NXKlL8LW2--
