@@ -1,43 +1,43 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PxxSh-00063W-Ou
+	(envelope-from <raj.khem@gmail.com>) id 1PxxUu-00068B-FH
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 09:12:40 +0100
-Received: by pzk35 with SMTP id 35so201248pzk.6
+	Fri, 11 Mar 2011 09:14:56 +0100
+Received: by yia13 with SMTP id 13so1070143yia.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Mar 2011 00:10:58 -0800 (PST)
+	Fri, 11 Mar 2011 00:13:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:date:from:to:subject:message-id
 	:mail-followup-to:references:mime-version:content-type
 	:content-disposition:in-reply-to:user-agent;
-	bh=boy9BIAeqBuzVFRxG++qmbeKCKTfcYNxpYYbhtxrfv8=;
-	b=lFeGpoKVeDE6JSjZvgBa8v/GD+rMWbZJES790m5CfaSmOswSrhxrnwyD/ilZ8gVPLl
-	kG2CiMbDF7wFCae2ovZx6J+dXDQ/xuLNFI90HZGg1Msl6mwAk4ZEnBIvfEeT59+v9iFm
-	p4dLaDG1SOoQFztL3Dx9l6wEMi0EAuRGr84Vs=
+	bh=0pLok5c8E/GGkHablfcKd4vgHrdwm5dtdugcT6R3Y1M=;
+	b=vSb8l2rXV+zL3agDBUMK7s0bok60Vlm9fjEU5WWPswCttA1dTosAY+mSnK397s4CEn
+	DCVuTLH9OfFQkwSH8/MSVcsoGFp8TjasHnaAK2GWJG74AYuK+ByAidi8/aThQVlyQITx
+	ILwX7qJPHNv0/SsVJ2mOvvIIMBJCJ8zzM3KZw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:mail-followup-to:references
 	:mime-version:content-type:content-disposition:in-reply-to
 	:user-agent;
-	b=FGryAhD72dStFKxrVFaTkQoZqg8emZbsEq3GffD0dysEBNhrgY/sKEm0hfNJWJsz3R
-	Tu3YHNC50R+rQ+nzCT9aduJr0gyYVKPNdtqY9Mu6dwqy0rVuLm3fZ7kWtJWVH2QCEMqt
-	BsKvKvdDWtIC5Q/7FoirfbVPWqT++wTxssHxQ=
-Received: by 10.143.169.7 with SMTP id w7mr7455899wfo.186.1299830644971;
-	Fri, 11 Mar 2011 00:04:04 -0800 (PST)
+	b=UA5V19DFZB53Yjf67mbdlsVw6h4xFt04RyLOZuOK4hyjZ4eu+beOy0aI1uRfw8Pu53
+	YigjV5Cuq6nIRe6qph/ocNmfl3jb1Ck5TGvkIyHDRFRo2MJTFzaF9AozbMIfinH3ZKAc
+	aGey+l3gdVtFuAVaOvUztRcOZrCQ9D5dTID+g=
+Received: by 10.101.112.11 with SMTP id p11mr869276anm.106.1299831198384;
+	Fri, 11 Mar 2011 00:13:18 -0800 (PST)
 Received: from sakrah.homelinux.org
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id 25sm5019898wfb.22.2011.03.11.00.04.02
+	by mx.google.com with ESMTPS id u13sm5055422ank.23.2011.03.11.00.13.16
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 11 Mar 2011 00:04:03 -0800 (PST)
-Date: Fri, 11 Mar 2011 00:04:27 -0800
+	Fri, 11 Mar 2011 00:13:17 -0800 (PST)
+Date: Fri, 11 Mar 2011 00:13:40 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110311080427.GB2478@sakrah.homelinux.org>
+Message-ID: <20110311081340.GD2478@sakrah.homelinux.org>
 Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <AANLkTik1GhO_ZX_oP3_TB6JR_73QPmM7t3jzxd4vbOkW@mail.gmail.com>
+References: <1299762656-4872-1-git-send-email-GNUtoo@no-log.org>
 MIME-Version: 1.0
-In-Reply-To: <AANLkTik1GhO_ZX_oP3_TB6JR_73QPmM7t3jzxd4vbOkW@mail.gmail.com>
+In-Reply-To: <1299762656-4872-1-git-send-email-GNUtoo@no-log.org>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [RFC] cpio.lzma compression level in bitbake.conf
+Subject: Re: [PATCH] autoconf.inc: check if files exist before using sed on them
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,41 +51,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2011 08:12:40 -0000
+X-List-Received-Date: Fri, 11 Mar 2011 08:14:56 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (10/03/11 10:21), Andrea Adami wrote:
-> Hello,
+On (10/03/11 14:10), Denis 'GNUtoo' Carikli wrote:
+> Without the that fix we have
+>   | + sed -i '-es,^SUBDIRS = .*,SUBDIRS = bin . lib,' .../work/x86_64-linux/autoconf213-native-2.13-r14.0/autoconf-2.13/Makefile.am
+>   | sed: can't read .../work/x86_64-linux/autoconf213-native-2.13-r14.0/autoconf-2.13/Makefile.am: No such file or directory
+> and:
+>   | + sed -i -e '1s:#!.*:#! /usr/bin/env perl:' '.../work/x86_64-linux/autoconf213-native-2.13-r14.0/autoconf-2.13/bin/*.in'
+>   | sed: can't read .../work/x86_64-linux/autoconf213-native-2.13-r14.0/autoconf-2.13/bin/*.in: No such file or directory
+>   NOTE: package autoconf213-native-2.13-r14.0: task do_configure: Failed
 > 
-> in bitbake.conf we use the maximum lzma compression level (-c -9) for
-> the initramfs:
+> Thanks a lot for all help in #oe on Freenode on irc for telling me
+>   which command to use for the *.in at the end pb__ found the best command:
+> <pb__> or ls ${S} | grep -q '\.in$'
 > 
-> IMAGE_CMD_cpio.lzma = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} &&
-> (find . | cpio -o -H newc | lzma -c -9
-> >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma)
-> ${EXTRA_IMAGECMD}"
-> 
-> This makes decompressor fail on devices with 32Mb RAM (see
-> http://paste.debian.net/110203/ ).
-> Same kernel boots with compression set to -7.
-> 
-> Some figures can be obtained here:
-> http://www.gsp.com/cgi-bin/man.cgi?section=1&topic=lzcat
-> 
-> It was suggested we should introduce something like
-> LZMA_COMPRESSION_LEVEL or use internal tables to find better level
-> from targets memory amount.
-> In the meanwhile I think we should change the defaults in bitbake.conf.
+> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 
-I think this is something we can encapsulate in machine.conf files
-so unless the general value in bitbake.conf does not fail for almost
-all cases I would suggest to keep it and instead introduce a new
-variable to control the level 
+Did you do a build from scratch ? This change might impact other autconf
+recipes besids autoconf213-native.
+
+> ---
+>  recipes/autoconf/autoconf.inc |   14 ++++++++++----
+>  1 files changed, 10 insertions(+), 4 deletions(-)
 > 
-> Opinions?
+> diff --git a/recipes/autoconf/autoconf.inc b/recipes/autoconf/autoconf.inc
+> index 7f22c2b..e0eecd3 100644
+> --- a/recipes/autoconf/autoconf.inc
+> +++ b/recipes/autoconf/autoconf.inc
+> @@ -8,7 +8,7 @@ RDEPENDS_${PN} = "m4 perl gnu-config"
+>  DEPENDS_virtclass-native = "m4-native gnu-config-native perl-native"
+>  RDEPENDS_${PN}_virtclass-native = "m4-native gnu-config-native perl-native"
+>  
+> -INC_PR = "r13"
+> +INC_PR = "r14"
+>  
+>  SRC_URI = "${GNU_MIRROR}/autoconf/autoconf-${PV}.tar.bz2;name=autoconf \
+>  	   file://program_prefix.patch"
+> @@ -25,13 +25,19 @@ do_configure_prepend () {
+>  		export ac_cv_path_M4="${ac_cv_path_M4=${bindir}/m4}"
+>  		export ac_cv_prog_gnu_m4="${ac_cv_prog_gnu_m4=yes}"
+>  	fi
+> -
+> -	sed -i -e's,^SUBDIRS = .*,SUBDIRS = ${SUBDIRS},' ${S}/Makefile.am
+> +	if [ -e ${S}/Makefile.am ]
+> +	then
+> +		sed -i -e's,^SUBDIRS = .*,SUBDIRS = ${SUBDIRS},' ${S}/Makefile.am
+> +	fi
+>  }
+>  
+>  do_configure_append() {
+>  	# replace paths to STAGING_BINDIR_NATIVE/perl with ${bindir}/perl
+> -	sed -i -e "1s:#!.*:#! /usr/bin/env perl:" ${S}/bin/*.in
+> +	ls ${S} | grep -q '\.in$'
+> +	if [ $? -eq 0 ]
+> +	then
+> +		sed -i -e "1s:#!.*:#! /usr/bin/env perl:" ${S}/bin/*.in
+> +	fi
+>  }
+>  
+>  PARALLEL_MAKE = ""
+> -- 
+> 1.7.0.4
 > 
-> Andrea
 > 
 > _______________________________________________
 > Openembedded-devel mailing list
