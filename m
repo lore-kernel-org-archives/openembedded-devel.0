@@ -1,35 +1,23 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Py1JF-0003j8-2y for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 13:19:09 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Py1Hd-0003TA-8x for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 13:17:29 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Mar 2011 13:17:29 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Mar 2011 13:17:29 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Py1Qi-0003xD-6M for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Mar 2011 13:26:52 +0100
+Received: from f053042227.adsl.alicedsl.de ([78.53.42.227]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Py1PA-00016J-VQ for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Mar 2011 12:25:17 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 11 Mar 2011 13:17:16 +0100
-Message-ID: <ild3sc$enc$1@dough.gmane.org>
-References: <20110311081950.GG7353@excalibur.local>	<ilcokq$g5i$1@dough.gmane.org>
-	<20110311101752.GI7353@excalibur.local>
+In-Reply-To: <201103111138.38493.pgsellmann@portner-elektronik.at>
+References: <201103111138.38493.pgsellmann@portner-elektronik.at>
+Date: Fri, 11 Mar 2011 13:25:15 +0100
+Message-ID: <1299846315.4137.48.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <20110311101752.GI7353@excalibur.local>
-X-Enigmail-Version: 1.0.1
-Subject: Re: OE Bugzilla Future
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH] gsoap_2.7.13 build errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,62 +31,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2011 12:19:09 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 11 Mar 2011 12:26:52 -0000
+X-Groupsio-MsgNum: 30068
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-tfJtzuTMVwaG7y3sH/6w"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-tfJtzuTMVwaG7y3sH/6w
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 11-03-11 11:17, Stefan Schmidt wrote:
-> Hello.
-> 
-> On Fri, 2011-03-11 at 10:05, Koen Kooi wrote:
->> On 11-03-11 09:19, Stefan Schmidt wrote:
->>>
->>> This topic has come up several times now and it did come up again during a TSC
->>> meeting yesterday.
->>>
->>> It feels like the current OE bugzilla is not in really good shape. The question
->>> is how we are going to handle this. On the one hand it might be good to remove
->>> as it holds a lot outdated informations and it seems developers are not using it
->>> at all.
->>>
->>> On the other hand this would cut off a service for atcual users of OE.
->>>
->>> If we can find a group of people that is willing to clean the current bugzilla
->>> up improve it and make sure that problems in it are actually worked on it still
->>> have a chance to stay. We need a clear maintainership for it and bugs need
->>> atcually be worked.
->>>
->>> Comments? Volunteers?
->>
->> Just kill it already, for OE-core we can use the yocto bugzilla which
->> has dedicated maintainers.
-> 
-> That leaves still a big part of the metadat without bugzilla coverage.
-> meta-openembedded. If we find a group of people maintaining it I don't see a
-> problem with the OE bugzilla to stay.
+Dear Peter,
 
-I stopped using OE bugzilla when the maintainer at that time was closing
-bugs because patches were posted to the mailinglist for review instead
-of attached to bugzilla.
-So if the new maintainers are crazy like that bugzilla will be useless.
 
-Maybe we can use something like trac or redmine to have it more
-integrated with the SCM. Hell, we could even abuse patchwork as
-bugtracker :)
+Am Freitag, den 11.03.2011, 11:38 +0100 schrieb Peter Gsellmann:
+> There is a compiler error about an impossible cast from QUIRKS* to const =
+QUIRKS*
+> The patches are from Fedora12 which has the exact same gsoap-version
+> They can be found at http://archive.fedoraproject.org/pub/archive/fedora/=
+linux/releases/12/Everything/source/SRPMS/gsoap-2.7.13-2.fc12.src.rpm
+>=20
+> In the native package, the generated binary is installed in STAGING_BINDI=
+R_NATIVE where expected by the gsoap-package
+>=20
+> Otherwise the gsoap-package uses a soapcpp2 delivered as 32bit-executable=
+ in the source-package! This fails on x86_64 hosts.
 
-regards,
+smaller patches would it make easier to review in my opinion. (If it
+were possible.)
 
-Koen
+On what did you test this patch?
+
+> Signed-off-by: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+> ---
+>  recipes/gsoap/gsoap-2.7.13/gsoap-2.7-openssl.patch |   17 +++++
+>  recipes/gsoap/gsoap-2.7.13/unused_args.patch       |   39 +++++++++++
+>  .../gsoap/gsoap-2.7.13/use_libtool-2.7.12.patch    |   72 ++++++++++++++=
+++++++
+>  recipes/gsoap/gsoap-native_2.7.13.bb               |    3 +-
+>  recipes/gsoap/gsoap_2.7.13.inc                     |    4 +-
+>  5 files changed, 133 insertions(+), 2 deletions(-)
+>  create mode 100644 recipes/gsoap/gsoap-2.7.13/gsoap-2.7-openssl.patch
+>  create mode 100644 recipes/gsoap/gsoap-2.7.13/unused_args.patch
+>  create mode 100644 recipes/gsoap/gsoap-2.7.13/use_libtool-2.7.12.patch
+
+[=E2=80=A6]
+
+> diff --git a/recipes/gsoap/gsoap-native_2.7.13.bb b/recipes/gsoap/gsoap-n=
+ative_2.7.13.bb
+> index 3e905e7..83c2329 100644
+> --- a/recipes/gsoap/gsoap-native_2.7.13.bb
+> +++ b/recipes/gsoap/gsoap-native_2.7.13.bb
+> @@ -6,8 +6,9 @@ EXTRA_OEMAKE =3D ""
+> =20
+>  inherit native
+> =20
+> +
+
+Not needed?
+
+>  do_install() {
+> -	:
+> +	install -m 0755 ${S}/gsoap/src/soapcpp2 ${STAGING_BINDIR_NATIVE}/
+>  }
+> =20
+>=20
+> diff --git a/recipes/gsoap/gsoap_2.7.13.inc b/recipes/gsoap/gsoap_2.7.13.=
+inc
+> index 877e1d1..c3ab3c4 100644
+> --- a/recipes/gsoap/gsoap_2.7.13.inc
+> +++ b/recipes/gsoap/gsoap_2.7.13.inc
+> @@ -3,7 +3,9 @@ for the development of SOAP Web Services and clients."
+>  SECTION =3D "devel"
+>  LICENSE =3D "GPL"
+> =20
+> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.tar.gz"
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.tar.gz	\
+> +	file://gsoap-2.7-openssl.patch	\
+
+Use spaces instead of tabulators before =C2=BB\=C2=AB?
+
+> +	file://unused_args.patch"
+
+Maybe you can move the quote =C2=BB"=C2=AB on a new line, so that future pa=
+tches
+will not create a difference for that line.
+
+>  inherit autotools
+
+
+Thanks,
+
+Paul
+
+--=-tfJtzuTMVwaG7y3sH/6w
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iD8DBQFNehLMMkyGM64RGpERAnZeAJ9I/A43aBEZmAQB2vYbVDdwEKGTkQCfQFT+
-NBTU7ROL4oul5LWGnIIACwA=
-=OEJI
+iEYEABECAAYFAk16FKsACgkQPX1aK2wOHVjF5ACfeR+XoOYptRkDeGOwLc59b6IL
+7OMAnRUzUXICXB9vQrRU53uiHG84JM/E
+=Htcm
 -----END PGP SIGNATURE-----
 
-
-
+--=-tfJtzuTMVwaG7y3sH/6w--
