@@ -1,37 +1,38 @@
 Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <attrezzopox@gmail.com>) id 1Py357-0003q3-D9
+	(envelope-from <kergoth@gmail.com>) id 1Py3SR-0004Dz-9c
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 15:12:52 +0100
-Received: by iyb26 with SMTP id 26so2795719iyb.6
+	Fri, 11 Mar 2011 15:36:47 +0100
+Received: by iyb26 with SMTP id 26so2818770iyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Mar 2011 06:10:53 -0800 (PST)
+	Fri, 11 Mar 2011 06:35:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:message-id:in-reply-to:subject
-	:mime-version:content-type;
-	bh=TdazzVxIUZEfx3PNrEw8jXDBXLBq5EMzeaQOqN0xTJQ=;
-	b=j0MnlEx142a3fA8pyQLL+6MKa/IbEdHCrT02K66yWMbkERwkpa4Zoql9hjS+w8R+Rr
-	YI1ROUzMjQVUn3dRVlmZpA3a6zXhA09MZgt4kpKmE9j7gEMB30ndL+S+mG+lf6esXH1b
-	h4aahJGUvpwKU8X3LfyR9ldnjA9GEOb2DSVxQ=
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
+	:date:x-google-sender-auth:message-id:subject:to:cc:content-type;
+	bh=sMXINmKdtxg6Gk4+Wlw7rysvCBMrXpyo6Eo0qmfFTS4=;
+	b=Bki/HvgTIrvhExK1XGUhPCvgBIzIn+DBfgMySXFzGdjv0CPGQN6XJ5Hj7/kIGhe4w4
+	MM3rGvGUNz0JhNjX97YPlN3lZ3yc2awWKpMXrsdKMvGp5iodKSpqqew75DClsAjRPv19
+	g6NPW9ssLhM1utHROHTp8THiEaZeVbV3C+wCE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:message-id:in-reply-to:subject:mime-version
-	:content-type;
-	b=Do9dEbbCUpBZtgoNDRBIC0FJgvNNMN4qL2swZzQ0l1XyDCfD0oUi3esYI4WFdVH3fu
-	xFnxH2c8g8UV1il7jU0v9ZAcZYgsh2BR39IgPw8WZiOdJkKyU4uFMttfNa57N8mcdYSH
-	wiSx7JSYr1gLtjPPy2DCcxo5pQNcri2R9VD1A=
-Received: by 10.43.45.135 with SMTP id uk7mr150425icb.301.1299852653171;
-	Fri, 11 Mar 2011 06:10:53 -0800 (PST)
-Received: from localhost (dmze.pantherenergy.us [209.12.107.35])
-	by mx.google.com with ESMTPS id wt14sm3156480icb.4.2011.03.11.06.10.51
-	(version=SSLv3 cipher=OTHER); Fri, 11 Mar 2011 06:10:51 -0800 (PST)
-Date: Fri, 11 Mar 2011 08:12:11 -0600 (CST)
-From: Marcus Gaskamp <attrezzopox@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <3921414.74.1299852728608.JavaMail.marcusg@IT-marcusg-desktop>
-In-Reply-To: <25548103.69.1299852642806.JavaMail.marcusg@IT-marcusg-desktop>
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type;
+	b=B20hMp0pXBnTcF0pYr5VsKeVTL7OAw6uk7NFpiuQH4ikAFaTSbCZQXHwHJsvg0x7W0
+	jlho+sDgj/7TfwmHjk0ke1AslNe2mVEPhiRUFC5k5E0Q5eoT6gfEdWYqSNDZUPFCosKN
+	pNPWrCU/PBVWn7DRUtnoB4qe4U/kNSZ9bGJGQ=
+Received: by 10.42.152.136 with SMTP id i8mr7404149icw.200.1299853651151; Fri,
+	11 Mar 2011 06:27:31 -0800 (PST)
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: EOL in string?
+Sender: kergoth@gmail.com
+Received: by 10.42.176.137 with HTTP; Fri, 11 Mar 2011 06:27:11 -0800 (PST)
+In-Reply-To: <ild7rh$50f$1@dough.gmane.org>
+References: <ild7rh$50f$1@dough.gmane.org>
+From: Chris Larson <clarson@kergoth.com>
+Date: Fri, 11 Mar 2011 07:27:11 -0700
+X-Google-Sender-Auth: 9o2pFTQ7mWM_fO8LtR9vhotS0EU
+Message-ID: <AANLkTikftdJ1_H3AyyQEU4EAz_8S--TywGFHmtAJa4S9@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Koen Kooi <k.kooi@student.utwente.nl>
+Subject: Re: Backporting bitbake python fixes to 1.12 branch?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,29 +46,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2011 14:12:52 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 11 Mar 2011 14:36:47 -0000
+Content-Type: text/plain; charset=UTF-8
 
+On Fri, Mar 11, 2011 at 6:25 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> Various people trying out the maintenance branch get stuck on "parsing
+> recipes: 0%" when using python 2.6.0 - 2.6.5-ish. I know master has
+> bugfixes for that, could someone please backport/cherrypick/rediff them
+> for the 1.12 branch?
 
-bitbake helloworld 
-NOTE: Out of date cache found, rebuilding... 
-ERROR: Error evaluating '${@oe.utils.ifelse(bool(d.getVar('MACHINE', True)), '${MACHINE}', 'BASE_PACKAGE_ARCH')}' | ETA: --:--:-- 
-Traceback (most recent call last): 
-File "/home/marcusg/stuff/bitbake/lib/bb/data_smart.py", line 117, in expandWithRefs 
-s = __expand_python_regexp__.sub(varparse.python_sub, s) 
-File "/home/marcusg/stuff/bitbake/lib/bb/data_smart.py", line 69, in python_sub 
-codeobj = compile(code.strip(), self.varname or "<expansion>", "eval") 
-File "MACHINE_ARCH", line 1 
-oe.utils.ifelse(bool(d.getVar('MACHINE', True)), '${MACHINE 
-^ 
-SyntaxError: EOL while scanning string literal 
-
-ERROR: Error parsing /home/marcusg/stuff/openembedded/recipes/perl/libhttp-cache-transparent-perl_1.0.bb: EOL while scanning string literal (MACHINE_ARCH, line 1) 
-ERROR: Command execution failed: Exited with 1 
-
-
-Was installed according to Chumby instructions http://wiki.chumby.com/mediawiki/index.php/Building_OpenEmbedded_(Beta)#Building_with_OpenEmbedded . Openembedded is pulled via git and bitbake is installed in a home directory and added to path. 
-
+Pushed to the 1.12 branch. Thanks for the reminder :)
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
