@@ -1,18 +1,18 @@
 Received: from edison.awellconnected.net ([83.167.180.132])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lukas@htc-linux.org>) id 1Pxqw2-0005VW-8M
+	(envelope-from <lukas@htc-linux.org>) id 1Pxqw6-0005Vg-7a
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 02:14:30 +0100
+	Fri, 11 Mar 2011 02:14:34 +0100
 Received: from ip-80-226-0-1.vodafone-net.de ([80.226.0.1]
 	helo=[10.225.64.244])
 	by edison.awellconnected.net with esmtp (Exim 4.69)
-	(envelope-from <lukas@htc-linux.org>) id 1PxquL-0005m7-AE
+	(envelope-from <lukas@htc-linux.org>) id 1PxquQ-0005mG-CB
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 01:12:46 +0000
+	Fri, 11 Mar 2011 01:12:50 +0000
 From: Lukas-David Gorris <lukas@htc-linux.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Mar 2011 02:03:32 +0100
-Message-ID: <1299805412.5437.31.camel@computer>
+Date: Fri, 11 Mar 2011 02:06:42 +0100
+Message-ID: <1299805602.5437.32.camel@computer>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.3 
 X-AntiAbuse: This header was added to track abuse,
@@ -38,7 +38,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2011 01:14:30 -0000
+X-List-Received-Date: Fri, 11 Mar 2011 01:14:34 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
@@ -72,6 +72,7 @@ index 0000000..e9a7891
 +
 -- 
 1.7.1
+
 
 
 
