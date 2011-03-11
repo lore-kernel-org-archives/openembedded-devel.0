@@ -1,46 +1,44 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PyCLv-0003iB-5t
+	(envelope-from <raj.khem@gmail.com>) id 1PyCTe-00041B-Dp
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Mar 2011 01:06:39 +0100
-Received: by yia13 with SMTP id 13so1390565yia.6
+	Sat, 12 Mar 2011 01:14:38 +0100
+Received: by yxn22 with SMTP id 22so1415418yxn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Mar 2011 16:05:01 -0800 (PST)
+	Fri, 11 Mar 2011 16:13:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id
+	h=domainkey-signature:date:from:to:subject:message-id
 	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:content-transfer-encoding:in-reply-to
-	:user-agent; bh=ls/4LjzndUsRegZJZvuyqDO7eV/5E9ZYIQzkUIztyLU=;
-	b=Rjn+fHSLwx23tAjHFEAki9Zhd2hzYYJ7ZEIVRPq7tnuQbrXYYH/IMi7WvzzpevrMU6
-	H7VSAm2F+iDWhA6xzLPM3q6fPAH5z92ttrU+lMKtNLYg8K9LTsGVpITWtiwo1gVw1xz+
-	SKsd6ePDwSpMpPdlzA4M9429DtKB5eZfV8FJo=
+	:content-disposition:in-reply-to:user-agent;
+	bh=t6xqxDPsjhXdEuO26799woAPOmcLyGdvLcAW7QoU+Fk=;
+	b=JNw3jgrtJ1lnQ+hOBgVK2+2P+jVnW7QiAkM2+P7vJg6IloYRzkgFYtRrhfPrLdUNBO
+	wS+kgGrk/f1b4n7nNTqrI9mqhMNYJpXWGqyHxSnlVTzAHSgC6SxtnrEV9WDHb/Ff2Uf0
+	4sg05Pnab99yp0lxHVifP/95MC3RNu7rUp53Q=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	b=uiC6jOUgDSdj8Rc+kh+OcIVzpY3opn27uiidATlpNBu4p2UMuWMNu9fBYIaPp9jg8j
-	iKGnSeBCIRp+Sm/WMHTDSdcppKRIUDcipWnHskc1TkvSt9Pq+Am93z0S097jXaa+13ZU
-	7c338BFl/xTds2oziO4HAfitd3FjcDBlMtPh4=
-Received: by 10.147.131.7 with SMTP id i7mr14513178yan.11.1299888300117;
-	Fri, 11 Mar 2011 16:05:00 -0800 (PST)
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	b=Ql6vMfE/HD7vdzFZFq/Zgg5/52jDfSANhgCK6USx1Dtr0R4JUkoFY518AfXWzOwwaC
+	X9Vx2HP3IUNxcxqV0ojBA0fo3L1R+sAXeh957tFqzL1VknWUS+mBlbqhLBykxa6tBxQl
+	FQcCOWbyDy5uwRKztNgPwNQQ2Zfrh0PGZgUZQ=
+Received: by 10.236.120.45 with SMTP id o33mr3267084yhh.53.1299887684089;
+	Fri, 11 Mar 2011 15:54:44 -0800 (PST)
 Received: from sakrah.homelinux.org
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id w4sm6003502anw.16.2011.03.11.16.04.58
+	by mx.google.com with ESMTPS id u45sm3298554yhn.9.2011.03.11.15.54.42
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 11 Mar 2011 16:04:59 -0800 (PST)
-Date: Fri, 11 Mar 2011 16:05:24 -0800
+	Fri, 11 Mar 2011 15:54:43 -0800 (PST)
+Date: Fri, 11 Mar 2011 15:55:07 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110312000524.GE5603@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org,
-	Koen Kooi <k.kooi@student.utwente.nl>
-References: <1299841477-23487-1-git-send-email-sledz@dresearch.de>
-	<ild6ma$ton$1@dough.gmane.org> <4D7A4566.6070607@dresearch.de>
+Message-ID: <20110311235507.GC5603@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <201103101553.27407.pgsellmann@portner-elektronik.at>
+	<4D7A86EB.2090504@mwester.net>
 MIME-Version: 1.0
-In-Reply-To: <4D7A4566.6070607@dresearch.de>
+In-Reply-To: <4D7A86EB.2090504@mwester.net>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Koen Kooi <k.kooi@student.utwente.nl>
-Subject: Re: [PATCH] net-snmp: disable libnl use
+Subject: Re: [PATCH] vsftpd-2.0.5: added dependency for correct build order
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,46 +52,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Mar 2011 00:06:39 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Sat, 12 Mar 2011 00:14:39 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 
-On (11/03/11 16:53), Steffen Sledz wrote:
-> On 03/11/2011 02:05 PM, Koen Kooi wrote:
-> > On 11-03-11 12:04, Steffen Sledz wrote:
-> >> Fixes compile error
+On (11/03/11 14:32), Mike Westerhof wrote:
+> On 3/10/2011 8:53 AM, Peter Gsellmann wrote:
+> > vsftpd needs the cap_* functions; if the library libcap is not built before vsftpd, an error occurs.
 > > 
-> >> | ./.libs/libnetsnmpmibs.so: undefined reference to `nl_handle_destroy'
-> >> | ./.libs/libnetsnmpmibs.so: undefined reference to `nl_handle_alloc'
+> > Signed-off-by: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+> > ---
+> >  recipes/vsftpd/vsftpd_2.0.5.bb |    4 +++-
+> >  1 files changed, 3 insertions(+), 1 deletions(-)
 > > 
-> >> which occurred sometimes depending on build order (not in clean package
-> >> only builds).
-> > 
-> > What features do we loose when disabling netlink support? I'd rather get
-> > the libnl recipe fixed (e.g. static lib only) instead of hacking the
-> > dependants.
+> > diff --git a/recipes/vsftpd/vsftpd_2.0.5.bb b/recipes/vsftpd/vsftpd_2.0.5.bb
+> > index 518628e..2486744 100644
+> > --- a/recipes/vsftpd/vsftpd_2.0.5.bb
+> > +++ b/recipes/vsftpd/vsftpd_2.0.5.bb
+> > @@ -3,6 +3,8 @@ SECTION = "console/network"
+> >  LICENSE = "GPL"
+> >  PR = "r2"
 > 
-> I'm not sure.
+> Technically, you'll want to bump the PR as well (although for this
+> particular change, it'll actually work without it)
 > 
-> But there is no dependency to libnl. If *libnl was not built before net-snmp* the autotools/configure does not find it. So in that case libnl wasn't used anyway.
-> 
-> Just in case *it was built before* net-snmp tries to use it and hits the mentioned error.
 
-So assuming that successful builds before did not link in libnl this
-seems ok to me.
+Yes a PR bump is needed here.
+
 > 
-> Regards,
-> Steffen
+> > +DEPENDS = "libcap"
+> > +
+> >  SRC_URI = "ftp://vsftpd.beasts.org/users/cevans/vsftpd-${PV}.tar.gz \
+> >             file://makefile.patch \
+> >             file://nopam.patch \
+> > @@ -20,7 +22,7 @@ do_configure() {
+> >  }
+> >  
+> >  do_compile() {
+> > -        oe_runmake "LIBS=-lcrypt -L${STAGING_LIBDIR}"
+> > +        oe_runmake "LIBS=-L${STAGING_LIBDIR} -lcrypt -lcap"
+> >  }
+> >  
+> >  do_install() {
 > 
-> -- 
-> DResearch Fahrzeugelektronik GmbH
-> Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-> Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-> Fax: +49 30 515932-299
-> Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-> Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-> Ust.-IDNr. DE273952058
 > 
 > _______________________________________________
 > Openembedded-devel mailing list
