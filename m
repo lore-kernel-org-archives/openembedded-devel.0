@@ -1,33 +1,25 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dp@xora.org.uk>) id 1Py3Vw-0004Hi-Uq
+	(envelope-from <philip@balister.org>) id 1Py3WI-0004IF-RM
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Mar 2011 15:40:25 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 997A8A470E
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Mar 2011 14:38:46 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id NTkfnbg9qBrH
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Mar 2011 14:38:45 +0000 (GMT)
-Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id D58CEA470B
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Mar 2011 14:38:44 +0000 (GMT)
-Message-ID: <4D7A3445.3010804@xora.org.uk>
-Date: Fri, 11 Mar 2011 14:40:05 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.15) Gecko/20110303 Lightning/1.0b2 Thunderbird/3.1.9
+	Fri, 11 Mar 2011 15:40:50 +0100
+Received: (qmail 10391 invoked by uid 1003); 11 Mar 2011 14:39:08 -0000
+Received: from unknown (HELO ?192.168.128.32?)
+	(philip@opensdr.com@70.56.61.235)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	11 Mar 2011 14:39:08 -0000
+Message-ID: <4D7A33FB.3020506@balister.org>
+Date: Fri, 11 Mar 2011 07:38:51 -0700
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1299778654-14912-1-git-send-email-tom_rini@mentor.com>
-In-Reply-To: <1299778654-14912-1-git-send-email-tom_rini@mentor.com>
-Subject: Re: [PATCH] gettext.bbclass: Add virtclass DEPENDS prepends
+References: <20110311081950.GG7353@excalibur.local>
+	<4D79F2A5.6060406@xora.org.uk>
+In-Reply-To: <4D79F2A5.6060406@xora.org.uk>
+Subject: Re: OE Bugzilla Future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,39 +33,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2011 14:40:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 11 Mar 2011 14:40:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Looks sensible to me
+On 03/11/2011 03:00 AM, Graeme Gregory wrote:
+> On 11/03/2011 08:19, Stefan Schmidt wrote:
+>> Comments? Volunteers?
+>>
+> Is there any newer bug tracking systems which should be considering?
+>
+> If we keep bugzilla then we are still running a system where people do
+> everything twice. They email patches to OE mailing list for review and
+> also have to file them into bugzilla. If we could somehow combine the
+> two functions. Effectively integrate patchwork and bug tracker into one
+> system. I have no idea if such a bug tracker exists.
+>
+> Also I might suggest we shift to launchpad or another hosted solution.
+> That way we can lesson the load on the admin team.
+>
+> Im happy to step up and be a bug massager if we decide to run with a
+> bugtracker, but I think we need to decide if that is the correct
+> workflow for us first.
 
-Acked-by: Graeme Gregory <dp@xora.org.uk>
+I'd like to see a place for users to report build failures and other 
+bugs in the meta-data. I do not think it should be for reporting distro 
+issues.
 
-G
+Patchwork is working well for tracking patches already, so we should not 
+encourage people to post patches to bugzilla.
 
-On 10/03/2011 17:37, Tom Rini wrote:
-> With BBCLASSEXTEND recipes which also modify DEPENDS_virtclass-native
-> gettext.bbclass is otherwise not working and gettext-native isn't
-> added.  So we need to have a DEPENDS_virtclass-$foo_prepend to
-> make sure GETTEXT_DEPENDS gets in.
-> 
-> Signed-off-by: Tom Rini <tom_rini@mentor.com>
-> ---
->  classes/gettext.bbclass |    3 +++
->  1 files changed, 3 insertions(+), 0 deletions(-)
-> 
-> diff --git a/classes/gettext.bbclass b/classes/gettext.bbclass
-> index 6c480b5..2303311 100644
-> --- a/classes/gettext.bbclass
-> +++ b/classes/gettext.bbclass
-> @@ -14,4 +14,7 @@ python () {
->  DEPENDS_GETTEXT = "gettext-native virtual/libiconv virtual/libintl"
->  
->  DEPENDS =+ "${DEPENDS_GETTEXT}"
-> +DEPENDS_virtclass-native_prepend = "${DEPENDS_GETTEXT} "
-> +DEPENDS_virtclass-nativesdk_prepend = "${DEPENDS_GETTEXT} "
-> +DEPENDS_virtclass-cross_prepend = "${DEPENDS_GETTEXT} "
->  EXTRA_OECONF += "--enable-nls"
+Having clear policies for what kind of bugs we track and how they are 
+managed is critical. An example of a management task is assigning bugs 
+to individuals, some people may be OK with having a bug master assign 
+them bugs and others may not. Peoples wishes should be respected.
 
+Philip
 
 
