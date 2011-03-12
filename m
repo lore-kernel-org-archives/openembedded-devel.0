@@ -1,40 +1,41 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PyUaT-0004ra-S5
+	(envelope-from <otavio.salvador@gmail.com>) id 1PyVMA-0006d1-Bw
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Mar 2011 20:34:54 +0100
-Received: by ywg8 with SMTP id 8so1614754ywg.6
+	Sat, 12 Mar 2011 21:24:11 +0100
+Received: by bwz10 with SMTP id 10so3307693bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Mar 2011 11:33:14 -0800 (PST)
+	Sat, 12 Mar 2011 12:21:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
-	:x-mailer:in-reply-to:references;
-	bh=wSRluprWH0AJJRuiI2J9OwWZfoTBnVLVCO15EKYtQ5E=;
-	b=Y3n+hjQjOgUR0g9XOuudMq0Na/+yzDpjVkHAq4ySTlg/nCYxlO6fSNy4tuPPWp5+Pt
-	36dOAI2yizIkw8TrZ8o2Rf3nBXbprTfkU+40MWSBCzvBBL4h/ci/b1DR8MpHBpmvOjt6
-	vwWflxFi8Q60vsmObRaWRlZ41JKkZfcxzH+to=
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=LhGrA+4uxb+XTxBnlA9Sy6qOfO/BN21y6se73DuAbZI=;
+	b=K0t3IoWBzF4KLAD3f8hrVDr0jV0d6pyP+kSIeTL3EE3aTxIxSsAY9NYGmOFulqANvw
+	GbzeLUlSGHZwHJzpzkiqkXz7PfqJLOKH+bCU6bwiOExa99Mr99JU3gpZ/d+MVOo9p9AY
+	lg0Hlsab075TmHygIO1qrJ0Rx1zUR+ZJ/tYSk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references;
-	b=HufFgdJTrYlTANItUAkPkttSa1+85o1DV0TNgWgdcPmCY0q9vRfkeKWdQhigSxIUgA
-	i/rNzRUr7seUyYMxK5FURPoonz61usKVJfJPnoG7W7WiapnyHWRfDo3ITw38u6PHt/ig
-	++0CFZC6MzJHMdG7iMYowz0Hhy8oLeDNm1CWY=
-Received: by 10.236.27.206 with SMTP id e54mr4525315yha.377.1299958052603;
-	Sat, 12 Mar 2011 11:27:32 -0800 (PST)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id c38sm4812832anc.38.2011.03.12.11.27.30
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 12 Mar 2011 11:27:31 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=D8B3tQO+/LaAx+XhVPTcLi8p0C1+5erQkKSLAPVwxgHUlH+9gt3PGXFIqshpo7PWzi
+	DoOwtQtgUvd08TPblZikthvApY+esoarxdcfXvlo8LNjnUbuuvveZYAL073/sqOMIHwG
+	SAvgfzcijTOtoQLHFwQnOCDLYCUb+BmInjVbw=
+MIME-Version: 1.0
+Received: by 10.204.75.23 with SMTP id w23mr4179239bkj.200.1299961266378; Sat,
+	12 Mar 2011 12:21:06 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.66.143 with HTTP; Sat, 12 Mar 2011 12:21:06 -0800 (PST)
+In-Reply-To: <1299958038-25216-6-git-send-email-otavio@ossystems.com.br>
+References: <1299958038-25216-1-git-send-email-otavio@ossystems.com.br>
+	<1299958038-25216-6-git-send-email-otavio@ossystems.com.br>
+Date: Sat, 12 Mar 2011 17:21:06 -0300
+X-Google-Sender-Auth: Km62XGNcka3qxrgGzvpr40Px69s
+Message-ID: <AANLkTimiahf+8xJ_nNePkXzB3Lhton2+5JqquPmruN24@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 12 Mar 2011 19:27:08 +0000
-Message-Id: <1299958038-25216-2-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <1299958038-25216-1-git-send-email-otavio@ossystems.com.br>
-References: <1299958038-25216-1-git-send-email-otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 01/11] freerdp: workaround gcc linking bug forcing -lpthread
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: Re: [PATCH 05/11] udev (165): move ConsoleKit support to udev-consolekit package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,36 +49,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Mar 2011 19:34:54 -0000
+X-List-Received-Date: Sat, 12 Mar 2011 20:24:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- recipes/freerdp/freerdp.inc |    7 ++++++-
- 1 files changed, 6 insertions(+), 1 deletions(-)
+On Sat, Mar 12, 2011 at 16:27, Otavio Salvador <otavio@ossystems.com.br> wr=
+ote:
+...
+> -PACKAGES =3D+ "libudev libgudev udev-utils"
+> +PACKAGES =3D+ "libudev libgudev udev-utils udev-consolekit"
+...
 
-diff --git a/recipes/freerdp/freerdp.inc b/recipes/freerdp/freerdp.inc
-index 0690d6e..10ce13c 100644
---- a/recipes/freerdp/freerdp.inc
-+++ b/recipes/freerdp/freerdp.inc
-@@ -8,10 +8,15 @@ RDEPENDS_${PN} += "xprop"
- SECTION = "x11/network"
- LICENSE = "Apache-2.0"
- 
--INC_PR = "r6"
-+INC_PR = "r7"
- 
- inherit pkgconfig autotools
- 
-+do_configure_prepend() {
-+	# workaround gcc linking bug
-+	find ${S} -name 'Makefile.am' | xargs -n 1 sed 's,-pthread,-lpthread -D_REENTRANT,g' -i
-+}
-+
- do_install_append() {
- 	rm ${D}${libdir}/freerdp/*.a ${D}${libdir}/freerdp/*.la
- }
--- 
-1.7.2.3
+Koen, can you take a look on this change?
 
+It seems Angstrom is the only used of this version and seems better to
+not provide support for consolekit by default so adding it as
+recommends or suggests seems wrong to me.
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
