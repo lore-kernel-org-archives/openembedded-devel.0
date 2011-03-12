@@ -1,43 +1,39 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PyEP2-0003mD-Ai
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Mar 2011 03:18:00 +0100
-Received: by bwz10 with SMTP id 10so2979397bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Mar 2011 18:16:22 -0800 (PST)
+	(envelope-from <raj.khem@gmail.com>)
+	id 1PyF7w-0004jM-V6; Sat, 12 Mar 2011 04:04:25 +0100
+Received: by gwb11 with SMTP id 11so1215603gwb.6
+	for <multiple recipients>; Fri, 11 Mar 2011 19:02:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=4tF6Hwkq7CbtFSbTUk6QNCG1wrefZQ9VfxEAEO69Yvo=;
-	b=ERpxAxx71DiVIhyvvCFWr+NaiO6GXtLUapbvWrUkjO0yCnFjwT4kK66T5L32xSb8Ui
-	dWJqsL9LKTpQuD5lbJNDVFNQLYUzMO+sSMogTdT0qbtT7h8SfHEUQ/5SLvbo9PGgiICU
-	O6oW7AzKp5TWuZh8Fe0A0QOm8BBHOizc2/4V4=
+	h=domainkey-signature:date:from:to:subject:message-id
+	:mail-followup-to:mime-version:content-type:content-disposition
+	:user-agent; bh=cG4jECobzlhfU6Gw6wqn7In4aUfOVBoIK7xgS7TAsDo=;
+	b=W45fbvB+VqESrRBZHHsPEDR0OA1ZCffN1t2B/JhL+36xs3bx6qZ2YsS2r7lnMV5F1A
+	076yAx/oI6YD1ru+GUrZs/4jDu3RwbH9noGuq18/kxAvzllOfeNK+y/sAbvfLw/JwRPM
+	z2+09Cl3VGD8x4Znnynnwqynyaqd9S7tUEvrk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=LxlqwBwBX7YdyC0HK12PvFik14T42E6+0y2OSA7XFC77YxfjgPS+9UiPkR0HT+UN0t
-	eDItV5mrXcdLiatrvZNv/urMutkeyzWnb5BNfIQIbZoskSvT5L7GbcbNiUk3cyj7CpU/
-	eNh26H2Mi1E+XnTwmFOTVeEYj2pESbMTbQAUw=
+	h=date:from:to:subject:message-id:mail-followup-to:mime-version
+	:content-type:content-disposition:user-agent;
+	b=xyS3bg88x01Vk7+BBg8cPz5SapvQIZp6kslDe2uhxFBaUkmdJYZEbkoGvr4H/LZ51M
+	5n1Za8bN8Ex3sHevZKdTbgV1Ryu76fsOZDg3t2By04rHZRUTbAi5AnIG4yEBZByTiZ9p
+	xYat2UeEklK7l4lEfYwSqR9FzjWX2EqkayHKg=
+Received: by 10.236.25.194 with SMTP id z42mr2224456yhz.312.1299898633830;
+	Fri, 11 Mar 2011 18:57:13 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id x75sm2281996yhn.24.2011.03.11.18.57.12
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 11 Mar 2011 18:57:13 -0800 (PST)
+Date: Fri, 11 Mar 2011 18:57:34 -0800
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Message-ID: <20110312025734.GA4556@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
 MIME-Version: 1.0
-Received: by 10.204.141.14 with SMTP id k14mr4169928bku.37.1299896182149; Fri,
-	11 Mar 2011 18:16:22 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.174.65 with HTTP; Fri, 11 Mar 2011 18:16:22 -0800 (PST)
-In-Reply-To: <20110311235346.GB5603@sakrah.homelinux.org>
-References: <AANLkTik1GhO_ZX_oP3_TB6JR_73QPmM7t3jzxd4vbOkW@mail.gmail.com>
-	<20110311080427.GB2478@sakrah.homelinux.org>
-	<AANLkTimLqGc2snJHw4Oymfz9q+t+GDWF+ErL46eTzJB5@mail.gmail.com>
-	<AANLkTinGAS+x7q=RVynv8QVV9gCD9RC_Yd+msyzYm=_m@mail.gmail.com>
-	<20110311235346.GB5603@sakrah.homelinux.org>
-Date: Sat, 12 Mar 2011 02:16:22 +0000
-X-Google-Sender-Auth: dnj7aIQH3ze3SKScqjA8yS2rJBA
-Message-ID: <AANLkTi==S4FgcwODFWjc+Rdf+zc6H+dC2CG7tingowCd@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] cpio.lzma compression level in bitbake.conf
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Wiki page for OE feature migration into oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,22 +47,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Mar 2011 02:18:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 12 Mar 2011 03:04:25 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hello,
+Hi
 
-I have fixed it in my tree and will send a new patchset tomorrow with
-it included.
+I have created a page to list all the features we would like to consider
+for getting into oe-core. I have populated it with some basic stuff to
+start of. I am expecting that everyone populate this table and create a
+comprehensive list of tasks out of it.
 
-Cheers,
+here is URL
+http://wiki.openembedded.org/index.php/List_of_OE_Features_For_oe-core
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Thanks
+
+-- 
+-Khem
 
 
