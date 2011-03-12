@@ -1,32 +1,35 @@
-Received: from ns.awellconnected.net ([83.167.180.132]
-	helo=edison.awellconnected.net)
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lukas@htc-linux.org>) id 1PyOqX-0005hP-3P
+	(envelope-from <otavio.salvador@gmail.com>) id 1PyUUw-0004if-W5
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Mar 2011 14:27:05 +0100
-Received: from ip-80-226-0-1.vodafone-net.de ([80.226.0.1] helo=[10.225.81.7])
-	by edison.awellconnected.net with esmtp (Exim 4.69)
-	(envelope-from <lukas@htc-linux.org>) id 1PyOos-0003Cp-K9
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Mar 2011 13:25:22 +0000
-From: Lukas-David Gorris <lukas@htc-linux.org>
+	Sat, 12 Mar 2011 20:29:11 +0100
+Received: by gwb11 with SMTP id 11so1380552gwb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 12 Mar 2011 11:27:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:sender:from:to:subject:date:message-id:x-mailer; 
+	bh=S54C2g4FGOprNmTPaJsWFMuwUHURbN1wMKsEqpm85Ww=;
+	b=Fl6WN8KZ9+VF0i21voCzpJEj5ThDV4M667hFBsfzS6KzUHI/SyBSi+f+k4FM6BHgZp
+	DYQsrg5OptMOZEGgsVdBKEyAEezowR2PVib1kgq1OOs8T/FGtI4JD+kDtt24TsnhFJZk
+	Q5iFLxioGFEK/NRJNGwM1/bpl6I+xOxoiR+tw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	b=TfVVnTbnqxJEf1kd8TSGt9ajyxqIYwQBvz6LKQizC2jMbnno+ZGQCUkmgAUEOHiCuT
+	oGr+oXwQ3FHBbqs2xC+ir9uCCFlqFjc5ScyMqwSnazLTEcW/qpH5gijHsG8jJvF+Q/U0
+	8Gcq0UD3Q8dHRl3C7IkrUu0DRbC6QaLXI9ZTM=
+Received: by 10.101.94.10 with SMTP id w10mr2203481anl.31.1299958050145;
+	Sat, 12 Mar 2011 11:27:30 -0800 (PST)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id c38sm4812832anc.38.2011.03.12.11.27.28
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 12 Mar 2011 11:27:29 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1299933388.3518.2.camel@computer>
-References: <1299933388.3518.2.camel@computer>
-Date: Sat, 12 Mar 2011 14:22:42 +0100
-Message-ID: <1299936162.3518.7.camel@computer>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - edison.awellconnected.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - htc-linux.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: Re: autoconf213: do_configure fails
+Date: Sat, 12 Mar 2011 19:27:07 +0000
+Message-Id: <1299958038-25216-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.3
+Subject: [PATCH 00/11] Patchset being in use on O.S. Systems internal tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,77 +43,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Mar 2011 13:27:05 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 12 Mar 2011 19:29:11 -0000
 
-Am Samstag, den 12.03.2011, 13:36 +0100 schrieb Lukas-David Gorris:
+Hello,
 
-> read /home/luke/linux/openembedded/tmp/work/armv7a-oe-linux-gnueabi/autoconf213-2.13-r13.0/autoconf-2.13/Makefile.am: No such file or directory
-> 
-> 
-> The same situation with autoconf213-native:
-> "Makefile.am: No such file or directory"
+This patchset has been in use in our internal tree and as usual we'd
+like to have it synced with upstream so we're proposing those for
+merging.
 
-I'm sorry, this topic has only been discussed previously in thread "[oe]
-[PATCH] autoconf.inc: check if files exist before using sed on them"
+The patches that are included on this set are:
 
-A patch has been supplied by Denis Carikli. Khem advised to do a build
-from scratch in order to make sure it doesn't affect other autoconf
-recipes.
+[PATCH 01/11] freerdp: workaround gcc linking bug forcing -lpthread
+[PATCH 02/11] freerdp: add singleton support with PDU error handling
+[PATCH 03/11] cmake.bbclass: drop CMAKE_MODULE_PATH as it works fine without it
+[PATCH 04/11] bitbake.conf: add XZ_INTEGRITY_CHECK and LZMA_COMPRESSION_LEVEL variables
+[PATCH 05/11] udev (165): move ConsoleKit support to udev-consolekit package
+[PATCH 06/11] xkeyboard-config: use --with-xkb-rules-symlink=xorg option
+[PATCH 07/11] xkeyboard-config (git): update to current version - 2.1 plus fixes
+[PATCH 08/11] linux (2.6.37): update to 2.6.37.3 stable patch
+[PATCH 09/11] libarchive: add
+[PATCH 10/11] cmake: depends on libarchive
+[PATCH 11/11] p910nd: update to 0.95 and improve packaging
 
-I am doing such a clean build now (with new tmpdir) and will update
-about the results.
+The diffstat of whole series is:
 
-Denis' patch:
+ classes/cmake.bbclass                              |    2 -
+ conf/bitbake.conf                                  |   10 +-
+ recipes/cmake/cmake_2.8.3.bb                       |    4 +-
+ recipes/freerdp/freerdp.inc                        |    7 +-
+ recipes/freerdp/freerdp/singleton-mode.patch       |  208 ++++++++++++++++++++
+ recipes/freerdp/freerdp_git.bb                     |    5 +-
+ .../0001-Patch-from-upstream-revision-1990.patch   |   45 +++++
+ .../0002-Patch-from-upstream-revision-1991.patch   |   34 ++++
+ .../0003-Patch-from-upstream-rev-2516.patch        |   65 ++++++
+ .../0004-Patch-from-upstream-rev-2514.patch        |   35 ++++
+ .../0005-Patch-from-upstream-rev-2520.patch        |   33 +++
+ .../0006-Patch-from-upstream-rev-2521.patch        |   30 +++
+ ...YS-error-when-setting-up-xattrs.-Closes-5.patch |   33 +++
+ recipes/libarchive/libarchive_2.8.4.bb             |   20 ++
+ recipes/linux/linux_2.6.37.bb                      |    8 +-
+ recipes/p910nd/p910nd_0.92.bb                      |   45 -----
+ recipes/p910nd/p910nd_0.95.bb                      |   49 +++++
+ recipes/udev/udev_165.bb                           |    7 +-
+ recipes/xkeyboard-config/xkeyboard-config.inc      |    9 +-
+ recipes/xkeyboard-config/xkeyboard-config_git.bb   |    6 +-
+ 20 files changed, 584 insertions(+), 71 deletions(-)
 
-diff --git a/recipes/autoconf/autoconf.inc
-b/recipes/autoconf/autoconf.inc
-index 7f22c2b..e0eecd3 100644
---- a/recipes/autoconf/autoconf.inc
-+++ b/recipes/autoconf/autoconf.inc
-@@ -8,7 +8,7 @@ RDEPENDS_${PN} = "m4 perl gnu-config"
- DEPENDS_virtclass-native = "m4-native gnu-config-native perl-native"
- RDEPENDS_${PN}_virtclass-native = "m4-native gnu-config-native
-perl-native"
- 
--INC_PR = "r13"
-+INC_PR = "r14"
- 
- SRC_URI = "${GNU_MIRROR}/autoconf/autoconf-${PV}.tar.bz2;name=autoconf
-\
- 	   file://program_prefix.patch"
-@@ -25,13 +25,19 @@ do_configure_prepend () {
- 		export ac_cv_path_M4="${ac_cv_path_M4=${bindir}/m4}"
- 		export ac_cv_prog_gnu_m4="${ac_cv_prog_gnu_m4=yes}"
- 	fi
--
--	sed -i -e's,^SUBDIRS = .*,SUBDIRS = ${SUBDIRS},' ${S}/Makefile.am
-+	if [ -e ${S}/Makefile.am ]
-+	then
-+		sed -i -e's,^SUBDIRS = .*,SUBDIRS = ${SUBDIRS},' ${S}/Makefile.am
-+	fi
- }
- 
- do_configure_append() {
- 	# replace paths to STAGING_BINDIR_NATIVE/perl with ${bindir}/perl
--	sed -i -e "1s:#!.*:#! /usr/bin/env perl:" ${S}/bin/*.in
-+	ls ${S} | grep -q '\.in$'
-+	if [ $? -eq 0 ]
-+	then
-+		sed -i -e "1s:#!.*:#! /usr/bin/env perl:" ${S}/bin/*.in
-+	fi
- }
- 
- PARALLEL_MAKE = ""
--- 
-1.7.0.4
-
-
-
-Best,
-
-Lukas
-
+Thanks in advance,
+Otavio Salvador
 
 
