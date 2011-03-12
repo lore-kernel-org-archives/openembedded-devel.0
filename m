@@ -1,44 +1,44 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PyCTe-00041B-Dp
+	(envelope-from <raj.khem@gmail.com>) id 1PyCW0-0004A9-2T
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Mar 2011 01:14:38 +0100
-Received: by yxn22 with SMTP id 22so1415418yxn.6
+	Sat, 12 Mar 2011 01:17:04 +0100
+Received: by gwb11 with SMTP id 11so1182586gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Mar 2011 16:13:00 -0800 (PST)
+	Fri, 11 Mar 2011 16:15:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:date:from:to:subject:message-id
 	:mail-followup-to:references:mime-version:content-type
 	:content-disposition:in-reply-to:user-agent;
-	bh=t6xqxDPsjhXdEuO26799woAPOmcLyGdvLcAW7QoU+Fk=;
-	b=JNw3jgrtJ1lnQ+hOBgVK2+2P+jVnW7QiAkM2+P7vJg6IloYRzkgFYtRrhfPrLdUNBO
-	wS+kgGrk/f1b4n7nNTqrI9mqhMNYJpXWGqyHxSnlVTzAHSgC6SxtnrEV9WDHb/Ff2Uf0
-	4sg05Pnab99yp0lxHVifP/95MC3RNu7rUp53Q=
+	bh=XvZ5ZvdCBHa0UzmR6J67DCJpPDd+1OZnLSnA/bDGcrs=;
+	b=rSRVOR5B2l3L24SdNcJu9Xvj5NRh8FolLv30iFgcr4PbFd5hJe2SktUn+jB/l0e5+w
+	ASt7K/Pb2syOhWtukh1LnnqaJ6a+hCASujQg/+ja35Mh4mij62EvzNkNgcuNB9RRT0JL
+	/CQj634LTrT7l2LozelypcAN/0XtEwrLKwiZ8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:mail-followup-to:references
 	:mime-version:content-type:content-disposition:in-reply-to
 	:user-agent;
-	b=Ql6vMfE/HD7vdzFZFq/Zgg5/52jDfSANhgCK6USx1Dtr0R4JUkoFY518AfXWzOwwaC
-	X9Vx2HP3IUNxcxqV0ojBA0fo3L1R+sAXeh957tFqzL1VknWUS+mBlbqhLBykxa6tBxQl
-	FQcCOWbyDy5uwRKztNgPwNQQ2Zfrh0PGZgUZQ=
-Received: by 10.236.120.45 with SMTP id o33mr3267084yhh.53.1299887684089;
-	Fri, 11 Mar 2011 15:54:44 -0800 (PST)
+	b=uS9reYHrM0zAqjpF4hnwXESeQt+el8+O5BuH/HeapNJZ+ZX6v8/VNASotBaytmcnq2
+	QTZ8LEFQmvGAK2m5wV+ejN1hb/6wVVqOfAVjDbUes9ww2HImpf1920sNJX1ErfrvwMsl
+	oYI1LUQzyXNxopKs0P9cnVTYHkMj7+68Wlk+M=
+Received: by 10.150.75.4 with SMTP id x4mr859109yba.410.1299888921657;
+	Fri, 11 Mar 2011 16:15:21 -0800 (PST)
 Received: from sakrah.homelinux.org
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id u45sm3298554yhn.9.2011.03.11.15.54.42
+	by mx.google.com with ESMTPS id f2sm3436296ybh.19.2011.03.11.16.15.19
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 11 Mar 2011 15:54:43 -0800 (PST)
-Date: Fri, 11 Mar 2011 15:55:07 -0800
+	Fri, 11 Mar 2011 16:15:20 -0800 (PST)
+Date: Fri, 11 Mar 2011 16:15:45 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110311235507.GC5603@sakrah.homelinux.org>
+Message-ID: <20110312001545.GG5603@sakrah.homelinux.org>
 Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <201103101553.27407.pgsellmann@portner-elektronik.at>
-	<4D7A86EB.2090504@mwester.net>
+References: <25548103.69.1299852642806.JavaMail.marcusg@IT-marcusg-desktop>
+	<3921414.74.1299852728608.JavaMail.marcusg@IT-marcusg-desktop>
 MIME-Version: 1.0
-In-Reply-To: <4D7A86EB.2090504@mwester.net>
+In-Reply-To: <3921414.74.1299852728608.JavaMail.marcusg@IT-marcusg-desktop>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH] vsftpd-2.0.5: added dependency for correct build order
+Subject: Re: EOL in string?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,48 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Mar 2011 00:14:39 -0000
+X-List-Received-Date: Sat, 12 Mar 2011 00:17:04 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (11/03/11 14:32), Mike Westerhof wrote:
-> On 3/10/2011 8:53 AM, Peter Gsellmann wrote:
-> > vsftpd needs the cap_* functions; if the library libcap is not built before vsftpd, an error occurs.
-> > 
-> > Signed-off-by: Peter Gsellmann <pgsellmann@portner-elektronik.at>
-> > ---
-> >  recipes/vsftpd/vsftpd_2.0.5.bb |    4 +++-
-> >  1 files changed, 3 insertions(+), 1 deletions(-)
-> > 
-> > diff --git a/recipes/vsftpd/vsftpd_2.0.5.bb b/recipes/vsftpd/vsftpd_2.0.5.bb
-> > index 518628e..2486744 100644
-> > --- a/recipes/vsftpd/vsftpd_2.0.5.bb
-> > +++ b/recipes/vsftpd/vsftpd_2.0.5.bb
-> > @@ -3,6 +3,8 @@ SECTION = "console/network"
-> >  LICENSE = "GPL"
-> >  PR = "r2"
+On (11/03/11 08:12), Marcus Gaskamp wrote:
 > 
-> Technically, you'll want to bump the PR as well (although for this
-> particular change, it'll actually work without it)
+> bitbake helloworld 
+> NOTE: Out of date cache found, rebuilding... 
+> ERROR: Error evaluating '${@oe.utils.ifelse(bool(d.getVar('MACHINE', True)), '${MACHINE}', 'BASE_PACKAGE_ARCH')}' | ETA: --:--:-- 
+> Traceback (most recent call last): 
+> File "/home/marcusg/stuff/bitbake/lib/bb/data_smart.py", line 117, in expandWithRefs 
+> s = __expand_python_regexp__.sub(varparse.python_sub, s) 
+> File "/home/marcusg/stuff/bitbake/lib/bb/data_smart.py", line 69, in python_sub 
+> codeobj = compile(code.strip(), self.varname or "<expansion>", "eval") 
+> File "MACHINE_ARCH", line 1 
+> oe.utils.ifelse(bool(d.getVar('MACHINE', True)), '${MACHINE 
+> ^ 
+> SyntaxError: EOL while scanning string literal 
+> 
+> ERROR: Error parsing /home/marcusg/stuff/openembedded/recipes/perl/libhttp-cache-transparent-perl_1.0.bb: EOL while scanning string literal (MACHINE_ARCH, line 1) 
+> ERROR: Command execution failed: Exited with 1 
 > 
 
-Yes a PR bump is needed here.
+please post the Build Configuration thats printed by bitbake before it
+begins to build
 
 > 
-> > +DEPENDS = "libcap"
-> > +
-> >  SRC_URI = "ftp://vsftpd.beasts.org/users/cevans/vsftpd-${PV}.tar.gz \
-> >             file://makefile.patch \
-> >             file://nopam.patch \
-> > @@ -20,7 +22,7 @@ do_configure() {
-> >  }
-> >  
-> >  do_compile() {
-> > -        oe_runmake "LIBS=-lcrypt -L${STAGING_LIBDIR}"
-> > +        oe_runmake "LIBS=-L${STAGING_LIBDIR} -lcrypt -lcap"
-> >  }
-> >  
-> >  do_install() {
+> Was installed according to Chumby instructions http://wiki.chumby.com/mediawiki/index.php/Building_OpenEmbedded_(Beta)#Building_with_OpenEmbedded . Openembedded is pulled via git and bitbake is installed in a home directory and added to path. 
 > 
 > 
 > _______________________________________________
