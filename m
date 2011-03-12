@@ -1,39 +1,34 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from ns.awellconnected.net ([83.167.180.132]
+	helo=edison.awellconnected.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1PyF7w-0004jM-V6; Sat, 12 Mar 2011 04:04:25 +0100
-Received: by gwb11 with SMTP id 11so1215603gwb.6
-	for <multiple recipients>; Fri, 11 Mar 2011 19:02:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id
-	:mail-followup-to:mime-version:content-type:content-disposition
-	:user-agent; bh=cG4jECobzlhfU6Gw6wqn7In4aUfOVBoIK7xgS7TAsDo=;
-	b=W45fbvB+VqESrRBZHHsPEDR0OA1ZCffN1t2B/JhL+36xs3bx6qZ2YsS2r7lnMV5F1A
-	076yAx/oI6YD1ru+GUrZs/4jDu3RwbH9noGuq18/kxAvzllOfeNK+y/sAbvfLw/JwRPM
-	z2+09Cl3VGD8x4Znnynnwqynyaqd9S7tUEvrk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:mime-version
-	:content-type:content-disposition:user-agent;
-	b=xyS3bg88x01Vk7+BBg8cPz5SapvQIZp6kslDe2uhxFBaUkmdJYZEbkoGvr4H/LZ51M
-	5n1Za8bN8Ex3sHevZKdTbgV1Ryu76fsOZDg3t2By04rHZRUTbAi5AnIG4yEBZByTiZ9p
-	xYat2UeEklK7l4lEfYwSqR9FzjWX2EqkayHKg=
-Received: by 10.236.25.194 with SMTP id z42mr2224456yhz.312.1299898633830;
-	Fri, 11 Mar 2011 18:57:13 -0800 (PST)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id x75sm2281996yhn.24.2011.03.11.18.57.12
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 11 Mar 2011 18:57:13 -0800 (PST)
-Date: Fri, 11 Mar 2011 18:57:34 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Message-ID: <20110312025734.GA4556@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Wiki page for OE feature migration into oe-core
+	(envelope-from <lukas@htc-linux.org>) id 1PyFdw-000596-Ku
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Mar 2011 04:37:28 +0100
+Received: from ip-80-226-0-1.vodafone-net.de ([80.226.0.1]
+	helo=[10.225.76.243])
+	by edison.awellconnected.net with esmtp (Exim 4.69)
+	(envelope-from <lukas@htc-linux.org>) id 1PyFcL-0008AU-MW
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Mar 2011 03:35:51 +0000
+From: Lukas-David Gorris <lukas@htc-linux.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20110311235903.GD5603@sakrah.homelinux.org>
+References: <1299838487.2321.9.camel@computer>
+	<20110311235903.GD5603@sakrah.homelinux.org>
+Date: Sat, 12 Mar 2011 04:35:38 +0100
+Message-ID: <1299900938.2785.1.camel@computer>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - edison.awellconnected.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - htc-linux.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: Re: [PATCH] htcleo: update xorg.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,23 +42,178 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Mar 2011 03:04:25 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 12 Mar 2011 03:37:28 -0000
+X-Groupsio-MsgNum: 30120
+Content-Type: multipart/mixed; boundary="=-0NYTOBx9+LN/gT18JKMj"
 
-Hi
+--=-0NYTOBx9+LN/gT18JKMj
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-I have created a page to list all the features we would like to consider
-for getting into oe-core. I have populated it with some basic stuff to
-start of. I am expecting that everyone populate this table and create a
-comprehensive list of tasks out of it.
+Am Freitag, den 11.03.2011, 15:59 -0800 schrieb Khem Raj:
+> On (11/03/11 11:14), Lukas-David Gorris wrote:
+> > Attached patch updates xorg.conf for htcleo machine. It's needed to
+> > disable tslib. Tested on the device.
+> > 
+> 
+> needs a PR bump. 
 
-here is URL
-http://wiki.openembedded.org/index.php/List_of_OE_Features_For_oe-core
+Thanks! Patch with added PR bump attached.
 
-Thanks
+Best,
+Lukas
 
+--=-0NYTOBx9+LN/gT18JKMj
+Content-Disposition: attachment; filename="htcleo_update-xorg-conf_bump-pr.diff"
+Content-Type: text/x-patch; name="htcleo_update-xorg-conf_bump-pr.diff"; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+From fef8c5c43547b9fe83a1d76120e499596d47afcc Mon Sep 17 00:00:00 2001
+From: Lukas-David Gorris <lukas.gorris@gmail.com>
+Date: Sat, 12 Mar 2011 04:31:50 +0100
+Subject: [PATCH] xserver-xorg-conf: Update htcleo/xorg.conf and bump PR
+
+Thanks to Khem for the review
+---
+ .../xserver-xorg-conf/htcleo/xorg.conf             |   93 +++++++++++++-------
+ recipes/xorg-xserver/xserver-xorg-conf_0.1.bb      |    2 +-
+ 2 files changed, 63 insertions(+), 32 deletions(-)
+
+diff --git a/recipes/xorg-xserver/xserver-xorg-conf/htcleo/xorg.conf b/recipes/xorg-xserver/xserver-xorg-conf/htcleo/xorg.conf
+index 4153a26..c819873 100644
+--- a/recipes/xorg-xserver/xserver-xorg-conf/htcleo/xorg.conf
++++ b/recipes/xorg-xserver/xserver-xorg-conf/htcleo/xorg.conf
+@@ -1,3 +1,11 @@
++Section "Module"
++        Load    "extmod"
++        Load    "dbe"
++        Load    "freetype"
++        Load    "type1"
++        Load    "record"
++EndSection
++
+ Section "Monitor"
+ 	Identifier "Monitor0"
+ 	Mode "480x800"
+@@ -18,17 +26,6 @@ Section "Device"
+ EndSection                                                
+ 
+ 
+-Section "Screen"                                        
+-        Identifier "Framebuffer"     
+-        Device  "fbdev"            
+-        Monitor "Monitor"               
+-	DefaultFbBpp 16
+-	SubSection "Display"
+-		Depth 16
+-        	Modes "480x800"
+-	EndSubSection
+-EndSection                                              
+-
+ Section "Screen"
+         Identifier "480x800x16"
+         Device  "fbdev"
+@@ -41,33 +38,67 @@ Section "Screen"
+ EndSection
+ 
+ 
+-Section "ServerLayout"                                 
+-        Identifier      "Builtin Default Layout"                                     
+-        Screen  "Framebuffer"        
+-	InputDevice "Touchscreen" "CorePointer"
+-        InputDevice "Keyboard" "CoreKeyboard"
+-EndSection        
++Section "ServerLayout"
++	Identifier      "Default Layout"
++	Screen		"480x800x16"
++#	InputDevice     "event0"
++#        InputDevice     "event1"
++#        InputDevice     "event2"
++        InputDevice     "event3"
++#        InputDevice     "event4"
++#        InputDevice     "event5"
++        InputDevice     "event6"
++EndSection 
++
++     
++Section "InputDevice"
++	Identifier      "event0"
++	Driver          "evdev"
++	Option          "Device"        "/dev/input/event0"
++EndSection
++
++Section "InputDevice"
++        Identifier      "event1"
++        Driver          "evdev"
++        Option          "Device"        "/dev/input/event1"
++EndSection
++
++
++Section "InputDevice"
++        Identifier      "event2"
++        Driver          "evdev"
++        Option          "Device"        "/dev/input/event2"
++EndSection
+ 
+ Section "InputDevice"
+-    Identifier     "Mouse0"
+-    Driver         "mouse"
+-    Option         "Protocol" "auto"
+-    Option         "Device" "/dev/input/mice"
+-    Option         "Emulate3Buttons" "no"
+-    Option         "ZAxisMapping" "4 5"
++        Identifier      "event3"
++        Driver          "evdev"
++        Option          "Device"        "/dev/input/event3"
++#	Option	"Calibration"		"6713 86 262 4110"
++#	Option "InvertY"	"1"
++#        Option "InvertX"        "1"
++
++#	Option	"SwapAxes"	"1" # unless it was already set to 1
++
+ EndSection
+ 
++Section "InputDevice"
++        Identifier      "event4"
++        Driver          "evdev"
++        Option          "Device"        "/dev/input/event4"
++EndSection
+ 
+ Section "InputDevice"
+-    Identifier     "Touchscreen"
+-    Driver         "tslib"
+-    Option         "Protocol" "auto"
+-    Option         "Device" "/dev/input/event0"
+-    Option         "CorePointer"    "true"
++        Identifier      "event5"
++        Driver          "evdev"
++        Option          "Device"        "/dev/input/event5"
+ EndSection
+ 
+ Section "InputDevice"
+-        Identifier  "Keyboard"
+-        Driver      "kbd"
+-        Option      "XkbLayout" "en_US"
++        Identifier      "event6"
++        Driver          "evdev"
++        Option          "Device"        "/dev/input/event6"
++#       Option "InvertY"        "1"
++
++#       Option  "SwapAxes"	"1" # unless it was already set to 1
+ EndSection
+diff --git a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
+index 692df9d..a549cf2 100644
+--- a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
++++ b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Machine specific xorg.conf files"
+-PR = "r43"
++PR = "r44"
+ 
+ SRC_URI = "file://xorg.conf"
+ 
 -- 
--Khem
+1.7.1
 
 
+--=-0NYTOBx9+LN/gT18JKMj--
