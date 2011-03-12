@@ -1,44 +1,43 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PyEGW-0003ab-Cj
+	(envelope-from <otavio.salvador@gmail.com>) id 1PyEP2-0003mD-Ai
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Mar 2011 03:09:12 +0100
-Received: by pvc30 with SMTP id 30so538237pvc.6
+	Sat, 12 Mar 2011 03:18:00 +0100
+Received: by bwz10 with SMTP id 10so2979397bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Mar 2011 18:07:32 -0800 (PST)
+	Fri, 11 Mar 2011 18:16:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id
-	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:content-transfer-encoding:in-reply-to
-	:user-agent; bh=ZHEdtIWTC5b2FxokTsDa8gsltQ525Y/6flw8k/j2eBE=;
-	b=Pdv4NF2eRH0Uz9VNtWc3yruM7Evdp8jH2uZAgAegvp1Y9YiQv0mdcL174zzORh3jfH
-	wAHdsHZbaPSOwsgM/raDCF0mnyLFKTN4qGPXzNKBnQbgu0W+8dW/IbrWkQnqozkI1a4P
-	x8M+sbjQ9idpSCGFM1VGxqOgrkwXcGc0j9Tk4=
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=4tF6Hwkq7CbtFSbTUk6QNCG1wrefZQ9VfxEAEO69Yvo=;
+	b=ERpxAxx71DiVIhyvvCFWr+NaiO6GXtLUapbvWrUkjO0yCnFjwT4kK66T5L32xSb8Ui
+	dWJqsL9LKTpQuD5lbJNDVFNQLYUzMO+sSMogTdT0qbtT7h8SfHEUQ/5SLvbo9PGgiICU
+	O6oW7AzKp5TWuZh8Fe0A0QOm8BBHOizc2/4V4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	b=e8AwIq2cY1zp3Kj7ZbELwPYwKOZ96t/XZNJsNWX1H+CktFzBQUyZaZLUjmkpyfs+Ft
-	Om8bS6yMDUS/GS2IdE5/LkDHfx3uBjWDGLi7kFHwasQ8+EWYOI77vVXJQP39wXHkhs9H
-	9eYtAWhE5wl7izav4j2D7nuHdBI/GigHNlO1A=
-Received: by 10.143.86.5 with SMTP id o5mr8194899wfl.216.1299889436938;
-	Fri, 11 Mar 2011 16:23:56 -0800 (PST)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id w32sm6038511wfh.19.2011.03.11.16.23.55
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 11 Mar 2011 16:23:55 -0800 (PST)
-Date: Fri, 11 Mar 2011 16:24:20 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110312002420.GM5603@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1299886498-22190-1-git-send-email-eric@eukrea.com>
-	<1299886498-22190-2-git-send-email-eric@eukrea.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=LxlqwBwBX7YdyC0HK12PvFik14T42E6+0y2OSA7XFC77YxfjgPS+9UiPkR0HT+UN0t
+	eDItV5mrXcdLiatrvZNv/urMutkeyzWnb5BNfIQIbZoskSvT5L7GbcbNiUk3cyj7CpU/
+	eNh26H2Mi1E+XnTwmFOTVeEYj2pESbMTbQAUw=
 MIME-Version: 1.0
-In-Reply-To: <1299886498-22190-2-git-send-email-eric@eukrea.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH 1/2] obexd: add 0.40
+Received: by 10.204.141.14 with SMTP id k14mr4169928bku.37.1299896182149; Fri,
+	11 Mar 2011 18:16:22 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.174.65 with HTTP; Fri, 11 Mar 2011 18:16:22 -0800 (PST)
+In-Reply-To: <20110311235346.GB5603@sakrah.homelinux.org>
+References: <AANLkTik1GhO_ZX_oP3_TB6JR_73QPmM7t3jzxd4vbOkW@mail.gmail.com>
+	<20110311080427.GB2478@sakrah.homelinux.org>
+	<AANLkTimLqGc2snJHw4Oymfz9q+t+GDWF+ErL46eTzJB5@mail.gmail.com>
+	<AANLkTinGAS+x7q=RVynv8QVV9gCD9RC_Yd+msyzYm=_m@mail.gmail.com>
+	<20110311235346.GB5603@sakrah.homelinux.org>
+Date: Sat, 12 Mar 2011 02:16:22 +0000
+X-Google-Sender-Auth: dnj7aIQH3ze3SKScqjA8yS2rJBA
+Message-ID: <AANLkTi==S4FgcwODFWjc+Rdf+zc6H+dC2CG7tingowCd@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [RFC] cpio.lzma compression level in bitbake.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,54 +51,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Mar 2011 02:09:12 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 12 Mar 2011 02:18:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On (12/03/11 00:34), Eric Bénard wrote:
-> Signed-off-by: Eric Bénard <eric@eukrea.com>
-> ---
->  recipes/bluez/obexd_0.40.bb |   17 +++++++++++++++++
->  1 files changed, 17 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/bluez/obexd_0.40.bb
-> 
-> diff --git a/recipes/bluez/obexd_0.40.bb b/recipes/bluez/obexd_0.40.bb
-> new file mode 100644
-> index 0000000..3d8790a
-> --- /dev/null
-> +++ b/recipes/bluez/obexd_0.40.bb
-> @@ -0,0 +1,17 @@
-> +DESCRIPTION = "OBEX Server and Client"
-> +DEPENDS = "openobex glib-2.0 dbus bluez4 libical"
-> +
-> +LICENSE = "GPLv2"
-> +
-> +PR = "r0"
-> +
-> +DEFAULT_PREFERENCE = "-1"
+Hello,
 
-why DP -1 ?
+I have fixed it in my tree and will send a new patchset tomorrow with
+it included.
 
-> +
-> +SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/obexd-${PV}.tar.gz"
-> +
-> +inherit autotools
-> +
-> +FILES_${PN} += "${datadir}/dbus-1/"
-> +
-> +SRC_URI[md5sum] = "243335d849700c30b318c360db95f62c"
-> +SRC_URI[sha256sum] = "5440a3df1d33c2c12cca61fff1e8d643488ea139eef7340cfdbf6d2e5ea3e04b"
-> -- 
-> 1.7.0.4
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Cheers,
 
--- 
--Khem
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
