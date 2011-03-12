@@ -1,41 +1,33 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from ns.awellconnected.net ([83.167.180.132]
+	helo=edison.awellconnected.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PyVMA-0006d1-Bw
+	(envelope-from <lukas@htc-linux.org>) id 1PyWeu-0008Tu-SN
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Mar 2011 21:24:11 +0100
-Received: by bwz10 with SMTP id 10so3307693bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Mar 2011 12:21:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=LhGrA+4uxb+XTxBnlA9Sy6qOfO/BN21y6se73DuAbZI=;
-	b=K0t3IoWBzF4KLAD3f8hrVDr0jV0d6pyP+kSIeTL3EE3aTxIxSsAY9NYGmOFulqANvw
-	GbzeLUlSGHZwHJzpzkiqkXz7PfqJLOKH+bCU6bwiOExa99Mr99JU3gpZ/d+MVOo9p9AY
-	lg0Hlsab075TmHygIO1qrJ0Rx1zUR+ZJ/tYSk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=D8B3tQO+/LaAx+XhVPTcLi8p0C1+5erQkKSLAPVwxgHUlH+9gt3PGXFIqshpo7PWzi
-	DoOwtQtgUvd08TPblZikthvApY+esoarxdcfXvlo8LNjnUbuuvveZYAL073/sqOMIHwG
-	SAvgfzcijTOtoQLHFwQnOCDLYCUb+BmInjVbw=
-MIME-Version: 1.0
-Received: by 10.204.75.23 with SMTP id w23mr4179239bkj.200.1299961266378; Sat,
-	12 Mar 2011 12:21:06 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.66.143 with HTTP; Sat, 12 Mar 2011 12:21:06 -0800 (PST)
-In-Reply-To: <1299958038-25216-6-git-send-email-otavio@ossystems.com.br>
-References: <1299958038-25216-1-git-send-email-otavio@ossystems.com.br>
-	<1299958038-25216-6-git-send-email-otavio@ossystems.com.br>
-Date: Sat, 12 Mar 2011 17:21:06 -0300
-X-Google-Sender-Auth: Km62XGNcka3qxrgGzvpr40Px69s
-Message-ID: <AANLkTimiahf+8xJ_nNePkXzB3Lhton2+5JqquPmruN24@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Sat, 12 Mar 2011 22:47:37 +0100
+Received: from ip-80-226-0-1.vodafone-net.de ([80.226.0.1] helo=[10.225.81.7])
+	by edison.awellconnected.net with esmtp (Exim 4.69)
+	(envelope-from <lukas@htc-linux.org>) id 1PyWdF-0002yd-1h
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Mar 2011 21:45:53 +0000
+From: Lukas-David Gorris <lukas@htc-linux.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: Re: [PATCH 05/11] udev (165): move ConsoleKit support to udev-consolekit package
+In-Reply-To: <1299936162.3518.7.camel@computer>
+References: <1299933388.3518.2.camel@computer>
+	<1299936162.3518.7.camel@computer>
+Date: Sat, 12 Mar 2011 22:45:48 +0100
+Message-ID: <1299966348.1322.3.camel@computer>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - edison.awellconnected.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - htc-linux.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: Re: autoconf213: do_configure fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,28 +41,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Mar 2011 20:24:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 12 Mar 2011 21:47:37 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Sat, Mar 12, 2011 at 16:27, Otavio Salvador <otavio@ossystems.com.br> wr=
-ote:
-...
-> -PACKAGES =3D+ "libudev libgudev udev-utils"
-> +PACKAGES =3D+ "libudev libgudev udev-utils udev-consolekit"
-...
+Am Samstag, den 12.03.2011, 14:22 +0100 schrieb Lukas-David Gorris: 
+> Am Samstag, den 12.03.2011, 13:36 +0100 schrieb Lukas-David Gorris:
+> 
 
-Koen, can you take a look on this change?
+> I am doing such a clean build now (with new tmpdir) and will update
+> about the results.
+> 
+> Denis' patch:
+> 
+> diff --git a/recipes/autoconf/autoconf.inc
+> b/recipes/autoconf/autoconf.inc
+> index 7f22c2b..e0eecd3 100644
+> --- a/recipes/autoconf/autoconf.inc
+> +++ b/recipes/autoconf/autoconf.inc
+> @@ -8,7 +8,7 @@ RDEPENDS_${PN} = "m4 perl gnu-config"
+>  DEPENDS_virtclass-native = "m4-native gnu-config-native perl-native"
+>  RDEPENDS_${PN}_virtclass-native = "m4-native gnu-config-native
+> perl-native"
+>  
+> -INC_PR = "r13"
+> +INC_PR = "r14"
+>  
+>  SRC_URI = "${GNU_MIRROR}/autoconf/autoconf-${PV}.tar.bz2;name=autoconf
+> \
+>  	   file://program_prefix.patch"
+> @@ -25,13 +25,19 @@ do_configure_prepend () {
+>  		export ac_cv_path_M4="${ac_cv_path_M4=${bindir}/m4}"
+>  		export ac_cv_prog_gnu_m4="${ac_cv_prog_gnu_m4=yes}"
+>  	fi
+> -
+> -	sed -i -e's,^SUBDIRS = .*,SUBDIRS = ${SUBDIRS},' ${S}/Makefile.am
+> +	if [ -e ${S}/Makefile.am ]
+> +	then
+> +		sed -i -e's,^SUBDIRS = .*,SUBDIRS = ${SUBDIRS},' ${S}/Makefile.am
+> +	fi
+>  }
+>  
+>  do_configure_append() {
+>  	# replace paths to STAGING_BINDIR_NATIVE/perl with ${bindir}/perl
+> -	sed -i -e "1s:#!.*:#! /usr/bin/env perl:" ${S}/bin/*.in
+> +	ls ${S} | grep -q '\.in$'
+> +	if [ $? -eq 0 ]
+> +	then
+> +		sed -i -e "1s:#!.*:#! /usr/bin/env perl:" ${S}/bin/*.in
+> +	fi
+>  }
+>  
+>  PARALLEL_MAKE = ""
 
-It seems Angstrom is the only used of this version and seems better to
-not provide support for consolekit by default so adding it as
-recommends or suggests seems wrong to me.
+Ok I rebuilt from scratch with that patch. Turns out it doesn't affect
+other autoconf versions:  recipes/autoconf/autoconf_2.65.bb builds
+fine. 
+But it doesn't fix autoconf213 and autoconf213-native . It will still
+fail, now with following error:
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+| + sed -i -e '1s:#!.*:#! /usr/bin/env perl:'
+'/home/luke/linux/openembedded/tmp/work/armv7a-oe-linux-gnueabi/autoconf213-2.13-r14.0/autoconf-2.13/bin/*.in'
+| sed: can't
+read /home/luke/linux/openembedded/tmp/work/armv7a-oe-linux-gnueabi/autoconf213-2.13-r14.0/autoconf-2.13/bin/*.in: No such file or directory
+
+The problem is autoconf213 lacks Makefile.in (all other autoconf recipes
+in OE have it).
+Any sed magicians who know how to solve this ?
+
+Best,
+
+Lukas
+
 
 
