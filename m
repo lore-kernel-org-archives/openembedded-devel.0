@@ -1,44 +1,43 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PyCW0-0004A9-2T
+	(envelope-from <raj.khem@gmail.com>) id 1PyCYj-0004Iw-Gq
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Mar 2011 01:17:04 +0100
-Received: by gwb11 with SMTP id 11so1182586gwb.6
+	Sat, 12 Mar 2011 01:19:53 +0100
+Received: by iyb26 with SMTP id 26so3334187iyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Mar 2011 16:15:22 -0800 (PST)
+	Fri, 11 Mar 2011 16:18:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:date:from:to:subject:message-id
 	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:in-reply-to:user-agent;
-	bh=XvZ5ZvdCBHa0UzmR6J67DCJpPDd+1OZnLSnA/bDGcrs=;
-	b=rSRVOR5B2l3L24SdNcJu9Xvj5NRh8FolLv30iFgcr4PbFd5hJe2SktUn+jB/l0e5+w
-	ASt7K/Pb2syOhWtukh1LnnqaJ6a+hCASujQg/+ja35Mh4mij62EvzNkNgcuNB9RRT0JL
-	/CQj634LTrT7l2LozelypcAN/0XtEwrLKwiZ8=
+	:content-disposition:content-transfer-encoding:in-reply-to
+	:user-agent; bh=4sYnQUpMzzJ5o1+7jVWQW5r1tcpzguKd2Ch5wALmhWM=;
+	b=yD8ptHlh4CN6m631t6dM27j4AJX1Yx7oiGjNA7i06QcHX+q+nZx3ivuKNqwZsFUXqU
+	1FU5kumBg99FaOXygX59GE5S+H2+DHLQ0X6u6PR547kLz0L4YZ34k9JAsozN+dsFcNPb
+	ErBdAIPwlWiUa04mcIW7WsNiI6GomlVPtkKgM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	b=uS9reYHrM0zAqjpF4hnwXESeQt+el8+O5BuH/HeapNJZ+ZX6v8/VNASotBaytmcnq2
-	QTZ8LEFQmvGAK2m5wV+ejN1hb/6wVVqOfAVjDbUes9ww2HImpf1920sNJX1ErfrvwMsl
-	oYI1LUQzyXNxopKs0P9cnVTYHkMj7+68Wlk+M=
-Received: by 10.150.75.4 with SMTP id x4mr859109yba.410.1299888921657;
-	Fri, 11 Mar 2011 16:15:21 -0800 (PST)
+	:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	b=BnB4hxilfNXu9GuWPkl+cAMstTR0NIO4IlkoVVqPd+e2tTGismCOojmM3E4H0wHI2r
+	9cMFJ+f30mEFcxaJqIv7peGF4kLbSAsz2VQpBdPGGF6hKpg6t53f4ew/91GyFhgCH3c2
+	mWG4Y0xH3bL8jAqzTtJUW2ZDMW7XSL7MrXmeY=
+Received: by 10.42.18.197 with SMTP id y5mr4695322ica.317.1299889093852;
+	Fri, 11 Mar 2011 16:18:13 -0800 (PST)
 Received: from sakrah.homelinux.org
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id f2sm3436296ybh.19.2011.03.11.16.15.19
+	by mx.google.com with ESMTPS id vm9sm3454493icb.12.2011.03.11.16.18.12
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 11 Mar 2011 16:15:20 -0800 (PST)
-Date: Fri, 11 Mar 2011 16:15:45 -0800
+	Fri, 11 Mar 2011 16:18:12 -0800 (PST)
+Date: Fri, 11 Mar 2011 16:18:37 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110312001545.GG5603@sakrah.homelinux.org>
+Message-ID: <20110312001837.GH5603@sakrah.homelinux.org>
 Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <25548103.69.1299852642806.JavaMail.marcusg@IT-marcusg-desktop>
-	<3921414.74.1299852728608.JavaMail.marcusg@IT-marcusg-desktop>
+References: <1299879352-3665-1-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-In-Reply-To: <3921414.74.1299852728608.JavaMail.marcusg@IT-marcusg-desktop>
+In-Reply-To: <1299879352-3665-1-git-send-email-eric@eukrea.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: EOL in string?
+Subject: Re: [PATCH] nodejs: update to 0.4.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,34 +51,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Mar 2011 00:17:04 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 12 Mar 2011 00:19:53 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On (11/03/11 08:12), Marcus Gaskamp wrote:
-> 
-> bitbake helloworld 
-> NOTE: Out of date cache found, rebuilding... 
-> ERROR: Error evaluating '${@oe.utils.ifelse(bool(d.getVar('MACHINE', True)), '${MACHINE}', 'BASE_PACKAGE_ARCH')}' | ETA: --:--:-- 
-> Traceback (most recent call last): 
-> File "/home/marcusg/stuff/bitbake/lib/bb/data_smart.py", line 117, in expandWithRefs 
-> s = __expand_python_regexp__.sub(varparse.python_sub, s) 
-> File "/home/marcusg/stuff/bitbake/lib/bb/data_smart.py", line 69, in python_sub 
-> codeobj = compile(code.strip(), self.varname or "<expansion>", "eval") 
-> File "MACHINE_ARCH", line 1 
-> oe.utils.ifelse(bool(d.getVar('MACHINE', True)), '${MACHINE 
-> ^ 
-> SyntaxError: EOL while scanning string literal 
-> 
-> ERROR: Error parsing /home/marcusg/stuff/openembedded/recipes/perl/libhttp-cache-transparent-perl_1.0.bb: EOL while scanning string literal (MACHINE_ARCH, line 1) 
-> ERROR: Command execution failed: Exited with 1 
-> 
+On (11/03/11 22:35), Eric Bénard wrote:
+> Signed-off-by: Eric Bénard <eric@eukrea.com>
 
-please post the Build Configuration thats printed by bitbake before it
-begins to build
-
+Acked-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  ...s-cc_0.4.0.patch => libev-cross-cc_0.4.2.patch} |    0
+>  .../nodejs/{nodejs_0.4.0.bb => nodejs_0.4.2.bb}    |    4 ++--
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>  rename recipes/nodejs/files/{libev-cross-cc_0.4.0.patch => libev-cross-cc_0.4.2.patch} (100%)
+>  rename recipes/nodejs/{nodejs_0.4.0.bb => nodejs_0.4.2.bb} (77%)
 > 
-> Was installed according to Chumby instructions http://wiki.chumby.com/mediawiki/index.php/Building_OpenEmbedded_(Beta)#Building_with_OpenEmbedded . Openembedded is pulled via git and bitbake is installed in a home directory and added to path. 
+> diff --git a/recipes/nodejs/files/libev-cross-cc_0.4.0.patch b/recipes/nodejs/files/libev-cross-cc_0.4.2.patch
+> similarity index 100%
+> rename from recipes/nodejs/files/libev-cross-cc_0.4.0.patch
+> rename to recipes/nodejs/files/libev-cross-cc_0.4.2.patch
+> diff --git a/recipes/nodejs/nodejs_0.4.0.bb b/recipes/nodejs/nodejs_0.4.2.bb
+> similarity index 77%
+> rename from recipes/nodejs/nodejs_0.4.0.bb
+> rename to recipes/nodejs/nodejs_0.4.2.bb
+> index be3d23e..912eb5d 100644
+> --- a/recipes/nodejs/nodejs_0.4.0.bb
+> +++ b/recipes/nodejs/nodejs_0.4.2.bb
+> @@ -9,8 +9,8 @@ SRC_URI = " \
+>    file://libev-cross-cc_${PV}.patch \
+>  "
+>  
+> -SRC_URI[md5sum] = "18f89256751f9b8e27dee8494f508171"
+> -SRC_URI[sha256sum] = "4a30bd9963373cb86a994479bdd451ab3b6f2124f0089493366315da79d3408e"
+> +SRC_URI[md5sum] = "9e9e791e125f6a601ebc663dc99c72a8"
+> +SRC_URI[sha256sum] = "09b1100ca6828eedbe52418fbeb3352d71c0b1ff3344c44a5af3efb80c5b908c"
+>  
+>  S = "${WORKDIR}/node-v${PV}"
+>  
+> -- 
+> 1.7.0.4
 > 
 > 
 > _______________________________________________
