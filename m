@@ -1,43 +1,27 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from smtpfb2-g21.free.fr ([212.27.42.10])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PyCfH-0004vM-Hx
+	(envelope-from <eric@eukrea.com>) id 1PyDBK-0005tD-7m
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Mar 2011 01:26:40 +0100
-Received: by yxn22 with SMTP id 22so1418003yxn.6
+	Sat, 12 Mar 2011 01:59:46 +0100
+Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
+	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 00A74D1A827
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Mar 2011 16:25:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id
-	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:content-transfer-encoding:in-reply-to
-	:user-agent; bh=oCLwHsxjeprL5XPVHsxyP453TrZmHcU7GlKibaIlt9s=;
-	b=OqaRArfJzFb9Ss3KZiyopSiwlqHW/7OCK48L9cFZaWhp/2DVXS5s1z1uYwM7+H3s7L
-	Ia5O8KQazxUdbP9bko7Br88j9cnIYOBMZITxdEwn9hGZT8b7lISBvyP0AhbWpYyUH1+J
-	I/9yaoc6GgylME3enNNuZxFJha5QZ3giWW7c0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	b=xVfEBBw2l9MJr8IdWt7rM60reotQcqNDnGk3XIucuZCZcluvX8I5eqAzuaCcUTiIh8
-	cuz3d5tZX082Um7axTvQciVNMFVZw7ViCtce5bkSiCpF074hkVzZhGNpK9+4DalEwcnp
-	77ZNTk36GLLm2nfIEWXKubC5ZdLsjqN3+nzOs=
-Received: by 10.101.36.9 with SMTP id o9mr1577605anj.127.1299889500602;
-	Fri, 11 Mar 2011 16:25:00 -0800 (PST)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id 37sm1847348anr.4.2011.03.11.16.24.58
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 11 Mar 2011 16:24:59 -0800 (PST)
-Date: Fri, 11 Mar 2011 16:25:24 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110312002524.GN5603@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1299886498-22190-1-git-send-email-eric@eukrea.com>
-	<1299886498-22190-3-git-send-email-eric@eukrea.com>
+	Sat, 12 Mar 2011 01:58:06 +0100 (CET)
+Received: from [192.168.2.15] (unknown [82.233.81.124])
+	by smtp3-g21.free.fr (Postfix) with ESMTP id C361FA6192
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 12 Mar 2011 01:51:51 +0100 (CET)
+Message-ID: <4D7AC3A6.9010104@eukrea.com>
+Date: Sat, 12 Mar 2011 01:51:50 +0100
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
-In-Reply-To: <1299886498-22190-3-git-send-email-eric@eukrea.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+To: openembedded-devel@lists.openembedded.org
+References: <1299886498-22190-1-git-send-email-eric@eukrea.com>	<1299886498-22190-3-git-send-email-eric@eukrea.com>
+	<20110312002524.GN5603@sakrah.homelinux.org>
+In-Reply-To: <20110312002524.GN5603@sakrah.homelinux.org>
 Subject: Re: [PATCH 2/2] bluez-hcidump: add 2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -52,55 +36,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Mar 2011 00:26:40 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 12 Mar 2011 00:59:46 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-On (12/03/11 00:34), Eric Bénard wrote:
-> Signed-off-by: Eric Bénard <eric@eukrea.com>
-> ---
->  recipes/bluez/bluez-hcidump_2.0.bb |   18 ++++++++++++++++++
->  1 files changed, 18 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/bluez/bluez-hcidump_2.0.bb
-> 
-> diff --git a/recipes/bluez/bluez-hcidump_2.0.bb b/recipes/bluez/bluez-hcidump_2.0.bb
-> new file mode 100644
-> index 0000000..94a7097
-> --- /dev/null
-> +++ b/recipes/bluez/bluez-hcidump_2.0.bb
-> @@ -0,0 +1,18 @@
-> +DESCRIPTION = "Linux Bluetooth Stack HCI Debugger Tool."
-> +SECTION = "console"
-> +PRIORITY = "optional"
-> +DEPENDS = "bluez-libs"
-> +LICENSE = "GPLv2"
-> +PR = "r0"
-> +
-> +DEFAULT_PREFERENCE = "-1"
+On 12/03/2011 01:25, Khem Raj wrote:
+> On (12/03/11 00:34), Eric B=C3=A9nard wrote:
+>> Signed-off-by: Eric B=C3=A9nard<eric@eukrea.com>
+>> ---
+>>   recipes/bluez/bluez-hcidump_2.0.bb |   18 ++++++++++++++++++
+>>   1 files changed, 18 insertions(+), 0 deletions(-)
+>>   create mode 100644 recipes/bluez/bluez-hcidump_2.0.bb
+>>
+>> diff --git a/recipes/bluez/bluez-hcidump_2.0.bb b/recipes/bluez/bluez-=
+hcidump_2.0.bb
+>> new file mode 100644
+>> index 0000000..94a7097
+>> --- /dev/null
+>> +++ b/recipes/bluez/bluez-hcidump_2.0.bb
+>> @@ -0,0 +1,18 @@
+>> +DESCRIPTION =3D "Linux Bluetooth Stack HCI Debugger Tool."
+>> +SECTION =3D "console"
+>> +PRIORITY =3D "optional"
+>> +DEPENDS =3D "bluez-libs"
+>> +LICENSE =3D "GPLv2"
+>> +PR =3D "r0"
+>> +
+>> +DEFAULT_PREFERENCE =3D "-1"
+>
+> why DP -1 ?
+>
+because not yet tested on real hardware (which will arrive in 2 weeks, I'=
+m=20
+just upgrading the tools I'll then need ;)
 
-why DP -1 ?
+Eric
 
-> +
-> +SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/bluez-hcidump-${PV}.tar.gz"
-> +S = "${WORKDIR}/bluez-hcidump-${PV}"
-> +
-> +EXTRA_OECONF = "--with-bluez-libs=${STAGING_LIBDIR} --with-bluez-includes=${STAGING_INCDIR}"
-> +
-> +inherit autotools
-> +
-> +SRC_URI[md5sum] = "5c2e3ef0a68b2845047867ba51ff8ac9"
-> +SRC_URI[sha256sum] = "b3b64fd0b18301df07d3aaf34c037c1e4808b4aaf702294822d62b5424f617fd"
-> -- 
-> 1.7.0.4
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
--- 
--Khem
 
 
