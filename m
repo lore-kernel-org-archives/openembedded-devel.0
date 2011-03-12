@@ -1,34 +1,25 @@
-Received: from ns.awellconnected.net ([83.167.180.132]
-	helo=edison.awellconnected.net)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lukas@htc-linux.org>) id 1PyFdw-000596-Ku
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Mar 2011 04:37:28 +0100
-Received: from ip-80-226-0-1.vodafone-net.de ([80.226.0.1]
-	helo=[10.225.76.243])
-	by edison.awellconnected.net with esmtp (Exim 4.69)
-	(envelope-from <lukas@htc-linux.org>) id 1PyFcL-0008AU-MW
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Mar 2011 03:35:51 +0000
-From: Lukas-David Gorris <lukas@htc-linux.org>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PyMiR-0003ce-FY for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Mar 2011 12:10:35 +0100
+Received: from f053032177.adsl.alicedsl.de ([78.53.32.177]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PyMgt-0002g1-1a for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Mar 2011 11:08:59 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20110311235903.GD5603@sakrah.homelinux.org>
-References: <1299838487.2321.9.camel@computer>
-	<20110311235903.GD5603@sakrah.homelinux.org>
-Date: Sat, 12 Mar 2011 04:35:38 +0100
-Message-ID: <1299900938.2785.1.camel@computer>
+In-Reply-To: <1299084995.3857.68.camel@mattotaupa>
+References: <1299076864.3857.46.camel@mattotaupa>
+	<20110302154001.GA13969@mi.fu-berlin.de>
+	<1299084995.3857.68.camel@mattotaupa>
+Date: Sat, 12 Mar 2011 12:08:57 +0100
+Message-ID: <1299928137.3680.5.camel@mattotaupa>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - edison.awellconnected.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - htc-linux.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: Re: [PATCH] htcleo: update xorg.conf
+X-Mailer: Evolution 2.32.2 
+Subject: Re: minimal-uclibc: alsa-utils_1.0.24.2: task compile fails with `warning: incompatible implicit declaration of built-in function 'exp10'`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,178 +33,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Mar 2011 03:37:28 -0000
-X-Groupsio-MsgNum: 30120
-Content-Type: multipart/mixed; boundary="=-0NYTOBx9+LN/gT18JKMj"
+X-List-Received-Date: Sat, 12 Mar 2011 11:10:35 -0000
+X-Groupsio-MsgNum: 30121
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-+bVPWo2PZwZ+8bxKpyYQ"
 
---=-0NYTOBx9+LN/gT18JKMj
+--=-+bVPWo2PZwZ+8bxKpyYQ
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-Am Freitag, den 11.03.2011, 15:59 -0800 schrieb Khem Raj:
-> On (11/03/11 11:14), Lukas-David Gorris wrote:
-> > Attached patch updates xorg.conf for htcleo machine. It's needed to
-> > disable tslib. Tested on the device.
-> > 
-> 
-> needs a PR bump. 
+Am Mittwoch, den 02.03.2011, 17:56 +0100 schrieb Paul Menzel:
+> Am Mittwoch, den 02.03.2011, 16:40 +0100 schrieb Henning Heinold:
+> > You didnt tell us your uclibc version. Try git.
+>=20
+> I have nothing in my `conf/local.conf` and therefore uclibc_git is used
+> by default. A line from the build log.
+>=20
+>     NOTE: package uclibc-initial-git-r35.8+gitr0+094d82d3b3e8f8c8460a802b=
+7a9548f3ae4fda46
 
-Thanks! Patch with added PR bump attached.
+Just to clarify, since I was a little confused, since
+`DEFAULT_PREFERENCE =3D "-1"` is in `uclibc_git.bb`.
 
-Best,
-Lukas
+        $ git grep PREFERRED_UCLIBC
+        conf/distro/include/sane-toolchain-uclibc.inc:PREFERRED_VERSION_ucl=
+ibc                    ?=3D "${PREFERRED_UCLIBC_VERSION}"
+        conf/distro/include/sane-toolchain-uclibc.inc:PREFERRED_VERSION_ucl=
+ibc-initial            ?=3D "${PREFERRED_UCLIBC_VERSION}"
+        conf/distro/include/sane-toolchain-uclibc.inc:PREFERRED_VERSION_ucl=
+ibc-cross              ?=3D "${PREFERRED_UCLIBC_VERSION}"
+        conf/distro/include/sane-toolchain-uclibc.inc:PREFERRED_VERSION_ucl=
+ibc-cross-sdk          ?=3D "${PREFERRED_UCLIBC_VERSION}"
+        conf/distro/include/sane-toolchain-uclibc.inc:PREFERRED_VERSION_ucl=
+ibc-cross-initial      ?=3D "${PREFERRED_UCLIBC_VERSION}"
+        conf/distro/include/sane-toolchain-uclibc.inc:PREFERRED_VERSION_ucl=
+ibc-cross-intermediate ?=3D "${PREFERRED_UCLIBC_VERSION}"
+        conf/distro/include/sane-toolchain.inc:PREFERRED_UCLIBC_VERSION    =
+         ?=3D "git"
 
---=-0NYTOBx9+LN/gT18JKMj
-Content-Disposition: attachment; filename="htcleo_update-xorg-conf_bump-pr.diff"
-Content-Type: text/x-patch; name="htcleo_update-xorg-conf_bump-pr.diff"; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-
-From fef8c5c43547b9fe83a1d76120e499596d47afcc Mon Sep 17 00:00:00 2001
-From: Lukas-David Gorris <lukas.gorris@gmail.com>
-Date: Sat, 12 Mar 2011 04:31:50 +0100
-Subject: [PATCH] xserver-xorg-conf: Update htcleo/xorg.conf and bump PR
-
-Thanks to Khem for the review
----
- .../xserver-xorg-conf/htcleo/xorg.conf             |   93 +++++++++++++-------
- recipes/xorg-xserver/xserver-xorg-conf_0.1.bb      |    2 +-
- 2 files changed, 63 insertions(+), 32 deletions(-)
-
-diff --git a/recipes/xorg-xserver/xserver-xorg-conf/htcleo/xorg.conf b/recipes/xorg-xserver/xserver-xorg-conf/htcleo/xorg.conf
-index 4153a26..c819873 100644
---- a/recipes/xorg-xserver/xserver-xorg-conf/htcleo/xorg.conf
-+++ b/recipes/xorg-xserver/xserver-xorg-conf/htcleo/xorg.conf
-@@ -1,3 +1,11 @@
-+Section "Module"
-+        Load    "extmod"
-+        Load    "dbe"
-+        Load    "freetype"
-+        Load    "type1"
-+        Load    "record"
-+EndSection
-+
- Section "Monitor"
- 	Identifier "Monitor0"
- 	Mode "480x800"
-@@ -18,17 +26,6 @@ Section "Device"
- EndSection                                                
- 
- 
--Section "Screen"                                        
--        Identifier "Framebuffer"     
--        Device  "fbdev"            
--        Monitor "Monitor"               
--	DefaultFbBpp 16
--	SubSection "Display"
--		Depth 16
--        	Modes "480x800"
--	EndSubSection
--EndSection                                              
--
- Section "Screen"
-         Identifier "480x800x16"
-         Device  "fbdev"
-@@ -41,33 +38,67 @@ Section "Screen"
- EndSection
- 
- 
--Section "ServerLayout"                                 
--        Identifier      "Builtin Default Layout"                                     
--        Screen  "Framebuffer"        
--	InputDevice "Touchscreen" "CorePointer"
--        InputDevice "Keyboard" "CoreKeyboard"
--EndSection        
-+Section "ServerLayout"
-+	Identifier      "Default Layout"
-+	Screen		"480x800x16"
-+#	InputDevice     "event0"
-+#        InputDevice     "event1"
-+#        InputDevice     "event2"
-+        InputDevice     "event3"
-+#        InputDevice     "event4"
-+#        InputDevice     "event5"
-+        InputDevice     "event6"
-+EndSection 
-+
-+     
-+Section "InputDevice"
-+	Identifier      "event0"
-+	Driver          "evdev"
-+	Option          "Device"        "/dev/input/event0"
-+EndSection
-+
-+Section "InputDevice"
-+        Identifier      "event1"
-+        Driver          "evdev"
-+        Option          "Device"        "/dev/input/event1"
-+EndSection
-+
-+
-+Section "InputDevice"
-+        Identifier      "event2"
-+        Driver          "evdev"
-+        Option          "Device"        "/dev/input/event2"
-+EndSection
- 
- Section "InputDevice"
--    Identifier     "Mouse0"
--    Driver         "mouse"
--    Option         "Protocol" "auto"
--    Option         "Device" "/dev/input/mice"
--    Option         "Emulate3Buttons" "no"
--    Option         "ZAxisMapping" "4 5"
-+        Identifier      "event3"
-+        Driver          "evdev"
-+        Option          "Device"        "/dev/input/event3"
-+#	Option	"Calibration"		"6713 86 262 4110"
-+#	Option "InvertY"	"1"
-+#        Option "InvertX"        "1"
-+
-+#	Option	"SwapAxes"	"1" # unless it was already set to 1
-+
- EndSection
- 
-+Section "InputDevice"
-+        Identifier      "event4"
-+        Driver          "evdev"
-+        Option          "Device"        "/dev/input/event4"
-+EndSection
- 
- Section "InputDevice"
--    Identifier     "Touchscreen"
--    Driver         "tslib"
--    Option         "Protocol" "auto"
--    Option         "Device" "/dev/input/event0"
--    Option         "CorePointer"    "true"
-+        Identifier      "event5"
-+        Driver          "evdev"
-+        Option          "Device"        "/dev/input/event5"
- EndSection
- 
- Section "InputDevice"
--        Identifier  "Keyboard"
--        Driver      "kbd"
--        Option      "XkbLayout" "en_US"
-+        Identifier      "event6"
-+        Driver          "evdev"
-+        Option          "Device"        "/dev/input/event6"
-+#       Option "InvertY"        "1"
-+
-+#       Option  "SwapAxes"	"1" # unless it was already set to 1
- EndSection
-diff --git a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-index 692df9d..a549cf2 100644
---- a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-+++ b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "Machine specific xorg.conf files"
--PR = "r43"
-+PR = "r44"
- 
- SRC_URI = "file://xorg.conf"
- 
--- 
-1.7.1
+So `minimal-uclibc` uses `uclibc_git.bb` by default.
 
 
---=-0NYTOBx9+LN/gT18JKMj--
+Thanks,
+
+Paul
+
+--=-+bVPWo2PZwZ+8bxKpyYQ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk17VEAACgkQPX1aK2wOHVgjUwCeJL5933z+eKhE1uUsD5s9HTg1
+jGoAnRy8yGbMldcoICPyieeYIHSSwH4v
+=q9XN
+-----END PGP SIGNATURE-----
+
+--=-+bVPWo2PZwZ+8bxKpyYQ--
