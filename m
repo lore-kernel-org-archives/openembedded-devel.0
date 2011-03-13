@@ -1,42 +1,42 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PysAx-0007mm-A7
+	(envelope-from <raj.khem@gmail.com>) id 1PysR4-0000q7-5C
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Mar 2011 21:46:08 +0100
-Received: by pvc30 with SMTP id 30so723322pvc.6
+	Sun, 13 Mar 2011 22:02:52 +0100
+Received: by pwj9 with SMTP id 9so750432pwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Mar 2011 13:44:26 -0700 (PDT)
+	Sun, 13 Mar 2011 14:01:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
 	:subject:references:in-reply-to:content-type
 	:content-transfer-encoding;
-	bh=irLUiDoBexRrRnkO+t863k+NTDCSNcopgDwDKlv2cP4=;
-	b=ULvHf+WYvuJKw+dqwmnzDWIpt/9UsIGVbhnPkZgEwCd9gnVgpsHmtt9gy5Agw00Mu2
-	XfKTj5KISJBb0Qt31xR3emg57G5K1mW8m/utKw6/2IHXygkjyYxk9Q49IAZXdwmT5mWE
-	8JUMpaivkbfR3LoUrJzirgyRz3sa1/07bpM5I=
+	bh=RWgdm8UbgVYw79Z4kIi5sD16incSbj5PDX1TypScHrA=;
+	b=ig0MWxA84S7TRZZBDwy4X2rOI/6QsrbLDQGt0r6c8MpOX7AkZ8fKquy+sZUkLkMUaW
+	GxwH5LRMosDtBdbwHtgybSqYxf0RhVsPXoCDzP1zgb+KIZze2ezTvi6MBpX+rl8rRfX1
+	7DPFbkUSM2UXBh3PwU1Tz5S6oW7NiMDBtIlFY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:user-agent:mime-version:to:subject:references
 	:in-reply-to:content-type:content-transfer-encoding;
-	b=Ra9l66XCzgmiAisLiFuSOvotS+1lhZ+vUmNcsqsoyMGwLSzuvpEgOnYxdKPjGQJ1SV
-	kQcB9H3sAab4TDjXH38RTy9aVZbwbdqxsWsDrvfZuPyTTZNig3In0lVPjUFAoKXSYOo9
-	md+ok0Yas1t5ZCYW6YNQ2ghNUUyHuKjCJy224=
-Received: by 10.142.212.11 with SMTP id k11mr3531673wfg.372.1300047638684;
-	Sun, 13 Mar 2011 13:20:38 -0700 (PDT)
+	b=up05ZjuYirqOmxpMIDrUR06AWHx3WGPAJvZLbH/CmL2QGneCGka6yVUXbPioftCP/g
+	IdUoO0EzMxOZfx7rVwWiHzv7quUWhk8QJrDRq3xsUsuRH39VeOl/gcgFYZ8aBNOzM8u4
+	nNNFWYcXAy1bYbJp5RhYlJLtBjSFC6g7/qGsY=
+Received: by 10.142.89.20 with SMTP id m20mr4599822wfb.79.1300048247635;
+	Sun, 13 Mar 2011 13:30:47 -0700 (PDT)
 Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id d35sm9163682wfj.9.2011.03.13.13.20.35
-	(version=SSLv3 cipher=OTHER); Sun, 13 Mar 2011 13:20:36 -0700 (PDT)
-Message-ID: <4D7D2708.8060902@gmail.com>
-Date: Sun, 13 Mar 2011 13:20:24 -0700
+	by mx.google.com with ESMTPS id w11sm9175061wfh.6.2011.03.13.13.30.45
+	(version=SSLv3 cipher=OTHER); Sun, 13 Mar 2011 13:30:46 -0700 (PDT)
+Message-ID: <4D7D296A.7000909@gmail.com>
+Date: Sun, 13 Mar 2011 13:30:34 -0700
 From: Khem Raj <raj.khem@gmail.com>
 User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
 	rv:1.9.2.15) Gecko/20110303 Thunderbird/3.1.9
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1300035425-15984-1-git-send-email-eric@eukrea.com>
-	<1300035425-15984-4-git-send-email-eric@eukrea.com>
-In-Reply-To: <1300035425-15984-4-git-send-email-eric@eukrea.com>
-Subject: Re: [PATCH 4/4] busybox: remove 1.18.3
+References: <1300042739-17381-1-git-send-email-eric@eukrea.com>
+	<1300042739-17381-8-git-send-email-eric@eukrea.com>
+In-Reply-To: <1300042739-17381-8-git-send-email-eric@eukrea.com>
+Subject: Re: [PATCH 8/9] php: add 5.3.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,2106 +50,429 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Mar 2011 20:46:08 -0000
+X-List-Received-Date: Sun, 13 Mar 2011 21:02:52 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 3/13/2011 9:57 AM, Eric Bénard wrote:
-> now that 1.18.4 is default for angstrom and slugos
+On 3/13/2011 11:58 AM, Eric Bénard wrote:
+> which is the latest version
 >
 > Signed-off-by: Eric Bénard<eric@eukrea.com>
 
-Conditionally when you get approval for distros
-
 Acked-by: Khem Raj <raj.khem@gmail.com>
-
 > ---
->   recipes/busybox/busybox-1.18.3/B921600.patch       |   13 -
->   recipes/busybox/busybox-1.18.3/defconfig           |  873 -----------------
->   recipes/busybox/busybox-1.18.3/fdisk_nios2.patch   |   13 -
->   .../busybox/busybox-1.18.3/get_header_tar.patch    |   13 -
->   recipes/busybox/busybox-1.18.3/slugos/defconfig    |  986 --------------------
->   .../busybox-1.18.3/udhcpc-fix-nfsroot.patch        |   47 -
->   .../busybox-1.18.3/udhcpc-new-nfsroot.patch        |   16 -
->   recipes/busybox/busybox-1.18.3/udhcpscript.patch   |   13 -
->   recipes/busybox/busybox-static_1.18.3.bb           |    4 -
->   recipes/busybox/busybox_1.18.3.bb                  |   26 -
->   10 files changed, 0 insertions(+), 2004 deletions(-)
->   delete mode 100644 recipes/busybox/busybox-1.18.3/B921600.patch
->   delete mode 100644 recipes/busybox/busybox-1.18.3/defconfig
->   delete mode 100644 recipes/busybox/busybox-1.18.3/fdisk_nios2.patch
->   delete mode 100644 recipes/busybox/busybox-1.18.3/get_header_tar.patch
->   delete mode 100644 recipes/busybox/busybox-1.18.3/slugos/defconfig
->   delete mode 100644 recipes/busybox/busybox-1.18.3/udhcpc-fix-nfsroot.patch
->   delete mode 100644 recipes/busybox/busybox-1.18.3/udhcpc-new-nfsroot.patch
->   delete mode 100644 recipes/busybox/busybox-1.18.3/udhcpscript.patch
->   delete mode 100644 recipes/busybox/busybox-static_1.18.3.bb
->   delete mode 100644 recipes/busybox/busybox_1.18.3.bb
+>   recipes/php/php-5.3.5/acinclude-xml2-config.patch |   18 ++++
+>   recipes/php/php-5.3.5/iconv.patch                 |   27 +++++
+>   recipes/php/php-5.3.5/imap-fix-autofoo.patch      |   41 ++++++++
+>   recipes/php/php-5.3.5/pear-makefile.patch         |   13 +++
+>   recipes/php/php-5.3.5/phar-makefile.patch         |   26 +++++
+>   recipes/php/php-5.3.5/php-m4-divert.patch         |   83 ++++++++++++++++
+>   recipes/php/php-5.3.5/php_exec_native.patch       |   11 ++
+>   recipes/php/php-native_5.3.5.bb                   |   11 ++
+>   recipes/php/php_5.3.5.bb                          |  108 +++++++++++++++++++++
+>   9 files changed, 338 insertions(+), 0 deletions(-)
+>   create mode 100644 recipes/php/php-5.3.5/acinclude-xml2-config.patch
+>   create mode 100644 recipes/php/php-5.3.5/iconv.patch
+>   create mode 100644 recipes/php/php-5.3.5/imap-fix-autofoo.patch
+>   create mode 100644 recipes/php/php-5.3.5/pear-makefile.patch
+>   create mode 100644 recipes/php/php-5.3.5/phar-makefile.patch
+>   create mode 100644 recipes/php/php-5.3.5/php-m4-divert.patch
+>   create mode 100644 recipes/php/php-5.3.5/php_exec_native.patch
+>   create mode 100644 recipes/php/php-native_5.3.5.bb
+>   create mode 100644 recipes/php/php_5.3.5.bb
 >
-> diff --git a/recipes/busybox/busybox-1.18.3/B921600.patch b/recipes/busybox/busybox-1.18.3/B921600.patch
-> deleted file mode 100644
-> index 61cc32b..0000000
-> --- a/recipes/busybox/busybox-1.18.3/B921600.patch
-> +++ /dev/null
-> @@ -1,13 +0,0 @@
-> -diff -upNr busybox-1.7.2/libbb/speed_table.c busybox-1.7.2-921600/libbb/speed_table.c
-> ---- busybox-1.7.2/libbb/speed_table.c	2007-09-03 13:48:41.000000000 +0200
-> -+++ busybox-1.7.2-921600/libbb/speed_table.c	2008-10-09 16:23:26.269592899 +0200
-> -@@ -52,6 +52,9 @@ static const struct speed_map speeds[] =
-> - #ifdef B460800
-> - 	{B460800, 460800/256 + 0x8000U},
-> - #endif
-> -+#ifdef B921600
-> -+	{B921600, 921600/256 + 0x8000U},
-> -+#endif
-> - };
-> -
-> - enum { NUM_SPEEDS = ARRAY_SIZE(speeds) };
-> diff --git a/recipes/busybox/busybox-1.18.3/defconfig b/recipes/busybox/busybox-1.18.3/defconfig
-> deleted file mode 100644
-> index 5a6870c..0000000
-> --- a/recipes/busybox/busybox-1.18.3/defconfig
-> +++ /dev/null
-> @@ -1,873 +0,0 @@
-> -#
-> -# Automatically generated make config: don't edit
-> -# Busybox version: 1.13.2
-> -# Sun Feb  8 17:22:39 2009
-> -#
-> -CONFIG_HAVE_DOT_CONFIG=y
-> -
-> -#
-> -# Busybox Settings
-> -#
-> -
-> -#
-> -# General Configuration
-> -#
-> -# CONFIG_DESKTOP is not set
-> -# CONFIG_EXTRA_COMPAT is not set
-> -CONFIG_FEATURE_ASSUME_UNICODE=y
-> -CONFIG_FEATURE_BUFFERS_USE_MALLOC=y
-> -# CONFIG_FEATURE_BUFFERS_GO_ON_STACK is not set
-> -# CONFIG_FEATURE_BUFFERS_GO_IN_BSS is not set
-> -CONFIG_SHOW_USAGE=y
-> -CONFIG_FEATURE_VERBOSE_USAGE=y
-> -CONFIG_FEATURE_COMPRESS_USAGE=y
-> -# CONFIG_FEATURE_INSTALLER is not set
-> -CONFIG_LOCALE_SUPPORT=y
-> -CONFIG_GETOPT_LONG=y
-> -CONFIG_FEATURE_DEVPTS=y
-> -# CONFIG_FEATURE_CLEAN_UP is not set
-> -CONFIG_FEATURE_PIDFILE=y
-> -CONFIG_FEATURE_SUID=y
-> -CONFIG_FEATURE_SUID_CONFIG=y
-> -CONFIG_FEATURE_SUID_CONFIG_QUIET=y
-> -# CONFIG_SELINUX is not set
-> -# CONFIG_FEATURE_PREFER_APPLETS is not set
-> -CONFIG_BUSYBOX_EXEC_PATH="/proc/self/exe"
-> -CONFIG_FEATURE_SYSLOG=y
-> -CONFIG_FEATURE_HAVE_RPC=y
-> -
-> -#
-> -# Build Options
-> -#
-> -# CONFIG_STATIC is not set
-> -# CONFIG_PIE is not set
-> -# CONFIG_NOMMU is not set
-> -# CONFIG_BUILD_LIBBUSYBOX is not set
-> -# CONFIG_FEATURE_INDIVIDUAL is not set
-> -# CONFIG_FEATURE_SHARED_BUSYBOX is not set
-> -CONFIG_LFS=y
-> -CONFIG_CROSS_COMPILER_PREFIX=""
-> -
-> -#
-> -# Debugging Options
-> -#
-> -# CONFIG_DEBUG is not set
-> -# CONFIG_DEBUG_PESSIMIZE is not set
-> -# CONFIG_WERROR is not set
-> -CONFIG_NO_DEBUG_LIB=y
-> -# CONFIG_DMALLOC is not set
-> -# CONFIG_EFENCE is not set
-> -# CONFIG_INCLUDE_SUSv2 is not set
-> -
-> -#
-> -# Installation Options
-> -#
-> -# CONFIG_INSTALL_NO_USR is not set
-> -CONFIG_INSTALL_APPLET_SYMLINKS=y
-> -# CONFIG_INSTALL_APPLET_HARDLINKS is not set
-> -# CONFIG_INSTALL_APPLET_SCRIPT_WRAPPERS is not set
-> -# CONFIG_INSTALL_APPLET_DONT is not set
-> -# CONFIG_INSTALL_SH_APPLET_SYMLINK is not set
-> -# CONFIG_INSTALL_SH_APPLET_HARDLINK is not set
-> -# CONFIG_INSTALL_SH_APPLET_SCRIPT_WRAPPER is not set
-> -CONFIG_PREFIX="./_install"
-> -
-> -#
-> -# Busybox Library Tuning
-> -#
-> -CONFIG_PASSWORD_MINLEN=6
-> -CONFIG_MD5_SIZE_VS_SPEED=2
-> -CONFIG_FEATURE_FAST_TOP=y
-> -# CONFIG_FEATURE_ETC_NETWORKS is not set
-> -CONFIG_FEATURE_EDITING=y
-> -CONFIG_FEATURE_EDITING_MAX_LEN=1024
-> -# CONFIG_FEATURE_EDITING_VI is not set
-> -CONFIG_FEATURE_EDITING_HISTORY=64
-> -CONFIG_FEATURE_EDITING_SAVEHISTORY=y
-> -CONFIG_FEATURE_TAB_COMPLETION=y
-> -CONFIG_FEATURE_USERNAME_COMPLETION=y
-> -CONFIG_FEATURE_EDITING_FANCY_PROMPT=y
-> -CONFIG_FEATURE_VERBOSE_CP_MESSAGE=y
-> -CONFIG_FEATURE_COPYBUF_KB=4
-> -CONFIG_MONOTONIC_SYSCALL=y
-> -CONFIG_IOCTL_HEX2STR_ERROR=y
-> -CONFIG_FEATURE_HWIB=y
-> -
-> -#
-> -# Applets
-> -#
-> -
-> -#
-> -# Archival Utilities
-> -#
-> -# CONFIG_FEATURE_SEAMLESS_LZMA is not set
-> -CONFIG_FEATURE_SEAMLESS_BZ2=y
-> -CONFIG_FEATURE_SEAMLESS_GZ=y
-> -CONFIG_FEATURE_SEAMLESS_Z=y
-> -CONFIG_AR=y
-> -# CONFIG_FEATURE_AR_LONG_FILENAMES is not set
-> -CONFIG_BUNZIP2=y
-> -# CONFIG_BZIP2 is not set
-> -CONFIG_CPIO=y
-> -# CONFIG_FEATURE_CPIO_O is not set
-> -# CONFIG_DPKG is not set
-> -# CONFIG_DPKG_DEB is not set
-> -# CONFIG_FEATURE_DPKG_DEB_EXTRACT_ONLY is not set
-> -CONFIG_GUNZIP=y
-> -CONFIG_GZIP=y
-> -# CONFIG_RPM2CPIO is not set
-> -# CONFIG_RPM is not set
-> -CONFIG_TAR=y
-> -CONFIG_FEATURE_TAR_CREATE=y
-> -CONFIG_FEATURE_TAR_AUTODETECT=y
-> -CONFIG_FEATURE_TAR_FROM=y
-> -CONFIG_FEATURE_TAR_OLDGNU_COMPATIBILITY=y
-> -# CONFIG_FEATURE_TAR_OLDSUN_COMPATIBILITY is not set
-> -CONFIG_FEATURE_TAR_GNU_EXTENSIONS=y
-> -CONFIG_FEATURE_TAR_LONG_OPTIONS=y
-> -CONFIG_FEATURE_TAR_UNAME_GNAME=y
-> -# CONFIG_UNCOMPRESS is not set
-> -# CONFIG_UNLZMA is not set
-> -# CONFIG_FEATURE_LZMA_FAST is not set
-> -CONFIG_UNZIP=y
-> -
-> -#
-> -# Coreutils
-> -#
-> -CONFIG_BASENAME=y
-> -# CONFIG_CAL is not set
-> -CONFIG_CAT=y
-> -# CONFIG_CATV is not set
-> -CONFIG_CHGRP=y
-> -CONFIG_CHMOD=y
-> -CONFIG_CHOWN=y
-> -CONFIG_CHROOT=y
-> -# CONFIG_CKSUM is not set
-> -# CONFIG_COMM is not set
-> -CONFIG_CP=y
-> -CONFIG_CUT=y
-> -CONFIG_DATE=y
-> -CONFIG_FEATURE_DATE_ISOFMT=y
-> -CONFIG_DD=y
-> -CONFIG_FEATURE_DD_SIGNAL_HANDLING=y
-> -# CONFIG_FEATURE_DD_IBS_OBS is not set
-> -CONFIG_DF=y
-> -CONFIG_FEATURE_DF_FANCY=y
-> -CONFIG_DIRNAME=y
-> -# CONFIG_DOS2UNIX is not set
-> -# CONFIG_UNIX2DOS is not set
-> -CONFIG_DU=y
-> -CONFIG_FEATURE_DU_DEFAULT_BLOCKSIZE_1K=y
-> -CONFIG_ECHO=y
-> -CONFIG_FEATURE_FANCY_ECHO=y
-> -CONFIG_ENV=y
-> -CONFIG_FEATURE_ENV_LONG_OPTIONS=y
-> -# CONFIG_EXPAND is not set
-> -# CONFIG_FEATURE_EXPAND_LONG_OPTIONS is not set
-> -CONFIG_EXPR=y
-> -# CONFIG_EXPR_MATH_SUPPORT_64 is not set
-> -CONFIG_FALSE=y
-> -# CONFIG_FOLD is not set
-> -CONFIG_HEAD=y
-> -CONFIG_FEATURE_FANCY_HEAD=y
-> -# CONFIG_HOSTID is not set
-> -CONFIG_ID=y
-> -# CONFIG_INSTALL is not set
-> -# CONFIG_FEATURE_INSTALL_LONG_OPTIONS is not set
-> -# CONFIG_LENGTH is not set
-> -CONFIG_LN=y
-> -CONFIG_LOGNAME=y
-> -CONFIG_LS=y
-> -CONFIG_FEATURE_LS_FILETYPES=y
-> -CONFIG_FEATURE_LS_FOLLOWLINKS=y
-> -CONFIG_FEATURE_LS_RECURSIVE=y
-> -CONFIG_FEATURE_LS_SORTFILES=y
-> -CONFIG_FEATURE_LS_TIMESTAMPS=y
-> -CONFIG_FEATURE_LS_USERNAME=y
-> -CONFIG_FEATURE_LS_COLOR=y
-> -# CONFIG_FEATURE_LS_COLOR_IS_DEFAULT is not set
-> -CONFIG_MD5SUM=y
-> -CONFIG_MKDIR=y
-> -CONFIG_FEATURE_MKDIR_LONG_OPTIONS=y
-> -CONFIG_MKFIFO=y
-> -CONFIG_MKNOD=y
-> -CONFIG_MV=y
-> -CONFIG_FEATURE_MV_LONG_OPTIONS=y
-> -CONFIG_NICE=y
-> -CONFIG_NOHUP=y
-> -CONFIG_OD=y
-> -# CONFIG_PRINTENV is not set
-> -CONFIG_PRINTF=y
-> -CONFIG_PWD=y
-> -CONFIG_READLINK=y
-> -CONFIG_FEATURE_READLINK_FOLLOW=y
-> -CONFIG_REALPATH=y
-> -CONFIG_RM=y
-> -CONFIG_RMDIR=y
-> -CONFIG_FEATURE_RMDIR_LONG_OPTIONS=y
-> -CONFIG_SEQ=y
-> -# CONFIG_SHA1SUM is not set
-> -CONFIG_SLEEP=y
-> -CONFIG_FEATURE_FANCY_SLEEP=y
-> -CONFIG_FEATURE_FLOAT_SLEEP=y
-> -CONFIG_SORT=y
-> -CONFIG_FEATURE_SORT_BIG=y
-> -# CONFIG_SPLIT is not set
-> -# CONFIG_FEATURE_SPLIT_FANCY is not set
-> -# CONFIG_STAT is not set
-> -# CONFIG_FEATURE_STAT_FORMAT is not set
-> -CONFIG_STTY=y
-> -# CONFIG_SUM is not set
-> -CONFIG_SYNC=y
-> -# CONFIG_TAC is not set
-> -CONFIG_TAIL=y
-> -CONFIG_FEATURE_FANCY_TAIL=y
-> -CONFIG_TEE=y
-> -CONFIG_FEATURE_TEE_USE_BLOCK_IO=y
-> -CONFIG_TEST=y
-> -# CONFIG_FEATURE_TEST_64 is not set
-> -CONFIG_TOUCH=y
-> -CONFIG_TR=y
-> -CONFIG_FEATURE_TR_CLASSES=y
-> -# CONFIG_FEATURE_TR_EQUIV is not set
-> -CONFIG_TRUE=y
-> -CONFIG_TTY=y
-> -CONFIG_UNAME=y
-> -# CONFIG_UNEXPAND is not set
-> -# CONFIG_FEATURE_UNEXPAND_LONG_OPTIONS is not set
-> -CONFIG_UNIQ=y
-> -CONFIG_USLEEP=y
-> -# CONFIG_UUDECODE is not set
-> -# CONFIG_UUENCODE is not set
-> -CONFIG_WC=y
-> -# CONFIG_FEATURE_WC_LARGE is not set
-> -CONFIG_WHO=y
-> -CONFIG_WHOAMI=y
-> -CONFIG_YES=y
-> -
-> -#
-> -# Common options for cp and mv
-> -#
-> -# CONFIG_FEATURE_PRESERVE_HARDLINKS is not set
-> -
-> -#
-> -# Common options for ls, more and telnet
-> -#
-> -CONFIG_FEATURE_AUTOWIDTH=y
-> -
-> -#
-> -# Common options for df, du, ls
-> -#
-> -CONFIG_FEATURE_HUMAN_READABLE=y
-> -
-> -#
-> -# Common options for md5sum, sha1sum
-> -#
-> -CONFIG_FEATURE_MD5_SHA1_SUM_CHECK=y
-> -
-> -#
-> -# Console Utilities
-> -#
-> -CONFIG_CHVT=y
-> -CONFIG_CLEAR=y
-> -CONFIG_DEALLOCVT=y
-> -CONFIG_DUMPKMAP=y
-> -# CONFIG_KBD_MODE is not set
-> -CONFIG_LOADFONT=y
-> -CONFIG_LOADKMAP=y
-> -CONFIG_OPENVT=y
-> -CONFIG_RESET=y
-> -# CONFIG_RESIZE is not set
-> -# CONFIG_FEATURE_RESIZE_PRINT is not set
-> -CONFIG_SETCONSOLE=y
-> -# CONFIG_FEATURE_SETCONSOLE_LONG_OPTIONS is not set
-> -CONFIG_SETFONT=y
-> -CONFIG_FEATURE_SETFONT_TEXTUAL_MAP=y
-> -CONFIG_DEFAULT_SETFONT_DIR=""
-> -# CONFIG_SETKEYCODES is not set
-> -# CONFIG_SETLOGCONS is not set
-> -CONFIG_SHOWKEY=y
-> -
-> -#
-> -# Debian Utilities
-> -#
-> -CONFIG_MKTEMP=y
-> -# CONFIG_PIPE_PROGRESS is not set
-> -CONFIG_RUN_PARTS=y
-> -CONFIG_FEATURE_RUN_PARTS_LONG_OPTIONS=y
-> -CONFIG_FEATURE_RUN_PARTS_FANCY=y
-> -CONFIG_START_STOP_DAEMON=y
-> -CONFIG_FEATURE_START_STOP_DAEMON_FANCY=y
-> -CONFIG_FEATURE_START_STOP_DAEMON_LONG_OPTIONS=y
-> -CONFIG_WHICH=y
-> -
-> -#
-> -# Editors
-> -#
-> -CONFIG_AWK=y
-> -CONFIG_FEATURE_AWK_LIBM=y
-> -CONFIG_CMP=y
-> -CONFIG_DIFF=y
-> -CONFIG_FEATURE_DIFF_BINARY=y
-> -CONFIG_FEATURE_DIFF_DIR=y
-> -CONFIG_FEATURE_DIFF_MINIMAL=y
-> -# CONFIG_ED is not set
-> -CONFIG_PATCH=y
-> -CONFIG_SED=y
-> -CONFIG_VI=y
-> -CONFIG_FEATURE_VI_MAX_LEN=1024
-> -CONFIG_FEATURE_VI_8BIT=y
-> -CONFIG_FEATURE_VI_COLON=y
-> -CONFIG_FEATURE_VI_YANKMARK=y
-> -CONFIG_FEATURE_VI_SEARCH=y
-> -CONFIG_FEATURE_VI_USE_SIGNALS=y
-> -CONFIG_FEATURE_VI_DOT_CMD=y
-> -# CONFIG_FEATURE_VI_READONLY is not set
-> -# CONFIG_FEATURE_VI_SETOPTS is not set
-> -CONFIG_FEATURE_VI_SET=y
-> -CONFIG_FEATURE_VI_WIN_RESIZE=y
-> -CONFIG_FEATURE_VI_OPTIMIZE_CURSOR=y
-> -CONFIG_FEATURE_ALLOW_EXEC=y
-> -
-> -#
-> -# Finding Utilities
-> -#
-> -CONFIG_FIND=y
-> -CONFIG_FEATURE_FIND_PRINT0=y
-> -CONFIG_FEATURE_FIND_MTIME=y
-> -CONFIG_FEATURE_FIND_MMIN=y
-> -CONFIG_FEATURE_FIND_PERM=y
-> -CONFIG_FEATURE_FIND_TYPE=y
-> -CONFIG_FEATURE_FIND_XDEV=y
-> -CONFIG_FEATURE_FIND_MAXDEPTH=y
-> -CONFIG_FEATURE_FIND_NEWER=y
-> -CONFIG_FEATURE_FIND_INUM=y
-> -CONFIG_FEATURE_FIND_EXEC=y
-> -CONFIG_FEATURE_FIND_USER=y
-> -CONFIG_FEATURE_FIND_GROUP=y
-> -CONFIG_FEATURE_FIND_NOT=y
-> -CONFIG_FEATURE_FIND_DEPTH=y
-> -CONFIG_FEATURE_FIND_PAREN=y
-> -CONFIG_FEATURE_FIND_SIZE=y
-> -CONFIG_FEATURE_FIND_PRUNE=y
-> -CONFIG_FEATURE_FIND_DELETE=y
-> -CONFIG_FEATURE_FIND_PATH=y
-> -CONFIG_FEATURE_FIND_REGEX=y
-> -# CONFIG_FEATURE_FIND_CONTEXT is not set
-> -CONFIG_GREP=y
-> -CONFIG_FEATURE_GREP_EGREP_ALIAS=y
-> -CONFIG_FEATURE_GREP_FGREP_ALIAS=y
-> -CONFIG_FEATURE_GREP_CONTEXT=y
-> -CONFIG_XARGS=y
-> -# CONFIG_FEATURE_XARGS_SUPPORT_CONFIRMATION is not set
-> -CONFIG_FEATURE_XARGS_SUPPORT_QUOTES=y
-> -CONFIG_FEATURE_XARGS_SUPPORT_TERMOPT=y
-> -CONFIG_FEATURE_XARGS_SUPPORT_ZERO_TERM=y
-> -
-> -#
-> -# Init Utilities
-> -#
-> -CONFIG_INIT=y
-> -CONFIG_FEATURE_USE_INITTAB=y
-> -CONFIG_FEATURE_KILL_REMOVED=y
-> -CONFIG_FEATURE_KILL_DELAY=0
-> -# CONFIG_FEATURE_INIT_SCTTY is not set
-> -# CONFIG_FEATURE_INIT_SYSLOG is not set
-> -# CONFIG_FEATURE_EXTRA_QUIET is not set
-> -# CONFIG_FEATURE_INIT_COREDUMPS is not set
-> -CONFIG_FEATURE_INITRD=y
-> -CONFIG_HALT=y
-> -# CONFIG_MESG is not set
-> -
-> -#
-> -# Login/Password Management Utilities
-> -#
-> -CONFIG_FEATURE_SHADOWPASSWDS=y
-> -# CONFIG_USE_BB_PWD_GRP is not set
-> -# CONFIG_USE_BB_SHADOW is not set
-> -CONFIG_USE_BB_CRYPT=y
-> -CONFIG_ADDGROUP=y
-> -CONFIG_FEATURE_ADDUSER_TO_GROUP=y
-> -CONFIG_DELGROUP=y
-> -CONFIG_FEATURE_DEL_USER_FROM_GROUP=y
-> -CONFIG_FEATURE_CHECK_NAMES=y
-> -CONFIG_ADDUSER=y
-> -CONFIG_FEATURE_ADDUSER_LONG_OPTIONS=y
-> -CONFIG_DELUSER=y
-> -CONFIG_GETTY=y
-> -CONFIG_FEATURE_UTMP=y
-> -CONFIG_FEATURE_WTMP=y
-> -CONFIG_LOGIN=y
-> -# CONFIG_PAM is not set
-> -CONFIG_LOGIN_SCRIPTS=y
-> -CONFIG_FEATURE_NOLOGIN=y
-> -CONFIG_FEATURE_SECURETTY=y
-> -CONFIG_PASSWD=y
-> -CONFIG_FEATURE_PASSWD_WEAK_CHECK=y
-> -CONFIG_CRYPTPW=y
-> -CONFIG_CHPASSWD=y
-> -CONFIG_SU=y
-> -CONFIG_FEATURE_SU_SYSLOG=y
-> -CONFIG_FEATURE_SU_CHECKS_SHELLS=y
-> -CONFIG_SULOGIN=y
-> -CONFIG_VLOCK=y
-> -
-> -#
-> -# Linux Ext2 FS Progs
-> -#
-> -CONFIG_CHATTR=y
-> -CONFIG_FSCK=y
-> -# CONFIG_LSATTR is not set
-> -
-> -#
-> -# Linux Module Utilities
-> -#
-> -CONFIG_DEFAULT_MODULES_DIR="/lib/modules"
-> -CONFIG_DEFAULT_DEPMOD_FILE="modules.dep"
-> -# CONFIG_MODPROBE_SMALL is not set
-> -# CONFIG_FEATURE_MODPROBE_SMALL_OPTIONS_ON_CMDLINE is not set
-> -# CONFIG_FEATURE_MODPROBE_SMALL_CHECK_ALREADY_LOADED is not set
-> -CONFIG_INSMOD=y
-> -CONFIG_RMMOD=y
-> -CONFIG_LSMOD=y
-> -CONFIG_FEATURE_LSMOD_PRETTY_2_6_OUTPUT=y
-> -CONFIG_MODPROBE=y
-> -CONFIG_FEATURE_MODPROBE_BLACKLIST=y
-> -# CONFIG_DEPMOD is not set
-> -
-> -#
-> -# Options common to multiple modutils
-> -#
-> -# CONFIG_FEATURE_2_4_MODULES is not set
-> -# CONFIG_FEATURE_INSMOD_VERSION_CHECKING is not set
-> -# CONFIG_FEATURE_INSMOD_KSYMOOPS_SYMBOLS is not set
-> -# CONFIG_FEATURE_INSMOD_LOADINKMEM is not set
-> -# CONFIG_FEATURE_INSMOD_LOAD_MAP is not set
-> -# CONFIG_FEATURE_INSMOD_LOAD_MAP_FULL is not set
-> -CONFIG_FEATURE_CHECK_TAINTED_MODULE=y
-> -CONFIG_FEATURE_MODUTILS_ALIAS=y
-> -CONFIG_FEATURE_MODUTILS_SYMBOLS=y
-> -
-> -#
-> -# Linux System Utilities
-> -#
-> -CONFIG_BLKID=y
-> -CONFIG_DMESG=y
-> -CONFIG_FEATURE_DMESG_PRETTY=y
-> -CONFIG_FBSET=y
-> -CONFIG_FEATURE_FBSET_FANCY=y
-> -CONFIG_FEATURE_FBSET_READMODE=y
-> -# CONFIG_FDFLUSH is not set
-> -# CONFIG_FDFORMAT is not set
-> -CONFIG_FDISK=y
-> -CONFIG_FDISK_SUPPORT_LARGE_DISKS=y
-> -CONFIG_FEATURE_FDISK_WRITABLE=y
-> -# CONFIG_FEATURE_AIX_LABEL is not set
-> -# CONFIG_FEATURE_SGI_LABEL is not set
-> -# CONFIG_FEATURE_SUN_LABEL is not set
-> -CONFIG_FEATURE_OSF_LABEL=y
-> -CONFIG_FEATURE_FDISK_ADVANCED=y
-> -# CONFIG_FINDFS is not set
-> -CONFIG_FREERAMDISK=y
-> -CONFIG_FSCK_MINIX=y
-> -CONFIG_MKFS_MINIX=y
-> -
-> -#
-> -# Minix filesystem support
-> -#
-> -CONFIG_FEATURE_MINIX2=y
-> -CONFIG_GETOPT=y
-> -CONFIG_HEXDUMP=y
-> -# CONFIG_FEATURE_HEXDUMP_REVERSE is not set
-> -# CONFIG_HD is not set
-> -CONFIG_HWCLOCK=y
-> -CONFIG_FEATURE_HWCLOCK_LONG_OPTIONS=y
-> -CONFIG_FEATURE_HWCLOCK_ADJTIME_FHS=y
-> -# CONFIG_IPCRM is not set
-> -# CONFIG_IPCS is not set
-> -CONFIG_LOSETUP=y
-> -CONFIG_MDEV=y
-> -CONFIG_FEATURE_MDEV_CONF=y
-> -CONFIG_FEATURE_MDEV_RENAME=y
-> -CONFIG_FEATURE_MDEV_RENAME_REGEXP=y
-> -CONFIG_FEATURE_MDEV_EXEC=y
-> -CONFIG_FEATURE_MDEV_LOAD_FIRMWARE=y
-> -CONFIG_MKSWAP=y
-> -# CONFIG_FEATURE_MKSWAP_V0 is not set
-> -CONFIG_MORE=y
-> -CONFIG_FEATURE_USE_TERMIOS=y
-> -CONFIG_VOLUMEID=y
-> -# CONFIG_FEATURE_VOLUMEID_EXT is not set
-> -# CONFIG_FEATURE_VOLUMEID_REISERFS is not set
-> -# CONFIG_FEATURE_VOLUMEID_FAT is not set
-> -# CONFIG_FEATURE_VOLUMEID_HFS is not set
-> -# CONFIG_FEATURE_VOLUMEID_JFS is not set
-> -# CONFIG_FEATURE_VOLUMEID_XFS is not set
-> -# CONFIG_FEATURE_VOLUMEID_NTFS is not set
-> -# CONFIG_FEATURE_VOLUMEID_ISO9660 is not set
-> -# CONFIG_FEATURE_VOLUMEID_UDF is not set
-> -# CONFIG_FEATURE_VOLUMEID_LUKS is not set
-> -# CONFIG_FEATURE_VOLUMEID_LINUXSWAP is not set
-> -# CONFIG_FEATURE_VOLUMEID_CRAMFS is not set
-> -# CONFIG_FEATURE_VOLUMEID_ROMFS is not set
-> -# CONFIG_FEATURE_VOLUMEID_SYSV is not set
-> -# CONFIG_FEATURE_VOLUMEID_OCFS2 is not set
-> -# CONFIG_FEATURE_VOLUMEID_LINUXRAID is not set
-> -CONFIG_MOUNT=y
-> -# CONFIG_FEATURE_MOUNT_FAKE is not set
-> -CONFIG_FEATURE_MOUNT_VERBOSE=y
-> -CONFIG_FEATURE_MOUNT_HELPERS=y
-> -CONFIG_FEATURE_MOUNT_LABEL=y
-> -CONFIG_FEATURE_MOUNT_NFS=y
-> -CONFIG_FEATURE_MOUNT_CIFS=y
-> -CONFIG_FEATURE_MOUNT_FLAGS=y
-> -CONFIG_FEATURE_MOUNT_FSTAB=y
-> -CONFIG_PIVOT_ROOT=y
-> -CONFIG_RDATE=y
-> -CONFIG_RDEV=y
-> -CONFIG_READPROFILE=y
-> -CONFIG_RTCWAKE=y
-> -# CONFIG_SCRIPT is not set
-> -# CONFIG_SETARCH is not set
-> -CONFIG_SWAPONOFF=y
-> -# CONFIG_FEATURE_SWAPON_PRI is not set
-> -CONFIG_SWITCH_ROOT=y
-> -CONFIG_UMOUNT=y
-> -CONFIG_FEATURE_UMOUNT_ALL=y
-> -
-> -#
-> -# Common options for mount/umount
-> -#
-> -CONFIG_FEATURE_MOUNT_LOOP=y
-> -# CONFIG_FEATURE_MTAB_SUPPORT is not set
-> -
-> -#
-> -# Miscellaneous Utilities
-> -#
-> -# CONFIG_ADJTIMEX is not set
-> -# CONFIG_BBCONFIG is not set
-> -# CONFIG_CHAT is not set
-> -# CONFIG_FEATURE_CHAT_NOFAIL is not set
-> -# CONFIG_FEATURE_CHAT_TTY_HIFI is not set
-> -# CONFIG_FEATURE_CHAT_IMPLICIT_CR is not set
-> -# CONFIG_FEATURE_CHAT_SWALLOW_OPTS is not set
-> -# CONFIG_FEATURE_CHAT_SEND_ESCAPES is not set
-> -# CONFIG_FEATURE_CHAT_VAR_ABORT_LEN is not set
-> -# CONFIG_FEATURE_CHAT_CLR_ABORT is not set
-> -# CONFIG_CHRT is not set
-> -# CONFIG_CROND is not set
-> -# CONFIG_FEATURE_CROND_D is not set
-> -# CONFIG_FEATURE_CROND_CALL_SENDMAIL is not set
-> -# CONFIG_CRONTAB is not set
-> -CONFIG_DC=y
-> -CONFIG_FEATURE_DC_LIBM=y
-> -# CONFIG_DEVFSD is not set
-> -# CONFIG_DEVFSD_MODLOAD is not set
-> -# CONFIG_DEVFSD_FG_NP is not set
-> -# CONFIG_DEVFSD_VERBOSE is not set
-> -# CONFIG_FEATURE_DEVFS is not set
-> -# CONFIG_DEVMEM is not set
-> -# CONFIG_EJECT is not set
-> -# CONFIG_FEATURE_EJECT_SCSI is not set
-> -CONFIG_FBSPLASH=y
-> -# CONFIG_INOTIFYD is not set
-> -CONFIG_LAST=y
-> -CONFIG_FEATURE_LAST_SMALL=y
-> -# CONFIG_FEATURE_LAST_FANCY is not set
-> -CONFIG_LESS=y
-> -CONFIG_FEATURE_LESS_MAXLINES=9999999
-> -CONFIG_FEATURE_LESS_BRACKETS=y
-> -CONFIG_FEATURE_LESS_FLAGS=y
-> -# CONFIG_FEATURE_LESS_DASHCMD is not set
-> -# CONFIG_FEATURE_LESS_MARKS is not set
-> -# CONFIG_FEATURE_LESS_REGEXP is not set
-> -# CONFIG_FEATURE_LESS_LINENUMS is not set
-> -# CONFIG_FEATURE_LESS_WINCH is not set
-> -# CONFIG_HDPARM is not set
-> -# CONFIG_FEATURE_HDPARM_GET_IDENTITY is not set
-> -# CONFIG_FEATURE_HDPARM_HDIO_SCAN_HWIF is not set
-> -# CONFIG_FEATURE_HDPARM_HDIO_UNREGISTER_HWIF is not set
-> -# CONFIG_FEATURE_HDPARM_HDIO_DRIVE_RESET is not set
-> -# CONFIG_FEATURE_HDPARM_HDIO_TRISTATE_HWIF is not set
-> -# CONFIG_FEATURE_HDPARM_HDIO_GETSET_DMA is not set
-> -CONFIG_MAKEDEVS=y
-> -# CONFIG_FEATURE_MAKEDEVS_LEAF is not set
-> -CONFIG_FEATURE_MAKEDEVS_TABLE=y
-> -# CONFIG_MAN is not set
-> -CONFIG_MICROCOM=y
-> -# CONFIG_MOUNTPOINT is not set
-> -# CONFIG_MT is not set
-> -# CONFIG_RAIDAUTORUN is not set
-> -CONFIG_READAHEAD=y
-> -# CONFIG_RUNLEVEL is not set
-> -# CONFIG_RX is not set
-> -# CONFIG_SETSID is not set
-> -CONFIG_STRINGS=y
-> -# CONFIG_TASKSET is not set
-> -# CONFIG_FEATURE_TASKSET_FANCY is not set
-> -CONFIG_TIME=y
-> -# CONFIG_TTYSIZE is not set
-> -# CONFIG_WATCHDOG is not set
-> -
-> -#
-> -# Networking Utilities
-> -#
-> -CONFIG_FEATURE_IPV6=y
-> -CONFIG_FEATURE_PREFER_IPV4_ADDRESS=y
-> -# CONFIG_VERBOSE_RESOLUTION_ERRORS is not set
-> -# CONFIG_ARP is not set
-> -# CONFIG_ARPING is not set
-> -# CONFIG_BRCTL is not set
-> -# CONFIG_FEATURE_BRCTL_FANCY is not set
-> -# CONFIG_FEATURE_BRCTL_SHOW is not set
-> -# CONFIG_DNSD is not set
-> -# CONFIG_ETHER_WAKE is not set
-> -# CONFIG_FAKEIDENTD is not set
-> -# CONFIG_FTPGET is not set
-> -# CONFIG_FTPPUT is not set
-> -# CONFIG_FEATURE_FTPGETPUT_LONG_OPTIONS is not set
-> -CONFIG_HOSTNAME=y
-> -CONFIG_HTTPD=y
-> -CONFIG_FEATURE_HTTPD_RANGES=y
-> -CONFIG_FEATURE_HTTPD_USE_SENDFILE=y
-> -CONFIG_FEATURE_HTTPD_RELOAD_CONFIG_SIGHUP=y
-> -CONFIG_FEATURE_HTTPD_SETUID=y
-> -CONFIG_FEATURE_HTTPD_BASIC_AUTH=y
-> -CONFIG_FEATURE_HTTPD_AUTH_MD5=y
-> -CONFIG_FEATURE_HTTPD_CONFIG_WITH_MIME_TYPES=y
-> -CONFIG_FEATURE_HTTPD_CGI=y
-> -CONFIG_FEATURE_HTTPD_CONFIG_WITH_SCRIPT_INTERPR=y
-> -CONFIG_FEATURE_HTTPD_SET_REMOTE_PORT_TO_ENV=y
-> -CONFIG_FEATURE_HTTPD_ENCODE_URL_STR=y
-> -CONFIG_FEATURE_HTTPD_ERROR_PAGES=y
-> -CONFIG_FEATURE_HTTPD_PROXY=y
-> -CONFIG_IFCONFIG=y
-> -CONFIG_FEATURE_IFCONFIG_STATUS=y
-> -# CONFIG_FEATURE_IFCONFIG_SLIP is not set
-> -# CONFIG_FEATURE_IFCONFIG_MEMSTART_IOADDR_IRQ is not set
-> -CONFIG_FEATURE_IFCONFIG_HW=y
-> -CONFIG_FEATURE_IFCONFIG_BROADCAST_PLUS=y
-> -# CONFIG_IFENSLAVE is not set
-> -CONFIG_IFUPDOWN=y
-> -CONFIG_IFUPDOWN_IFSTATE_PATH="/var/run/ifstate"
-> -# CONFIG_FEATURE_IFUPDOWN_IP is not set
-> -# CONFIG_FEATURE_IFUPDOWN_IP_BUILTIN is not set
-> -CONFIG_FEATURE_IFUPDOWN_IFCONFIG_BUILTIN=y
-> -CONFIG_FEATURE_IFUPDOWN_IPV4=y
-> -CONFIG_FEATURE_IFUPDOWN_IPV6=y
-> -CONFIG_FEATURE_IFUPDOWN_MAPPING=y
-> -# CONFIG_FEATURE_IFUPDOWN_EXTERNAL_DHCP is not set
-> -# CONFIG_INETD is not set
-> -# CONFIG_FEATURE_INETD_SUPPORT_BUILTIN_ECHO is not set
-> -# CONFIG_FEATURE_INETD_SUPPORT_BUILTIN_DISCARD is not set
-> -# CONFIG_FEATURE_INETD_SUPPORT_BUILTIN_TIME is not set
-> -# CONFIG_FEATURE_INETD_SUPPORT_BUILTIN_DAYTIME is not set
-> -# CONFIG_FEATURE_INETD_SUPPORT_BUILTIN_CHARGEN is not set
-> -# CONFIG_FEATURE_INETD_RPC is not set
-> -CONFIG_IP=y
-> -CONFIG_FEATURE_IP_ADDRESS=y
-> -CONFIG_FEATURE_IP_LINK=y
-> -CONFIG_FEATURE_IP_ROUTE=y
-> -CONFIG_FEATURE_IP_TUNNEL=y
-> -# CONFIG_FEATURE_IP_RULE is not set
-> -# CONFIG_FEATURE_IP_SHORT_FORMS is not set
-> -# CONFIG_FEATURE_IP_RARE_PROTOCOLS is not set
-> -# CONFIG_IPADDR is not set
-> -# CONFIG_IPLINK is not set
-> -# CONFIG_IPROUTE is not set
-> -# CONFIG_IPTUNNEL is not set
-> -# CONFIG_IPRULE is not set
-> -# CONFIG_IPCALC is not set
-> -# CONFIG_FEATURE_IPCALC_FANCY is not set
-> -# CONFIG_FEATURE_IPCALC_LONG_OPTIONS is not set
-> -# CONFIG_NAMEIF is not set
-> -# CONFIG_FEATURE_NAMEIF_EXTENDED is not set
-> -CONFIG_NC=y
-> -CONFIG_NC_SERVER=y
-> -CONFIG_NC_EXTRA=y
-> -CONFIG_NETSTAT=y
-> -CONFIG_FEATURE_NETSTAT_WIDE=y
-> -CONFIG_FEATURE_NETSTAT_PRG=y
-> -CONFIG_NSLOOKUP=y
-> -CONFIG_PING=y
-> -CONFIG_PING6=y
-> -CONFIG_FEATURE_FANCY_PING=y
-> -# CONFIG_PSCAN is not set
-> -CONFIG_ROUTE=y
-> -# CONFIG_SLATTACH is not set
-> -CONFIG_TELNET=y
-> -# CONFIG_FEATURE_TELNET_TTYPE is not set
-> -CONFIG_FEATURE_TELNET_AUTOLOGIN=y
-> -CONFIG_TELNETD=y
-> -# CONFIG_FEATURE_TELNETD_STANDALONE is not set
-> -CONFIG_TFTP=y
-> -# CONFIG_TFTPD is not set
-> -CONFIG_FEATURE_TFTP_GET=y
-> -CONFIG_FEATURE_TFTP_PUT=y
-> -# CONFIG_FEATURE_TFTP_BLOCKSIZE is not set
-> -# CONFIG_TFTP_DEBUG is not set
-> -CONFIG_TRACEROUTE=y
-> -CONFIG_FEATURE_TRACEROUTE_VERBOSE=y
-> -CONFIG_FEATURE_TRACEROUTE_SOURCE_ROUTE=y
-> -CONFIG_FEATURE_TRACEROUTE_USE_ICMP=y
-> -CONFIG_UDHCPD=y
-> -CONFIG_DHCPRELAY=y
-> -CONFIG_DUMPLEASES=y
-> -# CONFIG_FEATURE_UDHCPD_WRITE_LEASES_EARLY is not set
-> -CONFIG_DHCPD_LEASES_FILE="/var/lib/misc/udhcpd.leases"
-> -CONFIG_UDHCPC=y
-> -CONFIG_FEATURE_UDHCPC_ARPING=y
-> -# CONFIG_FEATURE_UDHCP_PORT is not set
-> -# CONFIG_UDHCP_DEBUG is not set
-> -# CONFIG_FEATURE_UDHCP_RFC3397 is not set
-> -CONFIG_UDHCPC_DEFAULT_SCRIPT="@DATADIR@/udhcpc/default.script"
-> -CONFIG_UDHCPC_SLACK_FOR_BUGGY_SERVERS=80
-> -# CONFIG_VCONFIG is not set
-> -CONFIG_WGET=y
-> -CONFIG_FEATURE_WGET_STATUSBAR=y
-> -CONFIG_FEATURE_WGET_AUTHENTICATION=y
-> -CONFIG_FEATURE_WGET_LONG_OPTIONS=y
-> -# CONFIG_ZCIP is not set
-> -# CONFIG_TCPSVD is not set
-> -# CONFIG_UDPSVD is not set
-> -
-> -#
-> -# Print Utilities
-> -#
-> -# CONFIG_LPD is not set
-> -# CONFIG_LPR is not set
-> -# CONFIG_LPQ is not set
-> -
-> -#
-> -# Mail Utilities
-> -#
-> -# CONFIG_MAKEMIME is not set
-> -CONFIG_FEATURE_MIME_CHARSET=""
-> -# CONFIG_POPMAILDIR is not set
-> -# CONFIG_FEATURE_POPMAILDIR_DELIVERY is not set
-> -# CONFIG_REFORMIME is not set
-> -# CONFIG_FEATURE_REFORMIME_COMPAT is not set
-> -# CONFIG_SENDMAIL is not set
-> -# CONFIG_FEATURE_SENDMAIL_MAILX is not set
-> -# CONFIG_FEATURE_SENDMAIL_MAILXX is not set
-> -
-> -#
-> -# Process Utilities
-> -#
-> -CONFIG_FREE=y
-> -CONFIG_FUSER=y
-> -CONFIG_KILL=y
-> -CONFIG_KILLALL=y
-> -# CONFIG_KILLALL5 is not set
-> -# CONFIG_NMETER is not set
-> -# CONFIG_PGREP is not set
-> -CONFIG_PIDOF=y
-> -CONFIG_FEATURE_PIDOF_SINGLE=y
-> -CONFIG_FEATURE_PIDOF_OMIT=y
-> -# CONFIG_PKILL is not set
-> -CONFIG_PS=y
-> -CONFIG_FEATURE_PS_WIDE=y
-> -# CONFIG_FEATURE_PS_TIME is not set
-> -# CONFIG_FEATURE_PS_UNUSUAL_SYSTEMS is not set
-> -CONFIG_RENICE=y
-> -CONFIG_BB_SYSCTL=y
-> -CONFIG_TOP=y
-> -CONFIG_FEATURE_TOP_CPU_USAGE_PERCENTAGE=y
-> -CONFIG_FEATURE_TOP_CPU_GLOBAL_PERCENTS=y
-> -# CONFIG_FEATURE_TOP_SMP_CPU is not set
-> -# CONFIG_FEATURE_TOP_DECIMALS is not set
-> -# CONFIG_FEATURE_TOP_SMP_PROCESS is not set
-> -# CONFIG_FEATURE_TOPMEM is not set
-> -CONFIG_UPTIME=y
-> -CONFIG_WATCH=y
-> -
-> -#
-> -# Runit Utilities
-> -#
-> -# CONFIG_RUNSV is not set
-> -# CONFIG_RUNSVDIR is not set
-> -# CONFIG_FEATURE_RUNSVDIR_LOG is not set
-> -# CONFIG_SV is not set
-> -CONFIG_SV_DEFAULT_SERVICE_DIR=""
-> -# CONFIG_SVLOGD is not set
-> -# CONFIG_CHPST is not set
-> -# CONFIG_SETUIDGID is not set
-> -# CONFIG_ENVUIDGID is not set
-> -# CONFIG_ENVDIR is not set
-> -# CONFIG_SOFTLIMIT is not set
-> -# CONFIG_CHCON is not set
-> -# CONFIG_FEATURE_CHCON_LONG_OPTIONS is not set
-> -# CONFIG_GETENFORCE is not set
-> -# CONFIG_GETSEBOOL is not set
-> -# CONFIG_LOAD_POLICY is not set
-> -# CONFIG_MATCHPATHCON is not set
-> -# CONFIG_RESTORECON is not set
-> -# CONFIG_RUNCON is not set
-> -# CONFIG_FEATURE_RUNCON_LONG_OPTIONS is not set
-> -# CONFIG_SELINUXENABLED is not set
-> -# CONFIG_SETENFORCE is not set
-> -# CONFIG_SETFILES is not set
-> -# CONFIG_FEATURE_SETFILES_CHECK_OPTION is not set
-> -# CONFIG_SETSEBOOL is not set
-> -# CONFIG_SESTATUS is not set
-> -
-> -#
-> -# Shells
-> -#
-> -CONFIG_FEATURE_SH_IS_ASH=y
-> -# CONFIG_FEATURE_SH_IS_HUSH is not set
-> -# CONFIG_FEATURE_SH_IS_MSH is not set
-> -# CONFIG_FEATURE_SH_IS_NONE is not set
-> -CONFIG_ASH=y
-> -
-> -#
-> -# Ash Shell Options
-> -#
-> -CONFIG_ASH_BASH_COMPAT=y
-> -CONFIG_ASH_JOB_CONTROL=y
-> -CONFIG_ASH_READ_NCHARS=y
-> -CONFIG_ASH_READ_TIMEOUT=y
-> -CONFIG_ASH_ALIAS=y
-> -CONFIG_ASH_MATH_SUPPORT=y
-> -# CONFIG_ASH_MATH_SUPPORT_64 is not set
-> -CONFIG_ASH_GETOPTS=y
-> -CONFIG_ASH_BUILTIN_ECHO=y
-> -CONFIG_ASH_BUILTIN_PRINTF=y
-> -CONFIG_ASH_BUILTIN_TEST=y
-> -# CONFIG_ASH_CMDCMD is not set
-> -# CONFIG_ASH_MAIL is not set
-> -# CONFIG_ASH_OPTIMIZE_FOR_SIZE is not set
-> -# CONFIG_ASH_RANDOM_SUPPORT is not set
-> -CONFIG_ASH_EXPAND_PRMT=y
-> -# CONFIG_HUSH is not set
-> -# CONFIG_HUSH_HELP is not set
-> -# CONFIG_HUSH_INTERACTIVE is not set
-> -# CONFIG_HUSH_JOB is not set
-> -# CONFIG_HUSH_TICK is not set
-> -# CONFIG_HUSH_IF is not set
-> -# CONFIG_HUSH_LOOPS is not set
-> -# CONFIG_HUSH_CASE is not set
-> -# CONFIG_LASH is not set
-> -# CONFIG_MSH is not set
-> -
-> -#
-> -# Bourne Shell Options
-> -#
-> -CONFIG_FEATURE_SH_EXTRA_QUIET=y
-> -# CONFIG_FEATURE_SH_STANDALONE is not set
-> -# CONFIG_FEATURE_SH_NOFORK is not set
-> -# CONFIG_CTTYHACK is not set
-> -
-> -#
-> -# System Logging Utilities
-> -#
-> -CONFIG_SYSLOGD=y
-> -CONFIG_FEATURE_ROTATE_LOGFILE=y
-> -CONFIG_FEATURE_REMOTE_LOG=y
-> -CONFIG_FEATURE_SYSLOGD_DUP=y
-> -CONFIG_FEATURE_IPC_SYSLOG=y
-> -CONFIG_FEATURE_IPC_SYSLOG_BUFFER_SIZE=16
-> -CONFIG_LOGREAD=y
-> -CONFIG_FEATURE_LOGREAD_REDUCED_LOCKING=y
-> -CONFIG_KLOGD=y
-> -CONFIG_LOGGER=y
-> diff --git a/recipes/busybox/busybox-1.18.3/fdisk_nios2.patch b/recipes/busybox/busybox-1.18.3/fdisk_nios2.patch
-> deleted file mode 100644
-> index 648e68e..0000000
-> --- a/recipes/busybox/busybox-1.18.3/fdisk_nios2.patch
-> +++ /dev/null
-> @@ -1,13 +0,0 @@
-> -Index: busybox-1.15.3/util-linux/fdisk_osf.c
-> -===================================================================
-> ---- busybox-1.15.3.orig/util-linux/fdisk_osf.c
-> -+++ busybox-1.15.3/util-linux/fdisk_osf.c
-> -@@ -44,7 +44,7 @@
-> - #define BSD_LINUX_BOOTDIR "/usr/ucb/mdec"
-> -
-> - #if defined(i386) || defined(__sparc__) || defined(__arm__) \
-> -- || defined(__m68k__) || defined(__mips__) || defined(__s390__) \
-> -+ || defined(__m68k__) || defined(__mips__) || defined(__nios2__) \
-> -  || defined(__s390__) || defined(__s390x__) \
-> -  || defined(__sh__) || defined(__x86_64__) || defined(__avr32__)
-> - # define BSD_LABELSECTOR   1
-> diff --git a/recipes/busybox/busybox-1.18.3/get_header_tar.patch b/recipes/busybox/busybox-1.18.3/get_header_tar.patch
-> deleted file mode 100644
-> index 62b55af..0000000
-> --- a/recipes/busybox/busybox-1.18.3/get_header_tar.patch
-> +++ /dev/null
-> @@ -1,13 +0,0 @@
-> -diff --git a/archival/libarchive/get_header_tar.c b/archival/libarchive/get_header_tar.c
-> -index 78b0ae2..58b15c1 100644
-> ---- a/archival/libarchive/get_header_tar.c
-> -+++ b/archival/libarchive/get_header_tar.c
-> -@@ -314,6 +314,8 @@ char FAST_FUNC get_header_tar(archive_handle_t *archive_handle)
-> - 			file_header->name = concat_path_file(tar.prefix, tar.name);
-> - 		} else
-> - 			file_header->name = xstrdup(tar.name);
-> -+		if (strlen(file_header->name)>  100)
-> -+			file_header->name[100] = 0;
-> - 	}
-> -
-> - 	/* Set bits 12-15 of the files mode */
-> diff --git a/recipes/busybox/busybox-1.18.3/slugos/defconfig b/recipes/busybox/busybox-1.18.3/slugos/defconfig
-> deleted file mode 100644
-> index fb4a8f2..0000000
-> --- a/recipes/busybox/busybox-1.18.3/slugos/defconfig
-> +++ /dev/null
-> @@ -1,986 +0,0 @@
-> -#
-> -# Automatically generated make config: don't edit
-> -# Busybox version: 1.18.3
-> -# Sun Feb 20 20:50:07 2011
-> -#
-> -CONFIG_HAVE_DOT_CONFIG=y
-> -
-> -#
-> -# Busybox Settings
-> -#
-> -
-> -#
-> -# General Configuration
-> -#
-> -# CONFIG_DESKTOP is not set
-> -# CONFIG_EXTRA_COMPAT is not set
-> -# CONFIG_INCLUDE_SUSv2 is not set
-> -# CONFIG_USE_PORTABLE_CODE is not set
-> -CONFIG_PLATFORM_LINUX=y
-> -CONFIG_FEATURE_BUFFERS_USE_MALLOC=y
-> -# CONFIG_FEATURE_BUFFERS_GO_ON_STACK is not set
-> -# CONFIG_FEATURE_BUFFERS_GO_IN_BSS is not set
-> -CONFIG_SHOW_USAGE=y
-> -CONFIG_FEATURE_VERBOSE_USAGE=y
-> -CONFIG_FEATURE_COMPRESS_USAGE=y
-> -# CONFIG_FEATURE_INSTALLER is not set
-> -# CONFIG_INSTALL_NO_USR is not set
-> -# CONFIG_LOCALE_SUPPORT is not set
-> -CONFIG_UNICODE_SUPPORT=y
-> -# CONFIG_UNICODE_USING_LOCALE is not set
-> -# CONFIG_FEATURE_CHECK_UNICODE_IN_ENV is not set
-> -CONFIG_SUBST_WCHAR=63
-> -CONFIG_LAST_SUPPORTED_WCHAR=767
-> -# CONFIG_UNICODE_COMBINING_WCHARS is not set
-> -# CONFIG_UNICODE_WIDE_WCHARS is not set
-> -# CONFIG_UNICODE_BIDI_SUPPORT is not set
-> -# CONFIG_UNICODE_NEUTRAL_TABLE is not set
-> -# CONFIG_UNICODE_PRESERVE_BROKEN is not set
-> -CONFIG_LONG_OPTS=y
-> -CONFIG_FEATURE_DEVPTS=y
-> -# CONFIG_FEATURE_CLEAN_UP is not set
-> -CONFIG_FEATURE_WTMP=y
-> -CONFIG_FEATURE_UTMP=y
-> -CONFIG_FEATURE_PIDFILE=y
-> -CONFIG_FEATURE_SUID=y
-> -CONFIG_FEATURE_SUID_CONFIG=y
-> -CONFIG_FEATURE_SUID_CONFIG_QUIET=y
-> -# CONFIG_SELINUX is not set
-> -# CONFIG_FEATURE_PREFER_APPLETS is not set
-> -CONFIG_BUSYBOX_EXEC_PATH="/proc/self/exe"
-> -CONFIG_FEATURE_SYSLOG=y
-> -CONFIG_FEATURE_HAVE_RPC=y
-> -
-> -#
-> -# Build Options
-> -#
-> -# CONFIG_STATIC is not set
-> -# CONFIG_PIE is not set
-> -# CONFIG_NOMMU is not set
-> -# CONFIG_BUILD_LIBBUSYBOX is not set
-> -# CONFIG_FEATURE_INDIVIDUAL is not set
-> -# CONFIG_FEATURE_SHARED_BUSYBOX is not set
-> -CONFIG_LFS=y
-> -CONFIG_CROSS_COMPILER_PREFIX="arm-oe-linux-gnueabi-"
-> -CONFIG_EXTRA_CFLAGS="-isystem/r/slug/slugos/tmp/sysroots/armv5te-oe-linux-gnueabi/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os"
-> -
-> -#
-> -# Debugging Options
-> -#
-> -# CONFIG_DEBUG is not set
-> -# CONFIG_DEBUG_PESSIMIZE is not set
-> -# CONFIG_WERROR is not set
-> -CONFIG_NO_DEBUG_LIB=y
-> -# CONFIG_DMALLOC is not set
-> -# CONFIG_EFENCE is not set
-> -
-> -#
-> -# Installation Options ("make install" behavior)
-> -#
-> -CONFIG_INSTALL_APPLET_SYMLINKS=y
-> -# CONFIG_INSTALL_APPLET_HARDLINKS is not set
-> -# CONFIG_INSTALL_APPLET_SCRIPT_WRAPPERS is not set
-> -# CONFIG_INSTALL_APPLET_DONT is not set
-> -# CONFIG_INSTALL_SH_APPLET_SYMLINK is not set
-> -# CONFIG_INSTALL_SH_APPLET_HARDLINK is not set
-> -# CONFIG_INSTALL_SH_APPLET_SCRIPT_WRAPPER is not set
-> -CONFIG_PREFIX="./_install"
-> -
-> -#
-> -# Busybox Library Tuning
-> -#
-> -CONFIG_PASSWORD_MINLEN=6
-> -CONFIG_MD5_SIZE_VS_SPEED=1
-> -CONFIG_FEATURE_FAST_TOP=y
-> -# CONFIG_FEATURE_ETC_NETWORKS is not set
-> -CONFIG_FEATURE_USE_TERMIOS=y
-> -CONFIG_FEATURE_EDITING=y
-> -CONFIG_FEATURE_EDITING_MAX_LEN=1024
-> -# CONFIG_FEATURE_EDITING_VI is not set
-> -CONFIG_FEATURE_EDITING_HISTORY=50
-> -CONFIG_FEATURE_EDITING_SAVEHISTORY=y
-> -CONFIG_FEATURE_TAB_COMPLETION=y
-> -CONFIG_FEATURE_USERNAME_COMPLETION=y
-> -CONFIG_FEATURE_EDITING_FANCY_PROMPT=y
-> -# CONFIG_FEATURE_EDITING_ASK_TERMINAL is not set
-> -CONFIG_FEATURE_NON_POSIX_CP=y
-> -CONFIG_FEATURE_VERBOSE_CP_MESSAGE=y
-> -CONFIG_FEATURE_COPYBUF_KB=4
-> -CONFIG_MONOTONIC_SYSCALL=y
-> -CONFIG_IOCTL_HEX2STR_ERROR=y
-> -# CONFIG_FEATURE_HWIB is not set
-> -
-> -#
-> -# Applets
-> -#
-> -
-> -#
-> -# Archival Utilities
-> -#
-> -CONFIG_FEATURE_SEAMLESS_XZ=y
-> -# CONFIG_FEATURE_SEAMLESS_LZMA is not set
-> -CONFIG_FEATURE_SEAMLESS_BZ2=y
-> -CONFIG_FEATURE_SEAMLESS_GZ=y
-> -CONFIG_FEATURE_SEAMLESS_Z=y
-> -CONFIG_AR=y
-> -CONFIG_FEATURE_AR_LONG_FILENAMES=y
-> -CONFIG_FEATURE_AR_CREATE=y
-> -CONFIG_BUNZIP2=y
-> -CONFIG_BZIP2=y
-> -CONFIG_CPIO=y
-> -CONFIG_FEATURE_CPIO_O=y
-> -CONFIG_FEATURE_CPIO_P=y
-> -# CONFIG_DPKG is not set
-> -# CONFIG_DPKG_DEB is not set
-> -# CONFIG_FEATURE_DPKG_DEB_EXTRACT_ONLY is not set
-> -CONFIG_GUNZIP=y
-> -CONFIG_GZIP=y
-> -CONFIG_FEATURE_GZIP_LONG_OPTIONS=y
-> -CONFIG_LZOP=y
-> -# CONFIG_LZOP_COMPR_HIGH is not set
-> -# CONFIG_RPM2CPIO is not set
-> -# CONFIG_RPM is not set
-> -CONFIG_TAR=y
-> -CONFIG_FEATURE_TAR_CREATE=y
-> -CONFIG_FEATURE_TAR_AUTODETECT=y
-> -CONFIG_FEATURE_TAR_FROM=y
-> -CONFIG_FEATURE_TAR_OLDGNU_COMPATIBILITY=y
-> -# CONFIG_FEATURE_TAR_OLDSUN_COMPATIBILITY is not set
-> -CONFIG_FEATURE_TAR_GNU_EXTENSIONS=y
-> -CONFIG_FEATURE_TAR_LONG_OPTIONS=y
-> -CONFIG_FEATURE_TAR_TO_COMMAND=y
-> -CONFIG_FEATURE_TAR_UNAME_GNAME=y
-> -CONFIG_FEATURE_TAR_NOPRESERVE_TIME=y
-> -# CONFIG_FEATURE_TAR_SELINUX is not set
-> -CONFIG_UNCOMPRESS=y
-> -CONFIG_UNLZMA=y
-> -# CONFIG_FEATURE_LZMA_FAST is not set
-> -CONFIG_LZMA=y
-> -CONFIG_UNXZ=y
-> -CONFIG_XZ=y
-> -CONFIG_UNZIP=y
-> -
-> -#
-> -# Coreutils
-> -#
-> -CONFIG_BASENAME=y
-> -CONFIG_CAT=y
-> -CONFIG_DATE=y
-> -CONFIG_FEATURE_DATE_ISOFMT=y
-> -# CONFIG_FEATURE_DATE_NANO is not set
-> -CONFIG_FEATURE_DATE_COMPAT=y
-> -CONFIG_TEST=y
-> -# CONFIG_FEATURE_TEST_64 is not set
-> -CONFIG_TR=y
-> -CONFIG_FEATURE_TR_CLASSES=y
-> -CONFIG_FEATURE_TR_EQUIV=y
-> -CONFIG_BASE64=y
-> -# CONFIG_CAL is not set
-> -# CONFIG_CATV is not set
-> -CONFIG_CHGRP=y
-> -CONFIG_CHMOD=y
-> -CONFIG_CHOWN=y
-> -CONFIG_FEATURE_CHOWN_LONG_OPTIONS=y
-> -CONFIG_CHROOT=y
-> -# CONFIG_CKSUM is not set
-> -# CONFIG_COMM is not set
-> -CONFIG_CP=y
-> -CONFIG_FEATURE_CP_LONG_OPTIONS=y
-> -CONFIG_CUT=y
-> -CONFIG_DD=y
-> -CONFIG_FEATURE_DD_SIGNAL_HANDLING=y
-> -CONFIG_FEATURE_DD_THIRD_STATUS_LINE=y
-> -CONFIG_FEATURE_DD_IBS_OBS=y
-> -CONFIG_DF=y
-> -# CONFIG_FEATURE_DF_FANCY is not set
-> -CONFIG_DIRNAME=y
-> -CONFIG_DOS2UNIX=y
-> -CONFIG_UNIX2DOS=y
-> -CONFIG_DU=y
-> -CONFIG_FEATURE_DU_DEFAULT_BLOCKSIZE_1K=y
-> -CONFIG_ECHO=y
-> -CONFIG_FEATURE_FANCY_ECHO=y
-> -CONFIG_ENV=y
-> -CONFIG_FEATURE_ENV_LONG_OPTIONS=y
-> -# CONFIG_EXPAND is not set
-> -# CONFIG_FEATURE_EXPAND_LONG_OPTIONS is not set
-> -CONFIG_EXPR=y
-> -# CONFIG_EXPR_MATH_SUPPORT_64 is not set
-> -CONFIG_FALSE=y
-> -# CONFIG_FOLD is not set
-> -CONFIG_FSYNC=y
-> -CONFIG_HEAD=y
-> -CONFIG_FEATURE_FANCY_HEAD=y
-> -# CONFIG_HOSTID is not set
-> -CONFIG_ID=y
-> -# CONFIG_INSTALL is not set
-> -# CONFIG_FEATURE_INSTALL_LONG_OPTIONS is not set
-> -CONFIG_LENGTH=y
-> -CONFIG_LN=y
-> -CONFIG_LOGNAME=y
-> -CONFIG_LS=y
-> -CONFIG_FEATURE_LS_FILETYPES=y
-> -CONFIG_FEATURE_LS_FOLLOWLINKS=y
-> -CONFIG_FEATURE_LS_RECURSIVE=y
-> -CONFIG_FEATURE_LS_SORTFILES=y
-> -CONFIG_FEATURE_LS_TIMESTAMPS=y
-> -CONFIG_FEATURE_LS_USERNAME=y
-> -CONFIG_FEATURE_LS_COLOR=y
-> -# CONFIG_FEATURE_LS_COLOR_IS_DEFAULT is not set
-> -CONFIG_MD5SUM=y
-> -CONFIG_MKDIR=y
-> -CONFIG_FEATURE_MKDIR_LONG_OPTIONS=y
-> -CONFIG_MKFIFO=y
-> -CONFIG_MKNOD=y
-> -CONFIG_MV=y
-> -CONFIG_FEATURE_MV_LONG_OPTIONS=y
-> -CONFIG_NICE=y
-> -CONFIG_NOHUP=y
-> -CONFIG_OD=y
-> -# CONFIG_PRINTENV is not set
-> -CONFIG_PRINTF=y
-> -CONFIG_PWD=y
-> -CONFIG_READLINK=y
-> -CONFIG_FEATURE_READLINK_FOLLOW=y
-> -CONFIG_REALPATH=y
-> -CONFIG_RM=y
-> -CONFIG_RMDIR=y
-> -CONFIG_FEATURE_RMDIR_LONG_OPTIONS=y
-> -CONFIG_SEQ=y
-> -CONFIG_SHA1SUM=y
-> -CONFIG_SHA256SUM=y
-> -CONFIG_SHA512SUM=y
-> -CONFIG_SLEEP=y
-> -CONFIG_FEATURE_FANCY_SLEEP=y
-> -# CONFIG_FEATURE_FLOAT_SLEEP is not set
-> -CONFIG_SORT=y
-> -CONFIG_FEATURE_SORT_BIG=y
-> -CONFIG_SPLIT=y
-> -CONFIG_FEATURE_SPLIT_FANCY=y
-> -# CONFIG_STAT is not set
-> -# CONFIG_FEATURE_STAT_FORMAT is not set
-> -CONFIG_STTY=y
-> -CONFIG_SUM=y
-> -CONFIG_SYNC=y
-> -# CONFIG_TAC is not set
-> -CONFIG_TAIL=y
-> -CONFIG_FEATURE_FANCY_TAIL=y
-> -CONFIG_TEE=y
-> -CONFIG_FEATURE_TEE_USE_BLOCK_IO=y
-> -CONFIG_TOUCH=y
-> -CONFIG_TRUE=y
-> -CONFIG_TTY=y
-> -CONFIG_UNAME=y
-> -# CONFIG_UNEXPAND is not set
-> -# CONFIG_FEATURE_UNEXPAND_LONG_OPTIONS is not set
-> -CONFIG_UNIQ=y
-> -CONFIG_USLEEP=y
-> -# CONFIG_UUDECODE is not set
-> -# CONFIG_UUENCODE is not set
-> -CONFIG_WC=y
-> -# CONFIG_FEATURE_WC_LARGE is not set
-> -CONFIG_WHO=y
-> -CONFIG_WHOAMI=y
-> -CONFIG_YES=y
-> -
-> -#
-> -# Common options for cp and mv
-> -#
-> -CONFIG_FEATURE_PRESERVE_HARDLINKS=y
-> -
-> -#
-> -# Common options for ls, more and telnet
-> -#
-> -CONFIG_FEATURE_AUTOWIDTH=y
-> -
-> -#
-> -# Common options for df, du, ls
-> -#
-> -CONFIG_FEATURE_HUMAN_READABLE=y
-> -
-> -#
-> -# Common options for md5sum, sha1sum, sha256sum, sha512sum
-> -#
-> -CONFIG_FEATURE_MD5_SHA1_SUM_CHECK=y
-> -
-> -#
-> -# Console Utilities
-> -#
-> -CONFIG_CHVT=y
-> -CONFIG_FGCONSOLE=y
-> -CONFIG_CLEAR=y
-> -CONFIG_DEALLOCVT=y
-> -CONFIG_DUMPKMAP=y
-> -CONFIG_KBD_MODE=y
-> -# CONFIG_LOADFONT is not set
-> -CONFIG_LOADKMAP=y
-> -CONFIG_OPENVT=y
-> -CONFIG_RESET=y
-> -CONFIG_RESIZE=y
-> -CONFIG_FEATURE_RESIZE_PRINT=y
-> -CONFIG_SETCONSOLE=y
-> -CONFIG_FEATURE_SETCONSOLE_LONG_OPTIONS=y
-> -# CONFIG_SETFONT is not set
-> -# CONFIG_FEATURE_SETFONT_TEXTUAL_MAP is not set
-> -CONFIG_DEFAULT_SETFONT_DIR=""
-> -CONFIG_SETKEYCODES=y
-> -CONFIG_SETLOGCONS=y
-> -# CONFIG_SHOWKEY is not set
-> -# CONFIG_FEATURE_LOADFONT_PSF2 is not set
-> -# CONFIG_FEATURE_LOADFONT_RAW is not set
-> -
-> -#
-> -# Debian Utilities
-> -#
-> -CONFIG_MKTEMP=y
-> -# CONFIG_PIPE_PROGRESS is not set
-> -CONFIG_RUN_PARTS=y
-> -CONFIG_FEATURE_RUN_PARTS_LONG_OPTIONS=y
-> -CONFIG_FEATURE_RUN_PARTS_FANCY=y
-> -CONFIG_START_STOP_DAEMON=y
-> -CONFIG_FEATURE_START_STOP_DAEMON_FANCY=y
-> -CONFIG_FEATURE_START_STOP_DAEMON_LONG_OPTIONS=y
-> -CONFIG_WHICH=y
-> -
-> -#
-> -# Editors
-> -#
-> -CONFIG_PATCH=y
-> -CONFIG_AWK=y
-> -# CONFIG_FEATURE_AWK_LIBM is not set
-> -CONFIG_CMP=y
-> -CONFIG_DIFF=y
-> -CONFIG_FEATURE_DIFF_LONG_OPTIONS=y
-> -CONFIG_FEATURE_DIFF_DIR=y
-> -# CONFIG_ED is not set
-> -CONFIG_SED=y
-> -CONFIG_VI=y
-> -CONFIG_FEATURE_VI_MAX_LEN=1024
-> -CONFIG_FEATURE_VI_8BIT=y
-> -CONFIG_FEATURE_VI_COLON=y
-> -CONFIG_FEATURE_VI_YANKMARK=y
-> -CONFIG_FEATURE_VI_SEARCH=y
-> -CONFIG_FEATURE_VI_USE_SIGNALS=y
-> -# CONFIG_FEATURE_VI_DOT_CMD is not set
-> -# CONFIG_FEATURE_VI_READONLY is not set
-> -# CONFIG_FEATURE_VI_SETOPTS is not set
-> -# CONFIG_FEATURE_VI_SET is not set
-> -CONFIG_FEATURE_VI_WIN_RESIZE=y
-> -CONFIG_FEATURE_VI_ASK_TERMINAL=y
-> -CONFIG_FEATURE_VI_OPTIMIZE_CURSOR=y
-> -CONFIG_FEATURE_ALLOW_EXEC=y
-> -
-> -#
-> -# Finding Utilities
-> -#
-> -CONFIG_FIND=y
-> -CONFIG_FEATURE_FIND_PRINT0=y
-> -CONFIG_FEATURE_FIND_MTIME=y
-> -CONFIG_FEATURE_FIND_MMIN=y
-> -CONFIG_FEATURE_FIND_PERM=y
-> -CONFIG_FEATURE_FIND_TYPE=y
-> -CONFIG_FEATURE_FIND_XDEV=y
-> -CONFIG_FEATURE_FIND_MAXDEPTH=y
-> -CONFIG_FEATURE_FIND_NEWER=y
-> -CONFIG_FEATURE_FIND_INUM=y
-> -CONFIG_FEATURE_FIND_EXEC=y
-> -CONFIG_FEATURE_FIND_USER=y
-> -CONFIG_FEATURE_FIND_GROUP=y
-> -CONFIG_FEATURE_FIND_NOT=y
-> -CONFIG_FEATURE_FIND_DEPTH=y
-> -CONFIG_FEATURE_FIND_PAREN=y
-> -CONFIG_FEATURE_FIND_SIZE=y
-> -CONFIG_FEATURE_FIND_PRUNE=y
-> -CONFIG_FEATURE_FIND_DELETE=y
-> -CONFIG_FEATURE_FIND_PATH=y
-> -CONFIG_FEATURE_FIND_REGEX=y
-> -# CONFIG_FEATURE_FIND_CONTEXT is not set
-> -CONFIG_FEATURE_FIND_LINKS=y
-> -CONFIG_GREP=y
-> -CONFIG_FEATURE_GREP_EGREP_ALIAS=y
-> -CONFIG_FEATURE_GREP_FGREP_ALIAS=y
-> -CONFIG_FEATURE_GREP_CONTEXT=y
-> -CONFIG_XARGS=y
-> -CONFIG_FEATURE_XARGS_SUPPORT_CONFIRMATION=y
-> -CONFIG_FEATURE_XARGS_SUPPORT_QUOTES=y
-> -CONFIG_FEATURE_XARGS_SUPPORT_TERMOPT=y
-> -CONFIG_FEATURE_XARGS_SUPPORT_ZERO_TERM=y
-> -
-> -#
-> -# Init Utilities
-> -#
-> -CONFIG_BOOTCHARTD=y
-> -CONFIG_FEATURE_BOOTCHARTD_BLOATED_HEADER=y
-> -CONFIG_FEATURE_BOOTCHARTD_CONFIG_FILE=y
-> -# CONFIG_HALT is not set
-> -# CONFIG_FEATURE_CALL_TELINIT is not set
-> -CONFIG_TELINIT_PATH=""
-> -# CONFIG_INIT is not set
-> -# CONFIG_FEATURE_USE_INITTAB is not set
-> -# CONFIG_FEATURE_KILL_REMOVED is not set
-> -CONFIG_FEATURE_KILL_DELAY=0
-> -# CONFIG_FEATURE_INIT_SCTTY is not set
-> -# CONFIG_FEATURE_INIT_SYSLOG is not set
-> -# CONFIG_FEATURE_EXTRA_QUIET is not set
-> -# CONFIG_FEATURE_INIT_COREDUMPS is not set
-> -# CONFIG_FEATURE_INITRD is not set
-> -CONFIG_INIT_TERMINAL_TYPE=""
-> -# CONFIG_MESG is not set
-> -
-> -#
-> -# Login/Password Management Utilities
-> -#
-> -# CONFIG_ADD_SHELL is not set
-> -# CONFIG_REMOVE_SHELL is not set
-> -# CONFIG_FEATURE_SHADOWPASSWDS is not set
-> -CONFIG_USE_BB_PWD_GRP=y
-> -# CONFIG_USE_BB_SHADOW is not set
-> -CONFIG_USE_BB_CRYPT=y
-> -CONFIG_USE_BB_CRYPT_SHA=y
-> -CONFIG_ADDUSER=y
-> -CONFIG_FEATURE_ADDUSER_LONG_OPTIONS=y
-> -CONFIG_FEATURE_CHECK_NAMES=y
-> -CONFIG_FIRST_SYSTEM_ID=100
-> -CONFIG_LAST_SYSTEM_ID=499
-> -CONFIG_ADDGROUP=y
-> -CONFIG_FEATURE_ADDGROUP_LONG_OPTIONS=y
-> -CONFIG_FEATURE_ADDUSER_TO_GROUP=y
-> -CONFIG_DELUSER=y
-> -CONFIG_DELGROUP=y
-> -CONFIG_FEATURE_DEL_USER_FROM_GROUP=y
-> -CONFIG_GETTY=y
-> -CONFIG_LOGIN=y
-> -# CONFIG_PAM is not set
-> -CONFIG_LOGIN_SCRIPTS=y
-> -CONFIG_FEATURE_NOLOGIN=y
-> -CONFIG_FEATURE_SECURETTY=y
-> -CONFIG_PASSWD=y
-> -CONFIG_FEATURE_PASSWD_WEAK_CHECK=y
-> -CONFIG_CRYPTPW=y
-> -CONFIG_CHPASSWD=y
-> -CONFIG_SU=y
-> -CONFIG_FEATURE_SU_SYSLOG=y
-> -CONFIG_FEATURE_SU_CHECKS_SHELLS=y
-> -CONFIG_SULOGIN=y
-> -# CONFIG_VLOCK is not set
-> -
-> -#
-> -# Linux Ext2 FS Progs
-> -#
-> -# CONFIG_CHATTR is not set
-> -# CONFIG_FSCK is not set
-> -# CONFIG_LSATTR is not set
-> -# CONFIG_TUNE2FS is not set
-> -
-> -#
-> -# Linux Module Utilities
-> -#
-> -CONFIG_MODINFO=y
-> -# CONFIG_MODPROBE_SMALL is not set
-> -# CONFIG_FEATURE_MODPROBE_SMALL_OPTIONS_ON_CMDLINE is not set
-> -# CONFIG_FEATURE_MODPROBE_SMALL_CHECK_ALREADY_LOADED is not set
-> -CONFIG_INSMOD=y
-> -CONFIG_RMMOD=y
-> -CONFIG_LSMOD=y
-> -CONFIG_FEATURE_LSMOD_PRETTY_2_6_OUTPUT=y
-> -CONFIG_MODPROBE=y
-> -CONFIG_FEATURE_MODPROBE_BLACKLIST=y
-> -CONFIG_DEPMOD=y
-> -
-> -#
-> -# Options common to multiple modutils
-> -#
-> -# CONFIG_FEATURE_2_4_MODULES is not set
-> -# CONFIG_FEATURE_INSMOD_TRY_MMAP is not set
-> -# CONFIG_FEATURE_INSMOD_VERSION_CHECKING is not set
-> -# CONFIG_FEATURE_INSMOD_KSYMOOPS_SYMBOLS is not set
-> -# CONFIG_FEATURE_INSMOD_LOADINKMEM is not set
-> -# CONFIG_FEATURE_INSMOD_LOAD_MAP is not set
-> -# CONFIG_FEATURE_INSMOD_LOAD_MAP_FULL is not set
-> -CONFIG_FEATURE_CHECK_TAINTED_MODULE=y
-> -CONFIG_FEATURE_MODUTILS_ALIAS=y
-> -CONFIG_FEATURE_MODUTILS_SYMBOLS=y
-> -CONFIG_DEFAULT_MODULES_DIR="/lib/modules"
-> -CONFIG_DEFAULT_DEPMOD_FILE="modules.dep"
-> -
-> -#
-> -# Linux System Utilities
-> -#
-> -CONFIG_BLOCKDEV=y
-> -CONFIG_REV=y
-> -CONFIG_ACPID=y
-> -CONFIG_FEATURE_ACPID_COMPAT=y
-> -CONFIG_BLKID=y
-> -CONFIG_DMESG=y
-> -CONFIG_FEATURE_DMESG_PRETTY=y
-> -# CONFIG_FBSET is not set
-> -# CONFIG_FEATURE_FBSET_FANCY is not set
-> -# CONFIG_FEATURE_FBSET_READMODE is not set
-> -# CONFIG_FDFLUSH is not set
-> -# CONFIG_FDFORMAT is not set
-> -CONFIG_FDISK=y
-> -CONFIG_FDISK_SUPPORT_LARGE_DISKS=y
-> -CONFIG_FEATURE_FDISK_WRITABLE=y
-> -# CONFIG_FEATURE_AIX_LABEL is not set
-> -# CONFIG_FEATURE_SGI_LABEL is not set
-> -# CONFIG_FEATURE_SUN_LABEL is not set
-> -# CONFIG_FEATURE_OSF_LABEL is not set
-> -# CONFIG_FEATURE_GPT_LABEL is not set
-> -CONFIG_FEATURE_FDISK_ADVANCED=y
-> -CONFIG_FINDFS=y
-> -CONFIG_FLOCK=y
-> -CONFIG_FREERAMDISK=y
-> -# CONFIG_FSCK_MINIX is not set
-> -CONFIG_MKFS_EXT2=y
-> -# CONFIG_MKFS_MINIX is not set
-> -# CONFIG_FEATURE_MINIX2 is not set
-> -# CONFIG_MKFS_REISER is not set
-> -CONFIG_MKFS_VFAT=y
-> -CONFIG_GETOPT=y
-> -CONFIG_FEATURE_GETOPT_LONG=y
-> -CONFIG_HEXDUMP=y
-> -CONFIG_FEATURE_HEXDUMP_REVERSE=y
-> -CONFIG_HD=y
-> -CONFIG_HWCLOCK=y
-> -CONFIG_FEATURE_HWCLOCK_LONG_OPTIONS=y
-> -CONFIG_FEATURE_HWCLOCK_ADJTIME_FHS=y
-> -# CONFIG_IPCRM is not set
-> -# CONFIG_IPCS is not set
-> -CONFIG_LOSETUP=y
-> -CONFIG_LSPCI=y
-> -CONFIG_LSUSB=y
-> -CONFIG_MDEV=y
-> -CONFIG_FEATURE_MDEV_CONF=y
-> -CONFIG_FEATURE_MDEV_RENAME=y
-> -CONFIG_FEATURE_MDEV_RENAME_REGEXP=y
-> -CONFIG_FEATURE_MDEV_EXEC=y
-> -CONFIG_FEATURE_MDEV_LOAD_FIRMWARE=y
-> -CONFIG_MKSWAP=y
-> -CONFIG_FEATURE_MKSWAP_UUID=y
-> -CONFIG_MORE=y
-> -CONFIG_MOUNT=y
-> -CONFIG_FEATURE_MOUNT_FAKE=y
-> -CONFIG_FEATURE_MOUNT_VERBOSE=y
-> -CONFIG_FEATURE_MOUNT_HELPERS=y
-> -CONFIG_FEATURE_MOUNT_LABEL=y
-> -CONFIG_FEATURE_MOUNT_NFS=y
-> -CONFIG_FEATURE_MOUNT_CIFS=y
-> -CONFIG_FEATURE_MOUNT_FLAGS=y
-> -CONFIG_FEATURE_MOUNT_FSTAB=y
-> -CONFIG_PIVOT_ROOT=y
-> -CONFIG_RDATE=y
-> -# CONFIG_RDEV is not set
-> -# CONFIG_READPROFILE is not set
-> -# CONFIG_RTCWAKE is not set
-> -CONFIG_SCRIPT=y
-> -CONFIG_SCRIPTREPLAY=y
-> -# CONFIG_SETARCH is not set
-> -CONFIG_SWAPONOFF=y
-> -CONFIG_FEATURE_SWAPON_PRI=y
-> -CONFIG_SWITCH_ROOT=y
-> -CONFIG_UMOUNT=y
-> -CONFIG_FEATURE_UMOUNT_ALL=y
-> -
-> -#
-> -# Common options for mount/umount
-> -#
-> -CONFIG_FEATURE_MOUNT_LOOP=y
-> -CONFIG_FEATURE_MOUNT_LOOP_CREATE=y
-> -# CONFIG_FEATURE_MTAB_SUPPORT is not set
-> -CONFIG_VOLUMEID=y
-> -
-> -#
-> -# Filesystem/Volume identification
-> -#
-> -CONFIG_FEATURE_VOLUMEID_EXT=y
-> -CONFIG_FEATURE_VOLUMEID_BTRFS=y
-> -# CONFIG_FEATURE_VOLUMEID_REISERFS is not set
-> -CONFIG_FEATURE_VOLUMEID_FAT=y
-> -CONFIG_FEATURE_VOLUMEID_HFS=y
-> -CONFIG_FEATURE_VOLUMEID_JFS=y
-> -# CONFIG_FEATURE_VOLUMEID_XFS is not set
-> -CONFIG_FEATURE_VOLUMEID_NTFS=y
-> -CONFIG_FEATURE_VOLUMEID_ISO9660=y
-> -CONFIG_FEATURE_VOLUMEID_UDF=y
-> -CONFIG_FEATURE_VOLUMEID_LUKS=y
-> -CONFIG_FEATURE_VOLUMEID_LINUXSWAP=y
-> -# CONFIG_FEATURE_VOLUMEID_CRAMFS is not set
-> -# CONFIG_FEATURE_VOLUMEID_ROMFS is not set
-> -# CONFIG_FEATURE_VOLUMEID_SYSV is not set
-> -# CONFIG_FEATURE_VOLUMEID_OCFS2 is not set
-> -CONFIG_FEATURE_VOLUMEID_LINUXRAID=y
-> -
-> -#
-> -# Miscellaneous Utilities
-> -#
-> -# CONFIG_CONSPY is not set
-> -# CONFIG_NANDWRITE is not set
-> -# CONFIG_NANDDUMP is not set
-> -# CONFIG_UBIATTACH is not set
-> -# CONFIG_UBIDETACH is not set
-> -CONFIG_ADJTIMEX=y
-> -CONFIG_BBCONFIG=y
-> -CONFIG_FEATURE_COMPRESS_BBCONFIG=y
-> -CONFIG_BEEP=y
-> -CONFIG_FEATURE_BEEP_FREQ=4000
-> -CONFIG_FEATURE_BEEP_LENGTH_MS=30
-> -# CONFIG_CHAT is not set
-> -# CONFIG_FEATURE_CHAT_NOFAIL is not set
-> -# CONFIG_FEATURE_CHAT_TTY_HIFI is not set
-> -# CONFIG_FEATURE_CHAT_IMPLICIT_CR is not set
-> -# CONFIG_FEATURE_CHAT_SWALLOW_OPTS is not set
-> -# CONFIG_FEATURE_CHAT_SEND_ESCAPES is not set
-> -# CONFIG_FEATURE_CHAT_VAR_ABORT_LEN is not set
-> -# CONFIG_FEATURE_CHAT_CLR_ABORT is not set
-> -CONFIG_CHRT=y
-> -CONFIG_CROND=y
-> -# CONFIG_FEATURE_CROND_D is not set
-> -# CONFIG_FEATURE_CROND_CALL_SENDMAIL is not set
-> -CONFIG_FEATURE_CROND_DIR="/var/spool/cron"
-> -CONFIG_CRONTAB=y
-> -CONFIG_DC=y
-> -# CONFIG_FEATURE_DC_LIBM is not set
-> -# CONFIG_DEVFSD is not set
-> -# CONFIG_DEVFSD_MODLOAD is not set
-> -# CONFIG_DEVFSD_FG_NP is not set
-> -# CONFIG_DEVFSD_VERBOSE is not set
-> -# CONFIG_FEATURE_DEVFS is not set
-> -# CONFIG_DEVMEM is not set
-> -# CONFIG_EJECT is not set
-> -# CONFIG_FEATURE_EJECT_SCSI is not set
-> -# CONFIG_FBSPLASH is not set
-> -# CONFIG_FLASHCP is not set
-> -# CONFIG_FLASH_LOCK is not set
-> -# CONFIG_FLASH_UNLOCK is not set
-> -# CONFIG_FLASH_ERASEALL is not set
-> -CONFIG_IONICE=y
-> -# CONFIG_INOTIFYD is not set
-> -# CONFIG_LAST is not set
-> -# CONFIG_FEATURE_LAST_SMALL is not set
-> -# CONFIG_FEATURE_LAST_FANCY is not set
-> -CONFIG_LESS=y
-> -CONFIG_FEATURE_LESS_MAXLINES=9999999
-> -CONFIG_FEATURE_LESS_BRACKETS=y
-> -CONFIG_FEATURE_LESS_FLAGS=y
-> -CONFIG_FEATURE_LESS_MARKS=y
-> -CONFIG_FEATURE_LESS_REGEXP=y
-> -# CONFIG_FEATURE_LESS_WINCH is not set
-> -# CONFIG_FEATURE_LESS_DASHCMD is not set
-> -# CONFIG_FEATURE_LESS_LINENUMS is not set
-> -# CONFIG_HDPARM is not set
-> -# CONFIG_FEATURE_HDPARM_GET_IDENTITY is not set
-> -# CONFIG_FEATURE_HDPARM_HDIO_SCAN_HWIF is not set
-> -# CONFIG_FEATURE_HDPARM_HDIO_UNREGISTER_HWIF is not set
-> -# CONFIG_FEATURE_HDPARM_HDIO_DRIVE_RESET is not set
-> -# CONFIG_FEATURE_HDPARM_HDIO_TRISTATE_HWIF is not set
-> -# CONFIG_FEATURE_HDPARM_HDIO_GETSET_DMA is not set
-> -CONFIG_MAKEDEVS=y
-> -# CONFIG_FEATURE_MAKEDEVS_LEAF is not set
-> -CONFIG_FEATURE_MAKEDEVS_TABLE=y
-> -# CONFIG_MAN is not set
-> -CONFIG_MICROCOM=y
-> -CONFIG_MOUNTPOINT=y
-> -# CONFIG_MT is not set
-> -CONFIG_RAIDAUTORUN=y
-> -CONFIG_READAHEAD=y
-> -# CONFIG_RFKILL is not set
-> -CONFIG_RUNLEVEL=y
-> -CONFIG_RX=y
-> -# CONFIG_SETSID is not set
-> -CONFIG_STRINGS=y
-> -# CONFIG_TASKSET is not set
-> -# CONFIG_FEATURE_TASKSET_FANCY is not set
-> -CONFIG_TIME=y
-> -CONFIG_TIMEOUT=y
-> -# CONFIG_TTYSIZE is not set
-> -CONFIG_VOLNAME=y
-> -CONFIG_WALL=y
-> -CONFIG_WATCHDOG=y
-> -
-> -#
-> -# Networking Utilities
-> -#
-> -CONFIG_NBDCLIENT=y
-> -CONFIG_NC=y
-> -CONFIG_NC_SERVER=y
-> -CONFIG_NC_EXTRA=y
-> -# CONFIG_NC_110_COMPAT is not set
-> -CONFIG_FEATURE_IPV6=y
-> -# CONFIG_FEATURE_UNIX_LOCAL is not set
-> -CONFIG_FEATURE_PREFER_IPV4_ADDRESS=y
-> -CONFIG_VERBOSE_RESOLUTION_ERRORS=y
-> -CONFIG_ARP=y
-> -CONFIG_ARPING=y
-> -CONFIG_BRCTL=y
-> -CONFIG_FEATURE_BRCTL_FANCY=y
-> -CONFIG_FEATURE_BRCTL_SHOW=y
-> -# CONFIG_DNSD is not set
-> -# CONFIG_ETHER_WAKE is not set
-> -# CONFIG_FAKEIDENTD is not set
-> -CONFIG_FTPD=y
-> -CONFIG_FEATURE_FTP_WRITE=y
-> -CONFIG_FEATURE_FTPD_ACCEPT_BROKEN_LIST=y
-> -# CONFIG_FTPGET is not set
-> -# CONFIG_FTPPUT is not set
-> -# CONFIG_FEATURE_FTPGETPUT_LONG_OPTIONS is not set
-> -CONFIG_HOSTNAME=y
-> -CONFIG_HTTPD=y
-> -CONFIG_FEATURE_HTTPD_RANGES=y
-> -CONFIG_FEATURE_HTTPD_USE_SENDFILE=y
-> -CONFIG_FEATURE_HTTPD_SETUID=y
-> -CONFIG_FEATURE_HTTPD_BASIC_AUTH=y
-> -CONFIG_FEATURE_HTTPD_AUTH_MD5=y
-> -CONFIG_FEATURE_HTTPD_CGI=y
-> -CONFIG_FEATURE_HTTPD_CONFIG_WITH_SCRIPT_INTERPR=y
-> -CONFIG_FEATURE_HTTPD_SET_REMOTE_PORT_TO_ENV=y
-> -CONFIG_FEATURE_HTTPD_ENCODE_URL_STR=y
-> -CONFIG_FEATURE_HTTPD_ERROR_PAGES=y
-> -CONFIG_FEATURE_HTTPD_PROXY=y
-> -CONFIG_FEATURE_HTTPD_GZIP=y
-> -CONFIG_IFCONFIG=y
-> -CONFIG_FEATURE_IFCONFIG_STATUS=y
-> -# CONFIG_FEATURE_IFCONFIG_SLIP is not set
-> -# CONFIG_FEATURE_IFCONFIG_MEMSTART_IOADDR_IRQ is not set
-> -CONFIG_FEATURE_IFCONFIG_HW=y
-> -CONFIG_FEATURE_IFCONFIG_BROADCAST_PLUS=y
-> -# CONFIG_IFENSLAVE is not set
-> -CONFIG_IFPLUGD=y
-> -CONFIG_IFUPDOWN=y
-> -CONFIG_IFUPDOWN_IFSTATE_PATH="/var/run/ifstate"
-> -# CONFIG_FEATURE_IFUPDOWN_IP is not set
-> -# CONFIG_FEATURE_IFUPDOWN_IP_BUILTIN is not set
-> -CONFIG_FEATURE_IFUPDOWN_IFCONFIG_BUILTIN=y
-> -CONFIG_FEATURE_IFUPDOWN_IPV4=y
-> -CONFIG_FEATURE_IFUPDOWN_IPV6=y
-> -# CONFIG_FEATURE_IFUPDOWN_MAPPING is not set
-> -# CONFIG_FEATURE_IFUPDOWN_EXTERNAL_DHCP is not set
-> -# CONFIG_INETD is not set
-> -# CONFIG_FEATURE_INETD_SUPPORT_BUILTIN_ECHO is not set
-> -# CONFIG_FEATURE_INETD_SUPPORT_BUILTIN_DISCARD is not set
-> -# CONFIG_FEATURE_INETD_SUPPORT_BUILTIN_TIME is not set
-> -# CONFIG_FEATURE_INETD_SUPPORT_BUILTIN_DAYTIME is not set
-> -# CONFIG_FEATURE_INETD_SUPPORT_BUILTIN_CHARGEN is not set
-> -# CONFIG_FEATURE_INETD_RPC is not set
-> -CONFIG_IP=y
-> -CONFIG_FEATURE_IP_ADDRESS=y
-> -CONFIG_FEATURE_IP_LINK=y
-> -CONFIG_FEATURE_IP_ROUTE=y
-> -CONFIG_FEATURE_IP_TUNNEL=y
-> -CONFIG_FEATURE_IP_RULE=y
-> -CONFIG_FEATURE_IP_SHORT_FORMS=y
-> -# CONFIG_FEATURE_IP_RARE_PROTOCOLS is not set
-> -CONFIG_IPADDR=y
-> -CONFIG_IPLINK=y
-> -CONFIG_IPROUTE=y
-> -CONFIG_IPTUNNEL=y
-> -CONFIG_IPRULE=y
-> -CONFIG_IPCALC=y
-> -CONFIG_FEATURE_IPCALC_FANCY=y
-> -CONFIG_FEATURE_IPCALC_LONG_OPTIONS=y
-> -# CONFIG_NAMEIF is not set
-> -# CONFIG_FEATURE_NAMEIF_EXTENDED is not set
-> -CONFIG_NETSTAT=y
-> -CONFIG_FEATURE_NETSTAT_WIDE=y
-> -# CONFIG_FEATURE_NETSTAT_PRG is not set
-> -CONFIG_NSLOOKUP=y
-> -CONFIG_NTPD=y
-> -CONFIG_FEATURE_NTPD_SERVER=y
-> -CONFIG_PING=y
-> -CONFIG_PING6=y
-> -CONFIG_FEATURE_FANCY_PING=y
-> -CONFIG_PSCAN=y
-> -CONFIG_ROUTE=y
-> -# CONFIG_SLATTACH is not set
-> -# CONFIG_TCPSVD is not set
-> -CONFIG_TELNET=y
-> -CONFIG_FEATURE_TELNET_TTYPE=y
-> -CONFIG_FEATURE_TELNET_AUTOLOGIN=y
-> -# CONFIG_TELNETD is not set
-> -# CONFIG_FEATURE_TELNETD_STANDALONE is not set
-> -# CONFIG_FEATURE_TELNETD_INETD_WAIT is not set
-> -CONFIG_TFTP=y
-> -# CONFIG_TFTPD is not set
-> -
-> -#
-> -# Common options for tftp/tftpd
-> -#
-> -CONFIG_FEATURE_TFTP_GET=y
-> -CONFIG_FEATURE_TFTP_PUT=y
-> -CONFIG_FEATURE_TFTP_BLOCKSIZE=y
-> -CONFIG_FEATURE_TFTP_PROGRESS_BAR=y
-> -# CONFIG_TFTP_DEBUG is not set
-> -CONFIG_TRACEROUTE=y
-> -CONFIG_TRACEROUTE6=y
-> -CONFIG_FEATURE_TRACEROUTE_VERBOSE=y
-> -CONFIG_FEATURE_TRACEROUTE_SOURCE_ROUTE=y
-> -# CONFIG_FEATURE_TRACEROUTE_USE_ICMP is not set
-> -CONFIG_TUNCTL=y
-> -CONFIG_FEATURE_TUNCTL_UG=y
-> -# CONFIG_UDHCPD is not set
-> -# CONFIG_DHCPRELAY is not set
-> -# CONFIG_DUMPLEASES is not set
-> -# CONFIG_FEATURE_UDHCPD_WRITE_LEASES_EARLY is not set
-> -CONFIG_DHCPD_LEASES_FILE=""
-> -CONFIG_UDHCPC=y
-> -CONFIG_FEATURE_UDHCPC_ARPING=y
-> -# CONFIG_FEATURE_UDHCP_PORT is not set
-> -CONFIG_UDHCP_DEBUG=9
-> -# CONFIG_FEATURE_UDHCP_RFC3397 is not set
-> -CONFIG_UDHCPC_DEFAULT_SCRIPT="/usr/share/udhcpc/default.script"
-> -CONFIG_UDHCPC_SLACK_FOR_BUGGY_SERVERS=120
-> -CONFIG_IFUPDOWN_UDHCPC_CMD_OPTIONS="-R -n"
-> -# CONFIG_UDPSVD is not set
-> -CONFIG_VCONFIG=y
-> -CONFIG_WGET=y
-> -CONFIG_FEATURE_WGET_STATUSBAR=y
-> -CONFIG_FEATURE_WGET_AUTHENTICATION=y
-> -CONFIG_FEATURE_WGET_LONG_OPTIONS=y
-> -CONFIG_FEATURE_WGET_TIMEOUT=y
-> -# CONFIG_ZCIP is not set
-> -
-> -#
-> -# Print Utilities
-> -#
-> -# CONFIG_LPD is not set
-> -# CONFIG_LPR is not set
-> -# CONFIG_LPQ is not set
-> -
-> -#
-> -# Mail Utilities
-> -#
-> -# CONFIG_MAKEMIME is not set
-> -CONFIG_FEATURE_MIME_CHARSET=""
-> -# CONFIG_POPMAILDIR is not set
-> -# CONFIG_FEATURE_POPMAILDIR_DELIVERY is not set
-> -# CONFIG_REFORMIME is not set
-> -# CONFIG_FEATURE_REFORMIME_COMPAT is not set
-> -# CONFIG_SENDMAIL is not set
-> -
-> -#
-> -# Process Utilities
-> -#
-> -CONFIG_IOSTAT=y
-> -CONFIG_MPSTAT=y
-> -CONFIG_PMAP=y
-> -CONFIG_POWERTOP=y
-> -CONFIG_SMEMCAP=y
-> -CONFIG_FREE=y
-> -CONFIG_FUSER=y
-> -CONFIG_KILL=y
-> -CONFIG_KILLALL=y
-> -CONFIG_KILLALL5=y
-> -# CONFIG_NMETER is not set
-> -# CONFIG_PGREP is not set
-> -CONFIG_PIDOF=y
-> -CONFIG_FEATURE_PIDOF_SINGLE=y
-> -CONFIG_FEATURE_PIDOF_OMIT=y
-> -CONFIG_PKILL=y
-> -CONFIG_PS=y
-> -CONFIG_FEATURE_PS_WIDE=y
-> -# CONFIG_FEATURE_PS_TIME is not set
-> -# CONFIG_FEATURE_PS_ADDITIONAL_COLUMNS is not set
-> -# CONFIG_FEATURE_PS_UNUSUAL_SYSTEMS is not set
-> -CONFIG_RENICE=y
-> -CONFIG_BB_SYSCTL=y
-> -CONFIG_TOP=y
-> -CONFIG_FEATURE_TOP_CPU_USAGE_PERCENTAGE=y
-> -CONFIG_FEATURE_TOP_CPU_GLOBAL_PERCENTS=y
-> -# CONFIG_FEATURE_TOP_SMP_CPU is not set
-> -CONFIG_FEATURE_TOP_DECIMALS=y
-> -# CONFIG_FEATURE_TOP_SMP_PROCESS is not set
-> -CONFIG_FEATURE_TOPMEM=y
-> -CONFIG_FEATURE_SHOW_THREADS=y
-> -CONFIG_UPTIME=y
-> -CONFIG_WATCH=y
-> -
-> -#
-> -# Runit Utilities
-> -#
-> -# CONFIG_RUNSV is not set
-> -# CONFIG_RUNSVDIR is not set
-> -# CONFIG_FEATURE_RUNSVDIR_LOG is not set
-> -# CONFIG_SV is not set
-> -CONFIG_SV_DEFAULT_SERVICE_DIR=""
-> -# CONFIG_SVLOGD is not set
-> -# CONFIG_CHPST is not set
-> -# CONFIG_SETUIDGID is not set
-> -# CONFIG_ENVUIDGID is not set
-> -# CONFIG_ENVDIR is not set
-> -# CONFIG_SOFTLIMIT is not set
-> -# CONFIG_CHCON is not set
-> -# CONFIG_FEATURE_CHCON_LONG_OPTIONS is not set
-> -# CONFIG_GETENFORCE is not set
-> -# CONFIG_GETSEBOOL is not set
-> -# CONFIG_LOAD_POLICY is not set
-> -# CONFIG_MATCHPATHCON is not set
-> -# CONFIG_RESTORECON is not set
-> -# CONFIG_RUNCON is not set
-> -# CONFIG_FEATURE_RUNCON_LONG_OPTIONS is not set
-> -# CONFIG_SELINUXENABLED is not set
-> -# CONFIG_SETENFORCE is not set
-> -# CONFIG_SETFILES is not set
-> -# CONFIG_FEATURE_SETFILES_CHECK_OPTION is not set
-> -# CONFIG_SETSEBOOL is not set
-> -# CONFIG_SESTATUS is not set
-> -
-> -#
-> -# Shells
-> -#
-> -CONFIG_ASH=y
-> -CONFIG_ASH_BASH_COMPAT=y
-> -CONFIG_ASH_JOB_CONTROL=y
-> -CONFIG_ASH_ALIAS=y
-> -CONFIG_ASH_GETOPTS=y
-> -CONFIG_ASH_BUILTIN_ECHO=y
-> -CONFIG_ASH_BUILTIN_PRINTF=y
-> -CONFIG_ASH_BUILTIN_TEST=y
-> -CONFIG_ASH_CMDCMD=y
-> -# CONFIG_ASH_MAIL is not set
-> -CONFIG_ASH_OPTIMIZE_FOR_SIZE=y
-> -CONFIG_ASH_RANDOM_SUPPORT=y
-> -CONFIG_ASH_EXPAND_PRMT=y
-> -CONFIG_CTTYHACK=y
-> -# CONFIG_HUSH is not set
-> -# CONFIG_HUSH_BASH_COMPAT is not set
-> -# CONFIG_HUSH_BRACE_EXPANSION is not set
-> -# CONFIG_HUSH_HELP is not set
-> -# CONFIG_HUSH_INTERACTIVE is not set
-> -# CONFIG_HUSH_SAVEHISTORY is not set
-> -# CONFIG_HUSH_JOB is not set
-> -# CONFIG_HUSH_TICK is not set
-> -# CONFIG_HUSH_IF is not set
-> -# CONFIG_HUSH_LOOPS is not set
-> -# CONFIG_HUSH_CASE is not set
-> -# CONFIG_HUSH_FUNCTIONS is not set
-> -# CONFIG_HUSH_LOCAL is not set
-> -# CONFIG_HUSH_RANDOM_SUPPORT is not set
-> -# CONFIG_HUSH_EXPORT_N is not set
-> -# CONFIG_HUSH_MODE_X is not set
-> -# CONFIG_MSH is not set
-> -CONFIG_FEATURE_SH_IS_ASH=y
-> -# CONFIG_FEATURE_SH_IS_HUSH is not set
-> -# CONFIG_FEATURE_SH_IS_NONE is not set
-> -# CONFIG_FEATURE_BASH_IS_ASH is not set
-> -# CONFIG_FEATURE_BASH_IS_HUSH is not set
-> -CONFIG_FEATURE_BASH_IS_NONE=y
-> -CONFIG_SH_MATH_SUPPORT=y
-> -CONFIG_SH_MATH_SUPPORT_64=y
-> -CONFIG_FEATURE_SH_EXTRA_QUIET=y
-> -# CONFIG_FEATURE_SH_STANDALONE is not set
-> -# CONFIG_FEATURE_SH_NOFORK is not set
-> -
-> -#
-> -# System Logging Utilities
-> -#
-> -CONFIG_SYSLOGD=y
-> -CONFIG_FEATURE_ROTATE_LOGFILE=y
-> -CONFIG_FEATURE_REMOTE_LOG=y
-> -CONFIG_FEATURE_SYSLOGD_DUP=y
-> -CONFIG_FEATURE_SYSLOGD_READ_BUFFER_SIZE=256
-> -CONFIG_FEATURE_IPC_SYSLOG=y
-> -CONFIG_FEATURE_IPC_SYSLOG_BUFFER_SIZE=16
-> -CONFIG_LOGREAD=y
-> -CONFIG_FEATURE_LOGREAD_REDUCED_LOCKING=y
-> -CONFIG_KLOGD=y
-> -CONFIG_FEATURE_KLOGD_KLOGCTL=y
-> -CONFIG_LOGGER=y
-> diff --git a/recipes/busybox/busybox-1.18.3/udhcpc-fix-nfsroot.patch b/recipes/busybox/busybox-1.18.3/udhcpc-fix-nfsroot.patch
-> deleted file mode 100644
-> index 3b975b6..0000000
-> --- a/recipes/busybox/busybox-1.18.3/udhcpc-fix-nfsroot.patch
-> +++ /dev/null
-> @@ -1,47 +0,0 @@
-> -Index: busybox-1.15.1/examples/udhcp/simple.script
-> -===================================================================
-> ---- busybox-1.15.1.orig/examples/udhcp/simple.script	2009-09-16 22:52:09.000000000 +0200
-> -+++ busybox-1.15.1/examples/udhcp/simple.script	2009-09-16 22:57:11.424608476 +0200
-> -@@ -10,10 +10,17 @@ NETMASK=""
-> - BROADCAST="broadcast +"
-> - [ -n "$broadcast" ]&&  BROADCAST="broadcast $broadcast"
-> -
-> -+# return 0 if root is mounted on a network filesystem
-> -+root_is_nfs() {
-> -+	grep -qe '^/dev/root.*\(nfs\|smbfs\|ncp\|coda\) .*' /proc/mounts
-> -+}
-> -+
-> - case "$1" in
-> - 	deconfig)
-> -+		if ! root_is_nfs ; then
-> - 		echo "Setting IP address 0.0.0.0 on $interface"
-> --		ifconfig $interface 0.0.0.0
-> -+			ifconfig $interface 0.0.0.0
-> -+		fi
-> - 		;;
-> -
-> - 	renew|bound)
-> -@@ -21,15 +28,18 @@ case "$1" in
-> - 		ifconfig $interface $ip $NETMASK $BROADCAST
-> -
-> - 		if [ -n "$router" ] ; then
-> --			echo "Deleting routers"
-> --			while route del default gw 0.0.0.0 dev $interface 2>/dev/null ; do
-> --				:
-> --			done
-> -+			if ! root_is_nfs ; then
-> -+				echo "Deleting routers"
-> -+				while route del default gw 0.0.0.0 dev $interface 2>/dev/null ; do
-> -+					:
-> -+				done
-> -+			:
-> -+		done
-> -
-> - 			metric=0
-> - 			for i in $router ; do
-> - 				echo "Adding router $i"
-> --				route add default gw $i dev $interface metric $((metric++))
-> -+				route add default gw $i dev $interface metric $((metric++)) 2>/dev/null
-> - 			done
-> - 		fi
-> -
-> diff --git a/recipes/busybox/busybox-1.18.3/udhcpc-new-nfsroot.patch b/recipes/busybox/busybox-1.18.3/udhcpc-new-nfsroot.patch
-> deleted file mode 100644
-> index 46aaab9..0000000
-> --- a/recipes/busybox/busybox-1.18.3/udhcpc-new-nfsroot.patch
-> +++ /dev/null
-> @@ -1,16 +0,0 @@
-> -diff -uNr busybox-1.13.2.orig/examples/udhcp/simple.script busybox-1.13.2/examples/udhcp/simple.script
-> ---- busybox-1.13.2.orig/examples/udhcp/simple.script	2011-02-23 00:30:32.000000000 -0500
-> -+++ busybox-1.13.2/examples/udhcp/simple.script	2011-02-23 17:05:37.873381763 -0500
-> -@@ -10,7 +10,12 @@
-> -
-> - # return 0 if root is mounted on a network filesystem
-> - root_is_nfs() {
-> -+	# old style mounts
-> - 	grep -qe '^/dev/root.*\(nfs\|smbfs\|ncp\|coda\) .*' /proc/mounts
-> -+	if ! $? ; then
-> -+		# new style mounts
-> -+		grep -qe '^.*:.* / \(nfs\|smbfs\|ncp\|coda\) .*' /proc/mounts
-> -+	fi
-> - }
-> -
-> - case "$1" in
-> diff --git a/recipes/busybox/busybox-1.18.3/udhcpscript.patch b/recipes/busybox/busybox-1.18.3/udhcpscript.patch
-> deleted file mode 100644
-> index 2ffba95..0000000
-> --- a/recipes/busybox/busybox-1.18.3/udhcpscript.patch
-> +++ /dev/null
-> @@ -1,13 +0,0 @@
-> -Index: busybox-1.15.1/examples/udhcp/simple.script
-> -===================================================================
-> ---- busybox-1.15.1.orig/examples/udhcp/simple.script	2009-09-12 17:55:36.000000000 +0200
-> -+++ busybox-1.15.1/examples/udhcp/simple.script	2009-09-16 22:51:06.599693412 +0200
-> -@@ -22,7 +22,7 @@ case "$1" in
-> -
-> - 		if [ -n "$router" ] ; then
-> - 			echo "Deleting routers"
-> --			while route del default gw 0.0.0.0 dev $interface ; do
-> -+			while route del default gw 0.0.0.0 dev $interface 2>/dev/null ; do
-> - 				:
-> - 			done
-> -
-> diff --git a/recipes/busybox/busybox-static_1.18.3.bb b/recipes/busybox/busybox-static_1.18.3.bb
-> deleted file mode 100644
-> index 05cca17..0000000
-> --- a/recipes/busybox/busybox-static_1.18.3.bb
-> +++ /dev/null
-> @@ -1,4 +0,0 @@
-> -require busybox_${PV}.bb
-> -
-> -FILESPATHPKG =. "${P}:${BPN}:busybox-${PV}:"
-> -S = "${WORKDIR}/busybox-${PV}"
-> diff --git a/recipes/busybox/busybox_1.18.3.bb b/recipes/busybox/busybox_1.18.3.bb
-> deleted file mode 100644
-> index 39c386e..0000000
-> --- a/recipes/busybox/busybox_1.18.3.bb
-> +++ /dev/null
-> @@ -1,26 +0,0 @@
-> -require busybox_1.1x.inc
-> -PR = "${INC_PR}.4"
-> -
-> -SRC_URI += " \
-> -	http://busybox.net/downloads/fixes-1.18.3/busybox-1.18.3-buildsys.patch;name=patch01 \
-> -	http://busybox.net/downloads/fixes-1.18.3/busybox-1.18.3-modutils24.patch;name=patch02 \
-> -	http://busybox.net/downloads/fixes-1.18.3/busybox-1.18.3-wget.patch;name=patch03 \
-> -        http://busybox.net/downloads/fixes-1.18.3/busybox-1.18.3-menuconfig.patch;name=patch04 \
-> -	http://busybox.net/downloads/fixes-1.18.3/busybox-1.18.3-klogd.patch;name=patch05 \
-> -	http://busybox.net/downloads/fixes-1.18.3/busybox-1.18.3-cksum.patch;name=patch06 \
-> -	"
-> -
-> -SRC_URI[md5sum] = "660af4d44661d32b22025a66f4f78df2"
-> -SRC_URI[sha256sum] = "83f112ee88b7eb85bea1cac0b1af33f61387a1036f1898c5ecd79813191a619b"
-> -SRC_URI[patch01.md5sum] = "1270a714d2ed9940f04379c97bb83cba"
-> -SRC_URI[patch01.sha256sum] = "cb438f0a5c46125387187b4a2389d56f7aa8db5a308aed314f5866cf9a09b72b"
-> -SRC_URI[patch02.md5sum] = "ce7c3421c87088a7f779278680563bff"
-> -SRC_URI[patch02.sha256sum] = "134ed86867784348f484810464df5bc97589e7aa41079c90e35b8d12b9284df8"
-> -SRC_URI[patch03.md5sum] = "abe065069fed8458eedbdad48c115e1f"
-> -SRC_URI[patch03.sha256sum] = "22538ebee96f66916104b8143cfd16e21568da4c5a89128b9daa60d83a59120b"
-> -SRC_URI[patch04.md5sum] = "d12d997b66669451bd8c4cc494162a80"
-> -SRC_URI[patch04.sha256sum] = "f3f8466432088248492fc44631a765ed0a95a8b7d14e37483fae25158d07dc68"
-> -SRC_URI[patch05.md5sum] = "f2277e7a31d04295bd9d56a98ff1535b"
-> -SRC_URI[patch05.sha256sum] = "4c7ab0e7d940a4aaf54a0b6fd21f00ab025eaf025d47f2e085a6269e1842016c"
-> -SRC_URI[patch06.md5sum] = "04d7d01e71b2875f3093d4de9fa8c001"
-> -SRC_URI[patch06.sha256sum] = "4ce825550723ded45a5cc71ac524cce50342508cfff118172f64e8e86bb65828"
+> diff --git a/recipes/php/php-5.3.5/acinclude-xml2-config.patch b/recipes/php/php-5.3.5/acinclude-xml2-config.patch
+> new file mode 100644
+> index 0000000..bf519d2
+> --- /dev/null
+> +++ b/recipes/php/php-5.3.5/acinclude-xml2-config.patch
+> @@ -0,0 +1,18 @@
+> +--- /orig-acinclude.m4 2007-02-20 15:03:25.000000000 +0200
+> ++++ /acinclude.m4      2007-02-20 15:03:24.000000000 +0200
+> +@@ -2359,12 +2359,9 @@
+> + AC_DEFUN([PHP_SETUP_LIBXML], [
+> + AC_CACHE_CHECK([for xml2-config path], ac_cv_php_xml2_config_path,
+> + [
+> +-  for i in $PHP_LIBXML_DIR /usr/local /usr; do
+> +-    if test -x "$i/bin/xml2-config"; then
+> +-      ac_cv_php_xml2_config_path="$i/bin/xml2-config"
+> +-      break
+> +-    fi
+> +-  done
+> ++
+> ++      ac_cv_php_xml2_config_path="$PHP_LIBXML_DIR/xml2-config"
+> ++
+> + ])
+> +
+> +   if test -x "$ac_cv_php_xml2_config_path"; then
+> diff --git a/recipes/php/php-5.3.5/iconv.patch b/recipes/php/php-5.3.5/iconv.patch
+> new file mode 100644
+> index 0000000..66b39cc
+> --- /dev/null
+> +++ b/recipes/php/php-5.3.5/iconv.patch
+> @@ -0,0 +1,27 @@
+> +Index: php-5.2.13/acinclude.m4
+> +===================================================================
+> +--- php-5.2.13.orig/acinclude.m4
+> ++++ php-5.2.13/acinclude.m4
+> +@@ -2430,7 +2430,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
+> +   dnl
+> +   dnl Check libc first if no path is provided in --with-iconv
+> +   dnl
+> +-  if test "$PHP_ICONV" = "yes"; then
+> ++  dnl must check against no, not against yes as PHP_ICONV can also include a path, which implies yes
+> ++  if test "$PHP_ICONV" != "no"; then
+> +     AC_CHECK_FUNC(iconv, [
+> +       found_iconv=yes
+> +     ],[
+> +Index: php-5.2.13/ext/iconv/config.m4
+> +===================================================================
+> +--- php-5.2.13.orig/ext/iconv/config.m4
+> ++++ php-5.2.13/ext/iconv/config.m4
+> +@@ -15,7 +15,7 @@ if test "$PHP_ICONV" != "no"; then
+> +
+> +   if test "$iconv_avail" != "no"; then
+> +     if test -z "$ICONV_DIR"; then
+> +-      for i in /usr/local /usr; do
+> ++      for i in $PHP_ICONV /usr/local /usr; do
+> +         if test -f "$i/include/iconv.h" || test -f "$i/include/giconv.h"; then
+> +           PHP_ICONV_PREFIX="$i"
+> +           break
+> diff --git a/recipes/php/php-5.3.5/imap-fix-autofoo.patch b/recipes/php/php-5.3.5/imap-fix-autofoo.patch
+> new file mode 100644
+> index 0000000..3695b7b
+> --- /dev/null
+> +++ b/recipes/php/php-5.3.5/imap-fix-autofoo.patch
+> @@ -0,0 +1,41 @@
+> +Index: php-5.2.11/ext/imap/config.m4
+> +===================================================================
+> +--- php-5.2.11.orig/ext/imap/config.m4	2009-12-10 12:27:52.800974533 -0700
+> ++++ php-5.2.11/ext/imap/config.m4	2009-12-10 12:28:33.720976583 -0700
+> +@@ -103,7 +103,7 @@
+> +     PHP_NEW_EXTENSION(imap, php_imap.c, $ext_shared)
+> +     AC_DEFINE(HAVE_IMAP,1,[ ])
+> +
+> +-    for i in $PHP_IMAP /usr/local /usr; do
+> ++    for i in $PHP_IMAP $PHP_IMAP/usr /usr/local /usr; do
+> +       IMAP_INC_CHK()
+> +       el[]IMAP_INC_CHK(/include/c-client)
+> +       el[]IMAP_INC_CHK(/include/imap)
+> +@@ -192,13 +192,7 @@
+> +       AC_MSG_ERROR(Cannot find rfc822.h. Please check your c-client installation.)
+> +     fi
+> +
+> +-    if test -r "$IMAP_DIR/c-client/c-client.a"; then
+> +-      ln -s "$IMAP_DIR/c-client/c-client.a" "$IMAP_DIR/c-client/libc-client.a">/dev/null 2>&1
+> +-    elif test -r "$IMAP_DIR/$PHP_LIBDIR/c-client.a"; then
+> +-      ln -s "$IMAP_DIR/$PHP_LIBDIR/c-client.a" "$IMAP_DIR/$PHP_LIBDIR/libc-client.a">/dev/null 2>&1
+> +-    fi
+> +-
+> +-    for lib in c-client4 c-client imap; do
+> ++    for lib in /usr/lib c-client4 c-client imap; do
+> +       IMAP_LIB=$lib
+> +       IMAP_LIB_CHK($PHP_LIBDIR)
+> +       IMAP_LIB_CHK(c-client)
+> +Index: php-5.2.11/acinclude.m4
+> +===================================================================
+> +--- php-5.2.11.orig/acinclude.m4	2009-12-10 12:37:13.134722881 -0700
+> ++++ php-5.2.11/acinclude.m4	2009-12-10 12:37:39.342007053 -0700
+> +@@ -2338,7 +2338,7 @@
+> +       PHP_OPENSSL_DIR="/usr/local/ssl /usr/local /usr /usr/local/openssl"
+> +     fi
+> +
+> +-    for i in $PHP_OPENSSL_DIR; do
+> ++    for i in $PHP_OPENSSL_DIR $PHP_OPENSSL_DIR/usr; do
+> +       if test -r $i/include/openssl/evp.h; then
+> +         OPENSSL_INCDIR=$i/include
+> +       fi
+> diff --git a/recipes/php/php-5.3.5/pear-makefile.patch b/recipes/php/php-5.3.5/pear-makefile.patch
+> new file mode 100644
+> index 0000000..1928b98
+> --- /dev/null
+> +++ b/recipes/php/php-5.3.5/pear-makefile.patch
+> @@ -0,0 +1,13 @@
+> +diff --git a/pear/Makefile.frag b/pear/Makefile.frag
+> +index 1f6f70e..b19a77c 100644
+> +--- a/pear/Makefile.frag
+> ++++ b/pear/Makefile.frag
+> +@@ -11,7 +11,7 @@ PEAR_PREFIX = -dp a${program_prefix}
+> + PEAR_SUFFIX = -ds a$(program_suffix)
+> +
+> + install-pear-installer: $(SAPI_CLI_PATH)
+> +-	@$(top_builddir)/sapi/cli/php $(PEAR_INSTALL_FLAGS) pear/install-pear-nozlib.phar -d "$(peardir)" -b "$(bindir)" ${PEAR_PREFIX} ${PEAR_SUFFIX}
+> ++	@$(PHP_NATIVE_DIR)/php $(PEAR_INSTALL_FLAGS) $(builddir)/install-pear-nozlib.phar -d "$(peardir)" -b "$(bindir)" ${PEAR_PREFIX} ${PEAR_SUFFIX}
+> +
+> + install-pear:
+> + 	@echo "Installing PEAR environment:      $(INSTALL_ROOT)$(peardir)/"
+> diff --git a/recipes/php/php-5.3.5/phar-makefile.patch b/recipes/php/php-5.3.5/phar-makefile.patch
+> new file mode 100644
+> index 0000000..6fde251
+> --- /dev/null
+> +++ b/recipes/php/php-5.3.5/phar-makefile.patch
+> @@ -0,0 +1,26 @@
+> +diff --git a/ext/phar/Makefile.frag b/ext/phar/Makefile.frag
+> +index fc93d1d..9a8cd65 100755
+> +--- a/ext/phar/Makefile.frag
+> ++++ b/ext/phar/Makefile.frag
+> +@@ -6,19 +6,8 @@ pharcmd: $(builddir)/phar.php $(builddir)/phar.phar
+> +
+> + PHP_PHARCMD_SETTINGS = -d 'open_basedir=' -d 'output_buffering=0' -d 'memory_limit=-1' -d phar.readonly=0 -d 'safe_mode=0'
+> + PHP_PHARCMD_EXECUTABLE = ` \
+> +-	if test -x "$(top_builddir)/$(SAPI_CLI_PATH)"; then \
+> +-		$(top_srcdir)/build/shtool echo -n -- "$(top_builddir)/$(SAPI_CLI_PATH) -n"; \
+> +-		if test "x$(PHP_MODULES)" != "x"; then \
+> +-		$(top_srcdir)/build/shtool echo -n -- " -d extension_dir=$(top_builddir)/modules"; \
+> +-		for i in bz2 zlib phar; do \
+> +-			if test -f "$(top_builddir)/modules/$$i.la"; then \
+> +-				. $(top_builddir)/modules/$$i.la; $(top_srcdir)/build/shtool echo -n -- " -d extension=$$dlname"; \
+> +-			fi; \
+> +-		done; \
+> +-		fi; \
+> +-	else \
+> +-		$(top_srcdir)/build/shtool echo -n -- "$(PHP_EXECUTABLE)"; \
+> +-	fi;`
+> ++		$(top_srcdir)/build/shtool echo -n -- "$(PHP_EXECUTABLE)"; `
+> ++
+> + PHP_PHARCMD_BANG = `$(top_srcdir)/build/shtool echo -n -- "$(INSTALL_ROOT)$(bindir)/$(program_prefix)php$(program_suffix)$(EXEEXT)";`
+> +
+> + $(builddir)/phar/phar.inc: $(srcdir)/phar/phar.inc
+> diff --git a/recipes/php/php-5.3.5/php-m4-divert.patch b/recipes/php/php-5.3.5/php-m4-divert.patch
+> new file mode 100644
+> index 0000000..dfc7b64
+> --- /dev/null
+> +++ b/recipes/php/php-5.3.5/php-m4-divert.patch
+> @@ -0,0 +1,83 @@
+> +Patch taken from
+> +
+> +http://cvs.pld-linux.org/cgi-bin/cvsweb/packages/php/php-m4-divert.patch?rev=1.1
+> +
+> +diff -ur php-5.2.10.org/configure.in php-5.2.10/configure.in
+> +--- php-5.2.10.org/configure.in	2009-06-17 14:22:41.000000000 +0200
+> ++++ php-5.2.10/configure.in	2009-08-18 12:16:25.317640253 +0200
+> +@@ -1,7 +1,7 @@
+> + ## $Id: configure.in,v 1.579.2.52.2.139 2009/06/17 12:22:41 iliaa Exp $ -*- autoconf -*-
+> + dnl ## Process this file with autoconf to produce a configure script.
+> +
+> +-divert(1)
+> ++divert(1001)
+> +
+> + dnl ## Diversion 1 is the autoconf + automake setup phase. We also
+> + dnl ## set the PHP version, deal with platform-specific compile
+> +@@ -263,7 +263,7 @@
+> + sinclude(TSRM/tsrm.m4)
+> +
+> +
+> +-divert(2)
+> ++divert(1002)
+> +
+> + dnl ## Diversion 2 is where we set PHP-specific options and come up
+> + dnl ## with reasonable default values for them. We check for pthreads here
+> +@@ -302,7 +302,7 @@
+> +   PTHREADS_FLAGS
+> + fi
+> +
+> +-divert(3)
+> ++divert(1003)
+> +
+> + dnl ## In diversion 3 we check for compile-time options to the PHP
+> + dnl ## core and how to deal with different system dependencies.
+> +@@ -661,7 +661,7 @@
+> +   PHP_CRYPT_R_STYLE
+> + fi
+> +
+> +-divert(4)
+> ++divert(1004)
+> +
+> + dnl ## In diversion 4 we check user-configurable general settings.
+> +
+> +@@ -902,7 +902,7 @@
+> +   AC_MSG_RESULT([using system default])
+> + fi
+> +
+> +-divert(5)
+> ++divert(1005)
+> +
+> + dnl ## In diversion 5 we check which extensions should be compiled.
+> + dnl ## All of these are normally in the extension directories.
+> +diff -ur php-5.2.10.org/ext/standard/config.m4 php-5.2.10/ext/standard/config.m4
+> +--- php-5.2.10.org/ext/standard/config.m4	2007-07-11 13:56:03.000000000 +0200
+> ++++ php-5.2.10/ext/standard/config.m4	2009-08-18 12:16:25.317640253 +0200
+> +@@ -1,6 +1,6 @@
+> + dnl $Id: config.m4,v 1.80.2.3.2.3 2007/07/11 11:56:03 jani Exp $ -*- autoconf -*-
+> +
+> +-divert(3)dnl
+> ++divert(1003)dnl
+> +
+> + dnl
+> + dnl Check if flush should be called explicitly after buffered io
+> +@@ -205,7 +205,7 @@
+> + AC_CHECK_FUNCS(getcwd getwd asinh acosh atanh log1p hypot glob strfmon nice fpclass isinf isnan)
+> + AC_FUNC_FNMATCH	
+> +
+> +-divert(5)dnl
+> ++divert(1005)dnl
+> +
+> + dnl
+> + dnl Check for regex library type
+> +diff -ur php-5.2.10.org/scripts/phpize.m4 php-5.2.10/scripts/phpize.m4
+> +--- php-5.2.10.org/scripts/phpize.m4	2009-06-02 21:54:22.000000000 +0200
+> ++++ php-5.2.10/scripts/phpize.m4	2009-08-18 12:16:25.317640253 +0200
+> +@@ -1,6 +1,6 @@
+> + dnl This file becomes configure.in for self-contained extensions.
+> +
+> +-divert(1)
+> ++divert(1001)
+> +
+> + AC_PREREQ(2.13)
+> + AC_INIT(config.m4)
+> diff --git a/recipes/php/php-5.3.5/php_exec_native.patch b/recipes/php/php-5.3.5/php_exec_native.patch
+> new file mode 100644
+> index 0000000..a563c9a
+> --- /dev/null
+> +++ b/recipes/php/php-5.3.5/php_exec_native.patch
+> @@ -0,0 +1,11 @@
+> +--- php/configure.in.orig	2011-03-12 02:13:19.000000000 +0100
+> ++++ php/configure.in	2011-03-12 02:14:05.000000000 +0100
+> +@@ -1216,7 +1216,7 @@
+> +   PHP_INSTALL_CLI_TARGET="install-cli"
+> +   PHP_ADD_SOURCES(sapi/cli, php_cli.c php_cli_readline.c,, cli)
+> +   PHP_INSTALLED_SAPIS="cli $PHP_SAPI"
+> +-  PHP_EXECUTABLE="\$(top_builddir)/\$(SAPI_CLI_PATH)"
+> ++  PHP_EXECUTABLE="${PHP_NATIVE_DIR}/php"
+> + else
+> +   PHP_INSTALLED_SAPIS="$PHP_SAPI"
+> + fi
+> diff --git a/recipes/php/php-native_5.3.5.bb b/recipes/php/php-native_5.3.5.bb
+> new file mode 100644
+> index 0000000..3d4f2be
+> --- /dev/null
+> +++ b/recipes/php/php-native_5.3.5.bb
+> @@ -0,0 +1,11 @@
+> +require php-native.inc
+> +
+> +PR = "${INC_PR}.0"
+> +
+> +SRC_URI =     "http://downloads.php.net/johannes/php-${PV}.tar.gz;name=src \
+> +               file://acinclude-xml2-config.patch \
+> +               file://php-m4-divert.patch \
+> +              "
+> +
+> +SRC_URI[src.md5sum] = "fb727a3ac72bf0ce37e1a20468a7bb81"
+> +SRC_URI[src.sha256sum] = "95474df979efbf2b1a298998fe9954200f59048681817a97eb18415346fb6ca4"
+> diff --git a/recipes/php/php_5.3.5.bb b/recipes/php/php_5.3.5.bb
+> new file mode 100644
+> index 0000000..23be66c
+> --- /dev/null
+> +++ b/recipes/php/php_5.3.5.bb
+> @@ -0,0 +1,108 @@
+> +require php.inc
+> +
+> +DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native mysql5 \
+> +           libc-client openssl"
+> +
+> +PR = "${INC_PR}.0"
+> +
+> +SRC_URI =     "http://downloads.php.net/johannes/php-${PV}.tar.gz;name=src \
+> +               file://acinclude-xml2-config.patch \
+> +               file://php-m4-divert.patch \
+> +               file://iconv.patch \
+> +               file://imap-fix-autofoo.patch \
+> +	       file://pear-makefile.patch \
+> +               file://phar-makefile.patch \
+> +               file://php_exec_native.patch \
+> +              "
+> +
+> +SRC_URI[src.md5sum] = "fb727a3ac72bf0ce37e1a20468a7bb81"
+> +SRC_URI[src.sha256sum] = "95474df979efbf2b1a298998fe9954200f59048681817a97eb18415346fb6ca4"
+> +
+> +export THREADS="pthread"
+> +export LIBS=" -lpthread "
+> +
+> +EXTRA_OECONF = "    --enable-mbstring \
+> +                    --enable-discard-path \
+> +                    --enable-sockets \
+> +                    --enable-shared \
+> +                    --enable-pcntl \
+> +                    --enable-wddx \
+> +                    --disable-embedded-mysqli \
+> +                    --disable-rpath \
+> +                    --enable-magic-quotes \
+> +                    --enable-fastcgi \
+> +                    --with-imap=${STAGING_DIR_HOST} \
+> +                    --with-imap-ssl=${STAGING_DIR_HOST} \
+> +                    --with-zlib --with-zlib-dir=${STAGING_LIBDIR}/.. \
+> +                    --with-iconv=${STAGING_LIBDIR}/.. \
+> +                    --with-libxml-dir=${STAGING_BINDIR_CROSS} \
+> +                    --with-mysql="${STAGING_DIR_TARGET}${layout_exec_prefix}" \
+> +                    --with-mysqli="${STAGING_BINDIR_CROSS}/mysql_config" \
+> +                    --with-pdo-mysql="${STAGING_BINDIR_CROSS}/mysql_config" \
+> +                    --without-pdo-sqlite \
+> +               "
+> +
+> +export LD_LIBRARY_PATH = "${STAGING_LIBDIR}"
+> +export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
+> +export PHP_PEAR_PHP_BIN = "${bindir}/php"
+> +
+> +#LDFLAGS += "-lstdc++"
+> +
+> +do_configure_append() {
+> +    find ${S} -type f -readable -writable | xargs sed -i 's:I/usr/include:I${STAGING_INCDIR}:g'
+> +    # use same fix as libiconv
+> +    sed -i -e  s/^hardcode_libdir_flag_spec/#hardcode_libdir_flag_spec/ \
+> +           -e s/^runpath_var/#runpath_var/ ${S}/*-libtool
+> +}
+> +
+> +# fixme
+> +do_install_append() {
+> +    mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir} ${D}/${sysconfdir}
+> +    rm -rf ${D}/${STAGING_DIR_NATIVE}
+> +    rm -rf ${D}/.registry
+> +    rm -rf ${D}/.channels
+> +    rm -rf ${D}/.[a-z]*
+> +    sed -i 's:${STAGING_DIR_NATIVE}::g' ${D}/${sysconfdir}/pear.conf
+> +}
+> +
+> +PACKAGES = "${PN}-dbg \
+> +            ${PN}-cli \
+> +            ${PN}-cgi \
+> +            ${PN}-pear \
+> +            ${PN}-dev \
+> +            ${PN}-doc \
+> +            ${PN} \
+> +"
+> +
+> +
+> +FILES_${PN}-dbg            =+ "${bindir}/.debug"
+> +
+> +FILES_${PN}-doc            += "${libdir}/php/doc"
+> +
+> +FILES_${PN}-cli            = "${bindir}/php"
+> +FILES_${PN}-cgi            = "${bindir}/php-cgi"
+> +
+> +FILES_${PN}-pear            = "${bindir}/pear* ${bindir}/pecl \
+> +                             ${libdir}/php/PEAR \
+> +                             ${libdir}/php/PEAR.php \
+> +                             ${libdir}/php/System.php ${libdir}php/peclcmd.php ${libdir}/php/pearcmd.php \
+> +                             ${libdir}/php/.channels  ${libdir}/php/.channels/.alias  \
+> +                             ${libdir}/php/.channels\__uri.reg \
+> +                             ${libdir}/php/.channels\pear.php.net.reg ${libdir}/php/.channels/pecl.php.net.reg \
+> +                             ${libdir}/php/.registry \
+> +                             ${libdir}/php/Archive/Tar.php \
+> +                             ${libdir}/php/Console/Getopt.php ${libdir}/php/OS/Guess.php \
+> +                             ${sysconfdir}/pear.conf"
+> +
+> +
+> +FILES_${PN}-dev            = "${includedir}/php ${libdir}/build \
+> +                             ${bindir}/phpize ${bindir}/php-config \
+> +                             ${libdir}/php/.depdb ${libdir}/php/.depdblock ${libdir}/php/.filemap ${libdir}/php/.lock \
+> +                             ${libdir}/php/test "
+> +
+> +FILES_${PN}                 = "${libdir}/php"
+> +FILES_${PN}                += "${bindir}"
+> +
+> +RDEPENDS_${PN}-pear         = ${PN}
+> +RDEPENDS_${PN}-cli          = ${PN}
+> +RDEPENDS_${PN}-dev          = ${PN}
 
 
 
