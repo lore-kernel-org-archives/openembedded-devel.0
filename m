@@ -1,35 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PyoRB-0004pt-6U for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Mar 2011 17:46:40 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PyoPb-0001sq-0Y for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Mar 2011 17:44:59 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Mar 2011 17:44:59 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Mar 2011 17:44:59 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from 31.mail-out.ovh.net ([213.186.62.10])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PyobS-00051g-Cx
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 13 Mar 2011 17:57:14 +0100
+Received: (qmail 28670 invoked by uid 503); 13 Mar 2011 17:40:22 -0000
+Received: from b7.ovh.net (HELO mail97.ha.ovh.net) (213.186.33.57)
+	by 31.mail-out.ovh.net with SMTP; 13 Mar 2011 17:40:22 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 13 Mar 2011 18:55:36 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 13 Mar 2011 18:55:34 +0200
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 13 Mar 2011 17:44:48 +0100
-Message-ID: <ilisa0$e7h$1@dough.gmane.org>
-References: <1299882034-23172-1-git-send-email-eric@eukrea.com>	<ileapd$gdk$1@dough.gmane.org>
-	<4D7CD7C8.1080108@eukrea.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4D7CD7C8.1080108@eukrea.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] nodejs: update to 0.4.2
+Date: Sun, 13 Mar 2011 17:57:04 +0100
+Message-Id: <1300035425-15984-3-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1300035425-15984-1-git-send-email-eric@eukrea.com>
+References: <1300035425-15984-1-git-send-email-eric@eukrea.com>
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 17799914579356134731
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: [PATCH 3/4] slugos: prefer busybox 1.18.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,38 +37,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Mar 2011 16:46:40 -0000
+X-List-Received-Date: Sun, 13 Mar 2011 16:57:14 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+Cc: Mike Westerhof <mike@mwester.net>
+---
+ conf/distro/include/preferred-slugos-versions.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-On 13-03-11 15:42, Eric Bénard wrote:
-> Hi Koen,
-> 
-> On 12/03/2011 00:21, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 11-03-11 23:20, Eric Bénard wrote:
->>> Signed-off-by: Eric Bénard<eric@eukrea.com>
->>
->> Does this one actually build? 0.4.0 doesn't :(
->>
-> strange I had 0.4.0 running on an armv5 using angstrom-2010, about 2
-> weeks ago. I just tested it again and 0.4.2 builds for the same target.
-
-good enough for me:
-
-Acked-by: Koen Kooi <koen@dominion.thruhere.net>
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNfPR/MkyGM64RGpERAoZTAKCKuiAZ4yh/YctHFSsSlC0mma1dWwCgtWbS
-AH7hRGANeaPhSDFWI4M32Ic=
-=S71F
------END PGP SIGNATURE-----
+diff --git a/conf/distro/include/preferred-slugos-versions.inc b/conf/distro/include/preferred-slugos-versions.inc
+index b1b3255..b864dac 100644
+--- a/conf/distro/include/preferred-slugos-versions.inc
++++ b/conf/distro/include/preferred-slugos-versions.inc
+@@ -24,7 +24,7 @@ PREFERRED_VERSION_autoconf			?= "2.65"
+ PREFERRED_VERSION_autoconf-native		?= "2.65"
+ PREFERRED_VERSION_automake			?= "1.11.1"
+ PREFERRED_VERSION_automake-native		?= "1.11.1"
+-PREFERRED_VERSION_busybox			?= "1.18.3"
++PREFERRED_VERSION_busybox			?= "1.18.4"
+ PREFERRED_VERSION_dbus				?= "1.4.1"
+ PREFERRED_VERSION_glib-2.0			?= "2.26.1"
+ PREFERRED_VERSION_glib-2.0-native		?= "2.26.1"
+-- 
+1.7.0.4
 
 
 
