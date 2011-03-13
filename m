@@ -1,29 +1,29 @@
-Received: from 7.27.mail-out.ovh.net ([46.105.34.120] helo=27.mail-out.ovh.net)
+Received: from 2.27.mail-out.ovh.net ([46.105.37.238] helo=27.mail-out.ovh.net)
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PyqVX-0008UU-Hr
+	(envelope-from <eric@eukrea.com>) id 1PyqVY-0008Uc-6H
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Mar 2011 19:59:15 +0100
-Received: (qmail 17754 invoked by uid 503); 13 Mar 2011 19:51:11 -0000
+	Sun, 13 Mar 2011 19:59:17 +0100
+Received: (qmail 17747 invoked by uid 503); 13 Mar 2011 19:51:09 -0000
 Received: from b9.ovh.net (HELO mail625.ha.ovh.net) (213.186.33.59)
 	by 27.mail-out.ovh.net with SMTP; 13 Mar 2011 19:51:04 -0000
 Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 13 Mar 2011 20:57:30 +0200
+	by b0.ovh.net with SMTP; 13 Mar 2011 20:57:29 +0200
 Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
 	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 13 Mar 2011 20:57:29 +0200
+	by ns0.ovh.net with SMTP; 13 Mar 2011 20:57:28 +0200
 From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Mar 2011 19:58:59 +0100
-Message-Id: <1300042739-17381-9-git-send-email-eric@eukrea.com>
+Date: Sun, 13 Mar 2011 19:58:56 +0100
+Message-Id: <1300042739-17381-6-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1300042739-17381-1-git-send-email-eric@eukrea.com>
 References: <1300042739-17381-1-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 1412159958811520337
+X-Ovh-Tracer-Id: 1411878483834809678
 X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
 X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
 X-Spam-Check: DONE|U 0.5/N
-Subject: [PATCH 9/9] php: remove php-native 5.3.2
+Subject: [PATCH 6/9] libc-client: add 2007e
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,237 +37,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Mar 2011 18:59:16 -0000
+X-List-Received-Date: Sun, 13 Mar 2011 18:59:17 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-now that we have 5.3.5
-
 Signed-off-by: Eric Bénard <eric@eukrea.com>
 ---
- recipes/php/php-5.3.2/CVE-2010-0397.patch         |   57 --------------
- recipes/php/php-5.3.2/acinclude-xml2-config.patch |   18 -----
- recipes/php/php-5.3.2/pear-makefile.patch         |   11 ---
- recipes/php/php-5.3.2/php-m4-divert.patch         |   83 ---------------------
- recipes/php/php-native_5.3.2.bb                   |   12 ---
- 5 files changed, 0 insertions(+), 181 deletions(-)
- delete mode 100644 recipes/php/php-5.3.2/CVE-2010-0397.patch
- delete mode 100644 recipes/php/php-5.3.2/acinclude-xml2-config.patch
- delete mode 100644 recipes/php/php-5.3.2/pear-makefile.patch
- delete mode 100644 recipes/php/php-5.3.2/php-m4-divert.patch
- delete mode 100644 recipes/php/php-native_5.3.2.bb
+ recipes/libc-client/libc-client_2007e.bb |   29 +++++++++++++++++++++++++++++
+ 1 files changed, 29 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/libc-client/libc-client_2007e.bb
 
-diff --git a/recipes/php/php-5.3.2/CVE-2010-0397.patch b/recipes/php/php-5.3.2/CVE-2010-0397.patch
-deleted file mode 100644
-index 0d9c23d..0000000
---- a/recipes/php/php-5.3.2/CVE-2010-0397.patch
-+++ /dev/null
-@@ -1,57 +0,0 @@
--Description: Fix a null pointer dereference when processing invalid
-- XML-RPC requests.
--Origin: vendor
--Forwarded: http://bugs.php.net/51288
--Last-Update: 2010-03-12
--
--Index: php/ext/xmlrpc/tests/bug51288.phpt
--===================================================================
----- /dev/null
--+++ php/ext/xmlrpc/tests/bug51288.phpt
--@@ -0,0 +1,14 @@
--+--TEST--
--+Bug #51288 (CVE-2010-0397, NULL pointer deref when no <methodName> in request)
--+--FILE--
--+<?php
--+$method = NULL;
--+$req = '<?xml version="1.0"?><methodCall></methodCall>';
--+var_dump(xmlrpc_decode_request($req, $method));
--+var_dump($method);
--+echo "Done\n";
--+?>
--+--EXPECT--
--+NULL
--+NULL
--+Done
--Index: php/ext/xmlrpc/xmlrpc-epi-php.c
--===================================================================
----- php.orig/ext/xmlrpc/xmlrpc-epi-php.c
--+++ php/ext/xmlrpc/xmlrpc-epi-php.c
--@@ -778,6 +778,7 @@
-- 	zval* retval = NULL;
-- 	XMLRPC_REQUEST response;
-- 	STRUCT_XMLRPC_REQUEST_INPUT_OPTIONS opts = {{0}};
--+	const char *method_name;
-- 	opts.xml_elem_opts.encoding = encoding_in ? utf8_get_encoding_id_from_string(encoding_in) : ENCODING_DEFAULT;
-- 
-- 	/* generate XMLRPC_REQUEST from raw xml */
--@@ -788,10 +789,15 @@
-- 
-- 		if (XMLRPC_RequestGetRequestType(response) == xmlrpc_request_call) {
-- 			if (method_name_out) {
---				zval_dtor(method_name_out);
---				Z_TYPE_P(method_name_out) = IS_STRING;
---				Z_STRVAL_P(method_name_out) = estrdup(XMLRPC_RequestGetMethodName(response));
---				Z_STRLEN_P(method_name_out) = strlen(Z_STRVAL_P(method_name_out));
--+				method_name = XMLRPC_RequestGetMethodName(response);
--+				if (method_name) {
--+					zval_dtor(method_name_out);
--+					Z_TYPE_P(method_name_out) = IS_STRING;
--+					Z_STRVAL_P(method_name_out) = estrdup(method_name);
--+					Z_STRLEN_P(method_name_out) = strlen(Z_STRVAL_P(method_name_out));
--+				} else {
--+					retval = NULL;
--+				}
-- 			}
-- 		}
-- 
-diff --git a/recipes/php/php-5.3.2/acinclude-xml2-config.patch b/recipes/php/php-5.3.2/acinclude-xml2-config.patch
-deleted file mode 100644
-index bf519d2..0000000
---- a/recipes/php/php-5.3.2/acinclude-xml2-config.patch
-+++ /dev/null
-@@ -1,18 +0,0 @@
----- /orig-acinclude.m4 2007-02-20 15:03:25.000000000 +0200
--+++ /acinclude.m4      2007-02-20 15:03:24.000000000 +0200
--@@ -2359,12 +2359,9 @@
-- AC_DEFUN([PHP_SETUP_LIBXML], [
-- AC_CACHE_CHECK([for xml2-config path], ac_cv_php_xml2_config_path,
-- [
---  for i in $PHP_LIBXML_DIR /usr/local /usr; do
---    if test -x "$i/bin/xml2-config"; then
---      ac_cv_php_xml2_config_path="$i/bin/xml2-config"
---      break
---    fi
---  done
--+
--+      ac_cv_php_xml2_config_path="$PHP_LIBXML_DIR/xml2-config"
--+
-- ])
--
--   if test -x "$ac_cv_php_xml2_config_path"; then
-diff --git a/recipes/php/php-5.3.2/pear-makefile.patch b/recipes/php/php-5.3.2/pear-makefile.patch
-deleted file mode 100644
-index 26de98a..0000000
---- a/recipes/php/php-5.3.2/pear-makefile.patch
-+++ /dev/null
-@@ -1,11 +0,0 @@
----- /pear/orig-Makefile.frag	2007-03-16 12:18:33.000000000 +0200
--+++ /pear/Makefile.frag	2007-03-16 12:35:48.000000000 +0200
--@@ -6,7 +6,7 @@
-- PEAR_INSTALL_FLAGS = -n -dshort_open_tag=0 -dsafe_mode=0 -dopen_basedir= -derror_reporting=E_ALL -dmemory_limit=-1 -ddetect_unicode=0
-- 
-- install-pear-installer: $(SAPI_CLI_PATH)
---	@$(top_builddir)/sapi/cli/php $(PEAR_INSTALL_FLAGS) $(builddir)/install-pear-nozlib.phar -d "$(peardir)" -b "$(bindir)"
--+	@$(PHP_NATIVE_DIR)/php $(PEAR_INSTALL_FLAGS) $(builddir)/install-pear-nozlib.phar -d "$(peardir)" -b "$(bindir)"
-- 
-- install-pear:
-- 	@echo "Installing PEAR environment:      $(INSTALL_ROOT)$(peardir)/"
-diff --git a/recipes/php/php-5.3.2/php-m4-divert.patch b/recipes/php/php-5.3.2/php-m4-divert.patch
-deleted file mode 100644
-index dfc7b64..0000000
---- a/recipes/php/php-5.3.2/php-m4-divert.patch
-+++ /dev/null
-@@ -1,83 +0,0 @@
--Patch taken from
--
--http://cvs.pld-linux.org/cgi-bin/cvsweb/packages/php/php-m4-divert.patch?rev=1.1
--
--diff -ur php-5.2.10.org/configure.in php-5.2.10/configure.in
----- php-5.2.10.org/configure.in	2009-06-17 14:22:41.000000000 +0200
--+++ php-5.2.10/configure.in	2009-08-18 12:16:25.317640253 +0200
--@@ -1,7 +1,7 @@
-- ## $Id: configure.in,v 1.579.2.52.2.139 2009/06/17 12:22:41 iliaa Exp $ -*- autoconf -*-
-- dnl ## Process this file with autoconf to produce a configure script.
-- 
---divert(1)
--+divert(1001)
-- 
-- dnl ## Diversion 1 is the autoconf + automake setup phase. We also
-- dnl ## set the PHP version, deal with platform-specific compile
--@@ -263,7 +263,7 @@
-- sinclude(TSRM/tsrm.m4)
-- 
-- 
---divert(2)
--+divert(1002)
-- 
-- dnl ## Diversion 2 is where we set PHP-specific options and come up
-- dnl ## with reasonable default values for them. We check for pthreads here
--@@ -302,7 +302,7 @@
--   PTHREADS_FLAGS
-- fi
-- 
---divert(3)
--+divert(1003)
-- 
-- dnl ## In diversion 3 we check for compile-time options to the PHP
-- dnl ## core and how to deal with different system dependencies.
--@@ -661,7 +661,7 @@
--   PHP_CRYPT_R_STYLE
-- fi
-- 
---divert(4)
--+divert(1004)
-- 
-- dnl ## In diversion 4 we check user-configurable general settings.
-- 
--@@ -902,7 +902,7 @@
--   AC_MSG_RESULT([using system default])
-- fi
-- 
---divert(5)
--+divert(1005)
-- 
-- dnl ## In diversion 5 we check which extensions should be compiled.
-- dnl ## All of these are normally in the extension directories.
--diff -ur php-5.2.10.org/ext/standard/config.m4 php-5.2.10/ext/standard/config.m4
----- php-5.2.10.org/ext/standard/config.m4	2007-07-11 13:56:03.000000000 +0200
--+++ php-5.2.10/ext/standard/config.m4	2009-08-18 12:16:25.317640253 +0200
--@@ -1,6 +1,6 @@
-- dnl $Id: config.m4,v 1.80.2.3.2.3 2007/07/11 11:56:03 jani Exp $ -*- autoconf -*-
-- 
---divert(3)dnl
--+divert(1003)dnl
-- 
-- dnl
-- dnl Check if flush should be called explicitly after buffered io
--@@ -205,7 +205,7 @@
-- AC_CHECK_FUNCS(getcwd getwd asinh acosh atanh log1p hypot glob strfmon nice fpclass isinf isnan)
-- AC_FUNC_FNMATCH	
-- 
---divert(5)dnl
--+divert(1005)dnl
-- 
-- dnl
-- dnl Check for regex library type
--diff -ur php-5.2.10.org/scripts/phpize.m4 php-5.2.10/scripts/phpize.m4
----- php-5.2.10.org/scripts/phpize.m4	2009-06-02 21:54:22.000000000 +0200
--+++ php-5.2.10/scripts/phpize.m4	2009-08-18 12:16:25.317640253 +0200
--@@ -1,6 +1,6 @@
-- dnl This file becomes configure.in for self-contained extensions.
-- 
---divert(1)
--+divert(1001)
-- 
-- AC_PREREQ(2.13)
-- AC_INIT(config.m4)
-diff --git a/recipes/php/php-native_5.3.2.bb b/recipes/php/php-native_5.3.2.bb
-deleted file mode 100644
-index 3a2299c..0000000
---- a/recipes/php/php-native_5.3.2.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--require php-native.inc
--
--PR = "${INC_PR}.1"
--
--SRC_URI =     "http://museum.php.net/php5/php-${PV}.tar.bz2;name=src \
--               file://acinclude-xml2-config.patch \
--               file://php-m4-divert.patch \
--	       file://CVE-2010-0397.patch"
--
--SRC_URI[src.md5sum] = "46f500816125202c48a458d0133254a4"
--SRC_URI[src.sha256sum] = "9a380a574adcb3a9abe3226e7c3a9bae619e8a1b90842ec2a7edf0ad92afdeda"
--
+diff --git a/recipes/libc-client/libc-client_2007e.bb b/recipes/libc-client/libc-client_2007e.bb
+new file mode 100644
+index 0000000..743910c
+--- /dev/null
++++ b/recipes/libc-client/libc-client_2007e.bb
+@@ -0,0 +1,29 @@
++DESCRIPTION = "UW c-client library for mail protocols"
++SECTION = "devel"
++PRIORITY = "optional"
++LICENSE = "University of Washingtons Free-Fork License"
++DEPENDS = "libpam openssl libpam"
++
++SRC_URI = "ftp://ftp.cac.washington.edu/imap/imap-${PV}.tar.gz \
++	   file://quote_cctype.patch"
++
++S = "${WORKDIR}/imap-${PV}"
++
++EXTRA_OEMAKE = "CC='${CC}'"
++
++HEADERS = "src/c-client/*.h src/osdep/unix/*.h c-client/auths.c c-client/linkage.c c-client/linkage.h c-client/osdep.h"
++
++do_compile() {
++	echo "SSLINCLUDE=${STAGING_INCDIR} SSLLIB=${STAGING_LIBDIR}" > ${S}/SPECIALS
++	oe_runmake lnp
++}
++
++do_install() {
++        install -d ${D}${includedir}/c-client
++        install ${HEADERS} ${D}${includedir}/c-client
++	install -d ${D}${libdir}
++        install c-client/c-client.a ${D}${libdir}/libc-client.a
++}
++
++SRC_URI[md5sum] = "7903800dc2604000016de070e0c55840"
++SRC_URI[sha256sum] = "4b1137b87249782496ec3eeacaf83bbf09312a7d2ae3aead262179041b55565f"
 -- 
 1.7.0.4
 
