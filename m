@@ -1,29 +1,29 @@
-Received: from 1.27.mail-out.ovh.net ([46.105.60.43] helo=27.mail-out.ovh.net)
+Received: from 6.27.mail-out.ovh.net ([46.105.50.195] helo=27.mail-out.ovh.net)
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Pyqc6-00015h-F1
+	(envelope-from <eric@eukrea.com>) id 1Pyqc0-00015e-Dp
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Mar 2011 20:06:02 +0100
-Received: (qmail 17801 invoked by uid 503); 13 Mar 2011 19:51:13 -0000
+	Sun, 13 Mar 2011 20:06:09 +0100
+Received: (qmail 17760 invoked by uid 503); 13 Mar 2011 19:51:11 -0000
 Received: from b9.ovh.net (HELO mail625.ha.ovh.net) (213.186.33.59)
 	by 27.mail-out.ovh.net with SMTP; 13 Mar 2011 19:51:04 -0000
 Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
 	by b0.ovh.net with SMTP; 13 Mar 2011 20:57:29 +0200
 Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
 	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 13 Mar 2011 20:57:27 +0200
+	by ns0.ovh.net with SMTP; 13 Mar 2011 20:57:28 +0200
 From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Mar 2011 19:58:53 +0100
-Message-Id: <1300042739-17381-3-git-send-email-eric@eukrea.com>
+Date: Sun, 13 Mar 2011 19:58:55 +0100
+Message-Id: <1300042739-17381-5-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1300042739-17381-1-git-send-email-eric@eukrea.com>
 References: <1300042739-17381-1-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 1411597008858099019
+X-Ovh-Tracer-Id: 1411878483834809677
 X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
 X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
 X-Spam-Check: DONE|U 0.5/N
-Subject: [PATCH 3/9] apr: remove old versions
+Subject: [PATCH 5/9] apache2: remove 2.2.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,335 +37,388 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Mar 2011 19:06:02 -0000
+X-List-Received-Date: Sun, 13 Mar 2011 19:06:10 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-recent apr was not building, others are not pinned anywhere.
+which doesn't build and is replaced by 2.2.17
 
 Signed-off-by: Eric Bénard <eric@eukrea.com>
 ---
- recipes/apr/apr-1.3.5/cleanup.patch    |   42 --------------------------------
- recipes/apr/apr-util_0.9.12.bb         |   22 ----------------
- recipes/apr/apr-util_1.3.4.bb          |   38 ----------------------------
- recipes/apr/apr_0.9.12.bb              |   16 ------------
- recipes/apr/apr_1.3.12.bb              |   36 ---------------------------
- recipes/apr/apr_1.3.3.bb               |   35 --------------------------
- recipes/apr/apr_1.3.5.bb               |   35 --------------------------
- recipes/apr/files/gen_uri_delims.patch |    7 -----
- recipes/apr/files/uri_delims.h         |   16 ------------
- 9 files changed, 0 insertions(+), 247 deletions(-)
- delete mode 100644 recipes/apr/apr-1.3.5/cleanup.patch
- delete mode 100644 recipes/apr/apr-util_0.9.12.bb
- delete mode 100644 recipes/apr/apr-util_1.3.4.bb
- delete mode 100644 recipes/apr/apr_0.9.12.bb
- delete mode 100644 recipes/apr/apr_1.3.12.bb
- delete mode 100644 recipes/apr/apr_1.3.3.bb
- delete mode 100644 recipes/apr/apr_1.3.5.bb
- delete mode 100644 recipes/apr/files/gen_uri_delims.patch
- delete mode 100644 recipes/apr/files/uri_delims.h
+ recipes/apache2/apache2-2.2.14/apr-sockets-patch   |   10 --
+ recipes/apache2/apache2-2.2.14/apr.h.in.patch      |   13 --
+ recipes/apache2/apache2-2.2.14/configure-patch     |   71 -----------
+ recipes/apache2/apache2-2.2.14/configure.in.patch  |   27 -----
+ .../apache2/apache2-2.2.14/dftables-makefile-patch |   10 --
+ .../apache2/apache2-2.2.14/server-makefile-patch   |   11 --
+ recipes/apache2/apache2-native_2.2.14.bb           |   44 -------
+ recipes/apache2/apache2_2.2.14.bb                  |  122 --------------------
+ 8 files changed, 0 insertions(+), 308 deletions(-)
+ delete mode 100644 recipes/apache2/apache2-2.2.14/apr-sockets-patch
+ delete mode 100644 recipes/apache2/apache2-2.2.14/apr.h.in.patch
+ delete mode 100644 recipes/apache2/apache2-2.2.14/configure-patch
+ delete mode 100644 recipes/apache2/apache2-2.2.14/configure.in.patch
+ delete mode 100644 recipes/apache2/apache2-2.2.14/dftables-makefile-patch
+ delete mode 100644 recipes/apache2/apache2-2.2.14/server-makefile-patch
+ delete mode 100644 recipes/apache2/apache2-native_2.2.14.bb
+ delete mode 100644 recipes/apache2/apache2_2.2.14.bb
 
-diff --git a/recipes/apr/apr-1.3.5/cleanup.patch b/recipes/apr/apr-1.3.5/cleanup.patch
+diff --git a/recipes/apache2/apache2-2.2.14/apr-sockets-patch b/recipes/apache2/apache2-2.2.14/apr-sockets-patch
 deleted file mode 100644
-index 53623a2..0000000
---- a/recipes/apr/apr-1.3.5/cleanup.patch
+index 5e97482..0000000
+--- a/recipes/apache2/apache2-2.2.14/apr-sockets-patch
 +++ /dev/null
-@@ -1,42 +0,0 @@
--Index: apr-1.3.5/build/buildcheck.sh
+@@ -1,10 +0,0 @@
+---- httpd-2.2.3/srclib/apr/network_io/unix/sockets.c.orig
+-+++ httpd-2.2.3/srclib/apr/network_io/unix/sockets.c	
+-@@ -231,6 +231,7 @@
+- #if APR_O_NONBLOCK_INHERITED
+-     if (apr_is_option_set(sock, APR_SO_NONBLOCK) == 1) {
+-         apr_set_option(*new, APR_SO_NONBLOCK, 1);
+-+	apr_socket_opt_set(*new, APR_SO_NONBLOCK, 0); 
+-     }
+- #endif /* APR_O_NONBLOCK_INHERITED */
+- 
+diff --git a/recipes/apache2/apache2-2.2.14/apr.h.in.patch b/recipes/apache2/apache2-2.2.14/apr.h.in.patch
+deleted file mode 100644
+index 97554c9..0000000
+--- a/recipes/apache2/apache2-2.2.14/apr.h.in.patch
++++ /dev/null
+@@ -1,13 +0,0 @@
+-Index: httpd-2.2.14/srclib/apr/include/apr.h.in
 -===================================================================
----- apr-1.3.5.orig/build/buildcheck.sh	2009-02-23 20:37:18.000000000 -0700
--+++ apr-1.3.5/build/buildcheck.sh	2010-09-09 11:09:08.000000000 -0700
--@@ -31,36 +31,4 @@
+---- httpd-2.2.14.orig/srclib/apr/include/apr.h.in
+-+++ httpd-2.2.14/srclib/apr/include/apr.h.in
+-@@ -224,7 +224,7 @@ extern "C" {
+- #define APR_HAVE_STRUCT_RLIMIT  @struct_rlimit@
+- #define APR_HAVE_UNION_SEMUN    @have_union_semun@
+- #define APR_HAVE_SCTP           @have_sctp@
+--#define APR_HAVE_IOVEC          @have_iovec@
+-+#define APR_HAVE_IOVEC          1
+- 
+- /*  APR Feature Macros */
+- #define APR_HAS_SHARED_MEMORY     @sharedmem@
+diff --git a/recipes/apache2/apache2-2.2.14/configure-patch b/recipes/apache2/apache2-2.2.14/configure-patch
+deleted file mode 100644
+index 50f7420..0000000
+--- a/recipes/apache2/apache2-2.2.14/configure-patch
++++ /dev/null
+@@ -1,71 +0,0 @@
+-Index: httpd-2.2.14/configure
+-===================================================================
+---- httpd-2.2.14.orig/configure
+-+++ httpd-2.2.14/configure
+-@@ -3795,26 +3795,6 @@ if test "${with_apr+set}" = set; then :
+- 
 - else
-- echo "buildconf: autoconf version $ac_version (ok)"
-- fi
+- 
+--        if test -n "1" && test "1" = "1"; then
+--      for apr_temp_apr_config_file in $apr_temp_acceptable_apr_config
+--      do
+--        if $apr_temp_apr_config_file --help > /dev/null 2>&1 ; then
+--          apr_config="$apr_temp_apr_config_file"
 --
---# Sample libtool --version outputs:
---# ltmain.sh (GNU libtool) 1.3.3 (1.385.2.181 1999/07/02 15:49:11)
---# ltmain.sh (GNU libtool 1.1361 2004/01/02 23:10:52) 1.5a
---# output is multiline from 1.5 onwards
+--          apr_found="yes"
+--          break
+--        else
+--                    for lookdir in /usr /usr/local /usr/local/apr /opt/apr; do
+--            if $TEST_X "$lookdir/bin/$apr_temp_apr_config_file"; then
+--              apr_config="$lookdir/bin/$apr_temp_apr_config_file"
 --
---# Require libtool 1.4 or newer
---libtool=`build/PrintPath glibtool1 glibtool libtool libtool15 libtool14`
---lt_pversion=`$libtool --version 2>/dev/null|sed -e 's/([^)]*)//g;s/^[^0-9]*//;s/[- ].*//g;q'`
---if test -z "$lt_pversion"; then
---echo "buildconf: libtool not found."
---echo "           You need libtool version 1.4 or newer installed"
---echo "           to build APR from SVN."
---exit 1
---fi
---lt_version=`echo $lt_pversion|sed -e 's/\([a-z]*\)$/.\1/'`
---IFS=.; set $lt_version; IFS=' '
---lt_status="good"
---if test "$1" = "1"; then
---   if test "$2" -lt "4"; then
---      lt_status="bad"
---   fi
---fi
---if test $lt_status = "good"; then
---   echo "buildconf: libtool version $lt_pversion (ok)"
---   exit 0
---fi
+--              apr_found="yes"
+--              break 2
+--            fi
+--          done
+--        fi
+--      done
+--    fi
+-         if test "$apr_found" = "no" && test -d ""$srcdir/srclib/apr""; then
+-       apr_temp_abs_srcdir="`cd "$srcdir/srclib/apr" && pwd`"
+-       apr_found="reconfig"
+-@@ -4147,26 +4127,6 @@ if test "${with_apr_util+set}" = set; th
+- 
+- else
+- 
+--    if test -n "1" && test "1" = "1"; then
+--      for apu_temp_apu_config_file in $apu_temp_acceptable_apu_config
+--      do
+--        if $apu_temp_apu_config_file --help > /dev/null 2>&1 ; then
+--          apu_config="$apu_temp_apu_config_file"
 --
---echo "buildconf: libtool version $lt_pversion found."
---echo "           You need libtool version 1.4 or newer installed"
---echo "           to build APR from SVN."
+--          apu_found="yes"
+--          break
+--        else
+--                    for lookdir in /usr /usr/local /usr/local/apr /opt/apr; do
+--            if $TEST_X "$lookdir/bin/$apu_temp_apu_config_file"; then
+--              apu_config="$lookdir/bin/$apu_temp_apu_config_file"
 --
---exit 1
--+exit 0
-diff --git a/recipes/apr/apr-util_0.9.12.bb b/recipes/apr/apr-util_0.9.12.bb
+--              apu_found="yes"
+--              break 2
+--            fi
+--          done
+--        fi
+--      done
+--    fi
+-         if test "$apu_found" = "no" && test -d ""$srcdir/srclib/apr-util""; then
+-       apu_temp_abs_srcdir="`cd "$srcdir/srclib/apr-util" && pwd`"
+-       apu_found="reconfig"
+-@@ -7045,7 +7005,11 @@ if test "${ap_cv_void_ptr_lt_long+set}"
+-   $as_echo_n "(cached) " >&6
+- else
+-   if test "$cross_compiling" = yes; then :
+--  ap_cv_void_ptr_lt_long=yes
+-+    if test "$ac_cv_sizeof_long_p" = "$ac_cv_sizeof_void_p"; then
+-+      ap_void_ptr_lt_long=no
+-+    else
+-+      ap_void_ptr_lt_long=yes
+-+    fi
+- else
+-   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+- /* end confdefs.h.  */
+diff --git a/recipes/apache2/apache2-2.2.14/configure.in.patch b/recipes/apache2/apache2-2.2.14/configure.in.patch
 deleted file mode 100644
-index 89c9a93..0000000
---- a/recipes/apr/apr-util_0.9.12.bb
+index 2ca098d..0000000
+--- a/recipes/apache2/apache2-2.2.14/configure.in.patch
 +++ /dev/null
-@@ -1,22 +0,0 @@
--DESCRIPTION = "Apache Portable Runtime (APR) companion library"
--SECTION = "libs"
--DEPENDS = "apr expat gdbm"
--LICENSE = "Apache"
--HOMEPAGE = "http://apr.apache.org"
--PR = "r1"
+@@ -1,27 +0,0 @@
+-Index: httpd-2.2.14/srclib/apr/configure.in
+-===================================================================
+---- httpd-2.2.14.orig/srclib/apr/configure.in
+-+++ httpd-2.2.14/srclib/apr/configure.in
+-@@ -923,7 +923,7 @@ AC_CHECK_FUNCS([mmap munmap shm_open shm
+-                 create_area])
+- 
+- APR_CHECK_DEFINE(MAP_ANON, sys/mman.h)
+--AC_CHECK_FILE(/dev/zero)
+-+APR_CHECK_FILE(/dev/zero)
+- 
+- # Not all systems can mmap /dev/zero (such as HP-UX).  Check for that.
+- if test "$ac_cv_func_mmap" = "yes" &&
+-Index: httpd-2.2.14/configure.in
+-===================================================================
+---- httpd-2.2.14.orig/configure.in
+-+++ httpd-2.2.14/configure.in
+-@@ -61,6 +61,9 @@ APR_MKDIR_P_CHECK($top_srcdir/build/mkdi
+- 
+- dnl ## Run configure for packages Apache uses
+- 
+-+dnl first configure subdirs
+-+AC_CONFIG_SUBDIRS(srclib/apr srclib/apr-util srclib/prce)
+-+
+- dnl shared library support for these packages doesn't currently
+- dnl work on some platforms
+- 
+diff --git a/recipes/apache2/apache2-2.2.14/dftables-makefile-patch b/recipes/apache2/apache2-2.2.14/dftables-makefile-patch
+deleted file mode 100644
+index ac966db..0000000
+--- a/recipes/apache2/apache2-2.2.14/dftables-makefile-patch
++++ /dev/null
+@@ -1,10 +0,0 @@
+---- http-2.2.3/srclib/pcre/Makefile.in-orig
+-+++ http-2.2.3/srclib/pcre/Makefile.in	2005-12-20 13:12:03.000000000 -0500
+-@@ -15,6 +15,6 @@
+- 	$(LINK) $(EXTRA_LDFLAGS) dftables.lo $(EXTRA_LIBS)
+- 
+- $(srcdir)/chartables.c: dftables
+--	./dftables $@
+-+	dftables $@
+- 
+- pcre.lo: $(srcdir)/chartables.c
+diff --git a/recipes/apache2/apache2-2.2.14/server-makefile-patch b/recipes/apache2/apache2-2.2.14/server-makefile-patch
+deleted file mode 100644
+index f1349cb..0000000
+--- a/recipes/apache2/apache2-2.2.14/server-makefile-patch
++++ /dev/null
+@@ -1,11 +0,0 @@
+---- http-2.0.54/server/Makefile.in-old	2005-12-20 13:26:56.000000000 -0500
+-+++ http-2.0.54/server/Makefile.in	2005-12-20 13:27:22.000000000 -0500
+-@@ -27,7 +27,7 @@
+- 	$(LINK) $(EXTRA_LDFLAGS) $(gen_test_char_OBJECTS) $(EXTRA_LIBS)
+- 
+- test_char.h: gen_test_char
+--	./gen_test_char > test_char.h
+-+	gen_test_char > test_char.h
+- 
+- util.lo: test_char.h
+- 
+diff --git a/recipes/apache2/apache2-native_2.2.14.bb b/recipes/apache2/apache2-native_2.2.14.bb
+deleted file mode 100644
+index 8b1bf7e..0000000
+--- a/recipes/apache2/apache2-native_2.2.14.bb
++++ /dev/null
+@@ -1,44 +0,0 @@
+-SECTION = "net"
+-DEPENDS = "expat pcre"
 -
--SRC_URI = "${APACHE_MIRROR}/apr/${P}.tar.gz \
--           file://gen_uri_delims.patch \
--           file://uri_delims.h"
+-inherit native 
 -
--EXTRA_OECONF = "--with-apr=${STAGING_BINDIR_CROSS} --with-dbm=gdbm --with-gdbm=${STAGING_DIR_HOST}${layout_prefix} --with-expat=${STAGING_DIR_HOST}${layout_prefix}"
+-PR = "r2"
+-SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2"
 -
--inherit autotools lib_package binconfig
+-S = "${WORKDIR}/httpd-${PV}"
+-
+-do_configure () {
+-	./configure --with-included-apr --prefix=${prefix}
+-}
+-
+-do_install () {
+-	install -d ${D}${bindir} ${D}${libdir}
+-	cp server/gen_test_char ${D}${bindir}
+-	cp srclib/apr/apr-1-config ${D}${bindir}
+-	cp srclib/apr-util/apu-1-config ${D}${bindir}
+-	cp support/apxs ${D}${bindir}
+-	chmod 755 ${D}${bindir}/apxs
+-	install -d ${D}/usr/build
+-	cp build/*.mk ${D}/usr/build
+-	cp build/instdso.sh ${D}/usr/build
+-	cp .libs/httpd ${D}${bindir}
+-
+-	(cd srclib/apr/.libs; tar -cf - libapr-*.so* ) |
+-	  (cd ${D}${libdir}; tar -xf - )
+-	(cd srclib/apr-util/.libs; tar -cf - libaprutil-*.so* ) |
+-	  (cd ${D}${libdir}; tar -xf - )
+-
+-	install -d ${D}${includedir}/apache2
+-	cp include/* ${D}${includedir}/apache2
+-	cp os/unix/os.h ${D}${includedir}/apache2
+-	cp os/unix/unixd.h ${D}${includedir}/apache2
+-
+-  	cp support/envvars-std ${D}${bindir}/envvars
+-    	chmod 755 ${D}${bindir}/envvars
+-}
+-
+-SRC_URI[md5sum] = "a5226203aaf97e5b941c41a71c112704"
+-SRC_URI[sha256sum] = "b2deab8a5e797fde7a04fb4a5ebfa9c80f767d064dd19dcd2857c94838ae3ac6"
+-
+-NATIVE_INSTALL_WORKS = "1"
+diff --git a/recipes/apache2/apache2_2.2.14.bb b/recipes/apache2/apache2_2.2.14.bb
+deleted file mode 100644
+index 8a6b38d..0000000
+--- a/recipes/apache2/apache2_2.2.14.bb
++++ /dev/null
+@@ -1,122 +0,0 @@
+-SECTION = "net"
+-DESCRIPTION = "The apache v2 web server"
+-DEPENDS = "libtool-native apache2-native openssl expat pcre"
+-RDEPENDS_${PN} += "openssl"
+-
+-PR = "r2"
+-
+-SRC_URI = "http://apache.mirrors.tds.net/httpd/httpd-${PV}.tar.bz2 \
+-	   file://apr-sockets-patch;apply=yes \
+-	   file://configure-patch;apply=yes \
+-	   file://server-makefile-patch;apply=yes \
+-	   file://configure.in.patch \
+-	   file://apr.h.in.patch \
+-           file://init"
+-
+-#
+-# over-ride needed since apache unpacks into httpd
+-#
+-S = "${WORKDIR}/httpd-${PV}"
+-
+-#
+-# implications - autotools defines suitable do_configure, do_install, etc.
+-# update-rc.d adds hooks for rc-update.
+-#
+-#
+-inherit autotools update-rc.d
+-
+-#
+-# implications - used by update-rc.d scripts
+-#
+-INITSCRIPT_NAME = "apache2"
+-INITSCRIPT_PARAMS = "defaults 91 20"
+-LEAD_SONAME = "libapr-1.so.0"
+-
+-CONFFILES_${PN} = "${sysconfdir}/${PN}/httpd.conf \
+-		   ${sysconfdir}/${PN}/magic \
+-		   ${sysconfdir}/${PN}/mime.types \
+-		   ${sysconfdir}/init.d/${PN} "
+-
+-#
+-PACKAGES = "${PN}-doc ${PN}-dev ${PN}-dbg ${PN}"
+-
+-# we override here rather than append so that .so links are
+-# included in the runtime package rather than here (-dev)
+-# and to get build, icons, error into the -dev package
+-FILES_${PN}-dev = "${datadir}/${PN}/build \
+-		${datadir}/${PN}/icons \
+-		${datadir}/${PN}/error \
+-		${bindir}/apr-config ${bindir}/apu-config \
+-		${libdir}/apr*.exp \
+-		${includedir}/${PN} \
+-		${libdir}/*.la \
+-		${libdir}/*.a"
+-
+-# manual to manual
+-FILES_${PN}-doc += " ${datadir}/${PN}/manual"
+-
+-#
+-# override this too - here is the default, less datadir
+-#
+-FILES_${PN} =  "${bindir} ${sbindir} ${libexecdir} ${libdir}/lib*.so.* ${sysconfdir} \
+-		${sharedstatedir} ${localstatedir} /bin /sbin /lib/*.so* \
+-		${libdir}/${PN}"
+-
+-# we want htdocs and cgi-bin to go with the binary
+-FILES_${PN} += "${datadir}/${PN}/htdocs ${datadir}/${PN}/cgi-bin"
+-
+-#make sure the lone .so links also get wrapped in the base package
+-FILES_${PN} += " ${libdir}/lib*.so ${libdir}/pkgconfig/*"
+-
+-CFLAGS_append = " -DPATH_MAX=4096"
+-CFLAGS_prepend = "-I${STAGING_INCDIR}/openssl "
+-EXTRA_OECONF = "--enable-ssl \
+-		--with-ssl=${STAGING_LIBDIR}/.. \
+-		--with-expat=${STAGING_LIBDIR}/.. \
+-		--with-pcre=${STAGING_LIBDIR}/.. \
+-		--enable-info \
+-		--enable-rewrite \
+-		--with-dbm=sdbm \
+-		--with-berkeley-db=no \
+-		--localstatedir=/var/${PN} \
+-		--with-gdbm=no \
+-		--with-ndbm=no \
+-		--includedir=${includedir}/${PN} \
+-		--datadir=${datadir}/${PN} \
+-		--sysconfdir=${sysconfdir}/${PN} \
+-		"
+-
+-#
+-# here we over-ride the autotools provided do_configure.
+-#
+-
+-do_configure_prepend() {
+-	sed -e 's,libtool libtool15,${HOST_SYS}-libtool libtool115,' -i ${S}/srclib/apr/build/buildcheck.sh
+-}
 -
 -do_configure() {
--	cp ${S}/../uri_delims.h ${S}/uri/.
+-	( cd srclib/apr; sh ./buildconf ) 
 -	oe_runconf
 -}
 -
--SRC_URI[md5sum] = "8e9cc71a1303b67b3278fbeab9799f2e"
--SRC_URI[sha256sum] = "5768fcc4d38fa6f811b0a89e2ef450d0f52688ff9263e548819adb096fbfc9c3"
-diff --git a/recipes/apr/apr-util_1.3.4.bb b/recipes/apr/apr-util_1.3.4.bb
-deleted file mode 100644
-index a2c8211..0000000
---- a/recipes/apr/apr-util_1.3.4.bb
-+++ /dev/null
-@@ -1,38 +0,0 @@
--DESCRIPTION = "Apache Portable Runtime (APR) companion library"
--SECTION = "libs"
--DEPENDS = "apr expat gdbm"
--LICENSE = "Apache License, Version 2.0"
--
--PR = "r7"
--
--SRC_URI = "${APACHE_MIRROR}/apr/${P}.tar.gz \
--           file://configfix.patch \
--           file://configure_fixes.patch"
--
--EXTRA_OECONF = "--with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \ 
--		--with-dbm=gdbm \
--		--with-gdbm=${STAGING_DIR_HOST}${layout_prefix} \
--		--without-sqlite2 \
--		--without-sqlite3 \
--		--without-pgsql \
--		--with-expat=${STAGING_DIR_HOST}${layout_prefix}"
--
--
--inherit autotools lib_package binconfig
--
--OE_BINCONFIG_EXTRA_MANGLE = " -e 's:location=source:location=installed:'"
--
--do_configure_prepend() {
--	cp ${STAGING_DATADIR}/apr/apr_rules.mk ${S}/build/rules.mk
--	echo "AC_PROG_LIBTOOL" >> ${S}/configure.in
--}
--
--do_configure_append() {
--	sed -i -e  s:apr_builders=/usr/share/build-1:apr_builders=${STAGING_DATADIR}/build-1:g ${S}/build/rules.mk
--	sed -i /^LIBTOOL/d ${S}/build/rules.mk
--	echo LIBTOOL="${HOST_SYS}-libtool --tag=CC" >> ${S}/build/rules.mk
--}
--
--
--SRC_URI[md5sum] = "a10e2ca150ff07f484c724c36142211f"
--SRC_URI[sha256sum] = "3f07ffdb18fb853290c9b83e82cd5cae66b8fbc357bd391e846c0afdd24fed7e"
-diff --git a/recipes/apr/apr_0.9.12.bb b/recipes/apr/apr_0.9.12.bb
-deleted file mode 100644
-index 8748757..0000000
---- a/recipes/apr/apr_0.9.12.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--DESCRIPTION = "Apache Portable Runtime (APR) library"
--SECTION = "libs"
--LICENSE = "Apache"
--HOMEPAGE = "http://apr.apache.org"
--PR = "r1"
--
--SRC_URI = "${APACHE_MIRROR}/apr/apr-${PV}.tar.bz2"
--
--inherit autotools lib_package binconfig
--
--do_configure() {
--	oe_runconf
--}
--
--SRC_URI[md5sum] = "63fef787c263bd8025c6ab6a6cecdd01"
--SRC_URI[sha256sum] = "cd1da2119dd812127ab6e6e8cbb954d9b74fe01ec744364ba79c9845865ffdaa"
-diff --git a/recipes/apr/apr_1.3.12.bb b/recipes/apr/apr_1.3.12.bb
-deleted file mode 100644
-index 38ed343..0000000
---- a/recipes/apr/apr_1.3.12.bb
-+++ /dev/null
-@@ -1,36 +0,0 @@
--DESCRIPTION = "Apache Portable Runtime (APR) library"
--SECTION = "libs"
--LICENSE = "Apache License, Version 2.0"
--
--SRC_URI = "${APACHE_MIRROR}/apr/${P}.tar.bz2 \
--           file://configure_fixes.patch \
--#	   file://cleanup.patch \
--           file://configfix.patch"
--
--SRC_URI[md5sum] = "6f19af60a161480cc16bb6adb9820040"
--SRC_URI[sha256sum] = "cdc5eff894239344cb35e06f10e8d39a5b46d4250750c6c4ac4058ffbfb6ae80"
--
--inherit autotools lib_package binconfig
--
--OE_BINCONFIG_EXTRA_MANGLE = " -e 's:location=source:location=installed:'"
--
--do_configure_prepend() {
--	cd ${S}
--	echo "top_builddir=@apr_builddir@" >> build/apr_rules.mk.in
--	cp build/libtool.m4 .
--	./buildconf
--}
--
--FILES_${PN}-dev += "${datadir}/build-1/* ${libdir}/apr.exp"
+-do_compile_prepend() {
+-	ln -sf ${S}/srclib/apr/${HOST_SYS}-libtool ${S}/srclib/apr/libtool
+-}	
 -
 -do_install_append() {
--	install -d ${D}${datadir}/apr
--	cp ${S}/build/apr_rules.mk ${D}${datadir}/apr/
--	sed -i s,apr_builddir=.*,apr_builddir=,g ${D}${datadir}/apr/apr_rules.mk
--	sed -i s,apr_builders=.*,apr_builders=,g ${D}${datadir}/apr/apr_rules.mk
--	sed -i s,LIBTOOL=.*,LIBTOOL=\$\(SHELL\)\ ${HOST_SYS}-libtool,g ${D}${datadir}/apr/apr_rules.mk
--	sed -i s,\$\(apr_builders\),${D}${datadir}/apr/,g ${D}${datadir}/apr/apr_rules.mk
--	cp ${S}/build/mkdir.sh ${D}${datadir}/apr/
--	cp ${S}/build/make_exports.awk ${D}${datadir}/apr/
--	cp ${S}/build/make_var_export.awk ${D}${datadir}/apr/
--}
-diff --git a/recipes/apr/apr_1.3.3.bb b/recipes/apr/apr_1.3.3.bb
-deleted file mode 100644
-index 22e399d..0000000
---- a/recipes/apr/apr_1.3.3.bb
-+++ /dev/null
-@@ -1,35 +0,0 @@
--DESCRIPTION = "Apache Portable Runtime (APR) library"
--SECTION = "libs"
--LICENSE = "Apache License, Version 2.0"
--
--PR = "r4"
--
--SRC_URI = "${APACHE_MIRROR}/apr/${P}.tar.bz2 \
--           file://configure_fixes.patch \
--	   file://cleanup.patch \
--           file://configfix.patch"
--
--inherit autotools lib_package binconfig
--
--OE_BINCONFIG_EXTRA_MANGLE = " -e 's:location=source:location=installed:'"
--
--do_configure_prepend() {
--	cd ${S}
--	./buildconf
+-	install -d ${D}/${sysconfdir}/init.d
+-	cat ${WORKDIR}/init | \
+-		sed -e 's,/usr/sbin/,${sbindir}/,g' \
+-		    -e 's,/usr/bin/,${bindir}/,g' \
+-		    -e 's,/usr/lib,${libdir}/,g' \
+-		    -e 's,/etc/,${sysconfdir}/,g' \
+-		    -e 's,/usr/,${prefix}/,g' > ${D}/${sysconfdir}/init.d/${PN}
+-	chmod 755 ${D}/${sysconfdir}/init.d/${PN}
+-# remove the goofy original files...
+-	rm -rf ${D}/${sysconfdir}/${PN}/original
+-# Expat should be found in the staging area via DEPENDS...
+-	rm -f ${D}/${libdir}/libexpat.*
 -}
 -
--do_stage() {
--	autotools_stage_all
--	install -d ${STAGING_DATADIR}/apr
--	cp ${S}/build/apr_rules.mk ${STAGING_DATADIR}/apr/
--	sed -i s,apr_builddir=.*,apr_builddir=,g ${STAGING_DATADIR}/apr/apr_rules.mk
--	sed -i s,apr_builders=.*,apr_builders=,g ${STAGING_DATADIR}/apr/apr_rules.mk
--	sed -i s,LIBTOOL=.*,LIBTOOL=\$\(SHELL\)\ ${HOST_SYS}-libtool,g ${STAGING_DATADIR}/apr/apr_rules.mk
--	sed -i s,\$\(apr_builders\),${STAGING_DATADIR}/apr/,g ${STAGING_DATADIR}/apr/apr_rules.mk
--	cp ${S}/build/mkdir.sh ${STAGING_DATADIR}/apr/
--	cp ${S}/build/make_exports.awk ${STAGING_DATADIR}/apr/
--	cp ${S}/build/make_var_export.awk ${STAGING_DATADIR}/apr/
--}
--
--SRC_URI[md5sum] = "2090c21dee4f0eb1512604127dcd158f"
--SRC_URI[sha256sum] = "d95f3b78366c86317043304864bb08cb836312c87ea7d142a4c02154e7e0dd37"
-diff --git a/recipes/apr/apr_1.3.5.bb b/recipes/apr/apr_1.3.5.bb
-deleted file mode 100644
-index 4f4c288..0000000
---- a/recipes/apr/apr_1.3.5.bb
-+++ /dev/null
-@@ -1,35 +0,0 @@
--DESCRIPTION = "Apache Portable Runtime (APR) library"
--SECTION = "libs"
--LICENSE = "Apache License, Version 2.0"
--
--PR = "r5"
--
--SRC_URI = "${APACHE_MIRROR}/apr/${P}.tar.bz2;name=apr135tarbz2 \
--           file://configure_fixes.patch \
--	   file://cleanup.patch \
--           file://configfix.patch"
--
--inherit autotools lib_package binconfig
--
--OE_BINCONFIG_EXTRA_MANGLE = " -e 's:location=source:location=installed:'"
--
--do_configure_prepend() {
--	cd ${S}
--	./buildconf
--}
--
--do_stage() {
--	autotools_stage_all
--	install -d ${STAGING_DATADIR}/apr
--	cp ${S}/build/apr_rules.mk ${STAGING_DATADIR}/apr/
--	sed -i s,apr_builddir=.*,apr_builddir=,g ${STAGING_DATADIR}/apr/apr_rules.mk
--	sed -i s,apr_builders=.*,apr_builders=,g ${STAGING_DATADIR}/apr/apr_rules.mk
--	sed -i s,LIBTOOL=.*,LIBTOOL=\$\(SHELL\)\ ${HOST_SYS}-libtool,g ${STAGING_DATADIR}/apr/apr_rules.mk
--	sed -i s,\$\(apr_builders\),${STAGING_DATADIR}/apr/,g ${STAGING_DATADIR}/apr/apr_rules.mk
--	cp ${S}/build/mkdir.sh ${STAGING_DATADIR}/apr/
--	cp ${S}/build/make_exports.awk ${STAGING_DATADIR}/apr/
--	cp ${S}/build/make_var_export.awk ${STAGING_DATADIR}/apr/
--}
--
--SRC_URI[apr135tarbz2.md5sum] = "9ac9a00eaa190937fdbbde7b4f03ac1e"
--SRC_URI[apr135tarbz2.sha256sum] = "a33d360b70a9c7971651b3810513d7a85ca84d13ddfc1cb96d6cb0af76aab574"
-diff --git a/recipes/apr/files/gen_uri_delims.patch b/recipes/apr/files/gen_uri_delims.patch
-deleted file mode 100644
-index 57bc15a..0000000
---- a/recipes/apr/files/gen_uri_delims.patch
-+++ /dev/null
-@@ -1,7 +0,0 @@
----- apr-util-0.9.7/uri/Makefile.in.old	2006-03-11 23:01:09.000000000 +0100
--+++ apr-util-0.9.7/uri/Makefile.in	2006-03-11 23:01:28.000000000 +0100
--@@ -15,4 +15,3 @@
-- apr_uri.lo: uri_delims.h apr_uri.c
-- 
-- uri_delims.h: gen_uri_delims
---	./gen_uri_delims > uri_delims.h
-diff --git a/recipes/apr/files/uri_delims.h b/recipes/apr/files/uri_delims.h
-deleted file mode 100644
-index 0c855bf..0000000
---- a/recipes/apr/files/uri_delims.h
-+++ /dev/null
-@@ -1,16 +0,0 @@
--/* this file is automatically generated by gen_uri_delims, do not edit */
--static const unsigned char uri_delims[256] = {
--    T_NUL,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
--    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,T_HASH,0,0,0,0,
--    0,0,0,0,0,0,0,T_SLASH,0,0,0,0,0,0,0,0,0,0,T_COLON,0,
--    0,0,0,T_QUESTION,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
--    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
--    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
--    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
--    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
--    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
--    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
--    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
--    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
--    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 
--};
+-SRC_URI[md5sum] = "a5226203aaf97e5b941c41a71c112704"
+-SRC_URI[sha256sum] = "b2deab8a5e797fde7a04fb4a5ebfa9c80f767d064dd19dcd2857c94838ae3ac6"
 -- 
 1.7.0.4
 
