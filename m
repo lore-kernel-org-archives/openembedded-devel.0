@@ -1,25 +1,25 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Pz8Z0-0001BJ-RD for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Mar 2011 15:16:17 +0100
+	id 1Pz8ex-0001OL-Na for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Mar 2011 15:22:11 +0100
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Pz8XD-0008IJ-QL for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Mar 2011 15:14:11 +0100
+	id 1Pz8JZ-00016B-Fr for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Mar 2011 15:00:05 +0100
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Mar 2011 15:14:11 +0100
+	Mon, 14 Mar 2011 15:00:05 +0100
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Mar 2011 15:14:11 +0100
+	Mon, 14 Mar 2011 15:00:05 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 14 Mar 2011 15:13:55 +0100
-Message-ID: <ill7r3$j5u$1@dough.gmane.org>
+Date: Mon, 14 Mar 2011 14:55:14 +0100
+Message-ID: <ill6o2$d6n$1@dough.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
@@ -40,7 +40,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Mar 2011 14:16:17 -0000
+X-List-Received-Date: Mon, 14 Mar 2011 14:22:11 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
@@ -74,9 +74,9 @@ Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFNfiKjMkyGM64RGpERAsosAJ9Bj+BnhFTikyuYTX9JPB/IPNHQXQCfd5Tt
-b0FgqARbKJDrCdPhCESUFck=
-=9Zgj
+iD8DBQFNfh5CMkyGM64RGpERAjAzAJ470e7MPf4EoP/0akwJcaZM80AcDgCfZwti
+CNU7Yf+aa19GF/nALyBTt+8=
+=Qo/M
 -----END PGP SIGNATURE-----
 
 
