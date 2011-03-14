@@ -1,28 +1,24 @@
-Received: from smtpfb2-g21.free.fr ([212.27.42.10])
+Received: from bsmtp5.bon.at ([195.3.86.187] helo=bsmtp.bon.at)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Pz4RH-0001NX-FM
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Mar 2011 10:51:47 +0100
-Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
-	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 3E434CA9586
+	(envelope-from <pgsellmann@portner-elektronik.at>)
+	id 1Pz4XT-0001kI-Ue for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Mar 2011 10:58:12 +0100
+Received: from aspire.localdomain (unknown [88.116.171.82])
+	by bsmtp.bon.at (Postfix) with ESMTP id E8508CDF97
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Mar 2011 10:50:07 +0100 (CET)
-Received: from [192.168.1.15] (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id BBD544B02C9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Mar 2011 10:41:52 +0100 (CET)
-Message-ID: <4D7DE2DF.708@eukrea.com>
-Date: Mon, 14 Mar 2011 10:41:51 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
-MIME-Version: 1.0
+	Mon, 14 Mar 2011 10:56:20 +0100 (CET)
+From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+Organization: PORTNER Elektronik
 To: openembedded-devel@lists.openembedded.org
-References: <1300035425-15984-1-git-send-email-eric@eukrea.com>	<1300035425-15984-3-git-send-email-eric@eukrea.com>
-	<1300092673.9169.0.camel@localhost>
-In-Reply-To: <1300092673.9169.0.camel@localhost>
-Subject: Re: [PATCH 3/4] slugos: prefer busybox 1.18.4
+Date: Mon, 14 Mar 2011 10:56:24 +0100
+User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
+	)
+References: <201103111138.38493.pgsellmann@portner-elektronik.at>
+	<1299846315.4137.48.camel@mattotaupa>
+In-Reply-To: <1299846315.4137.48.camel@mattotaupa>
+MIME-Version: 1.0
+Message-Id: <201103141056.24985.pgsellmann@portner-elektronik.at>
+Subject: Re: [PATCH] gsoap_2.7.13 build errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,36 +32,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Mar 2011 09:51:47 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 14 Mar 2011 09:58:12 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Marcin,
+Am Freitag, 11. M=E4rz 2011, 13:25:15 schrieb Paul Menzel:
+> Dear Peter,
+>=20
+>=20
+> Am Freitag, den 11.03.2011, 11:38 +0100 schrieb Peter Gsellmann:
+> > There is a compiler error about an impossible cast from QUIRKS* to cons=
+t QUIRKS*
+> > The patches are from Fedora12 which has the exact same gsoap-version
+> > They can be found at http://archive.fedoraproject.org/pub/archive/fedor=
+a/linux/releases/12/Everything/source/SRPMS/gsoap-2.7.13-2.fc12.src.rpm
+> >=20
+> > In the native package, the generated binary is installed in STAGING_BIN=
+DIR_NATIVE where expected by the gsoap-package
+> >=20
+> > Otherwise the gsoap-package uses a soapcpp2 delivered as 32bit-executab=
+le in the source-package! This fails on x86_64 hosts.
+>=20
+> smaller patches would it make easier to review in my opinion. (If it
+> were possible.)
+The patches are as found in Fedora gsoap-2.7.13-2.fc12.src.rpm . I did not =
+make them. Credits to the fedora team.
 
-On 14/03/2011 09:51, Marcin Juszkiewicz wrote:
-> Dnia 2011-03-13, nie o godzinie 17:57 +0100, Eric B=C3=A9nard pisze:
->> --- a/conf/distro/include/preferred-slugos-versions.inc
->> +++ b/conf/distro/include/preferred-slugos-versions.inc
->> @@ -24,7 +24,7 @@ PREFERRED_VERSION_autoconf                    ?=3D
->> "2.65"
->>   PREFERRED_VERSION_autoconf-native              ?=3D "2.65"
->>   PREFERRED_VERSION_automake                     ?=3D "1.11.1"
->>   PREFERRED_VERSION_automake-native              ?=3D "1.11.1"
->> -PREFERRED_VERSION_busybox                      ?=3D "1.18.3"
->> +PREFERRED_VERSION_busybox                      ?=3D "1.18.4"
->
-> Can't it be handled by DEFAULT_PREFERENCE_slugos =3D "1" in
-> busybox_1.18.4.bb recipe? Less reparsing.
->
-that is a distro choice so if distro want to track the latest stable busy=
-box,=20
-they can remove this PREFERRED_VERSION_busybox line and the latest stable=
-=20
-version will be used as a default.
-For next version I'll use a 1.19 PV and will only increase PR when fixes =
-are=20
-added, that will make less changes in the preferred-versions.inc files.
+> On what did you test this patch?
+I run a daily build for my target which is Angstrom with some extra package=
+s. Target hardware is at91sam9g20.
 
-Eric
+> > diff --git a/recipes/gsoap/gsoap-native_2.7.13.bb b/recipes/gsoap/gsoap=
+=2Dnative_2.7.13.bb
+> > index 3e905e7..83c2329 100644
+> > --- a/recipes/gsoap/gsoap-native_2.7.13.bb
+> > +++ b/recipes/gsoap/gsoap-native_2.7.13.bb
+> > @@ -6,8 +6,9 @@ EXTRA_OEMAKE =3D ""
+> > =20
+> >  inherit native
+> > =20
+> > +
+>=20
+> Not needed?
+>=20
+> >  do_install() {
+> > -	:
+> > +	install -m 0755 ${S}/gsoap/src/soapcpp2 ${STAGING_BINDIR_NATIVE}/
+> >  }
+Only soapcpp2 is needed, exactly in this place.
+
+> > diff --git a/recipes/gsoap/gsoap_2.7.13.inc b/recipes/gsoap/gsoap_2.7.1=
+3.inc
+> > index 877e1d1..c3ab3c4 100644
+> > --- a/recipes/gsoap/gsoap_2.7.13.inc
+> > +++ b/recipes/gsoap/gsoap_2.7.13.inc
+> > @@ -3,7 +3,9 @@ for the development of SOAP Web Services and clients."
+> >  SECTION =3D "devel"
+> >  LICENSE =3D "GPL"
+> > =20
+> > -SRC_URI =3D "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.tar.gz"
+> > +SRC_URI =3D "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.tar.gz	\
+> > +	file://gsoap-2.7-openssl.patch	\
+>=20
+> Use spaces instead of tabulators before =BB\=AB?
+>=20
+> > +	file://unused_args.patch"
+>=20
+> Maybe you can move the quote =BB"=AB on a new line, so that future patches
+> will not create a difference for that line.
+I will repost a reworked patch without tabs today
+
+
+Peter
 
 
