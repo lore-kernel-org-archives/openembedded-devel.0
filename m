@@ -1,43 +1,25 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>)
-	id 1Pz6ze-0006Ay-2t; Mon, 14 Mar 2011 13:35:26 +0100
-Received: by bwz10 with SMTP id 10so4078678bwz.6
-	for <multiple recipients>; Mon, 14 Mar 2011 05:33:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=xjGU9BdtKr23yaDe3hlluXUTaC9AcsOyElVVT9Ng2sM=;
-	b=jg4YksF5fZd376BgU8RFmIE8wWq2/bhU4e+OVkfpsWl+fgOo53KU45zeFMub+CzozK
-	P9nJWRKAA+J7EvYEEgWBuuBeti81FIRQ2VUtZSn7vUyhoAgMpMEBB2VmWZIPxQc507dY
-	5DbBC1Cyaw3nbrQ9aA1e3GDbxuOcQYXWh+RXc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=xAMePsJFwEk1L5nX4MWQ3Skq0qHzNFVxAcXc3h3zoFR+nb9+VSS61Ss0f5/E902WD1
-	rM73moPRQA1twXIzyeNV9RgddyMG3j9Y4z+x6fdFnDOhFNGpyejM1eF7QV15HnMrfKUt
-	ZZICLV4sQA1cAVjSjgqw9y8O11f9Oh5kjIdJA=
-MIME-Version: 1.0
-Received: by 10.204.75.22 with SMTP id w22mr10742644bkj.65.1300106024498; Mon,
-	14 Mar 2011 05:33:44 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.66.143 with HTTP; Mon, 14 Mar 2011 05:33:44 -0700 (PDT)
-In-Reply-To: <EC0F161F-7C09-42FD-929D-67914A54AC25@dominion.thruhere.net>
-References: <1299958038-25216-1-git-send-email-otavio@ossystems.com.br>
-	<1299958038-25216-6-git-send-email-otavio@ossystems.com.br>
-	<AANLkTimiahf+8xJ_nNePkXzB3Lhton2+5JqquPmruN24@mail.gmail.com>
-	<EC0F161F-7C09-42FD-929D-67914A54AC25@dominion.thruhere.net>
-Date: Mon, 14 Mar 2011 09:33:44 -0300
-X-Google-Sender-Auth: mCK1qtJCcxj9UkjMHH0OINIBG3w
-Message-ID: <AANLkTimdtCq5X3j=uMLhgDjM=uEoMPQ4P2fV9Heqh5ay@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Koen Kooi <koen@beagleboard.org>
-Cc: Koen Kooi <koen@openembedded.org>,
-	openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [PATCH 05/11] udev (165): move ConsoleKit support to udev-consolekit package
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pz7Ij-0003EM-JG for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Mar 2011 13:55:09 +0100
+Received: from f053046215.adsl.alicedsl.de ([78.53.46.215]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pz7H9-0002Uf-2x for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Mar 2011 12:53:31 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <201103141214.25918.pgsellmann@portner-elektronik.at>
+References: <201103111138.38493.pgsellmann@portner-elektronik.at>
+	<1299846315.4137.48.camel@mattotaupa>
+	<201103141214.25918.pgsellmann@portner-elektronik.at>
+Date: Mon, 14 Mar 2011 13:53:29 +0100
+Message-ID: <1300107209.4193.16.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH] gsoap_2.7.13 build errors, amendment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,33 +33,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Mar 2011 12:35:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 14 Mar 2011 12:55:09 -0000
+X-Groupsio-MsgNum: 30181
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-0Uf2SHj+fx1jUc2LL5gK"
+
+--=-0Uf2SHj+fx1jUc2LL5gK
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Mar 12, 2011 at 19:03, Koen Kooi <koen@beagleboard.org> wrote:
-> If someone can quickly explain me what it does then we can see what needs=
- to get changed. Without having looked into it I think adding RRECOMMENDS_$=
-{PN} +=3D "udev-consolekit" to the consolekit recipe should fix most possib=
-le breakage.
+Am Montag, den 14.03.2011, 12:14 +0100 schrieb Peter Gsellmann:
 
-I think it manages to register the 'seat' on consolekit. So I think
-this would solve this issue.
+The commit summary could just say =C2=BBformatting=C2=AB or =C2=BBwhitespac=
+e
+fixes=C2=AB [1].
 
-> Adding oe-core to CC:
->
-> What are the plans in oe-core for udev? There currently is a recipe overl=
-ayed in meta-oe because I haven't had time to look into the differences bet=
-ween the oe-dev and oe-core version. If we're going to touch udev we might =
-as well do it properly :)
+[1] http://openembedded.org/index.php/Styleguide
 
-I think 165 ought to be our base there.
+> [amendment to d641ae6bfd4303508c86db9285c2dcba28fb5474]
+> recipes reformatted, removed tab characters
+>=20
+> Signed-off-by: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+> ---
+>  recipes/gsoap/gsoap-native_2.7.13.bb |    3 +--
+>  recipes/gsoap/gsoap_2.7.13.inc       |    8 ++++----
+>  2 files changed, 5 insertions(+), 6 deletions(-)
+>=20
+> diff --git a/recipes/gsoap/gsoap-native_2.7.13.bb b/recipes/gsoap/gsoap-n=
+ative_2.7.13.bb
+> index 83c2329..cc323cb 100644
+> --- a/recipes/gsoap/gsoap-native_2.7.13.bb
+> +++ b/recipes/gsoap/gsoap-native_2.7.13.bb
+> @@ -6,9 +6,8 @@ EXTRA_OEMAKE =3D ""
+> =20
+>  inherit native
+> =20
+> -
+>  do_install() {
+> -	install -m 0755 ${S}/gsoap/src/soapcpp2 ${STAGING_BINDIR_NATIVE}/
+> +    install -m 0755 ${S}/gsoap/src/soapcpp2 ${STAGING_BINDIR_NATIVE}/
+>  }
+> =20
+>=20
+> diff --git a/recipes/gsoap/gsoap_2.7.13.inc b/recipes/gsoap/gsoap_2.7.13.=
+inc
+> index c3ab3c4..3771486 100644
+> --- a/recipes/gsoap/gsoap_2.7.13.inc
+> +++ b/recipes/gsoap/gsoap_2.7.13.inc
+> @@ -3,9 +3,10 @@ for the development of SOAP Web Services and clients."
+>  SECTION =3D "devel"
+>  LICENSE =3D "GPL"
+> =20
+> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.tar.gz	\
+> -	file://gsoap-2.7-openssl.patch	\
+> -	file://unused_args.patch"
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.tar.gz \
+> +        file://gsoap-2.7-openssl.patch \
+> +        file://unused_args.patch \
+> +        "
+> =20
+>  inherit autotools
+> =20
+> @@ -14,4 +15,3 @@ S =3D "${WORKDIR}/gsoap-2.7"
+>  PARALLEL_MAKE =3D ""
+> =20
+>  EXTRA_OEMAKE =3D "SOAP=3D${STAGING_BINDIR_NATIVE}/soapcpp2"
+> -
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+It is just formatting, so
 
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
 
+--=-0Uf2SHj+fx1jUc2LL5gK
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk1+D8kACgkQPX1aK2wOHVjWYgCfYcNaEcA5zA5UL1skPtirf++b
+A0kAnApPz8/IU7r8w5QoREGF/BtP6ss/
+=v8QO
+-----END PGP SIGNATURE-----
+
+--=-0Uf2SHj+fx1jUc2LL5gK--
