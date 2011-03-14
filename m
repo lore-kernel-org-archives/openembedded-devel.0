@@ -1,32 +1,32 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>)
-	id 1PzAF2-00083p-50; Mon, 14 Mar 2011 17:03:32 +0100
+	(envelope-from <Tom_Rini@mentor.com>) id 1PzAPg-0000MB-VI
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Mar 2011 17:14:33 +0100
 Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
 	by relay1.mentorg.com with esmtp 
-	id 1PzADO-0006ML-Bh from Tom_Rini@mentor.com ;
-	Mon, 14 Mar 2011 09:01:50 -0700
-Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
+	id 1PzAO5-00000f-Ii from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Mar 2011 09:12:53 -0700
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
 	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Mon, 14 Mar 2011 09:01:05 -0700
-Received: from [172.30.80.14] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
-	Mon, 14 Mar 2011 09:01:05 -0700
-Message-ID: <4D7E3BB2.6060104@mentor.com>
-Date: Mon, 14 Mar 2011 09:00:50 -0700
+	Microsoft SMTPSVC(6.0.3790.4675); Mon, 14 Mar 2011 09:12:49 -0700
+Received: from [172.30.80.14] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
+	with Microsoft SMTP Server id 14.1.270.1;
+	Mon, 14 Mar 2011 09:12:48 -0700
+Message-ID: <4D7E3E72.7000605@mentor.com>
+Date: Mon, 14 Mar 2011 09:12:34 -0700
 From: Tom Rini <tom_rini@mentor.com>
 Organization: Mentor Graphics Corporation
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-To: Ben Gardiner <bengardiner@nanometrics.ca>
-References: <1300111886-4102-1-git-send-email-bengardiner@nanometrics.ca>
-In-Reply-To: <1300111886-4102-1-git-send-email-bengardiner@nanometrics.ca>
-X-OriginalArrivalTime: 14 Mar 2011 16:01:05.0872 (UTC)
-	FILETIME=[067C8500:01CBE261]
-Cc: Koen Kooi <koen@openembedded.org>, Tom Rini <trini@embeddedalley.com>,
-	Denys, arago-devel@gforge.ti.com, openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] bitbake.conf : make IMAGE_CMD_ubifs also produce .rootfs.ubifs
+To: <openembedded-devel@lists.openembedded.org>
+References: <ill7r3$j5u$1@dough.gmane.org>
+In-Reply-To: <ill7r3$j5u$1@dough.gmane.org>
+X-OriginalArrivalTime: 14 Mar 2011 16:12:49.0086 (UTC)
+	FILETIME=[A9A275E0:01CBE262]
+Subject: Re: [2011.03-maintenance] Pull request #2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,86 +40,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Mar 2011 16:03:32 -0000
+X-List-Received-Date: Mon, 14 Mar 2011 16:14:33 -0000
 Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 03/14/2011 07:11 AM, Ben Gardiner wrote:
-> The ubifs image filenames produced by the ubi and ubifs commands differ.
+On 03/14/2011 07:13 AM, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> IMAGE_CMD_ubi produces an interim ubifs image
-> ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubifs ; whereas IMAGE_CMD_ubifs
-> produces a final ubifs image
-> ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img
+> Tom,
 >
-> This results in the undesirable behaviour then when a user specifies
-> IMAGE_FSTYPES contains ubifs (as opposed to ubi) they get a broken link
-> ${DEPLOY_DIR_IMAGE}/${ROOTFS_IMAGE}-${MACHINE}.ubifs pointing to the
-> non-existant ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubifs
+> Please pull the 3 commits from here:
 >
-> Fix the discrepancy by making the IMAGE_CMD_ubifs also produce the
-> .rootfs.ubifs target like the IMAGE_CMD_ubi does and preserve the old
-> .ubifs.img filename as a link for backwards compatibility.
+> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+> Branch: 2011.03-maintenance
+>
+> Koen Kooi (3):
+>        angstrom: name release after branch
+>        angstrom contrib: use proper release version on webserver
+>        angstrom-version: catch up with release changes in parent commits
+>
+> You can view the branch online at
+> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance
+>
+> These aren't backports, but distro version housekeeping. The necessary
+> symlinks have already been made on the feed servers, so there is no
+> impact for existing users, except for getting less confused by the
+> versions reported.
+>
+>
+> regards,
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFNfiKjMkyGM64RGpERAsosAJ9Bj+BnhFTikyuYTX9JPB/IPNHQXQCfd5Tt
+> b0FgqARbKJDrCdPhCESUFck=
+> =9Zgj
+> -----END PGP SIGNATURE-----
 
-So, wait.  What's the problem here?  If you do IMAGE_FSTYPES="ubifs" you 
-get the interim image which isn't useful normally but is useful if 
-you're doing volume management outside of the provided build targets. 
-It's not however a valid rootfs target since it can't be used as is.  I 
-think what's missing here is just a comment to the effect that most 
-people do not want 'ubifs' and they do want 'ubi' as we provide ubifs 
-for advanced usages.
-
->
-> Signed-off-by: Ben Gardiner<bengardiner@nanometrics.ca>
-> CC: Tom Rini<trini@embeddedalley.com>
-> CC: Koen Kooi<koen@openembedded.org>
-> CC: Denys Dmytriyenko<denis@denix.org>
->
-> ---
->
-> Please also consider this patch for inclusion into the 2011.03-maintenance
-> branch and into arago-oe-dev
-
-Just as a general comment, I don't want combined requests for 
-2011.03-maintenance but do feel free to make the request as soon as it 
-hits a mainline tree (and you've done the relevant testing on 
-2011.03-maintenance).
-
-> The reason I want to be able to address the ubifs image -- and
-> not the UBI image -- is because I am trying to produce a UBI image from a
-> a different ubinize config file which will contain both rootfs and
-> kernel volumes.
->
-> I am trying to accomplish this by creating a recipe which depends on the
-> rootfs and kernel images we use. This recipe needs to synthesize the image
-> file path, but without this patch it isn't simple since the link
-> ${DEPLOY_DIR_IMAGE}/${ROOTFS_IMAGE}-${MACHINE}.ubifs is broken.
-
-So, this is a valid use case (which I was spelling out above, before I 
-got down here). but I think you're using the wrong variables.  There 
-should be something that maps over to ${IMAGE_NAME}.ubifs.img
-
-
->
-> ---
->
->   conf/bitbake.conf |    2 +-
->   1 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-> index 903b9b7..49c4263 100644
-> --- a/conf/bitbake.conf
-> +++ b/conf/bitbake.conf
-> @@ -404,7 +404,7 @@ IMAGE_CMD_cpio.xz = "type cpio>/dev/null; cd ${IMAGE_ROOTFS}&&  (find . | cpio
->   IMAGE_CMD_cpio.gz.u-boot = "type cpio>/dev/null; cd ${IMAGE_ROOTFS}&&  (find . | cpio -o -H newc | gzip -c -9>${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz) ${EXTRA_IMAGECMD}; mkimage -A ${UBOOT_ARCH} -O linux -T ramdisk -C gzip -n ${IMAGE_NAME} -d ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz.u-boot"
->   IMAGE_CMD_cpio.lzma = "type cpio>/dev/null; cd ${IMAGE_ROOTFS}&&  (find . | cpio -o -H newc | lzma -c ${LZMA_COMPRESSION_LEVEL}>${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma) ${EXTRA_IMAGECMD}"
->   IMAGE_CMD_ubi = "echo \[ubifs\]>  ubinize.cfg ; echo mode=ubi>>  ubinize.cfg ; echo image=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubifs>>  ubinize.cfg ; echo vol_id=0>>  ubinize.cfg ; echo vol_type=dynamic>>  ubinize.cfg ; echo vol_name=${UBI_VOLNAME}>>  ubinize.cfg ; echo vol_flags=autoresize>>  ubinize.cfg;mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubifs ${MKUBIFS_ARGS}&&  ubinize -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ${UBINIZE_ARGS} ubinize.cfg"
-> -IMAGE_CMD_ubifs = "mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img ${MKUBIFS_ARGS}"
-> +IMAGE_CMD_ubifs = "mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubifs ${MKUBIFS_ARGS}; rm -f ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img; ln -sf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubifs ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img"
->
->   EXTRA_IMAGECMD = ""
->   EXTRA_IMAGECMD_jffs2 = ""
-
+Applied, thanks.
 
 -- 
 Tom Rini
