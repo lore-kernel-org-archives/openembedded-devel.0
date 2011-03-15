@@ -1,33 +1,35 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dp@xora.org.uk>) id 1PzUiQ-0008NN-DU
+	(envelope-from <chasemaupin03@gmail.com>) id 1PzVTQ-0001u1-JQ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Mar 2011 14:55:14 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 7F16DA472A
+	Tue, 15 Mar 2011 15:43:48 +0100
+Received: by gwb11 with SMTP id 11so253946gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Mar 2011 13:53:31 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id Yz+w7CR+st8c
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Mar 2011 13:53:30 +0000 (GMT)
-Received: from xora-eee (188-220-38-49.zone11.bethere.co.uk [188.220.38.49])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 708CCA4622
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Mar 2011 13:53:30 +0000 (GMT)
-Received: by xora-eee (Postfix, from userid 1000)
-	id B0F3680282; Tue, 15 Mar 2011 13:53:30 +0000 (GMT)
-Date: Tue, 15 Mar 2011 13:53:30 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Tue, 15 Mar 2011 07:42:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=/bwqOIWZsS7ukmRNrGbKYVSdD6hyQ0bT7CHnQluKzyw=;
+	b=WslroXbU2qgbyC4BOBgB7Vk1bVPfBqMYB4D0TxkpuwAvaJ30TfM4N/88v44rydDugX
+	1BJQhxdIchcSBytliLg0tJJFAZlx8x/wqTgdA+Xu2kOQ4d80I93dFXvtSHdPx5OaQmjK
+	dxARouQTl92ORI0lZf7Ii1E2vlU28RAsKdEi8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=bJ726x1a65viHmEKsQzPhrWWt6PaslUwISI5RUS0P6pyMTTbtohywMWENrJo45BWrV
+	Btk1kzuLEob8V4ctHVadCX+ZSo6PpmMPMTpjvqUsR/+q/AuQpxpDNaszAscIpRAaeqFt
+	5hfqwzqVA2ODWmXKmTjAbnAF6ebVktuSHT5mE=
+Received: by 10.151.4.8 with SMTP id g8mr45114ybi.335.1300200125803;
+	Tue, 15 Mar 2011 07:42:05 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id q13sm2856431yba.20.2011.03.15.07.42.03
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 15 Mar 2011 07:42:04 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110315135330.GA1913@xora-eee.xora.org.uk>
-References: <1300185619.3759.155.camel@mattotaupa>
-MIME-Version: 1.0
-In-Reply-To: <1300185619.3759.155.camel@mattotaupa>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: removal of `angstrom-2008.1` in dev and needed updates
+Date: Tue, 15 Mar 2011 09:42:01 -0500
+Message-Id: <1300200121-31822-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: [PATCH] u-boot.inc: allow variable make targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,74 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2011 13:55:14 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 15 Mar 2011 14:43:48 -0000
 
-For the angstrom self references we will fix these in next few days.
+* Later versions of u-boot sometimes have top level make targets
+  such as u-boot.imx, u-boot.kwb, and for upcoming TI devices
+  u-boot.ti.
+* These targets define different calls to the mkimage tool to
+  change the images created, such as changing the load address.
+* This change allows recipes to change the default make target
+  of "all" to something like u-boot.ti or u-boot.imx by setting
+  the UBOOT_MAKE_TARGET variable.
 
-For the other distros using this file, I would suggest if they dont get
-fixed within 14 days they are scheduled for removal as probably they are
-dead distros anyway.
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+---
+ recipes/u-boot/u-boot.inc |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-Graeme
-
-On Tue, Mar 15, 2011 at 11:40:19AM +0100, Paul Menzel wrote:
-> Dear OE folks,
-> 
-> 
-> in case you are using `angstrom-2008.1` and are getting the following
-> error message
-> 
->         $ bitbake -k some-recipe
->         ERROR: Error parsing /home/paul/oe/openembedded/recipes/images/uml-image.bb: Could not inherit file classes/rootfs_${IMAGE_PKGTYPE}.bbclass
->         ERROR: Command execution failed: Exited with 1
-> 
-> it means that `conf/distro/angstrom-2008.1.conf` was removed in [1].
-> 
->         commit 67a7c91a4eeed0a5b48f99d98ec9bb54ba6ea120
->         Author: Koen Kooi <koen@openembedded.org>
->         Date:   Wed Mar 9 14:51:10 2011 +0100
->         
->             angstrom 2008.1: remove from .dev
->             
->             This will be maintained in the 2011.03-maintenance branch
->             
->             Signed-off-by: Koen Kooi <koen@openembedded.org>
-> 
-> It looks like some other configurations files and comments still refer
-> to `angstrom-2008.1` though and probably need an update.
-> 
->         conf/distro/amsdelta-oe.conf:require conf/distro/angstrom-2008.1.conf
->         conf/distro/angstrom-2010.x.conf:# If you want something stable *right now*, use angstrom-2008.1
->         conf/distro/angstrom-2010.x.conf:# Again, in doubt, use DISTRO="angstrom-2008.1"
->         conf/distro/foonas.conf:require conf/distro/angstrom-2008.1.conf
->         conf/distro/iphone-compat.conf:require conf/distro/angstrom-2008.1.conf
->         conf/distro/nylon.conf:require conf/distro/angstrom-2008.1.conf
->         conf/local.conf.sample:# DISTRO = "angstrom-2008.1"
->         contrib/angstrom/local.conf:DISTRO = "angstrom-2008.1"
->         contrib/buildbot/scripts/full-oe-autobuild:     echo 'DISTRO = "angstrom-2008.1"' >> "$CONFFILE"
->         contrib/testing/testbuilder/README:bitbake (e.g. angstrom-2008.1/qemuarm/console-image).
->         contrib/testing/testbuilder/README:    ./testbuilder -D angstrom-2008.1 -M qemuarm console-image
->         contrib/testing/testbuilder/README:    ./testbuilder -D angstrom-2008.1 -M qemuarm -S
->         contrib/testing/testbuilder/testbuilder.d/testing.conf.sample:DISTROS="angstrom-2008.1 angstrom-2010.x"
->         docs/usermanual/chapters/getting_oe.xml:DISTRO = "angstrom-2008.1"
->         recipes/linux/linux-2.6.29/cm-x270/0004-add-build-script.patch:+CROSS_COMPILER_PATH=`cd /build/oe/oe-stable/build/angstrom-2008.1/tmp/cross/armv5te/bin; pwd`
-> 
-> 
-> Thanks,
-> 
-> Paul
-> 
-> 
-> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=67a7c91a4eeed0a5b48f99d98ec9bb54ba6ea120
-
-
-
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+diff --git a/recipes/u-boot/u-boot.inc b/recipes/u-boot/u-boot.inc
+index 88c6a4d..ffd1e1e 100644
+--- a/recipes/u-boot/u-boot.inc
++++ b/recipes/u-boot/u-boot.inc
+@@ -16,6 +16,7 @@ UBOOT_MACHINE ?= "${MACHINE}_config"
+ UBOOT_BINARY ?= "u-boot.bin"
+ UBOOT_IMAGE ?= "u-boot-${MACHINE}-${PV}-${PR}.bin"
+ UBOOT_SYMLINK ?= "u-boot-${MACHINE}.bin"
++UBOOT_MAKE_TARGET ?= "all"
+ 
+ do_configure () {
+ 	oe_runmake ${UBOOT_MACHINE}
+@@ -25,7 +26,7 @@ do_compile () {
+ 	unset LDFLAGS
+ 	unset CFLAGS
+ 	unset CPPFLAGS
+-	oe_runmake all
++	oe_runmake ${UBOOT_MAKE_TARGET}
+ 	oe_runmake tools env HOSTCC="${CC}"
+ }
+ 
+-- 
+1.7.0.4
 
 
 
