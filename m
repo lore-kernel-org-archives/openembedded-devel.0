@@ -1,36 +1,35 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PzX28-0001NO-Aq
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Mar 2011 17:23:44 +0100
-Received: by bwz10 with SMTP id 10so668087bwz.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PzX3C-0001Q8-Ow for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Mar 2011 17:24:51 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PzX1a-0006te-Kv for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Mar 2011 17:23:10 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Mar 2011 17:23:10 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Mar 2011 09:22:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=N3+nYO/s2jCB+T7CXpuCthGaeItiQ8ITZBnEHkz4TMk=;
-	b=O+6j95UUI+ANwf01OwJBSmPdGi0irlL7LXvzbSqiA4rkEysntuI6z2Jx9OoaF8HLvR
-	DTnjL0mx4O6/+txgLbVOloIM3ZmksKkZ6ag7gyz/o6ixjRNKm/ioPuT6IHqij2NIKkKM
-	p2EPpIyJftL7sWFqUZJmu4fbcIHk0EKDN0bp0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=GUrkL3+AGAmta03ojgPARm4OSF02HOcklWqeucm1vGRXAyGGVmkehOsSIJvxH15M+/
-	jdCmB6W9IpyYbKg+bc1m6Hbgf2NBLdL/kI8lgXy7av8vkKiq4U/bxt/TXbhdtPy276nr
-	JBjYDSB1TkxMKkT3Dbal89470ChdjG69Y8WfY=
-Received: by 10.223.143.86 with SMTP id t22mr5548436fau.68.1300206089388; Tue,
-	15 Mar 2011 09:21:29 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.223.41.89 with HTTP; Tue, 15 Mar 2011 09:20:29 -0700 (PDT)
-In-Reply-To: <1300184267.3759.123.camel@mattotaupa>
-References: <1300184267.3759.123.camel@mattotaupa>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 15 Mar 2011 09:20:29 -0700
-Message-ID: <AANLkTinEtbUXarNyKutN7y4FvfmpAT3u8=sUrBVT-9-c@mail.gmail.com>
+	Tue, 15 Mar 2011 17:23:10 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
-Subject: Re: [PATCH] mango-lassi: `touch config.rpath` to fix `configure.ac:127: required file `./config.rpath' not found`
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 15 Mar 2011 17:22:57 +0100
+Message-ID: <ilo3p1$lut$1@dough.gmane.org>
+References: <4D7E3B34.5050100@mentor.com>	<AANLkTikqSLJd90dhRx8NwoEb37B-ZSQ4NcfKe_vVXpm2@mail.gmail.com>	<20110314163639.GA3375@jama.jama.net>	<AANLkTi=VL3kWZwKnzEao5iDUEA_F_-fMkx=m0astpSG3@mail.gmail.com>	<4D7EA326.2000902@mentor.com>	<AANLkTimjL1ohV7vMkG=2WMVZqC-vH+NNndjGi+K49k4P@mail.gmail.com>
+	<4D7F8B8A.2040501@mentor.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <4D7F8B8A.2040501@mentor.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: Discussion: Version retention policy in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,96 +43,150 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2011 16:23:44 -0000
+X-List-Received-Date: Tue, 15 Mar 2011 16:24:51 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 15, 2011 at 3:17 AM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> Date: Tue, 15 Mar 2011 10:58:26 +0100
->
-> Task configure fails with the following error message.
->
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0Build Configuration:
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0BB_VERSION =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D "1.1=
-2.0"
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0METADATA_BRANCH =C2=A0 =3D "<unknown>"
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0METADATA_REVISION =3D "b1fbaf6"
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0TARGET_ARCH =C2=A0 =C2=A0 =C2=A0 =3D "arm"
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0TARGET_OS =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D "lin=
-ux-gnueabi"
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0MACHINE =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D=
- "beagleboard"
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0DISTRO =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0=3D "angstrom"
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0DISTRO_VERSION =C2=A0 =C2=A0=3D "v20110315"
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0TARGET_FPU =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D "har=
-d"
->
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0[=E2=80=A6]
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0autoreconf: running: /oe/build-angstrom-next/a=
-ngstrom-dev/sysroots/i686-linux/usr/bin/autoheader --include=3D/oe/build-an=
-gstrom-next/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/a=
-clocal-1.11 --include=3D/oe/build-angstrom-next/angstrom-dev/sysroots/armv7=
-a-angstrom-linux-gnueabi/usr/share/aclocal --force --warnings=3Dcross
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0autoreconf: running: automake --foreign --add-=
-missing --copy --force-missing --warnings=3Dcross
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0automake: unknown warning category `cross'
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0configure.ac:39: installing `./compile'
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0configure.ac:127: installing `./config.guess'
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0configure.ac:127: required file `./config.rpat=
-h' not found
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0configure.ac:127: installing `./config.sub'
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0configure.ac:27: installing `./install-sh'
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0configure.ac:27: installing `./missing'
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0Makefile.am: installing `./depcomp'
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0autoreconf: automake failed with exit status: =
-1
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0+ oefatal 'autoreconf execution failed.'
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0+ echo FATAL: 'autoreconf execution failed.'
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0FATAL: autoreconf execution failed.
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0+ exit 1
->
-> `touch config.rpath` in `do_configure_perpend() {}` fixes the issues.
->
-> Mango Lasso includes `bootstrap.sh` [1] which also does the same. Using `=
-bootstrap.sh` [1] for configuring Mango Lassi is not considered because `pu=
-lseaudio_git.bb` [2] also uses the proposed fix.
->
-> [1] http://git.0pointer.de/?p=3Dmango-lassi.git;a=3Dblob;f=3Dbootstrap.sh=
-;h=3D089d445b3cce3374b48fc083f1f87983c4100052;hb=3DHEAD
-> [2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/pulse=
-audio/pulseaudio_git.bb?id=3Dfcb12f3a4448621ccc75d37dcad4a01820fdf89d#n27
->
-> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-This patch is ok.
+On 15-03-11 16:53, Tom Rini wrote:
+> On 03/15/2011 02:38 AM, Frans Meulenbroeks wrote:
+>> Tom, thanks for the reply.
+>>
+>> 2011/3/15 Tom Rini<tom_rini@mentor.com>:
+>>> On 03/14/2011 11:52 AM, Frans Meulenbroeks wrote:
+>>>>
+>>
+>> [cut out large part of text]
+>>
+>>>> Overall this seems like a fine proposal to me. Thanks a lot for
+>>>> drafting
+>>>> it.
+>>>>
+>>>> There are a few minor suggestions I would like to make.
+>>>>
+>>>> First is to define which components are considered to be critical, as
+>>>> for what is non-critical for one person might be critical for someone
+>>>> else.
+>>>> Leaving this open is bound to lead to discussion and disagreement
+>>>> later on, perhaps better be clear about it upfront.
+>>>
+>>> We see that as outside of the scope of this policy but I agree it
+>>> needs to
+>>> be settled up, at least as a starting point sooner rather than
+>>> later.  So
+>>> that we don't forget, please ask us to put this on the agenda.
+>>
+>> I agree that that is outside the policy (but within the TSC domain).
+>> I'll bring it up when I see the agenda.
+>> Note that I am quite busy tomorrow so it might be (my) thursday
+>> morning before I get to that.
+> 
+> Thanks.
+> 
+>>>> Second is the location of deprecated recipes.
+>>>> As far as I know we haven't clearly defined what goes into meta-oe.
+>>>
+>>> Well, that's up to OE at large, including how it's run.  We're just
+>>> setting
+>>> out how the core should work right now.
+>>
+>> I understand, but as said before this is also a topic for the TSC
+> 
+> One more agenda topic :)
+> 
+>>>> I have assumed that this is one layer that will (also) contain recipes
+>>>> that are not part of oe-core.For example a recipe for a UPnP server or
+>>>> a CD recording program.
+>>>
+>>> Correct.  We expect meta-oe to continue to hold things that are not
+>>> essential but are useful and not distribution specific.
+>>>
+>>>> Mixing deprecated oe-core and mainline non-core recipes in the same
+>>>> tree will probably lead to confusion and perhaps even to people trying
+>>>> to upgrade deprecated recipes in meta-oe.
+>>>
+>>> Why?  If meta-oe doesn't need something that's deprecated in the core it
+>>> shouldn't take it on.  If it does need something deprecated, we
+>>> should try
+>>> and figure out what can be done about that in order to fix that, or live
+>>> with it (which is to say, if package A depends on package B no newer
+>>> than
+>>> version 2.0 and package B is now up to 3.2, is package A something
+>>> that's
+>>> really worth keeping?  Or should it perhaps go away?
+>>
+>> Well there are two things I like to avoid.
+>> First one is someone seeing a deprecated OE-core recipe in meta-oe.
+>> Say this recipe is at 1.X. The person seeing this knows that upstream
+>> is at 1.Y (Y>  X), but is not aware that this recipe (and maybe 1.Y)
+>> is in oe-core and starts to work at it.
+>> Only later (e.g. when submitting changes) (s)he learns that actually
+>> the newer version is in OE-core, and that all the work is wasted
+>> timel. This is not an encouraging experience).
+>> I think it would help if people are alerted that a newer version
+>> exists in oe-core)
+> 
+> I don't see this happening as you don't use meta-oe by itself but
+> oe-core + meta-oe (+ possibly more).
+> 
+>> The second one is that we have many versions of the same recipe and no
+>> one really cares or maintains these old versions. (if they are
+>> maintained and used I have no objections against multiple versions,
+>> but I am somewhat allergic to recipes that are kinda orphaned and
+>> sometimes do not even build).
+> 
+> Right.  The default case isn't "throw it in meta-oe" when there's a new
+> version but "is someone volunteering to take this into meta-oe because
+> they need it".
+> 
+>> Btw that raises the following question: if a distro wants to pin (for
+>> whatever reason) a certain recipe, but that version is not really
+>> needed by other packages or so, does it still live in meta-oe? or
+>> should it then eventually move into a distro specific overlay? I'm
+>> especially thinking about distro's that are not too active in updating
+>> their pinnings
+> 
+> It's up to however meta-oe wants to run things.  It sounds like the
+> desire is that if people are active and things work, it's fine to have
+> things in meta-oe.
+> 
+>>>> In order to avoid that confusion is is probably better to give the
+>>>> deprecated oe-core recipes their own layer (e.g. old-oe-core).
+>>>
+>>> If something isn't needed, we don't want to have to carry it anywhere
+>>> other
+>>> than in the scm history.  If it's needed, it should be somewhere
+>>> active so
+>>> it can be used.  We can re-evaluate this at a later point in time if
+>>> it's
+>>> not working, but we discussed this and that was our conclusion
+>>> (that's my
+>>> recollection at least, the log can be checked over if needed).
+>>
+>> I'm not sure if I saw the last log.
+>> Key in your remark is what defines "needed".
+>> Also what I often see is that things are needed, but after a while
+>> become unneeded and become somewhat orphaned.
+> 
+> So, using a recent example.  policykit dropped needing eggdus build.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
-> ---
-> =C2=A0recipes/avahi/mango-lassi_git.bb | =C2=A0 =C2=A03 +++
-> =C2=A01 files changed, 3 insertions(+), 0 deletions(-)
->
-> diff --git a/recipes/avahi/mango-lassi_git.bb b/recipes/avahi/mango-lassi=
-_git.bb
-> index 1faee4b..049ac24 100644
-> --- a/recipes/avahi/mango-lassi_git.bb
-> +++ b/recipes/avahi/mango-lassi_git.bb
-> @@ -11,3 +11,6 @@ S =3D "${WORKDIR}/git"
->
-> =C2=A0inherit autotools
->
-> +do_configure_prepend() {
-> + =C2=A0 =C2=A0touch config.rpath
-> +}
-> --
-> 1.7.4.1
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+FWIW, in the GNOME world anything with 'egg' in its name is a tech
+that's in an incubation stage and scheduled to get merged into e.g.
+libgnome, gtk, glib-2.0, etc. So if we stick to even releases we
+shouldn't be needing any eggs. In a perfect world, that is :)
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNf5JhMkyGM64RGpERAtQQAJ0fiVfoQgrwGsiv/IoJ0teB1qA76wCcDTAM
+hHo9KrP5MvGUrs9tx6/gZCo=
+=LMEy
+-----END PGP SIGNATURE-----
+
 
 
