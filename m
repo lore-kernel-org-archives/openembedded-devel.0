@@ -1,41 +1,27 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from vms173013pub.verizon.net ([206.46.173.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ka6sox@gmail.com>)
-	id 1PzIzH-0003Ka-Io; Tue, 15 Mar 2011 02:23:51 +0100
-Received: by fxm19 with SMTP id 19so108260fxm.6
-	for <multiple recipients>; Mon, 14 Mar 2011 18:22:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=qtF4dUJ1GhBIunxFkNrcHZcU44CxmYWuFfGC0zL/fY4=;
-	b=eUY8RKns4gTvANr3sy0tBsrhhe8BaCKHC2IsHIe7b/J6JUuZPUwtIOKOpFkuELWzdv
-	yQbQLT6iXdyTh2q/V8sdEGC4Bkg4Lepxi9uIdbRqvdnFnKX/tGgzV2QvDuGH0ddbKq05
-	/PJ1bKtqVguQUvBTdjpBUNZ3kV4sa2qS3LvQQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	b=lsd1bMAdtzKrPd+XH4wXuaHaBtjkTve2YYDjisy/U11HHRh0cUvBub/zzUBhpB8nm0
-	ywrUDIFbCreUciApLupKKu9NFX0ugxfNbjb1om8AKjkhezyQbOGlLRsO2WCyQF0RgE+6
-	jgqdjoXn3pXQosC34iFi5kt7OBxuBM3cY1kpM=
-MIME-Version: 1.0
-Received: by 10.223.106.78 with SMTP id w14mr2138694fao.35.1300152130261; Mon,
-	14 Mar 2011 18:22:10 -0700 (PDT)
-Received: by 10.223.93.205 with HTTP; Mon, 14 Mar 2011 18:22:10 -0700 (PDT)
-In-Reply-To: <4D7EBDAA.2030805@balister.org>
-References: <1300145968.30423.803.camel@rex> <20110314235317.GB28065@denix.org>
-	<1300149295.30423.889.camel@rex>
-	<AANLkTikmH2iFaxLYh=HVjX2RjLsCeG1PUJVjQN9kLDk0@mail.gmail.com>
-	<4D7EBDAA.2030805@balister.org>
-Date: Mon, 14 Mar 2011 18:22:10 -0700
-Message-ID: <AANLkTi=0ev4tEtpbxuHw6iz0uLSi53CvTjSDuiAm=v0a@mail.gmail.com>
-From: Tom King <ka6sox@gmail.com>
-To: openembedded-members@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: yocto@yoctoproject.org,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	Richard Purdie <richard.purdie@linuxfoundation.org>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: Collab Summit + ELC + TSC Meeting
+	(envelope-from <openembedded@rkmorris.us>) id 1PzKCT-0003Fp-Lf
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Mar 2011 03:41:33 +0100
+Received: from server ([unknown] [71.164.183.134]) by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LI2005R6VDY4GR0@vms173013.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	14 Mar 2011 21:39:34 -0500 (CDT)
+Received: from server (127.0.0.1) by server (Axigen)
+	with ESMTPSA id 25FCE5; Mon, 14 Mar 2011 21:39:33 -0500
+Received: from [192.168.1.2] by rkmorris.us with HTTP; Mon,
+	14 Mar 2011 21:39:32 -0500
+From: Russell Morris <openembedded@rkmorris.us>
+Date: Mon, 14 Mar 2011 21:39:32 -0500
+X-Mailer: Axigen WebMail
+To: openembedded-devel@lists.openembedded.org
+Message-id: <1300156772037897500@rkmorris.us>
+Importance: Normal
+MIME-version: 1.0
+X-AxigenVirus-Level: 1
+X-AxigenSpam-Level: 4
+Subject: OpenEmbedded (Wiki) Web Site Down
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,51 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2011 01:23:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 15 Mar 2011 02:41:33 -0000
+Content-type: text/plain
+Content-transfer-encoding: quoted-printable
+Content-disposition: inline
 
-I will be
+Hi,
 
-TK
-On Mon, Mar 14, 2011 at 6:15 PM, Philip Balister <philip@balister.org>wrote:
+Just a heads up, but the Wiki / site seems to be down. Here is the error me=
+ssage that I receive (tried from two different PC's, on two different netwo=
+rks),
 
-> On 03/14/2011 08:44 PM, Jeff Osier-Mixon wrote:
->
->>
->>>  There also was a request for more general purpose OEDAM over the
->>>> weekend,
->>>> maybe in parallel or before/after TSC meeting:
->>>>
->>>> Any thoughts on that?
->>>>
->>>
->>> Most of the replies there are from TSC people who are going to be there
->>> with the exceptions of yourself and Mike. I'm ok with having a more
->>> general meeting if the demand is there and Jefro can arrange it. If
->>> there are only a few people, I'd suggest something like meeting after
->>> the TSC meeting and finding food/drink together.
->>>
->>>
->>
->> For those who don't know me, I'm Jefro.  :)
->>
->> As Richard says, a small crowd would probably interact better over
->> refreshments.  If you are interested in such a gathering, send me a note
->> at
->> jefro@jefro.net and let me know when you are available, and I'll see what
->> I
->> can pull together.
->>
->
-> A quick show of hands, how many OE people can be in San Francisco over the
-> weekend of April 9-10? TSC people, go ahead and chime in for completeness.
->
-> Philip
->
->
-> _______________________________________________
-> Openembedded-members mailing list
-> Openembedded-members@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-members
->
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+Database error
+
+A database error has occurred
+Query: SELECT lc_value FROM `l10n_cache` WHERE lc_lang =3D 'en' AND lc_key =
+=3D 'deps' LIMIT 1=20
+Function: LCStore_DB::get
+Error: 1146 Table 'oe_mediawiki.l10n_cache' doesn't exist (10.10.10.7)
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+... Russell
+
+
 
