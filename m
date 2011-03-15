@@ -1,23 +1,36 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PzWnL-0003GV-By for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Mar 2011 17:08:27 +0100
-Received: from f053032095.adsl.alicedsl.de ([78.53.32.95]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PzWlj-0002Mx-0O for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Mar 2011 16:06:47 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <raj.khem@gmail.com>) id 1PzX28-0001NO-Aq
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Mar 2011 17:23:44 +0100
+Received: by bwz10 with SMTP id 10so668087bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Mar 2011 09:22:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type:content-transfer-encoding;
+	bh=N3+nYO/s2jCB+T7CXpuCthGaeItiQ8ITZBnEHkz4TMk=;
+	b=O+6j95UUI+ANwf01OwJBSmPdGi0irlL7LXvzbSqiA4rkEysntuI6z2Jx9OoaF8HLvR
+	DTnjL0mx4O6/+txgLbVOloIM3ZmksKkZ6ag7gyz/o6ixjRNKm/ioPuT6IHqij2NIKkKM
+	p2EPpIyJftL7sWFqUZJmu4fbcIHk0EKDN0bp0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=GUrkL3+AGAmta03ojgPARm4OSF02HOcklWqeucm1vGRXAyGGVmkehOsSIJvxH15M+/
+	jdCmB6W9IpyYbKg+bc1m6Hbgf2NBLdL/kI8lgXy7av8vkKiq4U/bxt/TXbhdtPy276nr
+	JBjYDSB1TkxMKkT3Dbal89470ChdjG69Y8WfY=
+Received: by 10.223.143.86 with SMTP id t22mr5548436fau.68.1300206089388; Tue,
+	15 Mar 2011 09:21:29 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.223.41.89 with HTTP; Tue, 15 Mar 2011 09:20:29 -0700 (PDT)
+In-Reply-To: <1300184267.3759.123.camel@mattotaupa>
+References: <1300184267.3759.123.camel@mattotaupa>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 15 Mar 2011 09:20:29 -0700
+Message-ID: <AANLkTinEtbUXarNyKutN7y4FvfmpAT3u8=sUrBVT-9-c@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1299591298.3785.126.camel@mattotaupa>
-References: <1299591298.3785.126.camel@mattotaupa>
-Date: Tue, 15 Mar 2011 17:06:45 +0100
-Message-ID: <1300205205.4123.6.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: xfce4-session: task configure fails with `checking for iceauth... no`
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: [PATCH] mango-lassi: `touch config.rpath` to fix `configure.ac:127: required file `./config.rpath' not found`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,145 +44,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2011 16:08:27 -0000
-X-Groupsio-MsgNum: 30228
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-xfsAJrQb2ERF/1gDK5lh"
-
---=-xfsAJrQb2ERF/1gDK5lh
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 15 Mar 2011 16:23:44 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Dear OE folks,
+On Tue, Mar 15, 2011 at 3:17 AM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Date: Tue, 15 Mar 2011 10:58:26 +0100
+>
+> Task configure fails with the following error message.
+>
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0Build Configuration:
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0BB_VERSION =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D "1.1=
+2.0"
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0METADATA_BRANCH =C2=A0 =3D "<unknown>"
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0METADATA_REVISION =3D "b1fbaf6"
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0TARGET_ARCH =C2=A0 =C2=A0 =C2=A0 =3D "arm"
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0TARGET_OS =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D "lin=
+ux-gnueabi"
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0MACHINE =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D=
+ "beagleboard"
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0DISTRO =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0=3D "angstrom"
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0DISTRO_VERSION =C2=A0 =C2=A0=3D "v20110315"
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0TARGET_FPU =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D "har=
+d"
+>
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0[=E2=80=A6]
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0autoreconf: running: /oe/build-angstrom-next/a=
+ngstrom-dev/sysroots/i686-linux/usr/bin/autoheader --include=3D/oe/build-an=
+gstrom-next/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/a=
+clocal-1.11 --include=3D/oe/build-angstrom-next/angstrom-dev/sysroots/armv7=
+a-angstrom-linux-gnueabi/usr/share/aclocal --force --warnings=3Dcross
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0autoreconf: running: automake --foreign --add-=
+missing --copy --force-missing --warnings=3Dcross
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0automake: unknown warning category `cross'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0configure.ac:39: installing `./compile'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0configure.ac:127: installing `./config.guess'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0configure.ac:127: required file `./config.rpat=
+h' not found
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0configure.ac:127: installing `./config.sub'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0configure.ac:27: installing `./install-sh'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0configure.ac:27: installing `./missing'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0Makefile.am: installing `./depcomp'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0autoreconf: automake failed with exit status: =
+1
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0+ oefatal 'autoreconf execution failed.'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0+ echo FATAL: 'autoreconf execution failed.'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0FATAL: autoreconf execution failed.
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0+ exit 1
+>
+> `touch config.rpath` in `do_configure_perpend() {}` fixes the issues.
+>
+> Mango Lasso includes `bootstrap.sh` [1] which also does the same. Using `=
+bootstrap.sh` [1] for configuring Mango Lassi is not considered because `pu=
+lseaudio_git.bb` [2] also uses the proposed fix.
+>
+> [1] http://git.0pointer.de/?p=3Dmango-lassi.git;a=3Dblob;f=3Dbootstrap.sh=
+;h=3D089d445b3cce3374b48fc083f1f87983c4100052;hb=3DHEAD
+> [2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/pulse=
+audio/pulseaudio_git.bb?id=3Dfcb12f3a4448621ccc75d37dcad4a01820fdf89d#n27
+>
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+
+This patch is ok.
+
+Acked-by: Khem Raj <raj.khem@gmail.com>
+> ---
+> =C2=A0recipes/avahi/mango-lassi_git.bb | =C2=A0 =C2=A03 +++
+> =C2=A01 files changed, 3 insertions(+), 0 deletions(-)
+>
+> diff --git a/recipes/avahi/mango-lassi_git.bb b/recipes/avahi/mango-lassi=
+_git.bb
+> index 1faee4b..049ac24 100644
+> --- a/recipes/avahi/mango-lassi_git.bb
+> +++ b/recipes/avahi/mango-lassi_git.bb
+> @@ -11,3 +11,6 @@ S =3D "${WORKDIR}/git"
+>
+> =C2=A0inherit autotools
+>
+> +do_configure_prepend() {
+> + =C2=A0 =C2=A0touch config.rpath
+> +}
+> --
+> 1.7.4.1
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
-Am Dienstag, den 08.03.2011, 14:34 +0100 schrieb Paul Menzel:
-
-> task configure of `xfce4-session_4.6.2.bb` fails with the following
-> error message using any distribution (`minimal`, `angstrom-2008.1`).
->=20
->         checking if the linker (arm-oe-linux-gnueabi-ld --sysroot=3D/oe/b=
-uild-minimal-eglibc/minimal-dev/sysroots/armv5te-oe-linux-gnueabi) is GNU l=
-d... (cached) yes
->         checking whether to build with profiling support... no
->         checking whether to compile with coverage profiling instrumentati=
-on... no
->         checking whether to disable assertions... no
->         checking whether to build final version... yes
->         checking whether arm-oe-linux-gnueabi-ld --sysroot=3D/oe/build-mi=
-nimal-eglibc/minimal-dev/sysroots/armv5te-oe-linux-gnueabi accepts -O1... y=
-es
->         checking for iceauth... no
->         configure: error: iceauth missing, please check your X11 installa=
-tion
->=20
-> In my build directory I get the following hits for =C2=BB*iceauth*=C2=AB.
->=20
->         $ find . -iname *iceauth*
->         ./minimal-dev/deploy/sources/MIT-X/iceauth
->         ./minimal-dev/deploy/sources/MIT-X/iceauth/iceauth-1.0.4.tar.bz2
->         ./minimal-dev/deploy/ipk/armv5te/iceauth-dbg_1.0.4-r5.0_armv5te.i=
-pk
->         ./minimal-dev/deploy/ipk/armv5te/iceauth-dev_1.0.4-r5.0_armv5te.i=
-pk
->         ./minimal-dev/deploy/ipk/armv5te/iceauth-doc_1.0.4-r5.0_armv5te.i=
-pk
->         ./minimal-dev/deploy/ipk/armv5te/iceauth_1.0.4-r5.0_armv5te.ipk
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_patch
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_package_stage
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_configure
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_unpack
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_setscene
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_compile
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_rm_work
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_package_stage_all
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_fetch
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_package_write
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_qa_configure
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_build
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_install
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_qa_staging
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_package
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_distribute_sources
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_package_write_ipk
->         ./minimal-dev/stamps/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.=
-0.do_populate_sysroot
->         ./minimal-dev/pstage/minimaleglibc/staging-iceauth-armv5te-oe-lin=
-ux-gnueabi_1.0.4-r5.0_armv5te-linux-gnueabi.ipk
->         ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/iceauth
->         ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth.pa=
-ckaged
->         ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth-do=
-c
->         ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth-db=
-g.packaged
->         ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth-de=
-v
->         ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth
->         ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth-db=
-g
->         ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth-do=
-c.packaged
->         ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth-lo=
-cale
->         ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth-de=
-v.packaged
->         ./minimal-dev/pkgdata/armv5te-oe-linux-gnueabi/runtime/iceauth-st=
-atic
->         ./minimal-dev/sysroots/armv5te-oe-linux-gnueabi/usr/share/man/man=
-1/iceauth.1
->         ./minimal-dev/work/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4-r5.0
->         ./minimal-dev/usr/lib/opkg/info/staging-iceauth-armv5te-oe-linux-=
-gnueabi.control
->         ./minimal-dev/usr/lib/opkg/info/staging-iceauth-armv5te-oe-linux-=
-gnueabi.list=20
->=20
-> So nothing is in the `sysroot`. Building without `INHERIT +=3D "rm_work"`
-> I find the following.
->=20
->         $ ls -l minimal-dev/work/armv5te-oe-linux-gnueabi/iceauth-1_1.0.4=
--r5.0/package/usr/bin/iceauth=20
->         -rwxr-xr-x 1 x x 16264 Mar  7 11:55 minimal-dev/work/armv5te-oe-l=
-inux-gnueabi/iceauth-1_1.0.4-r5.0/package/usr/bin/iceauth
->=20
-> Does anyone have an idea how this can be solved. `git grep iceauth`
-> indicates that only `xfce4-session_4.*` depends on `iceauth`.
-
-Any ideas?
-
-
-Thanks,
-
-Paul
-
---=-xfsAJrQb2ERF/1gDK5lh
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk1/jo4ACgkQPX1aK2wOHVgG4gCeIslkcWzATLAvLFM1G+rDzp2/
-IMoAn0PBdHYtAQD0y79Bq+fpBjVfFovm
-=+WqM
------END PGP SIGNATURE-----
-
---=-xfsAJrQb2ERF/1gDK5lh--
