@@ -1,27 +1,30 @@
-Received: from vms173013pub.verizon.net ([206.46.173.13])
+Received: from vms173001pub.verizon.net ([206.46.173.1])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <openembedded@rkmorris.us>) id 1PzKCT-0003Fp-Lf
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Mar 2011 03:41:33 +0100
-Received: from server ([unknown] [71.164.183.134]) by vms173013.mailsrvcs.net
+	(envelope-from <denis@denix.org>)
+	id 1PzKPl-0004TH-RH; Tue, 15 Mar 2011 03:55:17 +0100
+Received: from gandalf.denix.org ([unknown] [71.251.48.61])
+	by vms173001.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LI2005R6VDY4GR0@vms173013.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	14 Mar 2011 21:39:34 -0500 (CDT)
-Received: from server (127.0.0.1) by server (Axigen)
-	with ESMTPSA id 25FCE5; Mon, 14 Mar 2011 21:39:33 -0500
-Received: from [192.168.1.2] by rkmorris.us with HTTP; Mon,
-	14 Mar 2011 21:39:32 -0500
-From: Russell Morris <openembedded@rkmorris.us>
-Date: Mon, 14 Mar 2011 21:39:32 -0500
-X-Mailer: Axigen WebMail
-To: openembedded-devel@lists.openembedded.org
-Message-id: <1300156772037897500@rkmorris.us>
-Importance: Normal
+	2009))
+	with ESMTPA id <0LI200CV3W09G3Y2@vms173001.mailsrvcs.net>; Mon,
+	14 Mar 2011 21:53:10 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 881F114AF6A; Mon,
+	14 Mar 2011 22:52:57 -0400 (EDT)
+Date: Mon, 14 Mar 2011 22:52:57 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-members@lists.openembedded.org
+Message-id: <20110315025257.GA29668@denix.org>
+References: <1300145968.30423.803.camel@rex> <20110314235317.GB28065@denix.org>
+	<1300149295.30423.889.camel@rex>
+	<AANLkTikmH2iFaxLYh=HVjX2RjLsCeG1PUJVjQN9kLDk0@mail.gmail.com>
+	<4D7EBDAA.2030805@balister.org>
 MIME-version: 1.0
-X-AxigenVirus-Level: 1
-X-AxigenSpam-Level: 4
-Subject: OpenEmbedded (Wiki) Web Site Down
+In-reply-to: <4D7EBDAA.2030805@balister.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Cc: yocto@yoctoproject.org, Richard Purdie <richard.purdie@linuxfoundation.org>,
+	openembedded-devel@lists.openembedded.org,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: Collab Summit + ELC + TSC Meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,34 +38,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2011 02:41:33 -0000
-Content-type: text/plain
-Content-transfer-encoding: quoted-printable
+X-List-Received-Date: Tue, 15 Mar 2011 02:55:18 -0000
+Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-Hi,
+On Mon, Mar 14, 2011 at 09:15:22PM -0400, Philip Balister wrote:
+> On 03/14/2011 08:44 PM, Jeff Osier-Mixon wrote:
+>>>
+>>>> There also was a request for more general purpose OEDAM over the 
+>>>> weekend,
+>>>> maybe in parallel or before/after TSC meeting:
+>>>>
+>>>> Any thoughts on that?
+>>>
+>>> Most of the replies there are from TSC people who are going to be there
+>>> with the exceptions of yourself and Mike. I'm ok with having a more
+>>> general meeting if the demand is there and Jefro can arrange it. If
+>>> there are only a few people, I'd suggest something like meeting after
+>>> the TSC meeting and finding food/drink together.
+>>>
+>>
+>>
+>> For those who don't know me, I'm Jefro.  :)
+>>
+>> As Richard says, a small crowd would probably interact better over
+>> refreshments.  If you are interested in such a gathering, send me a note 
+>> at
+>> jefro@jefro.net and let me know when you are available, and I'll see what 
+>> I
+>> can pull together.
+>
+> A quick show of hands, how many OE people can be in San Francisco over the 
+> weekend of April 9-10? TSC people, go ahead and chime in for completeness.
 
-Just a heads up, but the Wiki / site seems to be down. Here is the error me=
-ssage that I receive (tried from two different PC's, on two different netwo=
-rks),
+I plan to be there.
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-Database error
-
-A database error has occurred
-Query: SELECT lc_value FROM `l10n_cache` WHERE lc_lang =3D 'en' AND lc_key =
-=3D 'deps' LIMIT 1=20
-Function: LCStore_DB::get
-Error: 1146 Table 'oe_mediawiki.l10n_cache' doesn't exist (10.10.10.7)
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-... Russell
-
+-- 
+Denys
 
 
