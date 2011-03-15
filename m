@@ -1,30 +1,31 @@
-Received: from vms173003pub.verizon.net ([206.46.173.3])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <openembedded@rkmorris.us>) id 1PzLBY-0006JD-P7
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Mar 2011 04:44:40 +0100
-Received: from server ([unknown] [71.164.183.134]) by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LI200G3PVJ70S00@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	14 Mar 2011 21:42:43 -0500 (CDT)
-Received: from server (127.0.0.1) by server (Axigen)
-	with ESMTPSA id 3DEAA5; Mon, 14 Mar 2011 21:42:39 -0500
-Received: from [192.168.1.2] by rkmorris.us with HTTP; Mon,
-	14 Mar 2011 21:42:37 -0500
-From: Russell Morris <openembedded@rkmorris.us>
-Date: Mon, 14 Mar 2011 21:42:37 -0500
-X-Mailer: Axigen WebMail
-To: openembedded-devel@lists.openembedded.org
-Message-id: <1300156957735069500@rkmorris.us>
-In-reply-to: <E1Pxmz1-0005jc-DM@happy.bec-systems.com>
-References: <E1Pxmz1-0005jc-DM@happy.bec-systems.com>
-Importance: Normal
-MIME-version: 1.0
-X-AxigenVirus-Level: 1
-X-AxigenSpam-Level: 5
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: testing branch 2011-03-10
+	(envelope-from <koen@dominion.thruhere.net>)
+	id 1PzOFe-0005jn-EX; Tue, 15 Mar 2011 08:01:06 +0100
+Received: by wwb17 with SMTP id 17so269104wwb.24
+	for <multiple recipients>; Mon, 14 Mar 2011 23:59:24 -0700 (PDT)
+Received: by 10.216.16.100 with SMTP id g78mr11940893weg.55.1300172364276;
+	Mon, 14 Mar 2011 23:59:24 -0700 (PDT)
+Received: from [172.20.0.255] (ip545070eb.adsl-surfen.hetnet.nl
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id n73sm817693wej.36.2011.03.14.23.59.23
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 14 Mar 2011 23:59:23 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1082)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <4D7EBDAA.2030805@balister.org>
+Date: Tue, 15 Mar 2011 07:59:22 +0100
+Message-Id: <4EE210EE-1EED-4ED8-94D6-57538FA0E795@dominion.thruhere.net>
+References: <1300145968.30423.803.camel@rex>
+	<20110314235317.GB28065@denix.org>	<1300149295.30423.889.camel@rex>
+	<AANLkTikmH2iFaxLYh=HVjX2RjLsCeG1PUJVjQN9kLDk0@mail.gmail.com>
+	<4D7EBDAA.2030805@balister.org>
+To: openembedded-members@lists.openembedded.org
+X-Mailer: Apple Mail (2.1082)
+Cc: yocto@yoctoproject.org,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: Collab Summit + ELC + TSC Meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,47 +39,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2011 03:44:40 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 15 Mar 2011 07:01:06 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
-
-Hi,
-
-=20
-
-I can't post this to the Wiki right now (as it's down) ... so a note that =
-the builds for a h1940 machine seem to fail (console-image and x11-gpe-imag=
-e, angstrom-2010.x distro). They fail at the do_configure stage of the Linu=
-x kernel (but this has built correctly in the past, and I just manually bui=
-ld a much more recent kernel and it works, so I think my box is configured =
-correctly).
-
-=20
-
-Thanks,
-
-... Russell
 
 
-On Thu, Mar 10, 2011 03:01  PM, cbrake <cliff.brake@gmail.com> wrote:
+Op 15 mrt 2011, om 02:15 heeft Philip Balister het volgende geschreven:
 
-
+> On 03/14/2011 08:44 PM, Jeff Osier-Mixon wrote:
+>>>=20
+>>>> There also was a request for more general purpose OEDAM over the =
+weekend,
+>>>> maybe in parallel or before/after TSC meeting:
+>>>>=20
+>>>> Any thoughts on that?
+>>>=20
+>>> Most of the replies there are from TSC people who are going to be =
+there
+>>> with the exceptions of yourself and Mike. I'm ok with having a more
+>>> general meeting if the demand is there and Jefro can arrange it. If
+>>> there are only a few people, I'd suggest something like meeting =
+after
+>>> the TSC meeting and finding food/drink together.
+>>>=20
+>>=20
+>>=20
+>> For those who don't know me, I'm Jefro.  :)
+>>=20
+>> As Richard says, a small crowd would probably interact better over
+>> refreshments.  If you are interested in such a gathering, send me a =
+note at
+>> jefro@jefro.net and let me know when you are available, and I'll see =
+what I
+>> can pull together.
 >=20
-master has been merged to testing-next and is ready for clean builds
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-From raj.khem@gmail.com Tue Mar 15 07:06:41 2011
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PzNOw-00077a-TN
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Mar 2011 07:06:40 +0100
-Received: by fxm19 with SMTP id 19so239400fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Mar 2011 23:04:57 -0700 (PDT)
-DKIM-Signature: v
+> A quick show of hands, how many OE people can be in San Francisco over =
+the weekend of April 9-10? TSC people, go ahead and chime in for =
+completeness.
+
+I will be there on sunday.
+
+regards,
+
+Koen=
+
+
