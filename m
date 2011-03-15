@@ -1,25 +1,30 @@
-Received: from vms173019pub.verizon.net ([206.46.173.19])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1PzI9d-00015n-Mo
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Mar 2011 01:30:29 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.48.61])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LI200BJNPBJTWJ2@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	14 Mar 2011 19:28:37 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5DC9114AF6C; Mon,
-	14 Mar 2011 20:28:26 -0400 (EDT)
-Date: Mon, 14 Mar 2011 20:28:26 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20110315002826.GA29374@denix.org>
-References: <1300148053.3828.9.camel@mattotaupa>
-MIME-version: 1.0
-In-reply-to: <1300148053.3828.9.camel@mattotaupa>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH] mango-lassi: Typo. s/ESCRIPTION/DESCRIPTION/
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <richard.purdie@linuxfoundation.org>)
+	id 1PzIFl-0001Fc-2f; Tue, 15 Mar 2011 01:36:49 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p2F0Z8mM010363;
+	Tue, 15 Mar 2011 00:35:08 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 09928-08; Tue, 15 Mar 2011 00:35:04 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p2F0Z2hW010351
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Tue, 15 Mar 2011 00:35:03 GMT
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: openembedded-members@lists.openembedded.org
+In-Reply-To: <20110314235317.GB28065@denix.org>
+References: <1300145968.30423.803.camel@rex> <20110314235317.GB28065@denix.org>
+Date: Tue, 15 Mar 2011 00:34:55 +0000
+Message-ID: <1300149295.30423.889.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: Collab Summit + ELC + TSC Meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,55 +38,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2011 00:30:29 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 15 Mar 2011 00:36:49 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 15, 2011 at 01:14:13AM +0100, Paul Menzel wrote:
-> Date: Fri, 18 Feb 2011 00:32:01 +0100
+On Mon, 2011-03-14 at 19:53 -0400, Denys Dmytriyenko wrote:
+> On Mon, Mar 14, 2011 at 11:39:28PM +0000, Richard Purdie wrote:
+> > Again, sorry for cross posting but I want to ensure people see this.
+> > 
+> > There are a few events coming up soon including the Linux Foundation
+> > Collaboration Summit and the Embedded Linux Conference which are back to
+> > back in San Francisco at the beginning of April. I mentioned these over
+> > on the Yocto list:
+> > 
+> > https://lists.yoctoproject.org/pipermail/yocto/2011-March/001142.html
+> > 
+> > The summary is that at the collab summit, there will be partner oriented
+> > Yocto meetings and a technical session, between the two events we're
+> > organising a face to face OE TSC meeting over the weekend and then there
 > 
+> Richard,
 > 
-> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> ---
-> Dear OE folks,
+> There also was a request for more general purpose OEDAM over the weekend, 
+> maybe in parallel or before/after TSC meeting:
 > 
+> http://thread.gmane.org/gmane.comp.handhelds.openembedded/43069
 > 
-> before I push this, could you please tell me, if a PR bump is needed.
-> 
-> I would say yes, since the description gets included in the package?
+> Any thoughts on that?
 
-Makes sense to bump the PR, so binary feeds get updated with the correct 
-package containing proper description.
+Most of the replies there are from TSC people who are going to be there
+with the exceptions of yourself and Mike. I'm ok with having a more
+general meeting if the demand is there and Jefro can arrange it. If
+there are only a few people, I'd suggest something like meeting after
+the TSC meeting and finding food/drink together.
 
--- 
-Denys
+Cheers,
 
-
-> [1] http://www.openembedded.org/index.php/When_To_Bump_PR
-> ---
->  recipes/avahi/mango-lassi_git.bb |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
-> 
-> diff --git a/recipes/avahi/mango-lassi_git.bb b/recipes/avahi/mango-lassi_git.bb
-> index c2250d8..a1a4117 100644
-> --- a/recipes/avahi/mango-lassi_git.bb
-> +++ b/recipes/avahi/mango-lassi_git.bb
-> @@ -1,4 +1,4 @@
-> -ESCRIPTION = "Input sharing, the avahi way"
-> +DESCRIPTION = "Input sharing, the avahi way"
->  DEPENDS = "avahi-ui libglade libnotify"
->  
->  SRCREV = "73638817126a68d62f1233f6e6859ce75a259e93"
-> -- 
-> 1.7.4.1
-> 
-
-
-
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Richard
 
 
 
