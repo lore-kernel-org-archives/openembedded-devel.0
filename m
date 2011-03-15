@@ -1,25 +1,33 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1PzU6V-0006FI-4p
+	(envelope-from <dp@xora.org.uk>) id 1PzUiQ-0008NN-DU
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Mar 2011 14:16:03 +0100
-Received: (qmail 5120 invoked by uid 1003); 15 Mar 2011 13:14:18 -0000
-Received: from unknown (HELO ?192.168.1.167?)
-	(philip@opensdr.com@74.107.167.114)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	15 Mar 2011 13:14:17 -0000
-Message-ID: <4D7F6629.8030107@balister.org>
-Date: Tue, 15 Mar 2011 09:14:17 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Thunderbird/3.1.7
-MIME-Version: 1.0
+	Tue, 15 Mar 2011 14:55:14 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 7F16DA472A
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Mar 2011 13:53:31 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id Yz+w7CR+st8c
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Mar 2011 13:53:30 +0000 (GMT)
+Received: from xora-eee (188-220-38-49.zone11.bethere.co.uk [188.220.38.49])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 708CCA4622
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Mar 2011 13:53:30 +0000 (GMT)
+Received: by xora-eee (Postfix, from userid 1000)
+	id B0F3680282; Tue, 15 Mar 2011 13:53:30 +0000 (GMT)
+Date: Tue, 15 Mar 2011 13:53:30 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-References: <4D7E3B34.5050100@mentor.com> <4D7E953E.2000706@balister.org>
-	<4D7EA0FD.6090506@mentor.com>
-In-Reply-To: <4D7EA0FD.6090506@mentor.com>
-Subject: Re: Discussion: Version retention policy in oe-core
+Message-ID: <20110315135330.GA1913@xora-eee.xora.org.uk>
+References: <1300185619.3759.155.camel@mattotaupa>
+MIME-Version: 1.0
+In-Reply-To: <1300185619.3759.155.camel@mattotaupa>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: removal of `angstrom-2008.1` in dev and needed updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,154 +41,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2011 13:16:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 15 Mar 2011 13:55:14 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 03/14/2011 07:13 PM, Tom Rini wrote:
-> On 03/14/2011 03:22 PM, Philip Balister wrote:
->> On 03/14/2011 11:58 AM, Tom Rini wrote:
->>> Hi all,
->>>
->>> The TSC has discussed this item at the request of the community and has
->>> come up with the following recommendation which we are looking for
->>> feedback (positive/negative/neutral) before putting this up on the wiki.
->>
->> Looks reasonable. One thing I did not see is asking people not to add a
->> new recipe and delete the old one in separate commits. This makes it
->> easier to figure out problems when they arise.
->
-> So, part of what is envisioned here is that for, grabbing a recent
-> example, nodejs 0.4.0 to 0.4.2 we just see a git mv, and that's the
-> normal case for that level of things. But for say 0.4.9 to 0.5.0 (or
-> would it be 0.6.0? I don't track the project, but next stable release
-> that's not in 0.4.x) it would be add 0.5.0 one commit, drop 0.4.9 the
-> next, Does this still fit, given your comment?
+For the angstrom self references we will fix these in next few days.
 
-The immediate case I am thinking off is the policykit-gnome update. 
-(Which I think did the add/delete in the same commit). One of the 
-changes was a configure option change that led to build failures on my 
-F14 box. I'm not sure how this fits in the scheme you describe since the 
-versioning seems to lack a major/minor concept. (Well the minor number 
-is large)
+For the other distros using this file, I would suggest if they dont get
+fixed within 14 days they are scheduled for removal as probably they are
+dead distros anyway.
 
-In a perfect world, what you are describing is great, however I'm 
-concerned the "special cases" may be an issue.
+Graeme
 
-Philip
+On Tue, Mar 15, 2011 at 11:40:19AM +0100, Paul Menzel wrote:
+> Dear OE folks,
+> 
+> 
+> in case you are using `angstrom-2008.1` and are getting the following
+> error message
+> 
+>         $ bitbake -k some-recipe
+>         ERROR: Error parsing /home/paul/oe/openembedded/recipes/images/uml-image.bb: Could not inherit file classes/rootfs_${IMAGE_PKGTYPE}.bbclass
+>         ERROR: Command execution failed: Exited with 1
+> 
+> it means that `conf/distro/angstrom-2008.1.conf` was removed in [1].
+> 
+>         commit 67a7c91a4eeed0a5b48f99d98ec9bb54ba6ea120
+>         Author: Koen Kooi <koen@openembedded.org>
+>         Date:   Wed Mar 9 14:51:10 2011 +0100
+>         
+>             angstrom 2008.1: remove from .dev
+>             
+>             This will be maintained in the 2011.03-maintenance branch
+>             
+>             Signed-off-by: Koen Kooi <koen@openembedded.org>
+> 
+> It looks like some other configurations files and comments still refer
+> to `angstrom-2008.1` though and probably need an update.
+> 
+>         conf/distro/amsdelta-oe.conf:require conf/distro/angstrom-2008.1.conf
+>         conf/distro/angstrom-2010.x.conf:# If you want something stable *right now*, use angstrom-2008.1
+>         conf/distro/angstrom-2010.x.conf:# Again, in doubt, use DISTRO="angstrom-2008.1"
+>         conf/distro/foonas.conf:require conf/distro/angstrom-2008.1.conf
+>         conf/distro/iphone-compat.conf:require conf/distro/angstrom-2008.1.conf
+>         conf/distro/nylon.conf:require conf/distro/angstrom-2008.1.conf
+>         conf/local.conf.sample:# DISTRO = "angstrom-2008.1"
+>         contrib/angstrom/local.conf:DISTRO = "angstrom-2008.1"
+>         contrib/buildbot/scripts/full-oe-autobuild:     echo 'DISTRO = "angstrom-2008.1"' >> "$CONFFILE"
+>         contrib/testing/testbuilder/README:bitbake (e.g. angstrom-2008.1/qemuarm/console-image).
+>         contrib/testing/testbuilder/README:    ./testbuilder -D angstrom-2008.1 -M qemuarm console-image
+>         contrib/testing/testbuilder/README:    ./testbuilder -D angstrom-2008.1 -M qemuarm -S
+>         contrib/testing/testbuilder/testbuilder.d/testing.conf.sample:DISTROS="angstrom-2008.1 angstrom-2010.x"
+>         docs/usermanual/chapters/getting_oe.xml:DISTRO = "angstrom-2008.1"
+>         recipes/linux/linux-2.6.29/cm-x270/0004-add-build-script.patch:+CROSS_COMPILER_PATH=`cd /build/oe/oe-stable/build/angstrom-2008.1/tmp/cross/armv5te/bin; pwd`
+> 
+> 
+> Thanks,
+> 
+> Paul
+> 
+> 
+> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=67a7c91a4eeed0a5b48f99d98ec9bb54ba6ea120
 
 
->
->>
->> Philip
->>
->>>
->>> -------- Original Message --------
->>> Subject: Re: Discussion: Version retention policy in oe-core
->>> Date: Thu, 24 Feb 2011 15:05:25 -0600
->>> From: Mark Hatle <mark.hatle@windriver.com>
->>> Reply-To: tsc@lists.openembedded.org
->>> Organization: Wind River Systems
->>> To: <tsc@lists.openembedded.org>
->>>
->>> This is a follow on to Tom's original post. The attempt is to merge his
->>> original thoughts with my own.
->>>
->>> ---
->>>
->>> As has been discussed in a few places, there needs to be a policy that
->>> is followed about how long to retain (or when to replace) old recipes
->>> within the oe-core repository as well as what to do with older versions
->>> of things.
->>>
->>> It is expected that OE will have a related meta-oe or similar layers
->>> which older components can be moved into while they are still useful and
->>> desirable to maintain. However, these will be alternative versions and
->>> not the "core" version any longer.
->>>
->>> Within the oe-core we can divide the components into two classes.
->>> Critical infrastructure components and standard components. The critical
->>> components include the toolchain, autotools, and key libraries.
->>> Virtually everything else fits into the standard components bucket.
->>>
->>> We also have use cases such as:
->>> - Upstream provides provides support (new releases) and clear guidelines
->>> on upgrading for version 4.0 (current), version 3.8 (previous and
->>> stable) and version 3.6 (further previous, stable). Upstream is also
->>> working on version 4.1.x (unstable, active development).
->>> - Upstream provides no clear policy about what's supported other than
->>> current.
->>> - Community standards indicate a specific version should be used rather
->>> then the latest for some reason
->>> - An architecture requires specific versions.
->>>
->>> We would like to propose the following:
->>>
->>> The goal of oe-core is to remain a stable, yet up-to-date set of
->>> software that forms the foundation of the Open Embedded world. While not
->>> everyone will be able to agree on a broad definition of "stable, yet
->>> up-to-date" the following guidelines will help define the rules for the
->>> inclusion and/or replacement of different versions into the oe-core.
->>>
->>> First, each of the packages need to be divided into two categories:
->>> Critical Infrastructure and Core components. If an item is neither of
->>> these, then the oe-core is likely the wrong place for the component.
->>>
->>> By default we want to use the latest stable version of each component.
->>> The latest stable version of each component is defined by the
->>> component's upstream. When there is no clear policy from upstream we
->>> simply have to apply best judgment.
->>>
->>> There of course will be exceptions to the default policy. However, when
->>> an exception occurs it must be clearly stated and documented when and
->>> why we did not use the latest stable version -- or why we may have
->>> multiple versions available of a given component. This will allow us to
->>> reevaluate the exceptions on a timely basis and decide the exception is
->>> no longer reasonable.
->>>
->>> Most of these exceptions will be located in the critical infrastructure
->>> components, specifically the toolchains. In many cases we will need to
->>> support variants of these components either for stability or
->>> architectural reasons.
->>>
->>> Another common exception is to meet specific policy or compatibility
->>> objectives within the system, such as the need to support both GPLv2 and
->>> GPLv3 versions of selected components.
->>>
->>> If multiple versions are provided, usually the latest stable version
->>> will be preferred, however best judgment will be used to determine the
->>> preferred version.
->>>
->>> As existing versions of removed, if they are still desirable, they
->>> should be moved into meta-oe or a suitable layer.
->>>
->>> We also have the issue of upcoming development versions it is suggested
->>> that upcoming development versions of software be worked on in specific
->>> development layers until they have reach sufficient maturity to be
->>> considered stable and ready for inclusion in oe-core.
->>>
->>> Related to this are:
->>> - We want to encourage distributions that are tracking the latest to try
->>> and stay with the latest.
->>> - We want to encourage recipes which people are interested in to be
->>> maintained long term to be maintained, long term, in meta-oe.
->>> - We want to encourage distributions to work with and add to / maintain
->>> the core rather than deciding we have too frequent of an unhelpful churn
->>> (which is to say 4.0.1 -> 4.0.2 of $whatever is good, 4.0.1 -> 4.4.3 of
->>> $whatever is not).
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
->
+
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
