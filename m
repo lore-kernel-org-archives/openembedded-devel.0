@@ -1,26 +1,21 @@
-Received: from vms173011pub.verizon.net ([206.46.173.11])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>)
-	id 1PzHbV-0007tk-1h; Tue, 15 Mar 2011 00:55:14 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.48.61])
-	by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009))
-	with ESMTPA id <0LI200ANRNOTFPT7@vms173011.mailsrvcs.net>; Mon,
-	14 Mar 2011 18:53:18 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id BA58414AF6A; Mon,
-	14 Mar 2011 19:53:17 -0400 (EDT)
-Date: Mon, 14 Mar 2011 19:53:17 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-members@lists.openembedded.org
-Message-id: <20110314235317.GB28065@denix.org>
-References: <1300145968.30423.803.camel@rex>
-MIME-version: 1.0
-In-reply-to: <1300145968.30423.803.camel@rex>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: Collab Summit + ELC + TSC Meeting
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PzHvW-0000Td-Lh for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Mar 2011 01:15:54 +0100
+Received: from f053046215.adsl.alicedsl.de ([78.53.46.215]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PzHtv-0005ou-DE for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Mar 2011 00:14:15 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 15 Mar 2011 01:14:13 +0100
+Message-ID: <1300148053.3828.9.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: [PATCH] mango-lassi: Typo. s/ESCRIPTION/DESCRIPTION/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,44 +29,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Mar 2011 23:55:14 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 15 Mar 2011 00:15:54 -0000
+X-Groupsio-MsgNum: 30202
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Vm4RgoPD5tDg7pls331J"
 
-On Mon, Mar 14, 2011 at 11:39:28PM +0000, Richard Purdie wrote:
-> Again, sorry for cross posting but I want to ensure people see this.
-> 
-> There are a few events coming up soon including the Linux Foundation
-> Collaboration Summit and the Embedded Linux Conference which are back to
-> back in San Francisco at the beginning of April. I mentioned these over
-> on the Yocto list:
-> 
-> https://lists.yoctoproject.org/pipermail/yocto/2011-March/001142.html
-> 
-> The summary is that at the collab summit, there will be partner oriented
-> Yocto meetings and a technical session, between the two events we're
-> organising a face to face OE TSC meeting over the weekend and then there
+--=-Vm4RgoPD5tDg7pls331J
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Richard,
-
-There also was a request for more general purpose OEDAM over the weekend, 
-maybe in parallel or before/after TSC meeting:
-
-http://thread.gmane.org/gmane.comp.handhelds.openembedded/43069
-
-Any thoughts on that?
+Date: Fri, 18 Feb 2011 00:32:01 +0100
 
 
-> will be another joint OE/Yocto discussion BoF at ELC. I'm hoping this
-> means people don't need to attend both events and will still get to
-> raise anything they wish to discuss.
-> 
-> I'd be happy to see people at either event, whichever the feel is most
-> appropriate. Collab Summit is by invitation and limited in numbers but
-> we have some allocation. Its probably easiest to talk to me about that
-> in the first instance if you're interested in that.
-
--- 
-Denys
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+Dear OE folks,
 
 
+before I push this, could you please tell me, if a PR bump is needed.
+
+I would say yes, since the description gets included in the package?
+
+
+Thanks,
+
+Paul
+
+
+[1] http://www.openembedded.org/index.php/When_To_Bump_PR
+---
+ recipes/avahi/mango-lassi_git.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/recipes/avahi/mango-lassi_git.bb b/recipes/avahi/mango-lassi_g=
+it.bb
+index c2250d8..a1a4117 100644
+--- a/recipes/avahi/mango-lassi_git.bb
++++ b/recipes/avahi/mango-lassi_git.bb
+@@ -1,4 +1,4 @@
+-ESCRIPTION =3D "Input sharing, the avahi way"
++DESCRIPTION =3D "Input sharing, the avahi way"
+ DEPENDS =3D "avahi-ui libglade libnotify"
+=20
+ SRCREV =3D "73638817126a68d62f1233f6e6859ce75a259e93"
+--=20
+1.7.4.1
+
+
+--=-Vm4RgoPD5tDg7pls331J
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk1+r1UACgkQPX1aK2wOHVg1BgCfR49fa2wA4CLQC3VWY5H6Z7DY
+qI0An00L6katrUx+DM55mDndA2SeusET
+=Mw5h
+-----END PGP SIGNATURE-----
+
+--=-Vm4RgoPD5tDg7pls331J--
