@@ -1,21 +1,31 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from vms173011pub.verizon.net ([206.46.173.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PzRhQ-000402-0M for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Mar 2011 11:42:00 +0100
-Received: from f053032095.adsl.alicedsl.de ([78.53.32.95]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PzRfo-00068I-Es for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Mar 2011 10:40:20 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <openembedded@rkmorris.us>) id 1PzTxR-00060o-0x
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Mar 2011 14:06:42 +0100
+Received: from server ([unknown] [71.164.183.134]) by vms173011.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LI300EGLLJTPW00@vms173011.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	15 Mar 2011 07:04:41 -0500 (CDT)
+Received: from server (127.0.0.1) by server (Axigen)
+	with ESMTPSA id 2DB772; Tue, 15 Mar 2011 07:04:35 -0500
+Received: from [192.168.1.11] by rkmorris.us with HTTP; Tue,
+	15 Mar 2011 07:04:34 -0500
+From: Russell Morris <openembedded@rkmorris.us>
+Date: Tue, 15 Mar 2011 07:04:34 -0500
+X-Mailer: Axigen WebMail
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Mar 2011 11:40:19 +0100
-Message-ID: <1300185619.3759.155.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: removal of `angstrom-2008.1` in dev and needed updates
+Message-id: <1300190674277005500@rkmorris.us>
+In-reply-to: <1300177015.3759.3.camel@mattotaupa>
+References: <1300156772037897500@rkmorris.us>
+	<1300177015.3759.3.camel@mattotaupa>
+Importance: Normal
+MIME-version: 1.0
+X-AxigenVirus-Level: 1
+X-AxigenSpam-Level: 5
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [solved] OpenEmbedded (Wiki) Web Site Down
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,89 +39,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2011 10:42:00 -0000
-X-Groupsio-MsgNum: 30220
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-Jpb8rEnIaTSLUb4u//al"
-
---=-Jpb8rEnIaTSLUb4u//al
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 15 Mar 2011 13:06:42 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Dear OE folks,
+Yep, it's working again here now also - thanks!
 
+... Russell
 
-in case you are using `angstrom-2008.1` and are getting the following
-error message
+On Tue, Mar 15, 2011 03:16  AM, Paul Menzel <paulepanter@users.sourceforge=
+.net> wrote:
 
-        $ bitbake -k some-recipe
-        ERROR: Error parsing /home/paul/oe/openembedded/recipes/images/uml-=
-image.bb: Could not inherit file classes/rootfs_${IMAGE_PKGTYPE}.bbclass
-        ERROR: Command execution failed: Exited with 1
-
-it means that `conf/distro/angstrom-2008.1.conf` was removed in [1].
-
-        commit 67a7c91a4eeed0a5b48f99d98ec9bb54ba6ea120
-        Author: Koen Kooi <koen@openembedded.org>
-        Date:   Wed Mar 9 14:51:10 2011 +0100
-       =20
-            angstrom 2008.1: remove from .dev
-           =20
-            This will be maintained in the 2011.03-maintenance branch
-           =20
-            Signed-off-by: Koen Kooi <koen@openembedded.org>
-
-It looks like some other configurations files and comments still refer
-to `angstrom-2008.1` though and probably need an update.
-
-        conf/distro/amsdelta-oe.conf:require conf/distro/angstrom-2008.1.co=
-nf
-        conf/distro/angstrom-2010.x.conf:# If you want something stable *ri=
-ght now*, use angstrom-2008.1
-        conf/distro/angstrom-2010.x.conf:# Again, in doubt, use DISTRO=3D"a=
-ngstrom-2008.1"
-        conf/distro/foonas.conf:require conf/distro/angstrom-2008.1.conf
-        conf/distro/iphone-compat.conf:require conf/distro/angstrom-2008.1.=
-conf
-        conf/distro/nylon.conf:require conf/distro/angstrom-2008.1.conf
-        conf/local.conf.sample:# DISTRO =3D "angstrom-2008.1"
-        contrib/angstrom/local.conf:DISTRO =3D "angstrom-2008.1"
-        contrib/buildbot/scripts/full-oe-autobuild:     echo 'DISTRO =3D "a=
-ngstrom-2008.1"' >> "$CONFFILE"
-        contrib/testing/testbuilder/README:bitbake (e.g. angstrom-2008.1/qe=
-muarm/console-image).
-        contrib/testing/testbuilder/README:    ./testbuilder -D angstrom-20=
-08.1 -M qemuarm console-image
-        contrib/testing/testbuilder/README:    ./testbuilder -D angstrom-20=
-08.1 -M qemuarm -S
-        contrib/testing/testbuilder/testbuilder.d/testing.conf.sample:DISTR=
-OS=3D"angstrom-2008.1 angstrom-2010.x"
-        docs/usermanual/chapters/getting_oe.xml:DISTRO =3D "angstrom-2008.1=
-"
-        recipes/linux/linux-2.6.29/cm-x270/0004-add-build-script.patch:+CRO=
-SS_COMPILER_PATH=3D`cd /build/oe/oe-stable/build/angstrom-2008.1/tmp/cross/=
-armv5te/bin; pwd`
-
-
-Thanks,
-
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D67a7c91=
-a4eeed0a5b48f99d98ec9bb54ba6ea120
-
---=-Jpb8rEnIaTSLUb4u//al
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk1/QhMACgkQPX1aK2wOHVgI2QCaA/nQ/gGYZPom640LnvxGs6J/
-kioAn3b7uZZNsQkzmZFVyfePc0U9kDOX
-=lqps
------END PGP SIGNATURE-----
-
---=-Jpb8rEnIaTSLUb4u//al--
+>=20
+Dear Russell,
+>=20
+>=20
+> Am Montag, den 14.03.2011, 21:39 -0500 schrieb Russell Morris:
+>=20
+> > Just a heads up, but the Wiki / site seems to be down. Here is the err=
+or message that I receive (tried from two different PC's, on two different =
+networks),
+> >=20
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >=20
+> > Database error
+> >=20
+> > A database error has occurred
+> > Query: SELECT lc_value FROM `l10n_cache` WHERE lc_lang =3D 'en' AND lc=
+_key =3D 'deps' LIMIT 1=20
+> > Function: LCStore_DB::get
+> > Error: 1146 Table 'oe_mediawiki.l10n_cache' doesn't exist (10.10.10.7)
+> >=20
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>=20
+> it works for me now, so I guess the problem has been fixed.
+>=20
+>=20
+> Thanks,
+>=20
+> Paul
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+From paulepanter@users.sourceforge.net Tue Mar 15 14:12:28 2011
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PzU32-00069K-K2 for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Mar 2011 14:12:28 +0100
+Received: from f053032095.adsl.alicedsl.de ([78.53.32.95]
+	helo
