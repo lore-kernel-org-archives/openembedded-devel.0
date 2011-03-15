@@ -1,21 +1,21 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PzQvY-0004Xh-Mx for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Mar 2011 10:52:32 +0100
+	id 1PzRLc-0005iG-83 for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Mar 2011 11:19:28 +0100
 Received: from f053032095.adsl.alicedsl.de ([78.53.32.95]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PzQtx-00041k-1p for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Mar 2011 09:50:53 +0000
+	id 1PzRK0-0005HD-Qt for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Mar 2011 10:17:48 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Mar 2011 10:50:51 +0100
-Message-ID: <1300182651.3759.95.camel@mattotaupa>
+Date: Tue, 15 Mar 2011 11:17:47 +0100
+Message-ID: <1300184267.3759.123.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.2 
-Subject: guile-native-1.8.7-r1: task configure fails with `configure.in:882: error: possibly undefined macro: AM_GNU_GETTEXT`
+Subject: [PATCH] mango-lassi: `touch config.rpath` to fix `configure.ac:127: required file `./config.rpath' not found`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,80 +29,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2011 09:52:32 -0000
-X-Groupsio-MsgNum: 30218
+X-List-Received-Date: Tue, 15 Mar 2011 10:19:28 -0000
+X-Groupsio-MsgNum: 30219
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-9ETIm8snPTx8cPVxRATZ"
+	boundary="=-VSPZHz0K0XjZhKdVUXU/"
 
---=-9ETIm8snPTx8cPVxRATZ
+--=-VSPZHz0K0XjZhKdVUXU/
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dear OE folks,
+Date: Tue, 15 Mar 2011 10:58:26 +0100
 
+Task configure fails with the following error message.
 
-task configure of `guile-native-1.8.7-r1` fails with the following
-error.
+	Build Configuration:
+	BB_VERSION        =3D "1.12.0"
+	METADATA_BRANCH   =3D "<unknown>"
+	METADATA_REVISION =3D "b1fbaf6"
+	TARGET_ARCH       =3D "arm"
+	TARGET_OS         =3D "linux-gnueabi"
+	MACHINE           =3D "beagleboard"
+	DISTRO            =3D "angstrom"
+	DISTRO_VERSION    =3D "v20110315"
+	TARGET_FPU        =3D "hard"
 
-        Build Configuration:
-        BB_VERSION        =3D "1.12.0"
-        METADATA_BRANCH   =3D "<unknown>"
-        METADATA_REVISION =3D "b1fbaf6"
-        TARGET_ARCH       =3D "arm"
-        TARGET_OS         =3D "linux-uclibceabi"
-        MACHINE           =3D "beagleboard"
-        DISTRO            =3D "minimal-uclibc"
-        DISTRO_VERSION    =3D "dev-snapshot-20110315"
-        TARGET_FPU        =3D "soft"
-       =20
-        [=E2=80=A6]
-        libtoolize: copying file `m4/ltversion.m4'
-        libtoolize: copying file `m4/lt~obsolete.m4'
-        libtoolize: Consider adding `AC_CONFIG_MACRO_DIR([m4])' to configur=
-e.in and
-        libtoolize: rerunning libtoolize, to keep the correct libtool macro=
-s in-tree.
-        configure.in:859: warning: macro `AM_GNU_GETTEXT' not found in libr=
-ary
-        configure.in:1376: warning: AC_RUN_IFELSE called without default to=
- allow cross compiling
-        ../../lib/autoconf/general.m4:2716: AC_RUN_IFELSE is expanded from.=
-..
-        configure.in:1376: the top level
-        configure.in:882: error: possibly undefined macro: AM_GNU_GETTEXT
-              If this token and others are legitimate, please use m4_patter=
-n_allow.
-              See the Autoconf documentation.
-        autoreconf: /oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/i6=
-86-linux/usr/bin/autoconf failed with exit status: 1
-        + oefatal 'autoreconf execution failed.'
-        + echo FATAL: 'autoreconf execution failed.'
-        FATAL: autoreconf execution failed.
-        + exit 1
+	[=E2=80=A6]
+	autoreconf: running: /oe/build-angstrom-next/angstrom-dev/sysroots/i686-li=
+nux/usr/bin/autoheader --include=3D/oe/build-angstrom-next/angstrom-dev/sys=
+roots/armv7a-angstrom-linux-gnueabi/usr/share/aclocal-1.11 --include=3D/oe/=
+build-angstrom-next/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr=
+/share/aclocal --force --warnings=3Dcross
+	autoreconf: running: automake --foreign --add-missing --copy --force-missi=
+ng --warnings=3Dcross
+	automake: unknown warning category `cross'
+	configure.ac:39: installing `./compile'
+	configure.ac:127: installing `./config.guess'
+	configure.ac:127: required file `./config.rpath' not found
+	configure.ac:127: installing `./config.sub'
+	configure.ac:27: installing `./install-sh'
+	configure.ac:27: installing `./missing'
+	Makefile.am: installing `./depcomp'
+	autoreconf: automake failed with exit status: 1
+	+ oefatal 'autoreconf execution failed.'
+	+ echo FATAL: 'autoreconf execution failed.'
+	FATAL: autoreconf execution failed.
+	+ exit 1
 
-I guess that the latest gettext changes have to do with this [1][2].
+`touch config.rpath` in `do_configure_perpend() {}` fixes the issues.
 
+Mango Lasso includes `bootstrap.sh` [1] which also does the same. Using `bo=
+otstrap.sh` [1] for configuring Mango Lassi is not considered because `puls=
+eaudio_git.bb` [2] also uses the proposed fix.
 
-Thanks,
+[1] http://git.0pointer.de/?p=3Dmango-lassi.git;a=3Dblob;f=3Dbootstrap.sh;h=
+=3D089d445b3cce3374b48fc083f1f87983c4100052;hb=3DHEAD
+[2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/pulseau=
+dio/pulseaudio_git.bb?id=3Dfcb12f3a4448621ccc75d37dcad4a01820fdf89d#n27
 
-Paul
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ recipes/avahi/mango-lassi_git.bb |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
+diff --git a/recipes/avahi/mango-lassi_git.bb b/recipes/avahi/mango-lassi_g=
+it.bb
+index 1faee4b..049ac24 100644
+--- a/recipes/avahi/mango-lassi_git.bb
++++ b/recipes/avahi/mango-lassi_git.bb
+@@ -11,3 +11,6 @@ S =3D "${WORKDIR}/git"
+=20
+ inherit autotools
+=20
++do_configure_prepend() {
++    touch config.rpath
++}
+--=20
+1.7.4.1
 
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/log/recipes/guile
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/recipes/guile=
-?id=3D60ef5a3b2d71aa116faf5e4bb6f6e3659097ec04
-
---=-9ETIm8snPTx8cPVxRATZ
+--=-VSPZHz0K0XjZhKdVUXU/
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk1/NnsACgkQPX1aK2wOHVjMFgCggBriZRtEKmdmm6mz5j72R0zd
-iCcAn2k4beKU8lauf/1qQ0v/iVuGBz8a
-=04QB
+iEYEABECAAYFAk1/PMsACgkQPX1aK2wOHVinGACfSmKi0go6RT/8dxavw2mWOwnc
+0GgAnRlDdMvgqMtkneaPkhf4UBKoZwJF
+=AODD
 -----END PGP SIGNATURE-----
 
---=-9ETIm8snPTx8cPVxRATZ--
+--=-VSPZHz0K0XjZhKdVUXU/--
