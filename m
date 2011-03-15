@@ -1,35 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PzX3C-0001Q8-Ow for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Mar 2011 17:24:51 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PzX1a-0006te-Kv for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Mar 2011 17:23:10 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Mar 2011 17:23:10 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1PzX4z-0001e7-QP
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Mar 2011 17:26:42 +0100
+Received: by fxm19 with SMTP id 19so720970fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Mar 2011 17:23:10 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 15 Mar 2011 09:24:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type:content-transfer-encoding;
+	bh=jkZ/FvcwlNSW4HkSWd0sz5KO+kOFppZDWV7fwjIh4eA=;
+	b=iWJacKu/RvPqfEZ73Il6wqm1R9/ip4c/eGNc11/Kfj4wYhsZymxCvbTBXoS6v2ir1A
+	exbiL/9j9VJMWZSYgxHXn4n6ATX3SCQbXCiKdSvJ75s3A9BG6PvdFZHcWIncuG/6NWJV
+	MZqlRlAcTgfEAXFSCj4TPlaXTDb6fjXCzcr0A=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=YGwSnGQTIB9Bpti7kh3ig3XmlWO+ucIhm+3UgQFFazInFr51qqv7y4Yb88HMRCqdkF
+	qJ8Q4pN43rChXIcgxAX+mHrzQydzFm7vx7F/7hMxgxSHqW4lXFeFgVFpphdDzT+Mk30s
+	Gb90wd/C/zZpkQZXUkw/eDPcShiiKWjwF+xZE=
+Received: by 10.223.77.16 with SMTP id e16mr1166034fak.87.1300206189112; Tue,
+	15 Mar 2011 09:23:09 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.223.41.89 with HTTP; Tue, 15 Mar 2011 09:22:17 -0700 (PDT)
+In-Reply-To: <1300194647.3759.256.camel@mattotaupa>
+References: <1300194647.3759.256.camel@mattotaupa>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 15 Mar 2011 09:22:17 -0700
+Message-ID: <AANLkTi=-9cukS2AG7Dtdnusvvggt5PLvELkK2CcWZ+nO@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 15 Mar 2011 17:22:57 +0100
-Message-ID: <ilo3p1$lut$1@dough.gmane.org>
-References: <4D7E3B34.5050100@mentor.com>	<AANLkTikqSLJd90dhRx8NwoEb37B-ZSQ4NcfKe_vVXpm2@mail.gmail.com>	<20110314163639.GA3375@jama.jama.net>	<AANLkTi=VL3kWZwKnzEao5iDUEA_F_-fMkx=m0astpSG3@mail.gmail.com>	<4D7EA326.2000902@mentor.com>	<AANLkTimjL1ohV7vMkG=2WMVZqC-vH+NNndjGi+K49k4P@mail.gmail.com>
-	<4D7F8B8A.2040501@mentor.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4D7F8B8A.2040501@mentor.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: Discussion: Version retention policy in oe-core
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: pygtksourceview-2.10.1: task compile fails, because $(srcdir) not substituted with staging directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,150 +44,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2011 16:24:51 -0000
+X-List-Received-Date: Tue, 15 Mar 2011 16:26:42 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, Mar 15, 2011 at 6:10 AM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Dear OE folks,
+>
+>
+> task compile of `pygtksourceview-2.10.1.bb` fails with the following
+> error.
+>
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0+ do_compile
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0+ base_do_compile
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0+ '[' -e Makefile -o -e makefile -o -e GNUmake=
+file ']'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0+ oe_runmake
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0+ oenote make -j4
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0+ echo NOTE: 'make -j4'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0NOTE: make -j4
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0+ make -j4
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0make =C2=A0all-recursive
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0make[1]: Entering directory `/oe/build-angstro=
+m-next/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/python-pygtksourcevi=
+ew-2.10.1-r0/pygtksourceview-2.10.1'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0Making all in test
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0make[2]: Entering directory `/oe/build-angstro=
+m-next/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/python-pygtksourcevi=
+ew-2.10.1-r0/pygtksourceview-2.10.1/test'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0make[2]: Nothing to be done for `all'.
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0make[2]: Leaving directory `/oe/build-angstrom=
+-next/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/python-pygtksourcevie=
+w-2.10.1-r0/pygtksourceview-2.10.1/test'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0Making all in docs
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0make[2]: Entering directory `/oe/build-angstro=
+m-next/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/python-pygtksourcevi=
+ew-2.10.1-r0/pygtksourceview-2.10.1/docs'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0/oe/build-angstrom-next/angstrom-dev/sysroots/=
+i686-linux/usr/bin/python -c 'import datetime; print datetime.date.today()'=
+ > reference/builddate.xml
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0/oe/build-angstrom-next/angstrom-dev/sysroots/=
+i686-linux/usr/bin/xsltproc --nonet --xinclude -o ../docs/html/ \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 --path ../docs/reference:./reference \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 --stringparam gtkdoc.bookname "pygtksourceview2" \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 --stringparam gtkdoc.version . \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 /usr/share/pygobject/xsl/ref-html-style.xsl ./reference/gtksourc=
+eview2-ref.xml
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0warning: failed to load external entity "/usr/=
+share/pygobject/xsl/ref-html-style.xsl"
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0cannot parse /usr/share/pygobject/xsl/ref-html=
+-style.xsl
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0make[2]: *** [build_stamp] Error 4
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0make[2]: Leaving directory `/oe/build-angstrom=
+-next/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/python-pygtksourcevie=
+w-2.10.1-r0/pygtksourceview-2.10.1/docs'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0make[1]: *** [all-recursive] Error 1
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0make[1]: Leaving directory `/oe/build-angstrom=
+-next/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/python-pygtksourcevie=
+w-2.10.1-r0/pygtksourceview-2.10.1'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0make: *** [all] Error 2
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0+ die 'oe_runmake failed'
+>
+> Apparently in
+>
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0$ more docs/Makefile.am
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0[=E2=80=A6]
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0build_stamp: $(REFERENCE_DEPS)reference/buildd=
+ate.xml
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0xsltproc --nonet -=
+-xinclude -o $(BUILDDIR)/html/ \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 --path $(BUILDDIR)/reference:$(srcdir)/reference \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 --stringparam gtkdoc.bookname "pygtksourceview2" \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 --stringparam gtkdoc.version ${REF_VERSION} \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 $(HTML_STYLE) $(srcdir)/reference/gtksourceview2-ref.xml
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0$(PYGOBJECT_FIXXRE=
+F) -i $(PYGOBJECT_PYGDOCS) $(BUILDDIR)/html
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0touch $@
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0[=E2=80=A6]
+>
+> `$(srcdir)` is not set to the staging directory.
+>
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0angstrom-dev/work/armv7a-angstrom-linux-gnueab=
+i/python-pygtksourceview-2.10.1-r0/pygtksourceview-2.10.1/Makefile:srcdir =
+=3D .
+>
+> How is that dealt with in OE? Or should something else be used in
+> `Makefile.am`?
+>
 
-On 15-03-11 16:53, Tom Rini wrote:
-> On 03/15/2011 02:38 AM, Frans Meulenbroeks wrote:
->> Tom, thanks for the reply.
->>
->> 2011/3/15 Tom Rini<tom_rini@mentor.com>:
->>> On 03/14/2011 11:52 AM, Frans Meulenbroeks wrote:
->>>>
->>
->> [cut out large part of text]
->>
->>>> Overall this seems like a fine proposal to me. Thanks a lot for
->>>> drafting
->>>> it.
->>>>
->>>> There are a few minor suggestions I would like to make.
->>>>
->>>> First is to define which components are considered to be critical, as
->>>> for what is non-critical for one person might be critical for someone
->>>> else.
->>>> Leaving this open is bound to lead to discussion and disagreement
->>>> later on, perhaps better be clear about it upfront.
->>>
->>> We see that as outside of the scope of this policy but I agree it
->>> needs to
->>> be settled up, at least as a starting point sooner rather than
->>> later.  So
->>> that we don't forget, please ask us to put this on the agenda.
->>
->> I agree that that is outside the policy (but within the TSC domain).
->> I'll bring it up when I see the agenda.
->> Note that I am quite busy tomorrow so it might be (my) thursday
->> morning before I get to that.
-> 
-> Thanks.
-> 
->>>> Second is the location of deprecated recipes.
->>>> As far as I know we haven't clearly defined what goes into meta-oe.
->>>
->>> Well, that's up to OE at large, including how it's run.  We're just
->>> setting
->>> out how the core should work right now.
->>
->> I understand, but as said before this is also a topic for the TSC
-> 
-> One more agenda topic :)
-> 
->>>> I have assumed that this is one layer that will (also) contain recipes
->>>> that are not part of oe-core.For example a recipe for a UPnP server or
->>>> a CD recording program.
->>>
->>> Correct.  We expect meta-oe to continue to hold things that are not
->>> essential but are useful and not distribution specific.
->>>
->>>> Mixing deprecated oe-core and mainline non-core recipes in the same
->>>> tree will probably lead to confusion and perhaps even to people trying
->>>> to upgrade deprecated recipes in meta-oe.
->>>
->>> Why?  If meta-oe doesn't need something that's deprecated in the core it
->>> shouldn't take it on.  If it does need something deprecated, we
->>> should try
->>> and figure out what can be done about that in order to fix that, or live
->>> with it (which is to say, if package A depends on package B no newer
->>> than
->>> version 2.0 and package B is now up to 3.2, is package A something
->>> that's
->>> really worth keeping?  Or should it perhaps go away?
->>
->> Well there are two things I like to avoid.
->> First one is someone seeing a deprecated OE-core recipe in meta-oe.
->> Say this recipe is at 1.X. The person seeing this knows that upstream
->> is at 1.Y (Y>  X), but is not aware that this recipe (and maybe 1.Y)
->> is in oe-core and starts to work at it.
->> Only later (e.g. when submitting changes) (s)he learns that actually
->> the newer version is in OE-core, and that all the work is wasted
->> timel. This is not an encouraging experience).
->> I think it would help if people are alerted that a newer version
->> exists in oe-core)
-> 
-> I don't see this happening as you don't use meta-oe by itself but
-> oe-core + meta-oe (+ possibly more).
-> 
->> The second one is that we have many versions of the same recipe and no
->> one really cares or maintains these old versions. (if they are
->> maintained and used I have no objections against multiple versions,
->> but I am somewhat allergic to recipes that are kinda orphaned and
->> sometimes do not even build).
-> 
-> Right.  The default case isn't "throw it in meta-oe" when there's a new
-> version but "is someone volunteering to take this into meta-oe because
-> they need it".
-> 
->> Btw that raises the following question: if a distro wants to pin (for
->> whatever reason) a certain recipe, but that version is not really
->> needed by other packages or so, does it still live in meta-oe? or
->> should it then eventually move into a distro specific overlay? I'm
->> especially thinking about distro's that are not too active in updating
->> their pinnings
-> 
-> It's up to however meta-oe wants to run things.  It sounds like the
-> desire is that if people are active and things work, it's fine to have
-> things in meta-oe.
-> 
->>>> In order to avoid that confusion is is probably better to give the
->>>> deprecated oe-core recipes their own layer (e.g. old-oe-core).
->>>
->>> If something isn't needed, we don't want to have to carry it anywhere
->>> other
->>> than in the scm history.  If it's needed, it should be somewhere
->>> active so
->>> it can be used.  We can re-evaluate this at a later point in time if
->>> it's
->>> not working, but we discussed this and that was our conclusion
->>> (that's my
->>> recollection at least, the log can be checked over if needed).
->>
->> I'm not sure if I saw the last log.
->> Key in your remark is what defines "needed".
->> Also what I often see is that things are needed, but after a while
->> become unneeded and become somewhat orphaned.
-> 
-> So, using a recent example.  policykit dropped needing eggdus build.
 
-FWIW, in the GNOME world anything with 'egg' in its name is a tech
-that's in an incubation stage and scheduled to get merged into e.g.
-libgnome, gtk, glib-2.0, etc. So if we stick to even releases we
-shouldn't be needing any eggs. In a perfect world, that is :)
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNf5JhMkyGM64RGpERAtQQAJ0fiVfoQgrwGsiv/IoJ0teB1qA76wCcDTAM
-hHo9KrP5MvGUrs9tx6/gZCo=
-=LMEy
------END PGP SIGNATURE-----
-
+EXTRA_OEMAKE +=3D "srcdir=3D${S}" or something like that might help may be
+it needs a dir below $S
+>
+> Thanks,
+>
+> Paul
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
