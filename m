@@ -1,31 +1,23 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>)
-	id 1PzOFe-0005jn-EX; Tue, 15 Mar 2011 08:01:06 +0100
-Received: by wwb17 with SMTP id 17so269104wwb.24
-	for <multiple recipients>; Mon, 14 Mar 2011 23:59:24 -0700 (PDT)
-Received: by 10.216.16.100 with SMTP id g78mr11940893weg.55.1300172364276;
-	Mon, 14 Mar 2011 23:59:24 -0700 (PDT)
-Received: from [172.20.0.255] (ip545070eb.adsl-surfen.hetnet.nl
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id n73sm817693wej.36.2011.03.14.23.59.23
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 14 Mar 2011 23:59:23 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1082)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <4D7EBDAA.2030805@balister.org>
-Date: Tue, 15 Mar 2011 07:59:22 +0100
-Message-Id: <4EE210EE-1EED-4ED8-94D6-57538FA0E795@dominion.thruhere.net>
-References: <1300145968.30423.803.camel@rex>
-	<20110314235317.GB28065@denix.org>	<1300149295.30423.889.camel@rex>
-	<AANLkTikmH2iFaxLYh=HVjX2RjLsCeG1PUJVjQN9kLDk0@mail.gmail.com>
-	<4D7EBDAA.2030805@balister.org>
-To: openembedded-members@lists.openembedded.org
-X-Mailer: Apple Mail (2.1082)
-Cc: yocto@yoctoproject.org,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: Collab Summit + ELC + TSC Meeting
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PzPSe-0007vw-Aq for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Mar 2011 09:18:36 +0100
+Received: from f053032095.adsl.alicedsl.de ([78.53.32.95]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PzPR2-0007vH-RC for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Mar 2011 08:16:56 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1300156772037897500@rkmorris.us>
+References: <1300156772037897500@rkmorris.us>
+Date: Tue, 15 Mar 2011 09:16:55 +0100
+Message-ID: <1300177015.3759.3.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [solved] OpenEmbedded (Wiki) Web Site Down
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,48 +31,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2011 07:01:06 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 15 Mar 2011 08:18:36 -0000
+X-Groupsio-MsgNum: 30215
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-ga41T5/vtOiFYkdmQViu"
+
+--=-ga41T5/vtOiFYkdmQViu
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
+Dear Russell,
 
-Op 15 mrt 2011, om 02:15 heeft Philip Balister het volgende geschreven:
 
-> On 03/14/2011 08:44 PM, Jeff Osier-Mixon wrote:
->>>=20
->>>> There also was a request for more general purpose OEDAM over the =
-weekend,
->>>> maybe in parallel or before/after TSC meeting:
->>>>=20
->>>> Any thoughts on that?
->>>=20
->>> Most of the replies there are from TSC people who are going to be =
-there
->>> with the exceptions of yourself and Mike. I'm ok with having a more
->>> general meeting if the demand is there and Jefro can arrange it. If
->>> there are only a few people, I'd suggest something like meeting =
-after
->>> the TSC meeting and finding food/drink together.
->>>=20
->>=20
->>=20
->> For those who don't know me, I'm Jefro.  :)
->>=20
->> As Richard says, a small crowd would probably interact better over
->> refreshments.  If you are interested in such a gathering, send me a =
-note at
->> jefro@jefro.net and let me know when you are available, and I'll see =
-what I
->> can pull together.
+Am Montag, den 14.03.2011, 21:39 -0500 schrieb Russell Morris:
+
+> Just a heads up, but the Wiki / site seems to be down. Here is the error =
+message that I receive (tried from two different PC's, on two different net=
+works),
 >=20
-> A quick show of hands, how many OE people can be in San Francisco over =
-the weekend of April 9-10? TSC people, go ahead and chime in for =
-completeness.
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>=20
+> Database error
+>=20
+> A database error has occurred
+> Query: SELECT lc_value FROM `l10n_cache` WHERE lc_lang =3D 'en' AND lc_ke=
+y =3D 'deps' LIMIT 1=20
+> Function: LCStore_DB::get
+> Error: 1146 Table 'oe_mediawiki.l10n_cache' doesn't exist (10.10.10.7)
+>=20
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-I will be there on sunday.
-
-regards,
-
-Koen=
+it works for me now, so I guess the problem has been fixed.
 
 
+Thanks,
+
+Paul
+
+--=-ga41T5/vtOiFYkdmQViu
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk1/IGsACgkQPX1aK2wOHVjyQwCeODL50QatNIts/nS5zGYFQSaL
+1bsAoIF4ZVry0hncSEt3QPSXq//4o6cu
+=f7UN
+-----END PGP SIGNATURE-----
+
+--=-ga41T5/vtOiFYkdmQViu--
