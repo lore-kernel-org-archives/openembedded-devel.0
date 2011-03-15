@@ -1,36 +1,34 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1PzW6Z-0001JI-B6
+	(envelope-from <Tom_Rini@mentor.com>) id 1PzWQp-0007LP-Ae
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Mar 2011 16:24:16 +0100
-Received: from dlep34.itg.ti.com ([157.170.170.115])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id p2FFG5rk028026
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Tue, 15 Mar 2011 10:16:05 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id p2FFG5RI010812;
-	Tue, 15 Mar 2011 10:16:05 -0500 (CDT)
-Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p2FFG55v024109;
-	Tue, 15 Mar 2011 10:16:05 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
-	([157.170.170.8]) with mapi; Tue, 15 Mar 2011 10:16:05 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: Chase Maupin <chasemaupin03@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 15 Mar 2011 10:16:03 -0500
-Thread-Topic: [PATCH] u-boot.inc: allow variable make targets
-Thread-Index: AcvjHykhaFo1c+YYRUu8TL4Y/2rnywABJBuQ
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F0803409A86B3@dlee06.ent.ti.com>
-References: <1300200121-31822-1-git-send-email-Chase.Maupin@ti.com>
-In-Reply-To: <1300200121-31822-1-git-send-email-Chase.Maupin@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Tue, 15 Mar 2011 16:45:11 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PzWPC-0005MI-4S from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Mar 2011 08:43:30 -0700
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Tue, 15 Mar 2011 08:43:14 -0700
+Received: from [172.30.80.14] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
+	with Microsoft SMTP Server id 14.1.270.1;
+	Tue, 15 Mar 2011 08:43:29 -0700
+Message-ID: <4D7F8912.7080608@mentor.com>
+Date: Tue, 15 Mar 2011 08:43:14 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-Subject: Re: [PATCH] u-boot.inc: allow variable make targets
+To: <openembedded-devel@lists.openembedded.org>
+References: <4D7E3B34.5050100@mentor.com>
+	<4D7E953E.2000706@balister.org>	<4D7EA0FD.6090506@mentor.com>
+	<4D7F6629.8030107@balister.org>
+In-Reply-To: <4D7F6629.8030107@balister.org>
+X-OriginalArrivalTime: 15 Mar 2011 15:43:14.0459 (UTC)
+	FILETIME=[B2499EB0:01CBE327]
+Subject: Re: Discussion: Version retention policy in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,70 +42,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2011 15:24:16 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 15 Mar 2011 15:45:11 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I should have probably clarified that this was intended for the 2011.03-mai=
-ntenance branch.  Tom, I have also submitted this to the oe-core.  Would yo=
-u be willing to pick this up?
+On 03/15/2011 06:14 AM, Philip Balister wrote:
+> On 03/14/2011 07:13 PM, Tom Rini wrote:
+>> On 03/14/2011 03:22 PM, Philip Balister wrote:
+>>> On 03/14/2011 11:58 AM, Tom Rini wrote:
+>>>> Hi all,
+>>>>
+>>>> The TSC has discussed this item at the request of the community and has
+>>>> come up with the following recommendation which we are looking for
+>>>> feedback (positive/negative/neutral) before putting this up on the
+>>>> wiki.
+>>>
+>>> Looks reasonable. One thing I did not see is asking people not to add a
+>>> new recipe and delete the old one in separate commits. This makes it
+>>> easier to figure out problems when they arise.
+>>
+>> So, part of what is envisioned here is that for, grabbing a recent
+>> example, nodejs 0.4.0 to 0.4.2 we just see a git mv, and that's the
+>> normal case for that level of things. But for say 0.4.9 to 0.5.0 (or
+>> would it be 0.6.0? I don't track the project, but next stable release
+>> that's not in 0.4.x) it would be add 0.5.0 one commit, drop 0.4.9 the
+>> next, Does this still fit, given your comment?
+>
+> The immediate case I am thinking off is the policykit-gnome update.
+> (Which I think did the add/delete in the same commit). One of the
+> changes was a configure option change that led to build failures on my
+> F14 box. I'm not sure how this fits in the scheme you describe since the
+> versioning seems to lack a major/minor concept. (Well the minor number
+> is large)
 
-Sincerely,
-Chase Maupin
-Open Platforms
-ARM MPU
-e-mail: chase.maupin@ti.com
-phone: (214) 567-2950
+So, policykit-gnome was just adding a new stable version (as default). 
+The previous one is still there (in part because of pinning of 
+dependencies to older versions).
 
-For support:
-Forums - http://community.ti.com/forums/
-Wiki - http://wiki.davincidsp.com/
+Plugging this example into the workflow:
+- policykit/policykit-gnome have newer stable versions released.
+- Add new version as default, test[1]
+- Keep old versions for now due to some distributions pinning glib-2.0 
+to an older version that policykit > 0.98 (or so) need.
 
-> -----Original Message-----
-> From: Chase Maupin [mailto:chasemaupin03@gmail.com]
-> Sent: Tuesday, March 15, 2011 9:42 AM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Maupin, Chase
-> Subject: [PATCH] u-boot.inc: allow variable make targets
->=20
-> * Later versions of u-boot sometimes have top level make targets
->   such as u-boot.imx, u-boot.kwb, and for upcoming TI devices
->   u-boot.ti.
-> * These targets define different calls to the mkimage tool to
->   change the images created, such as changing the load address.
-> * This change allows recipes to change the default make target
->   of "all" to something like u-boot.ti or u-boot.imx by setting
->   the UBOOT_MAKE_TARGET variable.
->=20
-> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-> ---
->  recipes/u-boot/u-boot.inc |    3 ++-
->  1 files changed, 2 insertions(+), 1 deletions(-)
->=20
-> diff --git a/recipes/u-boot/u-boot.inc b/recipes/u-boot/u-boot.inc
-> index 88c6a4d..ffd1e1e 100644
-> --- a/recipes/u-boot/u-boot.inc
-> +++ b/recipes/u-boot/u-boot.inc
-> @@ -16,6 +16,7 @@ UBOOT_MACHINE ?=3D "${MACHINE}_config"
->  UBOOT_BINARY ?=3D "u-boot.bin"
->  UBOOT_IMAGE ?=3D "u-boot-${MACHINE}-${PV}-${PR}.bin"
->  UBOOT_SYMLINK ?=3D "u-boot-${MACHINE}.bin"
-> +UBOOT_MAKE_TARGET ?=3D "all"
->=20
->  do_configure () {
->  	oe_runmake ${UBOOT_MACHINE}
-> @@ -25,7 +26,7 @@ do_compile () {
->  	unset LDFLAGS
->  	unset CFLAGS
->  	unset CPPFLAGS
-> -	oe_runmake all
-> +	oe_runmake ${UBOOT_MAKE_TARGET}
->  	oe_runmake tools env HOSTCC=3D"${CC}"
->  }
->=20
-> --
-> 1.7.0.4
+And, that brings us to [1].  FC14 seems to show off a class of bugs that 
+need squashing.  I'd love it if someone can point me at a VMware 
+compatible image (with functional tools) already installed.  That said, 
+I think I meant to post to the ML and forgot, or no one saw the 
+EXTRA_OECONF bug in the recipe that Koen fixed which I think fixes your 
+problem.
 
+> In a perfect world, what you are describing is great, however I'm
+> concerned the "special cases" may be an issue.
+
+The special cases being the critical infrastructure?  Or the unclear 
+version policy?
+
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
