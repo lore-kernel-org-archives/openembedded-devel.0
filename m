@@ -1,27 +1,32 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PzsKZ-00086G-SK for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Mar 2011 16:08:11 +0100
-Received: from f053032013.adsl.alicedsl.de ([78.53.32.13]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PzsIw-0005vT-R2 for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Mar 2011 15:06:30 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1300284412.2132.13266.camel@phil-desktop>
-References: <1300264546.3840.9.camel@mattotaupa>
-	<4D80791E.2040803@gmail.com>  <1300265560.3840.10.camel@mattotaupa>
-	<1300269370.2132.13010.camel@phil-desktop>
-	<1300282755.3840.69.camel@mattotaupa>
-	<1300284412.2132.13266.camel@phil-desktop>
-Date: Wed, 16 Mar 2011 16:06:30 +0100
-Message-ID: <1300287990.3840.85.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: minimal-uclibc: gnutls-2.10.4-r11.0: task compile fails with `make[4]: *** [coding.lo] Error 1`
+	(envelope-from <Tom_Rini@mentor.com>) id 1PzsYo-0008Pi-05
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Mar 2011 16:22:54 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PzsX9-0004Yh-82 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Mar 2011 08:21:11 -0700
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 16 Mar 2011 08:20:50 -0700
+Received: from [172.30.80.14] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
+	with Microsoft SMTP Server id 14.1.270.1;
+	Wed, 16 Mar 2011 08:21:10 -0700
+Message-ID: <4D80D556.8020508@mentor.com>
+Date: Wed, 16 Mar 2011 08:20:54 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <4D80C3A7.9030704@beam.ltd.uk>
+In-Reply-To: <4D80C3A7.9030704@beam.ltd.uk>
+X-OriginalArrivalTime: 16 Mar 2011 15:20:50.0505 (UTC)
+	FILETIME=[BBA44390:01CBE3ED]
+Subject: Re: [Openembedded-users] Problem with building angstrom-2008.1 for at91sam9m10g45ek
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,73 +40,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2011 15:08:12 -0000
-X-Groupsio-MsgNum: 30273
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-dqd/a2ZwRG9NZGWzPwre"
+X-List-Received-Date: Wed, 16 Mar 2011 15:22:54 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---=-dqd/a2ZwRG9NZGWzPwre
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 03/16/2011 07:05 AM, Terry Barnaby wrote:
+> -------- Original Message --------
+> Subject: Re: [Openembedded-users] Problem with building angstrom-2008.1 for
+> at91sam9m10g45ek
+> Date: Wed, 16 Mar 2011 00:45:30 -0700
+> From: Khem Raj<raj.khem@gmail.com>
+> To: openembedded-users@linuxtogo.org
+>
+> On 3/16/2011 12:18 AM, Terry Barnaby wrote:
+>> On 03/15/2011 02:23 PM, Terry Barnaby wrote:
+>>> On 03/15/2011 01:03 PM, Ludovic Desroches wrote:
+>>>> Hello,
+>>>>
+>>>> On 3/15/2011 1:36 PM, Terry Barnaby wrote:
+>>>>> Hi,
+>>>>>
+>>>>> I am trying to build angstrom-2008.1 for a at91sam9m10g45ek but am
+>>>>> having
+>>>>> an error.
+>>>>>
+>>>>> NOTE: Applying patch 'tclprivate.diff'
+>>>>> (openembedded/recipes/tcltk/tcl-8.5.8/tclprivate.diff)
+>>>>> NOTE: Applying patch 'mips-tclstrtod.patch'
+>>>>> (openembedded/recipes/tcltk/tcl-8.5.8/mips-tclstrtod.patch)
+>>>>> ERROR: Task 693
+>>>>> (virtual:native:/scratch/OpenEmbedded/openembedded/recipes/tcltk/tcl_8.5.8.bb,
+>>>>>
+>>>>> do_patch) failed with exit code 1
+>>>>> FATAL: Execution of 'quilt
+>>>>> --quiltrc=/scratch/OpenEmbedded/tmp/sysroots/i686-linux/usr/bin/quiltrc
+>>>>> push'
+>>>>> failed with exit code 1:
+>>>>> Applying patch mips-tclstrtod.patch
+>>>>> patch: **** rejecting target file name with ".." component:
+>>>>> ../generic/tclStrToD.c
+>>>>> Patch mips-tclstrtod.patch does not apply (enforce with -f)
+>>>>
+>>>> The problem seems to be only with the last patch applied onto tcl
+>>>> sources. Since
+>>>> it concerns only MIPS architecture, you can skip it for your ARM chip by
+>>>> removing into tcl_8.5.8.bb the line
+>>>> file://mips-tclstrtod.patch;striplevel=0 \
+>>>>
+>>>> It doesn't solve the problem but then you could continue. You have a
+>>>> look on the
+>>>> sources to see if the patches can be applied, maybe the problem is
+>>>> the patch level.
+>>>>
+>>>>
+>>>> Regards
+>>>>
+>>>> Ludovic Desroches
+>>>>
+>>>>
+>>>> _______________________________________________
+>>>> Openembedded-users mailing list
+>>>> Openembedded-users@linuxtogo.org
+>>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-users
+>>> Hi Ludovic,
+>>>
+>>> Thanks, that has allowed the build to continue, I will see what happens.
+>>>
+>>> Cheers
+>>>
+>>>
+>>> Terry
+>>>
+>>> _______________________________________________
+>>> Openembedded-users mailing list
+>>> Openembedded-users@linuxtogo.org
+>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-users
+>>
+>> Should I report this as an OpenEmbedded bug somewhere ?
+>
+> please forward this to openembedded-devel@lists.openembedded.org
+>
 
-Am Mittwoch, den 16.03.2011, 14:06 +0000 schrieb Phil Blundell:
-> On Wed, 2011-03-16 at 14:39 +0100, Paul Menzel wrote:
-> >         arm-oe-linux-uclibceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8=
- -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=
-=3D/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
-ibceabi -DHAVE_CONFIG_H -I. -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./..=
- -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pip=
-e -g -MT coding.lo -MD -MP -MF .deps/coding.Tpo -c coding.c -o coding.o
-> >         coding.c: In function 'asn1_length_der':
-> >         coding.c:101:1: internal compiler error: in dwarf2out_frame_deb=
-ug_expr, at dwarf2out.c:2221
-> >         Please submit a full bug report,
-> >         with preprocessed source if appropriate.
-> >         See <http://gcc.gnu.org/bugs.html> for instructions.
-> >         {standard input}: Assembler messages:
->=20
-> >From the looks of the error, you could probably work around the crash by
-> compiling without -g.
+Thanks for the report, I'll take care of this.
 
-Thanks, that worked.
-
-> Obviously you'd lose debuggability but that might or might not be a
-> problem for your particular use case.
-
-Well, I am just build testing.
-
-> > I am wondering if the latest GCC 4.5 changes are causing this, but as
-> > always this is just an uneducated guess.
->=20
-> Could be.  Or it's possible that the bug has been latent for a long time
-> and has just been tickled by a recent change to CFLAGS.  I think the
-> inclusion of -g in the default opts is a relatively recent innovation.
-
-I think it worked before last Friday, i. e., before the GCC 4.5 updates.
-
-> You could bisect the recent changes if you want but, unless you want to
-> debug this for yourself, the best way to proceed is probably to follow
-> the directions in the error message and submit a bug report to upstream
-> GCC.
-
-I will see, if or when I will get to that and report back.
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
-Thanks,
-
-Paul
-
---=-dqd/a2ZwRG9NZGWzPwre
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk2A0fYACgkQPX1aK2wOHVhR9ACfQkGUg2rKD966vz0lr/kj4U5w
-BSMAoIUBjtvfLfM5AqyrLXklv6qboWmL
-=ccIL
------END PGP SIGNATURE-----
-
---=-dqd/a2ZwRG9NZGWzPwre--
