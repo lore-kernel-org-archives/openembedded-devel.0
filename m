@@ -1,33 +1,26 @@
-Received: from gate.tarent.de
-	([212.79.178.249] helo=ugs.tarent.de ident=daemon)
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <henning@tarent.de>) id 1PzoYS-0003pv-Hy
+	(envelope-from <jay@jay-tech.ru>) id 1Pzoao-0003v4-Np
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Mar 2011 12:06:19 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by ugs.tarent.de (Postfix) with ESMTP id 5EFF1400571A0;
-	Wed, 16 Mar 2011 11:55:07 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by ugs.tarent.de (Postfix) with ESMTP id 572114005161C;
-	Wed, 16 Mar 2011 11:55:07 +0100 (CET)
-Received: from ugs.tarent.de ([127.0.0.1])
-	by localhost (ugs.tarent.de [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4KlqOt7hQQbo; Wed, 16 Mar 2011 11:55:07 +0100 (CET)
-Received: from entw1 (lui.tarent.buero [192.168.4.41])
-	by ugs.tarent.de (Postfix) with ESMTPSA id 3BBC2400571A0;
-	Wed, 16 Mar 2011 11:55:07 +0100 (CET)
-Received: from henning by entw1 with local (Exim 4.71)
-	(envelope-from <henning@tarent.de>)
-	id 1PzoNe-0006KO-Oq; Wed, 16 Mar 2011 11:55:06 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Wed, 16 Mar 2011 12:08:42 +0100
+Received: by vxd7 with SMTP id 7so1472891vxd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Mar 2011 04:06:58 -0700 (PDT)
+Received: by 10.220.67.219 with SMTP id s27mr158141vci.41.1300273618083; Wed,
+	16 Mar 2011 04:06:58 -0700 (PDT)
+MIME-Version: 1.0
+Sender: jay@jay-tech.ru
+Received: by 10.220.180.141 with HTTP; Wed, 16 Mar 2011 04:06:38 -0700 (PDT)
+X-Originating-IP: [78.106.51.57]
+In-Reply-To: <1300185619.3759.155.camel@mattotaupa>
+References: <1300185619.3759.155.camel@mattotaupa>
+From: Yury Bushmelev <jay4mail@gmail.com>
+Date: Wed, 16 Mar 2011 14:06:38 +0300
+X-Google-Sender-Auth: cx5_qlKvzgabDUzYJl0fe9U0tpc
+Message-ID: <AANLkTinBEW6OAdkaU-zK03s+=M+zMYjd0PPguUTR5shA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Mar 2011 11:54:42 +0100
-Message-Id: <1300272884-24220-3-git-send-email-heinold@inf.fu-berlin.de>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1300272884-24220-1-git-send-email-heinold@inf.fu-berlin.de>
-References: <1300272884-24220-1-git-send-email-heinold@inf.fu-berlin.de>
-Cc: Henning Heinold <h.heinold@tarent.de>
-Subject: [PATCH 2/4] cacao-hg: update to latest revision
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: removal of `angstrom-2008.1` in dev and needed updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,29 +34,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2011 11:06:20 -0000
+X-List-Received-Date: Wed, 16 Mar 2011 11:08:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-From: Henning Heinold <h.heinold@tarent.de>
+2011/3/15 Paul Menzel <paulepanter@users.sourceforge.net>:
 
----
- recipes/cacao/cacao-native_hg.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+> It looks like some other configurations files and comments still refer
+> to `angstrom-2008.1` though and probably need an update.
+>
+> =A0 =A0 =A0 =A0contrib/testing/testbuilder/README:bitbake (e.g. angstrom-=
+2008.1/qemuarm/console-image).
+> =A0 =A0 =A0 =A0contrib/testing/testbuilder/README: =A0 =A0./testbuilder -=
+D angstrom-2008.1 -M qemuarm console-image
+> =A0 =A0 =A0 =A0contrib/testing/testbuilder/README: =A0 =A0./testbuilder -=
+D angstrom-2008.1 -M qemuarm -S
+> =A0 =A0 =A0 =A0contrib/testing/testbuilder/testbuilder.d/testing.conf.sam=
+ple:DISTROS=3D"angstrom-2008.1 angstrom-2010.x"
 
-diff --git a/recipes/cacao/cacao-native_hg.bb b/recipes/cacao/cacao-native_hg.bb
-index 0f0df64..6ece8dd 100644
---- a/recipes/cacao/cacao-native_hg.bb
-+++ b/recipes/cacao/cacao-native_hg.bb
-@@ -3,7 +3,7 @@ require cacao-native.inc
- PV = "1.1.0+hgr${SRCPV}"
- PR = "r2"
- 
--SRCREV = "1ac977fe271c"
-+SRCREV = "c7bf150bfa46"
- SRC_URI = "hg://mips.complang.tuwien.ac.at/hg/;module=cacao;rev=${SRCREV}"
- 
- S = "${WORKDIR}/cacao"
--- 
-1.7.0.4
+I've fixed testbuilder entries yesterday.
 
+--=20
+Yury Bushmelev
 
 
