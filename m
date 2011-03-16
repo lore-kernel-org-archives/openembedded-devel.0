@@ -1,40 +1,35 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1Pzw1O-0001NZ-GY
+	(envelope-from <chasemaupin03@gmail.com>) id 1Pzw5d-0001Rf-Fn
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Mar 2011 20:04:38 +0100
-Received: from dlep33.itg.ti.com ([157.170.170.112])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id p2GJ2uS0021235
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Wed, 16 Mar 2011 20:09:01 +0100
+Received: by gwb11 with SMTP id 11so793034gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Mar 2011 14:02:56 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep33.itg.ti.com (8.13.7/8.13.7) with ESMTP id p2GJ2ugl025754
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Mar 2011 14:02:56 -0500 (CDT)
-Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p2GJ2uTL029855
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Mar 2011 14:02:56 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dsbe71.ent.ti.com
-	([156.117.232.23]) with mapi; Wed, 16 Mar 2011 14:02:55 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 16 Mar 2011 14:02:54 -0500
-Thread-Topic: [oe] [PATCH][2011.003-maintenance] ti-pru-sw-example: fix
-	building with new toolchain sysroot
-Thread-Index: AcvkC5JfgzRXLSNfQ6SNtPH5HpW63QAAR/yQ
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080340AC3EC2@dlee06.ent.ti.com>
-References: <1300296140-7275-1-git-send-email-Chase.Maupin@ti.com>
-	<ilqv4v$66u$1@dough.gmane.org>
-In-Reply-To: <ilqv4v$66u$1@dough.gmane.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-Subject: Re: [PATCH][2011.003-maintenance] ti-pru-sw-example: fix building with new toolchain sysroot
+	Wed, 16 Mar 2011 12:07:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=/bwqOIWZsS7ukmRNrGbKYVSdD6hyQ0bT7CHnQluKzyw=;
+	b=sb4+WhxoGjcpPtwm/zx+3fGnEZ/XFUdxhpgmLo4Ir3o2Katw6MeviLXckg+XshuOQr
+	3gmNGMtyuwVcrfUSnXYrIJPEaBEINQrnvLnxovRWetgdBXiprzbMvUVyYAKYjOsnVRsB
+	Q7S23Ggrq6PDhQTB783Rroty+9GKSDCsLmSNg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=xyskofIj0srAAA59wbmQKuc4kFPR/fLz6X9Mc4M6h3BxgNLwUjjNmmmLhRLtU76SNB
+	JihcMfwzsFeKAGYUd8tMw0Tl60oEbp/vBoUbZUeI3r7qa4F+8ZSAEd56LpDZxgOjvWii
+	1Cj6dwjkS4O4KjXGrz8+UV66tUkVlwuYFxRfM=
+Received: by 10.236.63.240 with SMTP id a76mr290857yhd.369.1300302130921;
+	Wed, 16 Mar 2011 12:02:10 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id k5sm766126yhm.21.2011.03.16.12.02.09
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 16 Mar 2011 12:02:09 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 16 Mar 2011 14:02:03 -0500
+Message-Id: <1300302126-32560-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: [PATCH 1/4] u-boot.inc: allow variable make targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,46 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2011 19:04:38 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 16 Mar 2011 19:09:02 -0000
 
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Koen Kooi
-> Sent: Wednesday, March 16, 2011 1:22 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [PATCH][2011.003-maintenance] ti-pru-sw-example: fix
-> building with new toolchain sysroot
->=20
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> On 16-03-11 18:22, Chase Maupin wrote:
-> > * Patch taken from Arago overlay where it was added by
-> >   Denys Dmytriyenko
-> > * PR incremented by two to align recipe PR values between Arago
-> >   and OE.
-> >
-> > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
->=20
-> NAK, this hasn't been thru .dev yet.
+* Later versions of u-boot sometimes have top level make targets
+  such as u-boot.imx, u-boot.kwb, and for upcoming TI devices
+  u-boot.ti.
+* These targets define different calls to the mkimage tool to
+  change the images created, such as changing the load address.
+* This change allows recipes to change the default make target
+  of "all" to something like u-boot.ti or u-boot.imx by setting
+  the UBOOT_MAKE_TARGET variable.
 
-Just submitted all 4 of my patches for .dev.  Thanks.
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+---
+ recipes/u-boot/u-boot.inc |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->=20
-> iD8DBQFNgP/fMkyGM64RGpERAl6xAJ45EJRtCFR9OXVfx47vHziPgljS8ACgnYLG
-> F8X61AnjZTX5/ctbDUvuhMI=3D
-> =3D9ZrC
-> -----END PGP SIGNATURE-----
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+diff --git a/recipes/u-boot/u-boot.inc b/recipes/u-boot/u-boot.inc
+index 88c6a4d..ffd1e1e 100644
+--- a/recipes/u-boot/u-boot.inc
++++ b/recipes/u-boot/u-boot.inc
+@@ -16,6 +16,7 @@ UBOOT_MACHINE ?= "${MACHINE}_config"
+ UBOOT_BINARY ?= "u-boot.bin"
+ UBOOT_IMAGE ?= "u-boot-${MACHINE}-${PV}-${PR}.bin"
+ UBOOT_SYMLINK ?= "u-boot-${MACHINE}.bin"
++UBOOT_MAKE_TARGET ?= "all"
+ 
+ do_configure () {
+ 	oe_runmake ${UBOOT_MACHINE}
+@@ -25,7 +26,7 @@ do_compile () {
+ 	unset LDFLAGS
+ 	unset CFLAGS
+ 	unset CPPFLAGS
+-	oe_runmake all
++	oe_runmake ${UBOOT_MAKE_TARGET}
+ 	oe_runmake tools env HOSTCC="${CC}"
+ }
+ 
+-- 
+1.7.0.4
+
 
 
