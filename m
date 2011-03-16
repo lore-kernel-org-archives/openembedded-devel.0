@@ -1,35 +1,42 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chasemaupin03@gmail.com>) id 1PzuSL-0004K9-SB
+	(envelope-from <raj.khem@gmail.com>) id 1Pzuoj-0004xI-A8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Mar 2011 18:24:22 +0100
-Received: by ywg8 with SMTP id 8so749024ywg.6
+	Wed, 16 Mar 2011 18:47:29 +0100
+Received: by pvc30 with SMTP id 30so291463pvc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Mar 2011 10:22:27 -0700 (PDT)
+	Wed, 16 Mar 2011 10:45:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=+jxZ0610o89P56PneWu3KK2MusbDVTjaJOKLM56jaz0=;
-	b=DVjmYL/zxiFzqLzsXis+cQzrcrg+ycaZZlMdrY80vRKaC882mbfUeSsgivCmkYXR+f
-	BscKvEVTZ/o/VD+hoKpJLXKP/EspowsjNAu6MVxeuZek4E3B0RroVtR7rDZjDKJiIJT9
-	FxlCTNsYQ7uaxpaNINvmQiSnduUWE2le0Bp7M=
+	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=iYGmjmD55+zsM1ZK4NKxuNNfuoEU9zmMB2yjirepWZQ=;
+	b=Bfr52tZfVDsCe/rq5gT1MmWP9xwa7IkddQfbuMZUPkbfmcjGbRVzc+BfLuPNCII4hc
+	4VMyUKYBcWz4NNOA5NQDKkby3svXpQxKrWkVtflX0qbqeqgO1F/k8Aft7W7MSm0kq+Xh
+	dOLUl4Hm7IJntnAESGgyYIHy5pfztsSsQVv9I=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=GZ6alNLc9XcLEiYQY2+mMRMObKjZ0fiw2JqMgcRoRgI3sPw0jELJjiKbEp0uVK9Oqs
-	suKzIHJbIi0AU8eUhJgciWUWTC2/kW364f9TGZyhuffvdLynFEEnhq2E6vOURJcbMYyp
-	9v/K1FAUTBrfdg/4AGtxewNaalUgANKW8Fgvk=
-Received: by 10.101.112.11 with SMTP id p11mr167543anm.106.1300296147589;
-	Wed, 16 Mar 2011 10:22:27 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id d14sm1486558ana.20.2011.03.16.10.22.23
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 16 Mar 2011 10:22:26 -0700 (PDT)
-From: Chase Maupin <chasemaupin03@gmail.com>
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=s1I/0xcseYelrGZshmyoigDFsEcYLCH1TqDvp2B2m7ZplrZqzbAzy+/ZHTcLnZOCex
+	oRcG3OgOlhtgz2oiiAYrLtKkfRSW2BZlqM0FZ70iX/VjaVk6CQj2hQnSZ6SVvKZn43zA
+	o1eBTqnbR5VUGm0kANDx3LXrQicEiRMjcHcQk=
+Received: by 10.142.202.12 with SMTP id z12mr145451wff.442.1300297544407;
+	Wed, 16 Mar 2011 10:45:44 -0700 (PDT)
+Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id w27sm1418356wfd.4.2011.03.16.10.45.41
+	(version=SSLv3 cipher=OTHER); Wed, 16 Mar 2011 10:45:42 -0700 (PDT)
+Message-ID: <4D80F737.70906@gmail.com>
+Date: Wed, 16 Mar 2011 10:45:27 -0700
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.15) Gecko/20110303 Thunderbird/3.1.9
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Mar 2011 12:22:20 -0500
-Message-Id: <1300296140-7275-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH][2011.003-maintenance] ti-pru-sw-example: fix building with new toolchain sysroot
+References: <1300272884-24220-1-git-send-email-heinold@inf.fu-berlin.de>
+	<1300272884-24220-2-git-send-email-heinold@inf.fu-berlin.de>
+In-Reply-To: <1300272884-24220-2-git-send-email-heinold@inf.fu-berlin.de>
+Subject: Re: [PATCH 1/4] openjdk: use qemu now for the awt sizer binary too
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,42 +50,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2011 17:24:22 -0000
+X-List-Received-Date: Wed, 16 Mar 2011 17:47:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-* Patch taken from Arago overlay where it was added by
-  Denys Dmytriyenko
-* PR incremented by two to align recipe PR values between Arago
-  and OE.
+On 3/16/2011 3:54 AM, Henning Heinold wrote:
+> From: Henning Heinold<h.heinold@tarent.de>
+>
+> * bump INC_PR
+> ---
+>   .../icedtea-crosscompile-fix.patch                 |   24 ++++++++++---------
+>   recipes/openjdk/openjdk-6-common.inc               |    8 +-----
+>   2 files changed, 14 insertions(+), 18 deletions(-)
+>
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
----
- recipes/ti/ti-pru-sw-examples_1.00.00.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+the inc file has
+DEPENDS_append_arm = " qemu-native "
+so I guess it will work fine for arm how about other architectures ?
+otherwise patch looks ok
 
-diff --git a/recipes/ti/ti-pru-sw-examples_1.00.00.bb b/recipes/ti/ti-pru-sw-examples_1.00.00.bb
-index f5fa8d5..45a01eb 100644
---- a/recipes/ti/ti-pru-sw-examples_1.00.00.bb
-+++ b/recipes/ti/ti-pru-sw-examples_1.00.00.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://gforge.ti.com/gf/project/pru_sw/"
- LICENSE = "BSD"
- DEPENDS += "ti-pru-sw-app-loader ti-pru-sw-edma-library"
- RDEPENDS += "ti-pru-sw-edma-driver kernel-module-uio-pru"
--PR = "r2+svnr${SRCPV}"
-+PR = "r4+svnr${SRCPV}"
- 
- COMPATIBLE_MACHINE = "omapl138"
- 
-@@ -14,7 +14,7 @@ S = "${WORKDIR}/trunk"
- 
- do_compile () {
-         make -C ${S}/example_apps \
--          CC=${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc \
-+          CC="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}" \
-           BINDIR_APPLICATIONS="${S}/example_apps/bin" \
-           BINDIR_FW="${S}/example_apps/bin" \
-           UTILS_DIR="${S}/utils"
--- 
-1.7.0.4
+> diff --git a/recipes/openjdk/openjdk-6-6b18-1.8/icedtea-crosscompile-fix.patch b/recipes/openjdk/openjdk-6-6b18-1.8/icedtea-crosscompile-fix.patch
+> index ec0f259..652f7ac 100644
+> --- a/recipes/openjdk/openjdk-6-6b18-1.8/icedtea-crosscompile-fix.patch
+> +++ b/recipes/openjdk/openjdk-6-6b18-1.8/icedtea-crosscompile-fix.patch
+> @@ -73,17 +73,6 @@ Index: openjdk/jdk/make/sun/xawt/Makefile
+>    endif
+>
+>    ifeq ($(PLATFORM), solaris)
+> -@@ -237,7 +238,9 @@
+> - 	$(BOOT_JAVA_CMD) -cp $(WRAPPER_GENERATOR_TEMPDIR) WrapperGenerator \
+> - 	    $(SIZER_DIR) $(XLIBTYPES) "sizer" $(subst .,,$(suffix $(basename $@)))
+> -
+> --$(SIZES): $(SIZERS)
+> -+#$(SIZES): $(SIZERS)
+> -+# Prevent binaries being created. Instead take what is available.
+> -+$(SIZES):
+> - 	@if [ "$(DOHACK)$@" = "true$(PREDEFINED_SIZES)" ]; then \
+> - 	    $(ECHO) COPYING $(PREDEFINED_SIZES_TMPL) into $@; \
+> - 	    $(CP) $(PREDEFINED_SIZES_TMPL) $@; \
+>   Index: openjdk/hotspot/make/linux/makefiles/vm.make
+>   ===================================================================
+>   --- openjdk.orig/hotspot/make/linux/makefiles/vm.make	2009-01-24 17:54:57.000000000 +0100
+> @@ -212,3 +201,16 @@ Index: openjdk/hotspot/make/linux/makefiles/launcher.make
+>      LIBS_LAUNCHER             += -l$(JVM) $(LIBS) -lstdc++
+>    endif
+>
+> +Index: icedtea6-1.8.5/build/openjdk/jdk/make/sun/xawt/Makefile
+> +===================================================================
+> +--- openjdk/jdk/make/sun/xawt/Makefile	2011-03-14 14:17:03.926207269 +0100
+> ++++ openjdk/jdk/make/sun/xawt/Makefile	2011-03-14 14:30:11.956186631 +0100
+> +@@ -245,7 +245,7 @@
+> + 	    $(CHMOD) +w $@;\
+> + 	else	\
+> + 	    $(ECHO) GENERATING $@; \
+> +-	    $(WRAPPER_GENERATOR_DIR)/sizer$(suffix $@)>  $@; \
+> ++	    $(QEMU) $(WRAPPER_GENERATOR_DIR)/sizer$(suffix $@)>  $@; \
+> + 	fi
+> + 	@if [ "$(DOCOMPARE)$(suffix $@)" = "true.64" ]; then \
+> + 	    $(ECHO) COMPARING $@ and $(STORED_SIZES_TMPL_$(PLATFORM)_$(LIBARCH)); \
+> diff --git a/recipes/openjdk/openjdk-6-common.inc b/recipes/openjdk/openjdk-6-common.inc
+> index f04800b..54c45f8 100644
+> --- a/recipes/openjdk/openjdk-6-common.inc
+> +++ b/recipes/openjdk/openjdk-6-common.inc
+> @@ -10,7 +10,7 @@ ICEDTEA = "NEEDS TO BE SET"
+>   S = "${WORKDIR}/${ICEDTEA}"
+>   B = "${S}/build"
+>
+> -INC_PR = "r10"
+> +INC_PR = "r11"
+>
+>   SRC_URI = "\
+>     ${ICEDTEA_URI} \
+> @@ -288,12 +288,6 @@ addtask compilestepone after do_configure before do_compilesteptwo
+>   do_compilesteptwo() {
+>   	echo "2/3 Building bootstrap JDK"
+>
+> -	# Take pre-generated binaries from -native build
+> -	install -d generated/sun/awt/X11/generator
+> -	ln -sf ${STAGING_LIBDIR_JVM_NATIVE}/icedtea6-native/generated/sizer.32 generated/sun/awt/X11/generator/sizer.32
+> -	install -d openjdk/${BUILD_DIR}/gensrc/sun/awt/X11/generator
+> -	ln -sf ${STAGING_LIBDIR_JVM_NATIVE}/icedtea6-native/generated/sizer.32 openjdk/${BUILD_DIR}/gensrc/sun/awt/X11/generator/sizer.32
+> -
+>   	# Now cross-compile bootstrap JDK
+>   	rm stamps/icedtea-against-ecj.stamp stamps/icedtea-ecj.stamp || true
+>   	oe_runmake icedtea-against-ecj
 
 
 
