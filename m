@@ -1,23 +1,27 @@
-Received: from portal.beam.ltd.uk ([62.49.82.227] helo=mailgate.beam.ltd.uk)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <terry@beam.ltd.uk>) id 1PzruB-0003g9-RB
-	for openembedded-devel@linuxtogo.org; Wed, 16 Mar 2011 15:40:56 +0100
-Received: from beam.beamnet (beam.beamnet [127.0.0.1])
-	by mailgate.beam.ltd.uk (8.14.4/8.14.4) with ESMTP id p2GE3LHo003569;
-	Wed, 16 Mar 2011 14:03:22 GMT
-Message-ID: <4D80C329.9020309@beam.ltd.uk>
-Date: Wed, 16 Mar 2011 14:03:21 +0000
-From: Terry Barnaby <terry@beam.ltd.uk>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Thunderbird/3.1.7
-MIME-Version: 1.0
-To: Ludovic Desroches <ludovic.desroches@atmel.com>
-References: <4D80653A.7010804@beam.ltd.uk> <4D80772A.8080207@atmel.com>
-In-Reply-To: <4D80772A.8080207@atmel.com>
-X-Enigmail-Version: 1.1.1
-Cc: openembedded-devel@linuxtogo.org, openembedded-users@linuxtogo.org
-Subject: Re: [Openembedded-users] Problem with patch version 2.6.1-7 and	after
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PzsKZ-00086G-SK for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Mar 2011 16:08:11 +0100
+Received: from f053032013.adsl.alicedsl.de ([78.53.32.13]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PzsIw-0005vT-R2 for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Mar 2011 15:06:30 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1300284412.2132.13266.camel@phil-desktop>
+References: <1300264546.3840.9.camel@mattotaupa>
+	<4D80791E.2040803@gmail.com>  <1300265560.3840.10.camel@mattotaupa>
+	<1300269370.2132.13010.camel@phil-desktop>
+	<1300282755.3840.69.camel@mattotaupa>
+	<1300284412.2132.13266.camel@phil-desktop>
+Date: Wed, 16 Mar 2011 16:06:30 +0100
+Message-ID: <1300287990.3840.85.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: minimal-uclibc: gnutls-2.10.4-r11.0: task compile fails with `make[4]: *** [coding.lo] Error 1`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,103 +35,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2011 14:40:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 16 Mar 2011 15:08:12 -0000
+X-Groupsio-MsgNum: 30273
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-dqd/a2ZwRG9NZGWzPwre"
 
-On 03/16/2011 08:39 AM, Ludovic Desroches wrote:
-> Hello,
-> 
-> On 3/16/2011 8:22 AM, Terry Barnaby wrote:
->> Hi,
->>
->> I am getting the error:
->>
->> NOTE: Applying patch 'arm-thumb-mutex_db5.patch'
->> (openembedded/recipes/db/db-5.1.19/arm-thumb-mutex_db5.patch)
->> ERROR: Execution of 'quilt
->> --quiltrc=/scratch/OpenEmbeddedNew/tmp/sysroots/i686-linux/usr/bin/quiltrc
->> push' failed with exit code 1:
->> Applying patch arm-thumb-mutex_db5.patch
->> patch: **** rejecting target file name with ".." component:
->> ../src/dbinc/mutex_int.h
->> Patch arm-thumb-mutex_db5.patch does not apply (enforce with -f)
->>
->> ERROR: Function 'patch_do_patch' failed
-> 
-> I have no problem to apply the patch manually or running bitbake db-5.1.19. I am
-> using the latest bitbake release and the 2011.03 oe release.
-> 
->>
->> This appears to be due to a security enhancement made to the patch utility
->> relatively recently. 
-> I have updated my patch utility we the latest release, not version on the alpha
-> ftp :
-> 
-> $ bitbake db-5.1.19
-> ...
-> Build Configuration:
-> BB_VERSION        = "1.12.0"
-> METADATA_BRANCH   = "2011.03_atmel"
-> METADATA_REVISION = "8c6a371"
-> TARGET_ARCH       = "arm"
-> TARGET_OS         = "linux-gnueabi"
-> MACHINE           = "at91sam9m10g45"
-> DISTRO            = "angstrom"
-> DISTRO_VERSION    = "v20110316"
-> TARGET_FPU        = "soft"
-> 
-> NOTE: Resolving any missing task queue dependencies
-> NOTE: Preparing runqueue
-> NOTE: Executing RunQueue Tasks
-> ...
-> NOTE: package db-5.1.19-r1: task do_patch: Started
-> NOTE: package db-5.1.19-r1: task do_patch: Succeeded
-> NOTE: Running task 721 of 732 (ID: 11,
-> /local/users/ldesroch/workspace/openembedded/openembedded/recipes/db/db_5.1.19.bb,
-> do_configure)
-> ...
-> 
-> ldesroch@RFOLXTS02:openembedded (master)$ patch --version
-> patch 2.6.1
-> 
->> Is there a known clean way of fixing this and where
->> should I report the bug ?
->>
-> You should use the openembedded-devel list. I think you will have more answers.
-> 
-> 
-> Regards
-> 
-> Ludovic Desroches
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-users mailing list
-> Openembedded-users@linuxtogo.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-users
-Hi,
+--=-dqd/a2ZwRG9NZGWzPwre
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-### Forwarded to openembedded-devel ###
+Am Mittwoch, den 16.03.2011, 14:06 +0000 schrieb Phil Blundell:
+> On Wed, 2011-03-16 at 14:39 +0100, Paul Menzel wrote:
+> >         arm-oe-linux-uclibceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8=
+ -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=
+=3D/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
+ibceabi -DHAVE_CONFIG_H -I. -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./..=
+ -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pip=
+e -g -MT coding.lo -MD -MP -MF .deps/coding.Tpo -c coding.c -o coding.o
+> >         coding.c: In function 'asn1_length_der':
+> >         coding.c:101:1: internal compiler error: in dwarf2out_frame_deb=
+ug_expr, at dwarf2out.c:2221
+> >         Please submit a full bug report,
+> >         with preprocessed source if appropriate.
+> >         See <http://gcc.gnu.org/bugs.html> for instructions.
+> >         {standard input}: Assembler messages:
+>=20
+> >From the looks of the error, you could probably work around the crash by
+> compiling without -g.
 
-We are using Fedora14. That is using patch 2.6.1-8.
+Thanks, that worked.
 
-The -8 release includes the following patches to patch.
-Patch1: patch-2.5.4-sigsegv.patch
-Patch2: patch-get-arg.patch
-Patch3: patch-CVE-2010-4651.patch
-Patch100: patch-selinux.patch
+> Obviously you'd lose debuggability but that might or might not be a
+> problem for your particular use case.
 
-I think one of those fixes a security issue in patch where ".." in
-path names were allowed. With this version of patch (which I assume
-will become standard ?) the OpenEmbedded fails.
-Any ideas on a way to get around this (ideally without using a
-different patch version :) )
+Well, I am just build testing.
 
-Cheers
+> > I am wondering if the latest GCC 4.5 changes are causing this, but as
+> > always this is just an uneducated guess.
+>=20
+> Could be.  Or it's possible that the bug has been latent for a long time
+> and has just been tickled by a recent change to CFLAGS.  I think the
+> inclusion of -g in the default opts is a relatively recent innovation.
+
+I think it worked before last Friday, i. e., before the GCC 4.5 updates.
+
+> You could bisect the recent changes if you want but, unless you want to
+> debug this for yourself, the best way to proceed is probably to follow
+> the directions in the error message and submit a bug report to upstream
+> GCC.
+
+I will see, if or when I will get to that and report back.
 
 
-Terry
+Thanks,
 
+Paul
 
+--=-dqd/a2ZwRG9NZGWzPwre
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2A0fYACgkQPX1aK2wOHVhR9ACfQkGUg2rKD966vz0lr/kj4U5w
+BSMAoIUBjtvfLfM5AqyrLXklv6qboWmL
+=ccIL
+-----END PGP SIGNATURE-----
+
+--=-dqd/a2ZwRG9NZGWzPwre--
