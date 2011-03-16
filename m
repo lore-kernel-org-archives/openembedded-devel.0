@@ -1,25 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pznym-0001w2-Ef for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Mar 2011 11:29:24 +0100
-Received: from f053032013.adsl.alicedsl.de ([78.53.32.13]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pznx9-0003Mr-DJ for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Mar 2011 10:27:43 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PzoIn-0002Vo-TO for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Mar 2011 11:50:05 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PzoH8-00063e-QR for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Mar 2011 11:48:22 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Mar 2011 11:48:22 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Mar 2011 11:48:22 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1300267026.3840.13.camel@mattotaupa>
-References: <1300264546.3840.9.camel@mattotaupa>
-	<4D80791E.2040803@gmail.com>  <1300265560.3840.10.camel@mattotaupa>
-	<1300267026.3840.13.camel@mattotaupa>
-Date: Wed, 16 Mar 2011 11:27:42 +0100
-Message-ID: <1300271262.3840.41.camel@mattotaupa>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 16 Mar 2011 11:48:07 +0100
+Message-ID: <ilq4h7$35k$1@dough.gmane.org>
+References: <1299882034-23172-1-git-send-email-eric@eukrea.com>	<ileapd$gdk$1@dough.gmane.org>
+	<4D7CD7C8.1080108@eukrea.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: minimal-uclibc: gnutls-2.10.4-r11.0: task compile fails with `make[4]: *** [coding.lo] Error 1`
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <4D7CD7C8.1080108@eukrea.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH] nodejs: update to 0.4.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,138 +43,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2011 10:29:24 -0000
-X-Groupsio-MsgNum: 30256
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-RD7DsU8SHhbJx3Mbh9Su"
+X-List-Received-Date: Wed, 16 Mar 2011 10:50:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---=-RD7DsU8SHhbJx3Mbh9Su
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am Mittwoch, den 16.03.2011, 10:17 +0100 schrieb Paul Menzel:
-> Am Mittwoch, den 16.03.2011, 09:52 +0100 schrieb Paul Menzel:
-> > Am Mittwoch, den 16.03.2011, 01:47 -0700 schrieb Khem Raj:
-> > > On 3/16/2011 1:35 AM, Paul Menzel wrote:
-> > > > Dear OE folks,
-> > > >
-> > > >
-> > > > using the following configuration
-> > > >
-> > > >          Build Configuration:
-> > > >          BB_VERSION        =3D "1.12.0"
-> > > >          METADATA_BRANCH   =3D "<unknown>"
-> > > >          METADATA_REVISION =3D "f621e5e"
-> > > >          TARGET_ARCH       =3D "arm"
-> > > >          TARGET_OS         =3D "linux-uclibceabi"
-> > > >          MACHINE           =3D "beagleboard"
-> > > >          DISTRO            =3D "minimal-uclibc"
-> > > >          DISTRO_VERSION    =3D "dev-snapshot-20110316"
-> > > >          TARGET_FPU        =3D "soft"
-> > > >
-> > > > task compile of `gnutls_2.10.4.bb` fails with the following error.
-> > > >
-> > > >          arm-oe-linux-uclibceabi-libtool: compile:  arm-oe-linux-uc=
-libceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=
-=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=3D/oe/build-minimal-uclibc=
-/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I.=
- -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./.. -fexpensive-optimizations =
--fomit-frame-pointer -frename-registers -Os -pipe -g -MT element.lo -MD -MP=
- -MF .deps/element.Tpo -c element.c  -fPIC -DPIC -o .libs/element.o
-> > > >          mv -f .deps/parser_aux.Tpo .deps/parser_aux.Plo
-> > > >          /bin/sh ../arm-oe-linux-uclibceabi-libtool --tag=3DCC   --=
-mode=3Dcompile arm-oe-linux-uclibceabi-gcc -march=3Darmv7-a -mtune=3Dcortex=
--a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb --sysroo=
-t=3D/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uc=
-libceabi -DHAVE_CONFIG_H -I. -I..  -DASN1_BUILDING -I./../gl -I./../gl -I./=
-..   -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os =
--pipe -g -MT coding.lo -MD -MP -MF .deps/coding.Tpo -c -o coding.lo coding.=
-c
-> > > >          arm-oe-linux-uclibceabi-libtool: compile:  arm-oe-linux-uc=
-libceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=
-=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=3D/oe/build-minimal-uclibc=
-/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I.=
- -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./.. -fexpensive-optimizations =
--fomit-frame-pointer -frename-registers -Os -pipe -g -MT coding.lo -MD -MP =
--MF .deps/coding.Tpo -c coding.c  -fPIC -DPIC -o .libs/coding.o
-> > > >          arm-oe-linux-uclibceabi-libtool: compile:  arm-oe-linux-uc=
-libceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=
-=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=3D/oe/build-minimal-uclibc=
-/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I.=
- -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./.. -fexpensive-optimizations =
--fomit-frame-pointer -frename-registers -Os -pipe -g -MT element.lo -MD -MP=
- -MF .deps/element.Tpo -c element.c -o element.o>/dev/null 2>&1
-> > > >          arm-oe-linux-uclibceabi-libtool: compile:  arm-oe-linux-uc=
-libceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=
-=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=3D/oe/build-minimal-uclibc=
-/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I.=
- -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./.. -fexpensive-optimizations =
--fomit-frame-pointer -frename-registers -Os -pipe -g -MT structure.lo -MD -=
-MP -MF .deps/structure.Tpo -c structure.c -o structure.o>/dev/null 2>&1
-> > > >          arm-oe-linux-uclibceabi-libtool: compile:  arm-oe-linux-uc=
-libceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=
-=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=3D/oe/build-minimal-uclibc=
-/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I.=
- -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./.. -fexpensive-optimizations =
--fomit-frame-pointer -frename-registers -Os -pipe -g -MT coding.lo -MD -MP =
--MF .deps/coding.Tpo -c coding.c -o coding.o>/dev/null 2>&1
-> > > >          mv -f .deps/element.Tpo .deps/element.Plo
-> > > >          /bin/sh ../arm-oe-linux-uclibceabi-libtool --tag=3DCC   --=
-mode=3Dcompile arm-oe-linux-uclibceabi-gcc -march=3Darmv7-a -mtune=3Dcortex=
--a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb --sysroo=
-t=3D/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uc=
-libceabi -DHAVE_CONFIG_H -I. -I..  -DASN1_BUILDING -I./../gl -I./../gl -I./=
-..   -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os =
--pipe -g -MT version.lo -MD -MP -MF .deps/version.Tpo -c -o version.lo vers=
-ion.c
-> > > >          arm-oe-linux-uclibceabi-libtool: compile:  arm-oe-linux-uc=
-libceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=
-=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=3D/oe/build-minimal-uclibc=
-/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I.=
- -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./.. -fexpensive-optimizations =
--fomit-frame-pointer -frename-registers -Os -pipe -g -MT version.lo -MD -MP=
- -MF .deps/version.Tpo -c version.c  -fPIC -DPIC -o .libs/version.o
-> > > >          make[4]: *** [coding.lo] Error 1
-> > > >
-> > > > I guess this has to do with the following commit [1], since it buil=
-ds
-> > > > fine using `minimal` using EGLIBC.
-> > > >
-> > > >          commit f3ef166dca255f2e8518bb03655332273b1ef074
-> > > >          Author: Khem Raj<raj.khem@gmail.com>
-> > > >          Date:   Mon Mar 14 22:47:46 2011 -0700
-> > > >
-> > > >              uclibc_git: Upgrade to latest 0.9.32 snapshot
-> > > >
-> > > >              Signed-off-by: Khem Raj<raj.khem@gmail.com>
-> > > >
-> > >=20
-> > > and where/what is the error message ? what you posted does not help
-> >=20
-> > I am sorry. But I could not find an error message anywhere in
-> > `log.do_compile`. Please find the log file attached.
->=20
-> I have to correct myself. It also fails using `minimal` (EGLIBC) with
-> the same error message but works using `minimal` with `LIBC =3D "glibc"`.
+On 13-03-11 15:42, Eric Bénard wrote:
+> Hi Koen,
+> 
+> On 12/03/2011 00:21, Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 11-03-11 23:20, Eric Bénard wrote:
+>>> Signed-off-by: Eric Bénard<eric@eukrea.com>
+>>
+>> Does this one actually build? 0.4.0 doesn't :(
+>>
+> strange I had 0.4.0 running on an armv5 using angstrom-2010, about 2
+> weeks ago. I just tested it again and 0.4.2 builds for the same target.
 
-`MACHINE=3D"qemuarm" bitbake -k gnutls` finishes without problems too.
+I get this:
 
++ do_compile
++ make
+Waf: Entering directory
+`/OE/angstrom-2008/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/nodejs-0.4.2-r0/node-v0.4.2/build'
+[74/74] cxx_link: build/default/src/node_main_4.o
+build/default/src/node_4.o build/default/src/node_buffer_4.o
+build/default/src/node_javascript_4.o
+build/default/src/node_extensions_4.o
+build/default/src/node_http_parser_4.o build/default/src/node_net_4.o
+build/default/src/node_io_watcher_4.o
+build/default/src/node_constants_4.o build/default/src/node_cares_4.o
+build/default/src/node_events_4.o build/default/src/node_file_4.o
+build/default/src/node_signal_watcher_4.o
+build/default/src/node_stat_watcher_4.o build/default/src/node_timer_4.o
+build/default/src/node_script_4.o build/default/src/node_os_4.o
+build/default/src/node_dtrace_4.o build/default/src/node_stdio_4.o
+build/default/src/node_child_process_4.o
+build/default/src/platform_linux_4.o build/default/src/node_crypto_4.o
+build/default/deps/libeio/eio_1.o
+build/default/deps/http_parser/http_parser_2.o
+build/default/deps/libev/ev_1.o
+build/default/deps/c-ares/ares_strcasecmp_1.o
+build/default/deps/c-ares/ares_free_string_1.o
+build/default/deps/c-ares/ares_options_1.o
+build/default/deps/c-ares/ares_send_1.o
+build/default/deps/c-ares/ares_parse_txt_reply_1.o
+build/default/deps/c-ares/ares_parse_ptr_reply_1.o
+build/default/deps/c-ares/ares_nowarn_1.o
+build/default/deps/c-ares/ares_search_1.o
+build/default/deps/c-ares/ares_gethostbyname_1.o
+build/default/deps/c-ares/ares_getsock_1.o
+build/default/deps/c-ares/ares__timeval_1.o
+build/default/deps/c-ares/inet_ntop_1.o
+build/default/deps/c-ares/ares_parse_a_reply_1.o
+build/default/deps/c-ares/ares_getopt_1.o
+build/default/deps/c-ares/ares__close_sockets_1.o
+build/default/deps/c-ares/ares_expand_string_1.o
+build/default/deps/c-ares/ares_destroy_1.o
+build/default/deps/c-ares/ares_cancel_1.o
+build/default/deps/c-ares/ares_parse_aaaa_reply_1.o
+build/default/deps/c-ares/ares_parse_ns_reply_1.o
+build/default/deps/c-ares/ares_version_1.o
+build/default/deps/c-ares/ares__get_hostent_1.o
+build/default/deps/c-ares/ares_writev_1.o
+build/default/deps/c-ares/ares_expand_name_1.o
+build/default/deps/c-ares/ares_free_hostent_1.o
+build/default/deps/c-ares/ares_parse_mx_reply_1.o
+build/default/deps/c-ares/ares_gethostbyaddr_1.o
+build/default/deps/c-ares/ares_query_1.o
+build/default/deps/c-ares/ares_data_1.o
+build/default/deps/c-ares/ares_init_1.o
+build/default/deps/c-ares/ares_timeout_1.o
+build/default/deps/c-ares/ares_fds_1.o
+build/default/deps/c-ares/inet_net_pton_1.o
+build/default/deps/c-ares/ares_strerror_1.o
+build/default/deps/c-ares/bitncmp_1.o
+build/default/deps/c-ares/ares_getnameinfo_1.o
+build/default/deps/c-ares/ares_library_init_1.o
+build/default/deps/c-ares/ares_mkquery_1.o
+build/default/deps/c-ares/ares_process_1.o
+build/default/deps/c-ares/windows_port_1.o
+build/default/deps/c-ares/ares_parse_srv_reply_1.o
+build/default/deps/c-ares/ares_llist_1.o
+build/default/deps/c-ares/ares__read_line_1.o
+build/default/deps/c-ares/ares_strdup_1.o -> build/default/node
+default/deps/libeio/eio_1.o: In function `eio__sync_file_range':
+/OE/angstrom-2008/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/nodejs-0.4.2-r0/node-v0.4.2/build/../deps/libeio/eio.c:918:
+warning: warning: sync_file_range is not implemented and will always fail
+default/src/node_stdio_4.o: In function `node::OpenPTY(v8::Arguments
+const&)':
 
-Thanks,
+/OE/angstrom-2008/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/nodejs-0.4.2-r0/node-v0.4.2/build/../src/node_stdio.cc:241:
+undefined reference to `openpty'
 
-Paul
+collect2: ld returned 1 exit status
+Waf: Leaving directory
+`/OE/angstrom-2008/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/nodejs-0.4.2-r0/node-v0.4.2/build'
+koen@dominion:/OE/angstrom-2008$
 
---=-RD7DsU8SHhbJx3Mbh9Su
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
+For angstrom/beagleboard
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAk2AkJ4ACgkQPX1aK2wOHVgfXgCeIfe8Upf4VyEIICPsYsY8r4Fw
-JKEAoIO22tNSr7zYQQXrkshFG96KXsgc
-=feRY
+iD8DBQFNgJVnMkyGM64RGpERAtQxAJ9abFsqUaHdSPeeTaZBGs3bgkuGPQCdGzIT
+9PZewAqNEe+yMXrmlWUR79A=
+=0QMk
 -----END PGP SIGNATURE-----
 
---=-RD7DsU8SHhbJx3Mbh9Su--
+
+
