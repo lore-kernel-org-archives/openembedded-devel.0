@@ -1,35 +1,25 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Pzp23-00058Q-GS for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Mar 2011 12:36:51 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Pzogz-0008UL-R5 for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Mar 2011 12:15:05 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Mar 2011 12:15:05 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Mar 2011 12:15:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pzqy9-0000Ua-KR for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Mar 2011 14:40:57 +0100
+Received: from f053032013.adsl.alicedsl.de ([78.53.32.13]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PzqwW-000227-PF for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Mar 2011 13:39:16 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 16 Mar 2011 12:12:27 +0100
-Message-ID: <ilq5ur$a51$2@dough.gmane.org>
-References: <1300272884-24220-1-git-send-email-heinold@inf.fu-berlin.de>
-	<1300272884-24220-5-git-send-email-heinold@inf.fu-berlin.de>
+In-Reply-To: <1300269370.2132.13010.camel@phil-desktop>
+References: <1300264546.3840.9.camel@mattotaupa>
+	<4D80791E.2040803@gmail.com>  <1300265560.3840.10.camel@mattotaupa>
+	<1300269370.2132.13010.camel@phil-desktop>
+Date: Wed, 16 Mar 2011 14:39:15 +0100
+Message-ID: <1300282755.3840.69.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1300272884-24220-5-git-send-email-heinold@inf.fu-berlin.de>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH 4/4] angstrom-jalimo: use cacao-native hg version for javac-native
+X-Mailer: Evolution 2.32.2 
+Subject: Re: minimal-uclibc: gnutls-2.10.4-r11.0: task compile fails with `make[4]: *** [coding.lo] Error 1`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,48 +33,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2011 11:36:51 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 16 Mar 2011 13:40:57 -0000
+X-Groupsio-MsgNum: 30267
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-KNPpZhUTGchdc6dldXhh"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-KNPpZhUTGchdc6dldXhh
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 16-03-11 11:54, Henning Heinold wrote:
-> From: Henning Heinold <h.heinold@tarent.de>
+Am Mittwoch, den 16.03.2011, 09:56 +0000 schrieb Phil Blundell:
+> On Wed, 2011-03-16 at 09:52 +0100, Paul Menzel wrote:
+> > I am sorry. But I could not find an error message anywhere in
+> > `log.do_compile`. Please find the log file attached.
+>=20
+> One of libtool's less endearing features is that it runs the compiler
+> for shared objects with errors directed to /dev/null.  I guess this is
+> to avoid getting repeated warnings for objects that are compiled both
+> shared and nonshared, but it does make it more tedious to debug this
+> kind of crash.
 
-Acked-by: Koen Kooi <koen@dominion.thruhere.net>
+Thank you for the explanation and the following advise.
 
-> 
-> * build java packages is more stable than with jamvm
-> ---
->  conf/distro/include/angstrom-jalimo.conf |    5 ++---
->  1 files changed, 2 insertions(+), 3 deletions(-)
-> 
-> diff --git a/conf/distro/include/angstrom-jalimo.conf b/conf/distro/include/angstrom-jalimo.conf
-> index f95c7c9..3ab8e2d 100644
-> --- a/conf/distro/include/angstrom-jalimo.conf
-> +++ b/conf/distro/include/angstrom-jalimo.conf
-> @@ -5,9 +5,8 @@ PREFERRED_VERSION_jamvm-initial = "1.4.5"
->  PREFERRED_VERSION_classpath-initial = "0.93"
->  
->  # Native VM
-> -PREFERRED_PROVIDER_virtual/java-native ?= "jamvm-native"
-> -PREFERRED_VERSION_jamvm-native = "1.5.3"
-> -#PREFERRED_VERSION_cacao-native = "0.99.3"
-> +PREFERRED_PROVIDER_virtual/java-native ?= "cacao-native"
-> +SRCREV_pn-cacao-native ?= "c7bf150bfa46"
->  PREFERRED_VERSION_classpath-native = "0.98"
->  
->  # Native compiler settings
+> Anyway, the line in question is this one from your log file:
+>=20
+> arm-oe-linux-uclibceabi-libtool: compile:  arm-oe-linux-uclibceabi-gcc -m=
+arch=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb=
+-interwork -mno-thumb --sysroot=3D/oe/build-minimal-uclibc/minimal-uclibc-d=
+ev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I. -I.. -DASN1_BUIL=
+DING -I./../gl -I./../gl -I./.. -fexpensive-optimizations -fomit-frame-poin=
+ter -frename-registers -Os -pipe -g -MT coding.lo -MD -MP -MF .deps/coding.=
+Tpo -c coding.c -o coding.o >/dev/null 2>&1
+>=20
+> If you run that compile command manually with the ">/dev/null 2>&1" bit
+> removed then you should be able to see the errors.  Given that it's
+> apparently happening only with -fPIC enabled I would suspect that it's
+> an ice of some kind, rather than being uclibc's fault directly, but once
+> we have the error message it should be fairly obvious what's gone wrong.
+
+        arm-oe-linux-uclibceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mf=
+pu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=3D/oe=
+/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceab=
+i -DHAVE_CONFIG_H -I. -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./.. -fexp=
+ensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe -g -=
+MT coding.lo -MD -MP -MF .deps/coding.Tpo -c coding.c -o coding.o
+        coding.c: In function 'asn1_length_der':
+        coding.c:101:1: internal compiler error: in dwarf2out_frame_debug_e=
+xpr, at dwarf2out.c:2221
+        Please submit a full bug report,
+        with preprocessed source if appropriate.
+        See <http://gcc.gnu.org/bugs.html> for instructions.
+        {standard input}: Assembler messages:
+
+I am wondering if the latest GCC 4.5 changes are causing this, but as
+always this is just an uneducated guess.
+
+        commit 21ce5641f8c993aefeefd8febd210f41dbf1d442
+        Author: Khem Raj <raj.khem@gmail.com>
+        Date:   Fri Mar 11 15:47:23 2011 -0800
+       =20
+            gcc-4.5: Fix ICE on i586
+           =20
+            Upgrade to latest svnrev
+            Get new linaro patches
+            Delete patches that are not applied
+           =20
+            Signed-off-by: Khem Raj <raj.khem@gmail.com>
+            Tested-by: Yuri Bushmelev <jay4mail@gmail.com>
+
+Searching for the error message just returned a bug report for GCC 3.4 [1].
+
+
+Thanks,
+
+Paul
+
+
+[1] http://gcc.gnu.org/bugzilla/show_bug.cgi?id=3D10695
+
+--=-KNPpZhUTGchdc6dldXhh
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iD8DBQFNgJsbMkyGM64RGpERAqEPAJ4wWeAh+XbjrGki1mDgyhmxihahzQCgnFEW
-UZ2W3dglmx0A+Bf+82TIUcM=
-=3DHO
+iEYEABECAAYFAk2AvYMACgkQPX1aK2wOHVj3wgCgi+w/FG6PiaGKpKfc2TvsPoU7
+8wMAnjAwn5JkOTwxwRQ6/uTFaZRiB/e9
+=4Tah
 -----END PGP SIGNATURE-----
 
-
-
+--=-KNPpZhUTGchdc6dldXhh--
