@@ -1,38 +1,40 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from bear.ext.ti.com ([192.94.94.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chasemaupin03@gmail.com>) id 1Pzvsu-0000vL-Jo
+	(envelope-from <chase.maupin@ti.com>) id 1Pzvvb-0000y6-Eb
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Mar 2011 19:55:52 +0100
-Received: by ywg8 with SMTP id 8so788748ywg.6
+	Wed, 16 Mar 2011 19:58:39 +0100
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id p2GIut5X007838
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Mar 2011 11:54:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=Ts9y7wFzzQLpgnvRQ+At1asGz4PzcmE2eVqcFxuWP24=;
-	b=dcjDSV/xPP2r2bDCByEGMJAjJpQrANfSDIBHHuo8cY7R4/GUwqNKo2GdL3Ly1osDfu
-	l+Xjs7OXnN7hMl5jQwMDgv8CE7JTUr6cOhgSfGMLUwz0Of7SXvQqYoIAqvBeLszW8K7K
-	fNM9Z/1m3mZVlepRvp7tA3iU4L5V7m3ZwaNPU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=DhJHOyTAdxsq0GHEGttWI1WWXkHEQdDreX+7bjxmaIu5eazM6n6UsVC1lCQNp1DpH/
-	hzonzSl56JNexG7xGmYWkMXIpZmR4X3ibWvROn4huAK8Cu3TNsEWMpHIF1L3bm04kKwo
-	+aUpIHyz2rXTnNdsKeyUPaIDyQYhohg4avy2Y=
-Received: by 10.236.191.231 with SMTP id g67mr443149yhn.67.1300301648366;
-	Wed, 16 Mar 2011 11:54:08 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id u29sm105866yhn.71.2011.03.16.11.54.07
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 16 Mar 2011 11:54:07 -0700 (PDT)
-From: Chase Maupin <chasemaupin03@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Mar 2011 13:54:02 -0500
-Message-Id: <1300301642-18461-2-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1300301642-18461-1-git-send-email-Chase.Maupin@ti.com>
-References: <1300301642-18461-1-git-send-email-Chase.Maupin@ti.com>
-Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 2/2][2011.03-maintenance] matrix-gui: add support for dm386-evm machine
+	Wed, 16 Mar 2011 13:56:55 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id p2GIutB5016593
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Mar 2011 13:56:55 -0500 (CDT)
+Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p2GIutxD025695
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Mar 2011 13:56:55 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
+	([157.170.170.8]) with mapi; Wed, 16 Mar 2011 13:56:54 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 16 Mar 2011 13:56:53 -0500
+Thread-Topic: [oe] [PATCH][2011.003-maintenance] ti-pru-sw-example: fix
+	building with new toolchain sysroot
+Thread-Index: AcvkC5JfgzRXLSNfQ6SNtPH5HpW63QAAChYg
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080340AC3EB6@dlee06.ent.ti.com>
+References: <1300296140-7275-1-git-send-email-Chase.Maupin@ti.com>
+	<ilqv4v$66u$1@dough.gmane.org>
+In-Reply-To: <ilqv4v$66u$1@dough.gmane.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+Subject: Re: [PATCH][2011.003-maintenance] ti-pru-sw-example: fix building with new toolchain sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,77 +48,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2011 18:55:52 -0000
+X-List-Received-Date: Wed, 16 Mar 2011 18:58:39 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-* Add support for the dm368-evm machine type
-* Bump the PRs
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
----
- recipes/ti/matrix-gui-common.inc |    5 +++--
- recipes/ti/matrix-gui-e.inc      |    5 +++--
- recipes/ti/matrix-gui.inc        |    5 +++--
- 3 files changed, 9 insertions(+), 6 deletions(-)
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Koen Kooi
+> Sent: Wednesday, March 16, 2011 1:22 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [PATCH][2011.003-maintenance] ti-pru-sw-example: fix
+> building with new toolchain sysroot
+>=20
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> On 16-03-11 18:22, Chase Maupin wrote:
+> > * Patch taken from Arago overlay where it was added by
+> >   Denys Dmytriyenko
+> > * PR incremented by two to align recipe PR values between Arago
+> >   and OE.
+> >
+> > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+>=20
+> NAK, this hasn't been thru .dev yet.
 
-diff --git a/recipes/ti/matrix-gui-common.inc b/recipes/ti/matrix-gui-common.inc
-index c0edbfd..486cb8d 100644
---- a/recipes/ti/matrix-gui-common.inc
-+++ b/recipes/ti/matrix-gui-common.inc
-@@ -4,11 +4,12 @@ LICENSE = "BSD"
- SECTION = "multimedia"
- PRIORITY = "optional"
- 
--INC_PR = "r7"
-+INC_PR = "r8"
- 
- COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x)"
- 
--PLATFORM_dm365 = "dm365"
-+PLATFORM_dm365-evm = "dm365"
-+PLATFORM_dm368-evm = "dm368"
- PLATFORM_omapl138 = "omapl138"
- PLATFORM_omap3evm = "omap3530"
- PLATFORM_dm37x-evm = "dm3730"
-diff --git a/recipes/ti/matrix-gui-e.inc b/recipes/ti/matrix-gui-e.inc
-index ba8012c..e19b5b9 100644
---- a/recipes/ti/matrix-gui-e.inc
-+++ b/recipes/ti/matrix-gui-e.inc
-@@ -4,11 +4,12 @@ LICENSE = "BSD"
- SECTION = "multimedia"
- PRIORITY = "optional"
- 
--INC_PR = "r21"
-+INC_PR = "r22"
- 
- COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x)"
- 
--PLATFORM_dm365 = "dm365"
-+PLATFORM_dm365-evm = "dm365"
-+PLATFORM_dm368-evm = "dm368"
- PLATFORM_omapl138 = "omapl138"
- PLATFORM_omap3evm = "omap3530"
- PLATFORM_dm37x-evm = "dm3730"
-diff --git a/recipes/ti/matrix-gui.inc b/recipes/ti/matrix-gui.inc
-index 82ec6ab..240e695 100644
---- a/recipes/ti/matrix-gui.inc
-+++ b/recipes/ti/matrix-gui.inc
-@@ -4,11 +4,12 @@ LICENSE = "BSD"
- SECTION = "multimedia"
- PRIORITY = "optional"
- 
--INC_PR = "r19"
-+INC_PR = "r20"
- 
- COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x)"
- 
--PLATFORM_dm365 = "dm365"
-+PLATFORM_dm365-evm = "dm365"
-+PLATFORM_dm368-evm = "dm368"
- PLATFORM_omapl138 = "omapl138"
- PLATFORM_omap3evm = "omap3530"
- PLATFORM_dm37x-evm = "dm3730"
--- 
-1.7.0.4
+Koen,
 
+OK, so I think this answers my question about whether to submit to .dev, oe=
+-core, or what before the maintenance branch.  I'll submit all my patches t=
+o .dev shortly.
+
+Chase
+
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>=20
+> iD8DBQFNgP/fMkyGM64RGpERAl6xAJ45EJRtCFR9OXVfx47vHziPgljS8ACgnYLG
+> F8X61AnjZTX5/ctbDUvuhMI=3D
+> =3D9ZrC
+> -----END PGP SIGNATURE-----
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
