@@ -1,43 +1,43 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from na3sys009aog102.obsmtp.com ([74.125.149.69])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Pzv2N-0007k7-5r
+	(envelope-from <bengardiner@nanometrics.ca>) id 1Pzv8z-0008UL-Jz
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Mar 2011 19:01:36 +0100
-Received: by pvc30 with SMTP id 30so293438pvc.6
+	Wed, 16 Mar 2011 19:08:35 +0100
+Received: from source ([209.85.214.46]) (using TLSv1) by
+	na3sys009aob102.postini.com ([74.125.148.12]) with SMTP
+	ID DSNKTYD8LwBC2LeTPeIVaHpDNsZRfDMbD3at@postini.com;
+	Wed, 16 Mar 2011 11:06:44 PDT
+Received: by mail-bw0-f46.google.com with SMTP id 15so1768786bwz.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Mar 2011 10:59:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=Q+Sm+CS2JmMtQ+Ff/YAOUunc6q0nRJ7EHqj2dQ3pOlU=;
-	b=hVCIVJew1zWLF5n++0ujSSO4149bAPYR5y6Uiu7U3tJy5Ltea9TiLkKezJEvvpcvPc
-	8x/NRIIlRgCGmeexFqcjjpb/3NuvTVlYcFUG08TaH0diaAbgEQEuJPVV4TUzpRHhCWNG
-	1B/Gd3v0+ewpWwgOihkbNH7+CPi0GRlGRjQZQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=EbMdy1ToqSG5+QxYakxm8gUGpxEWiQPRrxu7OATpTTGBeJUxxwau9MV2lNexzqaTF6
-	a8d3UmIXM8wZCnP5sykCSwJ5h0R9bHZtVjL2U1WsBwFHFT39efgawkDCU7LzfeKIDoP6
-	Oia/S33nUcOenfdoYascLCPVn748QFreF/f1g=
-Received: by 10.143.24.39 with SMTP id b39mr155862wfj.341.1300298390636;
-	Wed, 16 Mar 2011 10:59:50 -0700 (PDT)
-Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id n4sm1434544wfl.2.2011.03.16.10.59.47
-	(version=SSLv3 cipher=OTHER); Wed, 16 Mar 2011 10:59:48 -0700 (PDT)
-Message-ID: <4D80FA85.7030903@gmail.com>
-Date: Wed, 16 Mar 2011 10:59:33 -0700
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
-	rv:1.9.2.15) Gecko/20110303 Thunderbird/3.1.9
+	Wed, 16 Mar 2011 11:06:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=nanometrics.ca; s=google;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=7BbdnwDFxQHsxIHQBfiaXhzUo3pJ6nktOXb4lVAe1pA=;
+	b=aTRuv4BJmhnAndpqJsXSVR3BWly+CXC9qaN1RQSgRD1uHkJmG+8d65+p70BSjdUjxq
+	3Ck7A+SixUqil9h5rHUYeWiUM5yR/cnrxlbCCw5bz4V0t+MDVgFwNRIjYdp8+1vaHOZa
+	gruvNe4jHrrANhs4Rq/d18iNxH10Ah4N9PbnQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=nanometrics.ca; s=google;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	b=ixa8LjJXCzI1euCbXwgvzbkHm6DfPpzaaHsd7v6ccTg3zpUfYU27UgHkWX4o/ajxwB
+	yR9UOqXQzEmUrtZ7pEPtwwWl5n2iqWVmDcqeTaQX2XzfBLu8RgbM8FsAw08/FBwTnXOB
+	rgS10wx59KLOK2bynxKjFmUQMVQVsNH6wgdwU=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1300264546.3840.9.camel@mattotaupa>	<4D80791E.2040803@gmail.com>
-	<1300265560.3840.10.camel@mattotaupa>	<1300269370.2132.13010.camel@phil-desktop>	<1300282755.3840.69.camel@mattotaupa>	<1300284412.2132.13266.camel@phil-desktop>
-	<1300287990.3840.85.camel@mattotaupa>
-In-Reply-To: <1300287990.3840.85.camel@mattotaupa>
-Subject: Re: minimal-uclibc: gnutls-2.10.4-r11.0: task compile fails with `make[4]: *** [coding.lo] Error 1`
+Received: by 10.204.81.224 with SMTP id y32mr100235bkk.152.1300289148067; Wed,
+	16 Mar 2011 08:25:48 -0700 (PDT)
+Received: by 10.204.53.130 with HTTP; Wed, 16 Mar 2011 08:25:48 -0700 (PDT)
+In-Reply-To: <20110315200131.GA3042@denix.org>
+References: <1300212835-8779-1-git-send-email-bengardiner@nanometrics.ca>
+	<20110315200131.GA3042@denix.org>
+Date: Wed, 16 Mar 2011 11:25:48 -0400
+Message-ID: <AANLkTikS9S8OdO3DqBzhErVMiTxHruk2Mo17rNqK9aad@mail.gmail.com>
+From: Ben Gardiner <bengardiner@nanometrics.ca>
+To: Denys Dmytriyenko <denis@denix.org>
+Cc: Tom Rini <trini@embeddedalley.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/2] image.bbclass: add link to .rootfs.<type> or .<type>.img
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,63 +51,191 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2011 18:01:37 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 16 Mar 2011 18:08:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 3/16/2011 8:06 AM, Paul Menzel wrote:
-> Am Mittwoch, den 16.03.2011, 14:06 +0000 schrieb Phil Blundell:
->> On Wed, 2011-03-16 at 14:39 +0100, Paul Menzel wrote:
->>>          arm-oe-linux-uclibceabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb --sysroot=/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I. -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./.. -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe -g -MT coding.lo -MD -MP -MF .deps/coding.Tpo -c coding.c -o coding.o
->>>          coding.c: In function 'asn1_length_der':
->>>          coding.c:101:1: internal compiler error: in dwarf2out_frame_debug_expr, at dwarf2out.c:2221
->>>          Please submit a full bug report,
->>>          with preprocessed source if appropriate.
->>>          See<http://gcc.gnu.org/bugs.html>  for instructions.
->>>          {standard input}: Assembler messages:
->>
->> > From the looks of the error, you could probably work around the crash by
->> compiling without -g.
->
-> Thanks, that worked.
->
->> Obviously you'd lose debuggability but that might or might not be a
->> problem for your particular use case.
->
-> Well, I am just build testing.
->
->>> I am wondering if the latest GCC 4.5 changes are causing this, but as
->>> always this is just an uneducated guess.
->>
->> Could be.  Or it's possible that the bug has been latent for a long time
->> and has just been tickled by a recent change to CFLAGS.  I think the
->> inclusion of -g in the default opts is a relatively recent innovation.
->
-> I think it worked before last Friday, i. e., before the GCC 4.5 updates.
+Thanks, Denys for the Ack and Tom for picking up the patches.
 
-Yes and the fix was to address exact same problem but reported in 
-another recipe. So it fixed things but partially. Let me try to poke 
-around a bit
+Now that they have hit mainline, I would like to request that they get
+into arago-oe-dev. From the 2010.03-maintenance announcement I'm
+guessing that means that they need to be backported to
+2010.03-maintenance branch first.
 
->
->> You could bisect the recent changes if you want but, unless you want to
->> debug this for yourself, the best way to proceed is probably to follow
->> the directions in the error message and submit a bug report to upstream
->> GCC.
->
-> I will see, if or when I will get to that and report back.
->
->
-> Thanks,
->
-> Paul
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+I've cherry-picked the following commits (some with fixups) to get a
+successful build of hello-worldimage with externa-toolchain and
+Build Configuration:
+BB_VERSION        = "1.10.2"
+METADATA_BRANCH   =
+"upstream/oe/releases/2011.03-maintenance/features/BenGardiner/backport-ubifs-links"
+METADATA_REVISION = "64d4245"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "da850-omapl138-evm"
+DISTRO            = "angstrom"
+DISTRO_VERSION    = "2011.03"
+TARGET_FPU        = "soft"
 
+commit 64d42452395f0c02d355516943c8493dc770ade2Author: Denys
+Dmytriyenko <denys@ti.com>
+Date:   Thu Mar 3 13:37:19 2011 -0500
+
+    toolchain-external.conf: set the default provider for gdbserver
+
+    Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+    (cherry picked from commit df59f77a2eb37d9807c6d9167488110e92601d7b)
+
+    Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+
+ conf/distro/include/toolchain-external.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+commit 2641cb6d7e2db1dcd2608bae7d84909915b1f023
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Mar 3 13:27:26 2011 -0500
+
+    external-toolchain-csl: handle packaging of gdbserver based on
+PREFERRED_PROVIDER
+
+    Allow packaging independent copy of specific version of gdbserver with
+    external-toolchain-csl by setting PREFERRED_PROVIDER. E.g. for GPLv2
+    gdbserver, add these lines to your distro/local.conf:
+
+    PREFERRED_PROVIDER_gdbserver = "gdbserver"
+    PREFERRED_VERSION_gdbserver = "6.6"
+
+    Thanks to Ben Gardiner for providing valuable feedback.
+
+    Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+    (cherry picked from commit a47c14c83cf97a2c90ee50ec7212ec33bdafb58b)
+
+    Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+
+ recipes/meta/external-toolchain-csl.bb |   11 ++++++-----
+ 1 files changed, 6 insertions(+), 5 deletions(-)
+
+commit 1775a7d2fdc6b7cc242b2b4e9f0a6516edf0ad83
+Author: Tom Rini <tom_rini@mentor.com>
+Date:   Wed Mar 2 11:39:48 2011 -0700
+
+    external-toolchain-csl: Drop do_stage, add gdbserver
+
+    Based on work from Noor Ahsan, we merge the important part of do_stage
+    into do_install and then set NATIVE_INSTALL_WORKS.  We also add a function
+    for getting the gdb version for packaging up gdbserver and ship that.
+
+    Signed-off-by: Tom Rini <tom_rini@mentor.com>
+    (cherry picked from commit 207971b244ee6958dab1fb41d6f3cd94ac416b73)
+
+    Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+
+ recipes/meta/external-toolchain-csl.bb |   39 +++++++++++++++++--------------
+ 1 files changed, 21 insertions(+), 18 deletions(-)
+
+commit a96c10d6cff4f8298c43eccd9139dd20d41a4cc8
+Author: Ben Gardiner <bengardiner@nanometrics.ca>
+Date:   Wed Mar 2 10:05:14 2011 -0500
+
+    external-toolchain-csl: allow linux-libc-headers
+
+    If PREFERRED_PROVIDER_linux-libc-headers is defined as anything
+    other than external-toolchain-csl then don't PROVIDE, install or
+    stage the linux headers packaged with the CSL toolchain.
+
+    (Updated by Tom Rini to not modify local.conf.sample yet and to use
+    cp + rm -rf rather than rsync)
+
+    Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+    Tested-by: Andrea Galbusera <gizero@gmail.com>
+    Signed-off-by: Tom Rini <tom_rini@mentor.com>
+    (cherry picked from commit 3116ad58e507c6e5dc7b7249f521c395db586b9f)
+
+    Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+
+ recipes/meta/external-toolchain-csl.bb |    9 ++++++---
+ 1 files changed, 6 insertions(+), 3 deletions(-)
+
+commit 925e89153270dc162957903bc793ecbfdbf6ec05
+Author: Ben Gardiner <bengardiner@nanometrics.ca>
+Date:   Wed Mar 2 10:05:13 2011 -0500
+
+    external-toolchain: allow override of linux-libc-headers provider
+
+    only set PREFERRED_PROVIDER_linux-libc-headers if it is not
+    already assigned a value.
+
+    Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+    Tested-by: Andrea Galbusera <gizero@gmail.com>
+    Signed-off-by: Tom Rini <tom_rini@mentor.com>
+    (cherry picked from commit 829ea5110bc82f71a225f168bcb6a9a327b1b5c8)
+
+    Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+
+ conf/distro/include/toolchain-external.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+commit 5156e672c781e8a44e02f9eb4351cb8c476c3a60
+Author: Ben Gardiner <bengardiner@nanometrics.ca>
+Date:   Tue Mar 15 14:13:55 2011 -0400
+
+    bitbake.conf: use .ubifs.img extension in IMAGE_CMD_ubi
+
+    The current IMAGE_CMD_ubi creates an interim image with a .rootfs.ubifs
+    extension.
+
+    The ubifs image created is not considered a valid rootfs without a UBI
+    container.
+
+    Change the filename of the iterim ubifs image used by IMAGE_CMD_ubi to
+    .ubifs.img to match the IMAGE_CMD_ubifs command.
+
+    Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+    Acked-by: Denys Dmytriyenko <denys@ti.com>
+    Signed-off-by: Tom Rini <tom_rini@mentor.com>
+    (backported from commit 7308e68fc26cdbffa08d311a2319c8d1c3b2805f -- some
+    changes were needed since commit 312b42bcf2cc9b11266ba497ade68e8ddabb3007
+    bitbake.conf: add XZ_INTEGRITY_CHECK and LZMA_COMPRESSION_LEVEL variables
+    has not been applied to 2011.03-maintenance)
+
+    Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+
+ conf/bitbake.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+commit 08cb84d24fdd8e9d40a5db836b98a3706187c7c6
+Author: Ben Gardiner <bengardiner@nanometrics.ca>
+Date:   Tue Mar 15 14:13:54 2011 -0400
+
+    image.bbclass: add link to .rootfs.<type> or .<type>.img
+
+    The current image link-creation code will unconditionaly create a link
+    from .<type> pointing to the .rootfs.<type> output.
+
+    This is not compatible with the UBIFS images produced which have
+    .<type>.img extension since they are not considered to be valid rootfs
+    images when they are not included in a UBI container.
+
+    Check for existence of the link target .rootfs.<type> before creating the
+    link and fallback to a check for the .<type>.img target after that.
+
+    Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+    Acked-by: Denys Dmytriyenko <denys@ti.com>
+    Signed-off-by: Tom Rini <tom_rini@mentor.com>
+    (cherry picked from commit cfde49e8d0f1cf09d589910f1a342849db148519)
+
+    Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+
+ classes/image.bbclass |    6 +++++-
+ 1 files changed, 5 insertions(+), 1 deletions(-)
+
+It seems a little strange to me to re-post the patches to the list; so
+I'm asking first. Please let me know if I'm on the right track for the
+procedure.
+
+Best Regards,
+Ben Gardiner
+
+---
+Nanometrics Inc.
+http://www.nanometrics.ca
 
 
