@@ -1,25 +1,20 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from portal.beam.ltd.uk ([62.49.82.227] helo=mailgate.beam.ltd.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1PzrLo-0001fn-ET
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Mar 2011 15:05:24 +0100
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1PzrK0-0002Wd-SK
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Mar 2011 15:03:33 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1300282755.3840.69.camel@mattotaupa>
-References: <1300264546.3840.9.camel@mattotaupa>
-	<4D80791E.2040803@gmail.com>  <1300265560.3840.10.camel@mattotaupa>
-	<1300269370.2132.13010.camel@phil-desktop>
-	<1300282755.3840.69.camel@mattotaupa>
-Date: Wed, 16 Mar 2011 14:06:52 +0000
-Message-ID: <1300284412.2132.13266.camel@phil-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: minimal-uclibc: gnutls-2.10.4-r11.0: task compile fails with `make[4]: *** [coding.lo] Error 1`
+	(envelope-from <terry@beam.ltd.uk>) id 1PzrNW-0001gZ-O4
+	for openembedded-devel@linuxtogo.org; Wed, 16 Mar 2011 15:07:10 +0100
+Received: from beam.beamnet (beam.beamnet [127.0.0.1])
+	by mailgate.beam.ltd.uk (8.14.4/8.14.4) with ESMTP id p2GE5RTh003677
+	for <openembedded-devel@linuxtogo.org>; Wed, 16 Mar 2011 14:05:27 GMT
+Message-ID: <4D80C3A7.9030704@beam.ltd.uk>
+Date: Wed, 16 Mar 2011 14:05:27 +0000
+From: Terry Barnaby <terry@beam.ltd.uk>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Thunderbird/3.1.7
+MIME-Version: 1.0
+To: openembedded-devel@linuxtogo.org
+X-Enigmail-Version: 1.1.1
+Subject: Re: [Openembedded-users] Problem with building angstrom-2008.1 for at91sam9m10g45ek
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,35 +28,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2011 14:05:24 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 16 Mar 2011 14:07:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2011-03-16 at 14:39 +0100, Paul Menzel wrote:
->         arm-oe-linux-uclibceabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb --sysroot=/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I. -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./.. -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe -g -MT coding.lo -MD -MP -MF .deps/coding.Tpo -c coding.c -o coding.o
->         coding.c: In function 'asn1_length_der':
->         coding.c:101:1: internal compiler error: in dwarf2out_frame_debug_expr, at dwarf2out.c:2221
->         Please submit a full bug report,
->         with preprocessed source if appropriate.
->         See <http://gcc.gnu.org/bugs.html> for instructions.
->         {standard input}: Assembler messages:
+-------- Original Message --------
+Subject: Re: [Openembedded-users] Problem with building angstrom-2008.1 for
+at91sam9m10g45ek
+Date: Wed, 16 Mar 2011 00:45:30 -0700
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-users@linuxtogo.org
 
-From the looks of the error, you could probably work around the crash by
-compiling without -g.  Obviously you'd lose debuggability but that might
-or might not be a problem for your particular use case.
+On 3/16/2011 12:18 AM, Terry Barnaby wrote:
+> On 03/15/2011 02:23 PM, Terry Barnaby wrote:
+>> On 03/15/2011 01:03 PM, Ludovic Desroches wrote:
+>>> Hello,
+>>>
+>>> On 3/15/2011 1:36 PM, Terry Barnaby wrote:
+>>>> Hi,
+>>>>
+>>>> I am trying to build angstrom-2008.1 for a at91sam9m10g45ek but am
+>>>> having
+>>>> an error.
+>>>>
+>>>> NOTE: Applying patch 'tclprivate.diff'
+>>>> (openembedded/recipes/tcltk/tcl-8.5.8/tclprivate.diff)
+>>>> NOTE: Applying patch 'mips-tclstrtod.patch'
+>>>> (openembedded/recipes/tcltk/tcl-8.5.8/mips-tclstrtod.patch)
+>>>> ERROR: Task 693
+>>>> (virtual:native:/scratch/OpenEmbedded/openembedded/recipes/tcltk/tcl_8.5.8.bb,
+>>>>
+>>>> do_patch) failed with exit code 1
+>>>> FATAL: Execution of 'quilt
+>>>> --quiltrc=/scratch/OpenEmbedded/tmp/sysroots/i686-linux/usr/bin/quiltrc
+>>>> push'
+>>>> failed with exit code 1:
+>>>> Applying patch mips-tclstrtod.patch
+>>>> patch: **** rejecting target file name with ".." component:
+>>>> ../generic/tclStrToD.c
+>>>> Patch mips-tclstrtod.patch does not apply (enforce with -f)
+>>>
+>>> The problem seems to be only with the last patch applied onto tcl
+>>> sources. Since
+>>> it concerns only MIPS architecture, you can skip it for your ARM chip by
+>>> removing into tcl_8.5.8.bb the line
+>>> file://mips-tclstrtod.patch;striplevel=0 \
+>>>
+>>> It doesn't solve the problem but then you could continue. You have a
+>>> look on the
+>>> sources to see if the patches can be applied, maybe the problem is
+>>> the patch level.
+>>>
+>>>
+>>> Regards
+>>>
+>>> Ludovic Desroches
+>>>
+>>>
+>>> _______________________________________________
+>>> Openembedded-users mailing list
+>>> Openembedded-users@linuxtogo.org
+>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-users
+>> Hi Ludovic,
+>>
+>> Thanks, that has allowed the build to continue, I will see what happens.
+>>
+>> Cheers
+>>
+>>
+>> Terry
+>>
+>> _______________________________________________
+>> Openembedded-users mailing list
+>> Openembedded-users@linuxtogo.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-users
+>
+> Should I report this as an OpenEmbedded bug somewhere ?
 
-> I am wondering if the latest GCC 4.5 changes are causing this, but as
-> always this is just an uneducated guess.
+please forward this to openembedded-devel@lists.openembedded.org
 
-Could be.  Or it's possible that the bug has been latent for a long time
-and has just been tickled by a recent change to CFLAGS.  I think the
-inclusion of -g in the default opts is a relatively recent innovation.
-You could bisect the recent changes if you want but, unless you want to
-debug this for yourself, the best way to proceed is probably to follow
-the directions in the error message and submit a bug report to upstream
-GCC.
-
-p.
-
+_______________________________________________
+Openembedded-users mailing list
+Openembedded-users@linuxtogo.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-users
 
 
