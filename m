@@ -1,20 +1,23 @@
 Received: from portal.beam.ltd.uk ([62.49.82.227] helo=mailgate.beam.ltd.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <terry@beam.ltd.uk>) id 1PzrNW-0001gZ-O4
-	for openembedded-devel@linuxtogo.org; Wed, 16 Mar 2011 15:07:10 +0100
+	(envelope-from <terry@beam.ltd.uk>) id 1PzruB-0003g9-RB
+	for openembedded-devel@linuxtogo.org; Wed, 16 Mar 2011 15:40:56 +0100
 Received: from beam.beamnet (beam.beamnet [127.0.0.1])
-	by mailgate.beam.ltd.uk (8.14.4/8.14.4) with ESMTP id p2GE5RTh003677
-	for <openembedded-devel@linuxtogo.org>; Wed, 16 Mar 2011 14:05:27 GMT
-Message-ID: <4D80C3A7.9030704@beam.ltd.uk>
-Date: Wed, 16 Mar 2011 14:05:27 +0000
+	by mailgate.beam.ltd.uk (8.14.4/8.14.4) with ESMTP id p2GE3LHo003569;
+	Wed, 16 Mar 2011 14:03:22 GMT
+Message-ID: <4D80C329.9020309@beam.ltd.uk>
+Date: Wed, 16 Mar 2011 14:03:21 +0000
 From: Terry Barnaby <terry@beam.ltd.uk>
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
 	Thunderbird/3.1.7
 MIME-Version: 1.0
-To: openembedded-devel@linuxtogo.org
+To: Ludovic Desroches <ludovic.desroches@atmel.com>
+References: <4D80653A.7010804@beam.ltd.uk> <4D80772A.8080207@atmel.com>
+In-Reply-To: <4D80772A.8080207@atmel.com>
 X-Enigmail-Version: 1.1.1
-Subject: Re: [Openembedded-users] Problem with building angstrom-2008.1 for at91sam9m10g45ek
+Cc: openembedded-devel@linuxtogo.org, openembedded-users@linuxtogo.org
+Subject: Re: [Openembedded-users] Problem with patch version 2.6.1-7 and	after
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,88 +31,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2011 14:07:11 -0000
+X-List-Received-Date: Wed, 16 Mar 2011 14:40:56 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
--------- Original Message --------
-Subject: Re: [Openembedded-users] Problem with building angstrom-2008.1 for
-at91sam9m10g45ek
-Date: Wed, 16 Mar 2011 00:45:30 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-users@linuxtogo.org
+On 03/16/2011 08:39 AM, Ludovic Desroches wrote:
+> Hello,
+> 
+> On 3/16/2011 8:22 AM, Terry Barnaby wrote:
+>> Hi,
+>>
+>> I am getting the error:
+>>
+>> NOTE: Applying patch 'arm-thumb-mutex_db5.patch'
+>> (openembedded/recipes/db/db-5.1.19/arm-thumb-mutex_db5.patch)
+>> ERROR: Execution of 'quilt
+>> --quiltrc=/scratch/OpenEmbeddedNew/tmp/sysroots/i686-linux/usr/bin/quiltrc
+>> push' failed with exit code 1:
+>> Applying patch arm-thumb-mutex_db5.patch
+>> patch: **** rejecting target file name with ".." component:
+>> ../src/dbinc/mutex_int.h
+>> Patch arm-thumb-mutex_db5.patch does not apply (enforce with -f)
+>>
+>> ERROR: Function 'patch_do_patch' failed
+> 
+> I have no problem to apply the patch manually or running bitbake db-5.1.19. I am
+> using the latest bitbake release and the 2011.03 oe release.
+> 
+>>
+>> This appears to be due to a security enhancement made to the patch utility
+>> relatively recently. 
+> I have updated my patch utility we the latest release, not version on the alpha
+> ftp :
+> 
+> $ bitbake db-5.1.19
+> ...
+> Build Configuration:
+> BB_VERSION        = "1.12.0"
+> METADATA_BRANCH   = "2011.03_atmel"
+> METADATA_REVISION = "8c6a371"
+> TARGET_ARCH       = "arm"
+> TARGET_OS         = "linux-gnueabi"
+> MACHINE           = "at91sam9m10g45"
+> DISTRO            = "angstrom"
+> DISTRO_VERSION    = "v20110316"
+> TARGET_FPU        = "soft"
+> 
+> NOTE: Resolving any missing task queue dependencies
+> NOTE: Preparing runqueue
+> NOTE: Executing RunQueue Tasks
+> ...
+> NOTE: package db-5.1.19-r1: task do_patch: Started
+> NOTE: package db-5.1.19-r1: task do_patch: Succeeded
+> NOTE: Running task 721 of 732 (ID: 11,
+> /local/users/ldesroch/workspace/openembedded/openembedded/recipes/db/db_5.1.19.bb,
+> do_configure)
+> ...
+> 
+> ldesroch@RFOLXTS02:openembedded (master)$ patch --version
+> patch 2.6.1
+> 
+>> Is there a known clean way of fixing this and where
+>> should I report the bug ?
+>>
+> You should use the openembedded-devel list. I think you will have more answers.
+> 
+> 
+> Regards
+> 
+> Ludovic Desroches
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-users mailing list
+> Openembedded-users@linuxtogo.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-users
+Hi,
 
-On 3/16/2011 12:18 AM, Terry Barnaby wrote:
-> On 03/15/2011 02:23 PM, Terry Barnaby wrote:
->> On 03/15/2011 01:03 PM, Ludovic Desroches wrote:
->>> Hello,
->>>
->>> On 3/15/2011 1:36 PM, Terry Barnaby wrote:
->>>> Hi,
->>>>
->>>> I am trying to build angstrom-2008.1 for a at91sam9m10g45ek but am
->>>> having
->>>> an error.
->>>>
->>>> NOTE: Applying patch 'tclprivate.diff'
->>>> (openembedded/recipes/tcltk/tcl-8.5.8/tclprivate.diff)
->>>> NOTE: Applying patch 'mips-tclstrtod.patch'
->>>> (openembedded/recipes/tcltk/tcl-8.5.8/mips-tclstrtod.patch)
->>>> ERROR: Task 693
->>>> (virtual:native:/scratch/OpenEmbedded/openembedded/recipes/tcltk/tcl_8.5.8.bb,
->>>>
->>>> do_patch) failed with exit code 1
->>>> FATAL: Execution of 'quilt
->>>> --quiltrc=/scratch/OpenEmbedded/tmp/sysroots/i686-linux/usr/bin/quiltrc
->>>> push'
->>>> failed with exit code 1:
->>>> Applying patch mips-tclstrtod.patch
->>>> patch: **** rejecting target file name with ".." component:
->>>> ../generic/tclStrToD.c
->>>> Patch mips-tclstrtod.patch does not apply (enforce with -f)
->>>
->>> The problem seems to be only with the last patch applied onto tcl
->>> sources. Since
->>> it concerns only MIPS architecture, you can skip it for your ARM chip by
->>> removing into tcl_8.5.8.bb the line
->>> file://mips-tclstrtod.patch;striplevel=0 \
->>>
->>> It doesn't solve the problem but then you could continue. You have a
->>> look on the
->>> sources to see if the patches can be applied, maybe the problem is
->>> the patch level.
->>>
->>>
->>> Regards
->>>
->>> Ludovic Desroches
->>>
->>>
->>> _______________________________________________
->>> Openembedded-users mailing list
->>> Openembedded-users@linuxtogo.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-users
->> Hi Ludovic,
->>
->> Thanks, that has allowed the build to continue, I will see what happens.
->>
->> Cheers
->>
->>
->> Terry
->>
->> _______________________________________________
->> Openembedded-users mailing list
->> Openembedded-users@linuxtogo.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-users
->
-> Should I report this as an OpenEmbedded bug somewhere ?
+### Forwarded to openembedded-devel ###
 
-please forward this to openembedded-devel@lists.openembedded.org
+We are using Fedora14. That is using patch 2.6.1-8.
 
-_______________________________________________
-Openembedded-users mailing list
-Openembedded-users@linuxtogo.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-users
+The -8 release includes the following patches to patch.
+Patch1: patch-2.5.4-sigsegv.patch
+Patch2: patch-get-arg.patch
+Patch3: patch-CVE-2010-4651.patch
+Patch100: patch-selinux.patch
+
+I think one of those fixes a security issue in patch where ".." in
+path names were allowed. With this version of patch (which I assume
+will become standard ?) the OpenEmbedded fails.
+Any ideas on a way to get around this (ideally without using a
+different patch version :) )
+
+Cheers
+
+
+Terry
 
 
