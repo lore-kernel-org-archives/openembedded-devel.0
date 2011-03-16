@@ -1,43 +1,42 @@
-Received: from na3sys009aog112.obsmtp.com ([74.125.149.207])
+Received: from mail-px0-f178.google.com ([209.85.212.178])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <bengardiner@nanometrics.ca>) id 1Pztxi-0006xs-W0
+	(envelope-from <raj.khem@gmail.com>) id 1Pztyi-0006zF-T6
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Mar 2011 17:52:43 +0100
-Received: from source ([209.85.213.182]) (using TLSv1) by
-	na3sys009aob112.postini.com ([74.125.148.12]) with SMTP
-	ID DSNKTYDqburKPyMrInuEOQf03zQ0VUL2mjfC@postini.com;
-	Wed, 16 Mar 2011 09:51:02 PDT
-Received: by yxl31 with SMTP id 31so1027224yxl.27
+	Wed, 16 Mar 2011 17:53:45 +0100
+Received: by pxi1 with SMTP id 1so444759pxi.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Mar 2011 09:50:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=nanometrics.ca; s=google;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=KWjyxM7+oc/JtzuuNXoMwo0q3Bg12nC6LrG//p6TvxQ=;
-	b=Q1Xo9mEUp0h1NVQZjsqS5M7GSMs01oRi57XG+B1wWvzGM4exUWDklOvXsYqN/2ZKuL
-	YHOLUn5DBND8KwNxGIhq55DXZ7n1UHY8i/KfM78tNs30T7D7x+kSAB1G73mS2b3CauYl
-	QPH3EJI61y4MJoMRO39AJuzW+ye7D0cg3hOB0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=nanometrics.ca; s=google;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=ExusgzpVDCyeFVOUvNeYw1wOJiunxdxWdAIeVlocQCrY2Y+7+9kf7qoGF9HXy7vNza
-	EPQ5RISB5nwAYDVY8wS7+hanhndjkHgQ2/CiitvjwJH5Jk+g4KIMkAsWtlndUmr6im6V
-	NlNKtUoB8RlU80vA0OcDSduCvVicIjUfztlKs=
-Received: by 10.42.75.130 with SMTP id a2mr282323ick.320.1300294253697;
-	Wed, 16 Mar 2011 09:50:53 -0700 (PDT)
-Received: from localhost.localdomain ([206.191.47.130])
-	by mx.google.com with ESMTPS id q34sm39593ibu.40.2011.03.16.09.50.51
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 16 Mar 2011 09:50:52 -0700 (PDT)
-From: Ben Gardiner <bengardiner@nanometrics.ca>
+	Wed, 16 Mar 2011 09:52:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=LU7gaV7/TUfZP+CK4xF1BXzTgitqc0npYYCg5eMgCCU=;
+	b=c4a6bYE5TxrcxYy8H3FF/JWC2F7oClaO3mvJsiGYeBHs0tles3C1Gf0f9sxwWmGePB
+	35k83okLp2G718C4oj0fIyL1CjZv5IOMDeis9649k0vTbYXVG9LflwcJpE6wwMrW9nyg
+	rwKGscOPoDEOTb7r/XvZgQSxztes99vWJY6hA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=kY+12v+AZLfl1XlA5SRd+iD1l+e5GufV7blL60bQTeOIyVBCH/Wn1H1yRtN/EeQk9Q
+	PREMJp3XygMnjWoRDZ610Z9Be3IrXGb9soO1QmhdZtBLuqVwk9ThCE81G77cKUHF1sMG
+	5TLjh31hlQwpFAxBbdNLU+QoWhvoPPxnmeDso=
+Received: by 10.142.141.3 with SMTP id o3mr109588wfd.327.1300294319682;
+	Wed, 16 Mar 2011 09:51:59 -0700 (PDT)
+Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id n4sm1364307wfl.14.2011.03.16.09.51.57
+	(version=SSLv3 cipher=OTHER); Wed, 16 Mar 2011 09:51:58 -0700 (PDT)
+Message-ID: <4D80EA9E.5080207@gmail.com>
+Date: Wed, 16 Mar 2011 09:51:42 -0700
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.15) Gecko/20110303 Thunderbird/3.1.9
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Mar 2011 12:50:40 -0400
-Message-Id: <64d42452395f0c02d355516943c8493dc770ade2.1300293663.git.bengardiner@nanometrics.ca>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <cover.1300293663.git.bengardiner@nanometrics.ca>
-References: <cover.1300293663.git.bengardiner@nanometrics.ca>
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [2010.03-maintenance] [PATCH 7/7] toolchain-external.conf: set the default provider for gdbserver
+References: <1300264546.3840.9.camel@mattotaupa> <4D80791E.2040803@gmail.com>
+	<1300265560.3840.10.camel@mattotaupa>
+In-Reply-To: <1300265560.3840.10.camel@mattotaupa>
+Subject: Re: minimal-uclibc: gnutls-2.10.4-r11.0: task compile fails with `make[4]: *** [coding.lo] Error 1`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,32 +50,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2011 16:52:43 -0000
+X-List-Received-Date: Wed, 16 Mar 2011 16:53:45 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Denys Dmytriyenko <denys@ti.com>
+On 3/16/2011 1:52 AM, Paul Menzel wrote:
+> Am Mittwoch, den 16.03.2011, 01:47 -0700 schrieb Khem Raj:
+>> On 3/16/2011 1:35 AM, Paul Menzel wrote:
+>>> Dear OE folks,
+>>>
+>>>
+>>> using the following configuration
+>>>
+>>>           Build Configuration:
+>>>           BB_VERSION        = "1.12.0"
+>>>           METADATA_BRANCH   = "<unknown>"
+>>>           METADATA_REVISION = "f621e5e"
+>>>           TARGET_ARCH       = "arm"
+>>>           TARGET_OS         = "linux-uclibceabi"
+>>>           MACHINE           = "beagleboard"
+>>>           DISTRO            = "minimal-uclibc"
+>>>           DISTRO_VERSION    = "dev-snapshot-20110316"
+>>>           TARGET_FPU        = "soft"
+>>>
+>>> task compile of `gnutls_2.10.4.bb` fails with the following error.
+>>>
+>>>           arm-oe-linux-uclibceabi-libtool: compile:  arm-oe-linux-uclibceabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb --sysroot=/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I. -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./.. -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe -g -MT element.lo -MD -MP -MF .deps/element.Tpo -c element.c  -fPIC -DPIC -o .libs/element.o
+>>>           mv -f .deps/parser_aux.Tpo .deps/parser_aux.Plo
+>>>           /bin/sh ../arm-oe-linux-uclibceabi-libtool --tag=CC   --mode=compile arm-oe-linux-uclibceabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb --sysroot=/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I. -I..  -DASN1_BUILDING -I./../gl -I./../gl -I./..   -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe -g -MT coding.lo -MD -MP -MF .deps/coding.Tpo -c -o coding.lo coding.c
+>>>           arm-oe-linux-uclibceabi-libtool: compile:  arm-oe-linux-uclibceabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb --sysroot=/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I. -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./.. -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe -g -MT coding.lo -MD -MP -MF .deps/coding.Tpo -c coding.c  -fPIC -DPIC -o .libs/coding.o
+>>>           arm-oe-linux-uclibceabi-libtool: compile:  arm-oe-linux-uclibceabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb --sysroot=/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I. -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./.. -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe -g -MT element.lo -MD -MP -MF .deps/element.Tpo -c element.c -o element.o>/dev/null 2>&1
+>>>           arm-oe-linux-uclibceabi-libtool: compile:  arm-oe-linux-uclibceabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb --sysroot=/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I. -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./.. -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe -g -MT structure.lo -MD -MP -MF .deps/structure.Tpo -c structure.c -o structure.o>/dev/null 2>&1
+>>>           arm-oe-linux-uclibceabi-libtool: compile:  arm-oe-linux-uclibceabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb --sysroot=/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I. -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./.. -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe -g -MT coding.lo -MD -MP -MF .deps/coding.Tpo -c coding.c -o coding.o>/dev/null 2>&1
+>>>           mv -f .deps/element.Tpo .deps/element.Plo
+>>>           /bin/sh ../arm-oe-linux-uclibceabi-libtool --tag=CC   --mode=compile arm-oe-linux-uclibceabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb --sysroot=/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I. -I..  -DASN1_BUILDING -I./../gl -I./../gl -I./..   -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe -g -MT version.lo -MD -MP -MF .deps/version.Tpo -c -o version.lo version.c
+>>>           arm-oe-linux-uclibceabi-libtool: compile:  arm-oe-linux-uclibceabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb --sysroot=/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi -DHAVE_CONFIG_H -I. -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./.. -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -pipe -g -MT version.lo -MD -MP -MF .deps/version.Tpo -c version.c  -fPIC -DPIC -o .libs/version.o
+>>>           make[4]: *** [coding.lo] Error 1
+>>>
+>>> I guess this has to do with the following commit [1], since it builds
+>>> fine using `minimal` using EGLIBC.
+>>>
+>>>           commit f3ef166dca255f2e8518bb03655332273b1ef074
+>>>           Author: Khem Raj<raj.khem@gmail.com>
+>>>           Date:   Mon Mar 14 22:47:46 2011 -0700
+>>>
+>>>               uclibc_git: Upgrade to latest 0.9.32 snapshot
+>>>
+>>>               Signed-off-by: Khem Raj<raj.khem@gmail.com>
+>>>
+>>
+>> and where/what is the error message ? what you posted does not help
+>
+> I am sorry. But I could not find an error message anywhere in
+> `log.do_compile`. Please find the log file attached.
+>
+>
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-(cherry picked from commit df59f77a2eb37d9807c6d9167488110e92601d7b)
+there is no explicit error mentioned in log.do_compile too. It could be 
+a gcc ICE thats somehow being consumed by libtool. Can you execute
 
-Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
----
- conf/distro/include/toolchain-external.inc |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/conf/distro/include/toolchain-external.inc b/conf/distro/include/toolchain-external.inc
-index 12dc454..6ea2a37 100644
---- a/conf/distro/include/toolchain-external.inc
-+++ b/conf/distro/include/toolchain-external.inc
-@@ -5,6 +5,7 @@ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-intermediate = "external-toolchai
- PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc = "external-toolchain-${TOOLCHAIN_BRAND}"
- PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}g++ = "external-toolchain-${TOOLCHAIN_BRAND}"
- PREFERRED_PROVIDER_linux-libc-headers ?= "external-toolchain-${TOOLCHAIN_BRAND}"
-+PREFERRED_PROVIDER_gdbserver ?= "external-toolchain-${TOOLCHAIN_BRAND}"
- 
- TOOLCHAIN_VENDOR ?= "${TARGET_VENDOR}"
- TARGET_VENDOR := "${TOOLCHAIN_VENDOR}"
--- 
-1.7.1
+/bin/sh ../arm-oe-linux-uclibceabi-libtool --tag=CC   --mode=compile 
+arm-oe-linux-uclibceabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon 
+-mfloat-abi=softfp -mthumb-interwork -mno-thumb 
+--sysroot=/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi 
+-DHAVE_CONFIG_H -I. -I..  -DASN1_BUILDING -I./../gl -I./../gl -I./.. 
+-fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os 
+-pipe -g -MT decoding.lo -MD -MP -MF .deps/decoding.Tpo -c -o 
+decoding.lo decoding.c
+
+
+inside this directory
+/oe/build-minimal-uclibc/minimal-uclibc-dev/work/armv7a-oe-linux-uclibceabi/gnutls-2.10.4-r11.0/gnutls-2.10.4/lib/minitasn1
+
+> Thanks,
+>
+> Paul
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
