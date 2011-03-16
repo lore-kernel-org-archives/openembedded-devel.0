@@ -1,37 +1,42 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-px0-f178.google.com ([209.85.212.178])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PzkM4-0005WQ-OP
+	(envelope-from <raj.khem@gmail.com>) id 1Pzkrz-0006v1-Iu
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Mar 2011 07:37:12 +0100
-Received: by iwn10 with SMTP id 10so1387882iwn.6
+	Wed, 16 Mar 2011 08:10:11 +0100
+Received: by pxi1 with SMTP id 1so335506pxi.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Mar 2011 23:35:28 -0700 (PDT)
+	Wed, 16 Mar 2011 00:08:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=1Aha+aHkGj5eofxdqz76oIZmOxBYtKieZjYwBC9Gw2g=;
-	b=tsnFcqwiv1yePp2ybI39eQr+gP38SwOlALAY7hlhpv3IQyjL7qchHJ7OVL+h886+ar
-	Tfi7UkhxJaXZHntrmMDu/XwH8Q3HQqbVgK0QRvUnpjn5PqhQnQWH44XJH+CkMwaw2GHd
-	3T4ldyJt10/x5Gc3xY1k7CGsGNoIFHel4kMvA=
+	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=7ELGpGCD6cPzdP+MJV5cm7HNXNmAypO8Quvryco4QKc=;
+	b=t/rtVAK6l76pE3dVp2ImlHxJRrnxkYgCpB3cfwxFBr8Gpp9RzdXQ6NY99NTmLJyzXU
+	Lmp2lkQpnm9bfIbcCKmbnBNB1+5/9ViMfRv7LrZgW3AtNXnHrgf1yGjh7P8/sClGvNod
+	0go+ttjoAS+07OwfaeQdz6Qh4e7JipWJbSHts=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=leY2sl9/HgrtPtSqVaHODWOARAjYOeASLfZO/Hvnipx9IzN61VJ1aqhR9In2BRiHOk
-	xR6sYJ4VU0rgK4ZjL9bos6sSriRxH1Xae4N61fpcsm1covALgvgB8xWlHZv9xEB6S0iK
-	VN4PCX1wMTMj3Enqe6pM9z0rOFbYVxKJOsBO0=
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=EQn/iIMjZj6UJHN+8IqNusUxUX1izJ3bcA1H7yQwfSOyOfEi9mdHTnbadfqObwk8fI
+	/gSSUcOKzcgRiXAiD1+pI0RYxYnReBDecvDn5j5f6yn+5P9OMgl041EQFhSHzqqhhmQr
+	KxpgfdkI3dEzJ4Sy4GNgCLfKN/CcJ/vFHgTvo=
+Received: by 10.142.47.2 with SMTP id u2mr375961wfu.250.1300259307827;
+	Wed, 16 Mar 2011 00:08:27 -0700 (PDT)
+Received: from [172.23.0.199] (natint3.juniper.net [66.129.224.36])
+	by mx.google.com with ESMTPS id w19sm792142wfd.8.2011.03.16.00.08.25
+	(version=SSLv3 cipher=OTHER); Wed, 16 Mar 2011 00:08:26 -0700 (PDT)
+Message-ID: <4D8061DE.6030106@gmail.com>
+Date: Wed, 16 Mar 2011 00:08:14 -0700
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.15) Gecko/20110303 Thunderbird/3.1.9
 MIME-Version: 1.0
-Received: by 10.231.61.65 with SMTP id s1mr347263ibh.120.1300257328008; Tue,
-	15 Mar 2011 23:35:28 -0700 (PDT)
-Received: by 10.231.13.69 with HTTP; Tue, 15 Mar 2011 23:35:27 -0700 (PDT)
-In-Reply-To: <1300254477.2818.5.camel@eha>
-References: <1299841477-23487-1-git-send-email-sledz@dresearch.de>
-	<1300180117.2522.14.camel@eha> <20110315220301.GC3042@denix.org>
-	<1300254477.2818.5.camel@eha>
-Date: Wed, 16 Mar 2011 07:35:27 +0100
-Message-ID: <AANLkTinaWtnMFNLRUqC3CLJxoPmVeWw1KtW5qmDKbE+7@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Eliminating dependency race-conditions
+References: <1299841477-23487-1-git-send-email-sledz@dresearch.de><1300180117.2522.14.camel@eha>	<20110315220301.GC3042@denix.org>
+	<1300254477.2818.5.camel@eha>
+	<989A078976CDAD4CB2DC976EEF70E2A50547990E@eu2-mail.mgc.mentorg.com>
+In-Reply-To: <989A078976CDAD4CB2DC976EEF70E2A50547990E@eu2-mail.mgc.mentorg.com>
+Subject: Re: Python-native dependency in libxml2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,81 +50,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2011 06:37:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 16 Mar 2011 07:10:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2011/3/16 Esben Haabendal <eha@doredevelopment.dk>:
-> On Tue, 2011-03-15 at 18:03 -0400, Denys Dmytriyenko wrote:
->> On Tue, Mar 15, 2011 at 10:08:37AM +0100, Esben Haabendal wrote:
->> > On Fri, 2011-03-11 at 12:04 +0100, Steffen Sledz wrote:
->> > > which occurred sometimes depending on build order (not in clean
->> > > package only builds).
->> >
->> > I would like to raise awareness of the underlying problem here.
->> >
->> > The current dependency/staging model of OE basically has this feature
->> > that a build can be influenced not only by it's own dependencies, but
->> > also what has been build before it (or not).
->> >
->> > I strongly believe that this has to be fixed on the architectural leve=
-l,
->> > and not just on a case-by-case level as is currently needed.
->> >
->> > I haven't received much feedback on the preivous posting about the
->> > per-recipe staging principle implemented in OE-lite, but I decided to
->> > take this opportunity to re-iterate the fact that the OE-lite
->> > implementation of staging and build dependencies eliminates this
->> > problem.
->> >
->> > I am still very much interested in discussing how to move this
->> > technology from OE-lite to OE, but as it impacts all recipe metadata
->> > (build dependencies has to be redefined), OE community at a large real=
-ly
->> > needs to value the benefits of solving this problem.
->>
->> Esben,
->>
->> Thanks for raising this issue and making people aware of it!
->>
->> This has previously been discussed several times, including last time du=
-ring
->> the Yocto Summit in December, where I brought up the question of per-pac=
-kage
->> staging/dependency to Richard's attention, when he introduced the new Sh=
-ared
->> State (sstate). While per-package dependency wasn't considered a critica=
-l
->> must-have feature right away, it was acknowledged as something worthwhil=
-e
->> looking at and, according to Richard, should be easy to accomplish with =
-the
->> new sstate functionality...
+On 3/15/2011 11:22 PM, Ahsan, Noor wrote:
+> Hello,
 >
-> There is two different objectives in this.
+> I was looking at the libxml2 package. While going through the recipes I
+> came to know that its native package depends on python-native package as
+> well. This dependency is defined in libxml2.inc file.
 >
-> Per-recipe staging and per-package build-time dependencies. =A0While I
-> assume per-recipe staging will be doable to build on top of sstate,
-> per-package build-time dependencies is not really related to sstate, but
-> is mostly a meta-data issue (man-hours wise), while also requiring
-> changes to tbe BitBake cooker.
+> DEPENDS_virtclass-native = "python-native"
 >
-> The final thing that I have found while solving the above issues, is how
-> simple (KISS!) all this can be addressed when going from per-recipe
-> build-time dependencies to per-package. =A0And I really think that we nee=
-d
-> more KISS in OE ;-)
+> This package build fine after removing this dependency. I am not clear
+> why this dependency is being added in libxml2 package. Can somebody
+> clear that to me. While looking at the git log I came to know that this
+> change is coming from libxml2-native.inc file. But I am not clear why
+> this dependency was added as this package build fine without it.
 >
-> /Esben
+> Please help me in understanding this dependency. Thanks.
 
-From a consistency point of view per package build-time dependencies
-are highly desirable to get a consistent and reproducible system as
-you are always getting the same output irrespective of build order.
-Currently this is not the case because configure might pick up
-whatever package is build first.
-So for (deeply) embedded product development this is a very desirable
-feature, QA wise, if not a must have.
+Try to build this recipe from scratch and see if it still works then we 
+can remove the dep
+>
+> Regards,
+> Noor
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Frans
 
 
