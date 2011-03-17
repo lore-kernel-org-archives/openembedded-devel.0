@@ -1,35 +1,30 @@
-Received: from zmta01.irigo.dk ([193.200.44.52])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eha@doredevelopment.dk>) id 1Q0HOv-000145-MS
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Mar 2011 18:54:21 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by zmta01.irigo.dk (Postfix) with ESMTP id 29E4124C01E0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 18:52:37 +0100 (CET)
-X-Virus-Scanned: amavisd-new at zmta01.irigo.dk
-Received: from zmta01.irigo.dk ([127.0.0.1])
-	by localhost (zmta01.irigo.dk [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 1vZDFJr+9DBv
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 18:52:36 +0100 (CET)
-Received: from [192.168.1.189] (0x55532124.adsl.cybercity.dk [85.83.33.36])
-	by zmta01.irigo.dk (Postfix) with ESMTPSA id 0744F24C0402
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 18:52:36 +0100 (CET)
-From: Esben Haabendal <eha@doredevelopment.dk>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1300374439.9054.21.camel@phil-desktop>
-References: <1299841477-23487-1-git-send-email-sledz@dresearch.de>
-	<1300180117.2522.14.camel@eha>
-	<1300360696.2132.14681.camel@phil-desktop>
-	<1300373028.2468.8.camel@eha> <1300374439.9054.21.camel@phil-desktop>
-Organization: DoreDevelopment ApS
-Date: Thu, 17 Mar 2011 18:52:35 +0100
-Message-ID: <1300384355.2175.13.camel@eha>
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <richard.purdie@linuxfoundation.org>)
+	id 1Q0HVR-0005If-Ea; Thu, 17 Mar 2011 19:01:05 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p2HHxMQt023096;
+	Thu, 17 Mar 2011 17:59:22 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 22702-07; Thu, 17 Mar 2011 17:59:18 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p2HHxIMi023090
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 17 Mar 2011 17:59:18 GMT
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: tsc@lists.openembedded.org
+In-Reply-To: <AANLkTim51F7=Jt5COph35-KpHEX0oBJwhBUh4KLhgT_W@mail.gmail.com>
+References: <4D817FB9.5050404@windriver.com>
+	<AANLkTim51F7=Jt5COph35-KpHEX0oBJwhBUh4KLhgT_W@mail.gmail.com>
+Date: Thu, 17 Mar 2011 17:59:03 +0000
+Message-ID: <1300384743.30423.2087.camel@rex>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: Eliminating dependency race-conditions (was Re: [PATCH] net-snmp: disable libnl use)
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Minutes, OE TSC meeting, March 10 2011
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,66 +38,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2011 17:54:21 -0000
+X-List-Received-Date: Thu, 17 Mar 2011 18:01:05 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2011-03-17 at 15:07 +0000, Phil Blundell wrote:
-> On Thu, 2011-03-17 at 15:43 +0100, Esben Haabendal wrote:
-> > Is OE really in a position to permantly settle for something suboptimal
-> > in such a central area?
+On Thu, 2011-03-17 at 09:38 +0100, Frans Meulenbroeks wrote:
+> Mark, thanks for the minutes.
 > 
-> No, but rejecting the big bang doesn't mean that we can't make the
-> change; it just means that we need to find a way to make the old and new
-> arrangements coexist for a transition period.  This is the way every
-> other architectural change in OE has been done and I don't see any
-> reason that this one needs to be different.
-
-Exactly
-
+> There is one remark I'd like to make and one agenda item i'd like to
+> coin for the TSC (I'll do that here since I haven't seen an agenda and
+> call for topics for the next TSC meeting)
 > 
-> If we really did want to go ahead and have a metadata flag day then no
-> doubt there are plenty of other things we would like to change at the
-> same time.  But, thus far, this has never seemed to justify the
-> disruption of breaking every recipe in both the main OE repo and third
-> party overlays.
+> 2011/3/17 Mark Hatle <mark.hatle@windriver.com>:
+> 
+> >
+> > Further discussion of deprecation of OE bugzilla.  Yocto intends to keep a bug
+> > tracking system for itself.  This might also be the place where OE-Core bugs can
+> > be tracked.
+> >
+> 
+> What about the remaining parts of OE?
+> Do we also stop to use bugzilla for those?
 
-Well, it might be possible to minimize the disruption for a transitional
-period by carefully specifying some catch-all build-time package
-dependencies pulling in all packages for recipes not ported yet.
+The current OE bugzilla is a mess, I think that much is clear. Why?
 
-I think it would be much more worthwhile to put effort into this than to
-push for per-recipe sysroot with the current sstate solution.
+For a bugzilla to work, its needs active maintenance. Yocto has enough
+resources to do this for OECore, its is not really able to take on the
+whole of OE though, we're simply not resourced to do it. I'd rather take
+on something manageable and do it well that try and do too much and do
+it badly.
 
-Having package-based build-time dependencies, using the same packages as
-when building run-time images, is much simpler than what is currently
-done in OE, while at the same time giving increased flexibility in
-specifying the build-time dependencies needed for a recipe and it's
-packages.
+The offer of Yocto looking after OECore bugs and the bugzilla for them
+is therefore a positive step but if we want to cover the whole of OE,
+the resources need to come from somewhere and there is nobody
+volunteering at this time.
 
-But you might have to try it out before really understanding why you
-cannot live without it ;-)
+I think the TSC is pretty much recommending the existing OE bugzilla
+should be shut down as nobody is doing active work with it and it just
+misleads people.
 
-> I must admit that I'm also slightly unclear about why the change in
-> build dependency specifications is a prerequisite for doing per-recipe
-> sysroots.
+> Or will that also be done in the yocto bug tracking system?
+> 
+> I would like to suggest that the TSC starts to discuss how to deal
+> with the non-oe-core recipes that we have.
+> We have meta-oe of course. It might be useful to discuss and decide on:
+> - do we want to use meta-oe (and if so, how should it be
+> sub-structured, e.g. similar to oe-core meta* dirs)
 
-It might not be, but the result will of-course not be the same.
+I think the TSC has said yes, it wants to encourage meta-oe and that is
+was encouraging a more layered approach there.
 
->Is that just an artifact of the way you implemented it in
-> OE-lite or is there some fundamental constraint that means it needs to
-> be this way?
+> - assuming it'll be meta-oe, how will we deal with it in terms of
+> adding recipes, dealing with patches, retention policy, ownership etc
+> etc
 
-I don't think there are any fundamental constraint.  Sometimes doing
-things right are simply so much easier.  As a result, I already do have
-a solution with both per-recipe staging/sysroot and buld-time
-dependencies using target packages.  I feel pretty confident that this
-was the fast path, which is sort of backed by the fact that it is done,
-whereas the path (detour?) currently being worked on in OE is still just
-on it's way.
+I think the TSC did discuss and document some of this but its certainly
+not crystal clear yet. We're still trying to sort out the documentation
+for OE Core though and that is a priority over meta-oe. Note that it
+doesn't have to be the just the TSC members who do this and we're open
+for any help in writing drafts for discussion...
 
-/Esben
+> - how/where to store deprecated oe-core recipes that are still
+> useful/needed (and how to retire them if they are not needed any
+> more).
 
+If meta-oe is layered, a layer for these could be created to make this
+clear.
+
+Cheers,
+
+Richard
 
 
 
