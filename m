@@ -1,29 +1,39 @@
-Received: from bsmtp3.bon.at ([213.33.87.17] helo=lbmfmo03.bon.at)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pgsellmann@portner-elektronik.at>)
-	id 1Q0Fia-0001l0-2l for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Mar 2011 17:06:32 +0100
-Received: from bsmtp.bon.at (unknown [192.168.181.104])
-	by lbmfmo03.bon.at (Postfix) with ESMTP id D3CE6CE6E9
+	(envelope-from <jefro.net@gmail.com>) id 1Q0G8I-0002Sl-BZ
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Mar 2011 17:33:06 +0100
+Received: by fxm19 with SMTP id 19so2821055fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 17:04:48 +0100 (CET)
-Received: from aspire.localdomain (unknown [88.116.171.82])
-	by bsmtp.bon.at (Postfix) with ESMTP id B23141300B0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 16:54:32 +0100 (CET)
-From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
-Organization: PORTNER Elektronik
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Mar 2011 16:54:31 +0100
-User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
-	)
-References: <201103171154.23397.pgsellmann@portner-elektronik.at>
-	<1300360258.2132.14668.camel@phil-desktop>
-	<0C757E680E33864AB113392C7E83F910BE5144@GSX300A.mxchg.m.corp>
-In-Reply-To: <0C757E680E33864AB113392C7E83F910BE5144@GSX300A.mxchg.m.corp>
+	Thu, 17 Mar 2011 09:31:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=YuKcxjOJDe9hi5/oL9Dyje5CM/2pbyme1soNClUgp98=;
+	b=Cg3jQzuU9FKatn18rMBcwk3FFpyt6cN+eQ6J5kOml7u9xV/3C1MEnHDbJWUDBH84Pr
+	VcUunLjgN2GyLlYulEH7WYIjxftGhvVCb5g8Kd0jbZFksWY74QW6A4WmGam+ZGh6yChQ
+	MFUKTN2LuZVFss5b1tOXQtvE8GzVERQajglYg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	b=IvHumPVm6xIVSiJPH3HNhSD+C/DopXDso0/xpwn5PWUZ8LP8us3NV1WwEPhUTc32z3
+	2r8IiadYJtiYYRwHTUyUcvFXrrzZ6Bl/Tfv7tkjLcHy6YwK3O/bacYapHyK6AGaA2D5y
+	Aj7d4PGXEbpRuiRJpphBeV5vosaFSIub/PzO8=
 MIME-Version: 1.0
-Message-Id: <201103171654.31619.pgsellmann@portner-elektronik.at>
-Subject: Re: [PATCH 3/3] base-files-3.0.14 configuration files
+Received: by 10.223.143.5 with SMTP id s5mr1178531fau.14.1300379480979; Thu,
+	17 Mar 2011 09:31:20 -0700 (PDT)
+Sender: jefro.net@gmail.com
+Received: by 10.223.125.83 with HTTP; Thu, 17 Mar 2011 09:31:20 -0700 (PDT)
+In-Reply-To: <AANLkTim51F7=Jt5COph35-KpHEX0oBJwhBUh4KLhgT_W@mail.gmail.com>
+References: <4D817FB9.5050404@windriver.com>
+	<AANLkTim51F7=Jt5COph35-KpHEX0oBJwhBUh4KLhgT_W@mail.gmail.com>
+Date: Thu, 17 Mar 2011 09:31:20 -0700
+X-Google-Sender-Auth: Wo8wigNqKtGDpo3Cav7AQawPB14
+Message-ID: <AANLkTi=vZMLrrk9=WBqGXxy49STP-TNeQ-_5pGm5YCR1@mail.gmail.com>
+From: Jeff Osier-Mixon <jefro@jefro.net>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Minutes, OE TSC meeting, March 10 2011
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,27 +47,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2011 16:06:32 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Mar 2011 16:33:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Am Donnerstag, 17. M=E4rz 2011, 13:53:27 schrieb Hauser, Wolfgang (external=
-):
-> > Mark some files in ${sysconfdir} as configuration files so they are
-> not blindly overwritten when upgrading
->=20
-> I would suggest a pre-/post processing in the packages, like debian
-> does.
-> If a config file exists or is changed, the current File will be rotated
-> or, if possible, left as it is and the new=20
-> file is installed beside the changed one.
+Hi Frans,
 
-The opkg does not touch a present config file, but installs the new file wi=
-th the name *-opkg
-So if you do a find /etc -name \*-opkg you see the conflicts.
+I will add this to the agenda for this week
 
-Any sensible conversion from old to new config file should be made by the p=
-ackage itself.
+On Thu, Mar 17, 2011 at 1:38 AM, Frans Meulenbroeks <
+fransmeulenbroeks@gmail.com> wrote:
 
+> Mark, thanks for the minutes.
+>
+> There is one remark I'd like to make and one agenda item i'd like to
+> coin for the TSC (I'll do that here since I haven't seen an agenda and
+> call for topics for the next TSC meeting)
+>
+> 2011/3/17 Mark Hatle <mark.hatle@windriver.com>:
+>
+> >
+> > Further discussion of deprecation of OE bugzilla.  Yocto intends to keep
+> a bug
+> > tracking system for itself.  This might also be the place where OE-Core
+> bugs can
+> > be tracked.
+> >
+>
+> What about the remaining parts of OE?
+> Do we also stop to use bugzilla for those?
+> Or will that also be done in the yocto bug tracking system?
+>
+> I would like to suggest that the TSC starts to discuss how to deal
+> with the non-oe-core recipes that we have.
+> We have meta-oe of course. It might be useful to discuss and decide on:
+> - do we want to use meta-oe (and if so, how should it be
+> sub-structured, e.g. similar to oe-core meta* dirs)
+> - assuming it'll be meta-oe, how will we deal with it in terms of
+> adding recipes, dealing with patches, retention policy, ownership etc
+> etc
+> - how/where to store deprecated oe-core recipes that are still
+> useful/needed (and how to retire them if they are not needed any
+> more).
+> ...
+>
+> Or in a more general sense:
+> How are we going to deal with the parts of OE that are not part of OE-core.
+>
+> Best regards, Frans.
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
+
+-- 
+Jeff Osier-Mixon
+Yocto Community Manager @Intel
 
