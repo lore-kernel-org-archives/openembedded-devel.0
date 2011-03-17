@@ -1,42 +1,25 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1Q08xd-0001wO-U3
+	(envelope-from <jay@jay-tech.ru>) id 1Q09Hz-0004GM-Dc
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Mar 2011 09:53:38 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id AC8EA11000BA
+	Thu, 17 Mar 2011 10:14:39 +0100
+Received: by vxd7 with SMTP id 7so2398733vxd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 09:51:55 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id CD77111000B7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 09:51:54 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (g225146072.adsl.alicedsl.de
-	[92.225.146.72]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 09:51:54 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 94DBF3C0BA; Thu, 17 Mar 2011 09:51:05 +0100 (CET)
-Date: Thu, 17 Mar 2011 09:51:05 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110317085104.GA3317@mail.familie-heinold.de>
-References: <1300325100-29332-1-git-send-email-denis@denix.org>
-	<20110317014349.GN3042@denix.org> <4D817F36.30900@gmail.com>
-	<ilsdn3$dg5$1@dough.gmane.org>
+	Thu, 17 Mar 2011 02:12:54 -0700 (PDT)
+Received: by 10.52.173.209 with SMTP id bm17mr1376498vdc.105.1300353174186;
+	Thu, 17 Mar 2011 02:12:54 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <ilsdn3$dg5$1@dough.gmane.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [PATCH] cairo: disable native atomic operations, conflicts with libatomics-ops
+Sender: jay@jay-tech.ru
+Received: by 10.220.180.141 with HTTP; Thu, 17 Mar 2011 02:12:34 -0700 (PDT)
+X-Originating-IP: [78.106.51.57]
+In-Reply-To: <1300303278-6308-1-git-send-email-raj.khem@gmail.com>
+References: <1300303278-6308-1-git-send-email-raj.khem@gmail.com>
+From: Yury Bushmelev <jay4mail@gmail.com>
+Date: Thu, 17 Mar 2011 12:12:34 +0300
+X-Google-Sender-Auth: 9Ixb-k5Pnzunp-xKpMy3Rpny_k8
+Message-ID: <AANLkTimXEEcwSzF0Yfw-ghkK00DTt-Y6TazK4VZXQf=2@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] gcc-4.5: Fix segfault in dwarf2out
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,20 +33,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2011 08:53:38 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 17 Mar 2011 09:14:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+2011/3/16 Khem Raj <raj.khem@gmail.com>:
+> Currently following fails
+>
+> rm-oe-linux-uclibceabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon
+> -mfloat-abi=softfp -mthumb-interwork -mno-thumb
+> --sysroot=/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi
+> -DHAVE_CONFIG_H -I. -I.. -DASN1_BUILDING -I./../gl -I./../gl -I./..
+> -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os
+> -pipe -g -MT coding.lo -MD -MP -MF .deps/coding.Tpo -c coding.c -o
+> coding.o
+>
+> coding.c: In function 'asn1_length_der':
+> coding.c:101:1: internal compiler error: in
+> dwarf2out_frame_debug_expr, at dwarf2out.c:2221
+> Please submit a full bug report,
+> with preprocessed source if appropriate.
+> See <http://gcc.gnu.org/bugs.html> for instructions.
+> {standard input}: Assembler messages:
 
-I am courious while cairo is using here libatomic-ops at all and not the
-kernel-handler or the gcc stuff for linux. Besides libatomic-ops
-is no pulseaudio project. Pulse only need it for mips and some other
-archs, for arm the kernel-handler is used.
+My tonights build still have alike error but for akita and libgcrypt_1.4.1.
 
-So my sugestion is to find out which arch is needing and which not
-and adjust the build process accrodingly. 
+Build Configuration:
+BB_VERSION        = "1.13.0"
+METADATA_BRANCH   = "master"
+METADATA_REVISION = "103126a"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "akita"
+DISTRO            = "angstrom"
+DISTRO_VERSION    = "v20110317"
+TARGET_FPU        = "soft"
 
-Bye Henning
+| sexp.c: In function '_gcry_sexp_length':
+| sexp.c:492:1: internal compiler error: in
+dwarf2out_frame_debug_expr, at dwarf2out.c:2221
+| Please submit a full bug report,
+| with preprocessed source if appropriate.
+| See <http://gcc.gnu.org/bugs.html> for instructions.
+| make[2]: *** [libgcrypt_la-sexp.lo] Error 1
+
+NOTE: package libgcrypt-1.4.1-r0: task do_compile: Failed
+
+Full build log is available here:
+http://jay-home.ath.cx/testbuilder/logs/B.master.angstrom-2010.x.akita.c.log
+
+-- 
+Yury Bushmelev
 
 
