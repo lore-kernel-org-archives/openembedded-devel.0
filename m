@@ -1,26 +1,36 @@
-Received: from vms173001pub.verizon.net ([206.46.173.1])
+Received: from zmta01.irigo.dk ([193.200.44.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1Q0Ijf-00052Z-Pb
+	(envelope-from <eha@doredevelopment.dk>) id 1Q0JMl-0005DL-LY
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Mar 2011 20:19:51 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.48.61])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LI700DAHUXO11F2@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	17 Mar 2011 14:17:49 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 1CEB914AF6A; Thu,
-	17 Mar 2011 15:17:48 -0400 (EDT)
-Date: Thu, 17 Mar 2011 15:17:48 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 17 Mar 2011 21:00:18 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by zmta01.irigo.dk (Postfix) with ESMTP id 4F30324EC460
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Mar 2011 20:58:30 +0100 (CET)
+X-Virus-Scanned: amavisd-new at zmta01.irigo.dk
+Received: from zmta01.irigo.dk ([127.0.0.1])
+	by localhost (zmta01.irigo.dk [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ay3TpsTO-S4f
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Mar 2011 20:58:29 +0100 (CET)
+Received: from [192.168.1.189] (0x55532124.adsl.cybercity.dk [85.83.33.36])
+	by zmta01.irigo.dk (Postfix) with ESMTPSA id DDF1524C0402
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Mar 2011 20:58:28 +0100 (CET)
+From: Esben Haabendal <eha@doredevelopment.dk>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20110317191748.GO3042@denix.org>
-References: <1300325100-29332-1-git-send-email-denis@denix.org>
-	<20110317141220.GA16796@rhein.zuhause.netz>
-MIME-version: 1.0
-In-reply-to: <20110317141220.GA16796@rhein.zuhause.netz>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH] cairo: disable native atomic operations, conflicts with libatomics-ops
+In-Reply-To: <1300385153.9054.44.camel@phil-desktop>
+References: <1299841477-23487-1-git-send-email-sledz@dresearch.de>
+	<1300180117.2522.14.camel@eha>
+	<1300360696.2132.14681.camel@phil-desktop>
+	<1300373028.2468.8.camel@eha> <1300374439.9054.21.camel@phil-desktop>
+	<1300384355.2175.13.camel@eha> <1300385153.9054.44.camel@phil-desktop>
+Organization: DoreDevelopment ApS
+Date: Thu, 17 Mar 2011 20:58:27 +0100
+Message-ID: <1300391907.2175.23.camel@eha>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: Eliminating dependency race-conditions (was Re: [PATCH] net-snmp: disable libnl use)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,48 +44,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2011 19:19:52 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 17 Mar 2011 20:00:18 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Mar 17, 2011 at 03:12:21PM +0100, Henning Heinold wrote:
-> Hi,
+On Thu, 2011-03-17 at 18:05 +0000, Phil Blundell wrote:
+> On Thu, 2011-03-17 at 18:52 +0100, Esben Haabendal wrote:
+> > Well, it might be possible to minimize the disruption for a transitional
+> > period by carefully specifying some catch-all build-time package
+> > dependencies pulling in all packages for recipes not ported yet.
 > 
-> I looked deeper into the problem.
-> Cairo looks first for:
-> 
-> return __sync_fetch_and_add
-> __sync_val_compare_and_swap
-> 
-> and defines it as cairo_cv_atomic_primitives="Intel".
-> 
-> According to http://gcc.gnu.org/wiki/Atomic
-> arm and sh3/4 should work too.
-> 
-> If the configure compile fails
-> cairo is looking for libatomic-ops
-> support.
+> Yes, that's the sort of thing I was thinking of.  It isn't even totally
+> obvious to me that specifying individual packages is any better than
+> "all packages from recipe X", since with the former you then have a
+> potential maintenance headache if files get moved from one package to
+> another.
 
-Similar to what I observed (if not reversed):
+There is a number of ways that I believe package based build
+dependencies are better than recipe based.
 
-* If libatomic-ops is not available (no atomic_ops.h), it chooses/falls back 
-to "Intel" provider (i.e. kernel/gcc), which also works on ARM. It's similar 
-to --disable-atomic
+a) It is possible to depend on parts of a recipe, which fx. is useful
+when a recipe provides more than 1 library, where you might not want all
+of them.
 
-* If it finds atomic_ops.h previously staged, it chooses that as a provider, 
-but since libatomic-ops was not built with emulated CAS for ARM, it later 
-fails with the build error.
+b) To build a recipe, you depend on some stuff which you don't need to,
+or perhaps even really don't want to pass on to recipes depending on
+this recipe.
 
-> The libatomic-ops in oe is very old and misses diffrent bug fixes and is only
-> needed for ppc and mips.
-> 
-> I will try to clean the stuff up this evening, which proably applies to
-> pulse-audio too.
+c) KISS. Using the actual target packages for satisfying build-time
+dependencies are a very simple approach, which I strongly believe will
+make OE a better tool in the long run, by reducing complexity, and thus
+lowering the bar for contributing to OE archictural work.
 
-If you are going to update libatomic-ops anyway, I won't bother adding 
-AO_REQUIRE_CAS define myself. Thanks for looking into it.
+The maintenance headache you talk about is already there.  In OE-lite
+build-time dependency 95% of the time just follow the run-time
+dependencies, perhaps making it easier to maintain than OE, as we don't
+have to think about another type of "item names" to depend on.
 
--- 
-Denys
+/Esben
+
+
 
 
