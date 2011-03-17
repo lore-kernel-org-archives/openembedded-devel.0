@@ -1,40 +1,42 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1Q0DyR-0006xF-76
+	(envelope-from <chase.maupin@ti.com>) id 1Q0E43-00071Q-NH
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Mar 2011 15:14:47 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id E450611000BA
+	Thu, 17 Mar 2011 15:20:36 +0100
+Received: from dlep35.itg.ti.com ([157.170.170.118])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id p2HE1Gku007492
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 15:13:04 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 15B9A11000B7
+	Thu, 17 Mar 2011 09:01:16 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id p2HE1FAW015228
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 15:13:04 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (g225146072.adsl.alicedsl.de
-	[92.225.146.72]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	Thu, 17 Mar 2011 09:01:15 -0500 (CDT)
+Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p2HE1FCv024008
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 15:13:04 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 5CAB93C0BA; Thu, 17 Mar 2011 15:12:21 +0100 (CET)
-Date: Thu, 17 Mar 2011 15:12:21 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110317141220.GA16796@rhein.zuhause.netz>
-References: <1300325100-29332-1-git-send-email-denis@denix.org>
+	Thu, 17 Mar 2011 09:01:15 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
+	([157.170.170.88]) with mapi; Thu, 17 Mar 2011 09:01:14 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 17 Mar 2011 09:01:13 -0500
+Thread-Topic: [oe] [PATCH][2011.003-maintenance] ti-pru-sw-example: fix
+	building with new toolchain sysroot
+Thread-Index: Acvkd16GYBmCfIdOS5603qR0NoK14QANFQLg
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080340AC4009@dlee06.ent.ti.com>
+References: <1300296140-7275-1-git-send-email-Chase.Maupin@ti.com>
+	<ilqv4v$66u$1@dough.gmane.org>
+	<131E5DFBE7373E4C8D813795A6AA7F080340AC3EC2@dlee06.ent.ti.com>
+	<ilse5o$fd4$1@dough.gmane.org>
+In-Reply-To: <ilse5o$fd4$1@dough.gmane.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-In-Reply-To: <1300325100-29332-1-git-send-email-denis@denix.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [PATCH] cairo: disable native atomic operations, conflicts with libatomics-ops
+Subject: Re: [PATCH][2011.003-maintenance] ti-pru-sw-example: fix building with new toolchain sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,33 +50,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2011 14:14:47 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 17 Mar 2011 14:20:36 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
 
-I looked deeper into the problem.
-Cairo looks first for:
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Koen Kooi
+> Sent: Thursday, March 17, 2011 2:45 AM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [PATCH][2011.003-maintenance] ti-pru-sw-example: fix
+> building with new toolchain sysroot
+>=20
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> On 16-03-11 20:02, Maupin, Chase wrote:
+> >> From: openembedded-devel-bounces@lists.openembedded.org
+> >> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf O=
+f
+> >> Koen Kooi
+> >> Sent: Wednesday, March 16, 2011 1:22 PM
+> >> To: openembedded-devel@lists.openembedded.org
+> >> Subject: Re: [oe] [PATCH][2011.003-maintenance] ti-pru-sw-example: fix
+> >> building with new toolchain sysroot
+> >>
+> > On 16-03-11 18:22, Chase Maupin wrote:
+> >>>> * Patch taken from Arago overlay where it was added by
+> >>>>   Denys Dmytriyenko
+> >>>> * PR incremented by two to align recipe PR values between Arago
+> >>>>   and OE.
+> >>>>
+> >>>> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> >
+> > NAK, this hasn't been thru .dev yet.
+> >
+> >> Just submitted all 4 of my patches for .dev.  Thanks.
+>=20
+> I've staged them here:
+> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=3D2011.03-
+> maintenance
+> (subject to rebasing).
+>=20
+> Do you want to would for the pull request to go out tomorrow, or do you
+> want Tom to pick up your patches seperately?
 
-return __sync_fetch_and_add
-__sync_val_compare_and_swap
+Looks like you already have them in your pull request #3 :)
 
-and defines it as cairo_cv_atomic_primitives="Intel".
+Thanks.
 
-According to http://gcc.gnu.org/wiki/Atomic
-arm and sh3/4 should work too.
-
-If the configure compile fails
-cairo is looking for libatomic-ops
-support.
-
-The libatomic-ops in oe is very old and misses diffrent bug fixes and is only
-needed for ppc and mips.
-
-I will try to clean the stuff up this evening, which proably applies to
-pulse-audio too.
-
-Bye Henning
+>=20
+> regards,
+>=20
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>=20
+> iD8DBQFNgbv3MkyGM64RGpERAhAuAJ4iE8FFf/ZNqHJF06GSeOEhum9y+wCeOeMO
+> drixfFNicVpKY2l05LPSynw=3D
+> =3DNAy9
+> -----END PGP SIGNATURE-----
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
