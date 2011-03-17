@@ -1,35 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from bsmtp3.bon.at ([213.33.87.17] helo=lbmfmo03.bon.at)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q0F5g-0000f3-Ba for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Mar 2011 16:26:20 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q0F3x-0002IS-6N for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Mar 2011 16:24:33 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 16:24:33 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <pgsellmann@portner-elektronik.at>)
+	id 1Q0Fia-0001l0-2l for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Mar 2011 17:06:32 +0100
+Received: from bsmtp.bon.at (unknown [192.168.181.104])
+	by lbmfmo03.bon.at (Postfix) with ESMTP id D3CE6CE6E9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 16:24:33 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 17 Mar 2011 17:04:48 +0100 (CET)
+Received: from aspire.localdomain (unknown [88.116.171.82])
+	by bsmtp.bon.at (Postfix) with ESMTP id B23141300B0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Mar 2011 16:54:32 +0100 (CET)
+From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+Organization: PORTNER Elektronik
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 17 Mar 2011 16:24:22 +0100
-Message-ID: <ilt936$ab1$1@dough.gmane.org>
-References: <1299841477-23487-1-git-send-email-sledz@dresearch.de>	<1300180117.2522.14.camel@eha>	<1300360696.2132.14681.camel@phil-desktop>	<1300373028.2468.8.camel@eha>
-	<4D822021.6030808@xora.org.uk>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4D822021.6030808@xora.org.uk>
-X-Enigmail-Version: 1.0.1
-Subject: Re: Eliminating dependency race-conditions (was Re: [PATCH] net-snmp: disable libnl use)
+Date: Thu, 17 Mar 2011 16:54:31 +0100
+User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
+	)
+References: <201103171154.23397.pgsellmann@portner-elektronik.at>
+	<1300360258.2132.14668.camel@phil-desktop>
+	<0C757E680E33864AB113392C7E83F910BE5144@GSX300A.mxchg.m.corp>
+In-Reply-To: <0C757E680E33864AB113392C7E83F910BE5144@GSX300A.mxchg.m.corp>
+MIME-Version: 1.0
+Message-Id: <201103171654.31619.pgsellmann@portner-elektronik.at>
+Subject: Re: [PATCH 3/3] base-files-3.0.14 configuration files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,51 +37,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2011 15:26:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 17 Mar 2011 16:06:32 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Am Donnerstag, 17. M=E4rz 2011, 13:53:27 schrieb Hauser, Wolfgang (external=
+):
+> > Mark some files in ${sysconfdir} as configuration files so they are
+> not blindly overwritten when upgrading
+>=20
+> I would suggest a pre-/post processing in the packages, like debian
+> does.
+> If a config file exists or is changed, the current File will be rotated
+> or, if possible, left as it is and the new=20
+> file is installed beside the changed one.
 
-On 17-03-11 15:52, Graeme Gregory wrote:
-> On 17/03/2011 14:43, Esben Haabendal wrote:
->> On Thu, 2011-03-17 at 11:18 +0000, Phil Blundell wrote:
->>>> I am still very much interested in discussing how to move this
->>>> technology from OE-lite to OE, but as it impacts all recipe metadata
->>>> (build dependencies has to be redefined), OE community at a large
->>> really
->>>> needs to value the benefits of solving this problem.
->>> The benefits of solving the problem are clearly very great, but I
->>> don't think OE itself is really in a position to embrace a "big bang"
->>> kind of change which would require redefining all the build
->>> dependencies.  I think we need to find a technological solution which
->>> will work with our current DEPENDS scheme. 
->> I know that this seems to be the general consensus in OE, but I do not
->> agree with it.  Sometimes architectural work requires working out the
->> details on a branch, and then when it is mostly done, do the "big bang"
->> which will then not really be that "big" anymore, as most of the issues
->> have been resolved.
->>
->> Is OE really in a position to permantly settle for something suboptimal
->> in such a central area?
->>
-> I would suggest a branch of oe-core is the ideal place to do this work.
-> It can be proved on oe-core then rolled out to meta-oe at a later date.
+The opkg does not touch a present config file, but installs the new file wi=
+th the name *-opkg
+So if you do a find /etc -name \*-opkg you see the conflicts.
 
-OE-core already features per-machine sysroots, so the main problem we
-had, relocatability, has already been solved.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNgielMkyGM64RGpERAqcIAKCyT44a9MzDF+esO6DgRbtBXi4L8ACdGzpN
-4vN5d5EtUwbo3cNHfMl9XQ4=
-=eFCq
------END PGP SIGNATURE-----
-
+Any sensible conversion from old to new config file should be made by the p=
+ackage itself.
 
 
