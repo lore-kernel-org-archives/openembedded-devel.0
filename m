@@ -1,35 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q0EWL-0007p2-Lz for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Mar 2011 15:49:49 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q0EUW-00073P-9w for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Mar 2011 15:47:56 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 15:47:56 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <dp@xora.org.uk>) id 1Q0EZ3-0007yd-Ql
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Mar 2011 15:52:38 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 905FCA48FB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 15:47:56 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 17 Mar 2011 14:50:52 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id Bw0Vr6ih4e9y
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Mar 2011 14:50:51 +0000 (GMT)
+Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id B0866A48F9
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Mar 2011 14:50:51 +0000 (GMT)
+Message-ID: <4D822021.6030808@xora.org.uk>
+Date: Thu, 17 Mar 2011 14:52:17 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.15) Gecko/20110303 Lightning/1.0b2 Thunderbird/3.1.9
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 17 Mar 2011 15:47:38 +0100
-Message-ID: <ilt6ua$r2l$1@dough.gmane.org>
-References: <1300325100-29332-1-git-send-email-denis@denix.org>
-	<20110317141220.GA16796@rhein.zuhause.netz>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <20110317141220.GA16796@rhein.zuhause.netz>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] cairo: disable native atomic operations, conflicts with libatomics-ops
+References: <1299841477-23487-1-git-send-email-sledz@dresearch.de>	<1300180117.2522.14.camel@eha>	<1300360696.2132.14681.camel@phil-desktop>
+	<1300373028.2468.8.camel@eha>
+In-Reply-To: <1300373028.2468.8.camel@eha>
+X-Enigmail-Version: 1.1.1
+Subject: Re: Eliminating dependency race-conditions (was Re: [PATCH] net-snmp: disable libnl use)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,47 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2011 14:49:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 17 Mar 2011 14:52:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 17/03/2011 14:43, Esben Haabendal wrote:
+> On Thu, 2011-03-17 at 11:18 +0000, Phil Blundell wrote:
+>>> I am still very much interested in discussing how to move this
+>>> technology from OE-lite to OE, but as it impacts all recipe metadata
+>>> (build dependencies has to be redefined), OE community at a large
+>> really
+>>> needs to value the benefits of solving this problem.
+>> The benefits of solving the problem are clearly very great, but I
+>> don't think OE itself is really in a position to embrace a "big bang"
+>> kind of change which would require redefining all the build
+>> dependencies.  I think we need to find a technological solution which
+>> will work with our current DEPENDS scheme. 
+> I know that this seems to be the general consensus in OE, but I do not
+> agree with it.  Sometimes architectural work requires working out the
+> details on a branch, and then when it is mostly done, do the "big bang"
+> which will then not really be that "big" anymore, as most of the issues
+> have been resolved.
+>
+> Is OE really in a position to permantly settle for something suboptimal
+> in such a central area?
+>
+I would suggest a branch of oe-core is the ideal place to do this work.
+It can be proved on oe-core then rolled out to meta-oe at a later date.
 
-On 17-03-11 15:12, Henning Heinold wrote:
-> Hi,
-> 
-> I looked deeper into the problem.
-> Cairo looks first for:
-> 
-> return __sync_fetch_and_add
-> __sync_val_compare_and_swap
-> 
-> and defines it as cairo_cv_atomic_primitives="Intel".
-> 
-> According to http://gcc.gnu.org/wiki/Atomic
-> arm and sh3/4 should work too.
-> 
-> If the configure compile fails
-> cairo is looking for libatomic-ops
-> support.
-> 
-> The libatomic-ops in oe is very old and misses diffrent bug fixes and is only
-> needed for ppc and mips.
-
-Is there a new version released yet or do you mean debian/fedora/suse
-bugfixes?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNgh8KMkyGM64RGpERAlJzAJ0b6sByXKXffddvKChK+FpL7Hu4ngCfcQwQ
-ek1CXJV0RPVg0BNVudsCnl0=
-=q81c
------END PGP SIGNATURE-----
+Graeme
 
 
 
