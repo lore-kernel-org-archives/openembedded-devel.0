@@ -1,37 +1,31 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.eads.net ([80.156.45.113])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q0Csq-0004Y5-WF
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Mar 2011 14:04:57 +0100
-Received: by fxm19 with SMTP id 19so2599766fxm.6
+	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
+	id 1Q0Cwx-0004in-1e for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Mar 2011 14:09:11 +0100
+Received: from gsx3071-vs5.mxchg.m.corp ([53.147.176.148])
+	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id p2HCrWeT011236
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 06:03:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=gh9CYEOcleViLZkmhCRok3BIoS+joLT+LraknV1NV7I=;
-	b=Rp4KY/dM9JmvgFOHSoCtEX/Ak7lt1vEjCCXqNwxFFDshaqHLs+WU0gMrYdJnW9wYbw
-	GAFFmPsAjNKApso5yQZB0UKc4xwiRf08MVNtJvab+WPVTuDVKEfMtJkwLMW1RGLnxZjd
-	ivxTRQj42D24SIkN2yifCfjeEyq1ZyYxulE6Y=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=WHtRgU2642rRY5a2ws7AE1XcTgJeRqumdWlewXFAYw1wMthl37tLxCCX0Ovn+sFCj2
-	rfudIHD0uNI7HOQACcNt2D/Umei/xMMEbOfsMGGACP9Hw6cDlgUSFS8TpofcLddy9fV7
-	SrcDyoNKyOnlPv3zH4o92Eyb0bcjyGTWUORzY=
-Received: by 10.223.98.75 with SMTP id p11mr1495348fan.15.1300366992984;
-	Thu, 17 Mar 2011 06:03:12 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id c11sm909843fav.26.2011.03.17.06.03.11
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 17 Mar 2011 06:03:12 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Mar 2011 14:03:04 +0100
-Message-Id: <1300366984-4526-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <20110317125759.GA3585@jama.jama.net>
-References: <20110317125759.GA3585@jama.jama.net>
-Subject: [PATCHv2] gtk+: define empty PACKAGES_DYNAMIC_virtclass-native in recipes with native BBCLASSEXTEND
+	Thu, 17 Mar 2011 13:53:33 +0100
+Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
+	gsx3071-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Thu, 17 Mar 2011 13:53:27 +0100
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Thu, 17 Mar 2011 13:53:27 +0100
+Message-ID: <0C757E680E33864AB113392C7E83F910BE5144@GSX300A.mxchg.m.corp>
+In-Reply-To: <1300360258.2132.14668.camel@phil-desktop>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] [PATCH 3/3] base-files-3.0.14  configuration files
+Thread-Index: AcvknDfrjkBOH2Z8S1e0KtzW5nluggABPl0A
+References: <201103171154.23397.pgsellmann@portner-elektronik.at>
+	<1300360258.2132.14668.camel@phil-desktop>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 17 Mar 2011 12:53:28.0170 (UTC)
+	FILETIME=[4F9CC4A0:01CBE4A2]
+Subject: Re: [PATCH 3/3] base-files-3.0.14 configuration files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,73 +39,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2011 13:04:57 -0000
+X-List-Received-Date: Thu, 17 Mar 2011 13:09:11 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-* otherwise couple of errors like this are shown
-  NOTE: multiple providers are available for runtime gdk-pixbuf-loader-gif (gtk+-native, gtk+, gtk+-fastscaling)
-  NOTE: consider defining a PREFERRED_PROVIDER entry to match gdk-pixbuf-loader-gif
-  ERROR: Trying to resolve runtime dependency gdk-pixbuf-loader-xpm resulted in conflicting PREFERRED_PROVIDER entries being found.
-  The providers found were: ['/OE/dev/recipes/gtk+/gtk+_2.20.1.bb', 'virtual:native:/OE/dev/recipes/gtk+/gtk+_2.20.0.bb']
-  The PREFERRED_PROVIDER entries resulting in this conflict were: ['PREFERRED_PROVIDER_gtk+ = gtk+', 'PREFERRED_PROVIDER_gdk-pixbuf-csource-native = gtk+-native']
+> Mark some files in ${sysconfdir} as configuration files so they are
+not blindly overwritten when upgrading
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes/gtk+/gtk+_2.14.2.bb |    1 +
- recipes/gtk+/gtk+_2.18.6.bb |    1 +
- recipes/gtk+/gtk+_2.20.0.bb |    1 +
- recipes/gtk+/gtk+_2.20.1.bb |    1 +
- 4 files changed, 4 insertions(+), 0 deletions(-)
+I would suggest a pre-/post processing in the packages, like debian
+does.
+If a config file exists or is changed, the current File will be rotated
+or, if possible, left as it is and the new=20
+file is installed beside the changed one.
 
-diff --git a/recipes/gtk+/gtk+_2.14.2.bb b/recipes/gtk+/gtk+_2.14.2.bb
-index acf8624..bcf538a 100644
---- a/recipes/gtk+/gtk+_2.14.2.bb
-+++ b/recipes/gtk+/gtk+_2.14.2.bb
-@@ -19,6 +19,7 @@ EXTRA_OECONF = "--with-libtiff --disable-xkb --disable-glibtest --enable-display
- EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg --without-libjasper --disable-cups"
- 
- PACKAGES_DYNAMIC = "gtk-module-* gdk-pixbuf-loader-* gtk-immodule-* gtk-printbackend-*"
-+PACKAGES_DYNAMIC_virtclass-native = ""
- 
- python populate_packages_prepend () {
- 	import os.path
-diff --git a/recipes/gtk+/gtk+_2.18.6.bb b/recipes/gtk+/gtk+_2.18.6.bb
-index 864f4ba..b84ce74 100644
---- a/recipes/gtk+/gtk+_2.18.6.bb
-+++ b/recipes/gtk+/gtk+_2.18.6.bb
-@@ -19,6 +19,7 @@ EXTRA_OECONF = "--with-libtiff ${XKBTOGGLE} --disable-glibtest gio_can_sniff=yes
- EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg --disable-cups"
- 
- PACKAGES_DYNAMIC = "gtk-module-* gdk-pixbuf-loader-* gtk-immodule-* gtk-printbackend-*"
-+PACKAGES_DYNAMIC_virtclass-native = ""
- 
- python populate_packages_prepend () {
- 	import os.path
-diff --git a/recipes/gtk+/gtk+_2.20.0.bb b/recipes/gtk+/gtk+_2.20.0.bb
-index 1e07e83..cf20117 100644
---- a/recipes/gtk+/gtk+_2.20.0.bb
-+++ b/recipes/gtk+/gtk+_2.20.0.bb
-@@ -23,6 +23,7 @@ EXTRA_OECONF = "--with-libtiff ${XKBTOGGLE} --disable-glibtest gio_can_sniff=yes
- EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg --disable-cups"
- 
- PACKAGES_DYNAMIC = "gtk-module-* gdk-pixbuf-loader-* gtk-immodule-* gtk-printbackend-*"
-+PACKAGES_DYNAMIC_virtclass-native = ""
- 
- python populate_packages_prepend () {
- 	import os.path
-diff --git a/recipes/gtk+/gtk+_2.20.1.bb b/recipes/gtk+/gtk+_2.20.1.bb
-index 9cffee1..d65a0db 100644
---- a/recipes/gtk+/gtk+_2.20.1.bb
-+++ b/recipes/gtk+/gtk+_2.20.1.bb
-@@ -27,6 +27,7 @@ EXTRA_OECONF = " --enable-introspection=no --with-libtiff ${XKBTOGGLE} --disable
- EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg --disable-cups"
- 
- PACKAGES_DYNAMIC = "gtk-module-* gdk-pixbuf-loader-* gtk-immodule-* gtk-printbackend-*"
-+PACKAGES_DYNAMIC_virtclass-native = ""
- 
- python populate_packages_prepend () {
- 	import os.path
--- 
-1.7.4.1
+Having too much config files makes it difficult to do an individual
+configuration by own packages.
 
+Regards
+Wolfgang
 
 
