@@ -1,42 +1,24 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
+Received: from portal.beam.ltd.uk ([62.49.82.227] helo=mailgate.beam.ltd.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1Q0E43-00071Q-NH
+	(envelope-from <terry@beam.ltd.uk>) id 1Q0ENl-0007Xu-Tw
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Mar 2011 15:20:36 +0100
-Received: from dlep35.itg.ti.com ([157.170.170.118])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id p2HE1Gku007492
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 09:01:16 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id p2HE1FAW015228
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 09:01:15 -0500 (CDT)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p2HE1FCv024008
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 09:01:15 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
-	([157.170.170.88]) with mapi; Thu, 17 Mar 2011 09:01:14 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Mar 2011 09:01:13 -0500
-Thread-Topic: [oe] [PATCH][2011.003-maintenance] ti-pru-sw-example: fix
-	building with new toolchain sysroot
-Thread-Index: Acvkd16GYBmCfIdOS5603qR0NoK14QANFQLg
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080340AC4009@dlee06.ent.ti.com>
-References: <1300296140-7275-1-git-send-email-Chase.Maupin@ti.com>
-	<ilqv4v$66u$1@dough.gmane.org>
-	<131E5DFBE7373E4C8D813795A6AA7F080340AC3EC2@dlee06.ent.ti.com>
-	<ilse5o$fd4$1@dough.gmane.org>
-In-Reply-To: <ilse5o$fd4$1@dough.gmane.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Thu, 17 Mar 2011 15:40:58 +0100
+Received: from beam.beamnet (beam.beamnet [127.0.0.1])
+	by mailgate.beam.ltd.uk (8.14.4/8.14.4) with ESMTP id p2HEWLC4000889;
+	Thu, 17 Mar 2011 14:32:21 GMT
+Message-ID: <4D821B75.6090206@beam.ltd.uk>
+Date: Thu, 17 Mar 2011 14:32:21 +0000
+From: Terry Barnaby <terry@beam.ltd.uk>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Thunderbird/3.1.7
 MIME-Version: 1.0
-Subject: Re: [PATCH][2011.003-maintenance] ti-pru-sw-example: fix building with new toolchain sysroot
+To: openembedded-devel@lists.openembedded.org
+References: <4D80653A.7010804@beam.ltd.uk>	<4D80772A.8080207@atmel.com>	<4D80C329.9020309@beam.ltd.uk>	<4D80EE70.8000309@mentor.com>
+	<4D81161E.5090202@mentor.com>
+In-Reply-To: <4D81161E.5090202@mentor.com>
+X-Enigmail-Version: 1.1.1
+Subject: Re: [Openembedded-users] Problem with patch version 2.6.1-7 and	after
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,74 +32,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2011 14:20:36 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Mar 2011 14:40:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+
+On 03/16/2011 07:57 PM, Tom Rini wrote:
+> On 03/16/2011 10:08 AM, Tom Rini wrote:
+>> On 03/16/2011 07:03 AM, Terry Barnaby wrote:
+>>
+>> [snip]
+>>> Hi,
+>>>
+>>> ### Forwarded to openembedded-devel ###
+>>>
+>>> We are using Fedora14. That is using patch 2.6.1-8.
+>>>
+>>> The -8 release includes the following patches to patch.
+>>> Patch1: patch-2.5.4-sigsegv.patch
+>>> Patch2: patch-get-arg.patch
+>>> Patch3: patch-CVE-2010-4651.patch
+>>> Patch100: patch-selinux.patch
+>>>
+>>> I think one of those fixes a security issue in patch where ".." in
+>>> path names were allowed. With this version of patch (which I assume
+>>> will become standard ?) the OpenEmbedded fails.
+>>> Any ideas on a way to get around this (ideally without using a
+>>> different patch version :) )
+>>
+>> So, there's a lot of recipes with patches with .. in the path:
+>> openembedded$ git grep -lE "^---.*[^.]\.\.\/" recipes/ | wc -l
+>> 80
+>>
+>> Some of these will be easy fixups (first one I peeked at we can just
+>> change the patch and not have to modify the recipe) but others like the
+>> tcl one will require a little thought.
+> 
+> Everything should be happy now.
+> 
+Indeed it is :)
+Thanks very much, I wasn't expecting changes that quick !
+
+Cheers
 
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Koen Kooi
-> Sent: Thursday, March 17, 2011 2:45 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [PATCH][2011.003-maintenance] ti-pru-sw-example: fix
-> building with new toolchain sysroot
->=20
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> On 16-03-11 20:02, Maupin, Chase wrote:
-> >> From: openembedded-devel-bounces@lists.openembedded.org
-> >> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf O=
-f
-> >> Koen Kooi
-> >> Sent: Wednesday, March 16, 2011 1:22 PM
-> >> To: openembedded-devel@lists.openembedded.org
-> >> Subject: Re: [oe] [PATCH][2011.003-maintenance] ti-pru-sw-example: fix
-> >> building with new toolchain sysroot
-> >>
-> > On 16-03-11 18:22, Chase Maupin wrote:
-> >>>> * Patch taken from Arago overlay where it was added by
-> >>>>   Denys Dmytriyenko
-> >>>> * PR incremented by two to align recipe PR values between Arago
-> >>>>   and OE.
-> >>>>
-> >>>> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-> >
-> > NAK, this hasn't been thru .dev yet.
-> >
-> >> Just submitted all 4 of my patches for .dev.  Thanks.
->=20
-> I've staged them here:
-> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=3D2011.03-
-> maintenance
-> (subject to rebasing).
->=20
-> Do you want to would for the pull request to go out tomorrow, or do you
-> want Tom to pick up your patches seperately?
-
-Looks like you already have them in your pull request #3 :)
-
-Thanks.
-
->=20
-> regards,
->=20
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->=20
-> iD8DBQFNgbv3MkyGM64RGpERAhAuAJ4iE8FFf/ZNqHJF06GSeOEhum9y+wCeOeMO
-> drixfFNicVpKY2l05LPSynw=3D
-> =3DNAy9
-> -----END PGP SIGNATURE-----
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Terry
 
 
