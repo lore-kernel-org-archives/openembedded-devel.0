@@ -1,35 +1,26 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from vms173001pub.verizon.net ([206.46.173.1])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1Q0HzG-0000Im-7S
+	(envelope-from <denis@denix.org>) id 1Q0Ijf-00052Z-Pb
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Mar 2011 19:31:54 +0100
-Received: from dlep35.itg.ti.com ([157.170.170.118])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id p2HIU8l2002939
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Thu, 17 Mar 2011 13:30:08 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id p2HIU8Qp024825;
-	Thu, 17 Mar 2011 13:30:08 -0500 (CDT)
-Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p2HIU7Lj024927;
-	Thu, 17 Mar 2011 13:30:07 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
-	([157.170.170.8]) with mapi; Thu, 17 Mar 2011 13:30:06 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: Tom Rini <tom_rini@mentor.com>, "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Mar 2011 13:30:05 -0500
-Thread-Topic: [oe] [2011.03-maintenance] Pull request #3
-Thread-Index: Acvkz0FA+6D0n10XR4yQMlpRFB61vQAAgqTA
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080340AC410D@dlee06.ent.ti.com>
-References: <ilt06r$gji$1@dough.gmane.org> <4D824F9A.8020903@mentor.com>
-In-Reply-To: <4D824F9A.8020903@mentor.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-Subject: Re: [2011.03-maintenance] Pull request #3
+	Thu, 17 Mar 2011 20:19:51 +0100
+Received: from gandalf.denix.org ([unknown] [71.251.48.61])
+	by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LI700DAHUXO11F2@vms173001.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	17 Mar 2011 14:17:49 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 1CEB914AF6A; Thu,
+	17 Mar 2011 15:17:48 -0400 (EDT)
+Date: Thu, 17 Mar 2011 15:17:48 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20110317191748.GO3042@denix.org>
+References: <1300325100-29332-1-git-send-email-denis@denix.org>
+	<20110317141220.GA16796@rhein.zuhause.netz>
+MIME-version: 1.0
+In-reply-to: <20110317141220.GA16796@rhein.zuhause.netz>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [PATCH] cairo: disable native atomic operations, conflicts with libatomics-ops
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,70 +34,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2011 18:31:54 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Mar 2011 19:19:52 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-> -----Original Message-----
-> From: Tom Rini [mailto:tom_rini@mentor.com]
-> Sent: Thursday, March 17, 2011 1:15 PM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Maupin, Chase
-> Subject: Re: [oe] [2011.03-maintenance] Pull request #3
->=20
-> On 03/17/2011 05:52 AM, Koen Kooi wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> >
-> > Tom,
-> >
-> > Please pull the 11 commits from here:
-> >
-> > URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-> > Branch: 2011.03-maintenance
-> >
-> > Koen Kooi (7):
-> >        angstrom 2011.03 blacklist bash-noemu
-> >        task-omap-drivers: task for commonly needed drivers on omap chip=
-s
-> >        *beagleboard-validation: collection of tasks iand images to serv=
-e
-> >        task-beagleboard*: add changes from latest round of feedback
-> >        linux-omap-psp 2.6.32: add support for xM revision C
-> >        linux-omap-psp 2.6.32: bump PR
-> >        u-boot git: update beagleboard u-boot to 2011.03-RC
-> >
-> > chase maupin (4):
-> >        u-boot.inc: allow variable make targets
-> >        dm368-evm: Add configuration for DM368 machine
-> >        matrix-gui: add support for dm386-evm machine
-> >        ti-pru-sw-example: fix building with new toolchain sysroot
-> >
-> >
-> > You can view the branch online at
-> > http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=3D2011.03=
--
-> maintenance
-> >
-> > The bash-noemu and u-boot commits both have a one line change compared
-> > to .dev to account for the differences between angstrom versions. The
-> > other 9 commits are straight cherry-picks.
->=20
-> Merged, thanks.
->=20
-> > I can pick up the external-toolchain patches from Ben for next weeks
-> > pull request if you wish.
->=20
-> I've grabbed these with pw-am.sh and updated patchwork.  Chase, can you
-> please update patchwork to reflect that your changes have been applied?
->   Thanks!
+On Thu, Mar 17, 2011 at 03:12:21PM +0100, Henning Heinold wrote:
+> Hi,
+> 
+> I looked deeper into the problem.
+> Cairo looks first for:
+> 
+> return __sync_fetch_and_add
+> __sync_val_compare_and_swap
+> 
+> and defines it as cairo_cv_atomic_primitives="Intel".
+> 
+> According to http://gcc.gnu.org/wiki/Atomic
+> arm and sh3/4 should work too.
+> 
+> If the configure compile fails
+> cairo is looking for libatomic-ops
+> support.
 
-Tom, I'll take care of that now.  Thanks.
+Similar to what I observed (if not reversed):
 
->=20
-> --
-> Tom Rini
-> Mentor Graphics Corporation
+* If libatomic-ops is not available (no atomic_ops.h), it chooses/falls back 
+to "Intel" provider (i.e. kernel/gcc), which also works on ARM. It's similar 
+to --disable-atomic
+
+* If it finds atomic_ops.h previously staged, it chooses that as a provider, 
+but since libatomic-ops was not built with emulated CAS for ARM, it later 
+fails with the build error.
+
+> The libatomic-ops in oe is very old and misses diffrent bug fixes and is only
+> needed for ppc and mips.
+> 
+> I will try to clean the stuff up this evening, which proably applies to
+> pulse-audio too.
+
+If you are going to update libatomic-ops anyway, I won't bother adding 
+AO_REQUIRE_CAS define myself. Thanks for looking into it.
+
+-- 
+Denys
 
 
