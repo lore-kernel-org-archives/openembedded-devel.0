@@ -1,41 +1,24 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from vms173009pub.verizon.net ([206.46.173.9])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jan.paesmans@gmail.com>) id 1Q00bZ-00041T-C6
+	(envelope-from <denis@denix.org>) id 1Q01zK-0005jF-Sf
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Mar 2011 00:58:17 +0100
-Received: by wyb40 with SMTP id 40so2093527wyb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Mar 2011 16:56:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type;
-	bh=OBLFOUsDxQ5WEUQBJYZq20bHOF7GNaZiAGMrEqusqhc=;
-	b=tXstk8vBd0tUzlWB1ckoFpknyHGkDGOoTCPmTVR/clca8GxvYIizrFq4ijIMDP2jSs
-	owDqCK5JrYx/E8M55yP6fiGyxkujYNfQLm3eAQXz/2mQoP3ni7JvyRaPqXsV9bofDwNL
-	CCQepsm2HhtUGX60yw0YH7XRs0t2jGFnWnetA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type;
-	b=IjnCi5djwaOFfItK8gEliaiKqjcNwxhq+XTIQ2t9YGfVuHPNqWs1nZX7y/519sP/ps
-	oWEIL7/WquR8PfUxfoNR4ZBcekgDdjkwxZ85piJGjhtgMhcJlzEAa9DEtzsUP8rEzAdZ
-	X+JZvhi9hU3G20VV0BlJzQ1/OGN5+pcEUKw+w=
-Received: by 10.227.39.66 with SMTP id f2mr648273wbe.2.1300319786520;
-	Wed, 16 Mar 2011 16:56:26 -0700 (PDT)
-Received: from [192.168.1.103] (121.149-240-81.adsl-dyn.isp.belgacom.be
-	[81.240.149.121])
-	by mx.google.com with ESMTPS id y16sm278184wby.13.2011.03.16.16.56.25
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 16 Mar 2011 16:56:25 -0700 (PDT)
-Message-ID: <4D814E28.6080701@gmail.com>
-Date: Thu, 17 Mar 2011 00:56:24 +0100
-From: Jan Paesmans <jan.paesmans@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20110131 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Thu, 17 Mar 2011 02:26:55 +0100
+Received: from gandalf.denix.org ([unknown] [71.251.48.61])
+	by vms173009.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LI600LBMH9SVS41@vms173009.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	16 Mar 2011 20:25:05 -0500 (CDT)
+Received: from elrond.denix.org (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id F323114AF5D; Wed,
+	16 Mar 2011 21:25:03 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-References: <4D81226B.4060704@gmail.com> <4D81331E.2070604@mentor.com>
-In-Reply-To: <4D81331E.2070604@mentor.com>
-Subject: Re: perl-native_5.10.1 fails
+Date: Wed, 16 Mar 2011 21:25:00 -0400
+Message-id: <1300325100-29332-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.7.4.1
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [PATCH] cairo: disable native atomic operations, conflicts with libatomics-ops
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,132 +32,167 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2011 23:58:17 -0000
-X-Groupsio-MsgNum: 30317
-Content-Type: multipart/mixed; boundary="------------020502060403070202050506"
+X-List-Received-Date: Thu, 17 Mar 2011 01:26:55 -0000
 
---------------020502060403070202050506
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+From: Denys Dmytriyenko <denys@ti.com>
 
-On 03/16/11 23:01, Tom Rini wrote:
-> On 03/16/2011 01:49 PM, Jan Paesmans wrote:
->> Hi all,
->>
->> When trying to build an x11-image for pm9263 with angstrom-2010.x,
->> perl-native fails to build.
->> The error is listed below. As far as I can tell, the problem is that a
->> gcc flag is passed to the linker, -fstack-protector. I tried to find out
->> where this -fstack-protector could come from, but the only trace I could
->> find was in the Configure of perl-native itself. There is no mention
->> that it is set when Configure is called in the configure step, nor in
->> any of the environment variables during the do_configure or
->> do_compile step.
->>
->> I run Ubuntu 10.10 with gold as the linker. I thought that it might be
->> the gold linker but neither gold nor ld seem to have this option when
->> reviewing the man-page.
->
-> Can you edit the recipe and add in:
-> EXTRA_OEMAKE = 'LD="${CCLD}"'
->
-> And do a bitbake -c clean perl-native then bitbake perl-native
-> Thanks.
->
-That did the trick. Now perl-native compiles fine. However when I
-checked the output of the log.do_compile I did notice a change a the
-behaviour. I was expecting the -fstack-protector flag to be gone,
-instead it is still there. However, instead of invoking ld for the final
-link, now gcc is invoked. Below you can find the relevent section of the
-log file. Also in attachment is a patch with the change you suggested.
+* Add --disable-atomic to configure, otherwise it finds previously staged
+libatomics-ops from pulseaudio, which doesn't have the necessary primitives:
 
-Thanks for the help.
-Regards,
+| In file included from cairo-reference-count-private.h:40,
+|                  from cairo-types-private.h:45,
+|                  from cairoint.h:242,
+|                  from cairo-analysis-surface.c:37:
+| cairo-atomic-private.h: In function '_cairo_atomic_int_cmpxchg_return_old_fallback':
+| cairo-atomic-private.h:218: error: implicit declaration of function 'AO_compare_and_swap_full'
+| cairo-atomic-private.h:218: warning: nested extern declaration of 'AO_compare_and_swap_full'
 
-Jan
+* From my previous builds I see that cairo used to build before libatomics-ops
+was staged, avoiding this issue.
+* Also, add INC_PR to cairo.inc and use it in recipes
+* Start INC_PR from r4 to account for one of the older versions
 
-Running Makefile.PL in ext/DynaLoader
-../../miniperl -I../../lib Makefile.PL INSTALLDIRS=perl
-INSTALLMAN1DIR=none INSTALLMAN3DIR=none PERL_CORE=1 LIBPERL_A=libperl.so
-LINKTYPE=static
-Processing hints file hints/linux.pl
-Unrecognized argument in LIBS ignored:
-'-Wl,-rpath-link,/home/janp/src/openembedded/build/tmp/sysroots/x86_64-linux/usr/lib'
-Unrecognized argument in LIBS ignored:
-'-Wl,-rpath,/home/janp/src/openembedded/build/tmp/sysroots/x86_64-linux/usr/lib'
-Unrecognized argument in LIBS ignored: '-Wl,-O1'
-Unrecognized argument in LIBS ignored: '-fstack-protector'
-Writing Makefile for DynaLoader
-make[1]: Entering directory
-`/home/janp/src/openembedded/build/tmp/work/x86_64-linux/perl-native-5.10.1-r10/perl-5.10.1/ext/DynaLoader'
-make[1]: Leaving directory
-`/home/janp/src/openembedded/build/tmp/work/x86_64-linux/perl-native-5.10.1-r10/perl-5.10.1/ext/DynaLoader'
-Making all in ext/DynaLoader
- make all PERL_CORE=1 LIBPERL_A=libperl.so LINKTYPE=static
-make[1]: Entering directory
-`/home/janp/src/openembedded/build/tmp/work/x86_64-linux/perl-native-5.10.1-r10/perl-5.10.1/ext/DynaLoader'
-../../miniperl "-I../../lib" "-I../../lib" DynaLoader_pm.PL DynaLoader.pm
-../../miniperl "-I../../lib" "-I../../lib" XSLoader_pm.PL XSLoader.pm
-cp XSLoader.pm ../../lib/XSLoader.pm
-cp DynaLoader.pm ../../lib/DynaLoader.pm
-AutoSplitting ../../lib/DynaLoader.pm (../../lib/auto/DynaLoader)
-rm -f DynaLoader.xs
-cp dl_dlopen.xs DynaLoader.xs
-../../miniperl "-I../../lib" "-I../../lib" ../../lib/ExtUtils/xsubpp
--noprototypes -typemap ../../lib/ExtUtils/typemap DynaLoader.xs >
-DynaLoader.xsc && mv DynaLoader.xsc DynaLoader.c
-gcc  -c   -D_REENTRANT -D_GNU_SOURCE -fno-strict-aliasing -pipe
--fstack-protector -I/usr/local/include -D_LARGEFILE_SOURCE
--D_FILE_OFFSET_BITS=64 -O2   -DVERSION=\"1.10\" -DXS_VERSION=\"1.10\"
--fPIC "-I../.."  -DLIBC="/lib/libc-2.12.1.so" DynaLoader.c
-rm -rf ../../DynaLoader.o
-cp DynaLoader.o ../../DynaLoader.o
-make[1]: Leaving directory
-`/home/janp/src/openembedded/build/tmp/work/x86_64-linux/perl-native-5.10.1-r10/perl-5.10.1/ext/DynaLoader'
-rm -f libperl.so
-gcc  -o libperl.so -shared -O2
--L/home/janp/src/openembedded/build/tmp/sysroots/x86_64-linux/usr/lib
--L/usr/local/lib -fstack-protector op.o perl.o   gv.o toke.o perly.o
-pad.o regcomp.o dump.o util.o mg.o reentr.o mro.o hv.o av.o run.o
-pp_hot.o sv.o pp.o scope.o pp_ctl.o pp_sys.o doop.o doio.o regexec.o
-utf8.o taint.o deb.o universal.o xsutils.o globals.o perlio.o perlapi.o
-numeric.o mathoms.o locale.o pp_pack.o pp_sort.o   DynaLoader.o -lnsl
--ldl -lm -lcrypt -lutil -lpthread -lc
-LD_LIBRARY_PATH=/home/janp/src/openembedded/build/tmp/work/x86_64-linux/perl-native-5.10.1-r10/perl-5.10.1
-gcc  -o perl 
--L/home/janp/src/openembedded/build/tmp/sysroots/x86_64-linux/usr/lib
--Wl,-rpath-link,/home/janp/src/openembedded/build/tmp/sysroots/x86_64-linux/usr/lib
--Wl,-rpath,/home/janp/src/openembedded/build/tmp/sysroots/x86_64-linux/usr/lib
--Wl,-O1 -fstack-protector -L/usr/local/lib -Wl,-E
--Wl,-rpath,/home/janp/src/openembedded/build/tmp/sysroots/x86_64-linux/usr/lib/perl/5.10.1/CORE
-perlmain.o  libperl.so `cat ext.libs` -lnsl -ldl -lm -lcrypt -lutil
--lpthread -lc
-LD_LIBRARY_PATH=/home/janp/src/openembedded/build/tmp/work/x86_64-linux/perl-native-5.10.1-r10/perl-5.10.1 
-./miniperl -Ilib mkppport
-running
-/home/janp/src/openembedded/build/tmp/work/x86_64-linux/perl-native-5.10.1-r10/perl-5.10.1/miniperl
--I../../lib PPPort_pm.PL
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes/cairo/cairo-directfb_1.6.4.bb |    2 +-
+ recipes/cairo/cairo.inc               |    5 +++++
+ recipes/cairo/cairo_1.10.0.bb         |    3 +--
+ recipes/cairo/cairo_1.4.10.bb         |    3 +--
+ recipes/cairo/cairo_1.8.0.bb          |    2 +-
+ recipes/cairo/cairo_1.8.10.bb         |    3 +--
+ recipes/cairo/cairo_1.8.8.bb          |    4 +---
+ recipes/cairo/cairomm_1.8.4.bb        |    3 ++-
+ 8 files changed, 13 insertions(+), 12 deletions(-)
 
-
---------------020502060403070202050506
-Content-Type: text/plain;
- name="perl-native_5.10.1.bb.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="perl-native_5.10.1.bb.patch"
-
-diff --git a/recipes/perl/perl-native_5.10.1.bb b/recipes/perl/perl-native_5.10.1.bb
-index 5aa0c7b..586fcbd 100644
---- a/recipes/perl/perl-native_5.10.1.bb
-+++ b/recipes/perl/perl-native_5.10.1.bb
-@@ -29,6 +29,8 @@ S = "${WORKDIR}/perl-${PV}"
+diff --git a/recipes/cairo/cairo-directfb_1.6.4.bb b/recipes/cairo/cairo-directfb_1.6.4.bb
+index b4fea9a..3670eab 100644
+--- a/recipes/cairo/cairo-directfb_1.6.4.bb
++++ b/recipes/cairo/cairo-directfb_1.6.4.bb
+@@ -12,7 +12,7 @@ EXTRA_OECONF += " --enable-directfb \
+ LDFLAGS_append += " -ldirectfb"
+ CFLAGS_append  += " -I${STAGING_INCDIR}/directfb"
  
- inherit native
+-PR = "r1"
++PR = "${INC_PR}.1"
  
-+EXTRA_OEMAKE = 'LD="${CCLD}"'
+ S = "${WORKDIR}/cairo-${PV}"
+ 
+diff --git a/recipes/cairo/cairo.inc b/recipes/cairo/cairo.inc
+index c60d7d9..3dcc14c 100644
+--- a/recipes/cairo/cairo.inc
++++ b/recipes/cairo/cairo.inc
+@@ -4,10 +4,15 @@ DEPENDS = "virtual/libx11 pixman libsm libpng fontconfig libxrender glib-2.0"
+ DESCRIPTION = "Cairo graphics library"
+ LICENSE = "MPL LGPL"
+ 
++INC_PR = "r4"
 +
- do_configure () {
-     ./Configure \
-         -Dcc="${CC}" \
+ #check for TARGET_FPU=soft and inform configure of the result so it can disable some floating points 
+ require cairo-fpu.inc
+ EXTRA_OECONF += "${@get_cairo_fpu_setting(bb, d)}"
+ 
++# Disable check for atomic functions, as it fails with libatomics-ops staged
++EXTRA_OECONF += " --disable-atomic"
++
+ inherit autotools pkgconfig 
+ 
+ PACKAGES =+ "cairo-trace cairo-trace-dev libcairo-script-interpreter libcairo-gobject"
+diff --git a/recipes/cairo/cairo_1.10.0.bb b/recipes/cairo/cairo_1.10.0.bb
+index 58e2481..177c615 100644
+--- a/recipes/cairo/cairo_1.10.0.bb
++++ b/recipes/cairo/cairo_1.10.0.bb
+@@ -1,10 +1,9 @@
+ require cairo.inc
+ 
+-PR = "r1"
++PR = "${INC_PR}.1"
+ 
+ SRC_URI = "http://cairographics.org/releases/cairo-${PV}.tar.gz;name=cairo \
+ "
+ 
+ SRC_URI[cairo.md5sum] = "70a2ece66cf473d976e2db0f75bf199e"
+ SRC_URI[cairo.sha256sum] = "0f2ce4cc4615594088d74eb8b5360bad7c3cc3c3da9b61af9bfd979ed1ed94b2"
+-
+diff --git a/recipes/cairo/cairo_1.4.10.bb b/recipes/cairo/cairo_1.4.10.bb
+index 544479b..c334c34 100644
+--- a/recipes/cairo/cairo_1.4.10.bb
++++ b/recipes/cairo/cairo_1.4.10.bb
+@@ -5,8 +5,7 @@ DEFAULT_PREFERENCE = "-1"
+ SRC_URI = "http://cairographics.org/releases/cairo-${PV}.tar.gz \
+ file://stats.patch;p=1"
+ 
+-PR = "r0"
+-
++PR = "${INC_PR}.0"
+ 
+ SRC_URI[md5sum] = "5598a5e500ad922e37b159dee72fc993"
+ SRC_URI[sha256sum] = "594e78a66044898c321e378d47faf43b665b23ba638834d2787e344ba13e5132"
+diff --git a/recipes/cairo/cairo_1.8.0.bb b/recipes/cairo/cairo_1.8.0.bb
+index a4225e8..e7cdeb7 100644
+--- a/recipes/cairo/cairo_1.8.0.bb
++++ b/recipes/cairo/cairo_1.8.0.bb
+@@ -3,7 +3,7 @@ require cairo.inc
+ SRC_URI = "http://cairographics.org/releases/cairo-${PV}.tar.gz \
+           "
+ 
+-
++PR = "${INC_PR}.0"
+ 
+ SRC_URI[md5sum] = "4ea70ea87b47e92d318d4e7f5b940f47"
+ SRC_URI[sha256sum] = "827acee89ba3e8e762fbb23165cf8d455e7d95e1e50984e6882b2070a7f3abae"
+diff --git a/recipes/cairo/cairo_1.8.10.bb b/recipes/cairo/cairo_1.8.10.bb
+index 884a6a7..8339b81 100644
+--- a/recipes/cairo/cairo_1.8.10.bb
++++ b/recipes/cairo/cairo_1.8.10.bb
+@@ -1,6 +1,6 @@
+ require cairo.inc
+ 
+-PR = "r3"
++PR = "${INC_PR}.3"
+ 
+ SRC_URI = "http://cairographics.org/releases/cairo-${PV}.tar.gz;name=cairo \
+            file://dolt-fix.patch \
+@@ -9,4 +9,3 @@ SRC_URI = "http://cairographics.org/releases/cairo-${PV}.tar.gz;name=cairo \
+ 
+ SRC_URI[cairo.md5sum] = "b60a82f405f9400bbfdcf850b1728d25"
+ SRC_URI[cairo.sha256sum] = "572bada15596ec8708392db1af8b93a1af75ca47690348154e2841f3a6f08439"
+-
+diff --git a/recipes/cairo/cairo_1.8.8.bb b/recipes/cairo/cairo_1.8.8.bb
+index de12f13..b0280a9 100644
+--- a/recipes/cairo/cairo_1.8.8.bb
++++ b/recipes/cairo/cairo_1.8.8.bb
+@@ -1,4 +1,4 @@
+-PR = "r1"
++PR = "${INC_PR}.1"
+ 
+ require cairo.inc
+ 
+@@ -6,7 +6,5 @@ SRC_URI = "http://cairographics.org/releases/cairo-${PV}.tar.gz \
+            file://dolt-fix.patch \
+           "
+ 
+-
+-
+ SRC_URI[md5sum] = "d3e1a1035ae563812d4dd44a74fb0dd0"
+ SRC_URI[sha256sum] = "3c51d3de5dc4596e01a6675acd3c86c2c99c00f02e8fad5493758a29fe451c90"
+diff --git a/recipes/cairo/cairomm_1.8.4.bb b/recipes/cairo/cairomm_1.8.4.bb
+index 672dcb5..19b7618 100644
+--- a/recipes/cairo/cairomm_1.8.4.bb
++++ b/recipes/cairo/cairomm_1.8.4.bb
+@@ -1,9 +1,10 @@
+ require cairo.inc
+ 
++PR = "${INC_PR}.0"
++
+ DEPENDS = "cairo libsigc++-2.0"
+ DESCRIPTION = "C++ bindings for Cairo graphics library"
+ 
+ SRC_URI = "http://cairographics.org/releases/cairomm-${PV}.tar.gz;name=archive"
+ SRC_URI[archive.md5sum] = "559afbc47484ba3fad265e38a3dafe90"
+ SRC_URI[archive.sha256sum] = "a28ec6d9af8f93d09076f32cd77de35f9d74a517def5dea12cb8cc2ce3a6c8f1"
+-
+-- 
+1.7.0.4
 
---------------020502060403070202050506--
+
+
