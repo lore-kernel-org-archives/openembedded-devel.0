@@ -1,37 +1,41 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q0DWE-0005yn-Hj
+	(envelope-from <martin.jansa@gmail.com>) id 1Q0Dex-0006E1-Pf
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Mar 2011 14:45:38 +0100
-Received: by bwz10 with SMTP id 10so2305178bwz.6
+	Thu, 17 Mar 2011 14:54:40 +0100
+Received: by bwz10 with SMTP id 10so2312795bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2011 06:43:54 -0700 (PDT)
+	Thu, 17 Mar 2011 06:52:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=G8OS7SxLZoNPHJXnXMPo5a+x50mU73OPJTCIvi4oAf4=;
-	b=t5QUoIf8OGFg683n6v03moCnKSMi+0pAkxj8giJln0OOM/WUsuYRdM48vL0raHzuAr
-	VN6DMroSmbq3gAqcQ1N3VWuFcFPI+5VTvYTQoL46XUa+NwTzg+V9Uz7ElWIibqaYpdh0
-	cQunqfIcOh9izVtQDozqyQ70IoqMqweGkX3Xg=
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=bLc0CL4uk77yYWTQH+ki8AO4raNN6PJOWLhelBuSHgI=;
+	b=wJZZ9ZXE2u6t18XINvRSrqb+O0XeGqwv/sVAw6wi7WUeh/l8nmc5GPgjCOZ8bNb6Ny
+	2fsBENxlTitzIF+06kWoaK0lLgAhdzhrXwNQh/pQriRAC+sNO5FDmYSULukAY/narz1t
+	bYXQSKiqZ+37eqcnVSBCLUrmAON1zsq4pQ9Js=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=Okxlp/SKUrMJdzl4fjiocHoly2eW6PnOmduO5uY0ilao2VQZPLSvdeP3SwHQxpGgKQ
-	ULHlCkOjkCyXxDX9kXX4HiwRlbrQeBKs6L1WBBm6Me+E0rnsijY+uLJMwJTDtRFEEPAf
-	fXt8H5O4WHURjIjR5SFuTx7jW+Z7zsQ+IGHy0=
-Received: by 10.204.19.66 with SMTP id z2mr1179592bka.178.1300369434103;
-	Thu, 17 Mar 2011 06:43:54 -0700 (PDT)
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=pLXTPvyar9y/rOnwSKX+75aghzPZ90WHX6ifblPFYfPsgDvf5pYXy5Gtt4BIC4rdvi
+	ZTapsZCKAt/TM0hbrP+lTuFz50af+YW0USUMY2r5o9Qfp9jta02Y/en37rzJt7xfQEuI
+	Ygc8sYvBq/UT2TauNbqP50PmY7dXSFKnXJIDc=
+Received: by 10.204.20.142 with SMTP id f14mr1157659bkb.155.1300369975505;
+	Thu, 17 Mar 2011 06:52:55 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id t1sm1377230bkx.7.2011.03.17.06.43.52
+	by mx.google.com with ESMTPS id k5sm1382874bku.4.2011.03.17.06.52.53
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 17 Mar 2011 06:43:53 -0700 (PDT)
+	Thu, 17 Mar 2011 06:52:54 -0700 (PDT)
+Date: Thu, 17 Mar 2011 14:52:47 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Mar 2011 14:43:47 +0100
-Message-Id: <1300369427-3287-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <1300367747-29308-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1300367747-29308-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCHv2] e-wm: use ESYSACTIONS, EMENU, ECONFIG, ETHEME variables instead of hardcoded e-wm-sysactions/e-wm-menu runtime dependency
+Message-ID: <20110317135247.GB3585@jama.jama.net>
+References: <1300365679-20067-1-git-send-email-Martin.Jansa@gmail.com>
+	<1300365679-20067-2-git-send-email-Martin.Jansa@gmail.com>
+	<ilt2d9$sr2$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <ilt2d9$sr2$1@dough.gmane.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH 2/2] gst-plugins: define disjunctive PACKAGES_DYNAMIC for each pack base/good/bad/ugly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,249 +49,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2011 13:45:38 -0000
+X-List-Received-Date: Thu, 17 Mar 2011 13:54:40 -0000
+X-Groupsio-MsgNum: 30349
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="ZoaI/ZTpAVc4A5k6"
+Content-Disposition: inline
 
-* ILLUME_THEME/ILLUME_CONFIG were renamed to ETHEME/ECONFIG to use the
-  same variable names as task-demo-x11/task-beagleboard-*
+--ZoaI/ZTpAVc4A5k6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-* e-wm-sysactions-shr doesn't need RPROVIDES anymore
+On Thu, Mar 17, 2011 at 02:30:17PM +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> On 17-03-11 13:41, Martin Jansa wrote:
+> > * adds a bit more bits to keep in sync while changing gst-plugins
+> >   version, but not that much (this patch was mostly prepared by script)
+>=20
+> Can you upload the script as well? The constant motion of plugins
+> between the releases (a good thing!) was my reason to have a single
+> PACKAGES_DYNAMIC.
 
-* fixes last multiple providers notice I had
-  NOTE: multiple providers are available for runtime e-wm-sysactions (e-wm, e-wm-sysactions-shr)
-  NOTE: consider defining a PREFERRED_PROVIDER entry to match e-wm-sysactions
+OK, I'll have to cleanup it a bit to be usable for others :).
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- conf/distro/shr.conf                          |    6 ++++--
- recipes/e17/e-wm_svn.bb                       |    6 ++++--
- recipes/freesmartphone/menu-freesmartphone.bb |    4 ++--
- recipes/images/fso-illume-image.bb            |    2 +-
- recipes/images/fso-image.inc                  |    2 +-
- recipes/images/illume-image.bb                |   14 ++++++++------
- recipes/shr/e-wm-config-illume2-shr_git.bb    |    9 ++++++---
- recipes/shr/e-wm-sysactions-shr_git.bb        |    4 +---
- recipes/tasks/task-shr-minimal.bb             |    3 +--
- recipes/tasks/task-x11-illume.bb              |    8 ++++----
- 10 files changed, 32 insertions(+), 26 deletions(-)
+So I'll wait for outcome of patch and discrussion Phil started if
+silencing that notice is worth it.
 
-diff --git a/conf/distro/shr.conf b/conf/distro/shr.conf
-index be2441a..6e0e728 100644
---- a/conf/distro/shr.conf
-+++ b/conf/distro/shr.conf
-@@ -115,8 +115,10 @@ IMAGE_INITSCRIPTS = "initscripts-shr"
- IPKG_VARIANT = "opkg"
- 
- #Illume settings
--ILLUME_CONFIG = "e-wm-config-illume2-shr"
--ILLUME_THEME = "e-wm-theme-illume-gry"
-+ESYSACTIONS = "e-wm-sysactions-shr"
-+EMENU = "e-wm-menu-shr"
-+ECONFIG = "e-wm-config-illume2-shr"
-+ETHEME = "e-wm-theme-illume-gry"
- 
- # From minimal.conf
- 
-diff --git a/recipes/e17/e-wm_svn.bb b/recipes/e17/e-wm_svn.bb
-index e8f6b1e..b7ce1b1 100644
---- a/recipes/e17/e-wm_svn.bb
-+++ b/recipes/e17/e-wm_svn.bb
-@@ -3,7 +3,7 @@ DEPENDS = "eet evas ecore edje efreet edbus eeze"
- LICENSE = "MIT BSD"
- SRCNAME = "e"
- PV = "0.16.999.060+svnr${SRCPV}"
--PR = "r18"
-+PR = "r19"
- SRCREV = "${EFL_SRCREV}"
- 
- inherit e update-alternatives
-@@ -91,13 +91,15 @@ PACKAGES =+ "\
-   illume-keyboard-default-terminal \
- "
- 
-+ESYSACTIONS ?= "${PN}-sysactions"
-+
- RRECOMMENDS_${PN} = "\
-   ${PN}-config-default \
-   ${PN}-images \
-   ${PN}-icons \
-   ${PN}-other \
-   ${PN}-input-methods \
--  ${PN}-sysactions \
-+  ${ESYSACTIONS} \
- "
- 
- PACKAGE_ARCH_${PN}-config-default = "all"
-diff --git a/recipes/freesmartphone/menu-freesmartphone.bb b/recipes/freesmartphone/menu-freesmartphone.bb
-index 2d1f614..3dfcc3b 100644
---- a/recipes/freesmartphone/menu-freesmartphone.bb
-+++ b/recipes/freesmartphone/menu-freesmartphone.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "XDG menu file for the freesmartphone.org project"
- LICENSE = "PD"
- PV = "0.1"
--PR = "r0"
-+PR = "r1"
- 
- SRC_URI = "file://applications.menu"
- 
-@@ -10,7 +10,7 @@ do_install() {
-     install -m 644 ${WORKDIR}/applications.menu ${D}/${sysconfdir}/xdg/menus/
- }
- 
--RPROVIDES_${PN} = "e-wm-menu"
-+RCONFLICTS_${PN} = "e-wm-menu"
- CONFFILES_${PN} = "${sysconfdir}/xdg/menus/applications.menu"
- FILES_${PN} = "${sysconfdir}/xdg/menus/applications.menu"
- 
-diff --git a/recipes/images/fso-illume-image.bb b/recipes/images/fso-illume-image.bb
-index 189c8cb..6b85e23 100644
---- a/recipes/images/fso-illume-image.bb
-+++ b/recipes/images/fso-illume-image.bb
-@@ -14,7 +14,7 @@ BASE_INSTALL = "\
-   task-base \
- "
- 
--ILLUME_THEME = "illume-theme-fso"
-+ETHEME = "illume-theme-fso"
- 
- X_INSTALL = "\
-   task-x11-illume \
-diff --git a/recipes/images/fso-image.inc b/recipes/images/fso-image.inc
-index 5311f84..e4d4e3d 100644
---- a/recipes/images/fso-image.inc
-+++ b/recipes/images/fso-image.inc
-@@ -9,7 +9,7 @@ BASE_INSTALL = "\
-   task-base \
- "
- 
--ILLUME_THEME = "illume-theme-freesmartphone"
-+ETHEME = "illume-theme-freesmartphone"
- 
- X_INSTALL = "\
-   task-x11-illume \
-diff --git a/recipes/images/illume-image.bb b/recipes/images/illume-image.bb
-index e01ef27..3f146c6 100644
---- a/recipes/images/illume-image.bb
-+++ b/recipes/images/illume-image.bb
-@@ -8,8 +8,10 @@ IMAGE_LINGUAS = "en-us de-de fr-fr pt-br ca-es zh-cn zh-tw bg-bg cs-cz da-dk nl-
- SPLASH = "exquisite exquisite-themes exquisite-theme-illume"
- 
- # Default illume theme
--ILLUME_THEME ?= "e-wm-theme-illume"
--ILLUME_CONFIG ?= "e-wm-config-illume2"
-+ETHEME ?= "e-wm-theme-illume"
-+ECONFIG ?= "e-wm-config-illume2"
-+ESYSACTIONS ?= "e-wm-sysactions"
-+EMENU ?= "e-wm-menu"
- 
- # getting the base system up
- BASE_INSTALL = "\
-@@ -42,10 +44,10 @@ X_INSTALL = "\
-   shared-mime-info \
-   mime-support \
-   e-wm \
--  e-wm-menu \
--  e-wm-sysactions \
--  ${ILLUME_CONFIG} \
--  ${ILLUME_THEME} \
-+  ${EMENU} \
-+  ${ESYSACTIONS} \
-+  ${ECONFIG} \
-+  ${ETHEME} \
-   e-wm-config-standard \
-   e-wm-config-netbook \
-   e-wm-config-minimalist \
-diff --git a/recipes/shr/e-wm-config-illume2-shr_git.bb b/recipes/shr/e-wm-config-illume2-shr_git.bb
-index 4d9176f..692d979 100644
---- a/recipes/shr/e-wm-config-illume2-shr_git.bb
-+++ b/recipes/shr/e-wm-config-illume2-shr_git.bb
-@@ -5,7 +5,7 @@ LICENSE = "MIT BSD"
- RDEPENDS_${PN} = "shr-e-gadgets"
- SRCREV = "b166fa3c8f7160c0102877d32ee3ad09c8afaa7d"
- PV = "1.2+gitr${SRCPV}"
--PR = "r7"
-+PR = "r8"
- 
- inherit e
- 
-@@ -19,9 +19,12 @@ EXTRA_OECONF = "\
- 
- FILES_${PN} = "${datadir}/enlightenment/data/config/illume2-shr"
- 
-+ESYSACTIONS ?= "e-wm-sysactions"
-+EMENU ?= "e-wm-menu"
-+
- RRECOMMENDS_${PN} = "\
--  e-wm-sysactions-shr \
--  e-wm-menu-shr \
-+  ${ESYSACTIONS} \
-+  ${EMENU} \
-   illume-keyboard-default-alpha \
-   illume-keyboard-numeric-alt \
-   illume-keyboard-default-terminal \
-diff --git a/recipes/shr/e-wm-sysactions-shr_git.bb b/recipes/shr/e-wm-sysactions-shr_git.bb
-index 68d5b30..6f5da4c 100644
---- a/recipes/shr/e-wm-sysactions-shr_git.bb
-+++ b/recipes/shr/e-wm-sysactions-shr_git.bb
-@@ -3,12 +3,10 @@ SECTION = "e/utils"
- LICENSE = "MIT BSD"
- SRCREV = "bbcec18f0ebd47e4f6eea88b9b774edf7400e752"
- PV = "1.2+gitr${SRCPV}"
--PR = "r5"
-+PR = "r6"
- PACKAGE_ARCH = "all"
- 
--RPROVIDES_${PN} = "e-wm-sysactions"
- RCONFLICTS_${PN} = "e-wm-sysactions"
--#RREPLACES_${PN} = "e-wm-sysactions"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
- 
-diff --git a/recipes/tasks/task-shr-minimal.bb b/recipes/tasks/task-shr-minimal.bb
-index b9449e9..1c0e2b1 100644
---- a/recipes/tasks/task-shr-minimal.bb
-+++ b/recipes/tasks/task-shr-minimal.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "SHR Lite Image Feed"
--PR = "r40"
-+PR = "r41"
- PV = "2.0"
- LICENSE = "GPL"
- 
-@@ -107,7 +107,6 @@ RDEPENDS_${PN}-audio = "\
- RDEPENDS_${PN}-x = "\
-   task-x11-illume \
-   task-fonts-truetype-core \
--  e-wm-menu-shr \
-   shr-wizard \
-   shr-theme-gry \
-   xcursor-transparent-theme \
-diff --git a/recipes/tasks/task-x11-illume.bb b/recipes/tasks/task-x11-illume.bb
-index 5af3a30..7c6fe3e 100644
---- a/recipes/tasks/task-x11-illume.bb
-+++ b/recipes/tasks/task-x11-illume.bb
-@@ -9,8 +9,8 @@ PR = "r1"
- inherit task
- 
- # Default illume theme
--ILLUME_THEME ?= "e-wm-theme-illume"
--ILLUME_CONFIG ?= "e-wm-config-illume2"
-+ETHEME ?= "e-wm-theme-illume"
-+ECONFIG ?= "e-wm-config-illume2"
- 
- RDEPENDS_${PN} = "\
-   task-x11-server \
-@@ -18,6 +18,6 @@ RDEPENDS_${PN} = "\
- #  xserver-kdrive-splash-illume \
-   \
-   e-wm \
--  ${ILLUME_CONFIG} \
--  ${ILLUME_THEME} \
-+  ${ECONFIG} \
-+  ${ETHEME} \
- "
--- 
-1.7.4.1
+> The other case to consider is ENTERPRISE_DISTRO and DISTRO_FEATURES[1],
+> how do those interact with this patch.
 
+I guess it should be fine with this patch as extra patterns in
+PACKAGES_DYNAMIC won't harm afaik, it will only make my script a bit
+more complicated (I just build it and then list plugins from builddir
+like do_split_packages in gst-plugins-package.inc does).
 
+Regards,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--ZoaI/ZTpAVc4A5k6
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
+
+iEYEARECAAYFAk2CEi8ACgkQN1Ujt2V2gBxYLQCfYP5VVmwV0AnQ+kSrK4S/H/BF
+knQAoKleWLqT/ylKkLvQ0BVqryXyHu0c
+=ROHZ
+-----END PGP SIGNATURE-----
+
+--ZoaI/ZTpAVc4A5k6--
