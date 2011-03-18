@@ -1,31 +1,44 @@
-Received: from mail.eads.net ([80.156.45.113])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
-	id 1Q0VYN-0005LM-0Q for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 10:01:03 +0100
-Received: from gsx3072-vs5.mxchg.m.corp ([53.147.176.149])
-	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id p2I8xMwq012449
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Q0Vgj-0005Ti-JN
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Mar 2011 10:09:41 +0100
+Received: by iyb26 with SMTP id 26so3838657iyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2011 09:59:23 +0100
-Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
-	gsx3072-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Fri, 18 Mar 2011 09:59:18 +0100
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Fri, 18 Mar 2011 02:07:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=VDr/gXxl7POp+KWPpJXnHc9lxBEcPX8lrKgF013yvUk=;
+	b=XH6LyOqSXhogUS9LXMhsmmH+r0vMije/johqyzkvRRl2n8c5huUobhdiqVIxIDSaRA
+	j0bFmKo2r0rw8ENW9zyH3LuJD1XSacnAslAJch1MjxS1yJeaLWbExREi3K4sjrxpcpof
+	rNpHETkCbb8oaRb0GOiabKJePxwdHNyxp+nrw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=F148wNt+Rtezcp5EX3gcS2z6RJiPfZuXTsWBlzAXGlJblkbT0TTebNF67tADf2IISu
+	jELiEQn4Y/QYUnZxLmYZ8UnSpAFULA8D3TTsvZBoUTOag+qCb7aO4Imd6M7kkj75LZHg
+	/4zFBIn/9l301cVDqWjcXHCUinK7/v2mChHDM=
 MIME-Version: 1.0
-Date: Fri, 18 Mar 2011 09:59:17 +0100
-Message-ID: <0C757E680E33864AB113392C7E83F910BE5145@GSX300A.mxchg.m.corp>
-In-Reply-To: <201103171654.31619.pgsellmann@portner-elektronik.at>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [PATCH 3/3] base-files-3.0.14  configuration files
-Thread-Index: AcvkvVkOgl2RmWRSSq2kTsafc711ywAjPSyg
-References: <201103171154.23397.pgsellmann@portner-elektronik.at><1300360258.2132.14668.camel@phil-desktop><0C757E680E33864AB113392C7E83F910BE5144@GSX300A.mxchg.m.corp>
-	<201103171654.31619.pgsellmann@portner-elektronik.at>
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 18 Mar 2011 08:59:18.0547 (UTC)
-	FILETIME=[C3CC2E30:01CBE54A]
-Subject: Re: [PATCH 3/3] base-files-3.0.14 configuration files
+Received: by 10.231.117.129 with SMTP id r1mr680932ibq.195.1300438900340; Fri,
+	18 Mar 2011 02:01:40 -0700 (PDT)
+Received: by 10.231.13.69 with HTTP; Fri, 18 Mar 2011 02:01:40 -0700 (PDT)
+In-Reply-To: <989A078976CDAD4CB2DC976EEF70E2A505479B8C@eu2-mail.mgc.mentorg.com>
+References: <1299841477-23487-1-git-send-email-sledz@dresearch.de>
+	<1300180117.2522.14.camel@eha> <20110315220301.GC3042@denix.org>
+	<1300254477.2818.5.camel@eha>
+	<989A078976CDAD4CB2DC976EEF70E2A50547990E@eu2-mail.mgc.mentorg.com>
+	<4D8061DE.6030106@gmail.com>
+	<AANLkTikfnLb0XW6B6M0s+w=VuOkaeq0=MrYwUniQ6B_x@mail.gmail.com>
+	<20110316080500.GA3414@jama.jama.net>
+	<989A078976CDAD4CB2DC976EEF70E2A505479928@eu2-mail.mgc.mentorg.com>
+	<989A078976CDAD4CB2DC976EEF70E2A505479ABD@eu2-mail.mgc.mentorg.com>
+	<989A078976CDAD4CB2DC976EEF70E2A505479B8C@eu2-mail.mgc.mentorg.com>
+Date: Fri, 18 Mar 2011 10:01:40 +0100
+Message-ID: <AANLkTin1+BjbYGaeJ77qZhSh667VbNP7C-4LfXz0LZt1@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Python-native dependency in libxml2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,32 +52,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 09:01:03 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 18 Mar 2011 09:09:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
->> > Mark some files in ${sysconfdir} as configuration files so they are
->> not blindly overwritten when upgrading
->>=20
->> I would suggest a pre-/post processing in the packages, like debian
->> does.
->> If a config file exists or is changed, the current File will be
-rotated
->> or, if possible, left as it is and the new=20
->> file is installed beside the changed one.
+2011/3/18 Ahsan, Noor <Noor_Ahsan@mentor.com>:
+> Hello Martin/Frans and Khem,
+>
+> Any recommendation after following analysis that how should I proceed.
+> Should I send the patches to community?
+>
+> Regards,
+> Noor
 
->The opkg does not touch a present config file, but installs the new
-file with the name *-opkg
->So if you do a find /etc -name \*-opkg you see the conflicts.
+I think Martin is in a better position to judge this than I am.
+Did you also verify that the generated output (the packages and the
+contents of the packages) is identical in the python and no-python
+case?
 
->Any sensible conversion from old to new config file should be made by
-the package itself.
-
-As I experienced, opkg exits with an error code if a config file already
-exists, so if you want to create an image, the process will break at
-that error.
-It wasn't possible to create an image automatically then.
+Best regards, Frans
 
 
