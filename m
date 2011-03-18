@@ -1,24 +1,29 @@
 Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1Q0WgK-0000qg-Jw
+	(envelope-from <philb@gnu.org>) id 1Q0Wqw-0004PF-Ks
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 11:13:20 +0100
+	Fri, 18 Mar 2011 11:24:18 +0100
 Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
 	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q0Wef-0003IJ-Le
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q0WpH-0003Ib-Mo
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 11:11:37 +0100
+	Fri, 18 Mar 2011 11:22:35 +0100
 From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTi=9DUeh3eyaW=fQciA_Qk51yvqbBP_792n8fwQD@mail.gmail.com>
-References: <20110311081950.GG7353@excalibur.local>
-	<1300385432.2298.33.camel@saphir> <1300396447.30423.2113.camel@rex>
-	<AANLkTi=9DUeh3eyaW=fQciA_Qk51yvqbBP_792n8fwQD@mail.gmail.com>
-Date: Fri, 18 Mar 2011 10:15:29 +0000
-Message-ID: <1300443329.9054.53.camel@phil-desktop>
+In-Reply-To: <1300426143.8862.0.camel@eha>
+References: <1299841477-23487-1-git-send-email-sledz@dresearch.de>
+	<1300180117.2522.14.camel@eha>
+	<1300360696.2132.14681.camel@phil-desktop>
+	<1300373028.2468.8.camel@eha> <1300374439.9054.21.camel@phil-desktop>
+	<1300384355.2175.13.camel@eha> <1300385153.9054.44.camel@phil-desktop>
+	<1300391907.2175.23.camel@eha>
+	<1300395614.3026.2.camel@lenovo.internal.reciva.com>
+	<1300426143.8862.0.camel@eha>
+Date: Fri, 18 Mar 2011 10:26:27 +0000
+Message-ID: <1300443987.9054.64.camel@phil-desktop>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.3 
-Subject: Re: OE Bugzilla Future
+Subject: Re: Eliminating dependency race-conditions (was Re: [PATCH] net-snmp: disable libnl use)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,52 +37,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 10:13:20 -0000
+X-List-Received-Date: Fri, 18 Mar 2011 10:24:18 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2011-03-18 at 08:57 +0100, Frans Meulenbroeks wrote:
-> 2011/3/17 Richard Purdie <richard.purdie@linuxfoundation.org>:
-> > On Thu, 2011-03-17 at 19:10 +0100, Michael 'Mickey' Lauer wrote:
-> >> I'm in favor of keeping it, cleaning it up, and improve
-> >> the integration with patchwork / git. Throwing it away
-> >> would be a very bad sign to all those countless people
-> >> who've gone through the pains of actually working with
-> >> the bugtracker.
-> >
-> > The simple question is who is actually going to sort out the mess its
-> > in?
-> >
-> > Who is going to look after it on a continuing basis?
-> >
-> > If there isn't ownership, nothing is going to change.
+On Fri, 2011-03-18 at 06:29 +0100, Esben Haabendal wrote:
+> Yes, I get your point.  You could of-course still specify build
+> dependencies using recipe names/provides, and then just unpack all
+> target packages build by that recipe.
 > 
-> Actually I feel the real problem is that:
-> - people did not want to get bugs assigned to them (at least that was
-> what someone told me in the past)
-> - we're lacking a good notion of package or recipe ownership, so even
-> if we had someone acting as a bug manager, (s)he would have a hard
-> time to find out who to assign an issue to.
+> This would give you the major part of the KISS win I see, except for in
+> the dependency handling code of BitBake (and in the learning curve of OE
+> developers).  Keep in mind that by using packages for build-time
+> dependencies, the mechanism is exactly identical for run-time and
+> build-time dependencies.  Exactly the same code in BitBake handles both,
+> and the same mechanism needs to be understood.  This is also part of the
+> KISS win of doing it this way.
 
-Yes, agreed.  A few people have tried in the past to take responsibility
-for bugzilla itself (in infrastructure terms) and I would be happy
-enough to do that for the future.  But it clearly is not reasonable to
-expect the Bugzilla maintainer(s) to be personally responsible for
-fixing every bug that gets reported.  Unless other developers are
-cooperative, this leads inevitably to the current situation of issues
-languishing in bugzilla forever.
+Right.  So, it seems to me that the appropriate way to attack the
+problem in OE is to start by doing exactly that: leave the syntax of
+DEPENDS alone for now, treat each entry in DEPENDS as meaning "all
+packages built by the named recipe", and then implement the per-recipe
+sysroot construction that I think we are agreed is highly desirable.
 
-As you say, the real issue here seems to be that someone (presumably the
-TSC) needs to determine the workflow that OE is going to use and then
-convince the developers to stick to it.  Bugzilla works most effectively
-if everything goes through it, which means you can use the bug list as a
-kind of dashboard showing the issues which need attention each day, and
-if everybody uses it (and hence is diligent about closing bugs once they
-are actually fixed).  To that extent its role overlaps somewhat with
-patchwork and, personally, I would be quite happy to see bugzilla
-replace patchwork for email submissions.  But clearly others have a
-different view on that and, again, it is probably going to be down to
-the TSC to decide what tools are right for OE.
+Then, as a later refinement, we could introduce a mechanism for
+specifying dependencies more precisely, at the package level rather than
+the recipe level.  We could do that either by extending the syntax of
+DEPENDS, something like:
+
+DEPENDS = "boost:boost-iostreams"
+
+(to say that you wanted just the boost-iostreams package from the boost
+recipe)
+
+or, alternately, by introducing a new variable which would either
+supplement or replace DEPENDS.  Either of those would allow us to
+migrate to fine-grained dependencies without breaking existing recipes.
+
+> > (How) do you deal with library package renaming in OE-lite?
+> 
+> What exactly do you mean?  (We are doing several things with library
+> package naming...)
+
+I was thinking of situations like the Debian package autonamer, ie the
+thing that causes glibc-dev to come out named "libc6-dev.ipk" or similar
+depending on the soname of the library that was built.  It seems like
+this would be a bit awkward to deal with if your dependencies were
+specified purely in terms of output packages.
 
 p.
 
