@@ -1,25 +1,34 @@
-Received: from bsmtp5.bon.at ([195.3.86.187] helo=bsmtp.bon.at)
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pgsellmann@portner-elektronik.at>)
-	id 1Q0ZRP-00013E-04 for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 14:10:07 +0100
-Received: from aspire.localdomain (unknown [88.116.171.82])
-	by bsmtp.bon.at (Postfix) with ESMTP id 134F8130060
+	(envelope-from <martin.jansa@gmail.com>) id 1Q0aG2-0005OF-RQ
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Mar 2011 15:02:28 +0100
+Received: by bwz10 with SMTP id 10so3154740bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2011 14:08:17 +0100 (CET)
-From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
-Organization: PORTNER Elektronik
+	Fri, 18 Mar 2011 07:00:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=Q+vd8tndwLBtuL9bEcbfBXr9TDuFkMZ9hFyVUzXLpfQ=;
+	b=TFzGxaOJFXoeebwGZZhfNrZEXTjTyN7ShGZ4F6E54B+XSuptZv8pCHVb2EJD22LrS1
+	ra7aYb/W7WTPjZmaEgBi/F+tj67x/eb+Vo+dqExzYR65saLgzGUXr/mBK94mM+8g10c8
+	AyExB3NYj8XD4a0bOe2P/vnrl6GhkUTHXnnfg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Arl6j1uq4sD+yFTXcnKVOR/4Dfu2f/8uhBgRLSIaP4atkr0MR/+2A52Lu7SYmhIeCT
+	wMpvlj/CNU/ij9icB9SpaOPPCcSM2lZ7Q9jV619/1O4I7wYNPpbJPk9Mc3SyVYhz51be
+	A2Lc4ilOiqLVE/Jdfkk2Q963Lo/Y3GN9B+QCM=
+Received: by 10.204.180.80 with SMTP id bt16mr972267bkb.184.1300456840949;
+	Fri, 18 Mar 2011 07:00:40 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id b6sm2165467bkb.10.2011.03.18.07.00.36
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 18 Mar 2011 07:00:37 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Mar 2011 14:08:15 +0100
-User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
-	)
-References: <201103171154.23397.pgsellmann@portner-elektronik.at>
-	<201103171654.31619.pgsellmann@portner-elektronik.at>
-	<0C757E680E33864AB113392C7E83F910BE5145@GSX300A.mxchg.m.corp>
-In-Reply-To: <0C757E680E33864AB113392C7E83F910BE5145@GSX300A.mxchg.m.corp>
-MIME-Version: 1.0
-Message-Id: <201103181408.16366.pgsellmann@portner-elektronik.at>
-Subject: Re: [PATCH 3/3] base-files-3.0.14 configuration files
+Date: Fri, 18 Mar 2011 15:00:18 +0100
+Message-Id: <1300456829-25755-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [PATCH 01/12] libnl: rename libnl2 to libnl as used in openembedded-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,73 +42,501 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 13:10:07 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 18 Mar 2011 14:02:28 -0000
 
-Am Freitag, 18. M=E4rz 2011, 09:59:17 schrieb Hauser, Wolfgang (external):
-> >> > Mark some files in ${sysconfdir} as configuration files so they are
-> >> not blindly overwritten when upgrading
-> >>=20
-> >> I would suggest a pre-/post processing in the packages, like debian
-> >> does.
-> >> If a config file exists or is changed, the current File will be
-> rotated
-> >> or, if possible, left as it is and the new=20
-> >> file is installed beside the changed one.
->=20
-> >The opkg does not touch a present config file, but installs the new
-> file with the name *-opkg
-> >So if you do a find /etc -name \*-opkg you see the conflicts.
->=20
-> >Any sensible conversion from old to new config file should be made by
-> the package itself.
->=20
-> As I experienced, opkg exits with an error code if a config file already
-> exists, so if you want to create an image, the process will break at
-> that error.
-> It wasn't possible to create an image automatically then.
-If you create a fresh new image, the config files should not exist.
-opkg should not complain.
+* libnl1/libnl2 still conflicts even when using separate includedir so
+  it will be easier for distro maintainers to use only libnl1 or libnl2
+  by PREFERRED_VERSION
 
-Problem arises if you do a 'opkg upgrade' from the running target;
-With patch, opkg knows about Conffiles of base-files:
-root@us-3:~# opkg info base-files
-Package: base-files
-Version: 3.0.14-r101.9
-Provides:
-Status: install user installed
-Section: base
-Architecture: pcontrol_g20
-Maintainer: Angstrom Developers <angstrom-distro-devel@linuxtogo.org>
-MD5Sum: d5553232d20233866c7f626b7f1d6d4f
-Size: 4336
-=46ilename: base-files_3.0.14-r101.9_pcontrol_g20.ipk
-Conffiles:
- /etc/fstab 8a0d747a1565dfb39ae3b27b33ab5031
- /etc/hostname 0e97f4187e8f27c48206165806f9310a
- /etc/motd d41d8cd98f00b204e9800998ecf8427e
- /etc/profile 573d43f3c53d5bdabca7ec2317f5eb28
- /etc/nsswitch.conf 109e33e2c91d1853b5bc56078a96aa18
- /etc/host.conf a61b9f6548d337c1cc1e5a4de39f7b7f
-Source: file://nsswitch.conf file://motd file://inputrc file://host.conf fi=
-le://profile file://profile.d file://fstab file://filesystems file://issue.=
-net file://issue file://usbd file://share/dot.bashrc file://share/dot.profi=
-le file://licenses/BSD file://licenses/GPL-2 file://licenses/GPL-3 file://l=
-icenses/LGPL-2 file://licenses/LGPL-2.1 file://licenses/LGPL-3 file://licen=
-ses/GFDL-1.2 file://licenses/Artistic
-Description: Miscellaneous files for the base system.
-Installed-Time: 1300270958
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../libnl/files/dont-link-libnl-from-sysroot.patch |   26 -------------------
+ recipes/libnl/files/fix-includes.patch             |   13 ---------
+ recipes/libnl/files/fix-pc-file.patch              |   11 --------
+ recipes/libnl/files/local-includes.patch           |   12 ---------
+ recipes/libnl/files/netlink-local-fix.patch        |   12 ---------
+ recipes/libnl/files/respect-ldflags.patch          |   12 ---------
+ .../libnl-1.1/dont-link-libnl-from-sysroot.patch   |   26 +++++++++++++++++++
+ recipes/libnl/libnl-1.1/fix-includes.patch         |   13 +++++++++
+ recipes/libnl/libnl-1.1/local-includes.patch       |   12 +++++++++
+ recipes/libnl/libnl-1.1/netlink-local-fix.patch    |   12 +++++++++
+ recipes/libnl/libnl-1.1/respect-ldflags.patch      |   12 +++++++++
+ recipes/libnl/libnl/fix-pc-file.patch              |   11 ++++++++
+ recipes/libnl/libnl/fix-pktloc-dep-race.patch      |   20 ++++++++++++++
+ recipes/libnl/libnl2/fix-pc-file.patch             |   11 --------
+ recipes/libnl/libnl2/fix-pktloc-dep-race.patch     |   20 --------------
+ recipes/libnl/libnl2_2.0.bb                        |   27 --------------------
+ recipes/libnl/libnl2_git.bb                        |   27 --------------------
+ recipes/libnl/libnl_2.0.bb                         |   27 ++++++++++++++++++++
+ recipes/libnl/libnl_git.bb                         |   27 ++++++++++++++++++++
+ 19 files changed, 160 insertions(+), 171 deletions(-)
+ delete mode 100644 recipes/libnl/files/dont-link-libnl-from-sysroot.patch
+ delete mode 100644 recipes/libnl/files/fix-includes.patch
+ delete mode 100644 recipes/libnl/files/fix-pc-file.patch
+ delete mode 100644 recipes/libnl/files/local-includes.patch
+ delete mode 100644 recipes/libnl/files/netlink-local-fix.patch
+ delete mode 100644 recipes/libnl/files/respect-ldflags.patch
+ create mode 100644 recipes/libnl/libnl-1.1/dont-link-libnl-from-sysroot.patch
+ create mode 100644 recipes/libnl/libnl-1.1/fix-includes.patch
+ create mode 100644 recipes/libnl/libnl-1.1/local-includes.patch
+ create mode 100644 recipes/libnl/libnl-1.1/netlink-local-fix.patch
+ create mode 100644 recipes/libnl/libnl-1.1/respect-ldflags.patch
+ create mode 100644 recipes/libnl/libnl/fix-pc-file.patch
+ create mode 100644 recipes/libnl/libnl/fix-pktloc-dep-race.patch
+ delete mode 100644 recipes/libnl/libnl2/fix-pc-file.patch
+ delete mode 100644 recipes/libnl/libnl2/fix-pktloc-dep-race.patch
+ delete mode 100644 recipes/libnl/libnl2_2.0.bb
+ delete mode 100644 recipes/libnl/libnl2_git.bb
+ create mode 100644 recipes/libnl/libnl_2.0.bb
+ create mode 100644 recipes/libnl/libnl_git.bb
 
+diff --git a/recipes/libnl/files/dont-link-libnl-from-sysroot.patch b/recipes/libnl/files/dont-link-libnl-from-sysroot.patch
+deleted file mode 100644
+index beb6361..0000000
+--- a/recipes/libnl/files/dont-link-libnl-from-sysroot.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-Index: libnl-1.1/src/Makefile
+-===================================================================
+---- libnl-1.1.orig/src/Makefile	2008-01-14 07:48:45.000000000 -0800
+-+++ libnl-1.1/src/Makefile	2010-09-22 14:58:46.820826001 -0700
+-@@ -13,7 +13,7 @@ ifeq ($(shell [ ! -r ../Makefile.opts ]
+-     include ../Makefile.opts
+- endif
+- 
+--LDFLAGS	+= -L../lib -lnl utils.o
+-+LDFLAGS	+= ../lib/libnl.so utils.o
+- CIN 	:= $(wildcard nl-*.c) $(wildcard genl-*.c) $(wildcard nf-*.c)
+- TOOLS	:= $(CIN:%.c=%)
+- 
+-Index: libnl-1.1/tests/Makefile
+-===================================================================
+---- libnl-1.1.orig/tests/Makefile	2008-01-14 07:48:45.000000000 -0800
+-+++ libnl-1.1/tests/Makefile	2010-09-22 14:58:46.820826001 -0700
+-@@ -13,7 +13,7 @@ ifeq ($(shell [ ! -r ../Makefile.opts ]
+-     include ../Makefile.opts
+- endif
+- 
+--LDFLAGS	+= -L../lib -lnl ../src/utils.o
+-+LDFLAGS	+= ../lib/libnl.so ../src/utils.o
+- CIN 	:= $(wildcard test-*.c)
+- TOOLS	:= $(CIN:%.c=%)
+- 
+diff --git a/recipes/libnl/files/fix-includes.patch b/recipes/libnl/files/fix-includes.patch
+deleted file mode 100644
+index b172fd2..0000000
+--- a/recipes/libnl/files/fix-includes.patch
++++ /dev/null
+@@ -1,13 +0,0 @@
+-diff -ruN libnl-1.1/lib/route/link/vlan.c libnl-1.1-new/lib/route/link/vlan.c
+---- libnl-1.1/lib/route/link/vlan.c	2008-01-14 18:48:45.000000000 +0300
+-+++ libnl-1.1-new/lib/route/link/vlan.c	2009-01-30 10:55:09.000000000 +0300
+-@@ -26,7 +26,9 @@
+- #include <netlink/route/link/info-api.h>
+- #include <netlink/route/link/vlan.h>
+- 
+-+#ifndef VLAN_FLAG_REORDER_HDR
+- #include <linux/if_vlan.h>
+-+#endif
+- 
+- /** @cond SKIP */
+- #define VLAN_HAS_ID		(1<<0)
+diff --git a/recipes/libnl/files/fix-pc-file.patch b/recipes/libnl/files/fix-pc-file.patch
+deleted file mode 100644
+index 77f3e88..0000000
+--- a/recipes/libnl/files/fix-pc-file.patch
++++ /dev/null
+@@ -1,11 +0,0 @@
+-Index: git/libnl-2.0.pc.in
+-===================================================================
+---- git.orig/libnl-2.0.pc.in
+-+++ git/libnl-2.0.pc.in
+-@@ -6,5 +6,5 @@
+- Name: libnl
+- Description: Convenience library for netlink sockets
+- Version: @PACKAGE_VERSION@
+--Libs: -L${libdir} -lnl
+-+Libs: -L${libdir} -lnl -lnl-genl -lnl-nf -lnl-route
+- Cflags: -I${includedir}
+diff --git a/recipes/libnl/files/local-includes.patch b/recipes/libnl/files/local-includes.patch
+deleted file mode 100644
+index 85659db..0000000
+--- a/recipes/libnl/files/local-includes.patch
++++ /dev/null
+@@ -1,12 +0,0 @@
+-diff -urN libnl-1.1.orig/Makefile.opts.in libnl-1.1/Makefile.opts.in
+---- libnl-1.1.orig/Makefile.opts.in	2008-01-14 15:48:45.000000000 +0000
+-+++ libnl-1.1/Makefile.opts.in	2009-04-06 10:20:40.000000000 +0000
+-@@ -10,7 +10,7 @@
+- #
+- 
+- CC               := @CC@
+--CFLAGS           := @CFLAGS@
+-+CFLAGS           := -I./include -I. -I../include @CFLAGS@
+- LDFLAGS          := @LDFLAGS@
+- CPPFLAGS         := @CPPFLAGS@
+- PACKAGE_NAME     := @PACKAGE_NAME@
+diff --git a/recipes/libnl/files/netlink-local-fix.patch b/recipes/libnl/files/netlink-local-fix.patch
+deleted file mode 100644
+index 51c6736..0000000
+--- a/recipes/libnl/files/netlink-local-fix.patch
++++ /dev/null
+@@ -1,12 +0,0 @@
+-Index: libnl-1.1/include/netlink-local.h
+-===================================================================
+---- libnl-1.1.orig/include/netlink-local.h	2009-06-18 15:28:32.614209645 +0400
+-+++ libnl-1.1/include/netlink-local.h	2009-06-18 15:28:44.094190518 +0400
+-@@ -26,6 +26,7 @@
+- #include <sys/socket.h>
+- #include <inttypes.h>
+- #include <assert.h>
+-+#include <limits.h>
+- 
+- #include <arpa/inet.h>
+- #include <netdb.h>
+diff --git a/recipes/libnl/files/respect-ldflags.patch b/recipes/libnl/files/respect-ldflags.patch
+deleted file mode 100644
+index ba97dc6..0000000
+--- a/recipes/libnl/files/respect-ldflags.patch
++++ /dev/null
+@@ -1,12 +0,0 @@
+-diff -urN libnl-1.1.orig/lib/Makefile libnl-1.1/lib/Makefile
+---- libnl-1.1.orig/lib/Makefile	2008-01-14 15:48:45.000000000 +0000
+-+++ libnl-1.1/lib/Makefile	2009-04-06 10:16:21.000000000 +0000
+-@@ -48,7 +48,7 @@
+- 
+- $(OUT_SLIB): ../Makefile.opts $(OBJ)
+- 	@echo "  LD $(OUT_SLIB)"; \
+--	$(CC) -shared -Wl,-soname,libnl.so.1 -o $(OUT_SLIB) $(OBJ) $(LIBNL_LIB) -lc
+-+	$(CC) $(LDFLAGS) -shared -Wl,-soname,libnl.so.1 -o $(OUT_SLIB) $(OBJ) $(LIBNL_LIB) -lc
+- 	@echo "  LN $(OUT_SLIB) $(LN1_SLIB)"; \
+- 	rm -f $(LN1_SLIB) ; $(LN) -s $(OUT_SLIB) $(LN1_SLIB)
+- 	@echo "  LN $(LN1_SLIB) $(LN_SLIB)"; \
+diff --git a/recipes/libnl/libnl-1.1/dont-link-libnl-from-sysroot.patch b/recipes/libnl/libnl-1.1/dont-link-libnl-from-sysroot.patch
+new file mode 100644
+index 0000000..beb6361
+--- /dev/null
++++ b/recipes/libnl/libnl-1.1/dont-link-libnl-from-sysroot.patch
+@@ -0,0 +1,26 @@
++Index: libnl-1.1/src/Makefile
++===================================================================
++--- libnl-1.1.orig/src/Makefile	2008-01-14 07:48:45.000000000 -0800
+++++ libnl-1.1/src/Makefile	2010-09-22 14:58:46.820826001 -0700
++@@ -13,7 +13,7 @@ ifeq ($(shell [ ! -r ../Makefile.opts ]
++     include ../Makefile.opts
++ endif
++ 
++-LDFLAGS	+= -L../lib -lnl utils.o
+++LDFLAGS	+= ../lib/libnl.so utils.o
++ CIN 	:= $(wildcard nl-*.c) $(wildcard genl-*.c) $(wildcard nf-*.c)
++ TOOLS	:= $(CIN:%.c=%)
++ 
++Index: libnl-1.1/tests/Makefile
++===================================================================
++--- libnl-1.1.orig/tests/Makefile	2008-01-14 07:48:45.000000000 -0800
+++++ libnl-1.1/tests/Makefile	2010-09-22 14:58:46.820826001 -0700
++@@ -13,7 +13,7 @@ ifeq ($(shell [ ! -r ../Makefile.opts ]
++     include ../Makefile.opts
++ endif
++ 
++-LDFLAGS	+= -L../lib -lnl ../src/utils.o
+++LDFLAGS	+= ../lib/libnl.so ../src/utils.o
++ CIN 	:= $(wildcard test-*.c)
++ TOOLS	:= $(CIN:%.c=%)
++ 
+diff --git a/recipes/libnl/libnl-1.1/fix-includes.patch b/recipes/libnl/libnl-1.1/fix-includes.patch
+new file mode 100644
+index 0000000..b172fd2
+--- /dev/null
++++ b/recipes/libnl/libnl-1.1/fix-includes.patch
+@@ -0,0 +1,13 @@
++diff -ruN libnl-1.1/lib/route/link/vlan.c libnl-1.1-new/lib/route/link/vlan.c
++--- libnl-1.1/lib/route/link/vlan.c	2008-01-14 18:48:45.000000000 +0300
+++++ libnl-1.1-new/lib/route/link/vlan.c	2009-01-30 10:55:09.000000000 +0300
++@@ -26,7 +26,9 @@
++ #include <netlink/route/link/info-api.h>
++ #include <netlink/route/link/vlan.h>
++ 
+++#ifndef VLAN_FLAG_REORDER_HDR
++ #include <linux/if_vlan.h>
+++#endif
++ 
++ /** @cond SKIP */
++ #define VLAN_HAS_ID		(1<<0)
+diff --git a/recipes/libnl/libnl-1.1/local-includes.patch b/recipes/libnl/libnl-1.1/local-includes.patch
+new file mode 100644
+index 0000000..85659db
+--- /dev/null
++++ b/recipes/libnl/libnl-1.1/local-includes.patch
+@@ -0,0 +1,12 @@
++diff -urN libnl-1.1.orig/Makefile.opts.in libnl-1.1/Makefile.opts.in
++--- libnl-1.1.orig/Makefile.opts.in	2008-01-14 15:48:45.000000000 +0000
+++++ libnl-1.1/Makefile.opts.in	2009-04-06 10:20:40.000000000 +0000
++@@ -10,7 +10,7 @@
++ #
++ 
++ CC               := @CC@
++-CFLAGS           := @CFLAGS@
+++CFLAGS           := -I./include -I. -I../include @CFLAGS@
++ LDFLAGS          := @LDFLAGS@
++ CPPFLAGS         := @CPPFLAGS@
++ PACKAGE_NAME     := @PACKAGE_NAME@
+diff --git a/recipes/libnl/libnl-1.1/netlink-local-fix.patch b/recipes/libnl/libnl-1.1/netlink-local-fix.patch
+new file mode 100644
+index 0000000..51c6736
+--- /dev/null
++++ b/recipes/libnl/libnl-1.1/netlink-local-fix.patch
+@@ -0,0 +1,12 @@
++Index: libnl-1.1/include/netlink-local.h
++===================================================================
++--- libnl-1.1.orig/include/netlink-local.h	2009-06-18 15:28:32.614209645 +0400
+++++ libnl-1.1/include/netlink-local.h	2009-06-18 15:28:44.094190518 +0400
++@@ -26,6 +26,7 @@
++ #include <sys/socket.h>
++ #include <inttypes.h>
++ #include <assert.h>
+++#include <limits.h>
++ 
++ #include <arpa/inet.h>
++ #include <netdb.h>
+diff --git a/recipes/libnl/libnl-1.1/respect-ldflags.patch b/recipes/libnl/libnl-1.1/respect-ldflags.patch
+new file mode 100644
+index 0000000..ba97dc6
+--- /dev/null
++++ b/recipes/libnl/libnl-1.1/respect-ldflags.patch
+@@ -0,0 +1,12 @@
++diff -urN libnl-1.1.orig/lib/Makefile libnl-1.1/lib/Makefile
++--- libnl-1.1.orig/lib/Makefile	2008-01-14 15:48:45.000000000 +0000
+++++ libnl-1.1/lib/Makefile	2009-04-06 10:16:21.000000000 +0000
++@@ -48,7 +48,7 @@
++ 
++ $(OUT_SLIB): ../Makefile.opts $(OBJ)
++ 	@echo "  LD $(OUT_SLIB)"; \
++-	$(CC) -shared -Wl,-soname,libnl.so.1 -o $(OUT_SLIB) $(OBJ) $(LIBNL_LIB) -lc
+++	$(CC) $(LDFLAGS) -shared -Wl,-soname,libnl.so.1 -o $(OUT_SLIB) $(OBJ) $(LIBNL_LIB) -lc
++ 	@echo "  LN $(OUT_SLIB) $(LN1_SLIB)"; \
++ 	rm -f $(LN1_SLIB) ; $(LN) -s $(OUT_SLIB) $(LN1_SLIB)
++ 	@echo "  LN $(LN1_SLIB) $(LN_SLIB)"; \
+diff --git a/recipes/libnl/libnl/fix-pc-file.patch b/recipes/libnl/libnl/fix-pc-file.patch
+new file mode 100644
+index 0000000..17666fb
+--- /dev/null
++++ b/recipes/libnl/libnl/fix-pc-file.patch
+@@ -0,0 +1,11 @@
++Index: libnl-2.0/libnl-2.0.pc.in
++===================================================================
++--- libnl-2.0.orig/libnl-2.0.pc.in
+++++ libnl-2.0/libnl-2.0.pc.in
++@@ -6,5 +6,5 @@
++ Name: libnl
++ Description: Convenience library for netlink sockets
++ Version: @PACKAGE_VERSION@
++-Libs: -L${libdir} -lnl
+++Libs: -L${libdir} -lnl -lnl-genl -lnl-nf -lnl-route
++ Cflags: -I${includedir}
+diff --git a/recipes/libnl/libnl/fix-pktloc-dep-race.patch b/recipes/libnl/libnl/fix-pktloc-dep-race.patch
+new file mode 100644
+index 0000000..ee21744
+--- /dev/null
++++ b/recipes/libnl/libnl/fix-pktloc-dep-race.patch
+@@ -0,0 +1,20 @@
++Index: libnl-2.0/lib/Makefile.am
++===================================================================
++--- libnl-2.0.orig/lib/Makefile.am
+++++ libnl-2.0/lib/Makefile.am
++@@ -27,11 +27,15 @@ CLEANFILES = \
++ 	route/pktloc_grammar.c route/pktloc_grammar.h \
++ 	route/pktloc_syntax.c route/pktloc_syntax.h
++ 
+++BUILT_SOURCES = route/pktloc_syntax.h route/pktloc_grammar.h
+++
++ # Hack to avoid using ylwrap. It does not function correctly in combination
++ # with --header-file=
+++route/pktloc_grammar.h: route/pktloc_grammar.c
++ route/pktloc_grammar.c: route/pktloc_grammar.l
++ 	$(LEX) --header-file=route/pktloc_grammar.h $(LFLAGS) -o $@ $^
++ 
+++route/pktloc_syntax.h: route/pktloc_syntax.c
++ route/pktloc_syntax.c: route/pktloc_syntax.y
++ 	$(YACC) -d $(YFLAGS) -o $@ $^
++ 
+diff --git a/recipes/libnl/libnl2/fix-pc-file.patch b/recipes/libnl/libnl2/fix-pc-file.patch
+deleted file mode 100644
+index 17666fb..0000000
+--- a/recipes/libnl/libnl2/fix-pc-file.patch
++++ /dev/null
+@@ -1,11 +0,0 @@
+-Index: libnl-2.0/libnl-2.0.pc.in
+-===================================================================
+---- libnl-2.0.orig/libnl-2.0.pc.in
+-+++ libnl-2.0/libnl-2.0.pc.in
+-@@ -6,5 +6,5 @@
+- Name: libnl
+- Description: Convenience library for netlink sockets
+- Version: @PACKAGE_VERSION@
+--Libs: -L${libdir} -lnl
+-+Libs: -L${libdir} -lnl -lnl-genl -lnl-nf -lnl-route
+- Cflags: -I${includedir}
+diff --git a/recipes/libnl/libnl2/fix-pktloc-dep-race.patch b/recipes/libnl/libnl2/fix-pktloc-dep-race.patch
+deleted file mode 100644
+index ee21744..0000000
+--- a/recipes/libnl/libnl2/fix-pktloc-dep-race.patch
++++ /dev/null
+@@ -1,20 +0,0 @@
+-Index: libnl-2.0/lib/Makefile.am
+-===================================================================
+---- libnl-2.0.orig/lib/Makefile.am
+-+++ libnl-2.0/lib/Makefile.am
+-@@ -27,11 +27,15 @@ CLEANFILES = \
+- 	route/pktloc_grammar.c route/pktloc_grammar.h \
+- 	route/pktloc_syntax.c route/pktloc_syntax.h
+- 
+-+BUILT_SOURCES = route/pktloc_syntax.h route/pktloc_grammar.h
+-+
+- # Hack to avoid using ylwrap. It does not function correctly in combination
+- # with --header-file=
+-+route/pktloc_grammar.h: route/pktloc_grammar.c
+- route/pktloc_grammar.c: route/pktloc_grammar.l
+- 	$(LEX) --header-file=route/pktloc_grammar.h $(LFLAGS) -o $@ $^
+- 
+-+route/pktloc_syntax.h: route/pktloc_syntax.c
+- route/pktloc_syntax.c: route/pktloc_syntax.y
+- 	$(YACC) -d $(YFLAGS) -o $@ $^
+- 
+diff --git a/recipes/libnl/libnl2_2.0.bb b/recipes/libnl/libnl2_2.0.bb
+deleted file mode 100644
+index 7e9336e..0000000
+--- a/recipes/libnl/libnl2_2.0.bb
++++ /dev/null
+@@ -1,27 +0,0 @@
+-DESCRIPTION = "libnl2 is a library for applications dealing with netlink sockets"
+-SECTION = "libs/network"
+-LICENSE = "LGPL"
+-HOMEPAGE = "http://www.infradead.org/~tgr/libnl/"
+-PE = "1"
+-PR = "r2"
+-
+-DEPENDS = "flex-native bison-native"
+-
+-inherit autotools pkgconfig
+-
+-includedir = ${prefix}/include/libnl2
+-
+-S = "${WORKDIR}/libnl-${PV}"
+-SRC_URI = "\
+-  http://www.infradead.org/~tgr/libnl/files/libnl-${PV}.tar.gz \
+-  file://fix-pc-file.patch \
+-  file://fix-pktloc-dep-race.patch \
+-"
+-SRC_URI[md5sum] = "6aaf1e9802a17a7d702bb0638044ffa7"
+-SRC_URI[sha256sum] = "5a40dc903d3ca1074da7424b908bec8ff16936484798c7e46e53e9db8bc87a9c"
+-
+-PACKAGES =+ "${PN}-route ${PN}-nf ${PN}-genl ${PN}-cli"
+-FILES_${PN}-route = "${libdir}/libnl-route.so.*"
+-FILES_${PN}-nf    = "${libdir}/libnl-nf.so.*"
+-FILES_${PN}-genl  = "${libdir}/libnl-genl.so.*"
+-FILES_${PN}-cli   = "${libdir}/libnl-cli.so.*"
+diff --git a/recipes/libnl/libnl2_git.bb b/recipes/libnl/libnl2_git.bb
+deleted file mode 100644
+index b667815..0000000
+--- a/recipes/libnl/libnl2_git.bb
++++ /dev/null
+@@ -1,27 +0,0 @@
+-DESCRIPTION = "libnl2 is a library for applications dealing with netlink sockets"
+-SECTION = "libs/network"
+-LICENSE = "LGPL"
+-HOMEPAGE = "http://www.infradead.org/~tgr/libnl/"
+-SRCREV = "d378220c96c3c8b6f27dca33e7d8ba03318f9c2d"
+-PV = "1.9+gitr${SRCPV}"
+-PE = "1"
+-PR = "r3"
+-
+-DEPENDS = "flex-native bison-native"
+-
+-inherit autotools
+-
+-includedir = ${prefix}/include/libnl2
+-
+-SRC_URI = "\
+-  git://git.kernel.org/pub/scm/libs/netlink/libnl.git;protocol=git \
+-  file://fix-pc-file.patch \
+-  file://fix-pktloc-dep-race.patch \
+-"
+-S = "${WORKDIR}/git"
+-
+-PACKAGES =+ "${PN}-route ${PN}-nf ${PN}-genl ${PN}-cli"
+-FILES_${PN}-route = "${libdir}/libnl-route.so.*"
+-FILES_${PN}-nf    = "${libdir}/libnl-nf.so.*"
+-FILES_${PN}-genl  = "${libdir}/libnl-genl.so.*"
+-FILES_${PN}-cli   = "${libdir}/libnl-cli.so.*"
+diff --git a/recipes/libnl/libnl_2.0.bb b/recipes/libnl/libnl_2.0.bb
+new file mode 100644
+index 0000000..7e9336e
+--- /dev/null
++++ b/recipes/libnl/libnl_2.0.bb
+@@ -0,0 +1,27 @@
++DESCRIPTION = "libnl2 is a library for applications dealing with netlink sockets"
++SECTION = "libs/network"
++LICENSE = "LGPL"
++HOMEPAGE = "http://www.infradead.org/~tgr/libnl/"
++PE = "1"
++PR = "r2"
++
++DEPENDS = "flex-native bison-native"
++
++inherit autotools pkgconfig
++
++includedir = ${prefix}/include/libnl2
++
++S = "${WORKDIR}/libnl-${PV}"
++SRC_URI = "\
++  http://www.infradead.org/~tgr/libnl/files/libnl-${PV}.tar.gz \
++  file://fix-pc-file.patch \
++  file://fix-pktloc-dep-race.patch \
++"
++SRC_URI[md5sum] = "6aaf1e9802a17a7d702bb0638044ffa7"
++SRC_URI[sha256sum] = "5a40dc903d3ca1074da7424b908bec8ff16936484798c7e46e53e9db8bc87a9c"
++
++PACKAGES =+ "${PN}-route ${PN}-nf ${PN}-genl ${PN}-cli"
++FILES_${PN}-route = "${libdir}/libnl-route.so.*"
++FILES_${PN}-nf    = "${libdir}/libnl-nf.so.*"
++FILES_${PN}-genl  = "${libdir}/libnl-genl.so.*"
++FILES_${PN}-cli   = "${libdir}/libnl-cli.so.*"
+diff --git a/recipes/libnl/libnl_git.bb b/recipes/libnl/libnl_git.bb
+new file mode 100644
+index 0000000..b667815
+--- /dev/null
++++ b/recipes/libnl/libnl_git.bb
+@@ -0,0 +1,27 @@
++DESCRIPTION = "libnl2 is a library for applications dealing with netlink sockets"
++SECTION = "libs/network"
++LICENSE = "LGPL"
++HOMEPAGE = "http://www.infradead.org/~tgr/libnl/"
++SRCREV = "d378220c96c3c8b6f27dca33e7d8ba03318f9c2d"
++PV = "1.9+gitr${SRCPV}"
++PE = "1"
++PR = "r3"
++
++DEPENDS = "flex-native bison-native"
++
++inherit autotools
++
++includedir = ${prefix}/include/libnl2
++
++SRC_URI = "\
++  git://git.kernel.org/pub/scm/libs/netlink/libnl.git;protocol=git \
++  file://fix-pc-file.patch \
++  file://fix-pktloc-dep-race.patch \
++"
++S = "${WORKDIR}/git"
++
++PACKAGES =+ "${PN}-route ${PN}-nf ${PN}-genl ${PN}-cli"
++FILES_${PN}-route = "${libdir}/libnl-route.so.*"
++FILES_${PN}-nf    = "${libdir}/libnl-nf.so.*"
++FILES_${PN}-genl  = "${libdir}/libnl-genl.so.*"
++FILES_${PN}-cli   = "${libdir}/libnl-cli.so.*"
+-- 
+1.7.4.1
 
-As you can see, opkg maintains some md5-hash value for the unchanged Conffi=
-le so a sensible conflict resolution is possible.
-If it is not done so, its a opkg bug
-
-Tested: it is possible to create an image with this patch.
-Tested: 'opkg upgrade' handles the Conffiles as expected.
-
-Peter
 
 
