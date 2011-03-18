@@ -1,34 +1,38 @@
-Received: from mail2.matrix-vision.com ([85.214.244.251])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <michael.jones@matrix-vision.de>) id 1Q0WRJ-0001ZK-K0
+Received: from familie-heinold.de ([85.214.48.103]
+	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <woglinde@rhein.zuhause.netz>) id 1Q0WXI-0000TG-Ud
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 10:57:56 +0100
-Received: from mail2.matrix-vision.com (localhost [127.0.0.1])
-	by mail2.matrix-vision.com (Postfix) with ESMTP id 45FA641432;
-	Fri, 18 Mar 2011 10:49:25 +0100 (CET)
-Received: from erinome (g2.matrix-vision.com [80.152.136.245])
-	by mail2.matrix-vision.com (Postfix) with ESMTPA id EF21F41429;
-	Fri, 18 Mar 2011 10:49:24 +0100 (CET)
-Received: from erinome (localhost [127.0.0.1])
-	by erinome (Postfix) with ESMTP id 6CC1C6F8A;
-	Fri, 18 Mar 2011 10:49:24 +0100 (CET)
-Received: by erinome (Postfix, from userid 108)
-	id 5F2256F9C; Fri, 18 Mar 2011 10:49:24 +0100 (CET)
-Received: from [192.168.65.46] (host65-46.intern.matrix-vision.de
-	[192.168.65.46]) by erinome (Postfix) with ESMTPA id 4BB606F8A;
-	Fri, 18 Mar 2011 10:49:24 +0100 (CET)
-Message-ID: <4D832AA4.1020701@matrix-vision.de>
-Date: Fri, 18 Mar 2011 10:49:24 +0100
-From: Michael Jones <michael.jones@matrix-vision.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.12) Gecko/20101029 Lightning/1.0b2 Thunderbird/3.1.6
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
- koen@dominion.thruhere.net
-X-MV-Disclaimer: true (erinome)
-X-AV-Checked: ClamAV using ClamSMTP (erinome)
-X-AV-Checked: ClamAV using ClamSMTP (mail2)
-Subject: staging & using kernel headers
+	Fri, 18 Mar 2011 11:04:01 +0100
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id DF13911000B7
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Mar 2011 10:54:00 +0100 (CET)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 474C811000BA
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Mar 2011 10:53:59 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from rhein.familie-heinold.de (g225072129.adsl.alicedsl.de
+	[92.225.72.129]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Mar 2011 10:53:59 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 448DB3C05A; Fri, 18 Mar 2011 10:53:14 +0100 (CET)
+From: heinold@inf.fu-berlin.de
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 18 Mar 2011 10:53:10 +0100
+Message-Id: <1300441991-30490-2-git-send-email-heinold@inf.fu-berlin.de>
+X-Mailer: git-send-email 1.7.4.1
+In-Reply-To: <1300441991-30490-1-git-send-email-heinold@inf.fu-berlin.de>
+References: <1300441991-30490-1-git-send-email-heinold@inf.fu-berlin.de>
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: [PATCH 1/2] ti-c6accel: fix building for uclibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,96 +46,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 09:58:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 18 Mar 2011 10:04:01 -0000
 
-Hello Koen & co.,
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 
-I recently bumped into a problem with recipes ti-dmai and gstreamer-ti
-when they included the kernel headers.  These headers were staged by
-kernel.bbclass sysroot_stage_all_append() with a lot of manual copying
-and manipulating links and such, rather than using 'oe_runmake
-headers_install'.  Back in October Koen explained this
-(http://article.gmane.org/gmane.comp.handhelds.openembedded/37772) is
-because some recipes use private kernel API.  The result of this with my
-2.6.38 kernel is that I get a warning-turned-error from linux/types.h
-that "Attempt to use kernel headers from user space".
 
-ti-dmai_svn.bb hacks this (self-admittedly) by defining
-_EXPORTED_HEADERS_ (commit d0184be13b4879e, also from Koen).  I had to
-modify the recipe to enable the define to actually get passed as a
-compile option.  For gstreamer-ti, there was no such hack in place, but
-it was needed for the same reason.
-
-I would think it is a common requirement for recipes to include kernel
-headers, and this warning has been around since 2.6.32.  I got around it
-with gstreamer-ti by installing the headers with headers_install into a
-subdir of the headers directory set up currently by kernel.bbclass, and
-pointing the gstreamer-ti recipe at that, but I'm not sure if there's a
-better way.
-
-If there are some recipes that need internal kernel sources staged for
-them, then it seems to me that we need both sets of kernel headers: one
-exported to userspace (with headers_install) and one that is not.
-Right?  Can we agree on a standard place/manner for this?
-
-Below is my patch to get gstreamer-ti working, for illustration.
-
--Michael
-
-From 71b3762ad5f6e7a8553a6b780296f7e994513f0b Mon Sep 17 00:00:00 2001
-From: Michael Jones <michael.jones@matrix-vision.de>
-Date: Thu, 17 Mar 2011 17:23:53 +0100
-Subject: [PATCH] install kernel headers exported for userspace
-
-kernel.bbclass already copies and manipulates kernel headers into
-sysroot, but it doesn't export them properly using "make headers_install"
-which leads to a compiler error/warning in linux/types.h:
-
-"Attempt to use kernel headers from user space, see
-http://kernelnewbies.org/KernelHeaders"
-
+Signed-off-by: Henning Heinold <heinold@inf.fu-berlin.de>
 ---
- classes/kernel.bbclass      |    5 +++++
- recipes/ti/gstreamer-ti.inc |    2 +-
- 2 files changed, 6 insertions(+), 1 deletions(-)
+ recipes/ti/ti-c6accel.inc                   |    2 +-
+ recipes/ti/ti-c6accel/fix_time_symbol.patch |   46 +++++++++++++++++++++++++++
+ recipes/ti/ti-c6accel_1.01.00.03.bb         |    2 +
+ 3 files changed, 49 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/ti/ti-c6accel/fix_time_symbol.patch
 
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index 422bcd7..6b46d51 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -210,6 +210,11 @@ sysroot_stage_all_append() {
- 	[ -e Module.symvers ] && install -m 0644 Module.symvers $kerneldir/
+diff --git a/recipes/ti/ti-c6accel.inc b/recipes/ti/ti-c6accel.inc
+index 7d09783..216f4c2 100644
+--- a/recipes/ti/ti-c6accel.inc
++++ b/recipes/ti/ti-c6accel.inc
+@@ -18,7 +18,7 @@ PROVIDES += "ti-c6accel-apps"
  
- 	cp -fR scripts $kerneldir/
+ # This recipe links statically against kernel dependant stuff, use kernel PR as base and append a local version
+ PR = "${MACHINE_KERNEL_PR}"
+-PR_append = "c"
++PR_append = "d"
+ 
+ S = "${WORKDIR}/c6accel_${PV}"
+ 
+diff --git a/recipes/ti/ti-c6accel/fix_time_symbol.patch b/recipes/ti/ti-c6accel/fix_time_symbol.patch
+new file mode 100644
+index 0000000..9963669
+--- /dev/null
++++ b/recipes/ti/ti-c6accel/fix_time_symbol.patch
+@@ -0,0 +1,46 @@
++Index: c6accel_1_01_00_03/soc/app/benchmark.h
++===================================================================
++--- c6accel_1_01_00_03.orig/soc/app/benchmark.h	2011-03-12 17:45:49.640633120 +0100
+++++ c6accel_1_01_00_03/soc/app/benchmark.h	2011-03-12 17:46:10.360988120 +0100
++@@ -39,7 +39,7 @@
++ 
++ 
++  extern Time_Object sTime;
++- extern UInt32      time;
+++ extern UInt32      timestamp;
++ 
++  #define OPEN_LOG_FILE(Name)                                    \
++  if ((benchmarkFd = fopen(Name,"wb")) == NULL) {                \
++@@ -49,7 +49,7 @@
++  #define CLOSE_LOG_FILE() fclose(benchmarkFd);
++ 
++  #define START_BENCHMARK()                                     \
++-           Time_delta(&sTime,&time);
+++           Time_delta(&sTime,&timestamp);
++ 
++  #define LOG_STRING(str)                                        \
++        fprintf(benchmarkFd,"%s",str);
++@@ -70,8 +70,8 @@
++ 
++ 
++  #define END_AND_WRITE_BENCHMARK()                             \
++-       Time_delta(&sTime,&time);                                \
++-       fprintf(benchmarkFd,"%d",(unsigned int)time);
+++       Time_delta(&sTime,&timestamp);                                \
+++       fprintf(benchmarkFd,"%d",(unsigned int)timestamp);
++ 
++ 
++ 
++Index: c6accel_1_01_00_03/soc/app/appMain.c
++===================================================================
++--- c6accel_1_01_00_03.orig/soc/app/appMain.c	2011-03-12 17:46:42.030148120 +0100
+++++ c6accel_1_01_00_03/soc/app/appMain.c	2011-03-12 17:48:00.619423120 +0100
++@@ -66,7 +66,7 @@
++ /* This object is used in MACRO in benchmark.h */
++ #include "timeObj.h"
++ Time_Object sTime;
++-UInt32      time;
+++UInt32      timestamp;
++ 
++ void Time_reset(Time_Object *sTime)
++ {
+diff --git a/recipes/ti/ti-c6accel_1.01.00.03.bb b/recipes/ti/ti-c6accel_1.01.00.03.bb
+index bf5f1cf..42b0cc6 100644
+--- a/recipes/ti/ti-c6accel_1.01.00.03.bb
++++ b/recipes/ti/ti-c6accel_1.01.00.03.bb
+@@ -7,6 +7,8 @@ SRC_URI_append = "file://fix-loadmodule.patch \
+                   file://0001-soc-honour-buildsystem-CFLAGS-and-LDFLAGS-when-set.patch \
+                  "
+ 
++SRC_URI_append_libc-uclibc = "file://fix_time_symbol.patch"
 +
-+	# install kernel headers in the proper manner to export them
-+	# for userspace programs
-+	userspace_hdrs=${kerneldir}/userspace
-+	oe_runmake headers_install INSTALL_HDR_PATH=${userspace_hdrs} ARCH=${ARCH}
- }
+ PV = "1_01_00_03"
  
- kernel_do_configure() {
-diff --git a/recipes/ti/gstreamer-ti.inc b/recipes/ti/gstreamer-ti.inc
-index 905e192..04d990f 100644
---- a/recipes/ti/gstreamer-ti.inc
-+++ b/recipes/ti/gstreamer-ti.inc
-@@ -72,7 +72,7 @@ CPPFLAGS_append = " -DPlatform_${PLATFORM}"
- export ENCODE_COMBO    = "${installdir}/ti-codecs-server/encodeCombo.x64P"
- export DECODE_COMBO    = "${installdir}/ti-codecs-server/decodeCombo.x64P"
- # Makefile also expects to be able to find the kernel headers from the envirionment
--export LINUXKERNEL_INSTALL_DIR = "${STAGING_KERNEL_DIR}"
-+export LINUXKERNEL_INSTALL_DIR = "${STAGING_KERNEL_DIR}/userspace"
  
- do_configure_prepend() {
- 	# PSP kernel is based on older DSS. we need to replace linux/omapfb.h with mach/omapfb.h
 -- 
 1.7.4.1
-
-
-MATRIX VISION GmbH, Talstrasse 16, DE-71570 Oppenweiler
-Registergericht: Amtsgericht Stuttgart, HRB 271090
-Geschaeftsfuehrer: Gerhard Thullner, Werner Armingeon, Uwe Furtner
 
 
