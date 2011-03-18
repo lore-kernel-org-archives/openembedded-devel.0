@@ -1,41 +1,20 @@
-Received: from [77.233.226.4] (helo=public.doredevelopment.dk)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eha@doredevelopment.dk>) id 1Q0Yjl-0006SU-Pf
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 13:25:01 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by public.doredevelopment.dk (Postfix) with ESMTP id 697B951B7
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2011 13:15:01 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at dev.doredevelopment.dk
-Received: from public.doredevelopment.dk ([127.0.0.1])
-	by localhost (public.doredevelopment.dk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id PbTOy6omjuz4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2011 13:14:56 +0100 (CET)
-Received: from eha (unknown [192.168.18.101])
-	by public.doredevelopment.dk (Postfix) with ESMTP id 6B41040F9
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2011 13:14:56 +0100 (CET)
-Received: by eha (Postfix, from userid 1000)
-	id 4AC4DAA113; Fri, 18 Mar 2011 13:14:56 +0100 (CET)
-From: Esben Haabendal <eha@doredevelopment.dk>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q0YlF-0006Tp-C0 for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Mar 2011 13:26:33 +0100
+Received: from f053044006.adsl.alicedsl.de ([78.53.44.6] helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q0Yja-0003bA-4D for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Mar 2011 12:24:50 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1299841477-23487-1-git-send-email-sledz@dresearch.de>
-	<1300180117.2522.14.camel@eha>
-	<1300360696.2132.14681.camel@phil-desktop>
-	<1300373028.2468.8.camel@eha> <1300374439.9054.21.camel@phil-desktop>
-	<1300384355.2175.13.camel@eha> <1300385153.9054.44.camel@phil-desktop>
-	<1300391907.2175.23.camel@eha>
-	<1300395614.3026.2.camel@lenovo.internal.reciva.com>
-	<1300426143.8862.0.camel@eha> <1300443987.9054.64.camel@phil-desktop>
-Date: Fri, 18 Mar 2011 13:14:56 +0100
-In-Reply-To: <1300443987.9054.64.camel@phil-desktop> (Phil Blundell's message
-	of "Fri, 18 Mar 2011 10:26:27 +0000")
-Message-ID: <87ei6439rz.fsf@eha.doredevelopment.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.1 (gnu/linux)
-MIME-Version: 1.0
-Subject: Re: Eliminating dependency race-conditions
+Date: Fri, 18 Mar 2011 13:24:48 +0100
+Message-ID: <1300451088.3830.53.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: qemu: `ERROR: QA Issue with qemu: Architecture did not match (3 to 20) on /work/i686-oe-linux/qemu-0.14.0-r3/packages-split/qemu/usr/share/qemu/openbios-ppc`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,94 +28,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 12:25:01 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 18 Mar 2011 12:26:33 -0000
+X-Groupsio-MsgNum: 30399
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Q5vr9g3PGd0IR7VWfyzx"
 
-Phil Blundell <philb@gnu.org> writes:
+--=-Q5vr9g3PGd0IR7VWfyzx
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> On Fri, 2011-03-18 at 06:29 +0100, Esben Haabendal wrote:
->> Yes, I get your point.  You could of-course still specify build
->> dependencies using recipe names/provides, and then just unpack all
->> target packages build by that recipe.
->> 
->> This would give you the major part of the KISS win I see, except for in
->> the dependency handling code of BitBake (and in the learning curve of OE
->> developers).  Keep in mind that by using packages for build-time
->> dependencies, the mechanism is exactly identical for run-time and
->> build-time dependencies.  Exactly the same code in BitBake handles both,
->> and the same mechanism needs to be understood.  This is also part of the
->> KISS win of doing it this way.
->
-> Right.  So, it seems to me that the appropriate way to attack the
-> problem in OE is to start by doing exactly that: leave the syntax of
-> DEPENDS alone for now, treat each entry in DEPENDS as meaning "all
-> packages built by the named recipe", and then implement the per-recipe
-> sysroot construction that I think we are agreed is highly desirable.
-
-By doing it this way, I don't think we are getting much closer to the
-second step (package-based build-time dependencies).  The OE-lite
-implementation of per-recipe staging builds on top of package-based
-build-time dependencies, so to do it the other way around, would imply
-taking the sstate concept and extend it to do per-recipe sysroots.
-After that, I believe you have exactly the same amount of development
-left to get where OE-lite is in respect to package-based build-time
-depencies and per-recipe staging.
-
-As I see it, package-based build-time dependencies practically obsoletes
-sstate.  So if we for a moment imagine that we have moved OE to have
-sstate based per-recipe staging, we still have the same amount of work
-to do in the following areas:
-
-* Modifying BitBake and OE metadata to handle package-based build-time
-  dependencies
-* Modifying existing recipes to include package-based build-time
-  dependency information
-
-You can see the per-recipe staging as a postive side-effect of the
-package-based build-time dependency implementation.
-
-So why take the detour instead of just doing it?
-
-> Then, as a later refinement, we could introduce a mechanism for
-> specifying dependencies more precisely, at the package level rather than
-> the recipe level.  We could do that either by extending the syntax of
-> DEPENDS, something like:
->
-> DEPENDS = "boost:boost-iostreams"
->
-> (to say that you wanted just the boost-iostreams package from the boost
-> recipe)
-
-That is IMO just adding more cruft to OE.  Not really what we need.
-
-> or, alternately, by introducing a new variable which would either
-> supplement or replace DEPENDS.  Either of those would allow us to
-> migrate to fine-grained dependencies without breaking existing recipes.
-
-Sounds better.
-
-Also, just as for run-time dependencies, the build-time package
-dependencies is not necesarely the actual package names, but some
-provides names, so having a "recipe:package" syntax really does not make
-much sense.
-
->> > (How) do you deal with library package renaming in OE-lite?
->> 
->> What exactly do you mean?  (We are doing several things with library
->> package naming...)
->
-> I was thinking of situations like the Debian package autonamer, ie the
-> thing that causes glibc-dev to come out named "libc6-dev.ipk" or similar
-> depending on the soname of the library that was built.  It seems like
-> this would be a bit awkward to deal with if your dependencies were
-> specified purely in terms of output packages.
-
-As OE-lite is not OE, we are currently not supporting such type of
-package renaming.  Let's leave that to Debian guys to fight with ;-)
-
-But as we build-time dependencies are typically in the form of some
-package "provides", it doesn't really matter if the package is renamed.
-
-/Esben
+Dear OE folks,
 
 
+        $ MACHINE=3D"qemux86" bitbake -k qemu
+        [=E2=80=A6]
+        Build Configuration:
+        BB_VERSION        =3D "1.12.0"
+        METADATA_BRANCH   =3D "<unknown>"
+        METADATA_REVISION =3D "e043f30"
+        TARGET_ARCH       =3D "i686"
+        TARGET_OS         =3D "linux"
+        MACHINE           =3D "qemux86"
+        DISTRO            =3D "minimal"
+        DISTRO_VERSION    =3D "dev-snapshot-20110318"
+        [=E2=80=A6]
+        NOTE: package qemu-0.14.0-r3: task do_qa_staging: Succeeded
+        ERROR: QA Issue with qemu: Architecture did not match (3 to 20) on =
+/work/i686-oe-linux/qemu-0.14.0-r3/packages-split/qemu/usr/share/qemu/openb=
+ios-ppc
+        ERROR: QA Issue with qemu: Architecture did not match (3 to 2) on /=
+work/i686-oe-linux/qemu-0.14.0-r3/packages-split/qemu/usr/share/qemu/openbi=
+os-sparc32
+        ERROR: QA run found fatal errors. Please consider fixing them.
+        NOTE: package qemu-0.14.0-r3: task do_package_qa: Failed
+        ERROR: Function 'do_package_qa' failed
+        ERROR: Task 15 (/oe/openembedded/recipes/qemu/qemu_0.14.0.bb, do_pa=
+ckage) failed with exit code '1'
+        ERROR: '/oe/openembedded/recipes/qemu/qemu_0.14.0.bb' failed
+
+
+Thanks,
+
+Paul
+
+--=-Q5vr9g3PGd0IR7VWfyzx
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2DTxAACgkQPX1aK2wOHVjC5ACfecg4N2uk3dcnLHYBkyMPmbB4
+0VAAn3fiYYrmz7LJcvdaZlrfOMPlDAKM
+=4y0c
+-----END PGP SIGNATURE-----
+
+--=-Q5vr9g3PGd0IR7VWfyzx--
