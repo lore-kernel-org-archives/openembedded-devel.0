@@ -1,37 +1,37 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q0aHl-0005Tz-Gy
+	(envelope-from <martin.jansa@gmail.com>) id 1Q0aHu-0005Tz-1M
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 15:04:13 +0100
+	Fri, 18 Mar 2011 15:04:22 +0100
 Received: by mail-bw0-f47.google.com with SMTP id 10so3155541bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2011 07:02:30 -0700 (PDT)
+	Fri, 18 Mar 2011 07:02:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
 	:in-reply-to:references;
-	bh=HXC4XbAwV25yY4daz6RHpVq9Ntz4AnlRiEQSM7r+ZUI=;
-	b=Z/GU0O0M+8SwDrrcLl4dpuhIsc8dBoSHk4sr5O+tVgn1sN0yERLTr8+qK+PRHzHaO+
-	AYlCKFgAjqXEpEvESFSmZ6FRgmQf1fZy2riPzCfS1gEVwJh4cqTNxQHTXEW/hKVMa1iZ
-	Rzmd3oG9Z9ahfNI8Sd6IdWi1Xt95C1i1H2RBk=
+	bh=xFtVuhkvAkNTbbZT777U33jbdvqhEmWEwlP0z8qq0pQ=;
+	b=uhYwKGF8To9nEqpm9HSNMmgvnuCgR0OeAdthq7L2lmIbnKMkqDHeT9u6FV8YySCbUf
+	GQ2pUxrKM72wN2RcfeLQlmdK9338g0GNOD6sMRGXzeAIGbMeY1C/GE9W7JjftrkEj/F/
+	pcNHSkVNz+KK5Mpt7dTjZJOPq/NGRj84FyPD0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=NmBckU4FLV9hITXipy+SIKlICfddDti6c1Di6ZZ9KuURu0P3gC1DskEWvtOLQhjgcI
-	nXX6SwDdtOQ9UKqZImSefF0HcNkaI81A5K10bVVVzVR1wO9EP6t2ygMF4t9QCA6jj2C7
-	3MVuHwlelYtMPk56AOj5oKK1Y//wVjDN/SKsE=
-Received: by 10.204.46.34 with SMTP id h34mr51556bkf.19.1300456950148;
-	Fri, 18 Mar 2011 07:02:30 -0700 (PDT)
+	b=Z7kbkY5T6hSMdTPdg8ioTunr2YNrntWQgWhQxeVlkjm2YGZbPF9eJdP7/nc2//WoUc
+	LghDw2scjqxhqzEXFEOZzLRHoPI4kcp1sdlu8QNBtHovlwZBcYvZA3TQH8lw0LbMXPK/
+	CCuJmnfp5ASfi0VPxJlCCKWCnPV+Dl45UdHz0=
+Received: by 10.204.74.85 with SMTP id t21mr987327bkj.128.1300456958728;
+	Fri, 18 Mar 2011 07:02:38 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id v21sm2166924bkt.11.2011.03.18.07.02.28
+	by mx.google.com with ESMTPS id b7sm2165383bkb.18.2011.03.18.07.02.37
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 18 Mar 2011 07:02:29 -0700 (PDT)
+	Fri, 18 Mar 2011 07:02:37 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Mar 2011 15:00:28 +0100
-Message-Id: <1300456829-25755-11-git-send-email-Martin.Jansa@gmail.com>
+Date: Fri, 18 Mar 2011 15:00:29 +0100
+Message-Id: <1300456829-25755-12-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.4.1
 In-Reply-To: <1300456829-25755-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1300456829-25755-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH 11/12] wpa-supplicant-0.7: depend only on libnl(-2.0) not libnl2(-2.0)
+Subject: [PATCH 12/12] connman: depend only on libnl(-2.0) not libnl2(-2.0)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,41 +45,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 14:04:13 -0000
+X-List-Received-Date: Fri, 18 Mar 2011 14:04:22 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes/wpa-supplicant/wpa-supplicant-0.7.inc |    9 ++-------
- 1 files changed, 2 insertions(+), 7 deletions(-)
+ recipes/connman/connman.inc     |    2 +-
+ recipes/connman/connman_0.46.bb |    2 +-
+ recipes/connman/connman_0.51.bb |    2 +-
+ recipes/connman/connman_0.65.bb |    2 +-
+ recipes/connman/connman_0.68.bb |    2 +-
+ recipes/connman/connman_git.bb  |    2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
-index 7649038..0cf3b70 100644
---- a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
-+++ b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
-@@ -6,9 +6,9 @@ LICENSE = "GPLv2 | BSD"
- LIC_FILES_CHKSUM = "file://../COPYING;md5=c54ce9345727175ff66d17b67ff51f58 \
-                     file://../README;md5=54cfc88015d3ce83f7156e63c6bb1738 \
-                     file://wpa_supplicant.c;beginline=1;endline=17;md5=acdc5a4b0d6345f21f136eace747260e"
--DEPENDS = "gnutls dbus libnl2 openssl ${@base_contains("COMBINED_FEATURES", "madwifi", "madwifi-ng", "",d)}"
-+DEPENDS = "gnutls dbus libnl openssl ${@base_contains("COMBINED_FEATURES", "madwifi", "madwifi-ng", "",d)}"
- RRECOMMENDS_${PN} = "wpa-supplicant-passphrase wpa-supplicant-cli"
--INC_PR = "r6"
-+INC_PR = "r7"
+diff --git a/recipes/connman/connman.inc b/recipes/connman/connman.inc
+index e25d64a..7306b1b 100644
+--- a/recipes/connman/connman.inc
++++ b/recipes/connman/connman.inc
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.moblin.org/projects/projects_connman.php"
+ SECTION = "libs/network"
+ LICENSE = "GPL"
+ # we need to define the depends here, the dynamic stuff is too late
+-DEPENDS  = "libnl2 wpa-supplicant dbus glib-2.0 ppp busybox dhclient resolvconf bluez4"
++DEPENDS  = "libnl wpa-supplicant dbus glib-2.0 ppp busybox dhclient resolvconf bluez4"
  
- SRC_URI = "http://hostap.epitest.fi/releases/wpa_supplicant-${PV}.tar.gz \
-            file://defconfig \
-@@ -20,11 +20,6 @@ SRC_URI = "http://hostap.epitest.fi/releases/wpa_supplicant-${PV}.tar.gz \
+ EXTRA_OECONF += "\
+     ac_cv_path_WPASUPPLICANT=/usr/sbin/wpa_supplicant \
+diff --git a/recipes/connman/connman_0.46.bb b/recipes/connman/connman_0.46.bb
+index a7bf286..1f1df9c 100644
+--- a/recipes/connman/connman_0.46.bb
++++ b/recipes/connman/connman_0.46.bb
+@@ -1,5 +1,5 @@
+ require connman.inc
+-PR = "r5"
++PR = "r6"
  
- S = "${WORKDIR}/wpa_supplicant-${PV}/wpa_supplicant"
+ EXTRA_OECONF += "\
+   --disable-gtk-doc \
+diff --git a/recipes/connman/connman_0.51.bb b/recipes/connman/connman_0.51.bb
+index f1c5003..036a710 100644
+--- a/recipes/connman/connman_0.51.bb
++++ b/recipes/connman/connman_0.51.bb
+@@ -1,5 +1,5 @@
+ require connman.inc
+-PR = "r1"
++PR = "r2"
  
--# We stage libnl2 header files not directly as they clash with libnl files. Once
--# we only use libnl2 and stage the headers at the normal place we can remove
--# this.
--CFLAGS += "-I${STAGING_INCDIR}/libnl2/"
--
- PACKAGES_prepend = "wpa-supplicant-passphrase wpa-supplicant-cli "
- FILES_wpa-supplicant-passphrase = "/usr/sbin/wpa_passphrase"
- FILES_wpa-supplicant-cli = "/usr/sbin/wpa_cli"
+ EXTRA_OECONF += "\
+   --disable-gtk-doc \
+diff --git a/recipes/connman/connman_0.65.bb b/recipes/connman/connman_0.65.bb
+index 78e4287..880d775 100644
+--- a/recipes/connman/connman_0.65.bb
++++ b/recipes/connman/connman_0.65.bb
+@@ -1,7 +1,7 @@
+ require connman.inc
+ # connman requires libXtables now
+ DEPENDS += "iptables"
+-PR = "r0"
++PR = "r1"
+ 
+ EXTRA_OECONF += "\
+   --disable-gtk-doc \
+diff --git a/recipes/connman/connman_0.68.bb b/recipes/connman/connman_0.68.bb
+index ead215d..093a5a5 100644
+--- a/recipes/connman/connman_0.68.bb
++++ b/recipes/connman/connman_0.68.bb
+@@ -1,7 +1,7 @@
+ require connman.inc
+ # connman requires libXtables now
+ DEPENDS += "iptables"
+-PR = "r1"
++PR = "r2"
+ 
+ EXTRA_OECONF += "\
+   --disable-gtk-doc \
+diff --git a/recipes/connman/connman_git.bb b/recipes/connman/connman_git.bb
+index 39ffac6..283eb6b 100644
+--- a/recipes/connman/connman_git.bb
++++ b/recipes/connman/connman_git.bb
+@@ -27,7 +27,7 @@ require connman.inc
+ SRCREV = "1a94db417ecaba20a609ff4b4431a3f67c5dcbc6" 
+ 
+ PV = "0.42+git"
+-PR = "r2"
++PR = "r3"
+ PR_append = ".gitr${SRCREV}"
+ 
+ DEFAULT_PREFERENCE = "-1"
 -- 
 1.7.4.1
 
