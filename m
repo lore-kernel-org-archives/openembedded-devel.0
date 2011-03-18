@@ -1,36 +1,31 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Q0UaX-0001e3-26
+	(envelope-from <tarjei.knapstad@gmail.com>) id 1Q0V99-0008Ux-J7
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 08:59:13 +0100
-Received: by iwn10 with SMTP id 10so3787485iwn.6
+	Fri, 18 Mar 2011 09:35:00 +0100
+Received: by qyk27 with SMTP id 27so3232003qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2011 00:57:27 -0700 (PDT)
+	Fri, 18 Mar 2011 01:33:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=X9qpp9VmxyXowgU2T21d9Yjn6TbxD13RP9lrMIS7yY4=;
-	b=k8qShwk4ouzoL22T6S2aVUmHkTAtTUjtFCK9+7dakGeR9+8bA8mzp4XfYAlWXD2t9k
-	N0eON6I/ApVGURLRTQ1TQkSjkM3T/l57fs8LaQbl7DHVK79D8IDEiH3truQgyjx36wzL
-	TbJQagnU+KIIqZpJRv1kWeHwmagcH3ITcbRKA=
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=1Wj7ItbZdqf3v2RxdQpgCi3DJhkZPcdm+yQFWhOapRk=;
+	b=WXjY4VlxadJDhj2oczWjNZRjNfxg4tW3dfPQR33hJaS2EmeeU8fO+pwF4ja9I1wqkV
+	dNgTB28ws+/5Fr8LmcRMtCdxnZ2EbuqW5FxxFEGrbsmt0dvkJEsfesibavae3XhGvcWZ
+	+cqRYTb2EacIzKaKHjx0ggeLe2nyxXKYEYKoY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=HifPEsdVkXylUmDtyT2nnjKE0mKwIMium4ykRGFs1mTO2zPFJa4YmFnm9upXnMiEok
-	oip1222soy5mvTaLZ3pfciazz+Tr80mhZwC+zU9fAl2JyFefpd08BWutsBwrgDOEak/T
-	TBcsJuFGFMUo5fog9kBxmoNYbBK0SNiwqzeDY=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=M4a8a/m96MmUPQRZDh6GKQC1Zz/HV/HFVjCZF0xSN6XdmxQfJ1bSxtmvJhRNLJE3X7
+	zIBhCiDSckK81nNU2CBUWTGFhhB1ROsDLiUHtqZlw7WSxvHWdmZe0P56ETr+x2zHlrIZ
+	rWBhIMB4/8bOFwOBI5n15Q95OIomeZAq4n8wg=
 MIME-Version: 1.0
-Received: by 10.231.177.193 with SMTP id bj1mr653717ibb.145.1300435047041;
-	Fri, 18 Mar 2011 00:57:27 -0700 (PDT)
-Received: by 10.231.13.69 with HTTP; Fri, 18 Mar 2011 00:57:26 -0700 (PDT)
-In-Reply-To: <1300396447.30423.2113.camel@rex>
-References: <20110311081950.GG7353@excalibur.local>
-	<1300385432.2298.33.camel@saphir> <1300396447.30423.2113.camel@rex>
-Date: Fri, 18 Mar 2011 08:57:26 +0100
-Message-ID: <AANLkTi=9DUeh3eyaW=fQciA_Qk51yvqbBP_792n8fwQD@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.229.51.74 with SMTP id c10mr624604qcg.248.1300437193923; Fri,
+	18 Mar 2011 01:33:13 -0700 (PDT)
+Received: by 10.229.192.66 with HTTP; Fri, 18 Mar 2011 01:33:13 -0700 (PDT)
+Date: Fri, 18 Mar 2011 09:33:13 +0100
+Message-ID: <AANLkTik0yYB28d951apBxi9R0uVHHGFPcijtrjxsNpu6@mail.gmail.com>
+From: Tarjei Knapstad <tarjei.knapstad@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: OE Bugzilla Future
+Subject: Triggering kgdb on linux-2.6.37 with ttyOx
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,40 +39,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 07:59:13 -0000
+X-List-Received-Date: Fri, 18 Mar 2011 08:35:00 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2011/3/17 Richard Purdie <richard.purdie@linuxfoundation.org>:
-> On Thu, 2011-03-17 at 19:10 +0100, Michael 'Mickey' Lauer wrote:
->> I'm in favor of keeping it, cleaning it up, and improve
->> the integration with patchwork / git. Throwing it away
->> would be a very bad sign to all those countless people
->> who've gone through the pains of actually working with
->> the bugtracker.
->
-> The simple question is who is actually going to sort out the mess its
-> in?
->
-> Who is going to look after it on a continuing basis?
->
-> If there isn't ownership, nothing is going to change.
+In recent kernels the omap serial consoles have been renamed from
+ttySx to ttyOx. This seems to be an issue for kgdb. Setting kernel
+boot parameters has no effect:
 
-Actually I feel the real problem is that:
-- people did not want to get bugs assigned to them (at least that was
-what someone told me in the past)
-- we're lacking a good notion of package or recipe ownership, so even
-if we had someone acting as a bug manager, (s)he would have a hard
-time to find out who to assign an issue to.
+kgdb=ttyO2,115200n8 kgdboc=ttyO2,115200n8 kgdbwait
 
-and of course it takes discipline to look at regular intervals in the
-bug tracker to see if there are issues that affect the recipes you
-feel responsible for.
-A discipline that few people have and that is also easy to forget if
-there is only very rarely something for you.
+and attempting to trigger kgdb from the console also fails:
 
-So it is more of a process issue.
-(btw this may be something that could be picked up by the TSC).
+# echo ttyO2 > /sys/module/kgdboc/parameters/kgdboc
+-bash: echo: write error: No such device
 
-Frans.
+Attempting to send 'g' to sysrequest also does nothing, not sure if
+there has been changes to the magic sysrq stuff as well?
+# echo g > /proc/sysrq-trigger
+[  120.267944] SysRq : HELP : loglevel(0-9) reBoot Crash
+terminate-all-tasks(E) memory-full-oom-kill(F) kill-all-tasks(I) t
+haw-filesystems(J) saK show-memory-usage(M) nice-all-RT-tasks(N)
+powerOff show-registers(P) show-all-timers(Q) unRaw Sync s
+how-task-states(T) Unmount show-blocked-tasks(W)
+
+I've had a look at the kgdb code, but I can't figure out what to patch
+to make it understand that ttyO2 is a valid terminal. Any suggestions?
+
+Thanks,
+Tarjei
 
 
