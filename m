@@ -1,24 +1,34 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q0i23-0007ji-CV for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 23:20:31 +0100
-Received: from f053044006.adsl.alicedsl.de ([78.53.44.6] helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q0i0N-0007mz-It for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 22:18:47 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q0iBQ-000899-Sn for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Mar 2011 23:30:12 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q0i9j-0007YS-SH for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Mar 2011 23:28:27 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Mar 2011 23:28:27 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Mar 2011 23:28:27 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20110318151435.GA31039@mail.familie-heinold.de>
-References: <1293311973.4089.26.camel@mattotaupa>
-	<1300451882.3830.54.camel@mattotaupa>
-	<20110318151435.GA31039@mail.familie-heinold.de>
-Date: Fri, 18 Mar 2011 23:18:46 +0100
-Message-ID: <1300486726.3759.9.camel@mattotaupa>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 18 Mar 2011 23:28:14 +0100
+Message-ID: <im0m9u$71e$1@dough.gmane.org>
+References: <6F3B187F-5497-4504-9EEB-99204CCC815B@vanille-media.de>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH] xbmc: add `libass` to `DEPENDS`
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <6F3B187F-5497-4504-9EEB-99204CCC815B@vanille-media.de>
+X-Enigmail-Version: 1.0.1
+Subject: Re: blacklist.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,65 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 22:20:31 -0000
-X-Groupsio-MsgNum: 30424
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-1aveCI8xH4Ujim29rqTc"
+X-List-Received-Date: Fri, 18 Mar 2011 22:30:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-1aveCI8xH4Ujim29rqTc
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Dear Henning,
+On 18-03-11 20:24, Dr. Michael Lauer wrote:
+> Salut,
+> 
+> the blacklisting of packages as found in angstrom.bbclass
+> is pretty helpful and would be beneficial to all kinds
+> of distribution configurations in OE.
 
+So include it in your $DISTRO.
 
-Am Freitag, den 18.03.2011, 16:14 +0100 schrieb Henning Heinold:
-> Hi Paul,
->=20
-> the problem is this
->=20
-> do_configure() {
->         if [ -e bootstrap.angstrom ] ; then
->                 sh bootstrap.angstrom
->         else
->                 sh bootstrap
->         fi
->         oe_runconf
-> }
->=20
->=20
-> which prevents the autoreconf run and so the regenerating of libtool stuf=
-f, which results
-> in that the configure option --with-sysrootdir is not available. I cannt =
-see how
-> your patch is fixing that.
+> Would there be
+> a strong objection of renaming this to blacklist.bbclass?
 
-I think the following goes on. XBMC=E2=80=99s configure script detects that=
- the
-external libass is available and just uses that. XBMC ships all used
-libraries with it, so it is buildable without downloading additional
-stuff (which is of course bad for maintainability reasons). So
-beforehand the configure script set up compilation of the internal
-libass which failed for the reason you pointed out above.
-
-I build tested this, so it should be fine?
-
-
-Thanks,
-
-Paul
-
---=-1aveCI8xH4Ujim29rqTc
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
+Why is a rename needed? SHR is already using it as is.
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAk2D2jIACgkQPX1aK2wOHVgKBQCfYrAIzDZpzQQkvbhz05RiwAsw
-cYoAni48MDKlteqAn3EkjrLaN5eegZQW
-=Zppi
+iD8DBQFNg9x+MkyGM64RGpERApRIAKCaBrrX6A/yyoIMuRrELdeJCTqs1gCggw93
+q+51Hc05SmGVgocnoEJeR10=
+=+KOd
 -----END PGP SIGNATURE-----
 
---=-1aveCI8xH4Ujim29rqTc--
+
+
