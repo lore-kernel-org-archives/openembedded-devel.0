@@ -1,25 +1,33 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1Q0iSG-0000V7-At
+	(envelope-from <dp@xora.org.uk>) id 1Q0inu-0002ZO-UJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 23:47:36 +0100
-Received: (qmail 26982 invoked by uid 1003); 18 Mar 2011 22:45:48 -0000
-Received: from unknown (HELO ?192.168.1.167?)
-	(philip@opensdr.com@96.240.162.57)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	18 Mar 2011 22:45:47 -0000
-Message-ID: <4D83E09C.5010503@balister.org>
-Date: Fri, 18 Mar 2011 18:45:48 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Thunderbird/3.1.7
+	Sat, 19 Mar 2011 00:09:58 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id E9E17A493F
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Mar 2011 23:08:10 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id BdGcV337vVyS
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Mar 2011 23:08:09 +0000 (GMT)
+Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 98A9BA493C
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Mar 2011 23:08:09 +0000 (GMT)
+Message-ID: <4D83E632.2040701@xora.org.uk>
+Date: Fri, 18 Mar 2011 23:09:38 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.15) Gecko/20110303 Lightning/1.0b2 Thunderbird/3.1.9
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <6F3B187F-5497-4504-9EEB-99204CCC815B@vanille-media.de>
-	<im0m9u$71e$1@dough.gmane.org>
-In-Reply-To: <im0m9u$71e$1@dough.gmane.org>
-Cc: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <6F3B187F-5497-4504-9EEB-99204CCC815B@vanille-media.de>
+X-Enigmail-Version: 1.1.1
 Subject: Re: blacklist.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,31 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 22:47:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 18 Mar 2011 23:09:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 03/18/2011 06:28 PM, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+On 18/03/2011 19:24, Dr. Michael Lauer wrote:
+> Salut,
 >
-> On 18-03-11 20:24, Dr. Michael Lauer wrote:
->> Salut,
->>
->> the blacklisting of packages as found in angstrom.bbclass
->> is pretty helpful and would be beneficial to all kinds
->> of distribution configurations in OE.
+> the blacklisting of packages as found in angstrom.bbclass
+> is pretty helpful and would be beneficial to all kinds
+> of distribution configurations in OE. Would there be
+> a strong objection of renaming this to blacklist.bbclass?
 >
-> So include it in your $DISTRO.
+> Copying, of course, is also a possibility, but
+> in my opinion it would only be the second best choice.
 >
->> Would there be
->> a strong objection of renaming this to blacklist.bbclass?
->
-> Why is a rename needed? SHR is already using it as is.
+As the author I object to renaming it.
 
-What is oe-core doing? I would think they would want to make this more 
-generic. The solution may be to adopt what happens there.
+We have played this rename game before and Im still not happy with the
+results of the last time.
 
-Philip
+I also object on the grounds of the amount of abuse I got from some
+other distro maintainers for implementing this, which is the reason it
+is called angstrom.bbclass.
+
+Graeme
+
 
 
