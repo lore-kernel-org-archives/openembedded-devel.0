@@ -1,25 +1,20 @@
-Received: from bsmtp5.bon.at ([195.3.86.187] helo=bsmtp.bon.at)
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pgsellmann@portner-elektronik.at>)
-	id 1Q0ddT-00051O-Qr for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 18:38:52 +0100
-Received: from aspire.localdomain (unknown [88.116.171.82])
-	by bsmtp.bon.at (Postfix) with ESMTP id 8180E1000B
+	(envelope-from <mickey@vanille-media.de>) id 1Q0fJI-0007K7-Ug
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Mar 2011 20:26:08 +0100
+Received: from [192.168.2.7] (e180128010.adsl.alicedsl.de [85.180.128.10])
+	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id 028AE584109
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2011 18:37:06 +0100 (CET)
-From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
-Organization: PORTNER Elektronik
+	Fri, 18 Mar 2011 20:45:45 +0100 (CET)
+From: Dr. Michael Lauer <mickey@vanille-media.de>
+Date: Fri, 18 Mar 2011 20:24:34 +0100
+Message-Id: <6F3B187F-5497-4504-9EEB-99204CCC815B@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Mar 2011 18:37:04 +0100
-User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
-	)
-References: <201103171154.23397.pgsellmann@portner-elektronik.at>
-	<201103181408.16366.pgsellmann@portner-elektronik.at>
-	<20110318153048.GC17785@jama.jama.net>
-In-Reply-To: <20110318153048.GC17785@jama.jama.net>
-MIME-Version: 1.0
-Message-Id: <201103181837.04944.pgsellmann@portner-elektronik.at>
-Subject: Re: [PATCH 3/3] base-files-3.0.14 configuration files
+Mime-Version: 1.0 (Apple Message framework v1082)
+X-Mailer: Apple Mail (2.1082)
+Subject: blacklist.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,83 +28,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 17:38:52 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-15"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 18 Mar 2011 19:26:09 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Hi Martin!
+Salut,
 
-Am Freitag, 18. M=E4rz 2011, 16:30:48 schrieb Martin Jansa:
-> On Fri, Mar 18, 2011 at 02:08:15PM +0100, Peter Gsellmann wrote:
-> > Am Freitag, 18. M=E4rz 2011, 09:59:17 schrieb Hauser, Wolfgang (externa=
-l):
-> > > >> > Mark some files in ${sysconfdir} as configuration files so they =
-are
-> > > >> not blindly overwritten when upgrading
-> > > >>=20
-> > > >> I would suggest a pre-/post processing in the packages, like debian
-> > > >> does.
-> > > >> If a config file exists or is changed, the current File will be
-> > > rotated
-> > > >> or, if possible, left as it is and the new=20
-> > > >> file is installed beside the changed one.
-> > >=20
-> > > >The opkg does not touch a present config file, but installs the new
-> > > file with the name *-opkg
-> > > >So if you do a find /etc -name \*-opkg you see the conflicts.
-> > >=20
-> > > >Any sensible conversion from old to new config file should be made by
-> > > the package itself.
-> > >=20
-> > > As I experienced, opkg exits with an error code if a config file alre=
-ady
-> > > exists, so if you want to create an image, the process will break at
-> > > that error.
-> > > It wasn't possible to create an image automatically then.
-> > If you create a fresh new image, the config files should not exist.
-> > opkg should not complain.
->=20
-> Looks like you two are talking about 2 different things.
->=20
-> W) If 2 different packages are installing same config file, opkg won't
-> overwrite it and image creation would also fail
-This should considered as bug in opkg;
-why 2 packages may not use the same Conffile?
-=46or example one would split 'ntp' into 'ntpd' and 'ntpdate':
-  both should use the servers in /etc/ntp.conf .
-In present configuration you have to syncronize 2 files /etc/ntp.conf
-  and /etc/ntp/step-tickers .
+the blacklisting of packages as found in angstrom.bbclass
+is pretty helpful and would be beneficial to all kinds
+of distribution configurations in OE. Would there be
+a strong objection of renaming this to blacklist.bbclass?
 
-> P) If same package is trying to install newer version of config file it
-> overwrites it silently when md5 sums are the same or file is not in
-> CONFFILES or creates config.file-opkg otherwise.
-This should considered as user error to 'install' a package instead of 'upg=
-rade'.
+Copying, of course, is also a possibility, but
+in my opinion it would only be the second best choice.
 
-> So the patch idea looks sane to me, only please check why there is
-> unused conffiles variable and maybe use it as default CONFFILES or
-> remove it completely.
-I think you talk about CONFFILES_${PN}_micro, CONFFILES_${PN}_nylon, CONFFI=
-LES_${PN}_slugos ?
-=46or 'nylon' and 'slugos' it generates an additional empty file /etc/resol=
-v.conf .
-Otherwise this file is not owned by any package even so it exists!
-  (anybody knows who creates it?)
-Could this be written as:
-CONFFILES_${PN}_nylon =3D ${CONFFILES_${PN}} + "${sysconfdir}/resolv.conf"
-  or is there a smarter syntax?
+Cheers,
 
-OTOH, declaring 'base-files' as owner of /etc/resolv.conf for _all_ images
-  would be the better solution (in my opinion). Votings?
+:M:
 
-
-=46or 'micro' the list is empty! What is the advantage of an empty list for=
- this image?
-I dont know and for this i am a bit reluctant to remove it.
-
-
-
-Peter
 
 
