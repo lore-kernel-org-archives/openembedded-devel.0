@@ -1,37 +1,37 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q0aH5-0005Tz-PY
+	(envelope-from <martin.jansa@gmail.com>) id 1Q0aHG-0005UV-BM
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 15:03:32 +0100
-Received: by mail-bw0-f47.google.com with SMTP id 10so3155541bwz.6
+	Fri, 18 Mar 2011 15:03:42 +0100
+Received: by fxm19 with SMTP id 19so3647417fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2011 07:01:48 -0700 (PDT)
+	Fri, 18 Mar 2011 07:01:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
 	:in-reply-to:references;
-	bh=0lSlQXo9Aa5qfNoUOW0/t1fdlpoRnME8Ncly0EGzhBw=;
-	b=bGeHrLEqo3QPxKM5kawxz2semkS9bw7i86SuJ1T1Wl8Uxnh18l5gv0HGaOCSupNCOc
-	owsW/egwIGKFE69W1PuXfLFh5BoMVWikVoASZG7DkErC4x6h/LuuAw3aoTRcA6Lmxj7z
-	If8aYVJowzmCxwDVSZ1WM5LxHgEhlxq3on/wM=
+	bh=ns9kQZDd5qFSo8wt5/i37y3EFTVw3F28CF0K63sX3is=;
+	b=dz5JkbQX7k+KMcZw8UhnvP+6gPqOSBZ41FkiUCADOIGi1YF31s47tVafvXQwE4Ep3f
+	D/iaufYKLBJlO3iCwirNG1gn6tKD6/gUC5DiL6iyGQhqlqK9O8IQfwsK3NFRDI0lwXVG
+	wmitblCN6d8bAMp/ETp1bKLhIgJGC2UKg5eQc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=WoG40WBlNL/xxJeFfhUxvSTxt6WcoAdEpw0+hGXVl6SfDOilOsfMK/0rlsfiy5vv/i
-	IK8BeQmfX984ZDFz7UGYyMQ2ubzfHjaNEX5JHhaF6EElDll6rgEiwdBdYK6Z3KINnIAn
-	5wj+4rkw897vroYSQh34bH083t0PhBMJ+c9lQ=
-Received: by 10.204.10.21 with SMTP id n21mr1014654bkn.77.1300456908346;
-	Fri, 18 Mar 2011 07:01:48 -0700 (PDT)
+	b=B5WFK8bDGlogr4UnX0I9Uh2OJBnHXEcMA7tOFy7idlBmYKSA0R7mYAkBrin/v2kKPe
+	fn+1cYHnzDfg6L9zol3cnLeyO7MsW/Q7tOSvtoheY2KoNPOGbf+1CzrO+BdbUaiSjQ17
+	83yNry8EBmBw01gBNOOuYFTowoR4zq5qxl898=
+Received: by 10.223.127.210 with SMTP id h18mr1296964fas.73.1300456917096;
+	Fri, 18 Mar 2011 07:01:57 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id z18sm2165560bkf.20.2011.03.18.07.01.46
+	by mx.google.com with ESMTPS id e17sm485002fak.24.2011.03.18.07.01.55
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 18 Mar 2011 07:01:47 -0700 (PDT)
+	Fri, 18 Mar 2011 07:01:56 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Mar 2011 15:00:23 +0100
-Message-Id: <1300456829-25755-6-git-send-email-Martin.Jansa@gmail.com>
+Date: Fri, 18 Mar 2011 15:00:24 +0100
+Message-Id: <1300456829-25755-7-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.4.1
 In-Reply-To: <1300456829-25755-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1300456829-25755-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH 06/12] SHR: drop blacklist entries for libnl, now when libnl2 is used by default
+Subject: [PATCH 07/12] libfsobasics: depend only on libnl(-2.0) not libnl2(-2.0)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,33 +45,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 14:03:32 -0000
+X-List-Received-Date: Fri, 18 Mar 2011 14:03:42 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- conf/distro/shr.conf |    2 --
- 1 files changed, 0 insertions(+), 2 deletions(-)
+ recipes/freesmartphone/libfsobasics_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/distro/shr.conf b/conf/distro/shr.conf
-index e8fd844..be5904e 100644
---- a/conf/distro/shr.conf
-+++ b/conf/distro/shr.conf
-@@ -59,7 +59,6 @@ ANGSTROM_BLACKLIST_pn-xserver-kdrive-1300 = "xorg-server is preferred"
- ANGSTROM_BLACKLIST_pn-bluez-libs  = "bluez-libs 3.x has been replaced by bluez4"
- ANGSTROM_BLACKLIST_pn-bluez-utils = "bluez-utils 3.x has been replaced by bluez4"
- ANGSTROM_BLACKLIST_pn-atd = "atd has been replaced by atd-over-fso"
--ANGSTROM_BLACKLIST_pn-libnl = "libnld has been replaced by libnl2"
- ANGSTROM_BLACKLIST_pn-update-alternatives-cworth-native = "update-alternatives-cworth-native has been replaced by opkg implementation of u-a script"
- ANGSTROM_BLACKLIST_pn-update-alternatives-cworth = "update-alternatives-cworth has been replaced by opkg implementation of u-a script"
- ANGSTROM_BLACKLIST_pn-qt4-x11-free-gles = "qt4-x11-free is fine even without gles"
-@@ -85,7 +84,6 @@ ANGSTROM_BLACKLIST_pn-linux-jlime-current = "strange kernel, spank maintainer"
- ANGSTROM_BLACKLIST_pn-linux-ml403-mvista-2.6.x = "strange kernel, spank maintainer"
- ANGSTROM_BLACKLIST_pn-linux-davinci = "strange kernel, spank maintainer"
+diff --git a/recipes/freesmartphone/libfsobasics_git.bb b/recipes/freesmartphone/libfsobasics_git.bb
+index c99bd8e..1d751ca 100644
+--- a/recipes/freesmartphone/libfsobasics_git.bb
++++ b/recipes/freesmartphone/libfsobasics_git.bb
+@@ -1,8 +1,8 @@
+ require cornucopia.inc
  
--
- CVS_TARBALL_STASH += "http://build.shr-project.org/sources/"
- 
- #The shr-mirrors.bbclass repleaces this
+ DESCRIPTION = "freesmartphone.org support library"
+-DEPENDS += "libnl2"
++DEPENDS += "libnl"
+ SRCREV = "${FSO_CORNUCOPIA_SRCREV}"
+ PV = "0.9.10+gitr${SRCPV}"
+ PE = "1"
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
 -- 
 1.7.4.1
 
