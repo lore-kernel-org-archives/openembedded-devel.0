@@ -1,27 +1,36 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1Q0ULI-0001Gt-2S
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Q0UaX-0001e3-26
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 08:43:28 +0100
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1Q0UJb-0006fS-Ry from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 00:41:44 -0700
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Fri, 18 Mar 2011 08:59:13 +0100
+Received: by iwn10 with SMTP id 10so3787485iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Mar 2011 00:57:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=X9qpp9VmxyXowgU2T21d9Yjn6TbxD13RP9lrMIS7yY4=;
+	b=k8qShwk4ouzoL22T6S2aVUmHkTAtTUjtFCK9+7dakGeR9+8bA8mzp4XfYAlWXD2t9k
+	N0eON6I/ApVGURLRTQ1TQkSjkM3T/l57fs8LaQbl7DHVK79D8IDEiH3truQgyjx36wzL
+	TbJQagnU+KIIqZpJRv1kWeHwmagcH3ITcbRKA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=HifPEsdVkXylUmDtyT2nnjKE0mKwIMium4ykRGFs1mTO2zPFJa4YmFnm9upXnMiEok
+	oip1222soy5mvTaLZ3pfciazz+Tr80mhZwC+zU9fAl2JyFefpd08BWutsBwrgDOEak/T
+	TBcsJuFGFMUo5fog9kBxmoNYbBK0SNiwqzeDY=
 MIME-Version: 1.0
-Date: Fri, 18 Mar 2011 08:41:40 +0100
-Message-ID: <989A078976CDAD4CB2DC976EEF70E2A505479B8C@eu2-mail.mgc.mentorg.com>
-In-Reply-To: <989A078976CDAD4CB2DC976EEF70E2A505479ABD@eu2-mail.mgc.mentorg.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Python-native dependency in libxml2
-Thread-Index: AcvjsWNKCktkBgGKSJakDP0uSABizwAA0PIgADZvpyAALFVGUA==
-References: <1299841477-23487-1-git-send-email-sledz@dresearch.de><1300180117.2522.14.camel@eha><20110315220301.GC3042@denix.org><1300254477.2818.5.camel@eha><989A078976CDAD4CB2DC976EEF70E2A50547990E@eu2-mail.mgc.mentorg.com><4D8061DE.6030106@gmail.com><AANLkTikfnLb0XW6B6M0s+w=VuOkaeq0=MrYwUniQ6B_x@mail.gmail.com><20110316080500.GA3414@jama.jama.net><989A078976CDAD4CB2DC976EEF70E2A505479928@eu2-mail.mgc.mentorg.com>
-	<989A078976CDAD4CB2DC976EEF70E2A505479ABD@eu2-mail.mgc.mentorg.com>
-From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: Python-native dependency in libxml2
+Received: by 10.231.177.193 with SMTP id bj1mr653717ibb.145.1300435047041;
+	Fri, 18 Mar 2011 00:57:27 -0700 (PDT)
+Received: by 10.231.13.69 with HTTP; Fri, 18 Mar 2011 00:57:26 -0700 (PDT)
+In-Reply-To: <1300396447.30423.2113.camel@rex>
+References: <20110311081950.GG7353@excalibur.local>
+	<1300385432.2298.33.camel@saphir> <1300396447.30423.2113.camel@rex>
+Date: Fri, 18 Mar 2011 08:57:26 +0100
+Message-ID: <AANLkTi=9DUeh3eyaW=fQciA_Qk51yvqbBP_792n8fwQD@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: OE Bugzilla Future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,159 +44,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 07:43:28 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 18 Mar 2011 07:59:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hello Martin/Frans and Khem,
+2011/3/17 Richard Purdie <richard.purdie@linuxfoundation.org>:
+> On Thu, 2011-03-17 at 19:10 +0100, Michael 'Mickey' Lauer wrote:
+>> I'm in favor of keeping it, cleaning it up, and improve
+>> the integration with patchwork / git. Throwing it away
+>> would be a very bad sign to all those countless people
+>> who've gone through the pains of actually working with
+>> the bugtracker.
+>
+> The simple question is who is actually going to sort out the mess its
+> in?
+>
+> Who is going to look after it on a continuing basis?
+>
+> If there isn't ownership, nothing is going to change.
 
-Any recommendation after following analysis that how should I proceed.
-Should I send the patches to community?
+Actually I feel the real problem is that:
+- people did not want to get bugs assigned to them (at least that was
+what someone told me in the past)
+- we're lacking a good notion of package or recipe ownership, so even
+if we had someone acting as a bug manager, (s)he would have a hard
+time to find out who to assign an issue to.
 
-Regards,
-Noor
+and of course it takes discipline to look at regular intervals in the
+bug tracker to see if there are issues that affect the recipes you
+feel responsible for.
+A discipline that few people have and that is also easy to forget if
+there is only very rarely something for you.
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-Ahsan, Noor
-Sent: Thursday, March 17, 2011 3:41 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] Python-native dependency in libxml2
+So it is more of a process issue.
+(btw this may be something that could be picked up by the TSC).
 
-Hello,
-
-Today I got the fresh stuff and tried to build gnome-doc-utils-native
-(to build xml2po package). I am building on Ubuntu host 9.10. First it
-gave me an error that it could not find intltoolize command. You can see
-the attached build log "build_intltool_error,log". So I added intltool
-package in gnome-doc-utils-native DEPENDS so it built successfully. You
-can see the build log "build_intltool_fix.log". Then I removed all the
-build stuff from build DIR and commented DEPENDS_virtclass-native =3D
-"python-native" and XPY_virtclass-native =3D "
---with-python=3D${PYTHON_DIR}" in libxml2.inc file. Rebuild
-gnome-doc-utils-native. It built successfully again. The build log is
-also attached "build_no_python.log". I think there is no need of python
-dependency in libxml2 package. Kindly correct me if I am doing anything
-wrong.
-
-We need to fix gnome-doc-utils-native recipe, so that it does not show
-intltoolize error.
-
-Regards,
-Noor
-
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-Ahsan, Noor
-Sent: Wednesday, March 16, 2011 1:39 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] Python-native dependency in libxml2
-
-Hello,
-
-I made 2 changes, first one was to remove python-native from DEPENDS and
-second was commented out XPY_virtclass-native =3D "
---with-python=3D${PYTHON_DIR}". Moreover I removed all the stuff from
-build dir, so there were not python-native for me. After kicking this
-build libxml2-native build fine.
-
-I was looking for xml2po recipe, I couldn't find it. Can you tell me how
-to build xml2po package so that I can reproduce the problem.
-
-Regards,
-Noor
-
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-Martin Jansa
-Sent: Wednesday, March 16, 2011 1:05 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] Python-native dependency in libxml2
-
-On Wed, Mar 16, 2011 at 08:28:39AM +0100, Frans Meulenbroeks wrote:
-> 2011/3/16 Khem Raj <raj.khem@gmail.com>:
-> > On 3/15/2011 11:22 PM, Ahsan, Noor wrote:
-> >>
-> >> Hello,
-> >>
-> >> I was looking at the libxml2 package. While going through the
-recipes I
-> >> came to know that its native package depends on python-native
-package as
-> >> well. This dependency is defined in libxml2.inc file.
-> >>
-> >> DEPENDS_virtclass-native =3D "python-native"
-> >>
-> >> This package build fine after removing this dependency. I am not
-clear
-> >> why this dependency is being added in libxml2 package. Can somebody
-> >> clear that to me. While looking at the git log I came to know that
-this
-> >> change is coming from libxml2-native.inc file. But I am not clear
-why
-> >> this dependency was added as this package build fine without it.
-> >>
-> >> Please help me in understanding this dependency. Thanks.
-> >
-> > Try to build this recipe from scratch and see if it still works then
-we can
-> > remove the dep
-
-That's not enough, libxml2-native builds fine.. but then xml2po
-will fail if there isn't libxml2-native built with python support.
-
-see a25f07ca6159e1cd5b8a215ca5da8405fb1b9053
-
-So yes.. for such tests you should build recipe from scratch _and_ check
-if resulting package/sysroot is still the same.
-
-Regards,
-
-> I'm not sure if that is the right way.
-> It might well be that typically python-native is already there in a
-> scratch build because some earlier package needed it (or even because
-> of the scheduling of build steps.
->=20
-> Probably a better way is to build with packaged staging (with staging
-> dir outside TMPDIR) then rm TMPDIR and bake the package.
-> Alternately peek into the package to see if it needs python. If it is
-> needed then the DEPENDS should stay.
->=20
-> Looking at the issue at hand maybe the best person to ask is Martin
-> Jansa as he last touched that line according to git blame:
-> 3cd9ddbf recipes/libxml/libxml2.inc  (Martin Jansa
-> 2010-02-26 12:32:53 +0100  5) DEPENDS_virtclass-native =3D
-> "python-native"
->=20
-> The other thing is that further on in the .inc file I see:
-> XPY_virtclass-native =3D " --with-python=3D${PYTHON_DIR}"
->=20
-> This strongly suggests a hard dependency on python, so removing the
-> DEPENDS "because it builds without it" does not seem to be a good plan
-> to me.
->=20
-> My strong feeling is that recipes should be self-contained (so should
-> list all packages they need to build, minus the ones that are
-> inherited from classes (and maybe a few implicit ones like maybe make)
->=20
-> Frans
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Frans.
 
 
