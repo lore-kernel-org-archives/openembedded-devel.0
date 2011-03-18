@@ -1,16 +1,17 @@
-Received: from familie-heinold.de ([85.214.48.103]
-	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <woglinde@rhein.zuhause.netz>) id 1Q0WXI-0000TG-Ud
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <woglinde@rhein.zuhause.netz>) id 1Q0WXK-0000TM-1K
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 11:04:01 +0100
+	Fri, 18 Mar 2011 11:04:02 +0100
 Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
 	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id DF13911000B7
+	by mail.familie-heinold.de (Postfix) with ESMTP id 9EC4511000BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2011 10:54:00 +0100 (CET)
+	Fri, 18 Mar 2011 10:54:01 +0100 (CET)
 Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
 	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 474C811000BA
+	by mail.familie-heinold.de (Postfix) with ESMTP id 4AB601100104
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 18 Mar 2011 10:53:59 +0100 (CET)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
@@ -23,16 +24,16 @@ Received: from rhein.familie-heinold.de (g225072129.adsl.alicedsl.de
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 18 Mar 2011 10:53:59 +0100 (CET)
 Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 448DB3C05A; Fri, 18 Mar 2011 10:53:14 +0100 (CET)
+	id 47BB53C0BE; Fri, 18 Mar 2011 10:53:14 +0100 (CET)
 From: heinold@inf.fu-berlin.de
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Mar 2011 10:53:10 +0100
-Message-Id: <1300441991-30490-2-git-send-email-heinold@inf.fu-berlin.de>
+Date: Fri, 18 Mar 2011 10:53:11 +0100
+Message-Id: <1300441991-30490-3-git-send-email-heinold@inf.fu-berlin.de>
 X-Mailer: git-send-email 1.7.4.1
 In-Reply-To: <1300441991-30490-1-git-send-email-heinold@inf.fu-berlin.de>
 References: <1300441991-30490-1-git-send-email-heinold@inf.fu-berlin.de>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [PATCH 1/2] ti-c6accel: fix building for uclibc
+Subject: [PATCH 2/2] ti-codec-engine: make rebuild of ti-codec-engine itself possible
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,97 +47,281 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 10:04:01 -0000
+X-List-Received-Date: Fri, 18 Mar 2011 10:04:02 -0000
 
 From: Henning Heinold <heinold@inf.fu-berlin.de>
 
 
 Signed-off-by: Henning Heinold <heinold@inf.fu-berlin.de>
 ---
- recipes/ti/ti-c6accel.inc                   |    2 +-
- recipes/ti/ti-c6accel/fix_time_symbol.patch |   46 +++++++++++++++++++++++++++
- recipes/ti/ti-c6accel_1.01.00.03.bb         |    2 +
- 3 files changed, 49 insertions(+), 1 deletions(-)
- create mode 100644 recipes/ti/ti-c6accel/fix_time_symbol.patch
+ recipes/ti/ti-codec-engine.inc                    |  117 +++++++++++++++++++++
+ recipes/ti/ti-codec-engine/fix_core_package.patch |   13 +++
+ recipes/ti/ti-codec-engine/fix_ipc_dsplink.patch  |   86 +++++++++++++++
+ recipes/ti/ti-codec-engine_2.26.01.09.bb          |    4 +
+ 4 files changed, 220 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/ti/ti-codec-engine/fix_core_package.patch
+ create mode 100644 recipes/ti/ti-codec-engine/fix_ipc_dsplink.patch
 
-diff --git a/recipes/ti/ti-c6accel.inc b/recipes/ti/ti-c6accel.inc
-index 7d09783..216f4c2 100644
---- a/recipes/ti/ti-c6accel.inc
-+++ b/recipes/ti/ti-c6accel.inc
-@@ -18,7 +18,7 @@ PROVIDES += "ti-c6accel-apps"
- 
- # This recipe links statically against kernel dependant stuff, use kernel PR as base and append a local version
- PR = "${MACHINE_KERNEL_PR}"
--PR_append = "c"
-+PR_append = "d"
- 
- S = "${WORKDIR}/c6accel_${PV}"
- 
-diff --git a/recipes/ti/ti-c6accel/fix_time_symbol.patch b/recipes/ti/ti-c6accel/fix_time_symbol.patch
-new file mode 100644
-index 0000000..9963669
---- /dev/null
-+++ b/recipes/ti/ti-c6accel/fix_time_symbol.patch
-@@ -0,0 +1,46 @@
-+Index: c6accel_1_01_00_03/soc/app/benchmark.h
-+===================================================================
-+--- c6accel_1_01_00_03.orig/soc/app/benchmark.h	2011-03-12 17:45:49.640633120 +0100
-++++ c6accel_1_01_00_03/soc/app/benchmark.h	2011-03-12 17:46:10.360988120 +0100
-+@@ -39,7 +39,7 @@
-+ 
-+ 
-+  extern Time_Object sTime;
-+- extern UInt32      time;
-++ extern UInt32      timestamp;
-+ 
-+  #define OPEN_LOG_FILE(Name)                                    \
-+  if ((benchmarkFd = fopen(Name,"wb")) == NULL) {                \
-+@@ -49,7 +49,7 @@
-+  #define CLOSE_LOG_FILE() fclose(benchmarkFd);
-+ 
-+  #define START_BENCHMARK()                                     \
-+-           Time_delta(&sTime,&time);
-++           Time_delta(&sTime,&timestamp);
-+ 
-+  #define LOG_STRING(str)                                        \
-+        fprintf(benchmarkFd,"%s",str);
-+@@ -70,8 +70,8 @@
-+ 
-+ 
-+  #define END_AND_WRITE_BENCHMARK()                             \
-+-       Time_delta(&sTime,&time);                                \
-+-       fprintf(benchmarkFd,"%d",(unsigned int)time);
-++       Time_delta(&sTime,&timestamp);                                \
-++       fprintf(benchmarkFd,"%d",(unsigned int)timestamp);
-+ 
-+ 
-+ 
-+Index: c6accel_1_01_00_03/soc/app/appMain.c
-+===================================================================
-+--- c6accel_1_01_00_03.orig/soc/app/appMain.c	2011-03-12 17:46:42.030148120 +0100
-++++ c6accel_1_01_00_03/soc/app/appMain.c	2011-03-12 17:48:00.619423120 +0100
-+@@ -66,7 +66,7 @@
-+ /* This object is used in MACRO in benchmark.h */
-+ #include "timeObj.h"
-+ Time_Object sTime;
-+-UInt32      time;
-++UInt32      timestamp;
-+ 
-+ void Time_reset(Time_Object *sTime)
-+ {
-diff --git a/recipes/ti/ti-c6accel_1.01.00.03.bb b/recipes/ti/ti-c6accel_1.01.00.03.bb
-index bf5f1cf..42b0cc6 100644
---- a/recipes/ti/ti-c6accel_1.01.00.03.bb
-+++ b/recipes/ti/ti-c6accel_1.01.00.03.bb
-@@ -7,6 +7,8 @@ SRC_URI_append = "file://fix-loadmodule.patch \
-                   file://0001-soc-honour-buildsystem-CFLAGS-and-LDFLAGS-when-set.patch \
-                  "
- 
-+SRC_URI_append_libc-uclibc = "file://fix_time_symbol.patch"
+diff --git a/recipes/ti/ti-codec-engine.inc b/recipes/ti/ti-codec-engine.inc
+index fdaebd5..9e8a8ad 100644
+--- a/recipes/ti/ti-codec-engine.inc
++++ b/recipes/ti/ti-codec-engine.inc
+@@ -64,6 +64,107 @@ do_configure() {
+     sed -i  \
+         -e s:arm-none-linux-gnueabi-:${TARGET_PREFIX}:g \
+         ${S}/examples/xdcpaths.mak
 +
- PV = "1_01_00_03"
++    # Generate a config.bld for codec engine lib
++
++    cat > ${S}/packages/ti/sdo/ce/config.bld <<EOF
++
++/* Generated by ti-codeco-engine.inc OE recipe */
++
++var Build = xdc.useModule('xdc.bld.BuildEnvironment');
++
++var GCArmv5T = xdc.useModule('gnu.targets.arm.GCArmv5T');
++GCArmv5T.LONGNAME = "bin/${TARGET_PREFIX}gcc";
++GCArmv5T.rootDir = "${TOOLCHAIN_PATH}";
++GCArmv5T.ccOpts.prefix += " -Wall -fno-strict-aliasing -I${FC_INSTALL_DIR}/packages -I${XDAIS_INSTALL_DIR}/packages ";
++GCArmv5T.platform = null;
++GCArmv5T.platforms = [
++    "${XDC_PLATFORM}"
++];
++
++/* remove profiles we don't use */
++delete GCArmv5T.profiles["coverage"];
++delete GCArmv5T.profiles["profile"];
++
++Build.targets.\$add(GCArmv5T);
++
++var C64P = xdc.useModule('ti.targets.C64P');
++C64P.rootDir = "${CODEGEN_INSTALL_DIR}";
++C64P.ccOpts.prefix += " -I${FC_INSTALL_DIR}/packages -I${XDAIS_INSTALL_DIR}/packages ";
++
++Build.targets.\$add(C64P);
++EOF
++
++    cat > ${S}/packages/ti/sdo/ce/osal/linux/config.bld <<EOF
++
++/* Generated by ti-codeco-engine.inc OE recipe */
++
++var Build = xdc.useModule('xdc.bld.BuildEnvironment');
++
++var GCArmv5T = xdc.useModule('gnu.targets.arm.GCArmv5T');
++GCArmv5T.LONGNAME = "bin/${TARGET_PREFIX}gcc";
++GCArmv5T.rootDir = "${TOOLCHAIN_PATH}";
++GCArmv5T.ccOpts.prefix += " -Wall -fno-strict-aliasing -I${FC_INSTALL_DIR}/packages -I${CMEM_INSTALL_DIR}/packages ";
++GCArmv5T.platform = null;
++GCArmv5T.platforms = [
++    "${XDC_PLATFORM}"
++];
++
++/* remove profiles we don't use */
++delete GCArmv5T.profiles["coverage"];
++delete GCArmv5T.profiles["profile"];
++
++Build.targets.\$add(GCArmv5T);
++
++EOF
++
++    cat > ${S}/packages/ti/sdo/ce/ipc/dsplink/config.bld <<EOF
++
++/* Generated by ti-codeco-engine.inc OE recipe */
++
++var Build = xdc.useModule('xdc.bld.BuildEnvironment');
++
++var GCArmv5T = xdc.useModule('gnu.targets.arm.GCArmv5T');
++GCArmv5T.LONGNAME = "bin/${TARGET_PREFIX}gcc";
++GCArmv5T.rootDir = "${TOOLCHAIN_PATH}";
++GCArmv5T.ccOpts.prefix += " -Wall -fno-strict-aliasing -I${FC_INSTALL_DIR}/packages "
++GCArmv5T.ccOpts.prefix += " -I${CMEM_INSTALL_DIR}/packages -I${LPM_INSTALL_DIR}/packages ";
++GCArmv5T.platform = null;
++GCArmv5T.platforms = [
++    "${XDC_PLATFORM}"
++];
++
++/* remove profiles we don't use */
++delete GCArmv5T.profiles["coverage"];
++delete GCArmv5T.profiles["profile"];
++
++Build.targets.\$add(GCArmv5T);
++
++EOF
++
++    cat > ${S}/packages/ti/dsplink/utils/ladclient/config.bld <<EOF
++
++/* Generated by ti-codeco-engine.inc OE recipe */
++
++var Build = xdc.useModule('xdc.bld.BuildEnvironment');
++
++var GCArmv5T = xdc.useModule('gnu.targets.arm.GCArmv5T');
++GCArmv5T.LONGNAME = "bin/${TARGET_PREFIX}gcc";
++GCArmv5T.rootDir = "${TOOLCHAIN_PATH}";
++GCArmv5T.ccOpts.prefix += " -Wall -fno-strict-aliasing "
++GCArmv5T.platform = null;
++GCArmv5T.platforms = [
++    "${XDC_PLATFORM}"
++];
++
++/* remove profiles we don't use */
++delete GCArmv5T.profiles["coverage"];
++delete GCArmv5T.profiles["profile"];
++
++Build.targets.\$add(GCArmv5T);
++
++EOF
++
+ }
  
+ do_prepsources() {
+@@ -98,6 +199,22 @@ addtask prepsources after do_configure before do_compile
  
+ do_compile () {
+ 
++        cd ${S}/packages/ti/sdo/ce
++           ${XDC_INSTALL_DIR}/xdc
++
++        cd ${S}/packages/ti/sdo/ce/osal/linux
++           ${XDC_INSTALL_DIR}/xdc
++
++	cd ${S}/packages/ti/sdo/ce/ipc/dsplink
++           make XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
++                CE_INSTALL_DIR="${S}" \
++		DSPLINK_REPO="${LINK_INSTALL_DIR}" \
++                XDCARGS="DEVICE=${CEEXAMPLESDEVICES}"
++
++
++        cd ${S}/packages/ti/dsplink/utils/ladclient
++           ${XDC_INSTALL_DIR}/xdc
++
+         for i in codecs extensions servers apps ; do
+                 cd ${S}/examples/ti/sdo/ce/examples/$i
+                 make DEVICES="${CEEXAMPLESDEVICES}" \
+diff --git a/recipes/ti/ti-codec-engine/fix_core_package.patch b/recipes/ti/ti-codec-engine/fix_core_package.patch
+new file mode 100644
+index 0000000..69ca438
+--- /dev/null
++++ b/recipes/ti/ti-codec-engine/fix_core_package.patch
+@@ -0,0 +1,13 @@
++Index: codec_engine_2_26_01_09/packages/ti/sdo/ce/package.bld
++===================================================================
++--- codec_engine_2_26_01_09.orig/packages/ti/sdo/ce/package.bld	2011-03-12 14:37:00.515568120 +0100
+++++ codec_engine_2_26_01_09/packages/ti/sdo/ce/package.bld	2011-03-12 14:37:04.174063120 +0100
++@@ -45,6 +45,8 @@
++  */
++ Pkg.attrs.exportSrc = true;
++ 
+++Pkg.libTemplate = "ti/sdo/ce/utils/libvers.xdt"
+++
++ Pkg.otherFiles = ["CERuntime.h", "Server.h", "Engine.h", "visa.h", "skel.h",
++         "rms.h", "ServerDataSheet.html.xdt", "async-extensions.txt",
++         "package.bld"];
+diff --git a/recipes/ti/ti-codec-engine/fix_ipc_dsplink.patch b/recipes/ti/ti-codec-engine/fix_ipc_dsplink.patch
+new file mode 100644
+index 0000000..06f362c
+--- /dev/null
++++ b/recipes/ti/ti-codec-engine/fix_ipc_dsplink.patch
+@@ -0,0 +1,86 @@
++Index: codec_engine_2_26_01_09/packages/ti/sdo/ce/ipc/dsplink/package.bld
++===================================================================
++--- codec_engine_2_26_01_09.orig/packages/ti/sdo/ce/ipc/dsplink/package.bld	2011-03-12 16:42:42.508013119 +0100
+++++ codec_engine_2_26_01_09/packages/ti/sdo/ce/ipc/dsplink/package.bld	2011-03-12 17:05:14.163503119 +0100
++@@ -67,6 +67,15 @@
++           "package will not be built.");
++ }
++ 
+++var DEVICE;
+++
+++/* initialize local vars with those set in xdcpaths.mak (via XDCARGS) */
+++for (x = 0; x < arguments.length; x++) {
+++    if (arguments[x].match(/^DEVICE=/)) {
+++        DEVICE = arguments[x].split("=")[1];
+++    }
+++}
+++
++ for (var i = 0; i < Build.targets.length; i++) {
++     var targ = Build.targets[i];
++     var lib;
++@@ -77,8 +86,11 @@
++     }
++ 
++     if ((":"+targ.getISAChain().join(":")+":").match(/:v5T:|:v6:/i)) {
++-        /* DM6446 */
+++
++         linkGppGlobal.runtimeOS = linkGppGlobal.LINUX;
+++
+++     if (DEVICE.match(/DM6446|DM6467/)) {
+++        /* DM6446 */
++         linkGppGlobal.deviceName = linkGppGlobal.DAVINCI;
++ 
++         lib = Pkg.addLibrary("lib/release/ipc_dsplink_6446", targ, {
++@@ -121,7 +133,7 @@
++         lib.addObjects([
++             "Processor_dsplink_linkcfg_DM6467.c"
++         ]);
++-
+++     } else if (DEVICE.match(/OMAP2530/)) {
++         /* OMAP2530 */
++         linkGppGlobal.deviceName = linkGppGlobal.OMAP2530;
++ 
++@@ -144,6 +156,8 @@
++             "Processor_dsplink_linkcfg_OMAP2530.c"
++         ]);
++ 
+++      } else if(DEVICE.match(/OMAP3530/)) {
+++
++         /* OMAP3530 */
++         linkGppGlobal.deviceName = linkGppGlobal.OMAP3530;
++ 
++@@ -166,6 +180,8 @@
++             "Processor_dsplink_linkcfg_OMAP3530.c"
++         ]);
++ 
+++      } else if(DEVICE.match(/DM355|DM365/)) {
+++
++         /* DM357 */
++         linkGppGlobal.deviceName = linkGppGlobal.DM357;
++ 
++@@ -188,6 +204,8 @@
++             "Processor_dsplink_linkcfg_DM357.c"
++         ]);
++ 
+++      } else if(DEVICE.match(/OMAPL137/)) {
+++
++         /* OMAPL137 */
++         linkGppGlobal.deviceName = linkGppGlobal.OMAPL1XX;
++ 
++@@ -210,6 +228,8 @@
++             "Processor_dsplink_linkcfg_OMAPL137.c"
++         ]);
++ 
+++      } else if(DEVICE.match(/OMAPL138/)) {
+++
++         /* OMAPL138 */
++         linkGppGlobal.deviceName = linkGppGlobal.OMAPL138;
++ 
++@@ -231,6 +251,7 @@
++         lib.addObjects([
++             "Processor_dsplink_linkcfg_OMAPL138.c"
++         ]);
+++      }
++     }
++     else {
++         if ((":"+targ.getISAChain().join(":")+":").match(/:v4T:/i)) {
+diff --git a/recipes/ti/ti-codec-engine_2.26.01.09.bb b/recipes/ti/ti-codec-engine_2.26.01.09.bb
+index ca28522..2cd8bed 100644
+--- a/recipes/ti/ti-codec-engine_2.26.01.09.bb
++++ b/recipes/ti/ti-codec-engine_2.26.01.09.bb
+@@ -2,5 +2,9 @@ require ti-codec-engine.inc
+ 
+ PV = "2_26_01_09"
+ 
++SRC_URI += "file://fix_core_package.patch \
++            file://fix_ipc_dsplink.patch \
++           "
++
+ SRC_URI[cetarball.md5sum] = "d6046f29926b949b9eae4599f42dd51e"
+ SRC_URI[cetarball.sha256sum] = "4db08e47abb62b1180eb2310f5d0bbad2d1f58702a61d157dca5e056388dc7c2"
 -- 
 1.7.4.1
 
