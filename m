@@ -1,27 +1,41 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from [77.233.226.4] (helo=public.doredevelopment.dk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q0YNl-0005yz-HK for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 13:02:17 +0100
-Received: from f053044006.adsl.alicedsl.de ([78.53.44.6] helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q0YLy-0002zc-Ke for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 12:00:26 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <eha@doredevelopment.dk>) id 1Q0Yjl-0006SU-Pf
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Mar 2011 13:25:01 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by public.doredevelopment.dk (Postfix) with ESMTP id 697B951B7
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Mar 2011 13:15:01 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at dev.doredevelopment.dk
+Received: from public.doredevelopment.dk ([127.0.0.1])
+	by localhost (public.doredevelopment.dk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id PbTOy6omjuz4
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Mar 2011 13:14:56 +0100 (CET)
+Received: from eha (unknown [192.168.18.101])
+	by public.doredevelopment.dk (Postfix) with ESMTP id 6B41040F9
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Mar 2011 13:14:56 +0100 (CET)
+Received: by eha (Postfix, from userid 1000)
+	id 4AC4DAA113; Fri, 18 Mar 2011 13:14:56 +0100 (CET)
+From: Esben Haabendal <eha@doredevelopment.dk>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTi=xe7p694-8-bnGV85H59M-tJvTUnwm6TgCFPZk@mail.gmail.com>
-References: <1299591298.3785.126.camel@mattotaupa>
-	<1300205205.4123.6.camel@mattotaupa>
-	<AANLkTimEXRbjaJ9VXOk4m+QvpF6ZVnWzAGaXY9Q2tiyc@mail.gmail.com>
-	<1300364903.3950.21.camel@mattotaupa>
-	<1300402006.17833.14.camel@mattotaupa>
-	<AANLkTi=xe7p694-8-bnGV85H59M-tJvTUnwm6TgCFPZk@mail.gmail.com>
-Date: Fri, 18 Mar 2011 13:00:25 +0100
-Message-ID: <1300449625.3830.47.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: [PATCH] xfce_session_4.6.{1, 2}: explicitly pass the path of `iceauth`
+References: <1299841477-23487-1-git-send-email-sledz@dresearch.de>
+	<1300180117.2522.14.camel@eha>
+	<1300360696.2132.14681.camel@phil-desktop>
+	<1300373028.2468.8.camel@eha> <1300374439.9054.21.camel@phil-desktop>
+	<1300384355.2175.13.camel@eha> <1300385153.9054.44.camel@phil-desktop>
+	<1300391907.2175.23.camel@eha>
+	<1300395614.3026.2.camel@lenovo.internal.reciva.com>
+	<1300426143.8862.0.camel@eha> <1300443987.9054.64.camel@phil-desktop>
+Date: Fri, 18 Mar 2011 13:14:56 +0100
+In-Reply-To: <1300443987.9054.64.camel@phil-desktop> (Phil Blundell's message
+	of "Fri, 18 Mar 2011 10:26:27 +0000")
+Message-ID: <87ei6439rz.fsf@eha.doredevelopment.dk>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.1 (gnu/linux)
+MIME-Version: 1.0
+Subject: Re: Eliminating dependency race-conditions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,114 +49,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 12:02:17 -0000
-X-Groupsio-MsgNum: 30397
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-1zUT/OWkX9DN9Zt6Csgc"
+X-List-Received-Date: Fri, 18 Mar 2011 12:25:01 -0000
+Content-Type: text/plain; charset=us-ascii
 
---=-1zUT/OWkX9DN9Zt6Csgc
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Phil Blundell <philb@gnu.org> writes:
 
-Date: Fri, 18 Mar 2011 12:03:43 +0100
+> On Fri, 2011-03-18 at 06:29 +0100, Esben Haabendal wrote:
+>> Yes, I get your point.  You could of-course still specify build
+>> dependencies using recipe names/provides, and then just unpack all
+>> target packages build by that recipe.
+>> 
+>> This would give you the major part of the KISS win I see, except for in
+>> the dependency handling code of BitBake (and in the learning curve of OE
+>> developers).  Keep in mind that by using packages for build-time
+>> dependencies, the mechanism is exactly identical for run-time and
+>> build-time dependencies.  Exactly the same code in BitBake handles both,
+>> and the same mechanism needs to be understood.  This is also part of the
+>> KISS win of doing it this way.
+>
+> Right.  So, it seems to me that the appropriate way to attack the
+> problem in OE is to start by doing exactly that: leave the syntax of
+> DEPENDS alone for now, treat each entry in DEPENDS as meaning "all
+> packages built by the named recipe", and then implement the per-recipe
+> sysroot construction that I think we are agreed is highly desirable.
 
-Xfce Session build depends on the executable `iceauth`, which fails when cr=
-oss compiling for a different architecture.
+By doing it this way, I don't think we are getting much closer to the
+second step (package-based build-time dependencies).  The OE-lite
+implementation of per-recipe staging builds on top of package-based
+build-time dependencies, so to do it the other way around, would imply
+taking the sstate concept and extend it to do per-recipe sysroots.
+After that, I believe you have exactly the same amount of development
+left to get where OE-lite is in respect to package-based build-time
+depencies and per-recipe staging.
 
-        checking if the linker (arm-oe-linux-gnueabi-ld --sysroot=3D/oe/bui=
-ld-minimal-eglibc/minimal-dev/sysroots/armv5te-oe-linux-gnueabi) is GNU ld.=
-.. (cached) yes
-        checking whether to build with profiling support... no
-        checking whether to compile with coverage profiling instrumentation=
-... no
-        checking whether to disable assertions... no
-        checking whether to build final version... yes
-        checking whether arm-oe-linux-gnueabi-ld --sysroot=3D/oe/build-mini=
-mal-eglibc/minimal-dev/sysroots/armv5te-oe-linux-gnueabi accepts -O1... yes
-        checking for iceauth... no
-        configure: error: iceauth missing, please check your X11 installati=
-on
+As I see it, package-based build-time dependencies practically obsoletes
+sstate.  So if we for a moment imagine that we have moved OE to have
+sstate based per-recipe staging, we still have the same amount of work
+to do in the following areas:
 
-As suggested by Khem Raj [1] pass the value =E2=80=93 `/usr/bin/iceauth` is=
- taken =E2=80=93 to the configure script so that the test is avoided.
+* Modifying BitBake and OE metadata to handle package-based build-time
+  dependencies
+* Modifying existing recipes to include package-based build-time
+  dependency information
 
-Therefore `iceauth` is removed from `DEPENDS` and the `PR` variable is incr=
-emented.
+You can see the per-recipe staging as a postive side-effect of the
+package-based build-time dependency implementation.
 
-This issue has been reported upstream as ticket #7420 [2].
+So why take the detour instead of just doing it?
 
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-March/0311=
-15.html
-[2] http://bugzilla.xfce.org/show_bug.cgi?id=3D7420
+> Then, as a later refinement, we could introduce a mechanism for
+> specifying dependencies more precisely, at the package level rather than
+> the recipe level.  We could do that either by extending the syntax of
+> DEPENDS, something like:
+>
+> DEPENDS = "boost:boost-iostreams"
+>
+> (to say that you wanted just the boost-iostreams package from the boost
+> recipe)
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
- recipes/xfce-base/xfce4-session_4.6.1.bb |    6 ++++--
- recipes/xfce-base/xfce4-session_4.6.2.bb |    6 ++++--
- 2 files changed, 8 insertions(+), 4 deletions(-)
+That is IMO just adding more cruft to OE.  Not really what we need.
 
-diff --git a/recipes/xfce-base/xfce4-session_4.6.1.bb b/recipes/xfce-base/x=
-fce4-session_4.6.1.bb
-index ba66ac1..5029b21 100644
---- a/recipes/xfce-base/xfce4-session_4.6.1.bb
-+++ b/recipes/xfce-base/xfce4-session_4.6.1.bb
-@@ -1,13 +1,15 @@
- DESCRIPTION =3D "xfce4-session is a session manager for Xfce 4 Desktop Env=
-ironment"
--DEPENDS =3D "lbwnck libxfcegui4 libxfce4util dbus iceauth xfce-utils"
-+DEPENDS =3D "lbwnck libxfcegui4 libxfce4util dbus xfce-utils"
- SECTION =3D "x11"
-=20
--PR =3D "r4"
-+PR =3D "r5"
-=20
- inherit xfce46
-=20
- RDEPENDS_${PN} =3D "iceauth xfce-utils xinit dbus-x11"
-=20
-+EXTRA_OECONF +=3D "ac_cv_path_ICEAUTH=3D/usr/bin/iceauth"
-+
- FILES_${PN} +=3D "${libdir}/xfce4/splash/engines/*.so"
- FILES_${PN} +=3D "${datadir}/xfce4/tips/*"
- FILES_${PN} +=3D "${datadir}/themes/Default/balou/*"
-diff --git a/recipes/xfce-base/xfce4-session_4.6.2.bb b/recipes/xfce-base/x=
-fce4-session_4.6.2.bb
-index d7f768a..c937775 100644
---- a/recipes/xfce-base/xfce4-session_4.6.2.bb
-+++ b/recipes/xfce-base/xfce4-session_4.6.2.bb
-@@ -1,13 +1,15 @@
- DESCRIPTION =3D "xfce4-session is a session manager for Xfce 4 Desktop Env=
-ironment"
--DEPENDS =3D "libwnck libxfcegui4 libxfce4util dbus iceauth xfce-utils"
-+DEPENDS =3D "libwnck libxfcegui4 libxfce4util dbus xfce-utils"
- SECTION =3D "x11"
-=20
--PR =3D "r0"
-+PR =3D "r1"
-=20
- inherit xfce46
-=20
- RDEPENDS_${PN} =3D "iceauth xfce-utils xinit dbus-x11"
-=20
-+EXTRA_OECONF +=3D "ac_cv_path_ICEAUTH=3D/usr/bin/iceauth"
-+
- FILES_${PN} +=3D "${libdir}/xfce4/splash/engines/*.so"
- FILES_${PN} +=3D "${datadir}/xfce4/tips/*"
- FILES_${PN} +=3D "${datadir}/themes/Default/balou/*"
---=20
-1.7.4.1
+> or, alternately, by introducing a new variable which would either
+> supplement or replace DEPENDS.  Either of those would allow us to
+> migrate to fine-grained dependencies without breaking existing recipes.
 
---=-1zUT/OWkX9DN9Zt6Csgc
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+Sounds better.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Also, just as for run-time dependencies, the build-time package
+dependencies is not necesarely the actual package names, but some
+provides names, so having a "recipe:package" syntax really does not make
+much sense.
 
-iEYEABECAAYFAk2DSVkACgkQPX1aK2wOHVhbrgCZATRxVZpgX9lQ+/Ia6t/psfXP
-XqQAn1018ZLdW5SSLsZVfyW5Q7oTf9Oz
-=jD6C
------END PGP SIGNATURE-----
+>> > (How) do you deal with library package renaming in OE-lite?
+>> 
+>> What exactly do you mean?  (We are doing several things with library
+>> package naming...)
+>
+> I was thinking of situations like the Debian package autonamer, ie the
+> thing that causes glibc-dev to come out named "libc6-dev.ipk" or similar
+> depending on the soname of the library that was built.  It seems like
+> this would be a bit awkward to deal with if your dependencies were
+> specified purely in terms of output packages.
 
---=-1zUT/OWkX9DN9Zt6Csgc--
+As OE-lite is not OE, we are currently not supporting such type of
+package renaming.  Let's leave that to Debian guys to fight with ;-)
+
+But as we build-time dependencies are typically in the form of some
+package "provides", it doesn't really matter if the package is renamed.
+
+/Esben
+
+
