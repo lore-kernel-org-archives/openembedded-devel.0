@@ -1,22 +1,25 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from bsmtp5.bon.at ([195.3.86.187] helo=bsmtp.bon.at)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q0Yy2-0007dP-Nb for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 13:39:46 +0100
-Received: from f053044006.adsl.alicedsl.de ([78.53.44.6] helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q0YwN-00041w-Hj for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 12:38:03 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <pgsellmann@portner-elektronik.at>)
+	id 1Q0ZRP-00013E-04 for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Mar 2011 14:10:07 +0100
+Received: from aspire.localdomain (unknown [88.116.171.82])
+	by bsmtp.bon.at (Postfix) with ESMTP id 134F8130060
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Mar 2011 14:08:17 +0100 (CET)
+From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+Organization: PORTNER Elektronik
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1293311973.4089.26.camel@mattotaupa>
-References: <1293311973.4089.26.camel@mattotaupa>
-Date: Fri, 18 Mar 2011 13:38:02 +0100
-Message-ID: <1300451882.3830.54.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: [PATCH] xbmc: add `libass` to `DEPENDS`
+Date: Fri, 18 Mar 2011 14:08:15 +0100
+User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
+	)
+References: <201103171154.23397.pgsellmann@portner-elektronik.at>
+	<201103171654.31619.pgsellmann@portner-elektronik.at>
+	<0C757E680E33864AB113392C7E83F910BE5145@GSX300A.mxchg.m.corp>
+In-Reply-To: <0C757E680E33864AB113392C7E83F910BE5145@GSX300A.mxchg.m.corp>
+MIME-Version: 1.0
+Message-Id: <201103181408.16366.pgsellmann@portner-elektronik.at>
+Subject: Re: [PATCH 3/3] base-files-3.0.14 configuration files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,165 +33,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 12:39:46 -0000
-X-Groupsio-MsgNum: 30400
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-0C7XC25ZHre+hlAyOfFV"
-
---=-0C7XC25ZHre+hlAyOfFV
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 18 Mar 2011 13:10:07 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-Date: Fri, 18 Mar 2011 09:51:52 +0100
+Am Freitag, 18. M=E4rz 2011, 09:59:17 schrieb Hauser, Wolfgang (external):
+> >> > Mark some files in ${sysconfdir} as configuration files so they are
+> >> not blindly overwritten when upgrading
+> >>=20
+> >> I would suggest a pre-/post processing in the packages, like debian
+> >> does.
+> >> If a config file exists or is changed, the current File will be
+> rotated
+> >> or, if possible, left as it is and the new=20
+> >> file is installed beside the changed one.
+>=20
+> >The opkg does not touch a present config file, but installs the new
+> file with the name *-opkg
+> >So if you do a find /etc -name \*-opkg you see the conflicts.
+>=20
+> >Any sensible conversion from old to new config file should be made by
+> the package itself.
+>=20
+> As I experienced, opkg exits with an error code if a config file already
+> exists, so if you want to create an image, the process will break at
+> that error.
+> It wasn't possible to create an image automatically then.
+If you create a fresh new image, the config files should not exist.
+opkg should not complain.
 
-Task compile of `xbmc_svn.bb` fails with the following error message when u=
-sing `angstrom-2010.x`. `angstrom-2008.1` does/did not have this problem pr=
-obably because of using Libtool 2.2.
+Problem arises if you do a 'opkg upgrade' from the running target;
+With patch, opkg knows about Conffiles of base-files:
+root@us-3:~# opkg info base-files
+Package: base-files
+Version: 3.0.14-r101.9
+Provides:
+Status: install user installed
+Section: base
+Architecture: pcontrol_g20
+Maintainer: Angstrom Developers <angstrom-distro-devel@linuxtogo.org>
+MD5Sum: d5553232d20233866c7f626b7f1d6d4f
+Size: 4336
+=46ilename: base-files_3.0.14-r101.9_pcontrol_g20.ipk
+Conffiles:
+ /etc/fstab 8a0d747a1565dfb39ae3b27b33ab5031
+ /etc/hostname 0e97f4187e8f27c48206165806f9310a
+ /etc/motd d41d8cd98f00b204e9800998ecf8427e
+ /etc/profile 573d43f3c53d5bdabca7ec2317f5eb28
+ /etc/nsswitch.conf 109e33e2c91d1853b5bc56078a96aa18
+ /etc/host.conf a61b9f6548d337c1cc1e5a4de39f7b7f
+Source: file://nsswitch.conf file://motd file://inputrc file://host.conf fi=
+le://profile file://profile.d file://fstab file://filesystems file://issue.=
+net file://issue file://usbd file://share/dot.bashrc file://share/dot.profi=
+le file://licenses/BSD file://licenses/GPL-2 file://licenses/GPL-3 file://l=
+icenses/LGPL-2 file://licenses/LGPL-2.1 file://licenses/LGPL-3 file://licen=
+ses/GFDL-1.2 file://licenses/Artistic
+Description: Miscellaneous files for the base system.
+Installed-Time: 1300270958
 
-	arm-angstrom-linux-gnueabi-g++ -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=
-=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb --sysroot=3D/oe/b=
-uild-angstrom-next/angstrom-dev/s
-	ysroots/armv7a-angstrom-linux-gnueabi -MD -c -fexpensive-optimizations -fo=
-mit-frame-pointer -frename-registers -O2 -ggdb2 -fpermissive -fvisibility-i=
-nlines-hidden -fPIC -DPIC -D_RE
-	ENTRANT -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=3D64 -g -D_DEBUG -Wall -=
-O2 -mfloat-abi=3Dsoftfp -mno-apcs-stack-check -Wa,-march=3Darmv7a -mcpu=3Dc=
-ortex-a8 -mfpu=3Dneon -mvectorize-with-ne
-	on-quad -fexpensive-optimizations -fomit-frame-pointer -frename-registers =
--O2 -ggdb2 -fpermissive -fvisibility-inlines-hidden -fPIC -DPIC -D_REENTRAN=
-T -D_LARGEFILE64_SOURCE -D_FILE
-	_OFFSET_BITS=3D64 -g -D_DEBUG -Wall -O2 -mfloat-abi=3Dsoftfp -mno-apcs-sta=
-ck-check -Wa,-march=3Darmv7a -mcpu=3Dcortex-a8 -mfpu=3Dneon -mvectorize-wit=
-h-neon-quad -fexpensive-optimizations -fo
-	mit-frame-pointer -frename-registers -O2 -ggdb2 -fpermissive -fvisibility-=
-inlines-hidden -fPIC -DPIC -D_REENTRANT -D_LARGEFILE64_SOURCE -D_FILE_OFFSE=
-T_BITS=3D64 -g -D_DEBUG -Wall -O2
-	 -mfloat-abi=3Dsoftfp -mno-apcs-stack-check -Wa,-march=3Darmv7a -mcpu=3Dco=
-rtex-a8 -mfpu=3Dneon -mvectorize-with-neon-quad -D_LINUX -D_FILE_DEFINED -D=
-__STDC_CONSTANT_MACROS -DBIN_INSTALL_PA
-	TH=3D"\"/usr/lib/xbmc\"" -DINSTALL_PATH=3D"\"/usr/share/xbmc\"" -DHAS_SDL_=
-JOYSTICK -D'SVN_REV=3D"Unknown"' -D_ARMEL -DHAVE_CONFIG_H  -I. -I.. -I../..=
-/ -I../linux -I../cores -I../../guili
-	b -I../posix -I../../lib/jsoncpp/jsoncpp/include -D_GNU_SOURCE=3D1 -D_REEN=
-TRANT -I/oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-angstrom-linux=
--gnueabi/usr/include/ -
-	I/oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-angstrom-linux-gnuea=
-bi/usr/include/SDL -I/oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-a=
-ngstrom-lin
-	ux-gnueabi/usr/include/alsa -I/oe/build-angstrom-next/angstrom-dev/sysroot=
-s/armv7a-angstrom-linux-gnueabi/usr/include/dbus-1.0 -I/oe/build-angstrom-n=
-ext/angstro
-	m-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/freetype2 -I/oe/b=
-uild-angstrom-next/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/=
-include/fribidi -I/ho
-	me/paul/oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-angstrom-linux=
--gnueabi/usr/include/glib-2.0 -I/oe/build-angstrom-next/angstrom-dev/sysroo=
-ts/armv7a-angstrom-li
-	nux-gnueabi/usr/include/libpng12 -I/oe/build-angstrom-next/angstrom-dev/sy=
-sroots/armv7a-angstrom-linux-gnueabi/usr/lib/dbus-1.0/include -I/oe/build-a=
-ngstrom-nex
-	t/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/inc=
-lude -I/oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/armv7a/=
-include -I/
-	oe/build-angstrom-next/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/xbm=
-c-10.05-r11+gitr0+e2ab481ebe964321c358ab9d6402088c714adcbe/git Socket.cpp -=
-o Socket.o
-		LINK  libass.la
-	In file included from log.h:25:0,
-		               from Socket.cpp:26:
-	../../guilib/StdString.h:1597:14: note: the mangling of 'va_list' has chan=
-ged in GCC 4.4
-	arm-angstrom-linux-gnueabi-libtool: link: warning: library `/oe/build-angs=
-trom-next/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libfr=
-eetype.la' was moved.
-	/bin/grep: /usr/lib/libz.la: No such file or directory
-	/bin/sed: can't read /usr/lib/libz.la: No such file or directory
-	arm-angstrom-linux-gnueabi-libtool: link: `/usr/lib/libz.la' is not a vali=
-d libtool archive
-	make[4]: *** [libass.la] Error 1
-	make[4]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/work/armv=
-7a-angstrom-linux-gnueabi/xbmc-10.05-r11+gitr0+e2ab481ebe964321c358ab9d6402=
-088c714adcbe/git/lib/
-	libass/libass'
-	make[3]: *** [all-recursive] Error 1
-	make[3]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/work/armv=
-7a-angstrom-linux-gnueabi/xbmc-10.05-r11+gitr0+e2ab481ebe964321c358ab9d6402=
-088c714adcbe/git/lib/
-	libass'
-	make[2]: *** [all] Error 2
-	make[2]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/work/armv=
-7a-angstrom-linux-gnueabi/xbmc-10.05-r11+gitr0+e2ab481ebe964321c358ab9d6402=
-088c714adcbe/git/lib/
-	libass'
-	make[1]: *** [../libass/.libs/libass.so] Error 2
-	make[1]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/work/armv=
-7a-angstrom-linux-gnueabi/xbmc-10.05-r11+gitr0+e2ab481ebe964321c358ab9d6402=
-088c714adcbe/git/lib/
-	libass/xbmc'
-	make: *** [dvdpcodecs] Error 2
-	make: *** Waiting for unfinished jobs....
 
-Using the external package fixes this problem.
+As you can see, opkg maintains some md5-hash value for the unchanged Conffi=
+le so a sensible conflict resolution is possible.
+If it is not done so, its a opkg bug
 
-	Build Configuration:
-	BB_VERSION        =3D "1.12.0"
-	METADATA_BRANCH   =3D "<unknown>"
-	METADATA_REVISION =3D "a36e1dd"
-	TARGET_ARCH       =3D "arm"
-	TARGET_OS         =3D "linux-gnueabi"
-	MACHINE           =3D "beagleboard"
-	DISTRO            =3D "angstrom"
-	DISTRO_VERSION    =3D "v20110318"
-	TARGET_FPU        =3D "hard"
+Tested: it is possible to create an image with this patch.
+Tested: 'opkg upgrade' handles the Conffiles as expected.
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
- recipes/xbmc/xbmc_svn.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+Peter
 
-diff --git a/recipes/xbmc/xbmc_svn.bb b/recipes/xbmc/xbmc_svn.bb
-index be2e34e..45a7dad 100644
---- a/recipes/xbmc/xbmc_svn.bb
-+++ b/recipes/xbmc/xbmc_svn.bb
-@@ -1,13 +1,13 @@
- DESCRIPTION =3D "XBMC Media Center"
- LICENSE =3D "xbmc"
-=20
--DEPENDS =3D "gperf-native libxmu fribidi mpeg2dec ffmpeg samba fontconfig =
-curl python libmodplug libmicrohttpd wavpack libmms cmake-native libsdl-ima=
-ge libsdl-mixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boo=
-st lzo2 enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtu=
-al/libsdl jasper zip-native zlib"
-+DEPENDS =3D "gperf-native libxmu fribidi mpeg2dec ffmpeg samba fontconfig =
-curl python libass libmodplug libmicrohttpd wavpack libmms cmake-native lib=
-sdl-image libsdl-mixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libp=
-cre boost lzo2 enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip=
-2 virtual/libsdl jasper zip-native zlib"
- require recipes/egl/egl.inc
-=20
- SRCREV =3D "e2ab481ebe964321c358ab9d6402088c714adcbe"
-=20
- PV =3D "10.05"
--PR =3D "r11"
-+PR =3D "r12"
- PR_append =3D "+gitr${SRCPV}"
-=20
- SRC_URI =3D "git://xbmc.git.sourceforge.net/gitroot/xbmc/xbmc;protocol=3Dg=
-it;branch=3Dmaster \
---=20
-1.7.4.1
 
---=-0C7XC25ZHre+hlAyOfFV
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk2DUioACgkQPX1aK2wOHVjVAwCgi9L8el8DJHqwMrdqMIeMTmLC
-6Z8An1IJ0K8EHobx4yEbipxCI7tPxJPW
-=ClMT
------END PGP SIGNATURE-----
-
---=-0C7XC25ZHre+hlAyOfFV--
