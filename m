@@ -1,37 +1,23 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1Q0hGK-0005Sl-8E
+	(envelope-from <philb@gnu.org>) id 1Q0hMa-0005l9-7D
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 22:31:12 +0100
-Received: by iwn10 with SMTP id 10so4526330iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2011 14:29:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
-	:date:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	bh=a6mIIK7RWtspk3F1DTJW1Uu6xCC0B/NagzrHDNQFQxk=;
-	b=gN2f/wU2p4DqNQtFwZkEwjHEZ6rXQ2D5VL3KwuHgnV8yxzhg79c23+HawTUPx8FFQj
-	xCLTELXyF+8B5zFYGrb7MGG37oX4WEO7nzmwDbQzNw3CdiAAislzgvoOlDc77gqoWfuU
-	+5GCpm5swBE9RWOFxU3r67Iw+aAKDuI3e7Tts=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=StnOpIvRNvPszNl7zeKSrS/K/B5XmbSUAvMsa3hP87oJ3m3exet7ChOsSaqEJOq9oo
-	WSM2jhP+x2Dci/3WlotpiesWLx/NWBfvC6PuYf8Q+teXoFE6xLqnrqui2yb9VRrZLHj7
-	3Ey1T0cwyilAyFuPT/4CWbYfmom1aEkddf8Lc=
-Received: by 10.42.162.65 with SMTP id w1mr2215687icx.334.1300483766076; Fri,
-	18 Mar 2011 14:29:26 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.42.176.137 with HTTP; Fri, 18 Mar 2011 14:29:06 -0700 (PDT)
+	Fri, 18 Mar 2011 22:37:40 +0100
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.3])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q0hKq-0003hy-0y
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Mar 2011 22:35:52 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <AANLkTi=1fr0ZVD9WmsaBY_E3veZvdppTsJtVXY-1O88g@mail.gmail.com>
 References: <6F3B187F-5497-4504-9EEB-99204CCC815B@vanille-media.de>
 	<AANLkTi=1fr0ZVD9WmsaBY_E3veZvdppTsJtVXY-1O88g@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Fri, 18 Mar 2011 14:29:06 -0700
-X-Google-Sender-Auth: 7JEf9__3o4DUnlEnzzB-4QFIk4c
-Message-ID: <AANLkTi=Rps4rd3aZPwCM2nTNWng0oU-Jzj_9kpkyXg7=@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+Date: Fri, 18 Mar 2011 21:35:41 +0000
+Message-ID: <1300484141.3026.6.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
 Subject: Re: blacklist.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,37 +32,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 21:31:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 18 Mar 2011 21:37:40 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Fri, Mar 18, 2011 at 1:33 PM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
+On Fri, 2011-03-18 at 21:33 +0100, Frans Meulenbroeks wrote:
 > 2011/3/18 Dr. Michael Lauer <mickey@vanille-media.de>:
->> Salut,
->>
->> the blacklisting of packages as found in angstrom.bbclass
->> is pretty helpful and would be beneficial to all kinds
->> of distribution configurations in OE. Would there be
->> a strong objection of renaming this to blacklist.bbclass?
->>
->> Copying, of course, is also a possibility, but
->> in my opinion it would only be the second best choice.
->>
->> Cheers,
->>
->> :M:
->
+> > Salut,
+> >
+> > the blacklisting of packages as found in angstrom.bbclass
+> > is pretty helpful and would be beneficial to all kinds
+> > of distribution configurations in OE. Would there be
+> > a strong objection of renaming this to blacklist.bbclass?
+> >
+> > Copying, of course, is also a possibility, but
+> > in my opinion it would only be the second best choice.
+> >
+> > Cheers,
+> >
+> > :M:
+> 
 > If blacklisting a certain package for all distro's is there then still
 > a need to keep those blacklisted packages ????
 
-Just because the class is named blacklist and *can* be used by any
-distro doesn't mean we'd be globally blacklisting something for all
-distros.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+The class that Mickey is talking about is just the mechanism to allow
+blacklisting.  It doesn't actually contain a list of blacklisted
+packages; I think that typically goes in DISTRO.conf for distros that
+use it.
+
+However, if we do want to rename it to something more global (which I
+agree seems like a good idea) then the contents would need a bit of
+tweaking since both the variables that it looks at, and the messages
+that it outputs, make reference to Angstrom specifically.
+
+p.
+
+
 
 
