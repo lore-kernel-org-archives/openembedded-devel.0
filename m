@@ -1,36 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q0WJX-0005i9-Ci for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 10:49:51 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q0WHs-0004oU-1G for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Mar 2011 10:48:04 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2011 10:48:04 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2011 10:48:04 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <koen@dominion.thruhere.net>)
+	id 1Q0WQf-00012T-H0; Fri, 18 Mar 2011 10:57:11 +0100
+Received: by wwb17 with SMTP id 17so4085940wwb.24
+	for <multiple recipients>; Fri, 18 Mar 2011 02:55:23 -0700 (PDT)
+Received: by 10.216.221.72 with SMTP id q50mr896863wep.99.1300442123604;
+	Fri, 18 Mar 2011 02:55:23 -0700 (PDT)
+Received: from [172.20.1.5] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
+	by mx.google.com with ESMTPS id f30sm1491173wef.7.2011.03.18.02.55.22
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 18 Mar 2011 02:55:23 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1082)
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 18 Mar 2011 10:47:49 +0100
-Message-ID: <ilv9o6$t5p$1@dough.gmane.org>
-References: <1300180117.2522.14.camel@eha>
-	<20110315220301.GC3042@denix.org>	<1300254477.2818.5.camel@eha>	<989A078976CDAD4CB2DC976EEF70E2A50547990E@eu2-mail.mgc.mentorg.com>	<4D8061DE.6030106@gmail.com>	<AANLkTikfnLb0XW6B6M0s+w=VuOkaeq0=MrYwUniQ6B_x@mail.gmail.com>	<20110316080500.GA3414@jama.jama.net>	<989A078976CDAD4CB2DC976EEF70E2A505479928@eu2-mail.mgc.mentorg.com>	<989A078976CDAD4CB2DC976EEF70E2A505479ABD@eu2-mail.mgc.mentorg.com>	<989A078976CDAD4CB2DC976EEF70E2A505479B8C@eu2-mail.mgc.mentorg.com>
-	<20110318083802.GA17785@jama.jama.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <20110318083802.GA17785@jama.jama.net>
-X-Enigmail-Version: 1.0.1
-Subject: Re: Python-native dependency in libxml2
+In-Reply-To: <4D832AA4.1020701@matrix-vision.de>
+Date: Fri, 18 Mar 2011 10:55:22 +0100
+Message-Id: <AB78D48B-B478-47DF-A7CF-94FF96C313AC@dominion.thruhere.net>
+References: <4D832AA4.1020701@matrix-vision.de>
+To: Michael Jones <michael.jones@matrix-vision.de>
+X-Mailer: Apple Mail (2.1082)
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: staging & using kernel headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,200 +35,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2011 09:49:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 18 Mar 2011 09:57:15 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+CC:ing oe-core since we have kernel.bbclass patches there as well.
 
-On 18-03-11 09:38, Martin Jansa wrote:
-> On Fri, Mar 18, 2011 at 08:41:40AM +0100, Ahsan, Noor wrote:
->> Hello Martin/Frans and Khem,
->> Any recommendation after following analysis that how should I proceed.
->> Should I send the patches to community?
-> 
-> Maybe koen will reply with more info about xml2po issue he found, imho
-> it wasn't in xml2po build but while using xml2to to generate docs in some
-> other recipe.
+Op 18 mrt 2011, om 10:49 heeft Michael Jones het volgende geschreven:
 
-The issue I had that I needed xml2{t,p}o to work on the target as well
-for native compilation. If that still works, Noors changes is fine by me.
+> Hello Koen & co.,
+>=20
+> I recently bumped into a problem with recipes ti-dmai and gstreamer-ti
+> when they included the kernel headers.  These headers were staged by
+> kernel.bbclass sysroot_stage_all_append() with a lot of manual copying
+> and manipulating links and such, rather than using 'oe_runmake
+> headers_install'.  Back in October Koen explained this
+> (http://article.gmane.org/gmane.comp.handhelds.openembedded/37772) is
+> because some recipes use private kernel API.  The result of this with =
+my
+> 2.6.38 kernel
+
+DMAI and gst-ti don't really work with anything newer than 2.6.32-psp, =
+we're trying to get that addressed internally.
+
+> is that I get a warning-turned-error from linux/types.h
+> that "Attempt to use kernel headers from user space".
+>=20
+> ti-dmai_svn.bb hacks this (self-admittedly) by defining
+> _EXPORTED_HEADERS_ (commit d0184be13b4879e, also from Koen).  I had to
+> modify the recipe to enable the define to actually get passed as a
+> compile option.  For gstreamer-ti, there was no such hack in place, =
+but
+> it was needed for the same reason.
+>=20
+> I would think it is a common requirement for recipes to include kernel
+> headers, and this warning has been around since 2.6.32.  I got around =
+it
+> with gstreamer-ti by installing the headers with headers_install into =
+a
+> subdir of the headers directory set up currently by kernel.bbclass, =
+and
+> pointing the gstreamer-ti recipe at that, but I'm not sure if there's =
+a
+> better way.
+>=20
+> If there are some recipes that need internal kernel sources staged for
+> them, then it seems to me that we need both sets of kernel headers: =
+one
+> exported to userspace (with headers_install) and one that is not.
+> Right?  Can we agree on a standard place/manner for this?
+>=20
+> Below is my patch to get gstreamer-ti working, for illustration.
+
+I don't really have a better suggestion, apart from adding a var in e.g. =
+bitbake.conf to point to the userspace stuff.
+
+We might even do the reverse, stage the full set into =
+$kernel_dir/private and the userspace ones in $kernel_dir, that would =
+make it more clear which recipes need internal API.
 
 regards,
 
 Koen
 
->  
-> IIRC I had similar issue in some other recipe, but unfortunatelly don't 
-> remember which one.
-> 
-> Regards,
-> 
->>
->> Regards,
->> Noor
->>
->> -----Original Message-----
->> From: openembedded-devel-bounces@lists.openembedded.org
->> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
->> Ahsan, Noor
->> Sent: Thursday, March 17, 2011 3:41 PM
->> To: openembedded-devel@lists.openembedded.org
->> Subject: Re: [oe] Python-native dependency in libxml2
->>
->> Hello,
->>
->> Today I got the fresh stuff and tried to build gnome-doc-utils-native
->> (to build xml2po package). I am building on Ubuntu host 9.10. First it
->> gave me an error that it could not find intltoolize command. You can see
->> the attached build log "build_intltool_error,log". So I added intltool
->> package in gnome-doc-utils-native DEPENDS so it built successfully. You
->> can see the build log "build_intltool_fix.log". Then I removed all the
->> build stuff from build DIR and commented DEPENDS_virtclass-native =
->> "python-native" and XPY_virtclass-native = "
->> --with-python=${PYTHON_DIR}" in libxml2.inc file. Rebuild
->> gnome-doc-utils-native. It built successfully again. The build log is
->> also attached "build_no_python.log". I think there is no need of python
->> dependency in libxml2 package. Kindly correct me if I am doing anything
->> wrong.
->>
->> We need to fix gnome-doc-utils-native recipe, so that it does not show
->> intltoolize error.
->>
->> Regards,
->> Noor
->>
->> -----Original Message-----
->> From: openembedded-devel-bounces@lists.openembedded.org
->> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
->> Ahsan, Noor
->> Sent: Wednesday, March 16, 2011 1:39 PM
->> To: openembedded-devel@lists.openembedded.org
->> Subject: Re: [oe] Python-native dependency in libxml2
->>
->> Hello,
->>
->> I made 2 changes, first one was to remove python-native from DEPENDS and
->> second was commented out XPY_virtclass-native = "
->> --with-python=${PYTHON_DIR}". Moreover I removed all the stuff from
->> build dir, so there were not python-native for me. After kicking this
->> build libxml2-native build fine.
->>
->> I was looking for xml2po recipe, I couldn't find it. Can you tell me how
->> to build xml2po package so that I can reproduce the problem.
->>
->> Regards,
->> Noor
->>
->> -----Original Message-----
->> From: openembedded-devel-bounces@lists.openembedded.org
->> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
->> Martin Jansa
->> Sent: Wednesday, March 16, 2011 1:05 PM
->> To: openembedded-devel@lists.openembedded.org
->> Subject: Re: [oe] Python-native dependency in libxml2
->>
->> On Wed, Mar 16, 2011 at 08:28:39AM +0100, Frans Meulenbroeks wrote:
->>> 2011/3/16 Khem Raj <raj.khem@gmail.com>:
->>>> On 3/15/2011 11:22 PM, Ahsan, Noor wrote:
->>>>>
->>>>> Hello,
->>>>>
->>>>> I was looking at the libxml2 package. While going through the
->> recipes I
->>>>> came to know that its native package depends on python-native
->> package as
->>>>> well. This dependency is defined in libxml2.inc file.
->>>>>
->>>>> DEPENDS_virtclass-native = "python-native"
->>>>>
->>>>> This package build fine after removing this dependency. I am not
->> clear
->>>>> why this dependency is being added in libxml2 package. Can somebody
->>>>> clear that to me. While looking at the git log I came to know that
->> this
->>>>> change is coming from libxml2-native.inc file. But I am not clear
->> why
->>>>> this dependency was added as this package build fine without it.
->>>>>
->>>>> Please help me in understanding this dependency. Thanks.
->>>>
->>>> Try to build this recipe from scratch and see if it still works then
->> we can
->>>> remove the dep
->>
->> That's not enough, libxml2-native builds fine.. but then xml2po
->> will fail if there isn't libxml2-native built with python support.
->>
->> see a25f07ca6159e1cd5b8a215ca5da8405fb1b9053
->>
->> So yes.. for such tests you should build recipe from scratch _and_ check
->> if resulting package/sysroot is still the same.
->>
->> Regards,
->>
->>> I'm not sure if that is the right way.
->>> It might well be that typically python-native is already there in a
->>> scratch build because some earlier package needed it (or even because
->>> of the scheduling of build steps.
->>>
->>> Probably a better way is to build with packaged staging (with staging
->>> dir outside TMPDIR) then rm TMPDIR and bake the package.
->>> Alternately peek into the package to see if it needs python. If it is
->>> needed then the DEPENDS should stay.
->>>
->>> Looking at the issue at hand maybe the best person to ask is Martin
->>> Jansa as he last touched that line according to git blame:
->>> 3cd9ddbf recipes/libxml/libxml2.inc  (Martin Jansa
->>> 2010-02-26 12:32:53 +0100  5) DEPENDS_virtclass-native =
->>> "python-native"
->>>
->>> The other thing is that further on in the .inc file I see:
->>> XPY_virtclass-native = " --with-python=${PYTHON_DIR}"
->>>
->>> This strongly suggests a hard dependency on python, so removing the
->>> DEPENDS "because it builds without it" does not seem to be a good plan
->>> to me.
->>>
->>> My strong feeling is that recipes should be self-contained (so should
->>> list all packages they need to build, minus the ones that are
->>> inherited from classes (and maybe a few implicit ones like maybe make)
->>>
->>> Frans
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->> -- 
->> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNgypFMkyGM64RGpERAka3AJ91Dpu6+SCx3MH0HtK6LUyEnaH7tACeM4EP
-b0nPj51+QTs4wdONs4BCP7Y=
-=Zxcy
------END PGP SIGNATURE-----
+>=20
+> -Michael
+>=20
+> =46rom 71b3762ad5f6e7a8553a6b780296f7e994513f0b Mon Sep 17 00:00:00 =
+2001
+> From: Michael Jones <michael.jones@matrix-vision.de>
+> Date: Thu, 17 Mar 2011 17:23:53 +0100
+> Subject: [PATCH] install kernel headers exported for userspace
+>=20
+> kernel.bbclass already copies and manipulates kernel headers into
+> sysroot, but it doesn't export them properly using "make =
+headers_install"
+> which leads to a compiler error/warning in linux/types.h:
+>=20
+> "Attempt to use kernel headers from user space, see
+> http://kernelnewbies.org/KernelHeaders"
+>=20
+> ---
+> classes/kernel.bbclass      |    5 +++++
+> recipes/ti/gstreamer-ti.inc |    2 +-
+> 2 files changed, 6 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+> index 422bcd7..6b46d51 100644
+> --- a/classes/kernel.bbclass
+> +++ b/classes/kernel.bbclass
+> @@ -210,6 +210,11 @@ sysroot_stage_all_append() {
+> 	[ -e Module.symvers ] && install -m 0644 Module.symvers =
+$kerneldir/
+>=20
+> 	cp -fR scripts $kerneldir/
+> +
+> +	# install kernel headers in the proper manner to export them
+> +	# for userspace programs
+> +	userspace_hdrs=3D${kerneldir}/userspace
+> +	oe_runmake headers_install INSTALL_HDR_PATH=3D${userspace_hdrs} =
+ARCH=3D${ARCH}
+> }
+>=20
+> kernel_do_configure() {
+> diff --git a/recipes/ti/gstreamer-ti.inc b/recipes/ti/gstreamer-ti.inc
+> index 905e192..04d990f 100644
+> --- a/recipes/ti/gstreamer-ti.inc
+> +++ b/recipes/ti/gstreamer-ti.inc
+> @@ -72,7 +72,7 @@ CPPFLAGS_append =3D " -DPlatform_${PLATFORM}"
+> export ENCODE_COMBO    =3D =
+"${installdir}/ti-codecs-server/encodeCombo.x64P"
+> export DECODE_COMBO    =3D =
+"${installdir}/ti-codecs-server/decodeCombo.x64P"
+> # Makefile also expects to be able to find the kernel headers from the =
+envirionment
+> -export LINUXKERNEL_INSTALL_DIR =3D "${STAGING_KERNEL_DIR}"
+> +export LINUXKERNEL_INSTALL_DIR =3D "${STAGING_KERNEL_DIR}/userspace"
+>=20
+> do_configure_prepend() {
+> 	# PSP kernel is based on older DSS. we need to replace =
+linux/omapfb.h with mach/omapfb.h
+> --=20
+> 1.7.4.1
+>=20
+>=20
+> MATRIX VISION GmbH, Talstrasse 16, DE-71570 Oppenweiler
+> Registergericht: Amtsgericht Stuttgart, HRB 271090
+> Geschaeftsfuehrer: Gerhard Thullner, Werner Armingeon, Uwe Furtner
 
 
 
