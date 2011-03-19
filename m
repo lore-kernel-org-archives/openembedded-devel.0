@@ -1,40 +1,35 @@
 Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
 	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <richard.purdie@linuxfoundation.org>)
-	id 1Q0k7n-00066J-Ec for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Mar 2011 01:34:35 +0100
+	id 1Q0kcJ-0007Th-5w for openembedded-devel@lists.openembedded.org;
+	Sat, 19 Mar 2011 02:06:07 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p2J0WoXV015346
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p2J14M88015590
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Mar 2011 00:32:50 GMT
+	Sat, 19 Mar 2011 01:04:22 GMT
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 15243-02 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Mar 2011 00:32:46 +0000 (GMT)
+	id 15243-06 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 19 Mar 2011 01:04:18 +0000 (GMT)
 Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p2J0WfAG015340
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p2J14GV7015584
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Mar 2011 00:32:41 GMT
+	Sat, 19 Mar 2011 01:04:16 GMT
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <87ei6439rz.fsf@eha.doredevelopment.dk>
-References: <1299841477-23487-1-git-send-email-sledz@dresearch.de>
-	<1300180117.2522.14.camel@eha>
-	<1300360696.2132.14681.camel@phil-desktop>
-	<1300373028.2468.8.camel@eha> <1300374439.9054.21.camel@phil-desktop>
-	<1300384355.2175.13.camel@eha> <1300385153.9054.44.camel@phil-desktop>
-	<1300391907.2175.23.camel@eha>
-	<1300395614.3026.2.camel@lenovo.internal.reciva.com>
-	<1300426143.8862.0.camel@eha> <1300443987.9054.64.camel@phil-desktop>
-	<87ei6439rz.fsf@eha.doredevelopment.dk>
-Date: Sat, 19 Mar 2011 00:32:24 +0000
-Message-ID: <1300494744.30423.2239.camel@rex>
+In-Reply-To: <1300443329.9054.53.camel@phil-desktop>
+References: <20110311081950.GG7353@excalibur.local>
+	<1300385432.2298.33.camel@saphir> <1300396447.30423.2113.camel@rex>
+	<AANLkTi=9DUeh3eyaW=fQciA_Qk51yvqbBP_792n8fwQD@mail.gmail.com>
+	<1300443329.9054.53.camel@phil-desktop>
+Date: Sat, 19 Mar 2011 01:03:58 +0000
+Message-ID: <1300496638.30423.2249.camel@rex>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.3 
 X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Eliminating dependency race-conditions
+Subject: Re: OE Bugzilla Future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,47 +43,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Mar 2011 00:34:35 -0000
+X-List-Received-Date: Sat, 19 Mar 2011 01:06:07 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2011-03-18 at 13:14 +0100, Esben Haabendal wrote:
-> By doing it this way, I don't think we are getting much closer to the
-> second step (package-based build-time dependencies).  The OE-lite
-> implementation of per-recipe staging builds on top of package-based
-> build-time dependencies, so to do it the other way around, would imply
-> taking the sstate concept and extend it to do per-recipe sysroots.
-> After that, I believe you have exactly the same amount of development
-> left to get where OE-lite is in respect to package-based build-time
-> depencies and per-recipe staging.
+On Fri, 2011-03-18 at 10:15 +0000, Phil Blundell wrote:
+> On Fri, 2011-03-18 at 08:57 +0100, Frans Meulenbroeks wrote:
+> > 2011/3/17 Richard Purdie <richard.purdie@linuxfoundation.org>:
+> > > On Thu, 2011-03-17 at 19:10 +0100, Michael 'Mickey' Lauer wrote:
+> > >> I'm in favor of keeping it, cleaning it up, and improve
+> > >> the integration with patchwork / git. Throwing it away
+> > >> would be a very bad sign to all those countless people
+> > >> who've gone through the pains of actually working with
+> > >> the bugtracker.
+> > >
+> > > The simple question is who is actually going to sort out the mess its
+> > > in?
+> > >
+> > > Who is going to look after it on a continuing basis?
+> > >
+> > > If there isn't ownership, nothing is going to change.
+> > 
+> > Actually I feel the real problem is that:
+> > - people did not want to get bugs assigned to them (at least that was
+> > what someone told me in the past)
+> > - we're lacking a good notion of package or recipe ownership, so even
+> > if we had someone acting as a bug manager, (s)he would have a hard
+> > time to find out who to assign an issue to.
 > 
-> As I see it, package-based build-time dependencies practically obsoletes
-> sstate. 
+> Yes, agreed.  A few people have tried in the past to take responsibility
+> for bugzilla itself (in infrastructure terms) and I would be happy
+> enough to do that for the future.  But it clearly is not reasonable to
+> expect the Bugzilla maintainer(s) to be personally responsible for
+> fixing every bug that gets reported.
 
-This is where I think you misunderstand why sstate has been written and
-what its role is.
+This is the key question. Who is responsible for fixing bugs?
 
-Its a generic abstraction of taking the output from a task, saving it
-away somewhere and then being able to reuse a prebuilt version of it.
-There is no dependency on a package manager, package format or special
-dependency formats. sstate simply looks for a prebuilt version (matching
-a checksum), uses it if present, otherwise builds from "scratch".
+The recipe's original author?
+The maintainer?
+The reporter?
+The bugzilla maintainer?
+The TSC?
 
-> > I was thinking of situations like the Debian package autonamer, ie the
-> > thing that causes glibc-dev to come out named "libc6-dev.ipk" or similar
-> > depending on the soname of the library that was built.  It seems like
-> > this would be a bit awkward to deal with if your dependencies were
-> > specified purely in terms of output packages.
-> 
-> As OE-lite is not OE, we are currently not supporting such type of
-> package renaming.  Let's leave that to Debian guys to fight with ;-)
+The answer in general is whoever has time and an interest in it and none
+of the above.
 
-What other features are you not supporting? Are you prepared to think
-about them or is that someone else's problem?
+> As you say, the real issue here seems to be that someone (presumably the
+> TSC) needs to determine the workflow that OE is going to use and then
+> convince the developers to stick to it.
+
+Here lies the problem. All OE's developers are effectively volunteers.
+We have no means to convince developers to stick to anything. Volunteer
+developers have a tendency to rebel as soon as it even remotely looks
+like someone might "force" them to do something :).
+
+I put the smile in as I don't mean this in a bad way but I do think we
+need to understand that few people have the time to dive into other
+people's problems. This is the underlying issue and I don't think
+anything has changed for OE. I don't think there is anything magic the
+TSC can do either.
+
+Yocto has different dynamics and I think those could be useful for some
+of this and can help improve things for the better but its never a free
+for all. Yocto has, can and will look at certain bugs but the scope
+needs to be constrained, certainly to OE-Core.
 
 Cheers,
 
 Richard
+
+
 
 
 
