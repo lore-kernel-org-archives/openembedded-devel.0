@@ -1,35 +1,49 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q0x4z-000517-QJ for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Mar 2011 15:24:33 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q0x3I-0000oY-QQ for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Mar 2011 15:22:48 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Mar 2011 15:22:48 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1Q10yf-0003Rr-3f
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 19 Mar 2011 19:34:17 +0100
+Received: by pvc30 with SMTP id 30so557982pvc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Mar 2011 15:22:48 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 19 Mar 2011 11:32:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id
+	:mail-followup-to:references:mime-version:content-type
+	:content-disposition:content-transfer-encoding:in-reply-to
+	:user-agent; bh=QdnjYLZYgh/wO2C9pJ24OLajBO0VIPlfGpXsmupUWs0=;
+	b=O0tTykr3f9V4G0fhmcd5NdmhWHu1Y/iuSGSttZei849VS48hvEkxXNcqGPk1NV/Y6U
+	R4VGSkLOfAV1TIo0A8RSMcvujhLKTnlidv4W1EOQjBZkAN7Re+k7P9lVo3IRtpE/9fO+
+	r0GaJXL7XF+AXzkr5fTfiNx1kH7wTF/Y/rbgY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	b=V4QsK+eG/jnTUm/5ailxJDIdzImuOHHxFlhAg0847lqzxPLefXm7Tg+bL+Dtqb7TEx
+	fqI303lYide0jp9pqqiHl3cobHAYGUViI4GotOhSvO6KxZiCEJjsPeFQ4Ck+m9YKgeMF
+	lpg6Zeoxi+JC1hjkhv+HxMcGcNVUzxJ3V9ihA=
+Received: by 10.142.50.2 with SMTP id x2mr1038358wfx.138.1300559547484;
+	Sat, 19 Mar 2011 11:32:27 -0700 (PDT)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id w27sm4657758wfd.16.2011.03.19.11.32.24
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 19 Mar 2011 11:32:24 -0700 (PDT)
+Date: Sat, 19 Mar 2011 11:33:29 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 19 Mar 2011 15:22:35 +0100
-Message-ID: <im2e7b$h6b$1@dough.gmane.org>
-References: <AANLkTimm0B4bFuDgSJ1k+CUG_65Qm2QDeSxEkxWO79fA@mail.gmail.com>	<im2a3s$ssm$1@dough.gmane.org>
-	<4D84B61F.7020303@mentor.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4D84B61F.7020303@mentor.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [2011.03-maintenance] Re: cmake in stable
+Message-ID: <20110319183329.GA14868@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1299591298.3785.126.camel@mattotaupa>
+	<1300205205.4123.6.camel@mattotaupa>
+	<AANLkTimEXRbjaJ9VXOk4m+QvpF6ZVnWzAGaXY9Q2tiyc@mail.gmail.com>
+	<1300364903.3950.21.camel@mattotaupa>
+	<1300402006.17833.14.camel@mattotaupa>
+	<AANLkTi=xe7p694-8-bnGV85H59M-tJvTUnwm6TgCFPZk@mail.gmail.com>
+	<1300449625.3830.47.camel@mattotaupa>
+MIME-Version: 1.0
+In-Reply-To: <1300449625.3830.47.camel@mattotaupa>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH] xfce_session_4.6.{1, 2}: explicitly pass the path of `iceauth`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,43 +57,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Mar 2011 14:24:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 19 Mar 2011 18:34:17 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 19-03-11 14:56, Tom Rini wrote:
-> On 03/19/2011 06:12 AM, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 19-03-11 10:58, Maksym Parkachov wrote:
->>> Hi everyone,
->>>
->>> could someone, please, cherry-pick following commits to the
->>> 2011.03-maintenance branch as the cmake is broken in this branch.
->>>
->>> 7ce3543709765f37e359b2fa449216c834a5910e
->>> 37a042ec115f100a0aef606ee7f88cad560f0d1e
->>
->> I added those to my staging tree and will do some test builds.
->>
->> Tom, if those test builds are successfull, do you want to pick those 2
->> up yourself or do you want me to include them in the next pull request?
+On (18/03/11 13:00), Paul Menzel wrote:
+> Date: Fri, 18 Mar 2011 12:03:43 +0100
 > 
-> Next pull request please, thanks!
+> Xfce Session build depends on the executable `iceauth`, which fails when cross compiling for a different architecture.
+> 
+>         checking if the linker (arm-oe-linux-gnueabi-ld --sysroot=/oe/build-minimal-eglibc/minimal-dev/sysroots/armv5te-oe-linux-gnueabi) is GNU ld... (cached) yes
+>         checking whether to build with profiling support... no
+>         checking whether to compile with coverage profiling instrumentation... no
+>         checking whether to disable assertions... no
+>         checking whether to build final version... yes
+>         checking whether arm-oe-linux-gnueabi-ld --sysroot=/oe/build-minimal-eglibc/minimal-dev/sysroots/armv5te-oe-linux-gnueabi accepts -O1... yes
+>         checking for iceauth... no
+>         configure: error: iceauth missing, please check your X11 installation
+> 
+> As suggested by Khem Raj [1] pass the value – `/usr/bin/iceauth` is taken – to the configure script so that the test is avoided.
+> 
+> Therefore `iceauth` is removed from `DEPENDS` and the `PR` variable is incremented.
+> 
+> This issue has been reported upstream as ticket #7420 [2].
+> 
+> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-March/031115.html
+> [2] http://bugzilla.xfce.org/show_bug.cgi?id=7420
+> 
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> ---
+>  recipes/xfce-base/xfce4-session_4.6.1.bb |    6 ++++--
+>  recipes/xfce-base/xfce4-session_4.6.2.bb |    6 ++++--
+>  2 files changed, 8 insertions(+), 4 deletions(-)
+> 
+> diff --git a/recipes/xfce-base/xfce4-session_4.6.1.bb b/recipes/xfce-base/xfce4-session_4.6.1.bb
+> index ba66ac1..5029b21 100644
+> --- a/recipes/xfce-base/xfce4-session_4.6.1.bb
+> +++ b/recipes/xfce-base/xfce4-session_4.6.1.bb
+> @@ -1,13 +1,15 @@
+>  DESCRIPTION = "xfce4-session is a session manager for Xfce 4 Desktop Environment"
+> -DEPENDS = "lbwnck libxfcegui4 libxfce4util dbus iceauth xfce-utils"
+> +DEPENDS = "lbwnck libxfcegui4 libxfce4util dbus xfce-utils"
+>  SECTION = "x11"
+>  
+> -PR = "r4"
+> +PR = "r5"
+>  
+>  inherit xfce46
+>  
+>  RDEPENDS_${PN} = "iceauth xfce-utils xinit dbus-x11"
+>  
+> +EXTRA_OECONF += "ac_cv_path_ICEAUTH=/usr/bin/iceauth"
 
-Will do!
+Would it make sense to have iceauth-native instead ?
+> +
+>  FILES_${PN} += "${libdir}/xfce4/splash/engines/*.so"
+>  FILES_${PN} += "${datadir}/xfce4/tips/*"
+>  FILES_${PN} += "${datadir}/themes/Default/balou/*"
+> diff --git a/recipes/xfce-base/xfce4-session_4.6.2.bb b/recipes/xfce-base/xfce4-session_4.6.2.bb
+> index d7f768a..c937775 100644
+> --- a/recipes/xfce-base/xfce4-session_4.6.2.bb
+> +++ b/recipes/xfce-base/xfce4-session_4.6.2.bb
+> @@ -1,13 +1,15 @@
+>  DESCRIPTION = "xfce4-session is a session manager for Xfce 4 Desktop Environment"
+> -DEPENDS = "libwnck libxfcegui4 libxfce4util dbus iceauth xfce-utils"
+> +DEPENDS = "libwnck libxfcegui4 libxfce4util dbus xfce-utils"
+>  SECTION = "x11"
+>  
+> -PR = "r0"
+> +PR = "r1"
+>  
+>  inherit xfce46
+>  
+>  RDEPENDS_${PN} = "iceauth xfce-utils xinit dbus-x11"
+>  
+> +EXTRA_OECONF += "ac_cv_path_ICEAUTH=/usr/bin/iceauth"
+> +
+>  FILES_${PN} += "${libdir}/xfce4/splash/engines/*.so"
+>  FILES_${PN} += "${datadir}/xfce4/tips/*"
+>  FILES_${PN} += "${datadir}/themes/Default/balou/*"
+> -- 
+> 1.7.4.1
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFNhLwqMkyGM64RGpERAoLkAJ9NPesSJGtnBpuHgSVN+JPbvNbw6gCgrjoO
-DPqBsISoOH44WwIqlaAsmzk=
-=L2fb
------END PGP SIGNATURE-----
 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+-- 
+-Khem
 
 
