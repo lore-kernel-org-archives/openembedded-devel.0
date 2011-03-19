@@ -1,44 +1,33 @@
-Received: from mail-px0-f178.google.com ([209.85.212.178])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Q11CE-0003xy-7S
+	(envelope-from <Tom_Rini@mentor.com>) id 1Q14rJ-0005eh-6R
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Mar 2011 19:48:18 +0100
-Received: by pxi1 with SMTP id 1so862742pxi.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Mar 2011 11:46:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id
-	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:in-reply-to:user-agent;
-	bh=fpsF/A3OLEbw4EXZZivX75RDC80PBUGHwEklkwCdCf4=;
-	b=W9jl1td+XG1nmwuF2jSmo93jzXlPe8vqU7japsv1wi0WyU9gbujSSf8jlnBm3Ma7Sl
-	+UenSY2rc3XmObCMCv0imOW//7S+SlHATGA7Aw0wVAPM+Zlt81BZ9zl+VLpkR5gvvIYG
-	7S25myqyZYB0Zv77EJk0n/tjWE89oz+IPBpMU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	b=mOmSkdXWzNtc8OJIvSMmvuTyK7gVTXC4SPRdwhI2fAGDQB+NCCgQm26ApK0pwfrG8L
-	Efcys+PetDbZx/LnHBUT7j1tplD8aoDHTts3XG+QSHKqeZicMQL18LbjUjmJWBEvSDKk
-	gH9utePxH/JRp6GO/qwAuFpuVEfq7PdK/xtT8=
-Received: by 10.142.128.16 with SMTP id a16mr1037472wfd.282.1300560389917;
-	Sat, 19 Mar 2011 11:46:29 -0700 (PDT)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id t9sm1504252wff.20.2011.03.19.11.46.27
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 19 Mar 2011 11:46:28 -0700 (PDT)
-Date: Sat, 19 Mar 2011 11:47:37 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110319184737.GD14868@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1300441991-30490-1-git-send-email-heinold@inf.fu-berlin.de>
-	<1300441991-30490-3-git-send-email-heinold@inf.fu-berlin.de>
+	Sat, 19 Mar 2011 23:42:57 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1Q14pZ-0002oi-3o from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 19 Mar 2011 15:41:09 -0700
+Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Sat, 19 Mar 2011 15:41:08 -0700
+Received: from [172.30.80.15] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
+	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
+	Sat, 19 Mar 2011 15:41:08 -0700
+Message-ID: <4D8530EF.5040307@mentor.com>
+Date: Sat, 19 Mar 2011 15:40:47 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-In-Reply-To: <1300441991-30490-3-git-send-email-heinold@inf.fu-berlin.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH 2/2] ti-codec-engine: make rebuild of ti-codec-engine itself possible
+To: <openembedded-devel@lists.openembedded.org>
+References: <6F3B187F-5497-4504-9EEB-99204CCC815B@vanille-media.de>
+	<4D83E632.2040701@xora.org.uk>
+In-Reply-To: <4D83E632.2040701@xora.org.uk>
+X-OriginalArrivalTime: 19 Mar 2011 22:41:08.0944 (UTC)
+	FILETIME=[BD7F6500:01CBE686]
+Subject: Re: blacklist.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,297 +41,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Mar 2011 18:48:18 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 19 Mar 2011 22:42:57 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On (18/03/11 10:53), heinold@inf.fu-berlin.de wrote:
-> From: Henning Heinold <heinold@inf.fu-berlin.de>
-> 
-> 
-> Signed-off-by: Henning Heinold <heinold@inf.fu-berlin.de>
-Looks ok
+On 03/18/2011 04:09 PM, Graeme Gregory wrote:
+> On 18/03/2011 19:24, Dr. Michael Lauer wrote:
+>> Salut,
+>>
+>> the blacklisting of packages as found in angstrom.bbclass
+>> is pretty helpful and would be beneficial to all kinds
+>> of distribution configurations in OE. Would there be
+>> a strong objection of renaming this to blacklist.bbclass?
+>>
+>> Copying, of course, is also a possibility, but
+>> in my opinion it would only be the second best choice.
+>>
+> As the author I object to renaming it.
+>
+> We have played this rename game before and Im still not happy with the
+> results of the last time.
+>
+> I also object on the grounds of the amount of abuse I got from some
+> other distro maintainers for implementing this, which is the reason it
+> is called angstrom.bbclass.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
-
-> ---
->  recipes/ti/ti-codec-engine.inc                    |  117 +++++++++++++++++++++
->  recipes/ti/ti-codec-engine/fix_core_package.patch |   13 +++
->  recipes/ti/ti-codec-engine/fix_ipc_dsplink.patch  |   86 +++++++++++++++
->  recipes/ti/ti-codec-engine_2.26.01.09.bb          |    4 +
->  4 files changed, 220 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/ti/ti-codec-engine/fix_core_package.patch
->  create mode 100644 recipes/ti/ti-codec-engine/fix_ipc_dsplink.patch
-> 
-> diff --git a/recipes/ti/ti-codec-engine.inc b/recipes/ti/ti-codec-engine.inc
-> index fdaebd5..9e8a8ad 100644
-> --- a/recipes/ti/ti-codec-engine.inc
-> +++ b/recipes/ti/ti-codec-engine.inc
-> @@ -64,6 +64,107 @@ do_configure() {
->      sed -i  \
->          -e s:arm-none-linux-gnueabi-:${TARGET_PREFIX}:g \
->          ${S}/examples/xdcpaths.mak
-> +
-> +    # Generate a config.bld for codec engine lib
-> +
-> +    cat > ${S}/packages/ti/sdo/ce/config.bld <<EOF
-> +
-> +/* Generated by ti-codeco-engine.inc OE recipe */
-> +
-> +var Build = xdc.useModule('xdc.bld.BuildEnvironment');
-> +
-> +var GCArmv5T = xdc.useModule('gnu.targets.arm.GCArmv5T');
-> +GCArmv5T.LONGNAME = "bin/${TARGET_PREFIX}gcc";
-> +GCArmv5T.rootDir = "${TOOLCHAIN_PATH}";
-> +GCArmv5T.ccOpts.prefix += " -Wall -fno-strict-aliasing -I${FC_INSTALL_DIR}/packages -I${XDAIS_INSTALL_DIR}/packages ";
-> +GCArmv5T.platform = null;
-> +GCArmv5T.platforms = [
-> +    "${XDC_PLATFORM}"
-> +];
-> +
-> +/* remove profiles we don't use */
-> +delete GCArmv5T.profiles["coverage"];
-> +delete GCArmv5T.profiles["profile"];
-> +
-> +Build.targets.\$add(GCArmv5T);
-> +
-> +var C64P = xdc.useModule('ti.targets.C64P');
-> +C64P.rootDir = "${CODEGEN_INSTALL_DIR}";
-> +C64P.ccOpts.prefix += " -I${FC_INSTALL_DIR}/packages -I${XDAIS_INSTALL_DIR}/packages ";
-> +
-> +Build.targets.\$add(C64P);
-> +EOF
-> +
-> +    cat > ${S}/packages/ti/sdo/ce/osal/linux/config.bld <<EOF
-> +
-> +/* Generated by ti-codeco-engine.inc OE recipe */
-> +
-> +var Build = xdc.useModule('xdc.bld.BuildEnvironment');
-> +
-> +var GCArmv5T = xdc.useModule('gnu.targets.arm.GCArmv5T');
-> +GCArmv5T.LONGNAME = "bin/${TARGET_PREFIX}gcc";
-> +GCArmv5T.rootDir = "${TOOLCHAIN_PATH}";
-> +GCArmv5T.ccOpts.prefix += " -Wall -fno-strict-aliasing -I${FC_INSTALL_DIR}/packages -I${CMEM_INSTALL_DIR}/packages ";
-> +GCArmv5T.platform = null;
-> +GCArmv5T.platforms = [
-> +    "${XDC_PLATFORM}"
-> +];
-> +
-> +/* remove profiles we don't use */
-> +delete GCArmv5T.profiles["coverage"];
-> +delete GCArmv5T.profiles["profile"];
-> +
-> +Build.targets.\$add(GCArmv5T);
-> +
-> +EOF
-> +
-> +    cat > ${S}/packages/ti/sdo/ce/ipc/dsplink/config.bld <<EOF
-> +
-> +/* Generated by ti-codeco-engine.inc OE recipe */
-> +
-> +var Build = xdc.useModule('xdc.bld.BuildEnvironment');
-> +
-> +var GCArmv5T = xdc.useModule('gnu.targets.arm.GCArmv5T');
-> +GCArmv5T.LONGNAME = "bin/${TARGET_PREFIX}gcc";
-> +GCArmv5T.rootDir = "${TOOLCHAIN_PATH}";
-> +GCArmv5T.ccOpts.prefix += " -Wall -fno-strict-aliasing -I${FC_INSTALL_DIR}/packages "
-> +GCArmv5T.ccOpts.prefix += " -I${CMEM_INSTALL_DIR}/packages -I${LPM_INSTALL_DIR}/packages ";
-> +GCArmv5T.platform = null;
-> +GCArmv5T.platforms = [
-> +    "${XDC_PLATFORM}"
-> +];
-> +
-> +/* remove profiles we don't use */
-> +delete GCArmv5T.profiles["coverage"];
-> +delete GCArmv5T.profiles["profile"];
-> +
-> +Build.targets.\$add(GCArmv5T);
-> +
-> +EOF
-> +
-> +    cat > ${S}/packages/ti/dsplink/utils/ladclient/config.bld <<EOF
-> +
-> +/* Generated by ti-codeco-engine.inc OE recipe */
-> +
-> +var Build = xdc.useModule('xdc.bld.BuildEnvironment');
-> +
-> +var GCArmv5T = xdc.useModule('gnu.targets.arm.GCArmv5T');
-> +GCArmv5T.LONGNAME = "bin/${TARGET_PREFIX}gcc";
-> +GCArmv5T.rootDir = "${TOOLCHAIN_PATH}";
-> +GCArmv5T.ccOpts.prefix += " -Wall -fno-strict-aliasing "
-> +GCArmv5T.platform = null;
-> +GCArmv5T.platforms = [
-> +    "${XDC_PLATFORM}"
-> +];
-> +
-> +/* remove profiles we don't use */
-> +delete GCArmv5T.profiles["coverage"];
-> +delete GCArmv5T.profiles["profile"];
-> +
-> +Build.targets.\$add(GCArmv5T);
-> +
-> +EOF
-> +
->  }
->  
->  do_prepsources() {
-> @@ -98,6 +199,22 @@ addtask prepsources after do_configure before do_compile
->  
->  do_compile () {
->  
-> +        cd ${S}/packages/ti/sdo/ce
-> +           ${XDC_INSTALL_DIR}/xdc
-> +
-> +        cd ${S}/packages/ti/sdo/ce/osal/linux
-> +           ${XDC_INSTALL_DIR}/xdc
-> +
-> +	cd ${S}/packages/ti/sdo/ce/ipc/dsplink
-> +           make XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
-> +                CE_INSTALL_DIR="${S}" \
-> +		DSPLINK_REPO="${LINK_INSTALL_DIR}" \
-> +                XDCARGS="DEVICE=${CEEXAMPLESDEVICES}"
-> +
-> +
-> +        cd ${S}/packages/ti/dsplink/utils/ladclient
-> +           ${XDC_INSTALL_DIR}/xdc
-> +
->          for i in codecs extensions servers apps ; do
->                  cd ${S}/examples/ti/sdo/ce/examples/$i
->                  make DEVICES="${CEEXAMPLESDEVICES}" \
-> diff --git a/recipes/ti/ti-codec-engine/fix_core_package.patch b/recipes/ti/ti-codec-engine/fix_core_package.patch
-> new file mode 100644
-> index 0000000..69ca438
-> --- /dev/null
-> +++ b/recipes/ti/ti-codec-engine/fix_core_package.patch
-> @@ -0,0 +1,13 @@
-> +Index: codec_engine_2_26_01_09/packages/ti/sdo/ce/package.bld
-> +===================================================================
-> +--- codec_engine_2_26_01_09.orig/packages/ti/sdo/ce/package.bld	2011-03-12 14:37:00.515568120 +0100
-> ++++ codec_engine_2_26_01_09/packages/ti/sdo/ce/package.bld	2011-03-12 14:37:04.174063120 +0100
-> +@@ -45,6 +45,8 @@
-> +  */
-> + Pkg.attrs.exportSrc = true;
-> + 
-> ++Pkg.libTemplate = "ti/sdo/ce/utils/libvers.xdt"
-> ++
-> + Pkg.otherFiles = ["CERuntime.h", "Server.h", "Engine.h", "visa.h", "skel.h",
-> +         "rms.h", "ServerDataSheet.html.xdt", "async-extensions.txt",
-> +         "package.bld"];
-> diff --git a/recipes/ti/ti-codec-engine/fix_ipc_dsplink.patch b/recipes/ti/ti-codec-engine/fix_ipc_dsplink.patch
-> new file mode 100644
-> index 0000000..06f362c
-> --- /dev/null
-> +++ b/recipes/ti/ti-codec-engine/fix_ipc_dsplink.patch
-> @@ -0,0 +1,86 @@
-> +Index: codec_engine_2_26_01_09/packages/ti/sdo/ce/ipc/dsplink/package.bld
-> +===================================================================
-> +--- codec_engine_2_26_01_09.orig/packages/ti/sdo/ce/ipc/dsplink/package.bld	2011-03-12 16:42:42.508013119 +0100
-> ++++ codec_engine_2_26_01_09/packages/ti/sdo/ce/ipc/dsplink/package.bld	2011-03-12 17:05:14.163503119 +0100
-> +@@ -67,6 +67,15 @@
-> +           "package will not be built.");
-> + }
-> + 
-> ++var DEVICE;
-> ++
-> ++/* initialize local vars with those set in xdcpaths.mak (via XDCARGS) */
-> ++for (x = 0; x < arguments.length; x++) {
-> ++    if (arguments[x].match(/^DEVICE=/)) {
-> ++        DEVICE = arguments[x].split("=")[1];
-> ++    }
-> ++}
-> ++
-> + for (var i = 0; i < Build.targets.length; i++) {
-> +     var targ = Build.targets[i];
-> +     var lib;
-> +@@ -77,8 +86,11 @@
-> +     }
-> + 
-> +     if ((":"+targ.getISAChain().join(":")+":").match(/:v5T:|:v6:/i)) {
-> +-        /* DM6446 */
-> ++
-> +         linkGppGlobal.runtimeOS = linkGppGlobal.LINUX;
-> ++
-> ++     if (DEVICE.match(/DM6446|DM6467/)) {
-> ++        /* DM6446 */
-> +         linkGppGlobal.deviceName = linkGppGlobal.DAVINCI;
-> + 
-> +         lib = Pkg.addLibrary("lib/release/ipc_dsplink_6446", targ, {
-> +@@ -121,7 +133,7 @@
-> +         lib.addObjects([
-> +             "Processor_dsplink_linkcfg_DM6467.c"
-> +         ]);
-> +-
-> ++     } else if (DEVICE.match(/OMAP2530/)) {
-> +         /* OMAP2530 */
-> +         linkGppGlobal.deviceName = linkGppGlobal.OMAP2530;
-> + 
-> +@@ -144,6 +156,8 @@
-> +             "Processor_dsplink_linkcfg_OMAP2530.c"
-> +         ]);
-> + 
-> ++      } else if(DEVICE.match(/OMAP3530/)) {
-> ++
-> +         /* OMAP3530 */
-> +         linkGppGlobal.deviceName = linkGppGlobal.OMAP3530;
-> + 
-> +@@ -166,6 +180,8 @@
-> +             "Processor_dsplink_linkcfg_OMAP3530.c"
-> +         ]);
-> + 
-> ++      } else if(DEVICE.match(/DM355|DM365/)) {
-> ++
-> +         /* DM357 */
-> +         linkGppGlobal.deviceName = linkGppGlobal.DM357;
-> + 
-> +@@ -188,6 +204,8 @@
-> +             "Processor_dsplink_linkcfg_DM357.c"
-> +         ]);
-> + 
-> ++      } else if(DEVICE.match(/OMAPL137/)) {
-> ++
-> +         /* OMAPL137 */
-> +         linkGppGlobal.deviceName = linkGppGlobal.OMAPL1XX;
-> + 
-> +@@ -210,6 +228,8 @@
-> +             "Processor_dsplink_linkcfg_OMAPL137.c"
-> +         ]);
-> + 
-> ++      } else if(DEVICE.match(/OMAPL138/)) {
-> ++
-> +         /* OMAPL138 */
-> +         linkGppGlobal.deviceName = linkGppGlobal.OMAPL138;
-> + 
-> +@@ -231,6 +251,7 @@
-> +         lib.addObjects([
-> +             "Processor_dsplink_linkcfg_OMAPL138.c"
-> +         ]);
-> ++      }
-> +     }
-> +     else {
-> +         if ((":"+targ.getISAChain().join(":")+":").match(/:v4T:/i)) {
-> diff --git a/recipes/ti/ti-codec-engine_2.26.01.09.bb b/recipes/ti/ti-codec-engine_2.26.01.09.bb
-> index ca28522..2cd8bed 100644
-> --- a/recipes/ti/ti-codec-engine_2.26.01.09.bb
-> +++ b/recipes/ti/ti-codec-engine_2.26.01.09.bb
-> @@ -2,5 +2,9 @@ require ti-codec-engine.inc
->  
->  PV = "2_26_01_09"
->  
-> +SRC_URI += "file://fix_core_package.patch \
-> +            file://fix_ipc_dsplink.patch \
-> +           "
-> +
->  SRC_URI[cetarball.md5sum] = "d6046f29926b949b9eae4599f42dd51e"
->  SRC_URI[cetarball.sha256sum] = "4db08e47abb62b1180eb2310f5d0bbad2d1f58702a61d157dca5e056388dc7c2"
-> -- 
-> 1.7.4.1
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+OK.  Can we change the message so it says ${DISTRO} doesn't support, 
+rather than Angstrom doesn't support?
 
 -- 
--Khem
+Tom Rini
+Mentor Graphics Corporation
 
 
