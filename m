@@ -1,31 +1,34 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lazy.gopher@gmail.com>) id 1Q0sx0-0007AF-Mn
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Mar 2011 11:00:02 +0100
-Received: by fxm19 with SMTP id 19so4275188fxm.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q0vzB-0003cE-Bn for openembedded-devel@lists.openembedded.org;
+	Sat, 19 Mar 2011 14:14:29 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q0vxQ-0007Wr-3W for openembedded-devel@lists.openembedded.org;
+	Sat, 19 Mar 2011 14:12:40 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 19 Mar 2011 14:12:40 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Mar 2011 02:58:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=MEaFp9Tf7MOC+lPr2kzhaFeXILtA6p3fKQ1FdYaUMQw=;
-	b=COJCoBaANuGNg3DnkEZ2tO0UbpomW7Ut9ZxkXjQN0bpT+NWcKaN8/LuH8qXPd3577P
-	v0XBP6EjhDR9nKT7qNHbV73GDb3tT9tvhezmzvzFW4ZbYSA0Xfypf/R2fQrXyx+uROqZ
-	7D6oeNjNIUS143bqAH1GkTdvRauY4L6u4xOok=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Xhq9DZzIZ3NHfd+t7sGdmpEMmQP10UtmZoU09kAzp3F2ux18FfnyTHGmDc8hW+sgWs
-	0PoYHM3rzA+KGPUZH5WaMbeUQqycw+12UW2JtvD8OC5W3iVjrknMDP7rHMqddv/xxyKr
-	YxreVGlNt7D+5UW5Nx0Z2m1nt3yG1f9pUHHY8=
-MIME-Version: 1.0
-Received: by 10.223.16.82 with SMTP id n18mr2388679faa.48.1300528696367; Sat,
-	19 Mar 2011 02:58:16 -0700 (PDT)
-Received: by 10.223.70.135 with HTTP; Sat, 19 Mar 2011 02:58:16 -0700 (PDT)
-Date: Sat, 19 Mar 2011 10:58:16 +0100
-Message-ID: <AANLkTimm0B4bFuDgSJ1k+CUG_65Qm2QDeSxEkxWO79fA@mail.gmail.com>
-From: Maksym Parkachov <lazy.gopher@gmail.com>
+	Sat, 19 Mar 2011 14:12:40 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: cmake in stable
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 19 Mar 2011 14:12:28 +0100
+Message-ID: <im2a3s$ssm$1@dough.gmane.org>
+References: <AANLkTimm0B4bFuDgSJ1k+CUG_65Qm2QDeSxEkxWO79fA@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <AANLkTimm0B4bFuDgSJ1k+CUG_65Qm2QDeSxEkxWO79fA@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+Subject: [2011.03-maintenance] Re: cmake in stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,18 +42,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Mar 2011 10:00:02 -0000
+X-List-Received-Date: Sat, 19 Mar 2011 13:14:29 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi everyone,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-could someone, please, cherry-pick following commits to the
-2011.03-maintenance branch as the cmake is broken in this branch.
+On 19-03-11 10:58, Maksym Parkachov wrote:
+> Hi everyone,
+> 
+> could someone, please, cherry-pick following commits to the
+> 2011.03-maintenance branch as the cmake is broken in this branch.
+> 
+> 7ce3543709765f37e359b2fa449216c834a5910e
+> 37a042ec115f100a0aef606ee7f88cad560f0d1e
 
-7ce3543709765f37e359b2fa449216c834a5910e
-37a042ec115f100a0aef606ee7f88cad560f0d1e
+I added those to my staging tree and will do some test builds.
 
-Thanks in advance,
-Maksym.
+Tom, if those test builds are successfull, do you want to pick those 2
+up yourself or do you want me to include them in the next pull request?
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNhKu8MkyGM64RGpERAnwgAKCLOUEDhIxyVkj40YOs70kt6bE3gQCfVbzR
+rSZmErWBUirvq4vu+m8vh3A=
+=lZt9
+-----END PGP SIGNATURE-----
+
 
 
