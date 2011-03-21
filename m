@@ -1,42 +1,39 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q1baV-0007mV-PX
+	(envelope-from <martin.jansa@gmail.com>) id 1Q1boi-00082Q-2N
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Mar 2011 10:39:47 +0100
-Received: by fxm19 with SMTP id 19so5248358fxm.6
+	Mon, 21 Mar 2011 10:54:28 +0100
+Received: by bwz10 with SMTP id 10so4603423bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2011 02:37:59 -0700 (PDT)
+	Mon, 21 Mar 2011 02:52:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:date:from:to:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=6Zd7KXL/00zJZkONyveGTgEivZYFhdxmJE8y1gjCgaU=;
-	b=C7y8jz0TB7p4O9LXN5Z2Occ6NWCnPgAgrJryVfyq5mhsscdLhqoTxIVpwBsz5kr/9o
-	dNHoGnC+mBCqY+Jd3qtuTwUdVl/vmKUlZNxdow+5pWiGO1Itmmv4sJNjkt8+Kz35mjiu
-	S9gBoil363DzO0qdZxtEYTxpBnCay2pqsiy/Y=
+	:user-agent; bh=WjDEQImTbtXCIPr0MUc3cKjQHKHc7QYffp1qE4eZFAw=;
+	b=i/oLDHavKyagF70N/bjODlPDcdbpKSkqCrJfyhWZq8a7ZQvoGEV31pq6d0bpzkRTkb
+	KRpV5OalQMJtM0pqE2AE0ryIGpANz4VU5tlMlsIGAoJZUWCoatrK3fG7Ozgv+B1QOxZ6
+	HfiYUiAztAxj2UJjJnke4tXe8Qb8lw+cU5ISo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=P4uXifrgNM9kJ6JPK9hOv4JXrRl81Kdzr/1EMPeZ/zWIZV3M9GasA0SzppCY8/04+w
-	aVlQqSR2nyU7g4gbZapTEtgaHpHqA7JP1LObw0lx5t/+VV28kHwlQ+Aqq+iSryBlsNYe
-	zSYRlsXfqTQTdKlmpFfaMPDaqCeA+Kf7QQuuo=
-Received: by 10.223.1.73 with SMTP id 9mr4699020fae.44.1300699829001;
-	Mon, 21 Mar 2011 02:30:29 -0700 (PDT)
+	b=KAP6EqrTDZPQlPtoFUEstkPsWC7C1S7iclRq4hQSrALAl3SEnEvW4slCjdBNSCx6gd
+	1ecxUezAt7R/yHgLqNDrnEzByiFLykDQlOlW7IF1njPxBPqpWU8tmK/2C+F8fHZbTu9/
+	6RA5s9HgRFV0pwyREN3kl+nBuKutnpic8wViI=
+Received: by 10.204.153.20 with SMTP id i20mr3409177bkw.208.1300701159119;
+	Mon, 21 Mar 2011 02:52:39 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id n2sm2379327fam.4.2011.03.21.02.30.27
+	by mx.google.com with ESMTPS id x6sm321776bkv.12.2011.03.21.02.52.36
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 21 Mar 2011 02:30:27 -0700 (PDT)
-Date: Mon, 21 Mar 2011 10:30:21 +0100
+	Mon, 21 Mar 2011 02:52:37 -0700 (PDT)
+Date: Mon, 21 Mar 2011 10:52:35 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110321093020.GB3798@jama.jama.net>
-References: <201103171154.23397.pgsellmann@portner-elektronik.at>
-	<201103181408.16366.pgsellmann@portner-elektronik.at>
-	<20110318153048.GC17785@jama.jama.net>
-	<201103181837.04944.pgsellmann@portner-elektronik.at>
+Message-ID: <20110321095235.GD3798@jama.jama.net>
+References: <1298561156-21514-1-git-send-email-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <201103181837.04944.pgsellmann@portner-elektronik.at>
+In-Reply-To: <1298561156-21514-1-git-send-email-Martin.Jansa@gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH 3/3] base-files-3.0.14 configuration files
+Subject: Re: [PATCH] bitbake.conf: define shared PERSISTENT_DIR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,128 +47,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Mar 2011 09:39:47 -0000
-X-Groupsio-MsgNum: 30461
+X-List-Received-Date: Mon, 21 Mar 2011 09:54:28 -0000
+X-Groupsio-MsgNum: 30462
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="zx4FCpZtqtKETZ7O"
+	protocol="application/pgp-signature"; boundary="LTeJQqWS0MN7I/qa"
 Content-Disposition: inline
 
---zx4FCpZtqtKETZ7O
-Content-Type: text/plain; charset=iso-8859-1
+--LTeJQqWS0MN7I/qa
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 18, 2011 at 06:37:04PM +0100, Peter Gsellmann wrote:
-> Hi Martin!
-
-Hi,
-=20
-> Am Freitag, 18. M=E4rz 2011, 16:30:48 schrieb Martin Jansa:
-> > On Fri, Mar 18, 2011 at 02:08:15PM +0100, Peter Gsellmann wrote:
-> > > Am Freitag, 18. M=E4rz 2011, 09:59:17 schrieb Hauser, Wolfgang (exter=
-nal):
-> > > > >> > Mark some files in ${sysconfdir} as configuration files so the=
-y are
-> > > > >> not blindly overwritten when upgrading
-> > > > >>=20
-> > > > >> I would suggest a pre-/post processing in the packages, like deb=
-ian
-> > > > >> does.
-> > > > >> If a config file exists or is changed, the current File will be
-> > > > rotated
-> > > > >> or, if possible, left as it is and the new=20
-> > > > >> file is installed beside the changed one.
-> > > >=20
-> > > > >The opkg does not touch a present config file, but installs the new
-> > > > file with the name *-opkg
-> > > > >So if you do a find /etc -name \*-opkg you see the conflicts.
-> > > >=20
-> > > > >Any sensible conversion from old to new config file should be made=
- by
-> > > > the package itself.
-> > > >=20
-> > > > As I experienced, opkg exits with an error code if a config file al=
-ready
-> > > > exists, so if you want to create an image, the process will break at
-> > > > that error.
-> > > > It wasn't possible to create an image automatically then.
-> > > If you create a fresh new image, the config files should not exist.
-> > > opkg should not complain.
-> >=20
-> > Looks like you two are talking about 2 different things.
-> >=20
-> > W) If 2 different packages are installing same config file, opkg won't
-> > overwrite it and image creation would also fail
-> This should considered as bug in opkg;
-> why 2 packages may not use the same Conffile?
-> For example one would split 'ntp' into 'ntpd' and 'ntpdate':
->   both should use the servers in /etc/ntp.conf .
-> In present configuration you have to syncronize 2 files /etc/ntp.conf
->   and /etc/ntp/step-tickers .
-
-well maybe it makes sense for files from CONFFILES, but certainly you
-don't want some other package to overwrite binary owned by other package
-etc.. so I think that it's working the same for CONFFILES and such
-"usefull" colisions are so seldom that nobody cared to create exception.
-
-> > P) If same package is trying to install newer version of config file it
-> > overwrites it silently when md5 sums are the same or file is not in
-> > CONFFILES or creates config.file-opkg otherwise.
-> This should considered as user error to 'install' a package instead of 'u=
-pgrade'.
-
-it's the same with upgrade, by "install newer version" I actually meant
-"opkg upgrade", sorry I wasn't clear.
-
-> > So the patch idea looks sane to me, only please check why there is
-> > unused conffiles variable and maybe use it as default CONFFILES or
-> > remove it completely.
-> I think you talk about CONFFILES_${PN}_micro, CONFFILES_${PN}_nylon, CONF=
-FILES_${PN}_slugos ?
-
-No, about conffiles (lowercase)
-<snip>
-volatiles =3D "cache run log lock tmp"
-conffiles =3D "${sysconfdir}/debian_version ${sysconfdir}/host.conf \
-             ${sysconfdir}/inputrc ${sysconfdir}/issue /${sysconfdir}/issue=
-=2Enet \
-             ${sysconfdir}/nsswitch.conf ${sysconfdir}/profile \
-             ${sysconfdir}/default"
-</snip>
-
-> For 'nylon' and 'slugos' it generates an additional empty file /etc/resol=
-v.conf .
-> Otherwise this file is not owned by any package even so it exists!
->   (anybody knows who creates it?)
-> Could this be written as:
-> CONFFILES_${PN}_nylon =3D ${CONFFILES_${PN}} + "${sysconfdir}/resolv.conf"
->   or is there a smarter syntax?
+On Thu, Feb 24, 2011 at 04:25:56PM +0100, Martin Jansa wrote:
+> * import from poky
+>   commit 6a11cf7dfe930461a6660e3b783b546fa2634900
+>   Author: Richard Purdie <rpurdie@linux.intel.com>
+>   Date:   Sun May 31 22:23:30 2009 +0100
+> * we had CACHE var pointing to machine specific dir since
+>   commit caf077679022f37ce55d758101f130e4e93bd7b5
+>   Author: Richard Purdie <rpurdie@rpsys.net>
+>   Date:   Mon Nov 20 17:40:20 2006 +0000
 >=20
-> OTOH, declaring 'base-files' as owner of /etc/resolv.conf for _all_ images
->   would be the better solution (in my opinion). Votings?
+> * current bitbake is looking for cache dir like this:
+>   cachedir =3D (bb.data.getVar("PERSISTENT_DIR", d, True) or
+>               bb.data.getVar("CACHE", d, True))
+>   which without PERSISTENT_DIR defined picks machine-specific CACHE dir
+>   so LOCALCOUNT numbers in SRCPV keeps rolling with every MACHINE switch
+>   in same builddir :/
 >=20
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+ping?
+
+2nd version which moved it outside TMPDIR
+[oe] [PATCH] bitbake.conf: define shared PERSISTENT_DIR and point it outsid=
+e TMPDIR
+was sort of rejected:
+http://lists.linuxtogo.org/pipermail/openembedded-core/2011-March/000298.ht=
+ml
+
+but this part without moving it outside TMPDIR is still valid and I'll
+push it after month of review if nobody objects :).
+
+> ---
+>  conf/bitbake.conf |    2 ++
+>  1 files changed, 2 insertions(+), 0 deletions(-)
 >=20
-> For 'micro' the list is empty! What is the advantage of an empty list for=
- this image?
-> I dont know and for this i am a bit reluctant to remove it.
-
-IIRC someone in this thread said it's because micro is not using ONLINE_PAC=
-KAGE_MANAGEMENT..
-
-Regards,
+> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+> index dcc5c70..53bb7b7 100644
+> --- a/conf/bitbake.conf
+> +++ b/conf/bitbake.conf
+> @@ -294,6 +294,8 @@ FILESDIR =3D "${@bb.which(d.getVar('FILESPATH', 1), '=
+=2E')}"
+> =20
+>  TMPDIR =3D "${TOPDIR}/tmp"
+>  CACHE =3D "${TMPDIR}/cache${@['', '/' + str(bb.data.getVar('MACHINE', d,=
+ 1))][bool(bb.data.getVar('MACHINE', d, 1))]}"
+> +# The persistent cache should be shared by all builds
+> +PERSISTENT_DIR =3D "${TMPDIR}/cache"
+>  CO_DIR =3D "${DL_DIR}"
+>  CVSDIR =3D "${CO_DIR}/cvs"
+>  SVNDIR =3D "${CO_DIR}/svn"
+> --=20
+> 1.7.4.1
+>=20
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---zx4FCpZtqtKETZ7O
+--LTeJQqWS0MN7I/qa
 Content-Type: application/pgp-signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.17 (GNU/Linux)
 
-iEYEARECAAYFAk2HGqwACgkQN1Ujt2V2gBxxwwCfeYT1jXbybenWIDednqdAFlUy
-jScAn1OjReDQIYEoUEcYWrpMB8fYTsH6
-=oWbQ
+iEYEARECAAYFAk2HH+MACgkQN1Ujt2V2gBzB7ACghQAhPiCdOhGAxLYWtfHNkiyn
+1CIAn1X3jaod5cBGJ5HI8dihu/cjfDn4
+=WrYq
 -----END PGP SIGNATURE-----
 
---zx4FCpZtqtKETZ7O--
+--LTeJQqWS0MN7I/qa--
