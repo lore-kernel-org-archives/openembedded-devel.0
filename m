@@ -1,43 +1,25 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from bsmtp5.bon.at ([195.3.86.187] helo=bsmtp.bon.at)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Q1eJt-0000Ig-Ub
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Mar 2011 13:34:50 +0100
-Received: by iwn10 with SMTP id 10so6502498iwn.6
+	(envelope-from <pgsellmann@portner-elektronik.at>)
+	id 1Q1edv-0000ey-UM for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Mar 2011 13:55:32 +0100
+Received: from aspire.localdomain (unknown [88.116.171.82])
+	by bsmtp.bon.at (Postfix) with ESMTP id 7FA3B130091
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2011 05:33:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=LGD3HRoxH9oHshIDRC8uGl3V+X4T8ZlgnGFHUAJa0HE=;
-	b=uRDA94qEgCNinJ3yCmAoQRGmEpR4jDVw3BkmGn0ipfHI6WD6PwQMuZ2HMwJVVgtXIU
-	kBGTTcCoExMcl474j/bVxD9Ibebw2Qn7W4KiiJXeHuH1osl/b5APrQXTktX2ugaVUj+M
-	AlZJ0dQZZ9kP7YSJku/VtfhUbX/FZZWs51EFE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=VvkgMRBFCYMrXEj0QWk5+rExy8zqSffc+sH6pDDfRacky2Uto7MB1LyXz+fqvodBYn
-	kPFCN0BvzFWoLF8UqxHkc403SFtBocFsV+E7SqGtR5dwFBt7ZBAUM5aqFTZb4TMbMofl
-	fmQdTaJgNTVVrNisaiKt2i9LttV13u1H2HI60=
-MIME-Version: 1.0
-Received: by 10.43.61.138 with SMTP id ww10mr6603266icb.390.1300710780385;
-	Mon, 21 Mar 2011 05:33:00 -0700 (PDT)
-Received: by 10.231.13.69 with HTTP; Mon, 21 Mar 2011 05:33:00 -0700 (PDT)
-In-Reply-To: <1300702108.30423.3316.camel@rex>
-References: <20110311081950.GG7353@excalibur.local>
-	<1300385432.2298.33.camel@saphir> <1300396447.30423.2113.camel@rex>
-	<AANLkTi=9DUeh3eyaW=fQciA_Qk51yvqbBP_792n8fwQD@mail.gmail.com>
-	<1300443329.9054.53.camel@phil-desktop>
-	<1300496638.30423.2249.camel@rex>
-	<AANLkTi=s9L+Q8k9ds3BiSZj7MC1BOe8=1jWoObi2qu02@mail.gmail.com>
-	<4D8644E1.4040808@gmail.com>
-	<AANLkTineDL=wJ=DiPHLVVjT5=Wzo2A=tDo-Nh7f2E8cx@mail.gmail.com>
-	<1300702108.30423.3316.camel@rex>
-Date: Mon, 21 Mar 2011 13:33:00 +0100
-Message-ID: <AANLkTinpdLL2CFrZCvm1b3u2E5cKXwJPS6JmF1jy77w+@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 21 Mar 2011 13:53:41 +0100 (CET)
+From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+Organization: PORTNER Elektronik
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: OE Bugzilla Future
+Date: Mon, 21 Mar 2011 13:53:40 +0100
+User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
+	)
+References: <201103171154.23397.pgsellmann@portner-elektronik.at>
+	<20110321093020.GB3798@jama.jama.net>
+	<201103211236.39719.pgsellmann@portner-elektronik.at>
+In-Reply-To: <201103211236.39719.pgsellmann@portner-elektronik.at>
+MIME-Version: 1.0
+Message-Id: <201103211353.40761.pgsellmann@portner-elektronik.at>
+Subject: [PATCH v2] base-files-3.0.14 configuration files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,58 +33,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Mar 2011 12:34:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 21 Mar 2011 12:55:32 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
+Content-Transfer-Encoding: 7bit
 
-2011/3/21 Richard Purdie <richard.purdie@linuxfoundation.org>:
-> On Sun, 2011-03-20 at 22:08 +0100, Frans Meulenbroeks wrote:
->> I have no interest any more to get rude comments. It brought too much
->> frustration and irritation.
->> And as my work apparently not appreciated, I decided to cut back on my
->> effort, also because I dio not have a home project any more that uses
->> OE.
->>
->> Bash a volunteer often enough and at some point he'll not be
->> volunteering any more.
->> What OE really needs is a more positive atmosphere towards each other.
->>
->> Frans.
->>
->> PS: another reason to wind down my effort is the yocto migration I see
->> going on.
->> I have no interest to become an unpaid resource for Intel and the
->> other LF member companies.
->
-> So you dislike rude comments and a lack of positive atmosphere, then you
-> yourself make comments like that about Yocto?
+Mark some files in ${sysconfdir} as configuration files so they are not blindly overwritten when upgrading
+Adjust conffiles variable to be usable as default in CONFFILES
+Images nylon,slugo inherit and amend default set of conffiles
+Image micro has very few configuration files
 
-This was by no means intended as a rude comment, just a personal note
-about why I trimmed down on my activities.
-Upon rereading what I wrote, I still do not see the rudeness. However,
-if you or anyone else feels offended by it, I apologize.
->
-> a) Yocto !=3D Intel (more so now than ever)
+Signed-off-by: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+---
+ recipes/base-files/base-files_3.0.14.bb |   21 +++++++++++----------
+ 1 files changed, 11 insertions(+), 10 deletions(-)
 
-I know. That is why I also wrote other LF member companies.
+diff --git a/recipes/base-files/base-files_3.0.14.bb b/recipes/base-files/base-files_3.0.14.bb
+index 0aa27f4..65cab03 100644
+--- a/recipes/base-files/base-files_3.0.14.bb
++++ b/recipes/base-files/base-files_3.0.14.bb
+@@ -1,7 +1,8 @@
+ DESCRIPTION = "Miscellaneous files for the base system."
+ SECTION = "base"
+ PRIORITY = "required"
+-PR = "r102"
++PR = "r103"
++
+ LICENSE = "GPL"
+ 
+ SRC_URI = " \
+@@ -55,10 +56,10 @@ media = "card cf net ram"
+ media_micro = ""
+ 
+ volatiles = "cache run log lock tmp"
+-conffiles = "${sysconfdir}/debian_version ${sysconfdir}/host.conf \
+-	     ${sysconfdir}/inputrc ${sysconfdir}/issue /${sysconfdir}/issue.net \
+-	     ${sysconfdir}/nsswitch.conf ${sysconfdir}/profile \
+-	     ${sysconfdir}/default"
++conffiles = "${sysconfdir}/fstab ${sysconfdir}/host.conf ${sysconfdir}/hostname \
++            ${sysconfdir}/inputrc ${sysconfdir}/issue /${sysconfdir}/issue.net \
++            ${sysconfdir}/motd ${sysconfdir}/nsswitch.conf ${sysconfdir}/profile \
++            "
+ 
+ #
+ # set standard hostname, might be a candidate for a DISTRO variable? :M:
+@@ -95,7 +96,7 @@ do_install () {
+ 	fi
+ 
+         if [ "${DISTRO}" != "micro" -a "${DISTRO}" != "micro-uclibc" ]; then
+-                install -m 644 ${WORKDIR}/issue*  ${D}${sysconfdir}  
++                install -m 644 ${WORKDIR}/issue*  ${D}${sysconfdir}
+ 
+                 if [ -n "${DISTRO_NAME}" ]; then
+         		echo -n "${DISTRO_NAME} " >> ${D}${sysconfdir}/issue
+@@ -181,8 +182,8 @@ PACKAGE_ARCH_rt3000 = "rt3000"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-CONFFILES_${PN} = "${sysconfdir}/fstab ${sysconfdir}/hostname"
+-CONFFILES_${PN}_micro = ""
+-CONFFILES_${PN}_nylon = "${sysconfdir}/resolv.conf ${sysconfdir}/fstab ${sysconfdir}/hostname"
+-CONFFILES_${PN}_slugos = "${sysconfdir}/resolv.conf ${sysconfdir}/fstab ${sysconfdir}/hostname"
++CONFFILES_${PN} = ${conffiles}
++CONFFILES_${PN}_micro = "${sysconfdir}/hostname ${sysconfdir}/nsswitch.conf"
++CONFFILES_${PN}_nylon = "${sysconfdir}/resolv.conf" + ${conffiles}
++CONFFILES_${PN}_slugos = "${sysconfdir}/resolv.conf" + ${conffiles}
+ 
+-- 
+1.7.2.3
 
-> b) Don't confuse any communication on Yocto's part to include people in
-> =A0 discussion as something else.
 
-Sorry, I reread the above sentence about four times, but I don't understand=
- it.
-
-> c) Yocto isn't asking/telling anyone to work on anything, it is
-> =A0 providing plenty of resources to do things itself.
-
-I know. I have never stated that this is not the case. I know LF and
-the member companies put quite some effort in it.
-
-> d) None of the above means we don't want to collaborate with anyone
-> =A0 else with similar goals or ideas.
-
-I don't think I have ever stated that this is not the case.
-
-Best regards, Frans
 
 
