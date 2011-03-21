@@ -1,39 +1,29 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <richard.purdie@linuxfoundation.org>)
-	id 1Q1c4X-0000K2-3m for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Mar 2011 11:10:50 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p2LA90BL011543
+Received: from bsmtp3.bon.at ([213.33.87.17] helo=lbmfmo03.bon.at)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <pgsellmann@portner-elektronik.at>)
+	id 1Q1dbT-0001cP-RC for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Mar 2011 12:48:55 +0100
+Received: from bsmtp.bon.at (unknown [192.168.181.108])
+	by lbmfmo03.bon.at (Postfix) with ESMTP id AEC25CE8E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2011 10:09:00 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 11074-09 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2011 10:08:56 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p2LA8pFs011537
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Mon, 21 Mar 2011 12:47:04 +0100 (CET)
+Received: from aspire.localdomain (unknown [88.116.171.82])
+	by bsmtp.bon.at (Postfix) with ESMTP id 8B646130050
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2011 10:08:52 GMT
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
+	Mon, 21 Mar 2011 12:36:40 +0100 (CET)
+From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+Organization: PORTNER Elektronik
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTineDL=wJ=DiPHLVVjT5=Wzo2A=tDo-Nh7f2E8cx@mail.gmail.com>
-References: <20110311081950.GG7353@excalibur.local>
-	<1300385432.2298.33.camel@saphir> <1300396447.30423.2113.camel@rex>
-	<AANLkTi=9DUeh3eyaW=fQciA_Qk51yvqbBP_792n8fwQD@mail.gmail.com>
-	<1300443329.9054.53.camel@phil-desktop>
-	<1300496638.30423.2249.camel@rex>
-	<AANLkTi=s9L+Q8k9ds3BiSZj7MC1BOe8=1jWoObi2qu02@mail.gmail.com>
-	<4D8644E1.4040808@gmail.com>
-	<AANLkTineDL=wJ=DiPHLVVjT5=Wzo2A=tDo-Nh7f2E8cx@mail.gmail.com>
-Date: Mon, 21 Mar 2011 10:08:28 +0000
-Message-ID: <1300702108.30423.3316.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: OE Bugzilla Future
+Date: Mon, 21 Mar 2011 12:36:39 +0100
+User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
+	)
+References: <201103171154.23397.pgsellmann@portner-elektronik.at>
+	<201103181837.04944.pgsellmann@portner-elektronik.at>
+	<20110321093020.GB3798@jama.jama.net>
+In-Reply-To: <20110321093020.GB3798@jama.jama.net>
+MIME-Version: 1.0
+Message-Id: <201103211236.39719.pgsellmann@portner-elektronik.at>
+Subject: Re: [PATCH 3/3] base-files-3.0.14 configuration files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,46 +37,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Mar 2011 10:10:51 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 21 Mar 2011 11:48:56 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, 2011-03-20 at 22:08 +0100, Frans Meulenbroeks wrote:
-> I have no interest any more to get rude comments. It brought too much
-> frustration and irritation.
-> And as my work apparently not appreciated, I decided to cut back on my
-> effort, also because I dio not have a home project any more that uses
-> OE.
-> 
-> Bash a volunteer often enough and at some point he'll not be
-> volunteering any more.
-> What OE really needs is a more positive atmosphere towards each other.
-> 
-> Frans.
-> 
-> PS: another reason to wind down my effort is the yocto migration I see
-> going on.
-> I have no interest to become an unpaid resource for Intel and the
-> other LF member companies.
+Hi Martin!
 
-So you dislike rude comments and a lack of positive atmosphere, then you
-yourself make comments like that about Yocto?
+Am Montag, 21. M=E4rz 2011, 10:30:21 schrieb Martin Jansa:
+> On Fri, Mar 18, 2011 at 06:37:04PM +0100, Peter Gsellmann wrote:
+> > Am Freitag, 18. M=E4rz 2011, 16:30:48 schrieb Martin Jansa:
+> > > On Fri, Mar 18, 2011 at 02:08:15PM +0100, Peter Gsellmann wrote:
+> > > > Am Freitag, 18. M=E4rz 2011, 09:59:17 schrieb Hauser, Wolfgang (ext=
+ernal):
+> > > > > >> > Mark some files in ${sysconfdir} as configuration files so t=
+hey are
+> > > > > >> not blindly overwritten when upgrading
+> > > > > >>=20
+> > > > > >> I would suggest a pre-/post processing in the packages, like d=
+ebian
+> > > > > >> does.
+> > > > > >> If a config file exists or is changed, the current File will be
+> > > > > rotated
+> > > > > >> or, if possible, left as it is and the new=20
+> > > > > >> file is installed beside the changed one.
+> > > > >=20
+> > > > > >The opkg does not touch a present config file, but installs the =
+new
+> > > > > file with the name *-opkg
+> > > > > >So if you do a find /etc -name \*-opkg you see the conflicts.
+> > > > >=20
+> > > > > >Any sensible conversion from old to new config file should be ma=
+de by
+> > > > > the package itself.
+> > > > >=20
+> > > > > As I experienced, opkg exits with an error code if a config file =
+already
+> > > > > exists, so if you want to create an image, the process will break=
+ at
+> > > > > that error.
+> > > > > It wasn't possible to create an image automatically then.
+> > > > If you create a fresh new image, the config files should not exist.
+> > > > opkg should not complain.
+> > >=20
+> > > Looks like you two are talking about 2 different things.
+> > >=20
+> > > W) If 2 different packages are installing same config file, opkg won't
+> > > overwrite it and image creation would also fail
+> > This should considered as bug in opkg;
+> > why 2 packages may not use the same Conffile?
+> > For example one would split 'ntp' into 'ntpd' and 'ntpdate':
+> >   both should use the servers in /etc/ntp.conf .
+> > In present configuration you have to syncronize 2 files /etc/ntp.conf
+> >   and /etc/ntp/step-tickers .
+>=20
+> well maybe it makes sense for files from CONFFILES, but certainly you
+> don't want some other package to overwrite binary owned by other package
+> etc.. so I think that it's working the same for CONFFILES and such
+> "usefull" colisions are so seldom that nobody cared to create exception.
+>=20
+> > > P) If same package is trying to install newer version of config file =
+it
+> > > overwrites it silently when md5 sums are the same or file is not in
+> > > CONFFILES or creates config.file-opkg otherwise.
+> > This should considered as user error to 'install' a package instead of =
+'upgrade'.
+>=20
+> it's the same with upgrade, by "install newer version" I actually meant
+> "opkg upgrade", sorry I wasn't clear.
+>=20
+> > > So the patch idea looks sane to me, only please check why there is
+> > > unused conffiles variable and maybe use it as default CONFFILES or
+> > > remove it completely.
+> > I think you talk about CONFFILES_${PN}_micro, CONFFILES_${PN}_nylon, CO=
+NFFILES_${PN}_slugos ?
+>=20
+> No, about conffiles (lowercase)
+> <snip>
+> volatiles =3D "cache run log lock tmp"
+> conffiles =3D "${sysconfdir}/debian_version ${sysconfdir}/host.conf \
+>              ${sysconfdir}/inputrc ${sysconfdir}/issue /${sysconfdir}/iss=
+ue.net \
+>              ${sysconfdir}/nsswitch.conf ${sysconfdir}/profile \
+>              ${sysconfdir}/default"
+> </snip>
+like this?
+CONFFILES_${PN} =3D ${conffiles}
+CONFFILES_${PN}_micro =3D ""
+CONFFILES_${PN}_nylon =3D "${sysconfdir}/resolv.conf" + ${conffiles}
+CONFFILES_${PN}_slugos =3D "${sysconfdir}/resolv.conf" + ${conffiles}
 
-a) Yocto != Intel (more so now than ever)
-b) Don't confuse any communication on Yocto's part to include people in 
-   discussion as something else.
-c) Yocto isn't asking/telling anyone to work on anything, it is 
-   providing plenty of resources to do things itself. 
-d) None of the above means we don't want to collaborate with anyone 
-   else with similar goals or ideas.
+Patch follows (have to test before).
 
-Cheers,
+> > For 'micro' the list is empty! What is the advantage of an empty list f=
+or this image?
+> > I dont know and for this i am a bit reluctant to remove it.
+>=20
+> IIRC someone in this thread said it's because micro is not using ONLINE_P=
+ACKAGE_MANAGEMENT..
+setting ONLINE_PACKAGE_MANAGEMENT =3D "none" precludes the use of CONFFILES=
+_* in all recipes??
+As i can see, ONLINE_PACKAGE_MANAGEMENT is misused for micro image.
 
-Richard
 
--- 
-Linux Foundation
-http://www.yoctoproject.org/
 
+
+Peter
 
 
