@@ -1,25 +1,29 @@
-Received: from bsmtp5.bon.at ([195.3.86.187] helo=bsmtp.bon.at)
+Received: from bsmtp3.bon.at ([213.33.87.17] helo=lbmfmo03.bon.at)
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <pgsellmann@portner-elektronik.at>)
-	id 1Q1edv-0000ey-UM for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Mar 2011 13:55:32 +0100
-Received: from aspire.localdomain (unknown [88.116.171.82])
-	by bsmtp.bon.at (Postfix) with ESMTP id 7FA3B130091
+	id 1Q1fDx-0001RO-1b for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Mar 2011 14:32:45 +0100
+Received: from bsmtp.bon.at (unknown [192.168.181.107])
+	by lbmfmo03.bon.at (Postfix) with ESMTP id 02EA7119526
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2011 13:53:41 +0100 (CET)
+	Mon, 21 Mar 2011 13:33:25 +0100 (CET)
+Received: from aspire.localdomain (unknown [88.116.171.82])
+	by bsmtp.bon.at (Postfix) with ESMTP id B07FC130044
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Mar 2011 13:33:18 +0100 (CET)
 From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
 Organization: PORTNER Elektronik
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Mar 2011 13:53:40 +0100
+Date: Mon, 21 Mar 2011 13:33:17 +0100
 User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
 	)
 References: <201103171154.23397.pgsellmann@portner-elektronik.at>
-	<20110321093020.GB3798@jama.jama.net>
 	<201103211236.39719.pgsellmann@portner-elektronik.at>
-In-Reply-To: <201103211236.39719.pgsellmann@portner-elektronik.at>
+	<1300708482.2228.67.camel@phil-desktop>
+In-Reply-To: <1300708482.2228.67.camel@phil-desktop>
 MIME-Version: 1.0
-Message-Id: <201103211353.40761.pgsellmann@portner-elektronik.at>
-Subject: [PATCH v2] base-files-3.0.14 configuration files
+Message-Id: <201103211333.17729.pgsellmann@portner-elektronik.at>
+Subject: Re: [PATCH 3/3] base-files-3.0.14 configuration files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,75 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Mar 2011 12:55:32 -0000
+X-List-Received-Date: Mon, 21 Mar 2011 13:32:45 -0000
 Content-Type: Text/Plain;
-  charset="iso-8859-15"
-Content-Transfer-Encoding: 7bit
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Mark some files in ${sysconfdir} as configuration files so they are not blindly overwritten when upgrading
-Adjust conffiles variable to be usable as default in CONFFILES
-Images nylon,slugo inherit and amend default set of conffiles
-Image micro has very few configuration files
+Hi Phil!
 
-Signed-off-by: Peter Gsellmann <pgsellmann@portner-elektronik.at>
----
- recipes/base-files/base-files_3.0.14.bb |   21 +++++++++++----------
- 1 files changed, 11 insertions(+), 10 deletions(-)
+Am Montag, 21. M=E4rz 2011, 12:54:42 schrieb Phil Blundell:
+> On Mon, 2011-03-21 at 12:36 +0100, Peter Gsellmann wrote:
+> > setting ONLINE_PACKAGE_MANAGEMENT =3D "none" precludes the use of CONFF=
+ILES_* in all recipes??
+>=20
+> It doesn't preclude it, but it does render CONFFILES fairly useless.
+>=20
+> It looks like the CONFFILES_micro =3D "" in this particular recipe was
+> added by me in 2b4ab236.  I guess I probably did this to avoid having
+> nonexistent files show up in CONFFILES (since micro doesn't ship stuff
+> like motd at all).  I don't recall whether I did this just for neatness
+> or whether OE was actually issuing a diagnostic for that situation.
+>=20
+> I guess it might make some sense to just set CONFFILES_micro =3D ""
+> globally in micro.conf rather than doing it in individual recipes.
+>=20
+> > As i can see, ONLINE_PACKAGE_MANAGEMENT is misused for micro image.
+>=20
+> What do you mean?
+Sorry, no misuse, but wrong cause assumed by me.
+CONFFILES_${PN}_micro should not be empty but contain nsswitch.conf
+  and hostname as these are the only you allow to exist.
 
-diff --git a/recipes/base-files/base-files_3.0.14.bb b/recipes/base-files/base-files_3.0.14.bb
-index 0aa27f4..65cab03 100644
---- a/recipes/base-files/base-files_3.0.14.bb
-+++ b/recipes/base-files/base-files_3.0.14.bb
-@@ -1,7 +1,8 @@
- DESCRIPTION = "Miscellaneous files for the base system."
- SECTION = "base"
- PRIORITY = "required"
--PR = "r102"
-+PR = "r103"
-+
- LICENSE = "GPL"
- 
- SRC_URI = " \
-@@ -55,10 +56,10 @@ media = "card cf net ram"
- media_micro = ""
- 
- volatiles = "cache run log lock tmp"
--conffiles = "${sysconfdir}/debian_version ${sysconfdir}/host.conf \
--	     ${sysconfdir}/inputrc ${sysconfdir}/issue /${sysconfdir}/issue.net \
--	     ${sysconfdir}/nsswitch.conf ${sysconfdir}/profile \
--	     ${sysconfdir}/default"
-+conffiles = "${sysconfdir}/fstab ${sysconfdir}/host.conf ${sysconfdir}/hostname \
-+            ${sysconfdir}/inputrc ${sysconfdir}/issue /${sysconfdir}/issue.net \
-+            ${sysconfdir}/motd ${sysconfdir}/nsswitch.conf ${sysconfdir}/profile \
-+            "
- 
- #
- # set standard hostname, might be a candidate for a DISTRO variable? :M:
-@@ -95,7 +96,7 @@ do_install () {
- 	fi
- 
-         if [ "${DISTRO}" != "micro" -a "${DISTRO}" != "micro-uclibc" ]; then
--                install -m 644 ${WORKDIR}/issue*  ${D}${sysconfdir}  
-+                install -m 644 ${WORKDIR}/issue*  ${D}${sysconfdir}
- 
-                 if [ -n "${DISTRO_NAME}" ]; then
-         		echo -n "${DISTRO_NAME} " >> ${D}${sysconfdir}/issue
-@@ -181,8 +182,8 @@ PACKAGE_ARCH_rt3000 = "rt3000"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--CONFFILES_${PN} = "${sysconfdir}/fstab ${sysconfdir}/hostname"
--CONFFILES_${PN}_micro = ""
--CONFFILES_${PN}_nylon = "${sysconfdir}/resolv.conf ${sysconfdir}/fstab ${sysconfdir}/hostname"
--CONFFILES_${PN}_slugos = "${sysconfdir}/resolv.conf ${sysconfdir}/fstab ${sysconfdir}/hostname"
-+CONFFILES_${PN} = ${conffiles}
-+CONFFILES_${PN}_micro = "${sysconfdir}/hostname ${sysconfdir}/nsswitch.conf"
-+CONFFILES_${PN}_nylon = "${sysconfdir}/resolv.conf" + ${conffiles}
-+CONFFILES_${PN}_slugos = "${sysconfdir}/resolv.conf" + ${conffiles}
- 
--- 
-1.7.2.3
+Would this work for you?
+CONFFILES_${PN}_micro =3D "${sysconfdir}/hostname ${sysconfdir}/nsswitch.co=
+nf"
+
+Even if nothing on your target is honoring the configness of these files at=
+ least it is documented.
 
 
+
+Peter
 
 
