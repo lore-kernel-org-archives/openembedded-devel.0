@@ -1,39 +1,39 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q1boi-00082Q-2N
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Mar 2011 10:54:28 +0100
-Received: by bwz10 with SMTP id 10so4603423bwz.6
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <richard.purdie@linuxfoundation.org>)
+	id 1Q1c4X-0000K2-3m for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Mar 2011 11:10:50 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p2LA90BL011543
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2011 02:52:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=WjDEQImTbtXCIPr0MUc3cKjQHKHc7QYffp1qE4eZFAw=;
-	b=i/oLDHavKyagF70N/bjODlPDcdbpKSkqCrJfyhWZq8a7ZQvoGEV31pq6d0bpzkRTkb
-	KRpV5OalQMJtM0pqE2AE0ryIGpANz4VU5tlMlsIGAoJZUWCoatrK3fG7Ozgv+B1QOxZ6
-	HfiYUiAztAxj2UJjJnke4tXe8Qb8lw+cU5ISo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=KAP6EqrTDZPQlPtoFUEstkPsWC7C1S7iclRq4hQSrALAl3SEnEvW4slCjdBNSCx6gd
-	1ecxUezAt7R/yHgLqNDrnEzByiFLykDQlOlW7IF1njPxBPqpWU8tmK/2C+F8fHZbTu9/
-	6RA5s9HgRFV0pwyREN3kl+nBuKutnpic8wViI=
-Received: by 10.204.153.20 with SMTP id i20mr3409177bkw.208.1300701159119;
-	Mon, 21 Mar 2011 02:52:39 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id x6sm321776bkv.12.2011.03.21.02.52.36
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 21 Mar 2011 02:52:37 -0700 (PDT)
-Date: Mon, 21 Mar 2011 10:52:35 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 21 Mar 2011 10:09:00 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 11074-09 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Mar 2011 10:08:56 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p2LA8pFs011537
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Mar 2011 10:08:52 GMT
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110321095235.GD3798@jama.jama.net>
-References: <1298561156-21514-1-git-send-email-Martin.Jansa@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1298561156-21514-1-git-send-email-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] bitbake.conf: define shared PERSISTENT_DIR
+In-Reply-To: <AANLkTineDL=wJ=DiPHLVVjT5=Wzo2A=tDo-Nh7f2E8cx@mail.gmail.com>
+References: <20110311081950.GG7353@excalibur.local>
+	<1300385432.2298.33.camel@saphir> <1300396447.30423.2113.camel@rex>
+	<AANLkTi=9DUeh3eyaW=fQciA_Qk51yvqbBP_792n8fwQD@mail.gmail.com>
+	<1300443329.9054.53.camel@phil-desktop>
+	<1300496638.30423.2249.camel@rex>
+	<AANLkTi=s9L+Q8k9ds3BiSZj7MC1BOe8=1jWoObi2qu02@mail.gmail.com>
+	<4D8644E1.4040808@gmail.com>
+	<AANLkTineDL=wJ=DiPHLVVjT5=Wzo2A=tDo-Nh7f2E8cx@mail.gmail.com>
+Date: Mon, 21 Mar 2011 10:08:28 +0000
+Message-ID: <1300702108.30423.3316.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: OE Bugzilla Future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,83 +47,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Mar 2011 09:54:28 -0000
-X-Groupsio-MsgNum: 30462
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="LTeJQqWS0MN7I/qa"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 21 Mar 2011 10:10:51 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
---LTeJQqWS0MN7I/qa
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sun, 2011-03-20 at 22:08 +0100, Frans Meulenbroeks wrote:
+> I have no interest any more to get rude comments. It brought too much
+> frustration and irritation.
+> And as my work apparently not appreciated, I decided to cut back on my
+> effort, also because I dio not have a home project any more that uses
+> OE.
+> 
+> Bash a volunteer often enough and at some point he'll not be
+> volunteering any more.
+> What OE really needs is a more positive atmosphere towards each other.
+> 
+> Frans.
+> 
+> PS: another reason to wind down my effort is the yocto migration I see
+> going on.
+> I have no interest to become an unpaid resource for Intel and the
+> other LF member companies.
 
-On Thu, Feb 24, 2011 at 04:25:56PM +0100, Martin Jansa wrote:
-> * import from poky
->   commit 6a11cf7dfe930461a6660e3b783b546fa2634900
->   Author: Richard Purdie <rpurdie@linux.intel.com>
->   Date:   Sun May 31 22:23:30 2009 +0100
-> * we had CACHE var pointing to machine specific dir since
->   commit caf077679022f37ce55d758101f130e4e93bd7b5
->   Author: Richard Purdie <rpurdie@rpsys.net>
->   Date:   Mon Nov 20 17:40:20 2006 +0000
->=20
-> * current bitbake is looking for cache dir like this:
->   cachedir =3D (bb.data.getVar("PERSISTENT_DIR", d, True) or
->               bb.data.getVar("CACHE", d, True))
->   which without PERSISTENT_DIR defined picks machine-specific CACHE dir
->   so LOCALCOUNT numbers in SRCPV keeps rolling with every MACHINE switch
->   in same builddir :/
->=20
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+So you dislike rude comments and a lack of positive atmosphere, then you
+yourself make comments like that about Yocto?
 
-ping?
+a) Yocto != Intel (more so now than ever)
+b) Don't confuse any communication on Yocto's part to include people in 
+   discussion as something else.
+c) Yocto isn't asking/telling anyone to work on anything, it is 
+   providing plenty of resources to do things itself. 
+d) None of the above means we don't want to collaborate with anyone 
+   else with similar goals or ideas.
 
-2nd version which moved it outside TMPDIR
-[oe] [PATCH] bitbake.conf: define shared PERSISTENT_DIR and point it outsid=
-e TMPDIR
-was sort of rejected:
-http://lists.linuxtogo.org/pipermail/openembedded-core/2011-March/000298.ht=
-ml
+Cheers,
 
-but this part without moving it outside TMPDIR is still valid and I'll
-push it after month of review if nobody objects :).
+Richard
 
-> ---
->  conf/bitbake.conf |    2 ++
->  1 files changed, 2 insertions(+), 0 deletions(-)
->=20
-> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-> index dcc5c70..53bb7b7 100644
-> --- a/conf/bitbake.conf
-> +++ b/conf/bitbake.conf
-> @@ -294,6 +294,8 @@ FILESDIR =3D "${@bb.which(d.getVar('FILESPATH', 1), '=
-=2E')}"
-> =20
->  TMPDIR =3D "${TOPDIR}/tmp"
->  CACHE =3D "${TMPDIR}/cache${@['', '/' + str(bb.data.getVar('MACHINE', d,=
- 1))][bool(bb.data.getVar('MACHINE', d, 1))]}"
-> +# The persistent cache should be shared by all builds
-> +PERSISTENT_DIR =3D "${TMPDIR}/cache"
->  CO_DIR =3D "${DL_DIR}"
->  CVSDIR =3D "${CO_DIR}/cvs"
->  SVNDIR =3D "${CO_DIR}/svn"
-> --=20
-> 1.7.4.1
->=20
+-- 
+Linux Foundation
+http://www.yoctoproject.org/
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---LTeJQqWS0MN7I/qa
-Content-Type: application/pgp-signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk2HH+MACgkQN1Ujt2V2gBzB7ACghQAhPiCdOhGAxLYWtfHNkiyn
-1CIAn1X3jaod5cBGJ5HI8dihu/cjfDn4
-=WrYq
------END PGP SIGNATURE-----
-
---LTeJQqWS0MN7I/qa--
