@@ -1,32 +1,45 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Q24oR-0003pn-Po
+	(envelope-from <raj.khem@gmail.com>) id 1Q25KL-0000W4-Gm
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 17:52:08 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Q24mh-0006od-9I from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 09:50:19 -0700
-Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Tue, 22 Mar 2011 09:49:27 -0700
-Received: from [172.30.80.248] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
-	Tue, 22 Mar 2011 09:50:18 -0700
-Message-ID: <4D88D332.2060907@mentor.com>
-Date: Tue, 22 Mar 2011 09:49:54 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+	Tue, 22 Mar 2011 18:25:06 +0100
+Received: by iyb26 with SMTP id 26so7943938iyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Mar 2011 10:23:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id
+	:mail-followup-to:references:mime-version:content-type
+	:content-disposition:content-transfer-encoding:in-reply-to
+	:user-agent; bh=TKwaZ0UPggnfCON2rQR/cdNQB2hDsfvZz44dSmvBxWI=;
+	b=TRlwTOqcgV3blXA79sotxuHpbMEn4yr6k0dKMMgtCj5M5iVoxpqYohUOod2tNytdLK
+	xuotczRoBr3gm/QR7VOlRfbb+dmgIDzneVMU/Gl941A8u3NrOdnAzaQ5H7fw2Y7dKVf5
+	JOlanUcmz2i7ynDk3lUJkK6h6hU9k1MxDEcIw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	b=jfMgCKW5g7OVe6hezufcETSnWa4ecyHukQjsrDaScmTdVs1mMzCWU/LqEFXenm9LbK
+	I95RuarfiKtvRvWxQsCk4rgADCYw2jskvQIKIjJaYIh1VHDsLitcK9cqigYAfjYVhJL9
+	5Xa8mFv8Tuqvxn6Ww142t8cY6LM6Zr/LN88NY=
+Received: by 10.43.48.131 with SMTP id uw3mr3673107icb.405.1300814558216;
+	Tue, 22 Mar 2011 10:22:38 -0700 (PDT)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id i20sm4524314iby.65.2011.03.22.10.22.35
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 22 Mar 2011 10:22:36 -0700 (PDT)
+Date: Tue, 22 Mar 2011 10:22:51 -0700
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110322172251.GB22283@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1300784531-13757-1-git-send-email-heinold@inf.fu-berlin.de>
+	<AANLkTi=Q6ATHuoUN87y8G9futYc+2iJ9c23YLRfPYOZj@mail.gmail.com>
+	<AANLkTim2xJnB2x3gDkA4vfmghv6UeamRcUPYXhSxjxjf@mail.gmail.com>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <im9oit$71k$1@dough.gmane.org>
-In-Reply-To: <im9oit$71k$1@dough.gmane.org>
-X-OriginalArrivalTime: 22 Mar 2011 16:49:27.0412 (UTC)
-	FILETIME=[1B3E6340:01CBE8B1]
-Subject: Re: [2011.03-maintenance] Pull request #4
+In-Reply-To: <AANLkTim2xJnB2x3gDkA4vfmghv6UeamRcUPYXhSxjxjf@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: lzma has no -e option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,46 +53,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 16:52:08 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Mar 2011 17:25:06 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On 03/22/2011 02:02 AM, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Tom,
->
-> Please pull the 2 commits from here:
->
-> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-> Branch: 2011.03-maintenance
->
-> Otavio Salvador (2):
->        libarchive: add
->        cmake: depends on libarchive
->
-> You can view the branch online at
-> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance
->
-> Not much there this time :) I was expecting to have some java backports,
-> but Stefan is handling those already.
->
-> regards,
->
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFNiGWcMkyGM64RGpERAq0yAJ9bMuev/h0nerupV8Fc6oj8fRuZyQCeITOD
-> Bd9V7KsTEp19cEJP6X6GD8A=
-> =NKbQ
-> -----END PGP SIGNATURE-----
+On (22/03/11 09:32), Otavio Salvador wrote:
+> On Tue, Mar 22, 2011 at 06:22, Andrea Adami <andrea.adami@gmail.com> wrote:
+> > Yes, I've seen this too.
+> > It's due to a mismatch between lzma (utils) and xz (utils).
+> >
+> > We should probably move to xz   http://tukaani.org/xz/
+> 
+> I see no point in having lzma images but we can use xz utils to
+> generate lzma if desired. I'd say to us to drop lzma-native and use xz
+> to build those or drop them.
 
-Pushed, thanks!
+Seems ok. Can you cook up a patch ?
+> 
+> -- 
+> Otavio Salvador                             O.S. Systems
+> E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+> Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 -- 
-Tom Rini
-Mentor Graphics Corporation
+-Khem
 
 
