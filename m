@@ -1,24 +1,25 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from bsmtp5.bon.at ([195.3.86.187] helo=bsmtp.bon.at)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q1zWQ-0002wf-3j for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 12:13:10 +0100
-Received: from f053033163.adsl.alicedsl.de ([78.53.33.163]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q1zUg-0000Cq-JO for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 11:11:22 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <pgsellmann@portner-elektronik.at>)
+	id 1Q1zcl-0002sf-Vu for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 12:19:44 +0100
+Received: from aspire.localdomain (unknown [88.116.171.82])
+	by bsmtp.bon.at (Postfix) with ESMTP id 54354130062
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Mar 2011 12:17:54 +0100 (CET)
+From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+Organization: PORTNER Elektronik
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4CEA83D9.1070109@eukrea.com>
-References: <AANLkTi=5Ypor=R4EXQV7D7gkQHFtPu+WukVMz1p57d3N@mail.gmail.com>
-	<4CEA83D9.1070109@eukrea.com>
-Date: Tue, 22 Mar 2011 12:11:21 +0100
-Message-ID: <1300792281.26064.6.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: task fetch fails for <anoncvs.handhelds.org> (was: ipkg-utils)
+Date: Tue, 22 Mar 2011 12:17:53 +0100
+User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
+	)
+References: <201103171154.23397.pgsellmann@portner-elektronik.at>
+	<1300725546.2228.88.camel@phil-desktop>
+	<201103211919.11954.pgsellmann@portner-elektronik.at>
+In-Reply-To: <201103211919.11954.pgsellmann@portner-elektronik.at>
+MIME-Version: 1.0
+Message-Id: <201103221217.53713.pgsellmann@portner-elektronik.at>
+Subject: [PATCH v3] base-files-3.0.14 configuration files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,77 +33,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 11:13:10 -0000
-X-Groupsio-MsgNum: 30498
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-6kkgSE7M0FHeDxmu+X+t"
+X-List-Received-Date: Tue, 22 Mar 2011 11:19:44 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
---=-6kkgSE7M0FHeDxmu+X+t
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Mark some files in ${sysconfdir} as configuration files so they are not blindly overwritten when upgrading
+Adjust conffiles variable to be usable as default in CONFFILES
+Distros nylon,slugos inherit and amend default set of conffiles
+Distro micro has very few configuration files
 
-Dear Eric,
+Signed-off-by: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+---
+ recipes/base-files/base-files_3.0.14.bb |   21 +++++++++++----------
+ 1 files changed, 11 insertions(+), 10 deletions(-)
+
+diff --git a/recipes/base-files/base-files_3.0.14.bb b/recipes/base-files/base-files_3.0.14.bb
+index 0aa27f4..6d64699 100644
+--- a/recipes/base-files/base-files_3.0.14.bb
++++ b/recipes/base-files/base-files_3.0.14.bb
+@@ -1,7 +1,8 @@
+ DESCRIPTION = "Miscellaneous files for the base system."
+ SECTION = "base"
+ PRIORITY = "required"
+-PR = "r102"
++PR = "r103"
++
+ LICENSE = "GPL"
+ 
+ SRC_URI = " \
+@@ -55,10 +56,10 @@ media = "card cf net ram"
+ media_micro = ""
+ 
+ volatiles = "cache run log lock tmp"
+-conffiles = "${sysconfdir}/debian_version ${sysconfdir}/host.conf \
+-	     ${sysconfdir}/inputrc ${sysconfdir}/issue /${sysconfdir}/issue.net \
+-	     ${sysconfdir}/nsswitch.conf ${sysconfdir}/profile \
+-	     ${sysconfdir}/default"
++conffiles = "${sysconfdir}/fstab ${sysconfdir}/host.conf ${sysconfdir}/hostname \
++            ${sysconfdir}/inputrc ${sysconfdir}/issue /${sysconfdir}/issue.net \
++            ${sysconfdir}/motd ${sysconfdir}/nsswitch.conf ${sysconfdir}/profile \
++            "
+ 
+ #
+ # set standard hostname, might be a candidate for a DISTRO variable? :M:
+@@ -95,7 +96,7 @@ do_install () {
+ 	fi
+ 
+         if [ "${DISTRO}" != "micro" -a "${DISTRO}" != "micro-uclibc" ]; then
+-                install -m 644 ${WORKDIR}/issue*  ${D}${sysconfdir}  
++                install -m 644 ${WORKDIR}/issue*  ${D}${sysconfdir}
+ 
+                 if [ -n "${DISTRO_NAME}" ]; then
+         		echo -n "${DISTRO_NAME} " >> ${D}${sysconfdir}/issue
+@@ -181,8 +182,8 @@ PACKAGE_ARCH_rt3000 = "rt3000"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-CONFFILES_${PN} = "${sysconfdir}/fstab ${sysconfdir}/hostname"
+-CONFFILES_${PN}_micro = ""
+-CONFFILES_${PN}_nylon = "${sysconfdir}/resolv.conf ${sysconfdir}/fstab ${sysconfdir}/hostname"
+-CONFFILES_${PN}_slugos = "${sysconfdir}/resolv.conf ${sysconfdir}/fstab ${sysconfdir}/hostname"
++CONFFILES_${PN} = "${conffiles}"
++CONFFILES_${PN}_micro = "${sysconfdir}/hostname ${sysconfdir}/nsswitch.conf"
++CONFFILES_${PN}_nylon = "${sysconfdir}/resolv.conf ${conffiles}"
++CONFFILES_${PN}_slugos = "${sysconfdir}/resolv.conf ${conffiles}"
+ 
+-- 
+1.7.2.3
 
 
-Am Montag, den 22.11.2010, 15:53 +0100 schrieb Eric B=C3=A9nard:
 
-> On 22/11/2010 15:36, Frans Meulenbroeks wrote:
-> > ipkg-utils has two issues:
-> >
-> > - the fetch from handhelds.org failed, so we need an update of the SRC_=
-URI
-> > - the recipe is misnamed. It is ipkg-utils_1.6+cvs20050404.bb but it
-> > says SRCDATE =3D "20050930"
-> >
-> > I can fix the latter, but not the former.
-> > We need to resolve the handhelds.org references before the release!
-> >
-> I'm testing a patch which adds PREMIRROR to oe's mirrors which workaround=
- the=20
-> handhelds CVS fetching problem and should be enough for the release.
-> I hope to send it tonight or tomorrow.
-
-did you commit something to tackle this problem? I could not find
-anything in the commit log.
-
-I am getting the following error with `bitbake e-image` which depends on
-`rosetta`.
-
-        NOTE: Running task 1363 of 2090 (ID: 8, /oe/openembedded/recipes/ro=
-setta/rosetta_cvs.bb, do_fetch)
-        cvs [checkout aborted]: connect to anoncvs.handhelds.org(128.31.0.2=
-3):2401 failed: Connection refused
-        NOTE: package rosetta-0.0+cvs20090514-r4: task do_fetch: Started
-        WARNING: /oe/bitbake/lib/bb/fetch/cvs.py:140: DeprecationWarning: C=
-all to deprecated function bb.mkdirhier: Please use bb.utils.mkdirhier inst=
-ead.
-          bb.mkdirhier(pkgdir)
-       =20
-        NOTE: package rosetta-0.0+cvs20090514-r4: task Fetch failed: Unable=
- to fetch URL cvs://anoncvs:anoncvs@anoncvs.handhelds.org/cvs;module=3Drose=
-tta from any source.: Failed
-        ERROR: Function 'Fetch failed: Unable to fetch URL cvs://anoncvs:an=
-oncvs@anoncvs.handhelds.org/cvs;module=3Drosetta from any source.' failed
-        ERROR: Task 8 (/oe/openembedded/recipes/rosetta/rosetta_cvs.bb, do_=
-fetch) failed with exit code '1'
-        ERROR: '/oe/openembedded/recipes/rosetta/rosetta_cvs.bb' failed
-
-
-Thanks,
-
-Paul
-
---=-6kkgSE7M0FHeDxmu+X+t
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk2Ig9kACgkQPX1aK2wOHVipuQCfZENcaFtzulF+K0wuOp/WRHgn
-y6AAn3dNHagn/wGcwjkv4i18oxHSLEVh
-=6vS5
------END PGP SIGNATURE-----
-
---=-6kkgSE7M0FHeDxmu+X+t--
