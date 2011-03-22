@@ -1,40 +1,40 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Q23HV-000339-FN
+	(envelope-from <otavio.salvador@gmail.com>) id 1Q23HY-00033L-1F
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 16:14:01 +0100
-Received: by gxk3 with SMTP id 3so1617603gxk.6
+	Tue, 22 Mar 2011 16:14:04 +0100
+Received: by yia13 with SMTP id 13so2904437yia.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2011 08:12:11 -0700 (PDT)
+	Tue, 22 Mar 2011 08:12:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
 	:x-mailer:in-reply-to:references;
-	bh=C1EvLX/PVTBZgAAu5f74PA4PfktyIQ0ezkOG+ir4qso=;
-	b=k+cEQZX5+5J59U2jTk9byuE+kjHNKtYJ5GTtHTDRfJugIKJhQYmZLEPOMDvBO7gCXQ
-	PI7T50qGfw281tXmsmW3tPeZrxU4BPnrPo8kD+NsGg0pHKiGxlM6czfGOBeQOx2fv8b6
-	2lXF3Sj177lu/YSLiHgL+6IHoWwpdU4D4ymf8=
+	bh=TpQXWbnNtdRtuBe0IcXgASbHfcMLY2RvxccOvv3WgvM=;
+	b=dDniEaU+trJic++6MLVsfpGX+FJLMpW13rkH9yccIDjFkROZ6Y/reJxfRiRNqeeg5b
+	xjdcQhaMZfNySXpmIrArgRytYUcqEL56+5bWDJAUczfwJ2i1AKLvX9eI+qUWx/TETFBy
+	58T265TyeSy01BmFZefKtoKyYRCbayqZDPc/8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=WCcID/SPeLP40RWJvUl02g7murHhCuZ/OJRg6m61dUzIFYUI6ehbPszVNk9Fkf8waU
-	TQiWUCvBbFuFT1yrJv3OfUYfQYabP/yNHrcGU6zwsaPsJxRuaiLxsBGZZihmBI9BEJvx
-	cmH90qtcx2HptO0o66PvEpofKesbmUvdSqC4I=
-Received: by 10.151.143.14 with SMTP id v14mr5150226ybn.132.1300806731086;
-	Tue, 22 Mar 2011 08:12:11 -0700 (PDT)
+	b=ETv03EZj0U9zmjY3Asg5rUMXyAJxTgVv2rKuO6wsSFonhB3Vin+i/PUtLicfvnUJgv
+	LRWnuTuuRak+c/D6Roaph2JZmTXRAMV+C2BEXPe7OVW9QSj+iz1LtiWJE9euyR/cS92A
+	L7Lm8SoNvfZAg6q8bTqpStnDA9Ge3YBTigOWE=
+Received: by 10.151.137.1 with SMTP id p1mr5321172ybn.73.1300806733404;
+	Tue, 22 Mar 2011 08:12:13 -0700 (PDT)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id o2sm1732487ybn.21.2011.03.22.08.12.08
+	by mx.google.com with ESMTPS id o2sm1732487ybn.21.2011.03.22.08.12.11
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 22 Mar 2011 08:12:09 -0700 (PDT)
+	Tue, 22 Mar 2011 08:12:12 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Mar 2011 15:11:21 +0000
-Message-Id: <1300806683-17244-3-git-send-email-otavio@ossystems.com.br>
+Date: Tue, 22 Mar 2011 15:11:22 +0000
+Message-Id: <1300806683-17244-4-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.3
 In-Reply-To: <1300806683-17244-1-git-send-email-otavio@ossystems.com.br>
 References: <1300806683-17244-1-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 2/4] flash-plugin: update to 10.2.153.1
+Subject: [PATCH 3/4] vlc: use INC_PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,104 +48,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 15:14:01 -0000
+X-List-Received-Date: Tue, 22 Mar 2011 15:14:04 -0000
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- recipes/adobe-flash/flash-plugin_10.0.22.87.bb |   35 --------------------
- recipes/adobe-flash/flash-plugin_10.2.153.1.bb |   41 ++++++++++++++++++++++++
- 2 files changed, 41 insertions(+), 35 deletions(-)
- delete mode 100644 recipes/adobe-flash/flash-plugin_10.0.22.87.bb
- create mode 100644 recipes/adobe-flash/flash-plugin_10.2.153.1.bb
+ recipes/vlc/vlc.inc        |    2 ++
+ recipes/vlc/vlc_0.9.2.bb   |    2 +-
+ recipes/vlc/vlc_0.9.6.bb   |    2 +-
+ recipes/vlc/vlc_0.9.8a.bb  |    2 +-
+ recipes/vlc/vlc_1.0.6.bb   |    2 +-
+ recipes/vlc/vlc_1.1.4.1.bb |    2 ++
+ 6 files changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/recipes/adobe-flash/flash-plugin_10.0.22.87.bb b/recipes/adobe-flash/flash-plugin_10.0.22.87.bb
-deleted file mode 100644
-index d6cde60..0000000
---- a/recipes/adobe-flash/flash-plugin_10.0.22.87.bb
-+++ /dev/null
-@@ -1,35 +0,0 @@
--# Adobe provides two versions of flash player packages
--#
--# One "unversioned" download at :
--#
--#     ${ADOBE_MIRROR}/install_flash_player_9_linux.tar.gz
--#
--# And the other, versioned, which is encapsulated in RPM.
--#
--# We use the versioned one to make sure we can keep track of the
--# version and thus do repeatable builds at the cost of future download
--# failures when adobe updates.
--DESCRIPTION = "Adobe Flash 9 plugin for Mozilla/Firefox web browsers"
--LICENSE = "AdobeFlash"
--DEPENDS = "rpm2cpio-native"
+diff --git a/recipes/vlc/vlc.inc b/recipes/vlc/vlc.inc
+index 6129cac..0435e87 100644
+--- a/recipes/vlc/vlc.inc
++++ b/recipes/vlc/vlc.inc
+@@ -7,6 +7,8 @@ SECTION = "multimedia"
+ DEPENDS = "libfribidi libtool hal gettext libgcrypt schroedinger virtual/libsdl qt4-x11-free dbus libxml2 gnutls tremor faad2 ffmpeg flac \
+            ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad libid3tag liba52 mpeg2dec', d)}"
+ 
++INC_PR = "r4"
++
+ SRC_URI = "http://download.videolan.org/pub/videolan/vlc/${PV}/vlc-${PV}.tar.bz2"
+ 
+ inherit autotools
+diff --git a/recipes/vlc/vlc_0.9.2.bb b/recipes/vlc/vlc_0.9.2.bb
+index 7dd6a75..bc24a75 100644
+--- a/recipes/vlc/vlc_0.9.2.bb
++++ b/recipes/vlc/vlc_0.9.2.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPL"
+ PRIORITY = "optional"
+ SECTION = "multimedia"
+ 
+-PR = "r2"
++PR = "${INC_PR}.0"
+ 
+ DEPENDS = "libtool hal gettext libgcrypt schroedinger virtual/libsdl qt4-x11-free dbus libxml2 gnutls tremor faad2 ffmpeg flac \
+            ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad libid3tag liba52 mpeg2dec', d)}"
+diff --git a/recipes/vlc/vlc_0.9.6.bb b/recipes/vlc/vlc_0.9.6.bb
+index f34ff6a..4b5cc20 100644
+--- a/recipes/vlc/vlc_0.9.6.bb
++++ b/recipes/vlc/vlc_0.9.6.bb
+@@ -1,5 +1,5 @@
+ require vlc.inc
 -PR = "r1"
--
--SRC_URI = "${ADOBE_MIRROR}/flash-plugin-${PV}-release.i386.rpm"
--
--do_configure() {
--        rpm=${WORKDIR}/flash-plugin-${PV}-release.i386.rpm
--        if [ -f "$rpm" ]; then
--                rpm2cpio.pl $rpm | cpio -id
--                find . -type f -exec mv -i {} "`pwd`" \;
--        fi
--}
--do_install() {
--        mkdir -p ${D}${libdir}/mozilla/plugins/
--        install -m 0755 libflashplayer.so ${D}${libdir}/mozilla/plugins/
--        # AFAIK this is not needed
--        # install -m 0644 flashplayer.xpt ${D}${libdir}/mozilla/plugins/
--}
--
--FILES_${PN} = "${libdir}/* ${libdir}/X11/*"
--
--COMPATIBLE_HOST = "i.86.*-linux"
-diff --git a/recipes/adobe-flash/flash-plugin_10.2.153.1.bb b/recipes/adobe-flash/flash-plugin_10.2.153.1.bb
-new file mode 100644
-index 0000000..af9df0a
---- /dev/null
-+++ b/recipes/adobe-flash/flash-plugin_10.2.153.1.bb
-@@ -0,0 +1,41 @@
-+# Adobe provides two versions of flash player packages
-+#
-+# One "unversioned" download at :
-+#
-+#     ${ADOBE_MIRROR}/install_flash_player_9_linux.tar.gz
-+#
-+# And the other, versioned, which is encapsulated in RPM.
-+#
-+# We use the versioned one to make sure we can keep track of the
-+# version and thus do repeatable builds at the cost of future download
-+# failures when adobe updates.
-+DESCRIPTION = "Adobe Flash 9 plugin for Mozilla/Firefox web browsers"
-+LICENSE = "AdobeFlash"
-+DEPENDS = "rpm2cpio-native"
-+PR = "r1"
++PR = "${INC_PR}.0"
+ 
+ SRC_URI[md5sum] = "cd71276ed867029a6d077a40bccd4d05"
+ SRC_URI[sha256sum] = "ac091ba9b2e2e9aff293969b3405b145c09789e59ac0caab2247211a19e09a8a"
+diff --git a/recipes/vlc/vlc_0.9.8a.bb b/recipes/vlc/vlc_0.9.8a.bb
+index dd131b2..b846466 100644
+--- a/recipes/vlc/vlc_0.9.8a.bb
++++ b/recipes/vlc/vlc_0.9.8a.bb
+@@ -5,7 +5,7 @@
+ 
+ require vlc.inc
+ 
+-PR = "r3"
++PR = "${INC_PR}.0"
+ 
+ # ffmpeg from git (library version => 52) is required
+ # libtool-native must be >= 2.2.4
+diff --git a/recipes/vlc/vlc_1.0.6.bb b/recipes/vlc/vlc_1.0.6.bb
+index 12da530..4f98cfc 100644
+--- a/recipes/vlc/vlc_1.0.6.bb
++++ b/recipes/vlc/vlc_1.0.6.bb
+@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "f521933e7a1021746d8ecde6caa2f9d1b43187ab2e13df6abc07540e41
+ # ffmpeg from git (library version => 52) is required
+ # libtool-native must be >= 2.2.4
+ DEPENDS += "libdvdcss libdvdread"
+-PR = "r1"
++PR = "${INC_PR}.0"
+ 
+ EXTRA_OECONF += "\
+ 	--enable-dvdread \
+diff --git a/recipes/vlc/vlc_1.1.4.1.bb b/recipes/vlc/vlc_1.1.4.1.bb
+index df8f17c..6d4b877 100644
+--- a/recipes/vlc/vlc_1.1.4.1.bb
++++ b/recipes/vlc/vlc_1.1.4.1.bb
+@@ -5,6 +5,8 @@
+ 
+ require vlc.inc
+ 
++PR = "${INC_PR}.0"
 +
-+# it lacks GNU_HASH but we can't fix it, so ignore it
-+INSANE_SKIP_${PN} = "1"
-+
-+SRC_URI = "${ADOBE_MIRROR}/flash-plugin-${PV}-release.i386.rpm"
-+
-+SRC_URI[md5sum] = "4ef7c931c442aef19c920580de0e1c42"
-+SRC_URI[sha256sum] = "9899252732cc94b3bc0ae7e145c6c5e94255e123bd8d5298f9ec40cb10f63568"
-+
-+do_configure() {
-+        rpm=${WORKDIR}/flash-plugin-${PV}-release.i386.rpm
-+        if [ -f "$rpm" ]; then
-+                rpm2cpio.pl $rpm | cpio -id
-+                find . -type f -exec mv -i {} "`pwd`" \;
-+        fi
-+}
-+do_install() {
-+        mkdir -p ${D}${libdir}/mozilla/plugins/
-+        install -m 0755 libflashplayer.so ${D}${libdir}/mozilla/plugins/
-+        # AFAIK this is not needed
-+        # install -m 0644 flashplayer.xpt ${D}${libdir}/mozilla/plugins/
-+}
-+
-+FILES_${PN} = "${libdir}/* ${libdir}/X11/*"
-+
-+COMPATIBLE_HOST = "i.86.*-linux"
+ SRC_URI[md5sum] = "ce17c335b38b322949694313173fcd49"
+ SRC_URI[sha256sum] = "61c9ea30a17ea40c6ccbfd507026e5c83ad9e0691f221d3667c8e49696d7c2aa"
+ 
 -- 
 1.7.2.3
 
