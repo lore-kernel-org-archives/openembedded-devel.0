@@ -1,23 +1,23 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q23Jr-0003Tu-9H for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 16:16:27 +0100
+	id 1Q23OM-0003cU-4w for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 16:21:06 +0100
 Received: from f053033163.adsl.alicedsl.de ([78.53.33.163]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q23I7-0006IJ-ES; Tue, 22 Mar 2011 15:14:39 +0000
+	id 1Q23Mc-0006Mh-8b; Tue, 22 Mar 2011 15:19:18 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1300790972.3827.21.camel@mattotaupa>
+In-Reply-To: <4D88B92B.3090703@opendreambox.org>
 References: <1300790542.3827.19.camel@mattotaupa>
-	<1300790972.3827.21.camel@mattotaupa>
-Date: Tue, 22 Mar 2011 16:14:38 +0100
-Message-ID: <1300806878.26064.20.camel@mattotaupa>
+	<4D88B92B.3090703@opendreambox.org>
+Date: Tue, 22 Mar 2011 16:19:16 +0100
+Message-ID: <1300807156.26064.24.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH 1/3 v3] ipkg: remove legacy staging and install `libipkg.pc` properly
+Subject: Re: [PATCH 1/3] ipkg: remove legacy staging and install `libipkg.pc` properly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,90 +31,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 15:16:27 -0000
-X-Groupsio-MsgNum: 30508
+X-List-Received-Date: Tue, 22 Mar 2011 15:21:06 -0000
+X-Groupsio-MsgNum: 30509
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-OM+VFBB+WaY52h5+oDd8"
+	boundary="=-2pgB0b9YXx1Y1CDnBOpT"
 
---=-OM+VFBB+WaY52h5+oDd8
+--=-2pgB0b9YXx1Y1CDnBOpT
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Date: Tue, 22 Mar 2011 10:51:47 +0100
+Dear Andreas,
 
-Convert to new style staging [1] and install `libipkg.pc` properly as done =
-in [2][3].
 
-[1] http://openembedded.org/index.php/Legacy_staging
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dc2c8fe4=
-c5629add94bd0b922f5b3446624a9f4d8
-[3] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D48838f0=
-fca6b00767115dd13bce2537f035fd3ba
+Am Dienstag, den 22.03.2011, 15:58 +0100 schrieb Andreas Oberritter:
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-CC: Andreas Oberritter <obi@opendreambox.org>
----
-v2: use correct location `${S}` instead of `${WORKDIR}`
-v3: install header files as done beforehand by `do_stage()` (also pointed o=
-ut by Andreas)
+> On 03/22/2011 11:42 AM, Paul Menzel wrote:
+> > --- a/recipes/ipkg/ipkg_0.99.163.bb
+> > +++ b/recipes/ipkg/ipkg_0.99.163.bb
+> > @@ -1,5 +1,5 @@
+> >  include ipkg.inc
+> > -PR =3D "r8"
+> > +PR =3D "r9"
+> > =20
+> >  S =3D "${WORKDIR}/ipkg-${PV}"
+> > =20
+> > @@ -12,15 +12,10 @@ SRC_URI =3D "http://www.handhelds.org/pub/packages/=
+ipkg/ipkg-${PV}.tar.gz \
+> >  	file://lonk-link-name.patch \
+> >  	"
+> > =20
+> > -do_stage() {
+> > -	oe_libinstall -so libipkg ${STAGING_LIBDIR}
+> > -	install -d ${STAGING_INCDIR}/libipkg/
+> > -	for f in *.h
+> > -	do
+> > -		install -m 0644 $f ${STAGING_INCDIR}/libipkg/
+> > -	done
+> > +do_install () {
+> > +	install -d ${D}${libdir}/pkgconfig
+> > +	install -m 0644 ${WORKDIR}/libipkg.pc ${D}${libdir}/pkgconfig/libipkg=
+.pc
+> >  }
+>=20
+> how do the library and headers get installed? Is there a do_install()
+> inside ipkg.inc? In that case, you should use do_install_append()
+> instead or move the two new lines to ipkg.inc.
 
-Another time I do not understand why `libipkg.pc` is not installed
-automatically. I did not find =C2=BBlibipkg.pc was not installed.=C2=AB fro=
-m
-`pkgconfig.bbclass` in `log.do_install`. Is that an error in the
-Makefile of `ipkg`?
----
- recipes/ipkg/ipkg_0.99.163.bb |   12 ++++++------
- 1 files changed, 6 insertions(+), 6 deletions(-)
+I thought they were picked up automatically and got confused because I
+had not run `bitbake -c clean libipkg` beforehand. I sent a v3 of this
+patch.
 
-diff --git a/recipes/ipkg/ipkg_0.99.163.bb b/recipes/ipkg/ipkg_0.99.163.bb
-index 8eb83a1..01e3629 100644
---- a/recipes/ipkg/ipkg_0.99.163.bb
-+++ b/recipes/ipkg/ipkg_0.99.163.bb
-@@ -1,5 +1,5 @@
- include ipkg.inc
--PR =3D "r8"
-+PR =3D "r9"
-=20
- S =3D "${WORKDIR}/ipkg-${PV}"
-=20
-@@ -12,15 +12,15 @@ SRC_URI =3D "http://www.handhelds.org/pub/packages/ipkg=
-/ipkg-${PV}.tar.gz \
- 	file://lonk-link-name.patch \
- 	"
-=20
--do_stage() {
--	oe_libinstall -so libipkg ${STAGING_LIBDIR}
--	install -d ${STAGING_INCDIR}/libipkg/
-+do_install() {
-+	install -d ${D}${includedir}/libipkg/
- 	for f in *.h
- 	do
--		install -m 0644 $f ${STAGING_INCDIR}/libipkg/
-+		install -m 0644 $f ${D}${includedir}/libipkg/
- 	done
-+	install -d ${D}${libdir}/pkgconfig
-+	install -m 0644 ${S}/libipkg.pc ${D}${libdir}/pkgconfig/libipkg.pc
- }
-=20
--
- SRC_URI[md5sum] =3D "0b10ad2924611bccaea8ddf98481a192"
- SRC_URI[sha256sum] =3D "405743e1ba320ed6095d42a898f1486e3af1d745cae2bd45df=
-e1d8403a4d8995"
---=20
-1.7.4.1
+> Despite this, I'd prefer moving it to obsolete, too.
 
---=-OM+VFBB+WaY52h5+oDd8
+I propose to push the cleanup and move it to obsolete afterward or
+remove it right away. I am adding Florian to CC to let him comment on
+`gpe-package`, which depends on `libipkg`.
+
+
+Thanks,
+
+Paul
+
+--=-2pgB0b9YXx1Y1CDnBOpT
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk2IvN4ACgkQPX1aK2wOHVg8UACcC2VM/PuZHLh2DRVw+q6OVwn7
-YgYAn1aYeoSlW0vQrTZQ+/7/wWa60sq7
-=Ce6B
+iEYEABECAAYFAk2IvfQACgkQPX1aK2wOHVi13ACeOGoLi7rE1Q/lii+tiLZcfTVl
+W6YAnjYVtQrq0tYrwWdbk9UgQXYpVsqy
+=YEs0
 -----END PGP SIGNATURE-----
 
---=-OM+VFBB+WaY52h5+oDd8--
+--=-2pgB0b9YXx1Y1CDnBOpT--
