@@ -1,41 +1,34 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q1xYh-0007QX-K7
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 10:07:23 +0100
-Received: by bwz10 with SMTP id 10so5458604bwz.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q1xd6-0007YC-Sw for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 10:11:57 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q1xbJ-0004Fa-4A for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 10:10:05 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Mar 2011 10:10:05 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2011 02:05:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=80ZGyxq+MSkTt1NaDK2xZy6wLRf4J3sDgo++P9DOfp8=;
-	b=clsyOQDl3fIPcLETn6J9y30H9/oYcEsGFXZpUBlhXCSUhdYPD5NDGD65l2gEOeHI1C
-	5FJsGkVXwB7wKx0XEyb7gM7DWkKZDrT2CFbBqWKoOuE4nCp48fWpKiCQgr7msS6ehunG
-	8EUMfA0WJPSaTZcp/ICtJubGaxsG4RqJvSlEg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=sLXpULkV2L+tbumBnJdKpYa9i6Bej2fr9SMuigtgOUqBmaOOMfk89biM6/OwIqvuxD
-	qRYVFyR8gNIjpDBOdl6s7wr8SQoEq55v4+I17Gnf5Rf8DQIlKebD1WiZJsQ63/52A8cX
-	KEOudC9GlpvXSHS1S234YuFHGzmOAp36tf85w=
-Received: by 10.204.33.22 with SMTP id f22mr2586679bkd.72.1300784727181;
-	Tue, 22 Mar 2011 02:05:27 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id z18sm4953827bkf.20.2011.03.22.02.05.25
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 22 Mar 2011 02:05:25 -0700 (PDT)
-Date: Tue, 22 Mar 2011 10:05:23 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 22 Mar 2011 10:10:05 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110322090523.GA3418@jama.jama.net>
-References: <1300780910-28866-1-git-send-email-heinold@inf.fu-berlin.de>
-	<1300780910-28866-2-git-send-email-heinold@inf.fu-berlin.de>
-	<im9m2q$pse$1@dough.gmane.org>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 22 Mar 2011 10:05:57 +0100
+Message-ID: <im9opm$85o$1@dough.gmane.org>
+References: <1300780910-28866-1-git-send-email-heinold@inf.fu-berlin.de>	<1300780910-28866-2-git-send-email-heinold@inf.fu-berlin.de>	<im9m2q$pse$1@dough.gmane.org>
 	<20110322090004.GA13738@rhein.zuhause.netz>
-MIME-Version: 1.0
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
 In-Reply-To: <20110322090004.GA13738@rhein.zuhause.netz>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Enigmail-Version: 1.0.1
 Subject: Re: [PATCH 1/3] libatomic-ops: switch to own directroy and use cvs version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -50,52 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 09:07:23 -0000
-X-Groupsio-MsgNum: 30486
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="G4iJoqBmSsgzjUCe"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 22 Mar 2011 09:11:57 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---G4iJoqBmSsgzjUCe
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Tue, Mar 22, 2011 at 10:00:05AM +0100, Henning Heinold wrote:
+On 22-03-11 10:00, Henning Heinold wrote:
 > On Tue, Mar 22, 2011 at 09:19:38AM +0100, Koen Kooi wrote:
-> > Where are you setting SRCDATE for this recipe?
->=20
+>> Where are you setting SRCDATE for this recipe?
+> 
 > Ah sorry,
->=20
+> 
 > I left this over for discussion and forget to mentioned it.
->=20
+> 
 > Is it better in inside the recipe now or per the sane-revdate.inc?
 
-In recipe please
-
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3D26b7830cab29=
-b04c2a3db1799fb171550e7d83fb
-
->=20
-> Bye Henning
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---G4iJoqBmSsgzjUCe
-Content-Type: application/pgp-signature
-
+Inside the recipe please
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEARECAAYFAk2IZlMACgkQN1Ujt2V2gBxqGgCfSz7LvG6ZCa3ot6GwhIip/i0S
-aJIAn0m7YJJq+8eJi1fekbcx3P5Oj4nO
-=ygx1
+iD8DBQFNiGZ1MkyGM64RGpERAkekAJ9HiQ84dKHflbMsr8qdfXx9KU5SagCeKcUZ
+m1/O5spy5V+heNSE65nYJFY=
+=AYaQ
 -----END PGP SIGNATURE-----
 
---G4iJoqBmSsgzjUCe--
+
+
