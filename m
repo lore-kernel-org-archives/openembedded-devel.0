@@ -1,25 +1,41 @@
-Received: from bsmtp5.bon.at ([195.3.86.187] helo=bsmtp.bon.at)
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pgsellmann@portner-elektronik.at>)
-	id 1Q1zcl-0002sf-Vu for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 12:19:44 +0100
-Received: from aspire.localdomain (unknown [88.116.171.82])
-	by bsmtp.bon.at (Postfix) with ESMTP id 54354130062
+	(envelope-from <martin.jansa@gmail.com>) id 1Q1zlI-0002mv-5D
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 12:28:33 +0100
+Received: by bwz10 with SMTP id 10so5536108bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2011 12:17:54 +0100 (CET)
-From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
-Organization: PORTNER Elektronik
+	Tue, 22 Mar 2011 04:26:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=MSlDU6OuxJyFMAdTipZBjFNT9gu6qAVcC0zbs2LBmyw=;
+	b=CJdiIJmWaz5bwboYssM0FLruFlt9i8TDdQ7rbjRKbwc8kf2hWFVVgBseyRzKN3AEfw
+	9lEwBQ6VsRqa6Sh7d1zAfGzNtI/vJc4VyJMTk8y4KefqkPJaoigfXhWaGT7KimBsA/cb
+	Lc8rZDU2M2SkVJxGRo6AS6cPFFvv+kLIzcMkc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=KyY6sHJ2L5XZ7s5MmwaJ1RFcusi3Wyaf8++0Ip8t1brgYg3v3KsTSMJ52NLF2eX+VH
+	7lbYOaWCuwFECmDopaJAbv2i9BLKwBQ6Kwzx520vgF3pEcGxI9bFUxgv7uO4OvNgaLNq
+	8GyWQXjMgSIaSzguiMb9nlpOqDzPgKGSxgq9U=
+Received: by 10.204.175.194 with SMTP id bb2mr4838016bkb.121.1300793186239;
+	Tue, 22 Mar 2011 04:26:26 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id b6sm5052137bkb.22.2011.03.22.04.26.24
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 22 Mar 2011 04:26:25 -0700 (PDT)
+Date: Tue, 22 Mar 2011 12:26:18 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Mar 2011 12:17:53 +0100
-User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
-	)
-References: <201103171154.23397.pgsellmann@portner-elektronik.at>
-	<1300725546.2228.88.camel@phil-desktop>
-	<201103211919.11954.pgsellmann@portner-elektronik.at>
-In-Reply-To: <201103211919.11954.pgsellmann@portner-elektronik.at>
+Message-ID: <20110322112618.GD3418@jama.jama.net>
+References: <1300790542.3827.19.camel@mattotaupa>
+	<20110322105613.GC3418@jama.jama.net>
+	<1300791693.26064.1.camel@mattotaupa>
 MIME-Version: 1.0
-Message-Id: <201103221217.53713.pgsellmann@portner-elektronik.at>
-Subject: [PATCH v3] base-files-3.0.14 configuration files
+In-Reply-To: <1300791693.26064.1.camel@mattotaupa>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH 1/3] ipkg: remove legacy staging and install `libipkg.pc` properly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,74 +49,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 11:19:44 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Mar 2011 11:28:34 -0000
+X-Groupsio-MsgNum: 30500
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="zbGR4y+acU1DwHSi"
+Content-Disposition: inline
 
-Mark some files in ${sysconfdir} as configuration files so they are not blindly overwritten when upgrading
-Adjust conffiles variable to be usable as default in CONFFILES
-Distros nylon,slugos inherit and amend default set of conffiles
-Distro micro has very few configuration files
+--zbGR4y+acU1DwHSi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Peter Gsellmann <pgsellmann@portner-elektronik.at>
----
- recipes/base-files/base-files_3.0.14.bb |   21 +++++++++++----------
- 1 files changed, 11 insertions(+), 10 deletions(-)
+On Tue, Mar 22, 2011 at 12:01:33PM +0100, Paul Menzel wrote:
+> Am Dienstag, den 22.03.2011, 11:56 +0100 schrieb Martin Jansa:
+> > On Tue, Mar 22, 2011 at 11:42:22AM +0100, Paul Menzel wrote:
+> > > Date: Tue, 22 Mar 2011 10:51:47 +0100
+> > >=20
+> > > Convert to new style staging [1] and install `libipkg.pc` properly as=
+ done in [2][3].
+> > >=20
+> > > [1] http://openembedded.org/index.php/Legacy_staging
+> > > [2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dc=
+2c8fe4c5629add94bd0b922f5b3446624a9f4d8
+> > > [3] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D4=
+8838f0fca6b00767115dd13bce2537f035fd3ba
+> >=20
+> > Is it worth to update it now when I hope last bits were also converted
+> > to opkg?
+>=20
+> `gpe-package` depends on `libipkg`.
 
-diff --git a/recipes/base-files/base-files_3.0.14.bb b/recipes/base-files/base-files_3.0.14.bb
-index 0aa27f4..6d64699 100644
---- a/recipes/base-files/base-files_3.0.14.bb
-+++ b/recipes/base-files/base-files_3.0.14.bb
-@@ -1,7 +1,8 @@
- DESCRIPTION = "Miscellaneous files for the base system."
- SECTION = "base"
- PRIORITY = "required"
--PR = "r102"
-+PR = "r103"
-+
- LICENSE = "GPL"
- 
- SRC_URI = " \
-@@ -55,10 +56,10 @@ media = "card cf net ram"
- media_micro = ""
- 
- volatiles = "cache run log lock tmp"
--conffiles = "${sysconfdir}/debian_version ${sysconfdir}/host.conf \
--	     ${sysconfdir}/inputrc ${sysconfdir}/issue /${sysconfdir}/issue.net \
--	     ${sysconfdir}/nsswitch.conf ${sysconfdir}/profile \
--	     ${sysconfdir}/default"
-+conffiles = "${sysconfdir}/fstab ${sysconfdir}/host.conf ${sysconfdir}/hostname \
-+            ${sysconfdir}/inputrc ${sysconfdir}/issue /${sysconfdir}/issue.net \
-+            ${sysconfdir}/motd ${sysconfdir}/nsswitch.conf ${sysconfdir}/profile \
-+            "
- 
- #
- # set standard hostname, might be a candidate for a DISTRO variable? :M:
-@@ -95,7 +96,7 @@ do_install () {
- 	fi
- 
-         if [ "${DISTRO}" != "micro" -a "${DISTRO}" != "micro-uclibc" ]; then
--                install -m 644 ${WORKDIR}/issue*  ${D}${sysconfdir}  
-+                install -m 644 ${WORKDIR}/issue*  ${D}${sysconfdir}
- 
-                 if [ -n "${DISTRO_NAME}" ]; then
-         		echo -n "${DISTRO_NAME} " >> ${D}${sysconfdir}/issue
-@@ -181,8 +182,8 @@ PACKAGE_ARCH_rt3000 = "rt3000"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--CONFFILES_${PN} = "${sysconfdir}/fstab ${sysconfdir}/hostname"
--CONFFILES_${PN}_micro = ""
--CONFFILES_${PN}_nylon = "${sysconfdir}/resolv.conf ${sysconfdir}/fstab ${sysconfdir}/hostname"
--CONFFILES_${PN}_slugos = "${sysconfdir}/resolv.conf ${sysconfdir}/fstab ${sysconfdir}/hostname"
-+CONFFILES_${PN} = "${conffiles}"
-+CONFFILES_${PN}_micro = "${sysconfdir}/hostname ${sysconfdir}/nsswitch.conf"
-+CONFFILES_${PN}_nylon = "${sysconfdir}/resolv.conf ${conffiles}"
-+CONFFILES_${PN}_slugos = "${sysconfdir}/resolv.conf ${conffiles}"
- 
--- 
-1.7.2.3
+ok, btw ipkg is blacklisted by Angstrom and Kaeilos so fixing
+gpe-package looks like better way to me, but I don't use
+gpe-package|ipkg
 
+> > git mv to obsolete would be easier to review :).
+>=20
+> Good point, but maybe someone still uses it and can benefit from the
+> fix.
 
+On the other hand, moving ipkg to obsolete would show that we're using
+opkg by default now more clearly. And ipkg is used only in old stuff or
+by accident.
 
+Something like
+http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dd1c65e9a7d9d=
+5b324095e6c4eb28cf7a58f394e5
+
+Cheers,
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--zbGR4y+acU1DwHSi
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
+
+iEYEARECAAYFAk2Ih1oACgkQN1Ujt2V2gBzUFACfZgPaIqJ878/cWwt0u77KmtER
+IZUAnjh2SkFR8dJkdtu095vFgSzvrJCu
+=yqmJ
+-----END PGP SIGNATURE-----
+
+--zbGR4y+acU1DwHSi--
