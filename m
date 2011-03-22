@@ -1,35 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q1xd6-0007YC-Sw for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 10:11:57 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q1xbJ-0004Fa-4A for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 10:10:05 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2011 10:10:05 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1Q1xkJ-0007kI-5X
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 10:19:36 +0100
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 6D5B911000B1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2011 10:10:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 22 Mar 2011 10:03:08 +0100 (CET)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 9CD1B11000B2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Mar 2011 10:03:06 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from rhein.familie-heinold.de (g225144151.adsl.alicedsl.de
+	[92.225.144.151]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Mar 2011 10:03:06 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 9DEF93C0BE; Tue, 22 Mar 2011 10:02:19 +0100 (CET)
+From: heinold@inf.fu-berlin.de
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 22 Mar 2011 10:05:57 +0100
-Message-ID: <im9opm$85o$1@dough.gmane.org>
-References: <1300780910-28866-1-git-send-email-heinold@inf.fu-berlin.de>	<1300780910-28866-2-git-send-email-heinold@inf.fu-berlin.de>	<im9m2q$pse$1@dough.gmane.org>
-	<20110322090004.GA13738@rhein.zuhause.netz>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <20110322090004.GA13738@rhein.zuhause.netz>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH 1/3] libatomic-ops: switch to own directroy and use cvs version
+Date: Tue, 22 Mar 2011 10:02:11 +0100
+Message-Id: <1300784531-13757-2-git-send-email-heinold@inf.fu-berlin.de>
+X-Mailer: git-send-email 1.7.4.1
+In-Reply-To: <1300784531-13757-1-git-send-email-heinold@inf.fu-berlin.de>
+References: <1300784531-13757-1-git-send-email-heinold@inf.fu-berlin.de>
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: [PATCH] bitbake.conf: fix LZMA_COMPRESSION_LEVEL, because lzma has no -e option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,31 +47,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 09:11:57 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Mar 2011 09:19:36 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 
-On 22-03-11 10:00, Henning Heinold wrote:
-> On Tue, Mar 22, 2011 at 09:19:38AM +0100, Koen Kooi wrote:
->> Where are you setting SRCDATE for this recipe?
-> 
-> Ah sorry,
-> 
-> I left this over for discussion and forget to mentioned it.
-> 
-> Is it better in inside the recipe now or per the sane-revdate.inc?
 
-Inside the recipe please
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Signed-off-by: Henning Heinold <heinold@inf.fu-berlin.de>
+---
+ conf/bitbake.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-iD8DBQFNiGZ1MkyGM64RGpERAkekAJ9HiQ84dKHflbMsr8qdfXx9KU5SagCeKcUZ
-m1/O5spy5V+heNSE65nYJFY=
-=AYaQ
------END PGP SIGNATURE-----
-
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index e57a7ad..0207146 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -149,7 +149,7 @@ QEMU_OPTIONS_armv7a   = "-cpu cortex-a8"
+ 
+ # default compression levels
+ XZ_COMPRESSION_LEVEL ?= "-e -9"
+-LZMA_COMPRESSION_LEVEL ?= "-e -9"
++LZMA_COMPRESSION_LEVEL ?= "-9"
+ 
+ # default integrity check
+ XZ_INTEGRITY_CHECK ?= "crc32"
+-- 
+1.7.4.1
 
 
