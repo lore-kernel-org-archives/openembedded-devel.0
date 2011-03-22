@@ -1,32 +1,37 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q1xVn-0007FV-7D for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 10:04:23 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q1xU0-0000eP-UD for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 10:02:32 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2011 10:02:32 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1Q1xWX-0007Kr-BK
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 10:05:09 +0100
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id B2E6511000BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2011 10:02:32 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 22 Mar 2011 10:03:07 +0100 (CET)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 7467111000B1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Mar 2011 10:03:06 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from rhein.familie-heinold.de (g225144151.adsl.alicedsl.de
+	[92.225.144.151]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Mar 2011 10:03:06 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 97EF83C0BF; Tue, 22 Mar 2011 10:02:19 +0100 (CET)
+From: heinold@inf.fu-berlin.de
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 22 Mar 2011 10:02:20 +0100
-Message-ID: <im9oit$71k$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-X-Enigmail-Version: 1.0.1
-Subject: [2011.03-maintenance] Pull request #4
+Date: Tue, 22 Mar 2011 10:02:10 +0100
+Message-Id: <1300784531-13757-1-git-send-email-heinold@inf.fu-berlin.de>
+X-Mailer: git-send-email 1.7.4.1
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: lzma has no -e option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,40 +45,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 09:04:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Mar 2011 09:05:09 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Tom,
+maybee I am wrong but my host lzma and the lzma build with oe angstroem-2010 has no -e option
+for compression. So even its a weak define in bitbake.conf it should be correct.
 
-Please pull the 2 commits from here:
-
-URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-Branch: 2011.03-maintenance
-
-Otavio Salvador (2):
-      libarchive: add
-      cmake: depends on libarchive
-
-You can view the branch online at
-http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance
-
-Not much there this time :) I was expecting to have some java backports,
-but Stefan is handling those already.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNiGWcMkyGM64RGpERAq0yAJ9bMuev/h0nerupV8Fc6oj8fRuZyQCeITOD
-Bd9V7KsTEp19cEJP6X6GD8A=
-=NKbQ
------END PGP SIGNATURE-----
-
+Bye Henning
 
 
