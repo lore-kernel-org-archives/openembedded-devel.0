@@ -1,33 +1,35 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1Q234k-0002lD-P9
+	(envelope-from <otavio.salvador@gmail.com>) id 1Q23HR-00032x-VG
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 16:00:50 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id C4880314F310;
-	Tue, 22 Mar 2011 15:59:01 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id wYmYfIi6RyVj; Tue, 22 Mar 2011 15:58:52 +0100 (CET)
-Received: from [172.22.22.61] (ip-109-90-23-193.unitymediagroup.de
-	[109.90.23.193])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 32E04314F313;
-	Tue, 22 Mar 2011 15:58:52 +0100 (CET)
-Message-ID: <4D88B92B.3090703@opendreambox.org>
-Date: Tue, 22 Mar 2011 15:58:51 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.15) Gecko/20110307 Lightning/1.0b2 Thunderbird/3.1.9
-MIME-Version: 1.0
-To: Paul Menzel <paulepanter@users.sourceforge.net>
-References: <1300790542.3827.19.camel@mattotaupa>
-In-Reply-To: <1300790542.3827.19.camel@mattotaupa>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/3] ipkg: remove legacy staging and install `libipkg.pc` properly
+	Tue, 22 Mar 2011 16:13:58 +0100
+Received: by ywg8 with SMTP id 8so2904043ywg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Mar 2011 08:12:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:sender:from:to:subject:date:message-id:x-mailer; 
+	bh=ITRG6rGqoxW3FUtw1RkdWdspLb7lTxoumPYLBfG1PBY=;
+	b=KthMYEvJQnA5DyAvEE8t6cCegXptOzxQgn5c7KI6gSGi+EQb5K0O1ypbKqoQFDUrnL
+	O3OL1v3Mi1HkVe4pnvBydTp/mFxWFrBQWFHlV4G7mZbyHLzVhNHOcv6sB815ph5hgXcn
+	4qjgbaxq4Ug1Ba1fyKnYnXmyWOkyS2qjPxX4g=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	b=St1t6AIJQIz4uLu/anM5gHDjBPirfID8EOYjiCp6vZFvdWfIQwI7v5nWOfKRSq257W
+	3uuEokPyueWP7TOKpF/ezSZETkor2lG7o1VqiHVYfQYM6WZFOZJd1WcmxlgZBntVow58
+	0VcsVDGnQ6+404AJvVXBMTGV6n3gEaxX6yUy8=
+Received: by 10.151.62.14 with SMTP id p14mr5309974ybk.30.1300806725510;
+	Tue, 22 Mar 2011 08:12:05 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id o2sm1732487ybn.21.2011.03.22.08.12.03
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 22 Mar 2011 08:12:04 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 22 Mar 2011 15:11:19 +0000
+Message-Id: <1300806683-17244-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.3
+Subject: [PATCH 0/4] Patchset being use on O.S. Systems tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,45 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 15:00:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Mar 2011 15:13:58 -0000
 
-Hello Paul,
+Hello,
 
-On 03/22/2011 11:42 AM, Paul Menzel wrote:
-> --- a/recipes/ipkg/ipkg_0.99.163.bb
-> +++ b/recipes/ipkg/ipkg_0.99.163.bb
-> @@ -1,5 +1,5 @@
->  include ipkg.inc
-> -PR = "r8"
-> +PR = "r9"
->  
->  S = "${WORKDIR}/ipkg-${PV}"
->  
-> @@ -12,15 +12,10 @@ SRC_URI = "http://www.handhelds.org/pub/packages/ipkg/ipkg-${PV}.tar.gz \
->  	file://lonk-link-name.patch \
->  	"
->  
-> -do_stage() {
-> -	oe_libinstall -so libipkg ${STAGING_LIBDIR}
-> -	install -d ${STAGING_INCDIR}/libipkg/
-> -	for f in *.h
-> -	do
-> -		install -m 0644 $f ${STAGING_INCDIR}/libipkg/
-> -	done
-> +do_install () {
-> +	install -d ${D}${libdir}/pkgconfig
-> +	install -m 0644 ${WORKDIR}/libipkg.pc ${D}${libdir}/pkgconfig/libipkg.pc
->  }
+Here goes our current patchset that is being use on our tree. Besides
+this, there's also the udev change that is still open and unsolved.
 
-how do the library and headers get installed? Is there a do_install()
-inside ipkg.inc? In that case, you should use do_install_append()
-instead or move the two new lines to ipkg.inc.
+[PATCH 1/4] wrapper/install: add -t support
+[PATCH 2/4] flash-plugin: update to 10.2.153.1
+[PATCH 3/4] vlc: use INC_PR
+[PATCH 4/4] vlc (1.1.4.1): depends on lua5.1
 
-Despite this, I'd prefer moving it to obsolete, too.
+With following diffstat:
 
-Regards,
-Andreas
+ bin/install                                    |    4 +-                                             
+ recipes/adobe-flash/flash-plugin_10.0.22.87.bb |   35 --------------------
+ recipes/adobe-flash/flash-plugin_10.2.153.1.bb |   41 ++++++++++++++++++++++++
+ recipes/vlc/vlc.inc                            |    2 +
+ recipes/vlc/vlc_0.9.2.bb                       |    2 +-
+ recipes/vlc/vlc_0.9.6.bb                       |    2 +-
+ recipes/vlc/vlc_0.9.8a.bb                      |    2 +-
+ recipes/vlc/vlc_1.0.6.bb                       |    2 +-
+ recipes/vlc/vlc_1.1.4.1.bb                     |    4 ++-
+ 9 files changed, 52 insertions(+), 42 deletions(-)
+
+Cheers,
+
 
 
