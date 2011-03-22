@@ -1,44 +1,45 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Q2Ad5-0001tl-H8
+	(envelope-from <raj.khem@gmail.com>) id 1Q2Af2-0005gj-Sg
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Mar 2011 00:04:47 +0100
-Received: by iyb26 with SMTP id 26so8278946iyb.6
+	Wed, 23 Mar 2011 00:06:49 +0100
+Received: by iwn10 with SMTP id 10so8290245iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2011 16:02:56 -0700 (PDT)
+	Tue, 22 Mar 2011 16:04:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id
+	h=domainkey-signature:date:from:to:cc:subject:message-id
 	:mail-followup-to:references:mime-version:content-type
 	:content-disposition:in-reply-to:user-agent;
-	bh=VNnbYX9DTXTeo44kZ6tu6iId8FCF8HUJhB/K9t9xYnM=;
-	b=mpNmOTbFoIPbDUwmwHufiALan1RgcOkK+gGuYJZIyYyZiQqJGV3SjUVIkxjjk3/mJu
-	swgj6p3JOpk6fJTDO6NopfcNmMkHJfJGf7Ftjc0XPlANeNMy+2IglkSU+iGEBvnl4ltm
-	wtOgU6CxHJ36kcFCEidzucYjBKBL1H7fcL4ys=
+	bh=faiN9m5yRSbX+KQVcc4nhLDjYGfvt7yYhwuOuWmjiEU=;
+	b=a9MBJUO+sJ4WDFgCh7JrMumxFFg9+EUaNioTvpANNzsp85oTNSmfjNytktSVhAspQp
+	sSUHXrWLvcMc6B4SVN/6BlsxpwNi9j8k6aLks8rIh7Bvp18dnJ9YqzxxzqNQO3PhkQR+
+	lCk5BYW4AR4hC6a9nVk6L0d7N2vuK3+P1TRLc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
+	h=date:from:to:cc:subject:message-id:mail-followup-to:references
 	:mime-version:content-type:content-disposition:in-reply-to
 	:user-agent;
-	b=APse35VD2aXPwnjVeGq1wVpzmwKzWTkAMCpPUMcdvGYJzlwzbi63ux32Y39g/IdIhw
-	Fw8gPWKMcCmHYcs9Hyprc0wJ0gxhoXnwJTmSkTQjPusxrlbLNxZsZ9tc1hEigPEDKg06
-	32usZJCa3UXjA3QeoOdNuf+BCtaHRAV3PsRS0=
-Received: by 10.42.5.81 with SMTP id 17mr9901819icv.130.1300834976743;
-	Tue, 22 Mar 2011 16:02:56 -0700 (PDT)
+	b=n0X4XkYTJubfcD5ILcwBvMv0o+vg0nftR0ihIkeR2REqfRKZpyhq3XDD+YnduQ5sXI
+	jTVpPlCJQmpsxgnmOei58cdUuUdg1fMgOOCGeNTIXq8a69n7YZSnn/cawXXFpLQ5CGwj
+	B0H+mCtbS4qWaQTuGlDV1UFmtdwWMSje+Ofwc=
+Received: by 10.42.96.4 with SMTP id h4mr10125907icn.136.1300835097989;
+	Tue, 22 Mar 2011 16:04:57 -0700 (PDT)
 Received: from sakrah.homelinux.org
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id 19sm4670390ibx.52.2011.03.22.16.02.54
+	by mx.google.com with ESMTPS id 8sm4668426iba.38.2011.03.22.16.04.56
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 22 Mar 2011 16:02:55 -0700 (PDT)
-Date: Tue, 22 Mar 2011 16:03:12 -0700
+	Tue, 22 Mar 2011 16:04:56 -0700 (PDT)
+Date: Tue, 22 Mar 2011 16:05:13 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110322230312.GC13076@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <20110322173359.GB10685@rhein.zuhause.netz>
-	<1300832261-14946-1-git-send-email-Martin.Jansa@gmail.com>
+Message-ID: <20110322230513.GD13076@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org,
+	Kartik Mohta <kartikmohta@gmail.com>
+References: <1300833106-28370-1-git-send-email-kartikmohta@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1300832261-14946-1-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1300833106-28370-1-git-send-email-kartikmohta@gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH] evas, pango, llvm-native: drop empty PACKAGES_DYNAMIC_virtclass-native as it's in native.bbclass now
+Cc: Kartik Mohta <kartikmohta@gmail.com>
+Subject: Re: [PATCH] libarchive: Requires libxml2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,60 +53,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 23:04:48 -0000
+X-List-Received-Date: Tue, 22 Mar 2011 23:06:49 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (22/03/11 23:17), Martin Jansa wrote:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+On (23/03/11 04:01), Kartik Mohta wrote:
+> Signed-off-by: Kartik Mohta <kartikmohta@gmail.com>
 > ---
->  recipes/efl1/evas.inc        |    1 -
->  recipes/llvm/llvm-native.inc |    2 --
->  recipes/pango/pango.inc      |    1 -
->  3 files changed, 0 insertions(+), 4 deletions(-)
+>  recipes/libarchive/libarchive_2.8.4.bb |    2 ++
+>  1 files changed, 2 insertions(+), 0 deletions(-)
+
+
+Why did you resend it ?
+
 > 
-> diff --git a/recipes/efl1/evas.inc b/recipes/efl1/evas.inc
-> index bcb1984..0310667 100644
-> --- a/recipes/efl1/evas.inc
-> +++ b/recipes/efl1/evas.inc
-> @@ -28,7 +28,6 @@ do_install_append() {
->  FILES_${PN}-dev += "${libdir}/evas/modules/*/*/*/*.a ${libdir}/evas/modules/*/*/*/*.la"
->  FILES_${PN}-dbg += "${libdir}/evas/modules/*/*/*/.debug/"
+> diff --git a/recipes/libarchive/libarchive_2.8.4.bb b/recipes/libarchive/libarchive_2.8.4.bb
+> index 551746b..1139416 100644
+> --- a/recipes/libarchive/libarchive_2.8.4.bb
+> +++ b/recipes/libarchive/libarchive_2.8.4.bb
+> @@ -4,6 +4,8 @@ SECTION = "devel"
+>  LICENSE = "BSD"
+>  PR = "r0"
 >  
-> -PACKAGES_DYNAMIC_virtclass-native = ""
->  PACKAGES_DYNAMIC = "evas-engine-* evas-loader-* evas-saver-*"
->  
->  RRECOMMENDS_${PN} = " \
-> diff --git a/recipes/llvm/llvm-native.inc b/recipes/llvm/llvm-native.inc
-> index b3cb7a6..216b03d 100644
-> --- a/recipes/llvm/llvm-native.inc
-> +++ b/recipes/llvm/llvm-native.inc
-> @@ -19,8 +19,6 @@ EXTRA_OECMAKE = "\
->  
->  PACKAGES = ""
->  
-> -PACKAGES_DYNAMIC = ""
-> -
->  do_stage() {
->    cd ${OECMAKE_BUILDPATH}
->  
-> diff --git a/recipes/pango/pango.inc b/recipes/pango/pango.inc
-> index c54fbad..2e0f199 100644
-> --- a/recipes/pango/pango.inc
-> +++ b/recipes/pango/pango.inc
-> @@ -14,7 +14,6 @@ DEPENDS_virtclass-native = "glib-2.0-native cairo-native"
->  BBCLASSEXTEND = "native"
->  
->  PACKAGES_DYNAMIC = "pango-module-*"
-> -PACKAGES_DYNAMIC_virtclass-native = ""
->  
->  RRECOMMENDS_${PN} = "pango-module-basic-x pango-module-basic-fc" 
->  RRECOMMENDS_${PN}_virtclass-native = ""
-
-Acked-by: Khem Raj <raj.khem@gmail.com>
-
+> +DEPENDS = "libxml2"
+> +
+>  SRC_URI = "http://libarchive.googlecode.com/files/${PN}-${PV}.tar.gz \
+>             file://0001-Patch-from-upstream-revision-1990.patch \
+>             file://0002-Patch-from-upstream-revision-1991.patch \
 > -- 
-> 1.7.4.1
+> 1.7.1
 > 
 > 
 > _______________________________________________
