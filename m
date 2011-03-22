@@ -1,37 +1,24 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q29vs-0008Cl-8h
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 23:20:08 +0100
-Received: by bwz10 with SMTP id 10so6082826bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2011 15:18:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=mUvkCbQw6ThLk9rrx+oQlJyHkwb/QyeS9SCBj7r6aSQ=;
-	b=QqDBe4OAm07Hc2uVsmK7Alf00aVCjSA2Sg5stviCZqEPvqCFvtVoikToBEo2/Eg2Fu
-	ydHCo1KAsjWS8v08+UAnJQ4tyrwqHZ3InnVFZu3WdkfESDhYbODaElPUgEz+rav+RECI
-	poQiSOYMlxzmoxbI0vx/Fr3E/NM7LWZkvtLvw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=LbJuMC+hw3cEOujWk9QgWmyZdIgOxKrLfRrPGroqkL9fP6x/xqjnGqDyVQzP+vcbGC
-	IndkJ5U2v5UnDD8jZrJEz5rcdMHF+VNw8X197cfbhG8rytU/Li4YSu5kZGNZz3gykw7N
-	hJjHRck9htxOFUHOmSoIDKeuAGEx3R55fs/+k=
-Received: by 10.204.19.20 with SMTP id y20mr124945bka.170.1300832270603;
-	Tue, 22 Mar 2011 15:17:50 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id t1sm5483377bkx.19.2011.03.22.15.17.49
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 22 Mar 2011 15:17:49 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q2AVp-0000JS-Tj for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 23:57:17 +0100
+Received: from f053033163.adsl.alicedsl.de ([78.53.33.163]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q2AU5-00031P-HB for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 22:55:29 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Mar 2011 23:17:41 +0100
-Message-Id: <1300832261-14946-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <20110322173359.GB10685@rhein.zuhause.netz>
-References: <20110322173359.GB10685@rhein.zuhause.netz>
-Subject: [PATCH] evas, pango, llvm-native: drop empty PACKAGES_DYNAMIC_virtclass-native as it's in native.bbclass now
+In-Reply-To: <1300806683-17244-5-git-send-email-otavio@ossystems.com.br>
+References: <1300806683-17244-1-git-send-email-otavio@ossystems.com.br>
+	<1300806683-17244-5-git-send-email-otavio@ossystems.com.br>
+Date: Tue, 22 Mar 2011 23:55:28 +0100
+Message-ID: <1300834528.3825.3.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH 4/4] vlc (1.1.4.1): depends on lua5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,54 +32,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 22:20:08 -0000
+X-List-Received-Date: Tue, 22 Mar 2011 22:57:17 -0000
+X-Groupsio-MsgNum: 30528
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-4xNw+a715uPf1iWql4Ri"
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes/efl1/evas.inc        |    1 -
- recipes/llvm/llvm-native.inc |    2 --
- recipes/pango/pango.inc      |    1 -
- 3 files changed, 0 insertions(+), 4 deletions(-)
+--=-4xNw+a715uPf1iWql4Ri
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/recipes/efl1/evas.inc b/recipes/efl1/evas.inc
-index bcb1984..0310667 100644
---- a/recipes/efl1/evas.inc
-+++ b/recipes/efl1/evas.inc
-@@ -28,7 +28,6 @@ do_install_append() {
- FILES_${PN}-dev += "${libdir}/evas/modules/*/*/*/*.a ${libdir}/evas/modules/*/*/*/*.la"
- FILES_${PN}-dbg += "${libdir}/evas/modules/*/*/*/.debug/"
- 
--PACKAGES_DYNAMIC_virtclass-native = ""
- PACKAGES_DYNAMIC = "evas-engine-* evas-loader-* evas-saver-*"
- 
- RRECOMMENDS_${PN} = " \
-diff --git a/recipes/llvm/llvm-native.inc b/recipes/llvm/llvm-native.inc
-index b3cb7a6..216b03d 100644
---- a/recipes/llvm/llvm-native.inc
-+++ b/recipes/llvm/llvm-native.inc
-@@ -19,8 +19,6 @@ EXTRA_OECMAKE = "\
- 
- PACKAGES = ""
- 
--PACKAGES_DYNAMIC = ""
--
- do_stage() {
-   cd ${OECMAKE_BUILDPATH}
- 
-diff --git a/recipes/pango/pango.inc b/recipes/pango/pango.inc
-index c54fbad..2e0f199 100644
---- a/recipes/pango/pango.inc
-+++ b/recipes/pango/pango.inc
-@@ -14,7 +14,6 @@ DEPENDS_virtclass-native = "glib-2.0-native cairo-native"
- BBCLASSEXTEND = "native"
- 
- PACKAGES_DYNAMIC = "pango-module-*"
--PACKAGES_DYNAMIC_virtclass-native = ""
- 
- RRECOMMENDS_${PN} = "pango-module-basic-x pango-module-basic-fc" 
- RRECOMMENDS_${PN}_virtclass-native = ""
--- 
-1.7.4.1
+Am Dienstag, den 22.03.2011, 15:11 +0000 schrieb Otavio Salvador:
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>  recipes/vlc/vlc_1.1.4.1.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/recipes/vlc/vlc_1.1.4.1.bb b/recipes/vlc/vlc_1.1.4.1.bb
+> index 6d4b877..18297c9 100644
+> --- a/recipes/vlc/vlc_1.1.4.1.bb
+> +++ b/recipes/vlc/vlc_1.1.4.1.bb
+> @@ -5,14 +5,14 @@
+> =20
+>  require vlc.inc
+> =20
+> -PR =3D "${INC_PR}.0"
+> +PR =3D "${INC_PR}.1"
+> =20
+>  SRC_URI[md5sum] =3D "ce17c335b38b322949694313173fcd49"
+>  SRC_URI[sha256sum] =3D "61c9ea30a17ea40c6ccbfd507026e5c83ad9e0691f221d36=
+67c8e49696d7c2aa"
+> =20
+>  # ffmpeg from git (library version =3D> 52) is required
+>  # libtool-native must be >=3D 2.2.4
+> -DEPENDS +=3D "libdvdcss libdvdread lua5.1-native"
+> +DEPENDS +=3D "libdvdcss libdvdread lua5.1-native lua5.1"
+>  RDEPENDS_${PN} +=3D "lua5.1"
+> =20
+>  EXTRA_OECONF +=3D "\
+
+What kind of error do you get? The recipe build fine for me using
+`angstrom-2010.x` for `MACHINE =3D "beagleboard"`.
 
 
+Thanks,
 
+Paul
+
+--=-4xNw+a715uPf1iWql4Ri
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2JKNIACgkQPX1aK2wOHVimLACfTQhfCqVL1smj8Bq3aMlGCdXv
+N+gAoIM85yg5L6lpybKyt0beg8Ltx4UB
+=WhRg
+-----END PGP SIGNATURE-----
+
+--=-4xNw+a715uPf1iWql4Ri--
