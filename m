@@ -1,40 +1,32 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Q24l2-0003ge-Ai
+	(envelope-from <Tom_Rini@mentor.com>) id 1Q24oR-0003pn-Po
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 17:48:36 +0100
-Received: by bwz10 with SMTP id 10so5810891bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2011 09:46:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=ZzNzCFmjTxpUCQ6ScJiRV2I0gHOfVHqH6gmY+N/eLrc=;
-	b=wHqM8gqM6SxFh5mAJGEFrhGv5cZ1NkhG4KBfRr45ECLZ+S1Ju2UChAnXmUkrvH9X2h
-	BdD1gZrdZibkMXuHVoxwF0PygVF8cPClmkKZ+tFtXbANi8qDOlICFSjaq+v+cQD8wyfU
-	fPzcY+I0UvNQTqyTR6QpgugZAuUxg7JMMKfrk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=dKAVxedcvFo/NDE9e+bLZ6OXrtMGfOgIxehW1VZT5pJiFljxn9bO4vXYuTC0IB7v6t
-	y5J1lKEjRrrazjsXuc0fJ5UGsUhJQHSk44yxrpI+OueHOPqX3ZTiqIeQt1P4sJSrzcAk
-	3vHi99xtPh9AV0zR2rJo8Ose5y99XvgpDGhnA=
+	Tue, 22 Mar 2011 17:52:08 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Q24mh-0006od-9I from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 09:50:19 -0700
+Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Tue, 22 Mar 2011 09:49:27 -0700
+Received: from [172.30.80.248] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
+	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
+	Tue, 22 Mar 2011 09:50:18 -0700
+Message-ID: <4D88D332.2060907@mentor.com>
+Date: Tue, 22 Mar 2011 09:49:54 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-Received: by 10.204.133.91 with SMTP id e27mr269828bkt.23.1300812406258; Tue,
-	22 Mar 2011 09:46:46 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.8.15 with HTTP; Tue, 22 Mar 2011 09:46:46 -0700 (PDT)
-In-Reply-To: <1300812057-24450-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1300812057-24450-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Tue, 22 Mar 2011 13:46:46 -0300
-X-Google-Sender-Auth: damWF-h6-WVxGYdVDEDn61XpnSE
-Message-ID: <AANLkTimvvF9NRr4pizr0ZuGjm2yEAGXVhZeSMFUObhB4@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [PATCH] native.bbclass: define empty PACKAGES_DYNAMIC
+To: <openembedded-devel@lists.openembedded.org>
+References: <im9oit$71k$1@dough.gmane.org>
+In-Reply-To: <im9oit$71k$1@dough.gmane.org>
+X-OriginalArrivalTime: 22 Mar 2011 16:49:27.0412 (UTC)
+	FILETIME=[1B3E6340:01CBE8B1]
+Subject: Re: [2011.03-maintenance] Pull request #4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,20 +40,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 16:48:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 22 Mar 2011 16:52:08 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 22, 2011 at 13:40, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+On 03/22/2011 02:02 AM, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Tom,
+>
+> Please pull the 2 commits from here:
+>
+> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+> Branch: 2011.03-maintenance
+>
+> Otavio Salvador (2):
+>        libarchive: add
+>        cmake: depends on libarchive
+>
+> You can view the branch online at
+> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance
+>
+> Not much there this time :) I was expecting to have some java backports,
+> but Stefan is handling those already.
+>
+> regards,
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFNiGWcMkyGM64RGpERAq0yAJ9bMuev/h0nerupV8Fc6oj8fRuZyQCeITOD
+> Bd9V7KsTEp19cEJP6X6GD8A=
+> =NKbQ
+> -----END PGP SIGNATURE-----
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+Pushed, thanks!
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
