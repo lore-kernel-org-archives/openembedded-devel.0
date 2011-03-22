@@ -1,39 +1,35 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1Q1wj5-0006at-2x
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 09:14:03 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 9BDDC11000B2
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q1wqP-0006kq-Ic for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 09:21:37 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q1wof-0006ev-Mq for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 09:19:49 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Mar 2011 09:19:49 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2011 09:03:06 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id B9CCE110022E
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2011 09:03:05 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (g225144151.adsl.alicedsl.de
-	[92.225.144.151]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2011 09:02:55 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 1D0603C0C8; Tue, 22 Mar 2011 09:02:01 +0100 (CET)
-From: heinold@inf.fu-berlin.de
+	Tue, 22 Mar 2011 09:19:49 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Mar 2011 09:01:49 +0100
-Message-Id: <1300780910-28866-3-git-send-email-heinold@inf.fu-berlin.de>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <1300780910-28866-1-git-send-email-heinold@inf.fu-berlin.de>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 22 Mar 2011 09:19:38 +0100
+Message-ID: <im9m2q$pse$1@dough.gmane.org>
 References: <1300780910-28866-1-git-send-email-heinold@inf.fu-berlin.de>
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [PATCH 2/3] cairo.inc: let arm, mips and ppc depend on libatomic-ops
+	<1300780910-28866-2-git-send-email-heinold@inf.fu-berlin.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1300780910-28866-2-git-send-email-heinold@inf.fu-berlin.de>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH 1/3] libatomic-ops: switch to own directroy and use cvs version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,45 +43,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 08:14:03 -0000
+X-List-Received-Date: Tue, 22 Mar 2011 08:21:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 22-03-11 09:01, heinold@inf.fu-berlin.de wrote:
+> From: Henning Heinold <heinold@inf.fu-berlin.de>
 
 
-Signed-off-by: Henning Heinold <heinold@inf.fu-berlin.de>
----
- recipes/cairo/cairo.inc |    9 ++++++++-
- 1 files changed, 8 insertions(+), 1 deletions(-)
+> +++ b/recipes/libatomic-ops/libatomic-ops_cvs.bb
+> @@ -0,0 +1,15 @@
+> +DESCRIPTION = "A library for atomic integer operations"
+> +LICENSE = "MIT"
+> +
+> +PV = "4.0+cvs${SRCDATE}"
+> +
+> +SRC_URI = "cvs://anonymous@bdwgc.cvs.sourceforge.net/cvsroot/bdwgc;module=bdwgc"
+> +
+> +S = "${WORKDIR}/bdwgc/libatomic_ops/"
+> +
+> +inherit autotools pkgconfig
+> +
+> +# Allow empty package to fix SDK depchains
+> +ALLOW_EMPTY_${PN} = "1"
+> +
+> +FILES_${PN}-doc += "${datadir}/libatomic_ops/COPYING ${datadir}/libatomic_ops/*.txt"
 
-diff --git a/recipes/cairo/cairo.inc b/recipes/cairo/cairo.inc
-index c60d7d9..fad50b3 100644
---- a/recipes/cairo/cairo.inc
-+++ b/recipes/cairo/cairo.inc
-@@ -1,15 +1,22 @@
- SECTION = "libs"
- PRIORITY = "optional"
--DEPENDS = "virtual/libx11 pixman libsm libpng fontconfig libxrender glib-2.0"
- DESCRIPTION = "Cairo graphics library"
- LICENSE = "MPL LGPL"
- 
-+DEPENDS = "virtual/libx11 pixman libsm libpng fontconfig libxrender glib-2.0"
-+
-+DEPENDS_append_arm = " libatomic-ops"
-+DEPENDS_append_mips = " libatomic-ops"
-+DEPENDS_append_mipsel = " libatomic-ops"
-+DEPENDS_append_ppc = " libatomic-ops"
-+
- #check for TARGET_FPU=soft and inform configure of the result so it can disable some floating points 
- require cairo-fpu.inc
- EXTRA_OECONF += "${@get_cairo_fpu_setting(bb, d)}"
- 
- inherit autotools pkgconfig 
- 
-+
- PACKAGES =+ "cairo-trace cairo-trace-dev libcairo-script-interpreter libcairo-gobject"
- FILES_libcairo-gobject = "${libdir}/libcairo-gobject.so.*"
- FILES_libcairo-script-interpreter = "${libdir}/libcairo-script-interpreter.so.*"
--- 
-1.7.4.1
+Where are you setting SRCDATE for this recipe?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNiFuaMkyGM64RGpERAkn6AKC5bgVE7shDA6lUCMmPVjP4NdqaagCfQ4L4
+aenatxfKDnffrucGwrGnD7I=
+=N/3n
+-----END PGP SIGNATURE-----
+
 
 
