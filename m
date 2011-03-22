@@ -1,21 +1,20 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q1yPG-00042q-AM for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 11:01:42 +0100
+	id 1Q1z4M-0003sI-Sl for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 11:44:10 +0100
 Received: from f053033163.adsl.alicedsl.de ([78.53.33.163]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q1yNW-0006SF-Sc for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 09:59:55 +0000
+	id 1Q1z2d-0007fS-73; Tue, 22 Mar 2011 10:42:23 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Mar 2011 10:59:53 +0100
-Message-ID: <1300787993.3827.18.camel@mattotaupa>
+Date: Tue, 22 Mar 2011 11:42:22 +0100
+Message-ID: <1300790542.3827.19.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.2 
-Subject: [PATCH] ipkg.inc: remove unused `do_stage()`
+Subject: [PATCH 1/3] ipkg: remove legacy staging and install `libipkg.pc` properly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,61 +28,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 10:01:42 -0000
-X-Groupsio-MsgNum: 30491
+X-List-Received-Date: Tue, 22 Mar 2011 10:44:10 -0000
+X-Groupsio-MsgNum: 30492
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-LFjY6QCa6vOQdjaGWqSe"
+	boundary="=-UrkK64oaJBbHN/FHdxwl"
 
---=-LFjY6QCa6vOQdjaGWqSe
+--=-UrkK64oaJBbHN/FHdxwl
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Date: Tue, 22 Mar 2011 09:53:17 +0100
+Date: Tue, 22 Mar 2011 10:51:47 +0100
 
-`do_stage()` is also present in `ipkg_0.99.163.bb` which is the only recipe=
- available for `ipkg`.
+Convert to new style staging [1] and install `libipkg.pc` properly as done =
+in [2][3].
+
+[1] http://openembedded.org/index.php/Legacy_staging
+[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dc2c8fe4=
+c5629add94bd0b922f5b3446624a9f4d8
+[3] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D48838f0=
+fca6b00767115dd13bce2537f035fd3ba
 
 Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+CC: Andreas Oberritter <obi@opendreambox.org>
 ---
- recipes/ipkg/ipkg.inc |   11 -----------
- 1 files changed, 0 insertions(+), 11 deletions(-)
+Another time I do not understand why `libipkg.pc` is not installed
+automatically. I did not find =C2=BBlibipkg.pc was not installed.=C2=AB fro=
+m
+`pkgconfig.bbclass` in `log.do_install`. Is that an error in the
+Makefile of `ipkg`?
+---
+ recipes/ipkg/ipkg_0.99.163.bb |   13 ++++---------
+ 1 files changed, 4 insertions(+), 9 deletions(-)
 
-diff --git a/recipes/ipkg/ipkg.inc b/recipes/ipkg/ipkg.inc
-index c28cf8b..701322c 100644
---- a/recipes/ipkg/ipkg.inc
-+++ b/recipes/ipkg/ipkg.inc
-@@ -43,17 +43,6 @@ do_install_append() {
- 	install -m 0755 ${WORKDIR}/${INITSCRIPT_NAME} ${D}${sysconfdir}/init.d/
- }
+diff --git a/recipes/ipkg/ipkg_0.99.163.bb b/recipes/ipkg/ipkg_0.99.163.bb
+index 8eb83a1..09068d4 100644
+--- a/recipes/ipkg/ipkg_0.99.163.bb
++++ b/recipes/ipkg/ipkg_0.99.163.bb
+@@ -1,5 +1,5 @@
+ include ipkg.inc
+-PR =3D "r8"
++PR =3D "r9"
+=20
+ S =3D "${WORKDIR}/ipkg-${PV}"
+=20
+@@ -12,15 +12,10 @@ SRC_URI =3D "http://www.handhelds.org/pub/packages/ipkg=
+/ipkg-${PV}.tar.gz \
+ 	file://lonk-link-name.patch \
+ 	"
 =20
 -do_stage() {
 -	oe_libinstall -so libipkg ${STAGING_LIBDIR}
--	install -d ${STAGING_INCDIR}/replace/
--	install -m 0644 replace/replace.h ${STAGING_INCDIR}/replace/
 -	install -d ${STAGING_INCDIR}/libipkg/
 -	for f in *.h
 -	do
 -		install -m 0644 $f ${STAGING_INCDIR}/libipkg/
 -	done
--}
++do_install () {
++	install -d ${D}${libdir}/pkgconfig
++	install -m 0644 ${WORKDIR}/libipkg.pc ${D}${libdir}/pkgconfig/libipkg.pc
+ }
+=20
 -
- #
- # FIXME: Install /etc/ipkg.conf and /etc/ipkg/arch.conf
- #
+ SRC_URI[md5sum] =3D "0b10ad2924611bccaea8ddf98481a192"
+ SRC_URI[sha256sum] =3D "405743e1ba320ed6095d42a898f1486e3af1d745cae2bd45df=
+e1d8403a4d8995"
 --=20
 1.7.4.1
 
---=-LFjY6QCa6vOQdjaGWqSe
+--=-UrkK64oaJBbHN/FHdxwl
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk2IcxkACgkQPX1aK2wOHVjt+gCeKHcqZD7rQ1uF0CsOZBt8++wl
-VTcAn18SnjfTEIsemDf4q6CKDlg5QcaI
-=cz9G
+iEYEABECAAYFAk2IfQ0ACgkQPX1aK2wOHVgFegCeOTV5+vLbKnVpIMUB3rUTqGXd
+YuAAniC/CHhPoUN/DGTjtEesXWrW5QnB
+=yiT2
 -----END PGP SIGNATURE-----
 
---=-LFjY6QCa6vOQdjaGWqSe--
+--=-UrkK64oaJBbHN/FHdxwl--
