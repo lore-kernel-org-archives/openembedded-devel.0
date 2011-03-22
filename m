@@ -1,40 +1,23 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Q23Ha-00034E-NL
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 16:14:06 +0100
-Received: by yxn22 with SMTP id 22so2905863yxn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2011 08:12:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
-	:x-mailer:in-reply-to:references;
-	bh=tUn3IHhlm14NevZ1Ok9+SsEXGg1Ejaz6y/xCIQMLouw=;
-	b=T1QVpQ0PKlA22HrCKGqqy85LJANPUutIsW+y0z84OgCaOyGM70qEx+Ic9fYXcn6pNn
-	1TFgNWV5DL7m3nLYxGH49O14m6TMH4MPGaI40q+ODMTTEqgZCqePfk8HfcMCg6mH5yBc
-	NU9ifwGEOeQVUrpx4weDLBPCWZx0j2bqTy4eM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references;
-	b=GhaUSmW40mtrrb9Pck72kJILT7mTWtSmAukX19tJZCgrBCypI3ez9zk66xcdFCVw4u
-	qcsleB6yMLfj0fFoKfiS1m7niUUaMn5m/bWqthmYsVutxfIRk2ntCq09iD81r5Uf303h
-	FyfVvm3axbYnRR0NV7qoHlLZ7QgSmf3Fte18s=
-Received: by 10.150.239.4 with SMTP id m4mr1597515ybh.402.1300806736306;
-	Tue, 22 Mar 2011 08:12:16 -0700 (PDT)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id o2sm1732487ybn.21.2011.03.22.08.12.13
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 22 Mar 2011 08:12:14 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q23Jr-0003Tu-9H for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 16:16:27 +0100
+Received: from f053033163.adsl.alicedsl.de ([78.53.33.163]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q23I7-0006IJ-ES; Tue, 22 Mar 2011 15:14:39 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Mar 2011 15:11:23 +0000
-Message-Id: <1300806683-17244-5-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <1300806683-17244-1-git-send-email-otavio@ossystems.com.br>
-References: <1300806683-17244-1-git-send-email-otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 4/4] vlc (1.1.4.1): depends on lua5.1
+In-Reply-To: <1300790972.3827.21.camel@mattotaupa>
+References: <1300790542.3827.19.camel@mattotaupa>
+	<1300790972.3827.21.camel@mattotaupa>
+Date: Tue, 22 Mar 2011 16:14:38 +0100
+Message-ID: <1300806878.26064.20.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH 1/3 v3] ipkg: remove legacy staging and install `libipkg.pc` properly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,36 +31,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 15:14:06 -0000
+X-List-Received-Date: Tue, 22 Mar 2011 15:16:27 -0000
+X-Groupsio-MsgNum: 30508
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-OM+VFBB+WaY52h5+oDd8"
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+--=-OM+VFBB+WaY52h5+oDd8
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Date: Tue, 22 Mar 2011 10:51:47 +0100
+
+Convert to new style staging [1] and install `libipkg.pc` properly as done =
+in [2][3].
+
+[1] http://openembedded.org/index.php/Legacy_staging
+[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dc2c8fe4=
+c5629add94bd0b922f5b3446624a9f4d8
+[3] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D48838f0=
+fca6b00767115dd13bce2537f035fd3ba
+
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+CC: Andreas Oberritter <obi@opendreambox.org>
 ---
- recipes/vlc/vlc_1.1.4.1.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+v2: use correct location `${S}` instead of `${WORKDIR}`
+v3: install header files as done beforehand by `do_stage()` (also pointed o=
+ut by Andreas)
 
-diff --git a/recipes/vlc/vlc_1.1.4.1.bb b/recipes/vlc/vlc_1.1.4.1.bb
-index 6d4b877..18297c9 100644
---- a/recipes/vlc/vlc_1.1.4.1.bb
-+++ b/recipes/vlc/vlc_1.1.4.1.bb
-@@ -5,14 +5,14 @@
- 
- require vlc.inc
- 
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- SRC_URI[md5sum] = "ce17c335b38b322949694313173fcd49"
- SRC_URI[sha256sum] = "61c9ea30a17ea40c6ccbfd507026e5c83ad9e0691f221d3667c8e49696d7c2aa"
- 
- # ffmpeg from git (library version => 52) is required
- # libtool-native must be >= 2.2.4
--DEPENDS += "libdvdcss libdvdread lua5.1-native"
-+DEPENDS += "libdvdcss libdvdread lua5.1-native lua5.1"
- RDEPENDS_${PN} += "lua5.1"
- 
- EXTRA_OECONF += "\
--- 
-1.7.2.3
+Another time I do not understand why `libipkg.pc` is not installed
+automatically. I did not find =C2=BBlibipkg.pc was not installed.=C2=AB fro=
+m
+`pkgconfig.bbclass` in `log.do_install`. Is that an error in the
+Makefile of `ipkg`?
+---
+ recipes/ipkg/ipkg_0.99.163.bb |   12 ++++++------
+ 1 files changed, 6 insertions(+), 6 deletions(-)
 
+diff --git a/recipes/ipkg/ipkg_0.99.163.bb b/recipes/ipkg/ipkg_0.99.163.bb
+index 8eb83a1..01e3629 100644
+--- a/recipes/ipkg/ipkg_0.99.163.bb
++++ b/recipes/ipkg/ipkg_0.99.163.bb
+@@ -1,5 +1,5 @@
+ include ipkg.inc
+-PR =3D "r8"
++PR =3D "r9"
+=20
+ S =3D "${WORKDIR}/ipkg-${PV}"
+=20
+@@ -12,15 +12,15 @@ SRC_URI =3D "http://www.handhelds.org/pub/packages/ipkg=
+/ipkg-${PV}.tar.gz \
+ 	file://lonk-link-name.patch \
+ 	"
+=20
+-do_stage() {
+-	oe_libinstall -so libipkg ${STAGING_LIBDIR}
+-	install -d ${STAGING_INCDIR}/libipkg/
++do_install() {
++	install -d ${D}${includedir}/libipkg/
+ 	for f in *.h
+ 	do
+-		install -m 0644 $f ${STAGING_INCDIR}/libipkg/
++		install -m 0644 $f ${D}${includedir}/libipkg/
+ 	done
++	install -d ${D}${libdir}/pkgconfig
++	install -m 0644 ${S}/libipkg.pc ${D}${libdir}/pkgconfig/libipkg.pc
+ }
+=20
+-
+ SRC_URI[md5sum] =3D "0b10ad2924611bccaea8ddf98481a192"
+ SRC_URI[sha256sum] =3D "405743e1ba320ed6095d42a898f1486e3af1d745cae2bd45df=
+e1d8403a4d8995"
+--=20
+1.7.4.1
 
+--=-OM+VFBB+WaY52h5+oDd8
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2IvN4ACgkQPX1aK2wOHVg8UACcC2VM/PuZHLh2DRVw+q6OVwn7
+YgYAn1aYeoSlW0vQrTZQ+/7/wWa60sq7
+=Ce6B
+-----END PGP SIGNATURE-----
+
+--=-OM+VFBB+WaY52h5+oDd8--
