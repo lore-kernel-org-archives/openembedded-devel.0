@@ -1,40 +1,33 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Q20nI-00043u-Lh
+	(envelope-from <obi@opendreambox.org>) id 1Q234k-0002lD-P9
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 13:34:41 +0100
-Received: by bwz10 with SMTP id 10so5578860bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2011 05:32:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=NnJwCFpFcwHf69TfcP1avsv9ibX59Drl9pMPSqjN9M0=;
-	b=Ym9TtFvlT95p9WgIdBJvnat1Wn0sTLlAP8pi4hwelbcrhfR/OP8KNoRZJw9QsNt9Jx
-	3I5UaPt6TOwcRHKBifQWmozGrUFgBPuafkxPro6VfiG5jteGJ3sTj/f3drFShF1prHUI
-	pdnLvFqco5vJYZ3Qc3rdF/wYjkaxHRjFnUEb4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=dn30w7vZ6Db7lTIgaIVjAmyGTT9h0FaK522Z3RIX46QEjw8T/D885xHGf/jWUzN+x4
-	CsyLH2K4MqRwYJy1kp7k5WBT6YgVdiuckpqd6dRKe066sNPDEgzBTw380ZZJYOuw2VHc
-	Gs19shzi7+t5xVWCOtEqoUx5vXrD7rrUz6zds=
+	Tue, 22 Mar 2011 16:00:50 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id C4880314F310;
+	Tue, 22 Mar 2011 15:59:01 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id wYmYfIi6RyVj; Tue, 22 Mar 2011 15:58:52 +0100 (CET)
+Received: from [172.22.22.61] (ip-109-90-23-193.unitymediagroup.de
+	[109.90.23.193])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 32E04314F313;
+	Tue, 22 Mar 2011 15:58:52 +0100 (CET)
+Message-ID: <4D88B92B.3090703@opendreambox.org>
+Date: Tue, 22 Mar 2011 15:58:51 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.15) Gecko/20110307 Lightning/1.0b2 Thunderbird/3.1.9
 MIME-Version: 1.0
-Received: by 10.204.75.88 with SMTP id x24mr4934628bkj.158.1300797169663; Tue,
-	22 Mar 2011 05:32:49 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.8.15 with HTTP; Tue, 22 Mar 2011 05:32:49 -0700 (PDT)
-In-Reply-To: <AANLkTi=Q6ATHuoUN87y8G9futYc+2iJ9c23YLRfPYOZj@mail.gmail.com>
-References: <1300784531-13757-1-git-send-email-heinold@inf.fu-berlin.de>
-	<AANLkTi=Q6ATHuoUN87y8G9futYc+2iJ9c23YLRfPYOZj@mail.gmail.com>
-Date: Tue, 22 Mar 2011 09:32:49 -0300
-X-Google-Sender-Auth: VH3YwIxBT3B3R3wJCiMro3U8cRQ
-Message-ID: <AANLkTim2xJnB2x3gDkA4vfmghv6UeamRcUPYXhSxjxjf@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: lzma has no -e option
+To: Paul Menzel <paulepanter@users.sourceforge.net>
+References: <1300790542.3827.19.camel@mattotaupa>
+In-Reply-To: <1300790542.3827.19.camel@mattotaupa>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/3] ipkg: remove legacy staging and install `libipkg.pc` properly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,25 +41,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 12:34:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 22 Mar 2011 15:00:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 22, 2011 at 06:22, Andrea Adami <andrea.adami@gmail.com> wrote:
-> Yes, I've seen this too.
-> It's due to a mismatch between lzma (utils) and xz (utils).
->
-> We should probably move to xz =A0 http://tukaani.org/xz/
+Hello Paul,
 
-I see no point in having lzma images but we can use xz utils to
-generate lzma if desired. I'd say to us to drop lzma-native and use xz
-to build those or drop them.
+On 03/22/2011 11:42 AM, Paul Menzel wrote:
+> --- a/recipes/ipkg/ipkg_0.99.163.bb
+> +++ b/recipes/ipkg/ipkg_0.99.163.bb
+> @@ -1,5 +1,5 @@
+>  include ipkg.inc
+> -PR = "r8"
+> +PR = "r9"
+>  
+>  S = "${WORKDIR}/ipkg-${PV}"
+>  
+> @@ -12,15 +12,10 @@ SRC_URI = "http://www.handhelds.org/pub/packages/ipkg/ipkg-${PV}.tar.gz \
+>  	file://lonk-link-name.patch \
+>  	"
+>  
+> -do_stage() {
+> -	oe_libinstall -so libipkg ${STAGING_LIBDIR}
+> -	install -d ${STAGING_INCDIR}/libipkg/
+> -	for f in *.h
+> -	do
+> -		install -m 0644 $f ${STAGING_INCDIR}/libipkg/
+> -	done
+> +do_install () {
+> +	install -d ${D}${libdir}/pkgconfig
+> +	install -m 0644 ${WORKDIR}/libipkg.pc ${D}${libdir}/pkgconfig/libipkg.pc
+>  }
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+how do the library and headers get installed? Is there a do_install()
+inside ipkg.inc? In that case, you should use do_install_append()
+instead or move the two new lines to ipkg.inc.
+
+Despite this, I'd prefer moving it to obsolete, too.
+
+Regards,
+Andreas
 
 
