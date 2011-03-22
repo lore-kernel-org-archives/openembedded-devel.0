@@ -1,20 +1,22 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q1z4M-0003sI-Sl for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 11:44:10 +0100
+	id 1Q1zBI-00041E-Rx for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 11:51:20 +0100
 Received: from f053033163.adsl.alicedsl.de ([78.53.33.163]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q1z2d-0007fS-73; Tue, 22 Mar 2011 10:42:23 +0000
+	id 1Q1z9Z-00089p-6u; Tue, 22 Mar 2011 10:49:33 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Mar 2011 11:42:22 +0100
-Message-ID: <1300790542.3827.19.camel@mattotaupa>
+In-Reply-To: <1300790542.3827.19.camel@mattotaupa>
+References: <1300790542.3827.19.camel@mattotaupa>
+Date: Tue, 22 Mar 2011 11:49:32 +0100
+Message-ID: <1300790972.3827.21.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.2 
-Subject: [PATCH 1/3] ipkg: remove legacy staging and install `libipkg.pc` properly
+Subject: [PATCH 1/3 v2] ipkg: remove legacy staging and install `libipkg.pc` properly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,13 +30,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 10:44:10 -0000
-X-Groupsio-MsgNum: 30492
+X-List-Received-Date: Tue, 22 Mar 2011 10:51:20 -0000
+X-Groupsio-MsgNum: 30493
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-UrkK64oaJBbHN/FHdxwl"
+	boundary="=-G6YySjiMWt6QkeYry5dR"
 
---=-UrkK64oaJBbHN/FHdxwl
+--=-G6YySjiMWt6QkeYry5dR
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -52,6 +54,8 @@ fca6b00767115dd13bce2537f035fd3ba
 Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
 CC: Andreas Oberritter <obi@opendreambox.org>
 ---
+v2: use correct location `${S}` instead of `${WORKDIR}`
+
 Another time I do not understand why `libipkg.pc` is not installed
 automatically. I did not find =C2=BBlibipkg.pc was not installed.=C2=AB fro=
 m
@@ -62,7 +66,7 @@ Makefile of `ipkg`?
  1 files changed, 4 insertions(+), 9 deletions(-)
 
 diff --git a/recipes/ipkg/ipkg_0.99.163.bb b/recipes/ipkg/ipkg_0.99.163.bb
-index 8eb83a1..09068d4 100644
+index 8eb83a1..f89a274 100644
 --- a/recipes/ipkg/ipkg_0.99.163.bb
 +++ b/recipes/ipkg/ipkg_0.99.163.bb
 @@ -1,5 +1,5 @@
@@ -86,7 +90,7 @@ index 8eb83a1..09068d4 100644
 -	done
 +do_install () {
 +	install -d ${D}${libdir}/pkgconfig
-+	install -m 0644 ${WORKDIR}/libipkg.pc ${D}${libdir}/pkgconfig/libipkg.pc
++	install -m 0644 ${S}/libipkg.pc ${D}${libdir}/pkgconfig/libipkg.pc
  }
 =20
 -
@@ -96,16 +100,16 @@ e1d8403a4d8995"
 --=20
 1.7.4.1
 
---=-UrkK64oaJBbHN/FHdxwl
+--=-G6YySjiMWt6QkeYry5dR
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk2IfQ0ACgkQPX1aK2wOHVgFegCeOTV5+vLbKnVpIMUB3rUTqGXd
-YuAAniC/CHhPoUN/DGTjtEesXWrW5QnB
-=yiT2
+iEYEABECAAYFAk2IfrwACgkQPX1aK2wOHVjmhwCeOHwTJV7k8pN73zyrxRM7apG3
+uboAni53NRTFR+L7ouAbligH187/Z7zK
+=GUyH
 -----END PGP SIGNATURE-----
 
---=-UrkK64oaJBbHN/FHdxwl--
+--=-G6YySjiMWt6QkeYry5dR--
