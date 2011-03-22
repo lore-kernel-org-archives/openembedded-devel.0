@@ -1,22 +1,21 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q1zBI-00041E-Rx for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 11:51:20 +0100
+	id 1Q1zCZ-00047F-Dt for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 11:52:39 +0100
 Received: from f053033163.adsl.alicedsl.de ([78.53.33.163]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q1z9Z-00089p-6u; Tue, 22 Mar 2011 10:49:33 +0000
+	id 1Q1zAp-0008A7-Nd for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Mar 2011 10:50:51 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1300790542.3827.19.camel@mattotaupa>
-References: <1300790542.3827.19.camel@mattotaupa>
-Date: Tue, 22 Mar 2011 11:49:32 +0100
-Message-ID: <1300790972.3827.21.camel@mattotaupa>
+Date: Tue, 22 Mar 2011 11:50:50 +0100
+Message-ID: <1300791050.3827.22.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.2 
-Subject: [PATCH 1/3 v2] ipkg: remove legacy staging and install `libipkg.pc` properly
+Subject: [PATCH 2/3] ipkg.inc: convert tabulators to spaces and reorder recipe [1]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,86 +29,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2011 10:51:20 -0000
-X-Groupsio-MsgNum: 30493
+X-List-Received-Date: Tue, 22 Mar 2011 10:52:39 -0000
+X-Groupsio-MsgNum: 30494
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-G6YySjiMWt6QkeYry5dR"
+	boundary="=-NilECA9z9hjCVshXPyhx"
 
---=-G6YySjiMWt6QkeYry5dR
+--=-NilECA9z9hjCVshXPyhx
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Date: Tue, 22 Mar 2011 10:51:47 +0100
+Date: Tue, 22 Mar 2011 11:15:26 +0100
 
-Convert to new style staging [1] and install `libipkg.pc` properly as done =
-in [2][3].
-
-[1] http://openembedded.org/index.php/Legacy_staging
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dc2c8fe4=
-c5629add94bd0b922f5b3446624a9f4d8
-[3] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D48838f0=
-fca6b00767115dd13bce2537f035fd3ba
+[1] http://openembedded.org/index.php/Styleguide
 
 Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-CC: Andreas Oberritter <obi@opendreambox.org>
 ---
-v2: use correct location `${S}` instead of `${WORKDIR}`
+ recipes/ipkg/ipkg.inc |   16 ++++++++--------
+ 1 files changed, 8 insertions(+), 8 deletions(-)
 
-Another time I do not understand why `libipkg.pc` is not installed
-automatically. I did not find =C2=BBlibipkg.pc was not installed.=C2=AB fro=
-m
-`pkgconfig.bbclass` in `log.do_install`. Is that an error in the
-Makefile of `ipkg`?
----
- recipes/ipkg/ipkg_0.99.163.bb |   13 ++++---------
- 1 files changed, 4 insertions(+), 9 deletions(-)
-
-diff --git a/recipes/ipkg/ipkg_0.99.163.bb b/recipes/ipkg/ipkg_0.99.163.bb
-index 8eb83a1..f89a274 100644
---- a/recipes/ipkg/ipkg_0.99.163.bb
-+++ b/recipes/ipkg/ipkg_0.99.163.bb
-@@ -1,5 +1,5 @@
- include ipkg.inc
--PR =3D "r8"
-+PR =3D "r9"
+diff --git a/recipes/ipkg/ipkg.inc b/recipes/ipkg/ipkg.inc
+index 701322c..b4ccef3 100644
+--- a/recipes/ipkg/ipkg.inc
++++ b/recipes/ipkg/ipkg.inc
+@@ -4,16 +4,11 @@ SECTION =3D "base"
+ LICENSE =3D "GPL"
+ PROVIDES =3D "virtual/ipkg libipkg"
 =20
- S =3D "${WORKDIR}/ipkg-${PV}"
+-PACKAGES =3D+ "libipkg-dev libipkg"
+-FILES_libipkg-dev =3D "${libdir}/*.a ${libdir}/*.la ${libdir}/*.so"
+-FILES_libipkg =3D "${libdir}/*.so.*"
+-AUTO_LIBNAME_PKGS =3D "libipkg"
+-
+ SRC_URI =3D "${HANDHELDS_CVS};module=3Dfamiliar/dist/ipkg;tag=3D${@'V' + b=
+b.data.getVar('PV',d,1).replace('.', '-')} \
+         file://update_version_comparision.patch \
+         file://enable_debversion.patch \
+         file://ipkg-configure \
+-	file://terse.patch"
++        file://terse.patch"
 =20
-@@ -12,15 +12,10 @@ SRC_URI =3D "http://www.handhelds.org/pub/packages/ipkg=
-/ipkg-${PV}.tar.gz \
- 	file://lonk-link-name.patch \
- 	"
+ S =3D "${WORKDIR}/ipkg/C"
 =20
--do_stage() {
--	oe_libinstall -so libipkg ${STAGING_LIBDIR}
--	install -d ${STAGING_INCDIR}/libipkg/
--	for f in *.h
--	do
--		install -m 0644 $f ${STAGING_INCDIR}/libipkg/
--	done
-+do_install () {
-+	install -d ${D}${libdir}/pkgconfig
-+	install -m 0644 ${S}/libipkg.pc ${D}${libdir}/pkgconfig/libipkg.pc
+@@ -39,10 +34,15 @@ update-alternatives --remove ipkg ${bindir}/ipkg-cl
  }
 =20
--
- SRC_URI[md5sum] =3D "0b10ad2924611bccaea8ddf98481a192"
- SRC_URI[sha256sum] =3D "405743e1ba320ed6095d42a898f1486e3af1d745cae2bd45df=
-e1d8403a4d8995"
+ do_install_append() {
+-	install -d ${D}${sysconfdir}/init.d
+-	install -m 0755 ${WORKDIR}/${INITSCRIPT_NAME} ${D}${sysconfdir}/init.d/
++    install -d ${D}${sysconfdir}/init.d
++    install -m 0755 ${WORKDIR}/${INITSCRIPT_NAME} ${D}${sysconfdir}/init.d=
+/
+ }
+=20
+ #
+ # FIXME: Install /etc/ipkg.conf and /etc/ipkg/arch.conf
+ #
++
++PACKAGES =3D+ "libipkg-dev libipkg"
++FILES_libipkg-dev =3D "${libdir}/*.a ${libdir}/*.la ${libdir}/*.so"
++FILES_libipkg =3D "${libdir}/*.so.*"
++AUTO_LIBNAME_PKGS =3D "libipkg"
 --=20
 1.7.4.1
 
---=-G6YySjiMWt6QkeYry5dR
+--=-NilECA9z9hjCVshXPyhx
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk2IfrwACgkQPX1aK2wOHVjmhwCeOHwTJV7k8pN73zyrxRM7apG3
-uboAni53NRTFR+L7ouAbligH187/Z7zK
-=GUyH
+iEYEABECAAYFAk2IfwoACgkQPX1aK2wOHVgseQCeIJhlcafSrUJT8muJLERvbwjq
+DfgAnRO+d5mro+VkFsNE10gYr9AJXF7j
+=Lc4J
 -----END PGP SIGNATURE-----
 
---=-G6YySjiMWt6QkeYry5dR--
+--=-NilECA9z9hjCVshXPyhx--
