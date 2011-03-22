@@ -1,18 +1,20 @@
 Received: from smtp203.alice.it ([82.57.200.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <GNUtoo@no-log.org>) id 1Q26dR-00065I-Tu
+	(envelope-from <GNUtoo@no-log.org>) id 1Q26dR-00065J-Tu
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Mar 2011 19:48:53 +0100
+	Tue, 22 Mar 2011 19:48:54 +0100
 Received: from localhost.localdomain (79.25.134.226) by smtp203.alice.it
 	(8.5.124.08) (authenticated as editempo@alice.it)
-	id 4C1A2A960818EA85; Tue, 22 Mar 2011 19:44:44 +0100
+	id 4C1A2A960818EA9B; Tue, 22 Mar 2011 19:44:48 +0100
 From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 To: Stefan Schmidt <stefan@buglabs.net>
-Date: Tue, 22 Mar 2011 19:44:36 +0100
-Message-Id: <1300819478-6906-1-git-send-email-GNUtoo@no-log.org>
+Date: Tue, 22 Mar 2011 19:44:38 +0100
+Message-Id: <1300819478-6906-3-git-send-email-GNUtoo@no-log.org>
 X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1300819478-6906-1-git-send-email-GNUtoo@no-log.org>
+References: <1300819478-6906-1-git-send-email-GNUtoo@no-log.org>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 1/3] bug20: add wifi and bluetooth to MACHINE_FEATURES
+Subject: [PATCH 3/3] linux-omap-hah-2.6.31: enable XV for omapfb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,24 +30,44 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 22 Mar 2011 18:48:54 -0000
 
+Without that fix we have that in /var/log/Xorg.0.log:
+  [2909187.116] (EE) omapfb(0): Failed to open /dev/fb2: No such file or directory
+  [2909187.116] (EE) omapfb(0): XVScreenInit failed
+That means that without 3 framebuffers it refuses to enable XV
+Setting CONFIG_FB_OMAP2_NUM_FBS to 3 should fix the problem
+
 Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 ---
- conf/machine/bug20.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ .../linux/linux-omap-hah-2.6.31/bug20/defconfig    |    2 +-
+ recipes/linux/linux-omap-hah_2.6.31.bb             |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/bug20.conf b/conf/machine/bug20.conf
-index a9441bd..95ce49c 100644
---- a/conf/machine/bug20.conf
-+++ b/conf/machine/bug20.conf
-@@ -47,7 +47,7 @@ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
- PREFERRED_VERSION_u-boot = "git"
+diff --git a/recipes/linux/linux-omap-hah-2.6.31/bug20/defconfig b/recipes/linux/linux-omap-hah-2.6.31/bug20/defconfig
+index b59847b..3216876 100644
+--- a/recipes/linux/linux-omap-hah-2.6.31/bug20/defconfig
++++ b/recipes/linux/linux-omap-hah-2.6.31/bug20/defconfig
+@@ -1397,7 +1397,7 @@ CONFIG_OMAP2_DSS_MIN_FCK_PER_PCK=0
+ CONFIG_FB_OMAP2=y
+ # CONFIG_FB_OMAP2_DEBUG_SUPPORT is not set
+ # CONFIG_FB_OMAP2_FORCE_AUTO_UPDATE is not set
+-CONFIG_FB_OMAP2_NUM_FBS=1
++CONFIG_FB_OMAP2_NUM_FBS=3
  
- # and sdio
--MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
-+MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa wifi bluetooth"
+ #
+ # OMAP2/3 Display Device Drivers
+diff --git a/recipes/linux/linux-omap-hah_2.6.31.bb b/recipes/linux/linux-omap-hah_2.6.31.bb
+index 9170a64..9fd20ba 100644
+--- a/recipes/linux/linux-omap-hah_2.6.31.bb
++++ b/recipes/linux/linux-omap-hah_2.6.31.bb
+@@ -5,7 +5,7 @@ KERNEL_IMAGETYPE = "uImage"
  
- # We don't provide a bug20 x-load config yet
- XLOAD_MACHINE = "omap3530beagle_config"
+ COMPATIBLE_MACHINE = "bug20"
+ 
+-MACHINE_KERNEL_PR = "r96"
++MACHINE_KERNEL_PR = "r97"
+ 
+ SRCREV = "b8231a0d64e371aca70e69a702dbb57f5d69f376"
+ 
 -- 
 1.7.0.4
 
