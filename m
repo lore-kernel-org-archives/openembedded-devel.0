@@ -1,41 +1,24 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Q2Mcw-0005lr-3Z
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Mar 2011 12:53:26 +0100
-Received: by bwz10 with SMTP id 10so6426903bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Mar 2011 04:51:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=16CCXBYzYdIukhWippCvPZeG1SZoG0yXWCzxOhQ73R8=;
-	b=lgXrAZoGuIQJheIsLYsYaHbk0Mah2N+2P+SizBMdB98nIJO2IeN9DLwR3EP5tSTWbS
-	h4zIc+YwxGHA1ueR8EwGBfcdRCCUKBBmYRiTdgfgyNHn1vhOkdyjJ9YuAIanolsl8aGS
-	WYVDGW9NElf7rKcfsci4RLXnoCOCSEK0Vca+M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=xk1cFEzyJx78tdql9pGvN3TZ4eH/NF5s30NlWwvvT74n6N71c+AgGC9JJ4UKeyLJ9Z
-	uY0LvgITjdf46eu8J6FW8SviJbFb+4q5G2T4p6Z3W2BEb75ogRVKmOTLZ8xXCA2cNqAo
-	BqUbtL4bqanFR3xbbe2zbNSJ2CpWZ3rm2laAE=
-MIME-Version: 1.0
-Received: by 10.204.17.1 with SMTP id q1mr6132781bka.131.1300881076253; Wed,
-	23 Mar 2011 04:51:16 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.8.15 with HTTP; Wed, 23 Mar 2011 04:51:16 -0700 (PDT)
-In-Reply-To: <1300834528.3825.3.camel@mattotaupa>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q2Mhe-0007Pa-Cj for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Mar 2011 12:58:18 +0100
+Received: from f053045005.adsl.alicedsl.de ([78.53.45.5] helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q2Mft-00026k-Lm for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Mar 2011 11:56:29 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <AANLkTim8KdVzogFp2hh5bTLxWnXvLzDOK8eb5E+-k+P1@mail.gmail.com>
 References: <1300806683-17244-1-git-send-email-otavio@ossystems.com.br>
 	<1300806683-17244-5-git-send-email-otavio@ossystems.com.br>
 	<1300834528.3825.3.camel@mattotaupa>
-Date: Wed, 23 Mar 2011 08:51:16 -0300
-X-Google-Sender-Auth: ATwo_kP6muNg4n4vUG7DZ2eum8c
-Message-ID: <AANLkTim8KdVzogFp2hh5bTLxWnXvLzDOK8eb5E+-k+P1@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+	<AANLkTim8KdVzogFp2hh5bTLxWnXvLzDOK8eb5E+-k+P1@mail.gmail.com>
+Date: Wed, 23 Mar 2011 12:56:28 +0100
+Message-ID: <1300881388.4101.23.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
 Subject: Re: [PATCH 4/4] vlc (1.1.4.1): depends on lua5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -50,22 +33,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Mar 2011 11:53:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 23 Mar 2011 11:58:18 -0000
+X-Groupsio-MsgNum: 30550
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-7HcoIpnxdSJxm0SMwrGt"
+
+--=-7HcoIpnxdSJxm0SMwrGt
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 22, 2011 at 19:55, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> What kind of error do you get? The recipe build fine for me using
-> `angstrom-2010.x` for `MACHINE =3D "beagleboard"`.
+Am Mittwoch, den 23.03.2011, 08:51 -0300 schrieb Otavio Salvador:
+> On Tue, Mar 22, 2011 at 19:55, Paul Menzel
+> <paulepanter@users.sourceforge.net> wrote:
+> > What kind of error do you get? The recipe build fine for me using
+> > `angstrom-2010.x` for `MACHINE =3D "beagleboard"`.
+>=20
+> It fails to find lua.h so probably you had it built due other dependency.
 
-It fails to find lua.h so probably you had it built due other dependency.
-
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+No, I made a clean build, i. e. `rm -rf angstrom-dev`. Please post your
+build configuration.
 
 
+Thanks,
+
+Paul
+
+--=-7HcoIpnxdSJxm0SMwrGt
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2J3+wACgkQPX1aK2wOHVh6jQCcDAus98Gy4lz/nTRjCkdUeEmE
+HaAAn3nqW5QHfmUMNNbLkMFvySv5XwwQ
+=OTcF
+-----END PGP SIGNATURE-----
+
+--=-7HcoIpnxdSJxm0SMwrGt--
