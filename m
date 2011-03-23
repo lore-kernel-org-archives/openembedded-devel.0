@@ -1,36 +1,23 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefro.net@gmail.com>)
-	id 1Q2Rgk-0001TW-W9; Wed, 23 Mar 2011 18:19:34 +0100
-Received: by fxm19 with SMTP id 19so7743250fxm.6
-	for <multiple recipients>; Wed, 23 Mar 2011 10:15:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:date:x-google-sender-auth
-	:message-id:subject:from:to:content-type;
-	bh=L+byn3754CwojzGCJAOSrO2Ir+pwPKzawOGyhWC8k14=;
-	b=Q3tOYtNQJOl7voWEgSQATxmUv5AVnZE1/Vtc7Og1Qi6YNGrZ9Tj9Fj5L1/x81v0A9Y
-	U4p0++7RHPxbJtd/W6FEeaM/rjLErJLvc1gWKQRZMaSLwTs2IKis0rM/qmWllknlfDvM
-	HRo0lgwok38CzRKm9G8V0/pUYVgDNf+91tzM8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	b=pAcbMDwEoMJafc5siOi+K0e3ZHRjaVzu/1tInRbiwkfomZ/ZZTJhPiAQA4TcMt1r+r
-	DRfDBcTc9wMGhY4t7HFLxupxCgn+RzovsMPOqgMLWbFRJ1gUzUjd6SAjWZ5TFrvJGV6A
-	iEbCRTzNLSf/N560tT9mSRY7sjAplSZm1Dwm4=
-MIME-Version: 1.0
-Received: by 10.223.143.5 with SMTP id s5mr2119624fau.14.1300900542153; Wed,
-	23 Mar 2011 10:15:42 -0700 (PDT)
-Sender: jefro.net@gmail.com
-Received: by 10.223.125.83 with HTTP; Wed, 23 Mar 2011 10:15:42 -0700 (PDT)
-Date: Wed, 23 Mar 2011 10:15:42 -0700
-X-Google-Sender-Auth: yhg9UYZBBzo7liFOlOK44_2HTqY
-Message-ID: <AANLkTinvUpiWyo4q=cijbg1B3LFdYfu2o8Y9H0sd=M6=@mail.gmail.com>
-From: Jeff Osier-Mixon <jefro@jefro.net>
-To: openembedded-devel@lists.openembedded.org, 
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	tsc <tsc@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: AGENDA: OE Technical Steering Committee, 24 March 2011
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q2Ry7-0004BW-J7 for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Mar 2011 18:35:39 +0100
+Received: from f053045005.adsl.alicedsl.de ([78.53.45.5] helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q2RwM-000561-6f for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Mar 2011 17:33:50 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1300898424.4101.26.camel@mattotaupa>
+References: <1300838404-7296-1-git-send-email-kartikmohta@gmail.com>
+	<1300898424.4101.26.camel@mattotaupa>
+Date: Wed, 23 Mar 2011 18:33:49 +0100
+Message-ID: <1300901629.4101.33.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH] cmake: Requires ncurses (for ccmake)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,66 +31,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Mar 2011 17:22:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 23 Mar 2011 17:35:40 -0000
+X-Groupsio-MsgNum: 30561
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-6fhL5xEGpeWpjzvPpzsc"
 
-This agenda is posted for comment
+--=-6fhL5xEGpeWpjzvPpzsc
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-AGENDA: OpenEmbedded Technical Steering Committee, 24 March 2011
+Am Mittwoch, den 23.03.2011, 17:40 +0100 schrieb Paul Menzel:
+> Am Dienstag, den 22.03.2011, 20:00 -0400 schrieb Kartik Mohta:
+> > Signed-off-by: Kartik Mohta <kartikmohta@gmail.com>
+>=20
+> [=E2=80=A6]
+>=20
+> Acked-by: Paul Menzel <paulepanter@users.sourceforge.net> and pushed
+> [1].
 
- 01) Agree on meeting chair (Khem already volunteered)
-___________________________________
- 02) Status report on oe-core
+Please update the state of your patch in our patch queue [2].
 
-previous action items:
-Koen to send email gathering input for checklist (sent before meeting ended)
-Jefro volunteers to wikify checklist if someone sends
-discussion for branding & recipe split to mailing list, Richard responded to
-Koen's post already
-___________________________________
- 03) Status report on pull model, contrib repo and guidelines
+        pwclient update -s Accepted -c b1f2e1501c19540617a829b37415c0616101=
+c7ad 1727
 
-previous action items:
-Mark hopes to post commit/patch policy guidelines tomorrow, has feedback to
-incorporate
-Koen would like to copy oe-core guidelines as much as possible for meta-oe
-layer
-
-___________________________________
- 04) Status report on board support layer guidelines
-
-previous action items:
-Richard has action to write proposal for YP steering group, won't have
-answer until their meeting
-___________________________________
- 05) Status report on version retention policy and interaction with
- oe-core / meta-oe / $distro layers
-
-previous action items:
-Tom will wiki it
-___________________________________
- 06) Status on layer splitting of metadata
-
-previous action items:
-Koen volunteers to be pullmaster
-Koen will move data in repo down a level into meta-oe now
-___________________________________
- 07) DISTRO_FEATURE/MACHINE_FEATURE/libc features and other
-    "flags" discussion
-  [ Proposed: Tom Rini ]
-
-previous action items:
-Tom to move to ml
-___________________________________
- 07) Continue discussion on posting of policies and guidelines
-
-previous action items:
-AI: Khem to highlight the oe-core ml on oe-dev, tell people about discussion
-___________________________________
- 08) Continue discussions on infrastructure items
+I am not allowed to do so. You will have to register at [3].
 
 
--- 
-Jeff Osier-Mixon
-Yocto Project Community Manager @Intel
+Thanks,
 
+Paul
+
+
+> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Db1f2e=
+1501c19540617a829b37415c0616101c7ad
+[2] http://openembedded.org/index.php/Patchwork
+[3] http://patches.openembedded.org/
+
+--=-6fhL5xEGpeWpjzvPpzsc
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2KLv0ACgkQPX1aK2wOHVjmWgCfW9gXblYjvuIcim+8uQngGDLO
+6gQAniYGCtDw2oK3wPTI7oasyWHUpgAL
+=FOBk
+-----END PGP SIGNATURE-----
+
+--=-6fhL5xEGpeWpjzvPpzsc--
