@@ -1,41 +1,35 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q2MLh-0001rf-NW
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Mar 2011 12:35:37 +0100
-Received: by bwz10 with SMTP id 10so6416456bwz.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q2MTl-0005Yx-3w for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Mar 2011 12:43:57 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q2MRz-0006Dj-Ha for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Mar 2011 12:42:07 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Mar 2011 12:42:07 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Mar 2011 04:33:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=RhXQ4pEmpFjmNXzx+TFz9uOJdH6u3oxLPop+ZuHWA3o=;
-	b=Dd2juFuVeHl3fLjxEsZ2psSJDQDIwTFDgVY9yCEYMQwMprducIattCxqxU71mXJhxR
-	x7H/r5a7RHLDsS5x8MkSs9EhH1j0zV4qF94jEj/yRJxMI2x48liIuNMjt7yfJ/zYgtjr
-	GhUi+pKoUq+Z6cppPzLA16pMl7rRA8yEfIoh4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Q3aujGiEK/R+cmA+zLN3EIRgx1IzHaGLjKww599Cg9+aA9JKKPLkvi+EJMBeEjhRRn
-	VFct1q5nWD94CRAiGEXSbl6jUc4FXWMUK5Ob7SluYd6e8oiS6ykLxGRqzw/C1CCFSTLD
-	y9WDvr3PX6Wf6TgW/LUwzzXoNNKi4XRLTJFDc=
-Received: by 10.204.127.129 with SMTP id g1mr5937017bks.39.1300880026940;
-	Wed, 23 Mar 2011 04:33:46 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id l1sm2065335bkl.1.2011.03.23.04.33.45
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 23 Mar 2011 04:33:46 -0700 (PDT)
-Date: Wed, 23 Mar 2011 12:33:39 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 23 Mar 2011 12:42:07 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110323113339.GF3418@jama.jama.net>
-References: <1300456829-25755-1-git-send-email-Martin.Jansa@gmail.com>
-	<1300456829-25755-4-git-send-email-Martin.Jansa@gmail.com>
-	<20110323104413.GG21392@excalibur.local>
-MIME-Version: 1.0
-In-Reply-To: <20110323104413.GG21392@excalibur.local>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH 04/12] libnl_git: remove fix-pktloc-dep-race.patch from this version
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 23 Mar 2011 12:41:55 +0100
+Message-ID: <imcma4$hlu$1@dough.gmane.org>
+References: <1300456829-25755-1-git-send-email-Martin.Jansa@gmail.com>	<20110323104755.GH21392@excalibur.local>
+	<20110323112448.GE3418@jama.jama.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <20110323112448.GE3418@jama.jama.net>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH 01/12] libnl: rename libnl2 to libnl as used in openembedded-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,42 +43,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Mar 2011 11:35:38 -0000
-X-Groupsio-MsgNum: 30547
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="l+goss899txtYvYf"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 23 Mar 2011 11:43:57 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---l+goss899txtYvYf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Wed, Mar 23, 2011 at 11:44:19AM +0100, Stefan Schmidt wrote:
-> Hello.
->=20
-> On Fri, 2011-03-18 at 15:00, Martin Jansa wrote:
-> > * it does not apply because there isn't pktloc in this SRCREV yet,
-> >   commented out in upstream src/lib/Makefile.am
->=20
-> Hmm, does this mean we are behind the latest release with our _git
-> recipe?
+On 23-03-11 12:24, Martin Jansa wrote:
+> On Wed, Mar 23, 2011 at 11:47:55AM +0100, Stefan Schmidt wrote:
+>> Hello.
+>>
+>> On Fri, 2011-03-18 at 15:00, Martin Jansa wrote:
+>>> * libnl1/libnl2 still conflicts even when using separate includedir so
+>>>   it will be easier for distro maintainers to use only libnl1 or libnl2
+>>>   by PREFERRED_VERSION
+>>
+>> For distros that want to support network-manager that still means that
+>> both versions are being build and may clash as we have seen before.
+> 
+> How do you build 2 versions of same package? Whole point of this patch
+> series is to force distromaintainers to use only libnl_2.0.0 or
+> libnl_1.1.0 based on PREFERRED_VERSION_libnl and this way keep them away
+> from shooting own foot by accident.
 
-Yes, it's older than libnl_2.0.0 as PV says
-PV =3D "1.9+gitr${SRCPV}"
+I don't think that's an acceptable solution just yet since angstrom
+needs both iw and nm. I think the best way forward is:
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+1) configure libnl1 to only build a .a
+2) rename that .a to libnl-old.a before installing it
+3) patch nm to use -l:libnl-old.a
 
---l+goss899txtYvYf
-Content-Type: application/pgp-signature
+or
 
+1) configure libnl1 to only build a .a
+2) move that .a to ${libdir}/libnl1/
+3) patch nm to use -L${STAGING_LIBDIR}/libnl1 -l:libnl.a
+
+A lot like
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=71e69ad8b551aa06f63160232d1bd87b8d801a1d
+but a bit cleaner.
+
+>> Just a remark. Personally I would like to go this route and maybe get
+>> rid of libnl1 at all.
+> 
+> Yes this is step in direction to get rid of libnl1 :). I'm using
+> libnl_2.0.0 from oe-core in meta-shr, so this change is making diff
+> between recipes in oe.dev and meta-shr smaller.
+
+regards,
+
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEARECAAYFAk2J2pMACgkQN1Ujt2V2gBwFLwCePtW2M1K8qBJ4dhZYRwSeA7C+
-FkoAniYZvqMx0AS/hL0GdiJh/Gt9nk+f
-=LFTQ
+iD8DBQFNidyDMkyGM64RGpERAtrBAJ9j+q1b4dFMXW7C0T9g55y22GO/PACfeH1O
+3NU5PzIAzmtbZy5rdk7ojhs=
+=Vgfx
 -----END PGP SIGNATURE-----
 
---l+goss899txtYvYf--
+
+
