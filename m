@@ -1,25 +1,22 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q2Mhe-0007Pa-Cj for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Mar 2011 12:58:18 +0100
-Received: from f053045005.adsl.alicedsl.de ([78.53.45.5] helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q2Mft-00026k-Lm for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Mar 2011 11:56:29 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <philb@gnu.org>) id 1Q2Mrk-00084n-KW
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Mar 2011 13:08:44 +0100
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q2Mpz-00083l-SQ
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Mar 2011 13:06:56 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTim8KdVzogFp2hh5bTLxWnXvLzDOK8eb5E+-k+P1@mail.gmail.com>
-References: <1300806683-17244-1-git-send-email-otavio@ossystems.com.br>
-	<1300806683-17244-5-git-send-email-otavio@ossystems.com.br>
-	<1300834528.3825.3.camel@mattotaupa>
-	<AANLkTim8KdVzogFp2hh5bTLxWnXvLzDOK8eb5E+-k+P1@mail.gmail.com>
-Date: Wed, 23 Mar 2011 12:56:28 +0100
-Message-ID: <1300881388.4101.23.camel@mattotaupa>
+In-Reply-To: <1300878254.4101.21.camel@mattotaupa>
+References: <1300878254.4101.21.camel@mattotaupa>
+Date: Wed, 23 Mar 2011 12:07:30 +0000
+Message-ID: <1300882050.2228.142.camel@phil-desktop>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH 4/4] vlc (1.1.4.1): depends on lua5.1
+X-Mailer: Evolution 2.30.3 
+Subject: Re: libarchive: task compile fails with `error: static declaration of 'wcscpy' follows non-static declaration`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,42 +30,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Mar 2011 11:58:18 -0000
-X-Groupsio-MsgNum: 30550
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-7HcoIpnxdSJxm0SMwrGt"
-
---=-7HcoIpnxdSJxm0SMwrGt
+X-List-Received-Date: Wed, 23 Mar 2011 12:08:44 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Am Mittwoch, den 23.03.2011, 08:51 -0300 schrieb Otavio Salvador:
-> On Tue, Mar 22, 2011 at 19:55, Paul Menzel
-> <paulepanter@users.sourceforge.net> wrote:
-> > What kind of error do you get? The recipe build fine for me using
-> > `angstrom-2010.x` for `MACHINE =3D "beagleboard"`.
->=20
-> It fails to find lua.h so probably you had it built due other dependency.
+On Wed, 2011-03-23 at 12:04 +0100, Paul Menzel wrote:
+> 	libarchive/archive_entry.c:136:18: error: static declaration of 'wcscpy' follows non-static declaration
 
-No, I made a clean build, i. e. `rm -rf angstrom-dev`. Please post your
-build configuration.
+Seems to be some kind of autoconf lossage.  You'll need to check
+log.do_configure to find out why it thinks wcscpy isn't available.
+
+p.
 
 
-Thanks,
 
-Paul
 
---=-7HcoIpnxdSJxm0SMwrGt
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk2J3+wACgkQPX1aK2wOHVh6jQCcDAus98Gy4lz/nTRjCkdUeEmE
-HaAAn3nqW5QHfmUMNNbLkMFvySv5XwwQ
-=OTcF
------END PGP SIGNATURE-----
-
---=-7HcoIpnxdSJxm0SMwrGt--
