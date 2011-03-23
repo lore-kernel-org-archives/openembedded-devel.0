@@ -1,25 +1,24 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1Q2JgQ-00081n-4p
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Mar 2011 09:44:55 +0100
-Received: (qmail invoked by alias); 23 Mar 2011 08:42:59 -0000
-Received: from mail2.zera.de (EHLO localhost.localdomain) [62.225.102.139]
-	by mail.gmx.net (mp014) with SMTP; 23 Mar 2011 09:42:59 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19KIscLzl1KSrzlwNlyNE5K9rpVY4TTtZkK8q0/OV
-	vjaW/9pGfFtUL6
-From: Andreas Mueller <schnitzeltony@gmx.de>
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q2KlA-0006wb-BF for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Mar 2011 10:53:48 +0100
+Received: from f053045005.adsl.alicedsl.de ([78.53.45.5] helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q2KjP-0005bW-HR for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Mar 2011 09:51:59 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Mar 2011 09:35:01 +0100
-User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
+In-Reply-To: <201103230935.01227.schnitzeltony@gmx.de>
 References: <1299591298.3785.126.camel@mattotaupa>
 	<201103230133.06164.schnitzeltony@gmx.de>
 	<imc6ke$j7j$1@dough.gmane.org>
-In-Reply-To: <imc6ke$j7j$1@dough.gmane.org>
-MIME-Version: 1.0
-Message-Id: <201103230935.01227.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
+	<201103230935.01227.schnitzeltony@gmx.de>
+Date: Wed, 23 Mar 2011 10:51:58 +0100
+Message-ID: <1300873918.4101.4.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
 Subject: Re: [PATCH] xfce_session_4.6.{1, 2}: explicitly pass the path of `iceauth`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,48 +33,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Mar 2011 08:45:13 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 23 Mar 2011 09:53:48 -0000
+X-Groupsio-MsgNum: 30538
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-EQbCO/z4Rr45CyXecEup"
 
-On Wednesday 23 March 2011 08:14:22 Koen Kooi wrote:
-> On 23-03-11 01:33, Andreas Mueller wrote:
-> > Anyway: In 'xfce4-session' / config.log I found:
-> > | configure:15972: checking for iceauth
-> > | configure:15990: found */usr/bin/iceauth*
-> > | configure:16002: result: /usr/bin/iceauth
-> > 
-> > So - as Khem suggested - and with xfce4-session: RDEPENDS_${PN}="iceauth" I:
-> >   - changed iceauth to extent to iceauth-native.
-> >   - changed xfce4-session: DEPENDS = "iceauth-native ..."
-> 
-> No, it only wants to probe for the PATH of the binary to encode into the
-> result. We do NOT want target binaries to point to your builddir instead
-> of ${bindir}.
-> 
-> As I said before, Pauls patch does the right thing.
-Got it - sorry for the noise - have an ACK on Paul's patch :-)
+--=-EQbCO/z4Rr45CyXecEup
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+Am Mittwoch, den 23.03.2011, 09:35 +0100 schrieb Andreas Mueller:
+> On Wednesday 23 March 2011 08:14:22 Koen Kooi wrote:
+> > On 23-03-11 01:33, Andreas Mueller wrote:
 
-On Wednesday 23 March 2011 01:51:38 Paul Menzel wrote:
-> I did not check that. But why does not `RDEPENDS` pull that in?
-If I would understand that... But I think that is what happened to you in 
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-March/030721.html
-xfce4-settings has iceauth in DEPENDS & RDEPENDS since long time..
+[=E2=80=A6]
 
-> Have you run tested that? As far as I understood that path is put into
-> the resulting binary and, if I am not mistaken, the path will be
-> `/usr/bin/iceauth` on the target system.
-now yes - it failed - see above..
-> 
-> > Since xfce4.6 means huge rebuild for me (and I did only pick up what Khem
-> > suggested): Can anybody test this for xfce_session_4.6.{1, 2} and create
-> > the patches?
-> 
-> Could you send me the patch to get the native recipe for Xfce 4.8?
-Sorry - but what do you mean with *native* recipe for Xfce 4.8?
+> > > Since xfce4.6 means huge rebuild for me (and I did only pick up what =
+Khem
+> > > suggested): Can anybody test this for xfce_session_4.6.{1, 2} and cre=
+ate
+> > > the patches?
+> >=20
+> > Could you send me the patch to get the native recipe for Xfce 4.8?
+> Sorry - but what do you mean with *native* recipe for Xfce 4.8?
 
-Andreas
+You wrote that you had adapted/extended(?) `xfce-session_4.8.*.bb` to
+build a native package(?) (sorry). So I wanted to just see your
+`xfce-session_.4.8.*.bb` to know what to do.
 
 
+Thanks,
+
+Paul
+
+--=-EQbCO/z4Rr45CyXecEup
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2JwrcACgkQPX1aK2wOHVhGcgCgi2lSF1FLw67p37yoX8haEmrq
+xucAoIt6YTHpEWlhSKih/sROCjA/nM6u
+=YA/4
+-----END PGP SIGNATURE-----
+
+--=-EQbCO/z4Rr45CyXecEup--
