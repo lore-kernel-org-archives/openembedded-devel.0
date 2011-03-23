@@ -1,23 +1,41 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q2N4p-0008QU-Sq for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Mar 2011 13:22:15 +0100
-Received: from f053045005.adsl.alicedsl.de ([78.53.45.5] helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q2N34-0002lr-SC for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Mar 2011 12:20:27 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <sylvain.pare@gmail.com>) id 1Q2ODf-000179-Fy
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Mar 2011 14:35:27 +0100
+Received: by qwh5 with SMTP id 5so5835302qwh.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Mar 2011 06:33:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=g/ix2Z0Fcv5OND1eDvYFiWpJ/1wruvPXntjTEvyO8v0=;
+	b=WEdcGh8/dYZxOJLJBnLbbtHJAZQXK77cbMKz6BvsnXYu+cebYh6Gd9SNTRQywp6AmK
+	QcDEF6c9lHBVU8lz+C1TlXNMYZY4+kRvIkpN/XRHatJgI5CKtohSiGUn/PjGHPeccj7H
+	UXov30nE/RVPMya8xW/aafF6HQSgIhbl6XsAY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	b=cfk9IA0yDk+30EpBmlDb06CywQbZjtx12fLXv8fC6qtcGa1qFn7/d8FEGxqlXZTFW6
+	LHWLmgAX1hHm8P4ZGFY18bKEV2DtcflLy4YPv4mHWmprHefeSbiE6mJPe8QxSVr/nwbR
+	BANIlu2btgkDclKl0up93KtevcEqv3TABFwEg=
+Received: by 10.229.50.193 with SMTP id a1mr5766443qcg.177.1300887215261; Wed,
+	23 Mar 2011 06:33:35 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.229.98.202 with HTTP; Wed, 23 Mar 2011 06:33:15 -0700 (PDT)
+In-Reply-To: <1300881388.4101.23.camel@mattotaupa>
+References: <1300806683-17244-1-git-send-email-otavio@ossystems.com.br>
+	<1300806683-17244-5-git-send-email-otavio@ossystems.com.br>
+	<1300834528.3825.3.camel@mattotaupa>
+	<AANLkTim8KdVzogFp2hh5bTLxWnXvLzDOK8eb5E+-k+P1@mail.gmail.com>
+	<1300881388.4101.23.camel@mattotaupa>
+From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
+Date: Wed, 23 Mar 2011 14:33:15 +0100
+Message-ID: <AANLkTikhnHdQGGh-bkAs3si4PNg5NqGCJ1c2iQOkuwL-@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTimJyKwc34_gwpG0nkP9ZyXgs3vQm1ScwqtMrG6P@mail.gmail.com>
-References: <1300878254.4101.21.camel@mattotaupa>
-	<AANLkTimJyKwc34_gwpG0nkP9ZyXgs3vQm1ScwqtMrG6P@mail.gmail.com>
-Date: Wed, 23 Mar 2011 13:20:25 +0100
-Message-ID: <1300882825.4101.25.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: libarchive: task compile fails with `error: static declaration of 'wcscpy' follows non-static declaration`
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: [PATCH 4/4] vlc (1.1.4.1): depends on lua5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,48 +49,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Mar 2011 12:22:15 -0000
-X-Groupsio-MsgNum: 30553
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-WPeINJy/pQPd80USB5Sh"
+X-List-Received-Date: Wed, 23 Mar 2011 13:35:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-WPeINJy/pQPd80USB5Sh
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hello
+I was going to fill a bugrepport on OE's bugzilla but as you are already
+speaking of vlc building issue..
+It does not build for me neither : http://pastebin.com/raw.php?i=wK4Sxbv9
+Thanks by advance.
 
-Dear Kartik,
+Regards,
 
-
-Am Mittwoch, den 23.03.2011, 08:00 -0400 schrieb Kartik Mohta:
-
-> I had the same problem,
-> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3D6db4b9050e=
-0e8b963e2a6b63790e48e3042ea99e
-> solves it.
-
-I saw that and did `bitbake -k libxml2` beforehand but it did not fix
-the build. I will retry, just in case task configure was not rerun.
+Sylvain (aka GarthPS)
 
 
-Thanks,
+2011/3/23 Paul Menzel <paulepanter@users.sourceforge.net>
 
-Paul
+> Am Mittwoch, den 23.03.2011, 08:51 -0300 schrieb Otavio Salvador:
+> > On Tue, Mar 22, 2011 at 19:55, Paul Menzel
+> > <paulepanter@users.sourceforge.net> wrote:
+> > > What kind of error do you get? The recipe build fine for me using
+> > > `angstrom-2010.x` for `MACHINE = "beagleboard"`.
+> >
+> > It fails to find lua.h so probably you had it built due other dependency.
+>
+> No, I made a clean build, i. e. `rm -rf angstrom-dev`. Please post your
+> build configuration.
+>
+>
+> Thanks,
+>
+> Paul
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
-
-PS: My case shows one reason, why I think pasting error messages into
-commit messages is a good thing. ;-)
-
---=-WPeINJy/pQPd80USB5Sh
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk2J5YkACgkQPX1aK2wOHVgHBACbBL4U7jAYRHui3eUq1c58/k/v
-HOoAnRL3+d6NTVy3o8M4SSqb6gQSZra5
-=CKG3
------END PGP SIGNATURE-----
-
---=-WPeINJy/pQPd80USB5Sh--
