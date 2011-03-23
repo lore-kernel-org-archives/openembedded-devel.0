@@ -1,20 +1,40 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q2Lt6-00011l-Ro for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Mar 2011 12:06:21 +0100
-Received: from f053045005.adsl.alicedsl.de ([78.53.45.5] helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q2LrM-0008D6-1E for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Mar 2011 11:04:16 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <martin.jansa@gmail.com>) id 1Q2MDA-0007FH-Aw
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Mar 2011 12:26:48 +0100
+Received: by bwz10 with SMTP id 10so6411356bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Mar 2011 04:24:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=8yk9eLjMPSWKo0hOoiX/sj8zqSkuXTNhwN8QAX+UqhM=;
+	b=o3EuA0XRbWmsO9vMNPS2/5Fpbkpz/kEeWBAEqev/C85ixUMaV1hFCOfVMrdxMfSwxT
+	94+RV2EkDna2X9QmOR2+zE0swZz+AeFrJvR5KJcMrpFhFqAi59fhN/kRJmvAVw5gt24m
+	6b8Xt2wlAeWMeHVuqyaxYs51szKSnjLJZDVJ0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=Uhc9wJaIiDert1fDQBE9l9uaGVS5Am33vlsGQJnUkvP1xizroObXSInvEQ9Fp4GJ4M
+	BfsSvx0bEXh2tJs2rsSfk1TnufXYVdJ+CYzYdwSkWS0r1vdzbNJE2tM8xdNYtSCNEOHM
+	5lfuKm5p4s6BWjH82QYO64jEWcCWL95JFMlvE=
+Received: by 10.204.20.134 with SMTP id f6mr6018519bkb.165.1300879497301;
+	Wed, 23 Mar 2011 04:24:57 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id rb14sm540472bkb.9.2011.03.23.04.24.54
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 23 Mar 2011 04:24:55 -0700 (PDT)
+Date: Wed, 23 Mar 2011 12:24:48 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Mar 2011 12:04:14 +0100
-Message-ID: <1300878254.4101.21.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: libarchive: task compile fails with `error: static declaration of 'wcscpy' follows non-static declaration`
+Message-ID: <20110323112448.GE3418@jama.jama.net>
+References: <1300456829-25755-1-git-send-email-Martin.Jansa@gmail.com>
+	<20110323104755.GH21392@excalibur.local>
+MIME-Version: 1.0
+In-Reply-To: <20110323104755.GH21392@excalibur.local>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH 01/12] libnl: rename libnl2 to libnl as used in openembedded-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,105 +48,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Mar 2011 11:06:39 -0000
-X-Groupsio-MsgNum: 30545
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-GOsZe/RtKYpk+/aGJeWj"
+X-List-Received-Date: Wed, 23 Mar 2011 11:26:48 -0000
+X-Groupsio-MsgNum: 30546
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="imjhCm/Pyz7Rq5F2"
+Content-Disposition: inline
 
---=-GOsZe/RtKYpk+/aGJeWj
-Content-Type: text/plain; charset="UTF-8"
+--imjhCm/Pyz7Rq5F2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Dear OE folks
+On Wed, Mar 23, 2011 at 11:47:55AM +0100, Stefan Schmidt wrote:
+> Hello.
+>=20
+> On Fri, 2011-03-18 at 15:00, Martin Jansa wrote:
+> > * libnl1/libnl2 still conflicts even when using separate includedir so
+> >   it will be easier for distro maintainers to use only libnl1 or libnl2
+> >   by PREFERRED_VERSION
+>=20
+> For distros that want to support network-manager that still means that
+> both versions are being build and may clash as we have seen before.
 
+How do you build 2 versions of same package? Whole point of this patch
+series is to force distromaintainers to use only libnl_2.0.0 or
+libnl_1.1.0 based on PREFERRED_VERSION_libnl and this way keep them away
+=66rom shooting own foot by accident.
 
-trying to test the latest changes in `libarchive_2.8.4.bb` I hit the
-following error.
+> Just a remark. Personally I would like to go this route and maybe get
+> rid of libnl1 at all.
 
-	arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -march=3D=
-armv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interw=
-ork -mno-thumb --sysroot=3D/oe/build-minimal-eglibc/minimal-dev/sysroots/ar=
-mv7a-oe-linux-gnueabi -DHAVE_CONFIG_H -I. -I/oe/build-minimal-eglibc/minima=
-l-dev/sysroots/i686-linux/usr/include/libxml2 -fexpensive-optimizations -fo=
-mit-frame-pointer -frename-registers -Os -g -MT libarchive/archive_entry.lo=
- -MD -MP -MF libarchive/.deps/archive_entry.Tpo -c libarchive/archive_entry=
-.c  -fPIC -DPIC -o libarchive/.libs/archive_entry.o
-	libarchive/archive_entry.c:136:18: error: static declaration of 'wcscpy' f=
-ollows non-static declaration
-	/oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux-gnueabi/usr/=
-include/wchar.h:144:17: note: previous declaration of 'wcscpy' was here
-	libarchive/archive_entry.c:145:15: error: static declaration of 'wcslen' f=
-ollows non-static declaration
-	/oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux-gnueabi/usr/=
-include/wchar.h:284:15: note: previous declaration of 'wcslen' was here
-	arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -march=3D=
-armv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interw=
-ork -mno-thumb --sysroot=3D/oe/build-minimal-eglibc/minimal-dev/sysroots/ar=
-mv7a-oe-linux-gnueabi -DHAVE_CONFIG_H -I. -I/oe/build-minimal-eglibc/minima=
-l-dev/sysroots/i686-linux/usr/include/libxml2 -fexpensive-optimizations -fo=
-mit-frame-pointer -frename-registers -Os -g -MT libarchive/archive_entry_st=
-at.lo -MD -MP -MF libarchive/.deps/archive_entry_stat.Tpo -c libarchive/arc=
-hive_entry_stat.c -o libarchive/archive_entry_stat.o >/dev/null 2>&1
-	arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -march=3D=
-armv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interw=
-ork -mno-thumb --sysroot=3D/oe/build-minimal-eglibc/minimal-dev/sysroots/ar=
-mv7a-oe-linux-gnueabi -DHAVE_CONFIG_H -I. -I/oe/build-minimal-eglibc/minima=
-l-dev/sysroots/i686-linux/usr/include/libxml2 -fexpensive-optimizations -fo=
-mit-frame-pointer -frename-registers -Os -g -MT libarchive/archive_entry_st=
-rmode.lo -MD -MP -MF libarchive/.deps/archive_entry_strmode.Tpo -c libarchi=
-ve/archive_entry_strmode.c -o libarchive/archive_entry_strmode.o >/dev/null=
- 2>&1
-	arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -march=3D=
-armv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interw=
-ork -mno-thumb --sysroot=3D/oe/build-minimal-eglibc/minimal-dev/sysroots/ar=
-mv7a-oe-linux-gnueabi -DHAVE_CONFIG_H -I. -I/oe/build-minimal-eglibc/minima=
-l-dev/sysroots/i686-linux/usr/include/libxml2 -fexpensive-optimizations -fo=
-mit-frame-pointer -frename-registers -Os -g -MT libarchive/archive_entry_xa=
-ttr.lo -MD -MP -MF libarchive/.deps/archive_entry_xattr.Tpo -c libarchive/a=
-rchive_entry_xattr.c -o libarchive/archive_entry_xattr.o >/dev/null 2>&1
-	make[1]: *** [libarchive/archive_entry.lo] Error 1
-	make[1]: *** Waiting for unfinished jobs....
-	make[1]: Leaving directory `/oe/build-minimal-eglibc/minimal-dev/work/armv=
-7a-oe-linux-gnueabi/libarchive-2.8.4-r0/libarchive-2.8.4'
-	make: *** [all] Error 2
-	+ die 'oe_runmake failed'
-	+ oefatal 'oe_runmake failed'
-	+ echo FATAL: 'oe_runmake failed'
-	FATAL: oe_runmake failed
-	+ exit 1
+Yes this is step in direction to get rid of libnl1 :). I'm using
+libnl_2.0.0 from oe-core in meta-shr, so this change is making diff
+between recipes in oe.dev and meta-shr smaller.
 
-The following configuration is used.
+Regards,
 
-	Build Configuration:
-	BB_VERSION        =3D "1.12.0"
-	METADATA_BRANCH   =3D "master"
-	METADATA_REVISION =3D "79d295c"
-	TARGET_ARCH       =3D "arm"
-	TARGET_OS         =3D "linux-gnueabi"
-	MACHINE           =3D "beagleboard"
-	DISTRO            =3D "minimal"
-	DISTRO_VERSION    =3D "dev-snapshot-20110323"
-	TARGET_FPU        =3D "soft"
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-I will test a build using `angstrom-2010.x` next, but will not have time
-to track down the fix.
-
-
-Thanks,
-
-Paul
-
---=-GOsZe/RtKYpk+/aGJeWj
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+--imjhCm/Pyz7Rq5F2
+Content-Type: application/pgp-signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v2.0.17 (GNU/Linux)
 
-iEYEABECAAYFAk2J064ACgkQPX1aK2wOHVhewACffEl4ctDjBOPewXK33nPMAowe
-YxAAn1UEXwd7bR36OYMp7WCL7FuiLzVK
-=ofbn
+iEYEARECAAYFAk2J2IAACgkQN1Ujt2V2gBz1KwCgtiGLxtbu2QCW0wZr8cqJKvMj
+0gsAnR+Oy8w9yTSuAuoCAtW61lZ31oyi
+=z4aq
 -----END PGP SIGNATURE-----
 
---=-GOsZe/RtKYpk+/aGJeWj--
+--imjhCm/Pyz7Rq5F2--
