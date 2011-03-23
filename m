@@ -1,26 +1,20 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1Q2Le5-0002xQ-Db
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Mar 2011 11:50:33 +0100
-Received: (qmail invoked by alias); 23 Mar 2011 10:27:55 -0000
-Received: from mail2.zera.de (EHLO localhost.localdomain) [62.225.102.139]
-	by mail.gmx.net (mp005) with SMTP; 23 Mar 2011 11:27:55 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1+jOkNdRmGjXtJeuaPS34bEKNb+ode5CwtwV/nUvF
-	QrkqxNdE3pT/9m
-From: Andreas Mueller <schnitzeltony@gmx.de>
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q2Lt6-00011l-Ro for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Mar 2011 12:06:21 +0100
+Received: from f053045005.adsl.alicedsl.de ([78.53.45.5] helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q2LrM-0008D6-1E for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Mar 2011 11:04:16 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Mar 2011 11:19:49 +0100
-User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
-References: <1299591298.3785.126.camel@mattotaupa>
-	<201103230935.01227.schnitzeltony@gmx.de>
-	<1300873918.4101.4.camel@mattotaupa>
-In-Reply-To: <1300873918.4101.4.camel@mattotaupa>
-MIME-Version: 1.0
-Message-Id: <201103231119.49415.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: [PATCH] xfce_session_4.6.{1, 2}: explicitly pass the path of `iceauth`
+Date: Wed, 23 Mar 2011 12:04:14 +0100
+Message-ID: <1300878254.4101.21.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: libarchive: task compile fails with `error: static declaration of 'wcscpy' follows non-static declaration`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,88 +28,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Mar 2011 10:50:33 -0000
-X-Groupsio-MsgNum: 30544
-Content-Type: Multipart/Mixed;
-  boundary="Boundary-00=_FlciNWHq+XuUsxH"
+X-List-Received-Date: Wed, 23 Mar 2011 11:06:39 -0000
+X-Groupsio-MsgNum: 30545
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-GOsZe/RtKYpk+/aGJeWj"
 
---Boundary-00=_FlciNWHq+XuUsxH
-Content-Type: Text/Plain;
-  charset="utf-8"
+--=-GOsZe/RtKYpk+/aGJeWj
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wednesday 23 March 2011 10:51:58 Paul Menzel wrote:
-> Am Mittwoch, den 23.03.2011, 09:35 +0100 schrieb Andreas Mueller:
-> > On Wednesday 23 March 2011 08:14:22 Koen Kooi wrote:
-> > > On 23-03-11 01:33, Andreas Mueller wrote:
-> [=E2=80=A6]
->=20
-> > > > Since xfce4.6 means huge rebuild for me (and I did only pick up what
-> > > > Khem suggested): Can anybody test this for xfce_session_4.6.{1, 2}
-> > > > and create the patches?
-> > >=20
-> > > Could you send me the patch to get the native recipe for Xfce 4.8?
-> >=20
-> > Sorry - but what do you mean with *native* recipe for Xfce 4.8?
->=20
-> You wrote that you had adapted/extended(?) `xfce-session_4.8.*.bb` to
-> build a native package(?) (sorry). So I wanted to just see your
-> `xfce-session_.4.8.*.bb` to know what to do.
-Oh I see - sorry for causing confusion: I added native support for iceauth.
+Dear OE folks
 
-With the recipes attached I get=20
-=2D iceauth installed on target image=20
-=2D xfce4-session not complaining about missing iceauth
 
-Still have no idea why iceauth was not found in target image...
+trying to test the latest changes in `libarchive_2.8.4.bb` I hit the
+following error.
 
-Andreas
+	arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -march=3D=
+armv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interw=
+ork -mno-thumb --sysroot=3D/oe/build-minimal-eglibc/minimal-dev/sysroots/ar=
+mv7a-oe-linux-gnueabi -DHAVE_CONFIG_H -I. -I/oe/build-minimal-eglibc/minima=
+l-dev/sysroots/i686-linux/usr/include/libxml2 -fexpensive-optimizations -fo=
+mit-frame-pointer -frename-registers -Os -g -MT libarchive/archive_entry.lo=
+ -MD -MP -MF libarchive/.deps/archive_entry.Tpo -c libarchive/archive_entry=
+.c  -fPIC -DPIC -o libarchive/.libs/archive_entry.o
+	libarchive/archive_entry.c:136:18: error: static declaration of 'wcscpy' f=
+ollows non-static declaration
+	/oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux-gnueabi/usr/=
+include/wchar.h:144:17: note: previous declaration of 'wcscpy' was here
+	libarchive/archive_entry.c:145:15: error: static declaration of 'wcslen' f=
+ollows non-static declaration
+	/oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux-gnueabi/usr/=
+include/wchar.h:284:15: note: previous declaration of 'wcslen' was here
+	arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -march=3D=
+armv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interw=
+ork -mno-thumb --sysroot=3D/oe/build-minimal-eglibc/minimal-dev/sysroots/ar=
+mv7a-oe-linux-gnueabi -DHAVE_CONFIG_H -I. -I/oe/build-minimal-eglibc/minima=
+l-dev/sysroots/i686-linux/usr/include/libxml2 -fexpensive-optimizations -fo=
+mit-frame-pointer -frename-registers -Os -g -MT libarchive/archive_entry_st=
+at.lo -MD -MP -MF libarchive/.deps/archive_entry_stat.Tpo -c libarchive/arc=
+hive_entry_stat.c -o libarchive/archive_entry_stat.o >/dev/null 2>&1
+	arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -march=3D=
+armv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interw=
+ork -mno-thumb --sysroot=3D/oe/build-minimal-eglibc/minimal-dev/sysroots/ar=
+mv7a-oe-linux-gnueabi -DHAVE_CONFIG_H -I. -I/oe/build-minimal-eglibc/minima=
+l-dev/sysroots/i686-linux/usr/include/libxml2 -fexpensive-optimizations -fo=
+mit-frame-pointer -frename-registers -Os -g -MT libarchive/archive_entry_st=
+rmode.lo -MD -MP -MF libarchive/.deps/archive_entry_strmode.Tpo -c libarchi=
+ve/archive_entry_strmode.c -o libarchive/archive_entry_strmode.o >/dev/null=
+ 2>&1
+	arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -march=3D=
+armv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interw=
+ork -mno-thumb --sysroot=3D/oe/build-minimal-eglibc/minimal-dev/sysroots/ar=
+mv7a-oe-linux-gnueabi -DHAVE_CONFIG_H -I. -I/oe/build-minimal-eglibc/minima=
+l-dev/sysroots/i686-linux/usr/include/libxml2 -fexpensive-optimizations -fo=
+mit-frame-pointer -frename-registers -Os -g -MT libarchive/archive_entry_xa=
+ttr.lo -MD -MP -MF libarchive/.deps/archive_entry_xattr.Tpo -c libarchive/a=
+rchive_entry_xattr.c -o libarchive/archive_entry_xattr.o >/dev/null 2>&1
+	make[1]: *** [libarchive/archive_entry.lo] Error 1
+	make[1]: *** Waiting for unfinished jobs....
+	make[1]: Leaving directory `/oe/build-minimal-eglibc/minimal-dev/work/armv=
+7a-oe-linux-gnueabi/libarchive-2.8.4-r0/libarchive-2.8.4'
+	make: *** [all] Error 2
+	+ die 'oe_runmake failed'
+	+ oefatal 'oe_runmake failed'
+	+ echo FATAL: 'oe_runmake failed'
+	FATAL: oe_runmake failed
+	+ exit 1
 
---Boundary-00=_FlciNWHq+XuUsxH
-Content-Type: text/plain;
-  charset="UTF-8";
-  name="iceauth_1.0.4.bb"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename="iceauth_1.0.4.bb"
+The following configuration is used.
 
-require xorg-app-common.inc
-DESCRIPTION = "a tool for manipulating ICE protocol authorization records"
-DEPENDS += " libice"
-PE = "1"
-PR = "${INC_PR}.1"
+	Build Configuration:
+	BB_VERSION        =3D "1.12.0"
+	METADATA_BRANCH   =3D "master"
+	METADATA_REVISION =3D "79d295c"
+	TARGET_ARCH       =3D "arm"
+	TARGET_OS         =3D "linux-gnueabi"
+	MACHINE           =3D "beagleboard"
+	DISTRO            =3D "minimal"
+	DISTRO_VERSION    =3D "dev-snapshot-20110323"
+	TARGET_FPU        =3D "soft"
 
-BBCLASSEXTEND="native"
+I will test a build using `angstrom-2010.x` next, but will not have time
+to track down the fix.
 
-SRC_URI[archive.md5sum] = "bb2e4d2611047f7c5a1a82ec956a9de4"
-SRC_URI[archive.sha256sum] = "0ee6fd4554f0131b1ed526ee00b9cf643e7dc97eb70fb51448848ef2f349938d"
 
---Boundary-00=_FlciNWHq+XuUsxH
-Content-Type: text/plain;
-  charset="UTF-8";
-  name="xfce4-session_4.8.1.bb"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename="xfce4-session_4.8.1.bb"
+Thanks,
 
-DESCRIPTION = "xfce4-session is a session manager for Xfce 4 Desktop Environment"
-DEPENDS = "libwnck libxfce4ui libxfce4util dbus iceauth-native xfce-utils"
-RDEPENDS_${PN} = "iceauth xinit dbus-x11"
-SECTION = "x11"
+Paul
 
-PR = "r0"
+--=-GOsZe/RtKYpk+/aGJeWj
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
-inherit xfce46
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-EXTRA_OECONF += "ac_cv_path_ICEAUTH=${bindir}/iceauth"
+iEYEABECAAYFAk2J064ACgkQPX1aK2wOHVhewACffEl4ctDjBOPewXK33nPMAowe
+YxAAn1UEXwd7bR36OYMp7WCL7FuiLzVK
+=ofbn
+-----END PGP SIGNATURE-----
 
-FILES_${PN} += "${libdir}/xfce4/*/*"
-FILES_${PN} += "${datadir}/xfce4/*/*"
-FILES_${PN} += "${datadir}/themes/Default/balou/*"
-
-FILES_${PN}-dbg += "${libdir}/xfce4/*/*/.debug"
-
-SRC_URI[md5sum] = "478080ff666fdd36786a243829663efd"
-SRC_URI[sha256sum] = "1df52a77d87ed4d27b4f40a2f03a0b6334422d64bdc4e31b9aac22e25e68b829"
-
---Boundary-00=_FlciNWHq+XuUsxH--
+--=-GOsZe/RtKYpk+/aGJeWj--
