@@ -1,23 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q2gex-0000vl-1n for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 10:16:51 +0100
-Received: from f053039182.adsl.alicedsl.de ([78.53.39.182]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q2gdB-0005Vy-B9 for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 09:15:01 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q2hSx-00023y-CV for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 11:08:31 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q2h7A-0006M6-7j for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 10:46:00 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Mar 2011 10:46:00 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Mar 2011 10:46:00 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTikXA3RfJ2jfnf+ct=eCVmOS4CC1xPg1Q94JDeGT@mail.gmail.com>
-References: <AANLkTikXA3RfJ2jfnf+ct=eCVmOS4CC1xPg1Q94JDeGT@mail.gmail.com>
-Date: Thu, 24 Mar 2011 10:15:00 +0100
-Message-ID: <1300958100.3795.13.camel@mattotaupa>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 24 Mar 2011 10:45:42 +0100
+Message-ID: <imf3s6$rl0$1@dough.gmane.org>
+References: <20110323162552.GH3418@jama.jama.net>	<1300899470-10514-1-git-send-email-Martin.Jansa@gmail.com>	<imdiri$aic$1@dough.gmane.org>	<20110323200206.GL3418@jama.jama.net>	<imf0s2$atc$1@dough.gmane.org>
+	<20110324090223.GC20421@jama.jama.net>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH 1/2] TI IPC: Fixes for license, dependencies and installer unpack
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <20110324090223.GC20421@jama.jama.net>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH 1/2] libnl-1.1: rename to libnl1 and build only static lib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,108 +43,144 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 09:16:51 -0000
-X-Groupsio-MsgNum: 30576
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-M8Ir2//U0inFSECgPWjO"
+X-List-Received-Date: Thu, 24 Mar 2011 10:08:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-M8Ir2//U0inFSECgPWjO
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Dear Siddharth,
+On 24-03-11 10:02, Martin Jansa wrote:
+> On Thu, Mar 24, 2011 at 09:54:25AM +0100, Koen Kooi wrote:
+> On 23-03-11 21:02, Martin Jansa wrote:
+>>>> On Wed, Mar 23, 2011 at 08:49:06PM +0100, Koen Kooi wrote:
+>>>> Can you regenerate this on top of .dev? I couldn't get it to apply, even
+>>>> after renaming files -> libnl-1.1
+>>>>
+>>>>> Did you try to apply it on top of that 12patch series?
+>>>>
+>>>>> Or you can apply top 14 from
+>>>>> http://gitorious.org/~jama/angstrom/jama-shr-experimental/
+> 
+> I applied the top 14, clean libnl* and nm, built libnl1 and libnl and I get:
+> 
+> ps/libip6_manager_la-nm-ip6-manager.Tpo -c nm-ip6-manager.c  -fPIC -DPIC
+> -o .libs/libip6_manager_la-nm-ip6-manager.o
+> | nm-ip6-manager.c: In function 'process_addr':
+> | nm-ip6-manager.c:488:46: error: too few arguments to function
+> 'nl_cache_include'
+> |
+> /OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/netlink/cache.h:64:14:
+> note: declared here
+> | nm-ip6-manager.c: In function 'process_route':
+> | nm-ip6-manager.c:528:47: error: too few arguments to function
+> 'nl_cache_include'
+> |
+> /OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/netlink/cache.h:64:14:
+> note: declared here
+> | nm-ip6-manager.c: In function 'nm_ip6_manager_get_ip6_config':
+> | nm-ip6-manager.c:944:2: warning: passing argument 1 of
+> 'nl_cache_refill' from incompatible pointer type
+> |
+> /OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/netlink/cache.h:56:14:
+> note: expected 'struct nl_sock *' but argument is of type 'struct
+> nl_handle *'
+> | nm-ip6-manager.c:945:2: warning: passing argument 1 of
+> 'nl_cache_refill' from incompatible pointer type
+> |
+> /OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/netlink/cache.h:56:14:
+> note: expected 'struct nl_sock *' but argument is of type 'struct
+> nl_handle *'
+> | nm-ip6-manager.c:960:13: warning: assignment makes pointer from
+> integer without a cast
+> | nm-ip6-manager.c:985:3: error: too few arguments to function
+> 'rtnl_route_get_metric'
+> |
+> /OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/netlink/route/route.h:83:12:
+> note: declared here
+> | nm-ip6-manager.c: In function 'nm_ip6_manager_init':
+> | nm-ip6-manager.c:1073:2: warning: passing argument 1 of
+> 'rtnl_addr_alloc_cache' from incompatible pointer type
+> |
+> /OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/netlink/route/addr.h:31:12:
+> note: expected 'struct nl_sock *' but argument is ofERROR: Function
+> 'do_compile' failed (see
+> /OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/networkmanager-0.8.1-r2/temp/log.do_compile.20022
+> for further information)
+> |  type 'struct nl_handle *'
+> | nm-ip6-manager.c:1073:2: error: too few arguments to function
+> 'rtnl_addr_alloc_cache'
+> |
+> /OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/netlink/route/addr.h:31:12:
+> note: declared here
+> | nm-ip6-manager.c:1074:2: warning: passing argument 1 of
+> 'rtnl_route_alloc_cache' from incompatible pointer type
+> |
+> /OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/netlink/route/route.h:48:12:
+> note: expected 'struct nl_sock *' but argument is of type 'struct
+> nl_handle *'
+> | nm-ip6-manager.c:1074:2: error: too few arguments to function
+> 'rtnl_route_alloc_cache'
+> |
+> /OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/netlink/route/route.h:48:12:
+> note: declared here
+> | make[4]: *** [libip6_manager_la-nm-ip6-manager.lo] Error 1
+> | make[4]: Leaving directory
+> `/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/networkmanager-0.8.1-r2/NetworkManager-0.8.1/src/ip6-manager'
+> | make[3]: *** [all-recursive] Error 1
+> | make[3]: Leaving directory
+> `/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/networkmanager-0.8.1-r2/NetworkManager-0.8.1/src'
+> | make[2]: *** [all] Error 2
+> | make[2]: Leaving directory
+> `/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/networkmanager-0.8.1-r2/NetworkManager-0.8.1/src'
+> | make[1]: *** [all-recursive] Error 1
+> | make[1]: Leaving directory
+> `/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/networkmanager-0.8.1-r2/NetworkManager-0.8.1'
+> | make: *** [all] Error 2
+> | + die 'oe_runmake failed'
+> | + oefatal 'oe_runmake failed'
+> | + echo FATAL: 'oe_runmake failed'
+> | FATAL: oe_runmake failed
+> | + exit 1
+> 
+> So there still is a header clash by the looks of it. Did I miss a patch?
+> 
+>> I've fixed nm only in
+>> recipes/networkmanager/networkmanager_git.bb
+>> where was
+>> DEFAULT_PREFERENCE_angstrom = "1"
+>> and highest PV
+> 
+>> this looks like
+>> recipes/networkmanager/networkmanager_0.8.1.bb
+>> and exactly same errors like I had with git version (backend subdir will
+>> be next to fail)
+> 
+>> you can add/adapt
+>> recipes/networkmanager/networkmanager/0001-respect-libnl-flags-also-in-backends-ip6-manager.patch
+>> if you need 0.8.1 too
 
+That worked!
 
-Am Donnerstag, den 24.03.2011, 14:22 +0530 schrieb Siddharth Heroor:
-> * Correct the license from TI to BSD.
-> * Fix dependencies
+I will adapt it since I'd like this to go into 2011.03-maintenance as well.
 
-Also full stop at the end. ;-)
+Patch is here:
+http://dominion.thruhere.net/koen/angstrom/0001-networkmanager-0.8.1-fix-build-against-libl-using-th.patch
 
-> * Update the installer unpack commands for latest releases.
->=20
-> Signed-off-by: Siddharth Heroor <heroor@ti.com>
-> ---
->  recipes/ti/ti-ipc.inc |    9 ++++++---
->  1 files changed, 6 insertions(+), 3 deletions(-)
->=20
-> diff --git a/recipes/ti/ti-ipc.inc b/recipes/ti/ti-ipc.inc
-> index cd6ad6e..28f8525 100644
-> --- a/recipes/ti/ti-ipc.inc
-> +++ b/recipes/ti/ti-ipc.inc
-> @@ -1,20 +1,23 @@
->  DESCRIPTION =3D "TI Inter Process Ccommunication (IPC) Mechanisms (for
-> Uni- and Multi- Processor Configurations)"
+For the whole series:
 
-Your mailer mangled the patch by adding line breaks.
+Acked-by: Koen Kooi <koen@dominion.thruhere.net>
 
->  HOMEPAGE =3D "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targe=
-tcontent/ipc/index.html"
-> +
+regards,
 
-I think no empty line is needed [1].
-
->  SECTION =3D "devel"
-> -LICENSE =3D "TI"
-> +LICENSE =3D "BSD"
->=20
->  require ti-paths.inc
->  require ti-staging.inc
->  require ti-eula-unpack.inc
->=20
-> -PR =3D "r2"
-> +PR =3D "r3"
->=20
->  S =3D "${WORKDIR}/ipc_${PV}"
->=20
->  SRC_URI =3D "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/target=
-content/ipc/${PV}/exports/ipc_setuplinux_${PV}.bin;name=3Dipcbin"
->=20
-> +DEPENDS =3D "ti-sysbios ti-cgt6x ti-xdctools"
-> +
-
-Did it work before?
-
->  BINFILE=3D"ipc_setuplinux_${PV}.bin"
-> -TI_BIN_UNPK_CMDS=3D"Y: qY:workdir:Y"
-> +TI_BIN_UNPK_CMDS=3D"Y: q:workdir:Y"
-
-Will this work with the older versions, since it is an include file.
-
->  do_install() {
->      install -d ${D}${IPC_INSTALL_DIR_RECIPE}
-
-Please resend as =C2=BBPATCH v2=C2=AB. Your other patch was also corrupted.
-
-Two additional comments.
-
-1. I would prefer one commit for each change.
-2. Is it true that `ti-ipc` as committed in 32336b9a [1] was only usable
-for the TI folks and just now it is released to and usable for the
-public? This should be explained in the commit message and that the
-first public version will be committed in the next commit.
-
-
-Thanks,
-
-Paul
-
-
-[1] http://openembedded.org/index.php/Styleguide
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D32336b9=
-a0e785f2f13d8cc36aefcaa2be27141da
-
---=-M8Ir2//U0inFSECgPWjO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAk2LC5MACgkQPX1aK2wOHVgWaQCfZpX09PWAMczB1cQAI80VKurb
-FngAnRllc/m93hjnzGwUtuB3TUgrcKRg
-=FcnL
+iD8DBQFNixLGMkyGM64RGpERAihzAJ9RVZzfyPnOYyEGM0K5AcmIsXz/BQCaA39i
+MoqqmxpHxqlyUNj8pQCocBk=
+=leDh
 -----END PGP SIGNATURE-----
 
---=-M8Ir2//U0inFSECgPWjO--
+
+
