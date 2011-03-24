@@ -1,28 +1,23 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <a0875592@swubn01>) id 1Q2kiZ-00037G-NO
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 14:36:52 +0100
-Received: from dbdp31.itg.ti.com ([172.24.170.98])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id p2OD1Wbu016676
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2011 08:01:34 -0500
-Received: from swubn01 (localhost [127.0.0.1])
-	by dbdp31.itg.ti.com (8.13.8/8.13.8) with ESMTP id p2OD1Vm6010943;
-	Thu, 24 Mar 2011 18:31:31 +0530 (IST)
-Received: from a0875592 by swubn01 with local (Exim 4.71)
-	(envelope-from <a0875592@swubn01>)
-	id 1Q2kAN-00074O-Fo; Thu, 24 Mar 2011 18:31:31 +0530
-From: Siddharth Heroor <heroor@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q2kwU-0003MP-Ar for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 14:51:14 +0100
+Received: from f053039182.adsl.alicedsl.de ([78.53.39.182]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q2kui-0008Tz-8x for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 13:49:24 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Mar 2011 18:31:16 +0530
-Message-Id: <1300971676-31774-3-git-send-email-heroor@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1300971676-31774-1-git-send-email-heroor@gmail.com>
 References: <1300971676-31774-1-git-send-email-heroor@gmail.com>
-Cc: Siddharth Heroor <heroor@ti.com>
-Subject: [PATCH 3/3] TI IPC: Add version 1.22.04.25
+Date: Thu, 24 Mar 2011 14:49:22 +0100
+Message-ID: <1300974563.3795.29.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH 1/3] TI IPC: Fix License field.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,49 +31,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 13:36:52 -0000
+X-List-Received-Date: Thu, 24 Mar 2011 13:51:14 -0000
+X-Groupsio-MsgNum: 30598
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-/hc1ROQRFSyiJl/RkaP/"
 
-From: Siddharth Heroor <heroor@ti.com>
+--=-/hc1ROQRFSyiJl/RkaP/
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-* This version is one the first versions of TI IPC available.
-* Fix the installer installer command in the include file.
-  Since this is the first version available on OE, changing
-  this does not affect any other versions.
+Am Donnerstag, den 24.03.2011, 18:31 +0530 schrieb Siddharth Heroor:
+> From: Siddharth Heroor <heroor@ti.com>
+>=20
+> * The correct license for TI IPC is BSD and not TI.
 
-Signed-off-by: Siddharth Heroor <heroor@ti.com>
----
- recipes/ti/ti-ipc.inc           |    2 +-
- recipes/ti/ti-ipc_1.22.04.25.bb |    6 ++++++
- 2 files changed, 7 insertions(+), 1 deletions(-)
- create mode 100644 recipes/ti/ti-ipc_1.22.04.25.bb
+Was the original license a mistake or was it relicensed?
 
-diff --git a/recipes/ti/ti-ipc.inc b/recipes/ti/ti-ipc.inc
-index 2a23a9b..0bc6218 100644
---- a/recipes/ti/ti-ipc.inc
-+++ b/recipes/ti/ti-ipc.inc
-@@ -15,7 +15,7 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ip
- 
- DEPENDS = "ti-sysbios ti-cgt6x ti-xdctools"
- BINFILE="ipc_setuplinux_${PV}.bin"
--TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
-+TI_BIN_UNPK_CMDS="Y: q:workdir:Y"
- 
- do_install() {
-     install -d ${D}${IPC_INSTALL_DIR_RECIPE}
-diff --git a/recipes/ti/ti-ipc_1.22.04.25.bb b/recipes/ti/ti-ipc_1.22.04.25.bb
-new file mode 100644
-index 0000000..1573dce
---- /dev/null
-+++ b/recipes/ti/ti-ipc_1.22.04.25.bb
-@@ -0,0 +1,6 @@
-+require ti-ipc.inc
-+
-+PV = "1_22_04_25"
-+
-+SRC_URI[ipcbin.md5sum] = "aaa7f3776794a92b4226cd923c7cd956"
-+SRC_URI[ipcbin.sha256sum] = "b33e25e0330719c2857a5ca3abccd03fe1b55a9300b2f825707f2bc64b84c883"
--- 
-1.7.0.4
+> Signed-off-by: Siddharth Heroor <heroor@ti.com>
+> ---
+>  recipes/ti/ti-ipc.inc |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/recipes/ti/ti-ipc.inc b/recipes/ti/ti-ipc.inc
+> index cd6ad6e..fc9b908 100644
+> --- a/recipes/ti/ti-ipc.inc
+> +++ b/recipes/ti/ti-ipc.inc
+> @@ -1,7 +1,7 @@
+>  DESCRIPTION =3D "TI Inter Process Ccommunication (IPC) Mechanisms (for U=
+ni- and Multi- Processor Configurations)"
+>  HOMEPAGE =3D "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targe=
+tcontent/ipc/index.html"
+>  SECTION =3D "devel"
+> -LICENSE =3D "TI"=20
+> +LICENSE =3D "BSD"=20
+> =20
+>  require ti-paths.inc
+>  require ti-staging.inc
+
+All Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>. I would
+push them or do the TI people want to push these?
 
 
+Thanks,
 
+Paul
+
+--=-/hc1ROQRFSyiJl/RkaP/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2LS+IACgkQPX1aK2wOHVjAIACeMZ3MCgbFEjRgWzEK2EP8+WHz
+iIYAn3KWJpZFArBjGgjykhbd/67GQKRq
+=HJ2E
+-----END PGP SIGNATURE-----
+
+--=-/hc1ROQRFSyiJl/RkaP/--
