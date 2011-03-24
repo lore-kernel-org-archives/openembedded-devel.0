@@ -1,37 +1,37 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q2hWB-0002BU-J2
+	(envelope-from <martin.jansa@gmail.com>) id 1Q2hWK-0002BU-9o
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 11:11:51 +0100
+	Thu, 24 Mar 2011 11:12:00 +0100
 Received: by mail-bw0-f47.google.com with SMTP id 10so7236709bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2011 03:10:01 -0700 (PDT)
+	Thu, 24 Mar 2011 03:10:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:subject:date:message-id:x-mailer
 	:in-reply-to:references;
-	bh=wouwxdktdP7o1297m7Zq0Rd//u/77Vv/07duLo94JIA=;
-	b=oBIIDHxnZ7x1J903Z+QZ78JFq5MRhA5xjObd3OUlva5KrwjzuBl9gVnS45Zl3s9AcU
-	7j9UY1GF0Cc/FVFPlDn+jDLlXZiXlPcEEfcy2wP3ZrnCXkyjKxU2WwvQ+3sl8o+zhKdy
-	ChZX/sAAf42qOh4b6jsTa8uUT8wkS1zLIJclI=
+	bh=gSDUeMI1AjGA6VOVbCM3Jipr9S94BFjTecmD5QhCjmo=;
+	b=cFe6TiMwD+fn9gLA9DHHhAWDJH5m6H0xvX5wxlsQuR9tJC+ZFUdsLIvLSw89rWGpDO
+	BQ2jl5eArFi9HMjGd4HcxkLHfhC+A4qA0mIDxcoLu6xlQFID4Yn2ASYi2BEiEpi0f/uH
+	GW1wizP1SN+sZMnzpEz2LSYHmlb53aVTtxLso=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=mtc+s3QCPdicFwu3jI4L75K2GkzB+TTPGDwyEpeodGaQRm4tfpVVoMfD6yoeeC9/10
-	GFpftyT0LY9jv6NvWIcHYVsqBQpnxy1uXb/34OMYIXxMwhqNivOhMWUBjCvP9P1Vwrzy
-	DfhwyzUZCHUIC23FUXIJqMkFa2qIi87c163eU=
-Received: by 10.204.143.4 with SMTP id s4mr6329135bku.98.1300961401644;
-	Thu, 24 Mar 2011 03:10:01 -0700 (PDT)
+	b=G1+vgO8tWDjneLQx+rGBMpRMs0SqQKyhU+I9O8RJA+7V/5Yd+MG/4gPNbqKh3OTqQL
+	1sUD97ZaND5KR2sm1DHzbP/cERw4EJY6/547mGzxiv29rklxMLVP5F2ijmsUg+L/NfEE
+	MfpNKKa3UPty7wXxLkW9OEmJauCMVxnsU7Op8=
+Received: by 10.204.175.194 with SMTP id bb2mr7230917bkb.121.1300961410366;
+	Thu, 24 Mar 2011 03:10:10 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id w3sm6583898bkt.17.2011.03.24.03.10.00
+	by mx.google.com with ESMTPS id w3sm6584003bkt.17.2011.03.24.03.10.08
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 24 Mar 2011 03:10:00 -0700 (PDT)
+	Thu, 24 Mar 2011 03:10:09 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Mar 2011 11:09:54 +0100
-Message-Id: <d4a17c4542c760ec7a091fc162ae2cfd26f66fc9.1300961186.git.Martin.Jansa@gmail.com>
+Date: Thu, 24 Mar 2011 11:10:02 +0100
+Message-Id: <e3233329efa0d0b384f4d3e5cc9970441f209df0.1300961186.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.4.1
 In-Reply-To: <cover.1300961186.git.Martin.Jansa@gmail.com>
 References: <cover.1300961186.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 1/7] libgpg-error: add checksums
+Subject: [PATCH 2/7] mime-support: add LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,26 +45,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 10:11:51 -0000
+X-List-Received-Date: Thu, 24 Mar 2011 10:12:00 -0000
 
 ---
- .../libgpg-error/libgpg-error_1.8.bb               |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ .../mime-support/mime-support_3.44.bb              |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libgpg-error/libgpg-error_1.8.bb b/meta-oe/recipes-support/libgpg-error/libgpg-error_1.8.bb
-index 5f6b72c..19a3c26 100644
---- a/meta-oe/recipes-support/libgpg-error/libgpg-error_1.8.bb
-+++ b/meta-oe/recipes-support/libgpg-error/libgpg-error_1.8.bb
-@@ -9,7 +9,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
-                     file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
-                     file://src/gpg-error.h;endline=23;md5=83c16c8f5cea85affa1ff270a6f4fcff \
-                     file://src/init.c;endline=20;md5=b69742f2a8827d494c6f6a4b1768416c"
--
-+SRC_URI[md5sum] = "1d2005268a2f096db28cf9cf77b3229a"
-+SRC_URI[sha256sum] = "bdfbf2677147239d2d26d4e37f44635d9fd97c133c9ef9fd9793a12a059508c5"
+diff --git a/meta-oe/recipes-support/mime-support/mime-support_3.44.bb b/meta-oe/recipes-support/mime-support/mime-support_3.44.bb
+index 415022a..99c2af7 100644
+--- a/meta-oe/recipes-support/mime-support/mime-support_3.44.bb
++++ b/meta-oe/recipes-support/mime-support/mime-support_3.44.bb
+@@ -1,6 +1,7 @@
+ SECTION = "base"
+ DESCRIPTION = "MIME files 'mime.types' & 'mailcap', and support programs"
+ LICENSE = "PD"
++LIC_FILES_CHKSUM = "file://debian/README;md5=36bbe2ace0a05c3fb684b73208fbf30b"
  
- SECTION = "libs"
- LICENSE = "GPLv2+ & LGPLv2.1+"
+ DEPENDS = "file"
+ RRECOMMENDS_${PN} = "file"
 -- 
 1.7.4.1
 
