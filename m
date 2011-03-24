@@ -1,24 +1,34 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q2t1U-0005zO-Ei for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 23:28:56 +0100
-Received: from f053039182.adsl.alicedsl.de ([78.53.39.182]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q2szh-0004Ge-Vr for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 22:27:06 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <martin.jansa@gmail.com>) id 1Q2tvz-0004AQ-Sg
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Mar 2011 00:27:19 +0100
+Received: by bwz10 with SMTP id 10so577628bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Mar 2011 16:25:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=K9Qy+dRnXpZVxKMNPh0kK1a3s9SlOiWYEEFJysvBBCE=;
+	b=Kg4ey+zr1Bk3mM6UlKyWfL7POAe7/G3x7toPbqfTRAyk7X64/CP6F95p0G7fR9azSR
+	oZuwdo+d+Q3sj+Z1ECZTZiUamx2flpTx1c9sz9AeanS73I9gQ8IewLQne76ODNDzcPUq
+	bCP9Kzl4kTeePgswiL0VPQE+9GD2UW7uwTVyc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=M0X30dHVXbZzIw1rp1SqHEfrDQwnrcYfh7stAYQoILP7eccD44ZYKH6HpuTrLEbXfg
+	tUqYleBPuNOui751k5sXg/Zmlp2i+/St+vztYJiNMxGkgY2WgN1cl9g8IDu4QVvOdguN
+	/A5KPA3tw4M8Txe8P0DG2lMKPb5+A1fUaceOU=
+Received: by 10.204.19.74 with SMTP id z10mr68223bka.183.1301009127150;
+	Thu, 24 Mar 2011 16:25:27 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id w3sm323644bkt.5.2011.03.24.16.25.25
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 24 Mar 2011 16:25:26 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20110324042221.GA9120@sakrah.homelinux.org>
-References: <1300878254.4101.21.camel@mattotaupa>
-	<20110324042221.GA9120@sakrah.homelinux.org>
-Date: Thu, 24 Mar 2011 23:27:04 +0100
-Message-ID: <1301005624.3795.221.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: [solved] libarchive: task compile fails with `error: static declaration of 'wcscpy' follows non-static declaration`
+Date: Fri, 25 Mar 2011 00:25:20 +0100
+Message-Id: <cover.1301008354.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [PATCH 0/8] [meta-oe] remaining set of LIC_FILES_CHKSUMs for e-wm build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,142 +42,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 22:28:56 -0000
-X-Groupsio-MsgNum: 30617
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-mD6WG/xxk3FN6LgoZ/Vo"
+X-List-Received-Date: Thu, 24 Mar 2011 23:27:19 -0000
 
---=-mD6WG/xxk3FN6LgoZ/Vo
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+e-wm compiled fine now with few extra BBCLASSEXTEND in oe-core
 
-Am Mittwoch, den 23.03.2011, 21:22 -0700 schrieb Khem Raj:
-> On (23/03/11 12:04), Paul Menzel wrote:
-
-> > trying to test the latest changes in `libarchive_2.8.4.bb` I hit the
-> > following error.
-> >=20
-> > 	arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -marc=
-h=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-in=
-terwork -mno-thumb --sysroot=3D/oe/build-minimal-eglibc/minimal-dev/sysroot=
-s/armv7a-oe-linux-gnueabi -DHAVE_CONFIG_H -I. -I/oe/build-minimal-eglibc/mi=
-nimal-dev/sysroots/i686-linux/usr/include/libxml2 -fexpensive-optimizations=
- -fomit-frame-pointer -frename-registers -Os -g -MT libarchive/archive_entr=
-y.lo -MD -MP -MF libarchive/.deps/archive_entry.Tpo -c libarchive/archive_e=
-ntry.c  -fPIC -DPIC -o libarchive/.libs/archive_entry.o
-> > 	libarchive/archive_entry.c:136:18: error: static declaration of 'wcscp=
-y' follows non-static declaration
-> > 	/oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux-gnueabi/=
-usr/include/wchar.h:144:17: note: previous declaration of 'wcscpy' was here
-> > 	libarchive/archive_entry.c:145:15: error: static declaration of 'wcsle=
-n' follows non-static declaration
-> > 	/oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux-gnueabi/=
-usr/include/wchar.h:284:15: note: previous declaration of 'wcslen' was here
-> > 	arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -marc=
-h=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-in=
-terwork -mno-thumb --sysroot=3D/oe/build-minimal-eglibc/minimal-dev/sysroot=
-s/armv7a-oe-linux-gnueabi -DHAVE_CONFIG_H -I. -I/oe/build-minimal-eglibc/mi=
-nimal-dev/sysroots/i686-linux/usr/include/libxml2 -fexpensive-optimizations=
- -fomit-frame-pointer -frename-registers -Os -g -MT libarchive/archive_entr=
-y_stat.lo -MD -MP -MF libarchive/.deps/archive_entry_stat.Tpo -c libarchive=
-/archive_entry_stat.c -o libarchive/archive_entry_stat.o >/dev/null 2>&1
-> > 	arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -marc=
-h=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-in=
-terwork -mno-thumb --sysroot=3D/oe/build-minimal-eglibc/minimal-dev/sysroot=
-s/armv7a-oe-linux-gnueabi -DHAVE_CONFIG_H -I. -I/oe/build-minimal-eglibc/mi=
-nimal-dev/sysroots/i686-linux/usr/include/libxml2 -fexpensive-optimizations=
- -fomit-frame-pointer -frename-registers -Os -g -MT libarchive/archive_entr=
-y_strmode.lo -MD -MP -MF libarchive/.deps/archive_entry_strmode.Tpo -c liba=
-rchive/archive_entry_strmode.c -o libarchive/archive_entry_strmode.o >/dev/=
-null 2>&1
-> > 	arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -marc=
-h=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-in=
-terwork -mno-thumb --sysroot=3D/oe/build-minimal-eglibc/minimal-dev/sysroot=
-s/armv7a-oe-linux-gnueabi -DHAVE_CONFIG_H -I. -I/oe/build-minimal-eglibc/mi=
-nimal-dev/sysroots/i686-linux/usr/include/libxml2 -fexpensive-optimizations=
- -fomit-frame-pointer -frename-registers -Os -g -MT libarchive/archive_entr=
-y_xattr.lo -MD -MP -MF libarchive/.deps/archive_entry_xattr.Tpo -c libarchi=
-ve/archive_entry_xattr.c -o libarchive/archive_entry_xattr.o >/dev/null 2>&=
-1
-> > 	make[1]: *** [libarchive/archive_entry.lo] Error 1
-> > 	make[1]: *** Waiting for unfinished jobs....
-> > 	make[1]: Leaving directory `/oe/build-minimal-eglibc/minimal-dev/work/=
-armv7a-oe-linux-gnueabi/libarchive-2.8.4-r0/libarchive-2.8.4'
-> > 	make: *** [all] Error 2
-> > 	+ die 'oe_runmake failed'
-> > 	+ oefatal 'oe_runmake failed'
-> > 	+ echo FATAL: 'oe_runmake failed'
-> > 	FATAL: oe_runmake failed
-> > 	+ exit 1
-> >=20
-> > The following configuration is used.
-> >=20
-> > 	Build Configuration:
-> > 	BB_VERSION        =3D "1.12.0"
-> > 	METADATA_BRANCH   =3D "master"
-> > 	METADATA_REVISION =3D "79d295c"
-> > 	TARGET_ARCH       =3D "arm"
-> > 	TARGET_OS         =3D "linux-gnueabi"
-> > 	MACHINE           =3D "beagleboard"
-> > 	DISTRO            =3D "minimal"
-> > 	DISTRO_VERSION    =3D "dev-snapshot-20110323"
-> > 	TARGET_FPU        =3D "soft"
-> >=20
->=20
-> Well it works ok for me on both uclibc/eglibc
->=20
-> Build Configuration:
-> BB_VERSION        =3D "1.13.0"
-> METADATA_BRANCH   =3D "master"
-> METADATA_REVISION =3D "3e7790b"
-> TARGET_ARCH       =3D "arm"
-> TARGET_OS         =3D "linux-gnueabi"
-> MACHINE           =3D "efikamx"
-> DISTRO            =3D "minimal"
-> DISTRO_VERSION    =3D "dev-snapshot-20110324"
-> TARGET_FPU        =3D "soft"
->=20
-> and as Phil pointed out somehow your test for wscpy is failing
-> I have=20
->=20
->=20
-> checking for wcrtomb... yes
-> checking for wcscmp... yes
-> checking for wcscpy... yes
-> checking for wcslen... yes
-> checking for wctomb... yes
-> checking for wmemcmp... yes
-> checking for wmemcpy... yes
->=20
-> in log.do_configure
-
-I had no there. After deleting the build dir and doing a clean build
-everything worked fine. I guess I had forgotten running configure again
-before.
-
-> as well as in build/cmake/config.h.in
->=20
-> /* Define to 1 if you have the `wcscpy' function. */
-> #cmakedefine HAVE_WCSCPY 1
-
-[=E2=80=A6]
-
+Pull URL: git://gitorious.org/shr/meta-openembedded.git
+  Branch: jama/license
+  Browse: http://gitorious.org/shr/meta-openembedded/commits/jama/license
 
 Thanks,
+    Martin Jansa <Martin.Jansa@gmail.com>
+---
 
-Paul
 
---=-mD6WG/xxk3FN6LgoZ/Vo
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+Martin Jansa (8):
+  eet: add LIC_FILES_CHKSUM
+  evas: add LIC_FILES_CHKSUM
+  ecore: add LIC_FILES_CHKSUM and inherit gettext
+  edbus: add LIC_FILES_CHKSUM
+  efreet: add LIC_FILES_CHKSUM
+  eeze: add LIC_FILES_CHKSUM
+  edje: add LIC_FILES_CHKSUM
+  e-wm: add LIC_FILES_CHKSUM and inherit gettext
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+ meta-efl/recipes-efl/e17/e-wm_svn.bb |    3 ++-
+ meta-efl/recipes-efl/efl/ecore.inc   |    7 ++++---
+ meta-efl/recipes-efl/efl/edbus.inc   |    1 +
+ meta-efl/recipes-efl/efl/edje.inc    |    1 +
+ meta-efl/recipes-efl/efl/eet.inc     |    1 +
+ meta-efl/recipes-efl/efl/eeze.inc    |    1 +
+ meta-efl/recipes-efl/efl/efreet.inc  |    1 +
+ meta-efl/recipes-efl/efl/evas.inc    |    1 +
+ 8 files changed, 12 insertions(+), 4 deletions(-)
 
-iEYEABECAAYFAk2LxTgACgkQPX1aK2wOHVhm+QCgiS3YhJh28PMdsM6BM/chaUYe
-jM0AnRuQkti/fSpxoMp7fdRTnBrhh31a
-=Xdxu
------END PGP SIGNATURE-----
+-- 
+1.7.4.1
 
---=-mD6WG/xxk3FN6LgoZ/Vo--
+
+
