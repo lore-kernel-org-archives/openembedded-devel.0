@@ -1,33 +1,31 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1Q2mcq-0000HQ-3V
+	(envelope-from <msmith@cbnco.com>) id 1Q2n6f-0005QD-9z
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 16:39:04 +0100
+	Thu, 24 Mar 2011 17:09:53 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 2D59E314F49A;
-	Thu, 24 Mar 2011 16:37:14 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id WFNHvinXaBNu; Thu, 24 Mar 2011 16:37:06 +0100 (CET)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 51886314F49D;
-	Thu, 24 Mar 2011 16:37:05 +0100 (CET)
-Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Thu, 24 Mar 2011 15:37:05 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
+	by smtp.cbnco.com (Postfix) with ESMTP id 08BE53BDA27
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Mar 2011 12:01:01 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 07969-04 for <openembedded-devel@lists.openembedded.org>; 
+	Thu, 24 Mar 2011 12:01:00 -0400 (EDT)
+Received: from [172.20.22.83] (dmzgw2.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 59F79488769
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Mar 2011 12:00:57 -0400 (EDT)
+Message-ID: <4D8B6AB8.8030300@cbnco.com>
+Date: Thu, 24 Mar 2011 12:00:56 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Mar 2011 15:37:04 +0000
-Message-Id: <1300981024-9111-2-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <1300981024-9111-1-git-send-email-obi@opendreambox.org>
-References: <1300981024-9111-1-git-send-email-obi@opendreambox.org>
-In-Reply-To: <AANLkTimPH65gqiSJGt9YtgJ2afpmPqX=snyMmMzP_+d4@mail.gmail.com>
 References: <AANLkTimPH65gqiSJGt9YtgJ2afpmPqX=snyMmMzP_+d4@mail.gmail.com>
-Cc: Denis Dydychkin <nyrl@mail.ru>
-Subject: [PATCH] kernel/module-base: Append PR to MACHINE_KERNEL_PR
+	<1300981024-9111-1-git-send-email-obi@opendreambox.org>
+In-Reply-To: <1300981024-9111-1-git-send-email-obi@opendreambox.org>
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: MACHINE_KERNEL_PR overrides PR for modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,62 +39,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 15:39:04 -0000
+X-List-Received-Date: Thu, 24 Mar 2011 16:09:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Based on http://comments.gmane.org/gmane.comp.handhelds.openembedded/42905
+Andreas Oberritter wrote:
+> how about this solution? For MACHINE_KERNEL_PR = "r11" and PR = "r20" it
+> creates PR = "r11.20", to mimic the revision numbers commonly seen with
+> recipes using INC_PR.
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-CC: Denis Dydychkin <nyrl@mail.ru>
-CC: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
----
- classes/kernel.bbclass      |   10 +++++++++-
- classes/module-base.bbclass |   10 +++++++++-
- 2 files changed, 18 insertions(+), 2 deletions(-)
+I'd rather see PR before MACHINE_KERNEL_PR as PR seems more "major". But 
+like either way better than the current situation.
 
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index 0109ce6..a462ab4 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -24,7 +24,15 @@ python __anonymous () {
-     machine_kernel_pr = bb.data.getVar('MACHINE_KERNEL_PR', d, True)
- 
-     if machine_kernel_pr:
--       bb.data.setVar('PR', machine_kernel_pr, d)
-+       # Append
-+       # a) .X, if the recipe's PR is rX, or
-+       # b) +${PR}, if the recipe's PR doesn't begin with r
-+       pr = bb.data.getVar('PR', d, True)
-+       if pr.startswith('r'):
-+               suffix = '.' + pr[1:]
-+       else:
-+               suffix = '+' + pr
-+       bb.data.setVar('PR', machine_kernel_pr + suffix, d)
- }
- 
- INITRAMFS_IMAGE ?= ""
-diff --git a/classes/module-base.bbclass b/classes/module-base.bbclass
-index 9aaaa4e..edc0774 100644
---- a/classes/module-base.bbclass
-+++ b/classes/module-base.bbclass
-@@ -11,7 +11,15 @@ python __anonymous () {
-     machine_kernel_pr = bb.data.getVar('MACHINE_KERNEL_PR', d, True)
- 
-     if machine_kernel_pr:
--       bb.data.setVar('PR', machine_kernel_pr, d)
-+       # Append
-+       # a) .X, if the recipe's PR is rX, or
-+       # b) +${PR}, if the recipe's PR doesn't begin with r
-+       pr = bb.data.getVar('PR', d, True)
-+       if pr.startswith('r'):
-+               suffix = '.' + pr[1:]
-+       else:
-+               suffix = '+' + pr
-+       bb.data.setVar('PR', machine_kernel_pr + suffix, d)
- }
- 
- export KERNEL_VERSION = "${@base_read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
--- 
-1.7.2.3
-
+Mike
 
 
