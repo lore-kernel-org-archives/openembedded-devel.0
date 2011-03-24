@@ -1,43 +1,23 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Q2c5Q-0001dx-NG
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 05:23:53 +0100
-Received: by pwj9 with SMTP id 9so1112166pwj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Mar 2011 21:22:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id
-	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:in-reply-to:user-agent;
-	bh=MMKuJxAbssdJCyGLtPR3r5zH7ylkJwPJJ98mXF99dj4=;
-	b=qNYOAPEI4NrXH4BBV55iE+vLi3/YWkQHD++dNlLk+igpMCQWO3VSqaugB04nWHDIsP
-	4YVsUH2zNeScZxalZjYAvnC3eW4gQstL1Tz4mM15aO23V7h4hZNzmwEw7IX3q3FmWI6d
-	MI4Gvwl3+HdKxLqfhLj+RjIyWU0vQgUrr1ce8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	b=Hi278aAF+ajHZxQ58VF7G4NJoZA+eaPPOsUVAiXXPmmfCambAaGNSD2yXaa7hIAPOB
-	44pw/fA7wgk788QTp0f32OGHVDlC5i3Q+9Lln4p0MSn7Us0VAl8zJ1lZaR86vO/KMtlK
-	UcSSkrJiBHoarbiEGJZTWhbWXMGmDxf0r+2Co=
-Received: by 10.142.139.18 with SMTP id m18mr5607601wfd.373.1300940520272;
-	Wed, 23 Mar 2011 21:22:00 -0700 (PDT)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id n4sm10943831wfl.14.2011.03.23.21.21.58
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 23 Mar 2011 21:21:59 -0700 (PDT)
-Date: Wed, 23 Mar 2011 21:22:21 -0700
-From: Khem Raj <raj.khem@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q2gH6-0001Yq-Ib for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 09:52:12 +0100
+Received: from f053039182.adsl.alicedsl.de ([78.53.39.182]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q2gFB-0004Y4-LX for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 08:50:13 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110324042221.GA9120@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1300878254.4101.21.camel@mattotaupa>
-MIME-Version: 1.0
-In-Reply-To: <1300878254.4101.21.camel@mattotaupa>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: libarchive: task compile fails with `error: static declaration of 'wcscpy' follows non-static declaration`
+In-Reply-To: <1300908539-2442-1-git-send-email-schnitzeltony@gmx.de>
+References: <1300908539-2442-1-git-send-email-schnitzeltony@gmx.de>
+Date: Thu, 24 Mar 2011 09:50:12 +0100
+Message-ID: <1300956612.3795.4.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH] xfce4-session_4.6.1.bb: fix typo lbwnck->libwnck
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,101 +31,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 04:23:53 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 24 Mar 2011 08:52:12 -0000
+X-Groupsio-MsgNum: 30571
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-aRasbINZHICccNkGrVmQ"
 
-On (23/03/11 12:04), Paul Menzel wrote:
-> Dear OE folks
-> 
-> 
-> trying to test the latest changes in `libarchive_2.8.4.bb` I hit the
-> following error.
-> 
-> 	arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb --sysroot=/oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux-gnueabi -DHAVE_CONFIG_H -I. -I/oe/build-minimal-eglibc/minimal-dev/sysroots/i686-linux/usr/include/libxml2 -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -g -MT libarchive/archive_entry.lo -MD -MP -MF libarchive/.deps/archive_entry.Tpo -c libarchive/archive_entry.c  -fPIC -DPIC -o libarchive/.libs/archive_entry.o
-> 	libarchive/archive_entry.c:136:18: error: static declaration of 'wcscpy' follows non-static declaration
-> 	/oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux-gnueabi/usr/include/wchar.h:144:17: note: previous declaration of 'wcscpy' was here
-> 	libarchive/archive_entry.c:145:15: error: static declaration of 'wcslen' follows non-static declaration
-> 	/oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux-gnueabi/usr/include/wchar.h:284:15: note: previous declaration of 'wcslen' was here
-> 	arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb --sysroot=/oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux-gnueabi -DHAVE_CONFIG_H -I. -I/oe/build-minimal-eglibc/minimal-dev/sysroots/i686-linux/usr/include/libxml2 -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -g -MT libarchive/archive_entry_stat.lo -MD -MP -MF libarchive/.deps/archive_entry_stat.Tpo -c libarchive/archive_entry_stat.c -o libarchive/archive_entry_stat.o >/dev/null 2>&1
-> 	arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb --sysroot=/oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux-gnueabi -DHAVE_CONFIG_H -I. -I/oe/build-minimal-eglibc/minimal-dev/sysroots/i686-linux/usr/include/libxml2 -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -g -MT libarchive/archive_entry_strmode.lo -MD -MP -MF libarchive/.deps/archive_entry_strmode.Tpo -c libarchive/archive_entry_strmode.c -o libarchive/archive_entry_strmode.o >/dev/null 2>&1
-> 	arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb --sysroot=/oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux-gnueabi -DHAVE_CONFIG_H -I. -I/oe/build-minimal-eglibc/minimal-dev/sysroots/i686-linux/usr/include/libxml2 -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -g -MT libarchive/archive_entry_xattr.lo -MD -MP -MF libarchive/.deps/archive_entry_xattr.Tpo -c libarchive/archive_entry_xattr.c -o libarchive/archive_entry_xattr.o >/dev/null 2>&1
-> 	make[1]: *** [libarchive/archive_entry.lo] Error 1
-> 	make[1]: *** Waiting for unfinished jobs....
-> 	make[1]: Leaving directory `/oe/build-minimal-eglibc/minimal-dev/work/armv7a-oe-linux-gnueabi/libarchive-2.8.4-r0/libarchive-2.8.4'
-> 	make: *** [all] Error 2
-> 	+ die 'oe_runmake failed'
-> 	+ oefatal 'oe_runmake failed'
-> 	+ echo FATAL: 'oe_runmake failed'
-> 	FATAL: oe_runmake failed
-> 	+ exit 1
-> 
-> The following configuration is used.
-> 
-> 	Build Configuration:
-> 	BB_VERSION        = "1.12.0"
-> 	METADATA_BRANCH   = "master"
-> 	METADATA_REVISION = "79d295c"
-> 	TARGET_ARCH       = "arm"
-> 	TARGET_OS         = "linux-gnueabi"
-> 	MACHINE           = "beagleboard"
-> 	DISTRO            = "minimal"
-> 	DISTRO_VERSION    = "dev-snapshot-20110323"
-> 	TARGET_FPU        = "soft"
-> 
+--=-aRasbINZHICccNkGrVmQ
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Well it works ok for me on both uclibc/eglibc
+Am Mittwoch, den 23.03.2011, 20:28 +0100 schrieb Andreas Mueller:
+> Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
+> ---
+>  recipes/xfce-base/xfce4-session_4.6.1.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/recipes/xfce-base/xfce4-session_4.6.1.bb b/recipes/xfce-base=
+/xfce4-session_4.6.1.bb
+> index 09e34c5..4385ab8 100644
+> --- a/recipes/xfce-base/xfce4-session_4.6.1.bb
+> +++ b/recipes/xfce-base/xfce4-session_4.6.1.bb
+> @@ -1,8 +1,8 @@
+>  DESCRIPTION =3D "xfce4-session is a session manager for Xfce 4 Desktop E=
+nvironment"
+> -DEPENDS =3D "lbwnck libxfcegui4 libxfce4util dbus xfce-utils"
+> +DEPENDS =3D "libwnck libxfcegui4 libxfce4util dbus xfce-utils"
+>  SECTION =3D "x11"
+> =20
+> -PR =3D "r5"
+> +PR =3D "r6"
+> =20
+>  inherit xfce46
 
-Build Configuration:
-BB_VERSION        = "1.13.0"
-METADATA_BRANCH   = "master"
-METADATA_REVISION = "3e7790b"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "efikamx"
-DISTRO            = "minimal"
-DISTRO_VERSION    = "dev-snapshot-20110324"
-TARGET_FPU        = "soft"
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net> and pushed
+with edit of commit message in [1].
 
-and as Phil pointed out somehow your test for wscpy is failing
-I have 
+Please update the state of your patch in our patch queue [2].
+
+	pwclient update -s Accepted -c 591a57e83ffb8b21da077445efc1b4f14f8b17e2 17=
+33
+
+I am not allowed to do so. You will have to register at [3].
 
 
-checking for wcrtomb... yes
-checking for wcscmp... yes
-checking for wcscpy... yes
-checking for wcslen... yes
-checking for wctomb... yes
-checking for wmemcmp... yes
-checking for wmemcpy... yes
+Thanks,
 
-in log.do_configure
-
-as well as in build/cmake/config.h.in
-
-/* Define to 1 if you have the `wcscpy' function. */
-#cmakedefine HAVE_WCSCPY 1
+Paul
 
 
--Khem
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D591a57e=
+83ffb8b21da077445efc1b4f14f8b17e2
+[2] http://openembedded.org/index.php/Patchwork
+[3] http://patches.openembedded.org/
 
-> I will test a build using `angstrom-2010.x` next, but will not have time
-> to track down the fix.
-> 
-> 
-> Thanks,
-> 
-> Paul
+--=-aRasbINZHICccNkGrVmQ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
 
+iEYEABECAAYFAk2LBb4ACgkQPX1aK2wOHViLhgCbBasqJQNpLYAu/z9FzHKfhNY3
+YzoAn1bLex7UQYNPQ4OFlcOCDW7SVNxn
+=3wqz
+-----END PGP SIGNATURE-----
 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
--- 
--Khem
-
-
+--=-aRasbINZHICccNkGrVmQ--
