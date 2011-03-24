@@ -1,23 +1,33 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q2gH6-0001Yq-Ib for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 09:52:12 +0100
-Received: from f053039182.adsl.alicedsl.de ([78.53.39.182]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q2gFB-0004Y4-LX for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 08:50:13 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <heroor@gmail.com>) id 1Q2gJg-0008PY-SF
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 09:54:53 +0100
+Received: by qwh5 with SMTP id 5so6444535qwh.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Mar 2011 01:52:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=07RWkWuass4i0tg410MozwsclqtzaT9OJgS2WK0jfyg=;
+	b=huA0VSO++ELiwybQWAGFp5P0THCALwq7vF23YSp0rMOPqu5ttfMlNsZssFQGJlp0pp
+	Wt+46H6Oo7oy3nf/HQVCNJLlPaHsZP1o2Z/RwLJ6PMQRp6FWXgA8vlD9rARTy6GBi60c
+	DEQp9vdykhOy+khhAjxuF5Cj67KckF9IMwXag=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=lXBwWkpaw0Q8VlTwEta4U5EM15Ms2G/N6tTnwIOVFIrxEm3mSR9ybPqfu35gX20Qg2
+	Lv1zBi/UzlCrJoy9MJwvdTLiimAQ/w16u2dS0ayMryW7zWmGk4bbkGxwthdT46DrGudC
+	488Lc7l1ZBQSKAsA0JNvciTIcIHQcHWAyG2vs=
+MIME-Version: 1.0
+Received: by 10.224.71.69 with SMTP id g5mr6898760qaj.305.1300956778373; Thu,
+	24 Mar 2011 01:52:58 -0700 (PDT)
+Received: by 10.224.134.5 with HTTP; Thu, 24 Mar 2011 01:52:58 -0700 (PDT)
+Date: Thu, 24 Mar 2011 14:22:58 +0530
+Message-ID: <AANLkTikXA3RfJ2jfnf+ct=eCVmOS4CC1xPg1Q94JDeGT@mail.gmail.com>
+From: Siddharth Heroor <heroor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1300908539-2442-1-git-send-email-schnitzeltony@gmx.de>
-References: <1300908539-2442-1-git-send-email-schnitzeltony@gmx.de>
-Date: Thu, 24 Mar 2011 09:50:12 +0100
-Message-ID: <1300956612.3795.4.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH] xfce4-session_4.6.1.bb: fix typo lbwnck->libwnck
+Subject: [PATCH 1/2] TI IPC: Fixes for license, dependencies and installer unpack
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,70 +41,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 08:52:12 -0000
-X-Groupsio-MsgNum: 30571
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-aRasbINZHICccNkGrVmQ"
-
---=-aRasbINZHICccNkGrVmQ
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 24 Mar 2011 08:54:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Am Mittwoch, den 23.03.2011, 20:28 +0100 schrieb Andreas Mueller:
-> Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
-> ---
->  recipes/xfce-base/xfce4-session_4.6.1.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/recipes/xfce-base/xfce4-session_4.6.1.bb b/recipes/xfce-base=
-/xfce4-session_4.6.1.bb
-> index 09e34c5..4385ab8 100644
-> --- a/recipes/xfce-base/xfce4-session_4.6.1.bb
-> +++ b/recipes/xfce-base/xfce4-session_4.6.1.bb
-> @@ -1,8 +1,8 @@
->  DESCRIPTION =3D "xfce4-session is a session manager for Xfce 4 Desktop E=
-nvironment"
-> -DEPENDS =3D "lbwnck libxfcegui4 libxfce4util dbus xfce-utils"
-> +DEPENDS =3D "libwnck libxfcegui4 libxfce4util dbus xfce-utils"
->  SECTION =3D "x11"
-> =20
-> -PR =3D "r5"
-> +PR =3D "r6"
-> =20
->  inherit xfce46
+* Correct the license from TI to BSD.
+* Fix dependencies
+* Update the installer unpack commands for latest releases.
 
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net> and pushed
-with edit of commit message in [1].
+Signed-off-by: Siddharth Heroor <heroor@ti.com>
+---
+=A0recipes/ti/ti-ipc.inc |=A0=A0=A0 9 ++++++---
+=A01 files changed, 6 insertions(+), 3 deletions(-)
 
-Please update the state of your patch in our patch queue [2].
+diff --git a/recipes/ti/ti-ipc.inc b/recipes/ti/ti-ipc.inc
+index cd6ad6e..28f8525 100644
+--- a/recipes/ti/ti-ipc.inc
++++ b/recipes/ti/ti-ipc.inc
+@@ -1,20 +1,23 @@
+=A0DESCRIPTION =3D "TI Inter Process Ccommunication (IPC) Mechanisms (for
+Uni- and Multi- Processor Configurations)"
+=A0HOMEPAGE =3D "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targe=
+tcontent/ipc/index.html"
++
+=A0SECTION =3D "devel"
+-LICENSE =3D "TI"
++LICENSE =3D "BSD"
 
-	pwclient update -s Accepted -c 591a57e83ffb8b21da077445efc1b4f14f8b17e2 17=
-33
+=A0require ti-paths.inc
+=A0require ti-staging.inc
+=A0require ti-eula-unpack.inc
 
-I am not allowed to do so. You will have to register at [3].
+-PR =3D "r2"
++PR =3D "r3"
+
+=A0S =3D "${WORKDIR}/ipc_${PV}"
+
+=A0SRC_URI =3D "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/target=
+content/ipc/${PV}/exports/ipc_setuplinux_${PV}.bin;name=3Dipcbin"
+
++DEPENDS =3D "ti-sysbios ti-cgt6x ti-xdctools"
++
+=A0BINFILE=3D"ipc_setuplinux_${PV}.bin"
+-TI_BIN_UNPK_CMDS=3D"Y: qY:workdir:Y"
++TI_BIN_UNPK_CMDS=3D"Y: q:workdir:Y"
+
+=A0do_install() {
+=A0=A0=A0=A0 install -d ${D}${IPC_INSTALL_DIR_RECIPE}
+--
+1.7.0.4
 
 
-Thanks,
-
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D591a57e=
-83ffb8b21da077445efc1b4f14f8b17e2
-[2] http://openembedded.org/index.php/Patchwork
-[3] http://patches.openembedded.org/
-
---=-aRasbINZHICccNkGrVmQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk2LBb4ACgkQPX1aK2wOHViLhgCbBasqJQNpLYAu/z9FzHKfhNY3
-YzoAn1bLex7UQYNPQ4OFlcOCDW7SVNxn
-=3wqz
------END PGP SIGNATURE-----
-
---=-aRasbINZHICccNkGrVmQ--
