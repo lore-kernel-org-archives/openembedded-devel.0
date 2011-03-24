@@ -1,35 +1,34 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heroor@gmail.com>) id 1Q2omL-0007QA-6j
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 18:57:01 +0100
-Received: by qyk27 with SMTP id 27so185620qyk.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q2p8f-00083U-QO for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 19:20:06 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q2p6p-0000es-Fo for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 19:18:11 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Mar 2011 19:18:11 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2011 10:55:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=AYDZIm4Y3vvQl/RxyFdeEyi37tlgNrjV+461FGyn8E4=;
-	b=HhRVBKsPrJvUw8GQq1usDfasgefPM2Gv1m7kdgarX4g1yFnpqgqOqEZGkAMBF9FjJo
-	kbt3Z+LdvSu2x2btoW6QgQhsrRpYDk/Zx2weRAoIVpRzo378Hbezl8hcTN6mcW8t+zuE
-	PxTObBQQJwyZf5ZbqQ4IZmnDnrLYVMGS77TQo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=uRDSbzZvsHY4FJgs6iQmiLBZwXWxpyrt5vPOipQcSL27T0Te3+UZrJsGNWnZEH+pUD
-	DMlaZ0bhoIDhBnV+utyYMBbc1cYiJzFSmdtIrbtz4n5pqTB55H5SvFrfdgt/097+oT/c
-	+dOFmm3E9oMZ0tQRWnQB/f8l34CYUx237Hojc=
-MIME-Version: 1.0
-Received: by 10.224.71.69 with SMTP id g5mr7461064qaj.305.1300989303564; Thu,
-	24 Mar 2011 10:55:03 -0700 (PDT)
-Received: by 10.224.134.5 with HTTP; Thu, 24 Mar 2011 10:55:03 -0700 (PDT)
-In-Reply-To: <1300974563.3795.29.camel@mattotaupa>
+	Thu, 24 Mar 2011 19:18:11 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 24 Mar 2011 19:17:58 +0100
+Message-ID: <img1sm$q20$1@dough.gmane.org>
 References: <1300971676-31774-1-git-send-email-heroor@gmail.com>
 	<1300974563.3795.29.camel@mattotaupa>
-Date: Thu, 24 Mar 2011 23:25:03 +0530
-Message-ID: <AANLkTinvAR_FcrX+FobiJd9WYkD+Lf-za2GCmEmx1UT2@mail.gmail.com>
-From: Siddharth Heroor <heroor@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1300974563.3795.29.camel@mattotaupa>
+X-Enigmail-Version: 1.0.1
 Subject: Re: [PATCH 1/3] TI IPC: Fix License field.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,28 +43,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 17:57:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 24 Mar 2011 18:20:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, Mar 24, 2011 at 7:19 PM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 24-03-11 14:49, Paul Menzel wrote:
 > Am Donnerstag, den 24.03.2011, 18:31 +0530 schrieb Siddharth Heroor:
+>> From: Siddharth Heroor <heroor@ti.com>
+>>
+>> * The correct license for TI IPC is BSD and not TI.
+> 
+> Was the original license a mistake or was it relicensed?
+> 
+>> Signed-off-by: Siddharth Heroor <heroor@ti.com>
+>> ---
+>>  recipes/ti/ti-ipc.inc |    2 +-
+>>  1 files changed, 1 insertions(+), 1 deletions(-)
+>>
+>> diff --git a/recipes/ti/ti-ipc.inc b/recipes/ti/ti-ipc.inc
+>> index cd6ad6e..fc9b908 100644
+>> --- a/recipes/ti/ti-ipc.inc
+>> +++ b/recipes/ti/ti-ipc.inc
+>> @@ -1,7 +1,7 @@
+>>  DESCRIPTION = "TI Inter Process Ccommunication (IPC) Mechanisms (for Uni- and Multi- Processor Configurations)"
+>>  HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ipc/index.html"
+>>  SECTION = "devel"
+>> -LICENSE = "TI" 
+>> +LICENSE = "BSD" 
+>>  
+>>  require ti-paths.inc
+>>  require ti-staging.inc
+> 
 > All Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>. I would
 > push them or do the TI people want to push these?
-Please go ahead and push them.
 
-> Thanks,
->
-> Paul
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+Please don't push any TI patches without my or Denys' Ack/SOB.
 
-Thanks and Regards,
-Sid
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNi4rWMkyGM64RGpERAu2LAJ9x+/eqEk+5Dh5Ae68O8GuSRYQhngCfcMco
+4DpChXARi7jlI9jDXSZWKJs=
+=cXET
+-----END PGP SIGNATURE-----
+
 
 
