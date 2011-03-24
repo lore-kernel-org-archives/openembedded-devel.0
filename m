@@ -1,22 +1,34 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q2hoX-0003Iy-0S for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 11:30:49 +0100
-Received: from f053039182.adsl.alicedsl.de ([78.53.39.182]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q2hml-0008OJ-5Q for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 10:28:59 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q2hyl-0003YM-CW for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 11:41:23 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q2hwy-0000Vc-KG for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 11:39:32 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Mar 2011 11:39:32 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Mar 2011 11:39:32 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <cover.1300961186.git.Martin.Jansa@gmail.com>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 24 Mar 2011 11:39:19 +0100
+Message-ID: <imf70n$dcv$1@dough.gmane.org>
 References: <cover.1300961186.git.Martin.Jansa@gmail.com>
-Date: Thu, 24 Mar 2011 11:28:57 +0100
-Message-ID: <1300962537.3795.26.camel@mattotaupa>
+	<1300962537.3795.26.camel@mattotaupa>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1300962537.3795.26.camel@mattotaupa>
+X-Enigmail-Version: 1.0.1
 Subject: Re: [PATCH 0/7] Checksums and LIC_FILES_CHKSUMs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,55 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 10:30:49 -0000
-X-Groupsio-MsgNum: 30586
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-FODfmBoT/c95FXnAxXkp"
+X-List-Received-Date: Thu, 24 Mar 2011 10:41:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-FODfmBoT/c95FXnAxXkp
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am Donnerstag, den 24.03.2011, 11:09 +0100 schrieb Martin Jansa:
-> Mostly checksums and LIC_FILES_CHKSUMs
+On 24-03-11 11:28, Paul Menzel wrote:
+> Am Donnerstag, den 24.03.2011, 11:09 +0100 schrieb Martin Jansa:
+>> Mostly checksums and LIC_FILES_CHKSUMs
+> 
+> I have never heard of 'LIC_FILES_CHKSUM'.
+> 
+>         $ git grep 'LIC_FILES'
+>         recipes/htop/htop_0.9.bb:LIC_FILES_CHKSUM = "file://COPYING;md5=c312653532e8e669f30e5ec8bdc23be3"
+>         recipes/lighttpd/lighttpd_1.4.28.bb:LIC_FILES_CHKSUM = "file://COPYING;md5=e4dac5c6ab169aa212feb5028853a579"
+>         recipes/ofono/ofono.inc:LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
+>         recipes/wpa-supplicant/wpa-supplicant-0.7.inc:LIC_FILES_CHKSUM = "file://../COPYING;md5=c54ce9345727175ff66d17b67ff51f58 \
+> 
+> It looks like this is something from Pkoy [1]. So is this for the merge
+> with Yocto?
 
-I have never heard of 'LIC_FILES_CHKSUM'.
+This is for http://cgit.openembedded.org/cgit.cgi/meta-openembedded/
 
-        $ git grep 'LIC_FILES'
-        recipes/htop/htop_0.9.bb:LIC_FILES_CHKSUM =3D "file://COPYING;md5=
-=3Dc312653532e8e669f30e5ec8bdc23be3"
-        recipes/lighttpd/lighttpd_1.4.28.bb:LIC_FILES_CHKSUM =3D "file://CO=
-PYING;md5=3De4dac5c6ab169aa212feb5028853a579"
-        recipes/ofono/ofono.inc:LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D=
-eb723b61539feef013de476e68b5c50a \
-        recipes/wpa-supplicant/wpa-supplicant-0.7.inc:LIC_FILES_CHKSUM =3D =
-"file://../COPYING;md5=3Dc54ce9345727175ff66d17b67ff51f58 \
+regards,
 
-It looks like this is something from Pkoy [1]. So is this for the merge
-with Yocto?
-
-[=E2=80=A6]
-
-
-Thanks,
-
-Paul
-
-
-[1] http://www.yoctoproject.org/docs/poky-ref-manual/poky-ref-manual.html#u=
-singpoky-specifying-LIC_FILES_CHKSUM
-
---=-FODfmBoT/c95FXnAxXkp
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAk2LHOkACgkQPX1aK2wOHVjsTwCfZAfyKBnygVqUzzWrv51vZJZU
-FpcAnRKld+NdBrgDSJ4UFROlKktuvww0
-=onIr
+iD8DBQFNix9XMkyGM64RGpERAoqnAJ4gdzyAl8FYrGE6sX26swBFFpdaMQCcCFpH
+9EVH8PewwCg1yyXOJkYpZoc=
+=Lvdu
 -----END PGP SIGNATURE-----
 
---=-FODfmBoT/c95FXnAxXkp--
+
+
