@@ -1,44 +1,35 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sylvain.pare@gmail.com>) id 1Q2iUd-0004uT-UD
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 12:14:20 +0100
-Received: by qwh5 with SMTP id 5so6503761qwh.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q2jI4-0007JU-9z for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 13:05:24 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q2jGH-0006yd-D4 for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 13:03:33 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Mar 2011 13:03:33 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2011 04:12:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=87fygmzBskqd7Nh8qq+6eB20W2eWMQguHwmfVByLjmY=;
-	b=SwInY/YOpYkifabpRb+aspl5Vm0Vkc0VfxPNbNZkXUTP/skhcY2WaYuhkkk5KRCxNU
-	8eqBfiTHUOYmAnwU00YH3rrgCK3tGtxu/ZOfRfcYThQFbpwfb0/DYjBbW9glAPQRspgp
-	rM20+OkhpRDL4t+1GaX3GdZNczhQwoCX0ClA4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	b=MS53Pi5ny/DXONkXhGIvOke5nr2ERROX2KNaTOS6txY3gA13sprtkpwLg0kLcYBW9Q
-	BSdXiH97Dc8dVP/xmwpFYve9fbspqMnQeOyf5ybSVlZeUAgxsHFtJe2soDMyp25XfbFR
-	1GyfdLB7vCB9qyDKkySoD5eW//6bS3emNVcYw=
-Received: by 10.229.23.21 with SMTP id p21mr6616505qcb.291.1300965144166; Thu,
-	24 Mar 2011 04:12:24 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.229.98.202 with HTTP; Thu, 24 Mar 2011 04:12:04 -0700 (PDT)
-In-Reply-To: <1300903273.4101.36.camel@mattotaupa>
-References: <1300806683-17244-1-git-send-email-otavio@ossystems.com.br>
-	<1300806683-17244-5-git-send-email-otavio@ossystems.com.br>
-	<1300834528.3825.3.camel@mattotaupa>
-	<AANLkTim8KdVzogFp2hh5bTLxWnXvLzDOK8eb5E+-k+P1@mail.gmail.com>
-	<1300881388.4101.23.camel@mattotaupa>
-	<AANLkTikhnHdQGGh-bkAs3si4PNg5NqGCJ1c2iQOkuwL-@mail.gmail.com>
-	<AANLkTi=kT3DNMuC_+6LQGE6usL=ryExHiWm_hKQdu32x@mail.gmail.com>
-	<1300903273.4101.36.camel@mattotaupa>
-From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
-Date: Thu, 24 Mar 2011 12:12:04 +0100
-Message-ID: <AANLkTim7t=h17BSSU50o=GFd1kGwgwUvKKnSB2ttrCGv@mail.gmail.com>
+	Thu, 24 Mar 2011 13:03:33 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
-Subject: Re: [PATCH 4/4] vlc (1.1.4.1): depends on lua5.1
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 24 Mar 2011 13:03:21 +0100
+Message-ID: <imfbu9$9t5$1@dough.gmane.org>
+References: <1300456829-25755-1-git-send-email-Martin.Jansa@gmail.com>
+	<imf8ac$l91$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <imf8ac$l91$1@dough.gmane.org>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH 01/12] libnl: rename libnl2 to libnl as used in openembedded-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,53 +43,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 11:14:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 24 Mar 2011 12:05:24 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi Paul
-Thanks for your attention.
-Here my machine is "palmpre2" and building for SHR unstable.
-If I can help for something..
-Grettings,
-Sylvain
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-2011/3/23 Paul Menzel <paulepanter@users.sourceforge.net>
+On 24-03-11 12:01, Koen Kooi wrote:
+> On 18-03-11 15:00, Martin Jansa wrote:
+>> * libnl1/libnl2 still conflicts even when using separate includedir so
+>>   it will be easier for distro maintainers to use only libnl1 or libnl2
+>>   by PREFERRED_VERSION
+> 
+>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> 
+> I added this into my maintenance staging branch:
+> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance
+> 
+> If testing shows no regressions I'm going to do a pull request for it
+> next week.
 
-> Am Mittwoch, den 23.03.2011, 15:20 +0100 schrieb Frans Meulenbroeks:
-> > 2011/3/23 Sylvain Par=E9 <sylvain.pare@gmail.com>:
-> > > Hello
-> > > I was going to fill a bugrepport on OE's bugzilla but as you are
-> already
-> > > speaking of vlc building issue..
-> > > It does not build for me neither :
-> http://pastebin.com/raw.php?i=3DwK4Sxbv9
->
-> It build for me fine *again* with 2b952471. So please, Otavio and
-> Sylvain, report you build configuration. I am using `angstrom-2010.x`
-> for `MACHINE =3D "beagleboard"`.
->
-> > We did discuss this on irc, and the issue seems to be that
-> > libliveMedia.a is probably a host lib.
-> >
-> > Another issue that was noted was that OE_CONF says --enable-live555
-> > (or something like that) but live555 is not in the DEPENDS.
-> > A quick glance over the recipe showed that there seem to be more
-> > things missing in DEPENDS (freetype, apache, png, ...)
->
-> That could be and it should be fixed to not implicitly depend on
-> something. But we should also figure out why it works for me and lua.h
-> gets staged for me.
->
->
-> Thanks,
->
-> Paul
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+FWIW from
+http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/testlab/diff/beagleboard/GNOME-image/depends.dot?id=97bcd1b4d01073a30a54a1387a89a54fc9fa3fe3:
+
+diff --git a/beagleboard/GNOME-image/depends.dot
+b/beagleboard/GNOME-image/depends.dot
+index f7b7cb3..ee4b521 100644
+- --- a/beagleboard/GNOME-image/depends.dot
++++ b/beagleboard/GNOME-image/depends.dot
+@@ -5924,8 +5924,6 @@ libnet_dbus_perl -> libdbus_1_3;
+ libnet_dbus_perl -> libc6;
+ libnl_genl2 -> libnl2;
+ libnl_genl2 -> libc6;
+- -libnl1 -> libc6;
+- -libnl1 -> libgcc1;
+ libnl2 -> libc6;
+ libnl2 -> libgcc1;
+ libnm_util1 -> libdbus_glib_1_2;
+@@ -7166,7 +7164,7 @@ networkmanager -> libgio_2_0_0;
+ networkmanager -> libgmodule_2_0_0;
+ networkmanager -> policykit;
+ networkmanager -> eggdbus;
+- -networkmanager -> libnl1;
++networkmanager -> libgcc1;
+ networkmanager -> iptables [style=dotted];
+ networkmanager_locale_de -> libnm_util1;
+ networkmanager_locale_de -> virtual_locale_de;
+
+Seems to be working as expected!
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNizMIMkyGM64RGpERAsjkAKCk1B/gFOSkDBwDgXCmRWxmIIws0QCgtneF
+DFp11bVF08UQKUrP+2/dgYQ=
+=FWub
+-----END PGP SIGNATURE-----
+
+
 
