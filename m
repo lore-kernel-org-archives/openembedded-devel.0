@@ -1,32 +1,36 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Q2nYn-00066q-2k
+	(envelope-from <heroor@gmail.com>) id 1Q2omL-0007QA-6j
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 17:38:57 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Q2nWz-0000iL-EL from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 09:37:05 -0700
-Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Thu, 24 Mar 2011 09:36:03 -0700
-Received: from [172.30.80.38] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
-	Thu, 24 Mar 2011 09:37:04 -0700
-Message-ID: <4D8B7316.2050607@mentor.com>
-Date: Thu, 24 Mar 2011 09:36:38 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+	Thu, 24 Mar 2011 18:57:01 +0100
+Received: by qyk27 with SMTP id 27so185620qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Mar 2011 10:55:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=AYDZIm4Y3vvQl/RxyFdeEyi37tlgNrjV+461FGyn8E4=;
+	b=HhRVBKsPrJvUw8GQq1usDfasgefPM2Gv1m7kdgarX4g1yFnpqgqOqEZGkAMBF9FjJo
+	kbt3Z+LdvSu2x2btoW6QgQhsrRpYDk/Zx2weRAoIVpRzo378Hbezl8hcTN6mcW8t+zuE
+	PxTObBQQJwyZf5ZbqQ4IZmnDnrLYVMGS77TQo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=uRDSbzZvsHY4FJgs6iQmiLBZwXWxpyrt5vPOipQcSL27T0Te3+UZrJsGNWnZEH+pUD
+	DMlaZ0bhoIDhBnV+utyYMBbc1cYiJzFSmdtIrbtz4n5pqTB55H5SvFrfdgt/097+oT/c
+	+dOFmm3E9oMZ0tQRWnQB/f8l34CYUx237Hojc=
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <cover.1300979039.git.stefan@buglabs.net>
-In-Reply-To: <cover.1300979039.git.stefan@buglabs.net>
-X-OriginalArrivalTime: 24 Mar 2011 16:36:03.0318 (UTC)
-	FILETIME=[90CAE160:01CBEA41]
-Subject: Re: [PATCH 2011.03-maintenance 0/7] Pull request for openjdk-6 and	bug20 changes
+Received: by 10.224.71.69 with SMTP id g5mr7461064qaj.305.1300989303564; Thu,
+	24 Mar 2011 10:55:03 -0700 (PDT)
+Received: by 10.224.134.5 with HTTP; Thu, 24 Mar 2011 10:55:03 -0700 (PDT)
+In-Reply-To: <1300974563.3795.29.camel@mattotaupa>
+References: <1300971676-31774-1-git-send-email-heroor@gmail.com>
+	<1300974563.3795.29.camel@mattotaupa>
+Date: Thu, 24 Mar 2011 23:25:03 +0530
+Message-ID: <AANLkTinvAR_FcrX+FobiJd9WYkD+Lf-za2GCmEmx1UT2@mail.gmail.com>
+From: Siddharth Heroor <heroor@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/3] TI IPC: Fix License field.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,30 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 16:38:57 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 24 Mar 2011 17:57:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 03/24/2011 08:09 AM, Stefan Schmidt wrote:
-> From: Stefan Schmidt<stefan@buglabs.net>
->
-> Hello.
->
-> Tom, please pull these openjdk-6 changes originally done by Henning and one
-> bug20 update from Denis. I tested them in my private build for Buglabs and
-> especially the openjdk changes are fixing a lot of problems for me.
->
-> Pull URL: git://github.com/Stefan-Schmidt/openembedded
->    Branch: for-2011.03
->    Browse: https://github.com/Stefan-Schmidt/openembedded/commit/for-2011.03
->
+On Thu, Mar 24, 2011 at 7:19 PM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Am Donnerstag, den 24.03.2011, 18:31 +0530 schrieb Siddharth Heroor:
+> All Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>. I would
+> push them or do the TI people want to push these?
+Please go ahead and push them.
+
 > Thanks,
->      Stefan Schmidt<stefan@buglabs.net>
+>
+> Paul
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
-Applied, thanks.
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+Thanks and Regards,
+Sid
 
 
