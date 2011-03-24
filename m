@@ -1,35 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q2mLd-0008Pg-FD for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 16:21:17 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q2m0Q-0003Zs-HJ for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 15:59:22 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2011 15:59:22 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <obi@opendreambox.org>) id 1Q2mcp-0000HK-Vc
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 16:39:04 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id CCC96314F481
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2011 15:59:22 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 24 Mar 2011 16:37:10 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id 00gia2BxUyUv
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Mar 2011 16:37:05 +0100 (CET)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id 3A022314F49A
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Mar 2011 16:37:04 +0100 (CET)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Thu, 24 Mar 2011 15:37:04 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 24 Mar 2011 15:59:08 +0100
-Message-ID: <imfm7s$cd7$1@dough.gmane.org>
-References: <1300971676-31774-1-git-send-email-heroor@gmail.com>
-	<1300974563.3795.29.camel@mattotaupa>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1300974563.3795.29.camel@mattotaupa>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH 1/3] TI IPC: Fix License field.
+Date: Thu, 24 Mar 2011 15:37:03 +0000
+Message-Id: <1300981024-9111-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.2.3
+In-Reply-To: <AANLkTimPH65gqiSJGt9YtgJ2afpmPqX=snyMmMzP_+d4@mail.gmail.com>
+References: <AANLkTimPH65gqiSJGt9YtgJ2afpmPqX=snyMmMzP_+d4@mail.gmail.com>
+Subject: Re: MACHINE_KERNEL_PR overrides PR for modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,48 +40,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 15:21:17 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 24 Mar 2011 15:39:04 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello,
 
-On 24-03-11 14:49, Paul Menzel wrote:
-> Am Donnerstag, den 24.03.2011, 18:31 +0530 schrieb Siddharth Heroor:
->> From: Siddharth Heroor <heroor@ti.com>
->>
->> * The correct license for TI IPC is BSD and not TI.
-> 
-> Was the original license a mistake or was it relicensed?
+how about this solution? For MACHINE_KERNEL_PR = "r11" and PR = "r20" it
+creates PR = "r11.20", to mimic the revision numbers commonly seen with
+recipes using INC_PR.
 
-The "LICENSE = TI" bit in the recipes is 90% a copy/paste from another
-recipe. For most things we use BSD, but since that is a "fill in"
-license I choose "TI" or "TI BSD" while I waited for the interna;
-opensource review board to tell me which term to use. While waiting for
-that the original recipes got copied a lot :)
+If PR doesn't start with 'r', +${PR} gets appended, so MACHINE_KERNEL_PR =
+"foo1" and PR = "bar2" results in PR = "foo1+bar2".
 
-A short rundown, not 100% accurate, but a good rule of thumb:
+Regards,
+Andreas
 
-BSD: things that gets put into the codecserver or linked to by apps
-GPLv2 or GPLv2+BSD: Kernel modules
-"TI": compiler, various binary only IP, etc
-Eclipse: XDC
+Andreas Oberritter (1):
+  kernel/module-base: Append PR to MACHINE_KERNEL_PR
 
-And then we have distribution license "Technology Software Publically
-Available" or TSPA which means you can download it without any login or
-registration. This is not a source license.
+ classes/kernel.bbclass      |   10 +++++++++-
+ classes/module-base.bbclass |   10 +++++++++-
+ 2 files changed, 18 insertions(+), 2 deletions(-)
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNi1w8MkyGM64RGpERApIpAJ9HAxmnM01wjgmSvNfk9j7fl1ydqgCfSZAX
-V1wHf3tSSrt/4eSXXYh3Mtk=
-=IudE
------END PGP SIGNATURE-----
+-- 
+1.7.2.3
 
 
 
