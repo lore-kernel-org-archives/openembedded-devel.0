@@ -1,37 +1,23 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q2hY2-0002Ql-S4
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 11:13:46 +0100
-Received: by mail-bw0-f47.google.com with SMTP id 10so7237376bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2011 03:11:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=G4jrJi3wKqH5PlCl3em7Yc2hPIVDntEMFzDazYQwgr0=;
-	b=KnOQV+Z4tDrjOMlup5z+JLWRXC3FKfc+OjPZwUy6WsJxACCv/WIlWQkfCWTHWmpA0r
-	iChv7fQ+miBI6sZ6WTBE5YRfLMxTC/mr0iBG50tBDiBBn/x/UjwtGTFKfJ2rFMNWz9vW
-	t5u/5ZYzQfLw092rX65/Q9ynuHQuMWhUNWBmQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=faNZGG1aGMWyfzznaMF091/G4ybcvnRB6RNoAR/oJqjrtDHylQJdg3VQdjEyA6nGSQ
-	BdSwZ5YAu7rHBbpGQdgtzB0/U/5N5zP4bbBNMex5h9alKxm0a+YPwgPGyu5BqVKNETGt
-	kXp8+Ko5ceNToDw57fTzmSP7uEfNjmU1Sos0k=
-Received: by 10.204.80.29 with SMTP id r29mr7181497bkk.195.1300961514323;
-	Thu, 24 Mar 2011 03:11:54 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id w3sm6585125bkt.5.2011.03.24.03.11.52
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 24 Mar 2011 03:11:53 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q2hoX-0003Iy-0S for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 11:30:49 +0100
+Received: from f053039182.adsl.alicedsl.de ([78.53.39.182]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q2hml-0008OJ-5Q for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 10:28:59 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Mar 2011 11:11:46 +0100
-Message-Id: <69203f0bd1154b83fb79ed416d5959a0d737b680.1300961186.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
 In-Reply-To: <cover.1300961186.git.Martin.Jansa@gmail.com>
 References: <cover.1300961186.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 7/7] lua5.1: add LIC_FILES_CHKSUM
+Date: Thu, 24 Mar 2011 11:28:57 +0100
+Message-ID: <1300962537.3795.26.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH 0/7] Checksums and LIC_FILES_CHKSUMs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,26 +31,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 10:13:46 -0000
+X-List-Received-Date: Thu, 24 Mar 2011 10:30:49 -0000
+X-Groupsio-MsgNum: 30586
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-FODfmBoT/c95FXnAxXkp"
 
----
- meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+--=-FODfmBoT/c95FXnAxXkp
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb b/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb
-index 06c8004..5591c4c 100644
---- a/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb
-+++ b/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb
-@@ -1,6 +1,7 @@
- DESCRIPTION = "Lua is a powerful light-weight programming language designed \
- for extending applications."
- LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=90c3badc6055c699194c4a7cea583296"
- HOMEPAGE = "http://www.lua.org/"
- 
- DEPENDS += "readline"
--- 
-1.7.4.1
+Am Donnerstag, den 24.03.2011, 11:09 +0100 schrieb Martin Jansa:
+> Mostly checksums and LIC_FILES_CHKSUMs
+
+I have never heard of 'LIC_FILES_CHKSUM'.
+
+        $ git grep 'LIC_FILES'
+        recipes/htop/htop_0.9.bb:LIC_FILES_CHKSUM =3D "file://COPYING;md5=
+=3Dc312653532e8e669f30e5ec8bdc23be3"
+        recipes/lighttpd/lighttpd_1.4.28.bb:LIC_FILES_CHKSUM =3D "file://CO=
+PYING;md5=3De4dac5c6ab169aa212feb5028853a579"
+        recipes/ofono/ofono.inc:LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D=
+eb723b61539feef013de476e68b5c50a \
+        recipes/wpa-supplicant/wpa-supplicant-0.7.inc:LIC_FILES_CHKSUM =3D =
+"file://../COPYING;md5=3Dc54ce9345727175ff66d17b67ff51f58 \
+
+It looks like this is something from Pkoy [1]. So is this for the merge
+with Yocto?
+
+[=E2=80=A6]
 
 
+Thanks,
 
+Paul
+
+
+[1] http://www.yoctoproject.org/docs/poky-ref-manual/poky-ref-manual.html#u=
+singpoky-specifying-LIC_FILES_CHKSUM
+
+--=-FODfmBoT/c95FXnAxXkp
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2LHOkACgkQPX1aK2wOHVjsTwCfZAfyKBnygVqUzzWrv51vZJZU
+FpcAnRKld+NdBrgDSJ4UFROlKktuvww0
+=onIr
+-----END PGP SIGNATURE-----
+
+--=-FODfmBoT/c95FXnAxXkp--
