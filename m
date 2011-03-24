@@ -1,23 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q2kwU-0003MP-Ar for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 14:51:14 +0100
-Received: from f053039182.adsl.alicedsl.de ([78.53.39.182]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q2kui-0008Tz-8x for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 13:49:24 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <stefan@datenfreihafen.org>) id 1Q2mCR-0007MA-65
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 16:11:54 +0100
+Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
+	id 1Q2mAc-0002Qg-JZ by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Mar 2011 16:09:57 +0100
+Received: from stefan by excalibur.local with local (Exim 4.74)
+	(envelope-from <stefan@excalibur.local>) id 1Q2mAY-0008MH-KV
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 16:09:50 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1300971676-31774-1-git-send-email-heroor@gmail.com>
-References: <1300971676-31774-1-git-send-email-heroor@gmail.com>
-Date: Thu, 24 Mar 2011 14:49:22 +0100
-Message-ID: <1300974563.3795.29.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH 1/3] TI IPC: Fix License field.
+Date: Thu, 24 Mar 2011 16:09:50 +0100
+Message-Id: <f538a8adbf3450436056e05b6173e36276e61d3c.1300979039.git.stefan@buglabs.net>
+X-Mailer: git-send-email 1.7.4.1
+In-Reply-To: <cover.1300979039.git.stefan@buglabs.net>
+References: <cover.1300979039.git.stefan@buglabs.net>
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,NO_RELAYS
+	autolearn=ham version=3.2.5
+Subject: [PATCH 2011.03-maintenance 5/7] angstrom-jalimo: use cacao-native hg version for javac-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,62 +38,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 13:51:14 -0000
-X-Groupsio-MsgNum: 30598
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-/hc1ROQRFSyiJl/RkaP/"
+X-List-Received-Date: Thu, 24 Mar 2011 15:11:56 -0000
 
---=-/hc1ROQRFSyiJl/RkaP/
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Henning Heinold <h.heinold@tarent.de>
 
-Am Donnerstag, den 24.03.2011, 18:31 +0530 schrieb Siddharth Heroor:
-> From: Siddharth Heroor <heroor@ti.com>
->=20
-> * The correct license for TI IPC is BSD and not TI.
+* build java packages is more stable than with jamvm
 
-Was the original license a mistake or was it relicensed?
+Signed-off-by: Henning Heinold <h.heinold@tarent.de>
+Acked-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
+---
+ conf/distro/include/angstrom-jalimo.conf |    5 ++---
+ 1 files changed, 2 insertions(+), 3 deletions(-)
 
-> Signed-off-by: Siddharth Heroor <heroor@ti.com>
-> ---
->  recipes/ti/ti-ipc.inc |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
->=20
-> diff --git a/recipes/ti/ti-ipc.inc b/recipes/ti/ti-ipc.inc
-> index cd6ad6e..fc9b908 100644
-> --- a/recipes/ti/ti-ipc.inc
-> +++ b/recipes/ti/ti-ipc.inc
-> @@ -1,7 +1,7 @@
->  DESCRIPTION =3D "TI Inter Process Ccommunication (IPC) Mechanisms (for U=
-ni- and Multi- Processor Configurations)"
->  HOMEPAGE =3D "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targe=
-tcontent/ipc/index.html"
->  SECTION =3D "devel"
-> -LICENSE =3D "TI"=20
-> +LICENSE =3D "BSD"=20
-> =20
->  require ti-paths.inc
->  require ti-staging.inc
-
-All Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>. I would
-push them or do the TI people want to push these?
+diff --git a/conf/distro/include/angstrom-jalimo.conf b/conf/distro/include/angstrom-jalimo.conf
+index e116053..48727c4 100644
+--- a/conf/distro/include/angstrom-jalimo.conf
++++ b/conf/distro/include/angstrom-jalimo.conf
+@@ -5,9 +5,8 @@ PREFERRED_VERSION_jamvm-initial = "1.4.5"
+ PREFERRED_VERSION_classpath-initial = "0.93"
+ 
+ # Native VM
+-PREFERRED_PROVIDER_virtual/java-native = "jamvm-native"
+-PREFERRED_VERSION_jamvm-native = "1.5.3"
+-#PREFERRED_VERSION_cacao-native = "0.99.3"
++PREFERRED_PROVIDER_virtual/java-native ?= "cacao-native"
++SRCREV_pn-cacao-native ?= "c7bf150bfa46"
+ PREFERRED_VERSION_classpath-native = "0.98"
+ 
+ # Native compiler settings
+-- 
+1.7.4.1
 
 
-Thanks,
 
-Paul
-
---=-/hc1ROQRFSyiJl/RkaP/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk2LS+IACgkQPX1aK2wOHVjAIACeMZ3MCgbFEjRgWzEK2EP8+WHz
-iIYAn3KWJpZFArBjGgjykhbd/67GQKRq
-=HJ2E
------END PGP SIGNATURE-----
-
---=-/hc1ROQRFSyiJl/RkaP/--
