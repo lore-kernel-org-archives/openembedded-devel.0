@@ -1,37 +1,37 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q2hXh-0002Ql-Bp
+	(envelope-from <martin.jansa@gmail.com>) id 1Q2hY2-0002Ql-S4
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 11:13:25 +0100
+	Thu, 24 Mar 2011 11:13:46 +0100
 Received: by mail-bw0-f47.google.com with SMTP id 10so7237376bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2011 03:11:35 -0700 (PDT)
+	Thu, 24 Mar 2011 03:11:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:subject:date:message-id:x-mailer
 	:in-reply-to:references;
-	bh=QVJxKn+O+j9JowaNfvJYlX0W5vOD24H1KYBQZdTKMFQ=;
-	b=cvY+SKPNIhzuKXXg5l58Dnaz9UK82fpgfGjhXAtntqXdg7fbLwh0w+GpZqpLyC6FR3
-	QE4DDIg1BxaGWD1QN0LDhFLl0FGKBTnW76gMFk2W2W0ovfQZgpwfH7QSjNxgU2UY66mQ
-	oO9Pez5oXd6eVBa4EvverRQZ2bdkNTXuR2ZuI=
+	bh=G4jrJi3wKqH5PlCl3em7Yc2hPIVDntEMFzDazYQwgr0=;
+	b=KnOQV+Z4tDrjOMlup5z+JLWRXC3FKfc+OjPZwUy6WsJxACCv/WIlWQkfCWTHWmpA0r
+	iChv7fQ+miBI6sZ6WTBE5YRfLMxTC/mr0iBG50tBDiBBn/x/UjwtGTFKfJ2rFMNWz9vW
+	t5u/5ZYzQfLw092rX65/Q9ynuHQuMWhUNWBmQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=t5BZA4qKjIdWWIByois4jRUbtRX6P071fzoKciX7r8KAJEUaAze2YxvprfuLXk4aUG
-	mIhzuRKDlNqeHj/C/k29Uh/+vNBc35iMeYA+M2uqkk34lNwttJDeNHyXNRPbGU9Jch1H
-	T5Bz/UcRE+BnFWD29OYfzOB8U50bw/9jB40M0=
-Received: by 10.204.3.146 with SMTP id 18mr3420788bkn.1.1300961495072;
-	Thu, 24 Mar 2011 03:11:35 -0700 (PDT)
+	b=faNZGG1aGMWyfzznaMF091/G4ybcvnRB6RNoAR/oJqjrtDHylQJdg3VQdjEyA6nGSQ
+	BdSwZ5YAu7rHBbpGQdgtzB0/U/5N5zP4bbBNMex5h9alKxm0a+YPwgPGyu5BqVKNETGt
+	kXp8+Ko5ceNToDw57fTzmSP7uEfNjmU1Sos0k=
+Received: by 10.204.80.29 with SMTP id r29mr7181497bkk.195.1300961514323;
+	Thu, 24 Mar 2011 03:11:54 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id t1sm6587030bkx.19.2011.03.24.03.11.33
+	by mx.google.com with ESMTPS id w3sm6585125bkt.5.2011.03.24.03.11.52
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 24 Mar 2011 03:11:34 -0700 (PDT)
+	Thu, 24 Mar 2011 03:11:53 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Mar 2011 11:11:27 +0100
-Message-Id: <25669e8b93f665e329570ce4e4b0f812c46f7e3d.1300961186.git.Martin.Jansa@gmail.com>
+Date: Thu, 24 Mar 2011 11:11:46 +0100
+Message-Id: <69203f0bd1154b83fb79ed416d5959a0d737b680.1300961186.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.4.1
 In-Reply-To: <cover.1300961186.git.Martin.Jansa@gmail.com>
 References: <cover.1300961186.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 6/7] fribidi: fix LICENSE, drop D_P, add LIC_FILES_CHKSUM
+Subject: [PATCH 7/7] lua5.1: add LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,39 +45,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 10:13:25 -0000
+X-List-Received-Date: Thu, 24 Mar 2011 10:13:46 -0000
 
 ---
- .../recipes-devtools/libfribidi/fribidi_0.19.2.bb  |    9 +++------
- 1 files changed, 3 insertions(+), 6 deletions(-)
+ meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb b/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb
-index dd7fb98..fd4ef7a 100644
---- a/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb
-+++ b/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb
-@@ -2,14 +2,12 @@ DESCRIPTION = "Fribidi library for bidirectional text"
- SECTION = "libs"
- PRIORITY = "optional"
- PR = "r1"
--LICENSE = "unknown"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
-+BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb b/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb
+index 06c8004..5591c4c 100644
+--- a/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb
++++ b/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb
+@@ -1,6 +1,7 @@
+ DESCRIPTION = "Lua is a powerful light-weight programming language designed \
+ for extending applications."
+ LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=90c3badc6055c699194c4a7cea583296"
+ HOMEPAGE = "http://www.lua.org/"
  
- PROVIDES = "libfribidi"
- 
--# Slightly incompatible with 0.10.x, so:
--DEFAULT_PREFERENCE = "-1"
--DEFAULT_PREFERENCE_angstrom = "1"
--
- inherit autotools lib_package pkgconfig
- 
- CFLAGS_append = "  -DPAGE_SIZE=4096 "
-@@ -18,4 +16,3 @@ SRC_URI = "http://fribidi.org/download/fribidi-${PV}.tar.gz"
- 
- SRC_URI[md5sum] = "626db17d2d99b43615ad9d12500f568a"
- SRC_URI[sha256sum] = "49cf91586e48b52fe25872ff66c1da0dff0daac2593f9f300e2af12f44f64177"
--BBCLASSEXTEND = "native"
+ DEPENDS += "readline"
 -- 
 1.7.4.1
 
