@@ -1,35 +1,38 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q2hyl-0003YM-CW for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 11:41:23 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q2hwy-0000Vc-KG for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Mar 2011 11:39:32 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2011 11:39:32 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <heroor@gmail.com>) id 1Q2i3o-0003je-3P
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Mar 2011 11:46:36 +0100
+Received: by qwh5 with SMTP id 5so6490973qwh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2011 11:39:32 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 24 Mar 2011 03:44:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=CYzftvNVGsSNA1Ytvu8QLDUzoX6kfBTYJ10KUkKaez8=;
+	b=Mv5Gcej7EkFf60WVfIgxECIVMOKmj4xjqyG8cF8oMIF6hr1vDRr3zAc0XxIpe4SaFs
+	nRbIMAgk1+yJ39GNWYHvQvLSsJEzkxFzZqW6EnB25HRjv8gxcwjYdObT2dyzZ2h9iHxP
+	sMClHPcSK5hmZfuWkaBAVf/nDtIyh0gsndVjg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=XVip/dyFJ3gAjAlDYzUlM4aVsV74YZzPow0eKVkDfV7GqTUkv4Uhri0E2OCHe33rRv
+	EST9c2SbyUUe1iCUdkYlHu/QJewLqZ7aJVW23oH53zAZZ5T6pySvxJJ/wVkIUDAorlGH
+	JeLMr6u1903Y1ghB/SpmybyM2vMMGs49FpTJ4=
+MIME-Version: 1.0
+Received: by 10.224.41.11 with SMTP id m11mr6899313qae.155.1300963016424; Thu,
+	24 Mar 2011 03:36:56 -0700 (PDT)
+Received: by 10.224.134.5 with HTTP; Thu, 24 Mar 2011 03:36:56 -0700 (PDT)
+In-Reply-To: <1300958100.3795.13.camel@mattotaupa>
+References: <AANLkTikXA3RfJ2jfnf+ct=eCVmOS4CC1xPg1Q94JDeGT@mail.gmail.com>
+	<1300958100.3795.13.camel@mattotaupa>
+Date: Thu, 24 Mar 2011 16:06:56 +0530
+Message-ID: <AANLkTinKGR2iQmx7WvndGc3q6AHOZE=dm=fkwLdWmwb0@mail.gmail.com>
+From: Siddharth Heroor <heroor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 24 Mar 2011 11:39:19 +0100
-Message-ID: <imf70n$dcv$1@dough.gmane.org>
-References: <cover.1300961186.git.Martin.Jansa@gmail.com>
-	<1300962537.3795.26.camel@mattotaupa>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1300962537.3795.26.camel@mattotaupa>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH 0/7] Checksums and LIC_FILES_CHKSUMs
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: [PATCH 1/2] TI IPC: Fixes for license, dependencies and installer unpack
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,40 +46,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 10:41:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 24 Mar 2011 10:46:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thu, Mar 24, 2011 at 2:45 PM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Dear Siddharth,
+>
+>
+> Am Donnerstag, den 24.03.2011, 14:22 +0530 schrieb Siddharth Heroor:
+<snip>
 
-On 24-03-11 11:28, Paul Menzel wrote:
-> Am Donnerstag, den 24.03.2011, 11:09 +0100 schrieb Martin Jansa:
->> Mostly checksums and LIC_FILES_CHKSUMs
-> 
-> I have never heard of 'LIC_FILES_CHKSUM'.
-> 
->         $ git grep 'LIC_FILES'
->         recipes/htop/htop_0.9.bb:LIC_FILES_CHKSUM = "file://COPYING;md5=c312653532e8e669f30e5ec8bdc23be3"
->         recipes/lighttpd/lighttpd_1.4.28.bb:LIC_FILES_CHKSUM = "file://COPYING;md5=e4dac5c6ab169aa212feb5028853a579"
->         recipes/ofono/ofono.inc:LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
->         recipes/wpa-supplicant/wpa-supplicant-0.7.inc:LIC_FILES_CHKSUM = "file://../COPYING;md5=c54ce9345727175ff66d17b67ff51f58 \
-> 
-> It looks like this is something from Pkoy [1]. So is this for the merge
-> with Yocto?
+>>
+>> +DEPENDS =3D "ti-sysbios ti-cgt6x ti-xdctools"
+>> +
+>
+> Did it work before?
+>
+>> =A0BINFILE=3D"ipc_setuplinux_${PV}.bin"
+>> -TI_BIN_UNPK_CMDS=3D"Y: qY:workdir:Y"
+>> +TI_BIN_UNPK_CMDS=3D"Y: q:workdir:Y"
+>
+> Will this work with the older versions, since it is an include file.
 
-This is for http://cgit.openembedded.org/cgit.cgi/meta-openembedded/
+I found only the include file present and so, the second patch added
+the version of a package that's available.
 
-regards,
+>
+> Please resend as =BBPATCH v2=AB. Your other patch was also corrupted.
+>
+> Two additional comments.
+>
+> 1. I would prefer one commit for each change.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Sure. I can send separate patches.
 
-iD8DBQFNix9XMkyGM64RGpERAoqnAJ4gdzyAl8FYrGE6sX26swBFFpdaMQCcCFpH
-9EVH8PewwCg1yyXOJkYpZoc=
-=Lvdu
------END PGP SIGNATURE-----
+> 2. Is it true that `ti-ipc` as committed in 32336b9a [1] was only usable
+> for the TI folks and just now it is released to and usable for the
+> public? This should be explained in the commit message and that the
+> first public version will be committed in the next commit.
 
+Yes, I will add more information in the commit and resend patches.
+
+>
+>
+> Thanks,
+>
+> Paul
+>
+>
+> [1] http://openembedded.org/index.php/Styleguide
+> [2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D32336=
+b9a0e785f2f13d8cc36aefcaa2be27141da
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
+
+--=20
+Sid
 
 
