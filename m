@@ -1,26 +1,34 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <a0875592@swubn01>) id 1Q2zCK-0004Un-42
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Mar 2011 06:04:33 +0100
-Received: from dbdp31.itg.ti.com ([172.24.170.98])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id p2P52ZXR014600
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q31ZQ-0006Gq-26 for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Mar 2011 08:36:32 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q31XY-0003Fg-P6 for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Mar 2011 08:34:36 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 Mar 2011 08:34:36 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Mar 2011 00:02:37 -0500
-Received: from swubn01 (localhost [127.0.0.1])
-	by dbdp31.itg.ti.com (8.13.8/8.13.8) with ESMTP id p2P52X1U017739;
-	Fri, 25 Mar 2011 10:32:34 +0530 (IST)
-Received: from a0875592 by swubn01 with local (Exim 4.71)
-	(envelope-from <a0875592@swubn01>)
-	id 1Q2zAP-00005B-Gz; Fri, 25 Mar 2011 10:32:33 +0530
-From: Siddharth Heroor <heroor@gmail.com>
+	Fri, 25 Mar 2011 08:34:36 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Mar 2011 10:32:31 +0530
-Message-Id: <1301029351-32736-1-git-send-email-heroor@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: Siddharth Heroor <heroor@ti.com>
-Subject: [PATCH] TI XDCTools: Add version 3.20.08.88
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 25 Mar 2011 08:34:21 +0100
+Message-ID: <imhght$u23$1@dough.gmane.org>
+References: <cover.1301008354.git.Martin.Jansa@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <cover.1301008354.git.Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH 0/8] [meta-oe] remaining set of LIC_FILES_CHKSUMs for e-wm build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,31 +42,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Mar 2011 05:04:33 -0000
+X-List-Received-Date: Fri, 25 Mar 2011 07:36:32 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Siddharth Heroor <heroor@ti.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 25-03-11 00:25, Martin Jansa wrote:
+> e-wm compiled fine now with few extra BBCLASSEXTEND in oe-core
+> 
+> Pull URL: git://gitorious.org/shr/meta-openembedded.git
+>   Branch: jama/license
+>   Browse: http://gitorious.org/shr/meta-openembedded/commits/jama/license
+> 
+> Thanks,
+>     Martin Jansa <Martin.Jansa@gmail.com>
 
 
-Signed-off-by: Siddharth Heroor <heroor@ti.com>
----
- recipes/ti/ti-xdctools_3.20.08.88.bb |    6 ++++++
- 1 files changed, 6 insertions(+), 0 deletions(-)
- create mode 100644 recipes/ti/ti-xdctools_3.20.08.88.bb
+Merged into master, thanks!
 
-diff --git a/recipes/ti/ti-xdctools_3.20.08.88.bb b/recipes/ti/ti-xdctools_3.20.08.88.bb
-new file mode 100644
-index 0000000..bf0cdcd
---- /dev/null
-+++ b/recipes/ti/ti-xdctools_3.20.08.88.bb
-@@ -0,0 +1,6 @@
-+require ti-xdctools.inc
-+
-+PV = "3_20_08_88"
-+
-+SRC_URI[xdcbin.md5sum] = "068447e935adb54f0cacf0e294a281f9"
-+SRC_URI[xdcbin.sha256sum] = "a4616fae3cc2a9f46b5b4377bb57af7f7932297cda210a6cbcc5f942256db196"
--- 
-1.7.0.4
+
+
+> ---
+> 
+> 
+> Martin Jansa (8):
+>   eet: add LIC_FILES_CHKSUM
+>   evas: add LIC_FILES_CHKSUM
+>   ecore: add LIC_FILES_CHKSUM and inherit gettext
+>   edbus: add LIC_FILES_CHKSUM
+>   efreet: add LIC_FILES_CHKSUM
+>   eeze: add LIC_FILES_CHKSUM
+>   edje: add LIC_FILES_CHKSUM
+>   e-wm: add LIC_FILES_CHKSUM and inherit gettext
+> 
+>  meta-efl/recipes-efl/e17/e-wm_svn.bb |    3 ++-
+>  meta-efl/recipes-efl/efl/ecore.inc   |    7 ++++---
+>  meta-efl/recipes-efl/efl/edbus.inc   |    1 +
+>  meta-efl/recipes-efl/efl/edje.inc    |    1 +
+>  meta-efl/recipes-efl/efl/eet.inc     |    1 +
+>  meta-efl/recipes-efl/efl/eeze.inc    |    1 +
+>  meta-efl/recipes-efl/efl/efreet.inc  |    1 +
+>  meta-efl/recipes-efl/efl/evas.inc    |    1 +
+>  8 files changed, 12 insertions(+), 4 deletions(-)
+> 
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNjEV9MkyGM64RGpERAltSAKCeD41sPU1eQssTI4Nu1fMpW2Lw/gCaAn1L
+lghIXdSxuxf+6phf4WRe3tQ=
+=SG0/
+-----END PGP SIGNATURE-----
 
 
 
