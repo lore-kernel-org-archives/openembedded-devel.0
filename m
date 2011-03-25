@@ -1,32 +1,35 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q34wS-0007kS-Li for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Mar 2011 12:12:34 +0100
+	id 1Q35US-0008CL-4t for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Mar 2011 12:47:40 +0100
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q34uf-0007xz-Bk for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Mar 2011 12:10:41 +0100
+	id 1Q35Se-0000oU-C5 for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Mar 2011 12:45:48 +0100
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Mar 2011 12:10:41 +0100
+	Fri, 25 Mar 2011 12:45:48 +0100
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Mar 2011 12:10:41 +0100
+	Fri, 25 Mar 2011 12:45:48 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 25 Mar 2011 12:10:28 +0100
-Message-ID: <imht74$3ej$1@dough.gmane.org>
+Date: Fri, 25 Mar 2011 12:45:32 +0100
+Message-ID: <imhv8s$f50$1@dough.gmane.org>
+References: <1300971676-31774-1-git-send-email-heroor@gmail.com>	<1300974563.3795.29.camel@mattotaupa>	<img1sm$q20$1@dough.gmane.org>
+	<AANLkTinSf8edN_JitFWFu=oi1cOfseAu4r7fCRMTmrJw@mail.gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <AANLkTinSf8edN_JitFWFu=oi1cOfseAu4r7fCRMTmrJw@mail.gmail.com>
 X-Enigmail-Version: 1.0.1
-Subject: [2011.03-maintenance] Pull request #5
+Subject: Re: [PATCH 1/3] TI IPC: Fix License field.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,77 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Mar 2011 11:12:34 -0000
+X-List-Received-Date: Fri, 25 Mar 2011 11:47:40 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Tom,
+On 25-03-11 12:08, Siddharth Heroor wrote:
+> On Thu, Mar 24, 2011 at 11:47 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 24-03-11 14:49, Paul Menzel wrote:
+>>> Am Donnerstag, den 24.03.2011, 18:31 +0530 schrieb Siddharth Heroor:
+>>>> From: Siddharth Heroor <heroor@ti.com>
+>>>>
+>>>> * The correct license for TI IPC is BSD and not TI.
+>>>
+>>> Was the original license a mistake or was it relicensed?
+>>>
+>>>> Signed-off-by: Siddharth Heroor <heroor@ti.com>
+>>>> ---
+>>>
+>>> All Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>. I would
+>>> push them or do the TI people want to push these?
+>>
+>> Please don't push any TI patches without my or Denys' Ack/SOB.
+> 
+> Can you please consider pushing this patchset into the 2011.03
+> maintenance branch as well?
 
-Please pull the 27 commits from here:
-
-URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-Branch: 2011.03-maintenance
-
-Kartik Mohta (1):
-      libarchive: Requires libxml2
-
-Khem Raj (2):
-      cairo_1.10.0.bb: Fennec will now need tee support in cairo so
-      fennec: Make it build on ARM eglibc/uclibc
-
-Koen Kooi (3):
-      networkmanager 0.8.1: fix build against libl using the patch from
-      x-load git: update to 1.5.0
-      u-boot git: remove duplicate filesdir line
-
-Martin Jansa (14):
-      libnl: rename libnl2 to libnl as used in openembedded-core
-      libnl: don't use /usr/include/libnl2 anymore
-      libnl: add libnl.inc and use INC_PR
-      SHR: drop blacklist entries for libnl, now when libnl2 is used by
-      libfsobasics: depend only on libnl(-2.0) not libnl2(-2.0)
-      hostap-daemon: depend only on libnl(-2.0) not libnl2(-2.0)
-      iw: depend only on libnl(-2.0) not libnl2(-2.0)
-      ti-wifi-utils: depend only on libnl(-2.0) not libnl2(-2.0)
-      wpa-supplicant-0.7: depend only on libnl(-2.0) not libnl2(-2.0)
-      connman: depend only on libnl(-2.0) not libnl2(-2.0)
-      libnl_git: remove fix-pktloc-dep-race.patch from this version
-      libnl-1.1: rename to libnl1 and build only static lib
-      networkmanager_git: fix build with static libnl1
-      mc: add RRECOMMENDed mc-skins package and more files to FILES_PN
-
-Roger Monk (3):
-      u-boot-git:  Add omap4430-panda to u-boot git recipe
-      omap4430-panda: Prefer u-boot-git and remove extra custom x-load
-      gst-plugins-good: update to 0.10.28
-
-Siddharth Heroor (4):
-      TI IPC: Fix License field.
-      TI IPC: Add missing dependencies
-      TI IPC: Add version 1.22.04.25
-      TI XDCTools: Add version 3.20.08.88
-
-You can view the branch online at
-http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance
-
-This biggest chunk is the libnl situation, that was runtime tested on
-angstrom/beagleboard and angstrom/hawkboard. After that there's the TI
-stuff update, which only impacts out-of-tree recipes, the pandaboard
-changes which were runtime tested on angstrom/pandaboard, a gstreamer
-update and small updates for fennec, mc and libarchive.
-
-regards,
-
-Koen
+Done, see pull request #5
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFNjHgjMkyGM64RGpERAlgHAJ9L3t1FyVJk/4v18PilmTQQky6sjQCfZJUQ
-ujQ9XIWO1hL9b8hn2Fng6EU=
-=AYMM
+iD8DBQFNjIBcMkyGM64RGpERAjhEAJ9ORWYWurljq0uYuRWixQUVXz/ZQwCeK3Vu
+rExeIo7bL9vpNj4ohwy7Uz4=
+=X7kB
 -----END PGP SIGNATURE-----
 
 
