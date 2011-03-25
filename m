@@ -1,25 +1,25 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q39eH-0008Gc-V2 for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Mar 2011 17:14:06 +0100
+	id 1Q3CvV-0001I9-SR for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Mar 2011 20:44:05 +0100
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q39cT-0008Ii-Sf for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Mar 2011 17:12:13 +0100
+	id 1Q3Ctb-0002Oz-V9 for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Mar 2011 20:42:07 +0100
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Mar 2011 17:12:13 +0100
+	Fri, 25 Mar 2011 20:42:07 +0100
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Mar 2011 17:12:13 +0100
+	Fri, 25 Mar 2011 20:42:07 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 25 Mar 2011 17:12:01 +0100
-Message-ID: <imiesh$fqt$1@dough.gmane.org>
+Date: Fri, 25 Mar 2011 20:41:55 +0100
+Message-ID: <imir63$qug$1@dough.gmane.org>
 References: <imht74$3ej$1@dough.gmane.org> <4D8CB3AB.4010203@mentor.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
@@ -42,7 +42,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Mar 2011 16:14:06 -0000
+X-List-Received-Date: Fri, 25 Mar 2011 19:44:06 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
@@ -113,20 +113,25 @@ On 25-03-11 16:24, Tom Rini wrote:
 > The libnl stuff makes me nervous.  Can you throw it through your whole
 > build matrix easily?
 
-I built angstrom-gnome-image for both armv5te and armv7a, I queued it up
-for the whole matrix a few minutes ago. I'll report back when it has
-finished.
+So far the only "problem" is that on a incremental build libnl1 won't
+get cleaned since it has disappeared, but libnl2 overwrites the things
+in sysroot so no practical issues. On a build from scratch no problems
+at all.
+I'll let the build cycle continue throughout the night.
 
 regards,
 
 Koen
 
+regards,
+
+Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFNjL7RMkyGM64RGpERApFWAJ4vgcSKEP3gpIXmoUby4UKN3iRaLgCeKAyV
-m1IFnsoHfsbnBYlRXBgrLro=
-=lOYm
+iD8DBQFNjPADMkyGM64RGpERAh5DAJkBrjPeriEMoJeREhh0Dtu/2oyqPwCgrfbc
+8LZt8bnfS0ysr5D8kFmLBKU=
+=cg5Y
 -----END PGP SIGNATURE-----
 
 
