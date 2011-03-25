@@ -1,37 +1,36 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q2txE-0004AQ-4X
+	(envelope-from <raj.khem@gmail.com>) id 1Q2ut4-0006Nx-9l
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Mar 2011 00:28:36 +0100
-Received: by mail-bw0-f47.google.com with SMTP id 10so577628bwz.6
+	Fri, 25 Mar 2011 01:28:22 +0100
+Received: by bwz10 with SMTP id 10so607164bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2011 16:26:44 -0700 (PDT)
+	Thu, 24 Mar 2011 17:26:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=uC1t0bg3mnSCDPgO9ea35wV+hPlH5JTFORCU3t5WbYU=;
-	b=oFGK8gZlsuiP/owjJW5hsF/lUUM/TgZ7+dbKxDRLu+2UhuMEzIKcNFJDbmeDvZunWm
-	bsqtsRVXULzqL0wGcN/R/1kDuEWxAgimkAJ972bQPEMZA2zyL/98pcCRDqsGY0OsGSpm
-	iZMUxj1UWBZCI9n1tRfcob1DhdJbmst92hLeA=
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type:content-transfer-encoding;
+	bh=tbdz3he0ZxwzgIDpdr0oZTcjWFNmJowJxz1dF3NsIS4=;
+	b=Fw4Ga12T4IAPJvl2Jdih0mRIZkqszzMsoIKVjnnnx2NHqQC00ICxhYpBEEZg9WZ/zm
+	7xAzWWEHG0lsnHJmOqI3YKLZnje3UlOTTqznkEYEORW788qMqBsQDJIPvQ29b+ccIB0X
+	ZelA0cRNTlgGzM1gjNNnpnUwBmm1Oe9/hupKU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=ghWfMWgVGzXqEmvz9jSxOgWS4hnoN/bs9U1/Zs0RvdRYnZuyotKzIguBPkAwUN7/0B
-	Wzy+RjT1FNejEFLW+DfjgYm14nrlLN4lXfXdm7TMNszP68UsdJa54xMpgT0/vWFTmT3N
-	dYM5WHDM4x9zfCJdSnmDC2u7mJe2Zq+S0yvYQ=
-Received: by 10.204.144.194 with SMTP id a2mr70020bkv.93.1301009183332;
-	Thu, 24 Mar 2011 16:26:23 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id rb14sm316525bkb.21.2011.03.24.16.26.22
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 24 Mar 2011 16:26:22 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Mar 2011 00:26:21 +0100
-Message-Id: <3854884409bc6ee290e0a0fcc26b452e88f5e052.1301008354.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=COl1UxCdh2mTTlTBqWqi8dCXv5n59s60SbjWC7x1knkMdeEljHNrz50bism/0jicfA
+	PEV4853e0bb7UWNS8oy5QiitLNcjsgufUhxDAOPloIqKN8FzTlTDhaO5Mbj7Xb4cB6NW
+	fcaJEW2+JR7X0UTqFeGxx/7FElEBNE/qDD9IU=
+Received: by 10.223.78.138 with SMTP id l10mr134769fak.106.1301012789112; Thu,
+	24 Mar 2011 17:26:29 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.223.109.12 with HTTP; Thu, 24 Mar 2011 17:25:59 -0700 (PDT)
 In-Reply-To: <cover.1301008354.git.Martin.Jansa@gmail.com>
 References: <cover.1301008354.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 8/8] e-wm: add LIC_FILES_CHKSUM and inherit gettext
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 24 Mar 2011 17:25:59 -0700
+Message-ID: <AANLkTi=2wrTUFovXf3eRwcwwrqCwdMNcep01vtbQTYVc@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [PATCH 0/8] [meta-oe] remaining set of LIC_FILES_CHKSUMs for e-wm build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,34 +44,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2011 23:28:36 -0000
+X-List-Received-Date: Fri, 25 Mar 2011 00:28:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/recipes-efl/e17/e-wm_svn.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+On Thu, Mar 24, 2011 at 4:25 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> e-wm compiled fine now with few extra BBCLASSEXTEND in oe-core
+>
+> Pull URL: git://gitorious.org/shr/meta-openembedded.git
+> =C2=A0Branch: jama/license
+> =C2=A0Browse: http://gitorious.org/shr/meta-openembedded/commits/jama/lic=
+ense
+>
+> Thanks,
+> =C2=A0 =C2=A0Martin Jansa <Martin.Jansa@gmail.com>
 
-diff --git a/meta-efl/recipes-efl/e17/e-wm_svn.bb b/meta-efl/recipes-efl/e17/e-wm_svn.bb
-index b7ce1b1..baed233 100644
---- a/meta-efl/recipes-efl/e17/e-wm_svn.bb
-+++ b/meta-efl/recipes-efl/e17/e-wm_svn.bb
-@@ -1,12 +1,13 @@
- DESCRIPTION = "The Enlightenment Window Manager Version 17"
- DEPENDS = "eet evas ecore edje efreet edbus eeze"
- LICENSE = "MIT BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f523ab5986cc79b52a90d2ac3d5454a2"
- SRCNAME = "e"
- PV = "0.16.999.060+svnr${SRCPV}"
- PR = "r19"
- SRCREV = "${EFL_SRCREV}"
- 
--inherit e update-alternatives
-+inherit e update-alternatives gettext
- S = "${WORKDIR}/${SRCNAME}"
- 
- SRC_URI = "\
--- 
-1.7.4.1
+whole seried looks ok
 
+Acked-by: Khem Raj <raj.khem@gmail.com>
+
+> ---
+>
+>
+> Martin Jansa (8):
+> =C2=A0eet: add LIC_FILES_CHKSUM
+> =C2=A0evas: add LIC_FILES_CHKSUM
+> =C2=A0ecore: add LIC_FILES_CHKSUM and inherit gettext
+> =C2=A0edbus: add LIC_FILES_CHKSUM
+> =C2=A0efreet: add LIC_FILES_CHKSUM
+> =C2=A0eeze: add LIC_FILES_CHKSUM
+> =C2=A0edje: add LIC_FILES_CHKSUM
+> =C2=A0e-wm: add LIC_FILES_CHKSUM and inherit gettext
+>
+> =C2=A0meta-efl/recipes-efl/e17/e-wm_svn.bb | =C2=A0 =C2=A03 ++-
+> =C2=A0meta-efl/recipes-efl/efl/ecore.inc =C2=A0 | =C2=A0 =C2=A07 ++++---
+> =C2=A0meta-efl/recipes-efl/efl/edbus.inc =C2=A0 | =C2=A0 =C2=A01 +
+> =C2=A0meta-efl/recipes-efl/efl/edje.inc =C2=A0 =C2=A0| =C2=A0 =C2=A01 +
+> =C2=A0meta-efl/recipes-efl/efl/eet.inc =C2=A0 =C2=A0 | =C2=A0 =C2=A01 +
+> =C2=A0meta-efl/recipes-efl/efl/eeze.inc =C2=A0 =C2=A0| =C2=A0 =C2=A01 +
+> =C2=A0meta-efl/recipes-efl/efl/efreet.inc =C2=A0| =C2=A0 =C2=A01 +
+> =C2=A0meta-efl/recipes-efl/efl/evas.inc =C2=A0 =C2=A0| =C2=A0 =C2=A01 +
+> =C2=A08 files changed, 12 insertions(+), 4 deletions(-)
+>
+> --
+> 1.7.4.1
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
