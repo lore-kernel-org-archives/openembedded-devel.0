@@ -1,33 +1,32 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <richard.purdie@linuxfoundation.org>)
-	id 1Q38Sf-0001rO-Qr; Fri, 25 Mar 2011 15:58:04 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p2PEu8TA023411;
-	Fri, 25 Mar 2011 14:56:08 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 20959-08; Fri, 25 Mar 2011 14:56:05 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p2PEtvLb023397
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Fri, 25 Mar 2011 14:56:00 GMT
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Michael Jones <michael.jones@matrix-vision.de>
-In-Reply-To: <4D8CA329.10407@matrix-vision.de>
-References: <4D832AA4.1020701@matrix-vision.de>
-	<AB78D48B-B478-47DF-A7CF-94FF96C313AC@dominion.thruhere.net>
-	<1301060302.3018.129.camel@rex>  <4D8CA329.10407@matrix-vision.de>
-Date: Fri, 25 Mar 2011 14:55:49 +0000
-Message-ID: <1301064949.3018.147.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] staging & using kernel headers
+Received: from relay1.mentorg.com ([192.94.38.131])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <Tom_Rini@mentor.com>) id 1Q38u7-0004Yc-DX
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Mar 2011 16:26:23 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1Q38sI-00046B-RB from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Mar 2011 08:24:30 -0700
+Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Fri, 25 Mar 2011 08:24:30 -0700
+Received: from [172.30.80.83] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
+	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
+	Fri, 25 Mar 2011 08:24:30 -0700
+Message-ID: <4D8CB3AB.4010203@mentor.com>
+Date: Fri, 25 Mar 2011 08:24:27 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <imht74$3ej$1@dough.gmane.org>
+In-Reply-To: <imht74$3ej$1@dough.gmane.org>
+X-OriginalArrivalTime: 25 Mar 2011 15:24:30.0659 (UTC)
+	FILETIME=[BC94D930:01CBEB00]
+Subject: Re: [2011.03-maintenance] Pull request #5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,94 +40,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Mar 2011 14:58:04 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 25 Mar 2011 15:26:23 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2011-03-25 at 15:14 +0100, Michael Jones wrote:
-> On 03/25/2011 02:38 PM, Richard Purdie wrote:
-> > On Fri, 2011-03-18 at 10:55 +0100, Koen Kooi wrote:
-> >> CC:ing oe-core since we have kernel.bbclass patches there as well.
-> >>
-> >> Op 18 mrt 2011, om 10:49 heeft Michael Jones het volgende geschreven:
-> >>
-> >>> Hello Koen & co.,
-> >>>
-> >>> I recently bumped into a problem with recipes ti-dmai and gstreamer-ti
-> >>> when they included the kernel headers.  These headers were staged by
-> >>> kernel.bbclass sysroot_stage_all_append() with a lot of manual copying
-> >>> and manipulating links and such, rather than using 'oe_runmake
-> >>> headers_install'.  Back in October Koen explained this
-> >>> (http://article.gmane.org/gmane.comp.handhelds.openembedded/37772) is
-> >>> because some recipes use private kernel API.  The result of this with my
-> >>> 2.6.38 kernel
-> >>
-> >> DMAI and gst-ti don't really work with anything newer than 2.6.32-psp, we're trying to get that addressed internally.
-> >>
-> >>> is that I get a warning-turned-error from linux/types.h
-> >>> that "Attempt to use kernel headers from user space".
-> >>>
-> >>> ti-dmai_svn.bb hacks this (self-admittedly) by defining
-> >>> _EXPORTED_HEADERS_ (commit d0184be13b4879e, also from Koen).  I had to
-> >>> modify the recipe to enable the define to actually get passed as a
-> >>> compile option.  For gstreamer-ti, there was no such hack in place, but
-> >>> it was needed for the same reason.
-> >>>
-> >>> I would think it is a common requirement for recipes to include kernel
-> >>> headers, and this warning has been around since 2.6.32.  I got around it
-> >>> with gstreamer-ti by installing the headers with headers_install into a
-> >>> subdir of the headers directory set up currently by kernel.bbclass, and
-> >>> pointing the gstreamer-ti recipe at that, but I'm not sure if there's a
-> >>> better way.
-> >>>
-> >>> If there are some recipes that need internal kernel sources staged for
-> >>> them, then it seems to me that we need both sets of kernel headers: one
-> >>> exported to userspace (with headers_install) and one that is not.
-> >>> Right?  Can we agree on a standard place/manner for this?
-> >>>
-> >>> Below is my patch to get gstreamer-ti working, for illustration.
-> >>
-> >> I don't really have a better suggestion, apart from adding a var in e.g. bitbake.conf to point to the userspace stuff.
-> >>
-> >> We might even do the reverse, stage the full set into
-> >> $kernel_dir/private and the userspace ones in $kernel_dir, that would
-> >> make it more clear which recipes need internal API.
-> > 
-> > Anything using internal kernel headers is effectively kernel module like
-> > and should be using STAGING_DIR_KERNEL. There should be a complete set
-> > of headers available there, particularly after recent improvements to
-> > kernel.bbclass in oecore. Note that using kernel headers like this
-> > effectively makes the package machine specific since the kernel is
-> > machine specific.
-> 
-> When you say "_internal_ kernel headers", I assume you mean kernel
-> headers which aren't intended for user space.  But because of the
-> "Attempt to use kernel headers from user space" warning (or rather the
-> motivations behind the warning), I don't want to/ I can't use the exact
-> same headers for building apps which need public kernel API as I do for
-> building modules which use internal kernel headers.
+On 03/25/2011 04:10 AM, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Tom,
+>
+> Please pull the 27 commits from here:
+>
+> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+> Branch: 2011.03-maintenance
+>
+> Kartik Mohta (1):
+>        libarchive: Requires libxml2
+>
+> Khem Raj (2):
+>        cairo_1.10.0.bb: Fennec will now need tee support in cairo so
+>        fennec: Make it build on ARM eglibc/uclibc
+>
+> Koen Kooi (3):
+>        networkmanager 0.8.1: fix build against libl using the patch from
+>        x-load git: update to 1.5.0
+>        u-boot git: remove duplicate filesdir line
+>
+> Martin Jansa (14):
+>        libnl: rename libnl2 to libnl as used in openembedded-core
+>        libnl: don't use /usr/include/libnl2 anymore
+>        libnl: add libnl.inc and use INC_PR
+>        SHR: drop blacklist entries for libnl, now when libnl2 is used by
+>        libfsobasics: depend only on libnl(-2.0) not libnl2(-2.0)
+>        hostap-daemon: depend only on libnl(-2.0) not libnl2(-2.0)
+>        iw: depend only on libnl(-2.0) not libnl2(-2.0)
+>        ti-wifi-utils: depend only on libnl(-2.0) not libnl2(-2.0)
+>        wpa-supplicant-0.7: depend only on libnl(-2.0) not libnl2(-2.0)
+>        connman: depend only on libnl(-2.0) not libnl2(-2.0)
+>        libnl_git: remove fix-pktloc-dep-race.patch from this version
+>        libnl-1.1: rename to libnl1 and build only static lib
+>        networkmanager_git: fix build with static libnl1
+>        mc: add RRECOMMENDed mc-skins package and more files to FILES_PN
+>
+> Roger Monk (3):
+>        u-boot-git:  Add omap4430-panda to u-boot git recipe
+>        omap4430-panda: Prefer u-boot-git and remove extra custom x-load
+>        gst-plugins-good: update to 0.10.28
+>
+> Siddharth Heroor (4):
+>        TI IPC: Fix License field.
+>        TI IPC: Add missing dependencies
+>        TI IPC: Add version 1.22.04.25
+>        TI XDCTools: Add version 3.20.08.88
+>
+> You can view the branch online at
+> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance
+>
+> This biggest chunk is the libnl situation, that was runtime tested on
+> angstrom/beagleboard and angstrom/hawkboard. After that there's the TI
+> stuff update, which only impacts out-of-tree recipes, the pandaboard
+> changes which were runtime tested on angstrom/pandaboard, a gstreamer
+> update and small updates for fennec, mc and libarchive.
 
-Ok, so you only really have the options of:
+The libnl stuff makes me nervous.  Can you throw it through your whole 
+build matrix easily?
 
-a) Use a specific patched kernel for linux-libc-headers which has these
-headers in it (see below for why this is ugly)
-b) Install some extra headers in "libc-headers-extras" type recipe
-c) Ship default versions of the headers with your userspace and use
-those if shared versions don't exist. This assumes the API is stable and
-on its way to mainline.
-
-I don't think this is as common a requirement as you think as most
-people get this kind of thing merged into the mainline kernel to try and
-reduce this kind of problem.
-
-The ugliness is where you have two different arm boards you want to
-build, with a common optimisation/toolchain and each wants to redirect
-linux-libc-headers to its own "special" version. The question is then,
-why aren't the "special" bits in mainline.
-
-Cheers,
-
-Richard
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
