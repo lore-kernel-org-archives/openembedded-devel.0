@@ -1,39 +1,23 @@
-Received: from familie-heinold.de ([85.214.48.103]
-	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1Q3UPY-0005Oi-7W
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <radoslav@kolev.info>) id 1Q3Wir-0007pn-Qe
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Mar 2011 15:24:16 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 8D01E11000A8
+	Sat, 26 Mar 2011 17:52:21 +0100
+Received: by fxm19 with SMTP id 19so1975500fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2011 15:21:36 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id E50DC110008E
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2011 15:21:35 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (f052239170.adsl.alicedsl.de
-	[78.52.239.170]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2011 15:21:35 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 689FA3C0C8; Sat, 26 Mar 2011 15:20:52 +0100 (CET)
-Date: Sat, 26 Mar 2011 15:20:52 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Sat, 26 Mar 2011 09:50:27 -0700 (PDT)
+Received: by 10.223.15.5 with SMTP id i5mr2441289faa.114.1301158224279;
+	Sat, 26 Mar 2011 09:50:24 -0700 (PDT)
+Received: from localhost.localdomain ([77.85.232.104])
+	by mx.google.com with ESMTPS id j11sm835356faa.20.2011.03.26.09.50.22
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 26 Mar 2011 09:50:23 -0700 (PDT)
+From: Radoslav Kolev <radoslav@kolev.info>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110326142051.GA29533@rhein.zuhause.netz>
-References: <1301146638.3979.52.camel@mattotaupa>
-MIME-Version: 1.0
-In-Reply-To: <1301146638.3979.52.camel@mattotaupa>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [PATCH] xbmc: add patch to fix `error: call of overloaded 'abs(int64_t)' is ambiguous`
+Date: Sat, 26 Mar 2011 18:50:34 +0200
+Message-Id: <1301158234-13658-1-git-send-email-radoslav@kolev.info>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH] Added a recipe for libmodbus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,17 +31,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Mar 2011 14:24:17 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 26 Mar 2011 16:52:21 -0000
 
-Hi,
 
-please not 100 lines useless info. One error message is enough.
-Otherwise
+Signed-off-by: Radoslav Kolev <radoslav@kolev.info>
+---
+ recipes/libmodbus/libmodbus.inc      |    8 ++++++++
+ recipes/libmodbus/libmodbus_2.0.3.bb |    8 ++++++++
+ recipes/libmodbus/libmodbus_git.bb   |   11 +++++++++++
+ 3 files changed, 27 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/libmodbus/libmodbus.inc
+ create mode 100644 recipes/libmodbus/libmodbus_2.0.3.bb
+ create mode 100644 recipes/libmodbus/libmodbus_git.bb
 
-Acked-by: Henning Heinold <heinold@inf.fu-berlin.de>
+diff --git a/recipes/libmodbus/libmodbus.inc b/recipes/libmodbus/libmodbus.inc
+new file mode 100644
+index 0000000..c5a673a
+--- /dev/null
++++ b/recipes/libmodbus/libmodbus.inc
+@@ -0,0 +1,8 @@
++DESCRIPTION = "A Modbus library for Linux, Mac OS X, FreeBSD, QNX and Win32"
++HOMEPAGE = "http://www.libmodbus.org/"
++SECTION = "libs"
++PRIORITY = "optional"
++LICENSE = "LGPL"
++INC_PR = "r1"
++
++inherit autotools pkgconfig
+diff --git a/recipes/libmodbus/libmodbus_2.0.3.bb b/recipes/libmodbus/libmodbus_2.0.3.bb
+new file mode 100644
+index 0000000..bf6062c
+--- /dev/null
++++ b/recipes/libmodbus/libmodbus_2.0.3.bb
+@@ -0,0 +1,8 @@
++require libmodbus.inc
++
++PR = "${INC_PR}.1"
++
++SRC_URI = "http://github.com/downloads/stephane/libmodbus/libmodbus-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "0646f3edca6d7783d0356dc2fc4f9f4c"
++SRC_URI[sha256sum] = "cf9d8d3981ace78a4ed559f2e28c5e0270d56a607b9ae79484e5742e36543feb"
+diff --git a/recipes/libmodbus/libmodbus_git.bb b/recipes/libmodbus/libmodbus_git.bb
+new file mode 100644
+index 0000000..5b405f8
+--- /dev/null
++++ b/recipes/libmodbus/libmodbus_git.bb
+@@ -0,0 +1,11 @@
++require libmodbus.inc
++
++SRCREV = "6254ede9156095ee0300"
++
++PR = "${INC_PR}.1"
++
++DEFAULT_PREFERENCE = "-1"
++
++SRC_URI = "git://github.com/stephane/libmodbus;branch=master;protocol=git"
++S = "${WORKDIR}/git"
++
+-- 
+1.7.0.4
 
-Bye Henning
 
 
