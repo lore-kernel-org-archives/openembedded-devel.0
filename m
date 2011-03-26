@@ -1,32 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q3U0m-0004hG-QO for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Mar 2011 14:58:41 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q3Tyh-0005I9-St for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Mar 2011 14:56:31 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2011 14:56:31 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+Received: from familie-heinold.de ([85.214.48.103]
+	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1Q3UPY-0005Oi-7W
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Mar 2011 15:24:16 +0100
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 8D01E11000A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2011 14:56:31 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 26 Mar 2011 15:21:36 +0100 (CET)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id E50DC110008E
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 26 Mar 2011 15:21:35 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from rhein.familie-heinold.de (f052239170.adsl.alicedsl.de
+	[78.52.239.170]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 26 Mar 2011 15:21:35 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 689FA3C0C8; Sat, 26 Mar 2011 15:20:52 +0100 (CET)
+Date: Sat, 26 Mar 2011 15:20:52 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 26 Mar 2011 14:56:16 +0100
-Message-ID: <imkra1$jiv$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-X-Enigmail-Version: 1.0.1
-Subject: [2011.03-maintenance] Pull request #6 (replaces #5)
+Message-ID: <20110326142051.GA29533@rhein.zuhause.netz>
+References: <1301146638.3979.52.camel@mattotaupa>
+MIME-Version: 1.0
+In-Reply-To: <1301146638.3979.52.camel@mattotaupa>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: [PATCH] xbmc: add patch to fix `error: call of overloaded 'abs(int64_t)' is ambiguous`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,67 +47,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Mar 2011 13:58:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 26 Mar 2011 14:24:17 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Tom,
+please not 100 lines useless info. One error message is enough.
+Otherwise
 
-Please pull the 16 commits from here:
+Acked-by: Henning Heinold <heinold@inf.fu-berlin.de>
 
-URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-Branch: 2011.03-maintenance-pr6
-
-Kartik Mohta (1):
-      libarchive: Requires libxml2
-
-Khem Raj (2):
-      cairo_1.10.0.bb: Fennec will now need tee support in cairo so
-enable it
-      fennec: Make it build on ARM eglibc/uclibc
-
-Koen Kooi (2):
-      x-load git: update to 1.5.0
-      u-boot git: remove duplicate filesdir line
-
-Martin Jansa (1):
-      mc: add RRECOMMENDed mc-skins package and more files to FILES_PN
-
-Roger Monk (6):
-      u-boot-git: Add omap4430-panda to u-boot git recipe
-      omap4430-panda: Prefer u-boot-git and remove extra custom x-load
-      gst-plugins-good: update to 0.10.28
-      ti-gst-ducati: Update to latest SRCREV, package libs
-      ti-libdce: Update to latest SRCREV
-      omapfbplay: Add patch for dce codec error handling
-
-Siddharth Heroor (4):
-      TI IPC: Fix License field.
-      TI IPC: Add missing dependencies
-      TI IPC: Add version 1.22.04.25
-      TI XDCTools: Add version 3.20.08.88
-
-You can view the branch online at
-http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance-pr6
-
-This is pull request #5 minus the libnl changes, but with some omap4
-updates added.
-
-The libnl changes will follow a bit later.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNjfCAMkyGM64RGpERAmpdAJ4kEEzkSFgoWnHav9MQsUm3eSUJWACeP0re
-vfPBoVTe04eBvMC0rEIftkI=
-=Lck9
------END PGP SIGNATURE-----
-
+Bye Henning
 
 
