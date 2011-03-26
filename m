@@ -1,34 +1,32 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q3Tmr-0004V9-3v for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Mar 2011 14:44:17 +0100
+	id 1Q3U0m-0004hG-QO for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Mar 2011 14:58:41 +0100
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q3TQz-0001Ez-1T for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Mar 2011 14:21:41 +0100
+	id 1Q3Tyh-0005I9-St for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Mar 2011 14:56:31 +0100
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2011 14:21:41 +0100
+	Sat, 26 Mar 2011 14:56:31 +0100
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2011 14:21:41 +0100
+	Sat, 26 Mar 2011 14:56:31 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 26 Mar 2011 14:21:24 +0100
-Message-ID: <imkp8k$93d$1@dough.gmane.org>
-References: <1301137767.3979.40.camel@mattotaupa>
+Date: Sat, 26 Mar 2011 14:56:16 +0100
+Message-ID: <imkra1$jiv$1@dough.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1301137767.3979.40.camel@mattotaupa>
 X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] orc: add version 0.4.10
+Subject: [2011.03-maintenance] Pull request #6 (replaces #5)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,55 +40,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Mar 2011 13:44:17 -0000
+X-List-Received-Date: Sat, 26 Mar 2011 13:58:41 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 26-03-11 12:09, Paul Menzel wrote:
-> Date: Thu, 24 Mar 2011 10:21:23 +0100
-> 
-> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> ---
-> 0.4.11 is out already, but I tested my used program with 0.4.10 only.
+Tom,
 
-FWIW, .11 works fine for me.
+Please pull the 16 commits from here:
 
-Anyway,
+URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+Branch: 2011.03-maintenance-pr6
 
-Acked-by: Koen Kooi <koen@dominion.thruhere.net>
+Kartik Mohta (1):
+      libarchive: Requires libxml2
 
-> ---
->  recipes/orc/orc_0.4.10.bb |    4 ++++
->  1 files changed, 4 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/orc/orc_0.4.10.bb
-> 
-> diff --git a/recipes/orc/orc_0.4.10.bb b/recipes/orc/orc_0.4.10.bb
-> new file mode 100644
-> index 0000000..e072fab
-> --- /dev/null
-> +++ b/recipes/orc/orc_0.4.10.bb
-> @@ -0,0 +1,4 @@
-> +require orc.inc
-> +
-> +SRC_URI[orc.md5sum] = "dd4e7a1820c9db5853aa7fe31ddb5a03"
-> +SRC_URI[orc.sha256sum] = "5001a0034edc06800b546246fbe0407ba6e9759c9583d5d93adba3557b6a777e"
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Khem Raj (2):
+      cairo_1.10.0.bb: Fennec will now need tee support in cairo so
+enable it
+      fennec: Make it build on ARM eglibc/uclibc
 
+Koen Kooi (2):
+      x-load git: update to 1.5.0
+      u-boot git: remove duplicate filesdir line
+
+Martin Jansa (1):
+      mc: add RRECOMMENDed mc-skins package and more files to FILES_PN
+
+Roger Monk (6):
+      u-boot-git: Add omap4430-panda to u-boot git recipe
+      omap4430-panda: Prefer u-boot-git and remove extra custom x-load
+      gst-plugins-good: update to 0.10.28
+      ti-gst-ducati: Update to latest SRCREV, package libs
+      ti-libdce: Update to latest SRCREV
+      omapfbplay: Add patch for dce codec error handling
+
+Siddharth Heroor (4):
+      TI IPC: Fix License field.
+      TI IPC: Add missing dependencies
+      TI IPC: Add version 1.22.04.25
+      TI XDCTools: Add version 3.20.08.88
+
+You can view the branch online at
+http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance-pr6
+
+This is pull request #5 minus the libnl changes, but with some omap4
+updates added.
+
+The libnl changes will follow a bit later.
+
+regards,
+
+Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFNjehUMkyGM64RGpERAipaAKC40Lu43X056B+2DYwVTQ6cZ4B9KACdFOIe
-SaURz/NinO1T7iu/PF2GHyM=
-=bhTG
+iD8DBQFNjfCAMkyGM64RGpERAmpdAJ4kEEzkSFgoWnHav9MQsUm3eSUJWACeP0re
+vfPBoVTe04eBvMC0rEIftkI=
+=Lck9
 -----END PGP SIGNATURE-----
 
 
