@@ -1,23 +1,32 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <radoslav@kolev.info>) id 1Q3XOC-0004Ne-PC
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Mar 2011 18:35:04 +0100
-Received: by qyk27 with SMTP id 27so1564781qyk.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q3XuC-0007be-JQ for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Mar 2011 19:08:08 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q3XsM-0003U6-4Q for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Mar 2011 19:06:14 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 26 Mar 2011 19:06:14 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2011 10:33:08 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.224.69.145 with SMTP id z17mr1839750qai.151.1301160788625;
-	Sat, 26 Mar 2011 10:33:08 -0700 (PDT)
-Received: by 10.229.189.130 with HTTP; Sat, 26 Mar 2011 10:33:08 -0700 (PDT)
-In-Reply-To: <iml6ie$bb4$1@dough.gmane.org>
-References: <1301158234-13658-1-git-send-email-radoslav@kolev.info>
-	<iml6ie$bb4$1@dough.gmane.org>
-Date: Sat, 26 Mar 2011 19:33:08 +0200
-Message-ID: <AANLkTinYwCR3vQq+HskwJonw0YKd8+8fGQRKhqwpWhqh@mail.gmail.com>
-From: Radoslav Kolev <radoslav@kolev.info>
+	Sat, 26 Mar 2011 19:06:14 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] Added a recipe for libmodbus
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 26 Mar 2011 19:06:02 +0100
+Message-ID: <iml9ua$thk$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+X-Enigmail-Version: 1.0.1
+Subject: [2011.03-maintenance] Pull request #7 - the libnl one
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,45 +40,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Mar 2011 17:35:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 26 Mar 2011 18:08:08 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Sat, Mar 26, 2011 at 7:08 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 26-03-11 17:50, Radoslav Kolev wrote:
->
->> +++ b/recipes/libmodbus/libmodbus_git.bb
->> @@ -0,0 +1,11 @@
->> +require libmodbus.inc
->> +
->> +SRCREV = "6254ede9156095ee0300"
->> +
->> +PR = "${INC_PR}.1"
->
-> That's missing a PV = 1.2 or similar
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Ah, OK. Just I'm not sure what that value should be.
+Tom,
 
-So, the libmodbus project releases two tarballs - stable and
-development. Now stable is at 2.0.3, and I made a separate recipe for
-it.
+Please pull the 15 commits from here:
 
-I didn't make a recipe for the current development tarball (now at
-2.9.3), but instead added this _git recipe for which the SRCREV points
-to the top of the master branch as of today. It is not tagged with any
-numeric release version. My intention being to be used by people who
-want to test the bleeding edge, and for this reason added the
-DEFAULT_PREFERENCE = "-1" to it, so it has to be explicitly selected.
+URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+Branch: 2011.03-maintenance-pr7
 
-This is the first recipe I submit, so I don't know exactly what is the
-official policy for beta/trunk versions of software.
+Koen Kooi (2):
+      networkmanager 0.8.1: fix build against libl using the patch from
+      bluez 4.84: raise default preference after libnl changes
 
-In this case when we have two releases - stable and dev tarballs and a
-git repository what would you advise to do?
+Martin Jansa (13):
+      libnl: rename libnl2 to libnl as used in openembedded-core
+      libnl: don't use /usr/include/libnl2 anymore
+      libnl: add libnl.inc and use INC_PR
+      SHR: drop blacklist entries for libnl, now when libnl2 is used by
+default
+      libfsobasics: depend only on libnl(-2.0) not libnl2(-2.0)
+      hostap-daemon: depend only on libnl(-2.0) not libnl2(-2.0)
+      iw: depend only on libnl(-2.0) not libnl2(-2.0)
+      ti-wifi-utils: depend only on libnl(-2.0) not libnl2(-2.0)
+      wpa-supplicant-0.7: depend only on libnl(-2.0) not libnl2(-2.0)
+      connman: depend only on libnl(-2.0) not libnl2(-2.0)
+      libnl_git: remove fix-pktloc-dep-race.patch from this version
+      libnl-1.1: rename to libnl1 and build only static lib
+      networkmanager_git: fix build with static libnl1
 
-Best regads,
-Radoslav Kolev
+You can view the branch online at
+http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance-pr7
+
+This was build tested from scratch for armv7a and armv5te, runtime
+tested on armv7a.
+
+It has one patch that isn't in .dev, the "bluez 4.84: raise default
+preference after libnl changes" one. The dev branch has a much newer
+bluez4 version already to solve that.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNjisKMkyGM64RGpERAhujAJ0VsK7SfpYQ3ftqt5BOkAdhtuJfOQCgn32R
+06V+fdOr4jjbfxwWNpDbywY=
+=Ej3+
+-----END PGP SIGNATURE-----
+
 
 
