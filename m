@@ -1,33 +1,22 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q3X0Z-0001Mn-51 for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Mar 2011 18:10:39 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q3Wyk-0001Uk-D8 for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Mar 2011 18:08:46 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2011 18:08:46 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <radoslav@kolev.info>) id 1Q3XOC-0004Ne-PC
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Mar 2011 18:35:04 +0100
+Received: by qyk27 with SMTP id 27so1564781qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2011 18:08:46 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 26 Mar 2011 18:08:30 +0100
-Message-ID: <iml6ie$bb4$1@dough.gmane.org>
+	Sat, 26 Mar 2011 10:33:08 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.224.69.145 with SMTP id z17mr1839750qai.151.1301160788625;
+	Sat, 26 Mar 2011 10:33:08 -0700 (PDT)
+Received: by 10.229.189.130 with HTTP; Sat, 26 Mar 2011 10:33:08 -0700 (PDT)
+In-Reply-To: <iml6ie$bb4$1@dough.gmane.org>
 References: <1301158234-13658-1-git-send-email-radoslav@kolev.info>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1301158234-13658-1-git-send-email-radoslav@kolev.info>
-X-Enigmail-Version: 1.0.1
+	<iml6ie$bb4$1@dough.gmane.org>
+Date: Sat, 26 Mar 2011 19:33:08 +0200
+Message-ID: <AANLkTinYwCR3vQq+HskwJonw0YKd8+8fGQRKhqwpWhqh@mail.gmail.com>
+From: Radoslav Kolev <radoslav@kolev.info>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH] Added a recipe for libmodbus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,31 +31,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Mar 2011 17:10:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 26 Mar 2011 17:35:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Sat, Mar 26, 2011 at 7:08 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 26-03-11 17:50, Radoslav Kolev wrote:
+>
+>> +++ b/recipes/libmodbus/libmodbus_git.bb
+>> @@ -0,0 +1,11 @@
+>> +require libmodbus.inc
+>> +
+>> +SRCREV = "6254ede9156095ee0300"
+>> +
+>> +PR = "${INC_PR}.1"
+>
+> That's missing a PV = 1.2 or similar
 
-On 26-03-11 17:50, Radoslav Kolev wrote:
+Ah, OK. Just I'm not sure what that value should be.
 
-> +++ b/recipes/libmodbus/libmodbus_git.bb
-> @@ -0,0 +1,11 @@
-> +require libmodbus.inc
-> +
-> +SRCREV = "6254ede9156095ee0300"
-> +
-> +PR = "${INC_PR}.1"
+So, the libmodbus project releases two tarballs - stable and
+development. Now stable is at 2.0.3, and I made a separate recipe for
+it.
 
-That's missing a PV = 1.2 or similar
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+I didn't make a recipe for the current development tarball (now at
+2.9.3), but instead added this _git recipe for which the SRCREV points
+to the top of the master branch as of today. It is not tagged with any
+numeric release version. My intention being to be used by people who
+want to test the bleeding edge, and for this reason added the
+DEFAULT_PREFERENCE = "-1" to it, so it has to be explicitly selected.
 
-iD8DBQFNjh2OMkyGM64RGpERAn/bAKCy5pAexAIwWE/LlH6bE+b+03WpwQCgqLLR
-ScFrtf6DFwZlBoMm8hextko=
-=0ktX
------END PGP SIGNATURE-----
+This is the first recipe I submit, so I don't know exactly what is the
+official policy for beta/trunk versions of software.
 
+In this case when we have two releases - stable and dev tarballs and a
+git repository what would you advise to do?
+
+Best regads,
+Radoslav Kolev
 
 
