@@ -1,25 +1,33 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <radoslav@kolev.info>) id 1Q3mA4-0006zt-Or
+	(envelope-from <Tom_Rini@mentor.com>) id 1Q3s0D-0002O8-Cn
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Mar 2011 11:21:28 +0200
-Received: by fxm19 with SMTP id 19so2217654fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Mar 2011 02:19:32 -0700 (PDT)
-Received: by 10.223.58.141 with SMTP id g13mr2749049fah.146.1301217570251;
-	Sun, 27 Mar 2011 02:19:30 -0700 (PDT)
-Received: from localhost.localdomain ([77.85.232.104])
-	by mx.google.com with ESMTPS id k5sm1023513faa.39.2011.03.27.02.19.28
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 27 Mar 2011 02:19:29 -0700 (PDT)
-From: Radoslav Kolev <radoslav@kolev.info>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 27 Mar 2011 12:19:43 +0300
-Message-Id: <1301217583-2776-1-git-send-email-radoslav@kolev.info>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <iml6ie$bb4$1@dough.gmane.org>
-References: <iml6ie$bb4$1@dough.gmane.org>
-Subject: [PATCH v2] Added a recipe for libmodbus
+	Sun, 27 Mar 2011 17:35:58 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Q3ry9-0004yW-TG from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 27 Mar 2011 08:33:33 -0700
+Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Sun, 27 Mar 2011 08:32:16 -0700
+Received: from [172.30.80.83] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
+	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
+	Sun, 27 Mar 2011 08:33:33 -0700
+Message-ID: <4D8F58C8.50306@mentor.com>
+Date: Sun, 27 Mar 2011 08:33:28 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <imkra1$jiv$1@dough.gmane.org>
+In-Reply-To: <imkra1$jiv$1@dough.gmane.org>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 27 Mar 2011 15:32:16.0584 (UTC)
+	FILETIME=[271EDC80:01CBEC94]
+Subject: Re: [2011.03-maintenance] Pull request #6 (replaces #5)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,68 +41,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Mar 2011 09:21:28 -0000
+X-List-Received-Date: Sun, 27 Mar 2011 15:35:58 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Radoslav Kolev <radoslav@kolev.info>
----
- recipes/libmodbus/libmodbus.inc      |    8 ++++++++
- recipes/libmodbus/libmodbus_2.0.3.bb |    8 ++++++++
- recipes/libmodbus/libmodbus_git.bb   |   13 +++++++++++++
- 3 files changed, 29 insertions(+), 0 deletions(-)
- create mode 100644 recipes/libmodbus/libmodbus.inc
- create mode 100644 recipes/libmodbus/libmodbus_2.0.3.bb
- create mode 100644 recipes/libmodbus/libmodbus_git.bb
+On 03/26/2011 06:56 AM, Koen Kooi wrote:
+> Tom,
+> 
+> Please pull the 16 commits from here:
+> 
+> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+> Branch: 2011.03-maintenance-pr6
+> 
+> Kartik Mohta (1):
+>        libarchive: Requires libxml2
+> 
+> Khem Raj (2):
+>        cairo_1.10.0.bb: Fennec will now need tee support in cairo so
+> enable it
+>        fennec: Make it build on ARM eglibc/uclibc
+> 
+> Koen Kooi (2):
+>        x-load git: update to 1.5.0
+>        u-boot git: remove duplicate filesdir line
+> 
+> Martin Jansa (1):
+>        mc: add RRECOMMENDed mc-skins package and more files to FILES_PN
+> 
+> Roger Monk (6):
+>        u-boot-git: Add omap4430-panda to u-boot git recipe
+>        omap4430-panda: Prefer u-boot-git and remove extra custom x-load
+>        gst-plugins-good: update to 0.10.28
+>        ti-gst-ducati: Update to latest SRCREV, package libs
+>        ti-libdce: Update to latest SRCREV
+>        omapfbplay: Add patch for dce codec error handling
+> 
+> Siddharth Heroor (4):
+>        TI IPC: Fix License field.
+>        TI IPC: Add missing dependencies
+>        TI IPC: Add version 1.22.04.25
+>        TI XDCTools: Add version 3.20.08.88
+> 
+> You can view the branch online at
+> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance-pr6
+> 
+> This is pull request #5 minus the libnl changes, but with some omap4
+> updates added.
+> 
+> The libnl changes will follow a bit later.
+> 
+> regards,
+> 
+> Koen
 
-diff --git a/recipes/libmodbus/libmodbus.inc b/recipes/libmodbus/libmodbus.inc
-new file mode 100644
-index 0000000..c5a673a
---- /dev/null
-+++ b/recipes/libmodbus/libmodbus.inc
-@@ -0,0 +1,8 @@
-+DESCRIPTION = "A Modbus library for Linux, Mac OS X, FreeBSD, QNX and Win32"
-+HOMEPAGE = "http://www.libmodbus.org/"
-+SECTION = "libs"
-+PRIORITY = "optional"
-+LICENSE = "LGPL"
-+INC_PR = "r1"
-+
-+inherit autotools pkgconfig
-diff --git a/recipes/libmodbus/libmodbus_2.0.3.bb b/recipes/libmodbus/libmodbus_2.0.3.bb
-new file mode 100644
-index 0000000..bf6062c
---- /dev/null
-+++ b/recipes/libmodbus/libmodbus_2.0.3.bb
-@@ -0,0 +1,8 @@
-+require libmodbus.inc
-+
-+PR = "${INC_PR}.1"
-+
-+SRC_URI = "http://github.com/downloads/stephane/libmodbus/libmodbus-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "0646f3edca6d7783d0356dc2fc4f9f4c"
-+SRC_URI[sha256sum] = "cf9d8d3981ace78a4ed559f2e28c5e0270d56a607b9ae79484e5742e36543feb"
-diff --git a/recipes/libmodbus/libmodbus_git.bb b/recipes/libmodbus/libmodbus_git.bb
-new file mode 100644
-index 0000000..dd15e58
---- /dev/null
-+++ b/recipes/libmodbus/libmodbus_git.bb
-@@ -0,0 +1,13 @@
-+require libmodbus.inc
-+
-+SRCREV = "6254ede9156095ee0300"
-+
-+PV = "2.9.3+gitr${SRCPV}"
-+
-+PR = "${INC_PR}.2"
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+SRC_URI = "git://github.com/stephane/libmodbus;branch=master;protocol=git"
-+S = "${WORKDIR}/git"
-+
--- 
-1.7.0.4
+Applied, thanks.
 
+- -- 
+Tom Rini
+Mentor Graphics Corporation
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iQEcBAEBAgAGBQJNj1jIAAoJEI4NMjfc3nJx3+4H/jkWwWzSVphNzkugxq5fL1Tt
+m3Qg9j9A0xkLMtjMJD/5tXLwA8UR+n6ZXIm5uFzQSmKm/rlf0ruiSLNd+GEUierG
+IqOgH2CjpVSBjFGubLKh3VlT7mtv68LZrHNIHh8bLYh/QitBpO+r9qINbppJJEe+
+v17G10DeX6ptDFMIoq0u+woQH+Y7yw4ab0NdCr0GpL1t8Ibo1Y0yICUgx7DKY7ag
+TGCvQSTmDxmbkDPTtyC6d/Wl3headNKQY8rvMA1ZOISc/Jl3W5vMuAQ3gtz9k+f4
+r/WhgNM8KoapVnlNqX9ZGsziWwqcFSjPFVoIw+cIKUHdRhUUPyup8k+b8B8MS4A=
+=IiaH
+-----END PGP SIGNATURE-----
 
 
