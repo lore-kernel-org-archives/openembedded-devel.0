@@ -1,35 +1,31 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q4Hfq-00062N-N4 for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Mar 2011 21:00:22 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q4Hdx-0002Gq-KQ for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Mar 2011 20:58:25 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Mar 2011 20:58:25 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Mar 2011 20:58:25 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 28 Mar 2011 20:58:12 +0200
-Message-ID: <imqlo4$ohv$1@dough.gmane.org>
-References: <4D909B3E.5030201@balister.org> <imq7o7$sa6$1@dough.gmane.org>
-	<4D90A3BA.6000609@balister.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4D90A3BA.6000609@balister.org>
-X-Enigmail-Version: 1.0.1
-Subject: Re: Problem with qmake2 and native sdk
+	(envelope-from <Tom_Rini@mentor.com>)
+	id 1Q4IFi-0006dR-IY; Mon, 28 Mar 2011 21:37:26 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Q4IDp-0007Rl-6L from Tom_Rini@mentor.com ;
+	Mon, 28 Mar 2011 12:35:29 -0700
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 28 Mar 2011 12:34:05 -0700
+Received: from [172.30.80.76] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
+	with Microsoft SMTP Server id 14.1.270.1;
+	Mon, 28 Mar 2011 12:35:27 -0700
+Message-ID: <4D90E2FA.7020603@mentor.com>
+Date: Mon, 28 Mar 2011 12:35:22 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>, <tsc@lists.openembedded.org>
+References: <4D7E3B34.5050100@mentor.com>
+In-Reply-To: <4D7E3B34.5050100@mentor.com>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 28 Mar 2011 19:34:05.0927 (UTC)
+	FILETIME=[19C6A770:01CBED7F]
+Subject: Re: Discussion: Version retention policy in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,49 +39,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Mar 2011 19:00:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 28 Mar 2011 19:37:26 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 28-03-11 17:05, Philip Balister wrote:
-> On 03/28/2011 10:59 AM, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 28-03-11 16:29, Philip Balister wrote:
->>> I building PyQwt on an omap3 suing the qt native sdk. This leads to the
->>> following message:
->>>
->>> Could not find mkspecs for your QMAKESPEC(linux-g++) after trying:
->>>          /home/balister/oe/tmp/sysroots/x86_64-linux/qt4/mkspecs
->>>
->>> I can work around this by editing the PyQwt configure.py file to use the
->>> full path to the linux-g++ spec file, but it would be nice if this
->>> worked out of the box.
->>>
->>> Does anyone know how to change the default spec file path in qmake2?
->>> I've looked at the recipe and nothing jumps out at me to try.
->>
->> If you are using angstrom, 'opkg install qt4-mkspecs' and source the
->> script that should be in there. That should install the specs and set
->> QMAKE* properly.
+On 03/14/2011 08:58 AM, Tom Rini wrote:
+> Hi all,
 > 
-> Already done :) I also have an uncommitted patch that adds a var for
-> strip to the environment file. I looked at the env file and didn't see
-> anything to change there either :(
+> The TSC has discussed this item at the request of the community and has
+> come up with the following recommendation which we are looking for
+> feedback (positive/negative/neutral) before putting this up on the wiki.
 
-In that case the OE patch to make qmake honour env vars might have
-gotten lost. Can you compare the 4.6.x and 4.7.x patches?
+Based on feedback I have placed this into
+http://wiki.openembedded.org/index.php/Version_Retention_Policy
+
+If any feedback is not incorporated it was unintentional and please let
+me know so I can update it.  My reading of the feedback however came
+down to:
+- - Definition of what packages are in what category needs to be define
+(separate task)
+- - "Need to see how it works in practice" (agreed!).
+
+Thanks all!
+
+- -- 
+Tom Rini
+Mentor Graphics Corporation
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
 
-iD8DBQFNkNpEMkyGM64RGpERAk63AKCBAhqhScCvx9z/sF7U5qGoEhqe+ACgleh5
-o1zMQiFCvov11hvc10K/s8Q=
-=JeQb
+iQEcBAEBAgAGBQJNkOL6AAoJEI4NMjfc3nJxkFkIAM39xQlKT6/0CfVxS+KS6dty
+AEpnVVXH6xfguY2oqYSi9pq0slt0IY5OQMl9LB8qSUU0KVZuxeTsXIAJLk6s2VN8
+8/Q4kO8tgq0Y2c7m8xzXUka2pYQO9PgGfkibSVMdnmLLTDYaTa77tblLGYFqkVwq
+g75s0/iJFyVvILhyApwSBnWdy6oV85KBm02ADcEFANCtsiL8QHgp2PMbWCe2QvcE
+yVQ3/8tR9XZ3Niz9zzE7MvCkbds8DAJRc5tb8M4UzJQyUp+QFcb6awiBoOyhfr4f
+R2brcosDDgb3bIZWuC9Ks/Cq1rqjEpkHXDU3NjvoxjVZlBGCQ/xq1BnEj9pQARY=
+=mo/a
 -----END PGP SIGNATURE-----
-
 
 
