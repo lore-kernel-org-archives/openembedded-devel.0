@@ -1,35 +1,35 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philippedeswert@gmail.com>) id 1Q4HIj-0005H2-P4
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Mar 2011 20:36:29 +0200
-Received: by eye27 with SMTP id 27so1173668eye.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q4Hfq-00062N-N4 for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Mar 2011 21:00:22 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q4Hdx-0002Gq-KQ for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Mar 2011 20:58:25 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Mar 2011 20:58:25 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Mar 2011 11:34:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=tnBsn7Q2GEa7kLkwVFPF2CW8bG0pYopKEcSBfigAxKg=;
-	b=nd1nceANNmvK7tWV38GweLZW1f5vMI1twVWDQdVthXiisj57Hz7SXrT3VDMuR3yJ/x
-	e+YsnPBTDUQFEJOcGkDOeEXdaZnmGkER0lHW4TRCC1pX5wArNucHa3SMYvoncxSCJDnu
-	/gBPUtyQoCl6oHK73t3pMLJhLAO3QCY/MipuM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=tT1N6aGTPzoRN6spFwigGhhYkhFku26qaqm7nSci11VChB17k0uVIMFj0ocKZXS0Xm
-	CJEodrZfeAvzJACNGLlcs22mEvfNbVbG2rTx6QR1gEVRbJy0SldIHeewCjgKtrFxFou8
-	cX4a1I/7hce48y+tNjaxdCUPjyWyhOWyg+n4E=
-Received: by 10.14.125.137 with SMTP id z9mr1933892eeh.1.1301337269934;
-	Mon, 28 Mar 2011 11:34:29 -0700 (PDT)
-Received: from localhost.localdomain (85-156-4-183.elisa-mobile.fi
-	[85.156.4.183])
-	by mx.google.com with ESMTPS id q53sm2974922eeh.25.2011.03.28.11.34.25
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 28 Mar 2011 11:34:29 -0700 (PDT)
-From: phdeswer <philippedeswert@gmail.com>
+	Mon, 28 Mar 2011 20:58:25 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Mar 2011 21:33:26 +0300
-Message-Id: <1301337206-24526-1-git-send-email-philippedeswert@gmail.com>
-X-Mailer: git-send-email 1.7.2.5
-Subject: [PATCH: poppler] Remove default_preference game as everybody wants to use the latest version, but the default_prefernce is -1 so this fails building packages that depend on poppler if not used with a distro that has a preferred version or default_preference bump
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 28 Mar 2011 20:58:12 +0200
+Message-ID: <imqlo4$ohv$1@dough.gmane.org>
+References: <4D909B3E.5030201@balister.org> <imq7o7$sa6$1@dough.gmane.org>
+	<4D90A3BA.6000609@balister.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <4D90A3BA.6000609@balister.org>
+X-Enigmail-Version: 1.0.1
+Subject: Re: Problem with qmake2 and native sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,31 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Mar 2011 18:36:29 -0000
+X-List-Received-Date: Mon, 28 Mar 2011 19:00:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: phdeswer <philippedeswert@gmail.com>
----
- recipes/poppler/poppler_0.12.3.bb |    5 -----
- 1 files changed, 0 insertions(+), 5 deletions(-)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/recipes/poppler/poppler_0.12.3.bb b/recipes/poppler/poppler_0.12.3.bb
-index 8b9fcca..ce1952e 100644
---- a/recipes/poppler/poppler_0.12.3.bb
-+++ b/recipes/poppler/poppler_0.12.3.bb
-@@ -2,11 +2,6 @@ require poppler.inc
- 
- DEPENDS += "lcms"
- 
--DEFAULT_PREFERENCE = "-1"
--DEFAULT_PREFERENCE_angstrom = "1"
--DEFAULT_PREFERENCE_minimal = "1"
--DEFAULT_PREFERENCE_minimal-uclibc = "1"
--
- EXTRA_OECONF_append = " --disable-abiword-output "
- 
- RDEPENDS_${PN} = "poppler-data"
--- 
-1.7.2.5
+On 28-03-11 17:05, Philip Balister wrote:
+> On 03/28/2011 10:59 AM, Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 28-03-11 16:29, Philip Balister wrote:
+>>> I building PyQwt on an omap3 suing the qt native sdk. This leads to the
+>>> following message:
+>>>
+>>> Could not find mkspecs for your QMAKESPEC(linux-g++) after trying:
+>>>          /home/balister/oe/tmp/sysroots/x86_64-linux/qt4/mkspecs
+>>>
+>>> I can work around this by editing the PyQwt configure.py file to use the
+>>> full path to the linux-g++ spec file, but it would be nice if this
+>>> worked out of the box.
+>>>
+>>> Does anyone know how to change the default spec file path in qmake2?
+>>> I've looked at the recipe and nothing jumps out at me to try.
+>>
+>> If you are using angstrom, 'opkg install qt4-mkspecs' and source the
+>> script that should be in there. That should install the specs and set
+>> QMAKE* properly.
+> 
+> Already done :) I also have an uncommitted patch that adds a var for
+> strip to the environment file. I looked at the env file and didn't see
+> anything to change there either :(
+
+In that case the OE patch to make qmake honour env vars might have
+gotten lost. Can you compare the 4.6.x and 4.7.x patches?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNkNpEMkyGM64RGpERAk63AKCBAhqhScCvx9z/sF7U5qGoEhqe+ACgleh5
+o1zMQiFCvov11hvc10K/s8Q=
+=JeQb
+-----END PGP SIGNATURE-----
 
 
 
