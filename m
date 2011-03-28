@@ -1,36 +1,33 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1Q48Kt-0007Sp-Lk
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Mar 2011 11:02:08 +0200
-Received: by pvc30 with SMTP id 30so452891pvc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Mar 2011 02:00:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=R2czbhQscgQ6aBwgyEc2pLQOd5oNqXHJ/riMdLcAshI=;
-	b=Pe00mjWPyRCmybfUvRMiCaul3fk8FqWxWI50a4rumuOx3zIlI8Uq7urawM47HINorz
-	LCHrf2U3wClHlKLE8zgjgZCLVxrnqEMngYt/fuRII3KrZfSqPAIkTMxvHnuO46Q8Oyj4
-	RthVF+5gTredk+azzvIZ2Sc8psSjL3R2Tj0D4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=OMFn4cEk7pDc4yoOr0iowHkFoBmipofCURaFcmiH9vKC1ADofy8lObYs4QXD1gjQ8F
-	Fo21Q/m/7QbOpnVNpBA5SEsgxWaTafYp9a4tXjTxTw6/B9XP/xLQD55MUvI0xsauEKtB
-	EZ9wlPPLmwmWkSZMLbOxhf7/xEqcduTfmuPQQ=
-MIME-Version: 1.0
-Received: by 10.142.126.18 with SMTP id y18mr537052wfc.361.1301302806872; Mon,
-	28 Mar 2011 02:00:06 -0700 (PDT)
-Received: by 10.142.136.15 with HTTP; Mon, 28 Mar 2011 02:00:06 -0700 (PDT)
-In-Reply-To: <20110328083149.GA7337@xora-eee.xora.org.uk>
-References: <E1Q3y4q-00047f-Ns@melo.openembedded.org>
-	<20110328083149.GA7337@xora-eee.xora.org.uk>
-Date: Mon, 28 Mar 2011 11:00:06 +0200
-Message-ID: <AANLkTikP801Wp0c2BVr+9EQ5S0yfrzO8ONa7V3cU1BCp@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <richard.purdie@linuxfoundation.org>)
+	id 1Q4Bo5-0002uc-HJ; Mon, 28 Mar 2011 14:44:29 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p2SCgRW0028786;
+	Mon, 28 Mar 2011 13:42:27 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 28592-04; Mon, 28 Mar 2011 13:42:24 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p2SCgJZF028780
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Mon, 28 Mar 2011 13:42:20 +0100
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] Andrea Adami : udev: remove udev-compat for Zaurus devices since we use 2.6 .38 finally.
+In-Reply-To: <4D8CBCA4.2070603@matrix-vision.de>
+References: <4D832AA4.1020701@matrix-vision.de>
+	<AB78D48B-B478-47DF-A7CF-94FF96C313AC@dominion.thruhere.net>
+	<1301060302.3018.129.camel@rex> <4D8CA329.10407@matrix-vision.de>
+	<1301064949.3018.147.camel@rex>  <4D8CBCA4.2070603@matrix-vision.de>
+Date: Mon, 28 Mar 2011 13:42:16 +0100
+Message-ID: <1301316136.3018.189.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: koen@dominion.thruhere.net, Patches,
+	layer <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] staging & using kernel headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,194 +41,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Mar 2011 09:02:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 28 Mar 2011 12:44:30 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Mon, Mar 28, 2011 at 10:31 AM, Graeme Gregory <dp@xora.org.uk> wrote:
-> Shouldnt this patch have a PR bump so udev already on devices is updated?
->
-> Graeme
+On Fri, 2011-03-25 at 17:02 +0100, Michael Jones wrote:
+> On 03/25/2011 03:55 PM, Richard Purdie wrote:
+> > On Fri, 2011-03-25 at 15:14 +0100, Michael Jones wrote:
+> > Ok, so you only really have the options of:
+> > 
+> > a) Use a specific patched kernel for linux-libc-headers which has these
+> > headers in it (see below for why this is ugly)
+> > b) Install some extra headers in "libc-headers-extras" type recipe
+> > c) Ship default versions of the headers with your userspace and use
+> > those if shared versions don't exist. This assumes the API is stable and
+> > on its way to mainline.
+> > 
+> > I don't think this is as common a requirement as you think as most
+> > people get this kind of thing merged into the mainline kernel to try and
+> > reduce this kind of problem.
+> 
+> To clarify, it's not that I have a custom patched kernel I need to use.
+>  I am following V4L2 development, so I am using a new kernel from those
+> developers.  V4L2 changes do of course move upstream.
 
-Ah, yes ...if we only had working images on devices ;)
-IIRC udev-compat was not accepted in Narcissus.
-ATM for Z best is build from scratch. Things will change hopefully soon.
+Ok, sorry, I was lacking context here.
+ 
+> > The ugliness is where you have two different arm boards you want to
+> > build, with a common optimisation/toolchain and each wants to redirect
+> > linux-libc-headers to its own "special" version. The question is then,
+> > why aren't the "special" bits in mainline.
+> 
+> OK, so here's what I'm realizing, please correct me if I'm wrong:
+> What I did unconventionally (ie. wrong) was to use a kernel version
+> newer than my linux-libc-headers were.  I should create a new
+> linux-libc-headers recipe, as I had done with the kernel recipe, and
+> build glibc and linux-libc-headers using my 2.6.38 kernel.
 
-BTW, editing that files I've seen the 'udev-compat' layer is used by
-only another machine (palmpre) in a single udev recipe.
-Should we clean the other recipes from those bits now?
+We should *always* be using linux-libc-headers >= to the kernel version
+being used.
 
-Andrea
+> I only stumbled upon this because the gstreamer-ti recipes were pointing
+> at internal kernel headers, but because these are user-space apps, they
+> should actually be using the linux-libc-headers.  Right?
 
->
-> On Sun, Mar 27, 2011 at 10:04:52PM +0000, git version control wrote:
->> Module: openembedded.git
->> Branch: org.openembedded.dev
->> Commit: e0b9730eeb42cab4a16983777d1a7fc3986f4933
->> URL: =A0 =A0http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcom=
-mit;h=3De0b9730eeb42cab4a16983777d1a7fc3986f4933
->>
->> Author: Andrea Adami <andrea.adami@gmail.com>
->> Date: =A0 Sun Mar 27 23:59:02 2011 +0200
->>
->> udev: remove udev-compat for Zaurus devices since we use 2.6.38 finally.
->> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
->>
->> ---
->>
->> =A0recipes/udev/udev.inc =A0 =A0| =A0 16 ----------------
->> =A0recipes/udev/udev_151.bb | =A0 16 ----------------
->> =A0recipes/udev/udev_154.bb | =A0 16 ----------------
->> =A0recipes/udev/udev_162.bb | =A0 16 ----------------
->> =A0recipes/udev/udev_165.bb | =A0 16 ----------------
->> =A05 files changed, 0 insertions(+), 80 deletions(-)
->>
->> diff --git a/recipes/udev/udev.inc b/recipes/udev/udev.inc
->> index 0c8a662..79f43dc 100644
->> --- a/recipes/udev/udev.inc
->> +++ b/recipes/udev/udev.inc
->> @@ -44,22 +44,6 @@ EXTRA_OEMAKE =3D "-e \
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 'STRIP=3Decho'"
->>
->> =A0RPROVIDES_udev_append =3D " udev-compat-wrapper"
->> -RDEPENDS_udev_spitz +=3D "udev-compat"
->> -do_unpack_append_spitz() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->> -RDEPENDS_udev_akita +=3D "udev-compat"
->> -do_unpack_append_akita() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->> -RDEPENDS_udev_c7x0 +=3D "udev-compat"
->> -do_unpack_append_c7x0() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->> -RDEPENDS_udev_poodle +=3D "udev-compat"
->> -do_unpack_append_poodle() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->>
->> =A0# Modify init script on platforms that need to boot old kernels:
->> =A0do_apply_compat_wrapper() {
->> diff --git a/recipes/udev/udev_151.bb b/recipes/udev/udev_151.bb
->> index d31d99a..e7f78f2 100644
->> --- a/recipes/udev/udev_151.bb
->> +++ b/recipes/udev/udev_151.bb
->> @@ -85,22 +85,6 @@ FILES_${PN} +=3D "/lib/udev* ${libdir}/ConsoleKit"
->> =A0FILES_${PN}-dbg +=3D "/lib/udev/.debug"
->>
->> =A0RPROVIDES_udev_append =3D " udev-compat-wrapper"
->> -RDEPENDS_udev_append_spitz =3D " udev-compat"
->> -do_unpack_append_spitz() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->> -RDEPENDS_udev_append_akita =3D " udev-compat"
->> -do_unpack_append_akita() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->> -RDEPENDS_udev_append_c7x0 =3D " udev-compat"
->> -do_unpack_append_c7x0() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->> -RDEPENDS_udev_append_poodle =3D " udev-compat"
->> -do_unpack_append_poodle() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->>
->> =A0# Modify init script on platforms that need to boot old kernels:
->> =A0do_apply_compat_wrapper() {
->> diff --git a/recipes/udev/udev_154.bb b/recipes/udev/udev_154.bb
->> index 44d7b13..8b416e2 100644
->> --- a/recipes/udev/udev_154.bb
->> +++ b/recipes/udev/udev_154.bb
->> @@ -77,22 +77,6 @@ FILES_${PN} +=3D "/lib/udev* ${libdir}/ConsoleKit"
->> =A0FILES_${PN}-dbg +=3D "/lib/udev/.debug"
->>
->> =A0RPROVIDES_udev_append =3D " udev-compat-wrapper"
->> -RDEPENDS_udev_append_spitz =3D " udev-compat"
->> -do_unpack_append_spitz() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->> -RDEPENDS_udev_append_akita =3D " udev-compat"
->> -do_unpack_append_akita() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->> -RDEPENDS_udev_append_c7x0 =3D " udev-compat"
->> -do_unpack_append_c7x0() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->> -RDEPENDS_udev_append_poodle =3D " udev-compat"
->> -do_unpack_append_poodle() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->>
->> =A0# Modify init script on platforms that need to boot old kernels:
->> =A0do_apply_compat_wrapper() {
->> diff --git a/recipes/udev/udev_162.bb b/recipes/udev/udev_162.bb
->> index 40104be..6611d8c 100644
->> --- a/recipes/udev/udev_162.bb
->> +++ b/recipes/udev/udev_162.bb
->> @@ -88,22 +88,6 @@ FILES_${PN} +=3D "/lib/udev* ${libdir}/ConsoleKit"
->> =A0FILES_${PN}-dbg +=3D "/lib/udev/.debug"
->>
->> =A0RPROVIDES_udev_append =3D " udev-compat-wrapper"
->> -RDEPENDS_udev_append_spitz =3D " udev-compat"
->> -do_unpack_append_spitz() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->> -RDEPENDS_udev_append_akita =3D " udev-compat"
->> -do_unpack_append_akita() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->> -RDEPENDS_udev_append_c7x0 =3D " udev-compat"
->> -do_unpack_append_c7x0() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->> -RDEPENDS_udev_append_poodle =3D " udev-compat"
->> -do_unpack_append_poodle() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->> =A0RDEPENDS_udev_append_palmpre =3D " udev-compat"
->> =A0do_unpack_append_palmpre() {
->> =A0 =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> diff --git a/recipes/udev/udev_165.bb b/recipes/udev/udev_165.bb
->> index 63e62f1..d426aff 100644
->> --- a/recipes/udev/udev_165.bb
->> +++ b/recipes/udev/udev_165.bb
->> @@ -88,22 +88,6 @@ FILES_${PN} +=3D "/lib/udev* ${libdir}/ConsoleKit"
->> =A0FILES_${PN}-dbg +=3D "/lib/udev/.debug"
->>
->> =A0RPROVIDES_udev_append =3D " udev-compat-wrapper"
->> -RDEPENDS_udev_append_spitz =3D " udev-compat"
->> -do_unpack_append_spitz() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->> -RDEPENDS_udev_append_akita =3D " udev-compat"
->> -do_unpack_append_akita() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->> -RDEPENDS_udev_append_c7x0 =3D " udev-compat"
->> -do_unpack_append_c7x0() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->> -RDEPENDS_udev_append_poodle =3D " udev-compat"
->> -do_unpack_append_poodle() {
->> - =A0 =A0 bb.build.exec_func('do_apply_compat_wrapper', d)
->> -}
->>
->> =A0# Modify init script on platforms that need to boot old kernels:
->> =A0do_apply_compat_wrapper() {
->>
->>
->> _______________________________________________
->> Openembedded-commits mailing list
->> Openembedded-commits@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Ideally, yes. I know under some circumstances, they might want to poke
+into internal kernel headers but that is really a design issue that
+needs fixing.
+
+Cheers,
+
+Richard
+
 
 
