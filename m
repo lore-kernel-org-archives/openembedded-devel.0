@@ -1,34 +1,33 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Q41vH-0001qB-2p
+	(envelope-from <dp@xora.org.uk>) id 1Q47tT-0006Zt-AZ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Mar 2011 04:11:16 +0200
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Q41tJ-0005qs-LM from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Mar 2011 19:09:13 -0700
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Sun, 27 Mar 2011 19:07:54 -0700
-Received: from [172.30.80.76] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
-	with Microsoft SMTP Server id 14.1.270.1;
-	Sun, 27 Mar 2011 19:09:12 -0700
-Message-ID: <4D8FEDC4.8000001@mentor.com>
-Date: Sun, 27 Mar 2011 19:09:08 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+	Mon, 28 Mar 2011 10:33:47 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 38CBAA49AA
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Mar 2011 09:31:52 +0100 (BST)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id 5gvih3wGqRMN
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Mar 2011 09:31:50 +0100 (BST)
+Received: from xora-eee (188-220-38-49.zone11.bethere.co.uk [188.220.38.49])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 57304A42E6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Mar 2011 09:31:50 +0100 (BST)
+Received: by xora-eee (Postfix, from userid 1000)
+	id 96F4882102; Mon, 28 Mar 2011 09:31:49 +0100 (BST)
+Date: Mon, 28 Mar 2011 09:31:49 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110328083149.GA7337@xora-eee.xora.org.uk>
+References: <E1Q3y4q-00047f-Ns@melo.openembedded.org>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <20110326023201.GA13132@denix.org> <4D8F5910.1060803@mentor.com>
-	<20110328000202.GA15392@denix.org>
-In-Reply-To: <20110328000202.GA15392@denix.org>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 28 Mar 2011 02:07:54.0084 (UTC)
-	FILETIME=[F2D78A40:01CBECEC]
-Subject: Re: [2011.03-maintenance] Pull request for external	toolchains updates and matrix-gui
+In-Reply-To: <E1Q3y4q-00047f-Ns@melo.openembedded.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [oe-commits] Andrea Adami : udev: remove udev-compat for Zaurus devices since we use 2.6 .38 finally.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,54 +41,175 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Mar 2011 02:11:16 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 28 Mar 2011 08:33:47 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Shouldnt this patch have a PR bump so udev already on devices is updated?
 
-On 03/27/2011 05:02 PM, Denys Dmytriyenko wrote:
-> On Sun, Mar 27, 2011 at 08:34:40AM -0700, Tom Rini wrote:
->> On 03/25/2011 07:32 PM, Denys Dmytriyenko wrote:
->>> Tom,
->>>
->>> Please pull these 8 commits for the external CSL and Angstrom toolchains, as well
->>> as a trivial SRCREV update for TI's matrix-gui. All are cherry picked from oe.dev
->>>
->>>
->>> Pull URL: git://arago-project.org/git/people/denix/openembedded.git
->>>   Branch: 2011.03-maintenance
->>>   Browse: http://arago-project.org/git/people/?p=denix/openembedded.git;a=shortlog;h=refs/heads/2011.03-maintenance
->>>
->>> Thanks,
->>>     Denys Dmytriyenko <denys@ti.com>
->>
->> $ git pull git://arago-project.org/git/people/denix/openembedded.git
->> 2011.03-maintenance
->> fatal: The remote end hung up unexpectedly
->>
->> Otherwise I'd apply this.  Thanks!
+Graeme
+
+On Sun, Mar 27, 2011 at 10:04:52PM +0000, git version control wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: e0b9730eeb42cab4a16983777d1a7fc3986f4933
+> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=e0b9730eeb42cab4a16983777d1a7fc3986f4933
 > 
-> Can you try again - seems to work here. Thanks. Otherwise I'd have to dig 
-> deeper at what's going on...
-
-Works now, applied.
-
-- -- 
-Tom Rini
-Mentor Graphics Corporation
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iQEcBAEBAgAGBQJNj+3DAAoJEI4NMjfc3nJxdQYH/1wvffHoJKzSthbzCWuGs7MH
-y8kwHmv6YcTLNF5XIpncmbqQneJJn9ReX3Qge2cfjynus8r5n5DF4Jyc937T4AlK
-jtNbNJQ7cNkBPL/VF3DvHeSl7N0r7Dr4wXQKoFynn7Am7m3H2nhkd+V1e155L8+0
-R327xXneRNJ3PqtGz+bUX/eCXafVtlSvSPBPdLNokpEqKOmRFxh7ZvTIkpFf8Esx
-XLZHc1/MYpspfs2JO8pZZqUECwGL1PmJSq4HV/PRy8XZmMYiTECpH2WI+Hyb28gR
-eX24fp+hJTpwub6dbH5TbaVWzdwaXk6iF5hw06mOnLDJKiiuWPtvdkFObd9NuBs=
-=eDGb
------END PGP SIGNATURE-----
+> Author: Andrea Adami <andrea.adami@gmail.com>
+> Date:   Sun Mar 27 23:59:02 2011 +0200
+> 
+> udev: remove udev-compat for Zaurus devices since we use 2.6.38 finally.
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> 
+> ---
+> 
+>  recipes/udev/udev.inc    |   16 ----------------
+>  recipes/udev/udev_151.bb |   16 ----------------
+>  recipes/udev/udev_154.bb |   16 ----------------
+>  recipes/udev/udev_162.bb |   16 ----------------
+>  recipes/udev/udev_165.bb |   16 ----------------
+>  5 files changed, 0 insertions(+), 80 deletions(-)
+> 
+> diff --git a/recipes/udev/udev.inc b/recipes/udev/udev.inc
+> index 0c8a662..79f43dc 100644
+> --- a/recipes/udev/udev.inc
+> +++ b/recipes/udev/udev.inc
+> @@ -44,22 +44,6 @@ EXTRA_OEMAKE = "-e \
+>  		'STRIP=echo'"
+>  
+>  RPROVIDES_udev_append = " udev-compat-wrapper"
+> -RDEPENDS_udev_spitz += "udev-compat"
+> -do_unpack_append_spitz() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+> -RDEPENDS_udev_akita += "udev-compat"
+> -do_unpack_append_akita() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+> -RDEPENDS_udev_c7x0 += "udev-compat"
+> -do_unpack_append_c7x0() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+> -RDEPENDS_udev_poodle += "udev-compat"
+> -do_unpack_append_poodle() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+>  
+>  # Modify init script on platforms that need to boot old kernels:
+>  do_apply_compat_wrapper() {
+> diff --git a/recipes/udev/udev_151.bb b/recipes/udev/udev_151.bb
+> index d31d99a..e7f78f2 100644
+> --- a/recipes/udev/udev_151.bb
+> +++ b/recipes/udev/udev_151.bb
+> @@ -85,22 +85,6 @@ FILES_${PN} += "/lib/udev* ${libdir}/ConsoleKit"
+>  FILES_${PN}-dbg += "/lib/udev/.debug"
+>  
+>  RPROVIDES_udev_append = " udev-compat-wrapper"
+> -RDEPENDS_udev_append_spitz = " udev-compat"
+> -do_unpack_append_spitz() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+> -RDEPENDS_udev_append_akita = " udev-compat"
+> -do_unpack_append_akita() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+> -RDEPENDS_udev_append_c7x0 = " udev-compat"
+> -do_unpack_append_c7x0() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+> -RDEPENDS_udev_append_poodle = " udev-compat"
+> -do_unpack_append_poodle() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+>  
+>  # Modify init script on platforms that need to boot old kernels:
+>  do_apply_compat_wrapper() {
+> diff --git a/recipes/udev/udev_154.bb b/recipes/udev/udev_154.bb
+> index 44d7b13..8b416e2 100644
+> --- a/recipes/udev/udev_154.bb
+> +++ b/recipes/udev/udev_154.bb
+> @@ -77,22 +77,6 @@ FILES_${PN} += "/lib/udev* ${libdir}/ConsoleKit"
+>  FILES_${PN}-dbg += "/lib/udev/.debug"
+>  
+>  RPROVIDES_udev_append = " udev-compat-wrapper"
+> -RDEPENDS_udev_append_spitz = " udev-compat"
+> -do_unpack_append_spitz() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+> -RDEPENDS_udev_append_akita = " udev-compat"
+> -do_unpack_append_akita() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+> -RDEPENDS_udev_append_c7x0 = " udev-compat"
+> -do_unpack_append_c7x0() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+> -RDEPENDS_udev_append_poodle = " udev-compat"
+> -do_unpack_append_poodle() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+>  
+>  # Modify init script on platforms that need to boot old kernels:
+>  do_apply_compat_wrapper() {
+> diff --git a/recipes/udev/udev_162.bb b/recipes/udev/udev_162.bb
+> index 40104be..6611d8c 100644
+> --- a/recipes/udev/udev_162.bb
+> +++ b/recipes/udev/udev_162.bb
+> @@ -88,22 +88,6 @@ FILES_${PN} += "/lib/udev* ${libdir}/ConsoleKit"
+>  FILES_${PN}-dbg += "/lib/udev/.debug"
+>  
+>  RPROVIDES_udev_append = " udev-compat-wrapper"
+> -RDEPENDS_udev_append_spitz = " udev-compat"
+> -do_unpack_append_spitz() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+> -RDEPENDS_udev_append_akita = " udev-compat"
+> -do_unpack_append_akita() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+> -RDEPENDS_udev_append_c7x0 = " udev-compat"
+> -do_unpack_append_c7x0() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+> -RDEPENDS_udev_append_poodle = " udev-compat"
+> -do_unpack_append_poodle() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+>  RDEPENDS_udev_append_palmpre = " udev-compat"
+>  do_unpack_append_palmpre() {
+>  	bb.build.exec_func('do_apply_compat_wrapper', d)
+> diff --git a/recipes/udev/udev_165.bb b/recipes/udev/udev_165.bb
+> index 63e62f1..d426aff 100644
+> --- a/recipes/udev/udev_165.bb
+> +++ b/recipes/udev/udev_165.bb
+> @@ -88,22 +88,6 @@ FILES_${PN} += "/lib/udev* ${libdir}/ConsoleKit"
+>  FILES_${PN}-dbg += "/lib/udev/.debug"
+>  
+>  RPROVIDES_udev_append = " udev-compat-wrapper"
+> -RDEPENDS_udev_append_spitz = " udev-compat"
+> -do_unpack_append_spitz() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+> -RDEPENDS_udev_append_akita = " udev-compat"
+> -do_unpack_append_akita() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+> -RDEPENDS_udev_append_c7x0 = " udev-compat"
+> -do_unpack_append_c7x0() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+> -RDEPENDS_udev_append_poodle = " udev-compat"
+> -do_unpack_append_poodle() {
+> -	bb.build.exec_func('do_apply_compat_wrapper', d)
+> -}
+>  
+>  # Modify init script on platforms that need to boot old kernels:
+>  do_apply_compat_wrapper() {
+> 
+> 
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
 
 
