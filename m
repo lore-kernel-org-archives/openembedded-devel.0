@@ -1,40 +1,35 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1Q4Fbm-0005ME-Vx; Mon, 28 Mar 2011 18:48:03 +0200
-Received: by fxm19 with SMTP id 19so3080616fxm.6
-	for <multiple recipients>; Mon, 28 Mar 2011 09:46:05 -0700 (PDT)
+	(envelope-from <philippedeswert@gmail.com>) id 1Q4HIj-0005H2-P4
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Mar 2011 20:36:29 +0200
+Received: by eye27 with SMTP id 27so1173668eye.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Mar 2011 11:34:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=rWSxdsBDPuCxUAsX54EiF3owWJHOiJLxtU0aWoRcaCw=;
-	b=UmHcAgr8YROAJ8xFv9hY1UfWL9rMP9efTHfSc3hVcQslFOL20pV/ySaHAfOxAXDlXy
-	1H80fTS7S2FE2eLENrca+dC5zdpRQhvkKHyqdc6r+ojyXSnhm2tTkmxa4lgj6LS5vYHj
-	dvBDqoDNvYARHgTjScTh9L1dtAf499B5Y21mM=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=tnBsn7Q2GEa7kLkwVFPF2CW8bG0pYopKEcSBfigAxKg=;
+	b=nd1nceANNmvK7tWV38GweLZW1f5vMI1twVWDQdVthXiisj57Hz7SXrT3VDMuR3yJ/x
+	e+YsnPBTDUQFEJOcGkDOeEXdaZnmGkER0lHW4TRCC1pX5wArNucHa3SMYvoncxSCJDnu
+	/gBPUtyQoCl6oHK73t3pMLJhLAO3QCY/MipuM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=G706emoSJSAkxrCRis1+8GhZO0ZhOk/SMLO+g6Lpy/3P0jE9P/5owCvQ8mp7+qefku
-	q0p1XrBFtAvWiqPQzBFIatZXN655gXeAe559jhJiccFHL8NKJAOmTDre2fLdXMDtmGbx
-	e/pne18Dvt9xDQWseLh+wWph6kMmhACwGRj3M=
-Received: by 10.223.5.26 with SMTP id 26mr2160373fat.68.1301330376039; Mon, 28
-	Mar 2011 09:39:36 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.223.109.12 with HTTP; Mon, 28 Mar 2011 09:39:03 -0700 (PDT)
-In-Reply-To: <1301316136.3018.189.camel@rex>
-References: <4D832AA4.1020701@matrix-vision.de>
-	<AB78D48B-B478-47DF-A7CF-94FF96C313AC@dominion.thruhere.net>
-	<1301060302.3018.129.camel@rex> <4D8CA329.10407@matrix-vision.de>
-	<1301064949.3018.147.camel@rex> <4D8CBCA4.2070603@matrix-vision.de>
-	<1301316136.3018.189.camel@rex>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Mar 2011 09:39:03 -0700
-Message-ID: <AANLkTikwK_F7Wep4pfj05PMrMsgcaQkBi9aUvtu07+GV@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=tT1N6aGTPzoRN6spFwigGhhYkhFku26qaqm7nSci11VChB17k0uVIMFj0ocKZXS0Xm
+	CJEodrZfeAvzJACNGLlcs22mEvfNbVbG2rTx6QR1gEVRbJy0SldIHeewCjgKtrFxFou8
+	cX4a1I/7hce48y+tNjaxdCUPjyWyhOWyg+n4E=
+Received: by 10.14.125.137 with SMTP id z9mr1933892eeh.1.1301337269934;
+	Mon, 28 Mar 2011 11:34:29 -0700 (PDT)
+Received: from localhost.localdomain (85-156-4-183.elisa-mobile.fi
+	[85.156.4.183])
+	by mx.google.com with ESMTPS id q53sm2974922eeh.25.2011.03.28.11.34.25
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 28 Mar 2011 11:34:29 -0700 (PDT)
+From: phdeswer <philippedeswert@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: koen@dominion.thruhere.net,
-	Richard Purdie <richard.purdie@linuxfoundation.org>,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] staging & using kernel headers
+Date: Mon, 28 Mar 2011 21:33:26 +0300
+Message-Id: <1301337206-24526-1-git-send-email-philippedeswert@gmail.com>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [PATCH: poppler] Remove default_preference game as everybody wants to use the latest version, but the default_prefernce is -1 so this fails building packages that depend on poppler if not used with a distro that has a preferred version or default_preference bump
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,28 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Mar 2011 16:48:03 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 28 Mar 2011 18:36:29 -0000
 
-On Mon, Mar 28, 2011 at 5:42 AM, Richard Purdie
-<richard.purdie@linuxfoundation.org> wrote:
->
->> OK, so here's what I'm realizing, please correct me if I'm wrong:
->> What I did unconventionally (ie. wrong) was to use a kernel version
->> newer than my linux-libc-headers were. =C2=A0I should create a new
->> linux-libc-headers recipe, as I had done with the kernel recipe, and
->> build glibc and linux-libc-headers using my 2.6.38 kernel.
->
-> We should *always* be using linux-libc-headers >=3D to the kernel version
-> being used.
->
+Signed-off-by: phdeswer <philippedeswert@gmail.com>
+---
+ recipes/poppler/poppler_0.12.3.bb |    5 -----
+ 1 files changed, 0 insertions(+), 5 deletions(-)
 
-If you use newer kernel should work ok why is that a problem ? kernel
-syscalls are backward compatible
-and we use oldest kernel version of like 2.6.16 for eglibc to build
-against so it should not be a problem
-to use different versions for kernel and kernel-headers. I think your
-problem lies elsewhere
+diff --git a/recipes/poppler/poppler_0.12.3.bb b/recipes/poppler/poppler_0.12.3.bb
+index 8b9fcca..ce1952e 100644
+--- a/recipes/poppler/poppler_0.12.3.bb
++++ b/recipes/poppler/poppler_0.12.3.bb
+@@ -2,11 +2,6 @@ require poppler.inc
+ 
+ DEPENDS += "lcms"
+ 
+-DEFAULT_PREFERENCE = "-1"
+-DEFAULT_PREFERENCE_angstrom = "1"
+-DEFAULT_PREFERENCE_minimal = "1"
+-DEFAULT_PREFERENCE_minimal-uclibc = "1"
+-
+ EXTRA_OECONF_append = " --disable-abiword-output "
+ 
+ RDEPENDS_${PN} = "poppler-data"
+-- 
+1.7.2.5
+
 
 
