@@ -1,23 +1,34 @@
-Received: from smtpauth04.prod.mesa1.secureserver.net ([64.202.165.95])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <mike@mwester.net>) id 1Q4DmG-0005Tz-4L
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Mar 2011 16:50:44 +0200
-Received: (qmail 26566 invoked from network); 28 Mar 2011 14:42:06 -0000
-Received: from unknown (209.242.7.185)
-	by smtpauth04.prod.mesa1.secureserver.net (64.202.165.95) with ESMTP;
-	28 Mar 2011 14:42:06 -0000
-Message-ID: <4D909E41.60705@mwester.net>
-Date: Mon, 28 Mar 2011 09:42:09 -0500
-From: Mike Westerhof <mike@mwester.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
-MIME-Version: 1.0
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q4Dwd-00061o-K9 for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Mar 2011 17:01:28 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q4Dum-0001R6-EG for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Mar 2011 16:59:32 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Mar 2011 16:59:32 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Mar 2011 16:59:32 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1301317955-22559-1-git-send-email-ospite@studenti.unina.it>
-	<1301317955-22559-2-git-send-email-ospite@studenti.unina.it>
-In-Reply-To: <1301317955-22559-2-git-send-email-ospite@studenti.unina.it>
-Subject: Re: [PATCH 1/2] tzdata: Updated to 2011d
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 28 Mar 2011 16:59:19 +0200
+Message-ID: <imq7o7$sa6$1@dough.gmane.org>
+References: <4D909B3E.5030201@balister.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <4D909B3E.5030201@balister.org>
+X-Enigmail-Version: 1.0.1
+Subject: Re: Problem with qmake2 and native sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,36 +42,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Mar 2011 14:50:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 28 Mar 2011 15:01:28 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 3/28/2011 8:12 AM, Antonio Ospite wrote:
-> Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Acked-by: Mike Westerhof <mike@mwester.net>
-
-> ---
->  .../tzdata/{tzdata_2011b.bb => tzdata_2011d.bb}    |    5 ++---
->  1 files changed, 2 insertions(+), 3 deletions(-)
->  rename recipes/tzdata/{tzdata_2011b.bb => tzdata_2011d.bb} (64%)
+On 28-03-11 16:29, Philip Balister wrote:
+> I building PyQwt on an omap3 suing the qt native sdk. This leads to the
+> following message:
 > 
-> diff --git a/recipes/tzdata/tzdata_2011b.bb b/recipes/tzdata/tzdata_2011d.bb
-> similarity index 64%
-> rename from recipes/tzdata/tzdata_2011b.bb
-> rename to recipes/tzdata/tzdata_2011d.bb
-> index 158f4ce..ca225bf 100644
-> --- a/recipes/tzdata/tzdata_2011b.bb
-> +++ b/recipes/tzdata/tzdata_2011d.bb
-> @@ -6,6 +6,5 @@ require tzdata.inc
->  
->  PR = "${INC_PR}.0"
->  
-> -SRC_URI[md5sum] = "9eaf3ca354c42a32bd28e623539bf0e0"
-> -SRC_URI[sha256sum] = "ff45f5ddc2ec925249626d00d7bc2ffff587e0956a1d8245517a023bf27e4cc9"
-> -
-> +SRC_URI[md5sum] = "03c5793502b7c41985edd73146bf7e36"
-> +SRC_URI[sha256sum] = "415a54774094e8dcdc9ba141fafbee4b3b2f2140a5b8cf012eea4b37fb9a23bd"
+> Could not find mkspecs for your QMAKESPEC(linux-g++) after trying:
+>         /home/balister/oe/tmp/sysroots/x86_64-linux/qt4/mkspecs
+> 
+> I can work around this by editing the PyQwt configure.py file to use the
+> full path to the linux-g++ spec file, but it would be nice if this
+> worked out of the box.
+> 
+> Does anyone know how to change the default spec file path in qmake2?
+> I've looked at the recipe and nothing jumps out at me to try.
+
+If you are using angstrom, 'opkg install qt4-mkspecs' and source the
+script that should be in there. That should install the specs and set
+QMAKE* properly.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNkKJHMkyGM64RGpERAqiCAJ9l1uMOxITkPb+I9P0OckVDIzd/pgCfVclX
+zkj6vQmqIDwVX4SQF0Uw+7o=
+=R3A8
+-----END PGP SIGNATURE-----
 
 
 
