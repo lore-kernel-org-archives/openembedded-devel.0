@@ -1,35 +1,23 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philippedeswert@gmail.com>) id 1Q4KIj-0001cS-6d
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Mar 2011 23:48:41 +0200
-Received: by ewy5 with SMTP id 5so1240460ewy.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Mar 2011 14:46:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=X9VbIzPcVAN+zSnU1hKCvlK2a4Bjd9mhvKtc8hR3w5M=;
-	b=hcjOIIbUfF+u4qy5OHZI68w38122y1my3x/y/R3NkxYfI3I6t/LB7zSEgMLSV5TDf0
-	QgCbXc5mhMHutPi9gKUNgxjeNaHibz3PSgnQL2BTE6+KWFWdlliVrN3GnEAKiOeZ67DH
-	djW+z8aatkiUV9EOolnSxnxcsXBMv7pQtm4ZM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=cwLJS642WpfmZX+N/JPBlltvWni4MKhm0qyMQtsSK9BG6m9EliHc/gmtfsgz3J//gp
-	0BpVjaeE6AdOR1XUlDg/0DwYrTVWNpI7NK2+rTvn3MJ8ewK+WI04VUI5EMf2JZoyGU9b
-	vCoFr8q97fUkDrNUIrHb1luPRho7dDGu6utfc=
-Received: by 10.213.97.30 with SMTP id j30mr2149034ebn.20.1301348797709;
-	Mon, 28 Mar 2011 14:46:37 -0700 (PDT)
-Received: from localhost.localdomain (85-156-4-183.elisa-mobile.fi
-	[85.156.4.183])
-	by mx.google.com with ESMTPS id x54sm3087642eeh.5.2011.03.28.14.46.34
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 28 Mar 2011 14:46:37 -0700 (PDT)
-From: phdeswer <philippedeswert@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q4LpR-0004Ir-8m for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Mar 2011 01:26:33 +0200
+Received: from f053033035.adsl.alicedsl.de ([78.53.33.35]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q4Lna-0006dA-57 for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Mar 2011 23:24:38 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Mar 2011 00:45:40 +0300
-Message-Id: <1301348740-30018-1-git-send-email-philippedeswert@gmail.com>
-X-Mailer: git-send-email 1.7.2.5
-Subject: [PATCH] eeze: update to 1.0.1
+In-Reply-To: <1301348740-30018-1-git-send-email-philippedeswert@gmail.com>
+References: <1301348740-30018-1-git-send-email-philippedeswert@gmail.com>
+Date: Tue, 29 Mar 2011 01:24:33 +0200
+Message-ID: <1301354673.6649.10.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH] eeze: update to 1.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,35 +31,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Mar 2011 21:48:41 -0000
+X-List-Received-Date: Mon, 28 Mar 2011 23:26:33 -0000
+X-Groupsio-MsgNum: 30682
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-IJoNzZldkGtT5YQD2V2h"
 
-* Update to 1.0.1
-* Contains bugfixes for udev watch/find functions to make sure devices are shown correctly
+--=-IJoNzZldkGtT5YQD2V2h
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: phdeswer <philippedeswert@gmail.com>
----
- recipes/efl1/eeze_1.0.1.bb |   10 ++++++++++
- 1 files changed, 10 insertions(+), 0 deletions(-)
- create mode 100644 recipes/efl1/eeze_1.0.1.bb
+Am Dienstag, den 29.03.2011, 00:45 +0300 schrieb phdeswer:
+> * Update to 1.0.1
 
-diff --git a/recipes/efl1/eeze_1.0.1.bb b/recipes/efl1/eeze_1.0.1.bb
-new file mode 100644
-index 0000000..cc1d721
---- /dev/null
-+++ b/recipes/efl1/eeze_1.0.1.bb
-@@ -0,0 +1,10 @@
-+require eeze.inc
-+
-+PR = "${INC_PR}.0"
-+
-+SRC_URI = "\
-+  ${E_MIRROR}/${SRCNAME}-${PV}.tar.gz \
-+"
-+
-+SRC_URI[md5sum] = "e36b5e8ed444c8d13d27fd82d5f71659"
-+SRC_URI[sha256sum] = "736470383c33837edd88f417200c5612ca9cc5f400bc48d61fd966fec3fe09d7"
--- 
-1.7.2.5
+No need to recite the commit summary, in my opinion.
+
+> * Contains bugfixes for udev watch/find functions to make sure devices ar=
+e shown correctly
+
+Since it looks like a minor update, maybe 1.0.0 should be replaced right
+away.
+
+> Signed-off-by: phdeswer <philippedeswert@gmail.com>
+
+I think your full name is need here [1]. You can change your Git setup
+using `git config user.name "Philippe Deswert"`.
+
+> ---
+>  recipes/efl1/eeze_1.0.1.bb |   10 ++++++++++
+>  1 files changed, 10 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/efl1/eeze_1.0.1.bb
+>=20
+> diff --git a/recipes/efl1/eeze_1.0.1.bb b/recipes/efl1/eeze_1.0.1.bb
+> new file mode 100644
+> index 0000000..cc1d721
+> --- /dev/null
+> +++ b/recipes/efl1/eeze_1.0.1.bb
+> @@ -0,0 +1,10 @@
+> +require eeze.inc
+> +
+> +PR =3D "${INC_PR}.0"
+> +
+> +SRC_URI =3D "\
+> +  ${E_MIRROR}/${SRCNAME}-${PV}.tar.gz \
+> +"
+> +
+> +SRC_URI[md5sum] =3D "e36b5e8ed444c8d13d27fd82d5f71659"
+> +SRC_URI[sha256sum] =3D "736470383c33837edd88f417200c5612ca9cc5f400bc48d6=
+1fd966fec3fe09d7"
 
 
+Thank you for your patch,
 
+Paul
+
+
+[1] http://openembedded.org/index.php/Commit_Policy
+
+--=-IJoNzZldkGtT5YQD2V2h
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2RGLEACgkQPX1aK2wOHViG/wCfZSpsaRFBZVqa14qWJ/GHfIIF
+I+EAn3UO3LH9W4tyI0vmJYhGvJsfyKfv
+=mUAs
+-----END PGP SIGNATURE-----
+
+--=-IJoNzZldkGtT5YQD2V2h--
