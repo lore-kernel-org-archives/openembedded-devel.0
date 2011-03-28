@@ -1,34 +1,35 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Q4J6T-0007wB-2S
+	(envelope-from <philippedeswert@gmail.com>) id 1Q4KIj-0001cS-6d
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Mar 2011 22:31:57 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1Q4J4b-00045N-JF from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Mar 2011 13:30:01 -0700
-Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Mon, 28 Mar 2011 13:30:01 -0700
-Received: from [172.30.80.76] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
-	Mon, 28 Mar 2011 13:30:00 -0700
-Message-ID: <4D90EFC2.4060003@mentor.com>
-Date: Mon, 28 Mar 2011 13:29:54 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <4D7E3B34.5050100@mentor.com> <4D90E2FA.7020603@mentor.com>
-	<20110328201541.GA32128@denix.org>
-In-Reply-To: <20110328201541.GA32128@denix.org>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 28 Mar 2011 20:30:01.0409 (UTC)
-	FILETIME=[E9CC9310:01CBED86]
-Subject: Re: Discussion: Version retention policy in oe-core
+	Mon, 28 Mar 2011 23:48:41 +0200
+Received: by ewy5 with SMTP id 5so1240460ewy.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Mar 2011 14:46:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=X9VbIzPcVAN+zSnU1hKCvlK2a4Bjd9mhvKtc8hR3w5M=;
+	b=hcjOIIbUfF+u4qy5OHZI68w38122y1my3x/y/R3NkxYfI3I6t/LB7zSEgMLSV5TDf0
+	QgCbXc5mhMHutPi9gKUNgxjeNaHibz3PSgnQL2BTE6+KWFWdlliVrN3GnEAKiOeZ67DH
+	djW+z8aatkiUV9EOolnSxnxcsXBMv7pQtm4ZM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=cwLJS642WpfmZX+N/JPBlltvWni4MKhm0qyMQtsSK9BG6m9EliHc/gmtfsgz3J//gp
+	0BpVjaeE6AdOR1XUlDg/0DwYrTVWNpI7NK2+rTvn3MJ8ewK+WI04VUI5EMf2JZoyGU9b
+	vCoFr8q97fUkDrNUIrHb1luPRho7dDGu6utfc=
+Received: by 10.213.97.30 with SMTP id j30mr2149034ebn.20.1301348797709;
+	Mon, 28 Mar 2011 14:46:37 -0700 (PDT)
+Received: from localhost.localdomain (85-156-4-183.elisa-mobile.fi
+	[85.156.4.183])
+	by mx.google.com with ESMTPS id x54sm3087642eeh.5.2011.03.28.14.46.34
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 28 Mar 2011 14:46:37 -0700 (PDT)
+From: phdeswer <philippedeswert@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 29 Mar 2011 00:45:40 +0300
+Message-Id: <1301348740-30018-1-git-send-email-philippedeswert@gmail.com>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [PATCH] eeze: update to 1.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,53 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Mar 2011 20:31:57 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 28 Mar 2011 21:48:41 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* Update to 1.0.1
+* Contains bugfixes for udev watch/find functions to make sure devices are shown correctly
 
-On 03/28/2011 01:15 PM, Denys Dmytriyenko wrote:
-> On Mon, Mar 28, 2011 at 12:35:22PM -0700, Tom Rini wrote:
->> On 03/14/2011 08:58 AM, Tom Rini wrote:
->>> Hi all,
->>>
->>> The TSC has discussed this item at the request of the community and has
->>> come up with the following recommendation which we are looking for
->>> feedback (positive/negative/neutral) before putting this up on the wiki.
->>
->> Based on feedback I have placed this into
->> http://wiki.openembedded.org/index.php/Version_Retention_Policy
->>
->> Tom Rini
->> Mentor Graphics Corporation
-> 
-> Tom,
-> 
-> A slight offtopic: you started signing your emails, but where is the 
-> corresponding public key DCDE7271 - I cannot find it on any of the 
-> keyservers, although there are plenty of your old keys...
+Signed-off-by: phdeswer <philippedeswert@gmail.com>
+---
+ recipes/efl1/eeze_1.0.1.bb |   10 ++++++++++
+ 1 files changed, 10 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/efl1/eeze_1.0.1.bb
 
-Blah, I didn't realize gpg2 --send-keys didn't work anymore.  It should
-be on keyserver2.pgp.com in however long it takes for it to populate (I
-can't find it in search just now but I also just clicked the
-verification link).
+diff --git a/recipes/efl1/eeze_1.0.1.bb b/recipes/efl1/eeze_1.0.1.bb
+new file mode 100644
+index 0000000..cc1d721
+--- /dev/null
++++ b/recipes/efl1/eeze_1.0.1.bb
+@@ -0,0 +1,10 @@
++require eeze.inc
++
++PR = "${INC_PR}.0"
++
++SRC_URI = "\
++  ${E_MIRROR}/${SRCNAME}-${PV}.tar.gz \
++"
++
++SRC_URI[md5sum] = "e36b5e8ed444c8d13d27fd82d5f71659"
++SRC_URI[sha256sum] = "736470383c33837edd88f417200c5612ca9cc5f400bc48d61fd966fec3fe09d7"
+-- 
+1.7.2.5
 
-- -- 
-Tom Rini
-Mentor Graphics Corporation
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iQEcBAEBAgAGBQJNkO/CAAoJEI4NMjfc3nJxmxkIALqNj55DpR9kxH+YTxE+CVVY
-fHC+tBkCF8mR+NYQ3Qh6duwxBJXJdzWwDZivLow9iu9ej9i5vH5if7n+zsNfbw2+
-c7nzZJh3fDk/oT3IRbXiM3CA4rpn/E4uSPGPa4uo0aOtT2NKwRYqrAKqlbWpaHku
-DU2e1fN3H9+CMMXDbn4wjOuhCT+HIhaggzaD44zCm/15dK6M6u9ql6thAVq03Efw
-x/Ft3nm3jBFhJPF7AEVzmYmI8LICtqUTSfjq6d7uBdnZQoqvnWfJQ9zKsmkBdJ6l
-N/NFXX9SEajVc2c/Ez1mn6K32Uy2N36dR8ocmfPs+FVkf7UV0xQvmyhkmkAlNPA=
-=dcsn
------END PGP SIGNATURE-----
 
 
