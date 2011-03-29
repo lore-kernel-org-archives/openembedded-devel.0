@@ -1,34 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q4d94-0004RF-Qg for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Mar 2011 19:55:59 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q4d78-00079L-M6 for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Mar 2011 19:53:58 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Mar 2011 19:53:58 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <jay@jay-tech.ru>) id 1Q4dZ1-0005I6-KE
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Mar 2011 20:22:48 +0200
+Received: by iwn10 with SMTP id 10so443911iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Mar 2011 19:53:58 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 29 Mar 2011 19:53:44 +0200
-Message-ID: <imt6b8$ktl$1@dough.gmane.org>
-References: <E1Q3y4q-00047f-Ns@melo.openembedded.org>	<20110328083149.GA7337@xora-eee.xora.org.uk>
+	Tue, 29 Mar 2011 11:20:48 -0700 (PDT)
+Received: by 10.231.207.1 with SMTP id fw1mr216489ibb.8.1301422848302; Tue, 29
+	Mar 2011 11:20:48 -0700 (PDT)
+MIME-Version: 1.0
+Sender: jay@jay-tech.ru
+Received: by 10.231.34.130 with HTTP; Tue, 29 Mar 2011 11:20:28 -0700 (PDT)
+X-Originating-IP: [95.29.13.198]
+In-Reply-To: <imt6b8$ktl$1@dough.gmane.org>
+References: <E1Q3y4q-00047f-Ns@melo.openembedded.org>
+	<20110328083149.GA7337@xora-eee.xora.org.uk>
 	<AANLkTikP801Wp0c2BVr+9EQ5S0yfrzO8ONa7V3cU1BCp@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <AANLkTikP801Wp0c2BVr+9EQ5S0yfrzO8ONa7V3cU1BCp@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
+	<imt6b8$ktl$1@dough.gmane.org>
+From: Yury Bushmelev <jay4mail@gmail.com>
+Date: Tue, 29 Mar 2011 22:20:28 +0400
+X-Google-Sender-Auth: ZVFN9eD1n5vVhsMGVUzlWi0pbHQ
+Message-ID: <BANLkTikeuv7W-3YMNJjAO7_7YR2SY0twKQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [oe-commits] Andrea Adami : udev: remove udev-compat for Zaurus devices since we use 2.6 .38 finally.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,31 +36,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Mar 2011 17:55:59 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 29 Mar 2011 18:22:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 28-03-11 11:00, Andrea Adami wrote:
-> On Mon, Mar 28, 2011 at 10:31 AM, Graeme Gregory <dp@xora.org.uk> wrote:
->> Shouldnt this patch have a PR bump so udev already on devices is updated?
+2011/3/29 Koen Kooi <koen@dominion.thruhere.net>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 28-03-11 11:00, Andrea Adami wrote:
+>> On Mon, Mar 28, 2011 at 10:31 AM, Graeme Gregory <dp@xora.org.uk> wrote:
+>>> Shouldnt this patch have a PR bump so udev already on devices is updated?
+>>>
+>>> Graeme
 >>
->> Graeme
-> 
-> Ah, yes ...if we only had working images on devices ;)
-> IIRC udev-compat was not accepted in Narcissus.
+>> Ah, yes ...if we only had working images on devices ;)
+>> IIRC udev-compat was not accepted in Narcissus.
+>
+> That's because noone wants to support zaurus devices in angstrom, only
+> bitch about them being unsupported.
 
-That's because noone wants to support zaurus devices in angstrom, only
-bitch about them being unsupported.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+s/ in angstrom// :(
 
-iD8DBQFNkhynMkyGM64RGpERAkFoAJ0VA+kAaABhjSR/SjZLdtMoGuBRrgCdFUko
-mfThfdyrOZwrVCd3CMs3KT4=
-=cc+u
------END PGP SIGNATURE-----
-
+-- 
+Yury Bushmelev
 
 
