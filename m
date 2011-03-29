@@ -1,23 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q4LpR-0004Ir-8m for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Mar 2011 01:26:33 +0200
-Received: from f053033035.adsl.alicedsl.de ([78.53.33.35]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q4Lna-0006dA-57 for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Mar 2011 23:24:38 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q4NTV-0006Y6-LT for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Mar 2011 03:12:02 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q4NRd-0004xe-Ea for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Mar 2011 03:10:05 +0200
+Received: from 95.76.68.223 ([95.76.68.223])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Mar 2011 03:10:05 +0200
+Received: from cheepeero by 95.76.68.223 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Mar 2011 03:10:05 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1301348740-30018-1-git-send-email-philippedeswert@gmail.com>
-References: <1301348740-30018-1-git-send-email-philippedeswert@gmail.com>
-Date: Tue, 29 Mar 2011 01:24:33 +0200
-Message-ID: <1301354673.6649.10.camel@mattotaupa>
+From: Ciprian Ciubotariu <cheepeero@gmx.net>
+Date: Tue, 29 Mar 2011 03:09:52 +0300
+Message-ID: <imr80g$18s$1@dough.gmane.org>
+References: <op.vqmoblu0aqzt3c@pluto>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH] eeze: update to 1.0.1
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: 95.76.68.223
+User-Agent: KNode/4.6 beta4
+Subject: Re: qt4-tools-native not compiling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,73 +38,165 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Mar 2011 23:26:33 -0000
-X-Groupsio-MsgNum: 30682
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-IJoNzZldkGtT5YQD2V2h"
+X-List-Received-Date: Tue, 29 Mar 2011 01:12:02 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7Bit
 
---=-IJoNzZldkGtT5YQD2V2h
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+I am experiencing the same problem, also on Gentoo x86_64.
 
-Am Dienstag, den 29.03.2011, 00:45 +0300 schrieb phdeswer:
-> * Update to 1.0.1
+Thomas Elste wrote:
 
-No need to recite the commit summary, in my opinion.
+> Hi,
+> 
+> I'm trying to build qt4-tools-native (I'm on tested_2011-01-28 currently).
+> It fails while compiling qegl_qws.cpp (see log below).
+> There seems to be a problem with the Qt configure script checking for
+> EGL include files and detecting EGL support. Don't know if it should
+> or shouldn't. Nevertheless if I remove my build hosts /usr/include/EGL
+> directory, compiling qt4-tools-native works fine. I'm using Gentoo64 and
+> the EGL headers are from media-libs/mesa ebuild. So installing mesa-dev
+> package on some other distribution will possibly lead to this error, too.
+> Any hint how to fix this?
+> 
+> 
+> Best Regards
+> Thomas
+> 
+> 
+> Build Configuration:
+> BB_VERSION        = "1.10.2"
+> METADATA_BRANCH   = "<unknown>"
+> METADATA_REVISION = "3a7b93a"
+> TARGET_ARCH       = "arm"
+> TARGET_OS         = "linux-gnueabi"
+> MACHINE           = "am3517-evm"
+> DISTRO            = "angstrom"
+> DISTRO_VERSION    = "2010.7-test-20110209"
+> TARGET_FPU        = "hard"
+> 
+> log.do_compile:
+> <...>
+> g++  -c
+> -isystem/boards/am3517-evm/oe-tested_2011-01-28/tmp/sysroots/x86_64-linu
+> x/usr/include -O2 -g
+> -I/boards/am3517-evm/oe-tested_2011-01-28/tmp/sysroots/x86_
+> 64-linux/usr/include -fno-exceptions -O2 -fvisibility=hidden
+> -fvisibility-inline s-hidden -Wall -W -D_REENTRANT -fPIC
+> -DQT_BUILD_GUI_LIB -DQT_NO_USING_NAMESPACE -DQT_NO_CAST_TO_ASCII
+> -DQT_ASCII_CAST_WARNINGS -DQT3_SUPPORT -DQT_MOC_COMPAT -DQ
+> T_NO_IMAGEFORMAT_PNG -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE
+> -DQT_HAVE_MMXEX T -DQT_HAVE_SSE2 -DQT_NO_FONTCONFIG -DQT_NO_FREETYPE
+> -DQT_NO_OPENTYPE -DQT_NO_ST YLE_MAC -DQT_NO_STYLE_WINDOWSVISTA
+> -DQT_NO_STYLE_WINDOWSXP -DQT_NO_STYLE_GTK -DQ T_NO_STYLE_WINDOWSCE
+> -DQT_NO_STYLE_WINDOWSMOBILE -DQT_NO_STYLE_S60 -DQ_INTERNAL_ QAPP_SRC
+> -DQT_NO_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB -D_LARGEFILE64_SOURCE -D_L
+> ARGEFILE_SOURCE -I../../mkspecs/qws/linux-x86_64-g++ -I.
+> -I../../include/QtCore -I../../include/QtNetwork -I../../include
+> -I../../include/QtGui -I.rcc/release-s tatic-emb-x86_64
+> -I../3rdparty/harfbuzz/src -Idialogs -I.moc/release-static-emb- x86_64
+> -I.uic/release-static-emb-x86_64 -o .obj/release-static-emb-x86_64/qegl_q
+> ws.o egl/qegl_qws.cpp moc embedded/qsoundqss_qws.h moc
+> embedded/qcopchannel_qws.h moc embedded/qdecorationplugin_qws.h moc
+> embedded/qdirectpainter_qws.h moc embedded/qwsmanager_qws.h moc
+> embedded/qtransportauth_qws.h embedded/qtransportauth_qws.h:0: Warning: No
+> relevant classes found. No output g enerated. moc embedded/qwssocket_qws.h
+> In file included from ../../include/QtCore/qcoreevent.h:1,
+>                   from
+>                   
+../../include/QtCore/../../src/corelib/kernel/qcoreapplica
+> tion.h:46,
+>                   from ../../include/QtCore/qcoreapplication.h:1,
+>                   from
+>                   
+../../include/QtGui/../../src/gui/kernel/qapplication.h:45
+> ,
+>                   from ../../include/QtGui/qapplication.h:1,
+>                   from egl/qegl_qws.cpp:51:
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:69: error:
+> expected i dentifier before numeric constant
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:69: error:
+> expected ' }' before numeric constant
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:69: error:
+> expected u nqualified-id before numeric constant
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:297: error:
+> expected ')' before 'type'
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:298: error:
+> declarati on of '~QEvent' as non-member
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:299: error:
+> 'Type' do es not name a type
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:300: error:
+> non-membe r function 'bool spontaneous()' cannot have cv-qualifier
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h: In function
+> 'bool sp ontaneous()':
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:300: error:
+> 'spont' w as not declared in this scope
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h: In function
+> 'void se tAccepted(bool)':
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:302: error:
+> 'm_accept ' was not declared in this scope
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h: At global
+> scope: ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:303:
+> error: non-membe r function 'bool isAccepted()' cannot have cv-qualifier
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h: In function
+> 'bool is Accepted()':
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:303: error:
+> 'm_accept ' was not declared in this scope
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h: In function
+> 'void ac cept()':
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:305: error:
+> 'm_accept ' was not declared in this scope
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h: In function
+> 'void ig nore()':
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:306: error:
+> 'm_accept ' was not declared in this scope
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h: At global
+> scope: ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:310:
+> error: expected unqualified-id before 'protected'
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:314: error:
+> expected unqualified-id before 'private'
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:316: error:
+> expected initializer before ':' token
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:317: error:
+> expected initializer before ':' token
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:318: error:
+> expected initializer before ':' token
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:320: error:
+> 'friend' used outside of class
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:321: error:
+> 'friend' used outside of class
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:322: error:
+> 'friend' used outside of class
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:323: error:
+> 'friend' used outside of class
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:324: error:
+> 'friend' used outside of class
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:325: error:
+> 'friend' used outside of class
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:326: error:
+> 'friend' used outside of class
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:327: error:
+> 'friend' used outside of class
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:328: error:
+> 'friend' used outside of class
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:329: error:
+> 'friend' used outside of class
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:330: error:
+> 'friend' used outside of class
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:331: error:
+> 'friend' used outside of class
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:332: error:
+> expected declaration before '}' token
+> moc embedded/qwsembedwidget.h
+> moc embedded/qscreendriverplugin_qws.h
+> moc embedded/qkbddriverplugin_qws.h
+> ../../include/QtCore/../../src/corelib/kernel/qcoreevent.h:308: warning:
+> 'int re gisterEventType(int)' declared 'static' but never defined
+> moc embedded/qmousedriverplugin_qws.h
+> make: *** [.obj/release-static-emb-x86_64/qegl_qws.o] Error 1
+> make: *** Waiting for unfinished jobs....
+> FATAL: oe_runmake failed
+> ERROR: Function do_compile failed
 
-> * Contains bugfixes for udev watch/find functions to make sure devices ar=
-e shown correctly
-
-Since it looks like a minor update, maybe 1.0.0 should be replaced right
-away.
-
-> Signed-off-by: phdeswer <philippedeswert@gmail.com>
-
-I think your full name is need here [1]. You can change your Git setup
-using `git config user.name "Philippe Deswert"`.
-
-> ---
->  recipes/efl1/eeze_1.0.1.bb |   10 ++++++++++
->  1 files changed, 10 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/efl1/eeze_1.0.1.bb
->=20
-> diff --git a/recipes/efl1/eeze_1.0.1.bb b/recipes/efl1/eeze_1.0.1.bb
-> new file mode 100644
-> index 0000000..cc1d721
-> --- /dev/null
-> +++ b/recipes/efl1/eeze_1.0.1.bb
-> @@ -0,0 +1,10 @@
-> +require eeze.inc
-> +
-> +PR =3D "${INC_PR}.0"
-> +
-> +SRC_URI =3D "\
-> +  ${E_MIRROR}/${SRCNAME}-${PV}.tar.gz \
-> +"
-> +
-> +SRC_URI[md5sum] =3D "e36b5e8ed444c8d13d27fd82d5f71659"
-> +SRC_URI[sha256sum] =3D "736470383c33837edd88f417200c5612ca9cc5f400bc48d6=
-1fd966fec3fe09d7"
 
 
-Thank you for your patch,
 
-Paul
-
-
-[1] http://openembedded.org/index.php/Commit_Policy
-
---=-IJoNzZldkGtT5YQD2V2h
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk2RGLEACgkQPX1aK2wOHViG/wCfZSpsaRFBZVqa14qWJ/GHfIIF
-I+EAn3UO3LH9W4tyI0vmJYhGvJsfyKfv
-=mUAs
------END PGP SIGNATURE-----
-
---=-IJoNzZldkGtT5YQD2V2h--
