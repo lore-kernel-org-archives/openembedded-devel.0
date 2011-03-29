@@ -1,33 +1,25 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Q4aHK-0004Ad-F1
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Mar 2011 16:52:18 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1Q4aFI-0004xw-OS from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Mar 2011 07:50:12 -0700
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Tue, 29 Mar 2011 07:50:12 -0700
-Received: from [172.30.80.76] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
-	with Microsoft SMTP Server id 14.1.270.1;
-	Tue, 29 Mar 2011 07:50:11 -0700
-Message-ID: <4D91F19C.2090701@mentor.com>
-Date: Tue, 29 Mar 2011 07:50:04 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <AANLkTinndYKCjXukE90p0yGuh1KCtm1joySugGMQXrTU@mail.gmail.com>
-In-Reply-To: <AANLkTinndYKCjXukE90p0yGuh1KCtm1joySugGMQXrTU@mail.gmail.com>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 29 Mar 2011 14:50:12.0603 (UTC)
-	FILETIME=[9B896CB0:01CBEE20]
-Subject: Re: Modifying download directories
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q4aag-00053B-IR for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Mar 2011 17:12:18 +0200
+Received: from f053045115.adsl.alicedsl.de ([78.53.45.115]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q4aYo-0004nN-BZ; Tue, 29 Mar 2011 15:10:22 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <AANLkTi=6hSKs9aJqHEWsYturvxYGaFTxk-jkb5bO6+Rc@mail.gmail.com>
+References: <1301348740-30018-1-git-send-email-philippedeswert@gmail.com>
+	<1301354673.6649.10.camel@mattotaupa>
+	<AANLkTi=6hSKs9aJqHEWsYturvxYGaFTxk-jkb5bO6+Rc@mail.gmail.com>
+Date: Tue, 29 Mar 2011 17:10:20 +0200
+Message-ID: <1301411420.25311.4.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [PATCH] eeze: update to 1.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,39 +33,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Mar 2011 14:52:18 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 29 Mar 2011 15:12:18 -0000
+X-Groupsio-MsgNum: 30700
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-kMzBfzREv5d2Xv5HCD7f"
 
-On 03/28/2011 07:03 PM, Charles Manning wrote:
-> Hi All
-> 
-> I am fetching various modules from svn and need to create a specific
-> directory structure with them. I'm struggling to find the correct
-> combination to make this work.
-> 
-> If I use
-> SRC_URI = " \
->         svn://xxx/svn/a/trunk;module=Common;proto=http \
->         svn://xxx/svn/a/trunk;module=Core;proto=http \
->         svn://xxx/svn/b/trunk;module=HAL;proto=http \
-> "
-> that fetches the modules so that I end up with
-> 
-> ${WORKDIR}/Common
-> ${WORKDIR}/Core
-> ${WORKDIR}/HAL
-> 
-> but what I really want is;
-> 
-> ${WORKDIR}/foo/Common
-> ${WORKDIR}/foo/Core
-> ${WORKDIR}/bar/HAL
+--=-kMzBfzREv5d2Xv5HCD7f
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I think you can use ';subdir=Common' and so forth in the URIs.
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+Dear Martin,
 
 
+Am Dienstag, den 29.03.2011, 14:16 +0300 schrieb Philippe De Swert:
+
+> On 29/03/2011, Paul Menzel <paulepanter@users.sourceforge.net> wrote:
+> > Am Dienstag, den 29.03.2011, 00:45 +0300 schrieb phdeswer:
+> >> * Update to 1.0.1
+> >
+> > No need to recite the commit summary, in my opinion.
+>=20
+> Well I kind of did because that were the changes and I wanted to make
+> sure the mail header was correct. Maybe I can skip it next time
+> indeed.
+>=20
+> >> * Contains bugfixes for udev watch/find functions to make sure devices=
+ are
+> >> shown correctly
+> >
+> > Since it looks like a minor update, maybe 1.0.0 should be replaced righ=
+t
+> > away.
+>=20
+> Would be an option.
+>=20
+> >> Signed-off-by: phdeswer <philippedeswert@gmail.com>
+> >
+> > I think your full name is need here [1]. You can change your Git setup
+> > using `git config user.name "Philippe Deswert"`.
+>=20
+> I just followed the instructions here [1], but I updated my name as
+> suggested by you. So that should be fine for the next commits.
+
+what do you prefer? Keep or remove Eeze 1.0.0?
+
+
+Thanks,
+
+Paul
+
+
+> [1] http://www.openembedded.org/index.php/How_to_submit_a_patch_to_OpenEm=
+bedded
+
+--=-kMzBfzREv5d2Xv5HCD7f
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2R9lUACgkQPX1aK2wOHVhehgCaAkozZBWgdT3MYhkgzULC12Sf
+v9UAnjJ4hF1Rpg+KZ81tp8/dFGPlKSMB
+=sPLS
+-----END PGP SIGNATURE-----
+
+--=-kMzBfzREv5d2Xv5HCD7f--
