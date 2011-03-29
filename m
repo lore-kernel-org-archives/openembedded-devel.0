@@ -1,41 +1,33 @@
-Received: from cortex1.nebelhauch.de ([213.133.111.172])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <julian@whisper-net.de>) id 1Q4ZpJ-0004V4-0V
+	(envelope-from <Tom_Rini@mentor.com>) id 1Q4a2d-0007hO-TK
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Mar 2011 16:23:21 +0200
-Received: by cortex1.nebelhauch.de (Postfix, from userid 65534)
-	id D7F38E6B30; Tue, 29 Mar 2011 16:22:13 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	cortex1.nebelhauch.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED
-	autolearn=unavailable version=3.3.1
-Received: from localhost (localhost [127.0.0.1])
-	by cortex1.nebelhauch.de (Postfix) with ESMTP id BD75FE6B2F
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Mar 2011 16:22:13 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at nebelhauch.de
-Received: from cortex1.nebelhauch.de ([127.0.0.1])
-	by localhost (cortex1.nebelhauch.de [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id XBdrdhh1Vycu
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Mar 2011 16:22:13 +0200 (CEST)
-Received: from nebelhauch.de (cortex1.nebelhauch.de [213.133.111.172])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by cortex1.nebelhauch.de (Postfix) with ESMTPSA id 9FFEDE6B28
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Mar 2011 16:22:13 +0200 (CEST)
+	Tue, 29 Mar 2011 16:37:21 +0200
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1Q4a0k-0003UY-KH from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Mar 2011 07:35:10 -0700
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Tue, 29 Mar 2011 07:35:10 -0700
+Received: from [172.30.80.76] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
+	with Microsoft SMTP Server id 14.1.270.1;
+	Tue, 29 Mar 2011 07:35:09 -0700
+Message-ID: <4D91EE16.8060104@mentor.com>
+Date: Tue, 29 Mar 2011 07:35:02 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-Date: Tue, 29 Mar 2011 16:22:13 +0200
-From: Julian Pietron <julian@whisper-net.de>
 To: <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <99989183e4a44b810bb727c31af09ddd@nebelhauch.de>
-References: <99989183e4a44b810bb727c31af09ddd@nebelhauch.de>
-Message-ID: <a1c26f70a687295bb95b52fa3f856755@nebelhauch.de>
-X-Sender: julian@whisper-net.de
-User-Agent: Roundcube Webmail/0.4.2
-Subject: Re: do_compile of gcc-cross-sdk-4.5 fails with -mfloat-abi=hard
+References: <4D91C2FE.4000905@oktetlabs.ru>
+In-Reply-To: <4D91C2FE.4000905@oktetlabs.ru>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 29 Mar 2011 14:35:10.0468 (UTC)
+	FILETIME=[81D28C40:01CBEE1E]
+Subject: Re: patch 2.6 rejects relative paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,22 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Mar 2011 14:23:21 -0000
-Content-Type: text/plain;
- charset=UTF-8;
- format=flowed
+X-List-Received-Date: Tue, 29 Mar 2011 14:37:22 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
 Content-Transfer-Encoding: 7bit
 
- On Tue, 29 Mar 2011 15:33:11 +0200, Julian Pietron 
- <julian@whisper-net.de> wrote:
-> Currently I'm trying to build with ARM_FP_MODE="softfp" to see
-> whether the problem persists, but I don't think so as it seems to be
-> related to the VFP instructions.
+On 03/29/2011 04:31 AM, Elena Vengerova wrote:
+> Hello,
+> 
+> I have patch 2.6.1 on my Fedora.
+> I've found out that it rejects patches like
+> recipes/tcltk/tcl-8.5.8/mips-tclstrtod.patch with relative paths:
+> 
+> --- ../generic/tclStrToD.c.orig
+> +++ ../generic/tclStrToD.c
+> 
+> I failed to find the reason, but my colleague said me (she was unsure)
+> that it was security hole fix.
+> Thus looks like it's no way to force patch behave like old one.
+> 
+> I wonder if some work around is possible (except patch downgrade) or
+> it's necessary to fix the recipes.
 
- As expected, a build in softfp mode works without errors and completes 
- successfully.
+What metadata are you using (and branch name)?  This should be fixed in
+current openembedded.org master.
 
- Best regards,
- Julian
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
