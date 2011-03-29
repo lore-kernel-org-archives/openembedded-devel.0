@@ -1,43 +1,39 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q4eOt-0006lS-A0
+	(envelope-from <chase.maupin@ti.com>) id 1Q4edy-0001Co-RP
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Mar 2011 21:16:23 +0200
-Received: by bwz5 with SMTP id 5so463012bwz.6
+	Tue, 29 Mar 2011 21:31:59 +0200
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id p2TJRc47006209
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Mar 2011 12:14:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=WMHTsONU5WyH1v+R6SZGlkM4i6MKqFocBtAAX4cRA74=;
-	b=PzapmarIRS6/ii4Jd8Gaf+ZXNNdTEX6aHoataybf4Js9MRQ14RQMigqHN72qvA2NH8
-	53AtgLmbNQn42qWTJc37ZQAh2XRr/3o0b95ZVWABiJ9TZnBUlSsSFYh4SpdbdOqxNmt/
-	KNtdXC4mcM0yX5UgRLYQF0VhLw0UWzDhjqiMA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=GvuVnPWqEaOLXqFK/Rk2tRzd+1nWdfIIuJKnZ8W2eq6rejr3cnxpCZQpQme3hi5D4p
-	VEsT7nJzU2ZrCkwT7CSXZIboJPcmNR1p5j+cbqnQsJVbWFRbE9SqOyKdoTNBxrKfBDal
-	QVRXP7aBhLFmYfA2Fgl/mYUPpbQm51MQ8kO3E=
-Received: by 10.204.19.3 with SMTP id y3mr149703bka.180.1301426065171;
-	Tue, 29 Mar 2011 12:14:25 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id w3sm3636598bkt.17.2011.03.29.12.14.22
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 29 Mar 2011 12:14:23 -0700 (PDT)
-Date: Tue, 29 Mar 2011 21:14:16 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Paul Menzel <paulepanter@users.sourceforge.net>
-Message-ID: <20110329191416.GB3439@jama.jama.net>
-References: <1301348740-30018-1-git-send-email-philippedeswert@gmail.com>
-	<1301354673.6649.10.camel@mattotaupa>
-	<AANLkTi=6hSKs9aJqHEWsYturvxYGaFTxk-jkb5bO6+Rc@mail.gmail.com>
-	<1301411420.25311.4.camel@mattotaupa>
+	Tue, 29 Mar 2011 14:27:38 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id p2TJRcrc006945
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Mar 2011 14:27:38 -0500 (CDT)
+Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p2TJRcB6026643
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Mar 2011 14:27:38 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dsbe71.ent.ti.com
+	([156.117.232.23]) with mapi; Tue, 29 Mar 2011 14:27:31 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Tue, 29 Mar 2011 14:27:30 -0500
+Thread-Topic: [oe] [PATCH 1/1] matrix-gui: update SRCREV
+Thread-Index: AcvuKU7vfh5Ia0dwRmeYb1KGJ90lxQAHfnEQ
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080340B8D60E@dlee06.ent.ti.com>
+References: <1301498420-6480-1-git-send-email-j-lance1@ti.com>
+In-Reply-To: <1301498420-6480-1-git-send-email-j-lance1@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-In-Reply-To: <1301411420.25311.4.camel@mattotaupa>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] eeze: update to 1.0.1
+Cc: "Lance, Jeff" <j-lance1@ti.com>
+Subject: Re: [PATCH 1/1] matrix-gui: update SRCREV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,37 +47,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Mar 2011 19:16:23 -0000
-X-Groupsio-MsgNum: 30706
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="cmJC7u66zC7hs+87"
-Content-Disposition: inline
-
---cmJC7u66zC7hs+87
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 29 Mar 2011 19:32:00 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 29, 2011 at 05:10:20PM +0200, Paul Menzel wrote:
-> Dear Martin,
-> what do you prefer? Keep or remove Eeze 1.0.0?
 
-feel free to remove 1.0.0
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Jeff Lance
+> Sent: Wednesday, March 30, 2011 10:20 AM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Lance, Jeff
+> Subject: [oe] [PATCH 1/1] matrix-gui: update SRCREV
+>=20
+>   * am1808 - pull in better description for WiFi.
+>=20
+> Signed-off-by: Jeff Lance   <j-lance1@ti.com>
+> ---
 
-Cheers,
+Acked-by: Chase Maupin <chase.maupin@ti.com>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---cmJC7u66zC7hs+87
-Content-Type: application/pgp-signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
 
-iEYEARECAAYFAk2SL4gACgkQN1Ujt2V2gByoNACgmK4C3E8jGcAmI7ZohZBQzG8D
-su4AniyEGYk/WAHuWl98ilkl22sQ0+Yi
-=yEbS
------END PGP SIGNATURE-----
-
---cmJC7u66zC7hs+87--
