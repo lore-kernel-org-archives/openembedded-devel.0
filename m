@@ -1,31 +1,23 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cdhmanning@gmail.com>) id 1Q4OIl-0005Fe-Ch
-	for Openembedded-devel@lists.openembedded.org;
-	Tue, 29 Mar 2011 04:04:59 +0200
-Received: by fxm19 with SMTP id 19so3468287fxm.6
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Mar 2011 19:03:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=nrmQylWSvaUyoMqE0ZF4G9yDKqbQ6nMiP7xySuKH3UU=;
-	b=jLQYInGLOiOkT8tcYV1R+rz13jlxScDdVAe9aCvZFDCSia7gukVdCz6W925MriG+Ve
-	zWlLyIviUYd0l8+ZI8HRJ+LYc7SonDx9aWwQQjsXERjx6l84l9u7dwFT9PcsIqwosq/c
-	qSUwalSrqMSPb9BE2vM7RoCNK4gLwVEPl4Uoc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=xuFAnNnlC3HIoPdqKyx3PcBvmvvmHlH7CLUG73IOjEBRf/R8qTvy8I/RcxQ8QM0YW+
-	NrS/Viwb5JZcZ2YR7ZMLnnB2svs3quGqom6/WVygG0Cfk0AzozHvCi9DzhZktERUcyYj
-	U3Z+GjPPJVkMg+jq0ue5HobSxRZNwQcYMYJpk=
-MIME-Version: 1.0
-Received: by 10.223.17.202 with SMTP id t10mr712334faa.139.1301364182251; Mon,
-	28 Mar 2011 19:03:02 -0700 (PDT)
-Received: by 10.223.96.129 with HTTP; Mon, 28 Mar 2011 19:03:02 -0700 (PDT)
-Date: Tue, 29 Mar 2011 15:03:02 +1300
-Message-ID: <AANLkTinndYKCjXukE90p0yGuh1KCtm1joySugGMQXrTU@mail.gmail.com>
-From: Charles Manning <cdhmanning@gmail.com>
-To: Openembedded-devel@lists.openembedded.org
-Subject: Modifying download directories
+	(envelope-from <sledz@dresearch-fe.de>) id 1Q4TGR-0000zW-QY
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Mar 2011 09:22:55 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 53A79491283;
+	Tue, 29 Mar 2011 09:00:34 +0200 (CEST)
+Received: from mobil-400-586.intern.dresearch.de ([10.32.11.62]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
+	Tue, 29 Mar 2011 09:00:34 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 29 Mar 2011 09:00:28 +0200
+Message-Id: <1301382028-10848-1-git-send-email-sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.3.4
+X-OriginalArrivalTime: 29 Mar 2011 07:00:34.0311 (UTC)
+	FILETIME=[FFF74970:01CBEDDE]
+Subject: [PATCH] linux-2.6.24: allow building kernel with newer GNU make
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,39 +31,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Mar 2011 02:04:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 29 Mar 2011 07:22:56 -0000
 
-Hi All
+GNU make >= 3.82 does not allow mixed implicit and normal rules
 
-I am fetching various modules from svn and need to create a specific
-directory structure with them. I'm struggling to find the correct
-combination to make this work.
+Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+---
+ .../linux-libc-headers-2.6.24/make-3.82.patch      |   29 ++++++++++++++++++++
+ .../linux-libc-headers_2.6.24.bb                   |    3 +-
+ recipes/linux/linux-2.6.24/make-3.82.patch         |   29 ++++++++++++++++++++
+ recipes/linux/linux_2.6.24.bb                      |    3 +-
+ 4 files changed, 62 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/linux-libc-headers/linux-libc-headers-2.6.24/make-3.82.patch
+ create mode 100644 recipes/linux/linux-2.6.24/make-3.82.patch
 
-If I use
-SRC_URI = " \
-        svn://xxx/svn/a/trunk;module=Common;proto=http \
-        svn://xxx/svn/a/trunk;module=Core;proto=http \
-        svn://xxx/svn/b/trunk;module=HAL;proto=http \
-"
-that fetches the modules so that I end up with
+diff --git a/recipes/linux-libc-headers/linux-libc-headers-2.6.24/make-3.82.patch b/recipes/linux-libc-headers/linux-libc-headers-2.6.24/make-3.82.patch
+new file mode 100644
+index 0000000..99896d9
+--- /dev/null
++++ b/recipes/linux-libc-headers/linux-libc-headers-2.6.24/make-3.82.patch
+@@ -0,0 +1,29 @@
++diff -Nurd linux-2.6.24.orig//Makefile linux-2.6.24/Makefile
++--- linux-2.6.24.orig//Makefile	2011-03-29 07:56:05.122449521 +0200
+++++ linux-2.6.24/Makefile	2011-03-29 07:57:48.726768621 +0200
++@@ -431,7 +431,11 @@
++ include $(srctree)/arch/$(SRCARCH)/Makefile
++ export KBUILD_DEFCONFIG
++ 
++-config %config: scripts_basic outputmakefile FORCE
+++config: scripts_basic outputmakefile FORCE
+++	$(Q)mkdir -p include/linux include/config
+++	$(Q)$(MAKE) $(build)=scripts/kconfig $@
+++
+++%config: scripts_basic outputmakefile FORCE
++ 	$(Q)mkdir -p include/linux include/config
++ 	$(Q)$(MAKE) $(build)=scripts/kconfig $@
++ 
++@@ -1500,7 +1504,11 @@
++ 	$(Q)$(MAKE) $(build)=$(build-dir) $(target-dir)$(notdir $@)
++ 
++ # Modules
++-/ %/: prepare scripts FORCE
+++/: prepare scripts FORCE
+++	$(cmd_crmodverdir)
+++	$(Q)$(MAKE) KBUILD_MODULES=$(if $(CONFIG_MODULES),1) \
+++	$(build)=$(build-dir)
+++%/: prepare scripts FORCE
++ 	$(cmd_crmodverdir)
++ 	$(Q)$(MAKE) KBUILD_MODULES=$(if $(CONFIG_MODULES),1) \
++ 	$(build)=$(build-dir)
+diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
+index e95299b..9c683a7 100644
+--- a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
++++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
+@@ -2,11 +2,12 @@ require linux-libc-headers.inc
+ 
+ INHIBIT_DEFAULT_DEPS = "1"
+ DEPENDS += "unifdef-native"
+-PR = "r6"
++PR = "r7"
+ 
+ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
+            file://procinfo.h \
+            file://export_falloc_h.patch \
++           file://make-3.82.patch \
+            file://unifdef.patch"
+ 
+ S = "${WORKDIR}/linux-${PV}"
+diff --git a/recipes/linux/linux-2.6.24/make-3.82.patch b/recipes/linux/linux-2.6.24/make-3.82.patch
+new file mode 100644
+index 0000000..99896d9
+--- /dev/null
++++ b/recipes/linux/linux-2.6.24/make-3.82.patch
+@@ -0,0 +1,29 @@
++diff -Nurd linux-2.6.24.orig//Makefile linux-2.6.24/Makefile
++--- linux-2.6.24.orig//Makefile	2011-03-29 07:56:05.122449521 +0200
+++++ linux-2.6.24/Makefile	2011-03-29 07:57:48.726768621 +0200
++@@ -431,7 +431,11 @@
++ include $(srctree)/arch/$(SRCARCH)/Makefile
++ export KBUILD_DEFCONFIG
++ 
++-config %config: scripts_basic outputmakefile FORCE
+++config: scripts_basic outputmakefile FORCE
+++	$(Q)mkdir -p include/linux include/config
+++	$(Q)$(MAKE) $(build)=scripts/kconfig $@
+++
+++%config: scripts_basic outputmakefile FORCE
++ 	$(Q)mkdir -p include/linux include/config
++ 	$(Q)$(MAKE) $(build)=scripts/kconfig $@
++ 
++@@ -1500,7 +1504,11 @@
++ 	$(Q)$(MAKE) $(build)=$(build-dir) $(target-dir)$(notdir $@)
++ 
++ # Modules
++-/ %/: prepare scripts FORCE
+++/: prepare scripts FORCE
+++	$(cmd_crmodverdir)
+++	$(Q)$(MAKE) KBUILD_MODULES=$(if $(CONFIG_MODULES),1) \
+++	$(build)=$(build-dir)
+++%/: prepare scripts FORCE
++ 	$(cmd_crmodverdir)
++ 	$(Q)$(MAKE) KBUILD_MODULES=$(if $(CONFIG_MODULES),1) \
++ 	$(build)=$(build-dir)
+diff --git a/recipes/linux/linux_2.6.24.bb b/recipes/linux/linux_2.6.24.bb
+index 5c05593..5cc686a 100644
+--- a/recipes/linux/linux_2.6.24.bb
++++ b/recipes/linux/linux_2.6.24.bb
+@@ -11,7 +11,7 @@ DEFAULT_PREFERENCE_hipox = "1"
+ DEFAULT_PREFERENCE_cs-e9302 = "1"
+ DEFAULT_PREFERENCE_smartq5 = "1"
+ 
+-PR = "r36"
++PR = "r37"
+ 
+ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-2.6.24.tar.bz2;name=kernel \
+            ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/patch-${PV}.7.bz2;apply=yes;name=stablepatch \
+@@ -19,6 +19,7 @@ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-2.6.24.tar.bz2;name=k
+            file://ubifs-v2.6.24.patch \
+            file://ubifs-v2.6.24-silent-get-sb.patch \
+            file://cfi-amic.patch \
++           file://make-3.82.patch \
+            file://defconfig"
+ 
+ # Moved away temporarely until committed properly (work in progress).
+-- 
+1.7.3.4
 
-${WORKDIR}/Common
-${WORKDIR}/Core
-${WORKDIR}/HAL
-
-but what I really want is;
-
-${WORKDIR}/foo/Common
-${WORKDIR}/foo/Core
-${WORKDIR}/bar/HAL
-
-because that is how the Makefiles are set up
-
-Any advice welcome.
-
-Thanks
-
-Charles
 
 
