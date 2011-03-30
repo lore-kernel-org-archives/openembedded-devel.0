@@ -1,21 +1,23 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from harad.oktetlabs.ru ([89.163.14.95])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q4tJR-0005Eh-Q2 for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Mar 2011 13:11:47 +0200
-Received: from f053043231.adsl.alicedsl.de ([78.53.43.231]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q4tHP-0006OY-7y for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Mar 2011 11:09:39 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <helen@oktetlabs.ru>) id 1Q4u6u-0006g0-Em
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Mar 2011 14:02:52 +0200
+Received: from aule.oktetlabs.ru (aule.oktetlabs.ru [192.168.37.14])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by harad.oktetlabs.ru (Postfix) with ESMTPSA id 3BCC47B4B
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Mar 2011 16:00:53 +0400 (MSD)
+Message-ID: <4D931B74.7020009@oktetlabs.ru>
+Date: Wed, 30 Mar 2011 16:00:52 +0400
+From: Elena Vengerova <helen@oktetlabs.ru>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.15) Gecko/20110307 Fedora/3.1.9-0.38.b3pre.fc13
+	Thunderbird/3.1.9
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Mar 2011 13:09:37 +0200
-Message-ID: <1301483378.10697.16.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: e-image-core: task rootfs fails because dependency `evas-engine-gl-x11` is not satisfied
+Subject: prebuilt toolchain versus --sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,59 +31,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Mar 2011 11:11:47 -0000
-X-Groupsio-MsgNum: 30721
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-TmFV5HT2BBoNxJNC8pbr"
+X-List-Received-Date: Wed, 30 Mar 2011 12:02:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---=-TmFV5HT2BBoNxJNC8pbr
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hello,
 
-Dear OE folks,
+I'm trying to use pre-built SDK. PATH, CPPFLAGS and LDFLAGS are correct. 
+However configure of the first target package fails because compiler 
+cannot find crt1.o. I've found out that it's due --sysroot that points 
+to STAGING_DIR_TARGET.
 
-
-task rootfs of `bitbake e-image-core` with `minimal` for `MACHINE =3D
-"beagleboard"` fails with the following error message.
-
-        [=E2=80=A6]
-        Configuring eglibc-localedata-i18n.
-        Configuring xf86-input-mouse.
-        Configuring udev.
-        Configuring tinylogin.
-        Configuring xf86-input-evdev.
-        Configuring sysvinit.
-        Collected errors:
-         * satisfy_dependencies_for: Cannot satisfy the following dependenc=
-ies for task-e-x11-core:
-         *      evas-engine-gl-x11 *=20
-         * opkg_install_cmd: Cannot install package task-e-x11-core.
-         * resolve_conffiles: Existing conffile /oe/build-minimal-eglibc/mi=
-nimal-dev/rootfs/e-image-core/etc/device_table is different from the conffi=
-le in the new package. The new conffile will be placed at /oe/build-minimal=
--eglibc/minimal-dev/rootfs/e-image-core/etc/device_table-opkg.
-
-How can this dependency be satisfied?
-
-`recipes/tasks/task-e-x11.bb` runtime depends on `expedite` which in
-return runtime depends on `evas-engine-gl-x11`. Where is the problem?
-
+Should I copy SDK libraries and headers to STAGING_DIR_TARGET or there 
+is more correct option to resolve this issue?
 
 Thanks,
+     Elena
 
-Paul
 
---=-TmFV5HT2BBoNxJNC8pbr
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk2TD3EACgkQPX1aK2wOHVhjNACfRTpCxXMj1vkC/EZsH8wQIGpC
-8SgAnjITnyuZa3FiQyx0EGSZXG4IDiAf
-=SujS
------END PGP SIGNATURE-----
-
---=-TmFV5HT2BBoNxJNC8pbr--
