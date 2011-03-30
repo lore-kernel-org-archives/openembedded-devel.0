@@ -1,26 +1,28 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from bear.ext.ti.com ([192.94.94.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <a0875592@swubn01>) id 1Q4q58-0003hd-Pa
+	(envelope-from <a0875592@swubn01>) id 1Q4q59-0003hf-Ci
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 30 Mar 2011 09:44:47 +0200
 Received: from dbdp31.itg.ti.com ([172.24.170.98])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id p2U7giA4017479
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id p2U7gj1D009321
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 30 Mar 2011 02:42:47 -0500
 Received: from swubn01 (localhost [127.0.0.1])
-	by dbdp31.itg.ti.com (8.13.8/8.13.8) with ESMTP id p2U7ggWG016602;
-	Wed, 30 Mar 2011 13:12:43 +0530 (IST)
+	by dbdp31.itg.ti.com (8.13.8/8.13.8) with ESMTP id p2U7giXA016609;
+	Wed, 30 Mar 2011 13:12:44 +0530 (IST)
 Received: from a0875592 by swubn01 with local (Exim 4.71)
 	(envelope-from <a0875592@swubn01>)
-	id 1Q4q38-00048e-DX; Wed, 30 Mar 2011 13:12:42 +0530
+	id 1Q4q3A-00048t-6Q; Wed, 30 Mar 2011 13:12:44 +0530
 From: Siddharth Heroor <heroor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Mar 2011 13:12:39 +0530
-Message-Id: <1301470961-15808-1-git-send-email-heroor@gmail.com>
+Date: Wed, 30 Mar 2011 13:12:41 +0530
+Message-Id: <1301470961-15808-3-git-send-email-heroor@gmail.com>
 X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1301470961-15808-1-git-send-email-heroor@gmail.com>
+References: <1301470961-15808-1-git-send-email-heroor@gmail.com>
 Cc: Siddharth Heroor <heroor@ti.com>
-Subject: [PATCH 1/3] TI EDMA3LLD Sysbios: Move installer unpack to recipe version
+Subject: [PATCH 3/3] TI EDMA3LLD Sysbios: Add version 02.11.01.02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,56 +40,25 @@ X-List-Received-Date: Wed, 30 Mar 2011 07:44:47 -0000
 
 From: Siddharth Heroor <heroor@ti.com>
 
-* The EDMA3LLD for Sysbios, does not ship as an installer
-  but as a tarball. The older release 02.10.03.04 used an installer
-  and this patch is in preparation of upcoming patches for new
-  releases of EDMA3LLD.
 
 Signed-off-by: Siddharth Heroor <heroor@ti.com>
 ---
- recipes/ti/ti-edma3lld-sysbios.inc            |    6 ------
- recipes/ti/ti-edma3lld-sysbios_02.10.03.04.bb |    5 +++++
- 2 files changed, 5 insertions(+), 6 deletions(-)
+ recipes/ti/ti-edma3lld-sysbios_02.11.01.02.bb |    6 ++++++
+ 1 files changed, 6 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/ti/ti-edma3lld-sysbios_02.11.01.02.bb
 
-diff --git a/recipes/ti/ti-edma3lld-sysbios.inc b/recipes/ti/ti-edma3lld-sysbios.inc
-index fb17978..c91f4c2 100644
---- a/recipes/ti/ti-edma3lld-sysbios.inc
-+++ b/recipes/ti/ti-edma3lld-sysbios.inc
-@@ -5,17 +5,11 @@ LICENSE = "TI"
- 
- require ti-paths.inc
- require ti-staging.inc
--require ti-eula-unpack.inc
- 
- PR = "r1"
- 
- S = "${WORKDIR}/edma3_lld_${PV}"
- 
--SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_tii/psp/edma3_lld/edma3-lld-bios6/${PV}/exports/EDMA3_LLD_setuplinux_${PV}.bin;name=edma3lldsysbiosbin"
--
--BINFILE="EDMA3_LLD_setuplinux_${PV}.bin"
--TI_BIN_UNPK_CMDS="Y:workdir"
--
- do_install() {
-     install -d ${D}${EDMA3_LLD_SYSBIOS_INSTALL_DIR_RECIPE}
-     cp -pPrf ${S}/* ${D}${EDMA3_LLD_SYSBIOS_INSTALL_DIR_RECIPE}
-diff --git a/recipes/ti/ti-edma3lld-sysbios_02.10.03.04.bb b/recipes/ti/ti-edma3lld-sysbios_02.10.03.04.bb
-index 0bfacf6..51cd6fe 100644
---- a/recipes/ti/ti-edma3lld-sysbios_02.10.03.04.bb
-+++ b/recipes/ti/ti-edma3lld-sysbios_02.10.03.04.bb
-@@ -1,7 +1,12 @@
- require ti-edma3lld-sysbios.inc
-+require ti-eula-unpack.inc
- 
- PV = "02_10_03_04"
- 
-+SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_tii/psp/edma3_lld/edma3-lld-bios6/${PV}/exports/EDMA3_LLD_setuplinux_${PV}.bin;name=edma3lldsysbiosbin"
+diff --git a/recipes/ti/ti-edma3lld-sysbios_02.11.01.02.bb b/recipes/ti/ti-edma3lld-sysbios_02.11.01.02.bb
+new file mode 100644
+index 0000000..264dfb3
+--- /dev/null
++++ b/recipes/ti/ti-edma3lld-sysbios_02.11.01.02.bb
+@@ -0,0 +1,6 @@
++require ti-edma3lld-sysbios.inc
 +
- SRC_URI[edma3lldsysbiosbin.md5sum] = "9c1d9b8ee600f234ad635d3866b9f850"
- SRC_URI[edma3lldsysbiosbin.sha256sum] = "7becc0bf7f2c8126f4bc1fcde8daf50db22a55f7d13abc733db96380f10e910f"
- 
-+BINFILE="EDMA3_LLD_setuplinux_${PV}.bin"
-+TI_BIN_UNPK_CMDS="Y:workdir"
++PV = "02_11_01_02"
++
++SRC_URI[md5sum] = "270c15dc5f0a5761adb1ff45ab1adb99"
++SRC_URI[sha256sum] = "bd76114114a099eba15bdce8e3815a8cd2c01d819ebfc630f6abdd39da36b525"
 -- 
 1.7.0.4
 
