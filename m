@@ -1,35 +1,38 @@
 Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chasemaupin03@gmail.com>) id 1Q4zqY-0004wl-5A
+	(envelope-from <chasemaupin03@gmail.com>) id 1Q4zqb-0004wl-B6
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Mar 2011 20:10:22 +0200
-Received: by yxn22 with SMTP id 22so644107yxn.6
+	Wed, 30 Mar 2011 20:10:25 +0200
+Received: by mail-yx0-f175.google.com with SMTP id 22so644107yxn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Mar 2011 11:08:22 -0700 (PDT)
+	Wed, 30 Mar 2011 11:08:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=XqjEnGH9o68VoWh7Q5Vkb3jv7aBCniunWY6NiaWeVqU=;
-	b=r4XshcGEcx2tlMo4cx5Te7H8VnyWRMaNTTvvV+cOdVGkngNnOg8+Of76lbA7/AgHji
-	LBRMDduatN6ZncYEDBSMtPfyS42BgRvXiK1zdIna54XG+7M/r9+uIMTvK7GR+Fi7ivt7
-	7LN5ex9VPHIYPtN6px0y1MZPhlWibsBROlJuU=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=krvB4GyT7udA/OdAkzLyEJ1IUGS4OVO7Dtx0gMJhYZI=;
+	b=tzoR4kzaOpU5fUpl0yMkYsdyAgNZF2GBh6AIxEewFXckfojk/15XATKkWRoXLfWs7M
+	34L67xBuT589NpGdAeDvwI7aJL23HrHAkTlu3/3HmhawpKTWCveDbpwOCC7QzcZ2SOix
+	ZJ2P2XVmpII+mOSlCwElLx+O8X8FWJIMLc7r4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=w/CgM6kTJVPz1GruESgJruMT2S0pbxa2CISF1C7krQancZtpu3uHqGk+UGYW14rhCg
-	JnvR4QJiJmZC8dD+0MtLDhUasizvf21Dd6kZAPBkkMoEWAOb51QVFCtoPJaQOUUDic1X
-	6K8v/GgpvfDLuH0JK7JLyeo5ng3YQKBiut6r0=
-Received: by 10.101.193.1 with SMTP id v1mr1134866anp.143.1301508502535;
-	Wed, 30 Mar 2011 11:08:22 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=urf6kgXuJT6F4/lMqqeUW4wwkeKHBfgoiWEgMIWYCWuwpGzhMSM97S8M3SJ4hN8huS
+	QRNXvQXWu+qrgNT0drqNJ6g+aNloG4WCq+I/wmvirguRncidrifbXQxa4Wp9JEi0vDdN
+	foNVp4nPpow0hpxLw0PRhe5Obz7fknCBrNWSo=
+Received: by 10.101.115.18 with SMTP id s18mr1125363anm.103.1301508508246;
+	Wed, 30 Mar 2011 11:08:28 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id x32sm301049ana.38.2011.03.30.11.08.15
+	by mx.google.com with ESMTPS id x32sm301049ana.38.2011.03.30.11.08.26
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 30 Mar 2011 11:08:17 -0700 (PDT)
+	Wed, 30 Mar 2011 11:08:27 -0700 (PDT)
 From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Mar 2011 13:08:06 -0500
-Message-Id: <1301508491-3062-1-git-send-email-Chase.Maupin@ti.com>
+Date: Wed, 30 Mar 2011 13:08:08 -0500
+Message-Id: <1301508491-3062-3-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1301508491-3062-1-git-send-email-Chase.Maupin@ti.com>
+References: <1301508491-3062-1-git-send-email-Chase.Maupin@ti.com>
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 1/6] ti814x: Add new machine definitions
+Subject: [PATCH 3/6] u-boot: Add PSP version for am387x-evm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,92 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Mar 2011 18:10:22 -0000
+X-List-Received-Date: Wed, 30 Mar 2011 18:10:25 -0000
 
-* Add new am387x-evm machine definition
-* Add new dm814xx-evm machine definition
-* Add new c6a814x-evm machine definition
-* New SOC_FAMILY ti814x available
-* Based on machine configuration files from Arago contributed
-  by Siddharth Heroor
+* Add the TI PSP u-boot version for the am387x-evm machine type
+* Make this version the default preference for ti814x
+  SOC_FAMILY devices.
+* Based on u-boot recipe from Arago contributed by Nageswari
+  Srinivasan
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- conf/machine/am387x-evm.conf    |    5 +++++
- conf/machine/c6a814x-evm.conf   |    5 +++++
- conf/machine/dm814x-evm.conf    |    5 +++++
- conf/machine/include/ti814x.inc |   26 ++++++++++++++++++++++++++
- 4 files changed, 41 insertions(+), 0 deletions(-)
- create mode 100644 conf/machine/am387x-evm.conf
- create mode 100644 conf/machine/c6a814x-evm.conf
- create mode 100644 conf/machine/dm814x-evm.conf
- create mode 100644 conf/machine/include/ti814x.inc
+ recipes/u-boot/u-boot_2010.06-psp04.01.00.03.bb |   14 ++++++++++++++
+ 1 files changed, 14 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/u-boot/u-boot_2010.06-psp04.01.00.03.bb
 
-diff --git a/conf/machine/am387x-evm.conf b/conf/machine/am387x-evm.conf
+diff --git a/recipes/u-boot/u-boot_2010.06-psp04.01.00.03.bb b/recipes/u-boot/u-boot_2010.06-psp04.01.00.03.bb
 new file mode 100644
-index 0000000..ebf9889
+index 0000000..d4a2afc
 --- /dev/null
-+++ b/conf/machine/am387x-evm.conf
-@@ -0,0 +1,5 @@
-+#@TYPE: Machine
-+#@NAME: AM389x evm
-+#@DESCRIPTION: Machine configuration for the AM389x evm
++++ b/recipes/u-boot/u-boot_2010.06-psp04.01.00.03.bb
+@@ -0,0 +1,14 @@
++require u-boot-omap3.inc
 +
-+require conf/machine/include/ti814x.inc
-diff --git a/conf/machine/c6a814x-evm.conf b/conf/machine/c6a814x-evm.conf
-new file mode 100644
-index 0000000..b85c489
---- /dev/null
-+++ b/conf/machine/c6a814x-evm.conf
-@@ -0,0 +1,5 @@
-+#@TYPE: Machine
-+#@NAME: c6a814x evm
-+#@DESCRIPTION: Machine configuration for the c6a814x evm
++COMPATIBLE_MACHINE = "ti814x"
 +
-+require conf/machine/include/ti814x.inc
-diff --git a/conf/machine/dm814x-evm.conf b/conf/machine/dm814x-evm.conf
-new file mode 100644
-index 0000000..140dcc1
---- /dev/null
-+++ b/conf/machine/dm814x-evm.conf
-@@ -0,0 +1,5 @@
-+#@TYPE: Machine
-+#@NAME: DM814x evm
-+#@DESCRIPTION: Machine configuration for the DM814x evm
++DEFAULT_PREFERENCE_ti814x = "1"
++BRANCH = "master"
 +
-+require conf/machine/include/ti814x.inc
-diff --git a/conf/machine/include/ti814x.inc b/conf/machine/include/ti814x.inc
-new file mode 100644
-index 0000000..8fa7ee9
---- /dev/null
-+++ b/conf/machine/include/ti814x.inc
-@@ -0,0 +1,26 @@
-+TARGET_ARCH = "arm"
-+SOC_FAMILY = "ti814x"
++# Use literal tags in SRCREV, when available, instead of commit IDs
++SRCREV = "v2010.06_TI814XPSP_04.01.00.03"
 +
-+require conf/machine/include/tune-cortexa8.inc
++UVER = "2010.06"
++PSPREL = "04.01.00.03"
 +
-+PREFERRED_PROVIDER_virtual/kernel = "linux-omap3"
-+PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-+
-+# Increase this everytime you change something in the kernel
-+MACHINE_KERNEL_PR = "r1"
-+
-+KERNEL_IMAGETYPE = "uImage"
-+
-+UBOOT_ARCH = "arm"
-+UBOOT_MACHINE = "ti8148_evm_config_nand"
-+UBOOT_ENTRYPOINT = "0x80008000"
-+UBOOT_LOADADDRESS = "0x80008000"
-+
-+# Only build u-boot
-+EXTRA_IMAGEDEPENDS += "u-boot"
-+
-+# Ship all kernel modules
-+IMAGE_FSTYPES ?= "jffs2 tar.bz2"
-+EXTRA_IMAGECMD_jffs2 = "-lqn -e 128"
-+SERIAL_CONSOLE = "115200 ttyO0"
-+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 ethernet"
++PR = "r1"
 -- 
 1.7.0.4
 
