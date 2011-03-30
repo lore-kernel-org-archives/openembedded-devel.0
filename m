@@ -1,21 +1,26 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1Q4oj6-0001pM-N9
+	(envelope-from <a0875592@swubn01>) id 1Q4q58-0003hd-Pa
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Mar 2011 08:17:56 +0200
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id 29D7A1D360AA; Wed, 30 Mar 2011 08:15:55 +0200 (CEST)
-Date: Wed, 30 Mar 2011 08:15:55 +0200
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+	Wed, 30 Mar 2011 09:44:47 +0200
+Received: from dbdp31.itg.ti.com ([172.24.170.98])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id p2U7giA4017479
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Mar 2011 02:42:47 -0500
+Received: from swubn01 (localhost [127.0.0.1])
+	by dbdp31.itg.ti.com (8.13.8/8.13.8) with ESMTP id p2U7ggWG016602;
+	Wed, 30 Mar 2011 13:12:43 +0530 (IST)
+Received: from a0875592 by swubn01 with local (Exim 4.71)
+	(envelope-from <a0875592@swubn01>)
+	id 1Q4q38-00048e-DX; Wed, 30 Mar 2011 13:12:42 +0530
+From: Siddharth Heroor <heroor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110330061555.GC2681@ibawizard.net>
-References: <1301435199-30068-1-git-send-email-v2g.udel@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1301435199-30068-1-git-send-email-v2g.udel@gmail.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Cc: Sachin Kamboj <skamboj@udel.edu>
-Subject: Re: [PATCH] Add support for the Technologic Systems TS7500	ARM SBCs
+Date: Wed, 30 Mar 2011 13:12:39 +0530
+Message-Id: <1301470961-15808-1-git-send-email-heroor@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: Siddharth Heroor <heroor@ti.com>
+Subject: [PATCH 1/3] TI EDMA3LLD Sysbios: Move installer unpack to recipe version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,31 +34,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Mar 2011 06:17:56 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 30 Mar 2011 07:44:47 -0000
 
-UDel V2G Team <v2g.udel@gmail.com> [2011-03-29 17:46:39]:
+From: Siddharth Heroor <heroor@ti.com>
 
-> From: Sachin Kamboj <skamboj@udel.edu>
-> 
-> * Includes conf/machine/ts75xx.conf and conf/machine/include/tune-fa526.inc
->   files needed for building OE packages w/ EABI and *NO* thumb support
-> * Adds recipes for building TS75xx userspace utilities:
->   canctl, dioctl, dmxctl, jed2vme, sdctl, ts7500ctl,  spiflashctl and xuartctl
-> * Adds a custom kernel with all the patches for the Cavium FA 526 core
-> * Added a busybox defconfig for building a version of busybox that will be
->   very similar to the shipped version
-> * Added two images - one for building the initrd image and the other for
->   building the rootfs image.
+* The EDMA3LLD for Sysbios, does not ship as an installer
+  but as a tarball. The older release 02.10.03.04 used an installer
+  and this patch is in preparation of upcoming patches for new
+  releases of EDMA3LLD.
 
-Hi,
+Signed-off-by: Siddharth Heroor <heroor@ti.com>
+---
+ recipes/ti/ti-edma3lld-sysbios.inc            |    6 ------
+ recipes/ti/ti-edma3lld-sysbios_02.10.03.04.bb |    5 +++++
+ 2 files changed, 5 insertions(+), 6 deletions(-)
 
-first of all thank you for your contribution. Please can you split your huge
-patchset to the logical parts and send it as the patch series? ie. one patch
-which adds ts75xx machine, one which adds kernel etc. It should be easy with
-git rebase. It's really hard to make any comments and/or read it.  Thanks.
+diff --git a/recipes/ti/ti-edma3lld-sysbios.inc b/recipes/ti/ti-edma3lld-sysbios.inc
+index fb17978..c91f4c2 100644
+--- a/recipes/ti/ti-edma3lld-sysbios.inc
++++ b/recipes/ti/ti-edma3lld-sysbios.inc
+@@ -5,17 +5,11 @@ LICENSE = "TI"
+ 
+ require ti-paths.inc
+ require ti-staging.inc
+-require ti-eula-unpack.inc
+ 
+ PR = "r1"
+ 
+ S = "${WORKDIR}/edma3_lld_${PV}"
+ 
+-SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_tii/psp/edma3_lld/edma3-lld-bios6/${PV}/exports/EDMA3_LLD_setuplinux_${PV}.bin;name=edma3lldsysbiosbin"
+-
+-BINFILE="EDMA3_LLD_setuplinux_${PV}.bin"
+-TI_BIN_UNPK_CMDS="Y:workdir"
+-
+ do_install() {
+     install -d ${D}${EDMA3_LLD_SYSBIOS_INSTALL_DIR_RECIPE}
+     cp -pPrf ${S}/* ${D}${EDMA3_LLD_SYSBIOS_INSTALL_DIR_RECIPE}
+diff --git a/recipes/ti/ti-edma3lld-sysbios_02.10.03.04.bb b/recipes/ti/ti-edma3lld-sysbios_02.10.03.04.bb
+index 0bfacf6..51cd6fe 100644
+--- a/recipes/ti/ti-edma3lld-sysbios_02.10.03.04.bb
++++ b/recipes/ti/ti-edma3lld-sysbios_02.10.03.04.bb
+@@ -1,7 +1,12 @@
+ require ti-edma3lld-sysbios.inc
++require ti-eula-unpack.inc
+ 
+ PV = "02_10_03_04"
+ 
++SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_tii/psp/edma3_lld/edma3-lld-bios6/${PV}/exports/EDMA3_LLD_setuplinux_${PV}.bin;name=edma3lldsysbiosbin"
++
+ SRC_URI[edma3lldsysbiosbin.md5sum] = "9c1d9b8ee600f234ad635d3866b9f850"
+ SRC_URI[edma3lldsysbiosbin.sha256sum] = "7becc0bf7f2c8126f4bc1fcde8daf50db22a55f7d13abc733db96380f10e910f"
+ 
++BINFILE="EDMA3_LLD_setuplinux_${PV}.bin"
++TI_BIN_UNPK_CMDS="Y:workdir"
+-- 
+1.7.0.4
 
--- ynezz
 
 
