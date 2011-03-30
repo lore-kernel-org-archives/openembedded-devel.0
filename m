@@ -1,28 +1,32 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <a0875592@swubn01>) id 1Q4q59-0003he-OG
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Mar 2011 09:44:48 +0200
-Received: from dbdp31.itg.ti.com ([172.24.170.98])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id p2U7giqE009320
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q4q7U-0003wh-Lo for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Mar 2011 09:47:12 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q4pla-0002IS-Ta for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Mar 2011 09:24:34 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Mar 2011 09:24:34 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Mar 2011 02:42:47 -0500
-Received: from swubn01 (localhost [127.0.0.1])
-	by dbdp31.itg.ti.com (8.13.8/8.13.8) with ESMTP id p2U7ghZl016603;
-	Wed, 30 Mar 2011 13:12:43 +0530 (IST)
-Received: from a0875592 by swubn01 with local (Exim 4.71)
-	(envelope-from <a0875592@swubn01>)
-	id 1Q4q39-00048h-EY; Wed, 30 Mar 2011 13:12:43 +0530
-From: Siddharth Heroor <heroor@gmail.com>
+	Wed, 30 Mar 2011 09:24:34 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Mar 2011 13:12:40 +0530
-Message-Id: <1301470961-15808-2-git-send-email-heroor@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1301470961-15808-1-git-send-email-heroor@gmail.com>
-References: <1301470961-15808-1-git-send-email-heroor@gmail.com>
-Cc: Siddharth Heroor <heroor@ti.com>
-Subject: [PATCH 2/3] TI EDMA3LLD Sysbios: Update recipe for SRC_URI
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 30 Mar 2011 09:24:21 +0200
+Message-ID: <imulr5$v3s$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+X-Enigmail-Version: 1.0.1
+Subject: [2011.03-maintenance] Pull request #8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,38 +40,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Mar 2011 07:44:48 -0000
+X-List-Received-Date: Wed, 30 Mar 2011 07:47:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Siddharth Heroor <heroor@ti.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-* Add SRC_URI for tar.gz releases.
-* Bump PR.
+Tom,
 
-Signed-off-by: Siddharth Heroor <heroor@ti.com>
----
- recipes/ti/ti-edma3lld-sysbios.inc |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+Please pull the 3 commits from here:
 
-diff --git a/recipes/ti/ti-edma3lld-sysbios.inc b/recipes/ti/ti-edma3lld-sysbios.inc
-index c91f4c2..3e51c5c 100644
---- a/recipes/ti/ti-edma3lld-sysbios.inc
-+++ b/recipes/ti/ti-edma3lld-sysbios.inc
-@@ -6,10 +6,12 @@ LICENSE = "TI"
- require ti-paths.inc
- require ti-staging.inc
- 
--PR = "r1"
-+PR = "r2"
- 
- S = "${WORKDIR}/edma3_lld_${PV}"
- 
-+SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_tii/psp/edma3_lld/edma3-lld-bios6/${PV}/exports/edma3_lld_${PV}.tar.gz"
-+
- do_install() {
-     install -d ${D}${EDMA3_LLD_SYSBIOS_INSTALL_DIR_RECIPE}
-     cp -pPrf ${S}/* ${D}${EDMA3_LLD_SYSBIOS_INSTALL_DIR_RECIPE}
--- 
-1.7.0.4
+URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+Branch: 2011.03-maintenance
+
+Jeff Lance (1):
+      matrix-gui: update SRCREV
+
+Paul Menzel (1):
+      orc: add version 0.4.10
+
+Roger Monk (1):
+      omap4430-panda: Switch panda to use new omap4 include + add new
+
+You can view the branch online at
+http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance
+
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNktqlMkyGM64RGpERAqcWAJ9MbJTUGuGUNZs7dKtuPWSCzDrkVQCfbjaD
+JSttnDfv54HmTTzXp1f60g8=
+=hF64
+-----END PGP SIGNATURE-----
 
 
 
