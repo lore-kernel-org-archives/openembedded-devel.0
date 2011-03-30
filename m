@@ -1,27 +1,21 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q4spn-0008Ps-S4 for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Mar 2011 12:41:08 +0200
+	id 1Q4tJR-0005Eh-Q2 for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Mar 2011 13:11:47 +0200
 Received: from f053043231.adsl.alicedsl.de ([78.53.43.231]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q4snu-0004pE-WC for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Mar 2011 10:39:11 +0000
+	id 1Q4tHP-0006OY-7y for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Mar 2011 11:09:39 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20110329191416.GB3439@jama.jama.net>
-References: <1301348740-30018-1-git-send-email-philippedeswert@gmail.com>
-	<1301354673.6649.10.camel@mattotaupa>
-	<AANLkTi=6hSKs9aJqHEWsYturvxYGaFTxk-jkb5bO6+Rc@mail.gmail.com>
-	<1301411420.25311.4.camel@mattotaupa>
-	<20110329191416.GB3439@jama.jama.net>
-Date: Wed, 30 Mar 2011 12:39:09 +0200
-Message-ID: <1301481549.10697.8.camel@mattotaupa>
+Date: Wed, 30 Mar 2011 13:09:37 +0200
+Message-ID: <1301483378.10697.16.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH] eeze: update to 1.0.1
+Subject: e-image-core: task rootfs fails because dependency `evas-engine-gl-x11` is not satisfied
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,46 +29,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Mar 2011 10:41:08 -0000
-X-Groupsio-MsgNum: 30720
+X-List-Received-Date: Wed, 30 Mar 2011 11:11:47 -0000
+X-Groupsio-MsgNum: 30721
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-whf6INPhVwUDGQ44Dzk7"
+	boundary="=-TmFV5HT2BBoNxJNC8pbr"
 
---=-whf6INPhVwUDGQ44Dzk7
+--=-TmFV5HT2BBoNxJNC8pbr
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Am Dienstag, den 29.03.2011, 21:14 +0200 schrieb Martin Jansa:
-> On Tue, Mar 29, 2011 at 05:10:20PM +0200, Paul Menzel wrote:
+Dear OE folks,
 
-> > what do you prefer? Keep or remove Eeze 1.0.0?
->=20
-> feel free to remove 1.0.0
 
-Thank you for your reply. I pushed commit fd3c59f7 [1].
+task rootfs of `bitbake e-image-core` with `minimal` for `MACHINE =3D
+"beagleboard"` fails with the following error message.
 
-Philippe, please update the state in the patch queue.
+        [=E2=80=A6]
+        Configuring eglibc-localedata-i18n.
+        Configuring xf86-input-mouse.
+        Configuring udev.
+        Configuring tinylogin.
+        Configuring xf86-input-evdev.
+        Configuring sysvinit.
+        Collected errors:
+         * satisfy_dependencies_for: Cannot satisfy the following dependenc=
+ies for task-e-x11-core:
+         *      evas-engine-gl-x11 *=20
+         * opkg_install_cmd: Cannot install package task-e-x11-core.
+         * resolve_conffiles: Existing conffile /oe/build-minimal-eglibc/mi=
+nimal-dev/rootfs/e-image-core/etc/device_table is different from the conffi=
+le in the new package. The new conffile will be placed at /oe/build-minimal=
+-eglibc/minimal-dev/rootfs/e-image-core/etc/device_table-opkg.
+
+How can this dependency be satisfied?
+
+`recipes/tasks/task-e-x11.bb` runtime depends on `expedite` which in
+return runtime depends on `evas-engine-gl-x11`. Where is the problem?
 
 
 Thanks,
 
 Paul
 
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dfd3c59f=
-71032f3bbd94248fe225df1b1bbac3c2f
-
---=-whf6INPhVwUDGQ44Dzk7
+--=-TmFV5HT2BBoNxJNC8pbr
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk2TCEcACgkQPX1aK2wOHVisFwCfQ40XLKnPiYgQfU0r8/GcBm8k
-mRoAn1tRZo3nDyzNzbUJYgTXH0VrfCCh
-=CNAq
+iEYEABECAAYFAk2TD3EACgkQPX1aK2wOHVhjNACfRTpCxXMj1vkC/EZsH8wQIGpC
+8SgAnjITnyuZa3FiQyx0EGSZXG4IDiAf
+=SujS
 -----END PGP SIGNATURE-----
 
---=-whf6INPhVwUDGQ44Dzk7--
+--=-TmFV5HT2BBoNxJNC8pbr--
