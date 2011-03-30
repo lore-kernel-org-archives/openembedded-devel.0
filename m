@@ -1,38 +1,38 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chasemaupin03@gmail.com>) id 1Q4zqg-0004xk-I6
+	(envelope-from <chasemaupin03@gmail.com>) id 1Q4zqi-0004xm-QL
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 30 Mar 2011 20:10:32 +0200
-Received: by ywg8 with SMTP id 8so641797ywg.6
+Received: by gwb11 with SMTP id 11so645865gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Mar 2011 11:08:30 -0700 (PDT)
+	Wed, 30 Mar 2011 11:08:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
 	:in-reply-to:references;
-	bh=FUrRiMJakt7TzU20hXGghhS3eLlsVGxxOkiKUy3pRuQ=;
-	b=s90fwu74OOlT5jDiA2abhQLz78XOzlTH/5MLB4Gvz4r6wD8mfiAQCWKlYB3IPPnGhK
-	S6PXsOrUsKW01spQPkkOZ9pOXagbGuuMbdw9q1F8iVsp5AGOmOzxSJgdeQ4C5w6rQLhO
-	H1VQGAlERelbX6Yl/8ORDUtgIZxNeemnLdrLU=
+	bh=FkzYCda8RkmYQGhmF7PIFlE1LCGsICK8SWhH42gRQQ8=;
+	b=vgwJjSwuaUvhMdwqCdhQp5YPHA9AWK0tG52q1hxlUnKFM5QRGJSlwlvFpUtJ+fckw5
+	Q7lAnhlsOOo+/vQUvdYmbKxF/h3Icuy4v15spyvqzHHlrxuOupbUBGUDcZXaY5t8dq19
+	U2haV8u3nfndb/mhiN7eLidU/HIlut8XqYskw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=VzmMhjp2A2fh1yGleavKYohuxpK920hGvq+pzPUwibs2ItH2LcLh5S5KGHKs5gci4i
-	wY7mn5K+GBWDJP3n//qevRyQ7YNlfV5b9CfKLggj+ztbEtabCxn+OqLEkuOrqQ+vIPAj
-	jfOIAduGVQomXdMbHM8IFlOcS7ytZjwCaxiGg=
-Received: by 10.90.234.12 with SMTP id g12mr1849912agh.183.1301508510254;
-	Wed, 30 Mar 2011 11:08:30 -0700 (PDT)
+	b=sWO2hwBDT6GXerVTPwvH48OFP7ewZhhJ8gaHn0qKXoY+JpNm1VT/NbuB4dx83OTNFh
+	E6yetUnmQbDxLExHd39BNvTGd8NrmUT4H2SSrVPkSTcmfcthmypoJpOHdv/ZREWD8yq3
+	U13kdX7uyr926QLUATAQO2EEm7dmJV0nmTmQg=
+Received: by 10.90.16.38 with SMTP id 38mr1927981agp.63.1301508512216;
+	Wed, 30 Mar 2011 11:08:32 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id x32sm301049ana.38.2011.03.30.11.08.28
+	by mx.google.com with ESMTPS id x32sm301049ana.38.2011.03.30.11.08.30
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 30 Mar 2011 11:08:29 -0700 (PDT)
+	Wed, 30 Mar 2011 11:08:31 -0700 (PDT)
 From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Mar 2011 13:08:09 -0500
-Message-Id: <1301508491-3062-4-git-send-email-Chase.Maupin@ti.com>
+Date: Wed, 30 Mar 2011 13:08:10 -0500
+Message-Id: <1301508491-3062-5-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1301508491-3062-1-git-send-email-Chase.Maupin@ti.com>
 References: <1301508491-3062-1-git-send-email-Chase.Maupin@ti.com>
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 4/6] sort: Add ti814x machine types
+Subject: [PATCH 5/6] am-benchmarks: Add support for am387x-evm machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,29 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Mar 2011 18:10:32 -0000
+X-List-Received-Date: Wed, 30 Mar 2011 18:10:33 -0000
 
-* Add support for am387x-evm, dm814x-evm, and c6a814x-evm
-  machine types.
+* Add support in this recipe for the am387x-evm machine
+  type.
+* Bump the PR.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- contrib/angstrom/sort.sh |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes/ti/am-benchmarks_1.2.bb |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/contrib/angstrom/sort.sh b/contrib/angstrom/sort.sh
-index b8d702b..b38be99 100755
---- a/contrib/angstrom/sort.sh
-+++ b/contrib/angstrom/sort.sh
-@@ -79,7 +79,7 @@ case "$arch" in
- 	"armv6-novfp")
- 			machines="htcblackstone htcdiamond htcdream htckaiser htcnike htcpolaris htcraphael htctitan htcvogue" ;;
- 	"armv7a")
--			machines="am3517-evm am3517-crane archos5 archos5it beagleboard bug20 cm-t35 dm37x-evm am37x-evm am389x-evm babbage c6a816x-evm efikamx htcleo igep0020 nokia900 omap3517-evm omap3evm omap3-pandora omap3-touchbook omap4430-sdp omapzoom omapzoom2 omapzoom36x overo palmpre omap4430-panda usrp-embedded usrp-e1xx" ;;
-+			machines="am3517-evm am3517-crane archos5 archos5it beagleboard bug20 cm-t35 dm37x-evm am37x-evm am387x-evm am389x-evm babbage c6a814x-evm c6a816x-evm dm814x-evm efikamx htcleo igep0020 nokia900 omap3517-evm omap3evm omap3-pandora omap3-touchbook omap4430-sdp omapzoom omapzoom2 omapzoom36x overo palmpre omap4430-panda usrp-embedded usrp-e1xx" ;;
- 	"armv7a-vfp")
- 			machines="ac100" ;;
- 	"avr32")
+diff --git a/recipes/ti/am-benchmarks_1.2.bb b/recipes/ti/am-benchmarks_1.2.bb
+index 5ae0585..38c7056 100644
+--- a/recipes/ti/am-benchmarks_1.2.bb
++++ b/recipes/ti/am-benchmarks_1.2.bb
+@@ -8,15 +8,16 @@ LICENSE = "BSD"
+ SECTION = "system"
+ PRIORITY = "optional"
+ 
+-SRCREV = "59"
++SRCREV = "60"
+ PR = "r2+svnr${SRCPV}"
+ 
+-COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x)"
++COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x|ti814x)"
+ 
+ ARCHITECTURE_dm365 = "arm9"
+ ARCHITECTURE_omapl138 = "arm9"
+ ARCHITECTURE_omap3 = "cortex-a8"
+ ARCHITECTURE_ti816x = "cortex-a8"
++ARCHITECTURE_ti814x = "cortex-a8"
+ 
+ INSANE_SKIP_${PN} = "True"
+ 
 -- 
 1.7.0.4
 
