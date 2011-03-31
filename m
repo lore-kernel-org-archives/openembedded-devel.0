@@ -1,33 +1,37 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Q5OeB-00041b-Cz
+	(envelope-from <raj.khem@gmail.com>) id 1Q5OgP-0006oe-Ja
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 22:39:16 +0200
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Q5OcG-0007A7-Hu from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 13:37:16 -0700
-Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Thu, 31 Mar 2011 13:35:37 -0700
-Received: from [172.30.80.77] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
-	Thu, 31 Mar 2011 13:37:15 -0700
-Message-ID: <4D94E5F2.7080401@mentor.com>
-Date: Thu, 31 Mar 2011 13:37:06 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+	Thu, 31 Mar 2011 22:41:35 +0200
+Received: by fxm19 with SMTP id 19so2461196fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 31 Mar 2011 13:39:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type:content-transfer-encoding;
+	bh=IQAYpfXqHBbupN/uXxWVyg1tuHNqhu1d166sInW2Eh8=;
+	b=vprx03oOeC0/1iTNBgiSNe7Twpd4LWDaLoJBMiVGE4VaPf+m3/gsdJZrwUvVNpNo4k
+	Jd99ZOEueQpMTwORiPbkXk5eB5XhBtOAFwxFcnUHyyiIUl7IWK+0sSdxDR36YUGjyzq1
+	oKRrZrWCw/8TpuY1WCXyUDvuAKyE15hYLalQk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=k3PA3gu55fJ7gFrLt1I7yupHR7hMdf38FnUY1wfsf8d468No5NzERCZhAmkrhWNxJX
+	eGrZyPA6XMMM+fA/CYmWzJoPYRrYBdC48SfH2a+fcvzjXXg/JsDx6Zi5i8SAfslyTpzu
+	lgPcw36OLp7KUK+3/gBnqDwrl1XVn2Hy33tSo=
+Received: by 10.223.127.210 with SMTP id h18mr471730fas.46.1301603973130; Thu,
+	31 Mar 2011 13:39:33 -0700 (PDT)
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <in2jl3$i21$1@dough.gmane.org>
-In-Reply-To: <in2jl3$i21$1@dough.gmane.org>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 31 Mar 2011 20:35:37.0646 (UTC)
-	FILETIME=[317384E0:01CBEFE3]
-Subject: Re: [2011.03-maintenance] Pull request #10 (replaces #9)
+Received: by 10.223.23.136 with HTTP; Thu, 31 Mar 2011 13:39:03 -0700 (PDT)
+In-Reply-To: <8d76bc22e6b97944d4af16b2d9a6e318200d857b.1301560589.git.Martin.Jansa@gmail.com>
+References: <cover.1301560589.git.Martin.Jansa@gmail.com>
+	<8d76bc22e6b97944d4af16b2d9a6e318200d857b.1301560589.git.Martin.Jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 31 Mar 2011 13:39:03 -0700
+Message-ID: <AANLkTimZoMAuYXF4BruMZyZVU8T_M-AcaJ8S2BWZVmtW@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [PATCH 7/8] task-x11-illume: add LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,42 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 20:39:17 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 31 Mar 2011 20:41:36 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thu, Mar 31, 2011 at 3:17 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+> =C2=A0meta-efl/recipes-efl/tasks/task-x11-illume.bb | =C2=A0 =C2=A01 +
+> =C2=A01 files changed, 1 insertions(+), 0 deletions(-)
+>
+> diff --git a/meta-efl/recipes-efl/tasks/task-x11-illume.bb b/meta-efl/rec=
+ipes-efl/tasks/task-x11-illume.bb
+> index 8b14adb..e197cc7 100644
+> --- a/meta-efl/recipes-efl/tasks/task-x11-illume.bb
+> +++ b/meta-efl/recipes-efl/tasks/task-x11-illume.bb
+> @@ -1,6 +1,7 @@
+> =C2=A0DESCRIPTION =3D "The Illume Windowing Environment -- install this t=
+ask to get the Enlightenment Window Manager + the Illume environment."
+> =C2=A0SECTION =3D "x11/wm"
+> =C2=A0LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://${TOPDIR}/meta-openembedded/meta-efl/COPYIN=
+G.MIT;md5=3D3da9cfbcb788c80a0384361b4de20420"
 
-On 03/31/2011 12:11 PM, Koen Kooi wrote:
-> Tom,
-> 
-> Please pull the 3 commits from here:
-> 
-> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-> Branch: 2011.03-maintenance
-> 
-> Philip Balister (3):
->       autoconf: Fix paths for scripts installed on the target.
->       automake: Fix paths in scripts installed on target.
->       qmake2: Define env var for strip. Convert to use INC_PR.
+why not copy the license file to workdir first
 
-Applied, thanks.
-
-- -- 
-Tom Rini
-Mentor Graphics Corporation
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iQEcBAEBAgAGBQJNlOXxAAoJEI4NMjfc3nJx3HAH/izVxo3dz+2R4LERWg/R7Kjb
-EESJHLvkYHOBDyodCApOigPT+yNf7rOFKS51LBXD8Jl5D+SvAUbtWXoSbDaY5Pff
-GW92W1KnxLPDVyGh55HxQ6ei2cuwlqjo2Pr6c/0tMcbkMQYVOX3SoZqlHgxyPhOd
-Hi+aQnYbgbXCsuWphkEmAmhV8ggxruW0UTaTQd6punoaqOvAFI9dQ2BUzrN60eku
-ki+jlMyCH7NmigkJwCOHR8uPnx5S0jYvQY9EnY+c43/b6783csBnQ44OpxInA7nn
-LkzEqEtgqfR5c8u6ZqzSlXLktYW96b3xov1VvqhaDNyHjcvj8HxRX+sK2SjhFq4=
-=F7RD
------END PGP SIGNATURE-----
+> =C2=A0PV =3D "1.0"
+> =C2=A0PR =3D "r1"
+>
+> --
+> 1.7.4.1
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
