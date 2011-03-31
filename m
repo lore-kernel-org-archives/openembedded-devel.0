@@ -1,26 +1,32 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1Q5ICO-0003L1-GE
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 15:46:16 +0200
-Received: by wye20 with SMTP id 20so2208566wye.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q5IQq-0005w6-FV for openembedded-devel@lists.openembedded.org;
+	Thu, 31 Mar 2011 16:01:04 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q5IOi-00079l-70 for openembedded-devel@lists.openembedded.org;
+	Thu, 31 Mar 2011 15:58:52 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 31 Mar 2011 15:58:52 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2011 06:44:01 -0700 (PDT)
-Received: by 10.227.32.131 with SMTP id c3mr2722592wbd.188.1301579041708;
-	Thu, 31 Mar 2011 06:44:01 -0700 (PDT)
-Received: from [10.32.10.2] (p57A2133A.dip0.t-ipconnect.de [87.162.19.58])
-	by mx.google.com with ESMTPS id ed10sm655807wbb.66.2011.03.31.06.43.59
-	(version=SSLv3 cipher=OTHER); Thu, 31 Mar 2011 06:44:00 -0700 (PDT)
-Message-ID: <4D94851E.3030308@dresearch-fe.de>
-Date: Thu, 31 Mar 2011 15:43:58 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.15) Gecko/20110303 Lightning/1.0b2 Thunderbird/3.1.9
-MIME-Version: 1.0
+	Thu, 31 Mar 2011 15:58:52 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1301382028-10848-1-git-send-email-sledz@dresearch-fe.de>
-In-Reply-To: <1301382028-10848-1-git-send-email-sledz@dresearch-fe.de>
-Subject: Re: [PATCH] linux-2.6.24: allow building kernel with newer GNU make
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 31 Mar 2011 15:58:32 +0200
+Message-ID: <in21a8$jod$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+X-Enigmail-Version: 1.0.1
+Subject: [2011.03-maintenance] Pull request #9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,26 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 13:46:21 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 31 Mar 2011 14:01:04 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Am 29.03.2011 09:00, schrieb Steffen Sledz:
-> GNU make >= 3.82 does not allow mixed implicit and normal rules
-> 
-> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Somebody willing to ACK?
+Tom,
 
-Steffen
+Please pull the 5 commits from here:
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+Branch: 2011.03-maintenance
+
+Philip Balister (3):
+      autoconf: Fix paths for scripts installed on the target.
+      automake: Fix paths in scripts installed on target.
+      qmake2: Define env var for strip. Convert to use INC_PR.
+
+Tom Rini (2):
+      In a large number of patches, remove unneeded '..' in paths.
+      tcl: Rework mips-tclstrtod.patch
+
+You can view the branch online at
+http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance
+
+The ones from Philip fix the native toolchain and you know what your
+patches do :)
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNlIiIMkyGM64RGpERAlicAJ9n8O4jU3HJfcWf1c5wXnIaWZNN5wCgijmv
+sgPV4umI0Ne6PcV47vW05Pk=
+=i4bA
+-----END PGP SIGNATURE-----
+
 
 
