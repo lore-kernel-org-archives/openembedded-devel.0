@@ -1,35 +1,34 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Q5FV4-0002Cm-DF
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 12:53:14 +0200
-Received: by iye7 with SMTP id 7so2458262iye.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q5Fa7-0002Q7-Bh for openembedded-devel@lists.openembedded.org;
+	Thu, 31 Mar 2011 12:58:27 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q5FYD-0004Lu-4M for openembedded-devel@lists.openembedded.org;
+	Thu, 31 Mar 2011 12:56:29 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 31 Mar 2011 12:56:29 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2011 03:51:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=yPEpD0xl7kot9O90CbpSWdWU4oBVmmpHbXi+hEu4PhQ=;
-	b=NrKjM5TaXVMW4cbum489uES7zGOzJEDBtcK0onl99KbsEb5+5BncF05vCurf0PfJEp
-	W3l1ssV1DpReXNcjWCtGEdVZzYY3PSdE4xXhAlGEy8jcMipe5ihE82GjYPggMYbGPlc+
-	UMA6MrZy9fQ8giy2k7beMmI5aTd7Uem5FA0UI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=XjMB8fgeYYy2M5RW1EgMqZtkU5H1swPdvZeAebm1k7KGxApnVyK3vsxAZaQs9TPYt5
-	jeWxKZVAkZZUIcSDt9634jkiQsmxrR9SguPYmyQoE/+Rz/s4cTOPGE1WENufO58kkqPL
-	XNNE+s1gjHArO5WbsqQKcEdM4RQC8IAc+p2/U=
-MIME-Version: 1.0
-Received: by 10.43.60.65 with SMTP id wr1mr2855504icb.323.1301568670712; Thu,
-	31 Mar 2011 03:51:10 -0700 (PDT)
-Received: by 10.231.43.6 with HTTP; Thu, 31 Mar 2011 03:51:10 -0700 (PDT)
-In-Reply-To: <in1gf0$aun$1@dough.gmane.org>
-References: <20110331074506.GB23178@denix.org> <in1gf0$aun$1@dough.gmane.org>
-Date: Thu, 31 Mar 2011 12:51:10 +0200
-Message-ID: <AANLkTikn4r-ScRstfT_r-Adw36=682MEb_XHMKn+qs3_@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Thu, 31 Mar 2011 12:56:29 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance] Pull request for new TI machines, angstrom and qt4 fixes
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 31 Mar 2011 12:56:17 +0200
+Message-ID: <in1mkh$eln$1@dough.gmane.org>
+References: <cover.1301562689.git.Martin.Jansa@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <cover.1301562689.git.Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH 0/2] [meta-oe] Pull request #2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,13 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 10:53:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 31 Mar 2011 10:58:27 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Adding new machines on a maintenance branch seems somewhat odd as new
-somewhat conflicts with maintenance.
-is this what we want? And if so, what about adding new recipes?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Frans
+On 31-03-11 11:13, Martin Jansa wrote:
+> python-cython is needed by meta-efl layer for python-efl
+> ttf-sazanami: fix LICENSE
+> 
+> Pull URL: git://gitorious.org/shr/meta-openembedded.git
+>   Branch: jama/meta-oe
+>   Browse: http://gitorious.org/shr/meta-openembedded/commits/jama/meta-oe
+> 
+> Thanks,
+>     Martin Jansa <Martin.Jansa@gmail.com>
+
+Merged, thanks!
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNlF3RMkyGM64RGpERAuvrAKCAi/BgKRllpMJ3pKf9osuUbFQuYACgh/ZN
+K3miIWj+YGBpJLOdaG225wE=
+=bXg4
+-----END PGP SIGNATURE-----
+
 
 
