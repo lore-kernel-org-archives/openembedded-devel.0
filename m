@@ -1,19 +1,35 @@
-Received: from smtp203.alice.it ([82.57.200.99])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <GNUtoo@no-log.org>) id 1Q5Q8v-0008Dr-7O
+	(envelope-from <rickfoosusa@gmail.com>) id 1Q5Rad-0005AG-HJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Apr 2011 00:15:05 +0200
-Received: from localhost.localdomain (79.25.134.226) by smtp203.alice.it
-	(8.5.124.08) (authenticated as editempo@alice.it)
-	id 4C1A2A960842D56C; Fri, 1 Apr 2011 00:13:03 +0200
-From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
-To: Stefan Schmidt <stefan@buglabs.net>
-Date: Fri,  1 Apr 2011 00:12:59 +0200
-Message-Id: <1301609579-27642-1-git-send-email-GNUtoo@no-log.org>
-X-Mailer: git-send-email 1.7.0.4
-Cc: BUG-dev <bug-dev@lists.buglabs.net>,
-	openembedded-devel@lists.openembedded.org
-Subject: [PATCH] fix com.buglabs.bug.jni.* 'could not read symbols: Bad value' error
+	Fri, 01 Apr 2011 01:47:47 +0200
+Received: by ywg8 with SMTP id 8so1221649ywg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 31 Mar 2011 16:45:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=OMe/4tynbF2xJCOvYyE54n9Lhhc2nMPrWdQrc4+/7YU=;
+	b=u3p7jgzBdAhNfBMOladBOZOw3H9U9VmQUQO0eCwvjxfouB3lIfLunU/xQwtOcPYXCi
+	1wYsa9ci0NZ/M9b6cUV7qp6Iduu2oGRGeEA188H4nCXUqs8KoQk7JtR7QGRVb1ANKN1w
+	0xFAUOOXMYV575oJsrG5zuQ+7otgRL3GX9BYw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=HwhykGKKDlLuXWdAnZmJ+87T4Ih3GXDCaMllNQaV60r24zVGoavdhAQDxdZFDtCJIo
+	/4xx3E2toeUN2amL4RKYbWhi/uOEQ6T218wXHVKam6QylgpKf0HZfk3kX9aTV4u93XQl
+	ap4Zw9IZj/eGA4nXmIP9LCTqIs+EpLscH26lo=
+Received: by 10.150.115.14 with SMTP id n14mr3553118ybc.293.1301615146290;
+	Thu, 31 Mar 2011 16:45:46 -0700 (PDT)
+Received: from localhost.localdomain (adsl-68-93-135-199.dsl.austtx.swbell.net
+	[68.93.135.199])
+	by mx.google.com with ESMTPS id b4sm71835ybn.23.2011.03.31.16.45.44
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 31 Mar 2011 16:45:45 -0700 (PDT)
+From: Rick Foos <rickfoosusa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 31 Mar 2011 18:44:46 -0500
+Message-Id: <1301615087-19374-1-git-send-email-rickfoosusa@gmail.com>
+X-Mailer: git-send-email 1.7.4
+Subject: [PATCH 1/2] Elsie added new version 3/14. Created version d per comments. Signed-off-by: Rick Foos <rickfoosusa@gmail.com>
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,90 +43,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 22:15:05 -0000
+X-List-Received-Date: Thu, 31 Mar 2011 23:47:47 -0000
 
-Without that fix we have :
-  | .../sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: CharDevice.o: relocation R_ARM_MOVW_ABS_NC against `a local symbol' can not be used when making a shared object; recompile with -fPIC
-  | CharDevice.o: could not read symbols: Bad value
-  | collect2: ld returned 1 exit status
-  | make: *** [libCommon.so] Error 1
-For the following recipes:
-  com.buglabs.bug.jni.common
-  com.buglabs.bug.jni.input
-  com.buglabs.bug.jni.lcd
-  com.buglabs.bug.jni.accelerometer
-  com.buglabs.bug.jni.libmatthew
-  com.buglabs.bug.jni.vonhippel
-  com.buglabs.bug.jni.camera
-  com.buglabs.bug.jni.rxtx
-  com.buglabs.bug.jni.gps
-
-The solution was to pass -fPIC to the Makefile:
-For instance in com.buglabs.bug.jni.common/src/c the Makefile contained:
-  ALL_CXXFLAGS += $(INCLUDE) $(CXXFLAGS)
-  [...]
-  %.o: %.cpp
-          $(CXX) $(ALL_CXXFLAGS) -c -v $^ -o $@
-So passing -fPIC to CXXFLAGS solved all of the compilation failures but com.buglabs.bug.jni.camera
-com.buglabs.bug.jni.camera which failed that way:
-  | .../sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: Camera.o: relocation R_ARM_MOVW_ABS_NC against `a local symbol' can not be used when making a shared object; recompile with -fPIC
-  | Camera.o: could not read symbols: Bad value
-  | collect2: ld returned 1 exit status
-  | make: *** [libCamera.so] Error 1
-Had that in its Makefile:
-  ALL_CCFLAGS += $(INCLUDE) $(CCFLAGS)
-  [...]
-  %.o: %.c
-          $(CC) $(ALL_CCFLAGS) -c $^ -o $@
-which corresponded to the compilation of bug_v4l.c
-Altough just setting CCFLAGS += "-fPIC" wasn't sufficent since CFLAGS was not exported
-(see run.do_jni_install script)
-So I had to export it.
-
-Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 ---
- recipes/buglabs-osgi/bug-osgi.inc                  |    4 +++-
- recipes/buglabs-osgi/com.buglabs.bug.jni.camera.bb |    3 +++
- 2 files changed, 6 insertions(+), 1 deletions(-)
+ recipes/tzcode/tzcode-native_2011d.bb |   15 +++++++++++++++
+ 1 files changed, 15 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/tzcode/tzcode-native_2011d.bb
 
-diff --git a/recipes/buglabs-osgi/bug-osgi.inc b/recipes/buglabs-osgi/bug-osgi.inc
-index b5b6e9f..75908bb 100644
---- a/recipes/buglabs-osgi/bug-osgi.inc
-+++ b/recipes/buglabs-osgi/bug-osgi.inc
-@@ -8,7 +8,7 @@ inherit bug-java-library
- JARFILENAME = "${BPN}.jar"
- ALTJARFILENAMES = ""
- 
--INC_PR = "r0"
-+INC_PR = "r1"
- 
- SRCREV = "12839"
- 
-@@ -28,6 +28,8 @@ EXTRA_OEMAKE+="CLASSPATH_INCDIR=${STAGING_INCDIR}/classpath"
- 
- JAVAC_OPTIONS="-source 1.6"
- 
-+CXXFLAGS += "-fPIC"
+diff --git a/recipes/tzcode/tzcode-native_2011d.bb b/recipes/tzcode/tzcode-native_2011d.bb
+new file mode 100644
+index 0000000..f18f09d
+--- /dev/null
++++ b/recipes/tzcode/tzcode-native_2011d.bb
+@@ -0,0 +1,15 @@
++require tzcode-native.inc
 +
- do_compile() {
-   mkdir -p build
-   oe_makeclasspath cp -s ${DEPENDS} ${EXTRA_CP}
-diff --git a/recipes/buglabs-osgi/com.buglabs.bug.jni.camera.bb b/recipes/buglabs-osgi/com.buglabs.bug.jni.camera.bb
-index dced292..28a22e1 100644
---- a/recipes/buglabs-osgi/com.buglabs.bug.jni.camera.bb
-+++ b/recipes/buglabs-osgi/com.buglabs.bug.jni.camera.bb
-@@ -2,6 +2,9 @@ require bug-osgi.inc
- inherit jni-library
- 
- PR = "${INC_PR}.7+svnr${SRCREV}"
++# Note that elsie.nci.nih.gov removes old versions when new is coming out
++# So if this doesn't build for you because of missing source file, just
++# bump it to the latest available version, removing old one
++# Also, tzdata (and it is needed to build tzcode) version can differ from
++# tzcode version, thus this variable
 +
-+export CCFLAGS  += "-fPIC"
++TZDATA_PV = "2011d"
 +
- FILES_${PN} += "${JNI_LIB_DIR}/libCamera.so"
- 
- DEPENDS += "com.buglabs.common com.buglabs.bug.jni.common classpath jpeg virtual/kernel jpeg"
++PR = "${INC_PR}.0"
++SRC_URI[tzcode-2011d.md5sum] = "95095242ee368e6a7e107f154590ac11"
++SRC_URI[tzcode-2011d.sha256sum] = "68f2c07471c5390199c09fe9fee6a22f8a4dac24713af88b92da17b33ad98cc7"
++SRC_URI[tzdata-2011d.md5sum] = "03c5793502b7c41985edd73146bf7e36"
++SRC_URI[tzdata-2011d.sha256sum] = "415a54774094e8dcdc9ba141fafbee4b3b2f2140a5b8cf012eea4b37fb9a23bd"
 -- 
-1.7.0.4
+1.7.4
 
 
 
