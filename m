@@ -1,35 +1,35 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philippedeswert@gmail.com>) id 1Q5Nld-0007v0-GY
+	(envelope-from <philippedeswert@gmail.com>) id 1Q5NsZ-00089q-Oe
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 21:42:53 +0200
-Received: by eye27 with SMTP id 27so813441eye.6
+	Thu, 31 Mar 2011 21:50:04 +0200
+Received: by ewy5 with SMTP id 5so814692ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2011 12:40:50 -0700 (PDT)
+	Thu, 31 Mar 2011 12:47:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=baZZRAZLy3yo4LzOTdEQBQRksxF5ScqXIc/ic7yYUXY=;
-	b=trNNTAUNqc01dATzFcu6GYIzqOsMxRHivvZjAGGXMJcX/sCriTieYwS9mWPwipbFRW
-	ptJm22S5ZHHSyt9A0W4p1/xoE4PNg4yElHQVGAz3b6F4G4ZpLvMBkMisv7AmlV5yVqBY
-	dQl/sKefd1qtZCc6ZhTUo8hh3UhJs07PbIeSs=
+	bh=wyPG7XGxEuZu7ELG4TKkY5Oc7LP7oPzFeGniKcDrc6A=;
+	b=tOHuzpgUamx9pcyb34MiNE1YrXO0aUB5aW6B5Yp1Rfr8wOLSJcu012Hlqka+w/YetY
+	83gs9TQJ6EzZuZYZteqOORXXC5ky1SUgcyo6XrlQ95tusl0X7jKtHvFyT/csLHYYHPpM
+	vgtY42iQbgGewGTBPZhLROYFAzBpKRhj0/8C8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=xdHqPRUvkw9sZTwvC5C82o4OiDtIxMDvuCg8b3ArKA6DXIbwqbo6IBfhaBwU6WTj1s
-	EjHxd2EdGIiXTF4SrWTa7RQ8s1FTB03/t0+a7cnP9vj18qwkw+141FT1EKy5OE3OYQwW
-	wE2WGNEeyb+8jmVJH70NEUGXaT5O9KkYo7+wE=
-Received: by 10.213.33.143 with SMTP id h15mr725990ebd.22.1301600450148;
-	Thu, 31 Mar 2011 12:40:50 -0700 (PDT)
+	b=B6UGUd5FpxRGe18aPN1tL4SwnXrnhwd/pF9IsmNao4M1ABUpIxU/Agfz8H9YA3uIea
+	HOdrRo137/0BOwbH+hDhsAkaxI/p6G7aFhPlsu4a3bZ4+KTCUHMAGA34CNuDVaQxWdcA
+	oxRx+vQ0C/g2S1A2sBgUv3t/83kc2JVd5mZzE=
+Received: by 10.213.22.142 with SMTP id n14mr1327593ebb.149.1301600861543;
+	Thu, 31 Mar 2011 12:47:41 -0700 (PDT)
 Received: from localhost.localdomain (a83-245-252-47.elisa-laajakaista.fi
 	[83.245.252.47])
-	by mx.google.com with ESMTPS id q53sm934713eeh.4.2011.03.31.12.40.48
+	by mx.google.com with ESMTPS id x54sm935982eeh.12.2011.03.31.12.47.40
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 31 Mar 2011 12:40:49 -0700 (PDT)
+	Thu, 31 Mar 2011 12:47:40 -0700 (PDT)
 From: Philippe De Swert <philippedeswert@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 Mar 2011 22:39:59 +0300
-Message-Id: <1301600399-32041-1-git-send-email-philippedeswert@gmail.com>
+Date: Thu, 31 Mar 2011 22:46:53 +0300
+Message-Id: <1301600813-32334-1-git-send-email-philippedeswert@gmail.com>
 X-Mailer: git-send-email 1.7.2.5
-Subject: [PATCH [1/2]] eio: New recipe for eio
+Subject: [PATCH [2/2]] ephoto: new recipe. Depends on eio
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,52 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 19:42:53 -0000
+X-List-Received-Date: Thu, 31 Mar 2011 19:50:04 -0000
 
 Signed-off-by: Philippe De Swert <philippedeswert@gmail.com>
 ---
- recipes/efl1/eio.inc    |   11 +++++++++++
- recipes/efl1/eio_svn.bb |   13 +++++++++++++
- 2 files changed, 24 insertions(+), 0 deletions(-)
- create mode 100644 recipes/efl1/eio.inc
- create mode 100644 recipes/efl1/eio_svn.bb
+ recipes/e17/ephoto_svn.bb |   11 +++++++++++
+ 1 files changed, 11 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/e17/ephoto_svn.bb
 
-diff --git a/recipes/efl1/eio.inc b/recipes/efl1/eio.inc
+diff --git a/recipes/e17/ephoto_svn.bb b/recipes/e17/ephoto_svn.bb
 new file mode 100644
-index 0000000..396b455
+index 0000000..c2c744a
 --- /dev/null
-+++ b/recipes/efl1/eio.inc
++++ b/recipes/e17/ephoto_svn.bb
 @@ -0,0 +1,11 @@
-+DESCRIPTION = "Enlightenment Input Output Library"
-+LICENSE = "MIT BSD"
-+DEPENDS = "ecore eina"
-+
-+inherit efl
-+
-+BBCLASSEXTEND = "native"
-+INC_PR = "r0"
-+
-+# Some upgrade path tweaking
-+AUTO_LIBNAME_PKGS = ""
-diff --git a/recipes/efl1/eio_svn.bb b/recipes/efl1/eio_svn.bb
-new file mode 100644
-index 0000000..6a12dcf
---- /dev/null
-+++ b/recipes/efl1/eio_svn.bb
-@@ -0,0 +1,13 @@
-+require eio.inc
-+
-+SRCREV = "${EFL_SRCREV}"
-+PV = "0.1.0+svnr${SRCPV}"
++LICENSE = "MIT"
++PV = "0.0.1+svnr${SRCREV}"
 +PR = "${INC_PR}.0"
-+DEFAULT_PREFERENCE = "-1"
 +
-+LIC_FILES_CHKSUM = "file://COPYING;md5=403f20cf42c847686ac2956f14bfa30f"
++LIC_FILES_CHKSUM = "file://COPYING;md5=df45d9de58df0b48f515eae8d2421257"
 +
-+SRC_URI = "\
-+  ${E_SVN}/trunk;module=${SRCNAME};proto=http;scmdata=keep \
-+"
-+S = "${WORKDIR}/${SRCNAME}"
++require e-module.inc
++
++DEPENDS += "elementary ethumb ecore eio"
++
++SRCNAME = "${PN}"
 -- 
 1.7.2.5
 
