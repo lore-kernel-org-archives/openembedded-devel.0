@@ -1,36 +1,25 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Q5GXg-0002gJ-IZ
+	(envelope-from <philip@balister.org>) id 1Q5H9Q-0006LR-Pg
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 14:00:01 +0200
-Received: by iwn10 with SMTP id 10so2546652iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2011 04:57:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=rzh5nDB5s11WlCA86W9cD14XFYQ3FgEvKYTUvSbl9lc=;
-	b=YrMJjZEAfPLIhtzrIpmlAiDyDv21o5IuOc/AgUUKLpq93H7WZgaOdhTewGfSaVXpYF
-	yygH4hfKmmTUY3yUh6kJNrLPghWiHC4JROtjifz8lssvZNp6i2Vyud40YCb8OUjkEx98
-	BUGYyO+YmLWuiCrtAADLVVapBkzS+YOwD6rfY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=v4JBYbzNuqQTdOKgE7NYbYFnKnLh6pmdoeh0dBUrbIWfhka9XxoJNJ/69vZj8c+3pG
-	KnKNd3+R1UnBMBofYLsfhFWewXc1XsbbCB+T8CLxPQo2/8wx5lVcRTL+wpO0p1HWZwMS
-	OZ+phBpb+pR5stY28yrzgz6vUMrv8TKy/Z7w0=
+	Thu, 31 Mar 2011 14:39:01 +0200
+Received: (qmail 15168 invoked by uid 1003); 31 Mar 2011 12:36:35 -0000
+Received: from unknown (HELO ?192.168.1.167?)
+	(philip@opensdr.com@96.240.183.40)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	31 Mar 2011 12:36:35 -0000
+Message-ID: <4D947552.8020201@balister.org>
+Date: Thu, 31 Mar 2011 08:36:34 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.42.115.129 with SMTP id k1mr2637314icq.457.1301572672883; Thu,
-	31 Mar 2011 04:57:52 -0700 (PDT)
-Received: by 10.231.43.6 with HTTP; Thu, 31 Mar 2011 04:57:52 -0700 (PDT)
-In-Reply-To: <in1n4g$hvs$1@dough.gmane.org>
-References: <20110331074506.GB23178@denix.org> <in1gf0$aun$1@dough.gmane.org>
-	<AANLkTikn4r-ScRstfT_r-Adw36=682MEb_XHMKn+qs3_@mail.gmail.com>
-	<in1n4g$hvs$1@dough.gmane.org>
-Date: Thu, 31 Mar 2011 13:57:52 +0200
-Message-ID: <AANLkTin8=R-0LBgbfKprsKuFCTL6DcU6em-dNAUv9Nrw@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+References: <20110331074506.GB23178@denix.org>
+	<in1gf0$aun$1@dough.gmane.org>	<AANLkTikn4r-ScRstfT_r-Adw36=682MEb_XHMKn+qs3_@mail.gmail.com>	<in1n4g$hvs$1@dough.gmane.org>
+	<AANLkTin8=R-0LBgbfKprsKuFCTL6DcU6em-dNAUv9Nrw@mail.gmail.com>
+In-Reply-To: <AANLkTin8=R-0LBgbfKprsKuFCTL6DcU6em-dNAUv9Nrw@mail.gmail.com>
 Subject: Re: [2011.03-maintenance] Pull request for new TI machines, angstrom and qt4 fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,46 +34,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 12:00:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 31 Mar 2011 12:39:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2011/3/31 Koen Kooi <koen@dominion.thruhere.net>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+Frans,
+
+Before this spins into a long thread of who did what to who, let's try 
+reinterpreting Koen's answer;
+
+The pull request is in line with the policy from this branch defined in 
+the wiki. Also, prior requests have also added new machines.
+
+If you disagree with the policies that this branch is using, you may ask 
+if the people using and maintaining the branch would like to update the 
+policy to reflect no new machines will be added. If they disagree with 
+you, and you still feel strongly, start your own support branch.
+
+Philip
+
+On 03/31/2011 07:57 AM, Frans Meulenbroeks wrote:
+> 2011/3/31 Koen Kooi<koen@dominion.thruhere.net>:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 31-03-11 12:51, Frans Meulenbroeks wrote:
+>>> Adding new machines on a maintenance branch seems somewhat odd as new
+>>> somewhat conflicts with maintenance.
+>>> is this what we want? And if so, what about adding new recipes?
+>>
+>> Since you aren't using, developing or supporting 2011.03-maintenance, I
+>> strongly object to your usage of 'we'.
 >
-> On 31-03-11 12:51, Frans Meulenbroeks wrote:
->> Adding new machines on a maintenance branch seems somewhat odd as new
->> somewhat conflicts with maintenance.
->> is this what we want? And if so, what about adding new recipes?
+> I don't think you know what I am using, let alone what I am developing
+> at the moment, or my plans to support things.
 >
-> Since you aren't using, developing or supporting 2011.03-maintenance, I
-> strongly object to your usage of 'we'.
-
-I don't think you know what I am using, let alone what I am developing
-at the moment, or my plans to support things.
-
-Also the we was a general tone of voice meaning "we as OE".
-
-But somehow I guess this is the hostile and unfriendly response to be
-expected from you.
-Instead of stimulating people to think with you, you bash them away.
-And then tomorrow complain that people do not participate.
-Now how would that come?
+> Also the we was a general tone of voice meaning "we as OE".
 >
-> Furthermore, this isn't the first time that new machines would get added
-> to 2011.03-maintenance.
-
-which might not be a good plan either.
+> But somehow I guess this is the hostile and unfriendly response to be
+> expected from you.
+> Instead of stimulating people to think with you, you bash them away.
+> And then tomorrow complain that people do not participate.
+> Now how would that come?
+>>
+>> Furthermore, this isn't the first time that new machines would get added
+>> to 2011.03-maintenance.
 >
-> People really should read
-> http://wiki.openembedded.org/index.php/2011.03-maintenance
-
-Which does not speficy what should and should not be added
-(apart from:
-"Unless specific to code that no longer resides in a non-maintenance
-branch (ie master here or oe-core / meta-oe / etc) code must be a
-backport and should say where the code already resides (for ease of
-review, interoperability checking and so forth). "
-)
+> which might not be a good plan either.
+>>
+>> People really should read
+>> http://wiki.openembedded.org/index.php/2011.03-maintenance
+>
+> Which does not speficy what should and should not be added
+> (apart from:
+> "Unless specific to code that no longer resides in a non-maintenance
+> branch (ie master here or oe-core / meta-oe / etc) code must be a
+> backport and should say where the code already resides (for ease of
+> review, interoperability checking and so forth). "
+> )
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
