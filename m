@@ -1,23 +1,37 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1Q5E3m-0007SU-Vk
+	(envelope-from <martin.jansa@gmail.com>) id 1Q5EyT-0000Vt-Ev
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 11:20:59 +0200
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q5E1t-0001oQ-6t
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 11:19:01 +0200
-From: Phil Blundell <philb@gnu.org>
+	Thu, 31 Mar 2011 12:19:35 +0200
+Received: by bwz5 with SMTP id 5so1699154bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 31 Mar 2011 03:17:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=Gf8AoMYzX5wElCWh+KzvBOOTCX4oLfE5AasLD/DNOMA=;
+	b=bHl+6cW7iQXOJNEtF9O0QaIIBQirPY16ZZCg2+qn2Zexj9EjnnvvrD33Hh8sh2BeAf
+	8hSqzltaome9CtblWHsgxdrmrxcphVehAmba4zjBbOXZamwy24Ww5j9bM2v+BoiHWqMa
+	XOybgSywb0B52s/NHSNaW7fYnH9JOyAq7uPKw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=F+S/1kdEW11UP6A0+6mGsak3xnSUPfPeHA1EF3alYfPC/bm55nHM/oCbplxjcWCSJ/
+	NWs0WB4Nc614mQPKjbVMnOnK+YFqMg/F6cS0EghVsO8mcrJgSnktxcsj2DTvkVBp95PS
+	kYyNMUVs7LbXh9cfwfUOkXcqwHnMufDjoevas=
+Received: by 10.204.82.143 with SMTP id b15mr2237681bkl.118.1301566651995;
+	Thu, 31 Mar 2011 03:17:31 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id w3sm635511bkt.5.2011.03.31.03.17.30
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 31 Mar 2011 03:17:31 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <imvq1h$8hl$2@dough.gmane.org>
-References: <AANLkTi=r1KzyDtTfZ74f0ZhJVpo=cTZV5n_azfAKQEHt@mail.gmail.com>
-	<imvq1h$8hl$2@dough.gmane.org>
-Date: Thu, 31 Mar 2011 10:19:09 +0100
-Message-ID: <1301563149.14449.52.camel@phil-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: [PATCH 1/6] Add support for the Technologic Systems TS7500 ARM SBCs
+Date: Thu, 31 Mar 2011 12:17:29 +0200
+Message-Id: <eaec45e0d96688532c6eb1dc78a4e17330d1a5cb.1301560589.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+In-Reply-To: <cover.1301560589.git.Martin.Jansa@gmail.com>
+References: <cover.1301560589.git.Martin.Jansa@gmail.com>
+Subject: [PATCH 2/8] elementary: add LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,30 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 09:20:59 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 31 Mar 2011 10:19:35 -0000
 
-On Wed, 2011-03-30 at 19:42 +0200, Koen Kooi wrote:
-> On 30-03-11 18:40, R.T. McGee wrote:
-> > Its true, the FA526 is not a ARM920T but it's a bit different from other
-> > standard ARMv4 types.
-> > 
-> > Comments about the FA526 and ARM920T similarity are based on work like this:
-> > http://openocd.sourcearchive.com/lines/0.3.1/fa526_8c-source.html
-> > This are not from the perspective of the instruction set, but it more or
-> > less talking about hardware features.
-> 
-> So it's more like a ARM920?
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/recipes-efl/efl/elementary_svn.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-It's sort of like an ARM920 might perhaps be if such a thing existed,
-yeah, but even then it probably wouldn't be an exact equivalent.  The
-original description of "resembles ARM920T without Thumb" sounds like
-it's about as good as it's going to get in terms of drawing an analogy
-between the ARM cores and the Faraday ones.
-
-p.
-
+diff --git a/meta-efl/recipes-efl/efl/elementary_svn.bb b/meta-efl/recipes-efl/efl/elementary_svn.bb
+index 6276d00..2fdd0dd 100644
+--- a/meta-efl/recipes-efl/efl/elementary_svn.bb
++++ b/meta-efl/recipes-efl/efl/elementary_svn.bb
+@@ -1,5 +1,6 @@
+ DESCRIPTION = "EFL based widget set for mobile devices"
+-LICENSE = "LGPL"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=620edc2399d9155fc180a0adc2b0ab7c"
+ DEPENDS = "eet-native efreet evas ecore edje eet edbus ethumb"
+ PV = "0.7.0+svnr${SRCPV}"
+ PR = "r11"
+-- 
+1.7.4.1
 
 
 
