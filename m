@@ -1,37 +1,37 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q5Dyt-0006xx-Dx
+	(envelope-from <martin.jansa@gmail.com>) id 1Q5Dyw-0006xr-9V
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 11:15:56 +0200
-Received: by bwz5 with SMTP id 5so1664438bwz.6
+	Thu, 31 Mar 2011 11:15:59 +0200
+Received: by mail-bw0-f47.google.com with SMTP id 5so1664409bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2011 02:13:52 -0700 (PDT)
+	Thu, 31 Mar 2011 02:14:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
 	:in-reply-to:references;
-	bh=LIIJu77ebni0CTjYKu8rBFNhnXNYTb0fOnM5mElF7Wo=;
-	b=pwOczSakcJj/hY8DrQniDFtZVrQ9Ud8jUK4mmpPXMOU+bBZ2fEPHXtspB42rt5SSHm
-	wtNkNdOO8kBfOPQl30HcN+odPKiyvMnO3ZB6xByOMDYbZxDjha5NT1nDhlEdXoA9laNO
-	2ytqkx2pAmq5JeXsuz94dWr5bxfupE2LexSOw=
+	bh=5QB5sB48xh6n1ijhM/wnjBEuqN8dCSXmDubWOd097Q4=;
+	b=ZFXwnLdmpWynqpoB1ACFQxAUPb2FCQGiXudp88ok3uZ8jbDY4Ye0WdLtyKatYKyuBj
+	BcsbfCd47fcRxeEO8eQwfLLAG8a4U2VidFuwp/CrOUPjYkY1oSjhB6DKPIMCfm4TJmS9
+	26cFF9iZnZOKgkcW/PKsqoOn9ce6VY6n/HG04=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=ZYYqJi2xSZjhaIiUSEwTshjr9mTpfL0u+9vtFi5BwZKcbdEqvJG9a/ldnX35LhoTTg
-	RpdcsjbV4AFnVxOkQVeMU6XrRIdgOCHnvrI/KH+40vwRw4AAoxw5a/gzwSyI68naYThT
-	zuS89QcMXVuxYwj1PIqNtFUFBQEF9DphWMTz4=
-Received: by 10.204.127.68 with SMTP id f4mr2153941bks.42.1301562831664;
-	Thu, 31 Mar 2011 02:13:51 -0700 (PDT)
+	b=d7OsruewQpBANvTGI6uUOhkkONjUEr9ygc1j4iyS3I5oJbhBFTMHHVL+M+i1vxjHxu
+	+JJ+nB8WeatIWE4zfO7JBL1r2vDA7n2ueb6eu6/hlsSDwtINN1ejAY8N+IV6fs41YTRB
+	pH09mAlAkXT/DVrA1oH0eqv2a44s9LNsum7IM=
+Received: by 10.204.49.87 with SMTP id u23mr2128957bkf.171.1301562840230;
+	Thu, 31 Mar 2011 02:14:00 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id l1sm588842bkl.13.2011.03.31.02.13.50
+	by mx.google.com with ESMTPS id b6sm584707bkb.22.2011.03.31.02.13.58
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 31 Mar 2011 02:13:51 -0700 (PDT)
+	Thu, 31 Mar 2011 02:13:59 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 Mar 2011 11:13:49 +0200
-Message-Id: <62c38635dfccecaaf1b4e09b408f50470d0a4e6d.1301562689.git.Martin.Jansa@gmail.com>
+Date: Thu, 31 Mar 2011 11:13:52 +0200
+Message-Id: <44ead8d4c9a5a985a0b878d4b166dc552f5896b8.1301562689.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.4.1
 In-Reply-To: <cover.1301562689.git.Martin.Jansa@gmail.com>
 References: <cover.1301562689.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 1/2] python-cython: import from meta-shr
+Subject: [PATCH 2/2] ttf-sazanami: fix LICENSE and add LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,39 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 09:15:56 -0000
+X-List-Received-Date: Thu, 31 Mar 2011 09:15:59 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-devtools/python/python-cython_0.13.bb  |   19 +++++++++++++++++++
- 1 files changed, 19 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/python/python-cython_0.13.bb
+ .../ttf-fonts/ttf-sazanami_20040629.bb             |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/python/python-cython_0.13.bb b/meta-oe/recipes-devtools/python/python-cython_0.13.bb
-new file mode 100644
-index 0000000..f705756
---- /dev/null
-+++ b/meta-oe/recipes-devtools/python/python-cython_0.13.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "Cython is a language specially designed for writing Python extension modules. \
-+It's designed to bridge the gap between the nice, high-level, easy-to-use world of Python \
-+and the messy, low-level world of C."
-+SECTION = "devel/python"
-+PRIORITY = "optional"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
-+SRCNAME = "Cython"
-+BBCLASSEXTEND = "native"
-+NATIVE_INSTALL_WORKS = "1"
-+DEPENDS = "python"
-+
-+SRC_URI = "http://www.cython.org/release/${SRCNAME}-${PV}.tar.gz"
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+SRC_URI[md5sum] = "ed2ec5e0df60a6b8e500bedf93bb1feb"
-+SRC_URI[sha256sum] = "a30d5e26c82ec65d65703c7cf312161a21b30339addc1a42d3b2965dea254ca6"
-+
-+inherit distutils
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
+index 1b9a01b..1ee1c9c 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
+@@ -5,7 +5,8 @@ DESCRIPTION_ttf-sazanami-gothic = "Sazanami Gothic Japanese TrueType font"
+ DESCRIPTION_ttf-sazanami-mincho = "Sazanami Mincho Japanese TrueType font"
+ AUTHOR = "Electronic Font Open Laboratory (/efont/)"
+ HOMEPAGE = "http://sourceforge.jp/projects/efont/"
+-LICENSE = "${PN}"
++LICENSE = "Public domain"
++LIC_FILES_CHKSUM = "file://README;md5=97d739900be6e852830f55aa3c07d4a0"
+ SRC_DISTRIBUTE_LICENSES += "${PN}"
+ RPROVIDES_${PN} = "virtual-japanese-font"
+ PR = "r5"
 -- 
 1.7.4.1
 
