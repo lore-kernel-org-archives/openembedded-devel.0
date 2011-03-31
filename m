@@ -1,37 +1,36 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q5Eyv-0000Vt-1t
+	(envelope-from <heroor@gmail.com>) id 1Q5FI8-0001XL-Rn
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 12:20:08 +0200
-Received: by mail-bw0-f47.google.com with SMTP id 5so1699154bwz.6
+	Thu, 31 Mar 2011 12:39:54 +0200
+Received: by qwh5 with SMTP id 5so1446831qwh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2011 03:18:02 -0700 (PDT)
+	Thu, 31 Mar 2011 03:37:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=DZm+c1GXbtrx/rlEBZbN2YbOVlkq/FT2+x2NKj0UZZQ=;
-	b=sIkQwPHtbfRBfBKPLXZST8M/XslitEHS+NvcuNSxDg9dXeOqoIYyOmy6dCQuOtI8lj
-	4ybWZLByDWnSdwElkGcuNYT1hqTmXd8gUkTjOZicRjQtDcxHVHAqGZLgwPNSftYwAMQY
-	j9Z1XochlZejn3egcKBRTy+pFuXJ2RX/opxQo=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=KWkwQm5vnAZhSHyp+d2Fx90/O+naOvPh8LZj4+KEwGM=;
+	b=PGQu9oVCQ+l8wHiR/QIlI4yg6GeV3afo+WUDyxlTQ2V3uWuCUYJmeYVun16dckAG6b
+	1igi7Mr2OhR3+Tng8xAk8h7035mOCt1qAtWgO5w0zBemeZda4eegIs6xp2zLDiYY+pMp
+	jC2K43gqKNJKZVHQaSf4LdRTDHMfcwmzWO+MU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=iPkfn79jGwu0cBAAOM2JNWt7v0ouxDEcllyxgm6NV35aj/KQlvxUw5i7Q0oWY3GHkb
-	oP/+5b8xIVwKD926BlHEknNeALm6lDqrdxKk5UPcvwng3iWveTyDoVShmeijIRZTAc+K
-	N7XkNesIphN1RmWJ5zTKCPueh4EDnmYQAohYk=
-Received: by 10.204.127.29 with SMTP id e29mr919600bks.52.1301566682700;
-	Thu, 31 Mar 2011 03:18:02 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id t1sm635463bkx.7.2011.03.31.03.18.01
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 31 Mar 2011 03:18:02 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=LOB+rOM7YJh5KL+XS7TG6YCVU9YMUfzQGuwFwGOuj583X33Ig6f/3oUVqjpKvrUP4I
+	flqcCAaPfu3o4bUkU5TLe/RLYZDphmscyr59jPlyqeJEk4rOlqb/mB9XLIL1JaYr4HfG
+	f47C5MIdNhYvO7EtW+qY6pmoNZHQ0zMzsqoMM=
+MIME-Version: 1.0
+Received: by 10.224.138.16 with SMTP id y16mr2076105qat.255.1301567867539;
+	Thu, 31 Mar 2011 03:37:47 -0700 (PDT)
+Received: by 10.224.134.5 with HTTP; Thu, 31 Mar 2011 03:37:47 -0700 (PDT)
+In-Reply-To: <1301470961-15808-3-git-send-email-heroor@gmail.com>
+References: <1301470961-15808-1-git-send-email-heroor@gmail.com>
+	<1301470961-15808-3-git-send-email-heroor@gmail.com>
+Date: Thu, 31 Mar 2011 16:07:47 +0530
+Message-ID: <AANLkTim3ssJNA5JV80r4=6z96zD3QYOJjh_x43hdzD+Z@mail.gmail.com>
+From: Siddharth Heroor <heroor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 Mar 2011 12:18:00 +0200
-Message-Id: <a68da746a85706945192e21fa1c508b405f77d15.1301560589.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <cover.1301560589.git.Martin.Jansa@gmail.com>
-References: <cover.1301560589.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 8/8] python-efl: import from meta-shr
+Subject: Re: [PATCH 3/3] TI EDMA3LLD Sysbios: Add version 02.11.01.02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,200 +44,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 10:20:08 -0000
+X-List-Received-Date: Thu, 31 Mar 2011 10:39:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../recipes-devtools/python/python-ecore_svn.bb    |    6 +++
- .../recipes-devtools/python/python-edbus_svn.bb    |    7 +++
- .../python-edje/0001-fix-unicode-conversion.patch  |   38 ++++++++++++++++
- .../recipes-devtools/python/python-edje_svn.bb     |    8 +++
- meta-efl/recipes-devtools/python/python-efl.inc    |   46 ++++++++++++++++++++
- .../python/python-elementary_svn.bb                |    6 +++
- .../recipes-devtools/python/python-emotion_svn.bb  |    6 +++
- .../recipes-devtools/python/python-evas_svn.bb     |    5 ++
- 8 files changed, 122 insertions(+), 0 deletions(-)
- create mode 100644 meta-efl/recipes-devtools/python/python-ecore_svn.bb
- create mode 100644 meta-efl/recipes-devtools/python/python-edbus_svn.bb
- create mode 100644 meta-efl/recipes-devtools/python/python-edje/0001-fix-unicode-conversion.patch
- create mode 100644 meta-efl/recipes-devtools/python/python-edje_svn.bb
- create mode 100644 meta-efl/recipes-devtools/python/python-efl.inc
- create mode 100644 meta-efl/recipes-devtools/python/python-elementary_svn.bb
- create mode 100644 meta-efl/recipes-devtools/python/python-emotion_svn.bb
- create mode 100644 meta-efl/recipes-devtools/python/python-evas_svn.bb
+On Wed, Mar 30, 2011 at 1:12 PM, Siddharth Heroor <heroor@gmail.com> wrote:
+> From: Siddharth Heroor <heroor@ti.com>
+>
+>
+> Signed-off-by: Siddharth Heroor <heroor@ti.com>
+> ---
+> =A0recipes/ti/ti-edma3lld-sysbios_02.11.01.02.bb | =A0 =A06 ++++++
+> =A01 files changed, 6 insertions(+), 0 deletions(-)
+> =A0create mode 100644 recipes/ti/ti-edma3lld-sysbios_02.11.01.02.bb
+>
+> diff --git a/recipes/ti/ti-edma3lld-sysbios_02.11.01.02.bb b/recipes/ti/t=
+i-edma3lld-sysbios_02.11.01.02.bb
+> new file mode 100644
+> index 0000000..264dfb3
+> --- /dev/null
+> +++ b/recipes/ti/ti-edma3lld-sysbios_02.11.01.02.bb
+> @@ -0,0 +1,6 @@
+> +require ti-edma3lld-sysbios.inc
+> +
+> +PV =3D "02_11_01_02"
+> +
+> +SRC_URI[md5sum] =3D "270c15dc5f0a5761adb1ff45ab1adb99"
+> +SRC_URI[sha256sum] =3D "bd76114114a099eba15bdce8e3815a8cd2c01d819ebfc630=
+f6abdd39da36b525"
+> --
+> 1.7.0.4
 
-diff --git a/meta-efl/recipes-devtools/python/python-ecore_svn.bb b/meta-efl/recipes-devtools/python/python-ecore_svn.bb
-new file mode 100644
-index 0000000..0b87608
---- /dev/null
-+++ b/meta-efl/recipes-devtools/python/python-ecore_svn.bb
-@@ -0,0 +1,6 @@
-+require python-efl.inc
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
-+SRCREV = "${EFL_SRCREV}"
-+DEPENDS += "python-evas ecore"
-+RDEPENDS_${PN} += "python-evas"
-diff --git a/meta-efl/recipes-devtools/python/python-edbus_svn.bb b/meta-efl/recipes-devtools/python/python-edbus_svn.bb
-new file mode 100644
-index 0000000..d6144e9
---- /dev/null
-+++ b/meta-efl/recipes-devtools/python/python-edbus_svn.bb
-@@ -0,0 +1,7 @@
-+require python-efl.inc
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
-+SRCREV = "${EFL_SRCREV}"
-+DEPENDS += "edbus python-dbus"
-+RDEPENDS_${PN} += "python-dbus"
-+SRCNAME = "python-e_dbus"
-diff --git a/meta-efl/recipes-devtools/python/python-edje/0001-fix-unicode-conversion.patch b/meta-efl/recipes-devtools/python/python-edje/0001-fix-unicode-conversion.patch
-new file mode 100644
-index 0000000..3b0cdc6
---- /dev/null
-+++ b/meta-efl/recipes-devtools/python/python-edje/0001-fix-unicode-conversion.patch
-@@ -0,0 +1,38 @@
-+From fa12a33b5a3c0e86231ca84967d9eff456e5f314 Mon Sep 17 00:00:00 2001
-+From: Jan Luebbe <jluebbe@debian.org>
-+Date: Sat, 9 Aug 2008 18:30:04 +0200
-+Subject: [PATCH] fix unicode conversion
-+
-+---
-+ edje/edje.c_edje_object.pxi |   11 +++++++----
-+ 1 files changed, 7 insertions(+), 4 deletions(-)
-+
-+diff --git a/edje/edje.c_edje_object.pxi b/edje/edje.c_edje_object.pxi
-+index 0f4da68..21c237e 100644
-+--- a/edje/edje.c_edje_object.pxi
-++++ b/edje/edje.c_edje_object.pxi
-+@@ -415,17 +415,20 @@
-+         else:
-+             raise TypeError("func must be callable or None")
-+ 
-+-    def part_text_set(self, char *part, char *text):
-+-        edje_object_part_text_set(self.obj, part, text)
-++    def part_text_set(self, char *part, text):
-++        cdef char *s
-++        u = text.encode("utf8")
-++        s = u
-++        edje_object_part_text_set(self.obj, part, s)
-+ 
-+     def part_text_get(self, char *part):
-+-        "@rtype: str"
-++        "@rtype: unicode"
-+         cdef const_char_ptr s
-+         s = edje_object_part_text_get(self.obj, part)
-+         if s == NULL:
-+             return None
-+         else:
-+-            return s
-++            return s.decode("utf8")
-+ 
-+     def part_text_select_all(self, char *part):
-+         edje_object_part_text_select_all(self.obj, part)
-diff --git a/meta-efl/recipes-devtools/python/python-edje_svn.bb b/meta-efl/recipes-devtools/python/python-edje_svn.bb
-new file mode 100644
-index 0000000..581cc1c
---- /dev/null
-+++ b/meta-efl/recipes-devtools/python/python-edje_svn.bb
-@@ -0,0 +1,8 @@
-+require python-efl.inc
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
-+SRCREV = "${EFL_SRCREV}"
-+DEPENDS += "edje python-evas"
-+RDEPENDS_${PN} += "python-evas"
-+
-+SRC_URI += "file://0001-fix-unicode-conversion.patch"
-diff --git a/meta-efl/recipes-devtools/python/python-efl.inc b/meta-efl/recipes-devtools/python/python-efl.inc
-new file mode 100644
-index 0000000..f816305
---- /dev/null
-+++ b/meta-efl/recipes-devtools/python/python-efl.inc
-@@ -0,0 +1,46 @@
-+DESCRIPTION = "${PN} bindings"
-+LICENSE = "BSD"
-+AUTHOR = "Gustavo Sverzut Barbieri <barbieri@gmail.com>"
-+# NOTE: Due to a bug in distutils, even if we don't use pyrex but cython,
-+# we need to build pyrex otherwise cython doesn't get called to build
-+# the extension modules.
-+DEPENDS = "python-cython-native python-pyrex-native python-numeric eina"
-+RDEPENDS_${PN} += "python-lang"
-+PV = "0.7.3+svnr${SRCPV}"
-+PR = "ml1"
-+
-+# necessary to let the call for python-config succeed
-+export BUILD_SYS
-+export HOST_SYS
-+
-+inherit e-base autotools pkgconfig distutils-base
-+
-+SRC_URI = "${E_SVN}/trunk/BINDINGS/python;module=${SRCNAME};proto=http"
-+S = "${WORKDIR}/${SRCNAME}"
-+
-+
-+do_configure_prepend() {
-+	# prefix CYTHON_.*_INCLUDEDIR with path to STAGING_DIR_HOST also use $PKG_CONFIG instead of pkg-config directly
-+        sed -i "s#\`\$PKG_CONFIG --variable=includedir \"python-evas#${STAGING_DIR_HOST}\`\$PKG_CONFIG --variable=includedir \"python-evas#g" ${S}/configure.ac
-+}
-+
-+do_install_append() {
-+	if [ -e examples ]; then
-+		for i in `find examples -name "*.edc"`; do
-+			cd ${S}/`dirname $i`
-+			echo "Generating .edj file for $i..."
-+			edje_cc `basename $i`
-+			echo "Removing sources in this directory..."
-+			rm -f *.edc *.png *.ttf *.jpeg
-+		done
-+		cd ${S}
-+		install -d ${D}${datadir}/${PN}/
-+		cp -a examples ${D}${datadir}/${PN}/
-+		find ${D}${datadir}/${PN}/examples -name ".svn" | xargs rm -rf
-+	fi
-+}
-+
-+FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/*.egg/*/*/.debug"
-+
-+PACKAGES += "${PN}-examples"
-+FILES_${PN}-examples = "${datadir}/${PN}/examples"
-diff --git a/meta-efl/recipes-devtools/python/python-elementary_svn.bb b/meta-efl/recipes-devtools/python/python-elementary_svn.bb
-new file mode 100644
-index 0000000..e7f18ec
---- /dev/null
-+++ b/meta-efl/recipes-devtools/python/python-elementary_svn.bb
-@@ -0,0 +1,6 @@
-+require python-efl.inc
-+LICENSE = "LGPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
-+SRCREV = "${EFL_SRCREV}"
-+DEPENDS += "elementary python-evas"
-+RDEPENDS_${PN} += "python-evas python-ecore python-edje" 
-diff --git a/meta-efl/recipes-devtools/python/python-emotion_svn.bb b/meta-efl/recipes-devtools/python/python-emotion_svn.bb
-new file mode 100644
-index 0000000..ae2eb4c
---- /dev/null
-+++ b/meta-efl/recipes-devtools/python/python-emotion_svn.bb
-@@ -0,0 +1,6 @@
-+require python-efl.inc
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
-+SRCREV = "${EFL_SRCREV}"
-+DEPENDS += "emotion python-evas"
-+RDEPENDS_${PN} += "python-ecore"
-diff --git a/meta-efl/recipes-devtools/python/python-evas_svn.bb b/meta-efl/recipes-devtools/python/python-evas_svn.bb
-new file mode 100644
-index 0000000..8ec9c41
---- /dev/null
-+++ b/meta-efl/recipes-devtools/python/python-evas_svn.bb
-@@ -0,0 +1,5 @@
-+require python-efl.inc
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
-+SRCREV = "${EFL_SRCREV}"
-+DEPENDS += "evas"
--- 
-1.7.4.1
+May I know the status of this patch? I don't see it on the patchwork
+queue or on the master branch. I see it archived on the -devel mailing
+list archive though.
 
+--=20
+Sid
 
 
