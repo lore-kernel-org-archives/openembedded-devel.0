@@ -1,26 +1,26 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1Q5H9Q-0006LR-Pg
+	(envelope-from <sledz@dresearch-fe.de>) id 1Q5ICO-0003L1-GE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 14:39:01 +0200
-Received: (qmail 15168 invoked by uid 1003); 31 Mar 2011 12:36:35 -0000
-Received: from unknown (HELO ?192.168.1.167?)
-	(philip@opensdr.com@96.240.183.40)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	31 Mar 2011 12:36:35 -0000
-Message-ID: <4D947552.8020201@balister.org>
-Date: Thu, 31 Mar 2011 08:36:34 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Thunderbird/3.1.7
+	Thu, 31 Mar 2011 15:46:16 +0200
+Received: by wye20 with SMTP id 20so2208566wye.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 31 Mar 2011 06:44:01 -0700 (PDT)
+Received: by 10.227.32.131 with SMTP id c3mr2722592wbd.188.1301579041708;
+	Thu, 31 Mar 2011 06:44:01 -0700 (PDT)
+Received: from [10.32.10.2] (p57A2133A.dip0.t-ipconnect.de [87.162.19.58])
+	by mx.google.com with ESMTPS id ed10sm655807wbb.66.2011.03.31.06.43.59
+	(version=SSLv3 cipher=OTHER); Thu, 31 Mar 2011 06:44:00 -0700 (PDT)
+Message-ID: <4D94851E.3030308@dresearch-fe.de>
+Date: Thu, 31 Mar 2011 15:43:58 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.15) Gecko/20110303 Lightning/1.0b2 Thunderbird/3.1.9
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <20110331074506.GB23178@denix.org>
-	<in1gf0$aun$1@dough.gmane.org>	<AANLkTikn4r-ScRstfT_r-Adw36=682MEb_XHMKn+qs3_@mail.gmail.com>	<in1n4g$hvs$1@dough.gmane.org>
-	<AANLkTin8=R-0LBgbfKprsKuFCTL6DcU6em-dNAUv9Nrw@mail.gmail.com>
-In-Reply-To: <AANLkTin8=R-0LBgbfKprsKuFCTL6DcU6em-dNAUv9Nrw@mail.gmail.com>
-Subject: Re: [2011.03-maintenance] Pull request for new TI machines, angstrom and qt4 fixes
+References: <1301382028-10848-1-git-send-email-sledz@dresearch-fe.de>
+In-Reply-To: <1301382028-10848-1-git-send-email-sledz@dresearch-fe.de>
+Subject: Re: [PATCH] linux-2.6.24: allow building kernel with newer GNU make
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,69 +34,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 12:39:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 31 Mar 2011 13:46:21 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: 8bit
 
-Frans,
+Am 29.03.2011 09:00, schrieb Steffen Sledz:
+> GNU make >= 3.82 does not allow mixed implicit and normal rules
+> 
+> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
 
-Before this spins into a long thread of who did what to who, let's try 
-reinterpreting Koen's answer;
+Somebody willing to ACK?
 
-The pull request is in line with the policy from this branch defined in 
-the wiki. Also, prior requests have also added new machines.
+Steffen
 
-If you disagree with the policies that this branch is using, you may ask 
-if the people using and maintaining the branch would like to update the 
-policy to reflect no new machines will be added. If they disagree with 
-you, and you still feel strongly, start your own support branch.
-
-Philip
-
-On 03/31/2011 07:57 AM, Frans Meulenbroeks wrote:
-> 2011/3/31 Koen Kooi<koen@dominion.thruhere.net>:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 31-03-11 12:51, Frans Meulenbroeks wrote:
->>> Adding new machines on a maintenance branch seems somewhat odd as new
->>> somewhat conflicts with maintenance.
->>> is this what we want? And if so, what about adding new recipes?
->>
->> Since you aren't using, developing or supporting 2011.03-maintenance, I
->> strongly object to your usage of 'we'.
->
-> I don't think you know what I am using, let alone what I am developing
-> at the moment, or my plans to support things.
->
-> Also the we was a general tone of voice meaning "we as OE".
->
-> But somehow I guess this is the hostile and unfriendly response to be
-> expected from you.
-> Instead of stimulating people to think with you, you bash them away.
-> And then tomorrow complain that people do not participate.
-> Now how would that come?
->>
->> Furthermore, this isn't the first time that new machines would get added
->> to 2011.03-maintenance.
->
-> which might not be a good plan either.
->>
->> People really should read
->> http://wiki.openembedded.org/index.php/2011.03-maintenance
->
-> Which does not speficy what should and should not be added
-> (apart from:
-> "Unless specific to code that no longer resides in a non-maintenance
-> branch (ie master here or oe-core / meta-oe / etc) code must be a
-> backport and should say where the code already resides (for ease of
-> review, interoperability checking and so forth). "
-> )
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
