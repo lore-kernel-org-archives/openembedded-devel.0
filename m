@@ -1,44 +1,37 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q5PBk-0005VO-1T
+	(envelope-from <raj.khem@gmail.com>) id 1Q5PCb-0005ho-8r
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 23:13:56 +0200
-Received: by bwz5 with SMTP id 5so2194751bwz.6
+	Thu, 31 Mar 2011 23:14:49 +0200
+Received: by fxm19 with SMTP id 19so2487908fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2011 14:11:52 -0700 (PDT)
+	Thu, 31 Mar 2011 14:12:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=lAdltloVSbCSksG7mTOBmelL+v+C/XJylSdqB1xowEI=;
-	b=eU9GBmjnDzqxhR1yQ7dVknknm0wy4LrZ+OOPKTWVlFNPTcsmMF2bJTYxzN93TgMup1
-	4XUkj9eBPH7UG1o3kGErxVfFYf2MyQv5vAf4OTO4EHG7eqaXLnEsvh89Oxd7CoAW5QJ8
-	ymxPdilluuCQPXqw9UJke0DrbmnbDCTv4itwM=
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type:content-transfer-encoding;
+	bh=rsWYpWpHF3o6X72ugccTtVu31JXnBhVgUp9bPmxw+Xg=;
+	b=mgdwuK9luzOYG35m8Mc2xH8FGbypbZ1B4qTMP2FEHPnFak8V5jvF2Phmw967UG8T5+
+	QSLQEf0QT89eFxtbmjr9I00mN3N1VfDh0ZOGoikH09Z3enRlRPK/xMANb8e4fAhvJvV2
+	ZG+tokS+19W/e7Pb15qzXbyfMuzbD4PDBTEjM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=mHFFQFJvxm0X7PFmyAWTxz+Zuq++6HH1pJf59tXkZhRj14BoNvLd3ehm0mQRKFDOtD
-	W/RvPANB993OQDMqEnAyXLuVawjJ/YkioJR3P+ajiA4R5ravI+PVP4F3ia/Y9H82UCN6
-	oWxzAv6c7fQLa9sidNkoD3rMlV7BiHrLW+RUI=
-Received: by 10.204.84.137 with SMTP id j9mr2842941bkl.120.1301605912626;
-	Thu, 31 Mar 2011 14:11:52 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id v21sm988080bkt.23.2011.03.31.14.11.50
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 31 Mar 2011 14:11:51 -0700 (PDT)
-Date: Thu, 31 Mar 2011 23:11:44 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20110331211144.GI3745@jama.jama.net>
-References: <cover.1301560589.git.Martin.Jansa@gmail.com>
-	<dff2afec47fd746f45b9f630bf14755f40a8fdc5.1301560589.git.Martin.Jansa@gmail.com>
-	<AANLkTikvnKY+hdT9ck4TpG9vvTR9MHKvLxgjRGHjKY2R@mail.gmail.com>
-	<20110331205342.GH3745@jama.jama.net>
-	<AANLkTi=T+7_bep7Hy3MfSgQNAWXjyo49wUut+S8iN-qn@mail.gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=sefl7b4tf4rcs0Zkzz0zLve5DA0xizswNk1FaBjbzDIYDSWUFqHpZvLoAFbCsrN2KP
+	tWidbjzMy5w82GiM5nZ1ZJ83IXqlZYTW9160K6eHlj10IxF08bA4WZBpBD9kmUQtuJvT
+	HEX37FckbY1x57+dvb40d2owyHXIlq/QOzxP0=
+Received: by 10.223.14.137 with SMTP id g9mr1979908faa.8.1301605969066; Thu,
+	31 Mar 2011 14:12:49 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <AANLkTi=T+7_bep7Hy3MfSgQNAWXjyo49wUut+S8iN-qn@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/8] illume-keyboards-shr: add LICENSE
+Received: by 10.223.23.136 with HTTP; Thu, 31 Mar 2011 14:12:19 -0700 (PDT)
+In-Reply-To: <1301508491-3062-3-git-send-email-Chase.Maupin@ti.com>
+References: <1301508491-3062-1-git-send-email-Chase.Maupin@ti.com>
+	<1301508491-3062-3-git-send-email-Chase.Maupin@ti.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 31 Mar 2011 14:12:19 -0700
+Message-ID: <AANLkTinDdEKgOWW0ZHLSc8d_0PRWydOGAQNDCnhbqNXK@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: Re: [PATCH 3/6] u-boot: Add PSP version for am387x-evm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,164 +45,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 21:13:56 -0000
-X-Groupsio-MsgNum: 30812
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="cVp8NMj01v+Em8Se"
-Content-Disposition: inline
-
---cVp8NMj01v+Em8Se
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Thu, 31 Mar 2011 21:14:49 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 31, 2011 at 02:03:23PM -0700, Khem Raj wrote:
-> On Thu, Mar 31, 2011 at 1:53 PM, Martin Jansa <martin.jansa@gmail.com> wr=
+On Wed, Mar 30, 2011 at 11:08 AM, Chase Maupin <chasemaupin03@gmail.com> wr=
 ote:
-> > On Thu, Mar 31, 2011 at 01:40:38PM -0700, Khem Raj wrote:
-> >> On Thu, Mar 31, 2011 at 2:14 AM, Martin Jansa <martin.jansa@gmail.com>=
- wrote:
-> >> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> >>
-> >> I hope you made sure that all license files in a package source are ch=
-ecksummed.
-> >
-> > I've added LICENSE file only in case that package sources doesn't have
-> > any licensing information (simple scripts without header etc) like in
-> > this case
-> > http://git.shr-project.org/git/?p=3Dillume-keyboards.git;a=3Dtree
-> >
-> > For all e-wm/efl/illume related recipes we have mostly in meta-shr I've
-> > used LICENSE file from enlightenment repo, because our versions usually
-> > just modifies original versions a bit so for me as not-a-lawyer-at-all
-> > it makes sense to use same LICENSE.
->=20
->=20
-> thats fine as long as we dont miss any new licenses. You can also chop of
-> portions of source files with startline and endline in checksumming licen=
-ses
-> if there is no explicit LICENSE file
+> * Add the TI PSP u-boot version for the am387x-evm machine type
+> * Make this version the default preference for ti814x
+> =C2=A0SOC_FAMILY devices.
+> * Based on u-boot recipe from Arago contributed by Nageswari
+> =C2=A0Srinivasan
+>
+> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> ---
+> =C2=A0recipes/u-boot/u-boot_2010.06-psp04.01.00.03.bb | =C2=A0 14 +++++++=
++++++++
+> =C2=A01 files changed, 14 insertions(+), 0 deletions(-)
+> =C2=A0create mode 100644 recipes/u-boot/u-boot_2010.06-psp04.01.00.03.bb
+>
+> diff --git a/recipes/u-boot/u-boot_2010.06-psp04.01.00.03.bb b/recipes/u-=
+boot/u-boot_2010.06-psp04.01.00.03.bb
+> new file mode 100644
+> index 0000000..d4a2afc
+> --- /dev/null
+> +++ b/recipes/u-boot/u-boot_2010.06-psp04.01.00.03.bb
+> @@ -0,0 +1,14 @@
+> +require u-boot-omap3.inc
+> +
+> +COMPATIBLE_MACHINE =3D "ti814x"
+> +
+> +DEFAULT_PREFERENCE_ti814x =3D "1"
+> +BRANCH =3D "master"
+> +
+> +# Use literal tags in SRCREV, when available, instead of commit IDs
+> +SRCREV =3D "v2010.06_TI814XPSP_04.01.00.03"
+> +
+> +UVER =3D "2010.06"
+> +PSPREL =3D "04.01.00.03"
+> +
+> +PR =3D "r1"
 
-I know and I've used this in couple of recipes already, but there=20
-sometimes there really is nothing..
+new recipe starts at r0
+otherwise ok
 
-> > Cheers,
-> >
-> >> whole series is ok where I had question I replied to individual patch
-> >>
-> >> Acked-by: Khem Raj <raj.khem@gmail.com>
-> >>
-> >> > ---
-> >> > =A0.../recipes-efl/e17/illume-keyboards-shr/LICENSE =A0 | =A0 25 +++=
-+++++++++++++++++
-> >> > =A0.../recipes-efl/e17/illume-keyboards-shr_git.bb =A0 =A0| =A0 =A07=
- +++--
-> >> > =A02 files changed, 29 insertions(+), 3 deletions(-)
-> >> > =A0create mode 100644 meta-efl/recipes-efl/e17/illume-keyboards-shr/=
-LICENSE
-> >> >
-> >> > diff --git a/meta-efl/recipes-efl/e17/illume-keyboards-shr/LICENSE b=
-/meta-efl/recipes-efl/e17/illume-keyboards-shr/LICENSE
-> >> > new file mode 100644
-> >> > index 0000000..61bb2f6
-> >> > --- /dev/null
-> >> > +++ b/meta-efl/recipes-efl/e17/illume-keyboards-shr/LICENSE
-> >> > @@ -0,0 +1,25 @@
-> >> > +Copyright notice for Enlightenment:
-> >> > +
-> >> > +Copyright (C) 2000-2010 Carsten Haitzler and various contributors (=
-see AUTHORS)
-> >> > +
-> >> > +All rights reserved.
-> >> > +
-> >> > +Redistribution and use in source and binary forms, with or without
-> >> > +modification, are permitted provided that the following conditions =
-are met:
-> >> > +
-> >> > + =A0 1. Redistributions of source code must retain the above copyri=
-ght
-> >> > + =A0 =A0 =A0notice, this list of conditions and the following discl=
-aimer.
-> >> > + =A0 2. Redistributions in binary form must reproduce the above cop=
-yright
-> >> > + =A0 =A0 =A0notice, this list of conditions and the following discl=
-aimer in the
-> >> > + =A0 =A0 =A0documentation and/or other materials provided with the =
-distribution.
-> >> > +
-> >> > +THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRAN=
-TIES,
-> >> > +INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTAB=
-ILITY AND
-> >> > +FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL =
-THE
-> >> > +COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-> >> > +INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING=
-, BUT NOT
-> >> > +LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF US=
-E, DATA,
-> >> > +OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE=
-ORY OF
-> >> > +LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-> >> > +NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS =
-SOFTWARE,
-> >> > +EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-> >> > diff --git a/meta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb b/=
-meta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb
-> >> > index fe34513..e3b182d 100644
-> >> > --- a/meta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb
-> >> > +++ b/meta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb
-> >> > @@ -1,15 +1,16 @@
-> >> > =A0SECTION =3D "x11/data"
-> >> >
-> >> > =A0SRC_URI =3D "git://git.shr-project.org/repo/illume-keyboards.git;=
-protocol=3Dhttp;branch=3Dmaster \
-> >> > - =A0 =A0 =A0 =A0 =A0 file://0001-Makefile-update-KEYBOARDS_DIR-for-=
-new-illume2.patch"
-> >> > + =A0 =A0 =A0 =A0 =A0 file://0001-Makefile-update-KEYBOARDS_DIR-for-=
-new-illume2.patch \
-> >> > + =A0 =A0 =A0 =A0 =A0file://LICENSE"
-> >> > =A0S =3D "${WORKDIR}/git"
-> >> >
-> >> > =A0SRCREV =3D "4064489f359a1addf572089b582f317dff5f50e1"
-> >> > =A0PV =3D "0.0+gitr${SRCPV}"
-> >> > =A0PE =3D "1"
-> >> > =A0PR =3D "r4"
-> >> > -LICENSE =3D "unknown"
-> >> > -
-> >> > +LICENSE =3D "MIT BSD"
-> >> > +LIC_FILES_CHKSUM =3D "file://${WORKDIR}/LICENSE;md5=3Df523ab5986cc7=
-9b52a90d2ac3d5454a2"
-> >> >
-> >> > =A0PACKAGES =3D "\
-> >> > =A0illume-keyboard-alpha \
-> >> > --
-> >> > 1.7.4.1
-> >> >
-> >> >
-> >> > _______________________________________________
-> >> > Openembedded-devel mailing list
-> >> > Openembedded-devel@lists.openembedded.org
-> >> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-dev=
-el
-> >> >
-> >
-> > --
-> > Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
-> >
+> --
+> 1.7.0.4
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---cVp8NMj01v+Em8Se
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk2U7hAACgkQN1Ujt2V2gBwJWQCgq3mcsLyrYC0TZC7Ok7IvIK/N
-GxsAnjx1VhzZjh+EgeMunvq4kO3HAct2
-=Nu+f
------END PGP SIGNATURE-----
-
---cVp8NMj01v+Em8Se--
