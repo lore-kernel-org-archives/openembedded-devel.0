@@ -1,39 +1,39 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Q5P1w-0004hC-TB
+	(envelope-from <raj.khem@gmail.com>) id 1Q5P3x-0004zE-BC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 23:03:49 +0200
-Received: by fxm19 with SMTP id 19so2480156fxm.6
+	Thu, 31 Mar 2011 23:05:53 +0200
+Received: by fxm19 with SMTP id 19so2481769fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2011 14:01:48 -0700 (PDT)
+	Thu, 31 Mar 2011 14:03:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=2WxADMn1L1OndwQ4FQatGOW7/06IR+eEI6oNFFDeMPU=;
-	b=sw56uTDbPKh/IqnFrrJBC20PJuDvL3w8oNLZylEbHr0bWudifIsSVVIbEP7WfUVJre
-	/x3fLPcJevllNX+SW2ETWigo7TrOhcuTWuK1VWMDb+48Vuz3+jTm2WrDpTuadhxOiRei
-	wOGq8w9Nev4MhTZKcB9fZZ/YfdvqKjpUZVmtg=
+	bh=zoqHrbX6BecE1cD/l86niHLn40ZJG0gNcPGJ/HrYVKs=;
+	b=WPRONyro5bBoQkuRk/t9TXBf0z8ZDqfRTZtX+kVZ/UkBB4mEON7QRpIlcL6TcYJcEN
+	3VAodSTcyBZk8XdovSttZvbM7ZSLDe31VtUUuR7PgoKl+pCEIy/01Z76EYQtZRe/rl1V
+	GLGMth51xHdhsHu6DrYK86tvn58cA4TqtIN7Y=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:cc:content-type:content-transfer-encoding;
-	b=bQYmFOm/B6pcQY/wM9zlnvLLxjCJCKQ5LTTnNy/MIOfSMSeYMFfDW6lHcYSgcqJMXr
-	+k5dKDCwzcDEgGpgvhJ/rFAFlwzp8zF1qAvP1n/zGuD2yv16pGvmk01vkui0IxavjWyw
-	jw3r3OpMScy572PwUD0fH05g4E9OkNt5hlfHE=
-Received: by 10.223.14.137 with SMTP id g9mr1970384faa.8.1301605308465; Thu,
-	31 Mar 2011 14:01:48 -0700 (PDT)
+	b=JQqpxUOE0Wfee3P7qGSpv11T2xPin2SeaC+flZLxZp2dSthZQc2gcVMHa7yx3RnZ5/
+	3RWX7ySqGDfg07LR7TkBaKPnKH63012XEaN61kx5aVSyyq5Dsf4Da6czAAc8ZHUzOQ9F
+	Z2eeYp6bVVFhGOzaQNCDvi9Z1ug/SHxOVBMLI=
+Received: by 10.223.14.137 with SMTP id g9mr1972233faa.8.1301605433093; Thu,
+	31 Mar 2011 14:03:53 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.223.23.136 with HTTP; Thu, 31 Mar 2011 14:01:18 -0700 (PDT)
-In-Reply-To: <20110331204758.GG3745@jama.jama.net>
+Received: by 10.223.23.136 with HTTP; Thu, 31 Mar 2011 14:03:23 -0700 (PDT)
+In-Reply-To: <20110331205342.GH3745@jama.jama.net>
 References: <cover.1301560589.git.Martin.Jansa@gmail.com>
-	<8d76bc22e6b97944d4af16b2d9a6e318200d857b.1301560589.git.Martin.Jansa@gmail.com>
-	<AANLkTimZoMAuYXF4BruMZyZVU8T_M-AcaJ8S2BWZVmtW@mail.gmail.com>
-	<20110331204758.GG3745@jama.jama.net>
+	<dff2afec47fd746f45b9f630bf14755f40a8fdc5.1301560589.git.Martin.Jansa@gmail.com>
+	<AANLkTikvnKY+hdT9ck4TpG9vvTR9MHKvLxgjRGHjKY2R@mail.gmail.com>
+	<20110331205342.GH3745@jama.jama.net>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 31 Mar 2011 14:01:18 -0700
-Message-ID: <AANLkTi=Tr-GvisGYU5QxzfCKqthzsRX-2mfuQQfjcYvO@mail.gmail.com>
+Date: Thu, 31 Mar 2011 14:03:23 -0700
+Message-ID: <AANLkTi=T+7_bep7Hy3MfSgQNAWXjyo49wUut+S8iN-qn@mail.gmail.com>
 To: Martin Jansa <martin.jansa@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 7/8] task-x11-illume: add LIC_FILES_CHKSUM
+Subject: Re: [PATCH 1/8] illume-keyboards-shr: add LICENSE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,67 +47,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 21:03:49 -0000
+X-List-Received-Date: Thu, 31 Mar 2011 21:05:53 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 31, 2011 at 1:47 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+On Thu, Mar 31, 2011 at 1:53 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
 e:
-> On Thu, Mar 31, 2011 at 01:39:03PM -0700, Khem Raj wrote:
->> On Thu, Mar 31, 2011 at 3:17 AM, Martin Jansa <martin.jansa@gmail.com> w=
+> On Thu, Mar 31, 2011 at 01:40:38PM -0700, Khem Raj wrote:
+>> On Thu, Mar 31, 2011 at 2:14 AM, Martin Jansa <martin.jansa@gmail.com> w=
 rote:
 >> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->> > ---
->> > =C2=A0meta-efl/recipes-efl/tasks/task-x11-illume.bb | =C2=A0 =C2=A01 +
->> > =C2=A01 files changed, 1 insertions(+), 0 deletions(-)
->> >
->> > diff --git a/meta-efl/recipes-efl/tasks/task-x11-illume.bb b/meta-efl/=
-recipes-efl/tasks/task-x11-illume.bb
->> > index 8b14adb..e197cc7 100644
->> > --- a/meta-efl/recipes-efl/tasks/task-x11-illume.bb
->> > +++ b/meta-efl/recipes-efl/tasks/task-x11-illume.bb
->> > @@ -1,6 +1,7 @@
->> > =C2=A0DESCRIPTION =3D "The Illume Windowing Environment -- install thi=
-s task to get the Enlightenment Window Manager + the Illume environment."
->> > =C2=A0SECTION =3D "x11/wm"
->> > =C2=A0LICENSE =3D "MIT"
->> > +LIC_FILES_CHKSUM =3D "file://${TOPDIR}/meta-openembedded/meta-efl/COP=
-YING.MIT;md5=3D3da9cfbcb788c80a0384361b4de20420"
 >>
->> why not copy the license file to workdir first
+>> I hope you made sure that all license files in a package source are chec=
+ksummed.
 >
-> you mean introduce SRC_URI for task-* recipes?
+> I've added LICENSE file only in case that package sources doesn't have
+> any licensing information (simple scripts without header etc) like in
+> this case
+> http://git.shr-project.org/git/?p=3Dillume-keyboards.git;a=3Dtree
 >
-> I don't really like hardcoding meta-openembedded path here, so maybe we c=
-an introduce
-> METAOEBASE for this, like oe-core does with POKYBASE in LIC_FILES_CHKSUMs
+> For all e-wm/efl/illume related recipes we have mostly in meta-shr I've
+> used LICENSE file from enlightenment repo, because our versions usually
+> just modifies original versions a bit so for me as not-a-lawyer-at-all
+> it makes sense to use same LICENSE.
 
-yes that would be better I think
+
+thats fine as long as we dont miss any new licenses. You can also chop of
+portions of source files with startline and endline in checksumming license=
+s
+if there is no explicit LICENSE file
+
 >
-> bitbake@jama ~/shr-core/openembedded-core/meta/recipes-core/tasks $ git g=
-rep LIC_FILES_CHKSUM
-> task-base.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE;md5=3D3f40d=
-7994397109285ec7b81fdeb3b58 \
-> task-cross-canadian.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE;m=
-d5=3D3f40d7994397109285ec7b81fdeb3b58 \
-> task-poky-boot.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE;md5=3D=
-3f40d7994397109285ec7b81fdeb3b58 \
-> task-poky-nfs.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE;md5=3D3=
-f40d7994397109285ec7b81fdeb3b58 \
-> task-poky-sdk.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE;md5=3D3=
-f40d7994397109285ec7b81fdeb3b58 \
-> task-poky-ssh-dropbear.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENS=
-E;md5=3D3f40d7994397109285ec7b81fdeb3b58 \
-> task-poky-ssh-openssh.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE=
-;md5=3D3f40d7994397109285ec7b81fdeb3b58 \
-> task-poky-standalone-sdk-target.bb:LIC_FILES_CHKSUM =3D "file://${POKYBAS=
-E}/LICENSE;md5=3D3f40d7994397109285ec7b81fdeb3b58 \
-> task-poky-tools.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE;md5=
-=3D3f40d7994397109285ec7b81fdeb3b58 \
-> task-sdk-host.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE;md5=3D3=
-f40d7994397109285ec7b81fdeb3b58 \
+> Cheers,
 >
-> Regards,
+>> whole series is ok where I had question I replied to individual patch
+>>
+>> Acked-by: Khem Raj <raj.khem@gmail.com>
+>>
+>> > ---
+>> > =C2=A0.../recipes-efl/e17/illume-keyboards-shr/LICENSE =C2=A0 | =C2=A0=
+ 25 ++++++++++++++++++++
+>> > =C2=A0.../recipes-efl/e17/illume-keyboards-shr_git.bb =C2=A0 =C2=A0| =
+=C2=A0 =C2=A07 +++--
+>> > =C2=A02 files changed, 29 insertions(+), 3 deletions(-)
+>> > =C2=A0create mode 100644 meta-efl/recipes-efl/e17/illume-keyboards-shr=
+/LICENSE
+>> >
+>> > diff --git a/meta-efl/recipes-efl/e17/illume-keyboards-shr/LICENSE b/m=
+eta-efl/recipes-efl/e17/illume-keyboards-shr/LICENSE
+>> > new file mode 100644
+>> > index 0000000..61bb2f6
+>> > --- /dev/null
+>> > +++ b/meta-efl/recipes-efl/e17/illume-keyboards-shr/LICENSE
+>> > @@ -0,0 +1,25 @@
+>> > +Copyright notice for Enlightenment:
+>> > +
+>> > +Copyright (C) 2000-2010 Carsten Haitzler and various contributors (se=
+e AUTHORS)
+>> > +
+>> > +All rights reserved.
+>> > +
+>> > +Redistribution and use in source and binary forms, with or without
+>> > +modification, are permitted provided that the following conditions ar=
+e met:
+>> > +
+>> > + =C2=A0 1. Redistributions of source code must retain the above copyr=
+ight
+>> > + =C2=A0 =C2=A0 =C2=A0notice, this list of conditions and the followin=
+g disclaimer.
+>> > + =C2=A0 2. Redistributions in binary form must reproduce the above co=
+pyright
+>> > + =C2=A0 =C2=A0 =C2=A0notice, this list of conditions and the followin=
+g disclaimer in the
+>> > + =C2=A0 =C2=A0 =C2=A0documentation and/or other materials provided wi=
+th the distribution.
+>> > +
+>> > +THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTI=
+ES,
+>> > +INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABIL=
+ITY AND
+>> > +FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL TH=
+E
+>> > +COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+>> > +INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, =
+BUT NOT
+>> > +LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,=
+ DATA,
+>> > +OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEOR=
+Y OF
+>> > +LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+>> > +NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SO=
+FTWARE,
+>> > +EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+>> > diff --git a/meta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb b/me=
+ta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb
+>> > index fe34513..e3b182d 100644
+>> > --- a/meta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb
+>> > +++ b/meta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb
+>> > @@ -1,15 +1,16 @@
+>> > =C2=A0SECTION =3D "x11/data"
+>> >
+>> > =C2=A0SRC_URI =3D "git://git.shr-project.org/repo/illume-keyboards.git=
+;protocol=3Dhttp;branch=3Dmaster \
+>> > - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-Makefile-update-KEYBO=
+ARDS_DIR-for-new-illume2.patch"
+>> > + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-Makefile-update-KEYBO=
+ARDS_DIR-for-new-illume2.patch \
+>> > + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://LICENSE"
+>> > =C2=A0S =3D "${WORKDIR}/git"
+>> >
+>> > =C2=A0SRCREV =3D "4064489f359a1addf572089b582f317dff5f50e1"
+>> > =C2=A0PV =3D "0.0+gitr${SRCPV}"
+>> > =C2=A0PE =3D "1"
+>> > =C2=A0PR =3D "r4"
+>> > -LICENSE =3D "unknown"
+>> > -
+>> > +LICENSE =3D "MIT BSD"
+>> > +LIC_FILES_CHKSUM =3D "file://${WORKDIR}/LICENSE;md5=3Df523ab5986cc79b=
+52a90d2ac3d5454a2"
+>> >
+>> > =C2=A0PACKAGES =3D "\
+>> > =C2=A0illume-keyboard-alpha \
+>> > --
+>> > 1.7.4.1
+>> >
+>> >
+>> > _______________________________________________
+>> > Openembedded-devel mailing list
+>> > Openembedded-devel@lists.openembedded.org
+>> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>> >
+>
 > --
 > Martin 'JaMa' Jansa =C2=A0 =C2=A0 jabber: Martin.Jansa@gmail.com
 >
