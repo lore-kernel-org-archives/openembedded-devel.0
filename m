@@ -1,37 +1,23 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q5DzV-0006xx-AT
+	(envelope-from <philb@gnu.org>) id 1Q5E3m-0007SU-Vk
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 11:16:33 +0200
-Received: by mail-bw0-f47.google.com with SMTP id 5so1664438bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2011 02:14:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=gxiFHqQ4Kwn0LveKjFm0IO7bYf5rVoIhIpqmRXTE9M0=;
-	b=dbrwmxl2Lyf4d/8UVyaMF+h/I9QX0heeSpdRt3CEOB5HrIWt2Cc+93O78QG+aSwnSV
-	aw0VQT3wOieRhK2fHzK01IzAmrTwaAiMmJKkf0P9/KgUi9X0yufXrMPe6ZKCEqAho45+
-	0mBmnZYgujkseAtngKHCieBU60xObcmMzT+nU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=V0K+jlbkd0YMx6/kBJ6DU1xqfD17S6MHCN2Loweg3WDGxT8U/twsxuKcizOdlAFelY
-	HKrpfYuhzsYBkh6LFV/3OGZ9fzrZ5elIbVyNX1QESQlCGUI906stRWTpJV9OV9yULy9l
-	hg7FjJYJVmQ9xNv3KulImbl2DzeGacAt1zLi8=
-Received: by 10.204.75.26 with SMTP id w26mr401761bkj.154.1301562875460;
-	Thu, 31 Mar 2011 02:14:35 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id q24sm590065bks.9.2011.03.31.02.14.34
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 31 Mar 2011 02:14:34 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 31 Mar 2011 11:20:59 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q5E1t-0001oQ-6t
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 31 Mar 2011 11:19:01 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 Mar 2011 11:14:28 +0200
-Message-Id: <dff2afec47fd746f45b9f630bf14755f40a8fdc5.1301560589.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <cover.1301560589.git.Martin.Jansa@gmail.com>
-References: <cover.1301560589.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 1/8] illume-keyboards-shr: add LICENSE
+In-Reply-To: <imvq1h$8hl$2@dough.gmane.org>
+References: <AANLkTi=r1KzyDtTfZ74f0ZhJVpo=cTZV5n_azfAKQEHt@mail.gmail.com>
+	<imvq1h$8hl$2@dough.gmane.org>
+Date: Thu, 31 Mar 2011 10:19:09 +0100
+Message-ID: <1301563149.14449.52.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: [PATCH 1/6] Add support for the Technologic Systems TS7500 ARM SBCs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,72 +31,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 09:16:33 -0000
+X-List-Received-Date: Thu, 31 Mar 2011 09:20:59 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../recipes-efl/e17/illume-keyboards-shr/LICENSE   |   25 ++++++++++++++++++++
- .../recipes-efl/e17/illume-keyboards-shr_git.bb    |    7 +++--
- 2 files changed, 29 insertions(+), 3 deletions(-)
- create mode 100644 meta-efl/recipes-efl/e17/illume-keyboards-shr/LICENSE
+On Wed, 2011-03-30 at 19:42 +0200, Koen Kooi wrote:
+> On 30-03-11 18:40, R.T. McGee wrote:
+> > Its true, the FA526 is not a ARM920T but it's a bit different from other
+> > standard ARMv4 types.
+> > 
+> > Comments about the FA526 and ARM920T similarity are based on work like this:
+> > http://openocd.sourcearchive.com/lines/0.3.1/fa526_8c-source.html
+> > This are not from the perspective of the instruction set, but it more or
+> > less talking about hardware features.
+> 
+> So it's more like a ARM920?
 
-diff --git a/meta-efl/recipes-efl/e17/illume-keyboards-shr/LICENSE b/meta-efl/recipes-efl/e17/illume-keyboards-shr/LICENSE
-new file mode 100644
-index 0000000..61bb2f6
---- /dev/null
-+++ b/meta-efl/recipes-efl/e17/illume-keyboards-shr/LICENSE
-@@ -0,0 +1,25 @@
-+Copyright notice for Enlightenment:
-+
-+Copyright (C) 2000-2010 Carsten Haitzler and various contributors (see AUTHORS)
-+
-+All rights reserved.
-+
-+Redistribution and use in source and binary forms, with or without
-+modification, are permitted provided that the following conditions are met:
-+
-+   1. Redistributions of source code must retain the above copyright
-+      notice, this list of conditions and the following disclaimer.
-+   2. Redistributions in binary form must reproduce the above copyright 
-+      notice, this list of conditions and the following disclaimer in the
-+      documentation and/or other materials provided with the distribution.
-+
-+THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
-+INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-+FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-+COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-+OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-+EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-diff --git a/meta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb b/meta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb
-index fe34513..e3b182d 100644
---- a/meta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb
-+++ b/meta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb
-@@ -1,15 +1,16 @@
- SECTION = "x11/data"
- 
- SRC_URI = "git://git.shr-project.org/repo/illume-keyboards.git;protocol=http;branch=master \
--           file://0001-Makefile-update-KEYBOARDS_DIR-for-new-illume2.patch"
-+           file://0001-Makefile-update-KEYBOARDS_DIR-for-new-illume2.patch \
-+	   file://LICENSE"
- S = "${WORKDIR}/git"
- 
- SRCREV = "4064489f359a1addf572089b582f317dff5f50e1"
- PV = "0.0+gitr${SRCPV}"
- PE = "1"
- PR = "r4"
--LICENSE = "unknown"
--
-+LICENSE = "MIT BSD"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=f523ab5986cc79b52a90d2ac3d5454a2"
- 
- PACKAGES = "\
- illume-keyboard-alpha \
--- 
-1.7.4.1
+It's sort of like an ARM920 might perhaps be if such a thing existed,
+yeah, but even then it probably wouldn't be an exact equivalent.  The
+original description of "resembles ARM920T without Thumb" sounds like
+it's about as good as it's going to get in terms of drawing an analogy
+between the ARM cores and the Faraday ones.
+
+p.
+
 
 
 
