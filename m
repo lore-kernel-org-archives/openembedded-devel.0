@@ -1,42 +1,35 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q5OpD-0000GY-SK
+	(envelope-from <raj.khem@gmail.com>) id 1Q5OpW-0000ko-6a
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 22:50:45 +0200
-Received: by bwz5 with SMTP id 5so2179405bwz.6
+	Thu, 31 Mar 2011 22:51:02 +0200
+Received: by fxm19 with SMTP id 19so2469494fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2011 13:48:02 -0700 (PDT)
+	Thu, 31 Mar 2011 13:48:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=wDTPyIfTEvY7dSDIh17TomEWAErFNvvQ7NFBo9L9EGI=;
-	b=FNmGGz/1fwQCV/tQY7QkZG2bH2ipbFA+fWTvayKUgjJGxbZDycfOLcw3c/C4dNflE1
-	CnSHfAKr6jh+CGonjI0I0zX0XSiFM8iBO1W7URRdooif0Dd994Ozf+A5kIT3ILe45r+u
-	CbrUNapkwoKcA2LEu5/hVb5D/DeNbUCUxnJOg=
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type:content-transfer-encoding;
+	bh=A9AYsH6EznjYqqvCs9oiqgoINgIrlY4WzSn6ig2JLsM=;
+	b=tnst1xhKPJZAOWRE8pPx/FHwkdyJw+l65Vr9s7o3uk/2WTvPnBbGx7DTC628dyaV5i
+	Gbaw9UvWQja/As+RAhlzMPr/0CINKLWChA8AhLQhWs4i/8Y1DIsK4gFAjuLrTi0I6xTz
+	Pbvz8Z5y1V2xSRBckcW8QYTcw+OQvfjxibI5I=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=BH0u0WngYvAW5e0F2C7YorLcTYeQWLFE39omY7fdFYViVT0pg0uJMvujHoMIhzeI5g
-	81r5/iVum1wG0BN9iXbMc3uIwAv7p2LnjmJbvwhObtUoajEPAhWr5PRHz4NCuqDaVUt1
-	VWjqcbMg7n9LP28Mb895DE2B38tvJF4R0LKQI=
-Received: by 10.204.46.34 with SMTP id h34mr2932557bkf.19.1301604481914;
-	Thu, 31 Mar 2011 13:48:01 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 16sm979895bkm.18.2011.03.31.13.48.00
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 31 Mar 2011 13:48:00 -0700 (PDT)
-Date: Thu, 31 Mar 2011 22:47:59 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20110331204758.GG3745@jama.jama.net>
-References: <cover.1301560589.git.Martin.Jansa@gmail.com>
-	<8d76bc22e6b97944d4af16b2d9a6e318200d857b.1301560589.git.Martin.Jansa@gmail.com>
-	<AANLkTimZoMAuYXF4BruMZyZVU8T_M-AcaJ8S2BWZVmtW@mail.gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=Wi/+8MyUX5UUvPJ7N75MTU+pidhXsp2EYYLfqIjbBsVWeBc3Fhl/qf6eZWUnvhqtLY
+	PKdFIXZ7sNwlYMfCgnA2TbiwsyhY+NNG15P1nl51qbeEJWi3k/1xqIrE8v3A/FTS2Jn8
+	SrzDqxBpYH+DKRBitUwUVEhLUVis4Q5JdGZUQ=
+Received: by 10.223.14.137 with SMTP id g9mr1958974faa.8.1301604535075; Thu,
+	31 Mar 2011 13:48:55 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <AANLkTimZoMAuYXF4BruMZyZVU8T_M-AcaJ8S2BWZVmtW@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 7/8] task-x11-illume: add LIC_FILES_CHKSUM
+Received: by 10.223.23.136 with HTTP; Thu, 31 Mar 2011 13:48:25 -0700 (PDT)
+In-Reply-To: <1301494030-10554-1-git-send-email-v2g.udel@gmail.com>
+References: <1301494030-10554-1-git-send-email-v2g.udel@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 31 Mar 2011 13:48:25 -0700
+Message-ID: <AANLkTinpsase2JeCR14LJ0VtMQ_f4eEtDB5E8ZNeLzPz@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/6] Add support for the Technologic Systems TS7500 ARM SBCs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,82 +43,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 20:51:01 -0000
-X-Groupsio-MsgNum: 30805
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="w/VI3ydZO+RcZ3Ux"
-Content-Disposition: inline
-
---w/VI3ydZO+RcZ3Ux
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Thu, 31 Mar 2011 20:51:07 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 31, 2011 at 01:39:03PM -0700, Khem Raj wrote:
-> On Thu, Mar 31, 2011 at 3:17 AM, Martin Jansa <martin.jansa@gmail.com> wr=
-ote:
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> > =A0meta-efl/recipes-efl/tasks/task-x11-illume.bb | =A0 =A01 +
-> > =A01 files changed, 1 insertions(+), 0 deletions(-)
-> >
-> > diff --git a/meta-efl/recipes-efl/tasks/task-x11-illume.bb b/meta-efl/r=
-ecipes-efl/tasks/task-x11-illume.bb
-> > index 8b14adb..e197cc7 100644
-> > --- a/meta-efl/recipes-efl/tasks/task-x11-illume.bb
-> > +++ b/meta-efl/recipes-efl/tasks/task-x11-illume.bb
-> > @@ -1,6 +1,7 @@
-> > =A0DESCRIPTION =3D "The Illume Windowing Environment -- install this ta=
-sk to get the Enlightenment Window Manager + the Illume environment."
-> > =A0SECTION =3D "x11/wm"
-> > =A0LICENSE =3D "MIT"
-> > +LIC_FILES_CHKSUM =3D "file://${TOPDIR}/meta-openembedded/meta-efl/COPY=
-ING.MIT;md5=3D3da9cfbcb788c80a0384361b4de20420"
->=20
-> why not copy the license file to workdir first
+On Wed, Mar 30, 2011 at 7:07 AM, UDel V2G Team <v2g.udel@gmail.com> wrote:
+> * Includes conf/machine/ts75xx.conf and conf/machine/include/tune-fa526.i=
+nc
+> =C2=A0files needed for building OE packages w/ EABI and *NO* thumb suppor=
+t
+>
+> Signed-off-by: UDel V2G Team <v2g.udel@gmail.com>
+> ---
+> =C2=A0conf/machine/include/tune-fa526.inc | =C2=A0 22 +++++++++++++++++++=
++++
+> =C2=A0conf/machine/ts75xx.conf =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=
+ =C2=A0 22 ++++++++++++++++++++++
+> =C2=A02 files changed, 44 insertions(+), 0 deletions(-)
+> =C2=A0create mode 100755 conf/machine/include/tune-fa526.inc
+> =C2=A0create mode 100755 conf/machine/ts75xx.conf
+>
+> diff --git a/conf/machine/include/tune-fa526.inc b/conf/machine/include/t=
+une-fa526.inc
+> new file mode 100755
+> index 0000000..a5c5008
+> --- /dev/null
+> +++ b/conf/machine/include/tune-fa526.inc
+> @@ -0,0 +1,22 @@
+> +# This tune file is for the Faraday FA526 core is used in
+> +# ARM processors like the Semi STR8132/ Cavium CNS2132, which is
+> +# in the Technologic Systems TS-7500 board in addition to some
+> +# NAS boxes out there.
+> +#
+> +# This core basically resembles a ARM920T but has NO thumb interworking =
+support
+> +# which makes it not fully EABI compliant
+> +#
+> +# Hence, we need to diable all thumb instructions here
+> +# Also be sure to disable all thumb flags/features/includes in the distr=
+os
+> +
+> +FEED_ARCH =3D "armv4"
+> +BASE_PACKAGE_ARCH =3D "armv4"
+> +
+> +# Ideally we want the following CFLAGS for our architecture.
+> +# Angstorm will automtically add the thumb flags, so don't include them =
+here
+> +# TARGET_CC_ARCH +=3D "-march=3Darmv4 -mno-thumb-interwork -mno-thumb -m=
+float-abi=3Dsoft"
 
-you mean introduce SRC_URI for task-* recipes?
+-mfloat-abi=3Dsoft is probably not needed since thats the toolchain default=
+.
 
-I don't really like hardcoding meta-openembedded path here, so maybe we can=
- introduce=20
-METAOEBASE for this, like oe-core does with POKYBASE in LIC_FILES_CHKSUMs
+> +TARGET_CC_ARCH +=3D "-march=3Darmv4 -mfloat-abi=3Dsoft"
+> +
+> +PACKAGE_EXTRA_ARCHS +=3D "armv4"
+> +LDFLAGS +=3D "-Xlinker --fix-v4bx -Xassembler --fix-v4bx"
 
-bitbake@jama ~/shr-core/openembedded-core/meta/recipes-core/tasks $ git gre=
-p LIC_FILES_CHKSUM
-task-base.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE;md5=3D3f40d79=
-94397109285ec7b81fdeb3b58 \
-task-cross-canadian.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE;md5=
-=3D3f40d7994397109285ec7b81fdeb3b58 \
-task-poky-boot.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE;md5=3D3f=
-40d7994397109285ec7b81fdeb3b58 \
-task-poky-nfs.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE;md5=3D3f4=
-0d7994397109285ec7b81fdeb3b58 \
-task-poky-sdk.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE;md5=3D3f4=
-0d7994397109285ec7b81fdeb3b58 \
-task-poky-ssh-dropbear.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE;=
-md5=3D3f40d7994397109285ec7b81fdeb3b58 \
-task-poky-ssh-openssh.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE;m=
-d5=3D3f40d7994397109285ec7b81fdeb3b58 \
-task-poky-standalone-sdk-target.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}=
-/LICENSE;md5=3D3f40d7994397109285ec7b81fdeb3b58 \
-task-poky-tools.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE;md5=3D3=
-f40d7994397109285ec7b81fdeb3b58 \
-task-sdk-host.bb:LIC_FILES_CHKSUM =3D "file://${POKYBASE}/LICENSE;md5=3D3f4=
-0d7994397109285ec7b81fdeb3b58 \
+those should also be default when toolchain is build for armv4
+where do u need to specify that in LDFLAGS
 
-Regards,
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> +THUMB_INTERWORK =3D "no"
+> diff --git a/conf/machine/ts75xx.conf b/conf/machine/ts75xx.conf
+> new file mode 100755
+> index 0000000..d76548d
+> --- /dev/null
+> +++ b/conf/machine/ts75xx.conf
+> @@ -0,0 +1,22 @@
+> +#@TYPE: Machine
+> +#@Name: Technologic Systems TS-75xx SBC
+> +#@DESCRIPTION: Machine configuration for Technologic Systems TS-75xx SBC
+> +
+> +TARGET_ARCH =3D "arm"
+> +
+> +MACHINE_FEATURES =3D "kernel26 ext2 usbhost"
+> +
+> +# This requires cavium fa526 patch set to function
+> +# See the linux-ts75xx directory for the patches
+> +PREFERRED_PROVIDER_virtual/kernel =3D "linux-ts75xx"
+> +PREFERRED_VERSION_linux =3D "2.6.35"
+> +
+> +SERIAL_CONSOLE =3D "115200 ttyS0"
+> +USE_VT =3D "0"
+> +
+> +# Uses the traditional TS-7500 bootloader process
+> +# See the ts75xx-initrd-image.bb recipe for building
+> +# an initrd script that only uses EABI userspace utilities
+> +CMDLINE =3D "root=3D/dev/ram0 init=3D/linuxrc console=3D/dev/ttyS0,11520=
+0 lpj=3D958464"
+> +
+> +require conf/machine/include/tune-fa526.inc
+> --
+> 1.7.3.4
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
---w/VI3ydZO+RcZ3Ux
-Content-Type: application/pgp-signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk2U6H4ACgkQN1Ujt2V2gByRzACZAR9TjTH9QdRUtitYRV9Xj8YW
-L9YAnjoSqr6+8X2oiYnOIVVXQUquCqEd
-=MFJJ
------END PGP SIGNATURE-----
-
---w/VI3ydZO+RcZ3Ux--
