@@ -1,33 +1,33 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Q5Odc-0003gv-Kr
+	(envelope-from <Tom_Rini@mentor.com>) id 1Q5OeB-00041b-Cz
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 22:38:42 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	Thu, 31 Mar 2011 22:39:16 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
 	by relay1.mentorg.com with esmtp 
-	id 1Q5Obh-00076d-Aw from Tom_Rini@mentor.com ;
-	Thu, 31 Mar 2011 13:36:41 -0700
+	id 1Q5OcG-0007A7-Hu from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 31 Mar 2011 13:37:16 -0700
 Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 31 Mar 2011 13:36:41 -0700
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Thu, 31 Mar 2011 13:35:37 -0700
 Received: from [172.30.80.77] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
 	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
-	Thu, 31 Mar 2011 13:36:40 -0700
-Message-ID: <4D94E5CE.3010801@mentor.com>
-Date: Thu, 31 Mar 2011 13:36:30 -0700
+	Thu, 31 Mar 2011 13:37:15 -0700
+Message-ID: <4D94E5F2.7080401@mentor.com>
+Date: Thu, 31 Mar 2011 13:37:06 -0700
 From: Tom Rini <tom_rini@mentor.com>
 Organization: Mentor Graphics Corporation
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-To: Denys Dmytriyenko <denis@denix.org>
-References: <20110331180721.GD23178@denix.org>
-In-Reply-To: <20110331180721.GD23178@denix.org>
+To: <openembedded-devel@lists.openembedded.org>
+References: <in2jl3$i21$1@dough.gmane.org>
+In-Reply-To: <in2jl3$i21$1@dough.gmane.org>
 X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 31 Mar 2011 20:36:41.0175 (UTC)
-	FILETIME=[57514670:01CBEFE3]
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance] Pull request for new TI machines, angstrom and qt4 fixes
+X-OriginalArrivalTime: 31 Mar 2011 20:35:37.0646 (UTC)
+	FILETIME=[317384E0:01CBEFE3]
+Subject: Re: [2011.03-maintenance] Pull request #10 (replaces #9)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,44 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 20:38:42 -0000
+X-List-Received-Date: Thu, 31 Mar 2011 20:39:17 -0000
 Content-Type: text/plain; charset="ISO-8859-1"
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 03/31/2011 11:07 AM, Denys Dmytriyenko wrote:
+On 03/31/2011 12:11 PM, Koen Kooi wrote:
 > Tom,
 > 
-> Please pull these 8 commits for the external Angstrom toolchain fix,
-> qt4 security advisory fix, as well as for addition of new TI machines.
-> All are cherry picked from oe.dev
+> Please pull the 3 commits from here:
 > 
-> The machine commits were reordered to add kernel and u-boot recipes before the 
-> actual machine configs.
+> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+> Branch: 2011.03-maintenance
 > 
-> 
-> Pull URL: git://arago-project.org/git/people/denix/openembedded.git
->   Branch: 2011.03-maintenance
->   Browse: http://arago-project.org/git/people/?p=denix/openembedded.git;a=shortlog;h=refs/heads/2011.03-maintenance
-> 
-> Thanks,
->     Denys Dmytriyenko <denys@ti.com>
-> ---
-> 
-> 
-> Chase Maupin (6):
->   linux-omap3: add PSP recipe for am387x-evm
->   u-boot: Add PSP version for am387x-evm
->   sort: Add ti814x machine types
->   ti814x: Add new machine definitions
->   am-benchmarks: Add support for am387x-evm machine
->   matrix-gui: Add support for am387x-evm machine
-> 
-> Denys Dmytriyenko (2):
->   external-toolchain-angstrom: don't stage .la files
->   qt4: security advisory - blacklist fraudulent comodo certificates
+> Philip Balister (3):
+>       autoconf: Fix paths for scripts installed on the target.
+>       automake: Fix paths in scripts installed on target.
+>       qmake2: Define env var for strip. Convert to use INC_PR.
 
 Applied, thanks.
 
@@ -89,13 +70,13 @@ Mentor Graphics Corporation
 Version: GnuPG v1.4.10 (GNU/Linux)
 Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
 
-iQEcBAEBAgAGBQJNlOXOAAoJEI4NMjfc3nJxtzoIAKvyaue1FpcI8KiRCDADIsqH
-hp3bS7R2XSymVqj13NGXjRzZsjAZcwK1gwFYiHsoLDvTg8Zbq3MNB6YuTBqYrN5h
-ZbpzuG8RGuFvTONGlTCaQRluh+82nk6w3M2oqejGua9NcENu1fnfgC+jTy1K38v6
-yzF4zOYDCP62DbJFW/VUf3X7TY5qrRdAl8DazkSJ4pXRDXTqYYbaWLdbmAvYMSPK
-vnpyesWKv8etkWHgOIIGqwBQGnA9Db5Qnlya0QU/VqpGqzPLprnJkirrHShGq2GL
-8YXnMffsAdqiaB0KL0da3wlL5UEc3H2qGrBqz/171btgYjx3ZpiCkMtGbAbTSx0=
-=sD4J
+iQEcBAEBAgAGBQJNlOXxAAoJEI4NMjfc3nJx3HAH/izVxo3dz+2R4LERWg/R7Kjb
+EESJHLvkYHOBDyodCApOigPT+yNf7rOFKS51LBXD8Jl5D+SvAUbtWXoSbDaY5Pff
+GW92W1KnxLPDVyGh55HxQ6ei2cuwlqjo2Pr6c/0tMcbkMQYVOX3SoZqlHgxyPhOd
+Hi+aQnYbgbXCsuWphkEmAmhV8ggxruW0UTaTQd6punoaqOvAFI9dQ2BUzrN60eku
+ki+jlMyCH7NmigkJwCOHR8uPnx5S0jYvQY9EnY+c43/b6783csBnQ44OpxInA7nn
+LkzEqEtgqfR5c8u6ZqzSlXLktYW96b3xov1VvqhaDNyHjcvj8HxRX+sK2SjhFq4=
+=F7RD
 -----END PGP SIGNATURE-----
 
 
