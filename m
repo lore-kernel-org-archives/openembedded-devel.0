@@ -1,21 +1,21 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Q5L1R-0002ye-K4
+	(envelope-from <Tom_Rini@mentor.com>) id 1Q5L3c-00034p-SC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 18:47:01 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	Thu, 31 Mar 2011 18:49:17 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
 	by relay1.mentorg.com with esmtp 
-	id 1Q5KzW-000023-UG from Tom_Rini@mentor.com 
+	id 1Q5L1i-0000EX-6E from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Mar 2011 09:45:02 -0700
+	Thu, 31 Mar 2011 09:47:18 -0700
 Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 31 Mar 2011 09:45:02 -0700
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Thu, 31 Mar 2011 09:45:40 -0700
 Received: from [172.30.80.77] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
 	with Microsoft SMTP Server id 14.1.270.1;
-	Thu, 31 Mar 2011 09:45:01 -0700
-Message-ID: <4D94AF84.8020000@mentor.com>
-Date: Thu, 31 Mar 2011 09:44:52 -0700
+	Thu, 31 Mar 2011 09:47:16 -0700
+Message-ID: <4D94B00B.6040006@mentor.com>
+Date: Thu, 31 Mar 2011 09:47:07 -0700
 From: Tom Rini <tom_rini@mentor.com>
 Organization: Mentor Graphics Corporation
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
@@ -23,10 +23,11 @@ User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 MIME-Version: 1.0
 To: <openembedded-devel@lists.openembedded.org>
 References: <20110331074506.GB23178@denix.org> <in1gf0$aun$1@dough.gmane.org>
-In-Reply-To: <in1gf0$aun$1@dough.gmane.org>
+	<AANLkTikn4r-ScRstfT_r-Adw36=682MEb_XHMKn+qs3_@mail.gmail.com>
+In-Reply-To: <AANLkTikn4r-ScRstfT_r-Adw36=682MEb_XHMKn+qs3_@mail.gmail.com>
 X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 31 Mar 2011 16:45:02.0764 (UTC)
-	FILETIME=[FB380EC0:01CBEFC2]
+X-OriginalArrivalTime: 31 Mar 2011 16:45:40.0146 (UTC)
+	FILETIME=[11801920:01CBEFC3]
 Subject: Re: [2011.03-maintenance] Pull request for new TI machines, angstrom and qt4 fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,26 +42,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 16:47:01 -0000
+X-List-Received-Date: Thu, 31 Mar 2011 16:49:17 -0000
 Content-Type: text/plain; charset="ISO-8859-1"
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 03/31/2011 02:10 AM, Koen Kooi wrote:
-> On 31-03-11 09:45, Denys Dmytriyenko wrote:
->> Tom,
-> 
->> Please pull these 8 commits for the external Angstrom toolchain fix,
->> qt4 security advisory fix, as well as for addition of new TI machines.
->> All are cherry picked from oe.dev
-> 
-> Merging it like this creates a few broken commits because the machines
-> were added first. Is that really what we want?
+On 03/31/2011 03:51 AM, Frans Meulenbroeks wrote:
 
-We do not.  Denys, please re-order the commits so that things are
-building in each commit.  Thanks!
+> Adding new machines on a maintenance branch seems somewhat odd as new
+> somewhat conflicts with maintenance.
+> is this what we want? And if so, what about adding new recipes?
+
+To be clear, I do not have a problem with backporting support for new
+hardware nor support for new recipes to 2011.03-maintenance so long as
+(as stated on the wiki page) they are first and foremost backports and
+secondly something the the users of the branch desire.
 
 - -- 
 Tom Rini
@@ -69,13 +67,13 @@ Mentor Graphics Corporation
 Version: GnuPG v1.4.10 (GNU/Linux)
 Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
 
-iQEcBAEBAgAGBQJNlK+EAAoJEI4NMjfc3nJxFiAIAKTxXOFRRJ1EmYy3meXOX3yJ
-WVaXrFmCYcFSU+E9YcFuW9NPd1k4rpSZfI7n4Ezdsqo+GiwMmNwFbAm63DL0al99
-t/aEsSHxXsaoj++M529hTmnyS66WodqlYgIxbi8nzNx/ETYDyenQN1I278Ums3b3
-RtTIsYJVHCthQTK0991lmjyqC9cFGKSyW2j4J3bLrozdP2tOIqt5j/rXOAnsTNK0
-O/OonrOewcqolzSpEFRmwgvKTiB77q7VDYTJRWSZ/tZ2sx8Z1ZJ59Ms2KMB+CvMJ
-MBT0zQgtJrSwizrCNUemeLYyDBdRb771e2A9trOEcFw54TeenMzeYm8Z60+iQQE=
-=j3tp
+iQEcBAEBAgAGBQJNlLALAAoJEI4NMjfc3nJxrIQH/3yOQmPPBXVjZjYo4wHtZF1Q
+xZ8MZAK6X5NoDkBMZGwMZP0uGAHYeq4FW+C5oMhGQ/Woq0mXHL7MVUUThXL5gGUi
+0wH82tw/Pp8hEJjtWey4f9I2sKXDKI0Twa0At5+Ux+VhYsHtIbO3G6Ats029x1dJ
+XcXSGvAjZbEcB/GZE8j5UXY9OZZmJXwRQMrz2DGLOMzT4BR5V2aLzyCSPGKD/N1u
+D1DgiOJ/xgzOsNmK0yvfWtszyc84GbFKmwbZ3nRvz5FB/fyuW00kB6R6f3a9LQmf
+eWMXXy4zI0bLcU+S/TL7kR9ZSnEHqbwZnnYM+ubw0PAqFuDY2XP9TyCjS+U78WQ=
+=3EPj
 -----END PGP SIGNATURE-----
 
 
