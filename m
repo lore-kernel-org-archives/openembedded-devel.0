@@ -1,32 +1,24 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Q5g25-0002PG-1e
+	(envelope-from <philb@gnu.org>) id 1Q5jQC-0006KD-Gn
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Apr 2011 17:13:05 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1Q5g09-0005Rj-AC from Tom_Rini@mentor.com 
+	Fri, 01 Apr 2011 20:50:12 +0200
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.3])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q5jOH-0004Ks-Cy
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Apr 2011 08:11:05 -0700
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Fri, 1 Apr 2011 08:11:04 -0700
-Received: from [172.30.80.69] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
-	with Microsoft SMTP Server id 14.1.270.1; Fri, 1 Apr 2011 08:11:03 -0700
-Message-ID: <4D95EB06.2060906@mentor.com>
-Date: Fri, 1 Apr 2011 08:11:02 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <in4ph2$ru6$1@dough.gmane.org>
-In-Reply-To: <in4ph2$ru6$1@dough.gmane.org>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 01 Apr 2011 15:11:04.0554 (UTC)
-	FILETIME=[04FF3CA0:01CBF07F]
-Subject: Re: [2011.03-maintenance] Pull request #11
+	Fri, 01 Apr 2011 20:48:13 +0200
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4D95CF3D.9090801@balister.org>
+References: <1301642773.3951.2.camel@mattotaupa>
+	<4D95CF3D.9090801@balister.org>
+Date: Fri, 01 Apr 2011 19:48:07 +0100
+Message-ID: <1301683687.3720.1.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: patch queue: latest patches not listed in Patchwork
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,46 +32,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2011 15:13:05 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
+X-List-Received-Date: Fri, 01 Apr 2011 18:50:12 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 04/01/2011 08:04 AM, Koen Kooi wrote:
-> Tom,
+On Fri, 2011-04-01 at 09:12 -0400, Philip Balister wrote:
+> On 04/01/2011 03:26 AM, Paul Menzel wrote:
+> > Dear OE folks,
+> >
+> >
+> > I do not see the latest patches in our patch queue [1]. Is that a known
+> > problem?
 > 
-> Please pull the 4 commits from here:
+> The process that processes the patchwork emails started taking 100% cpu 
+> yesterday. The admin team had to turn it off so other functions on the 
+> machine would run.
 > 
-> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-> Branch: 2011.03-maintenance
-> 
-> Tom Rini (4):
->       tcl: Rework mips-tclstrtod.patch
->       tcl: Switch to patchdir rather than applying in do_configure
->       tk 8.4.19: Rework disable-xim.patch
->       tk 8.4.19: Switch to patchdir rather than applying in do_configure
-> 
-> You can view the branch online at
-> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance
+> We need someone who understands enough about patchwork and/or the script 
+> to figure out why it is stuck and how to fix it.
 
-Applied, thanks.
+I have a bit of spare time this evening.  If you can point me to which
+machine patchwork runs on (melo?), which script was causing the problem
+and where it has been disabled, I will take a look at it.
 
-- -- 
-Tom Rini
-Mentor Graphics Corporation
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+p.
 
-iQEcBAEBAgAGBQJNlesCAAoJEI4NMjfc3nJxEg8H/2TqcABrpuaa1bB7amrAnZDl
-zLHkNX7s1m6TzSS1sMtIF8mGdgkDHa3YE0gwt0NmHjvQy32DclgUtylMQCUDVsY3
-COoiFg/HKsrk/Tmabh04XnZeSDyp5xDUJjzpp8kbq5syer1BgY8cQ56k6EwHBPPt
-vOw7HojtVNbKYZlEkoIW75d8Chorh7Ipx6I/f+MoATKDedFDtCa68EmSgMChVDxu
-Fa3iLvwMoGnFJ0BBO14gSQX5PY1oY7HHbPGwD6uUd2E5fEm/l6RrVmRUMZKqBGr3
-7/3FM0D/OeddTe1tWolfCqQBjV7nfE08bxX9BEuVzHHqLPkAs8MVEJm60c4z+v8=
-=hkT3
------END PGP SIGNATURE-----
+
 
 
