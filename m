@@ -1,25 +1,21 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q5bBc-0008Ix-1l for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Apr 2011 12:02:36 +0200
+	id 1Q5c7S-0004aI-Nx for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Apr 2011 13:02:22 +0200
 Received: from f053035217.adsl.alicedsl.de ([78.53.35.217]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q5b9g-0007uP-W6 for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Apr 2011 10:00:37 +0000
+	id 1Q5c5X-0002i2-QZ for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Apr 2011 11:00:23 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTikL73GsmeB8pqSGMPjD972MhjsCOE+reTLKjxk+@mail.gmail.com>
-References: <1301600399-32041-1-git-send-email-philippedeswert@gmail.com>
-	<1301602980.3988.18.camel@mattotaupa>
-	<AANLkTikL73GsmeB8pqSGMPjD972MhjsCOE+reTLKjxk+@mail.gmail.com>
-Date: Fri, 01 Apr 2011 12:00:35 +0200
-Message-ID: <1301652035.3951.49.camel@mattotaupa>
+Date: Fri, 01 Apr 2011 13:00:22 +0200
+Message-ID: <1301655622.3951.64.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH [1/2]] eio: New recipe for eio
+Subject: minimal-uclibc: Set `PREFERRED_PROVIDER_ffmpeg` to `ffmpeg` or `libav`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,77 +29,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2011 10:02:36 -0000
-X-Groupsio-MsgNum: 30836
+X-List-Received-Date: Fri, 01 Apr 2011 11:02:22 -0000
+X-Groupsio-MsgNum: 30837
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-ncPjFe6OHoI82aAywEnK"
+	boundary="=-b3tvzYavX6I8MwB+Zmqf"
 
---=-ncPjFe6OHoI82aAywEnK
+--=-b3tvzYavX6I8MwB+Zmqf
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dear Philippe,
+Dear OE folks,
 
 
-Am Freitag, den 01.04.2011, 10:25 +0300 schrieb Philippe De Swert:
+with the fork of the FFmpeg [1] there is now also Libav [2]. With commit
+692d43ee [3]
 
-> Thanks for the review.
+        commit 692d43eeb6596df52b5984ae1bd14739f9ec9e0f
+        Author: Koen Kooi <koen@openembedded.org>
+        Date:   Mon Mar 28 15:47:23 2011 +0200
+       =20
+            libav: add proper recipe for git version
+            omapfbplay: switch to libav
+           =20
+            Signed-off-by: Koen Kooi <koen@openembedded.org>
 
-No problem.
+`bitbake -k e-image` using minimal-uclibc fails with the following
+message, since `libav` also provides `ffmpeg`.
 
-> On 31 March 2011 23:23, Paul Menzel <paulepanter@users.sourceforge.net> w=
-rote:
-> > Am Donnerstag, den 31.03.2011, 22:39 +0300 schrieb Philippe De Swert:
-> >
-> > =C2=BBeio: add initial recipe (svn)=C2=AB  or something like that would=
- be a
-> > better commit summary in my opinion.
->=20
-> I'll keep that in mind
+        NOTE: multiple providers are available for ffmpeg (ffmpeg,
+        libav)
+        NOTE: consider defining a PREFERRED_PROVIDER entry to match
+        ffmpeg
 
-Additionally =C2=BB[PATCH [1/2]]=C2=AB seems to confuse `git am` to use
-
-	] eio: New recipe for eio
-
-as the commit summary. So only no nested brackets please.
-
-I found one other problem. The license is LGPL 2.1+ and not MIT or BSD
-[1].
-
-> >> +
-> >> +# Some upgrade path tweaking
-> >> +AUTO_LIBNAME_PKGS =3D ""
-> >
-> > What upgrade patch?
->=20
-> Yeah I should have double checked that... Just put it there as all the
-> other enlightenment .inc files had it.
-
-Maybe Martin can comment on that.
-
-> >> diff --git a/recipes/efl1/eio_svn.bb b/recipes/efl1/eio_svn.bb
-> >> new file mode 100644
-> >> index 0000000..6a12dcf
-> >> --- /dev/null
-> >> +++ b/recipes/efl1/eio_svn.bb
-> >> @@ -0,0 +1,13 @@
-> >> +require eio.inc
-> >> +
-> >> +SRCREV =3D "${EFL_SRCREV}"
-> >> +PV =3D "0.1.0+svnr${SRCPV}"
-> >> +PR =3D "${INC_PR}.0"
-> >> +DEFAULT_PREFERENCE =3D "-1"
-> >
-> > It is the only recipe, so `DP =3D "-1"` should not be useful.
->=20
-> Just wanted to be future proof for when the actual versioned recipes come=
-.
-
-I think it should be adapted if there is a recipe for a released
-version.
-
-Please resend the patch as [PATCH 1/2 v2] after Martin has commented.
+So a decision needs to be made what program minimal-uclibc prefers.
+(Strangely (plain) minimal does not fail for me.)
 
 
 Thanks,
@@ -111,18 +71,21 @@ Thanks,
 Paul
 
 
-[1] http://trac.enlightenment.org/e/browser/trunk/eio/COPYING?rev=3D57852
+[1] http://www.ffmpeg.org/
+[2] http://www.libav.org/
+[3] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D692d43e=
+eb6596df52b5984ae1bd14739f9ec9e0f
 
---=-ncPjFe6OHoI82aAywEnK
+--=-b3tvzYavX6I8MwB+Zmqf
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk2VokMACgkQPX1aK2wOHVhA+QCfTuHEkH71IQzqrGL58pB+mizb
-zkwAnRNa1RlAiqvpWVzoluCL6Yi0v85F
-=r60/
+iEYEABECAAYFAk2VsEYACgkQPX1aK2wOHVgm9QCfZ4A92Zy2mpmGCisQZ2n6CtBT
+ow0An3U6KNx+T/Iwxrd3iReo9PSAZb+P
+=cjMo
 -----END PGP SIGNATURE-----
 
---=-ncPjFe6OHoI82aAywEnK--
+--=-b3tvzYavX6I8MwB+Zmqf--
