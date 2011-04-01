@@ -1,36 +1,21 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philippedeswert@gmail.com>) id 1Q5YlT-0004AR-PD
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Apr 2011 09:27:27 +0200
-Received: by iye7 with SMTP id 7so3508397iye.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Apr 2011 00:25:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=gvR02FDmrL2mI2u4u/3rKpiY1RyJxsZt2o7IzZAfqBM=;
-	b=O5cakGJ6YtPZ335yWg4sYfr6sPeD7EhOi87Nvpr5pY2ffDW+epmY2YUO4m2w6ZxQcx
-	MvD/5nLLfkLE96dwENqJH3oVsGTfMhu1fMuGfqZpQyli1zJdBVDVdh0EEQ2j665DWdu8
-	uBlz5p3bpSwV6xnoyXpUN1MAGBJJXewJHZwqw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=C5y7cJuyoDLe3KFINwFgJsmVLNsqR5v/GbDSBQ5obIQZGteX4Fw9PTVsW4+3jE7waV
-	x+gUExcWHHGE0VbTcqIZp2Um0pVEkIQNzdB9pGpD0krV1roSfR3BBVHT1CreQbuhhcAs
-	hWfzHdadwgBHorhQ+zOG6HQ8kpJ0ERrG4vJ4M=
-MIME-Version: 1.0
-Received: by 10.43.58.12 with SMTP id wi12mr4327837icb.309.1301642722800; Fri,
-	01 Apr 2011 00:25:22 -0700 (PDT)
-Received: by 10.43.131.199 with HTTP; Fri, 1 Apr 2011 00:25:22 -0700 (PDT)
-In-Reply-To: <1301602980.3988.18.camel@mattotaupa>
-References: <1301600399-32041-1-git-send-email-philippedeswert@gmail.com>
-	<1301602980.3988.18.camel@mattotaupa>
-Date: Fri, 1 Apr 2011 10:25:22 +0300
-Message-ID: <AANLkTikL73GsmeB8pqSGMPjD972MhjsCOE+reTLKjxk+@mail.gmail.com>
-From: Philippe De Swert <philippedeswert@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q5YmE-0004Fa-ML for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Apr 2011 09:28:14 +0200
+Received: from f053035217.adsl.alicedsl.de ([78.53.35.217]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q5YkJ-0004K6-4g for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Apr 2011 07:26:15 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH [1/2]] eio: New recipe for eio
+Date: Fri, 01 Apr 2011 09:26:13 +0200
+Message-ID: <1301642773.3951.2.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: patch queue: latest patches not listed in Patchwork
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,52 +29,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2011 07:27:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 01 Apr 2011 07:28:14 -0000
+X-Groupsio-MsgNum: 30831
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-UIJKmqQNXhJ1t9RiJXdS"
+
+--=-UIJKmqQNXhJ1t9RiJXdS
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Paul,
-
-Thanks for the review.
-
-On 31 March 2011 23:23, Paul Menzel <paulepanter@users.sourceforge.net> wro=
-te:
-> Am Donnerstag, den 31.03.2011, 22:39 +0300 schrieb Philippe De Swert:
->
-> =BBeio: add initial recipe (svn)=AB =A0or something like that would be a
-> better commit summary in my opinion.
-
-I'll keep that in mind
-
->> +
->> +# Some upgrade path tweaking
->> +AUTO_LIBNAME_PKGS =3D ""
->
-> What upgrade patch?
-
-Yeah I should have double checked that... Just put it there as all the
-other enlightenment
-.inc files had it.
-
->> diff --git a/recipes/efl1/eio_svn.bb b/recipes/efl1/eio_svn.bb
->> new file mode 100644
->> index 0000000..6a12dcf
->> --- /dev/null
->> +++ b/recipes/efl1/eio_svn.bb
->> @@ -0,0 +1,13 @@
->> +require eio.inc
->> +
->> +SRCREV =3D "${EFL_SRCREV}"
->> +PV =3D "0.1.0+svnr${SRCPV}"
->> +PR =3D "${INC_PR}.0"
->> +DEFAULT_PREFERENCE =3D "-1"
->
-> It is the only recipe, so `DP =3D "-1"` should not be useful.
-
-Just wanted to be future proof for when the actual versioned recipes come.
-
-Cheers,
-
-Philippe
+Dear OE folks,
 
 
+I do not see the latest patches in our patch queue [1]. Is that a known
+problem?
+
+
+Thanks,
+
+Paul
+
+
+[1] http://patches.openembedded.org/project/oe/list/
+
+--=-UIJKmqQNXhJ1t9RiJXdS
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2Vfg8ACgkQPX1aK2wOHViA9wCfdogwxcq8l9B18HsLWwhOYlGI
+GPoAn3xt3qtECD5hrnkIxywNfucPz4ML
+=12qW
+-----END PGP SIGNATURE-----
+
+--=-UIJKmqQNXhJ1t9RiJXdS--
