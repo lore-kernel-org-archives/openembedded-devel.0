@@ -1,38 +1,31 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rickfoosusa@gmail.com>) id 1Q5Ran-0005Aa-Db
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Apr 2011 01:47:57 +0200
-Received: by gxk3 with SMTP id 3so1222703gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2011 16:45:56 -0700 (PDT)
+	(envelope-from <cdhmanning@gmail.com>) id 1Q5UH7-0007lr-A7
+	for Openembedded-devel@lists.openembedded.org;
+	Fri, 01 Apr 2011 04:39:49 +0200
+Received: by fxm19 with SMTP id 19so2646421fxm.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 31 Mar 2011 19:37:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=ps80vOQVilQcSDqKYe9YRtwjYh4GiYddUmUHjdH3fJs=;
-	b=vshqxVzKcNX7lHBD/SzS+3msoSJ+NVhg52avpHBOolHkTkupv+PBQbCZOUibY9HJtK
-	nVe7+S9IrC8E5BmJIRx/z47vdOpDTZ3dOl3v8JMG3oCu9Z41BrflBVEDmyd6Bo9KRwsn
-	RTa/l8azhRg+4s48Smzh9UyVp4xz38UOerAGc=
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=i56A1vZpDwGI8b2TWkW7caVX4WSgZ3c5QwPEkeGeVj8=;
+	b=ZoJMRC6hrlqhHgcy6TNWOnTA7A0GavIa69CmlxtUqiOpm1qIfCujQhUalC6ABUXPaF
+	g8jiFgS2PO+S9g+Ay7MrQjGmlvwWrP3vzzfbX0/vNAqL5VpEfws3BXvmLwk7je3uPPa0
+	Nsw3o2P/4dQlaBC8xvnGJFd6lauf2Cs77LSHw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=YEeJPi/4OAPKbI2plrgbTMex2TkoimTRS+ozNdvd3eNX733zFfTiY+exUDxv1XLo7t
-	eAbGnyWMPWbPqWg+WZKHj7/hId19ZrvS+74lk0V7+Npcfs+xf0HcQ+mmsoNse3k1beqv
-	YwPrFYYEvi//LFdhnG7uPnM86+lYOR3vBlDGw=
-Received: by 10.150.113.4 with SMTP id l4mr3263887ybc.279.1301615156151;
-	Thu, 31 Mar 2011 16:45:56 -0700 (PDT)
-Received: from localhost.localdomain (adsl-68-93-135-199.dsl.austtx.swbell.net
-	[68.93.135.199])
-	by mx.google.com with ESMTPS id b4sm71835ybn.23.2011.03.31.16.45.54
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 31 Mar 2011 16:45:55 -0700 (PDT)
-From: Rick Foos <rickfoosusa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 Mar 2011 18:44:47 -0500
-Message-Id: <1301615087-19374-2-git-send-email-rickfoosusa@gmail.com>
-X-Mailer: git-send-email 1.7.4
-In-Reply-To: <1301615087-19374-1-git-send-email-rickfoosusa@gmail.com>
-References: <1301615087-19374-1-git-send-email-rickfoosusa@gmail.com>
-Subject: [PATCH 2/2] Obsoleted by 2011d, no longer on server. Signed-off-by: Rick Foos <rickfoosusa@gmail.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=jUQslhgKMxMY2w/HW4xuLW5XR9HwwiYh2nxxJkBzFdZ9zuvPIBmjly475JO8dQH+GK
+	maybMIzwdyPygSoRgQw6X8BZdu3lNb68TaTwv3sOTa0GzyokljVQgWcNpqRLf3oJRGJb
+	su0zcJejJTIzdvH8h1rXwZRQzDeaccR7gsZpY=
+MIME-Version: 1.0
+Received: by 10.223.2.8 with SMTP id 8mr781595fah.82.1301625468696; Thu, 31
+	Mar 2011 19:37:48 -0700 (PDT)
+Received: by 10.223.96.129 with HTTP; Thu, 31 Mar 2011 19:37:48 -0700 (PDT)
+Date: Fri, 1 Apr 2011 15:37:48 +1300
+Message-ID: <AANLkTikZZcRSnzJqEFgwoiYp+1KuF9ukZ4YJ+ZNJzZBx@mail.gmail.com>
+From: Charles Manning <cdhmanning@gmail.com>
+To: Openembedded-devel@lists.openembedded.org
+Subject: How to exclude a package from a rootfs?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,37 +39,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2011 23:47:57 -0000
+X-List-Received-Date: Fri, 01 Apr 2011 02:39:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
----
- recipes/tzcode/tzcode-native_2011b.bb |   16 ----------------
- 1 files changed, 0 insertions(+), 16 deletions(-)
- delete mode 100644 recipes/tzcode/tzcode-native_2011b.bb
+I'm building a customised rootfs somewhat similar to omap3-console-image.
 
-diff --git a/recipes/tzcode/tzcode-native_2011b.bb b/recipes/tzcode/tzcode-native_2011b.bb
-deleted file mode 100644
-index 30996d9..0000000
---- a/recipes/tzcode/tzcode-native_2011b.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--require tzcode-native.inc
--
--# Note that elsie.nci.nih.gov removes old versions when new is coming out
--# So if this doesn't build for you because of missing source file, just
--# bump it to the latest available version, removing old one
--# Also, tzdata (and it is needed to build tzcode) version can differ from
--# tzcode version, thus this variable
--
--TZDATA_PV = "2011b"
--
--PR = "${INC_PR}.0"
--
--SRC_URI[tzcode-2011b.md5sum] = "c63a1425f7252aef1fe54a258cdccff8"
--SRC_URI[tzcode-2011b.sha256sum] = "8031d05102e5c5109521a282aaab0629680bec82db783c716905802313678d67"
--SRC_URI[tzdata-2011b.md5sum] = "9eaf3ca354c42a32bd28e623539bf0e0"
--SRC_URI[tzdata-2011b.sha256sum] = "ff45f5ddc2ec925249626d00d7bc2ffff587e0956a1d8245517a023bf27e4cc9"
--- 
-1.7.4
+Various dependencies cause the inclusion of /boot/uImage* which is not
+required in the rootfs, so I want to exclude it.
 
+I tried using BAD_RECOMMENDATIONS = "kernel-image-" but that did not work.
+The log shows that it identified the right package suring the
+BAD_RECOMMENDATIONS processing in rootfs-ipk.bbclass but the file is
+still in the output rootfs.
+
+
+Any other hints?
+
+Thanks
+
+-- Charles
 
 
