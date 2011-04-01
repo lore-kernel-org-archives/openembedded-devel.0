@@ -1,44 +1,23 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Q5fBJ-0001m1-GH
+	(envelope-from <jkridner@beagleboard.org>) id 1Q5fek-0004KW-V1
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Apr 2011 16:18:34 +0200
-Received: by wye20 with SMTP id 20so3262021wye.6
+	Fri, 01 Apr 2011 16:48:59 +0200
+Received: by vws2 with SMTP id 2so3119509vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Apr 2011 07:16:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=aFnOYwnIKOq2/6xAjcuX/T6fKzFDH6ue11Aw7/zc0h8=;
-	b=s/20JftmCQzuXDHuNq9v5N0i0OCjudgNxx7DGHXtyifK4iyS11kez/F+DmkfuwIveF
-	6OGll5QOFHI1tifDIXZoChzXr64vNxYlj/vV0M0kScYyb77gaKj5zM9BFjMsUYRg8uvr
-	iMpVu53KrL4T7fGPqPCFMnnBOhYrLz85/963c=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=t9pW2cagyqX0zbI0DDT5AolIOAcSdBegVi7xWNnMtILN0x7XeLJgeTIxIq/zts2ONC
-	CQcnLL+yf6C48iG0GIxgYGKc/Oj0MpmhyJXD0lgGeWkqSrnxYJbA+A5cpOb/JVCNyHtl
-	JsM/5CS/AarpUIVPafC5kby5z5it8mgUVCAnQ=
-MIME-Version: 1.0
-Received: by 10.216.134.207 with SMTP id s57mr3980455wei.25.1301667391765;
-	Fri, 01 Apr 2011 07:16:31 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.216.15.67 with HTTP; Fri, 1 Apr 2011 07:16:31 -0700 (PDT)
-In-Reply-To: <CC5D751E-FF84-40C2-B184-4C813C49F5E4@dominion.thruhere.net>
-References: <1301660208-31105-1-git-send-email-otavio@ossystems.com.br>
-	<1301660208-31105-3-git-send-email-otavio@ossystems.com.br>
-	<in4lhs$326$1@dough.gmane.org>
-	<AANLkTimRF7Q3=XeF1EOHgPNAGfJwnp5PmjHGyjUhTyef@mail.gmail.com>
-	<CC5D751E-FF84-40C2-B184-4C813C49F5E4@dominion.thruhere.net>
-Date: Fri, 1 Apr 2011 11:16:31 -0300
-X-Google-Sender-Auth: 0nA4SRJ5xbqae12-6MgGNVV73Ss
-Message-ID: <AANLkTimS+CcrB7cHUF+ao=XwD0aXeFqt4r1N4erHoKFs@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 3/6] xorg-xserver-common.inc: drop .la files from packages
+	Fri, 01 Apr 2011 07:46:57 -0700 (PDT)
+Received: by 10.220.62.201 with SMTP id y9mr1034288vch.250.1301669215931;
+	Fri, 01 Apr 2011 07:46:55 -0700 (PDT)
+Received: from localhost.localdomain
+	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
+	by mx.google.com with ESMTPS id p29sm593213vcr.7.2011.04.01.07.46.55
+	(version=SSLv3 cipher=OTHER); Fri, 01 Apr 2011 07:46:55 -0700 (PDT)
+From: Jason Kridner <jkridner@beagleboard.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  1 Apr 2011 09:46:53 -0500
+Message-Id: <1301669213-5566-1-git-send-email-jkridner@beagleboard.org>
+X-Mailer: git-send-email 1.5.6.4
+Subject: [PATCH] u-boot: BeagleBoard: add rev xM-C detection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,22 +31,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2011 14:18:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 01 Apr 2011 14:49:00 -0000
 
-On Fri, Apr 1, 2011 at 11:07, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> I guessed that much, but why don't you want .la files in the -dev package=
-? Your commit message doesn't give any clue about it or anything else.
 
-Those are  for the modules that are dlopened so not required. It ended
-up on the regular package, no -dev.
+Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+---
+ ...0017-BeagleBoard-add-xM-rev-C-to-ID-table.patch |   68 ++++++++++++++++++++
+ recipes/u-boot/u-boot_git.bb                       |    3 +-
+ 2 files changed, 70 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/u-boot/u-boot-git/beagleboard/0017-BeagleBoard-add-xM-rev-C-to-ID-table.patch
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+diff --git a/recipes/u-boot/u-boot-git/beagleboard/0017-BeagleBoard-add-xM-rev-C-to-ID-table.patch b/recipes/u-boot/u-boot-git/beagleboard/0017-BeagleBoard-add-xM-rev-C-to-ID-table.patch
+new file mode 100644
+index 0000000..1125c88
+--- /dev/null
++++ b/recipes/u-boot/u-boot-git/beagleboard/0017-BeagleBoard-add-xM-rev-C-to-ID-table.patch
+@@ -0,0 +1,68 @@
++From fd6e8e5ca04fea310ff4f03faa7747d061217cba Mon Sep 17 00:00:00 2001
++From: Jason Kridner <jkridner@beagleboard.org>
++Date: Wed, 30 Mar 2011 10:44:17 -0500
++Subject: [PATCH] BeagleBoard: add xM rev C to ID table
++Cc: Sandeep Paulraj <s-paulraj@ti.com>
++
++A simple addition to the revision IDs.
++
++This patch depends upon http://patchwork.ozlabs.org/patch/85303/.
++
++Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
++---
++ board/ti/beagle/beagle.c |   12 ++++++++++++
++ board/ti/beagle/beagle.h |    1 +
++ 2 files changed, 13 insertions(+), 0 deletions(-)
++
++diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
++index 905b151..0596443 100644
++--- a/board/ti/beagle/beagle.c
+++++ b/board/ti/beagle/beagle.c
++@@ -168,6 +168,7 @@ void display_init(void)
++ 		break;
++ 	case REVISION_XM_A:
++ 	case REVISION_XM_B:
+++	case REVISION_XM_C:
++ 	default:
++ 		omap3_dss_panel_config(&dvid_cfg_xm);
++ 		break;
++@@ -227,6 +228,16 @@ int misc_init_r(void)
++ 					TWL4030_PM_RECEIVER_VAUX2_DEV_GRP,
++ 					TWL4030_PM_RECEIVER_DEV_GRP_P1);
++ 		break;
+++	case REVISION_XM_C:
+++		printf("Beagle xM Rev C\n");
+++		setenv("beaglerev", "xMC");
+++		MUX_BEAGLE_XM();
+++		/* Set VAUX2 to 1.8V for EHCI PHY */
+++		twl4030_pmrecv_vsel_cfg(TWL4030_PM_RECEIVER_VAUX2_DEDICATED,
+++					TWL4030_PM_RECEIVER_VAUX2_VSEL_18,
+++					TWL4030_PM_RECEIVER_VAUX2_DEV_GRP,
+++					TWL4030_PM_RECEIVER_DEV_GRP_P1);
+++		break;
++ 	default:
++ 		printf("Beagle unknown 0x%02x\n", get_board_revision());
++ 		MUX_BEAGLE_XM();
++@@ -372,6 +383,7 @@ int do_userbutton (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
++ 		break;
++ 	case REVISION_XM_A:
++ 	case REVISION_XM_B:
+++	case REVISION_XM_C:
++ 	default:
++ 		gpio = 4;
++ 		break;
++diff --git a/board/ti/beagle/beagle.h b/board/ti/beagle/beagle.h
++index bdf2a6f..f31ce31 100644
++--- a/board/ti/beagle/beagle.h
+++++ b/board/ti/beagle/beagle.h
++@@ -41,6 +41,7 @@ const omap3_sysinfo sysinfo = {
++ #define REVISION_C4	0x5
++ #define REVISION_XM_A	0x0
++ #define REVISION_XM_B	0x1
+++#define REVISION_XM_C	0x2
++ 
++ /*
++  * IEN  - Input Enable
++-- 
++1.5.6.4
++
+diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
+index b99e650..9c5fa13 100644
+--- a/recipes/u-boot/u-boot_git.bb
++++ b/recipes/u-boot/u-boot_git.bb
+@@ -1,5 +1,5 @@
+ require u-boot.inc
+-PR = "r74"
++PR = "r75"
+ 
+ FILESPATHPKG =. "u-boot-git:"
+ 
+@@ -42,6 +42,7 @@ SRC_URI_beagleboard = "git://www.denx.de/git/u-boot.git;protocol=git \
+                        file://0014-Corrected-LED-name-match-finding-avoiding-extraneous.patch \
+                        file://0015-omap3_beagle-Switch-default-console-from-ttyS2-to-tt.patch \
+                        file://0016-BeagleBoard-Load-kernel-via-MMC-ext2-not-fat.patch \
++		       file://0017-BeagleBoard-add-xM-rev-C-to-ID-table.patch \
+                        file://fw_env.config \
+ "
+ SRCREV_beagleboard = "c7977858dcf1f656cbe91ea0dc3cb9139c6a8cc8"
+-- 
+1.5.6.4
+
 
 
