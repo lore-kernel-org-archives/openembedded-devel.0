@@ -1,21 +1,36 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q5c7S-0004aI-Nx for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Apr 2011 13:02:22 +0200
-Received: from f053035217.adsl.alicedsl.de ([78.53.35.217]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q5c5X-0002i2-QZ for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Apr 2011 11:00:23 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <otavio.salvador@gmail.com>) id 1Q5dJo-0008Hp-ED
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Apr 2011 14:19:12 +0200
+Received: by ywg8 with SMTP id 8so1387729ywg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 Apr 2011 05:17:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
+	:x-mailer; bh=6eFJwYho3Vg7SUv6HC8uFl0+xtYYHkXh2a89PPSK1As=;
+	b=ZLl5wa71dM3DEEpf4Tib8z1eoidc8LPusmiJIPfO+4DZd3N4ne+LLnbh8lqElZe1oa
+	KuuvWd5KwAO4r8YPkOzX6jEBp+DgdPZKh7oBaTBzmUGfEEEgk0Wv8vNmMGMQ/6Vhqu/t
+	GZH3rEswS4SCktYSgbccvJS9OywHc2wMsKZEc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=Kw3/NnqoMYfMEfMvvcfzPO1g2EcxRzKUw8/szAb2E/n7uH5SqnJi8cj72fBffNIGLb
+	Dgw/H4uFY0fwEUbe2+dEzBIm6OwCSjaV2Lyl9YQTVusdW4vAnv2uodUDBBorbdv7/tMJ
+	Hojxvh+jyenNjuMbZSGd5MVLH3WFEYK/+WmqM=
+Received: by 10.151.69.17 with SMTP id w17mr3933330ybk.7.1301660230500;
+	Fri, 01 Apr 2011 05:17:10 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id d3sm948462ybi.20.2011.04.01.05.17.08
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 01 Apr 2011 05:17:09 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 01 Apr 2011 13:00:22 +0200
-Message-ID: <1301655622.3951.64.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: minimal-uclibc: Set `PREFERRED_PROVIDER_ffmpeg` to `ffmpeg` or `libav`
+Date: Fri,  1 Apr 2011 12:16:43 +0000
+Message-Id: <1301660208-31105-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.3
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [PATCH 1/6] udev (165): move ConsoleKit support to udev-consolekit package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,63 +44,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2011 11:02:22 -0000
-X-Groupsio-MsgNum: 30837
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-b3tvzYavX6I8MwB+Zmqf"
+X-List-Received-Date: Fri, 01 Apr 2011 12:19:12 -0000
 
---=-b3tvzYavX6I8MwB+Zmqf
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ recipes/udev/udev_165.bb |    7 ++++---
+ 1 files changed, 4 insertions(+), 3 deletions(-)
 
-Dear OE folks,
+diff --git a/recipes/udev/udev_165.bb b/recipes/udev/udev_165.bb
+index d426aff..822891f 100644
+--- a/recipes/udev/udev_165.bb
++++ b/recipes/udev/udev_165.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
+ the hotplug package and requires a kernel not older than 2.6.12."
+ LICENSE = "GPLv2+"
+ 
+-PR = "r3"
++PR = "r4"
+ 
+ # Untested
+ DEFAULT_PREFERENCE = "-1"
+@@ -71,7 +71,7 @@ EXTRA_OECONF += " --with-udev-prefix= \
+ INITSCRIPT_NAME = "udev"
+ INITSCRIPT_PARAMS = "start 03 S ."
+ 
+-PACKAGES =+ "libudev libgudev udev-utils"
++PACKAGES =+ "libudev libgudev udev-utils udev-consolekit"
+ 
+ FILES_libudev = "${base_libdir}/libudev.so.*"
+ FILES_libgudev = "${base_libdir}/libgudev*.so.*"
+@@ -84,7 +84,8 @@ FILES_${PN}-dbg += "${usrbindir}/.debug ${usrsbindir}/.debug"
+ 
+ # udev installs binaries under $(udev_prefix)/lib/udev, even if ${libdir}
+ # is ${prefix}/lib64
+-FILES_${PN} += "/lib/udev* ${libdir}/ConsoleKit"
++FILES_${PN} += "/lib/udev*"
++FILES_${PN}-consokekit += "${libdir}/ConsoleKit"
+ FILES_${PN}-dbg += "/lib/udev/.debug"
+ 
+ RPROVIDES_udev_append = " udev-compat-wrapper"
+-- 
+1.7.2.3
 
 
-with the fork of the FFmpeg [1] there is now also Libav [2]. With commit
-692d43ee [3]
 
-        commit 692d43eeb6596df52b5984ae1bd14739f9ec9e0f
-        Author: Koen Kooi <koen@openembedded.org>
-        Date:   Mon Mar 28 15:47:23 2011 +0200
-       =20
-            libav: add proper recipe for git version
-            omapfbplay: switch to libav
-           =20
-            Signed-off-by: Koen Kooi <koen@openembedded.org>
-
-`bitbake -k e-image` using minimal-uclibc fails with the following
-message, since `libav` also provides `ffmpeg`.
-
-        NOTE: multiple providers are available for ffmpeg (ffmpeg,
-        libav)
-        NOTE: consider defining a PREFERRED_PROVIDER entry to match
-        ffmpeg
-
-So a decision needs to be made what program minimal-uclibc prefers.
-(Strangely (plain) minimal does not fail for me.)
-
-
-Thanks,
-
-Paul
-
-
-[1] http://www.ffmpeg.org/
-[2] http://www.libav.org/
-[3] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D692d43e=
-eb6596df52b5984ae1bd14739f9ec9e0f
-
---=-b3tvzYavX6I8MwB+Zmqf
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk2VsEYACgkQPX1aK2wOHVgm9QCfZ4A92Zy2mpmGCisQZ2n6CtBT
-ow0An3U6KNx+T/Iwxrd3iReo9PSAZb+P
-=cjMo
------END PGP SIGNATURE-----
-
---=-b3tvzYavX6I8MwB+Zmqf--
