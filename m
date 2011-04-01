@@ -1,24 +1,35 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1Q5eBQ-0001K5-9w
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Apr 2011 15:14:39 +0200
-Received: (qmail 23871 invoked by uid 1003); 1 Apr 2011 13:12:28 -0000
-Received: from unknown (HELO ?192.168.1.167?)
-	(philip@opensdr.com@96.240.183.40)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	1 Apr 2011 13:12:28 -0000
-Message-ID: <4D95CF3D.9090801@balister.org>
-Date: Fri, 01 Apr 2011 09:12:29 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.15) Gecko/20110307 Fedora/3.1.9-0.39.b3pre.fc14
-	Thunderbird/3.1.9
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q5err-00064o-Dc for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Apr 2011 15:58:29 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q5eps-0006SI-6L for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Apr 2011 15:56:24 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 Apr 2011 15:56:24 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 Apr 2011 15:56:24 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1301642773.3951.2.camel@mattotaupa>
-In-Reply-To: <1301642773.3951.2.camel@mattotaupa>
-Subject: Re: patch queue: latest patches not listed in Patchwork
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 01 Apr 2011 15:56:12 +0200
+Message-ID: <in4lhs$326$1@dough.gmane.org>
+References: <1301660208-31105-1-git-send-email-otavio@ossystems.com.br>
+	<1301660208-31105-3-git-send-email-otavio@ossystems.com.br>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1301660208-31105-3-git-send-email-otavio@ossystems.com.br>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH 3/6] xorg-xserver-common.inc: drop .la files from packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,26 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2011 13:14:39 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 01 Apr 2011 13:58:30 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 04/01/2011 03:26 AM, Paul Menzel wrote:
-> Dear OE folks,
->
->
-> I do not see the latest patches in our patch queue [1]. Is that a known
-> problem?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-The process that processes the patchwork emails started taking 100% cpu 
-yesterday. The admin team had to turn it off so other functions on the 
-machine would run.
+On 01-04-11 14:16, Otavio Salvador wrote:
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 
-We need someone who understands enough about patchwork and/or the script 
-to figure out why it is stuck and how to fix it.
+> +	find ${D}/${libdir} -name '*.la' -exec rm '{}' ';'
 
-Any volunteers?
+Why is that needed?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Philip
+iD8DBQFNldl8MkyGM64RGpERArEXAKCOSRL/5Ps5wobuYu/rxpfJUNONJgCfVCWC
+6rDB+xeEmVdsLr+ksmcnn1s=
+=JMLE
+-----END PGP SIGNATURE-----
+
 
 
