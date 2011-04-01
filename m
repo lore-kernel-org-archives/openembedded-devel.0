@@ -1,40 +1,40 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Q5dJv-0008I2-ET
+	(envelope-from <otavio.salvador@gmail.com>) id 1Q5dJw-0008IA-Jj
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Apr 2011 14:19:19 +0200
-Received: by gwb11 with SMTP id 11so1391052gwb.6
+	Fri, 01 Apr 2011 14:19:21 +0200
+Received: by yxn22 with SMTP id 22so1390712yxn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Apr 2011 05:17:17 -0700 (PDT)
+	Fri, 01 Apr 2011 05:17:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
 	:x-mailer:in-reply-to:references;
-	bh=j1j/QOifspDcNqC9IqjRw4zQYS1UKBpUyz2/FbhLNrg=;
-	b=lYenyV6oDDYlbnI7sdTpPSIqXobIlwNLIImZHmjDqHWsXnqMhQHHzigviP0Hc9ro+g
-	7cyjQjYuVL2FiRCl21+dr7K2nqRPxWXet/PoBKh+7VMoJv/Qe59dv1OsVYlrd4ukxz9E
-	XJWu7jSleRd2X/MdfKhfuTVtL7hoGyPG/puGU=
+	bh=dt+uBATT+ZcT2AqRNnH1tK0pTr0wxdbdLJePDZ9zSBU=;
+	b=ipRYiUgrdPHUOyTiR8p+cu8ON9MQ6SIzGtfgl6nslslE2KuObWkrcqXFTUUoM4JLQF
+	glmipsZK5ig15/6it/XLN4g73G8OJF+j7XiTDAd3MSipOWE/QIlXChxif9HHrTTLzQIA
+	OlR2tRfQpEVqNJXIOgmEp/zVE4UszOtonsFwo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=pAncSmfrB1+JXBrH7oZkmlAu5bfAn1cmTrUsBTC1crkcpA7NPOKirmSyqe5kbiVXXd
-	r3qwQDYhFD/HPBOVJfZQ4+zpcWy5eTHTjFmm+tmcYW6j0ay/aGptGkx2anT1qs/CLYh8
-	uFzjfkjydPaLEgDDacaTIGanSERyt39K7t/I8=
-Received: by 10.150.14.4 with SMTP id 4mr3715169ybn.434.1301660236826;
-	Fri, 01 Apr 2011 05:17:16 -0700 (PDT)
+	b=ilcY72kW0VD+yV86gMgsGL5J8+gAXRaUkUx7MPWWCKoV0dUjUOTXZxMOgzdquF5VF6
+	3VDZYbkCaGpFxteP6Xm/YbkmcTHRCZX6ZzrvVD7v38dOYfSxBWg714Gr2JCS4P7HPUn3
+	R4qYeNa0pMFdSGEloDxpgDkDjniyzHEs/JMB4=
+Received: by 10.151.13.7 with SMTP id q7mr3761811ybi.304.1301660238998;
+	Fri, 01 Apr 2011 05:17:18 -0700 (PDT)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id d3sm948462ybi.20.2011.04.01.05.17.14
+	by mx.google.com with ESMTPS id d3sm948462ybi.20.2011.04.01.05.17.17
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 01 Apr 2011 05:17:15 -0700 (PDT)
+	Fri, 01 Apr 2011 05:17:18 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Apr 2011 12:16:45 +0000
-Message-Id: <1301660208-31105-3-git-send-email-otavio@ossystems.com.br>
+Date: Fri,  1 Apr 2011 12:16:46 +0000
+Message-Id: <1301660208-31105-4-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.3
 In-Reply-To: <1301660208-31105-1-git-send-email-otavio@ossystems.com.br>
 References: <1301660208-31105-1-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 3/6] xorg-xserver-common.inc: drop .la files from packages
+Subject: [PATCH 4/6] xserver-xorg (1.9.4): enable xephyr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,32 +48,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2011 12:19:19 -0000
+X-List-Received-Date: Fri, 01 Apr 2011 12:19:21 -0000
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- recipes/xorg-xserver/xorg-xserver-common.inc |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ recipes/xorg-xserver/xserver-xorg_1.9.4.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/xorg-xserver/xorg-xserver-common.inc b/recipes/xorg-xserver/xorg-xserver-common.inc
-index 29e3b10..8f59b0b 100644
---- a/recipes/xorg-xserver/xorg-xserver-common.inc
-+++ b/recipes/xorg-xserver/xorg-xserver-common.inc
-@@ -2,7 +2,7 @@ HOMEPAGE = "http://www.x.org"
- SECTION = "x11/base"
- LICENSE = "MIT-X"
+diff --git a/recipes/xorg-xserver/xserver-xorg_1.9.4.bb b/recipes/xorg-xserver/xserver-xorg_1.9.4.bb
+index 89e7a03..cc2dc43 100644
+--- a/recipes/xorg-xserver/xserver-xorg_1.9.4.bb
++++ b/recipes/xorg-xserver/xserver-xorg_1.9.4.bb
+@@ -6,7 +6,7 @@ require xorg-xserver-common.inc
+ DESCRIPTION = "the X.Org X server"
+ DEPENDS += "pixman libpciaccess openssl dri2proto glproto xorg-minimal-fonts font-util-native"
+ PE = "2"
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
  
--INC_PR = "r18"
-+INC_PR = "r19"
+ SRC_URI += " \
+             file://dolt-fix.patch \
+@@ -25,7 +25,7 @@ do_install_prepend() {
+ PACKAGE_ARCH_ion = "${MACHINE_ARCH}"
+ XINERAMA = "${@['--disable-xinerama','--enable-xinerama'][bb.data.getVar('MACHINE',d) in ['ion']]}"
  
- PROVIDES = "virtual/xserver"
+-EXTRA_OECONF += " ${CONFIG_MANAGER_OPTION} ${XINERAMA} --disable-kdrive --disable-xephyr --disable-xsdl --disable-xfake --disable-xfbdev --disable-dmx"
++EXTRA_OECONF += " ${CONFIG_MANAGER_OPTION} ${XINERAMA} --disable-xsdl --disable-xfake --disable-xfbdev --disable-dmx"
+ EXTRA_OECONF += " --enable-dri2 --disable-unit-tests --disable-docs --disable-devel-docs"
  
-@@ -108,4 +108,5 @@ FILES_${PN}-multimedia-modules = "${libdir}/xorg/modules/multimedia/*drv*"
- 
- do_install_append () {
- 	ln -sf ${datadir}/fonts/X11 ${D}/${libdir}/X11/fonts
-+	find ${D}/${libdir} -name '*.la' -exec rm '{}' ';'
- }
+ export LDFLAGS += " -ldl "
 -- 
 1.7.2.3
 
