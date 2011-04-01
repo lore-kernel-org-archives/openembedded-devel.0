@@ -1,25 +1,42 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1Q5f0m-0005Hu-LY
+	(envelope-from <otavio.salvador@gmail.com>) id 1Q5f1U-0005P4-F2
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Apr 2011 16:07:50 +0200
-Received: (qmail 12538 invoked by uid 1003); 1 Apr 2011 14:05:37 -0000
-Received: from unknown (HELO ?192.168.1.167?)
-	(philip@opensdr.com@96.240.183.40)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	1 Apr 2011 14:05:37 -0000
-Message-ID: <4D95DBB0.7070606@balister.org>
-Date: Fri, 01 Apr 2011 10:05:36 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.15) Gecko/20110307 Fedora/3.1.9-0.39.b3pre.fc14
-	Thunderbird/3.1.9
+	Fri, 01 Apr 2011 16:08:25 +0200
+Received: by wye20 with SMTP id 20so3250814wye.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 Apr 2011 07:06:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=2lQQqNyoczLWQa+md5YHKl3xCsLzUn4zQfN/+LK3uA8=;
+	b=crjwGSgeHrnWn2NLJMntErcpYOrWnVPzmABzqTNLtZ2rMlQ7pv8JQK9oidCVAv61nu
+	2NL1hxfKQMFGho1GCKBiLBzITDkw/Yd4m1vvrEUipgLl177Pa0ygwB5J7ABvN5k7mmUW
+	c88WydVzISjrfegE5APwF8g5nRL58OzL3xf2I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=Z3KJOt2JG8mYLxptv+4wC5YKp6R/nfvLwYRd8OypnfPkN+lowE9SwpagpcuezCLaLP
+	N1N4xr46cMzDMJAipCt5om/ck3Kpjb4EEonV8zRZdPpAoMtZN8QSxzwWVD34rBpudDiR
+	dOJICCtKoQoyL0ODLMy0S+/cc67yFW3h29+MI=
 MIME-Version: 1.0
+Received: by 10.216.122.149 with SMTP id t21mr918753weh.10.1301666781486; Fri,
+	01 Apr 2011 07:06:21 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.216.15.67 with HTTP; Fri, 1 Apr 2011 07:06:21 -0700 (PDT)
+In-Reply-To: <in4lhs$326$1@dough.gmane.org>
+References: <1301660208-31105-1-git-send-email-otavio@ossystems.com.br>
+	<1301660208-31105-3-git-send-email-otavio@ossystems.com.br>
+	<in4lhs$326$1@dough.gmane.org>
+Date: Fri, 1 Apr 2011 11:06:21 -0300
+X-Google-Sender-Auth: bh-RJ7d13GJ24ZFuBxPDbFjeoWE
+Message-ID: <AANLkTimRF7Q3=XeF1EOHgPNAGfJwnp5PmjHGyjUhTyef@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-References: <1301642773.3951.2.camel@mattotaupa>	<4D95CF3D.9090801@balister.org>
-	<in4lkv$326$2@dough.gmane.org>
-In-Reply-To: <in4lkv$326$2@dough.gmane.org>
-Subject: Re: patch queue: latest patches not listed in Patchwork
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [PATCH 3/6] xorg-xserver-common.inc: drop .la files from packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,57 +50,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2011 14:07:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 01 Apr 2011 14:08:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 04/01/2011 09:57 AM, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+On Fri, Apr 1, 2011 at 10:56, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> On 01-04-11 14:16, Otavio Salvador wrote:
+>> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 >
-> On 01-04-11 15:12, Philip Balister wrote:
->> On 04/01/2011 03:26 AM, Paul Menzel wrote:
->>> Dear OE folks,
->>>
->>>
->>> I do not see the latest patches in our patch queue [1]. Is that a known
->>> problem?
->>
->> The process that processes the patchwork emails started taking 100% cpu
->> yesterday. The admin team had to turn it off so other functions on the
->> machine would run.
+>> + =A0 =A0 find ${D}/${libdir} -name '*.la' -exec rm '{}' ';'
 >
-> Can we have an announcement about that on oe-devel in the future? It
-> would have saved me a lot of F5'ing in my browser :)
->
+> Why is that needed?
 
-Sorry, things are hectic for me  and Tom atm.
+To avoid .la files on the package.
 
->
->> We need someone who understands enough about patchwork and/or the script
->> to figure out why it is stuck and how to fix it.
->
-> Did anyone strace the process? If we enable it again, does it behave
-> normally?
-
-No, we are looking for someone to look at it.
-
-philip
-
-
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFNldnfMkyGM64RGpERAs9bAJ0detDErQaNJOXCfR0EY/kRSHu4ZACdFMt0
-> pQS5JjeocqJyAzyBpbsG2eQ=
-> =RtHU
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
