@@ -1,38 +1,36 @@
 Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Q5XMl-0006nY-Im
+	(envelope-from <philippedeswert@gmail.com>) id 1Q5YlT-0004AR-PD
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Apr 2011 07:57:51 +0200
-Received: by mail-iy0-f175.google.com with SMTP id 7so3442476iye.6
+	Fri, 01 Apr 2011 09:27:27 +0200
+Received: by iye7 with SMTP id 7so3508397iye.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2011 22:55:52 -0700 (PDT)
+	Fri, 01 Apr 2011 00:25:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=ol3KgIxdnaAVZH9ZRP2PLef8n3YIeEQcDiiGJZRoWE4=;
-	b=YVFSNtIJWUwnNHGdf+3qfZp9oVwJz/1B2Ct6gnlPoUCICaOB9aLJncYcK0Caz9TjdV
-	wz3lgnvkUPRn0oZw4PkIphlKPlVoET9vZ+9xg/MRae6xnNrKS3jmKsEWhUdowvJu1C+M
-	yNo+VazdjgwYhG1xaiuLUISuSKsXF4VmGjZUE=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=gvR02FDmrL2mI2u4u/3rKpiY1RyJxsZt2o7IzZAfqBM=;
+	b=O5cakGJ6YtPZ335yWg4sYfr6sPeD7EhOi87Nvpr5pY2ffDW+epmY2YUO4m2w6ZxQcx
+	MvD/5nLLfkLE96dwENqJH3oVsGTfMhu1fMuGfqZpQyli1zJdBVDVdh0EEQ2j665DWdu8
+	uBlz5p3bpSwV6xnoyXpUN1MAGBJJXewJHZwqw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=VOjdzIf5mXC8dq0wG/YAWoh0y6hOKlPGlR/lnb9sRfStkCPmIwK/rmiZsMCW/SCzgB
-	CyagvsfiJeEp2cWk+skPuHMmCV5Din5VRf/7hmBt8b1f7ZjyHKmb2D5WHM9gKmgt/3T3
-	q9HLX0wDZd+UqgOYastOwPpvxA1mNxqr5KP6Y=
-Received: by 10.42.180.197 with SMTP id bv5mr4634605icb.86.1301637352774;
-	Thu, 31 Mar 2011 22:55:52 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id xi12sm1086554icb.6.2011.03.31.22.55.51
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 31 Mar 2011 22:55:52 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=C5y7cJuyoDLe3KFINwFgJsmVLNsqR5v/GbDSBQ5obIQZGteX4Fw9PTVsW4+3jE7waV
+	x+gUExcWHHGE0VbTcqIZp2Um0pVEkIQNzdB9pGpD0krV1roSfR3BBVHT1CreQbuhhcAs
+	hWfzHdadwgBHorhQ+zOG6HQ8kpJ0ERrG4vJ4M=
+MIME-Version: 1.0
+Received: by 10.43.58.12 with SMTP id wi12mr4327837icb.309.1301642722800; Fri,
+	01 Apr 2011 00:25:22 -0700 (PDT)
+Received: by 10.43.131.199 with HTTP; Fri, 1 Apr 2011 00:25:22 -0700 (PDT)
+In-Reply-To: <1301602980.3988.18.camel@mattotaupa>
+References: <1301600399-32041-1-git-send-email-philippedeswert@gmail.com>
+	<1301602980.3988.18.camel@mattotaupa>
+Date: Fri, 1 Apr 2011 10:25:22 +0300
+Message-ID: <AANLkTikL73GsmeB8pqSGMPjD972MhjsCOE+reTLKjxk+@mail.gmail.com>
+From: Philippe De Swert <philippedeswert@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 Mar 2011 22:55:27 -0700
-Message-Id: <1301637327-26825-7-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <1301637327-26825-1-git-send-email-raj.khem@gmail.com>
-References: <1301637327-26825-1-git-send-email-raj.khem@gmail.com>
-Subject: [PATCH 7/7] libgpg-error_1.8.bb: Inherit gettext
+Subject: Re: [PATCH [1/2]] eio: New recipe for eio
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,27 +44,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2011 05:57:51 -0000
+X-List-Received-Date: Fri, 01 Apr 2011 07:27:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-It uses gettext but was not specifying the dependency
+Hi Paul,
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../libgpg-error/libgpg-error_1.8.bb               |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Thanks for the review.
 
-diff --git a/meta-oe/recipes-support/libgpg-error/libgpg-error_1.8.bb b/meta-oe/recipes-support/libgpg-error/libgpg-error_1.8.bb
-index 19a3c26..2c17e53 100644
---- a/meta-oe/recipes-support/libgpg-error/libgpg-error_1.8.bb
-+++ b/meta-oe/recipes-support/libgpg-error/libgpg-error_1.8.bb
-@@ -24,4 +24,4 @@ SRC_URI = "ftp://ftp.gnupg.org/gcrypt/libgpg-error/libgpg-error-${PV}.tar.bz2 \
- FILES_${PN} = "${libdir}/lib*.so.*"
- FILES_${PN}-dev += "${bindir}/*"
- 
--inherit autotools binconfig pkgconfig
-+inherit autotools binconfig pkgconfig gettext
--- 
-1.7.4.1
+On 31 March 2011 23:23, Paul Menzel <paulepanter@users.sourceforge.net> wro=
+te:
+> Am Donnerstag, den 31.03.2011, 22:39 +0300 schrieb Philippe De Swert:
+>
+> =BBeio: add initial recipe (svn)=AB =A0or something like that would be a
+> better commit summary in my opinion.
 
+I'll keep that in mind
+
+>> +
+>> +# Some upgrade path tweaking
+>> +AUTO_LIBNAME_PKGS =3D ""
+>
+> What upgrade patch?
+
+Yeah I should have double checked that... Just put it there as all the
+other enlightenment
+.inc files had it.
+
+>> diff --git a/recipes/efl1/eio_svn.bb b/recipes/efl1/eio_svn.bb
+>> new file mode 100644
+>> index 0000000..6a12dcf
+>> --- /dev/null
+>> +++ b/recipes/efl1/eio_svn.bb
+>> @@ -0,0 +1,13 @@
+>> +require eio.inc
+>> +
+>> +SRCREV =3D "${EFL_SRCREV}"
+>> +PV =3D "0.1.0+svnr${SRCPV}"
+>> +PR =3D "${INC_PR}.0"
+>> +DEFAULT_PREFERENCE =3D "-1"
+>
+> It is the only recipe, so `DP =3D "-1"` should not be useful.
+
+Just wanted to be future proof for when the actual versioned recipes come.
+
+Cheers,
+
+Philippe
 
 
