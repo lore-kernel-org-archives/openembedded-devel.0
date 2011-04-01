@@ -1,38 +1,38 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Q5mSw-00037p-1F
+	(envelope-from <raj.khem@gmail.com>) id 1Q5mT3-00037p-6v
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Apr 2011 00:05:15 +0200
+	Sat, 02 Apr 2011 00:05:21 +0200
 Received: by mail-iw0-f175.google.com with SMTP id 10so4361066iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Apr 2011 15:03:14 -0700 (PDT)
+	Fri, 01 Apr 2011 15:03:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
 	:in-reply-to:references;
-	bh=ahuof86lOrrCoyvHWL6nJThB7qYPLD+JyKHfCkkqlSg=;
-	b=Y0ug6MW2fUvrxlpNsTuaAOa46AY7EV4x4Ccb+Lgjdqp4e40wLin5PCCdk9o8uVMVNk
-	VY02bV6lgCXMoSSXW3CqgLAnXl0G/Qs2UoYQCPCpQiM3/dFMiwq2PeronE25BOejMBjl
-	FImLxQ50fqbI+mNAkfMLXWS67q4HgTQjpA1cY=
+	bh=b1ZpJPNBTPnazfQ8LMmyORNsLEI/+ThnS7e5g0Cxr7A=;
+	b=u6M9vaPNzRzOXJSC/RRn7+ANL2Dk9tF6DQpo40bJJDrrpCjiuQTxQ0D4qn8/8JWLiE
+	DhBL5bwjs0JCUtBKDpOecQZ5iSdL4RhZoVcCSi/jLcRCEvu5mNb+hRzmOa/N0ThNQ7cH
+	D7relCxm9sQ8rlixfRflReU+cFLKMb7wsoH/I=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=tdPjJf7sKbrzEchobjOtl9RB+Nv0hz6yGArt7XvbS0EZc2/xtMcuRPptMTfAWmzNJP
-	fw1QTvNHS2LeQ8o4+xjM/6aCrFvBf1iWcu9Q/BG0V2+Oy1Jdx7V8a8UbRXE0NwYXzdM4
-	j1aWPlD+vp8AarSt9i9dYywSdCLSGnkRxp+vY=
-Received: by 10.42.161.197 with SMTP id u5mr1166333icx.466.1301695394529;
-	Fri, 01 Apr 2011 15:03:14 -0700 (PDT)
+	b=ESvZV2MnY14rIF/O6WoWNLKq1R/jWIPzuE5bziw0JUTbJjVGZTK1Jf2T3SHG28jXiO
+	wYF/EBxuEi5R4OriPCqjW0Db/ItElNd89WdJ3ixCyDvaOaOKTiCcD6bDq16WGuH3ga0C
+	453C/121odflegcf2b75fpSmJi6wrl42ubC3o=
+Received: by 10.43.60.14 with SMTP id wq14mr525337icb.118.1301695400329;
+	Fri, 01 Apr 2011 15:03:20 -0700 (PDT)
 Received: from localhost.localdomain
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id d10sm1710981ibb.51.2011.04.01.15.03.12
+	by mx.google.com with ESMTPS id wu1sm1544350icb.22.2011.04.01.15.03.17
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 01 Apr 2011 15:03:13 -0700 (PDT)
+	Fri, 01 Apr 2011 15:03:18 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Apr 2011 15:03:04 -0700
-Message-Id: <b60c8a54117077996bdf2b40de0c720140825791.1301695158.git.raj.khem@gmail.com>
+Date: Fri,  1 Apr 2011 15:03:09 -0700
+Message-Id: <740a50cb308f186123a9f916330bf10daa22faa5.1301695158.git.raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.4.1
 In-Reply-To: <cover.1301695158.git.raj.khem@gmail.com>
 References: <cover.1301695158.git.raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 5/7] dbus.inc: Add missing dependency on libxdmcp
+Subject: [meta-oe][PATCH 6/7] gcc-runtime_4.5.bb: Remove construct to filter -feliminate-dwarf2-dups
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,26 +46,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2011 22:05:15 -0000
+X-List-Received-Date: Fri, 01 Apr 2011 22:05:21 -0000
+
+This option is no longer default in bitbake.conf
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-core/dbus/dbus.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ meta-oe/recipes-devtools/gcc/gcc-runtime_4.5.bb |    5 -----
+ 1 files changed, 0 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-core/dbus/dbus.inc b/meta-oe/recipes-core/dbus/dbus.inc
-index 40a670a..2ae5b1d 100644
---- a/meta-oe/recipes-core/dbus/dbus.inc
-+++ b/meta-oe/recipes-core/dbus/dbus.inc
-@@ -4,7 +4,7 @@ SECTION = "base"
- LICENSE = "AFL2.1 | GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=10dded3b58148f3f1fd804b26354af3e \
-                     file://dbus/dbus.h;firstline=6;endline=20;md5=6eea2e0c7750dd8e620dcb1437312fa5"
--DEPENDS = "expat virtual/libintl libsm libice virtual/libx11"
-+DEPENDS = "expat virtual/libintl libsm libice virtual/libx11 libxdmcp"
+diff --git a/meta-oe/recipes-devtools/gcc/gcc-runtime_4.5.bb b/meta-oe/recipes-devtools/gcc/gcc-runtime_4.5.bb
+index 1571601..aaa48b5 100644
+--- a/meta-oe/recipes-devtools/gcc/gcc-runtime_4.5.bb
++++ b/meta-oe/recipes-devtools/gcc/gcc-runtime_4.5.bb
+@@ -9,8 +9,3 @@ SRC_URI_append = "file://fortran-cross-compile-hack.patch"
+ ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
  
- INC_PR = "r20"
- 
+ EXTRA_OECONF += "--disable-libunwind-exceptions"
+-
+-# gcc 4.5 ends up in ICE when using -feliminate-dwarf2-dups in libstdc++
+-# compiling pre compiled headers so we remove this option when compiling 
+-# to workaround it
+-CXXFLAGS := "${@oe_filter_out('-feliminate-dwarf2-dups', '${CXXFLAGS}', d)}"
 -- 
 1.7.4.1
 
