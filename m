@@ -1,21 +1,23 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1Q5wby-0004Ii-2Y
+	(envelope-from <philb@gnu.org>) id 1Q5xPd-00056C-TD
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Apr 2011 10:55:14 +0200
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id F1A101D360AA; Sat,  2 Apr 2011 10:53:11 +0200 (CEST)
-Date: Sat, 2 Apr 2011 10:53:11 +0200
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+	Sat, 02 Apr 2011 11:46:33 +0200
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.3])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q5xNh-0004ez-M4
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 02 Apr 2011 11:44:33 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110402085311.GE2681@ibawizard.net>
-References: <1301494030-10554-1-git-send-email-v2g.udel@gmail.com>
-	<1301494030-10554-3-git-send-email-v2g.udel@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1301494030-10554-3-git-send-email-v2g.udel@gmail.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [PATCH 3/6] Add kernel support for the Technologic	Systems TS7500 ARM SBCs
+In-Reply-To: <1301642773.3951.2.camel@mattotaupa>
+References: <1301642773.3951.2.camel@mattotaupa>
+Date: Sat, 02 Apr 2011 10:44:27 +0100
+Message-ID: <1301737467.3720.289.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: patch queue: latest patches not listed in Patchwork
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,16 +31,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Apr 2011 08:55:14 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 02 Apr 2011 09:46:34 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-UDel V2G Team <v2g.udel@gmail.com> [2011-03-30 10:07:07]:
+On Fri, 2011-04-01 at 09:26 +0200, Paul Menzel wrote:
+> I do not see the latest patches in our patch queue [1]. Is that a known
+> problem?
 
->  .../linux/linux-ts75xx-2.6.35/ts75xx/defconfig.bak | 1521 +
+I think the patch queue is working again now, at least for new
+submissions.  Some patches which were submitted while it was down will
+probably not have shown up yet but they will appear eventually.
 
-You can drop that .bak file.
+p.
 
--- ynezz
+
 
 
