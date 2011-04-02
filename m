@@ -1,24 +1,23 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1Q5onX-0003GX-Vz
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1Q5wQ2-00041s-B9
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Apr 2011 02:34:40 +0200
-Received: from gandalf.denix.org ([unknown] [108.18.140.4])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LJ0005JB1HZTWT2@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	01 Apr 2011 19:32:24 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id B4F1C14AF6C; Fri,
-	01 Apr 2011 20:32:23 -0400 (EDT)
-Date: Fri, 01 Apr 2011 20:32:23 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Sat, 02 Apr 2011 10:42:54 +0200
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id 781761D360AA; Sat,  2 Apr 2011 10:40:25 +0200 (CEST)
+Date: Sat, 2 Apr 2011 10:40:25 +0200
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20110402003223.GA4182@denix.org>
-MIME-version: 1.0
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [2011.03-maintenance] Pull request for TI edma3lld-sysbios, cgt6x	and beagle u-boot changes
+Message-ID: <20110402084025.GD2681@ibawizard.net>
+References: <1301494030-10554-1-git-send-email-v2g.udel@gmail.com>
+	<1301494030-10554-4-git-send-email-v2g.udel@gmail.com>
+	<1301496042.11614.15.camel@localhost>
+	<BA1E2EAB-64FF-47E0-AB46-407D19D68B6D@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <BA1E2EAB-64FF-47E0-AB46-407D19D68B6D@gmail.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH 4/6] Add recipes for building TS75xx userspace	utilities
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,45 +31,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Apr 2011 00:34:40 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sat, 02 Apr 2011 08:42:54 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Tom,
+Sachin Kamboj <v2g.udel@gmail.com> [2011-03-30 12:55:35]:
 
-Please pull these 5 commits for TI related changes - edma3lld-sysbios mods,
-new cgt6x version and u-boot change for beagleboard xM-C.
-All are cherry picked from oe.dev
+> We'll discuss this with the vendor - however, can we include these tarballs
+> in the interim?
 
+Maybe, that you can skip the vendor part, make GitHub account, add all the
+files in one project and make ts75xx-utils versioned package and recipe. I
+don't see any point why it should be in separate recipe. It's possible to make
+different packages from one recipe.
 
-Pull URL: git://arago-project.org/git/people/denix/openembedded.git
-  Branch: 2011.03-maintenance
-  Browse: http://arago-project.org/git/people/?p=denix/openembedded.git;a=shortlog;h=refs/heads/2011.03-maintenance
-
-Thanks,
-    Denys Dmytriyenko <denys@ti.com>
----
-
-
-Jason Kridner (1):
-  u-boot: BeagleBoard: add rev xM-C detection
-
-Siddharth Heroor (4):
-  TI EDMA3LLD Sysbios: Move installer unpack to recipe version
-  TI EDMA3LLD Sysbios: Update recipe for SRC_URI
-  TI EDMA3LLD Sysbios: Add version 02.11.01.02
-  ti-cgt6x: Add release 7.2.2
-
- recipes/ti/ti-cgt6x_7.2.2.bb                       |    8 ++
- recipes/ti/ti-edma3lld-sysbios.inc                 |    8 +--
- recipes/ti/ti-edma3lld-sysbios_02.10.03.04.bb      |    5 ++
- recipes/ti/ti-edma3lld-sysbios_02.11.01.02.bb      |    6 ++
- ...0017-BeagleBoard-add-xM-rev-C-to-ID-table.patch |   68 ++++++++++++++++++++
- recipes/u-boot/u-boot_git.bb                       |    3 +-
- 6 files changed, 91 insertions(+), 7 deletions(-)
- create mode 100644 recipes/ti/ti-cgt6x_7.2.2.bb
- create mode 100644 recipes/ti/ti-edma3lld-sysbios_02.11.01.02.bb
- create mode 100644 recipes/u-boot/u-boot-git/beagleboard/0017-BeagleBoard-add-xM-rev-C-to-ID-table.patch
-
+-- ynezz
 
 
