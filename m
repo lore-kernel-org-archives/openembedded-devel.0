@@ -1,19 +1,21 @@
 Received: from ibawizard.net
 	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ynezz@true.cz>) id 1Q61hE-0006oE-BU
+	(envelope-from <ynezz@true.cz>) id 1Q61hH-0006oQ-OY
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Apr 2011 16:21:00 +0200
+	Sat, 02 Apr 2011 16:21:04 +0200
 Received: from ntbk.lan (localhost [127.0.0.1])
-	by mengele.ibawizard.net (Postfix) with ESMTP id 8B5A31D36069;
-	Sat,  2 Apr 2011 16:18:56 +0200 (CEST)
+	by mengele.ibawizard.net (Postfix) with ESMTP id 39DD21D360AD;
+	Sat,  2 Apr 2011 16:19:00 +0200 (CEST)
 From: =?UTF-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  2 Apr 2011 16:18:44 +0200
-Message-Id: <1301753930-32581-1-git-send-email-ynezz@true.cz>
+Date: Sat,  2 Apr 2011 16:18:46 +0200
+Message-Id: <1301753930-32581-3-git-send-email-ynezz@true.cz>
 X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1301753930-32581-1-git-send-email-ynezz@true.cz>
+References: <1301753930-32581-1-git-send-email-ynezz@true.cz>
 MIME-Version: 1.0
-Subject: [PATCH 0/6] RFC: patches I plan to push
+Subject: [PATCH 2/6] lua-lanes: add recipe for version 2.1.0 and delete the old one
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,179 +29,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Apr 2011 14:21:00 -0000
+X-List-Received-Date: Sat, 02 Apr 2011 14:21:04 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+I'm removing the old version 2.0.6, because it shouldn't have been commit=
+ed
+anyway. It was quite buggy and untested version.
 
-I plan to push few patches, so I'm posting them for the review first to g=
-et some
-feedback (if any). Thanks.
-
--- ynezz
-
-Petr =C5=A0tetiar (6):
-  zeromq: add new recipe for version 2.1.1
-  lua-lanes: add recipe for version 2.1.0 and delete the old one
-  librs232: add version 1.0.1 and remove the old one
-  lua-rs232: add recipe for version 1.0.1, remove old package and fix
-    stripping
-  linux-2.6.36: remove ts72xx support because 2.6.38 is now default
-  linux-2.6.38: add support for ts72xx and make it default
-
- recipes/librs232/librs232_1.0.0.bb                 |   10 -
- recipes/librs232/librs232_1.0.1.bb                 |   10 +
- .../linux-2.6.36/ts72xx/0001-ts72xx_base.patch     |  450 --
- .../ts72xx/0002-ts72xx_force_machine-id.patch      |   49 -
- .../linux-2.6.36/ts72xx/0003-ep93xx_cpuinfo.patch  |   36 -
- .../linux-2.6.36/ts72xx/0004-ep93xx_eth.patch      |  555 ---
- .../ts72xx/0005-ep93xx-m2m-DMA-support.patch       |  886 ----
- .../linux-2.6.36/ts72xx/0006-ts72xx_rs485.patch    |  223 -
- .../linux-2.6.36/ts72xx/0007-ts72xx_ts_ser1.patch  |  264 --
- .../ts72xx/0008-ts72xx_ts_eth100.patch             |  278 --
- .../linux-2.6.36/ts72xx/0009-ts72xx_pata.patch     |  437 --
- .../linux-2.6.36/ts72xx/0010-ts72xx_gpio_i2c.patch |   63 -
- .../ts72xx/0011-ts72xx_dio_keypad.patch            |  311 --
- .../linux-2.6.36/ts72xx/0012-ts72xx_sbcinfo.patch  |  267 --
- .../linux-2.6.36/ts72xx/0013-ts72xx_max197.patch   |  356 --
- .../ts72xx/0014-ts7200_nor_flash.patch             |  181 -
- .../linux-2.6.36/ts72xx/0015-ts72xx_sdcard.patch   | 3298 --------------
- .../ts72xx/0016-ts72xx_spi_tmp124.patch            |  305 --
- .../0017-ts72xx-use-CPLD-watchdog-for-reset.patch  |   53 -
- .../ts72xx/0018-ethoc-ts7300-fixes.patch           |   93 -
- .../ts72xx/0019-ts7300-add-ethernet-support.patch  |   87 -
- .../ts72xx/0023-ts72xx-add-lcd-linux-driver.patch  | 4569 --------------=
------
- .../ts72xx/0024-ts72xx-add-GPIO-keys.patch         |  100 -
- recipes/linux/linux-2.6.36/ts72xx/defconfig        | 2127 ---------
- .../linux-2.6.38/ts72xx/0001-ts72xx_base.patch     |  451 ++
- .../ts72xx/0002-ts72xx_force_machine-id.patch      |   49 +
- .../linux-2.6.38/ts72xx/0003-ep93xx_cpuinfo.patch  |   36 +
- .../linux-2.6.38/ts72xx/0004-ep93xx_eth.patch      |  553 +++
- .../ts72xx/0005-ep93xx-m2m-DMA-support.patch       |  870 ++++
- .../linux-2.6.38/ts72xx/0006-ts72xx_rs485.patch    |  221 +
- .../linux-2.6.38/ts72xx/0007-ts72xx_ts_ser1.patch  |  264 ++
- .../ts72xx/0008-ts72xx_ts_eth100.patch             |  278 ++
- .../linux-2.6.38/ts72xx/0009-ts72xx_pata.patch     |  437 ++
- .../linux-2.6.38/ts72xx/0010-ts72xx_gpio_i2c.patch |   63 +
- .../ts72xx/0011-ts72xx_dio_keypad.patch            |  311 ++
- .../linux-2.6.38/ts72xx/0012-ts72xx_sbcinfo.patch  |  267 ++
- .../linux-2.6.38/ts72xx/0013-ts72xx_max197.patch   |  356 ++
- .../ts72xx/0014-ts7200_nor_flash.patch             |  181 +
- .../linux-2.6.38/ts72xx/0015-ts72xx_sdcard.patch   | 3299 ++++++++++++++
- .../ts72xx/0016-ts72xx_spi_tmp124.patch            |  305 ++
- .../0017-ts72xx-use-CPLD-watchdog-for-reset.patch  |   53 +
- .../ts72xx/0018-ethoc-ts7300-fixes.patch           |   72 +
- .../ts72xx/0019-ts7300-add-ethernet-support.patch  |   87 +
- .../ts72xx/0020-ts72xx-add-lcd-linux-driver.patch  | 4572 ++++++++++++++=
+Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
+---
+ .../0001-fix-LanesTimer-inifinite-thread-GC.patch  |   31 ---
+ recipes/lua/lua-lanes-2.0.6/makefile.patch         |  207 --------------=
+------
+ recipes/lua/lua-lanes-2.0.6/uclibc.patch           |   13 --
+ recipes/lua/lua-lanes-2.1.0/makefile.patch         |  207 ++++++++++++++=
 ++++++
- .../ts72xx/0021-TS-72XX-LCD-console-driver.patch   |  528 +++
- ...M-ep93xx-Fix-inverted-RTS-and-DTR-signals.patch |   38 +
- recipes/linux/linux-2.6.38/ts72xx/defconfig        | 2214 ++++++++++
- recipes/linux/linux_2.6.36.bb                      |   25 -
- recipes/linux/linux_2.6.38.bb                      |   26 +
- .../0001-fix-LanesTimer-inifinite-thread-GC.patch  |   31 -
- recipes/lua/lua-lanes-2.0.6/makefile.patch         |  207 -
- recipes/lua/lua-lanes-2.0.6/uclibc.patch           |   13 -
- recipes/lua/lua-lanes-2.1.0/makefile.patch         |  207 +
- recipes/lua/lua-lanes-2.1.0/uclibc.patch           |   13 +
- recipes/lua/lua-lanes_2.0.6.bb                     |   33 -
- recipes/lua/lua-lanes_2.1.0.bb                     |   34 +
- recipes/lua/lua-rs232_1.0.0.bb                     |   28 -
- recipes/lua/lua-rs232_1.0.1.bb                     |   28 +
- recipes/zeromq/zeromq_2.1.1.bb                     |   20 +
- 59 files changed, 15843 insertions(+), 15335 deletions(-)
- delete mode 100644 recipes/librs232/librs232_1.0.0.bb
- create mode 100644 recipes/librs232/librs232_1.0.1.bb
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0001-ts72xx_base.pa=
-tch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0002-ts72xx_force_m=
-achine-id.patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0003-ep93xx_cpuinfo=
-.patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0004-ep93xx_eth.pat=
-ch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0005-ep93xx-m2m-DMA=
--support.patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0006-ts72xx_rs485.p=
-atch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0007-ts72xx_ts_ser1=
-.patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0008-ts72xx_ts_eth1=
-00.patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0009-ts72xx_pata.pa=
-tch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0010-ts72xx_gpio_i2=
-c.patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0011-ts72xx_dio_key=
-pad.patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0012-ts72xx_sbcinfo=
-.patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0013-ts72xx_max197.=
-patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0014-ts7200_nor_fla=
-sh.patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0015-ts72xx_sdcard.=
-patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0016-ts72xx_spi_tmp=
-124.patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0017-ts72xx-use-CPL=
-D-watchdog-for-reset.patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0018-ethoc-ts7300-f=
-ixes.patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0019-ts7300-add-eth=
-ernet-support.patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0023-ts72xx-add-lcd=
--linux-driver.patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/0024-ts72xx-add-GPI=
-O-keys.patch
- delete mode 100644 recipes/linux/linux-2.6.36/ts72xx/defconfig
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0001-ts72xx_base.pa=
-tch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0002-ts72xx_force_m=
-achine-id.patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0003-ep93xx_cpuinfo=
-.patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0004-ep93xx_eth.pat=
-ch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0005-ep93xx-m2m-DMA=
--support.patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0006-ts72xx_rs485.p=
-atch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0007-ts72xx_ts_ser1=
-.patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0008-ts72xx_ts_eth1=
-00.patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0009-ts72xx_pata.pa=
-tch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0010-ts72xx_gpio_i2=
-c.patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0011-ts72xx_dio_key=
-pad.patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0012-ts72xx_sbcinfo=
-.patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0013-ts72xx_max197.=
-patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0014-ts7200_nor_fla=
-sh.patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0015-ts72xx_sdcard.=
-patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0016-ts72xx_spi_tmp=
-124.patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0017-ts72xx-use-CPL=
-D-watchdog-for-reset.patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0018-ethoc-ts7300-f=
-ixes.patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0019-ts7300-add-eth=
-ernet-support.patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0020-ts72xx-add-lcd=
--linux-driver.patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0021-TS-72XX-LCD-co=
-nsole-driver.patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/0024-ARM-ep93xx-Fix=
--inverted-RTS-and-DTR-signals.patch
- create mode 100644 recipes/linux/linux-2.6.38/ts72xx/defconfig
+ recipes/lua/lua-lanes-2.1.0/uclibc.patch           |   13 ++
+ recipes/lua/lua-lanes_2.0.6.bb                     |   33 ---
+ recipes/lua/lua-lanes_2.1.0.bb                     |   34 ++++
+ 7 files changed, 254 insertions(+), 284 deletions(-)
  delete mode 100644 recipes/lua/lua-lanes-2.0.6/0001-fix-LanesTimer-inifi=
 nite-thread-GC.patch
  delete mode 100644 recipes/lua/lua-lanes-2.0.6/makefile.patch
@@ -208,9 +57,648 @@ nite-thread-GC.patch
  create mode 100644 recipes/lua/lua-lanes-2.1.0/uclibc.patch
  delete mode 100644 recipes/lua/lua-lanes_2.0.6.bb
  create mode 100644 recipes/lua/lua-lanes_2.1.0.bb
- delete mode 100644 recipes/lua/lua-rs232_1.0.0.bb
- create mode 100644 recipes/lua/lua-rs232_1.0.1.bb
- create mode 100644 recipes/zeromq/zeromq_2.1.1.bb
+
+diff --git a/recipes/lua/lua-lanes-2.0.6/0001-fix-LanesTimer-inifinite-th=
+read-GC.patch b/recipes/lua/lua-lanes-2.0.6/0001-fix-LanesTimer-inifinite=
+-thread-GC.patch
+deleted file mode 100644
+index 18fb36b..0000000
+--- a/recipes/lua/lua-lanes-2.0.6/0001-fix-LanesTimer-inifinite-thread-GC=
+.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From 69583ec6fc6cd18a0248d1233193bb2407dbda04 Mon Sep 17 00:00:00 2001
+-From: =3D?UTF-8?q?Petr=3D20=3DC5=3DA0tetiar?=3D <ynezz@true.cz>
+-Date: Sun, 31 Oct 2010 23:02:49 +0100
+-Subject: [PATCH] fix LanesTimer inifinite thread GC
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=3DUTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-threading.c 394: pthread_cond_destroy(ref) failed, 16 EBUSY
+-
+-Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
+----
+- src/lanes.c |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/src/lanes.c b/src/lanes.c
+-index c02c540..54cfa7a 100644
+---- a/src/lanes.c
+-+++ b/src/lanes.c
+-@@ -1559,7 +1559,7 @@ LUAG_FUNC( thread_gc ) {
+-=20
+-     // We can read 's->status' without locks, but not wait for it
+-     //
+--    if (s->status < DONE) {
+-+    if (s->status < DONE && strcmp(s->threadName, "LanesTimer")) {
+-         //
+-         selfdestruct_add(s);
+-         assert( s->selfdestruct_next );
+---=20
+-1.7.0.4
+-
+diff --git a/recipes/lua/lua-lanes-2.0.6/makefile.patch b/recipes/lua/lua=
+-lanes-2.0.6/makefile.patch
+deleted file mode 100644
+index 6807010..0000000
+--- a/recipes/lua/lua-lanes-2.0.6/makefile.patch
++++ /dev/null
+@@ -1,207 +0,0 @@
+-Index: lanes-2.0.6/src/Makefile
+-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+---- lanes-2.0.6.orig/src/Makefile	2009-01-22 07:32:18.000000000 +0100
+-+++ lanes-2.0.6/src/Makefile	2010-10-17 22:00:16.000000000 +0200
+-@@ -11,123 +11,21 @@
+-=20
+- OBJ=3D$(SRC:.c=3D.o)
+-=20
+--# LuaRocks gives 'LIBFLAG' from the outside
+--#
+--LIBFLAG=3D-shared
+--
+--OPT_FLAGS=3D-O2
+--    # -O0 -g
+--
+- LUA=3Dlua
+- LUAC=3Dluac
+-=20
+--_SO=3D.so
+--ifeq "$(findstring MINGW32,$(shell uname -s))" "MINGW32"
+--  _SO=3D.dll
+--endif
+--
+--ifeq "$(LUAROCKS)" ""
+--  ifeq "$(findstring MINGW32,$(shell uname -s))" "MINGW32"
+--    # MinGW MSYS on Windows
+--    #
+--    # - 'lua' and 'luac' expected to be on the path
+--    # - %LUA_DEV% must lead to include files and libraries (Lua for Win=
+dows >=3D 5.1.3.14)
+--    # - %MSCVR80% must be the full pathname of 'msvcr80.dll'
+--    #
+--    ifeq "$(LUA_DEV)" ""
+--      $(error LUA_DEV not defined - try i.e. 'make LUA_DEV=3D/c/Program=
+\ Files/Lua/5.1')
+--    endif
+--    ifeq "$(MSVCR80)" ""
+--      MSVCR80:=3D$(LUA_DEV)/install/support/Microsoft.VC80.CRT.SP1/MSVC=
+R80.DLL
+--      ifneq '$(shell test -f "$(MSVCR80)" && echo found)' 'found'
+--        $(error MSVCR80 not defined - set it to full path of msvcr80.dl=
+l')
+--      endif
+--      $(warning MSVCR80=3D$(MSVCR80))
+--    endif
+--    LUA_FLAGS:=3D-I "$(LUA_DEV)/include"
+--    LUA_LIBS:=3D"$(LUA_DEV)/lua5.1.dll" -lgcc -lmsvcr80 "$(MSVCR80)"
+--    LIBFLAG=3D-shared -Wl,-Map,lanes.map
+--  else
+--    # Autodetect LUA_FLAGS and/or LUA_LIBS
+--    #
+--    ifneq "$(shell which pkg-config)" ""
+--      ifeq "$(shell pkg-config --exists lua5.1 && echo 1)" "1"
+--        LUA_FLAGS:=3D$(shell pkg-config --cflags lua5.1)
+--        LUA_LIBS:=3D$(shell pkg-config --libs lua5.1)
+--          #
+--          # Ubuntu: -I/usr/include/lua5.1=20
+--          #         -llua5.1
+--      else
+--        ifeq "$(shell pkg-config --exists lua && echo 1)" "1"
+--          LUA_FLAGS:=3D$(shell pkg-config --cflags lua)
+--          LUA_LIBS:=3D$(shell pkg-config --libs lua)
+--            #
+--            # OS X fink with pkg-config:
+--            #      -I/sw/include=20
+--            #      -L/sw/lib -llua -lm
+--        else
+--          $(warning *** 'pkg-config' existed but did not know of 'lua[5=
+.1]' - Good luck!)
+--          LUA_FLAGS:=3D
+--          LUA_LIBS:=3D-llua
+--        endif
+--      endif
+--    else
+--      # No 'pkg-config'; try defaults
+--      #
+--      ifeq "$(shell uname -s)" "Darwin"
+--        $(warning *** Assuming 'fink' at default path)
+--        LUA_FLAGS:=3D-I/sw/include
+--        LUA_LIBS:=3D-L/sw/lib -llua
+--      else
+--        $(warning *** Assuming an arbitrary Lua installation; try insta=
+lling 'pkg-config')
+--        LUA_FLAGS:=3D
+--        LUA_LIBS:=3D-llua
+--      endif
+--    endif
+--  endif
+--
+--  ifeq "$(shell uname -s)" "Darwin"
+--    # Some machines need 'MACOSX_DEPLOYMENT_TARGET=3D10.3' for using '-=
+undefined dynamic_lookup'
+--    # (at least PowerPC running 10.4.11); does not harm the others
+--    #
+--    CC =3D MACOSX_DEPLOYMENT_TARGET=3D10.3 gcc
+--    LIBFLAG =3D -bundle -undefined dynamic_lookup
+--  endif
+-- =20
+--  CFLAGS=3D-Wall -Werror $(OPT_FLAGS) $(LUA_FLAGS)
+--  LIBS=3D$(LUA_LIBS)
+--endif
+--
+- #---
+--# PThread platform specifics
+--#
+--ifeq "$(shell uname -s)" "Linux"
+--  # -D_GNU_SOURCE needed for 'pthread_mutexattr_settype'
+--  CFLAGS +=3D -D_GNU_SOURCE -fPIC
+--
+--  # Use of -DUSE_PTHREAD_TIMEDJOIN is possible, but not recommended (sl=
+ower & keeps threads
+--  # unreleased somewhat longer)
+--  #CFLAGS +=3D -DUSE_PTHREAD_TIMEDJOIN
+--
+--  LIBS +=3D -lpthread
+--endif
+--
+--ifeq "$(shell uname -s)" "BSD"
+--  LIBS +=3D -lpthread
+--endif
+--
+--#---
+--all: lua51-$(MODULE)$(_SO)
+-+all: lua51-$(MODULE).so
+-=20
+- %.o: %.c *.h Makefile
+-=20
+- # Note: Don't put $(LUA_LIBS) ahead of $^; MSYS will not like that (I t=
+hink)
+- #
+--lua51-$(MODULE)$(_SO): $(OBJ)
+--	$(CC) $(LIBFLAG) $(LIBS) $^ $(LUA_LIBS) -o $@
+-+lua51-$(MODULE).so: $(OBJ)
+-+	$(CC) -shared -fPIC -lpthread -D_GNU_SOURCE `pkg-config --cflags --lib=
+s lua5.1` $(MYFLAGS) $^ -o $@
+-=20
+- clean:
+--	-rm -rf lua51-$(MODULE)$(_SO) *.lch *.o *.tmp *.map
+-+	-rm -rf lua51-$(MODULE).so *.lch *.o *.tmp *.map
+-=20
+- lanes.o: keeper.lch
+-=20
+-@@ -139,38 +37,5 @@
+- 	$(LUA) ../tools/bin2c.lua $@.tmp -o $@
+- 	-rm $@.tmp
+-=20
+--#---
+--# NSLU2 "slug" Linux ARM
+--#
+--nslu2:
+--	$(MAKE) all CFLAGS=3D"$(CFLAGS) -I/opt/include -L/opt/lib -D_GNU_SOURC=
+E -lpthread"
+--
+--#---
+--# Cross compiling to Win32 (MinGW on OS X Intel)
+--#
+--# Point WIN32_LUA51 to an extraction of LuaBinaries dll8 and dev packag=
+es.
+--#
+--# Note: Only works on platforms with same endianess (i.e. not from Powe=
+rPC OS X,
+--#       since 'luac' uses the host endianess)
+--#
+--# EXPERIMENTAL; NOT TESTED OF LATE.
+--#
+--MINGW_GCC=3Dmingw32-gcc
+--    # i686-pc-mingw32-gcc
+--
+--win32: $(WIN32_LUA51)/include/lua.h
+--	$(MAKE) build CC=3D$(MINGW_GCC) \
+--            LUA_FLAGS=3D-I$(WIN32_LUA51)/include \
+--            LUA_LIBS=3D"-L$(WIN32_LUA51) -llua51" \
+--            _SO=3D.dll \
+--            SO_FLAGS=3D-shared \
+--            LUA=3Dlua51 \
+--            LUAC=3Dluac51
+--
+--$(WIN32_LUA51)/include/lua.h:
+--	@echo "Usage: make win32 WIN32_LUA51=3D<path of extracted LuaBinaries =
+dll8 and dev packages>"
+--	@echo "                  [MINGW_GCC=3D...mingw32-gcc]"
+--	@false
+--
+--.PROXY:	all clean nslu2 win32
+-+.PROXY:	all clean
+-=20
+-Index: lanes-2.0.6/Makefile
+-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+---- lanes-2.0.6.orig/Makefile	2010-07-27 11:39:00.000000000 +0200
+-+++ lanes-2.0.6/Makefile	2010-10-17 22:14:20.000000000 +0200
+-@@ -32,8 +32,10 @@
+- else
+-   # Autodetect LUA & LUAC
+-   #
+--  LUA=3D$(word 1,$(shell which lua5.1) $(shell which lua51) lua)
+--  LUAC=3D$(word 1,$(shell which luac5.1) $(shell which luac51) luac)
+-+  #LUA=3D$(word 1,$(shell which lua5.1) $(shell which lua51) lua)
+-+  #LUAC=3D$(word 1,$(shell which luac5.1) $(shell which luac51) luac)
+-+  LUA=3Dlua
+-+  LUAC=3Dluac
+- endif
+-=20
+- _PREFIX=3DLUA_CPATH=3D./src/?$(_SO) LUA_PATH=3D"src/?.lua;./tests/?.lua=
+"
+-@@ -42,7 +44,7 @@
+- all: $(_TARGET_SO)
+-=20
+- $(_TARGET_SO): src/*.lua src/*.c src/*.h
+--	cd src && $(MAKE) LUA=3D$(LUA) LUAC=3D$(LUAC)
+-+	cd src && $(MAKE) LUA=3D$(LUA) LUAC=3D$(LUAC) MYFLAGS=3D'$(MYFLAGS)'
+-=20
+- clean:
+- 	cd src && $(MAKE) clean
+-@@ -183,7 +185,7 @@
+- #
+- install: $(_TARGET_SO) src/lanes.lua
+- 	mkdir -p $(LUA_LIBDIR) $(LUA_SHAREDIR)
+--	install -m 644 $(_TARGET_SO) $(LUA_LIBDIR)
+-+	install $(_TARGET_SO) $(LUA_LIBDIR)
+- 	cp -p src/lanes.lua $(LUA_SHAREDIR)
+-=20
+-=20
+diff --git a/recipes/lua/lua-lanes-2.0.6/uclibc.patch b/recipes/lua/lua-l=
+anes-2.0.6/uclibc.patch
+deleted file mode 100644
+index b3d1f83..0000000
+--- a/recipes/lua/lua-lanes-2.0.6/uclibc.patch
++++ /dev/null
+@@ -1,13 +0,0 @@
+-Index: lanes-2.0.6/src/threading.h
+-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+---- lanes-2.0.6.orig/src/threading.h	2010-10-10 09:35:20.000000000 +0200
+-+++ lanes-2.0.6/src/threading.h	2010-10-10 09:35:32.000000000 +0200
+-@@ -112,7 +112,7 @@
+-   #ifdef PLATFORM_OSX
+-     #define YIELD() pthread_yield_np()
+-   #else
+--    #define YIELD() pthread_yield()
+-+    #define YIELD() sched_yield()
+-   #endif
+- #endif
+-=20
+diff --git a/recipes/lua/lua-lanes-2.1.0/makefile.patch b/recipes/lua/lua=
+-lanes-2.1.0/makefile.patch
+new file mode 100644
+index 0000000..6807010
+--- /dev/null
++++ b/recipes/lua/lua-lanes-2.1.0/makefile.patch
+@@ -0,0 +1,207 @@
++Index: lanes-2.0.6/src/Makefile
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++--- lanes-2.0.6.orig/src/Makefile	2009-01-22 07:32:18.000000000 +0100
+++++ lanes-2.0.6/src/Makefile	2010-10-17 22:00:16.000000000 +0200
++@@ -11,123 +11,21 @@
++=20
++ OBJ=3D$(SRC:.c=3D.o)
++=20
++-# LuaRocks gives 'LIBFLAG' from the outside
++-#
++-LIBFLAG=3D-shared
++-
++-OPT_FLAGS=3D-O2
++-    # -O0 -g
++-
++ LUA=3Dlua
++ LUAC=3Dluac
++=20
++-_SO=3D.so
++-ifeq "$(findstring MINGW32,$(shell uname -s))" "MINGW32"
++-  _SO=3D.dll
++-endif
++-
++-ifeq "$(LUAROCKS)" ""
++-  ifeq "$(findstring MINGW32,$(shell uname -s))" "MINGW32"
++-    # MinGW MSYS on Windows
++-    #
++-    # - 'lua' and 'luac' expected to be on the path
++-    # - %LUA_DEV% must lead to include files and libraries (Lua for Win=
+dows >=3D 5.1.3.14)
++-    # - %MSCVR80% must be the full pathname of 'msvcr80.dll'
++-    #
++-    ifeq "$(LUA_DEV)" ""
++-      $(error LUA_DEV not defined - try i.e. 'make LUA_DEV=3D/c/Program=
+\ Files/Lua/5.1')
++-    endif
++-    ifeq "$(MSVCR80)" ""
++-      MSVCR80:=3D$(LUA_DEV)/install/support/Microsoft.VC80.CRT.SP1/MSVC=
+R80.DLL
++-      ifneq '$(shell test -f "$(MSVCR80)" && echo found)' 'found'
++-        $(error MSVCR80 not defined - set it to full path of msvcr80.dl=
+l')
++-      endif
++-      $(warning MSVCR80=3D$(MSVCR80))
++-    endif
++-    LUA_FLAGS:=3D-I "$(LUA_DEV)/include"
++-    LUA_LIBS:=3D"$(LUA_DEV)/lua5.1.dll" -lgcc -lmsvcr80 "$(MSVCR80)"
++-    LIBFLAG=3D-shared -Wl,-Map,lanes.map
++-  else
++-    # Autodetect LUA_FLAGS and/or LUA_LIBS
++-    #
++-    ifneq "$(shell which pkg-config)" ""
++-      ifeq "$(shell pkg-config --exists lua5.1 && echo 1)" "1"
++-        LUA_FLAGS:=3D$(shell pkg-config --cflags lua5.1)
++-        LUA_LIBS:=3D$(shell pkg-config --libs lua5.1)
++-          #
++-          # Ubuntu: -I/usr/include/lua5.1=20
++-          #         -llua5.1
++-      else
++-        ifeq "$(shell pkg-config --exists lua && echo 1)" "1"
++-          LUA_FLAGS:=3D$(shell pkg-config --cflags lua)
++-          LUA_LIBS:=3D$(shell pkg-config --libs lua)
++-            #
++-            # OS X fink with pkg-config:
++-            #      -I/sw/include=20
++-            #      -L/sw/lib -llua -lm
++-        else
++-          $(warning *** 'pkg-config' existed but did not know of 'lua[5=
+.1]' - Good luck!)
++-          LUA_FLAGS:=3D
++-          LUA_LIBS:=3D-llua
++-        endif
++-      endif
++-    else
++-      # No 'pkg-config'; try defaults
++-      #
++-      ifeq "$(shell uname -s)" "Darwin"
++-        $(warning *** Assuming 'fink' at default path)
++-        LUA_FLAGS:=3D-I/sw/include
++-        LUA_LIBS:=3D-L/sw/lib -llua
++-      else
++-        $(warning *** Assuming an arbitrary Lua installation; try insta=
+lling 'pkg-config')
++-        LUA_FLAGS:=3D
++-        LUA_LIBS:=3D-llua
++-      endif
++-    endif
++-  endif
++-
++-  ifeq "$(shell uname -s)" "Darwin"
++-    # Some machines need 'MACOSX_DEPLOYMENT_TARGET=3D10.3' for using '-=
+undefined dynamic_lookup'
++-    # (at least PowerPC running 10.4.11); does not harm the others
++-    #
++-    CC =3D MACOSX_DEPLOYMENT_TARGET=3D10.3 gcc
++-    LIBFLAG =3D -bundle -undefined dynamic_lookup
++-  endif
++- =20
++-  CFLAGS=3D-Wall -Werror $(OPT_FLAGS) $(LUA_FLAGS)
++-  LIBS=3D$(LUA_LIBS)
++-endif
++-
++ #---
++-# PThread platform specifics
++-#
++-ifeq "$(shell uname -s)" "Linux"
++-  # -D_GNU_SOURCE needed for 'pthread_mutexattr_settype'
++-  CFLAGS +=3D -D_GNU_SOURCE -fPIC
++-
++-  # Use of -DUSE_PTHREAD_TIMEDJOIN is possible, but not recommended (sl=
+ower & keeps threads
++-  # unreleased somewhat longer)
++-  #CFLAGS +=3D -DUSE_PTHREAD_TIMEDJOIN
++-
++-  LIBS +=3D -lpthread
++-endif
++-
++-ifeq "$(shell uname -s)" "BSD"
++-  LIBS +=3D -lpthread
++-endif
++-
++-#---
++-all: lua51-$(MODULE)$(_SO)
+++all: lua51-$(MODULE).so
++=20
++ %.o: %.c *.h Makefile
++=20
++ # Note: Don't put $(LUA_LIBS) ahead of $^; MSYS will not like that (I t=
+hink)
++ #
++-lua51-$(MODULE)$(_SO): $(OBJ)
++-	$(CC) $(LIBFLAG) $(LIBS) $^ $(LUA_LIBS) -o $@
+++lua51-$(MODULE).so: $(OBJ)
+++	$(CC) -shared -fPIC -lpthread -D_GNU_SOURCE `pkg-config --cflags --lib=
+s lua5.1` $(MYFLAGS) $^ -o $@
++=20
++ clean:
++-	-rm -rf lua51-$(MODULE)$(_SO) *.lch *.o *.tmp *.map
+++	-rm -rf lua51-$(MODULE).so *.lch *.o *.tmp *.map
++=20
++ lanes.o: keeper.lch
++=20
++@@ -139,38 +37,5 @@
++ 	$(LUA) ../tools/bin2c.lua $@.tmp -o $@
++ 	-rm $@.tmp
++=20
++-#---
++-# NSLU2 "slug" Linux ARM
++-#
++-nslu2:
++-	$(MAKE) all CFLAGS=3D"$(CFLAGS) -I/opt/include -L/opt/lib -D_GNU_SOURC=
+E -lpthread"
++-
++-#---
++-# Cross compiling to Win32 (MinGW on OS X Intel)
++-#
++-# Point WIN32_LUA51 to an extraction of LuaBinaries dll8 and dev packag=
+es.
++-#
++-# Note: Only works on platforms with same endianess (i.e. not from Powe=
+rPC OS X,
++-#       since 'luac' uses the host endianess)
++-#
++-# EXPERIMENTAL; NOT TESTED OF LATE.
++-#
++-MINGW_GCC=3Dmingw32-gcc
++-    # i686-pc-mingw32-gcc
++-
++-win32: $(WIN32_LUA51)/include/lua.h
++-	$(MAKE) build CC=3D$(MINGW_GCC) \
++-            LUA_FLAGS=3D-I$(WIN32_LUA51)/include \
++-            LUA_LIBS=3D"-L$(WIN32_LUA51) -llua51" \
++-            _SO=3D.dll \
++-            SO_FLAGS=3D-shared \
++-            LUA=3Dlua51 \
++-            LUAC=3Dluac51
++-
++-$(WIN32_LUA51)/include/lua.h:
++-	@echo "Usage: make win32 WIN32_LUA51=3D<path of extracted LuaBinaries =
+dll8 and dev packages>"
++-	@echo "                  [MINGW_GCC=3D...mingw32-gcc]"
++-	@false
++-
++-.PROXY:	all clean nslu2 win32
+++.PROXY:	all clean
++=20
++Index: lanes-2.0.6/Makefile
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++--- lanes-2.0.6.orig/Makefile	2010-07-27 11:39:00.000000000 +0200
+++++ lanes-2.0.6/Makefile	2010-10-17 22:14:20.000000000 +0200
++@@ -32,8 +32,10 @@
++ else
++   # Autodetect LUA & LUAC
++   #
++-  LUA=3D$(word 1,$(shell which lua5.1) $(shell which lua51) lua)
++-  LUAC=3D$(word 1,$(shell which luac5.1) $(shell which luac51) luac)
+++  #LUA=3D$(word 1,$(shell which lua5.1) $(shell which lua51) lua)
+++  #LUAC=3D$(word 1,$(shell which luac5.1) $(shell which luac51) luac)
+++  LUA=3Dlua
+++  LUAC=3Dluac
++ endif
++=20
++ _PREFIX=3DLUA_CPATH=3D./src/?$(_SO) LUA_PATH=3D"src/?.lua;./tests/?.lua=
+"
++@@ -42,7 +44,7 @@
++ all: $(_TARGET_SO)
++=20
++ $(_TARGET_SO): src/*.lua src/*.c src/*.h
++-	cd src && $(MAKE) LUA=3D$(LUA) LUAC=3D$(LUAC)
+++	cd src && $(MAKE) LUA=3D$(LUA) LUAC=3D$(LUAC) MYFLAGS=3D'$(MYFLAGS)'
++=20
++ clean:
++ 	cd src && $(MAKE) clean
++@@ -183,7 +185,7 @@
++ #
++ install: $(_TARGET_SO) src/lanes.lua
++ 	mkdir -p $(LUA_LIBDIR) $(LUA_SHAREDIR)
++-	install -m 644 $(_TARGET_SO) $(LUA_LIBDIR)
+++	install $(_TARGET_SO) $(LUA_LIBDIR)
++ 	cp -p src/lanes.lua $(LUA_SHAREDIR)
++=20
++=20
+diff --git a/recipes/lua/lua-lanes-2.1.0/uclibc.patch b/recipes/lua/lua-l=
+anes-2.1.0/uclibc.patch
+new file mode 100644
+index 0000000..b3d1f83
+--- /dev/null
++++ b/recipes/lua/lua-lanes-2.1.0/uclibc.patch
+@@ -0,0 +1,13 @@
++Index: lanes-2.0.6/src/threading.h
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++--- lanes-2.0.6.orig/src/threading.h	2010-10-10 09:35:20.000000000 +0200
+++++ lanes-2.0.6/src/threading.h	2010-10-10 09:35:32.000000000 +0200
++@@ -112,7 +112,7 @@
++   #ifdef PLATFORM_OSX
++     #define YIELD() pthread_yield_np()
++   #else
++-    #define YIELD() pthread_yield()
+++    #define YIELD() sched_yield()
++   #endif
++ #endif
++=20
+diff --git a/recipes/lua/lua-lanes_2.0.6.bb b/recipes/lua/lua-lanes_2.0.6=
+.bb
+deleted file mode 100644
+index dc9a60d..0000000
+--- a/recipes/lua/lua-lanes_2.0.6.bb
++++ /dev/null
+@@ -1,33 +0,0 @@
+-DESCRIPTION =3D "Lua Lanes is a Lua extension library providing the poss=
+ibility to run multiple Lua states in parallel."
+-LICENSE =3D "MIT"
+-HOMEPAGE =3D "http://kotisivu.dnainternet.net/askok/bin/lanes/index.html=
+"
+-
+-DEPENDS +=3D "lua5.1-native"
+-RDEPENDS_${PN} +=3D "lua5.1"
+-
+-PR =3D "r1"
+-S =3D "${WORKDIR}/lanes-${PV}"
+-
+-SRC_URI =3D "http://luaforge.net/frs/download.php/4652/lanes-2.0.6.tgz \
+-           file://makefile.patch \
+-           file://0001-fix-LanesTimer-inifinite-thread-GC.patch \
+-          "
+-
+-UCLIBC_PATCHES =3D "file://uclibc.patch"
+-SRC_URI_append_libc-uclibc =3D "${UCLIBC_PATCHES}"
+-
+-LUA_LIB_DIR =3D  "${libdir}/lua/5.1"
+-LUA_SHARE_DIR =3D "${datadir}/lua/5.1"
+-
+-PACKAGES =3D "${PN} ${PN}-dbg"
+-FILES_${PN} =3D "${LUA_LIB_DIR}/lua51-lanes.so ${LUA_SHARE_DIR}/lanes.lu=
+a"
+-FILES_${PN}-dbg =3D "${LUA_LIB_DIR}/.debug/lua51-lanes.so"
+-
+-EXTRA_OEMAKE =3D "MYFLAGS=3D'${CFLAGS} ${LDFLAGS}'"
+-
+-do_install() {
+-	oe_runmake install DESTDIR=3D'${D}/usr'=20
+-}
+-
+-SRC_URI[md5sum] =3D "1716bdf138fcc65b7069aaad864da677"
+-SRC_URI[sha256sum] =3D "7b07fa1c21749981ec0addcf8e9e85acfca91efe8d3f6498=
+2a6ac0bc6a615e70"
+diff --git a/recipes/lua/lua-lanes_2.1.0.bb b/recipes/lua/lua-lanes_2.1.0=
+.bb
+new file mode 100644
+index 0000000..bf5b3e6
+--- /dev/null
++++ b/recipes/lua/lua-lanes_2.1.0.bb
+@@ -0,0 +1,34 @@
++DESCRIPTION =3D "Lua Lanes is a Lua extension library providing the poss=
+ibility to run multiple Lua states in parallel."
++LICENSE =3D "MIT"
++HOMEPAGE =3D "http://kotisivu.dnainternet.net/askok/bin/lanes/index.html=
+"
++
++DEPENDS +=3D "lua5.1-native"
++RDEPENDS_${PN} +=3D "lua5.1"
++
++PR =3D "r0"
++
++S =3D "${WORKDIR}/git/"
++SRCREV =3D "5499ec1a61be9797c57834618a49731952b1d212"
++
++SRC_URI =3D "git://github.com/LuaLanes/lanes.git;protocol=3Dgit \
++           file://makefile.patch \
++          "
++
++UCLIBC_PATCHES =3D "file://uclibc.patch"
++SRC_URI_append_libc-uclibc =3D "${UCLIBC_PATCHES}"
++
++LUA_LIB_DIR =3D  "${libdir}/lua/5.1"
++LUA_SHARE_DIR =3D "${datadir}/lua/5.1"
++
++PACKAGES =3D "${PN} ${PN}-dbg"
++FILES_${PN} =3D "${LUA_LIB_DIR}/lua51-lanes.so ${LUA_SHARE_DIR}/lanes.lu=
+a"
++FILES_${PN}-dbg =3D "${LUA_LIB_DIR}/.debug/lua51-lanes.so"
++
++EXTRA_OEMAKE =3D "MYFLAGS=3D'${CFLAGS} ${LDFLAGS}'"
++
++do_install() {
++	oe_runmake install DESTDIR=3D'${D}/usr'=20
++}
++
++SRC_URI[md5sum] =3D "1716bdf138fcc65b7069aaad864da677"
++SRC_URI[sha256sum] =3D "7b07fa1c21749981ec0addcf8e9e85acfca91efe8d3f6498=
+2a6ac0bc6a615e70"
+--=20
+1.7.1
 
 
 
