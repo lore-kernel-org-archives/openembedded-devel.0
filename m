@@ -1,24 +1,35 @@
-Received: from smtp206.alice.it ([82.57.200.102])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ospite@studenti.unina.it>) id 1Q6jam-0000JA-DW
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Apr 2011 15:13:16 +0200
-Received: from jcn (87.11.136.76) by smtp206.alice.it (8.5.124.08)
-	(authenticated as fospite@alice.it)
-	id 4D49918D0525C98D; Mon, 4 Apr 2011 15:05:14 +0200
-Date: Mon, 4 Apr 2011 15:05:06 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q6kJA-0005I0-4b for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Apr 2011 15:59:08 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q6kHB-0005Uw-9P for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Apr 2011 15:57:05 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 04 Apr 2011 15:57:05 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 04 Apr 2011 15:57:05 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20110404150506.3995e1f6.ospite@studenti.unina.it>
-In-Reply-To: <1301416483-7255-1-git-send-email-ospite@studenti.unina.it>
-References: <1301416483-7255-1-git-send-email-ospite@studenti.unina.it>
-X-Mailer: Sylpheed 3.1.0 (GTK+ 2.24.3; x86_64-unknown-linux-gnu)
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 04 Apr 2011 15:56:50 +0200
+Message-ID: <incin3$3vi$1@dough.gmane.org>
+References: <AANLkTinD5vHUrhcuB1McLOkG4M+K7T5zAvCX276Xti8a@mail.gmail.com>	<4D657F34.5050200@mentor.com>
+	<BANLkTik=S6Ui--WVgGMZO0XiUoGsaQxU0g@mail.gmail.com>
 Mime-Version: 1.0
-Subject: Re: [RFC, PATCH] classes/mirrors.bbclass: add mirror for download.osgeo.org
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <BANLkTik=S6Ui--WVgGMZO0XiUoGsaQxU0g@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: VMware disk image type
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,61 +43,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Apr 2011 13:13:16 -0000
-X-Groupsio-MsgNum: 30889
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg="PGP-SHA1";
-	boundary="Signature=_Mon__4_Apr_2011_15_05_07_+0200_FWDWZf_EzHR3fdrb"
+X-List-Received-Date: Mon, 04 Apr 2011 13:59:08 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---Signature=_Mon__4_Apr_2011_15_05_07_+0200_FWDWZf_EzHR3fdrb
-Content-Type: text/plain; charset=US-ASCII
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Tue, 29 Mar 2011 18:34:43 +0200
-Antonio Ospite <ospite@studenti.unina.it> wrote:
+On 04-04-11 13:21, Mickael Chazaux wrote:
+> Hi,
+> 
+> 2011/2/23 Tom Rini <tom_rini@mentor.com>:
+>> On 02/23/2011 05:48 AM, Mickael Chazaux wrote:
+>>>
+>>> Hi,
+>>>
+>>> I see there is a vmware.conf in conf/machine, but it does not generate
+>>> vmdk (vmware virtual disk files) files. Here are the steps I take to
+>>> do that:
+>>>
+>>> - create an empty file the size wanted (with dd),
+>>> - format it to ext3 (mkfs.ext3 myfile)
+>>> - mount it loopback (mount -o loop myfile /mnt)
+>>> - untar the OE-generated rootfs in /mnt
+>>> - create a /boot/extlinux.conf [1],
+>>> - install extlinux in /boot (extlinux -i /mnt/boot)
+>>> - umount,
+>>> - convert to vmdk (using qemu-img -O vmdk myfile myfile.vmdk)
+>>> - boot it in vmware.
+>>>
+>>> Is it possible to add a "vmdk" image to openembedded to do this
+>>> automatically?
+>>
+>> Yes, patches would be welcome.  This would reside in conf/bitbake.conf.  See
+>> the ubi/ubifs image examples for how to generate slightly complex images
+>> like this.  And I would recommend adding vmdk.ext[234] as the image names
+>> (and supply at least one of them, someone else might step up and do the
+>> regex for the others if you don't).  Thanks!
+>>
+> 
+> The problem is the loopback mount, which requires root privileges, and
+> is required by extlinux for its installation. Is there another method?
 
-> The host download.osgeo.org is not reachable from some network/country
-> because of some routing issue, and this makes the do_fetch task of the
-> libtiff recipe to fail:
->=20
-[..]
+If your user is in the 'disk' group it should also work. Narcissus runs
+as 'www-data' and generated OMAP SD images with loopmounts, adding
+'www-data' to 'disks' fixed the weird problems we were seeing (vfat loop
+mounts worked, ext3 didn't0.
 
-> Add a reachable mirror for it, so that the tiff recipe can build fine.
->=20
-> Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
-> ---
->=20
-> A less invasive solution would be to change the SRC_URI address directly =
-in=20
-> the recipe, but I don't know if that can affects anyone else, or we can e=
-ven=20
-> have a copy of the archive hosted on mirrors.openembedded.org and live wi=
-th=20
-> that until the next release. What is  your opinion?
->=20
+regards,
 
-Ping.
-
---=20
-Antonio Ospite
-http://ao2.it
-
-PGP public key ID: 0x4553B001
-
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
-
---Signature=_Mon__4_Apr_2011_15_05_07_+0200_FWDWZf_EzHR3fdrb
-Content-Type: application/pgp-signature
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEARECAAYFAk2ZwgMACgkQ5xr2akVTsAFF2QCfagINqbhdy0q5vSzWdugtzN3P
-mJYAoKa9q4DpdJ2BLAc4abmZ8fYuSLO9
-=p0uV
+iD8DBQFNmc4iMkyGM64RGpERAuygAKCk1FXClMR8xQZU99Cu7d4ZIVsXhgCeP89h
+XQPhqxENu/aE+9LsE9g1R88=
+=J9PL
 -----END PGP SIGNATURE-----
 
---Signature=_Mon__4_Apr_2011_15_05_07_+0200_FWDWZf_EzHR3fdrb--
+
+
