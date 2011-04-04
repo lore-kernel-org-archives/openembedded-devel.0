@@ -1,24 +1,27 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1Q6kTS-0002yL-Ns
+	(envelope-from <gary@mlbassoc.com>) id 1Q6kpg-00017G-0k
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Apr 2011 16:09:46 +0200
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q6kRU-0006Yu-Aw
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Apr 2011 16:07:44 +0200
-From: Phil Blundell <philb@gnu.org>
+	Mon, 04 Apr 2011 16:32:44 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 7EF1A16605C2; Mon,  4 Apr 2011 08:30:40 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2-r929478 (2010-03-31) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2-r929478
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id C5C8F16601B1;
+	Mon,  4 Apr 2011 08:30:33 -0600 (MDT)
+Message-ID: <4D99D609.8020800@mlbassoc.com>
+Date: Mon, 04 Apr 2011 08:30:33 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc13
+	Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <BANLkTik=S6Ui--WVgGMZO0XiUoGsaQxU0g@mail.gmail.com>
-References: <AANLkTinD5vHUrhcuB1McLOkG4M+K7T5zAvCX276Xti8a@mail.gmail.com>
-	<4D657F34.5050200@mentor.com>
-	<BANLkTik=S6Ui--WVgGMZO0XiUoGsaQxU0g@mail.gmail.com>
-Date: Mon, 04 Apr 2011 15:07:41 +0100
-Message-ID: <1301926061.14449.273.camel@phil-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: VMware disk image type
+Subject: Master broken?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,53 +35,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Apr 2011 14:09:47 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 04 Apr 2011 14:32:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2011-04-04 at 13:21 +0200, Mickael Chazaux wrote:
-> Hi,
-> 
-> 2011/2/23 Tom Rini <tom_rini@mentor.com>:
-> > On 02/23/2011 05:48 AM, Mickael Chazaux wrote:
-> >>
-> >> Hi,
-> >>
-> >> I see there is a vmware.conf in conf/machine, but it does not generate
-> >> vmdk (vmware virtual disk files) files. Here are the steps I take to
-> >> do that:
-> >>
-> >> - create an empty file the size wanted (with dd),
-> >> - format it to ext3 (mkfs.ext3 myfile)
-> >> - mount it loopback (mount -o loop myfile /mnt)
-> >> - untar the OE-generated rootfs in /mnt
-> >> - create a /boot/extlinux.conf [1],
-> >> - install extlinux in /boot (extlinux -i /mnt/boot)
-> >> - umount,
-> >> - convert to vmdk (using qemu-img -O vmdk myfile myfile.vmdk)
-> >> - boot it in vmware.
-> >>
-> >> Is it possible to add a "vmdk" image to openembedded to do this
-> >> automatically?
-> >
-> > Yes, patches would be welcome.  This would reside in conf/bitbake.conf.  See
-> > the ubi/ubifs image examples for how to generate slightly complex images
-> > like this.  And I would recommend adding vmdk.ext[234] as the image names
-> > (and supply at least one of them, someone else might step up and do the
-> > regex for the others if you don't).  Thanks!
-> >
-> 
-> The problem is the loopback mount, which requires root privileges, and
-> is required by extlinux for its installation. Is there another method?
+I just updated to org.openembedded.dev 556819235f501bf762c8d8cc9f41a1a8244b106f
 
-You could avoid the loopback mount for the first steps by using
-genext2fs to create the image and then tune2fs to add a journal inode.
-But I can't think of any way to avoid the need for loopback when
-installing extlinux (apart, obviously, from patching either extlinux
-itself or fakeroot).
+Now I get these errors during the initial parse:
+   $ bitbake xfce-image
+   NOTE: Handling BitBake files: | (0046/7335) [ 0 %]ERROR: global name 'runtime_mapping_rename' is not defined while parsing /local/Angstrom_BeagleBoard/openembedded 
+/recipes/images/x11-gpe-image.bb
+   NOTE: Handling BitBake files: \ (0053/7335) [ 0 %]ERROR: global name 'runtime_mapping_rename' is not defined while parsing 
+/local/Angstrom_BeagleBoard/openembedded/recipes/images/angstrom-gnome-image.bb
+   NOTE: Handling BitBake files: \ (0113/7335) [ 1 %]ERROR: global name 'runtime_mapping_rename' is not defined while parsing 
+/local/Angstrom_BeagleBoard/openembedded/recipes/images/helloworld-image.bb
+    ... etc
 
-p.
+What am I missing?
 
-
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
