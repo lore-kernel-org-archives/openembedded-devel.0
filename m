@@ -1,28 +1,39 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1Q6krj-0001DQ-KX
+	(envelope-from <v2g.udel@gmail.com>) id 1Q6kvx-0001Lr-Js
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Apr 2011 16:34:51 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 8164516605BD; Mon,  4 Apr 2011 08:32:48 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2-r929478 (2010-03-31) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2-r929478
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id C45DB16601B1;
-	Mon,  4 Apr 2011 08:32:41 -0600 (MDT)
-Message-ID: <4D99D689.9050705@mlbassoc.com>
-Date: Mon, 04 Apr 2011 08:32:41 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc13
-	Thunderbird/3.1.7
-MIME-Version: 1.0
+	Mon, 04 Apr 2011 16:39:13 +0200
+Received: by qyk35 with SMTP id 35so1171105qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 04 Apr 2011 07:37:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:content-type:mime-version:subject:from
+	:in-reply-to:date:content-transfer-encoding:message-id:references:to
+	:x-mailer; bh=iHMVy5mf6mU0t6kBlPqmoG1vEug77pCVo9ZaN5Iwels=;
+	b=bqVUoUnxPtFDrgtu0W4u81JW8z6m6utBkFaHvIDFSba3hTNadeVx2pIA8gPeClNwgj
+	l/yU238ToSlgB63ob3BuIEIBZ1Hgh15TcO9rHN3wS+3iZipGfS1OgbUEvQsvpTcNP7U+
+	nYuziL1+KOtrR0DKSx1B7J+dZs6kEuJDUQvYA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to:x-mailer;
+	b=Q/1v2YKm/VGPS3aOTey5WtkGG8sQuFQ8+VyuNdGjZcGNslXFH/3Hj+rxS6NePHd0y0
+	PrYVp+E7S6kjjdGmatIqz5SuV1tRXyQufnTK3Ahd6tZfy8SQ8LABE7D38FnkvMqMmcbj
+	tc5eg8wjaHLShigkP4BqyIUK5xkXXKsWbcoiE=
+Received: by 10.229.221.139 with SMTP id ic11mr5831433qcb.129.1301927828105;
+	Mon, 04 Apr 2011 07:37:08 -0700 (PDT)
+Received: from roaming-188-24.nss.udel.edu (roaming-188-24.nss.udel.edu
+	[128.175.188.24])
+	by mx.google.com with ESMTPS id m7sm3490059qcg.29.2011.04.04.07.37.07
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 04 Apr 2011 07:37:07 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1084)
+From: Sachin Kamboj <v2g.udel@gmail.com>
+In-Reply-To: <4D99D689.9050705@mlbassoc.com>
+Date: Mon, 4 Apr 2011 10:37:06 -0400
+Message-Id: <79CF2877-D36A-412A-AF90-6FF538AACF9C@gmail.com>
+References: <4D99D609.8020800@mlbassoc.com> <4D99D689.9050705@mlbassoc.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4D99D609.8020800@mlbassoc.com>
-In-Reply-To: <4D99D609.8020800@mlbassoc.com>
+X-Mailer: Apple Mail (2.1084)
 Subject: Re: Master broken?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -37,35 +48,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Apr 2011 14:34:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 04 Apr 2011 14:39:13 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On 04/04/2011 08:30 AM, Gary Thomas wrote:
-> I just updated to org.openembedded.dev 556819235f501bf762c8d8cc9f41a1a8244b106f
+The problem is "angstrom-2008.1" has been retired and is no longer =
+available in the master branch. Use "angstrom-2010.x" instead as your =
+distro. Alternatively, use the maintenance branch:
 
-To be clear, local.conf includes these settings:
-   DISTRO = "angstrom-2008.1"
-   MACHINE = "beagleboard"
-   IMAGE_PKGTYPE ?= "ipk"
+=
+http://www.angstrom-distribution.org/angstrom-20081-moves-maintenance-bran=
+ch
+=20
+/Sachin.
 
-> Now I get these errors during the initial parse:
-> $ bitbake xfce-image
-> NOTE: Handling BitBake files: | (0046/7335) [ 0 %]ERROR: global name 'runtime_mapping_rename' is not defined while parsing /local/Angstrom_BeagleBoard/openembedded
-> /recipes/images/x11-gpe-image.bb
-> NOTE: Handling BitBake files: \ (0053/7335) [ 0 %]ERROR: global name 'runtime_mapping_rename' is not defined while parsing
-> /local/Angstrom_BeagleBoard/openembedded/recipes/images/angstrom-gnome-image.bb
-> NOTE: Handling BitBake files: \ (0113/7335) [ 1 %]ERROR: global name 'runtime_mapping_rename' is not defined while parsing
-> /local/Angstrom_BeagleBoard/openembedded/recipes/images/helloworld-image.bb
-> ... etc
->
-> What am I missing?
->
+On Apr 4, 2011, at 10:32 AM, Gary Thomas wrote:
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+> On 04/04/2011 08:30 AM, Gary Thomas wrote:
+>> I just updated to org.openembedded.dev =
+556819235f501bf762c8d8cc9f41a1a8244b106f
+>=20
+> To be clear, local.conf includes these settings:
+>  DISTRO =3D "angstrom-2008.1"
+>  MACHINE =3D "beagleboard"
+>  IMAGE_PKGTYPE ?=3D "ipk"
+>=20
+>> Now I get these errors during the initial parse:
+>> $ bitbake xfce-image
+>> NOTE: Handling BitBake files: | (0046/7335) [ 0 %]ERROR: global name =
+'runtime_mapping_rename' is not defined while parsing =
+/local/Angstrom_BeagleBoard/openembedded
+>> /recipes/images/x11-gpe-image.bb
+>> NOTE: Handling BitBake files: \ (0053/7335) [ 0 %]ERROR: global name =
+'runtime_mapping_rename' is not defined while parsing
+>> =
+/local/Angstrom_BeagleBoard/openembedded/recipes/images/angstrom-gnome-ima=
+ge.bb
+>> NOTE: Handling BitBake files: \ (0113/7335) [ 1 %]ERROR: global name =
+'runtime_mapping_rename' is not defined while parsing
+>> =
+/local/Angstrom_BeagleBoard/openembedded/recipes/images/helloworld-image.b=
+b
+>> ... etc
+>>=20
+>> What am I missing?
+>>=20
+>=20
+> --=20
+> ------------------------------------------------------------
+> Gary Thomas                 |  Consulting for the
+> MLB Associates              |    Embedded world
+> ------------------------------------------------------------
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
