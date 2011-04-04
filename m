@@ -1,34 +1,36 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Q6l4q-0001hZ-LT
+	(envelope-from <chase.maupin@ti.com>) id 1Q6l95-0001pQ-FU
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Apr 2011 16:48:24 +0200
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Q6l2r-0006c8-0Q from Tom_Rini@mentor.com ;
-	Mon, 04 Apr 2011 07:46:21 -0700
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Mon, 4 Apr 2011 07:44:22 -0700
-Received: from [172.30.80.151] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
-	with Microsoft SMTP Server id 14.1.270.1;
-	Mon, 4 Apr 2011 07:46:20 -0700
-Message-ID: <4D99D9B6.8090108@mentor.com>
-Date: Mon, 4 Apr 2011 07:46:14 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+	Mon, 04 Apr 2011 16:52:47 +0200
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id p34Eog6f017116
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 4 Apr 2011 09:50:42 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id p34EofIZ010161
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 4 Apr 2011 09:50:41 -0500 (CDT)
+Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p34EofOI016351
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 4 Apr 2011 09:50:41 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dsbe71.ent.ti.com
+	([156.117.232.23]) with mapi; Mon, 4 Apr 2011 09:50:32 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Mon, 4 Apr 2011 09:50:30 -0500
+Thread-Topic: Unused patches in x-load-git directory
+Thread-Index: Acvy16R5X8Ym+0YeSgSvCCjqTiP8BQ==
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080340C6812C@dlee06.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-To: Mickael Chazaux <mickael.chazaux@gmail.com>
-References: <AANLkTinD5vHUrhcuB1McLOkG4M+K7T5zAvCX276Xti8a@mail.gmail.com>	<4D657F34.5050200@mentor.com>
-	<BANLkTik=S6Ui--WVgGMZO0XiUoGsaQxU0g@mail.gmail.com>
-In-Reply-To: <BANLkTik=S6Ui--WVgGMZO0XiUoGsaQxU0g@mail.gmail.com>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 04 Apr 2011 14:44:22.0912 (UTC)
-	FILETIME=[C9955000:01CBF2D6]
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: VMware disk image type
+Subject: Unused patches in x-load-git directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,50 +44,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Apr 2011 14:48:25 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 04 Apr 2011 14:52:47 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On 04/04/2011 04:21 AM, Mickael Chazaux wrote:
-> Hi,
-> 
-> 2011/2/23 Tom Rini <tom_rini@mentor.com>:
->> On 02/23/2011 05:48 AM, Mickael Chazaux wrote:
->>>
->>> Hi,
->>>
->>> I see there is a vmware.conf in conf/machine, but it does not generate
->>> vmdk (vmware virtual disk files) files. Here are the steps I take to
->>> do that:
->>>
->>> - create an empty file the size wanted (with dd),
->>> - format it to ext3 (mkfs.ext3 myfile)
->>> - mount it loopback (mount -o loop myfile /mnt)
->>> - untar the OE-generated rootfs in /mnt
->>> - create a /boot/extlinux.conf [1],
->>> - install extlinux in /boot (extlinux -i /mnt/boot)
->>> - umount,
->>> - convert to vmdk (using qemu-img -O vmdk myfile myfile.vmdk)
->>> - boot it in vmware.
->>>
->>> Is it possible to add a "vmdk" image to openembedded to do this
->>> automatically?
->>
->> Yes, patches would be welcome.  This would reside in conf/bitbake.conf.  See
->> the ubi/ubifs image examples for how to generate slightly complex images
->> like this.  And I would recommend adding vmdk.ext[234] as the image names
->> (and supply at least one of them, someone else might step up and do the
->> regex for the others if you don't).  Thanks!
->>
-> 
-> The problem is the loopback mount, which requires root privileges, and
-> is required by extlinux for its installation. Is there another method?
+All,
 
-See classes/syslinux.bbclass for how we handle doing syslinux today.
-Something similar should be doable for extlinux if you can't use syslinux.
+I noticed that there are 5 patches in the recipes/x-load/x-load-git directo=
+ry that do not seem to be used by any recipes.  At least one of the patches=
+ seems to have been merged into the upstream project (http://gitorious.org/=
+x-loader/x-loader/commits/master).  Is anyone using the patches below?  If =
+not then I'll submit a patch to remove them.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+0001-OMAP4-clocks-Enable-only-required-clks.patch
+0002-OMAP4-Select-DPLL-PER-Clock-as-source-for-SGX-FCLK.patch
+0003-MUX-Configure-SYS_NIRQ2-pin-in-safe-mode.patch
+0004-OMAP4-clocks-Disable-slimbus-and-pad_clks.patch
+0005-omap4-Make-1GHz-as-default-MPU-clock.patch =20
+
+Sincerely,
+Chase Maupin
+Open Platforms
+ARM MPU
+e-mail: chase.maupin@ti.com
+phone: (214) 567-2950
+
+For support:
+Forums - http://community.ti.com/forums/
+Wiki - http://wiki.davincidsp.com/
+
 
 
