@@ -1,33 +1,35 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Q6oIC-0002AM-GY
+	(envelope-from <obi@opendreambox.org>) id 1Q6oIm-0002FU-9O
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Apr 2011 20:14:24 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1Q6oGC-0002xu-OI from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Apr 2011 11:12:20 -0700
-Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Mon, 4 Apr 2011 11:12:20 -0700
-Received: from [172.30.80.151] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
-	Mon, 4 Apr 2011 11:12:19 -0700
-Message-ID: <4D9A09FE.8030507@mentor.com>
-Date: Mon, 4 Apr 2011 11:12:14 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+	Mon, 04 Apr 2011 20:15:00 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 79498314FC53
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  4 Apr 2011 20:12:57 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id GgUZFapvONlR
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  4 Apr 2011 20:12:51 +0200 (CEST)
+Received: from [172.22.22.61] (ip-109-85-231-67.web.vodafone.de
+	[109.85.231.67])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 816F6314FC51
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  4 Apr 2011 20:12:51 +0200 (CEST)
+Message-ID: <4D9A0A1D.3020209@opendreambox.org>
+Date: Mon, 04 Apr 2011 20:12:45 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.15) Gecko/20110307 Lightning/1.0b2 Thunderbird/3.1.9
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
+To: openembedded-devel@lists.openembedded.org
 References: <1300981024-9111-2-git-send-email-obi@opendreambox.org>	<1300983264-16652-1-git-send-email-obi@opendreambox.org>	<4D99C0EA.5070902@opendreambox.org>	<inciqg$3vi$2@dough.gmane.org>	<4D99E05E.9020100@opendreambox.org>
 	<ind0l0$io$1@dough.gmane.org>
 In-Reply-To: <ind0l0$io$1@dough.gmane.org>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 04 Apr 2011 18:12:20.0558 (UTC)
-	FILETIME=[D6D6FEE0:01CBF2F3]
 Subject: Re: [PATCHv2] kernel/module-base: Append PR to	MACHINE_KERNEL_PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,11 +44,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Apr 2011 18:14:24 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
+X-List-Received-Date: Mon, 04 Apr 2011 18:15:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 04/04/2011 10:54 AM, Koen Kooi wrote:
+On 04/04/2011 07:54 PM, Koen Kooi wrote:
 > On 04-04-11 17:14, Andreas Oberritter wrote:
 >> On 04/04/2011 03:58 PM, Koen Kooi wrote:
 >>> On 04-04-11 15:00, Andreas Oberritter wrote:
@@ -70,13 +72,18 @@ On 04/04/2011 10:54 AM, Koen Kooi wrote:
 > sets it. The distro has *no* say in it. Therefore the module recipes
 > don't need to set it, since it's automatic.
 
-If I read the original thread right, Andreas' problem is that changing
-the module recipe (ie fix a bug in the version, not a new version) means
-you need to change all the machine PRs to get it bumped.  This seems
-wrong to me.
+That's nitpicking. Let me rephrase:
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+With the previously cited version. a *machine* can start to use
+MACHINE_KERNEL_PR any time without breaking updates.
+
+The vast majority of module recipes do not use MACHINE_KERNEL_PR. That
+means that they use their own PR instead of appending something to
+MACHINE_KERNEL_PR, as suggested by you. Setting MACHINE_KERNEL_PR in the
+machine's configuration disables automatic rebuilds of 91% of module
+recipes.
+
+Regards,
+Andreas
 
 
