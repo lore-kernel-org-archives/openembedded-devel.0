@@ -1,42 +1,37 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q6fwU-0005jm-7G
+	(envelope-from <mickael.chazaux@gmail.com>) id 1Q6hsb-0007nc-Qf
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Apr 2011 11:19:26 +0200
-Received: by bwz5 with SMTP id 5so3998438bwz.6
+	Mon, 04 Apr 2011 13:23:34 +0200
+Received: by vxd7 with SMTP id 7so4595996vxd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Apr 2011 02:17:21 -0700 (PDT)
+	Mon, 04 Apr 2011 04:21:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=j8/qbB+kXBwsiOim0lcNyL1O11WpcFdG4KlrIMVlU38=;
-	b=Z0kcn63IPqmK9rq2vnM3z31CAAj5bn6j/zlgw2VCnyzbImMrZ+ljFOhdx64u1AReXD
-	tIzTiMZ826mT3lCkC3B5E1RNAEQ5++8rGb0856gitjn37B65u/ZKcAmR047lhn0ebcYS
-	kOi7s26vzPBVIjLUwYpSBIbJXL/G8Xz3Ashfw=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=DfnMNSn3Pq+8L9dHNZEdv4BX+KKCTafQY8lYJGITEfA=;
+	b=qtPvq70fINaWQlhilBhltV4XmopQHBwvPfO/Na5/VjoCrQPr+c8KhdqcjQCg3rQaS0
+	Xj1At3Y1JlpNLerMUQdInKODgO6mPlkyYGSF9NJ3obHd4EdR9bWYA0bFfArsjCtTl69k
+	D06s4v6Zm9QtlEY+hDyceRuACD8sqJrYGULzo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=LOOsZ2kdibzrAJ2SCNOJas0n3RxAVsXPURVMRgTfV8R8CV/uWk2ks52fQqbxBiA+yr
-	gK79z4n5jRdgtQWsRznaTahxGyPsm9LBv1zHJYUxjmsBXiwh+hNVW4wcAoXqKgZzVJqH
-	99Pg8mxIQoSR6UJErHMW7ta21i7m6im0TKDEM=
-Received: by 10.204.229.193 with SMTP id jj1mr2183773bkb.21.1301908639822;
-	Mon, 04 Apr 2011 02:17:19 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id l1sm2936325bkl.1.2011.04.04.02.17.17
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 04 Apr 2011 02:17:17 -0700 (PDT)
-Date: Mon, 4 Apr 2011 11:17:15 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110404091715.GC11838@jama.jama.net>
-References: <1301600399-32041-1-git-send-email-philippedeswert@gmail.com>
-	<1301602980.3988.18.camel@mattotaupa>
-	<AANLkTikL73GsmeB8pqSGMPjD972MhjsCOE+reTLKjxk+@mail.gmail.com>
-	<1301652035.3951.49.camel@mattotaupa>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=pWXgKvX6eqNzej/mLeXJGLa/fdA5Q0yhdVUVW1IemvMTTidChcbllGvnMK++Qpv/px
+	0d5sh7hSxBawnpWLgcmgWQNojjcZ1H6QM56B/mGZs2Y7iiE9UUZS7UZl4ZrypLTG8WsN
+	hxPWbJ01FuKRaE6JtBZO3dlko6QKp2bkHrP3I=
 MIME-Version: 1.0
-In-Reply-To: <1301652035.3951.49.camel@mattotaupa>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH [1/2]] eio: New recipe for eio
+Received: by 10.52.99.38 with SMTP id en6mr5153546vdb.182.1301916088420; Mon,
+	04 Apr 2011 04:21:28 -0700 (PDT)
+Received: by 10.220.46.65 with HTTP; Mon, 4 Apr 2011 04:21:28 -0700 (PDT)
+In-Reply-To: <4D657F34.5050200@mentor.com>
+References: <AANLkTinD5vHUrhcuB1McLOkG4M+K7T5zAvCX276Xti8a@mail.gmail.com>
+	<4D657F34.5050200@mentor.com>
+Date: Mon, 4 Apr 2011 13:21:28 +0200
+Message-ID: <BANLkTik=S6Ui--WVgGMZO0XiUoGsaQxU0g@mail.gmail.com>
+From: Mickael Chazaux <mickael.chazaux@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: VMware disk image type
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,103 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Apr 2011 09:19:26 -0000
-X-Groupsio-MsgNum: 30886
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="RIYY1s2vRbPFwWeW"
-Content-Disposition: inline
-
---RIYY1s2vRbPFwWeW
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Mon, 04 Apr 2011 11:23:34 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Apr 01, 2011 at 12:00:35PM +0200, Paul Menzel wrote:
-> Dear Philippe,
->=20
->=20
-> Am Freitag, den 01.04.2011, 10:25 +0300 schrieb Philippe De Swert:
->=20
-> > Thanks for the review.
->=20
-> No problem.
->=20
-> > On 31 March 2011 23:23, Paul Menzel <paulepanter@users.sourceforge.net>=
- wrote:
-> > > Am Donnerstag, den 31.03.2011, 22:39 +0300 schrieb Philippe De Swert:
-> > >
-> > > =BBeio: add initial recipe (svn)=AB  or something like that would be a
-> > > better commit summary in my opinion.
-> >=20
-> > I'll keep that in mind
->=20
-> Additionally =BB[PATCH [1/2]]=AB seems to confuse `git am` to use
->=20
-> 	] eio: New recipe for eio
->=20
-> as the commit summary. So only no nested brackets please.
->=20
-> I found one other problem. The license is LGPL 2.1+ and not MIT or BSD
-> [1].
->=20
-> > >> +
-> > >> +# Some upgrade path tweaking
-> > >> +AUTO_LIBNAME_PKGS =3D ""
-> > >
-> > > What upgrade patch?
-> >=20
-> > Yeah I should have double checked that... Just put it there as all the
-> > other enlightenment .inc files had it.
->=20
-> Maybe Martin can comment on that.
+Hi,
 
-Don't know if eio will part in next efl release (1.1.0 probably), but
-libeio-ver-pre-svn-09 is not nice package name anyways, so I vote to
-keep it for future upgrade path :).
+2011/2/23 Tom Rini <tom_rini@mentor.com>:
+> On 02/23/2011 05:48 AM, Mickael Chazaux wrote:
+>>
+>> Hi,
+>>
+>> I see there is a vmware.conf in conf/machine, but it does not generate
+>> vmdk (vmware virtual disk files) files. Here are the steps I take to
+>> do that:
+>>
+>> - create an empty file the size wanted (with dd),
+>> - format it to ext3 (mkfs.ext3 myfile)
+>> - mount it loopback (mount -o loop myfile /mnt)
+>> - untar the OE-generated rootfs in /mnt
+>> - create a /boot/extlinux.conf [1],
+>> - install extlinux in /boot (extlinux -i /mnt/boot)
+>> - umount,
+>> - convert to vmdk (using qemu-img -O vmdk myfile myfile.vmdk)
+>> - boot it in vmware.
+>>
+>> Is it possible to add a "vmdk" image to openembedded to do this
+>> automatically?
+>
+> Yes, patches would be welcome. =C2=A0This would reside in conf/bitbake.co=
+nf. =C2=A0See
+> the ubi/ubifs image examples for how to generate slightly complex images
+> like this. =C2=A0And I would recommend adding vmdk.ext[234] as the image =
+names
+> (and supply at least one of them, someone else might step up and do the
+> regex for the others if you don't). =C2=A0Thanks!
+>
 
->=20
-> > >> diff --git a/recipes/efl1/eio_svn.bb b/recipes/efl1/eio_svn.bb
-> > >> new file mode 100644
-> > >> index 0000000..6a12dcf
-> > >> --- /dev/null
-> > >> +++ b/recipes/efl1/eio_svn.bb
-> > >> @@ -0,0 +1,13 @@
-> > >> +require eio.inc
-> > >> +
-> > >> +SRCREV =3D "${EFL_SRCREV}"
-> > >> +PV =3D "0.1.0+svnr${SRCPV}"
-> > >> +PR =3D "${INC_PR}.0"
-> > >> +DEFAULT_PREFERENCE =3D "-1"
-> > >
-> > > It is the only recipe, so `DP =3D "-1"` should not be useful.
-> >=20
-> > Just wanted to be future proof for when the actual versioned recipes co=
-me.
+The problem is the loopback mount, which requires root privileges, and
+is required by extlinux for its installation. Is there another method?
 
-Also fine with DP =3D "-1" (even on only one version in this case)=20
-in case there will be eio_1.1.0.bb
+Regards,
 
-> I think it should be adapted if there is a recipe for a released
-> version.
->=20
-> Please resend the patch as [PATCH 1/2 v2] after Martin has commented.
+Mickael Chazaux
 
-For me, just fix LICENSE and I'm fine with it (just overlooked license
-in off-list review).
 
-Cheers,
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---RIYY1s2vRbPFwWeW
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk2ZjJsACgkQN1Ujt2V2gBwiywCgjM765kYmPgUjgy6F6O5iAYMa
-S8EAoIu/T2+D8xaF0gUNs3RkXcVSqZoH
-=Ni/D
------END PGP SIGNATURE-----
-
---RIYY1s2vRbPFwWeW--
