@@ -1,40 +1,19 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q6qwz-00078v-OA
+	(envelope-from <ynezz@true.cz>) id 1Q6s39-0008Px-Jq
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Apr 2011 23:04:41 +0200
-Received: by bwz5 with SMTP id 5so4525460bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Apr 2011 14:02:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=1kV2h/ygwkyZcdfrAUFJ2qeLYmvnn6P/4WV2COQTxyE=;
-	b=s/8TrykklWPANSqv3YA3yR+cWLcEOt6HGPA8d0uNDd9a2wzzANGovtLH1CGSk+Psvx
-	pqZiRG0USfmUZu42lVcGsGpmlqk/cSvluWM39sdE73EBwxt9K5+o1v7baG0q8gFtr38O
-	XdJnBEp95HfNcyNOgkPiMbWsIyNlwujt073Nw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=iXIXi164sVZGwOC/qq2EpE97AM6Rgtd5CuTlyDf5BjJNWejswJFR3gXIH+GUsygBXc
-	+WH+ZOGA5XK+xPmwM0tfxzGz6d5ZaPyE7EcW1iTcDqEcyj8WkUJMzRmr+hTfy/LTwl0m
-	bH3iZrExZX9Qs9Zk0GdDSmyvYd575/Gn6Fh6I=
-Received: by 10.204.171.65 with SMTP id g1mr600126bkz.45.1301950956933;
-	Mon, 04 Apr 2011 14:02:36 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id w3sm3342188bkt.5.2011.04.04.14.02.35
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 04 Apr 2011 14:02:36 -0700 (PDT)
-Date: Mon, 4 Apr 2011 23:02:34 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 05 Apr 2011 00:15:07 +0200
+Received: from ntbk.lan (localhost [127.0.0.1])
+	by mengele.ibawizard.net (Postfix) with ESMTP id 7E7C020013F;
+	Tue,  5 Apr 2011 00:12:58 +0200 (CEST)
+From: =?UTF-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110404210234.GD30816@jama.jama.net>
-References: <1301949631-6761-1-git-send-email-philippedeswert@gmail.com>
-	<1301949631-6761-2-git-send-email-philippedeswert@gmail.com>
+Date: Tue,  5 Apr 2011 00:12:56 +0200
+Message-Id: <1301955176-14829-1-git-send-email-ynezz@true.cz>
+X-Mailer: git-send-email 1.7.1
 MIME-Version: 1.0
-In-Reply-To: <1301949631-6761-2-git-send-email-philippedeswert@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH v2] 2/2] ephoto: new svn build recipe
+Subject: [PATCH RFC] modutils-initscripts: fix wrong order of module loading happening in udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,63 +27,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Apr 2011 21:04:41 -0000
-X-Groupsio-MsgNum: 30910
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="hxkXGo8AKqTJ+9QI"
-Content-Disposition: inline
-
---hxkXGo8AKqTJ+9QI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 04 Apr 2011 22:15:07 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 04, 2011 at 11:40:31PM +0300, Philippe De Swert wrote:
-> Signed-off-by: Philippe De Swert <philippedeswert@gmail.com>
-> ---
->  recipes/e17/ephoto_svn.bb |   12 ++++++++++++
->  1 files changed, 12 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/e17/ephoto_svn.bb
->=20
-> diff --git a/recipes/e17/ephoto_svn.bb b/recipes/e17/ephoto_svn.bb
-> new file mode 100644
-> index 0000000..3b6cadf
-> --- /dev/null
-> +++ b/recipes/e17/ephoto_svn.bb
-> @@ -0,0 +1,12 @@
-> +LICENSE =3D "MIT Creative Commons Attribution-ShareAlike 2.5"
-> +PV =3D "0.1.0+svnr${SRCREV}"
-> +PR =3D "${INC_PR}.0"
-> +
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Ddf45d9de58df0b48f515eae8d2421=
-257"
-> +LIC_FILES_CHKSUM =3D "file://COPYING.icons;md5=3Dd4e4f10748f3146a089aaa2=
-3c9ade59b"
-> +
-> +require e-module.inc
-> +
-> +DEPENDS +=3D "elementary ethumb ecore eio"
-> +
-> +SRCNAME =3D "${PN}"
+In the current state, udev init script is loaded as 3rd and modutils.sh a=
+s
+20th, so udevadm called in udev init script loads all kernel modules in s=
+ome
+unpredictable order, not honoring in any way specified order of modules i=
+n
+/etc/modules. This causes some troubles mainly in the first boot. So to f=
+ix
+this we now move loading of the kernel modules just before we exec udev i=
+nit
+script. Example of the current state:
 
-both applied, thanks!
+	Starting udev
+	rtc-m48t86 rtc-m48t86: rtc core: registered m48t86 as rtc0
+	rtc-m48t86 rtc-m48t86: battery ok
+	ep93xx-rtc ep93xx-rtc: rtc core: registered ep93xx-rtc as rtc1
 
-btw: subject is a bit wrong, too many closing brackets ], so "2/2] " ends in
-the begining of commit message
+	root@ts72xx:~# cat /etc/modules
+	rtc-ep93xx
+	ohci-hcd
+	ts72xx_sbcinfo
+	rtc-m48t86
 
-Cheers,
+As you can guess, this is really wrong behaviour, because I've rtc1 as th=
+e
+main time source for my system.
+
+	root@ts72xx:~# cat /etc/default/hwclock
+	HWCLOCKACCESS=3Dyes
+	HWCLOCKDEVICE=3D/dev/rtc1
+
+Expected behaviour with this patch applied:
+
+	Please wait: booting...
+	ep93xx-rtc ep93xx-rtc: rtc core: registered ep93xx-rtc as rtc0
+	usbcore: registered new device driver usb
+	ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+	...
+	rtc-m48t86 rtc-m48t86: rtc core: registered m48t86 as rtc1
+	rtc-m48t86 rtc-m48t86: battery ok
+	Starting udev
+
+Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
+---
+ recipes/modutils/modutils-initscripts.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes/modutils/modutils-initscripts.bb b/recipes/modutils/=
+modutils-initscripts.bb
+index 07f4810..797acb3 100644
+--- a/recipes/modutils/modutils-initscripts.bb
++++ b/recipes/modutils/modutils-initscripts.bb
+@@ -2,10 +2,10 @@ SECTION =3D "base"
+ DESCRIPTION =3D "modutils configuration files"
+ LICENSE =3D "PD"
+ SRC_URI =3D "file://modutils.sh"
+-PR =3D "r3"
++PR =3D "r4"
+=20
+ INITSCRIPT_NAME =3D "modutils.sh"
+-INITSCRIPT_PARAMS =3D "start 20 S ."
++INITSCRIPT_PARAMS =3D "start 2 S ."
+=20
+ inherit update-rc.d
+=20
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+1.7.1
 
---hxkXGo8AKqTJ+9QI
-Content-Type: application/pgp-signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
 
-iEYEARECAAYFAk2aMeoACgkQN1Ujt2V2gBx7CwCeO0W0k/71p/TCM//8NmDKBmX3
-m4gAn0jsnKrbVzcbhJhQi97V1PajnhRg
-=r04p
------END PGP SIGNATURE-----
-
---hxkXGo8AKqTJ+9QI--
