@@ -1,35 +1,23 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q6kM4-0007vS-F8 for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Apr 2011 16:02:10 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q6kK5-00079p-J7 for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Apr 2011 16:00:05 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Apr 2011 16:00:05 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Apr 2011 16:00:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from p3plsmtpa06-08.prod.phx3.secureserver.net ([173.201.192.109])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <mike@mwester.net>) id 1Q6kMp-0008Gq-Oa
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Apr 2011 16:03:02 +0200
+Received: (qmail 4254 invoked from network); 4 Apr 2011 14:00:40 -0000
+Received: from unknown (209.242.7.132)
+	by p3plsmtpa06-08.prod.phx3.secureserver.net (173.201.192.109) with
+	ESMTP; 04 Apr 2011 14:00:40 -0000
+Message-ID: <4D99CF0C.5020406@mwester.net>
+Date: Mon, 04 Apr 2011 09:00:44 -0500
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 04 Apr 2011 15:58:40 +0200
-Message-ID: <inciqg$3vi$2@dough.gmane.org>
-References: <1300981024-9111-2-git-send-email-obi@opendreambox.org>	<1300983264-16652-1-git-send-email-obi@opendreambox.org>
-	<4D99C0EA.5070902@opendreambox.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4D99C0EA.5070902@opendreambox.org>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCHv2] kernel/module-base: Append PR to MACHINE_KERNEL_PR
+References: <AANLkTinD5vHUrhcuB1McLOkG4M+K7T5zAvCX276Xti8a@mail.gmail.com>	<4D657F34.5050200@mentor.com>
+	<BANLkTik=S6Ui--WVgGMZO0XiUoGsaQxU0g@mail.gmail.com>
+In-Reply-To: <BANLkTik=S6Ui--WVgGMZO0XiUoGsaQxU0g@mail.gmail.com>
+Subject: Re: VMware disk image type
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,119 +31,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Apr 2011 14:02:12 -0000
+X-List-Received-Date: Mon, 04 Apr 2011 14:03:05 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 04-04-11 15:00, Andreas Oberritter wrote:
-> Ping. Any votes for or against this patch with either appended or
-> prepended PR?
-
-I don't like this patch *at all*. Recipes can already do
-MACHINE_KERNEL_PR_append = "something" if they need to.
-
-Can you should me a specific example on how this would be an improvement?
-
-regards,
-
-Koen
-
+On 4/4/2011 6:21 AM, Mickael Chazaux wrote:
+> Hi,
 > 
-> On 03/24/2011 05:14 PM, Andreas Oberritter wrote:
->> Based on http://comments.gmane.org/gmane.comp.handhelds.openembedded/42905
+> 2011/2/23 Tom Rini <tom_rini@mentor.com>:
+>> On 02/23/2011 05:48 AM, Mickael Chazaux wrote:
+>>>
+>>> Hi,
+>>>
+>>> I see there is a vmware.conf in conf/machine, but it does not generate
+>>> vmdk (vmware virtual disk files) files. Here are the steps I take to
+>>> do that:
+>>>
+>>> - create an empty file the size wanted (with dd),
+>>> - format it to ext3 (mkfs.ext3 myfile)
+>>> - mount it loopback (mount -o loop myfile /mnt)
+>>> - untar the OE-generated rootfs in /mnt
+>>> - create a /boot/extlinux.conf [1],
+>>> - install extlinux in /boot (extlinux -i /mnt/boot)
+>>> - umount,
+>>> - convert to vmdk (using qemu-img -O vmdk myfile myfile.vmdk)
+>>> - boot it in vmware.
+>>>
+>>> Is it possible to add a "vmdk" image to openembedded to do this
+>>> automatically?
 >>
->> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
->> CC: Denis Dydychkin <nyrl@mail.ru>
->> CC: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
->> ---
->> v2: Move code to machine-kernel-pr.bbclass, to avoid duplication and to
->>     allow other recipes to inherit it. This is useful for tasks which
->>     depend on different kernel modules for different kernel versions,
->>     e.g. madwifi-ng for old kernels, but ath5k for new kernels.
+>> Yes, patches would be welcome.  This would reside in conf/bitbake.conf.  See
+>> the ubi/ubifs image examples for how to generate slightly complex images
+>> like this.  And I would recommend adding vmdk.ext[234] as the image names
+>> (and supply at least one of them, someone else might step up and do the
+>> regex for the others if you don't).  Thanks!
 >>
->>  classes/kernel.bbclass            |    7 ++-----
->>  classes/machine-kernel-pr.bbclass |   15 +++++++++++++++
->>  classes/module-base.bbclass       |   11 ++---------
->>  3 files changed, 19 insertions(+), 14 deletions(-)
->>  create mode 100644 classes/machine-kernel-pr.bbclass
->>
->> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
->> index 0109ce6..0187fb3 100644
->> --- a/classes/kernel.bbclass
->> +++ b/classes/kernel.bbclass
->> @@ -20,13 +20,10 @@ python __anonymous () {
->>      image = bb.data.getVar('INITRAMFS_IMAGE', d, True)
->>      if image:
->>          bb.data.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs', d)
->> -
->> -    machine_kernel_pr = bb.data.getVar('MACHINE_KERNEL_PR', d, True)
->> -
->> -    if machine_kernel_pr:
->> -       bb.data.setVar('PR', machine_kernel_pr, d)
->>  }
->>  
->> +inherit machine-kernel-pr
->> +
->>  INITRAMFS_IMAGE ?= ""
->>  INITRAMFS_TASK ?= ""
->>  
->> diff --git a/classes/machine-kernel-pr.bbclass b/classes/machine-kernel-pr.bbclass
->> new file mode 100644
->> index 0000000..a72a0c0
->> --- /dev/null
->> +++ b/classes/machine-kernel-pr.bbclass
->> @@ -0,0 +1,15 @@
->> +# A machine.conf or local.conf can increase MACHINE_KERNEL_PR to force
->> +# rebuilds for kernel and external modules
->> +python __anonymous () {
->> +    machine_kernel_pr = bb.data.getVar('MACHINE_KERNEL_PR', d, True)
->> +    if machine_kernel_pr:
->> +       # Append
->> +       # a) .X, if the recipe's PR is rX, or
->> +       # b) +${PR}, if the recipe's PR doesn't begin with r
->> +       pr = bb.data.getVar('PR', d, True)
->> +       if pr.startswith('r'):
->> +               suffix = '.' + pr[1:]
->> +       else:
->> +               suffix = '+' + pr
->> +       bb.data.setVar('PR', machine_kernel_pr + suffix, d)
->> +}
->> diff --git a/classes/module-base.bbclass b/classes/module-base.bbclass
->> index 9aaaa4e..1a97955 100644
->> --- a/classes/module-base.bbclass
->> +++ b/classes/module-base.bbclass
->> @@ -2,18 +2,11 @@ inherit module_strip
->>  
->>  inherit kernel-arch
->>  
->> +inherit machine-kernel-pr
->> +
->>  export OS = "${TARGET_OS}"
->>  export CROSS_COMPILE = "${TARGET_PREFIX}"
->>  
->> -# A machine.conf or local.conf can increase MACHINE_KERNEL_PR to force
->> -# rebuilds for kernel and external modules
->> -python __anonymous () {
->> -    machine_kernel_pr = bb.data.getVar('MACHINE_KERNEL_PR', d, True)
->> -
->> -    if machine_kernel_pr:
->> -       bb.data.setVar('PR', machine_kernel_pr, d)
->> -}
->> -
->>  export KERNEL_VERSION = "${@base_read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
->>  export KERNEL_SOURCE = "${@base_read_file('${STAGING_KERNEL_DIR}/kernel-source')}"
->>  KERNEL_OBJECT_SUFFIX = "${@[".o", ".ko"][base_read_file('${STAGING_KERNEL_DIR}/kernel-abiversion') > "2.6.0"]}"
+> 
+> The problem is the loopback mount, which requires root privileges, and
+> is required by extlinux for its installation. Is there another method?
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Can't you just copy or otherwise re-use the existing code for creating
+ext3 images?   (I think that uses fakeroot to do the job, which avoids
+loopback mounts and all the potential problems that involves.)
 
-iD8DBQFNmc6QMkyGM64RGpERApSbAJkBcJm8dGGqOLOftp/ulcfEyQjR+ACgjPAu
-LUeJwMv5bmRdL9kDne0GvIc=
-=U/65
------END PGP SIGNATURE-----
-
+-Mike (mwester)
 
 
