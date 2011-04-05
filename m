@@ -1,41 +1,35 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Q6wHo-0002aN-8R
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 04:46:32 +0200
-Received: by pwj9 with SMTP id 9so1726532pwj.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q6zjK-0001MP-R1 for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Apr 2011 08:27:10 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q6zhL-0001DG-B3 for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Apr 2011 08:25:07 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Apr 2011 08:25:07 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Apr 2011 19:44:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=cuPsD3XehKfZ7uwPBQM1IJF4iaF3CJK0fQAjFghZJTM=;
-	b=wcVxPCLArGSyAyDk5Un1xZWtNonCMMBY3RV72uDFFVALEFmNWS2yAL15iSqUEtGV5d
-	d6xyLUj41v13vvNnj+H76Hj5gyIi+QY8tLAnjMRGsjVw0AI+fmGTNxA3E5uSfp7T/4ol
-	U62PEwwngpN3wBqGUBwc2XM3Bu4jECDQCznQ0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=UCgSZrpy9k1LWMk8OYgVXpuhhw9UaJaGWgtxussCiqyR8WcG1T2IBSem5AC7cvFOok
-	rXPUCn7bho+cER5ytC58eBTDOyWJVURnqScjEWDnEZYf5UVYJrUZ+EWjEdg8IK8miGzr
-	8wMQupkE4vIQ74xuxtBkeuII4F9KR/zgcYmYY=
-Received: by 10.142.224.11 with SMTP id w11mr7310890wfg.136.1301971465636;
-	Mon, 04 Apr 2011 19:44:25 -0700 (PDT)
-Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id x11sm8367054wfd.1.2011.04.04.19.44.23
-	(version=SSLv3 cipher=OTHER); Mon, 04 Apr 2011 19:44:24 -0700 (PDT)
-Message-ID: <4D9A8204.1030908@gmail.com>
-Date: Mon, 04 Apr 2011 19:44:20 -0700
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
-	rv:1.9.2.15) Gecko/20110303 Thunderbird/3.1.9
-MIME-Version: 1.0
+	Tue, 05 Apr 2011 08:25:07 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4D997896.9050607@gmail.com>
-In-Reply-To: <4D997896.9050607@gmail.com>
-Subject: Re: Ignore externals from a SVN source in SRC_URI
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 05 Apr 2011 08:22:04 +0200
+Message-ID: <inecec$sae$2@dough.gmane.org>
+References: <1300981024-9111-2-git-send-email-obi@opendreambox.org>	<1300983264-16652-1-git-send-email-obi@opendreambox.org>	<4D99C0EA.5070902@opendreambox.org>	<inciqg$3vi$2@dough.gmane.org>	<4D99E05E.9020100@opendreambox.org>	<ind0l0$io$1@dough.gmane.org>
+	<4D9A0A1D.3020209@opendreambox.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <4D9A0A1D.3020209@opendreambox.org>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCHv2] kernel/module-base: Append PR to MACHINE_KERNEL_PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,59 +43,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 02:46:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 05 Apr 2011 06:27:11 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 4/4/2011 12:51 AM, Francois Retief wrote:
-> Hello,
->
-> What is the recommended way to ignore external directories from a SVN
-> source? Tried SVNCOOPTS, but it did not work.
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-yes it could mislead thats why. Since it wont update external svn repos
-when you change SRCREV it will give false information of updating all
-thats checked out.
+On 04-04-11 20:12, Andreas Oberritter wrote:
+> On 04/04/2011 07:54 PM, Koen Kooi wrote:
+>> On 04-04-11 17:14, Andreas Oberritter wrote:
+>>> On 04/04/2011 03:58 PM, Koen Kooi wrote:
+>>>> On 04-04-11 15:00, Andreas Oberritter wrote:
+>>>>> Ping. Any votes for or against this patch with either appended or
+>>>>> prepended PR?
+>>>>
+>>>> I don't like this patch *at all*. Recipes can already do
+>>>> MACHINE_KERNEL_PR_append = "something" if they need to.
+>>
+>>> The use of MACHINE_KERNEL_PR is optional, so it feels really wrong to
+>>> append something to it in a recipe.
+>>
+>>>> Can you should me a specific example on how this would be an improvement?
+>>
+>>> With the version below. a distro can start to use MACHINE_KERNEL_PR any
+>>> time without breaking updates.
+>>
+>>> The vast majority of modules do not use MACHINE_KERNEL_PR
+>>
+>> It seems you don't understand how MACHINE_KERNEL_PR works. The *machine*
+>> sets it. The distro has *no* say in it. Therefore the module recipes
+>> don't need to set it, since it's automatic.
+> 
+> That's nitpicking. Let me rephrase:
+> 
+> With the previously cited version. a *machine* can start to use
+> MACHINE_KERNEL_PR any time without breaking updates.
+> 
+> The vast majority of module recipes do not use MACHINE_KERNEL_PR. That
+> means that they use their own PR instead of appending something to
+> MACHINE_KERNEL_PR, as suggested by you. Setting MACHINE_KERNEL_PR in the
+> machine's configuration disables automatic rebuilds of 91% of module
+> recipes.
 
-> So I hacked bitbake for my needs with the patch below. But is there a
-> better way?
->
+So make all the module recipes use MACHINE_KERNEL_PR and ditch PR. Doing
+all the appending in different classes is just fixing this at the wrong end.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-This seems ok
-
-> SRC_URI =
-> "svn://svn.somesite.com/trunk;module=somemodule;externals=ignore;proto=https"
->
-> Cheers
->    Francois
->
-> diff --git a/lib/bb/fetch/svn.py b/lib/bb/fetch/svn.py
-> index ba9f6ab..f22f572 100644
-> --- a/lib/bb/fetch/svn.py
-> +++ b/lib/bb/fetch/svn.py
-> @@ -114,6 +114,12 @@ class Svn(Fetch):
->           if command is "info":
->               svncmd = "%s info %s %s://%s/%s/" % (basecmd, "
-> ".join(options), proto, svnroot, ud.module)
->           else:
-> +            if "externals" in ud.parm:
-> +                if ud.parm["externals"] == "ignore":
-> +                    options.append("--ignore-externals")
-> +                else:
-> +                    raise FetchError("Invalid value for 'externals':
-> expected 'ignore'")
-> +
->               suffix = ""
->               if ud.revision:
->                   options.append("-r %s" % ud.revision)
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+iD8DBQFNmrUMMkyGM64RGpERAuLPAJ9YYQEQj0H8R3uncTqpCqx0AtGkpQCeIqlA
+RmVtl113MqrJ6axwCMYyhkU=
+=rvEk
+-----END PGP SIGNATURE-----
 
 
 
