@@ -1,26 +1,41 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <robert@erafx.com>) id 1Q6vAa-00035T-Vg
+	(envelope-from <raj.khem@gmail.com>) id 1Q6wHo-0002aN-8R
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 03:35:01 +0200
-Received: by yxn22 with SMTP id 22so2450509yxn.6
+	Tue, 05 Apr 2011 04:46:32 +0200
+Received: by pwj9 with SMTP id 9so1726532pwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Apr 2011 18:32:55 -0700 (PDT)
-Received: by 10.101.2.1 with SMTP id e1mr5908190ani.18.1301967174660;
-	Mon, 04 Apr 2011 18:32:54 -0700 (PDT)
-Received: from localhost.localdomain (cpe-24-165-208-114.neo.res.rr.com
-	[24.165.208.114])
-	by mx.google.com with ESMTPS id i8sm5979139ang.5.2011.04.04.18.32.52
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 04 Apr 2011 18:32:54 -0700 (PDT)
-From: Bob Foerster <robert@erafx.com>
+	Mon, 04 Apr 2011 19:44:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=cuPsD3XehKfZ7uwPBQM1IJF4iaF3CJK0fQAjFghZJTM=;
+	b=wcVxPCLArGSyAyDk5Un1xZWtNonCMMBY3RV72uDFFVALEFmNWS2yAL15iSqUEtGV5d
+	d6xyLUj41v13vvNnj+H76Hj5gyIi+QY8tLAnjMRGsjVw0AI+fmGTNxA3E5uSfp7T/4ol
+	U62PEwwngpN3wBqGUBwc2XM3Bu4jECDQCznQ0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=UCgSZrpy9k1LWMk8OYgVXpuhhw9UaJaGWgtxussCiqyR8WcG1T2IBSem5AC7cvFOok
+	rXPUCn7bho+cER5ytC58eBTDOyWJVURnqScjEWDnEZYf5UVYJrUZ+EWjEdg8IK8miGzr
+	8wMQupkE4vIQ74xuxtBkeuII4F9KR/zgcYmYY=
+Received: by 10.142.224.11 with SMTP id w11mr7310890wfg.136.1301971465636;
+	Mon, 04 Apr 2011 19:44:25 -0700 (PDT)
+Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id x11sm8367054wfd.1.2011.04.04.19.44.23
+	(version=SSLv3 cipher=OTHER); Mon, 04 Apr 2011 19:44:24 -0700 (PDT)
+Message-ID: <4D9A8204.1030908@gmail.com>
+Date: Mon, 04 Apr 2011 19:44:20 -0700
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.15) Gecko/20110303 Thunderbird/3.1.9
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Apr 2011 21:31:21 -0400
-Message-Id: <1301967081-14512-2-git-send-email-robert@erafx.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1301967081-14512-1-git-send-email-robert@erafx.com>
-References: <1301967081-14512-1-git-send-email-robert@erafx.com>
-Subject: [PATCH 2/2] tzdata: update to 2011e
+References: <4D997896.9050607@gmail.com>
+In-Reply-To: <4D997896.9050607@gmail.com>
+Subject: Re: Ignore externals from a SVN source in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,32 +49,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 01:35:01 -0000
+X-List-Received-Date: Tue, 05 Apr 2011 02:46:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Bob Foerster <robert@erafx.com>
----
- .../tzdata/{tzdata_2011d.bb => tzdata_2011e.bb}    |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
- rename recipes/tzdata/{tzdata_2011d.bb => tzdata_2011e.bb} (64%)
+On 4/4/2011 12:51 AM, Francois Retief wrote:
+> Hello,
+>
+> What is the recommended way to ignore external directories from a SVN
+> source? Tried SVNCOOPTS, but it did not work.
+>
 
-diff --git a/recipes/tzdata/tzdata_2011d.bb b/recipes/tzdata/tzdata_2011e.bb
-similarity index 64%
-rename from recipes/tzdata/tzdata_2011d.bb
-rename to recipes/tzdata/tzdata_2011e.bb
-index ca225bf..ef8d65e 100644
---- a/recipes/tzdata/tzdata_2011d.bb
-+++ b/recipes/tzdata/tzdata_2011e.bb
-@@ -6,5 +6,6 @@ require tzdata.inc
- 
- PR = "${INC_PR}.0"
- 
--SRC_URI[md5sum] = "03c5793502b7c41985edd73146bf7e36"
--SRC_URI[sha256sum] = "415a54774094e8dcdc9ba141fafbee4b3b2f2140a5b8cf012eea4b37fb9a23bd"
-+SRC_URI[md5sum] = "044a07072300a0ee72b046e5a9a4ec90"
-+SRC_URI[sha256sum] = "44fef01de4589a4979eb6b5fdbbfd21a3b135852af1ecbfb9e0368ae47392c79"
-+
--- 
-1.7.0.4
+yes it could mislead thats why. Since it wont update external svn repos
+when you change SRCREV it will give false information of updating all
+thats checked out.
+
+> So I hacked bitbake for my needs with the patch below. But is there a
+> better way?
+>
+
+This seems ok
+
+> SRC_URI =
+> "svn://svn.somesite.com/trunk;module=somemodule;externals=ignore;proto=https"
+>
+> Cheers
+>    Francois
+>
+> diff --git a/lib/bb/fetch/svn.py b/lib/bb/fetch/svn.py
+> index ba9f6ab..f22f572 100644
+> --- a/lib/bb/fetch/svn.py
+> +++ b/lib/bb/fetch/svn.py
+> @@ -114,6 +114,12 @@ class Svn(Fetch):
+>           if command is "info":
+>               svncmd = "%s info %s %s://%s/%s/" % (basecmd, "
+> ".join(options), proto, svnroot, ud.module)
+>           else:
+> +            if "externals" in ud.parm:
+> +                if ud.parm["externals"] == "ignore":
+> +                    options.append("--ignore-externals")
+> +                else:
+> +                    raise FetchError("Invalid value for 'externals':
+> expected 'ignore'")
+> +
+>               suffix = ""
+>               if ud.revision:
+>                   options.append("-r %s" % ud.revision)
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
