@@ -1,29 +1,24 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1Q740E-0006eq-Qy
+	(envelope-from <robert@erafx.com>) id 1Q74UF-0007EA-7E
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 13:00:54 +0200
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q73yF-0007Wv-Ek
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 12:58:51 +0200
-From: Phil Blundell <philb@gnu.org>
+	Tue, 05 Apr 2011 13:31:55 +0200
+Received: by iye7 with SMTP id 7so284129iye.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Apr 2011 04:29:49 -0700 (PDT)
+Received: by 10.42.117.134 with SMTP id t6mr4090298icq.459.1302002989063;
+	Tue, 05 Apr 2011 04:29:49 -0700 (PDT)
+Received: from localhost.localdomain (cpe-24-165-208-114.neo.res.rr.com
+	[24.165.208.114])
+	by mx.google.com with ESMTPS id vx7sm4123381icb.2.2011.04.05.04.29.47
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 05 Apr 2011 04:29:48 -0700 (PDT)
+From: Bob Foerster <robert@erafx.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <inerh7$g3o$1@dough.gmane.org>
-References: <1300981024-9111-2-git-send-email-obi@opendreambox.org>
-	<1300983264-16652-1-git-send-email-obi@opendreambox.org>
-	<4D99C0EA.5070902@opendreambox.org>	<inciqg$3vi$2@dough.gmane.org>
-	<4D99E05E.9020100@opendreambox.org>	<ind0l0$io$1@dough.gmane.org>
-	<4D9A0A1D.3020209@opendreambox.org>	<inecec$sae$2@dough.gmane.org>
-	<4D9ADC0D.6060603@opendreambox.org> <inen1t$mgv$1@dough.gmane.org>
-	<1301995968.14449.293.camel@phil-desktop>
-	<inerh7$g3o$1@dough.gmane.org>
-Date: Tue, 05 Apr 2011 11:58:49 +0100
-Message-ID: <1302001129.14449.319.camel@phil-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: [PATCHv2] kernel/module-base: Append PR to MACHINE_KERNEL_PR
+Date: Tue,  5 Apr 2011 07:28:25 -0400
+Message-Id: <1302002906-16491-1-git-send-email-robert@erafx.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH v2 1/2] tzcode-native: update to 2011e
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,35 +32,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 11:00:55 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 05 Apr 2011 11:31:55 -0000
 
-On Tue, 2011-04-05 at 12:39 +0200, Koen Kooi wrote:
-> So apart from handwaving ("presumably unwelcome") do you have any actual
-> arguments against moving all machines to MACHINE_KERNEL_PR?
+Signed-off-by: Bob Foerster <robert@erafx.com>
+---
+ ...code-native_2011d.bb => tzcode-native_2011e.bb} |   10 +++++-----
+ 1 files changed, 5 insertions(+), 5 deletions(-)
+ rename recipes/tzcode/{tzcode-native_2011d.bb => tzcode-native_2011e.bb} (51%)
 
-Well, I can't obviously speak for all the machine config maintainers.
-It does seem a bit odd to me that you assume they would wish to use
-MACHINE_KERNEL_PR when, despite having had it at their disposal for some
-time, they have not availed themselves of that opportunity.
-
-As we've discovered in the past when M_K_PR was originally landed in the
-tree (and then again in the contemporary stable branch), having it
-suddenly switched on tends to cause PRs to go backwards unless it is
-done very carefully.  I would certainly consider that to be "unwelcome"
-though perhaps you don't share this viewpoint.
-
-Also, as we have previously discussed, the design of M_K_PR does have
-some shortcomings, particularly if you have a MACHINE with multiple
-kernel packages.  I personally consider it to be a poorly engineered
-solution and, although I have no problem with other people and/or
-DISTROs using it if it solves their particular problems, I have no
-desire to do so myself and I would be opposed to anything which obliges
-me to do so.
-
-p.
-
+diff --git a/recipes/tzcode/tzcode-native_2011d.bb b/recipes/tzcode/tzcode-native_2011e.bb
+similarity index 51%
+rename from recipes/tzcode/tzcode-native_2011d.bb
+rename to recipes/tzcode/tzcode-native_2011e.bb
+index 1cc7757..2bf4f4c 100644
+--- a/recipes/tzcode/tzcode-native_2011d.bb
++++ b/recipes/tzcode/tzcode-native_2011e.bb
+@@ -6,11 +6,11 @@ require tzcode-native.inc
+ # Also, tzdata (and it is needed to build tzcode) version can differ from
+ # tzcode version, thus this variable
+ 
+-TZDATA_PV = "2011d"
++TZDATA_PV = "2011e"
+ 
+ PR = "${INC_PR}.0"
+ 
+-SRC_URI[tzcode-2011d.md5sum] = "95095242ee368e6a7e107f154590ac11"
+-SRC_URI[tzcode-2011d.sha256sum] = "68f2c07471c5390199c09fe9fee6a22f8a4dac24713af88b92da17b33ad98cc7"
+-SRC_URI[tzdata-2011d.md5sum] = "03c5793502b7c41985edd73146bf7e36"
+-SRC_URI[tzdata-2011d.sha256sum] = "415a54774094e8dcdc9ba141fafbee4b3b2f2140a5b8cf012eea4b37fb9a23bd"
++SRC_URI[tzcode-2011e.md5sum] = "fbfc05dbf9ebcfe7c4bba18549870173"
++SRC_URI[tzcode-2011e.sha256sum] = "8fb00f8763aa51d83d6f3190d144124bb7176ca829fc08823d6205297bf0426b"
++SRC_URI[tzdata-2011e.md5sum] = "044a07072300a0ee72b046e5a9a4ec90"
++SRC_URI[tzdata-2011e.sha256sum] = "44fef01de4589a4979eb6b5fdbbfd21a3b135852af1ecbfb9e0368ae47392c79"
+-- 
+1.7.0.4
 
 
 
