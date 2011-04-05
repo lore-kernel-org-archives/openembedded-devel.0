@@ -1,23 +1,24 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q7E2u-0000mA-Ao for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 23:44:20 +0200
-Received: from f053040021.adsl.alicedsl.de ([78.53.40.21]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q7E0y-0004lM-Jo for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 21:42:20 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from p3plsmtpa01-04.prod.phx3.secureserver.net ([72.167.82.84])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <mike@mwester.net>) id 1Q7Eq1-0008Sn-Q4
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Apr 2011 00:35:07 +0200
+Received: (qmail 21946 invoked from network); 5 Apr 2011 22:32:58 -0000
+Received: from unknown (209.242.7.132)
+	by p3plsmtpa01-04.prod.phx3.secureserver.net (72.167.82.84) with ESMTP;
+	05 Apr 2011 22:32:58 -0000
+Message-ID: <4D9B989D.5060703@mwester.net>
+Date: Tue, 05 Apr 2011 17:33:01 -0500
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <BANLkTikmAU59dgxEwN7uHnr0DeupZvzKFA@mail.gmail.com>
-References: <BANLkTikmAU59dgxEwN7uHnr0DeupZvzKFA@mail.gmail.com>
-Date: Tue, 05 Apr 2011 23:42:14 +0200
-Message-ID: <1302039734.3933.5.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: Building Gstreamer from GIT
+References: <1300981024-9111-2-git-send-email-obi@opendreambox.org>	<1300983264-16652-1-git-send-email-obi@opendreambox.org>	<4D99C0EA.5070902@opendreambox.org>	<inciqg$3vi$2@dough.gmane.org>	<4D99E05E.9020100@opendreambox.org>	<ind0l0$io$1@dough.gmane.org>	<4D9A0A1D.3020209@opendreambox.org>	<inecec$sae$2@dough.gmane.org>	<4D9ADC0D.6060603@opendreambox.org>
+	<inen1t$mgv$1@dough.gmane.org>
+	<1301995968.14449.293.camel@phil-desktop>
+In-Reply-To: <1301995968.14449.293.camel@phil-desktop>
+Subject: Re: [PATCHv2] kernel/module-base: Append PR to MACHINE_KERNEL_PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,94 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 21:44:20 -0000
-X-Groupsio-MsgNum: 30965
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-Gfjorg7xQ0r0O9KxLcNn"
+X-List-Received-Date: Tue, 05 Apr 2011 22:35:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---=-Gfjorg7xQ0r0O9KxLcNn
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 4/5/2011 4:32 AM, Phil Blundell wrote:
+> On Tue, 2011-04-05 at 11:23 +0200, Koen Kooi wrote:
+>> On 05-04-11 11:08, Andreas Oberritter wrote:
+>>> Thereby making MACHINE_KERNEL_PR mandatory for all machines?
+>>
+>> I don't see why not.
+> 
+> The majority of machines aren't using it at present so this would be an
+> unexpected (and presumably unwelcome) change for them.  That seems like
+> a bad idea unless there is a compelling reason why it needs to be done.
 
-Dear Srinredplano,
+Quite frankly, I recall when this was originally discussed, and I really
+didn't understand the use case for it -- if it makes sense to use it for
+SlugOS, I'd be happy to do so.
 
+On a somewhat tangential note, I am responsible for a *distro*, but I'm
+not sure that I'm responsible for any *machines* -- so perhaps this is
+not my decision to make WRT to SlugOS?  Am I missing something?
 
-Am Dienstag, den 05.04.2011, 11:53 -0700 schrieb srinredplano SP:
-
-> I am trying to build Gstreamer from GIT ( using branch 0.10.23 ) .But
-> I am not able to run autogen.sh due to missing .git  directory .
->=20
-> Can any one let me know why the . git is  getting erased and what I
-> should do to stop getting   that erased. (I am verymuch new to Git
-> (though I have build Gstreamer using svn)o build Gstreamer using GIt
-> Pointers for building Gstreamer using GIT  would be helpful.
->=20
-> Here is my recipe http://pastebin.com/tz6dsZmV . Thanks in Advance
->=20
-> gstreamer_0.10.30.bb
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D
-> require gstreamer.inc
-> PR =3D "r1"
->=20
-> SRCREV_pn-gstreamer =3D "${AUTOREV}"
->=20
-> SRC_URI[archive.md5sum] =3D "de01f73f71d97c5854badd363ca06509"
-> SRC_URI[archive.sha256sum] =3D
-> "e8ef301be423797ff36a0bb3615930b112b4175634051d19fd655e0ed974532a"
-
-Your mailer mangled your message. Please turn of line wrapping for
-sections with code.
-
-> SRC_URI =3D "git://10.121.72.60/git/gstreamer.git;branch=3D0.10.23;protoc=
-ol=3Dgit "
->=20
-> #SRC_URI =3D "git://anongit.freedesktop.org/gstreamer/common;branch=3D0.1=
-0.23;protocol=3Dgit
-> "
->=20
->=20
-> S =3D ${WORKDIR}/git
->=20
-> EXTRA_OECONF +=3D "ac_cv_func_register_printf_function=3Dno"
->=20
-> do_configure_prepend() {
->     pushd ${S}
->     tar -xzf ${DL_DIR}/git_10.121.72.60.git.gstreamer.git.tar.gz
-
-What is that for? Where does the archive come from? BitBake takes care
-getting a clone/checkout of the repository.
-
->     ./autogen.sh --noconfigure --nocheck
->=20
->     sed -i -e s:docs::g Makefile.am
->     popd
-> }
-
-Please take a look at the existing Git recipes, for example
-
-	$ find recipes/ -name *\_git.bb
-
-and send a patch next time using `git format-patch =E2=80=A6` and `git
-send-email` so people can easily deal and test your code.
+-Mike (mwester)
 
 
-Thanks,
-
-Paul
-
---=-Gfjorg7xQ0r0O9KxLcNn
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk2bjLAACgkQPX1aK2wOHVh6TwCfcQk3IGkvAVByzzETa8kW04hS
-p+sAnjCl1mL39WfxhgUsz5S5PB2lZ2vY
-=b0i7
------END PGP SIGNATURE-----
-
---=-Gfjorg7xQ0r0O9KxLcNn--
