@@ -1,35 +1,35 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Q77kf-0003Um-Oc
+	(envelope-from <heroor@gmail.com>) id 1Q77wJ-0003hK-7G
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 17:01:05 +0200
-Received: from w1076.wlan.rz.tu-bs.de ([134.169.204.60] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1Q77iW-0000Lx-Kq by authid <stefan@sostec.de> with cram_md5;
-	Tue, 05 Apr 2011 16:59:00 +0200
-Received: from stefan by excalibur.local with local (Exim 4.75)
-	(envelope-from <stefan@excalibur.local>)
-	id 1Q77iV-0001jn-TJ; Tue, 05 Apr 2011 16:58:52 +0200
-Date: Tue, 5 Apr 2011 16:58:51 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
-Message-ID: <20110405145851.GA4381@excalibur.local>
-References: <1301609579-27642-1-git-send-email-GNUtoo@no-log.org>
-MIME-Version: 1.0
-In-Reply-To: <1301609579-27642-1-git-send-email-GNUtoo@no-log.org>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-946.8 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Cc: BUG-dev <bug-dev@lists.buglabs.net>,
-	openembedded-devel@lists.openembedded.org,
-	Stefan Schmidt <stefan@buglabs.net>
-Subject: Re: [PATCH] fix com.buglabs.bug.jni.* 'could not read symbols: Bad value' error
+	Tue, 05 Apr 2011 17:13:07 +0200
+Received: by yxn22 with SMTP id 22so170015yxn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Apr 2011 08:11:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=swrLNqkYPvmbeDQLXKeSGu3OWYqmc08zzWf1NqNV2Og=;
+	b=dtd6JsaRyq80sOHmKwjKuveGdTJi7m15Cy5fN6+TIwHq+4o6Dt5GV/0GjpHV0C+ihZ
+	/oiRBtKMuupHH6QyXiwEWDfzE/vIl6Uyx6kqjO2m5rbO3zsB+GCf3wQsYQtowdJUHffb
+	Hqhs9AMZGenp0KdFrzBHtMjJmS3IthMgvySRQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=mGvXOe7NUsqKQN0JiP1SFwUaBfJQilZLz7U5RQyqTrb3N902EsrW9ap5X8BG0qFskh
+	CVImWhoG2cG/DBrGvr2SQexaVdidi4Ticql9W7muadu2bmkAvO37gZdwr7wqGEl9emap
+	vm5aM2NZYTemArEkZI2atHDd3ug5jpsXQBhzQ=
+Received: by 10.150.67.10 with SMTP id p10mr652602yba.236.1302016260898;
+	Tue, 05 Apr 2011 08:11:00 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id p28sm148062ybk.0.2011.04.05.08.10.58
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 05 Apr 2011 08:11:00 -0700 (PDT)
+From: Siddharth Heroor <heroor@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  5 Apr 2011 20:40:52 +0530
+Message-Id: <1302016253-10390-1-git-send-email-heroor@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: Siddharth Heroor <heroor@ti.com>
+Subject: [PATCH 1/2] ti-syslink: Add TI Syslink for TI816x and TI814x devices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,104 +43,209 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 15:01:05 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 05 Apr 2011 15:13:08 -0000
 
-Hello.
+From: Siddharth Heroor <heroor@ti.com>
 
-On Fri, 2011-04-01 at 00:12, Denis 'GNUtoo' Carikli wrote:
-> Without that fix we have :
->   | .../sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: CharDevice.o: relocation R_ARM_MOVW_ABS_NC against `a local symbol' can not be used when making a shared object; recompile with -fPIC
->   | CharDevice.o: could not read symbols: Bad value
->   | collect2: ld returned 1 exit status
->   | make: *** [libCommon.so] Error 1
-> For the following recipes:
->   com.buglabs.bug.jni.common
->   com.buglabs.bug.jni.input
->   com.buglabs.bug.jni.lcd
->   com.buglabs.bug.jni.accelerometer
->   com.buglabs.bug.jni.libmatthew
->   com.buglabs.bug.jni.vonhippel
->   com.buglabs.bug.jni.camera
->   com.buglabs.bug.jni.rxtx
->   com.buglabs.bug.jni.gps
-> 
-> The solution was to pass -fPIC to the Makefile:
-> For instance in com.buglabs.bug.jni.common/src/c the Makefile contained:
->   ALL_CXXFLAGS += $(INCLUDE) $(CXXFLAGS)
->   [...]
->   %.o: %.cpp
->           $(CXX) $(ALL_CXXFLAGS) -c -v $^ -o $@
-> So passing -fPIC to CXXFLAGS solved all of the compilation failures but com.buglabs.bug.jni.camera
-> com.buglabs.bug.jni.camera which failed that way:
->   | .../sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: Camera.o: relocation R_ARM_MOVW_ABS_NC against `a local symbol' can not be used when making a shared object; recompile with -fPIC
->   | Camera.o: could not read symbols: Bad value
->   | collect2: ld returned 1 exit status
->   | make: *** [libCamera.so] Error 1
-> Had that in its Makefile:
->   ALL_CCFLAGS += $(INCLUDE) $(CCFLAGS)
->   [...]
->   %.o: %.c
->           $(CC) $(ALL_CCFLAGS) -c $^ -o $@
-> which corresponded to the compilation of bug_v4l.c
-> Altough just setting CCFLAGS += "-fPIC" wasn't sufficent since CFLAGS was not exported
-> (see run.do_jni_install script)
-> So I had to export it.
-> 
-> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+* Syslink is an Inter Processor communication layer for ARM/DSP devices.
 
-Acked-by: Stefan Schmidt <stefan@buglabs.net>
+Signed-off-by: Siddharth Heroor <heroor@ti.com>
+---
+ recipes/ti/ti-syslink.inc |  183 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 183 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/ti/ti-syslink.inc
 
-I also tested this against angstrom-2008 in the 2011.03-maintenance
-branch without problems. Thanks for traacking this down Denis.
+diff --git a/recipes/ti/ti-syslink.inc b/recipes/ti/ti-syslink.inc
+new file mode 100644
+index 0000000..651d840
+--- /dev/null
++++ b/recipes/ti/ti-syslink.inc
+@@ -0,0 +1,183 @@
++DESCRIPTION = "SYSLINK Inter-Processor Communications (IPC) for TI ARM/DSP processors"
++HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/SysLink/index.html"
++SECTION = "devel"
++LICENSE = "BSD"
++
++require ti-paths.inc
++require ti-staging.inc
++
++COMPATIBLE_MACHINE = "(ti816x|ti814x)"
++
++PROVIDES = "ti-syslink-module"
++PROVIDES += "ti-syslink-examples"
++
++# This package builds a kernel module, use kernel PR as base and append a local version
++PR = "${MACHINE_KERNEL_PR}"
++PR_append = "j"
++
++S = "${WORKDIR}/syslink_${PV}"
++
++SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/SysLink/${PV}/exports/syslink_${PV}.tar.gz;name=syslinktarball"
++
++DEPENDS = "ti-sysbios ti-xdctools ti-cgt6x ti-ipc" 
++DEPENDS += "virtual/kernel" 
++
++# Define Syslink variables. 
++SYSLINKHLOSSAMPLES  = "procMgr frameq gateMP heapBufMP heapMemMP listMP messageQ notify ringIO ringIO_gpp sharedRegion"
++SYSLINKPLATFORM    ?= "TI81XX"
++SYSLINKSUFFIX      ?= "xe674"
++SYSLINKLOADER      ?= "ELF"
++
++SYSLINKVARIANT_ti816x  = "TI816X"
++SYSLINKVARIANT_ti814x  = "TI814X"
++SYSLINKVARIANT     ?= "<UNDEFINED_SYSLINKVARIANT>"
++
++# Export additional variables needed by build
++XDCTARGETS         ?= "ti.targets.elf.C674"
++export XDCTARGETS
++
++SYSLINK_ROOT = "${S}"
++export SYSLINK_ROOT
++
++XDCPATH = "${IPC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages" 
++export XDCPATH
++
++XDCBUILDCFG="${SYSLINK_ROOT}/config.bld"
++export XDCBUILDCFG
++
++do_configure() {
++    # Update config.bld with rootDir paths for CodeGen Tools
++    # Build only C674 Elf.
++    sed -i \
++        -e s:^C674_ELF.rootDir.*:C674_ELF.rootDir\ =\ \"${CODEGEN_INSTALL_DIR}\":g \
++        -e s:C64P_COFF,://C64P_COFF:g \
++        -e s:C64P_ELF,://C64P_ELF:g \
++	-e s:C674_COFF,://C674_COFF:g \
++        -e s:C674_ELF,:C674_ELF:g \
++        -e s:M3_ELF,://M3_ELF:g \
++        -e s:A8_ELF$://A8_ELF:g \
++        -e 's/"ti.platforms.evmDA830:dsp",//g' \
++        ${S}/config.bld
++}
++
++do_prepsources () {
++    # Prepare the tree for rebuilding - clean and generate interfaces
++    cd ${SYSLINK_ROOT}/ti/syslink    
++    ${XDC_INSTALL_DIR}/xdc .make -PR .
++    ${XDC_INSTALL_DIR}/xdc clean -PR .
++    ${XDC_INSTALL_DIR}/xdc .interfaces -PR .
++}
++
++addtask prepsources after do_configure before do_compile
++
++do_compile() {
++    unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS
++
++    # Build the gpp (hlos) kernel space
++    cd ${S}/ti/syslink/utils/hlos/knl/Linux && make \
++        ARCH="${TARGET_ARCH}" \
++        CROSS_COMPILE="${TARGET_PREFIX}" \
++        SYSLINK_PLATFORM="${SYSLINKPLATFORM}" \
++        SYSLINK_VARIANT="${SYSLINKVARIANT}" \
++        SYSLINK_LOADER="${SYSLINKLOADER}" \
++        SYSLINK_PKGPATH="${IPC_INSTALL_DIR}/packages" \
++        KDIR="${STAGING_KERNEL_DIR}"
++
++    # Build the gpp (hlos) kernel space samples. 
++    for sample in ${SYSLINKHLOSSAMPLES}; do
++        cd ${S}/ti/syslink/samples/hlos/$sample/knl/Linux && make \
++            ARCH="${TARGET_ARCH}" \
++            CROSS_COMPILE="${TARGET_PREFIX}" \
++            SYSLINK_PLATFORM="${SYSLINKPLATFORM}" \
++            SYSLINK_VARIANT="${SYSLINKVARIANT}" \
++            SYSLINK_LOADER="${SYSLINKLOADER}" \
++            SYSLINK_PKGPATH="${IPC_INSTALL_DIR}/packages" \
++            SYSLINK_SDK=EZSDK \
++            KDIR="${STAGING_KERNEL_DIR}"
++    done
++
++    # Build the gpp (hlos) user space
++    cd ${S}/ti/syslink/utils/hlos/usr/Linux && make \
++        ARCH="${TARGET_ARCH}" \
++        CROSS_COMPILE="${TARGET_PREFIX}" \
++        TOOLCHAIN_PREFIX="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}" \
++        SYSLINK_PLATFORM="${SYSLINKPLATFORM}" \
++        SYSLINK_VARIANT="${SYSLINKVARIANT}" \
++        SYSLINK_LOADER="${SYSLINKLOADER}" \
++        SYSLINK_PKGPATH="${IPC_INSTALL_DIR}/packages"
++
++    # Build the gpp (hlos) user space samples 
++    # First build the common lib for samples.
++    cd ${S}/ti/syslink/samples/hlos/common/usr/Linux && make \
++        ARCH="${TARGET_ARCH}" \
++        CROSS_COMPILE="${TARGET_PREFIX}" \
++        TOOLCHAIN_PREFIX="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}" \
++        SYSLINK_PLATFORM="${SYSLINKPLATFORM}" \
++        SYSLINK_VARIANT="${SYSLINKVARIANT}" \
++        SYSLINK_LOADER="${SYSLINKLOADER}" \
++        SYSLINK_SDK=EZSDK \
++        SYSLINK_PKGPATH="${IPC_INSTALL_DIR}/packages"
++
++    for sample in ${SYSLINKHLOSSAMPLES}; do
++        cd ${S}/ti/syslink/samples/hlos/$sample/usr/Linux && make \
++            ARCH="${TARGET_ARCH}" \
++            CROSS_COMPILE="${TARGET_PREFIX}" \
++            TOOLCHAIN_PREFIX="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}" \
++            SYSLINK_PLATFORM="${SYSLINKPLATFORM}" \
++            SYSLINK_VARIANT="${SYSLINKVARIANT}" \
++            SYSLINK_LOADER="${SYSLINKLOADER}" \
++            SYSLINK_SDK=EZSDK \
++            SYSLINK_PKGPATH="${IPC_INSTALL_DIR}/packages"
++    done
++
++    # Build the dsp/arm (rtos) code (system)
++    cd ${S}/ti/syslink && \
++        ${XDC_INSTALL_DIR}/xdc -P \
++	 `${XDC_INSTALL_DIR}/bin/xdcpkg ${SYSLINK_ROOT}/ti/syslink | grep -v samples`
++
++    # Build the dsp/arm (rtos) code (samples)
++    export XDCARGS="profile=debug"
++    cd ${S}/ti/syslink && \
++        ${XDC_INSTALL_DIR}/xdc --jobs=${BB_NUMBER_THREADS} -P \
++	 `${XDC_INSTALL_DIR}/bin/xdcpkg ${SYSLINK_ROOT}/ti/syslink | grep samples`
++}
++
++do_install () {
++    # Install the hlos kernel module
++    install -d ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/dsp
++    install -m 0755 ${S}/ti/syslink/bin/${SYSLINKVARIANT}/syslink.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/dsp/
++
++    # Install the hlos examples
++    install -d ${D}/${installdir}/ti-syslink-examples
++    install -m 0755 ${S}/ti/syslink/bin/${SYSLINKVARIANT}/samples/* ${D}/${installdir}/ti-syslink-examples/
++
++    # Install the rtos examples
++    cd ${S}/ti/syslink/samples/rtos
++    for i in $(find . -name "*.${SYSLINKSUFFIX}"); do
++        install -d ${D}/${installdir}/ti-syslink-examples/`dirname ${i} | cut -f4 -d /`
++        install ${i} ${D}/${installdir}/ti-syslink-examples/`dirname ${i} | cut -f4 -d /`
++    done
++
++    # Install/Stage the Source Tree
++    install -d ${D}${SYSLINK_INSTALL_DIR_RECIPE}
++    cp -pPrf ${S}/* ${D}${SYSLINK_INSTALL_DIR_RECIPE}
++}
++
++PACKAGES += "ti-syslink-module"
++FILES_ti-syslink-module = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/dsp/syslink.ko" 
++RDEPENDS_ti-syslink-module += "update-modules"
++
++pkg_postinst_ti-syslink-module () {
++#!/bin/sh
++if [ -n "$D" ]; then
++	exit 1
++fi
++
++depmod -a
++update-modules || true
++}
++
++pkg_postrm_ti-syslink-module () {
++#!/bin/sh
++update-modules || true
++}
+-- 
+1.7.0.4
 
-regards
-Stefan Schmidt
-
-> ---
->  recipes/buglabs-osgi/bug-osgi.inc                  |    4 +++-
->  recipes/buglabs-osgi/com.buglabs.bug.jni.camera.bb |    3 +++
->  2 files changed, 6 insertions(+), 1 deletions(-)
-> 
-> diff --git a/recipes/buglabs-osgi/bug-osgi.inc b/recipes/buglabs-osgi/bug-osgi.inc
-> index b5b6e9f..75908bb 100644
-> --- a/recipes/buglabs-osgi/bug-osgi.inc
-> +++ b/recipes/buglabs-osgi/bug-osgi.inc
-> @@ -8,7 +8,7 @@ inherit bug-java-library
->  JARFILENAME = "${BPN}.jar"
->  ALTJARFILENAMES = ""
->  
-> -INC_PR = "r0"
-> +INC_PR = "r1"
->  
->  SRCREV = "12839"
->  
-> @@ -28,6 +28,8 @@ EXTRA_OEMAKE+="CLASSPATH_INCDIR=${STAGING_INCDIR}/classpath"
->  
->  JAVAC_OPTIONS="-source 1.6"
->  
-> +CXXFLAGS += "-fPIC"
-> +
->  do_compile() {
->    mkdir -p build
->    oe_makeclasspath cp -s ${DEPENDS} ${EXTRA_CP}
-> diff --git a/recipes/buglabs-osgi/com.buglabs.bug.jni.camera.bb b/recipes/buglabs-osgi/com.buglabs.bug.jni.camera.bb
-> index dced292..28a22e1 100644
-> --- a/recipes/buglabs-osgi/com.buglabs.bug.jni.camera.bb
-> +++ b/recipes/buglabs-osgi/com.buglabs.bug.jni.camera.bb
-> @@ -2,6 +2,9 @@ require bug-osgi.inc
->  inherit jni-library
->  
->  PR = "${INC_PR}.7+svnr${SRCREV}"
-> +
-> +export CCFLAGS  += "-fPIC"
-> +
->  FILES_${PN} += "${JNI_LIB_DIR}/libCamera.so"
->  
->  DEPENDS += "com.buglabs.common com.buglabs.bug.jni.common classpath jpeg virtual/kernel jpeg"
-> -- 
-> 1.7.0.4
-> 
 
 
