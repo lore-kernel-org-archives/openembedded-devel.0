@@ -1,32 +1,30 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from smtp208.alice.it ([82.57.200.104])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <srinredplano@gmail.com>) id 1Q7BPZ-0005Un-Rg
+	(envelope-from <ospite@studenti.unina.it>) id 1Q7DXf-0000LV-VB
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 20:55:34 +0200
-Received: by vxd7 with SMTP id 7so574557vxd.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Apr 2011 11:53:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=xn7w/3kg4Ozg5MOFEb/tMO4eOLqsJHgItr/73HSM4G4=;
-	b=tYPogye2JT1w4KhxJyIrKlJOzucJOTGOOlOREd86WFqEN6SlPIgU42NEoarAdm3jJr
-	XJHKTUbWSeYEpe2i65wXQwfVAcmEyaepttCwWUINuvoOEmc5n/B1LL1YV3gBt1e/NQD7
-	ILwW9iVCKCCdguNhKNmUs1yvL4CfTmhJfF4dw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=SvzYpvl9bC0vZDg9QLEVIaO9ToY+hmmaUkVZ00cBS6MpK8p9nk/3j+Ssp5rpcxUONm
-	JvjA1nAXwNIsHpdGYpKzFupnFrh+11R4rVhcYCVfAYJ4tkVHiLcGWIKBl1XwEer+B5Z8
-	CjA9B9RPuR+DPjdET+9BKSvHdzccVN4gGK7u8=
-MIME-Version: 1.0
-Received: by 10.52.169.135 with SMTP id ae7mr74000vdc.79.1302029606945; Tue,
-	05 Apr 2011 11:53:26 -0700 (PDT)
-Received: by 10.220.201.76 with HTTP; Tue, 5 Apr 2011 11:53:26 -0700 (PDT)
-Date: Tue, 5 Apr 2011 11:53:26 -0700
-Message-ID: <BANLkTikmAU59dgxEwN7uHnr0DeupZvzKFA@mail.gmail.com>
-From: srinredplano SP <srinredplano@gmail.com>
-To: openembedded-devel@lists.openembedded.org, arago-devel@gforge.ti.com, 
-	angstrom-distro-users@linuxtogo.org, openembedded-issues@linuxtogo.org
-Subject: Building Gstreamer from GIT
+	Tue, 05 Apr 2011 23:12:04 +0200
+Received: from jcn (82.57.80.195) by smtp208.alice.it (8.5.124.08)
+	(authenticated as fospite@alice.it)
+	id 4C1A271616483C68; Tue, 5 Apr 2011 23:09:56 +0200
+Date: Tue, 5 Apr 2011 23:09:47 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
+To: Robert Foerster <robert@erafx.com>
+Message-Id: <20110405230947.aaa39ee0.ospite@studenti.unina.it>
+In-Reply-To: <BANLkTiksYsGVCr7HH_WM_47kkz-+d6R_DQ@mail.gmail.com>
+References: <1301967081-14512-1-git-send-email-robert@erafx.com>
+	<20110405143320.GE30816@jama.jama.net>
+	<20110405143634.GF30816@jama.jama.net>
+	<20110405172059.50829132.ospite@studenti.unina.it>
+	<BANLkTiksYsGVCr7HH_WM_47kkz-+d6R_DQ@mail.gmail.com>
+X-Mailer: Sylpheed 3.1.0 (GTK+ 2.24.3; x86_64-unknown-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [PATCH 1/2] tzcode-native: update to 2011e
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,48 +38,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 18:55:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 05 Apr 2011 21:12:04 -0000
+X-Groupsio-MsgNum: 30964
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Tue__5_Apr_2011_23_09_47_+0200_ypdPDz6_05Y7fC8Q"
 
-Hi All,
-I am trying to build Gstreamer from GIT ( using branch 0.10.23 ) .But
-I am not able to run autogen.sh due to missing .git  directory .
+--Signature=_Tue__5_Apr_2011_23_09_47_+0200_ypdPDz6_05Y7fC8Q
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Can any one let me know why the . git is  getting erased and what I
-should do to stop getting   that erased. (I am verymuch new to Git
-(though I have build Gstreamer using svn)o build Gstreamer using GIt
-Pointers for building Gstreamer using GIT  would be helpful.
+On Tue, 5 Apr 2011 11:32:41 -0400
+Robert Foerster <robert@erafx.com> wrote:
 
-Here is my recipe http://pastebin.com/tz6dsZmV . Thanks in Advance
+> On Tue, Apr 5, 2011 at 11:20 AM, Antonio Ospite <ospite@studenti.unina.it=
+>wrote:
+>=20
+[...]
+> > > or a bit newer tzcode :)
+> > >
+> > > OE nokia900@shr ~/shr-core $ grep LIC meta-shr/recipes-extended/tzcod=
+e/
+> > tzcode-native_2011d.bb
+> > > LICENSE =3D "PD"
+> > > LIC_FILES_CHKSUM =3D "file://README;md5=3D3ae8198f82258417ce29066d3b0=
+34035"
+> > >
+> >
+> > Bob tell us if you are interested about adding those yourself and if so,
+> > if you are going to send incremental patches on top of your v2, so we
+> > separate the version update from the recipe upgrade about LICENSE, and
+> > I can merge your v2 as it is now.
+>=20
+> Commit v2 as it as.  I will submit new patches later today with the LIC
+> info.
 
-gstreamer_0.10.30.bb
-===================================================
-require gstreamer.inc
-PR = "r1"
+Pushed, thanks.
 
-SRCREV_pn-gstreamer = "${AUTOREV}"
+--=20
+Antonio Ospite
+http://ao2.it
 
-SRC_URI[archive.md5sum] = "de01f73f71d97c5854badd363ca06509"
-SRC_URI[archive.sha256sum] =
-"e8ef301be423797ff36a0bb3615930b112b4175634051d19fd655e0ed974532a"
+PGP public key ID: 0x4553B001
 
-SRC_URI = "git://10.121.72.60/git/gstreamer.git;branch=0.10.23;protocol=git "
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
 
-#SRC_URI = "git://anongit.freedesktop.org/gstreamer/common;branch=0.10.23;protocol=git
-"
+--Signature=_Tue__5_Apr_2011_23_09_47_+0200_ypdPDz6_05Y7fC8Q
+Content-Type: application/pgp-signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-S = ${WORKDIR}/git
+iEYEARECAAYFAk2bhRsACgkQ5xr2akVTsAG9IQCfffXqaer6qMXgQyXyvGh80B6l
+W9gAnix3T+HhipuGWizgUfpIf48058JS
+=EVly
+-----END PGP SIGNATURE-----
 
-EXTRA_OECONF += "ac_cv_func_register_printf_function=no"
-
-do_configure_prepend() {
-    pushd ${S}
-    tar -xzf ${DL_DIR}/git_10.121.72.60.git.gstreamer.git.tar.gz
-    ./autogen.sh --noconfigure --nocheck
-
-    sed -i -e s:docs::g Makefile.am
-    popd
-}
-
-
+--Signature=_Tue__5_Apr_2011_23_09_47_+0200_ypdPDz6_05Y7fC8Q--
