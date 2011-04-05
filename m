@@ -1,38 +1,32 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1Q7AlB-0006rn-He
+	(envelope-from <srinredplano@gmail.com>) id 1Q7BPZ-0005Un-Rg
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 20:13:49 +0200
-Received: from dlep35.itg.ti.com ([157.170.170.118])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id p35IBZEm010009
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Tue, 5 Apr 2011 13:11:35 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id p35IBYXM018386;
-	Tue, 5 Apr 2011 13:11:34 -0500 (CDT)
-Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p35IBYtV017088;
-	Tue, 5 Apr 2011 13:11:34 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
-	([157.170.170.8]) with mapi; Tue, 5 Apr 2011 13:11:24 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: Denys Dmytriyenko <denis@denix.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 5 Apr 2011 13:11:21 -0500
-Thread-Topic: [oe] [PATCH 5/5] am45x-evm: Add am45x-evm machine configuration
-Thread-Index: Acvzr9RZgAG6V8/zTAac6ySTWQ88oQADOToA
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080340C684B7@dlee06.ent.ti.com>
-References: <1302018111-20799-1-git-send-email-Chase.Maupin@ti.com>
-	<1302018111-20799-5-git-send-email-Chase.Maupin@ti.com>
-	<20110405163747.GA7168@denix.org>
-In-Reply-To: <20110405163747.GA7168@denix.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Tue, 05 Apr 2011 20:55:34 +0200
+Received: by vxd7 with SMTP id 7so574557vxd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Apr 2011 11:53:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=xn7w/3kg4Ozg5MOFEb/tMO4eOLqsJHgItr/73HSM4G4=;
+	b=tYPogye2JT1w4KhxJyIrKlJOzucJOTGOOlOREd86WFqEN6SlPIgU42NEoarAdm3jJr
+	XJHKTUbWSeYEpe2i65wXQwfVAcmEyaepttCwWUINuvoOEmc5n/B1LL1YV3gBt1e/NQD7
+	ILwW9iVCKCCdguNhKNmUs1yvL4CfTmhJfF4dw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=SvzYpvl9bC0vZDg9QLEVIaO9ToY+hmmaUkVZ00cBS6MpK8p9nk/3j+Ssp5rpcxUONm
+	JvjA1nAXwNIsHpdGYpKzFupnFrh+11R4rVhcYCVfAYJ4tkVHiLcGWIKBl1XwEer+B5Z8
+	CjA9B9RPuR+DPjdET+9BKSvHdzccVN4gGK7u8=
 MIME-Version: 1.0
-Subject: Re: [PATCH 5/5] am45x-evm: Add am45x-evm machine configuration
+Received: by 10.52.169.135 with SMTP id ae7mr74000vdc.79.1302029606945; Tue,
+	05 Apr 2011 11:53:26 -0700 (PDT)
+Received: by 10.220.201.76 with HTTP; Tue, 5 Apr 2011 11:53:26 -0700 (PDT)
+Date: Tue, 5 Apr 2011 11:53:26 -0700
+Message-ID: <BANLkTikmAU59dgxEwN7uHnr0DeupZvzKFA@mail.gmail.com>
+From: srinredplano SP <srinredplano@gmail.com>
+To: openembedded-devel@lists.openembedded.org, arago-devel@gforge.ti.com, 
+	angstrom-distro-users@linuxtogo.org, openembedded-issues@linuxtogo.org
+Subject: Building Gstreamer from GIT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,80 +40,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 18:13:49 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 05 Apr 2011 18:55:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+
+Hi All,
+I am trying to build Gstreamer from GIT ( using branch 0.10.23 ) .But
+I am not able to run autogen.sh due to missing .git  directory .
+
+Can any one let me know why the . git is  getting erased and what I
+should do to stop getting   that erased. (I am verymuch new to Git
+(though I have build Gstreamer using svn)o build Gstreamer using GIt
+Pointers for building Gstreamer using GIT  would be helpful.
+
+Here is my recipe http://pastebin.com/tz6dsZmV . Thanks in Advance
+
+gstreamer_0.10.30.bb
+===================================================
+require gstreamer.inc
+PR = "r1"
+
+SRCREV_pn-gstreamer = "${AUTOREV}"
+
+SRC_URI[archive.md5sum] = "de01f73f71d97c5854badd363ca06509"
+SRC_URI[archive.sha256sum] =
+"e8ef301be423797ff36a0bb3615930b112b4175634051d19fd655e0ed974532a"
+
+SRC_URI = "git://10.121.72.60/git/gstreamer.git;branch=0.10.23;protocol=git "
+
+#SRC_URI = "git://anongit.freedesktop.org/gstreamer/common;branch=0.10.23;protocol=git
+"
 
 
-> -----Original Message-----
-> From: Denys Dmytriyenko [mailto:denis@denix.org]
-> Sent: Tuesday, April 05, 2011 11:38 AM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Maupin, Chase
-> Subject: Re: [oe] [PATCH 5/5] am45x-evm: Add am45x-evm machine
-> configuration
->=20
-> On Tue, Apr 05, 2011 at 10:41:51AM -0500, Chase Maupin wrote:
-> > * Added a new machine configuration for the am45x-evm device.
-> > * This machine currently mimics the omap4430-panda configuration
-> >   during the prototyping phase but is expected to change as the
-> >   hardware and software evolves.
-> > * The am45x-evm machine type is used to allow differentiating
-> >   software components to be build and packaged (i.e. task lists)
-> >   as well as to account for differences with the omap4430-panda
-> >   device in the future.
->=20
-> Chase,
->=20
-> This would have been better explained in a cover letter for all the 5
-> patches,
-> as I was reading through the first 4 and wondering why do you use panda
-> remnants, until I got to the 5th one... :)
->=20
-> FYI, there are new repos on arago ready to be populated for linux-am45x
-> and
-> u-boot-am45x, so need to switch corresponding recipes in the future...
+S = ${WORKDIR}/git
 
-Thanks.  I'll do that in the future.
+EXTRA_OECONF += "ac_cv_func_register_printf_function=no"
 
-We will switch to the Arago repos when they are ready but that is not sched=
-uled for over a month.  Until then this lets us keep prototyping and develo=
-ping :)
+do_configure_prepend() {
+    pushd ${S}
+    tar -xzf ${DL_DIR}/git_10.121.72.60.git.gstreamer.git.tar.gz
+    ./autogen.sh --noconfigure --nocheck
 
->=20
-> > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
->=20
-> Acked-by: Denys Dmytriyenko <denys@ti.com>
->=20
-> > ---
-> >  conf/machine/am45x-evm.conf |   10 ++++++++++
-> >  1 files changed, 10 insertions(+), 0 deletions(-)
-> >  create mode 100644 conf/machine/am45x-evm.conf
-> >
-> > diff --git a/conf/machine/am45x-evm.conf b/conf/machine/am45x-evm.conf
-> > new file mode 100644
-> > index 0000000..3597d37
-> > --- /dev/null
-> > +++ b/conf/machine/am45x-evm.conf
-> > @@ -0,0 +1,10 @@
-> > +#@TYPE: Machine
-> > +#@NAME: AM45X EVM
-> > +#@DESCRIPTION: Machine configuration for the AM45x EVM
-> > +
-> > +# Currently the am45x-evm machine type mimics the panda
-> > +# machine for its configuration.  This is expected to change
-> > +# as the hardware and software evolves.  Currently the unique
-> > +# machine type is used to differentiate software stack being
-> > +# built for the two devices.
-> > +require conf/machine/omap4430-panda.conf
-> > --
-> > 1.7.0.4
-> >
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+    sed -i -e s:docs::g Makefile.am
+    popd
+}
 
 
