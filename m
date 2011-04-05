@@ -1,38 +1,27 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from smtp205.alice.it ([82.57.200.101])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heroor@gmail.com>) id 1Q77wM-0003hQ-Sk
+	(envelope-from <ospite@studenti.unina.it>) id 1Q7864-0007ZJ-3O
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 17:13:11 +0200
-Received: by gyf1 with SMTP id 1so168143gyf.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Apr 2011 08:11:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=zEnK0SCUdHfmgBxxgPk0MQfLlChYQoA1qfT/lVRxwSc=;
-	b=K31DoL4rT1vir0jxz7fL/PDl7kkgHdilFnK4wLgAbhUWpW8HD1ZpTlGMhw6dMpgJN8
-	1Qf1g0cOPaZcfWL1ojnWB0L63luv73BklWQP04c1rthW9cHfYrHdDLJyOkrLIKTzgtfd
-	RG1c1w7a7k4Qo5cDkaFzBsM6h4eRoy2xiDEeU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=TBnkIP2C9C3TzZDQdQF3t6jkUxJsNieogDfZ1/5FUdU94KojH5MjRUWiJL8AZW/Bza
-	i0BJFslY2Y0q0IlGgi+zlZMkwi5gdPkAKyPu9YGshv2oqozx2aO+Kmdrjm9LzhPfrb4G
-	jagq1Izu5EW9QV3X0y4AcUoDX+G02cpkn1QVI=
-Received: by 10.150.67.3 with SMTP id p3mr629141yba.153.1302016264364;
-	Tue, 05 Apr 2011 08:11:04 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id p28sm148062ybk.0.2011.04.05.08.11.02
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 05 Apr 2011 08:11:03 -0700 (PDT)
-From: Siddharth Heroor <heroor@gmail.com>
+	Tue, 05 Apr 2011 17:23:12 +0200
+Received: from jcn (82.57.80.195) by smtp205.alice.it (8.5.124.08)
+	(authenticated as fospite@alice.it)
+	id 4D0D00380941136C; Tue, 5 Apr 2011 17:21:06 +0200
+Date: Tue, 5 Apr 2011 17:20:59 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Apr 2011 20:40:53 +0530
-Message-Id: <1302016253-10390-2-git-send-email-heroor@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1302016253-10390-1-git-send-email-heroor@gmail.com>
-References: <1302016253-10390-1-git-send-email-heroor@gmail.com>
-Cc: Siddharth Heroor <heroor@ti.com>
-Subject: [PATCH 2/2] ti-syslink: Add release 02.00.00.68.
+Message-Id: <20110405172059.50829132.ospite@studenti.unina.it>
+In-Reply-To: <20110405143634.GF30816@jama.jama.net>
+References: <1301967081-14512-1-git-send-email-robert@erafx.com>
+	<20110405143320.GE30816@jama.jama.net>
+	<20110405143634.GF30816@jama.jama.net>
+X-Mailer: Sylpheed 3.1.0 (GTK+ 2.24.3; x86_64-unknown-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+Mime-Version: 1.0
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [PATCH 1/2] tzcode-native: update to 2011e
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,37 +35,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 15:13:11 -0000
+X-List-Received-Date: Tue, 05 Apr 2011 15:23:13 -0000
+X-Groupsio-MsgNum: 30944
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Tue__5_Apr_2011_17_20_59_+0200_sCHL4S_Q3n20Ow7O"
 
-From: Siddharth Heroor <heroor@ti.com>
+--Signature=_Tue__5_Apr_2011_17_20_59_+0200_sCHL4S_Q3n20Ow7O
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Tue, 5 Apr 2011 16:36:34 +0200
+Martin Jansa <martin.jansa@gmail.com> wrote:
 
-Signed-off-by: Siddharth Heroor <heroor@ti.com>
+> On Tue, Apr 05, 2011 at 04:33:20PM +0200, Martin Jansa wrote:
+> > On Mon, Apr 04, 2011 at 09:31:20PM -0400, Bob Foerster wrote:
+> > > Signed-off-by: Bob Foerster <robert@erafx.com>
+> > > ---
+> > >  ...code-native_2011d.bb =3D> tzcode-native_2011e.bb} |   11 ++++++--=
 ---
- recipes/ti/ti-syslink_02.00.00.68.bb |   12 ++++++++++++
- 1 files changed, 12 insertions(+), 0 deletions(-)
- create mode 100644 recipes/ti/ti-syslink_02.00.00.68.bb
+> > >  1 files changed, 6 insertions(+), 5 deletions(-)
+> > >  rename recipes/tzcode/{tzcode-native_2011d.bb =3D> tzcode-native_201=
+1e.bb} (51%)
+> >=20
+> > Hi,
+> >=20
+> > Can you please add LICENSE and LIC_FILES_CHKSUM fields? The same for tz=
+data.
+> >=20
+> > Something like this:
+> > OE nokia900@shr ~/shr-core $ grep LIC
+> > openembedded-core/meta/recipes-extended/tzdata/tzdata_2010o.bb
+> > LICENSE =3D "PD"
+> > LIC_FILES_CHKSUM =3D "file://asia;beginline=3D2;endline=3D3;md5=3D06468=
+c0e84ef4d4c97045a4a29b08234"
+> > OE nokia900@shr ~/shr-core $ grep LIC
+> > openembedded-core/meta/recipes-extended/tzcode/tzcode-native_2009r.bb
+> > LICENSE =3D "Public Domain"
+> > LIC_FILES_CHKSUM =3D "file://${WORKDIR}/README;md5=3D3ae8198f82258417ce=
+29066d3b034035"
+>=20
+> or a bit newer tzcode :)
+>=20
+> OE nokia900@shr ~/shr-core $ grep LIC meta-shr/recipes-extended/tzcode/tz=
+code-native_2011d.bb
+> LICENSE =3D "PD"
+> LIC_FILES_CHKSUM =3D "file://README;md5=3D3ae8198f82258417ce29066d3b03403=
+5"
+>=20
 
-diff --git a/recipes/ti/ti-syslink_02.00.00.68.bb b/recipes/ti/ti-syslink_02.00.00.68.bb
-new file mode 100644
-index 0000000..6ae07ae
---- /dev/null
-+++ b/recipes/ti/ti-syslink_02.00.00.68.bb
-@@ -0,0 +1,12 @@
-+require ti-syslink.inc
-+
-+PV = "02_00_00_68"
-+
-+# This release appends a beta tag to PV.
-+PVExtra = "_beta1"
-+S = "${WORKDIR}/syslink_${PV}${PVExtra}"
-+
-+SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/SysLink/${PV}${PVExtra}/exports/syslink_${PV}${PVExtra}.tar.gz;name=syslinktarball"
-+
-+SRC_URI[syslinktarball.md5sum] = "468034372124f70f82b60cfb5f11c8e8"
-+SRC_URI[syslinktarball.sha256sum] = "ed574dcb3a5477cfbc69a1c9e768d5197291cb057d19fd791e16e1c89af3e8e1"
--- 
-1.7.0.4
+Bob tell us if you are interested about adding those yourself and if so,
+if you are going to send incremental patches on top of your v2, so we
+separate the version update from the recipe upgrade about LICENSE, and
+I can merge your v2 as it is now.
 
+Regards,
+   Antonio
 
+--=20
+Antonio Ospite
+http://ao2.it
 
+PGP public key ID: 0x4553B001
+
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+
+--Signature=_Tue__5_Apr_2011_17_20_59_+0200_sCHL4S_Q3n20Ow7O
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEARECAAYFAk2bM1sACgkQ5xr2akVTsAFhhwCffsNF16z1aGP6Z4fx7DIEw8uI
+4UIAoKddEm902jt+c5SBKMagLklmHDSn
+=uikg
+-----END PGP SIGNATURE-----
+
+--Signature=_Tue__5_Apr_2011_17_20_59_+0200_sCHL4S_Q3n20Ow7O--
