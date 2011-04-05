@@ -1,27 +1,35 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <robert@erafx.com>) id 1Q74uH-0000WL-CL
+	(envelope-from <heroor@gmail.com>) id 1Q757K-000122-AS
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 13:58:49 +0200
-Received: by vxd7 with SMTP id 7so186473vxd.6
+	Tue, 05 Apr 2011 14:12:18 +0200
+Received: by ywg8 with SMTP id 8so87006ywg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Apr 2011 04:56:42 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.52.72.5 with SMTP id z5mr6859679vdu.43.1302004602248; Tue, 05
-	Apr 2011 04:56:42 -0700 (PDT)
-Received: by 10.220.192.1 with HTTP; Tue, 5 Apr 2011 04:56:42 -0700 (PDT)
-X-Originating-IP: [24.165.208.114]
-In-Reply-To: <BANLkTi=dMe7oKT=JrVvi6q2o7mW0+9oTCw@mail.gmail.com>
-References: <1301967081-14512-1-git-send-email-robert@erafx.com>
-	<20110405103538.fc13eeb3.ospite@studenti.unina.it>
-	<BANLkTi=dMe7oKT=JrVvi6q2o7mW0+9oTCw@mail.gmail.com>
-Date: Tue, 5 Apr 2011 07:56:42 -0400
-Message-ID: <BANLkTinPFnmPKo0WXz0UHit7PCgayDwXRg@mail.gmail.com>
-From: Robert Foerster <robert@erafx.com>
-To: Antonio Ospite <ospite@studenti.unina.it>,
-	openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH 1/2] tzcode-native: update to 2011e
+	Tue, 05 Apr 2011 05:10:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=ltoDHJcealvzI0ADw22OUcNyYVm8UUBjK9MMxyHKgEk=;
+	b=SbcZD2bOrPhZaJfiEClWgSwWPfHs3N6uXX3P0k9BX1G9UGbGt0Err1lYgDSn+cP1Oz
+	CM5klrkNT2Dh7XuzHVPNTl8qqMxs2ZOB3hcTTOR2c0+0xbucwuusQ7zowecDFqnU9J4J
+	l4G4ojVn8syFSfQl6pYtXfJ11BvrBscy1/WAE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Tn7d6uNtPwIFBGxyVA60ygXpz5er9v4PtJYBlYRN1uIb+mRN00wzpRLr0xrYtUysjf
+	mKrOWBSXQD+pfph5jDIdSk4Gq8UNZJjfV1oy0oMfq3Nr1mA5na+xoPe2/bsjpf736luu
+	4AJcoLebW4Oqwuz0NCxOF1bHbHWgQf/bb5Bic=
+Received: by 10.236.197.99 with SMTP id s63mr11318463yhn.325.1302005411260;
+	Tue, 05 Apr 2011 05:10:11 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id h43sm2798378yhm.22.2011.04.05.05.10.09
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 05 Apr 2011 05:10:10 -0700 (PDT)
+From: Siddharth Heroor <heroor@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  5 Apr 2011 17:40:01 +0530
+Message-Id: <1302005404-21580-1-git-send-email-heroor@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: Siddharth Heroor <heroor@ti.com>
+Subject: [PATCH 1/4] ti-sysbios: Add missing License field.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,91 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 11:58:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 05 Apr 2011 12:12:18 -0000
 
-On Tue, Apr 5, 2011 at 7:40 AM, Robert Foerster <robert@erafx.com> wrote:
+From: Siddharth Heroor <heroor@ti.com>
 
->
-> On Tue, Apr 5, 2011 at 4:35 AM, Antonio Ospite <ospite@studenti.unina.it>wrote:
->
->> On Mon,  4 Apr 2011 21:31:20 -0400
->> Bob Foerster <robert@erafx.com> wrote:
->>
->> > Signed-off-by: Bob Foerster <robert@erafx.com>
->> > ---
->> >  ...code-native_2011d.bb => tzcode-native_2011e.bb} |   11 ++++++-----
->> >  1 files changed, 6 insertions(+), 5 deletions(-)
->> >  rename recipes/tzcode/{tzcode-native_2011d.bb =>
->> tzcode-native_2011e.bb} (51%)
->> >
->> > diff --git a/recipes/tzcode/tzcode-native_2011d.bb b/recipes/tzcode/
->> tzcode-native_2011e.bb
->> > similarity index 51%
->> > rename from recipes/tzcode/tzcode-native_2011d.bb
->> > rename to recipes/tzcode/tzcode-native_2011e.bb
->> > index 1cc7757..39b172b 100644
->> > --- a/recipes/tzcode/tzcode-native_2011d.bb
->> > +++ b/recipes/tzcode/tzcode-native_2011e.bb
->> > @@ -6,11 +6,12 @@ require tzcode-native.inc
->> >  # Also, tzdata (and it is needed to build tzcode) version can differ
->> from
->> >  # tzcode version, thus this variable
->> >
->> > -TZDATA_PV = "2011d"
->> > +TZDATA_PV = "2011e"
->> >
->> >  PR = "${INC_PR}.0"
->> >
->> > -SRC_URI[tzcode-2011d.md5sum] = "95095242ee368e6a7e107f154590ac11"
->> > -SRC_URI[tzcode-2011d.sha256sum] =
->> "68f2c07471c5390199c09fe9fee6a22f8a4dac24713af88b92da17b33ad98cc7"
->> > -SRC_URI[tzdata-2011d.md5sum] = "03c5793502b7c41985edd73146bf7e36"
->> > -SRC_URI[tzdata-2011d.sha256sum] =
->> "415a54774094e8dcdc9ba141fafbee4b3b2f2140a5b8cf012eea4b37fb9a23bd"
->> > +SRC_URI[tzcode-2011e.md5sum] = "fbfc05dbf9ebcfe7c4bba18549870173"
->> > +SRC_URI[tzcode-2011e.sha256sum] =
->> "8fb00f8763aa51d83d6f3190d144124bb7176ca829fc08823d6205297bf0426b"
->> > +SRC_URI[tzdata-2011e.md5sum] = "044a07072300a0ee72b046e5a9a4ec90"
->> > +SRC_URI[tzdata-2011e.sha256sum] =
->> "44fef01de4589a4979eb6b5fdbbfd21a3b135852af1ecbfb9e0368ae47392c79"
->> > +
->>
->> Just nitpicking, maybe you can drop the last blank line.
->> Same comment for the other patch about tzdata.
->>
->>
-> Sure, v2 sent. Though it seems git send-email didn't prefix the second
-> patch with v2.  That's odd, because it showed the proper subject when
-> sending:
->
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [PATCH v2 2/2] tzdata: update to 2011e
-> Date: Tue,  5 Apr 2011 07:28:26 -0400
->
+* Sys/Bios is released under a BSD license.
+
+Signed-off-by: Siddharth Heroor <heroor@ti.com>
+---
+ recipes/ti/ti-sysbios.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/recipes/ti/ti-sysbios.inc b/recipes/ti/ti-sysbios.inc
+index cf45c37..84a76a4 100644
+--- a/recipes/ti/ti-sysbios.inc
++++ b/recipes/ti/ti-sysbios.inc
+@@ -1,6 +1,7 @@
+ DESCRIPTION = "TI SYS/BIOS v6 Kernel"
+ HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/bios/sysbios"
+ SECTION = "devel"
++LICENSE = "BSD"
+ 
+ require ti-paths.inc
+ require ti-staging.inc
+-- 
+1.7.0.4
 
 
-Nevermind this. It seems gmail coalesced the versions to me, causing my
-confusion. They both look fine on the list.
-
-
-
->
->
->
->> Thanks,
->>   Antonio
->>
->> --
->> Antonio Ospite
->> http://ao2.it
->>
->> PGP public key ID: 0x4553B001
->>
->> A: Because it messes up the order in which people normally read text.
->>   See http://en.wikipedia.org/wiki/Posting_style
->> Q: Why is top-posting such a bad thing?
->>
->
->
 
