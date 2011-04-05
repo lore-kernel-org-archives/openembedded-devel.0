@@ -1,25 +1,26 @@
-Received: from smtp208.alice.it ([82.57.200.104])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ospite@studenti.unina.it>) id 1Q76Rn-0000CY-43
+	(envelope-from <robert@erafx.com>) id 1Q76dA-0003Mv-IF
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 15:37:31 +0200
-Received: from jcn (82.57.80.195) by smtp208.alice.it (8.5.124.08)
-	(authenticated as fospite@alice.it)
-	id 4C1A2716163DB12B; Tue, 5 Apr 2011 15:35:25 +0200
-Date: Tue, 5 Apr 2011 15:35:19 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
-To: openembedded-devel@lists.openembedded.org
-Message-Id: <20110405153519.9ca49ebe.ospite@studenti.unina.it>
-In-Reply-To: <1302002906-16491-2-git-send-email-robert@erafx.com>
+	Tue, 05 Apr 2011 15:49:16 +0200
+Received: by vws2 with SMTP id 2so271906vws.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Apr 2011 06:47:10 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.52.73.105 with SMTP id k9mr11699836vdv.83.1302011230267; Tue,
+	05 Apr 2011 06:47:10 -0700 (PDT)
+Received: by 10.220.192.1 with HTTP; Tue, 5 Apr 2011 06:47:10 -0700 (PDT)
+X-Originating-IP: [24.165.208.114]
+In-Reply-To: <20110405153424.35cdac31.ospite@studenti.unina.it>
 References: <1302002906-16491-1-git-send-email-robert@erafx.com>
-	<1302002906-16491-2-git-send-email-robert@erafx.com>
-X-Mailer: Sylpheed 3.1.0 (GTK+ 2.24.3; x86_64-unknown-linux-gnu)
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-Mime-Version: 1.0
-Subject: Re: [PATCH v2 2/2] tzdata: update to 2011e
+	<20110405153424.35cdac31.ospite@studenti.unina.it>
+Date: Tue, 5 Apr 2011 09:47:10 -0400
+Message-ID: <BANLkTi=Y0OeeWJvs2hn+YJ5MweXBej7J8Q@mail.gmail.com>
+From: Robert Foerster <robert@erafx.com>
+To: Antonio Ospite <ospite@studenti.unina.it>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH v2 1/2] tzcode-native: update to 2011e
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,69 +34,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 13:37:31 -0000
-X-Groupsio-MsgNum: 30935
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg="PGP-SHA1";
-	boundary="Signature=_Tue__5_Apr_2011_15_35_19_+0200_qxRrr+NA=sfNkxF+"
+X-List-Received-Date: Tue, 05 Apr 2011 13:49:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---Signature=_Tue__5_Apr_2011_15_35_19_+0200_qxRrr+NA=sfNkxF+
-Content-Type: text/plain; charset=US-ASCII
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, Apr 5, 2011 at 9:34 AM, Antonio Ospite <ospite@studenti.unina.it>wrote:
 
-On Tue,  5 Apr 2011 07:28:26 -0400
-Bob Foerster <robert@erafx.com> wrote:
+> On Tue,  5 Apr 2011 07:28:25 -0400
+> Bob Foerster <robert@erafx.com> wrote:
+>
+> > Signed-off-by: Bob Foerster <robert@erafx.com>
+>
+> Acked-by: Antonio Ospite <ospite@studenti.unina.it>
+>
+> Bob, do you want me to push those?
+>
 
-> Signed-off-by: Bob Foerster <robert@erafx.com>
+Yes, that'd be great. Thanks.
 
-Acked-by: Antonio Ospite <ospite@studenti.unina.it>
 
-> ---
->  .../tzdata/{tzdata_2011d.bb =3D> tzdata_2011e.bb}    |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
->  rename recipes/tzdata/{tzdata_2011d.bb =3D> tzdata_2011e.bb} (64%)
->=20
-> diff --git a/recipes/tzdata/tzdata_2011d.bb b/recipes/tzdata/tzdata_2011e=
-.bb
-> similarity index 64%
-> rename from recipes/tzdata/tzdata_2011d.bb
-> rename to recipes/tzdata/tzdata_2011e.bb
-> index ca225bf..581ced3 100644
-> --- a/recipes/tzdata/tzdata_2011d.bb
-> +++ b/recipes/tzdata/tzdata_2011e.bb
-> @@ -6,5 +6,5 @@ require tzdata.inc
-> =20
->  PR =3D "${INC_PR}.0"
-> =20
-> -SRC_URI[md5sum] =3D "03c5793502b7c41985edd73146bf7e36"
-> -SRC_URI[sha256sum] =3D "415a54774094e8dcdc9ba141fafbee4b3b2f2140a5b8cf01=
-2eea4b37fb9a23bd"
-> +SRC_URI[md5sum] =3D "044a07072300a0ee72b046e5a9a4ec90"
-> +SRC_URI[sha256sum] =3D "44fef01de4589a4979eb6b5fdbbfd21a3b135852af1ecbfb=
-9e0368ae47392c79"
-> --=20
-> 1.7.0.4
+>
+> > ---
+> >  ...code-native_2011d.bb => tzcode-native_2011e.bb} |   10 +++++-----
+> >  1 files changed, 5 insertions(+), 5 deletions(-)
+> >  rename recipes/tzcode/{tzcode-native_2011d.bb => tzcode-native_2011e.bb}
+> (51%)
+> >
+> > diff --git a/recipes/tzcode/tzcode-native_2011d.bb b/recipes/tzcode/
+> tzcode-native_2011e.bb
+> > similarity index 51%
+> > rename from recipes/tzcode/tzcode-native_2011d.bb
+> > rename to recipes/tzcode/tzcode-native_2011e.bb
+> > index 1cc7757..2bf4f4c 100644
+> > --- a/recipes/tzcode/tzcode-native_2011d.bb
+> > +++ b/recipes/tzcode/tzcode-native_2011e.bb
+> > @@ -6,11 +6,11 @@ require tzcode-native.inc
+> >  # Also, tzdata (and it is needed to build tzcode) version can differ
+> from
+> >  # tzcode version, thus this variable
+> >
+> > -TZDATA_PV = "2011d"
+> > +TZDATA_PV = "2011e"
+> >
+> >  PR = "${INC_PR}.0"
+> >
+> > -SRC_URI[tzcode-2011d.md5sum] = "95095242ee368e6a7e107f154590ac11"
+> > -SRC_URI[tzcode-2011d.sha256sum] =
+> "68f2c07471c5390199c09fe9fee6a22f8a4dac24713af88b92da17b33ad98cc7"
+> > -SRC_URI[tzdata-2011d.md5sum] = "03c5793502b7c41985edd73146bf7e36"
+> > -SRC_URI[tzdata-2011d.sha256sum] =
+> "415a54774094e8dcdc9ba141fafbee4b3b2f2140a5b8cf012eea4b37fb9a23bd"
+> > +SRC_URI[tzcode-2011e.md5sum] = "fbfc05dbf9ebcfe7c4bba18549870173"
+> > +SRC_URI[tzcode-2011e.sha256sum] =
+> "8fb00f8763aa51d83d6f3190d144124bb7176ca829fc08823d6205297bf0426b"
+> > +SRC_URI[tzdata-2011e.md5sum] = "044a07072300a0ee72b046e5a9a4ec90"
+> > +SRC_URI[tzdata-2011e.sha256sum] =
+> "44fef01de4589a4979eb6b5fdbbfd21a3b135852af1ecbfb9e0368ae47392c79"
+> > --
+>
+> --
+> Antonio Ospite
+> http://ao2.it
+>
+> PGP public key ID: 0x4553B001
+>
+> A: Because it messes up the order in which people normally read text.
+>   See http://en.wikipedia.org/wiki/Posting_style
+> Q: Why is top-posting such a bad thing?
+>
 
---=20
-Antonio Ospite
-http://ao2.it
-
-PGP public key ID: 0x4553B001
-
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
-
---Signature=_Tue__5_Apr_2011_15_35_19_+0200_qxRrr+NA=sfNkxF+
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEARECAAYFAk2bGpcACgkQ5xr2akVTsAHqpACaAotq437gJc2BZWLoxnGahGBL
-4UYAoKi/T4O+Ijn/q0vPKbCG+MvKjDog
-=J5g4
------END PGP SIGNATURE-----
-
---Signature=_Tue__5_Apr_2011_15_35_19_+0200_qxRrr+NA=sfNkxF+--
