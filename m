@@ -1,36 +1,25 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1Q72Hd-0007aw-GW
+	(envelope-from <mickey@vanille-media.de>) id 1Q72V0-0002CN-QO
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 11:10:45 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id C2B30314FCB5
+	Tue, 05 Apr 2011 11:24:34 +0200
+Received: from [192.168.1.15] (business-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id 156F6584125
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Apr 2011 11:08:37 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id tKyuXjwqoaHs
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Apr 2011 11:08:30 +0200 (CEST)
-Received: from [172.22.22.61] (ip-109-85-231-67.web.vodafone.de
-	[109.85.231.67])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 784F5314FC8F
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Apr 2011 11:08:30 +0200 (CEST)
-Message-ID: <4D9ADC0D.6060603@opendreambox.org>
-Date: Tue, 05 Apr 2011 11:08:29 +0200
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.15) Gecko/20110307 Lightning/1.0b2 Thunderbird/3.1.9
-MIME-Version: 1.0
+	Tue,  5 Apr 2011 11:45:15 +0200 (CEST)
+Mime-Version: 1.0 (Apple Message framework v1084)
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+In-Reply-To: <4D99D92F.6080609@mlbassoc.com>
+Date: Tue, 5 Apr 2011 11:22:26 +0200
+Message-Id: <A24792C8-9E84-41EA-B52F-04A54FCECDF0@vanille-media.de>
+References: <4D99D609.8020800@mlbassoc.com> <4D99D689.9050705@mlbassoc.com>
+	<79CF2877-D36A-412A-AF90-6FF538AACF9C@gmail.com>
+	<4D99D92F.6080609@mlbassoc.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1300981024-9111-2-git-send-email-obi@opendreambox.org>	<1300983264-16652-1-git-send-email-obi@opendreambox.org>	<4D99C0EA.5070902@opendreambox.org>	<inciqg$3vi$2@dough.gmane.org>	<4D99E05E.9020100@opendreambox.org>	<ind0l0$io$1@dough.gmane.org>	<4D9A0A1D.3020209@opendreambox.org>
-	<inecec$sae$2@dough.gmane.org>
-In-Reply-To: <inecec$sae$2@dough.gmane.org>
-Subject: Re: [PATCHv2] kernel/module-base: Append PR to	MACHINE_KERNEL_PR
+X-Mailer: Apple Mail (2.1084)
+Subject: Re: Master broken?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,50 +33,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 09:10:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 05 Apr 2011 09:24:34 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
-On 04/05/2011 08:22 AM, Koen Kooi wrote:
-> On 04-04-11 20:12, Andreas Oberritter wrote:
->> On 04/04/2011 07:54 PM, Koen Kooi wrote:
->>> On 04-04-11 17:14, Andreas Oberritter wrote:
->>>> On 04/04/2011 03:58 PM, Koen Kooi wrote:
->>>>> On 04-04-11 15:00, Andreas Oberritter wrote:
->>>>>> Ping. Any votes for or against this patch with either appended or
->>>>>> prepended PR?
->>>>>
->>>>> I don't like this patch *at all*. Recipes can already do
->>>>> MACHINE_KERNEL_PR_append = "something" if they need to.
->>>
->>>> The use of MACHINE_KERNEL_PR is optional, so it feels really wrong to
->>>> append something to it in a recipe.
->>>
->>>>> Can you should me a specific example on how this would be an improvement?
->>>
->>>> With the version below. a distro can start to use MACHINE_KERNEL_PR any
->>>> time without breaking updates.
->>>
->>>> The vast majority of modules do not use MACHINE_KERNEL_PR
->>>
->>> It seems you don't understand how MACHINE_KERNEL_PR works. The *machine*
->>> sets it. The distro has *no* say in it. Therefore the module recipes
->>> don't need to set it, since it's automatic.
-> 
->> That's nitpicking. Let me rephrase:
-> 
->> With the previously cited version. a *machine* can start to use
->> MACHINE_KERNEL_PR any time without breaking updates.
-> 
->> The vast majority of module recipes do not use MACHINE_KERNEL_PR. That
->> means that they use their own PR instead of appending something to
->> MACHINE_KERNEL_PR, as suggested by you. Setting MACHINE_KERNEL_PR in the
->> machine's configuration disables automatic rebuilds of 91% of module
->> recipes.
-> 
-> So make all the module recipes use MACHINE_KERNEL_PR and ditch PR.
 
-Thereby making MACHINE_KERNEL_PR mandatory for all machines?
+Am 04.04.2011 um 16:43 schrieb Gary Thomas:
+
+> On 04/04/2011 08:37 AM, Sachin Kamboj wrote:
+>> The problem is "angstrom-2008.1" has been retired and is no longer =
+available in the master branch. Use "angstrom-2010.x" instead as your =
+distro. Alternatively, use the maintenance branch:
+>>=20
+>> =
+http://www.angstrom-distribution.org/angstrom-20081-moves-maintenance-bran=
+ch
+>=20
+> Thanks, that got me going.
+>=20
+> Why didn't I get an error when I selected DISTRO=3D"angstrom-2008.1"?  =
+There is no
+> longer a .../conf/distro/angstrom-2008.1.conf file on the master =
+branch.
+
+Take a look at bitbake.conf The DISTRO configuration is included via the
+'include' directive, which is a permissive include =96 in contrast to =
+'require',
+which is a mandatory include.
+
+I don't recall our reasons for keeping it like that, but I remember that =
+'require'
+wasn't present at the time we wrote bitbake.conf. Perhaps we should =
+reconsider
+that 'include'.
+
+Cheers,
+
+:M:
 
 
 
