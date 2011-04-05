@@ -1,19 +1,24 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ynezz@true.cz>) id 1Q6s39-0008Px-Jq
+	(envelope-from <robert@erafx.com>) id 1Q6vAP-000352-VO
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 00:15:07 +0200
-Received: from ntbk.lan (localhost [127.0.0.1])
-	by mengele.ibawizard.net (Postfix) with ESMTP id 7E7C020013F;
-	Tue,  5 Apr 2011 00:12:58 +0200 (CEST)
-From: =?UTF-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
+	Tue, 05 Apr 2011 03:34:50 +0200
+Received: by gyf1 with SMTP id 1so2439682gyf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 04 Apr 2011 18:32:44 -0700 (PDT)
+Received: by 10.90.248.11 with SMTP id v11mr7987049agh.37.1301967163848;
+	Mon, 04 Apr 2011 18:32:43 -0700 (PDT)
+Received: from localhost.localdomain (cpe-24-165-208-114.neo.res.rr.com
+	[24.165.208.114])
+	by mx.google.com with ESMTPS id i8sm5979139ang.5.2011.04.04.18.32.42
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 04 Apr 2011 18:32:43 -0700 (PDT)
+From: Bob Foerster <robert@erafx.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Apr 2011 00:12:56 +0200
-Message-Id: <1301955176-14829-1-git-send-email-ynezz@true.cz>
-X-Mailer: git-send-email 1.7.1
-MIME-Version: 1.0
-Subject: [PATCH RFC] modutils-initscripts: fix wrong order of module loading happening in udev
+Date: Mon,  4 Apr 2011 21:31:20 -0400
+Message-Id: <1301967081-14512-1-git-send-email-robert@erafx.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH 1/2] tzcode-native: update to 2011e
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,77 +32,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Apr 2011 22:15:07 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 05 Apr 2011 01:34:50 -0000
 
-In the current state, udev init script is loaded as 3rd and modutils.sh a=
-s
-20th, so udevadm called in udev init script loads all kernel modules in s=
-ome
-unpredictable order, not honoring in any way specified order of modules i=
-n
-/etc/modules. This causes some troubles mainly in the first boot. So to f=
-ix
-this we now move loading of the kernel modules just before we exec udev i=
-nit
-script. Example of the current state:
-
-	Starting udev
-	rtc-m48t86 rtc-m48t86: rtc core: registered m48t86 as rtc0
-	rtc-m48t86 rtc-m48t86: battery ok
-	ep93xx-rtc ep93xx-rtc: rtc core: registered ep93xx-rtc as rtc1
-
-	root@ts72xx:~# cat /etc/modules
-	rtc-ep93xx
-	ohci-hcd
-	ts72xx_sbcinfo
-	rtc-m48t86
-
-As you can guess, this is really wrong behaviour, because I've rtc1 as th=
-e
-main time source for my system.
-
-	root@ts72xx:~# cat /etc/default/hwclock
-	HWCLOCKACCESS=3Dyes
-	HWCLOCKDEVICE=3D/dev/rtc1
-
-Expected behaviour with this patch applied:
-
-	Please wait: booting...
-	ep93xx-rtc ep93xx-rtc: rtc core: registered ep93xx-rtc as rtc0
-	usbcore: registered new device driver usb
-	ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
-	...
-	rtc-m48t86 rtc-m48t86: rtc core: registered m48t86 as rtc1
-	rtc-m48t86 rtc-m48t86: battery ok
-	Starting udev
-
-Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
+Signed-off-by: Bob Foerster <robert@erafx.com>
 ---
- recipes/modutils/modutils-initscripts.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ ...code-native_2011d.bb => tzcode-native_2011e.bb} |   11 ++++++-----
+ 1 files changed, 6 insertions(+), 5 deletions(-)
+ rename recipes/tzcode/{tzcode-native_2011d.bb => tzcode-native_2011e.bb} (51%)
 
-diff --git a/recipes/modutils/modutils-initscripts.bb b/recipes/modutils/=
-modutils-initscripts.bb
-index 07f4810..797acb3 100644
---- a/recipes/modutils/modutils-initscripts.bb
-+++ b/recipes/modutils/modutils-initscripts.bb
-@@ -2,10 +2,10 @@ SECTION =3D "base"
- DESCRIPTION =3D "modutils configuration files"
- LICENSE =3D "PD"
- SRC_URI =3D "file://modutils.sh"
--PR =3D "r3"
-+PR =3D "r4"
-=20
- INITSCRIPT_NAME =3D "modutils.sh"
--INITSCRIPT_PARAMS =3D "start 20 S ."
-+INITSCRIPT_PARAMS =3D "start 2 S ."
-=20
- inherit update-rc.d
-=20
---=20
-1.7.1
+diff --git a/recipes/tzcode/tzcode-native_2011d.bb b/recipes/tzcode/tzcode-native_2011e.bb
+similarity index 51%
+rename from recipes/tzcode/tzcode-native_2011d.bb
+rename to recipes/tzcode/tzcode-native_2011e.bb
+index 1cc7757..39b172b 100644
+--- a/recipes/tzcode/tzcode-native_2011d.bb
++++ b/recipes/tzcode/tzcode-native_2011e.bb
+@@ -6,11 +6,12 @@ require tzcode-native.inc
+ # Also, tzdata (and it is needed to build tzcode) version can differ from
+ # tzcode version, thus this variable
+ 
+-TZDATA_PV = "2011d"
++TZDATA_PV = "2011e"
+ 
+ PR = "${INC_PR}.0"
+ 
+-SRC_URI[tzcode-2011d.md5sum] = "95095242ee368e6a7e107f154590ac11"
+-SRC_URI[tzcode-2011d.sha256sum] = "68f2c07471c5390199c09fe9fee6a22f8a4dac24713af88b92da17b33ad98cc7"
+-SRC_URI[tzdata-2011d.md5sum] = "03c5793502b7c41985edd73146bf7e36"
+-SRC_URI[tzdata-2011d.sha256sum] = "415a54774094e8dcdc9ba141fafbee4b3b2f2140a5b8cf012eea4b37fb9a23bd"
++SRC_URI[tzcode-2011e.md5sum] = "fbfc05dbf9ebcfe7c4bba18549870173"
++SRC_URI[tzcode-2011e.sha256sum] = "8fb00f8763aa51d83d6f3190d144124bb7176ca829fc08823d6205297bf0426b"
++SRC_URI[tzdata-2011e.md5sum] = "044a07072300a0ee72b046e5a9a4ec90"
++SRC_URI[tzdata-2011e.sha256sum] = "44fef01de4589a4979eb6b5fdbbfd21a3b135852af1ecbfb9e0368ae47392c79"
++
+-- 
+1.7.0.4
 
 
 
