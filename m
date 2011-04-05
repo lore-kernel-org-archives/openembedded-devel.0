@@ -1,35 +1,25 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q72Vs-0002HR-IL for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 11:25:28 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q72Tp-00057a-De for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 11:23:21 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Apr 2011 11:23:21 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Apr 2011 11:23:21 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <philb@gnu.org>) id 1Q72cg-00028I-AU
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Apr 2011 11:32:32 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q72ag-00070d-RS
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Apr 2011 11:30:26 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 05 Apr 2011 11:23:09 +0200
-Message-ID: <inen1t$mgv$1@dough.gmane.org>
-References: <1300981024-9111-2-git-send-email-obi@opendreambox.org>	<1300983264-16652-1-git-send-email-obi@opendreambox.org>	<4D99C0EA.5070902@opendreambox.org>	<inciqg$3vi$2@dough.gmane.org>	<4D99E05E.9020100@opendreambox.org>	<ind0l0$io$1@dough.gmane.org>	<4D9A0A1D.3020209@opendreambox.org>	<inecec$sae$2@dough.gmane.org>
-	<4D9ADC0D.6060603@opendreambox.org>
+In-Reply-To: <A24792C8-9E84-41EA-B52F-04A54FCECDF0@vanille-media.de>
+References: <4D99D609.8020800@mlbassoc.com> <4D99D689.9050705@mlbassoc.com>
+	<79CF2877-D36A-412A-AF90-6FF538AACF9C@gmail.com>
+	<4D99D92F.6080609@mlbassoc.com>
+	<A24792C8-9E84-41EA-B52F-04A54FCECDF0@vanille-media.de>
+Date: Tue, 05 Apr 2011 10:30:24 +0100
+Message-ID: <1301995824.14449.291.camel@phil-desktop>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4D9ADC0D.6060603@opendreambox.org>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCHv2] kernel/module-base: Append PR to MACHINE_KERNEL_PR
+X-Mailer: Evolution 2.30.3 
+Subject: Re: Master broken?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,64 +33,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 09:25:28 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 05 Apr 2011 09:32:33 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, 2011-04-05 at 11:22 +0200, Dr. Michael Lauer wrote:
+> Take a look at bitbake.conf The DISTRO configuration is included via the
+> 'include' directive, which is a permissive include =E2=80=93 in contrast =
+to 'require',
+> which is a mandatory include.
+>=20
+> I don't recall our reasons for keeping it like that, but I remember that =
+'require'
+> wasn't present at the time we wrote bitbake.conf. Perhaps we should recon=
+sider
+> that 'include'.
 
-On 05-04-11 11:08, Andreas Oberritter wrote:
-> On 04/05/2011 08:22 AM, Koen Kooi wrote:
->> On 04-04-11 20:12, Andreas Oberritter wrote:
->>> On 04/04/2011 07:54 PM, Koen Kooi wrote:
->>>> On 04-04-11 17:14, Andreas Oberritter wrote:
->>>>> On 04/04/2011 03:58 PM, Koen Kooi wrote:
->>>>>> On 04-04-11 15:00, Andreas Oberritter wrote:
->>>>>>> Ping. Any votes for or against this patch with either appended or
->>>>>>> prepended PR?
->>>>>>
->>>>>> I don't like this patch *at all*. Recipes can already do
->>>>>> MACHINE_KERNEL_PR_append = "something" if they need to.
->>>>
->>>>> The use of MACHINE_KERNEL_PR is optional, so it feels really wrong to
->>>>> append something to it in a recipe.
->>>>
->>>>>> Can you should me a specific example on how this would be an improvement?
->>>>
->>>>> With the version below. a distro can start to use MACHINE_KERNEL_PR any
->>>>> time without breaking updates.
->>>>
->>>>> The vast majority of modules do not use MACHINE_KERNEL_PR
->>>>
->>>> It seems you don't understand how MACHINE_KERNEL_PR works. The *machine*
->>>> sets it. The distro has *no* say in it. Therefore the module recipes
->>>> don't need to set it, since it's automatic.
->>
->>> That's nitpicking. Let me rephrase:
->>
->>> With the previously cited version. a *machine* can start to use
->>> MACHINE_KERNEL_PR any time without breaking updates.
->>
->>> The vast majority of module recipes do not use MACHINE_KERNEL_PR. That
->>> means that they use their own PR instead of appending something to
->>> MACHINE_KERNEL_PR, as suggested by you. Setting MACHINE_KERNEL_PR in the
->>> machine's configuration disables automatic rebuilds of 91% of module
->>> recipes.
->>
->> So make all the module recipes use MACHINE_KERNEL_PR and ditch PR.
-> 
-> Thereby making MACHINE_KERNEL_PR mandatory for all machines?
+Partly because, as you say, bitbake didn't support "require" at the
+time; and also partly because, when that part of bitbake.conf was
+originally written, both DISTRO and MACHINE were much more optional than
+they are today.  (In fact, the sample local.conf still implies that it's
+legitimate to not select a MACHINE or DISTRO, though in practice I'm not
+sure that it's feasible to get any useful results if you don't.)
 
-I don't see why not.
+I agree, it seems reasonable to change that include to a require.
+Anybody who genuinely doesn't want a distro configuration is presumably
+going to be savvy enough to create a dummy file in order to keep bitbake
+happy.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+p.
 
-iD8DBQFNmt99MkyGM64RGpERAsEeAKCFdLTfAEdS0jQsE3roLugG2yvTtQCbBXx7
-z2FSA/yy6GVHr8+pASP14e4=
-=mJV7
------END PGP SIGNATURE-----
 
 
 
