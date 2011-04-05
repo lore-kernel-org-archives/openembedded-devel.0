@@ -1,42 +1,26 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Q74Va-0007OI-CI
+	(envelope-from <robert@erafx.com>) id 1Q74en-0000Cv-87
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 13:33:18 +0200
-Received: by iwn10 with SMTP id 10so283352iwn.6
+	Tue, 05 Apr 2011 13:42:49 +0200
+Received: by vxd7 with SMTP id 7so177456vxd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Apr 2011 04:31:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=N3vBIAjM1FxWVZlTfuaamg5Iqx6DxEFdaMHEGcWHn8s=;
-	b=lvXz6DnQ8vsFm5caRtsS0rb8j6fF8RjT/dYPhZA6D4W2Rs/MYezOkpjY0E+IWPKqaU
-	JFzS1JdOdY6zlH8z87434FSgl7C9RoJLmR6WMPMhrWV/OwlwlX4r+vrI5HI9ILQDTOjK
-	Tk455HTPpfzOy9b1SWg3L913VTfftyhZxQ2ec=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=RJ/Vp3ETNpE8a2QLLUUvcq4jXsXqUttJ6UIB1p1Bhg3OsvhYRIb2lWlQ5ohx4GEkmH
-	GyIh//5ArJUCel1+OaAgf5owG5SoST/NBJH+o6Notn8rUbNKDC0vhOqgg3Nzsw5OPDiP
-	xriKcZuocpTTPu69l2oEmWBGesP5KmwKfRd48=
+	Tue, 05 Apr 2011 04:40:38 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.184.156 with SMTP id ck28mr7797914ibb.141.1302003071918;
-	Tue, 05 Apr 2011 04:31:11 -0700 (PDT)
-Received: by 10.231.19.204 with HTTP; Tue, 5 Apr 2011 04:31:11 -0700 (PDT)
-In-Reply-To: <inerh7$g3o$1@dough.gmane.org>
-References: <1300981024-9111-2-git-send-email-obi@opendreambox.org>
-	<1300983264-16652-1-git-send-email-obi@opendreambox.org>
-	<4D99C0EA.5070902@opendreambox.org> <inciqg$3vi$2@dough.gmane.org>
-	<4D99E05E.9020100@opendreambox.org> <ind0l0$io$1@dough.gmane.org>
-	<4D9A0A1D.3020209@opendreambox.org> <inecec$sae$2@dough.gmane.org>
-	<4D9ADC0D.6060603@opendreambox.org> <inen1t$mgv$1@dough.gmane.org>
-	<1301995968.14449.293.camel@phil-desktop>
-	<inerh7$g3o$1@dough.gmane.org>
-Date: Tue, 5 Apr 2011 13:31:11 +0200
-Message-ID: <BANLkTim1RWLBvJMhFrkgU4LoGhbB6Avjxw@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCHv2] kernel/module-base: Append PR to MACHINE_KERNEL_PR
+Received: by 10.220.62.8 with SMTP id v8mr2342537vch.6.1302003638275; Tue, 05
+	Apr 2011 04:40:38 -0700 (PDT)
+Received: by 10.220.192.1 with HTTP; Tue, 5 Apr 2011 04:40:38 -0700 (PDT)
+X-Originating-IP: [24.165.208.114]
+In-Reply-To: <20110405103538.fc13eeb3.ospite@studenti.unina.it>
+References: <1301967081-14512-1-git-send-email-robert@erafx.com>
+	<20110405103538.fc13eeb3.ospite@studenti.unina.it>
+Date: Tue, 5 Apr 2011 07:40:38 -0400
+Message-ID: <BANLkTi=dMe7oKT=JrVvi6q2o7mW0+9oTCw@mail.gmail.com>
+From: Robert Foerster <robert@erafx.com>
+To: Antonio Ospite <ospite@studenti.unina.it>,
+	openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH 1/2] tzcode-native: update to 2011e
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,77 +34,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 11:33:18 -0000
+X-List-Received-Date: Tue, 05 Apr 2011 11:42:50 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-2011/4/5 Koen Kooi <koen@dominion.thruhere.net>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 05-04-11 11:32, Phil Blundell wrote:
->> On Tue, 2011-04-05 at 11:23 +0200, Koen Kooi wrote:
->>> On 05-04-11 11:08, Andreas Oberritter wrote:
->>>> Thereby making MACHINE_KERNEL_PR mandatory for all machines?
->>>
->>> I don't see why not.
->>
->> The majority of machines aren't using it at present so this would be an
->> unexpected (and presumably unwelcome) change for them. =A0That seems lik=
-e
->> a bad idea unless there is a compelling reason why it needs to be done.
->
-> First: You don't get to complain about broken kernel module PRs when you
-> are against rebuilding them when the kernel changes.
->
-> Second: the majority of machines doesn't even build, so those kind of
-> arguments are bogus
+On Tue, Apr 5, 2011 at 4:35 AM, Antonio Ospite <ospite@studenti.unina.it>wrote:
 
-In the tree I have handy there are 313 machines.
-I'd be rather hesitant to make statements that the majority does not
-build without having that tested (and if you have: how many do not
-build).
-
-These are the files that have M_K_PR in them:
-ea3250.conf:MACHINE_KERNEL_PR		=3D "r0"
-nokia900.conf:MACHINE_KERNEL_PR =3D "r58"
-omap3-pandora.conf:MACHINE_KERNEL_PR =3D "r2"
-smartq5.conf:MACHINE_KERNEL_PR =3D "r1"
-smartqv7.conf:MACHINE_KERNEL_PR =3D "r0"
-include/davinci.inc:MACHINE_KERNEL_PR =3D "r50"
-include/kirkwood.inc:MACHINE_KERNEL_PR =3D "r19"
-include/omap3.inc:MACHINE_KERNEL_PR =3D "r101"
-include/omap4.inc:MACHINE_KERNEL_PR =3D "r101"
-include/palmpre.inc:MACHINE_KERNEL_PR =3D "r93"
-include/ti814x.inc:MACHINE_KERNEL_PR =3D "r1"
-include/ti816x.inc:MACHINE_KERNEL_PR =3D "r1"
-
-Actually it seems quite some machines used to test the 2011.3 release
-do not seem to use M_K_PR
-(http://wiki.openembedded.org/index.php/Release-2011.03).
-
-Frans.
-
-PS: the machines I feel responsible for, and use regularly all build.
-Not all of them do use M_K_PR.
-
+> On Mon,  4 Apr 2011 21:31:20 -0400
+> Bob Foerster <robert@erafx.com> wrote:
 >
-> So apart from handwaving ("presumably unwelcome") do you have any actual
-> arguments against moving all machines to MACHINE_KERNEL_PR?
+> > Signed-off-by: Bob Foerster <robert@erafx.com>
+> > ---
+> >  ...code-native_2011d.bb => tzcode-native_2011e.bb} |   11 ++++++-----
+> >  1 files changed, 6 insertions(+), 5 deletions(-)
+> >  rename recipes/tzcode/{tzcode-native_2011d.bb => tzcode-native_2011e.bb}
+> (51%)
+> >
+> > diff --git a/recipes/tzcode/tzcode-native_2011d.bb b/recipes/tzcode/
+> tzcode-native_2011e.bb
+> > similarity index 51%
+> > rename from recipes/tzcode/tzcode-native_2011d.bb
+> > rename to recipes/tzcode/tzcode-native_2011e.bb
+> > index 1cc7757..39b172b 100644
+> > --- a/recipes/tzcode/tzcode-native_2011d.bb
+> > +++ b/recipes/tzcode/tzcode-native_2011e.bb
+> > @@ -6,11 +6,12 @@ require tzcode-native.inc
+> >  # Also, tzdata (and it is needed to build tzcode) version can differ
+> from
+> >  # tzcode version, thus this variable
+> >
+> > -TZDATA_PV = "2011d"
+> > +TZDATA_PV = "2011e"
+> >
+> >  PR = "${INC_PR}.0"
+> >
+> > -SRC_URI[tzcode-2011d.md5sum] = "95095242ee368e6a7e107f154590ac11"
+> > -SRC_URI[tzcode-2011d.sha256sum] =
+> "68f2c07471c5390199c09fe9fee6a22f8a4dac24713af88b92da17b33ad98cc7"
+> > -SRC_URI[tzdata-2011d.md5sum] = "03c5793502b7c41985edd73146bf7e36"
+> > -SRC_URI[tzdata-2011d.sha256sum] =
+> "415a54774094e8dcdc9ba141fafbee4b3b2f2140a5b8cf012eea4b37fb9a23bd"
+> > +SRC_URI[tzcode-2011e.md5sum] = "fbfc05dbf9ebcfe7c4bba18549870173"
+> > +SRC_URI[tzcode-2011e.sha256sum] =
+> "8fb00f8763aa51d83d6f3190d144124bb7176ca829fc08823d6205297bf0426b"
+> > +SRC_URI[tzdata-2011e.md5sum] = "044a07072300a0ee72b046e5a9a4ec90"
+> > +SRC_URI[tzdata-2011e.sha256sum] =
+> "44fef01de4589a4979eb6b5fdbbfd21a3b135852af1ecbfb9e0368ae47392c79"
+> > +
 >
-> -----BEGIN PGP SI-
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFNmvFnMkyGM64RGpERAqqkAJ4vgIlyQ3cgVAnZS2rcjdGJHjn3uQCfTOjt
-> UtUZ9dRa9XfWvnganZPrAbg=3D
-> =3DKtE5
-> -----END PGP SIGNATURE-----
+> Just nitpicking, maybe you can drop the last blank line.
+> Same comment for the other patch about tzdata.
 >
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Sure, v2 sent. Though it seems git send-email didn't prefix the second patch
+with v2.  That's odd, because it showed the proper subject when sending:
 
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH v2 2/2] tzdata: update to 2011e
+Date: Tue,  5 Apr 2011 07:28:26 -0400
+
+
+
+
+> Thanks,
+>   Antonio
+>
+> --
+> Antonio Ospite
+> http://ao2.it
+>
+> PGP public key ID: 0x4553B001
+>
+> A: Because it messes up the order in which people normally read text.
+>   See http://en.wikipedia.org/wiki/Posting_style
+> Q: Why is top-posting such a bad thing?
+>
 
