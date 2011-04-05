@@ -1,36 +1,32 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q73hr-000565-Im for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 12:41:55 +0200
+	id 1Q73mw-0005W1-0j for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Apr 2011 12:47:10 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q73fo-0005qJ-V2 for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 12:39:48 +0200
+	id 1Q73ku-0000K3-NG for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Apr 2011 12:45:04 +0200
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Apr 2011 12:39:48 +0200
+	Tue, 05 Apr 2011 12:45:04 +0200
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Apr 2011 12:39:48 +0200
+	Tue, 05 Apr 2011 12:45:04 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 05 Apr 2011 12:39:35 +0200
-Message-ID: <inerh7$g3o$1@dough.gmane.org>
-References: <1300981024-9111-2-git-send-email-obi@opendreambox.org>	<1300983264-16652-1-git-send-email-obi@opendreambox.org>	<4D99C0EA.5070902@opendreambox.org>	<inciqg$3vi$2@dough.gmane.org>	<4D99E05E.9020100@opendreambox.org>	<ind0l0$io$1@dough.gmane.org>	<4D9A0A1D.3020209@opendreambox.org>	<inecec$sae$2@dough.gmane.org>	<4D9ADC0D.6060603@opendreambox.org>
-	<inen1t$mgv$1@dough.gmane.org>
-	<1301995968.14449.293.camel@phil-desktop>
+Date: Tue, 05 Apr 2011 12:44:05 +0200
+Message-ID: <inerpl$g3o$2@dough.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1301995968.14449.293.camel@phil-desktop>
 X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCHv2] kernel/module-base: Append PR to MACHINE_KERNEL_PR
+Subject: [2011.03-maintenance] Pull request #12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,39 +40,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 10:41:55 -0000
+X-List-Received-Date: Tue, 05 Apr 2011 10:47:10 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 05-04-11 11:32, Phil Blundell wrote:
-> On Tue, 2011-04-05 at 11:23 +0200, Koen Kooi wrote:
->> On 05-04-11 11:08, Andreas Oberritter wrote:
->>> Thereby making MACHINE_KERNEL_PR mandatory for all machines?
->>
->> I don't see why not.
-> 
-> The majority of machines aren't using it at present so this would be an
-> unexpected (and presumably unwelcome) change for them.  That seems like
-> a bad idea unless there is a compelling reason why it needs to be done.
+Tom,
 
-First: You don't get to complain about broken kernel module PRs when you
-are against rebuilding them when the kernel changes.
+Please pull the 4 commits from here:
 
-Second: the majority of machines doesn't even build, so those kind of
-arguments are bogus
+URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+Branch: 2011.03-maintenance
 
-So apart from handwaving ("presumably unwelcome") do you have any actual
-arguments against moving all machines to MACHINE_KERNEL_PR?
+Koen Kooi (4):
+      networkmanager git: bump to 0.8.3.999
+      network-manager-applet git: move to 0.8.3.999
+      angstrom: remove networkmanager pinnings
+      angstrom 2011.03: remove networkmanager pinnings
 
+You can view the branch online at
+http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance
+
+The first 3 are straight cherry-picks, the 4th one is a change to the
+angstrom 2011.03 file that is gone from .dev.
+
+Runtime tested on hawkboard/angstrom and beagleboard/angstrom
+
+regards,
+
+Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFNmvFnMkyGM64RGpERAqqkAJ4vgIlyQ3cgVAnZS2rcjdGJHjn3uQCfTOjt
-UtUZ9dRa9XfWvnganZPrAbg=
-=KtE5
+iD8DBQFNmvJ1MkyGM64RGpERAhyhAJ4pXP7J3mCjvF1SXUk4zjS7TpXKuwCfa5rw
+ZV6qbNUscltjZVB2aMjDAU4=
+=InZe
 -----END PGP SIGNATURE-----
 
 
