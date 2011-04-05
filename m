@@ -1,29 +1,35 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <robert@erafx.com>) id 1Q78HH-00013a-JY
+	(envelope-from <chasemaupin03@gmail.com>) id 1Q78QG-0001DL-LH
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 17:34:47 +0200
-Received: by vws2 with SMTP id 2so381143vws.6
+	Tue, 05 Apr 2011 17:44:04 +0200
+Received: by yia13 with SMTP id 13so188434yia.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Apr 2011 08:32:41 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.52.72.5 with SMTP id z5mr7220745vdu.43.1302017561246; Tue, 05
-	Apr 2011 08:32:41 -0700 (PDT)
-Received: by 10.220.192.1 with HTTP; Tue, 5 Apr 2011 08:32:41 -0700 (PDT)
-X-Originating-IP: [24.165.208.114]
-In-Reply-To: <20110405172059.50829132.ospite@studenti.unina.it>
-References: <1301967081-14512-1-git-send-email-robert@erafx.com>
-	<20110405143320.GE30816@jama.jama.net>
-	<20110405143634.GF30816@jama.jama.net>
-	<20110405172059.50829132.ospite@studenti.unina.it>
-Date: Tue, 5 Apr 2011 11:32:41 -0400
-Message-ID: <BANLkTiksYsGVCr7HH_WM_47kkz-+d6R_DQ@mail.gmail.com>
-From: Robert Foerster <robert@erafx.com>
-To: Antonio Ospite <ospite@studenti.unina.it>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-devel@lists.openembedded.org,
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [PATCH 1/2] tzcode-native: update to 2011e
+	Tue, 05 Apr 2011 08:41:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=HNgRa1hPAikEmczeMZBSuBIPTy5EJMoF4NgQZJp0gI8=;
+	b=yEJjQMZGtb507+VgtOXkbgwBvk0FI1+zCyuSpAJazVXWBwD11YioFsy6RdNkRaz9o9
+	4N8VojeujxDtDWHlSocvPctas5Xu5aXd/k8zKJq4chQogExye/Uk3skZVYNA3gNgel4Z
+	j8iuB2jxXVwKyMz0skmt2W4+jRVMp7uBfx/GY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=l5rj2IGqS5tDnu2McRk79+NCCewvRHnuHxYV4TQ5rWoAV+I2b3F6vQzQ2MI+0Q4S0t
+	JZI39pUGzGOn1fAWQR3BtucU9y6yAnaufTCrP/ypWSJM+l4bhc+oCL2+ndFBiuTbGcs2
+	VLrR958u/XpvBHa1E4V4KqEcxlYnKbcfI9Nvk=
+Received: by 10.150.63.4 with SMTP id l4mr655675yba.337.1302018118200;
+	Tue, 05 Apr 2011 08:41:58 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id r18sm2737519yba.11.2011.04.05.08.41.55
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 05 Apr 2011 08:41:57 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  5 Apr 2011 10:41:47 -0500
+Message-Id: <1302018111-20799-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: [PATCH 1/5] linux-omap4: Add support for am45x-evm machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,72 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 15:34:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 05 Apr 2011 15:44:04 -0000
 
-On Tue, Apr 5, 2011 at 11:20 AM, Antonio Ospite <ospite@studenti.unina.it>wrote:
+* Add the am45x-evm machine type to the COMPATIBLE_MACHINEs
+  for this kernel version.
+* Add the defconfig file for am45x-evm machine type
 
-> On Tue, 5 Apr 2011 16:36:34 +0200
-> Martin Jansa <martin.jansa@gmail.com> wrote:
->
-> > On Tue, Apr 05, 2011 at 04:33:20PM +0200, Martin Jansa wrote:
-> > > On Mon, Apr 04, 2011 at 09:31:20PM -0400, Bob Foerster wrote:
-> > > > Signed-off-by: Bob Foerster <robert@erafx.com>
-> > > > ---
-> > > >  ...code-native_2011d.bb => tzcode-native_2011e.bb} |   11
-> ++++++-----
-> > > >  1 files changed, 6 insertions(+), 5 deletions(-)
-> > > >  rename recipes/tzcode/{tzcode-native_2011d.bb =>
-> tzcode-native_2011e.bb} (51%)
-> > >
-> > > Hi,
-> > >
-> > > Can you please add LICENSE and LIC_FILES_CHKSUM fields? The same for
-> tzdata.
-> > >
-> > > Something like this:
-> > > OE nokia900@shr ~/shr-core $ grep LIC
-> > > openembedded-core/meta/recipes-extended/tzdata/tzdata_2010o.bb
-> > > LICENSE = "PD"
-> > > LIC_FILES_CHKSUM =
-> "file://asia;beginline=2;endline=3;md5=06468c0e84ef4d4c97045a4a29b08234"
-> > > OE nokia900@shr ~/shr-core $ grep LIC
-> > > openembedded-core/meta/recipes-extended/tzcode/tzcode-native_2009r.bb
-> > > LICENSE = "Public Domain"
-> > > LIC_FILES_CHKSUM =
-> "file://${WORKDIR}/README;md5=3ae8198f82258417ce29066d3b034035"
-> >
-> > or a bit newer tzcode :)
-> >
-> > OE nokia900@shr ~/shr-core $ grep LIC meta-shr/recipes-extended/tzcode/
-> tzcode-native_2011d.bb
-> > LICENSE = "PD"
-> > LIC_FILES_CHKSUM = "file://README;md5=3ae8198f82258417ce29066d3b034035"
-> >
->
-> Bob tell us if you are interested about adding those yourself and if so,
-> if you are going to send incremental patches on top of your v2, so we
-> separate the version update from the recipe upgrade about LICENSE, and
-> I can merge your v2 as it is now.
->
->
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+---
+ .../{omap4430-panda => am45x-evm}/defconfig        |    0
+ recipes/linux/linux-omap4_2.6.35.3.bb              |    2 +-
+ 2 files changed, 1 insertions(+), 1 deletions(-)
+ copy recipes/linux/linux-omap4/{omap4430-panda => am45x-evm}/defconfig (100%)
 
-Commit v2 as it as.  I will submit new patches later today with the LIC
-info.
+diff --git a/recipes/linux/linux-omap4/omap4430-panda/defconfig b/recipes/linux/linux-omap4/am45x-evm/defconfig
+similarity index 100%
+copy from recipes/linux/linux-omap4/omap4430-panda/defconfig
+copy to recipes/linux/linux-omap4/am45x-evm/defconfig
+diff --git a/recipes/linux/linux-omap4_2.6.35.3.bb b/recipes/linux/linux-omap4_2.6.35.3.bb
+index 0502554..8c41441 100644
+--- a/recipes/linux/linux-omap4_2.6.35.3.bb
++++ b/recipes/linux/linux-omap4_2.6.35.3.bb
+@@ -1,4 +1,4 @@
+-COMPATIBLE_MACHINE = "omap4430-panda"
++COMPATIBLE_MACHINE = "omap4430-panda|am45x-evm"
+ 
+ require multi-kernel.inc
+ 
+-- 
+1.7.0.4
 
 
-
-> Regards,
->    Antonio
->
-> --
-> Antonio Ospite
-> http://ao2.it
->
-> PGP public key ID: 0x4553B001
->
-> A: Because it messes up the order in which people normally read text.
->   See http://en.wikipedia.org/wiki/Posting_style
-> Q: Why is top-posting such a bad thing?
->
 
