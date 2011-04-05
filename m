@@ -1,27 +1,37 @@
-Received: from smtp205.alice.it ([82.57.200.101])
+Received: from mail2.matrix-vision.com ([85.214.244.251])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ospite@studenti.unina.it>) id 1Q7864-0007ZJ-3O
+	(envelope-from <michael.jones@matrix-vision.de>) id 1Q78A9-0000sw-KA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 17:23:12 +0200
-Received: from jcn (82.57.80.195) by smtp205.alice.it (8.5.124.08)
-	(authenticated as fospite@alice.it)
-	id 4D0D00380941136C; Tue, 5 Apr 2011 17:21:06 +0200
-Date: Tue, 5 Apr 2011 17:20:59 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
+	Tue, 05 Apr 2011 17:27:26 +0200
+Received: from mail2.matrix-vision.com (localhost [127.0.0.1])
+	by mail2.matrix-vision.com (Postfix) with ESMTP id 8466740582
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  5 Apr 2011 17:25:19 +0200 (CEST)
+Received: from erinome (g2.matrix-vision.com [80.152.136.245])
+	by mail2.matrix-vision.com (Postfix) with ESMTPA id 563503F619
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  5 Apr 2011 17:25:19 +0200 (CEST)
+Received: from erinome (localhost [127.0.0.1])
+	by erinome (Postfix) with ESMTP id E7E136F8A
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  5 Apr 2011 17:25:18 +0200 (CEST)
+Received: by erinome (Postfix, from userid 108)
+	id D926C6F9C; Tue,  5 Apr 2011 17:25:18 +0200 (CEST)
+Received: from ap437-joe.intern.matrix-vision.de
+	(host65-46.intern.matrix-vision.de [192.168.65.46])
+	by erinome (Postfix) with ESMTPA id C64426F8A
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  5 Apr 2011 17:25:18 +0200 (CEST)
+From: Michael Jones <michael.jones@matrix-vision.de>
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20110405172059.50829132.ospite@studenti.unina.it>
-In-Reply-To: <20110405143634.GF30816@jama.jama.net>
-References: <1301967081-14512-1-git-send-email-robert@erafx.com>
-	<20110405143320.GE30816@jama.jama.net>
-	<20110405143634.GF30816@jama.jama.net>
-X-Mailer: Sylpheed 3.1.0 (GTK+ 2.24.3; x86_64-unknown-linux-gnu)
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-Mime-Version: 1.0
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [PATCH 1/2] tzcode-native: update to 2011e
+Date: Tue,  5 Apr 2011 17:24:41 +0200
+Message-Id: <1302017081-18698-1-git-send-email-michael.jones@matrix-vision.de>
+X-Mailer: git-send-email 1.7.4.3
+MIME-Version: 1.0
+X-MV-Disclaimer: true (erinome)
+X-AV-Checked: ClamAV using ClamSMTP (erinome)
+X-AV-Checked: ClamAV using ClamSMTP (mail2)
+Subject: =?UTF-8?B?W1BBVENIXSBiYXNlLWZpbGVzOiB3cml0ZSBBbmdzdHJvbSBhcyDDhW5nc3Ryw7ZtIGluIHRoZSBpc3N1ZSBmaWxlLg==?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,83 +45,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 15:23:13 -0000
-X-Groupsio-MsgNum: 30944
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg="PGP-SHA1";
-	boundary="Signature=_Tue__5_Apr_2011_17_20_59_+0200_sCHL4S_Q3n20Ow7O"
-
---Signature=_Tue__5_Apr_2011_17_20_59_+0200_sCHL4S_Q3n20Ow7O
-Content-Type: text/plain; charset=US-ASCII
-Content-Disposition: inline
+X-List-Received-Date: Tue, 05 Apr 2011 15:27:26 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, 5 Apr 2011 16:36:34 +0200
-Martin Jansa <martin.jansa@gmail.com> wrote:
+spice up the ASCII art a bit
 
-> On Tue, Apr 05, 2011 at 04:33:20PM +0200, Martin Jansa wrote:
-> > On Mon, Apr 04, 2011 at 09:31:20PM -0400, Bob Foerster wrote:
-> > > Signed-off-by: Bob Foerster <robert@erafx.com>
-> > > ---
-> > >  ...code-native_2011d.bb =3D> tzcode-native_2011e.bb} |   11 ++++++--=
+Signed-off-by: Michael Jones <michael.jones@matrix-vision.de>
 ---
-> > >  1 files changed, 6 insertions(+), 5 deletions(-)
-> > >  rename recipes/tzcode/{tzcode-native_2011d.bb =3D> tzcode-native_201=
-1e.bb} (51%)
-> >=20
-> > Hi,
-> >=20
-> > Can you please add LICENSE and LIC_FILES_CHKSUM fields? The same for tz=
-data.
-> >=20
-> > Something like this:
-> > OE nokia900@shr ~/shr-core $ grep LIC
-> > openembedded-core/meta/recipes-extended/tzdata/tzdata_2010o.bb
-> > LICENSE =3D "PD"
-> > LIC_FILES_CHKSUM =3D "file://asia;beginline=3D2;endline=3D3;md5=3D06468=
-c0e84ef4d4c97045a4a29b08234"
-> > OE nokia900@shr ~/shr-core $ grep LIC
-> > openembedded-core/meta/recipes-extended/tzcode/tzcode-native_2009r.bb
-> > LICENSE =3D "Public Domain"
-> > LIC_FILES_CHKSUM =3D "file://${WORKDIR}/README;md5=3D3ae8198f82258417ce=
-29066d3b034035"
->=20
-> or a bit newer tzcode :)
->=20
-> OE nokia900@shr ~/shr-core $ grep LIC meta-shr/recipes-extended/tzcode/tz=
-code-native_2011d.bb
-> LICENSE =3D "PD"
-> LIC_FILES_CHKSUM =3D "file://README;md5=3D3ae8198f82258417ce29066d3b03403=
-5"
->=20
 
-Bob tell us if you are interested about adding those yourself and if so,
-if you are going to send incremental patches on top of your v2, so we
-separate the version update from the recipe upgrade about LICENSE, and
-I can merge your v2 as it is now.
+This seems overdue.  It's undergone intense testing, I don't
+think it will introduce any regressions.
 
-Regards,
-   Antonio
+ recipes/base-files/base-files/angstrom/issue     |    4 ++--
+ recipes/base-files/base-files/angstrom/issue.net |    4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
+diff --git a/recipes/base-files/base-files/angstrom/issue b/recipes/base-=
+files/base-files/angstrom/issue
+index 302ba10..d316a04 100644
+--- a/recipes/base-files/base-files/angstrom/issue
++++ b/recipes/base-files/base-files/angstrom/issue
+@@ -1,5 +1,5 @@
+-.-------.                                          =20
+-|       |                  .-.                     =20
++.---O---.                                          =20
++|       |                  .-.           o o       =20
+ |   |   |-----.-----.-----.| |   .----..-----.-----.
+ |       |     | __  |  ---'| '--.|  .-'|     |     |
+ |   |   |  |  |     |---  ||  --'|  |  |  '  | | | |
+diff --git a/recipes/base-files/base-files/angstrom/issue.net b/recipes/b=
+ase-files/base-files/angstrom/issue.net
+index 182fc83..2c4d9bb 100644
+--- a/recipes/base-files/base-files/angstrom/issue.net
++++ b/recipes/base-files/base-files/angstrom/issue.net
+@@ -1,5 +1,5 @@
+-.-------.                                          =20
+-|       |                  .-.                     =20
++.---O---.                                          =20
++|       |                  .-.           o o       =20
+ |   |   |-----.-----.-----.| |   .----..-----.-----.
+ |       |     | __  |  ---'| '--.|  .-'|     |     |
+ |   |   |  |  |     |---  ||  --'|  |  |  '  | | | |
 --=20
-Antonio Ospite
-http://ao2.it
+1.7.4.3
 
-PGP public key ID: 0x4553B001
 
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
+MATRIX VISION GmbH, Talstrasse 16, DE-71570 Oppenweiler
+Registergericht: Amtsgericht Stuttgart, HRB 271090
+Geschaeftsfuehrer: Gerhard Thullner, Werner Armingeon, Uwe Furtner
 
---Signature=_Tue__5_Apr_2011_17_20_59_+0200_sCHL4S_Q3n20Ow7O
-Content-Type: application/pgp-signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEARECAAYFAk2bM1sACgkQ5xr2akVTsAFhhwCffsNF16z1aGP6Z4fx7DIEw8uI
-4UIAoKddEm902jt+c5SBKMagLklmHDSn
-=uikg
------END PGP SIGNATURE-----
-
---Signature=_Tue__5_Apr_2011_17_20_59_+0200_sCHL4S_Q3n20Ow7O--
