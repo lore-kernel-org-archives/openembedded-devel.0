@@ -1,35 +1,38 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heroor@gmail.com>) id 1Q77wJ-0003hK-7G
+	(envelope-from <heroor@gmail.com>) id 1Q77wM-0003hQ-Sk
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Apr 2011 17:13:07 +0200
-Received: by yxn22 with SMTP id 22so170015yxn.6
+	Tue, 05 Apr 2011 17:13:11 +0200
+Received: by gyf1 with SMTP id 1so168143gyf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Apr 2011 08:11:01 -0700 (PDT)
+	Tue, 05 Apr 2011 08:11:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=swrLNqkYPvmbeDQLXKeSGu3OWYqmc08zzWf1NqNV2Og=;
-	b=dtd6JsaRyq80sOHmKwjKuveGdTJi7m15Cy5fN6+TIwHq+4o6Dt5GV/0GjpHV0C+ihZ
-	/oiRBtKMuupHH6QyXiwEWDfzE/vIl6Uyx6kqjO2m5rbO3zsB+GCf3wQsYQtowdJUHffb
-	Hqhs9AMZGenp0KdFrzBHtMjJmS3IthMgvySRQ=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=zEnK0SCUdHfmgBxxgPk0MQfLlChYQoA1qfT/lVRxwSc=;
+	b=K31DoL4rT1vir0jxz7fL/PDl7kkgHdilFnK4wLgAbhUWpW8HD1ZpTlGMhw6dMpgJN8
+	1Qf1g0cOPaZcfWL1ojnWB0L63luv73BklWQP04c1rthW9cHfYrHdDLJyOkrLIKTzgtfd
+	RG1c1w7a7k4Qo5cDkaFzBsM6h4eRoy2xiDEeU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=mGvXOe7NUsqKQN0JiP1SFwUaBfJQilZLz7U5RQyqTrb3N902EsrW9ap5X8BG0qFskh
-	CVImWhoG2cG/DBrGvr2SQexaVdidi4Ticql9W7muadu2bmkAvO37gZdwr7wqGEl9emap
-	vm5aM2NZYTemArEkZI2atHDd3ug5jpsXQBhzQ=
-Received: by 10.150.67.10 with SMTP id p10mr652602yba.236.1302016260898;
-	Tue, 05 Apr 2011 08:11:00 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=TBnkIP2C9C3TzZDQdQF3t6jkUxJsNieogDfZ1/5FUdU94KojH5MjRUWiJL8AZW/Bza
+	i0BJFslY2Y0q0IlGgi+zlZMkwi5gdPkAKyPu9YGshv2oqozx2aO+Kmdrjm9LzhPfrb4G
+	jagq1Izu5EW9QV3X0y4AcUoDX+G02cpkn1QVI=
+Received: by 10.150.67.3 with SMTP id p3mr629141yba.153.1302016264364;
+	Tue, 05 Apr 2011 08:11:04 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id p28sm148062ybk.0.2011.04.05.08.10.58
+	by mx.google.com with ESMTPS id p28sm148062ybk.0.2011.04.05.08.11.02
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 05 Apr 2011 08:11:00 -0700 (PDT)
+	Tue, 05 Apr 2011 08:11:03 -0700 (PDT)
 From: Siddharth Heroor <heroor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Apr 2011 20:40:52 +0530
-Message-Id: <1302016253-10390-1-git-send-email-heroor@gmail.com>
+Date: Tue,  5 Apr 2011 20:40:53 +0530
+Message-Id: <1302016253-10390-2-git-send-email-heroor@gmail.com>
 X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1302016253-10390-1-git-send-email-heroor@gmail.com>
+References: <1302016253-10390-1-git-send-email-heroor@gmail.com>
 Cc: Siddharth Heroor <heroor@ti.com>
-Subject: [PATCH 1/2] ti-syslink: Add TI Syslink for TI816x and TI814x devices
+Subject: [PATCH 2/2] ti-syslink: Add release 02.00.00.68.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,207 +46,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 15:13:08 -0000
+X-List-Received-Date: Tue, 05 Apr 2011 15:13:11 -0000
 
 From: Siddharth Heroor <heroor@ti.com>
 
-* Syslink is an Inter Processor communication layer for ARM/DSP devices.
 
 Signed-off-by: Siddharth Heroor <heroor@ti.com>
 ---
- recipes/ti/ti-syslink.inc |  183 +++++++++++++++++++++++++++++++++++++++++++++
- 1 files changed, 183 insertions(+), 0 deletions(-)
- create mode 100644 recipes/ti/ti-syslink.inc
+ recipes/ti/ti-syslink_02.00.00.68.bb |   12 ++++++++++++
+ 1 files changed, 12 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/ti/ti-syslink_02.00.00.68.bb
 
-diff --git a/recipes/ti/ti-syslink.inc b/recipes/ti/ti-syslink.inc
+diff --git a/recipes/ti/ti-syslink_02.00.00.68.bb b/recipes/ti/ti-syslink_02.00.00.68.bb
 new file mode 100644
-index 0000000..651d840
+index 0000000..6ae07ae
 --- /dev/null
-+++ b/recipes/ti/ti-syslink.inc
-@@ -0,0 +1,183 @@
-+DESCRIPTION = "SYSLINK Inter-Processor Communications (IPC) for TI ARM/DSP processors"
-+HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/SysLink/index.html"
-+SECTION = "devel"
-+LICENSE = "BSD"
++++ b/recipes/ti/ti-syslink_02.00.00.68.bb
+@@ -0,0 +1,12 @@
++require ti-syslink.inc
 +
-+require ti-paths.inc
-+require ti-staging.inc
++PV = "02_00_00_68"
 +
-+COMPATIBLE_MACHINE = "(ti816x|ti814x)"
++# This release appends a beta tag to PV.
++PVExtra = "_beta1"
++S = "${WORKDIR}/syslink_${PV}${PVExtra}"
 +
-+PROVIDES = "ti-syslink-module"
-+PROVIDES += "ti-syslink-examples"
++SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/SysLink/${PV}${PVExtra}/exports/syslink_${PV}${PVExtra}.tar.gz;name=syslinktarball"
 +
-+# This package builds a kernel module, use kernel PR as base and append a local version
-+PR = "${MACHINE_KERNEL_PR}"
-+PR_append = "j"
-+
-+S = "${WORKDIR}/syslink_${PV}"
-+
-+SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/SysLink/${PV}/exports/syslink_${PV}.tar.gz;name=syslinktarball"
-+
-+DEPENDS = "ti-sysbios ti-xdctools ti-cgt6x ti-ipc" 
-+DEPENDS += "virtual/kernel" 
-+
-+# Define Syslink variables. 
-+SYSLINKHLOSSAMPLES  = "procMgr frameq gateMP heapBufMP heapMemMP listMP messageQ notify ringIO ringIO_gpp sharedRegion"
-+SYSLINKPLATFORM    ?= "TI81XX"
-+SYSLINKSUFFIX      ?= "xe674"
-+SYSLINKLOADER      ?= "ELF"
-+
-+SYSLINKVARIANT_ti816x  = "TI816X"
-+SYSLINKVARIANT_ti814x  = "TI814X"
-+SYSLINKVARIANT     ?= "<UNDEFINED_SYSLINKVARIANT>"
-+
-+# Export additional variables needed by build
-+XDCTARGETS         ?= "ti.targets.elf.C674"
-+export XDCTARGETS
-+
-+SYSLINK_ROOT = "${S}"
-+export SYSLINK_ROOT
-+
-+XDCPATH = "${IPC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages" 
-+export XDCPATH
-+
-+XDCBUILDCFG="${SYSLINK_ROOT}/config.bld"
-+export XDCBUILDCFG
-+
-+do_configure() {
-+    # Update config.bld with rootDir paths for CodeGen Tools
-+    # Build only C674 Elf.
-+    sed -i \
-+        -e s:^C674_ELF.rootDir.*:C674_ELF.rootDir\ =\ \"${CODEGEN_INSTALL_DIR}\":g \
-+        -e s:C64P_COFF,://C64P_COFF:g \
-+        -e s:C64P_ELF,://C64P_ELF:g \
-+	-e s:C674_COFF,://C674_COFF:g \
-+        -e s:C674_ELF,:C674_ELF:g \
-+        -e s:M3_ELF,://M3_ELF:g \
-+        -e s:A8_ELF$://A8_ELF:g \
-+        -e 's/"ti.platforms.evmDA830:dsp",//g' \
-+        ${S}/config.bld
-+}
-+
-+do_prepsources () {
-+    # Prepare the tree for rebuilding - clean and generate interfaces
-+    cd ${SYSLINK_ROOT}/ti/syslink    
-+    ${XDC_INSTALL_DIR}/xdc .make -PR .
-+    ${XDC_INSTALL_DIR}/xdc clean -PR .
-+    ${XDC_INSTALL_DIR}/xdc .interfaces -PR .
-+}
-+
-+addtask prepsources after do_configure before do_compile
-+
-+do_compile() {
-+    unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS
-+
-+    # Build the gpp (hlos) kernel space
-+    cd ${S}/ti/syslink/utils/hlos/knl/Linux && make \
-+        ARCH="${TARGET_ARCH}" \
-+        CROSS_COMPILE="${TARGET_PREFIX}" \
-+        SYSLINK_PLATFORM="${SYSLINKPLATFORM}" \
-+        SYSLINK_VARIANT="${SYSLINKVARIANT}" \
-+        SYSLINK_LOADER="${SYSLINKLOADER}" \
-+        SYSLINK_PKGPATH="${IPC_INSTALL_DIR}/packages" \
-+        KDIR="${STAGING_KERNEL_DIR}"
-+
-+    # Build the gpp (hlos) kernel space samples. 
-+    for sample in ${SYSLINKHLOSSAMPLES}; do
-+        cd ${S}/ti/syslink/samples/hlos/$sample/knl/Linux && make \
-+            ARCH="${TARGET_ARCH}" \
-+            CROSS_COMPILE="${TARGET_PREFIX}" \
-+            SYSLINK_PLATFORM="${SYSLINKPLATFORM}" \
-+            SYSLINK_VARIANT="${SYSLINKVARIANT}" \
-+            SYSLINK_LOADER="${SYSLINKLOADER}" \
-+            SYSLINK_PKGPATH="${IPC_INSTALL_DIR}/packages" \
-+            SYSLINK_SDK=EZSDK \
-+            KDIR="${STAGING_KERNEL_DIR}"
-+    done
-+
-+    # Build the gpp (hlos) user space
-+    cd ${S}/ti/syslink/utils/hlos/usr/Linux && make \
-+        ARCH="${TARGET_ARCH}" \
-+        CROSS_COMPILE="${TARGET_PREFIX}" \
-+        TOOLCHAIN_PREFIX="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}" \
-+        SYSLINK_PLATFORM="${SYSLINKPLATFORM}" \
-+        SYSLINK_VARIANT="${SYSLINKVARIANT}" \
-+        SYSLINK_LOADER="${SYSLINKLOADER}" \
-+        SYSLINK_PKGPATH="${IPC_INSTALL_DIR}/packages"
-+
-+    # Build the gpp (hlos) user space samples 
-+    # First build the common lib for samples.
-+    cd ${S}/ti/syslink/samples/hlos/common/usr/Linux && make \
-+        ARCH="${TARGET_ARCH}" \
-+        CROSS_COMPILE="${TARGET_PREFIX}" \
-+        TOOLCHAIN_PREFIX="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}" \
-+        SYSLINK_PLATFORM="${SYSLINKPLATFORM}" \
-+        SYSLINK_VARIANT="${SYSLINKVARIANT}" \
-+        SYSLINK_LOADER="${SYSLINKLOADER}" \
-+        SYSLINK_SDK=EZSDK \
-+        SYSLINK_PKGPATH="${IPC_INSTALL_DIR}/packages"
-+
-+    for sample in ${SYSLINKHLOSSAMPLES}; do
-+        cd ${S}/ti/syslink/samples/hlos/$sample/usr/Linux && make \
-+            ARCH="${TARGET_ARCH}" \
-+            CROSS_COMPILE="${TARGET_PREFIX}" \
-+            TOOLCHAIN_PREFIX="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}" \
-+            SYSLINK_PLATFORM="${SYSLINKPLATFORM}" \
-+            SYSLINK_VARIANT="${SYSLINKVARIANT}" \
-+            SYSLINK_LOADER="${SYSLINKLOADER}" \
-+            SYSLINK_SDK=EZSDK \
-+            SYSLINK_PKGPATH="${IPC_INSTALL_DIR}/packages"
-+    done
-+
-+    # Build the dsp/arm (rtos) code (system)
-+    cd ${S}/ti/syslink && \
-+        ${XDC_INSTALL_DIR}/xdc -P \
-+	 `${XDC_INSTALL_DIR}/bin/xdcpkg ${SYSLINK_ROOT}/ti/syslink | grep -v samples`
-+
-+    # Build the dsp/arm (rtos) code (samples)
-+    export XDCARGS="profile=debug"
-+    cd ${S}/ti/syslink && \
-+        ${XDC_INSTALL_DIR}/xdc --jobs=${BB_NUMBER_THREADS} -P \
-+	 `${XDC_INSTALL_DIR}/bin/xdcpkg ${SYSLINK_ROOT}/ti/syslink | grep samples`
-+}
-+
-+do_install () {
-+    # Install the hlos kernel module
-+    install -d ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/dsp
-+    install -m 0755 ${S}/ti/syslink/bin/${SYSLINKVARIANT}/syslink.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/dsp/
-+
-+    # Install the hlos examples
-+    install -d ${D}/${installdir}/ti-syslink-examples
-+    install -m 0755 ${S}/ti/syslink/bin/${SYSLINKVARIANT}/samples/* ${D}/${installdir}/ti-syslink-examples/
-+
-+    # Install the rtos examples
-+    cd ${S}/ti/syslink/samples/rtos
-+    for i in $(find . -name "*.${SYSLINKSUFFIX}"); do
-+        install -d ${D}/${installdir}/ti-syslink-examples/`dirname ${i} | cut -f4 -d /`
-+        install ${i} ${D}/${installdir}/ti-syslink-examples/`dirname ${i} | cut -f4 -d /`
-+    done
-+
-+    # Install/Stage the Source Tree
-+    install -d ${D}${SYSLINK_INSTALL_DIR_RECIPE}
-+    cp -pPrf ${S}/* ${D}${SYSLINK_INSTALL_DIR_RECIPE}
-+}
-+
-+PACKAGES += "ti-syslink-module"
-+FILES_ti-syslink-module = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/dsp/syslink.ko" 
-+RDEPENDS_ti-syslink-module += "update-modules"
-+
-+pkg_postinst_ti-syslink-module () {
-+#!/bin/sh
-+if [ -n "$D" ]; then
-+	exit 1
-+fi
-+
-+depmod -a
-+update-modules || true
-+}
-+
-+pkg_postrm_ti-syslink-module () {
-+#!/bin/sh
-+update-modules || true
-+}
++SRC_URI[syslinktarball.md5sum] = "468034372124f70f82b60cfb5f11c8e8"
++SRC_URI[syslinktarball.sha256sum] = "ed574dcb3a5477cfbc69a1c9e768d5197291cb057d19fd791e16e1c89af3e8e1"
 -- 
 1.7.0.4
 
