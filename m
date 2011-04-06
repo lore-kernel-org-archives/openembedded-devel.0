@@ -1,36 +1,37 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heroor@gmail.com>) id 1Q7IjB-0003eG-VT
+	(envelope-from <heroor@gmail.com>) id 1Q7JEO-0004Ng-3s
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Apr 2011 04:44:18 +0200
-Received: by qwh5 with SMTP id 5so610670qwh.6
+	Wed, 06 Apr 2011 05:16:32 +0200
+Received: by qyk27 with SMTP id 27so824105qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Apr 2011 19:42:11 -0700 (PDT)
+	Tue, 05 Apr 2011 20:14:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=bLsj2rR832GkHI9kqgFQNZsNsP10r14m4mNfH6QW50k=;
-	b=eKTgDslCpnDAlpmHshjLoZjnP+Zz4Ju8l1hvG3GLNFDIEfC5WXovOwJBmR8UpqflGR
-	vnCwuUnho6xdnbD6NWZ+TTAHiLmo6a5nFXfujXKm4guTZuymQwuLd0l0rYOEYMV1qwvg
-	n9A/4ZNOAzkdN72LfsDxDYJlQo7EouL8DFAVc=
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=tunUP4CA+wc8+34OSfkIDsHjY63zCuQaI3hsAUDVV8s=;
+	b=YjGYte7hBk8lOWvj8jj2ZM45NocW+kRs3OtFzV181pwctXJlHboZWHyI7sxP1qnZlk
+	U2FcGuOYOQj13gyAaN5QkM1qsieLkCAGkTkhoMtp/WrsCbywHgIy+mD91BFnkfsZJDhR
+	hG0UBecGkcPzfMFK98tDmV9G0PgKBGStfq8Tk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=xAlOsutxjMQ9c9ioy69nPIQAUWosj/WIfHcTkq971ndNGDwwMD8gEDI3MpwZfHhdVV
-	0Q6OX39P9vArPOHBKgCBMgjGzC7eZY5JEs6AYwK7ZGtqhY6AAww7lwVQnumMY6ACqjfe
-	scgi1j1mBQimx0IKaKBysbG/Ff8k7UTxZmRpk=
+	:content-type:content-transfer-encoding;
+	b=awShKjP4h1wMz7NEX/dpnyFO9Gvt8zJ7RbwpeKNfwIJMJGzA/LlnTMlvVDAIdO4rlX
+	PUyJkmnRedFKmFYhT6TaMSv2dVIiVapt55sp2PkHiwJiBmq0K3UMp+BaWXo/gZwAgltb
+	gugHSyOUJmbPBhj5xf3xXLMHMI7nG/+PCqAws=
 MIME-Version: 1.0
-Received: by 10.224.212.7 with SMTP id gq7mr327495qab.96.1302057730997; Tue,
-	05 Apr 2011 19:42:10 -0700 (PDT)
-Received: by 10.224.133.195 with HTTP; Tue, 5 Apr 2011 19:42:10 -0700 (PDT)
-In-Reply-To: <inff89$hdg$1@dough.gmane.org>
-References: <1302016253-10390-1-git-send-email-heroor@gmail.com>
-	<inff89$hdg$1@dough.gmane.org>
-Date: Wed, 6 Apr 2011 08:12:10 +0530
-Message-ID: <BANLkTinEDpEthJ92iS1w=wT=6Ctemum9UQ@mail.gmail.com>
+Received: by 10.224.197.197 with SMTP id el5mr313067qab.396.1302059665340;
+	Tue, 05 Apr 2011 20:14:25 -0700 (PDT)
+Received: by 10.224.133.195 with HTTP; Tue, 5 Apr 2011 20:14:25 -0700 (PDT)
+In-Reply-To: <20110405164133.GF7168@denix.org>
+References: <1302005404-21580-1-git-send-email-heroor@gmail.com>
+	<1302005404-21580-4-git-send-email-heroor@gmail.com>
+	<20110405164133.GF7168@denix.org>
+Date: Wed, 6 Apr 2011 08:44:25 +0530
+Message-ID: <BANLkTim2P_N_kCZQnPaDedqKO4VMauKyxA@mail.gmail.com>
 From: Siddharth Heroor <heroor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/2] ti-syslink: Add TI Syslink for TI816x and TI814x devices
+Subject: Re: [PATCH 4/4] ti-sysbios: Add version 6.31.04.27.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,47 +45,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Apr 2011 02:44:18 -0000
+X-List-Received-Date: Wed, 06 Apr 2011 03:16:32 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 5, 2011 at 9:46 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 05-04-11 17:10, Siddharth Heroor wrote:
+On Tue, Apr 5, 2011 at 10:11 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> On Tue, Apr 05, 2011 at 05:40:04PM +0530, Siddharth Heroor wrote:
 >> From: Siddharth Heroor <heroor@ti.com>
+>
+> Sid,
+>
+> Do you need to set a COMPATIBLE_MACHINE in the recipe, by any chance?
+
+Sys/Bios supports a large variety of the platforms including OMAP2,
+OMAP3, OMAP4
+etc.. Therefore, I don't think we should restrict this version to only
+TI816x or TI814x. Is
+it ok?
+
+>
+>> Signed-off-by: Siddharth Heroor <heroor@ti.com>
+>> ---
+>> =A0recipes/ti/ti-sysbios_6.31.04.27.bb | =A0 =A06 ++++++
+>> =A01 files changed, 6 insertions(+), 0 deletions(-)
+>> =A0create mode 100644 recipes/ti/ti-sysbios_6.31.04.27.bb
 >>
->> * Syslink is an Inter Processor communication layer for ARM/DSP devices.
+>> diff --git a/recipes/ti/ti-sysbios_6.31.04.27.bb b/recipes/ti/ti-sysbios=
+_6.31.04.27.bb
+>> new file mode 100644
+>> index 0000000..619d6ff
+>> --- /dev/null
+>> +++ b/recipes/ti/ti-sysbios_6.31.04.27.bb
+>> @@ -0,0 +1,6 @@
+>> +require ti-sysbios.inc
+>> +
+>> +PV =3D "6_31_04_27"
+>> +
+>> +SRC_URI[sysbiosbin.md5sum] =3D "c82e1d3afc9e2d3e88b0e4137f152ed6"
+>> +SRC_URI[sysbiosbin.sha256sum] =3D "92337cf3197d2b7ffe2316f311cd163be7b4=
+70acbb032273894d7d39182f4227"
+>> --
+>> 1.7.0.4
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-> NAK!
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-> 1) This has way too much copy/paste crud from dsplink that needs to get
-> cleaned up, some highlights:
-Yes, I did follow precedence and use what was already present in OE.
 
->
->> +PROVIDES = "ti-syslink-module"
->> +PROVIDES += "ti-syslink-examples"
->> +PR_append = "j"
->
-> 2) inconsistent whitespace every where, do_compile is the worst
->
-> 3) This really needs to get split into 2 recipes: one for the kernel
-> modules using module.bbclass and one for the userspace bits.
 
-I can split the examples and libraries into two recipes, but we may need the
-kernel module and libraries to be staged together. What would you suggest
-I do to keep them together when staging?
 
->
-> 4) The platform defines seem to be better suited for e.g. ti-paths.inc
-
-Would moving all the defines into a separate ti-syslink-env.inc be good or does
-it have to be in ti-paths.inc. I'm not keen on keep all the syslink
-defines in ti-paths.inc
-as its unrelated to the other recipes that use ti-paths.inc.
-
--- 
+--=20
 Sid
 
 
