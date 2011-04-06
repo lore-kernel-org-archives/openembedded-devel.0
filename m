@@ -1,24 +1,36 @@
-Received: from p3plsmtpa01-04.prod.phx3.secureserver.net ([72.167.82.84])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <mike@mwester.net>) id 1Q7Eq1-0008Sn-Q4
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heroor@gmail.com>) id 1Q7IjB-0003eG-VT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Apr 2011 00:35:07 +0200
-Received: (qmail 21946 invoked from network); 5 Apr 2011 22:32:58 -0000
-Received: from unknown (209.242.7.132)
-	by p3plsmtpa01-04.prod.phx3.secureserver.net (72.167.82.84) with ESMTP;
-	05 Apr 2011 22:32:58 -0000
-Message-ID: <4D9B989D.5060703@mwester.net>
-Date: Tue, 05 Apr 2011 17:33:01 -0500
-From: Mike Westerhof <mike@mwester.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
+	Wed, 06 Apr 2011 04:44:18 +0200
+Received: by qwh5 with SMTP id 5so610670qwh.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Apr 2011 19:42:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=bLsj2rR832GkHI9kqgFQNZsNsP10r14m4mNfH6QW50k=;
+	b=eKTgDslCpnDAlpmHshjLoZjnP+Zz4Ju8l1hvG3GLNFDIEfC5WXovOwJBmR8UpqflGR
+	vnCwuUnho6xdnbD6NWZ+TTAHiLmo6a5nFXfujXKm4guTZuymQwuLd0l0rYOEYMV1qwvg
+	n9A/4ZNOAzkdN72LfsDxDYJlQo7EouL8DFAVc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=xAlOsutxjMQ9c9ioy69nPIQAUWosj/WIfHcTkq971ndNGDwwMD8gEDI3MpwZfHhdVV
+	0Q6OX39P9vArPOHBKgCBMgjGzC7eZY5JEs6AYwK7ZGtqhY6AAww7lwVQnumMY6ACqjfe
+	scgi1j1mBQimx0IKaKBysbG/Ff8k7UTxZmRpk=
 MIME-Version: 1.0
+Received: by 10.224.212.7 with SMTP id gq7mr327495qab.96.1302057730997; Tue,
+	05 Apr 2011 19:42:10 -0700 (PDT)
+Received: by 10.224.133.195 with HTTP; Tue, 5 Apr 2011 19:42:10 -0700 (PDT)
+In-Reply-To: <inff89$hdg$1@dough.gmane.org>
+References: <1302016253-10390-1-git-send-email-heroor@gmail.com>
+	<inff89$hdg$1@dough.gmane.org>
+Date: Wed, 6 Apr 2011 08:12:10 +0530
+Message-ID: <BANLkTinEDpEthJ92iS1w=wT=6Ctemum9UQ@mail.gmail.com>
+From: Siddharth Heroor <heroor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1300981024-9111-2-git-send-email-obi@opendreambox.org>	<1300983264-16652-1-git-send-email-obi@opendreambox.org>	<4D99C0EA.5070902@opendreambox.org>	<inciqg$3vi$2@dough.gmane.org>	<4D99E05E.9020100@opendreambox.org>	<ind0l0$io$1@dough.gmane.org>	<4D9A0A1D.3020209@opendreambox.org>	<inecec$sae$2@dough.gmane.org>	<4D9ADC0D.6060603@opendreambox.org>
-	<inen1t$mgv$1@dough.gmane.org>
-	<1301995968.14449.293.camel@phil-desktop>
-In-Reply-To: <1301995968.14449.293.camel@phil-desktop>
-Subject: Re: [PATCHv2] kernel/module-base: Append PR to MACHINE_KERNEL_PR
+Subject: Re: [PATCH 1/2] ti-syslink: Add TI Syslink for TI816x and TI814x devices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,29 +44,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2011 22:35:07 -0000
+X-List-Received-Date: Wed, 06 Apr 2011 02:44:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-On 4/5/2011 4:32 AM, Phil Blundell wrote:
-> On Tue, 2011-04-05 at 11:23 +0200, Koen Kooi wrote:
->> On 05-04-11 11:08, Andreas Oberritter wrote:
->>> Thereby making MACHINE_KERNEL_PR mandatory for all machines?
+On Tue, Apr 5, 2011 at 9:46 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 05-04-11 17:10, Siddharth Heroor wrote:
+>> From: Siddharth Heroor <heroor@ti.com>
 >>
->> I don't see why not.
-> 
-> The majority of machines aren't using it at present so this would be an
-> unexpected (and presumably unwelcome) change for them.  That seems like
-> a bad idea unless there is a compelling reason why it needs to be done.
+>> * Syslink is an Inter Processor communication layer for ARM/DSP devices.
+>
+> NAK!
+>
+> 1) This has way too much copy/paste crud from dsplink that needs to get
+> cleaned up, some highlights:
+Yes, I did follow precedence and use what was already present in OE.
 
-Quite frankly, I recall when this was originally discussed, and I really
-didn't understand the use case for it -- if it makes sense to use it for
-SlugOS, I'd be happy to do so.
+>
+>> +PROVIDES = "ti-syslink-module"
+>> +PROVIDES += "ti-syslink-examples"
+>> +PR_append = "j"
+>
+> 2) inconsistent whitespace every where, do_compile is the worst
+>
+> 3) This really needs to get split into 2 recipes: one for the kernel
+> modules using module.bbclass and one for the userspace bits.
 
-On a somewhat tangential note, I am responsible for a *distro*, but I'm
-not sure that I'm responsible for any *machines* -- so perhaps this is
-not my decision to make WRT to SlugOS?  Am I missing something?
+I can split the examples and libraries into two recipes, but we may need the
+kernel module and libraries to be staged together. What would you suggest
+I do to keep them together when staging?
 
--Mike (mwester)
+>
+> 4) The platform defines seem to be better suited for e.g. ti-paths.inc
+
+Would moving all the defines into a separate ti-syslink-env.inc be good or does
+it have to be in ti-paths.inc. I'm not keen on keep all the syslink
+defines in ti-paths.inc
+as its unrelated to the other recipes that use ti-paths.inc.
+
+-- 
+Sid
 
 
