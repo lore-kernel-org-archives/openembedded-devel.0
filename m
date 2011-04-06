@@ -1,35 +1,34 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q7NCg-0006oC-8U for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Apr 2011 09:31:07 +0200
+	id 1Q7NIb-0004Q7-TX for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Apr 2011 09:37:09 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Q7NAf-0002z8-IY for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Apr 2011 09:28:57 +0200
+	id 1Q7NGb-0006XZ-By for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Apr 2011 09:35:05 +0200
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Apr 2011 09:28:57 +0200
+	Wed, 06 Apr 2011 09:35:05 +0200
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Apr 2011 09:28:57 +0200
+	Wed, 06 Apr 2011 09:35:05 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 06 Apr 2011 09:28:45 +0200
-Message-ID: <inh4nd$q7$1@dough.gmane.org>
-References: <1302016253-10390-1-git-send-email-heroor@gmail.com>	<inff89$hdg$1@dough.gmane.org>
-	<BANLkTinEDpEthJ92iS1w=wT=6Ctemum9UQ@mail.gmail.com>
+Date: Wed, 06 Apr 2011 09:32:25 +0200
+Message-ID: <inh4u9$q7$3@dough.gmane.org>
+References: <cover.1302074016.git.Martin.Jansa@gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <BANLkTinEDpEthJ92iS1w=wT=6Ctemum9UQ@mail.gmail.com>
+In-Reply-To: <cover.1302074016.git.Martin.Jansa@gmail.com>
 X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH 1/2] ti-syslink: Add TI Syslink for TI816x and TI814x devices
+Subject: Re: [PATCH 0/8] [meta-efl] Pull request #3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,63 +42,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Apr 2011 07:31:10 -0000
+X-List-Received-Date: Wed, 06 Apr 2011 07:37:10 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 06-04-11 04:42, Siddharth Heroor wrote:
-> On Tue, Apr 5, 2011 at 9:46 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 05-04-11 17:10, Siddharth Heroor wrote:
->>> From: Siddharth Heroor <heroor@ti.com>
->>>
->>> * Syslink is an Inter Processor communication layer for ARM/DSP devices.
->>
->> NAK!
->>
->> 1) This has way too much copy/paste crud from dsplink that needs to get
->> cleaned up, some highlights:
-> Yes, I did follow precedence and use what was already present in OE.
+On 06-04-11 09:14, Martin Jansa wrote:
+> Sync with oe, add ephoto, bump SRCREV
 > 
->>
->>> +PROVIDES = "ti-syslink-module"
->>> +PROVIDES += "ti-syslink-examples"
->>> +PR_append = "j"
->>
->> 2) inconsistent whitespace every where, do_compile is the worst
->>
->> 3) This really needs to get split into 2 recipes: one for the kernel
->> modules using module.bbclass and one for the userspace bits.
+> Pull URL: git://gitorious.org/shr/meta-openembedded.git
+>   Branch: jama/meta-efl
+>   Browse: http://gitorious.org/shr/meta-openembedded/commits/jama/meta-efl
+
+Merged into master, thanks!
+
+
 > 
-> I can split the examples and libraries into two recipes, but we may need the
-> kernel module and libraries to be staged together. What would you suggest
-> I do to keep them together when staging?
-
-You don't need to stage the kernel modules, only the symbol map. And I
-doubt even that is necessary looking at the syslink diagrams.
-
->> 4) The platform defines seem to be better suited for e.g. ti-paths.inc
+> Thanks,
+>     Martin Jansa <Martin.Jansa@gmail.com>
+> ---
 > 
-> Would moving all the defines into a separate ti-syslink-env.inc be good or does
-> it have to be in ti-paths.inc. I'm not keen on keep all the syslink
-> defines in ti-paths.inc
-> as its unrelated to the other recipes that use ti-paths.inc.
+> 
+> Martin Jansa (5):
+>   ephoto: inherit gettext
+>   elementary: inherit gettext
+>   e-base: bump SRCREV
+>   evas: drop PACKAGES_DYNAMIC_virtclass-native, not needed anymore
+>   azy: disable mysql tests
+> 
+> Philippe De Swert (3):
+>   eio: new recipe and include file for eio
+>   ephoto: new svn build recipe
+>   eeze: update to 1.0.1
+> 
+>  meta-efl/classes/e-base.bbclass            |    2 +-
+>  meta-efl/recipes-efl/e17/ephoto_svn.bb     |   14 ++++++++++++++
+>  meta-efl/recipes-efl/efl/azy_svn.bb        |    2 ++
+>  meta-efl/recipes-efl/efl/eeze_1.0.0.bb     |   10 ----------
+>  meta-efl/recipes-efl/efl/eeze_1.0.1.bb     |   10 ++++++++++
+>  meta-efl/recipes-efl/efl/eio.inc           |    8 ++++++++
+>  meta-efl/recipes-efl/efl/eio_svn.bb        |   13 +++++++++++++
+>  meta-efl/recipes-efl/efl/elementary_svn.bb |    2 +-
+>  meta-efl/recipes-efl/efl/evas.inc          |    1 -
+>  9 files changed, 49 insertions(+), 13 deletions(-)
+>  create mode 100644 meta-efl/recipes-efl/e17/ephoto_svn.bb
+>  delete mode 100644 meta-efl/recipes-efl/efl/eeze_1.0.0.bb
+>  create mode 100644 meta-efl/recipes-efl/efl/eeze_1.0.1.bb
+>  create mode 100644 meta-efl/recipes-efl/efl/eio.inc
+>  create mode 100644 meta-efl/recipes-efl/efl/eio_svn.bb
+> 
 
-And a related question, why is this version of syslink so convoluted
-compared to
-http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/ti/ti-syslink_git.bb
-?
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFNnBYtMkyGM64RGpERArn6AKCKCyr22nEDOFPTahnnhsqvvNQbWwCePna9
-AplUQiJ0epW8GZ/rzsSBoOo=
-=Jrak
+iD8DBQFNnBcJMkyGM64RGpERAvJqAKCTNrFB8awSK//9N+7Sj0VPr1Mg5ACfY7/u
+ZiwI0PEKHXbzvRAnzdoUeao=
+=Hqsf
 -----END PGP SIGNATURE-----
 
 
