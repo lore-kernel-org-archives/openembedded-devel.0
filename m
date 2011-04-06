@@ -1,38 +1,23 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heroor@gmail.com>) id 1Q7PBz-0001td-Ul
+	(envelope-from <philb@gnu.org>) id 1Q7PKy-0002Al-6Q
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Apr 2011 11:38:28 +0200
-Received: by ywg8 with SMTP id 8so518043ywg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Apr 2011 02:36:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=niYscsDabKA5iX+mqPUkAsrWiQat6SDK9ZIkxvYyKpI=;
-	b=W+Fd18EWiDDAjTr5nMXMfLh9x0bhOR1TyLM6TpDdGe5qZbAMiLNJCbivJiL4Luu//R
-	pXiqBKXziky5FgtblBamYKbHcZWuHkA0cTvo47/OZockPx/hDNcI72cH44XgG8pTbaeW
-	P0tpAfolKc4Bf6G+5Q6wKuccRABlYffGldDKU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=qu6oRteHd3r7z+G/FRP4LQoO6LKmuWjxMwp6Rwy1VUXt9+JkyH4SR/5TDB5qA68l6H
-	16MnCqU0wCF+cfB/ReEd4NsxtFxxDk/HVP6TKAuW3ocKz+WGkYyMALWwPWmvx5IXgJkx
-	5GZ2FHFAmu7TLZwAp08X/KDVr7gYHgbHkWRUY=
-Received: by 10.101.2.1 with SMTP id e1mr593873ani.18.1302082579827;
-	Wed, 06 Apr 2011 02:36:19 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id w6sm462366anf.32.2011.04.06.02.36.17
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 06 Apr 2011 02:36:19 -0700 (PDT)
-From: Siddharth Heroor <heroor@gmail.com>
+	Wed, 06 Apr 2011 11:47:44 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q7PIx-0000vB-LZ
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Apr 2011 11:45:39 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Apr 2011 15:06:07 +0530
-Message-Id: <1302082567-26357-2-git-send-email-heroor@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1302082567-26357-1-git-send-email-heroor@gmail.com>
-References: <1302082567-26357-1-git-send-email-heroor@gmail.com>
-Cc: Siddharth Heroor <heroor@ti.com>
-Subject: [PATCH 2/2] u-boot: Add PSP version for ti816x devices.
+In-Reply-To: <20110404150506.3995e1f6.ospite@studenti.unina.it>
+References: <1301416483-7255-1-git-send-email-ospite@studenti.unina.it>
+	<20110404150506.3995e1f6.ospite@studenti.unina.it>
+Date: Wed, 06 Apr 2011 10:45:37 +0100
+Message-ID: <1302083137.14449.352.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: [RFC, PATCH] classes/mirrors.bbclass: add mirror for download.osgeo.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,40 +31,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Apr 2011 09:38:28 -0000
+X-List-Received-Date: Wed, 06 Apr 2011 09:47:44 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-From: Siddharth Heroor <heroor@ti.com>
+On Mon, 2011-04-04 at 15:05 +0200, Antonio Ospite wrote:
+> On Tue, 29 Mar 2011 18:34:43 +0200
+> Antonio Ospite <ospite@studenti.unina.it> wrote:
+> 
+> > The host download.osgeo.org is not reachable from some network/country
+> > because of some routing issue, and this makes the do_fetch task of the
+> > libtiff recipe to fail:
+> > 
+> [..]
+> 
+> > Add a reachable mirror for it, so that the tiff recipe can build fine.
+> > 
+> > Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+> > ---
+> > 
+> > A less invasive solution would be to change the SRC_URI address directly in 
+> > the recipe, but I don't know if that can affects anyone else, or we can even 
+> > have a copy of the archive hosted on mirrors.openembedded.org and live with 
+> > that until the next release. What is  your opinion?
+> > 
+> 
+> Ping.
 
-* Add TI PSP u-boot version for dm816x/c6a816x/am389x devices.
-* Based on PSP release 4.00.00.10.
+Acked-by: Phil Blundell <philb@gnu.org>
 
-Signed-off-by: Siddharth Heroor <heroor@ti.com>
----
- recipes/u-boot/u-boot_2010.06-psp04.00.00.10.bb |   13 +++++++++++++
- 1 files changed, 13 insertions(+), 0 deletions(-)
- create mode 100644 recipes/u-boot/u-boot_2010.06-psp04.00.00.10.bb
+p.
 
-diff --git a/recipes/u-boot/u-boot_2010.06-psp04.00.00.10.bb b/recipes/u-boot/u-boot_2010.06-psp04.00.00.10.bb
-new file mode 100644
-index 0000000..2c4d120
---- /dev/null
-+++ b/recipes/u-boot/u-boot_2010.06-psp04.00.00.10.bb
-@@ -0,0 +1,13 @@
-+require u-boot-omap3.inc
-+
-+COMPATIBLE_MACHINE = "ti816x"
-+
-+BRANCH = "master"
-+
-+# Use literal tags in SRCREV, when available, instead of commit IDs
-+SRCREV = "v2010.06_TI816XPSP_04.00.00.10"
-+
-+UVER = "2010.06"
-+PSPREL = "04.00.00.10"
-+
-+PR = "r1"
--- 
-1.7.0.4
 
 
 
