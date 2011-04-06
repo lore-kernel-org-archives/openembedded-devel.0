@@ -1,23 +1,29 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from edison.awellconnected.net ([83.167.180.132])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1Q7PKy-0002Al-6Q
+	(envelope-from <lukas@htc-linux.org>) id 1Q7PxC-00074W-Nc
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Apr 2011 11:47:44 +0200
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q7PIx-0000vB-LZ
+	Wed, 06 Apr 2011 12:27:14 +0200
+Received: from ip-80-226-0-1.vodafone-net.de ([80.226.0.1] helo=[10.225.88.13])
+	by edison.awellconnected.net with esmtp (Exim 4.69)
+	(envelope-from <lukas@htc-linux.org>) id 1Q7Pv4-0005bs-Bh
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Apr 2011 11:45:39 +0200
-From: Phil Blundell <philb@gnu.org>
+	Wed, 06 Apr 2011 11:25:02 +0100
+From: Lukas-David Gorris <lukas@htc-linux.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20110404150506.3995e1f6.ospite@studenti.unina.it>
-References: <1301416483-7255-1-git-send-email-ospite@studenti.unina.it>
-	<20110404150506.3995e1f6.ospite@studenti.unina.it>
-Date: Wed, 06 Apr 2011 10:45:37 +0100
-Message-ID: <1302083137.14449.352.camel@phil-desktop>
+Date: Wed, 06 Apr 2011 12:24:54 +0200
+Message-ID: <1302085494.2267.20.camel@computer>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.3 
-Subject: Re: [RFC, PATCH] classes/mirrors.bbclass: add mirror for download.osgeo.org
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - edison.awellconnected.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - htc-linux.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: fennec fonts too small
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,37 +37,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Apr 2011 09:47:44 -0000
+X-List-Received-Date: Wed, 06 Apr 2011 10:27:14 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2011-04-04 at 15:05 +0200, Antonio Ospite wrote:
-> On Tue, 29 Mar 2011 18:34:43 +0200
-> Antonio Ospite <ospite@studenti.unina.it> wrote:
-> 
-> > The host download.osgeo.org is not reachable from some network/country
-> > because of some routing issue, and this makes the do_fetch task of the
-> > libtiff recipe to fail:
-> > 
-> [..]
-> 
-> > Add a reachable mirror for it, so that the tiff recipe can build fine.
-> > 
-> > Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
-> > ---
-> > 
-> > A less invasive solution would be to change the SRC_URI address directly in 
-> > the recipe, but I don't know if that can affects anyone else, or we can even 
-> > have a copy of the archive hosted on mirrors.openembedded.org and live with 
-> > that until the next release. What is  your opinion?
-> > 
-> 
-> Ping.
+Hi,
 
-Acked-by: Phil Blundell <philb@gnu.org>
+It tried out fennec on htcleo machine (4,2" wvga, 217 ppi specified) and
+noticed the fonts are itsy. Maybe it would be good to install a modified
+configuration in order to make it more usable. It's possible to set font
+minima via about:config .
 
-p.
+Should a configuration be added?
 
+If so, how?
+
+There is MACHINE_DISPLAY_{WIDTH,HEIGHT}_PIXELS. E.g. from
+conf/machine/htcleo.conf :
+MACHINE_DISPLAY_WIDTH_PIXELS = "480"
+MACHINE_DISPLAY_HEIGHT_PIXELS = "800"
+
+But it doesn't include screen size.. (dpi).
+
+There's also smallscreen GUI_MACHINE_CLASS = "smallscreen"
+
+Maybe we could make the fennec recipe read such parameters and write a
+fitting configuration file into the package if a suitable is present.
+
+
+Build Configuration:
+BB_VERSION        = "1.12.0"
+METADATA_BRANCH   = "master"
+METADATA_REVISION = "c3265b1"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "htcleo"
+DISTRO            = "shr"
+DISTRO_VERSION    = "-20110406"
+TARGET_FPU        = "hard"
+
+
+Best,
+Lukas
 
 
 
