@@ -1,19 +1,36 @@
-Received: from stoexhub01.domain01.net ([83.145.59.142]
-	helo=stoexhub02.domain01.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1Q7QFy-0007RW-Cd
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <luisborlido@gmail.com>) id 1Q7R21-0003PR-HT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Apr 2011 12:46:38 +0200
-Received: from localhost (85.231.30.150) by stoexhub02.domain01.net
-	(10.12.10.2) with Microsoft SMTP Server id 8.3.137.0; Wed, 6 Apr 2011
-	12:43:27 +0200
-From: Anders Darander <anders@chargestorm.se>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 6 Apr 2011 12:43:13 +0200
-Message-ID: <1302086593-15560-1-git-send-email-anders@chargestorm.se>
-X-Mailer: git-send-email 1.7.4.1
+	Wed, 06 Apr 2011 13:36:17 +0200
+Received: by wye20 with SMTP id 20so1283218wye.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Apr 2011 04:34:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=wfHlsCEtZlDRf9ZKD+EK/kxpj46uonc4TvCYt3VcJ2Q=;
+	b=JJv5RNRK5xY7CG3fBmerlxDvEBy4BLLTJXaNRCGda0usFAkM7qCOeQ3F3oGdm6YnjS
+	PL7e1WFO9hYlPMu9IY/tKRupWMIEq23q40L+CAifJ1oQ1Xc3E5Llg2rH08sPle4jOMcE
+	1JDzYWe3wumH71Es0N1iXWebtNwY7AhKxtxDA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=psBALmpf5N1A3jEzHKOkBmwY5xW2sfs96UiFZV3Bg9KKygcbxsnDhXRqyC93Cw3PVP
+	zRuniezDTiJYzCsco5k860phGwYMf+gE+IMHA6VBhxTtak3rFa2xitYsPzRwkIvrSAeE
+	8ThweA4+vGREGtkhGnQ9T92uf5Lox2CVwHEBY=
 MIME-Version: 1.0
-X-GFI-SMTP-Submission: 1
-Subject: [PATCH] lowpan-tools_0.2.2;: fix build with static libnl1
+Received: by 10.216.245.4 with SMTP id n4mr175274wer.83.1302089650476; Wed, 06
+	Apr 2011 04:34:10 -0700 (PDT)
+Received: by 10.216.38.147 with HTTP; Wed, 6 Apr 2011 04:34:10 -0700 (PDT)
+In-Reply-To: <BANLkTimy1b_JM5zx9EYJddfEqk4MYWZ2Pg@mail.gmail.com>
+References: <BANLkTimy1b_JM5zx9EYJddfEqk4MYWZ2Pg@mail.gmail.com>
+Date: Wed, 6 Apr 2011 18:34:10 +0700
+Message-ID: <BANLkTimD2hxAA-nQPGFzUhXtJLzVXui1Jg@mail.gmail.com>
+From: =?ISO-8859-1?Q?Lu=EDs_Filipe_Sal=E9_Borlido?= <luisborlido@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: ESE Key Daemon 1.2.4: FTBFS with gcc-4.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,121 +44,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Apr 2011 10:46:38 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 06 Apr 2011 11:36:17 -0000
+X-Groupsio-MsgNum: 30989
+Content-Type: multipart/mixed; boundary=e0cb4e43d1bb15198204a03e5fd9
 
-* add NL_CFLAGS to a few Makefiles.am
-* git version not fixed
-* build and runtime tested, although only in qemuarm
+--e0cb4e43d1bb15198204a03e5fd9
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Anders Darander <anders@chargestorm.se>
----
- .../0001-Add-NL_CFLAGS-to-libcommon.patch          |   65 ++++++++++++++++++++
- recipes/lowpan-tools/lowpan-tools.inc              |    2 +-
- recipes/lowpan-tools/lowpan-tools_0.2.2.bb         |    4 +
- 3 files changed, 70 insertions(+), 1 deletions(-)
- create mode 100644 recipes/lowpan-tools/lowpan-tools-0.2.2/0001-Add-NL_CFLAGS-to-libcommon.patch
+Hi!
 
-diff --git a/recipes/lowpan-tools/lowpan-tools-0.2.2/0001-Add-NL_CFLAGS-to-libcommon.patch b/recipes/lowpan-tools/lowpan-tools-0.2.2/0001-Add-NL_CFLAGS-to-libcommon.patch
-new file mode 100644
-index 0000000..45cc4d0
---- /dev/null
-+++ b/recipes/lowpan-tools/lowpan-tools-0.2.2/0001-Add-NL_CFLAGS-to-libcommon.patch
-@@ -0,0 +1,65 @@
-+From 7fa435ea775b1410d9ccb95d2e315847f5a0f09c Mon Sep 17 00:00:00 2001
-+From: Anders Darander <anders@chargestorm.se>
-+Date: Tue, 5 Apr 2011 20:24:54 +0200
-+Subject: [PATCH] Add-NL_CFLAGS-to-libcommon
-+
-+Signed-off-by: Anders Darander <anders@chargestorm.se>
-+---
-+ iplink/Makefile.am |    1 +
-+ lib/Makefile.am    |    1 +
-+ src/Makefile.am    |    4 ++--
-+ tests/Makefile.am  |    2 +-
-+ 4 files changed, 5 insertions(+), 3 deletions(-)
-+
-+diff --git a/iplink/Makefile.am b/iplink/Makefile.am
-+index bbed7ba..6e87ae0 100644
-+--- a/iplink/Makefile.am
-++++ b/iplink/Makefile.am
-+@@ -4,3 +4,4 @@ noinst_HEADERS = iplink.h
-+ iproute_LTLIBRARIES = link_wpan.la
-+ link_wpan_la_LDFLAGS = -module -avoid-version -shared
-+ 
-++link_wpan_la_CFLAGS = $(NL_CFLAGS) -D_GNU_SOURCE
-+\ No newline at end of file
-+diff --git a/lib/Makefile.am b/lib/Makefile.am
-+index 5e15018..6936ebb 100644
-+--- a/lib/Makefile.am
-++++ b/lib/Makefile.am
-+@@ -3,3 +3,4 @@ include $(top_srcdir)/Makefile.common
-+ noinst_LTLIBRARIES = libcommon.la
-+ libcommon_la_SOURCES = printbuf.c genl.c parse.c shash.c logging.c nl_policy.c
-+ 
-++libcommon_la_CFLAGS = $(NL_CFLAGS) -D_GNU_SOURCE
-+diff --git a/src/Makefile.am b/src/Makefile.am
-+index 555e214..46c4017 100644
-+--- a/src/Makefile.am
-++++ b/src/Makefile.am
-+@@ -20,11 +20,11 @@ iz_SOURCES = iz.c iz-common.c iz-mac.c iz-phy.c
-+ noinst_HEADERS = iz.h
-+ 
-+ izcoordinator_SOURCES = coordinator.c
-+-izcoordinator_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS) -DLEASE_FILE=\"$(leasefile)\"
-++izcoordinator_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS) -DLEASE_FILE=\"$(leasefile)\" -D_GNU_SOURCE
-+ izcoordinator_CFLAGS += -DPID_FILE=\"$(pidfile)\"
-+ izcoordinator_LDADD = ../addrdb/libaddrdb.la $(LDADD) $(NL_LIBS) $(LEXLIB)
-+ 
-+-iz_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS)
-++iz_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS) -D_GNU_SOURCE
-+ iz_LDADD = $(LDADD) $(NL_LIBS)
-+ 
-+ izattach.8: $(izattach_SOURCES) $(top_srcdir)/configure.ac
-+diff --git a/tests/Makefile.am b/tests/Makefile.am
-+index d491be5..00621ca 100644
-+--- a/tests/Makefile.am
-++++ b/tests/Makefile.am
-+@@ -4,6 +4,6 @@ zbtest_PROGRAMS = listen-packet test test2 test3 test4 test5 test6 test7 gnl izl
-+ 
-+ izlisten_SOURCES = listen.c
-+ 
-+-gnl_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS)
-++gnl_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS) -D_GNU_SOURCE
-+ gnl_LDADD = $(LDADD) $(NL_LIBS)
-+ 
-+-- 
-+1.7.4.1
-+
-diff --git a/recipes/lowpan-tools/lowpan-tools.inc b/recipes/lowpan-tools/lowpan-tools.inc
-index f429f96..ba8396c 100644
---- a/recipes/lowpan-tools/lowpan-tools.inc
-+++ b/recipes/lowpan-tools/lowpan-tools.inc
-@@ -1,6 +1,6 @@
- DESCRIPTION = "LoWPAN utilities (IEEE802.15.4)"
- LICENSE = "GPLv2"
--DEPENDS = "libnl bison-native flex-native python-native"
-+DEPENDS = "libnl1 bison-native flex-native python-native"
- INC_PR = "r11"
- 
- SRC_URI = "http://prdownloads.sourceforge.net/linux-zigbee/linux-zigbee-sources/${PV}/lowpan-tools-${PV}.tar.gz"
-diff --git a/recipes/lowpan-tools/lowpan-tools_0.2.2.bb b/recipes/lowpan-tools/lowpan-tools_0.2.2.bb
-index 5686487..358b094 100644
---- a/recipes/lowpan-tools/lowpan-tools_0.2.2.bb
-+++ b/recipes/lowpan-tools/lowpan-tools_0.2.2.bb
-@@ -2,6 +2,10 @@ require lowpan-tools.inc
- 
- PR = "${INC_PR}.0"
- 
-+SRC_URI_append = " \
-+      file://0001-Add-NL_CFLAGS-to-libcommon.patch \
-+      "
-+
- EXTRA_OECONF = "--enable-ip-plugin"
- 
- SRC_URI[md5sum] = "c727b36e5a6053b15e54ecf220bd5d6b"
--- 
-1.7.4.1
+I was compiling a new image for mini2440  that contains esekeyd and I got a=
+n
+error:
 
+NOTE: Running task 2457 of 4369 (ID: 199,
+/opt/OpenEmbedded/openembedded/recipes/esekeyd/esekeyd_1.2.4.bb, do_compile=
+)
+NOTE: package esekeyd-1.2.4-r0: task do_compile: Started
+ERROR: Logfile of failure stored in:
+/opt/OpenEmbedded/build/tmp/work/armv4t-angstrom-linux-gnueabi/esekeyd-1.2.=
+4-r0/temp/log.do_compile.11553
+Log data follows:
+| + do_compile
+| + base_do_compile
+| + '[' -e Makefile -o -e makefile -o -e GNUmakefile ']'
+| + oe_runmake
+| + oenote make
+| + echo NOTE: make
+| NOTE: make
+| + make
+| make  all-recursive
+| make[1]: Entering directory
+`/opt/OpenEmbedded/build/tmp/work/armv4t-angstrom-linux-gnueabi/esekeyd-1.2=
+.4-r0/esekeyd-1.2.4'
+| Making all in src
+| make[2]: Entering directory
+`/opt/OpenEmbedded/build/tmp/work/armv4t-angstrom-linux-gnueabi/esekeyd-1.2=
+.4-r0/esekeyd-1.2.4/src'
+| arm-angstrom-linux-gnueabi-gcc -march=3Darmv4t -mtune=3Darm920t
+-mthumb-interwork -mno-thumb
+--sysroot=3D/opt/OpenEmbedded/build/tmp/sysroots/armv4t-angstrom-linux-gnue=
+abi
+-DHAVE_CONFIG_H -I. -I..     -fexpensive-optimizations -fomit-frame-pointer
+-frename-registers -O2 -ggdb2 -MT keytest.o -MD -MP -MF .deps/keytest.Tpo -=
+c
+-o keytest.o keytest.c
+| keytest.c: In function 'main':
+*| keytest.c:55:3: error: variable-sized object may not be initialized*
+| make[2]: *** [keytest.o] Error 1
+| make[2]: Leaving directory
+`/opt/OpenEmbedded/build/tmp/work/armv4t-angstrom-linux-gnueabi/esekeyd-1.2=
+.4-r0/esekeyd-1.2.4/src'
+| make[1]: *** [all-recursive] Error 1
+| make[1]: Leaving directory
+`/opt/OpenEmbedded/build/tmp/work/armv4t-angstrom-linux-gnueabi/esekeyd-1.2=
+.4-r0/esekeyd-1.2.4'
+| make: *** [all] Error 2
+| + die 'oe_runmake failed'
+| + oefatal 'oe_runmake failed'
+| + echo FATAL: 'oe_runmake failed'
+| FATAL: oe_runmake failed
+| + exit 1
+NOTE: package esekeyd-1.2.4-r0: task do_compile: Failed
+ERROR: Function 'do_compile' failed (see
+/opt/OpenEmbedded/build/tmp/work/armv4t-angstrom-linux-gnueabi/esekeyd-1.2.=
+4-r0/temp/log.do_compile.11553
+for further information)
+ERROR: Task 199 (/opt/OpenEmbedded/openembedded/recipes/esekeyd/
+esekeyd_1.2.4.bb, do_compile) failed with exit code '1'
+ERROR: '/opt/OpenEmbedded/openembedded/recipes/esekeyd/esekeyd_1.2.4.bb'
+failed
 
+In one of the Debian bug reports (
+http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D564981), they seem to sa=
+y
+that the package cannot be built using gcc-4.5, which is the version of
+arm-angstrom-linux-gnueabi-gcc that is being used to build the package.
 
+To solve this problem I added a recipe to esekeyd-1.2.7 (in attach) and now
+it's working.
+
+Best regards,
+Lu=EDs Borlido
+
+--e0cb4e43d1bb15198204a03e5fd9
+Content-Type: application/octet-stream; name="esekeyd_1.2.7.bb"
+Content-Disposition: attachment; filename="esekeyd_1.2.7.bb"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_gm6674px0
+
+REVTQ1JJUFRJT04gPSAiRVNFIEtleSBEYWVtb24iCkxJQ0VOU0UgPSAiR1BMIgpTRUNUSU9OID0g
+ImJhc2UiCkhPTUVQQUdFID0gImh0dHA6Ly93d3cuYnVyZ2hhcmR0LnBsIgoKU1JDX1VSSSA9ICJo
+dHRwOi8vd3d3LmJ1cmdoYXJkdC5wbC9maWxlcy9lc2VrZXlkLSR7UFZ9LnRhci5neiIKCmluaGVy
+aXQgYXV0b3Rvb2xzIAoKClNSQ19VUklbbWQ1c3VtXSA9ICI1OTM3YWQ2ZDc4MTVkYmM2YWI2OTgz
+NDExYTlmMzdkNCIKU1JDX1VSSVtzaGEyNTZzdW1dID0gIjU4YmRhYzk5NGJlODA1ZDljMTFiMjEw
+NjU0MjdjOGY1MzY4NGQzOGExYjQ0YmIwMmIxNzVmYzRlZTU5NGNjNTYiCg==
+
+--e0cb4e43d1bb15198204a03e5fd9--
