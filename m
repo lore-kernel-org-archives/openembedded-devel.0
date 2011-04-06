@@ -1,29 +1,22 @@
-Received: from edison.awellconnected.net ([83.167.180.132])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lukas@htc-linux.org>) id 1Q7PxC-00074W-Nc
+	(envelope-from <philb@gnu.org>) id 1Q7QFV-0007Mf-5f
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Apr 2011 12:27:14 +0200
-Received: from ip-80-226-0-1.vodafone-net.de ([80.226.0.1] helo=[10.225.88.13])
-	by edison.awellconnected.net with esmtp (Exim 4.69)
-	(envelope-from <lukas@htc-linux.org>) id 1Q7Pv4-0005bs-Bh
+	Wed, 06 Apr 2011 12:46:09 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q7QDP-0000we-Io
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Apr 2011 11:25:02 +0100
-From: Lukas-David Gorris <lukas@htc-linux.org>
+	Wed, 06 Apr 2011 12:43:59 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 06 Apr 2011 12:24:54 +0200
-Message-ID: <1302085494.2267.20.camel@computer>
+In-Reply-To: <1302085494.2267.20.camel@computer>
+References: <1302085494.2267.20.camel@computer>
+Date: Wed, 06 Apr 2011 11:43:57 +0100
+Message-ID: <1302086637.14449.353.camel@phil-desktop>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.3 
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - edison.awellconnected.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - htc-linux.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: fennec fonts too small
+Subject: Re: fennec fonts too small
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,48 +30,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Apr 2011 10:27:14 -0000
+X-List-Received-Date: Wed, 06 Apr 2011 10:46:09 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Hi,
+On Wed, 2011-04-06 at 12:24 +0200, Lukas-David Gorris wrote:
+> It tried out fennec on htcleo machine (4,2" wvga, 217 ppi specified) and
+> noticed the fonts are itsy. Maybe it would be good to install a modified
+> configuration in order to make it more usable. It's possible to set font
+> minima via about:config .
+> 
+> Should a configuration be added?
 
-It tried out fennec on htcleo machine (4,2" wvga, 217 ppi specified) and
-noticed the fonts are itsy. Maybe it would be good to install a modified
-configuration in order to make it more usable. It's possible to set font
-minima via about:config .
+I think fennec ought to be figuring this out for itself at run time.  It
+can get the screen dpi from the xserver.
 
-Should a configuration be added?
+p.
 
-If so, how?
-
-There is MACHINE_DISPLAY_{WIDTH,HEIGHT}_PIXELS. E.g. from
-conf/machine/htcleo.conf :
-MACHINE_DISPLAY_WIDTH_PIXELS = "480"
-MACHINE_DISPLAY_HEIGHT_PIXELS = "800"
-
-But it doesn't include screen size.. (dpi).
-
-There's also smallscreen GUI_MACHINE_CLASS = "smallscreen"
-
-Maybe we could make the fennec recipe read such parameters and write a
-fitting configuration file into the package if a suitable is present.
-
-
-Build Configuration:
-BB_VERSION        = "1.12.0"
-METADATA_BRANCH   = "master"
-METADATA_REVISION = "c3265b1"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "htcleo"
-DISTRO            = "shr"
-DISTRO_VERSION    = "-20110406"
-TARGET_FPU        = "hard"
-
-
-Best,
-Lukas
 
 
 
