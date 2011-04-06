@@ -1,38 +1,35 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q7N1J-0003cL-FA
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Apr 2011 09:19:18 +0200
-Received: by mail-fx0-f47.google.com with SMTP id 19so888220fxm.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q7NCg-0006oC-8U for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Apr 2011 09:31:07 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Q7NAf-0002z8-IY for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Apr 2011 09:28:57 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Apr 2011 09:28:57 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Apr 2011 00:17:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=Qjql1SCW5q21IjJR1Kh10ZKYBZQbZ+SJJgmOFbUYF38=;
-	b=v/KyNsNaYIXzTcG6pnsjtoiRBesQpsHa6SK9Srs7P7dPi/dCHK5Mh15xfNozEVSHlJ
-	skXPhgvL70Mkn6XXRgDgyjLl67PFB8JGEwUwu7GxOa/7aJCpKiECNMAvbi9fBwREM3PT
-	mJiAAthkvrmNUM0c6ElIrc+y/EIrneiUB7v60=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=GFv+CvfWi740gyyxnezAZiZey4FLvLwg58Kf643/HSpwMkds6Q94D2l4zfM52VjQY7
-	Qcb72cTZscZ9BwoEagVF8BggPG5+w6rYFBoY8TwUFXQLp8eVrDYNp92o3PjJiw7bmuxj
-	ZX6LRPb5q2oVPCPQILeLhEVA6jegk+zv78x9Y=
-Received: by 10.223.63.212 with SMTP id c20mr669873fai.37.1302074230082;
-	Wed, 06 Apr 2011 00:17:10 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id b18sm82086fak.8.2011.04.06.00.17.08
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 06 Apr 2011 00:17:09 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 06 Apr 2011 09:28:57 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Apr 2011 09:17:03 +0200
-Message-Id: <013ae010f6f5ebf5356cbe484f424b2e19a93f56.1302074016.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <cover.1302074016.git.Martin.Jansa@gmail.com>
-References: <cover.1302074016.git.Martin.Jansa@gmail.com>
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
-Subject: [PATCH 8/8] azy: disable mysql tests
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 06 Apr 2011 09:28:45 +0200
+Message-ID: <inh4nd$q7$1@dough.gmane.org>
+References: <1302016253-10390-1-git-send-email-heroor@gmail.com>	<inff89$hdg$1@dough.gmane.org>
+	<BANLkTinEDpEthJ92iS1w=wT=6Ctemum9UQ@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <BANLkTinEDpEthJ92iS1w=wT=6Ctemum9UQ@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH 1/2] ti-syslink: Add TI Syslink for TI816x and TI814x devices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,28 +43,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Apr 2011 07:19:18 -0000
+X-List-Received-Date: Wed, 06 Apr 2011 07:31:10 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/recipes-efl/efl/azy_svn.bb |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/meta-efl/recipes-efl/efl/azy_svn.bb b/meta-efl/recipes-efl/efl/azy_svn.bb
-index c7ee1f4..bd4268c 100644
---- a/meta-efl/recipes-efl/efl/azy_svn.bb
-+++ b/meta-efl/recipes-efl/efl/azy_svn.bb
-@@ -8,6 +8,8 @@ SRCREV = "${EFL_SRCREV}"
- # to provide native lemon binary
- BBCLASSEXTEND = "native"
- 
-+EXTRA_OECONF += " --disable-mysql-tests"
-+
- do_configure_prepend() {
-   sed -i "s#\./lemon#${STAGING_BINDIR_NATIVE}/lemon#g" ${S}/src/bin/Makefile.am
-   sed -i "s#\$(top_builddir)/src/bin/azy_parser -H -p -o#${STAGING_BINDIR_NATIVE}/azy_parser -H -p -o#g" ${S}/src/tests/Makefile.am
--- 
-1.7.4.1
+On 06-04-11 04:42, Siddharth Heroor wrote:
+> On Tue, Apr 5, 2011 at 9:46 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 05-04-11 17:10, Siddharth Heroor wrote:
+>>> From: Siddharth Heroor <heroor@ti.com>
+>>>
+>>> * Syslink is an Inter Processor communication layer for ARM/DSP devices.
+>>
+>> NAK!
+>>
+>> 1) This has way too much copy/paste crud from dsplink that needs to get
+>> cleaned up, some highlights:
+> Yes, I did follow precedence and use what was already present in OE.
+> 
+>>
+>>> +PROVIDES = "ti-syslink-module"
+>>> +PROVIDES += "ti-syslink-examples"
+>>> +PR_append = "j"
+>>
+>> 2) inconsistent whitespace every where, do_compile is the worst
+>>
+>> 3) This really needs to get split into 2 recipes: one for the kernel
+>> modules using module.bbclass and one for the userspace bits.
+> 
+> I can split the examples and libraries into two recipes, but we may need the
+> kernel module and libraries to be staged together. What would you suggest
+> I do to keep them together when staging?
+
+You don't need to stage the kernel modules, only the symbol map. And I
+doubt even that is necessary looking at the syslink diagrams.
+
+>> 4) The platform defines seem to be better suited for e.g. ti-paths.inc
+> 
+> Would moving all the defines into a separate ti-syslink-env.inc be good or does
+> it have to be in ti-paths.inc. I'm not keen on keep all the syslink
+> defines in ti-paths.inc
+> as its unrelated to the other recipes that use ti-paths.inc.
+
+And a related question, why is this version of syslink so convoluted
+compared to
+http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/ti/ti-syslink_git.bb
+?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNnBYtMkyGM64RGpERArn6AKCKCyr22nEDOFPTahnnhsqvvNQbWwCePna9
+AplUQiJ0epW8GZ/rzsSBoOo=
+=Jrak
+-----END PGP SIGNATURE-----
 
 
 
