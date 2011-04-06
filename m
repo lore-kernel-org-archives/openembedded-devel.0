@@ -1,37 +1,39 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail1.matrix-vision.com ([78.47.19.71])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q7RCB-0003b1-1T
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Apr 2011 13:46:47 +0200
-Received: by mail-fx0-f47.google.com with SMTP id 19so1044407fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Apr 2011 04:44:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=PMWY0LrQgpyX3Id7hbsyoudGoD5IMMwyDxC0X1mw00w=;
-	b=reZkwkH+EFM4a4h3akosY+H9DH4DhW2q6TzIPVO2VdkRDAdjYZBPY7Ks8VC6vzeURm
-	rfzCcIRsUSaPKQgXa2+HdfdQCoexC6cTtTkzdn3pwnuGWQRQaLnNqZSPlFXMC1tcHvv0
-	U7b4LNT9FEMmJYRPi3jbfgBWpy+f0y1D4IcuA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=EB9HYvpbve1QUjyUho9kOOuy0nvoNFu3jMKSCJftNeziJxr8qCcZw9JxmgzMo6oj6t
-	DdhGt42f+KD04+Sf0mtx6/opLc9pxsAiNSekG2zybn9YcaxSZTSctiqW/qf6czHYxv/Z
-	GPCDMd7Tw67Gf8fnSeD9k1p2houdrQD0T/LT0=
-Received: by 10.223.85.195 with SMTP id p3mr976930fal.0.1302090282616;
-	Wed, 06 Apr 2011 04:44:42 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 14sm51768fas.6.2011.04.06.04.44.40
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 06 Apr 2011 04:44:41 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <michael.jones@matrix-vision.de>)
+	id 1Q7V7z-0007Jt-BP; Wed, 06 Apr 2011 17:58:43 +0200
+Received: from mail1.matrix-vision.com (localhost [127.0.0.1])
+	by mail1.matrix-vision.com (Postfix) with ESMTP id CBC257213E;
+	Wed,  6 Apr 2011 17:47:16 +0200 (CEST)
+Received: from erinome (g2.matrix-vision.com [80.152.136.245])
+	by mail1.matrix-vision.com (Postfix) with ESMTPA id 8B29272119;
+	Wed,  6 Apr 2011 17:47:16 +0200 (CEST)
+Received: from erinome (localhost [127.0.0.1])
+	by erinome (Postfix) with ESMTP id D55986F8A;
+	Wed,  6 Apr 2011 17:47:15 +0200 (CEST)
+Received: by erinome (Postfix, from userid 108)
+	id C6A076F9C; Wed,  6 Apr 2011 17:47:15 +0200 (CEST)
+Received: from [192.168.65.46] (host65-46.intern.matrix-vision.de
+	[192.168.65.46]) by erinome (Postfix) with ESMTPA id ADA2D6F8A;
+	Wed,  6 Apr 2011 17:47:15 +0200 (CEST)
+Message-ID: <4D9C8B03.8080008@matrix-vision.de>
+Date: Wed, 06 Apr 2011 17:47:15 +0200
+From: Michael Jones <michael.jones@matrix-vision.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.12) Gecko/20101029 Lightning/1.0b2 Thunderbird/3.1.6
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Apr 2011 13:44:08 +0200
-Message-Id: <1302090248-16251-6-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <1302090248-16251-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1302090248-16251-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH 5/5] xf86-input-tslib: WIP, start with xserver-1.10.ABI.patch
+References: <4D832AA4.1020701@matrix-vision.de>	<AB78D48B-B478-47DF-A7CF-94FF96C313AC@dominion.thruhere.net>	<1301060302.3018.129.camel@rex>
+	<4D8CA329.10407@matrix-vision.de>	<1301064949.3018.147.camel@rex>
+	<4D8CBCA4.2070603@matrix-vision.de> <1301316136.3018.189.camel@rex>
+In-Reply-To: <1301316136.3018.189.camel@rex>
+X-MV-Disclaimer: true (erinome)
+X-AV-Checked: ClamAV using ClamSMTP (erinome)
+X-AV-Checked: ClamAV using ClamSMTP (mail1)
+Cc: koen@dominion.thruhere.net,
+	Richard Purdie <richard.purdie@linuxfoundation.org>,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] staging & using kernel headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,108 +47,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Apr 2011 11:46:47 -0000
+X-List-Received-Date: Wed, 06 Apr 2011 15:58:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-* but later dropped support for xf86-input-tslib
-* https://bugs.launchpad.net/ubuntu/+source/xf86-input-tslib/+bug/714353
+Sorry for the delay, I overlooked the last 2 replies because I was no
+longer in to: or cc:  :(
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../xf86-input-tslib/xserver-1.10.ABI.patch        |   70 ++++++++++++++++++++
- recipes/xorg-driver/xf86-input-tslib_0.0.6.bb      |    1 +
- 2 files changed, 71 insertions(+), 0 deletions(-)
- create mode 100644 recipes/xorg-driver/xf86-input-tslib/xserver-1.10.ABI.patch
+On 03/28/2011 02:42 PM, Richard Purdie wrote:
+> On Fri, 2011-03-25 at 17:02 +0100, Michael Jones wrote:
+>> On 03/25/2011 03:55 PM, Richard Purdie wrote:
+>>> On Fri, 2011-03-25 at 15:14 +0100, Michael Jones wrote:
+>>> Ok, so you only really have the options of:
+>>>
+>>> a) Use a specific patched kernel for linux-libc-headers which has these
+>>> headers in it (see below for why this is ugly)
+>>> b) Install some extra headers in "libc-headers-extras" type recipe
+>>> c) Ship default versions of the headers with your userspace and use
+>>> those if shared versions don't exist. This assumes the API is stable and
+>>> on its way to mainline.
+>>>
+>>> I don't think this is as common a requirement as you think as most
+>>> people get this kind of thing merged into the mainline kernel to try and
+>>> reduce this kind of problem.
+>>
+>> To clarify, it's not that I have a custom patched kernel I need to use.
+>>  I am following V4L2 development, so I am using a new kernel from those
+>> developers.  V4L2 changes do of course move upstream.
+> 
+> Ok, sorry, I was lacking context here.
+>  
+>>> The ugliness is where you have two different arm boards you want to
+>>> build, with a common optimisation/toolchain and each wants to redirect
+>>> linux-libc-headers to its own "special" version. The question is then,
+>>> why aren't the "special" bits in mainline.
+>>
+>> OK, so here's what I'm realizing, please correct me if I'm wrong:
+>> What I did unconventionally (ie. wrong) was to use a kernel version
+>> newer than my linux-libc-headers were.  I should create a new
+>> linux-libc-headers recipe, as I had done with the kernel recipe, and
+>> build glibc and linux-libc-headers using my 2.6.38 kernel.
+> 
+> We should *always* be using linux-libc-headers >= to the kernel version
+> being used.
 
-diff --git a/recipes/xorg-driver/xf86-input-tslib/xserver-1.10.ABI.patch b/recipes/xorg-driver/xf86-input-tslib/xserver-1.10.ABI.patch
-new file mode 100644
-index 0000000..d73a2c6
---- /dev/null
-+++ b/recipes/xorg-driver/xf86-input-tslib/xserver-1.10.ABI.patch
-@@ -0,0 +1,70 @@
-+Index: xf86-input-tslib/src/tslib.c
-+===================================================================
-+--- xf86-input-tslib/src/tslib.c	(revision 48)
-++++ xf86-input-tslib/src/tslib.c	(working copy)
-+@@ -106,7 +106,7 @@
-+ }
-+ 
-+ static Bool
-+-ConvertProc( LocalDevicePtr local,
-++ConvertProc( InputInfoPtr local,
-+ 			 int first,
-+ 			 int num,
-+ 			 int v0,
-+@@ -135,7 +135,7 @@
-+     return t;
-+ }
-+ 
-+-static void ReadInput (LocalDevicePtr local)
-++static void ReadInput (InputInfoPtr local)
-+ {
-+ 	struct ts_priv *priv = (struct ts_priv *) (local->private);
-+ 	struct ts_sample samp;
-+@@ -382,7 +382,11 @@
-+ 					       axiswidth - 1,	/* max val */
-+ 					       axiswidth,	/* resolution */
-+ 					       0,		/* min_res */
-+-					       axiswidth);	/* max_res */
-++					       axiswidth
-++#if GET_ABI_MAJOR(ABI_XINPUT_VERSION) >= 12
-++					       ,Absolute	/* max_res */
-++#endif
-++					       );
-+ 
-+ 		InitValuatorAxisStruct(device, 1,
-+ #if GET_ABI_MAJOR(ABI_XINPUT_VERSION) >= 7
-+@@ -392,7 +396,11 @@
-+ 					       axisheight - 1,	/* max val */
-+ 					       axisheight,	/* resolution */
-+ 					       0,		/* min_res */
-+-					       axisheight);	/* max_res */
-++					       axisheight       /* max_res */
-++#if GET_ABI_MAJOR(ABI_XINPUT_VERSION) >= 12
-++					       ,Absolute
-++#endif
-++					       );
-+ 
-+ 		if (InitProximityClassDeviceStruct (device) == FALSE) {
-+ 			ErrorF ("Unable to allocate EVTouch touchscreen ProximityClassDeviceStruct\n");
-+@@ -445,7 +453,7 @@
-+  * called when the module subsection is found in XF86Config
-+  */
-+ static InputInfoPtr
-+-xf86TslibInit(InputDriverPtr drv, IDevPtr dev, int flags)
-++xf86TslibInit(InputDriverPtr drv, InputInfoPtr dev, int flags)
-+ {
-+ 	struct ts_priv *priv;
-+ 	char *s;
-+@@ -455,10 +463,11 @@
-+         if (!priv)
-+                 return NULL;
-+ 
-+-	if (!(pInfo = xf86AllocateInput(drv, 0))) {
-++	if (!(pInfo = xf86AllocateInput())) {
-+ 		xfree(priv);
-+ 		return NULL;
-+ 	}
-++	xf86AddInput(drv, pInfo);
-+ 
-+ 	/* Initialise the InputInfoRec. */
-+ 	pInfo->name = dev->identifier;
-diff --git a/recipes/xorg-driver/xf86-input-tslib_0.0.6.bb b/recipes/xorg-driver/xf86-input-tslib_0.0.6.bb
-index a1cecaa..decd4a6 100644
---- a/recipes/xorg-driver/xf86-input-tslib_0.0.6.bb
-+++ b/recipes/xorg-driver/xf86-input-tslib_0.0.6.bb
-@@ -10,6 +10,7 @@ SRC_URI = "http://www.pengutronix.de/software/xf86-input-tslib/download/xf86-inp
-            file://10-x11-input-tslib.fdi \
-            file://xserver-174-XGetPointerControl.patch \
-            file://99-xf86-input-tslib.rules \
-+	   file://xserver-1.10.ABI.patch \
- "
- SRC_URI[archive.md5sum] = "b7a4d2f11637ee3fcf432e044b1d017f"
- SRC_URI[archive.sha256sum] = "5f46fdef095a6e44a69e0f0b57c7d665224b26d990d006611236d8332e85b105"
--- 
-1.7.4.1
+Isn't it the other way around?  Steffen Sledz had the opposite problem
+as me in Feb
+(http://www.mail-archive.com/openembedded-devel%40lists.openembedded.org/msg16022.html)
+because he's using a kernel older than the linux-libc-headers.  He
+quotes the kernel doc: "This means that a program built against a C
+library using older kernel headers should run on a newer kernel"
 
+> 
+>> I only stumbled upon this because the gstreamer-ti recipes were pointing
+>> at internal kernel headers, but because these are user-space apps, they
+>> should actually be using the linux-libc-headers.  Right?
+> 
+> Ideally, yes. I know under some circumstances, they might want to poke
+> into internal kernel headers but that is really a design issue that
+> needs fixing.
+> 
+> Cheers,
+> 
+> Richard
+> 
+
+-Michael
+
+
+MATRIX VISION GmbH, Talstrasse 16, DE-71570 Oppenweiler
+Registergericht: Amtsgericht Stuttgart, HRB 271090
+Geschaeftsfuehrer: Gerhard Thullner, Werner Armingeon, Uwe Furtner
 
 
