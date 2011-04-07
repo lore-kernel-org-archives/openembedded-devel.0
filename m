@@ -1,39 +1,32 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q7qb2-0007X9-TU
+	(envelope-from <Tom_Rini@mentor.com>) id 1Q7s2E-0001me-BI
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Apr 2011 16:54:08 +0200
-Received: by fxm19 with SMTP id 19so1980054fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Apr 2011 07:51:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=bLUAZ59UYmAEZ2D42TuxG8UZ5/LYBDIe0MQt64Y6jzE=;
-	b=LOmeMu45Gj+i9PmNnUqNQzl0HL5dq862cdEmFgmpRsjHq9l8OjpQxXjEjmgBpTlCCP
-	xruf49w1Yn5laJ8rkKWklH56a5d+8B4uwUkqqvW1kn+f5VGCYs7/xDe14M1mxS/EzmuP
-	4y0PKLaw3LiJS2IDRymYWJjEGI8N2srYBUACU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=ELwKMKFlkByEUWvkM6pjkqPJsmkcZO9ZTTH/RvQDVaZ3ksqPOahS85NvZ+EgRkNvZc
-	QNN2iU0f7UMNzOqE5tp4HqNg1UCl/lx4fIX99Pop9kG08RxO6Ocv/4nbh0fzMSUa2xwk
-	X078y9mLme6IK+AZca6gr8GvP6j1FUSgNrlNc=
-Received: by 10.223.15.141 with SMTP id k13mr1016047faa.30.1302187915690;
-	Thu, 07 Apr 2011 07:51:55 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id p16sm506551fax.45.2011.04.07.07.51.53
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 07 Apr 2011 07:51:54 -0700 (PDT)
-Date: Thu, 7 Apr 2011 16:51:47 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110407145147.GK30816@jama.jama.net>
-References: <inkeui$jpv$1@dough.gmane.org>
- <inkiks$c0i$1@dough.gmane.org>
+	Thu, 07 Apr 2011 18:26:18 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Q7s0B-0004w6-8d from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Apr 2011 09:24:11 -0700
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Thu, 7 Apr 2011 09:21:57 -0700
+Received: from [172.30.80.151] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
+	with Microsoft SMTP Server id 14.1.270.1;
+	Thu, 7 Apr 2011 09:24:10 -0700
+Message-ID: <4D9DE521.2090606@mentor.com>
+Date: Thu, 7 Apr 2011 09:24:01 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-In-Reply-To: <inkiks$c0i$1@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+To: <openembedded-devel@lists.openembedded.org>
+References: <inkeui$jpv$1@dough.gmane.org>
+In-Reply-To: <inkeui$jpv$1@dough.gmane.org>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 07 Apr 2011 16:21:57.0349 (UTC)
+	FILETIME=[EA56C150:01CBF53F]
 Subject: Re: [2011.03-maintenance] Pull request #13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,88 +41,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Apr 2011 14:54:09 -0000
-X-Groupsio-MsgNum: 31021
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="KjSGHOmKKB2VUiQn"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 07 Apr 2011 16:26:18 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
---KjSGHOmKKB2VUiQn
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Thu, Apr 07, 2011 at 04:44:44PM +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> On 07-04-11 15:41, Koen Kooi wrote:
-> > Tom,
-> >=20
-> > Please pull the 13 commits from here:
-> >=20
-> > URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-> > Branch: 2011.03-maintenance
-> >=20
-> >=20
-> > Koen Kooi (1):
-> >       pixman: add 0.21.6 + fixes
-> >=20
-> > Michael Jones (1):
-> >       base-files: write Angstrom as =C5ngstr=F6m in the issue file.
-> >=20
-> > Siddharth Heroor (6):
-> >       ti-sysbios: Add missing License field.
-> >       ti-sysbios: Copy installer unpack to recipe versions.
-> >       ti-sysbios: Update Installer unpack commands.
-> >       ti-sysbios: Add version 6.31.04.27.
-> >       linux-omap3: Add PSP recipe for ti816x devices.
-> >       u-boot: Add PSP version for ti816x devices.
-> >=20
-> > chase maupin (5):
-> >       linux-omap4: Add support for am45x-evm machine
-> >       u-boot: Add support for am45x-evm machine
-> >       sort: Add support for am45x-evm machine type
-> >       alsa-state: Add support for am45x-evm machine type
-> >       am45x-evm: Add am45x-evm machine configuration
-> >=20
-> > You can view the branch online at
-> > http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=3D2011.03=
--maintenance
-> >=20
-> > These are all cherry-picks[1] from .dev. The AM4x and sysbios stuff was
-> > only build tested, no proper hw on my desk yet.
->=20
-> The pixman change was runtime tested on beagle and hawk  FWIW
+On 04/07/2011 06:41 AM, Koen Kooi wrote:
+> Tom,
+> 
+> Please pull the 13 commits from here:
+> 
+> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+> Branch: 2011.03-maintenance
+> 
+> 
+> Koen Kooi (1):
+>       pixman: add 0.21.6 + fixes
+> 
+> Michael Jones (1):
+>       base-files: write Angstrom as Ångström in the issue file.
+> 
+> Siddharth Heroor (6):
+>       ti-sysbios: Add missing License field.
+>       ti-sysbios: Copy installer unpack to recipe versions.
+>       ti-sysbios: Update Installer unpack commands.
+>       ti-sysbios: Add version 6.31.04.27.
+>       linux-omap3: Add PSP recipe for ti816x devices.
+>       u-boot: Add PSP version for ti816x devices.
+> 
+> chase maupin (5):
+>       linux-omap4: Add support for am45x-evm machine
+>       u-boot: Add support for am45x-evm machine
+>       sort: Add support for am45x-evm machine type
+>       alsa-state: Add support for am45x-evm machine type
+>       am45x-evm: Add am45x-evm machine configuration
+> 
+> You can view the branch online at
+> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance
+> 
+> These are all cherry-picks[1] from .dev. The AM4x and sysbios stuff was
+> only build tested, no proper hw on my desk yet.
 
-and om-gta02, nokia900 FWIW :)
+Applied, thanks.
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->=20
-> iD8DBQFNnc3cMkyGM64RGpERAoY9AJ9VYuQelZQ1781aPAtAmiMWtY1oQACdEDLs
-> VfiVMIbYAWF37IC4LgWlv4o=3D
-> =3DFPuA
-> -----END PGP SIGNATURE-----
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---KjSGHOmKKB2VUiQn
-Content-Type: application/pgp-signature
-
+- -- 
+Tom Rini
+Mentor Graphics Corporation
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
 
-iEYEARECAAYFAk2dz4MACgkQN1Ujt2V2gBwbyACgq8mcCIeXwUe5WZY+ls6h/Opf
-4FgAoJupCvQLkKCRAWuAT6LqVxvYg/88
-=m+29
+iQEcBAEBAgAGBQJNneUaAAoJEI4NMjfc3nJxlSoIAIyB4XOwvjUwZLHZoXW5DIYV
+SBQt0w+LCaP0q9Znkhs7Y7EbEGud7tVYiV3PhIATwXw7QvkbNfcr+VIuRl5oiIpr
+pK7l0B6XXiTpzpW29k/tIIhz7m4rJHGNe78UpP0jC4Pv0/Lx9iHEdH5QRAx2NmF4
+IR7CT+5fP7o3FzXjonQllL90q70EtdJzh6ipgm5Ujh+azNf1TXzM/qKpQVHRg2DA
+gKSSRFR645N0bEMPSNCQPcvzGZ38SwEJZjgyyBgEWM37ZLlIgY04FCEDR9dBKYXk
+BTgP/ukQ0OJP1fN+XDNGPZxfR1xHyKj8iKd7cb1m3QoO9kokoIk04zEcuisMnDw=
+=V769
 -----END PGP SIGNATURE-----
 
---KjSGHOmKKB2VUiQn--
+
