@@ -1,43 +1,42 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Q7t3w-0000RE-1s
+	(envelope-from <otavio.salvador@gmail.com>) id 1Q7t4T-0000Xf-Rj
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Apr 2011 19:32:08 +0200
-Received: by wye20 with SMTP id 20so2620129wye.6
+	Thu, 07 Apr 2011 19:32:41 +0200
+Received: by wwb17 with SMTP id 17so2927943wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Apr 2011 10:29:59 -0700 (PDT)
+	Thu, 07 Apr 2011 10:30:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
 	:content-transfer-encoding;
-	bh=1UDMrb51U2fHlkI3kroTzTFy7dWiF1qygB37WfTxf6k=;
-	b=u0TWBjHa2T5YhberoYwBHMFi4RWAGYCYj8wcszZQHhGH3cLOhkW5kz6kFH/W+V38EI
-	yAQpmmoQL1QUQA24Fk1ftWcZ6oOjUGmCIzp//fHXl+EozMKf/mBinJcUvMgSMnhyG6tV
-	PkH1dpCPsb/sIINb6DC6bfYV0vFefEO1qKxMo=
+	bh=qpt4aZDaJ0hZGSsKMg4Y7J5TWyec94Qhfl8TgkSKLhU=;
+	b=GrTDqvNK9O3HBarLLSYMVtPe+MtRsBcAksuRdMkijY2A1UcazZYWV1I7JPdufYOo2I
+	h5nbTH5+RTAeN0Xz+kXte1XK0W4w0jeMbXempLnTfXCYXaGvYpVTR54kBsP1Q6aOgI37
+	jRoKotO45f7cnBG28IQQ4F6j00Eg1EXmFXqYY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
 	:content-transfer-encoding;
-	b=hd4Evzm8DS5GBvoolcSJb4ssOwsDbDNU6h/UD6NM2nLYq5mPdHr6NpbFXn8EA2YcW6
-	3FS+1pVLpd1ehOj81fTNWFhUpakALBf8K4ODJwzbnv/AiVc+L+6oQyeZ4VYy8qkPpPzE
-	5aKwWFFI+ur1ru/hngLKI45u4T0Ri7ob51oU8=
+	b=IfN55NFPhZ8Tdwfm5IfX4e2roGBEycxePTHV0IQazU8GEYDFmMnr9+C82wBETAnY5R
+	ugckwBRaotIK61LPLcq1mjHPR8a1Paf25ZK0P6TmO+v70TEpoFKbrIgVqc0rdnaH4xCP
+	0oVk05gGASuOLT0xP91bZB3cEfy4+Oe74tmPk=
 MIME-Version: 1.0
-Received: by 10.227.42.137 with SMTP id s9mr1226247wbe.8.1302197399569; Thu,
-	07 Apr 2011 10:29:59 -0700 (PDT)
+Received: by 10.227.209.137 with SMTP id gg9mr1167811wbb.124.1302197432833;
+	Thu, 07 Apr 2011 10:30:32 -0700 (PDT)
 Sender: otavio.salvador@gmail.com
-Received: by 10.216.46.207 with HTTP; Thu, 7 Apr 2011 10:29:59 -0700 (PDT)
-In-Reply-To: <1302196981.14449.444.camel@phil-desktop>
+Received: by 10.216.46.207 with HTTP; Thu, 7 Apr 2011 10:30:32 -0700 (PDT)
+In-Reply-To: <1302196878.14449.442.camel@phil-desktop>
 References: <1302182396-4171-1-git-send-email-otavio@ossystems.com.br>
 	<1302182396-4171-2-git-send-email-otavio@ossystems.com.br>
-	<1302182396-4171-3-git-send-email-otavio@ossystems.com.br>
-	<1302196981.14449.444.camel@phil-desktop>
-Date: Thu, 7 Apr 2011 14:29:59 -0300
-X-Google-Sender-Auth: SF-PoIERsP5EHELuyD8JeUyMJCY
-Message-ID: <BANLkTikbZgOi7r_rOkovffHQPiXcHMrMAg@mail.gmail.com>
+	<1302196878.14449.442.camel@phil-desktop>
+Date: Thu, 7 Apr 2011 14:30:32 -0300
+X-Google-Sender-Auth: 9wUWwYUJtcFbHM2TWyP15VrLSRA
+Message-ID: <BANLkTin4_zGipzvY7=Tr9NdFrvV2mr+i3Q@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: Phil Blundell <philb@gnu.org>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/6] conf/bitbake: improve compression image handling
+Subject: Re: [PATCH 1/6] udev (165): move ConsoleKit support to udev-consolekit package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,23 +50,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Apr 2011 17:32:08 -0000
+X-List-Received-Date: Thu, 07 Apr 2011 17:32:42 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 7, 2011 at 14:23, Phil Blundell <philb@gnu.org> wrote:
+On Thu, Apr 7, 2011 at 14:21, Phil Blundell <philb@gnu.org> wrote:
 > On Thu, 2011-04-07 at 13:19 +0000, Otavio Salvador wrote:
->> =A0XZ_COMPRESSION_LEVEL ?=3D "-e -9"
->> =A0LZMA_COMPRESSION_LEVEL ?=3D "-e -9"
->> +GZIP_COMPRESSION_LEVEL ?=3D "-9"
->> +BZIP2_COMPRESSION_LEVEL ?=3D "-9"
+>> -PACKAGES =3D+ "libudev libgudev udev-utils"
+>> +PACKAGES =3D+ "libudev libgudev udev-utils udev-consolekit"
+>>
+>> =A0FILES_libudev =3D "${base_libdir}/libudev.so.*"
+>> =A0FILES_libgudev =3D "${base_libdir}/libgudev*.so.*"
+>> @@ -84,7 +84,8 @@ FILES_${PN}-dbg +=3D "${usrbindir}/.debug ${usrsbindir=
+}/.debug"
+>>
+>> =A0# udev installs binaries under $(udev_prefix)/lib/udev, even if ${lib=
+dir}
+>> =A0# is ${prefix}/lib64
+>> -FILES_${PN} +=3D "/lib/udev* ${libdir}/ConsoleKit"
+>> +FILES_${PN} +=3D "/lib/udev*"
+>> +FILES_${PN}-consokekit +=3D "${libdir}/ConsoleKit"
 >
-> It seems a bit sad to have to keep adding new vars to the global
-> configuration set (and hence parse them for every single recipe) every
-> time someone wants to tweak a new compression format. =A0Can we not just
-> have a single IMAGE_COMPRESSION_LEVEL that does for everything?
+> Did you test this patch? =A0Surely the line above should read
+> "${PN}-consolekit" otherwise it won't match anything.
 
-For me it doesn't matter; I can add it if preferred.
+I did but probably did a mistake when rebasing it; will fix it.
 
 --=20
 Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
