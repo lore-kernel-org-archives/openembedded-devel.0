@@ -1,33 +1,44 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mark.hatle@windriver.com>) id 1Q7tPQ-0005I5-31
+	(envelope-from <neil@gumstix.com>) id 1Q7u9M-00067S-Ic
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Apr 2011 19:54:36 +0200
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb [147.11.189.41])
-	by mail.windriver.com (8.14.3/8.14.3) with ESMTP id p37HqAiX016716
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 07 Apr 2011 20:41:49 +0200
+Received: from homiemail-a12.g.dreamhost.com (caiajhbdcbbj.dreamhost.com
+	[208.97.132.119])
+	by hapkido.dreamhost.com (Postfix) with ESMTP id 2B44217BBD1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 7 Apr 2011 10:52:11 -0700 (PDT)
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.1.73]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.01.0255.000;
-	Thu, 7 Apr 2011 10:52:10 -0700
-From: "Hatle, Mark" <mark.hatle@windriver.com>
-To: "<openembedded-devel@lists.openembedded.org>"
-	<openembedded-devel@lists.openembedded.org>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] Yocto project video
-Thread-Index: AQHL9IZlFPcn+Y/5mEWqMovwuC915pRTIx0A//+M3rk=
-Date: Thu, 7 Apr 2011 17:52:09 +0000
-Message-ID: <A36AA2D6-5A55-47C3-AA1B-25EC101CA046@windriver.com>
-References: <4D9CAD27.4050106@balister.org>,
-	<1302198254.23237.4.camel@mattotaupa>
-In-Reply-To: <1302198254.23237.4.camel@mattotaupa>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
+	Thu,  7 Apr 2011 11:39:41 -0700 (PDT)
+Received: from homiemail-a12.g.dreamhost.com (localhost [127.0.0.1])
+	by homiemail-a12.g.dreamhost.com (Postfix) with ESMTP id 525FF714070
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 Apr 2011 11:39:38 -0700 (PDT)
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gumstix.com; h=message-id:date
+	:from:mime-version:to:subject:content-type:
+	content-transfer-encoding; q=dns; s=gumstix.com; b=nTpxIn7wEmfZY
+	kHBZpP62FVHIDbEpMCEcCzuUg2FOfsvOPFwsPhu+BnNN6VMlGhzEYMBcPdnh+aA+
+	aBP290ALFZRsmsckDjx2/eZNfxvlcwbijlJm8i3Jjzt9AcAwEFtJ8smWpsqKPIYQ
+	o4eZNRKY9FrBoYjgLCGtg/b2+2eu7Q=
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=gumstix.com; h=message-id
+	:date:from:mime-version:to:subject:content-type:
+	content-transfer-encoding; s=gumstix.com; bh=QcgbRv5cS2srFUt1HyF
+	DpIGS5VY=; b=BwaXImDma5Y6qgcS8OhYESPz7Gim3+pYUEbIpd5uVYCgfioTNE1
+	RElfo8zIwdTSqylkC/3GDy4AzLRyM7IpXrA2mixG0f11RtXhqKiF3sVh7ve2Pemb
+	HKsAxbG/g0dE1seYrOFICbzdceS3lFnkfqy2VnT+17MeYd6Aznlg6Aj0=
+Received: from [10.0.1.35] (s64-180-61-141.bc.hsia.telus.net [64.180.61.141])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: neil@gumstix.com)
+	by homiemail-a12.g.dreamhost.com (Postfix) with ESMTPSA id 32385714060
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 Apr 2011 11:39:38 -0700 (PDT)
+Message-ID: <4D9E04ED.4000102@gumstix.com>
+Date: Thu, 07 Apr 2011 11:39:41 -0700
+From: Neil MacMunn <neil@gumstix.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
 MIME-Version: 1.0
-Subject: Re: Yocto project video
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Portmap Install Permissions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,60 +52,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Apr 2011 17:54:40 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 07 Apr 2011 18:41:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+
+I recently switched to angstrom-2010.x and now I'm running into what 
+appears to be a permissions issue.
+
+> neil@cumulus:~/overo-oe/org.openembedded.dev$ bitbake omap3-desktop-image
+> <snip>
+> | ERROR: Function 'do_install' failed (see /home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/portmap-6.0-r5/temp/log.do_install.10931 for further information)
+> | + cd /home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/portmap-6.0-r5/portmap_6.0/
+> | + do_install
+> | + install -d /home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/portmap-6.0-r5/image/usr/share/man/man8/ /home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/portmap-6.0-r5/image/sbin /home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/portmap-6.0-r5/image/etc/init.d
+> | + install -m 0755 /home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/portmap-6.0-r5/portmap.init /home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/portmap-6.0-r5/image/etc/init.d/portmap
+> | + oe_runmake install DESTDIR=/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/portmap-6.0-r5/image
+> | + oenote make -e MAKEFLAGS= install DESTDIR=/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/portmap-6.0-r5/image
+> | + echo NOTE: 'make -e MAKEFLAGS= install DESTDIR=/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/portmap-6.0-r5/image'
+> | NOTE: make -e MAKEFLAGS= install DESTDIR=/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/portmap-6.0-r5/image
+> | + make -e MAKEFLAGS= install DESTDIR=/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/portmap-6.0-r5/image
+> | install -o root -g root -m 0755 portmap /home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/portmap-6.0-r5/image/sbin
+> | install: cannot change ownership of `/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/portmap-6.0-r5/image/sbin/portmap': Operation not permitted
+> | make: *** [install] Error 1
+> | + die 'oe_runmake failed'
+> | + oefatal 'oe_runmake failed'
+> | + echo FATAL: 'oe_runmake failed'
+> | FATAL: oe_runmake failed
+> | + exit 1
+> <snip>
+
+ls -la in the destination directory gives
+> -rw------- 1 neil neil 90441 2011-04-07 08:38 portmap
+
+The portmap recipe doesn't appear to have changed. I tried changing the 
+permissions and owner manually and it demanded credentials. How 
+does(did) it get away with changing the file owner and group? Does the 
+install step use chown?
+
+Thanks.
+--
+Neil
 
 
-
-
-
-On Apr 7, 2011, at 10:44 AM, "Paul Menzel" <paulepanter@users.sourceforge.n=
-et> wrote:
-
-> Am Mittwoch, den 06.04.2011, 11:12 -0700 schrieb Philip Balister:
->> For your amusement:
->>=20
->> http://www.yoctoproject.org/
->>=20
->> Please note, the audience is non-technical people, not us :) We already=
-=20
->> know how to build embedded systems.
->>=20
->> I thought the video did a good job of presenting the larger goals of the=
-=20
->> Yocto Project.
->=20
-> Yes, I like this video. Thank you for sharing it.
->=20
-> I did not understand the one thing though on how it is easy to choose a
-> commercial Linux distribution? Which one do they mean and can they
-> handle BitBake recipes? Or what did they mean?
->=20
-
-"they" want a clear transition from a build system and recipe set to a comm=
-ercially supported Eco system of OSVs.
-
-They being semiconductor manufacturers, OSVs, product integrators, etc.... =
-Historically the problem has been that someone will start a prototype with =
-a semiconductor (or open source) system.. They then decide to build a devic=
-e and look for commercial support... At which point they generally have to =
-start over once they choose their support partner.
-
-With Yocto, if you start with the open source version and layers, you can t=
-hen have a clear known path to a commercial service contract with a more cl=
-ear expectation of what can or can not be reused.
-
-That's the theory, we hope we can make it a reality.
-
->=20
-> Thanks,
->=20
-> Paul
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
