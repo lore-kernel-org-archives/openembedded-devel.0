@@ -1,35 +1,40 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Q7pAD-00027A-6k
+	(envelope-from <otavio.salvador@gmail.com>) id 1Q7pAE-00027E-5n
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Apr 2011 15:22:21 +0200
-Received: by gxk3 with SMTP id 3so462376gxk.6
+	Thu, 07 Apr 2011 15:22:22 +0200
+Received: by gwb11 with SMTP id 11so809406gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Apr 2011 06:20:10 -0700 (PDT)
+	Thu, 07 Apr 2011 06:20:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:sender:from:to:subject:date:message-id:x-mailer; 
-	bh=fD9u8WCs/ZFpHk1H1a94DRMZUz5sIejaQTV0qWfE6u8=;
-	b=UaFXRHeitZYN7Q/2c1cVaAFvxTCP/jNLhiUpeZmJx+lkR6Us2WQF7lA7AFMa4uhERC
-	WS5rcEYN222jo1lMlWfiaoH3LCAjUBYBx53PFpf+1mgT88TSbpFRsPKcEqjJkNgBsvsU
-	wDh9fUC471KS/G3a8NdvnIjcxn/aM9Ow5PB+c=
+	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
+	:x-mailer:in-reply-to:references;
+	bh=6eFJwYho3Vg7SUv6HC8uFl0+xtYYHkXh2a89PPSK1As=;
+	b=QVHsNIWqExC7Tb9wc9fGWiVqABAFlhRdW2vpzIgJaPSBJf+iXlNdJutreuLzOBKe/s
+	HeI4COjexqzG8Rjsk/4OfwK/zcYmq1WwIRoBiv6rX7Jrl9SmaKTn0lWPjgAwGAzgq+ZO
+	0vdU9tp4sGo6FNd5wg+eBW56QMMC9FtowGz5w=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer;
-	b=DuNA3szmbe2ZLhq0Xkc4rxMD2ajxxtpsWETg7STqsfSYR7JcOwQtIiAwjIAH8M2Mjb
-	nu06KAViQu6ZTCbfIopE2qdWiob8apHWgNszvVxV44zcD2hAbBrrMt1FMdsnpazmXlN4
-	Oz7uwK/6EOZwoKo0kbTZyQe84rfaQoQCndtpU=
-Received: by 10.236.116.40 with SMTP id f28mr1117601yhh.314.1302182410597;
-	Thu, 07 Apr 2011 06:20:10 -0700 (PDT)
+	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references;
+	b=GjyRFD1jlypaOIyX7C+ra987v5k+7hzi0t7EEQahvuRoifmd4gZyriVoAnGLfCkIHT
+	ZiY9eZ6LtmoQce5Z/Juwe99MsW3k/0ZmhzSfIsGrjKoth98QxSaO7w/taohc7gGcWa4i
+	l3NsbwnAZb3IakMevpjqmd99kdNwtY7lm9j/8=
+Received: by 10.236.141.37 with SMTP id f25mr1109940yhj.113.1302182413726;
+	Thu, 07 Apr 2011 06:20:13 -0700 (PDT)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id l43sm726453yhn.36.2011.04.07.06.20.08
+	by mx.google.com with ESMTPS id l43sm726453yhn.36.2011.04.07.06.20.10
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 07 Apr 2011 06:20:09 -0700 (PDT)
+	Thu, 07 Apr 2011 06:20:11 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Apr 2011 13:19:50 +0000
-Message-Id: <1302182396-4171-1-git-send-email-otavio@ossystems.com.br>
+Date: Thu,  7 Apr 2011 13:19:51 +0000
+Message-Id: <1302182396-4171-2-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.3
-Subject: [PATCH 0/6] Patchset for pushing into master
+In-Reply-To: <1302182396-4171-1-git-send-email-otavio@ossystems.com.br>
+References: <1302182396-4171-1-git-send-email-otavio@ossystems.com.br>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [PATCH 1/6] udev (165): move ConsoleKit support to udev-consolekit package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,15 +48,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Apr 2011 13:22:21 -0000
+X-List-Received-Date: Thu, 07 Apr 2011 13:22:22 -0000
 
-Hello,
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ recipes/udev/udev_165.bb |    7 ++++---
+ 1 files changed, 4 insertions(+), 3 deletions(-)
 
-Here goes our current patchset that is ready for pushing into
-master. Please review and apply those that fit your quality
-requirements ;-)
-
-Att,
+diff --git a/recipes/udev/udev_165.bb b/recipes/udev/udev_165.bb
+index d426aff..822891f 100644
+--- a/recipes/udev/udev_165.bb
++++ b/recipes/udev/udev_165.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
+ the hotplug package and requires a kernel not older than 2.6.12."
+ LICENSE = "GPLv2+"
+ 
+-PR = "r3"
++PR = "r4"
+ 
+ # Untested
+ DEFAULT_PREFERENCE = "-1"
+@@ -71,7 +71,7 @@ EXTRA_OECONF += " --with-udev-prefix= \
+ INITSCRIPT_NAME = "udev"
+ INITSCRIPT_PARAMS = "start 03 S ."
+ 
+-PACKAGES =+ "libudev libgudev udev-utils"
++PACKAGES =+ "libudev libgudev udev-utils udev-consolekit"
+ 
+ FILES_libudev = "${base_libdir}/libudev.so.*"
+ FILES_libgudev = "${base_libdir}/libgudev*.so.*"
+@@ -84,7 +84,8 @@ FILES_${PN}-dbg += "${usrbindir}/.debug ${usrsbindir}/.debug"
+ 
+ # udev installs binaries under $(udev_prefix)/lib/udev, even if ${libdir}
+ # is ${prefix}/lib64
+-FILES_${PN} += "/lib/udev* ${libdir}/ConsoleKit"
++FILES_${PN} += "/lib/udev*"
++FILES_${PN}-consokekit += "${libdir}/ConsoleKit"
+ FILES_${PN}-dbg += "/lib/udev/.debug"
+ 
+ RPROVIDES_udev_append = " udev-compat-wrapper"
+-- 
+1.7.2.3
 
 
 
