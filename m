@@ -1,31 +1,16 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mrsl.grasp.upenn.edu ([158.130.53.11] helo=morwong)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kartikmohta@gmail.com>) id 1Q7ass-0003BN-H6
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Apr 2011 00:07:30 +0200
-Received: by iye7 with SMTP id 7so2036272iye.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Apr 2011 15:05:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:from:date:message-id:subject:to
-	:content-type; bh=MQKoxmLxpwQz3FCxY1vVPB0DUsHGjqf6grbcfzU6WRo=;
-	b=wlUSJEJpglYbBDHUG97f8Q8Z2uKNf8ziKWO3yD4e9m8tMECghqB5MGuFs8NQcTKdDg
-	KdJCVNOQ+YrPeMQbPUQSngYcdOW8odDZseJ7f8/C9QhOqSOgycJejA6BnKnAAo2qlk56
-	xFAvHRo4ZizvYifbuS8ezXZsRqu2uXPotl3R0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=gZlIFUdG4dTcumjjAEVJo4DO8XNj3XJQhtaDNstlA7VXi+SFIfG4i1ayBAFTUs0GcW
-	LrYamGNDGJbTWi6YthReNJGfGHZm/bn/y0fdLlc+CT4Xao/hQjBkfaT+QQY30HLCvGpN
-	kjXGBv4qzrX2R8EpRKDgp+HxKrFnTZDPeMJkk=
-Received: by 10.43.48.131 with SMTP id uw3mr151738icb.405.1302127522442; Wed,
-	06 Apr 2011 15:05:22 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.42.222.135 with HTTP; Wed, 6 Apr 2011 15:04:57 -0700 (PDT)
+	(envelope-from <kartikmohta@morwong.mrsl.grasp.upenn.edu>)
+	id 1Q7dyx-0006BH-CZ for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Apr 2011 03:25:59 +0200
+Received: by morwong (Postfix, from userid 1000)
+	id 0C820A6140; Wed,  6 Apr 2011 21:14:07 -0400 (EDT)
 From: Kartik Mohta <kartikmohta@gmail.com>
-Date: Wed, 6 Apr 2011 18:04:57 -0400
-Message-ID: <BANLkTimPVgqbjMhJnBcniZgJBbRd_1D8yQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: python-distutils_2.6.6: config/Makefile contains sysroot
+Date: Wed,  6 Apr 2011 21:14:06 -0400
+Message-Id: <1302138846-5819-1-git-send-email-kartikmohta@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] Adding mercurial v1.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,29 +24,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Apr 2011 22:07:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 07 Apr 2011 01:25:59 -0000
 
-The Makefile (in /usr/lib/python2.6/config) used by distutils to
-compile modules contains the original sysroot used while compiling
-Python on the host:
+Haven't updated the native version since it requires python-docutils for
+which we don't have a native recipe.
 
-CC=        arm-angstrom-linux-gnueabi-gcc -march=armv7-a
--mtune=cortex-a8 -mfpu=neon -mfloat-abi=hard -mthumb-interwork
--mno-thumb --sysroot=/home/kartikmohta/overo-oe/tmp/sysroots/armv7a-hardfp-angstrom-linux-gnueabi
-CXX=       arm-angstrom-linux-gnueabi-g++ -march=armv7-a
--mtune=cortex-a8 -mfpu=neon -mfloat-abi=hard -mthumb-interwork
--mno-thumb --sysroot=/home/kartikmohta/overo-oe/tmp/sysroots/armv7a-hardfp-angstrom-linux-gnueabi
+Signed-off-by: Kartik Mohta <kartikmohta@gmail.com>
+---
+ .../mercurial/mercurial-1.8.2/python_inc_dir.patch |   11 +++++++++++
+ recipes/mercurial/mercurial_1.8.2.bb               |   20 ++++++++++++++++++++
+ 2 files changed, 31 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/mercurial/mercurial-1.8.2/python_inc_dir.patch
+ create mode 100644 recipes/mercurial/mercurial_1.8.2.bb
 
-This leads to the following error when compiling modules using distutils:
-/usr/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
-this linker was not configured to use sysroots
-
-
-Can these sysroot arguments be removed in the do_install_append() step
-using a simple sed script?
-
+diff --git a/recipes/mercurial/mercurial-1.8.2/python_inc_dir.patch b/recipes/mercurial/mercurial-1.8.2/python_inc_dir.patch
+new file mode 100644
+index 0000000..7b651be
+--- /dev/null
++++ b/recipes/mercurial/mercurial-1.8.2/python_inc_dir.patch
+@@ -0,0 +1,11 @@
++--- mercurial-1.8.2/setup.py~	2011-04-06 20:29:35.576828632 -0400
+++++ mercurial-1.8.2/setup.py	2011-04-06 20:29:07.869694480 -0400
++@@ -254,7 +254,7 @@
++                     self.py_modules.append("mercurial.pure.%s" % ext.name[10:])
++             self.distribution.ext_modules = []
++         else:
++-            if not os.path.exists(os.path.join(get_python_inc(), 'Python.h')):
+++            if not os.path.exists(os.path.join(get_python_inc(plat_specific = True), 'Python.h')):
++                 raise SystemExit("Python headers are required to build Mercurial")
++ 
++     def find_modules(self):
+diff --git a/recipes/mercurial/mercurial_1.8.2.bb b/recipes/mercurial/mercurial_1.8.2.bb
+new file mode 100644
+index 0000000..26c10aa
+--- /dev/null
++++ b/recipes/mercurial/mercurial_1.8.2.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "The Mercurial distributed SCM"
++HOMEPAGE = "http://mercurial.selenic.com/"
++SECTION = "console/utils"
++LICENSE = "GPLv2"
++DEPENDS = "python python-docutils"
++PR = "r0"
++
++SRC_URI = "http://mercurial.selenic.com/release/mercurial-${PV}.tar.gz;name=src \
++           file://python_inc_dir.patch \
++          "
++SRC_URI[src.md5sum] = "a1634b9b709ecc70662f3257abece2c7"
++SRC_URI[src.sha256sum] = "d326be6a5d8d9d39bfab1cadd4d8fd64937ba7c217dfbcba1f83e5026c57b041"
++
++S = "${WORKDIR}/mercurial-${PV}"
++
++inherit distutils
++
++FILES_${PN}-dbg="${libdir}/python2.6/site-packages/mercurial/.debug \
++                 ${libdir}/python2.6/site-packages/hgext/inotify/linux/.debug \
++                "
 -- 
-Kartik
+1.7.1
+
 
 
