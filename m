@@ -1,35 +1,34 @@
-Received: from mail-px0-f178.google.com ([209.85.212.178])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Q7xjA-00013v-9i
+	(envelope-from <Tom_Rini@mentor.com>) id 1Q7yym-0002E4-5w
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Apr 2011 00:31:00 +0200
-Received: by pxi1 with SMTP id 1so1561952pxi.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Apr 2011 15:28:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=03XfZreXbe2fJdIxz73BSi4GwyE65tamaEmgLDQpctI=;
-	b=QZXPL0YgKUG3REviZO5BVKXsIfebJSnzgr0+DRzglnXzyz0NLqg1jCmu2KDD7sO2AJ
-	OSoNa2b/uf+K4ZC8REZCmL4eQr3ebtDmhOeHu8Lkq2o7BK7VlfHj7nSXqqaSzieuvkTJ
-	WT2vKJOukkZkhxUQ5CIIeLoub9lJ6O6RZVYsc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=r34OS9EMIJwB1rvTXTXQvqLa7+W8hH2kHnO0J4jZW24doi3WH2nupxPqTmewpg3xqC
-	4mdtAzQnvJI6aeIripnPLHu0Ihw+8gZQkjY9+HZm1vh2u/2hRp39ZvPUNcfh23gPnc4c
-	9t36InfxeEPguY85oNqiXDzEFKP0U73NFaOxs=
-Received: by 10.142.7.10 with SMTP id 10mr1063934wfg.390.1302215331082;
-	Thu, 07 Apr 2011 15:28:51 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id x11sm2753140wfd.13.2011.04.07.15.28.49
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 07 Apr 2011 15:28:49 -0700 (PDT)
-From: raj.khem@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Apr 2011 15:28:44 -0700
-Message-Id: <1302215324-29971-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-Subject: [meta-oe][PATCH] gcc-4.5.inc: Compile gcc runtime stuff always in ARM mode for arm
+	Fri, 08 Apr 2011 01:51:12 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Q7ywj-0001aJ-0N from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Apr 2011 16:49:05 -0700
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Thu, 7 Apr 2011 16:46:49 -0700
+Received: from [172.30.80.151] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
+	with Microsoft SMTP Server id 14.1.270.1;
+	Thu, 7 Apr 2011 16:49:04 -0700
+Message-ID: <4D9E4D66.1000701@mentor.com>
+Date: Thu, 7 Apr 2011 16:48:54 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1302182396-4171-1-git-send-email-otavio@ossystems.com.br>	<1302182396-4171-2-git-send-email-otavio@ossystems.com.br>	<1302182396-4171-3-git-send-email-otavio@ossystems.com.br>	<1302196981.14449.444.camel@phil-desktop>
+	<BANLkTikbZgOi7r_rOkovffHQPiXcHMrMAg@mail.gmail.com>
+In-Reply-To: <BANLkTikbZgOi7r_rOkovffHQPiXcHMrMAg@mail.gmail.com>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 07 Apr 2011 23:46:49.0490 (UTC)
+	FILETIME=[10183F20:01CBF57E]
+Subject: Re: [PATCH 2/6] conf/bitbake: improve compression image	handling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,41 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Apr 2011 22:31:00 -0000
+X-List-Received-Date: Thu, 07 Apr 2011 23:51:12 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
-From: Khem Raj <raj.khem@gmail.com>
+On 04/07/2011 10:29 AM, Otavio Salvador wrote:
+> On Thu, Apr 7, 2011 at 14:23, Phil Blundell <philb@gnu.org> wrote:
+>> On Thu, 2011-04-07 at 13:19 +0000, Otavio Salvador wrote:
+>>>  XZ_COMPRESSION_LEVEL ?= "-e -9"
+>>>  LZMA_COMPRESSION_LEVEL ?= "-e -9"
+>>> +GZIP_COMPRESSION_LEVEL ?= "-9"
+>>> +BZIP2_COMPRESSION_LEVEL ?= "-9"
+>>
+>> It seems a bit sad to have to keep adding new vars to the global
+>> configuration set (and hence parse them for every single recipe) every
+>> time someone wants to tweak a new compression format.  Can we not just
+>> have a single IMAGE_COMPRESSION_LEVEL that does for everything?
+> 
+> For me it doesn't matter; I can add it if preferred.
 
-Some distros e.g. SHR uses thumb1 for armv4t and armv5t
-so we need to make sure that in such cases libgcc is compiled
-in ARM mode
+Why are we even tweaking gzip/bzip2?  XZ/LZMA can have serious tradeoffs
+at higher levels but I thought for bzip2/gzip it was either do it or no
+compression, not "turn it down a little bit".
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Tested-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-devtools/gcc/gcc-4.5.inc |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
-
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.5.inc b/meta-oe/recipes-devtools/gcc/gcc-4.5.inc
-index b510650..519a1e7 100644
---- a/meta-oe/recipes-devtools/gcc/gcc-4.5.inc
-+++ b/meta-oe/recipes-devtools/gcc/gcc-4.5.inc
-@@ -1,4 +1,5 @@
- require recipes-devtools/gcc/gcc-common.inc
-+ARM_INSTRUCTION_SET = "arm"
- 
- DEPENDS =+ "mpfr gmp libmpc elfutils"
- NATIVEDEPS = "mpfr-native gmp-native gettext-native libmpc-native elfutils-native"
-@@ -14,7 +15,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
- 
- SRCREV = "170880"
- PV = "4.5"
--INC_PR = "r34"
-+INC_PR = "r35"
- 
- # BINV should be incremented after updating to a revision
- # after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
 -- 
-1.7.4.1
-
+Tom Rini
+Mentor Graphics Corporation
 
 
