@@ -1,34 +1,31 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Q7yym-0002E4-5w
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Apr 2011 01:51:12 +0200
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Q7ywj-0001aJ-0N from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Apr 2011 16:49:05 -0700
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Thu, 7 Apr 2011 16:46:49 -0700
-Received: from [172.30.80.151] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
-	with Microsoft SMTP Server id 14.1.270.1;
-	Thu, 7 Apr 2011 16:49:04 -0700
-Message-ID: <4D9E4D66.1000701@mentor.com>
-Date: Thu, 7 Apr 2011 16:48:54 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+	(envelope-from <cdhmanning@gmail.com>) id 1Q7z1L-0002Jt-TQ
+	for Openembedded-devel@lists.openembedded.org;
+	Fri, 08 Apr 2011 01:53:51 +0200
+Received: by fxm19 with SMTP id 19so2347273fxm.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Apr 2011 16:51:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=iFd3YuBg7MJnPfzvf6YnMDqaCd2y+VlorA2swjuQ61E=;
+	b=I+PtHZRpI5MDxgsX9qD9Z/B8Kt32EJQFXd10ZqyrxZ5PR97CWGnoa6AijO4besV+ND
+	NOeK1k0Vv11pslNT0qlSCj7LslFrhxPs339JoZLK1L2133vbumB+Qb+IOVeoFxX5XUs4
+	DPkv0fphhj0jhP6KdDeERzBdSIe0tjmREmaK4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=EsQk64W3HcU/QceIuFkliijYap0Hz6AqmiWoVd6wEMfh60r05XYiZRFlgqasB/mw8b
+	5uMWcuo94jYOumodd0d+CSbKY4NYdkf8+JAowAltkjPHrIGAgW7xYbFHZGrKUwtMLYxy
+	QuJFDCC7EPW+nda5KegyGWBCggNskvPR7y2/0=
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1302182396-4171-1-git-send-email-otavio@ossystems.com.br>	<1302182396-4171-2-git-send-email-otavio@ossystems.com.br>	<1302182396-4171-3-git-send-email-otavio@ossystems.com.br>	<1302196981.14449.444.camel@phil-desktop>
-	<BANLkTikbZgOi7r_rOkovffHQPiXcHMrMAg@mail.gmail.com>
-In-Reply-To: <BANLkTikbZgOi7r_rOkovffHQPiXcHMrMAg@mail.gmail.com>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 07 Apr 2011 23:46:49.0490 (UTC)
-	FILETIME=[10183F20:01CBF57E]
-Subject: Re: [PATCH 2/6] conf/bitbake: improve compression image	handling
+Received: by 10.223.161.194 with SMTP id s2mr1541500fax.143.1302220303741;
+	Thu, 07 Apr 2011 16:51:43 -0700 (PDT)
+Received: by 10.223.75.202 with HTTP; Thu, 7 Apr 2011 16:51:43 -0700 (PDT)
+Date: Fri, 8 Apr 2011 11:51:43 +1200
+Message-ID: <BANLkTimXZfFJORrAqT9JO1hHVGWenjAfAA@mail.gmail.com>
+From: Charles Manning <cdhmanning@gmail.com>
+To: Openembedded-devel@lists.openembedded.org
+Subject: How do I install python modules for use within recipes?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,31 +39,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Apr 2011 23:51:12 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 07 Apr 2011 23:53:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 04/07/2011 10:29 AM, Otavio Salvador wrote:
-> On Thu, Apr 7, 2011 at 14:23, Phil Blundell <philb@gnu.org> wrote:
->> On Thu, 2011-04-07 at 13:19 +0000, Otavio Salvador wrote:
->>>  XZ_COMPRESSION_LEVEL ?= "-e -9"
->>>  LZMA_COMPRESSION_LEVEL ?= "-e -9"
->>> +GZIP_COMPRESSION_LEVEL ?= "-9"
->>> +BZIP2_COMPRESSION_LEVEL ?= "-9"
->>
->> It seems a bit sad to have to keep adding new vars to the global
->> configuration set (and hence parse them for every single recipe) every
->> time someone wants to tweak a new compression format.  Can we not just
->> have a single IMAGE_COMPRESSION_LEVEL that does for everything?
-> 
-> For me it doesn't matter; I can add it if preferred.
+Hi
 
-Why are we even tweaking gzip/bzip2?  XZ/LZMA can have serious tradeoffs
-at higher levels but I thought for bzip2/gzip it was either do it or no
-compression, not "turn it down a little bit".
+I have a project which uses python as part of the building process to
+generate some C code from some XML which is then later compiled.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+The python script uses the python lxml module.
+
+My recipe has a do_compile as follows:
+
+do_compile() {
+	cd ${S}/
+	make -f Gencode.mk
+	make
+}
+
+During the make -f Gencode.mk, the python script which imports lxml
+fails to do so and fails.
+
+Question: How do I instruct OE to set up the lxml module and make it
+available here?
+
+Thanks
+
+Charles
 
 
