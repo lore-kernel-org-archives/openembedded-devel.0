@@ -1,42 +1,47 @@
 Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Q7t4T-0000Xf-Rj
+	(envelope-from <otavio.salvador@gmail.com>) id 1Q7t7r-0000ps-5N
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Apr 2011 19:32:41 +0200
-Received: by wwb17 with SMTP id 17so2927943wwb.24
+	Thu, 07 Apr 2011 19:36:11 +0200
+Received: by wwb17 with SMTP id 17so2930658wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Apr 2011 10:30:33 -0700 (PDT)
+	Thu, 07 Apr 2011 10:34:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
 	:content-transfer-encoding;
-	bh=qpt4aZDaJ0hZGSsKMg4Y7J5TWyec94Qhfl8TgkSKLhU=;
-	b=GrTDqvNK9O3HBarLLSYMVtPe+MtRsBcAksuRdMkijY2A1UcazZYWV1I7JPdufYOo2I
-	h5nbTH5+RTAeN0Xz+kXte1XK0W4w0jeMbXempLnTfXCYXaGvYpVTR54kBsP1Q6aOgI37
-	jRoKotO45f7cnBG28IQQ4F6j00Eg1EXmFXqYY=
+	bh=9ycvEhzgZxljHL0iJh2it97+3tAZrUMSgWdEZ8VvaVc=;
+	b=p4GiDyFVOvoYIbTkMs4lY55X4VkSga4ZG/KYMumSB5uB06rNEW785duUl5yf/KuLdO
+	d3sAqrCVoHWghpNG/JQPuMHFFuNsEiUMcYl/EOk60lQxwWogQLKvtyrVadjLGgCfUm6u
+	Q5574gXN/OreZm7TIKJpuJ39R01UeHE6Mb8Ho=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
 	:content-transfer-encoding;
-	b=IfN55NFPhZ8Tdwfm5IfX4e2roGBEycxePTHV0IQazU8GEYDFmMnr9+C82wBETAnY5R
-	ugckwBRaotIK61LPLcq1mjHPR8a1Paf25ZK0P6TmO+v70TEpoFKbrIgVqc0rdnaH4xCP
-	0oVk05gGASuOLT0xP91bZB3cEfy4+Oe74tmPk=
+	b=wUKNQTD3Z+8xHh12zmaKTEvMxhO3CHEEX7skHVIxG31s/fnQ4oGf1mXp91MzT4USC2
+	Dn7BBCJncOGNJ8jJBo0xlWmYkEc96O1FyLHDswm8+2g7RqErHCKioVZXV2I9kVzfVEjt
+	+Fro6hH0kRtdjg8ayHfynqPFBhnVIXeyqPrgU=
 MIME-Version: 1.0
-Received: by 10.227.209.137 with SMTP id gg9mr1167811wbb.124.1302197432833;
-	Thu, 07 Apr 2011 10:30:32 -0700 (PDT)
+Received: by 10.227.208.136 with SMTP id gc8mr1248781wbb.37.1302197642604;
+	Thu, 07 Apr 2011 10:34:02 -0700 (PDT)
 Sender: otavio.salvador@gmail.com
-Received: by 10.216.46.207 with HTTP; Thu, 7 Apr 2011 10:30:32 -0700 (PDT)
-In-Reply-To: <1302196878.14449.442.camel@phil-desktop>
+Received: by 10.216.46.207 with HTTP; Thu, 7 Apr 2011 10:34:02 -0700 (PDT)
+In-Reply-To: <1302197239.14449.446.camel@phil-desktop>
 References: <1302182396-4171-1-git-send-email-otavio@ossystems.com.br>
 	<1302182396-4171-2-git-send-email-otavio@ossystems.com.br>
-	<1302196878.14449.442.camel@phil-desktop>
-Date: Thu, 7 Apr 2011 14:30:32 -0300
-X-Google-Sender-Auth: 9wUWwYUJtcFbHM2TWyP15VrLSRA
-Message-ID: <BANLkTin4_zGipzvY7=Tr9NdFrvV2mr+i3Q@mail.gmail.com>
+	<1302182396-4171-3-git-send-email-otavio@ossystems.com.br>
+	<1302182396-4171-4-git-send-email-otavio@ossystems.com.br>
+	<1302182396-4171-5-git-send-email-otavio@ossystems.com.br>
+	<1302182396-4171-6-git-send-email-otavio@ossystems.com.br>
+	<1302182396-4171-7-git-send-email-otavio@ossystems.com.br>
+	<1302197239.14449.446.camel@phil-desktop>
+Date: Thu, 7 Apr 2011 14:34:02 -0300
+X-Google-Sender-Auth: mmvov3ybhJrEwXnWXbmlbVkcdvw
+Message-ID: <BANLkTikWf8o_Cko4V4ya6xhPbD-bWdxz-w@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: Phil Blundell <philb@gnu.org>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/6] udev (165): move ConsoleKit support to udev-consolekit package
+Subject: Re: [PATCH 6/6] freerdp: update version to 2009-03-29 snapshot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,31 +55,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Apr 2011 17:32:42 -0000
+X-List-Received-Date: Thu, 07 Apr 2011 17:36:11 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 7, 2011 at 14:21, Phil Blundell <philb@gnu.org> wrote:
+On Thu, Apr 7, 2011 at 14:27, Phil Blundell <philb@gnu.org> wrote:
 > On Thu, 2011-04-07 at 13:19 +0000, Otavio Salvador wrote:
->> -PACKAGES =3D+ "libudev libgudev udev-utils"
->> +PACKAGES =3D+ "libudev libgudev udev-utils udev-consolekit"
->>
->> =A0FILES_libudev =3D "${base_libdir}/libudev.so.*"
->> =A0FILES_libgudev =3D "${base_libdir}/libgudev*.so.*"
->> @@ -84,7 +84,8 @@ FILES_${PN}-dbg +=3D "${usrbindir}/.debug ${usrsbindir=
-}/.debug"
->>
->> =A0# udev installs binaries under $(udev_prefix)/lib/udev, even if ${lib=
-dir}
->> =A0# is ${prefix}/lib64
->> -FILES_${PN} +=3D "/lib/udev* ${libdir}/ConsoleKit"
->> +FILES_${PN} +=3D "/lib/udev*"
->> +FILES_${PN}-consokekit +=3D "${libdir}/ConsoleKit"
+>> -# Copyright (C) 2010, O.S. Systems Software Ltda. All Rights Reserved
+>> +# Copyright (C) 2010, 2011, O.S. Systems Software Ltda. All Rights Rese=
+rved
+>> =A0# Released under the MIT license
 >
-> Did you test this patch? =A0Surely the line above should read
-> "${PN}-consolekit" otherwise it won't match anything.
+> Not a comment on this patch as such, but a meta-comment on the recipe:
+> does it really make sense to state "all rights reserved" in this
+> context?
 
-I did but probably did a mistake when rebasing it; will fix it.
+Not a big deal to us; dropped it.
+
+Will resend it after end of review.
 
 --=20
 Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
