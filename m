@@ -1,28 +1,43 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1Q7t1M-0000Bm-E8
+	(envelope-from <otavio.salvador@gmail.com>) id 1Q7t3w-0000RE-1s
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Apr 2011 19:29:28 +0200
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>)
-	id 1Q7szK-0003wz-Iz; Thu, 07 Apr 2011 19:27:22 +0200
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1302182396-4171-7-git-send-email-otavio@ossystems.com.br>
+	Thu, 07 Apr 2011 19:32:08 +0200
+Received: by wye20 with SMTP id 20so2620129wye.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Apr 2011 10:29:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=1UDMrb51U2fHlkI3kroTzTFy7dWiF1qygB37WfTxf6k=;
+	b=u0TWBjHa2T5YhberoYwBHMFi4RWAGYCYj8wcszZQHhGH3cLOhkW5kz6kFH/W+V38EI
+	yAQpmmoQL1QUQA24Fk1ftWcZ6oOjUGmCIzp//fHXl+EozMKf/mBinJcUvMgSMnhyG6tV
+	PkH1dpCPsb/sIINb6DC6bfYV0vFefEO1qKxMo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=hd4Evzm8DS5GBvoolcSJb4ssOwsDbDNU6h/UD6NM2nLYq5mPdHr6NpbFXn8EA2YcW6
+	3FS+1pVLpd1ehOj81fTNWFhUpakALBf8K4ODJwzbnv/AiVc+L+6oQyeZ4VYy8qkPpPzE
+	5aKwWFFI+ur1ru/hngLKI45u4T0Ri7ob51oU8=
+MIME-Version: 1.0
+Received: by 10.227.42.137 with SMTP id s9mr1226247wbe.8.1302197399569; Thu,
+	07 Apr 2011 10:29:59 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.216.46.207 with HTTP; Thu, 7 Apr 2011 10:29:59 -0700 (PDT)
+In-Reply-To: <1302196981.14449.444.camel@phil-desktop>
 References: <1302182396-4171-1-git-send-email-otavio@ossystems.com.br>
 	<1302182396-4171-2-git-send-email-otavio@ossystems.com.br>
 	<1302182396-4171-3-git-send-email-otavio@ossystems.com.br>
-	<1302182396-4171-4-git-send-email-otavio@ossystems.com.br>
-	<1302182396-4171-5-git-send-email-otavio@ossystems.com.br>
-	<1302182396-4171-6-git-send-email-otavio@ossystems.com.br>
-	<1302182396-4171-7-git-send-email-otavio@ossystems.com.br>
-Date: Thu, 07 Apr 2011 18:27:19 +0100
-Message-ID: <1302197239.14449.446.camel@phil-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [PATCH 6/6] freerdp: update version to 2009-03-29 snapshot
+	<1302196981.14449.444.camel@phil-desktop>
+Date: Thu, 7 Apr 2011 14:29:59 -0300
+X-Google-Sender-Auth: SF-PoIERsP5EHELuyD8JeUyMJCY
+Message-ID: <BANLkTikbZgOi7r_rOkovffHQPiXcHMrMAg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Phil Blundell <philb@gnu.org>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 2/6] conf/bitbake: improve compression image handling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,21 +51,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Apr 2011 17:29:28 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 07 Apr 2011 17:32:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2011-04-07 at 13:19 +0000, Otavio Salvador wrote:
-> -# Copyright (C) 2010, O.S. Systems Software Ltda. All Rights Reserved
-> +# Copyright (C) 2010, 2011, O.S. Systems Software Ltda. All Rights Reserved
->  # Released under the MIT license
+On Thu, Apr 7, 2011 at 14:23, Phil Blundell <philb@gnu.org> wrote:
+> On Thu, 2011-04-07 at 13:19 +0000, Otavio Salvador wrote:
+>> =A0XZ_COMPRESSION_LEVEL ?=3D "-e -9"
+>> =A0LZMA_COMPRESSION_LEVEL ?=3D "-e -9"
+>> +GZIP_COMPRESSION_LEVEL ?=3D "-9"
+>> +BZIP2_COMPRESSION_LEVEL ?=3D "-9"
+>
+> It seems a bit sad to have to keep adding new vars to the global
+> configuration set (and hence parse them for every single recipe) every
+> time someone wants to tweak a new compression format. =A0Can we not just
+> have a single IMAGE_COMPRESSION_LEVEL that does for everything?
 
-Not a comment on this patch as such, but a meta-comment on the recipe:
-does it really make sense to state "all rights reserved" in this
-context?
+For me it doesn't matter; I can add it if preferred.
 
-p.
-
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
