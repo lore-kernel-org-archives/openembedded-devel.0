@@ -1,34 +1,27 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from moutng.kundenserver.de ([212.227.17.10])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Q8JOs-0002mL-Vj
+	(envelope-from <eng1@koblersystems.de>) id 1Q8Lek-00049E-6c
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Apr 2011 23:39:31 +0200
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Q8JMo-0007TQ-8i from Tom_Rini@mentor.com ;
-	Fri, 08 Apr 2011 14:37:22 -0700
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Fri, 8 Apr 2011 14:35:02 -0700
-Received: from [172.30.80.151] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
-	with Microsoft SMTP Server id 14.1.270.1;
-	Fri, 8 Apr 2011 14:37:21 -0700
-Message-ID: <4D9F8006.3080402@mentor.com>
-Date: Fri, 8 Apr 2011 14:37:10 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
+	Sat, 09 Apr 2011 02:04:02 +0200
+Received: from [192.168.1.34] (p57B40D8C.dip0.t-ipconnect.de [87.180.13.140])
+	by mrelayeu.kundenserver.de (node=mrbap2) with ESMTP (Nemesis)
+	id 0Lgf13-1Pc1W50jvp-00oSMG; Sat, 09 Apr 2011 01:56:44 +0200
+Message-ID: <4D9FA0B5.9000708@koblersystems.de>
+Date: Sat, 09 Apr 2011 01:56:37 +0200
+From: Jan Kobler <eng1@koblersystems.de>
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+	rv:1.9.2.13) Gecko/20110120 Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
-To: Jan Kobler <eng1@koblersystems.de>
+To: openembedded-devel@lists.openembedded.org
 References: <1302291183-17622-1-git-send-email-eng1@koblersystems.de>
-	<4D9F654C.10206@mentor.com> <4D9F69CC.3060608@koblersystems.de>
-In-Reply-To: <4D9F69CC.3060608@koblersystems.de>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 08 Apr 2011 21:35:02.0068 (UTC)
-	FILETIME=[D1512740:01CBF634]
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [mpc5125-twr 1/2] New machine mpc5125-twr, Freescale TWR-MPC5125-KIT
+	<4D9F6CFC.3060801@koblersystems.de>
+In-Reply-To: <4D9F6CFC.3060801@koblersystems.de>
+X-Provags-ID: V02:K0:VDoVAIaJp116Lxbo/U05Edr8JvB/w9J7zpGDmeSEwKC
+	2oyFtLSTkEUXCCK7mnYNvW4TYOyOp/ix1iOzqRX1xqF53hyaGU
+	JWn4n30ZF5ZlWzVqQzYSmoMsd9tRuRQsRAmr1BNEJOcj/aKDAV
+	dzgXi2uMs1WIQIAV654JcELhzOK8eOea506DqJirILruVzBoR3
+	H4VlAH3B/UbG0DNzAckfQ==
+Subject: Re: mpc5125-twr: Tutorial
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,32 +35,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Apr 2011 21:39:31 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
+X-List-Received-Date: Sat, 09 Apr 2011 00:04:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 04/08/2011 01:02 PM, Jan Kobler wrote:
-> Hi,
-> 
-> 1. I wanted to make a clear distinction between what I have written  and
-> what I have taken from
-> http://www.freescale.com/files/soft_dev_tools/software/board_support_packages/TWRMPC5125LinuxBSP.rar
-> which contains the Linux kernel 2.6.29-v2010041601 for the TWR-MPC5125-KIT.
-> 
-> Therefore linux_VER.bb is in  [mpc5125-twr 1/2], because I have changed
-> it. Otherwise I would put it together in one patch.
-> 
-> 2. I have tried to provide the same for Openembedded as Freescale is
-> currently shipping on their web page
-> http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=TWR-MPC5125-KIT&fpsp=1&tab=Design_Tools_Tab.
-> I have not tried to port it to a more recent kernel.
-> 
-> Is there already a more recent kernel, which contains mpc5125-twr support?
+Hi,
 
-It's possible that yes, this hardware is supported in 2.6.37.
+you can find the tutorial on gentoo-wiki.com now:
+http://en.gentoo-wiki.com/wiki/Freescale_TWR-MPC5125/Openembedded
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+It describes the usage and the current state of the BSP for the new
+machine  mpc5125-twr.
+
+I hope it helps.
+
+Best regards
+
+Jan
 
 
