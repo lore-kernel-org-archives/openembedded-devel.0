@@ -1,45 +1,44 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Q8AzI-0005jj-5W
+	(envelope-from <neil@gumstix.com>) id 1Q8GNU-0003Vb-7a
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Apr 2011 14:40:32 +0200
-Received: by bwz5 with SMTP id 5so2911739bwz.6
+	Fri, 08 Apr 2011 20:25:52 +0200
+Received: from homiemail-a18.g.dreamhost.com (caiajhbdcbbj.dreamhost.com
+	[208.97.132.119])
+	by hapkido.dreamhost.com (Postfix) with ESMTP id B35101788E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Apr 2011 05:38:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=j+5sodSpQTNKqVSZwML4STWquWpMtxAyzM0jaqX7fAQ=;
-	b=bdPBHIRf7v8IBO1v8fwFv7YHtnDatdaaQJzVVhlNyeR8TQGL9s3y9NoCAUU1v1IJMF
-	OlbXtQVvx1YzZcZVx+gS2SgrJB6HjdLTjn6SAQo6YRR/krw7demO+ibLUaxG745eRWr9
-	cLVFVlBFre0WLDHBEYdTAMQ42dguNlfJrM62c=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=wYx+jrdS+92v/uS5TWOJhi/5CQfTP4emgsTLSI2UlqKO7uAdmM9CRHzWcyuM6jw5BS
-	EzcF/MVYcFUZEF/qAJ4S0m+U0bpf+BXczFBp+Zr07WNFXUeL5zYD3oFD/p/ihs2gDajE
-	6O0HoiQupjZSc1A2NUBGvEnzdPJiGrOlJJNRU=
+	Fri,  8 Apr 2011 11:23:43 -0700 (PDT)
+Received: from homiemail-a18.g.dreamhost.com (localhost [127.0.0.1])
+	by homiemail-a18.g.dreamhost.com (Postfix) with ESMTP id E9F94250075
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  8 Apr 2011 11:23:40 -0700 (PDT)
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gumstix.com; h=message-id:date
+	:from:mime-version:to:subject:content-type:
+	content-transfer-encoding; q=dns; s=gumstix.com; b=UZPJFjLZsvUk4
+	NoGGcPslZcRHmCWI5Yrf9VhVQ+d3Y0qKqOSj75cZl6caAkcd9NFv+EUoWWbRSCdx
+	0/37mfpwrKsNwggv+zCVbSyXWj+WzXOaq9uZhgpjI7lQ1QFfKtpCbf4Odzk8+yze
+	s5vw3snk8wOefFRgXS65ePRgTqg08o=
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=gumstix.com; h=message-id
+	:date:from:mime-version:to:subject:content-type:
+	content-transfer-encoding; s=gumstix.com; bh=ZjbFtANOp2xdnr49/7z
+	t9kVl9T0=; b=LPla7Fpuv+AcsuQ1u2uOYX6fCagXX79x+dySt4iSo92O3tWkE8o
+	FLmUMAoR6MIgak7rHmrSUS7RC4XHFEm0zY9Iu1afvA4ZMAACW/2lNX1aWoq/m5bH
+	Lvt5qF6Nv5K5bCmMtRtNvOPzCsvg/xGOjvCx2FuZoaD91C7W0p4Iygp0=
+Received: from [10.0.1.35] (s64-180-61-141.bc.hsia.telus.net [64.180.61.141])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: neil@gumstix.com)
+	by homiemail-a18.g.dreamhost.com (Postfix) with ESMTPSA id BA317250079
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  8 Apr 2011 11:23:40 -0700 (PDT)
+Message-ID: <4D9F52B0.9030808@gumstix.com>
+Date: Fri, 08 Apr 2011 11:23:44 -0700
+From: Neil MacMunn <neil@gumstix.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
 MIME-Version: 1.0
-Received: by 10.204.45.226 with SMTP id g34mr55848bkf.67.1302266303201; Fri,
-	08 Apr 2011 05:38:23 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.14.137 with HTTP; Fri, 8 Apr 2011 05:38:23 -0700 (PDT)
-In-Reply-To: <1302265080.14449.513.camel@phil-desktop>
-References: <1302182396-4171-1-git-send-email-otavio@ossystems.com.br>
-	<1302182396-4171-2-git-send-email-otavio@ossystems.com.br>
-	<1302182396-4171-3-git-send-email-otavio@ossystems.com.br>
-	<1302196981.14449.444.camel@phil-desktop>
-	<BANLkTikbZgOi7r_rOkovffHQPiXcHMrMAg@mail.gmail.com>
-	<4D9E4D66.1000701@mentor.com>
-	<1302265080.14449.513.camel@phil-desktop>
-Date: Fri, 8 Apr 2011 09:38:23 -0300
-X-Google-Sender-Auth: SJEBm8YbgRpm2nrvTWjf6LRe5zw
-Message-ID: <BANLkTi=LZ-FT8O-wdS-ttecwWNDs06nOAw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/6] conf/bitbake: improve compression image handling
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: firefox fails at xpidl: missing glib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,42 +52,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Apr 2011 12:40:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 08 Apr 2011 18:25:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Apr 8, 2011 at 09:18, Phil Blundell <philb@gnu.org> wrote:
-> There is a bit of a tradeoff for gzip, though I'm not sure you would
-> notice it on modern hardware. =A0For bzip2 it's more significant; if
-> you're bzipping large files (several GB) then the choice between -9 and
-> -1 is quite noticeable even on a relatively powerful cpu. =A0I'm not sure
-> you'd notice much difference with either gzip or bzip on a 32MB jffs2
-> image.
+I'm trying to bitbake firefox with this configuration.
 
-It is noticible; I am doing images for some quite slow machine and it
-does matter otherwise I wouldn't have done it.
+> Build Configuration:
+> BB_VERSION        = "1.12.0"
+> METADATA_BRANCH   = "unstable"
+> METADATA_REVISION = "219f1e9"
+> TARGET_ARCH       = "arm"
+> TARGET_OS         = "linux-gnueabi"
+> MACHINE           = "overo"
+> DISTRO            = "angstrom"
+> DISTRO_VERSION    = "v20110408"
+> TARGET_FPU        = "hard"
 
-> And for unzipping, my recollection is that the decompressor stages of
-> both gzip and bzip run in more-or-less constant time irrespective of the
-> settings that you used when compressing.
->
-> So yeah, I agree, it isn't obvious that there is going to be much
-> real-world benefit from tweaking these knobs for gzip and bzip2. =A0If
-> someone wants that ability then fine, but ideally in a way that doesn't
-> cause further metadata bloat for everyone else. =A0One obvious way to do
-> that would be to put the default variable settings in the
-> image-generating classes, rather than in bitbake.conf, so that they
-> don't get set at all for the majority of recipes if you are happy to
-> accept the defaults.
+But it fails  in the directory 
+...work/armv7a-angstrom-linux-gnueabi/firefox-3.6.8-r3/mozilla-1.9.2/xpcom/typelib/xpidl
 
-I agree its place is on the image class or another; this doesn't
-matter too much to me if I have a place to change it.
+> gcc -o host_xpidl.o -c -isystem/home/neil/overo-oe/tmp-unstable/sysroots/x86_64-linux/usr/include -O2 -g -DXP_UNIX -O3  -DMDCPUCFG=\"md/_linux.cfg\"  -I. -I. -I../../../dist/include -I../../../dist/include/nsprpub  -I/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.8-r3/mozilla-1.9.2/dist/include/nspr -I/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.8-r3/mozilla-1.9.2/dist/include/nss      -I/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.8-r3/mozilla-1.9.2/dist/include/nspr xpidl.c
+> xpidl_idl.c
+> gcc -o host_xpidl_idl.o -c -isystem/home/neil/overo-oe/tmp-unstable/sysroots/x86_64-linux/usr/include -O2 -g -DXP_UNIX -O3  -DMDCPUCFG=\"md/_linux.cfg\"  -I. -I. -I../../../dist/include -I../../../dist/include/nsprpub  -I/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.8-r3/mozilla-1.9.2/dist/include/nspr -I/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.8-r3/mozilla-1.9.2/dist/include/nss      -I/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.8-r3/mozilla-1.9.2/dist/include/nspr xpidl_idl.c
+> xpidl_util.c
+> gcc -o host_xpidl_util.o -c -isystem/home/neil/overo-oe/tmp-unstable/sysroots/x86_64-linux/usr/include -O2 -g -DXP_UNIX -O3  -DMDCPUCFG=\"md/_linux.cfg\"  -I. -I. -I../../../dist/include -I../../../dist/include/nsprpub  -I/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.8-r3/mozilla-1.9.2/dist/include/nspr -I/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.8-r3/mozilla-1.9.2/dist/include/nss      -I/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.8-r3/mozilla-1.9.2/dist/include/nspr xpidl_util.c
+> xpidl_header.c
+> gcc -o host_xpidl_header.o -c -isystem/home/neil/overo-oe/tmp-unstable/sysroots/x86_64-linux/usr/include -O2 -g -DXP_UNIX -O3  -DMDCPUCFG=\"md/_linux.cfg\"  -I. -I. -I../../../dist/include -I../../../dist/include/nsprpub  -I/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.8-r3/mozilla-1.9.2/dist/include/nspr -I/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.8-r3/mozilla-1.9.2/dist/include/nss      -I/home/neil/overo-oe/tmp-unstable/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.8-r3/mozilla-1.9.2/dist/include/nspr xpidl_header.c
+> In file included from xpidl.c:42:
+> xpidl.h:49: fatal error: glib.h: No such file or directoryIn file included from xpidl_util.c:42:
+> xpidl.h:49: fatal error: glib.h: No such file or directory
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+cp sysroots/x86_64-linux/usr/include/glib-2.0/glib.h 
+sysroots/x86_64-linux/usr/include/ got me to another missing header 
+error. Comparing the log of my last successful build, this is missing.
+
+> -pthread -I/home/neil/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libIDL-2.0 -I/home/neil/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0 -I/home/neil/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/include
+
+What would cause these includes to be omitted?
+
+--
+Neil
+
+
+
 
 
