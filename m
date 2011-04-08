@@ -1,43 +1,21 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q83PO-0002aS-1Y
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Apr 2011 06:34:58 +0200
-Received: by bwz5 with SMTP id 5so2669828bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Apr 2011 21:32:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=05qBxgpRgNfsj5F0MtzlCu55KTvdTyTQULKQ8FqXg7s=;
-	b=lrg6opvv/LvDVc8Lgq9H8MPZU2DvyseU7R3aBr/ACXvjQ2zH8u84kEF1SWfMBGOBsZ
-	yGgaysqi1R779MkXrzXa0d7FTG9VHtizabCD1ZXzburbEbGYGFnQ2r+jCVODDDeBxEiw
-	rnL/VuC0DDyoSNzRoQZ1DCwP5t2yE1BLvVCFQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=pr4THeHZejZm9Id4DWrz1HCZLN8mliLCGXu5+ASGr/mPqL7DlGCNT0tQ6jCMX8cOvD
-	aoa/tmpMCedEYrMRX/xdITHdXBzdHSuH6DR+qlh1m1E/sl4r2Z0+L0Rx3IDOheRbpduk
-	PorF6VxmMxO7GH6LXMw47fe3bX84T9AfU9tOI=
-Received: by 10.204.82.143 with SMTP id b15mr1536293bkl.118.1302237168573;
-	Thu, 07 Apr 2011 21:32:48 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id q24sm1412873bks.21.2011.04.07.21.32.46
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 07 Apr 2011 21:32:47 -0700 (PDT)
-Date: Fri, 8 Apr 2011 06:32:45 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q89Ah-0001MG-K6 for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Apr 2011 12:44:12 +0200
+Received: from f053045107.adsl.alicedsl.de ([78.53.45.107]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q898h-0004og-WF for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Apr 2011 10:42:08 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110408043245.GC3180@jama.jama.net>
-References: <1302182396-4171-1-git-send-email-otavio@ossystems.com.br>
-	<1302182396-4171-2-git-send-email-otavio@ossystems.com.br>
-	<1302182396-4171-3-git-send-email-otavio@ossystems.com.br>
-	<1302196981.14449.444.camel@phil-desktop>
-MIME-Version: 1.0
-In-Reply-To: <1302196981.14449.444.camel@phil-desktop>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [PATCH 2/6] conf/bitbake: improve compression image handling
+Date: Fri, 08 Apr 2011 12:42:02 +0200
+Message-ID: <1302259322.7217.28.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: glibc-{charmap-utf-8,glibc-localedata-i18n} and uClibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,49 +29,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Apr 2011 04:34:58 -0000
-X-Groupsio-MsgNum: 31045
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="mvpLiMfbWzRoNl4x"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 08 Apr 2011 10:44:12 -0000
+X-Groupsio-MsgNum: 31046
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-ulafbMaz166AdAS1kVhr"
 
---mvpLiMfbWzRoNl4x
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--=-ulafbMaz166AdAS1kVhr
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 07, 2011 at 06:23:01PM +0100, Phil Blundell wrote:
-> On Thu, 2011-04-07 at 13:19 +0000, Otavio Salvador wrote:
-> >  XZ_COMPRESSION_LEVEL ?=3D "-e -9"
-> >  LZMA_COMPRESSION_LEVEL ?=3D "-e -9"
-> > +GZIP_COMPRESSION_LEVEL ?=3D "-9"
-> > +BZIP2_COMPRESSION_LEVEL ?=3D "-9"
->=20
-> It seems a bit sad to have to keep adding new vars to the global
-> configuration set (and hence parse them for every single recipe) every
-> time someone wants to tweak a new compression format.  Can we not just
-> have a single IMAGE_COMPRESSION_LEVEL that does for everything?
+Dear OE folks,
 
-Please check RP's changes in oe-core
-http://lists.linuxtogo.org/pipermail/openembedded-core/2011-March/000739.ht=
-ml
 
-IMHO would be great to integrate this before such changes.
+`bitbake e-image-core` and therefore `bitbake e-image` fails to build
+using minimal-uclibc. With the following change I am able to run the
+commands.
 
-Cheers,
+	-IMAGE_INSTALL =3D "${MACHINE_TASK_PROVIDER} task-e-x11-core ${XSERVER} gl=
+ibc-charmap-utf-8 glibc-localedata-i18n"
+	+IMAGE_INSTALL =3D "${MACHINE_TASK_PROVIDER} task-e-x11-core ${XSERVER}"
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Can the `glibc-=E2=80=A6` things somehow be made compatible with uClibc?
 
---mvpLiMfbWzRoNl4x
-Content-Type: application/pgp-signature
+
+Thanks,
+
+Paul
+
+--=-ulafbMaz166AdAS1kVhr
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAk2ej+0ACgkQN1Ujt2V2gBysrgCcDzkQzVtN+WlyjpL4M773W6T1
-mIkAoLXpWdWzGTyYin7UzHKEms0xrdG2
-=pEug
+iEYEABECAAYFAk2e5noACgkQPX1aK2wOHVi7gQCeNlAEQex7XZ6hMOIHIjD7uCKm
+AYcAnjdIRb4WM1pLbiY22n9V2LLyuDbV
+=ti9I
 -----END PGP SIGNATURE-----
 
---mvpLiMfbWzRoNl4x--
+--=-ulafbMaz166AdAS1kVhr--
