@@ -1,21 +1,44 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q89Ah-0001MG-K6 for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Apr 2011 12:44:12 +0200
-Received: from f053045107.adsl.alicedsl.de ([78.53.45.107]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q898h-0004og-WF for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Apr 2011 10:42:08 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <otavio.salvador@gmail.com>) id 1Q8AF4-0002lW-Hr
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Apr 2011 13:52:46 +0200
+Received: by wye20 with SMTP id 20so3249342wye.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 08 Apr 2011 04:50:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=+BKMqJ+mrnSWvaw2BMORFovLnNij8ZgtuDmXBXWsTm4=;
+	b=dWXhjdBBJoJ6eg6LNIjbln4NmN6quwLldbw2+BA5oGOaHunzU7He9EKZ6plh6sQLoJ
+	WFUnOdPe8FAI8olx2wS0L3KzMSTxMknl9yIJmPQdJW10e3sjr1aDOKKj/R3r5wqPZO2y
+	KpnHjdnpiCrZhrm9wmPqfU/Ok6l83jvDrss0E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=TLfosDF1+FenmcwCmE63P5aVnkPCIR0ROn+mftyGn8Ve18Rp4Lu6/ZJGlfILcVc96Q
+	4tprn0sFwPRWtvPe50hwgRXmZ3Anwh8c2+AMMy1l8wNjC4rxH9IhK3pBurT4WaaiZMOP
+	XeMfCOyZ5jrl+4bY1Ot5XofUGnOG+LTtOg5n0=
+MIME-Version: 1.0
+Received: by 10.216.168.82 with SMTP id j60mr1870403wel.47.1302263436657; Fri,
+	08 Apr 2011 04:50:36 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.216.46.207 with HTTP; Fri, 8 Apr 2011 04:50:36 -0700 (PDT)
+In-Reply-To: <4D9E4D66.1000701@mentor.com>
+References: <1302182396-4171-1-git-send-email-otavio@ossystems.com.br>
+	<1302182396-4171-2-git-send-email-otavio@ossystems.com.br>
+	<1302182396-4171-3-git-send-email-otavio@ossystems.com.br>
+	<1302196981.14449.444.camel@phil-desktop>
+	<BANLkTikbZgOi7r_rOkovffHQPiXcHMrMAg@mail.gmail.com>
+	<4D9E4D66.1000701@mentor.com>
+Date: Fri, 8 Apr 2011 08:50:36 -0300
+X-Google-Sender-Auth: 64b5fz--knlTZsdS3nLkd6-H3NM
+Message-ID: <BANLkTinGcvO0-Z97eSZ3uMsuRK-oEHz7Rw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 08 Apr 2011 12:42:02 +0200
-Message-ID: <1302259322.7217.28.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: glibc-{charmap-utf-8,glibc-localedata-i18n} and uClibc
+Subject: Re: [PATCH 2/6] conf/bitbake: improve compression image handling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,44 +52,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Apr 2011 10:44:12 -0000
-X-Groupsio-MsgNum: 31046
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-ulafbMaz166AdAS1kVhr"
-
---=-ulafbMaz166AdAS1kVhr
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 08 Apr 2011 11:52:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Dear OE folks,
+On Thu, Apr 7, 2011 at 20:48, Tom Rini <tom_rini@mentor.com> wrote:
+> Why are we even tweaking gzip/bzip2? =A0XZ/LZMA can have serious tradeoff=
+s
+> at higher levels but I thought for bzip2/gzip it was either do it or no
+> compression, not "turn it down a little bit".
+
+It changes a lot for compress and decompress time. I think it is
+important to be able to change those values but how it is done doesn't
+matter to me.
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
-`bitbake e-image-core` and therefore `bitbake e-image` fails to build
-using minimal-uclibc. With the following change I am able to run the
-commands.
-
-	-IMAGE_INSTALL =3D "${MACHINE_TASK_PROVIDER} task-e-x11-core ${XSERVER} gl=
-ibc-charmap-utf-8 glibc-localedata-i18n"
-	+IMAGE_INSTALL =3D "${MACHINE_TASK_PROVIDER} task-e-x11-core ${XSERVER}"
-
-Can the `glibc-=E2=80=A6` things somehow be made compatible with uClibc?
-
-
-Thanks,
-
-Paul
-
---=-ulafbMaz166AdAS1kVhr
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk2e5noACgkQPX1aK2wOHVi7gQCeNlAEQex7XZ6hMOIHIjD7uCKm
-AYcAnjdIRb4WM1pLbiY22n9V2LLyuDbV
-=ti9I
------END PGP SIGNATURE-----
-
---=-ulafbMaz166AdAS1kVhr--
