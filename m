@@ -1,26 +1,44 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1Q8Afd-0000Zj-P3
+	(envelope-from <otavio.salvador@gmail.com>) id 1Q8AzI-0005jj-5W
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Apr 2011 14:20:13 +0200
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q8Ada-0004xj-Ta
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Apr 2011 14:18:07 +0200
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4D9E4D66.1000701@mentor.com>
+	Fri, 08 Apr 2011 14:40:32 +0200
+Received: by bwz5 with SMTP id 5so2911739bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 08 Apr 2011 05:38:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=j+5sodSpQTNKqVSZwML4STWquWpMtxAyzM0jaqX7fAQ=;
+	b=bdPBHIRf7v8IBO1v8fwFv7YHtnDatdaaQJzVVhlNyeR8TQGL9s3y9NoCAUU1v1IJMF
+	OlbXtQVvx1YzZcZVx+gS2SgrJB6HjdLTjn6SAQo6YRR/krw7demO+ibLUaxG745eRWr9
+	cLVFVlBFre0WLDHBEYdTAMQ42dguNlfJrM62c=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=wYx+jrdS+92v/uS5TWOJhi/5CQfTP4emgsTLSI2UlqKO7uAdmM9CRHzWcyuM6jw5BS
+	EzcF/MVYcFUZEF/qAJ4S0m+U0bpf+BXczFBp+Zr07WNFXUeL5zYD3oFD/p/ihs2gDajE
+	6O0HoiQupjZSc1A2NUBGvEnzdPJiGrOlJJNRU=
+MIME-Version: 1.0
+Received: by 10.204.45.226 with SMTP id g34mr55848bkf.67.1302266303201; Fri,
+	08 Apr 2011 05:38:23 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.14.137 with HTTP; Fri, 8 Apr 2011 05:38:23 -0700 (PDT)
+In-Reply-To: <1302265080.14449.513.camel@phil-desktop>
 References: <1302182396-4171-1-git-send-email-otavio@ossystems.com.br>
 	<1302182396-4171-2-git-send-email-otavio@ossystems.com.br>
 	<1302182396-4171-3-git-send-email-otavio@ossystems.com.br>
 	<1302196981.14449.444.camel@phil-desktop>
 	<BANLkTikbZgOi7r_rOkovffHQPiXcHMrMAg@mail.gmail.com>
 	<4D9E4D66.1000701@mentor.com>
-Date: Fri, 08 Apr 2011 13:18:00 +0100
-Message-ID: <1302265080.14449.513.camel@phil-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
+	<1302265080.14449.513.camel@phil-desktop>
+Date: Fri, 8 Apr 2011 09:38:23 -0300
+X-Google-Sender-Auth: SJEBm8YbgRpm2nrvTWjf6LRe5zw
+Message-ID: <BANLkTi=LZ-FT8O-wdS-ttecwWNDs06nOAw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH 2/6] conf/bitbake: improve compression image handling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,52 +53,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Apr 2011 12:20:13 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 08 Apr 2011 12:40:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2011-04-07 at 16:48 -0700, Tom Rini wrote:
-> On 04/07/2011 10:29 AM, Otavio Salvador wrote:
-> > On Thu, Apr 7, 2011 at 14:23, Phil Blundell <philb@gnu.org> wrote:
-> >> On Thu, 2011-04-07 at 13:19 +0000, Otavio Salvador wrote:
-> >>>  XZ_COMPRESSION_LEVEL ?= "-e -9"
-> >>>  LZMA_COMPRESSION_LEVEL ?= "-e -9"
-> >>> +GZIP_COMPRESSION_LEVEL ?= "-9"
-> >>> +BZIP2_COMPRESSION_LEVEL ?= "-9"
-> >>
-> >> It seems a bit sad to have to keep adding new vars to the global
-> >> configuration set (and hence parse them for every single recipe) every
-> >> time someone wants to tweak a new compression format.  Can we not just
-> >> have a single IMAGE_COMPRESSION_LEVEL that does for everything?
-> > 
-> > For me it doesn't matter; I can add it if preferred.
-> 
-> Why are we even tweaking gzip/bzip2?  XZ/LZMA can have serious tradeoffs
-> at higher levels but I thought for bzip2/gzip it was either do it or no
-> compression, not "turn it down a little bit".
+On Fri, Apr 8, 2011 at 09:18, Phil Blundell <philb@gnu.org> wrote:
+> There is a bit of a tradeoff for gzip, though I'm not sure you would
+> notice it on modern hardware. =A0For bzip2 it's more significant; if
+> you're bzipping large files (several GB) then the choice between -9 and
+> -1 is quite noticeable even on a relatively powerful cpu. =A0I'm not sure
+> you'd notice much difference with either gzip or bzip on a 32MB jffs2
+> image.
 
-There is a bit of a tradeoff for gzip, though I'm not sure you would
-notice it on modern hardware.  For bzip2 it's more significant; if
-you're bzipping large files (several GB) then the choice between -9 and
--1 is quite noticeable even on a relatively powerful cpu.  I'm not sure
-you'd notice much difference with either gzip or bzip on a 32MB jffs2
-image.
+It is noticible; I am doing images for some quite slow machine and it
+does matter otherwise I wouldn't have done it.
 
-And for unzipping, my recollection is that the decompressor stages of
-both gzip and bzip run in more-or-less constant time irrespective of the
-settings that you used when compressing.  
+> And for unzipping, my recollection is that the decompressor stages of
+> both gzip and bzip run in more-or-less constant time irrespective of the
+> settings that you used when compressing.
+>
+> So yeah, I agree, it isn't obvious that there is going to be much
+> real-world benefit from tweaking these knobs for gzip and bzip2. =A0If
+> someone wants that ability then fine, but ideally in a way that doesn't
+> cause further metadata bloat for everyone else. =A0One obvious way to do
+> that would be to put the default variable settings in the
+> image-generating classes, rather than in bitbake.conf, so that they
+> don't get set at all for the majority of recipes if you are happy to
+> accept the defaults.
 
-So yeah, I agree, it isn't obvious that there is going to be much
-real-world benefit from tweaking these knobs for gzip and bzip2.  If
-someone wants that ability then fine, but ideally in a way that doesn't
-cause further metadata bloat for everyone else.  One obvious way to do
-that would be to put the default variable settings in the
-image-generating classes, rather than in bitbake.conf, so that they
-don't get set at all for the majority of recipes if you are happy to
-accept the defaults.
+I agree its place is on the image class or another; this doesn't
+matter too much to me if I have a place to change it.
 
-p.
-
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
