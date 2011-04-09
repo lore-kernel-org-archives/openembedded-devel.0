@@ -1,38 +1,48 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heroor@gmail.com>) id 1Q8RC3-0000yJ-Ur
+	(envelope-from <raj.khem@gmail.com>) id 1Q8Rm9-0001zd-7M
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Apr 2011 07:58:48 +0200
-Received: by yxn22 with SMTP id 22so1699227yxn.6
+	Sat, 09 Apr 2011 08:36:05 +0200
+Received: by yia13 with SMTP id 13so1704322yia.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Apr 2011 22:56:37 -0700 (PDT)
+	Fri, 08 Apr 2011 23:33:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=wk7B23nB0B05ThR4MbpTLCiMCMDja0m81N1Wsz9puoQ=;
-	b=bokHd2pnMU9FpWoZryIss0BFHufR5n2mUabdQNjfDuM7MZwQgn6MvchweGfReVCqIv
-	3XjcNO25m99HS0hMM5Ar7qsm6cFBykpypXzuEauB7PBg6TNWSGHnV1jx+1W3o/nsjRHG
-	e+FUujYPE4hGJYD/+VgYS5QPeP7+lZX0EoNrw=
+	h=domainkey-signature:subject:from:reply-to:to:cc:in-reply-to
+	:references:content-type:organization:date:message-id:mime-version
+	:x-mailer:content-transfer-encoding;
+	bh=BF1zBqUKpsL9oonsVwqFcEXbmSvGKCfPV7LxTnhGnAU=;
+	b=nP3xqdEZWU19d+nMpPh0nvPuI6NbkURpxCTqdnMckANcivrVLakv0nAameNCsClBgr
+	AfgELdN04rC/6/NTJY547+RMnD5llqTF65xD9UKHfheBHZbVgTxrICK4tslHVn9T0+5N
+	4wXa36afggrL1dFVOpCmItwdcmsXq2ymgMLMM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=lNQ9nQo+9jrVubj7ZexzdxeKhnMXBZPG5b1chWZLxw7Ym6Fn9HBPFwcTL/IVvZk9to
-	Yr082h93STNstuHTewvjQBc4fPTE7YI3cxzUMfEgllJc34ybDDSuM85FIoGzgd9vlpEZ
-	qLtU+Xzqj8HVGD1/Pa4FAOC69FEdXaxSyaXoo=
-Received: by 10.150.62.1 with SMTP id k1mr2555709yba.382.1302328597044;
-	Fri, 08 Apr 2011 22:56:37 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id p28sm280822ybk.0.2011.04.08.22.56.34
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 08 Apr 2011 22:56:36 -0700 (PDT)
-From: Siddharth Heroor <heroor@gmail.com>
+	h=subject:from:reply-to:to:cc:in-reply-to:references:content-type
+	:organization:date:message-id:mime-version:x-mailer
+	:content-transfer-encoding;
+	b=DNjLDj1+kGUOI5+U0SeG7hxsM57JJellBGGR4dqudspqhXiOPFwqQFugA6dFcEF+3F
+	GPBWg+d+TFIy4xxZ6f0ed4lA9/45F1K0O+A4i3df6GKmLY1nHfVl8nWG/9Puc42rdYsZ
+	XULmVRSYbKJ9B5OLDmQapLsXe7ILF3Q5wUPD0=
+Received: by 10.236.181.41 with SMTP id k29mr4016326yhm.62.1302330834012;
+	Fri, 08 Apr 2011 23:33:54 -0700 (PDT)
+Received: from [192.168.1.67] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 41sm1657651yhl.23.2011.04.08.23.33.49
+	(version=SSLv3 cipher=OTHER); Fri, 08 Apr 2011 23:33:50 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Apr 2011 11:26:21 +0530
-Message-Id: <1302328581-30367-3-git-send-email-heroor@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1302328581-30367-1-git-send-email-heroor@gmail.com>
-References: <1302328581-30367-1-git-send-email-heroor@gmail.com>
-Cc: Siddharth Heroor <heroor@ti.com>
-Subject: [PATCH 3/3] libgles-omap3: Remove SGX Fixup for TI816x.
+In-Reply-To: <AANLkTimS+CcrB7cHUF+ao=XwD0aXeFqt4r1N4erHoKFs@mail.gmail.com>
+References: <1301660208-31105-1-git-send-email-otavio@ossystems.com.br>
+	<1301660208-31105-3-git-send-email-otavio@ossystems.com.br>
+	<in4lhs$326$1@dough.gmane.org>
+	<AANLkTimRF7Q3=XeF1EOHgPNAGfJwnp5PmjHGyjUhTyef@mail.gmail.com>
+	<CC5D751E-FF84-40C2-B184-4C813C49F5E4@dominion.thruhere.net>
+	<AANLkTimS+CcrB7cHUF+ao=XwD0aXeFqt4r1N4erHoKFs@mail.gmail.com>
+Organization: Sakrah
+Date: Fri, 08 Apr 2011 23:33:36 -0700
+Message-ID: <1302330816.15056.15.camel@leto>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [PATCH 3/6] xorg-xserver-common.inc: drop .la files from packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,44 +56,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Apr 2011 05:58:48 -0000
+X-List-Received-Date: Sat, 09 Apr 2011 06:36:05 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-From: Siddharth Heroor <heroor@ti.com>
+On Fri, 2011-04-01 at 11:16 -0300, Otavio Salvador wrote:
+> On Fri, Apr 1, 2011 at 11:07, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> > I guessed that much, but why don't you want .la files in the -dev package? Your commit message doesn't give any clue about it or anything else.
+> 
+> Those are  for the modules that are dlopened so not required. It ended
+> up on the regular package, no -dev.
+> 
 
-* Unlike OMAP3, the SGX core has not undergone revisions in TI816x.
-  The libraries for TI816x are also fixed and do not need fixup based
-  on revision of the SGX core.
+I think right fix is to put them in -dev package for now
 
-Signed-off-by: Siddharth Heroor <heroor@ti.com>
----
- recipes/powervr-drivers/libgles-omap3/rc.pvr |   10 +++-------
- 1 files changed, 3 insertions(+), 7 deletions(-)
-
-diff --git a/recipes/powervr-drivers/libgles-omap3/rc.pvr b/recipes/powervr-drivers/libgles-omap3/rc.pvr
-index 395d085..1b141a0 100755
---- a/recipes/powervr-drivers/libgles-omap3/rc.pvr
-+++ b/recipes/powervr-drivers/libgles-omap3/rc.pvr
-@@ -90,15 +90,11 @@ case $CPUTYPE in
- 	devmem2 0x48180900 w 0x2
- 	devmem2 0x48180920 w 0x2
- 
-+	sleep 2
-+
- 	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:5: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
- 
--	if [ "${ES_REVISION}" != "${SAVED_ESREVISION}" ] ; then
--		echo -n "Starting SGX fixup for"
--		echo " ES${ES_REVISION}.x"
--		cp -a /usr/lib/ES${ES_REVISION}.0/* /usr/lib
--		cp -a /usr/bin/ES${ES_REVISION}.0/* /usr/bin	
--		echo "${ES_REVISION}" > /etc/powervr-esrev
--	fi
-+	echo "${ES_REVISION}" > /etc/powervr-esrev
- 	/usr/bin/pvrsrvinit
- 
- 	;;
 -- 
-1.7.0.4
+-Khem
 
 
 
