@@ -1,17 +1,17 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1Q8ddK-0004Ov-Qt
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Apr 2011 21:15:46 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.3])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q8dbG-0006O6-Kf
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Apr 2011 21:13:38 +0200
-From: Phil Blundell <philb@gnu.org>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q8eos-0005Ug-8e for openembedded-devel@lists.openembedded.org;
+	Sat, 09 Apr 2011 22:31:46 +0200
+Received: from f053040093.adsl.alicedsl.de ([78.53.40.93]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q8emv-0004qw-Gj for openembedded-devel@lists.openembedded.org;
+	Sat, 09 Apr 2011 20:29:45 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4DA0A13A.1090406@mentor.com>
+In-Reply-To: <1302376412.3131.9.camel@lenovo.internal.reciva.com>
 References: <1301660208-31105-1-git-send-email-otavio@ossystems.com.br>
 	<1301660208-31105-3-git-send-email-otavio@ossystems.com.br>
 	<in4lhs$326$1@dough.gmane.org>
@@ -22,10 +22,11 @@ References: <1301660208-31105-1-git-send-email-otavio@ossystems.com.br>
 	<1302340789.3131.7.camel@lenovo.internal.reciva.com>
 	<BANLkTinKJf85aenJia6nrVBaOdANdM44oA@mail.gmail.com>
 	<4DA0A13A.1090406@mentor.com>
-Date: Sat, 09 Apr 2011 20:13:32 +0100
-Message-ID: <1302376412.3131.9.camel@lenovo.internal.reciva.com>
+	<1302376412.3131.9.camel@lenovo.internal.reciva.com>
+Date: Sat, 09 Apr 2011 22:29:36 +0200
+Message-ID: <1302380976.15868.16.camel@mattotaupa>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
+X-Mailer: Evolution 2.32.2 
 Subject: Re: [PATCH 3/6] xorg-xserver-common.inc: drop .la files from packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,34 +41,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Apr 2011 19:15:46 -0000
+X-List-Received-Date: Sat, 09 Apr 2011 20:31:46 -0000
+X-Groupsio-MsgNum: 31075
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-laiyqhoXPG8yRZKtcP3f"
+
+--=-laiyqhoXPG8yRZKtcP3f
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, 2011-04-09 at 11:11 -0700, Tom Rini wrote:
-> On 04/09/2011 10:36 AM, Otavio Salvador wrote:
-> > On Sat, Apr 9, 2011 at 06:19, Phil Blundell <philb@gnu.org> wrote:
-> >> What would be the use case for having them there?  Nothing ever links
-> >> against them.  I think Otavio is right, they're better off deleted.
-> > 
-> > AFAIK .la files are used for in project linking not when linking with
-> > system or sdk libraries. So I'd prefer to remove them.
-> 
-> .la files have a defined purpose in a development area.  Until / unless
-> we move to globally killing .la files (see Richard talking about this on
-> the poky list a few weeks ago), we should ship these in the -dev
-> package.  If they're broken that probably means something isn't
-> inherit'ing the right class that should be fixing them.
+Am Samstag, den 09.04.2011, 20:13 +0100 schrieb Phil Blundell:
+> On Sat, 2011-04-09 at 11:11 -0700, Tom Rini wrote:
+> > On 04/09/2011 10:36 AM, Otavio Salvador wrote:
+> > > On Sat, Apr 9, 2011 at 06:19, Phil Blundell <philb@gnu.org> wrote:
+> > >> What would be the use case for having them there?  Nothing ever link=
+s
+> > >> against them.  I think Otavio is right, they're better off deleted.
+> > >=20
+> > > AFAIK .la files are used for in project linking not when linking with
+> > > system or sdk libraries. So I'd prefer to remove them.
+> >=20
+> > .la files have a defined purpose in a development area.  Until / unless
+> > we move to globally killing .la files (see Richard talking about this o=
+n
+> > the poky list a few weeks ago), we should ship these in the -dev
+> > package.  If they're broken that probably means something isn't
+> > inherit'ing the right class that should be fixing them.
+>=20
+> Well, the point about these particular .la files is that they relate to
+> dlopen()ed modules, not to shared libraries that one would wish to link
+> against.  So the "defined purpose" doesn't apply to this situation.
+>=20
+> I don't think the files in question are broken, just useless.  It seems
+> silly to waste space in the -dev package with them.
 
-Well, the point about these particular .la files is that they relate to
-dlopen()ed modules, not to shared libraries that one would wish to link
-against.  So the "defined purpose" doesn't apply to this situation.
+I just want to add that Debian is also removed (and is still removing)
+*.la files [1] as far as I can see.
 
-I don't think the files in question are broken, just useless.  It seems
-silly to waste space in the -dev package with them.
-
-p.
+Sorry if that does not belong here.
 
 
+Thanks,
+
+Paul
 
 
+[1] http://wiki.debian.org/ReleaseGoals/LAFileRemoval
+
+--=-laiyqhoXPG8yRZKtcP3f
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2gwakACgkQPX1aK2wOHVhExACeNZdJMNWiNdU/i+PmyiwEEoBq
+IgYAniKoJ+tsS0sFpigTA3SFz6vfZn/m
+=4zFJ
+-----END PGP SIGNATURE-----
+
+--=-laiyqhoXPG8yRZKtcP3f--
