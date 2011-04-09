@@ -1,31 +1,16 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Q8ci3-00018p-PH
+	(envelope-from <philb@gnu.org>) id 1Q8ddK-0004Ov-Qt
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Apr 2011 20:16:40 +0200
-Received: by wwb17 with SMTP id 17so4616734wwb.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Apr 2011 11:14:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=lyRwJmEkJR8zY/zmuoNpDv7lHiUL9YnKqf/uMAeOBLk=;
-	b=jkC0VlxoPeUr3HZFzwmQ2cTAEm4VDtLZgT92SZRpve1Ea+Ta8CXWsqNp0iG7fhuwBh
-	KbMVWLzIfyJXAxyEnSGYu2JebTzvqhFVt8JKN7lbP6UIPa23hZCYtI2F1eexrYgQoNTM
-	6Mk5zipQFhwanrGrXUq/HsTfEZPf0NGmvJuoQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=SZXSpj+M+AffcDBLqQbAqPc5I+9WII024/R9ZEp8iAIBLRxSATDmU74nHJbvcJJ47l
-	Fbrbw7/ESJ5OCfhv8Cmk0XjrScxFWx+AGA6HMZaKB8OQUdsSzG3NUSgK3lzRr9YOzm2r
-	viQhkPtbYMhzN1J387juoJpoLbEi2Ov3/fQmY=
-MIME-Version: 1.0
-Received: by 10.216.167.65 with SMTP id h43mr1031338wel.17.1302372862045; Sat,
-	09 Apr 2011 11:14:22 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.216.46.207 with HTTP; Sat, 9 Apr 2011 11:14:21 -0700 (PDT)
+	Sat, 09 Apr 2011 21:15:46 +0200
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.3])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Q8dbG-0006O6-Kf
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 09 Apr 2011 21:13:38 +0200
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <4DA0A13A.1090406@mentor.com>
 References: <1301660208-31105-1-git-send-email-otavio@ossystems.com.br>
 	<1301660208-31105-3-git-send-email-otavio@ossystems.com.br>
@@ -37,11 +22,10 @@ References: <1301660208-31105-1-git-send-email-otavio@ossystems.com.br>
 	<1302340789.3131.7.camel@lenovo.internal.reciva.com>
 	<BANLkTinKJf85aenJia6nrVBaOdANdM44oA@mail.gmail.com>
 	<4DA0A13A.1090406@mentor.com>
-Date: Sat, 9 Apr 2011 15:14:21 -0300
-X-Google-Sender-Auth: xaBFHmzlQFW4CLpmxHXDL1PNCf8
-Message-ID: <BANLkTimKawBSB=aAAdYL5dKUxPJM=-XTGQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
+Date: Sat, 09 Apr 2011 20:13:32 +0100
+Message-ID: <1302376412.3131.9.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
 Subject: Re: [PATCH 3/6] xorg-xserver-common.inc: drop .la files from packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -56,35 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Apr 2011 18:16:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 09 Apr 2011 19:15:46 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Sat, Apr 9, 2011 at 15:11, Tom Rini <tom_rini@mentor.com> wrote:
+On Sat, 2011-04-09 at 11:11 -0700, Tom Rini wrote:
 > On 04/09/2011 10:36 AM, Otavio Salvador wrote:
->> On Sat, Apr 9, 2011 at 06:19, Phil Blundell <philb@gnu.org> wrote:
->>> What would be the use case for having them there? =A0Nothing ever links
->>> against them. =A0I think Otavio is right, they're better off deleted.
->>
->> AFAIK .la files are used for in project linking not when linking with
->> system or sdk libraries. So I'd prefer to remove them.
->
-> .la files have a defined purpose in a development area. =A0Until / unless
+> > On Sat, Apr 9, 2011 at 06:19, Phil Blundell <philb@gnu.org> wrote:
+> >> What would be the use case for having them there?  Nothing ever links
+> >> against them.  I think Otavio is right, they're better off deleted.
+> > 
+> > AFAIK .la files are used for in project linking not when linking with
+> > system or sdk libraries. So I'd prefer to remove them.
+> 
+> .la files have a defined purpose in a development area.  Until / unless
 > we move to globally killing .la files (see Richard talking about this on
 > the poky list a few weeks ago), we should ship these in the -dev
-> package. =A0If they're broken that probably means something isn't
+> package.  If they're broken that probably means something isn't
 > inherit'ing the right class that should be fixing them.
 
-Mind to point me some reference about this topic?
+Well, the point about these particular .la files is that they relate to
+dlopen()ed modules, not to shared libraries that one would wish to link
+against.  So the "defined purpose" doesn't apply to this situation.
 
-For me it doesn't matter et all but I want do not ship those into
-regular packages et all.
+I don't think the files in question are broken, just useless.  It seems
+silly to waste space in the -dev package with them.
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+p.
+
+
 
 
