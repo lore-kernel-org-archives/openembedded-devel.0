@@ -1,42 +1,41 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-px0-f178.google.com ([209.85.212.178])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Q8kQR-0003uT-3l
+	(envelope-from <raj.khem@gmail.com>) id 1Q8kbo-000455-9h
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Apr 2011 04:30:55 +0200
-Received: by pvc30 with SMTP id 30so1710272pvc.6
+	Sun, 10 Apr 2011 04:42:40 +0200
+Received: by pxi1 with SMTP id 1so2471595pxi.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Apr 2011 19:28:42 -0700 (PDT)
+	Sat, 09 Apr 2011 19:40:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
 	:subject:references:in-reply-to:content-type
 	:content-transfer-encoding;
-	bh=7mA7VYD0giTH5TEUBudirwu5Glxwuv3URLzpz6209vY=;
-	b=ZgfroqQUNwYKYl8J3jvizffxnbwRgnaJpzOPnOnHPfed2e2G/Az0eWRICwtf4Tx04z
-	BIMwO3N5qd4jXwfl94bqpLJT0h/286JoRDIUYtX7DqsozZFj2WLCfh+NDpKt4EqTdBfX
-	Fs62OVA1CnxJjjlndWTIvBK4GEoUFFGzTSoW0=
+	bh=Yt7Qdh/v6T71964Pzb0+6xpszFnnMJGKDF+jhvZlRVg=;
+	b=Zj5eMFkQBHE48+4G8nIoZmgBPnq8J/JIyoPDD7CmVEy6o9/3TwC7dm/r5Dm9K0E+LE
+	XajB9G90mdYuoVwNcyfXDgCX2NL74/xa4X3X9WH5IhBgZUgjMWU31HscLnR5pvpWCHyC
+	Cov+GPw4Vfy5gCjNx5ey+rAaO6RnB+qN0gZis=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:user-agent:mime-version:to:subject:references
 	:in-reply-to:content-type:content-transfer-encoding;
-	b=Xvs6LuJTDCVE6GjVD8NvW+FTo1YvyADxdTKN/I32heb0p9793yQ/NIPmDWEzHZaDIE
-	i/RF29AfexN9W0l1YqDVJzCeWWIcFlbHcomJqd+tdhhwybXE5Ba3d3HRvzXbnqtyB6Op
-	Y0F8aKZCqD2gI92tS6GKjDMPlGCyWX3fF8ONQ=
-Received: by 10.142.173.5 with SMTP id v5mr3557460wfe.66.1302402522842;
-	Sat, 09 Apr 2011 19:28:42 -0700 (PDT)
+	b=ZCLj7xABUjRcSnM2QsogLRTX3PcXK2EYTu9Ags5BMajBBwtWNeNit1GszqON92AarY
+	g1+ROsmzXg76B2EdsG1nQ3aMHOtkYRvV0gMwOlF5KNundW01CEa7qoiA6H7DofR36st+
+	FA0DHJFvyVJERwORRek2XRmaFgrkuqfWtyIwM=
+Received: by 10.142.250.6 with SMTP id x6mr1808139wfh.229.1302403228635;
+	Sat, 09 Apr 2011 19:40:28 -0700 (PDT)
 Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id w32sm6017020wfh.7.2011.04.09.19.28.40
-	(version=SSLv3 cipher=OTHER); Sat, 09 Apr 2011 19:28:41 -0700 (PDT)
-Message-ID: <4DA115DB.1000209@gmail.com>
-Date: Sat, 09 Apr 2011 19:28:43 -0700
+	by mx.google.com with ESMTPS id 25sm6023717wfb.22.2011.04.09.19.40.26
+	(version=SSLv3 cipher=OTHER); Sat, 09 Apr 2011 19:40:27 -0700 (PDT)
+Message-ID: <4DA1189E.5050703@gmail.com>
+Date: Sat, 09 Apr 2011 19:40:30 -0700
 From: Khem Raj <raj.khem@gmail.com>
 User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
 	rv:1.9.2.15) Gecko/20110303 Thunderbird/3.1.9
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <BANLkTimy1b_JM5zx9EYJddfEqk4MYWZ2Pg@mail.gmail.com>
-	<BANLkTimD2hxAA-nQPGFzUhXtJLzVXui1Jg@mail.gmail.com>
-In-Reply-To: <BANLkTimD2hxAA-nQPGFzUhXtJLzVXui1Jg@mail.gmail.com>
-Subject: Re: ESE Key Daemon 1.2.4: FTBFS with gcc-4.5
+References: <BANLkTimPVgqbjMhJnBcniZgJBbRd_1D8yQ@mail.gmail.com>
+In-Reply-To: <BANLkTimPVgqbjMhJnBcniZgJBbRd_1D8yQ@mail.gmail.com>
+Subject: Re: python-distutils_2.6.6: config/Makefile contains sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,85 +49,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Apr 2011 02:30:55 -0000
+X-List-Received-Date: Sun, 10 Apr 2011 02:42:40 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 4/6/2011 4:34 AM, Luís Filipe Salé Borlido wrote:
-> Hi!
+On 4/6/2011 3:04 PM, Kartik Mohta wrote:
+> The Makefile (in /usr/lib/python2.6/config) used by distutils to
+> compile modules contains the original sysroot used while compiling
+> Python on the host:
 >
-> I was compiling a new image for mini2440  that contains esekeyd and I got an
-> error:
+> CC=        arm-angstrom-linux-gnueabi-gcc -march=armv7-a
+> -mtune=cortex-a8 -mfpu=neon -mfloat-abi=hard -mthumb-interwork
+> -mno-thumb --sysroot=/home/kartikmohta/overo-oe/tmp/sysroots/armv7a-hardfp-angstrom-linux-gnueabi
+> CXX=       arm-angstrom-linux-gnueabi-g++ -march=armv7-a
+> -mtune=cortex-a8 -mfpu=neon -mfloat-abi=hard -mthumb-interwork
+> -mno-thumb --sysroot=/home/kartikmohta/overo-oe/tmp/sysroots/armv7a-hardfp-angstrom-linux-gnueabi
 >
-> NOTE: Running task 2457 of 4369 (ID: 199,
-> /opt/OpenEmbedded/openembedded/recipes/esekeyd/esekeyd_1.2.4.bb, do_compile)
-> NOTE: package esekeyd-1.2.4-r0: task do_compile: Started
-> ERROR: Logfile of failure stored in:
-> /opt/OpenEmbedded/build/tmp/work/armv4t-angstrom-linux-gnueabi/esekeyd-1.2.4-r0/temp/log.do_compile.11553
-> Log data follows:
-> | + do_compile
-> | + base_do_compile
-> | + '[' -e Makefile -o -e makefile -o -e GNUmakefile ']'
-> | + oe_runmake
-> | + oenote make
-> | + echo NOTE: make
-> | NOTE: make
-> | + make
-> | make  all-recursive
-> | make[1]: Entering directory
-> `/opt/OpenEmbedded/build/tmp/work/armv4t-angstrom-linux-gnueabi/esekeyd-1.2.4-r0/esekeyd-1.2.4'
-> | Making all in src
-> | make[2]: Entering directory
-> `/opt/OpenEmbedded/build/tmp/work/armv4t-angstrom-linux-gnueabi/esekeyd-1.2.4-r0/esekeyd-1.2.4/src'
-> | arm-angstrom-linux-gnueabi-gcc -march=armv4t -mtune=arm920t
-> -mthumb-interwork -mno-thumb
-> --sysroot=/opt/OpenEmbedded/build/tmp/sysroots/armv4t-angstrom-linux-gnueabi
-> -DHAVE_CONFIG_H -I. -I..     -fexpensive-optimizations -fomit-frame-pointer
-> -frename-registers -O2 -ggdb2 -MT keytest.o -MD -MP -MF .deps/keytest.Tpo -c
-> -o keytest.o keytest.c
-> | keytest.c: In function 'main':
-> *| keytest.c:55:3: error: variable-sized object may not be initialized*
-> | make[2]: *** [keytest.o] Error 1
-> | make[2]: Leaving directory
-> `/opt/OpenEmbedded/build/tmp/work/armv4t-angstrom-linux-gnueabi/esekeyd-1.2.4-r0/esekeyd-1.2.4/src'
-> | make[1]: *** [all-recursive] Error 1
-> | make[1]: Leaving directory
-> `/opt/OpenEmbedded/build/tmp/work/armv4t-angstrom-linux-gnueabi/esekeyd-1.2.4-r0/esekeyd-1.2.4'
-> | make: *** [all] Error 2
-> | + die 'oe_runmake failed'
-> | + oefatal 'oe_runmake failed'
-> | + echo FATAL: 'oe_runmake failed'
-> | FATAL: oe_runmake failed
-> | + exit 1
-> NOTE: package esekeyd-1.2.4-r0: task do_compile: Failed
-> ERROR: Function 'do_compile' failed (see
-> /opt/OpenEmbedded/build/tmp/work/armv4t-angstrom-linux-gnueabi/esekeyd-1.2.4-r0/temp/log.do_compile.11553
-> for further information)
-> ERROR: Task 199 (/opt/OpenEmbedded/openembedded/recipes/esekeyd/
-> esekeyd_1.2.4.bb, do_compile) failed with exit code '1'
-> ERROR: '/opt/OpenEmbedded/openembedded/recipes/esekeyd/esekeyd_1.2.4.bb'
-> failed
+> This leads to the following error when compiling modules using distutils:
+> /usr/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+> this linker was not configured to use sysroots
 >
-> In one of the Debian bug reports (
-> http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=564981), they seem to say
-> that the package cannot be built using gcc-4.5, which is the version of
-> arm-angstrom-linux-gnueabi-gcc that is being used to build the package.
 >
-> To solve this problem I added a recipe to esekeyd-1.2.7 (in attach) and now
-> it's working.
+> Can these sysroot arguments be removed in the do_install_append() step
+> using a simple sed script?
 >
 
-can you resend the patch following submission guidelines
-http://openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmbedded
-> Best regards,
-> Luís Borlido
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+you should try to figure out why binutils was build without sysroot. 
+Check the configure args for binutils-cross
 
 
