@@ -1,41 +1,21 @@
-Received: from mail-px0-f178.google.com ([209.85.212.178])
+Received: from smtp3-g21.free.fr ([212.27.42.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Q8kbo-000455-9h
+	(envelope-from <eric@eukrea.com>) id 1Q8rE5-0000M4-FQ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Apr 2011 04:42:40 +0200
-Received: by pxi1 with SMTP id 1so2471595pxi.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Apr 2011 19:40:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=Yt7Qdh/v6T71964Pzb0+6xpszFnnMJGKDF+jhvZlRVg=;
-	b=Zj5eMFkQBHE48+4G8nIoZmgBPnq8J/JIyoPDD7CmVEy6o9/3TwC7dm/r5Dm9K0E+LE
-	XajB9G90mdYuoVwNcyfXDgCX2NL74/xa4X3X9WH5IhBgZUgjMWU31HscLnR5pvpWCHyC
-	Cov+GPw4Vfy5gCjNx5ey+rAaO6RnB+qN0gZis=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=ZCLj7xABUjRcSnM2QsogLRTX3PcXK2EYTu9Ags5BMajBBwtWNeNit1GszqON92AarY
-	g1+ROsmzXg76B2EdsG1nQ3aMHOtkYRvV0gMwOlF5KNundW01CEa7qoiA6H7DofR36st+
-	FA0DHJFvyVJERwORRek2XRmaFgrkuqfWtyIwM=
-Received: by 10.142.250.6 with SMTP id x6mr1808139wfh.229.1302403228635;
-	Sat, 09 Apr 2011 19:40:28 -0700 (PDT)
-Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 25sm6023717wfb.22.2011.04.09.19.40.26
-	(version=SSLv3 cipher=OTHER); Sat, 09 Apr 2011 19:40:27 -0700 (PDT)
-Message-ID: <4DA1189E.5050703@gmail.com>
-Date: Sat, 09 Apr 2011 19:40:30 -0700
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
-	rv:1.9.2.15) Gecko/20110303 Thunderbird/3.1.9
+	Sun, 10 Apr 2011 11:46:53 +0200
+Received: from [192.168.2.15] (unknown [82.233.81.124])
+	by smtp3-g21.free.fr (Postfix) with ESMTP id CE5D1A64EC;
+	Sun, 10 Apr 2011 11:43:46 +0200 (CEST)
+Message-ID: <4DA17BD1.8050500@eukrea.com>
+Date: Sun, 10 Apr 2011 11:43:45 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.15) Gecko/20110307 Fedora/3.1.9-0.39.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.9
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <BANLkTimPVgqbjMhJnBcniZgJBbRd_1D8yQ@mail.gmail.com>
-In-Reply-To: <BANLkTimPVgqbjMhJnBcniZgJBbRd_1D8yQ@mail.gmail.com>
-Subject: Re: python-distutils_2.6.6: config/Makefile contains sysroot
+To: Tom Rini <tom_rini@mentor.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [2011.03-maintenance] cherry-pick request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,32 +29,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Apr 2011 02:42:40 -0000
+X-List-Received-Date: Sun, 10 Apr 2011 09:46:53 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 4/6/2011 3:04 PM, Kartik Mohta wrote:
-> The Makefile (in /usr/lib/python2.6/config) used by distutils to
-> compile modules contains the original sysroot used while compiling
-> Python on the host:
->
-> CC=        arm-angstrom-linux-gnueabi-gcc -march=armv7-a
-> -mtune=cortex-a8 -mfpu=neon -mfloat-abi=hard -mthumb-interwork
-> -mno-thumb --sysroot=/home/kartikmohta/overo-oe/tmp/sysroots/armv7a-hardfp-angstrom-linux-gnueabi
-> CXX=       arm-angstrom-linux-gnueabi-g++ -march=armv7-a
-> -mtune=cortex-a8 -mfpu=neon -mfloat-abi=hard -mthumb-interwork
-> -mno-thumb --sysroot=/home/kartikmohta/overo-oe/tmp/sysroots/armv7a-hardfp-angstrom-linux-gnueabi
->
-> This leads to the following error when compiling modules using distutils:
-> /usr/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
-> this linker was not configured to use sysroots
->
->
-> Can these sysroot arguments be removed in the do_install_append() step
-> using a simple sed script?
->
+Hi Tom,
 
-you should try to figure out why binutils was build without sysroot. 
-Check the configure args for binutils-cross
+is it possible to cherry-pick the following commits to 2011.03-maintenance.
+They are part of your fixes for patches with ".." in path but only the ones 
+for tcl/tk were merged into 2011.03-maintenance branch, thus for example db5 
+fails to compile on a Fedora 14.
+
+4adee396bf2eaf0cb52f5914302b7789270a4080
+12b24f2598cebf8fd18f2f15cf68abf229ddf6eb
+3c90f4773accbde5c30c9f0b4ab39245b0094504
+f0bb74cccdff4c63cdef5416cbe25360d35ee12c
+31adccabfaeb234cb69cb029e090b0ec47a96f5d
+6f64c786d3d47ccc24439d86ca02b6ee77c2f603
+43bb129434f6007a7003c6472675d625bb63bd76
+ed3b755c62c6b353268a48b8c1a2becc26513752
+bcb14fc7adb1fa817e624421a91b2d11d3b107b8
+fe0d72d2fabde47af3aaeeb4158672ff0e23d705
+44abf99ecfd45c739508a4be5af45da797c859dd
+3fb654d5a9bd62a258eeb8f77178653948897b10
+de753f3bef4b30c1d1dafb78e2d8282d6f415298
+35672befc2752f3bd84b0d5369a2c006dfb744a4
+
+Thanks
+Eric
 
 
