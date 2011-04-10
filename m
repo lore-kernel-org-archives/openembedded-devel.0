@@ -1,37 +1,37 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Q8tyw-0001o3-JZ
+	(envelope-from <martin.jansa@gmail.com>) id 1Q8tz1-0001ns-7b
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Apr 2011 14:43:10 +0200
-Received: by bwz5 with SMTP id 5so4004112bwz.6
+	Sun, 10 Apr 2011 14:43:15 +0200
+Received: by mail-bw0-f47.google.com with SMTP id 5so4004034bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Apr 2011 05:40:55 -0700 (PDT)
+	Sun, 10 Apr 2011 05:41:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
 	:in-reply-to:references;
-	bh=RgIGUYtLEe44TP9gpbJHTsvDZ/XkL3BWSBN85cnx+2M=;
-	b=kzhtyR1FZMHyw0xeWYBt6Vt7bcAjt8M4D6C9ifphCKKR1YqYEJ0mkBmILoYuA95ps/
-	daFBrJ+W5XPdUZRUEvhr5Wz+b8zcqGEm2yCPCeq+07kdnRdeJMiqdNV7ZjjMASNcs1bb
-	hEnpE4OAbtcMTeu6N7zqYvKBylG3tLHlLB08Y=
+	bh=bxoXE7eMRZN+K3zlX/sDklnlALv4DqjT1p5znsWq31w=;
+	b=OssiIN/abmr4VCdarKNl1RjUNNdjstNJ9KBWSJ8oMeL0hQjUObB50vSkK5BAAy1h9i
+	+Tu5+ih0l6bU5YJBccRGXc+qT0ZCIB+qsjxA2gbpOCENCW762bHun4TAd6+Uzqk+nWoC
+	sJumk73PYiPvd33w4859kTfnM9UsBMDNG7lts=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=RA9TLlD01OOKu8DB7r2AsIAlSk15N2y/Q6kb1B+QMbyatIqDu3bkFQWTlQRZLjG50e
-	WJjLWubD0jrsc6S6vUAJXvJRjn4rva/uhdFMf6kNqwH430x304tXsU3aLW03Dp81TddY
-	XyRfH+WqOeF718AU5Ot8+r1osB11o/lZYBsxU=
-Received: by 10.204.23.81 with SMTP id q17mr3888023bkb.2.1302439255093;
-	Sun, 10 Apr 2011 05:40:55 -0700 (PDT)
+	b=T414a3MgZG/j5IEnkdjOsLUl4gg4TwmNu25XE0b5ogm1trRXW7n0zQOAklDUNGt+gO
+	ngAbIBzzm2DZlFYzX2Sjt5Npl38IDnbUJxJEsdw0SvePjW5ZAcaPvRyMTFL1cqmR6XSr
+	a6Q4ZKJB5YmzOTMsO1GAYYZhy3ycGhXFPvcdw=
+Received: by 10.204.175.194 with SMTP id bb2mr3810264bkb.121.1302439266236;
+	Sun, 10 Apr 2011 05:41:06 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id l1sm2640831bkl.1.2011.04.10.05.40.53
+	by mx.google.com with ESMTPS id l1sm2638374bkl.13.2011.04.10.05.41.04
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 10 Apr 2011 05:40:54 -0700 (PDT)
+	Sun, 10 Apr 2011 05:41:05 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Apr 2011 14:40:52 +0200
-Message-Id: <36837169207e7b6daf60fc1bf6370c6090ec1502.1302439112.git.Martin.Jansa@gmail.com>
+Date: Sun, 10 Apr 2011 14:40:59 +0200
+Message-Id: <122a45d6732434d6dc4d3e61387ff7f5030f56e0.1302439112.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.4.1
 In-Reply-To: <cover.1302439112.git.Martin.Jansa@gmail.com>
 References: <cover.1302439112.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 1/3] e-base: bump SRCREV
+Subject: [PATCH 2/3] libusb-compat: add native, nativesdk to BBCLASSEXTEND and define native PROVIDES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,24 +45,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Apr 2011 12:43:10 -0000
+X-List-Received-Date: Sun, 10 Apr 2011 12:43:15 -0000
 
+* virtual/libusb0-native is used in usbpath-native
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/classes/e-base.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ .../libusb/libusb-compat_0.1.3.bbappend            |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-diff --git a/meta-efl/classes/e-base.bbclass b/meta-efl/classes/e-base.bbclass
-index 2692cfe..b25ddf2 100644
---- a/meta-efl/classes/e-base.bbclass
-+++ b/meta-efl/classes/e-base.bbclass
-@@ -2,7 +2,7 @@ HOMEPAGE = "http://www.enlightenment.org"
- SRCNAME ?= "${BPN}"
+diff --git a/meta-oe/recipes-support/libusb/libusb-compat_0.1.3.bbappend b/meta-oe/recipes-support/libusb/libusb-compat_0.1.3.bbappend
+index 7de2361..5b50d6b 100644
+--- a/meta-oe/recipes-support/libusb/libusb-compat_0.1.3.bbappend
++++ b/meta-oe/recipes-support/libusb/libusb-compat_0.1.3.bbappend
+@@ -1,4 +1,6 @@
+ PROVIDES += "virtual/libusb0"
++PROVIDES_virtclass-native += "virtual/libusb0-native"
++BBCLASSEXTEND = "native nativesdk"
  
- # usually tracks svn trunk HEAD
--EFL_SRCREV ?= "58315"
-+EFL_SRCREV ?= "58429"
- # revision when 1.0.0 was released, for recipes which don't need rebuild so often
- EFL_SRCREV_1.0.0 ?= "56356"
+ inherit lib_package
  
 -- 
 1.7.4.1
