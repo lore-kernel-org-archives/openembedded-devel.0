@@ -1,21 +1,27 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from vms173013pub.verizon.net ([206.46.173.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q8gSo-0007Jw-Jh for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Apr 2011 00:17:06 +0200
-Received: from f053040093.adsl.alicedsl.de ([78.53.40.93]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Q8gQs-0001Yi-0i for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Apr 2011 22:15:06 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <denis@denix.org>) id 1Q8idA-0004n7-J0
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Apr 2011 02:36:00 +0200
+Received: from gandalf.denix.org ([unknown] [108.18.140.4])
+	by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LJE00E26UVBRW82@vms173013.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sat,
+	09 Apr 2011 19:33:21 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 7190914AF5B; Sat,
+	09 Apr 2011 20:33:11 -0400 (EDT)
+Date: Sat, 09 Apr 2011 20:33:11 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Apr 2011 00:14:55 +0200
-Message-ID: <1302387296.15868.17.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: [PATCH] watchdog_5.2.6: remove recipe since task fetch fails
+Message-id: <20110410003311.GA32652@denix.org>
+References: <1302328581-30367-1-git-send-email-heroor@gmail.com>
+	<1302328581-30367-3-git-send-email-heroor@gmail.com>
+MIME-version: 1.0
+In-reply-to: <1302328581-30367-3-git-send-email-heroor@gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Cc: Siddharth Heroor <heroor@ti.com>
+Subject: Re: [PATCH 3/3] libgles-omap3: Remove SGX Fixup for TI816x.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,101 +35,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Apr 2011 22:17:06 -0000
-X-Groupsio-MsgNum: 31076
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-C9kITDvkNKJDgu/SlB7k"
+X-List-Received-Date: Sun, 10 Apr 2011 00:36:03 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
---=-C9kITDvkNKJDgu/SlB7k
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Sat, Apr 09, 2011 at 11:26:21AM +0530, Siddharth Heroor wrote:
+> From: Siddharth Heroor <heroor@ti.com>
+> 
+> * Unlike OMAP3, the SGX core has not undergone revisions in TI816x.
+>   The libraries for TI816x are also fixed and do not need fixup based
+>   on revision of the SGX core.
 
-Date: Sun, 10 Apr 2011 00:03:29 +0200
+Sid,
 
-Watchdog is not available anymore on [1] and neither the official location =
-[2].
+So, you are modifying generic rc script, which still apllies to OMAP3 
+platforms, by removing fixups used in OMAP3... Is that correct?
 
-	$ bitbake -c fetch -b /oe/openembedded/recipes/watchdog/watchdog_5.2.6.bb
-	[=E2=80=A6]
-	NOTE: Running task 2 of 2 (ID: 0, /oe/openembedded/recipes/watchdog/watchd=
-og_5.2.6.bb, do_fetch)
-	NOTE: package watchdog-5.2.6-r4: task do_fetch: Started
-	--2011-04-10 00:09:07--  http://www.ibiblio.org/pub/Linux/system/daemons/w=
-atchdog/watchdog-5.2.6.tar.gz
-	 Resolving www.ibiblio.org... 152.19.134.40
-	 Connecting to www.ibiblio.org|152.19.134.40|:80... connected.
-	 HTTP request sent, awaiting response... 404 Not Found
-	 2011-04-10 00:09:07 ERROR 404: Not Found.
+-- 
+Denys
 
-	 --2011-04-10 00:09:07--  http://mirrors.openembedded.org/watchdog-5.2.6.t=
-ar.gz
-	 Resolving mirrors.openembedded.org... 82.197.159.157
-	 Connecting to mirrors.openembedded.org|82.197.159.157|:80... failed: Conn=
-ection refused.
-	 --2011-04-10 00:09:07--  http://sources.openembedded.org/watchdog-5.2.6.t=
-ar.gz
-	 Resolving sources.openembedded.org... 140.211.169.165
-	 Connecting to sources.openembedded.org|140.211.169.165|:80... connected.
-	 HTTP request sent, awaiting response... 404 Not Found
-	 2011-04-10 00:09:08 ERROR 404: Not Found.
 
-	NOTE: package watchdog-5.2.6-r4: task Fetch failed: Unable to fetch URL ht=
-tp://www.ibiblio.org/pub/Linux/system/daemons/watchdog/watchdog-5.2.6.tar.g=
-z from any source.: Failed
-	ERROR: Function 'Fetch failed: Unable to fetch URL http://www.ibiblio.org/=
-pub/Linux/system/daemons/watchdog/watchdog-5.2.6.tar.gz from any source.' f=
-ailed
-	ERROR: Task 0 (/oe/openembedded/recipes/watchdog/watchdog_5.2.6.bb, do_fet=
-ch) failed with exit code '1'
-	ERROR: '/oe/openembedded/recipes/watchdog/watchdog_5.2.6.bb' failed
+> Signed-off-by: Siddharth Heroor <heroor@ti.com>
+> ---
+>  recipes/powervr-drivers/libgles-omap3/rc.pvr |   10 +++-------
+>  1 files changed, 3 insertions(+), 7 deletions(-)
+> 
+> diff --git a/recipes/powervr-drivers/libgles-omap3/rc.pvr b/recipes/powervr-drivers/libgles-omap3/rc.pvr
+> index 395d085..1b141a0 100755
+> --- a/recipes/powervr-drivers/libgles-omap3/rc.pvr
+> +++ b/recipes/powervr-drivers/libgles-omap3/rc.pvr
+> @@ -90,15 +90,11 @@ case $CPUTYPE in
+>  	devmem2 0x48180900 w 0x2
+>  	devmem2 0x48180920 w 0x2
+>  
+> +	sleep 2
+> +
+>  	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:5: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+>  
+> -	if [ "${ES_REVISION}" != "${SAVED_ESREVISION}" ] ; then
+> -		echo -n "Starting SGX fixup for"
+> -		echo " ES${ES_REVISION}.x"
+> -		cp -a /usr/lib/ES${ES_REVISION}.0/* /usr/lib
+> -		cp -a /usr/bin/ES${ES_REVISION}.0/* /usr/bin	
+> -		echo "${ES_REVISION}" > /etc/powervr-esrev
+> -	fi
+> +	echo "${ES_REVISION}" > /etc/powervr-esrev
+>  	/usr/bin/pvrsrvinit
+>  
+>  	;;
+> -- 
+> 1.7.0.4
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Since this version is not pinned by anything just remove it.
 
-[1] http://www.ibiblio.org/pub/Linux/system/daemons/watchdog/${P}.tar.gz
-[2] http://sourceforge.net/projects/watchdog/files/watchdog/
-
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
- recipes/watchdog/watchdog_5.2.6.bb |   13 -------------
- 1 files changed, 0 insertions(+), 13 deletions(-)
- delete mode 100644 recipes/watchdog/watchdog_5.2.6.bb
-
-diff --git a/recipes/watchdog/watchdog_5.2.6.bb b/recipes/watchdog/watchdog=
-_5.2.6.bb
-deleted file mode 100644
-index d117510..0000000
---- a/recipes/watchdog/watchdog_5.2.6.bb
-+++ /dev/null
-@@ -1,13 +0,0 @@
--#CONFFILES =3D "${sysconfdir}/watchdog.conf"
--DESCRIPTION =3D "Software watchdog"
--LICENSE =3D "GPL"
--PR =3D "r4"
--
--SRC_URI =3D "http://www.ibiblio.org/pub/Linux/system/daemons/watchdog/${P}=
-.tar.gz"
--
--inherit autotools
--
--FILES =3D "${sysconfdir}/watchdog.conf ${sbindir}/watchdog"
--
--SRC_URI[md5sum] =3D "5a1a4476087973852e30f8cdb5b0ff92"
--SRC_URI[sha256sum] =3D "c762525fdbf5f5dd32c6c950f2a63d8c1b15ec3dc7afca5d2d=
-c3dbd1b129a00d"
---=20
-1.7.4.1
-
---=-C9kITDvkNKJDgu/SlB7k
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk2g2l8ACgkQPX1aK2wOHVgjTQCeIeV3xOopug4o9peeeTLTPvhr
-q4oAn1KrDe0wF2W093NkLQADXxRTOYJ9
-=vwn/
------END PGP SIGNATURE-----
-
---=-C9kITDvkNKJDgu/SlB7k--
