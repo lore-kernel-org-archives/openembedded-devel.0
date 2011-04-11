@@ -1,50 +1,21 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Q9OxY-0005MI-9N
+	(envelope-from <philip@balister.org>) id 1Q9QqS-0006XC-8V
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Apr 2011 23:47:48 +0200
-Received: by iwn10 with SMTP id 10so6497966iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Apr 2011 14:45:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id
-	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:in-reply-to:user-agent;
-	bh=ajTTFFcmzIEN3fUNkYuil+0sSwPAxWSVj+QD6OdszjU=;
-	b=UaP6LaqW+4gkQ14qbdxZmdP7W5UJQEoBriAIoJDL941cjC12KOztaMlSVhyni7fmlX
-	wgIU1iHDsngy9XHPHVU3rRzDTvy+Je3MyjvGHDooCIyFVGN/PYSsEI/cp1vyYflr57t7
-	XuFEDxbDD0RDIwIs3P1mq9eyoMp/3qOsQFIJI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	b=WeqO491XfCa7XjCNbsKE7Gs/hNti4Am4ScrCEgbQy7DAqu/XvEFcRzoWAUa+qMXlkd
-	3r+YQrpttQ6o3H5CJM2Ha8dW2YlkbhTZvkhWmByT6JnUYJ3iFvyxCmodTSDecYh33Sms
-	0uUO7WzUtpgAjoz5Qu272g3gMZHmU2wsJVGPQ=
-Received: by 10.42.145.198 with SMTP id g6mr8651697icv.496.1302558334701;
-	Mon, 11 Apr 2011 14:45:34 -0700 (PDT)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id e9sm4461225ibb.49.2011.04.11.14.45.31
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 11 Apr 2011 14:45:32 -0700 (PDT)
-Date: Mon, 11 Apr 2011 14:45:50 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110411214550.GA16667@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org,
-	Otavio Salvador <otavio@ossystems.com.br>
-References: <1302182396-4171-1-git-send-email-otavio@ossystems.com.br>
-	<1302182396-4171-2-git-send-email-otavio@ossystems.com.br>
-	<1302182396-4171-3-git-send-email-otavio@ossystems.com.br>
-	<1302182396-4171-4-git-send-email-otavio@ossystems.com.br>
-	<1302182396-4171-5-git-send-email-otavio@ossystems.com.br>
-	<BANLkTikvUTiJSFKYAcD3X9tgFTwVu+X8Bg@mail.gmail.com>
+	Tue, 12 Apr 2011 01:48:36 +0200
+Received: (qmail 30483 invoked by uid 1003); 11 Apr 2011 23:46:21 -0000
+Received: from unknown (HELO ?10.21.2.135?) (philip@opensdr.com@70.36.246.130)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	11 Apr 2011 23:46:21 -0000
+Message-ID: <4DA392CC.4010401@balister.org>
+Date: Mon, 11 Apr 2011 16:46:20 -0700
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.15) Gecko/20110307 Fedora/3.1.9-0.39.b3pre.fc14
+	Thunderbird/3.1.9
 MIME-Version: 1.0
-In-Reply-To: <BANLkTikvUTiJSFKYAcD3X9tgFTwVu+X8Bg@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [PATCH 4/6] xserver-xorg (1.9.4): enable xephyr
+To: openembedded-devel@lists.openembedded.org
+Subject: Upstreaming patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,23 +29,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Apr 2011 21:47:48 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 11 Apr 2011 23:48:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On (11/04/11 15:10), Martin Jansa wrote:
-> |  'ephyrGetStill':
-> | ephyrvideo.c:1243:1: internal compiler error: in
-> default_secondary_reload, at targhooks.c:762
-> | Please submit a full bug report,
-> | with preprocessed source if appropriate.
-> | See <http://gcc.gnu.org/bugs.html> for instructions.
-> | make[4]: *** [ephyrvideo.lo] Error 1
+Saul Wold asked me about upstreaming some of the patches in OE. 
+Apparently, Intel has some people who can look at submitting some of our 
+patches upstream.
 
+The question is, what do we do about attribution? The problem is that is 
+not simple for many cases working out who created the patch. Rather than 
+spend time chasing through the revision history, it would be simpler to 
+send the patches upstream mentioning the source as derived from OE.
 
-another gcc ICE :( is it again in thumb mode ?
-can you send me the preprocessed file for ephyrvideo.c
+My thoughts are no reasonable OE contributor would object to someone 
+else upstreaming their patches :), but I thought I should ask people 
+what they thought.
 
--Khem
+Obviously, if there is a complex patch the situation is different, but I 
+suspect most of the easy patches do not fall into this category.
+
+Comments?
+
+Philip
 
 
