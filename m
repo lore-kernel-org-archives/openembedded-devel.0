@@ -1,41 +1,50 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1Q9NiW-0002Zg-02
+	(envelope-from <raj.khem@gmail.com>) id 1Q9OxY-0005MI-9N
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Apr 2011 22:28:12 +0200
-Received: from dlep33.itg.ti.com ([157.170.170.112])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id p3BKPt5i026449
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Mon, 11 Apr 2011 23:47:48 +0200
+Received: by iwn10 with SMTP id 10so6497966iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Apr 2011 15:25:55 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep33.itg.ti.com (8.13.7/8.13.7) with ESMTP id p3BKPsrO000964
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Apr 2011 15:25:54 -0500 (CDT)
-Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p3BKPswa013116
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Apr 2011 15:25:54 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dsbe71.ent.ti.com
-	([156.117.232.23]) with mapi; Mon, 11 Apr 2011 15:25:41 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 11 Apr 2011 15:25:39 -0500
-Thread-Topic: [oe] ncurses-5.7 patch files are missing
-Thread-Index: Acv4hgssiC0olgaTQoOGtFnfPN0hwQAADcjA
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080340D391B5@dlee06.ent.ti.com>
-References: <131E5DFBE7373E4C8D813795A6AA7F080340D39191@dlee06.ent.ti.com>
-	<20110411201207.GA30730@rhein.zuhause.netz>
-	<131E5DFBE7373E4C8D813795A6AA7F080340D391AE@dlee06.ent.ti.com>
-	<4DA362BD.3020703@mentor.com>
-In-Reply-To: <4DA362BD.3020703@mentor.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Mon, 11 Apr 2011 14:45:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:cc:subject:message-id
+	:mail-followup-to:references:mime-version:content-type
+	:content-disposition:in-reply-to:user-agent;
+	bh=ajTTFFcmzIEN3fUNkYuil+0sSwPAxWSVj+QD6OdszjU=;
+	b=UaP6LaqW+4gkQ14qbdxZmdP7W5UJQEoBriAIoJDL941cjC12KOztaMlSVhyni7fmlX
+	wgIU1iHDsngy9XHPHVU3rRzDTvy+Je3MyjvGHDooCIyFVGN/PYSsEI/cp1vyYflr57t7
+	XuFEDxbDD0RDIwIs3P1mq9eyoMp/3qOsQFIJI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	b=WeqO491XfCa7XjCNbsKE7Gs/hNti4Am4ScrCEgbQy7DAqu/XvEFcRzoWAUa+qMXlkd
+	3r+YQrpttQ6o3H5CJM2Ha8dW2YlkbhTZvkhWmByT6JnUYJ3iFvyxCmodTSDecYh33Sms
+	0uUO7WzUtpgAjoz5Qu272g3gMZHmU2wsJVGPQ=
+Received: by 10.42.145.198 with SMTP id g6mr8651697icv.496.1302558334701;
+	Mon, 11 Apr 2011 14:45:34 -0700 (PDT)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id e9sm4461225ibb.49.2011.04.11.14.45.31
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 11 Apr 2011 14:45:32 -0700 (PDT)
+Date: Mon, 11 Apr 2011 14:45:50 -0700
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110411214550.GA16667@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org,
+	Otavio Salvador <otavio@ossystems.com.br>
+References: <1302182396-4171-1-git-send-email-otavio@ossystems.com.br>
+	<1302182396-4171-2-git-send-email-otavio@ossystems.com.br>
+	<1302182396-4171-3-git-send-email-otavio@ossystems.com.br>
+	<1302182396-4171-4-git-send-email-otavio@ossystems.com.br>
+	<1302182396-4171-5-git-send-email-otavio@ossystems.com.br>
+	<BANLkTikvUTiJSFKYAcD3X9tgFTwVu+X8Bg@mail.gmail.com>
 MIME-Version: 1.0
-Subject: Re: ncurses-5.7 patch files are missing
+In-Reply-To: <BANLkTikvUTiJSFKYAcD3X9tgFTwVu+X8Bg@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [PATCH 4/6] xserver-xorg (1.9.4): enable xephyr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,78 +58,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Apr 2011 20:28:12 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 11 Apr 2011 21:47:48 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+On (11/04/11 15:10), Martin Jansa wrote:
+> |  'ephyrGetStill':
+> | ephyrvideo.c:1243:1: internal compiler error: in
+> default_secondary_reload, at targhooks.c:762
+> | Please submit a full bug report,
+> | with preprocessed source if appropriate.
+> | See <http://gcc.gnu.org/bugs.html> for instructions.
+> | make[4]: *** [ephyrvideo.lo] Error 1
 
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Tom Rini
-> Sent: Monday, April 11, 2011 3:21 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] ncurses-5.7 patch files are missing
->=20
-> On 04/11/2011 01:17 PM, Maupin, Chase wrote:
-> >> -----Original Message-----
-> >> From: openembedded-devel-bounces@lists.openembedded.org
-> >> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf O=
-f
-> >> Henning Heinold
-> >> Sent: Monday, April 11, 2011 3:12 PM
-> >> To: openembedded-devel@lists.openembedded.org
-> >> Subject: Re: [oe] ncurses-5.7 patch files are missing
-> >>
-> >> On Mon, Apr 11, 2011 at 03:07:35PM -0500, Maupin, Chase wrote:
-> >>> All,
-> >>>
-> >>> Has anyone else noticed that the patch files referred to in the
-> >> ncurses_5.7 recipe are missing from the ftp site?  The patch files are=
-:
-> >>>
-> >>> ncurses-5.7-20110108-patch.sh.bz2
-> >>> ncurses-5.7-20110115.patch.gz
-> >>>
-> >>> Does anyone have these mirrored or can they be uploaded to a mirror
-> like
-> >> the Angstrom mirror?
-> >>>
-> >>>
-> >>> Sincerely,
-> >>> Chase Maupin
-> >>
-> >> Yes serval people reported that now, I have no acess to upload them. I
-> >> guess koen will do it when he returns
-> >> from elc.
-> >
-> > Henning,
-> >
-> > Thanks.  I didn't notice the reports on the mailing list.  I did howeve=
-r
-> notice that Tom Rini is adding ncurses version 5.9 to oe-core.  I wonder
-> if maybe this should be ported over to the OE mainline or just stick with
-> 5.7+patches for now until everything is moved to oe-core.  Anyone else
-> have thoughts on this?
->=20
-> It's already done (I got it in here first).
+another gcc ICE :( is it again in thumb mode ?
+can you send me the preprocessed file for ephyrvideo.c
 
-Tom, sorry about that.  I was looking at the 2011.03-maintenance branch ins=
-tead of the master.
-
-Koen, would you mind submitting a pull request with the ncurses_5.9 recipe =
-to Tom for the 2011.03-maintenance branch when you get back?  We should be =
-able to queue this up with some other patches from Sid and others.
-
->=20
-> --
-> Tom Rini
-> Mentor Graphics Corporation
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-Khem
 
 
