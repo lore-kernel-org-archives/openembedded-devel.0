@@ -1,39 +1,38 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1Q9NVt-0000uk-0M
+	(envelope-from <chase.maupin@ti.com>) id 1Q9NaS-0006A7-RU
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Apr 2011 22:15:10 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 7B0061100085
+	Mon, 11 Apr 2011 22:19:53 +0200
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id p3BKHdZQ001119
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Apr 2011 22:12:56 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id DACB31100082
+	Mon, 11 Apr 2011 15:17:39 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id p3BKHcZr024462
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Apr 2011 22:12:55 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED,BAYES_40
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (f052239091.adsl.alicedsl.de
-	[78.52.239.91]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	Mon, 11 Apr 2011 15:17:38 -0500 (CDT)
+Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p3BKHcAI008128
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Apr 2011 22:12:55 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 441123C0D2; Mon, 11 Apr 2011 22:12:08 +0200 (CEST)
-Date: Mon, 11 Apr 2011 22:12:08 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110411201207.GA30730@rhein.zuhause.netz>
+	Mon, 11 Apr 2011 15:17:38 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dsbe71.ent.ti.com
+	([156.117.232.23]) with mapi; Mon, 11 Apr 2011 15:17:25 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Mon, 11 Apr 2011 15:17:22 -0500
+Thread-Topic: [oe] ncurses-5.7 patch files are missing
+Thread-Index: Acv4hNtXX0+I1g/sQJGWl/WVBa+1JwAABzDA
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080340D391AE@dlee06.ent.ti.com>
 References: <131E5DFBE7373E4C8D813795A6AA7F080340D39191@dlee06.ent.ti.com>
+	<20110411201207.GA30730@rhein.zuhause.netz>
+In-Reply-To: <20110411201207.GA30730@rhein.zuhause.netz>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F080340D39191@dlee06.ent.ti.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: ncurses-5.7 patch files are missing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,29 +47,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Apr 2011 20:15:10 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 11 Apr 2011 20:19:53 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 11, 2011 at 03:07:35PM -0500, Maupin, Chase wrote:
-> All,
-> 
-> Has anyone else noticed that the patch files referred to in the ncurses_5.7 recipe are missing from the ftp site?  The patch files are:
-> 
-> ncurses-5.7-20110108-patch.sh.bz2
-> ncurses-5.7-20110115.patch.gz
-> 
-> Does anyone have these mirrored or can they be uploaded to a mirror like the Angstrom mirror?
-> 
-> 
-> Sincerely,
-> Chase Maupin
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Henning Heinold
+> Sent: Monday, April 11, 2011 3:12 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] ncurses-5.7 patch files are missing
+>=20
+> On Mon, Apr 11, 2011 at 03:07:35PM -0500, Maupin, Chase wrote:
+> > All,
+> >
+> > Has anyone else noticed that the patch files referred to in the
+> ncurses_5.7 recipe are missing from the ftp site?  The patch files are:
+> >
+> > ncurses-5.7-20110108-patch.sh.bz2
+> > ncurses-5.7-20110115.patch.gz
+> >
+> > Does anyone have these mirrored or can they be uploaded to a mirror lik=
+e
+> the Angstrom mirror?
+> >
+> >
+> > Sincerely,
+> > Chase Maupin
+>=20
+> Yes serval people reported that now, I have no acess to upload them. I
+> guess koen will do it when he returns
+> from elc.
 
-Yes serval people reported that now, I have no acess to upload them. I guess koen will do it when he returns
-from elc.
+Henning,
 
-Bye Henning
+Thanks.  I didn't notice the reports on the mailing list.  I did however no=
+tice that Tom Rini is adding ncurses version 5.9 to oe-core.  I wonder if m=
+aybe this should be ported over to the OE mainline or just stick with 5.7+p=
+atches for now until everything is moved to oe-core.  Anyone else have thou=
+ghts on this?
 
-PS: google finds the following archive http://shr.bearstech.com/shr-unstable/sources/MIT/ncurses/
+>=20
+> Bye Henning
+>=20
+> PS: google finds the following archive http://shr.bearstech.com/shr-
+> unstable/sources/MIT/ncurses/
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
