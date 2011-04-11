@@ -1,19 +1,32 @@
 Received: from stoexhubfe01.domain01.net ([83.145.59.140])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1Q9L7g-0007pQ-Qo
+	(envelope-from <anders@chargestorm.se>) id 1Q9LCC-0002r8-4B
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Apr 2011 19:42:02 +0200
+	Mon, 11 Apr 2011 19:46:42 +0200
 Received: from localhost (85.231.30.150) by stoexhubfe01.domain01.net
 	(10.12.10.6) with Microsoft SMTP Server id 8.3.137.0; Mon, 11 Apr 2011
-	19:38:37 +0200
+	19:44:15 +0200
+Date: Mon, 11 Apr 2011 19:44:15 +0200
 From: Anders Darander <anders@chargestorm.se>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 11 Apr 2011 19:38:35 +0200
-Message-ID: <1302543515-3845-1-git-send-email-anders@chargestorm.se>
-X-Mailer: git-send-email 1.7.4.1
+Message-ID: <20110411174403.GA3719@chargestorm.se>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1302456441-3417-1-git-send-email-anders@chargestorm.se>
+	<20110411080125.GB28101@jama.jama.net>
+	<1217FED4-A7EC-4603-9CD7-19BEA0827E96@chargestorm.se>
+	<20110411105712.GA5626@excalibur.local>
+	<BANLkTikvA5bhUTJ0NhKXn158Y5RhZ8V-_g@mail.gmail.com>
+	<20110411114116.GB5626@excalibur.local>
 MIME-Version: 1.0
+In-Reply-To: <20110411114116.GB5626@excalibur.local>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.21 (2010-09-15)
 X-GFI-SMTP-Submission: 1
-Subject: [PATCHv3] lowpan-tools_0.2.2;: fix build with static libnl1
+Subject: Re: [PATCH v2] lowpan-tools_0.2.2; : fix build with static libnl1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,135 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Apr 2011 17:42:02 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 11 Apr 2011 17:46:43 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-* add NL_CFLAGS to a few Makefiles.am (to find libnl header files)
-* add _GNU_SOURCE to a few Makefiles.am (to make struct ucread visible)
-* git version not fixed
-* build and runtime tested, although only in qemuarm
 
-Signed-off-by: Anders Darander <anders@chargestorm.se>
----
+Hi,
 
-v3: * Removed the PR bump in lowpan-tools_0.2.2.bb
-    * Added more explanations in the enclosed patch
+A third version has just been posted.
 
-v2: * Added PR bumps
+* Stefan Schmidt <stefan@datenfreihafen.org> [110411 13:41]:
+> On Mon, 2011-04-11 at 13:29, Anders Darander wrote:
+> > Yes, I agree with you that the correct fix is to update lowpan-tools
+> > to use libnl2. However, due to time constraints, we opted for the
+> > interim solution.
 
- .../0001-Add-NL_CFLAGS-and-_GNU_SOURCE.patch       |   70 ++++++++++++++++++++
- recipes/lowpan-tools/lowpan-tools.inc              |    4 +-
- recipes/lowpan-tools/lowpan-tools_0.2.2.bb         |    4 +
- 3 files changed, 76 insertions(+), 2 deletions(-)
- create mode 100644 recipes/lowpan-tools/lowpan-tools-0.2.2/0001-Add-NL_CFLAGS-and-_GNU_SOURCE.patch
+> Yup, no problem. I'm going to touch the ieee802154 kernel stack and
+> maybe lowpan-tools the next weeks anyway I will try to squeeze in the
+> change to libnl2.
 
-diff --git a/recipes/lowpan-tools/lowpan-tools-0.2.2/0001-Add-NL_CFLAGS-and-_GNU_SOURCE.patch b/recipes/lowpan-tools/lowpan-tools-0.2.2/0001-Add-NL_CFLAGS-and-_GNU_SOURCE.patch
-new file mode 100644
-index 0000000..1f23b92
---- /dev/null
-+++ b/recipes/lowpan-tools/lowpan-tools-0.2.2/0001-Add-NL_CFLAGS-and-_GNU_SOURCE.patch
-@@ -0,0 +1,70 @@
-+From 2270749e0849ebb65ab2c94a5ee0d2a7b2f0b2a2 Mon Sep 17 00:00:00 2001
-+From: Anders Darander <anders@chargestorm.se>
-+Date: Tue, 5 Apr 2011 20:24:54 +0200
-+Subject: [PATCH] Add NL_CFLAGS and _GNU_SOURCE
-+
-+The NL_CFLAGS and -D_GNU_SOURCE is added to quite a few Makefiles...
-+This makes lowpan-tools compile using the static libnl1.
-+
-+* some parts do not find the header files of libnl, thus add NL_CFLAGS
-+* 'struct ucred' in glibc header files is hidden under _GNU_SOURCE
-+
-+Signed-off-by: Anders Darander <anders@chargestorm.se>
-+---
-+ iplink/Makefile.am |    1 +
-+ lib/Makefile.am    |    1 +
-+ src/Makefile.am    |    4 ++--
-+ tests/Makefile.am  |    2 +-
-+ 4 files changed, 5 insertions(+), 3 deletions(-)
-+
-+diff --git a/iplink/Makefile.am b/iplink/Makefile.am
-+index bbed7ba..d563b37 100644
-+--- a/iplink/Makefile.am
-++++ b/iplink/Makefile.am
-+@@ -4,3 +4,4 @@ noinst_HEADERS = iplink.h
-+ iproute_LTLIBRARIES = link_wpan.la
-+ link_wpan_la_LDFLAGS = -module -avoid-version -shared
-+ 
-++link_wpan_la_CFLAGS = $(NL_CFLAGS) -D_GNU_SOURCE
-+diff --git a/lib/Makefile.am b/lib/Makefile.am
-+index 5e15018..6936ebb 100644
-+--- a/lib/Makefile.am
-++++ b/lib/Makefile.am
-+@@ -3,3 +3,4 @@ include $(top_srcdir)/Makefile.common
-+ noinst_LTLIBRARIES = libcommon.la
-+ libcommon_la_SOURCES = printbuf.c genl.c parse.c shash.c logging.c nl_policy.c
-+ 
-++libcommon_la_CFLAGS = $(NL_CFLAGS) -D_GNU_SOURCE
-+diff --git a/src/Makefile.am b/src/Makefile.am
-+index 555e214..46c4017 100644
-+--- a/src/Makefile.am
-++++ b/src/Makefile.am
-+@@ -20,11 +20,11 @@ iz_SOURCES = iz.c iz-common.c iz-mac.c iz-phy.c
-+ noinst_HEADERS = iz.h
-+ 
-+ izcoordinator_SOURCES = coordinator.c
-+-izcoordinator_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS) -DLEASE_FILE=\"$(leasefile)\"
-++izcoordinator_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS) -DLEASE_FILE=\"$(leasefile)\" -D_GNU_SOURCE
-+ izcoordinator_CFLAGS += -DPID_FILE=\"$(pidfile)\"
-+ izcoordinator_LDADD = ../addrdb/libaddrdb.la $(LDADD) $(NL_LIBS) $(LEXLIB)
-+ 
-+-iz_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS)
-++iz_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS) -D_GNU_SOURCE
-+ iz_LDADD = $(LDADD) $(NL_LIBS)
-+ 
-+ izattach.8: $(izattach_SOURCES) $(top_srcdir)/configure.ac
-+diff --git a/tests/Makefile.am b/tests/Makefile.am
-+index d491be5..00621ca 100644
-+--- a/tests/Makefile.am
-++++ b/tests/Makefile.am
-+@@ -4,6 +4,6 @@ zbtest_PROGRAMS = listen-packet test test2 test3 test4 test5 test6 test7 gnl izl
-+ 
-+ izlisten_SOURCES = listen.c
-+ 
-+-gnl_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS)
-++gnl_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS) -D_GNU_SOURCE
-+ gnl_LDADD = $(LDADD) $(NL_LIBS)
-+ 
-+-- 
-+1.7.4.1
-+
-diff --git a/recipes/lowpan-tools/lowpan-tools.inc b/recipes/lowpan-tools/lowpan-tools.inc
-index f429f96..94faf9c 100644
---- a/recipes/lowpan-tools/lowpan-tools.inc
-+++ b/recipes/lowpan-tools/lowpan-tools.inc
-@@ -1,7 +1,7 @@
- DESCRIPTION = "LoWPAN utilities (IEEE802.15.4)"
- LICENSE = "GPLv2"
--DEPENDS = "libnl bison-native flex-native python-native"
--INC_PR = "r11"
-+DEPENDS = "libnl1 bison-native flex-native python-native"
-+INC_PR = "r12"
- 
- SRC_URI = "http://prdownloads.sourceforge.net/linux-zigbee/linux-zigbee-sources/${PV}/lowpan-tools-${PV}.tar.gz"
- 
-diff --git a/recipes/lowpan-tools/lowpan-tools_0.2.2.bb b/recipes/lowpan-tools/lowpan-tools_0.2.2.bb
-index 5686487..2a7ae8c 100644
---- a/recipes/lowpan-tools/lowpan-tools_0.2.2.bb
-+++ b/recipes/lowpan-tools/lowpan-tools_0.2.2.bb
-@@ -2,6 +2,10 @@ require lowpan-tools.inc
- 
- PR = "${INC_PR}.0"
- 
-+SRC_URI_append = " \
-+      file://0001-Add-NL_CFLAGS-and-_GNU_SOURCE.patch \
-+      "
-+
- EXTRA_OECONF = "--enable-ip-plugin"
- 
- SRC_URI[md5sum] = "c727b36e5a6053b15e54ecf220bd5d6b"
+Good news, such a change will definitely be appreciated. We had the same
+idea, however, we won't be able to find the time for it for quite a
+while...
+
+Regarding your work touching the ieee802154 kernel stack, is the version
+from the linux-zigbee-kernel tree? Or is it something getting mainlined?
+We are currently in a prototype phase, especially when it comes to
+zigbee, and both kernel version and additional kernel patches are
+open...
+
+Regards,
+Anders
+
 -- 
-1.7.4.1
-
+Anders Darander
+ChargeStorm AB
 
 
