@@ -1,33 +1,19 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from stoexhubfe01.domain01.net ([83.145.59.140])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Q9JpH-0005Oy-7b
+	(envelope-from <anders@chargestorm.se>) id 1Q9L7g-0007pQ-Qo
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Apr 2011 18:18:55 +0200
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Q9Jn6-0007Lr-PN from Tom_Rini@mentor.com ;
-	Mon, 11 Apr 2011 09:16:40 -0700
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Mon, 11 Apr 2011 09:14:06 -0700
-Received: from [172.30.80.119] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
-	with Microsoft SMTP Server id 14.1.270.1;
-	Mon, 11 Apr 2011 09:16:40 -0700
-Message-ID: <4DA32969.3080902@mentor.com>
-Date: Mon, 11 Apr 2011 09:16:41 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+	Mon, 11 Apr 2011 19:42:02 +0200
+Received: from localhost (85.231.30.150) by stoexhubfe01.domain01.net
+	(10.12.10.6) with Microsoft SMTP Server id 8.3.137.0; Mon, 11 Apr 2011
+	19:38:37 +0200
+From: Anders Darander <anders@chargestorm.se>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 11 Apr 2011 19:38:35 +0200
+Message-ID: <1302543515-3845-1-git-send-email-anders@chargestorm.se>
+X-Mailer: git-send-email 1.7.4.1
 MIME-Version: 1.0
-To: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-References: <4DA17BD1.8050500@eukrea.com>
-In-Reply-To: <4DA17BD1.8050500@eukrea.com>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 11 Apr 2011 16:14:06.0255 (UTC)
-	FILETIME=[7B3283F0:01CBF863]
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance] cherry-pick request
+X-GFI-SMTP-Submission: 1
+Subject: [PATCHv3] lowpan-tools_0.2.2;: fix build with static libnl1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,38 +27,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Apr 2011 16:18:55 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 11 Apr 2011 17:42:02 -0000
+Content-Type: text/plain
 
-On 04/10/2011 02:43 AM, Eric Bénard wrote:
-> Hi Tom,
-> 
-> is it possible to cherry-pick the following commits to 2011.03-maintenance.
-> They are part of your fixes for patches with ".." in path but only the
-> ones for tcl/tk were merged into 2011.03-maintenance branch, thus for
-> example db5 fails to compile on a Fedora 14.
-> 
-> 4adee396bf2eaf0cb52f5914302b7789270a4080
-> 12b24f2598cebf8fd18f2f15cf68abf229ddf6eb
-> 3c90f4773accbde5c30c9f0b4ab39245b0094504
-> f0bb74cccdff4c63cdef5416cbe25360d35ee12c
-> 31adccabfaeb234cb69cb029e090b0ec47a96f5d
-> 6f64c786d3d47ccc24439d86ca02b6ee77c2f603
-> 43bb129434f6007a7003c6472675d625bb63bd76
-> ed3b755c62c6b353268a48b8c1a2becc26513752
-> bcb14fc7adb1fa817e624421a91b2d11d3b107b8
-> fe0d72d2fabde47af3aaeeb4158672ff0e23d705
-> 44abf99ecfd45c739508a4be5af45da797c859dd
-> 3fb654d5a9bd62a258eeb8f77178653948897b10
-> de753f3bef4b30c1d1dafb78e2d8282d6f415298
-> 35672befc2752f3bd84b0d5369a2c006dfb744a4
+* add NL_CFLAGS to a few Makefiles.am (to find libnl header files)
+* add _GNU_SOURCE to a few Makefiles.am (to make struct ucread visible)
+* git version not fixed
+* build and runtime tested, although only in qemuarm
 
-I'd like for someone else to do the pick, confirm it works and send a
-pull request for that tree rather than doing the picking myself.  Thanks!
+Signed-off-by: Anders Darander <anders@chargestorm.se>
+---
 
+v3: * Removed the PR bump in lowpan-tools_0.2.2.bb
+    * Added more explanations in the enclosed patch
+
+v2: * Added PR bumps
+
+ .../0001-Add-NL_CFLAGS-and-_GNU_SOURCE.patch       |   70 ++++++++++++++++++++
+ recipes/lowpan-tools/lowpan-tools.inc              |    4 +-
+ recipes/lowpan-tools/lowpan-tools_0.2.2.bb         |    4 +
+ 3 files changed, 76 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/lowpan-tools/lowpan-tools-0.2.2/0001-Add-NL_CFLAGS-and-_GNU_SOURCE.patch
+
+diff --git a/recipes/lowpan-tools/lowpan-tools-0.2.2/0001-Add-NL_CFLAGS-and-_GNU_SOURCE.patch b/recipes/lowpan-tools/lowpan-tools-0.2.2/0001-Add-NL_CFLAGS-and-_GNU_SOURCE.patch
+new file mode 100644
+index 0000000..1f23b92
+--- /dev/null
++++ b/recipes/lowpan-tools/lowpan-tools-0.2.2/0001-Add-NL_CFLAGS-and-_GNU_SOURCE.patch
+@@ -0,0 +1,70 @@
++From 2270749e0849ebb65ab2c94a5ee0d2a7b2f0b2a2 Mon Sep 17 00:00:00 2001
++From: Anders Darander <anders@chargestorm.se>
++Date: Tue, 5 Apr 2011 20:24:54 +0200
++Subject: [PATCH] Add NL_CFLAGS and _GNU_SOURCE
++
++The NL_CFLAGS and -D_GNU_SOURCE is added to quite a few Makefiles...
++This makes lowpan-tools compile using the static libnl1.
++
++* some parts do not find the header files of libnl, thus add NL_CFLAGS
++* 'struct ucred' in glibc header files is hidden under _GNU_SOURCE
++
++Signed-off-by: Anders Darander <anders@chargestorm.se>
++---
++ iplink/Makefile.am |    1 +
++ lib/Makefile.am    |    1 +
++ src/Makefile.am    |    4 ++--
++ tests/Makefile.am  |    2 +-
++ 4 files changed, 5 insertions(+), 3 deletions(-)
++
++diff --git a/iplink/Makefile.am b/iplink/Makefile.am
++index bbed7ba..d563b37 100644
++--- a/iplink/Makefile.am
+++++ b/iplink/Makefile.am
++@@ -4,3 +4,4 @@ noinst_HEADERS = iplink.h
++ iproute_LTLIBRARIES = link_wpan.la
++ link_wpan_la_LDFLAGS = -module -avoid-version -shared
++ 
+++link_wpan_la_CFLAGS = $(NL_CFLAGS) -D_GNU_SOURCE
++diff --git a/lib/Makefile.am b/lib/Makefile.am
++index 5e15018..6936ebb 100644
++--- a/lib/Makefile.am
+++++ b/lib/Makefile.am
++@@ -3,3 +3,4 @@ include $(top_srcdir)/Makefile.common
++ noinst_LTLIBRARIES = libcommon.la
++ libcommon_la_SOURCES = printbuf.c genl.c parse.c shash.c logging.c nl_policy.c
++ 
+++libcommon_la_CFLAGS = $(NL_CFLAGS) -D_GNU_SOURCE
++diff --git a/src/Makefile.am b/src/Makefile.am
++index 555e214..46c4017 100644
++--- a/src/Makefile.am
+++++ b/src/Makefile.am
++@@ -20,11 +20,11 @@ iz_SOURCES = iz.c iz-common.c iz-mac.c iz-phy.c
++ noinst_HEADERS = iz.h
++ 
++ izcoordinator_SOURCES = coordinator.c
++-izcoordinator_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS) -DLEASE_FILE=\"$(leasefile)\"
+++izcoordinator_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS) -DLEASE_FILE=\"$(leasefile)\" -D_GNU_SOURCE
++ izcoordinator_CFLAGS += -DPID_FILE=\"$(pidfile)\"
++ izcoordinator_LDADD = ../addrdb/libaddrdb.la $(LDADD) $(NL_LIBS) $(LEXLIB)
++ 
++-iz_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS)
+++iz_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS) -D_GNU_SOURCE
++ iz_LDADD = $(LDADD) $(NL_LIBS)
++ 
++ izattach.8: $(izattach_SOURCES) $(top_srcdir)/configure.ac
++diff --git a/tests/Makefile.am b/tests/Makefile.am
++index d491be5..00621ca 100644
++--- a/tests/Makefile.am
+++++ b/tests/Makefile.am
++@@ -4,6 +4,6 @@ zbtest_PROGRAMS = listen-packet test test2 test3 test4 test5 test6 test7 gnl izl
++ 
++ izlisten_SOURCES = listen.c
++ 
++-gnl_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS)
+++gnl_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS) -D_GNU_SOURCE
++ gnl_LDADD = $(LDADD) $(NL_LIBS)
++ 
++-- 
++1.7.4.1
++
+diff --git a/recipes/lowpan-tools/lowpan-tools.inc b/recipes/lowpan-tools/lowpan-tools.inc
+index f429f96..94faf9c 100644
+--- a/recipes/lowpan-tools/lowpan-tools.inc
++++ b/recipes/lowpan-tools/lowpan-tools.inc
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "LoWPAN utilities (IEEE802.15.4)"
+ LICENSE = "GPLv2"
+-DEPENDS = "libnl bison-native flex-native python-native"
+-INC_PR = "r11"
++DEPENDS = "libnl1 bison-native flex-native python-native"
++INC_PR = "r12"
+ 
+ SRC_URI = "http://prdownloads.sourceforge.net/linux-zigbee/linux-zigbee-sources/${PV}/lowpan-tools-${PV}.tar.gz"
+ 
+diff --git a/recipes/lowpan-tools/lowpan-tools_0.2.2.bb b/recipes/lowpan-tools/lowpan-tools_0.2.2.bb
+index 5686487..2a7ae8c 100644
+--- a/recipes/lowpan-tools/lowpan-tools_0.2.2.bb
++++ b/recipes/lowpan-tools/lowpan-tools_0.2.2.bb
+@@ -2,6 +2,10 @@ require lowpan-tools.inc
+ 
+ PR = "${INC_PR}.0"
+ 
++SRC_URI_append = " \
++      file://0001-Add-NL_CFLAGS-and-_GNU_SOURCE.patch \
++      "
++
+ EXTRA_OECONF = "--enable-ip-plugin"
+ 
+ SRC_URI[md5sum] = "c727b36e5a6053b15e54ecf220bd5d6b"
 -- 
-Tom Rini
-Mentor Graphics Corporation
+1.7.4.1
+
 
 
