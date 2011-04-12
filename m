@@ -1,33 +1,21 @@
-Received: from cluster-a.mailcontrol.com ([85.115.52.190])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Daniele.Bosi@mta.it>) id 1Q9eis-0006SS-SE
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Apr 2011 16:37:43 +0200
-Received: from mail.mta.it (mail.mta.it [91.143.207.180])
-	by rly11a.srv.mailcontrol.com (MailControl) with ESMTP id
-	p3CE5U64002050 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Apr 2011 15:05:30 +0100
-Received: from mta-digicas.MTA.INT ([172.26.10.13]) by mail.mta.it with
-	Microsoft SMTPSVC(6.0.3790.4675); Tue, 12 Apr 2011 16:05:29 +0200
-Received: from mta-digimail.MTA.INT ([172.26.10.14]) by mta-digicas.MTA.INT
-	([172.26.10.13]) with mapi; Tue, 12 Apr 2011 16:05:29 +0200
-From: Bosi Daniele <Daniele.Bosi@mta.it>
-To: "'openembedded-devel@lists.openembedded.org'"
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 12 Apr 2011 16:05:28 +0200
-Thread-Topic: issue building the rule "gnome/gconf-dbus_svn.bb"
-Thread-Index: Acv5Gq13KguNhpsARY6P5I0gQDsaHw==
-Message-ID: <531B6536C9F737458807DF75064873C801CE0CD63514@mta-digimail.MTA.INT>
-Accept-Language: it-IT
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: it-IT
-MIME-Version: 1.0
-X-OriginalArrivalTime: 12 Apr 2011 14:05:30.0030 (UTC)
-	FILETIME=[AE61C4E0:01CBF91A]
-X-Scanned-By: MailControl A_10_80_00 (www.mailcontrol.com) on 10.65.0.121
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: issue building the rule "gnome/gconf-dbus_svn.bb"
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q9f9S-0005xj-D0 for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Apr 2011 17:05:10 +0200
+Received: from f053043024.adsl.alicedsl.de ([78.53.43.24]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Q9f7Y-0001WH-SS for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Apr 2011 15:03:13 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 12 Apr 2011 17:02:57 +0200
+Message-ID: <1302620577.4323.143.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: [REGRESSION] gst-plugins-base-meta missing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,60 +29,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Apr 2011 14:37:44 -0000
-Content-Language: it-IT
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 12 Apr 2011 15:05:10 -0000
+X-Groupsio-MsgNum: 31132
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-QlftiAihv8aSKGm0Qxqy"
+
+--=-QlftiAihv8aSKGm0Qxqy
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Guys,
-I can't build the rule gcnf-dbus_svn.bb.
-
-the problem seems to be that the svn server
-svn://developer.imendio.com/svn/gconf-dbus
-is not working anymore.
-
-Does anyone know a mirror for this site? Or a fix for the not working rule?
-
-This is the output I see on the terminal when I build
-
-NOTE: Handling BitBake files: \ (6705/6705) [100 %]
-NOTE: Parsing finished. 6405 cached, 0 parsed, 300 skipped, 0 masked.
-NOTE: Cache is clean, not saving.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 638 of 942 (ID: 1, /opt/OE/org.cnh_fred.dev/recipes/gnom=
-e/gconf-dbus_svn.bb, do_setscene)
-NOTE: Running task 639 of 942 (ID: 2, /opt/OE/org.cnh_fred.dev/recipes/gnom=
-e/gconf-dbus_svn.bb, do_fetch)
-NOTE: Fetch svn://developer.imendio.com/svn/gconf-dbus;module=3Dtrunk;proto=
-=3Dhttp
-svn: Server sent unexpected return value (504 Gateway Time-out) in response=
- to OPTIONS request for 'http://developer.imendio.com/svn/gconf-dbus/trunk'
-NOTE: Task failed: Fetch failed: Fetch command export SSH_AUTH_SOCK=3D/tmp/=
-keyring-Clq4Sq/ssh; export PATH=3D/opt/OE/build_cnh_fred/tmp.1/staging/i686=
--linux/usr/bin/ppce300c3-linux:/opt/OE/build_cnh_fred/tmp.1/staging/i686-li=
-nux/usr/bin/ppce300c3-linux:/opt/OE/build_cnh_fred/tmp.1/staging/i686-linux=
-/usr/sbin:/opt/OE/build_cnh_fred/tmp.1/staging/i686-linux/usr/bin:/opt/OE/b=
-uild_cnh_fred/tmp.1/cross/ppce300c3/bin:/opt/OE/build_cnh_fred/tmp.1/stagin=
-g/i686-linux/sbin:/opt/OE/build_cnh_fred/tmp.1/staging/i686-linux/bin:/usr/=
-local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games; /usr/bi=
-n/env svn co -r 641 http://developer.imendio.com/svn/gconf-dbus/trunk@641 t=
-runk failed with signal 1, output:
-svn: Server sent unexpected return value (504 Gateway Time-out) in response=
- to OPTIONS request for 'http://developer.imendio.com/svn/gconf-dbus/trunk'
-
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /opt/OE/org.cnh_fred.dev/recipes/gnome/gconf-dbus_svn.bb do=
-_fetch failed
-ERROR: Task 2 (/opt/OE/org.cnh_fred.dev/recipes/gnome/gconf-dbus_svn.bb, do=
-_fetch) failed
-NOTE: Tasks Summary: Attempted 638 tasks of which 637 didn't need to be rer=
-un and 1 failed.
-ERROR: '/opt/OE/org.cnh_fred.dev/recipes/gnome/gconf-dbus_svn.bb' failed
+Dear OE folks,
 
 
-Thanks in advance
-Daniele
+I just want to report that due to the recent commit e6d170ab [1]
+
+        commit e6d170abad28fcd0e3b8ba831705bed23e3309a4
+        Author: Martin Jansa <martin.jansa@gmail.com>
+        Date:   Thu Apr 7 00:12:22 2011 +0000
+       =20
+            gst-plugins: define disjunctive PACKAGES_DYNAMIC for each pack =
+base/good/bad/ugly
+           =20
+            * adds a bit more bits to keep in sync while changing gst-plugi=
+ns
+              version, but not that much (this patch was mostly prepared by=
+ script)
+            * overlap in PACKAGES_DYNAMIC namespace causes notes like this =
+in every build
+              NOTE: multiple providers are available for runtime gst-plugin=
+-autodetect (gst-plugins-bad, gst-plugins-good, gst-plugins-base, gst-plugi=
+ns-ugly)
+              NOTE: consider defining a PREFERRED_PROVIDER entry to match g=
+st-plugin-autodetect
+           =20
+            Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+            Acked-by: Mike Westerhof <mike@mwester.net>
+
+the following recipes fail to build.
+
+        $ git grep gst-plugins-base-meta
+        recipes/gnome/cheese_2.30.1.bb:RRECOMMENDS_${PN} =3D "gst-plugin-gc=
+onfelements gst-plugins-good-meta gst-plugins-base-meta"
+        recipes/tasks/angstrom-task-gnome.bb:  gst-plugins-base-meta \
+        recipes/tasks/task-gstreamer-ti.bb:     gst-plugins-base-meta \
+
+I will hopefully have some more time tomorrow to try out what Martin
+asked me in the other thread [2] with the following subject.
+
+	[oe] gstreamer*, starling: ERROR: Nothing RPROVIDES 'gst-plugin-ivorbis' (=
+but /oe/openembedded/recipes/starling/starling_0.9.bb
 
 
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3De6d170a=
+bad28fcd0e3b8ba831705bed23e3309a4
+[2] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-April/0318=
+67.html
+
+--=-QlftiAihv8aSKGm0Qxqy
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2kaaEACgkQPX1aK2wOHVhlUwCdEYUBr9roeDvesPEJKDvsSFH5
+OyQAnjANV2uJj3PQXK0eVFxs1wB7wXDd
+=aeiw
+-----END PGP SIGNATURE-----
+
+--=-QlftiAihv8aSKGm0Qxqy--
