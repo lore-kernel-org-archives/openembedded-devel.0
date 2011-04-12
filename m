@@ -1,34 +1,21 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Q9bUD-0002sc-K9
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <cheepeero@gmx.net>) id 1Q9cxq-0000uF-1h
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Apr 2011 13:10:21 +0200
-Received: from [2001:638:602:1183:389d:f73e:3ad8:812d] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1Q9bS4-0004cM-NH by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Apr 2011 13:08:10 +0200
-Received: from stefan by excalibur.local with local (Exim 4.75)
-	(envelope-from <stefan@excalibur.local>) id 1Q9bS3-0007UX-LY
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Apr 2011 13:08:07 +0200
-Date: Tue, 12 Apr 2011 13:08:07 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Tue, 12 Apr 2011 14:45:02 +0200
+Received: (qmail invoked by alias); 12 Apr 2011 12:42:45 -0000
+Received: from unknown (EHLO pink.cheepee.homedns.org) [95.76.68.223]
+	by mail.gmx.net (mp037) with SMTP; 12 Apr 2011 14:42:45 +0200
+X-Authenticated: #14774724
+X-Provags-ID: V01U2FsdGVkX1/NudonKEfNOcNx47U1wcm+24NyZglfCWDd8E7cGw
+	GJExD2lxElnwhg
+From: Ciprian Ciubotariu <cheepeero@gmx.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110412110807.GD17374@excalibur.local>
-References: <1302543515-3845-1-git-send-email-anders@chargestorm.se>
-MIME-Version: 1.0
-In-Reply-To: <1302543515-3845-1-git-send-email-anders@chargestorm.se>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
-	autolearn=ham version=3.2.5
-Subject: Re: [PATCHv3] lowpan-tools_0.2.2; : fix build with static libnl1
+Date: Tue, 12 Apr 2011 15:42:37 +0300
+Message-Id: <1302612157-7633-1-git-send-email-cheepeero@gmx.net>
+X-Mailer: git-send-email 1.7.3.4
+X-Y-GMX-Trusted: 0
+Subject: [PATCH] Fixed build of qt4-tools-native on Gentoo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,23 +29,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Apr 2011 11:10:21 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 12 Apr 2011 12:45:02 -0000
 
-Hello.
+More on the problem can be found at
 
-On Mon, 2011-04-11 at 19:38, Anders Darander wrote:
-> * add NL_CFLAGS to a few Makefiles.am (to find libnl header files)
-> * add _GNU_SOURCE to a few Makefiles.am (to make struct ucread visible)
-> * git version not fixed
-> * build and runtime tested, although only in qemuarm
-> 
-> Signed-off-by: Anders Darander <anders@chargestorm.se>
+http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg15734.html
 
-Tested and pushed. Thanks for your contribution.
+Signed-off-by: Ciprian Ciubotariu <cheepeero@gmx.net>
+---
+ recipes/qt4/files/hack-out-egl_config.patch |   28 +++++++++++++++++++++++++++
+ recipes/qt4/qt4-tools-native.inc            |    1 +
+ 2 files changed, 29 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/qt4/files/hack-out-egl_config.patch
 
-regards
-Stefan Schmidt
+diff --git a/recipes/qt4/files/hack-out-egl_config.patch b/recipes/qt4/files/hack-out-egl_config.patch
+new file mode 100644
+index 0000000..4c7be2e
+--- /dev/null
++++ b/recipes/qt4/files/hack-out-egl_config.patch
+@@ -0,0 +1,28 @@
++diff -Naur qt-everywhere-opensource-src-4.6.3-orig/configure qt-everywhere-opensource-src-4.6.3/configure
++--- qt-everywhere-opensource-src-4.6.3-orig/configure	2011-04-11 19:53:09.858229325 +0300
+++++ qt-everywhere-opensource-src-4.6.3/configure	2011-04-11 19:53:41.865539747 +0300
++@@ -4949,15 +4949,15 @@
++ if [ "$PLATFORM_X11" = "yes" -o "$PLATFORM_QWS" = "yes" ]; then
++ 
++     # detect EGL support
++-    if "$unixtests/compile.test" "$XQMAKESPEC" "$QMAKE_CONFIG" $OPT_VERBOSE "$relpath" "$outpath" "config.tests/unix/egl" "EGL (EGL/egl.h)" $L_FLAGS $I_FLAGS $l_FLAGS; then
++-        # EGL specified by QMAKE_*_EGL, included with <EGL/egl.h>
++-        CFG_EGL=yes
++-        CFG_EGL_GLES_INCLUDES=no
++-    elif "$unixtests/compile.test" "$XQMAKESPEC" "$QMAKE_CONFIG" $OPT_VERBOSE "$relpath" "$outpath" "config.tests/unix/egl4gles1" "EGL (GLES/egl.h)" $L_FLAGS $I_FLAGS $l_FLAGS; then
++-        # EGL specified by QMAKE_*_EGL, included with <GLES/egl.h>
++-        CFG_EGL=yes
++-        CFG_EGL_GLES_INCLUDES=yes
++-    fi
+++#    if "$unixtests/compile.test" "$XQMAKESPEC" "$QMAKE_CONFIG" $OPT_VERBOSE "$relpath" "$outpath" "config.tests/unix/egl" "EGL (EGL/egl.h)" $L_FLAGS $I_FLAGS $l_FLAGS; then
+++#        # EGL specified by QMAKE_*_EGL, included with <EGL/egl.h>
+++#        CFG_EGL=yes
+++#        CFG_EGL_GLES_INCLUDES=no
+++#    elif "$unixtests/compile.test" "$XQMAKESPEC" "$QMAKE_CONFIG" $OPT_VERBOSE "$relpath" "$outpath" "config.tests/unix/egl4gles1" "EGL (GLES/egl.h)" $L_FLAGS $I_FLAGS $l_FLAGS; then
+++#        # EGL specified by QMAKE_*_EGL, included with <GLES/egl.h>
+++#        CFG_EGL=yes
+++#        CFG_EGL_GLES_INCLUDES=yes
+++#    fi
++     if ( [ "$CFG_OPENGL" = "es1" ] || [ "$CFG_OPENGL" = "es1cl" ] || [ "$CFG_OPENGL" = "es2" ] ) && [ "$CFG_EGL" != "yes" ]; then
++         echo "The EGL functionality test failed!"
++         echo " EGL is required for OpenGL ES to manage contexts & surfaces."
+diff --git a/recipes/qt4/qt4-tools-native.inc b/recipes/qt4/qt4-tools-native.inc
+index 4a0ccce..2934751 100644
+--- a/recipes/qt4/qt4-tools-native.inc
++++ b/recipes/qt4/qt4-tools-native.inc
+@@ -10,6 +10,7 @@ INC_PR = "r10"
+ inherit native
+ 
+ SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-everywhere-opensource-src-${PV}.tar.gz \
++           file://hack-out-egl_config.patch \
+            file://qt-config.patch \
+            file://g++.conf \
+            file://linux.conf"
+-- 
+1.7.3.4
+
 
 
