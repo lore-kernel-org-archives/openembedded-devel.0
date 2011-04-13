@@ -1,35 +1,36 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QA94I-0004CU-BA
+	(envelope-from <gilby985@gmail.com>) id 1QA9r3-0004jf-DW
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Apr 2011 01:01:50 +0200
-Received: by fxm19 with SMTP id 19so949356fxm.6
+	Thu, 14 Apr 2011 01:52:13 +0200
+Received: by iwn10 with SMTP id 10so1131493iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Apr 2011 15:59:31 -0700 (PDT)
+	Wed, 13 Apr 2011 16:49:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=QT9OyTgDuEhAlPV1I17wPr5IgnFGvM/Vr76Y3qjOMf8=;
-	b=evb9eWB0lopd3cUlEQJUDnnXPwXI1LUbKhKGgUGkC0ooDC6NqwmJxiloC7jA1HgKt9
-	N3tJFSYReDz9RAfVskJlk+tYQ8Q2+jkEeOPuHt6n+2M5kegUhC4xJEoNpoCx+x4790iO
-	Nk+la6TGB6r9xULZO+ksbAUeBqrJyxAlYH+v8=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=/amN36NBMHxMI5icb8SG8NPprK2VZj3M6w2sd7Fx9LM=;
+	b=Mhb1C/DHTEC3dbC7mT1b6tno2T9iIFoxxVon0X3K3oCRM/E+5Wv7nZPu3B6zsOn06i
+	W1xhgSFd4zu/B+HGMsa1bFNPCvJzeATzjAnpI/pExdS7jRO7Lww8m2xY/hy2jaUS3tAd
+	0n1s8aeGSqPeBczP+yAk3QqrGIwR8cKtzy1Ys=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=qV86IPRFpo5HoVJeH26ugSwwySjHY1no+OCk220Cb8lEJ74DwogVRwMAJUGLOyQxbP
-	0ldUSpaY+c9M5yuuhCCAbn8/bfOufdc3Ef/Wu4FDG5P2fn9OZKIyjJhdY2zEHlVXNd6M
-	Zn6Xkxiwh0+PeCcuRbtCP4RjA/0rR7dTgeEiw=
-Received: by 10.223.74.83 with SMTP id t19mr14639faj.149.1302735571126; Wed,
-	13 Apr 2011 15:59:31 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=mvWX14gvTCzJqOEuqf0j2XgBSIKuXmtJywQc00wnkwWAXU1CCZjm5ocEMiF3SAQsyX
+	ZhMmqn+kuRnCWnmqXMHxi+KhUEbMkRM436CIki1Is4jf0yDRlWYx8m39ogQFY+kAMEgl
+	4sfND3GSSoobodc1Q3p1UzClYdtW0eW+l4F70=
 MIME-Version: 1.0
-Received: by 10.223.115.82 with HTTP; Wed, 13 Apr 2011 15:59:01 -0700 (PDT)
-In-Reply-To: <201104140046.05993.schnitzeltony@gmx.de>
-References: <201104140046.05993.schnitzeltony@gmx.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 13 Apr 2011 15:59:01 -0700
-Message-ID: <BANLkTi=h+7Xbz+DMYG=1NjJN14d2XJ8geQ@mail.gmail.com>
+Received: by 10.42.137.130 with SMTP id y2mr72876ict.486.1302738587029; Wed,
+	13 Apr 2011 16:49:47 -0700 (PDT)
+Received: by 10.42.224.73 with HTTP; Wed, 13 Apr 2011 16:49:46 -0700 (PDT)
+In-Reply-To: <BANLkTinm3CfQDhxyBuUJH6Eg4QgUo_8JUQ@mail.gmail.com>
+References: <BANLkTinm3CfQDhxyBuUJH6Eg4QgUo_8JUQ@mail.gmail.com>
+Date: Thu, 14 Apr 2011 01:49:46 +0200
+Message-ID: <BANLkTimufsQ4foAp3Tog17dfRZyizAZRsw@mail.gmail.com>
+From: Alberto Carrozzo <gilby985@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: How to handle a http git repository
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: arm-angstrom-linux-gnueabi-gcc: No such file or director
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,52 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Apr 2011 23:01:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 13 Apr 2011 23:52:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Apr 13, 2011 at 3:46 PM, Andreas Mueller <schnitzeltony@gmx.de> wro=
-te:
-> Hi,
->
-> I would like to build =C2=A0u-boot for freescale iMX28 with OE. =C2=A0The=
-re is u-boot
-> support available at
->
-> http://opensource.freescale.com/pub/scm/imx/uboot-imx.git/
->
-> Problem is that it links to the *files* of a git repo not to the repo its=
-elf. A
-> manual git clone works but I do not find a good approach fetching the rep=
-o in OE.
->
-> I could do something like
->
-> do_fetch () {
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0cd ${WORKDIR}
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0git clone http://opensource.freescale.com/pub/=
-scm/imx/uboot-imx.git
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0cd uboot-imx
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0git checkout imx_v2009.08_10.12.01
-> }
->
+hello you all... I'm from Italy so sorry for my english... :) OK... I have a
+problem: I'm developing a program on Angstrom and I'm using Ubuntu to cross
+compile it with bitbake... last week I had to format ubuntu so I had a
+backup of my oe folder and have replaced it after... now, all look that
+work, if i do bitbake x11-image it work but... if i try to cross compile my
+helloworld sample it give me the following error:
+______________________________
+arm-angstrom-linux-gnueabi-gcc: No such file or directory
+ERROR: Function do_compile failed
+______________________________
 
-SRC_URI =3D "git://opensource.freescale.com/pub/scm/imx/uboot-imx.git;proto=
-col=3Dhttp;tag=3Dimx_v2009.08_10.12.01"
+what's happened?
+someone can help me?
 
-> but (one of) the great disadvantage(s) of this hack is fetching on every =
-build.
->
-> Can anybody help me with a hint?
->
-> Thanks in advance
->
-> Andreas
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+-- 
+He walks among us, but he is not one of us - JS
 
+
+
+-- 
+He walks among us, but he is not one of us - JS
 
