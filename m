@@ -1,25 +1,23 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1QAM3U-0005UY-PJ
+Received: from vms173019pub.verizon.net ([206.46.173.19])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <denis@denix.org>) id 1QASLt-0005o2-09
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Apr 2011 14:53:53 +0200
-Received: (qmail invoked by alias); 14 Apr 2011 12:51:36 -0000
-Received: from mail2.zera.de (EHLO localhost.localdomain) [62.225.102.139]
-	by mail.gmx.net (mp072) with SMTP; 14 Apr 2011 14:51:36 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18sX7wZl/EsR6NiBUpK31DaH9itz6tdTkqEL893zj
-	mBbWt5igS4cDpi
-From: Andreas Mueller <schnitzeltony@gmx.de>
+	Thu, 14 Apr 2011 21:37:17 +0200
+Received: from gandalf.denix.org ([unknown] [108.18.140.4])
+	by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LJN0041VQDO8HA6@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	14 Apr 2011 14:34:42 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id D743314AF5B; Thu,
+	14 Apr 2011 15:34:36 -0400 (EDT)
+Date: Thu, 14 Apr 2011 15:34:36 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Apr 2011 14:48:37 +0200
-User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
-References: <201104140046.05993.schnitzeltony@gmx.de>
-	<BANLkTi=h+7Xbz+DMYG=1NjJN14d2XJ8geQ@mail.gmail.com>
-In-Reply-To: <BANLkTi=h+7Xbz+DMYG=1NjJN14d2XJ8geQ@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <201104141448.37777.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: How to handle a http git repository
+Message-id: <20110414193436.GA26286@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: [2011.03-maintenance] Pull request for TI matrix-gui, ipc and	sgx/gles
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,17 +31,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Apr 2011 12:53:53 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 14 Apr 2011 19:37:17 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Thursday 14 April 2011 00:59:01 Khem Raj wrote:
-> SRC_URI =
-> "git://opensource.freescale.com/pub/scm/imx/uboot-imx.git;protocol=http;ta
-> g=imx_v2009.08_10.12.01"
-Thanks (getting red & muttering that I was so close..)
+Tom,
 
-Andreas
+Please pull these 5 commits for TI related changes - matrix-gui rev bump,
+new ti-ipc version and sgx/gles fixes for ti816x.
+All are cherry picked from oe.dev
+
+
+Pull URL: git://arago-project.org/git/people/denix/openembedded.git
+  Branch: 2011.03-maintenance
+  Browse: http://arago-project.org/git/people/?p=denix/openembedded.git;a=shortlog;h=refs/heads/2011.03-maintenance
+
+Thanks,
+    Denys Dmytriyenko <denys@ti.com>
+---
+
+
+Jeff Lance (1):
+  matrix-gui: Bump up SRCREV
+
+Siddharth Heroor (4):
+  ti-ipc: Add version 1.22.05.27
+  omap3-sgx-modules: Update TI816x Module Location and Platform
+    variables.
+  libgles-omap3: Correct libraries for TI816x.
+  libgles-omap3: Remove SGX Fixup for TI816x.
+
+ recipes/powervr-drivers/libgles-omap3/rc.pvr       |   10 +++-------
+ .../powervr-drivers/libgles-omap3_4.03.00.01.bb    |    4 +++-
+ .../omap3-sgx-modules_1.6.16.3977.bb               |    4 ++--
+ recipes/ti/matrix-gui-common_1.4.bb                |    4 ++--
+ recipes/ti/matrix-gui-e_1.3.bb                     |    4 ++--
+ recipes/ti/matrix-gui_1.3.bb                       |    4 ++--
+ recipes/ti/ti-ipc_1.22.05.27.bb                    |    6 ++++++
+ 7 files changed, 20 insertions(+), 16 deletions(-)
+ create mode 100644 recipes/ti/ti-ipc_1.22.05.27.bb
+
 
 
