@@ -1,31 +1,35 @@
-Received: from mail2.eads.net ([80.156.45.114] helo=mail.eads.net)
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
-	id 1QAgSL-0007zG-69 for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Apr 2011 12:40:53 +0200
-Received: from gsx3072-vs5.mxchg.m.corp ([53.147.176.149])
-	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id p3FAcd7j023367
+	(envelope-from <andrea.adami@gmail.com>) id 1QAk1r-0001Vc-N8
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Apr 2011 16:29:47 +0200
+Received: by pzk35 with SMTP id 35so1051245pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Apr 2011 12:38:40 +0200
-Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
-	gsx3072-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Fri, 15 Apr 2011 12:38:33 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Fri, 15 Apr 2011 07:27:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=3pkSNY7mN0jRChnZfIlNa8N6QNmtaX6WRasJOjDvTf8=;
+	b=d+q5qXWkUMr7jn/tkKA3K1n9c0OceaV9wVCcKekbKZIMX4OfigmWqSp9A5kezDAwbP
+	4FqpUBY2MLxQVNlFqjsR/cZqfBG4u5MWL4SLjLltoUgKjVaM3voVqPUqsJel6K4YfFjH
+	6iSFdUPqsvCC9E5fh/IV41KnZvZCZb93RqM5c=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=j9YsyJLOGOkXwgQLn8Qz2evedwBo8KkzbqyUqjmjxksYX2iUK7g/8Huo0ANSowZ8jT
+	sC2qOC/iCDQ39p1C+OoRR+FScW6MRH08+v7doYfOkve81dWoJ+y+9lNf45HzjRy0zBVJ
+	AhQtguLHn4oYGZ49ct2AH1ko1meflb6c3iKtg=
 MIME-Version: 1.0
-Date: Fri, 15 Apr 2011 12:37:28 +0200
-Message-ID: <0C757E680E33864AB113392C7E83F910BE5160@GSX300A.mxchg.m.corp>
-In-Reply-To: <0C757E680E33864AB113392C7E83F910BE5D80@GSX300A.mxchg.m.corp>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: Bug in IPV6 DISTRO_FEATURE handling in recipe
-	openssl_1.0.0d.bb/openssl.inc
-Thread-Index: Acv7UzUOPnhESm9BTqyKbXnnjQwqfAABbbwg
-References: <0C757E680E33864AB113392C7E83F910BE5D80@GSX300A.mxchg.m.corp>
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 15 Apr 2011 10:38:33.0005 (UTC)
-	FILETIME=[447F5DD0:01CBFB59]
-Subject: Re: Bug in IPV6 DISTRO_FEATURE handling in recipe openssl_1.0.0d.bb/openssl.inc
+Received: by 10.142.212.5 with SMTP id k5mr876321wfg.285.1302877645362; Fri,
+	15 Apr 2011 07:27:25 -0700 (PDT)
+Received: by 10.142.237.11 with HTTP; Fri, 15 Apr 2011 07:27:25 -0700 (PDT)
+In-Reply-To: <AANLkTikBSTnFxn-h+BgD1fcuOmKPsP6Q8bVZ+R7_HUkW@mail.gmail.com>
+References: <AANLkTikBSTnFxn-h+BgD1fcuOmKPsP6Q8bVZ+R7_HUkW@mail.gmail.com>
+Date: Fri, 15 Apr 2011 16:27:25 +0200
+Message-ID: <BANLkTin9DG49DJ6C5M=70_+1UKpnOAtd3w@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: mtd-utils - issues with flash_eraseall -j
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,111 +43,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Apr 2011 10:40:53 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Fri, 15 Apr 2011 14:29:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Tested a bit, the sed command should look like:
+On Wed, Mar 9, 2011 at 1:14 AM, Andrea Adami <andrea.adami@gmail.com> wrote=
+:
+> Hello,
+>
+> with the previous mtd-utils-1.3.1 I could do ' flash_eraseall -j
+> /dev/mtd3' on my Zaurus/armv5te.
+>
+> With v. 1.4.1 (and 1.4.2 fwiw) I see following errors:
+>
+> ...
+> flash_erase: error!: /dev/mtd3: MTD writeoob failure
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0error 22 (Invalid argument=
+)
+> Erasing 16 Kibyte @ 43f0000 -- 99% complete libmtd: error!: unaligned add=
+ress 7
+> 1237640, mtd3 page size is 512
+> flash_erase: error!: /dev/mtd3: MTD writeoob failure
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0error 22 (Invalid argument=
+)
+> Erasing 16 Kibyte @ 43f4000 -- 99% complete libmtd: error!: unaligned add=
+ress 7
+> 1254024, mtd3 page size is 512
+> ...
+>
+> Anybody can confirm the issue?
+>
+> Regards
+>
+> Andrea
+>
 
-   eval "${@base_contains('DISTRO_FEATURES', 'ipv6', '', 'sed -i -e =
-\'/case AF_INET6:/,/break/d\' ${S}/crypto/bio/bss_dgram.c', d)}"=20
+It seems the issue has been aknowledge and resolved upstream.
 
-Regards
-Wolfgang
+http://lists.infradead.org/pipermail/linux-mtd/2011-April/034599.html
 
------Urspr=FCngliche Nachricht-----
-Von: Hauser, Wolfgang (external)=20
-Gesendet: Freitag, 15. April 2011 11:55
-An: openembedded-devel@lists.openembedded.org
-Betreff: Bug in IPV6 DISTRO_FEATURE handling in recipe =
-openssl_1.0.0d.bb/openssl.inc
+http://git.infradead.org/mtd-utils.git/commit/b22f7f386ba37a766aedd8e8cf347=
+81a3d1daad2
 
-I don't use IPV6, so I removed this feature from my DISTRO_FEATURES. =
-This results in a mangled code in crypto/bio/bss_dgram.c.
 
-The sed command in openssl.inc:
+Let's move to 1.4.4 ! RFC follows
 
-	eval "${@base_contains('DISTRO_FEATURES', 'ipv6', '', 'sed -i -e =
-"/AF_INET6/,/break/d" ${S}/crypto/bio/bss_dgram.c', d)}"
-
-cuts out following needed code:
-
-bss_dgram.c
->>>>>>
-line 344
-		else if (data->peer.sa.sa_family =3D=3D AF_INET6)
-			peerlen =3D sizeof(data->peer.sa_in6);
-#endif
-#if defined(NETWARE_CLIB) && defined(NETWARE_BSDSOCK)
-		ret=3Dsendto(b->num, (char *)in, inl, 0, &data->peer.sa, peerlen);
-#else
-		ret=3Dsendto(b->num, in, inl, 0, &data->peer.sa, peerlen);
-#endif
-		}
-
-	BIO_clear_retry_flags(b);
-	if (ret <=3D 0)
-		{
-		if (BIO_dgram_should_retry(ret))
-			{
-			BIO_set_retry_write(b); =20
-			data->_errno =3D get_last_socket_error();
-
-#if 0 /* higher layers are responsible for querying MTU, if necessary */
-			if ( data->_errno =3D=3D EMSGSIZE)
-				/* retrieve the new MTU */
-				BIO_ctrl(b, BIO_CTRL_DGRAM_QUERY_MTU, 0, NULL);
-#endif
-			}
-		}
-	return(ret);
-	}
-
-static long dgram_ctrl(BIO *b, int cmd, long num, void *ptr)
-	{
-	long ret=3D1;
-	int *ip;
-	struct sockaddr *to =3D NULL;
-	bio_dgram_data *data =3D NULL;
-#if defined(IP_MTU_DISCOVER) || defined(IP_MTU)
-	long sockopt_val =3D 0;
-	unsigned int sockopt_len =3D 0;
-#endif
-#ifdef OPENSSL_SYS_LINUX
-	socklen_t addr_len;
-	union	{
-		struct sockaddr	sa;
-		struct sockaddr_in s4;
-#if OPENSSL_USE_IPV6
-		struct sockaddr_in6 s6;
-#endif
-		} addr;
-#endif
-
-	data =3D (bio_dgram_data *)b->ptr;
-
-	switch (cmd)
-		{
-	case BIO_CTRL_RESET:
-		num=3D0;
-	case BIO_C_FILE_SEEK:
-		ret=3D0;
-		break;
-<<<<
-
-do it with sed is strange, but it may be better to use:
-
-   eval "${@base_contains('DISTRO_FEATURES', 'ipv6', '', 'sed -i -e =
-"/case AF_INET6:/,/break/d" ${S}/crypto/bio/bss_dgram.c', d)}"
-
-May be doing it witch a patch or disable OPENSSL_USE_IPV6 in configure =
-is the saver solution.
-
-I use the tar ball of 2011.03 release, so I am not able to create a =
-proper patch from git.
-
-Regards Wolfgang
+Andrea
 
 
