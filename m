@@ -1,21 +1,29 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail2.eads.net ([80.156.45.114] helo=mail.eads.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QAf6u-0000FB-2u for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Apr 2011 11:14:40 +0200
-Received: from f053034154.adsl.alicedsl.de ([78.53.34.154]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QAf53-0002NH-G8 for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Apr 2011 09:12:45 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Apr 2011 11:12:23 +0200
-Message-ID: <1302858743.4203.28.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: [PATCH] omapfbplay: move patch to new location after switch to Libav
+	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
+	id 1QAfmM-00074y-PF for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Apr 2011 11:57:31 +0200
+Received: from gsx3072-vs5.mxchg.m.corp ([53.147.176.149])
+	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id p3F9tGWX019483
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Apr 2011 11:55:17 +0200
+Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
+	gsx3072-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Fri, 15 Apr 2011 11:55:10 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Fri, 15 Apr 2011 11:55:10 +0200
+Message-ID: <0C757E680E33864AB113392C7E83F910BE515E@GSX300A.mxchg.m.corp>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: Bug in IPV6 DISTRO_FEATURE handling in recipe
+	openssl_1.0.0d.bb/openssl.inc
+Thread-Index: Acv7UzUOPnhESm9BTqyKbXnnjQwqfA==
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 15 Apr 2011 09:55:10.0240 (UTC)
+	FILETIME=[3520F200:01CBFB53]
+Subject: Bug in IPV6 DISTRO_FEATURE handling in recipe openssl_1.0.0d.bb/openssl.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,68 +37,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Apr 2011 09:14:40 -0000
-X-Groupsio-MsgNum: 31189
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-iQPFDbYByXJvxhqn+6uq"
-
---=-iQPFDbYByXJvxhqn+6uq
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 15 Apr 2011 09:57:31 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-Date: Fri, 15 Apr 2011 10:51:31 +0200
+I don't use IPV6, so I removed this feature from my DISTRO_FEATURES.
+This results in a mangled code in crypto/bio/bss_dgram.c.
 
-This patch fixes up commit 692d43ee [1]
+The sed command in openssl.inc:
 
-	commit 692d43eeb6596df52b5984ae1bd14739f9ec9e0f
-	Author: Koen Kooi <koen@openembedded.org>
-	Date:   Mon Mar 28 15:47:23 2011 +0200
+	eval "${@base_contains('DISTRO_FEATURES', 'ipv6', '', 'sed -i -e
+"/AF_INET6/,/break/d" ${S}/crypto/bio/bss_dgram.c', d)}"
 
-		  libav: add proper recipe for git version
-		  omapfbplay: switch to libav
+cuts out following needed code:
 
-which did not move the patch referenced in the recipe to the new location.
+bss_dgram.c
+>>>>>>
+line 344
+		else if (data->peer.sa.sa_family =3D=3D AF_INET6)
+			peerlen =3D sizeof(data->peer.sa_in6);
+#endif
+#if defined(NETWARE_CLIB) && defined(NETWARE_BSDSOCK)
+		ret=3Dsendto(b->num, (char *)in, inl, 0, &data->peer.sa,
+peerlen);
+#else
+		ret=3Dsendto(b->num, in, inl, 0, &data->peer.sa, peerlen);
+#endif
+		}
 
-	NOTE: package omapfbplay-0.0+r30+gitr34293052c5a2ae328eac6903512e6b4ce19b5=
-639-r30: task do_patch: Started
-	ERROR: [Errno 2] No such file or directory: '/oe/openembedded/recipes/liba=
-v/./omapfbplay-errorhandling.patch'
-	NOTE: package omapfbplay-0.0+r30+gitr34293052c5a2ae328eac6903512e6b4ce19b5=
-639-r30: task patch_do_patch: Failed
+	BIO_clear_retry_flags(b);
+	if (ret <=3D 0)
+		{
+		if (BIO_dgram_should_retry(ret))
+			{
+			BIO_set_retry_write(b); =20
+			data->_errno =3D get_last_socket_error();
 
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D692d43e=
-eb6596df52b5984ae1bd14739f9ec9e0f
+#if 0 /* higher layers are responsible for querying MTU, if necessary */
+			if ( data->_errno =3D=3D EMSGSIZE)
+				/* retrieve the new MTU */
+				BIO_ctrl(b, BIO_CTRL_DGRAM_QUERY_MTU, 0,
+NULL);
+#endif
+			}
+		}
+	return(ret);
+	}
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
-I first wanted to put the patch under `omapfbplay/` instead of `files/` but=
- that did not go well for the recipes `omapfbplay-{dce,xv}`. Suggestions ar=
-e welcome.
----
- .../files/omapfbplay-errorhandling.patch           |    0
- 1 files changed, 0 insertions(+), 0 deletions(-)
- rename recipes/{ffmpeg =3D> libav}/files/omapfbplay-errorhandling.patch (1=
-00%)
+static long dgram_ctrl(BIO *b, int cmd, long num, void *ptr)
+	{
+	long ret=3D1;
+	int *ip;
+	struct sockaddr *to =3D NULL;
+	bio_dgram_data *data =3D NULL;
+#if defined(IP_MTU_DISCOVER) || defined(IP_MTU)
+	long sockopt_val =3D 0;
+	unsigned int sockopt_len =3D 0;
+#endif
+#ifdef OPENSSL_SYS_LINUX
+	socklen_t addr_len;
+	union	{
+		struct sockaddr	sa;
+		struct sockaddr_in s4;
+#if OPENSSL_USE_IPV6
+		struct sockaddr_in6 s6;
+#endif
+		} addr;
+#endif
 
-diff --git a/recipes/ffmpeg/files/omapfbplay-errorhandling.patch b/recipes/=
-libav/files/omapfbplay-errorhandling.patch
-similarity index 100%
-rename from recipes/ffmpeg/files/omapfbplay-errorhandling.patch
-rename to recipes/libav/files/omapfbplay-errorhandling.patch
---=20
-1.7.4.1
+	data =3D (bio_dgram_data *)b->ptr;
 
---=-iQPFDbYByXJvxhqn+6uq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+	switch (cmd)
+		{
+	case BIO_CTRL_RESET:
+		num=3D0;
+	case BIO_C_FILE_SEEK:
+		ret=3D0;
+		break;
+<<<<
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+do it with sed is strange, but it may be better to use:
 
-iEYEABECAAYFAk2oC/cACgkQPX1aK2wOHViCHwCgi3EO8qhBiwMbIzNzdAA/04uA
-+QIAn3/bhJYttjYDO65SmwJS44fHF1JS
-=lDIz
------END PGP SIGNATURE-----
+   eval "${@base_contains('DISTRO_FEATURES', 'ipv6', '', 'sed -i -e
+"/case AF_INET6:/,/break/d" ${S}/crypto/bio/bss_dgram.c', d)}"
 
---=-iQPFDbYByXJvxhqn+6uq--
+May be doing it witch a patch or disable OPENSSL_USE_IPV6 in configure
+is the saver solution.
+
+I use the tar ball of 2011.03 release, so I am not able to create a
+proper patch from git.
+
+Regards Wolfgang
+
+
