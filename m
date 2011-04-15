@@ -1,24 +1,21 @@
-Received: from moutng.kundenserver.de ([212.227.17.10])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eng1@koblersystems.de>) id 1QAqzO-0007tj-43
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Apr 2011 23:55:46 +0200
-Received: from [192.168.1.34] (p57B40E19.dip0.t-ipconnect.de [87.180.14.25])
-	by mrelayeu.kundenserver.de (node=mreu2) with ESMTP (Nemesis)
-	id 0MQA1H-1QG3kN0MJX-005LLq; Fri, 15 Apr 2011 23:53:24 +0200
-Message-ID: <4DA8BE4F.5050008@koblersystems.de>
-Date: Fri, 15 Apr 2011 23:53:19 +0200
-From: Jan Kobler <eng1@koblersystems.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20110120 Lightning/1.0b3pre Thunderbird/3.1.7
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QArIy-0006fR-Se for openembedded-devel@lists.openembedded.org;
+	Sat, 16 Apr 2011 00:15:56 +0200
+Received: from f053034154.adsl.alicedsl.de ([78.53.34.154]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QArH8-0004KC-6I for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Apr 2011 22:14:02 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-Provags-ID: V02:K0:u7+h27FWHypgN/P2oewePTDATDM3LYjmCraP7VybwEk
-	JG1Ooyhmol/SJ1RD1/fKOqvKfQgydzI41ZRcaX2EjcjoMiR+8V
-	fyDQfGHvWz9CBQnzygWDQmbZOCnx6F5166PixqIUrWmsAyTHmH
-	ohsuWRdypEi9clPnSSQHwihMmQSkllttzbX8CR+VKaqhc1maeD
-	KfaaSE5WnIqXqkRp+XzVQ==
-Subject: efreet: changeset_trunk_r57435.patch in DOS Format, wrong line number
+Date: Sat, 16 Apr 2011 00:13:39 +0200
+Message-ID: <1302905619.3853.14.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: [PATCH] orc: add version 0.4.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,29 +29,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Apr 2011 21:55:47 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 15 Apr 2011 22:15:56 -0000
+X-Groupsio-MsgNum: 31203
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-0Q+NFeylf1wBpfclcekH"
 
-Hi,
+--=-0Q+NFeylf1wBpfclcekH
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-the file recipes/efl1/efreet/changeset_trunk_r57435.patch
-is in DOS format, i.e. the line endings are CR-NL.
-
-The patch changeset_trunk_r57435.patch failed on my Linux system.
-After changing the line endings to NL, i.e. Unix file format, it worked.
-
-The line number 1206 in the patch file is the line number 1368 in the
-file efreet/src/lib/efreet_desktop.c.
-
-I think the line number in the patch is wrong.
-
-I am not sending a patch of the patch file, because I am not sure if the
-different line endings are preserved.
-
-Best regards
-
-Jan
+Date: Sat, 16 Apr 2011 00:09:44 +0200
 
 
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ recipes/orc/orc_0.4.12.bb |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/orc/orc_0.4.12.bb
 
+diff --git a/recipes/orc/orc_0.4.12.bb b/recipes/orc/orc_0.4.12.bb
+new file mode 100644
+index 0000000..801db15
+--- /dev/null
++++ b/recipes/orc/orc_0.4.12.bb
+@@ -0,0 +1,4 @@
++require orc.inc
++
++SRC_URI[orc.md5sum] =3D "3130b63e6a1284b3e0796fab2450753a"
++SRC_URI[orc.sha256sum] =3D "61a676f7530277cced1ce327fcb812067595408b60bb34=
+7999240e393fb27fc5"
+--=20
+1.7.4.1
+
+
+--=-0Q+NFeylf1wBpfclcekH
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2owwYACgkQPX1aK2wOHVgfnACfYmTSuBAnbrKs12qBPTw5bulZ
+gi4An0vM8sADI9Of15NUXKSBTfrqyek6
+=E/BD
+-----END PGP SIGNATURE-----
+
+--=-0Q+NFeylf1wBpfclcekH--
