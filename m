@@ -1,40 +1,26 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QBAoE-0001xs-BR
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Apr 2011 21:05:30 +0200
-Received: by fxm19 with SMTP id 19so2813854fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Apr 2011 12:03:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=pYxMGH2Vw3ObNhDd4V9s9YgAxQcNWHPOSVv1gNipXo8=;
-	b=wMSi8ZCMak5umy4HaP5T8851IX+bv6q/fkltnzMvaJ3DPGYmqeBL62x5Sxycpz+Kh7
-	N+0DcbwCI/8XY13WNwVCqLCcvDSq7lSaiYmZdNQyp9oI9pu8s+VfVEKY87D7u6ZZdt4w
-	78626i3O6KeGb4TGcVNHGSf8cVcKelZveXXtM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=ZjaZFKWiQaogGg8YRM6jOGWgIjpTw1Uwg2QIhESQTyiuKkP9ZjbARTAWN6kma+vdCx
-	zcsrWMK2mblV9aD1umQe8pdbK/Fdysgx4J/GpxgpA+P2sc7+z6GH6UinSr6tLRkL2u2U
-	bkBm8vZyzyQr3rvrvff9YhmrS+Yd1c1QtuuFA=
-Received: by 10.223.127.210 with SMTP id h18mr3289383fas.73.1302980587105;
-	Sat, 16 Apr 2011 12:03:07 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.223.115.82 with HTTP; Sat, 16 Apr 2011 12:02:37 -0700 (PDT)
-In-Reply-To: <BANLkTink-co5TWFr1nJF0cqPueXESs51xg@mail.gmail.com>
-References: <AANLkTimSjWURf8gMrVZGd==xCH3jnWEG_=G8EMfsdbW1@mail.gmail.com>
-	<AANLkTimPz8ji6Lo-Yh2DmRUc0=A-EwePxre6GiTss2=V@mail.gmail.com>
-	<AANLkTi=pcOHKF78X_uezE9Yqj9m=TLT5FPsWePp_Vs11@mail.gmail.com>
-	<1302942561.8709.7.camel@mattotaupa>
-	<BANLkTink-co5TWFr1nJF0cqPueXESs51xg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 16 Apr 2011 12:02:37 -0700
-Message-ID: <BANLkTimOyVwaDar+zCM1ihxXkP0FH3ppLA@mail.gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QBB3I-0002Df-GC for openembedded-devel@lists.openembedded.org;
+	Sat, 16 Apr 2011 21:21:04 +0200
+Received: from f053044057.adsl.alicedsl.de ([78.53.44.57]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QBB1T-0007CT-Dg for openembedded-devel@lists.openembedded.org;
+	Sat, 16 Apr 2011 19:19:11 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
-Subject: Re: work flow with pull requests (was: Pull request from O.S. Systems tree)
+In-Reply-To: <1302960425.20934.3.camel@mattotaupa>
+References: <1302885760-32195-1-git-send-email-patda293@student.liu.se>
+	<1302900059.3534.1.camel@gnutoo-desktop>
+	<1302956885.8709.69.camel@mattotaupa>
+	<1302960425.20934.3.camel@mattotaupa>
+Date: Sat, 16 Apr 2011 21:18:45 +0200
+Message-ID: <1302981525.3780.7.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH v2] firefox: Added libIDL-2.0 CFLAGS and LIBS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,43 +34,174 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Apr 2011 19:05:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 16 Apr 2011 19:21:04 -0000
+X-Groupsio-MsgNum: 31227
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-p0y8+Bwhx3IWEI0STqdZ"
+
+--=-p0y8+Bwhx3IWEI0STqdZ
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Apr 16, 2011 at 10:42 AM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Sat, Apr 16, 2011 at 05:29, Paul Menzel
-> <paulepanter@users.sourceforge.net> wrote:
->> So I would conclude that using both ways =E2=80=93 as for example Otavio=
- is
->> doing right now =E2=80=93 seems to be an optimal(?) solution.
->
-> I am trying but it has not worked so far. Most patches I sent mailing
-> list are still not applied or nacked.
->
-> If you check at
-> https://projetos.ossystems.com.br/git/?p=3Dusers/otavio/org.openembedded.=
-dev.git;a=3Dsummary
-> you will see patches I sent two or three times here and that are not
-> merged/nacked yet.
+Am Samstag, den 16.04.2011, 15:27 +0200 schrieb Paul Menzel:
+> Am Samstag, den 16.04.2011, 14:28 +0200 schrieb Paul Menzel:
+> > Am Freitag, den 15.04.2011, 22:40 +0200 schrieb Denis 'GNUtoo' Carikli:
+> > > On Fri, 2011-04-15 at 18:42 +0200, Patrik Dahlstr=C3=B6m wrote:
+> > > > * autoconf does not fill in any CFLAGS or LIBS for libIDL-2.0. This
+> > > >   patch sets the appropriate flags in autoconf.mk.in for
+> > > >   HOST_LIBIDL_CFLAGS and HOST_LIBIDL_LIBS.
+> > > What error did you get?
+> > > Maybe you could add something like:
+> > >  This patch fixes the following error:
+> > >  [ERROR here]
+> > > To the commit message.
+> >=20
+> > I get the following error message.
+> >=20
+> >         make[7]: Entering directory `/oe/build-minimal-eglibc/minimal-d=
+ev/work/armv7a-oe-linux-gnueabi/firefox-3.6.8-r3/mozilla-1.9.2/xpcom/typeli=
+b/xpidl'
+> >         xpidl.c
+> >         gcc -o host_xpidl.o -c -isystem/oe/build-minimal-eglibc/minimal=
+-dev/sysroots/i686-linux/usr/include -O2 -g -DXP_UNIX -O3  -DMDCPUCFG=3D\"m=
+d/_linux.cfg\"  -I. -I. -I../../..
+> >         /dist/include -I../../../dist/include/nsprpub  -I/oe/build-mini=
+mal-eglibc/minimal-dev/work/armv7a-oe-linux-gnueabi/firefox-3.6.8-r3/mozill=
+a-1.9.2/dist/include/nspr -I/hom
+> >         e/paul/oe/build-minimal-eglibc/minimal-dev/work/armv7a-oe-linux=
+-gnueabi/firefox-3.6.8-r3/mozilla-1.9.2/dist/include/nss      -I/oe/build-m=
+inimal-eglibc/minimal-dev/work/a
+> >         rmv7a-oe-linux-gnueabi/firefox-3.6.8-r3/mozilla-1.9.2/dist/incl=
+ude/nspr xpidl.c
+> >        =20
+> >         In file included from xpidl.c:42:
+> >         xpidl.h:49:18: error: glib.h: No such file or directory
+> >         In file included from xpidl_idl.c:43:
+> >         xpidl.h:49:18: error: glib.h: No such file or directory
+> >         In file included from xpidl_util.c:42:
+> >         xpidl.h:49:18: error: glib.h: No such file or directory
+> >         In file included from xpidl_header.c:42:
+> >         xpidl.h:49:18: error: glib.h: No such file or directory
+> >         xpidl.h:52:24: error: libIDL/IDL.h: No such file or directory
+> >         xpidl.h:52:24: error: libIDL/IDL.h: No such file or directory
+> >         xpidl.h:52:24: error: libIDL/IDL.h: No such file or directory
+> >         In file included from xpidl.c:42:
+> >         xpidl.h:79: error: expected '=3D', ',', ';', 'asm' or '__attrib=
+ute__' before 'enable_debug'
+> >         xpidl.h:80: error: expected '=3D', ',', ';', 'asm' or '__attrib=
+ute__' before 'enable_warnings'
+> >         xpidl.h:81: error: expected '=3D', ',', ';', 'asm' or '__attrib=
+ute__' before 'verbose_mode'
+> >         xpidl.h:82: error: expected '=3D', ',', ';', 'asm' or '__attrib=
+ute__' before 'emit_typelib_annotations'
+> >         xpidl.h:83: error: expected '=3D', ',', ';', 'asm' or '__attrib=
+ute__' before 'explicit_output_filename'
+> >         In file included from xpidl_idl.c:43:
+> >         xpidl.h:79: error: expected '=3D', ',', ';', 'asm' or '__attrib=
+ute__' before 'enable_debug'
+> >         xpidl.h:80: error: expected '=3D', ',', ';', 'asm' or '__attrib=
+ute__' before 'enable_warnings'
+> >         xpidl.h:94: error: expected declaration specifiers or '...' bef=
+ore '*' tokenxpidl.h:81: error: expected '=3D', ',', ';', 'asm' or '__attri=
+bute__' before 'verbose_mode'
+> >        =20
+> >         xpidl.h:82: error: expected '=3D', ',', ';', 'asm' or '__attrib=
+ute__' before 'emit_typelib_annotations'
+> >         xpidl.h:94: error: 'gboolean' declared as function returning a =
+function
+> >         xpidl.h:83: error: expected '=3D', ',', ';', 'asm' or '__attrib=
+ute__' before 'explicit_output_filename'
+> >         xpidl.h:100: error: expected specifier-qualifier-list before 'n=
+odeHandler'
+> >         xpidl.h:94: error: expected declaration specifiers or '...' bef=
+ore '*' token
+> >         xpidl.h:94: error: 'gboolean' declared as function returning a =
+function
+> >         xpidl.h:100: error: expected specifier-qualifier-list before 'n=
+odeHandler'
+> >         xpidl.h:130: error: expected specifier-qualifier-list before 'I=
+DL_ns'
+> >         xpidl.h:138: error: expected specifier-qualifier-list before 'G=
+HashTable'
+> >         xpidl.h:130: error: expected specifier-qualifier-list before 'I=
+DL_ns'
+> >         xpidl.h:156: error: expected ')' before 'p'
+> >         xpidl.h:138: error: expected specifier-qualifier-list before 'G=
+HashTable'
+> >         xpidl.h:177: error: 'xpidl_process_node' declared as function r=
+eturning a function
+> >         xpidl.h:156: error: expected ')' before 'p'
+> >         xpidl.h:202: error: 'xpidl_sprint_iid' declared as function ret=
+urning a function
+> >         xpidl.h:177: error: 'xpidl_process_node' declared as function r=
+eturning a functionxpidl.h:209: error: 'xpidl_parse_iid' declared as functi=
+on returning a function
+> >        =20
+> >         xpidl.h:202: error: 'xpidl_sprint_iid' declared as function ret=
+urning a function
+> >         xpidl.h:241: error: expected '=3D', ',', ';', 'asm' or '__attri=
+bute__' before 'find_underlying_type'xpidl.h:209: error: 'xpidl_parse_iid' =
+declared as function returning a function
+> >        =20
+> >         xpidl.h:248: error: expected ')' before 'const_tree'
+> >         xpidl.h:254: error: expected ')' before 'method_tree'
+> >         xpidl.h:260: error: expected ')' before 'method_tree'
+> >         xpidl.h:266: error: expected ')' before 'method_tree'xpidl.h:24=
+1: error: expected '=3D', ',', ';', 'asm' or '__attribute__' before 'find_u=
+nderlying_type'
+> >        =20
+> >         xpidl.h:273: error: 'check_native' declared as function returni=
+ng a functionxpidl.h:248: error: expected ')' before 'const_tree'
+> >        =20
+> >         xpidl.h:254: error: expected ')' before 'method_tree'
+> >         xpidl.h:276: error: expected declaration specifiers or '...' be=
+fore 'GSList'
+> >         xpidl.h:260: error: expected ')' before 'method_tree'
+> >         xpidl.h:279: error: expected ')' before 'method_tree'xpidl.h:26=
+6: error: expected ')' before 'method_tree'
+> >        =20
+> >         xpidl.h:273: error: 'check_native' declared as function returni=
+ng a function
+> >         xpidl.h:276: error: expected declaration specifiers or '...' be=
+fore 'GSList'
+> >         xpidl.h:279: error: expected ')' before 'method_tree'
+> >=20
+> > > By the way, thanks a lot for the fix.
+> >=20
+> > I am testing this patch right now and will see if also a dependency on
+> > `glib-2.0` is needed.
+>=20
+> Patrik=E2=80=99s patch worked just fine.
+>=20
+>         Build Configuration:
+>         BB_VERSION        =3D "1.12.0"
+>         METADATA_BRANCH   =3D "gitorious"
+>         METADATA_REVISION =3D "2acbb95"
+>         TARGET_ARCH       =3D "arm"
+>         TARGET_OS         =3D "linux-gnueabi"
+>         MACHINE           =3D "beagleboard"
+>         DISTRO            =3D "minimal"
+>         DISTRO_VERSION    =3D "dev-snapshot-20110416"
+>         TARGET_FPU        =3D "hard"
 
-few of us were busy for last couple of weeks attending
-different conferences hence the delays. It should get better now
-after everyone is back and well rested after their travel
-
->
-> --
-> Otavio Salvador=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0O.S. Systems
-> E-mail: otavio@ossystems.com.br=C2=A0 http://www.ossystems.com.br
-> Mobile: +55 53 9981-7854=C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0http://projetos.ossystems.com.br
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Please wait until tomorrow. I think I made a mistake testing the patch.
 
 
+Thanks,
+
+Paul
+
+--=-p0y8+Bwhx3IWEI0STqdZ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2p65UACgkQPX1aK2wOHVjwigCcC2PS0OSG3I4Ir5C2iZu2bIGj
+d70Ani7DG6uS/GluJ/DeKmJRi66s9kpy
+=F5ae
+-----END PGP SIGNATURE-----
+
+--=-p0y8+Bwhx3IWEI0STqdZ--
