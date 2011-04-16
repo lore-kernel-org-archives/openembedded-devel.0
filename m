@@ -1,32 +1,39 @@
-Received: from ns.penguin.cz ([84.21.108.25])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <utx@penguin.cz>) id 1QB6av-00029Y-P1
+	(envelope-from <bgamari.foss@gmail.com>) id 1QB7E1-00080G-8f
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Apr 2011 16:35:29 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 8ABE41416BA8
+	Sat, 16 Apr 2011 17:15:53 +0200
+Received: by vws2 with SMTP id 2so3170244vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Apr 2011 16:11:55 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5NsOnALLUcAN
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Apr 2011 16:11:55 +0200 (CEST)
-Received: from [192.168.1.2] (233-15-80-78.tmcz.cz [78.80.15.233])
-	by ns.penguin.cz (Postfix) with ESMTP id 4869E1416BA5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Apr 2011 16:11:55 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	Sat, 16 Apr 2011 08:13:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:subject:in-reply-to:user-agent:date
+	:message-id:mime-version:content-type;
+	bh=hmsGQ4FxLHF+Qx/D2FqZeybe1FJhC5sly8ED+G1o9Bk=;
+	b=R/GxTuQ9Gyzvh6toMBgmZ+Vnaij7OwXqNqMW57GW55MTvygqdhPWHR9bN+5ZpmNNlj
+	lcJMG8mcXF76pynMMtct4VCmpZ/pC85MM72CPX30TaGYEY0ITdnmf6ruxGmwndQBMV1h
+	63D5d9H8fVpz3wIHd8t9V87KRZgWL/hEcjuc4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:in-reply-to:user-agent:date:message-id:mime-version
+	:content-type;
+	b=cBhD+T/n6euNiDutYxPrf0xKhN/4aT4gkj7hJXjF3yUDcBBkqd6+XWh4adDE60cwYB
+	4r15Y+lUC/RUPBY+x2roWq1b7iEa4UGM4wXjyygMRxR9cBj1NyZaFOK1vZisoQVobZmF
+	dN27gbV3h+tzAPJASLpVSVCuOrBkThtRn0DKE=
+Received: by 10.52.169.39 with SMTP id ab7mr4615293vdc.230.1302966814629;
+	Sat, 16 Apr 2011 08:13:34 -0700 (PDT)
+Received: from localhost (gamari.physics.umass.edu [128.119.56.223])
+	by mx.google.com with ESMTPS id p29sm825938vcr.31.2011.04.16.08.13.33
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 16 Apr 2011 08:13:33 -0700 (PDT)
+From: Ben Gamari <bgamari.foss@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1302951223.8709.23.camel@mattotaupa>
-References: <1302951049.8709.22.camel@mattotaupa>
-	<1302951223.8709.23.camel@mattotaupa>
-Date: Sat, 16 Apr 2011 16:11:47 +0200
-Message-ID: <1302963107.8128.5.camel@utx.lan>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.1 
-Subject: Re: [PATCH 2/2] viking: add `curl` to `DEPENDS`
+In-Reply-To: <20100322160729.4972.62697.stgit@ES-J7S4D2J.amer.consind.ge.com>
+User-Agent: Notmuch/0.5-83-g74bc93f (http://notmuchmail.org) Emacs/23.2.1
+	(x86_64-pc-linux-gnu)
+Date: Sat, 16 Apr 2011 11:13:32 -0400
+Message-ID: <87zknq5iw3.fsf@gmail.com>
+MIME-Version: 1.0
+Subject: [oe,RFC,v2] Alternative to busybox, using "proper tools"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,32 +47,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Apr 2011 14:35:29 -0000
-Content-Type: text/plain; charset="ISO-8859-2"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 16 Apr 2011 15:15:53 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Paul Menzel wrote:
-> Task configure fails with the following error.
 
-Fixed:
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=4736307c4a27660405505f2a8231afe974eec2dc
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=c4c5dc5019dec74d36566b94c0c386e48f6748cb
+Did anything ever happen with this[1] patch? If not, is there another
+convenient way to use the proper tools in leiu of busybox? For larger
+machines it's very nice to have a more civilized environment. Thanks,
 
-Well, gpsd in DEPENDS is now obsolete. But I am keeping it here with
-hope that somebody will fix it or port.
-
-Note that I have a specific reason to keep old version 0.9.6 there -
-newer versions defines a minimal width of the layers panel. On small
-screen devices it shrinks usable map space.
-
-On large screen devices latest version works well with a small patch:
-https://sourceforge.net/tracker/?func=detail&atid=570954&aid=3206628&group_id=83870
-
--- 
-
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
+ - Ben
 
 
