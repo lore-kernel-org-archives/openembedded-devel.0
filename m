@@ -1,38 +1,34 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QB490-0003Ho-Ga
+	(envelope-from <martin.jansa@gmail.com>) id 1QB49f-0003Mm-7i
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Apr 2011 13:58:30 +0200
-Received: by yia13 with SMTP id 13so1425937yia.6
+	Sat, 16 Apr 2011 13:59:11 +0200
+Received: by fxm19 with SMTP id 19so2693953fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Apr 2011 04:56:11 -0700 (PDT)
+	Sat, 16 Apr 2011 04:56:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=cXeVy0GSH9pouKgFHs1mcza5P5S+GphrGYa7irGX23k=;
-	b=oC0JNRCNccxDYZg48zqAUQapAug3AuSM3UqsCZ34wJptTsSWyp6VwOtPsPlOleERRU
-	8bM/Rk1mkN/cER0gxh/O3oBW63q56+s8pGS40jWF4P+wvKRawpeV5TtMAk8rr1yGu3MP
-	FDnYjN4tcAzB0wUeVrVlAuRqtqu/DDw2tuREM=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=N4zbaa70rB5JSuTBqFj9F4BwZcMP+lWOOeS2RFWXgVo=;
+	b=W/nGcUsGPJlpPElRXpxKkVGwb1+oqvW2Mn07tU9U1B+IpIHVtamrDYO3zsSa4kBk6U
+	/58rjJFGf+E58xx7zEEWd2oIqBcxmYcY7wLBeqYe06sbn0M0t5s6ZhTXrvqMsgZok5cp
+	OJdruJrF+ZyjbupyIz3lSQeY3Byp662+VpAbw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=ixR3jDSe3Wuc6b5EroMtkRySpqwr+n4VpxBXySXNQ7nnmIlE7bcoBvTkREZNaEMTYU
-	K02frykEHETa0kKTcMvIEZZ7XeYLUFAiQ6tCh3dWjDdpssONUcxqFggehzvEKxpBbXiA
-	d7woRj61aHmqPtEHSh7/QhhfuffnZkqyAGu4M=
-MIME-Version: 1.0
-Received: by 10.236.176.42 with SMTP id a30mr1781482yhm.153.1302954969578;
-	Sat, 16 Apr 2011 04:56:09 -0700 (PDT)
-Received: by 10.146.83.11 with HTTP; Sat, 16 Apr 2011 04:56:09 -0700 (PDT)
-In-Reply-To: <iobstd$780$1@dough.gmane.org>
-References: <cover.1302763397.git.Martin.Jansa@gmail.com>
-	<iobstd$780$1@dough.gmane.org>
-Date: Sat, 16 Apr 2011 13:56:09 +0200
-Message-ID: <BANLkTinWHPZpEKiHwKys5CZWyZ5VGqCCrQ@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=sQgNoZdz27o3dvBso48wFizFWxRXgF0kowRc9+pA/KPC5D+GQrqAGezytyXPiloTOH
+	1vGcP6YeoPOnR5ZvlVVUSz7juC48m8rU8ToxAaZEUbrV0ZjQ8D/pAxxgse/dylDeLNng
+	W4UnxILHLPiR9nvaV/KLGVdz5iYGnozX0dGqo=
+Received: by 10.223.24.213 with SMTP id w21mr3065721fab.113.1302955012499;
+	Sat, 16 Apr 2011 04:56:52 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id n7sm1067863fam.11.2011.04.16.04.56.51
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 16 Apr 2011 04:56:51 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe] [PATCHv2 0/1] Pull request #6
+Date: Sat, 16 Apr 2011 13:56:50 +0200
+Message-Id: <cover.1302954782.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.5.rc1
+Subject: [meta-oe][PATCH 0/4] Pull request #7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,52 +42,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Apr 2011 11:58:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 16 Apr 2011 11:59:11 -0000
 
-Thanks :) sending another...
+Pull URL: git://gitorious.org/shr/meta-openembedded.git
+  Branch: jama/meta-oe
+  Browse: http://gitorious.org/shr/meta-openembedded/commits/jama/meta-oe
 
-On Sat, Apr 16, 2011 at 1:01 PM, Koen Kooi <koen@dominion.thruhere.net> wro=
-te:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 14-04-11 08:46, Martin Jansa wrote:
->> Small fix for mesa-xlib.
->> FILESPATHPKG support in oe-core would be nice.
->>
->> Pull URL: git://gitorious.org/shr/meta-openembedded.git
->> =A0 Branch: jama/meta-oe
->> =A0 Browse: http://gitorious.org/shr/meta-openembedded/commits/jama/meta=
--oe
->>
->> Thanks,
->> =A0 =A0 Martin Jansa <Martin.Jansa@gmail.com>
->> ---
->>
->>
->> Martin Jansa (1):
->> =A0 mesa-xlib: fix FILESPATH
->>
->> =A0meta-oe/recipes-graphics/mesa/mesa-xlib.inc | =A0 =A05 ++++-
->> =A01 files changed, 4 insertions(+), 1 deletions(-)
->>
->
-> Thanks, applied
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFNqXbtMkyGM64RGpERAljBAJ48y1wJwz2PHxiLei2jeUkgi3wkzACglAKq
-> 6xu1E+/7CDJMfuDH4IFOpKs=3D
-> =3DGdHF
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Thanks,
+    Martin Jansa <Martin.Jansa@gmail.com>
+---
+
+
+Martin Jansa (4):
+  xserver-xorg: upgrade to 1.10.0.902
+  vala.bbclass: move from meta-efl to meta-oe as libcanberra_0.26.bb is
+    also using it
+  bluez4: merge .inc file to .bb file itself
+  bluez-hcidump: add 2.0 version and patch to build with newer bluez
+
+ {meta-efl => meta-oe}/classes/vala.bbclass         |    0
+ .../remove.ntoh64.definition.patch                 |   42 ++++++++++++
+ .../bluez/bluez-hcidump_2.0.bb                     |   21 ++++++
+ meta-oe/recipes-connectivity/bluez/bluez4.inc      |   71 --------------------
+ .../bluez/bluez4/bluetooth.conf                    |   16 -----
+ .../fix-dfutool-usb-declaration-mismatch.patch     |   13 ----
+ .../bluez/bluez4/hid2hci_usb_init.patch            |   33 ---------
+ .../bluez/bluez4/sbc-thumb.patch                   |   11 ---
+ meta-oe/recipes-connectivity/bluez/bluez4_4.91.bb  |   71 +++++++++++++++++--
+ ...ack-assume-pixman-supports-overlapped-blt.patch |    0
+ .../hack-fbdev-ignore-return-mode.patch            |    0
+ ...rg_1.10.0.901.bb => xserver-xorg_1.10.0.902.bb} |    5 +-
+ .../xorg-xserver/xserver-xorg_git.bb               |    6 +-
+ 13 files changed, 132 insertions(+), 157 deletions(-)
+ rename {meta-efl => meta-oe}/classes/vala.bbclass (100%)
+ create mode 100644 meta-oe/recipes-connectivity/bluez/bluez-hcidump-2.0/remove.ntoh64.definition.patch
+ create mode 100644 meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.0.bb
+ delete mode 100644 meta-oe/recipes-connectivity/bluez/bluez4.inc
+ delete mode 100644 meta-oe/recipes-connectivity/bluez/bluez4/bluetooth.conf
+ delete mode 100644 meta-oe/recipes-connectivity/bluez/bluez4/fix-dfutool-usb-declaration-mismatch.patch
+ delete mode 100644 meta-oe/recipes-connectivity/bluez/bluez4/hid2hci_usb_init.patch
+ delete mode 100644 meta-oe/recipes-connectivity/bluez/bluez4/sbc-thumb.patch
+ rename meta-oe/recipes-graphics/xorg-xserver/{xserver-xorg-1.10.0.901 => xserver-xorg-1.10.0.902}/hack-assume-pixman-supports-overlapped-blt.patch (100%)
+ rename meta-oe/recipes-graphics/xorg-xserver/{xserver-xorg-1.10.0.901 => xserver-xorg-1.10.0.902}/hack-fbdev-ignore-return-mode.patch (100%)
+ rename meta-oe/recipes-graphics/xorg-xserver/{xserver-xorg_1.10.0.901.bb => xserver-xorg_1.10.0.902.bb} (82%)
+
+-- 
+1.7.5.rc1
+
 
 
