@@ -1,39 +1,43 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <bgamari.foss@gmail.com>) id 1QB7E1-00080G-8f
+	(envelope-from <otavio.salvador@gmail.com>) id 1QB9Xz-0000PO-Lo
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Apr 2011 17:15:53 +0200
-Received: by vws2 with SMTP id 2so3170244vws.6
+	Sat, 16 Apr 2011 19:44:39 +0200
+Received: by wwb17 with SMTP id 17so3625209wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Apr 2011 08:13:34 -0700 (PDT)
+	Sat, 16 Apr 2011 10:42:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:subject:in-reply-to:user-agent:date
-	:message-id:mime-version:content-type;
-	bh=hmsGQ4FxLHF+Qx/D2FqZeybe1FJhC5sly8ED+G1o9Bk=;
-	b=R/GxTuQ9Gyzvh6toMBgmZ+Vnaij7OwXqNqMW57GW55MTvygqdhPWHR9bN+5ZpmNNlj
-	lcJMG8mcXF76pynMMtct4VCmpZ/pC85MM72CPX30TaGYEY0ITdnmf6ruxGmwndQBMV1h
-	63D5d9H8fVpz3wIHd8t9V87KRZgWL/hEcjuc4=
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=7AgB+HdPr77CmjMFAOoxw8zp3M75UO4yoRJF83rn1t0=;
+	b=wxdZ+If43W5ZwROL3ezlpt7FvtfeJRwpAbUg2FySn/HhxM+Bq1BJFQdfyF5m8w9JYB
+	Nyg7o1494dv0itNOI6fLiL7FYX19sOwto0xE4/PpljhXP82ZsWMJ2u5Qhl/GtoA03Xer
+	rhChiA/HTWMkMcohrgXkiQAr3Np/FNyL+J234=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:in-reply-to:user-agent:date:message-id:mime-version
-	:content-type;
-	b=cBhD+T/n6euNiDutYxPrf0xKhN/4aT4gkj7hJXjF3yUDcBBkqd6+XWh4adDE60cwYB
-	4r15Y+lUC/RUPBY+x2roWq1b7iEa4UGM4wXjyygMRxR9cBj1NyZaFOK1vZisoQVobZmF
-	dN27gbV3h+tzAPJASLpVSVCuOrBkThtRn0DKE=
-Received: by 10.52.169.39 with SMTP id ab7mr4615293vdc.230.1302966814629;
-	Sat, 16 Apr 2011 08:13:34 -0700 (PDT)
-Received: from localhost (gamari.physics.umass.edu [128.119.56.223])
-	by mx.google.com with ESMTPS id p29sm825938vcr.31.2011.04.16.08.13.33
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 16 Apr 2011 08:13:33 -0700 (PDT)
-From: Ben Gamari <bgamari.foss@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100322160729.4972.62697.stgit@ES-J7S4D2J.amer.consind.ge.com>
-User-Agent: Notmuch/0.5-83-g74bc93f (http://notmuchmail.org) Emacs/23.2.1
-	(x86_64-pc-linux-gnu)
-Date: Sat, 16 Apr 2011 11:13:32 -0400
-Message-ID: <87zknq5iw3.fsf@gmail.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=DpWtk8UoyS0tOsGLXPLXJjNoOvPLZmVml4/i8SfhzrwzmE/iWSv1fO/Smk/bIlxwcd
+	fEbuWTO8cMiUxe8QMK0aFPIqgVmZjBKH00dhONLzz5J+Wy4JfFbjzTy68fPkziK8cXsY
+	j7+sF/N/p3csdw5uFjx9yodqzI2IVyy0JcPLw=
 MIME-Version: 1.0
-Subject: [oe,RFC,v2] Alternative to busybox, using "proper tools"
+Received: by 10.216.159.141 with SMTP id s13mr3235960wek.17.1302975740953;
+	Sat, 16 Apr 2011 10:42:20 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.216.46.207 with HTTP; Sat, 16 Apr 2011 10:42:20 -0700 (PDT)
+In-Reply-To: <1302942561.8709.7.camel@mattotaupa>
+References: <AANLkTimSjWURf8gMrVZGd==xCH3jnWEG_=G8EMfsdbW1@mail.gmail.com>
+	<AANLkTimPz8ji6Lo-Yh2DmRUc0=A-EwePxre6GiTss2=V@mail.gmail.com>
+	<AANLkTi=pcOHKF78X_uezE9Yqj9m=TLT5FPsWePp_Vs11@mail.gmail.com>
+	<1302942561.8709.7.camel@mattotaupa>
+Date: Sat, 16 Apr 2011 14:42:20 -0300
+X-Google-Sender-Auth: WDZMYadhoSYYWMnjwo-YPBVSzxE
+Message-ID: <BANLkTink-co5TWFr1nJF0cqPueXESs51xg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: work flow with pull requests (was: Pull request from O.S. Systems tree)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,14 +51,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Apr 2011 15:15:53 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 16 Apr 2011 17:44:39 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
+On Sat, Apr 16, 2011 at 05:29, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> So I would conclude that using both ways =96 as for example Otavio is
+> doing right now =96 seems to be an optimal(?) solution.
 
-Did anything ever happen with this[1] patch? If not, is there another
-convenient way to use the proper tools in leiu of busybox? For larger
-machines it's very nice to have a more civilized environment. Thanks,
+I am trying but it has not worked so far. Most patches I sent mailing
+list are still not applied or nacked.
 
- - Ben
+If you check at
+https://projetos.ossystems.com.br/git/?p=3Dusers/otavio/org.openembedded.de=
+v.git;a=3Dsummary
+you will see patches I sent two or three times here and that are not
+merged/nacked yet.
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
