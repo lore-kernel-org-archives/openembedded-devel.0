@@ -1,36 +1,26 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from ns.penguin.cz ([84.21.108.25])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <xiaoxianghua@gmail.com>) id 1QBDAT-0004VV-Dk
+	(envelope-from <utx@penguin.cz>) id 1QBEri-00035e-Gu
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Apr 2011 23:36:37 +0200
-Received: by fxm19 with SMTP id 19so2852015fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Apr 2011 14:34:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=j/REj2d9fsQhQqKEOk6Ah3ScBcl9MZgxgG43uy5d1Y8=;
-	b=YI/gis6CqpFGjCausjVCqPfTYUz3UNBoPSzhHm6MyJK3kgBGopbvog8ph7mbVVNL2o
-	5piVS70NBpdMOicjg9N6iNa/31mQ7CqNepWCePD0jCa2GAjJuN9hTe1x/LdUThNt9Kda
-	e5a/s9Osjp0zP8xtpWrFzbwb7wC0TcD+AtV8o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Db+bHl4yehE2e36rtkYd2hPXdvm0GtIgOY5wVP0b/DRN9t+dWl3JEzCc/BH9is8R8I
-	PArFGnF10aVyomT9ZXybjZYf2rEVCRfPFlmdUVnAteVPxKE2FXVuvwCYGUk7FKYBU5Rw
-	F1+9IRfihRC3wPFwI+z+yY4Pi2MRfDY77vao4=
-MIME-Version: 1.0
-Received: by 10.223.55.78 with SMTP id t14mr923940fag.43.1302989658339; Sat,
-	16 Apr 2011 14:34:18 -0700 (PDT)
-Received: by 10.223.107.9 with HTTP; Sat, 16 Apr 2011 14:34:18 -0700 (PDT)
-In-Reply-To: <1302319620-18223-5-git-send-email-heroor@gmail.com>
-References: <1302319620-18223-1-git-send-email-heroor@gmail.com>
-	<1302319620-18223-5-git-send-email-heroor@gmail.com>
-Date: Sat, 16 Apr 2011 16:34:18 -0500
-Message-ID: <BANLkTi=o8_=Wdpe=b+Ydo6iha7aiMszC0A@mail.gmail.com>
-From: Xianghua Xiao <xiaoxianghua@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCHv3 5/5] ti-syslink-libs: Add Syslink version 02.00.00.68 Beta1
+	Sun, 17 Apr 2011 01:25:22 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 0A2D01416BAC;
+	Sun, 17 Apr 2011 01:23:15 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id RndPoxxv53EZ; Sun, 17 Apr 2011 01:23:14 +0200 (CEST)
+Received: from [192.168.1.2] (233-15-80-78.tmcz.cz [78.80.15.233])
+	by ns.penguin.cz (Postfix) with ESMTP id 2149E1416BA5;
+	Sun, 17 Apr 2011 01:23:13 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Sun, 17 Apr 2011 01:23:04 +0200
+Message-ID: <1302996184.3122.30.camel@utx.lan>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.1 
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: [PATCH 0/5] *.bbclass: search configs in D instead of S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,67 +34,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Apr 2011 21:36:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 16 Apr 2011 23:25:22 -0000
+Content-Type: text/plain; charset="ISO-8859-2"
+Content-Transfer-Encoding: 7bit
 
-This recipe includes a SRC URI that is not accessible for the public,
-why is that?
+Following series of patches changes way how config files are populated.
+Searching for *-config and .pc config files in S makes more problems
+than it brings benefits. Searching in the installed root seems to be
+more logical.
 
-On Fri, Apr 8, 2011 at 10:27 PM, Siddharth Heroor <heroor@gmail.com> wrote:
-> From: Siddharth Heroor <heroor@ti.com>
->
->
-> Signed-off-by: Siddharth Heroor <heroor@ti.com>
-> ---
-> =C2=A0...ti-syslink-libs_02.00.00.67+02.00.00.68beta1.bb | =C2=A0 24 ++++=
-++++++++++++++++
-> =C2=A01 files changed, 24 insertions(+), 0 deletions(-)
-> =C2=A0create mode 100644 recipes/ti/ti-syslink-libs_02.00.00.67+02.00.00.=
-68beta1.bb
->
-> diff --git a/recipes/ti/ti-syslink-libs_02.00.00.67+02.00.00.68beta1.bb b=
-/recipes/ti/ti-syslink-libs_02.00.00.67+02.00.00.68beta1.bb
-> new file mode 100644
-> index 0000000..4a88f28
-> --- /dev/null
-> +++ b/recipes/ti/ti-syslink-libs_02.00.00.67+02.00.00.68beta1.bb
-> @@ -0,0 +1,24 @@
-> +require ti-syslink-libs.inc
-> +
-> +PV =3D "02_00_00_68"
-> +PVExtra =3D "_beta1"
-> +
-> +S =3D "${WORKDIR}/syslink_${PV}${PVExtra}"
-> +SYSLINK_ROOT =3D "${WORKDIR}/syslink_${PV}${PVExtra}"
-> +
-> +SRC_URI =3D "http://software-dl.ti.com/dsps/dsps_public_sw/SysLink/${PV}=
-${PVExtra}/exports/syslink_${PV}${PVExtra}.tar.gz;name=3Dsyslinktarball"
-> +SRC_URI[syslinktarball.md5sum] =3D "468034372124f70f82b60cfb5f11c8e8"
-> +SRC_URI[syslinktarball.sha256sum] =3D "ed574dcb3a5477cfbc69a1c9e768d5197=
-291cb057d19fd791e16e1c89af3e8e1"
-> +
-> +do_configure() {
-> + =C2=A0 =C2=A0# Update config.bld
-> + =C2=A0 =C2=A0sed -i \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0-e s:^C674_ELF.rootDir.*:C674_ELF.rootDir\ =
-=3D\ \"${CODEGEN_INSTALL_DIR}\":g \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0-e s:C64P_COFF,://C64P_COFF:g \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0-e s:C64P_ELF,://C64P_ELF:g \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0-e s:C674_COFF,://C674P_COFF:g \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0-e s:M3_ELF,://M3_ELF:g \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0-e s:A8_ELF$://A8_ELF:g \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0${S}/config.bld
-> +}
-> +
-> --
-> 1.7.0.4
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Fixes following subtle breakages:
+- files are populated with a different name that upstream intended
+- populated files that were not intended to be populated
+
+It was discussed previously here:
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-January/029261.html
+
+Now I was able to make a complete system build with these patches, so I
+guess that they are ready to be pushed. I am sending class changes for
+review and waiting for ACK of class changes.
+
+Packages that are known to be fixed by this change:
+ncurses
+PR update will be needed here. (Not sending this patch to the list.)
+
+Packages that need to be modified after this change:
+tcl
+tk
+I already have these patches ready - just remove custom staging and use
+standard staging way plus simple trick. (Not sending this patch to the
+list.)
+
+Packages with secondary breakage fixed by this patch set:
+alsa-utils (breakage triggered by ncurses)
+
+New packages that may be build with this patch set:
+lynx
+
+-- 
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
