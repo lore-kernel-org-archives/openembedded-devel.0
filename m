@@ -1,20 +1,23 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QB37l-000868-6i for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Apr 2011 12:53:10 +0200
+	id 1QB3AW-0008Cz-W5 for openembedded-devel@lists.openembedded.org;
+	Sat, 16 Apr 2011 12:56:01 +0200
 Received: from f053044057.adsl.alicedsl.de ([78.53.44.57]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QB35u-00018B-15; Sat, 16 Apr 2011 10:51:14 +0000
+	id 1QB38i-0001EQ-0E for openembedded-devel@lists.openembedded.org;
+	Sat, 16 Apr 2011 10:54:08 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 16 Apr 2011 12:50:49 +0200
-Message-ID: <1302951049.8709.22.camel@mattotaupa>
+In-Reply-To: <1302951049.8709.22.camel@mattotaupa>
+References: <1302951049.8709.22.camel@mattotaupa>
+Date: Sat, 16 Apr 2011 12:53:43 +0200
+Message-ID: <1302951223.8709.23.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.2 
-Subject: [PATCH 1/2] viking: add `intltool-native` to `DEPENDS`
+Subject: [PATCH 2/2] viking: add `curl` to `DEPENDS`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,33 +31,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Apr 2011 10:53:11 -0000
-X-Groupsio-MsgNum: 31205
+X-List-Received-Date: Sat, 16 Apr 2011 10:56:01 -0000
+X-Groupsio-MsgNum: 31206
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-NK3042em6jN/9O/2QGwV"
+	boundary="=-F8oMFwfVEz2gMjixubBZ"
 
---=-NK3042em6jN/9O/2QGwV
+--=-F8oMFwfVEz2gMjixubBZ
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Date: Sat, 16 Apr 2011 09:40:23 +0200
+Date: Sat, 16 Apr 2011 12:39:23 +0200
 
-Task configure fails with the following error message.
+Task configure fails with the following error.
 
-	autoreconf: running: automake --foreign --add-missing --copy --force-missi=
-ng --warnings=3Dcross
-	automake: unknown warning category `cross'
-	autoreconf: running: gnu-configize
-	autoreconf: Leaving directory `.'
-	+ grep '^[[:space:]]*[AI][CT]_PROG_INTLTOOL' configure.ac
-	+ intltoolize --copy --force --automake
-	/oe/build-minimal-uclibc/minimal-uclibc-dev/work/armv7a-oe-linux-uclibceab=
-i/viking-0.9.6-r1/temp/run.do_configure.4334: line 168: intltoolize: comman=
-d not found
+	checking for gawk... (cached) gawk
+	checking for curl-config... no
+	checking whether libcurl is usable... no
+	configure: error: libcurl is needed but not found
 
-Adding `intltool-native` to `DEPENDS` fixes this problem with the following=
- configuration.
+Adding `curl` to `DEPENDS` fixes this problem and was tested using the foll=
+owing configuration.
 
 	Build Configuration:
 	BB_VERSION        =3D "1.12.0"
@@ -75,31 +72,31 @@ CC: Stanislav Brabec <utx@penguin.cz>
 
 diff --git a/recipes/viking/viking_0.9.6.bb b/recipes/viking/viking_0.9.6.b=
 b
-index 8ce7718..f24b859 100644
+index f24b859..13d9801 100644
 --- a/recipes/viking/viking_0.9.6.bb
 +++ b/recipes/viking/viking_0.9.6.bb
 @@ -1,7 +1,7 @@
  DESCRIPTION =3D "program to manage GPS data"
  HOMEPAGE =3D "http://viking.sourceforge.net/"
  SECTION =3D "x11/applications"
--DEPENDS =3D "gpsd gtk+"
-+DEPENDS =3D "gpsd gtk+ intltool-native"
+-DEPENDS =3D "gpsd gtk+ intltool-native"
++DEPENDS =3D "curl gpsd gtk+ intltool-native"
  LICENSE =3D "GPLv2"
  PRIORITY =3D "optional"
  PR =3D "r1"
 --=20
 1.7.4.4
 
---=-NK3042em6jN/9O/2QGwV
+--=-F8oMFwfVEz2gMjixubBZ
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk2pdIkACgkQPX1aK2wOHVj79gCeKlSaHUECNj7ohziv+Hs8EIJm
-feAAnROn4ebkPF6Jio/uaJVb+xxp08nm
-=PTR2
+iEYEABECAAYFAk2pdTcACgkQPX1aK2wOHVhSYgCeMajtcM0PmV5Ww1tQMfi1G651
+vQsAn02RnxouKXirFdtXLNAq79CI6zdq
+=qxR9
 -----END PGP SIGNATURE-----
 
---=-NK3042em6jN/9O/2QGwV--
+--=-F8oMFwfVEz2gMjixubBZ--
