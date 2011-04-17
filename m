@@ -1,24 +1,27 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from vms173019pub.verizon.net ([206.46.173.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <robert@erafx.com>) id 1QBWfj-0005WU-TI
+	(envelope-from <denis@denix.org>) id 1QBWjN-0005dA-Ar
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Apr 2011 20:26:14 +0200
-Received: by vxd7 with SMTP id 7so3569953vxd.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Apr 2011 11:23:48 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.220.123.130 with SMTP id p2mr1227406vcr.137.1303064628315;
-	Sun, 17 Apr 2011 11:23:48 -0700 (PDT)
-Received: by 10.220.177.139 with HTTP; Sun, 17 Apr 2011 11:23:48 -0700 (PDT)
-X-Originating-IP: [24.165.208.114]
-In-Reply-To: <BANLkTin=ptRRhu_WB=gDooxUEJLh64DNaA@mail.gmail.com>
-References: <BANLkTin=ptRRhu_WB=gDooxUEJLh64DNaA@mail.gmail.com>
-Date: Sun, 17 Apr 2011 14:23:48 -0400
-Message-ID: <BANLkTim=qvmZLwmdYZtPH802PDBM-y7n1g@mail.gmail.com>
-From: Robert Foerster <robert@erafx.com>
+	Sun, 17 Apr 2011 20:29:58 +0200
+Received: from gandalf.denix.org ([unknown] [108.18.140.4])
+	by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LJT006UH79UMZW0@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	17 Apr 2011 13:27:30 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 4C3B714AF5B; Sun,
+	17 Apr 2011 14:27:30 -0400 (EDT)
+Date: Sun, 17 Apr 2011 14:27:30 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Installing MAD-FCL using bitbake
+Message-id: <20110417182730.GC4068@denix.org>
+References: <1302319620-18223-1-git-send-email-heroor@gmail.com>
+	<1302319620-18223-4-git-send-email-heroor@gmail.com>
+MIME-version: 1.0
+In-reply-to: <1302319620-18223-4-git-send-email-heroor@gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Cc: Siddharth Heroor <heroor@ti.com>
+Subject: Re: [PATCHv3 4/5] ti-syslink-module: Add Syslink version	02.00.00.68 Beta1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,118 +35,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Apr 2011 18:26:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 17 Apr 2011 18:29:58 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Sun, Apr 17, 2011 at 1:20 PM, Alberto Carrozzo <gilby985@gmail.com>wrote:
+On Sat, Apr 09, 2011 at 08:56:59AM +0530, Siddharth Heroor wrote:
+> From: Siddharth Heroor <heroor@ti.com>
+> 
+> 
+> Signed-off-by: Siddharth Heroor <heroor@ti.com>
+> ---
+>  ...-syslink-module_02.00.00.67+02.00.00.68beta1.bb |   11 +++++++++++
+>  1 files changed, 11 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/ti/ti-syslink-module_02.00.00.67+02.00.00.68beta1.bb
 
-> Hello, I'm trying to install MAD-FCL (http://mad.cs.tut.fi/) in order
-> to use the Flute protocol on Angstrom... to do it, I modified the
-> "wscan_20091230.bb" recipe that you can find in
-> "oe/openembedded/recipes/dvbtools/" folder...
->
-> _________________________________________________
-> ESCRIPTION = "Wscan is a dvb channel scanner that doesn't require an
-> initial frequency table"
-> LICENSE = "GPLv2"
->
-> SRC_URI = "http://wirbel.htpc-forum.de/w_scan/w_scan-${PV}.tar.bz2"
->
-> S = "${WORKDIR}/w_scan-${PV}"
->
-> inherit autotools
->
-> FILES_${PN} += "${datadir}"
->
-> SRC_URI[md5sum] = "97cd83d5c174e386d01a364b2d280f2a"
-> SRC_URI[sha256sum] =
-> "1a5864559b6a0acb76b9fa66b4e1351acd7d06c4e4a9a2ba323e7eafa4d4788b"
-> __________________________________________________
->
-> It works perfectly and bitbaking it I can find the executable w_scan
-> in the
-> ~/oe/tmp/work/armv7a-angstrom-linux-gnueabi/wscan-20091230-r0/w_scan-20091230
-> folder... So I modifed it in this way:
->
-> ___________________________________________________
-> SRC_URI = "http://mad.cs.tut.fi/download/mad_fcl_v1.7_src.tar.gz"
->
-> S = "${WORKDIR}/flute"
->
->
-The directory in the tar.gz file is named mad_fcl_v1.7_src, not flute.  As
-such, your source directory (S) is set incorrectly.
+Sid,
 
+Renaming the file with the proper versioning doesn't do any good, when you set 
+the actual PV inside the recipe to the wrong value anyway - bitbake and opkg 
+will sort by PV and not the recipe name! Hence, you are setting the version to 
+02_00_00_68 and what happens when the real 02_00_00_68 gets released?
 
+I did some quick editing and will send the updated patches for #4 and #5 - 
+please review and provide feedback. Thanks.
 
-> inherit autotools
->
+-- 
+Denys
 
-I don't see any autotools artifacts in this tar.gz, so why are you
-inheriting autotools?
-
-
-
->
-> FILES_${PN} += "${bindir}/flute"
->
-> SRC_URI[md5sum] = "71a0c9d856a9b949b2c7c25bfd91029e"
-> SRC_URI[sha256sum] =
-> "97c0abc3807e48b102fee85bf14aaaeabe39ce3f98bb4423daed9651978e62f0"
-> ____________________________________________________
->
-> ...but it doesn't work and it gives me the following error on the
-> log.do_install file:
-> ____________________________________________________
-> NOTE: make
-> DESTDIR=/home/gilby/oe/tmp/work/armv7a-angstrom-linux-gnueabi/flute-1.0-r0/image
-> install
-> make: *** No rule to make target `install'.  Stop.
-> FATAL: oe_runmake failed
-> ERROR: Function do_install failed
-> ____________________________________________________
->
-> Note: the log.do_compile file tells me "NOTE: nothing to compile"
->
-> ... OK, so i added this on the recipe above:
-> ____________________________________________________
-> do_install(){
->        install -m 0755 -d ${D}${bindir} ${D}${docdir}/flute
-> }
-> ____________________________________________________
->
-> and it work without errors... but the log.do_compile file tells me
-> again "NOTE: nothing to compile" and i can't find the executable in
-> the ~/oe/tmp/work/armv7a-angstrom-linux-gnueabi/flute-1.0-r0/
-> folder... and the same thing happen if I delete the "inherit
-> autotools" row...
->
-> SO:
->
-> 1) Why for some recipes it execute the makefile automatically and not
-> for other ones?
->
-
-Well, bad input => bad output.  You must fix your recipe.
-
-
-> 2) How can I fix my prolems?
-
-
-Gain more understanding of OE - like using S, PN, PV, etc in your recipe.
-Fix S.
-Drop the inherit autotools.
-Figure out how to compile the package properly and implement that in the
-recipe.
-
-
-
->
-> somebody can help me? thank you so much
->
+> diff --git a/recipes/ti/ti-syslink-module_02.00.00.67+02.00.00.68beta1.bb b/recipes/ti/ti-syslink-module_02.00.00.67+02.00.00.68beta1.bb
+> new file mode 100644
+> index 0000000..f7bcb35
+> --- /dev/null
+> +++ b/recipes/ti/ti-syslink-module_02.00.00.67+02.00.00.68beta1.bb
+> @@ -0,0 +1,11 @@
+> +require ti-syslink-module.inc
+> +
+> +PV = "02_00_00_68"
+> +PVExtra = "_beta1"
+> +
+> +S = "${WORKDIR}/syslink_${PV}${PVExtra}/ti/syslink/utils/hlos/knl/Linux"
+> +SYSLINK_ROOT = "${WORKDIR}/syslink_${PV}${PVExtra}"
+> +
+> +SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/SysLink/${PV}${PVExtra}/exports/syslink_${PV}${PVExtra}.tar.gz;name=syslinktarball"
+> +SRC_URI[syslinktarball.md5sum] = "468034372124f70f82b60cfb5f11c8e8"
+> +SRC_URI[syslinktarball.sha256sum] = "ed574dcb3a5477cfbc69a1c9e768d5197291cb057d19fd791e16e1c89af3e8e1"
+> -- 
+> 1.7.0.4
+> 
+> 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
 
