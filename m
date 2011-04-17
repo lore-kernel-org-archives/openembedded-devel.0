@@ -1,34 +1,26 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from vms173003pub.verizon.net ([206.46.173.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1QBWSD-0005Di-V3
+	(envelope-from <denis@denix.org>) id 1QBWdk-0005PR-4j
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Apr 2011 20:12:14 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1QBWPz-0002BK-MP from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Apr 2011 11:09:55 -0700
-Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Sun, 17 Apr 2011 11:09:55 -0700
-Received: from [172.30.80.170] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
-	Sun, 17 Apr 2011 11:09:54 -0700
-Message-ID: <4DAB2CEC.1030008@mentor.com>
-Date: Sun, 17 Apr 2011 11:09:48 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
+	Sun, 17 Apr 2011 20:24:08 +0200
+Received: from gandalf.denix.org ([unknown] [108.18.140.4])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LJT00I606ZH7QS4@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	17 Apr 2011 13:21:23 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id B6CC914AF5B; Sun,
+	17 Apr 2011 14:21:17 -0400 (EDT)
+Date: Sun, 17 Apr 2011 14:21:17 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20110417182117.GB4068@denix.org>
 References: <20110414193436.GA26286@denix.org> <4DAA505E.4000305@mentor.com>
-	<ioe35g$lb4$1@dough.gmane.org>
-In-Reply-To: <ioe35g$lb4$1@dough.gmane.org>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 17 Apr 2011 18:09:55.0520 (UTC)
-	FILETIME=[A7C2B400:01CBFD2A]
-Subject: Re: [2011.03-maintenance] Pull request for TI matrix-gui, ipc and sgx/gles
+	<ioe35g$lb4$1@dough.gmane.org> <4DAB2CEC.1030008@mentor.com>
+MIME-version: 1.0
+In-reply-to: <4DAB2CEC.1030008@mentor.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [2011.03-maintenance] Pull request for TI matrix-gui, ipc	and sgx/gles
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,37 +34,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Apr 2011 18:12:14 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 17 Apr 2011 18:24:08 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On 04/17/2011 12:00 AM, Koen Kooi wrote:
-> On 17-04-11 04:28, Tom Rini wrote:
->> On 04/14/2011 12:34 PM, Denys Dmytriyenko wrote:
->>> Tom,
+On Sun, Apr 17, 2011 at 11:09:48AM -0700, Tom Rini wrote:
+> On 04/17/2011 12:00 AM, Koen Kooi wrote:
+> > On 17-04-11 04:28, Tom Rini wrote:
+> >> On 04/14/2011 12:34 PM, Denys Dmytriyenko wrote:
+> >>> Tom,
+> > 
+> >>> Please pull these 5 commits for TI related changes - matrix-gui rev bump,
+> >>> new ti-ipc version and sgx/gles fixes for ti816x.
+> >>> All are cherry picked from oe.dev
+> > 
+> > 
+> >>> Pull URL: git://arago-project.org/git/people/denix/openembedded.git
+> >>>   Branch: 2011.03-maintenance
+> >>>   Browse: http://arago-project.org/git/people/?p=denix/openembedded.git;a=shortlog;h=refs/heads/2011.03-maintenance
+> > 
+> >>> Thanks,
+> >>>     Denys Dmytriyenko <denys@ti.com>
+> > 
+> >> Applied, thanks.
+> > 
+> > Tom, can you please unmerge it? The SGX commit is bogus, I have already
+> > asked Denys to revert it from .dev. I do not want crap like that in
+> > maintenance.
 > 
->>> Please pull these 5 commits for TI related changes - matrix-gui rev bump,
->>> new ti-ipc version and sgx/gles fixes for ti816x.
->>> All are cherry picked from oe.dev
-> 
-> 
->>> Pull URL: git://arago-project.org/git/people/denix/openembedded.git
->>>   Branch: 2011.03-maintenance
->>>   Browse: http://arago-project.org/git/people/?p=denix/openembedded.git;a=shortlog;h=refs/heads/2011.03-maintenance
-> 
->>> Thanks,
->>>     Denys Dmytriyenko <denys@ti.com>
-> 
->> Applied, thanks.
-> 
-> Tom, can you please unmerge it? The SGX commit is bogus, I have already
-> asked Denys to revert it from .dev. I do not want crap like that in
-> maintenance.
+> All of the parts of the merge or just a specific one?
 
-All of the parts of the merge or just a specific one?
+Tom,
+
+Can we hold off with unmerging/reverting for now? I'm trying to understand the 
+damage level and see the best course of action... But the commit in question 
+is "ligles-omap3: Remove SGX Fixup for TI816x"
+
+Koen,
+
+I replied to your email. Please let me know if you still prefer the complete 
+revert or if it can be worked around, as it still works, while may not be 
+optimal, and doesn't break anything else. Thanks.
 
 -- 
-Tom Rini
-Mentor Graphics Corporation
+Denys
 
 
