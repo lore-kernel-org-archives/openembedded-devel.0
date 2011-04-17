@@ -1,33 +1,34 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1QBHlX-0001ps-73
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Apr 2011 04:31:11 +0200
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1QBHjJ-000388-9U from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Apr 2011 19:28:53 -0700
-Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Sat, 16 Apr 2011 19:25:50 -0700
-Received: from [172.30.80.170] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
-	Sat, 16 Apr 2011 19:28:52 -0700
-Message-ID: <4DAA505E.4000305@mentor.com>
-Date: Sat, 16 Apr 2011 19:28:46 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <20110414193436.GA26286@denix.org>
-In-Reply-To: <20110414193436.GA26286@denix.org>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 17 Apr 2011 02:25:50.0771 (UTC)
-	FILETIME=[C4DBF030:01CBFCA6]
-Subject: Re: [2011.03-maintenance] Pull request for TI matrix-gui, ipc and	sgx/gles
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QBM09-00079H-8I for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Apr 2011 09:02:33 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QBLxr-0008Bk-Rx for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Apr 2011 09:00:11 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Apr 2011 09:00:11 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Apr 2011 09:00:11 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sun, 17 Apr 2011 09:00:00 +0200
+Message-ID: <ioe35g$lb4$1@dough.gmane.org>
+References: <20110414193436.GA26286@denix.org> <4DAA505E.4000305@mentor.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <4DAA505E.4000305@mentor.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [2011.03-maintenance] Pull request for TI matrix-gui, ipc and sgx/gles
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,44 +42,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Apr 2011 02:31:11 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
+X-List-Received-Date: Sun, 17 Apr 2011 07:02:33 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 04/14/2011 12:34 PM, Denys Dmytriyenko wrote:
-> Tom,
+On 17-04-11 04:28, Tom Rini wrote:
+> On 04/14/2011 12:34 PM, Denys Dmytriyenko wrote:
+>> Tom,
 > 
-> Please pull these 5 commits for TI related changes - matrix-gui rev bump,
-> new ti-ipc version and sgx/gles fixes for ti816x.
-> All are cherry picked from oe.dev
+>> Please pull these 5 commits for TI related changes - matrix-gui rev bump,
+>> new ti-ipc version and sgx/gles fixes for ti816x.
+>> All are cherry picked from oe.dev
 > 
 > 
-> Pull URL: git://arago-project.org/git/people/denix/openembedded.git
->   Branch: 2011.03-maintenance
->   Browse: http://arago-project.org/git/people/?p=denix/openembedded.git;a=shortlog;h=refs/heads/2011.03-maintenance
+>> Pull URL: git://arago-project.org/git/people/denix/openembedded.git
+>>   Branch: 2011.03-maintenance
+>>   Browse: http://arago-project.org/git/people/?p=denix/openembedded.git;a=shortlog;h=refs/heads/2011.03-maintenance
 > 
-> Thanks,
->     Denys Dmytriyenko <denys@ti.com>
+>> Thanks,
+>>     Denys Dmytriyenko <denys@ti.com>
+> 
+> Applied, thanks.
 
-Applied, thanks.
+Tom, can you please unmerge it? The SGX commit is bogus, I have already
+asked Denys to revert it from .dev. I do not want crap like that in
+maintenance.
 
-- -- 
-Tom Rini
-Mentor Graphics Corporation
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+Version: GnuPG v1.4.5 (Darwin)
 
-iQEcBAEBAgAGBQJNqlBXAAoJEI4NMjfc3nJxzW0H/AsvFhFP6wAkhF1nwqRGpGtt
-4Odn6BAF7rCo7ukBNybTGSmViBcx6PKsfkSF9iTj1/cWXL5VOmUAzX8FoTDH9+1i
-w/21ZmuvmGuhnjUkF/WA4ub5HcbUBOpVW/0o7XlPfmBsK0OfKfrcKfl5YInJwjE6
-O9RIv/3Y7SaYZ6wUR+CbryRH+6rxddUKxw2OiayHC5WIWfNUxZHuheNJFN7Ttb+I
-GLkdsw83hndOqCSVt+tQlt4ihdKjflPCtT5UjyK2g/c0671J0SLQkYNwH22CKbQu
-Mj7spr9IaRT88TkbfQl1CBxyskJofE9MERs42lbtTRLE2C4LZC9ElQwG+ywFQsU=
-=5tDj
+iD8DBQFNqo/vMkyGM64RGpERAtVFAJwOGeELCSVSFHNXRIP1OV+J0nK4xgCeKk4W
+nYEv8mnNgcqg9CQLf+sZrHI=
+=vQav
 -----END PGP SIGNATURE-----
+
 
 
