@@ -1,29 +1,21 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1QBSZD-0004a3-Nf
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Apr 2011 16:03:11 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id C72CB16601B3; Sun, 17 Apr 2011 08:00:51 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2-r929478 (2010-03-31) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2-r929478
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 17ED316601B2;
-	Sun, 17 Apr 2011 08:00:51 -0600 (MDT)
-Message-ID: <4DAAF293.7080705@mlbassoc.com>
-Date: Sun, 17 Apr 2011 08:00:51 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc13
-	Thunderbird/3.1.7
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QBUYJ-0006UF-5Q for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Apr 2011 18:10:23 +0200
+Received: from f053034068.adsl.alicedsl.de ([78.53.34.68]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QBUWV-0003Q5-8j for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Apr 2011 16:08:31 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <DUB107-w168531FE95ECFF71F7C03098AE0@phx.gbl>
-In-Reply-To: <DUB107-w168531FE95ECFF71F7C03098AE0@phx.gbl>
-Subject: Re: an ipk package depending on its corresponding -dev
+Date: Sun, 17 Apr 2011 18:08:04 +0200
+Message-ID: <1303056484.23572.21.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: [PATCH] schroedinger: remove version 0.2.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,28 +29,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Apr 2011 14:03:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 17 Apr 2011 16:10:23 -0000
+X-Groupsio-MsgNum: 31240
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Lodpjx4HHmlX3H0rdme+"
 
-On 04/17/2011 07:43 AM, Luca Bolognini wrote:
->
-> A strange thing happended to me last time I created libgles-omap3 ipk packages.I had justed patched /usr/bin/cputype (a file contained in one of the SRC_URIs) and libgles-omap3.inc to add some INSANE_SKIPs , then I gave the commands:MACHINE=beagleboard bitbake -v -c clean libgles-omap3MACHINE=beagleboard bitbake -v libgles-omap3
-> At least, it happened that I had the dependency:libgles_omap3 ->  libgles_omap3_dev
-> It's quite strange and it's the first time I see a package depending on its corresponding -dev.Obviously this dependency is false, there can't be any dependency between these two packages.The same action, with MACHINE=c6a816x-evm (in a different development machine) doesn't lead to this behaviour.However I don't think that MACHINE=beagleboard is involved, probably I corrupted something in the 1st development machine, I don't know.Have you any idea how to remove this ugly (and useless) dependency? How could it originate?
+--=-Lodpjx4HHmlX3H0rdme+
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I've seen this happen when something in the package depends on a
-library named *.so, instead of a more qualified library such as *.so.1
-The *.so files are only packaged in the -dev subpackages by default.
+Date: Sun, 17 Apr 2011 17:58:48 +0200
 
-An easy workaround (which might not be perfectly correct) is to just
-list the .so files in the main package, e.g.
-   FILES_${PN} += "/usr/lib/lib*.so"
+This version was released on 2006-05-22 and the current version is 1.0.10, =
+where 1.0.9 is currently packaged in OE.
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Additionally this version fails to compile with for example the following e=
+rror using `angstrom-2010.x`.
 
+	[=E2=80=A6]
+	/bin/sh ../arm-angstrom-linux-gnueabi-libtool  --tag=3DCC   --mode=3Dcompi=
+le arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=
+=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interw
+	ork -mno-thumb --sysroot=3D/oe/build-angstrom-next/angstrom-dev/sysroots/a=
+rmv7a-angstrom-linux-gnueabi -DHAVE_CONFIG_H -I. -I..    -
+	Wall -I.. -I/oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-angstrom-=
+linux-gnueabi/usr/include/liboil-0.3   -fexpensive-optimizations -fomit-fra=
+me-pointer -frename-registers -O2 -ggdb2 -MT libschroedinger_0.1_la-schrobu=
+ffer.lo -MD -MP -MF .deps/libschroedinger_0.1_la-schrobuffer.Tpo -c -o libs=
+chroedinger_0.1_la-schrobuffer.lo `test -f 'schrobuffer.c' || echo './'`sch=
+robuffer.c
+	schroframe.c:350:1: error: expected declaration specifiers or '...' before=
+ '*' token
+	schroframe.c:350:1: error: '_oil_type_add_s16' declared as function return=
+ing a function
+	schroframe.c:350:1: error: '_oil_type_add_s16' redeclared as different kin=
+d of symbol
+	/oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueab=
+i/usr/include/liboil-0.3/liboil/liboilfuncs.h:70:16: note: previous declara=
+tion of '_oil_type_add_s16' was here
+	schroframe.c: In function '_oil_type_add_s16':
+	schroframe.c:354:13: error: 'n' undeclared (first use in this function)
+	schroframe.c:354:13: note: each undeclared identifier is reported only onc=
+e for each function it appears in
+	schroframe.c:355:5: error: 'd_n' undeclared (first use in this function)
+	schroframe.c:355:14: error: 's1_n' undeclared (first use in this function)
+	schroframe.c:355:24: error: 's2_n' undeclared (first use in this function)
+	schroframe.c:357:1: warning: no return statement in function returning non=
+-void
+	schroframe.c: At top level:
+	schroframe.c:360:1: error: expected declaration specifiers or '...' before=
+ '*' token
+	schroframe.c:360:1: error: '_oil_type_add_s16_u8' declared as function ret=
+urning a function
+	schroframe.c:360:1: error: '_oil_type_add_s16_u8' redeclared as different =
+kind of symbol
+	/oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueab=
+i/usr/include/liboil-0.3/liboil/liboilfuncs.h:73:16: note: previous declara=
+tion of '_oil_type_add_s16_u8' was here
+	[=E2=80=A6]
 
+No distribution is pinning this version.
+
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ recipes/schroedinger/schroedinger_0.2.0.0.bb |   13 -------------
+ 1 files changed, 0 insertions(+), 13 deletions(-)
+ delete mode 100644 recipes/schroedinger/schroedinger_0.2.0.0.bb
+
+diff --git a/recipes/schroedinger/schroedinger_0.2.0.0.bb b/recipes/schroed=
+inger/schroedinger_0.2.0.0.bb
+deleted file mode 100644
+index ba61d2a..0000000
+--- a/recipes/schroedinger/schroedinger_0.2.0.0.bb
++++ /dev/null
+@@ -1,13 +0,0 @@
+-HOMEPAGE =3D "http://schrodinger.sourceforge.net/"
+-LICENSE =3D "MPL GPL LGPL MIT"
+-DEPENDS =3D "liboil gstreamer gst-plugins-base"
+-
+-SRC_URI =3D "${SOURCEFORGE_MIRROR}/schrodinger/${P}.tar.gz"
+-
+-inherit autotools pkgconfig
+-
+-FILES_${PN} +=3D "${libdir}/gstreamer-0.10/libgstschro.so"
+-
+-
+-SRC_URI[md5sum] =3D "45f8d0efd9b76579a005e4ffe7f96ac3"
+-SRC_URI[sha256sum] =3D "0b01f9fb9c869ecb6e066993d59e34789f82d445438480ac0e=
+2dc30f29d047a0"
+--=20
+1.7.4.4
+
+--=-Lodpjx4HHmlX3H0rdme+
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2rEGQACgkQPX1aK2wOHVit1wCfZiZei8l/vyuc+yVZCZY4fq4Z
+ChMAnioponXdhM8wZMVM2GSLDUOVKtXg
+=TsIX
+-----END PGP SIGNATURE-----
+
+--=-Lodpjx4HHmlX3H0rdme+--
