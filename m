@@ -1,37 +1,21 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1QBUw4-0006tb-RI
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Apr 2011 18:34:57 +0200
-Received: by iye7 with SMTP id 7so3756108iye.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Apr 2011 09:32:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=BENWXb4cWbIgubgDE0wM5zJZd/XxJ0qscclYgWyvWkQ=;
-	b=LdFJYnIV1AdX0CjlrGEU1RjFFhI8T4AFuq6p+jXyIdgJDfQhhMPY3ORmvIoJHM27tT
-	QQJ9LftWNzKc3fIPLiZnQ/eVCRxoArcsETW7J0TwQkIUpCRRs9Ep+HxT5xaUbMSMIhrB
-	6wD0MqLGaYlCylLuND3NZ7dV96IfSpNZ15Roc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	b=EPXNY4MUlV8U73FqaLyFLU+CxxooFEPpYK6jQexR84ZYdtAQAUIs6hbmzQWmSKocL3
-	VP92IEZYbbQduNOT/qFH2kpkKpGhG0OFNs+KpguAv/8ZlzBHYi94uW1SJmIa6R9Eyf4O
-	Bwc/rqiUnjKT1FyOsszVHx5HPzCdJ+49kZCUA=
-MIME-Version: 1.0
-Received: by 10.231.79.131 with SMTP id p3mr3126348ibk.191.1303057953352; Sun,
-	17 Apr 2011 09:32:33 -0700 (PDT)
-Received: by 10.231.19.204 with HTTP; Sun, 17 Apr 2011 09:32:33 -0700 (PDT)
-In-Reply-To: <1303057740.23572.23.camel@mattotaupa>
-References: <1303057740.23572.23.camel@mattotaupa>
-Date: Sun, 17 Apr 2011 18:32:33 +0200
-Message-ID: <BANLkTimDT0KbTeygMoREYawyJN68sKVYHQ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: Paul Menzel <paulepanter@users.sourceforge.net>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] schroedinger.inc: remove version dependent checksums
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QBVSK-0003rY-27 for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Apr 2011 19:08:16 +0200
+Received: from f053034068.adsl.alicedsl.de ([78.53.34.68]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QBVQW-0006e0-EA for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Apr 2011 17:06:24 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 17 Apr 2011 19:05:57 +0200
+Message-ID: <1303059957.23572.25.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: [PATCH] schroedinger: inherit class `pkgconfig`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,48 +29,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Apr 2011 16:34:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 17 Apr 2011 17:08:16 -0000
+X-Groupsio-MsgNum: 31243
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-4IPUMUFPacXDdfa+Km5C"
 
-2011/4/17 Paul Menzel <paulepanter@users.sourceforge.net>
+--=-4IPUMUFPacXDdfa+Km5C
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> Date: Sun, 17 Apr 2011 18:14:13 +0200
->
-> This is a fix up for commit cb84b138 [1].
->
-> [1]
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=cb84b138269ed9f3426f4e79f4bb9911e5066387
->
-> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> CC: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
->
+Date: Sun, 17 Apr 2011 18:47:21 +0200
 
-Thanks!
-Having the checksums twice in there is indeed not too useful.
-Acked-by:  Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Schr=C3=B6dinger installs pkg-config files.
 
-> ---
->  recipes/schroedinger/schroedinger.inc |    2 --
->  1 files changed, 0 insertions(+), 2 deletions(-)
->
-> diff --git a/recipes/schroedinger/schroedinger.inc
-> b/recipes/schroedinger/schroedinger.inc
-> index 4dc8a6e..386fc73 100644
-> --- a/recipes/schroedinger/schroedinger.inc
-> +++ b/recipes/schroedinger/schroedinger.inc
-> @@ -5,8 +5,6 @@ DEPENDS = "liboil orc-native orc"
->  INC_PR = "r1"
->
->  SRC_URI = "
-> http://www.diracvideo.org/download/schroedinger/${P}.tar.gz;name=schroedingertargz
-> "
-> -SRC_URI[schroedingertargz.md5sum] = "d67ec48b7c506db8c8b49156bf409e60"
-> -SRC_URI[schroedingertargz.sha256sum] =
-> "345abcaa72ff0f2e9c1075e22f7141475ee4e6eea23a7f568b69ffc13cc1c723"
->  SRC_URI += "file://configure.ac.patch"
->
->  EXTRA_OECONF += "STAGING_DIR=${STAGING_DIR_NATIVE}"
-> --
-> 1.7.4.4
->
+	$ ls angstrom-dev/work/armv7a-angstrom-linux-gnueabi/schroedinger-1.0.9-r1=
+.0/schroedinger-1.0.9/*pc*
+	angstrom-dev/work/armv7a-angstrom-linux-gnueabi/schroedinger-1.0.9-r1.0/sc=
+hroedinger-1.0.9/depcomp
+	angstrom-dev/work/armv7a-angstrom-linux-gnueabi/schroedinger-1.0.9-r1.0/sc=
+hroedinger-1.0.9/schroedinger-1.0-uninstalled.pc
+	angstrom-dev/work/armv7a-angstrom-linux-gnueabi/schroedinger-1.0.9-r1.0/sc=
+hroedinger-1.0.9/schroedinger-uninstalled.pc
+	angstrom-dev/work/armv7a-angstrom-linux-gnueabi/schroedinger-1.0.9-r1.0/sc=
+hroedinger-1.0.9/schroedinger-uninstalled.pc.in
+	angstrom-dev/work/armv7a-angstrom-linux-gnueabi/schroedinger-1.0.9-r1.0/sc=
+hroedinger-1.0.9/schroedinger.pc
+	angstrom-dev/work/armv7a-angstrom-linux-gnueabi/schroedinger-1.0.9-r1.0/sc=
+hroedinger-1.0.9/schroedinger.pc.in
 
+It looks like originally `AUTOTOOLS_STAGE_PKGCONFIG` was used for this task=
+. This variable was not used anymore and stylistically removed in commit c9=
+ca1ec7 [1], but it was forgotten to inherit `pkgconfig` again.
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dc9ca1ec=
+7a97eda5518ef95a35efee76b943763a8
+
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+Strangely the missing class inheritance did not cause any build errors for =
+packages depending on `schroedinger`.
+---
+ recipes/schroedinger/schroedinger.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/recipes/schroedinger/schroedinger.inc b/recipes/schroedinger/s=
+chroedinger.inc
+index 386fc73..1e9877d 100644
+--- a/recipes/schroedinger/schroedinger.inc
++++ b/recipes/schroedinger/schroedinger.inc
+@@ -9,7 +9,7 @@ SRC_URI +=3D "file://configure.ac.patch"
+=20
+ EXTRA_OECONF +=3D "STAGING_DIR=3D${STAGING_DIR_NATIVE}"
+=20
+-inherit autotools
++inherit autotools pkgconfig
+=20
+ do_configure_append () {
+         # Fix stupid libtool... handling.=20
+--=20
+1.7.4.4
+
+
+--=-4IPUMUFPacXDdfa+Km5C
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2rHfUACgkQPX1aK2wOHVjgzQCdHof/zu/5oCCfjwHmDfdpTN1+
+1hYAn3pTO+y0LCK6M/wAM0oMr3CNAy0w
+=ahXT
+-----END PGP SIGNATURE-----
+
+--=-4IPUMUFPacXDdfa+Km5C--
