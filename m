@@ -1,39 +1,34 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heroor@gmail.com>) id 1QBftM-0003EX-2q
+	(envelope-from <stefan@datenfreihafen.org>) id 1QBjHm-0001Mq-4l
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Apr 2011 06:16:52 +0200
-Received: by qwh5 with SMTP id 5so2411271qwh.6
+	Mon, 18 Apr 2011 09:54:18 +0200
+Received: from [2001:638:602:1183:cda5:2bfc:7471:f49a] (helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
+	id 1QBjFS-0000gY-Qk by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Apr 2011 21:14:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=OM5PBdMPQX7fszur9+WvcN30+L0axuXQl7z+VxhsWbo=;
-	b=h/jPTHYB3dTt4FnV7Vdss68eAMUgouQEg4VFeN84FhXTTuj1QHOAmBrlYETny9wQLL
-	x9RmYqJXL542lb3t0MCiNZgztK2lvUhlEx1PW3Wte+i4dEPMfJ9iQ89IYNQn0vV1f8gQ
-	OUBcxl4uQ5ZH/cXhYtkUmPUpT4s4Hoe4pqw8o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=apr98eynzES7BzNlNlMQPqsPcBkr0I1TyyuReapumyJg+YoNSW7XuvFF/JgW/sf+dW
-	/OKzTvDJFYlGrDTcHdHByfN4ezSIMP4UNdwToXkxIm99JCSilXiDnw5bzMu4YxwkKbD+
-	gAf8KeShVkM9ia56gi6Y34zVChXhmiYW2Nq/o=
-MIME-Version: 1.0
-Received: by 10.224.207.10 with SMTP id fw10mr2453576qab.79.1303100070610;
-	Sun, 17 Apr 2011 21:14:30 -0700 (PDT)
-Received: by 10.224.89.78 with HTTP; Sun, 17 Apr 2011 21:14:30 -0700 (PDT)
-In-Reply-To: <20110418031524.GA19200@denix.org>
-References: <1302319620-18223-1-git-send-email-heroor@gmail.com>
-	<1302319620-18223-4-git-send-email-heroor@gmail.com>
-	<20110417182730.GC4068@denix.org>
-	<BANLkTi=FJ2bF31UUSS_4By691ccs0dXnrQ@mail.gmail.com>
-	<20110418031524.GA19200@denix.org>
-Date: Mon, 18 Apr 2011 09:44:30 +0530
-Message-ID: <BANLkTi=QiV6c0HbpaQ0wM+uT5ug3GM3iKg@mail.gmail.com>
-From: Siddharth Heroor <heroor@gmail.com>
+	Mon, 18 Apr 2011 09:52:00 +0200
+Received: from stefan by excalibur.local with local (Exim 4.75)
+	(envelope-from <stefan@excalibur.local>) id 1QBjFR-0005AM-Hf
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Apr 2011 09:51:53 +0200
+Date: Mon, 18 Apr 2011 09:51:53 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCHv3 4/5] ti-syslink-module: Add Syslink version 02.00.00.68 Beta1
+Message-ID: <20110418075153.GA15540@excalibur.local>
+References: <20110412085148.GC17374@excalibur.local>
+MIME-Version: 1.0
+In-Reply-To: <20110412085148.GC17374@excalibur.local>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
+	autolearn=ham version=3.2.5
+Subject: Re: Patchwork day on Sunday 2011-04-17 and shutdown of patchwork.openembedded.org in favour of patches.openembedded.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,133 +42,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2011 04:16:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 18 Apr 2011 07:54:18 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Mon, Apr 18, 2011 at 8:45 AM, Denys Dmytriyenko <denis@denix.org> wrote:
-> On Mon, Apr 18, 2011 at 08:31:02AM +0530, Siddharth Heroor wrote:
->> On Sun, Apr 17, 2011 at 11:57 PM, Denys Dmytriyenko <denis@denix.org> wr=
-ote:
->> > On Sat, Apr 09, 2011 at 08:56:59AM +0530, Siddharth Heroor wrote:
->> >> From: Siddharth Heroor <heroor@ti.com>
->> >>
->> >>
->> >> Signed-off-by: Siddharth Heroor <heroor@ti.com>
->> >> ---
->> >> =A0...-syslink-module_02.00.00.67+02.00.00.68beta1.bb | =A0 11 ++++++=
-+++++
->> >> =A01 files changed, 11 insertions(+), 0 deletions(-)
->> >> =A0create mode 100644 recipes/ti/ti-syslink-module_02.00.00.67+02.00.=
-00.68beta1.bb
->> >
->> > Sid,
->> >
->> > Renaming the file with the proper versioning doesn't do any good, when=
- you set
->> > the actual PV inside the recipe to the wrong value anyway - bitbake an=
-d opkg
->> > will sort by PV and not the recipe name! Hence, you are setting the ve=
-rsion to
->> > 02_00_00_68 and what happens when the real 02_00_00_68 gets released?
->> >
->> Hi Denys,
->>
->> Thank you for correcting my understanding.
->>
->> The next version of syslink is expected to be 02_00_00_69 Beta2. I
->> don't think there will be
->> a 02_00_00_68_beta2. The version numbering followed by syslink appends b=
-eta1 to
->> 02_00_00_68. In such a case, should the next version recipe be
->> 02_00_00_68+02_00_00_69_beta2?
->
-> Sid,
->
-> Are you saying the versioning schema for this component is like this:
->
-> 02_00_00_68_beta1
-> 02_00_00_69_beta2
-> etc?
->
-> It's quite weird... Anyway, for proper sorting and ordering of versions, =
-it's
-> still recommended to use OE's versioning policy...
-Hi Denys,
+Hello.
 
-Yes, the versioning for this component is exactly how you point out. I will
-follow OE's versioning for any new versions I submit going forward.
+On Tue, 2011-04-12 at 10:51, Stefan Schmidt wrote:
+> 
+> I would like to have another patchwork day on Sunday 2011-04-17. The
+> focus will be on a final cleanup for patchwork.openembedded.org.
 
->
-> --
-> Denys
->
->> > I did some quick editing and will send the updated patches for #4 and =
-#5 -
->> > please review and provide feedback. Thanks.
->> >
->> > --
->> > Denys
->> >
->> >> diff --git a/recipes/ti/ti-syslink-module_02.00.00.67+02.00.00.68beta=
-1.bb b/recipes/ti/ti-syslink-module_02.00.00.67+02.00.00.68beta1.bb
->> >> new file mode 100644
->> >> index 0000000..f7bcb35
->> >> --- /dev/null
->> >> +++ b/recipes/ti/ti-syslink-module_02.00.00.67+02.00.00.68beta1.bb
->> >> @@ -0,0 +1,11 @@
->> >> +require ti-syslink-module.inc
->> >> +
->> >> +PV =3D "02_00_00_68"
->> >> +PVExtra =3D "_beta1"
->> >> +
->> >> +S =3D "${WORKDIR}/syslink_${PV}${PVExtra}/ti/syslink/utils/hlos/knl/=
-Linux"
->> >> +SYSLINK_ROOT =3D "${WORKDIR}/syslink_${PV}${PVExtra}"
->> >> +
->> >> +SRC_URI =3D "http://software-dl.ti.com/dsps/dsps_public_sw/SysLink/$=
-{PV}${PVExtra}/exports/syslink_${PV}${PVExtra}.tar.gz;name=3Dsyslinktarball=
-"
->> >> +SRC_URI[syslinktarball.md5sum] =3D "468034372124f70f82b60cfb5f11c8e8=
-"
->> >> +SRC_URI[syslinktarball.sha256sum] =3D "ed574dcb3a5477cfbc69a1c9e768d=
-5197291cb057d19fd791e16e1c89af3e8e1"
->> >> --
->> >> 1.7.0.4
->> >>
->> >>
->> >> _______________________________________________
->> >> Openembedded-devel mailing list
->> >> Openembedded-devel@lists.openembedded.org
->> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-deve=
-l
->> >
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->> >
->>
->>
->>
->> --
->> Sid
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+OK, wuite patchwork weekend again. Seems I would need to pester people
+a bit more so they are going to look at it. Was just not in the mood
+for it yesterday. To great weather. :)
 
+I did some work on my own thought. See the results below.
 
+> That one is set on hold in favour of patches.openembedded.org since a
+> while now and the newest patches in their are 5 months old then while
+> the oldest are nearly 2 years.
+> 
+> I would like everyone interested in patches sitting there comming back
+> to us in this thread. A lot of them will apply now longer and
+> interested parties should re-work them and re-sent them. That way they
+> will get picked up by the new patchwork installation.
 
---=20
-Sid
+From 158 patches sitting there 98 no longer applied. The remaining 60
+patches did apply cleanly. I skimmed over them and have not seen "must
+have" patches in it. Some problems have already been fixed in other
+ways, some recipe updates or new recipes. Surely there are still some
+fixes in that are still missing.
+
+But we will need feedback from the original submitter for this.
+Without it I see not much point it keeping the patches.
+
+> Also anyone having patches sitting in any of the patchwork
+> installations should try to update the status of their patches. Maybe
+> ping on the list again to get some feedback.
+
+No response her eon the ml and neither in private or IRC. I would
+judge therefor that the patches sitting in there are not of much
+interest for people anymore.
+
+What worries me is that people put work into them and maybe we have
+not been fast enough with review and they just skipped OE. Which would
+be a bad sign. Not much we can improve on the old patches for this
+thought. Only trying to improve in the future on this.
+
+> After this cleanup I would propose to shutdown
+> patchwork.openembedded.org
+
+Personally I think we are ready for this. I would propose shutting it
+down next weekend.
+
+regards
+Stefan Schmidt
 
 
