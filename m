@@ -1,31 +1,40 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1QBvM6-0001pl-9u
+	(envelope-from <martin.jansa@gmail.com>) id 1QBwFC-0002wd-Uw
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Apr 2011 22:47:34 +0200
-Received: by pwj9 with SMTP id 9so2538490pwj.6
+	Mon, 18 Apr 2011 23:44:31 +0200
+Received: by fxm19 with SMTP id 19so3413026fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2011 13:45:12 -0700 (PDT)
+	Mon, 18 Apr 2011 14:42:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=ZICcHdg4S7pN9S8cbJ5M23S3afQVfH/QWEdHWfnF9UE=;
-	b=Hd1FEVVR3Uw8WQX7Tza+UhChvTX8iJ7R9/bl3TkQhzBPYFmd1wx+dldVc4NbOljGaf
-	WNoxz5qhEe+8No/DPp9mch4ACzHpqRsGX2JUAZV/mc6E5xA3bNLBYK6HpYTiIdbhKmcW
-	+UZ4CdUl5+l1rsNTBSAZrKetbGQBYQ0q1LSc4=
+	h=domainkey-signature:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=NN/5Z4dyLczkpK9u8DT9gCLaXt4BN9eYPcwjAvBrWg4=;
+	b=K24RMpv1hgW5IWTbeN2bxKsbH+STY0SC71SS8ooMLMvTIkMa8LsAtvd/wOx2vueg/F
+	GSgwuCfO8Irh62Jx4qzdlAI2LCstDX9VhpmEJ+xhjzsaRfjZoXcduxDYIXNEJeuRIfJD
+	hTB0I5dKmaBHxNeeRoUgMtxFpd9YNyQ/uoHtI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=oQ/Ox7n5bg7KijUvnzIZTLinTndhAEkqYg5YfcJVhl34XXFsL8tn+sW0UH2FLlMvaG
-	IiwJB3weaLkeefW+O2cjSHzeYCKHpT74tnEb3eXIVfGxqSCzhdRHMvUIaojspUQIPiL6
-	5E0+dtTM1gTKx4BlwdxdeYygeg06H1tUJby0A=
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=pDaownAn6ZKAkLTm8bSbWPEk0WAmDWEbNYKyYiMN0gDGMmOYeawCd7FWomwK3sO3Au
+	BClx+0yDoBtt+BYfxkP4ezwbZEqmdY/ZEp9R5IX3JiNKelz6Ca53Q3hyuojjGywAqQfl
+	14YlZc6+IDa1ISnAzJv3W/H464b7TAuIffd/U=
+Received: by 10.223.14.22 with SMTP id e22mr15445faa.64.1303162929510;
+	Mon, 18 Apr 2011 14:42:09 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id n9sm1704286fax.27.2011.04.18.14.42.08
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 18 Apr 2011 14:42:08 -0700 (PDT)
+Date: Mon, 18 Apr 2011 23:42:02 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110418214202.GI24192@jama.jama.net>
+References: <E1QBw2Q-0002Mz-6J@melo.openembedded.org>
 MIME-Version: 1.0
-Received: by 10.68.65.200 with SMTP id z8mr7832714pbs.219.1303159511973; Mon,
-	18 Apr 2011 13:45:11 -0700 (PDT)
-Received: by 10.68.42.5 with HTTP; Mon, 18 Apr 2011 13:45:11 -0700 (PDT)
-Date: Mon, 18 Apr 2011 16:45:11 -0400
-Message-ID: <BANLkTing0Am9kEGQ1r15rxGw-XoO_NoDMw@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: OE weekly changelog for org.openembedded.dev, 2011-04-11 to 2011-04-18
+In-Reply-To: <E1QBw2Q-0002Mz-6J@melo.openembedded.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-commits@openembedded.org
+Subject: Re: [oe-commits] Kumar Gala : kexec-tools: Add a git recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,101 +48,184 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2011 20:47:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 18 Apr 2011 21:44:31 -0000
+X-Groupsio-MsgNum: 31298
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="L+ofChggJdETEG3Y"
+Content-Disposition: inline
 
-OE weekly changelog for org.openembedded.dev, 2011-04-11 to 2011-04-18
+--L+ofChggJdETEG3Y
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Anders Darander (1):
-  lowpan-tools_0.2.2;: fix build with static libnl1
+On Mon, Apr 18, 2011 at 09:31:18PM +0000, git version control wrote:
+> Module: openembedded.git
+> Branch: master
+> Commit: ace025266169c8fbeac35fc6eb4ac67768f13df3
+> URL:    http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommit;h=
+=3Dace025266169c8fbeac35fc6eb4ac67768f13df3
+>=20
+> Author: Kumar Gala <kumar.gala@freescale.com>
+> Date:   Mon Apr 18 12:48:34 2011 -0500
+>=20
+> kexec-tools: Add a git recipe
+>=20
+> (Initially from Kumar, further updated by Tom)
+> Add a recipe to build kexec-tools from git.  While we're at it, make a
+> new kexec-tools.inc for the very common bits and use that all around as
+> well as switch to INC_PR.
+>=20
+> Signed-off-by: Kumar Gala <galak@kernel.crashing.org>
+> Signed-off-by: Tom Rini <tom_rini@mentor.com>
+>=20
+> ---
+>=20
+>  recipes/kexec-tools/kexec-tools-dietlibc_2.0.2.bb |    2 +-
+>  recipes/kexec-tools/kexec-tools-klibc_2.0.2.bb    |    2 +-
+>  recipes/kexec-tools/kexec-tools.inc               |    9 +++++++++
+>  recipes/kexec-tools/kexec-tools_2.0.2.bb          |    2 +-
+>  recipes/kexec-tools/kexec-tools_2.0.2.inc         |    9 +--------
+>  recipes/kexec-tools/kexec-tools_git.bb            |   11 +++++++++++
+>  recipes/kexec-tools/kexec-tools_git.inc           |   10 ++++++++++
+>  7 files changed, 34 insertions(+), 11 deletions(-)
+>=20
+> diff --git a/recipes/kexec-tools/kexec-tools-dietlibc_2.0.2.bb b/recipes/=
+kexec-tools/kexec-tools-dietlibc_2.0.2.bb
+> index 8a599c7..171ccdf 100644
+> --- a/recipes/kexec-tools/kexec-tools-dietlibc_2.0.2.bb
+> +++ b/recipes/kexec-tools/kexec-tools-dietlibc_2.0.2.bb
+> @@ -1,7 +1,7 @@
+>  # the binaries are statically linked against dietlibc
+>  require kexec-tools_${PV}.inc
+> =20
+> -PR =3D "r0"
+> +PR =3D "${INC_PR}.0"
+>  inherit dietlibc
+> =20
+>  FILESPATHPKG =3D. "kexec-tools-${PV}:"
+> diff --git a/recipes/kexec-tools/kexec-tools-klibc_2.0.2.bb b/recipes/kex=
+ec-tools/kexec-tools-klibc_2.0.2.bb
+> index e799309..f14f0e6 100644
+> --- a/recipes/kexec-tools/kexec-tools-klibc_2.0.2.bb
+> +++ b/recipes/kexec-tools/kexec-tools-klibc_2.0.2.bb
+> @@ -1,7 +1,7 @@
+>  # the binaries are statically linked against klibc
+>  require kexec-tools_${PV}.inc
+> =20
+> -PR =3D "r3"
+> +PR =3D "${INC_PR}.0"
+>  inherit klibc
+> =20
+>  FILESPATHPKG =3D. "kexec-tools-${PV}:"
+> diff --git a/recipes/kexec-tools/kexec-tools.inc b/recipes/kexec-tools/ke=
+xec-tools.inc
+> new file mode 100644
+> index 0000000..e7c51bc
+> --- /dev/null
+> +++ b/recipes/kexec-tools/kexec-tools.inc
+> @@ -0,0 +1,9 @@
+> +DESCRIPTION =3D "Kexec is a fast reboot feature that lets you reboot to =
+a new Linux kernel"
+> +AUTHOR =3D "Eric Biederman"
+> +HOMEPAGE =3D "http://www.xmission.com/~ebiederm/files/kexec/"
+> +SECTION =3D "kernel/userland"
+> +LICENSE =3D "GPL"
+> +DEPENDS =3D "virtual/kernel zlib"
+> +PR =3D "r4"
 
-Andrea Adami (4):
-  initscripts: remove obsolete Zaurus overrides
-  mtd-utils: upgrade to latest 1.4.4 release (bugfix)
-  mtd-utils: remove broken 1.4.1 version
-  mtd-utils: archive obsolete old versions
+Where is INC_PR defined? I guess this should be INC_PR not PR..
 
-Andreas Oberritter (1):
-  streamripper: fix depends and license
+> +
+> +inherit autotools
+> diff --git a/recipes/kexec-tools/kexec-tools_2.0.2.bb b/recipes/kexec-too=
+ls/kexec-tools_2.0.2.bb
+> index 28ab240..710ee93 100644
+> --- a/recipes/kexec-tools/kexec-tools_2.0.2.bb
+> +++ b/recipes/kexec-tools/kexec-tools_2.0.2.bb
+> @@ -1,6 +1,6 @@
+>  require kexec-tools_${PV}.inc
+> =20
+> -PR =3D "r1"
+> +PR =3D "${INC_PR}.0"
+> =20
+>  EXTRA_OECONF =3D " --with-zlib=3Dyes"
+>  export LDFLAGS =3D "-L${STAGING_LIBDIR}"
+> diff --git a/recipes/kexec-tools/kexec-tools_2.0.2.inc b/recipes/kexec-to=
+ols/kexec-tools_2.0.2.inc
+> index 81fbe9b..0ba22e8 100644
+> --- a/recipes/kexec-tools/kexec-tools_2.0.2.inc
+> +++ b/recipes/kexec-tools/kexec-tools_2.0.2.inc
+> @@ -1,11 +1,4 @@
+> -DESCRIPTION =3D "Kexec is a fast reboot feature that lets you reboot to =
+a new Linux kernel"
+> -AUTHOR =3D "Eric Biederman"
+> -HOMEPAGE =3D "http://www.xmission.com/~ebiederm/files/kexec/"
+> -SECTION =3D "kernel/userland"
+> -LICENSE =3D "GPL"
+> -DEPENDS =3D "virtual/kernel zlib"
+> -
+> -inherit autotools
+> +require kexec-tools.inc
+> =20
+>  SRC_URI =3D "http://kernel.org/pub/linux/utils/kernel/kexec/kexec-tools-=
+${PV}.tar.gz"
+> =20
+> diff --git a/recipes/kexec-tools/kexec-tools_git.bb b/recipes/kexec-tools=
+/kexec-tools_git.bb
+> new file mode 100644
+> index 0000000..69625ac
+> --- /dev/null
+> +++ b/recipes/kexec-tools/kexec-tools_git.bb
+> @@ -0,0 +1,11 @@
+> +require kexec-tools_git.inc
+> +
+> +PR =3D "${INC_PR}.0"
+> +
+> +EXTRA_OECONF =3D " --with-zlib=3Dyes"
+> +export LDFLAGS =3D "-L${STAGING_LIBDIR}"
+> +
+> +PACKAGES =3D+ "kexec kdump"
+> +
+> +FILES_kexec =3D "${sbindir}/kexec"
+> +FILES_kdump =3D "${sbindir}/kdump"
+> diff --git a/recipes/kexec-tools/kexec-tools_git.inc b/recipes/kexec-tool=
+s/kexec-tools_git.inc
+> new file mode 100644
+> index 0000000..511008c
+> --- /dev/null
+> +++ b/recipes/kexec-tools/kexec-tools_git.inc
+> @@ -0,0 +1,10 @@
+> +require kexec-tools.inc
+> +
+> +SRC_URI =3D "git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools=
+=2Egit"
+> +SRCREV =3D "e3bb6ccd50e483d06bfeaca24c9107c31f1cf5d7"
+> +
+> +PV =3D "2.0.2+${PR}+gitr${SRCREV}"
+> +
+> +DEFAULT_PREFERENCE =3D "-1"
+> +
+> +S =3D "${WORKDIR}/git"
+>=20
+>=20
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
 
-Antonio Ospite (7):
-  fsodeviced: add motorola_ezx conf
-  files/device_table-ezx.txt: Add /dev/snd and /dev/ttyS1
-  files/device_table-ezx.txt: change some indentation
-  linux/openezx-kernel_git.bb: update recipe to build 2.6.38
-  ezx/moto-boot-usb-native_git.bb: update SRCREV
-  ezx/ezx-gpiotool_svn.bb: make the recipe build again
-  ezx/ezx-gen-blob_git.bb: update SRCREV
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Denis 'GNUtoo' Carikli (1):
-  smpeg svn: fix compilation
+--L+ofChggJdETEG3Y
+Content-Type: application/pgp-signature
 
-Denys Dmytriyenko (1):
-  Revert "libgles-omap3: Remove SGX Fixup for TI816x."
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
 
-Henning Heinold (4):
-  tune-atom.inc: add i686 to PACKAGE_EXTRA_ARCH
-  mercurial-native: fix legacy staging
-  icedtea6-native: add libxext-native to the dependencies
-  cacao-native: add fix for vm-shutdown and multiple threads are involved
+iEYEARECAAYFAk2ssCoACgkQN1Ujt2V2gBz2nwCffPWaj0xcNdtBL0CmAlLUu430
+hxMAn0NnR2jM9Q9i8zfXGqQCa3TER79r
+=LLvp
+-----END PGP SIGNATURE-----
 
-Jeff Lance (1):
-  matrix-gui: Bump up SRCREV
-
-Jose Luis Perez Diez (1):
-  connman: update shr config, don't enable DNS Proxy on connmand start
-
-Koen Kooi (3):
-  ncurses 5.7: put patch in OE
-  angstrom feed sorter: catch up with latest oe-core changes
-  libgles-omap3: fix 81xx initscript ES detection
-
-Martin Jansa (2):
-  phonet-utils: sync with meta-oe
-  gst-plugins-package: add ${PN}-meta to PACKAGES directly instead from popula
-
-Michael 'Mickey' Lauer (1):
-  openezx-kernel: fix typo in COMPATIBLE_MACHINE directive
-
-Neil MacMunn (1):
-  networkmanager-openvpn: added version 0.8.3.995
-
-Pau Espin Pedrol (1):
-  elfe: bump SRCREV
-
-Paul Menzel (5):
-  starling: change `gst-plugin-ivorbis` to `gst-plugin-ivorbisdec` in `RRECOMM
-  orc: add version 0.4.12
-  viking: Fix dependencies - build requires intltoolize (intltool-native).
-  viking: Add curl to DEPENDS to fix potential build failure.     * See http:/
-  schroedinger.inc: remove version dependent checksums
-
-Siddharth Heroor (4):
-  ti-ipc: Add version 1.22.05.27
-  omap3-sgx-modules: Update TI816x Module Location and Platform variables.
-  libgles-omap3: Correct libraries for TI816x.
-  libgles-omap3: Remove SGX Fixup for TI816x.
-
-Stanislav Brabec (8):
-  zaurusd: Convert Makefile.am spaces to tabs to be compatible with the new GN
-  matchbox-wm-2: Convert Makefile.am spaces to tabs to be compatible with the
-  irdadump: Use standard installation.     * Fixes installation failure with n
-  guile: Build requires libltdl (libtool) and gettext to complete.
-  kismet: Updated to version 2010-07-R1.
-  viking: Disable realtime gps tracking.     * The code is not compatible with
-  viking: Potential fix of curl crashes.
-  tangogps: Potential fix of curl crashes.
-
-Tom Rini (5):
-  xkeyboard-config: Add glib-2.0-native to DEPENDS
-  libedit: Add 20100424 (3.0)
-  dtc_git: Merge .inc into .bb, update
-  Revert "dtc_git: Merge .inc into .bb, update"
-  dtc: Switch to BBCLASSEXTEND and INC_PR
-
-
--- 
-=================
-http://bec-systems.com
-
-
+--L+ofChggJdETEG3Y--
