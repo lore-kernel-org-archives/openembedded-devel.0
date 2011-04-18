@@ -1,30 +1,25 @@
-Received: from exprod5og108.obsmtp.com ([64.18.0.186])
+Received: from dub0-omc1-s31.dub0.hotmail.com ([157.55.0.230])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martyn.welch@ge.com>) id 1QBpIt-0002at-C9
+	(envelope-from <l.bolognini@hotmail.it>) id 1QBpwg-00083H-1W
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Apr 2011 16:19:51 +0200
-Received: from Cinmlip06.e2k.ad.ge.com ([165.156.4.1]) (using TLSv1) by
-	exprod5ob108.postini.com ([64.18.4.12]) with SMTP
-	ID DSNKTaxH+q3HZyxejTHWoaSyOkxYeejJ/YUX@postini.com;
-	Mon, 18 Apr 2011 07:17:33 PDT
-Received: from unknown (HELO cinmlef09.e2k.ad.ge.com) ([3.159.213.56])
-	by Cinmlip06.e2k.ad.ge.com with ESMTP; 18 Apr 2011 08:31:09 -0400
-Received: from [3.138.54.92] ([3.138.54.92]) by cinmlef09.e2k.ad.ge.com with
-	Microsoft SMTPSVC(6.0.3790.4675); Mon, 18 Apr 2011 08:31:09 -0400
-Message-ID: <4DAC2F0C.1030001@ge.com>
-Date: Mon, 18 Apr 2011 13:31:08 +0100
-From: Martyn Welch <martyn.welch@ge.com>
-Organization: GE Intelligent Platforms
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
+	Mon, 18 Apr 2011 17:00:58 +0200
+Received: from DUB107-W12 ([157.55.0.237]) by dub0-omc1-s31.dub0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.4675); 
+	Mon, 18 Apr 2011 07:57:24 -0700
+Message-ID: <DUB107-w12A7956EF90A1529568C7A98910@phx.gbl>
+X-Originating-IP: [78.6.111.196]
+From: Luca Bolognini <l.bolognini@hotmail.it>
+To: Openembedded Mailing List <openembedded-devel@lists.openembedded.org>
+Date: Mon, 18 Apr 2011 16:57:24 +0200
+Importance: Normal
+In-Reply-To: <4DAAF293.7080705@mlbassoc.com>
+References: <DUB107-w168531FE95ECFF71F7C03098AE0@phx.gbl>,
+	<4DAAF293.7080705@mlbassoc.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <87zknq5iw3.fsf@gmail.com>
-In-Reply-To: <87zknq5iw3.fsf@gmail.com>
-X-Enigmail-Version: 1.1.2
-X-OriginalArrivalTime: 18 Apr 2011 12:31:09.0930 (UTC)
-	FILETIME=[7F2D8CA0:01CBFDC4]
-Subject: Re: [oe,RFC,v2] Alternative to busybox, using "proper tools"
+X-OriginalArrivalTime: 18 Apr 2011 14:57:24.0215 (UTC)
+	FILETIME=[ED0F3070:01CBFDD8]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: an ipk package depending on its corresponding -dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,96 +33,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2011 14:19:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-
-On 16/04/11 16:13, Ben Gamari wrote:
-> 
-> Did anything ever happen with this[1] patch? If not, is there another
-> convenient way to use the proper tools in leiu of busybox? For larger
-> machines it's very nice to have a more civilized environment. Thanks,
-> 
-
-I'm afraid I got pulled away from this before I could finish it.
-
-The list of packages in task-proper-tools got updated by Marcin, I still have
-a rather old tree containing the rest of it. Here's what I have (sorry my mail
-client will have wrapped it a bit):
-
-diff --git a/recipes/busybox/busybox-alt_1.bb b/recipes/busybox/busybox-alt_1.bb
-new file mode 100644
-index 0000000..811f073
---- /dev/null
-+++ b/recipes/busybox/busybox-alt_1.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "Full versions of tools provided by busybox"
-+
-+PACKAGES = "busybox"
-+PACKAGE_ARCH = "all"
-+
-+PROVIDES = "busybox"
-+DEFAULT_PREFERENCE = "-1"
-+
-+RDEPENDS = "task-proper-tools"
-+
-+SRC_URI = "file://hwclock.sh"
-+
-+
-+do_install () {
-+       install -d ${D}${sysconfdir}/init.d/
-+       install -m 0755 ${WORKDIR}/hwclock.sh ${D}${sysconfdir}/init.d/
-+}
-+
-+FILES += "${sysconfdir}/init.d/hwclock.sh"
-diff --git a/recipes/busybox/files/hwclock.sh b/recipes/busybox/files/hwclock.sh
-index f9c9f9f..0a644fe 100644
---- a/recipes/busybox/files/hwclock.sh
-+++ b/recipes/busybox/files/hwclock.sh
-@@ -14,7 +14,7 @@
-
- . /etc/default/rcS
-
--[ "$UTC" = yes ] && UTC=-u || UTC=-l
-+[ "$UTC" = yes ] && UTC=--utc || UTC=--localtime
-
- case "$1" in
-         start)
-diff --git a/recipes/tasks/task-proper-tools.bb
-b/recipes/tasks/task-proper-tools.bb
-index 40baf87..fd5e481 100644
---- a/recipes/tasks/task-proper-tools.bb
-+++ b/recipes/tasks/task-proper-tools.bb
-@@ -21,6 +21,7 @@ RDEPENDS_${PN} = "\
-                grep \
-                gzip \
-                ifupdown \
-+#              inetutils \
-                iproute2 \
-                iputils-arping \
-                iputils-ping6 \
-@@ -40,6 +41,7 @@ RDEPENDS_${PN} = "\
-                psmisc \
-                pump \
-                realpath \
-+               openrdate \
-                sed \
-                shadow \
-                start-stop-daemon \
-@@ -51,6 +53,7 @@ RDEPENDS_${PN} = "\
-                time \
-                unzip \
-                util-linux-ng \
-+               unzip \
-                vim \
-                wget \
-         "
+X-List-Received-Date: Mon, 18 Apr 2011 15:00:58 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
 
--- 
-Martyn Welch (Principal Software Engineer) | Registered in England and
-GE Intelligent Platforms                   | Wales (3828642) at 100
-T +44(0)127322748                          | Barbirolli Square, Manchester,
-E martyn.welch@ge.com                      | M2 3AB  VAT:GB 927559189
+Thank you=2C but my libgles-omap3-dev_4.03.00.01-r11.6_armv7a.ipk includes =
+only /usr/include/* files=2C as written in the recipe: FILES_${PN}-dev =3D =
+"${includedir}"
+Moreover it doesn't happen when MACHINE=3Dc6a816x-evm... however I don't th=
+ink MACHINE=3Dbeagleboard is involved...
 
+-------------------------Luca Bologninil.bolognini@hotmail.it
+
+
+
+
+> Date: Sun=2C 17 Apr 2011 08:00:51 -0600
+> From: gary@mlbassoc.com
+> To: openembedded-devel@lists.openembedded.org
+> CC: l.bolognini@hotmail.it
+> Subject: Re: [oe] an ipk package depending on its corresponding -dev
+>=20
+> On 04/17/2011 07:43 AM=2C Luca Bolognini wrote:
+> >
+> > A strange thing happended to me last time I created libgles-omap3 ipk p=
+ackages.I had justed patched /usr/bin/cputype (a file contained in one of t=
+he SRC_URIs) and libgles-omap3.inc to add some INSANE_SKIPs =2C then I gave=
+ the commands:MACHINE=3Dbeagleboard bitbake -v -c clean libgles-omap3MACHIN=
+E=3Dbeagleboard bitbake -v libgles-omap3
+> > At least=2C it happened that I had the dependency:libgles_omap3 ->  lib=
+gles_omap3_dev
+> > It's quite strange and it's the first time I see a package depending on=
+ its corresponding -dev.Obviously this dependency is false=2C there can't b=
+e any dependency between these two packages.The same action=2C with MACHINE=
+=3Dc6a816x-evm (in a different development machine) doesn't lead to this be=
+haviour.However I don't think that MACHINE=3Dbeagleboard is involved=2C pro=
+bably I corrupted something in the 1st development machine=2C I don't know.=
+Have you any idea how to remove this ugly (and useless) dependency? How cou=
+ld it originate?
+>=20
+> I've seen this happen when something in the package depends on a
+> library named *.so=2C instead of a more qualified library such as *.so.1
+> The *.so files are only packaged in the -dev subpackages by default.
+>=20
+> An easy workaround (which might not be perfectly correct) is to just
+> list the .so files in the main package=2C e.g.
+>    FILES_${PN} +=3D "/usr/lib/lib*.so"
+>=20
+> --=20
+> ------------------------------------------------------------
+> Gary Thomas                 |  Consulting for the
+> MLB Associates              |    Embedded world
+> ------------------------------------------------------------
+ 		 	   		  =
 
