@@ -1,28 +1,36 @@
-Received: from [83.223.64.65] (helo=eric-weiss.de)
+Received: from mail-px0-f178.google.com ([209.85.212.178])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eric-weiss.de>) id 1QBwdY-0003ee-OQ
+	(envelope-from <andrea.adami@gmail.com>) id 1QBxF3-0004AN-BI
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Apr 2011 00:09:40 +0200
-Received: by eric-weiss.de (Postfix, from userid 1022)
-	id 78E5A5666D; Mon, 18 Apr 2011 22:56:41 +0200 (CEST)
-Received: from [10.128.0.1] (0133300566.0.fullrate.dk [95.166.196.39])
-	by eric-weiss.de (Postfix) with ESMTP id 301145664A
+	Tue, 19 Apr 2011 00:48:26 +0200
+Received: by pxi1 with SMTP id 1so3591023pxi.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2011 22:56:40 +0200 (CEST)
-Message-ID: <4DACB16C.6050303@eric-weiss.de>
-Date: Mon, 18 Apr 2011 23:47:24 +0200
-From: eric weiss <eric@eric-weiss.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.15) Gecko/20110402 Icedove/3.1.9
+	Mon, 18 Apr 2011 15:46:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=xnMF6S5wuVxXu0e+gLKQJmsqLoGMow9bRn391WHvehE=;
+	b=e0dQk02aHxRyFtebsJUMeHtNvTs1JMGcdZ3dTaUcu+xtFo+6KJTrrYzgjCIxdihJ0J
+	stpU4NezwukyaGrXoKtDqxfAJGZc0Vr2FNGL9euMXq3YSRLzHcsAr/ZtBqIkUuKdcnya
+	2ErrtxId/clawj+b7Ryq+Ppy8teDgAIJ0txPY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=MnvvZ2QiC+fXFnksrSINfTo8g+yV2RzcSssTZ4QDB+1zYMO71Z/qKCwd84NGOt8E5v
+	jUx8kankoHLEJsVmZgw+01MlwzEHjG9YDQuf49p1Y0x1lFFc4Ec197Qrs02c3wDvTymX
+	+lNpGVZCceFP2SIxTc9eVcsV3yl7Gpl8RkLVI=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.142.242.18 with SMTP id p18mr2987440wfh.98.1303166762812; Mon,
+	18 Apr 2011 15:46:02 -0700 (PDT)
+Received: by 10.142.223.2 with HTTP; Mon, 18 Apr 2011 15:46:02 -0700 (PDT)
+In-Reply-To: <4DACB16C.6050303@eric-weiss.de>
 References: <1302979061.3780.6.camel@mattotaupa>
 	<1303062425.23572.31.camel@mattotaupa>
-In-Reply-To: <1303062425.23572.31.camel@mattotaupa>
-X-Spam-Checker-Version: SpamAssassin 3.0.3 (2005-04-27) on eric-weiss.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-5.1 required=3.0 tests=ALL_TRUSTED,AWL,BAYES_00,
-	RATWARE_GECKO_BUILD autolearn=ham version=3.0.3
+	<4DACB16C.6050303@eric-weiss.de>
+Date: Tue, 19 Apr 2011 00:46:02 +0200
+Message-ID: <BANLkTikp04ZBA_s80vFhvDMH73_jzMZzAw@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [RFC] [PATCH] schroedinger: add version 1.0.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -37,13 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2011 22:09:40 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 18 Apr 2011 22:48:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Try to compile schroedinger_1.0.9 with orc_0.4.10  instead of orc_0.4.12
-seems that the int[8,16,32]_t definitions are gone int orc_0.4.12.
+On Mon, Apr 18, 2011 at 11:47 PM, eric weiss <eric@eric-weiss.de> wrote:
+> Try to compile schroedinger_1.0.9 with orc_0.4.10 =A0instead of orc_0.4.1=
+2
+> seems that the int[8,16,32]_t definitions are gone int orc_0.4.12.
+>
+> h
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-h
+
+I compiled it just hacking the orc-stdint.h header like this
+
+http://code.google.com/p/ossbuild/source/browse/trunk/Shared/Build/Windows/=
+Win32/include/orc-0.4/orc/orc-stdint.h?r=3D857
+
+Andrea
 
 
