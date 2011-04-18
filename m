@@ -1,23 +1,22 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtp203.alice.it ([82.57.200.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QBuPw-0000b6-Eo for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Apr 2011 21:47:28 +0200
-Received: from f053044028.adsl.alicedsl.de ([78.53.44.28]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QBuO9-0000T8-KS for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Apr 2011 19:45:38 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <GNUtoo@no-log.org>) id 1QBv6c-0001Zt-Vo
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Apr 2011 22:31:35 +0200
+Received: from [10.10.20.100] (95.249.56.93) by smtp203.alice.it (8.5.124.08)
+	(authenticated as editempo@alice.it)
+	id 4C1A2A9608936FAC for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Apr 2011 22:29:14 +0200
+From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <cover.1303154850.git.michael.lippautz@gmail.com>
-References: <cover.1303154850.git.michael.lippautz@gmail.com>
-Date: Mon, 18 Apr 2011 21:45:08 +0200
-Message-ID: <1303155908.3910.235.camel@mattotaupa>
+In-Reply-To: <20110418075153.GA15540@excalibur.local>
+References: <20110412085148.GC17374@excalibur.local>
+	<20110418075153.GA15540@excalibur.local>
+Date: Mon, 18 Apr 2011 22:29:12 +0200
+Message-ID: <1303158552.2853.4.camel@gnutoo-desktop>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: [oe-meta 0/2] pull request: vim, wget
+X-Mailer: Evolution 2.30.3 
+Subject: Re: Patchwork day on Sunday 2011-04-17 and shutdown of patchwork.openembedded.org in favour of patches.openembedded.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,47 +30,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2011 19:47:28 -0000
-X-Groupsio-MsgNum: 31295
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-EUZSZFSoSnRpU9vEjzr1"
-
---=-EUZSZFSoSnRpU9vEjzr1
+X-List-Received-Date: Mon, 18 Apr 2011 20:31:35 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Dear Michael,
+> No response her eon the ml and neither in private or IRC. I would
+> judge therefor that the patches sitting in there are not of much
+> interest for people anymore.
+The emacs patch interest me,
+that's why I sent a mail about it,
+but since the x11 version segfaults while dumping the memory with qemu,
+I'm stuck and can't push it.
 
+The thread is named :
+emacs-x11 "compilation" failure
 
-Am Montag, den 18.04.2011, 21:32 +0200 schrieb Michael Lippautz:
-> Re-import of vim/gvim/vim-tiny and wget.
->=20
-> * Clean vim recipe and update to 7.2.446 (446=3Dpatchset)
-> * Clean wget (ssl check using staging_dir)
-
-could you first (or also) submit these patches to the =E2=80=9Cold=E2=80=9D=
- OpenEmbedded
-repository? I think this would make it easier to track/compare the
-recipes.
-
-[=E2=80=A6]
+Denis.
 
 
-Thanks,
 
-Paul
 
---=-EUZSZFSoSnRpU9vEjzr1
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk2slMMACgkQPX1aK2wOHVht7ACfahqHltlY/ZRIvzrSyr6vdNM5
-cqoAnRMPgjg8TFMNOxk8+iMoDo2Y5JNh
-=K/BD
------END PGP SIGNATURE-----
-
---=-EUZSZFSoSnRpU9vEjzr1--
