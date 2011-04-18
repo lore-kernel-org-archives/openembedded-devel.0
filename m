@@ -1,33 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QBlwj-0001gP-S9 for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Apr 2011 12:44:46 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QBluR-00036g-W9 for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Apr 2011 12:42:23 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2011 12:42:23 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <dp@xora.org.uk>) id 1QBlyj-0001qi-IF
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Apr 2011 12:46:49 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 8E452A4A58
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2011 12:42:23 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 18 Apr 2011 11:44:28 +0100 (BST)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id Ot1Is3yOxb7g
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Apr 2011 11:44:21 +0100 (BST)
+Received: from xora-eee (188-220-38-49.zone11.bethere.co.uk [188.220.38.49])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 7727FA4A44
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Apr 2011 11:44:21 +0100 (BST)
+Received: by xora-eee (Postfix, from userid 1000)
+	id BE63B8017E; Mon, 18 Apr 2011 11:44:21 +0100 (BST)
+Date: Mon, 18 Apr 2011 11:44:21 +0100
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 18 Apr 2011 12:42:08 +0200
-Message-ID: <ioh4i0$nlu$1@dough.gmane.org>
+Message-ID: <20110418104421.GG2268@xora-eee.xora.org.uk>
 References: <cover.1303122650.git.Martin.Jansa@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+MIME-Version: 1.0
 In-Reply-To: <cover.1303122650.git.Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.0.1
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: [meta-oe][PATCH 00/13] Pull request #8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,14 +41,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2011 10:44:46 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 18 Apr 2011 10:46:49 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Not an issue with this checkin, but it raises a question for me,
 
-On 18-04-11 12:32, Martin Jansa wrote:
+Should xorg stuff be in OE core? Its not really that core in my mind.
+
+Graeme
+
+On Mon, Apr 18, 2011 at 12:32:38PM +0200, Martin Jansa wrote:
 > xorg recipes cleanup after some of them were upgraded in oe-core
 > more native and nativesdk in BBCLASSEXTEND
 > small fixes
@@ -57,9 +59,6 @@ On 18-04-11 12:32, Martin Jansa wrote:
 > Pull URL: git://gitorious.org/shr/meta-openembedded.git
 >   Branch: jama/meta-oe
 >   Browse: http://gitorious.org/shr/meta-openembedded/commits/jama/meta-oe
-
-Thanks, pulling these in today.
-
 > 
 > Thanks,
 >     Martin Jansa <Martin.Jansa@gmail.com>
@@ -163,14 +162,13 @@ Thanks, pulling these in today.
 >  rename meta-oe/recipes-graphics/xorg-xserver/{xserver-xorg_1.10.0.902.bb => xserver-xorg_1.10.1.bb} (88%)
 >  create mode 100644 meta-oe/recipes-support/libusb/libusb1_1.0.8.bbappend
 > 
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNrBWAMkyGM64RGpERAj5XAKCpPq2tTp92Oa3oaxnPHRBg3N6jOACgk6Xc
-xud2GUEUUhLPLWfGh9wApGI=
-=nNpJ
------END PGP SIGNATURE-----
-
+> -- 
+> 1.7.5.rc1
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
