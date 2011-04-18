@@ -1,44 +1,39 @@
-Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <neil@gumstix.com>) id 1QBtRN-0005DH-B3
+	(envelope-from <martin.jansa@gmail.com>) id 1QBtht-0000oH-7q
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Apr 2011 20:44:54 +0200
-Received: from homiemail-a75.g.dreamhost.com (caiajhbdcbbj.dreamhost.com
-	[208.97.132.119])
-	by hapkido.dreamhost.com (Postfix) with ESMTP id 6C78917DDF4
+	Mon, 18 Apr 2011 21:02:04 +0200
+Received: by bwz5 with SMTP id 5so4500620bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2011 11:42:34 -0700 (PDT)
-Received: from homiemail-a75.g.dreamhost.com (localhost [127.0.0.1])
-	by homiemail-a75.g.dreamhost.com (Postfix) with ESMTP id 4DAB05EC085
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2011 11:42:31 -0700 (PDT)
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gumstix.com; h=message-id:date
-	:from:mime-version:to:subject:content-type:
-	content-transfer-encoding; q=dns; s=gumstix.com; b=Ztw2Q4u8Tc/L9
-	x5ouSD9h4Rdgdg9fzyqmOkWqofRdzteYIPfsqKUfIOSikKk+3FlrRIFo4hC2im8B
-	ZrImwUfPlq9kVZB1gf/vUcNekcxx5SOE7Qf0uhA4TWvf/FABUwWQHvO12RuWl43Q
-	xa31qvXKI3QfpTIt7RQsJZez4wGsy0=
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=gumstix.com; h=message-id
-	:date:from:mime-version:to:subject:content-type:
-	content-transfer-encoding; s=gumstix.com; bh=eFvp/T6NJy9D2GjOWS6
-	YH0nM3yM=; b=gx2MKLAT+k3+GGrzi0f13m0Ls8YQPv5PO5BAfHaVPBZA8Mu5+iN
-	828+J0461mRD6Xpeit2XDPQjMGGZKRpx4hSAdsfmLngFSJe20Nb1if20FEV7UoPZ
-	apwovslAOpYzD3AmkpoCbb3cqM7qmRdaSQLBvn4D58zze8HZEYZnwzks=
-Received: from [10.0.1.35] (s64-180-61-141.bc.hsia.telus.net [64.180.61.141])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: neil@gumstix.com)
-	by homiemail-a75.g.dreamhost.com (Postfix) with ESMTPSA id 1A5D65EC081
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2011 11:42:31 -0700 (PDT)
-Message-ID: <4DAC8618.8000303@gumstix.com>
-Date: Mon, 18 Apr 2011 11:42:32 -0700
-From: Neil MacMunn <neil@gumstix.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
+	Mon, 18 Apr 2011 11:59:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=n0J9StjlWr2K1wzcfhNMr8rtLSKAmIlFC/pjt12FDI4=;
+	b=GxnoUD8cxc+x/CwGqvKVOlnvUVDY9RF7GJqIjdfRtRopdjQA/fSVmduFYf7zJVJeOJ
+	2S+1jUS1Qgqw2w9tHQn+qjuwu5SNK9pP4Fpbl5fPAEfnhnSN7C+LddD/yKKGblB8FYxN
+	h82GK05NS7l/4K8i/zeNay6oI6MDpRXJoBzwY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=QTiCJycXaxjdETyfJmVjJqEwY7zZd/q2BhflUKTp7NFJqZw110nzetCdLKs3gADx8V
+	p9RZyUs9SJ6NsOhMFVMnBmG/1TNtvcMt6/yyNo0qW7vPnYKOSJyL33Rg3UgwJXsmGpZ5
+	nUdrTa6kqPwjK5+GMNPPYVb+5ZXhFWj3ow75U=
+Received: by 10.204.136.210 with SMTP id s18mr154970bkt.56.1303153174904;
+	Mon, 18 Apr 2011 11:59:34 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id w3sm3411107bkt.5.2011.04.18.11.59.33
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 18 Apr 2011 11:59:33 -0700 (PDT)
+Date: Mon, 18 Apr 2011 20:59:27 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110418185927.GH24192@jama.jama.net>
+References: <1302620577.4323.143.camel@mattotaupa>
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: empathy warnings being treated as errors
+In-Reply-To: <1302620577.4323.143.camel@mattotaupa>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [REGRESSION] gst-plugins-base-meta missing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,42 +47,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2011 18:44:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 18 Apr 2011 19:02:04 -0000
+X-Groupsio-MsgNum: 31291
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="rWhLK7VZz0iBluhq"
+Content-Disposition: inline
 
-I'm running into these two errors when I build empathy
+--rWhLK7VZz0iBluhq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> | arm-angstrom-linux-gnueabi-libtool: compile:  arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb --sysroot=/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi -DHAVE_CONFIG_H -I. -I.. -I. -I.. -I.. -DDATADIR=\"/usr/share\" -DLOCALEDIR=\"/usr/share/locale\" -DG_LOG_DOMAIN=\"empathy\" -pthread -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/include -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gio-unix-2.0/ -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libxml2 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/telepathy-1.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/dbus-1.0 -I/home/neil/overo-
-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/dbus-1.0/include -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gstreamer-0.10 -pthread -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/dbus-1.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libxml2 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/dbus-1.0/include -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/include -Wall -Wunused -Wmissing-prototypes -Wmissing-declarations -Wchar-subscripts -Wnested-externs -Wpointer-arith -Wno-sign-compare -Wno-pointer-sign -Wformat -Werror -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 -ggdb2 -MT empathy-log-store-empathy.lo -MD -MP -MF .deps/empathy-log-store-empathy.T
-po -c empathy-log-store-empathy.c  -fPIC -DPIC -o .libs/empathy-log-store-empathy.o
-> | cc1: warnings being treated as errors
-> | empathy-log-store-empathy.c: In function 'log_store_empathy_get_messages_for_date':
-> | empathy-log-store-empathy.c:500:13: error: 'cm_id' may be used uninitialized in this function
-> | make[3]: *** [empathy-log-store-empathy.lo] Error 1
+On Tue, Apr 12, 2011 at 05:02:57PM +0200, Paul Menzel wrote:
+> Dear OE folks,
 
-I get past this by removing -Werror from WARN_CFLAGS in 
-libempathy/Makefile and then hit
+Dear Paul,
 
-> | arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb --sysroot=/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi -DHAVE_CONFIG_H -I. -I..  -I.. -DG_LOG_DOMAIN=\"empathy\" -pthread -DORBIT2=1 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/include -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gtk-2.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/gtk-2.0/include -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/pango-1.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/cairo -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/pixman-1 -I/home/neil/overo-oe/tmp-unstable/
-sysroots/armv7a-angstrom-linux-gnueabi/usr/include/freetype2 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libpng12 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/atk-1.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/evolution-data-server-2.26 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/dbus-1.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libxml2 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gconf/2 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libsoup-2.4 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/orbit-2.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/dbus-1.0/include -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-
-angstrom-linux-gnueabi/usr/include/telepathy-1.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gstreamer-0.10 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/unique-1.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gnome-keyring-1   -pthread -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gtk-2.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/include -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/dbus-1.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/dbus-1.0/include -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/gtk-2.0/include -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a
--angstrom-linux-gnueabi/usr/include/atk-1.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/cairo -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/pango-1.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/pixman-1 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/freetype2 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libpng12     -pthread -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/webkit-1.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/include -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gtk-2.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/
-usr/include/libsoup-2.4 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/gtk-2.0/include -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/atk-1.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/cairo -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/pango-1.0 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/pixman-1 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/freetype2 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libpng12 -I/home/neil/overo-oe/tmp-unstable/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libxml2   -Wall -Wunused -Wmissing-prototypes -Wmissing-declarations -Wchar-subscripts -Wnested-externs -Wpointer-arith -Wno-sign-compare -Wno-pointer-sign -Wformat -Werror   -fexpensive-optimizations -fomit-frame-
-pointer -frename-registers -O2 -ggdb2 -MT empathy-call-window.o -MD -MP -MF .deps/empathy-call-window.Tpo -c -o empathy-call-window.o empathy-call-window.c
-> | cc1: warnings being treated as errors
-> | empathy-call-window.c: In function 'empathy_call_window_request_resource_cb':
-> | empathy-call-window.c:1197:12: error: comparison between 'FsMediaType' and 'enum <anonymous>'
-> | make[3]: *** [empathy-call-window.o] Error 1
+should be fixed by 275aaa67263317255d1cc4a70feec8651e390829
+http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3D275aaa672633=
+17255d1cc4a70feec8651e390829
+
+still not really sure why that happen..
+
+> I just want to report that due to the recent commit e6d170ab [1]
+>=20
+>         commit e6d170abad28fcd0e3b8ba831705bed23e3309a4
+>         Author: Martin Jansa <martin.jansa@gmail.com>
+>         Date:   Thu Apr 7 00:12:22 2011 +0000
+>        =20
+>             gst-plugins: define disjunctive PACKAGES_DYNAMIC for each pac=
+k base/good/bad/ugly
+>            =20
+>             * adds a bit more bits to keep in sync while changing gst-plu=
+gins
+>               version, but not that much (this patch was mostly prepared =
+by script)
+>             * overlap in PACKAGES_DYNAMIC namespace causes notes like thi=
+s in every build
+>               NOTE: multiple providers are available for runtime gst-plug=
+in-autodetect (gst-plugins-bad, gst-plugins-good, gst-plugins-base, gst-plu=
+gins-ugly)
+>               NOTE: consider defining a PREFERRED_PROVIDER entry to match=
+ gst-plugin-autodetect
+>            =20
+>             Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>             Acked-by: Mike Westerhof <mike@mwester.net>
+>=20
+> the following recipes fail to build.
+>=20
+>         $ git grep gst-plugins-base-meta
+>         recipes/gnome/cheese_2.30.1.bb:RRECOMMENDS_${PN} =3D "gst-plugin-=
+gconfelements gst-plugins-good-meta gst-plugins-base-meta"
+>         recipes/tasks/angstrom-task-gnome.bb:  gst-plugins-base-meta \
+>         recipes/tasks/task-gstreamer-ti.bb:     gst-plugins-base-meta \
+>=20
+> I will hopefully have some more time tomorrow to try out what Martin
+> asked me in the other thread [2] with the following subject.
+>=20
+> 	[oe] gstreamer*, starling: ERROR: Nothing RPROVIDES 'gst-plugin-ivorbis'=
+ (but /oe/openembedded/recipes/starling/starling_0.9.bb
+>=20
+>=20
+> Thanks,
+>=20
+> Paul
+>=20
+>=20
+> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3De6d17=
+0abad28fcd0e3b8ba831705bed23e3309a4
+> [2] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-April/03=
+1867.html
 
 
-Which I work around by removing -Werror from WARN_CFLAGS in src/Makefile
 
-Empathy hasn't changed but I just switched to gcc-4.5 from 4.3.3 so I 
-suspect this is where the problem originates. Looking at an old log I 
-can see that -Werror was set there too.
-
---
-Neil
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--rWhLK7VZz0iBluhq
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
+
+iEYEARECAAYFAk2sig8ACgkQN1Ujt2V2gBwSdwCggJAEKbCLI4aoNnzT1LakdQPK
+B8oAnjsMpOw8u5pSja5A0awie+D1IqgI
+=O3dC
+-----END PGP SIGNATURE-----
+
+--rWhLK7VZz0iBluhq--
