@@ -1,23 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from exprod5og108.obsmtp.com ([64.18.0.186])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QBosu-0001r1-0m for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Apr 2011 15:53:00 +0200
-Received: from f053044028.adsl.alicedsl.de ([78.53.44.28]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QBor7-0006sa-0q for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Apr 2011 13:51:09 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <martyn.welch@ge.com>) id 1QBpIt-0002at-C9
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Apr 2011 16:19:51 +0200
+Received: from Cinmlip06.e2k.ad.ge.com ([165.156.4.1]) (using TLSv1) by
+	exprod5ob108.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKTaxH+q3HZyxejTHWoaSyOkxYeejJ/YUX@postini.com;
+	Mon, 18 Apr 2011 07:17:33 PDT
+Received: from unknown (HELO cinmlef09.e2k.ad.ge.com) ([3.159.213.56])
+	by Cinmlip06.e2k.ad.ge.com with ESMTP; 18 Apr 2011 08:31:09 -0400
+Received: from [3.138.54.92] ([3.138.54.92]) by cinmlef09.e2k.ad.ge.com with
+	Microsoft SMTPSVC(6.0.3790.4675); Mon, 18 Apr 2011 08:31:09 -0400
+Message-ID: <4DAC2F0C.1030001@ge.com>
+Date: Mon, 18 Apr 2011 13:31:08 +0100
+From: Martyn Welch <martyn.welch@ge.com>
+Organization: GE Intelligent Platforms
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1303134465.3910.63.camel@mattotaupa>
-References: <1303134465.3910.63.camel@mattotaupa>
-Date: Mon, 18 Apr 2011 15:50:40 +0200
-Message-ID: <1303134640.3910.67.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: [RFC] [PATCH 2/2] pkgconfig: add git version
+References: <87zknq5iw3.fsf@gmail.com>
+In-Reply-To: <87zknq5iw3.fsf@gmail.com>
+X-Enigmail-Version: 1.1.2
+X-OriginalArrivalTime: 18 Apr 2011 12:31:09.0930 (UTC)
+	FILETIME=[7F2D8CA0:01CBFDC4]
+Subject: Re: [oe,RFC,v2] Alternative to busybox, using "proper tools"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,85 +38,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2011 13:53:00 -0000
-X-Groupsio-MsgNum: 31286
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-NXxS8W06c/7FXtg+l5ny"
+X-List-Received-Date: Mon, 18 Apr 2011 14:19:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---=-NXxS8W06c/7FXtg+l5ny
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 16/04/11 16:13, Ben Gamari wrote:
+> 
+> Did anything ever happen with this[1] patch? If not, is there another
+> convenient way to use the proper tools in leiu of busybox? For larger
+> machines it's very nice to have a more civilized environment. Thanks,
+> 
 
-Date: Sun, 17 Apr 2011 19:19:58 +0200
+I'm afraid I got pulled away from this before I could finish it.
 
-1. The revision is close to the upcoming release of pkg-config 0.26. [1]
-2. The patch `sysrootfix.patch` has been merged upstream [2].
-3. No embedded GLib is shipped anymore [3]. Therefore drop patches `autofoo=
-.patch` and `glibconfig-sysdefs.h`.
+The list of packages in task-proper-tools got updated by Marcin, I still have
+a rather old tree containing the rest of it. Here's what I have (sorry my mail
+client will have wrapped it a bit):
 
-The patch is tested using the following configuration
-
-	Build Configuration:
-	BB_VERSION        =3D "1.12.0"
-	METADATA_BRANCH   =3D "pkg-config"
-	METADATA_REVISION =3D "d4ae0c5"
-	TARGET_ARCH       =3D "arm"
-	TARGET_OS         =3D "linux-uclibceabi"
-	MACHINE           =3D "beagleboard"
-	DISTRO            =3D "minimal-uclibc"
-	DISTRO_VERSION    =3D "dev-snapshot-20110417"
-	TARGET_FPU        =3D "hard"
-
-and `angstrom-2010.x` and `minimal` too.
-
-[1] http://lists.freedesktop.org/archives/pkg-config/2011-April/000720.html
-[2] http://cgit.freedesktop.org/pkg-config/commit/?id=3D66d49f1375fec838bcd=
-301bb4ca2ef76cee0e47c
-[3] http://cgit.freedesktop.org/pkg-config/commit/?id=3D99964eddb5935173fce=
-dfc793e762d7dc7d01bba
-
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
-1. How can this recipe used also for the native recipe?
-2. What is `pkg-config-sdk` used for?
----
- recipes/pkgconfig/pkgconfig_git.bb |   12 ++++++++++++
- 1 files changed, 12 insertions(+), 0 deletions(-)
- create mode 100644 recipes/pkgconfig/pkgconfig_git.bb
-
-diff --git a/recipes/pkgconfig/pkgconfig_git.bb b/recipes/pkgconfig/pkgconf=
-ig_git.bb
+diff --git a/recipes/busybox/busybox-alt_1.bb b/recipes/busybox/busybox-alt_1.bb
 new file mode 100644
-index 0000000..9c6d7d1
+index 0000000..811f073
 --- /dev/null
-+++ b/recipes/pkgconfig/pkgconfig_git.bb
-@@ -0,0 +1,12 @@
-+require ${PN}.inc
++++ b/recipes/busybox/busybox-alt_1.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "Full versions of tools provided by busybox"
 +
-+PR =3D "${INC_PR}.0"
++PACKAGES = "busybox"
++PACKAGE_ARCH = "all"
 +
-+SRCREV =3D "7850aeb03a54a15d07b6c243b61033cd379c39d7"
-+SRC_URI =3D "git://anongit.freedesktop.org/pkg-config;protocol=3Dgit"
++PROVIDES = "busybox"
++DEFAULT_PREFERENCE = "-1"
 +
-+PV =3D "0.26"
-+PR =3D "${INC_PR}.0"
-+PR_append =3D "+gitr${SRCPV}"
++RDEPENDS = "task-proper-tools"
 +
-+S =3D "${WORKDIR}/git"
---=20
-1.7.4.4
++SRC_URI = "file://hwclock.sh"
++
++
++do_install () {
++       install -d ${D}${sysconfdir}/init.d/
++       install -m 0755 ${WORKDIR}/hwclock.sh ${D}${sysconfdir}/init.d/
++}
++
++FILES += "${sysconfdir}/init.d/hwclock.sh"
+diff --git a/recipes/busybox/files/hwclock.sh b/recipes/busybox/files/hwclock.sh
+index f9c9f9f..0a644fe 100644
+--- a/recipes/busybox/files/hwclock.sh
++++ b/recipes/busybox/files/hwclock.sh
+@@ -14,7 +14,7 @@
 
---=-NXxS8W06c/7FXtg+l5ny
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+ . /etc/default/rcS
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+-[ "$UTC" = yes ] && UTC=-u || UTC=-l
++[ "$UTC" = yes ] && UTC=--utc || UTC=--localtime
 
-iEYEABECAAYFAk2sQbAACgkQPX1aK2wOHVgO9QCggGrjzlrmnZOToRGaoUDWywWM
-mmMAniLE/fNFaimkBE+sWMN6wzxnifHy
-=TU4E
------END PGP SIGNATURE-----
+ case "$1" in
+         start)
+diff --git a/recipes/tasks/task-proper-tools.bb
+b/recipes/tasks/task-proper-tools.bb
+index 40baf87..fd5e481 100644
+--- a/recipes/tasks/task-proper-tools.bb
++++ b/recipes/tasks/task-proper-tools.bb
+@@ -21,6 +21,7 @@ RDEPENDS_${PN} = "\
+                grep \
+                gzip \
+                ifupdown \
++#              inetutils \
+                iproute2 \
+                iputils-arping \
+                iputils-ping6 \
+@@ -40,6 +41,7 @@ RDEPENDS_${PN} = "\
+                psmisc \
+                pump \
+                realpath \
++               openrdate \
+                sed \
+                shadow \
+                start-stop-daemon \
+@@ -51,6 +53,7 @@ RDEPENDS_${PN} = "\
+                time \
+                unzip \
+                util-linux-ng \
++               unzip \
+                vim \
+                wget \
+         "
 
---=-NXxS8W06c/7FXtg+l5ny--
+
+-- 
+Martyn Welch (Principal Software Engineer) | Registered in England and
+GE Intelligent Platforms                   | Wales (3828642) at 100
+T +44(0)127322748                          | Barbirolli Square, Manchester,
+E martyn.welch@ge.com                      | M2 3AB  VAT:GB 927559189
+
+
