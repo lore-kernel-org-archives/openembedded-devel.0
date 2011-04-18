@@ -1,25 +1,39 @@
-Received: from dub0-omc1-s31.dub0.hotmail.com ([157.55.0.230])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <l.bolognini@hotmail.it>) id 1QBpwg-00083H-1W
+	(envelope-from <martin.jansa@gmail.com>) id 1QBt2o-0004o1-TK
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Apr 2011 17:00:58 +0200
-Received: from DUB107-W12 ([157.55.0.237]) by dub0-omc1-s31.dub0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.4675); 
-	Mon, 18 Apr 2011 07:57:24 -0700
-Message-ID: <DUB107-w12A7956EF90A1529568C7A98910@phx.gbl>
-X-Originating-IP: [78.6.111.196]
-From: Luca Bolognini <l.bolognini@hotmail.it>
-To: Openembedded Mailing List <openembedded-devel@lists.openembedded.org>
-Date: Mon, 18 Apr 2011 16:57:24 +0200
-Importance: Normal
-In-Reply-To: <4DAAF293.7080705@mlbassoc.com>
-References: <DUB107-w168531FE95ECFF71F7C03098AE0@phx.gbl>,
-	<4DAAF293.7080705@mlbassoc.com>
+	Mon, 18 Apr 2011 20:19:30 +0200
+Received: by bwz5 with SMTP id 5so4459688bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Apr 2011 11:17:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=/bydVrcyeka4hAoDHgSUYOSlak+Ih5o93lE85tk55BY=;
+	b=X4ORr38WWkopMibwaJppIGyYhr1/RZAwa3oBSwfJ9lK1uvCskfgFE/NV+P7XJfnA81
+	CX+Pk80WWMzLb24/ZDae373IYeDIGbhYkxFUiEdJACO+Yn4K+oMo8iUPaJ654l1fFNFJ
+	kZLgxERARjoCDxmcJHOA63Nx4rOH/BMgPsRq4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=ZL2tzP4NO2YQBNmv1lDVCzry2j3xnFv4vjEdGD3Fc9tGGy/L+GcDsjkfEWtj3V3aMz
+	b9BWs5n1v0e9h6O23zL5JZVrdKJ6tcO+EZp8MVxYu2olLb/UC75wccwflhuy62S8uirC
+	+Qa7DoHj/1zUVHpA4Id+NTsjGwXQ2g6ovATJU=
+Received: by 10.204.35.18 with SMTP id n18mr111710bkd.91.1303150629985;
+	Mon, 18 Apr 2011 11:17:09 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id q18sm3375643bka.3.2011.04.18.11.17.08
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 18 Apr 2011 11:17:08 -0700 (PDT)
+Date: Mon, 18 Apr 2011 20:17:07 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110418181707.GG24192@jama.jama.net>
+References: <1302898356-22075-1-git-send-email-GNUtoo@no-log.org>
 MIME-Version: 1.0
-X-OriginalArrivalTime: 18 Apr 2011 14:57:24.0215 (UTC)
-	FILETIME=[ED0F3070:01CBFDD8]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: an ipk package depending on its corresponding -dev
+In-Reply-To: <1302898356-22075-1-git-send-email-GNUtoo@no-log.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH] xserver-nodm-init 2.0: remove DEFAULT_PREFERENCE = "-1"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,58 +47,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2011 15:00:58 -0000
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Mon, 18 Apr 2011 18:19:31 -0000
+X-Groupsio-MsgNum: 31289
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="HeFlAV5LIbMFYYuh"
+Content-Disposition: inline
+
+--HeFlAV5LIbMFYYuh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-
-Thank you=2C but my libgles-omap3-dev_4.03.00.01-r11.6_armv7a.ipk includes =
-only /usr/include/* files=2C as written in the recipe: FILES_${PN}-dev =3D =
-"${includedir}"
-Moreover it doesn't happen when MACHINE=3Dc6a816x-evm... however I don't th=
-ink MACHINE=3Dbeagleboard is involved...
-
--------------------------Luca Bologninil.bolognini@hotmail.it
-
-
-
-
-> Date: Sun=2C 17 Apr 2011 08:00:51 -0600
-> From: gary@mlbassoc.com
-> To: openembedded-devel@lists.openembedded.org
-> CC: l.bolognini@hotmail.it
-> Subject: Re: [oe] an ipk package depending on its corresponding -dev
+On Fri, Apr 15, 2011 at 10:12:36PM +0200, Denis 'GNUtoo' Carikli wrote:
+> That fix was made in order to prevent distributions like Angstrom2010
+>   from picking the 1.0 version:
+> Angstrom 2008 picked the 2.0 version while Angstrom 2010 use the 1.0 vers=
+ion.
+>   That can prevent Xorg session from starting on the target device(like b=
+ug20 in my case):
+> The 1.0 lacks the following session start:
+>     xinit /etc/X11/Xsession -- `which $XSERVER` $ARGS >/var/log/Xsession.=
+log 2>&1
+> And has that instead:
+>     /etc/X11/Xserver &
+> Which has the effect of starting Xorg only(and not the session,display ma=
+nager etc...)
 >=20
-> On 04/17/2011 07:43 AM=2C Luca Bolognini wrote:
-> >
-> > A strange thing happended to me last time I created libgles-omap3 ipk p=
-ackages.I had justed patched /usr/bin/cputype (a file contained in one of t=
-he SRC_URIs) and libgles-omap3.inc to add some INSANE_SKIPs =2C then I gave=
- the commands:MACHINE=3Dbeagleboard bitbake -v -c clean libgles-omap3MACHIN=
-E=3Dbeagleboard bitbake -v libgles-omap3
-> > At least=2C it happened that I had the dependency:libgles_omap3 ->  lib=
-gles_omap3_dev
-> > It's quite strange and it's the first time I see a package depending on=
- its corresponding -dev.Obviously this dependency is false=2C there can't b=
-e any dependency between these two packages.The same action=2C with MACHINE=
-=3Dc6a816x-evm (in a different development machine) doesn't lead to this be=
-haviour.However I don't think that MACHINE=3Dbeagleboard is involved=2C pro=
-bably I corrupted something in the 1st development machine=2C I don't know.=
-Have you any idea how to remove this ugly (and useless) dependency? How cou=
-ld it originate?
+> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+> ---
+>  recipes/xserver-nodm-init/xserver-nodm-init_2.0.bb |    1 -
+>  1 files changed, 0 insertions(+), 1 deletions(-)
 >=20
-> I've seen this happen when something in the package depends on a
-> library named *.so=2C instead of a more qualified library such as *.so.1
-> The *.so files are only packaged in the -dev subpackages by default.
->=20
-> An easy workaround (which might not be perfectly correct) is to just
-> list the .so files in the main package=2C e.g.
->    FILES_${PN} +=3D "/usr/lib/lib*.so"
->=20
+> diff --git a/recipes/xserver-nodm-init/xserver-nodm-init_2.0.bb b/recipes=
+/xserver-nodm-init/xserver-nodm-init_2.0.bb
+> index 5d6ca39..317d58a 100644
+> --- a/recipes/xserver-nodm-init/xserver-nodm-init_2.0.bb
+> +++ b/recipes/xserver-nodm-init/xserver-nodm-init_2.0.bb
+> @@ -3,7 +3,6 @@ LICENSE =3D "GPL"
+>  SECTION =3D "x11"
+>  PRIORITY =3D "optional"
+>  RDEPENDS_${PN} =3D "xserver-common (>=3D 1.30) xinit"
+> -DEFAULT_PREFERENCE =3D "-1"
+>  PR =3D "r4"
+> =20
+>  SRC_URI =3D "file://xserver-nodm"
 > --=20
-> ------------------------------------------------------------
-> Gary Thomas                 |  Consulting for the
-> MLB Associates              |    Embedded world
-> ------------------------------------------------------------
- 		 	   		  =
+> 1.7.0.4
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--HeFlAV5LIbMFYYuh
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
+
+iEYEARECAAYFAk2sgCMACgkQN1Ujt2V2gBzKfwCcC5H6aJANvW0mwUHnRzQFsMMM
+KaMAn3Yhik84K6X0O2CEhcRp8o90hroB
+=Cmkg
+-----END PGP SIGNATURE-----
+
+--HeFlAV5LIbMFYYuh--
