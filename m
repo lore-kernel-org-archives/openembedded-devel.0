@@ -1,37 +1,37 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QBlok-0007Fd-CB
+	(envelope-from <martin.jansa@gmail.com>) id 1QBloo-0007Fg-Tg
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Apr 2011 12:36:30 +0200
-Received: by mail-fx0-f47.google.com with SMTP id 19so3317697fxm.6
+	Mon, 18 Apr 2011 12:36:35 +0200
+Received: by mail-fx0-f47.google.com with SMTP id 19so3317704fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2011 03:34:12 -0700 (PDT)
+	Mon, 18 Apr 2011 03:34:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
 	:in-reply-to:references;
-	bh=WZEa/U/xtVMCmG8+8ufSucIXzK6/UOjvLWnIXaQ860c=;
-	b=gfsuDJA2DefU6+RSl+jv3K/oPIb/+OFWiQk89l8uG3UiTczMoYZ1LWJDGKtE6bFWSC
-	kErT7LpFqemgJ4mClKh+yKNcGRmEj1/yEKSAHkFmtq6v7YKuQzdESgJMsHlGXdD3ul5D
-	qCkKqxwWwViTv3aEuh9Y9aYGSLBm+QCFvw7hc=
+	bh=KfiSVEsZRrkFFp/jfUEG627KNfKUMFLJu4YLyFByfTU=;
+	b=atNWsNRNm6ES9bxTqiNek9rPLfa1qXjKa4xfMUtRm3M42/YmDeUAmZAgXwYHkdrOHR
+	d/MQvSEYaiF1M9rKLpLpI07dC9dS+KGkiePzVFaqtZtsA8ABTuhC8schAk8gQBMeeaEk
+	JfRJmfpp7zugP8LX+31BA16TDGdryO6UyuZB0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=cF5Uh088ZdEvkGPEoUjSJ8H8jUrxfYf2roTTlb1OgMaPFxAo9EDlhsWzmT5hg8UX+P
-	E/GDmsweLhzwESM3AeFIGD9oqXtJooIWWepbtzlNCin4h78E/8fv33QqznjXARPaigyy
-	qdveyT3I8fZP88Lu/VSDm6Ay4qkbFs2Nb2XoI=
-Received: by 10.223.161.194 with SMTP id s2mr4791499fax.143.1303122842096;
-	Mon, 18 Apr 2011 03:34:02 -0700 (PDT)
+	b=p3e93b+KtGyXrGhdLpX6tyF5rnnRMz5C+HvzYL7ySBTcK0I0uTtFLjQyQ3WBRqmPyn
+	JJHWoNDnKFzCBpefN6CVi+5IDl3JYojDSLOSgqSx/fgzcEk+Gi7NVSs5oSiIs2oonMeS
+	5pT2vgInwmpDP6ZPITqEi4zEuRzagDyy4w5M4=
+Received: by 10.223.159.134 with SMTP id j6mr4745622fax.74.1303122856088;
+	Mon, 18 Apr 2011 03:34:16 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id n9sm1623534fax.27.2011.04.18.03.34.00
+	by mx.google.com with ESMTPS id j18sm1624007faa.18.2011.04.18.03.34.15
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 18 Apr 2011 03:34:01 -0700 (PDT)
+	Mon, 18 Apr 2011 03:34:15 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Apr 2011 12:33:55 +0200
-Message-Id: <caa015b5995e708756c83ef93797e3eb1f83a18e.1303122650.git.Martin.Jansa@gmail.com>
+Date: Mon, 18 Apr 2011 12:34:14 +0200
+Message-Id: <fc04fe74edfe5a681ed1ee5e0458e085573f9177.1303122650.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.5.rc1
 In-Reply-To: <cover.1303122650.git.Martin.Jansa@gmail.com>
 References: <cover.1303122650.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 10/13] libx11: drop older version 1.4.1
+Subject: [meta-oe][PATCH 13/13] libdrm: upgrade to 2.4.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,96 +45,153 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2011 10:36:30 -0000
+X-List-Received-Date: Mon, 18 Apr 2011 10:36:35 -0000
+
+* difference to oe-core version is different packaging and glamo/uclibc patches
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../xorg-lib/libx11-1.4.1/keysymdef_include.patch  |   19 -------------
- .../libx11-1.4.1/x11_disable_makekeys.patch        |   29 --------------------
- meta-oe/recipes-graphics/xorg-lib/libx11_1.4.1.bb  |   12 --------
- 3 files changed, 0 insertions(+), 60 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/xorg-lib/libx11-1.4.1/keysymdef_include.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-lib/libx11-1.4.1/x11_disable_makekeys.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-lib/libx11_1.4.1.bb
+ .../drm/libdrm-2.4.24/installtests.patch           |   43 -----------------
+ .../{libdrm-2.4.24 => libdrm-2.4.25}/glamo.patch   |    0
+ .../drm/libdrm-2.4.25/installtests.patch           |   49 ++++++++++++++++++++
+ .../drm/{libdrm_2.4.24.bb => libdrm_2.4.25.bb}     |    6 +--
+ 4 files changed, 51 insertions(+), 47 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/drm/libdrm-2.4.24/installtests.patch
+ rename meta-oe/recipes-graphics/drm/{libdrm-2.4.24 => libdrm-2.4.25}/glamo.patch (100%)
+ create mode 100644 meta-oe/recipes-graphics/drm/libdrm-2.4.25/installtests.patch
+ rename meta-oe/recipes-graphics/drm/{libdrm_2.4.24.bb => libdrm_2.4.25.bb} (91%)
 
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libx11-1.4.1/keysymdef_include.patch b/meta-oe/recipes-graphics/xorg-lib/libx11-1.4.1/keysymdef_include.patch
+diff --git a/meta-oe/recipes-graphics/drm/libdrm-2.4.24/installtests.patch b/meta-oe/recipes-graphics/drm/libdrm-2.4.24/installtests.patch
 deleted file mode 100644
-index 1a30e34..0000000
---- a/meta-oe/recipes-graphics/xorg-lib/libx11-1.4.1/keysymdef_include.patch
+index 9d6a168..0000000
+--- a/meta-oe/recipes-graphics/drm/libdrm-2.4.24/installtests.patch
 +++ /dev/null
-@@ -1,19 +0,0 @@
--diff -uNr libX11-1.3.6.orig//configure.ac libX11-1.3.6/configure.ac
----- libX11-1.3.6.orig//configure.ac	2010-09-20 08:04:16.000000000 +0200
--+++ libX11-1.3.6/configure.ac	2010-09-28 16:29:26.000000000 +0200
--@@ -355,7 +355,14 @@
-- # Find keysymdef.h
-- #
-- AC_MSG_CHECKING([keysym definitions])
---KEYSYMDEFDIR=`$PKG_CONFIG --variable=includedir xproto`/X11
--+AC_ARG_WITH(keysymdefdir,
--+        AC_HELP_STRING([--with-keysymdefdir=DIR], [The location of keysymdef.h]),
--+        KEYSYMDEFDIR=$withval, KEYSYMDEFDIR="")
--+
--+if test x$KEYSYMDEFDIR = x; then
--+	KEYSYMDEFDIR=`$PKG_CONFIG --variable=includedir xproto`/X11
--+fi
--+
-- FILES="keysymdef.h XF86keysym.h Sunkeysym.h DECkeysym.h HPkeysym.h"
-- for i in $FILES; do
--     if test -f "$KEYSYMDEFDIR/$i"; then
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libx11-1.4.1/x11_disable_makekeys.patch b/meta-oe/recipes-graphics/xorg-lib/libx11-1.4.1/x11_disable_makekeys.patch
-deleted file mode 100644
-index 9763313..0000000
---- a/meta-oe/recipes-graphics/xorg-lib/libx11-1.4.1/x11_disable_makekeys.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--Index: libX11-1.3.4/src/util/Makefile.am
+@@ -1,43 +0,0 @@
+-Index: libdrm-2.4.7/tests/Makefile.am
 -===================================================================
----- libX11-1.3.4.orig/src/util/Makefile.am
--+++ libX11-1.3.4/src/util/Makefile.am
--@@ -1,24 +1 @@
---
---noinst_PROGRAMS=makekeys
---
---makekeys_CFLAGS = \
---	$(X11_CFLAGS) \
---	$(CWARNFLAGS)
---
---CC = @CC_FOR_BUILD@
---CPPFLAGS = @CPPFLAGS_FOR_BUILD@
---CFLAGS = @CFLAGS_FOR_BUILD@
---LDFLAGS = @LDFLAGS_FOR_BUILD@
---
-- EXTRA_DIST = mkks.sh
---
---if LINT
---# Check source code with tools like lint & sparse
---
---ALL_LINT_FLAGS=$(LINT_FLAGS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
---		$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS)
---
---lint:
---	$(LINT) $(ALL_LINT_FLAGS) makekeys.c
---
---endif LINT
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libx11_1.4.1.bb b/meta-oe/recipes-graphics/xorg-lib/libx11_1.4.1.bb
-deleted file mode 100644
-index a442330..0000000
---- a/meta-oe/recipes-graphics/xorg-lib/libx11_1.4.1.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--require libx11.inc
+---- libdrm-2.4.7.orig/tests/Makefile.am	2009-04-09 20:16:35.000000000 +0100
+-+++ libdrm-2.4.7/tests/Makefile.am	2009-04-17 12:35:14.000000000 +0100
+-@@ -6,10 +6,11 @@
 -
--LICENSE = "MIT & MIT-style & BSD"
--LIC_FILES_CHKSUM = "file://COPYING;md5=172255dee66bb0151435b2d5d709fcf7"
+- LDADD = $(top_builddir)/libdrm.la
 -
--#--without-xcb is not an option anymore
--#http://cgit.freedesktop.org/xorg/lib/libX11/commit/?id=15e5eaf62897b3179d1fbe457cb19f886f0449f8
--DEPENDS_virtclass-native = "libxcb-native ${COMMON_DEPENDS}"
--PR = "${INC_PR}.0"
+--check_PROGRAMS = \
+-+bin_PROGRAMS = \
+- 	dristat \
+- 	drmstat
 -
--SRC_URI[md5sum] = "4603bdbce1bd73cbc140de402fe6ed24"
--SRC_URI[sha256sum] = "70f4e0f798645a0f269f362bfdbd4c7934dae3a2dd9ecbad28d6ede414f63ce2"
+-+check_PROGRAMS =
+- SUBDIRS =
+-
+- if HAVE_LIBKMS
+-Index: libdrm-2.4.7/tests/modeprint/Makefile.am
+-===================================================================
+---- libdrm-2.4.7.orig/tests/modeprint/Makefile.am	2009-02-17 19:52:37.000000000 +0000
+-+++ libdrm-2.4.7/tests/modeprint/Makefile.am	2009-04-17 12:35:32.000000000 +0100
+-@@ -3,7 +3,7 @@
+- 	-I$(top_srcdir)/libdrm/intel/ \
+- 	-I$(top_srcdir)/libdrm
+-
+--noinst_PROGRAMS = \
+-+bin_PROGRAMS = \
+- 	modeprint
+-
+- modeprint_SOURCES = \
+-Index: libdrm-2.4.7/tests/modetest/Makefile.am
+-===================================================================
+---- libdrm-2.4.7.orig/tests/modetest/Makefile.am	2009-02-17 19:52:37.000000000 +0000
+-+++ libdrm-2.4.7/tests/modetest/Makefile.am	2009-04-17 12:35:42.000000000 +0100
+-@@ -4,7 +4,7 @@
+- 	-I$(top_srcdir)/libdrm \
+- 	$(CAIRO_CFLAGS)
+-
+--noinst_PROGRAMS = \
+-+bin_PROGRAMS = \
+- 	modetest
+-
+- modetest_SOURCES = \
+diff --git a/meta-oe/recipes-graphics/drm/libdrm-2.4.24/glamo.patch b/meta-oe/recipes-graphics/drm/libdrm-2.4.25/glamo.patch
+similarity index 100%
+rename from meta-oe/recipes-graphics/drm/libdrm-2.4.24/glamo.patch
+rename to meta-oe/recipes-graphics/drm/libdrm-2.4.25/glamo.patch
+diff --git a/meta-oe/recipes-graphics/drm/libdrm-2.4.25/installtests.patch b/meta-oe/recipes-graphics/drm/libdrm-2.4.25/installtests.patch
+new file mode 100644
+index 0000000..2704ee6
+--- /dev/null
++++ b/meta-oe/recipes-graphics/drm/libdrm-2.4.25/installtests.patch
+@@ -0,0 +1,49 @@
++tests: also install tests app
++
++Upstream-Status: Pending
++
++Signed-off-by: Yu Ke <ke.yu@intel.com>
++
++diff --git a/tests/Makefile.am b/tests/Makefile.am
++index bf1987f..d909e19 100644
++--- a/tests/Makefile.am
+++++ b/tests/Makefile.am
++@@ -6,10 +6,11 @@ AM_CPPFLAGS = \
++ 
++ LDADD = $(top_builddir)/libdrm.la
++ 
++-check_PROGRAMS = \
+++bin_PROGRAMS = \
++ 	dristat \
++ 	drmstat
++ 
+++check_PROGRAMS =
++ SUBDIRS = modeprint
++ 
++ if HAVE_LIBKMS
++diff --git a/tests/modeprint/Makefile.am b/tests/modeprint/Makefile.am
++index c4862ac..7db76ea 100644
++--- a/tests/modeprint/Makefile.am
+++++ b/tests/modeprint/Makefile.am
++@@ -2,7 +2,7 @@ AM_CFLAGS = \
++ 	-I$(top_srcdir)/include/drm \
++ 	-I$(top_srcdir)
++ 
++-noinst_PROGRAMS = \
+++bin_PROGRAMS = \
++ 	modeprint
++ 
++ modeprint_SOURCES = \
++diff --git a/tests/modetest/Makefile.am b/tests/modetest/Makefile.am
++index 2191242..1d2c1b0 100644
++--- a/tests/modetest/Makefile.am
+++++ b/tests/modetest/Makefile.am
++@@ -4,7 +4,7 @@ AM_CFLAGS = \
++ 	-I$(top_srcdir) \
++ 	$(CAIRO_CFLAGS)
++ 
++-noinst_PROGRAMS = \
+++bin_PROGRAMS = \
++ 	modetest
++ 
++ modetest_SOURCES = \
+diff --git a/meta-oe/recipes-graphics/drm/libdrm_2.4.24.bb b/meta-oe/recipes-graphics/drm/libdrm_2.4.25.bb
+similarity index 91%
+rename from meta-oe/recipes-graphics/drm/libdrm_2.4.24.bb
+rename to meta-oe/recipes-graphics/drm/libdrm_2.4.25.bb
+index 0a2365e..4ffdcac 100644
+--- a/meta-oe/recipes-graphics/drm/libdrm_2.4.24.bb
++++ b/meta-oe/recipes-graphics/drm/libdrm_2.4.25.bb
+@@ -24,13 +24,11 @@ LEAD_SONAME = "libdrm.so"
+ EXTRA_OECONF_append = " ${@base_contains('MACHINE_FEATURES', 'x86', '', '--disable-intel --disable-radeon',d)}"
+ EXTRA_OECONF_append_shr = " --enable-glamo-experimental-api"
+ 
+-PR = "r8"
+-
+ SRC_URI += "file://installtests.patch"
+ SRC_URI += "file://glamo.patch"
+ 
+-SRC_URI[md5sum] = "8d802bf3b368f9fac0d7d17516a9436f"
+-SRC_URI[sha256sum] = "c7012381f64458af9f291d913309448aac7dd23a28dc86c6970e4bf38effb6a5"
++SRC_URI[md5sum] = "f53dc4c72109b17908e4113c3b8addfe"
++SRC_URI[sha256sum] = "51f99a815a18876977991bbc6f190607791d25a6e47a3269880ce7679dbd0e9f"
+ 
+ do_compile_prepend_libc-uclibc() {
+ 	eval "${@base_contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "/_FILE_OFFSET_BITS/d" ${S}/libkms/intel.c', d)}"
 -- 
 1.7.5.rc1
 
