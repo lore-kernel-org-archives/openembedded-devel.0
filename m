@@ -1,39 +1,37 @@
 Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heroor@gmail.com>) id 1QBefd-0001ZR-0w
+	(envelope-from <heroor@gmail.com>) id 1QBekF-00023N-J3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Apr 2011 04:58:37 +0200
-Received: by qwh5 with SMTP id 5so2394555qwh.6
+	Mon, 18 Apr 2011 05:03:24 +0200
+Received: by qwh5 with SMTP id 5so2395627qwh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Apr 2011 19:56:12 -0700 (PDT)
+	Sun, 17 Apr 2011 20:01:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=VIaUCvFvYjvnoYIYS/BgkD4TZ5X9KDBKcYSG29f+c1I=;
-	b=wEiSRD11Z8vWCUytWL5zEgrKUmbFidzzhlxDxqk7ip7rhoh3m054jmukzUMlwrjHby
-	RXflRhwiCOMzWYo0YzcP7aOEJBRhjBpjlAG2YudymiA07wYvggMxZ+OXxx0f0zX7tXDG
-	y8UTTgTzxMApkyqcQlL+4Y4QUxVUfiPpbmk3E=
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=aBYQu/WgrFU7SjslFMS674yCXjB5fF/d4s5E2uJIFUY=;
+	b=PyRz5mDfWfa+rkifixWZaphmhncjsCt0wigTEYlFYEnzOg7dqyA01xCTnljGrdWu0q
+	4e8U7MmtwFQPqTeVNnLEAhsgwH3gScWBpAlMErjF6nrx1ja1olpw1pXkGNlhbDvI0sqO
+	uJzXcyVnwtMoPfxhM0y6NkuxkmwPdc3zINq2E=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=v3TdZVvi4Jdx9wBRc09q89yR0dC0i0XQYBikSrfikToH/cjP/1NGt/zUFSLYhcMTIG
-	8FzMoN2XE/KpCcKLy5EsKMpBWRRZbut9vacf9+ycdZppFqD2dCgkXTkRDqX1qQ5YDqOH
-	/CW3qWlrDUEfnf5moCa0H5EB5UZnKvAoZh1PA=
+	:content-type:content-transfer-encoding;
+	b=PD6T4rqhqJqGnWMvomKPmgo5eZ/NjCDqCPb7beherR5EQ+sr1N32yi5CMnnltkNMem
+	m+M+plWKxbQWrHZXiQJsveTP0lzC5SPwznbFF+VQe5RTl+wmRPQRUURdKsBdvpr6ry4e
+	899JGDr/Z5RX9dgZrAtwv3noGVUKMxHum+JBI=
 MIME-Version: 1.0
-Received: by 10.224.211.194 with SMTP id gp2mr2367376qab.179.1303095372439;
-	Sun, 17 Apr 2011 19:56:12 -0700 (PDT)
-Received: by 10.224.89.78 with HTTP; Sun, 17 Apr 2011 19:56:12 -0700 (PDT)
-In-Reply-To: <iofbt7$hur$1@dough.gmane.org>
-References: <1302328581-30367-1-git-send-email-heroor@gmail.com>
-	<1302328581-30367-3-git-send-email-heroor@gmail.com>
-	<iofbt7$hur$1@dough.gmane.org>
-Date: Mon, 18 Apr 2011 08:26:12 +0530
-Message-ID: <BANLkTi=430sn7z55DsCfFVafKoeUZnUx8w@mail.gmail.com>
+Received: by 10.224.211.194 with SMTP id gp2mr2369528qab.179.1303095662584;
+	Sun, 17 Apr 2011 20:01:02 -0700 (PDT)
+Received: by 10.224.89.78 with HTTP; Sun, 17 Apr 2011 20:01:02 -0700 (PDT)
+In-Reply-To: <20110417182730.GC4068@denix.org>
+References: <1302319620-18223-1-git-send-email-heroor@gmail.com>
+	<1302319620-18223-4-git-send-email-heroor@gmail.com>
+	<20110417182730.GC4068@denix.org>
+Date: Mon, 18 Apr 2011 08:31:02 +0530
+Message-ID: <BANLkTi=FJ2bF31UUSS_4By691ccs0dXnrQ@mail.gmail.com>
 From: Siddharth Heroor <heroor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: prabu@ti.com
-Subject: Re: [PATCH 3/3] libgles-omap3: Remove SGX Fixup for TI816x.
+Subject: Re: [PATCHv3 4/5] ti-syslink-module: Add Syslink version 02.00.00.68 Beta1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,48 +45,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2011 02:58:37 -0000
+X-List-Received-Date: Mon, 18 Apr 2011 03:03:24 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 18, 2011 at 12:05 AM, Koen Kooi <koen@dominion.thruhere.net> wr=
-ote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 09-04-11 07:56, Siddharth Heroor wrote:
+On Sun, Apr 17, 2011 at 11:57 PM, Denys Dmytriyenko <denis@denix.org> wrote=
+:
+> On Sat, Apr 09, 2011 at 08:56:59AM +0530, Siddharth Heroor wrote:
 >> From: Siddharth Heroor <heroor@ti.com>
 >>
->> * Unlike OMAP3, the SGX core has not undergone revisions in TI816x.
->> =A0 The libraries for TI816x are also fixed and do not need fixup based
->> =A0 on revision of the SGX core.
 >>
 >> Signed-off-by: Siddharth Heroor <heroor@ti.com>
+>> ---
+>> =A0...-syslink-module_02.00.00.67+02.00.00.68beta1.bb | =A0 11 +++++++++=
+++
+>> =A01 files changed, 11 insertions(+), 0 deletions(-)
+>> =A0create mode 100644 recipes/ti/ti-syslink-module_02.00.00.67+02.00.00.=
+68beta1.bb
 >
-> So, I'm back from travelling now and I'll have to NAK this patch:
+> Sid,
 >
-> 1) it assumes netra will never have an sgx core update and makes it
-> diverge from the other platforms.
+> Renaming the file with the proper versioning doesn't do any good, when yo=
+u set
+> the actual PV inside the recipe to the wrong value anyway - bitbake and o=
+pkg
+> will sort by PV and not the recipe name! Hence, you are setting the versi=
+on to
+> 02_00_00_68 and what happens when the real 02_00_00_68 gets released?
 >
-> 2) it adds a useless 2 second boot delay
->
-> So the net result is a harder to maintain slower version of the scripts,
-> which is not acceptable.
-The SGX core revision being read by devmem2 returns 5, but the correct
-version of SGX libraries for TI816x is ES6.x. So, the original
-pvr-init script copies the libraries from ES5.x and overwrites the
-correctly installed libraries as part of boot. I will need to check
-with the 3D Graphics SDK team on why the 2 second delay is required
-(its present in targetfs/38xx-demo).
+Hi Denys,
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
+Thank you for correcting my understanding.
+
+The next version of syslink is expected to be 02_00_00_69 Beta2. I
+don't think there will be
+a 02_00_00_68_beta2. The version numbering followed by syslink appends beta=
+1 to
+02_00_00_68. In such a case, should the next version recipe be
+02_00_00_68+02_00_00_69_beta2?
+
+> I did some quick editing and will send the updated patches for #4 and #5 =
+-
+> please review and provide feedback. Thanks.
 >
-> iD8DBQFNqzLnMkyGM64RGpERAgHyAKCXhRIKrqjA1FMKG+nJ8U2d+rAfYgCfSxEf
-> cywcK4FZnaGd12H1+B9fk4Q=3D
-> =3DgoBu
-> -----END PGP SIGNATURE-----
+> --
+> Denys
 >
+>> diff --git a/recipes/ti/ti-syslink-module_02.00.00.67+02.00.00.68beta1.b=
+b b/recipes/ti/ti-syslink-module_02.00.00.67+02.00.00.68beta1.bb
+>> new file mode 100644
+>> index 0000000..f7bcb35
+>> --- /dev/null
+>> +++ b/recipes/ti/ti-syslink-module_02.00.00.67+02.00.00.68beta1.bb
+>> @@ -0,0 +1,11 @@
+>> +require ti-syslink-module.inc
+>> +
+>> +PV =3D "02_00_00_68"
+>> +PVExtra =3D "_beta1"
+>> +
+>> +S =3D "${WORKDIR}/syslink_${PV}${PVExtra}/ti/syslink/utils/hlos/knl/Lin=
+ux"
+>> +SYSLINK_ROOT =3D "${WORKDIR}/syslink_${PV}${PVExtra}"
+>> +
+>> +SRC_URI =3D "http://software-dl.ti.com/dsps/dsps_public_sw/SysLink/${PV=
+}${PVExtra}/exports/syslink_${PV}${PVExtra}.tar.gz;name=3Dsyslinktarball"
+>> +SRC_URI[syslinktarball.md5sum] =3D "468034372124f70f82b60cfb5f11c8e8"
+>> +SRC_URI[syslinktarball.sha256sum] =3D "ed574dcb3a5477cfbc69a1c9e768d519=
+7291cb057d19fd791e16e1c89af3e8e1"
+>> --
+>> 1.7.0.4
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 > _______________________________________________
 > Openembedded-devel mailing list
