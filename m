@@ -1,34 +1,25 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1QBjHm-0001Mq-4l
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <thebohemian@gmx.net>) id 1QBk9l-0008Cw-0V
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Apr 2011 09:54:18 +0200
-Received: from [2001:638:602:1183:cda5:2bfc:7471:f49a] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1QBjFS-0000gY-Qk by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2011 09:52:00 +0200
-Received: from stefan by excalibur.local with local (Exim 4.75)
-	(envelope-from <stefan@excalibur.local>) id 1QBjFR-0005AM-Hf
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Apr 2011 09:51:53 +0200
-Date: Mon, 18 Apr 2011 09:51:53 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110418075153.GA15540@excalibur.local>
-References: <20110412085148.GC17374@excalibur.local>
+	Mon, 18 Apr 2011 10:50:16 +0200
+Received: (qmail invoked by alias); 18 Apr 2011 08:47:43 -0000
+Received: from 64.176.73-86.rev.gaoland.net (EHLO [192.168.42.72])
+	[86.73.176.64]
+	by mail.gmx.net (mp005) with SMTP; 18 Apr 2011 10:47:43 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX18nxVMvmuknxW6ZIag8huqvJC2zMYdDyACIR2kUhB
+	v0Z3JmgZPvvnnM
+Message-ID: <4DABFAAE.3080900@gmx.net>
+Date: Mon, 18 Apr 2011 10:47:42 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
 MIME-Version: 1.0
-In-Reply-To: <20110412085148.GC17374@excalibur.local>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
-	autolearn=ham version=3.2.5
-Subject: Re: Patchwork day on Sunday 2011-04-17 and shutdown of patchwork.openembedded.org in favour of patches.openembedded.org
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 1.1.2
+X-Y-GMX-Trusted: 0
+Subject: OpenEmbedded @ LinuxTag 2011 - May 11th to 14th 2011
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,61 +33,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2011 07:54:18 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 18 Apr 2011 08:50:18 -0000
+X-Groupsio-MsgNum: 31263
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig8D70626C0374983721FE13CA"
 
-Hello.
+--------------enig8D70626C0374983721FE13CA
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2011-04-12 at 10:51, Stefan Schmidt wrote:
-> 
-> I would like to have another patchwork day on Sunday 2011-04-17. The
-> focus will be on a final cleanup for patchwork.openembedded.org.
+Hi everyone,
+make sure that you mark May 11th to 14th in your calendar because this
+is your chance to meet OpenEmbedded people in person at Berlin's LinuxTag=
+=2E
 
-OK, wuite patchwork weekend again. Seems I would need to pester people
-a bit more so they are going to look at it. Was just not in the mood
-for it yesterday. To great weather. :)
+We will have a booth there, demonstrate the latest cool hardware that is
+supported by OE and are always available for a chat about the project or
+Linux and embedded in general.
 
-I did some work on my own thought. See the results below.
-
-> That one is set on hold in favour of patches.openembedded.org since a
-> while now and the newest patches in their are 5 months old then while
-> the oldest are nearly 2 years.
-> 
-> I would like everyone interested in patches sitting there comming back
-> to us in this thread. A lot of them will apply now longer and
-> interested parties should re-work them and re-sent them. That way they
-> will get picked up by the new patchwork installation.
-
-From 158 patches sitting there 98 no longer applied. The remaining 60
-patches did apply cleanly. I skimmed over them and have not seen "must
-have" patches in it. Some problems have already been fixed in other
-ways, some recipe updates or new recipes. Surely there are still some
-fixes in that are still missing.
-
-But we will need feedback from the original submitter for this.
-Without it I see not much point it keeping the patches.
-
-> Also anyone having patches sitting in any of the patchwork
-> installations should try to update the status of their patches. Maybe
-> ping on the list again to get some feedback.
-
-No response her eon the ml and neither in private or IRC. I would
-judge therefor that the patches sitting in there are not of much
-interest for people anymore.
-
-What worries me is that people put work into them and maybe we have
-not been fast enough with review and they just skipped OE. Which would
-be a bad sign. Not much we can improve on the old patches for this
-thought. Only trying to improve in the future on this.
-
-> After this cleanup I would propose to shutdown
-> patchwork.openembedded.org
-
-Personally I think we are ready for this. I would propose shutting it
-down next weekend.
-
-regards
-Stefan Schmidt
+Cheers,
+Robert
 
 
+--------------enig8D70626C0374983721FE13CA
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAk2r+q4ACgkQG9cfwmwwEtp24wCggSFS7FRuJxZedNU05ZKxT449
+Z/wAoJWy5guCgcTeOvrtZzZSa48CRZT7
+=NmUN
+-----END PGP SIGNATURE-----
+
+--------------enig8D70626C0374983721FE13CA--
