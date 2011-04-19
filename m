@@ -1,35 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QCAri-0004q2-In for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Apr 2011 15:21:14 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QCApT-0000BE-55 for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Apr 2011 15:18:55 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Apr 2011 15:18:55 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1QCAu0-0004vd-I3
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Apr 2011 15:23:36 +0200
+Received: by fxm19 with SMTP id 19so3926895fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Apr 2011 15:18:55 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 19 Apr 2011 06:21:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=82u1ZXXDrYQhygcnnLTpCJ+32WLQiHNTgq7HNstODFo=;
+	b=UhPVti6ZGDaztM7QLmYTCfqzFbn030V7gU4oxjp1tL33ZsW2Pef0d1nUaUjof8Rhdj
+	bKBqqzgTG0eFgzq4oP9fQb19Lh5v9tHnhoK0ajb+lUvdgQLQEEIyp1SMolKDjpYpE+97
+	vGIO2+Ni2Igyjrr8Hixd7+3bxvrWmevE0mA9c=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=s97CGtkQLJFcNShVYvHFnX1W6C+6hLtzEvUmnQcyjmmS+EzfhlWJejRjHh0lSa3vZP
+	cyQci7gM4Hbi1HBHupId5ipEo4uEXynFIzy1LDEhzKgv+cyJKFvR3SvMsaC2IWslxYzX
+	aBLv8JVn9Ql5tflb5+ynE/RqL2kw1tWp6bZ18=
+Received: by 10.223.7.26 with SMTP id b26mr825439fab.119.1303219273891;
+	Tue, 19 Apr 2011 06:21:13 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id j18sm1932240faa.42.2011.04.19.06.21.12
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 19 Apr 2011 06:21:13 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 19 Apr 2011 15:18:41 +0200
-Message-ID: <iok23h$rqo$1@dough.gmane.org>
-References: <1303213631-7082-1-git-send-email-michael.lippautz@gmail.com>	<iojvfl$aue$1@dough.gmane.org>
-	<BANLkTindS0_R+7PrTWPizgT+hAm0yvEe4g@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <BANLkTindS0_R+7PrTWPizgT+hAm0yvEe4g@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-oe] fakeroot: Add LIC_FILES_CHKSUM
+Date: Tue, 19 Apr 2011 15:21:06 +0200
+Message-Id: <1303219266-5204-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.5.rc1
+Subject: [PATCH] qt4-x11-free: fix recipe name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,64 +42,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Apr 2011 13:21:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 19 Apr 2011 13:23:36 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* reported by Franz Leitl
 
-On 19-04-11 14:47, Michael Lippautz wrote:
-> 2011/4/19 Koen Kooi <koen@dominion.thruhere.net>:
-> On 19-04-11 13:47, Michael Lippautz wrote:
->>>> Signed-off-by: Michael Lippautz <michael.lippautz@gmail.com>
->>>> ---
->>>>  meta-oe/recipes-core/fakeroot/fakeroot_1.12.4.bb |    1 +
-> 
-> Thank you for your patch, but I'm not sure if it should go in or not. In
-> oe-core we switched to pseudo-native as fakeroot-native replacement, so
-> the fakeroot recipe seems redundant.
-> Does anyone have a need for fakeroot(-native) or can it get deleted?
-> 
-> Michaels immediate need for fakeroot-native was addressed with
-> http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-texasinstruments/commit/
-> 
->> Since I could build the omap-psp kernel with the new fix, I have no
->> need for it anymore. It looks like not that much ppl are actually
->> using the bsp layer, or otherwise this should have come up earlier ;)
-> 
->> meta-oe seems to be free of DEPENDS on fakeroot, however
-> 
->>  openembedded-core/meta $ grep -r "DEPENDS" * | grep "fakeroot"
->>     classes/populate_sdk.bbclass:DEPENDS = "virtual/fakeroot-native sed-native"
->>     recipes-connectivity/portmap/portmap.inc:DEPENDS = "virtual/fakeroot-native"
->>     recipes-core/meta/external-python-tarball.bb:DEPENDS =
->> "opkg-native opkg-utils-native virtual/fakeroot-native sed-native"
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.2.bb |   12 ++++++++++++
+ meta-oe/recipes-qt/qt4/qt4-x22-free_4.7.2.bb |   12 ------------
+ 2 files changed, 12 insertions(+), 12 deletions(-)
+ create mode 100644 meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.2.bb
+ delete mode 100644 meta-oe/recipes-qt/qt4/qt4-x22-free_4.7.2.bb
 
-virtual/fakeroot should point to pseudo now. Anyway, I'll put your patch
-in since it makes fakeroot work, we can always delete it later :)
-
-> 
->> -Michael
-> 
-> regards,
-> 
-> Koen
->>
->>
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNrYuxMkyGM64RGpERAjPwAJ9cY2Wj7R/YfhX8oArRj/qCCm5C2wCfdncX
-B9ktSad9a6n+1P/5lnJS7cs=
-=xfbw
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.2.bb b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.2.bb
+new file mode 100644
+index 0000000..75c6314
+--- /dev/null
++++ b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.2.bb
+@@ -0,0 +1,12 @@
++require qt4-x11-free.inc
++require qt-${PV}.inc
++
++PR = "${INC_PR}.1"
++
++QT_CONFIG_FLAGS_append_armv6 = " -no-neon "
++
++QT_CONFIG_FLAGS += " \
++ -no-embedded \
++ -xrandr \
++ -x11"
++
+diff --git a/meta-oe/recipes-qt/qt4/qt4-x22-free_4.7.2.bb b/meta-oe/recipes-qt/qt4/qt4-x22-free_4.7.2.bb
+deleted file mode 100644
+index 75c6314..0000000
+--- a/meta-oe/recipes-qt/qt4/qt4-x22-free_4.7.2.bb
++++ /dev/null
+@@ -1,12 +0,0 @@
+-require qt4-x11-free.inc
+-require qt-${PV}.inc
+-
+-PR = "${INC_PR}.1"
+-
+-QT_CONFIG_FLAGS_append_armv6 = " -no-neon "
+-
+-QT_CONFIG_FLAGS += " \
+- -no-embedded \
+- -xrandr \
+- -x11"
+-
+-- 
+1.7.5.rc1
 
 
 
