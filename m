@@ -1,34 +1,37 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QC7IJ-0006JW-BJ for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Apr 2011 11:32:29 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QC7G0-0001vW-J5 for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Apr 2011 11:30:04 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Apr 2011 11:30:04 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+Received: from familie-heinold.de ([85.214.48.103]
+	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1QC7Mg-0007rV-Pr
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Apr 2011 11:36:59 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 5688C11000BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Apr 2011 11:30:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 19 Apr 2011 11:34:37 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 4769F11000B0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Apr 2011 11:34:36 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from rhein.familie-heinold.de (g225005039.adsl.alicedsl.de
+	[92.225.5.39]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Apr 2011 11:34:36 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 135C93C0D2; Tue, 19 Apr 2011 11:33:44 +0200 (CEST)
+Date: Tue, 19 Apr 2011 11:33:44 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 19 Apr 2011 11:25:58 +0200
-Message-ID: <iojkf6$aka$2@dough.gmane.org>
-References: <1303169791-19354-1-git-send-email-schnitzeltony@gmx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1303169791-19354-1-git-send-email-schnitzeltony@gmx.de>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH v3] u-boot_overo: current version does not boot / read expansion board ID.
+Message-ID: <20110419093343.GB2989@rhein.zuhause.netz>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: orc 0.4.13 is out
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,31 +45,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Apr 2011 09:32:42 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 19 Apr 2011 09:36:59 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-On 19-04-11 01:36, Andreas Mueller wrote:
-> Patches & settings were taken from [1] / branch overo.
-> For more informations see [2].
-> 
-> Tests performed:
-> * boot kernel 2.6.37 from SDCard
-> * boot kernel 2.6.30 from NAND
-> * variable manipulations setenv printenv savenv
-> * NAND erase
+hm first email got to wrong mailinglist.
 
-NAK, you're going back to an older version without saying why.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+So here its again:
 
-iD8DBQFNrVUmMkyGM64RGpERAsILAJ9RIKrQQ4uysJ54mpPXGgOfBi3IPQCffmS5
-TMysr3kcU25LdpQgybSJH1E=
-=vZ6g
------END PGP SIGNATURE-----
+Hi,
 
+As of today orc 0.4.13 is out with the bugs fixed we hit.
+So someone(maybee Paul) can make a new recipe.
+
+Bye Henning
 
 
