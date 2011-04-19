@@ -1,35 +1,25 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QCAGA-0003jc-89 for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Apr 2011 14:42:27 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QCADt-0002Ww-Ko for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Apr 2011 14:40:05 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Apr 2011 14:40:05 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Apr 2011 14:40:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <philip@balister.org>) id 1QCAND-0003tF-GF
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Apr 2011 14:49:44 +0200
+Received: (qmail 31819 invoked by uid 1003); 19 Apr 2011 12:47:10 -0000
+Received: from unknown (HELO ?192.168.1.167?)
+	(philip@opensdr.com@96.240.165.110)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	19 Apr 2011 12:47:10 -0000
+Message-ID: <4DAD844D.7050800@balister.org>
+Date: Tue, 19 Apr 2011 08:47:09 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.15) Gecko/20110307 Fedora/3.1.9-0.39.b3pre.fc14
+	Thunderbird/3.1.9
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 19 Apr 2011 14:37:38 +0200
-Message-ID: <iojvmj$de8$1@dough.gmane.org>
-References: <1302727726-9362-1-git-send-email-eyalr@ti.com>	<iojko1$bte$3@dough.gmane.org>
-	<BANLkTimCahieiD70bjeSJz=G6oFfTu--Eg@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <BANLkTimCahieiD70bjeSJz=G6oFfTu--Eg@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCHv2] wpa-supplicant: Build from git sources
+References: <1303169791-19354-1-git-send-email-schnitzeltony@gmx.de>
+	<iojkf6$aka$2@dough.gmane.org>
+In-Reply-To: <iojkf6$aka$2@dough.gmane.org>
+Subject: Re: [PATCH v3] u-boot_overo: current version does not boot / read expansion board ID.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,63 +33,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Apr 2011 12:42:27 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 19 Apr 2011 12:49:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 19-04-11 14:13, אייל רייזר wrote:
-> This naming is used in other recipes building from git.
-> Any suggestions of how it should be called instead?
-
-You are entirely right that the filename usually is foo_git.bb, but
-there would be something like PV = "x.y.z+git" inside.
-This is to ensure upgrade paths from e.g. 0.7.3 to the 0.8rc and 0.8
-final release. If I have '0.7.3' installed, upgrading to 'git' is no
-problem, but going from 'git' to '0.8.0' would be, since 'git' will sort
-higher.
-I'm not into wpa-supplicant release versioning, so I don't have the
-right solution, but something like
-
-PV = "0.7.3+0.8rc"
-PR_append = "gitr${SRCPV}"
-
-should work.
-
-regards,
-
-Koen
-
-
-> בתאריך 2011 4 19 12:35, מאת "Koen Kooi" <koen@dominion.thruhere.net> :
-> On 13-04-11 22:48, Eyal Reizer wrote:
->>>> * Builds a new version 0.8.x which is not released yet as a zip file.
->>>> This version has new features like WIFI-direct used in new mac80211
->>>> versions
->>>>
-> 
-> Same thing as with hostap-daemon: 'git' is not a valid PV.
-> 
+On 04/19/2011 05:25 AM, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 19-04-11 01:36, Andreas Mueller wrote:
+>> Patches&  settings were taken from [1] / branch overo.
+>> For more informations see [2].
 >>
->>
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>> Tests performed:
+>> * boot kernel 2.6.37 from SDCard
+>> * boot kernel 2.6.30 from NAND
+>> * variable manipulations setenv printenv savenv
+>> * NAND erase
+>
+> NAK, you're going back to an older version without saying why.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Upstream u-boot should have the expansion patch in already.
 
-iD8DBQFNrYISMkyGM64RGpERAlbGAKCZCfCJloSSt8qNx3nclhPuG1KwKwCfYH6o
-dloJiapREwDLoeMUrdgWGu4=
-=9v/S
------END PGP SIGNATURE-----
-
+Philip
 
 
