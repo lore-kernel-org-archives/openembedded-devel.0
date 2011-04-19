@@ -1,34 +1,39 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <michael.lippautz@gmail.com>) id 1QC9R3-00054c-Sz
+	(envelope-from <eyalreizer@googlemail.com>) id 1QC9qS-0005t1-EW
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Apr 2011 13:49:38 +0200
-Received: by ewy5 with SMTP id 5so1660767ewy.6
+	Tue, 19 Apr 2011 14:15:52 +0200
+Received: by qwh5 with SMTP id 5so3093566qwh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Apr 2011 04:47:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=Ja4FfiOjHgFnW4eXlpnaFS6gP8Z+2QepIteyt5zf+Mc=;
-	b=Eu3HBgCT+nLSrrDUnDpropdG0T/rCWVDb0bplC3tUQqCobNQ7ToTqefflC0T6q7Tfh
-	+kV50KjyuWAu5qMp7XoTpIG6Oz7jubH6kR/6Q3jTtekezjF56wOAQTEsknUFnyfhkpPC
-	DgmWthtkP3qzUXsIV2pCVgXEmGDQnjh3zPlxo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=HVyiJCSiP2hPFHn6GJ+tRYZGf/U0HFuE/Iu6liqP2q7NUvWuKRw5lZibVG6aHGcv1m
-	VVqPUbyATrwAH7EJ1iy+MFLSGD85Tg013243HiKfe7NZbbdjaRgPNPnb/XDJJg5uKAGD
-	Nx+xckvE4udcBr0ao0rup54WrFjqwBqQVBv3c=
-Received: by 10.14.43.133 with SMTP id l5mr2042593eeb.171.1303213635865;
-	Tue, 19 Apr 2011 04:47:15 -0700 (PDT)
-Received: from localhost.localdomain ([62.218.44.194])
-	by mx.google.com with ESMTPS id r48sm4752396eei.23.2011.04.19.04.47.14
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 19 Apr 2011 04:47:15 -0700 (PDT)
-From: Michael Lippautz <michael.lippautz@gmail.com>
+	Tue, 19 Apr 2011 05:13:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=saXhCUsh5cu1WrVu93j6xyNPJLRVjQwVxB/KYcMWKhw=;
+	b=Y1cWTFyZVhozDTpwbHI0IzAMpgF3umIcBPVVfQxlo4TRuSE7yA8AIsJNd5hrkecDvT
+	mKpAos/Ir8aqEq0i3mWSECjsG23u8oifWL8YjX6jtbpf+e1b7lXM2UnQ4TRA/cOk0d19
+	ON2V9iqSX1LZz9TEAhr1m+x2YL7/h2WxYmQb0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=SRLEP2HUeoZwZ4a5/+k/qB0bV4+ae/zQw4ubDaUpO5Q0GcuIFKdsv4Dr8kz2LEKd7s
+	HFXQQHmjFdxAvPavfObw/0vGGuJEDnAtNDnLm1+X2reg0uIZQewQLYERM6xvDWJs4wAl
+	vyhe2tNQSXQbZsl6z/d/WLnBKXfK8Ln5lVqHY=
+MIME-Version: 1.0
+Received: by 10.229.114.200 with SMTP id f8mr4375076qcq.68.1303215210493; Tue,
+	19 Apr 2011 05:13:30 -0700 (PDT)
+Received: by 10.229.224.14 with HTTP; Tue, 19 Apr 2011 05:13:30 -0700 (PDT)
+Received: by 10.229.224.14 with HTTP; Tue, 19 Apr 2011 05:13:30 -0700 (PDT)
+In-Reply-To: <iojko1$bte$3@dough.gmane.org>
+References: <1302727726-9362-1-git-send-email-eyalr@ti.com>
+	<iojko1$bte$3@dough.gmane.org>
+Date: Tue, 19 Apr 2011 07:13:30 -0500
+Message-ID: <BANLkTimCahieiD70bjeSJz=G6oFfTu--Eg@mail.gmail.com>
+From: =?UTF-8?B?15DXmdeZ15wg16jXmdeZ15bXqA==?= <eyalreizer@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Apr 2011 13:47:11 +0200
-Message-Id: <1303213631-7082-1-git-send-email-michael.lippautz@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-Subject: [meta-oe] fakeroot: Add LIC_FILES_CHKSUM
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCHv2] wpa-supplicant: Build from git sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,27 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Apr 2011 11:49:38 -0000
+X-List-Received-Date: Tue, 19 Apr 2011 12:15:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Michael Lippautz <michael.lippautz@gmail.com>
----
- meta-oe/recipes-core/fakeroot/fakeroot_1.12.4.bb |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
-
-diff --git a/meta-oe/recipes-core/fakeroot/fakeroot_1.12.4.bb b/meta-oe/recipes-core/fakeroot/fakeroot_1.12.4.bb
-index c265749..1cc5602 100644
---- a/meta-oe/recipes-core/fakeroot/fakeroot_1.12.4.bb
-+++ b/meta-oe/recipes-core/fakeroot/fakeroot_1.12.4.bb
-@@ -2,6 +2,7 @@ DESCRIPTION = "Gives a fake root environment"
- HOMEPAGE = "http://fakeroot.alioth.debian.org"
- SECTION = "base"
- LICENSE = "GPL"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=7686b00e9859a1a04043d33452bae823"
- PR = "r2"
- 
- SRC_URI = "\
--- 
-1.7.3.4
-
-
+This naming is used in other recipes building from git.
+Any suggestions of how it should be called instead?
+=D7=91=D7=AA=D7=90=D7=A8=D7=99=D7=9A 2011 4 19 12:35, =D7=9E=D7=90=D7=AA "K=
+oen Kooi" <koen@dominion.thruhere.net> :
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 13-04-11 22:48, Eyal Reizer wrote:
+>> * Builds a new version 0.8.x which is not released yet as a zip file.
+>> This version has new features like WIFI-direct used in new mac80211
+>> versions
+>>
+>
+> Same thing as with hostap-daemon: 'git' is not a valid PV.
+>
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFNrVZBMkyGM64RGpERAiFKAJ0Qogin9nEKl1EAjRyxvlXaGJAFhQCfcVf1
+> dOwRpnAJEiCi00ExVgZitQM=3D
+> =3Dzcin
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
