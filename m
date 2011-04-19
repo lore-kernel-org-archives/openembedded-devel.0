@@ -1,35 +1,34 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1QC6mF-0002Am-Ol
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Apr 2011 10:59:19 +0200
-Received: from [2001:638:602:1183:41b:71ff:97b5:93d5] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1QC6jy-00085r-Ke by authid <stefan@sostec.de> with cram_md5
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QC7Dc-0004t5-0d for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Apr 2011 11:27:38 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QC7BG-0007ze-76 for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Apr 2011 11:25:10 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Apr 2011 11:25:10 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Apr 2011 10:57:00 +0200
-Received: from stefan by excalibur.local with local (Exim 4.75)
-	(envelope-from <stefan@excalibur.local>) id 1QC6jx-0003fa-Mk
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Apr 2011 10:56:57 +0200
-Date: Tue, 19 Apr 2011 10:56:57 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Tue, 19 Apr 2011 11:25:10 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110419085657.GB13833@excalibur.local>
-References: <1302898356-22075-1-git-send-email-GNUtoo@no-log.org>
-	<20110418181707.GG24192@jama.jama.net>
-MIME-Version: 1.0
-In-Reply-To: <20110418181707.GG24192@jama.jama.net>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
-	autolearn=ham version=3.2.5
-Subject: Re: [PATCH] xserver-nodm-init 2.0: remove DEFAULT_PREFERENCE = "-1"
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 19 Apr 2011 11:24:47 +0200
+Message-ID: <iojkcv$aka$1@dough.gmane.org>
+References: <cover.1303154850.git.michael.lippautz@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <cover.1303154850.git.michael.lippautz@gmail.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [oe-meta 0/2] pull request: vim, wget
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,59 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Apr 2011 08:59:19 -0000
-X-Groupsio-MsgNum: 31306
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="FL5UXtIhxfXey3p5"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 19 Apr 2011 09:27:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---FL5UXtIhxfXey3p5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Hello.
+On 18-04-11 21:32, Michael Lippautz wrote:
+> Re-import of vim/gvim/vim-tiny and wget.
+> 
+> * Clean vim recipe and update to 7.2.446 (446=patchset)
+> * Clean wget (ssl check using staging_dir)
+> 
+> Pull URL: git://gitorious.org/oe-zoid/meta-openembedded.git
+>   Branch: master
+>   Browse: http://gitorious.org/oe-zoid/meta-openembedded/commits/master
 
-On Mon, 2011-04-18 at 20:17, Martin Jansa wrote:
-> On Fri, Apr 15, 2011 at 10:12:36PM +0200, Denis 'GNUtoo' Carikli wrote:
-> > That fix was made in order to prevent distributions like Angstrom2010
-> >   from picking the 1.0 version:
-> > Angstrom 2008 picked the 2.0 version while Angstrom 2010 use the 1.0 ve=
-rsion.
-> >   That can prevent Xorg session from starting on the target device(like=
- bug20 in my case):
-> > The 1.0 lacks the following session start:
-> >     xinit /etc/X11/Xsession -- `which $XSERVER` $ARGS >/var/log/Xsessio=
-n.log 2>&1
-> > And has that instead:
-> >     /etc/X11/Xserver &
-> > Which has the effect of starting Xorg only(and not the session,display =
-manager etc...)
-> >=20
-> > Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
->=20
-> Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
-
-Acked-by: Stefan Schmidt <stefan@buglabs.net>
-
-I did run into this problem as well and pinned angstrom to this
-version to avoid it. Removing the default preference makes more sense
-to me. Allowing other to use it as well.
-
-regards
-Stefan Schmidt
-
---FL5UXtIhxfXey3p5
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
+merged, thanks
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-Comment: http://www.datenfreihafen.org/contact.html
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEARECAAYFAk2tTlkACgkQbNSsvd31FmX4lgCgi5hhaX5h6Eccvuu/UAIuj0fZ
-IQkAoKf0uBL+HrEL4CphjW6QD+l/Y8qc
-=TQNr
+iD8DBQFNrVTfMkyGM64RGpERAvWKAKC42t0l/m7qEQm8Ifp19yyol4OGcACcCKFi
+jvD3xecu+T2cMZoyx+QK1fY=
+=sFkX
 -----END PGP SIGNATURE-----
 
---FL5UXtIhxfXey3p5--
+
+
