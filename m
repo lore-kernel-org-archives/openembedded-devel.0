@@ -1,26 +1,35 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1QC7kG-0001Yd-BH
+Received: from mail.multimedia-labs.de ([82.149.226.172])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <obi@opendreambox.org>) id 1QC8rQ-0004CA-0N
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Apr 2011 12:01:20 +0200
-Received: (qmail invoked by alias); 19 Apr 2011 09:58:54 -0000
-Received: from p5B0A290D.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.41.13]
-	by mail.gmx.net (mp017) with SMTP; 19 Apr 2011 11:58:54 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18vQwlt1dgvO7ORhV3dBygECe9JuN9nXmIAZ3wH1O
-	eLp7O8d1DtcyL3
-From: Andreas Mueller <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Apr 2011 11:54:43 +0200
-User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
-References: <1303169791-19354-1-git-send-email-schnitzeltony@gmx.de>
-	<iojkf6$aka$2@dough.gmane.org>
-In-Reply-To: <iojkf6$aka$2@dough.gmane.org>
+	Tue, 19 Apr 2011 13:12:48 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id A93B0315044B
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Apr 2011 13:10:26 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id dMebef+6nFdW
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Apr 2011 13:10:21 +0200 (CEST)
+Received: from [172.22.22.61] (drms-590cf9dc.pool.mediaWays.net
+	[89.12.249.220])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 9BFC631502D7
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Apr 2011 13:10:21 +0200 (CEST)
+Message-ID: <4DAD6D9B.2000909@opendreambox.org>
+Date: Tue, 19 Apr 2011 13:10:19 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.15) Gecko/20110411 Lightning/1.0b2 Thunderbird/3.1.9
 MIME-Version: 1.0
-Message-Id: <201104191154.43865.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: [PATCH v3] u-boot_overo: current version does not boot / read expansion board ID.
+To: openembedded-devel@lists.openembedded.org
+References: <1302996215.3122.31.camel@utx.lan>
+In-Reply-To: <1302996215.3122.31.camel@utx.lan>
+Subject: Re: [PATCH 1/5] binconfig.bbclass: search configs in D instead of S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,26 +43,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Apr 2011 10:01:20 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 19 Apr 2011 11:12:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Tuesday 19 April 2011 11:25:58 Koen Kooi wrote:
-> On 19-04-11 01:36, Andreas Mueller wrote:
-> > Patches & settings were taken from [1] / branch overo.
-> > For more informations see [2].
-> > 
-> > Tests performed:
-> > * boot kernel 2.6.37 from SDCard
-> > * boot kernel 2.6.30 from NAND
-> > * variable manipulations setenv printenv savenv
-> > * NAND erase
+On 04/17/2011 01:23 AM, Stanislav Brabec wrote:
+> Searching for binconfig in S makes more problems than it
+> brings benefits. Searching in the installed root seems to be more logical.
 > 
-> NAK, you're going back to an older version without saying why.
-The version currently found in OE does not boot (from SDCard). I mentioned this 
-in the patch title.
+> Fixes following subtle breakages:
+> - binconfig are populated with a different name that upstream intended
+> - populated binconfig files that were not intended to be populated
+> 
+> It fixes at least ncurses, which populates ncurses-config instead of
+> ncurses5-config and ncursesw5-config, causing secondary breakages.
+> 
+> Signed-off-by: Stanislav Brabec <utx@penguin.cz>
 
-Andreas
+Acked-by: Andreas Oberritter <obi@opendreambox.org>
+
+> diff --git a/classes/binconfig.bbclass b/classes/binconfig.bbclass
+> index b3b2236..3d2bf0f 100644
+> --- a/classes/binconfig.bbclass
+> +++ b/classes/binconfig.bbclass
+> @@ -49,7 +49,7 @@ binconfig_package_preprocess () {
+>  SYSROOT_PREPROCESS_FUNCS += "binconfig_sysroot_preprocess"
+>  
+>  binconfig_sysroot_preprocess () {
+> -	for config in `find ${S} -name '${BINCONFIG_GLOB}'`; do
+> +	for config in `find ${D} -name '${BINCONFIG_GLOB}'`; do
+>  		configname=`basename $config`
+>  		install -d ${SYSROOT_DESTDIR}${STAGING_BINDIR_CROSS}
+>  		cat $config | sed ${@get_binconfig_mangle(d)} > ${SYSROOT_DESTDIR}${STAGING_BINDIR_CROSS}/$configname
+> 
 
 
