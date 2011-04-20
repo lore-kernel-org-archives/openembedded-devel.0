@@ -1,32 +1,34 @@
-Received: from ns.penguin.cz ([84.21.108.25])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <utx@penguin.cz>) id 1QCZfU-0002D7-MV
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Apr 2011 17:50:16 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id B0EB91416BC5
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QCaAh-0002uV-Bc for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Apr 2011 18:22:31 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QCa8H-0007DS-KM for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Apr 2011 18:20:01 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Apr 2011 18:20:01 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2011 17:48:19 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id cYWMT5DRpmFr
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2011 17:48:19 +0200 (CEST)
-Received: from [10.20.5.32] (nat.scz.novell.com [213.151.88.252])
-	by ns.penguin.cz (Postfix) with ESMTP id 90DA31416BA5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2011 17:48:19 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	Wed, 20 Apr 2011 18:20:01 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4DAD6FF9.8040700@opendreambox.org>
-References: <1302996247.3122.32.camel@utx.lan>
-	<4DAD6FF9.8040700@opendreambox.org>
-Date: Wed, 20 Apr 2011 17:47:55 +0200
-Message-ID: <1303314475.17572.261.camel@oct.suse.cz>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 20 Apr 2011 18:19:43 +0200
+Message-ID: <ion12v$6gp$1@dough.gmane.org>
+References: <1303305977-28224-1-git-send-email-Martin.Jansa@gmail.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.1 
-Subject: Re: [PATCH 2/5] pkgconfig.bbclass: search configs in D instead of S
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1303305977-28224-1-git-send-email-Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH] testlab: drop PE: from package version when looking for package filename
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,38 +42,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2011 15:50:16 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 20 Apr 2011 16:22:31 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Andreas Oberritter wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> > diff --git a/classes/pkgconfig.bbclass b/classes/pkgconfig.bbclass
-> > index d96b708..00298ca 100644
-> > --- a/classes/pkgconfig.bbclass
-> > +++ b/classes/pkgconfig.bbclass
-> > @@ -14,7 +14,7 @@ SYSROOT_PREPROCESS_FUNCS += "pkgconfig_sysroot_preprocess"
-> >  
-> >  pkgconfig_sysroot_preprocess () {
-> >  	install -d ${SYSROOT_DESTDIR}${PKG_CONFIG_DIR}
-> > -	for pc in `find ${S} -name '*.pc' -type f | grep -v -- '-uninstalled.pc$'`; do
-> > +	for pc in `find ${D} -name '*.pc' -type f`; do
-> >  		pcname=`basename $pc`
-> >  		if [ ! -f ${SYSROOT_DESTDIR}${PKG_CONFIG_DIR}/$pcname ]; then
-> >  			oenote "$pcname was not installed."
-> > 
+On 20-04-11 15:26, Martin Jansa wrote:
+> * reported by Otavio Salvador
 > 
-> This function just prints a warning, if it finds a .pc file that didn't
-> get installed. Using ${D} at this point makes this function a no-op.
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+Acked-by: Koen Kooi <koen@dominion.thruhere.net>
+
+> ---
+>  classes/testlab.bbclass |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
 > 
-> It might be better to just remove it completely.
+> diff --git a/classes/testlab.bbclass b/classes/testlab.bbclass
+> index 6581ec3..a6033ce 100644
+> --- a/classes/testlab.bbclass
+> +++ b/classes/testlab.bbclass
+> @@ -36,7 +36,7 @@ if [ -e  ${IMAGE_ROOTFS}/etc/opkg ] && [ "${ONLINE_PACKAGE_MANAGEMENT}" = "full"
+>  	echo -e "digraph depends {\n    node [shape=plaintext]" > ${TESTLAB_DIR}/depends.dot
+>  
+>  	for pkg in $(opkg-cl ${IPKG_ARGS} list_installed | awk '{print $1}') ; do 
+> -		opkg-cl ${IPKG_ARGS} info $pkg | grep -B 7 -A 7 "^Status.* \(\(installed\)\|\(unpacked\)\)" | awk '/^Package/ {printf $2"_"} /^Version/ {printf $2"_"} /^Archi/ {print $2".ipk"}'  >> ${TESTLAB_DIR}/installed-packages.txt
+> +		opkg-cl ${IPKG_ARGS} info $pkg | grep -B 7 -A 7 "^Status.* \(\(installed\)\|\(unpacked\)\)" | awk '/^Package/ {printf $2"_"} /^Version/ {sub(/.*:/,"", $2); printf $2"_"} /^Archi/ {print $2".ipk"}'  >> ${TESTLAB_DIR}/installed-packages.txt
+>  
+>      		for depends in $(opkg-cl ${IPKG_ARGS} info $pkg | grep ^Depends) ; do 
+>          		echo "$pkg OPP $depends;" | grep -v "(" | grep -v ")" | grep -v "$pkg OPP Depends" | sed -e 's:,::g' -e 's:-:_:g' -e 's:\.:_:g' -e 's:+::g' |sed 's:OPP:->:g' >> ${TESTLAB_DIR}/depends.dot
 
-Good hint. So I'll not submit this patch. Your commit c2c8fe4 already
-did the right fix here.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+iD8DBQFNrwefMkyGM64RGpERAvH3AKC1yhxHHyy9sqWt4AiYtSB9TzFY/gCfchu5
+a/SeS7LWBOGRjLOeyFN+rNs=
+=uIQJ
+-----END PGP SIGNATURE-----
 
 
 
