@@ -1,34 +1,27 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from bsmtp3.bon.at ([213.33.87.17] helo=lbmfmo03.bon.at)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QCXSt-0005tO-5v
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Apr 2011 15:29:07 +0200
-Received: by fxm19 with SMTP id 19so476884fxm.6
+	(envelope-from <pgsellmann@portner-elektronik.at>)
+	id 1QCXar-00066N-Ow for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Apr 2011 15:37:21 +0200
+Received: from bsmtp.bon.at (unknown [192.168.181.101])
+	by lbmfmo03.bon.at (Postfix) with ESMTP id 8AED1CE1DB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2011 06:26:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=+UrCl2nXOxlIWy8Sx8OwLntxhuXwsxF5hLWBGA8b0o0=;
-	b=aV7Y0A0dvU+ggt326haPm2QFTz/R2W5gUBK+bIqjZ+tIj5rGBMjfiRFj+rsRD/eheP
-	XYugUe0yxhIMn0YpUO3LZZGaPApxGpITgUbDheblyX6et4xuq4Nbj1q1qRXNLW2whpcq
-	Hj4AZ5HRj3vAqL42JF/SdsHN/nNnvuefP4iio=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=IGE0NsK1yozhwaG6D/T2QakInP0gOgqCviJbZnlP8YErdcsNWjHMoKj1nOIiT3ruDA
-	4PpQ1XuOZLfwiSn+0U5LBE3APFM2398gzrNDQnHap4E+UiTnqhS5mojPPe0wqdSSzfdh
-	IHSh/e+4zGgKN9NDYyfYZvCHbHRylLuU0HVes=
-Received: by 10.223.75.133 with SMTP id y5mr2093266faj.136.1303306003293;
-	Wed, 20 Apr 2011 06:26:43 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id e17sm292516fak.0.2011.04.20.06.26.41
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 20 Apr 2011 06:26:42 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 20 Apr 2011 15:34:57 +0200 (CEST)
+Received: from aspire.localdomain (unknown [88.116.171.82])
+	by bsmtp.bon.at (Postfix) with ESMTP id 9E2CFCDF91
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Apr 2011 15:34:44 +0200 (CEST)
+From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+Organization: PORTNER Elektronik
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Apr 2011 15:26:17 +0200
-Message-Id: <1303305977-28224-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.5.rc1
-Subject: [PATCH] testlab: drop PE: from package version when looking for package filename
+Date: Wed, 20 Apr 2011 15:34:51 +0200
+User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
+	)
+References: <20110419093343.GB2989@rhein.zuhause.netz>
+In-Reply-To: <20110419093343.GB2989@rhein.zuhause.netz>
+MIME-Version: 1.0
+Message-Id: <201104201534.51856.pgsellmann@portner-elektronik.at>
+Subject: Re: orc 0.4.13 is out
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,30 +35,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2011 13:29:07 -0000
+X-List-Received-Date: Wed, 20 Apr 2011 13:37:21 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-* reported by Otavio Salvador
+Am Dienstag 19 April 2011, 11:33:44 schrieb Henning Heinold:
+> Hi,
+> 
+> hm first email got to wrong mailinglist.
+> 
+> So here its again:
+> 
+> Hi,
+> 
+> As of today orc 0.4.13 is out with the bugs fixed we hit.
+> So someone(maybee Paul) can make a new recipe.
+> 
+> Bye Henning
+> 
+Sorry, but this version breaks recipe schroedinger-1.0.9 for my build.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- classes/testlab.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+schroorc.c: In function '_backup_orc_add2_rshift_add_s16_22_op':
+schroorc.c:93:3: error: 'int16_t' undeclared (first use in this function)
 
-diff --git a/classes/testlab.bbclass b/classes/testlab.bbclass
-index 6581ec3..a6033ce 100644
---- a/classes/testlab.bbclass
-+++ b/classes/testlab.bbclass
-@@ -36,7 +36,7 @@ if [ -e  ${IMAGE_ROOTFS}/etc/opkg ] && [ "${ONLINE_PACKAGE_MANAGEMENT}" = "full"
- 	echo -e "digraph depends {\n    node [shape=plaintext]" > ${TESTLAB_DIR}/depends.dot
- 
- 	for pkg in $(opkg-cl ${IPKG_ARGS} list_installed | awk '{print $1}') ; do 
--		opkg-cl ${IPKG_ARGS} info $pkg | grep -B 7 -A 7 "^Status.* \(\(installed\)\|\(unpacked\)\)" | awk '/^Package/ {printf $2"_"} /^Version/ {printf $2"_"} /^Archi/ {print $2".ipk"}'  >> ${TESTLAB_DIR}/installed-packages.txt
-+		opkg-cl ${IPKG_ARGS} info $pkg | grep -B 7 -A 7 "^Status.* \(\(installed\)\|\(unpacked\)\)" | awk '/^Package/ {printf $2"_"} /^Version/ {sub(/.*:/,"", $2); printf $2"_"} /^Archi/ {print $2".ipk"}'  >> ${TESTLAB_DIR}/installed-packages.txt
- 
-     		for depends in $(opkg-cl ${IPKG_ARGS} info $pkg | grep ^Depends) ; do 
-         		echo "$pkg OPP $depends;" | grep -v "(" | grep -v ")" | grep -v "$pkg OPP Depends" | sed -e 's:,::g' -e 's:-:_:g' -e 's:\.:_:g' -e 's:+::g' |sed 's:OPP:->:g' >> ${TESTLAB_DIR}/depends.dot
--- 
-1.7.5.rc1
+full log on http://88.116.171.82/angstrom/files/log.do_compile.12189
 
+neither 0.4.12 nor 0.4.13 works, only 0.4.10
+
+Build Configuration:
+BB_VERSION        = "1.10.2"
+METADATA_BRANCH   = "master"
+METADATA_REVISION = "5fe98c8"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "pcontrol_g20"
+DISTRO            = "angstrom"
+DISTRO_VERSION    = "v20110420"
+TARGET_FPU        = "soft"
+
+
+Look also into Dirac homepage http://diracvideo.org/
+There is a statement about orc 0.4.10
+I suspect schroedinger is bound to this specific version.
+
+
+Peter
 
 
