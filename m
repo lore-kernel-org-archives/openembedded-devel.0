@@ -1,34 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QCSrX-0001uV-Fm for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Apr 2011 10:34:17 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QCSp5-0000t1-QM for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Apr 2011 10:31:43 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2011 10:31:43 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <michael.lippautz@gmail.com>) id 1QCTGH-0005vB-7Q
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Apr 2011 10:59:49 +0200
+Received: by ewy5 with SMTP id 5so146886ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2011 10:31:43 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 20 Apr 2011 01:57:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:subject:date:message-id:x-mailer;
+	bh=7Qj13alaJjl3wDlstI4K4W6rwAz5OtyHXSIP6jJLGAc=;
+	b=ukJje/e694Y1b7y1VxaoTnr5tMrHW8BQmAzpL51aJTfjTv/MLyQnBrEAE2hbBUh4An
+	BsJPhLbcwaJEQTy/1GRmPF7F33GWGUxtzfJVy/xUi+7TkutqF/cpvZf7TmiGs9RgFswJ
+	8O0fxmd8h0o/4NYXkWP9UHXgYRPEnzt0Ck/bg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer;
+	b=vdWT/6w2mxoCuCLllBgmJl1jHeLdDHxQgy+o68f7qCxElu/Va0ZbPJS3iXw4LT/ZAb
+	D4do6t1I+qaZ4MB/i+7yQ27lgvfhbP7WuGzsj3UOjzwRZbZqgpWEXdYPpKusAnTgd/EY
+	x5Mtqb192K/NeU45ZavQtqJx53klDCR1nbfTQ=
+Received: by 10.213.0.206 with SMTP id 14mr3052769ebc.4.1303289845957;
+	Wed, 20 Apr 2011 01:57:25 -0700 (PDT)
+Received: from localhost.localdomain ([62.218.44.194])
+	by mx.google.com with ESMTPS id m55sm496854eei.22.2011.04.20.01.57.24
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 20 Apr 2011 01:57:25 -0700 (PDT)
+From: Michael Lippautz <michael.lippautz@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 20 Apr 2011 10:31:25 +0200
-Message-ID: <iom5kt$2h5$1@dough.gmane.org>
-References: <cover.1303283391.git.michael.lippautz@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <cover.1303283391.git.michael.lippautz@gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-oe 0/6] add syslog-ng/eventlog/libnet
+Date: Wed, 20 Apr 2011 10:57:20 +0200
+Message-Id: <cover.1303289630.git.michael.lippautz@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [oe-meta][PATCHv2] 0/3] Pull request v2: syslog-ng, eventlog, libnet
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,75 +42,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2011 08:34:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 20 Apr 2011 08:59:49 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Corrected (PR) and squashed version
 
-On 20-04-11 09:18, Michael Lippautz wrote:
-> This is an re-import and upgrade from org.oe.dev. If everything is fine I can 
-> also apply them to org.oe.dev.
-> 
-> libnet: 
-> * libnet at packetfactory.net is dead... 
-> * Get the latest version from a github fork that claimes to update and maintain 
->   it
-> * README tells it's compatible with libnet-1.1
-> * dynamic build, instead of static
-> * removed cruft that is handled by autotools class
-> * removed already applied patches and rebased endianess one
-> 
-> eventlog: minor upgrade
-> 
-> syslog-ng:
-> * adapt EXTRA_OECONF
-> * move to latest stable (3.2.2)
-> 
-> Pull URL: git://gitorious.org/oe-zoid/meta-openembedded.git
->   Branch: master
->   Browse: http://gitorious.org/oe-zoid/meta-openembedded/commits/master
-> 
-> Thanks,
->     Michael Lippautz <michael.lippautz@gmail.com>
-> ---
-> 
-> 
-> Michael Lippautz (6):
+Pull URL: git://gitorious.org/oe-zoid/meta-openembedded.git
+  Branch: master
+  Browse: http://gitorious.org/oe-zoid/meta-openembedded/commits/master
 
-Thanks for the patchset!
+Thanks,
+    Michael Lippautz <michael.lippautz@gmail.com>
+---
 
-Could please squasH
 
->   syslog-ng: Re-import 2.0.5 from org.oe.dev
->   syslog-ng: Update to 3.2.2
+Michael Lippautz (3):
+  libnet: Clean and upgrade (see below)
+  eventlog: Clean and update to 0.2.12
+  syslog-ng: Update to 3.2.2
 
-and
+ .../libnet/libnet-1.1.5/fix-endianess-test.patch   |   38 +++
+ .../recipes-connectivity/libnet/libnet_1.1.5.bb    |   24 ++
+ .../recipes-support/eventlog/eventlog_0.2.12.bb    |   11 +
+ meta-oe/recipes-support/syslog-ng/files/initscript |   45 +++
+ .../recipes-support/syslog-ng/files/syslog-ng.conf |  338 ++++++++++++++++++++
+ meta-oe/recipes-support/syslog-ng/syslog-ng.inc    |   78 +++++
+ .../recipes-support/syslog-ng/syslog-ng_3.2.2.bb   |   10 +
+ 7 files changed, 544 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/libnet/libnet-1.1.5/fix-endianess-test.patch
+ create mode 100644 meta-oe/recipes-connectivity/libnet/libnet_1.1.5.bb
+ create mode 100644 meta-oe/recipes-support/eventlog/eventlog_0.2.12.bb
+ create mode 100644 meta-oe/recipes-support/syslog-ng/files/initscript
+ create mode 100644 meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
+ create mode 100644 meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+ create mode 100644 meta-oe/recipes-support/syslog-ng/syslog-ng_3.2.2.bb
 
->   eventlog: Re-import 0.2.5 from org.oe.dev
->   eventlog: Clean recipe and upgrade to 0.2.12
-
-and
-
->   libnet: Re-import 1.1.2.1 from org.oe.dev
->   libnet: Clean and upgrade (see below)
-
-Being able to trace the origin isn't worth having broken recipes at
-various points due to missing checksums IMO.
-If people disagree with that I'm willing to stance my stance on that,
-though.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNrpndMkyGM64RGpERAkk7AJ9POYE6e38p9gV6J6u7lvB556iNhACfRXmq
-6+REBlvfKEQgeCzTXC6vEX4=
-=zXuI
------END PGP SIGNATURE-----
+-- 
+1.7.3.4
 
 
 
