@@ -1,31 +1,30 @@
-Received: from vms173011pub.verizon.net ([206.46.173.11])
+Received: from ns.penguin.cz ([84.21.108.25])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1QCbgc-0004Ub-Ak
+	(envelope-from <utx@penguin.cz>) id 1QCfEG-0003po-Kq
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Apr 2011 19:59:34 +0200
-Received: from gandalf.denix.org ([unknown] [108.18.140.4])
-	by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LJY00I35PUH2FW0@vms173011.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	20 Apr 2011 12:56:47 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id A81FB14AF5B; Wed,
-	20 Apr 2011 13:56:41 -0400 (EDT)
-Date: Wed, 20 Apr 2011 13:56:41 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 20 Apr 2011 23:46:32 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 562461417197;
+	Wed, 20 Apr 2011 23:44:36 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 8NSnfEZf-XhA; Wed, 20 Apr 2011 23:44:36 +0200 (CEST)
+Received: from [192.168.1.2] (233-15-80-78.tmcz.cz [78.80.15.233])
+	by ns.penguin.cz (Postfix) with ESMTP id E1FA21416BA5;
+	Wed, 20 Apr 2011 23:44:35 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20110420175641.GA25373@denix.org>
-References: <1302727726-9362-1-git-send-email-eyalr@ti.com>
-	<iojko1$bte$3@dough.gmane.org>
-	<BANLkTimCahieiD70bjeSJz=G6oFfTu--Eg@mail.gmail.com>
-	<iojvmj$de8$1@dough.gmane.org>
-	<BANLkTi=PX+c_=1ghKQt0131OMtS7YQzR-A@mail.gmail.com>
-	<EC51CDB0807A51469E0C9CB8CF72D65F03320BB47A@dnce02.ent.ti.com>
-MIME-version: 1.0
-In-reply-to: <EC51CDB0807A51469E0C9CB8CF72D65F03320BB47A@dnce02.ent.ti.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Cc: "Kooi, Koen" <k-kooi@ti.com>
-Subject: Re: [PATCHv2] wpa-supplicant: Build from git sources
+In-Reply-To: <1303297156.3979.46.camel@mattotaupa>
+References: <1302996215.3122.31.camel@utx.lan>
+	<4DAD6D9B.2000909@opendreambox.org>
+	<1303297156.3979.46.camel@mattotaupa>
+Date: Wed, 20 Apr 2011 23:44:10 +0200
+Message-ID: <1303335850.15291.3.camel@utx.lan>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.1 
+Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Subject: Re: [PATCH 1/5] binconfig.bbclass: search configs in D instead of S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,94 +38,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2011 17:59:34 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 20 Apr 2011 21:46:32 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 20, 2011 at 05:36:15PM +0200, Reizer, Eyal wrote:
-> Hi Koen,
-> 
-> adding such a PV to the recipe causes the files that are located under 
-> recipes/wpa-supplicant-git/ and are part of SRC_URI not to be found as it 
-> appears that it now looks for them under:
-> 
-> recipes/wpa-supplicant-0.7.3+0.8.x/
+Paul Menzel wrote:
+> > On 04/17/2011 01:23 AM, Stanislav Brabec wrote:
 
-You have two options:
+> > > It fixes at least ncurses, which populates ncurses-config instead o=
+f
+> > > ncurses5-config and ncursesw5-config, causing secondary breakages.
+>=20
+> Is `alsa-utils` =E2=80=93 as written in your introduction 0/5 =E2=80=93=
+ the only
+> secondary breakage you found? Is that a run time problem? I can build
+> `alsa-utils-1.0.24.2-r1` just fine using `minimal`.
 
-1. Move the files under recipes/wpa-supplicant-0.7.3+0.8.x/
-2. Keep them at recipes/wpa-supplicant-git/ but add to the recipe:
-FILESPATHPKG .= ":wpa-supplicant-git"
+Probably more breakages existed - basically anything that uses ncurses
+may be broken. Due to ncurses breakage, alsa-utils probably used
+ncurses?*-config from your host system, and as a consequence also host
+system includes. It may work, it may break in runtime, it may cause
+miscompilation. On hosts without ncurses development files build failed.
 
-And, BTW, please don't use 0.8.x in the PV! Use 0.7.3+0.8.0-rc or something.
+--=20
 
--- 
-Denys
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
-> How do I work around this?
-> 
-> Best Regards,
-> Eyal
-> On Tue, Apr 19, 2011 at 7:37 AM, Koen Kooi <koen@dominion.thruhere.net<mailto:koen@dominion.thruhere.net>> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> On 19-04-11 14:13, ???????? ?????????? wrote:
-> > This naming is used in other recipes building from git.
-> > Any suggestions of how it should be called instead?
-> You are entirely right that the filename usually is foo_git.bb<http://foo_git.bb/>, but
-> there would be something like PV = "x.y.z+git" inside.
-> This is to ensure upgrade paths from e.g. 0.7.3 to the 0.8rc and 0.8
-> final release. If I have '0.7.3' installed, upgrading to 'git' is no
-> problem, but going from 'git' to '0.8.0' would be, since 'git' will sort
-> higher.
-> I'm not into wpa-supplicant release versioning, so I don't have the
-> right solution, but something like
-> 
-> PV = "0.7.3+0.8rc"
-> PR_append = "gitr${SRCPV}"
-> 
-> should work.
-> 
-> regards,
-> 
-> Koen
-> 
-> 
-> > ???????????? 2011 4 19 12:35, ?????? "Koen Kooi" <koen@dominion.thruhere.net<mailto:koen@dominion.thruhere.net>> :
-> > On 13-04-11 22:48, Eyal Reizer wrote:
-> >>>> * Builds a new version 0.8.x which is not released yet as a zip file.
-> >>>> This version has new features like WIFI-direct used in new mac80211
-> >>>> versions
-> >>>>
-> >
-> > Same thing as with hostap-daemon: 'git' is not a valid PV.
-> >
-> >>
-> >>
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org<mailto:Openembedded-devel@lists.openembedded.org>
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org<mailto:Openembedded-devel@lists.openembedded.org>
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> iD8DBQFNrYISMkyGM64RGpERAlbGAKCZCfCJloSSt8qNx3nclhPuG1KwKwCfYH6o
-> dloJiapREwDLoeMUrdgWGu4=
-> =9v/S
-> -----END PGP SIGNATURE-----
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org<mailto:Openembedded-devel@lists.openembedded.org>
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
