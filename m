@@ -1,41 +1,25 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eyalreizer@googlemail.com>) id 1QCY1T-00008N-HZ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Apr 2011 16:04:51 +0200
-Received: by qwh5 with SMTP id 5so406063qwh.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2011 07:02:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=NE78y/wZN8KkRUd+eLEUk7rpLxsEvx4YBbtqamJePHk=;
-	b=uil8Kg92gBbloeuXSPBv8eHKeDxfjWczwEyi58JBNBllv8LAqoDUVWdEyk9vZsIE7O
-	Xk0kXXcDpawQhBnMdTYbxdUYk3cBXwTO3JI6G97+bl26/lf8eLJWjacsL/eJzBHAv1Og
-	h2W/OR+BxycjN+TWcblYhr/4hbeSI5mN6b3m0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	b=F81PoJQeEgV4yRhqekFJYm+eVqeP8c8GYtL+4ElYhTToSM+iNKbFN5fI/LjO6C5sDq
-	/GDz0hS/a3voPBAlQyI5Pfqmf5agh4oFu6qiNWC7KOaJlZ8/Vk+2yY4qPmSbupg/dVuI
-	nRCdaHuJcOpfP8M2EKdklb9lGfgMQEFZC0DeQ=
-MIME-Version: 1.0
-Received: by 10.229.106.5 with SMTP id v5mr5503610qco.12.1303308145097; Wed,
-	20 Apr 2011 07:02:25 -0700 (PDT)
-Received: by 10.229.70.207 with HTTP; Wed, 20 Apr 2011 07:02:25 -0700 (PDT)
-In-Reply-To: <iojvmj$de8$1@dough.gmane.org>
-References: <1302727726-9362-1-git-send-email-eyalr@ti.com>
-	<iojko1$bte$3@dough.gmane.org>
-	<BANLkTimCahieiD70bjeSJz=G6oFfTu--Eg@mail.gmail.com>
-	<iojvmj$de8$1@dough.gmane.org>
-Date: Wed, 20 Apr 2011 09:02:25 -0500
-Message-ID: <BANLkTi=PX+c_=1ghKQt0131OMtS7YQzR-A@mail.gmail.com>
-From: =?UTF-8?B?15DXmdeZ15wg16jXmdeZ15bXqA==?= <eyalreizer@googlemail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QCY1t-0000Dn-GV for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Apr 2011 16:05:17 +0200
+Received: from f053033014.adsl.alicedsl.de ([78.53.33.14]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QCY08-0007op-41 for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Apr 2011 14:03:28 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: eyalr@ti.com
-Subject: Re: [PATCHv2] wpa-supplicant: Build from git sources
+In-Reply-To: <1303307478.3979.60.camel@mattotaupa>
+References: <20110419093343.GB2989@rhein.zuhause.netz>
+	<201104201534.51856.pgsellmann@portner-elektronik.at>
+	<1303307478.3979.60.camel@mattotaupa>
+Date: Wed, 20 Apr 2011 16:02:55 +0200
+Message-ID: <1303308175.3979.62.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: [PATCH 1/2] orc_0.4.13: set `DEFAULT_PREFERENCE = "-1"`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,87 +33,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2011 14:04:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 20 Apr 2011 14:05:17 -0000
+X-Groupsio-MsgNum: 31372
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-zlJdRBRyztZ0jG/woJzn"
+
+--=-zlJdRBRyztZ0jG/woJzn
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Koen,
+Date: Tue, 19 Apr 2011 10:38:34 +0200
 
-adding such a PV to the recipe causes the files that are located under
-recipes/wpa-supplicant-git/ and are part of SRC_URI not to be found as it
-appears that it now looks for them under:
+Task compile of `schroedinger_1.0.9` fails with Orc 0.4.13 the same way as =
+with Orc 0.4.12 with the following error message [1][2].
 
-recipes/wpa-supplicant-0.7.3+0.8.x/
+	[=E2=80=A6]
+	schroorc.c: In function '_backup_orc_add2_rshift_add_s16_22_op':
+	schroorc.c:93:3: error: 'int16_t' undeclared (first use in this function)
+	schroorc.c:93:3: note: each undeclared identifier is reported only once fo=
+r each function it appears in
+	[=E2=80=A6]
 
-How do I work around this?
+Therefore we disable the default preference of Orc 0.4.13 for the time bein=
+g until the problems get resolved.
 
-Best Regards,
-Eyal
+[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-April/0321=
+10.html
+[2] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-April/0319=
+66.html
 
-On Tue, Apr 19, 2011 at 7:37 AM, Koen Kooi <koen@dominion.thruhere.net>wrot=
-e:
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ recipes/orc/orc_0.4.13.bb |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 19-04-11 14:13, =D7=90=D7=99=D7=99=D7=9C =D7=A8=D7=99=D7=99=D7=96=D7=
-=A8 wrote:
-> > This naming is used in other recipes building from git.
-> > Any suggestions of how it should be called instead?
->
-> You are entirely right that the filename usually is foo_git.bb, but
-> there would be something like PV =3D "x.y.z+git" inside.
-> This is to ensure upgrade paths from e.g. 0.7.3 to the 0.8rc and 0.8
-> final release. If I have '0.7.3' installed, upgrading to 'git' is no
-> problem, but going from 'git' to '0.8.0' would be, since 'git' will sort
-> higher.
-> I'm not into wpa-supplicant release versioning, so I don't have the
-> right solution, but something like
->
-> PV =3D "0.7.3+0.8rc"
-> PR_append =3D "gitr${SRCPV}"
->
-> should work.
->
-> regards,
->
-> Koen
->
->
-> > =D7=91=D7=AA=D7=90=D7=A8=D7=99=D7=9A 2011 4 19 12:35, =D7=9E=D7=90=D7=
-=AA "Koen Kooi" <koen@dominion.thruhere.net> :
-> > On 13-04-11 22:48, Eyal Reizer wrote:
-> >>>> * Builds a new version 0.8.x which is not released yet as a zip file=
-.
-> >>>> This version has new features like WIFI-direct used in new mac80211
-> >>>> versions
-> >>>>
-> >
-> > Same thing as with hostap-daemon: 'git' is not a valid PV.
-> >
-> >>
-> >>
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFNrYISMkyGM64RGpERAlbGAKCZCfCJloSSt8qNx3nclhPuG1KwKwCfYH6o
-> dloJiapREwDLoeMUrdgWGu4=3D
-> =3D9v/S
->  -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/recipes/orc/orc_0.4.13.bb b/recipes/orc/orc_0.4.13.bb
+index 107dea6..adfe693 100644
+--- a/recipes/orc/orc_0.4.13.bb
++++ b/recipes/orc/orc_0.4.13.bb
+@@ -1,4 +1,6 @@
+ require orc.inc
+=20
++DEFAULT_PREFERENCE =3D "-1"
++
+ SRC_URI[orc.md5sum] =3D "f6d0aed003f67c91933c22d9e5f1696a"
+ SRC_URI[orc.sha256sum] =3D "0fb8952ff688fe4b6f3b68cad49d4fb3cdfd28643b4341=
+0170601cc1f1e49601"
+--=20
+1.7.4.4
 
+
+--=-zlJdRBRyztZ0jG/woJzn
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2u548ACgkQPX1aK2wOHViy6gCdGOEYa3U8vcp/WZkBn+nb6GOU
+HnQAnRRYNSu6yWimER1XRQbWV1ooTqJK
+=+qb6
+-----END PGP SIGNATURE-----
+
+--=-zlJdRBRyztZ0jG/woJzn--
