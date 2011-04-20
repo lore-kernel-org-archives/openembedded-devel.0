@@ -1,27 +1,24 @@
-Received: from bsmtp3.bon.at ([213.33.87.17] helo=lbmfmo03.bon.at)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pgsellmann@portner-elektronik.at>)
-	id 1QCXar-00066N-Ow for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Apr 2011 15:37:21 +0200
-Received: from bsmtp.bon.at (unknown [192.168.181.101])
-	by lbmfmo03.bon.at (Postfix) with ESMTP id 8AED1CE1DB
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2011 15:34:57 +0200 (CEST)
-Received: from aspire.localdomain (unknown [88.116.171.82])
-	by bsmtp.bon.at (Postfix) with ESMTP id 9E2CFCDF91
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2011 15:34:44 +0200 (CEST)
-From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
-Organization: PORTNER Elektronik
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QCXe1-0006DS-3B for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Apr 2011 15:40:37 +0200
+Received: from f053033014.adsl.alicedsl.de ([78.53.33.14]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QCXcD-0006Lo-Dl for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Apr 2011 13:38:45 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Apr 2011 15:34:51 +0200
-User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
-	)
-References: <20110419093343.GB2989@rhein.zuhause.netz>
-In-Reply-To: <20110419093343.GB2989@rhein.zuhause.netz>
-MIME-Version: 1.0
-Message-Id: <201104201534.51856.pgsellmann@portner-elektronik.at>
-Subject: Re: orc 0.4.13 is out
+In-Reply-To: <201104201405.58174.sgh@sgh.dk>
+References: <201104201007.04378.sgh@sgh.dk> <201104201219.22239.sgh@sgh.dk>
+	<1303296345.3979.33.camel@mattotaupa> <201104201405.58174.sgh@sgh.dk>
+Date: Wed, 20 Apr 2011 15:38:12 +0200
+Message-ID: <1303306692.3979.53.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: Please pull 'wvstreams-fixes' of http://sgh.dk/~sgh/oe.git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,51 +32,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2011 13:37:21 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 20 Apr 2011 13:40:37 -0000
+X-Groupsio-MsgNum: 31369
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-eYmgr2L0bgmbcs4ThzSx"
 
-Am Dienstag 19 April 2011, 11:33:44 schrieb Henning Heinold:
-> Hi,
-> 
-> hm first email got to wrong mailinglist.
-> 
-> So here its again:
-> 
-> Hi,
-> 
-> As of today orc 0.4.13 is out with the bugs fixed we hit.
-> So someone(maybee Paul) can make a new recipe.
-> 
-> Bye Henning
-> 
-Sorry, but this version breaks recipe schroedinger-1.0.9 for my build.
+--=-eYmgr2L0bgmbcs4ThzSx
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-schroorc.c: In function '_backup_orc_add2_rshift_add_s16_22_op':
-schroorc.c:93:3: error: 'int16_t' undeclared (first use in this function)
-
-full log on http://88.116.171.82/angstrom/files/log.do_compile.12189
-
-neither 0.4.12 nor 0.4.13 works, only 0.4.10
-
-Build Configuration:
-BB_VERSION        = "1.10.2"
-METADATA_BRANCH   = "master"
-METADATA_REVISION = "5fe98c8"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "pcontrol_g20"
-DISTRO            = "angstrom"
-DISTRO_VERSION    = "v20110420"
-TARGET_FPU        = "soft"
+Dear S=C3=B8ren,
 
 
-Look also into Dirac homepage http://diracvideo.org/
-There is a statement about orc 0.4.10
-I suspect schroedinger is bound to this specific version.
+Am Mittwoch, den 20.04.2011, 14:05 +0200 schrieb S=C3=B8ren Holm:
+
+> Please use this url instead. Somehow http export is not working.
+>=20
+>    git://github.com/sgh/oe.git
+
+thank you. That worked.
 
 
-Peter
+Thanks,
 
+Paul
 
+--=-eYmgr2L0bgmbcs4ThzSx
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk2u4cQACgkQPX1aK2wOHVjuWwCeNTyiTMtB8VuYej8mPZOMrXTf
+1boAn1TPtsdxuMlhu5y67D/qBRsR1UbV
+=SAcj
+-----END PGP SIGNATURE-----
+
+--=-eYmgr2L0bgmbcs4ThzSx--
