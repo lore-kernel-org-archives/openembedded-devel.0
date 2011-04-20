@@ -1,31 +1,37 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mporter@ti.com>)
-	id 1QCfhB-0004Xx-9K; Thu, 21 Apr 2011 00:16:26 +0200
-Received: from dlep34.itg.ti.com ([157.170.170.115])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id p3KM8r8e024931
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Wed, 20 Apr 2011 17:08:53 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id p3KM8rbG028189;
-	Wed, 20 Apr 2011 17:08:53 -0500 (CDT)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p3KM8rEV018873;
-	Wed, 20 Apr 2011 17:08:53 -0500 (CDT)
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE73.ent.ti.com
-	(157.170.170.88) with Microsoft SMTP Server id 8.3.106.1;
-	Wed, 20 Apr 2011 17:08:35 -0500
-Received: from beef.ohporter.com (h56-39.vpn.ti.com [172.24.56.39])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id p3KM8qbi012948;
-	Wed, 20 Apr 2011 17:08:52 -0500
-From: Matt Porter <mporter@ti.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 20 Apr 2011 18:00:06 -0400
-Message-ID: <1303336806-30682-1-git-send-email-mporter@ti.com>
-X-Mailer: git-send-email 1.7.1
+	(envelope-from <martin.jansa@gmail.com>) id 1QCgJv-0004zE-PE
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Apr 2011 00:56:27 +0200
+Received: by gwb11 with SMTP id 11so373863gwb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Apr 2011 15:53:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=ICGdZNR4KVo64ozrLGS6wmIXwXDIkOuJS+h6wq/5Wew=;
+	b=UOXks4x9l+JbUf+7NT5wqPHpgU2iYIECKdRQQl7JDaRaWNiDfd5DgLtTRpxcG+QvD6
+	foxZ8Re9eqWvVBcI3ye/GMa42qtCI0A9lvBBhqnIG8FpGg6HkoEmLXUBnbkwbKshP9XD
+	RDVmnIvlSsm3VskswdA1LRK275B7y0fmb4A1U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=TrfMiaXN9HZ1gFcN/oOTPlt1GNAx0T3+EZDq3cqtUglu4Ywf5xqXpKf+DOPXE7jHEv
+	J42Hl4t8bGNZXfE4TrFDGpxA99QWwZPW//3odjjiF7ScJb/TfdqoQHZAl9xkqbBG/lao
+	7VWv//K3Arc5gI+Ka0riYcdb/kDAxkxN8VTJc=
 MIME-Version: 1.0
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: [PATCH][2011.03-maintenance] ffmpeg: switch to libav
+Received: by 10.146.114.26 with SMTP id m26mr4671052yac.30.1303340034354; Wed,
+	20 Apr 2011 15:53:54 -0700 (PDT)
+Received: by 10.146.83.11 with HTTP; Wed, 20 Apr 2011 15:53:54 -0700 (PDT)
+In-Reply-To: <E1QCddz-0006Jg-CA@melo.openembedded.org>
+References: <E1QCddz-0006Jg-CA@melo.openembedded.org>
+Date: Thu, 21 Apr 2011 00:53:54 +0200
+Message-ID: <BANLkTike9cMCGdViiV32CfAvYgKOgBajcw@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: openembedded-commits@openembedded.org
+Subject: Re: [oe-commits] Stanislav Brabec : tcl: Adapt tclConfig.sh modification to binconfig. class change.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,34 +45,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2011 22:16:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 20 Apr 2011 22:56:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-From: Koen Kooi <koen@openembedded.org>
+On Wed, Apr 20, 2011 at 10:04 PM, git version control
+<git@git.openembedded.org> wrote:
+> Module: openembedded.git
+> Branch: master
+> Commit: 7c4aeaf7e2a2b96e700cd5230b0e7b415ab08eab
+> URL: =A0 =A0http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcomm=
+it;h=3D7c4aeaf7e2a2b96e700cd5230b0e7b415ab08eab
+>
+> Author: Stanislav Brabec <utx@penguin.cz>
+> Date: =A0 Wed Apr 20 19:55:49 2011 +0000
+>
+> tcl: Adapt tclConfig.sh modification to binconfig.class change.
+>
+> Signed-off-by: Stanislav Brabec <utx@penguin.cz>
+>
+> ---
+>
+> =A0recipes/tcltk/tcl_8.5.8.bb | =A0 13 +++++--------
+> =A01 files changed, 5 insertions(+), 8 deletions(-)
+>
+> diff --git a/recipes/tcltk/tcl_8.5.8.bb b/recipes/tcltk/tcl_8.5.8.bb
+> index 9bb6859..82bc1bf 100644
+> --- a/recipes/tcltk/tcl_8.5.8.bb
+> +++ b/recipes/tcltk/tcl_8.5.8.bb
+> @@ -2,7 +2,7 @@ DESCRIPTION =3D "Tool Command Language"
+> =A0HOMEPAGE =3D "http://tcl.sourceforge.net"
+> =A0SECTION =3D "devel/tcltk"
+> =A0LICENSE =3D "tcl"
+> -PR =3D "r8"
+> +PR =3D "r9"
+>
+> =A0SRC_URI =3D "\
+> =A0 ${SOURCEFORGE_MIRROR}/tcl/tcl${PV}-src.tar.gz \
+> @@ -33,8 +33,7 @@ do_compile_prepend_pn-tcl () {
+> =A0 =A0 =A0 =A0 sed -i -e 's:./tclsh :tclsh :g' Makefile
+> =A0}
+>
+> -do_install() {
+> - =A0 =A0 =A0 =A0autotools_do_install
+> +do_install_append() {
+> =A0 =A0 =A0 =A0 # Stage a few extra headers to make tk happy
+> =A0 =A0 =A0 =A0 install -d ${D}${includedir}/tcl-${PV}/generic
+> =A0 =A0 =A0 =A0 install -m 0644 ../generic/*.h ${D}${includedir}/tcl-${PV=
+}/generic
+> @@ -43,6 +42,9 @@ do_install() {
+> =A0 =A0 =A0 =A0 install -m 0644 *Unix*.h ${D}${includedir}/tcl-${PV}/unix=
+/
+> =A0 =A0 =A0 =A0 rm -f ${D}${includedir}/regex.h
+> =A0 =A0 =A0 =A0 ln -sf tclsh8.5 ${D}${bindir}/tclsh
+> + =A0 =A0 =A0 # trick: We set it to incorrect value but binconfig will fi=
+x it
+> + =A0 =A0 =A0 # correctly for both target and staging package.
+> + =A0 =A0 =A0 sed -i 's:${includedir}/tcl-private:${STAGING_INCDIR}/tcl-$=
+{PV}:' ${D}${libdir}/tclConfig.sh
+> =A0}
+>
+> =A0PACKAGES =3D+ "${PN}-lib"
+> @@ -53,8 +55,3 @@ FILES_${PN}-dev +=3D "${libdir}/tclConfig.sh"
+>
+> =A0BINCONFIG_GLOB =3D "*Config.sh"
+> =A0BBCLASSEXTEND =3D "native"
+> -
+> -tcl_sysroot() {
+> - =A0 =A0 =A0 =A0sed -i 's:${includedir}/tcl-private:${STAGING_INCDIR}/tc=
+l-${PV}:' tclConfig.sh
+> -}
+> -
 
-cherry-picked Koen's mainline libav patch to fix invalid git.ffmpeg.org repo
+Hi,
 
-Signed-off-by: Koen Kooi <koen@openembedded.org>
-Signed-off-by: Matt Porter <mporter@ti.com>
----
- recipes/ffmpeg/ffmpeg_git.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+there is still
+tcl_8.5.8.bb:SYSROOT_PREPROCESS_FUNCS =3D+ "tcl_sysroot"
+and removing tcl_sysroot function results in new warning
 
-diff --git a/recipes/ffmpeg/ffmpeg_git.bb b/recipes/ffmpeg/ffmpeg_git.bb
-index d84653a..57b2c31 100644
---- a/recipes/ffmpeg/ffmpeg_git.bb
-+++ b/recipes/ffmpeg/ffmpeg_git.bb
-@@ -12,7 +12,7 @@ DEFAULT_PREFERENCE = "-1"
- DEFAULT_PREFERENCE_angstrom = "1"
- DEFAULT_PREFERENCE_shr = "1"
- 
--SRC_URI = "git://git.ffmpeg.org/ffmpeg.git;protocol=git"
-+SRC_URI = "git://git.libav.org/libav.git;protocol=git"
- 
- S = "${WORKDIR}/git"
- B = "${S}/build.${HOST_SYS}.${TARGET_SYS}"
--- 
-1.7.1
-
+NOTE: package tcl-native-8.5.8-r9: task do_populate_sysroot: Started
+WARNING: Function tcl_sysroot doesn't exist
+NOTE: package tcl-native-8.5.8-r9: task do_populate_sysroot: Succeeded
 
 
