@@ -1,25 +1,32 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QCY33-0000JD-G5 for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Apr 2011 16:06:29 +0200
-Received: from f053033014.adsl.alicedsl.de ([78.53.33.14]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QCY1J-0007pC-5I for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Apr 2011 14:04:41 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <msmith@cbnco.com>) id 1QCY3W-0000PI-Q7
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Apr 2011 16:06:59 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 8ED42BA76F0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Apr 2011 10:04:36 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 22933-01-4 for
+	<openembedded-devel@lists.openembedded.org>; 
+	Wed, 20 Apr 2011 10:04:36 -0400 (EDT)
+Received: from [172.20.22.83] (dmzgw2.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 86207BA7653
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Apr 2011 10:03:51 -0400 (EDT)
+Message-ID: <4DAEE7C6.2030101@cbnco.com>
+Date: Wed, 20 Apr 2011 10:03:50 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1303307478.3979.60.camel@mattotaupa>
-References: <20110419093343.GB2989@rhein.zuhause.netz>
-	<201104201534.51856.pgsellmann@portner-elektronik.at>
-	<1303307478.3979.60.camel@mattotaupa>
-Date: Wed, 20 Apr 2011 16:04:08 +0200
-Message-ID: <1303308248.3979.63.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: [PATCH 2/2] orc: add version 0.4.11
+References: <cover.1303283391.git.michael.lippautz@gmail.com>
+	<iom5kt$2h5$1@dough.gmane.org>
+In-Reply-To: <iom5kt$2h5$1@dough.gmane.org>
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: [meta-oe 0/6] add syslog-ng/eventlog/libnet
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,53 +40,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2011 14:06:29 -0000
-X-Groupsio-MsgNum: 31373
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-VKJjTTgOKuIp1xhAnyKH"
+X-List-Received-Date: Wed, 20 Apr 2011 14:06:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---=-VKJjTTgOKuIp1xhAnyKH
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Koen Kooi wrote:
+> Being able to trace the origin isn't worth having broken recipes at
+> various points due to missing checksums IMO.
 
-Date: Wed, 20 Apr 2011 11:50:37 +0200
+Yeah, in this case meta-oe is getting a newer version of a recipe than 
+what's in old OE, so there's not much reason to keep the history.
 
-This version is build tested using `angstrom-2010.x` and `minimal{,-uclibc}=
-` for `MACHINE =3D "beagleboard"`. `schroedinger_1.0.9.bb` also seems to bu=
-ild fine with this version.
+On the other hand if a recipe is imported into meta-oe, and it has a few 
+lines changed from the same version of the old OE recipe, it'd be nice 
+to see the changes in a commit on either old OE or meta-oe so we don't 
+lose the reason for the change.
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
- recipes/orc/orc_0.4.11.bb |    4 ++++
- 1 files changed, 4 insertions(+), 0 deletions(-)
- create mode 100644 recipes/orc/orc_0.4.11.bb
-
-diff --git a/recipes/orc/orc_0.4.11.bb b/recipes/orc/orc_0.4.11.bb
-new file mode 100644
-index 0000000..e101068
---- /dev/null
-+++ b/recipes/orc/orc_0.4.11.bb
-@@ -0,0 +1,4 @@
-+require orc.inc
-+
-+SRC_URI[orc.md5sum] =3D "b8b0b148d319422c3ad250c29483b3c4"
-+SRC_URI[orc.sha256sum] =3D "6ec60521a11339eda36f1e2210d08ae95010d769575e47=
-1aaf365b89bca8d031"
---=20
-1.7.4.4
+Mike
 
 
---=-VKJjTTgOKuIp1xhAnyKH
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk2u59gACgkQPX1aK2wOHVhD0wCfWtCDWtM5XJBqbVY8n5t0gjfz
-Rv8An14GbNc1NrI1pEdz/AV35JKGFFBf
-=mr6S
------END PGP SIGNATURE-----
-
---=-VKJjTTgOKuIp1xhAnyKH--
