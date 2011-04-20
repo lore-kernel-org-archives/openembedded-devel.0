@@ -1,30 +1,31 @@
-Received: from ns.penguin.cz ([84.21.108.25])
+Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <utx@penguin.cz>) id 1QCfEG-0003po-Kq
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Apr 2011 23:46:32 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 562461417197;
-	Wed, 20 Apr 2011 23:44:36 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8NSnfEZf-XhA; Wed, 20 Apr 2011 23:44:36 +0200 (CEST)
-Received: from [192.168.1.2] (233-15-80-78.tmcz.cz [78.80.15.233])
-	by ns.penguin.cz (Postfix) with ESMTP id E1FA21416BA5;
-	Wed, 20 Apr 2011 23:44:35 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1303297156.3979.46.camel@mattotaupa>
-References: <1302996215.3122.31.camel@utx.lan>
-	<4DAD6D9B.2000909@opendreambox.org>
-	<1303297156.3979.46.camel@mattotaupa>
-Date: Wed, 20 Apr 2011 23:44:10 +0200
-Message-ID: <1303335850.15291.3.camel@utx.lan>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.1 
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: Re: [PATCH 1/5] binconfig.bbclass: search configs in D instead of S
+	(envelope-from <mporter@ti.com>)
+	id 1QCfhB-0004Xx-9K; Thu, 21 Apr 2011 00:16:26 +0200
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id p3KM8r8e024931
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Wed, 20 Apr 2011 17:08:53 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id p3KM8rbG028189;
+	Wed, 20 Apr 2011 17:08:53 -0500 (CDT)
+Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p3KM8rEV018873;
+	Wed, 20 Apr 2011 17:08:53 -0500 (CDT)
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE73.ent.ti.com
+	(157.170.170.88) with Microsoft SMTP Server id 8.3.106.1;
+	Wed, 20 Apr 2011 17:08:35 -0500
+Received: from beef.ohporter.com (h56-39.vpn.ti.com [172.24.56.39])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id p3KM8qbi012948;
+	Wed, 20 Apr 2011 17:08:52 -0500
+From: Matt Porter <mporter@ti.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 20 Apr 2011 18:00:06 -0400
+Message-ID: <1303336806-30682-1-git-send-email-mporter@ti.com>
+X-Mailer: git-send-email 1.7.1
+MIME-Version: 1.0
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [PATCH][2011.03-maintenance] ffmpeg: switch to libav
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,33 +39,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2011 21:46:32 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 20 Apr 2011 22:16:27 -0000
+Content-Type: text/plain
 
-Paul Menzel wrote:
-> > On 04/17/2011 01:23 AM, Stanislav Brabec wrote:
+From: Koen Kooi <koen@openembedded.org>
 
-> > > It fixes at least ncurses, which populates ncurses-config instead o=
-f
-> > > ncurses5-config and ncursesw5-config, causing secondary breakages.
->=20
-> Is `alsa-utils` =E2=80=93 as written in your introduction 0/5 =E2=80=93=
- the only
-> secondary breakage you found? Is that a run time problem? I can build
-> `alsa-utils-1.0.24.2-r1` just fine using `minimal`.
+cherry-picked Koen's mainline libav patch to fix invalid git.ffmpeg.org repo
 
-Probably more breakages existed - basically anything that uses ncurses
-may be broken. Due to ncurses breakage, alsa-utils probably used
-ncurses?*-config from your host system, and as a consequence also host
-system includes. It may work, it may break in runtime, it may cause
-miscompilation. On hosts without ncurses development files build failed.
+Signed-off-by: Koen Kooi <koen@openembedded.org>
+Signed-off-by: Matt Porter <mporter@ti.com>
+---
+ recipes/ffmpeg/ffmpeg_git.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
---=20
-
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+diff --git a/recipes/ffmpeg/ffmpeg_git.bb b/recipes/ffmpeg/ffmpeg_git.bb
+index d84653a..57b2c31 100644
+--- a/recipes/ffmpeg/ffmpeg_git.bb
++++ b/recipes/ffmpeg/ffmpeg_git.bb
+@@ -12,7 +12,7 @@ DEFAULT_PREFERENCE = "-1"
+ DEFAULT_PREFERENCE_angstrom = "1"
+ DEFAULT_PREFERENCE_shr = "1"
+ 
+-SRC_URI = "git://git.ffmpeg.org/ffmpeg.git;protocol=git"
++SRC_URI = "git://git.libav.org/libav.git;protocol=git"
+ 
+ S = "${WORKDIR}/git"
+ B = "${S}/build.${HOST_SYS}.${TARGET_SYS}"
+-- 
+1.7.1
 
 
 
