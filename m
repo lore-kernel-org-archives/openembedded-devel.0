@@ -1,39 +1,34 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QCWW6-0006fT-CI
+	(envelope-from <martin.jansa@gmail.com>) id 1QCXSt-0005tO-5v
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Apr 2011 14:28:22 +0200
-Received: by fxm19 with SMTP id 19so438939fxm.6
+	Wed, 20 Apr 2011 15:29:07 +0200
+Received: by fxm19 with SMTP id 19so476884fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2011 05:25:59 -0700 (PDT)
+	Wed, 20 Apr 2011 06:26:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=b+sokTNdZd/irrdGMvxEwoKVgllgrDrb3cL9NFZk28g=;
-	b=QCiEyadrwtwf2ZXuWfs43OvlZ8TJO8c0VdPGZtZAYtniDTEgaRmrF/m1LQoEt33tRe
-	PbRdF1DXGDO1MBuHmk2NNc1MQIgYILTleNF0KkOt9FEuT+sYCltYd8Ie+f0Ln8WDHQI9
-	CY5jc2OJ31TmQY+tCvEsmhHsS1aPXVII2s9rQ=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=+UrCl2nXOxlIWy8Sx8OwLntxhuXwsxF5hLWBGA8b0o0=;
+	b=aV7Y0A0dvU+ggt326haPm2QFTz/R2W5gUBK+bIqjZ+tIj5rGBMjfiRFj+rsRD/eheP
+	XYugUe0yxhIMn0YpUO3LZZGaPApxGpITgUbDheblyX6et4xuq4Nbj1q1qRXNLW2whpcq
+	Hj4AZ5HRj3vAqL42JF/SdsHN/nNnvuefP4iio=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=U+x00U3AyRvdVyhfxjZhgB2/7ag3LzhiuwLO/ww9s6mLCq2V7ANtMkFjKP0wA6HT8S
-	/Bhj54RSCbFqJTDmhDPUwhYMj1hmZ3b4RocyCjOPJwMj22QbTlDZID3o5c8f8v5Gulc/
-	eaRuFg+Y57m8yd8dMmNVY4RUjznZS8txqLjAI=
-Received: by 10.223.57.5 with SMTP id a5mr2022683fah.90.1303302359243;
-	Wed, 20 Apr 2011 05:25:59 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=IGE0NsK1yozhwaG6D/T2QakInP0gOgqCviJbZnlP8YErdcsNWjHMoKj1nOIiT3ruDA
+	4PpQ1XuOZLfwiSn+0U5LBE3APFM2398gzrNDQnHap4E+UiTnqhS5mojPPe0wqdSSzfdh
+	IHSh/e+4zGgKN9NDYyfYZvCHbHRylLuU0HVes=
+Received: by 10.223.75.133 with SMTP id y5mr2093266faj.136.1303306003293;
+	Wed, 20 Apr 2011 06:26:43 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id j12sm275121fax.9.2011.04.20.05.25.57
+	by mx.google.com with ESMTPS id e17sm292516fak.0.2011.04.20.06.26.41
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 20 Apr 2011 05:25:58 -0700 (PDT)
-Date: Wed, 20 Apr 2011 14:25:57 +0200
+	Wed, 20 Apr 2011 06:26:42 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110420122557.GJ5675@jama.jama.net>
-References: <201104200130.49444.patda293@student.liu.se>
-MIME-Version: 1.0
-In-Reply-To: <201104200130.49444.patda293@student.liu.se>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: libnl1-1.1-r5 static libs leads to syntax errors in nmap-3.81
+Date: Wed, 20 Apr 2011 15:26:17 +0200
+Message-Id: <1303305977-28224-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.5.rc1
+Subject: [PATCH] testlab: drop PE: from package version when looking for package filename
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,96 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2011 12:28:22 -0000
-X-Groupsio-MsgNum: 31366
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="o71xDhNo7p97+qVi"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 20 Apr 2011 13:29:07 -0000
 
---o71xDhNo7p97+qVi
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* reported by Otavio Salvador
 
-On Wed, Apr 20, 2011 at 01:30:49AM +0200, Patrik Dahlstr=F6m (student) wrot=
-e:
-> If libnl1-1.1-r5 is built with only static libs, the configure script of=
-=20
-> nmap-3.81 will fail to find a usable pcap and fall back on its own=20
-> implementation (libpcap-possiblymodified). The configure script of that=
-=20
-> implementation suffers from syntax errors that I never managed to fix.
-> Here is a excerpt from config.log of nmap-3.81:
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ classes/testlab.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Hi,
+diff --git a/classes/testlab.bbclass b/classes/testlab.bbclass
+index 6581ec3..a6033ce 100644
+--- a/classes/testlab.bbclass
++++ b/classes/testlab.bbclass
+@@ -36,7 +36,7 @@ if [ -e  ${IMAGE_ROOTFS}/etc/opkg ] && [ "${ONLINE_PACKAGE_MANAGEMENT}" = "full"
+ 	echo -e "digraph depends {\n    node [shape=plaintext]" > ${TESTLAB_DIR}/depends.dot
+ 
+ 	for pkg in $(opkg-cl ${IPKG_ARGS} list_installed | awk '{print $1}') ; do 
+-		opkg-cl ${IPKG_ARGS} info $pkg | grep -B 7 -A 7 "^Status.* \(\(installed\)\|\(unpacked\)\)" | awk '/^Package/ {printf $2"_"} /^Version/ {printf $2"_"} /^Archi/ {print $2".ipk"}'  >> ${TESTLAB_DIR}/installed-packages.txt
++		opkg-cl ${IPKG_ARGS} info $pkg | grep -B 7 -A 7 "^Status.* \(\(installed\)\|\(unpacked\)\)" | awk '/^Package/ {printf $2"_"} /^Version/ {sub(/.*:/,"", $2); printf $2"_"} /^Archi/ {print $2".ipk"}'  >> ${TESTLAB_DIR}/installed-packages.txt
+ 
+     		for depends in $(opkg-cl ${IPKG_ARGS} info $pkg | grep ^Depends) ; do 
+         		echo "$pkg OPP $depends;" | grep -v "(" | grep -v ")" | grep -v "$pkg OPP Depends" | sed -e 's:,::g' -e 's:-:_:g' -e 's:\.:_:g' -e 's:+::g' |sed 's:OPP:->:g' >> ${TESTLAB_DIR}/depends.dot
+-- 
+1.7.5.rc1
 
-please check if there is newer nmap/pcap supporting libnl-2 and if no,
-then try to fix static build like here:
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3D154bd72b1ca8=
-59afcae5ed4fe99ed611a13a475c
-or
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3D849389a02126=
-e3e3bb6b8ca8e26068c386ef699c
 
-and the problem seems to be in pcap not nmap
 
-Regards,
-
-> ...
-> configure:4570: arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-a -mtune=3D=
-cortex-a8=20
-> -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb --
-> sysroot=3D/home/bitbake/build/tmp_beagleboard/sysroots/armv7a-angstrom-li=
-nux-
-> gnueabi -o conftest -fexpensive-optimizations -fomit-frame-pointer -frena=
-me-
-> registers -O2 -ggdb2 -Drecvfrom6_t=3Dsocklen_t -
-> L/home/bitbake/build/tmp_beagleboard/sysroots/armv7a-angstrom-linux-
-> gnueabi/usr/lib/../lib -Wl,-O1 -Wl,--hash-style=3Dgnu conftest.c -lpcap  =
--lm =20
-> >&5
-> /home/bitbake/build/tmp_beagleboard/sysroots/x86_64-
-> linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-
-> angstrom-linux-gnueabi/bin/ld: warning: libnl.so.1, needed by=20
-> /home/bitbake/build/tmp_beagleboard/sysroots/armv7a-angstrom-linux-
-> gnueabi/usr/lib/../lib/libpcap.so, not found (try using -rpath or -rpath-=
-link)
-> ...
->=20
-> If I removed build.only.static.lib.patch from the libnl1-1.1 recipe, the=
-=20
-> missing libnl.so.1.1 shared lib would be built and installed and successi=
-vely=20
-> nmap-3.81 would build and install fine.
->=20
-> --=20
-> MvH / with best regards
-> Patrik Dahlstr=F6m
->=20
-> "Every animal, except man, knows that the fundamental meaning of life is =
-to=20
-> enjoy it" --Samuel Butler
->=20
-> ()  ascii ribbon campaign - against html e-mail=20
-> /\  www.asciiribbon.org   - against proprietary attachments
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---o71xDhNo7p97+qVi
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk2u0NUACgkQN1Ujt2V2gBzYvQCgpN2l0c031BG9KZ4Zcix6BPKS
-zC8An0u7kLn8+bvKuaQDjMYvsfHvZCed
-=IoUS
------END PGP SIGNATURE-----
-
---o71xDhNo7p97+qVi--
