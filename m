@@ -1,34 +1,31 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from vms173011pub.verizon.net ([206.46.173.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QCaAh-0002uV-Bc for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Apr 2011 18:22:31 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QCa8H-0007DS-KM for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Apr 2011 18:20:01 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2011 18:20:01 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2011 18:20:01 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <denis@denix.org>) id 1QCbgc-0004Ub-Ak
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Apr 2011 19:59:34 +0200
+Received: from gandalf.denix.org ([unknown] [108.18.140.4])
+	by vms173011.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LJY00I35PUH2FW0@vms173011.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	20 Apr 2011 12:56:47 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id A81FB14AF5B; Wed,
+	20 Apr 2011 13:56:41 -0400 (EDT)
+Date: Wed, 20 Apr 2011 13:56:41 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 20 Apr 2011 18:19:43 +0200
-Message-ID: <ion12v$6gp$1@dough.gmane.org>
-References: <1303305977-28224-1-git-send-email-Martin.Jansa@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1303305977-28224-1-git-send-email-Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] testlab: drop PE: from package version when looking for package filename
+Message-id: <20110420175641.GA25373@denix.org>
+References: <1302727726-9362-1-git-send-email-eyalr@ti.com>
+	<iojko1$bte$3@dough.gmane.org>
+	<BANLkTimCahieiD70bjeSJz=G6oFfTu--Eg@mail.gmail.com>
+	<iojvmj$de8$1@dough.gmane.org>
+	<BANLkTi=PX+c_=1ghKQt0131OMtS7YQzR-A@mail.gmail.com>
+	<EC51CDB0807A51469E0C9CB8CF72D65F03320BB47A@dnce02.ent.ti.com>
+MIME-version: 1.0
+In-reply-to: <EC51CDB0807A51469E0C9CB8CF72D65F03320BB47A@dnce02.ent.ti.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Cc: "Kooi, Koen" <k-kooi@ti.com>
+Subject: Re: [PATCHv2] wpa-supplicant: Build from git sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,45 +39,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2011 16:22:31 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 20 Apr 2011 17:59:34 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 20-04-11 15:26, Martin Jansa wrote:
-> * reported by Otavio Salvador
+On Wed, Apr 20, 2011 at 05:36:15PM +0200, Reizer, Eyal wrote:
+> Hi Koen,
 > 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-
-Acked-by: Koen Kooi <koen@dominion.thruhere.net>
-
-> ---
->  classes/testlab.bbclass |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
+> adding such a PV to the recipe causes the files that are located under 
+> recipes/wpa-supplicant-git/ and are part of SRC_URI not to be found as it 
+> appears that it now looks for them under:
 > 
-> diff --git a/classes/testlab.bbclass b/classes/testlab.bbclass
-> index 6581ec3..a6033ce 100644
-> --- a/classes/testlab.bbclass
-> +++ b/classes/testlab.bbclass
-> @@ -36,7 +36,7 @@ if [ -e  ${IMAGE_ROOTFS}/etc/opkg ] && [ "${ONLINE_PACKAGE_MANAGEMENT}" = "full"
->  	echo -e "digraph depends {\n    node [shape=plaintext]" > ${TESTLAB_DIR}/depends.dot
->  
->  	for pkg in $(opkg-cl ${IPKG_ARGS} list_installed | awk '{print $1}') ; do 
-> -		opkg-cl ${IPKG_ARGS} info $pkg | grep -B 7 -A 7 "^Status.* \(\(installed\)\|\(unpacked\)\)" | awk '/^Package/ {printf $2"_"} /^Version/ {printf $2"_"} /^Archi/ {print $2".ipk"}'  >> ${TESTLAB_DIR}/installed-packages.txt
-> +		opkg-cl ${IPKG_ARGS} info $pkg | grep -B 7 -A 7 "^Status.* \(\(installed\)\|\(unpacked\)\)" | awk '/^Package/ {printf $2"_"} /^Version/ {sub(/.*:/,"", $2); printf $2"_"} /^Archi/ {print $2".ipk"}'  >> ${TESTLAB_DIR}/installed-packages.txt
->  
->      		for depends in $(opkg-cl ${IPKG_ARGS} info $pkg | grep ^Depends) ; do 
->          		echo "$pkg OPP $depends;" | grep -v "(" | grep -v ")" | grep -v "$pkg OPP Depends" | sed -e 's:,::g' -e 's:-:_:g' -e 's:\.:_:g' -e 's:+::g' |sed 's:OPP:->:g' >> ${TESTLAB_DIR}/depends.dot
+> recipes/wpa-supplicant-0.7.3+0.8.x/
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+You have two options:
 
-iD8DBQFNrwefMkyGM64RGpERAvH3AKC1yhxHHyy9sqWt4AiYtSB9TzFY/gCfchu5
-a/SeS7LWBOGRjLOeyFN+rNs=
-=uIQJ
------END PGP SIGNATURE-----
+1. Move the files under recipes/wpa-supplicant-0.7.3+0.8.x/
+2. Keep them at recipes/wpa-supplicant-git/ but add to the recipe:
+FILESPATHPKG .= ":wpa-supplicant-git"
 
+And, BTW, please don't use 0.8.x in the PV! Use 0.7.3+0.8.0-rc or something.
+
+-- 
+Denys
+
+> How do I work around this?
+> 
+> Best Regards,
+> Eyal
+> On Tue, Apr 19, 2011 at 7:37 AM, Koen Kooi <koen@dominion.thruhere.net<mailto:koen@dominion.thruhere.net>> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> On 19-04-11 14:13, ???????? ?????????? wrote:
+> > This naming is used in other recipes building from git.
+> > Any suggestions of how it should be called instead?
+> You are entirely right that the filename usually is foo_git.bb<http://foo_git.bb/>, but
+> there would be something like PV = "x.y.z+git" inside.
+> This is to ensure upgrade paths from e.g. 0.7.3 to the 0.8rc and 0.8
+> final release. If I have '0.7.3' installed, upgrading to 'git' is no
+> problem, but going from 'git' to '0.8.0' would be, since 'git' will sort
+> higher.
+> I'm not into wpa-supplicant release versioning, so I don't have the
+> right solution, but something like
+> 
+> PV = "0.7.3+0.8rc"
+> PR_append = "gitr${SRCPV}"
+> 
+> should work.
+> 
+> regards,
+> 
+> Koen
+> 
+> 
+> > ???????????? 2011 4 19 12:35, ?????? "Koen Kooi" <koen@dominion.thruhere.net<mailto:koen@dominion.thruhere.net>> :
+> > On 13-04-11 22:48, Eyal Reizer wrote:
+> >>>> * Builds a new version 0.8.x which is not released yet as a zip file.
+> >>>> This version has new features like WIFI-direct used in new mac80211
+> >>>> versions
+> >>>>
+> >
+> > Same thing as with hostap-daemon: 'git' is not a valid PV.
+> >
+> >>
+> >>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org<mailto:Openembedded-devel@lists.openembedded.org>
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org<mailto:Openembedded-devel@lists.openembedded.org>
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> iD8DBQFNrYISMkyGM64RGpERAlbGAKCZCfCJloSSt8qNx3nclhPuG1KwKwCfYH6o
+> dloJiapREwDLoeMUrdgWGu4=
+> =9v/S
+> -----END PGP SIGNATURE-----
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org<mailto:Openembedded-devel@lists.openembedded.org>
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
