@@ -1,32 +1,22 @@
-Received: from mail.cvg.de ([62.153.82.30])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1QCVnR-0003EL-VO
+Received: from cpe.ge-0-2-0-951.faaqnqu1.customer.tele.dk ([93.167.193.22]
+	helo=mail.mikrofyn.com) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <sgh@sgh.dk>) id 1QCWH9-0006PZ-Oy
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Apr 2011 13:42:14 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with SMTP id p3KBRZGU010282
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Wed, 20 Apr 2011 13:27:36 +0200
-Received: by ensc-virt.intern.sigma-chemnitz.de (sSMTP sendmail emulation);
-	Wed, 20 Apr 2011 13:27:35 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: Paul Menzel <paulepanter@users.sourceforge.net>
-References: <1302996215.3122.31.camel@utx.lan>
-	<4DAD6D9B.2000909@opendreambox.org>
-	<1303297156.3979.46.camel@mattotaupa>
-Date: Wed, 20 Apr 2011 13:27:35 +0200
-In-Reply-To: <1303297156.3979.46.camel@mattotaupa> (Paul Menzel's message of
-	"Wed, 20 Apr 2011 12:59:16 +0200")
-Message-ID: <lysjtdnowo.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+	Wed, 20 Apr 2011 14:12:56 +0200
+Received: from koontz.localnet ([10.115.0.175]) by mail.mikrofyn.com with
+	Microsoft SMTPSVC(6.0.3790.3959); Wed, 20 Apr 2011 14:10:41 +0200
+From: =?iso-8859-1?q?S=F8ren_Holm?= <sgh@sgh.dk>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 20 Apr 2011 14:05:58 +0200
+User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic; KDE/4.6.2; i686; ; )
+References: <201104201007.04378.sgh@sgh.dk> <201104201219.22239.sgh@sgh.dk>
+	<1303296345.3979.33.camel@mattotaupa>
+In-Reply-To: <1303296345.3979.33.camel@mattotaupa>
 MIME-Version: 1.0
-X-Spam-Score: -1.3
-X-Spam-Level: -
-X-Spam-Tests: AWL,BAYES_00,SPF_NEUTRAL,T_RP_MATCHES_RCVD
-X-Scanned-By: MIMEDefang 2.71 on 62.153.82.30
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/5] binconfig.bbclass: search configs in D instead of S
+Message-Id: <201104201405.58174.sgh@sgh.dk>
+X-OriginalArrivalTime: 20 Apr 2011 12:10:41.0109 (UTC)
+	FILETIME=[F791D850:01CBFF53]
+Subject: Re: Please pull 'wvstreams-fixes' of http://sgh.dk/~sgh/oe.git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,26 +30,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2011 11:42:14 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 20 Apr 2011 12:12:56 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Paul Menzel <paulepanter@users.sourceforge.net> writes:
+Hi Paul
 
->> > Searching for binconfig in S makes more problems than it
->> > brings benefits. Searching in the installed root seems to be more logical.
-> ...
-> I am adding Enrico to the CC since he did a lot of Ncurses work and
-> maybe can also share his opinion.
+Please use this url instead. Somehow http export is not working.
 
-yes; I submitted a similar patch [1] because it is required by ncurses.
+   git://github.com/sgh/oe.git
 
-Acked-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Onsdag 20 april 2011 12:45:45 skrev Paul Menzel:
+>=20
+> Am Mittwoch, den 20.04.2011, 12:19 +0200 schrieb S=F8ren Holm:
+> > The server should be responding now.
+>=20
+> I am now getting the following error.
+>=20
+>         $ git fetch http://sgh.dk/~sgh/oe.git wvstreams-fixes
+>         error: Unable to find a76908145053c3f4a90988ce4c6e312fa7578e42
+> under http://sgh.dk/~sgh/oe.git Cannot obtain needed object
+> a76908145053c3f4a90988ce4c6e312fa7578e42 error: Fetch failed.
+>=20
 
-
-
-Enrico
-
-Footnotes: 
-[1]  http://patchwork.openembedded.org/patch/2248
+=2D-=20
+S=F8ren Holm
 
 
