@@ -1,26 +1,27 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1QCrF9-0001kH-Pz
+	(envelope-from <koen@dominion.thruhere.net>) id 1QCrFA-0001kI-PH
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Apr 2011 12:36:15 +0200
-Received: by wye20 with SMTP id 20so1494976wye.6
+	Thu, 21 Apr 2011 12:36:16 +0200
+Received: by wwb17 with SMTP id 17so1612415wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Apr 2011 03:33:52 -0700 (PDT)
-Received: by 10.217.6.202 with SMTP id y52mr1942495wes.42.1303382031844;
-	Thu, 21 Apr 2011 03:33:51 -0700 (PDT)
+	Thu, 21 Apr 2011 03:33:53 -0700 (PDT)
+Received: by 10.227.36.209 with SMTP id u17mr6632386wbd.117.1303382033175;
+	Thu, 21 Apr 2011 03:33:53 -0700 (PDT)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id r80sm883724wei.39.2011.04.21.03.33.51
+	by mx.google.com with ESMTPS id bd8sm1097504wbb.65.2011.04.21.03.33.52
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 21 Apr 2011 03:33:51 -0700 (PDT)
+	Thu, 21 Apr 2011 03:33:52 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Apr 2011 12:33:21 +0200
-Message-Id: <1303382002-23874-2-git-send-email-koen@dominion.thruhere.net>
+Date: Thu, 21 Apr 2011 12:33:22 +0200
+Message-Id: <1303382002-23874-3-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.6.6.1
-In-Reply-To: <1303382002-23874-1-git-send-email-koen@dominion.thruhere.net>
+In-Reply-To: <1303382002-23874-2-git-send-email-koen@dominion.thruhere.net>
 References: <1303382002-23874-1-git-send-email-koen@dominion.thruhere.net>
+	<1303382002-23874-2-git-send-email-koen@dominion.thruhere.net>
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe 2/3] xinput-calibrator: make pointercal-xinput a soft dependency
+Subject: [meta-oe 3/3] pointercal-xinput: don't allow empty packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,33 +35,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Apr 2011 10:36:15 -0000
+X-List-Received-Date: Thu, 21 Apr 2011 10:36:16 -0000
 
-pointercal-xinput is machine specific and empty for most machines, so it it's only a soft dependency.
+Now that it is a soft dependency for xinput-calibrator only generate packages for machines with actual calibration data
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../xinput-calibrator/xinput-calibrator.inc        |    8 ++++++--
- 1 files changed, 6 insertions(+), 2 deletions(-)
+ .../xinput-calibrator/pointercal-xinput_0.0.bb     |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator.inc b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator.inc
-index 357b0e5..691a45c 100644
---- a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator.inc
-+++ b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator.inc
-@@ -2,7 +2,11 @@ DESCRIPTION = "A generic touchscreen calibration program for X.Org"
- HOMEPAGE = "http://www.freedesktop.org/wiki/Software/xinput_calibrator"
- LICENSE = "MIT/X11"
- DEPENDS = "virtual/libx11 libxi"
--RDEPENDS_${PN} = "xinput pointercal-xinput"
--INC_PR = "r7"
-+
-+INC_PR = "r8"
+diff --git a/meta-oe/recipes-graphics/xinput-calibrator/pointercal-xinput_0.0.bb b/meta-oe/recipes-graphics/xinput-calibrator/pointercal-xinput_0.0.bb
+index 10360f7..993a75d 100644
+--- a/meta-oe/recipes-graphics/xinput-calibrator/pointercal-xinput_0.0.bb
++++ b/meta-oe/recipes-graphics/xinput-calibrator/pointercal-xinput_0.0.bb
+@@ -4,7 +4,8 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
  
- inherit autotools
+ SECTION = "base"
+ 
+-PR = "r2"
++PR = "r3"
 +
-+RDEPENDS_${PN} = "xinput"
-+RRECOMMENDS_${PN} = "pointercal-xinput"
-+
+ SRC_URI = "file://pointercal.xinput"
+ S = "${WORKDIR}"
+ 
+@@ -16,6 +17,5 @@ do_install() {
+ 	fi
+ }
+ 
+-ALLOW_EMPTY_${PN} = "1"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ CONFFILES_${PN} = "${sysconfdir}/pointercal.xinput"
 -- 
 1.6.6.1
 
