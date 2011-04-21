@@ -1,39 +1,39 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1QCjGT-0001Fd-8C
+	(envelope-from <eyalreizer@googlemail.com>) id 1QCpgm-0000Bv-00
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Apr 2011 04:05:05 +0200
-Received: by vxd7 with SMTP id 7so1137944vxd.6
+	Thu, 21 Apr 2011 10:56:40 +0200
+Received: by gxk3 with SMTP id 3so456051gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2011 19:02:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
-	:date:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=PgaFXlU9a+aCYwFR2UGes++wwBY1proQkMgrA0EOoIQ=;
-	b=os0LsCqG9yoWPJii4pU0uVGdZaRljoJWQfjAOaeg0YLqePVm+6PX3Kx4k2AMT6uewl
-	bkQNOpsV0h4VsalE52hmOHutmdL6eyIukEsRGkcfRmfWqb6GrF0yPSGdbja4rt/fIsKe
-	vqerHZrOvUrWDjj2p9CEKto18pqISP7xYw2Ak=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	b=Ax4YedRoVJ/tXhvBJIVL9O2qOwmBryxN8jHufiF8/amQfXJXyOcuiB2cGm9z3ZlznN
-	1cGuuwuZoJr3BfOjn58zp8LMC5ZnLX/zhMlMYoLqEJ3qbuhHHS7Mkxjw72KY76dxd4yL
-	BzIweJ7hb9OFHCVDzlMBgAts3KSxTH/v9x+S4=
-Received: by 10.52.182.105 with SMTP id ed9mr360815vdc.38.1303351361084; Wed,
-	20 Apr 2011 19:02:41 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.52.156.226 with HTTP; Wed, 20 Apr 2011 19:02:21 -0700 (PDT)
-In-Reply-To: <4DAF8E5C.3040705@appliedminds.com>
-References: <4DAF8E5C.3040705@appliedminds.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Wed, 20 Apr 2011 19:02:21 -0700
-X-Google-Sender-Auth: iisbdn3POLNnJiJSVQPeNUpT4vY
-Message-ID: <BANLkTin4pume54zSryqBAZb-Bh0LqRWjbA@mail.gmail.com>
+	Thu, 21 Apr 2011 01:54:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=UtvpANqg2gmEShzse+nbKqFuE1g+fBOXYdCsmZBdjh0=;
+	b=U/tWcco1Z8IJHs2+xgGorzz5L4N7snT5IdFVoBbONrmwQUU5vN2HC8r0c+J1f6P2zo
+	Or2kYnVDBdl5RvE580aHpZL018nOwkZh0kx5EJa+ozghsg9aXSmRY+uwJX/ukaGRg0W5
+	tYiYdr1TxOLxmJrUbGryNTUTgcU3luk5/pyoQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=BFqQEsqv1eGu+XlARlvTKOv/nZoHDT2DMdGGP1yXzGPaSYMQ3QktjlrNjK246lH9ya
+	7YxS7j84HyVGweD1qTjceU/Ytbsz6J6OYrXNmOJjO08otF/x+A4Nl1KqvkED5A9xmmo+
+	xapA9td6v/p6+NCjD2qM6qkhgarYGub9tSl/M=
+Received: by 10.150.115.18 with SMTP id n18mr290369ybc.195.1303376047033;
+	Thu, 21 Apr 2011 01:54:07 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id f5sm2037720ybh.28.2011.04.21.01.54.03
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 21 Apr 2011 01:54:05 -0700 (PDT)
+From: Eyal Reizer <eyalreizer@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: opencv_2.2.bb recipe doesn't install libopencv_core.so
+Date: Thu, 21 Apr 2011 11:53:31 +0300
+Message-Id: <1303376011-5716-1-git-send-email-eyalr@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <y>
+References: <y>
+Cc: Eyal Reizer <eyalr@ti.com>
+Subject: [PATCH v3] hostap-daemon: build from git sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,31 +47,331 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Apr 2011 02:05:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 21 Apr 2011 08:56:40 -0000
 
-On Wed, Apr 20, 2011 at 6:54 PM, James Sarrett
-<jsarrett@appliedminds.com> wrote:
-> I'm trying to bitbake OpenCV for a BeagleBoard-xM, and having limited
-> success. =C2=A0OpenCV builds and installs fine into /usr/lib, but it does=
-n't
-> create (sym?-)links for the base shared objects. =C2=A0In other words, af=
-ter
-> install there is a /usr/lib/libopencv_<opencvpart>.so.2.2 but no
-> corresponding /usr/lib/libopencv_<opencvpart>.so or .a. =C2=A0this causes=
- the
-> OpenCV samples to fail to build on the target (they install as source)
-> because the cflags and libs returned by pkg-config are inconsistent.
-> pkg-config assumes no version numbers (-llibopencv_core etc.).
+* Builds a new version 0.8.x which is not released yet as a zip file.
+  This version has new features like WIFI-direct used in new mac80211
+  versions
+* As the recipe is very similar to the 0.7.3 version, I have created
+  a common include file shared between the 0.7.3 version and the
+  git version
+* Updated the 0.7.3 recipe to use this include file and bumped the PR
+* Add PV
+* Update defconfig
 
-Install the libopencv-dev package on the target if you want to build
-against it...
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Signed-off-by: Eyal Reizer <eyalr@ti.com>
+---
+ recipes/hostap/hostap-daemon-0.7.inc       |   26 ++++
+ recipes/hostap/hostap-daemon-git/defconfig |  187 ++++++++++++++++++++++++++++
+ recipes/hostap/hostap-daemon_0.7.3.bb      |   29 +----
+ recipes/hostap/hostap-daemon_git.bb        |   16 +++
+ 4 files changed, 233 insertions(+), 25 deletions(-)
+ create mode 100644 recipes/hostap/hostap-daemon-0.7.inc
+ create mode 100644 recipes/hostap/hostap-daemon-git/defconfig
+ create mode 100644 recipes/hostap/hostap-daemon_git.bb
+
+diff --git a/recipes/hostap/hostap-daemon-0.7.inc b/recipes/hostap/hostap-daemon-0.7.inc
+new file mode 100644
+index 0000000..49f2650
+--- /dev/null
++++ b/recipes/hostap/hostap-daemon-0.7.inc
+@@ -0,0 +1,26 @@
++HOMEPAGE = "http://hostap.epitest.fi"
++SECTION = "kernel/userland"
++PRIORITY = "optional"
++LICENSE = "GPL"
++DEPENDS = "libnl openssl"
++
++inherit update-rc.d
++INITSCRIPT_NAME=hostapd
++
++do_configure() {
++	install -m 0644 ${WORKDIR}/defconfig ${S}/.config
++}
++
++do_compile() {
++	make
++}
++
++do_install() {
++	install -d ${D}${sbindir} ${D}${sysconfdir}/init.d
++	install -m 0644 ${S}/hostapd.conf ${D}${sysconfdir}
++	install -m 0755 ${S}/hostapd ${D}${sbindir}
++	install -m 0755 ${S}/hostapd_cli ${D}${sbindir}
++	install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/hostapd
++}
++
++CONFFILES_${PN} += "${sysconfdir}/hostapd.conf"
+diff --git a/recipes/hostap/hostap-daemon-git/defconfig b/recipes/hostap/hostap-daemon-git/defconfig
+new file mode 100644
+index 0000000..4fd9061
+--- /dev/null
++++ b/recipes/hostap/hostap-daemon-git/defconfig
+@@ -0,0 +1,187 @@
++# Example hostapd build time configuration
++#
++# This file lists the configuration options that are used when building the
++# hostapd binary. All lines starting with # are ignored. Configuration option
++# lines must be commented out complete, if they are not to be included, i.e.,
++# just setting VARIABLE=n is not disabling that variable.
++#
++# This file is included in Makefile, so variables like CFLAGS and LIBS can also
++# be modified from here. In most cass, these lines should use += in order not
++# to override previous values of the variables.
++
++#CC=$(CROSS_COMPILE)gcc
++#CFLAGS += -I$(NFSROOT)/include -DCONFIG_LIBNL20
++#CPPFLAGS += -DCONFIG_LIBNL20
++#LIBS += -L$(NFSROOT)/lib -lnl-genl
++#LIBS_p += -L$(NFSROOT)/lib
++#LIBDIR = $(NFSROOT)/lib
++#BINDIR = $(NFSROOT)/usr/sbin
++
++# Driver interface for Host AP driver
++CONFIG_DRIVER_HOSTAP=y
++
++# Driver interface for wired authenticator
++#CONFIG_DRIVER_WIRED=y
++
++# Driver interface for madwifi driver
++#CONFIG_DRIVER_MADWIFI=y
++#CFLAGS += -I../../madwifi # change to the madwifi source directory
++
++# Driver interface for drivers using the nl80211 kernel interface
++CONFIG_DRIVER_NL80211=y
++CONFIG_LIBNL20=y
++# driver_nl80211.c requires a rather new libnl (version 1.1) which may not be
++# shipped with your distribution yet. If that is the case, you need to build
++# newer libnl version and point the hostapd build to use it.
++#LIBNL=$(LIBNL_PATH)
++#CFLAGS += -I$(LIBNL)/include
++#LIBS += -L$(LIBNL)/lib
++
++# Driver interface for FreeBSD net80211 layer (e.g., Atheros driver)
++#CONFIG_DRIVER_BSD=y
++#CFLAGS += -I/usr/local/include
++#LIBS += -L/usr/local/lib
++#LIBS_p += -L/usr/local/lib
++#LIBS_c += -L/usr/local/lib
++
++# Driver interface for no driver (e.g., RADIUS server only)
++#CONFIG_DRIVER_NONE=y
++
++# IEEE 802.11F/IAPP
++CONFIG_IAPP=y
++
++# WPA2/IEEE 802.11i RSN pre-authentication
++CONFIG_RSN_PREAUTH=y
++
++# PeerKey handshake for Station to Station Link (IEEE 802.11e DLS)
++CONFIG_PEERKEY=y
++
++# IEEE 802.11w (management frame protection)
++# This version is an experimental implementation based on IEEE 802.11w/D1.0
++# draft and is subject to change since the standard has not yet been finalized.
++# Driver support is also needed for IEEE 802.11w.
++#CONFIG_IEEE80211W=y
++
++# Integrated EAP server
++CONFIG_EAP=y
++
++# EAP-MD5 for the integrated EAP server
++CONFIG_EAP_MD5=y
++
++# EAP-TLS for the integrated EAP server
++CONFIG_EAP_TLS=y
++
++# EAP-MSCHAPv2 for the integrated EAP server
++CONFIG_EAP_MSCHAPV2=y
++
++# EAP-PEAP for the integrated EAP server
++CONFIG_EAP_PEAP=y
++
++# EAP-GTC for the integrated EAP server
++CONFIG_EAP_GTC=y
++
++# EAP-TTLS for the integrated EAP server
++CONFIG_EAP_TTLS=y
++
++# EAP-SIM for the integrated EAP server
++#CONFIG_EAP_SIM=y
++
++# EAP-AKA for the integrated EAP server
++#CONFIG_EAP_AKA=y
++
++# EAP-AKA' for the integrated EAP server
++# This requires CONFIG_EAP_AKA to be enabled, too.
++#CONFIG_EAP_AKA_PRIME=y
++
++# EAP-PAX for the integrated EAP server
++#CONFIG_EAP_PAX=y
++
++# EAP-PSK for the integrated EAP server (this is _not_ needed for WPA-PSK)
++#CONFIG_EAP_PSK=y
++
++# EAP-SAKE for the integrated EAP server
++#CONFIG_EAP_SAKE=y
++
++# EAP-GPSK for the integrated EAP server
++#CONFIG_EAP_GPSK=y
++# Include support for optional SHA256 cipher suite in EAP-GPSK
++#CONFIG_EAP_GPSK_SHA256=y
++
++# EAP-FAST for the integrated EAP server
++# Note: Default OpenSSL package does not include support for all the
++# functionality needed for EAP-FAST. If EAP-FAST is enabled with OpenSSL,
++# the OpenSSL library must be patched (openssl-0.9.9-session-ticket.patch)
++# to add the needed functions.
++#CONFIG_EAP_FAST=y
++
++# Wi-Fi Protected Setup (WPS)
++CONFIG_WPS=y
++# Enable UPnP support for external WPS Registrars
++#CONFIG_WPS_UPNP=y
++
++# EAP-IKEv2
++#CONFIG_EAP_IKEV2=y
++
++# Trusted Network Connect (EAP-TNC)
++#CONFIG_EAP_TNC=y
++
++# PKCS#12 (PFX) support (used to read private key and certificate file from
++# a file that usually has extension .p12 or .pfx)
++CONFIG_PKCS12=y
++
++# RADIUS authentication server. This provides access to the integrated EAP
++# server from external hosts using RADIUS.
++#CONFIG_RADIUS_SERVER=y
++
++# Build IPv6 support for RADIUS operations
++CONFIG_IPV6=y
++
++# IEEE Std 802.11r-2008 (Fast BSS Transition)
++#CONFIG_IEEE80211R=y
++
++# Use the hostapd's IEEE 802.11 authentication (ACL), but without
++# the IEEE 802.11 Management capability (e.g., madwifi or FreeBSD/net80211)
++#CONFIG_DRIVER_RADIUS_ACL=y
++
++# IEEE 802.11n (High Throughput) support
++#CONFIG_IEEE80211N=y
++
++# Remove debugging code that is printing out debug messages to stdout.
++# This can be used to reduce the size of the hostapd considerably if debugging
++# code is not needed.
++#CONFIG_NO_STDOUT_DEBUG=y
++
++# Remove support for RADIUS accounting
++#CONFIG_NO_ACCOUNTING=y
++
++# Remove support for RADIUS
++#CONFIG_NO_RADIUS=y
++
++# Remove support for VLANs
++#CONFIG_NO_VLAN=y
++
++# Remove support for dumping state into a file on SIGUSR1 signal
++# This can be used to reduce binary size at the cost of disabling a debugging
++# option.
++#CONFIG_NO_DUMP_STATE=y
++
++# Enable tracing code for developer debugging
++# This tracks use of memory allocations and other registrations and reports
++# incorrect use with a backtrace of call (or allocation) location.
++#CONFIG_WPA_TRACE=y
++# For BSD, comment out these.
++#LIBS += -lexecinfo
++#LIBS_p += -lexecinfo
++#LIBS_c += -lexecinfo
++
++# Use libbfd to get more details for developer debugging
++# This enables use of libbfd to get more detailed symbols for the backtraces
++# generated by CONFIG_WPA_TRACE=y.
++#CONFIG_WPA_TRACE_BFD=y
++# For BSD, comment out these.
++#LIBS += -lbfd -liberty -lz
++#LIBS_p += -lbfd -liberty -lz
++#LIBS_c += -lbfd -liberty -lz
++
++
++
+diff --git a/recipes/hostap/hostap-daemon_0.7.3.bb b/recipes/hostap/hostap-daemon_0.7.3.bb
+index 10b1389..5a8aee7 100644
+--- a/recipes/hostap/hostap-daemon_0.7.3.bb
++++ b/recipes/hostap/hostap-daemon_0.7.3.bb
+@@ -1,10 +1,8 @@
+ DESCRIPTION = "User space daemon for extended IEEE 802.11 management"
+-HOMEPAGE = "http://hostap.epitest.fi"
+-SECTION = "kernel/userland"
+-PRIORITY = "optional"
+-LICENSE = "GPL"
+-DEPENDS = "libnl openssl"
+-PR = "r2"
++
++require hostap-daemon-0.7.inc
++
++PR = "r3"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+@@ -16,23 +14,4 @@ SRC_URI[sha256sum] = "31eb2781f37e1a4c27969d1594f8019c0ca87779349c099ab812833289
+ 
+ S = "${WORKDIR}/hostapd-${PV}/hostapd"
+ 
+-inherit update-rc.d
+-INITSCRIPT_NAME=hostapd
+-
+-do_configure() {
+-	install -m 0644 ${WORKDIR}/defconfig ${S}/.config
+-}
+-
+-do_compile() {
+-	make
+-}
+-
+-do_install() {
+-	install -d ${D}${sbindir} ${D}${sysconfdir}/init.d
+-	install -m 0644 ${S}/hostapd.conf ${D}${sysconfdir}
+-	install -m 0755 ${S}/hostapd ${D}${sbindir}
+-	install -m 0755 ${S}/hostapd_cli ${D}${sbindir}
+-	install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/hostapd
+-}
+ 
+-CONFFILES_${PN} += "${sysconfdir}/hostapd.conf"
+diff --git a/recipes/hostap/hostap-daemon_git.bb b/recipes/hostap/hostap-daemon_git.bb
+new file mode 100644
+index 0000000..da966b9
+--- /dev/null
++++ b/recipes/hostap/hostap-daemon_git.bb
+@@ -0,0 +1,26 @@
++DESCRIPTION = "User space daemon for extended IEEE 802.11 management"
++
++require hostap-daemon-0.7.inc
++
++PR = "r0"
++SRCREV = "b8fb017272ed4794339978c9fbc0e74571a44728"
++PV = "0.7.3+0.8.0-rc"
++PR_append = "gitr${SRCPV}"
++FILESPATHPKG =. "hostap-daemon-git:"
++
++DEFAULT_PREFERENCE = "-1"
++
++S = "${WORKDIR}/git/hostapd"
++
++SRC_URI = "git://w1.fi/srv/git/hostap.git;protocol=git \
++	file://defconfig \
++	file://init"
++
++S = "${WORKDIR}/git/hostapd"
++
++do_configure() {
++	install -m 0644 ${WORKDIR}/defconfig ${S}/.config
++	echo "CFLAGS += -I${STAGING_INCDIR}" >> .config
++	echo "LIBS += -L${STAGING_LIBDIR}" >> .config
++}
++
+-- 
+1.7.0.4
+
 
 
