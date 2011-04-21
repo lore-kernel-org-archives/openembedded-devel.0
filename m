@@ -1,27 +1,38 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1QCrFA-0001kI-PH
+	(envelope-from <eyalreizer@googlemail.com>) id 1QCtpK-0001Lt-5a
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Apr 2011 12:36:16 +0200
-Received: by wwb17 with SMTP id 17so1612415wwb.24
+	Thu, 21 Apr 2011 15:21:47 +0200
+Received: by qwh5 with SMTP id 5so941440qwh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Apr 2011 03:33:53 -0700 (PDT)
-Received: by 10.227.36.209 with SMTP id u17mr6632386wbd.117.1303382033175;
-	Thu, 21 Apr 2011 03:33:53 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id bd8sm1097504wbb.65.2011.04.21.03.33.52
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 21 Apr 2011 03:33:52 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Thu, 21 Apr 2011 06:19:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=i/54x6FY/2Ef9fX9VmmQdAgtLXP3ecP4uFy0Ugd/Km4=;
+	b=fUaZRA0chcQT3ISpjcYoQPDkNkK8qo7x0Mo4PXjvuzs9zS34eM+VBDT2Ar2Bi3LGVD
+	mcrnr6/z7RZbCJ7Aky5ssPxXOFy8YtTdvJaS77qBKVCmmNsXWBOOffQFOKPhqqUX0fNk
+	U3ZLdlGXknVZHw8dgDlfLyx51gt2/VWAOtoqA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Tr479eIjZXpAmthO7A1CziebfGbSfunZO+ddKsEvgXIcNcAueFvdSVD9tuH38uzIwD
+	v9Jf2Bx4m4f9vlru+hIvFvHfcQdvcwShmz9iE6qp11tJrC4z7e6YGmIJ2axyaLflT+Pf
+	xGU02286cJ2p4Wrwf1b6Gj4rOEPc4Cf7wuagw=
+MIME-Version: 1.0
+Received: by 10.224.137.8 with SMTP id u8mr5674005qat.174.1303391960482; Thu,
+	21 Apr 2011 06:19:20 -0700 (PDT)
+Received: by 10.229.70.207 with HTTP; Thu, 21 Apr 2011 06:19:20 -0700 (PDT)
+In-Reply-To: <ioormn$lho$2@dough.gmane.org>
+References: <1303376052-5751-1-git-send-email-eyalr@ti.com>
+	<ioormn$lho$2@dough.gmane.org>
+Date: Thu, 21 Apr 2011 16:19:20 +0300
+Message-ID: <BANLkTi=sWzzqgGHBX8QtUNQ=MC8dzXXADQ@mail.gmail.com>
+From: =?UTF-8?B?15DXmdeZ15wg16jXmdeZ15bXqA==?= <eyalreizer@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Apr 2011 12:33:22 +0200
-Message-Id: <1303382002-23874-3-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.6.6.1
-In-Reply-To: <1303382002-23874-2-git-send-email-koen@dominion.thruhere.net>
-References: <1303382002-23874-1-git-send-email-koen@dominion.thruhere.net>
-	<1303382002-23874-2-git-send-email-koen@dominion.thruhere.net>
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe 3/3] pointercal-xinput: don't allow empty packages
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH v3] wpa-supplicant: Build from git sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,38 +46,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Apr 2011 10:36:16 -0000
+X-List-Received-Date: Thu, 21 Apr 2011 13:21:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Now that it is a soft dependency for xinput-calibrator only generate packages for machines with actual calibration data
+Thanks!
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- .../xinput-calibrator/pointercal-xinput_0.0.bb     |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+What is the next step for pushing these recipes (wpa-supplicant, hostapd,
+ti-wifi-utils) to the main repository?
 
-diff --git a/meta-oe/recipes-graphics/xinput-calibrator/pointercal-xinput_0.0.bb b/meta-oe/recipes-graphics/xinput-calibrator/pointercal-xinput_0.0.bb
-index 10360f7..993a75d 100644
---- a/meta-oe/recipes-graphics/xinput-calibrator/pointercal-xinput_0.0.bb
-+++ b/meta-oe/recipes-graphics/xinput-calibrator/pointercal-xinput_0.0.bb
-@@ -4,7 +4,8 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
- 
- SECTION = "base"
- 
--PR = "r2"
-+PR = "r3"
-+
- SRC_URI = "file://pointercal.xinput"
- S = "${WORKDIR}"
- 
-@@ -16,6 +17,5 @@ do_install() {
- 	fi
- }
- 
--ALLOW_EMPTY_${PN} = "1"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- CONFFILES_${PN} = "${sysconfdir}/pointercal.xinput"
--- 
-1.6.6.1
+Best Regards,
+Eyal Reizer
 
+On Thu, Apr 21, 2011 at 12:00 PM, Koen Kooi <koen@dominion.thruhere.net>wrote:
 
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 21-04-11 10:54, Eyal Reizer wrote:
+> > * Builds a new version 0.8.x which is not released yet as a zip file.
+> >   This version has new features like WIFI-direct used in new mac80211
+> >   versions
+> > * Add PV
+> > * Update defconfig
+> >
+> > Signed-off-by: Eyal Reizer <eyalr@ti.com>
+>
+> Acked-by: Koen Kooi <k-kooi@ti.com>
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFNr/IXMkyGM64RGpERAoAvAJ9Ewn8ERjg5arQndoaD89FkGXC7gACgr4Wf
+> Mrnv48tP+kBezqL3zjDSDxg=
+> =pJp5
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
