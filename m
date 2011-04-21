@@ -1,24 +1,26 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1QCrF9-0001kG-3n
+	(envelope-from <koen@dominion.thruhere.net>) id 1QCrF9-0001kH-Pz
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 21 Apr 2011 12:36:15 +0200
-Received: by wwb17 with SMTP id 17so1612383wwb.24
+Received: by wye20 with SMTP id 20so1494976wye.6
 	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Apr 2011 03:33:52 -0700 (PDT)
+Received: by 10.217.6.202 with SMTP id y52mr1942495wes.42.1303382031844;
 	Thu, 21 Apr 2011 03:33:51 -0700 (PDT)
-Received: by 10.216.68.17 with SMTP id k17mr1818238wed.109.1303382030633;
-	Thu, 21 Apr 2011 03:33:50 -0700 (PDT)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id ed10sm1101513wbb.32.2011.04.21.03.33.49
+	by mx.google.com with ESMTPS id r80sm883724wei.39.2011.04.21.03.33.51
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 21 Apr 2011 03:33:50 -0700 (PDT)
+	Thu, 21 Apr 2011 03:33:51 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Apr 2011 12:33:20 +0200
-Message-Id: <1303382002-23874-1-git-send-email-koen@dominion.thruhere.net>
+Date: Thu, 21 Apr 2011 12:33:21 +0200
+Message-Id: <1303382002-23874-2-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.6.6.1
+In-Reply-To: <1303382002-23874-1-git-send-email-koen@dominion.thruhere.net>
+References: <1303382002-23874-1-git-send-email-koen@dominion.thruhere.net>
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe 1/3] xserver-common 1.34: make it work with xserver-nodm-init
+Subject: [meta-oe 2/3] xinput-calibrator: make pointercal-xinput a soft dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,75 +36,30 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 21 Apr 2011 10:36:15 -0000
 
-* Move SHR patches to main SRC_URI, they are generic and good enough for everyone
-* Start x-window-manager
-* Run through oe-stylize
-* Remove duplicated LICENSE
-* Add reconflicts with x11-common as well
+pointercal-xinput is machine specific and empty for most machines, so it it's only a soft dependency.
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../xserver-common/xserver-common_1.34.bb          |   38 ++++++++++----------
- 1 files changed, 19 insertions(+), 19 deletions(-)
+ .../xinput-calibrator/xinput-calibrator.inc        |    8 ++++++--
+ 1 files changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-index b994dfb..0d59ab7 100644
---- a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-+++ b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-@@ -1,14 +1,8 @@
- DESCRIPTION = "Common X11 scripts and support files"
--LICENSE = "GPL"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
--RDEPENDS_${PN} = "xmodmap xrandr xdpyinfo fbset"
--PR = "r1"
- 
--PACKAGE_ARCH = "all"
--
--RCONFLICTS_${PN} = "xserver-kdrive-common"
--RREPLACES_${PN} = "xserver-kdrive-common"
-+PR = "r2"
- 
- # we are using a gpe-style Makefile
- inherit gpe
-@@ -19,20 +13,26 @@ SRC_URI[sha256sum] = "cd04c33418f776b1e13fcc7af3d6bd0c7cccd03fbabd7dbcd97f88166c
- SRC_URI_append = " \
-                    file://gplv2-license.patch \
-                    file://setDPI.sh \
--                   file://89xdgautostart.sh"
-+                   file://89xdgautostart.sh \
-+                   file://89xTs_Calibrate.xinput_calibrator.patch \
-+                   file://90xXWindowManager.patch \
-+                   file://Xserver.add.xserver-system.patch \
-+                   file://Xserver.add.nocursor.for.gta.patch \
-+                   file://Xserver.add.dpi.for.gta.patch \
-+                   file://Xserver.n900.patch \
-+"
- 
--RDEPENDS_${PN}_append_shr = " xinput-calibrator "
--
--SRC_URI_append_shr = " file://89xTs_Calibrate.xinput_calibrator.patch \
--                       file://90xXWindowManager.patch \
--                       file://Xserver.add.nocursor.for.gta.patch \
--                       file://Xserver.add.xserver-system.patch \
--                       file://Xserver.add.dpi.for.gta.patch \
--		       file://Xserver.n900.patch"
- 
- do_install_append() {
--	install -m 0755 "${WORKDIR}/setDPI.sh" "${D}/etc/X11/Xinit.d/50setdpi"
--	install -m 0755 "${WORKDIR}/89xdgautostart.sh" "${D}/etc/X11/Xsession.d/89xdgautostart"
--	sed -i 's:^BINDIR=.*$:BINDIR=${bindir}:' ${D}/etc/X11/xserver-common
-+        install -m 0755 "${WORKDIR}/setDPI.sh" "${D}/etc/X11/Xinit.d/50setdpi"
-+        install -m 0755 "${WORKDIR}/89xdgautostart.sh" "${D}/etc/X11/Xsession.d/89xdgautostart"
-+        sed -i 's:^BINDIR=.*$:BINDIR=${bindir}:' ${D}/etc/X11/xserver-common
- }
- 
-+PACKAGE_ARCH = "all"
+diff --git a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator.inc b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator.inc
+index 357b0e5..691a45c 100644
+--- a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator.inc
++++ b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator.inc
+@@ -2,7 +2,11 @@ DESCRIPTION = "A generic touchscreen calibration program for X.Org"
+ HOMEPAGE = "http://www.freedesktop.org/wiki/Software/xinput_calibrator"
+ LICENSE = "MIT/X11"
+ DEPENDS = "virtual/libx11 libxi"
+-RDEPENDS_${PN} = "xinput pointercal-xinput"
+-INC_PR = "r7"
 +
-+RDEPENDS_${PN} = "xmodmap xrandr xdpyinfo fbset xinput-calibrator"
++INC_PR = "r8"
+ 
+ inherit autotools
 +
-+RCONFLICTS_${PN} = "xserver-kdrive-common x11-common"
-+RREPLACES_${PN} = "xserver-kdrive-common x11-common"
++RDEPENDS_${PN} = "xinput"
++RRECOMMENDS_${PN} = "pointercal-xinput"
 +
 -- 
 1.6.6.1
