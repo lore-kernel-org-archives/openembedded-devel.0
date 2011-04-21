@@ -1,27 +1,33 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1QCuPE-0001xU-PM
+	(envelope-from <Tom_Rini@mentor.com>) id 1QCvu5-0003pK-DH
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Apr 2011 15:58:52 +0200
-Received: from gandalf.denix.org ([unknown] [108.18.140.4])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LK000BMU9DOP2ER@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	21 Apr 2011 08:56:18 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3A1C214AF5B; Thu,
-	21 Apr 2011 09:56:12 -0400 (EDT)
-Date: Thu, 21 Apr 2011 09:56:12 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20110421135612.GC19200@denix.org>
-References: <1303376052-5751-1-git-send-email-eyalr@ti.com>
-	<ioormn$lho$2@dough.gmane.org>
-	<BANLkTi=sWzzqgGHBX8QtUNQ=MC8dzXXADQ@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <BANLkTi=sWzzqgGHBX8QtUNQ=MC8dzXXADQ@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH v3] wpa-supplicant: Build from git sources
+	Thu, 21 Apr 2011 17:34:49 +0200
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1QCvrl-0003OZ-W1 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Apr 2011 08:32:26 -0700
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Thu, 21 Apr 2011 08:32:25 -0700
+Received: from [172.30.80.171] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
+	with Microsoft SMTP Server id 14.1.270.1;
+	Thu, 21 Apr 2011 08:32:25 -0700
+Message-ID: <4DB04DFE.1020806@mentor.com>
+Date: Thu, 21 Apr 2011 08:32:14 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <iomb04$vs0$1@dough.gmane.org>
+In-Reply-To: <iomb04$vs0$1@dough.gmane.org>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 21 Apr 2011 15:32:25.0794 (UTC)
+	FILETIME=[50EFF220:01CC0039]
+Subject: Re: [2011.03-maintenance] Pull request #14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,53 +41,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Apr 2011 13:58:53 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 21 Apr 2011 15:34:49 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Apr 21, 2011 at 04:19:20PM +0300, ???????? ?????????? wrote:
-> Thanks!
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 04/20/2011 03:02 AM, Koen Kooi wrote:
+> Tom,
 > 
-> What is the next step for pushing these recipes (wpa-supplicant, hostapd,
-> ti-wifi-utils) to the main repository?
-
-They are in.
-
--- 
-Denys
-
-> On Thu, Apr 21, 2011 at 12:00 PM, Koen Kooi <koen@dominion.thruhere.net>wrote:
+> Please pull the 2 commits from here:
 > 
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> >
-> > On 21-04-11 10:54, Eyal Reizer wrote:
-> > > * Builds a new version 0.8.x which is not released yet as a zip file.
-> > >   This version has new features like WIFI-direct used in new mac80211
-> > >   versions
-> > > * Add PV
-> > > * Update defconfig
-> > >
-> > > Signed-off-by: Eyal Reizer <eyalr@ti.com>
-> >
-> > Acked-by: Koen Kooi <k-kooi@ti.com>
-> > -----BEGIN PGP SIGNATURE-----
-> > Version: GnuPG v1.4.5 (Darwin)
-> >
-> > iD8DBQFNr/IXMkyGM64RGpERAoAvAJ9Ewn8ERjg5arQndoaD89FkGXC7gACgr4Wf
-> > Mrnv48tP+kBezqL3zjDSDxg=
-> > =pJp5
-> > -----END PGP SIGNATURE-----
-> >
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+> Branch: 2011.03-maintenance
+> 
+> Koen Kooi (1):
+>       libgles-omap3: fix 81xx initscript ES detection
+> 
+> Neil MacMunn (1):
+>       networkmanager-openvpn: added version 0.8.3.995
+> 
+> These are both cherry-picks from .dev.
+
+Applied, thanks.
+
+- -- 
+Tom Rini
+Mentor Graphics Corporation
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iQEcBAEBAgAGBQJNsE34AAoJEI4NMjfc3nJxyQoIAI98OxmJmHefv2KXaHs7zJYs
+nXSHgcyZyxc+DW+s0cTe+nVU6lNA3SPSbSkIg4dCzuf+y5KMdo6Py7uRIdyYvSlh
+N6WKG3cAm2N8lZ7Ay5UHPydqgsD9HdoRst+nzctDg61sgOsuCAgVxeGKYfqWH0hg
+BXjbSEbsSHh3zuTQNODbWdylSQH3Uv2iVyV8pTZouCJaTEtBqsVSghKu01+bLKqJ
+D4Qu8p4fp0jAHmE3HzH9TpDO4A3w+tD6oALsL2ou7kx2R0RJntmx/lJpI0OEPCWO
+wO+1wMYR6hFWp4551K4eSanRnxDvQmRsITlLmXdQVaTuOQxQ8cRLqLs6e2lYCHM=
+=TYdh
+-----END PGP SIGNATURE-----
 
 
