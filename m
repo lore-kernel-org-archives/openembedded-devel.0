@@ -1,23 +1,25 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QDMQ0-0006t8-R3 for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Apr 2011 21:53:32 +0200
+	id 1QDNjv-0001oe-8D for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Apr 2011 23:18:11 +0200
 Received: from f053043081.adsl.alicedsl.de ([78.53.43.81]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QDMOI-0006j0-FR; Fri, 22 Apr 2011 19:51:46 +0000
+	id 1QDNiD-0000LT-2O; Fri, 22 Apr 2011 21:16:25 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201104201007.04378.sgh@sgh.dk>
-References: <201104201007.04378.sgh@sgh.dk>
-Date: Fri, 22 Apr 2011 21:51:07 +0200
-Message-ID: <1303501867.4155.11.camel@mattotaupa>
+In-Reply-To: <4DAD7297.2030606@opendreambox.org>
+References: <1303134465.3910.63.camel@mattotaupa>
+	<1303134640.3910.67.camel@mattotaupa>
+	<4DAD7297.2030606@opendreambox.org>
+Date: Fri, 22 Apr 2011 23:15:46 +0200
+Message-ID: <1303506946.4155.81.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.2 
-Cc: =?ISO-8859-1?Q?S=F8ren?= Holm <soeren.holm@mikrofyn.com>
-Subject: [PATCH] wvstreams: add patch to add missing header includes
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [RFC] [PATCH 2/2] pkgconfig: add git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,128 +33,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Apr 2011 19:53:32 -0000
-X-Groupsio-MsgNum: 31403
+X-List-Received-Date: Fri, 22 Apr 2011 21:18:11 -0000
+X-Groupsio-MsgNum: 31404
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-V/OEHfZcVADAMbb4gn/j"
+	boundary="=-AAQMnZnbIWZ6AxBvfqZI"
 
---=-V/OEHfZcVADAMbb4gn/j
+--=-AAQMnZnbIWZ6AxBvfqZI
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-From: S=C3=B8ren Holm <soeren.holm@mikrofyn.com>
-Date: Wed, 20 Apr 2011 09:48:43 +0200
+Am Dienstag, den 19.04.2011, 13:31 +0200 schrieb Andreas Oberritter:
+> On 04/18/2011 03:50 PM, Paul Menzel wrote:
+> > Date: Sun, 17 Apr 2011 19:19:58 +0200
+> >=20
+> > 1. The revision is close to the upcoming release of pkg-config 0.26. [1=
+]
+> > 2. The patch `sysrootfix.patch` has been merged upstream [2].
+> > 3. No embedded GLib is shipped anymore [3]. Therefore drop patches `aut=
+ofoo.patch` and `glibconfig-sysdefs.h`.
+> >=20
+> > The patch is tested using the following configuration
+> >=20
+> > 	Build Configuration:
+> > 	BB_VERSION        =3D "1.12.0"
+> > 	METADATA_BRANCH   =3D "pkg-config"
+> > 	METADATA_REVISION =3D "d4ae0c5"
+> > 	TARGET_ARCH       =3D "arm"
+> > 	TARGET_OS         =3D "linux-uclibceabi"
+> > 	MACHINE           =3D "beagleboard"
+> > 	DISTRO            =3D "minimal-uclibc"
+> > 	DISTRO_VERSION    =3D "dev-snapshot-20110417"
+> > 	TARGET_FPU        =3D "hard"
+> >=20
+> > and `angstrom-2010.x` and `minimal` too.
+> >=20
+> > [1] http://lists.freedesktop.org/archives/pkg-config/2011-April/000720.=
+html
+> > [2] http://cgit.freedesktop.org/pkg-config/commit/?id=3D66d49f1375fec83=
+8bcd301bb4ca2ef76cee0e47c
+> > [3] http://cgit.freedesktop.org/pkg-config/commit/?id=3D99964eddb593517=
+3fcedfc793e762d7dc7d01bba
+> >=20
+> > Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> > ---
+> > 1. How can this recipe used also for the native recipe?
+> > 2. What is `pkg-config-sdk` used for?
+> > ---
+> >  recipes/pkgconfig/pkgconfig_git.bb |   12 ++++++++++++
+> >  1 files changed, 12 insertions(+), 0 deletions(-)
+> >  create mode 100644 recipes/pkgconfig/pkgconfig_git.bb
+> >=20
+> > diff --git a/recipes/pkgconfig/pkgconfig_git.bb b/recipes/pkgconfig/pkg=
+config_git.bb
+> > new file mode 100644
+> > index 0000000..9c6d7d1
+> > --- /dev/null
+> > +++ b/recipes/pkgconfig/pkgconfig_git.bb
+> > @@ -0,0 +1,12 @@
+> > +require ${PN}.inc
+> > +
+> > +PR =3D "${INC_PR}.0"
+> > +
+> > +SRCREV =3D "7850aeb03a54a15d07b6c243b61033cd379c39d7"
+> > +SRC_URI =3D "git://anongit.freedesktop.org/pkg-config;protocol=3Dgit"
+> > +
+> > +PV =3D "0.26"
+> > +PR =3D "${INC_PR}.0"
+> > +PR_append =3D "+gitr${SRCPV}"
+>=20
+> Usually, SRCPV is used in PV, not PR. Also, I'd prefer not using 0.26
+> for a pre-release snapshot, to make a future update to the released
+> version work. How about using one of
+>=20
+> PV =3D "0.25+gitr${SRCPV}"
+>=20
+> or
+>=20
+> PV =3D "0.25.999+gitr${SRCPV}"
+>=20
+> instead, and removing the PR_append line?
 
-Building fails with the following error.
+Your suggestion is documented in the user manual [1], but Koen advised
+to use `PR_append` to keep the hash out of `PV` [2].
 
-| ./CXX -c ipstreams/wvunixdgsocket
-| In file included from ./include/wvunixdgsocket.h:13:0,
-|                  from ipstreams/wvunixdgsocket.cc:1:
-| ./include/wvaddr.h: In member function 'uint32_t WvIPAddr::addr() const':
-| ./include/wvaddr.h:284:31: warning: dereferencing type-punned pointer wil=
-l break strict-aliasing rules
-| ipstreams/wvunixdgsocket.cc: In constructor 'WvUnixDGSocket::WvUnixDGSock=
-et(const WvFastString&, bool, int)':
-| ipstreams/wvunixdgsocket.cc:50:32: error: 'chmod' was not declared in thi=
-s scope
-| make: *** [ipstreams/wvunixdgsocket.o] Error 1
+Would I get an Acked-by changing the line to the following?
 
-This patch is build tested using `angstrom-2010.x` and `minimal` for `MACHI=
-NE =3D "beagleboard"`. The build still fails when uClibc is used.
+	PV =3D "0.25+0.26"
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-CC: S=C3=B8ren Holm <soeren.holm@mikrofyn.com>
-CC: Khem Raj <raj.khem@gmail.com>
----
-1. S=C3=B8ren, please add your Signed-off-by line in front of mine. This is=
- a demanded by the commit policy [1].
-2. I am adding Khem, since he seems to be the original author of this patch=
-. It would be great to get his Acked-by too.
-3. S=C3=B8ren, please send your patch upstream.
-4. S=C3=B8ren, when you have a little time it would be great if you could u=
-pdate WvStreams to 4.6.1 and test it.
-5. S=C3=B8ren, I removed `apply=3Dyes` since that is the default.
 
-[1] http://openembedded.org/index.php/Commit_Policy
----
- .../files/0001-Fixed-missing-header-includes.patch |   37 ++++++++++++++++=
-++++
- recipes/wvstreams/wvstreams_4.6.bb                 |    1 +
- 2 files changed, 38 insertions(+), 0 deletions(-)
- create mode 100644 recipes/wvstreams/files/0001-Fixed-missing-header-inclu=
-des.patch
+Thanks,
 
-diff --git a/recipes/wvstreams/files/0001-Fixed-missing-header-includes.pat=
-ch b/recipes/wvstreams/files/0001-Fixed-missing-header-includes.patch
-new file mode 100644
-index 0000000..f6d99f0
---- /dev/null
-+++ b/recipes/wvstreams/files/0001-Fixed-missing-header-includes.patch
-@@ -0,0 +1,37 @@
-+From d76ec92a9e09fefa3083250f4aa588d0e94fe20c Mon Sep 17 00:00:00 2001
-+From: =3D?UTF-8?q?S=3DC3=3DB8ren=3D20Holm?=3D <sh@mikrofyn.com>
-+Date: Wed, 20 Apr 2011 09:41:22 +0200
-+Subject: [PATCH] Fixed missing header includes.
-+
-+---
-+ ipstreams/wvunixdgsocket.cc |    2 +-
-+ streams/wvatomicfile.cc     |    2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/ipstreams/wvunixdgsocket.cc b/ipstreams/wvunixdgsocket.cc
-+index 41d2911..6dc12fc 100644
-+--- a/ipstreams/wvunixdgsocket.cc
-++++ b/ipstreams/wvunixdgsocket.cc
-+@@ -1,5 +1,5 @@
-+ #include "wvunixdgsocket.h"
-+-#ifdef MACOS
-++#if defined(MACOS) || defined(__GNUC__)
-+ #include <sys/types.h>
-+ #include <sys/stat.h>
-+ #endif
-+diff --git a/streams/wvatomicfile.cc b/streams/wvatomicfile.cc
-+index 65ae202..0a58069 100644
-+--- a/streams/wvatomicfile.cc
-++++ b/streams/wvatomicfile.cc
-+@@ -11,7 +11,7 @@
-+ #include "wvfileutils.h"
-+ #include "wvstrutils.h"
-+=20
-+-#ifdef MACOS
-++#if defined(MACOS) || defined(__GNUC__)
-+ #include <sys/stat.h>
-+ #endif
-+=20
-+--=20
-+1.7.4.1
-+
-diff --git a/recipes/wvstreams/wvstreams_4.6.bb b/recipes/wvstreams/wvstrea=
-ms_4.6.bb
-index 1c11268..0eb0198 100644
---- a/recipes/wvstreams/wvstreams_4.6.bb
-+++ b/recipes/wvstreams/wvstreams_4.6.bb
-@@ -6,6 +6,7 @@ DEPENDS =3D "zlib openssl (>=3D 0.9.8)"
- PR =3D "r1"
-=20
- SRC_URI =3D "http://wvstreams.googlecode.com/files/${PN}-${PV}.tar.gz \
-+	file://0001-Fixed-missing-header-includes.patch \
- 	"
-=20
- inherit autotools pkgconfig
---=20
-1.7.4.4
+Paul
 
---=-V/OEHfZcVADAMbb4gn/j
+
+[1] http://docs.openembedded.org/usermanual/usermanual.html#commonuse_new_p=
+ackage
+[2] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-January/02=
+8803.html
+
+--=-AAQMnZnbIWZ6AxBvfqZI
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk2x3CYACgkQPX1aK2wOHVjVMQCeIXQ9S1c2Qg5F8la3WgFu/Das
-E9kAniE52Vylyu+lKnuSe4cpuNbis/hW
-=jWqP
+iEYEABECAAYFAk2x8AIACgkQPX1aK2wOHVhoMQCfT4aVxputHP0iDQvV+RHjwX/v
+fsUAmwS6Q2a7mz/FL5bjTT2zAzd01T3X
+=0D7z
 -----END PGP SIGNATURE-----
 
---=-V/OEHfZcVADAMbb4gn/j--
+--=-AAQMnZnbIWZ6AxBvfqZI--
