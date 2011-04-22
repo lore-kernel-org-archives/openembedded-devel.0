@@ -1,32 +1,25 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QDG1E-0003dp-9n for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Apr 2011 15:03:33 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QDFyu-0001FF-1S for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Apr 2011 15:01:08 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2011 15:01:08 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2011 15:01:08 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QDHAn-0006en-53 for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Apr 2011 16:17:29 +0200
+Received: from f053043081.adsl.alicedsl.de ([78.53.43.81]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QDH94-0003Jj-I5; Fri, 22 Apr 2011 14:15:42 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 22 Apr 2011 15:00:54 +0200
-Message-ID: <ioru67$bfr$1@dough.gmane.org>
+In-Reply-To: <201104201649.58067.pgsellmann@portner-elektronik.at>
+References: <20110419093343.GB2989@rhein.zuhause.netz>
+	<1303307478.3979.60.camel@mattotaupa>
+	<1303308248.3979.63.camel@mattotaupa>
+	<201104201649.58067.pgsellmann@portner-elektronik.at>
+Date: Fri, 22 Apr 2011 16:15:04 +0200
+Message-ID: <1303481704.4037.28.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-X-Enigmail-Version: 1.0.1
-Subject: [2011.03-maintenance] Pull request #15
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH 2/2] orc: add version 0.4.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,57 +33,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Apr 2011 13:03:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 22 Apr 2011 14:17:29 -0000
+X-Groupsio-MsgNum: 31401
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-jZenldNbnusnUbg02AZE"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-jZenldNbnusnUbg02AZE
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Tom,
+Dear Peter,
 
-Please pull the 18 commits from here:
 
-URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-Branch: 2011.03-maintenance
+Am Mittwoch, den 20.04.2011, 16:49 +0200 schrieb Peter Gsellmann:
 
-Eyal Reizer (3):
-      ti-wifi-utils: update to a newer git commit
-      hostap-daemon: build from git sources
-      wpa-supplicant: Build from git sources
+> Am Mittwoch 20 April 2011, 16:04:08 schrieb Paul Menzel:
+> > Date: Wed, 20 Apr 2011 11:50:37 +0200
+> >=20
+> > This version is build tested using `angstrom-2010.x` and `minimal{,-ucl=
+ibc}` for `MACHINE =3D "beagleboard"`. `schroedinger_1.0.9.bb` also seems t=
+o build fine with this version.
+> >=20
+> > Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> > ---
+> >  recipes/orc/orc_0.4.11.bb |    4 ++++
+> >  1 files changed, 4 insertions(+), 0 deletions(-)
+> >  create mode 100644 recipes/orc/orc_0.4.11.bb
+> >=20
+> > diff --git a/recipes/orc/orc_0.4.11.bb b/recipes/orc/orc_0.4.11.bb
+> > new file mode 100644
+> > index 0000000..e101068
+> > --- /dev/null
+> > +++ b/recipes/orc/orc_0.4.11.bb
+> > @@ -0,0 +1,4 @@
+> > +require orc.inc
+> > +
+> > +SRC_URI[orc.md5sum] =3D "b8b0b148d319422c3ad250c29483b3c4"
+> > +SRC_URI[orc.sha256sum] =3D "6ec60521a11339eda36f1e2210d08ae95010d76957=
+5e471aaf365b89bca8d031"
+>=20
+> This version of orc is compatible to schroedinger_1.0.9
 
-Koen Kooi (1):
-      libgles-omap3: abstract ES handling and share it across all
+If it works for you, could you please reply with
 
-Tom Rini (14):
-      db: Rework arm-thumb-mutex_db5.patch
-      db: Switch to patchdir rather than applying in do_configure
-      ftpd-topfield: Rework usb-header-name-2-6-23.patch
-      opie-sh 1.2.4: Rework opie-sh-fsmounter-name.patch
-      qscintilla 1.65-gpl-1.6: Rework no-external-lexers.patch
-      poboxserver: Rework unicode.patch
-      xqt2: Rework the patches for xqt2 (vs the core part).
-      In a large number of patches, remove unneeded '..' in paths.
-      opie-sh: Switch to patchdir rather than applying in do_configure
-      poboxserver: Switch to patchdir rather than applying in
-      qscintilla: Switch to patchdir rather than applying in
-      xqt2: Switch to patchdir rather than applying in do_configure
-      samba: Switch to patchdir rather than applying in do_configure
-      vim: Switch to patchdir rather than applying in do_configure
+Acked-by: Peter Gsellmann <your@address.org>
 
-These are all cherry-picks from .dev.
+> compiles fine but only with BBMASK =3D "orc_0.4.13"
+> see http://88.116.171.82/angstrom/files/log.do_compile.9392
 
-regards,
+That is what the patch [1][2]
 
-Koen
+	[PATCH 1/2] orc_0.4.13: set `DEFAULT_PREFERENCE =3D "-1"`
+
+was for. Henning=E2=80=99s commit ddc04b7a [3] included this bit too.
+
+> What to do with the (defect?) versions 0.4.12
+
+Henning deleted this one when adding 0.4.13 in commit f3dcc065 [4].
+
+> and 0.4.13?
+
+Henning wants to fix `schroedinger` [5].
+
+> Delete recipes?
+>=20
+> PREFERRED_VERSION =3D orc_0.4.11  somewhere?
+
+I have not heard of that syntax, but you could have put
+
+	PREFERRED_VERSION_orc =3D "0.4.11"
+
+in `conf/local.conf`.
+
+> Is there a notation for a recipe like DEPENDS =3D "orc<=3D0.4.11" as 'Req=
+uires' in rpm-specfiles does?
+
+No. As far as I know this has not been implemented yet in BitBake.
+
+
+Thanks,
+
+Paul
+
+
+[1] http://patches.openembedded.org/patch/2563/
+[2] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-April/0321=
+14.html
+[3] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dddc04b7=
+af7747c9f3fa79826aeb70ca38aa39ddb
+[4] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Df3dcc06=
+56e356104d9c5ea3abcbef0c3a2e0c1bb
+[5] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-April/0321=
+17.html
+
+--=-jZenldNbnusnUbg02AZE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iD8DBQFNsXwGMkyGM64RGpERAkMVAKCqbAUdSZsk/RrAe6/DX6PO3bapQwCfasbV
-cLthIJgJpGUaAQzho4v1F0o=
-=kE7l
+iEYEABECAAYFAk2xjWgACgkQPX1aK2wOHVhH1gCdFrChmMj40DHGtbmnfRo1KNAO
+cWsAniDDbQsZ3FfuYjTHuHQWk94ef1/1
+=mD5l
 -----END PGP SIGNATURE-----
 
-
-
+--=-jZenldNbnusnUbg02AZE--
