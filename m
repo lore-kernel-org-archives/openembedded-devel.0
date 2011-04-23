@@ -1,27 +1,38 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QDOQv-0002ez-IB for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Apr 2011 00:02:37 +0200
-Received: from f053043081.adsl.alicedsl.de ([78.53.43.81]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QDOPC-00029O-EM for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Apr 2011 22:00:51 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AF97BCF4-CD32-4069-BB81-FECAC104F6D9@dominion.thruhere.net>
-References: <1303134465.3910.63.camel@mattotaupa>
-	<1303134640.3910.67.camel@mattotaupa>
-	<4DAD7297.2030606@opendreambox.org>
-	<1303506946.4155.81.camel@mattotaupa>
-	<AF97BCF4-CD32-4069-BB81-FECAC104F6D9@dominion.thruhere.net>
-Date: Sat, 23 Apr 2011 00:00:11 +0200
-Message-ID: <1303509611.4155.111.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: [RFC] [PATCH 2/2] pkgconfig: add git version
+	(envelope-from <raj.khem@gmail.com>) id 1QDQJb-0004dV-2i
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Apr 2011 02:03:11 +0200
+Received: by eye27 with SMTP id 27so275485eye.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Apr 2011 17:00:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type:content-transfer-encoding;
+	bh=dIRFpdnqLBJ87liaRpoLd0FnCb48PCj7KAuEDBYrSP8=;
+	b=TYrH6sVhh+XJwHHFL50dq0DIQB8DowxsjinsLBGZGtmXiM/4r4qYkaLTduCsG/RsAn
+	9mv6Doo/ZaG0rkxbP6vsrGPRn/0br6TmOG2EPotFcOedqpfmWUe9Evk30llXAcyUYNlT
+	Wmu4o1fa/wQMzsn0v6viKh/n79TpMCIQAWSUE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=jh2bF84o211vlgSc0pqDcJEuBUNbNdoMWkTEAEVEfDgkOxzimJqroEWp3hbIjbiXKf
+	qiVC8DzDLqeHhyz5RBzrQkDTDjpprKFUmwdp8a5nKfjapPfPxhBldFI0WihV3Cs6a4C8
+	9dzqSrOyzMGHj88wXjNsyebbC1HsZm0l2DHAU=
+Received: by 10.14.43.218 with SMTP id l66mr537401eeb.188.1303516842656; Fri,
+	22 Apr 2011 17:00:42 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.14.119.196 with HTTP; Fri, 22 Apr 2011 17:00:12 -0700 (PDT)
+In-Reply-To: <1303501867.4155.11.camel@mattotaupa>
+References: <201104201007.04378.sgh@sgh.dk>
+	<1303501867.4155.11.camel@mattotaupa>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 22 Apr 2011 17:00:12 -0700
+Message-ID: <BANLkTi=ESz3Eqxw52Rr1aOX0tEQ4bwiOHQ@mail.gmail.com>
+To: Paul Menzel <paulepanter@users.sourceforge.net>
+Cc: =?UTF-8?Q?S=C3=B8ren_Holm?= <soeren.holm@mikrofyn.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] wvstreams: add patch to add missing header includes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,85 +46,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Apr 2011 22:02:37 -0000
-X-Groupsio-MsgNum: 31406
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-SWW8kqaUMDy45op8mVZC"
-
---=-SWW8kqaUMDy45op8mVZC
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 23 Apr 2011 00:03:11 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Date: Sun, 17 Apr 2011 19:19:58 +0200
+On Fri, Apr 22, 2011 at 12:51 PM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> From: S=C3=B8ren Holm <soeren.holm@mikrofyn.com>
+> Date: Wed, 20 Apr 2011 09:48:43 +0200
+>
+> Building fails with the following error.
+>
+> | ./CXX -c ipstreams/wvunixdgsocket
+> | In file included from ./include/wvunixdgsocket.h:13:0,
+> | =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0from ipst=
+reams/wvunixdgsocket.cc:1:
+> | ./include/wvaddr.h: In member function 'uint32_t WvIPAddr::addr() const=
+':
+> | ./include/wvaddr.h:284:31: warning: dereferencing type-punned pointer w=
+ill break strict-aliasing rules
+> | ipstreams/wvunixdgsocket.cc: In constructor 'WvUnixDGSocket::WvUnixDGSo=
+cket(const WvFastString&, bool, int)':
+> | ipstreams/wvunixdgsocket.cc:50:32: error: 'chmod' was not declared in t=
+his scope
+> | make: *** [ipstreams/wvunixdgsocket.o] Error 1
+>
+> This patch is build tested using `angstrom-2010.x` and `minimal` for `MAC=
+HINE =3D "beagleboard"`. The build still fails when uClibc is used.
+>
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> CC: S=C3=B8ren Holm <soeren.holm@mikrofyn.com>
+> CC: Khem Raj <raj.khem@gmail.com>
 
-1. The revision is close to the upcoming release of pkg-config 0.26. [1]
-2. The patch `sysrootfix.patch` has been merged upstream [2].
-3. No embedded GLib is shipped anymore [3]. Therefore drop patches `autofoo=
-.patch` and `glibconfig-sysdefs.h`.
+Looks ok to me.
 
-The patch is tested using the following configuration
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
-	Build Configuration:
-	BB_VERSION        =3D "1.12.0"
-	METADATA_BRANCH   =3D "pkg-config"
-	METADATA_REVISION =3D "d4ae0c5"
-	TARGET_ARCH       =3D "arm"
-	TARGET_OS         =3D "linux-uclibceabi"
-	MACHINE           =3D "beagleboard"
-	DISTRO            =3D "minimal-uclibc"
-	DISTRO_VERSION    =3D "dev-snapshot-20110417"
-	TARGET_FPU        =3D "hard"
+> ---
+> 1. S=C3=B8ren, please add your Signed-off-by line in front of mine. This =
+is a demanded by the commit policy [1].
+> 2. I am adding Khem, since he seems to be the original author of this pat=
+ch. It would be great to get his Acked-by too.
+> 3. S=C3=B8ren, please send your patch upstream.
+> 4. S=C3=B8ren, when you have a little time it would be great if you could=
+ update WvStreams to 4.6.1 and test it.
+> 5. S=C3=B8ren, I removed `apply=3Dyes` since that is the default.
+>
+> [1] http://openembedded.org/index.php/Commit_Policy
+> ---
+> =C2=A0.../files/0001-Fixed-missing-header-includes.patch | =C2=A0 37 ++++=
+++++++++++++++++
+> =C2=A0recipes/wvstreams/wvstreams_4.6.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A01 +
+> =C2=A02 files changed, 38 insertions(+), 0 deletions(-)
+> =C2=A0create mode 100644 recipes/wvstreams/files/0001-Fixed-missing-heade=
+r-includes.patch
+>
+> diff --git a/recipes/wvstreams/files/0001-Fixed-missing-header-includes.p=
+atch b/recipes/wvstreams/files/0001-Fixed-missing-header-includes.patch
+> new file mode 100644
+> index 0000000..f6d99f0
+> --- /dev/null
+> +++ b/recipes/wvstreams/files/0001-Fixed-missing-header-includes.patch
+> @@ -0,0 +1,37 @@
+> +From d76ec92a9e09fefa3083250f4aa588d0e94fe20c Mon Sep 17 00:00:00 2001
+> +From: =3D?UTF-8?q?S=3DC3=3DB8ren=3D20Holm?=3D <sh@mikrofyn.com>
+> +Date: Wed, 20 Apr 2011 09:41:22 +0200
+> +Subject: [PATCH] Fixed missing header includes.
+> +
+> +---
+> + ipstreams/wvunixdgsocket.cc | =C2=A0 =C2=A02 +-
+> + streams/wvatomicfile.cc =C2=A0 =C2=A0 | =C2=A0 =C2=A02 +-
+> + 2 files changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/ipstreams/wvunixdgsocket.cc b/ipstreams/wvunixdgsocket.cc
+> +index 41d2911..6dc12fc 100644
+> +--- a/ipstreams/wvunixdgsocket.cc
+> ++++ b/ipstreams/wvunixdgsocket.cc
+> +@@ -1,5 +1,5 @@
+> + #include "wvunixdgsocket.h"
+> +-#ifdef MACOS
+> ++#if defined(MACOS) || defined(__GNUC__)
+> + #include <sys/types.h>
+> + #include <sys/stat.h>
+> + #endif
+> +diff --git a/streams/wvatomicfile.cc b/streams/wvatomicfile.cc
+> +index 65ae202..0a58069 100644
+> +--- a/streams/wvatomicfile.cc
+> ++++ b/streams/wvatomicfile.cc
+> +@@ -11,7 +11,7 @@
+> + #include "wvfileutils.h"
+> + #include "wvstrutils.h"
+> +
+> +-#ifdef MACOS
+> ++#if defined(MACOS) || defined(__GNUC__)
+> + #include <sys/stat.h>
+> + #endif
+> +
+> +--
+> +1.7.4.1
+> +
+> diff --git a/recipes/wvstreams/wvstreams_4.6.bb b/recipes/wvstreams/wvstr=
+eams_4.6.bb
+> index 1c11268..0eb0198 100644
+> --- a/recipes/wvstreams/wvstreams_4.6.bb
+> +++ b/recipes/wvstreams/wvstreams_4.6.bb
+> @@ -6,6 +6,7 @@ DEPENDS =3D "zlib openssl (>=3D 0.9.8)"
+> =C2=A0PR =3D "r1"
+>
+> =C2=A0SRC_URI =3D "http://wvstreams.googlecode.com/files/${PN}-${PV}.tar.=
+gz \
+> + =C2=A0 =C2=A0 =C2=A0 file://0001-Fixed-missing-header-includes.patch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0"
+>
+> =C2=A0inherit autotools pkgconfig
+> --
+> 1.7.4.4
+>
 
-and `angstrom-2010.x` and `minimal` too.
 
-[1] http://lists.freedesktop.org/archives/pkg-config/2011-April/000720.html
-[2] http://cgit.freedesktop.org/pkg-config/commit/?id=3D66d49f1375fec838bcd=
-301bb4ca2ef76cee0e47c
-[3] http://cgit.freedesktop.org/pkg-config/commit/?id=3D99964eddb5935173fce=
-dfc793e762d7dc7d01bba
-
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
-v2: change `PV` from `0.26` to `0.25+0.26` to ensure a sane upgrade path
-
-1. How can this recipe used also for the native recipe?
-2. What is `pkg-config-sdk` used for?
----
- recipes/pkgconfig/pkgconfig_git.bb |   10 ++++++++++
- 1 files changed, 10 insertions(+), 0 deletions(-)
- create mode 100644 recipes/pkgconfig/pkgconfig_git.bb
-
-diff --git a/recipes/pkgconfig/pkgconfig_git.bb b/recipes/pkgconfig/pkgconf=
-ig_git.bb
-new file mode 100644
-index 0000000..39a5033
---- /dev/null
-+++ b/recipes/pkgconfig/pkgconfig_git.bb
-@@ -0,0 +1,10 @@
-+require ${PN}.inc
-+
-+SRCREV =3D "7850aeb03a54a15d07b6c243b61033cd379c39d7"
-+PV =3D "0.25+0.26"
-+PR =3D "${INC_PR}.0"
-+PR_append =3D "+gitr${SRCPV}"
-+
-+SRC_URI =3D "git://anongit.freedesktop.org/pkg-config;protocol=3Dgit"
-+
-+S =3D "${WORKDIR}/git"
---=20
-1.7.4.4
-
---=-SWW8kqaUMDy45op8mVZC
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk2x+msACgkQPX1aK2wOHVjzhQCcDr23/Rz6mSl11cc5E6kda1bM
-L0kAniY5hgykVT4v1kWH3UzNpmha44B9
-=Kb9N
------END PGP SIGNATURE-----
-
---=-SWW8kqaUMDy45op8mVZC--
