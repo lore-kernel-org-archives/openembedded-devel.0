@@ -1,26 +1,37 @@
-Received: from mx02.stofanet.dk ([212.10.10.12])
-	by linuxtogo.org with esmtp (Exim 4.72) (envelope-from <sgh@sgh.dk>)
-	id 1QDbc3-0002z6-QH for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Apr 2011 14:06:59 +0200
-Received: from 5634f1b4.rev.stofanet.dk ([86.52.241.180] helo=asrock)
-	by mx02.stofanet.dk (envelope-from <sgh@sgh.dk>)
-	with esmtp id 1QDbZj-0004eg-39
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Apr 2011 14:04:35 +0200
-Received: from phoenix.localnet (unknown [192.168.0.226])
-	by asrock (Postfix) with ESMTPS id 8B54E7F153
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Apr 2011 14:04:35 +0200 (CEST)
-From: =?iso-8859-15?q?S=F8ren_Holm?= <sgh@sgh.dk>
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QDcSF-0003pP-3o for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Apr 2011 15:00:55 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QDcPu-0004zH-QY for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Apr 2011 14:58:30 +0200
+Received: from 77.126.199.51 ([77.126.199.51])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 23 Apr 2011 14:58:30 +0200
+Received: from dzvernik by 77.126.199.51 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 23 Apr 2011 14:58:30 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 23 Apr 2011 14:04:34 +0200
-User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic; KDE/4.6.2; i686; ; )
-References: <201104201007.04378.sgh@sgh.dk> <201104231308.08992.sgh@sgh.dk>
-	<1303559162.4551.15.camel@mattotaupa>
-In-Reply-To: <1303559162.4551.15.camel@mattotaupa>
-MIME-Version: 1.0
-Message-Id: <201104231404.34882.sgh@sgh.dk>
-Subject: Re: [PATCH] wvstreams: add patch to add missing header includes
+From: DmitryZ <dzvernik@gmail.com>
+Date: Sat, 23 Apr 2011 12:58:16 +0000 (UTC)
+Message-ID: <loom.20110423T144701-128@post.gmane.org>
+References: <1302979061.3780.6.camel@mattotaupa>
+	<1303062425.23572.31.camel@mattotaupa>
+	<4DACB16C.6050303@eric-weiss.de>
+	<loom.20110423T113131-855@post.gmane.org>
+	<1303553742.4551.2.camel@mattotaupa>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 77.126.199.51 (Mozilla/5.0 (X11; U; Linux i686;
+	en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.205
+	Safari/534.16)
+Subject: Re: [RFC] [PATCH] schroedinger: add version 1.0.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,55 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Apr 2011 12:06:59 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-15"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 23 Apr 2011 13:00:55 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-L=F8rdag den 23. april 2011 13:46:02 skrev Paul Menzel:
-> Am Samstag, den 23.04.2011, 13:08 +0200 schrieb S=F8ren Holm:
-> > Fredag den 22. april 2011 21:51:07 skrev Paul Menzel:
-> > > 1. S=F8ren, please add your Signed-off-by line in front of mine. This=
- is a demanded by the commit policy [1].
-> >=20
-> > I kind of novice into this. How do I add my signed-off line ?
->=20
-> When committing the change, just add the option `-s` and it is added
-> automatically by what you have configured using `git config`.
->=20
-> For now, you can just reply to this message and add that line where you
-> like.
+Paul Menzel <paulepanter <at> users.sourceforge.net> writes:
 
-
-Signed-off-by: S=F8ren Holm <sgh@sgh.dk>
-
-I rebased my branch at github repo to master. Now ait lso contains a 4.6.1 =
-recipe if your would like.
-I added my Signed-Off to both commits there also.
-
->=20
-> I will add it to the commit message using `git commit --amend`.
->=20
-> > > 2. I am adding Khem, since he seems to be the original author of this=
- patch. It would be great to get his Acked-by too.
-> > > 3. S=F8ren, please send your patch upstream.
-> > > 4. S=F8ren, when you have a little time it would be great if you coul=
-d update WvStreams to 4.6.1 and test it.
-> >=20
-> > will do
-> >=20
-> > > 5. S=F8ren, I removed `apply=3Dyes` since that is the default.
-> >=20
-> > great.
-> >=20
-> > btw. The emaileaddress mixup won't happen again.
->=20
-> Just tell me what the correct one is and I will push your patch.
->=20
->=20
+> please update to latest master and make a new build from scratch, i. e.,
+> remove your build directory beforehand.
+> 
+> You could also use `bitbake -c clean yourprogramname` before the upgrade
+> to try to get rid of the wrong versions.
+> 
 > Thanks,
->=20
+> 
 > Paul
->=20
+> 
+
+Dear Paul,
+
+Thanks for advice. I'm just trying your suggestions. But just to let you know 
+that I was updated to the master about three days ago. I just double checked 
+which of the orc versions the OE downloaded in order to build the problematic 
+package and it was 0.4.13. At the beginning of this thread it was said to try to 
+build it instead of 0.4.12 with 0.4.10 where the defines for different types 
+still exist. However, it looks that the OE trying to build it with 0.4.13 where 
+the types still omitted. Do you know about some patches that were applied in a 
+last three days or something.
+Just to let you know, I have been building the Angstrom console-image with 
+eglibc for mini6410 machine. The preffered kernel version that came with OE git 
+is 2.6.28 with stable patch 6, however it is impossible to build it since the 
+make oldconfig fails with ERROR that says that it mixes the implicit and normal 
+rules, so I just needed to upgrade to some newer kernel. So I just upgraded it 
+to the 2.6.37 and specifically kernel build succeeded.
+As being newbie to the whole stuff I was wondering if the all things somehow 
+have been in connection with one to other.
+
+
+
 
 
