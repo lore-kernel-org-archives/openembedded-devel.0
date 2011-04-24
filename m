@@ -1,27 +1,17 @@
-Received: from vms173019pub.verizon.net ([206.46.173.19])
+Received: from smtp.tibbo.com ([81.171.42.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <openembedded@rkmorris.us>) id 1QE015-0002Mf-S2
+	(envelope-from <dvorkin@tibbo.com>) id 1QE08a-0002Us-0G
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Apr 2011 16:10:28 +0200
-Received: from server ([unknown] [71.164.183.134]) by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LK5002IDR4YLL10@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sun,
-	24 Apr 2011 08:07:47 -0500 (CDT)
-Received: from server (127.0.0.1) by server (Axigen)
-	with ESMTPSA id 329F04; Sun, 24 Apr 2011 08:07:44 -0500
-Received: from [192.168.1.2] by rkmorris.us with HTTP; Sun,
-	24 Apr 2011 08:07:43 -0500
-From: Russell Morris <openembedded@rkmorris.us>
-Date: Sun, 24 Apr 2011 08:07:43 -0500
-X-Mailer: Axigen WebMail
+	Sun, 24 Apr 2011 16:18:36 +0200
+Received: (qmail 11061 invoked by uid 508); 24 Apr 2011 18:14:46 +0400
+Received: from dvhome.kansstel.ru (HELO localhost.localdomain) (79.171.10.83)
+	by smtp.tibbo.com with SMTP; 24 Apr 2011 18:14:46 +0400
+From: Dvorkin Dmitry <dvorkin@tibbo.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <1303650463701271500@rkmorris.us>
-Importance: Normal
-MIME-version: 1.0
-X-AxigenVirus-Level: 1
-X-AxigenSpam-Level: 1
-Subject: Build Warnings (Angstrom-2010.x)
+Date: Sun, 24 Apr 2011 18:09:47 +0400
+Message-Id: <1303654187-23768-1-git-send-email-dvorkin@tibbo.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [[PATCH] at91sam9m10g45ek: better board choice] Signed-off-by: Dvorkin Dmitry <dvorkin@tibbo.com>
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,64 +25,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Apr 2011 14:10:28 -0000
-Content-type: text/plain
-Content-transfer-encoding: quoted-printable
-Content-disposition: inline
+X-List-Received-Date: Sun, 24 Apr 2011 14:18:36 -0000
 
-Hi,
+Better board choice for at91bootstrap.
+---
+ conf/machine/at91sam9m10g45ek.conf |   33 ++++++++++++++++++---------------
+ 1 files changed, 18 insertions(+), 15 deletions(-)
 
-I have noted that when I run builds for this distro I end up with a lot of =
-warnings near the start (added below). Is this expected / normal, and what =
-can I do to address these (as not only are they a bit confusing, I'm of cou=
-rse worried that the right items are being pulled in to the build)?
-
-NOTE: angstrom DOES NOT support bluez-utils because bluez-utils 3.x has bee=
-n replaced by bluez4
-NOTE: angstrom DOES NOT support libiconv because the glibc builtin iconv re=
-placement is used
-NOTE: angstrom DOES NOT support ffmpeg because libav is the preferred multi=
-media library
-NOTE: angstrom DOES NOT support libiconv because the glibc builtin iconv re=
-placement is used
-NOTE: angstrom DOES NOT support hotplug-ng because hotplug functionality is=
- provided by udev
-NOTE: angstrom DOES NOT support ffmpeg because libav is the preferred multi=
-media library
-NOTE: angstrom DOES NOT support ffmpeg because libav is the preferred multi=
-media library
-NOTE: angstrom DOES NOT support bluez-libs because bluez-libs 3.x has been =
-replaced by bluez4
-NOTE: angstrom DOES NOT support hotplug2 because hotplug functionality is p=
-rovided by udev
-NOTE: angstrom DOES NOT support linux-hotplug because hotplug functionality=
- is provided by udev
-NOTE: angstrom DOES NOT support fso-apm because regular apmd is good enough
-NOTE: angstrom DOES NOT support bluez-libs because bluez-libs 3.x has been =
-replaced by bluez4
-NOTE: angstrom DOES NOT support linux-hotplug because hotplug functionality=
- is provided by udev
-NOTE: angstrom DOES NOT support bash-noemu because doesn't work on the targ=
-et
-NOTE: angstrom DOES NOT support hotplug-ng because hotplug functionality is=
- provided by udev
-NOTE: angstrom DOES NOT support bluez-libs because bluez-libs 3.x has been =
-replaced by bluez4
-NOTE: angstrom DOES NOT support xcursor-watchonly-theme because xcursor-tra=
-nsparent-theme is good enough
-NOTE: angstrom DOES NOT support libiconv because the glibc builtin iconv re=
-placement is used
-NOTE: angstrom DOES NOT support ipkg because ipkg has been superseded by op=
-kg
-NOTE: angstrom DOES NOT support ffmpeg because libav is the preferred multi=
-media library
-NOTE: angstrom DOES NOT support bluez-utils because bluez-utils 3.x has bee=
-n replaced by bluez4
-done.h
-
-Thanks!
-
-... Russell
+diff --git a/conf/machine/at91sam9m10g45ek.conf b/conf/machine/at91sam9m10g45ek.conf
+index 979d58a..822b3a2 100644
+--- a/conf/machine/at91sam9m10g45ek.conf
++++ b/conf/machine/at91sam9m10g45ek.conf
+@@ -1,23 +1,26 @@
+ #@TYPE: Machine
+ #@Name: Atmel AT91SAM9M10G45EK Development Platform
+-#@DESCRIPTION: Machine configuration for the at91sam9m10g45ek board with a at91sam9m10 processor
++#@DESCRIPTION: Machine configuration for the at91sam9m10g45ek development board with an at91sam9m10 processor
+ 
+-include conf/machine/include/at91-2.6.30.inc
+-include conf/machine/include/at91-lcd.inc
++TARGET_ARCH = "arm"
+ 
+-# Has linux config file in OpenEmbedded
+-# 
+-# LINUX26_DEFCONFIG = "at91sam9m10ekes_defconfig"
+-# LINUX26_DEFCONFIG = "at91sam9m10g45ek_defconfig"
++PREFERRED_PROVIDER_virtual/kernel = "linux"
++PREFERRED_PROVIDER_xserver = "xserver-kdrive"
+ 
+-# Supported u-boot machines
+-#UBOOT_MACHINE = "at91sam9m10g45ek_nandflash_config"
+-#UBOOT_MACHINE = "at91sam9m10g45ek_dataflash_config"
+-UBOOT_MACHINE = "at91sam9m10g45ek_dataflash_cs0_config"
+-#UBOOT_MACHINE = "at91sam9m10g45ek_config"
+-#UBOOT_MACHINE = "at91sam9m10g45ek_sd_config"
++KERNEL_IMAGETYPE = "uImage"
++UBOOT_ENTRYPOINT = "0x70008000"
++UBOOT_LOADADDRESS = "0x70008000"
+ 
+-AT91BOOTSTRAP_BOARD = "at91sam9g45df at91sam9g45ek at91sam9g45nf"
++#don't try to access tty1
++USE_VT = "0"
+ 
+-MACHINE_FEATURES += "usbhost"
++MACHINE_FEATURES = "kernel26 alsa ext2 usbhost usbgadget screen touchscreen"
+ 
++# used by sysvinit_2
++SERIAL_CONSOLE = "115200 ttyS0"
++IMAGE_FSTYPES ?= "jffs2"
++EXTRA_IMAGECMD_jffs2 = "--pad --little-endian --eraseblock=0x20000 -n"
++
++require conf/machine/include/tune-arm926ejs.inc
++
++AT91BOOTSTRAP_BOARD = "at91sam9m10df at91sam9m10ek at91sam9m10nf"
+-- 
+1.7.3.4
 
 
 
