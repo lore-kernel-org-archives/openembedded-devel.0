@@ -1,34 +1,39 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QEIhY-0007UT-Pa for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 12:07:32 +0200
+	id 1QEIkM-0007cG-NY for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Apr 2011 12:10:27 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QEIfB-0006LY-Sj for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 12:05:05 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	id 1QEIi0-0007xU-7B for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Apr 2011 12:08:00 +0200
+Received: from 77.126.199.51 ([77.126.199.51])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2011 12:05:05 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2011 12:05:05 +0200
+	Mon, 25 Apr 2011 12:08:00 +0200
+Received: from dzvernik by 77.126.199.51 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Apr 2011 12:08:00 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 25 Apr 2011 12:04:54 +0200
-Message-ID: <ip3h06$kfq$1@dough.gmane.org>
-References: <1303725452-1908-1-git-send-email-sgh@sgh.dk>
+From: DmitryZ <dzvernik@gmail.com>
+Date: Mon, 25 Apr 2011 10:07:48 +0000 (UTC)
+Message-ID: <loom.20110425T113723-263@post.gmane.org>
+References: <1302979061.3780.6.camel@mattotaupa>
+	<1303062425.23572.31.camel@mattotaupa>
+	<4DACB16C.6050303@eric-weiss.de>
+	<loom.20110423T113131-855@post.gmane.org>
+	<1303553742.4551.2.camel@mattotaupa>
+	<loom.20110423T144701-128@post.gmane.org>
+	<1303655726.3956.4.camel@mattotaupa>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1303725452-1908-1-git-send-email-sgh@sgh.dk>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] wvstreams: Added recipe for wxstreams 4.6.1.
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 77.126.199.51 (Mozilla/5.0 (X11; U; Linux i686;
+	en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.205
+	Safari/534.16)
+Subject: Re: [RFC] [PATCH] schroedinger: add version 1.0.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,63 +47,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2011 10:07:32 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 25 Apr 2011 10:10:27 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dear Paul,
 
-On 25-04-11 11:57, Søren Holm wrote:
+Sorry for the long delay, holidays you know and I have a very slow machine for 
+building (32 bit etc.) available for me without Psyco JIT, since I have Python 
+2.7 installed by default that current sources of Psyco JIT Compiler doesn't 
+support.
 
-> +LICENSE = "LGPL"
+So, answering your questions, yes after updating to the last master I 
+successfully build the schroedinger package and the whole Angstrom 
+console-image for the mini6410 with the parameters described earlier in this 
+thread. Thanks a lot for the assistance and help. 
+Just to let you know I haven't tested the image on the target board, so I can 
+confirm only the build.
 
-That needs a version number, e.g. LGPLv2.1
+Again, as being newbie to the whole stuff I simply don't know where I should 
+post 
+the information and problems regarding the components compatibility issues and 
+build problems (for example those described above for the kernel version 2.6.28 
+for mini6410 and I have a few more). Would you please kindly instruct me on 
+which of the OpenEmbedded mailing lists I should post this information. Simply 
+according to the information given at openembedded.org for the Release 2011.03 
+Tom Rini has the responsibily for the build for mini6410, so I want that this 
+information somehow will reach the right address.
+Sorry for junking the thread with irrelevant info.
 
-> +DEPENDS = "zlib openssl (>= 0.9.8)"
+Thanks,
 
-There's no < 0.9.8 in the tree anymore
-
-> +# dbus detection currently broken in configure.ac; remember to add "dbus (>= 1.2.14)" to DEPENDS  when fixed
-
-has it been fixed?
-
-> +EXTRA_OECONF = " --without-tcl --without-qt --without-pam --without-dbus"
-
-The pam stuff needs to be converted into something like:
-
-DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
-
-${@base_contains('DISTRO_FEATURES', 'pam', '--with-pam',
-'--without-pam', d)}
-
-> +
-> +PACKAGES_prepend = "libuniconf libuniconf-dbg "
-> +PACKAGES_prepend = "uniconfd uniconfd-dbg "
-> +PACKAGES_prepend = "libwvstreams-base libwvstreams-base-dbg "
-> +PACKAGES_prepend = "libwvstreams-extras libwvstreams-extras-dbg "
-
-Change that to a single PACKAGES =+
+Dmitry.
 
 
-> +do_configure() {
-> +        autoreconf
-> +        oe_runconf
-> +}
 
-Why not stock autotools_do_configure?
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNtUdGMkyGM64RGpERAsajAJ9nepgViPPFhbWwsS2AchhCw/tlBACfbVUa
-JdSqbThI5m5aFsEd0cajYB4=
-=gUZN
------END PGP SIGNATURE-----
 
 
 
