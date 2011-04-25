@@ -1,19 +1,19 @@
 Received: from cpe.ge-0-2-0-951.faaqnqu1.customer.tele.dk ([93.167.193.22]
 	helo=mail.mikrofyn.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sgh@sgh.dk>) id 1QEHjU-0006Ln-5z
+	(envelope-from <sgh@sgh.dk>) id 1QEIZ5-0006we-Gs
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 11:05:28 +0200
+	Mon, 25 Apr 2011 11:58:47 +0200
 Received: from zemeckis.mikrofyn.local ([10.115.0.50]) by mail.mikrofyn.com
 	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 25 Apr 2011 11:07:46 +0200
+	Mon, 25 Apr 2011 12:01:04 +0200
 From: =?UTF-8?q?S=C3=B8ren=20Holm?= <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Apr 2011 11:04:12 +0200
-Message-Id: <1303722252-32371-1-git-send-email-sgh@sgh.dk>
+Date: Mon, 25 Apr 2011 11:57:32 +0200
+Message-Id: <1303725452-1908-1-git-send-email-sgh@sgh.dk>
 X-Mailer: git-send-email 1.7.1
 MIME-Version: 1.0
-X-OriginalArrivalTime: 25 Apr 2011 09:07:46.0656 (UTC)
-	FILETIME=[3E59F600:01CC0328]
+X-OriginalArrivalTime: 25 Apr 2011 10:01:04.0656 (UTC)
+	FILETIME=[B0820900:01CC032F]
 Subject: [PATCH] wvstreams: Added recipe for wxstreams 4.6.1.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -28,7 +28,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2011 09:05:28 -0000
+X-List-Received-Date: Mon, 25 Apr 2011 09:58:47 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
