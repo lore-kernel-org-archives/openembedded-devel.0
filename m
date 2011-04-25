@@ -1,24 +1,29 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QENEa-0003sG-Mw for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 16:57:56 +0200
+	id 1QENJK-0004Lh-Pm for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Apr 2011 17:02:50 +0200
 Received: from f053045128.adsl.alicedsl.de ([78.53.45.128]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QENCw-0003Mg-1m for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 14:56:14 +0000
+	id 1QENHf-0003O8-Oj for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Apr 2011 15:01:08 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201104251229.57261.sgh@sgh.dk>
-References: <1303725452-1908-1-git-send-email-sgh@sgh.dk>
-	<ip3h06$kfq$1@dough.gmane.org>  <201104251229.57261.sgh@sgh.dk>
-Date: Mon, 25 Apr 2011 16:55:29 +0200
-Message-ID: <1303743329.15311.29.camel@mattotaupa>
+In-Reply-To: <loom.20110425T113723-263@post.gmane.org>
+References: <1302979061.3780.6.camel@mattotaupa>
+	<1303062425.23572.31.camel@mattotaupa> <4DACB16C.6050303@eric-weiss.de>
+	<loom.20110423T113131-855@post.gmane.org>
+	<1303553742.4551.2.camel@mattotaupa>
+	<loom.20110423T144701-128@post.gmane.org>
+	<1303655726.3956.4.camel@mattotaupa>
+	<loom.20110425T113723-263@post.gmane.org>
+Date: Mon, 25 Apr 2011 17:00:22 +0200
+Message-ID: <1303743623.15311.34.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH] wvstreams: Added recipe for wxstreams 4.6.1.
+Subject: Re: [RFC] [PATCH] schroedinger: add version 1.0.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,60 +37,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2011 14:57:57 -0000
-X-Groupsio-MsgNum: 31436
+X-List-Received-Date: Mon, 25 Apr 2011 15:02:50 -0000
+X-Groupsio-MsgNum: 31437
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-mdQe1JyyenWUwsEU3J6l"
+	boundary="=-bECmfJPxSI+Z9WAcRagb"
 
---=-mdQe1JyyenWUwsEU3J6l
+--=-bECmfJPxSI+Z9WAcRagb
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Am Montag, den 25.04.2011, 12:29 +0200 schrieb S=C3=B8ren Holm:
-> I will edit the recipe a bit. It is just a copy of the 4.6.0 recipe.
+Dear DmitryZ,
 
-Please pass `-M -C -C` to `git format-patch` next time, so that copies
-or renames are detected.
 
-Please also add what build configurations you used for testing next
-time. I have build 4.6.1 successfully in several configurations and I
-pushed your patch [1].
+Am Montag, den 25.04.2011, 10:07 +0000 schrieb DmitryZ:
 
-Please update the patch queue [2] using the Web interface or the
-following command.
+[=E2=80=A6]
 
-	$ pwclient update -s Accepted -c aaf30cc3e147816c63e694ef65951b3cd2dc48c5 =
-2815
+> So, answering your questions, yes after updating to the last master I=20
+> successfully build the schroedinger package and the whole Angstrom=20
+> console-image for the mini6410 with the parameters described earlier in t=
+his=20
+> thread. Thanks a lot for the assistance and help.=20
+> Just to let you know I haven't tested the image on the target board, so I=
+ can=20
+> confirm only the build.
 
-Your earlier message was also recorded, so you could do something like
-the following.
+it is great to hear that.
 
-	$ pwclient update -s Superseded 2813
+> Again, as being newbie to the whole stuff I simply don't know where I sho=
+uld=20
+> post the information and problems regarding the components compatibility =
+issues and=20
+> build problems (for example those described above for the kernel version =
+2.6.28=20
+> for mini6410 and I have a few more). Would you please kindly instruct me =
+on=20
+> which of the OpenEmbedded mailing lists I should post this information. S=
+imply=20
+> according to the information given at openembedded.org for the Release 20=
+11.03=20
+> Tom Rini has the responsibily for the build for mini6410, so I want that =
+this=20
+> information somehow will reach the right address.
+> Sorry for junking the thread with irrelevant info.
 
-Please post a follow up patch (in a new thread) addressing the things
-Koen pointed out.
+Well I do not know, but I suggest to open a new thread describing the
+problem and your fix. Hopefully Tom or someone else will respond and
+suggest a fix. You can even put him into CC and if he complains about
+that, then you can blame me and not put him into CC next time.
 
 
 Thanks,
 
 Paul
 
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Daaf30cc=
-3e147816c63e694ef65951b3cd2dc48c5
-[2] http://openembedded.org/index.php/Patchwork
-
---=-mdQe1JyyenWUwsEU3J6l
+--=-bECmfJPxSI+Z9WAcRagb
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk21i2AACgkQPX1aK2wOHVgnJwCfXCU8keDGbGrLn9ho+DQEiRlE
-pfcAn0Rib490RxhTWDTY1i+ve9zOAXvv
-=mece
+iEYEABECAAYFAk21jIYACgkQPX1aK2wOHVh0IwCfXdWVlw5iJYfEMg0UGjhYRGhQ
+4M0An2MJxKmCHxmAqFT2GWqLtv6eIvTQ
+=4nxT
 -----END PGP SIGNATURE-----
 
---=-mdQe1JyyenWUwsEU3J6l--
+--=-bECmfJPxSI+Z9WAcRagb--
