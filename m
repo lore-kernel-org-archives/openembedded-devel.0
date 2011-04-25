@@ -1,38 +1,32 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1QESo8-0006hA-Ax
+Received: from 1.26.mail-out.ovh.net ([46.105.43.121] helo=26.mail-out.ovh.net)
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1QET0E-0007Es-3J
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 22:55:00 +0200
-Received: by yia13 with SMTP id 13so2048yia.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2011 13:52:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=OoXlheBAK/NLocea4cBGO9df4PTxGu6pKuR+ciV/yCo=;
-	b=E2rOckVKDCHKkn9TkPg+cd99jCNYXrD2GfQ4R5QteiWpmPmieS3qFK4D2o6uvwos13
-	lTnFetPEgYPRjkC0TmdgwU27i7PNeEM8JibUcYKJJ7gyVdWzsR17XHahgUpUHiHA1xHv
-	60gRQ7GKeuE8j7PskcOJ6p89usG7DLPC2dojM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=KBfLY4X5RV+DuKa/709lhAVlZVBtfGA6YcqKih1xeOmg7GiKYBx+DA3fxPfNsrrBN/
-	BkjBmlNULIid/hRXbHSFqjIOXLJ72OdIQgzTofKsmqrGzH74MHaOkw0O/LIx+SjDWK2Y
-	1mbQOAQRHlVA499jyTD2WhUOF5+/cpCNZTdOs=
+	Mon, 25 Apr 2011 23:07:30 +0200
+Received: (qmail 16909 invoked by uid 503); 25 Apr 2011 18:45:01 -0000
+Received: from b6.ovh.net (HELO mail94.ha.ovh.net) (213.186.33.56)
+	by 26.mail-out.ovh.net with SMTP; 25 Apr 2011 18:45:00 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 25 Apr 2011 21:18:18 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 25 Apr 2011 21:18:17 +0200
+Message-ID: <4DB5C8F8.9070406@eukrea.com>
+Date: Mon, 25 Apr 2011 21:18:16 +0200
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.15) Gecko/20110307 Fedora/3.1.9-0.39.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.9
 MIME-Version: 1.0
-Received: by 10.90.160.10 with SMTP id i10mr23079age.65.1303764747256; Mon, 25
-	Apr 2011 13:52:27 -0700 (PDT)
-Received: by 10.90.141.8 with HTTP; Mon, 25 Apr 2011 13:52:27 -0700 (PDT)
-In-Reply-To: <4DB5DC4D.9080202@mentor.com>
-References: <1303756273-22385-1-git-send-email-tom_rini@mentor.com>
-	<BANLkTikm-JOf-Y2E=gz8xhrbzst2SOMLOw@mail.gmail.com>
-	<4DB5DC4D.9080202@mentor.com>
-Date: Mon, 25 Apr 2011 22:52:27 +0200
-Message-ID: <BANLkTinKZiHUR913r=582gPRPULh=N48Gw@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [RFC, PATCH] Add minver/maxver to patch.bbclass, update bluez
+References: <1303756273-22385-1-git-send-email-tom_rini@mentor.com>	<1303756273-22385-4-git-send-email-tom_rini@mentor.com>	<1303757678.15311.113.camel@mattotaupa>
+	<4DB5C602.60703@mentor.com>
+In-Reply-To: <4DB5C602.60703@mentor.com>
+X-Ovh-Tracer-Id: 14481606077285641545
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: Re: [PATCH 3/3] bluez4: Add 4.91 and make it default for	Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,75 +40,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2011 20:55:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 25 Apr 2011 21:07:30 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2011/4/25 Tom Rini <tom_rini@mentor.com>
+Hi
 
-> On 04/25/2011 01:14 PM, Frans Meulenbroeks wrote:
-> > 2011/4/25 Tom Rini <tom_rini@mentor.com>
-> >
-> >> Hey all,
-> >>
-> >> In digging at some other bluez problems, I found that at least
-> >> 4.91 no longer needs the sbc-thumb patch.  But without moving it to the
-> >> N versions of bluez4 we have or starting a new inc file for later bluez4
-> >> versions, there wasn't a clean way to exclude the patch.  Until now.
-> >> Borrowing the minrev/maxrev logic I added minver/maxver patch params
-> >> and tested them lightly (the patch is applied on 4.89 and not on
-> >> 4.91).  I'm cc'ing Koen here because patch #3 adds 4.91 and make it
-> >> default for Angstrom, but all I've done myself is build testing.
-> >> It should be safe, based on upstream changelog tho.
-> >>
-> >> First question should probably be: do we need 9 versions of bluez4? This
-> is
-> > not too much in line with the version policy the TSC once stipulated and
-> > seems also different from the road oe-core and meta-oe are taking.
+On 25/04/2011 21:05, Tom Rini wrote:
+>> Please create the patch next time adding `-M -C -C` to `git
+>> format-patch`.
 >
-> For bluez4 we could probably drop out 4.31, 4.41 (4.43 seems to
-> introduce some startup changes that might require folks to opt-in) and
-> then all of the post ones until 4.91, since shr and angstrom would both
-> depend on that.  I'd be happy to do that as a follow-up.
+> Is there a way to shove that into ~/.gitconfig?  Otherwise I'm sure to
+> forget.
 >
-> > Also personally I'm not too keen on minrev/maxrev. It only makes things
-> > again a little bit more complicated.
-> > My preference would be to remove the patch from the .inc file and move to
-> > the individual bb files
->
-> Well, maybe the better answer is a re-worked series to drop out a number
-> of older versions, and then it won't be bad to have the patch in a the
-> bb files..  Need to think about this.
->
+http://www.kernel.org/pub/software/scm/git/docs/git-config.html :
+diff.renames
 
-I appreciate it if you would.
-To me the analysis of what is needed seems sound.
+     Tells git to detect renames. If set to any boolean value, it will enable 
+basic rename detection. If set to "copies" or "copy", it will detect copies, 
+as well.
 
->
-> > My 2 cents.
-> >
-> > Frans
-> >
-> > PS: two more cents: it seems somewhat odd that some distro's have a DP =
-> 1
-> > for more than one version of a recipe. While technically not wrong this
-> > looks a little bit odd.
-> > Also we seem to have two mechanisms to select a version for a distro. One
-> is
-> > the DP_distro mechanism the other one is the PREFERRED_VERSION_recipe in
-> the
-> > conf file
-> > It seems to me one should be sufficient
->
-> Well, this is in part something the oe-core/meta-oe/etc policy will help
-> with since it does have a planned phasing out / removal of the old
-> version, so we would have less in the way of "add the latest .z release
-> and .z-1 through .z-5 just stick around).
->
+Eric
 
-Actually the last remark was mostly triggered by the observation that
-distro's have two ways to pin a recipe (and actually use both of them).
-Having only one mechanism might reduce the chance of causing confusion
-and/or mistakes
-
-Frans
 
