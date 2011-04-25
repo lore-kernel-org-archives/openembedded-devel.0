@@ -1,33 +1,20 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dp@xora.org.uk>) id 1QEHJw-0005fw-Ve
+Received: from cpe.ge-0-2-0-951.faaqnqu1.customer.tele.dk ([93.167.193.22]
+	helo=mail.mikrofyn.com) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <sgh@sgh.dk>) id 1QEHjU-0006Ln-5z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 10:39:05 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id A59261401C
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2011 09:36:37 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id 5YhslaQHpH3J
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2011 09:36:37 +0100 (BST)
-Received: from xora-eee (188-220-38-49.zone11.bethere.co.uk [188.220.38.49])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 276C0A4A8D
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2011 09:36:37 +0100 (BST)
-Received: by xora-eee (Postfix, from userid 1000)
-	id 7A8588072F; Mon, 25 Apr 2011 09:36:35 +0100 (BST)
-Date: Mon, 25 Apr 2011 09:36:35 +0100
-From: Graeme Gregory <dp@xora.org.uk>
+	Mon, 25 Apr 2011 11:05:28 +0200
+Received: from zemeckis.mikrofyn.local ([10.115.0.50]) by mail.mikrofyn.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 25 Apr 2011 11:07:46 +0200
+From: =?UTF-8?q?S=C3=B8ren=20Holm?= <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110425083635.GA2794@xora-eee.xora.org.uk>
-References: <1303650463701271500@rkmorris.us>
+Date: Mon, 25 Apr 2011 11:04:12 +0200
+Message-Id: <1303722252-32371-1-git-send-email-sgh@sgh.dk>
+X-Mailer: git-send-email 1.7.1
 MIME-Version: 1.0
-In-Reply-To: <1303650463701271500@rkmorris.us>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: Build Warnings (Angstrom-2010.x)
+X-OriginalArrivalTime: 25 Apr 2011 09:07:46.0656 (UTC)
+	FILETIME=[3E59F600:01CC0328]
+Subject: [PATCH] wvstreams: Added recipe for wxstreams 4.6.1.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,22 +28,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2011 08:39:05 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 25 Apr 2011 09:05:28 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sun, Apr 24, 2011 at 08:07:43AM -0500, Russell Morris wrote:
-> Hi,
-> 
-> I have noted that when I run builds for this distro I end up with a lot of warnings near the start (added below). Is this expected / normal, and what can I do to address these (as not only are they a bit confusing, I'm of course worried that the right items are being pulled in to the build)?
-> 
-Its just the blacklister removing software from the total set of software. We
-do this to remove items that are incompatible with Angstrom to prevent people
-building them by accident.
+Signed-off-by: Søren Holm <sgh@sgh.dk>
+---
+ recipes/wvstreams/wvstreams_4.6.1.bb |   44 ++++++++++++++++++++++++++++++++++
+ 1 files changed, 44 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/wvstreams/wvstreams_4.6.1.bb
 
-You can just leave it how it is, all is working perfect :-)
-
-G
+diff --git a/recipes/wvstreams/wvstreams_4.6.1.bb b/recipes/wvstreams/wvstreams_4.6.1.bb
+new file mode 100644
+index 0000000..b11b500
+--- /dev/null
++++ b/recipes/wvstreams/wvstreams_4.6.1.bb
+@@ -0,0 +1,44 @@
++HOMEPAGE = "http://alumnit.ca/wiki/index.php?page=WvStreams"
++LICENSE = "LGPL"
++DESCRIPTION = "WvStreams is a network programming library in C++"
++DEPENDS = "zlib openssl (>= 0.9.8)"
++
++PR = "r1"
++
++SRC_URI = "http://wvstreams.googlecode.com/files/${PN}-${PV}.tar.gz \
++	file://0001-Fixed-missing-header-includes.patch \
++	"
++
++inherit autotools pkgconfig
++
++LDFLAGS_append = " -Wl,-rpath-link,${TOOLCHAIN_PATH}/${TARGET_SYS}/lib"
++
++# dbus detection currently broken in configure.ac; remember to add "dbus (>= 1.2.14)" to DEPENDS  when fixed
++EXTRA_OECONF = " --without-tcl --without-qt --without-pam --without-dbus"
++
++PACKAGES_prepend = "libuniconf libuniconf-dbg "
++PACKAGES_prepend = "uniconfd uniconfd-dbg "
++PACKAGES_prepend = "libwvstreams-base libwvstreams-base-dbg "
++PACKAGES_prepend = "libwvstreams-extras libwvstreams-extras-dbg "
++
++FILES_libuniconf     = "${libdir}/libuniconf.so.*"
++FILES_libuniconf-dbg = "${libdir}/.debug/libuniconf.so.*"
++
++FILES_uniconfd     = "${sbindir}/uniconfd ${sysconfdir}/uniconf.conf ${localstatedir}/uniconf"
++FILES_uniconfd-dbg = "${sbindir}/.debug/uniconfd"
++
++FILES_libwvstreams-base     = "${libdir}/libwvutils.so.*"
++FILES_libwvstreams-base-dbg = "${libdir}/.debug/libwvutils.so.*"
++
++FILES_libwvstreams-extras     = "${libdir}/libwvbase.so.* ${libdir}/libwvstreams.so.*"
++FILES_libwvstreams-extras-dbg = "${libdir}/.debug/libwvbase.so.* ${libdir}/.debug/libwvstreams.so.*"
++
++PARALLEL_MAKE = ""
++
++do_configure() {
++        autoreconf
++        oe_runconf
++}
++
++SRC_URI[md5sum] = "2760dac31a43d452a19a3147bfde571c"
++SRC_URI[sha256sum] = "8403f5fbf83aa9ac0c6ce15d97fd85607488152aa84e007b7d0621b8ebc07633"
+-- 
+1.7.1
 
 
 
