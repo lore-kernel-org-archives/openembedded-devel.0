@@ -1,39 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QEIkM-0007cG-NY for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 12:10:27 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QEIi0-0007xU-7B for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 12:08:00 +0200
-Received: from 77.126.199.51 ([77.126.199.51])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2011 12:08:00 +0200
-Received: from dzvernik by 77.126.199.51 with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2011 12:08:00 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from mx02.stofanet.dk ([212.10.10.12])
+	by linuxtogo.org with esmtp (Exim 4.72) (envelope-from <sgh@sgh.dk>)
+	id 1QEJ5d-0007vp-3o for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Apr 2011 12:32:25 +0200
+Received: from 5634f1b4.rev.stofanet.dk ([86.52.241.180] helo=asrock)
+	by mx02.stofanet.dk (envelope-from <sgh@sgh.dk>)
+	with esmtp id 1QEJ3G-0002qf-2G
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Apr 2011 12:29:58 +0200
+Received: from phoenix.localnet (unknown [192.168.0.226])
+	by asrock (Postfix) with ESMTPS id 2D7958AC67
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Apr 2011 12:29:58 +0200 (CEST)
+From: =?utf-8?q?S=C3=B8ren_Holm?= <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-From: DmitryZ <dzvernik@gmail.com>
-Date: Mon, 25 Apr 2011 10:07:48 +0000 (UTC)
-Message-ID: <loom.20110425T113723-263@post.gmane.org>
-References: <1302979061.3780.6.camel@mattotaupa>
-	<1303062425.23572.31.camel@mattotaupa>
-	<4DACB16C.6050303@eric-weiss.de>
-	<loom.20110423T113131-855@post.gmane.org>
-	<1303553742.4551.2.camel@mattotaupa>
-	<loom.20110423T144701-128@post.gmane.org>
-	<1303655726.3956.4.camel@mattotaupa>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 77.126.199.51 (Mozilla/5.0 (X11; U; Linux i686;
-	en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.205
-	Safari/534.16)
-Subject: Re: [RFC] [PATCH] schroedinger: add version 1.0.10
+Date: Mon, 25 Apr 2011 12:29:57 +0200
+User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic; KDE/4.6.2; i686; ; )
+References: <1303725452-1908-1-git-send-email-sgh@sgh.dk>
+	<ip3h06$kfq$1@dough.gmane.org>
+In-Reply-To: <ip3h06$kfq$1@dough.gmane.org>
+MIME-Version: 1.0
+Message-Id: <201104251229.57261.sgh@sgh.dk>
+Subject: Re: [PATCH] wvstreams: Added recipe for wxstreams 4.6.1.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,41 +34,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2011 10:10:27 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 25 Apr 2011 10:32:25 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Dear Paul,
+I will edit the recipe a bit. It is just a copy of the 4.6.0 recipe.
 
-Sorry for the long delay, holidays you know and I have a very slow machine for 
-building (32 bit etc.) available for me without Psyco JIT, since I have Python 
-2.7 installed by default that current sources of Psyco JIT Compiler doesn't 
-support.
-
-So, answering your questions, yes after updating to the last master I 
-successfully build the schroedinger package and the whole Angstrom 
-console-image for the mini6410 with the parameters described earlier in this 
-thread. Thanks a lot for the assistance and help. 
-Just to let you know I haven't tested the image on the target board, so I can 
-confirm only the build.
-
-Again, as being newbie to the whole stuff I simply don't know where I should 
-post 
-the information and problems regarding the components compatibility issues and 
-build problems (for example those described above for the kernel version 2.6.28 
-for mini6410 and I have a few more). Would you please kindly instruct me on 
-which of the OpenEmbedded mailing lists I should post this information. Simply 
-according to the information given at openembedded.org for the Release 2011.03 
-Tom Rini has the responsibily for the build for mini6410, so I want that this 
-information somehow will reach the right address.
-Sorry for junking the thread with irrelevant info.
-
-Thanks,
-
-Dmitry.
-
-
-
-
+Mandag den 25. april 2011 12:04:54 skrev Koen Kooi:
+> On 25-04-11 11:57, S=C3=B8ren Holm wrote:
+>=20
+> > +LICENSE =3D "LGPL"
+>=20
+> That needs a version number, e.g. LGPLv2.1
+>=20
+> > +DEPENDS =3D "zlib openssl (>=3D 0.9.8)"
+>=20
+> There's no < 0.9.8 in the tree anymore
+>=20
+> > +# dbus detection currently broken in configure.ac; remember to add "db=
+us (>=3D 1.2.14)" to DEPENDS  when fixed
+>=20
+> has it been fixed?
+>=20
+> > +EXTRA_OECONF =3D " --without-tcl --without-qt --without-pam --without-=
+dbus"
+>=20
+> The pam stuff needs to be converted into something like:
+>=20
+> DEPENDS +=3D "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)=
+}"
+>=20
+> ${@base_contains('DISTRO_FEATURES', 'pam', '--with-pam',
+> '--without-pam', d)}
+>=20
+> > +
+> > +PACKAGES_prepend =3D "libuniconf libuniconf-dbg "
+> > +PACKAGES_prepend =3D "uniconfd uniconfd-dbg "
+> > +PACKAGES_prepend =3D "libwvstreams-base libwvstreams-base-dbg "
+> > +PACKAGES_prepend =3D "libwvstreams-extras libwvstreams-extras-dbg "
+>=20
+> Change that to a single PACKAGES =3D+
+>=20
+>=20
+> > +do_configure() {
+> > +        autoreconf
+> > +        oe_runconf
+> > +}
+>=20
+> Why not stock autotools_do_configure?
+>=20
 
 
