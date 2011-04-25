@@ -1,20 +1,27 @@
-Received: from cpe.ge-0-2-0-951.faaqnqu1.customer.tele.dk ([93.167.193.22]
-	helo=mail.mikrofyn.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sgh@zemeckis>) id 1QERai-0005Gy-4h
+Received: from mx03.stofanet.dk ([212.10.10.13])
+	by linuxtogo.org with esmtp (Exim 4.72) (envelope-from <sgh@sgh.dk>)
+	id 1QERlD-0005RK-Dq for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Apr 2011 21:47:55 +0200
+Received: from 5634f1b4.rev.stofanet.dk ([86.52.241.180] helo=asrock)
+	by mx01.stofanet.dk (envelope-from <sgh@sgh.dk>)
+	with esmtp id 1QERYR-0006cm-1W
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 21:37:04 +0200
-Received: from zemeckis ([10.115.0.50]) by mail.mikrofyn.com with Microsoft
-	SMTPSVC(6.0.3790.3959); Mon, 25 Apr 2011 21:38:17 +0200
-Received: by zemeckis (Postfix, from userid 1000)
-	id A9EA620029; Mon, 25 Apr 2011 21:34:48 +0200 (CEST)
-From: =?UTF-8?q?S=C3=B8ren=20Holm?= <sgh@sgh.dk>
+	Mon, 25 Apr 2011 21:34:43 +0200
+Received: from phoenix.localnet (unknown [192.168.0.226])
+	by asrock (Postfix) with ESMTPS id 133B781DEF
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Apr 2011 21:34:43 +0200 (CEST)
+From: =?iso-8859-15?q?S=F8ren_Holm?= <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Apr 2011 21:34:48 +0200
-Message-Id: <1303760088-28474-1-git-send-email-sgh@sgh.dk>
-X-Mailer: git-send-email 1.7.1
-X-OriginalArrivalTime: 25 Apr 2011 19:38:17.0031 (UTC)
-	FILETIME=[53031570:01CC0380]
-Subject: [PATCH] wvstreams: Cleaned up recipe.
+Date: Mon, 25 Apr 2011 21:34:42 +0200
+User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic; KDE/4.6.2; i686; ; )
+References: <1303725452-1908-1-git-send-email-sgh@sgh.dk>
+	<201104251229.57261.sgh@sgh.dk>
+	<1303743329.15311.29.camel@mattotaupa>
+In-Reply-To: <1303743329.15311.29.camel@mattotaupa>
+MIME-Version: 1.0
+Message-Id: <201104252134.42402.sgh@sgh.dk>
+Subject: Re: [PATCH] wvstreams: Added recipe for wxstreams 4.6.1.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,63 +35,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2011 19:37:04 -0000
+X-List-Received-Date: Mon, 25 Apr 2011 19:47:55 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
+Content-Transfer-Encoding: quoted-printable
 
-* Corrected license.
-* Added dbus support.
-* Made PAM-support conditional.
----
- recipes/wvstreams/wvstreams_4.6.1.bb |   21 +++++++--------------
- 1 files changed, 7 insertions(+), 14 deletions(-)
+Is there a document describing the workflow around patchwork?
+I'm a bit lost as to how it is supposed to work.
 
-diff --git a/recipes/wvstreams/wvstreams_4.6.1.bb b/recipes/wvstreams/wvstreams_4.6.1.bb
-index 53249d4..8453e08 100644
---- a/recipes/wvstreams/wvstreams_4.6.1.bb
-+++ b/recipes/wvstreams/wvstreams_4.6.1.bb
-@@ -1,9 +1,10 @@
- HOMEPAGE = "http://alumnit.ca/wiki/index.php?page=WvStreams"
--LICENSE = "LGPL"
-+LICENSE = "LGPLv2.1"
- DESCRIPTION = "WvStreams is a network programming library in C++"
--DEPENDS = "zlib openssl (>= 0.9.8)"
-+DEPENDS = "zlib openssl dbus"
-+DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
- 
--PR = "r0"
-+PR = "r1"
- 
- SRC_URI = "http://wvstreams.googlecode.com/files/${PN}-${PV}.tar.gz \
- 	file://0001-Fixed-missing-header-includes.patch \
-@@ -13,13 +14,10 @@ inherit autotools pkgconfig
- 
- LDFLAGS_append = " -Wl,-rpath-link,${TOOLCHAIN_PATH}/${TARGET_SYS}/lib"
- 
--# dbus detection currently broken in configure.ac; remember to add "dbus (>= 1.2.14)" to DEPENDS  when fixed
--EXTRA_OECONF = " --without-tcl --without-qt --without-pam --without-dbus"
-+EXTRA_OECONF = " --without-tcl --without-qt --with-dbus"
-+EXTRA_OECONF += ${@base_contains('DISTRO_FEATURES', 'pam', '--with-pam', '--without-pam', d)}
- 
--PACKAGES_prepend = "libuniconf libuniconf-dbg "
--PACKAGES_prepend = "uniconfd uniconfd-dbg "
--PACKAGES_prepend = "libwvstreams-base libwvstreams-base-dbg "
--PACKAGES_prepend = "libwvstreams-extras libwvstreams-extras-dbg "
-+PACKAGES += "libuniconf libuniconf-dbg uniconfd uniconfd-dbg libwvstreams-base libwvstreams-base-dbg libwvstreams-extras libwvstreams-extras-dbg"
- 
- FILES_libuniconf     = "${libdir}/libuniconf.so.*"
- FILES_libuniconf-dbg = "${libdir}/.debug/libuniconf.so.*"
-@@ -35,10 +33,5 @@ FILES_libwvstreams-extras-dbg = "${libdir}/.debug/libwvbase.so.* ${libdir}/.debu
- 
- PARALLEL_MAKE = ""
- 
--do_configure() {
--        autoreconf
--        oe_runconf
--}
--
- SRC_URI[md5sum] = "2760dac31a43d452a19a3147bfde571c"
- SRC_URI[sha256sum] = "8403f5fbf83aa9ac0c6ce15d97fd85607488152aa84e007b7d0621b8ebc07633"
--- 
-1.7.1
-
+Mandag den 25. april 2011 16:55:29 skrev Paul Menzel:
+> Am Montag, den 25.04.2011, 12:29 +0200 schrieb S=F8ren Holm:
+> > I will edit the recipe a bit. It is just a copy of the 4.6.0 recipe.
+>=20
+> Please pass `-M -C -C` to `git format-patch` next time, so that copies
+> or renames are detected.
+>=20
+> Please also add what build configurations you used for testing next
+> time. I have build 4.6.1 successfully in several configurations and I
+> pushed your patch [1].
+>=20
+> Please update the patch queue [2] using the Web interface or the
+> following command.
+>=20
+> 	$ pwclient update -s Accepted -c aaf30cc3e147816c63e694ef65951b3cd2dc48c=
+5 2815
+>=20
+> Your earlier message was also recorded, so you could do something like
+> the following.
+>=20
+> 	$ pwclient update -s Superseded 2813
+>=20
+> Please post a follow up patch (in a new thread) addressing the things
+> Koen pointed out.
+>=20
 
 
