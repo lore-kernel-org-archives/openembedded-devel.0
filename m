@@ -1,26 +1,24 @@
-Received: from mx02.stofanet.dk ([212.10.10.12])
-	by linuxtogo.org with esmtp (Exim 4.72) (envelope-from <sgh@sgh.dk>)
-	id 1QEJ5d-0007vp-3o for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 12:32:25 +0200
-Received: from 5634f1b4.rev.stofanet.dk ([86.52.241.180] helo=asrock)
-	by mx02.stofanet.dk (envelope-from <sgh@sgh.dk>)
-	with esmtp id 1QEJ3G-0002qf-2G
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 12:29:58 +0200
-Received: from phoenix.localnet (unknown [192.168.0.226])
-	by asrock (Postfix) with ESMTPS id 2D7958AC67
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2011 12:29:58 +0200 (CEST)
-From: =?utf-8?q?S=C3=B8ren_Holm?= <sgh@sgh.dk>
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QEN7v-0003gm-25 for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Apr 2011 16:51:03 +0200
+Received: from f053045128.adsl.alicedsl.de ([78.53.45.128]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QEN6G-0002TX-7M for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Apr 2011 14:49:20 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Apr 2011 12:29:57 +0200
-User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic; KDE/4.6.2; i686; ; )
-References: <1303725452-1908-1-git-send-email-sgh@sgh.dk>
-	<ip3h06$kfq$1@dough.gmane.org>
-In-Reply-To: <ip3h06$kfq$1@dough.gmane.org>
-MIME-Version: 1.0
-Message-Id: <201104251229.57261.sgh@sgh.dk>
-Subject: Re: [PATCH] wvstreams: Added recipe for wxstreams 4.6.1.
+In-Reply-To: <201104231404.34882.sgh@sgh.dk>
+References: <201104201007.04378.sgh@sgh.dk> <201104231308.08992.sgh@sgh.dk>
+	<1303559162.4551.15.camel@mattotaupa> <201104231404.34882.sgh@sgh.dk>
+Date: Mon, 25 Apr 2011 16:48:35 +0200
+Message-ID: <1303742915.15311.21.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH] wvstreams: add patch to add missing header includes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,55 +32,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2011 10:32:25 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Mon, 25 Apr 2011 14:51:03 -0000
+X-Groupsio-MsgNum: 31435
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-E/xPEu5JLvTCYQuBwh9t"
+
+--=-E/xPEu5JLvTCYQuBwh9t
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-I will edit the recipe a bit. It is just a copy of the 4.6.0 recipe.
+Am Samstag, den 23.04.2011, 14:04 +0200 schrieb S=C3=B8ren Holm:
+> L=C3=B8rdag den 23. april 2011 13:46:02 skrev Paul Menzel:
+> > Am Samstag, den 23.04.2011, 13:08 +0200 schrieb S=C3=B8ren Holm:
+> > > Fredag den 22. april 2011 21:51:07 skrev Paul Menzel:
+> > > > 1. S=C3=B8ren, please add your Signed-off-by line in front of mine.=
+ This is a demanded by the commit policy [1].
+> > >=20
+> > > I kind of novice into this. How do I add my signed-off line ?
+> >=20
+> > When committing the change, just add the option `-s` and it is added
+> > automatically by what you have configured using `git config`.
+> >=20
+> > For now, you can just reply to this message and add that line where you
+> > like.
+>=20
+> Signed-off-by: S=C3=B8ren Holm <sgh@sgh.dk>
+>=20
+> I rebased my branch at github repo to master. Now ait lso contains a 4.6.=
+1 recipe if your would like.
+> I added my Signed-Off to both commits there also.
+>
+> > I will add it to the commit message using `git commit --amend`.
+> >=20
+> > > > 2. I am adding Khem, since he seems to be the original author of th=
+is patch. It would be great to get his Acked-by too.
+> > > > 3. S=C3=B8ren, please send your patch upstream.
+> > > > 4. S=C3=B8ren, when you have a little time it would be great if you=
+ could update WvStreams to 4.6.1 and test it.
+> > >=20
+> > > will do
+> > >=20
+> > > > 5. S=C3=B8ren, I removed `apply=3Dyes` since that is the default.
+> > >=20
+> > > great.
+> > >=20
+> > > btw. The emaileaddress mixup won't happen again.
+> >=20
+> > Just tell me what the correct one is and I will push your patch.
 
-Mandag den 25. april 2011 12:04:54 skrev Koen Kooi:
-> On 25-04-11 11:57, S=C3=B8ren Holm wrote:
->=20
-> > +LICENSE =3D "LGPL"
->=20
-> That needs a version number, e.g. LGPLv2.1
->=20
-> > +DEPENDS =3D "zlib openssl (>=3D 0.9.8)"
->=20
-> There's no < 0.9.8 in the tree anymore
->=20
-> > +# dbus detection currently broken in configure.ac; remember to add "db=
-us (>=3D 1.2.14)" to DEPENDS  when fixed
->=20
-> has it been fixed?
->=20
-> > +EXTRA_OECONF =3D " --without-tcl --without-qt --without-pam --without-=
-dbus"
->=20
-> The pam stuff needs to be converted into something like:
->=20
-> DEPENDS +=3D "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)=
-}"
->=20
-> ${@base_contains('DISTRO_FEATURES', 'pam', '--with-pam',
-> '--without-pam', d)}
->=20
-> > +
-> > +PACKAGES_prepend =3D "libuniconf libuniconf-dbg "
-> > +PACKAGES_prepend =3D "uniconfd uniconfd-dbg "
-> > +PACKAGES_prepend =3D "libwvstreams-base libwvstreams-base-dbg "
-> > +PACKAGES_prepend =3D "libwvstreams-extras libwvstreams-extras-dbg "
->=20
-> Change that to a single PACKAGES =3D+
->=20
->=20
-> > +do_configure() {
-> > +        autoreconf
-> > +        oe_runconf
-> > +}
->=20
-> Why not stock autotools_do_configure?
->=20
+I pushed this commit yesterday [1]. I am sorry I messed up and omitted
+the commit summary.
 
 
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D3cb4c65=
+dbd0fba178208bc908ce93e6b1ae9fe9b
+
+--=-E/xPEu5JLvTCYQuBwh9t
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk21ib4ACgkQPX1aK2wOHVhKIACfbA2+2rQqZMFusCHTwAaZ82Di
+m9gAmwSrDBl7O7AYL+2WnTslrrdM8b6K
+=oopo
+-----END PGP SIGNATURE-----
+
+--=-E/xPEu5JLvTCYQuBwh9t--
