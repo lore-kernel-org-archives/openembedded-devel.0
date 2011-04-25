@@ -1,23 +1,33 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QENi8-0001OB-1f for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 17:28:28 +0200
-Received: from f053045128.adsl.alicedsl.de ([78.53.45.128]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QENgT-0004jt-62 for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 15:26:45 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201104251704.03324.sgh@sgh.dk>
-References: <201104251704.03324.sgh@sgh.dk>
-Date: Mon, 25 Apr 2011 17:26:00 +0200
-Message-ID: <1303745160.15311.36.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: [PATCH] python-scons_1.3.0: add `python-native` to `DEPENDS_virtclass-native`
+	(envelope-from <Tom_Rini@mentor.com>) id 1QEOzz-0002nM-N6
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Apr 2011 18:51:00 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1QEOxb-0003vD-Tc from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Apr 2011 09:48:31 -0700
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 25 Apr 2011 09:48:03 -0700
+Received: from [172.30.80.238] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
+	with Microsoft SMTP Server id 14.1.270.1;
+	Mon, 25 Apr 2011 09:48:31 -0700
+Message-ID: <4DB5A5DC.5040701@mentor.com>
+Date: Mon, 25 Apr 2011 09:48:28 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <ioru67$bfr$1@dough.gmane.org>
+In-Reply-To: <ioru67$bfr$1@dough.gmane.org>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 25 Apr 2011 16:48:03.0282 (UTC)
+	FILETIME=[8B24AB20:01CC0368]
+Subject: Re: [2011.03-maintenance] Pull request #15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,87 +41,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2011 15:28:28 -0000
-X-Groupsio-MsgNum: 31439
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-GJxM2gq/NQAvJADuVzej"
+X-List-Received-Date: Mon, 25 Apr 2011 16:51:01 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
---=-GJxM2gq/NQAvJADuVzej
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Date: Mon, 25 Apr 2011 17:18:07 +0200
+On 04/22/2011 06:00 AM, Koen Kooi wrote:
+> Tom,
+> 
+> Please pull the 18 commits from here:
+> 
+> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+> Branch: 2011.03-maintenance
+> 
+> Eyal Reizer (3):
+>       ti-wifi-utils: update to a newer git commit
+>       hostap-daemon: build from git sources
+>       wpa-supplicant: Build from git sources
+> 
+> Koen Kooi (1):
+>       libgles-omap3: abstract ES handling and share it across all
+> 
+> Tom Rini (14):
+>       db: Rework arm-thumb-mutex_db5.patch
+>       db: Switch to patchdir rather than applying in do_configure
+>       ftpd-topfield: Rework usb-header-name-2-6-23.patch
+>       opie-sh 1.2.4: Rework opie-sh-fsmounter-name.patch
+>       qscintilla 1.65-gpl-1.6: Rework no-external-lexers.patch
+>       poboxserver: Rework unicode.patch
+>       xqt2: Rework the patches for xqt2 (vs the core part).
+>       In a large number of patches, remove unneeded '..' in paths.
+>       opie-sh: Switch to patchdir rather than applying in do_configure
+>       poboxserver: Switch to patchdir rather than applying in
+>       qscintilla: Switch to patchdir rather than applying in
+>       xqt2: Switch to patchdir rather than applying in do_configure
+>       samba: Switch to patchdir rather than applying in do_configure
+>       vim: Switch to patchdir rather than applying in do_configure
+> 
+> These are all cherry-picks from .dev.
+> 
+> regards,
+> 
+> Koen
 
-A clean build fails with the following error [1].
+Applied, thanks.
 
-ERROR: Function 'do_compile' failed (see /home/sgh/oe-new-oe/build-vmc16/tm=
-p/work/x86_64-linux/python-scons-native-1.3.0-r1/temp/log.do_compile.26596 =
-for further information)
-ERROR: Logfile of failure stored in: /home/sgh/oe-new-oe/build-vmc16/tmp/wo=
-rk/x86_64-linux/python-scons-native-1.3.0-r1/temp/log.do_compile.26596
-Log data follows:
-| ERROR: Function 'do_compile' failed (see /home/sgh/oe-new-oe/build-vmc16/=
-tmp/work/x86_64-linux/python-scons-native-1.3.0-r1/temp/log.do_compile.2659=
-6 for further information)
-| + cd /home/sgh/oe-new-oe/build-vmc16/tmp/work/x86_64-linux/python-scons-n=
-ative-1.3.0-r1/scons-1.3.0
-| + do_compile
-| + distutils_do_compile
-| + STAGING_INCDIR=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/x86_64-li=
-nux/usr/include
-| + STAGING_LIBDIR=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/x86_64-li=
-nux/usr/lib
-| + BUILD_SYS=3Dx86_64-linux
-| + HOST_SYS=3Dx86_64-linux
-| + /home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/x86_64-linux/usr/bin/pytho=
-n setup.py build
-| /home/sgh/oe-new-oe/build-vmc16/tmp/work/x86_64-linux/python-scons-native=
--1.3.0-r1/temp/run.do_compile.26596: line 94: /home/sgh/oe-new-oe/build-vmc=
-16/tmp/sysroots/x86_64-linux/usr/bin/python: No such file or directory
-| + oefatal 'python setup.py build_ext execution failed.'
-| + echo FATAL: 'python setup.py build_ext execution failed.'
-
-Adding `python-native` to `DEPENDS_virtclass-native` as suggested in [1] an=
-d done for `python-scons-native_1.2.0` fixes the issue.
-
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-April/0321=
-80.html
-
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
-S=C3=B8ren, please test this patch. By default 1.2.0 is not used for the na=
-tive recipe.
----
- recipes/python/python-scons_1.3.0.bb |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
-
-diff --git a/recipes/python/python-scons_1.3.0.bb b/recipes/python/python-s=
-cons_1.3.0.bb
-index 82231f2..5a412cb 100644
---- a/recipes/python/python-scons_1.3.0.bb
-+++ b/recipes/python/python-scons_1.3.0.bb
-@@ -2,6 +2,7 @@ DESCRIPTION =3D "A Software Construction Tool"
- SECTION =3D "devel/python"
- PRIORITY =3D "optional"
- LICENSE =3D "MIT"
-+DEPENDS_virtclass-native =3D "python-native"
- SRCNAME =3D "scons"
- PR =3D "r1"
-=20
---=20
-1.7.4.4
-
---=-GJxM2gq/NQAvJADuVzej
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
+- -- 
+Tom Rini
+Mentor Graphics Corporation
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
 
-iEYEABECAAYFAk21kogACgkQPX1aK2wOHViRhACbBW2+cutSk6umYXW1UI7WJn9x
-KlIAoIhi6uB6dwJW97tUK9bO5NMMgoT7
-=Os/A
+iQEcBAEBAgAGBQJNtaXWAAoJEI4NMjfc3nJx+XIIAJD7wJuTToZ4ixXPhubEFG0z
+v4E8PsL6GqP2B7XDwSae54CZnEGFWjwrjg1TbTT481BkofE8xyE0ifoP7n9VIqJi
+qcl1eaIVyN7p76RDy3LJgHOG6K0DhNHlRtEEK52fU73EorGYGiJApN/2eiSxLw2q
+nMvIxWvMUXGjEMJ6k7EZNII8iudNENGM5eAdcv9loeua32i/pDmAjGhlmm4JUMwb
+PvV+ZSByNvCRjppCH/nlsCPorSKgX1JQmUty33Jt76LiRIsrIykCpqoHvoXYQUOG
+kCGRZEBeQ+K6a8OMYSJopEuk3c0qGd0si0yPdHacTdzeSbLr3tAUTm+QFWls9YI=
+=cMaR
 -----END PGP SIGNATURE-----
 
---=-GJxM2gq/NQAvJADuVzej--
+
