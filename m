@@ -1,40 +1,23 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QEQnR-0003Xl-60
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 20:46:09 +0200
-Received: by bwz5 with SMTP id 5so2042648bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2011 11:43:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=RfNkkbcXXTXdgMcN8JMkFxpOzna53CC6zM7hiAUhnD4=;
-	b=Q5ypkUsMxZ3HuKAX4qg9wWjAy2NV50EwRUjcm+vVaKwhoC9CTwW+OFdtg3l5m/ldN8
-	C8zZUzK7EY48XK35vKZAeBYZfbuOai4dVYuxXWr3s5nkS6YdwmMwA1s5j6KLmVFFxXT1
-	/Q0p1dJo2X+3bM5BD6iMSOp5gGoEwMz6gAxc8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Qgenr9GgQxEIR9p0LlEkOluu7sTagps+BKc3tyxF3T/pZvk1oTO8UApf7ecixMbOAh
-	BbCGYEo1doG+z1kSVnLFXKTV7cbCwwWWdThqSTgx7VAZvDHkkbpXA/pEO/NPC/MdyQpx
-	YBEk+rMPjBBuFu/n3GALLYWs+rH5s56AdaxBA=
-Received: by 10.204.39.68 with SMTP id f4mr3758744bke.17.1303757019645;
-	Mon, 25 Apr 2011 11:43:39 -0700 (PDT)
-Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id q18sm3408466bka.15.2011.04.25.11.43.37
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 25 Apr 2011 11:43:38 -0700 (PDT)
-Date: Mon, 25 Apr 2011 20:43:31 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QEQy2-0003mZ-PQ for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Apr 2011 20:57:06 +0200
+Received: from f053045128.adsl.alicedsl.de ([78.53.45.128]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QEQwO-0005l0-4r for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Apr 2011 18:55:24 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110425184331.GA3376@jama.jama.net>
+In-Reply-To: <1303756273-22385-4-git-send-email-tom_rini@mentor.com>
 References: <1303756273-22385-1-git-send-email-tom_rini@mentor.com>
 	<1303756273-22385-4-git-send-email-tom_rini@mentor.com>
-MIME-Version: 1.0
-In-Reply-To: <1303756273-22385-4-git-send-email-tom_rini@mentor.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: koen@dominion.thruhere.net
+Date: Mon, 25 Apr 2011 20:54:38 +0200
+Message-ID: <1303757678.15311.113.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
 Subject: Re: [PATCH 3/3] bluez4: Add 4.91 and make it default for Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -49,18 +32,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2011 18:46:09 -0000
-X-Groupsio-MsgNum: 31446
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="M9NhX3UHpAaciwkO"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 25 Apr 2011 18:57:07 -0000
+X-Groupsio-MsgNum: 31447
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-SErXjmnuiW06eltBQxRg"
 
---M9NhX3UHpAaciwkO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--=-SErXjmnuiW06eltBQxRg
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 25, 2011 at 11:31:13AM -0700, Tom Rini wrote:
+Dear Tom,
+
+
+On Mo, 2011-04-25 at 11:31 -0700, Tom Rini wrote:
+
+what build configuration did you use for build testing? Could you add
+that to the commit message please.
+
 > Signed-off-by: Tom Rini <tom_rini@mentor.com>
 > ---
 >  recipes/bluez/bluez4_4.91.bb |   18 ++++++++++++++++++
@@ -81,10 +70,6 @@ a0bbcad8a4eac18d"
 > +
 > +DEFAULT_PREFERENCE =3D "-1"
 > +DEFAULT_PREFERENCE_angstrom =3D "1"
-
-please make it default for shr too, we're using bluez4_4.91 now from=20
-meta-oe and it works ok, so we can keep it in sync, thanks
-
 > +
 > +DEPENDS +=3D "libsndfile1"
 > +
@@ -96,27 +81,30 @@ meta-oe and it works ok, so we can keep it in sync, thanks
 > +BTUDEV_shr =3D " --enable-udevrules"
 > +
 > +EXTRA_OECONF +=3D "${BTUDEV}"
-> --=20
-> 1.7.0.4
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Please create the patch next time adding `-M -C -C` to `git
+format-patch`. Additionally adding the recipe and making it default for
+=C8=A6ngstr=C3=B6m could have been two commits in my opinion.
 
---M9NhX3UHpAaciwkO
-Content-Type: application/pgp-signature
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+
+I will build test with `minimal-uclibc` and report back.
+
+
+Thanks,
+
+Paul
+
+--=-SErXjmnuiW06eltBQxRg
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAk21wNMACgkQN1Ujt2V2gBxpbACfeyVD5PMKPSC6z9ZLkQHnbCEC
-ogQAn3AVzW9B4C0DiZxr+H9C94TxUm6K
-=Ee/o
+iEYEABECAAYFAk21w24ACgkQPX1aK2wOHVgO8QCdGN+4J1hZcjCIE01ZrCtXP2VQ
+ErIAnAwC+BRcoGcsRa2/38LnokiMYEZ+
+=vgkL
 -----END PGP SIGNATURE-----
 
---M9NhX3UHpAaciwkO--
+--=-SErXjmnuiW06eltBQxRg--
