@@ -1,29 +1,29 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1QEQbV-00032A-83
+	(envelope-from <Tom_Rini@mentor.com>) id 1QEQbW-00032C-AN
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 20:33:49 +0200
+	Mon, 25 Apr 2011 20:33:50 +0200
 Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
 	by relay1.mentorg.com with esmtp 
-	id 1QEQZ5-0004z6-Sd from Tom_Rini@mentor.com ;
-	Mon, 25 Apr 2011 11:31:19 -0700
+	id 1QEQZ7-0004zM-EY from Tom_Rini@mentor.com ;
+	Mon, 25 Apr 2011 11:31:21 -0700
 Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
 	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Mon, 25 Apr 2011 11:31:19 -0700
+	SMTPSVC(6.0.3790.4675); Mon, 25 Apr 2011 11:31:21 -0700
 Received: from localhost.localdomain ([172.30.80.238]) by
 	na2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 25 Apr 2011 12:31:18 -0600
+	Mon, 25 Apr 2011 12:31:20 -0600
 From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Apr 2011 11:31:11 -0700
-Message-Id: <1303756273-22385-2-git-send-email-tom_rini@mentor.com>
+Date: Mon, 25 Apr 2011 11:31:13 -0700
+Message-Id: <1303756273-22385-4-git-send-email-tom_rini@mentor.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1303756273-22385-1-git-send-email-tom_rini@mentor.com>
 References: <1303756273-22385-1-git-send-email-tom_rini@mentor.com>
-X-OriginalArrivalTime: 25 Apr 2011 18:31:18.0965 (UTC)
-	FILETIME=[F80EDE50:01CC0376]
+X-OriginalArrivalTime: 25 Apr 2011 18:31:20.0543 (UTC)
+	FILETIME=[F8FFA6F0:01CC0376]
 Cc: koen@dominion.thruhere.net
-Subject: [PATCH 1/3] patch.bbclass: Add minver/maxver params
+Subject: [PATCH 3/3] bluez4: Add 4.91 and make it default for Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,39 +37,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2011 18:33:49 -0000
-
-Similar to minrev/maxrev and mindate/maxdate allow us to list patches
-in an inc file and only apply them in certain versions.
+X-List-Received-Date: Mon, 25 Apr 2011 18:33:50 -0000
 
 Signed-off-by: Tom Rini <tom_rini@mentor.com>
 ---
- classes/patch.bbclass |   12 ++++++++++++
- 1 files changed, 12 insertions(+), 0 deletions(-)
+ recipes/bluez/bluez4_4.91.bb |   18 ++++++++++++++++++
+ 1 files changed, 18 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/bluez/bluez4_4.91.bb
 
-diff --git a/classes/patch.bbclass b/classes/patch.bbclass
-index edfb5e9..3045719 100644
---- a/classes/patch.bbclass
-+++ b/classes/patch.bbclass
-@@ -102,6 +102,18 @@ python patch_do_patch() {
- 				bb.note("Patch '%s' applies to earlier revisions" % pname)
- 				continue
- 
-+		if "minver" in parm:
-+			srcver = bb.data.getVar('PV', d, 1)
-+			if srcver and srcver < parm["minver"]:
-+				bb.note("Patch '%s' applies to later versions" % pname)
-+				continue
+diff --git a/recipes/bluez/bluez4_4.91.bb b/recipes/bluez/bluez4_4.91.bb
+new file mode 100644
+index 0000000..16f06d5
+--- /dev/null
++++ b/recipes/bluez/bluez4_4.91.bb
+@@ -0,0 +1,18 @@
++require bluez4.inc
 +
-+		if "maxver" in parm:
-+			srcver = bb.data.getVar('PV', d, 1)
-+			if srcver and srcver > parm["maxver"]:
-+				bb.note("Patch '%s' applies to earlier versions" % pname)
-+				continue
++SRC_URI[md5sum] = "3059b7ef5168c84cd0c6a67034ce79f9"
++SRC_URI[sha256sum] = "11e9279e2669db996afd464b96d2c68f41f157f6eb9b8842a0bbcad8a4eac18d"
 +
- 		if "patchdir" in parm:
- 			patchdir = parm["patchdir"]
- 			if not os.path.isabs(patchdir):
++DEFAULT_PREFERENCE = "-1"
++DEFAULT_PREFERENCE_angstrom = "1"
++
++DEPENDS += "libsndfile1"
++
++PR = "${INC_PR}.0"
++
++# Not all distros have a recent enough udev
++BTUDEV = " --disable-udevrules"
++BTUDEV_angstrom = " --enable-udevrules"
++BTUDEV_shr = " --enable-udevrules"
++
++EXTRA_OECONF += "${BTUDEV}"
 -- 
 1.7.0.4
 
