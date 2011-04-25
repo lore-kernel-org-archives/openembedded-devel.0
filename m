@@ -1,24 +1,27 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QEQy2-0003mZ-PQ for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 20:57:06 +0200
-Received: from f053045128.adsl.alicedsl.de ([78.53.45.128]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QEQwO-0005l0-4r for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 18:55:24 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from mx02.stofanet.dk ([212.10.10.12])
+	by linuxtogo.org with esmtp (Exim 4.72) (envelope-from <sgh@sgh.dk>)
+	id 1QER3k-0004Vm-MF for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Apr 2011 21:03:00 +0200
+Received: from 5634f1b4.rev.stofanet.dk ([86.52.241.180] helo=asrock)
+	by mx04.stofanet.dk (envelope-from <sgh@sgh.dk>)
+	with esmtp id 1QEQty-0006KP-0r
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Apr 2011 20:52:54 +0200
+Received: from phoenix.localnet (unknown [192.168.0.226])
+	by asrock (Postfix) with ESMTPS id CABD981468
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Apr 2011 20:52:53 +0200 (CEST)
+From: =?iso-8859-15?q?S=F8ren_Holm?= <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1303756273-22385-4-git-send-email-tom_rini@mentor.com>
-References: <1303756273-22385-1-git-send-email-tom_rini@mentor.com>
-	<1303756273-22385-4-git-send-email-tom_rini@mentor.com>
-Date: Mon, 25 Apr 2011 20:54:38 +0200
-Message-ID: <1303757678.15311.113.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH 3/3] bluez4: Add 4.91 and make it default for Angstrom
+Date: Mon, 25 Apr 2011 20:52:53 +0200
+User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic; KDE/4.6.2; i686; ; )
+References: <201104251704.03324.sgh@sgh.dk>
+	<1303745160.15311.36.camel@mattotaupa>
+In-Reply-To: <1303745160.15311.36.camel@mattotaupa>
+MIME-Version: 1.0
+X-UID: 1
+Message-Id: <201104252052.53197.sgh@sgh.dk>
+Subject: Re: [PATCH] python-scons_1.3.0: add `python-native` to `DEPENDS_virtclass-native`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,79 +35,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2011 18:57:07 -0000
-X-Groupsio-MsgNum: 31447
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-SErXjmnuiW06eltBQxRg"
-
---=-SErXjmnuiW06eltBQxRg
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 25 Apr 2011 19:03:01 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
 Content-Transfer-Encoding: quoted-printable
 
-Dear Tom,
+Signed-off-by: S=F8ren Holm <sgh@sgh.dk>
 
+Works like a charm. What does DEPENDS_virtclass do ?
 
-On Mo, 2011-04-25 at 11:31 -0700, Tom Rini wrote:
-
-what build configuration did you use for build testing? Could you add
-that to the commit message please.
-
-> Signed-off-by: Tom Rini <tom_rini@mentor.com>
-> ---
->  recipes/bluez/bluez4_4.91.bb |   18 ++++++++++++++++++
->  1 files changed, 18 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/bluez/bluez4_4.91.bb
+Mandag den 25. april 2011 17:26:00 skrev Paul Menzel:
+> Date: Mon, 25 Apr 2011 17:18:07 +0200
 >=20
-> diff --git a/recipes/bluez/bluez4_4.91.bb b/recipes/bluez/bluez4_4.91.bb
-> new file mode 100644
-> index 0000000..16f06d5
-> --- /dev/null
-> +++ b/recipes/bluez/bluez4_4.91.bb
-> @@ -0,0 +1,18 @@
-> +require bluez4.inc
-> +
-> +SRC_URI[md5sum] =3D "3059b7ef5168c84cd0c6a67034ce79f9"
-> +SRC_URI[sha256sum] =3D "11e9279e2669db996afd464b96d2c68f41f157f6eb9b8842=
-a0bbcad8a4eac18d"
-> +
-> +DEFAULT_PREFERENCE =3D "-1"
-> +DEFAULT_PREFERENCE_angstrom =3D "1"
-> +
-> +DEPENDS +=3D "libsndfile1"
-> +
-> +PR =3D "${INC_PR}.0"
-> +
-> +# Not all distros have a recent enough udev
-> +BTUDEV =3D " --disable-udevrules"
-> +BTUDEV_angstrom =3D " --enable-udevrules"
-> +BTUDEV_shr =3D " --enable-udevrules"
-> +
-> +EXTRA_OECONF +=3D "${BTUDEV}"
+> A clean build fails with the following error [1].
+>=20
+> ERROR: Function 'do_compile' failed (see /home/sgh/oe-new-oe/build-vmc16/=
+tmp/work/x86_64-linux/python-scons-native-1.3.0-r1/temp/log.do_compile.2659=
+6 for further information)
+> ERROR: Logfile of failure stored in: /home/sgh/oe-new-oe/build-vmc16/tmp/=
+work/x86_64-linux/python-scons-native-1.3.0-r1/temp/log.do_compile.26596
+> Log data follows:
+> | ERROR: Function 'do_compile' failed (see /home/sgh/oe-new-oe/build-vmc1=
+6/tmp/work/x86_64-linux/python-scons-native-1.3.0-r1/temp/log.do_compile.26=
+596 for further information)
+> | + cd /home/sgh/oe-new-oe/build-vmc16/tmp/work/x86_64-linux/python-scons=
+=2Dnative-1.3.0-r1/scons-1.3.0
+> | + do_compile
+> | + distutils_do_compile
+> | + STAGING_INCDIR=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/x86_64-=
+linux/usr/include
+> | + STAGING_LIBDIR=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/x86_64-=
+linux/usr/lib
+> | + BUILD_SYS=3Dx86_64-linux
+> | + HOST_SYS=3Dx86_64-linux
+> | + /home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/x86_64-linux/usr/bin/pyt=
+hon setup.py build
+> | /home/sgh/oe-new-oe/build-vmc16/tmp/work/x86_64-linux/python-scons-nati=
+ve-1.3.0-r1/temp/run.do_compile.26596: line 94: /home/sgh/oe-new-oe/build-v=
+mc16/tmp/sysroots/x86_64-linux/usr/bin/python: No such file or directory
+> | + oefatal 'python setup.py build_ext execution failed.'
+> | + echo FATAL: 'python setup.py build_ext execution failed.'
+>=20
+> Adding `python-native` to `DEPENDS_virtclass-native` as suggested in [1] =
+and done for `python-scons-native_1.2.0` fixes the issue.
+>=20
+> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-April/03=
+2180.html
+>=20
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> ---
+> S=F8ren, please test this patch. By default 1.2.0 is not used for the nat=
+ive recipe.
+> ---
+>  recipes/python/python-scons_1.3.0.bb |    1 +
+>  1 files changed, 1 insertions(+), 0 deletions(-)
+>=20
+> diff --git a/recipes/python/python-scons_1.3.0.bb b/recipes/python/python=
+=2Dscons_1.3.0.bb
+> index 82231f2..5a412cb 100644
+> --- a/recipes/python/python-scons_1.3.0.bb
+> +++ b/recipes/python/python-scons_1.3.0.bb
+> @@ -2,6 +2,7 @@ DESCRIPTION =3D "A Software Construction Tool"
+>  SECTION =3D "devel/python"
+>  PRIORITY =3D "optional"
+>  LICENSE =3D "MIT"
+> +DEPENDS_virtclass-native =3D "python-native"
+>  SRCNAME =3D "scons"
+>  PR =3D "r1"
+> =20
+>=20
 
-Please create the patch next time adding `-M -C -C` to `git
-format-patch`. Additionally adding the recipe and making it default for
-=C8=A6ngstr=C3=B6m could have been two commits in my opinion.
 
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
-
-I will build test with `minimal-uclibc` and report back.
-
-
-Thanks,
-
-Paul
-
---=-SErXjmnuiW06eltBQxRg
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk21w24ACgkQPX1aK2wOHVgO8QCdGN+4J1hZcjCIE01ZrCtXP2VQ
-ErIAnAwC+BRcoGcsRa2/38LnokiMYEZ+
-=vgkL
------END PGP SIGNATURE-----
-
---=-SErXjmnuiW06eltBQxRg--
