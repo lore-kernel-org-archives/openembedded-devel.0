@@ -1,38 +1,20 @@
-Received: from mail-px0-f178.google.com ([209.85.212.178])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QERMl-0004wY-D7
+Received: from cpe.ge-0-2-0-951.faaqnqu1.customer.tele.dk ([93.167.193.22]
+	helo=mail.mikrofyn.com) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <sgh@zemeckis>) id 1QERai-0005Gy-4h
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 21:22:39 +0200
-Received: by pxi1 with SMTP id 1so1952012pxi.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2011 12:20:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=44Dw+aikQjsPBUcDBivbCZJxDk/ZIvUiodoomjUvJLc=;
-	b=SN5vgb7XyfIbAUCF8f7JEjB08jJN8mRA2+yRI3XTxHTOLjO05yfVU07LjJpqe92qe0
-	Y2CPz9rNGPGCDvbCrlSZzRBANQfrwS7rIDpCtgsoH6ay4YcS0R9AHJ6N6lfVrNZoorF7
-	AyUjb/YIO2Yn1cJXTMNZ62x/VgPGykzdc1h+s=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=jtmtLZG9Ec9yyEZycrS1jwsv5srVaDRP4euarVgvsjEFy3w2T/MEFmCxK/sW8gO0fZ
-	F48qYOAcZZ+3BiaruzL3fKV+zRiHJKNMsrLjGvJlXNegTw0TMqJWxOC5Iuv9Yi9ZfDw7
-	Lq/mhOL7cmJh/OmLsojRKRP8cjcmEc27kcnSg=
-Received: by 10.142.144.15 with SMTP id r15mr2779362wfd.439.1303759209107;
-	Mon, 25 Apr 2011 12:20:09 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id s39sm8119787wfc.4.2011.04.25.12.20.07
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 25 Apr 2011 12:20:07 -0700 (PDT)
-From: raj.khem@gmail.com
+	Mon, 25 Apr 2011 21:37:04 +0200
+Received: from zemeckis ([10.115.0.50]) by mail.mikrofyn.com with Microsoft
+	SMTPSVC(6.0.3790.3959); Mon, 25 Apr 2011 21:38:17 +0200
+Received: by zemeckis (Postfix, from userid 1000)
+	id A9EA620029; Mon, 25 Apr 2011 21:34:48 +0200 (CEST)
+From: =?UTF-8?q?S=C3=B8ren=20Holm?= <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Apr 2011 12:19:52 -0700
-Message-Id: <1303759192-7863-2-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <1303759192-7863-1-git-send-email-raj.khem@gmail.com>
-References: <1303759192-7863-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] libgpg-error_1.8.bb: No need to add gettext directly to DEPENDS
+Date: Mon, 25 Apr 2011 21:34:48 +0200
+Message-Id: <1303760088-28474-1-git-send-email-sgh@sgh.dk>
+X-Mailer: git-send-email 1.7.1
+X-OriginalArrivalTime: 25 Apr 2011 19:38:17.0031 (UTC)
+	FILETIME=[53031570:01CC0380]
+Subject: [PATCH] wvstreams: Cleaned up recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,31 +28,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2011 19:22:39 -0000
+X-List-Received-Date: Mon, 25 Apr 2011 19:37:04 -0000
 
-From: Khem Raj <raj.khem@gmail.com>
-
-Let inherit gettext take care of it
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+* Corrected license.
+* Added dbus support.
+* Made PAM-support conditional.
 ---
- .../libgpg-error/libgpg-error_1.8.bb               |    1 -
- 1 files changed, 0 insertions(+), 1 deletions(-)
+ recipes/wvstreams/wvstreams_4.6.1.bb |   21 +++++++--------------
+ 1 files changed, 7 insertions(+), 14 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libgpg-error/libgpg-error_1.8.bb b/meta-oe/recipes-support/libgpg-error/libgpg-error_1.8.bb
-index 2c17e53..321c7b8 100644
---- a/meta-oe/recipes-support/libgpg-error/libgpg-error_1.8.bb
-+++ b/meta-oe/recipes-support/libgpg-error/libgpg-error_1.8.bb
-@@ -14,7 +14,6 @@ SRC_URI[sha256sum] = "bdfbf2677147239d2d26d4e37f44635d9fd97c133c9ef9fd9793a12a05
+diff --git a/recipes/wvstreams/wvstreams_4.6.1.bb b/recipes/wvstreams/wvstreams_4.6.1.bb
+index 53249d4..8453e08 100644
+--- a/recipes/wvstreams/wvstreams_4.6.1.bb
++++ b/recipes/wvstreams/wvstreams_4.6.1.bb
+@@ -1,9 +1,10 @@
+ HOMEPAGE = "http://alumnit.ca/wiki/index.php?page=WvStreams"
+-LICENSE = "LGPL"
++LICENSE = "LGPLv2.1"
+ DESCRIPTION = "WvStreams is a network programming library in C++"
+-DEPENDS = "zlib openssl (>= 0.9.8)"
++DEPENDS = "zlib openssl dbus"
++DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
  
- SECTION = "libs"
- LICENSE = "GPLv2+ & LGPLv2.1+"
--DEPENDS = "gettext"
- PR = "r0"
+-PR = "r0"
++PR = "r1"
  
- SRC_URI = "ftp://ftp.gnupg.org/gcrypt/libgpg-error/libgpg-error-${PV}.tar.bz2 \
+ SRC_URI = "http://wvstreams.googlecode.com/files/${PN}-${PV}.tar.gz \
+ 	file://0001-Fixed-missing-header-includes.patch \
+@@ -13,13 +14,10 @@ inherit autotools pkgconfig
+ 
+ LDFLAGS_append = " -Wl,-rpath-link,${TOOLCHAIN_PATH}/${TARGET_SYS}/lib"
+ 
+-# dbus detection currently broken in configure.ac; remember to add "dbus (>= 1.2.14)" to DEPENDS  when fixed
+-EXTRA_OECONF = " --without-tcl --without-qt --without-pam --without-dbus"
++EXTRA_OECONF = " --without-tcl --without-qt --with-dbus"
++EXTRA_OECONF += ${@base_contains('DISTRO_FEATURES', 'pam', '--with-pam', '--without-pam', d)}
+ 
+-PACKAGES_prepend = "libuniconf libuniconf-dbg "
+-PACKAGES_prepend = "uniconfd uniconfd-dbg "
+-PACKAGES_prepend = "libwvstreams-base libwvstreams-base-dbg "
+-PACKAGES_prepend = "libwvstreams-extras libwvstreams-extras-dbg "
++PACKAGES += "libuniconf libuniconf-dbg uniconfd uniconfd-dbg libwvstreams-base libwvstreams-base-dbg libwvstreams-extras libwvstreams-extras-dbg"
+ 
+ FILES_libuniconf     = "${libdir}/libuniconf.so.*"
+ FILES_libuniconf-dbg = "${libdir}/.debug/libuniconf.so.*"
+@@ -35,10 +33,5 @@ FILES_libwvstreams-extras-dbg = "${libdir}/.debug/libwvbase.so.* ${libdir}/.debu
+ 
+ PARALLEL_MAKE = ""
+ 
+-do_configure() {
+-        autoreconf
+-        oe_runconf
+-}
+-
+ SRC_URI[md5sum] = "2760dac31a43d452a19a3147bfde571c"
+ SRC_URI[sha256sum] = "8403f5fbf83aa9ac0c6ce15d97fd85607488152aa84e007b7d0621b8ebc07633"
 -- 
-1.7.4.1
+1.7.1
 
 
 
