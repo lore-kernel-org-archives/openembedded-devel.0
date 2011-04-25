@@ -1,27 +1,36 @@
-Received: from mx03.stofanet.dk ([212.10.10.13])
-	by linuxtogo.org with esmtp (Exim 4.72) (envelope-from <sgh@sgh.dk>)
-	id 1QERlD-0005RK-Dq for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 21:47:55 +0200
-Received: from 5634f1b4.rev.stofanet.dk ([86.52.241.180] helo=asrock)
-	by mx01.stofanet.dk (envelope-from <sgh@sgh.dk>)
-	with esmtp id 1QERYR-0006cm-1W
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1QESDb-00068W-QY
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Apr 2011 21:34:43 +0200
-Received: from phoenix.localnet (unknown [192.168.0.226])
-	by asrock (Postfix) with ESMTPS id 133B781DEF
+	Mon, 25 Apr 2011 22:17:19 +0200
+Received: by gxk3 with SMTP id 3so840984gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2011 21:34:43 +0200 (CEST)
-From: =?iso-8859-15?q?S=F8ren_Holm?= <sgh@sgh.dk>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Apr 2011 21:34:42 +0200
-User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic; KDE/4.6.2; i686; ; )
-References: <1303725452-1908-1-git-send-email-sgh@sgh.dk>
-	<201104251229.57261.sgh@sgh.dk>
-	<1303743329.15311.29.camel@mattotaupa>
-In-Reply-To: <1303743329.15311.29.camel@mattotaupa>
+	Mon, 25 Apr 2011 13:14:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=FhMZKUu9wQ5Rvz/4DseBDNONw/mtxb1+3mAKQ6mFshM=;
+	b=q/jgugdm0vCmKggA5JvVzfK6OreiaMKRmHXvNqKtkqcyyrV3Hl++gdQsyfJWQHkrOT
+	bRvush0nh8LR7ulY726gzif0GPZyVCZIQA9UHb5TcIHNAEkpTvLA+5LSvwrNzI62a8FU
+	OG1HVrQ7fJxJoSJtrz7x1uh61yEMa0dmmqv3U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=FjARBxDlfZwNhaU8NPavjpptdvz/2IrFMnaQU3ED89k1vZ3GKu0AW/nx3E2OVUO/LX
+	OIIRRZIL8K5f5hvd9QJovCkmOQAnWEyBEecdSH73VMS4Zv5dGvkfXtN6A0tZZ0hRl6Qa
+	rbHoGTePpxT0bUnmxEH/P2i2sw44Egz1g/wPc=
 MIME-Version: 1.0
-Message-Id: <201104252134.42402.sgh@sgh.dk>
-Subject: Re: [PATCH] wvstreams: Added recipe for wxstreams 4.6.1.
+Received: by 10.91.15.5 with SMTP id s5mr5154agi.11.1303762486480; Mon, 25 Apr
+	2011 13:14:46 -0700 (PDT)
+Received: by 10.90.141.8 with HTTP; Mon, 25 Apr 2011 13:14:46 -0700 (PDT)
+In-Reply-To: <1303756273-22385-1-git-send-email-tom_rini@mentor.com>
+References: <1303756273-22385-1-git-send-email-tom_rini@mentor.com>
+Date: Mon, 25 Apr 2011 22:14:46 +0200
+Message-ID: <BANLkTikm-JOf-Y2E=gz8xhrbzst2SOMLOw@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [RFC, PATCH] Add minver/maxver to patch.bbclass, update bluez
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,38 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2011 19:47:55 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-15"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 25 Apr 2011 20:17:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Is there a document describing the workflow around patchwork?
-I'm a bit lost as to how it is supposed to work.
+2011/4/25 Tom Rini <tom_rini@mentor.com>
 
-Mandag den 25. april 2011 16:55:29 skrev Paul Menzel:
-> Am Montag, den 25.04.2011, 12:29 +0200 schrieb S=F8ren Holm:
-> > I will edit the recipe a bit. It is just a copy of the 4.6.0 recipe.
->=20
-> Please pass `-M -C -C` to `git format-patch` next time, so that copies
-> or renames are detected.
->=20
-> Please also add what build configurations you used for testing next
-> time. I have build 4.6.1 successfully in several configurations and I
-> pushed your patch [1].
->=20
-> Please update the patch queue [2] using the Web interface or the
-> following command.
->=20
-> 	$ pwclient update -s Accepted -c aaf30cc3e147816c63e694ef65951b3cd2dc48c=
-5 2815
->=20
-> Your earlier message was also recorded, so you could do something like
-> the following.
->=20
-> 	$ pwclient update -s Superseded 2813
->=20
-> Please post a follow up patch (in a new thread) addressing the things
-> Koen pointed out.
->=20
+> Hey all,
+>
+> In digging at some other bluez problems, I found that at least
+> 4.91 no longer needs the sbc-thumb patch.  But without moving it to the
+> N versions of bluez4 we have or starting a new inc file for later bluez4
+> versions, there wasn't a clean way to exclude the patch.  Until now.
+> Borrowing the minrev/maxrev logic I added minver/maxver patch params
+> and tested them lightly (the patch is applied on 4.89 and not on
+> 4.91).  I'm cc'ing Koen here because patch #3 adds 4.91 and make it
+> default for Angstrom, but all I've done myself is build testing.
+> It should be safe, based on upstream changelog tho.
+>
+> First question should probably be: do we need 9 versions of bluez4? This is
+not too much in line with the version policy the TSC once stipulated and
+seems also different from the road oe-core and meta-oe are taking.
 
+Also personally I'm not too keen on minrev/maxrev. It only makes things
+again a little bit more complicated.
+My preference would be to remove the patch from the .inc file and move to
+the individual bb files
+
+My 2 cents.
+
+Frans
+
+PS: two more cents: it seems somewhat odd that some distro's have a DP = 1
+for more than one version of a recipe. While technically not wrong this
+looks a little bit odd.
+Also we seem to have two mechanisms to select a version for a distro. One is
+the DP_distro mechanism the other one is the PREFERRED_VERSION_recipe in the
+conf file
+It seems to me one should be sufficient
 
