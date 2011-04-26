@@ -1,34 +1,29 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from bsmtp3.bon.at ([213.33.87.17] helo=lbmfmo03.bon.at)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1QEfkd-0004yO-Gh
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Apr 2011 12:44:23 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with SMTP id p3QAfaes029386
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Tue, 26 Apr 2011 12:41:37 +0200
-Received: by ensc-virt.intern.sigma-chemnitz.de (sSMTP sendmail emulation);
-	Tue, 26 Apr 2011 12:41:36 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+	(envelope-from <pgsellmann@portner-elektronik.at>)
+	id 1QEfnB-00055Q-2K for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Apr 2011 12:46:53 +0200
+Received: from bsmtp.bon.at (unknown [192.168.181.105])
+	by lbmfmo03.bon.at (Postfix) with ESMTP id 142151212EB
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Apr 2011 12:44:22 +0200 (CEST)
+Received: from aspire.localdomain (unknown [88.116.171.82])
+	by bsmtp.bon.at (Postfix) with ESMTP id 62F5F2C4008
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Apr 2011 12:44:15 +0200 (CEST)
+From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+Organization: PORTNER Elektronik
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 Apr 2011 12:41:34 +0200
-Message-Id: <1303814494-9623-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-X-Mailer: git-send-email 1.7.4.4
+Date: Tue, 26 Apr 2011 12:44:13 +0200
+User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
+	)
+References: <20110419093343.GB2989@rhein.zuhause.netz>
+	<1303307478.3979.60.camel@mattotaupa>
+	<1303308175.3979.62.camel@mattotaupa>
+In-Reply-To: <1303308175.3979.62.camel@mattotaupa>
 MIME-Version: 1.0
-X-DSPAM-Result: Innocent
-X-DSPAM-Probability: 0
-X-DSPAM-Confidence: 0.83
-X-Spam-Score: -5.3
-X-Spam-Level: -----
-X-Spam-Tests: AWL,BAYES_00,SPF_NEUTRAL,T_RP_MATCHES_RCVD,DSPAM_INNOCENT
-X-Scanned-By: MIMEDefang 2.71 on 62.153.82.30
-X-MIME-Autoconverted: from 8bit to quoted-printable by mail.cvg.de id
-	p3QAfaes029386
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>,
-	Enrico Scholz <enrico.scholz@informatik.tu-chemnitz.de>,
-	=?UTF-8?q?Jeremy=20Lain=C3=A9?= <jeremy.laine@m4x.org>
-Subject: [PATCH] tcp-wrappers: place LIBS after object files
+Message-Id: <201104261244.14236.pgsellmann@portner-elektronik.at>
+Subject: Re: [PATCH 1/2] orc_0.4.13: set `DEFAULT_PREFERENCE = "-1"`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,65 +37,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2011 10:44:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 26 Apr 2011 10:46:53 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-From: Enrico Scholz <enrico.scholz@informatik.tu-chemnitz.de>
+Am Mittwoch 20 April 2011, 16:02:55 schrieb Paul Menzel:
+> Date: Tue, 19 Apr 2011 10:38:34 +0200
+>=20
+> Task compile of `schroedinger_1.0.9` fails with Orc 0.4.13 the same way a=
+s with Orc 0.4.12 with the following error message [1][2].
+>=20
+> 	[=E2=80=A6]
+> 	schroorc.c: In function '_backup_orc_add2_rshift_add_s16_22_op':
+> 	schroorc.c:93:3: error: 'int16_t' undeclared (first use in this function)
+> 	schroorc.c:93:3: note: each undeclared identifier is reported only once =
+for each function it appears in
+> 	[=E2=80=A6]
+>=20
+> Therefore we disable the default preference of Orc 0.4.13 for the time be=
+ing until the problems get resolved.
+>=20
+> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-April/03=
+2110.html
+> [2] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-April/03=
+1966.html
+>=20
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> ---
+>  recipes/orc/orc_0.4.13.bb |    2 ++
+>  1 files changed, 2 insertions(+), 0 deletions(-)
+>=20
+> diff --git a/recipes/orc/orc_0.4.13.bb b/recipes/orc/orc_0.4.13.bb
+> index 107dea6..adfe693 100644
+> --- a/recipes/orc/orc_0.4.13.bb
+> +++ b/recipes/orc/orc_0.4.13.bb
+> @@ -1,4 +1,6 @@
+>  require orc.inc
+> =20
+> +DEFAULT_PREFERENCE =3D "-1"
+> +
+>  SRC_URI[orc.md5sum] =3D "f6d0aed003f67c91933c22d9e5f1696a"
+>  SRC_URI[orc.sha256sum] =3D "0fb8952ff688fe4b6f3b68cad49d4fb3cdfd28643b43=
+410170601cc1f1e49601"
+>=20
 
-This fixes builds with '-Wl,-as-needed'. Patch changes the previous
-'ldflags.patch' files instead of adding a new one.
-
-Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Cc: Jeremy Lain=C3=A9 <jeremy.laine@m4x.org>
----
- .../tcp-wrappers/tcp-wrappers-7.6/ldflags.patch    |   22 ++++++++++++++=
-+----
- 1 files changed, 17 insertions(+), 5 deletions(-)
-
-diff --git a/recipes/tcp-wrappers/tcp-wrappers-7.6/ldflags.patch b/recipe=
-s/tcp-wrappers/tcp-wrappers-7.6/ldflags.patch
-index 2e89765..cac8615 100644
---- a/recipes/tcp-wrappers/tcp-wrappers-7.6/ldflags.patch
-+++ b/recipes/tcp-wrappers/tcp-wrappers-7.6/ldflags.patch
-@@ -1,13 +1,25 @@
--Index: tcp_wrappers_7.6.orig/Makefile
-+Index: tcp_wrappers_7.6/Makefile
- =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
----- tcp_wrappers_7.6.orig.orig/Makefile	2009-04-06 10:55:47.000000000 +0=
-000
--+++ tcp_wrappers_7.6.orig/Makefile	2009-04-06 10:57:04.000000000 +0000
--@@ -748,31 +748,31 @@
-+--- tcp_wrappers_7.6.orig/Makefile
-++++ tcp_wrappers_7.6/Makefile
-+@@ -724,9 +724,9 @@ SHLIBSOMAJ	=3D shared/libwrap.so.$(SOMAJOR
-+ SHLIBSO		=3D shared/libwrap.so
-+ SHLIBFLAGS	=3D -Lshared -lwrap
-+=20
-+-SHLINKFLAGS =3D -shared -Xlinker -soname -Xlinker libwrap.so.$(SOMAJOR)=
- -lc $(LIBS)
-++SHLINKFLAGS =3D -shared -Xlinker -soname -Xlinker libwrap.so.$(SOMAJOR)
-+ SHCFLAGS =3D -fPIC -shared -D_REENTRANT
-+-SHLIB_OBJ=3D $(addprefix shared/, $(LIB_OBJ));
-++SHLIB_OBJ=3D $(addprefix shared/, $(LIB_OBJ))
-+=20
-+ all other: config-check tcpd tcpdmatch try-from safe_finger tcpdchk $(L=
-IB)
-+=20
-+@@ -748,31 +748,31 @@ $(LIB):	$(LIB_OBJ)
- =20
-  $(SHLIB): $(SHLIB_OBJ)
-  	rm -f $(SHLIB)
- -	$(CC) -o $(SHLIB) $(SHLINKFLAGS) $(SHLIB_OBJ)
--+	$(CC) $(LDFLAGS) -o $(SHLIB) $(SHLINKFLAGS) $(SHLIB_OBJ)
-++	$(CC) $(LDFLAGS) -o $(SHLIB) $(SHLINKFLAGS) $(SHLIB_OBJ) $(LIBS)
-  	ln -sf $(notdir $(SHLIB)) $(SHLIBSOMAJ)
-  	ln -sf $(notdir $(SHLIBSOMAJ)) $(SHLIBSO)
- =20
---=20
-1.7.4.4
-
+Acked-by: Peter Gsellmann <pgsellmann@portner-elektronik.at>
 
 
