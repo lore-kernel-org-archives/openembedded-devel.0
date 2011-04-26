@@ -1,21 +1,31 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QEiin-0002x3-EV for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Apr 2011 15:54:33 +0200
-Received: from f053033081.adsl.alicedsl.de ([78.53.33.81]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QEih9-00032n-G5 for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Apr 2011 13:52:51 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1QEikj-000338-BB
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Apr 2011 15:56:33 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with SMTP id p3QDrvIk006323
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Apr 2011 15:53:58 +0200
+Received: by ensc-virt.intern.sigma-chemnitz.de (sSMTP sendmail emulation);
+	Tue, 26 Apr 2011 15:53:57 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 Apr 2011 15:52:04 +0200
-Message-ID: <1303825924.4073.50.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: tcp-wrappers: What kind of license? Custom or BSD?
+References: <1303814494-9623-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+	<1303824912.4073.44.camel@mattotaupa>
+Date: Tue, 26 Apr 2011 15:53:56 +0200
+In-Reply-To: <1303824912.4073.44.camel@mattotaupa> (Paul Menzel's message of
+	"Tue, 26 Apr 2011 15:35:12 +0200")
+Message-ID: <ly1v0pqft7.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+MIME-Version: 1.0
+X-Spam-Score: -1.3
+X-Spam-Level: -
+X-Spam-Tests: AWL,BAYES_00,SPF_NEUTRAL,T_RP_MATCHES_RCVD
+X-Scanned-By: MIMEDefang 2.71 on 62.153.82.30
+Subject: Re: [PATCH] tcp-wrappers: place LIBS after object files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,73 +39,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2011 13:54:33 -0000
-X-Groupsio-MsgNum: 31480
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-qKuuScB78hSM6oBE2yhV"
-
---=-qKuuScB78hSM6oBE2yhV
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 26 Apr 2011 13:56:33 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Dear OE folks,
+Paul Menzel <paulepanter@users.sourceforge.net> writes:
+
+>> From: Enrico Scholz <enrico.scholz@informatik.tu-chemnitz.de>
+>
+> it seems you need to update your Git configuration to your common
+> email address.
+
+Both addresses are in use; some patches are created at home when I work
+on a personal project (-> tu-chemnitz.de address), some patches at work
+(-> sigma-chemnitz.de address).
 
 
-is =C2=BBtcp-wrapper=C2=AB the correct value [1] to assign to `LICENSE`? Wi=
-kipedia
-says this is a BSD license [2]. The license is the following [3].
+> The diff could have been smaller, but no big problem.
 
-        As of June 1, 2001, the text below constitutes the TCP Wrappers lic=
-ense.
-       =20
-        /******************************************************************=
-******
-        * Copyright 1995 by Wietse Venema.  All rights reserved.  Some indi=
-vidual
-        * files may be covered by other copyrights.
-        *
-        * This material was originally written and compiled by Wietse Venem=
-a at
-        * Eindhoven University of Technology, The Netherlands, in 1990, 199=
-1,
-        * 1992, 1993, 1994 and 1995.
-        *
-        * Redistribution and use in source and binary forms, with or withou=
-t
-        * modification, are permitted provided that this entire copyright n=
-otice
-        * is duplicated in all such copies.
-        *
-        * This software is provided "as is" and without any expressed or im=
-plied
-        * warranties, including, without limitation, the implied warranties=
- of
-        * merchantibility and fitness for any particular purpose.
-        *******************************************************************=
-*****/
+how? three places must be changed (removal of $(LIBS) from old LINKFLAGS,
+removal of superflous ';' and adding of $(LIBS) to link command).
 
 
-Thanks,
+>> +-SHLIB_OBJ=3D $(addprefix shared/, $(LIB_OBJ));
+>> ++SHLIB_OBJ=3D $(addprefix shared/, $(LIB_OBJ))
+>
+> The =BB;=AB was superfluous, since no command followed?
 
-Paul
+yes; and it would break the build because it terminates the $(CC) command
+and $(LIBS) would be interpreted as the start of a new command.
+
+>> ++	$(CC) $(LDFLAGS) -o $(SHLIB) $(SHLINKFLAGS) $(SHLIB_OBJ) $(LIBS)
 
 
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/tcp-wra=
-ppers/tcp-wrappers_7.6.bb?id=3D0393bec46ca556be6845221b701dcf8f9508eb0c#n3
-[2] https://secure.wikimedia.org/wikipedia/en/wiki/TCP_Wrapper
-[3] ftp://ftp.porcupine.org/pub/security/tcp_wrappers_license
+> Is this patch already upstream?
 
---=-qKuuScB78hSM6oBE2yhV
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+woglinde gave his ack on irc and I submitted it.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk22zgQACgkQPX1aK2wOHVgHZwCeMqL4NI2oDAWgBgAmsMZdUB+8
-yxwAn03Bf8CH4BuVp449HsH5Um9VI3D9
-=8zFz
------END PGP SIGNATURE-----
 
---=-qKuuScB78hSM6oBE2yhV--
+Enrico
+
+
