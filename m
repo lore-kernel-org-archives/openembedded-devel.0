@@ -1,22 +1,24 @@
-Received: from cpe.ge-0-2-0-951.faaqnqu1.customer.tele.dk ([93.167.193.22]
-	helo=mail.mikrofyn.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sgh@sgh.dk>) id 1QEdmJ-0007Ne-Gi
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Apr 2011 10:37:51 +0200
-Received: from koontz.localnet ([10.115.0.175]) by mail.mikrofyn.com with
-	Microsoft SMTPSVC(6.0.3790.3959); Tue, 26 Apr 2011 10:40:10 +0200
-From: =?iso-8859-1?q?S=F8ren_Holm?= <sgh@sgh.dk>
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QEe91-00084a-2E for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Apr 2011 11:01:19 +0200
+Received: from f053033081.adsl.alicedsl.de ([78.53.33.81]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QEe7L-0004Sw-PH for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Apr 2011 08:59:36 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 Apr 2011 10:35:23 +0200
-User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic; KDE/4.6.2; i686; ; )
-References: <1303760088-28474-1-git-send-email-sgh@sgh.dk>
-	<1303805410.4073.15.camel@mattotaupa>
-In-Reply-To: <1303805410.4073.15.camel@mattotaupa>
-MIME-Version: 1.0
-Message-Id: <201104261035.23415.sgh@sgh.dk>
-X-OriginalArrivalTime: 26 Apr 2011 08:40:10.0218 (UTC)
-	FILETIME=[8D7354A0:01CC03ED]
-Subject: Re: [PATCH] wvstreams: Cleaned up recipe.
+In-Reply-To: <201104252052.53197.sgh@sgh.dk>
+References: <201104251704.03324.sgh@sgh.dk>
+	<1303745160.15311.36.camel@mattotaupa> <201104252052.53197.sgh@sgh.dk>
+Date: Tue, 26 Apr 2011 10:58:49 +0200
+Message-ID: <1303808329.4073.32.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH] python-scons_1.3.0: add `python-native` to `DEPENDS_virtclass-native`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,38 +32,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2011 08:37:51 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 26 Apr 2011 09:01:19 -0000
+X-Groupsio-MsgNum: 31464
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-zrHVq1ledLT2qCCRYDAc"
+
+--=-zrHVq1ledLT2qCCRYDAc
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Tirsdag 26 april 2011 10:10:10 skrev Paul Menzel:
->=20
-> at least the addition DBus support is not a clean up in my opinion and
-> should be an extra patch.
+Am Montag, den 25.04.2011, 20:52 +0200 schrieb S=C3=B8ren Holm:
+> Signed-off-by: S=C3=B8ren Holm <sgh@sgh.dk>
 
-True, but then again adding it as three patches would yield the same result=
- in=20
-the end, so it might have been better to keep wvstreams_4.6.0 also, for cas=
-es=20
-when 4.6.1+dbus would hurt.
+I used Acked-by instead and pushed it [3]. I think policy in
+OpenEmbedded does not differentiate between both versions anyway, but I
+am used to [1]. I used Signed-off-by in your commits, because I adapted
+the patches or the commit message slightly.
 
->=20
-> > * Made PAM-support conditional.
->=20
-> I would make a commit/patch for each change, but other developers
-> disagree with me in that point.
+[=E2=80=A6]
 
-I see your point.
+> What does DEPENDS_virtclass do ?
 
->=20
-> Can you think of a reason, why Khem did not use the default autotools
-> configure when adding the recipe? I am adding him to CC.
->=20
+If I am not mistaken, these are the dependencies for the native package
+when `BBCLASSEXTEND` is used [2].
 
-No.
+> Mandag den 25. april 2011 17:26:00 skrev Paul Menzel:
 
-=2D-=20
-S=F8ren Holm
+[=E2=80=A6]
+
+Please do not top post, i. e. please rather remove these full text quote
+altogether.
 
 
+Thanks,
+
+Paul
+
+
+[1] http://www.kernel.org/doc/Documentation/SubmittingPatches
+[2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/classes/native.=
+bbclass?id=3Dc3604894c130a6596b16abb945d3c57fbf40ef39
+[3] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D9fb55ee=
+61735ef420e468d9a84dee86e16a0480b
+
+--=-zrHVq1ledLT2qCCRYDAc
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk22iUkACgkQPX1aK2wOHViMdQCfSiyt4cHL1LVtPAtWsp+rNVP7
+gyoAnAtDKKVMJ+4hHR6eRi3iec8i/DnL
+=71dq
+-----END PGP SIGNATURE-----
+
+--=-zrHVq1ledLT2qCCRYDAc--
