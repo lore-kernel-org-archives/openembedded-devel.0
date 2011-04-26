@@ -1,31 +1,30 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1QEgia-0006Wq-Af
+	(envelope-from <msmith@cbnco.com>) id 1QEgqC-0006fp-33
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Apr 2011 13:46:12 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with SMTP id p3QBhe3e026399
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Tue, 26 Apr 2011 13:43:41 +0200
-Received: by ensc-virt.intern.sigma-chemnitz.de (sSMTP sendmail emulation);
-	Tue, 26 Apr 2011 13:43:40 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+	Tue, 26 Apr 2011 13:54:04 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id D5C36BB5B1D
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Apr 2011 07:51:35 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 05418-08 for <openembedded-devel@lists.openembedded.org>; 
+	Tue, 26 Apr 2011 07:51:35 -0400 (EDT)
+Received: from juice.ott.cti.com (dmzgw2.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id A8A6BBB5166
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Apr 2011 07:51:35 -0400 (EDT)
+Date: Tue, 26 Apr 2011 07:51:35 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
+X-X-Sender: michael@juice.ott.cti.com
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 Apr 2011 13:43:38 +0200
-Message-Id: <1303818218-12004-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1303815811-10323-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-References: <1303815811-10323-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-X-DSPAM-Result: Innocent
-X-DSPAM-Probability: 0
-X-DSPAM-Confidence: 0.99
-X-Spam-Score: -5.3
-X-Spam-Level: -----
-X-Spam-Tests: AWL,BAYES_00,SPF_NEUTRAL,T_RP_MATCHES_RCVD,DSPAM_INNOCENT
-X-Scanned-By: MIMEDefang 2.71 on 62.153.82.30
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: [PATCH] dietlibc.bbclass: require dietlibc-cross
+In-Reply-To: <1303813776-6345-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+Message-ID: <Pine.LNX.4.64.1104260750080.12200@juice.ott.cti.com>
+References: <1303813776-6345-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+MIME-Version: 1.0
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: [PATCH] openssl: enforce libdir=lib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,28 +38,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2011 11:46:12 -0000
+X-List-Received-Date: Tue, 26 Apr 2011 11:54:04 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-After recent dietlibc refactoring, the functionality of the old
-'dietlibc' recipe is now provided by 'dietlibc-cross'.
+On Tue, 26 Apr 2011, Enrico Scholz wrote:
 
-Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
----
- classes/dietlibc.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+> diff --git a/recipes/openssl/openssl.inc b/recipes/openssl/openssl.inc
+> index 24b517d..a2eaaa3 100644
+> --- a/recipes/openssl/openssl.inc
+> +++ b/recipes/openssl/openssl.inc
+> @@ -97,7 +97,7 @@ do_configure () {
+>          if [ "x$useprefix" = "x" ]; then
+>                  useprefix=/
+>          fi        
+> -	perl ./Configure ${EXTRA_OECONF} shared --prefix=$useprefix --openssldir=${libdir}/ssl $target
+> +	perl ./Configure ${EXTRA_OECONF} shared --prefix=$useprefix --libdir=lib --openssldir=${libdir}/ssl $target
 
-diff --git a/classes/dietlibc.bbclass b/classes/dietlibc.bbclass
-index 2676385..588c085 100644
---- a/classes/dietlibc.bbclass
-+++ b/classes/dietlibc.bbclass
-@@ -1,4 +1,4 @@
--DEPENDS =+ "dietlibc"
-+DEPENDS =+ "dietlibc-cross"
- 
- def dietlibc_after_parse(d):
-     import bb
--- 
-1.7.4.4
+Could you change "lib" to "${libdir}"? For x86_64 builds my libdir is 
+/usr/lib64.
 
+Mike
 
 
