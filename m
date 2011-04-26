@@ -1,30 +1,24 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1QEikj-000338-BB
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Apr 2011 15:56:33 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with SMTP id p3QDrvIk006323
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Apr 2011 15:53:58 +0200
-Received: by ensc-virt.intern.sigma-chemnitz.de (sSMTP sendmail emulation);
-	Tue, 26 Apr 2011 15:53:57 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QEj5W-0003vU-GI for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Apr 2011 16:18:02 +0200
+Received: from f053033081.adsl.alicedsl.de ([78.53.33.81]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QEj3s-0003Ru-R2 for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Apr 2011 14:16:21 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <ly1v0pqft7.fsf@ensc-virt.intern.sigma-chemnitz.de>
 References: <1303814494-9623-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
 	<1303824912.4073.44.camel@mattotaupa>
-Date: Tue, 26 Apr 2011 15:53:56 +0200
-In-Reply-To: <1303824912.4073.44.camel@mattotaupa> (Paul Menzel's message of
-	"Tue, 26 Apr 2011 15:35:12 +0200")
-Message-ID: <ly1v0pqft7.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
-MIME-Version: 1.0
-X-Spam-Score: -1.3
-X-Spam-Level: -
-X-Spam-Tests: AWL,BAYES_00,SPF_NEUTRAL,T_RP_MATCHES_RCVD
-X-Scanned-By: MIMEDefang 2.71 on 62.153.82.30
+	<ly1v0pqft7.fsf@ensc-virt.intern.sigma-chemnitz.de>
+Date: Tue, 26 Apr 2011 16:15:33 +0200
+Message-ID: <1303827333.4073.57.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
 Subject: Re: [PATCH] tcp-wrappers: place LIBS after object files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,45 +33,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2011 13:56:33 -0000
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Tue, 26 Apr 2011 14:18:02 -0000
+X-Groupsio-MsgNum: 31482
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-crnY8khghz0iMPA9bDDy"
+
+--=-crnY8khghz0iMPA9bDDy
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Paul Menzel <paulepanter@users.sourceforge.net> writes:
+Am Dienstag, den 26.04.2011, 15:53 +0200 schrieb Enrico Scholz:
+> Paul Menzel <paulepanter@users.sourceforge.net> writes:
+>=20
+> >> From: Enrico Scholz <enrico.scholz@informatik.tu-chemnitz.de>
+> >
+> > it seems you need to update your Git configuration to your common
+> > email address.
+>=20
+> Both addresses are in use; some patches are created at home when I work
+> on a personal project (-> tu-chemnitz.de address), some patches at work
+> (-> sigma-chemnitz.de address).
 
->> From: Enrico Scholz <enrico.scholz@informatik.tu-chemnitz.de>
->
-> it seems you need to update your Git configuration to your common
-> email address.
+I guessed as much. But your Signed-off-by line differs from the From
+line. Additionally for the commit statistics it would be better to use a
+common address so that all your commits are shown under one person.
 
-Both addresses are in use; some patches are created at home when I work
-on a personal project (-> tu-chemnitz.de address), some patches at work
-(-> sigma-chemnitz.de address).
+The second reason is just for convenience reasons.
+
+> > The diff could have been smaller, but no big problem.
+>=20
+> how? three places must be changed (removal of $(LIBS) from old LINKFLAGS,
+> removal of superflous ';' and adding of $(LIBS) to link command).
+
+I meant just the header of the diff in the patch.
+
+> >> +-SHLIB_OBJ=3D $(addprefix shared/, $(LIB_OBJ));
+> >> ++SHLIB_OBJ=3D $(addprefix shared/, $(LIB_OBJ))
+> >
+> > The =C2=BB;=C2=AB was superfluous, since no command followed?
+>=20
+> yes; and it would break the build because it terminates the $(CC) command
+> and $(LIBS) would be interpreted as the start of a new command.
+
+Thank you for the explanation.
+
+> >> ++	$(CC) $(LDFLAGS) -o $(SHLIB) $(SHLINKFLAGS) $(SHLIB_OBJ) $(LIBS)
+>=20
+> > Is this patch already upstream?
+>=20
+> woglinde gave his ack on irc
+
+For documentation purpose it would be great if you could add such
+acknowledgments to the commit message.
+
+> and I submitted it.
+
+But I meant upstream of TCP Wrapper.
 
 
-> The diff could have been smaller, but no big problem.
+Thank you for the explanation and your patches,
 
-how? three places must be changed (removal of $(LIBS) from old LINKFLAGS,
-removal of superflous ';' and adding of $(LIBS) to link command).
+Paul
 
+--=-crnY8khghz0iMPA9bDDy
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
->> +-SHLIB_OBJ=3D $(addprefix shared/, $(LIB_OBJ));
->> ++SHLIB_OBJ=3D $(addprefix shared/, $(LIB_OBJ))
->
-> The =BB;=AB was superfluous, since no command followed?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-yes; and it would break the build because it terminates the $(CC) command
-and $(LIBS) would be interpreted as the start of a new command.
+iEYEABECAAYFAk2204UACgkQPX1aK2wOHVjsvACdFU/Zdep2E1wE593NLp2WrCT5
+OwQAn1wCM3dBGKbJEDIN5SXBZFtEGuzB
+=Xka7
+-----END PGP SIGNATURE-----
 
->> ++	$(CC) $(LDFLAGS) -o $(SHLIB) $(SHLINKFLAGS) $(SHLIB_OBJ) $(LIBS)
-
-
-> Is this patch already upstream?
-
-woglinde gave his ack on irc and I submitted it.
-
-
-
-Enrico
-
-
+--=-crnY8khghz0iMPA9bDDy--
