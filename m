@@ -1,29 +1,25 @@
-Received: from bsmtp3.bon.at ([213.33.87.17] helo=lbmfmo03.bon.at)
+Received: from bsmtp4.bon.at ([195.3.86.186] helo=bsmtp.bon.at)
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <pgsellmann@portner-elektronik.at>)
-	id 1QEfnB-00055Q-2K for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Apr 2011 12:46:53 +0200
-Received: from bsmtp.bon.at (unknown [192.168.181.105])
-	by lbmfmo03.bon.at (Postfix) with ESMTP id 142151212EB
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Apr 2011 12:44:22 +0200 (CEST)
+	id 1QEfnE-00055b-Sn for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Apr 2011 12:46:57 +0200
 Received: from aspire.localdomain (unknown [88.116.171.82])
-	by bsmtp.bon.at (Postfix) with ESMTP id 62F5F2C4008
+	by bsmtp.bon.at (Postfix) with ESMTP id 81E4D130058
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Apr 2011 12:44:15 +0200 (CEST)
+	Tue, 26 Apr 2011 12:44:27 +0200 (CEST)
 From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
 Organization: PORTNER Elektronik
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 Apr 2011 12:44:13 +0200
+Date: Tue, 26 Apr 2011 12:44:26 +0200
 User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
 	)
 References: <20110419093343.GB2989@rhein.zuhause.netz>
 	<1303307478.3979.60.camel@mattotaupa>
-	<1303308175.3979.62.camel@mattotaupa>
-In-Reply-To: <1303308175.3979.62.camel@mattotaupa>
+	<1303308248.3979.63.camel@mattotaupa>
+In-Reply-To: <1303308248.3979.63.camel@mattotaupa>
 MIME-Version: 1.0
-Message-Id: <201104261244.14236.pgsellmann@portner-elektronik.at>
-Subject: Re: [PATCH 1/2] orc_0.4.13: set `DEFAULT_PREFERENCE = "-1"`
+Message-Id: <201104261244.27050.pgsellmann@portner-elektronik.at>
+Subject: Re: [PATCH 2/2] orc: add version 0.4.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,50 +33,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2011 10:46:53 -0000
+X-List-Received-Date: Tue, 26 Apr 2011 10:46:57 -0000
 Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+  charset="iso-8859-15"
+Content-Transfer-Encoding: 7bit
 
-Am Mittwoch 20 April 2011, 16:02:55 schrieb Paul Menzel:
-> Date: Tue, 19 Apr 2011 10:38:34 +0200
->=20
-> Task compile of `schroedinger_1.0.9` fails with Orc 0.4.13 the same way a=
-s with Orc 0.4.12 with the following error message [1][2].
->=20
-> 	[=E2=80=A6]
-> 	schroorc.c: In function '_backup_orc_add2_rshift_add_s16_22_op':
-> 	schroorc.c:93:3: error: 'int16_t' undeclared (first use in this function)
-> 	schroorc.c:93:3: note: each undeclared identifier is reported only once =
-for each function it appears in
-> 	[=E2=80=A6]
->=20
-> Therefore we disable the default preference of Orc 0.4.13 for the time be=
-ing until the problems get resolved.
->=20
-> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-April/03=
-2110.html
-> [2] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-April/03=
-1966.html
->=20
+Am Mittwoch 20 April 2011, 16:04:08 schrieb Paul Menzel:
+> Date: Wed, 20 Apr 2011 11:50:37 +0200
+> 
+> This version is build tested using `angstrom-2010.x` and `minimal{,-uclibc}` for `MACHINE = "beagleboard"`. `schroedinger_1.0.9.bb` also seems to build fine with this version.
+> 
 > Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
 > ---
->  recipes/orc/orc_0.4.13.bb |    2 ++
->  1 files changed, 2 insertions(+), 0 deletions(-)
->=20
-> diff --git a/recipes/orc/orc_0.4.13.bb b/recipes/orc/orc_0.4.13.bb
-> index 107dea6..adfe693 100644
-> --- a/recipes/orc/orc_0.4.13.bb
-> +++ b/recipes/orc/orc_0.4.13.bb
-> @@ -1,4 +1,6 @@
->  require orc.inc
-> =20
-> +DEFAULT_PREFERENCE =3D "-1"
+>  recipes/orc/orc_0.4.11.bb |    4 ++++
+>  1 files changed, 4 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/orc/orc_0.4.11.bb
+> 
+> diff --git a/recipes/orc/orc_0.4.11.bb b/recipes/orc/orc_0.4.11.bb
+> new file mode 100644
+> index 0000000..e101068
+> --- /dev/null
+> +++ b/recipes/orc/orc_0.4.11.bb
+> @@ -0,0 +1,4 @@
+> +require orc.inc
 > +
->  SRC_URI[orc.md5sum] =3D "f6d0aed003f67c91933c22d9e5f1696a"
->  SRC_URI[orc.sha256sum] =3D "0fb8952ff688fe4b6f3b68cad49d4fb3cdfd28643b43=
-410170601cc1f1e49601"
->=20
+> +SRC_URI[orc.md5sum] = "b8b0b148d319422c3ad250c29483b3c4"
+> +SRC_URI[orc.sha256sum] = "6ec60521a11339eda36f1e2210d08ae95010d769575e471aaf365b89bca8d031"
+> 
 
 Acked-by: Peter Gsellmann <pgsellmann@portner-elektronik.at>
 
