@@ -1,22 +1,22 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <msundius@sundius.com>) id 1QF9hy-0006B7-92
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Apr 2011 20:43:30 +0200
-Received: by qwh5 with SMTP id 5so981269qwh.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Apr 2011 11:40:58 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.229.77.13 with SMTP id e13mr141426qck.125.1303929658673; Wed,
-	27 Apr 2011 11:40:58 -0700 (PDT)
-Received: by 10.229.65.138 with HTTP; Wed, 27 Apr 2011 11:40:58 -0700 (PDT)
-Date: Wed, 27 Apr 2011 11:40:58 -0700
-Message-ID: <BANLkTi=FVHHE0+HjkhbRKy-z173cJGghog@mail.gmail.com>
-From: C Michael Sundius <msundius@sundius.com>
-To: openembedded-devel@lists.openembedded.org, poky@yoctoproject.org, 
-	josh@linux.intel.com, jessica.zhang@intel.com
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: building images
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QFBZC-0007WL-0c for openembedded-devel@lists.openembedded.org;
+	Wed, 27 Apr 2011 22:42:34 +0200
+Received: from f053039000.adsl.alicedsl.de ([78.53.39.0] helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QFBXY-0001Eo-Ff for openembedded-devel@lists.openembedded.org;
+	Wed, 27 Apr 2011 20:40:52 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4DB82E7C.9080206@cioinfoindus.fr>
+References: <4DB82E7C.9080206@cioinfoindus.fr>
+Date: Wed, 27 Apr 2011 22:40:02 +0200
+Message-ID: <1303936802.4833.8.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH 1/2] mypaint: new recipe for version 0.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,50 +30,170 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Apr 2011 18:43:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 27 Apr 2011 20:42:34 -0000
+X-Groupsio-MsgNum: 31503
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-2c8i1kR7up3qCHyM2kIX"
 
-I'm wondering if when bitbake builds an image, that is to say if all the
-necessary package recipes have already been completely built, if just when
-creating the image, does bitbake make use of the staging/sysroot directory
-at all? or does it only install packages and run some scripts for pre and
-post processing of the image?....
+--=-2c8i1kR7up3qCHyM2kIX
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-could we get away with simply simply providing the packages or a package
-feed for this step?
+Dear Christian,
 
-as I write this, I guess we'd be missing the native tools in the
-sysroot/i686-linux/* directory. lets just say we have told bitbake that it
-should use the native tools from the build host for *everything*.
 
-I'm asking this because I want a way for our customers to use an SDK (that
-we provide from OE) to build an app, and then create an image that is
-equivalent to one that would have been created from within the OE
-environment (will all the package recipes).
+Am Mittwoch, den 27.04.2011, 16:55 +0200 schrieb Christian Charreyre:
 
-My problem is that some of our customers will not adopt OE for developing
-applications. (I think they should, but we just can't guarantee that they
-will, nor do I think we should force them).
+> this new recipe will build the painting soft mypaint.
 
-If we provide:
+thank you for your patches.
 
-1) an SDK that includes:
-- all of our interfaces,
-- all of our utilities and branding info
-- the tool chain,
-- some or all the other native utilities (or maybe just take chances that
-the build host is not Fedora Core 3!)
-2) the packages or a link to a package feed with all of our packages
-necessary for the release
+> In order to correctly run on the target, it is necessary to add new
+> recipes dependencies in python-numpy recipe.
+>=20
+> Here are the two patches.
+>=20
+> Hoping it will be valuable.
 
-what would the minimal config and class info we'd need to create an image
-with bitbake?
+Please send each patch separately using `git send-email` or using your
+mail program and removing the first From line and past the subject into
+the according field of your mailer.
 
-would this be useful or would it be just as much work to get my customers to
-build their app with an OE recipe?
+>  From 0cc6d007fecb3ad7f5d09a9d4897d506a5c41d39 Mon Sep 17 00:00:00 2001
+> From: C. Charreyre<christian.charreyre@cioinfoindus.fr>
 
-anyone have any thoughts on as much?
+A space is missing. You can set it up correctly using `git config`.
 
-Does anyone else have the problem that they need to create an image from the
-result of an SDK? What do you do to solve the problem?
+> Date: Thu, 21 Apr 2011 16:40:54 +0200
+> Subject: [PATCH] mypaint: new recipe for version 0.9.1
+>=20
+> Signed-off-by: C. Charreyre<christian.charreyre@cioinfoindus.fr>
+> ---
+>    recipes/mypaint/files/scons-adapt.patch |   20 +++++++++++++++++
+>    recipes/mypaint/mypaint_0.9.1.bb        |   36
+> +++++++++++++++++++++++++++++++
 
+Your mail program mangled the patch. Please resend as `[PATCH v2]` and
+remember to turn off line wrapping.
+
+>    2 files changed, 56 insertions(+), 0 deletions(-)
+>    create mode 100644 recipes/mypaint/files/scons-adapt.patch
+>    create mode 100644 recipes/mypaint/mypaint_0.9.1.bb
+>=20
+> diff --git a/recipes/mypaint/files/scons-adapt.patch
+> b/recipes/mypaint/files/scons-adapt.patch
+> new file mode 100644
+> index 0000000..dcad6db
+> --- /dev/null
+> +++ b/recipes/mypaint/files/scons-adapt.patch
+> @@ -0,0 +1,20 @@
+> +Author: Christian Charreyre<christian.charreyre@cioinfoindus.fr>
+> +
+> +Adapt scons to OE
+> +Index: mypaint-0.9.1/lib/SConscript
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- mypaint-0.9.1.orig/lib/SConscript    2011-04-21 11:31:29.000000000
+> +0200
+> ++++ mypaint-0.9.1/lib/SConscript    2011-04-21 11:35:30.000000000 +0200
+> +@@ -1,5 +1,11 @@
+> + Import('env')
+> +-import sys
+> ++import sys, os
+> ++env.Replace(SHCXX =3D os.environ['CXX'])
+> ++env.Replace(SHLINK =3D os.environ['CXX'])
+> ++env.Replace(LDMODULEFLAGS =3D os.environ['TARGET_LDFLAGS'])
+> ++env.Append(LDMODULEFLAGS =3D ['-Wl,--hash-style=3Dgnu'])
+> ++env.Append(LDMODULEFLAGS =3D ['-shared'])
+> ++env.Replace(PATH =3D os.environ['PATH'])
+
+Did you send this upstream so that they can improve the build system for
+cross compilation?
+
+> +
+> + # For the record: I know that scons supports swig. But it doesn't scan
+> for #include in the generated code.
+> + #
+> diff --git a/recipes/mypaint/mypaint_0.9.1.bb
+> b/recipes/mypaint/mypaint_0.9.1.bb
+> new file mode 100644
+> index 0000000..a7e5077
+> --- /dev/null
+> +++ b/recipes/mypaint/mypaint_0.9.1.bb
+> @@ -0,0 +1,36 @@
+> +DESCRIPTION=3D"fast and easy open-source graphics application for digita=
+l
+> painters"
+> +LICENSE=3D"GPL"
+> +SECTION =3D "x11/applications"
+> +PRIORITY =3D "optional"
+> +HOMEPAGE =3D "http://mypaint.intilinux.com/"
+> +
+> +RDEPENDS_${PN} =3D "python-numpy python-image python-json"
+
+Can you sort those lexicographically.
+
+> +
+> +SRC_URI =3D "http://download.gna.org/mypaint/${PN}-${PV}.tar.bz2 \
+> +    file://scons-adapt.patch \
+> +"
+> +
+> +inherit distutils scons
+> +
+> +do_compile() {
+> +    STAGING_INCDIR=3D${STAGING_INCDIR} \
+> +    STAGING_LIBDIR=3D${STAGING_LIBDIR} \
+> +    BUILD_SYS=3D${BUILD_SYS} \
+> +    HOST_SYS=3D${HOST_SYS} \
+> +    PATH=3D${PATH} scons_do_compile
+> +}
+
+I do not know Scons, but it looks strange that the above is needed and
+not done automatically.
+
+> +
+> +do_install() {
+> +    BUILD_SYS=3D${BUILD_SYS} \
+> +    HOST_SYS=3D${HOST_SYS} \
+> +    scons_do_install
+> +}
+> +
+> +FILES_${PN} +=3D "${datadir}"
+> +
+> +SRC_URI[md5sum] =3D "6249a16359a438d6dc658f5765b35515"
+> +SRC_URI[sha256sum] =3D
+> "407b599f62fb0d6e711fee57d22e64d3aec88825364fb5f7f73b9f0940aa7aed"
+
+Please put it right at the top under `SRC_URI`.
+
+> +
+> +INSANE_SKIP_${PN} =3D True
+
+Please note in the commit message or in the recipe as a comment what
+error you get/why this is needed.
+
+> +
+> +
+
+Please remove the empty lines at the end.
+
+
+Thanks,
+
+Paul
+
+--=-2c8i1kR7up3qCHyM2kIX
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk24fxsACgkQPX1aK2wOHVieOACgiXBOB16koUsO8nKzxAuRDSRf
+s8EAni7f8rd7bD8OyDd4nlf2L7D1+ew7
+=qB1P
+-----END PGP SIGNATURE-----
+
+--=-2c8i1kR7up3qCHyM2kIX--
