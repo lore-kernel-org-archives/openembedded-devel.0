@@ -1,34 +1,21 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QEyTh-0004Y6-Jx for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Apr 2011 08:44:01 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QEyRJ-0002Ws-3V for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Apr 2011 08:41:33 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Apr 2011 08:41:33 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Apr 2011 08:41:33 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 27 Apr 2011 08:41:20 +0200
-Message-ID: <ip8dqg$gru$1@dough.gmane.org>
-References: <1303852991-28469-1-git-send-email-c-hernandez8@ti.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1303852991-28469-1-git-send-email-c-hernandez8@ti.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH v2] ltp-ddt: New recipe to build ltp-ddt test tool.
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1QF0oD-00088a-4H; Wed, 27 Apr 2011 11:13:21 +0200
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1QF10x-0002wq-Tv; Wed, 27 Apr 2011 11:26:31 +0200
+Message-ID: <4DB7DD96.9060507@kernelconcepts.de>
+Date: Wed, 27 Apr 2011 11:10:46 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
+MIME-Version: 1.0
+To: openembedded-members@lists.openembedded.org, 
+	openembedded-devel <openembedded-devel@openembedded.org>
+X-Enigmail-Version: 1.1.2
+Subject: LinuxTag exhibitor passes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,38 +29,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Apr 2011 06:44:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 27 Apr 2011 09:13:21 -0000
+Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi all,
 
-On 26-04-11 23:23, Carlos Hernandez wrote:
-> ltp-ddt is an open source test application for embedded linux devices.
-> It is based on the linux test project (ltp) but it has a smaller footprint
-> and it focus mainly on driver and system performance.
-> Design Highlights:
->  * Based on LTP http://ltp.sourceforge.net/
->  * Test cases are suitable for embedded devices w/ a limited shell.
->  * Support dynamic selection/filtering of test cases based on platform.
->  * Support test parameters overrides based on platform.
-> 
-> Signed-off-by: Carlos Hernandez <c-hernandez8@ti.com>
-> 
->  Changed in version 2:
->  * Install package under /opt instead of under /usr to comply with FHS per
->    Denys' recommendation.
+the deadline for ordering exhibitor passes ends this week.
+Everyone who intends to help at the booth and needs one please drop me a mail.
 
-NAK, everything we install in OE is part of the system, so no /opt stuff
-please.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Greetings
 
-iD8DBQFNt7qPMkyGM64RGpERAoOBAJ9cA79Bykrb7D9OWMpoy5+u0+4fJQCbB7kh
-wWt3XmwVgvmGOSYj1XX84Ik=
-=5W68
------END PGP SIGNATURE-----
+Florian
 
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
