@@ -1,31 +1,40 @@
-Received: from smtp-out05.msg.oleane.net ([62.161.7.3])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <christian.charreyre@cioinfoindus.fr>)
-	id 1QF9er-0005xA-9H for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Apr 2011 20:40:17 +0200
-Received: from smtp03.msg.oleane.net (smtp03.mail.priv [172.17.20.112]) 
-	by smtp-out05.msg.oleane.net with ESMTP id p3RFKl3b028630
+	(envelope-from <lukasmaerdian@googlemail.com>) id 1QF9hn-00063k-7n
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 27 Apr 2011 20:43:19 +0200
+Received: by bwz5 with SMTP id 5so1837353bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Apr 2011 17:20:47 +0200
-Received: from [192.168.1.148] (AMarseille-551-1-48-89.w80-9.abo.wanadoo.fr
-	[80.9.223.89]) (authenticated)
-	by smtp03.msg.oleane.net (MTA) with ESMTP id p3RF0Lrj021184
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Apr 2011 17:00:21 +0200
-X-Oleane-Rep: REPA
-Message-ID: <4DB82F84.3090407@cioinfoindus.fr>
-Date: Wed, 27 Apr 2011 17:00:20 +0200
-From: Christian Charreyre <christian.charreyre@cioinfoindus.fr>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
+	Wed, 27 Apr 2011 11:40:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
+	:mime-version:content-type:content-transfer-encoding;
+	bh=SfvyTsSvwWjriy2qZHYpS2UhYPdMdDmKoT1/aX/h5/A=;
+	b=Yls/XtK99PDDcBgbWWDmX3xbjJHyQ1ptjbNb2JXlOeFfmm9GyTn48e6ug8atKThWvx
+	6oHsm1k9t1uVlf6w18o/zYyA0jGYXxvgtGn/BF3YrNY4SBmD/PGP0VSMMYlZwlbdAvc1
+	ctvlb+8jxXqvAI5Z0Q8KK5hAhLGe009zPFCpE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:mime-version
+	:content-type:content-transfer-encoding;
+	b=jSdUykcajfAAVd5ZHgWO95YRj6qLLRGI6u3gz74xGOjALpBa2WSmNrNFXxUPmx600r
+	cN2JB0B54dKbxVcwVKWHVysH0AKqDRZ19vMk4LxzbaMm4fPkIZDsDTCf1Jw+3gOW7FtC
+	ydrODogNpKodod/TKlgp+uDM7kaIYezcTkx0A=
+Received: by 10.204.136.1 with SMTP id p1mr612833bkt.105.1303929648021;
+	Wed, 27 Apr 2011 11:40:48 -0700 (PDT)
+Received: from localhost.localdomain
+	(ppp-188-174-68-179.dynamic.mnet-online.de [188.174.68.179])
+	by mx.google.com with ESMTPS id q24sm585823bks.9.2011.04.27.11.40.44
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 27 Apr 2011 11:40:45 -0700 (PDT)
+From: "=?UTF-8?q?Lukas=20M=C3=A4rdian?=" <lukasmaerdian@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Spam-Flag: NO
-X-PMX-Spam: Probability=8%
-X-PFSI-Info: PMX 5.5.9.395186, Antispam-Engine: 2.7.2.376379,
-	Antispam-Data: 2011.4.27.144517 (no antivirus check)
-X-Orange-Auth: Y2I1NTMtM0BjaW9pbmZvaW4uZnIuZnRv
-Subject: [PATCH 2/2] python-numpy: add missing release dependencies
+Date: Wed, 27 Apr 2011 20:40:32 +0200
+Message-Id: <1303929633-1636-1-git-send-email-lukasmaerdian@gmail.com>
+X-Mailer: git-send-email 1.7.1
+MIME-Version: 1.0
+Cc: =?UTF-8?q?Lukas=20M=C3=A4rdian?= <lukasmaerdian@gmail.com>
+Subject: [PATCH 1/2] shr-e-gadgets: bump SRCREV and PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,77 +48,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Apr 2011 18:40:17 -0000
-X-Groupsio-MsgNum: 31499
-Content-Type: multipart/mixed; boundary="------------070900020804060904000009"
+X-List-Received-Date: Wed, 27 Apr 2011 18:43:19 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---------------070900020804060904000009
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+* this adds a new e-gadget: battery-fso
+* battery-fso is an alternative battery gadget, which uses fsodeviced as data source
 
-
-Hi all,
-
-this new recipe will build the painting soft mypaint.
-
-In order to correctly run on the target, it is necessary to add new
-recipes dependencies in python-numpy recipe.
-
-Here are the two patches.
-
-Hoping it will be valuable.
-
-
-
-  From 0ba53d830cbc429082244be68de367750b2f3702 Mon Sep 17 00:00:00 2001
-From: C. Charreyre<christian.charreyre@cioinfoindus.fr>
-Date: Thu, 21 Apr 2011 16:26:38 +0200
-Subject: [PATCH] python-numpy: add missing release dependencies
-necessaries for mypaint
-
-Signed-off-by: C. Charreyre<christian.charreyre@cioinfoindus.fr>
+Signed-off-by: Lukas Märdian <lukasmaerdian@gmail.com>
 ---
-   recipes/python/python-numpy_1.1.1.bb |    2 ++
-   1 files changed, 2 insertions(+), 0 deletions(-)
+ recipes/shr/shr-e-gadgets_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/python/python-numpy_1.1.1.bb
-b/recipes/python/python-numpy_1.1.1.bb
-index f5c23e0..9dda508 100644
---- a/recipes/python/python-numpy_1.1.1.bb
-+++ b/recipes/python/python-numpy_1.1.1.bb
-@@ -4,6 +4,8 @@ PRIORITY = "optional"
-   LICENSE = "PSF"
-   PR = "ml0"
-
-+RDEPENDS_${PN} = "python-compiler python-pkgutil python-pydoc
-python-mmap python-unittest"
-+
-   SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
-              file://unbreak-assumptions.diff \
-          file://trycompile.diff \
+diff --git a/recipes/shr/shr-e-gadgets_git.bb b/recipes/shr/shr-e-gadgets_git.bb
+index acb56b4..418d99a 100644
+--- a/recipes/shr/shr-e-gadgets_git.bb
++++ b/recipes/shr/shr-e-gadgets_git.bb
+@@ -5,9 +5,9 @@ DEPENDS = "e-wm"
+ RDEPENDS_${PN} = "e-wm"
+ SECTION = "x11/application"
+ 
+-SRCREV = "5c9d0f8f778565f3ae69e45b8c35b04529156345"
++SRCREV = "6db7db75a77f611665e33f777ec407428f1488eb"
+ PV = "0.0.0+gitr${SRCPV}"
+-PR = "r10"
++PR = "r11"
+ 
+ inherit autotools
+ 
 -- 
-1.7.0.2
+1.7.1
 
 
 
-
---------------070900020804060904000009
-Content-Type: text/x-vcard; charset=utf-8;
- name="christian_charreyre.vcf"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="christian_charreyre.vcf"
-
-begin:vcard
-fn:Christian  Charreyre
-n:Charreyre;Christian 
-org:CIO Informatique Industrielle
-adr;dom:;;11 Avenue Marigny;Marseille;;13014
-email;internet:christian.charreyre@cioinfoindus.fr
-tel;work:04 95 05 19 41
-url:http://www.cioinfoindus.fr
-version:2.1
-end:vcard
-
-
---------------070900020804060904000009--
