@@ -1,41 +1,31 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from smtp-out05.msg.oleane.net ([62.161.7.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QF8iO-0003PB-3c
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Apr 2011 19:39:52 +0200
-Received: by bwz5 with SMTP id 5so1779041bwz.6
+	(envelope-from <christian.charreyre@cioinfoindus.fr>)
+	id 1QF9er-0005xA-9H for openembedded-devel@lists.openembedded.org;
+	Wed, 27 Apr 2011 20:40:17 +0200
+Received: from smtp03.msg.oleane.net (smtp03.mail.priv [172.17.20.112]) 
+	by smtp-out05.msg.oleane.net with ESMTP id p3RFKl3b028630
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Apr 2011 10:37:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=JWSL9DwhPtsjZomAOSlsLAsbmLMN/vnP5H/178fhfFY=;
-	b=W6b7tsVDuKlNTmedMgsvOdUdEeyXFqDmko+tZL6ReJNhAE/qShHg1ftRufHw7UZAh5
-	6lfuj1A2Tyx+gnAgt//mc6PRLep9wrdKbAskU0sLvqbzE01uEmVKJNLIRx+16KMygBqQ
-	eIMPb4fnMNBmWZ+L+1s48U0XTOgQgp+Zm1IEk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=gJylcSthrxOn7KtdRyr7YgvA5Ci0DZRE4hJQXQ9mNa5N50Jc/aJW5MbWBXtoJ3XtL4
-	N/CZYWSABAWZPjbsvgwOyUVTWBq2cINs4zQ+ocK2jmiA040sbZAyDfNO3NMwII2+JaQr
-	qkU0FH7UL1aC8uNm2XKN2vjrl1yssewVgNZEY=
+	Wed, 27 Apr 2011 17:20:47 +0200
+Received: from [192.168.1.148] (AMarseille-551-1-48-89.w80-9.abo.wanadoo.fr
+	[80.9.223.89]) (authenticated)
+	by smtp03.msg.oleane.net (MTA) with ESMTP id p3RF0Lrj021184
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Apr 2011 17:00:21 +0200
+X-Oleane-Rep: REPA
+Message-ID: <4DB82F84.3090407@cioinfoindus.fr>
+Date: Wed, 27 Apr 2011 17:00:20 +0200
+From: Christian Charreyre <christian.charreyre@cioinfoindus.fr>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-Received: by 10.204.19.83 with SMTP id z19mr1163870bka.191.1303925841249; Wed,
-	27 Apr 2011 10:37:21 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.70.138 with HTTP; Wed, 27 Apr 2011 10:37:21 -0700 (PDT)
-In-Reply-To: <1299360603-24687-2-git-send-email-eric@eukrea.com>
-References: <1299360603-24687-1-git-send-email-eric@eukrea.com>
-	<1299360603-24687-2-git-send-email-eric@eukrea.com>
-Date: Wed, 27 Apr 2011 14:37:21 -0300
-X-Google-Sender-Auth: JlfsrW010cWIQ6rvuyvFTcMa9As
-Message-ID: <BANLkTimdEpdmQTFtscP9rrRSaO5HrGaG6g@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Cc: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-Subject: Re: [PATCH 2/2] qt4: add 4.7.2
+X-Spam-Flag: NO
+X-PMX-Spam: Probability=8%
+X-PFSI-Info: PMX 5.5.9.395186, Antispam-Engine: 2.7.2.376379,
+	Antispam-Data: 2011.4.27.144517 (no antivirus check)
+X-Orange-Auth: Y2I1NTMtM0BjaW9pbmZvaW4uZnIuZnRv
+Subject: [PATCH 2/2] python-numpy: add missing release dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,28 +39,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Apr 2011 17:39:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 27 Apr 2011 18:40:17 -0000
+X-Groupsio-MsgNum: 31499
+Content-Type: multipart/mixed; boundary="------------070900020804060904000009"
 
-On Sat, Mar 5, 2011 at 18:30, Eric B=E9nard <eric@eukrea.com> wrote:
-> =A0recipes/qt4/qt-4.7.2.inc =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 =A0 | =A0 72 ++++++++++++++++++++
-...
-> +do_configure_append() {
-> + =A0 =A0sed -e '/QMAKE_TARGET /d' -e '/TARGET /d' -i ${S}/translations/M=
-akefile
-> +}
-...
-
-It seems as a regression from previous qt4 recipes since we used to
-have translation support. Eric, can you take a look into that?
-
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+--------------070900020804060904000009
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
+Hi all,
+
+this new recipe will build the painting soft mypaint.
+
+In order to correctly run on the target, it is necessary to add new
+recipes dependencies in python-numpy recipe.
+
+Here are the two patches.
+
+Hoping it will be valuable.
+
+
+
+  From 0ba53d830cbc429082244be68de367750b2f3702 Mon Sep 17 00:00:00 2001
+From: C. Charreyre<christian.charreyre@cioinfoindus.fr>
+Date: Thu, 21 Apr 2011 16:26:38 +0200
+Subject: [PATCH] python-numpy: add missing release dependencies
+necessaries for mypaint
+
+Signed-off-by: C. Charreyre<christian.charreyre@cioinfoindus.fr>
+---
+   recipes/python/python-numpy_1.1.1.bb |    2 ++
+   1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/recipes/python/python-numpy_1.1.1.bb
+b/recipes/python/python-numpy_1.1.1.bb
+index f5c23e0..9dda508 100644
+--- a/recipes/python/python-numpy_1.1.1.bb
++++ b/recipes/python/python-numpy_1.1.1.bb
+@@ -4,6 +4,8 @@ PRIORITY = "optional"
+   LICENSE = "PSF"
+   PR = "ml0"
+
++RDEPENDS_${PN} = "python-compiler python-pkgutil python-pydoc
+python-mmap python-unittest"
++
+   SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
+              file://unbreak-assumptions.diff \
+          file://trycompile.diff \
+-- 
+1.7.0.2
+
+
+
+
+--------------070900020804060904000009
+Content-Type: text/x-vcard; charset=utf-8;
+ name="christian_charreyre.vcf"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="christian_charreyre.vcf"
+
+begin:vcard
+fn:Christian  Charreyre
+n:Charreyre;Christian 
+org:CIO Informatique Industrielle
+adr;dom:;;11 Avenue Marigny;Marseille;;13014
+email;internet:christian.charreyre@cioinfoindus.fr
+tel;work:04 95 05 19 41
+url:http://www.cioinfoindus.fr
+version:2.1
+end:vcard
+
+
+--------------070900020804060904000009--
