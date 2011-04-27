@@ -1,35 +1,35 @@
 Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefflance01@gmail.com>) id 1QElp0-0002OL-Dx
+	(envelope-from <jefflance01@gmail.com>) id 1QEmnH-0003WF-TA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Apr 2011 19:13:12 +0200
-Received: by yia13 with SMTP id 13so344173yia.6
+	Tue, 26 Apr 2011 20:15:28 +0200
+Received: by yia13 with SMTP id 13so369256yia.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Apr 2011 10:10:35 -0700 (PDT)
+	Tue, 26 Apr 2011 11:12:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=h2OT+TVy17dpE9H/EZtunkmjypX/DG5SJjeJKicKm3U=;
-	b=kOB7uV22Ke+AWZNK4ZMqJMO5qSiGelcpN38T1HJRUFJIrtrFZh/Gc/Y7wmxPUkhuzt
-	n8qsz9taM0sEeHldJOvyxltJxR5dPSdF1lBLi/F2y+LBwjTG9WfpZbSFBFOLc+6OPhoW
-	65Mr4XjRE2y44SvY4Wz6Kmay+WvlX5548TcIY=
+	bh=9GkmR3/rXZ8P0HRkgqXsONbOYgEj0QMKsZW8jk84OKA=;
+	b=gaiWWeh1FL524RTJipqygwdPWsYrOVr7cA0gKoPYUVxC+WgQp2gLc8mDY2A7f+SJVJ
+	Qu62tNaPF9qY0j7Jqsp19r+qyZdyWIWLeZh9juqHjpAIp4abG/cyf4dZ83QpZrxppdAO
+	TDxmZndTZtJYpThfiUQgQmYKZ6OP/zf5mEcSE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=lsTDaRN1lGKvHk75ojg/7Z6YevMpGuvbQS/w1PSk8ocFwQg6Bme8NkIhPkImwaoV6a
-	XosUzq5vgxhRJi0HLn5oooydzolAltKl+6JwMTHhoasEuGg7WvbKZhsxZ4I0YpnpB1Bk
-	qVgwWT9z+DvPjbiTLPA3ZkAWy7+WXST6f/c4k=
-Received: by 10.236.78.10 with SMTP id f10mr1298997yhe.176.1303837835499;
-	Tue, 26 Apr 2011 10:10:35 -0700 (PDT)
+	b=qCSjx3ZOxgN9WurULoK6Pjc503kMwup2zPfioqASPiQicezId8FpE0rfHXziuTP+7V
+	yr6bZ4P0WkmWafZCMjdrje/R1XrSGqD5pUBeFmgAH10eJJeHPGzEfwyYROhmMhPwCBih
+	FTR3Synru//mFlwo54n2Pd7pP027MIEDbEi5Y=
+Received: by 10.236.26.2 with SMTP id b2mr1393521yha.105.1303841576036;
+	Tue, 26 Apr 2011 11:12:56 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id l73sm2760791yhn.98.2011.04.26.10.10.34
+	by mx.google.com with ESMTPS id 73sm2794402yhl.49.2011.04.26.11.12.55
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 26 Apr 2011 10:10:34 -0700 (PDT)
+	Tue, 26 Apr 2011 11:12:55 -0700 (PDT)
 From: Jeff Lance <jefflance01@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Apr 2011 13:05:19 -0500
-Message-Id: <1303927519-6262-1-git-send-email-j-lance1@ti.com>
+Date: Wed, 27 Apr 2011 14:07:38 -0500
+Message-Id: <1303931258-6394-1-git-send-email-j-lance1@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 Cc: Jeff Lance <j-lance1@ti.com>
-Subject: [PATCH 1/1] am-benchmarks: add return values * add return values to dhrystone and linpack for automated test
+Subject: [PATCH v2 1/1] am-benchmarks: add return values
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,9 +43,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2011 17:13:13 -0000
+X-List-Received-Date: Tue, 26 Apr 2011 18:15:28 -0000
+
+ * add return values to dhrystone and linpack for automated test
 
 Signed-off-by: Jeff Lance  <j-lance1@ti.com>
+
+---
+ Updated in version 2:
+    * added space before bulleted list
 ---
  recipes/ti/am-benchmarks_1.2.bb |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
