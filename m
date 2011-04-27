@@ -1,21 +1,34 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QErDx-0006Yp-CN for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Apr 2011 00:59:17 +0200
-Received: from f053033081.adsl.alicedsl.de ([78.53.33.81]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QErCJ-0005OB-W2 for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Apr 2011 22:57:36 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QEyTh-0004Y6-Jx for openembedded-devel@lists.openembedded.org;
+	Wed, 27 Apr 2011 08:44:01 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QEyRJ-0002Ws-3V for openembedded-devel@lists.openembedded.org;
+	Wed, 27 Apr 2011 08:41:33 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Apr 2011 08:41:33 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Apr 2011 08:41:33 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Apr 2011 00:56:48 +0200
-Message-ID: <1303858608.24599.33.camel@mattotaupa>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 27 Apr 2011 08:41:20 +0200
+Message-ID: <ip8dqg$gru$1@dough.gmane.org>
+References: <1303852991-28469-1-git-send-email-c-hernandez8@ti.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: angstrom-2010.x: build is incomplete with `e-image`
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1303852991-28469-1-git-send-email-c-hernandez8@ti.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH v2] ltp-ddt: New recipe to build ltp-ddt test tool.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,86 +42,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2011 22:59:17 -0000
-X-Groupsio-MsgNum: 31494
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-s38xjPkjcyNqKeax8Loi"
+X-List-Received-Date: Wed, 27 Apr 2011 06:44:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-s38xjPkjcyNqKeax8Loi
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Dear OE folks,
+On 26-04-11 23:23, Carlos Hernandez wrote:
+> ltp-ddt is an open source test application for embedded linux devices.
+> It is based on the linux test project (ltp) but it has a smaller footprint
+> and it focus mainly on driver and system performance.
+> Design Highlights:
+>  * Based on LTP http://ltp.sourceforge.net/
+>  * Test cases are suitable for embedded devices w/ a limited shell.
+>  * Support dynamic selection/filtering of test cases based on platform.
+>  * Support test parameters overrides based on platform.
+> 
+> Signed-off-by: Carlos Hernandez <c-hernandez8@ti.com>
+> 
+>  Changed in version 2:
+>  * Install package under /opt instead of under /usr to comply with FHS per
+>    Denys' recommendation.
 
-
-	$ bitbake -k e-image
-	[=E2=80=A6]
-	Build Configuration:
-	BB_VERSION        =3D "1.12.0"
-	METADATA_BRANCH   =3D "master"
-	METADATA_REVISION =3D "f806a46"
-	TARGET_ARCH       =3D "arm"
-	TARGET_OS         =3D "linux-gnueabi"
-	MACHINE           =3D "beagleboard"
-	DISTRO            =3D "angstrom"
-	DISTRO_VERSION    =3D "v20110426"
-	TARGET_FPU        =3D "hard"
-
-	NOTE: Resolving any missing task queue dependencies
-	ERROR: Nothing PROVIDES 'bluez-libs-3.36'
-	ERROR: Nothing PROVIDES 'libipkg'
-	NOTE: Runtime target 'gpe-package' is unbuildable, removing...
-	Missing or unbuildable dependency chain was: ['gpe-package', 'libipkg']
-	NOTE: Runtime target 'task-gpe-settings' is unbuildable, removing...
-	Missing or unbuildable dependency chain was: ['task-gpe-settings', 'gpe-pa=
-ckage', 'libipkg']
-	NOTE: multiple providers are available for runtime xserver-kdrive (xserver=
--kdrive, xserver-kdrive-1300)
-	NOTE: consider defining a PREFERRED_PROVIDER entry to match xserver-kdrive
-	ERROR: Nothing RPROVIDES 'bluez-cups-backend' (but /oe/openembedded/recipe=
-s/bluez/bluez-cups-backend_3.36.bb RDEPENDS on or otherwise requires it)
-	NOTE: Runtime target 'bluez-cups-backend' is unbuildable, removing...
-	Missing or unbuildable dependency chain was: ['bluez-cups-backend']
-	ERROR: Nothing RPROVIDES 'bluez-gstreamer-plugin' (but /oe/openembedded/re=
-cipes/bluez/bluez-gstreamer-plugin_3.36.bb RDEPENDS on or otherwise require=
-s it)
-	NOTE: Runtime target 'bluez-gstreamer-plugin' is unbuildable, removing...
-	Missing or unbuildable dependency chain was: ['bluez-gstreamer-plugin']
-	ERROR: Nothing RPROVIDES 'bluez-utils-alsa' (but /oe/openembedded/recipes/=
-bluez/bluez-utils-alsa_3.36.bb RDEPENDS on or otherwise requires it)
-	NOTE: Runtime target 'bluez-utils-alsa' is unbuildable, removing...
-	Missing or unbuildable dependency chain was: ['bluez-utils-alsa']
-	NOTE: multiple providers are available for runtime esd (esound, osso-esd)
-	NOTE: consider defining a PREFERRED_PROVIDER entry to match esd
-	ERROR: Nothing RPROVIDES 'bluez-libs-3.36'
-	NOTE: Runtime target 'bluez-libs-3.36' is unbuildable, removing...
-	Missing or unbuildable dependency chain was: ['bluez-libs-3.36']
-	ERROR: Nothing RPROVIDES 'libipkg'
-	NOTE: Runtime target 'libipkg' is unbuildable, removing...
-	Missing or unbuildable dependency chain was: ['libipkg']
-	NOTE: Preparing runqueue
-	ERROR: All buildable tasks have been run but the build is incomplete (--co=
-ntinue mode). Errors for the tasks that failed will have been printed above=
-.
-
-Do you have an idea what caused this?
-
-
-Thanks,
-
-Paul
-
---=-s38xjPkjcyNqKeax8Loi
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
+NAK, everything we install in OE is part of the system, so no /opt stuff
+please.
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAk23TbAACgkQPX1aK2wOHVgFPACeJuEX+fDPD2jgQCt+wnSmcU92
-EicAn3knNa5Wg+JHB+Q7sA7QKBMuhSjg
-=RZQ2
+iD8DBQFNt7qPMkyGM64RGpERAoOBAJ9cA79Bykrb7D9OWMpoy5+u0+4fJQCbB7kh
+wWt3XmwVgvmGOSYj1XX84Ik=
+=5W68
 -----END PGP SIGNATURE-----
 
---=-s38xjPkjcyNqKeax8Loi--
+
+
