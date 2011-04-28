@@ -1,22 +1,21 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QFBZC-0007WL-0c for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Apr 2011 22:42:34 +0200
-Received: from f053039000.adsl.alicedsl.de ([78.53.39.0] helo=[192.168.178.21])
+	id 1QFLrC-000578-5D for openembedded-devel@lists.openembedded.org;
+	Thu, 28 Apr 2011 09:41:50 +0200
+Received: from g225080101.adsl.alicedsl.de ([92.225.80.101]
+	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QFBXY-0001Eo-Ff for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Apr 2011 20:40:52 +0000
+	id 1QFLpZ-0004lX-Pi for openembedded-devel@lists.openembedded.org;
+	Thu, 28 Apr 2011 07:40:10 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4DB82E7C.9080206@cioinfoindus.fr>
-References: <4DB82E7C.9080206@cioinfoindus.fr>
-Date: Wed, 27 Apr 2011 22:40:02 +0200
-Message-ID: <1303936802.4833.8.camel@mattotaupa>
+Date: Thu, 28 Apr 2011 09:39:18 +0200
+Message-ID: <1303976359.3990.14.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH 1/2] mypaint: new recipe for version 0.9.1
+Subject: angstrom-2010.x: `bitbake virtual/kernel` fails with `[Errno 2] No such file or directory: '/oe/openembedded/recipes/linux/linux-omap-2.6.37/beagleboard/./configs/'`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,170 +29,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Apr 2011 20:42:34 -0000
-X-Groupsio-MsgNum: 31503
+X-List-Received-Date: Thu, 28 Apr 2011 07:41:50 -0000
+X-Groupsio-MsgNum: 31504
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-2c8i1kR7up3qCHyM2kIX"
+	boundary="=-2f/hNafe5fHP1dAj8huR"
 
---=-2c8i1kR7up3qCHyM2kIX
+--=-2f/hNafe5fHP1dAj8huR
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dear Christian,
+Dear OE folks,
 
 
-Am Mittwoch, den 27.04.2011, 16:55 +0200 schrieb Christian Charreyre:
+using `angstrom-2010.x` for `MACHINE =3D "beagleboard"` and executing
+`bitbake -k virtual/kernel` from an empty build directory, task unpack
+of `linux-omap_2.6.37.bb` fails with the following error.
 
-> this new recipe will build the painting soft mypaint.
+	$ bitbake -k virtual/kernel
+	[=E2=80=A6]
+	Build Configuration:
+	BB_VERSION        =3D "1.12.0"
+	METADATA_BRANCH   =3D "master"
+	METADATA_REVISION =3D "9a7d3ae"
+	TARGET_ARCH       =3D "arm"
+	TARGET_OS         =3D "linux-gnueabi"
+	MACHINE           =3D "beagleboard"
+	DISTRO            =3D "angstrom"
+	DISTRO_VERSION    =3D "v20110428"
+	TARGET_FPU        =3D "hard"
 
-thank you for your patches.
+	NOTE: Resolving any missing task queue dependencies
+	NOTE: Preparing runqueue
+	NOTE: Executing RunQueue Tasks
+	NOTE: Running task 825 of 945 (ID: 10, /oe/openembedded/recipes/linux/linu=
+x-omap_2.6.37.bb, do_setscene)
+	NOTE: package linux-omap-2.6.37-r101d+gitrfa3b4e23ec20cfc944db7cc2b30b0d82=
+c20e4472: task do_setscene: Started
+	NOTE: package linux-omap-2.6.37-r101d+gitrfa3b4e23ec20cfc944db7cc2b30b0d82=
+c20e4472: task do_setscene: Succeeded
+	NOTE: Running task 922 of 945 (ID: 8, /oe/openembedded/recipes/linux/linux=
+-omap_2.6.37.bb, do_fetch)
+	NOTE: package linux-omap-2.6.37-r101d+gitrfa3b4e23ec20cfc944db7cc2b30b0d82=
+c20e4472: task do_fetch: Started
+	NOTE: package linux-omap-2.6.37-r101d+gitrfa3b4e23ec20cfc944db7cc2b30b0d82=
+c20e4472: task do_fetch: Succeeded
+	NOTE: Running task 923 of 945 (ID: 0, /oe/openembedded/recipes/linux/linux=
+-omap_2.6.37.bb, do_unpack)
+	NOTE: Running task 924 of 945 (ID: 20, /oe/openembedded/recipes/linux/linu=
+x-omap_2.6.37.bb, do_distribute_sources)
+	NOTE: package linux-omap-2.6.37-r101d+gitrfa3b4e23ec20cfc944db7cc2b30b0d82=
+c20e4472: task do_unpack: Started
+	NOTE: package linux-omap-2.6.37-r101d+gitrfa3b4e23ec20cfc944db7cc2b30b0d82=
+c20e4472: task do_distribute_sources: Started
+	ERROR: Error executing a python function in /oe/openembedded/recipes/linux=
+/linux-omap_2.6.37.bb:
+	OSError: [Errno 2] No such file or directory: '/oe/openembedded/recipes/li=
+nux/linux-omap-2.6.37/beagleboard/./configs/'
 
-> In order to correctly run on the target, it is necessary to add new
-> recipes dependencies in python-numpy recipe.
->=20
-> Here are the two patches.
->=20
-> Hoping it will be valuable.
+	ERROR: The stack trace of python calls that resulted in this exception/fai=
+lure was:
+	ERROR:   File "base_do_unpack", line 35, in <module>
+	ERROR:
+	ERROR:   File "base_do_unpack", line 32, in base_do_unpack
+	ERROR:
+	ERROR:   File "base.bbclass", line 29, in oe_unpack
+	ERROR:
+	ERROR:   File "/oe/openembedded/lib/oe/unpack.py", line 67, in unpack_file
+	ERROR:     if os.path.samefile(file, dest):
+	ERROR:
+	ERROR:   File "/usr/lib/python2.6/posixpath.py", line 152, in samefile
+	ERROR:     s1 =3D os.stat(f1)
+	ERROR:
+	ERROR: The code that was being executed was:
+	ERROR:      0031:
+	ERROR:      0032:            oe_unpack(d, local, urldata)
+	ERROR:      0033:
+	ERROR:      0034:
+	ERROR:  *** 0035:base_do_unpack(d)
+	ERROR:      0036:
+	ERROR: (file: 'base_do_unpack', lineno: 35, function: <module>)
+	ERROR:      0028:            local =3D urldata.localpath
+	ERROR:      0029:            if not local:
+	ERROR:      0030:                raise bb.build.FuncFailed('Unable to loca=
+te local file for %s' % url)
+	ERROR:      0031:
+	ERROR:  *** 0032:            oe_unpack(d, local, urldata)
+	ERROR:      0033:
+	ERROR:      0034:
+	ERROR:      0035:base_do_unpack(d)
+	ERROR:      0036:
+	ERROR: (file: 'base_do_unpack', lineno: 32, function: base_do_unpack)
+	NOTE: package linux-omap-2.6.37-r101d+gitrfa3b4e23ec20cfc944db7cc2b30b0d82=
+c20e4472: task base_do_unpack: Failed
+	ERROR: Function 'base_do_unpack' failed
+	ERROR: Task 0 (/oe/openembedded/recipes/linux/linux-omap_2.6.37.bb, do_unp=
+ack) failed with exit code '1'
+	Waiting for 1 active tasks to finish:
+	0: linux-omap-2.6.37-r101d+gitrfa3b4e23ec20cfc944db7cc2b30b0d82c20e4472 do=
+_distribute_sources (pid 17470)
+	NOTE: package linux-omap-2.6.37-r101d+gitrfa3b4e23ec20cfc944db7cc2b30b0d82=
+c20e4472: task do_distribute_sources: Succeeded
+	ERROR: '/oe/openembedded/recipes/linux/linux-omap_2.6.37.bb' failed
 
-Please send each patch separately using `git send-email` or using your
-mail program and removing the first From line and past the subject into
-the according field of your mailer.
+`.configs/` is appended to `SRC_URI` in `multi-kernel.inc` [1].
 
->  From 0cc6d007fecb3ad7f5d09a9d4897d506a5c41d39 Mon Sep 17 00:00:00 2001
-> From: C. Charreyre<christian.charreyre@cioinfoindus.fr>
+The strange thing is, that `bitbake -k beagleboard-demo-image` does not
+show this error.
 
-A space is missing. You can set it up correctly using `git config`.
-
-> Date: Thu, 21 Apr 2011 16:40:54 +0200
-> Subject: [PATCH] mypaint: new recipe for version 0.9.1
->=20
-> Signed-off-by: C. Charreyre<christian.charreyre@cioinfoindus.fr>
-> ---
->    recipes/mypaint/files/scons-adapt.patch |   20 +++++++++++++++++
->    recipes/mypaint/mypaint_0.9.1.bb        |   36
-> +++++++++++++++++++++++++++++++
-
-Your mail program mangled the patch. Please resend as `[PATCH v2]` and
-remember to turn off line wrapping.
-
->    2 files changed, 56 insertions(+), 0 deletions(-)
->    create mode 100644 recipes/mypaint/files/scons-adapt.patch
->    create mode 100644 recipes/mypaint/mypaint_0.9.1.bb
->=20
-> diff --git a/recipes/mypaint/files/scons-adapt.patch
-> b/recipes/mypaint/files/scons-adapt.patch
-> new file mode 100644
-> index 0000000..dcad6db
-> --- /dev/null
-> +++ b/recipes/mypaint/files/scons-adapt.patch
-> @@ -0,0 +1,20 @@
-> +Author: Christian Charreyre<christian.charreyre@cioinfoindus.fr>
-> +
-> +Adapt scons to OE
-> +Index: mypaint-0.9.1/lib/SConscript
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- mypaint-0.9.1.orig/lib/SConscript    2011-04-21 11:31:29.000000000
-> +0200
-> ++++ mypaint-0.9.1/lib/SConscript    2011-04-21 11:35:30.000000000 +0200
-> +@@ -1,5 +1,11 @@
-> + Import('env')
-> +-import sys
-> ++import sys, os
-> ++env.Replace(SHCXX =3D os.environ['CXX'])
-> ++env.Replace(SHLINK =3D os.environ['CXX'])
-> ++env.Replace(LDMODULEFLAGS =3D os.environ['TARGET_LDFLAGS'])
-> ++env.Append(LDMODULEFLAGS =3D ['-Wl,--hash-style=3Dgnu'])
-> ++env.Append(LDMODULEFLAGS =3D ['-shared'])
-> ++env.Replace(PATH =3D os.environ['PATH'])
-
-Did you send this upstream so that they can improve the build system for
-cross compilation?
-
-> +
-> + # For the record: I know that scons supports swig. But it doesn't scan
-> for #include in the generated code.
-> + #
-> diff --git a/recipes/mypaint/mypaint_0.9.1.bb
-> b/recipes/mypaint/mypaint_0.9.1.bb
-> new file mode 100644
-> index 0000000..a7e5077
-> --- /dev/null
-> +++ b/recipes/mypaint/mypaint_0.9.1.bb
-> @@ -0,0 +1,36 @@
-> +DESCRIPTION=3D"fast and easy open-source graphics application for digita=
-l
-> painters"
-> +LICENSE=3D"GPL"
-> +SECTION =3D "x11/applications"
-> +PRIORITY =3D "optional"
-> +HOMEPAGE =3D "http://mypaint.intilinux.com/"
-> +
-> +RDEPENDS_${PN} =3D "python-numpy python-image python-json"
-
-Can you sort those lexicographically.
-
-> +
-> +SRC_URI =3D "http://download.gna.org/mypaint/${PN}-${PV}.tar.bz2 \
-> +    file://scons-adapt.patch \
-> +"
-> +
-> +inherit distutils scons
-> +
-> +do_compile() {
-> +    STAGING_INCDIR=3D${STAGING_INCDIR} \
-> +    STAGING_LIBDIR=3D${STAGING_LIBDIR} \
-> +    BUILD_SYS=3D${BUILD_SYS} \
-> +    HOST_SYS=3D${HOST_SYS} \
-> +    PATH=3D${PATH} scons_do_compile
-> +}
-
-I do not know Scons, but it looks strange that the above is needed and
-not done automatically.
-
-> +
-> +do_install() {
-> +    BUILD_SYS=3D${BUILD_SYS} \
-> +    HOST_SYS=3D${HOST_SYS} \
-> +    scons_do_install
-> +}
-> +
-> +FILES_${PN} +=3D "${datadir}"
-> +
-> +SRC_URI[md5sum] =3D "6249a16359a438d6dc658f5765b35515"
-> +SRC_URI[sha256sum] =3D
-> "407b599f62fb0d6e711fee57d22e64d3aec88825364fb5f7f73b9f0940aa7aed"
-
-Please put it right at the top under `SRC_URI`.
-
-> +
-> +INSANE_SKIP_${PN} =3D True
-
-Please note in the commit message or in the recipe as a comment what
-error you get/why this is needed.
-
-> +
-> +
-
-Please remove the empty lines at the end.
+A fix would be greatly appreciated.
 
 
 Thanks,
 
 Paul
 
---=-2c8i1kR7up3qCHyM2kIX
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/m=
+ulti-kernel.inc#n16
+
+--=-2f/hNafe5fHP1dAj8huR
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk24fxsACgkQPX1aK2wOHVieOACgiXBOB16koUsO8nKzxAuRDSRf
-s8EAni7f8rd7bD8OyDd4nlf2L7D1+ew7
-=qB1P
+iEYEABECAAYFAk25GZoACgkQPX1aK2wOHVjo9gCfZ3BDeTgxbJaq9VtRNxZa8jej
+zgkAn0Gm8ODaWJRyk2Ll9muhye3IvYxn
+=Yyka
 -----END PGP SIGNATURE-----
 
---=-2c8i1kR7up3qCHyM2kIX--
+--=-2f/hNafe5fHP1dAj8huR--
