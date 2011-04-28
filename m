@@ -1,38 +1,35 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QFais-000510-3F
+	(envelope-from <raj.khem@gmail.com>) id 1QFb7n-0005b7-3D
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Apr 2011 01:34:15 +0200
-Received: by pzk36 with SMTP id 36so1974523pzk.6
+	Fri, 29 Apr 2011 01:59:59 +0200
+Received: by pvc30 with SMTP id 30so2138514pvc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Apr 2011 16:31:41 -0700 (PDT)
+	Thu, 28 Apr 2011 16:57:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=vkMvaCS4BuSBfZosByCvK3VKZ6WRAnytKGh5WVTgi0Y=;
-	b=Y+enR8TThqfHsHypBsU26Jcs9iJtMGlQh8ORO9lwl7yaUOnCPGLu51TKXfORxb8U37
-	+oAVUO2xa741mNwArEWf01bkzpBX9xiHYjwsdLzA9MbTQ+ApxKa72FxD846IZLzIx+6x
-	csAdN60d7hZhUw3bfwyskrrUi4aVovIUHfqqU=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=N2gELWUQO8EL+BcfzE8ruw/dLwFAf+quZRdID86N4yA=;
+	b=rt/uS6jcAqV+KEU8v26QbcuptkzBvyb8rT7fTqe2bhKmV1hgP4e8wmC2Ed9lbi0Mgt
+	4ByuS8NCEhe7AKMk2rgelcCAM00Y5O+AUSzx3mWp8ZclSy7WqbKfA4wa34fPQaPDKSWg
+	+uCA1GIsn1opmr2b7BXuxeaSiJDZxioT6NUeA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=wyRLgopqFQE7yfhKNGkP5JP9AAhus9RiIGovqjwEZMcWh0hJK89gRVMrrdNUdQWBvu
-	ZZv8Kmf3Ff1CY1QIHByclY3eetN5CaQpNJG7t4gGKjtE8fp2k2Z+fG61AYD9AK91iTuU
-	bfUJ3fGaycm1TztOBxH++g9KRiAu9ErFEq3W8=
-Received: by 10.68.63.36 with SMTP id d4mr555035pbs.60.1304033499718;
-	Thu, 28 Apr 2011 16:31:39 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Z6BKS24Q5z0d5LpEkoZs8ed4X/7de8w+a+OOAhReqchT2NUCz0tj9To7k3aurURPXS
+	+pBs/cFY5zboWB2l7DnZ6N5i+cM9oJ1023d3TdimrgDdVI8D8LmdWEIuIzUFPqDLOwye
+	XodPl/vyzvc37QolpfQIabTZWw6PPCToGdGAo=
+Received: by 10.142.204.20 with SMTP id b20mr1398744wfg.217.1304035045602;
+	Thu, 28 Apr 2011 16:57:25 -0700 (PDT)
 Received: from localhost.localdomain
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id y7sm1508046pbk.30.2011.04.28.16.31.37
+	by mx.google.com with ESMTPS id k7sm2440301wfa.14.2011.04.28.16.57.23
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 28 Apr 2011 16:31:38 -0700 (PDT)
+	Thu, 28 Apr 2011 16:57:24 -0700 (PDT)
 From: raj.khem@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 28 Apr 2011 16:31:18 -0700
-Message-Id: <1304033478-22959-3-git-send-email-raj.khem@gmail.com>
+Date: Thu, 28 Apr 2011 16:57:16 -0700
+Message-Id: <1304035036-10111-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <1304033478-22959-1-git-send-email-raj.khem@gmail.com>
-References: <1304033478-22959-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/3] libx11_1.4.3.bb: Remove --without-xcb
+Subject: [meta-oe][PATCH] tzdata, tzcode: Update 2011e -> 2011g
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,64 +43,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Apr 2011 23:34:15 -0000
+X-List-Received-Date: Thu, 28 Apr 2011 23:59:59 -0000
 
 From: Khem Raj <raj.khem@gmail.com>
 
---without-xcb is no longer supported and that made a lot of difference
-in different BBCLASSEXTENDED recipes. It can be unified now
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-graphics/xorg-lib/libx11.inc      |   15 +++++----------
- meta-oe/recipes-graphics/xorg-lib/libx11_1.4.3.bb |    1 -
- 2 files changed, 5 insertions(+), 11 deletions(-)
+ ...code-native_2011e.bb => tzcode-native_2011g.bb} |   11 ++++++-----
+ .../tzdata/{tzdata_2011e.bb => tzdata_2011g.bb}    |    5 ++---
+ 2 files changed, 8 insertions(+), 8 deletions(-)
+ rename meta-oe/recipes-extended/tzcode/{tzcode-native_2011e.bb => tzcode-native_2011g.bb} (56%)
+ rename meta-oe/recipes-extended/tzdata/{tzdata_2011e.bb => tzdata_2011g.bb} (71%)
 
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libx11.inc b/meta-oe/recipes-graphics/xorg-lib/libx11.inc
-index d1e646a..2aa9700 100644
---- a/meta-oe/recipes-graphics/xorg-lib/libx11.inc
-+++ b/meta-oe/recipes-graphics/xorg-lib/libx11.inc
-@@ -1,13 +1,10 @@
- require xorg-lib-common.inc
+diff --git a/meta-oe/recipes-extended/tzcode/tzcode-native_2011e.bb b/meta-oe/recipes-extended/tzcode/tzcode-native_2011g.bb
+similarity index 56%
+rename from meta-oe/recipes-extended/tzcode/tzcode-native_2011e.bb
+rename to meta-oe/recipes-extended/tzcode/tzcode-native_2011g.bb
+index 280840c..d32ee33 100644
+--- a/meta-oe/recipes-extended/tzcode/tzcode-native_2011e.bb
++++ b/meta-oe/recipes-extended/tzcode/tzcode-native_2011g.bb
+@@ -9,11 +9,12 @@ LIC_FILES_CHKSUM = "file://README;md5=3ae8198f82258417ce29066d3b034035"
+ # Also, tzdata (and it is needed to build tzcode) version can differ from
+ # tzcode version, thus this variable
  
- DESCRIPTION = "Base X libs."
--COMMON_DEPENDS = "util-macros xtrans libxdmcp libxau \
--                  bigreqsproto xproto xextproto xcmiscproto \
--                  xf86bigfontproto kbproto inputproto xproto-native"
--
--DEPENDS = "libxcb ${COMMON_DEPENDS}"		  
--DEPENDS_virtclass-native = "${COMMON_DEPENDS}"
--DEPENDS_virtclass-nativesdk = "${COMMON_DEPENDS}"
-+DEPENDS += "util-macros xtrans libxdmcp libxau \
-+            bigreqsproto xproto xextproto xcmiscproto \
-+            xf86bigfontproto kbproto inputproto libxcb \
-+	    xproto-native"
+-TZDATA_PV = "2011e"
++TZDATA_PV = "${PV}"
  
- FILESPATHPKG .= ":libx11-${PV}:libx11"
- BBCLASSEXTEND = "native nativesdk"
-@@ -22,9 +19,7 @@ FILES_${PN}-locale += "${datadir}/X11/locale ${libdir}/X11/locale"
- 
- XORG_PN = "libX11"
- 
--EXTRA_OECONF += " --with-xcb --with-keysymdefdir=${STAGING_INCDIR}/X11 --with-groff=no --with-ps2pdf=no --with-fop=no"
--EXTRA_OECONF_virtclass-native = " --without-xcb --with-groff=no --with-ps2pdf=no --with-fop=no"
--EXTRA_OECONF_virtclass-nativesdk = " --without-xcb --with-groff=no --with-ps2pdf=no --with-fop=no"
-+EXTRA_OECONF += "--with-keysymdefdir=${STAGING_INCDIR}/X11 --with-groff=no --with-ps2pdf=no --with-fop=no --disable-specs"
- 
- # Below option is added to overcome the GCC bug on ARM
- # see http://gcc.gnu.org/PR42981 for further details.
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libx11_1.4.3.bb b/meta-oe/recipes-graphics/xorg-lib/libx11_1.4.3.bb
-index 481b90f..3c6a170 100644
---- a/meta-oe/recipes-graphics/xorg-lib/libx11_1.4.3.bb
-+++ b/meta-oe/recipes-graphics/xorg-lib/libx11_1.4.3.bb
-@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=172255dee66bb0151435b2d5d709fcf7"
- 
- #--without-xcb is not an option anymore
- #http://cgit.freedesktop.org/xorg/lib/libX11/commit/?id=15e5eaf62897b3179d1fbe457cb19f886f0449f8
--DEPENDS_virtclass-native = "libxcb-native ${COMMON_DEPENDS}"
  PR = "${INC_PR}.0"
  
- SRC_URI[md5sum] = "85e942627aaa020813e0eb8433353563"
+-SRC_URI[tzcode-2011e.md5sum] = "fbfc05dbf9ebcfe7c4bba18549870173"
+-SRC_URI[tzcode-2011e.sha256sum] = "8fb00f8763aa51d83d6f3190d144124bb7176ca829fc08823d6205297bf0426b"
+-SRC_URI[tzdata-2011e.md5sum] = "044a07072300a0ee72b046e5a9a4ec90"
+-SRC_URI[tzdata-2011e.sha256sum] = "44fef01de4589a4979eb6b5fdbbfd21a3b135852af1ecbfb9e0368ae47392c79"
++SRC_URI[tzcode-2011g.md5sum] = "ecb564279b28c5b184421c525d997d6c"
++SRC_URI[tzcode-2011g.sha256sum] = "636c735d8df1276cc8ab88bc31bb36a21f91ed34e26d181303ecd8fe48021bc2"
++SRC_URI[tzdata-2011g.md5sum] = "a068c27e7e426fdb12ab0c88506df20d"
++SRC_URI[tzdata-2011g.sha256sum] = "01a2a189eeda63baacc5e68e6c13afffc7edce182102fffc53acbf35e8703d3c"
++
+diff --git a/meta-oe/recipes-extended/tzdata/tzdata_2011e.bb b/meta-oe/recipes-extended/tzdata/tzdata_2011g.bb
+similarity index 71%
+rename from meta-oe/recipes-extended/tzdata/tzdata_2011e.bb
+rename to meta-oe/recipes-extended/tzdata/tzdata_2011g.bb
+index c0f5291..6863b5a 100644
+--- a/meta-oe/recipes-extended/tzdata/tzdata_2011e.bb
++++ b/meta-oe/recipes-extended/tzdata/tzdata_2011g.bb
+@@ -8,6 +8,5 @@ LIC_FILES_CHKSUM = "file://asia;beginline=2;endline=3;md5=06468c0e84ef4d4c97045a
+ # just bump it to the latest available version, removing the old one
+ 
+ PR = "${INC_PR}.0"
+-
+-SRC_URI[md5sum] = "044a07072300a0ee72b046e5a9a4ec90"
+-SRC_URI[sha256sum] = "44fef01de4589a4979eb6b5fdbbfd21a3b135852af1ecbfb9e0368ae47392c79"
++SRC_URI[md5sum] = "a068c27e7e426fdb12ab0c88506df20d"
++SRC_URI[sha256sum] = "01a2a189eeda63baacc5e68e6c13afffc7edce182102fffc53acbf35e8703d3c"
 -- 
 1.7.4.1
 
