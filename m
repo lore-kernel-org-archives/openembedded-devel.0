@@ -1,34 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QFhdz-0000Mr-UB for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Apr 2011 08:57:40 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QFhbW-0006TA-4s for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Apr 2011 08:55:06 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2011 08:55:06 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1QFiIl-0001JR-Cx
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 29 Apr 2011 09:39:47 +0200
+Received: by bwz5 with SMTP id 5so3274614bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2011 08:55:06 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 29 Apr 2011 00:37:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=C+H29zqimEMJna7XZidJm+2oMeBtUXoCG+8ezfSUGvw=;
+	b=TDM/TTrnVvILXConR9mEWSDGhv+RsWyl3FACncBg75pa/zHjK9/ENXSPrt5AEtYQQO
+	aUCO9GMxYnv3QMG4rxqKtDae0LeHwkoJD7Loqr0KDnK5VI1x1B2pGEh+awGAC5HW4VnA
+	HDE1hpyFfKSlymYDRwluRGGiIWNobnqXVJlIw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=Yyqv1GL957zCRhX8l6nF0nq8el2L6UE3fVRDHQAk0VkgLr+eIUZ/7BiCniij+19o2y
+	yHh7e5fstWU8ZmPYKytFW7E/MCTEATwzQCfSbQMG5OnanBzbIZ4UXvr6bj0CjbhcMueh
+	FLHPo5uPkVn52sZPoVf9u8DafgTZApMvFznas=
+Received: by 10.204.74.9 with SMTP id s9mr609009bkj.184.1304062633326;
+	Fri, 29 Apr 2011 00:37:13 -0700 (PDT)
+Received: from localhost ([94.230.152.115])
+	by mx.google.com with ESMTPS id q24sm579119bks.9.2011.04.29.00.37.11
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 29 Apr 2011 00:37:12 -0700 (PDT)
+Date: Fri, 29 Apr 2011 09:37:10 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 29 Apr 2011 08:50:44 +0200
-Message-ID: <ipdn44$d51$2@dough.gmane.org>
-References: <1304035036-10111-1-git-send-email-raj.khem@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1304035036-10111-1-git-send-email-raj.khem@gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-oe][PATCH] tzdata, tzcode: Update 2011e -> 2011g
+Message-ID: <20110429073710.GA3373@jama.jama.net>
+References: <E1QFUM3-0005Zf-8J@melo.openembedded.org>
+MIME-Version: 1.0
+In-Reply-To: <E1QFUM3-0005Zf-8J@melo.openembedded.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-commits@openembedded.org
+Subject: Re: [oe-commits] Andrea Adami : etk-theme-ninja_svn: move from /obsolete to /obsolete/shr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,76 +48,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Apr 2011 06:57:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 29 Apr 2011 07:39:47 -0000
+X-Groupsio-MsgNum: 31520
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="IS0zKkzwUGydFO0o"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--IS0zKkzwUGydFO0o
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 29-04-11 01:57, raj.khem@gmail.com wrote:
-> From: Khem Raj <raj.khem@gmail.com>
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+On Thu, Apr 28, 2011 at 04:46:15PM +0000, git version control wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 0e7618a8bd3539f059ae9c7c05f91cf667c041aa
+> URL:    http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommit;h=
+=3D0e7618a8bd3539f059ae9c7c05f91cf667c041aa
+>=20
+> Author: Andrea Adami <andrea.adami@gmail.com>
+> Date:   Thu Apr 28 18:43:16 2011 +0200
+>=20
+> etk-theme-ninja_svn: move from /obsolete to /obsolete/shr
+>=20
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 
-Thanks, applied.
+FYI: etk-theme-ninja wasn't introduced by SHR people or ever used in SHR
+images/feeds, I've moved it to obsolete after obsoleting etk itself..
 
+So I don't understand this change, but don't care about obsolete dir struct=
+ure...
+
+>=20
 > ---
->  ...code-native_2011e.bb => tzcode-native_2011g.bb} |   11 ++++++-----
->  .../tzdata/{tzdata_2011e.bb => tzdata_2011g.bb}    |    5 ++---
->  2 files changed, 8 insertions(+), 8 deletions(-)
->  rename meta-oe/recipes-extended/tzcode/{tzcode-native_2011e.bb => tzcode-native_2011g.bb} (56%)
->  rename meta-oe/recipes-extended/tzdata/{tzdata_2011e.bb => tzdata_2011g.bb} (71%)
-> 
-> diff --git a/meta-oe/recipes-extended/tzcode/tzcode-native_2011e.bb b/meta-oe/recipes-extended/tzcode/tzcode-native_2011g.bb
-> similarity index 56%
-> rename from meta-oe/recipes-extended/tzcode/tzcode-native_2011e.bb
-> rename to meta-oe/recipes-extended/tzcode/tzcode-native_2011g.bb
-> index 280840c..d32ee33 100644
-> --- a/meta-oe/recipes-extended/tzcode/tzcode-native_2011e.bb
-> +++ b/meta-oe/recipes-extended/tzcode/tzcode-native_2011g.bb
-> @@ -9,11 +9,12 @@ LIC_FILES_CHKSUM = "file://README;md5=3ae8198f82258417ce29066d3b034035"
->  # Also, tzdata (and it is needed to build tzcode) version can differ from
->  # tzcode version, thus this variable
->  
-> -TZDATA_PV = "2011e"
-> +TZDATA_PV = "${PV}"
->  
->  PR = "${INC_PR}.0"
->  
-> -SRC_URI[tzcode-2011e.md5sum] = "fbfc05dbf9ebcfe7c4bba18549870173"
-> -SRC_URI[tzcode-2011e.sha256sum] = "8fb00f8763aa51d83d6f3190d144124bb7176ca829fc08823d6205297bf0426b"
-> -SRC_URI[tzdata-2011e.md5sum] = "044a07072300a0ee72b046e5a9a4ec90"
-> -SRC_URI[tzdata-2011e.sha256sum] = "44fef01de4589a4979eb6b5fdbbfd21a3b135852af1ecbfb9e0368ae47392c79"
-> +SRC_URI[tzcode-2011g.md5sum] = "ecb564279b28c5b184421c525d997d6c"
-> +SRC_URI[tzcode-2011g.sha256sum] = "636c735d8df1276cc8ab88bc31bb36a21f91ed34e26d181303ecd8fe48021bc2"
-> +SRC_URI[tzdata-2011g.md5sum] = "a068c27e7e426fdb12ab0c88506df20d"
-> +SRC_URI[tzdata-2011g.sha256sum] = "01a2a189eeda63baacc5e68e6c13afffc7edce182102fffc53acbf35e8703d3c"
-> +
-> diff --git a/meta-oe/recipes-extended/tzdata/tzdata_2011e.bb b/meta-oe/recipes-extended/tzdata/tzdata_2011g.bb
-> similarity index 71%
-> rename from meta-oe/recipes-extended/tzdata/tzdata_2011e.bb
-> rename to meta-oe/recipes-extended/tzdata/tzdata_2011g.bb
-> index c0f5291..6863b5a 100644
-> --- a/meta-oe/recipes-extended/tzdata/tzdata_2011e.bb
-> +++ b/meta-oe/recipes-extended/tzdata/tzdata_2011g.bb
-> @@ -8,6 +8,5 @@ LIC_FILES_CHKSUM = "file://asia;beginline=2;endline=3;md5=06468c0e84ef4d4c97045a
->  # just bump it to the latest available version, removing the old one
->  
->  PR = "${INC_PR}.0"
-> -
-> -SRC_URI[md5sum] = "044a07072300a0ee72b046e5a9a4ec90"
-> -SRC_URI[sha256sum] = "44fef01de4589a4979eb6b5fdbbfd21a3b135852af1ecbfb9e0368ae47392c79"
-> +SRC_URI[md5sum] = "a068c27e7e426fdb12ab0c88506df20d"
-> +SRC_URI[sha256sum] = "01a2a189eeda63baacc5e68e6c13afffc7edce182102fffc53acbf35e8703d3c"
+>=20
+>  recipes/obsolete/{ =3D> shr}/etk-theme-ninja_svn.bb |    0
+>  1 files changed, 0 insertions(+), 0 deletions(-)
+>=20
+> diff --git a/recipes/obsolete/etk-theme-ninja_svn.bb b/recipes/obsolete/s=
+hr/etk-theme-ninja_svn.bb
+> similarity index 100%
+> rename from recipes/obsolete/etk-theme-ninja_svn.bb
+> rename to recipes/obsolete/shr/etk-theme-ninja_svn.bb
+>=20
+>=20
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--IS0zKkzwUGydFO0o
+Content-Type: application/pgp-signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v2.0.17 (GNU/Linux)
 
-iD8DBQFNul/EMkyGM64RGpERAk+aAKC2MKtOS+13X6kQYcR96G81MhB3pACgjIXF
-p+OGI7P8ts1J0TqAAGAc6xs=
-=+bqg
+iEYEARECAAYFAk26aqYACgkQN1Ujt2V2gBw03QCghZeWq+RdYTJeLHF8b7OKjUpP
+hnMAnRlOkgO+tJH6lArG3VTtGLsRCUl/
+=FZ0S
 -----END PGP SIGNATURE-----
 
-
-
+--IS0zKkzwUGydFO0o--
