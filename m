@@ -1,29 +1,28 @@
 Received: from smtp-out05.msg.oleane.net ([62.161.7.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <christian.charreyre@cioinfoindus.fr>)
-	id 1QFqDc-0001aV-He for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Apr 2011 18:07:00 +0200
+	id 1QFqDd-0001ab-ER for openembedded-devel@lists.openembedded.org;
+	Fri, 29 Apr 2011 18:07:01 +0200
 Received: from smtp05.msg.oleane.net (smtp05.mail.priv [172.17.20.114]) 
-	by smtp-out05.msg.oleane.net with ESMTP id p3TG4TwH026596
+	by smtp-out05.msg.oleane.net with ESMTP id p3TG4TwT026596
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2011 18:04:29 +0200
+	Fri, 29 Apr 2011 18:04:30 +0200
 Received: from localhost.localdomain
 	(AMarseille-551-1-3-92.w80-9.abo.wanadoo.fr [80.9.74.92]) 
-	by smtp05.msg.oleane.net (MTA) with ESMTP id p3TFiC59021692;
-	Fri, 29 Apr 2011 17:44:23 +0200
+	by smtp05.msg.oleane.net (MTA) with ESMTP id p3TFiC58021692
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 29 Apr 2011 17:44:12 +0200
 X-Oleane-Rep: REPA
 From: "C. Charreyre" <christian.charreyre@cioinfoindus.fr>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Apr 2011 17:43:57 +0200
-Message-Id: <1304091838-23333-2-git-send-email-christian.charreyre@cioinfoindus.fr>
+Date: Fri, 29 Apr 2011 17:43:56 +0200
+Message-Id: <1304091838-23333-1-git-send-email-christian.charreyre@cioinfoindus.fr>
 X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1304091838-23333-1-git-send-email-christian.charreyre@cioinfoindus.fr>
-References: <1304091838-23333-1-git-send-email-christian.charreyre@cioinfoindus.fr>
 X-Spam-Flag: NO
 X-PMX-Spam: Probability=8%
-X-PFSI-Info: PMX 5.5.9.395186, Antispam-Engine: 2.7.2.376379,
-	Antispam-Data: 2011.4.29.153314 (no antivirus check)
-Subject: [PATCH v2] mypaint: new recipe for version 0.9.1
+X-PFSI-Info: PMX 5.6.0.2009776, Antispam-Engine: 2.7.2.376379,
+	Antispam-Data: 2011.4.29.152715 (no antivirus check)
+Subject: mypaint: new recipe for version 0.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,81 +36,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Apr 2011 16:07:00 -0000
+X-List-Received-Date: Fri, 29 Apr 2011 16:07:01 -0000
 
-Signed-off-by: C. Charreyre <christian.charreyre@cioinfoindus.fr>
----
- recipes/mypaint/files/scons-adapt.patch |   20 +++++++++++++++++
- recipes/mypaint/mypaint_0.9.1.bb        |   36 +++++++++++++++++++++++++++++++
- 2 files changed, 56 insertions(+), 0 deletions(-)
- create mode 100644 recipes/mypaint/files/scons-adapt.patch
- create mode 100644 recipes/mypaint/mypaint_0.9.1.bb
 
-diff --git a/recipes/mypaint/files/scons-adapt.patch b/recipes/mypaint/files/scons-adapt.patch
-new file mode 100644
-index 0000000..dcad6db
---- /dev/null
-+++ b/recipes/mypaint/files/scons-adapt.patch
-@@ -0,0 +1,20 @@
-+Author: Christian Charreyre <christian.charreyre@cioinfoindus.fr>
-+
-+Adapt scons to OE
-+Index: mypaint-0.9.1/lib/SConscript
-+===================================================================
-+--- mypaint-0.9.1.orig/lib/SConscript	2011-04-21 11:31:29.000000000 +0200
-++++ mypaint-0.9.1/lib/SConscript	2011-04-21 11:35:30.000000000 +0200
-+@@ -1,5 +1,11 @@
-+ Import('env')
-+-import sys
-++import sys, os
-++env.Replace(SHCXX = os.environ['CXX'])
-++env.Replace(SHLINK = os.environ['CXX'])
-++env.Replace(LDMODULEFLAGS = os.environ['TARGET_LDFLAGS'])
-++env.Append(LDMODULEFLAGS = ['-Wl,--hash-style=gnu'])
-++env.Append(LDMODULEFLAGS = ['-shared'])
-++env.Replace(PATH = os.environ['PATH'])
-+ 
-+ # For the record: I know that scons supports swig. But it doesn't scan for #include in the generated code.
-+ # 
-diff --git a/recipes/mypaint/mypaint_0.9.1.bb b/recipes/mypaint/mypaint_0.9.1.bb
-new file mode 100644
-index 0000000..a7e5077
---- /dev/null
-+++ b/recipes/mypaint/mypaint_0.9.1.bb
-@@ -0,0 +1,31 @@
-+DESCRIPTION="fast and easy open-source graphics application for digital painters"
-+LICENSE="GPL"
-+SECTION = "x11/applications"
-+PRIORITY = "optional"
-+HOMEPAGE = "http://mypaint.intilinux.com/"
-+
-+RDEPENDS_${PN} = "python-image python-json python-numpy"
-+
-+SRC_URI = "http://download.gna.org/mypaint/${PN}-${PV}.tar.bz2 \
-+	file://scons-adapt.patch \
-+"
-+SRC_URI[md5sum] = "6249a16359a438d6dc658f5765b35515"
-+SRC_URI[sha256sum] = "407b599f62fb0d6e711fee57d22e64d3aec88825364fb5f7f73b9f0940aa7aed"
-+
-+inherit distutils scons
-+
-+do_compile() {
-+	STAGING_INCDIR=${STAGING_INCDIR} \
-+       STAGING_LIBDIR=${STAGING_LIBDIR} \
-+       BUILD_SYS=${BUILD_SYS} \
-+	HOST_SYS=${HOST_SYS} \
-+	PATH=${PATH} scons_do_compile
-+}
-+
-+do_install() {
-+	BUILD_SYS=${BUILD_SYS} \
-+	HOST_SYS=${HOST_SYS} \
-+	scons_do_install
-+}
-+
-+FILES_${PN} += "${datadir}"
--- 
-1.7.0.4
+Hi all,
+
+this new recipe (corrected) will build the painting soft mypaint.
+
+In order to correctly run on the target, it is necessary to add new recipes dependencies in python-numpy recipe.
+
+Here are the two patches in version 2.
+
+Hoping it will be valuable.
 
 
 
