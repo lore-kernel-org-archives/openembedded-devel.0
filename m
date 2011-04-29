@@ -1,35 +1,29 @@
-Received: from smtp-out03.msg.oleane.net ([62.161.7.1])
+Received: from smtp-out05.msg.oleane.net ([62.161.7.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <christian.charreyre@cioinfoindus.fr>)
-	id 1QFpic-0000oO-5B for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Apr 2011 17:34:58 +0200
-Received: from smtp04.msg.oleane.net (smtp04.mail.priv [172.17.20.113]) 
-	by smtp-out03.msg.oleane.net with ESMTP id p3TFBb5s018209
+	id 1QFqDc-0001aV-He for openembedded-devel@lists.openembedded.org;
+	Fri, 29 Apr 2011 18:07:00 +0200
+Received: from smtp05.msg.oleane.net (smtp05.mail.priv [172.17.20.114]) 
+	by smtp-out05.msg.oleane.net with ESMTP id p3TG4TwH026596
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2011 17:11:38 +0200
-Received: from [192.168.1.148] (AMarseille-551-1-3-92.w80-9.abo.wanadoo.fr
-	[80.9.74.92]) (authenticated)
-	by smtp04.msg.oleane.net (MTA) with ESMTP id p3TEpYHL000565
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2011 16:51:35 +0200
+	Fri, 29 Apr 2011 18:04:29 +0200
+Received: from localhost.localdomain
+	(AMarseille-551-1-3-92.w80-9.abo.wanadoo.fr [80.9.74.92]) 
+	by smtp05.msg.oleane.net (MTA) with ESMTP id p3TFiC59021692;
+	Fri, 29 Apr 2011 17:44:23 +0200
 X-Oleane-Rep: REPA
-Message-ID: <4DBAD078.7020909@cioinfoindus.fr>
-Date: Fri, 29 Apr 2011 16:51:36 +0200
-From: Christian Charreyre <christian.charreyre@cioinfoindus.fr>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
+From: "C. Charreyre" <christian.charreyre@cioinfoindus.fr>
 To: openembedded-devel@lists.openembedded.org
-References: <4DB82E7C.9080206@cioinfoindus.fr>	<1303936802.4833.8.camel@mattotaupa>
-	<4DB9283C.1030602@cioinfoindus.fr>
-	<1304019015.3911.19.camel@mattotaupa>
-In-Reply-To: <1304019015.3911.19.camel@mattotaupa>
+Date: Fri, 29 Apr 2011 17:43:57 +0200
+Message-Id: <1304091838-23333-2-git-send-email-christian.charreyre@cioinfoindus.fr>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1304091838-23333-1-git-send-email-christian.charreyre@cioinfoindus.fr>
+References: <1304091838-23333-1-git-send-email-christian.charreyre@cioinfoindus.fr>
 X-Spam-Flag: NO
 X-PMX-Spam: Probability=8%
 X-PFSI-Info: PMX 5.5.9.395186, Antispam-Engine: 2.7.2.376379,
-	Antispam-Data: 2011.4.29.143915 (no antivirus check)
-X-Orange-Auth: Y2I1NTMtM0BjaW9pbmZvaW4uZnIuZnRv
-Subject: Re: [PATCH 1/2] mypaint: new recipe for version 0.9.1
+	Antispam-Data: 2011.4.29.153314 (no antivirus check)
+Subject: [PATCH v2] mypaint: new recipe for version 0.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,87 +37,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Apr 2011 15:34:58 -0000
-X-Groupsio-MsgNum: 31524
-Content-Type: multipart/mixed; boundary="------------040501040309000505090004"
+X-List-Received-Date: Fri, 29 Apr 2011 16:07:00 -0000
 
---------------040501040309000505090004
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by smtp-out03.msg.oleane.net id p3TFBb5s018209
+Signed-off-by: C. Charreyre <christian.charreyre@cioinfoindus.fr>
+---
+ recipes/mypaint/files/scons-adapt.patch |   20 +++++++++++++++++
+ recipes/mypaint/mypaint_0.9.1.bb        |   36 +++++++++++++++++++++++++++++++
+ 2 files changed, 56 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/mypaint/files/scons-adapt.patch
+ create mode 100644 recipes/mypaint/mypaint_0.9.1.bb
 
-Dear Paul,
+diff --git a/recipes/mypaint/files/scons-adapt.patch b/recipes/mypaint/files/scons-adapt.patch
+new file mode 100644
+index 0000000..dcad6db
+--- /dev/null
++++ b/recipes/mypaint/files/scons-adapt.patch
+@@ -0,0 +1,20 @@
++Author: Christian Charreyre <christian.charreyre@cioinfoindus.fr>
++
++Adapt scons to OE
++Index: mypaint-0.9.1/lib/SConscript
++===================================================================
++--- mypaint-0.9.1.orig/lib/SConscript	2011-04-21 11:31:29.000000000 +0200
+++++ mypaint-0.9.1/lib/SConscript	2011-04-21 11:35:30.000000000 +0200
++@@ -1,5 +1,11 @@
++ Import('env')
++-import sys
+++import sys, os
+++env.Replace(SHCXX = os.environ['CXX'])
+++env.Replace(SHLINK = os.environ['CXX'])
+++env.Replace(LDMODULEFLAGS = os.environ['TARGET_LDFLAGS'])
+++env.Append(LDMODULEFLAGS = ['-Wl,--hash-style=gnu'])
+++env.Append(LDMODULEFLAGS = ['-shared'])
+++env.Replace(PATH = os.environ['PATH'])
++ 
++ # For the record: I know that scons supports swig. But it doesn't scan for #include in the generated code.
++ # 
+diff --git a/recipes/mypaint/mypaint_0.9.1.bb b/recipes/mypaint/mypaint_0.9.1.bb
+new file mode 100644
+index 0000000..a7e5077
+--- /dev/null
++++ b/recipes/mypaint/mypaint_0.9.1.bb
+@@ -0,0 +1,31 @@
++DESCRIPTION="fast and easy open-source graphics application for digital painters"
++LICENSE="GPL"
++SECTION = "x11/applications"
++PRIORITY = "optional"
++HOMEPAGE = "http://mypaint.intilinux.com/"
++
++RDEPENDS_${PN} = "python-image python-json python-numpy"
++
++SRC_URI = "http://download.gna.org/mypaint/${PN}-${PV}.tar.bz2 \
++	file://scons-adapt.patch \
++"
++SRC_URI[md5sum] = "6249a16359a438d6dc658f5765b35515"
++SRC_URI[sha256sum] = "407b599f62fb0d6e711fee57d22e64d3aec88825364fb5f7f73b9f0940aa7aed"
++
++inherit distutils scons
++
++do_compile() {
++	STAGING_INCDIR=${STAGING_INCDIR} \
++       STAGING_LIBDIR=${STAGING_LIBDIR} \
++       BUILD_SYS=${BUILD_SYS} \
++	HOST_SYS=${HOST_SYS} \
++	PATH=${PATH} scons_do_compile
++}
++
++do_install() {
++	BUILD_SYS=${BUILD_SYS} \
++	HOST_SYS=${HOST_SYS} \
++	scons_do_install
++}
++
++FILES_${PN} += "${datadir}"
+-- 
+1.7.0.4
 
-Le 28/04/2011 21:30, Paul Menzel a =C3=A9crit :
-> Dear Christian,
->
->
-> Am Donnerstag, den 28.04.2011, 10:41 +0200 schrieb Christian Charreyre:
-
-[...]
-
-> I hope there will be a lot more. ;-)
->
-
-Hope so also.
-
-[...]
->>>> +SRC_URI =3D "http://download.gna.org/mypaint/${PN}-${PV}.tar.bz2 \
->>>> +    file://scons-adapt.patch \
->>>> +"
->>>> +
->>>> +inherit distutils scons
->>>> +
->>>> +do_compile() {
->>>> +    STAGING_INCDIR=3D${STAGING_INCDIR} \
->>>> +    STAGING_LIBDIR=3D${STAGING_LIBDIR} \
->>>> +    BUILD_SYS=3D${BUILD_SYS} \
->>>> +    HOST_SYS=3D${HOST_SYS} \
->>>> +    PATH=3D${PATH} scons_do_compile
->>>> +}
->>> I do not know Scons, but it looks strange that the above is needed an=
-d
->>> not done automatically.
->> Same reply as above, there are few recipes with scons, I've found this
->> tip in one recipe and applied it here to get the build completed.
-> I understand. Did you try with the default `do_compile`? If it does not
-> work leave it so it works.
-
-Yes, with the default do_compile the compilation tells that these=20
-variables are undefined and abort.
-scons uses python, and the variables are not available in the python's=20
-env. unless I redefines them here.
-
-[...]
-
-> Thank you for your response. I hope we will get your next patch
-> iteration included.
->
-
-I'll try to correct everything and post it again in v2.
-
-> Thanks,
->
-> Paul
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
---------------040501040309000505090004
-Content-Type: text/x-vcard; charset=utf-8;
- name="christian_charreyre.vcf"
-Content-Disposition: attachment;
- filename="christian_charreyre.vcf"
-Content-Transfer-Encoding: base64
-
-YmVnaW46dmNhcmQNCmZuOkNocmlzdGlhbiAgQ2hhcnJleXJlDQpuOkNoYXJyZXlyZTtDaHJpc3Rp
-YW4gDQpvcmc6Q0lPIEluZm9ybWF0aXF1ZSBJbmR1c3RyaWVsbGUNCmFkcjtkb206OzsxMSBBdmVu
-dWUgTWFyaWdueTtNYXJzZWlsbGU7OzEzMDE0DQplbWFpbDtpbnRlcm5ldDpjaHJpc3RpYW4uY2hh
-cnJleXJlQGNpb2luZm9pbmR1cy5mcg0KdGVsO3dvcms6MDQgOTUgMDUgMTkgNDENCnVybDpodHRw
-Oi8vd3d3LmNpb2luZm9pbmR1cy5mcg0KdmVyc2lvbjoyLjENCmVuZDp2Y2FyZA0KDQo=
-
---------------040501040309000505090004--
