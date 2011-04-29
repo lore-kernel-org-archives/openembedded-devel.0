@@ -1,23 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtp-out03.msg.oleane.net ([62.161.7.1])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QFpPH-0000YY-A5 for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Apr 2011 17:14:59 +0200
-Received: from f053041114.adsl.alicedsl.de ([78.53.41.114]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QFpNg-0007Jk-Ro for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Apr 2011 15:13:21 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <christian.charreyre@cioinfoindus.fr>)
+	id 1QFpic-0000oO-5B for openembedded-devel@lists.openembedded.org;
+	Fri, 29 Apr 2011 17:34:58 +0200
+Received: from smtp04.msg.oleane.net (smtp04.mail.priv [172.17.20.113]) 
+	by smtp-out03.msg.oleane.net with ESMTP id p3TFBb5s018209
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 29 Apr 2011 17:11:38 +0200
+Received: from [192.168.1.148] (AMarseille-551-1-3-92.w80-9.abo.wanadoo.fr
+	[80.9.74.92]) (authenticated)
+	by smtp04.msg.oleane.net (MTA) with ESMTP id p3TEpYHL000565
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 29 Apr 2011 16:51:35 +0200
+X-Oleane-Rep: REPA
+Message-ID: <4DBAD078.7020909@cioinfoindus.fr>
+Date: Fri, 29 Apr 2011 16:51:36 +0200
+From: Christian Charreyre <christian.charreyre@cioinfoindus.fr>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.14) Gecko/20110223 Lightning/1.0b2 Thunderbird/3.1.8
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <531B6536C9F737458807DF75064873C801ED5F36E7A3@mta-digimail.MTA.INT>
-References: <531B6536C9F737458807DF75064873C801ED5F36E7A3@mta-digimail.MTA.INT>
-Date: Fri, 29 Apr 2011 17:12:26 +0200
-Message-ID: <1304089946.6130.1.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: how to read pdf documents
+References: <4DB82E7C.9080206@cioinfoindus.fr>	<1303936802.4833.8.camel@mattotaupa>
+	<4DB9283C.1030602@cioinfoindus.fr>
+	<1304019015.3911.19.camel@mattotaupa>
+In-Reply-To: <1304019015.3911.19.camel@mattotaupa>
+X-Spam-Flag: NO
+X-PMX-Spam: Probability=8%
+X-PFSI-Info: PMX 5.5.9.395186, Antispam-Engine: 2.7.2.376379,
+	Antispam-Data: 2011.4.29.143915 (no antivirus check)
+X-Orange-Auth: Y2I1NTMtM0BjaW9pbmZvaW4uZnIuZnRv
+Subject: Re: [PATCH 1/2] mypaint: new recipe for version 0.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,47 +43,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Apr 2011 15:14:59 -0000
-X-Groupsio-MsgNum: 31523
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-9lmbR+284tS/kR2/LAyD"
+X-List-Received-Date: Fri, 29 Apr 2011 15:34:58 -0000
+X-Groupsio-MsgNum: 31524
+Content-Type: multipart/mixed; boundary="------------040501040309000505090004"
 
---=-9lmbR+284tS/kR2/LAyD
-Content-Type: text/plain; charset="UTF-8"
+--------------040501040309000505090004
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by smtp-out03.msg.oleane.net id p3TFBb5s018209
 
-Dear Bosi,
+Dear Paul,
+
+Le 28/04/2011 21:30, Paul Menzel a =C3=A9crit :
+> Dear Christian,
+>
+>
+> Am Donnerstag, den 28.04.2011, 10:41 +0200 schrieb Christian Charreyre:
+
+[...]
+
+> I hope there will be a lot more. ;-)
+>
+
+Hope so also.
+
+[...]
+>>>> +SRC_URI =3D "http://download.gna.org/mypaint/${PN}-${PV}.tar.bz2 \
+>>>> +    file://scons-adapt.patch \
+>>>> +"
+>>>> +
+>>>> +inherit distutils scons
+>>>> +
+>>>> +do_compile() {
+>>>> +    STAGING_INCDIR=3D${STAGING_INCDIR} \
+>>>> +    STAGING_LIBDIR=3D${STAGING_LIBDIR} \
+>>>> +    BUILD_SYS=3D${BUILD_SYS} \
+>>>> +    HOST_SYS=3D${HOST_SYS} \
+>>>> +    PATH=3D${PATH} scons_do_compile
+>>>> +}
+>>> I do not know Scons, but it looks strange that the above is needed an=
+d
+>>> not done automatically.
+>> Same reply as above, there are few recipes with scons, I've found this
+>> tip in one recipe and applied it here to get the build completed.
+> I understand. Did you try with the default `do_compile`? If it does not
+> work leave it so it works.
+
+Yes, with the default do_compile the compilation tells that these=20
+variables are undefined and abort.
+scons uses python, and the variables are not available in the python's=20
+env. unless I redefines them here.
+
+[...]
+
+> Thank you for your response. I hope we will get your next patch
+> iteration included.
+>
+
+I'll try to correct everything and post it again in v2.
+
+> Thanks,
+>
+> Paul
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
-Am Freitag, den 29.04.2011, 16:50 +0200 schrieb Bosi Daniele:
+--------------040501040309000505090004
+Content-Type: text/x-vcard; charset=utf-8;
+ name="christian_charreyre.vcf"
+Content-Disposition: attachment;
+ filename="christian_charreyre.vcf"
+Content-Transfer-Encoding: base64
 
-> I'm trying to read pdf files on my embedded system. Googling around I
-> found people suggesting to use Poppler as a library for reading such
-> type of documents.
->=20
-> Is there any Open Embedded software that use Poppler for reading pdf
-> files?
+YmVnaW46dmNhcmQNCmZuOkNocmlzdGlhbiAgQ2hhcnJleXJlDQpuOkNoYXJyZXlyZTtDaHJpc3Rp
+YW4gDQpvcmc6Q0lPIEluZm9ybWF0aXF1ZSBJbmR1c3RyaWVsbGUNCmFkcjtkb206OzsxMSBBdmVu
+dWUgTWFyaWdueTtNYXJzZWlsbGU7OzEzMDE0DQplbWFpbDtpbnRlcm5ldDpjaHJpc3RpYW4uY2hh
+cnJleXJlQGNpb2luZm9pbmR1cy5mcg0KdGVsO3dvcms6MDQgOTUgMDUgMTkgNDENCnVybDpodHRw
+Oi8vd3d3LmNpb2luZm9pbmR1cy5mcg0KdmVyc2lvbjoyLjENCmVuZDp2Y2FyZA0KDQo=
 
-I think Evince is packaged and it is using Poppler.
-
-[=E2=80=A6]
-
-
-Thanks,
-
-Paul
-
---=-9lmbR+284tS/kR2/LAyD
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk261VEACgkQPX1aK2wOHVgmjwCfT1PBNFH7Qtq0pNMcGjEvAJUG
-WsgAn0sXoQKSQrRP1/jI9JVb7/q5bP13
-=S5aX
------END PGP SIGNATURE-----
-
---=-9lmbR+284tS/kR2/LAyD--
+--------------040501040309000505090004--
