@@ -1,35 +1,24 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QFsgh-0003g7-5W
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Apr 2011 20:45:11 +0200
-Received: by pwj9 with SMTP id 9so1939279pwj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2011 11:42:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=3sLJ0RKLPvGA+/Kb23EmccslX/ZO08Z6W/NQpfSyJEw=;
-	b=fIWNaZC/Iv1BVME0npJR/7lxKmTfvFaIkq7jSMPU/jPrSy3QfzMambryXwkK+oZaf4
-	HVDtbp0Hv9s+xwdNUA25Da8M4jJSBTgaCIGm/U9KN5Hsynsd8idnNxn6ZfedvlPCIamc
-	xm7ccYgoxRxvIPBPHy1E+KOG0u+HxhGDMGJDk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=KOVWGbGDdsB3Q925NFndvgeatIecIQP/rXwDYptTNkXZ9O+2JfJhoIeRQPjUQZ4TUx
-	ViQMC42IhFLq8aYggDn3nnmbVxWn3EwP8KokKFcyna68BSLtWeDYAdBWu29XbjIkF9YV
-	CzKt8bfOV+Q3QRQz5R50agPp4tIBelaMG8bCs=
-Received: by 10.142.247.34 with SMTP id u34mr1815918wfh.48.1304102556858;
-	Fri, 29 Apr 2011 11:42:36 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id y5sm2064148pbq.57.2011.04.29.11.42.34
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 29 Apr 2011 11:42:35 -0700 (PDT)
-From: raj.khem@gmail.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QG4Xf-0005ke-6S for openembedded-devel@lists.openembedded.org;
+	Sat, 30 Apr 2011 09:24:39 +0200
+Received: from f053036151.adsl.alicedsl.de ([78.53.36.151]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QG4W5-0008Cd-Ew for openembedded-devel@lists.openembedded.org;
+	Sat, 30 Apr 2011 07:23:01 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Apr 2011 11:42:24 -0700
-Message-Id: <1304102545-27774-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-Subject: [meta-oe][PATCH v2] proxy-libintl_20100902.bb: Specify -fPIC in CFLAGS
+In-Reply-To: <1304091838-23333-2-git-send-email-christian.charreyre@cioinfoindus.fr>
+References: <1304091838-23333-1-git-send-email-christian.charreyre@cioinfoindus.fr>
+	<1304091838-23333-2-git-send-email-christian.charreyre@cioinfoindus.fr>
+Date: Sat, 30 Apr 2011 09:22:05 +0200
+Message-ID: <1304148125.5773.6.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH v2] mypaint: new recipe for version 0.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,44 +32,148 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Apr 2011 18:45:11 -0000
+X-List-Received-Date: Sat, 30 Apr 2011 07:24:39 -0000
+X-Groupsio-MsgNum: 31529
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-e+Bqf6MiSrrcVljjFlh0"
 
-From: Khem Raj <raj.khem@gmail.com>
+--=-e+Bqf6MiSrrcVljjFlh0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Some architectures like mips become upset if you
-try to link non-pic libraries to shared objects
-some generate pic by default so it does not matter
-Specifying -fPIC on commandline should make all happy
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../proxy-libintl/proxy-libintl_20100902.bb        |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-core/proxy-libintl/proxy-libintl_20100902.bb b/meta-oe/recipes-core/proxy-libintl/proxy-libintl_20100902.bb
-index 7c433bd..f125fb5 100644
---- a/meta-oe/recipes-core/proxy-libintl/proxy-libintl_20100902.bb
-+++ b/meta-oe/recipes-core/proxy-libintl/proxy-libintl_20100902.bb
-@@ -4,7 +4,7 @@ SECTION = "libs"
- LICENSE = "LGPLv2"
- LIC_FILES_CHKSUM = "file://src/proxy-libintl/COPYING.LIB.txt;md5=bc400bc21422f9a92e76ec2c5167ca2e"
- 
--PR = "r0"
-+PR = "r1"
- PROVIDES = "virtual/libintl virtual/gettext"
- 
- SRC_URI = " \
-@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "291ac350cc5eb4a01b0d651ca99fae64cee8a1c06b2005277fab5a4356
- S = "${WORKDIR}"
- FILES_${PN}-dev = "${includedir}/libintl.h ${libdir}/libintl.a"
- 
--CFLAGS_append = " -Wall -I ../../include ${@['-DSTUB_ONLY', ''][bb.data.getVar('USE_NLS', d, 1) != 'no']}"
-+CFLAGS_append = " -fPIC -Wall -I ../../include ${@['-DSTUB_ONLY', ''][bb.data.getVar('USE_NLS', d, 1) != 'no']}"
- TARGET_CC_ARCH += "${LDFLAGS}"
- 
- do_compile() {
--- 
-1.7.4.1
+Dear Christian,
 
 
+thank you for your improved patch.
 
+Am Freitag, den 29.04.2011, 17:43 +0200 schrieb C. Charreyre:
+
+What distribution and machine do you use to build this?
+
+I applied your patches. Unfortunately task compile fails with the
+following error using `angstrom-2010.x` or `minimal` with `MACHINE =3D
+"beagleboard".
+
+        + scons_do_compile
+        + '[' '' =3D 1 ']'
+        + /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/bin/=
+scons -j4 'CXX=3Darm-angstrom-linux-gnueabi-g++ -march=3Darmv7-a -mtune=3Dc=
+ortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb --s=
+ysroot=3D/oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-angstrom-linu=
+x-gnueabi' PREFIX=3D/usr prefix=3D/usr
+        scons: Reading SConscript files ...
+        Building for python2.6
+        You need to have numpy installed.
+       =20
+        ImportError: No module named numpy:
+          File "/oe/build-angstrom-next/angstrom-dev/work/armv7a-angstrom-l=
+inux-gnueabi/mypaint-0.9.1-r0/mypaint-0.9.1/SConstruct", line 15:
+            import numpy
+        + oefatal 'scons build
+
+> Signed-off-by: C. Charreyre <christian.charreyre@cioinfoindus.fr>
+
+Maybe spell out you first name.
+
+        git config user.name "Christian Charreyre" # maybe even
+        `--global`
+
+> ---
+>  recipes/mypaint/files/scons-adapt.patch |   20 +++++++++++++++++
+>  recipes/mypaint/mypaint_0.9.1.bb        |   36 +++++++++++++++++++++++++=
+++++++
+>  2 files changed, 56 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/mypaint/files/scons-adapt.patch
+>  create mode 100644 recipes/mypaint/mypaint_0.9.1.bb
+>=20
+> diff --git a/recipes/mypaint/files/scons-adapt.patch b/recipes/mypaint/fi=
+les/scons-adapt.patch
+> new file mode 100644
+> index 0000000..dcad6db
+> --- /dev/null
+> +++ b/recipes/mypaint/files/scons-adapt.patch
+> @@ -0,0 +1,20 @@
+> +Author: Christian Charreyre <christian.charreyre@cioinfoindus.fr>
+> +
+> +Adapt scons to OE
+> +Index: mypaint-0.9.1/lib/SConscript
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- mypaint-0.9.1.orig/lib/SConscript	2011-04-21 11:31:29.000000000 +020=
+0
+> ++++ mypaint-0.9.1/lib/SConscript	2011-04-21 11:35:30.000000000 +0200
+> +@@ -1,5 +1,11 @@
+> + Import('env')
+> +-import sys
+> ++import sys, os
+> ++env.Replace(SHCXX =3D os.environ['CXX'])
+> ++env.Replace(SHLINK =3D os.environ['CXX'])
+> ++env.Replace(LDMODULEFLAGS =3D os.environ['TARGET_LDFLAGS'])
+> ++env.Append(LDMODULEFLAGS =3D ['-Wl,--hash-style=3Dgnu'])
+> ++env.Append(LDMODULEFLAGS =3D ['-shared'])
+> ++env.Replace(PATH =3D os.environ['PATH'])
+> +=20
+> + # For the record: I know that scons supports swig. But it doesn't scan =
+for #include in the generated code.
+> + #=20
+> diff --git a/recipes/mypaint/mypaint_0.9.1.bb b/recipes/mypaint/mypaint_0=
+.9.1.bb
+> new file mode 100644
+> index 0000000..a7e5077
+> --- /dev/null
+> +++ b/recipes/mypaint/mypaint_0.9.1.bb
+> @@ -0,0 +1,31 @@
+> +DESCRIPTION=3D"fast and easy open-source graphics application for digita=
+l painters"
+> +LICENSE=3D"GPL"
+> +SECTION =3D "x11/applications"
+> +PRIORITY =3D "optional"
+> +HOMEPAGE =3D "http://mypaint.intilinux.com/"
+> +
+> +RDEPENDS_${PN} =3D "python-image python-json python-numpy"
+> +
+> +SRC_URI =3D "http://download.gna.org/mypaint/${PN}-${PV}.tar.bz2 \
+> +	file://scons-adapt.patch \
+> +"
+> +SRC_URI[md5sum] =3D "6249a16359a438d6dc658f5765b35515"
+> +SRC_URI[sha256sum] =3D "407b599f62fb0d6e711fee57d22e64d3aec88825364fb5f7=
+f73b9f0940aa7aed"
+> +
+> +inherit distutils scons
+> +
+> +do_compile() {
+> +	STAGING_INCDIR=3D${STAGING_INCDIR} \
+> +       STAGING_LIBDIR=3D${STAGING_LIBDIR} \
+> +       BUILD_SYS=3D${BUILD_SYS} \
+> +	HOST_SYS=3D${HOST_SYS} \
+> +	PATH=3D${PATH} scons_do_compile
+> +}
+> +
+> +do_install() {
+> +	BUILD_SYS=3D${BUILD_SYS} \
+> +	HOST_SYS=3D${HOST_SYS} \
+> +	scons_do_install
+> +}
+> +
+> +FILES_${PN} +=3D "${datadir}"
+
+
+Thanks,
+
+Paul
+
+--=-e+Bqf6MiSrrcVljjFlh0
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk27uJgACgkQPX1aK2wOHVjCFwCfTgA5S4mwm1Cr3m/VDjgDYPtx
+faoAnibgd3yNw25D851YrSx92sk3mljS
+=xdYu
+-----END PGP SIGNATURE-----
+
+--=-e+Bqf6MiSrrcVljjFlh0--
