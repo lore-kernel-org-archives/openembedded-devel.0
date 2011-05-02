@@ -1,27 +1,23 @@
-Received: from smtp-out05.msg.oleane.net ([62.161.7.3])
+Received: from smtp03.msg.oleane.net ([62.161.4.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <christian.charreyre@cioinfoindus.fr>)
-	id 1QGwQB-0002yG-CK for openembedded-devel@lists.openembedded.org;
-	Mon, 02 May 2011 18:56:31 +0200
-Received: from smtp03.msg.oleane.net (smtp03.mail.priv [172.17.20.112]) 
-	by smtp-out05.msg.oleane.net with ESMTP id p42Grv2u003490
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 2 May 2011 18:53:57 +0200
+	id 1QGx9R-0003nz-Py for openembedded-devel@lists.openembedded.org;
+	Mon, 02 May 2011 19:43:17 +0200
 Received: from localhost.localdomain
 	(AMarseille-551-1-66-56.w80-9.abo.wanadoo.fr [80.9.121.56]) 
-	by smtp03.msg.oleane.net (MTA) with ESMTP id p42GXrgx032514;
-	Mon, 2 May 2011 18:33:54 +0200
+	by smtp03.msg.oleane.net (MTA) with ESMTP id p42Hega8001553;
+	Mon, 2 May 2011 19:40:42 +0200
 X-Oleane-Rep: REPA
 From: Christian Charreyre <christian.charreyre@cioinfoindus.fr>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  2 May 2011 18:33:48 +0200
-Message-Id: <1304354028-24387-1-git-send-email-christian.charreyre@cioinfoindus.fr>
+Date: Mon,  2 May 2011 19:40:39 +0200
+Message-Id: <1304358039-20934-1-git-send-email-christian.charreyre@cioinfoindus.fr>
 X-Mailer: git-send-email 1.7.4.1
 X-Spam-Flag: NO
 X-PMX-Spam: Probability=8%
-X-PFSI-Info: PMX 5.6.0.2009776, Antispam-Engine: 2.7.2.376379,
-	Antispam-Data: 2011.5.2.162116 (no antivirus check)
-Subject: [PATCH v3] mypaint: new recipe for version 0.9.1
+X-PFSI-Info: PMX 5.5.9.395186, Antispam-Engine: 2.7.2.376379,
+	Antispam-Data: 2011.5.2.172718 (no antivirus check)
+Subject: [PATCH v4] mypaint: new recipe for version 0.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,7 +31,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 May 2011 16:56:31 -0000
+X-List-Received-Date: Mon, 02 May 2011 17:43:17 -0000
 
 Signed-off-by: Christian Charreyre <christian.charreyre@cioinfoindus.fr>
 ---
@@ -113,7 +109,7 @@ index 0000000..a7e5077
 +PRIORITY = "optional"
 +HOMEPAGE = "http://mypaint.intilinux.com/"
 +
-+DEPENDS_${PN} = "libglib libpng libpython libstdc++ python-numpy"
++DEPENDS = "glib-2.0 libpng python-numpy"
 +RDEPENDS_${PN} = "python-image python-json"
 +
 +SRC_URI = "http://download.gna.org/mypaint/${PN}-${PV}.tar.bz2 \
