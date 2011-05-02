@@ -1,35 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QGsmV-0004xf-C8 for openembedded-devel@lists.openembedded.org;
-	Mon, 02 May 2011 15:03:20 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QGsjs-0005BE-1h for openembedded-devel@lists.openembedded.org;
-	Mon, 02 May 2011 15:00:36 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 May 2011 15:00:36 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1QGutG-00073d-6D
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 02 May 2011 17:18:26 +0200
+Received: by wwb17 with SMTP id 17so5213623wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 May 2011 15:00:36 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 02 May 2011 15:00:15 +0200
-Message-ID: <ipm9t4$b83$1@dough.gmane.org>
-References: <1304324573-31754-1-git-send-email-koen@openembedded.org>
-	<1304335963.3949.56.camel@mattotaupa>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1304335963.3949.56.camel@mattotaupa>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] angstrom-2010-preferred-versions.inc: prefer DBus 1.4.1
+	Mon, 02 May 2011 08:15:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:date:x-google-sender-auth
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=qN/w6F3FQ974rxKj1T0U1XQRHXcKkuPhjIMLkoh4q20=;
+	b=OybXsO/ZusPVWwufw9hZ6JOEb7cGOYyX9hluBdYCMhS2JtjTSqOMFo0DKMermZ0MoA
+	ldYPulguS5IV56f0OqpTyNV2MEuJ3S4nikOGcIzhbALmfT4asVgj53iPhPymb0huP15G
+	za4a5/oDvXrYuFK4AO4R+cGtw0WL/oqWu9PU4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	b=enN4AuPYBQtD9ceF6qmQ9PYyR/wkINGkbHS/S3KoUkWB4hEFMSSN6ikHHpaKHfgA3I
+	8FC2fs3edolC4hF2cMr+epjcImJ6cc+RdhjuKan315zdAKRjftYB82U82i22dsv8r+0R
+	Y3EedQgTgAT5r7IQukr+izkEPPp+75MaaswQ4=
+MIME-Version: 1.0
+Received: by 10.216.230.31 with SMTP id i31mr22260weq.7.1304349347882; Mon, 02
+	May 2011 08:15:47 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.216.93.195 with HTTP; Mon, 2 May 2011 08:15:47 -0700 (PDT)
+Date: Mon, 2 May 2011 12:15:47 -0300
+X-Google-Sender-Auth: cf25kGcTEdmg-f8tGjYYXh9rToM
+Message-ID: <BANLkTimzgB9QSwwf2a=3n21-fUR=USwDUQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Mirror at GitHub
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,74 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 May 2011 13:03:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 02 May 2011 15:18:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello,
 
-On 02-05-11 13:32, Paul Menzel wrote:
-> Date: Mon, 2 May 2011 13:26:24 +0200
-> 
-> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> ---
-> This patch should go in before [1]
+I got in touch with GitHub people asking about in a way to setup a
+mirror for OpenEmbedded (core, meta and bitbake) thus allowing for
+easying forking and sharing of work.
 
-I know, I have a similar patch (and others) queued locally.
+Is someone against it?
 
-> 
-> 	[oe] [PATCH] systemd: update to v26
-> 
-> because otherwise task configure fails with the following error.
-> 
-> | checking for UDEV... yes
-> | checking for DBUS... configure: error: Package requirements ( dbus-1 >= 1.3.2 ) were not met:
-> |
-> | Requested 'dbus-1 >= 1.3.2' but version of dbus is 1.2.24
-> |
-> | Consider adjusting the PKG_CONFIG_PATH environment variable if you
-> | installed software in a non-standard prefix.
-> |
-> | Alternatively, you may set the environment variables DBUS_CFLAGS
-> | and DBUS_LIBS to avoid the need to call pkg-config.
-> | See the pkg-config man page for more details.
-> |
-> NOTE: package systemd-v26-r0: task do_configure: Failed
-> 
-> [1] http://patches.openembedded.org/patch/3061/
-> ---
->  .../include/angstrom-2010-preferred-versions.inc   |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
-> 
-> diff --git a/conf/distro/include/angstrom-2010-preferred-versions.inc b/conf/distro/include/angstrom-2010-preferred-versions.inc
-> index 5c28440..ae01b57 100644
-> --- a/conf/distro/include/angstrom-2010-preferred-versions.inc
-> +++ b/conf/distro/include/angstrom-2010-preferred-versions.inc
-> @@ -14,7 +14,7 @@ PREFERRED_VERSION_automake = "1.11.1"
->  PREFERRED_VERSION_automake-native = "1.11.1"
->  PREFERRED_VERSION_busybox 	= "1.18.4"
->  PREFERRED_VERSION_cairo		= "1.10.0"
-> -PREFERRED_VERSION_dbus 		= "1.2.24"
-> +PREFERRED_VERSION_dbus 		= "1.4.1"
->  PREFERRED_VERSION_dropbear      = "0.52"
->  PREFERRED_VERSION_fontconfig	= "2.8.0"
->  PREFERRED_VERSION_glib-2.0 	= "2.28.0"
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Basically it is just a matter of someone of OE's staff setup the
+organization account and I can ask for the mirrors to be setup by
+guthub's staff.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+This will make my life easier and probably others too.
 
-iD8DBQFNvqreMkyGM64RGpERAmKIAJ9w0RRThv+MshZMLSCpODjLCSt3DACgqT1w
-SgIeyg+ZuSMJxRZuT++nyJk=
-=TiSC
------END PGP SIGNATURE-----
+Cheers,
 
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
