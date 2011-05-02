@@ -1,23 +1,34 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtp-out06.msg.oleane.net ([62.161.7.4])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QGvzX-0002Ru-Hu for openembedded-devel@lists.openembedded.org;
-	Mon, 02 May 2011 18:29:00 +0200
-Received: from f053036031.adsl.alicedsl.de ([78.53.36.31]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QGvy0-00005K-46; Mon, 02 May 2011 16:27:24 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <christian.charreyre@cioinfoindus.fr>)
+	id 1QGw2j-0002f9-Vx for openembedded-devel@lists.openembedded.org;
+	Mon, 02 May 2011 18:32:18 +0200
+Received: from smtp04.msg.oleane.net (smtp04.mail.priv [172.17.20.113]) 
+	by smtp-out06.msg.oleane.net with ESMTP id p42GThjR027339
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 2 May 2011 18:29:43 +0200
+Received: from [192.168.1.148] (AMarseille-551-1-66-56.w80-9.abo.wanadoo.fr
+	[80.9.121.56]) (authenticated)
+	by smtp04.msg.oleane.net (MTA) with ESMTP id p42G9VNd031326
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 2 May 2011 18:09:31 +0200
+X-Oleane-Rep: REPA
+Message-ID: <4DBED73B.7050904@cioinfoindus.fr>
+Date: Mon, 02 May 2011 18:09:31 +0200
+From: Christian Charreyre <christian.charreyre@cioinfoindus.fr>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.15) Gecko/20110419 Lightning/1.0b2 Thunderbird/3.1.9
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4dbed1f4.0bf98e0a.0637.7f2b@mx.google.com>
-References: <4dbed1f4.0bf98e0a.0637.7f2b@mx.google.com>
-Date: Mon, 02 May 2011 18:26:22 +0200
-Message-ID: <1304353582.3949.76.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Cc: nagendra@mistralsolutions.com, srinath@mistralsolutions.com
-Subject: Re: [PATCH] Ethernet macid display fix
+References: <1304091838-23333-1-git-send-email-christian.charreyre@cioinfoindus.fr>	<1304091838-23333-2-git-send-email-christian.charreyre@cioinfoindus.fr>
+	<1304148125.5773.6.camel@mattotaupa>
+In-Reply-To: <1304148125.5773.6.camel@mattotaupa>
+X-Spam-Flag: NO
+X-PMX-Spam: Probability=8%
+X-PFSI-Info: PMX 5.6.0.2009776, Antispam-Engine: 2.7.2.376379,
+	Antispam-Data: 2011.5.2.155116 (no antivirus check)
+X-Orange-Auth: Y2I1NTMtM0BjaW9pbmZvaW4uZnIuZnRv
+Subject: Re: [PATCH v2] mypaint: new recipe for version 0.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,228 +42,179 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 May 2011 16:29:00 -0000
-X-Groupsio-MsgNum: 31568
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-awu67HhEL88sl7BJtNjN"
+X-List-Received-Date: Mon, 02 May 2011 16:32:18 -0000
+X-Groupsio-MsgNum: 31569
+Content-Type: multipart/mixed; boundary="------------030006080906000209060903"
 
---=-awu67HhEL88sl7BJtNjN
-Content-Type: text/plain; charset="UTF-8"
+--------------030006080906000209060903
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by smtp-out06.msg.oleane.net id p42GThjR027339
 
-Dear Anil,
+Dear Paul,
 
+my configuration is MACHINE=3D"beagleboard" and DISTRO=3D"angstrom-2008.1=
+".
 
-thank you for your patch.
+I've successfully reproduced your problem, that is explained by missing=20
+dependencies in mypaint recipe.
+In fact scons normally uses python-numpy (native version) to define=20
+parts of the include path.
+As python-numpy is not availbale in native version, I first made a=20
+receipe to generate it, but with Arm target and X86_64 host troubles may=20
+happen regarding type's length, so I patched Sconscript to give the=20
+correct path without python-numpy-native.
 
-Am Montag, den 02.05.2011, 21:16 +0530 schrieb Anil Kumar:
-> >From c832c7142d5f351e4e0eabba5f51ec9bba921354 Mon Sep 17 00:00:00 2001
-> From: Anil Kumar <anilm@mistralsolutions.com>
-> Date: Mon, 2 May 2011 20:56:13 +0530
-> Subject: [PATCH] Ethernet macid display fix
+In my environment it seems to work correctly.
 
-`git format-patch` creates a mbox file you can directly with Mutt.
+I will submit a new version (v3) that I hope will work better in a=20
+second mail.
 
-> Signed-off-by: Anil Kumar <anilm@mistralsolutions.com>
-> ---
->  .../0004-Ethernet-MACID-display-fix.patch          |  124 ++++++++++++++=
-++++++
->  recipes/u-boot/u-boot_git.bb                       |    3 +-
->  2 files changed, 126 insertions(+), 1 deletions(-)
->  create mode 100644 recipes/u-boot/u-boot-git/am3517-crane/0004-Ethernet-=
-MACID-display-fix.patch
->=20
-> diff --git a/recipes/u-boot/u-boot-git/am3517-crane/0004-Ethernet-MACID-d=
-isplay-fix.patch b/recipes/u-boot/u-boot-git/am3517-crane/0004-Ethernet-MAC=
-ID-display-fix.patch
-> new file mode 100644
-> index 0000000..246aa14
-> --- /dev/null
-> +++ b/recipes/u-boot/u-boot-git/am3517-crane/0004-Ethernet-MACID-display-=
-fix.patch
-> @@ -0,0 +1,124 @@
-> +From 76d9a5352c1a4abf2911ea2643e4372d30c10d32 Mon Sep 17 00:00:00 2001
-> +From: Anil Kumar M <anilm@mistralsolutions.com>
-> +Date: Mon, 2 May 2011 11:04:20 +0530
-> +Subject: [PATCH] Ethernet MACID display fix
+Concerning my first name, I don't understand what happens because git=20
+config user.name returns "Christian Charreyre".
+I have manually corrected in the v3 patch.
 
-Is this patch taken from upstream? Could you please tell us a URL so it
-can be tracked.
+Regards
 
-Additionally it would be nice to briefly describe what the problem is.
-In this case, =C2=BBEthernet MACID display fix=C2=AB is not enough. In what
-instance is the mac address(?) displayed incorrectly?
-
-What machines are affected by this patch?
-
-> +
-> +Signed-off-by: Anil Kumar M <anilm@mistralsolutions.com>
-> +---
-> + board/ti/am3517crane/am3517crane.c |   43 +++++++++++++++++++++--------=
--------
-> + board/ti/am3517crane/am3517crane.h |    9 ++++---
-> + include/configs/am3517_crane.h     |    2 +-
-> + 3 files changed, 31 insertions(+), 23 deletions(-)
-> +
-> +diff --git a/board/ti/am3517crane/am3517crane.c b/board/ti/am3517crane/a=
-m3517crane.c
-> +index 40e8b91..1914c25 100644
-> +--- a/board/ti/am3517crane/am3517crane.c
-> ++++ b/board/ti/am3517crane/am3517crane.c
-> +@@ -38,7 +38,7 @@
-> + #if defined(CONFIG_DRIVER_TI_EMAC)
-> + #define AM3517_IP_SW_RESET    0x48002598
-> + #define CPGMACSS_SW_RST               (1 << 1)
-> +-#define ETHERNET_NRST         34
-> ++#define ETHERNET_NRST         65
-> + #define EMACID_ADDR_LSB       0x48002380
-> + #define EMACID_ADDR_MSB       0x48002384
-> + #endif
-> +@@ -204,30 +204,37 @@ int misc_init_r(void)
-> + int cpu_eth_init(bd_t *bis)
-> + {
-> + #if defined(CONFIG_DRIVER_TI_EMAC)
-> +-      char mac_buf_lsb[8];
-> +-      char mac_buf_msb[16];
-> +-      char mac_id[24];
-> +-      const unsigned char separator =3D ':';
-> ++      /* Check for efficient way of code*/
-> ++      u8 mac_id[32];
-> ++
-> ++      u16 aa, bb, cc, dd, ee, ff;
-> ++      u32 emac_lsb, emac_msb;
-> ++
-> ++      memset(mac_id, '\0', sizeof(mac_id));
-> +=20
-> +       printf("davinci_emac_initialize\n");
-> +       davinci_emac_initialize();
-> +=20
-> +-      memset(mac_buf_lsb, '\0', sizeof(mac_buf_lsb));
-> +-      memset(mac_buf_msb, '\0', sizeof(mac_buf_msb));
-> +-      memset(mac_id, '\0', sizeof(mac_id));
-> ++      emac_lsb =3D readl(EMACID_ADDR_LSB);
-> ++      emac_msb =3D readl(EMACID_ADDR_MSB);
-> +=20
-> +-      sprintf(mac_buf_msb, "%x", readl(EMACID_ADDR_MSB));
-> +-      sprintf(mac_buf_lsb, "%x", readl(EMACID_ADDR_LSB));
-> +-      strcat(mac_buf_msb, mac_buf_lsb);
-> +-      sprintf(mac_id, "%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c",
-> +-                      mac_buf_msb[0], mac_buf_msb[1], separator,
-> +-                      mac_buf_msb[2], mac_buf_msb[3], separator,
-> +-                      mac_buf_msb[4], mac_buf_msb[5], separator,
-> +-                      mac_buf_msb[6], mac_buf_msb[7], separator,
-> +-                      mac_buf_msb[8], mac_buf_msb[9], separator,
-> +-                      mac_buf_msb[10], mac_buf_msb[11]);
-> ++      printf("EMAC LSB =3D 0x%08x\n",emac_lsb);
-> ++      printf("EMAC MSB =3D 0x%08x\n",emac_msb);
-> +=20
-> ++      cc  =3D (emac_msb & 0x000000FF) >> 0;
-> ++      bb  =3D (emac_msb & 0x0000FF00) >> 8;
-> ++      aa  =3D (emac_msb  & 0x00FF0000) >> 16;
-> ++
-> ++      ff  =3D (emac_lsb & 0x000000FF);
-> ++      ee  =3D (emac_lsb & 0x0000FF00) >> 8;
-> ++      dd  =3D (emac_lsb & 0x00FF0000) >> 16;
-> ++
-> ++      sprintf(mac_id,"%02x:%02x:%02x:%02x:%02x:%02x",aa,bb,cc,dd,ee,ff)=
-;
-> ++
-> ++      printf("-----------------------------\n");
-> +       printf("EMAC ID %s\n", mac_id);
-> ++      printf("-----------------------------\n");
-> ++
-> +       setenv("ethaddr", mac_id);
-> + #endif
-> +       return 0;
-> +diff --git a/board/ti/am3517crane/am3517crane.h b/board/ti/am3517crane/a=
-m3517crane.h
-> +index 83fe858..cdb0542 100644
-> +--- a/board/ti/am3517crane/am3517crane.h
-> ++++ b/board/ti/am3517crane/am3517crane.h
-> +@@ -88,10 +88,10 @@ const omap3_sysinfo sysinfo =3D {
-> +       MUX_VAL(CP(STRBEN_DLY0),        (IEN  | PTD | EN  | M0)) \
-> +       MUX_VAL(CP(STRBEN_DLY1),        (IEN  | PTD | EN  | M0)) \
-> + /* GPMC */\
-> +-      /* GPIO_34 ETHERNET_nRST */ \
-> +-      MUX_VAL(CP(GPMC_A1),            (IDIS | PTU | EN  | M4)) \
-> ++      /* GPIO_34 NC */ \
-> ++      MUX_VAL(CP(GPMC_A1),            (M7)) \
-> +       /* GPIO_35 USB1_HOST_EN */ \
-> +-      MUX_VAL(CP(GPMC_A2),            (IDIS | PTU | EN  | M4)) \
-> ++      MUX_VAL(CP(GPMC_A2),            (IDIS | PTU | DIS | M4)) \
-> +       /* GPIO_36 USB0_OVER_CURRENT*/ \
-> +       MUX_VAL(CP(GPMC_A3),            (IDIS | PTU | EN  | M4)) \
-> +       /* GPIO_37 USB1_OVER_CURRENT */ \
-> +@@ -140,7 +140,8 @@ const omap3_sysinfo sysinfo =3D {
-> +       MUX_VAL(CP(GPMC_WAIT0),         (IEN  | PTD | DIS | M0)) \
-> +       MUX_VAL(CP(GPMC_WAIT1),         (M7)) \
-> +       MUX_VAL(CP(GPMC_WAIT2),         (M7)) \
-> +-      MUX_VAL(CP(GPMC_WAIT3),         (M7)) \
-> ++      /* GPIO_65 ETHERNET_nRST */ \
-> ++      MUX_VAL(CP(GPMC_WAIT3),         (IDIS | PTU | EN  | M4)) \
-> + /* DSS */\
-> +       MUX_VAL(CP(DSS_PCLK),           (IDIS | PTD | DIS | M0)) \
-> +       MUX_VAL(CP(DSS_HSYNC),          (IDIS | PTD | DIS | M0)) \
-> +diff --git a/include/configs/am3517_crane.h b/include/configs/am3517_cra=
-ne.h
-> +index f059dc7..3a5f919 100644
-> +--- a/include/configs/am3517_crane.h
-> ++++ b/include/configs/am3517_crane.h
-> +@@ -187,7 +187,7 @@
-> + #define CONFIG_JFFS2_PART_SIZE                0xf980000       /* sz of =
-jffs2 part */
-> +=20
-> + /* Environment information */
-> +-#define CONFIG_BOOTDELAY      1
-> ++#define CONFIG_BOOTDELAY       3     =20
-> +=20
-> + #define CONFIG_BOOTFILE               uImage
-> +=20
-> +--=20
-> +1.7.2.3
-> +
-> diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
-> index 2cf5b12..e11bbba 100644
-> --- a/recipes/u-boot/u-boot_git.bb
-> +++ b/recipes/u-boot/u-boot_git.bb
-> @@ -1,5 +1,5 @@
->  require u-boot.inc
-> -PR =3D "r75"
-> +PR =3D "r76"
-> =20
->  FILESPATHPKG =3D. "u-boot-git:"
-> =20
-> @@ -138,6 +138,7 @@ SRC_URI_am3517-crane =3D "git://arago-project.org/git=
-/projects/u-boot-omap3.git;pr
->                          file://0001-OMAP2-3-I2C-Add-support-for-second-a=
-nd-third-bus.patch \
->                          file://0002-ARMV7-Restructure-OMAP-i2c-driver-to=
--allow-code-shar.patch \
->                          file://0003-craneboard-add-expansionboard-suppor=
-t.patch \
-> +                       file://0004-Ethernet-MACID-display-fix.patch \
->  "
-> =20
->  SRCREV_am3517-crane =3D "c0a8fb217fdca7888d89f9a3dee74a4cec865620"
-> --=20
-> 1.7.0.4=20
+Le 30/04/2011 09:22, Paul Menzel a =C3=A9crit :
+> Dear Christian,
+>
+>
+> thank you for your improved patch.
+>
+> Am Freitag, den 29.04.2011, 17:43 +0200 schrieb C. Charreyre:
+>
+> What distribution and machine do you use to build this?
+>
+> I applied your patches. Unfortunately task compile fails with the
+> following error using `angstrom-2010.x` or `minimal` with `MACHINE =3D
+> "beagleboard".
+>
+>          + scons_do_compile
+>          + '[' '' =3D 1 ']'
+>          + /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr=
+/bin/scons -j4 'CXX=3Darm-angstrom-linux-gnueabi-g++ -march=3Darmv7-a -mt=
+une=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-=
+thumb --sysroot=3D/oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-an=
+gstrom-linux-gnueabi' PREFIX=3D/usr prefix=3D/usr
+>          scons: Reading SConscript files ...
+>          Building for python2.6
+>          You need to have numpy installed.
+>
+>          ImportError: No module named numpy:
+>            File "/oe/build-angstrom-next/angstrom-dev/work/armv7a-angst=
+rom-linux-gnueabi/mypaint-0.9.1-r0/mypaint-0.9.1/SConstruct", line 15:
+>              import numpy
+>          + oefatal 'scons build
+>
+>> Signed-off-by: C. Charreyre<christian.charreyre@cioinfoindus.fr>
+> Maybe spell out you first name.
+>
+>          git config user.name "Christian Charreyre" # maybe even
+>          `--global`
+>
+>> ---
+>>   recipes/mypaint/files/scons-adapt.patch |   20 +++++++++++++++++
+>>   recipes/mypaint/mypaint_0.9.1.bb        |   36 +++++++++++++++++++++=
+++++++++++
+>>   2 files changed, 56 insertions(+), 0 deletions(-)
+>>   create mode 100644 recipes/mypaint/files/scons-adapt.patch
+>>   create mode 100644 recipes/mypaint/mypaint_0.9.1.bb
+>>
+>> diff --git a/recipes/mypaint/files/scons-adapt.patch b/recipes/mypaint=
+/files/scons-adapt.patch
+>> new file mode 100644
+>> index 0000000..dcad6db
+>> --- /dev/null
+>> +++ b/recipes/mypaint/files/scons-adapt.patch
+>> @@ -0,0 +1,20 @@
+>> +Author: Christian Charreyre<christian.charreyre@cioinfoindus.fr>
+>> +
+>> +Adapt scons to OE
+>> +Index: mypaint-0.9.1/lib/SConscript
+>> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>> +--- mypaint-0.9.1.orig/lib/SConscript	2011-04-21 11:31:29.000000000 +=
+0200
+>> ++++ mypaint-0.9.1/lib/SConscript	2011-04-21 11:35:30.000000000 +0200
+>> +@@ -1,5 +1,11 @@
+>> + Import('env')
+>> +-import sys
+>> ++import sys, os
+>> ++env.Replace(SHCXX =3D os.environ['CXX'])
+>> ++env.Replace(SHLINK =3D os.environ['CXX'])
+>> ++env.Replace(LDMODULEFLAGS =3D os.environ['TARGET_LDFLAGS'])
+>> ++env.Append(LDMODULEFLAGS =3D ['-Wl,--hash-style=3Dgnu'])
+>> ++env.Append(LDMODULEFLAGS =3D ['-shared'])
+>> ++env.Replace(PATH =3D os.environ['PATH'])
+>> +
+>> + # For the record: I know that scons supports swig. But it doesn't sc=
+an for #include in the generated code.
+>> + #
+>> diff --git a/recipes/mypaint/mypaint_0.9.1.bb b/recipes/mypaint/mypain=
+t_0.9.1.bb
+>> new file mode 100644
+>> index 0000000..a7e5077
+>> --- /dev/null
+>> +++ b/recipes/mypaint/mypaint_0.9.1.bb
+>> @@ -0,0 +1,31 @@
+>> +DESCRIPTION=3D"fast and easy open-source graphics application for dig=
+ital painters"
+>> +LICENSE=3D"GPL"
+>> +SECTION =3D "x11/applications"
+>> +PRIORITY =3D "optional"
+>> +HOMEPAGE =3D "http://mypaint.intilinux.com/"
+>> +
+>> +RDEPENDS_${PN} =3D "python-image python-json python-numpy"
+>> +
+>> +SRC_URI =3D "http://download.gna.org/mypaint/${PN}-${PV}.tar.bz2 \
+>> +	file://scons-adapt.patch \
+>> +"
+>> +SRC_URI[md5sum] =3D "6249a16359a438d6dc658f5765b35515"
+>> +SRC_URI[sha256sum] =3D "407b599f62fb0d6e711fee57d22e64d3aec88825364fb=
+5f7f73b9f0940aa7aed"
+>> +
+>> +inherit distutils scons
+>> +
+>> +do_compile() {
+>> +	STAGING_INCDIR=3D${STAGING_INCDIR} \
+>> +       STAGING_LIBDIR=3D${STAGING_LIBDIR} \
+>> +       BUILD_SYS=3D${BUILD_SYS} \
+>> +	HOST_SYS=3D${HOST_SYS} \
+>> +	PATH=3D${PATH} scons_do_compile
+>> +}
+>> +
+>> +do_install() {
+>> +	BUILD_SYS=3D${BUILD_SYS} \
+>> +	HOST_SYS=3D${HOST_SYS} \
+>> +	scons_do_install
+>> +}
+>> +
+>> +FILES_${PN} +=3D "${datadir}"
+>
+> Thanks,
+>
+> Paul
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
-Thanks,
+--------------030006080906000209060903
+Content-Type: text/x-vcard; charset=utf-8;
+ name="christian_charreyre.vcf"
+Content-Disposition: attachment;
+ filename="christian_charreyre.vcf"
+Content-Transfer-Encoding: base64
 
-Paul
+YmVnaW46dmNhcmQNCmZuOkNocmlzdGlhbiAgQ2hhcnJleXJlDQpuOkNoYXJyZXlyZTtDaHJpc3Rp
+YW4gDQpvcmc6Q0lPIEluZm9ybWF0aXF1ZSBJbmR1c3RyaWVsbGUNCmFkcjtkb206OzsxMSBBdmVu
+dWUgTWFyaWdueTtNYXJzZWlsbGU7OzEzMDE0DQplbWFpbDtpbnRlcm5ldDpjaHJpc3RpYW4uY2hh
+cnJleXJlQGNpb2luZm9pbmR1cy5mcg0KdGVsO3dvcms6MDQgOTUgMDUgMTkgNDENCnVybDpodHRw
+Oi8vd3d3LmNpb2luZm9pbmR1cy5mcg0KdmVyc2lvbjoyLjENCmVuZDp2Y2FyZA0KDQo=
 
---=-awu67HhEL88sl7BJtNjN
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk2+2y4ACgkQPX1aK2wOHVi7qgCfc70tgW72lCAI8opSEZJ0dj5M
-7b8AnRCMlvbcmOJXTp8TMoochNmX4UNO
-=y/BM
------END PGP SIGNATURE-----
-
---=-awu67HhEL88sl7BJtNjN--
+--------------030006080906000209060903--
