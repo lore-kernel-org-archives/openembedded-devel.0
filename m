@@ -1,22 +1,24 @@
 Received: from mailout-de.gmx.net ([213.165.64.22])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1QH0IY-0007Iv-HQ
+	(envelope-from <schnitzeltony@gmx.de>) id 1QH0Ia-0007JH-Do
 	for openembedded-devel@lists.openembedded.org;
 	Mon, 02 May 2011 23:04:56 +0200
-Received: (qmail invoked by alias); 02 May 2011 21:02:16 -0000
+Received: (qmail invoked by alias); 02 May 2011 21:02:18 -0000
 Received: from p5B0A1227.dip.t-dialin.net (EHLO localhost.localdomain)
 	[91.10.18.39]
-	by mail.gmx.net (mp010) with SMTP; 02 May 2011 23:02:16 +0200
+	by mail.gmx.net (mp010) with SMTP; 02 May 2011 23:02:18 +0200
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18NuKJel3cNkJt3gPboiOa7kme9mEKDxUtS4eRNIu
-	hlJapwoeyES6lO
+X-Provags-ID: V01U2FsdGVkX18IzXcXAfEIkdBC2DBKwjAZ4rQev/5S7F+m7GoGBU
+	+m59DqZaMYoClb
 From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  2 May 2011 23:02:44 +0200
-Message-Id: <1304370168-4354-1-git-send-email-schnitzeltony@gmx.de>
+Date: Mon,  2 May 2011 23:02:46 +0200
+Message-Id: <1304370168-4354-3-git-send-email-schnitzeltony@gmx.de>
 X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1304370168-4354-1-git-send-email-schnitzeltony@gmx.de>
+References: <1304370168-4354-1-git-send-email-schnitzeltony@gmx.de>
 X-Y-GMX-Trusted: 0
-Subject: [PATCH 0/4] Add support for freescale mx28evk board
+Subject: [PATCH 2/4] elftosb: Add native helper to create boot stream files used by freescale iMX SoCs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,35 +34,59 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 02 May 2011 21:04:56 -0000
 
-Kernel and u-boot are build based on the same sources as shipped with the
-latest freescale board support package. It is intended as a replacement for
-LTIB (think what you want of that build system). The ROM builtin bootloader
-requires so called boot streams (*.sb). These are build for u-boot and kernel
-by eltosb-native and stored in deploy folder. Subsequent patches will follow
-to have at least the kernel coming from mainline (it looks as if kernel 2.6.39
-will have enhanced support for mx28evk).
 
-Andreas Mueller (4):
-  mx28evk: Add new machine definition
-  elftosb: Add native helper to create boot stream files used by
-    freescale iMX SoCs
-  u-boot: Add support for freescale iMX28 SoCs
-  linux-imx-git: add support for freescale mx28evk
-
- conf/machine/include/imx28.inc                     |   19 +
- conf/machine/mx28evk.conf                          |   23 +
- .../elftosb/uclibc_and_eglibc_have_no_powf.patch   |   12 +
- recipes/freescale/elftosb_10.12.01.bb              |   20 +
- recipes/linux/linux-imx-git/mx28evk/defconfig      | 2132 ++++++++++++++++++++
- recipes/linux/linux-imx_git.bb                     |   53 +-
- recipes/u-boot/u-boot_git.bb                       |   24 +
- 7 files changed, 2268 insertions(+), 15 deletions(-)
- create mode 100644 conf/machine/include/imx28.inc
- create mode 100644 conf/machine/mx28evk.conf
+Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
+---
+ .../elftosb/uclibc_and_eglibc_have_no_powf.patch   |   12 ++++++++++++
+ recipes/freescale/elftosb_10.12.01.bb              |   20 ++++++++++++++++++++
+ 2 files changed, 32 insertions(+), 0 deletions(-)
  create mode 100644 recipes/freescale/elftosb/uclibc_and_eglibc_have_no_powf.patch
  create mode 100644 recipes/freescale/elftosb_10.12.01.bb
- create mode 100644 recipes/linux/linux-imx-git/mx28evk/defconfig
 
+diff --git a/recipes/freescale/elftosb/uclibc_and_eglibc_have_no_powf.patch b/recipes/freescale/elftosb/uclibc_and_eglibc_have_no_powf.patch
+new file mode 100644
+index 0000000..7874023
+--- /dev/null
++++ b/recipes/freescale/elftosb/uclibc_and_eglibc_have_no_powf.patch
+@@ -0,0 +1,12 @@
++--- a/elftosb2/ElftosbAST.cpp.old	2010-09-20 15:28:03.000000000 +0200
+++++ b/elftosb2/ElftosbAST.cpp	2011-04-18 22:25:54.000000000 +0200
++@@ -755,7 +755,8 @@
++ 			#ifdef WIN32
++ 				result = 0;
++ 			#else
++-				result = lroundf(powf(float(leftValue), float(rightValue)));
+++				//result = lroundf(powf(float(leftValue), float(rightValue)));
+++				result = 0;
++ 			#endif
++ 				break;
++ 			case kBitwiseAnd:
+diff --git a/recipes/freescale/elftosb_10.12.01.bb b/recipes/freescale/elftosb_10.12.01.bb
+new file mode 100644
+index 0000000..9fc18a0
+--- /dev/null
++++ b/recipes/freescale/elftosb_10.12.01.bb
+@@ -0,0 +1,20 @@
++LICENSE = "FREESCALE"
++PR = "r0"
++
++SRC_URI = "http://foss.doredevelopment.dk/mirrors/imx/elftosb-${PV}.tar.gz \
++           file://uclibc_and_eglibc_have_no_powf.patch"
++
++SRC_URI[md5sum] = "e8005d606c1e0bb3507c82f6eceb3056"
++SRC_URI[sha256sum] = "77bb6981620f7575b87d136d94c7daa88dd09195959cc75fc18b138369ecd42b"
++
++BBCLASSEXTEND = "native"
++
++do_install() {
++        install -d ${D}${bindir}
++        install ${S}/bld/linux/elftosb ${D}${bindir}/
++        install ${S}/bld/linux/keygen ${D}${bindir}/
++        install ${S}/bld/linux/sbtool ${D}${bindir}/
++}
++
++NATIVE_INSTALL_WORKS = "1"
++
 -- 
 1.7.4.4
 
