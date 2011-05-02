@@ -1,34 +1,34 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QGv1S-0007DN-DH for openembedded-devel@lists.openembedded.org;
-	Mon, 02 May 2011 17:26:54 +0200
+	id 1QGv86-0007NU-Cu for openembedded-devel@lists.openembedded.org;
+	Mon, 02 May 2011 17:33:46 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QGuyx-0007bT-Su for openembedded-devel@lists.openembedded.org;
-	Mon, 02 May 2011 17:24:19 +0200
+	id 1QGv5c-0003Br-6b for openembedded-devel@lists.openembedded.org;
+	Mon, 02 May 2011 17:31:12 +0200
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 May 2011 17:24:19 +0200
+	Mon, 02 May 2011 17:31:12 +0200
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 May 2011 17:24:19 +0200
+	Mon, 02 May 2011 17:31:12 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 02 May 2011 17:24:02 +0200
-Message-ID: <ipmian$2s9$1@dough.gmane.org>
-References: <BANLkTimzgB9QSwwf2a=3n21-fUR=USwDUQ@mail.gmail.com>
+Date: Mon, 02 May 2011 17:30:51 +0200
+Message-ID: <ipming$5ld$1@dough.gmane.org>
+References: <iplshp$vse$1@dough.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <BANLkTimzgB9QSwwf2a=3n21-fUR=USwDUQ@mail.gmail.com>
+In-Reply-To: <iplshp$vse$1@dough.gmane.org>
 X-Enigmail-Version: 1.0.1
-Subject: Re: Mirror at GitHub
+Subject: Re: [2011.03-maintenance] Pull request #16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,29 +42,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 May 2011 15:26:54 -0000
+X-List-Received-Date: Mon, 02 May 2011 15:33:46 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 02-05-11 17:15, Otavio Salvador wrote:
-> Hello,
-> 
-> I got in touch with GitHub people asking about in a way to setup a
-> mirror for OpenEmbedded (core, meta and bitbake) thus allowing for
-> easying forking and sharing of work.
-> 
-> Is someone against it?
+For the people keeping score: that's 6 commits, not 5 :)
 
-Wasn't Tom Rini already doing the same?
+On 02-05-11 11:12, Koen Kooi wrote:
+> Tom,
+> 
+> Please pull the 5 commits from here:
+> 
+> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+> Branch: 2011.03-maintenance
+> 
+> Jeff Lance (1):
+>       am-benchmarks: add return values
+> 
+> Koen Kooi (3):
+>       opencv 2.2: fix opencv-dev dependency chain
+>       opencv 2.2: include actual headers in the -dev package
+>       linux-omap-psp 2.6.32: add support for 5MP camera board
+> 
+> Michael 'Mickey' Lauer (1):
+>       qt4-embedded: enable support for the built-in LinuxInput keyboard
+> 
+> Philip Balister (1):
+>       uhd : Update to latest release. Both source and fpga images.
+> 
+> These are all cherry-picks from .dev.
+> 
+> regards,
+> 
+> Koen
+> 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFNvsySMkyGM64RGpERAgl2AJ9KKMUaeFrSr128FwnysLPxsC+GKQCfWovE
-VxShEYeYOd7jwvV0mCJd1NU=
-=Fx2P
+iD8DBQFNvs4rMkyGM64RGpERAgRgAJ4i0GyfswkIUPG5cEERxTK5uJQEWACZAT9S
+uuBLb51m6gRxIJK6+/Mse/w=
+=2gUm
 -----END PGP SIGNATURE-----
 
 
