@@ -1,23 +1,23 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QGrPK-0002db-VM for openembedded-devel@lists.openembedded.org;
-	Mon, 02 May 2011 13:35:18 +0200
-Received: from f053036031.adsl.alicedsl.de ([78.53.36.31]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QGrNn-0001pE-T4 for openembedded-devel@lists.openembedded.org;
-	Mon, 02 May 2011 11:33:44 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <radoslav@kolev.info>) id 1QGrUA-0002kb-8d
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 02 May 2011 13:40:18 +0200
+Received: by vws2 with SMTP id 2so4762310vws.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 May 2011 04:37:40 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.52.181.65 with SMTP id du1mr2043223vdc.100.1304336260674; Mon,
+	02 May 2011 04:37:40 -0700 (PDT)
+Received: by 10.52.166.231 with HTTP; Mon, 2 May 2011 04:37:40 -0700 (PDT)
+In-Reply-To: <20110502105241.GA3275@jama.jama.net>
+References: <BANLkTik1xhYidSX6QugYpYv5BmXCL78JUA@mail.gmail.com>
+	<20110502105241.GA3275@jama.jama.net>
+Date: Mon, 2 May 2011 14:37:40 +0300
+Message-ID: <BANLkTinaUrDmaT02zL-H5KCPDVj9T6rm5A@mail.gmail.com>
+From: Radoslav Kolev <radoslav@kolev.info>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1304324573-31754-1-git-send-email-koen@openembedded.org>
-References: <1304324573-31754-1-git-send-email-koen@openembedded.org>
-Date: Mon, 02 May 2011 13:32:43 +0200
-Message-ID: <1304335963.3949.56.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: [PATCH] angstrom-2010-preferred-versions.inc: prefer DBus 1.4.1
+Subject: Re: buildindex is always 0, using BB_GIT_CLONE_FOR_SRCREV = "1"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,73 +31,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 May 2011 11:35:19 -0000
-X-Groupsio-MsgNum: 31555
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-SHK1mNU09snJkO0tNRgI"
+X-List-Received-Date: Mon, 02 May 2011 11:40:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-SHK1mNU09snJkO0tNRgI
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Mon, May 2, 2011 at 1:52 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Mon, May 02, 2011 at 01:18:08PM +0300, Radoslav Kolev wrote:
+>> Hi,
+>>
+>> I'm trying to make a recipe which gets the newest revision from a git
+>> repository.
+>>
+>> Also to get upgradable packages on different build machines I have the
+>>
+>> BB_GIT_CLONE_FOR_SRCREV = "1"
+>
+> You need to set empty
+> BB_LOCALCOUNT_OVERRIDE = ""
+> with it.
 
-Date: Mon, 2 May 2011 13:26:24 +0200
+Thanks Martin! I unset the variable in local.conf and it's working as
+expected now. I am sure I tested doing this before too, but with no
+effect. I must have made a change after the last time I tried
+unsetting BB_LOCALCOUNT_OVERRIDE which made it work now, but I can't
+track this down.
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
-This patch should go in before [1]
+I'd say I find the description in the bitbake.conf comment a little confusing:
 
-	[oe] [PATCH] systemd: update to v26
+# For now disable autoincrement of revision counter in SRCPV, whoever
+wants it, should enable it in local.conf or distro config
+# Revision counter is incremented only locally (bad for multiple
+builders filling shared feeds), LOCALCOUNT can be used to maintain
+# counter globally in OE metadata (LOCALCOUNT value set in recipe).
+# Make sure you disable it, if you want always upgradable paths for
+git recipes without bumping LOCALCOUNT with every SRCREV change
+# or if you're using AUTOREV feature.
+BB_LOCALCOUNT_OVERRIDE = "1"
 
-because otherwise task configure fails with the following error.
+My interpretation of this was obviously incorrect. From the first
+sentence "For now disable autoincrement ..." it implies that the
+current default value of "1" means that it (autoincrement) is
+disabled, so no change is needed. And from last sentence "Make sure
+you disable it," I understood 'it' as referring to the "autoincrement
+of revision counter in SRCPV", but it seems it's referring to the
+LOCALCOUNT_OVERRIDE. I think the last sentence will be more clear if
+changed to "Make sure you disable this override, if ..."
 
-| checking for UDEV... yes
-| checking for DBUS... configure: error: Package requirements ( dbus-1 >=3D=
- 1.3.2 ) were not met:
-|
-| Requested 'dbus-1 >=3D 1.3.2' but version of dbus is 1.2.24
-|
-| Consider adjusting the PKG_CONFIG_PATH environment variable if you
-| installed software in a non-standard prefix.
-|
-| Alternatively, you may set the environment variables DBUS_CFLAGS
-| and DBUS_LIBS to avoid the need to call pkg-config.
-| See the pkg-config man page for more details.
-|
-NOTE: package systemd-v26-r0: task do_configure: Failed
+Also, I thought the BB_LOCALCOUNT_OVERRIDE var was only concerned when
+keeping an incrementing counter in the local cache, and not when using
+BB_GIT_CLONE_FOR_SRCREV = "1".
 
-[1] http://patches.openembedded.org/patch/3061/
----
- .../include/angstrom-2010-preferred-versions.inc   |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+So to sum up my understanding now and see if it's correct:
 
-diff --git a/conf/distro/include/angstrom-2010-preferred-versions.inc b/con=
-f/distro/include/angstrom-2010-preferred-versions.inc
-index 5c28440..ae01b57 100644
---- a/conf/distro/include/angstrom-2010-preferred-versions.inc
-+++ b/conf/distro/include/angstrom-2010-preferred-versions.inc
-@@ -14,7 +14,7 @@ PREFERRED_VERSION_automake =3D "1.11.1"
- PREFERRED_VERSION_automake-native =3D "1.11.1"
- PREFERRED_VERSION_busybox 	=3D "1.18.4"
- PREFERRED_VERSION_cairo		=3D "1.10.0"
--PREFERRED_VERSION_dbus 		=3D "1.2.24"
-+PREFERRED_VERSION_dbus 		=3D "1.4.1"
- PREFERRED_VERSION_dropbear      =3D "0.52"
- PREFERRED_VERSION_fontconfig	=3D "2.8.0"
- PREFERRED_VERSION_glib-2.0 	=3D "2.28.0"
---=20
-1.7.4.4
+LOCALCOUNT_OVERRIDE actually does two things if unset - enable
+autoincrementing of revision counter (doesn't matter if it's coming
+from local counter stored in cache or the SCM system like git, svn,
+etc) and disable overriding the LOCALCOUNT value form withing reciper.
 
---=-SHK1mNU09snJkO0tNRgI
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+Regards,
+Radoslav Kolev
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk2+llsACgkQPX1aK2wOHVgVMQCfSseproweG61AIdqhV/ZJqNdo
-iHgAn1I/BhkfyUtXy876Q8ZQzjW+Gcvi
-=dC3j
------END PGP SIGNATURE-----
-
---=-SHK1mNU09snJkO0tNRgI--
