@@ -1,41 +1,24 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QGrux-0003fC-Tq
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 May 2011 14:08:00 +0200
-Received: by ewy5 with SMTP id 5so1701683ewy.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 May 2011 05:05:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=3u63HNp1lqPyHkCfedWUN5OvZAQSA5EIuXhmkN9RvEQ=;
-	b=dFHxBXkc+RtXNUmd9aIFETsitIdH84pOblwjplGmnivJAYWIuLc45M9JHUht6tYvZQ
-	QwDYwYl4QGhZlOiJIXjTEUudorlo0GWoCA+k2DCtr9rzyAJKAYJhHrH+bsgtrdb1tA/N
-	mI5MhgoWZQcLQYLIG6Yu/hTtG0d1k0SO9YIpI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=nvpX6SR5Uhl2c3MKxYh1yHUQsZKTq780P6aIHcKax7sk2QfPZvQRzk/LhkIrzc91dI
-	oU8mnLnMZSSkNQde4ICduSuKhMETXqGsLKzC7DoLAMALddCkhHefyHlgcq7LTLVWxVOK
-	LXkpbVr79M/vYMxbAzEYP3HHfHOP6K33GpETs=
-Received: by 10.14.49.210 with SMTP id x58mr3315229eeb.12.1304337919716;
-	Mon, 02 May 2011 05:05:19 -0700 (PDT)
-Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id u16sm4100299eei.2.2011.05.02.05.05.18
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 02 May 2011 05:05:18 -0700 (PDT)
-Date: Mon, 2 May 2011 14:05:11 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QGsiX-0004T9-DR for openembedded-devel@lists.openembedded.org;
+	Mon, 02 May 2011 14:59:13 +0200
+Received: from f053036031.adsl.alicedsl.de ([78.53.36.31]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QGsh0-0006aF-63 for openembedded-devel@lists.openembedded.org;
+	Mon, 02 May 2011 12:57:38 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110502120511.GC3275@jama.jama.net>
-References: <BANLkTik1xhYidSX6QugYpYv5BmXCL78JUA@mail.gmail.com>
-	<20110502105241.GA3275@jama.jama.net>
-	<BANLkTinaUrDmaT02zL-H5KCPDVj9T6rm5A@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <BANLkTinaUrDmaT02zL-H5KCPDVj9T6rm5A@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: buildindex is always 0, using BB_GIT_CLONE_FOR_SRCREV = "1"
+In-Reply-To: <1304337015.3949.62.camel@mattotaupa>
+References: <1304324573-31754-1-git-send-email-koen@openembedded.org>
+	<1304337015.3949.62.camel@mattotaupa>
+Date: Mon, 02 May 2011 14:56:37 +0200
+Message-ID: <1304340997.3949.64.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH] systemd: update to v26
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,111 +32,208 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 May 2011 12:08:00 -0000
-X-Groupsio-MsgNum: 31559
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="WfZ7S8PLGjBY9Voh"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 02 May 2011 12:59:13 -0000
+X-Groupsio-MsgNum: 31560
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-WHcerVAP0BmhjmBDqsOX"
 
---WfZ7S8PLGjBY9Voh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--=-WHcerVAP0BmhjmBDqsOX
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 02, 2011 at 02:37:40PM +0300, Radoslav Kolev wrote:
-> On Mon, May 2, 2011 at 1:52 PM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> > On Mon, May 02, 2011 at 01:18:08PM +0300, Radoslav Kolev wrote:
-> >> Hi,
-> >>
-> >> I'm trying to make a recipe which gets the newest revision from a git
-> >> repository.
-> >>
-> >> Also to get upgradable packages on different build machines I have the
-> >>
-> >> BB_GIT_CLONE_FOR_SRCREV =3D "1"
-> >
-> > You need to set empty
-> > BB_LOCALCOUNT_OVERRIDE =3D ""
-> > with it.
+Am Montag, den 02.05.2011, 13:50 +0200 schrieb Paul Menzel:
+> Am Montag, den 02.05.2011, 10:22 +0200 schrieb Koen Kooi:
+> > Signed-off-by: Koen Kooi <koen@openembedded.org>
+> > ---
+> >  recipes/systemd/files/disable_xml_generation.patch |   36 --------
+> >  recipes/systemd/files/execute.patch                |   17 ----
+> >  recipes/systemd/files/getty-serial@.service        |   19 ----
+> >  recipes/systemd/files/replace_accpet4.patch        |   26 ------
+> >  recipes/systemd/files/systemadm.patch              |   13 ---
+> >  ...-disable-xml-file-stuff-and-introspection.patch |   93 ++++++++++++=
+++++++++
+> >  recipes/systemd/systemd-v26/execute.patch          |   17 ++++
+> >  recipes/systemd/systemd-v26/getty-serial@.service  |   19 ++++
+> >  recipes/systemd/systemd-v26/replace_accpet4.patch  |   26 ++++++
+> >  recipes/systemd/systemd-v26/systemadm.patch        |   13 +++
+> >  recipes/systemd/systemd_git.bb                     |   26 ++++--
+> >  11 files changed, 185 insertions(+), 120 deletions(-)
+> >  delete mode 100644 recipes/systemd/files/disable_xml_generation.patch
+> >  delete mode 100644 recipes/systemd/files/execute.patch
+> >  delete mode 100644 recipes/systemd/files/getty-serial@.service
+> >  delete mode 100644 recipes/systemd/files/replace_accpet4.patch
+> >  delete mode 100644 recipes/systemd/files/systemadm.patch
+> >  create mode 100644 recipes/systemd/systemd-v26/0001-systemd-disable-xm=
+l-file-stuff-and-introspection.patch
+> >  create mode 100644 recipes/systemd/systemd-v26/execute.patch
+> >  create mode 100644 recipes/systemd/systemd-v26/getty-serial@.service
+> >  create mode 100644 recipes/systemd/systemd-v26/replace_accpet4.patch
+> >  create mode 100644 recipes/systemd/systemd-v26/systemadm.patch
 >=20
-> Thanks Martin! I unset the variable in local.conf and it's working as
-> expected now. I am sure I tested doing this before too, but with no
-> effect. I must have made a change after the last time I tried
-> unsetting BB_LOCALCOUNT_OVERRIDE which made it work now, but I can't
-> track this down.
+> `git log --stat -M -C -C` makes the diff lock much more daunting.
 >=20
-> I'd say I find the description in the bitbake.conf comment a little confu=
-sing:
+> [=E2=80=A6]
 >=20
-> # For now disable autoincrement of revision counter in SRCPV, whoever
-> wants it, should enable it in local.conf or distro config
-> # Revision counter is incremented only locally (bad for multiple
-> builders filling shared feeds), LOCALCOUNT can be used to maintain
-> # counter globally in OE metadata (LOCALCOUNT value set in recipe).
-> # Make sure you disable it, if you want always upgradable paths for
-> git recipes without bumping LOCALCOUNT with every SRCREV change
-> # or if you're using AUTOREV feature.
-> BB_LOCALCOUNT_OVERRIDE =3D "1"
+> > --- /dev/null
+> > +++ b/recipes/systemd/systemd-v26/systemadm.patch
+> > @@ -0,0 +1,13 @@
+> > +Index: git/src/systemadm.vala
+> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > +--- git.orig/src/systemadm.vala	2010-06-15 11:02:35.863509632 +0200
+> > ++++ git/src/systemadm.vala	2010-06-15 11:06:16.305986249 +0200
+> > +@@ -297,7 +297,7 @@
+> > +=20
+> > +                 bbox.pack_start(cancel_button, false, true, 0);
+> > +=20
+> > +-                bus =3D Bus.get(session ? BusType.SESSION : BusType.S=
+YSTEM);
+> > ++                bus =3D DBus.Bus.get(session ? DBus.BusType.SESSION :=
+ DBus.BusType.SYSTEM);
+> > +=20
+> > +                 manager =3D bus.get_object(
+> > +                                 "org.freedesktop.systemd1",
+> > diff --git a/recipes/systemd/systemd_git.bb b/recipes/systemd/systemd_g=
+it.bb
+> > index 5f98e54..7634b22 100644
+> > --- a/recipes/systemd/systemd_git.bb
+> > +++ b/recipes/systemd/systemd_git.bb
+
+Thinking about it, should not this be named `system_26.bb` to avoid
+confusion?
+
+> > @@ -1,48 +1,56 @@
+> >  DESCRIPTION =3D "Systemd a init replacement"
+> >  HOMEPAGE =3D "http://www.freedesktop.org/wiki/Software/systemd"
+> > -LICENSE =3D "GPL"
+> > +LICENSE =3D "GPLv2+
+> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D751419260aa954499f7abaabaa8=
+82bbe"
+> > +
+> >  DEPENDS =3D "readline udev dbus libcap2 libcgroup gtk+"
+
+`gtk+` should be removed. Actually I would prefer a separate patch
+including disabling it.
+
+> >  PRIORITY =3D "optional"
+> >  SECTION =3D "base/shell"
+> > =20
+> > -PV =3D "0.0"
+> > -PR_append =3D "+${SRCPV}"
+> > +PV =3D "v26"
+> > +#PR_append =3D "+${SRCPV}"
 >=20
-> My interpretation of this was obviously incorrect. From the first
-> sentence "For now disable autoincrement ..." it implies that the
-> current default value of "1" means that it (autoincrement) is
-> disabled, so no change is needed. And from last sentence "Make sure
-
-I think this part is right. Autoincrement is really disabled (you have
-constant 0 as LOCALCOUNT before rev.
-
-> you disable it," I understood 'it' as referring to the "autoincrement
-> of revision counter in SRCPV", but it seems it's referring to the
-> LOCALCOUNT_OVERRIDE. I think the last sentence will be more clear if
-> changed to "Make sure you disable this override, if ..."
-
-I agree on this one.
-
-
-> Also, I thought the BB_LOCALCOUNT_OVERRIDE var was only concerned when
-> keeping an incrementing counter in the local cache, and not when using
-> BB_GIT_CLONE_FOR_SRCREV =3D "1".
-
-Be aware that BB_GIT_CLONE_FOR_SRCREV also implies full git clone also
-for recipes not in your dependency tree (because it will parse PV
-variable with SRCPV even for recipe completely unrelated to your target
-- unless you blacklist such recipe ie with angstrom blacklister).
-
-> So to sum up my understanding now and see if it's correct:
+> Remove the commented line.
+> =20
+> >  inherit autotools vala
+> > =20
+> > -TAG =3D "1ebdf2d8793181f31b766b8342391aa1978f9917"
+> > +TAG =3D "${PV}"
+> > =20
+> >  SRC_URI =3D "git://anongit.freedesktop.org/systemd;protocol=3Dgit;tag=
+=3D${TAG} \
+> >             file://execute.patch \
+> > -           file://systemadm.patch \
+> > -           file://disable_xml_generation.patch \
+> > +#           file://systemadm.patch \
 >=20
-> LOCALCOUNT_OVERRIDE actually does two things if unset - enable
-> autoincrementing of revision counter (doesn't matter if it's coming
-> from local counter stored in cache or the SCM system like git, svn,
-> etc) and disable overriding the LOCALCOUNT value form withing reciper.
-
-I'm not native english speaker, so I agree that comment could be
-improved. Please send it as patch and hopefully others will comment on
-it.
-
-
+> Maybe a comment in the recipe or the commit message would be nice, why
+> this is commented. Could it be needed in the future?
 >=20
-> Regards,
-> Radoslav Kolev
+> > +           file://0001-systemd-disable-xml-file-stuff-and-introspectio=
+n.patch \
+> >             file://replace_accpet4.patch \
+> >             file://getty-serial@.service \
+> >            "
+> > =20
+> >  S =3D "${WORKDIR}/git"
+> > =20
+> > +# The gtk+ tools should get built as a seperate recipe e.g. systemd-to=
+ols
 >=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> s/seperate/separate/
+>=20
+> =E2=80=A6 to not force people to build all gtk+ packages/recipes.
+>=20
+> >  EXTRA_OECONF =3D " --with-distro=3Ddebian \
+> >                   --with-rootdir=3D${base_prefix} \
+> > +                 --disable-gtk \
+> >                 "
+> > =20
+> > -PACKAGES =3D "${PN} ${PN}-gui ${PN}-dbg ${PN}-doc"
+> > +PACKAGES =3D+ "${PN}-gui"
+> > =20
+> >  FILES_${PN}-gui =3D "${bindir}/systemadm"
+> > =20
+> >  FILES_${PN} =3D " ${base_bindir}/* \
+> >                  ${datadir}/dbus-1/services \
+> >                  ${datadir}/dbus-1/system-services \
+> > +                ${datadir}/polkit-1 \
+> >                  ${datadir}/${PN} \
+> >                  ${sysconfdir} \
+> >                  ${base_libdir}/systemd/* \
+> >                  ${base_libdir}/systemd/system/* \
+> >                  ${base_libdir}/udev/rules.d \
+> > +                ${base_libdir}/security/*.so \
+> >                  /cgroup \
+> > -                ${bindir}/systemd-install \
+> > +                ${bindir}/systemd* \
+> > +                ${libdir}/tmpfiles.d/*.conf \
+> > +                ${libdir}/systemd \
+> >                 "
+> > =20
+> > -FILES_${PN}-dbg +=3D " /lib/systemd/.debug "
+> > +FILES_${PN}-dbg +=3D "${base_libdir}/systemd/.debug ${base_libdir}/sys=
+temd/*/.debug"
+> > =20
+> >  def get_baudrate(bb, d):
+> >      return bb.data.getVar('SERIAL_CONSOLE', d, 1).split()[0]
+>=20
+> A split in two commits to fix/improve the recipe and to update to v26
+> would have been nice.
+>=20
+> Anyway, using `angstrom-2010.x` for `MACHINE =3D "beagleboard"` fails wit=
+h
+> the following error message.
+>=20
+>         [=E2=80=A6]
+>           CCLD   systemd-getty-generator
+>           GEN    man/systemd.1
+>         I/O error : Attempt to load network entity http://docbook.sourcef=
+orge.net/release/xsl/current/manpages/docbook.xsl
+>         warning: failed to load external entity "http://docbook.sourcefor=
+ge.net/release/xsl/current/manpages/docbook.xsl"
+>         cannot parse http://docbook.sourceforge.net/release/xsl/current/m=
+anpages/docbook.xsl
+>         make[1]: *** [man/systemd.1] Error 4
+>         make[1]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/=
+work/armv7a-angstrom-linux-gnueabi/systemd-v26-r0/git'
+>         make: *** [all] Error 2
+>         + die 'oe_runmake failed'
+>         + oefatal 'oe_runmake failed'
+>         + echo FATAL: 'oe_runmake failed'
+>         FATAL: oe_runmake failed
+>         + exit 1
+>=20
+> Please find `log.do_compile` attached.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---WfZ7S8PLGjBY9Voh
-Content-Type: application/pgp-signature
+Thanks,
+
+Paul
+
+--=-WHcerVAP0BmhjmBDqsOX
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAk2+nfcACgkQN1Ujt2V2gBxJQQCfSnO+wDLSAkLtwAVIUeukMzoI
-JAUAn2JD2uH5ccW4m8aFLNbxq3QBm8Pw
-=tGPK
+iEYEABECAAYFAk2+qgUACgkQPX1aK2wOHVgNgwCeKtAJXVTcInKZxW4KJ2Ryb+lQ
+cjIAnjceUZUAVJYeImDzDah/ipo4LccZ
+=2mOm
 -----END PGP SIGNATURE-----
 
---WfZ7S8PLGjBY9Voh--
+--=-WHcerVAP0BmhjmBDqsOX--
