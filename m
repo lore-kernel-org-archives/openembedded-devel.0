@@ -1,32 +1,20 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QGpDo-0008Ft-Qp for openembedded-devel@lists.openembedded.org;
-	Mon, 02 May 2011 11:15:17 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QGpBH-0000TG-Q0 for openembedded-devel@lists.openembedded.org;
-	Mon, 02 May 2011 11:12:39 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 May 2011 11:12:39 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <radoslav@kolev.info>) id 1QGqFB-00011K-L6
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 02 May 2011 12:20:45 +0200
+Received: by vws2 with SMTP id 2so4728118vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 May 2011 11:12:39 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 02 May 2011 03:18:08 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.52.75.165 with SMTP id d5mr5873337vdw.300.1304331488831; Mon,
+	02 May 2011 03:18:08 -0700 (PDT)
+Received: by 10.52.166.231 with HTTP; Mon, 2 May 2011 03:18:08 -0700 (PDT)
+Date: Mon, 2 May 2011 13:18:08 +0300
+Message-ID: <BANLkTik1xhYidSX6QugYpYv5BmXCL78JUA@mail.gmail.com>
+From: Radoslav Kolev <radoslav@kolev.info>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 02 May 2011 11:12:20 +0200
-Message-ID: <iplshp$vse$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-X-Enigmail-Version: 1.0.1
-Subject: [2011.03-maintenance] Pull request #16
+Subject: buildindex is always 0, using BB_GIT_CLONE_FOR_SRCREV = "1"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,47 +28,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 May 2011 09:15:17 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 02 May 2011 10:20:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Tom,
+I'm trying to make a recipe which gets the newest revision from a git
+repository.
 
-Please pull the 5 commits from here:
+Also to get upgradable packages on different build machines I have the
 
-URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-Branch: 2011.03-maintenance
+BB_GIT_CLONE_FOR_SRCREV = "1"
 
-Jeff Lance (1):
-      am-benchmarks: add return values
+option set in my local.conf.
 
-Koen Kooi (3):
-      opencv 2.2: fix opencv-dev dependency chain
-      opencv 2.2: include actual headers in the -dev package
-      linux-omap-psp 2.6.32: add support for 5MP camera board
+In the recipe I have
 
-Michael 'Mickey' Lauer (1):
-      qt4-embedded: enable support for the built-in LinuxInput keyboard
+SRCREV = "${AUTOREV}"
+PV = "0.4+gitr-${SRCPV}"
 
-Philip Balister (1):
-      uhd : Update to latest release. Both source and fpga images.
+but I always get a PV of the form
+0.4+gitr-0+f5bb7404c351a08cf405fbe8d667b446ae8e0ef5-r10 where the
+buildindex stays at zero, even though new revisions are correctly
+checked out from the git repository.
 
-These are all cherry-picks from .dev.
+I added some print statements to bitbake/lib/bb/fetch/__init__.py and
+git.py and it seems to work fine until some point.
 
-regards,
+The _sortable_buildindex in git.py returns the correct incrementing
+value, also the first invocation of get_srcrev() returns a correct
+value with incrementing buildindex like
+168+f5bb7404c351a08cf405fbe8d667b446ae8e0ef5l. But then something
+happens and in all subsequent invocations by bitbakeit get_srcrev()
+always returns 0+f5bb7404c351a08cf405fbe8d667b446ae8e0ef5l.
 
-Koen
+Any help or ideas how to further debug the issue are greatly
+appreciated.  I'm using bitbake 1.10.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNvnV0MkyGM64RGpERAptmAKClbBQspBMjxpazJ2lTDXGezE8CSgCgmCda
-/eYseg2E8z3khzooXDZ0PYQ=
-=P2f4
------END PGP SIGNATURE-----
-
+Best regards,
+Radoslav Kolev
 
 
