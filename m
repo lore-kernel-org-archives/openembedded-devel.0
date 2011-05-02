@@ -1,20 +1,32 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <radoslav@kolev.info>) id 1QGqFB-00011K-L6
+Received: from 7.27.mail-out.ovh.net ([46.105.34.120] helo=27.mail-out.ovh.net)
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1QGqlQ-0001Sn-1M
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 May 2011 12:20:45 +0200
-Received: by vws2 with SMTP id 2so4728118vws.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 May 2011 03:18:08 -0700 (PDT)
+	Mon, 02 May 2011 12:54:04 +0200
+Received: (qmail 17218 invoked by uid 503); 2 May 2011 11:46:50 -0000
+Received: from b9.ovh.net (HELO mail621.ha.ovh.net) (213.186.33.59)
+	by 27.mail-out.ovh.net with SMTP; 2 May 2011 11:46:45 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 2 May 2011 12:51:24 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 2 May 2011 12:51:23 +0200
+Message-ID: <4DBE8CAA.3050500@eukrea.com>
+Date: Mon, 02 May 2011 12:51:22 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.10
 MIME-Version: 1.0
-Received: by 10.52.75.165 with SMTP id d5mr5873337vdw.300.1304331488831; Mon,
-	02 May 2011 03:18:08 -0700 (PDT)
-Received: by 10.52.166.231 with HTTP; Mon, 2 May 2011 03:18:08 -0700 (PDT)
-Date: Mon, 2 May 2011 13:18:08 +0300
-Message-ID: <BANLkTik1xhYidSX6QugYpYv5BmXCL78JUA@mail.gmail.com>
-From: Radoslav Kolev <radoslav@kolev.info>
-To: openembedded-devel@lists.openembedded.org
-Subject: buildindex is always 0, using BB_GIT_CLONE_FOR_SRCREV = "1"
+To: Radoslav Kolev <radoslav@kolev.info>
+References: <BANLkTik1xhYidSX6QugYpYv5BmXCL78JUA@mail.gmail.com>
+In-Reply-To: <BANLkTik1xhYidSX6QugYpYv5BmXCL78JUA@mail.gmail.com>
+X-Ovh-Tracer-Id: 10136195388393762264
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: buildindex is always 0, using BB_GIT_CLONE_FOR_SRCREV = "1"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,44 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 May 2011 10:20:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 02 May 2011 10:54:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+Hi Radoslav,
 
-I'm trying to make a recipe which gets the newest revision from a git
-repository.
+On 02/05/2011 12:18, Radoslav Kolev wrote:
+> In the recipe I have
+>
+> SRCREV = "${AUTOREV}"
+> PV = "0.4+gitr-${SRCPV}"
+>
+replace SRCPV with SRVREV in PV and you will the the rev instead of O.
 
-Also to get upgradable packages on different build machines I have the
-
-BB_GIT_CLONE_FOR_SRCREV = "1"
-
-option set in my local.conf.
-
-In the recipe I have
-
-SRCREV = "${AUTOREV}"
-PV = "0.4+gitr-${SRCPV}"
-
-but I always get a PV of the form
-0.4+gitr-0+f5bb7404c351a08cf405fbe8d667b446ae8e0ef5-r10 where the
-buildindex stays at zero, even though new revisions are correctly
-checked out from the git repository.
-
-I added some print statements to bitbake/lib/bb/fetch/__init__.py and
-git.py and it seems to work fine until some point.
-
-The _sortable_buildindex in git.py returns the correct incrementing
-value, also the first invocation of get_srcrev() returns a correct
-value with incrementing buildindex like
-168+f5bb7404c351a08cf405fbe8d667b446ae8e0ef5l. But then something
-happens and in all subsequent invocations by bitbakeit get_srcrev()
-always returns 0+f5bb7404c351a08cf405fbe8d667b446ae8e0ef5l.
-
-Any help or ideas how to further debug the issue are greatly
-appreciated.  I'm using bitbake 1.10.
-
-Best regards,
-Radoslav Kolev
+Eric
 
 
