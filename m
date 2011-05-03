@@ -1,22 +1,24 @@
 Received: from mailout-de.gmx.net ([213.165.64.22])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1QHGod-00053P-46
+	(envelope-from <schnitzeltony@gmx.de>) id 1QHGoX-00053a-IP
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 May 2011 16:43:07 +0200
-Received: (qmail invoked by alias); 03 May 2011 14:40:17 -0000
+	Tue, 03 May 2011 16:43:26 +0200
+Received: (qmail invoked by alias); 03 May 2011 14:40:21 -0000
 Received: from p5B0A2372.dip.t-dialin.net (EHLO localhost.localdomain)
 	[91.10.35.114]
-	by mail.gmx.net (mp010) with SMTP; 03 May 2011 16:40:17 +0200
+	by mail.gmx.net (mp010) with SMTP; 03 May 2011 16:40:21 +0200
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19sR49XpKZs27UTNxTKKYr/QIEtBvNr22RpwrFsUw
-	Ntz+dNqoR8NHSv
+X-Provags-ID: V01U2FsdGVkX19jcRlJeJlj3dj297KyIQrlxDkkQGIY+5UgU85eIY
+	m9I0lurOXkXPUm
 From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 May 2011 16:40:48 +0200
-Message-Id: <1304433651-3278-1-git-send-email-schnitzeltony@gmx.de>
+Date: Tue,  3 May 2011 16:40:51 +0200
+Message-Id: <1304433651-3278-4-git-send-email-schnitzeltony@gmx.de>
 X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1304433651-3278-1-git-send-email-schnitzeltony@gmx.de>
+References: <1304433651-3278-1-git-send-email-schnitzeltony@gmx.de>
 X-Y-GMX-Trusted: 0
-Subject: [PATCH v2 1/4] elftosb: Add native helper to create boot stream files used by freescale iMX SoCs
+Subject: [PATCH v2 4/4] mx28evk: Add new machine definition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,60 +32,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 May 2011 14:43:07 -0000
+X-List-Received-Date: Tue, 03 May 2011 14:43:26 -0000
 
 
 Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
 ---
- .../elftosb/uclibc_and_eglibc_have_no_powf.patch   |   12 ++++++++++++
- recipes/freescale/elftosb_10.12.01.bb              |   20 ++++++++++++++++++++
- 2 files changed, 32 insertions(+), 0 deletions(-)
- create mode 100644 recipes/freescale/elftosb/uclibc_and_eglibc_have_no_powf.patch
- create mode 100644 recipes/freescale/elftosb_10.12.01.bb
+ conf/machine/include/imx28.inc |   19 +++++++++++++++++++
+ conf/machine/mx28evk.conf      |   23 +++++++++++++++++++++++
+ 2 files changed, 42 insertions(+), 0 deletions(-)
+ create mode 100644 conf/machine/include/imx28.inc
+ create mode 100644 conf/machine/mx28evk.conf
 
-diff --git a/recipes/freescale/elftosb/uclibc_and_eglibc_have_no_powf.patch b/recipes/freescale/elftosb/uclibc_and_eglibc_have_no_powf.patch
+diff --git a/conf/machine/include/imx28.inc b/conf/machine/include/imx28.inc
 new file mode 100644
-index 0000000..7874023
+index 0000000..38248a8
 --- /dev/null
-+++ b/recipes/freescale/elftosb/uclibc_and_eglibc_have_no_powf.patch
-@@ -0,0 +1,12 @@
-+--- a/elftosb2/ElftosbAST.cpp.old	2010-09-20 15:28:03.000000000 +0200
-++++ b/elftosb2/ElftosbAST.cpp	2011-04-18 22:25:54.000000000 +0200
-+@@ -755,7 +755,8 @@
-+ 			#ifdef WIN32
-+ 				result = 0;
-+ 			#else
-+-				result = lroundf(powf(float(leftValue), float(rightValue)));
-++				//result = lroundf(powf(float(leftValue), float(rightValue)));
-++				result = 0;
-+ 			#endif
-+ 				break;
-+ 			case kBitwiseAnd:
-diff --git a/recipes/freescale/elftosb_10.12.01.bb b/recipes/freescale/elftosb_10.12.01.bb
++++ b/conf/machine/include/imx28.inc
+@@ -0,0 +1,19 @@
++SOC_FAMILY = "mx28"
++TARGET_ARCH = "arm"
++
++require conf/machine/include/tune-arm926ejs.inc
++
++PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
++
++# Increase this everytime you change something in the kernel
++MACHINE_KERNEL_PR = "r0"
++
++KERNEL_IMAGETYPE = "uImage"
++
++UBOOT_ENTRYPOINT = "0x8000"
++UBOOT_LOADADDRESS = "0x8000"
++
++EXTRA_IMAGEDEPENDS += "u-boot"
++
++IMAGE_FSTYPES += "jffs2 tar.bz2"
++
+diff --git a/conf/machine/mx28evk.conf b/conf/machine/mx28evk.conf
 new file mode 100644
-index 0000000..9fc18a0
+index 0000000..e093ffa
 --- /dev/null
-+++ b/recipes/freescale/elftosb_10.12.01.bb
-@@ -0,0 +1,20 @@
-+LICENSE = "FREESCALE"
-+PR = "r0"
++++ b/conf/machine/mx28evk.conf
+@@ -0,0 +1,23 @@
++#@Name: Freescale i.MX28 Evaluation Kit
++#@DESCRIPTION: Machine configuration for Freescale i.MX28 Evaluation Kit
++#@Homepage: http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=MCIMX28EVKJ&fr=g
 +
-+SRC_URI = "http://foss.doredevelopment.dk/mirrors/imx/elftosb-${PV}.tar.gz \
-+           file://uclibc_and_eglibc_have_no_powf.patch"
++UBOOT_MACHINE = "mx28_evk_config"
 +
-+SRC_URI[md5sum] = "e8005d606c1e0bb3507c82f6eceb3056"
-+SRC_URI[sha256sum] = "77bb6981620f7575b87d136d94c7daa88dd09195959cc75fc18b138369ecd42b"
++PREFERRED_PROVIDER_virtual/kernel = "linux-imx"
 +
-+BBCLASSEXTEND = "native"
++MACHINE_FEATURES = "kernel26 apm alsa ext2 usbhost usbgadget screen"
 +
-+do_install() {
-+        install -d ${D}${bindir}
-+        install ${S}/bld/linux/elftosb ${D}${bindir}/
-+        install ${S}/bld/linux/keygen ${D}${bindir}/
-+        install ${S}/bld/linux/sbtool ${D}${bindir}/
-+}
++MACHINE_GUI_CLASS = "bigscreen"
++LOGO_SIZE = "vga"
 +
-+NATIVE_INSTALL_WORKS = "1"
++PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
++XSERVER = "xserver-kdrive-fbdev"
++
++require conf/machine/include/imx28.inc
++
++# used by sysvinit_2
++SERIAL_CONSOLE = "115200 ttymxc0"
++
++ROOT_FLASH_SIZE = "128"
 +
 -- 
 1.7.4.4
