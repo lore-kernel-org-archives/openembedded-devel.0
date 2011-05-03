@@ -1,24 +1,22 @@
 Received: from mailout-de.gmx.net ([213.165.64.22])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1QHGoS-00053K-6p
+	(envelope-from <schnitzeltony@gmx.de>) id 1QHGod-00053P-46
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 May 2011 16:42:56 +0200
-Received: (qmail invoked by alias); 03 May 2011 14:40:18 -0000
+	Tue, 03 May 2011 16:43:07 +0200
+Received: (qmail invoked by alias); 03 May 2011 14:40:17 -0000
 Received: from p5B0A2372.dip.t-dialin.net (EHLO localhost.localdomain)
 	[91.10.35.114]
-	by mail.gmx.net (mp010) with SMTP; 03 May 2011 16:40:18 +0200
+	by mail.gmx.net (mp010) with SMTP; 03 May 2011 16:40:17 +0200
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/q0+lzWWPqWzYaZ6O4mYpFvVIAHBvaNopDUtQQeq
-	v0QUJAC4VE9spe
+X-Provags-ID: V01U2FsdGVkX19sR49XpKZs27UTNxTKKYr/QIEtBvNr22RpwrFsUw
+	Ntz+dNqoR8NHSv
 From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 May 2011 16:40:49 +0200
-Message-Id: <1304433651-3278-2-git-send-email-schnitzeltony@gmx.de>
+Date: Tue,  3 May 2011 16:40:48 +0200
+Message-Id: <1304433651-3278-1-git-send-email-schnitzeltony@gmx.de>
 X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1304433651-3278-1-git-send-email-schnitzeltony@gmx.de>
-References: <1304433651-3278-1-git-send-email-schnitzeltony@gmx.de>
 X-Y-GMX-Trusted: 0
-Subject: [PATCH v2 2/4] u-boot: Add support for freescale iMX28 SoCs
+Subject: [PATCH v2 1/4] elftosb: Add native helper to create boot stream files used by freescale iMX SoCs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,49 +30,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 May 2011 14:42:56 -0000
+X-List-Received-Date: Tue, 03 May 2011 14:43:07 -0000
 
 
 Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
 ---
- recipes/u-boot/u-boot_git.bb |   24 ++++++++++++++++++++++++
- 1 files changed, 24 insertions(+), 0 deletions(-)
+ .../elftosb/uclibc_and_eglibc_have_no_powf.patch   |   12 ++++++++++++
+ recipes/freescale/elftosb_10.12.01.bb              |   20 ++++++++++++++++++++
+ 2 files changed, 32 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/freescale/elftosb/uclibc_and_eglibc_have_no_powf.patch
+ create mode 100644 recipes/freescale/elftosb_10.12.01.bb
 
-diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
-index 2cf5b12..b51c83f 100644
---- a/recipes/u-boot/u-boot_git.bb
-+++ b/recipes/u-boot/u-boot_git.bb
-@@ -296,6 +296,30 @@ SRC_URI_append_c7x0 = "file://pdaXrom-u-boot.patch \
- SRC_URI_sheevaplug = "git://git.denx.de/u-boot-marvell.git;protocol=git;branch=master"
- SRCREV_sheevaplug = "749c971873dbba301bd138c95d31223a25b32150"
- 
-+SRC_URI_mx28 = "git://opensource.freescale.com/pub/scm/imx/uboot-imx.git;protocol=http;branch=imx_v2009.08_10.12.01 \
-+                http://foss.doredevelopment.dk/mirrors/imx/imx-bootlets-src-${PV_imx_bootlets}.tar.gz;name=imx-bootlets"
-+SRCREV_mx28 = "e4437f1c192a1a68028e6fcff3f50ff50352041d"
-+SRC_URI[imx-bootlets.md5sum] = "cf0ab3822dca694b930a051501c1d0e4"
-+SRC_URI[imx-bootlets.sha256sum] = "63f6068ae36884adef4259bbb1fe2591755718f22c46d0a59d854883dfab1ffc"
-+PV_mx28 = "2009.08-imx+${PR}+gitr${SRCREV}"
-+PV_imx_bootlets = "10.12.01"
-+DEPENDS_append_mx28 = " elftosb-native"
+diff --git a/recipes/freescale/elftosb/uclibc_and_eglibc_have_no_powf.patch b/recipes/freescale/elftosb/uclibc_and_eglibc_have_no_powf.patch
+new file mode 100644
+index 0000000..7874023
+--- /dev/null
++++ b/recipes/freescale/elftosb/uclibc_and_eglibc_have_no_powf.patch
+@@ -0,0 +1,12 @@
++--- a/elftosb2/ElftosbAST.cpp.old	2010-09-20 15:28:03.000000000 +0200
+++++ b/elftosb2/ElftosbAST.cpp	2011-04-18 22:25:54.000000000 +0200
++@@ -755,7 +755,8 @@
++ 			#ifdef WIN32
++ 				result = 0;
++ 			#else
++-				result = lroundf(powf(float(leftValue), float(rightValue)));
+++				//result = lroundf(powf(float(leftValue), float(rightValue)));
+++				result = 0;
++ 			#endif
++ 				break;
++ 			case kBitwiseAnd:
+diff --git a/recipes/freescale/elftosb_10.12.01.bb b/recipes/freescale/elftosb_10.12.01.bb
+new file mode 100644
+index 0000000..9fc18a0
+--- /dev/null
++++ b/recipes/freescale/elftosb_10.12.01.bb
+@@ -0,0 +1,20 @@
++LICENSE = "FREESCALE"
++PR = "r0"
 +
-+do_compile_prepend_mx28() {
-+	# We just build the bootlets here
-+	oe_runmake -C ${WORKDIR}/imx-bootlets-src-${PV_imx_bootlets} -e MAKEFLAGS= linux_prep boot_prep power_prep CC="${CC}" CFLAGS="${CFLAGS}" AR="${AR}" BOARD=iMX28_EVK
++SRC_URI = "http://foss.doredevelopment.dk/mirrors/imx/elftosb-${PV}.tar.gz \
++           file://uclibc_and_eglibc_have_no_powf.patch"
++
++SRC_URI[md5sum] = "e8005d606c1e0bb3507c82f6eceb3056"
++SRC_URI[sha256sum] = "77bb6981620f7575b87d136d94c7daa88dd09195959cc75fc18b138369ecd42b"
++
++BBCLASSEXTEND = "native"
++
++do_install() {
++        install -d ${D}${bindir}
++        install ${S}/bld/linux/elftosb ${D}${bindir}/
++        install ${S}/bld/linux/keygen ${D}${bindir}/
++        install ${S}/bld/linux/sbtool ${D}${bindir}/
 +}
 +
-+do_deploy_append_mx28 () {
-+	cd ${WORKDIR}/imx-bootlets-src-${PV_imx_bootlets}
-+	sed -i 's,[^ *]u_boot.*;,\tu_boot="'${S}/u-boot'";,' uboot_ivt.bd
-+	sed -i 's,[^ *]u_boot.*;,\tu_boot="'${S}/u-boot'";,' uboot.bd
-+	elftosb -z -c uboot.bd -o imx28_uboot.sb
-+	elftosb -z -f imx28 -c uboot_ivt.bd -o imx28_ivt_uboot.sb
-+	install -d ${DEPLOY_DIR_IMAGE}
-+	install -m 0644 ${WORKDIR}/imx-bootlets-src-${PV_imx_bootlets}/imx28*uboot.sb ${DEPLOY_DIR_IMAGE}/
-+}
++NATIVE_INSTALL_WORKS = "1"
 +
- SRC_URI_xilinx-ml507 = "git://git.xilinx.com/u-boot-xlnx.git;protocol=git"
- SRCREV_xilinx-ml507 = "26e999650cf77c16f33c580abaadab2532f5e8b2"
- 
 -- 
 1.7.4.4
 
