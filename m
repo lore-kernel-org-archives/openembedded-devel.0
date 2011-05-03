@@ -1,39 +1,36 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1QHISe-0000GX-6P
+	(envelope-from <heroor@gmail.com>) id 1QHIo5-0000fN-PA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 May 2011 18:28:33 +0200
-Received: by vxd7 with SMTP id 7so236620vxd.6
+	Tue, 03 May 2011 18:50:41 +0200
+Received: by qwh5 with SMTP id 5so160031qwh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 May 2011 09:25:54 -0700 (PDT)
+	Tue, 03 May 2011 09:48:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
-	:date:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	bh=Q987adZ2RIJ2LVPD0Rcjzr9qaNztTeOcjBlTv7GRZmE=;
-	b=NrKY3kzE9WcgW1LNoMe7QXm+Mycp1OMsyTNCxe7ca0NbsQT73kfs1EPf8kF8+JExc7
-	ve6WNEZM2kEBzf7Qt0rQPYekPIISJsbP46/pBkcd+8SMvje115wuL7SWRFbd81V7DDbj
-	zOp6yHs6vsGaAn8bZyFM/FKrIsBIWaNzBncCQ=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=f3QmZ/ZB4Ut8sDlxf0LD+Y81SHn1c1Il2JrFXf2PDGE=;
+	b=BW4x763hXUkR1tWeBRMo7H5YLxAryHV0cZnqPmE/61o/ToVnYL1+/+aUyvaD5OPZGl
+	n+Jsn7VGimX7EzW22x1Ovf+mRbZgJtFYs4CDTV2f/kO/TTaggcDVUOe78Gz6S3Om0aO4
+	/ET2TzngUolneychdbGVPF944YkLt2SC3UPuY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=RKPpDDcB2g/sVm9mEE1+jIJDbkQ4OUwu8mfD2w4CEm+GI7vsGK7skVQRt+8NL0vRoQ
-	JHWq5H4RY3Yw9O3bqTkh0SRmuv3kxdt6Dc6j5mUzsdd0faghCApe0BVpHRDgpqw+5BAq
-	vJ0Qd6ZQpK94gb2c/cK0L7TaDZGmnTZtmGtSk=
-Received: by 10.52.66.165 with SMTP id g5mr66245vdt.61.1304439954032; Tue, 03
-	May 2011 09:25:54 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=wQmwaLrZLpKQAm3uiHjiZosnMjBjAa1IMW8D2bkQHbpOKlNL24KXVYF+xCUQEPTl+p
+	iXdmJ9Vw6dQqu00l8jZMTGIjeRkA3rguSoHOOaAvZZXXIX6bi8v/aJtPxtUow1y1bM6n
+	Gx26XLxKxk4/62rAyTLYdN4ytbVHZCBkp5Eng=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.52.186.170 with HTTP; Tue, 3 May 2011 09:25:34 -0700 (PDT)
-In-Reply-To: <4DC0192E.3010808@kernelconcepts.de>
-References: <1304434485.13481.79.camel@mattotaupa>
-	<4DC0192E.3010808@kernelconcepts.de>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 3 May 2011 09:25:34 -0700
-X-Google-Sender-Auth: GGpswAErB6loyNKpvCtM5pk4BTA
-Message-ID: <BANLkTimT+YtwqHusRvxhEkVSDDQ8OGfF6g@mail.gmail.com>
+Received: by 10.224.210.8 with SMTP id gi8mr41230qab.292.1304441283715; Tue,
+	03 May 2011 09:48:03 -0700 (PDT)
+Received: by 10.224.2.209 with HTTP; Tue, 3 May 2011 09:48:03 -0700 (PDT)
+In-Reply-To: <20110501173015.GI27708@ibawizard.net>
+References: <1304243449-12028-1-git-send-email-heroor@ti.com>
+	<20110501173015.GI27708@ibawizard.net>
+Date: Tue, 3 May 2011 22:18:03 +0530
+Message-ID: <BANLkTimKHp5M5VvMR21+C_rSRBiu2M0BKQ@mail.gmail.com>
+From: Siddharth Heroor <heroor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
-Subject: Re: error in push of origin/org.openmbedded.dev
+Subject: Re: [PATCH 1/2] zeromq: Add zeromq socket library.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,26 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 May 2011 16:28:33 -0000
+X-List-Received-Date: Tue, 03 May 2011 16:50:41 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 3, 2011 at 8:03 AM, Florian Boor
-<florian.boor@kernelconcepts.de> wrote:
-> Am 03.05.2011 16:54, schrieb Paul Menzel:
->> you pushed to org.open*mb*edded.dev and therefore a new branch was
->> created.
+On Sun, May 1, 2011 at 11:00 PM, Petr =C5=A0tetiar <ynezz@true.cz> wrote:
+> Siddharth Heroor <heroor@gmail.com> [2011-05-01 15:20:48]:
 >
-> Args - sorry my bad, I have a typo in the local branch name. Interesting what
-> can happen working on a fresh tree :-)
+> Hi,
+>
+>> +PR =3D "r1"
+>> +
+>> +SRC_URI =3D "http://download.zeromq.org/zeromq-${PV}.tar.gz"
+>> +
+>> +inherit autotools
+>
+> for version 2.1.1 I've needed also the following:
+>
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0DEPENDS +=3D "util-linux-ng"
+>
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0do_configure_prepend() {
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0./autogen.sh
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0}
+>
+> It's not needed anymore?
+Is the older recipe available somewhere? I didn't have to do this for
+the latest version.
 
-All the more reason to use master, which is less prone to such typos.
-org.openembedded.dev is just a compatibility pointer at master, master
-is the real branch.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+--=20
+Sid
 
 
