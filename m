@@ -1,35 +1,34 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QHA2r-0001ZN-OE for openembedded-devel@lists.openembedded.org;
-	Tue, 03 May 2011 09:29:21 +0200
+	id 1QHA65-0001gB-SI for openembedded-devel@lists.openembedded.org;
+	Tue, 03 May 2011 09:32:41 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QHA0A-00073Z-3i for openembedded-devel@lists.openembedded.org;
-	Tue, 03 May 2011 09:26:34 +0200
+	id 1QHA3a-0000Hh-R6 for openembedded-devel@lists.openembedded.org;
+	Tue, 03 May 2011 09:30:06 +0200
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 May 2011 09:26:34 +0200
+	Tue, 03 May 2011 09:30:06 +0200
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 May 2011 09:26:34 +0200
+	Tue, 03 May 2011 09:30:06 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 03 May 2011 09:26:12 +0200
-Message-ID: <ipoamp$7ls$1@dough.gmane.org>
-References: <1304370168-4354-1-git-send-email-schnitzeltony@gmx.de>
-	<1304370168-4354-2-git-send-email-schnitzeltony@gmx.de>
+Date: Tue, 03 May 2011 09:29:10 +0200
+Message-ID: <ipoasc$8ti$1@dough.gmane.org>
+References: <531B6536C9F737458807DF75064873C801ED5F36E7A6@mta-digimail.MTA.INT>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1304370168-4354-2-git-send-email-schnitzeltony@gmx.de>
+In-Reply-To: <531B6536C9F737458807DF75064873C801ED5F36E7A6@mta-digimail.MTA.INT>
 X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH 1/4] mx28evk: Add new machine definition
+Subject: Re: troubles building rule qt4-embedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,87 +42,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 May 2011 07:29:21 -0000
+X-List-Received-Date: Tue, 03 May 2011 07:32:42 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Can you make this 4/4, otherwise bisecting will be broken since this
-machines lacks uboot and kernel.
-
-On 02-05-11 23:02, Andreas Mueller wrote:
+On 03-05-11 09:16, Bosi Daniele wrote:
+> Guys,
+> I have got some troubles building the rule qt4-embedded, during the build of "meta-toolchain-qte".
+> I'm working on an embedded board with a mpc5121 powerpc, using a "angstrom-2008.1" machine.
 > 
-> Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
-> ---
->  conf/machine/include/imx28.inc |   19 +++++++++++++++++++
->  conf/machine/mx28evk.conf      |   23 +++++++++++++++++++++++
->  2 files changed, 42 insertions(+), 0 deletions(-)
->  create mode 100644 conf/machine/include/imx28.inc
->  create mode 100644 conf/machine/mx28evk.conf
-> 
-> diff --git a/conf/machine/include/imx28.inc b/conf/machine/include/imx28.inc
-> new file mode 100644
-> index 0000000..38248a8
-> --- /dev/null
-> +++ b/conf/machine/include/imx28.inc
-> @@ -0,0 +1,19 @@
-> +SOC_FAMILY = "mx28"
-> +TARGET_ARCH = "arm"
-> +
-> +require conf/machine/include/tune-arm926ejs.inc
-> +
-> +PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-> +
-> +# Increase this everytime you change something in the kernel
-> +MACHINE_KERNEL_PR = "r0"
-> +
-> +KERNEL_IMAGETYPE = "uImage"
-> +
-> +UBOOT_ENTRYPOINT = "0x8000"
-> +UBOOT_LOADADDRESS = "0x8000"
-> +
-> +EXTRA_IMAGEDEPENDS += "u-boot"
-> +
-> +IMAGE_FSTYPES += "jffs2 tar.bz2"
-> +
-> diff --git a/conf/machine/mx28evk.conf b/conf/machine/mx28evk.conf
-> new file mode 100644
-> index 0000000..e093ffa
-> --- /dev/null
-> +++ b/conf/machine/mx28evk.conf
-> @@ -0,0 +1,23 @@
-> +#@Name: Freescale i.MX28 Evaluation Kit
-> +#@DESCRIPTION: Machine configuration for Freescale i.MX28 Evaluation Kit
-> +#@Homepage: http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=MCIMX28EVKJ&fr=g
-> +
-> +UBOOT_MACHINE = "mx28_evk_config"
-> +
-> +PREFERRED_PROVIDER_virtual/kernel = "linux-imx"
-> +
-> +MACHINE_FEATURES = "kernel26 apm alsa ext2 usbhost usbgadget screen"
-> +
-> +MACHINE_GUI_CLASS = "bigscreen"
-> +LOGO_SIZE = "vga"
-> +
-> +PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
-> +XSERVER = "xserver-kdrive-fbdev"
-> +
-> +require conf/machine/include/imx28.inc
-> +
-> +# used by sysvinit_2
-> +SERIAL_CONSOLE = "115200 ttymxc0"
-> +
-> +ROOT_FLASH_SIZE = "128"
-> +
+> Down here I post the output of the building process. After a first look it seems like the makefile has an "-mmmx" option that is unsupported from the powerpc-linux-g++ compiler.
+> Someone has any suggestions to fix this problem?
 
+
+> NOTE: Running task 1074 of 1527 (ID: 5, /opt/OE/org.cnh_fred.dev/recipes/qt4/qt4-embedded_4.5.1.bb, do_configure)
+
+There's no 4.5.1 in the maintenance branch, so you are using a really
+old version. Please update to the latest
+(http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=2011.03-maintenance)
+before reporting a bug.
+
+The easiest way to setup the maintenance branch for angstrom would be to
+follow the instructions at
+http://www.angstrom-distribution.org/building-angstrom
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFNv64UMkyGM64RGpERAnLbAJ428QinP3RjRJfULPVwSBoJDzzmWQCfcK+p
-eIXHu+QuINATlNrAQ9LH+pI=
-=UwFn
+iD8DBQFNv67GMkyGM64RGpERAi2LAKCYByyvMO4fqplq5Tk5MzlzwMpkvACfeJbC
+7muMZbTQO2CALWZ/3tax+WM=
+=SyM0
 -----END PGP SIGNATURE-----
 
 
