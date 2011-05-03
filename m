@@ -1,25 +1,37 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QHNxe-0000Pi-Mn for openembedded-devel@lists.openembedded.org;
-	Wed, 04 May 2011 00:20:54 +0200
-Received: from f053037176.adsl.alicedsl.de ([78.53.37.176]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QHNw8-0005nv-Rn for openembedded-devel@lists.openembedded.org;
-	Tue, 03 May 2011 22:19:20 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <andrea.adami@gmail.com>) id 1QHOZA-0000q7-NX
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 May 2011 00:59:40 +0200
+Received: by pwj9 with SMTP id 9so279835pwj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 03 May 2011 15:57:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=0hrWJCpRENrCzyp7dQF0GVmU1/xjEXw+nR02EVv5VJY=;
+	b=n7Q+LZBZ0om/bDPwWHHct0kwQ6bV/2t0v45IN7111dPu6+/9fLTziK1a8oGKjxvqM4
+	eFXT0YiDancBHIzedpqwkcyQL7l2STbYrt7urq/k+k9RCftrZxDc8SGtfYPhuHJsta/S
+	8Upos2sHUS5+jpBzECm4el5jOhyBhsewbuhtw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Eumh2iV1kqWDktM4tSRLacHTn1ql6r2pmoFG/KRYw+zN0+bQnJ4UNk2+ygBsCP5G+q
+	orz0cKXmJTiDY+TjOAh2qW844qpiSfLYx6z/iulDwRh8jW/dZfa3IoeAZJCwYi+/F6/f
+	zfeNZNzy4lQ//4IzzKXD+eQhf+z8CbD27EE1g=
+MIME-Version: 1.0
+Received: by 10.142.150.34 with SMTP id x34mr213952wfd.165.1304463421328; Tue,
+	03 May 2011 15:57:01 -0700 (PDT)
+Received: by 10.142.187.8 with HTTP; Tue, 3 May 2011 15:57:01 -0700 (PDT)
+In-Reply-To: <4DB41CB6.6020809@mlbassoc.com>
+References: <1301955176-14829-1-git-send-email-ynezz@true.cz>
+	<BANLkTik92_-9VB08Rfgx-ewWscrbCyspnQ@mail.gmail.com>
+	<4DB41CB6.6020809@mlbassoc.com>
+Date: Wed, 4 May 2011 00:57:01 +0200
+Message-ID: <BANLkTimiht1P9B2gwC4x=A7x3MjxfYXWvw@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1304435916.13481.82.camel@mattotaupa>
-References: <1304434485.13481.79.camel@mattotaupa>
-	<4DC0192E.3010808@kernelconcepts.de>
-	<1304435916.13481.82.camel@mattotaupa>
-Date: Wed, 04 May 2011 00:18:16 +0200
-Message-ID: <1304461096.22473.177.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: error in push of origin/org.openmbedded.dev
+Subject: Re: [PATCH RFC] modutils-initscripts: fix wrong order of module loading happening in udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,96 +45,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 May 2011 22:20:54 -0000
-X-Groupsio-MsgNum: 31609
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-yKzd16tC0xA5pnJQVaBg"
-
---=-yKzd16tC0xA5pnJQVaBg
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 03 May 2011 22:59:40 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Dear Florian,
+>>> Signed-off-by: Petr =C5=A0tetiar<ynezz@true.cz>
+>>
+>> Looks ok.
+>>
+>> Acked-by: Khem Raj<raj.khem@gmail.com>
+
+Already in oe-core.
+
+Acked-by: Andrea Adami <andrea.adami@gmail.com>
 
 
-Am Dienstag, den 03.05.2011, 17:18 +0200 schrieb Paul Menzel:
-
-> Am Dienstag, den 03.05.2011, 17:03 +0200 schrieb Florian Boor:
->=20
-> > Am 03.05.2011 16:54, schrieb Paul Menzel:
-> > > you pushed to org.open*mb*edded.dev and therefore a new branch was
-> > > created.
-> >=20
-> > Args - sorry my bad, I have a typo in the local branch name. Interestin=
-g what
-> > can happen working on a fresh tree :-)
-> >=20
-> > > Before you push to the correct branch could you maybe clean up the
-> > > commit log using `git rebase -i =E2=80=A6` or take the improved patch=
-es I
-> > > attached.
-> >=20
-> > Ok great - many tanks. What else did you change?
->=20
-> I also squashed the `ubootchart` commits. Everything else was just the
-> commit messages.
->=20
-> Somehow Git should be able to show the differences, but
->=20
-> 	$ git diff origin/master -- origin/org.openmbedded.dev
->=20
-> does not work for me.
-
-it would have been better to first commit the new recipe `lsb-base` [2]
-before using it in `ushare` [1] to preserve a working tree.
+Pushing
+Thanks
 
 
-Thanks,
-
-Paul
-
-
-PS: If anyone cares, the error message for the commit for Zenity [3] is
-the following.
-
-        [=E2=80=A6]
-        autoreconf: running: automake --foreign --add-missing --copy --forc=
-e-missing --warnings=3Dcross
-        automake: unknown warning category `cross'
-        gnome-doc-utils.make:63: HAVE_GNOME_DOC_UTILS does not appear in AM=
-_CONDITIONAL
-        help/Makefile.am:1:   `gnome-doc-utils.make' included from here
-        gnome-doc-utils.make:133: ENABLE_SK does not appear in AM_CONDITION=
-AL
-        help/Makefile.am:1:   `gnome-doc-utils.make' included from here
-        gnome-doc-utils.make:182: ENABLE_SK does not appear in AM_CONDITION=
-AL
-        help/Makefile.am:1:   `gnome-doc-utils.make' included from here
-        autoreconf: automake failed with exit status: 1
-        + oefatal 'autoreconf execution failed.'
-        + echo FATAL: 'autoreconf execution failed.'
-        FATAL: autoreconf execution failed.
-        + exit 1
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D0fd385e=
-f5512def0db880139b1c9fa78f652f494
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D419cb68=
-6b0bfe393f7c350ac881b46e8e2a14795
-[3] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D3539300=
-2bb5aa476e281a004f7dc64aeefcb2c9e
-
---=-yKzd16tC0xA5pnJQVaBg
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3AfygACgkQPX1aK2wOHVgSMgCdFodGNNJ37mMasm897x6AJJt5
-9EAAnRxtLGNx7o87uP4f0wi77GMwNfZm
-=FVGP
------END PGP SIGNATURE-----
-
---=-yKzd16tC0xA5pnJQVaBg--
