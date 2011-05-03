@@ -1,40 +1,25 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1QHB9N-0002lH-7t
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <thebohemian@gmx.net>) id 1QHBOQ-00030A-19
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 May 2011 10:40:11 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id E41A111001D1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 May 2011 10:37:29 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 1CF5011000B0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 May 2011 10:37:29 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (g225004083.adsl.alicedsl.de
-	[92.225.4.83]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 May 2011 10:37:29 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 2CA763C0D7; Tue,  3 May 2011 10:36:32 +0200 (CEST)
-Date: Tue, 3 May 2011 10:36:32 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110503083631.GA15251@rhein.zuhause.netz>
-References: <1304408065.13481.6.camel@mattotaupa>
+	Tue, 03 May 2011 10:55:42 +0200
+Received: (qmail invoked by alias); 03 May 2011 08:53:04 -0000
+Received: from 230.118.101-84.rev.gaoland.net (EHLO [192.168.42.71])
+	[84.101.118.230]
+	by mail.gmx.net (mp013) with SMTP; 03 May 2011 10:53:04 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX18Sa0UoD+ESY9vU5lMZ7L9Fp6dnBoXNjduLue8vM3
+	sVfDILEeLg+GjV
+Message-ID: <4DBFC26B.2090006@gmx.net>
+Date: Tue, 03 May 2011 10:52:59 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
 MIME-Version: 1.0
-In-Reply-To: <1304408065.13481.6.camel@mattotaupa>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [PATCH] orc: add version 0.4.14
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 1.1.2
+X-Y-GMX-Trusted: 0
+Subject: arduino IDE on beagleboard
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,15 +33,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 May 2011 08:40:11 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 03 May 2011 08:55:42 -0000
+X-Groupsio-MsgNum: 31584
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enigE95F39412EE145FD0B85BB26"
 
-Hi Paul,
+--------------enigE95F39412EE145FD0B85BB26
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
 
-without this patch http://code.entropywave.com/git?p=schroedinger.git;a=commitdiff;h=3eb4aa2c6e73bff70878dc9463f57f252a5e68d5
-schroedinger will not compile with orc >= 0.4.12 will not compile.
+Hi,
+on scap.linuxtogo.org I found a screenshot of someone using the arduino
+IDE on a beagleboard:
+http://scap.linuxtogo.org/files/422bf4ad3de13dccfd2bcd19253e9ab5.png
 
-Bye Henning
+If this person is here on this list (or someone else tried this too), I
+have a question: Did this work nicely? Could you upload programs to the
+arduino and receive stuff through the serial port?
+
+(The background is that this would be a perfect candidate for a
+conference demo.)
+
+Regards,
+Robert
 
 
+--------------enigE95F39412EE145FD0B85BB26
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAk2/wm8ACgkQG9cfwmwwEtp2rgCeMQeqPp91YULvhI1o9J2ux5UJ
+kJYAnj4OyqTax/XE1HURIY0CnBuurQwk
+=PSS2
+-----END PGP SIGNATURE-----
+
+--------------enigE95F39412EE145FD0B85BB26--
