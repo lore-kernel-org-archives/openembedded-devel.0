@@ -1,36 +1,34 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heroor@gmail.com>) id 1QHIo5-0000fN-PA
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 May 2011 18:50:41 +0200
-Received: by qwh5 with SMTP id 5so160031qwh.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QHJvo-0002A4-GB for openembedded-devel@lists.openembedded.org;
+	Tue, 03 May 2011 20:02:44 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QHJtI-0000sV-8f for openembedded-devel@lists.openembedded.org;
+	Tue, 03 May 2011 20:00:08 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 03 May 2011 20:00:08 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 May 2011 09:48:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=f3QmZ/ZB4Ut8sDlxf0LD+Y81SHn1c1Il2JrFXf2PDGE=;
-	b=BW4x763hXUkR1tWeBRMo7H5YLxAryHV0cZnqPmE/61o/ToVnYL1+/+aUyvaD5OPZGl
-	n+Jsn7VGimX7EzW22x1Ovf+mRbZgJtFYs4CDTV2f/kO/TTaggcDVUOe78Gz6S3Om0aO4
-	/ET2TzngUolneychdbGVPF944YkLt2SC3UPuY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=wQmwaLrZLpKQAm3uiHjiZosnMjBjAa1IMW8D2bkQHbpOKlNL24KXVYF+xCUQEPTl+p
-	iXdmJ9Vw6dQqu00l8jZMTGIjeRkA3rguSoHOOaAvZZXXIX6bi8v/aJtPxtUow1y1bM6n
-	Gx26XLxKxk4/62rAyTLYdN4ytbVHZCBkp5Eng=
-MIME-Version: 1.0
-Received: by 10.224.210.8 with SMTP id gi8mr41230qab.292.1304441283715; Tue,
-	03 May 2011 09:48:03 -0700 (PDT)
-Received: by 10.224.2.209 with HTTP; Tue, 3 May 2011 09:48:03 -0700 (PDT)
-In-Reply-To: <20110501173015.GI27708@ibawizard.net>
-References: <1304243449-12028-1-git-send-email-heroor@ti.com>
-	<20110501173015.GI27708@ibawizard.net>
-Date: Tue, 3 May 2011 22:18:03 +0530
-Message-ID: <BANLkTimKHp5M5VvMR21+C_rSRBiu2M0BKQ@mail.gmail.com>
-From: Siddharth Heroor <heroor@gmail.com>
+	Tue, 03 May 2011 20:00:08 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/2] zeromq: Add zeromq socket library.
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 03 May 2011 19:59:48 +0200
+Message-ID: <ippfqk$8lq$1@dough.gmane.org>
+References: <iplshp$vse$1@dough.gmane.org> <4DC01BD9.8000304@mentor.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <4DC01BD9.8000304@mentor.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [2011.03-maintenance] Pull request #16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,34 +42,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 May 2011 16:50:41 -0000
+X-List-Received-Date: Tue, 03 May 2011 18:02:44 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Sun, May 1, 2011 at 11:00 PM, Petr =C5=A0tetiar <ynezz@true.cz> wrote:
-> Siddharth Heroor <heroor@gmail.com> [2011-05-01 15:20:48]:
->
-> Hi,
->
->> +PR =3D "r1"
->> +
->> +SRC_URI =3D "http://download.zeromq.org/zeromq-${PV}.tar.gz"
->> +
->> +inherit autotools
->
-> for version 2.1.1 I've needed also the following:
->
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0DEPENDS +=3D "util-linux-ng"
->
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0do_configure_prepend() {
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0./autogen.sh
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0}
->
-> It's not needed anymore?
-Is the older recipe available somewhere? I didn't have to do this for
-the latest version.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
---=20
-Sid
+On 03-05-11 17:14, Tom Rini wrote:
+> On 05/02/2011 02:12 AM, Koen Kooi wrote:
+>> Tom,
+> 
+>> Please pull the 5 commits from here:
+> 
+>> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+>> Branch: 2011.03-maintenance
+> 
+>> Jeff Lance (1):
+>>       am-benchmarks: add return values
+> 
+>> Koen Kooi (3):
+>>       opencv 2.2: fix opencv-dev dependency chain
+>>       opencv 2.2: include actual headers in the -dev package
+>>       linux-omap-psp 2.6.32: add support for 5MP camera board
+> 
+>> Michael 'Mickey' Lauer (1):
+>>       qt4-embedded: enable support for the built-in LinuxInput keyboard
+> 
+>> Philip Balister (1):
+>>       uhd : Update to latest release. Both source and fpga images.
+> 
+>> These are all cherry-picks from .dev.
+> 
+> (Aside: I'm going to start giving all pull requests a day or so to
+> settle before I pull them, to make sure anyone that wants to comment on
+> them can, wiki updated).
+
+FWIW Denys and I are also giving commits a (working) day in .dev before
+putting them in a pull requests to help catch silly typo bugs.
+
+So for TI things that means there's a 2 day minimum delay between
+hitting .dev and maintenance. That seems to be a good trade-off between
+speed and review.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNwEKUMkyGM64RGpERAqL7AJ4kbCFvyfGc1clLNeNSqDVzZZ3lUQCfQVtc
+GnZRMck12ogEgzsuYg7zU/E=
+=r9la
+-----END PGP SIGNATURE-----
+
 
 
