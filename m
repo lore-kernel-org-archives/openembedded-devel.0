@@ -1,25 +1,32 @@
-Received: from mail.kernelconcepts.de ([212.60.202.196])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1QHcyt-0006Xc-CQ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 May 2011 16:23:11 +0200
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1QHdCU-0007qg-8w
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 May 2011 16:37:14 +0200
-Message-ID: <4DC160B2.4080703@kernelconcepts.de>
-Date: Wed, 04 May 2011 16:20:34 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QHdHD-0006nm-AH for openembedded-devel@lists.openembedded.org;
+	Wed, 04 May 2011 16:42:07 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QHdEf-0002EM-Ep for openembedded-devel@lists.openembedded.org;
+	Wed, 04 May 2011 16:39:29 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 May 2011 16:39:29 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 May 2011 16:39:29 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1304434485.13481.79.camel@mattotaupa>	<4DC0192E.3010808@kernelconcepts.de>	<1304435916.13481.82.camel@mattotaupa>
-	<1304511762.20079.4.camel@mattotaupa>
-In-Reply-To: <1304511762.20079.4.camel@mattotaupa>
-X-Enigmail-Version: 1.1.2
-Subject: Re: error in push of origin/org.openmbedded.dev
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 04 May 2011 16:39:18 +0200
+Message-ID: <iproem$fnt$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+X-Enigmail-Version: 1.0.1
+Subject: OE weekly changelog for meta-openembedded, 2011-04-25 to 2011-05-02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,30 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 May 2011 14:23:11 -0000
+X-List-Received-Date: Wed, 04 May 2011 14:42:07 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi Paul,
-
-Am 04.05.2011 14:22, schrieb Paul Menzel:
-> Could you please take a look.
-
-oh well... if things fail they fail completely :-(
-
-I will take a look this evening.
-
-Greetings
-
-Florian
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
 
+Khem Raj (7):
+  proxy-libintl: Upgrade to proxy-libintl-20100902
+  libgpg-error_1.8.bb: No need to add gettext directly to DEPENDS
+  tzdata, tzcode: Update 2011e -> 2011g
+  xcb-proto: Add recipe for version 1.6
+  libx11_1.4.3.bb: Remove --without-xcb
+  proxy-libintl_20100902.bb: Specify -fPIC in CFLAGS
+  gcc: Upgrade to 4.5.3 and bring in latest linaro updates
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+Martin Jansa (2):
+  gcc-4.5: drop comment from SRC_URI
+  gcc-4.5: add checksums
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNwWUWMkyGM64RGpERAt5wAKCQVH3e/AsZ8Ss0y0oXDG7xrDAcQgCgjOWr
+0/SuQrQjNzZ34gjLarjAI9g=
+=WVVg
+-----END PGP SIGNATURE-----
+
 
 
