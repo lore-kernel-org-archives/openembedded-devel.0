@@ -1,32 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QHdHD-0006nm-AH for openembedded-devel@lists.openembedded.org;
-	Wed, 04 May 2011 16:42:07 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QHdEf-0002EM-Ep for openembedded-devel@lists.openembedded.org;
-	Wed, 04 May 2011 16:39:29 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 May 2011 16:39:29 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 May 2011 16:39:29 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1QHe8Q-0007sV-Cg
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 May 2011 17:37:06 +0200
+Received: (qmail 2680 invoked by uid 503); 4 May 2011 16:26:47 -0000
+Received: from b9.ovh.net (HELO mail185.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 4 May 2011 16:26:47 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 4 May 2011 17:34:29 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 4 May 2011 17:34:28 +0200
+Message-ID: <4DC17203.607@eukrea.com>
+Date: Wed, 04 May 2011 17:34:27 +0200
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 04 May 2011 16:39:18 +0200
-Message-ID: <iproem$fnt$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-X-Enigmail-Version: 1.0.1
-Subject: OE weekly changelog for meta-openembedded, 2011-04-25 to 2011-05-02
+References: <1304358039-20934-1-git-send-email-christian.charreyre@cioinfoindus.fr>
+	<1304499401.4127.53.camel@mattotaupa>
+In-Reply-To: <1304499401.4127.53.camel@mattotaupa>
+X-Ovh-Tracer-Id: 8215691622265498953
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: Re: [PATCH v4] mypaint: new recipe for version 0.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,33 +40,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 May 2011 14:42:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 04 May 2011 15:37:06 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi Paul,
 
+On 04/05/2011 10:56, Paul Menzel wrote:
+> Please remember to add what build configuration you used. (You can just
+> paste it from the BitBake output.)
+>
+You asked this several times on the list but this part is not in the commit 
+log policy : http://wiki.openembedded.org/index.php/Commit_log_example
 
-Khem Raj (7):
-  proxy-libintl: Upgrade to proxy-libintl-20100902
-  libgpg-error_1.8.bb: No need to add gettext directly to DEPENDS
-  tzdata, tzcode: Update 2011e -> 2011g
-  xcb-proto: Add recipe for version 1.6
-  libx11_1.4.3.bb: Remove --without-xcb
-  proxy-libintl_20100902.bb: Specify -fPIC in CFLAGS
-  gcc: Upgrade to 4.5.3 and bring in latest linaro updates
-
-Martin Jansa (2):
-  gcc-4.5: drop comment from SRC_URI
-  gcc-4.5: add checksums
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNwWUWMkyGM64RGpERAt5wAKCQVH3e/AsZ8Ss0y0oXDG7xrDAcQgCgjOWr
-0/SuQrQjNzZ34gjLarjAI9g=
-=WVVg
------END PGP SIGNATURE-----
-
+Eric
 
 
