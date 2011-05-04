@@ -1,24 +1,22 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <morphis@gravedo.de>) id 1QHeXO-0000SS-Ok
+	(envelope-from <philb@gnu.org>) id 1QHegi-0000ds-Rp
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 May 2011 18:02:54 +0200
-Received: by gravedo.de (Postfix, from userid 5001)
-	id D193C79900F; Wed,  4 May 2011 17:50:33 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h1108419.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from localhost (dslb-088-071-187-171.pools.arcor-ip.net
-	[88.71.187.171]) by gravedo.de (Postfix) with ESMTPSA id 2DBB079900D;
-	Wed,  4 May 2011 17:50:32 +0200 (CEST)
-From: Simon Busch <morphis@gravedo.de>
+	Wed, 04 May 2011 18:12:32 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QHeZx-0000rM-F7
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 May 2011 18:05:34 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 May 2011 17:50:28 +0200
-Message-Id: <1304524228-25642-1-git-send-email-morphis@gravedo.de>
-X-Mailer: git-send-email 1.7.4.1
-Subject: [PATCH] cmake.bbclass: set the rpath for binaries build with cmake to ${libdir}
+In-Reply-To: <1304524228-25642-1-git-send-email-morphis@gravedo.de>
+References: <1304524228-25642-1-git-send-email-morphis@gravedo.de>
+Date: Wed, 04 May 2011 17:09:48 +0100
+Message-ID: <1304525388.15795.386.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: [PATCH] cmake.bbclass: set the rpath for binaries build with cmake to ${libdir}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,33 +30,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 May 2011 16:02:54 -0000
+X-List-Received-Date: Wed, 04 May 2011 16:12:32 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-In the default configuration cmake does not set a rpath for its builded binaries. This
-leads to errors at runtime when the binaries not find their needed runtime libraries.
+On Wed, 2011-05-04 at 17:50 +0200, Simon Busch wrote:
+> +# We need to set the rpath to the correct directory as cmake does not provide any
+> +# directory as rpath by default
+> +  echo "set( CMAKE_INSTALL_RPATH ${libdir} )" >> ${WORKDIR}/toolchain.cmake
 
-Signed-off-by: Simon Busch <morphis@gravedo.de>
----
- classes/cmake.bbclass |    4 ++++
- 1 files changed, 4 insertions(+), 0 deletions(-)
+Shouldn't this be inside some kind of guard for native?  You don't want
+rpath in target binaries, do you?
 
-diff --git a/classes/cmake.bbclass b/classes/cmake.bbclass
-index 40fadea..5f7066b 100644
---- a/classes/cmake.bbclass
-+++ b/classes/cmake.bbclass
-@@ -44,6 +44,10 @@ cmake_do_generate_toolchain_file() {
-   echo "set( CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY )" >> ${WORKDIR}/toolchain.cmake
- # Use qt.conf settings
-   echo "set( ENV{QT_CONF_PATH} ${WORKDIR}/qt.conf )" >> ${WORKDIR}/toolchain.cmake
-+
-+# We need to set the rpath to the correct directory as cmake does not provide any
-+# directory as rpath by default
-+  echo "set( CMAKE_INSTALL_RPATH ${libdir} )" >> ${WORKDIR}/toolchain.cmake
- }
- 
- addtask generate_toolchain_file after do_patch before do_configure
--- 
-1.7.4.1
+p.
+
 
 
 
