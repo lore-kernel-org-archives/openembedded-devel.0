@@ -1,24 +1,24 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <robert@erafx.com>) id 1QHeVA-0000M4-7Y
+	(envelope-from <morphis@gravedo.de>) id 1QHeXO-0000SS-Ok
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 May 2011 18:00:36 +0200
-Received: by gwb11 with SMTP id 11so481155gwb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 May 2011 08:57:54 -0700 (PDT)
-Received: by 10.150.213.2 with SMTP id l2mr1192965ybg.361.1304524673805;
-	Wed, 04 May 2011 08:57:53 -0700 (PDT)
-Received: from localhost.localdomain (cpe-24-165-208-114.neo.res.rr.com
-	[24.165.208.114])
-	by mx.google.com with ESMTPS id p41sm2180758ybk.14.2011.05.04.08.57.52
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 04 May 2011 08:57:53 -0700 (PDT)
-From: Bob Foerster <robert@erafx.com>
+	Wed, 04 May 2011 18:02:54 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id D193C79900F; Wed,  4 May 2011 17:50:33 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h1108419.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.3 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from localhost (dslb-088-071-187-171.pools.arcor-ip.net
+	[88.71.187.171]) by gravedo.de (Postfix) with ESMTPSA id 2DBB079900D;
+	Wed,  4 May 2011 17:50:32 +0200 (CEST)
+From: Simon Busch <morphis@gravedo.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 May 2011 11:56:58 -0400
-Message-Id: <1304524618-4864-1-git-send-email-robert@erafx.com>
-X-Mailer: git-send-email 1.7.1
-Subject: [PATCH] x264_r2245: fix DEPENDS for x86
+Date: Wed,  4 May 2011 17:50:28 +0200
+Message-Id: <1304524228-25642-1-git-send-email-morphis@gravedo.de>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [PATCH] cmake.bbclass: set the rpath for binaries build with cmake to ${libdir}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,36 +32,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 May 2011 16:00:36 -0000
+X-List-Received-Date: Wed, 04 May 2011 16:02:54 -0000
 
-The recipe intended to add "yasm-native" to the dependencies on x86,
-but it set DEPENDS_x86 = "yasm-native" which obliterated the base
-dependencies. On a fresh build, this package was failing since it
-was trying to build before the compiler was ready.
+In the default configuration cmake does not set a rpath for its builded binaries. This
+leads to errors at runtime when the binaries not find their needed runtime libraries.
 
-Depends is now set with DEPENDS_append_x86, which leaves the base
-dependencies intact.
-
-Signed-off-by: Bob Foerster <robert@erafx.com>
+Signed-off-by: Simon Busch <morphis@gravedo.de>
 ---
- recipes/vlc/x264_r2245.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ classes/cmake.bbclass |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/vlc/x264_r2245.bb b/recipes/vlc/x264_r2245.bb
-index 0cffea3..8c2b5b4 100644
---- a/recipes/vlc/x264_r2245.bb
-+++ b/recipes/vlc/x264_r2245.bb
-@@ -23,7 +23,7 @@ X264_ECFLAGS_mipsel = "-fPIC"
- X264_DISABLE_ASM = "--disable-asm"
- # use assembler written functions for those archs supporting this
- X264_DISABLE_ASM_x86 = ""
--DEPENDS_x86 = "yasm-native"
-+DEPENDS_append_x86 = "yasm-native"
+diff --git a/classes/cmake.bbclass b/classes/cmake.bbclass
+index 40fadea..5f7066b 100644
+--- a/classes/cmake.bbclass
++++ b/classes/cmake.bbclass
+@@ -44,6 +44,10 @@ cmake_do_generate_toolchain_file() {
+   echo "set( CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY )" >> ${WORKDIR}/toolchain.cmake
+ # Use qt.conf settings
+   echo "set( ENV{QT_CONF_PATH} ${WORKDIR}/qt.conf )" >> ${WORKDIR}/toolchain.cmake
++
++# We need to set the rpath to the correct directory as cmake does not provide any
++# directory as rpath by default
++  echo "set( CMAKE_INSTALL_RPATH ${libdir} )" >> ${WORKDIR}/toolchain.cmake
+ }
  
- EXTRA_OECONF = '--enable-shared ${X264_DISABLE_ASM} --extra-cflags="${X264_ECFLAGS}"'
- 
+ addtask generate_toolchain_file after do_patch before do_configure
 -- 
-1.7.1
+1.7.4.1
 
 
 
