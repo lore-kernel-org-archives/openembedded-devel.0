@@ -1,24 +1,23 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QHfIL-0001Ap-50 for openembedded-devel@lists.openembedded.org;
-	Wed, 04 May 2011 18:51:25 +0200
-Received: from f053033156.adsl.alicedsl.de ([78.53.33.156]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QHfGq-0003uR-2Q for openembedded-devel@lists.openembedded.org;
-	Wed, 04 May 2011 16:49:52 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <philb@gnu.org>) id 1QHfNc-0001J3-Aq
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 May 2011 18:56:52 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QHfGr-0000uL-LO
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 May 2011 18:49:53 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4DC17203.607@eukrea.com>
-References: <1304358039-20934-1-git-send-email-christian.charreyre@cioinfoindus.fr>
-	<1304499401.4127.53.camel@mattotaupa>  <4DC17203.607@eukrea.com>
-Date: Wed, 04 May 2011 18:48:47 +0200
-Message-ID: <1304527727.20079.6.camel@mattotaupa>
+In-Reply-To: <4DC17C80.3060001@gravedo.de>
+References: <1304524228-25642-1-git-send-email-morphis@gravedo.de>
+	<1304525388.15795.386.camel@phil-desktop> <4DC17C80.3060001@gravedo.de>
+Date: Wed, 04 May 2011 17:54:14 +0100
+Message-ID: <1304528054.15795.417.camel@phil-desktop>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH v4] mypaint: new recipe for version 0.9.1
+X-Mailer: Evolution 2.30.3 
+Subject: Re: [PATCH] cmake.bbclass: set the rpath for binaries build with cmake to ${libdir}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,50 +31,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 May 2011 16:51:25 -0000
-X-Groupsio-MsgNum: 31620
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-Y7TNFcCs86ir/NxzYw/S"
-
---=-Y7TNFcCs86ir/NxzYw/S
+X-List-Received-Date: Wed, 04 May 2011 16:56:52 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Dear Eric,
+On Wed, 2011-05-04 at 18:19 +0200, Simon Busch wrote:
+> On 04.05.2011 18:09, Phil Blundell wrote:
+> > On Wed, 2011-05-04 at 17:50 +0200, Simon Busch wrote:
+> >> +# We need to set the rpath to the correct directory as cmake does not provide any
+> >> +# directory as rpath by default
+> >> +  echo "set( CMAKE_INSTALL_RPATH ${libdir} )" >> ${WORKDIR}/toolchain.cmake
+> > 
+> > Shouldn't this be inside some kind of guard for native?  You don't want
+> > rpath in target binaries, do you?
+> 
+> Thanks for the hint!
+> 
+> You mean something like:
+> 
+> if not bb.data.inherits_class('native', d)
+>    and not bb.data.inherits_class('cross', d):
+
+I think you have the sense backwards but yes, that's the general idea.
+Though I must admit I don't quite understand why the rpath setting from
+BUILD_LDFLAGS is not turning up in cmake's final link.  It might be
+worth investigating why that isn't working for you in case this patch is
+just papering over some deeper problem.
+
+p.
 
 
-Am Mittwoch, den 04.05.2011, 17:34 +0200 schrieb Eric B=C3=A9nard:
-> Hi Paul,
->=20
-> On 04/05/2011 10:56, Paul Menzel wrote:
-> > Please remember to add what build configuration you used. (You can just
-> > paste it from the BitBake output.)
->
-> You asked this several times on the list but this part is not in the comm=
-it=20
-> log policy : http://wiki.openembedded.org/index.php/Commit_log_example
-
-I know and therefore I do *not* NACK patches and even commit them if the
-build configuration is not in the commit message. Still I think it
-belongs to useful commit messages to be able to reproduce something and
-therefore I am asking for it.
 
 
-Thanks,
-
-Paul
-
---=-Y7TNFcCs86ir/NxzYw/S
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3Bg28ACgkQPX1aK2wOHVgd4wCdG7BZ7mCPGCiH6kPMetvVhkUr
-Z/oAn3iVWLcF/E3Udb++8cvUaR6+TzTF
-=ZXAT
------END PGP SIGNATURE-----
-
---=-Y7TNFcCs86ir/NxzYw/S--
