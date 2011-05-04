@@ -1,32 +1,24 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1QHe8Q-0007sV-Cg
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <robert@erafx.com>) id 1QHeVA-0000M4-7Y
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 May 2011 17:37:06 +0200
-Received: (qmail 2680 invoked by uid 503); 4 May 2011 16:26:47 -0000
-Received: from b9.ovh.net (HELO mail185.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 4 May 2011 16:26:47 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 4 May 2011 17:34:29 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 4 May 2011 17:34:28 +0200
-Message-ID: <4DC17203.607@eukrea.com>
-Date: Wed, 04 May 2011 17:34:27 +0200
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.10
-MIME-Version: 1.0
+	Wed, 04 May 2011 18:00:36 +0200
+Received: by gwb11 with SMTP id 11so481155gwb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 May 2011 08:57:54 -0700 (PDT)
+Received: by 10.150.213.2 with SMTP id l2mr1192965ybg.361.1304524673805;
+	Wed, 04 May 2011 08:57:53 -0700 (PDT)
+Received: from localhost.localdomain (cpe-24-165-208-114.neo.res.rr.com
+	[24.165.208.114])
+	by mx.google.com with ESMTPS id p41sm2180758ybk.14.2011.05.04.08.57.52
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 04 May 2011 08:57:53 -0700 (PDT)
+From: Bob Foerster <robert@erafx.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1304358039-20934-1-git-send-email-christian.charreyre@cioinfoindus.fr>
-	<1304499401.4127.53.camel@mattotaupa>
-In-Reply-To: <1304499401.4127.53.camel@mattotaupa>
-X-Ovh-Tracer-Id: 8215691622265498953
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH v4] mypaint: new recipe for version 0.9.1
+Date: Wed,  4 May 2011 11:56:58 -0400
+Message-Id: <1304524618-4864-1-git-send-email-robert@erafx.com>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] x264_r2245: fix DEPENDS for x86
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,19 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 May 2011 15:37:06 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 04 May 2011 16:00:36 -0000
 
-Hi Paul,
+The recipe intended to add "yasm-native" to the dependencies on x86,
+but it set DEPENDS_x86 = "yasm-native" which obliterated the base
+dependencies. On a fresh build, this package was failing since it
+was trying to build before the compiler was ready.
 
-On 04/05/2011 10:56, Paul Menzel wrote:
-> Please remember to add what build configuration you used. (You can just
-> paste it from the BitBake output.)
->
-You asked this several times on the list but this part is not in the commit 
-log policy : http://wiki.openembedded.org/index.php/Commit_log_example
+Depends is now set with DEPENDS_append_x86, which leaves the base
+dependencies intact.
 
-Eric
+Signed-off-by: Bob Foerster <robert@erafx.com>
+---
+ recipes/vlc/x264_r2245.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/recipes/vlc/x264_r2245.bb b/recipes/vlc/x264_r2245.bb
+index 0cffea3..8c2b5b4 100644
+--- a/recipes/vlc/x264_r2245.bb
++++ b/recipes/vlc/x264_r2245.bb
+@@ -23,7 +23,7 @@ X264_ECFLAGS_mipsel = "-fPIC"
+ X264_DISABLE_ASM = "--disable-asm"
+ # use assembler written functions for those archs supporting this
+ X264_DISABLE_ASM_x86 = ""
+-DEPENDS_x86 = "yasm-native"
++DEPENDS_append_x86 = "yasm-native"
+ 
+ EXTRA_OECONF = '--enable-shared ${X264_DISABLE_ASM} --extra-cflags="${X264_ECFLAGS}"'
+ 
+-- 
+1.7.1
+
 
 
