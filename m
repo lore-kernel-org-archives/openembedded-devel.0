@@ -1,33 +1,31 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from smtp-out04.msg.oleane.net ([62.161.7.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <morphis@gravedo.de>) id 1QHx1B-00018G-Le
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 May 2011 13:46:53 +0200
-Received: by gravedo.de (Postfix, from userid 5001)
-	id 4BC1E799010; Thu,  5 May 2011 13:44:16 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h1108419.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from [10.1.1.50] (ip-109-44-86-12.web.vodafone.de [109.44.86.12])
-	by gravedo.de (Postfix) with ESMTPSA id 1BAED79900E
+	(envelope-from <christian.charreyre@cioinfoindus.fr>)
+	id 1QI15T-0003Nd-3W for openembedded-devel@lists.openembedded.org;
+	Thu, 05 May 2011 18:07:35 +0200
+Received: from smtp06.msg.oleane.net (smtp06.mail.priv [172.17.20.115]) 
+	by smtp-out04.msg.oleane.net with ESMTP id p45G4umc019266
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 May 2011 13:44:14 +0200 (CEST)
-Message-ID: <4DC28D8C.4040805@gravedo.de>
-Date: Thu, 05 May 2011 13:44:12 +0200
-From: Simon Busch <morphis@gravedo.de>
+	Thu, 5 May 2011 18:04:57 +0200
+Received: from [192.168.1.106] (AMarseille-551-1-8-51.w80-9.abo.wanadoo.fr
+	[80.9.203.51]) (authenticated)
+	by smtp06.msg.oleane.net (MTA) with ESMTP id p45FiR2d000654
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 5 May 2011 17:44:27 +0200
+X-Oleane-Rep: REPA
+Message-ID: <4DC2C5DA.10909@cioinfoindus.fr>
+Date: Thu, 05 May 2011 17:44:26 +0200
+From: Christian Charreyre <christian.charreyre@cioinfoindus.fr>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
 	rv:1.9.2.15) Gecko/20110419 Lightning/1.0b2 Thunderbird/3.1.9
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1304524228-25642-1-git-send-email-morphis@gravedo.de>	<1304525388.15795.386.camel@phil-desktop>
-	<4DC17C80.3060001@gravedo.de>	<1304528054.15795.417.camel@phil-desktop>
-	<4DC18628.40508@gravedo.de>	<1304589023.15795.426.camel@phil-desktop>
-	<4DC28855.1050000@gravedo.de>
-	<1304595253.15795.431.camel@phil-desktop>
-In-Reply-To: <1304595253.15795.431.camel@phil-desktop>
-Subject: Re: [PATCH] cmake.bbclass: set the rpath for binaries build with cmake to ${libdir}
+X-Spam-Flag: NO
+X-PMX-Spam: Probability=8%
+X-PFSI-Info: PMX 5.6.0.2009776, Antispam-Engine: 2.7.2.376379,
+	Antispam-Data: 2011.5.5.153314 (no antivirus check)
+X-Orange-Auth: Y2I1NTMtM0BjaW9pbmZvaW4uZnIuZnRv
+Subject: Re: [PATCH v4] mypaint: new recipe for version 0.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,44 +39,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 May 2011 11:46:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 05 May 2011 16:07:35 -0000
+X-Groupsio-MsgNum: 31634
+Content-Type: multipart/mixed; boundary="------------000003010006070903010109"
+
+--------------000003010006070903010109
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by smtp-out04.msg.oleane.net id p45G4umc019266
+
+Paul,
+
+I've an additional question regarding build configuration :
+
+
+Le 04/05/2011 17:34, Eric B=E9nard a =E9crit :
+>  Hi Paul,
+>
+>  On 04/05/2011 10:56, Paul Menzel wrote:
+>>  Please remember to add what build configuration you used. (You can ju=
+st
+>>  paste it from the BitBake output.)
+>>
+>  You asked this several times on the list but this part is not in the
+>  commit log policy :
+>  http://wiki.openembedded.org/index.php/Commit_log_example
+>
+
+[...]
+
+how must build configuration described : which information to add,
+where, and how do I get it from bitbake output ?
+
+Can you give me an example ?
+
+For your information, my machine is derived from beagleboard (very few
+differences), and my distribution is derived from angstrom, because I'm
+building a complete distribution, not using a standard one.
+
+Thanks.
+
+Christian.
+
+
+
+--------------000003010006070903010109
+Content-Type: text/x-vcard; charset=utf-8;
+ name="christian_charreyre.vcf"
+Content-Disposition: attachment;
+ filename="christian_charreyre.vcf"
 Content-Transfer-Encoding: 7bit
 
-On 05.05.2011 13:34, Phil Blundell wrote:
-> On Thu, 2011-05-05 at 13:21 +0200, Simon Busch wrote:
->> On 05.05.2011 11:50, Phil Blundell wrote:
->>> On Wed, 2011-05-04 at 19:00 +0200, Simon Busch wrote:
->>>> I alreay searched through the cmake documentation and it says that the
->>>> rpath is set with the content of the CMAKE_INSTALL_RPATH variable. The
->>>> default value of CMAKE_INSTALL_RPATH is ""[1]. As currently nothing sets
->>>> it to another value the rpath is never set during the build for the
->>>> resulting binaries. I send another patch which does the solution
->>>> mentioned above the right way.
->>>
->>> Oh right, I see.  So cmake is actually stripping the rpaths during the
->>> install step unless you tell it that you want them included?
->>>
->>> In that case, yeah, your plan seems reasonable.
->>
->> Ok, so you are fine with the patch?
-> 
-> Yup.  My only remaining concern was that it seemed a bit unwholesome to
-> do:
-> 
-> +  echo "set( CMAKE_INSTALL_RPATH ${OECMAKE_RPATH} )" >> ${WORKDIR}/toolchain.cmake
-> 
-> when OECMAKE_RPATH might be empty, and maybe it'd have been better to
-> bracket that echo with "if [ -n ${OECMAKE_RPATH} ] ...".  But if you've
-> tested it and cmake does the right thing then I guess it's fine as it
-> stands.
-> 
-> Acked-by: Phil Blundell <philb@gnu.org>
-
-Ok, thanks for your help. Patch is now pushed but somehow cgit got the
-line breaks wrong while local git is showing them correctly ...
-
-regards,
-Simon
+begin:vcard
+fn:Christian  Charreyre
+n:Charreyre;Christian 
+org:CIO Informatique Industrielle
+adr;dom:;;11 Avenue Marigny;Marseille;;13014
+email;internet:christian.charreyre@cioinfoindus.fr
+tel;work:04 95 05 19 41
+url:http://www.cioinfoindus.fr
+version:2.1
+end:vcard
 
 
+--------------000003010006070903010109--
