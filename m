@@ -1,35 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp-out06.msg.oleane.net ([62.161.7.4])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QISZo-0008WT-IB for openembedded-devel@lists.openembedded.org;
-	Fri, 06 May 2011 23:28:44 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QISXF-0006PA-3j for openembedded-devel@lists.openembedded.org;
-	Fri, 06 May 2011 23:26:05 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2011 23:26:05 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <christian.charreyre@cioinfoindus.fr>)
+	id 1QISln-0000KH-4g for openembedded-devel@lists.openembedded.org;
+	Fri, 06 May 2011 23:41:07 +0200
+Received: from smtp06.msg.oleane.net (smtp06.mail.priv [172.17.20.115]) 
+	by smtp-out06.msg.oleane.net with ESMTP id p46LcQCX032169
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2011 23:26:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 6 May 2011 23:38:27 +0200
+Received: from [192.168.1.106] (AMarseille-551-1-71-241.w80-9.abo.wanadoo.fr
+	[80.9.126.241]) (authenticated)
+	by smtp06.msg.oleane.net (MTA) with ESMTP id p46LIFR5011421
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 6 May 2011 23:18:16 +0200
+X-Oleane-Rep: REPA
+Message-ID: <4DC46597.90606@cioinfoindus.fr>
+Date: Fri, 06 May 2011 23:18:15 +0200
+From: Christian Charreyre <christian.charreyre@cioinfoindus.fr>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 06 May 2011 23:25:49 +0200
-Message-ID: <iq1p0t$q68$1@dough.gmane.org>
-References: <1304653677-2982-1-git-send-email-raj.khem@gmail.com>	<1304666954.3162.3.camel@lenovo.internal.reciva.com>
-	<BANLkTinMP8C0WQ5yEpckn7rM5yMap6QkZg@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <BANLkTinMP8C0WQ5yEpckn7rM5yMap6QkZg@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-oe][PATCH] conf/layer.conf: Use .= for BBPATH and += for BBFILES
+References: <4DC2C5DA.10909@cioinfoindus.fr>
+	<1304621939.18082.6.camel@mattotaupa>
+In-Reply-To: <1304621939.18082.6.camel@mattotaupa>
+X-Spam-Flag: NO
+X-PMX-Spam: Probability=8%
+X-PFSI-Info: PMX 5.5.9.395186, Antispam-Engine: 2.7.2.376379,
+	Antispam-Data: 2011.5.6.210316 (no antivirus check)
+X-Orange-Auth: Y2I1NTMtM0BjaW9pbmZvaW4uZnIuZnRv
+Subject: Re: [PATCH v4] mypaint: new recipe for version 0.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,62 +42,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2011 21:28:44 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 06 May 2011 21:41:07 -0000
+X-Groupsio-MsgNum: 31668
+Content-Type: multipart/mixed; boundary="------------040502040006030400020808"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--------------040502040006030400020808
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by smtp-out06.msg.oleane.net id p46LcQCX032169
 
-On 06-05-11 21:59, Khem Raj wrote:
-> On Fri, May 6, 2011 at 12:29 AM, Phil Blundell <philb@gnu.org> wrote:
->> On Thu, 2011-05-05 at 20:47 -0700, raj.khem@gmail.com wrote:
->>>  # We have a conf and classes directory, prepend to BBPATH to prefer our versions
->>> -BBPATH := "${LAYERDIR}:${BBPATH}"
->>> +BBPATH .= ":${LAYERDIR}"
->>
->> This patch seems to cause the code to do the opposite of what the
->> comment says.  If changing it to be an append rather than a prepend is
->> deliberate, please adjust the comment to match.  (It would also be nice
->> to have some commentary in the commit message explaining why this is
->> being done, since it isn't obvious to me why append would be better.)
->>
-> That comment should be fixed. Since previously I has prepend and then
-> changed it to append but forgot
-> to correct the comment.
-> It needed to follow some order for consistency and I chose append. Now
-> it depends on the order of
-> layers specified in BBLAYERS from bblayer.conf. Which means 1st entry
-> gets priority
-> over second entry when bitbake searches BBPATH. Right now there are
-> two criteria's
-> BBFILES are selected per priority set by BBFILES_PRIORITY for the
-> layer but BBPATHs dont have this
-> capability they get searched as they appear in the list.  Ideally I
-> would think it would be simpler to have just one order for BBFILES and
-> BBPATH
-> so if BBPATHS followed the BBFILES priority too would make it easier
-> to comprehend.
+Dear Paul,
 
-For meta-oe we need 2 different things:
-
-1) prepend to BBPATH to get our classes in first (e.g. kernel.bbclass,
-gnome.bbclass)
-2) append to BBFILES to use our version of recipes (.bbs) and overrides
-(.bbappends)
-
-It seems that using layer priorities won't work the way we need it.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNxGddMkyGM64RGpERAtQMAJwM1W5k0Z9CgxlBYq82O6b39kLDcwCfTNO7
-Qv6TUjazbpj5vYb6Ex0nxWQ=
-=J/NZ
------END PGP SIGNATURE-----
+Le 05/05/2011 20:58, Paul Menzel a =C3=A9crit :
 
 
+[...]
 
+> I guess that information would be enough.
+>
+> I would think that the following printed by `bitbake mypaint` would be
+> enough. Maybe add the OE repository revision your distribution is based
+> on.
+>
+>          Build Configuration:
+>          BB_VERSION        =3D "1.12.0"
+>          METADATA_BRANCH   =3D "73593c5"
+>          METADATA_REVISION =3D "7f22ddc"
+>          TARGET_ARCH       =3D "arm"
+>          TARGET_OS         =3D "linux-gnueabi"
+>          MACHINE           =3D "beagleboard"
+>          DISTRO            =3D "angstrom"
+>          DISTRO_VERSION    =3D "v20110505"
+>          TARGET_FPU        =3D "hard"
+>
+I'm using bitbake 1.8, that's the reason why these informations are not=20
+printed when I execute the recipe.
+Can I safely swap to bitbake 1.12.0 with recipes and classes quite old=20
+in my workspace ?
+Thanks for your advise on this point.
+
+--------------040502040006030400020808
+Content-Type: text/x-vcard; charset=utf-8;
+ name="christian_charreyre.vcf"
+Content-Disposition: attachment;
+ filename="christian_charreyre.vcf"
+Content-Transfer-Encoding: base64
+
+YmVnaW46dmNhcmQNCmZuOkNocmlzdGlhbiAgQ2hhcnJleXJlDQpuOkNoYXJyZXlyZTtDaHJpc3Rp
+YW4gDQpvcmc6Q0lPIEluZm9ybWF0aXF1ZSBJbmR1c3RyaWVsbGUNCmFkcjtkb206OzsxMSBBdmVu
+dWUgTWFyaWdueTtNYXJzZWlsbGU7OzEzMDE0DQplbWFpbDtpbnRlcm5ldDpjaHJpc3RpYW4uY2hh
+cnJleXJlQGNpb2luZm9pbmR1cy5mcg0KdGVsO3dvcms6MDQgOTUgMDUgMTkgNDENCnVybDpodHRw
+Oi8vd3d3LmNpb2luZm9pbmR1cy5mcg0KdmVyc2lvbjoyLjENCmVuZDp2Y2FyZA0KDQo=
+
+--------------040502040006030400020808--
