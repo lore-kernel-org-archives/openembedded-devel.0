@@ -1,31 +1,22 @@
-Received: from 1.26.mail-out.ovh.net ([46.105.43.121] helo=26.mail-out.ovh.net)
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1QINlc-00062A-Rs
+Received: from devils.ext.ti.com ([198.47.26.153])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <pprakash@ti.com>) id 1QIO2A-0006Lf-Ng
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 May 2011 18:20:36 +0200
-Received: (qmail 6424 invoked by uid 503); 6 May 2011 15:37:51 -0000
-Received: from b9.ovh.net (HELO mail611.ha.ovh.net) (213.186.33.59)
-	by 26.mail-out.ovh.net with SMTP; 6 May 2011 15:37:51 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 6 May 2011 18:11:18 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 6 May 2011 18:11:17 +0200
-Message-ID: <4DC41DA5.4080604@eukrea.com>
-Date: Fri, 06 May 2011 18:11:17 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.10
-MIME-Version: 1.0
+	Fri, 06 May 2011 18:37:42 +0200
+Received: from dlep33.itg.ti.com ([157.170.170.112])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id p46GX2PG012447
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Fri, 6 May 2011 11:33:02 -0500
+Received: from localhost.localdomain (localhost [127.0.0.1])
+	by dlep33.itg.ti.com (8.13.7/8.13.7) with ESMTP id p46GX2d0013999;
+	Fri, 6 May 2011 11:33:02 -0500 (CDT)
+From: Punya Prakash <pprakash@ti.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1304694796-9130-1-git-send-email-koen@openembedded.org>
-In-Reply-To: <1304694796-9130-1-git-send-email-koen@openembedded.org>
-X-Ovh-Tracer-Id: 2136113600363212105
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH] package.bbclass: convert unpackaged file message from	'info' to 'warn' so that it shows up on the console
+Date: Fri,  6 May 2011 08:29:51 -0500
+Message-Id: <1304688591-31481-1-git-send-email-pprakash@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: Punya Prakash <pprakash.ti@gmail.com>
+Subject: [PATCH] gst-ffmpeg: fix license information
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,33 +30,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2011 16:20:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 06 May 2011 16:37:43 -0000
 
-On 06/05/2011 17:13, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi<koen@openembedded.org>
-Acked-by: Eric Bénard <eric@eukrea.com>
-> ---
->   classes/package.bbclass |    4 ++--
->   1 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/classes/package.bbclass b/classes/package.bbclass
-> index 901ad9d..2b98049 100644
-> --- a/classes/package.bbclass
-> +++ b/classes/package.bbclass
-> @@ -464,9 +464,9 @@ python populate_packages () {
->   				unshipped.append(path)
->
->   	if unshipped != []:
-> -		bb.note("the following files were installed but not shipped in any package:")
-> +		bb.warn("the following files were installed but not shipped in any package:")
->   		for f in unshipped:
-> -			bb.note("  " + f)
-> +			bb.warn("  " + f)
->
->   	bb.build.exec_func("package_name_hook", d)
->
+From: Punya Prakash <pprakash.ti@gmail.com>
+
+* gst-ffmpeg by default compiles FFmpeg/libav with --enable-gpl and --enable-postproc
+---
+ recipes/gstreamer/gst-ffmpeg_0.10.11.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes/gstreamer/gst-ffmpeg_0.10.11.bb b/recipes/gstreamer/gst-ffmpeg_0.10.11.bb
+index 563521e..26aecce 100644
+--- a/recipes/gstreamer/gst-ffmpeg_0.10.11.bb
++++ b/recipes/gstreamer/gst-ffmpeg_0.10.11.bb
+@@ -1,11 +1,11 @@
+ DESCRIPTION = "FFmpeg-based GStreamer plug-in"
+ SECTION = "multimedia"
+ PRIORITY = "optional"
+-LICENSE = "LGPL"
++LICENSE = "GPLv2 LGPLv2.1"
+ HOMEPAGE = "http://www.gstreamer.net/"
+ DEPENDS = "ffmpeg gstreamer gst-plugins-base zlib"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ inherit autotools pkgconfig
+ 
+-- 
+1.7.0.4
 
 
 
