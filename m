@@ -1,39 +1,35 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
+Received: from mail-px0-f172.google.com ([209.85.212.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1QI5uP-0000xK-3R
+	(envelope-from <raj.khem@gmail.com>) id 1QIC4A-0006vw-AZ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 May 2011 23:16:29 +0200
-Received: from dlep35.itg.ti.com ([157.170.170.118])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id p45LDlsY002369
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Fri, 06 May 2011 05:50:58 +0200
+Received: by pxi6 with SMTP id 6so1976865pxi.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 5 May 2011 16:13:48 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id p45LDlbv027095
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 5 May 2011 16:13:47 -0500 (CDT)
-Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p45LDlUn021064
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 5 May 2011 16:13:47 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
-	([157.170.170.8]) with mapi; Thu, 5 May 2011 16:13:47 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 5 May 2011 16:13:47 -0500
-Thread-Topic: [oe] [PATCH] ncurses: add missing patch file
-Thread-Index: AcwLYQOqnnXnRGTDSDm23L/tCzLp9AACCSbw
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F08034AF1C0E1@dlee06.ent.ti.com>
-References: <1304618837-18698-1-git-send-email-Chase.Maupin@ti.com>
-	<4DC304E9.6050103@mentor.com>
-In-Reply-To: <4DC304E9.6050103@mentor.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-Subject: Re: [PATCH] ncurses: add missing patch file
+	Thu, 05 May 2011 20:48:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=1IUEit9ZkanIhezidFEEzmBhsY2wu9t+Ara75bl1GgA=;
+	b=WQo+b8JixBc52rbw7/DJO7KpykE9otsXhMvm4dwMoprvLIJggREcdXXD+BJscxr9an
+	bj/KiVu7bjz5e6TlQy0v9IlKoqHL0yqNvqTIc0dMqkUqq4Gdb7LB7jznx+orqkAFOuTz
+	rP4a28ElY8ArXYJvHHDmf280L5tHXzUZ17DNo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=fC6l7dxds8Ce45vMNf4+27qR4ga4FiM+yHO7Qp+PWd9/qBpYdrCMjCDRCZgbUjvEMd
+	x9SNEC39FRgOfuXmR6YAil+Zgv7lv/DHIMG5ve+6d+ercSEFRzZWswQudO3XbJOAiBLY
+	Wmxjqao8l6mWKKkXyowInq8N75tUkj9equHgw=
+Received: by 10.68.19.134 with SMTP id f6mr394096pbe.31.1304653696718;
+	Thu, 05 May 2011 20:48:16 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id q5sm1857647pbp.65.2011.05.05.20.48.14
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 05 May 2011 20:48:15 -0700 (PDT)
+From: raj.khem@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  5 May 2011 20:47:57 -0700
+Message-Id: <1304653677-2982-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [meta-oe][PATCH] conf/layer.conf: Use .= for BBPATH and += for BBFILES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,42 +43,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 May 2011 21:16:29 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 06 May 2011 03:50:58 -0000
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Tom Rini
-> Sent: Thursday, May 05, 2011 3:13 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [PATCH] ncurses: add missing patch file
->=20
-> On 05/05/2011 11:07 AM, Chase Maupin wrote:
-> > * The 20110115 patch file has gone missing.  Add it to the
-> >   OE repository like the previous patch file.
-> > * Bump the PR
-> >
-> > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
->=20
-> Maybe we need to consider just moving to vanilla 5.9 and drop 5.7?
+From: Khem Raj <raj.khem@gmail.com>
 
-I asked Koen to submit a pull request to the maintenance branch to add 5.9 =
-so I agree there.  I just thought I would go ahead and submit a patch to th=
-e dev branch to fix version 5.7 in case someone is using that version.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-efl/conf/layer.conf   |    4 ++--
+ meta-gnome/conf/layer.conf |    4 ++--
+ meta-gpe/conf/layer.conf   |    4 ++--
+ meta-oe/conf/layer.conf    |    4 ++--
+ 4 files changed, 8 insertions(+), 8 deletions(-)
 
-Personally I'm fine with going to 5.9 directly.
+diff --git a/meta-efl/conf/layer.conf b/meta-efl/conf/layer.conf
+index 85dbacd..f019337 100644
+--- a/meta-efl/conf/layer.conf
++++ b/meta-efl/conf/layer.conf
+@@ -1,8 +1,8 @@
+ # We have a conf and classes directory, prepend to BBPATH to prefer our versions
+-BBPATH := "${LAYERDIR}:${BBPATH}"
++BBPATH .= ":${LAYERDIR}"
+ 
+ # We have a recipes directory, add to BBFILES
+-BBFILES := "${BBFILES} ${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
++BBFILES += "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
+ 
+ BBFILE_COLLECTIONS += "efl-layer"
+ BBFILE_PATTERN_efl-layer := "^${LAYERDIR}/"
+diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
+index c878ecf..6e8ff28 100644
+--- a/meta-gnome/conf/layer.conf
++++ b/meta-gnome/conf/layer.conf
+@@ -1,8 +1,8 @@
+ # We have a conf and classes directory, prepend to BBPATH to prefer our versions
+-BBPATH := "${LAYERDIR}:${BBPATH}"
++BBPATH .= ":${LAYERDIR}"
+ 
+ # We have a recipes directory, add to BBFILES
+-BBFILES := "${BBFILES} ${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
++BBFILES += "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
+ 
+ BBFILE_COLLECTIONS += "gnome-layer"
+ BBFILE_PATTERN_gnome-layer := "^${LAYERDIR}/"
+diff --git a/meta-gpe/conf/layer.conf b/meta-gpe/conf/layer.conf
+index d250555..006b6af 100644
+--- a/meta-gpe/conf/layer.conf
++++ b/meta-gpe/conf/layer.conf
+@@ -1,8 +1,8 @@
+ # We have a conf and classes directory, prepend to BBPATH to prefer our versions
+-BBPATH := "${LAYERDIR}:${BBPATH}"
++BBPATH .= ":${LAYERDIR}"
+ 
+ # We have a recipes directory, add to BBFILES
+-BBFILES := "${BBFILES} ${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
++BBFILES += "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
+ 
+ BBFILE_COLLECTIONS += "gpe-layer"
+ BBFILE_PATTERN_gpe-layer := "^${LAYERDIR}/"
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index 9fa60c1..36137e9 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -1,8 +1,8 @@
+ # We have a conf and classes directory, prepend to BBPATH to prefer our versions
+-BBPATH := "${LAYERDIR}:${BBPATH}"
++BBPATH .= ":${LAYERDIR}"
+ 
+ # We have a recipes directory, add to BBFILES
+-BBFILES := "${BBFILES} ${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
++BBFILES += "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
+ 
+ BBFILE_COLLECTIONS += "openembedded-layer"
+ BBFILE_PATTERN_openembedded-layer := "^${LAYERDIR}/"
+-- 
+1.7.4.1
 
->=20
-> --
-> Tom Rini
-> Mentor Graphics Corporation
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
