@@ -1,35 +1,34 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QIRES-0005xc-Tc
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 May 2011 22:02:36 +0200
-Received: by eye27 with SMTP id 27so1076995eye.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QISZo-0008WT-IB for openembedded-devel@lists.openembedded.org;
+	Fri, 06 May 2011 23:28:44 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QISXF-0006PA-3j for openembedded-devel@lists.openembedded.org;
+	Fri, 06 May 2011 23:26:05 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 06 May 2011 23:26:05 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2011 12:59:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=xKeRFDRCLjSQkfH5LHlOLP5Sa1PzF44GYFX1NsNVVks=;
-	b=njSDckrQWwH24LsiX8OkGQIzruysKDiu2weba8V6FAp5goJzjPtbrw7jPHReULZ+f+
-	NlhFGLOJd5MS4m4jRbCNAC8frlVBcScL4VCGERMyUjkZFXHMXV0rVNe+JvUynvkKQvCF
-	uhLuK5UBLNcbZLRciI63/clmVaI13azQs92NY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=IqXX3hnfGdC737SJ5dwLO459DmXFf+xTM6zRhawyG5EyTy1A0apf80Gu4nxBFoUd2H
-	yfVkRj60E7K+g73gR7XbsQqAupJn9J+4YsCWhx4ajD50eAl+/z/iRWPOPJhpJIMoLIwc
-	dn5pMPhP+/rgElaFJutG5F4fTOypQF3c8CjNQ=
-Received: by 10.14.42.195 with SMTP id j43mr2138149eeb.176.1304711995276; Fri,
-	06 May 2011 12:59:55 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.14.53.5 with HTTP; Fri, 6 May 2011 12:59:25 -0700 (PDT)
-In-Reply-To: <1304666954.3162.3.camel@lenovo.internal.reciva.com>
-References: <1304653677-2982-1-git-send-email-raj.khem@gmail.com>
-	<1304666954.3162.3.camel@lenovo.internal.reciva.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 6 May 2011 12:59:25 -0700
-Message-ID: <BANLkTinMP8C0WQ5yEpckn7rM5yMap6QkZg@mail.gmail.com>
+	Fri, 06 May 2011 23:26:05 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 06 May 2011 23:25:49 +0200
+Message-ID: <iq1p0t$q68$1@dough.gmane.org>
+References: <1304653677-2982-1-git-send-email-raj.khem@gmail.com>	<1304666954.3162.3.camel@lenovo.internal.reciva.com>
+	<BANLkTinMP8C0WQ5yEpckn7rM5yMap6QkZg@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <BANLkTinMP8C0WQ5yEpckn7rM5yMap6QkZg@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
 Subject: Re: [meta-oe][PATCH] conf/layer.conf: Use .= for BBPATH and += for BBFILES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,52 +43,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2011 20:02:37 -0000
+X-List-Received-Date: Fri, 06 May 2011 21:28:44 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Fri, May 6, 2011 at 12:29 AM, Phil Blundell <philb@gnu.org> wrote:
-> On Thu, 2011-05-05 at 20:47 -0700, raj.khem@gmail.com wrote:
->> =C2=A0# We have a conf and classes directory, prepend to BBPATH to prefe=
-r our versions
->> -BBPATH :=3D "${LAYERDIR}:${BBPATH}"
->> +BBPATH .=3D ":${LAYERDIR}"
->
-> This patch seems to cause the code to do the opposite of what the
-> comment says. =C2=A0If changing it to be an append rather than a prepend =
-is
-> deliberate, please adjust the comment to match. =C2=A0(It would also be n=
-ice
-> to have some commentary in the commit message explaining why this is
-> being done, since it isn't obvious to me why append would be better.)
->
-That comment should be fixed. Since previously I has prepend and then
-changed it to append but forgot
-to correct the comment.
-It needed to follow some order for consistency and I chose append. Now
-it depends on the order of
-layers specified in BBLAYERS from bblayer.conf. Which means 1st entry
-gets priority
-over second entry when bitbake searches BBPATH. Right now there are
-two criteria's
-BBFILES are selected per priority set by BBFILES_PRIORITY for the
-layer but BBPATHs dont have this
-capability they get searched as they appear in the list.  Ideally I
-would think it would be simpler to have just one order for BBFILES and
-BBPATH
-so if BBPATHS followed the BBFILES priority too would make it easier
-to comprehend.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
+On 06-05-11 21:59, Khem Raj wrote:
+> On Fri, May 6, 2011 at 12:29 AM, Phil Blundell <philb@gnu.org> wrote:
+>> On Thu, 2011-05-05 at 20:47 -0700, raj.khem@gmail.com wrote:
+>>>  # We have a conf and classes directory, prepend to BBPATH to prefer our versions
+>>> -BBPATH := "${LAYERDIR}:${BBPATH}"
+>>> +BBPATH .= ":${LAYERDIR}"
+>>
+>> This patch seems to cause the code to do the opposite of what the
+>> comment says.  If changing it to be an append rather than a prepend is
+>> deliberate, please adjust the comment to match.  (It would also be nice
+>> to have some commentary in the commit message explaining why this is
+>> being done, since it isn't obvious to me why append would be better.)
+>>
+> That comment should be fixed. Since previously I has prepend and then
+> changed it to append but forgot
+> to correct the comment.
+> It needed to follow some order for consistency and I chose append. Now
+> it depends on the order of
+> layers specified in BBLAYERS from bblayer.conf. Which means 1st entry
+> gets priority
+> over second entry when bitbake searches BBPATH. Right now there are
+> two criteria's
+> BBFILES are selected per priority set by BBFILES_PRIORITY for the
+> layer but BBPATHs dont have this
+> capability they get searched as they appear in the list.  Ideally I
+> would think it would be simpler to have just one order for BBFILES and
+> BBPATH
+> so if BBPATHS followed the BBFILES priority too would make it easier
+> to comprehend.
 
-> p.
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+For meta-oe we need 2 different things:
+
+1) prepend to BBPATH to get our classes in first (e.g. kernel.bbclass,
+gnome.bbclass)
+2) append to BBFILES to use our version of recipes (.bbs) and overrides
+(.bbappends)
+
+It seems that using layer priorities won't work the way we need it.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNxGddMkyGM64RGpERAtQMAJwM1W5k0Z9CgxlBYq82O6b39kLDcwCfTNO7
+Qv6TUjazbpj5vYb6Ex0nxWQ=
+=J/NZ
+-----END PGP SIGNATURE-----
+
 
 
