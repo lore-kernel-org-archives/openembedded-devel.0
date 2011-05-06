@@ -1,24 +1,30 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1QIMl9-0008Cm-4P
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 May 2011 17:16:03 +0200
-Received: by wye20 with SMTP id 20so2792782wye.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2011 08:13:22 -0700 (PDT)
-Received: by 10.216.239.67 with SMTP id b45mr2621529wer.44.1304694802054;
-	Fri, 06 May 2011 08:13:22 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id h11sm2056356wbc.60.2011.05.06.08.13.20
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 06 May 2011 08:13:20 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QIMrf-0008N8-Vl for openembedded-devel@lists.openembedded.org;
+	Fri, 06 May 2011 17:22:48 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QIMp2-0006lt-Nu for openembedded-devel@lists.openembedded.org;
+	Fri, 06 May 2011 17:20:04 +0200
+Received: from 62.200.22.2 ([62.200.22.2])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 06 May 2011 17:20:04 +0200
+Received: from julian.pidancet by 62.200.22.2 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 06 May 2011 17:20:04 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 May 2011 17:13:16 +0200
-Message-Id: <1304694796-9130-1-git-send-email-koen@openembedded.org>
-X-Mailer: git-send-email 1.6.6.1
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: [PATCH] package.bbclass: convert unpackaged file message from 'info' to 'warn' so that it shows up on the console
+From: Julian Pidancet <julian.pidancet@citrix.com>
+Date: Fri, 06 May 2011 16:19:34 +0100
+Message-ID: <iq13cb$q6a$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: 62.200.22.2
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
+Subject: glibc-initial task do_rig_locales failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,31 +38,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2011 15:16:03 -0000
+X-List-Received-Date: Fri, 06 May 2011 15:22:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Koen Kooi <koen@openembedded.org>
----
- classes/package.bbclass |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+I had this issue on both debian and gentoo build machines (so it seems to be independent of the host):
 
-diff --git a/classes/package.bbclass b/classes/package.bbclass
-index 901ad9d..2b98049 100644
---- a/classes/package.bbclass
-+++ b/classes/package.bbclass
-@@ -464,9 +464,9 @@ python populate_packages () {
- 				unshipped.append(path)
- 
- 	if unshipped != []:
--		bb.note("the following files were installed but not shipped in any package:")
-+		bb.warn("the following files were installed but not shipped in any package:")
- 		for f in unshipped:
--			bb.note("  " + f)
-+			bb.warn("  " + f)
- 
- 	bb.build.exec_func("package_name_hook", d)
- 
+NOTE: package glibc-initial-2.10.1-r6: task do_rig_locales: Started
+
+ERROR: Function 'do_rig_locales' failed (see /trees/xci/build/work/i686core2-xci-linux/glibc-initial-2.10.1-r6/temp/log.do_rig_locales.11104 for further information)
+
+ERROR: Logfile of failure stored in: /trees/xci/build/work/i686core2-xci-linux/glibc-initial-2.10.1-r6/temp/log.do_rig_locales.11104
+
+Log data follows:
+
+| + cd /trees/xci/build/work/i686core2-xci-linux/glibc-initial-2.10.1-r6/build-i686-xci-linux
+
+| + do_rig_locales
+
+| + '[' 'xPOSIX en_US en_GB' '!=' x ']'
+
+| + INFILE=/trees/xci/build/work/i686core2-xci-linux/glibc-initial-2.10.1-r6/glibc-2.10.1/localedata/SUPPORTED
+
+| + OUTFILE=/trees/xci/build/work/i686core2-xci-linux/glibc-initial-2.10.1-r6/glibc-2.10.1/localedata/SUPPORTED.tmp
+
+| + head -n 3 /trees/xci/build/work/i686core2-xci-linux/glibc-initial-2.10.1-r6/glibc-2.10.1/localedata/SUPPORTED
+
+| + for i in POSIX en_US en_GB
+
+| + echo
+
+| 
+
+| + grep POSIX /trees/xci/build/work/i686core2-xci-linux/glibc-initial-2.10.1-r6/glibc-2.10.1/localedata/SUPPORTED
+
+| ERROR: Function 'do_rig_locales' failed (see /trees/xci/build/work/i686core2-xci-linux/glibc-initial-2.10.1-r6/temp/log.do_rig_locales.11104 for further information)
+
+NOTE: package glibc-initial-2.10.1-r6: task do_rig_locales: Failed
+
+ERROR: Task 1668 (/trees/xci/openembedded-core/meta/recipes-core/glibc/glibc-initial_2.10.1.bb, do_rig_locales) failed with exit code '1'
+
+For a reason I can't explain, the following patch fixed the issue:
+
+diff --git a/meta/recipes-core/glibc/glibc.inc b/meta/recipes-core/glibc/glibc.inc
+
+index 127ae23..c2a692b 100644
+
+--- a/meta/recipes-core/glibc/glibc.inc
+
++++ b/meta/recipes-core/glibc/glibc.inc
+
+@@ -49,7 +49,7 @@ do_rig_locales() {
+
+         head -n 3 $INFILE > $OUTFILE
+
+         for i in ${LIMIT_BUILT_LOCALES}; do
+
+             echo 
+
+-            grep $i $INFILE >> $OUTFILE
+
++            grep $i $INFILE >> $OUTFILE || true
+
+         done
+
+         head --lines=-1 $OUTFILE > $INFILE
+
+         tail --lines=1 $OUTFILE | sed 's#\\##' >> $INFILE
+
+
 -- 
-1.6.6.1
+Julian Pidancet
+
+
 
 
 
