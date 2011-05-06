@@ -1,25 +1,38 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anilm@mistralsolutions.com>) id 1QIHVZ-0007Sy-GA
+	(envelope-from <heroor@gmail.com>) id 1QII0z-0008EL-9S
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 May 2011 11:39:37 +0200
-Received: by iwn10 with SMTP id 10so2810645iwn.6
+	Fri, 06 May 2011 12:12:06 +0200
+Received: by qwh5 with SMTP id 5so2304171qwh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2011 02:36:56 -0700 (PDT)
+	Fri, 06 May 2011 03:09:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=mzM0fiJa4R7kcTjEba35QO+a3hdjmOoaOpqQ186oaIo=;
+	b=sh915P6sdH87SVCcoLU3gKW2Rqy/51JiAWkngRScKYnuUG3wSEIGVqaLabUXTs8KKZ
+	2GR3cUiakln6zwWx6HSj0XLSJJwFGDvyrtCmXxIL9tLbrgnKCK0oSz9l6H0nOIUPNh6o
+	jQj9Y9yq96gfLdGliJw0CHdsW1Toq5ebZ5ALw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=uw1qfwTmHgCgH5w57w/nY3OhAglNc6lrkSwhDryP/jR094EMmsDIejZ9JXJIauHT7V
+	fkiqx3z6neJ85WjV8ZUzK6FA5pnm6hGx5QYYjQTQxKGy1U8mOI31K/offxxFWd34spE6
+	CKpFROjtjvi/YXhzXD6frmWtpBf/fMD5oGmg0=
 MIME-Version: 1.0
-Received: by 10.42.71.77 with SMTP id i13mr2191779icj.168.1304674616037; Fri,
-	06 May 2011 02:36:56 -0700 (PDT)
-Received: by 10.231.11.138 with HTTP; Fri, 6 May 2011 02:36:55 -0700 (PDT)
-In-Reply-To: <000a01cc0bc4$3277cf70$97676e50$@com>
-References: <000a01cc0bc4$3277cf70$97676e50$@com>
-Date: Fri, 6 May 2011 15:06:55 +0530
-Message-ID: <BANLkTikFEsUA5bVaW5wxVn+85UxqWyknZw@mail.gmail.com>
-From: Anil Kumar Mamidala <anilm@mistralsolutions.com>
+Received: by 10.224.135.133 with SMTP id n5mr3346870qat.392.1304676563773;
+	Fri, 06 May 2011 03:09:23 -0700 (PDT)
+Received: by 10.224.6.79 with HTTP; Fri, 6 May 2011 03:09:23 -0700 (PDT)
+In-Reply-To: <20110506090243.GE26466@ibawizard.net>
+References: <1304243449-12028-1-git-send-email-heroor@ti.com>
+	<20110501173015.GI27708@ibawizard.net>
+	<BANLkTimKHp5M5VvMR21+C_rSRBiu2M0BKQ@mail.gmail.com>
+	<20110506090243.GE26466@ibawizard.net>
+Date: Fri, 6 May 2011 15:39:23 +0530
+Message-ID: <BANLkTikt+X9ocYn-0bsfwzbCcZDQFnm_ww@mail.gmail.com>
+From: Siddharth Heroor <heroor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: koen@dominion.thruhere.net, Srinath R <srinath@mistralsolutions.com>,
-	paulepanter@users.sourceforge.net, nagendra@mistralsolutions.com
-Subject: Re: [PATCH] u-boot_git: Ethernet MACID display fix for CraneBoard
+Subject: Re: [PATCH 1/2] zeromq: Add zeromq socket library.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,78 +46,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2011 09:39:37 -0000
-Content-Type: text/plain; charset=windows-1252
+X-List-Received-Date: Fri, 06 May 2011 10:12:07 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi Paul,
+On Fri, May 6, 2011 at 2:32 PM, Petr =C5=A0tetiar <ynezz@true.cz> wrote:
+> Siddharth Heroor <heroor@gmail.com> [2011-05-03 22:18:03]:
+>
+>> Is the older recipe available somewhere? I didn't have to do this for th=
+e
+>> latest version.
+>
+> Yes, it's in patchwork[1]. I should've pushed it few weeks ago, but didn'=
+t had
+> time to rebase and test it again yet. Hopefully I'll do it during this
+> weekend.
+Ok. I'll wait for your patch. I'm facing some issues with testing my
+patch and so I'll
+withdraw it.
 
-Thanks for your quick feedback. I am sorry. From my next submissions i will
-keep your comments in mind.
+--
+Sid
 
-Here is my Signed-off .
-Signed-off-by: Anil Kumar <anilm@mistralsolutions.com>
-
-This patch was not send to upstream.
-
-
-
-
-
-> Dear Anil,
 >
+> AFAIK, libuuid from util-linux-ng is build/run dependency, so it's needed=
+.
 >
-> thank you for the next version.
+> 1. http://patches.openembedded.org/patch/1885
 >
-> Am Freitag, den 06.05.2011, 12:45 +0530 schrieb Anil Kumar:
-> > CraneBoard u-boot displays the MAC ID wrongly if MAC ID has
-> >       preceding zeros. This patch fixes it and updates Ethernet
-> >       NRST GPIO from 34 to 65.
+> -- ynezz
 >
-> Unfortunately you forgot to add your Signed-off-by line. You do not need =
-to
-> resend the patch, but just reply to this message with the line.
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-> One question though you did not answer.
->
-> 1. Did you send this patch upstream?
->
-> Some more remarks for the future.
->
-> 2. Please mark patch iteration with version information. This patch shoul=
-d
-> have had =BB[PATCH v2]=AB in the subject.
-> 3. The commit message does not have to be indented.
-> 4. Please add below the =BB---=AB a short information what changed in the=
- patch
-> iteration, like
->
-> v2: add commit message
-> and finish this by an additional =BB---=AB.
->
-> > ---
-> >  ...t-MACID-display-fix-for-am3517-craneboard.patch |  108
-> ++++++++++++++++++++
-> >  recipes/u-boot/u-boot_git.bb                       |    3 +-
-> >  2 files changed, 110 insertions(+), 1 deletions(-)  create mode
-> > 100644
-> > recipes/u-boot/u-boot-git/am3517-crane/0004-Ethernet-MACID-display-fix
-> > -for-am3517-craneboard.patch
->
-> [=85]
->
-> Koen, will you push this or do you want me to do this?
->
->
-> Thank you,
->
-> Paul
->
-
 
 
 
 --=20
-Thanks and Regards
-Anil kumar.M
+Sid
+
 
