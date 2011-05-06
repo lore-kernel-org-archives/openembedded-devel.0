@@ -1,34 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QIPzC-0005f6-H1 for openembedded-devel@lists.openembedded.org;
-	Fri, 06 May 2011 20:42:46 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QIPwa-0004le-7D for openembedded-devel@lists.openembedded.org;
-	Fri, 06 May 2011 20:40:04 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2011 20:40:04 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1QIRES-0005xc-Tc
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 06 May 2011 22:02:36 +0200
+Received: by eye27 with SMTP id 27so1076995eye.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2011 20:40:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 06 May 2011 12:59:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=xKeRFDRCLjSQkfH5LHlOLP5Sa1PzF44GYFX1NsNVVks=;
+	b=njSDckrQWwH24LsiX8OkGQIzruysKDiu2weba8V6FAp5goJzjPtbrw7jPHReULZ+f+
+	NlhFGLOJd5MS4m4jRbCNAC8frlVBcScL4VCGERMyUjkZFXHMXV0rVNe+JvUynvkKQvCF
+	uhLuK5UBLNcbZLRciI63/clmVaI13azQs92NY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=IqXX3hnfGdC737SJ5dwLO459DmXFf+xTM6zRhawyG5EyTy1A0apf80Gu4nxBFoUd2H
+	yfVkRj60E7K+g73gR7XbsQqAupJn9J+4YsCWhx4ajD50eAl+/z/iRWPOPJhpJIMoLIwc
+	dn5pMPhP+/rgElaFJutG5F4fTOypQF3c8CjNQ=
+Received: by 10.14.42.195 with SMTP id j43mr2138149eeb.176.1304711995276; Fri,
+	06 May 2011 12:59:55 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.14.53.5 with HTTP; Fri, 6 May 2011 12:59:25 -0700 (PDT)
+In-Reply-To: <1304666954.3162.3.camel@lenovo.internal.reciva.com>
+References: <1304653677-2982-1-git-send-email-raj.khem@gmail.com>
+	<1304666954.3162.3.camel@lenovo.internal.reciva.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 6 May 2011 12:59:25 -0700
+Message-ID: <BANLkTinMP8C0WQ5yEpckn7rM5yMap6QkZg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 06 May 2011 20:35:02 +0200
-Message-ID: <iq1f0m$1u2$1@dough.gmane.org>
-References: <1304688591-31481-1-git-send-email-pprakash@ti.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1304688591-31481-1-git-send-email-pprakash@ti.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] gst-ffmpeg: fix license information
+Subject: Re: [meta-oe][PATCH] conf/layer.conf: Use .= for BBPATH and += for BBFILES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,51 +44,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2011 18:42:46 -0000
+X-List-Received-Date: Fri, 06 May 2011 20:02:37 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Fri, May 6, 2011 at 12:29 AM, Phil Blundell <philb@gnu.org> wrote:
+> On Thu, 2011-05-05 at 20:47 -0700, raj.khem@gmail.com wrote:
+>> =C2=A0# We have a conf and classes directory, prepend to BBPATH to prefe=
+r our versions
+>> -BBPATH :=3D "${LAYERDIR}:${BBPATH}"
+>> +BBPATH .=3D ":${LAYERDIR}"
+>
+> This patch seems to cause the code to do the opposite of what the
+> comment says. =C2=A0If changing it to be an append rather than a prepend =
+is
+> deliberate, please adjust the comment to match. =C2=A0(It would also be n=
+ice
+> to have some commentary in the commit message explaining why this is
+> being done, since it isn't obvious to me why append would be better.)
+>
+That comment should be fixed. Since previously I has prepend and then
+changed it to append but forgot
+to correct the comment.
+It needed to follow some order for consistency and I chose append. Now
+it depends on the order of
+layers specified in BBLAYERS from bblayer.conf. Which means 1st entry
+gets priority
+over second entry when bitbake searches BBPATH. Right now there are
+two criteria's
+BBFILES are selected per priority set by BBFILES_PRIORITY for the
+layer but BBPATHs dont have this
+capability they get searched as they appear in the list.  Ideally I
+would think it would be simpler to have just one order for BBFILES and
+BBPATH
+so if BBPATHS followed the BBFILES priority too would make it easier
+to comprehend.
 
-On 06-05-11 15:29, Punya Prakash wrote:
-> From: Punya Prakash <pprakash.ti@gmail.com>
-> 
-> * gst-ffmpeg by default compiles FFmpeg/libav with --enable-gpl and --enable-postproc
 
-As stated in the other mail, gst-ffmpeg doesn't compile libav, so are
-you sure this license change is correct?
-
-> ---
->  recipes/gstreamer/gst-ffmpeg_0.10.11.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes/gstreamer/gst-ffmpeg_0.10.11.bb b/recipes/gstreamer/gst-ffmpeg_0.10.11.bb
-> index 563521e..26aecce 100644
-> --- a/recipes/gstreamer/gst-ffmpeg_0.10.11.bb
-> +++ b/recipes/gstreamer/gst-ffmpeg_0.10.11.bb
-> @@ -1,11 +1,11 @@
->  DESCRIPTION = "FFmpeg-based GStreamer plug-in"
->  SECTION = "multimedia"
->  PRIORITY = "optional"
-> -LICENSE = "LGPL"
-> +LICENSE = "GPLv2 LGPLv2.1"
->  HOMEPAGE = "http://www.gstreamer.net/"
->  DEPENDS = "ffmpeg gstreamer gst-plugins-base zlib"
->  
-> -PR = "r1"
-> +PR = "r2"
->  
->  inherit autotools pkgconfig
->  
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNxD9WMkyGM64RGpERAm1wAJ41riUGHjnzXO6IbfgduwFNxwSIqwCgvMNk
-qHphF4LQGvNyUiI0D36Q6hs=
-=C6Te
------END PGP SIGNATURE-----
-
+> p.
+>
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
