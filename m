@@ -1,24 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-px0-f172.google.com ([209.85.212.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QIT7O-0001E8-LV for openembedded-devel@lists.openembedded.org;
-	Sat, 07 May 2011 00:03:26 +0200
-Received: from f053032229.adsl.alicedsl.de ([78.53.32.229]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QIT5w-0002Os-6o for openembedded-devel@lists.openembedded.org;
-	Fri, 06 May 2011 22:01:56 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <raj.khem@gmail.com>) id 1QITGz-0001PP-T0
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 07 May 2011 00:13:22 +0200
+Received: by pxi6 with SMTP id 6so2553177pxi.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 06 May 2011 15:10:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=Qaoe4g2RQhuNMSB83zk7dCjx45Ug0bcej1+MbMp8nqg=;
+	b=XD4lz4bS/IuF29kMGr1B2UDdYLxNwaslpuQeFdHRzea10mV/NZ8ADSaVBaPu7fP5+e
+	wGe/4RpZhO1Vq0I71dv4QbffVjllp3D2r7tvFOr7x5UBjrJSrbcTltcMLJP6nwoxk/XY
+	gzWTP/395dO2rqcyOSRWjf/L7eoPN2SccLstg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=LePz6lKyfpvci5PBwwUPTIAl4a7eK82+fHrPzSPL4ozQ4KPwNoDyeTDpgDjRqkg92q
+	BK9n+iR6MLwRyKMI8EVdxdzn3mDp0TneTTA1l+S/loSFoFg7ugtrW+9CfV7pY9RRv6j6
+	B4Whu5/vwVOxDoZuN+dlk/nBQZkTFAYCCTfuo=
+Received: by 10.68.6.6 with SMTP id w6mr5772281pbw.512.1304719839497;
+	Fri, 06 May 2011 15:10:39 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id a20sm2390273pbu.59.2011.05.06.15.10.37
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 06 May 2011 15:10:38 -0700 (PDT)
+From: raj.khem@gmail.com
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1304337015.3949.62.camel@mattotaupa>
-References: <1304324573-31754-1-git-send-email-koen@openembedded.org>
-	<1304337015.3949.62.camel@mattotaupa>
-Date: Sat, 07 May 2011 00:00:45 +0200
-Message-ID: <1304719245.3928.21.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Recipe for docbook-xsl useful? (was: [PATCH] systemd: update to v26)
+Date: Fri,  6 May 2011 15:10:28 -0700
+Message-Id: <1304719828-22697-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [meta-oe][PATCH] conf/layer.conf: conf/layer.conf: Document the operation on BBPATH correctly in the comment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,80 +43,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2011 22:03:26 -0000
-X-Groupsio-MsgNum: 31671
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-SmBA1Y8mgif0j+yCXcpH"
+X-List-Received-Date: Fri, 06 May 2011 22:13:22 -0000
 
---=-SmBA1Y8mgif0j+yCXcpH
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Khem Raj <raj.khem@gmail.com>
 
-Dear OE folks,
+Provide additional commentary that should help a bit more
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-efl/conf/layer.conf   |    2 +-
+ meta-gnome/conf/layer.conf |    2 +-
+ meta-gpe/conf/layer.conf   |    2 +-
+ meta-oe/conf/layer.conf    |   18 +++++++++++++++++-
+ 4 files changed, 20 insertions(+), 4 deletions(-)
+
+diff --git a/meta-efl/conf/layer.conf b/meta-efl/conf/layer.conf
+index f019337..272fc04 100644
+--- a/meta-efl/conf/layer.conf
++++ b/meta-efl/conf/layer.conf
+@@ -1,4 +1,4 @@
+-# We have a conf and classes directory, prepend to BBPATH to prefer our versions
++# We have a conf and classes directory, append to BBPATH 
+ BBPATH .= ":${LAYERDIR}"
+ 
+ # We have a recipes directory, add to BBFILES
+diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
+index 6e8ff28..902ab8f 100644
+--- a/meta-gnome/conf/layer.conf
++++ b/meta-gnome/conf/layer.conf
+@@ -1,4 +1,4 @@
+-# We have a conf and classes directory, prepend to BBPATH to prefer our versions
++# We have a conf and classes directory, append to BBPATH
+ BBPATH .= ":${LAYERDIR}"
+ 
+ # We have a recipes directory, add to BBFILES
+diff --git a/meta-gpe/conf/layer.conf b/meta-gpe/conf/layer.conf
+index 006b6af..6c018b1 100644
+--- a/meta-gpe/conf/layer.conf
++++ b/meta-gpe/conf/layer.conf
+@@ -1,4 +1,4 @@
+-# We have a conf and classes directory, prepend to BBPATH to prefer our versions
++# We have a conf and classes directory, append to BBPATH
+ BBPATH .= ":${LAYERDIR}"
+ 
+ # We have a recipes directory, add to BBFILES
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index 36137e9..d5c2a17 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -1,4 +1,14 @@
+-# We have a conf and classes directory, prepend to BBPATH to prefer our versions
++# It really depends on order of the layers appearing in BBLAYERS
++# variable in toplevel bblayers.conf file, where bitbake will search
++# for .inc files and others where bitbake uses BBPATH since it will
++# search the directories from first to last as specfied in BBPATH
++# Therefore if you want a given layer to be considered high priority
++# for the .inc and .conf etc. then consider it adding at the beginning
++# of BBPATH. For bblayers bitbake will use BBFILES_PRIORITY to resolve
++# the recipe contention so the order of directories in BBFILES does 
++# not matter
++
++# We have a conf and classes directory, append to BBPATH
+ BBPATH .= ":${LAYERDIR}"
+ 
+ # We have a recipes directory, add to BBFILES
+@@ -6,4 +16,10 @@ BBFILES += "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
+ 
+ BBFILE_COLLECTIONS += "openembedded-layer"
+ BBFILE_PATTERN_openembedded-layer := "^${LAYERDIR}/"
++
++# Define the priority for recipes (.bb files) from this layer
++# this should be noted when you use this layer since it has
++# to fall into the correct layer priority order that you have decided
++# for you layering model
++
+ BBFILE_PRIORITY_openembedded-layer = "6"
+-- 
+1.7.4.1
 
 
-Am Montag, den 02.05.2011, 13:50 +0200 schrieb Paul Menzel:
 
-[=E2=80=A6]
-
-> Anyway, using `angstrom-2010.x` for `MACHINE =3D "beagleboard"` fails wit=
-h
-> the following error message.
->=20
->         [=E2=80=A6]
->           CCLD   systemd-getty-generator
->           GEN    man/systemd.1
->         I/O error : Attempt to load network entity http://docbook.sourcef=
-orge.net/release/xsl/current/manpages/docbook.xsl
->         warning: failed to load external entity "http://docbook.sourcefor=
-ge.net/release/xsl/current/manpages/docbook.xsl"
->         cannot parse http://docbook.sourceforge.net/release/xsl/current/m=
-anpages/docbook.xsl
->         make[1]: *** [man/systemd.1] Error 4
->         make[1]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/=
-work/armv7a-angstrom-linux-gnueabi/systemd-v26-r0/git'
->         make: *** [all] Error 2
->         + die 'oe_runmake failed'
->         + oefatal 'oe_runmake failed'
->         + echo FATAL: 'oe_runmake failed'
->         FATAL: oe_runmake failed
->         + exit 1
-
-systemd depends on `docbook-xsl` to generate the manual pages. I do not
-have that installed on my build system.
-
-I found a recipe in `recipes/nonworking` [1] which dates back from the
-import of the BitKeeper tree into Git and which has just `SRC_URI`
-entries.
-
-Basically these are just the XML/XSL files which need to be copied to
-the correct location and somehow registered using `xmlcatalog`(?) from
-`libxml2-utils`.
-
-Has anyone of you tried to create a recipe for docbook-xsl or was it
-considered not useful for the effort needed and therefore recommended to
-install it locally on the build system?
-
-
-Thanks,
-
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/nonwork=
-ing/docbook-xsl?id=3Def7114f6ac9145eb31639cc65dfdc7f3615ece9e
-
---=-SmBA1Y8mgif0j+yCXcpH
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3Eb40ACgkQPX1aK2wOHVj31ACfXB5cscTmYcHh/ut8B+RvnxF9
-Ht8Amwd7rqZ8bRWTqf14sugLveI+0mKz
-=f7rs
------END PGP SIGNATURE-----
-
---=-SmBA1Y8mgif0j+yCXcpH--
