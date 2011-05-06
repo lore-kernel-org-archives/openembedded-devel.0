@@ -1,22 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QITVU-0001f4-UK for openembedded-devel@lists.openembedded.org;
-	Sat, 07 May 2011 00:28:20 +0200
-Received: from f053032229.adsl.alicedsl.de ([78.53.32.229]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QITU2-0003Rb-IM for openembedded-devel@lists.openembedded.org;
-	Fri, 06 May 2011 22:26:51 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gary@mlbassoc.com>) id 1QITfn-0001ux-Tv
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 07 May 2011 00:39:00 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 6E7DF166030B; Fri,  6 May 2011 16:36:19 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2-r929478 (2010-03-31) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2-r929478
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id E4F6A1660305;
+	Fri,  6 May 2011 16:36:15 -0600 (MDT)
+Message-ID: <4DC477DF.8070702@mlbassoc.com>
+Date: Fri, 06 May 2011 16:36:15 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc13
+	Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1304719828-22697-1-git-send-email-raj.khem@gmail.com>
 References: <1304719828-22697-1-git-send-email-raj.khem@gmail.com>
-Date: Sat, 07 May 2011 00:25:40 +0200
-Message-ID: <1304720740.3928.26.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
+	<1304720740.3928.26.camel@mattotaupa>
+In-Reply-To: <1304720740.3928.26.camel@mattotaupa>
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
 Subject: Re: [meta-oe][PATCH] conf/layer.conf: conf/layer.conf: Document the operation on BBPATH correctly in the comment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,135 +39,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2011 22:28:21 -0000
-X-Groupsio-MsgNum: 31673
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-62STNoJSoeQi1aBH2jzx"
-
---=-62STNoJSoeQi1aBH2jzx
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 06 May 2011 22:39:00 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-Am Freitag, den 06.05.2011, 15:10 -0700 schrieb raj.khem@gmail.com:
-> From: Khem Raj <raj.khem@gmail.com>
->=20
-> Provide additional commentary that should help a bit more
->=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-efl/conf/layer.conf   |    2 +-
->  meta-gnome/conf/layer.conf |    2 +-
->  meta-gpe/conf/layer.conf   |    2 +-
->  meta-oe/conf/layer.conf    |   18 +++++++++++++++++-
->  4 files changed, 20 insertions(+), 4 deletions(-)
->=20
-> diff --git a/meta-efl/conf/layer.conf b/meta-efl/conf/layer.conf
-> index f019337..272fc04 100644
-> --- a/meta-efl/conf/layer.conf
-> +++ b/meta-efl/conf/layer.conf
-> @@ -1,4 +1,4 @@
-> -# We have a conf and classes directory, prepend to BBPATH to prefer our =
-versions
-> +# We have a conf and classes directory, append to BBPATH=20
->  BBPATH .=3D ":${LAYERDIR}"
-> =20
->  # We have a recipes directory, add to BBFILES
-> diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
-> index 6e8ff28..902ab8f 100644
-> --- a/meta-gnome/conf/layer.conf
-> +++ b/meta-gnome/conf/layer.conf
-> @@ -1,4 +1,4 @@
-> -# We have a conf and classes directory, prepend to BBPATH to prefer our =
-versions
-> +# We have a conf and classes directory, append to BBPATH
->  BBPATH .=3D ":${LAYERDIR}"
-> =20
->  # We have a recipes directory, add to BBFILES
-> diff --git a/meta-gpe/conf/layer.conf b/meta-gpe/conf/layer.conf
-> index 006b6af..6c018b1 100644
-> --- a/meta-gpe/conf/layer.conf
-> +++ b/meta-gpe/conf/layer.conf
-> @@ -1,4 +1,4 @@
-> -# We have a conf and classes directory, prepend to BBPATH to prefer our =
-versions
-> +# We have a conf and classes directory, append to BBPATH
->  BBPATH .=3D ":${LAYERDIR}"
-> =20
->  # We have a recipes directory, add to BBFILES
-> diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-> index 36137e9..d5c2a17 100644
-> --- a/meta-oe/conf/layer.conf
-> +++ b/meta-oe/conf/layer.conf
-> @@ -1,4 +1,14 @@
-> -# We have a conf and classes directory, prepend to BBPATH to prefer our =
-versions
-> +# It really depends on order of the layers appearing in BBLAYERS
-> +# variable in toplevel bblayers.conf file, where bitbake will search
-> +# for .inc files and others where bitbake uses BBPATH since it will
-> +# search the directories from first to last as specfied in BBPATH
+On 05/06/2011 04:25 PM, Paul Menzel wrote:
+> Am Freitag, den 06.05.2011, 15:10 -0700 schrieb raj.khem@gmail.com:
+>> From: Khem Raj<raj.khem@gmail.com>
+>>
+>> Provide additional commentary that should help a bit more
+>>
+>> Signed-off-by: Khem Raj<raj.khem@gmail.com>
+>> ---
+>>   meta-efl/conf/layer.conf   |    2 +-
+>>   meta-gnome/conf/layer.conf |    2 +-
+>>   meta-gpe/conf/layer.conf   |    2 +-
+>>   meta-oe/conf/layer.conf    |   18 +++++++++++++++++-
+>>   4 files changed, 20 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/meta-efl/conf/layer.conf b/meta-efl/conf/layer.conf
+>> index f019337..272fc04 100644
+>> --- a/meta-efl/conf/layer.conf
+>> +++ b/meta-efl/conf/layer.conf
+>> @@ -1,4 +1,4 @@
+>> -# We have a conf and classes directory, prepend to BBPATH to prefer o=
+ur versions
+>> +# We have a conf and classes directory, append to BBPATH
+>>   BBPATH .=3D ":${LAYERDIR}"
+>>
+>>   # We have a recipes directory, add to BBFILES
+>> diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
+>> index 6e8ff28..902ab8f 100644
+>> --- a/meta-gnome/conf/layer.conf
+>> +++ b/meta-gnome/conf/layer.conf
+>> @@ -1,4 +1,4 @@
+>> -# We have a conf and classes directory, prepend to BBPATH to prefer o=
+ur versions
+>> +# We have a conf and classes directory, append to BBPATH
+>>   BBPATH .=3D ":${LAYERDIR}"
+>>
+>>   # We have a recipes directory, add to BBFILES
+>> diff --git a/meta-gpe/conf/layer.conf b/meta-gpe/conf/layer.conf
+>> index 006b6af..6c018b1 100644
+>> --- a/meta-gpe/conf/layer.conf
+>> +++ b/meta-gpe/conf/layer.conf
+>> @@ -1,4 +1,4 @@
+>> -# We have a conf and classes directory, prepend to BBPATH to prefer o=
+ur versions
+>> +# We have a conf and classes directory, append to BBPATH
+>>   BBPATH .=3D ":${LAYERDIR}"
+>>
+>>   # We have a recipes directory, add to BBFILES
+>> diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+>> index 36137e9..d5c2a17 100644
+>> --- a/meta-oe/conf/layer.conf
+>> +++ b/meta-oe/conf/layer.conf
+>> @@ -1,4 +1,14 @@
+>> -# We have a conf and classes directory, prepend to BBPATH to prefer o=
+ur versions
+>> +# It really depends on order of the layers appearing in BBLAYERS
+>> +# variable in toplevel bblayers.conf file, where bitbake will search
+>> +# for .inc files and others where bitbake uses BBPATH since it will
+>> +# search the directories from first to last as specfied in BBPATH
+>
+> spec*i*fied
+>
+>> +# Therefore if you want a given layer to be considered high priority
+>> +# for the .inc and .conf etc. then consider it adding at the beginnin=
+g
+>
+> =E2=80=A6 then consider adding it to the =E2=80=A6
+>
+>> +# of BBPATH. For bblayers bitbake will use BBFILES_PRIORITY to resolv=
+e
+>> +# the recipe contention so the order of directories in BBFILES does
+>> +# not matter
+>
+> Full stop at the end?
+>
+>> +
+>> +# We have a conf and classes directory, append to BBPATH
+>>   BBPATH .=3D ":${LAYERDIR}"
+>>
+>>   # We have a recipes directory, add to BBFILES
+>> @@ -6,4 +16,10 @@ BBFILES +=3D "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDI=
+R}/recipes-*/*/*.bbappend"
+>>
+>>   BBFILE_COLLECTIONS +=3D "openembedded-layer"
+>>   BBFILE_PATTERN_openembedded-layer :=3D "^${LAYERDIR}/"
+>> +
+>> +# Define the priority for recipes (.bb files) from this layer
+>
+> Add an extra line to make paragraph more clear or start with a capital
+> letter below?
+>
+>> +# this should be noted when you use this layer since it has
+>
+> Note sounds strange. Use =C2=BBdefined=C2=AB again?
+>
+>> +# to fall into the correct layer priority order that you have decided
+>> +# for you layering model
+>
+> s/you/your/
+>
+>> +
+>>   BBFILE_PRIORITY_openembedded-layer =3D "6"
+>
+> Acked-by: Paul Menzel<paulepanter@users.sourceforge.net>
+>
+> But please wait a bit before pushing it. Maybe a native speaker will
+> read through the new comments.
 
-spec*i*fied
+The corrections look fine, but I think that last bit should be
+worded more like this:
 
-> +# Therefore if you want a given layer to be considered high priority
-> +# for the .inc and .conf etc. then consider it adding at the beginning
+   # Define the priority for recipes (.bb files) from this layer,
+   # choosing carefully how this layer interacts with all of the
+   # other layers.
 
-=E2=80=A6 then consider adding it to the =E2=80=A6
+n.b. I'm not convinced of the worth of layer priorities; I don't
+see what they gain and to me they only cause confusion...
 
-> +# of BBPATH. For bblayers bitbake will use BBFILES_PRIORITY to resolve
-> +# the recipe contention so the order of directories in BBFILES does=20
-> +# not matter
-
-Full stop at the end?
-
-> +
-> +# We have a conf and classes directory, append to BBPATH
->  BBPATH .=3D ":${LAYERDIR}"
-> =20
->  # We have a recipes directory, add to BBFILES
-> @@ -6,4 +16,10 @@ BBFILES +=3D "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/=
-recipes-*/*/*.bbappend"
-> =20
->  BBFILE_COLLECTIONS +=3D "openembedded-layer"
->  BBFILE_PATTERN_openembedded-layer :=3D "^${LAYERDIR}/"
-> +
-> +# Define the priority for recipes (.bb files) from this layer
-
-Add an extra line to make paragraph more clear or start with a capital
-letter below?
-
-> +# this should be noted when you use this layer since it has
-
-Note sounds strange. Use =C2=BBdefined=C2=AB again?
-
-> +# to fall into the correct layer priority order that you have decided
-> +# for you layering model
-
-s/you/your/
-
-> +
->  BBFILE_PRIORITY_openembedded-layer =3D "6"
-
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
-
-But please wait a bit before pushing it. Maybe a native speaker will
-read through the new comments.
+--=20
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
-Thanks,
-
-Paul
-
---=-62STNoJSoeQi1aBH2jzx
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3EdWQACgkQPX1aK2wOHVgXKgCZAe56nmanOHHFN8pn6bE5t4zP
-2aQAnixL9qdnWW+AYVJ71/60alaag3nU
-=FdpU
------END PGP SIGNATURE-----
-
---=-62STNoJSoeQi1aBH2jzx--
