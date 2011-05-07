@@ -1,39 +1,39 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QIn0x-00064q-F3
+	(envelope-from <otavio.salvador@gmail.com>) id 1QIn2m-0006Aj-Rz
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 May 2011 21:18:07 +0200
-Received: by bwz5 with SMTP id 5so3616621bwz.6
+	Sat, 07 May 2011 21:20:00 +0200
+Received: by bwz5 with SMTP id 5so3617095bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 May 2011 12:15:25 -0700 (PDT)
+	Sat, 07 May 2011 12:17:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=+PKuJJfHUrbRX2N8AuZ5E61s1XUIEP6Ny+THeLRfkWc=;
-	b=UsgUhfUSPjJELXW5Asd95mzEygFuL5Ds+WFFWChD4P0rtqULc1PApE6GuLaslyhpyT
-	YE1sEg4magobYPbkg/AWn2Rtr0qY8aOPb5pVVH/0KImP7lzUqbMtQQ1/vtXlcIMfutIA
-	B4BmuhhGzsX7if1WTrmHyt9Fv8JLZojTUzOm0=
+	bh=5xlbByCaKu3xdLdtELh/FLlASIx57+g8DPZkr01IN3Y=;
+	b=R7Ut95j5C+xhmDsfn3jmWhaVoh4OL6A6ua/TRbQQrg5CXSGnoqNChXmNtEg0y/6/tw
+	LVMpVl1fFqoYVnAJqvEqp1cgH0HvEcJS4ce4OP5u/2Y/N08KktmwpWpwNvL2OsGzIHA3
+	M8oc0WkfvZifuHNap79aSe1JPAz/emp3iIXFM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	b=RBVMG4Qfkq+s1AG/LT01CEWr/pOHFq9w0tzwvwSwb+Aun5oB2Mv63vEtevA4uaIEUW
-	U9xDQaIvZnHFQanQm2GLpLIDeGvMWHQ7Xu88fw+xFFbb08XtlJdJVVQGeggzxEsU1o3A
-	Gr/dQsIPjjJ+h2pFT+4nYdUN/IFR5Jw9Y2LDI=
+	b=U5G95mWFRnsQ9a7UbEYQhs/vJNiVvUKHffBkrPULkKKjOgtzRt5z8LZiMd8t/6lYZS
+	d8vwTHclbiP90rFe1TMzOe0jm9tUUMp/BrfmZUGaIIe7QT24XtcazXUU8FLld4TbCwQT
+	Svbxsg5n7Eq4AlWXyMADEZvEzZao8rqeZ0aM4=
 MIME-Version: 1.0
-Received: by 10.204.83.129 with SMTP id f1mr2615786bkl.29.1304795725303; Sat,
-	07 May 2011 12:15:25 -0700 (PDT)
+Received: by 10.204.36.7 with SMTP id r7mr2933116bkd.2.1304795838675; Sat, 07
+	May 2011 12:17:18 -0700 (PDT)
 Sender: otavio.salvador@gmail.com
-Received: by 10.204.70.138 with HTTP; Sat, 7 May 2011 12:15:25 -0700 (PDT)
-In-Reply-To: <BANLkTimUzegj_5eGcXLHn8=zqCU5KpgDpQ@mail.gmail.com>
-References: <BANLkTimUzegj_5eGcXLHn8=zqCU5KpgDpQ@mail.gmail.com>
-Date: Sat, 7 May 2011 16:15:25 -0300
-X-Google-Sender-Auth: LoYvetPdGJj0iISwwmGDTlj113Q
-Message-ID: <BANLkTimoWPPhe700xnuuTEB8dX8+JLdwsg@mail.gmail.com>
+Received: by 10.204.70.138 with HTTP; Sat, 7 May 2011 12:17:18 -0700 (PDT)
+In-Reply-To: <1304773638-24877-1-git-send-email-morphis@gravedo.de>
+References: <1304773638-24877-1-git-send-email-morphis@gravedo.de>
+Date: Sat, 7 May 2011 16:17:18 -0300
+X-Google-Sender-Auth: qKVKB6tQY8T-i1c8Ly_ND2xNPTI
+Message-ID: <BANLkTik1ArwPz=B-OGrsfNWza2ad4d4g6Q@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: typo in push origin/org.openmbedded.dev
+Subject: Re: [PATCH] qt4-libs-native: add initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,17 +47,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 May 2011 19:18:07 -0000
+X-List-Received-Date: Sat, 07 May 2011 19:20:00 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, May 7, 2011 at 15:06, Khem Raj <raj.khem@gmail.com> wrote:
-> Someone pushed a branch origin/org.openmbedded.dev there is a typo I
-> think or was it intentional ?
-> if it has no patches that are not in master then we should delete this
-> branch please let me know
+On Sat, May 7, 2011 at 10:07, Simon Busch <morphis@gravedo.de> wrote:
+> The native version of the qt4 libraries is needed by some other native re=
+cipes to build.
+> It's mostly a copy of the qt4-tools-native recipes with some changed conf=
+iguration optons
+> and is only available for version 4.7.2 now.
 
-It was by mistake. I recall someone posting about it here.
+I second this idea since I will be a user of it but seems better to me
+to have a full qt4-native since this would reduce build duplication
+time, no?
 
 --=20
 Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
