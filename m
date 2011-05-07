@@ -1,33 +1,31 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1QIlmL-0003n4-V6
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 May 2011 19:58:58 +0200
-Received: from p4ff89784.dip.t-dialin.net ([79.248.151.132]
-	helo=excalibur.local) by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1QIlft-000421-NZ by authid <stefan@sostec.de> with srv_auth_cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 May 2011 19:56:17 +0200
-Received: from stefan by excalibur.local with local (Exim 4.75)
-	(envelope-from <stefan@excalibur.local>) id 1QIlfp-0003vh-0P
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 May 2011 19:52:13 +0200
-Date: Sat, 7 May 2011 19:52:12 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110507175212.GA27854@excalibur.local>
-References: <20110412085148.GC17374@excalibur.local>
-	<20110418075153.GA15540@excalibur.local>
-	<1303158552.2853.4.camel@gnutoo-desktop>
-	<20110419085515.GA13833@excalibur.local>
+	(envelope-from <raj.khem@gmail.com>) id 1QIlwz-0004P3-5A
+	for Openembedded-devel@lists.openembedded.org;
+	Sat, 07 May 2011 20:09:57 +0200
+Received: by eye27 with SMTP id 27so1245007eye.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sat, 07 May 2011 11:07:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:from:date:message-id:subject:to
+	:content-type; bh=8CximhcYdzsvJ3v+aXe0WfBmZRbjy5nIcKvAC5VrOiI=;
+	b=aAQQFty8vvc6Wh73PocPlZyoV6FY80OHljU9jE4n8oVS2SAorHHnxMrvuMvbdApLW6
+	TSAr103KEM1ZGptsincFRmciHOAYX4TbaxW119lg/IxxbEUQS29ZwbCYOWeZu3AMtgyY
+	AbqCXwzx92DKIAdMEWk61QJFcencpZer8NnO0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=HomfywCQXqJy6Is76CaEzd2lCmJwT/Lv7T4qxHnhLf20pv7ZE++UDdzKqID6GBLutB
+	9b+FPQ64C6lkh3WzSUfN0laK8l1DHNWB9ZyUWvCcCZNJjoT9r/6ano+SDpXb+ak/Wt22
+	Q4WzVWfJ9/g26H2tyyRfxdVl2Cq6qk1HSMQbg=
+Received: by 10.14.22.6 with SMTP id s6mr2532340ees.240.1304791635133; Sat, 07
+	May 2011 11:07:15 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20110419085515.GA13833@excalibur.local>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: Patchwork day on Sunday 2011-04-17 and shutdown of patchwork.openembedded.org in favour of patches.openembedded.org
+Received: by 10.14.53.5 with HTTP; Sat, 7 May 2011 11:06:45 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 7 May 2011 11:06:45 -0700
+Message-ID: <BANLkTimUzegj_5eGcXLHn8=zqCU5KpgDpQ@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: typo in push origin/org.openmbedded.dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,37 +39,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 May 2011 17:58:58 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 07 May 2011 18:09:57 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hello.
+Hi
 
-On Tue, 2011-04-19 at 10:55, Stefan Schmidt wrote:
-> 
-> On Mon, 2011-04-18 at 22:29, Denis 'GNUtoo' Carikli wrote:
-> > > No response her eon the ml and neither in private or IRC. I would
-> > > judge therefor that the patches sitting in there are not of much
-> > > interest for people anymore.
-> > The emacs patch interest me,
-> > that's why I sent a mail about it,
-> > but since the x11 version segfaults while dumping the memory with qemu,
-> > I'm stuck and can't push it.
-> 
-> So you will keep track of the original recipe and try to work out the
-> problems until its ready for inclusion.
-> 
-> I can over to put the old patches somewhere as reference when shutting
-> down the old patchwork.
+Someone pushed a branch origin/org.openmbedded.dev there is a typo I
+think or was it intentional ?
+if it has no patches that are not in master then we should delete this
+branch please let me know
 
-Its about time now. I uploaded a bundle with all patches still sitting
-in there here:
-http://datenfreihafen.org/~stefan/oe/all-old-patchwork-patches.mbox
-
-Will try to catch Tom King to initiate the old patchwork shutdown this
-weekend.
-
-regards
-Stefan Schmidt
+Thanks
+-Khem
 
 
