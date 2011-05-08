@@ -1,46 +1,36 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QItvt-0007cD-54
+	(envelope-from <otavio.salvador@gmail.com>) id 1QIu0X-0007m5-Uu
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 04:41:21 +0200
-Received: by bwz5 with SMTP id 5so3725867bwz.6
+	Sun, 08 May 2011 04:46:10 +0200
+Received: by gyf1 with SMTP id 1so1667705gyf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 May 2011 19:38:38 -0700 (PDT)
+	Sat, 07 May 2011 19:43:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=zIyBbHSP3nB0yxEUr/QjJo5uG+Z9cA9JDDxAALQNChg=;
-	b=GN5e0H4bA7OtbKWJKw2uyAPFdvMq80zPL6ORyUvyKvibarrj44RqDtLLdS+nMBG97F
-	EdDz3f7v1WdilSkCtHldOx4mJjYUce2v31aaebf2ALWv327Me6UQPOsagVpr1pHE4E4a
-	cbMFPIeFFvc1sHH3FZFdjK6IMb+F3RjnHZB8I=
+	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
+	:x-mailer; bh=mMqpeWfSU7kRKlAXmIAowPZ2IJDPEqQyqWvmpdBTf/Y=;
+	b=HyyAKVt7sUXkkZGfJvl5xh5Wf8iWQzoX4YzQGHEL3brquopHoZwclmelKT8V+cXVvx
+	JXtZjSgt0PgbRmQZhSgm4EzvOcvr4FwhoopDsIgY8yJfhbh/fgKkjHUjfr8WV0a9e86n
+	hTWm/HL6a0biPf24mFVee3d5syWSqC+PvJUhA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=AcgH/0E3d0iwBOcznZZjacnUoNRFoFh+/rqkB9tWEYit8snm0khGWassuZnl8vJI+r
-	Db4OMmgK84ZJyi/VIW/Zvk+ZMgvKGaFy1ECLwBARMt16ETuouunQGnnX70GxAzW9JcVB
-	qTRaobCnr6+epgVz/dzLlDosb4lAu68HkTZ2Y=
-MIME-Version: 1.0
-Received: by 10.204.178.65 with SMTP id bl1mr3978045bkb.189.1304822318632;
-	Sat, 07 May 2011 19:38:38 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.79.70 with HTTP; Sat, 7 May 2011 19:38:38 -0700 (PDT)
-In-Reply-To: <iq4q32$e40$3@dough.gmane.org>
-References: <BANLkTi=UexRucCByH0SrL-j0_+dB4DCC7Q@mail.gmail.com>
-	<1304806316-9716-1-git-send-email-otavio@ossystems.com.br>
-	<1304806316-9716-2-git-send-email-otavio@ossystems.com.br>
-	<1304806316-9716-3-git-send-email-otavio@ossystems.com.br>
-	<1304806316-9716-4-git-send-email-otavio@ossystems.com.br>
-	<1304806316-9716-5-git-send-email-otavio@ossystems.com.br>
-	<1304806316-9716-6-git-send-email-otavio@ossystems.com.br>
-	<iq4q32$e40$3@dough.gmane.org>
-Date: Sat, 7 May 2011 23:38:38 -0300
-X-Google-Sender-Auth: Fjs10pzBPFY3GgOCnf_0nJ5Jqt8
-Message-ID: <BANLkTikHrZ6YaASMM2bmbnFkoEF8ZA7kJg@mail.gmail.com>
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=sIC6fsIOfvHfuZGHlp2Rvm6LeTcaHYLfaJpOpDWhk9CfC9Xq2uvs41duBZRRKt4kqd
+	nWLSWNs11k77+0VvI45DRnkKSAsOdFj756C7cGCb59k+pW/Wf9IqsRHgVPmUyG2nnBaX
+	otHmRahZmySUgJacCOoJPpiTkDmE3bbiWPD54=
+Received: by 10.236.185.164 with SMTP id u24mr1129168yhm.443.1304822605534;
+	Sat, 07 May 2011 19:43:25 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id v1sm4837128anh.25.2011.05.07.19.43.23
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 07 May 2011 19:43:24 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 6/8] p910nd: add 0.95 version
+Date: Sun,  8 May 2011 02:42:56 +0000
+Message-Id: <1304822586-14872-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH 01/11] fuse: add 2.8.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,27 +44,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2011 02:41:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 08 May 2011 02:46:10 -0000
 
-On Sat, May 7, 2011 at 22:02, Koen Kooi <koen@dominion.thruhere.net> wrote:
-...
->> diff --git a/meta-oe/recipes-support/p910nd/files/avahi b/meta-oe/recipe=
-s-support/p910nd/files/avahi
->
->> + =A0 =A0<txt-record>product=3Dfoonas network printer</txt-record>
->
-> That's oddly distro specific
+This recipes is required by ntfs-3g-ntfsprogs.
 
-Agreed. I have dropped it from the recipe since I don't use it now. So
-let's add it if/when it is needed.
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ meta-oe/recipes-support/fuse/fuse_2.8.5.bb |   32 ++++++++++++++++++++++++++++
+ 1 files changed, 32 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/fuse/fuse_2.8.5.bb
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+diff --git a/meta-oe/recipes-support/fuse/fuse_2.8.5.bb b/meta-oe/recipes-support/fuse/fuse_2.8.5.bb
+new file mode 100644
+index 0000000..cf323ce
+--- /dev/null
++++ b/meta-oe/recipes-support/fuse/fuse_2.8.5.bb
+@@ -0,0 +1,32 @@
++DESCRIPTION = "With FUSE it is possible to implement a fully functional filesystem in a userspace program"
++HOMEPAGE = "http://fuse.sf.net"
++LICENSE = "GPLv2"
++RRECOMMENDS_fuse = "kernel-module-fuse""
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
++                    file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
++
++PR = "r0"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz"
++
++inherit autotools pkgconfig
++
++EXTRA_OECONF = " --disable-kernel-module"
++
++PACKAGES =+ "fuse-utils-dbg fuse-utils libulockmgr libulockmgr-dev libulockmgr-dbg"
++
++FILES_${PN} += "${libdir}/libfuse.so.*"
++FILES_${PN}-dev += "${libdir}/libfuse*.la"
++
++FILES_libulockmgr = "${libdir}/libulockmgr.so.*"
++FILES_libulockmgr-dev += "${libdir}/libulock*.la"
++FILES_libulockmgr-dbg += "${libdir}/.debug/libulock*"
++
++# Forbid auto-renaming to libfuse-utils
++FILES_fuse-utils = "${bindir} ${base_sbindir}"
++FILES_fuse-utils-dbg = "${bindir}/.debug ${base_sbindir}/.debug"
++DEBIAN_NOAUTONAME_fuse-utils = "1"
++DEBIAN_NOAUTONAME_fuse-utils-dbg = "1"
++
++SRC_URI[md5sum] = "8aa2fd689de00b73963620483084ae3b"
++SRC_URI[sha256sum] = "bec80e66ae8ee60dfdf67b2ca291266a45dcfe6bc20c64f3acfceaa38ed29a84"
+-- 
+1.7.2.5
+
 
 
