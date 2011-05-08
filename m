@@ -1,34 +1,24 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QIzZi-00076i-Fs for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 10:42:50 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QIzX4-0001gw-8U for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 10:40:06 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 May 2011 10:40:06 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 May 2011 10:40:06 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QIzgW-0007JX-5a for openembedded-devel@lists.openembedded.org;
+	Sun, 08 May 2011 10:49:52 +0200
+Received: from f053040243.adsl.alicedsl.de ([78.53.40.243]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QIzf5-0000u7-M1 for openembedded-devel@lists.openembedded.org;
+	Sun, 08 May 2011 08:48:23 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sun, 08 May 2011 10:33:42 +0200
-Message-ID: <iq5kh6$gie$2@dough.gmane.org>
+In-Reply-To: <iq5kie$gie$3@dough.gmane.org>
 References: <1304822586-14872-1-git-send-email-otavio@ossystems.com.br>
 	<1304822586-14872-2-git-send-email-otavio@ossystems.com.br>
+	<1304836455.4124.7.camel@mattotaupa>  <iq5kie$gie$3@dough.gmane.org>
+Date: Sun, 08 May 2011 10:47:10 +0200
+Message-ID: <1304844430.4124.20.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1304822586-14872-2-git-send-email-otavio@ossystems.com.br>
-X-Enigmail-Version: 1.0.1
+X-Mailer: Evolution 2.32.2 
 Subject: Re: [meta-oe][PATCH 02/11] ntfs-3g-ntfsprogs: add 2011.4.12 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,44 +33,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2011 08:42:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 08 May 2011 08:49:52 -0000
+X-Groupsio-MsgNum: 31728
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-AyjLllmttNuGfMvnvgNL"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-AyjLllmttNuGfMvnvgNL
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 08-05-11 04:42, Otavio Salvador wrote:
-> This recipe is a merge of ntfs-3g and ntfsprogs thus the provides
-> entries.
-> 
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->  .../ntfs-3g-ntfsprogs_2011.4.12.bb                 |   26 ++++++++++++++++++++
->  1 files changed, 26 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb
-> 
-> diff --git a/meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb b/meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb
-> new file mode 100644
-> index 0000000..561f52a
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb
-> @@ -0,0 +1,26 @@
-> +DESCRIPTION = "The NTFS-3G driver is an open source, freely available NTFS driver for Linux with read and write support."
-> +HOMEPAGE = "http://www.ntfs-3g.org/"
-> +DEPENDS = "fuse libgcrypt"
-> +PROVIDES = "ntfsprogs ntfs-3g"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
+Am Sonntag, den 08.05.2011, 10:34 +0200 schrieb Koen Kooi:
 
-COPYING.LIB implies LGPL components, is the LICENSE field correct?
+> On 08-05-11 08:34, Paul Menzel wrote:
+> > Am Sonntag, den 08.05.2011, 02:42 +0000 schrieb Otavio Salvador:
+
+[=E2=80=A6]
+
+> >> +S =3D "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
+> >=20
+> > Is not this the default for `S`?
+>=20
+> Note the _ in S versus - in PN :)
+
+
+Indeed. Thanks!
+
+Paul
+
+--=-AyjLllmttNuGfMvnvgNL
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iD8DBQFNxlVmMkyGM64RGpERAqDFAJ0QhXNSCswuFqlNsz3stWeNCVkCUACgkahC
-MmFKCMti+j7qg4wj8ENjGDQ=
-=qPAD
+iEYEABECAAYFAk3GWI4ACgkQPX1aK2wOHViXrgCfeltV6vzGWrFySeamp5ozLxJe
+fJAAn3BA3Bg/2qOY2g6GrRDfS/WiaM/t
+=wdXq
 -----END PGP SIGNATURE-----
 
-
-
+--=-AyjLllmttNuGfMvnvgNL--
