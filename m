@@ -1,39 +1,29 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QJ7f4-00049e-Mc
+	(envelope-from <morphis@gravedo.de>) id 1QJ88G-0005AT-2W
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 19:20:54 +0200
-Received: by bwz5 with SMTP id 5so3942751bwz.6
+	Sun, 08 May 2011 19:51:04 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id EC703799012; Sun,  8 May 2011 19:48:22 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h1108419.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from [192.168.178.21] (dslb-088-070-129-150.pools.arcor-ip.net
+	[88.70.129.150]) by gravedo.de (Postfix) with ESMTPSA id 82000798D6F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 May 2011 10:18:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=FSqW5IOOHko96XkYBMacVFPyCRSiwbPUpgkFtwUC3ao=;
-	b=E9jjWAn8KQI4lC1C6/Kx4l5RJ5dwClvFTypHyS3hc9qVrnGzESgvEj3sY/dpfZkg2u
-	Yyva0ZJn6+dQG/LwnhPLEVrtp3DOVhtMyJi3ZRQDS5NcEb6XI22miKBxngMBfiDXBLhZ
-	U0fTKbY3W48hPf77N87HUMUyMjRPpTtnaKQy4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=q3ra8F7H6r7BMurTTg0s39JyHs7wHsCqTlYeqz+OfH8qq4hsSGZ1hI/3S2zhuIiaDX
-	Q9kYN+5vQVY/xQdecXYZjP88BuzMIuhSSnbe2z8XxjfEXaemVzxkZK0Bej0Zi5BEDk89
-	nnPO6YFNTWm7SE9iRxqGSEheYvyyEGac4nm1o=
+	Sun,  8 May 2011 19:48:21 +0200 (CEST)
+Message-ID: <4DC6D765.8060706@gravedo.de>
+Date: Sun, 08 May 2011 19:48:21 +0200
+From: Simon Busch <morphis@gravedo.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
 MIME-Version: 1.0
-Received: by 10.204.49.138 with SMTP id v10mr1613857bkf.108.1304875084653;
-	Sun, 08 May 2011 10:18:04 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.79.70 with HTTP; Sun, 8 May 2011 10:18:04 -0700 (PDT)
-In-Reply-To: <1304873759-20379-1-git-send-email-morphis@gravedo.de>
-References: <4DC6CA02.1000009@gravedo.de>
-	<1304873759-20379-1-git-send-email-morphis@gravedo.de>
-Date: Sun, 8 May 2011 14:18:04 -0300
-X-Google-Sender-Auth: 270d7YFWJqlYRuUcBis6_4ZoZEk
-Message-ID: <BANLkTinj7NmL9h8R3EVC78YgPUaiBGqyFg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
+References: <4DC6CA02.1000009@gravedo.de>	<1304873759-20379-1-git-send-email-morphis@gravedo.de>
+	<BANLkTinj7NmL9h8R3EVC78YgPUaiBGqyFg@mail.gmail.com>
+In-Reply-To: <BANLkTinj7NmL9h8R3EVC78YgPUaiBGqyFg@mail.gmail.com>
 Subject: Re: [PATCH] qt4-native: introduce the native version of qt4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,24 +38,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2011 17:20:54 -0000
+X-List-Received-Date: Sun, 08 May 2011 17:51:04 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Sun, May 8, 2011 at 13:55, Simon Busch <morphis@gravedo.de> wrote:
-> The new recipe is based on the qt4-tool-native one but it even installs t=
-he libraries of
-> qt4 and not only the tools like moc/rcc. It will not increase the build t=
-ime as most
-> libraries are already build for the qt4-tool-native but not staged.
+On 08.05.2011 19:18, Otavio Salvador wrote:
+> Please remove the tools recipe too.
 
-Please remove the tools recipe too.
-
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Yes, I will provide a patch for this too. But first I want to know if
+you are fine with this patch?
 
 
