@@ -1,30 +1,34 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <morphis@gravedo.de>) id 1QJ391-0007su-S3
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 14:31:31 +0200
-Received: by gravedo.de (Postfix, from userid 5001)
-	id 01A2C799012; Sun,  8 May 2011 14:28:50 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h1108419.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from [192.168.178.21] (dslb-088-070-129-150.pools.arcor-ip.net
-	[88.70.129.150]) by gravedo.de (Postfix) with ESMTPSA id 2F528798D6F
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QJ3l3-0000tH-MS for openembedded-devel@lists.openembedded.org;
+	Sun, 08 May 2011 15:10:50 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QJ3iR-0005ce-O3 for openembedded-devel@lists.openembedded.org;
+	Sun, 08 May 2011 15:08:07 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 08 May 2011 15:08:07 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 May 2011 14:28:48 +0200 (CEST)
-Message-ID: <4DC68C80.2040506@gravedo.de>
-Date: Sun, 08 May 2011 14:28:48 +0200
-From: Simon Busch <morphis@gravedo.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
-MIME-Version: 1.0
+	Sun, 08 May 2011 15:08:07 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1304773638-24877-1-git-send-email-morphis@gravedo.de>
-	<BANLkTik1ArwPz=B-OGrsfNWza2ad4d4g6Q@mail.gmail.com>
-In-Reply-To: <BANLkTik1ArwPz=B-OGrsfNWza2ad4d4g6Q@mail.gmail.com>
-Subject: Re: [PATCH] qt4-libs-native: add initial recipe
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sun, 08 May 2011 15:07:55 +0200
+Message-ID: <iq64jb$qli$1@dough.gmane.org>
+References: <1304851275.4124.48.camel@mattotaupa>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1304851275.4124.48.camel@mattotaupa>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH] networkmanager_git: remove `DEFAULT_PREFERENCE = "-1"`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,28 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2011 12:31:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 08 May 2011 13:10:50 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 07.05.2011 21:17, Otavio Salvador wrote:
-> On Sat, May 7, 2011 at 10:07, Simon Busch <morphis@gravedo.de> wrote:
->> The native version of the qt4 libraries is needed by some other native recipes to build.
->> It's mostly a copy of the qt4-tools-native recipes with some changed configuration optons
->> and is only available for version 4.7.2 now.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 08-05-11 12:41, Paul Menzel wrote:
+> Date: Sat, 7 May 2011 16:40:28 +0200
 > 
-> I second this idea since I will be a user of it but seems better to me
-> to have a full qt4-native since this would reduce build duplication
-> time, no?
+> 1. Use `networkmanager_git` by default.
 
-You are right. As qt4-libs-native and qt4-tools-native are build mostly
-the same stuff we could merge them and create a qt4-native recipe if
-nobody else has any concerns. I will provide a patch for this.
+IF you do that you need to double check that matching vpn and applet
+versions are built
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-regards,
-Simon
-
-
+iD8DBQFNxpWrMkyGM64RGpERAtb3AJ9js2OliBfTqC1DzuGYA1cA6cbcMQCdEck1
+984rYCE8BXLDH/2vqtKkY8M=
+=x6Di
+-----END PGP SIGNATURE-----
 
 
 
