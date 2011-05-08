@@ -1,24 +1,23 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QIzgW-0007JX-5a for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 10:49:52 +0200
-Received: from f053040243.adsl.alicedsl.de ([78.53.40.243]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QIzf5-0000u7-M1 for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 08:48:23 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <philb@gnu.org>) id 1QIzrD-0007zt-6M
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 08 May 2011 11:00:55 +0200
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.3])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>)
+	id 1QIzjj-0005lK-Cn; Sun, 08 May 2011 10:53:11 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <iq5kie$gie$3@dough.gmane.org>
+In-Reply-To: <1304822586-14872-2-git-send-email-otavio@ossystems.com.br>
 References: <1304822586-14872-1-git-send-email-otavio@ossystems.com.br>
 	<1304822586-14872-2-git-send-email-otavio@ossystems.com.br>
-	<1304836455.4124.7.camel@mattotaupa>  <iq5kie$gie$3@dough.gmane.org>
-Date: Sun, 08 May 2011 10:47:10 +0200
-Message-ID: <1304844430.4124.20.camel@mattotaupa>
+Date: Sun, 08 May 2011 09:56:19 +0100
+Message-ID: <1304844979.3355.2.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
+X-Mailer: Evolution 2.30.3 
+Cc: Otavio Salvador <otavio@ossystems.com.br>
 Subject: Re: [meta-oe][PATCH 02/11] ntfs-3g-ntfsprogs: add 2011.4.12 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,44 +32,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2011 08:49:52 -0000
-X-Groupsio-MsgNum: 31728
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-AyjLllmttNuGfMvnvgNL"
-
---=-AyjLllmttNuGfMvnvgNL
+X-List-Received-Date: Sun, 08 May 2011 09:00:55 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Am Sonntag, den 08.05.2011, 10:34 +0200 schrieb Koen Kooi:
+On Sun, 2011-05-08 at 02:42 +0000, Otavio Salvador wrote:
+> +PACKAGES =. "ntfs-3g ntfsprogs libntfs-3g"
 
-> On 08-05-11 08:34, Paul Menzel wrote:
-> > Am Sonntag, den 08.05.2011, 02:42 +0000 schrieb Otavio Salvador:
+Does that really work?  I would have thought that you'd end up with "...
+libntfs-3g${PN}-dbg ..." or some such.
 
-[=E2=80=A6]
+> +FILES_libntfs-3g = "${libdir}/*.so.*"
 
-> >> +S =3D "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
-> >=20
-> > Is not this the default for `S`?
->=20
-> Note the _ in S versus - in PN :)
+It would be better to use ${SOLIBS} there.
+
+p.
 
 
-Indeed. Thanks!
 
-Paul
 
---=-AyjLllmttNuGfMvnvgNL
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3GWI4ACgkQPX1aK2wOHViXrgCfeltV6vzGWrFySeamp5ozLxJe
-fJAAn3BA3Bg/2qOY2g6GrRDfS/WiaM/t
-=wdXq
------END PGP SIGNATURE-----
-
---=-AyjLllmttNuGfMvnvgNL--
