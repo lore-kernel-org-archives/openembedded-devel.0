@@ -1,25 +1,41 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QJ646-0007ST-GA for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 17:38:38 +0200
-Received: from f053040243.adsl.alicedsl.de ([78.53.40.243]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QJ62f-00009i-Vc for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 15:37:10 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <otavio.salvador@gmail.com>) id 1QJ6eH-0000MC-Vo
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 08 May 2011 18:16:02 +0200
+Received: by bwz5 with SMTP id 5so3923334bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 08 May 2011 09:13:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=N1gVIEJiweQNkAAalJ+j/Lss6JBX7uexQ0aCo9xVWQY=;
+	b=ThZmNwI5+if05iJx0tIzcZJaqWmrzsz9ukQY7M2Behoox9+7Rvvf/OEoHCR15Dwm7h
+	y0t9OopWvsvUSUeTJj0gynbp3k8kXAuVf7/GT+Dj24zVfPTV+an+YuFio2iwzgbGpj08
+	1n6zdBvSEz96ZHEmb+w9PndEqDzTYXKNWjlto=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=HAyG8S/v0XB5IPo7i+gh814Q7kTaCpEuaKrcAK0eA1So66fuLsqcsJodonFVFMOjdP
+	JCXZIuLEom0VGe/84qux0YiH7/CGrfeCoenRh/trcbQXLyt9Dd4Y3aMKsWO9XosKX5pp
+	8cAq+zRvro1vJkjCg26JBmcpgvnLLZzIAR6nM=
+MIME-Version: 1.0
+Received: by 10.204.7.209 with SMTP id e17mr358050bke.162.1304871198587; Sun,
+	08 May 2011 09:13:18 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.79.70 with HTTP; Sun, 8 May 2011 09:13:18 -0700 (PDT)
+In-Reply-To: <1304836455.4124.7.camel@mattotaupa>
+References: <1304822586-14872-1-git-send-email-otavio@ossystems.com.br>
+	<1304822586-14872-2-git-send-email-otavio@ossystems.com.br>
+	<1304836455.4124.7.camel@mattotaupa>
+Date: Sun, 8 May 2011 13:13:18 -0300
+X-Google-Sender-Auth: MyZEJXvdcsbwhSD_aXFJSk3Yp7I
+Message-ID: <BANLkTiks1TaPjenOr-Y1_f0VU2pOBaD=-g@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <BANLkTimLb=i4eLMD2NWLRcC5QxADWQa4Mg@mail.gmail.com>
-References: <1304852453-9294-1-git-send-email-robert@erafx.com>
-	<1304852952.4124.52.camel@mattotaupa>
-	<BANLkTimLb=i4eLMD2NWLRcC5QxADWQa4Mg@mail.gmail.com>
-Date: Sun, 08 May 2011 17:35:55 +0200
-Message-ID: <1304868955.4124.67.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH v2] x264_r2245: do not override `DEPENDS` for x86
+Subject: Re: [meta-oe][PATCH 02/11] ntfs-3g-ntfsprogs: add 2011.4.12 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,84 +49,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2011 15:38:38 -0000
-X-Groupsio-MsgNum: 31743
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-Ixq2psSn3IwHlyqMNasK"
-
---=-Ixq2psSn3IwHlyqMNasK
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 08 May 2011 16:16:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Am Sonntag, den 08.05.2011, 07:33 -0400 schrieb Robert Foerster:
-> On Sun, May 8, 2011 at 7:09 AM, Paul Menzel wrote:
+On Sun, May 8, 2011 at 03:34, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+...
+>> +inherit autotools
+>> +
+>> +EXTRA_OEMAKE =3D "LDCONFIG=3Decho"
+>
+> A short explanation in the commit message or as a comment why this is
+> needed would be nice.
 
-> > Am Sonntag, den 08.05.2011, 07:00 -0400 schrieb Bob Foerster:
-> > > The recipe intended to add "yasm-native" to the dependencies on x86,
-> > > but it set DEPENDS_x86 =3D "yasm-native" which obliterated the base
-> > > dependencies. On a fresh build, this package was failing since it
-> > > was trying to build before the compiler was ready.
-> > >
-> > > Depends is now set with DEPENDS_append_x86, which leaves the base
-> > > dependencies intact.
-> >
-> > Btw. What `MACHINE` and `DISTRIBUTION` do you use?
->=20
-> machine=3Dx86, distro=3Dcustom
->=20
-> > > Signed-off-by: Bob Foerster <robert@erafx.com>
-> > > ---
-> > >  recipes/vlc/x264_r2245.bb |    2 +-
-> > >  1 files changed, 1 insertions(+), 1 deletions(-)
-> > >
-> > > diff --git a/recipes/vlc/x264_r2245.bb b/recipes/vlc/x264_r2245.bb
-> > > index 0cffea3..21e5a0e 100644
-> > > --- a/recipes/vlc/x264_r2245.bb
-> > > +++ b/recipes/vlc/x264_r2245.bb
-> > > @@ -23,7 +23,7 @@ X264_ECFLAGS_mipsel =3D "-fPIC"
-> > >  X264_DISABLE_ASM =3D "--disable-asm"
-> > >  # use assembler written functions for those archs supporting this
-> > >  X264_DISABLE_ASM_x86 =3D ""
-> > > -DEPENDS_x86 =3D "yasm-native"
-> > > +DEPENDS_append_x86 =3D " yasm-native"
-> > >
-> > >  EXTRA_OECONF =3D '--enable-shared ${X264_DISABLE_ASM}
-> > --extra-cflags=3D"${X264_ECFLAGS}"'
-> >
-> > Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+It is required otherwise it calls ldconfig at install
 
-I pushed your patch upstream in 0409d1d9 [1].
+>> +PACKAGES =3D. "ntfs-3g ntfsprogs libntfs-3g"
+>
+> `=3D+` is more commonly used?
+>
+>> +FILES_ntfs-3g =3D "${base_sbindir}/*.ntfs-3g ${bindir}/ntfs-3g*"
+>> +RDEPENDS_ntfs-3g +=3D "fuse"
+>> +
+>> +FILES_ntfsprogs =3D "${base_sbindir}/* ${bindir}/* ${sbindir}/*"
+>> +FILES_libntfs-3g =3D "${libdir}/*.so.*"
+>> +
+>> +SRC_URI[md5sum] =3D "9c4ce318373b15332239a77a9d2a39fe"
+>> +SRC_URI[sha256sum] =3D "aa8c747f0bfe819b2387b05e12db8d35e4ac96dcb243287=
+3a0b939e248b2ee05"
+>
+> Maybe again at the top.
 
-Please update the patch queue [2] with for example the following
-command.
-
-	$ pwclient update -s Accepted -c 0409d1d98a400c56d348de1f49c8a09f38b52fba =
-3385
-
-I do not have the rights to change the state of patches I did not
-submit.
+Ok.
 
 
-Thanks,
 
-Paul
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D0409d1d=
-98a400c56d348de1f49c8a09f38b52fba
-[2] http://openembedded.org/index.php/Patchwork
-
---=-Ixq2psSn3IwHlyqMNasK
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3GuFsACgkQPX1aK2wOHVh62gCfXDV90cxDxpJ6ltA1R8t0yVvt
-To8An1nUTJVYyj6fulVoZTHZF6MR49lq
-=Nv6V
------END PGP SIGNATURE-----
-
---=-Ixq2psSn3IwHlyqMNasK--
