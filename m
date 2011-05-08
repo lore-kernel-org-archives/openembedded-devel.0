@@ -1,41 +1,42 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QJ6eH-0000MC-Vo
+	(envelope-from <martin.jansa@gmail.com>) id 1QJ6mC-0000hv-9d
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 18:16:02 +0200
-Received: by bwz5 with SMTP id 5so3923334bwz.6
+	Sun, 08 May 2011 18:24:12 +0200
+Received: by fxm19 with SMTP id 19so3577242fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 May 2011 09:13:18 -0700 (PDT)
+	Sun, 08 May 2011 09:21:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=N1gVIEJiweQNkAAalJ+j/Lss6JBX7uexQ0aCo9xVWQY=;
-	b=ThZmNwI5+if05iJx0tIzcZJaqWmrzsz9ukQY7M2Behoox9+7Rvvf/OEoHCR15Dwm7h
-	y0t9OopWvsvUSUeTJj0gynbp3k8kXAuVf7/GT+Dj24zVfPTV+an+YuFio2iwzgbGpj08
-	1n6zdBvSEz96ZHEmb+w9PndEqDzTYXKNWjlto=
+	h=domainkey-signature:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=9ibUvxoMB4kO1rIQ0DDG0jCEpMrnFgbWQGFPHV+Z+kA=;
+	b=nFfkoIws96AUM/TO5PUffRats9YlvCqUnKe+doLF9SErgD/qyI9T0nOwYcy/K9s9jr
+	B6oYVuNKAtl2rmBv3Bf/ArP6q8rQIWMIiVfsh/NYpbKIMGthjrBolLO8J7VqVm0s6NMV
+	DyVN8vO7BCLYa0dDKZNxznWqroE54P9bXStaM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=HAyG8S/v0XB5IPo7i+gh814Q7kTaCpEuaKrcAK0eA1So66fuLsqcsJodonFVFMOjdP
-	JCXZIuLEom0VGe/84qux0YiH7/CGrfeCoenRh/trcbQXLyt9Dd4Y3aMKsWO9XosKX5pp
-	8cAq+zRvro1vJkjCg26JBmcpgvnLLZzIAR6nM=
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=OrwJxtmAzo8Vjkeywi1U0eB9GA0Q3g6ZaNA2On/iIlTapfUzzNYES7pB4AosIQJx8P
+	lCucXwsx3ptqW9F6zT4fNk6qr2CJLZpSbHdNQGt+yMsCo6sz33pKw52FGzrOf/a/RkAx
+	CYQpdJv6hBo+tRHM+LZEm3xfW4SbZj25178Go=
+Received: by 10.223.127.210 with SMTP id h18mr2554800fas.73.1304871685940;
+	Sun, 08 May 2011 09:21:25 -0700 (PDT)
+Received: from localhost ([94.230.152.115])
+	by mx.google.com with ESMTPS id 13sm1707437fau.40.2011.05.08.09.21.24
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 08 May 2011 09:21:24 -0700 (PDT)
+Date: Sun, 8 May 2011 18:21:18 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Paul Menzel <paulepanter@users.sourceforge.net>
+Message-ID: <20110508162118.GH17773@jama.jama.net>
+References: <1304851275.4124.48.camel@mattotaupa>
+	<iq64jb$qli$1@dough.gmane.org>
+	<1304861367.4124.63.camel@mattotaupa>
 MIME-Version: 1.0
-Received: by 10.204.7.209 with SMTP id e17mr358050bke.162.1304871198587; Sun,
-	08 May 2011 09:13:18 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.79.70 with HTTP; Sun, 8 May 2011 09:13:18 -0700 (PDT)
-In-Reply-To: <1304836455.4124.7.camel@mattotaupa>
-References: <1304822586-14872-1-git-send-email-otavio@ossystems.com.br>
-	<1304822586-14872-2-git-send-email-otavio@ossystems.com.br>
-	<1304836455.4124.7.camel@mattotaupa>
-Date: Sun, 8 May 2011 13:13:18 -0300
-X-Google-Sender-Auth: MyZEJXvdcsbwhSD_aXFJSk3Yp7I
-Message-ID: <BANLkTiks1TaPjenOr-Y1_f0VU2pOBaD=-g@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 02/11] ntfs-3g-ntfsprogs: add 2011.4.12 recipes
+In-Reply-To: <1304861367.4124.63.camel@mattotaupa>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH v2] networkmanager_git: remove `DEFAULT_PREFERENCE = "-1"`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,47 +50,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2011 16:16:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 08 May 2011 16:24:12 -0000
+X-Groupsio-MsgNum: 31745
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="wayzTnRSUXKNfBqd"
+Content-Disposition: inline
+
+--wayzTnRSUXKNfBqd
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, May 8, 2011 at 03:34, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-...
->> +inherit autotools
->> +
->> +EXTRA_OEMAKE =3D "LDCONFIG=3Decho"
->
-> A short explanation in the commit message or as a comment why this is
-> needed would be nice.
+On Sun, May 08, 2011 at 03:29:27PM +0200, Paul Menzel wrote:
+> Date: Sat, 7 May 2011 16:40:28 +0200
+>=20
+> Use `networkmanager_git` and `network-manager-applet_git` by default.
+>=20
+> Build tested using `minimal` for `MACHINE =3D "beagleboard"`. Using
+> `minimal-uclibc` task compile fails because `execinfo.h` is not
+> available [1].
+>=20
+> [1] http://mail.gnome.org/archives/networkmanager-list/2011-May/msg00069.=
+html
+>=20
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> ---
+> =C8=A6ngstr=C3=B6m and SHR maintainers, please tell me, if you want me to=
+ remove
+> the distribution specific overrides too.
 
-It is required otherwise it calls ldconfig at install
+feel free to remove shr override..
 
->> +PACKAGES =3D. "ntfs-3g ntfsprogs libntfs-3g"
->
-> `=3D+` is more commonly used?
->
->> +FILES_ntfs-3g =3D "${base_sbindir}/*.ntfs-3g ${bindir}/ntfs-3g*"
->> +RDEPENDS_ntfs-3g +=3D "fuse"
->> +
->> +FILES_ntfsprogs =3D "${base_sbindir}/* ${bindir}/* ${sbindir}/*"
->> +FILES_libntfs-3g =3D "${libdir}/*.so.*"
->> +
->> +SRC_URI[md5sum] =3D "9c4ce318373b15332239a77a9d2a39fe"
->> +SRC_URI[sha256sum] =3D "aa8c747f0bfe819b2387b05e12db8d35e4ac96dcb243287=
-3a0b939e248b2ee05"
->
-> Maybe again at the top.
-
-Ok.
+>=20
+> Am Sonntag, den 08.05.2011, 15:07 +0200 schrieb Koen Kooi:
+>=20
+> > On 08-05-11 12:41, Paul Menzel wrote:
+> > > Date: Sat, 7 May 2011 16:40:28 +0200
+> > >=20
+> > > 1. Use `networkmanager_git` by default.
+> >=20
+> > IF you do that you need to double check that matching vpn and applet
+> > versions are built
+>=20
+> Thank you for pointing that out. Looking through it nm-openvpn does not
+> have any `DEFAULT_PREFERENCE` set.
+> ---
+>  .../networkmanager/network-manager-applet_git.bb   |    1 -
+>  recipes/networkmanager/networkmanager_git.bb       |    1 -
+>  2 files changed, 0 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/recipes/networkmanager/network-manager-applet_git.bb b/recip=
+es/networkmanager/network-manager-applet_git.bb
+> index 8493f6d..2f644d7 100644
+> --- a/recipes/networkmanager/network-manager-applet_git.bb
+> +++ b/recipes/networkmanager/network-manager-applet_git.bb
+> @@ -3,7 +3,6 @@ LICENSE =3D "GPL"
+>  DEPENDS =3D "libnotify networkmanager dbus-glib libglade gconf gnome-key=
+ring"
+>  RDEPENDS_${PN} =3D "networkmanager"
+> =20
+> -DEFAULT_PREFERENCE =3D "-1"
+>  DEFAULT_PREFERENCE_angstrom =3D "1"
+> =20
+>  SRCREV =3D "0.8.3.999"
+> diff --git a/recipes/networkmanager/networkmanager_git.bb b/recipes/netwo=
+rkmanager/networkmanager_git.bb
+> index 8187787..cb79e78 100644
+> --- a/recipes/networkmanager/networkmanager_git.bb
+> +++ b/recipes/networkmanager/networkmanager_git.bb
+> @@ -1,6 +1,5 @@
+>  require networkmanager-0.7.inc
+> =20
+> -DEFAULT_PREFERENCE =3D "-1"
+>  DEFAULT_PREFERENCE_angstrom =3D "1"
+>  DEFAULT_PREFERENCE_shr =3D "1"
+> =20
+> --=20
+> 1.7.4.4
 
 
 
 --=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--wayzTnRSUXKNfBqd
+Content-Type: application/pgp-signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
+
+iEYEARECAAYFAk3Gwv4ACgkQN1Ujt2V2gBxBGgCeLI+KU7eOFJjlJo+53ZNjoMrB
+QMsAoKi4hl0IADTpFhI1rCCOV7vV1M7I
+=mLjj
+-----END PGP SIGNATURE-----
+
+--wayzTnRSUXKNfBqd--
