@@ -1,40 +1,40 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QJ767-0001WS-Pn
+	(envelope-from <otavio.salvador@gmail.com>) id 1QJ76A-0001ks-I2
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 18:44:47 +0200
-Received: by mail-gy0-f175.google.com with SMTP id 1so1741699gyf.6
+	Sun, 08 May 2011 18:44:51 +0200
+Received: by yxn22 with SMTP id 22so1744155yxn.6
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 08 May 2011 09:42:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
 	:x-mailer:in-reply-to:references;
-	bh=tkTqdhvSBIX/V7cgpgdmsIgawYHgEqehCngL8Tnt62o=;
-	b=GN90dKP8pQjaqeWwzoBDSR0LbHGwKIYxEkioXsqGC2VPOhKsGB5gy5DvmRbOE0s4xb
-	/sDgj4C0ZMd+/aS5R5hEyaQpEer46WC4DVpPNCMVHw4oyjfCkH7y6eBEq+VJvFOSMmMT
-	xursfaaFRoYqIHkl4Y0JJ9N2vyqmV3IPtLs9M=
+	bh=3eFptFpHluJBggg99qIXwfQS9glcqaUXqGqEiyvV3zU=;
+	b=jyVZuU3EQ+/4F1TaO5ukeE67hgkWgkAFE0l1pqkm/kjYfxYB7RZMb62XRy+LOPefvd
+	efmQySPWJBgTLmKHUdfeCKAhfTcVRhyssAFOOpJfY/o5wchOaIC4Aeilrzum+eLrF/MY
+	tRfQLkymC0KPxzWDFEqyWedCF/sHMTI5c2WNw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=bLbNIIsblCMsFaWUinUul9To8UR4voNPzd/bLQ+EIzPk5YF4zJNRfdlbBVe037WTfD
-	KWI7kGMKV9W7L6RQlg+5dJgLCqcy1CFqDrMf2ew4L5cTgB/IlgXQQhtr9sUVddau9uf1
-	ClFLCOHPmNzqKdOvmJda21mit7pC6C0d4rZaY=
-Received: by 10.236.32.164 with SMTP id o24mr1315387yha.116.1304872923063;
-	Sun, 08 May 2011 09:42:03 -0700 (PDT)
+	b=mhdPQXsh7qvUXta+v20ayQBMAYIRMuLSzuXXA0hJW7hAETUL3SdefJhRRi0gktGm9A
+	9j6yzpoqOPsaxpE1HJmxyLrmbpXTvrCSbn+9cbgNXdy/Eaqr2cDADtaCzJUuAC05smo5
+	VGsitRFb8qtUCKP21eN9FZXvdS+zIj+YU3Rpo=
+Received: by 10.236.176.230 with SMTP id b66mr5185757yhm.247.1304872926469;
+	Sun, 08 May 2011 09:42:06 -0700 (PDT)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id l74sm2245064yhn.96.2011.05.08.09.42.01
+	by mx.google.com with ESMTPS id l74sm2245064yhn.96.2011.05.08.09.42.03
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 08 May 2011 09:42:02 -0700 (PDT)
+	Sun, 08 May 2011 09:42:05 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  8 May 2011 16:41:31 +0000
-Message-Id: <1304872895-21596-7-git-send-email-otavio@ossystems.com.br>
+Date: Sun,  8 May 2011 16:41:32 +0000
+Message-Id: <1304872895-21596-8-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <1304872895-21596-1-git-send-email-otavio@ossystems.com.br>
 References: <1304872895-21596-1-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH v3 07/11] libiconv: drop hack since gettext was being inherited
+Subject: [meta-oe][PATCH v3 08/11] libinih: add git recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,29 +48,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2011 16:44:48 -0000
+X-List-Received-Date: Sun, 08 May 2011 16:44:51 -0000
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- .../recipes-support/libiconv/libiconv_1.13.1.bb    |    5 +----
- 1 files changed, 1 insertions(+), 4 deletions(-)
+ meta-oe/recipes-support/inih/libinih_git.bb |   20 ++++++++++++++++++++
+ 1 files changed, 20 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/inih/libinih_git.bb
 
-diff --git a/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb b/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
-index 4db70cb..868314b 100644
---- a/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
-+++ b/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
-@@ -8,10 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
- BBCLASSEXTEND = "native nativesdk"
- 
- PROVIDES = "virtual/libiconv"
--PR = "r1"
--
--#gettext.class cant be inherit here so use this hack
--DEPENDS = "${@['','gettext-native'][bb.data.getVar('USE_NLS', d, 1) == 'yes']}"
-+PR = "r2"
- 
- EXTRA_OECONF +=  "${@['--disable-nls','--enable-nls'][bb.data.getVar('USE_NLS', d, 1) == 'yes']}"
- 
+diff --git a/meta-oe/recipes-support/inih/libinih_git.bb b/meta-oe/recipes-support/inih/libinih_git.bb
+new file mode 100644
+index 0000000..1dc2059
+--- /dev/null
++++ b/meta-oe/recipes-support/inih/libinih_git.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "C and C++ INI Library"
++HOMEPAGE = "http://code.google.com/p/inih/"
++PRIORITY = "optional"
++PV = "0.0+gitr${SRCPV}"
++PKGV = "${GITPKGVTAG}"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=dae28cbf28207425e0d0b3eb835f4bde"
++
++PR = "r0"
++
++# The github repository provides a cmake and pkg-config integration
++SRCREV = "715cb4dc3d56714d7d53dcd94ae4b41c950119a7"
++SRC_URI = "git://github.com/OSSystems/inih.git;protocol=git"
++
++S = "${WORKDIR}/git"
++
++inherit gitpkgv cmake
++
++# We don't have libinih since we only have static libraries
++RDEPENDS_${PN}-dev = ""
 -- 
 1.7.2.5
 
