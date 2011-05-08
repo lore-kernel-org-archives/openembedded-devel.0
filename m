@@ -1,35 +1,35 @@
-Received: from mail-px0-f172.google.com ([209.85.212.172])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QIqfA-0002GW-3a
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 01:11:52 +0200
-Received: by pxi6 with SMTP id 6so3002612pxi.3
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QIsO1-000507-Ma for openembedded-devel@lists.openembedded.org;
+	Sun, 08 May 2011 03:02:17 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QIsLQ-0000hg-RR for openembedded-devel@lists.openembedded.org;
+	Sun, 08 May 2011 02:59:36 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 08 May 2011 02:59:36 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 May 2011 16:09:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=i4yPIsk2/iNXbeqkQLeHXf/kIOvw3AitcXo7VtY0KPg=;
-	b=HR8Dd7F2oOGY+CbSzCGXEWyZBHlZNKWX6mUKElbOpcqZUCeVzlS7q9yZ2dP1sJM9JK
-	0xCyukFqfZJ8yTGlkw/tfo4oEiVOsTULKY1mimr4rKbTYD4M7Vw4g9bnPN8/zqeQkfSd
-	/tXEigDzEel8wpxY0YWXXKstk5PHdePo5xd0U=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=NUd/qZfoaF35wG9K8vkIdw/QWAOlE+XaR9fpznVT6IfpfUhJrjEKTIUqAsc0qnZuQu
-	bwzwdct42+KbF06u4UpwH7AJLf8T4u5TPPT9Hj8EruEeWnLay9yzyFsOpXucUz7uomef
-	wyr2mFHN9UIeMCf3k4GdPlx0W/aNN/iF8qzsM=
-Received: by 10.68.58.7 with SMTP id m7mr7100287pbq.420.1304809748740;
-	Sat, 07 May 2011 16:09:08 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id x8sm3074366pbp.27.2011.05.07.16.09.05
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 07 May 2011 16:09:07 -0700 (PDT)
-From: raj.khem@gmail.com
+	Sun, 08 May 2011 02:59:36 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  7 May 2011 16:09:01 -0700
-Message-Id: <1304809741-11049-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-Subject: [meta-oe][] xserver-xorg_1.10.1.bb: Replace use of --variable=sdkdir with --cflags-only-I
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sun, 08 May 2011 02:59:24 +0200
+Message-ID: <iq4ptc$e40$1@dough.gmane.org>
+References: <BANLkTi=UexRucCByH0SrL-j0_+dB4DCC7Q@mail.gmail.com>	<1304806316-9716-1-git-send-email-otavio@ossystems.com.br>
+	<1304806316-9716-2-git-send-email-otavio@ossystems.com.br>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1304806316-9716-2-git-send-email-otavio@ossystems.com.br>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [meta-oe][PATCH 2/8] ntfs-3g-ntfsprogs: add 2011.4.12 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,79 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 May 2011 23:11:52 -0000
+X-List-Received-Date: Sun, 08 May 2011 01:02:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Khem Raj <raj.khem@gmail.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-This fixes the build failures of xf86-video-fbdev on build systems which
-have xorg-xserver development packages installed.
+On 08-05-11 00:11, Otavio Salvador wrote:
+> This recipe is a merge of ntfs-3g and ntfsprogs thus the provides
+> entries.
+> 
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>  .../ntfs-3g-ntfsprogs_2011.4.12.bb                 |   25 ++++++++++++++++++++
+>  1 files changed, 25 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb
+> 
+> diff --git a/meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb b/meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb
+> new file mode 100644
+> index 0000000..2b1720c
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb
+> @@ -0,0 +1,25 @@
+> +DESCRIPTION = "The NTFS-3G driver is an open source, freely available NTFS driver for Linux with read and write support."
+> +HOMEPAGE = "http://www.ntfs-3g.org/"
+> +DEPENDS = "fuse libgcrypt"
+> +PROVIDES = "ntfsprogs ntfs-3g"
+> +RDEPENDS_ntfs-3g += "fuse"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../replace-pkgconfig-sdkdir-poking.patch          |   33 ++++++++++++++++++++
- .../xorg-xserver/xserver-xorg_1.10.1.bb            |    3 +-
- 2 files changed, 35 insertions(+), 1 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.1/replace-pkgconfig-sdkdir-poking.patch
+Please order RDEPENDS with FILES and PACKAGES
 
-diff --git a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.1/replace-pkgconfig-sdkdir-poking.patch b/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.1/replace-pkgconfig-sdkdir-poking.patch
-new file mode 100644
-index 0000000..3967c4c
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.1/replace-pkgconfig-sdkdir-poking.patch
-@@ -0,0 +1,33 @@
-+configury forces pkg-config to poke for sdkdir variable which 
-+pkg-config happily returns but does not prepend sysroot to it
-+since thats only done for includes and libs. This then gets -I
-+prepended and added to CFLAGS. Guess what gcc cross gripes
-+about including host includes in cross builds but does not bail
-+out the build but it does not escape the wrath of our oe's
-+QA checks and rightly so. We replace use of sdkdir with 
-+--cflags-only-I which returns the include paths correctly
-+pointing inside sysroot and not at the host includes and plus
-+includedir if you look inside the .pc file is assigned sdkdir
-+anyway so we do not lose anything
-+
-+This m4 macro is included in other packages e.g. xf86-video-fbdev
-+which dont build on hosts which have installation of
-+xorg-xserver-dev because it gets this include poisoning
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-status: Pending
-+
-+Index: xorg-server-1.10.1/xorg-server.m4
-+===================================================================
-+--- xorg-server-1.10.1.orig/xorg-server.m4
-++++ xorg-server-1.10.1/xorg-server.m4
-+@@ -31,7 +31,7 @@ dnl
-+ AC_DEFUN([XORG_DRIVER_CHECK_EXT],[
-+ 	AC_REQUIRE([PKG_PROG_PKG_CONFIG])
-+ 	SAVE_CFLAGS="$CFLAGS"
-+-	CFLAGS="$CFLAGS -I`$PKG_CONFIG --variable=sdkdir xorg-server`"
-++	CFLAGS="$CFLAGS `$PKG_CONFIG --cflags-only-I xorg-server`"
-+ 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
-+ #include "xorg-server.h"
-+ #if !defined $1
-diff --git a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg_1.10.1.bb b/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg_1.10.1.bb
-index 7cb7339..91bf476 100644
---- a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg_1.10.1.bb
-+++ b/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg_1.10.1.bb
-@@ -7,11 +7,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=74df27b6254cc88d2799b5f4f5949c00"
- DESCRIPTION = "the X.Org X server"
- DEPENDS += "pixman libpciaccess openssl dri2proto glproto xorg-minimal-fonts font-util-native"
- PE = "2"
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- SRC_URI += " \
-             file://hack-fbdev-ignore-return-mode.patch \
-             file://hack-assume-pixman-supports-overlapped-blt.patch \
-+            file://replace-pkgconfig-sdkdir-poking.patch \
-            "
- SRC_URI[md5sum] = "75f117c74f2ecaf9dd167f6a66ac98de"
- SRC_URI[sha256sum] = "143c7c3d7d4428352e1153dffa34fd64af391f72d30b2a03e911e54e36f00b5d"
--- 
-1.7.4.1
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
+> +                    file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
+
+COPYING.LIB implies LGPL components, is the LICENSE field correct?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNxersMkyGM64RGpERAl5sAJ9rfBhHjBugTvd1ljRj3ffjhx1DhgCfRI7a
+dsahoWFX+Pz3t22/pJsDXUw=
+=MJpe
+-----END PGP SIGNATURE-----
 
 
 
