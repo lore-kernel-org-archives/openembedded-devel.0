@@ -1,41 +1,36 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QJ6y7-0001Bb-QA
+	(envelope-from <otavio.salvador@gmail.com>) id 1QJ75u-0001WS-FN
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 18:36:31 +0200
-Received: by bwz5 with SMTP id 5so3929702bwz.6
+	Sun, 08 May 2011 18:44:34 +0200
+Received: by gyf1 with SMTP id 1so1741699gyf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 May 2011 09:33:48 -0700 (PDT)
+	Sun, 08 May 2011 09:41:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=1AUpJCCxBlsPG1z2pfhdgxR/BRkmvbIVsHVcuw1UB3Q=;
-	b=jgNmKiPM/myhLSrtRBK5xtuB/VRvpTxcmc3muPh9DJsAx7nwwWaVxgYGAbNmYrGzC5
-	D6WOONg0Q9FtIPu+0VSNwJkzJ9FIk99Di8D6KeyoFkhAO0bPEjx3mS22Z20QYbnJWQ/2
-	ooaSkbsYiFPaUMXwBbhK6+JwifSqFFh9Ha5iY=
+	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
+	:x-mailer; bh=a7o15dLW4R4rT54NsZZjnxvC82zB0OQCQlhesr2XexU=;
+	b=dli7GikLeDP1b4Ka7Us1PLUqjc1uds9+Bs3ncAivUCdV6N+yx4jnUUgDPlapV09yCg
+	H8yfmiFSk1Ax53ji4XPooeDmBA19m3qp2JAypeT+kMKX1iONicgRfop+wSF746sGJqkg
+	y+AcxRZjNHZqzz0HngUMw8j1InzORry9gleCE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=lyakz8Bw7Js90vdmppHVXzTwGHdv1NYtPlpIAY7b1PvxDIukYNys08Ej3aFWE5GzFX
-	FV2X/wh83H2EA1rNoo7abLvtnABh/tASydAKMDM95iVF9G+JD13JFlepj+Soje86aLYP
-	2lOSOiJGLAelFPLl4sLacL5Vwi0UbXQJ7OaXI=
-MIME-Version: 1.0
-Received: by 10.204.40.70 with SMTP id j6mr2605385bke.81.1304872426529; Sun,
-	08 May 2011 09:33:46 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.79.70 with HTTP; Sun, 8 May 2011 09:33:45 -0700 (PDT)
-In-Reply-To: <4DC68C80.2040506@gravedo.de>
-References: <1304773638-24877-1-git-send-email-morphis@gravedo.de>
-	<BANLkTik1ArwPz=B-OGrsfNWza2ad4d4g6Q@mail.gmail.com>
-	<4DC68C80.2040506@gravedo.de>
-Date: Sun, 8 May 2011 13:33:45 -0300
-X-Google-Sender-Auth: 9OZrYLXH9KbJKei6ue9IU02xcp8
-Message-ID: <BANLkTim84uVEcJRPLoZ9TmQ4-vLs9Dux5g@mail.gmail.com>
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=Jja2rWpwrNr9dY5nTT7v1wCl27xPpQafZp5dO54IXfXTAdkD7MM7sIFmzPL4PKXULd
+	8uyJWmbcBenX+FWYVWiobcFFl3UwxByKowF4xlHBbmpytZhMCO3kYh9HjGws/mLXaFjd
+	cJoeQUddqF8uekLwNO5KqEgS9CzFwzgL+ai+Q=
+Received: by 10.236.193.100 with SMTP id j64mr7224756yhn.294.1304872909397;
+	Sun, 08 May 2011 09:41:49 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id l74sm2245064yhn.96.2011.05.08.09.41.47
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 08 May 2011 09:41:48 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] qt4-libs-native: add initial recipe
+Date: Sun,  8 May 2011 16:41:25 +0000
+Message-Id: <1304872895-21596-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH v3 01/11] fuse: add version 2.8.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,35 +44,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2011 16:36:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 08 May 2011 16:44:34 -0000
 
-On Sun, May 8, 2011 at 09:28, Simon Busch <morphis@gravedo.de> wrote:
-> On 07.05.2011 21:17, Otavio Salvador wrote:
->> On Sat, May 7, 2011 at 10:07, Simon Busch <morphis@gravedo.de> wrote:
->>> The native version of the qt4 libraries is needed by some other native =
-recipes to build.
->>> It's mostly a copy of the qt4-tools-native recipes with some changed co=
-nfiguration optons
->>> and is only available for version 4.7.2 now.
->>
->> I second this idea since I will be a user of it but seems better to me
->> to have a full qt4-native since this would reduce build duplication
->> time, no?
->
-> You are right. As qt4-libs-native and qt4-tools-native are build mostly
-> the same stuff we could merge them and create a qt4-native recipe if
-> nobody else has any concerns. I will provide a patch for this.
+This recipes is required by ntfs-3g-ntfsprogs.
 
-IMO you might try to make it on qt4-x11-free recipe and add a provides
-for the tools.
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ meta-oe/recipes-support/fuse/fuse_2.8.5.bb |   33 ++++++++++++++++++++++++++++
+ 1 files changed, 33 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/fuse/fuse_2.8.5.bb
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+diff --git a/meta-oe/recipes-support/fuse/fuse_2.8.5.bb b/meta-oe/recipes-support/fuse/fuse_2.8.5.bb
+new file mode 100644
+index 0000000..3176536
+--- /dev/null
++++ b/meta-oe/recipes-support/fuse/fuse_2.8.5.bb
+@@ -0,0 +1,33 @@
++DESCRIPTION = "With FUSE it is possible to implement a fully functional filesystem in a userspace program"
++HOMEPAGE = "http://fuse.sf.net"
++SECTION = "libs"
++LICENSE = "GPLv2"
++RRECOMMENDS_${PN} = "kernel-module-fuse""
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
++                    file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
++
++PR = "r0"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "8aa2fd689de00b73963620483084ae3b"
++SRC_URI[sha256sum] = "bec80e66ae8ee60dfdf67b2ca291266a45dcfe6bc20c64f3acfceaa38ed29a84"
++
++inherit autotools pkgconfig
++
++EXTRA_OECONF = "--disable-kernel-module"
++
++PACKAGES =+ "fuse-utils-dbg fuse-utils libulockmgr libulockmgr-dev libulockmgr-dbg"
++
++FILES_${PN} += "${libdir}/libfuse.so.*"
++FILES_${PN}-dev += "${libdir}/libfuse*.la"
++
++FILES_libulockmgr = "${libdir}/libulockmgr.so.*"
++FILES_libulockmgr-dev += "${libdir}/libulock*.la"
++FILES_libulockmgr-dbg += "${libdir}/.debug/libulock*"
++
++# Forbid auto-renaming to libfuse-utils
++FILES_fuse-utils = "${bindir} ${base_sbindir}"
++FILES_fuse-utils-dbg = "${bindir}/.debug ${base_sbindir}/.debug"
++DEBIAN_NOAUTONAME_fuse-utils = "1"
++DEBIAN_NOAUTONAME_fuse-utils-dbg = "1"
+-- 
+1.7.2.5
+
 
 
