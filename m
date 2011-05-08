@@ -1,35 +1,43 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QIsTK-0005DL-OF for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 03:07:46 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QIsQj-0002DS-8y for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 03:05:05 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 May 2011 03:05:05 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1QIsWQ-0005KI-K2
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 08 May 2011 03:10:58 +0200
+Received: by pzk36 with SMTP id 36so2003820pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 May 2011 03:05:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 07 May 2011 18:08:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id
+	:mail-followup-to:references:mime-version:content-type
+	:content-disposition:in-reply-to:user-agent;
+	bh=38ebEKkYxFqUEAHkbUOHHPB8p/Y822jV6ypk1slIjlw=;
+	b=KRFXodngXlvQEAkxPRzpHlRMTmv+IJ2rCRoZNjNadvR+W8pGlKrovJ4jgTug2GfrMI
+	9aa8lGegQ6FUUTLQ3NFi7ky5Ej+7eyA1vu9zMXnikqgusOT4LwOtob3mnPssH0EmU40C
+	yIti/xEs23GMoG6p/KskzQNNTgdiDqZKIF9VU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	b=a3F5RhTVK+ka5pQVhZhP3BkuBWlGnVJSt/Ns81vGCYy+StvIT5mbBS+M2C/aZMeLjg
+	s9gMF9UirQAfY+u9vRURBShjwwByPxpejQEsh9Z4Hj0sSA0W0pc1+46VMBOMdaYC+Ysj
+	fBA3VjMVhr0+zUpRv2yOlfdT7XATp+kV9T3/Y=
+Received: by 10.68.17.163 with SMTP id p3mr7266878pbd.323.1304816434074;
+	Sat, 07 May 2011 18:00:34 -0700 (PDT)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id k7sm3122668pbe.32.2011.05.07.18.00.31
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 07 May 2011 18:00:32 -0700 (PDT)
+Date: Sat, 7 May 2011 17:59:52 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sun, 08 May 2011 03:00:38 +0200
-Message-ID: <iq4pvm$e40$2@dough.gmane.org>
-References: <BANLkTi=UexRucCByH0SrL-j0_+dB4DCC7Q@mail.gmail.com>	<1304806316-9716-1-git-send-email-otavio@ossystems.com.br>	<1304806316-9716-2-git-send-email-otavio@ossystems.com.br>	<1304806316-9716-3-git-send-email-otavio@ossystems.com.br>
-	<1304806316-9716-4-git-send-email-otavio@ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1304806316-9716-4-git-send-email-otavio@ossystems.com.br>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-oe][PATCH 4/8] freerdp: add recipe based on GIT from 2009-03-29
+Message-ID: <20110508005952.GC20352@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1304524618-4864-1-git-send-email-robert@erafx.com>
+MIME-Version: 1.0
+In-Reply-To: <1304524618-4864-1-git-send-email-robert@erafx.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH] x264_r2245: fix DEPENDS for x86
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,45 +51,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2011 01:07:46 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 08 May 2011 01:10:58 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 08-05-11 00:11, Otavio Salvador wrote:
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->  meta-oe/recipes-support/freerdp/freerdp.inc    |   23 +++++++++++++++++++++++
->  meta-oe/recipes-support/freerdp/freerdp_git.bb |   15 +++++++++++++++
->  2 files changed, 38 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-support/freerdp/freerdp.inc
->  create mode 100644 meta-oe/recipes-support/freerdp/freerdp_git.bb
+On (04/05/11 11:56), Bob Foerster wrote:
+> The recipe intended to add "yasm-native" to the dependencies on x86,
+> but it set DEPENDS_x86 = "yasm-native" which obliterated the base
+> dependencies. On a fresh build, this package was failing since it
+> was trying to build before the compiler was ready.
 > 
-> diff --git a/meta-oe/recipes-support/freerdp/freerdp.inc b/meta-oe/recipes-support/freerdp/freerdp.inc
-> new file mode 100644
-> index 0000000..094f9c6
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/freerdp/freerdp.inc
-> @@ -0,0 +1,23 @@
-> +# Copyright (C) 2010, 2011 O.S. Systems Software Ltda. All Rights Reserved
-> +# Released under the MIT license
-> +
-> +DESCRIPTION = "FreeRDP RDP client"
-> +HOMEPAGE = "http://freerdp.sourceforge.net"
-> +DEPENDS = "virtual/libx11 openssl libxcursor cups alsa-lib"
-> +RDEPENDS_${PN} += "xprop"
+> Depends is now set with DEPENDS_append_x86, which leaves the base
+> dependencies intact.
+> 
+> Signed-off-by: Bob Foerster <robert@erafx.com>
+> ---
+>  recipes/vlc/x264_r2245.bb |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+> 
+> diff --git a/recipes/vlc/x264_r2245.bb b/recipes/vlc/x264_r2245.bb
+> index 0cffea3..8c2b5b4 100644
+> --- a/recipes/vlc/x264_r2245.bb
+> +++ b/recipes/vlc/x264_r2245.bb
+> @@ -23,7 +23,7 @@ X264_ECFLAGS_mipsel = "-fPIC"
+>  X264_DISABLE_ASM = "--disable-asm"
+>  # use assembler written functions for those archs supporting this
+>  X264_DISABLE_ASM_x86 = ""
+> -DEPENDS_x86 = "yasm-native"
+> +DEPENDS_append_x86 = "yasm-native"
+                         ^
+you need a space 
 
-Same comment as before, RDEPENDS are in the package section, so below
-do_install
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Otherwise looks ok
+>  
+>  EXTRA_OECONF = '--enable-shared ${X264_DISABLE_ASM} --extra-cflags="${X264_ECFLAGS}"'
+>  
+> -- 
+> 1.7.1
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-iD8DBQFNxes2MkyGM64RGpERApaEAJ9um0v6zRdLsqitkxeHYEj8rEs3WACglTVP
-7i85waMzo9JielLgiH2/ABg=
-=5Fai
------END PGP SIGNATURE-----
-
+-- 
+-Khem
 
 
