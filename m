@@ -1,40 +1,40 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QJ76E-0001WS-FK
+	(envelope-from <otavio.salvador@gmail.com>) id 1QJ76G-0001Wn-AN
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 18:44:55 +0200
-Received: by mail-gy0-f175.google.com with SMTP id 1so1741699gyf.6
+	Sun, 08 May 2011 18:44:57 +0200
+Received: by mail-gw0-f47.google.com with SMTP id 11so1743904gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 May 2011 09:42:13 -0700 (PDT)
+	Sun, 08 May 2011 09:42:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
 	:x-mailer:in-reply-to:references;
-	bh=7WoVQy5EzjFCY9H5mbq7SvpvIpffx+kK4Dj/RitpNBA=;
-	b=U9ZqUqXvRHUGwjamz6QsuXs1t81wC3JD+C6/Z9XFoYaKEF1tG5bvb8qCw9lMtJht+X
-	T2Z5yCKTdbTrvKuOUXGqQxpSFTlqnGzvQKpBKij4jm3sn47aEzLHD7MiNn1Rj11oaVu/
-	iOZqvw28bpOCBP7xYPVMPnhF0YdVDEHhUBytU=
+	bh=mAEkXwdi6MVUpYf29ZE/ObTTbYit62JZy+KlqHa8JEE=;
+	b=uyBi4uDTGY2Gp7D74INGW1CNNVz2qwAr4kCrSv7FqGTuAE1CkNNQJXwAh/22BFQrAk
+	JHwG5olHxq0t88sNfbP9P81xtt2R6yTbEcyTq5MVbsJMyXJbY8ux2B1xRcj5sFNrTiZA
+	a0pidC8kLHef4ZlWqpI8S6lTy+59g00FkdUJE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=PJm/pOiMsqyNBcXqAmCOrhMg7OttXL004ZYVt43mSyBhAbpbWG5k4PJmYfpNP7M3v3
-	eVdFKoZbTsNblG4CGRGR4HqZMsTiLkDIncoivWLsnrWe+FGDCzkiy9gL/Nr5wM+8IMJk
-	HyurgDOgLiVNmfOUTvR6aiC0Zc2lue951W4Bk=
-Received: by 10.236.75.197 with SMTP id z45mr6783284yhd.11.1304872931695;
-	Sun, 08 May 2011 09:42:11 -0700 (PDT)
+	b=jqsT4AdPK97jrFqa+T6qfruAfzBpSqZnqbieuQVDwOF29aJDgqg1B+qb6M1yDnjylO
+	jizMeom1EHEjsYWDhTWmdYj1P39ADq99do0FqaLXVX8IXra03v65Kxwb7yHJXvS7KzLq
+	rPDZQnYLZRS+R/iI6OdVlnmQG3IN8XvuubGQ4=
+Received: by 10.236.135.132 with SMTP id u4mr7145360yhi.340.1304872934710;
+	Sun, 08 May 2011 09:42:14 -0700 (PDT)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id l74sm2245064yhn.96.2011.05.08.09.42.09
+	by mx.google.com with ESMTPS id l74sm2245064yhn.96.2011.05.08.09.42.11
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 08 May 2011 09:42:10 -0700 (PDT)
+	Sun, 08 May 2011 09:42:13 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  8 May 2011 16:41:34 +0000
-Message-Id: <1304872895-21596-10-git-send-email-otavio@ossystems.com.br>
+Date: Sun,  8 May 2011 16:41:35 +0000
+Message-Id: <1304872895-21596-11-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <1304872895-21596-1-git-send-email-otavio@ossystems.com.br>
 References: <1304872895-21596-1-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH v3 10/11] postgresql: update to 8.4.7 since 8.4.4 was unfetchable
+Subject: [meta-oe][PATCH v3 11/11] qt4: fix 4.7.2 checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,128 +48,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2011 16:44:56 -0000
-
-This has been synced with postgresql recipes in OE.
+X-List-Received-Date: Sun, 08 May 2011 16:44:57 -0000
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- .../remove.autoconf.version.check.patch            |   15 ---------------
- .../remove.autoconf.version.check.patch            |   15 +++++++++++++++
- meta-oe/recipes-support/postgresql/postgresql.inc  |    6 ++++--
- .../recipes-support/postgresql/postgresql_8.4.4.bb |   11 -----------
- .../recipes-support/postgresql/postgresql_8.4.7.bb |   10 ++++++++++
- 5 files changed, 29 insertions(+), 28 deletions(-)
- delete mode 100644 meta-oe/recipes-support/postgresql/postgresql-8.4.4/remove.autoconf.version.check.patch
- create mode 100644 meta-oe/recipes-support/postgresql/postgresql-8.4.7/remove.autoconf.version.check.patch
- delete mode 100644 meta-oe/recipes-support/postgresql/postgresql_8.4.4.bb
- create mode 100644 meta-oe/recipes-support/postgresql/postgresql_8.4.7.bb
+ meta-oe/recipes-qt/qt4/qt-4.7.2.inc                |    4 ++--
+ meta-oe/recipes-qt/qt4/qt4-tools-native_4.7.2.bb   |    4 ++--
+ .../recipes-qt/qt4/qt4-tools-nativesdk_4.7.2.bb    |    4 ++--
+ meta-oe/recipes-qt/qt4/qt4-tools-sdk_4.7.2.bb      |    4 ++--
+ 4 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/meta-oe/recipes-support/postgresql/postgresql-8.4.4/remove.autoconf.version.check.patch b/meta-oe/recipes-support/postgresql/postgresql-8.4.4/remove.autoconf.version.check.patch
-deleted file mode 100644
-index d027061..0000000
---- a/meta-oe/recipes-support/postgresql/postgresql-8.4.4/remove.autoconf.version.check.patch
-+++ /dev/null
-@@ -1,15 +0,0 @@
--Index: postgresql-8.4.4/configure.in
--===================================================================
----- postgresql-8.4.4.orig/configure.in
--+++ postgresql-8.4.4/configure.in
--@@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch un
-- 
-- AC_INIT([PostgreSQL], [8.4.4], [pgsql-bugs@postgresql.org])
-- 
---m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.61], [], [m4_fatal([Autoconf version 2.61 is required.
---Untested combinations of 'autoconf' and PostgreSQL versions are not
---recommended.  You can remove the check from 'configure.in' but it is then
---your responsibility whether the result works or not.])])
-- AC_COPYRIGHT([Copyright (c) 1996-2009, PostgreSQL Global Development Group])
-- AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
-- AC_CONFIG_AUX_DIR(config)
-diff --git a/meta-oe/recipes-support/postgresql/postgresql-8.4.7/remove.autoconf.version.check.patch b/meta-oe/recipes-support/postgresql/postgresql-8.4.7/remove.autoconf.version.check.patch
-new file mode 100644
-index 0000000..514a9aa
---- /dev/null
-+++ b/meta-oe/recipes-support/postgresql/postgresql-8.4.7/remove.autoconf.version.check.patch
-@@ -0,0 +1,15 @@
-+Index: postgresql-8.4.7/configure.in
-+===================================================================
-+--- postgresql-8.4.7.orig/configure.in
-++++ postgresql-8.4.7/configure.in
-+@@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch un
-+ 
-+ AC_INIT([PostgreSQL], [8.4.7], [pgsql-bugs@postgresql.org])
-+ 
-+-m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.61], [], [m4_fatal([Autoconf version 2.61 is required.
-+-Untested combinations of 'autoconf' and PostgreSQL versions are not
-+-recommended.  You can remove the check from 'configure.in' but it is then
-+-your responsibility whether the result works or not.])])
-+ AC_COPYRIGHT([Copyright (c) 1996-2009, PostgreSQL Global Development Group])
-+ AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
-+ AC_CONFIG_AUX_DIR(config)
-diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
-index edad3bc..53c38df 100644
---- a/meta-oe/recipes-support/postgresql/postgresql.inc
-+++ b/meta-oe/recipes-support/postgresql/postgresql.inc
-@@ -1,14 +1,14 @@
- DESCRIPTION = "PostgreSQL is a powerful, open source relational database system."
- HOMEPAGE = "http://www.postgresql.com"
- LICENSE = "BSD"
--
- DEPENDS = "zlib readline tzcode-native"
-+INC_PR = "r5"
+diff --git a/meta-oe/recipes-qt/qt4/qt-4.7.2.inc b/meta-oe/recipes-qt/qt4/qt-4.7.2.inc
+index 70ee596..ed62bd3 100644
+--- a/meta-oe/recipes-qt/qt4/qt-4.7.2.inc
++++ b/meta-oe/recipes-qt/qt4/qt-4.7.2.inc
+@@ -14,8 +14,8 @@ SRC_URI = "http://get.qt.nokia.com/qt/source/qt-everywhere-opensource-src-${PV}.
+            file://linux.conf \
+            "
  
- ARM_INSTRUCTION_SET = "arm"
+-SRC_URI[md5sum] = "6f88d96507c84e9fea5bf3a71ebeb6d7"
+-SRC_URI[sha256sum] = "8cb5277c41f824cfc6dcee0e95e0bf23a9ad2c8d18d245105137481d092b124a"
++SRC_URI[md5sum] = "66b992f5c21145df08c99d21847f4fdb"
++SRC_URI[sha256sum] = "d4783b524b90bcd270ccf6e7a30d5fb51696c47eb5de49ebc2d553cd3eb49336"
  
- #WARNING: this recipe assumes you have the timezone compiler present in /usr/sbin/zic
+ S = "${WORKDIR}/qt-everywhere-opensource-src-${PV}"
  
--SRC_URI = "ftp://ftp-archives.postgresql.org/pub/source/v${PV}/${P}.tar.bz2"
-+SRC_URI = "ftp://ftp.postgresql.org/pub/source/v${PV}/${P}.tar.bz2"
+diff --git a/meta-oe/recipes-qt/qt4/qt4-tools-native_4.7.2.bb b/meta-oe/recipes-qt/qt4/qt4-tools-native_4.7.2.bb
+index e9de510..d3c0eda 100644
+--- a/meta-oe/recipes-qt/qt4/qt4-tools-native_4.7.2.bb
++++ b/meta-oe/recipes-qt/qt4/qt4-tools-native_4.7.2.bb
+@@ -9,5 +9,5 @@ EXTRA_OECONF += " -no-fast -silent -no-rpath"
  
- LEAD_SONAME = "libpq.so"
+ TOBUILD := "src/tools/bootstrap ${TOBUILD}"
  
-@@ -17,6 +17,8 @@ export LDFLAGS_SL = "${LDFLAGS}"
+-SRC_URI[md5sum] = "6f88d96507c84e9fea5bf3a71ebeb6d7"
+-SRC_URI[sha256sum] = "8cb5277c41f824cfc6dcee0e95e0bf23a9ad2c8d18d245105137481d092b124a"
++SRC_URI[md5sum] = "66b992f5c21145df08c99d21847f4fdb"
++SRC_URI[sha256sum] = "d4783b524b90bcd270ccf6e7a30d5fb51696c47eb5de49ebc2d553cd3eb49336"
+diff --git a/meta-oe/recipes-qt/qt4/qt4-tools-nativesdk_4.7.2.bb b/meta-oe/recipes-qt/qt4/qt4-tools-nativesdk_4.7.2.bb
+index 091a539..a917ac4 100644
+--- a/meta-oe/recipes-qt/qt4/qt4-tools-nativesdk_4.7.2.bb
++++ b/meta-oe/recipes-qt/qt4/qt4-tools-nativesdk_4.7.2.bb
+@@ -2,5 +2,5 @@ require qt4-tools-nativesdk.inc
  
- inherit autotools pkgconfig
+ PR = "${INC_PR}.0"
  
-+EXTRA_OECONF_sh4 = "--disable-spinlocks"
-+
- do_compile_append() {
-          cp /usr/sbin/zic ${S}/src/timezone/
- }
-diff --git a/meta-oe/recipes-support/postgresql/postgresql_8.4.4.bb b/meta-oe/recipes-support/postgresql/postgresql_8.4.4.bb
-deleted file mode 100644
-index d0f5078..0000000
---- a/meta-oe/recipes-support/postgresql/postgresql_8.4.4.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--require postgresql.inc
--
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=29b81b066680be9ffd98cb9d2afb9de6"
--
--DEFAULT_PREFERENCE = "-1"
--
--SRC_URI = "ftp://ftp.postgresql.org/pub/source/v${PV}/${P}.tar.bz2 \
--           file://remove.autoconf.version.check.patch"
--
--SRC_URI[md5sum] = "4bf2448ad965bca3940df648c02194df"
--SRC_URI[sha256sum] = "e66b398d565f7fb16d8ae58ae72881dcd3dbb1b88f532bbe1c2d1284812be37e"
-diff --git a/meta-oe/recipes-support/postgresql/postgresql_8.4.7.bb b/meta-oe/recipes-support/postgresql/postgresql_8.4.7.bb
-new file mode 100644
-index 0000000..63f324c
---- /dev/null
-+++ b/meta-oe/recipes-support/postgresql/postgresql_8.4.7.bb
-@@ -0,0 +1,10 @@
-+require postgresql.inc
-+
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=29b81b066680be9ffd98cb9d2afb9de6"
-+
-+PR = "${INC_PR}.0"
-+
-+SRC_URI += "file://remove.autoconf.version.check.patch"
-+
-+SRC_URI[md5sum] = "689397187bb1dfe9b5cbde99538311c3"
-+SRC_URI[sha256sum] = "08032849da121e67e318f7ff4e68d3ac88f29050e242641f717c4270839b597b"
+-SRC_URI[md5sum] = "6f88d96507c84e9fea5bf3a71ebeb6d7"
+-SRC_URI[sha256sum] = "8cb5277c41f824cfc6dcee0e95e0bf23a9ad2c8d18d245105137481d092b124a"
++SRC_URI[md5sum] = "66b992f5c21145df08c99d21847f4fdb"
++SRC_URI[sha256sum] = "d4783b524b90bcd270ccf6e7a30d5fb51696c47eb5de49ebc2d553cd3eb49336"
+diff --git a/meta-oe/recipes-qt/qt4/qt4-tools-sdk_4.7.2.bb b/meta-oe/recipes-qt/qt4/qt4-tools-sdk_4.7.2.bb
+index 1018f74..c86ac2a 100644
+--- a/meta-oe/recipes-qt/qt4/qt4-tools-sdk_4.7.2.bb
++++ b/meta-oe/recipes-qt/qt4/qt4-tools-sdk_4.7.2.bb
+@@ -4,5 +4,5 @@ PR = "${INC_PR}.0"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+-SRC_URI[md5sum] = "6f88d96507c84e9fea5bf3a71ebeb6d7"
+-SRC_URI[sha256sum] = "8cb5277c41f824cfc6dcee0e95e0bf23a9ad2c8d18d245105137481d092b124a"
++SRC_URI[md5sum] = "66b992f5c21145df08c99d21847f4fdb"
++SRC_URI[sha256sum] = "d4783b524b90bcd270ccf6e7a30d5fb51696c47eb5de49ebc2d553cd3eb49336"
 -- 
 1.7.2.5
 
