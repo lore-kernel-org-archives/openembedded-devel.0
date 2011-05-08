@@ -1,22 +1,24 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QJ1tz-0005Gu-8J for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 13:11:55 +0200
-Received: from f053040243.adsl.alicedsl.de ([78.53.40.243]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QJ1sY-0006S6-T5 for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 11:10:27 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1304852453-9294-1-git-send-email-robert@erafx.com>
+	(envelope-from <robert@erafx.com>) id 1QJ2Hb-0005sU-AQ
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 08 May 2011 13:36:19 +0200
+Received: by vxd7 with SMTP id 7so5728413vxd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 08 May 2011 04:33:35 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.220.20.81 with SMTP id e17mr1303390vcb.85.1304854414088; Sun,
+	08 May 2011 04:33:34 -0700 (PDT)
+Received: by 10.220.195.202 with HTTP; Sun, 8 May 2011 04:33:34 -0700 (PDT)
+X-Originating-IP: [24.165.208.114]
+In-Reply-To: <1304852952.4124.52.camel@mattotaupa>
 References: <1304852453-9294-1-git-send-email-robert@erafx.com>
-Date: Sun, 08 May 2011 13:09:12 +0200
-Message-ID: <1304852952.4124.52.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
+	<1304852952.4124.52.camel@mattotaupa>
+Date: Sun, 8 May 2011 07:33:34 -0400
+Message-ID: <BANLkTimLb=i4eLMD2NWLRcC5QxADWQa4Mg@mail.gmail.com>
+From: Robert Foerster <robert@erafx.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [PATCH v2] x264_r2245: do not override `DEPENDS` for x86
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,66 +33,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2011 11:11:55 -0000
-X-Groupsio-MsgNum: 31737
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-iNDAQARC9819D76F53uc"
+X-List-Received-Date: Sun, 08 May 2011 11:36:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-iNDAQARC9819D76F53uc
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Sun, May 8, 2011 at 7:09 AM, Paul Menzel <
+paulepanter@users.sourceforge.net> wrote:
 
-Dear Bob,
+> Dear Bob,
+>
+>
+> Am Sonntag, den 08.05.2011, 07:00 -0400 schrieb Bob Foerster:
+> > The recipe intended to add "yasm-native" to the dependencies on x86,
+> > but it set DEPENDS_x86 = "yasm-native" which obliterated the base
+> > dependencies. On a fresh build, this package was failing since it
+> > was trying to build before the compiler was ready.
+> >
+> > Depends is now set with DEPENDS_append_x86, which leaves the base
+> > dependencies intact.
+>
+> Btw. What `MACHINE` and `DISTRIBUTION` do you use?
+>
 
-
-Am Sonntag, den 08.05.2011, 07:00 -0400 schrieb Bob Foerster:
-> The recipe intended to add "yasm-native" to the dependencies on x86,
-> but it set DEPENDS_x86 =3D "yasm-native" which obliterated the base
-> dependencies. On a fresh build, this package was failing since it
-> was trying to build before the compiler was ready.
->=20
-> Depends is now set with DEPENDS_append_x86, which leaves the base
-> dependencies intact.
-
-Btw. What `MACHINE` and `DISTRIBUTION` do you use?
-
-> Signed-off-by: Bob Foerster <robert@erafx.com>
-> ---
->  recipes/vlc/x264_r2245.bb |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
->=20
-> diff --git a/recipes/vlc/x264_r2245.bb b/recipes/vlc/x264_r2245.bb
-> index 0cffea3..21e5a0e 100644
-> --- a/recipes/vlc/x264_r2245.bb
-> +++ b/recipes/vlc/x264_r2245.bb
-> @@ -23,7 +23,7 @@ X264_ECFLAGS_mipsel =3D "-fPIC"
->  X264_DISABLE_ASM =3D "--disable-asm"
->  # use assembler written functions for those archs supporting this
->  X264_DISABLE_ASM_x86 =3D ""
-> -DEPENDS_x86 =3D "yasm-native"
-> +DEPENDS_append_x86 =3D " yasm-native"
-> =20
->  EXTRA_OECONF =3D '--enable-shared ${X264_DISABLE_ASM} --extra-cflags=3D"=
-${X264_ECFLAGS}"'
-
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+machine=x86, distro=custom
 
 
-Thanks,
+>
+> > Signed-off-by: Bob Foerster <robert@erafx.com>
+> > ---
+> >  recipes/vlc/x264_r2245.bb |    2 +-
+> >  1 files changed, 1 insertions(+), 1 deletions(-)
+> >
+> > diff --git a/recipes/vlc/x264_r2245.bb b/recipes/vlc/x264_r2245.bb
+> > index 0cffea3..21e5a0e 100644
+> > --- a/recipes/vlc/x264_r2245.bb
+> > +++ b/recipes/vlc/x264_r2245.bb
+> > @@ -23,7 +23,7 @@ X264_ECFLAGS_mipsel = "-fPIC"
+> >  X264_DISABLE_ASM = "--disable-asm"
+> >  # use assembler written functions for those archs supporting this
+> >  X264_DISABLE_ASM_x86 = ""
+> > -DEPENDS_x86 = "yasm-native"
+> > +DEPENDS_append_x86 = " yasm-native"
+> >
+> >  EXTRA_OECONF = '--enable-shared ${X264_DISABLE_ASM}
+> --extra-cflags="${X264_ECFLAGS}"'
+>
+> Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+>
+>
+> Thanks,
+>
+> Paul
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
-Paul
-
---=-iNDAQARC9819D76F53uc
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3GedgACgkQPX1aK2wOHVjz2QCfV40uOkO/Wz93BZBbvsMUr+Px
-/34AnjRe8rbAWeuwVD8RjTEHDyqEzpoC
-=mxGN
------END PGP SIGNATURE-----
-
---=-iNDAQARC9819D76F53uc--
