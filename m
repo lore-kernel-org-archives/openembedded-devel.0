@@ -1,35 +1,35 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QIsO1-000507-Ma for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 03:02:17 +0200
+	id 1QIsTK-0005DL-OF for openembedded-devel@lists.openembedded.org;
+	Sun, 08 May 2011 03:07:46 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QIsLQ-0000hg-RR for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 02:59:36 +0200
+	id 1QIsQj-0002DS-8y for openembedded-devel@lists.openembedded.org;
+	Sun, 08 May 2011 03:05:05 +0200
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 May 2011 02:59:36 +0200
+	Sun, 08 May 2011 03:05:05 +0200
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 May 2011 02:59:36 +0200
+	Sun, 08 May 2011 03:05:05 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sun, 08 May 2011 02:59:24 +0200
-Message-ID: <iq4ptc$e40$1@dough.gmane.org>
-References: <BANLkTi=UexRucCByH0SrL-j0_+dB4DCC7Q@mail.gmail.com>	<1304806316-9716-1-git-send-email-otavio@ossystems.com.br>
-	<1304806316-9716-2-git-send-email-otavio@ossystems.com.br>
+Date: Sun, 08 May 2011 03:00:38 +0200
+Message-ID: <iq4pvm$e40$2@dough.gmane.org>
+References: <BANLkTi=UexRucCByH0SrL-j0_+dB4DCC7Q@mail.gmail.com>	<1304806316-9716-1-git-send-email-otavio@ossystems.com.br>	<1304806316-9716-2-git-send-email-otavio@ossystems.com.br>	<1304806316-9716-3-git-send-email-otavio@ossystems.com.br>
+	<1304806316-9716-4-git-send-email-otavio@ossystems.com.br>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1304806316-9716-2-git-send-email-otavio@ossystems.com.br>
+In-Reply-To: <1304806316-9716-4-git-send-email-otavio@ossystems.com.br>
 X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-oe][PATCH 2/8] ntfs-3g-ntfsprogs: add 2011.4.12 recipes
+Subject: Re: [meta-oe][PATCH 4/8] freerdp: add recipe based on GIT from 2009-03-29
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,7 +43,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2011 01:02:18 -0000
+X-List-Received-Date: Sun, 08 May 2011 01:07:46 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
@@ -51,40 +51,36 @@ Content-Transfer-Encoding: 7bit
 Hash: SHA1
 
 On 08-05-11 00:11, Otavio Salvador wrote:
-> This recipe is a merge of ntfs-3g and ntfsprogs thus the provides
-> entries.
-> 
 > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 > ---
->  .../ntfs-3g-ntfsprogs_2011.4.12.bb                 |   25 ++++++++++++++++++++
->  1 files changed, 25 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb
+>  meta-oe/recipes-support/freerdp/freerdp.inc    |   23 +++++++++++++++++++++++
+>  meta-oe/recipes-support/freerdp/freerdp_git.bb |   15 +++++++++++++++
+>  2 files changed, 38 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-support/freerdp/freerdp.inc
+>  create mode 100644 meta-oe/recipes-support/freerdp/freerdp_git.bb
 > 
-> diff --git a/meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb b/meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb
+> diff --git a/meta-oe/recipes-support/freerdp/freerdp.inc b/meta-oe/recipes-support/freerdp/freerdp.inc
 > new file mode 100644
-> index 0000000..2b1720c
+> index 0000000..094f9c6
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb
-> @@ -0,0 +1,25 @@
-> +DESCRIPTION = "The NTFS-3G driver is an open source, freely available NTFS driver for Linux with read and write support."
-> +HOMEPAGE = "http://www.ntfs-3g.org/"
-> +DEPENDS = "fuse libgcrypt"
-> +PROVIDES = "ntfsprogs ntfs-3g"
-> +RDEPENDS_ntfs-3g += "fuse"
+> +++ b/meta-oe/recipes-support/freerdp/freerdp.inc
+> @@ -0,0 +1,23 @@
+> +# Copyright (C) 2010, 2011 O.S. Systems Software Ltda. All Rights Reserved
+> +# Released under the MIT license
+> +
+> +DESCRIPTION = "FreeRDP RDP client"
+> +HOMEPAGE = "http://freerdp.sourceforge.net"
+> +DEPENDS = "virtual/libx11 openssl libxcursor cups alsa-lib"
+> +RDEPENDS_${PN} += "xprop"
 
-Please order RDEPENDS with FILES and PACKAGES
-
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
-> +                    file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
-
-COPYING.LIB implies LGPL components, is the LICENSE field correct?
+Same comment as before, RDEPENDS are in the package section, so below
+do_install
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFNxersMkyGM64RGpERAl5sAJ9rfBhHjBugTvd1ljRj3ffjhx1DhgCfRI7a
-dsahoWFX+Pz3t22/pJsDXUw=
-=MJpe
+iD8DBQFNxes2MkyGM64RGpERApaEAJ9um0v6zRdLsqitkxeHYEj8rEs3WACglTVP
+7i85waMzo9JielLgiH2/ABg=
+=5Fai
 -----END PGP SIGNATURE-----
 
 
