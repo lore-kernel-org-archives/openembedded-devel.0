@@ -1,26 +1,24 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1QJ1cq-0004Dd-DF
+	(envelope-from <robert@erafx.com>) id 1QJ1i6-0004Q2-Tn
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 12:54:12 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.3])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QJ1VM-0005my-2g
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 May 2011 12:46:28 +0200
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1304846189.4124.25.camel@mattotaupa>
+	Sun, 08 May 2011 12:59:40 +0200
+Received: by vxd7 with SMTP id 7so5712036vxd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 08 May 2011 03:56:55 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.220.116.146 with SMTP id m18mr1294895vcq.120.1304852214228;
+	Sun, 08 May 2011 03:56:54 -0700 (PDT)
+Received: by 10.220.195.202 with HTTP; Sun, 8 May 2011 03:56:54 -0700 (PDT)
+X-Originating-IP: [24.165.208.114]
+In-Reply-To: <20110508005952.GC20352@sakrah.homelinux.org>
 References: <1304524618-4864-1-git-send-email-robert@erafx.com>
 	<20110508005952.GC20352@sakrah.homelinux.org>
-	<1304837776.4124.15.camel@mattotaupa>
-	<1304845356.3355.4.camel@lenovo.internal.reciva.com>
-	<1304846189.4124.25.camel@mattotaupa>
-Date: Sun, 08 May 2011 11:51:25 +0100
-Message-ID: <1304851885.3355.13.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
+Date: Sun, 8 May 2011 06:56:54 -0400
+Message-ID: <BANLkTinOOsKHe7oh79ChQOVksHftxf+9Gg@mail.gmail.com>
+From: Robert Foerster <robert@erafx.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [PATCH] x264_r2245: fix DEPENDS for x86
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,48 +33,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2011 10:54:12 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 08 May 2011 10:59:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Sun, 2011-05-08 at 11:16 +0200, Paul Menzel wrote:
-> Thank you for the clarification. Is for example `RDEPENDS_${PN}` also an
-> override?
+On Sat, May 7, 2011 at 8:59 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-Not in the sense I was meaning here, no.  (It is true that the ${PN} bit
-is technically an OVERRIDE, but in most/all cases RDEPENDS_${PN} is
-effectively a primary variable, i.e. there is no underlying RDEPENDS
-which it overrides.)
+> On (04/05/11 11:56), Bob Foerster wrote:
+> > The recipe intended to add "yasm-native" to the dependencies on x86,
+> > but it set DEPENDS_x86 = "yasm-native" which obliterated the base
+> > dependencies. On a fresh build, this package was failing since it
+> > was trying to build before the compiler was ready.
+> >
+> > Depends is now set with DEPENDS_append_x86, which leaves the base
+> > dependencies intact.
+> >
+> > Signed-off-by: Bob Foerster <robert@erafx.com>
+> > ---
+> >  recipes/vlc/x264_r2245.bb |    2 +-
+> >  1 files changed, 1 insertions(+), 1 deletions(-)
+> >
+> > diff --git a/recipes/vlc/x264_r2245.bb b/recipes/vlc/x264_r2245.bb
+> > index 0cffea3..8c2b5b4 100644
+> > --- a/recipes/vlc/x264_r2245.bb
+> > +++ b/recipes/vlc/x264_r2245.bb
+> > @@ -23,7 +23,7 @@ X264_ECFLAGS_mipsel = "-fPIC"
+> >  X264_DISABLE_ASM = "--disable-asm"
+> >  # use assembler written functions for those archs supporting this
+> >  X264_DISABLE_ASM_x86 = ""
+> > -DEPENDS_x86 = "yasm-native"
+> > +DEPENDS_append_x86 = "yasm-native"
+>                          ^
+> you need a space
+>
+>
+Oddly, it works without the space. From bitbake -e:
+DEPENDS="pkgconfig-native autoconf-native automake-native help2man-native
+libtool-native libtool-cross gnu-config-native virtual/i486-oe-linux-gcc
+virtual/libc yasm-native"
 
-The issue with the "DEPENDS_x86" thing is that, as far as the initial
-metadata processing is concerned, DEPENDS and DEPENDS_x86 are distinct
-variables.  You might hope that "DEPENDS_x86 += ..." would do a
-conditional append to DEPENDS, but it doesn't: what happens is that it
-creates a new variable "DEPENDS_x86" which then replaces the contents of
-DEPENDS during override processing.  So the initial value of ${DEPENDS}
-is lost rather than being appended to.
-
-This whole issue is basically the whole reason that the "_append" syntax
-hasn't been deprecated, since we don't currently have any other way to
-do conditional appending (apart from resorting to python).
-
->  If yes, then looking at
-> 
-> 	$ git grep 'DEPENDS_'
-> 
-> returns a lot of incorrect usages.
-
-From a quick glance at that output nothing jumped out at me as being
-incorrect, but there might well be a few wrong ones in there.  This one,
-for example:
-
-classes/vala.bbclass:DEPENDS_virtclass-native += "vala-native"
-
-looks a bit dubious to me (for the same reasons as above) but without
-checking the recipe context it's impossible to say whether it's actually
-wrong or not.
-
-p.
+Nonetheless, I'll add a space and send a v2.
 
 
+
+> Otherwise looks ok
+> >
+> >  EXTRA_OECONF = '--enable-shared ${X264_DISABLE_ASM}
+> --extra-cflags="${X264_ECFLAGS}"'
+> >
+> > --
+> > 1.7.1
+> >
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> --
+> -Khem
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
