@@ -1,30 +1,26 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1QJKxo-00051G-C8
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 09:33:08 +0200
+	(envelope-from <stefan@datenfreihafen.org>) id 1QJLb3-0006Oh-O4
+	for openembedded-devel@openembedded.org; Mon, 09 May 2011 10:13:41 +0200
 Received: from [2001:638:602:1183:4da:ff61:f5c:b7b4] (helo=excalibur.local)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1QJKv6-0007dQ-33 by authid <stefan@sostec.de> with srv_auth_cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 May 2011 09:30:25 +0200
+	id 1QJL70-0007lm-KP by authid <stefan@sostec.de> with srv_auth_cram_md5;
+	Mon, 09 May 2011 09:42:40 +0200
 Received: from stefan by excalibur.local with local (Exim 4.75)
-	(envelope-from <stefan@excalibur.local>) id 1QJKv4-00013p-T5
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 09:30:18 +0200
+	(envelope-from <stefan@excalibur.local>)
+	id 1QJL6y-0001F9-DG; Mon, 09 May 2011 09:42:36 +0200
 From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 May 2011 09:30:18 +0200
-Message-Id: <39968efb6968eb70ebd753e5a21f9fa9889d5be6.1304925139.git.stefan@buglabs.net>
+To: openembedded-devel@openembedded.org
+Date: Mon,  9 May 2011 09:41:45 +0200
+Message-Id: <1304926905-4739-1-git-send-email-stefan@datenfreihafen.org>
 X-Mailer: git-send-email 1.7.5.1
-In-Reply-To: <cover.1304925139.git.stefan@buglabs.net>
-References: <cover.1304925139.git.stefan@buglabs.net>
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
 	autolearn=ham version=3.2.5
-Subject: [PATCH 2011.03-maintenance 7/7] cacao-native: add fix for vm-shutdown and multiple threads are involved
+Cc: Stefan Schmidt <stefan@buglabs.net>
+Subject: [PATCH] llvm2.7_2.7: Add patch for build errors on newer gcc / glibc combinations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,223 +34,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2011 07:33:08 -0000
+X-List-Received-Date: Mon, 09 May 2011 08:13:41 -0000
 
-From: Henning Heinold <h.heinold@tarent.de>
+From: Stefan Schmidt <stefan@buglabs.net>
 
-* bump PR
+Its seems there is a stricter header checking again which results in errors like
+this:
+error: 'ptrdiff_t' does not name a type
+
+This happens on my Debian SID system. Adding the needed includes fixes the
+build.
 
 Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
 ---
- recipes/cacao/cacao-native_hg.bb              |    6 +-
- recipes/cacao/files/cacao-shutdownguard.patch |  180 +++++++++++++++++++++++++
- 2 files changed, 184 insertions(+), 2 deletions(-)
- create mode 100644 recipes/cacao/files/cacao-shutdownguard.patch
+ recipes/llvm/llvm2.7/include-fixes.patch |   55 ++++++++++++++++++++++++++++++
+ recipes/llvm/llvm2.7_2.7.bb              |    3 +-
+ 2 files changed, 57 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/llvm/llvm2.7/include-fixes.patch
 
-diff --git a/recipes/cacao/cacao-native_hg.bb b/recipes/cacao/cacao-native_hg.bb
-index 82f56eb..dc35ce8 100644
---- a/recipes/cacao/cacao-native_hg.bb
-+++ b/recipes/cacao/cacao-native_hg.bb
-@@ -1,9 +1,11 @@
- require cacao-native.inc
- 
- PV = "1.1.0+hgr${SRCPV}"
--PR = "r3"
-+PR = "r4"
- 
- SRCREV = "c7bf150bfa46"
--SRC_URI = "hg://mips.complang.tuwien.ac.at/hg/;module=cacao;rev=${SRCREV}"
-+SRC_URI = "hg://mips.complang.tuwien.ac.at/hg/;module=cacao;rev=${SRCREV} \
-+           file://cacao-shutdownguard.patch \
-+          "
- 
- S = "${WORKDIR}/cacao"
-diff --git a/recipes/cacao/files/cacao-shutdownguard.patch b/recipes/cacao/files/cacao-shutdownguard.patch
+diff --git a/recipes/llvm/llvm2.7/include-fixes.patch b/recipes/llvm/llvm2.7/include-fixes.patch
 new file mode 100644
-index 0000000..b89170c
+index 0000000..9e71e40
 --- /dev/null
-+++ b/recipes/cacao/files/cacao-shutdownguard.patch
-@@ -0,0 +1,180 @@
-+diff -r c7bf150bfa46 src/threads/posix/mutex-posix.hpp
-+--- a/src/threads/posix/mutex-posix.hpp	Fri Mar 11 23:35:56 2011 +0100
-++++ b/src/threads/posix/mutex-posix.hpp	Fri Apr 01 16:16:07 2011 +0200
-+@@ -53,6 +53,9 @@
++++ b/recipes/llvm/llvm2.7/include-fixes.patch
+@@ -0,0 +1,55 @@
++Fixes stricter includes which result in failures like this:
++error: 'ptrdiff_t' does not name a type
++
++Upstream-Status: Unknown, not submitted as 2.7 is very old
++
++Signed-off-by: Stefan Schmidt <stefan@datenfreihafen.org>
++
++Index: llvm-2.7/include/llvm/ADT/SmallVector.h
++===================================================================
++--- llvm-2.7.orig/include/llvm/ADT/SmallVector.h	2011-05-08 17:07:09.000000000 +0200
+++++ llvm-2.7/include/llvm/ADT/SmallVector.h	2011-05-08 17:07:25.000000000 +0200
++@@ -19,6 +19,7 @@
++ #include <cassert>
++ #include <cstring>
++ #include <memory>
+++#include <stddef.h>
 + 
-+ 	inline void lock();
-+ 	inline void unlock();
-++
-++private:
-++	void abort(int, const char*);
-+ };
++ #ifdef _MSC_VER
++ namespace std {
++Index: llvm-2.7/include/llvm/ADT/ilist.h
++===================================================================
++--- llvm-2.7.orig/include/llvm/ADT/ilist.h	2011-05-08 20:24:57.000000000 +0200
+++++ llvm-2.7/include/llvm/ADT/ilist.h	2011-05-08 20:25:12.000000000 +0200
++@@ -40,6 +40,7 @@
 + 
-+ #else
-+@@ -66,7 +69,6 @@
-+ // Includes.
-+ #include "vm/os.hpp"
++ #include <cassert>
++ #include <iterator>
+++#include <stddef.h>
 + 
-+-
-+ #ifdef __cplusplus
++ namespace llvm {
 + 
-+ /**
-+@@ -77,19 +79,19 @@
-+ 	int result = pthread_mutexattr_init(&_attr);
++Index: llvm-2.7/include/llvm/Use.h
++===================================================================
++--- llvm-2.7.orig/include/llvm/Use.h	2011-05-08 20:28:21.000000000 +0200
+++++ llvm-2.7/include/llvm/Use.h	2011-05-08 20:28:37.000000000 +0200
++@@ -28,6 +28,7 @@
++ #include "llvm/Support/Casting.h"
++ #include "llvm/ADT/PointerIntPair.h"
++ #include <iterator>
+++#include <stddef.h>
 + 
-+ 	if (result != 0) {
-+-		os::abort_errnum(result, "Mutex::Mutex(): pthread_mutexattr_init failed");
-++		abort(result, "Mutex::Mutex(): pthread_mutexattr_init failed");
-+ 	}
++ namespace llvm {
 + 
-+ 	result = pthread_mutexattr_settype(&_attr, PTHREAD_MUTEX_RECURSIVE);
++Index: llvm-2.7/include/llvm/ADT/DenseMap.h
++===================================================================
++--- llvm-2.7.orig/include/llvm/ADT/DenseMap.h	2011-05-08 20:32:11.000000000 +0200
+++++ llvm-2.7/include/llvm/ADT/DenseMap.h	2011-05-08 20:32:21.000000000 +0200
++@@ -23,6 +23,7 @@
++ #include <utility>
++ #include <cassert>
++ #include <cstring>
+++#include <stddef.h>
 + 
-+ 	if (result != 0) {
-+-		os::abort_errnum(result, "Mutex::Mutex(): pthread_mutexattr_settype failed");
-++		abort(result, "Mutex::Mutex(): pthread_mutexattr_settype failed");
-+ 	}
++ namespace llvm {
 + 
-+ 	result = pthread_mutex_init(&_mutex, &_attr);
-+ 
-+ 	if (result != 0) {
-+-		os::abort_errnum(result, "Mutex::Mutex(): pthread_mutex_init failed");
-++		abort(result, "Mutex::Mutex(): pthread_mutex_init failed");
-+ 	}
-+ }
-+ 
-+@@ -102,13 +104,13 @@
-+ 	int result = pthread_mutexattr_destroy(&_attr);
-+ 
-+ 	if (result != 0) {
-+-		os::abort_errnum(result, "Mutex::~Mutex(): pthread_mutexattr_destroy failed");
-++		abort(result, "Mutex::~Mutex(): pthread_mutexattr_destroy failed");
-+ 	}
-+ 
-+ 	result = pthread_mutex_destroy(&_mutex);
-+ 
-+ 	if (result != 0) {
-+-		os::abort_errnum(result, "Mutex::~Mutex(): pthread_mutex_destroy failed");
-++		abort(result, "Mutex::~Mutex(): pthread_mutex_destroy failed");
-+ 	}
-+ }
-+ 
-+@@ -127,7 +129,7 @@
-+ 	int result = pthread_mutex_lock(&_mutex);
-+ 
-+ 	if (result != 0) {
-+-		os::abort_errnum(result, "Mutex::lock(): pthread_mutex_lock failed");
-++		abort(result, "Mutex::lock(): pthread_mutex_lock failed");
-+ 	}
-+ }
-+ 
-+@@ -141,10 +143,11 @@
-+ 	int result = pthread_mutex_unlock(&_mutex);
-+ 
-+ 	if (result != 0) {
-+-		os::abort_errnum(result, "Mutex::unlock: pthread_mutex_unlock failed");
-++		abort(result, "Mutex::unlock: pthread_mutex_unlock failed");
-+ 	}
-+ }
-+ 
-++
-+ #else
-+ 
-+ // This structure must have the same layout as the class above.
-+diff -r c7bf150bfa46 src/threads/posix/thread-posix.cpp
-+--- a/src/threads/posix/thread-posix.cpp	Fri Mar 11 23:35:56 2011 +0100
-++++ b/src/threads/posix/thread-posix.cpp	Fri Apr 01 16:16:07 2011 +0200
-+@@ -74,6 +74,23 @@
-+ #include "vm/string.hpp"
-+ #include "vm/vm.hpp"
-+ 
-++/**
-++ * Handle the case that a mutex related pthread function failed.
-++ *
-++ * During normal execution of the VM it will make it abort. However if the
-++ * VM is in its last stages of shutting down (where nothing pthread related works
-++ * anymore), it will silently end the calling thread.
-++ */ 
-++void Mutex::abort(int errnum, const char* text)
-++{
-++	if (VM::get_current()->is_shutdown())
-++	{
-++		pthread_exit(NULL);
-++	}
-++
-++	os::abort_errnum(errnum, text);
-++}
-++
-+ #if defined(ENABLE_STATISTICS)
-+ # include "vm/statistics.h"
-+ #endif
-+diff -r c7bf150bfa46 src/vm/vm.cpp
-+--- a/src/vm/vm.cpp	Fri Mar 11 23:35:56 2011 +0100
-++++ b/src/vm/vm.cpp	Fri Apr 01 16:16:07 2011 +0200
-+@@ -52,6 +52,7 @@
-+ 
-+ #include "native/vm/nativevm.hpp"
-+ 
-++#include "threads/atomic.hpp"
-+ #include "threads/lock.hpp"
-+ #include "threads/thread.hpp"
-+ 
-+@@ -1585,6 +1586,22 @@
-+ 	return true;
-+ }
-+ 
-++/**
-++ * Checks whether a shutdown process has to be guarded.
-++ *
-++ * Returning true means the caller must not continue
-++ * doing any shutdown operations.
-++ */
-++bool VM::shutdown_guard()
-++{
-++	return Atomic::generic_compare_and_swap(&_shuttingdown, 0, 1) == 1;
-++}
-++
-++bool VM::is_shutdown()
-++{
-++	Atomic::generic_memory_barrier();
-++	return _shuttingdown == 1;
-++}
-+ 
-+ /* vm_run **********************************************************************
-+ 
-+@@ -1865,6 +1882,15 @@
-+ 
-+ void vm_shutdown(s4 status)
-+ {
-++	log_println("vm_shutdown");
-++
-++	if (VM::get_current()->shutdown_guard())
-++	{
-++		/* Shutdown in progress by another thread already.
-++		 Silently not do it another time. */
-++		return;
-++	}
-++
-+ 	if (opt_verbose 
-+ #if defined(ENABLE_STATISTICS)
-+ 		|| opt_getcompilingtime || opt_stat
-+diff -r c7bf150bfa46 src/vm/vm.hpp
-+--- a/src/vm/vm.hpp	Fri Mar 11 23:35:56 2011 +0100
-++++ b/src/vm/vm.hpp	Fri Apr 01 16:16:07 2011 +0200
-+@@ -64,6 +64,7 @@
-+ 	bool    _initializing;
-+ 	bool    _created;
-+ 	bool    _exiting;
-++	uint32_t _shuttingdown;
-+ 	int64_t _starttime;
-+ 	int64_t _inittime;
-+ 
-+@@ -104,6 +105,9 @@
-+ 	int64_t get_starttime()   { return _starttime; }
-+ 	int64_t get_inittime()    { return _inittime; }
-+ 
-++	bool	shutdown_guard();
-++	bool	is_shutdown();
-++
-+ 	Properties&      get_properties     () { return _properties; }
-+ 	Recompiler&      get_recompiler     () { return _recompiler; } // REMOVEME
-+ #if defined(WITH_JAVA_RUNTIME_LIBRARY_OPENJDK)
+diff --git a/recipes/llvm/llvm2.7_2.7.bb b/recipes/llvm/llvm2.7_2.7.bb
+index 4353622..12755db 100644
+--- a/recipes/llvm/llvm2.7_2.7.bb
++++ b/recipes/llvm/llvm2.7_2.7.bb
+@@ -1,6 +1,6 @@
+ require llvm.inc
+ 
+-PR = "r9"
++PR = "r10"
+ 
+ DEPENDS = "llvm-common llvm2.7-native"
+ 
+@@ -15,6 +15,7 @@ SRC_URI += "\
+   file://r104652-VFPLoadStoreMultiple.patch \
+   file://r104653-BFC-BFI.patch \
+   file://rawMOVLRPC.patch \
++  file://include-fixes.patch \
+   "
+ 
+ LLVM_RELEASE = "2.7"
 -- 
 1.7.5.1
 
