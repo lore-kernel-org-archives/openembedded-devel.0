@@ -1,22 +1,22 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1QJKxe-0004oW-Fe
+	(envelope-from <stefan@datenfreihafen.org>) id 1QJKxj-0004tm-AB
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 09:32:58 +0200
+	Mon, 09 May 2011 09:33:03 +0200
 Received: from [2001:638:602:1183:4da:ff61:f5c:b7b4] (helo=excalibur.local)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1QJKv0-0007d5-Ke by authid <stefan@sostec.de> with srv_auth_cram_md5
+	id 1QJKv3-0007dE-AC by authid <stefan@sostec.de> with srv_auth_cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 May 2011 09:30:16 +0200
+	Mon, 09 May 2011 09:30:20 +0200
 Received: from stefan by excalibur.local with local (Exim 4.75)
-	(envelope-from <stefan@excalibur.local>) id 1QJKuz-00012d-0E
+	(envelope-from <stefan@excalibur.local>) id 1QJKv2-00013E-GG
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 09:30:13 +0200
+	Mon, 09 May 2011 09:30:16 +0200
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 May 2011 09:30:12 +0200
-Message-Id: <5b9d550f6154301c5926b31c798fa93eb150a1a7.1304925139.git.stefan@buglabs.net>
+Date: Mon,  9 May 2011 09:30:15 +0200
+Message-Id: <e682d07e272141a55ef957b0e527950cef3b4fc8.1304925139.git.stefan@buglabs.net>
 X-Mailer: git-send-email 1.7.5.1
 In-Reply-To: <cover.1304925139.git.stefan@buglabs.net>
 References: <cover.1304925139.git.stefan@buglabs.net>
@@ -24,7 +24,7 @@ X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
 	autolearn=ham version=3.2.5
-Subject: [PATCH 2011.03-maintenance 5/7] inetlib: move to proper place
+Subject: [PATCH 2011.03-maintenance 6/7] icedtea6-native: add libxext-native to the dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,26 +38,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2011 07:32:58 -0000
+X-List-Received-Date: Mon, 09 May 2011 07:33:03 -0000
 
 From: Henning Heinold <h.heinold@tarent.de>
 
+* bump PR
+
 Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
 ---
- .../inetlib-1.1.1/datadir_java.patch               |    0
- recipes/{classpath => classpathx}/inetlib_1.1.1.bb |    0
- 2 files changed, 0 insertions(+), 0 deletions(-)
- rename recipes/{classpath => classpathx}/inetlib-1.1.1/datadir_java.patch (100%)
- rename recipes/{classpath => classpathx}/inetlib_1.1.1.bb (100%)
+ recipes/icedtea/icedtea6-native.inc |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/classpath/inetlib-1.1.1/datadir_java.patch b/recipes/classpathx/inetlib-1.1.1/datadir_java.patch
-similarity index 100%
-rename from recipes/classpath/inetlib-1.1.1/datadir_java.patch
-rename to recipes/classpathx/inetlib-1.1.1/datadir_java.patch
-diff --git a/recipes/classpath/inetlib_1.1.1.bb b/recipes/classpathx/inetlib_1.1.1.bb
-similarity index 100%
-rename from recipes/classpath/inetlib_1.1.1.bb
-rename to recipes/classpathx/inetlib_1.1.1.bb
+diff --git a/recipes/icedtea/icedtea6-native.inc b/recipes/icedtea/icedtea6-native.inc
+index 39ecdad..06da7c0 100644
+--- a/recipes/icedtea/icedtea6-native.inc
++++ b/recipes/icedtea/icedtea6-native.inc
+@@ -1,12 +1,13 @@
+ DESCRIPTION = "Harness to build the source code from OpenJDK using Free Software build tools"
+ HOMEPAGE = "http://icedtea.classpath.org"
+ LICENSE  = "GPL with Classpath Exception"
+-INC_PR = "r3"
++INC_PR = "r4"
+ 
+ DEPENDS = "virtual/javac-native classpath-tools-native \
+ 	   virtual/java-native classpath-native \
+ 	   xalan-j-native xerces-j-native rhino-native \
+-	   ant-native libx11-native xproto-native libxt-native \
++	   ant-native \
++           libx11-native xproto-native libxt-native libxext-native \
+ 	   freetype-native zlib-native giflib-native jpeg-native \
+            zip-native \
+ 	  "
 -- 
 1.7.5.1
 
