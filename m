@@ -1,40 +1,23 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QJR9F-0005Eq-DG
+	(envelope-from <philb@gnu.org>) id 1QJRE7-0005Nu-So
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 16:09:21 +0200
-Received: by wye20 with SMTP id 20so4360157wye.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 May 2011 07:06:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=mmMLoZvXYMAIBCpaH+YMROk1k46rkZq6tacAueTAlwQ=;
-	b=ZyVoZupyrinkfFcHJLkYo+dcYL1rdA1uI4NZSgA8opQaHd+IHZNcvCbYDAsRlTpX04
-	A02EJyCh9PG4SVLvbVlZr5XSnn7hIomk+S898arEZ+gAgs+xxIMHrp+OT+QedrWT1qw8
-	CQ7v1sCkkO50c1dtC60AFSHzzGAkDyu/S4hbA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=vKVgybEeoi2i4VMI4iF2DlD78oynsT7FKAetn9fhs7W4wsK30BaUmdi4VO6EwHSQdJ
-	CLggzGPI3iZC3ICpZTQADsubmQL6hmTuH+IO+OhMy28/xh7UMdOZWad17+KyrYroKcWX
-	xH3H0QJfFRfv3Vs0leNbwHqboCrOlluozgVQE=
-MIME-Version: 1.0
-Received: by 10.216.232.8 with SMTP id m8mr248152weq.22.1304949996898; Mon, 09
-	May 2011 07:06:36 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.216.93.195 with HTTP; Mon, 9 May 2011 07:06:36 -0700 (PDT)
-In-Reply-To: <1304949493.8000.81.camel@phil-desktop>
+	Mon, 09 May 2011 16:14:23 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>)
+	id 1QJR6P-0006fm-N9; Mon, 09 May 2011 16:06:25 +0200
+From: Phil Blundell <philb@gnu.org>
+To: Otavio Salvador <otavio@ossystems.com.br>
+In-Reply-To: <BANLkTinxZqRQKOeG47S_wSLNMitNuGywqg@mail.gmail.com>
 References: <1304872895-21596-1-git-send-email-otavio@ossystems.com.br>
 	<1304872895-21596-6-git-send-email-otavio@ossystems.com.br>
 	<1304949493.8000.81.camel@phil-desktop>
-Date: Mon, 9 May 2011 11:06:36 -0300
-X-Google-Sender-Auth: _svjVaxYu5RupgUN70lY-QethtQ
-Message-ID: <BANLkTinxZqRQKOeG47S_wSLNMitNuGywqg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Phil Blundell <philb@gnu.org>
+	<BANLkTinxZqRQKOeG47S_wSLNMitNuGywqg@mail.gmail.com>
+Date: Mon, 09 May 2011 15:11:40 +0100
+Message-ID: <1304950300.8000.93.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH v3 06/11] p910nd: add version 0.95
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -50,32 +33,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2011 14:09:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 09 May 2011 14:14:24 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Mon, May 9, 2011 at 10:58, Phil Blundell <philb@gnu.org> wrote:
-...
-> This doesn't look like it's going to work: it tries to stop "p9100d" but
-> that doesn't seem to be the correct name of the executable.
+On Mon, 2011-05-09 at 11:06 -0300, Otavio Salvador wrote:
+> I prefer to drop the script et all. Personally I don't use it since we
+> handle it in our OS and so it would be easier and better to drop it
+> and someone add it back when need.
 
-I prefer to drop the script et all. Personally I don't use it since we
-handle it in our OS and so it would be easier and better to drop it
-and someone add it back when need.
+Right, sounds like a good plan to me.
 
->> +do_compile () {
->> + =A0 =A0 ${CC} ${LDFLAGS} -o p910nd p910nd.c
->> +}
->
-> Shouldn't this also mention $(CFLAGS)?
+p.
 
-Good catch.
-
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
 
 
