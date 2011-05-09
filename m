@@ -1,25 +1,21 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1QJO9L-0004pk-Rd
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 12:57:16 +0200
-Received: (qmail 7681 invoked by uid 1003); 9 May 2011 10:54:29 -0000
-Received: from unknown (HELO ?192.168.1.167?)
-	(philip@opensdr.com@96.240.165.110)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	9 May 2011 10:54:29 -0000
-Message-ID: <4DC7C7E4.4020709@balister.org>
-Date: Mon, 09 May 2011 06:54:28 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14 Thunderbird/3.1.10
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QJOdE-0002o1-Q1 for openembedded-devel@lists.openembedded.org;
+	Mon, 09 May 2011 13:28:08 +0200
+Received: from f053041075.adsl.alicedsl.de ([78.53.41.75]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QJObp-0000WD-C5 for openembedded-devel@lists.openembedded.org;
+	Mon, 09 May 2011 11:26:41 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <BANLkTimzgB9QSwwf2a=3n21-fUR=USwDUQ@mail.gmail.com>	<ipmian$2s9$1@dough.gmane.org>
-	<4DBED1C2.4040006@mentor.com>	<1304856738.3355.94.camel@lenovo.internal.reciva.com>
-	<8739ko9tld.fsf@eha.ulstruplund.dk>
-In-Reply-To: <8739ko9tld.fsf@eha.ulstruplund.dk>
-Subject: Re: Mirror at GitHub
+Date: Mon, 09 May 2011 13:25:25 +0200
+Message-ID: <1304940325.3791.45.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: [PATCH] network-manager-applet_git: use `--enable-more-warnings=no`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,40 +29,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2011 10:57:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 09 May 2011 11:28:08 -0000
+X-Groupsio-MsgNum: 31790
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-uzaOUJKRKB+/zVMi9NSW"
 
-On 05/09/2011 04:16 AM, Esben Haabendal wrote:
-> Phil Blundell<philb@gnu.org>  writes:
->
->> On Mon, 2011-05-02 at 08:46 -0700, Tom Rini wrote:
->>> Last I heard from Tom King this was still in progress / figuring out how
->>> to get it done.
->>
->> We now have a read-only mirror at github, see:
->>
->> https://github.com/openembedded
->>
->> Thanks to both the Toms for making this happen.
->>
->> Any problems with the mirror, please let me know.
->
-> So is it preferred to place OE repositories on github.com in favor of
-> gitorious.org?
+--=-uzaOUJKRKB+/zVMi9NSW
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-There is no "official" preference. We just setup the mirror on github 
-because people took the time to do so. If gitorious has the same feature 
-we could set it up there also for people that prefer gitorious.
+Date: Mon, 9 May 2011 12:46:40 +0200
 
-We should update the docs on the website to explain creating a personal 
-github repo using the githib mirror feature, rather than jsut pushing 
-the repo back.
+To prevent the following compile error [1]
 
-Another idea is to pull from the github repo and push to the OE repo.
+	[=E2=80=A6]
+	cc1: warnings being treated as errors
+	applet-dialogs.c: In function 'applet_info_dialog_show':
+	applet-dialogs.c:331:22: error: 'method' may be used uninitialized in this=
+ function
+	[=E2=80=A6]
 
-Can someone comment on how the github repo is updates from the main OE repo?
+`-Werror` should not be passed. According to the comment added since 0.7.1 =
+`--enable-more-warnings=3Dno` did not do that. Testing this recipe version =
+with `angstrom-2010.x` for `MACHINE=3D"beagleboard"` worked fine though.
 
-Philip
+[1] http://mail.gnome.org/archives/networkmanager-list/2011-May/msg00075.ht=
+ml
 
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ .../networkmanager/network-manager-applet_git.bb   |    8 +-------
+ 1 files changed, 1 insertions(+), 7 deletions(-)
 
+diff --git a/recipes/networkmanager/network-manager-applet_git.bb b/recipes=
+/networkmanager/network-manager-applet_git.bb
+index 8493f6d..5f7e0f8 100644
+--- a/recipes/networkmanager/network-manager-applet_git.bb
++++ b/recipes/networkmanager/network-manager-applet_git.bb
+@@ -17,13 +17,7 @@ SRC_URI =3D "git://git.gnome.org/network-manager-applet;=
+protocol=3Dgit;branch=3DNMA_0_
+=20
+ S =3D "${WORKDIR}/git"
+=20
+-do_configure_append() {
+-        rm config.log
+-        # Sigh... --enable-compile-warnings=3Dno doesn't actually turn off=
+ -Werror
+-        for i in $(find ${S} -name "Makefile") ; do
+-            sed -i -e s:-Werror::g $i
+-        done
+-}
++EXTRA_OECONF =3D "--enable-more-warnings=3Dno"
+=20
+ # Hack around dbus a_console problems
+ do_install_append() {
+--=20
+1.7.4.4
+
+--=-uzaOUJKRKB+/zVMi9NSW
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3HzyUACgkQPX1aK2wOHVivPwCeLllyVLeorvVwMbxz39r9iOQD
+8NYAnizKXeVmheEeTrPBZrf/zsX8As0g
+=OzmQ
+-----END PGP SIGNATURE-----
+
+--=-uzaOUJKRKB+/zVMi9NSW--
