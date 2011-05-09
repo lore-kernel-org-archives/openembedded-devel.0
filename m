@@ -1,38 +1,27 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QJRnt-00060O-ND
+	(envelope-from <robert@erafx.com>) id 1QJRtv-0006J9-FJ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 16:51:21 +0200
-Received: by pzk36 with SMTP id 36so2488702pzk.6
+	Mon, 09 May 2011 16:57:35 +0200
+Received: by vxd7 with SMTP id 7so153601vxd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 May 2011 07:48:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=i4yPIsk2/iNXbeqkQLeHXf/kIOvw3AitcXo7VtY0KPg=;
-	b=ho4BhMqKkcUiOCpQ2lAg234127hs3xN4X+/J0Spxh8kjQlpP6zpgCs2fS2VcTyc1Rp
-	kSQ8NlWXUmUXKxD18xDaDAmeaGpDyUNQyxkrUuJO0MunleD8dUN3dT6xtSrhGGyOwplf
-	4adbG8kMI0aBZOz9T4ZgYvlL9r/Ip78KHUkaY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=NLRHoDXUteR1zRKyH4PFlWLDd5lTRyrMuoTRVGlxgFVj4Gb5rbhufYsg/zhCxm96QY
-	OZw4RBA37POndD1/7ICjb5B/N+sq3nGjs8g5kgPMlYKwQgwEQ+VNXZV0XrKgYmpNQoVh
-	TNxQ6M63bmm/jq3uOHCIH6x1dgh6w0G3qifhg=
-Received: by 10.68.63.36 with SMTP id d4mr10420061pbs.60.1304952505814;
-	Mon, 09 May 2011 07:48:25 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id m4sm4149077pbb.78.2011.05.09.07.48.23
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 09 May 2011 07:48:24 -0700 (PDT)
-From: raj.khem@gmail.com
+	Mon, 09 May 2011 07:54:50 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.220.20.81 with SMTP id e17mr1516420vcb.85.1304952889728; Mon,
+	09 May 2011 07:54:49 -0700 (PDT)
+Received: by 10.220.195.202 with HTTP; Mon, 9 May 2011 07:54:49 -0700 (PDT)
+X-Originating-IP: [207.180.56.102]
+In-Reply-To: <1304868955.4124.67.camel@mattotaupa>
+References: <1304852453-9294-1-git-send-email-robert@erafx.com>
+	<1304852952.4124.52.camel@mattotaupa>
+	<BANLkTimLb=i4eLMD2NWLRcC5QxADWQa4Mg@mail.gmail.com>
+	<1304868955.4124.67.camel@mattotaupa>
+Date: Mon, 9 May 2011 10:54:49 -0400
+Message-ID: <BANLkTi=ZS_Cubc9+9o0tqc3z9D9vGvExWg@mail.gmail.com>
+From: Robert Foerster <robert@erafx.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 May 2011 07:48:04 -0700
-Message-Id: <1304952485-8207-2-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <1304952485-8207-1-git-send-email-raj.khem@gmail.com>
-References: <1304952485-8207-1-git-send-email-raj.khem@gmail.com>
-Subject: [PATCHv3 2/3] xserver-xorg_1.10.1.bb: Replace use of --variable=sdkdir with --cflags-only-I
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH v2] x264_r2245: do not override `DEPENDS` for x86
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,79 +35,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2011 14:51:22 -0000
+X-List-Received-Date: Mon, 09 May 2011 14:57:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Khem Raj <raj.khem@gmail.com>
+On Sun, May 8, 2011 at 11:35 AM, Paul Menzel <
+paulepanter@users.sourceforge.net> wrote:
 
-This fixes the build failures of xf86-video-fbdev on build systems which
-have xorg-xserver development packages installed.
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../replace-pkgconfig-sdkdir-poking.patch          |   33 ++++++++++++++++++++
- .../xorg-xserver/xserver-xorg_1.10.1.bb            |    3 +-
- 2 files changed, 35 insertions(+), 1 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.1/replace-pkgconfig-sdkdir-poking.patch
-
-diff --git a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.1/replace-pkgconfig-sdkdir-poking.patch b/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.1/replace-pkgconfig-sdkdir-poking.patch
-new file mode 100644
-index 0000000..3967c4c
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.1/replace-pkgconfig-sdkdir-poking.patch
-@@ -0,0 +1,33 @@
-+configury forces pkg-config to poke for sdkdir variable which 
-+pkg-config happily returns but does not prepend sysroot to it
-+since thats only done for includes and libs. This then gets -I
-+prepended and added to CFLAGS. Guess what gcc cross gripes
-+about including host includes in cross builds but does not bail
-+out the build but it does not escape the wrath of our oe's
-+QA checks and rightly so. We replace use of sdkdir with 
-+--cflags-only-I which returns the include paths correctly
-+pointing inside sysroot and not at the host includes and plus
-+includedir if you look inside the .pc file is assigned sdkdir
-+anyway so we do not lose anything
-+
-+This m4 macro is included in other packages e.g. xf86-video-fbdev
-+which dont build on hosts which have installation of
-+xorg-xserver-dev because it gets this include poisoning
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-status: Pending
-+
-+Index: xorg-server-1.10.1/xorg-server.m4
-+===================================================================
-+--- xorg-server-1.10.1.orig/xorg-server.m4
-++++ xorg-server-1.10.1/xorg-server.m4
-+@@ -31,7 +31,7 @@ dnl
-+ AC_DEFUN([XORG_DRIVER_CHECK_EXT],[
-+ 	AC_REQUIRE([PKG_PROG_PKG_CONFIG])
-+ 	SAVE_CFLAGS="$CFLAGS"
-+-	CFLAGS="$CFLAGS -I`$PKG_CONFIG --variable=sdkdir xorg-server`"
-++	CFLAGS="$CFLAGS `$PKG_CONFIG --cflags-only-I xorg-server`"
-+ 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
-+ #include "xorg-server.h"
-+ #if !defined $1
-diff --git a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg_1.10.1.bb b/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg_1.10.1.bb
-index 7cb7339..91bf476 100644
---- a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg_1.10.1.bb
-+++ b/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg_1.10.1.bb
-@@ -7,11 +7,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=74df27b6254cc88d2799b5f4f5949c00"
- DESCRIPTION = "the X.Org X server"
- DEPENDS += "pixman libpciaccess openssl dri2proto glproto xorg-minimal-fonts font-util-native"
- PE = "2"
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- SRC_URI += " \
-             file://hack-fbdev-ignore-return-mode.patch \
-             file://hack-assume-pixman-supports-overlapped-blt.patch \
-+            file://replace-pkgconfig-sdkdir-poking.patch \
-            "
- SRC_URI[md5sum] = "75f117c74f2ecaf9dd167f6a66ac98de"
- SRC_URI[sha256sum] = "143c7c3d7d4428352e1153dffa34fd64af391f72d30b2a03e911e54e36f00b5d"
--- 
-1.7.4.1
+> Am Sonntag, den 08.05.2011, 07:33 -0400 schrieb Robert Foerster:
+> > On Sun, May 8, 2011 at 7:09 AM, Paul Menzel wrote:
+>
+> > > Am Sonntag, den 08.05.2011, 07:00 -0400 schrieb Bob Foerster:
+> > > > The recipe intended to add "yasm-native" to the dependencies on x86,
+> > > > but it set DEPENDS_x86 = "yasm-native" which obliterated the base
+> > > > dependencies. On a fresh build, this package was failing since it
+> > > > was trying to build before the compiler was ready.
+> > > >
+> > > > Depends is now set with DEPENDS_append_x86, which leaves the base
+> > > > dependencies intact.
+> > >
+> > > Btw. What `MACHINE` and `DISTRIBUTION` do you use?
+> >
+> > machine=x86, distro=custom
+> >
+> > > > Signed-off-by: Bob Foerster <robert@erafx.com>
+> > > > ---
+> > > >  recipes/vlc/x264_r2245.bb |    2 +-
+> > > >  1 files changed, 1 insertions(+), 1 deletions(-)
+> > > >
+> > > > diff --git a/recipes/vlc/x264_r2245.bb b/recipes/vlc/x264_r2245.bb
+> > > > index 0cffea3..21e5a0e 100644
+> > > > --- a/recipes/vlc/x264_r2245.bb
+> > > > +++ b/recipes/vlc/x264_r2245.bb
+> > > > @@ -23,7 +23,7 @@ X264_ECFLAGS_mipsel = "-fPIC"
+> > > >  X264_DISABLE_ASM = "--disable-asm"
+> > > >  # use assembler written functions for those archs supporting this
+> > > >  X264_DISABLE_ASM_x86 = ""
+> > > > -DEPENDS_x86 = "yasm-native"
+> > > > +DEPENDS_append_x86 = " yasm-native"
+> > > >
+> > > >  EXTRA_OECONF = '--enable-shared ${X264_DISABLE_ASM}
+> > > --extra-cflags="${X264_ECFLAGS}"'
+> > >
+> > > Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+>
+> I pushed your patch upstream in 0409d1d9 [1].
+>
+> Please update the patch queue [2] with for example the following
+> command.
+>
+>        $ pwclient update -s Accepted -c
+> 0409d1d98a400c56d348de1f49c8a09f38b52fba 3385
+>
+> I do not have the rights to change the state of patches I did not
+> submit.
+>
+>
+>
+Done. Thanks, Paul!
 
 
+
+> Thanks,
+>
+> Paul
+>
+>
+> [1]
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=0409d1d98a400c56d348de1f49c8a09f38b52fba
+> [2] http://openembedded.org/index.php/Patchwork
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
