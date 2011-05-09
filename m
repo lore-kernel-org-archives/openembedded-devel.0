@@ -1,21 +1,25 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QJOdE-0002o1-Q1 for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 13:28:08 +0200
-Received: from f053041075.adsl.alicedsl.de ([78.53.41.75]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QJObp-0000WD-C5 for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 11:26:41 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <philb@gnu.org>) id 1QJOtv-0004TA-PY
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 09 May 2011 13:45:23 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QJOmE-0006e4-Qx
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 09 May 2011 13:37:26 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 09 May 2011 13:25:25 +0200
-Message-ID: <1304940325.3791.45.camel@mattotaupa>
+In-Reply-To: <4DC7C7E4.4020709@balister.org>
+References: <BANLkTimzgB9QSwwf2a=3n21-fUR=USwDUQ@mail.gmail.com>
+	<ipmian$2s9$1@dough.gmane.org> <4DBED1C2.4040006@mentor.com>
+	<1304856738.3355.94.camel@lenovo.internal.reciva.com>
+	<8739ko9tld.fsf@eha.ulstruplund.dk>  <4DC7C7E4.4020709@balister.org>
+Date: Mon, 09 May 2011 12:42:40 +0100
+Message-ID: <1304941360.8000.69.camel@phil-desktop>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: [PATCH] network-manager-applet_git: use `--enable-more-warnings=no`
+X-Mailer: Evolution 2.30.3 
+Subject: Re: Mirror at GitHub
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,74 +33,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2011 11:28:08 -0000
-X-Groupsio-MsgNum: 31790
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-uzaOUJKRKB+/zVMi9NSW"
-
---=-uzaOUJKRKB+/zVMi9NSW
+X-List-Received-Date: Mon, 09 May 2011 11:45:23 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Date: Mon, 9 May 2011 12:46:40 +0200
+On Mon, 2011-05-09 at 06:54 -0400, Philip Balister wrote:
+> Can someone comment on how the github repo is updates from the main OE repo?
 
-To prevent the following compile error [1]
+Right now it's just synced every 10 minutes.  When I get some more free
+minutes I will try to make it a bit smarter than that, but I think it
+should be good enough for most people as it stands.
 
-	[=E2=80=A6]
-	cc1: warnings being treated as errors
-	applet-dialogs.c: In function 'applet_info_dialog_show':
-	applet-dialogs.c:331:22: error: 'method' may be used uninitialized in this=
- function
-	[=E2=80=A6]
+p.
 
-`-Werror` should not be passed. According to the comment added since 0.7.1 =
-`--enable-more-warnings=3Dno` did not do that. Testing this recipe version =
-with `angstrom-2010.x` for `MACHINE=3D"beagleboard"` worked fine though.
 
-[1] http://mail.gnome.org/archives/networkmanager-list/2011-May/msg00075.ht=
-ml
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
- .../networkmanager/network-manager-applet_git.bb   |    8 +-------
- 1 files changed, 1 insertions(+), 7 deletions(-)
 
-diff --git a/recipes/networkmanager/network-manager-applet_git.bb b/recipes=
-/networkmanager/network-manager-applet_git.bb
-index 8493f6d..5f7e0f8 100644
---- a/recipes/networkmanager/network-manager-applet_git.bb
-+++ b/recipes/networkmanager/network-manager-applet_git.bb
-@@ -17,13 +17,7 @@ SRC_URI =3D "git://git.gnome.org/network-manager-applet;=
-protocol=3Dgit;branch=3DNMA_0_
-=20
- S =3D "${WORKDIR}/git"
-=20
--do_configure_append() {
--        rm config.log
--        # Sigh... --enable-compile-warnings=3Dno doesn't actually turn off=
- -Werror
--        for i in $(find ${S} -name "Makefile") ; do
--            sed -i -e s:-Werror::g $i
--        done
--}
-+EXTRA_OECONF =3D "--enable-more-warnings=3Dno"
-=20
- # Hack around dbus a_console problems
- do_install_append() {
---=20
-1.7.4.4
-
---=-uzaOUJKRKB+/zVMi9NSW
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3HzyUACgkQPX1aK2wOHVivPwCeLllyVLeorvVwMbxz39r9iOQD
-8NYAnizKXeVmheEeTrPBZrf/zsX8As0g
-=OzmQ
------END PGP SIGNATURE-----
-
---=-uzaOUJKRKB+/zVMi9NSW--
