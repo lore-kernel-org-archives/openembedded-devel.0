@@ -1,38 +1,33 @@
-Received: from david.siemens.de ([192.35.17.14])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1QJSR9-0007Lz-P2
+	(envelope-from <Tom_Rini@mentor.com>) id 1QJSlW-0007fC-02
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 17:31:55 +0200
-Received: from mail3.siemens.de (localhost [127.0.0.1])
-	by david.siemens.de (8.13.6/8.13.6) with ESMTP id p49FHBfq003273
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 9 May 2011 17:17:11 +0200
-Received: from DEMCHP99ET3MSX.ww902.siemens.net
-	(demchp99et3msx.ww902.siemens.net [139.25.131.243])
-	by mail3.siemens.de (8.13.6/8.13.6) with ESMTP id p49FHBKW016798
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 9 May 2011 17:17:11 +0200
-Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.183]) by
-	DEMCHP99ET3MSX.ww902.siemens.net ([139.25.131.243]) with mapi;
-	Mon, 9 May 2011 17:16:54 +0200
-From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 9 May 2011 17:17:09 +0200
-Thread-Topic: [oe] Mirror at GitHub
-Thread-Index: AcwNeUPJuP59N34mSpS9t2GBsU4tQAA4MMfg
-Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819E01507062C0@DEMCHP99E35MSX.ww902.siemens.net>
-References: <BANLkTimzgB9QSwwf2a=3n21-fUR=USwDUQ@mail.gmail.com>
-	<ipmian$2s9$1@dough.gmane.org>  <4DBED1C2.4040006@mentor.com>
-	<1304856738.3355.94.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1304856738.3355.94.camel@lenovo.internal.reciva.com>
-Accept-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: de-DE
+	Mon, 09 May 2011 17:52:58 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1QJSir-0006gk-TN from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 09 May 2011 08:50:13 -0700
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 9 May 2011 08:48:35 -0700
+Received: from [172.30.12.232] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
+	with Microsoft SMTP Server id 14.1.270.1;
+	Mon, 9 May 2011 08:50:13 -0700
+Message-ID: <4DC80D25.5090009@mentor.com>
+Date: Mon, 9 May 2011 08:49:57 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
 MIME-Version: 1.0
-Subject: Re: Mirror at GitHub
+To: <openembedded-devel@lists.openembedded.org>
+References: <iq0uo8$rer$1@dough.gmane.org>
+In-Reply-To: <iq0uo8$rer$1@dough.gmane.org>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 09 May 2011 15:48:35.0657 (UTC)
+	FILETIME=[8E74CB90:01CC0E60]
+Subject: Re: [2011.03-maintenance] Pull request #17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,28 +41,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2011 15:31:55 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 09 May 2011 15:52:58 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
+On 05/06/2011 06:57 AM, Koen Kooi wrote:
+> Tom,
+> 
+> Please pull the 1 commit from here:
+> 
+> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+> Branch: 2011.03-maintenance
+> 
+> Tom Rini (1):
+>       ncurses: Add version 5.9
+> 
+> Cherry-pick from .dev.
 
-> We now have a read-only mirror at github, see:
->=20
-> https://github.com/openembedded
->=20
-> Thanks to both the Toms for making this happen. =20
->=20
-> Any problems with the mirror, please let me know.
->=20
-> p.
->=20
+Applied, thanks.
 
-Many thanks, this is very appreciated
+- -- 
+Tom Rini
+Mentor Graphics Corporation
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
 
-With kind regards,
-Fabrice Aeschbacher
+iQEcBAEBAgAGBQJNyA0XAAoJEI4NMjfc3nJxJAIIAIYKtnMC5zokEsvU59OIsjpX
+a8+mXPexlXdcogjwkVJQp3NvZ+5qWTPEoWjZYu/aijpc1CX/GU3mky/5yR+KENNC
+cN37yzuOBAtd8ryq4F6q68V5D+BSb92XHcCuW0IEwrtrGRLgRs8gldE8PbV9dwT0
+adMnB2E5QtzPUa9h6xRrgmRl1qi2Hj2FpI59IX3S7dVtXvV08kvX16j5swNwuklc
+Dj09xASV2QHS24Os3awZcVLAkEj9Q3GnPs4eBdPWqSa0CpMleElz2/Vfadq6hqEZ
+LRZibi1piKFQkPd9+XqDCcJyfYyEt4OHx0xEEGESSNqQsPZBg+MiCW/O27VGCaw=
+=9Fkr
+-----END PGP SIGNATURE-----
 
 
