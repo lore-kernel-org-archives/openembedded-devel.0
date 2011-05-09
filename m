@@ -1,33 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QJWE2-00047q-6G for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 21:34:38 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QJWBO-0006zc-2z for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 21:31:54 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 May 2011 21:31:54 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1QJWTo-0004Oe-8N
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 09 May 2011 21:50:56 +0200
+Received: by wye20 with SMTP id 20so4657053wye.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 May 2011 21:31:54 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 09 May 2011 21:31:38 +0200
-Message-ID: <iq9feq$rn7$1@dough.gmane.org>
+	Mon, 09 May 2011 12:48:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=xO+/C6CMcWZyI63KrNT5jqJotBAQ6pVEOu+N9tM4Ktk=;
+	b=DIFU484UXf0F8u3JYBkkeNx2v738i4vQt6YWuLdAQtc7lKfGgZjPLChry15GAoEisy
+	AOoSvMeu0V9hKumAU1ba62OKB5VDxSnoICoQgSYxZkgyhz5NnyKLLly2WugLksLYXEj0
+	khle1wHnKS6JsiqVic9C4AtTk3S+DfRcgePpE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=MhoXyvgMBbb5Bqd9H81ZqkMdAvgiJxZKh2vj17rJtB+cIHNyXpJCj5ob2m1b9R/93t
+	o3+xv19GhKrTZASmudRkcw2WD1B+t+/1Iaml4L+9Ae2Jc72KhvqX/oTHEjo6U862Ns3A
+	l682T/iBf9+y8lw420qP0VOf/QgKGuKX6hkME=
+MIME-Version: 1.0
+Received: by 10.216.121.200 with SMTP id r50mr3234303weh.7.1304970491438; Mon,
+	09 May 2011 12:48:11 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.216.93.195 with HTTP; Mon, 9 May 2011 12:48:11 -0700 (PDT)
+In-Reply-To: <iq9feq$rn7$1@dough.gmane.org>
 References: <BANLkTi=UexRucCByH0SrL-j0_+dB4DCC7Q@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <BANLkTi=UexRucCByH0SrL-j0_+dB4DCC7Q@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
+	<iq9feq$rn7$1@dough.gmane.org>
+Date: Mon, 9 May 2011 16:48:11 -0300
+X-Google-Sender-Auth: hjyzO4TEAxpmejPhyrBZ6YByuC4
+Message-ID: <BANLkTi=154VwfG32+DzjurgbbBmYHHaSHQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe] Pull request for misc changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,78 +48,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2011 19:34:38 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 09 May 2011 19:50:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, May 9, 2011 at 16:31, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> I've merge the 12 patches and I'm doing some final sanity checking
+> before pushing them.
 
-On 07-05-11 21:19, Otavio Salvador wrote:
-> Hello,
-> 
-> On the process of migrating our products to oe-core we have done some
-> changes up to now...
+Don't put the setxkbmap on the merge. I will resend it.
 
-I've merge the 12 patches and I'm doing some final sanity checking
-before pushing them.
-
-Thanks for addressing all the review comments!
-
-regards,
-
-Koen
-
-> 
-> The following changes since commit 1325cc262c3f1e3cb5153aff98287ea8c65b15cf:
-> 
->   gcc-4.5: add checksums (2011-05-02 11:10:30 +0200)
-> 
-> are available in the git repository at:
->   git://github.com/OSSystems/meta-oe master
-> 
-> Otavio Salvador (8):
->       fuse: add 2.8.5
->       ntfs-3g-ntfsprogs: add 2011.4.12 recipes
->       setxkbmap: add 1.2.0 version
->       freerdp: add recipe based on GIT from 2009-03-29
->       pixman.inc: use Xorg mirror
->       p910nd: add 0.95 version
->       libiconv: drop hack since gettext was being inherited
->       libinih: add git recipe
-> 
->  .../recipes-graphics/xorg-app/setxkbmap_1.2.0.bb   |    8 +++
->  meta-oe/recipes-graphics/xorg-lib/pixman.inc       |    2 +-
->  meta-oe/recipes-support/freerdp/freerdp.inc        |   23 +++++++++
->  meta-oe/recipes-support/freerdp/freerdp_git.bb     |   15 ++++++
->  meta-oe/recipes-support/fuse/fuse_2.8.5.bb         |   32 ++++++++++++
->  meta-oe/recipes-support/inih/libinih_git.bb        |   18 +++++++
->  .../recipes-support/libiconv/libiconv_1.13.1.bb    |    5 +--
->  .../ntfs-3g-ntfsprogs_2011.4.12.bb                 |   25 ++++++++++
->  meta-oe/recipes-support/p910nd/files/avahi         |    9 ++++
->  meta-oe/recipes-support/p910nd/files/p910nd.init   |   38 +++++++++++++++
->  meta-oe/recipes-support/p910nd/p910nd_0.95.bb      |   51 ++++++++++++++++++++
->  11 files changed, 221 insertions(+), 5 deletions(-)
->  create mode 100644 meta-oe/recipes-graphics/xorg-app/setxkbmap_1.2.0.bb
->  create mode 100644 meta-oe/recipes-support/freerdp/freerdp.inc
->  create mode 100644 meta-oe/recipes-support/freerdp/freerdp_git.bb
->  create mode 100644 meta-oe/recipes-support/fuse/fuse_2.8.5.bb
->  create mode 100644 meta-oe/recipes-support/inih/libinih_git.bb
->  create mode 100644
-> meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb
->  create mode 100644 meta-oe/recipes-support/p910nd/files/avahi
->  create mode 100755 meta-oe/recipes-support/p910nd/files/p910nd.init
->  create mode 100644 meta-oe/recipes-support/p910nd/p910nd_0.95.bb
-> 
-> 
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNyEEaMkyGM64RGpERAk5jAKCxRiaYjTBeM8qo1Js0Jg3U41tROACeK3KU
-YcAkvpPEjh9vwYS+31qN6fU=
-=pAcB
------END PGP SIGNATURE-----
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
