@@ -1,21 +1,25 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QJNOc-0004A2-Iq for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 12:08:58 +0200
-Received: from f053041075.adsl.alicedsl.de ([78.53.41.75]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QJNNB-0005nJ-QY; Mon, 09 May 2011 10:07:30 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <philip@balister.org>) id 1QJO9L-0004pk-Rd
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 09 May 2011 12:57:16 +0200
+Received: (qmail 7681 invoked by uid 1003); 9 May 2011 10:54:29 -0000
+Received: from unknown (HELO ?192.168.1.167?)
+	(philip@opensdr.com@96.240.165.110)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	9 May 2011 10:54:29 -0000
+Message-ID: <4DC7C7E4.4020709@balister.org>
+Date: Mon, 09 May 2011 06:54:28 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14 Thunderbird/3.1.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 09 May 2011 12:06:13 +0200
-Message-ID: <1304935573.3791.25.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Cc: Peter Stuge <peter@stuge.se>
-Subject: OT: help coreboot at LinuxTag 2011 by borrowing a 12V 4-5A AC-DC power supply with 5.5/2.5mm plug
+References: <BANLkTimzgB9QSwwf2a=3n21-fUR=USwDUQ@mail.gmail.com>	<ipmian$2s9$1@dough.gmane.org>
+	<4DBED1C2.4040006@mentor.com>	<1304856738.3355.94.camel@lenovo.internal.reciva.com>
+	<8739ko9tld.fsf@eha.ulstruplund.dk>
+In-Reply-To: <8739ko9tld.fsf@eha.ulstruplund.dk>
+Subject: Re: Mirror at GitHub
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,49 +33,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2011 10:08:58 -0000
-X-Groupsio-MsgNum: 31788
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-pGdgNUPXZ7/SQM+UsCMK"
+X-List-Received-Date: Mon, 09 May 2011 10:57:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---=-pGdgNUPXZ7/SQM+UsCMK
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 05/09/2011 04:16 AM, Esben Haabendal wrote:
+> Phil Blundell<philb@gnu.org>  writes:
+>
+>> On Mon, 2011-05-02 at 08:46 -0700, Tom Rini wrote:
+>>> Last I heard from Tom King this was still in progress / figuring out how
+>>> to get it done.
+>>
+>> We now have a read-only mirror at github, see:
+>>
+>> https://github.com/openembedded
+>>
+>> Thanks to both the Toms for making this happen.
+>>
+>> Any problems with the mirror, please let me know.
+>
+> So is it preferred to place OE repositories on github.com in favor of
+> gitorious.org?
 
-Dear OE folks,
+There is no "official" preference. We just setup the mirror on github 
+because people took the time to do so. If gitorious has the same feature 
+we could set it up there also for people that prefer gitorious.
+
+We should update the docs on the website to explain creating a personal 
+github repo using the githib mirror feature, rather than jsut pushing 
+the repo back.
+
+Another idea is to pull from the github repo and push to the OE repo.
+
+Can someone comment on how the github repo is updates from the main OE repo?
+
+Philip
 
 
-if anyone of you has a
-
-	12V 4-5A AC-DC power supply with 5.5/2.5mm plug, + inside [1]
-
-and can bring it to the LinuxTag 2011 so that the coreboot project can
-power a picoPSU to demo a board this would be awesome. Of course we
-return it afterward to you.
-
-That you did not read this message for nothing, coreboot and U-Boot were
-recently hacked so that U-Boot could run on x86 hardware easily [1].
-
-
-Thanks,
-
-Paul
-
-
-[1] http://www.conrad.de/ce/de/product/511222
-[2] http://blogs.coreboot.org/blog/2011/04/30/u-boot-as-coreboot-payload/
-
---=-pGdgNUPXZ7/SQM+UsCMK
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3HvJUACgkQPX1aK2wOHViYYACdFnL0WPahEmLXQTxnygU7KlMj
-B6oAoINMCD3wBigdXHfcQJkiXuIqvq7+
-=ANNz
------END PGP SIGNATURE-----
-
---=-pGdgNUPXZ7/SQM+UsCMK--
