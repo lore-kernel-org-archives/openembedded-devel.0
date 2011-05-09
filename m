@@ -1,33 +1,25 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1QJSlW-0007fC-02
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 17:52:58 +0200
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1QJSir-0006gk-TN from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 08:50:13 -0700
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Mon, 9 May 2011 08:48:35 -0700
-Received: from [172.30.12.232] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
-	with Microsoft SMTP Server id 14.1.270.1;
-	Mon, 9 May 2011 08:50:13 -0700
-Message-ID: <4DC80D25.5090009@mentor.com>
-Date: Mon, 9 May 2011 08:49:57 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <iq0uo8$rer$1@dough.gmane.org>
-In-Reply-To: <iq0uo8$rer$1@dough.gmane.org>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 09 May 2011 15:48:35.0657 (UTC)
-	FILETIME=[8E74CB90:01CC0E60]
-Subject: Re: [2011.03-maintenance] Pull request #17
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QJUBX-00041u-JW for openembedded-devel@lists.openembedded.org;
+	Mon, 09 May 2011 19:23:55 +0200
+Received: from f053041075.adsl.alicedsl.de ([78.53.41.75]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QJUA8-0004v8-9L for openembedded-devel@lists.openembedded.org;
+	Mon, 09 May 2011 17:22:28 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F08034AF1C0E1@dlee06.ent.ti.com>
+References: <1304618837-18698-1-git-send-email-Chase.Maupin@ti.com>
+	<4DC304E9.6050103@mentor.com>
+	<131E5DFBE7373E4C8D813795A6AA7F08034AF1C0E1@dlee06.ent.ti.com>
+Date: Mon, 09 May 2011 19:21:11 +0200
+Message-ID: <1304961671.3939.8.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH] ncurses: add missing patch file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,42 +33,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2011 15:52:58 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 09 May 2011 17:23:55 -0000
+X-Groupsio-MsgNum: 31805
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-TTMRHrrwc8BRrKbbBwGr"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-TTMRHrrwc8BRrKbbBwGr
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 05/06/2011 06:57 AM, Koen Kooi wrote:
-> Tom,
-> 
-> Please pull the 1 commit from here:
-> 
-> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-> Branch: 2011.03-maintenance
-> 
-> Tom Rini (1):
->       ncurses: Add version 5.9
-> 
-> Cherry-pick from .dev.
+Dear Chase, dear Tom,
 
-Applied, thanks.
 
-- -- 
-Tom Rini
-Mentor Graphics Corporation
+Am Donnerstag, den 05.05.2011, 16:13 -0500 schrieb Maupin, Chase:
+
+> > Sent: Thursday, May 05, 2011 3:13 PM
+
+> > On 05/05/2011 11:07 AM, Chase Maupin wrote:
+> > > * The 20110115 patch file has gone missing.  Add it to the
+> > >   OE repository like the previous patch file.
+> > > * Bump the PR
+> > >
+> > > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> >=20
+> > Maybe we need to consider just moving to vanilla 5.9 and drop 5.7?
+>=20
+> I asked Koen to submit a pull request to the maintenance branch to add
+> 5.9 so I agree there.  I just thought I would go ahead and submit a
+> patch to the dev branch to fix version 5.7 in case someone is using
+> that version.
+>=20
+> Personally I'm fine with going to 5.9 directly.
+
+I would vote for getting this patch applied to improve the quality since
+one more package build with no problems.
+
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+
+Chase, can you push to the repository?
+
+
+Thanks,
+
+Paul
+
+--=-TTMRHrrwc8BRrKbbBwGr
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iQEcBAEBAgAGBQJNyA0XAAoJEI4NMjfc3nJxJAIIAIYKtnMC5zokEsvU59OIsjpX
-a8+mXPexlXdcogjwkVJQp3NvZ+5qWTPEoWjZYu/aijpc1CX/GU3mky/5yR+KENNC
-cN37yzuOBAtd8ryq4F6q68V5D+BSb92XHcCuW0IEwrtrGRLgRs8gldE8PbV9dwT0
-adMnB2E5QtzPUa9h6xRrgmRl1qi2Hj2FpI59IX3S7dVtXvV08kvX16j5swNwuklc
-Dj09xASV2QHS24Os3awZcVLAkEj9Q3GnPs4eBdPWqSa0CpMleElz2/Vfadq6hqEZ
-LRZibi1piKFQkPd9+XqDCcJyfYyEt4OHx0xEEGESSNqQsPZBg+MiCW/O27VGCaw=
-=9Fkr
+iEYEABECAAYFAk3IIocACgkQPX1aK2wOHViZzQCdGa3TH/arC5iU+/ch8yYhDf15
+bU0An0ZYCheIl+HHxAOM/K0mcpBKI7ur
+=9bSz
 -----END PGP SIGNATURE-----
 
-
+--=-TTMRHrrwc8BRrKbbBwGr--
