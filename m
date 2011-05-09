@@ -1,35 +1,24 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QJWyX-0005L4-1S for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 22:22:41 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QJWvt-0005uf-Pl for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 22:19:57 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 May 2011 22:19:57 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 May 2011 22:19:57 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1QJXZl-0006EY-9G
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 09 May 2011 23:01:09 +0200
+Received: (qmail invoked by alias); 09 May 2011 20:58:24 -0000
+Received: from p5B0A19A9.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.25.169]
+	by mail.gmx.net (mp065) with SMTP; 09 May 2011 22:58:24 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX18WME1PD9AWfNcXb2PzZuS7BZrc0myyH77FK3A+nl
+	9NNG2AYi3cu6vo
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 09 May 2011 22:19:45 +0200
-Message-ID: <iq9i91$cfq$1@dough.gmane.org>
-References: <BANLkTi=UexRucCByH0SrL-j0_+dB4DCC7Q@mail.gmail.com>	<iq9feq$rn7$1@dough.gmane.org>
-	<BANLkTi=154VwfG32+DzjurgbbBmYHHaSHQ@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <BANLkTi=154VwfG32+DzjurgbbBmYHHaSHQ@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-oe] Pull request for misc changes
+Date: Mon,  9 May 2011 22:59:07 +0200
+Message-Id: <1304974747-21466-2-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1304974747-21466-1-git-send-email-schnitzeltony@gmx.de>
+References: <1304974747-21466-1-git-send-email-schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: [PATCH 2/2] overo: u-boot fix by moving to version 2011.03
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,30 +32,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2011 20:22:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 09 May 2011 21:01:09 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+The old git version did not start up from SDCard.
 
-On 09-05-11 21:48, Otavio Salvador wrote:
-> On Mon, May 9, 2011 at 16:31, Koen Kooi <koen@dominion.thruhere.net> wrote:
->> I've merge the 12 patches and I'm doing some final sanity checking
->> before pushing them.
-> 
-> Don't put the setxkbmap on the merge. I will resend it.
+Tests:
+* Set default variable environment
+* Save variable environment
+* Boot kernel from MMC and NAND
 
-OK, I rebased that one out. Still building :)
+Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
+---
+ recipes/u-boot/u-boot_2011.03.bb |    1 +
+ recipes/u-boot/u-boot_git.bb     |    5 -----
+ 2 files changed, 1 insertions(+), 5 deletions(-)
 
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNyExhMkyGM64RGpERAtO8AKCGvkEffUrqYWB6GU4RZ6jY6K7o/wCdFQjd
-ZiYv93CP99aF0XGkBYjNY3I=
-=t7fw
------END PGP SIGNATURE-----
+diff --git a/recipes/u-boot/u-boot_2011.03.bb b/recipes/u-boot/u-boot_2011.03.bb
+index 8ab385f..ac609cd 100644
+--- a/recipes/u-boot/u-boot_2011.03.bb
++++ b/recipes/u-boot/u-boot_2011.03.bb
+@@ -2,6 +2,7 @@ PR = "r0"
+ require u-boot.inc
+ 
+ DEFAULT_PREFERENCE = "-1"
++DEFAULT_PREFERENCE_overo = "1"
+ 
+ SRC_URI = "ftp://ftp.denx.de/pub/u-boot/u-boot-${PV}.tar.bz2 "
+ SRC_URI[md5sum] = "91d02124c94368557d0e9ac05fb8c33f"
+diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
+index 2cf5b12..d7c4f6a 100644
+--- a/recipes/u-boot/u-boot_git.bb
++++ b/recipes/u-boot/u-boot_git.bb
+@@ -197,11 +197,6 @@ do_compile_omapzoom36x () {
+         oe_runmake tools
+ }
+ 
+-SRC_URI_overo = "git://www.sakoman.com/git/u-boot.git;branch=omap4-exp;protocol=git \
+-"
+-SRCREV_overo = "261733408a27d14590cf3ec6b596461808050e32"
+-PV_overo = "2010.12+${PR}+gitr${SRCREV}"
+-
+ SRC_URI_omap4430-panda = "git://www.sakoman.com/git/u-boot.git;branch=omap4-exp;protocol=git \
+                           file://fix-break-caused-by-new-binutils.patch \
+                          "
+-- 
+1.7.4.4
 
 
 
