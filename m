@@ -1,40 +1,28 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QJFQX-000850-6E
+	(envelope-from <stefan@datenfreihafen.org>) id 1QJKxF-0004mH-HK
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 03:38:25 +0200
-Received: by bwz5 with SMTP id 5so4099924bwz.6
+	Mon, 09 May 2011 09:32:33 +0200
+Received: from [2001:638:602:1183:4da:ff61:f5c:b7b4] (helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
+	id 1QJKub-0007as-6W by authid <stefan@sostec.de> with srv_auth_cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 May 2011 18:35:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=N7V1+ncVMOZQoD7Y1kHQ/+H7TCvCLQ07Qi6MC8jxvns=;
-	b=ikvslwOySyNxCHVFeNyfUqRqhWkTTA2rFtvJNiKY6IesgoqSaD8jwuMJ96vmgYjKia
-	5kfDeQBj9abJiPKjmc9WY1UI6SlH6d0Fwco0NGCeBR/obi+dyoIwGR1QCLQtg5Kok+24
-	9huJNxMNrp6w7iBjv73r6Jka73Lb5ffyNn7So=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=E1M3mKK8QaR9aT7bkHLBpWh0x1i4qWMgpXLOPch1+++lLXphVlpS2aOYp49TceZF+2
-	LmEcMmPV9NgLiSFiDwFIgW9DHgHT1kToUs6gWV3tn3uppIqmAdugCnR/vEw8L/ijTDky
-	F4PISb8xt2vUMqJJFljJ+5LjbuMha1vN08DCU=
-MIME-Version: 1.0
-Received: by 10.204.40.70 with SMTP id j6mr2949312bke.81.1304904939327; Sun,
-	08 May 2011 18:35:39 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.79.70 with HTTP; Sun, 8 May 2011 18:35:39 -0700 (PDT)
-In-Reply-To: <1304885628-32679-1-git-send-email-morphis@gravedo.de>
-References: <4DC6DA66.8090609@gravedo.de>
-	<1304885628-32679-1-git-send-email-morphis@gravedo.de>
-Date: Sun, 8 May 2011 22:35:39 -0300
-X-Google-Sender-Auth: uavzW2pEN0PxU_qPuKEm7PC3F40
-Message-ID: <BANLkTikAJnn3jeEmYW_Lc4UZRNrHYvcChw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Mon, 09 May 2011 09:29:51 +0200
+Received: from stefan by excalibur.local with local (Exim 4.75)
+	(envelope-from <stefan@excalibur.local>) id 1QJKua-0000ze-A6
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 09 May 2011 09:29:48 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] qt4-native: introduce the native version of qt4 and remove old qt4-tools-native
+Date: Mon,  9 May 2011 09:29:47 +0200
+Message-Id: <cover.1304925139.git.stefan@buglabs.net>
+X-Mailer: git-send-email 1.7.5.1
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
+	autolearn=ham version=3.2.5
+Subject: [PATCH 2011.03-maintenance 0/7] Openjdk fixes from master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,20 +36,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2011 01:38:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 09 May 2011 07:32:33 -0000
 
-On Sun, May 8, 2011 at 17:13, Simon Busch <morphis@gravedo.de> wrote:
-> Signed-off-by: Simon Busch <morphis@gravedo.de>
+From: Stefan Schmidt <stefan@buglabs.net>
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+Hello.
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Another pull request for openjdk related fixes. They have been in master for
+quite some time now and we tested them heavily at Buglabs. They improve the
+openjdk build situation a lot making it more robust and eliminating random
+failures.
+
+The patch from myself is for the 2011.03 release only as it covers a merge
+failure I introduced with my last pull request.
+
+Please pull.
+
+Pull URL: git://github.com/Stefan-Schmidt/openembedded
+  Branch: for-2011.03
+  Browse: https://github.com/Stefan-Schmidt/openembedded/tree/for-2011.03
+
+Thanks,
+    Stefan Schmidt <stefan@buglabs.net>
+---
+
+
+Henning (1):
+  ecj-bootstrap: try 5 times to compile the classes
+
+Henning Heinold (5):
+  llvm: merge native recipe into the normal recipe
+  ecj: for ecj-initial 512 mb heapsize is okay for ecj-bootstrap we
+    need 1024
+  inetlib: move to proper place
+  icedtea6-native: add libxext-native to the dependencies
+  cacao-native: add fix for vm-shutdown and multiple threads are
+    involved
+
+Stefan Schmidt (1):
+  icedtea6-native_1.7.10: Remove reference to deleted patch.
+
+ recipes/cacao/cacao-native_hg.bb                   |    6 +-
+ recipes/cacao/files/cacao-shutdownguard.patch      |  180 ++++++++++++++++++++
+ .../inetlib-1.1.1/datadir_java.patch               |    0
+ recipes/{classpath => classpathx}/inetlib_1.1.1.bb |    0
+ recipes/ecj/ecj-bootstrap-native.bb                |    2 +-
+ recipes/ecj/ecj-initial.bb                         |    6 +-
+ recipes/ecj/files/ecj-initial.in                   |    1 +
+ recipes/ecj/files/ecj.in                           |   14 ++-
+ recipes/icedtea/icedtea6-native.inc                |    5 +-
+ recipes/icedtea/icedtea6-native_1.7.10.bb          |    1 -
+ recipes/llvm/llvm-native.inc                       |   33 ----
+ recipes/llvm/llvm.inc                              |   70 ++++++---
+ recipes/llvm/llvm2.7-native_2.7.bb                 |   12 --
+ recipes/llvm/llvm2.7_2.7.bb                        |    5 +-
+ 14 files changed, 256 insertions(+), 79 deletions(-)
+ create mode 100644 recipes/cacao/files/cacao-shutdownguard.patch
+ rename recipes/{classpath => classpathx}/inetlib-1.1.1/datadir_java.patch (100%)
+ rename recipes/{classpath => classpathx}/inetlib_1.1.1.bb (100%)
+ create mode 100755 recipes/ecj/files/ecj-initial.in
+ delete mode 100644 recipes/llvm/llvm-native.inc
+ delete mode 100644 recipes/llvm/llvm2.7-native_2.7.bb
+
+-- 
+1.7.5.1
+
 
 
