@@ -1,27 +1,24 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <robert@erafx.com>) id 1QJRtv-0006J9-FJ
+Received: from na3sys009aog114.obsmtp.com ([74.125.149.211])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <mdpoole@troilus.org>) id 1QJRxd-0006ld-Mk
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 16:57:35 +0200
-Received: by vxd7 with SMTP id 7so153601vxd.6
+	Mon, 09 May 2011 17:01:26 +0200
+Received: from mail-ww0-f52.google.com ([74.125.82.52]) (using TLSv1) by
+	na3sys009aob114.postini.com ([74.125.148.12]) with SMTP
+	ID DSNKTcgBInCywZNC8akpoP7Sir/qpLzzlOXL@postini.com;
+	Mon, 09 May 2011 07:58:43 PDT
+Received: by mail-ww0-f52.google.com with SMTP id 31so1453001wwb.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 May 2011 07:54:50 -0700 (PDT)
+	Mon, 09 May 2011 07:58:42 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.220.20.81 with SMTP id e17mr1516420vcb.85.1304952889728; Mon,
-	09 May 2011 07:54:49 -0700 (PDT)
-Received: by 10.220.195.202 with HTTP; Mon, 9 May 2011 07:54:49 -0700 (PDT)
-X-Originating-IP: [207.180.56.102]
-In-Reply-To: <1304868955.4124.67.camel@mattotaupa>
-References: <1304852453-9294-1-git-send-email-robert@erafx.com>
-	<1304852952.4124.52.camel@mattotaupa>
-	<BANLkTimLb=i4eLMD2NWLRcC5QxADWQa4Mg@mail.gmail.com>
-	<1304868955.4124.67.camel@mattotaupa>
-Date: Mon, 9 May 2011 10:54:49 -0400
-Message-ID: <BANLkTi=ZS_Cubc9+9o0tqc3z9D9vGvExWg@mail.gmail.com>
-From: Robert Foerster <robert@erafx.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH v2] x264_r2245: do not override `DEPENDS` for x86
+Received: by 10.216.221.106 with SMTP id q84mr2735139wep.94.1304951336954;
+	Mon, 09 May 2011 07:28:56 -0700 (PDT)
+Received: by 10.216.137.161 with HTTP; Mon, 9 May 2011 07:28:56 -0700 (PDT)
+Date: Mon, 9 May 2011 10:28:56 -0400
+Message-ID: <BANLkTikdEKTJVERFL42kzbqk4=u6_kVoYA@mail.gmail.com>
+From: Michael Poole <mdpoole@troilus.org>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Bug in ti-eula-unpack.inc?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,79 +32,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2011 14:57:35 -0000
+X-List-Received-Date: Mon, 09 May 2011 15:01:26 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Sun, May 8, 2011 at 11:35 AM, Paul Menzel <
-paulepanter@users.sourceforge.net> wrote:
+The version of ti-eula-unpack.inc in 2011.03-maintenance (commit
+d886b980e) uses this to send each line of input to the installer:
 
-> Am Sonntag, den 08.05.2011, 07:33 -0400 schrieb Robert Foerster:
-> > On Sun, May 8, 2011 at 7:09 AM, Paul Menzel wrote:
->
-> > > Am Sonntag, den 08.05.2011, 07:00 -0400 schrieb Bob Foerster:
-> > > > The recipe intended to add "yasm-native" to the dependencies on x86,
-> > > > but it set DEPENDS_x86 = "yasm-native" which obliterated the base
-> > > > dependencies. On a fresh build, this package was failing since it
-> > > > was trying to build before the compiler was ready.
-> > > >
-> > > > Depends is now set with DEPENDS_append_x86, which leaves the base
-> > > > dependencies intact.
-> > >
-> > > Btw. What `MACHINE` and `DISTRIBUTION` do you use?
-> >
-> > machine=x86, distro=custom
-> >
-> > > > Signed-off-by: Bob Foerster <robert@erafx.com>
-> > > > ---
-> > > >  recipes/vlc/x264_r2245.bb |    2 +-
-> > > >  1 files changed, 1 insertions(+), 1 deletions(-)
-> > > >
-> > > > diff --git a/recipes/vlc/x264_r2245.bb b/recipes/vlc/x264_r2245.bb
-> > > > index 0cffea3..21e5a0e 100644
-> > > > --- a/recipes/vlc/x264_r2245.bb
-> > > > +++ b/recipes/vlc/x264_r2245.bb
-> > > > @@ -23,7 +23,7 @@ X264_ECFLAGS_mipsel = "-fPIC"
-> > > >  X264_DISABLE_ASM = "--disable-asm"
-> > > >  # use assembler written functions for those archs supporting this
-> > > >  X264_DISABLE_ASM_x86 = ""
-> > > > -DEPENDS_x86 = "yasm-native"
-> > > > +DEPENDS_append_x86 = " yasm-native"
-> > > >
-> > > >  EXTRA_OECONF = '--enable-shared ${X264_DISABLE_ASM}
-> > > --extra-cflags="${X264_ECFLAGS}"'
-> > >
-> > > Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
->
-> I pushed your patch upstream in 0409d1d9 [1].
->
-> Please update the patch queue [2] with for example the following
-> command.
->
->        $ pwclient update -s Accepted -c
-> 0409d1d98a400c56d348de1f49c8a09f38b52fba 3385
->
-> I do not have the rights to change the state of patches I did not
-> submit.
->
->
->
-Done. Thanks, Paul!
+  print >>f, "%s\n" % cmd
 
+Is this right?  It causes problems for me when installing ti-cgt6x,
+whereas removing the "\n" makes it work.  (This may be related to a
+patch sent by Gary Thomas last year, in
+http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg09653.html
+-- my user account does have write access to /opt, and I even have
+some of the TI tools installed there, but removing the extra \n works
+without adding --prefix.)
 
+Michael
 
-> Thanks,
->
-> Paul
->
->
-> [1]
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=0409d1d98a400c56d348de1f49c8a09f38b52fba
-> [2] http://openembedded.org/index.php/Patchwork
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
 
