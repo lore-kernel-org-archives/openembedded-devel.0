@@ -1,22 +1,24 @@
-Received: from [77.233.226.4] (helo=eha.ulstruplund.dk)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eha@dev.doredevelopment.dk>) id 1QJLgl-0006Ww-2V
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 May 2011 10:19:35 +0200
-Received: by eha.ulstruplund.dk (Postfix, from userid 1000)
-	id 2A83221D71; Mon,  9 May 2011 10:16:46 +0200 (CEST)
-From: Esben Haabendal <eha@dev.doredevelopment.dk>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QJMJT-00074m-Vo for openembedded-devel@lists.openembedded.org;
+	Mon, 09 May 2011 10:59:35 +0200
+Received: from f053041075.adsl.alicedsl.de ([78.53.41.75]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QJMI4-0003f0-FP for openembedded-devel@lists.openembedded.org;
+	Mon, 09 May 2011 08:58:08 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <BANLkTimzgB9QSwwf2a=3n21-fUR=USwDUQ@mail.gmail.com>
-	<ipmian$2s9$1@dough.gmane.org> <4DBED1C2.4040006@mentor.com>
-	<1304856738.3355.94.camel@lenovo.internal.reciva.com>
-Date: Mon, 09 May 2011 10:16:46 +0200
-In-Reply-To: <1304856738.3355.94.camel@lenovo.internal.reciva.com> (Phil
-	Blundell's message of "Sun, 08 May 2011 13:12:18 +0100")
-Message-ID: <8739ko9tld.fsf@eha.ulstruplund.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
-MIME-Version: 1.0
-Subject: Re: Mirror at GitHub
+In-Reply-To: <dda8ff6c3b7e006ed3114bc7de15dbf8b1742313.1304925139.git.stefan@buglabs.net>
+References: <cover.1304925139.git.stefan@buglabs.net>
+	<dda8ff6c3b7e006ed3114bc7de15dbf8b1742313.1304925139.git.stefan@buglabs.net>
+Date: Mon, 09 May 2011 10:56:52 +0200
+Message-ID: <1304931412.3791.2.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH 2011.03-maintenance 1/7] icedtea6-native_1.7.10: Remove reference to deleted patch.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,26 +32,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2011 08:19:35 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 09 May 2011 08:59:36 -0000
+X-Groupsio-MsgNum: 31784
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-sfLRclJA5U59rChg4YA8"
 
-Phil Blundell <philb@gnu.org> writes:
+--=-sfLRclJA5U59rChg4YA8
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> On Mon, 2011-05-02 at 08:46 -0700, Tom Rini wrote:
->> Last I heard from Tom King this was still in progress / figuring out how
->> to get it done.
->
-> We now have a read-only mirror at github, see:
->
-> https://github.com/openembedded
->
-> Thanks to both the Toms for making this happen.  
->
-> Any problems with the mirror, please let me know.
-
-So is it preferred to place OE repositories on github.com in favor of
-gitorious.org?
-
-/Esben
+Dear Stefan,
 
 
+Am Montag, den 09.05.2011, 09:29 +0200 schrieb Stefan Schmidt:
+> From: Stefan Schmidt <stefan@buglabs.net>
+>=20
+> During my cherry-pick of Henning's patch from master I somehow b0rked the=
+ commit
+> by loosing this hunk that also deletes the reference to the deleted patch=
+ file.
+
+why is not it possible to fix the borked commit using `git rebase` or
+just squash this patch and Hennings and resend the pull request?
+
+[=E2=80=A6]
+
+
+Thanks,
+
+Paul
+
+--=-sfLRclJA5U59rChg4YA8
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3HrEYACgkQPX1aK2wOHVgiggCbBBgmqMix1XhUw9d4RZhMiheN
+lwkAn1S20N49VlKqNhwoyNTBrQ4MU4hv
+=xLze
+-----END PGP SIGNATURE-----
+
+--=-sfLRclJA5U59rChg4YA8--
