@@ -1,37 +1,37 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QJlKt-0005rY-IH
+	(envelope-from <martin.jansa@gmail.com>) id 1QJlL1-0005rZ-Fb
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 13:42:43 +0200
-Received: by mail-fx0-f47.google.com with SMTP id 19so4758840fxm.6
+	Tue, 10 May 2011 13:42:51 +0200
+Received: by mail-fx0-f47.google.com with SMTP id 19so4758860fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 May 2011 04:40:00 -0700 (PDT)
+	Tue, 10 May 2011 04:40:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:subject:date:message-id:x-mailer
 	:in-reply-to:references;
-	bh=NquvO4c9fDFxTePOzVsobFKX08X6RqRpdBPLR43CtOI=;
-	b=MbaH/vdl0OTH6qptiA5a6SkczW39onrKhXUUA2B43P3van8FL1m9m8tTf0hqZBJbqG
-	ILlw5sx5nxhUH1LdNNDY4X7uvZjY+Wvgmg1N1s4hS7a0mKHLQuXp/GaqcOGxc2Ka7UWz
-	N4B8v63LRQ92L9hAT9cjCZcVV/mL9zvxF56d4=
+	bh=c4lZ+icd0CwSvSYUsXE69/VzqmKnu3ahXYxEUW81twQ=;
+	b=AIWF42h1zJxwctTxjYHQEgDhlGoX5FwPmQRHmaBM/ESOBQvYu+2HCbTBGL1XAjSVvV
+	2HOUQsAsCdCDdsa358siVHKkqgQt+8AcSFMtBPHuScdruYbFsvn3sL5+A1bpGxQvLkpM
+	wvayynLev70vk5mymFnimxnrO5ZB5eteQPfl0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=ar+9PNw109EXVxdspsCAnoS9ZClWPQn2hNSCHl0dl2IIyikW8Gn6QHDR7N/zo0/zN8
-	g0O3Vg2DusGI82Dmu+epfDJjsxPTUE5mk6ZK4eVayq2ItklCBpNhlCd3XZjZOH6+YSPO
-	jn5i4simvPlwj7PlW0hzvRiVBJB/Qj6qBuc80=
-Received: by 10.223.134.75 with SMTP id i11mr1610099fat.39.1305027600500;
-	Tue, 10 May 2011 04:40:00 -0700 (PDT)
+	b=Ba7nZi1SZtAsZpRs1a3F7I+mMqyCCX4P2kN3GuTR6314WKWIShoipl37qnMmCGjHW6
+	tnKRFgDS8/wJkBtFMJ7Q+PUvs3kvFohJIVc50vOWFlmDt7ri7PbdlpLAW5Bk7gLWKFQB
+	XS0jWD8uIwOprpdpQWTQwRydYGzTvUJh4YbqQ=
+Received: by 10.223.98.5 with SMTP id o5mr2663056fan.33.1305027607397;
+	Tue, 10 May 2011 04:40:07 -0700 (PDT)
 Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id 9sm2347924fat.15.2011.05.10.04.39.59
+	by mx.google.com with ESMTPS id c24sm2345814fak.31.2011.05.10.04.40.06
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 10 May 2011 04:39:59 -0700 (PDT)
+	Tue, 10 May 2011 04:40:06 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 May 2011 13:39:53 +0200
-Message-Id: <eafad7e3037910c0c7fc96bae773be38be25eaac.1305027503.git.Martin.Jansa@gmail.com>
+Date: Tue, 10 May 2011 13:40:00 +0200
+Message-Id: <7d981567a51e69b39500fe45e060c9f77aa93950.1305027503.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.5.rc3
 In-Reply-To: <cover.1305027503.git.Martin.Jansa@gmail.com>
 References: <cover.1305027503.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/9] libxfixes, util-macros: drop from meta-oe, now they are in oe-core
+Subject: [meta-oe][PATCH 3/9] gst-plugins-base: drop 0.10.30 from meta-oe, there is 0.10.32 in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,84 +45,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2011 11:42:43 -0000
+X-List-Received-Date: Tue, 10 May 2011 11:42:51 -0000
+
+* gst-python needs at least 0.10.32
+* http://lists.freedesktop.org/archives/gstreamer-bugs/2011-January/073592.html
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-graphics/xorg-lib/libxfixes_5.0.bb |   22 --------------------
- .../xorg-util/util-macros_1.13.0.bb                |   15 -------------
- .../xorg-util/xorg-util-common.inc                 |   11 ----------
- 3 files changed, 0 insertions(+), 48 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/xorg-lib/libxfixes_5.0.bb
- delete mode 100644 meta-oe/recipes-graphics/xorg-util/util-macros_1.13.0.bb
- delete mode 100644 meta-oe/recipes-graphics/xorg-util/xorg-util-common.inc
+ .../gst-plugins-base-tremor.patch                  |   17 --------
+ .../gstreamer/gst-plugins-base_0.10.30.bb          |   22 ----------
+ .../recipes-multimedia/gstreamer/gst-plugins.inc   |   41 --------------------
+ 3 files changed, 0 insertions(+), 80 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/gstreamer/gst-plugins-base-0.10.30/gst-plugins-base-tremor.patch
+ delete mode 100644 meta-oe/recipes-multimedia/gstreamer/gst-plugins-base_0.10.30.bb
+ delete mode 100644 meta-oe/recipes-multimedia/gstreamer/gst-plugins.inc
 
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libxfixes_5.0.bb b/meta-oe/recipes-graphics/xorg-lib/libxfixes_5.0.bb
+diff --git a/meta-oe/recipes-multimedia/gstreamer/gst-plugins-base-0.10.30/gst-plugins-base-tremor.patch b/meta-oe/recipes-multimedia/gstreamer/gst-plugins-base-0.10.30/gst-plugins-base-tremor.patch
 deleted file mode 100644
-index 4ca1ea2..0000000
---- a/meta-oe/recipes-graphics/xorg-lib/libxfixes_5.0.bb
+index a6494fd..0000000
+--- a/meta-oe/recipes-multimedia/gstreamer/gst-plugins-base-0.10.30/gst-plugins-base-tremor.patch
++++ /dev/null
+@@ -1,17 +0,0 @@
+-Remove -DTREMOR option since Tremor has dropped its internal
+-libogg2, and gst-plugins-base has dependency on that.
+-
+-Signed-off-by: Dongxiao Xu <dongxiao.xu@intel.com>
+-
+-diff -ruN gst-plugins-base-0.10.30-orig/ext/vorbis/Makefile.am gst-plugins-base-0.10.30/ext/vorbis/Makefile.am
+---- gst-plugins-base-0.10.30-orig/ext/vorbis/Makefile.am	2010-11-17 16:11:03.000000000 +0800
+-+++ gst-plugins-base-0.10.30/ext/vorbis/Makefile.am	2010-11-17 16:12:41.000000000 +0800
+-@@ -28,7 +28,7 @@
+- libgstivorbisdec_la_SOURCES = gstivorbisdec.c \
+- 	gstvorbisdec.c gstvorbisdeclib.c gstvorbiscommon.c
+- libgstivorbisdec_la_CFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLAGS) \
+--	-DTREMOR $(IVORBIS_CFLAGS)
+-+	$(IVORBIS_CFLAGS)
+- libgstivorbisdec_la_LIBADD = \
+- 	$(top_builddir)/gst-libs/gst/tag/libgsttag-@GST_MAJORMINOR@.la \
+- 	$(top_builddir)/gst-libs/gst/audio/libgstaudio-@GST_MAJORMINOR@.la \
+diff --git a/meta-oe/recipes-multimedia/gstreamer/gst-plugins-base_0.10.30.bb b/meta-oe/recipes-multimedia/gstreamer/gst-plugins-base_0.10.30.bb
+deleted file mode 100644
+index 9347ef4..0000000
+--- a/meta-oe/recipes-multimedia/gstreamer/gst-plugins-base_0.10.30.bb
 +++ /dev/null
 @@ -1,22 +0,0 @@
--SUMMARY = "XFixes: X Fixes extension library."
+-require gst-plugins.inc
 -
--DESCRIPTION = "X applications have often needed to work around various \
--shortcomings in the core X window system.  This extension is designed to \
--provide the minimal server-side support necessary to eliminate problems \
--caused by these workarounds."
+-LICENSE = "GPLv2+ & LGPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
+-                    file://common/coverage/coverage-report.pl;beginline=2;endline=17;md5=622921ffad8cb18ab906c56052788a3f \
+-                    file://COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605 \
+-                    file://gst/ffmpegcolorspace/utils.c;beginline=1;endline=20;md5=9c83a200b8e597b26ca29df20fc6ecd0"
 -
--require xorg-lib-common.inc
+-DEPENDS += "virtual/libx11 alsa-lib freetype liboil libogg libvorbis libxv libtheora"
 -
--LICENSE = "MIT-style"
--LIC_FILES_CHKSUM = "file://COPYING;md5=3c1ce42c334a6f5cccb0277556a053e0"
+-SRC_URI += " file://gst-plugins-base-tremor.patch"
 -
--DEPENDS += "virtual/libx11 xproto fixesproto xextproto"
--PE = "1"
--PR = "${INC_PR}.0"
+-PR = "r2"
 -
--SRC_URI[md5sum] = "678071bd7f9f7467e2fc712d81022318"
--SRC_URI[sha256sum] = "537a2446129242737a35db40081be4bbcc126e56c03bf5f2b142b10a79cda2e3"
+-inherit gettext
 -
--BBCLASSEXTEND = "native"
+-EXTRA_OECONF += "--disable-freetypetest --disable-pango"
 -
--XORG_PN = "libXfixes"
-diff --git a/meta-oe/recipes-graphics/xorg-util/util-macros_1.13.0.bb b/meta-oe/recipes-graphics/xorg-util/util-macros_1.13.0.bb
+-do_configure_prepend() {
+-	# This m4 file contains nastiness which conflicts with libtool 2.2.2
+-	rm -f ${S}/m4/lib-link.m4
+-}
+diff --git a/meta-oe/recipes-multimedia/gstreamer/gst-plugins.inc b/meta-oe/recipes-multimedia/gstreamer/gst-plugins.inc
 deleted file mode 100644
-index 3f4471a..0000000
---- a/meta-oe/recipes-graphics/xorg-util/util-macros_1.13.0.bb
+index cd3e0a0..0000000
+--- a/meta-oe/recipes-multimedia/gstreamer/gst-plugins.inc
 +++ /dev/null
-@@ -1,15 +0,0 @@
--require xorg-util-common.inc
--
--DESCRIPTION = "X autotools macros"
--PE = "1"
--
--LICENSE = "MIT & MIT-style"
--LIC_FILES_CHKSUM = "file://COPYING;md5=1970511fddd439b07a6ba789d28ff662"
--
--ALLOW_EMPTY = "1"
--BBCLASSEXTEND = "native nativesdk"
--
--PR = "${INC_PR}.0"
--
--SRC_URI[md5sum] = "31e9ddcbc1d8bc8c09ab180443974dd1"
--SRC_URI[sha256sum] = "7bff944fb120192e7fe1706e9c0b7e41666e7983ce3e2bdef0b7734392d9e695"
-diff --git a/meta-oe/recipes-graphics/xorg-util/xorg-util-common.inc b/meta-oe/recipes-graphics/xorg-util/xorg-util-common.inc
-deleted file mode 100644
-index e5c8ce9..0000000
---- a/meta-oe/recipes-graphics/xorg-util/xorg-util-common.inc
-+++ /dev/null
-@@ -1,11 +0,0 @@
--HOMEPAGE = "http://www.x.org"
--SECTION = "x11/utils"
--LICENSE = "MIT-X"
--
--INC_PR = "r2"
--
--SRC_URI = "${XORG_MIRROR}/individual/util/${BPN}-${PV}.tar.gz"
--
--S = "${WORKDIR}/${BPN}-${PV}"
+@@ -1,41 +0,0 @@
+-DESCRIPTION = "Plugins for GStreamer"
+-HOMEPAGE = "http://gstreamer.freedesktop.org/"
+-BUGTRACKER = "https://bugzilla.gnome.org/enter_bug.cgi?product=Gstreamer"
+-SECTION = "multimedia"
+-PRIORITY = "optional"
+-DEPENDS = "gstreamer"
 -
 -inherit autotools pkgconfig
+-
+-SRC_URI = "http://gstreamer.freedesktop.org/src/${PN}/${PN}-${PV}.tar.bz2"
+-
+-EXTRA_OECONF = "--disable-valgrind --disable-debug --disable-examples "
+-
+-acpaths = "-I ${S}/common/m4 -I ${S}/m4"
+-
+-LIBV = "0.10"
+-#FILES_${PN} += "${libdir}/gstreamer-${LIBV}/*.so"
+-#FILES_${PN}-dev += "${libdir}/gstreamer-${LIBV}/*.la ${libdir}/gstreamer-${LIBV}/*.a"
+-FILES_${PN}-dbg += "${libdir}/gstreamer-${LIBV}/.debug"
+-
+-PACKAGES_DYNAMIC = "${PN}-*"
+-
+-# orc.m4 calls pkg-config ----variable=orcc orc-0.4 to get the path to orcc,
+-# resulting in /usr/bin/orcc. Force it to use the staged orcc.
+-do_configure_append() {
+- 	for i in $(find ${S} -name "Makefile") ; do
+-		sed -i -e s:${bindir}/orcc:${STAGING_BINDIR_NATIVE}/orcc:g $i
+- 	done
+-}
+-
+-python populate_packages_prepend () {
+-	gst_libdir = bb.data.expand('${libdir}/gstreamer-${LIBV}', d)
+-	postinst = bb.data.getVar('plugin_postinst', d, 1)
+-
+-#	Can't package separate debug packages yet
+-#	do_split_packages(d, gst_libdir, '\.debug/libgst(.*)\.so$', bb.data.expand('${PN}-%s-dbg', d), 'GStreamer plugin for %s (with debugging symbols)', recursive=True, extra_depends=bb.data.expand('${PN}-dbg', d), match_path=True)
+-	do_split_packages(d, gst_libdir, 'libgst(.*)\.so$', bb.data.expand('${PN}-%s', d), 'GStreamer plugin for %s', postinst=postinst, extra_depends=bb.data.expand('${PN}',d))
+-	do_split_packages(d, gst_libdir, 'libgst(.*)\.l?a$', bb.data.expand('${PN}-%s-dev', d), 'GStreamer plugin for %s (development files)', extra_depends=bb.data.expand('${PN}-dev',d))
+-}
+-
+-ALLOW_EMPTY = "1"
 -- 
 1.7.5.rc3
 
