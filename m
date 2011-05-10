@@ -1,23 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QJp4Y-0002fS-9Y for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 17:42:06 +0200
-Received: from f053032140.adsl.alicedsl.de ([78.53.32.140]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QJp39-0001Ko-So for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 15:40:40 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <msmith@cbnco.com>) id 1QJpC7-0002pC-NZ
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 May 2011 17:49:56 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 29AD7BE1174
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 May 2011 11:47:11 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 18823-07 for <openembedded-devel@lists.openembedded.org>; 
+	Tue, 10 May 2011 11:47:11 -0400 (EDT)
+Received: from juice.ott.cti.com (dmzgw2.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id E4C80BE0DE1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 May 2011 11:47:10 -0400 (EDT)
+Date: Tue, 10 May 2011 11:47:10 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
+X-X-Sender: michael@juice.ott.cti.com
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1305024190-24481-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1305024190-24481-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Tue, 10 May 2011 17:39:20 +0200
-Message-ID: <1305041960.4259.10.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [PATCH] gnome-desktop-2.32.1: disable desktop docs
+In-Reply-To: <lyiptilga8.fsf@ensc-virt.intern.sigma-chemnitz.de>
+Message-ID: <Pine.LNX.4.64.1105101144120.12200@juice.ott.cti.com>
+References: <4DC8F3A2.2090005@nedap.com> <20110510100020.GA10493@mx.loc>
+	<1305022004.8000.149.camel@phil-desktop> <4DC91B33.9080807@nedap.com>
+	<1305025696.8000.155.camel@phil-desktop> <4DC91E4E.3070109@nedap.com>
+	<4DC9363B.6070909@nedap.com> <1305038299.8000.178.camel@phil-desktop>
+	<4DC9541B.6070208@nedap.com>
+	<lyiptilga8.fsf@ensc-virt.intern.sigma-chemnitz.de>
+MIME-Version: 1.0
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,81 +43,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2011 15:42:06 -0000
-X-Groupsio-MsgNum: 31875
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-Y/2JEa+95oC5zvhVnXvQ"
+X-List-Received-Date: Tue, 10 May 2011 15:49:56 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
---=-Y/2JEa+95oC5zvhVnXvQ
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Tue, 10 May 2011, Enrico Scholz wrote:
 
-Am Dienstag, den 10.05.2011, 12:43 +0200 schrieb Martin Jansa:
-> * we don't have gnome-doc-utils-native in DEPENDS to provide xml2po and i=
-t calls
->   `which xml2po` -m docbook -e -t "${mo}"
->   which doesnt work on host without xml2po
-> * if we add gnome-doc-utils-native to DEPENDS then it still fails:
->   | xsltproc -o fdl-C.omf --stringparam db2omf.basename fdl --stringparam=
- db2omf.format 'docbook' --stringparam db2omf.dtd "-//OASIS//DTD DocBook XM=
-L V4.1.2//EN" --stringparam db2omf.lang C --stringparam db2omf.omf_dir "/us=
-r/share/omf" --stringparam db2omf.help_dir "/usr/share/gnome/help" --string=
-param db2omf.omf_in "/OE/tmpdir-shr/work/armv4t-oe-linux-gnueabi/gnome-desk=
-top-2.32.1-r0/gnome-desktop-2.32.1/desktop-docs/fdl/fdl.omf.in"  `/OE/tmpdi=
-r-shr/sysroots/x86_64-linux/usr/bin/pkg-config --variable db2omf gnome-doc-=
-utils` C/fdl.xml || { rm -f "fdl-C.omf"; exit 1; }
->   | warning: failed to load external entity "/usr/share/xml/gnome/xslt/do=
-cbook/omf/db2omf.xsl"
->   because pkg-config returns xsl path without sysroot prefix
->   /OE/tmpdir-shr/sysroots/x86_64-linux/usr/bin/pkg-config --variable db2o=
-mf gnome-doc-utils
->   /usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl
-> * feel free to fix gnome-doc-utils-native/gnome-doc-utils if you care abo=
-ut desktop docs
+> Jaap de Jong <jaap.dejong@nedap.com> writes:
+> 
+> > TARGET_ARCH       = "x86_64"
+> 
+> did this ever work?  OE uses hardcoded 'lib' (instead of 'lib64') at
+> various places.
 
-The problem is the path
+Hi Enrico,
 
-	/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl
+This is my MACHINE config:
 
-is constructed from the variable `datadir` in the pc file of
-gnome-doc-utils. I only see a problem that we cannot just put
-`PKG_CONFIG_SYSROOT_DIR` in front of it, that some programs could take
-this value during compile time to actually store data in it during run
-time.
+TARGET_ARCH = "x86_64"
 
-Evince suffers from the same problem as far as I know [1]. How should
-that be fixed properly upstream? Any ideas [2]?
+# We can't reuse the same -native builds as 32-bit machines, because
+# ours need to be staged into staging/blah/lib64 instead of lib.
+# Set blah to x86_64-buildoe64-linux to keep them separate.
+BUILD_VENDOR = "-buildoe64"
 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+base_libdir = "${base_prefix}/lib64"
+libdir = "${exec_prefix}/lib64"
 
-[=E2=80=A6]
+# Some packages install files into /lib/packagename, not /lib64/packagename.
+FILES_${PN} += "${prefix}/lib/${PN}/*"
+FILES_${PN}-dbg += "${prefix}/lib/${PN}/.debug"
 
-With the bit Phil pointed out corrected this patch is
+# glibc's sysdeps/unix/sysv/linux/configure script only fixes
+# libc_cv_slibdir if prefix is "/usr". With prefix of "", we need to fix it
+# so libc libs don't get installed into /lib.
+export libc_cv_slibdir="/lib64"
 
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+--------
 
-I build tested it using `angstrom-2010.x` for `MACHINE =3D "beagleboard"`.
+I had to amend gcc-cross-intermediate:
+
+do_compile_prepend() {
+	# On x86_64, glibc-initial stages crti.o to
+	# x86_64-oe-linux/lib64/crti.o.
+	# When gcc-cross-intermediate tries to build libgcc, it looks
+	# for x86_64-oe-linux/lib/../lib64/crti.o.
+	# Create the "lib" dir so this shenanigan works.
+	install -d ${STAGING_DIR_TARGET}/lib
+}
 
 
-Thanks,
+And gcc-cross:
 
-Paul
+# glibc only built the 64-bit stubs, so don't try to build a 32-bit gcc
+# XXX maybe belongs in oe recipes/gcc/gcc-cross4.inc
+EXTRA_OECONF_append_x86_64 = " --disable-multilib"
 
 
-[1] http://lists.freedesktop.org/archives/pkg-config/2011-April/000717.html
-[2] http://lists.freedesktop.org/archives/pkg-config/2011-May/000742.html
+I think that's it - for the recipes I build, all the other fixes have been 
+pushed long ago.
 
---=-Y/2JEa+95oC5zvhVnXvQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+Mike
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk3JXCgACgkQPX1aK2wOHVj5nACePBNvSS+F8/awBIzhFU683TV8
-nmUAn3yRS8QWZmZn4mGA0HGIewBNTfxQ
-=176E
------END PGP SIGNATURE-----
-
---=-Y/2JEa+95oC5zvhVnXvQ--
