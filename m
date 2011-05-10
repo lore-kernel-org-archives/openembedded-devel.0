@@ -1,23 +1,25 @@
-Received: from mx02.stofanet.dk ([212.10.10.12])
-	by linuxtogo.org with esmtp (Exim 4.72) (envelope-from <sgh@sgh.dk>)
-	id 1QJnVb-0005lR-N2 for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 16:01:55 +0200
-Received: from 5634f1b4.rev.stofanet.dk ([86.52.241.180] helo=asrock)
-	by mx04.stofanet.dk (envelope-from <sgh@sgh.dk>)
-	with esmtp id 1QJnQ2-0006TR-1a
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <philb@gnu.org>) id 1QJo7Z-0006uK-2M
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 15:56:10 +0200
-Received: from koontz.localnet (localhost [127.0.0.1])
-	by asrock (Postfix) with ESMTPS id 1BBCB81A74
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 May 2011 15:56:10 +0200 (CEST)
-From: =?iso-8859-1?q?S=F8ren_Holm?= <sgh@sgh.dk>
+	Tue, 10 May 2011 16:41:09 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QJnzZ-0007G8-Bq
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 May 2011 16:32:53 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 May 2011 15:55:50 +0200
-User-Agent: KMail/1.13.6 (Linux/2.6.38-9-generic; KDE/4.6.2; i686; ; )
-MIME-Version: 1.0
-Message-Id: <201105101555.50984.sgh@sgh.dk>
-Subject: acpid-1.0.10-r5.1 fails compilation
+In-Reply-To: <4DC9363B.6070909@nedap.com>
+References: <4DC8F3A2.2090005@nedap.com>	<20110510100020.GA10493@mx.loc>
+	<1305022004.8000.149.camel@phil-desktop>	<4DC91B33.9080807@nedap.com>
+	<1305025696.8000.155.camel@phil-desktop> <4DC91E4E.3070109@nedap.com>
+	<4DC9363B.6070909@nedap.com>
+Date: Tue, 10 May 2011 15:38:19 +0100
+Message-ID: <1305038299.8000.178.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,89 +33,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2011 14:01:55 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 10 May 2011 14:41:09 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hi
+On Tue, 2011-05-10 at 14:57 +0200, Jaap de Jong wrote:
+> bitbake ends with
+> | 
+> /media/OpenEmbedded/release-2010.12/tmp/sysroots/i686-linux/usr/x86_64/x86_64-angstrom-linux/bin/ld: 
+> cannot find /lib64/libc.so.6 inside 
+> /media/OpenEmbedded/release-2010.12/tmp/sysroots/x86_64-angstrom-linux
+> 
+> There is only a lib directory and no lib64 directory...
 
-Current master fails during acpid-compilation.
+It seems that there is some disagreement between binutils and your C
+library about where the libs should be stored.  Which DISTRO
+configuration are you using?
 
-ERROR: Logfile of failure stored in: /home/sgh/oe-new-oe/build-vmc16/tmp/wo=
-rk/i686-angstrom-linux/acpid-1.0.10-r5.1/temp/log.do_compile.14235
-Log data follows:
-| ERROR: Function 'do_compile' failed (see /home/sgh/oe-new-oe/build-vmc16/=
-tmp/work/i686-angstrom-linux/acpid-1.0.10-r5.1/temp/log.do_compile.14235 fo=
-r further information)
-| + cd /home/sgh/oe-new-oe/build-vmc16/tmp/work/i686-angstrom-linux/acpid-1=
-=2E0.10-r5.1/acpid-1.0.10
-| + do_compile
-| + oe_runmake 'CC=3Di686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=
-=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux' CROSS=
-=3Di686-angstrom-linux-
-| + oenote make -j 8 'CC=3Di686-angstrom-linux-gcc -march=3Dpentiumpro --sy=
-sroot=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux' C=
-ROSS=3Di686-angstrom-linux-
-| + echo NOTE: 'make -j 8 CC=3Di686-angstrom-linux-gcc -march=3Dpentiumpro =
-=2D-sysroot=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-li=
-nux CROSS=3Di686-angstrom-linux-'
-| NOTE: make -j 8 CC=3Di686-angstrom-linux-gcc -march=3Dpentiumpro --sysroo=
-t=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux CROSS=
-=3Di686-angstrom-linux-
-| + make -j 8 'CC=3Di686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=
-=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux' CROSS=
-=3Di686-angstrom-linux-
-| i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-new-=
-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -W=
-shadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-acpid.o acpid.c
-| i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-new-=
-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -W=
-shadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-acpi_ids.o acpi_ids.c
-| i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-new-=
-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -W=
-shadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-connection_list.o connection_list.c
-| i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-new-=
-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -W=
-shadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-event.o event.c
-| i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-new-=
-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -W=
-shadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-input_layer.o input_layer.c
-| i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-new-=
-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -W=
-shadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-libnetlink.o libnetlink.c
-| i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-new-=
-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -W=
-shadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-netlink.o netlink.c
-| i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-new-=
-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -W=
-shadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-proc.o proc.c
-| i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-new-=
-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -W=
-shadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-sock.o sock.c
-| cc1: warnings being treated as errors
-| libnetlink.c: In function 'addraw_l':
-| libnetlink.c:521:56: error: comparison between signed and unsigned intege=
-r expressions
-| make: *** [libnetlink.o] Error 1
-| make: *** Waiting for unfinished jobs....
-| + die 'oe_runmake failed'
-| + oefatal 'oe_runmake failed'
-| + echo FATAL: 'oe_runmake failed'
-| FATAL: oe_runmake failed
-| + exit 1
-NOTE: package acpid-1.0.10-r5.1: task do_compile: Failed
+If you make a symlink from lib -> lib64 inside the sysroot, does that
+allow the build to continue?
 
-=2D-=20
-S=F8ren Holm
+p.
+
+
 
 
