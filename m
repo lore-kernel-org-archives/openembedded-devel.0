@@ -1,27 +1,34 @@
-Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1QJmXw-0002EJ-P0
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 15:00:16 +0200
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Tue, 10 May 2011 14:57:31 +0200
-X-TM-IMSS-Message-ID: <0c52443f00004a95@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.0) id 0c52443f00004a95 ;
-	Tue, 10 May 2011 14:57:31 +0200
-Message-ID: <4DC9363B.6070909@nedap.com>
-Date: Tue, 10 May 2011 14:57:31 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QJmxs-0002gR-1r for openembedded-devel@lists.openembedded.org;
+	Tue, 10 May 2011 15:27:04 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QJmvE-0003SU-Pm for openembedded-devel@lists.openembedded.org;
+	Tue, 10 May 2011 15:24:20 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 May 2011 15:24:20 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 May 2011 15:24:20 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4DC8F3A2.2090005@nedap.com>	<20110510100020.GA10493@mx.loc>	<1305022004.8000.149.camel@phil-desktop>	<4DC91B33.9080807@nedap.com>	<1305025696.8000.155.camel@phil-desktop>
-	<4DC91E4E.3070109@nedap.com>
-In-Reply-To: <4DC91E4E.3070109@nedap.com>
-X-OriginalArrivalTime: 10 May 2011 12:57:31.0314 (UTC)
-	FILETIME=[D2D81920:01CC0F11]
-Subject: Re: x86_64
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 10 May 2011 15:24:08 +0200
+Message-ID: <iqbe9o$v9h$1@dough.gmane.org>
+References: <1305031350-28805-1-git-send-email-Martin.Jansa@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1305031350-28805-1-git-send-email-Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [meta-oe][PATCH] dnsmasq(-dbus): import from oe.dev, needed for connman now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,57 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2011 13:00:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 10 May 2011 13:27:04 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
->>>>>> is there any support for 64 bit intel/amd machines?
->>>>>> And if so, how to build for them?
->>>>> Can we settle on a name please for i want to add a qemu machine for
->>>>> testing x86_64?
->>>>>
->>>>> x8664
->>>>> amd64
->>>>> ...
->>>>>
->>>>> Opinions?
->>>> "x86_64" seems to be what's currently used as the architecture name.  If
->>>> you want a value for ${MACHINE} then I guess something like
->>>> "x86_64-generic" would do.  I don't think there's any prohibition
->>>> against underscores in machine names.
->>>>
->>>> p.
->>> So I'm guessing it is not possible at this very moment?
->> Depends what you mean by "not possible".  There doesn't seem to be any
->> existing machine config file which targets x86_64, but I don't think
->> there is any reason that you couldn't trivially create one; something
->> along the lines of:
->>
->> $ cat>conf/machine/x84_64-generic.conf<<EOF
->> TARGET_ARCH = "x86_64"
->> GLIBC_ADDONS = "nptl"
->> GLIBC_EXTRA_OECONF = "--with-tls"
->> PREFERRED_PROVIDER_virtual/kernel = "linux"
->> KERNEL_IMAGETYPE = "bzImage"
->> EOF
->> $
->>
->> p.
-> Will try that; is there any 64 bit output to be expected?
-> Jaap.
->
+On 10-05-11 14:42, Martin Jansa wrote:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  .../dnsmasq/dnsmasq-dbus_2.55.bb                   |   13 +
+>  meta-oe/recipes-connectivity/dnsmasq/dnsmasq.inc   |   29 ++
+>  .../recipes-connectivity/dnsmasq/dnsmasq_2.55.bb   |    4 +
+>  .../dnsmasq/files/dnsmasq.conf                     |  293 ++++++++++++++++++++
+>  meta-oe/recipes-connectivity/dnsmasq/files/init    |   52 ++++
+>  5 files changed, 391 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-connectivity/dnsmasq/dnsmasq-dbus_2.55.bb
+>  create mode 100644 meta-oe/recipes-connectivity/dnsmasq/dnsmasq.inc
+>  create mode 100644 meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.55.bb
+>  create mode 100755 meta-oe/recipes-connectivity/dnsmasq/files/dnsmasq.conf
+>  create mode 100644 meta-oe/recipes-connectivity/dnsmasq/files/init
 
-bitbake ends with
-| 
-/media/OpenEmbedded/release-2010.12/tmp/sysroots/i686-linux/usr/x86_64/x86_64-angstrom-linux/bin/ld: 
-cannot find /lib64/libc.so.6 inside 
-/media/OpenEmbedded/release-2010.12/tmp/sysroots/x86_64-angstrom-linux
+Applied, thanks!
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-There is only a lib directory and no lib64 directory...
-
-Jaap
-
+iD8DBQFNyTx3MkyGM64RGpERAgn8AKCANAcq7HKjcFVj8tBBzWerk0PLvQCfcWJM
+CNAApVbeE2jK5uXv7Zl13W8=
+=lWG9
+-----END PGP SIGNATURE-----
 
 
 
