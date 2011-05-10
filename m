@@ -1,23 +1,21 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QJu1z-0002eY-1l for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 22:59:47 +0200
+	id 1QJuJ8-0003EQ-NL for openembedded-devel@lists.openembedded.org;
+	Tue, 10 May 2011 23:17:30 +0200
 Received: from f053032140.adsl.alicedsl.de ([78.53.32.140]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QJu0b-0005PO-Au for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 20:58:21 +0000
+	id 1QJuHk-0005Td-SU for openembedded-devel@lists.openembedded.org;
+	Tue, 10 May 2011 21:16:05 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1305060012.9982.33.camel@mattotaupa>
-References: <1305060012.9982.33.camel@mattotaupa>
-Date: Tue, 10 May 2011 22:57:01 +0200
-Message-ID: <1305061022.9982.44.camel@mattotaupa>
+Date: Tue, 10 May 2011 23:14:45 +0200
+Message-ID: <1305062085.9982.62.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.3 
-Subject: Re: qt4-native: `/usr/include/gnu/stubs.h:9:27: error: gnu/stubs-64.h: No such file or directory` because architecture incorrectly detected
+Subject: minimal-uclibc: systemd fails with `src/manager.c:257:42: error: 'EPOLL_CLOEXEC' undeclared (first use in this function)`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,198 +29,240 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2011 20:59:47 -0000
-X-Groupsio-MsgNum: 31889
+X-List-Received-Date: Tue, 10 May 2011 21:17:30 -0000
+X-Groupsio-MsgNum: 31890
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-XBkMVUURlbWvN/3xDk7N"
+	boundary="=-vKvqcer+3hRn3BbZw8KI"
 
---=-XBkMVUURlbWvN/3xDk7N
+--=-vKvqcer+3hRn3BbZw8KI
+Content-Type: multipart/mixed; boundary="=-NmjaQFtEx0GOs/xts4Jw"
+
+--=-NmjaQFtEx0GOs/xts4Jw
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dear Simon and other OpenEmbedded folks,
+Dear OE folks,
 
 
-I am sorry for the wrong subject line. I am fixing it hereby.
+task compile of `systemd_git.bb` fails with the following error message
+using `minimal-uclibc` for `MACHINE =3D "beagleboard"`. Using `minimal`,
+i. e. EGLIBC, works.
+
+        [=E2=80=A6]
+        |   CC     src/libsystemd_core_la-manager.lo
+        | src/manager.c: In function 'manager_new':
+        | src/manager.c:257:9: warning: implicit declaration of function 'e=
+poll_create1' [-Wimplicit-function-declaration]
+        | src/manager.c:257:42: error: 'EPOLL_CLOEXEC' undeclared (first us=
+e in this function)
+        | src/manager.c:257:42: note: each undeclared identifier is reporte=
+d only once for each function it appears in
+        | src/manager.c: In function 'manager_process_notify_fd':
+        | src/manager.c:1956:25: warning: cast increases required alignment=
+ of target type [-Wcast-align]
+        [=E2=80=A6]
+
+`manager.c` includes
+
+        #include <sys/epoll.h>
+        #include <fcntl.h>
+
+which I read should contain that definition. But looking at `fcntl.h` I
+could not find it. I then looked in
+
+        ./minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi/usr/includ=
+e/sys/epoll.h
+
+where it is defined for EGLIBC but not for uClibc. I also found the
+patch for uClibc [1] but there `EPOLL_CLOEXEC` is enclosed in `#if 0`.
+
+I am no uClibc expert, but do you know if uClibc will provide
+`EPOLL_CLOEXEC` in the near future? How should systemd fix that?
+
+Please find attached a patch updating systemd to a newer including a
+commit fixing another problem with systemd and uClibc.
 
 
-Am Dienstag, den 10.05.2011, 22:40 +0200 schrieb Paul Menzel:
+Thanks,
 
-> task configure of `qt4-native` fails on my build system which is a Xen
-> DomU running a 64-bit Linux kernel but 32-bit user space.
->=20
->         $ uname -a
->         Linux oe-build-host 2.6.32-5-xen-amd64 #1 SMP Tue Mar 8 00:01:30 =
-UTC 2011 x86_64 GNU/Linux
->         $ dpkg --print-architecture
->         i386
->=20
-> This seems to be a problem in the Qt4 build system which seems to be
-> using `uname` to determine the architecture.
->=20
->         $ more log.do_configure
->         + do_configure
->         + echo o
->         + echo yes
->         + ./configure -prefix /oe/build-angstrom-next/angstrom-dev/sysroo=
-ts/i686-linux/usr -L /oe/build-angstrom-next/angstrom-dev/sysroots/i686-lin=
-ux/usr/lib -I /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/=
-include -qt-libjpeg -qt-gif -system-zlib -no-libjpeg -no-libpng -no-libmng =
--no-libtiff -no-accessibility -no-cups -no-nas-sound -no-nis -no-openssl -v=
-erbose -release -embedded -no-freetype -no-glib -no-iconv -exceptions -xmlp=
-atterns -qt3support -no-fast -silent -no-rpath
->         Which edition of Qt do you want to use ?
->        =20
->         Type 'c' if you want to use the Commercial Edition.
->         Type 'o' if you want to use the Open Source Edition.
->        =20
->        =20
->         Determining system architecture... (Linux:2.6.32-5-xen-amd64:x86_=
-64)
->             64-bit AMD 80x86 (x86_64)
->             'x86_64' is supported
->         System architecture: 'x86_64'
->         Host architecture: 'x86_64'
->         Precompiled-headers support enabled.
->         Symbol visibility control enabled.
->        =20
->         This is the Qt for Embedded Linux Open Source Edition.
->        =20
->         You are licensed to use this software under the terms of
->         the Lesser GNU General Public License (LGPL) versions 2.1.
->         You are also licensed to use this software under the terms of
->         the GNU General Public License (GPL) versions 3.
->        =20
->         Type '3' to view the GNU General Public License version 3.
->         Type 'L' to view the Lesser GNU General Public License version 2.=
-1.
->         Type 'yes' to accept this license offer.
->         Type 'no' to decline this license offer.
->        =20
->         Do you accept the terms of either license?=20
->         Creating qmake. Please wait...
->         g++ -c -o project.o -pipe -m64 -m64 -DQMAKE_OPENSOURCE_EDITION -I=
-. -Igenerators -Igenerators/unix -Igenerators/win32 -Igenerators/mac -Igene=
-rators/symbian -I/oe/build-angstrom-next/angstrom-dev/work/i686-linux/qt4-n=
-ative-4.7.2-r0.0/qt-everywhere-opensource-src-4.7.2/include -I/oe/build-ang=
-strom-next/angstrom-dev/work/i686-linux/qt4-native-4.7.2-r0.0/qt-everywhere=
--opensource-src-4.7.2/include/QtCore -I/oe/build-angstrom-next/angstrom-dev=
-/work/i686-linux/qt4-native-4.7.2-r0.0/qt-everywhere-opensource-src-4.7.2/s=
-rc/corelib/global -I/oe/build-angstrom-next/angstrom-dev/work/i686-linux/qt=
-4-native-4.7.2-r0.0/qt-everywhere-opensource-src-4.7.2/src/corelib/xml -I/o=
-e/build-angstrom-next/angstrom-dev/work/i686-linux/qt4-native-4.7.2-r0.0/qt=
--everywhere-opensource-src-4.7.2/tools/shared -DQT_NO_PCRE -DQT_BUILD_QMAKE=
- -DQT_BOOTSTRAPPED -DQLIBRARYINFO_EPOCROOT -DQT_NO_TEXTCODEC -DQT_NO_UNICOD=
-ETABLES -DQT_NO_COMPONENT -DQT_NO_STL -DQT_NO_COMPRESS -I/oe/build-angstrom=
--next/angstrom-dev/work/i686-linux/qt4-native-4.7.2-r0.0/qt-everywhere-open=
-source-src-4.7.2/mkspecs/qws/linux-x86_64-g++ -DHAVE_QCONFIG_CPP -DQT_NO_TH=
-READ -DQT_NO_QOBJECT -DQT_NO_GEOM_VARIANT  project.cpp
->         In file included from /usr/include/features.h:378,
->                          from /usr/include/string.h:26,
->                          from /oe/build-angstrom-next/angstrom-dev/work/i=
-686-linux/qt4-native-4.7.2-r0.0/qt-everywhere-opensource-src-4.7.2/include/=
-QtCore/../../src/corelib/tools/qbytearray.h:48,
->                          from /oe/build-angstrom-next/angstrom-dev/work/i=
-686-linux/qt4-native-4.7.2-r0.0/qt-everywhere-opensource-src-4.7.2/include/=
-QtCore/qbytearray.h:1,
->                          from /oe/build-angstrom-next/angstrom-dev/work/i=
-686-linux/qt4-native-4.7.2-r0.0/qt-everywhere-opensource-src-4.7.2/include/=
-QtCore/../../src/corelib/tools/qstring.h:46,
->                          from /oe/build-angstrom-next/angstrom-dev/work/i=
-686-linux/qt4-native-4.7.2-r0.0/qt-everywhere-opensource-src-4.7.2/include/=
-QtCore/qstring.h:1,
->                          from /oe/build-angstrom-next/angstrom-dev/work/i=
-686-linux/qt4-native-4.7.2-r0.0/qt-everywhere-opensource-src-4.7.2/include/=
-QtCore/../../src/corelib/io/qiodevice.h:51,
->                          from /oe/build-angstrom-next/angstrom-dev/work/i=
-686-linux/qt4-native-4.7.2-r0.0/qt-everywhere-opensource-src-4.7.2/include/=
-QtCore/qiodevice.h:1,
->                          from /oe/build-angstrom-next/angstrom-dev/work/i=
-686-linux/qt4-native-4.7.2-r0.0/qt-everywhere-opensource-src-4.7.2/include/=
-QtCore/../../src/corelib/io/qdatastream.h:46,
->                          from /oe/build-angstrom-next/angstrom-dev/work/i=
-686-linux/qt4-native-4.7.2-r0.0/qt-everywhere-opensource-src-4.7.2/include/=
-QtCore/qdatastream.h:1,
->                          from /oe/build-angstrom-next/angstrom-dev/work/i=
-686-linux/qt4-native-4.7.2-r0.0/qt-everywhere-opensource-src-4.7.2/include/=
-QtCore/../../src/corelib/tools/qstringlist.h:46,
->                          from /oe/build-angstrom-next/angstrom-dev/work/i=
-686-linux/qt4-native-4.7.2-r0.0/qt-everywhere-opensource-src-4.7.2/include/=
-QtCore/qstringlist.h:1,
->                          from project.h:45,
->                          from project.cpp:42:
->         /usr/include/gnu/stubs.h:9:27: error: gnu/stubs-64.h: No such fil=
-e or directory
->         make: *** [project.o] Error 1
->         + die 'Configuring qt failed. EXTRA_OECONF was -prefix /oe/build-=
-angstrom-next/angstrom-dev/sysroots/i686-linux/usr                 -L /oe/b=
-uild-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/lib                =
- -I /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/include   =
-              -qt-libjpeg -qt-gif -system-zlib                 -no-libjpeg =
--no-libpng -no-libmng -no-libtiff                 -no-accessibility        =
-         -no-cups                 -no-nas-sound                 -no-nis -no=
--openssl                 -verbose -release                 -embedded -no-fr=
-eetype -no-glib -no-iconv                 -exceptions -xmlpatterns         =
-        -qt3support  -no-fast -silent -no-rpath'
->         + oefatal 'Configuring qt failed. EXTRA_OECONF was -prefix /oe/bu=
-ild-angstrom-next/angstrom-dev/sysroots/i686-linux/usr                 -L /=
-oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/lib            =
-     -I /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/includ=
-e                 -qt-libjpeg -qt-gif -system-zlib                 -no-libj=
-peg -no-libpng -no-libmng -no-libtiff                 -no-accessibility    =
-             -no-cups                 -no-nas-sound                 -no-nis=
- -no-openssl                 -verbose -release                 -embedded -n=
-o-freetype -no-glib -no-iconv                 -exceptions -xmlpatterns     =
-            -qt3support  -no-fast -silent -no-rpath'
->         + echo FATAL: 'Configuring qt failed. EXTRA_OECONF was -prefix /o=
-e/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr                 =
--L /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/lib        =
-         -I /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/in=
-clude                 -qt-libjpeg -qt-gif -system-zlib                 -no-=
-libjpeg -no-libpng -no-libmng -no-libtiff                 -no-accessibility=
-                 -no-cups                 -no-nas-sound                 -no=
--nis -no-openssl                 -verbose -release                 -embedde=
-d -no-freetype -no-glib -no-iconv                 -exceptions -xmlpatterns =
-                -qt3support  -no-fast -silent -no-rpath'
->         FATAL: Configuring qt failed. EXTRA_OECONF was -prefix /oe/build-=
-angstrom-next/angstrom-dev/sysroots/i686-linux/usr                 -L /oe/b=
-uild-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/lib                =
- -I /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/include   =
-              -qt-libjpeg -qt-gif -system-zlib                 -no-libjpeg =
--no-libpng -no-libmng -no-libtiff                 -no-accessibility        =
-         -no-cups                 -no-nas-sound                 -no-nis -no=
--openssl                 -verbose -release                 -embedded -no-fr=
-eetype -no-glib -no-iconv                 -exceptions -xmlpatterns         =
-        -qt3support  -no-fast -silent -no-rpath
->         + exit 1
->=20
-> Do you have direct contacts to the Qt developers you can ask about that?
-> If not I need to register at Qt upstream and submit a report sometime.
->=20
-> I found [1] and [2] on the WWW dealing with this error, but I did not
-> find an upstream bug report.
->=20
->=20
-> Thanks,
->=20
-> Paul
->=20
->=20
-> [1] http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D519050
-> [2] http://www.bitchx.com/log/qt-f/qt-f-11-Jun-2010/qt-f-11-Jun-2010-09.p=
-hp
+Paul
 
---=-XBkMVUURlbWvN/3xDk7N
+
+[1] http://lists.uclibc.org/pipermail/uclibc-cvs/2011-March/028879.html
+
+--=-NmjaQFtEx0GOs/xts4Jw
+Content-Disposition: attachment; filename="0001-systemd-bump-srcrev.patch"
+Content-Type: text/x-patch; name="0001-systemd-bump-srcrev.patch"; charset="UTF-8"
+Content-Transfer-Encoding: base64
+
+RnJvbSBhMTM1ZDczY2ZjN2Y0YzBlYjhkYTM0NGQ1YmYwZDQ5NjY4ZmZkYmY5IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQ0KRnJvbTogUGF1bCBNZW56ZWwgPHBhdWxlcGFudGVyQHVzZXJzLnNvdXJj
+ZWZvcmdlLm5ldD4NCkRhdGU6IFR1ZSwgMTAgTWF5IDIwMTEgMDk6MTk6MDIgKzAyMDANClN1Ympl
+Y3Q6IFtQQVRDSF0gc3lzdGVtZDogYnVtcCBzcmNyZXYNCk1JTUUtVmVyc2lvbjogMS4wDQpDb250
+ZW50LVR5cGU6IHRleHQvcGxhaW47IGNoYXJzZXQ9VVRGLTgNCkNvbnRlbnQtVHJhbnNmZXItRW5j
+b2Rpbmc6IDhiaXQNCg0K4oCiIGJldHRlciB1Q2xpYmMgc3VwcG9ydCBbMV0sIGJ1dCBzdGlsbCBm
+YWlscyBpbiBgc3JjL21hbmFnZXIuY2ANCuKAoiDIpm5nc3Ryw7ZtIHN1cHBvcnQgbWVyZ2VkIHVw
+c3RyZWFtIFsyXQ0KDQpTdGlsbCBuZWVkcyBuYXRpdmUgZG9jYm9vay14c2wgd2hpY2ggaXMgbm90
+IGF2YWlsYWJsZSBpbiBPRS4NCg0KWzFdIGh0dHA6Ly9jZ2l0LmZyZWVkZXNrdG9wLm9yZy9zeXN0
+ZW1kL2NvbW1pdC8/aWQ9ZWMyMDAyZjg0OTI4YzBiNTkyMWE5NjFjYjJiODYzNzU2M2YyOWRhYQ0K
+WzJdIGh0dHA6Ly9jZ2l0LmZyZWVkZXNrdG9wLm9yZy9zeXN0ZW1kL2NvbW1pdC8/aWQ9MWJkOGI4
+MTg0ZWUzYmM3ZmMwMjNkNmQ2ZGZiMmNhOTlmYjY2MTJmMw0KDQpTaWduZWQtb2ZmLWJ5OiBQYXVs
+IE1lbnplbCA8cGF1bGVwYW50ZXJAdXNlcnMuc291cmNlZm9yZ2UubmV0Pg0KLS0tDQogLi4uL3N5
+c3RlbWQtdjI2LzAwMDMtQW5nc3Ryb20tc3VwcG9ydC5wYXRjaCAgICAgICAgfCAgMTY1IC0tLS0t
+LS0tLS0tLS0tLS0tLS0tDQogcmVjaXBlcy9zeXN0ZW1kL3N5c3RlbWRfZ2l0LmJiICAgICAgICAg
+ICAgICAgICAgICAgfCAgICAzICstDQogMiBmaWxlcyBjaGFuZ2VkLCAxIGluc2VydGlvbnMoKyks
+IDE2NyBkZWxldGlvbnMoLSkNCiBkZWxldGUgbW9kZSAxMDA2NDQgcmVjaXBlcy9zeXN0ZW1kL3N5
+c3RlbWQtdjI2LzAwMDMtQW5nc3Ryb20tc3VwcG9ydC5wYXRjaA0KDQpkaWZmIC0tZ2l0IGEvcmVj
+aXBlcy9zeXN0ZW1kL3N5c3RlbWQtdjI2LzAwMDMtQW5nc3Ryb20tc3VwcG9ydC5wYXRjaCBiL3Jl
+Y2lwZXMvc3lzdGVtZC9zeXN0ZW1kLXYyNi8wMDAzLUFuZ3N0cm9tLXN1cHBvcnQucGF0Y2gNCmRl
+bGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KaW5kZXggYzc1Y2VlNC4uMDAwMDAwMA0KLS0tIGEvcmVj
+aXBlcy9zeXN0ZW1kL3N5c3RlbWQtdjI2LzAwMDMtQW5nc3Ryb20tc3VwcG9ydC5wYXRjaA0KKysr
+IC9kZXYvbnVsbA0KQEAgLTEsMTY1ICswLDAgQEANCi1Gcm9tIDBmYTViNTljNWY0ODRjODA0NTNl
+OWQzMjAxYjg3ZTQyNTNmOGJlYzMgTW9uIFNlcCAxNyAwMDowMDowMCAyMDAxDQotRnJvbTogS29l
+biBLb29pIDxrb2VuQGRvbWluaW9uLnRocnVoZXJlLm5ldD4NCi1EYXRlOiBUaHUsIDUgTWF5IDIw
+MTEgMTc6MTU6NDEgKzAyMDANCi1TdWJqZWN0OiBbUEFUQ0ggMy8zXSBBbmdzdHJvbSBzdXBwb3J0
+DQotDQotVGhpcyBjb21taXQgY29uc2lzdHMgb2YgdGhlIGluaXRpYWwgd29yayB0byBpbmNsdWRl
+IEFuZ3N0cm9tIGFzIGEgcG9ydGVkDQotZGlzdHJpYnV0aW9uIGZvciBzeXN0ZW1kLg0KLQ0KLUFu
+Z3N0cm9tIHRyaWVzIHRvIGZvbGxvdyB0aGUgZGViaWFuIHdheSBhcyBtdWNoIGFzIHBvc3NpYmxl
+LCBidXQgZGV2aWF0ZXMNCi13aGVyZSBpdCBkb2Vzbid0IG1ha2Ugc2Vuc2UgZm9yICdlbWJlZGRl
+ZCcuDQotDQotU2lnbmVkLW9mZi1ieTogS29lbiBLb29pIDxrb2VuQGRvbWluaW9uLnRocnVoZXJl
+Lm5ldD4NCi0tLS0NCi0gTWFrZWZpbGUuYW0gICAgICAgIHwgICAgNyArKysrKysrDQotIGNvbmZp
+Z3VyZS5hYyAgICAgICB8ICAgIDcgKysrKysrKw0KLSBzcmMvbG9jYWxlLXNldHVwLmMgfCAgICAy
+ICstDQotIHNyYy9zZXJ2aWNlLmMgICAgICB8ICAgMTAgKysrKystLS0tLQ0KLSBzcmMvdXRpbC5j
+ICAgICAgICAgfCAgIDEyICsrKysrKysrKysrKw0KLSA1IGZpbGVzIGNoYW5nZWQsIDMyIGluc2Vy
+dGlvbnMoKyksIDYgZGVsZXRpb25zKC0pDQotDQotZGlmZiAtLWdpdCBhL01ha2VmaWxlLmFtIGIv
+TWFrZWZpbGUuYW0NCi1pbmRleCA0OWQyZWU4Li5mM2Y3ODE4IDEwMDY0NA0KLS0tLSBhL01ha2Vm
+aWxlLmFtDQotKysrIGIvTWFrZWZpbGUuYW0NCi1AQCAtOTYsNiArOTYsMTIgQEAgQU1fQ1BQRkxB
+R1MgKz0gXA0KLSAJLURLQkRfU0VURk9OVD1cIi9iaW4vc2V0Zm9udFwiIFwNCi0gCS1EREVGQVVM
+VF9GT05UPVwiTGF0QXJDeXJIZWItMTZcIg0KLSBlbHNlDQotK2lmIFRBUkdFVF9BTkdTVFJPTQ0K
+LStBTV9DUFBGTEFHUyArPSBcDQotKwktREtCRF9MT0FES0VZUz1cIi91c3IvYmluL2xvYWRrZXlz
+XCIgXA0KLSsJLURLQkRfU0VURk9OVD1cIi91c3IvYmluL3NldGZvbnRcIiBcDQotKwktRERFRkFV
+TFRfRk9OVD1cIkxhdEFyQ3lySGViLTE2XCINCi0rZWxzZQ0KLSBBTV9DUFBGTEFHUyArPSBcDQot
+IAktREtCRF9MT0FES0VZUz1cIi9iaW4vbG9hZGtleXNcIiBcDQotIAktREtCRF9TRVRGT05UPVwi
+L2Jpbi9zZXRmb250XCIgXA0KLUBAIC0xMDUsNiArMTExLDcgQEAgZW5kaWYNCi0gZW5kaWYNCi0g
+ZW5kaWYNCi0gZW5kaWYNCi0rZW5kaWYNCi0gDQotIHJvb3RiaW5fUFJPR1JBTVMgPSBcDQotIAlz
+eXN0ZW1kIFwNCi1kaWZmIC0tZ2l0IGEvY29uZmlndXJlLmFjIGIvY29uZmlndXJlLmFjDQotaW5k
+ZXggZGNkNGI5ZC4uYjViN2FjMyAxMDA2NDQNCi0tLS0gYS9jb25maWd1cmUuYWMNCi0rKysgYi9j
+b25maWd1cmUuYWMNCi1AQCAtMjk1LDYgKzI5NSw3IEBAIGlmIHRlc3QgInokd2l0aF9kaXN0cm8i
+ID0gInoiOyB0aGVuDQotICAgICAgICAgICAgICAgICB0ZXN0IC1mICIvZXRjL2FsdGxpbnV4LXJl
+bGVhc2UiICYmIHdpdGhfZGlzdHJvPSJhbHRsaW51eCINCi0gICAgICAgICAgICAgICAgIHRlc3Qg
+LWYgIi9ldGMvbWFuZHJpdmEtcmVsZWFzZSIgJiYgd2l0aF9kaXN0cm89Im1hbmRyaXZhIg0KLSAg
+ICAgICAgICAgICAgICAgdGVzdCAtZiAiL2V0Yy9tZWVnby1yZWxlYXNlIiAmJiB3aXRoX2Rpc3Ry
+bz0ibWVlZ28iDQotKyAgICAgICAgICAgICAgICB0ZXN0IC1mICIvZXRjL2FuZ3N0cm9tLXZlcnNp
+b24iICYmIHdpdGhfZGlzdHJvPSJhbmdzdHJvbSINCi0gICAgICAgICAgICAgICAgIGlmIHRlc3Qg
+InhgbHNiX3JlbGVhc2UgLWlzIDI+L2Rldi9udWxsYCIgPSAieFVidW50dSI7IHRoZW4NCi0gICAg
+ICAgICAgICAgICAgICAgICAgICAgd2l0aF9kaXN0cm89InVidW50dSINCi0gICAgICAgICAgICAg
+ICAgIGZpDQotQEAgLTM3NSw2ICszNzYsMTEgQEAgY2FzZSAkd2l0aF9kaXN0cm8gaW4NCi0gICAg
+ICAgICAgICAgICAgIEFDX0RFRklORShUQVJHRVRfTUVFR08sIFtdLCBbVGFyZ2V0IGlzIE1lZUdv
+XSkNCi0gICAgICAgICAgICAgICAgIE00X0RJU1RST19GTEFHPS1EVEFSR0VUX01FRUdPPTENCi0g
+CQk7Ow0KLSsgICAgICAgIGFuZ3N0cm9tKQ0KLSsgICAgICAgICAgICAgICAgU1lTVEVNX1NZU1ZS
+Q05EX1BBVEg9L2V0Yw0KLSsgICAgICAgICAgICAgICAgQUNfREVGSU5FKFRBUkdFVF9BTkdTVFJP
+TSwgW10sIFtUYXJnZXQgaXMgw4VuZ3N0csO2bV0pDQotKyAgICAgICAgICAgICAgICBNNF9ESVNU
+Uk9fRkxBRz0tRFRBUkdFVF9BTkdTVFJPTT0xDQotKyAgICAgICAgICAgICAgICA7Ow0KLSAgICAg
+ICAgIG90aGVyKQ0KLSAgICAgICAgICAgICAgICAgOzsNCi0gICAgICAgICAqKQ0KLUBAIC00MjUs
+NiArNDMxLDcgQEAgQU1fQ09ORElUSU9OQUwoVEFSR0VUX0ZSVUdBTFdBUkUsIHRlc3QgeCIkd2l0
+aF9kaXN0cm8iID0geGZydWdhbHdhcmUpDQotIEFNX0NPTkRJVElPTkFMKFRBUkdFVF9BTFRMSU5V
+WCwgdGVzdCB4IiR3aXRoX2Rpc3RybyIgPSB4YWx0bGludXgpDQotIEFNX0NPTkRJVElPTkFMKFRB
+UkdFVF9NQU5EUklWQSwgdGVzdCB4IiR3aXRoX2Rpc3RybyIgPSB4bWFuZHJpdmEpDQotIEFNX0NP
+TkRJVElPTkFMKFRBUkdFVF9NRUVHTywgdGVzdCB4IiR3aXRoX2Rpc3RybyIgPSB4bWVlZ28pDQot
+K0FNX0NPTkRJVElPTkFMKFRBUkdFVF9BTkdTVFJPTSwgdGVzdCB4IiR3aXRoX2Rpc3RybyIgPSB4
+YW5nc3Ryb20pDQotIA0KLSBBTV9DT05ESVRJT05BTChIQVZFX1BMWU1PVVRILCB0ZXN0IC1uICIk
+aGF2ZV9wbHltb3V0aCIpDQotIEFNX0NPTkRJVElPTkFMKEhBVkVfU1lTVl9DT01QQVQsIHRlc3Qg
+IiRTWVNURU1fU1lTVl9DT01QQVQiID0gInllcyIpDQotZGlmZiAtLWdpdCBhL3NyYy9sb2NhbGUt
+c2V0dXAuYyBiL3NyYy9sb2NhbGUtc2V0dXAuYw0KLWluZGV4IGQ5YWRmYTMuLjMzMTExZGEgMTAw
+NjQ0DQotLS0tIGEvc3JjL2xvY2FsZS1zZXR1cC5jDQotKysrIGIvc3JjL2xvY2FsZS1zZXR1cC5j
+DQotQEAgLTEzNiw3ICsxMzYsNyBAQCBpbnQgbG9jYWxlX3NldHVwKHZvaWQpIHsNCi0gICAgICAg
+ICAgICAgICAgICAgICAgICAgbG9nX3dhcm5pbmcoIkZhaWxlZCB0byByZWFkIC9ldGMvc3lzY29u
+ZmlnL2xhbmd1YWdlOiAlcyIsIHN0cmVycm9yKC1yKSk7DQotICAgICAgICAgfQ0KLSANCi0tI2Vs
+aWYgZGVmaW5lZChUQVJHRVRfREVCSUFOKSB8fCBkZWZpbmVkKFRBUkdFVF9VQlVOVFUpDQotKyNl
+bGlmIGRlZmluZWQoVEFSR0VUX0RFQklBTikgfHwgZGVmaW5lZChUQVJHRVRfVUJVTlRVKSB8fCBk
+ZWZpbmVkKFRBUkdFVF9BTkdTVFJPTSkNCi0gICAgICAgICBpZiAociA8PSAwICYmDQotICAgICAg
+ICAgICAgIChyID0gcGFyc2VfZW52X2ZpbGUoIi9ldGMvZGVmYXVsdC9sb2NhbGUiLCBORVdMSU5F
+LA0KLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJMQU5HIiwgICAgICAgICAgICAg
+ICZ2YXJpYWJsZXNbVkFSSUFCTEVfTEFOR10sDQotZGlmZiAtLWdpdCBhL3NyYy9zZXJ2aWNlLmMg
+Yi9zcmMvc2VydmljZS5jDQotaW5kZXggZTdhNTYyMi4uZjgyNjc1NCAxMDA2NDQNCi0tLS0gYS9z
+cmMvc2VydmljZS5jDQotKysrIGIvc3JjL3NlcnZpY2UuYw0KLUBAIC02NSw3ICs2NSw3IEBAIHN0
+YXRpYyBjb25zdCBzdHJ1Y3Qgew0KLSAgICAgICAgIHsgImJvb3QuZCIsIFNQRUNJQUxfU1lTSU5J
+VF9UQVJHRVQsICAgUlVOTEVWRUxfU1lTSU5JVCB9LA0KLSAjZW5kaWYNCi0gDQotLSNpZiBkZWZp
+bmVkKFRBUkdFVF9ERUJJQU4pIHx8IGRlZmluZWQoVEFSR0VUX1VCVU5UVSkgfHwgZGVmaW5lZChU
+QVJHRVRfRlJVR0FMV0FSRSkNCi0rI2lmIGRlZmluZWQoVEFSR0VUX0RFQklBTikgfHwgZGVmaW5l
+ZChUQVJHRVRfVUJVTlRVKSB8fCBkZWZpbmVkKFRBUkdFVF9GUlVHQUxXQVJFKSB8fCBkZWZpbmVk
+KFRBUkdFVF9BTkdTVFJPTSkNCi0gICAgICAgICAvKiBEZWJpYW4gc3R5bGUgcmNTLmQgKi8NCi0g
+ICAgICAgICB7ICJyY1MuZCIsICBTUEVDSUFMX1NZU0lOSVRfVEFSR0VULCAgIFJVTkxFVkVMX1NZ
+U0lOSVQgfSwNCi0gI2VuZGlmDQotQEAgLTI0Niw3ICsyNDYsNyBAQCBzdGF0aWMgY2hhciAqc3lz
+dl90cmFuc2xhdGVfbmFtZShjb25zdCBjaGFyICpuYW1lKSB7DQotICAgICAgICAgaWYgKCEociA9
+IG5ldyhjaGFyLCBzdHJsZW4obmFtZSkgKyBzaXplb2YoIi5zZXJ2aWNlIikpKSkNCi0gICAgICAg
+ICAgICAgICAgIHJldHVybiBOVUxMOw0KLSANCi0tI2lmIGRlZmluZWQoVEFSR0VUX0RFQklBTikg
+fHwgZGVmaW5lZChUQVJHRVRfVUJVTlRVKQ0KLSsjaWYgZGVmaW5lZChUQVJHRVRfREVCSUFOKSB8
+fCBkZWZpbmVkKFRBUkdFVF9VQlVOVFUpIHx8IGRlZmluZWQoVEFSR0VUX0FOR1NUUk9NKQ0KLSAg
+ICAgICAgIGlmIChlbmRzd2l0aChuYW1lLCAiLnNoIikpDQotICAgICAgICAgICAgICAgICAvKiBE
+cm9wIERlYmlhbi1zdHlsZSAuc2ggc3VmZml4ICovDQotICAgICAgICAgICAgICAgICBzdHJjcHko
+c3RwY3B5KHIsIG5hbWUpIC0gMywgIi5zZXJ2aWNlIik7DQotQEAgLTI5Nyw3ICsyOTcsNyBAQCBz
+dGF0aWMgaW50IHN5c3ZfdHJhbnNsYXRlX2ZhY2lsaXR5KGNvbnN0IGNoYXIgKm5hbWUsIGNvbnN0
+IGNoYXIgKmZpbGVuYW1lLCBjaGFyDQotICAgICAgICAgICAgICAgICAieC1kaXNwbGF5LW1hbmFn
+ZXIiLCAgICBTUEVDSUFMX0RJU1BMQVlfTUFOQUdFUl9TRVJWSUNFLA0KLSAgICAgICAgICAgICAg
+ICAgIm51bGwiLCAgICAgICAgICAgICAgICAgTlVMTCwNCi0gDQotLSNpZiBkZWZpbmVkKFRBUkdF
+VF9ERUJJQU4pIHx8IGRlZmluZWQoVEFSR0VUX1VCVU5UVSkNCi0rI2lmIGRlZmluZWQoVEFSR0VU
+X0RFQklBTikgfHwgZGVmaW5lZChUQVJHRVRfVUJVTlRVKSB8fCBkZWZpbmVkKFRBUkdFVF9BTkdT
+VFJPTSkNCi0gICAgICAgICAgICAgICAgICJtYWlsLXRyYW5zcG9ydC1hZ2VudCIsIFNQRUNJQUxf
+TUFJTF9UUkFOU0ZFUl9BR0VOVF9UQVJHRVQsDQotICNlbmRpZg0KLSANCi1AQCAtODg3LDcgKzg4
+Nyw3IEBAIHN0YXRpYyBpbnQgc2VydmljZV9sb2FkX3N5c3ZfbmFtZShTZXJ2aWNlICpzLCBjb25z
+dCBjaGFyICpuYW1lKSB7DQotIA0KLSAgICAgICAgIC8qIEZvciBTeXNWIHNlcnZpY2VzIHdlIHN0
+cmlwIHRoZSBib290LiosIHJjLiogYW5kICouc2gNCi0gICAgICAgICAgKiBwcmVmaXhlcy9zdWZm
+aXhlcy4gKi8NCi0tI2lmIGRlZmluZWQoVEFSR0VUX0RFQklBTikgfHwgZGVmaW5lZChUQVJHRVRf
+VUJVTlRVKQ0KLSsjaWYgZGVmaW5lZChUQVJHRVRfREVCSUFOKSB8fCBkZWZpbmVkKFRBUkdFVF9V
+QlVOVFUpIHx8IGRlZmluZWQoVEFSR0VUX0FOR1NUUk9NKQ0KLSAgICAgICAgIGlmIChlbmRzd2l0
+aChuYW1lLCAiLnNoLnNlcnZpY2UiKSkNCi0gICAgICAgICAgICAgICAgIHJldHVybiAtRU5PRU5U
+Ow0KLSAjZW5kaWYNCi1AQCAtOTE0LDcgKzkxNCw3IEBAIHN0YXRpYyBpbnQgc2VydmljZV9sb2Fk
+X3N5c3ZfbmFtZShTZXJ2aWNlICpzLCBjb25zdCBjaGFyICpuYW1lKSB7DQotIA0KLSAgICAgICAg
+ICAgICAgICAgciA9IHNlcnZpY2VfbG9hZF9zeXN2X3BhdGgocywgcGF0aCk7DQotIA0KLS0jaWYg
+ZGVmaW5lZChUQVJHRVRfREVCSUFOKSB8fCBkZWZpbmVkKFRBUkdFVF9VQlVOVFUpDQotKyNpZiBk
+ZWZpbmVkKFRBUkdFVF9ERUJJQU4pIHx8IGRlZmluZWQoVEFSR0VUX1VCVU5UVSkgfHwgZGVmaW5l
+ZChUQVJHRVRfQU5HU1RST00pDQotICAgICAgICAgICAgICAgICBpZiAociA+PSAwICYmIHMtPm1l
+dGEubG9hZF9zdGF0ZSA9PSBVTklUX1NUVUIpIHsNCi0gICAgICAgICAgICAgICAgICAgICAgICAg
+LyogVHJ5IERlYmlhbiBzdHlsZSAqLnNoIHNvdXJjZSdhYmxlIGluaXQgc2NyaXB0cyAqLw0KLSAg
+ICAgICAgICAgICAgICAgICAgICAgICBzdHJjYXQocGF0aCwgIi5zaCIpOw0KLWRpZmYgLS1naXQg
+YS9zcmMvdXRpbC5jIGIvc3JjL3V0aWwuYw0KLWluZGV4IGYwMDUxZWUuLjVhZjkxNjEgMTAwNjQ0
+DQotLS0tIGEvc3JjL3V0aWwuYw0KLSsrKyBiL3NyYy91dGlsLmMNCi1AQCAtMzQyNiw2ICszNDI2
+LDE4IEBAIHZvaWQgc3RhdHVzX3dlbGNvbWUodm9pZCkgew0KLSANCi0gICAgICAgIGlmICghYW5z
+aV9jb2xvcikNCi0gICAgICAgICAgICAgICAgY29uc3RfY29sb3IgPSAiMTszNSI7IC8qIEJyaWdo
+dCBNYWdlbnRhIGZvciBNZWVHbyAqLw0KLSsjZWxpZiBkZWZpbmVkKFRBUkdFVF9BTkdTVFJPTSkN
+Ci0rDQotKyAgICAgICAgaWYgKCFwcmV0dHlfbmFtZSkgew0KLSsgICAgICAgICAgICAgICAgaWYg
+KChyID0gcmVhZF9vbmVfbGluZV9maWxlKCIvZXRjL2FuZ3N0cm9tLXZlcnNpb24iLCAmcHJldHR5
+X25hbWUpKSA8IDApIHsNCi0rDQotKyAgICAgICAgICAgICAgICAgICAgICAgIGlmIChyICE9IC1F
+Tk9FTlQpDQotKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbG9nX3dhcm5pbmcoIkZh
+aWxlZCB0byByZWFkIC9ldGMvYW5nc3Ryb20tdmVyc2lvbjogJXMiLCBzdHJlcnJvcigtcikpOw0K
+LSsgICAgICAgICAgICAgICAgfQ0KLSsgICAgICAgIH0NCi0rDQotKyAgICAgICBpZiAoIWFuc2lf
+Y29sb3IpDQotKyAgICAgICAgICAgICAgIGNvbnN0X2NvbG9yID0gIjE7MzUiOyAvKiBCcmlnaHQg
+TWFnZW50YSBmb3IgQW5nc3Ryb20gKi8NCi0gI2VuZGlmDQotIA0KLSAgICAgICAgIGlmICghcHJl
+dHR5X25hbWUgJiYgIWNvbnN0X3ByZXR0eSkNCi0tLSANCi0xLjYuNi4xDQotDQpkaWZmIC0tZ2l0
+IGEvcmVjaXBlcy9zeXN0ZW1kL3N5c3RlbWRfZ2l0LmJiIGIvcmVjaXBlcy9zeXN0ZW1kL3N5c3Rl
+bWRfZ2l0LmJiDQppbmRleCA2Njg4ZWVkLi45YzdhZjZhIDEwMDY0NA0KLS0tIGEvcmVjaXBlcy9z
+eXN0ZW1kL3N5c3RlbWRfZ2l0LmJiDQorKysgYi9yZWNpcGVzL3N5c3RlbWQvc3lzdGVtZF9naXQu
+YmINCkBAIC0xNSwxMiArMTUsMTEgQEAgUFJfYXBwZW5kID0gIiske1NSQ1BWfSINCiANCiBpbmhl
+cml0IGF1dG90b29scyB2YWxhIHVwZGF0ZS1hbHRlcm5hdGl2ZXMNCiANCi1UQUcgPSAiN2E2MDAw
+YTY4MjQxZDIzYzlmNmY2YmRlNDdiMmNmYTljMTgxODlkYSINCitUQUcgPSAiZWMyMDAyZjg0OTI4
+YzBiNTkyMWE5NjFjYjJiODYzNzU2M2YyOWRhYSINCiANCiBTUkNfVVJJID0gImdpdDovL2Fub25n
+aXQuZnJlZWRlc2t0b3Aub3JnL3N5c3RlbWQ7cHJvdG9jb2w9Z2l0O3RhZz0ke1RBR30gXA0KICAg
+ICAgICAgICAgZmlsZTovL2V4ZWN1dGUucGF0Y2ggXA0KICAgICAgICAgICAgZmlsZTovLzAwMDEt
+c3lzdGVtZC1kaXNhYmxlLXhtbC1maWxlLXN0dWZmLWFuZC1pbnRyb3NwZWN0aW9uLnBhdGNoIFwN
+Ci0gICAgICAgICAgIGZpbGU6Ly8wMDAzLUFuZ3N0cm9tLXN1cHBvcnQucGF0Y2ggXA0KICAgICAg
+ICAgICAgZmlsZTovL3JlcGxhY2VfYWNjcGV0NC5wYXRjaCBcDQogICAgICAgICAgICBmaWxlOi8v
+c2VyaWFsLWdldHR5QC5zZXJ2aWNlIFwNCiAgICAgICAgICAgIg0KLS0gDQoxLjcuNS4xDQoNCg==
+
+--=-NmjaQFtEx0GOs/xts4Jw--
+
+--=-vKvqcer+3hRn3BbZw8KI
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk3Jpp0ACgkQPX1aK2wOHVjhzgCcDt1aZPTifum8eNzZxOtx8yQb
-GYkAnRfNHGEwyrmBr6Y8koG5J+MSjhHE
-=0lzB
+iEYEABECAAYFAk3JqsUACgkQPX1aK2wOHVir9wCfSaGA3bI9Ns+UqxWcm8hZmEKT
+N5QAmQFqb8DpnCPjdLQrxOfbm3/k00OD
+=YwwU
 -----END PGP SIGNATURE-----
 
---=-XBkMVUURlbWvN/3xDk7N--
+--=-vKvqcer+3hRn3BbZw8KI--
