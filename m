@@ -1,41 +1,34 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QJljj-0007kw-2T
+	(envelope-from <martin.jansa@gmail.com>) id 1QJmJZ-0008N8-1L
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 14:08:24 +0200
-Received: by fxm19 with SMTP id 19so4773717fxm.6
+	Tue, 10 May 2011 14:45:25 +0200
+Received: by fxm19 with SMTP id 19so4798050fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 May 2011 05:05:37 -0700 (PDT)
+	Tue, 10 May 2011 05:42:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=WBxtq+LIRB9Yb5gUAmpTYCL4EvspIDl4Nja/0oSfhq0=;
-	b=Lmc9W8wV1ieE4jdA686Mw5l8rtAHc5SjilVg6am1MJSgD0QOi5ErseyufP5Gehw7SJ
-	zXSEQ019hq+ronP1zoArWLZ3nTDL7cTUUBoPEozV/btIm9peDmtp5BcrrkbPd7HpAY1y
-	ixqLBVSArXoGFP7rJFmcSlXM/gagH5chqI+WI=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=k8dMAaPURnx6tcQM069GV2SAZDwPYtt0WZG+NvWDA9k=;
+	b=rq/TEQYCyhPxEqIffFctUw6vA2A03vyvGEXcYe+jN69qGZ9VJevyMSrBN3JXay2WdY
+	qkPX6TIAJlqKy2ysNi00qGDD4aEwv8p41CQIxN+NU5jN6yVDMXGp2p9m2YyqKhKfAUmT
+	7rB3xKMAWFxw0+mh8WKXN2JLfDwRnkfGipZ60=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=acWTqRps5ktK/QXojIXva3ScdOtWRKrU+Dzau90ijJEOs1SBeh9WAamx5WAMqvp9x4
-	zEX591dtpfF7BicOwVkJr4J3nM8/qxNZU+KWSJc+T1PhffOm1qDF0l/rPSrJIvK5827E
-	lycPt9TxrVcfkpUY6onT4EjsbsopRdp+DFqnw=
-Received: by 10.223.86.130 with SMTP id s2mr593459fal.115.1305029137829;
-	Tue, 10 May 2011 05:05:37 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=RzQ1VeICoOLeHt5wbkmHPn6s3E97Vk7fUFfC6vwBPVWxeCfOimDizt2LTO887ELUds
+	H4BrKwdwU7tYwQe+LqYB9BeO4uyRDEo/o/1emcYceHNT3hXW+Hhd8cZB4OCn2iOjBcIU
+	y+x6SF65Hn7Xj5USolEt+fCBKUEOQprIrsYYI=
+Received: by 10.223.76.212 with SMTP id d20mr1295230fak.5.1305031359461;
+	Tue, 10 May 2011 05:42:39 -0700 (PDT)
 Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id 14sm2357460fas.6.2011.05.10.05.05.36
+	by mx.google.com with ESMTPS id b17sm2201463fab.23.2011.05.10.05.42.38
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 10 May 2011 05:05:37 -0700 (PDT)
-Date: Tue, 10 May 2011 14:05:30 +0200
+	Tue, 10 May 2011 05:42:38 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110510120530.GD3673@jama.jama.net>
-References: <cover.1305027503.git.Martin.Jansa@gmail.com>
-	<3ce8046fc75c61d0eed6b58152acee0c665383e7.1305027503.git.Martin.Jansa@gmail.com>
-	<iqb99k$uh2$3@dough.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <iqb99k$uh2$3@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 1/9] udev: drop udev-compat for zaurus devices
+Date: Tue, 10 May 2011 14:42:30 +0200
+Message-Id: <1305031350-28805-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.5.rc3
+Subject: [meta-oe][PATCH] dnsmasq(-dbus): import from oe.dev, needed for connman now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,40 +42,445 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2011 12:08:24 -0000
-X-Groupsio-MsgNum: 31863
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="48TaNjbzBVislYPb"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 10 May 2011 12:45:25 -0000
 
---48TaNjbzBVislYPb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../dnsmasq/dnsmasq-dbus_2.55.bb                   |   13 +
+ meta-oe/recipes-connectivity/dnsmasq/dnsmasq.inc   |   29 ++
+ .../recipes-connectivity/dnsmasq/dnsmasq_2.55.bb   |    4 +
+ .../dnsmasq/files/dnsmasq.conf                     |  293 ++++++++++++++++++++
+ meta-oe/recipes-connectivity/dnsmasq/files/init    |   52 ++++
+ 5 files changed, 391 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/dnsmasq/dnsmasq-dbus_2.55.bb
+ create mode 100644 meta-oe/recipes-connectivity/dnsmasq/dnsmasq.inc
+ create mode 100644 meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.55.bb
+ create mode 100755 meta-oe/recipes-connectivity/dnsmasq/files/dnsmasq.conf
+ create mode 100644 meta-oe/recipes-connectivity/dnsmasq/files/init
 
-On Tue, May 10, 2011 at 01:58:44PM +0200, Koen Kooi wrote:
-> We should consider using 168 in meta-oe, it's a lot faster than 168. 169
-> breaks crosscompilation, I'm talking to Kay to get that fixed before the
-> release.
+diff --git a/meta-oe/recipes-connectivity/dnsmasq/dnsmasq-dbus_2.55.bb b/meta-oe/recipes-connectivity/dnsmasq/dnsmasq-dbus_2.55.bb
+new file mode 100644
+index 0000000..896952d
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/dnsmasq/dnsmasq-dbus_2.55.bb
+@@ -0,0 +1,13 @@
++# dnsmasq with support for DBus interface
++
++require dnsmasq_${PV}.bb
++
++S = "${WORKDIR}/dnsmasq-${PV}"
++
++DEPENDS = "dbus"
++EXTRA_OEMAKE = "COPTS=-DHAVE_DBUS"
++
++do_install_append () {
++        install -d ${D}${sysconfdir}/dbus-1/system.d
++        install -m 644 dbus/dnsmasq.conf ${D}${sysconfdir}/dbus-1/system.d/
++}
+diff --git a/meta-oe/recipes-connectivity/dnsmasq/dnsmasq.inc b/meta-oe/recipes-connectivity/dnsmasq/dnsmasq.inc
+new file mode 100644
+index 0000000..e994852
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/dnsmasq/dnsmasq.inc
+@@ -0,0 +1,29 @@
++DESCRIPTION = "Dnsmasq is a lightweight, easy to configure DNS forwarder and DHCP server."
++HOMEPAGE = "http://www.thekelleys.org.uk/dnsmasq/doc.html"
++SECTION = "console/network"
++# GPLv3 was added in version 2.41 as license option
++LICENSE = "GPLv2 GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
++                    file://COPYING-v3;md5=d32239bcb673463ab874e80d47fae504"
++
++#at least versions 2.15 and prior are moved to the archive folder on the server
++SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(bb.data.getVar('PV',d,1).split('.')[1]) > 15]}dnsmasq-${PV}.tar.gz;name=dnsmasq-${PV} \
++           file://init \
++           file://dnsmasq.conf"
++
++inherit update-rc.d
++
++INITSCRIPT_NAME = "dnsmasq"
++INITSCRIPT_PARAMS = "defaults"
++
++do_install () {
++        oe_runmake "PREFIX=${D}${prefix}" \
++                   "BINDIR=${D}${bindir}" \
++                   "MANDIR=${D}${mandir}" \
++                   install
++        install -d ${D}${sysconfdir}/ ${D}${sysconfdir}/init.d ${D}${sysconfdir}/dnsmasq.d
++        install -m 644 ${WORKDIR}/dnsmasq.conf ${D}${sysconfdir}/
++        install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/dnsmasq
++}
++
++CONFFILES_${PN} = "${sysconfdir}/dnsmasq.conf"
+diff --git a/meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.55.bb b/meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.55.bb
+new file mode 100644
+index 0000000..5f87704
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.55.bb
+@@ -0,0 +1,4 @@
++require dnsmasq.inc
++
++SRC_URI[dnsmasq-2.55.md5sum] = "b093d7c6bc7f97ae6fd35d048529232a"
++SRC_URI[dnsmasq-2.55.sha256sum] = "cf63ecf5977f00474cbda98376a9d8743500a82fd98e13f43d7037bce9f9f929"
+diff --git a/meta-oe/recipes-connectivity/dnsmasq/files/dnsmasq.conf b/meta-oe/recipes-connectivity/dnsmasq/files/dnsmasq.conf
+new file mode 100755
+index 0000000..1a198a3
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/dnsmasq/files/dnsmasq.conf
+@@ -0,0 +1,293 @@
++# Configuration file for dnsmasq.
++#
++# Format is one option per line, legal options are the same
++# as the long options legal on the command line. See
++# "/usr/sbin/dnsmasq --help" or "man 8 dnsmasq" for details.
++
++# Change these lines if you want dnsmasq to serve MX records.
++# Only one of mx-host and mx-target need be set, the other defaults
++# to the name of the host  running dnsmasq.
++#mx-host=
++#mx-target=
++#selfmx
++#localmx
++
++# The following two options make you a better netizen, since they 
++# tell dnsmasq to filter out queries which the public DNS cannot
++# answer, and which load the servers (especially the root servers) 
++# uneccessarily. If you have a dial-on-demand link they also stop
++# these requests from bringing up the link uneccessarily.
++
++# Never forward plain names (with a dot or domain part)
++domain-needed
++# Never forward addresses in the non-routed address spaces.
++bogus-priv
++
++
++# Uncomment this to filter useless windows-originated DNS requests
++# which can trigger dial-on-demand links needlessly.
++# Note that (amongst other things) this blocks all SRV requests, 
++# so don't use it if you use eg Kerberos.
++#filterwin2k
++
++# Change this line if you want dns to get its upstream servers from
++# somewhere other that /etc/resolv.conf 
++#resolv-file=
++
++# By  default,  dnsmasq  will  send queries to any of the upstream
++# servers it knows about and tries to favour servers to are  known
++# to  be  up.  Uncommenting this forces dnsmasq to try each query
++# with  each  server  strictly  in  the  order  they   appear   in
++# /etc/resolv.conf
++#strict-order
++
++# If you don't want dnsmasq to read /etc/resolv.conf or any other
++# file, getting its servers for this file instead (see below), then
++# uncomment this
++#no-resolv
++
++# If you don't want dnsmasq to poll /etc/resolv.conf or other resolv
++# files for changes and re-read them then uncomment this.
++#no-poll
++
++# Add other name servers here, with domain specs if they are for 
++# non-public domains.
++#server=/localnet/192.168.0.1
++
++# Add local-only domains here, queries in these domains are answered
++# from /etc/hosts or DHCP only.
++#local=/localnet/
++
++# Add domains which you want to force to an IP address here.
++# The example below send any host in doubleclick.net to a local
++# webserver.
++#address=/doubleclick.net/127.0.0.1
++
++# You no longer (as of version 1.7) need to set these to enable 
++# dnsmasq to read /etc/ppp/resolv.conf since dnsmasq now uses the
++# "dip" group to achieve this.
++#user=
++#group=
++
++# If you want dnsmasq to listen for requests only on specified interfaces
++# (and the loopback) give the name of the interface (eg eth0) here. 
++# Repeat the line for more than one interface.
++#interface=
++# Or you can specify which interface _not_ to listen on
++#except-interface=
++# Or which to listen on by address (remember to include 127.0.0.1 if
++# you use this.)
++#listen-address=
++
++# On systems which support it, dnsmasq binds the wildcard address,
++# even when it is listening on only some interfaces. It then discards
++# requests that it shouldn't reply to. This has the advantage of 
++# working even when interfaces come and go and change address. If you
++# want dnsmasq to really bind only the interfaces it is listening on,
++# uncomment this option. About the only time you may need this is when 
++# running another nameserver on the same machine.
++#bind-interfaces 
++
++# If you don't want dnsmasq to read /etc/hosts, uncomment the
++# following line.
++#no-hosts
++# or if you want it to read another file, as well as /etc/hosts, use
++# this.
++#addn-hosts=/etc/banner_add_hosts
++
++# Set this (and domain: see below) if you want to have a domain
++# automatically added to simple names in a hosts-file.
++#expand-hosts
++
++# Set the domain for dnsmasq. this is optional, but if it is set, it
++# does the following things.
++# 1) Allows DHCP hosts to have fully qualified domain names, as long
++#     as the domain part matches this setting.
++# 2) Sets the "domain" DHCP option thereby potentially setting the
++#    domain of all systems configured by DHCP
++# 3) Provides the domain part for "expand-hosts"
++#domain=thekelleys.org.uk
++  
++# Uncomment this to enable the integrated DHCP server, you need
++# to supply the range of addresses available for lease and optionally 
++# a lease time. If you have more than one network, you will need to
++# repeat this for each network on which you want to supply DHCP
++# service.
++#dhcp-range=192.168.0.50,192.168.0.150,12h
++dhcp-range=10.0.0.10,10.0.0.200,2h
++
++# This is an example of a DHCP range where the netmask is given. This
++# is needed for networks we reach the dnsmasq DHCP server via a relay 
++# agent. If you don't know what a DHCP relay agent is, you probably
++# don't need to worry about this.
++#dhcp-range=192.168.0.50,192.168.0.150,255.255.255.0,12h
++
++# This is an example of a DHCP range with a network-id, so that
++# some DHCP options may be set only for this network.
++#dhcp-range=red,192.168.0.50,192.168.0.150
++
++# Supply parameters for specified hosts using DHCP. There are lots
++# of valid alternatives, so we will give examples of each. Note that
++# IP addresses DO NOT have to be in the range given above, they just
++# need to be on the same network. The order of the parameters in these
++# do not matter, it's permissble to give name,adddress and MAC in any order
++
++# Always allocate the host with ethernet address 11:22:33:44:55:66 
++# The IP address 192.168.0.60
++#dhcp-host=11:22:33:44:55:66,192.168.0.60
++
++# Always set the name of the host with hardware address
++# 11:22:33:44:55:66 to be "fred"
++#dhcp-host=11:22:33:44:55:66,fred
++
++# Always give the host with ethernet address 11:22:33:44:55:66
++# the name fred and IP address 192.168.0.60 and lease time 45 minutes
++#dhcp-host=11:22:33:44:55:66,fred,192.168.0.60,45m
++
++# Give the machine which says it's name is "bert" IP address
++# 192.168.0.70 and an infinite lease
++#dhcp-host=bert,192.168.0.70,infinite
++
++# Always give the host with client identifier 01:02:02:04 
++# the IP address 192.168.0.60
++#dhcp-host=id:01:02:02:04,192.168.0.60
++
++# Always give the host with client identifier "marjorie"
++# the IP address 192.168.0.60
++#dhcp-host=id:marjorie,192.168.0.60
++
++# Enable the address given for "judge" in /etc/hosts
++# to be given to a machine presenting the name "judge" when
++# it asks for a DHCP lease.
++#dhcp-host=judge
++
++# Never offer DHCP service to a machine whose ethernet 
++# address is 11:22:33:44:55:66
++#dhcp-host=11:22:33:44:55:66,ignore
++
++# Ignore any client-id presented by the machine with ethernet
++# address 11:22:33:44:55:66. This is useful to prevent a machine 
++# being treated differently when running under different OS's or
++# between PXE boot and OS boot.
++#dhcp-host=11:22:33:44:55:66,id:*
++
++# Send extra options which are tagged as "red" to 
++# the machine with ethernet address 11:22:33:44:55:66
++#dhcp-host=11:22:33:44:55:66,net:red
++
++# Send extra options which are tagged as "red" to any machine whose
++# DHCP vendorclass string includes the substring "Linux"
++#dhcp-vendorclass=red,Linux
++
++# Send extra options which are tagged as "red" to any machine one 
++# of whose DHCP userclass strings includes the substring "accounts"
++#dhcp-userclass=red,accounts
++
++# If this line is uncommented, dnsmasq will read /etc/ethers and act
++# on the ethernet-address/IP pairs found there just as if they had
++# been given as --dhcp-host options. Useful if you keep
++# MAC-address/host mappings there for other purposes.
++#read-ethers
++
++# Send options to hosts which ask for a DHCP lease.
++# See RFC 2132 for details of available options.
++# Note that all the common settings, such as netmask and
++# broadcast address, DNS server and default route, are given
++# sane defaults by dnsmasq. You very likely will not need any
++# any dhcp-options. If you use Windows clients and Samba, there
++# are some options which are recommended, they are detailed at the
++# end of this section.
++# For reference, the common options are:
++# subnet mask - 1
++# default router - 3
++# DNS server - 6
++# broadcast address - 28
++
++# Set the NTP time server addresses to 192.168.0.4 and 10.10.0.5
++#dhcp-option=42,192.168.0.4,10.10.0.5
++
++# Set the NTP time server address to be the same machine as 
++# is running dnsmasq
++#dhcp-option=42,0.0.0.0
++
++# Set the NIS domain name to "welly"
++#dhcp-option=40,welly
++
++# Set the default time-to-live to 50
++#dhcp-option=23,50
++
++# Set the "all subnets are local" flag
++#dhcp-option=27,1
++
++# Send the etherboot magic flag and then etherboot options (a string).
++#dhcp-option=128,e4:45:74:68:00:00
++#dhcp-option=129,NIC=eepro100
++
++# Specify an option which will only be sent to the "red" network 
++# (see dhcp-range for the declaration of the "red" network)
++#dhcp-option=red,42,192.168.1.1
++
++# The following DHCP options set up dnsmasq in the same way as is specified
++# for the ISC dhcpcd in 
++# http://www.samba.org/samba/ftp/docs/textdocs/DHCP-Server-Configuration.txt
++# adapted for a typical dnsmasq installation where the host running
++# dnsmasq is also the host running samba.
++# you may want to uncomment them if you use Windows clients and Samba.
++#dhcp-option=19,0           # option ip-forwarding off 
++#dhcp-option=44,0.0.0.0     # set netbios-over-TCP/IP nameserver(s) aka WINS server(s)
++#dhcp-option=45,0.0.0.0     # netbios datagram distribution server
++#dhcp-option=46,8           # netbios node type
++#dhcp-option=47             # empty netbios scope.
++ 
++
++# Set the boot filename and tftpd server name and address
++# for BOOTP. You will only need this is you want to
++# boot machines over the network.
++#dhcp-boot=/var/ftpd/pxelinux.0,boothost,192.168.0.3
++
++# Set the limit on DHCP leases, the default is 150
++#dhcp-lease-max=150
++
++# The DHCP server needs somewhere on disk to keep its lease database.
++# This defaults to a sane location, but if you want to change it, use
++# the line below.
++#dhcp-leasefile=/var/lib/misc/dnsmasq.leases
++
++# Set the cachesize here.
++#cache-size=150
++
++# If you want to disable negative caching, uncomment this.
++#no-negcache
++
++# Normally responses which come form /etc/hosts and the DHCP lease
++# file have Time-To-Live set as zero, which conventionally means
++# do not cache further. If you are happy to trade lower load on the 
++# server for potentially stale date, you can set a time-to-live (in 
++# seconds) here.
++#local-ttl=
++
++# If you want dnsmasq to detect attempts by Verisign to send queries
++# to unregistered .com and .net hosts to its sitefinder service and
++# have dnsmasq instead return the correct NXDOMAIN response, uncomment
++# this line. You can add similar lines to do the same for other
++# registries which have implemented wildcard A records.
++#bogus-nxdomain=64.94.110.11
++
++# If you want to fix up DNS results from upstream servers, use the
++# alias option. This only works for IPv4.
++# This alias makes a result of 1.2.3.4 appear as 5.6.7.8
++#alias=1.2.3.4,5.6.7.8
++# and this maps 1.2.3.x to 5.6.7.x
++#alias=1.2.3.0,5.6.7.0,255.255.255.0
++
++# For debugging purposes, log each DNS query as it passes through
++# dnsmasq.
++#log-queries
++
++# Include a another lot of configuration options.
++#conf-file=/etc/dnsmasq.more.conf
++ 
++ 
++
++
++
+diff --git a/meta-oe/recipes-connectivity/dnsmasq/files/init b/meta-oe/recipes-connectivity/dnsmasq/files/init
+new file mode 100644
+index 0000000..d1aa9e5
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/dnsmasq/files/init
+@@ -0,0 +1,52 @@
++#!/bin/sh
++DAEMON=/usr/bin/dnsmasq
++NAME=dnsmasq
++DESC="DNS forwarder and DHCP server"
++ARGS="-7 /etc/dnsmasq.d"
++
++test -f $DAEMON || exit 0
++
++set -e
++
++case "$1" in
++    start)
++        echo -n "starting $DESC: $NAME... "
++	test -d /var/lib/misc/ || mkdir /var/lib/misc/
++	start-stop-daemon -S -x $DAEMON -- $ARGS
++	echo "done."
++	;;
++    stop)
++        echo -n "stopping $DESC: $NAME... "
++	start-stop-daemon -K -x $DAEMON
++	echo "done."
++	;;
++    status)
++	echo -n "dnsmasq "
++	start-stop-daemon -q -K -t -x $DAEMON
++	RET=$?
++	if [ "$RET" = "0" ]; then
++		PID=`cat /var/run/dnsmasq.pid`
++		echo "($PID) is running"
++	else
++		echo "is not running"
++		exit $RET
++	fi
++	;;
++    restart)
++        echo "restarting $DESC: $NAME... "
++ 	$0 stop
++	$0 start
++	echo "done."
++	;;
++    reload)
++    	echo -n "reloading $DESC: $NAME... "
++    	killall -HUP $(basename ${DAEMON})
++	echo "done."
++	;;
++    *)
++	echo "Usage: $0 {start|stop|status|restart|reload}"
++	exit 1
++	;;
++esac
++
++exit 0
+-- 
+1.7.5.rc3
 
-Agreed, I had this in my queue, because I was trying to build my spitz
-images from meta-shr before meta-handhelds was announced (and I stopped
-trying for now).
 
-Regards,
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---48TaNjbzBVislYPb
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk3JKgoACgkQN1Ujt2V2gBxI+gCgm8h8zw03wBVmQ+Kv0SutYoCh
-t4IAn1udwcFroc9FUtO2I9XVSgxkkDDB
-=KOIH
------END PGP SIGNATURE-----
-
---48TaNjbzBVislYPb--
