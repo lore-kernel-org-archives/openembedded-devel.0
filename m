@@ -1,46 +1,23 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1QJrwN-00007M-D6
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 20:45:51 +0200
-Received: by fxm19 with SMTP id 19so5092397fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 May 2011 11:43:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=JAAiLfNIS8hc1OLaepoN/eHYz9ix0t3iGrE4P0MRDAM=;
-	b=eUEA3i/nPeV9NL8L3WFzTTElOvW5W+Fmv6XD7kdsTiPo9uSrPXDKwpLZY5uPUZQPrS
-	C7xb7gBLL/+FdgVuOYFMZuWxXrnJrS0N1cdK3jg3IXW3F3RM7mixGpU8NyGL2y0vnQad
-	e+ZMh2Y9twjdb73M+wEUyvDbfb/wYsCageJsI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=MU0hQEHYSS+vSg0C0TZURGkNvBUo0SwiZKluATnfVkisBPhA8LCyp+V4ArSduFP3bf
-	o5FHAOwGsyjH9upuTUo1OX5nXO0ppXwu9q/664wTNNTm2RRElf9hpj2yUb2gWmZoyI/h
-	1ltqSmRTtDYemRRz4h0v3lbi/LG3RdvRHBGmM=
-Received: by 10.223.53.85 with SMTP id l21mr3826422fag.26.1305052985910;
-	Tue, 10 May 2011 11:43:05 -0700 (PDT)
-Received: from s42.loc (85-127-250-41.dynamic.xdsl-line.inode.at
-	[85.127.250.41])
-	by mx.google.com with ESMTPS id o20sm590353fal.1.2011.05.10.11.43.04
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 10 May 2011 11:43:04 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.75)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1QJrty-0001Zl-3M; Tue, 10 May 2011 20:43:22 +0200
-Date: Tue, 10 May 2011 20:43:22 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QJtYm-0004mL-G4 for openembedded-devel@lists.openembedded.org;
+	Tue, 10 May 2011 22:29:39 +0200
+Received: from f053032140.adsl.alicedsl.de ([78.53.32.140]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QJtXO-0004HX-Hk for openembedded-devel@lists.openembedded.org;
+	Tue, 10 May 2011 20:28:10 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110510184322.GB7657@mx.loc>
-References: <4DC8F3A2.2090005@nedap.com> <20110510100020.GA10493@mx.loc>
-	<1305022004.8000.149.camel@phil-desktop>
-	<20110510161532.GB10493@mx.loc>
-	<1305049907.3355.99.camel@lenovo.internal.reciva.com>
-MIME-Version: 1.0
-In-Reply-To: <1305049907.3355.99.camel@lenovo.internal.reciva.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: x86_64
+In-Reply-To: <201105101555.50984.sgh@sgh.dk>
+References: <201105101555.50984.sgh@sgh.dk>
+Date: Tue, 10 May 2011 22:26:51 +0200
+Message-ID: <1305059211.9982.18.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: acpid-1.0.10-r5.1 fails compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,28 +31,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2011 18:45:51 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 10 May 2011 20:29:40 -0000
+X-Groupsio-MsgNum: 31885
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-e+N1/81TvfTafhH4bhsz"
 
-On Tue, May 10, 2011 at 06:51:47PM +0100, Phil Blundell wrote:
->On Tue, 2011-05-10 at 18:15 +0200, Bernhard Reutner-Fischer wrote:
->> On Tue, May 10, 2011 at 11:06:44AM +0100, Phil Blundell wrote:
->> >"x86_64" seems to be what's currently used as the architecture name.  If
->> 
->> That doesn't work as arch-dependent e.g. append, does it.
->> 
->> FOO_append_x86_64 = '-mcpu=barcelona'
->
->It seems to work just fine for me.  What goes wrong for you?
+--=-e+N1/81TvfTafhH4bhsz
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-It was OVERRIDES as Enrico mentioned.
-Given that both khem in (IIRC) 2009 and me a year later stumbled across
-the name and abandoned the thing in consequence, settling on an example
-name would be nice -- nowadays i would just use amd64 but that won't
-happen anytime soon, unfortunately.
-Both patches should be in the old patchwork, for reference.
-
-cheers,
+Dear S=C3=B8ren,
 
 
+Am Dienstag, den 10.05.2011, 15:55 +0200 schrieb S=C3=B8ren Holm:
+
+> ERROR: Logfile of failure stored in: /home/sgh/oe-new-oe/build-vmc16/tmp/=
+work/i686-angstrom-linux/acpid-1.0.10-r5.1/temp/log.do_compile.14235
+> Log data follows:
+> | ERROR: Function 'do_compile' failed (see /home/sgh/oe-new-oe/build-vmc1=
+6/tmp/work/i686-angstrom-linux/acpid-1.0.10-r5.1/temp/log.do_compile.14235 =
+for further information)
+> | + cd /home/sgh/oe-new-oe/build-vmc16/tmp/work/i686-angstrom-linux/acpid=
+-1.0.10-r5.1/acpid-1.0.10
+> | + do_compile
+> | + oe_runmake 'CC=3Di686-angstrom-linux-gcc -march=3Dpentiumpro --sysroo=
+t=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux' CROSS=
+=3Di686-angstrom-linux-
+> | + oenote make -j 8 'CC=3Di686-angstrom-linux-gcc -march=3Dpentiumpro --=
+sysroot=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux'=
+ CROSS=3Di686-angstrom-linux-
+> | + echo NOTE: 'make -j 8 CC=3Di686-angstrom-linux-gcc -march=3Dpentiumpr=
+o --sysroot=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-li=
+nux CROSS=3Di686-angstrom-linux-'
+> | NOTE: make -j 8 CC=3Di686-angstrom-linux-gcc -march=3Dpentiumpro --sysr=
+oot=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux CROS=
+S=3Di686-angstrom-linux-
+> | + make -j 8 'CC=3Di686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=
+=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux' CROSS=
+=3Di686-angstrom-linux-
+> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
+w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
+-Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
+> acpid.o acpid.c
+> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
+w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
+-Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
+> acpi_ids.o acpi_ids.c
+> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
+w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
+-Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
+> connection_list.o connection_list.c
+> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
+w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
+-Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
+> event.o event.c
+> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
+w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
+-Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
+> input_layer.o input_layer.c
+> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
+w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
+-Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
+> libnetlink.o libnetlink.c
+> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
+w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
+-Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
+> netlink.o netlink.c
+> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
+w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
+-Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
+> proc.o proc.c
+> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
+w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
+-Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
+> sock.o sock.c
+> | cc1: warnings being treated as errors
+> | libnetlink.c: In function 'addraw_l':
+> | libnetlink.c:521:56: error: comparison between signed and unsigned inte=
+ger expressions
+> | make: *** [libnetlink.o] Error 1
+> | make: *** Waiting for unfinished jobs....
+> | + die 'oe_runmake failed'
+> | + oefatal 'oe_runmake failed'
+> | + echo FATAL: 'oe_runmake failed'
+> | FATAL: oe_runmake failed
+> | + exit 1
+> NOTE: package acpid-1.0.10-r5.1: task do_compile: Failed
+
+I could build it fine using `minimal` as distribution for `MACHINE =3D
+"beagleboard"`. You seem to compile for i686. I do not know what differs
+there.
+
+
+Thanks,
+
+Paul
+
+--=-e+N1/81TvfTafhH4bhsz
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3Jn34ACgkQPX1aK2wOHViA4gCfRfXWSrs4ZNRV1sgGG7lovUTy
+NwwAnjlXlbB9Ax81tHcebQtU1EXKUpnE
+=fUzm
+-----END PGP SIGNATURE-----
+
+--=-e+N1/81TvfTafhH4bhsz--
