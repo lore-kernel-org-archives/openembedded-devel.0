@@ -1,25 +1,36 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1QJo7Z-0006uK-2M
+	(envelope-from <otavio.salvador@gmail.com>) id 1QJoK4-0007D5-I3
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 16:41:09 +0200
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QJnzZ-0007G8-Bq
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 16:32:53 +0200
-From: Phil Blundell <philb@gnu.org>
+	Tue, 10 May 2011 16:54:04 +0200
+Received: by yxn22 with SMTP id 22so2360851yxn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 May 2011 07:51:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
+	:x-mailer; bh=iHlCLdctbpZl+z8uARR1uRHJGPYGjkQ1Cw0Ltvp6k/c=;
+	b=aM6sSHYZNpOe2k6IIYfZym1Zv4rKgwarUWG9pbgrxkurAWwxMnBBbVz60U8lKoTI38
+	jHemrl3Ib3MBTrcnZRvfa3e5dQL7WH7BnnHy1ehJmK3YWdW5W7RISU6/P2rQzRTozSPC
+	k2o5z6F6X/wal94jEXejvuk6WZfHqffcGEdOg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=HJbV2kNFC2lFTNLbOaf0ZUusK6VIu/V4+vq3AFNQEg7Swk9Lo7WmFAaYCc+A1+OtPm
+	ozmvcOW6Dc/gTB7m3oHeZirR6P6aZXLMkK14CpU18pdlZ4TBGvjFg6ivivi4KBI+yf4c
+	1bASBdCMPoN3hQfy5nKMw627LMlPknZyIcCBE=
+Received: by 10.236.63.136 with SMTP id a8mr1619303yhd.339.1305039078544;
+	Tue, 10 May 2011 07:51:18 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id l73sm3147845yhn.98.2011.05.10.07.51.15
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 10 May 2011 07:51:16 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4DC9363B.6070909@nedap.com>
-References: <4DC8F3A2.2090005@nedap.com>	<20110510100020.GA10493@mx.loc>
-	<1305022004.8000.149.camel@phil-desktop>	<4DC91B33.9080807@nedap.com>
-	<1305025696.8000.155.camel@phil-desktop> <4DC91E4E.3070109@nedap.com>
-	<4DC9363B.6070909@nedap.com>
-Date: Tue, 10 May 2011 15:38:19 +0100
-Message-ID: <1305038299.8000.178.camel@phil-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: x86_64
+Date: Tue, 10 May 2011 14:51:02 +0000
+Message-Id: <1305039065-1326-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH v1 1/4] setxkbmap: add version 1.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,28 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2011 14:41:09 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 10 May 2011 14:54:04 -0000
 
-On Tue, 2011-05-10 at 14:57 +0200, Jaap de Jong wrote:
-> bitbake ends with
-> | 
-> /media/OpenEmbedded/release-2010.12/tmp/sysroots/i686-linux/usr/x86_64/x86_64-angstrom-linux/bin/ld: 
-> cannot find /lib64/libc.so.6 inside 
-> /media/OpenEmbedded/release-2010.12/tmp/sysroots/x86_64-angstrom-linux
-> 
-> There is only a lib directory and no lib64 directory...
+This is in sync with OE at 6e7e35679200cd55264fae308cd5dec7ef2d1d29.
 
-It seems that there is some disagreement between binutils and your C
-library about where the libs should be stored.  Which DISTRO
-configuration are you using?
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ .../recipes-graphics/xorg-app/setxkbmap_1.2.0.bb   |    8 ++++++++
+ 1 files changed, 8 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/xorg-app/setxkbmap_1.2.0.bb
 
-If you make a symlink from lib -> lib64 inside the sysroot, does that
-allow the build to continue?
-
-p.
-
+diff --git a/meta-oe/recipes-graphics/xorg-app/setxkbmap_1.2.0.bb b/meta-oe/recipes-graphics/xorg-app/setxkbmap_1.2.0.bb
+new file mode 100644
+index 0000000..592a95d
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xorg-app/setxkbmap_1.2.0.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++LIC_FILES_CHKSUM = "file://COPYING;md5=5feafdbe6dfe9e2bd32325be0cfc86f8"
++DEPENDS += " libxkbfile"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "2f6df89201eb9a2cbfb905d6b82a191e"
++SRC_URI[archive.sha256sum] = "999591bf1ba8ca2a7d480b2c01702396e6c349d499fb583c0de136ec00dbae39"
+-- 
+1.7.2.5
 
 
 
