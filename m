@@ -1,21 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QJuJ8-0003EQ-NL for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 23:17:30 +0200
-Received: from f053032140.adsl.alicedsl.de ([78.53.32.140]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QJuHk-0005Td-SU for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 21:16:05 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <chasemaupin03@gmail.com>) id 1QJvI9-0004YP-NM
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 11 May 2011 00:20:33 +0200
+Received: by yxn22 with SMTP id 22so2530973yxn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 May 2011 15:17:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=d8K77LrtP4dc/vHzhbXz5LKIxgKBrJl3LQMitMhSzzU=;
+	b=GZIuPED3KjEjsGPPRrGJ1MZ6ZLDdOTSfNad+TRjPUxLnIBKl3J4ajIqt28oTW0ojTP
+	bkgJ/0G1rZAAf3mCLrG/9ApftW1XmjNO1tGDjx0HMXqU/ybAtGnSvJYpZ4LRI6nAgssH
+	H3rhm9A9YB5edWZyR2TLWyJBvPTjX+ronvcpc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=rzNGqtzHH0kjP+1otdAWRX9+aOHAztb3zr8IwI4TiuwjSX12gUd6K5w4h6vf3Uf/c+
+	1zeKxJ+KiDyb39AUh4cvFncFe5ShqA8JL12BgmKwt1GNQKmGl/S0lTtZyEw70bQ3OPOa
+	e4GmuDOgw/E7v33Ws5OQHK+uR0ddp4qGWlFco=
+Received: by 10.236.197.6 with SMTP id s6mr10027727yhn.232.1305065866906;
+	Tue, 10 May 2011 15:17:46 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id p51sm3367798yhm.52.2011.05.10.15.17.45
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 10 May 2011 15:17:45 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 May 2011 23:14:45 +0200
-Message-ID: <1305062085.9982.62.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: minimal-uclibc: systemd fails with `src/manager.c:257:42: error: 'EPOLL_CLOEXEC' undeclared (first use in this function)`
+Date: Tue, 10 May 2011 17:17:42 -0500
+Message-Id: <1305065862-22878-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: [PATCH] pcsc-lite: make configuration file a separate package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,240 +43,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2011 21:17:30 -0000
-X-Groupsio-MsgNum: 31890
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-vKvqcer+3hRn3BbZw8KI"
+X-List-Received-Date: Tue, 10 May 2011 22:20:33 -0000
 
---=-vKvqcer+3hRn3BbZw8KI
-Content-Type: multipart/mixed; boundary="=-NmjaQFtEx0GOs/xts4Jw"
+* Move the reader.conf file to be part of a separate package
+  so that it is not installed by default.
+* This is done because individual readers that implements an
+  IFDHandler library need to be able to install their reader.conf
+  file in the /etc/reader.conf.d directory.  Without this change
+  those packages will conflict with the reader.conf file installed
+  by the pcsc-lite package:
+    * NOTE: the reader.conf file in the package is a commented out
+            template file, not an actual working configuration
+            file.
+* Using this change IFDHandler packages can use RCONFLICT with
+  the pcsc-lite-collateral package to let users know that these
+  packages cannot co-exist.
+* Mark the configuration file an such so that when the package is
+  updated the user's changes are not lost.
+* Bump the PR.
 
---=-NmjaQFtEx0GOs/xts4Jw
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+---
+ recipes/pcsc-lite/pcsc-lite_1.5.2.bb |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
 
-Dear OE folks,
-
-
-task compile of `systemd_git.bb` fails with the following error message
-using `minimal-uclibc` for `MACHINE =3D "beagleboard"`. Using `minimal`,
-i. e. EGLIBC, works.
-
-        [=E2=80=A6]
-        |   CC     src/libsystemd_core_la-manager.lo
-        | src/manager.c: In function 'manager_new':
-        | src/manager.c:257:9: warning: implicit declaration of function 'e=
-poll_create1' [-Wimplicit-function-declaration]
-        | src/manager.c:257:42: error: 'EPOLL_CLOEXEC' undeclared (first us=
-e in this function)
-        | src/manager.c:257:42: note: each undeclared identifier is reporte=
-d only once for each function it appears in
-        | src/manager.c: In function 'manager_process_notify_fd':
-        | src/manager.c:1956:25: warning: cast increases required alignment=
- of target type [-Wcast-align]
-        [=E2=80=A6]
-
-`manager.c` includes
-
-        #include <sys/epoll.h>
-        #include <fcntl.h>
-
-which I read should contain that definition. But looking at `fcntl.h` I
-could not find it. I then looked in
-
-        ./minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi/usr/includ=
-e/sys/epoll.h
-
-where it is defined for EGLIBC but not for uClibc. I also found the
-patch for uClibc [1] but there `EPOLL_CLOEXEC` is enclosed in `#if 0`.
-
-I am no uClibc expert, but do you know if uClibc will provide
-`EPOLL_CLOEXEC` in the near future? How should systemd fix that?
-
-Please find attached a patch updating systemd to a newer including a
-commit fixing another problem with systemd and uClibc.
+diff --git a/recipes/pcsc-lite/pcsc-lite_1.5.2.bb b/recipes/pcsc-lite/pcsc-lite_1.5.2.bb
+index b4af08d..88401b6 100644
+--- a/recipes/pcsc-lite/pcsc-lite_1.5.2.bb
++++ b/recipes/pcsc-lite/pcsc-lite_1.5.2.bb
+@@ -5,6 +5,8 @@ LICENSE = "BSD"
+ DEPENDS = "hal"
+ RDEPENDS_${PN} = "hal"
+ 
++PR = "r1"
++
+ SRC_URI = "https://alioth.debian.org/frs/download.php/2795/pcsc-lite-${PV}.tar.bz2 \
+            file://pcscd.init "
+ 
+@@ -26,8 +28,11 @@ do_install() {
+ }
+ 
+ PACKAGES =+ "libpcsclite"
++PACKAGES =+ "${PN}-collateral"
+ 
+ FILES_libpcsclite = "${libdir}/libpcsclite.so.*"
++FILES_${PN}-collateral = "${sysconfdir}/reader.conf.d/*"
++CONFFILES_${PN}-collateral = "${sysconfdir}/reader.conf.d/*"
+ 
+ SRC_URI[md5sum] = "d7d466621bec39354351f09349f6374c"
+ SRC_URI[sha256sum] = "a0c11b0b5cc46d4c4ec499b875cfdc4e766fdf12fe2f6ea635e1b11ab7b8821e"
+-- 
+1.7.0.4
 
 
-Thanks,
 
-Paul
-
-
-[1] http://lists.uclibc.org/pipermail/uclibc-cvs/2011-March/028879.html
-
---=-NmjaQFtEx0GOs/xts4Jw
-Content-Disposition: attachment; filename="0001-systemd-bump-srcrev.patch"
-Content-Type: text/x-patch; name="0001-systemd-bump-srcrev.patch"; charset="UTF-8"
-Content-Transfer-Encoding: base64
-
-RnJvbSBhMTM1ZDczY2ZjN2Y0YzBlYjhkYTM0NGQ1YmYwZDQ5NjY4ZmZkYmY5IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQ0KRnJvbTogUGF1bCBNZW56ZWwgPHBhdWxlcGFudGVyQHVzZXJzLnNvdXJj
-ZWZvcmdlLm5ldD4NCkRhdGU6IFR1ZSwgMTAgTWF5IDIwMTEgMDk6MTk6MDIgKzAyMDANClN1Ympl
-Y3Q6IFtQQVRDSF0gc3lzdGVtZDogYnVtcCBzcmNyZXYNCk1JTUUtVmVyc2lvbjogMS4wDQpDb250
-ZW50LVR5cGU6IHRleHQvcGxhaW47IGNoYXJzZXQ9VVRGLTgNCkNvbnRlbnQtVHJhbnNmZXItRW5j
-b2Rpbmc6IDhiaXQNCg0K4oCiIGJldHRlciB1Q2xpYmMgc3VwcG9ydCBbMV0sIGJ1dCBzdGlsbCBm
-YWlscyBpbiBgc3JjL21hbmFnZXIuY2ANCuKAoiDIpm5nc3Ryw7ZtIHN1cHBvcnQgbWVyZ2VkIHVw
-c3RyZWFtIFsyXQ0KDQpTdGlsbCBuZWVkcyBuYXRpdmUgZG9jYm9vay14c2wgd2hpY2ggaXMgbm90
-IGF2YWlsYWJsZSBpbiBPRS4NCg0KWzFdIGh0dHA6Ly9jZ2l0LmZyZWVkZXNrdG9wLm9yZy9zeXN0
-ZW1kL2NvbW1pdC8/aWQ9ZWMyMDAyZjg0OTI4YzBiNTkyMWE5NjFjYjJiODYzNzU2M2YyOWRhYQ0K
-WzJdIGh0dHA6Ly9jZ2l0LmZyZWVkZXNrdG9wLm9yZy9zeXN0ZW1kL2NvbW1pdC8/aWQ9MWJkOGI4
-MTg0ZWUzYmM3ZmMwMjNkNmQ2ZGZiMmNhOTlmYjY2MTJmMw0KDQpTaWduZWQtb2ZmLWJ5OiBQYXVs
-IE1lbnplbCA8cGF1bGVwYW50ZXJAdXNlcnMuc291cmNlZm9yZ2UubmV0Pg0KLS0tDQogLi4uL3N5
-c3RlbWQtdjI2LzAwMDMtQW5nc3Ryb20tc3VwcG9ydC5wYXRjaCAgICAgICAgfCAgMTY1IC0tLS0t
-LS0tLS0tLS0tLS0tLS0tDQogcmVjaXBlcy9zeXN0ZW1kL3N5c3RlbWRfZ2l0LmJiICAgICAgICAg
-ICAgICAgICAgICAgfCAgICAzICstDQogMiBmaWxlcyBjaGFuZ2VkLCAxIGluc2VydGlvbnMoKyks
-IDE2NyBkZWxldGlvbnMoLSkNCiBkZWxldGUgbW9kZSAxMDA2NDQgcmVjaXBlcy9zeXN0ZW1kL3N5
-c3RlbWQtdjI2LzAwMDMtQW5nc3Ryb20tc3VwcG9ydC5wYXRjaA0KDQpkaWZmIC0tZ2l0IGEvcmVj
-aXBlcy9zeXN0ZW1kL3N5c3RlbWQtdjI2LzAwMDMtQW5nc3Ryb20tc3VwcG9ydC5wYXRjaCBiL3Jl
-Y2lwZXMvc3lzdGVtZC9zeXN0ZW1kLXYyNi8wMDAzLUFuZ3N0cm9tLXN1cHBvcnQucGF0Y2gNCmRl
-bGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KaW5kZXggYzc1Y2VlNC4uMDAwMDAwMA0KLS0tIGEvcmVj
-aXBlcy9zeXN0ZW1kL3N5c3RlbWQtdjI2LzAwMDMtQW5nc3Ryb20tc3VwcG9ydC5wYXRjaA0KKysr
-IC9kZXYvbnVsbA0KQEAgLTEsMTY1ICswLDAgQEANCi1Gcm9tIDBmYTViNTljNWY0ODRjODA0NTNl
-OWQzMjAxYjg3ZTQyNTNmOGJlYzMgTW9uIFNlcCAxNyAwMDowMDowMCAyMDAxDQotRnJvbTogS29l
-biBLb29pIDxrb2VuQGRvbWluaW9uLnRocnVoZXJlLm5ldD4NCi1EYXRlOiBUaHUsIDUgTWF5IDIw
-MTEgMTc6MTU6NDEgKzAyMDANCi1TdWJqZWN0OiBbUEFUQ0ggMy8zXSBBbmdzdHJvbSBzdXBwb3J0
-DQotDQotVGhpcyBjb21taXQgY29uc2lzdHMgb2YgdGhlIGluaXRpYWwgd29yayB0byBpbmNsdWRl
-IEFuZ3N0cm9tIGFzIGEgcG9ydGVkDQotZGlzdHJpYnV0aW9uIGZvciBzeXN0ZW1kLg0KLQ0KLUFu
-Z3N0cm9tIHRyaWVzIHRvIGZvbGxvdyB0aGUgZGViaWFuIHdheSBhcyBtdWNoIGFzIHBvc3NpYmxl
-LCBidXQgZGV2aWF0ZXMNCi13aGVyZSBpdCBkb2Vzbid0IG1ha2Ugc2Vuc2UgZm9yICdlbWJlZGRl
-ZCcuDQotDQotU2lnbmVkLW9mZi1ieTogS29lbiBLb29pIDxrb2VuQGRvbWluaW9uLnRocnVoZXJl
-Lm5ldD4NCi0tLS0NCi0gTWFrZWZpbGUuYW0gICAgICAgIHwgICAgNyArKysrKysrDQotIGNvbmZp
-Z3VyZS5hYyAgICAgICB8ICAgIDcgKysrKysrKw0KLSBzcmMvbG9jYWxlLXNldHVwLmMgfCAgICAy
-ICstDQotIHNyYy9zZXJ2aWNlLmMgICAgICB8ICAgMTAgKysrKystLS0tLQ0KLSBzcmMvdXRpbC5j
-ICAgICAgICAgfCAgIDEyICsrKysrKysrKysrKw0KLSA1IGZpbGVzIGNoYW5nZWQsIDMyIGluc2Vy
-dGlvbnMoKyksIDYgZGVsZXRpb25zKC0pDQotDQotZGlmZiAtLWdpdCBhL01ha2VmaWxlLmFtIGIv
-TWFrZWZpbGUuYW0NCi1pbmRleCA0OWQyZWU4Li5mM2Y3ODE4IDEwMDY0NA0KLS0tLSBhL01ha2Vm
-aWxlLmFtDQotKysrIGIvTWFrZWZpbGUuYW0NCi1AQCAtOTYsNiArOTYsMTIgQEAgQU1fQ1BQRkxB
-R1MgKz0gXA0KLSAJLURLQkRfU0VURk9OVD1cIi9iaW4vc2V0Zm9udFwiIFwNCi0gCS1EREVGQVVM
-VF9GT05UPVwiTGF0QXJDeXJIZWItMTZcIg0KLSBlbHNlDQotK2lmIFRBUkdFVF9BTkdTVFJPTQ0K
-LStBTV9DUFBGTEFHUyArPSBcDQotKwktREtCRF9MT0FES0VZUz1cIi91c3IvYmluL2xvYWRrZXlz
-XCIgXA0KLSsJLURLQkRfU0VURk9OVD1cIi91c3IvYmluL3NldGZvbnRcIiBcDQotKwktRERFRkFV
-TFRfRk9OVD1cIkxhdEFyQ3lySGViLTE2XCINCi0rZWxzZQ0KLSBBTV9DUFBGTEFHUyArPSBcDQot
-IAktREtCRF9MT0FES0VZUz1cIi9iaW4vbG9hZGtleXNcIiBcDQotIAktREtCRF9TRVRGT05UPVwi
-L2Jpbi9zZXRmb250XCIgXA0KLUBAIC0xMDUsNiArMTExLDcgQEAgZW5kaWYNCi0gZW5kaWYNCi0g
-ZW5kaWYNCi0gZW5kaWYNCi0rZW5kaWYNCi0gDQotIHJvb3RiaW5fUFJPR1JBTVMgPSBcDQotIAlz
-eXN0ZW1kIFwNCi1kaWZmIC0tZ2l0IGEvY29uZmlndXJlLmFjIGIvY29uZmlndXJlLmFjDQotaW5k
-ZXggZGNkNGI5ZC4uYjViN2FjMyAxMDA2NDQNCi0tLS0gYS9jb25maWd1cmUuYWMNCi0rKysgYi9j
-b25maWd1cmUuYWMNCi1AQCAtMjk1LDYgKzI5NSw3IEBAIGlmIHRlc3QgInokd2l0aF9kaXN0cm8i
-ID0gInoiOyB0aGVuDQotICAgICAgICAgICAgICAgICB0ZXN0IC1mICIvZXRjL2FsdGxpbnV4LXJl
-bGVhc2UiICYmIHdpdGhfZGlzdHJvPSJhbHRsaW51eCINCi0gICAgICAgICAgICAgICAgIHRlc3Qg
-LWYgIi9ldGMvbWFuZHJpdmEtcmVsZWFzZSIgJiYgd2l0aF9kaXN0cm89Im1hbmRyaXZhIg0KLSAg
-ICAgICAgICAgICAgICAgdGVzdCAtZiAiL2V0Yy9tZWVnby1yZWxlYXNlIiAmJiB3aXRoX2Rpc3Ry
-bz0ibWVlZ28iDQotKyAgICAgICAgICAgICAgICB0ZXN0IC1mICIvZXRjL2FuZ3N0cm9tLXZlcnNp
-b24iICYmIHdpdGhfZGlzdHJvPSJhbmdzdHJvbSINCi0gICAgICAgICAgICAgICAgIGlmIHRlc3Qg
-InhgbHNiX3JlbGVhc2UgLWlzIDI+L2Rldi9udWxsYCIgPSAieFVidW50dSI7IHRoZW4NCi0gICAg
-ICAgICAgICAgICAgICAgICAgICAgd2l0aF9kaXN0cm89InVidW50dSINCi0gICAgICAgICAgICAg
-ICAgIGZpDQotQEAgLTM3NSw2ICszNzYsMTEgQEAgY2FzZSAkd2l0aF9kaXN0cm8gaW4NCi0gICAg
-ICAgICAgICAgICAgIEFDX0RFRklORShUQVJHRVRfTUVFR08sIFtdLCBbVGFyZ2V0IGlzIE1lZUdv
-XSkNCi0gICAgICAgICAgICAgICAgIE00X0RJU1RST19GTEFHPS1EVEFSR0VUX01FRUdPPTENCi0g
-CQk7Ow0KLSsgICAgICAgIGFuZ3N0cm9tKQ0KLSsgICAgICAgICAgICAgICAgU1lTVEVNX1NZU1ZS
-Q05EX1BBVEg9L2V0Yw0KLSsgICAgICAgICAgICAgICAgQUNfREVGSU5FKFRBUkdFVF9BTkdTVFJP
-TSwgW10sIFtUYXJnZXQgaXMgw4VuZ3N0csO2bV0pDQotKyAgICAgICAgICAgICAgICBNNF9ESVNU
-Uk9fRkxBRz0tRFRBUkdFVF9BTkdTVFJPTT0xDQotKyAgICAgICAgICAgICAgICA7Ow0KLSAgICAg
-ICAgIG90aGVyKQ0KLSAgICAgICAgICAgICAgICAgOzsNCi0gICAgICAgICAqKQ0KLUBAIC00MjUs
-NiArNDMxLDcgQEAgQU1fQ09ORElUSU9OQUwoVEFSR0VUX0ZSVUdBTFdBUkUsIHRlc3QgeCIkd2l0
-aF9kaXN0cm8iID0geGZydWdhbHdhcmUpDQotIEFNX0NPTkRJVElPTkFMKFRBUkdFVF9BTFRMSU5V
-WCwgdGVzdCB4IiR3aXRoX2Rpc3RybyIgPSB4YWx0bGludXgpDQotIEFNX0NPTkRJVElPTkFMKFRB
-UkdFVF9NQU5EUklWQSwgdGVzdCB4IiR3aXRoX2Rpc3RybyIgPSB4bWFuZHJpdmEpDQotIEFNX0NP
-TkRJVElPTkFMKFRBUkdFVF9NRUVHTywgdGVzdCB4IiR3aXRoX2Rpc3RybyIgPSB4bWVlZ28pDQot
-K0FNX0NPTkRJVElPTkFMKFRBUkdFVF9BTkdTVFJPTSwgdGVzdCB4IiR3aXRoX2Rpc3RybyIgPSB4
-YW5nc3Ryb20pDQotIA0KLSBBTV9DT05ESVRJT05BTChIQVZFX1BMWU1PVVRILCB0ZXN0IC1uICIk
-aGF2ZV9wbHltb3V0aCIpDQotIEFNX0NPTkRJVElPTkFMKEhBVkVfU1lTVl9DT01QQVQsIHRlc3Qg
-IiRTWVNURU1fU1lTVl9DT01QQVQiID0gInllcyIpDQotZGlmZiAtLWdpdCBhL3NyYy9sb2NhbGUt
-c2V0dXAuYyBiL3NyYy9sb2NhbGUtc2V0dXAuYw0KLWluZGV4IGQ5YWRmYTMuLjMzMTExZGEgMTAw
-NjQ0DQotLS0tIGEvc3JjL2xvY2FsZS1zZXR1cC5jDQotKysrIGIvc3JjL2xvY2FsZS1zZXR1cC5j
-DQotQEAgLTEzNiw3ICsxMzYsNyBAQCBpbnQgbG9jYWxlX3NldHVwKHZvaWQpIHsNCi0gICAgICAg
-ICAgICAgICAgICAgICAgICAgbG9nX3dhcm5pbmcoIkZhaWxlZCB0byByZWFkIC9ldGMvc3lzY29u
-ZmlnL2xhbmd1YWdlOiAlcyIsIHN0cmVycm9yKC1yKSk7DQotICAgICAgICAgfQ0KLSANCi0tI2Vs
-aWYgZGVmaW5lZChUQVJHRVRfREVCSUFOKSB8fCBkZWZpbmVkKFRBUkdFVF9VQlVOVFUpDQotKyNl
-bGlmIGRlZmluZWQoVEFSR0VUX0RFQklBTikgfHwgZGVmaW5lZChUQVJHRVRfVUJVTlRVKSB8fCBk
-ZWZpbmVkKFRBUkdFVF9BTkdTVFJPTSkNCi0gICAgICAgICBpZiAociA8PSAwICYmDQotICAgICAg
-ICAgICAgIChyID0gcGFyc2VfZW52X2ZpbGUoIi9ldGMvZGVmYXVsdC9sb2NhbGUiLCBORVdMSU5F
-LA0KLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJMQU5HIiwgICAgICAgICAgICAg
-ICZ2YXJpYWJsZXNbVkFSSUFCTEVfTEFOR10sDQotZGlmZiAtLWdpdCBhL3NyYy9zZXJ2aWNlLmMg
-Yi9zcmMvc2VydmljZS5jDQotaW5kZXggZTdhNTYyMi4uZjgyNjc1NCAxMDA2NDQNCi0tLS0gYS9z
-cmMvc2VydmljZS5jDQotKysrIGIvc3JjL3NlcnZpY2UuYw0KLUBAIC02NSw3ICs2NSw3IEBAIHN0
-YXRpYyBjb25zdCBzdHJ1Y3Qgew0KLSAgICAgICAgIHsgImJvb3QuZCIsIFNQRUNJQUxfU1lTSU5J
-VF9UQVJHRVQsICAgUlVOTEVWRUxfU1lTSU5JVCB9LA0KLSAjZW5kaWYNCi0gDQotLSNpZiBkZWZp
-bmVkKFRBUkdFVF9ERUJJQU4pIHx8IGRlZmluZWQoVEFSR0VUX1VCVU5UVSkgfHwgZGVmaW5lZChU
-QVJHRVRfRlJVR0FMV0FSRSkNCi0rI2lmIGRlZmluZWQoVEFSR0VUX0RFQklBTikgfHwgZGVmaW5l
-ZChUQVJHRVRfVUJVTlRVKSB8fCBkZWZpbmVkKFRBUkdFVF9GUlVHQUxXQVJFKSB8fCBkZWZpbmVk
-KFRBUkdFVF9BTkdTVFJPTSkNCi0gICAgICAgICAvKiBEZWJpYW4gc3R5bGUgcmNTLmQgKi8NCi0g
-ICAgICAgICB7ICJyY1MuZCIsICBTUEVDSUFMX1NZU0lOSVRfVEFSR0VULCAgIFJVTkxFVkVMX1NZ
-U0lOSVQgfSwNCi0gI2VuZGlmDQotQEAgLTI0Niw3ICsyNDYsNyBAQCBzdGF0aWMgY2hhciAqc3lz
-dl90cmFuc2xhdGVfbmFtZShjb25zdCBjaGFyICpuYW1lKSB7DQotICAgICAgICAgaWYgKCEociA9
-IG5ldyhjaGFyLCBzdHJsZW4obmFtZSkgKyBzaXplb2YoIi5zZXJ2aWNlIikpKSkNCi0gICAgICAg
-ICAgICAgICAgIHJldHVybiBOVUxMOw0KLSANCi0tI2lmIGRlZmluZWQoVEFSR0VUX0RFQklBTikg
-fHwgZGVmaW5lZChUQVJHRVRfVUJVTlRVKQ0KLSsjaWYgZGVmaW5lZChUQVJHRVRfREVCSUFOKSB8
-fCBkZWZpbmVkKFRBUkdFVF9VQlVOVFUpIHx8IGRlZmluZWQoVEFSR0VUX0FOR1NUUk9NKQ0KLSAg
-ICAgICAgIGlmIChlbmRzd2l0aChuYW1lLCAiLnNoIikpDQotICAgICAgICAgICAgICAgICAvKiBE
-cm9wIERlYmlhbi1zdHlsZSAuc2ggc3VmZml4ICovDQotICAgICAgICAgICAgICAgICBzdHJjcHko
-c3RwY3B5KHIsIG5hbWUpIC0gMywgIi5zZXJ2aWNlIik7DQotQEAgLTI5Nyw3ICsyOTcsNyBAQCBz
-dGF0aWMgaW50IHN5c3ZfdHJhbnNsYXRlX2ZhY2lsaXR5KGNvbnN0IGNoYXIgKm5hbWUsIGNvbnN0
-IGNoYXIgKmZpbGVuYW1lLCBjaGFyDQotICAgICAgICAgICAgICAgICAieC1kaXNwbGF5LW1hbmFn
-ZXIiLCAgICBTUEVDSUFMX0RJU1BMQVlfTUFOQUdFUl9TRVJWSUNFLA0KLSAgICAgICAgICAgICAg
-ICAgIm51bGwiLCAgICAgICAgICAgICAgICAgTlVMTCwNCi0gDQotLSNpZiBkZWZpbmVkKFRBUkdF
-VF9ERUJJQU4pIHx8IGRlZmluZWQoVEFSR0VUX1VCVU5UVSkNCi0rI2lmIGRlZmluZWQoVEFSR0VU
-X0RFQklBTikgfHwgZGVmaW5lZChUQVJHRVRfVUJVTlRVKSB8fCBkZWZpbmVkKFRBUkdFVF9BTkdT
-VFJPTSkNCi0gICAgICAgICAgICAgICAgICJtYWlsLXRyYW5zcG9ydC1hZ2VudCIsIFNQRUNJQUxf
-TUFJTF9UUkFOU0ZFUl9BR0VOVF9UQVJHRVQsDQotICNlbmRpZg0KLSANCi1AQCAtODg3LDcgKzg4
-Nyw3IEBAIHN0YXRpYyBpbnQgc2VydmljZV9sb2FkX3N5c3ZfbmFtZShTZXJ2aWNlICpzLCBjb25z
-dCBjaGFyICpuYW1lKSB7DQotIA0KLSAgICAgICAgIC8qIEZvciBTeXNWIHNlcnZpY2VzIHdlIHN0
-cmlwIHRoZSBib290LiosIHJjLiogYW5kICouc2gNCi0gICAgICAgICAgKiBwcmVmaXhlcy9zdWZm
-aXhlcy4gKi8NCi0tI2lmIGRlZmluZWQoVEFSR0VUX0RFQklBTikgfHwgZGVmaW5lZChUQVJHRVRf
-VUJVTlRVKQ0KLSsjaWYgZGVmaW5lZChUQVJHRVRfREVCSUFOKSB8fCBkZWZpbmVkKFRBUkdFVF9V
-QlVOVFUpIHx8IGRlZmluZWQoVEFSR0VUX0FOR1NUUk9NKQ0KLSAgICAgICAgIGlmIChlbmRzd2l0
-aChuYW1lLCAiLnNoLnNlcnZpY2UiKSkNCi0gICAgICAgICAgICAgICAgIHJldHVybiAtRU5PRU5U
-Ow0KLSAjZW5kaWYNCi1AQCAtOTE0LDcgKzkxNCw3IEBAIHN0YXRpYyBpbnQgc2VydmljZV9sb2Fk
-X3N5c3ZfbmFtZShTZXJ2aWNlICpzLCBjb25zdCBjaGFyICpuYW1lKSB7DQotIA0KLSAgICAgICAg
-ICAgICAgICAgciA9IHNlcnZpY2VfbG9hZF9zeXN2X3BhdGgocywgcGF0aCk7DQotIA0KLS0jaWYg
-ZGVmaW5lZChUQVJHRVRfREVCSUFOKSB8fCBkZWZpbmVkKFRBUkdFVF9VQlVOVFUpDQotKyNpZiBk
-ZWZpbmVkKFRBUkdFVF9ERUJJQU4pIHx8IGRlZmluZWQoVEFSR0VUX1VCVU5UVSkgfHwgZGVmaW5l
-ZChUQVJHRVRfQU5HU1RST00pDQotICAgICAgICAgICAgICAgICBpZiAociA+PSAwICYmIHMtPm1l
-dGEubG9hZF9zdGF0ZSA9PSBVTklUX1NUVUIpIHsNCi0gICAgICAgICAgICAgICAgICAgICAgICAg
-LyogVHJ5IERlYmlhbiBzdHlsZSAqLnNoIHNvdXJjZSdhYmxlIGluaXQgc2NyaXB0cyAqLw0KLSAg
-ICAgICAgICAgICAgICAgICAgICAgICBzdHJjYXQocGF0aCwgIi5zaCIpOw0KLWRpZmYgLS1naXQg
-YS9zcmMvdXRpbC5jIGIvc3JjL3V0aWwuYw0KLWluZGV4IGYwMDUxZWUuLjVhZjkxNjEgMTAwNjQ0
-DQotLS0tIGEvc3JjL3V0aWwuYw0KLSsrKyBiL3NyYy91dGlsLmMNCi1AQCAtMzQyNiw2ICszNDI2
-LDE4IEBAIHZvaWQgc3RhdHVzX3dlbGNvbWUodm9pZCkgew0KLSANCi0gICAgICAgIGlmICghYW5z
-aV9jb2xvcikNCi0gICAgICAgICAgICAgICAgY29uc3RfY29sb3IgPSAiMTszNSI7IC8qIEJyaWdo
-dCBNYWdlbnRhIGZvciBNZWVHbyAqLw0KLSsjZWxpZiBkZWZpbmVkKFRBUkdFVF9BTkdTVFJPTSkN
-Ci0rDQotKyAgICAgICAgaWYgKCFwcmV0dHlfbmFtZSkgew0KLSsgICAgICAgICAgICAgICAgaWYg
-KChyID0gcmVhZF9vbmVfbGluZV9maWxlKCIvZXRjL2FuZ3N0cm9tLXZlcnNpb24iLCAmcHJldHR5
-X25hbWUpKSA8IDApIHsNCi0rDQotKyAgICAgICAgICAgICAgICAgICAgICAgIGlmIChyICE9IC1F
-Tk9FTlQpDQotKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbG9nX3dhcm5pbmcoIkZh
-aWxlZCB0byByZWFkIC9ldGMvYW5nc3Ryb20tdmVyc2lvbjogJXMiLCBzdHJlcnJvcigtcikpOw0K
-LSsgICAgICAgICAgICAgICAgfQ0KLSsgICAgICAgIH0NCi0rDQotKyAgICAgICBpZiAoIWFuc2lf
-Y29sb3IpDQotKyAgICAgICAgICAgICAgIGNvbnN0X2NvbG9yID0gIjE7MzUiOyAvKiBCcmlnaHQg
-TWFnZW50YSBmb3IgQW5nc3Ryb20gKi8NCi0gI2VuZGlmDQotIA0KLSAgICAgICAgIGlmICghcHJl
-dHR5X25hbWUgJiYgIWNvbnN0X3ByZXR0eSkNCi0tLSANCi0xLjYuNi4xDQotDQpkaWZmIC0tZ2l0
-IGEvcmVjaXBlcy9zeXN0ZW1kL3N5c3RlbWRfZ2l0LmJiIGIvcmVjaXBlcy9zeXN0ZW1kL3N5c3Rl
-bWRfZ2l0LmJiDQppbmRleCA2Njg4ZWVkLi45YzdhZjZhIDEwMDY0NA0KLS0tIGEvcmVjaXBlcy9z
-eXN0ZW1kL3N5c3RlbWRfZ2l0LmJiDQorKysgYi9yZWNpcGVzL3N5c3RlbWQvc3lzdGVtZF9naXQu
-YmINCkBAIC0xNSwxMiArMTUsMTEgQEAgUFJfYXBwZW5kID0gIiske1NSQ1BWfSINCiANCiBpbmhl
-cml0IGF1dG90b29scyB2YWxhIHVwZGF0ZS1hbHRlcm5hdGl2ZXMNCiANCi1UQUcgPSAiN2E2MDAw
-YTY4MjQxZDIzYzlmNmY2YmRlNDdiMmNmYTljMTgxODlkYSINCitUQUcgPSAiZWMyMDAyZjg0OTI4
-YzBiNTkyMWE5NjFjYjJiODYzNzU2M2YyOWRhYSINCiANCiBTUkNfVVJJID0gImdpdDovL2Fub25n
-aXQuZnJlZWRlc2t0b3Aub3JnL3N5c3RlbWQ7cHJvdG9jb2w9Z2l0O3RhZz0ke1RBR30gXA0KICAg
-ICAgICAgICAgZmlsZTovL2V4ZWN1dGUucGF0Y2ggXA0KICAgICAgICAgICAgZmlsZTovLzAwMDEt
-c3lzdGVtZC1kaXNhYmxlLXhtbC1maWxlLXN0dWZmLWFuZC1pbnRyb3NwZWN0aW9uLnBhdGNoIFwN
-Ci0gICAgICAgICAgIGZpbGU6Ly8wMDAzLUFuZ3N0cm9tLXN1cHBvcnQucGF0Y2ggXA0KICAgICAg
-ICAgICAgZmlsZTovL3JlcGxhY2VfYWNjcGV0NC5wYXRjaCBcDQogICAgICAgICAgICBmaWxlOi8v
-c2VyaWFsLWdldHR5QC5zZXJ2aWNlIFwNCiAgICAgICAgICAgIg0KLS0gDQoxLjcuNS4xDQoNCg==
-
---=-NmjaQFtEx0GOs/xts4Jw--
-
---=-vKvqcer+3hRn3BbZw8KI
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3JqsUACgkQPX1aK2wOHVir9wCfSaGA3bI9Ns+UqxWcm8hZmEKT
-N5QAmQFqb8DpnCPjdLQrxOfbm3/k00OD
-=YwwU
------END PGP SIGNATURE-----
-
---=-vKvqcer+3hRn3BbZw8KI--
