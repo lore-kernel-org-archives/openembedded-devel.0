@@ -1,25 +1,25 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from ibawizard.net ([82.208.49.253] helo=mengele.ibawizard.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1QJtcD-00025t-JW
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1QJtgr-0002Di-IN
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 22:33:09 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.3])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QJtUG-0007QU-40
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 22:24:56 +0200
-From: Phil Blundell <philb@gnu.org>
+	Tue, 10 May 2011 22:37:57 +0200
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id 3DA351D36124; Tue, 10 May 2011 22:35:06 +0200 (CEST)
+Date: Tue, 10 May 2011 22:35:05 +0200
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ly8vueldd2.fsf@ensc-virt.intern.sigma-chemnitz.de>
-References: <4DC8F3A2.2090005@nedap.com> <20110510100020.GA10493@mx.loc>
-	<1305022004.8000.149.camel@phil-desktop>
-	<ly8vueldd2.fsf@ensc-virt.intern.sigma-chemnitz.de>
-Date: Tue, 10 May 2011 21:30:19 +0100
-Message-ID: <1305059419.3355.108.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: x86_64
+Message-ID: <20110510203505.GD1544@ibawizard.net>
+References: <1304243449-12028-1-git-send-email-heroor@ti.com>
+	<20110501173015.GI27708@ibawizard.net>
+	<BANLkTimKHp5M5VvMR21+C_rSRBiu2M0BKQ@mail.gmail.com>
+	<20110506090243.GE26466@ibawizard.net>
+	<BANLkTikt+X9ocYn-0bsfwzbCcZDQFnm_ww@mail.gmail.com>
+	<20110508180923.GG26466@ibawizard.net>
+	<BANLkTikQ81NTULOMEu9k9+nvkpB4m3iSrw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <BANLkTikQ81NTULOMEu9k9+nvkpB4m3iSrw@mail.gmail.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH 1/2] zeromq: Add zeromq socket library.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,47 +33,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2011 20:33:09 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 10 May 2011 20:37:57 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tue, 2011-05-10 at 18:38 +0200, Enrico Scholz wrote:
-> Phil Blundell <philb@gnu.org> writes:
+Siddharth Heroor <heroor@gmail.com> [2011-05-10 15:04:04]:
+
+> I tried to build it and it fails. The error is as follows -
 > 
-> > "x86_64" seems to be what's currently used as the architecture name.  If
-> > you want a value for ${MACHINE} then I guess something like
-> > "x86_64-generic" would do.  I don't think there's any prohibition
-> > against underscores in machine names.
-> 
-> OVERRIDES don't work correctly with this. E.g. (bitbake 1.10) a recipe
-> with
-> 
-> | xx = "default"
-> | xx_x86_64 = "XX"
-> 
-> results into
-> 
-> | OVERRIDES="...:x86_64:..."
-> | # xx_x86_64=XX
-> | xx_x86_64="XX"
-> | # xx=default
-> | xx="default"
+> ERROR: Logfile of failure stored in:
+> /swcoe/sdk/sid/arago/build-oe/angstrom-setup-scripts/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/zeromq-2.1.6-r0/temp/log.do_configure.10701
+> Log data follows:
+> | + do_configure
+> | + ./autogen.sh
+> | autogen.sh: error: could not find libtool.  libtool is required to
+> run autogen.sh.
+> NOTE: package zeromq-2.1.6-r0: task do_configure: Failed
 
-Yes, you're right.  But it seems as though _append overrides do work
-(see my other mail to Bernhard Reutner-Fischer), and I don't think the
-bitbake documentation notes that underscores are prohibited in
-OVERRIDES.  So I think this is a bug in bitbake and should be fixed
-there.
+Hm sorry, but this is strange. I don't know why it shoudln't find libtool...
+Log here:
 
-Changing the architecture to x86-64 would be a possibility, but clearly
-there are already folks using x86_64 (since there are files in site/
-with that naming, for example) so this seems like it would be best
-avoided.  Also it would require a tmpdir version bump to take care of
-BUILD_SYS for all the people who are cross compiling from x86_64, and
-that also seems like something best avoided if possible.
+	+ cd /opt/devel/oe/ts72xx-test/tmp-uclibc-angstrom-2010.x/work/armv4t-angstrom-linux-uclibceabi/zeromq-2.1.6-r0/zeromq-2.1.6
+	+ do_configure
+	+ ./autogen.sh
+	autoreconf: Entering directory `.'
+	autoreconf: configure.in: not using Gettext
+	autoreconf: running: aclocal -I config -I config --force -I config
+	...
 
-p.
+> By removing do_configure_prepend() from the recipe, I am able to build zeromq.
+> Why do we need to run autogen.sh to regenerate the configure script?
+> Won't the shipped configure work?
 
+It apparently wasn't working quite correctly in some scenario, that's why it's
+there. Maybe automake or something was complaining about the shipped version
+of the macros? Sorry, I don't remember it correctly now, but it was tested by
+Craig also, so I've pushed it as it is.
 
+Anyone with the better knowledge of the autofoo stuff, who could shed some
+light on this?
+
+> Also, shouldn't most the recipe be in an .inc file and the checksums
+> in a version.bb?
+
+AFAIK, there's no such guideline. If you do plan to add for example package
+which would track the git version of zeromq, then yes, it would be good idea
+to split it and reuse the common parts.
+
+-- ynezz
 
 
