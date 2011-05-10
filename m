@@ -1,23 +1,25 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QJtYm-0004mL-G4 for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 22:29:39 +0200
-Received: from f053032140.adsl.alicedsl.de ([78.53.32.140]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QJtXO-0004HX-Hk for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 20:28:10 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <philb@gnu.org>) id 1QJtcD-00025t-JW
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 May 2011 22:33:09 +0200
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.3])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QJtUG-0007QU-40
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 May 2011 22:24:56 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201105101555.50984.sgh@sgh.dk>
-References: <201105101555.50984.sgh@sgh.dk>
-Date: Tue, 10 May 2011 22:26:51 +0200
-Message-ID: <1305059211.9982.18.camel@mattotaupa>
+In-Reply-To: <ly8vueldd2.fsf@ensc-virt.intern.sigma-chemnitz.de>
+References: <4DC8F3A2.2090005@nedap.com> <20110510100020.GA10493@mx.loc>
+	<1305022004.8000.149.camel@phil-desktop>
+	<ly8vueldd2.fsf@ensc-virt.intern.sigma-chemnitz.de>
+Date: Tue, 10 May 2011 21:30:19 +0100
+Message-ID: <1305059419.3355.108.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: acpid-1.0.10-r5.1 fails compilation
+X-Mailer: Evolution 2.30.3 
+Subject: Re: x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,113 +33,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2011 20:29:40 -0000
-X-Groupsio-MsgNum: 31885
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-e+N1/81TvfTafhH4bhsz"
-
---=-e+N1/81TvfTafhH4bhsz
+X-List-Received-Date: Tue, 10 May 2011 20:33:09 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Dear S=C3=B8ren,
+On Tue, 2011-05-10 at 18:38 +0200, Enrico Scholz wrote:
+> Phil Blundell <philb@gnu.org> writes:
+> 
+> > "x86_64" seems to be what's currently used as the architecture name.  If
+> > you want a value for ${MACHINE} then I guess something like
+> > "x86_64-generic" would do.  I don't think there's any prohibition
+> > against underscores in machine names.
+> 
+> OVERRIDES don't work correctly with this. E.g. (bitbake 1.10) a recipe
+> with
+> 
+> | xx = "default"
+> | xx_x86_64 = "XX"
+> 
+> results into
+> 
+> | OVERRIDES="...:x86_64:..."
+> | # xx_x86_64=XX
+> | xx_x86_64="XX"
+> | # xx=default
+> | xx="default"
 
-
-Am Dienstag, den 10.05.2011, 15:55 +0200 schrieb S=C3=B8ren Holm:
-
-> ERROR: Logfile of failure stored in: /home/sgh/oe-new-oe/build-vmc16/tmp/=
-work/i686-angstrom-linux/acpid-1.0.10-r5.1/temp/log.do_compile.14235
-> Log data follows:
-> | ERROR: Function 'do_compile' failed (see /home/sgh/oe-new-oe/build-vmc1=
-6/tmp/work/i686-angstrom-linux/acpid-1.0.10-r5.1/temp/log.do_compile.14235 =
-for further information)
-> | + cd /home/sgh/oe-new-oe/build-vmc16/tmp/work/i686-angstrom-linux/acpid=
--1.0.10-r5.1/acpid-1.0.10
-> | + do_compile
-> | + oe_runmake 'CC=3Di686-angstrom-linux-gcc -march=3Dpentiumpro --sysroo=
-t=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux' CROSS=
-=3Di686-angstrom-linux-
-> | + oenote make -j 8 'CC=3Di686-angstrom-linux-gcc -march=3Dpentiumpro --=
-sysroot=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux'=
- CROSS=3Di686-angstrom-linux-
-> | + echo NOTE: 'make -j 8 CC=3Di686-angstrom-linux-gcc -march=3Dpentiumpr=
-o --sysroot=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-li=
-nux CROSS=3Di686-angstrom-linux-'
-> | NOTE: make -j 8 CC=3Di686-angstrom-linux-gcc -march=3Dpentiumpro --sysr=
-oot=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux CROS=
-S=3Di686-angstrom-linux-
-> | + make -j 8 'CC=3Di686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=
-=3D/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux' CROSS=
-=3Di686-angstrom-linux-
-> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
-w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
--Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-> acpid.o acpid.c
-> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
-w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
--Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-> acpi_ids.o acpi_ids.c
-> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
-w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
--Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-> connection_list.o connection_list.c
-> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
-w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
--Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-> event.o event.c
-> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
-w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
--Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-> input_layer.o input_layer.c
-> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
-w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
--Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-> libnetlink.o libnetlink.c
-> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
-w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
--Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-> netlink.o netlink.c
-> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
-w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
--Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-> proc.o proc.c
-> | i686-angstrom-linux-gcc -march=3Dpentiumpro --sysroot=3D/home/sgh/oe-ne=
-w-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef =
--Wshadow -D_GNU_SOURCE -O2 -g -DVERSION=3D"\"1.0.10\""   -c -o=20
-> sock.o sock.c
-> | cc1: warnings being treated as errors
-> | libnetlink.c: In function 'addraw_l':
-> | libnetlink.c:521:56: error: comparison between signed and unsigned inte=
-ger expressions
-> | make: *** [libnetlink.o] Error 1
-> | make: *** Waiting for unfinished jobs....
-> | + die 'oe_runmake failed'
-> | + oefatal 'oe_runmake failed'
-> | + echo FATAL: 'oe_runmake failed'
-> | FATAL: oe_runmake failed
-> | + exit 1
-> NOTE: package acpid-1.0.10-r5.1: task do_compile: Failed
-
-I could build it fine using `minimal` as distribution for `MACHINE =3D
-"beagleboard"`. You seem to compile for i686. I do not know what differs
+Yes, you're right.  But it seems as though _append overrides do work
+(see my other mail to Bernhard Reutner-Fischer), and I don't think the
+bitbake documentation notes that underscores are prohibited in
+OVERRIDES.  So I think this is a bug in bitbake and should be fixed
 there.
 
+Changing the architecture to x86-64 would be a possibility, but clearly
+there are already folks using x86_64 (since there are files in site/
+with that naming, for example) so this seems like it would be best
+avoided.  Also it would require a tmpdir version bump to take care of
+BUILD_SYS for all the people who are cross compiling from x86_64, and
+that also seems like something best avoided if possible.
 
-Thanks,
+p.
 
-Paul
 
---=-e+N1/81TvfTafhH4bhsz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk3Jn34ACgkQPX1aK2wOHViA4gCfRfXWSrs4ZNRV1sgGG7lovUTy
-NwwAnjlXlbB9Ax81tHcebQtU1EXKUpnE
-=fUzm
------END PGP SIGNATURE-----
-
---=-e+N1/81TvfTafhH4bhsz--
