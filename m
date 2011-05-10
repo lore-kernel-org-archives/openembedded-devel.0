@@ -1,34 +1,43 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <msmith@cbnco.com>) id 1QJpC7-0002pC-NZ
+	(envelope-from <rep.dot.nop@gmail.com>) id 1QJpdK-0005YP-Jp
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 May 2011 17:49:56 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 29AD7BE1174
+	Tue, 10 May 2011 18:18:02 +0200
+Received: by fxm19 with SMTP id 19so4979293fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 May 2011 11:47:11 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 18823-07 for <openembedded-devel@lists.openembedded.org>; 
-	Tue, 10 May 2011 11:47:11 -0400 (EDT)
-Received: from juice.ott.cti.com (dmzgw2.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id E4C80BE0DE1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 May 2011 11:47:10 -0400 (EDT)
-Date: Tue, 10 May 2011 11:47:10 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
-X-X-Sender: michael@juice.ott.cti.com
+	Tue, 10 May 2011 09:15:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=LY6A+dXEHdJuNFn0pVpM8HgFxf22gdqWrN59Ahl2HSc=;
+	b=eQwnNvDJ/IElqVsU9touGppjkr7fxI+cv3sBgtUtR3fs1atr/s1jhBpWohrxXp0mBe
+	E+6U6OQnjBTOCnkeMskRQSxir1Bi1ScAQQ9eQvit1zonVq4fXyF0a2sDBANl+ZdLoiLy
+	P+jf1LeXf7uqz4earZk5tLKjzyx/B0xADSfH8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=rkrmMAFCHsoYeZgNn3sdac/sx5SnrBGbkLwDikUlYdFeaklrLGLFQa6c2GxzYTwwkc
+	pswGW2wOfDG1rRWRsum/bS9KfdHN7dOvsJTwQGScLM6cGH0sh5JPrXwZt46ZafQ6wJs2
+	bTt5TeM+FJoggh4jvZZvY9XA3a2brYLHAPwG4=
+Received: by 10.223.86.130 with SMTP id s2mr887968fal.115.1305044116825;
+	Tue, 10 May 2011 09:15:16 -0700 (PDT)
+Received: from s42.loc (85-127-250-41.dynamic.xdsl-line.inode.at
+	[85.127.250.41])
+	by mx.google.com with ESMTPS id p16sm2443108fax.21.2011.05.10.09.15.14
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 10 May 2011 09:15:15 -0700 (PDT)
+Received: from cow by s42.loc with local (Exim 4.75)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1QJpau-0004dE-K1; Tue, 10 May 2011 18:15:32 +0200
+Date: Tue, 10 May 2011 18:15:32 +0200
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <lyiptilga8.fsf@ensc-virt.intern.sigma-chemnitz.de>
-Message-ID: <Pine.LNX.4.64.1105101144120.12200@juice.ott.cti.com>
+Message-ID: <20110510161532.GB10493@mx.loc>
 References: <4DC8F3A2.2090005@nedap.com> <20110510100020.GA10493@mx.loc>
-	<1305022004.8000.149.camel@phil-desktop> <4DC91B33.9080807@nedap.com>
-	<1305025696.8000.155.camel@phil-desktop> <4DC91E4E.3070109@nedap.com>
-	<4DC9363B.6070909@nedap.com> <1305038299.8000.178.camel@phil-desktop>
-	<4DC9541B.6070208@nedap.com>
-	<lyiptilga8.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	<1305022004.8000.149.camel@phil-desktop>
 MIME-Version: 1.0
-X-Virus-Scanned: amavisd-new at cbnco.com
+In-Reply-To: <1305022004.8000.149.camel@phil-desktop>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,65 +52,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2011 15:49:56 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Tue, 10 May 2011 16:18:02 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tue, 10 May 2011, Enrico Scholz wrote:
+On Tue, May 10, 2011 at 11:06:44AM +0100, Phil Blundell wrote:
+>On Tue, 2011-05-10 at 12:00 +0200, Bernhard Reutner-Fischer wrote:
+>> On Tue, May 10, 2011 at 10:13:22AM +0200, Jaap de Jong wrote:
+>> >Hi All,
+>> >
+>> >is there any support for 64 bit intel/amd machines?
+>> >And if so, how to build for them?
+>> 
+>> Can we settle on a name please for i want to add a qemu machine for
+>> testing x86_64?
+>> 
+>> x8664
+>> amd64
+>> ...
+>> 
+>> Opinions?
+>
+>"x86_64" seems to be what's currently used as the architecture name.  If
 
-> Jaap de Jong <jaap.dejong@nedap.com> writes:
-> 
-> > TARGET_ARCH       = "x86_64"
-> 
-> did this ever work?  OE uses hardcoded 'lib' (instead of 'lib64') at
-> various places.
+That doesn't work as arch-dependent e.g. append, does it.
 
-Hi Enrico,
+FOO_append_x86_64 = '-mcpu=barcelona'
 
-This is my MACHINE config:
+>you want a value for ${MACHINE} then I guess something like
+>"x86_64-generic" would do.  I don't think there's any prohibition
+>against underscores in machine names.
 
-TARGET_ARCH = "x86_64"
-
-# We can't reuse the same -native builds as 32-bit machines, because
-# ours need to be staged into staging/blah/lib64 instead of lib.
-# Set blah to x86_64-buildoe64-linux to keep them separate.
-BUILD_VENDOR = "-buildoe64"
-
-base_libdir = "${base_prefix}/lib64"
-libdir = "${exec_prefix}/lib64"
-
-# Some packages install files into /lib/packagename, not /lib64/packagename.
-FILES_${PN} += "${prefix}/lib/${PN}/*"
-FILES_${PN}-dbg += "${prefix}/lib/${PN}/.debug"
-
-# glibc's sysdeps/unix/sysv/linux/configure script only fixes
-# libc_cv_slibdir if prefix is "/usr". With prefix of "", we need to fix it
-# so libc libs don't get installed into /lib.
-export libc_cv_slibdir="/lib64"
-
---------
-
-I had to amend gcc-cross-intermediate:
-
-do_compile_prepend() {
-	# On x86_64, glibc-initial stages crti.o to
-	# x86_64-oe-linux/lib64/crti.o.
-	# When gcc-cross-intermediate tries to build libgcc, it looks
-	# for x86_64-oe-linux/lib/../lib64/crti.o.
-	# Create the "lib" dir so this shenanigan works.
-	install -d ${STAGING_DIR_TARGET}/lib
-}
-
-
-And gcc-cross:
-
-# glibc only built the 64-bit stubs, so don't try to build a 32-bit gcc
-# XXX maybe belongs in oe recipes/gcc/gcc-cross4.inc
-EXTRA_OECONF_append_x86_64 = " --disable-multilib"
-
-
-I think that's it - for the recipes I build, all the other fixes have been 
-pushed long ago.
-
-Mike
+Well, I was talking about the arch.
 
 
