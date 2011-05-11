@@ -1,28 +1,32 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1QKHZ2-0005PK-S4
+	(envelope-from <Tom_Rini@mentor.com>) id 1QKHl3-0005dE-55
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 May 2011 00:07:28 +0200
-Received: by wye20 with SMTP id 20so827204wye.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 May 2011 15:04:41 -0700 (PDT)
-Received: by 10.216.230.213 with SMTP id j63mr991716weq.20.1305151481724;
-	Wed, 11 May 2011 15:04:41 -0700 (PDT)
-Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id o6sm375610wbo.3.2011.05.11.15.04.40
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 11 May 2011 15:04:40 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1084)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1305145805-14609-4-git-send-email-eric@eukrea.com>
-Date: Thu, 12 May 2011 00:04:38 +0200
-Message-Id: <FEADF586-6D32-4F4F-9EAE-2B3DF5CF0E00@dominion.thruhere.net>
-References: <1305145805-14609-1-git-send-email-eric@eukrea.com>
-	<1305145805-14609-4-git-send-email-eric@eukrea.com>
-To: =?iso-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-X-Mailer: Apple Mail (2.1084)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 3/6] angstrom-2010: prefer qt 4.7.3
+	Thu, 12 May 2011 00:19:53 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1QKHiM-0006N3-RJ from Tom_Rini@mentor.com ;
+	Wed, 11 May 2011 15:17:06 -0700
+Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 11 May 2011 15:15:17 -0700
+Received: from [172.30.80.16] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
+	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
+	Wed, 11 May 2011 15:17:06 -0700
+Message-ID: <4DCB0ACF.2080605@mentor.com>
+Date: Wed, 11 May 2011 15:16:47 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <cover.1304925139.git.stefan@buglabs.net>
+In-Reply-To: <cover.1304925139.git.stefan@buglabs.net>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 11 May 2011 22:15:17.0219 (UTC)
+	FILETIME=[E87DB330:01CC1028]
+Subject: Re: [PATCH 2011.03-maintenance 0/7] Openjdk fixes from master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,37 +40,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 May 2011 22:07:28 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 11 May 2011 22:19:53 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Op 11 mei 2011, om 22:30 heeft Eric B=E9nard het volgende geschreven:
+On 05/09/2011 12:29 AM, Stefan Schmidt wrote:
+> From: Stefan Schmidt <stefan@buglabs.net>
+> 
+> Hello.
+> 
+> Another pull request for openjdk related fixes. They have been in master for
+> quite some time now and we tested them heavily at Buglabs. They improve the
+> openjdk build situation a lot making it more robust and eliminating random
+> failures.
+> 
+> The patch from myself is for the 2011.03 release only as it covers a merge
+> failure I introduced with my last pull request.
 
-> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
-> Cc: Koen Kooi <koen@dominion.thruhere.net>
+Sorry for the delay, this has been applied now.  Thanks!
 
-Acked-by: Koen Kooi <koen@dominion.thruhere.net>
+- -- 
+Tom Rini
+Mentor Graphics Corporation
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
 
-> ---
-> .../include/angstrom-2010-preferred-versions.inc   |    2 +-
-> 1 files changed, 1 insertions(+), 1 deletions(-)
->=20
-> diff --git a/conf/distro/include/angstrom-2010-preferred-versions.inc =
-b/conf/distro/include/angstrom-2010-preferred-versions.inc
-> index 611c4e7..87da854 100644
-> --- a/conf/distro/include/angstrom-2010-preferred-versions.inc
-> +++ b/conf/distro/include/angstrom-2010-preferred-versions.inc
-> @@ -1,5 +1,5 @@
-> ANGSTROM_MESA_VERSION =3D "7.9.1"
-> -ANGSTROM_QT_VERSION ?=3D "4.7.2"
-> +ANGSTROM_QT_VERSION ?=3D "4.7.3"
-> ANGSTROM_LIBTOOL_VERSION =3D "2.4"
-> # Use new sysroot feature
-> LIBTOOL_HAS_SYSROOT =3D "yes"
-> --=20
-> 1.7.0.4
->=20
-
+iQEcBAEBAgAGBQJNywrDAAoJEI4NMjfc3nJx6nMIAKNH8EaQlc6qxcdMmrmGufec
+ktz8a7EODHHQSvwOhLl8x+BTtds8jQBTd79xD4tJSQxf6XJMd3ZnaEeBBYtJF0VK
+CCnIm5AItoaFOP5OdxsCF5+0DiuifdQA86k4q+R2wkAt58VP14oII95D1YGwYvwj
+YHmc9ryMwo8+vFDDrQWveEOKdndkJVVLdlKt7a8NWQygNu5Obt131OvJFvgQKnCQ
+Dr6ZPkn8E+73AlKINU/fjhfjwUiCszvWErpeUoH6aght5RLWp8pxLC8wTqoPw7RI
+F3nlH0Hjd5RAIlhdvTPWnpS45IYEjg7e/HQiN8lPOsd37XFqnMJzJuauMARtB34=
+=Z432
+-----END PGP SIGNATURE-----
 
 
