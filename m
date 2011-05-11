@@ -1,37 +1,35 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QK3AG-00084Y-O9
+	(envelope-from <raj.khem@gmail.com>) id 1QK3SH-0003C4-T1
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 May 2011 08:44:56 +0200
-Received: by ewy5 with SMTP id 5so56034ewy.6
+	Wed, 11 May 2011 09:03:34 +0200
+Received: by pwj9 with SMTP id 9so123965pwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 May 2011 23:42:07 -0700 (PDT)
+	Wed, 11 May 2011 00:00:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=hEUozNInOXc5lJkHClQw6A3xsXvtQJJ4UWTWZyZsSPw=;
-	b=ZhT1D32AcJgbvHmnCRiHJkOpHNxGyilUTw5tCeSTA6ctQ2hQpq7hy3gfgbkyBlyUhx
-	Me+UAvfi5PadcZombFNJMRiQY8wnIaDCdRmzf/q7yup30Xca2QsCYR6sUJCjmDQZSa96
-	KftJmxokCIxpb1+tD5isEY+OBTT0Zfml7M3jo=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=60FdzVLqHCruJjMhKefMZnOeG/WT+vKqpfaPQ3OcR8w=;
+	b=UGZ6i43mIFvqtXZGQ28mMI3PX4ny73/ZCClltayhEpQQg9LdNcEvSFMa+UuccSMvU9
+	Jj+Ip/PdqIA+y2vo4tReV3YpOaHXZxL6k9U1Llve4SWC4JbzeB4CHg8wyrLcYeQiKeZx
+	aRCmDzkK6950oNa2zd854NHxGO3oZPWM9JhOw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=CFyCV+F0RoWWYziGGhIdbTMEHUc/skt40UZvP/sXV/txoT9ARFMDrZZklY1Q7I4Nfb
-	EDwrWyzejwB9QS0CgCNGAujNgxTlY92mPV6Lmc6gAZUHh09bmjHMogT34V/IaTA3Rm/2
-	buhHHRQ3MIEmh3sI0iU2nNdPeW/f6tkC2bEms=
-Received: by 10.14.41.193 with SMTP id h41mr3893718eeb.48.1305096121109; Tue,
-	10 May 2011 23:42:01 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.14.53.5 with HTTP; Tue, 10 May 2011 23:41:31 -0700 (PDT)
-In-Reply-To: <BANLkTik6=EJ0vt59kQM2KR0GJji1M+nvdA@mail.gmail.com>
-References: <cover.1305027503.git.Martin.Jansa@gmail.com>
-	<fe1c32740aeeb35847e5da470d9dec1583ba9610.1305027503.git.Martin.Jansa@gmail.com>
-	<BANLkTik6=EJ0vt59kQM2KR0GJji1M+nvdA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 10 May 2011 23:41:31 -0700
-Message-ID: <BANLkTi=HNBoTJQ9CFK4nMYHLQHcL9o2Tjg@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=ktSX+dwhleqtoBfelek1jotswJjL1jlBx/N84MEIMnT8vAm8/VIyzgOE5DJwO45fIr
+	4VGunk7/ynjp7hhVICjoJYL0E8OuHEARckpFhQSFIbfw+aiwxOHkyPHbZZ/vjZLoM3Wc
+	32QTxCvBSXDwHRwudp0XuHu5TW022tjFqB6u8=
+Received: by 10.68.51.67 with SMTP id i3mr11053787pbo.51.1305097235030;
+	Wed, 11 May 2011 00:00:35 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id g3sm4725709pbk.82.2011.05.11.00.00.32
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 11 May 2011 00:00:33 -0700 (PDT)
+From: raj.khem@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 4/9] xinput-calibrator: add new version 0.7.5 and include .inc to recipe directly
+Date: Wed, 11 May 2011 00:00:27 -0700
+Message-Id: <1305097227-23338-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [meta-oe][PATCH] uclibc_git.bb: Backport epoll implementation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,138 +43,425 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 May 2011 06:44:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 11 May 2011 07:03:34 -0000
 
-On Tue, May 10, 2011 at 11:17 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Tue, May 10, 2011 at 4:40 AM, Martin Jansa <martin.jansa@gmail.com> wr=
-ote:
->> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->> ---
->> =C2=A0.../xinput-calibrator/xinput-calibrator.inc =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0| =C2=A0 12 ----------
->> =C2=A0.../xinput-calibrator/xinput-calibrator_0.6.1.bb =C2=A0 | =C2=A0 1=
-7 ---------------
->> =C2=A0.../xinput-calibrator/xinput-calibrator_0.7.5.bb =C2=A0 | =C2=A0 2=
-2 ++++++++++++++++++++
->> =C2=A03 files changed, 22 insertions(+), 29 deletions(-)
->> =C2=A0delete mode 100644 meta-oe/recipes-graphics/xinput-calibrator/xinp=
-ut-calibrator.inc
->> =C2=A0delete mode 100644 meta-oe/recipes-graphics/xinput-calibrator/xinp=
-ut-calibrator_0.6.1.bb
->> =C2=A0create mode 100644 meta-oe/recipes-graphics/xinput-calibrator/xinp=
-ut-calibrator_0.7.5.bb
->>
->> diff --git a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrato=
-r.inc b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator.inc
->> deleted file mode 100644
->> index 691a45c..0000000
->> --- a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator.inc
->> +++ /dev/null
->> @@ -1,12 +0,0 @@
->> -DESCRIPTION =3D "A generic touchscreen calibration program for X.Org"
->> -HOMEPAGE =3D "http://www.freedesktop.org/wiki/Software/xinput_calibrato=
-r"
->> -LICENSE =3D "MIT/X11"
->> -DEPENDS =3D "virtual/libx11 libxi"
->> -
->> -INC_PR =3D "r8"
->> -
->> -inherit autotools
->> -
->> -RDEPENDS_${PN} =3D "xinput"
->> -RRECOMMENDS_${PN} =3D "pointercal-xinput"
->> -
->> diff --git a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrato=
-r_0.6.1.bb b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0=
-.6.1.bb
->> deleted file mode 100644
->> index 2eb3cc9..0000000
->> --- a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.6.1=
-.bb
->> +++ /dev/null
->> @@ -1,17 +0,0 @@
->> -require xinput-calibrator.inc
->> -
->> -LIC_FILES_CHKSUM =3D "file://src/calibrator.cpp;endline=3D22;md5=3D998e=
-238a7638a7446eaeb02398f691fc"
->> -SRC_URI =3D "git://github.com/tias/xinput_calibrator.git;protocol=3Dgit=
-"
->> -
->> -SRCREV =3D "d2ce98b3f638667dd64b6d718721379b2dc750a7"
->> -PR =3D "${INC_PR}.0"
->> -S =3D "${WORKDIR}/git/"
->> -
->> -do_install_append() {
->> - =C2=A0 =C2=A0 =C2=A0 =C2=A0install -d ${D}${bindir}
->> - =C2=A0 =C2=A0 =C2=A0 =C2=A0install -m 0755 scripts/xinput_calibrator_p=
-ointercal.sh ${D}${bindir}/xinput_calibrator_once.sh
->> - =C2=A0 =C2=A0 =C2=A0 =C2=A0ln -s ${bindir}/xinput_calibrator_x11 ${D}$=
-{bindir}/xinput_calibrator
->> - =C2=A0 =C2=A0 =C2=A0 =C2=A0install -d ${D}${datadir}/applications/
->> - =C2=A0 =C2=A0 =C2=A0 =C2=A0install -m 0755 scripts/xinput_calibrator.d=
-esktop ${D}${datadir}/applications/xinput-calibrator.desktop
->> - =C2=A0 =C2=A0 =C2=A0 =C2=A0install -m 0755 scripts/xinput_calibrator_g=
-et_hal_calibration.sh ${D}${bindir}/xinput_calibrator_get_hal_calibration.s=
-h
->> -}
->> diff --git a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrato=
-r_0.7.5.bb b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0=
-.7.5.bb
->> new file mode 100644
->> index 0000000..4024883
->> --- /dev/null
->> +++ b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5=
-.bb
->> @@ -0,0 +1,22 @@
->> +DESCRIPTION =3D "A generic touchscreen calibration program for X.Org"
->> +HOMEPAGE =3D "http://www.freedesktop.org/wiki/Software/xinput_calibrato=
-r"
->> +LICENSE =3D "MIT/X11"
->> +LIC_FILES_CHKSUM =3D "file://src/calibrator.cpp;endline=3D22;md5=3D998e=
-238a7638a7446eaeb02398f691fc"
->> +DEPENDS =3D "virtual/libx11 libxi"
->> +
->> +inherit autotools
->> +
->> +RDEPENDS_${PN} =3D "xinput"
->> +RRECOMMENDS_${PN} =3D "pointercal-xinput"
->> +
->> +SRC_URI =3D "http://github.com/downloads/tias/xinput_calibrator/xinput_=
-calibrator-${PV}.tar.gz"
->
->
-> this is causing some gripe.
->
-> $ wget http://github.com/downloads/tias/xinput_calibrator/xinput_calibrat=
-or-0.7.5.tar.gz
-> --2011-05-10 23:16:17--
-> http://github.com/downloads/tias/xinput_calibrator/xinput_calibrator-0.7.=
-5.tar.gz
-> Resolving github.com... 207.97.227.239
-> Connecting to github.com|207.97.227.239|:80... connected.
-> HTTP request sent, awaiting response... 301 Moved Permanently
-> Location: https://github.com/downloads/tias/xinput_calibrator/xinput_cali=
-brator-0.7.5.tar.gz
-> [following]
-> --2011-05-10 23:16:17--
-> https://github.com/downloads/tias/xinput_calibrator/xinput_calibrator-0.7=
-.5.tar.gz
-> Connecting to github.com|207.97.227.239|:443... connected.
-> ERROR: certificate common name `*.github.com' doesn't match requested
-> host name `github.com'.
-> To connect to github.com insecurely, use `--no-check-certificate'.
->
->
-> Which seems to be a known problem with wget as described here
-> http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D409938
->
-> So one option we =C2=A0have is to cache the tar on angstrom mirror.
->
+From: Khem Raj <raj.khem@gmail.com>
 
-or we could fix it with patching bitbake.conf something like this
-http://git.openembedded.org/cgit.cgi/openembedded-core-contrib/commit/?h=3D=
-kraj/misc-fixes&id=3D570e4eedba1c7de84db20de8f2c8730ce6c8a249
+Many applications e.g. firefox need it
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../uclibc/uclibc-git/uclibc-epoll.patch           |  378 ++++++++++++++++++++
+ meta-oe/recipes-core/uclibc/uclibc_git.bb          |    3 +-
+ 2 files changed, 380 insertions(+), 1 deletions(-)
+ create mode 100644 meta-oe/recipes-core/uclibc/uclibc-git/uclibc-epoll.patch
+
+diff --git a/meta-oe/recipes-core/uclibc/uclibc-git/uclibc-epoll.patch b/meta-oe/recipes-core/uclibc/uclibc-git/uclibc-epoll.patch
+new file mode 100644
+index 0000000..5d0cded
+--- /dev/null
++++ b/meta-oe/recipes-core/uclibc/uclibc-git/uclibc-epoll.patch
+@@ -0,0 +1,378 @@
++From 00c44b9f566f34d1fa3f2889771730b8496b6f95 Mon Sep 17 00:00:00 2001
++From: Peter S. Mazinger <ps.m@gmx.net>
++Date: Tue, 22 Mar 2011 00:02:10 +0000
++Subject: add epoll_pwait()
++
++Add epoll.h header for sparc.
++Update epoll.h from glibc (disabling though epoll_create1).
++
++Signed-off-by: Peter S. Mazinger <ps.m@gmx.net>
++---
++diff --git a/libc/sysdeps/linux/common/epoll.c b/libc/sysdeps/linux/common/epoll.c
++index dda9228..4fbba16 100644
++--- a/libc/sysdeps/linux/common/epoll.c
+++++ b/libc/sysdeps/linux/common/epoll.c
++@@ -1,6 +1,6 @@
++ /* vi: set sw=4 ts=4: */
++ /*
++- * epoll_create() / epoll_ctl() / epoll_wait() for uClibc
+++ * epoll_create() / epoll_ctl() / epoll_wait() / epoll_pwait() for uClibc
++  *
++  * Copyright (C) 2000-2006 Erik Andersen <andersen@uclibc.org>
++  *
++@@ -10,23 +10,19 @@
++ #include <sys/syscall.h>
++ #include <sys/epoll.h>
++ 
++-/*
++- * epoll_create()
++- */
++ #ifdef __NR_epoll_create
++ _syscall1(int, epoll_create, int, size)
++ #endif
++ 
++-/*
++- * epoll_ctl()
++- */
++ #ifdef __NR_epoll_ctl
++-_syscall4(int,epoll_ctl, int, epfd, int, op, int, fd, struct epoll_event *, event)
+++_syscall4(int, epoll_ctl, int, epfd, int, op, int, fd, struct epoll_event *, event)
++ #endif
++ 
++-/*
++- * epoll_wait()
++- */
++ #ifdef __NR_epoll_wait
++ _syscall4(int, epoll_wait, int, epfd, struct epoll_event *, events, int, maxevents, int, timeout)
++ #endif
+++
+++#ifdef __NR_epoll_pwait
+++_syscall5(int, epoll_pwait, int, epfd, struct epoll_event *, events, int, maxevents, int, timeout,
+++	  const sigset_t *, ss)
+++#endif
++diff --git a/libc/sysdeps/linux/common/stubs.c b/libc/sysdeps/linux/common/stubs.c
++index 655c640..0e740b1 100644
++--- a/libc/sysdeps/linux/common/stubs.c
+++++ b/libc/sysdeps/linux/common/stubs.c
++@@ -63,6 +63,10 @@ make_stub(epoll_ctl)
++ make_stub(epoll_wait)
++ #endif
++ 
+++#ifndef __NR_epoll_pwait
+++make_stub(epoll_pwait)
+++#endif
+++
++ #ifndef __NR_fdatasync
++ make_stub(fdatasync)
++ #endif
++diff --git a/libc/sysdeps/linux/common/sys/epoll.h b/libc/sysdeps/linux/common/sys/epoll.h
++index 44e814b..bf196d2 100644
++--- a/libc/sysdeps/linux/common/sys/epoll.h
+++++ b/libc/sysdeps/linux/common/sys/epoll.h
++@@ -1,4 +1,4 @@
++-/* Copyright (C) 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
+++/* Copyright (C) 2002-2006, 2007, 2008, 2009 Free Software Foundation, Inc.
++    This file is part of the GNU C Library.
++ 
++    The GNU C Library is free software; you can redistribute it and/or
++@@ -22,6 +22,26 @@
++ #include <stdint.h>
++ #include <sys/types.h>
++ 
+++/* Get __sigset_t.  */
+++#include <bits/sigset.h>
+++
+++#ifndef __sigset_t_defined
+++# define __sigset_t_defined
+++typedef __sigset_t sigset_t;
+++#endif
+++
+++
+++#if 0
+++/* Flags to be passed to epoll_create1.  */
+++enum
+++  {
+++    EPOLL_CLOEXEC = 02000000,
+++#define EPOLL_CLOEXEC EPOLL_CLOEXEC
+++    EPOLL_NONBLOCK = 04000
+++#define EPOLL_NONBLOCK EPOLL_NONBLOCK
+++  };
+++#endif
+++
++ 
++ enum EPOLL_EVENTS
++   {
++@@ -55,9 +75,9 @@ enum EPOLL_EVENTS
++ 
++ 
++ /* Valid opcodes ( "op" parameter ) to issue to epoll_ctl().  */
++-#define EPOLL_CTL_ADD 1	/* Add a file decriptor to the interface.  */
++-#define EPOLL_CTL_DEL 2	/* Remove a file decriptor from the interface.  */
++-#define EPOLL_CTL_MOD 3	/* Change file decriptor epoll_event structure.  */
+++#define EPOLL_CTL_ADD 1	/* Add a file descriptor to the interface.  */
+++#define EPOLL_CTL_DEL 2	/* Remove a file descriptor from the interface.  */
+++#define EPOLL_CTL_MOD 3	/* Change file descriptor epoll_event structure.  */
++ 
++ 
++ typedef union epoll_data
++@@ -83,6 +103,12 @@ __BEGIN_DECLS
++    returned by epoll_create() should be closed with close().  */
++ extern int epoll_create (int __size) __THROW;
++ 
+++#if 0
+++/* Same as epoll_create but with an FLAGS parameter.  The unused SIZE
+++   parameter has been dropped.  */
+++extern int epoll_create1 (int __flags) __THROW;
+++#endif
+++
++ 
++ /* Manipulate an epoll instance "epfd". Returns 0 in case of success,
++    -1 in case of error ( the "errno" variable will contain the
++@@ -107,6 +133,16 @@ extern int epoll_ctl (int __epfd, int __op, int __fd,
++ extern int epoll_wait (int __epfd, struct epoll_event *__events,
++ 		       int __maxevents, int __timeout);
++ 
+++
+++/* Same as epoll_wait, but the thread's signal mask is temporarily
+++   and atomically replaced with the one provided as parameter.
+++
+++   This function is a cancellation point and therefore not marked with
+++   __THROW.  */
+++extern int epoll_pwait (int __epfd, struct epoll_event *__events,
+++			int __maxevents, int __timeout,
+++			__const __sigset_t *__ss);
+++
++ __END_DECLS
++ 
++ #endif /* sys/epoll.h */
++diff --git a/libc/sysdeps/linux/sparc/sys/epoll.h b/libc/sysdeps/linux/sparc/sys/epoll.h
++new file mode 100644
++index 0000000..83a61da
++--- a/dev/null
+++++ b/libc/sysdeps/linux/sparc/sys/epoll.h
++@@ -0,0 +1,147 @@
+++/* Copyright (C) 2002-2006, 2007, 2008 Free Software Foundation, Inc.
+++   This file is part of the GNU C Library.
+++
+++   The GNU C Library is free software; you can redistribute it and/or
+++   modify it under the terms of the GNU Lesser General Public
+++   License as published by the Free Software Foundation; either
+++   version 2.1 of the License, or (at your option) any later version.
+++
+++   The GNU C Library is distributed in the hope that it will be useful,
+++   but WITHOUT ANY WARRANTY; without even the implied warranty of
+++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+++   Lesser General Public License for more details.
+++
+++   You should have received a copy of the GNU Lesser General Public
+++   License along with the GNU C Library; if not, write to the Free
+++   Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+++   02111-1307 USA.  */
+++
+++#ifndef	_SYS_EPOLL_H
+++#define	_SYS_EPOLL_H	1
+++
+++#include <stdint.h>
+++#include <sys/types.h>
+++
+++/* Get __sigset_t.  */
+++#include <bits/sigset.h>
+++
+++#ifndef __sigset_t_defined
+++# define __sigset_t_defined
+++typedef __sigset_t sigset_t;
+++#endif
+++
+++
+++#if 0
+++/* Flags to be passed to epoll_create2.  */
+++enum
+++  {
+++    EPOLL_CLOEXEC = 0x400000,
+++#define EPOLL_CLOEXEC EPOLL_CLOEXEC
+++    EPOLL_NONBLOCK = 0x4000
+++#define EPOLL_NONBLOCK EPOLL_NONBLOCK
+++  };
+++#endif
+++
+++
+++enum EPOLL_EVENTS
+++  {
+++    EPOLLIN = 0x001,
+++#define EPOLLIN EPOLLIN
+++    EPOLLPRI = 0x002,
+++#define EPOLLPRI EPOLLPRI
+++    EPOLLOUT = 0x004,
+++#define EPOLLOUT EPOLLOUT
+++    EPOLLRDNORM = 0x040,
+++#define EPOLLRDNORM EPOLLRDNORM
+++    EPOLLRDBAND = 0x080,
+++#define EPOLLRDBAND EPOLLRDBAND
+++    EPOLLWRNORM = 0x100,
+++#define EPOLLWRNORM EPOLLWRNORM
+++    EPOLLWRBAND = 0x200,
+++#define EPOLLWRBAND EPOLLWRBAND
+++    EPOLLMSG = 0x400,
+++#define EPOLLMSG EPOLLMSG
+++    EPOLLERR = 0x008,
+++#define EPOLLERR EPOLLERR
+++    EPOLLHUP = 0x010,
+++#define EPOLLHUP EPOLLHUP
+++    EPOLLRDHUP = 0x2000,
+++#define EPOLLRDHUP EPOLLRDHUP
+++    EPOLLONESHOT = (1 << 30),
+++#define EPOLLONESHOT EPOLLONESHOT
+++    EPOLLET = (1 << 31)
+++#define EPOLLET EPOLLET
+++  };
+++
+++
+++/* Valid opcodes ( "op" parameter ) to issue to epoll_ctl().  */
+++#define EPOLL_CTL_ADD 1	/* Add a file descriptor to the interface.  */
+++#define EPOLL_CTL_DEL 2	/* Remove a file descriptor from the interface.  */
+++#define EPOLL_CTL_MOD 3	/* Change file descriptor epoll_event structure.  */
+++
+++
+++typedef union epoll_data
+++{
+++  void *ptr;
+++  int fd;
+++  uint32_t u32;
+++  uint64_t u64;
+++} epoll_data_t;
+++
+++struct epoll_event
+++{
+++  uint32_t events;	/* Epoll events */
+++  epoll_data_t data;	/* User data variable */
+++};
+++
+++
+++__BEGIN_DECLS
+++
+++/* Creates an epoll instance.  Returns an fd for the new instance.
+++   The "size" parameter is a hint specifying the number of file
+++   descriptors to be associated with the new instance.  The fd
+++   returned by epoll_create() should be closed with close().  */
+++extern int epoll_create (int __size) __THROW;
+++
+++#if 0
+++/* Same as epoll_create but with an additional FLAGS parameter.  */
+++extern int epoll_create2 (int __size, int __flags) __THROW;
+++#endif
+++
+++
+++/* Manipulate an epoll instance "epfd". Returns 0 in case of success,
+++   -1 in case of error ( the "errno" variable will contain the
+++   specific error code ) The "op" parameter is one of the EPOLL_CTL_*
+++   constants defined above. The "fd" parameter is the target of the
+++   operation. The "event" parameter describes which events the caller
+++   is interested in and any associated user data.  */
+++extern int epoll_ctl (int __epfd, int __op, int __fd,
+++		      struct epoll_event *__event) __THROW;
+++
+++
+++/* Wait for events on an epoll instance "epfd". Returns the number of
+++   triggered events returned in "events" buffer. Or -1 in case of
+++   error with the "errno" variable set to the specific error code. The
+++   "events" parameter is a buffer that will contain triggered
+++   events. The "maxevents" is the maximum number of events to be
+++   returned ( usually size of "events" ). The "timeout" parameter
+++   specifies the maximum wait time in milliseconds (-1 == infinite).
+++
+++   This function is a cancellation point and therefore not marked with
+++   __THROW.  */
+++extern int epoll_wait (int __epfd, struct epoll_event *__events,
+++		       int __maxevents, int __timeout);
+++
+++
+++/* Same as epoll_wait, but the thread's signal mask is temporarily
+++   and atomically replaced with the one provided as parameter.
+++
+++   This function is a cancellation point and therefore not marked with
+++   __THROW.  */
+++extern int epoll_pwait (int __epfd, struct epoll_event *__events,
+++			int __maxevents, int __timeout,
+++			__const __sigset_t *__ss);
+++
+++__END_DECLS
+++
+++#endif /* sys/epoll.h */
++diff --git a/libc/sysdeps/linux/x86_64/sys/epoll.h b/libc/sysdeps/linux/x86_64/sys/epoll.h
++index 02672d3..6b90d54 100644
++--- a/libc/sysdeps/linux/x86_64/sys/epoll.h
+++++ b/libc/sysdeps/linux/x86_64/sys/epoll.h
++@@ -1,4 +1,4 @@
++-/* Copyright (C) 2002,2003,2004,2005,2006 Free Software Foundation, Inc.
+++/* Copyright (C) 2002,2003,2004,2005,2006,2007,2008 Free Software Foundation, Inc.
++    This file is part of the GNU C Library.
++ 
++    The GNU C Library is free software; you can redistribute it and/or
++@@ -22,6 +22,26 @@
++ #include <stdint.h>
++ #include <sys/types.h>
++ 
+++/* Get __sigset_t.  */
+++#include <bits/sigset.h>
+++
+++#ifndef __sigset_t_defined
+++# define __sigset_t_defined
+++typedef __sigset_t sigset_t;
+++#endif
+++
+++
+++#if 0
+++/* Flags to be passed to epoll_create1.  */
+++enum
+++  {
+++    EPOLL_CLOEXEC = 02000000,
+++#define EPOLL_CLOEXEC EPOLL_CLOEXEC
+++    EPOLL_NONBLOCK = 04000
+++#define EPOLL_NONBLOCK EPOLL_NONBLOCK
+++  };
+++#endif
+++
++ 
++ enum EPOLL_EVENTS
++   {
++@@ -45,6 +65,8 @@ enum EPOLL_EVENTS
++ #define EPOLLERR EPOLLERR
++     EPOLLHUP = 0x010,
++ #define EPOLLHUP EPOLLHUP
+++    EPOLLRDHUP = 0x2000,
+++#define EPOLLRDHUP EPOLLRDHUP
++     EPOLLONESHOT = (1 << 30),
++ #define EPOLLONESHOT EPOLLONESHOT
++     EPOLLET = (1 << 31)
++@@ -81,6 +103,12 @@ __BEGIN_DECLS
++    returned by epoll_create() should be closed with close().  */
++ extern int epoll_create (int __size) __THROW;
++ 
+++#if 0
+++/* Same as epoll_create but with an FLAGS parameter.  The unused SIZE
+++   parameter has been dropped.  */
+++extern int epoll_create1 (int __flags) __THROW;
+++#endif
+++
++ 
++ /* Manipulate an epoll instance "epfd". Returns 0 in case of success,
++    -1 in case of error ( the "errno" variable will contain the
++@@ -105,6 +133,16 @@ extern int epoll_ctl (int __epfd, int __op, int __fd,
++ extern int epoll_wait (int __epfd, struct epoll_event *__events,
++ 		       int __maxevents, int __timeout);
++ 
+++
+++/* Same as epoll_wait, but the thread's signal mask is temporarily
+++   and atomically replaced with the one provided as parameter.
+++
+++   This function is a cancellation point and therefore not marked with
+++   __THROW.  */
+++extern int epoll_pwait (int __epfd, struct epoll_event *__events,
+++			int __maxevents, int __timeout,
+++			__const __sigset_t *__ss);
+++
++ __END_DECLS
++ 
++ #endif /* sys/epoll.h */
++--
++cgit v0.8.2.1
+diff --git a/meta-oe/recipes-core/uclibc/uclibc_git.bb b/meta-oe/recipes-core/uclibc/uclibc_git.bb
+index 3719ea2..cbc8ab8 100644
+--- a/meta-oe/recipes-core/uclibc/uclibc_git.bb
++++ b/meta-oe/recipes-core/uclibc/uclibc_git.bb
+@@ -11,7 +11,7 @@ SRCREV="074930dd7f2a18a7013cdb72cc38136f3be39c40"
+ PR_append = "+gitr${SRCPV}"
+ 
+ require uclibc.inc
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ PROVIDES += "virtual/${TARGET_PREFIX}libc-for-gcc"
+ 
+ #recent versions uclibc require real kernel headers
+@@ -39,5 +39,6 @@ SRC_URI = "git://uclibc.org/uClibc.git;branch=master;protocol=git \
+ 	file://argp-support.patch \
+ 	file://argp-headers.patch \
+ 	file://remove_attribute_optimize_Os.patch \
++	file://uclibc-epoll.patch \
+ 	"
+ S = "${WORKDIR}/git"
+-- 
+1.7.4.1
+
 
 
