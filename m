@@ -1,42 +1,32 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QK3jb-0003Tc-O7
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 May 2011 09:21:27 +0200
-Received: by fxm19 with SMTP id 19so163538fxm.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QK3x6-0003pN-Tk for openembedded-devel@lists.openembedded.org;
+	Wed, 11 May 2011 09:35:25 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QK3uN-0001ur-8u for openembedded-devel@lists.openembedded.org;
+	Wed, 11 May 2011 09:32:35 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 May 2011 09:32:35 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 May 2011 00:18:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=iD5L6MFeK6HQxuWR5dkiihCOXVjoiCpNHIuFK8dPxPI=;
-	b=CTOIsIxo9cMO6p0H4LEWagPXtbHcdSPb80KKbBXZVouarkvhTVUl1bn1Jqz8rWStjr
-	cqjlwTdQjrwOA1RjJCiy9Ja4Piq9Yjen6GRbtK848t6HLh5scp+bTAuPIneS3Wawf2qE
-	ecgZxWSVqzcGs23SrlawT0CFqV5kMqRdAnj1s=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=p3vLyrYVPpsFIr65XR4b8tN6ASCGJmaG3sq20MN31iigXES8Z+5J1e8La5Hg9Q+6Oa
-	La1Y589kI/Jj1WVNtklsXHcte5L8wQDIDIYd3b4t1ZVN0NQ08qWZ/vPmJDqpHSRSa7jf
-	m8K0CWAxrf+z9B/MmfW4npDP63JLgCuY4POHQ=
-Received: by 10.223.55.200 with SMTP id v8mr275244fag.82.1305098317636;
-	Wed, 11 May 2011 00:18:37 -0700 (PDT)
-Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id c24sm2633723fak.31.2011.05.11.00.18.36
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 11 May 2011 00:18:36 -0700 (PDT)
-Date: Wed, 11 May 2011 09:18:30 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 11 May 2011 09:32:35 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110511071830.GD5171@jama.jama.net>
-References: <cover.1305027503.git.Martin.Jansa@gmail.com>
-	<fe1c32740aeeb35847e5da470d9dec1583ba9610.1305027503.git.Martin.Jansa@gmail.com>
-	<BANLkTik6=EJ0vt59kQM2KR0GJji1M+nvdA@mail.gmail.com>
-	<BANLkTi=HNBoTJQ9CFK4nMYHLQHcL9o2Tjg@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <BANLkTi=HNBoTJQ9CFK4nMYHLQHcL9o2Tjg@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 4/9] xinput-calibrator: add new version 0.7.5 and include .inc to recipe directly
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 11 May 2011 09:32:21 +0200
+Message-ID: <iqde25$jrd$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+X-Enigmail-Version: 1.0.1
+Subject: [2011.03-maintenance] Pull request #18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,114 +40,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 May 2011 07:21:27 -0000
-X-Groupsio-MsgNum: 31903
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="XvKFcGCOAo53UbWW"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 11 May 2011 07:35:25 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---XvKFcGCOAo53UbWW
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Tue, May 10, 2011 at 11:41:31PM -0700, Khem Raj wrote:
-> On Tue, May 10, 2011 at 11:17 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> > On Tue, May 10, 2011 at 4:40 AM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
-> > this is causing some gripe.
-> >
-> > $ wget http://github.com/downloads/tias/xinput_calibrator/xinput_calibr=
-ator-0.7.5.tar.gz
-> > --2011-05-10 23:16:17--
-> > http://github.com/downloads/tias/xinput_calibrator/xinput_calibrator-0.=
-7.5.tar.gz
-> > Resolving github.com... 207.97.227.239
-> > Connecting to github.com|207.97.227.239|:80... connected.
-> > HTTP request sent, awaiting response... 301 Moved Permanently
-> > Location: https://github.com/downloads/tias/xinput_calibrator/xinput_ca=
-librator-0.7.5.tar.gz
-> > [following]
-> > --2011-05-10 23:16:17--
-> > https://github.com/downloads/tias/xinput_calibrator/xinput_calibrator-0=
-=2E7.5.tar.gz
-> > Connecting to github.com|207.97.227.239|:443... connected.
-> > ERROR: certificate common name `*.github.com' doesn't match requested
-> > host name `github.com'.
-> > To connect to github.com insecurely, use `--no-check-certificate'.
+Tom,
 
-strange here it finally resolves to cloud.github.com with common name
-matching
+Please pull the 11 commits from here:
 
-wget http://github.com/downloads/tias/xinput_calibrator/xinput_calibrator-0=
-=2E7.5.tar.gz
---2011-05-11 09:13:11--  http://github.com/downloads/tias/xinput_calibrator=
-/xinput_calibrator-0.7.5.tar.gz
-Resolving github.com... 207.97.227.239
-Connecting to github.com|207.97.227.239|:80... connected.
-HTTP request sent, awaiting response... 301 Moved Permanently
-Location: https://github.com/downloads/tias/xinput_calibrator/xinput_calibr=
-ator-0.7.5.tar.gz [following]
---2011-05-11 09:13:11--  https://github.com/downloads/tias/xinput_calibrato=
-r/xinput_calibrator-0.7.5.tar.gz
-Connecting to github.com|207.97.227.239|:443... connected.
-HTTP request sent, awaiting response... 302 Found
-Location: http://cloud.github.com/downloads/tias/xinput_calibrator/xinput_c=
-alibrator-0.7.5.tar.gz [following]
---2011-05-11 09:13:12--  http://cloud.github.com/downloads/tias/xinput_cali=
-brator/xinput_calibrator-0.7.5.tar.gz
-Resolving cloud.github.com... 205.251.205.31, 205.251.205.41, 205.251.205.9=
-3, ...
-Connecting to cloud.github.com|205.251.205.31|:80... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 355313 (347K) [application/octet-stream]
-Saving to: `xinput_calibrator-0.7.5.tar.gz.1'
+URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+Branch: 2011.03-maintenance
 
-100%[=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D>] 355=A0=
-313      624K/s   in 0,6s
+Koen Kooi (6):
+      libgles-omap3: prune source a bit better
+      libgles-omap3: make initscript work with both busybox and bash
+      libgles-omap3: update 4.03 release to 02
+      libgles-omap3 4.03.00.02: make it the default
+      nmap 3.81: fix license
+      linux-omap-psp 2.6.32: support accept4 call
 
-2011-05-11 09:13:18 (624 KB/s) - `xinput_calibrator-0.7.5.tar.gz.1' saved [=
-355313/355313]
+Otavio Salvador (1):
+      wrapper/install: add -t support
 
-but maybe my wget should also check certificate before accepting 302
+Petr Štetiar (1):
+      zeromq: add new recipe for version 2.1.6
 
-$ wget --version
-GNU Wget 1.12 built on linux-gnu.
+Philip Balister (1):
+      uhd : Enable usrp e100 utilities and package them seperately.
 
-> >
-> > Which seems to be a known problem with wget as described here
-> > http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D409938
-> >
-> > So one option we =A0have is to cache the tar on angstrom mirror.
-> >
->=20
-> or we could fix it with patching bitbake.conf something like this
-> http://git.openembedded.org/cgit.cgi/openembedded-core-contrib/commit/?h=
-=3Dkraj/misc-fixes&id=3D570e4eedba1c7de84db20de8f2c8730ce6c8a249
+Steve Sakoman (2):
+      wpa-supplicant: Enable CONFIG_CTRL_IFACE_DBUS and
+      omap3-sgx-modules 4.03.00.02: fix build for latest kernels
 
-looks reasonable as we're checking checksum on downloaded archive anyway
 
-Cheers,
+All commits are cherry-picks from .dev
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+regards,
 
---XvKFcGCOAo53UbWW
-Content-Type: application/pgp-signature
+Koen
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEARECAAYFAk3KOEYACgkQN1Ujt2V2gBwP3wCfX9wvLp6F5Gq6/VzZPbogd5It
-rtQAmwTjDVKD2x1D/VHFmxl5AmBrtXiM
-=RyS9
+iD8DBQFNyjuFMkyGM64RGpERAm+BAJ4tgwgOUuYPuNQlRuAj+fP/3uFeigCfaVvy
+ki0ACXu85l/VXuT5/NK9GAw=
+=VYa7
 -----END PGP SIGNATURE-----
 
---XvKFcGCOAo53UbWW--
+
+
