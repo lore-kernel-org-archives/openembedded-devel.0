@@ -1,31 +1,22 @@
-Received: from exch01.praxiseng.com ([71.16.158.232])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dpsmith@praxiseng.com>) id 1QK7xN-0000EI-0R
+	(envelope-from <philb@gnu.org>) id 1QKCzd-00087m-5B
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 May 2011 13:51:57 +0200
-Received: from exch02.praxislan01.com ([192.168.200.77]) by
-	exch01.praxiseng.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Wed, 11 May 2011 07:49:04 -0400
-Received: from exch02.praxislan01.com ([127.0.0.1]) by exch02 ([127.0.0.1])
-	with mapi id 14.01.0270.001; Wed, 11 May 2011 07:49:04 -0400
-From: "Daniel P. Smith" <dpsmith@praxiseng.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] Puzzled over Angstrom generated kernel on a new board
-Thread-Index: AcwPOdq8iN+rJmT4TLOg4+SvaqByOgAJGLAAABw5XiA=
-Date: Wed, 11 May 2011 11:49:04 +0000
-Message-ID: <25BE6376FCDB1A44A12A866DA4936762528895@exch02>
-References: <25BE6376FCDB1A44A12A866DA493676252871F@exch02>
-	<iqbung$ak0$1@dough.gmane.org>
-In-Reply-To: <iqbung$ak0$1@dough.gmane.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [192.168.201.28]
-MIME-Version: 1.0
-X-OriginalArrivalTime: 11 May 2011 11:49:04.0673 (UTC)
-	FILETIME=[6D822910:01CC0FD1]
-Subject: Re: Puzzled over Angstrom generated kernel on a new board
+	Wed, 11 May 2011 19:14:37 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QKCYm-0000xR-IO
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 11 May 2011 18:46:52 +0200
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1305062085.9982.62.camel@mattotaupa>
+References: <1305062085.9982.62.camel@mattotaupa>
+Date: Wed, 11 May 2011 18:11:51 +0100
+Message-ID: <1305133911.2421.29.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: minimal-uclibc: systemd fails with `src/manager.c:257:42: error: 'EPOLL_CLOEXEC' undeclared (first use in this function)`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,44 +30,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 May 2011 11:51:57 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 11 May 2011 17:14:37 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Koen Kooi
-> Sent: Tuesday, May 10, 2011 2:05 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] Puzzled over Angstrom generated kernel on a new board
->=20
->=20
-> Try defining
->=20
-> UBOOT_ENTRYPOINT =3D "0x80008000"
-> UBOOT_LOADADDRESS =3D "0x80008000"
->=20
-> You probably need to change the values to match your hw, though
+On Tue, 2011-05-10 at 23:14 +0200, Paul Menzel wrote:
+> I am no uClibc expert, but do you know if uClibc will provide
+> `EPOLL_CLOEXEC` in the near future? How should systemd fix that?
 
-Haha, my apologies and thanks as I was looking through the bitbake logs for=
- the kernel and found that the recipe recreates the uImage file setting the=
- entry and load addr's to 0x20008000, where as the CNS3xxx is expecting 0x0=
-0008000. But this brings up the question for me is why does the kernel reci=
-pes recreate the uImage? The make uImage command will/should pull the zrela=
-ddr from the sub-arch's Makefile.boot. I would assume it is so OE can provi=
-de the flexibility, but I don't like to make assumptions.
+It's not just EPOLL_CLOEXEC: uClibc seems to be missing epoll_create1()
+entirely.  As far as I know there's nothing complex about that, though:
+it's just a standard syscall wrapper, so I don't know why it would have
+been deliberately left out.  I guess you'd have to ask the uClibc h4x0rs
+about that.
 
+There probably is no trivial workaround available to systemd.  If you
+wanted a quick hack to make it work then you could call
+syscall(SYS_epoll_create1, O_CLOEXEC) manually.  Or you could perhaps
+eliminate the usage of EPOLL_CLOEXEC in favour of a separate fcntl()
+call, but that may not be safe if systemd is multithreaded.
 
-On a side note, has anyone considered cataloging the variety of variables t=
-hat can be set by a recipe author? I would have never known about the two K=
-oen pointed out had I not asked here or spent hours poring over the interna=
-ls to find out where 0x20008000 was coming from.
+p.
 
-
-V/r,
-Daniel P. Smith
 
 
 
