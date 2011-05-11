@@ -1,27 +1,28 @@
-Received: from 64.mail-out.ovh.net ([91.121.185.65])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1QKGI2-0003e9-Ms
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <koen@dominion.thruhere.net>) id 1QKHZ2-0005PK-S4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 May 2011 22:45:50 +0200
-Received: (qmail 15225 invoked by uid 503); 11 May 2011 20:06:07 -0000
-Received: from b6.ovh.net (HELO mail412.ha.ovh.net) (213.186.33.56)
-	by 64.mail-out.ovh.net with SMTP; 11 May 2011 20:06:06 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 11 May 2011 22:36:25 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 11 May 2011 22:36:23 +0200
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 May 2011 22:27:55 +0200
-Message-Id: <1305145675-12434-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-X-Ovh-Tracer-Id: 17529980076416609609
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: [PATCH] busybox_git: update to today's master
+	Thu, 12 May 2011 00:07:28 +0200
+Received: by wye20 with SMTP id 20so827204wye.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 May 2011 15:04:41 -0700 (PDT)
+Received: by 10.216.230.213 with SMTP id j63mr991716weq.20.1305151481724;
+	Wed, 11 May 2011 15:04:41 -0700 (PDT)
+Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
+	by mx.google.com with ESMTPS id o6sm375610wbo.3.2011.05.11.15.04.40
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 11 May 2011 15:04:40 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1084)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1305145805-14609-4-git-send-email-eric@eukrea.com>
+Date: Thu, 12 May 2011 00:04:38 +0200
+Message-Id: <FEADF586-6D32-4F4F-9EAE-2B3DF5CF0E00@dominion.thruhere.net>
+References: <1305145805-14609-1-git-send-email-eric@eukrea.com>
+	<1305145805-14609-4-git-send-email-eric@eukrea.com>
+To: =?iso-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+X-Mailer: Apple Mail (2.1084)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 3/6] angstrom-2010: prefer qt 4.7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,47 +36,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 May 2011 20:45:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 11 May 2011 22:07:28 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-this patch also fix build failure because of missing group file.
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- recipes/busybox/busybox_git.bb |    7 +++++--
- 1 files changed, 5 insertions(+), 2 deletions(-)
+Op 11 mei 2011, om 22:30 heeft Eric B=E9nard het volgende geschreven:
 
-diff --git a/recipes/busybox/busybox_git.bb b/recipes/busybox/busybox_git.bb
-index 3a6477f..a12eef2 100644
---- a/recipes/busybox/busybox_git.bb
-+++ b/recipes/busybox/busybox_git.bb
-@@ -3,9 +3,9 @@ PR = "${INC_PR}.0"
- 
- FILESPATHPKG =. "busybox-git:"
- 
--SRCREV = "6596380f52cd48b8b44443bb5677ec8caf538761"
-+SRCREV = "10c0131a8a1b3db7fd6b23b72ebd7b33afc7b018"
- 
--PV = "1.18.2+gitr${SRCREV}"
-+PV = "1.18.4+gitr${SRCREV}"
- 
- S = "${WORKDIR}/git"
- 
-@@ -20,8 +20,11 @@ SRC_URI = "\
-   file://busybox-httpd \
-   file://busybox-udhcpd \
-   file://default.script file://simple.script \
-+  file://group \
-   file://hwclock.sh \
-   file://hwclock-default \
-+  file://inetd \
-+  file://inetd.conf \
-   file://mount.busybox \
-   file://mountall \
-   file://passwd \
--- 
-1.7.0.4
+> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+> Cc: Koen Kooi <koen@dominion.thruhere.net>
+
+Acked-by: Koen Kooi <koen@dominion.thruhere.net>
+
+> ---
+> .../include/angstrom-2010-preferred-versions.inc   |    2 +-
+> 1 files changed, 1 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/conf/distro/include/angstrom-2010-preferred-versions.inc =
+b/conf/distro/include/angstrom-2010-preferred-versions.inc
+> index 611c4e7..87da854 100644
+> --- a/conf/distro/include/angstrom-2010-preferred-versions.inc
+> +++ b/conf/distro/include/angstrom-2010-preferred-versions.inc
+> @@ -1,5 +1,5 @@
+> ANGSTROM_MESA_VERSION =3D "7.9.1"
+> -ANGSTROM_QT_VERSION ?=3D "4.7.2"
+> +ANGSTROM_QT_VERSION ?=3D "4.7.3"
+> ANGSTROM_LIBTOOL_VERSION =3D "2.4"
+> # Use new sysroot feature
+> LIBTOOL_HAS_SYSROOT =3D "yes"
+> --=20
+> 1.7.0.4
+>=20
 
 
 
