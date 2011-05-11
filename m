@@ -1,30 +1,29 @@
 Received: from 64.mail-out.ovh.net ([91.121.185.65])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1QKGDo-00031k-Md
+	(envelope-from <eric@eukrea.com>) id 1QKGDp-00031i-8A
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 May 2011 22:41:28 +0200
-Received: (qmail 17721 invoked by uid 503); 11 May 2011 20:08:24 -0000
+	Wed, 11 May 2011 22:41:29 +0200
+Received: (qmail 17630 invoked by uid 503); 11 May 2011 20:08:22 -0000
 Received: from b6.ovh.net (HELO mail412.ha.ovh.net) (213.186.33.56)
-	by 64.mail-out.ovh.net with SMTP; 11 May 2011 20:08:24 -0000
+	by 64.mail-out.ovh.net with SMTP; 11 May 2011 20:08:22 -0000
 Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 11 May 2011 22:38:43 +0200
+	by b0.ovh.net with SMTP; 11 May 2011 22:38:41 +0200
 Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
 	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 11 May 2011 22:38:41 +0200
+	by ns0.ovh.net with SMTP; 11 May 2011 22:38:40 +0200
 From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 May 2011 22:30:03 +0200
-Message-Id: <1305145805-14609-5-git-send-email-eric@eukrea.com>
+Date: Wed, 11 May 2011 22:30:00 +0200
+Message-Id: <1305145805-14609-2-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1305145805-14609-1-git-send-email-eric@eukrea.com>
 References: <1305145805-14609-1-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 17568823623319072077
+X-Ovh-Tracer-Id: 17568542148342361418
 X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
 X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
 X-Spam-Check: DONE|U 0.5/N
-Cc: Marco Cavallini <m.cavallini@koansoftware.com>
-Subject: [PATCH 4/6] kaeilos-2009: prefer qt 4.7.3
+Subject: [PATCH 1/6] qt4: introduce version 4.7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,29 +37,490 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 May 2011 20:41:28 -0000
+X-List-Received-Date: Wed, 11 May 2011 20:41:29 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
-Cc: Marco Cavallini <m.cavallini@koansoftware.com>
----
- .../include/kaeilos-2009-preferred-versions.inc    |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+only qt4-embedded and qt4-native recipe were tested
 
-diff --git a/conf/distro/include/kaeilos-2009-preferred-versions.inc b/conf/distro/include/kaeilos-2009-preferred-versions.inc
-index 498f5fb..27c78d6 100644
---- a/conf/distro/include/kaeilos-2009-preferred-versions.inc
-+++ b/conf/distro/include/kaeilos-2009-preferred-versions.inc
-@@ -61,7 +61,7 @@ PREFERRED_VERSION_python-pycairo = "1.8.0"
- KAEILOS_WX_VERSION ?= "2.8.10"
- PREFERRED_VERSION_wxwidgets = "${KAEILOS_WX_VERSION}"
- 
--KAEILOS_QT_VERSION ?= "4.7.2"
-+KAEILOS_QT_VERSION ?= "4.7.3"
- PREFERRED_VERSION_qt4-tools-native = "${KAEILOS_QT_VERSION}"
- PREFERRED_VERSION_qt4-tools-sdk = "${KAEILOS_QT_VERSION}"
- PREFERRED_VERSION_qt4-embedded = "${KAEILOS_QT_VERSION}"
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes/qt4/qt-4.7.3.inc                           |   72 ++++++++++++++++++++
+ .../0001-Added-Openembedded-crossarch-option.patch |   44 ++++++++++++
+ .../0010-phonon-gstreamer-rgb-endianess.patch      |   23 ++++++
+ recipes/qt4/qt-4.7.3/g++.conf                      |   60 ++++++++++++++++
+ recipes/qt4/qt-4.7.3/hack-out-pg2-4.7.0.patch      |   19 +++++
+ recipes/qt4/qt-4.7.3/linux.conf                    |   66 ++++++++++++++++++
+ recipes/qt4/qt4-embedded-gles_4.7.3.bb             |   19 +++++
+ recipes/qt4/qt4-embedded_4.7.3.bb                  |   14 ++++
+ recipes/qt4/qt4-native_4.7.3.bb                    |   19 +++++
+ recipes/qt4/qt4-tools-sdk_4.7.3.bb                 |    8 ++
+ recipes/qt4/qt4-x11-free-gles_4.7.3.bb             |   19 +++++
+ recipes/qt4/qt4-x11-free_4.7.3.bb                  |   15 ++++
+ 12 files changed, 378 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/qt4/qt-4.7.3.inc
+ create mode 100644 recipes/qt4/qt-4.7.3/0001-Added-Openembedded-crossarch-option.patch
+ create mode 100644 recipes/qt4/qt-4.7.3/0010-phonon-gstreamer-rgb-endianess.patch
+ create mode 100644 recipes/qt4/qt-4.7.3/g++.conf
+ create mode 100644 recipes/qt4/qt-4.7.3/hack-out-pg2-4.7.0.patch
+ create mode 100644 recipes/qt4/qt-4.7.3/linux.conf
+ create mode 100644 recipes/qt4/qt4-embedded-gles_4.7.3.bb
+ create mode 100644 recipes/qt4/qt4-embedded_4.7.3.bb
+ create mode 100644 recipes/qt4/qt4-native_4.7.3.bb
+ create mode 100644 recipes/qt4/qt4-tools-sdk_4.7.3.bb
+ create mode 100644 recipes/qt4/qt4-x11-free-gles_4.7.3.bb
+ create mode 100644 recipes/qt4/qt4-x11-free_4.7.3.bb
+
+diff --git a/recipes/qt4/qt-4.7.3.inc b/recipes/qt4/qt-4.7.3.inc
+new file mode 100644
+index 0000000..4e9c96a
+--- /dev/null
++++ b/recipes/qt4/qt-4.7.3.inc
+@@ -0,0 +1,72 @@
++DEFAULT_PREFERENCE = "-1"
++LICENSE = "LGPLv2.1 GPLv3"
++
++FILESPATHPKG =. "qt-${PV}:"
++
++SRC_URI = "\
++	ftp://ftp.trolltech.com/qt/source/qt-everywhere-opensource-src-${PV}.tar.gz \
++	file://0004-no-qmake.patch \
++	file://hack-out-pg2-4.7.0.patch \
++	file://0006-freetype-host-includes.patch \
++	file://0001-Added-Openembedded-crossarch-option.patch \
++	file://0010-phonon-gstreamer-rgb-endianess.patch \
++	file://g++.conf \
++	file://linux.conf \
++           "
++# Set necessary variables in the profile
++SRC_URI += "file://qte.sh"
++
++S = "${WORKDIR}/qt-everywhere-opensource-src-${PV}"
++
++FILES_${QT_BASE_NAME}-tools                += "${bindir}/qml"
++
++do_configure_prepend() {
++    for pro in $(find ${S} -name "*.pro") ; do
++        sed -i 's:$$QT_BUILD_TREE/bin/lrelease:${OE_QMAKE_LRELEASE}:g' $pro
++    done
++
++    sed -i s:SEDME:${S}: ${WORKDIR}/linux.conf
++    sed -i \
++    -e /QMAKE_MOC\ /d \
++    -e /QMAKE_UIC\ /d \
++    -e /QMAKE_UIC3\ /d \
++    -e /QMAKE_RCC\ /d \
++    ${S}/configure
++}
++
++do_configure_append() {
++    sed -e '/QMAKE_TARGET /d' -e '/TARGET /d' -i ${S}/translations/Makefile
++}
++
++QT_GLFLAGS ?= ""
++QT_CONFIG_FLAGS += " -javascript-jit -script -scripttools -declarative -xmlpatterns -no-rpath -qt3support -reduce-relocations -silent ${QT_GLFLAGS}"
++
++do_compile() {
++    # Fixup missing wsegl header in some SGX SDKs
++    if ! [ -e ${STAGING_INCDIR}/wsegl.h ] ; then
++        cp src/3rdparty/powervr/wsegl.h src/plugins/gfxdrivers/powervr/QWSWSEGL/
++    fi
++
++    unset CFLAGS CXXFLAGS
++    install -m 0755 ${STAGING_BINDIR_NATIVE}/rcc4 ${S}/bin/rcc
++    install -m 0755 ${STAGING_BINDIR_NATIVE}/moc4 ${S}/bin/moc
++    install -m 0755 ${STAGING_BINDIR_NATIVE}/uic4 ${S}/bin/uic
++    install -m 0755 ${STAGING_BINDIR_NATIVE}/lrelease4 ${S}/bin/lrelease
++
++    oe_runmake ${EXTRA_ENV}
++}
++
++do_install_append() {
++	install -d ${D}${bindir}
++	for i in rcc uic moc ; do
++		install -m 0755 ${S}/bin/$i ${D}${bindir}/
++	done
++
++        #Append an E to the qtdemo file
++        if [ -n "${QT_LIBINFIX}" ] ; then
++                mv ${D}${bindir}/qtdemo ${D}${bindir}/qtdemo${QT_LIBINFIX}
++        fi
++}
++
++SRC_URI[md5sum] = "49b96eefb1224cc529af6fe5608654fe"
++SRC_URI[sha256sum] = "d02b6fd69d089c01f4a787aa18175d074ccaecf8980a5956e328c2991905937e"
+diff --git a/recipes/qt4/qt-4.7.3/0001-Added-Openembedded-crossarch-option.patch b/recipes/qt4/qt-4.7.3/0001-Added-Openembedded-crossarch-option.patch
+new file mode 100644
+index 0000000..71a04a5
+--- /dev/null
++++ b/recipes/qt4/qt-4.7.3/0001-Added-Openembedded-crossarch-option.patch
+@@ -0,0 +1,44 @@
++From b1ba119f6a824dc01bd42ee00dba4a1653867b72 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Matthias=20G=C3=BCnther?= <matgnt@gmail.com>
++Date: Wed, 12 May 2010 16:52:45 +0200
++Subject: [PATCH 1/9] Added Openembedded "-crossarch" option
++
++---
++ configure |    7 ++++++-
++ 1 files changed, 6 insertions(+), 1 deletions(-)
++
++diff --git a/configure b/configure
++index facd192..9d15136 100755
++--- a/configure
+++++ b/configure
++@@ -954,7 +954,7 @@ while [ "$#" -gt 0 ]; do
++         shift
++         VAL=$1
++         ;;
++-    -prefix|-docdir|-headerdir|-plugindir|-importdir|-datadir|-libdir|-bindir|-translationdir|-sysconfdir|-examplesdir|-demosdir|-depths|-make|-nomake|-platform|-xplatform|-buildkey|-sdk|-arch|-host-arch|-mysql_config)
+++    -prefix|-docdir|-headerdir|-plugindir|-importdir|-datadir|-libdir|-bindir|-translationdir|-sysconfdir|-examplesdir|-demosdir|-depths|-make|-nomake|-platform|-xplatform|-buildkey|-sdk|-arch|-host-arch|-mysql_config|-crossarch)
++         VAR=`echo $1 | sed "s,^-\(.*\),\1,"`
++         shift
++         VAL="$1"
++@@ -1443,6 +1443,9 @@ while [ "$#" -gt 0 ]; do
++     xplatform)
++         XPLATFORM="$VAL"
++         ;;
+++	crossarch)
+++		CROSSARCH="$VAL"
+++		;;
++     debug-and-release)
++         if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
++             CFG_DEBUG_RELEASE="$VAL"
++@@ -2918,6 +2921,8 @@ elif [ "$PLATFORM_MAC" = "yes" ] || [ -z "$CFG_ARCH" ]; then
++     CFG_ARCH=$CFG_HOST_ARCH
++ fi
++ 
+++CFG_ARCH="$CROSSARCH"
+++
++ if [ -d "$relpath/src/corelib/arch/$CFG_ARCH" ]; then
++     if [ "$OPT_VERBOSE" = "yes" ]; then
++         echo "    '$CFG_ARCH' is supported"
++-- 
++1.7.0.4
++
+diff --git a/recipes/qt4/qt-4.7.3/0010-phonon-gstreamer-rgb-endianess.patch b/recipes/qt4/qt-4.7.3/0010-phonon-gstreamer-rgb-endianess.patch
+new file mode 100644
+index 0000000..d43366c
+--- /dev/null
++++ b/recipes/qt4/qt-4.7.3/0010-phonon-gstreamer-rgb-endianess.patch
+@@ -0,0 +1,23 @@
++--- a/src/3rdparty/phonon/gstreamer/qwidgetvideosink.cpp
+++++ b/src/3rdparty/phonon/gstreamer/qwidgetvideosink.cpp
++@@ -18,6 +18,7 @@
++ #include <QApplication>
++ #include "videowidget.h"
++ #include "qwidgetvideosink.h"
+++#include <gst/video/video.h>
++ 
++ QT_BEGIN_NAMESPACE
++ 
++@@ -106,11 +107,7 @@ static GstStaticPadTemplate template_factory_rgb =
++     GST_STATIC_PAD_TEMPLATE("sink",
++                             GST_PAD_SINK,
++                             GST_PAD_ALWAYS,
++-                            GST_STATIC_CAPS("video/x-raw-rgb, "
++-                                            "framerate = (fraction) [ 0, MAX ], "
++-                                            "width = (int) [ 1, MAX ], "
++-                                            "height = (int) [ 1, MAX ],"
++-                                            "bpp = (int) 32"));
+++                            GST_STATIC_CAPS(GST_VIDEO_CAPS_xRGB_HOST_ENDIAN));
++ 
++ template <VideoFormat FMT>
++ struct template_factory; 
+diff --git a/recipes/qt4/qt-4.7.3/g++.conf b/recipes/qt4/qt-4.7.3/g++.conf
+new file mode 100644
+index 0000000..80f925c
+--- /dev/null
++++ b/recipes/qt4/qt-4.7.3/g++.conf
+@@ -0,0 +1,60 @@
++#
++# qmake configuration for common gcc
++#
++
++QMAKE_CC       = $(OE_QMAKE_CC)
++QMAKE_CFLAGS       += -pipe $(OE_QMAKE_CFLAGS)
++QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += $(OE_QMAKE_CFLAGS)
++QMAKE_CFLAGS_DEPS	+= -M
++QMAKE_CFLAGS_WARN_ON	+= -Wall -W
++QMAKE_CFLAGS_WARN_OFF	+= -w
++QMAKE_CFLAGS_RELEASE	+=
++QMAKE_CFLAGS_DEBUG	+= -g
++QMAKE_CFLAGS_SHLIB	+= -fPIC
++QMAKE_CFLAGS_STATIC_LIB	+= -fPIC
++QMAKE_CFLAGS_YACC	+= -Wno-unused -Wno-parentheses
++QMAKE_CFLAGS_HIDESYMS   += -fvisibility=hidden
++QMAKE_CFLAGS_PRECOMPILE += -x c-header -c ${QMAKE_PCH_INPUT} -o ${QMAKE_PCH_OUTPUT}
++QMAKE_CFLAGS_USE_PRECOMPILE += -include ${QMAKE_PCH_OUTPUT_BASE}
++
++QMAKE_CXX      = $(OE_QMAKE_CXX)
++QMAKE_CXXFLAGS     += $$QMAKE_CFLAGS $(OE_QMAKE_CXXFLAGS)
++QMAKE_CXXFLAGS_DEPS	+= $$QMAKE_CFLAGS_DEPS
++QMAKE_CXXFLAGS_WARN_ON	+= $$QMAKE_CFLAGS_WARN_ON
++QMAKE_CXXFLAGS_WARN_OFF	+= $$QMAKE_CFLAGS_WARN_OFF
++QMAKE_CXXFLAGS_RELEASE	+= $$QMAKE_CFLAGS_RELEASE
++QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO += $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO
++QMAKE_CXXFLAGS_DEBUG	+= $$QMAKE_CFLAGS_DEBUG
++QMAKE_CXXFLAGS_SHLIB	+= $$QMAKE_CFLAGS_SHLIB
++QMAKE_CXXFLAGS_STATIC_LIB += $$QMAKE_CFLAGS_STATIC_LIB
++QMAKE_CXXFLAGS_YACC	+= $$QMAKE_CFLAGS_YACC
++QMAKE_CXXFLAGS_HIDESYMS += $$QMAKE_CFLAGS_HIDESYMS -fvisibility-inlines-hidden
++QMAKE_CXXFLAGS_PRECOMPILE += -x c++-header -c ${QMAKE_PCH_INPUT} -o ${QMAKE_PCH_OUTPUT}
++QMAKE_CXXFLAGS_USE_PRECOMPILE = $$QMAKE_CFLAGS_USE_PRECOMPILE
++
++QMAKE_LINK     = $(OE_QMAKE_LINK)
++QMAKE_LINK_SHLIB   = $(OE_QMAKE_LINK)
++QMAKE_LINK_C		= $(OE_QMAKE_LINK)
++QMAKE_LINK_C_SHLIB	= $(OE_QMAKE_LINK)
++QMAKE_LFLAGS       += $(OE_QMAKE_LDFLAGS)
++QMAKE_LFLAGS_RELEASE	+=
++QMAKE_LFLAGS_DEBUG	+=
++QMAKE_LFLAGS_APP	+=
++QMAKE_LFLAGS_SHLIB	+= -shared
++QMAKE_LFLAGS_PLUGIN	+= $$QMAKE_LFLAGS_SHLIB
++QMAKE_LFLAGS_SONAME	+= -Wl,-soname,
++QMAKE_LFLAGS_THREAD	+=
++QMAKE_LFLAGS_NOUNDEF	+= -Wl,--no-undefined
++QMAKE_LFLAGS_RPATH        = -Wl,-rpath-link,
++
++QMAKE_PCH_OUTPUT_EXT    = .gch
++
++# -Bsymbolic-functions (ld) support
++QMAKE_LFLAGS_BSYMBOLIC_FUNC = -Wl,-Bsymbolic-functions
++QMAKE_LFLAGS_DYNAMIC_LIST = -Wl,--dynamic-list,
++
++# some linking helper...
++CONFIG += rpath_libdirs
++
++# for the SDK
++isEmpty(QMAKE_QT_CONFIG):QMAKE_QT_CONFIG = $(OE_QMAKE_QT_CONFIG)
+diff --git a/recipes/qt4/qt-4.7.3/hack-out-pg2-4.7.0.patch b/recipes/qt4/qt-4.7.3/hack-out-pg2-4.7.0.patch
+new file mode 100644
+index 0000000..5c588ff
+--- /dev/null
++++ b/recipes/qt4/qt-4.7.3/hack-out-pg2-4.7.0.patch
+@@ -0,0 +1,19 @@
++Index: qt-everywhere-opensource-src-4.7.0/configure
++===================================================================
++--- qt-everywhere-opensource-src-4.7.0.orig/configure	2010-09-22 15:43:51.191162141 -0400
+++++ qt-everywhere-opensource-src-4.7.0/configure	2010-09-22 15:44:35.179981232 -0400
++@@ -4921,10 +4921,10 @@
++         psql)
++             if [ "$CFG_SQL_psql" != "no" ]; then
++                 # Be careful not to use native pg_config when cross building.
++-                if [ "$XPLATFORM_MINGW" != "yes" ] && "$WHICH" pg_config >/dev/null 2>&1; then
++-                    QT_CFLAGS_PSQL=`pg_config --includedir 2>/dev/null`
++-                    QT_LFLAGS_PSQL=`pg_config --libdir 2>/dev/null`
++-                fi
+++#                if [ "$XPLATFORM_MINGW" != "yes" ] && "$WHICH" pg_config >/dev/null 2>&1; then
+++#                    QT_CFLAGS_PSQL=`pg_config --includedir 2>/dev/null`
+++#                    QT_LFLAGS_PSQL=`pg_config --libdir 2>/dev/null`
+++#                fi
++                 [ -z "$QT_CFLAGS_PSQL" ] || QT_CFLAGS_PSQL="-I$QT_CFLAGS_PSQL"
++                 [ -z "$QT_LFLAGS_PSQL" ] || QT_LFLAGS_PSQL="-L$QT_LFLAGS_PSQL"
++                 # But, respect PSQL_LIBS if set
+diff --git a/recipes/qt4/qt-4.7.3/linux.conf b/recipes/qt4/qt-4.7.3/linux.conf
+new file mode 100644
+index 0000000..a541355
+--- /dev/null
++++ b/recipes/qt4/qt-4.7.3/linux.conf
+@@ -0,0 +1,66 @@
++#
++# qmake configuration for common linux
++#
++
++QMAKE_CFLAGS_THREAD	+= -D_REENTRANT
++QMAKE_CXXFLAGS_THREAD	+= $$QMAKE_CFLAGS_THREAD
++
++QMAKE_INCDIR          =
++QMAKE_LIBDIR          =
++QMAKE_INCDIR_X11      =
++QMAKE_LIBDIR_X11      =
++QMAKE_INCDIR_QT       = $(OE_QMAKE_INCDIR_QT)
++QMAKE_LIBDIR_QT       = $(OE_QMAKE_LIBDIR_QT)
++QMAKE_INCDIR_OPENGL   =
++QMAKE_LIBDIR_OPENGL   =
++QMAKE_INCDIR_OPENGL_ES1 = $$QMAKE_INCDIR_OPENGL
++QMAKE_LIBDIR_OPENGL_ES1 = $$QMAKE_LIBDIR_OPENGL
++QMAKE_INCDIR_OPENGL_ES2 = $$QMAKE_INCDIR_OPENGL
++QMAKE_LIBDIR_OPENGL_ES2 = $$QMAKE_LIBDIR_OPENGL
++QMAKE_INCDIR_EGL      =
++QMAKE_LIBDIR_EGL      =
++QMAKE_INCDIR_OPENVG   =
++QMAKE_LIBDIR_OPENVG   =
++
++
++QMAKE_LIBS            =
++QMAKE_LIBS_DYNLOAD    = -ldl
++QMAKE_LIBS_X11        = $(OE_QMAKE_LIBS_X11)
++QMAKE_LIBS_X11SM      = $(OE_QMAKE_LIBS_X11SM)
++QMAKE_LIBS_NIS        = -lnsl
++QMAKE_LIBS_EGL        = -lEGL
++QMAKE_LIBS_OPENGL     = -lGLU -lGL
++QMAKE_LIBS_OPENGL_QT  = -lGL
++QMAKE_LIBS_OPENGL_ES1 = -lGLES_CM
++QMAKE_LIBS_OPENGL_ES2 = -lGLESv2
++QMAKE_LIBS_OPENVG     = -lOpenVG
++QMAKE_LIBS_THREAD     = -lpthread
++
++QMAKE_MOC             = $(OE_QMAKE_MOC)
++QMAKE_UIC             = $(OE_QMAKE_UIC)
++QMAKE_UIC3            = $(OE_QMAKE_UIC3)
++QMAKE_RCC             = $(OE_QMAKE_RCC)
++QMAKE_QDBUSCPP2XML    = $(OE_QMAKE_QDBUSCPP2XML)
++QMAKE_QDBUSXML2CPP    = $(OE_QMAKE_QDBUSXML2CPP)
++
++QMAKE_AR              = $(OE_QMAKE_AR) cqs
++QMAKE_OBJCOPY         = objcopy
++QMAKE_RANLIB          =
++
++QMAKE_TAR             = tar -cf
++QMAKE_GZIP            = gzip -9f
++
++QMAKE_COPY            = cp -f
++QMAKE_COPY_FILE       = $(COPY)
++QMAKE_COPY_DIR        = $(COPY) -r
++QMAKE_MOVE            = mv -f
++QMAKE_DEL_FILE        = rm -f
++QMAKE_DEL_DIR         = rmdir
++QMAKE_STRIP           = $(OE_QMAKE_STRIP)
++QMAKE_STRIPFLAGS_LIB += --strip-unneeded
++QMAKE_CHK_DIR_EXISTS  = test -d
++QMAKE_MKDIR           = mkdir -p
++QMAKE_INSTALL_FILE    = install -m 644 -p
++QMAKE_INSTALL_PROGRAM = install -m 755 -p
++
++include(unix.conf)
+diff --git a/recipes/qt4/qt4-embedded-gles_4.7.3.bb b/recipes/qt4/qt4-embedded-gles_4.7.3.bb
+new file mode 100644
+index 0000000..8ab5a6c
+--- /dev/null
++++ b/recipes/qt4/qt4-embedded-gles_4.7.3.bb
+@@ -0,0 +1,19 @@
++DEFAULT_PREFERENCE = "-1"
++
++require qt4-embedded.inc
++
++PR = "${INC_PR}.10"
++
++QT_CONFIG_FLAGS_append_armv6 = " -no-neon "
++
++PROVIDES += "qt4-embedded"
++QT_GLFLAGS = "-opengl es2 -depths 16,24,32  -plugin-gfx-powervr"
++ 
++FILESPATHPKG .= ":qt4-embedded-${PV}:qt4-embedded"
++
++require qt-${PV}.inc
++
++QT_CONFIG_FLAGS += " \
++ -exceptions \
++"
++
+diff --git a/recipes/qt4/qt4-embedded_4.7.3.bb b/recipes/qt4/qt4-embedded_4.7.3.bb
+new file mode 100644
+index 0000000..7e3d4b8
+--- /dev/null
++++ b/recipes/qt4/qt4-embedded_4.7.3.bb
+@@ -0,0 +1,14 @@
++DEFAULT_PREFERENCE = "-1"
++
++require qt4-embedded.inc
++
++PR = "${INC_PR}.1"
++
++QT_CONFIG_FLAGS_append_armv6 = " -no-neon "
++
++require qt-${PV}.inc
++
++QT_CONFIG_FLAGS += " \
++ -exceptions \
++"
++
+diff --git a/recipes/qt4/qt4-native_4.7.3.bb b/recipes/qt4/qt4-native_4.7.3.bb
+new file mode 100644
+index 0000000..a6880a6
+--- /dev/null
++++ b/recipes/qt4/qt4-native_4.7.3.bb
+@@ -0,0 +1,19 @@
++require qt4-native.inc
++LICENSE = "LGPLv2.1 GPLv3"
++
++PR = "${INC_PR}.0"
++
++# Find the g++.conf/linux.conf in the right directory.
++FILESPATHPKG =. "qt-${PV}:"
++SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-everywhere-opensource-src-${PV}.tar.gz \
++           file://qt-config.patch \
++           file://g++.conf \
++           file://linux.conf"
++S = "${WORKDIR}/qt-everywhere-opensource-src-${PV}"
++
++EXTRA_OECONF += " -no-fast -silent -no-rpath"
++
++TOBUILD := "src/tools/bootstrap ${TOBUILD}"
++
++SRC_URI[md5sum] = "49b96eefb1224cc529af6fe5608654fe"
++SRC_URI[sha256sum] = "d02b6fd69d089c01f4a787aa18175d074ccaecf8980a5956e328c2991905937e"
+diff --git a/recipes/qt4/qt4-tools-sdk_4.7.3.bb b/recipes/qt4/qt4-tools-sdk_4.7.3.bb
+new file mode 100644
+index 0000000..832d389
+--- /dev/null
++++ b/recipes/qt4/qt4-tools-sdk_4.7.3.bb
+@@ -0,0 +1,8 @@
++require qt4-tools-sdk.inc
++
++PR = "${INC_PR}.0"
++
++DEFAULT_PREFERENCE = "-1"
++
++SRC_URI[md5sum] = "49b96eefb1224cc529af6fe5608654fe"
++SRC_URI[sha256sum] = "d02b6fd69d089c01f4a787aa18175d074ccaecf8980a5956e328c2991905937e"
+diff --git a/recipes/qt4/qt4-x11-free-gles_4.7.3.bb b/recipes/qt4/qt4-x11-free-gles_4.7.3.bb
+new file mode 100644
+index 0000000..c5fd6f3
+--- /dev/null
++++ b/recipes/qt4/qt4-x11-free-gles_4.7.3.bb
+@@ -0,0 +1,19 @@
++DEFAULT_PREFERENCE = "-1"
++
++require qt4-x11-free.inc
++PR = "${INC_PR}.7"
++
++QT_GLFLAGS = "-opengl es2 -depths 16,24,32 "
++
++require qt-${PV}.inc
++
++QT_CONFIG_FLAGS += " \
++ -no-embedded \
++ -xrandr \
++ -x11"
++
++FILESPATHPKG .= ":qt4-x11-free-${PV}:qt4-x11-free"
++
++DEPENDS += "virtual/egl"
++require recipes/egl/egl.inc
++PROVIDES += "qt4-x11-free"
+diff --git a/recipes/qt4/qt4-x11-free_4.7.3.bb b/recipes/qt4/qt4-x11-free_4.7.3.bb
+new file mode 100644
+index 0000000..79a765e
+--- /dev/null
++++ b/recipes/qt4/qt4-x11-free_4.7.3.bb
+@@ -0,0 +1,15 @@
++DEFAULT_PREFERENCE = "-1"
++
++require qt4-x11-free.inc
++
++PR = "${INC_PR}.0"
++
++QT_CONFIG_FLAGS_append_armv6 = " -no-neon "
++
++require qt-${PV}.inc
++
++QT_CONFIG_FLAGS += " \
++ -no-embedded \
++ -xrandr \
++ -x11"
++
 -- 
 1.7.0.4
 
