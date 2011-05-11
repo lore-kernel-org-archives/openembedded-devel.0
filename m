@@ -1,33 +1,31 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from exch01.praxiseng.com ([71.16.158.232])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1QK6NE-0007ET-Jl
+	(envelope-from <dpsmith@praxiseng.com>) id 1QK7xN-0000EI-0R
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 May 2011 12:10:32 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with SMTP id p4BA7eJS007900
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 May 2011 12:07:42 +0200
-Received: by ensc-virt.intern.sigma-chemnitz.de (sSMTP sendmail emulation);
-	Wed, 11 May 2011 12:07:40 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-References: <4DC8F3A2.2090005@nedap.com> <20110510100020.GA10493@mx.loc>
-	<1305022004.8000.149.camel@phil-desktop>
-	<ly8vueldd2.fsf@ensc-virt.intern.sigma-chemnitz.de>
-	<1305059419.3355.108.camel@lenovo.internal.reciva.com>
-Date: Wed, 11 May 2011 12:07:40 +0200
-In-Reply-To: <1305059419.3355.108.camel@lenovo.internal.reciva.com> (Phil
-	Blundell's message of "Tue, 10 May 2011 21:30:19 +0100")
-Message-ID: <ly62phpn2r.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+	Wed, 11 May 2011 13:51:57 +0200
+Received: from exch02.praxislan01.com ([192.168.200.77]) by
+	exch01.praxiseng.com with Microsoft SMTPSVC(6.0.3790.4675); 
+	Wed, 11 May 2011 07:49:04 -0400
+Received: from exch02.praxislan01.com ([127.0.0.1]) by exch02 ([127.0.0.1])
+	with mapi id 14.01.0270.001; Wed, 11 May 2011 07:49:04 -0400
+From: "Daniel P. Smith" <dpsmith@praxiseng.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] Puzzled over Angstrom generated kernel on a new board
+Thread-Index: AcwPOdq8iN+rJmT4TLOg4+SvaqByOgAJGLAAABw5XiA=
+Date: Wed, 11 May 2011 11:49:04 +0000
+Message-ID: <25BE6376FCDB1A44A12A866DA4936762528895@exch02>
+References: <25BE6376FCDB1A44A12A866DA493676252871F@exch02>
+	<iqbung$ak0$1@dough.gmane.org>
+In-Reply-To: <iqbung$ak0$1@dough.gmane.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [192.168.201.28]
 MIME-Version: 1.0
-X-Spam-Score: -1.3
-X-Spam-Level: -
-X-Spam-Tests: AWL,BAYES_00,SPF_NEUTRAL,T_RP_MATCHES_RCVD
-X-Scanned-By: MIMEDefang 2.71 on 62.153.82.30
-Subject: Re: x86_64
+X-OriginalArrivalTime: 11 May 2011 11:49:04.0673 (UTC)
+	FILETIME=[6D822910:01CC0FD1]
+Subject: Re: Puzzled over Angstrom generated kernel on a new board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,20 +39,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 May 2011 10:10:32 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 11 May 2011 11:51:57 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Phil Blundell <philb@gnu.org> writes:
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Koen Kooi
+> Sent: Tuesday, May 10, 2011 2:05 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] Puzzled over Angstrom generated kernel on a new board
+>=20
+>=20
+> Try defining
+>=20
+> UBOOT_ENTRYPOINT =3D "0x80008000"
+> UBOOT_LOADADDRESS =3D "0x80008000"
+>=20
+> You probably need to change the values to match your hw, though
 
-> Changing the architecture to x86-64 would be a possibility, 
+Haha, my apologies and thanks as I was looking through the bitbake logs for=
+ the kernel and found that the recipe recreates the uImage file setting the=
+ entry and load addr's to 0x20008000, where as the CNS3xxx is expecting 0x0=
+0008000. But this brings up the question for me is why does the kernel reci=
+pes recreate the uImage? The make uImage command will/should pull the zrela=
+ddr from the sub-arch's Makefile.boot. I would assume it is so OE can provi=
+de the flexibility, but I don't like to make assumptions.
 
-no; will cause too much pain because all the ./config.guess scripts
-expect 'x86_64'.
 
-I kept TARGET_ARCH='x86_64' but added an additional OVERRIDES where '_'
-is replaced by '-'.
+On a side note, has anyone considered cataloging the variety of variables t=
+hat can be set by a recipe author? I would have never known about the two K=
+oen pointed out had I not asked here or spent hours poring over the interna=
+ls to find out where 0x20008000 was coming from.
 
 
-Enrico
+V/r,
+Daniel P. Smith
+
 
 
