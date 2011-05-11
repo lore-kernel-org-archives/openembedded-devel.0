@@ -1,32 +1,33 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QK3x6-0003pN-Tk for openembedded-devel@lists.openembedded.org;
-	Wed, 11 May 2011 09:35:25 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QK3uN-0001ur-8u for openembedded-devel@lists.openembedded.org;
-	Wed, 11 May 2011 09:32:35 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 May 2011 09:32:35 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1QK6NE-0007ET-Jl
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 11 May 2011 12:10:32 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with SMTP id p4BA7eJS007900
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 May 2011 09:32:35 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 11 May 2011 12:07:42 +0200
+Received: by ensc-virt.intern.sigma-chemnitz.de (sSMTP sendmail emulation);
+	Wed, 11 May 2011 12:07:40 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 11 May 2011 09:32:21 +0200
-Message-ID: <iqde25$jrd$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-X-Enigmail-Version: 1.0.1
-Subject: [2011.03-maintenance] Pull request #18
+References: <4DC8F3A2.2090005@nedap.com> <20110510100020.GA10493@mx.loc>
+	<1305022004.8000.149.camel@phil-desktop>
+	<ly8vueldd2.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	<1305059419.3355.108.camel@lenovo.internal.reciva.com>
+Date: Wed, 11 May 2011 12:07:40 +0200
+In-Reply-To: <1305059419.3355.108.camel@lenovo.internal.reciva.com> (Phil
+	Blundell's message of "Tue, 10 May 2011 21:30:19 +0100")
+Message-ID: <ly62phpn2r.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+MIME-Version: 1.0
+X-Spam-Score: -1.3
+X-Spam-Level: -
+X-Spam-Tests: AWL,BAYES_00,SPF_NEUTRAL,T_RP_MATCHES_RCVD
+X-Scanned-By: MIMEDefang 2.71 on 62.153.82.30
+Subject: Re: x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,55 +41,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 May 2011 07:35:25 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 11 May 2011 10:10:32 -0000
+Content-Type: text/plain; charset=us-ascii
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Phil Blundell <philb@gnu.org> writes:
 
-Tom,
+> Changing the architecture to x86-64 would be a possibility, 
 
-Please pull the 11 commits from here:
+no; will cause too much pain because all the ./config.guess scripts
+expect 'x86_64'.
 
-URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-Branch: 2011.03-maintenance
-
-Koen Kooi (6):
-      libgles-omap3: prune source a bit better
-      libgles-omap3: make initscript work with both busybox and bash
-      libgles-omap3: update 4.03 release to 02
-      libgles-omap3 4.03.00.02: make it the default
-      nmap 3.81: fix license
-      linux-omap-psp 2.6.32: support accept4 call
-
-Otavio Salvador (1):
-      wrapper/install: add -t support
-
-Petr Štetiar (1):
-      zeromq: add new recipe for version 2.1.6
-
-Philip Balister (1):
-      uhd : Enable usrp e100 utilities and package them seperately.
-
-Steve Sakoman (2):
-      wpa-supplicant: Enable CONFIG_CTRL_IFACE_DBUS and
-      omap3-sgx-modules 4.03.00.02: fix build for latest kernels
+I kept TARGET_ARCH='x86_64' but added an additional OVERRIDES where '_'
+is replaced by '-'.
 
 
-All commits are cherry-picks from .dev
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNyjuFMkyGM64RGpERAm+BAJ4tgwgOUuYPuNQlRuAj+fP/3uFeigCfaVvy
-ki0ACXu85l/VXuT5/NK9GAw=
-=VYa7
------END PGP SIGNATURE-----
-
+Enrico
 
 
