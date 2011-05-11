@@ -1,35 +1,25 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QK3SH-0003C4-T1
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1QK3c1-0003LY-Hu
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 May 2011 09:03:34 +0200
-Received: by pwj9 with SMTP id 9so123965pwj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 May 2011 00:00:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=60FdzVLqHCruJjMhKefMZnOeG/WT+vKqpfaPQ3OcR8w=;
-	b=UGZ6i43mIFvqtXZGQ28mMI3PX4ny73/ZCClltayhEpQQg9LdNcEvSFMa+UuccSMvU9
-	Jj+Ip/PdqIA+y2vo4tReV3YpOaHXZxL6k9U1Llve4SWC4JbzeB4CHg8wyrLcYeQiKeZx
-	aRCmDzkK6950oNa2zd854NHxGO3oZPWM9JhOw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=ktSX+dwhleqtoBfelek1jotswJjL1jlBx/N84MEIMnT8vAm8/VIyzgOE5DJwO45fIr
-	4VGunk7/ynjp7hhVICjoJYL0E8OuHEARckpFhQSFIbfw+aiwxOHkyPHbZZ/vjZLoM3Wc
-	32QTxCvBSXDwHRwudp0XuHu5TW022tjFqB6u8=
-Received: by 10.68.51.67 with SMTP id i3mr11053787pbo.51.1305097235030;
-	Wed, 11 May 2011 00:00:35 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id g3sm4725709pbk.82.2011.05.11.00.00.32
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 11 May 2011 00:00:33 -0700 (PDT)
-From: raj.khem@gmail.com
+	Wed, 11 May 2011 09:13:37 +0200
+Received: from [217.237.167.130] (helo=[10.18.99.233])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1QK3qO-000227-Oj
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 11 May 2011 09:28:28 +0200
+Message-ID: <4DCA367B.2020705@kernelconcepts.de>
+Date: Wed, 11 May 2011 09:10:51 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110424 Thunderbird/3.1.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 May 2011 00:00:27 -0700
-Message-Id: <1305097227-23338-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-Subject: [meta-oe][PATCH] uclibc_git.bb: Backport epoll implementation
+References: <4DCA21FF.2010208@kernelconcepts.de>
+In-Reply-To: <4DCA21FF.2010208@kernelconcepts.de>
+X-Enigmail-Version: 1.1.2
+Subject: Re: LinuxTag opens this morning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,425 +33,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 May 2011 07:03:34 -0000
+X-List-Received-Date: Wed, 11 May 2011 07:13:37 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: 7bit
 
-From: Khem Raj <raj.khem@gmail.com>
+Hi again,
 
-Many applications e.g. firefox need it
+Am 11.05.2011 07:43, schrieb Florian Boor:
+> LinuxTag opens this morning and we will have a little booth there. If you happen
+> to be in Berlin just visit us at booth 7.2b 112.
+> For more information about the event take a look at http://www.linuxtag.org
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../uclibc/uclibc-git/uclibc-epoll.patch           |  378 ++++++++++++++++++++
- meta-oe/recipes-core/uclibc/uclibc_git.bb          |    3 +-
- 2 files changed, 380 insertions(+), 1 deletions(-)
- create mode 100644 meta-oe/recipes-core/uclibc/uclibc-git/uclibc-epoll.patch
+we still have some tickets left - if you need one please drop me a mail.
 
-diff --git a/meta-oe/recipes-core/uclibc/uclibc-git/uclibc-epoll.patch b/meta-oe/recipes-core/uclibc/uclibc-git/uclibc-epoll.patch
-new file mode 100644
-index 0000000..5d0cded
---- /dev/null
-+++ b/meta-oe/recipes-core/uclibc/uclibc-git/uclibc-epoll.patch
-@@ -0,0 +1,378 @@
-+From 00c44b9f566f34d1fa3f2889771730b8496b6f95 Mon Sep 17 00:00:00 2001
-+From: Peter S. Mazinger <ps.m@gmx.net>
-+Date: Tue, 22 Mar 2011 00:02:10 +0000
-+Subject: add epoll_pwait()
-+
-+Add epoll.h header for sparc.
-+Update epoll.h from glibc (disabling though epoll_create1).
-+
-+Signed-off-by: Peter S. Mazinger <ps.m@gmx.net>
-+---
-+diff --git a/libc/sysdeps/linux/common/epoll.c b/libc/sysdeps/linux/common/epoll.c
-+index dda9228..4fbba16 100644
-+--- a/libc/sysdeps/linux/common/epoll.c
-++++ b/libc/sysdeps/linux/common/epoll.c
-+@@ -1,6 +1,6 @@
-+ /* vi: set sw=4 ts=4: */
-+ /*
-+- * epoll_create() / epoll_ctl() / epoll_wait() for uClibc
-++ * epoll_create() / epoll_ctl() / epoll_wait() / epoll_pwait() for uClibc
-+  *
-+  * Copyright (C) 2000-2006 Erik Andersen <andersen@uclibc.org>
-+  *
-+@@ -10,23 +10,19 @@
-+ #include <sys/syscall.h>
-+ #include <sys/epoll.h>
-+ 
-+-/*
-+- * epoll_create()
-+- */
-+ #ifdef __NR_epoll_create
-+ _syscall1(int, epoll_create, int, size)
-+ #endif
-+ 
-+-/*
-+- * epoll_ctl()
-+- */
-+ #ifdef __NR_epoll_ctl
-+-_syscall4(int,epoll_ctl, int, epfd, int, op, int, fd, struct epoll_event *, event)
-++_syscall4(int, epoll_ctl, int, epfd, int, op, int, fd, struct epoll_event *, event)
-+ #endif
-+ 
-+-/*
-+- * epoll_wait()
-+- */
-+ #ifdef __NR_epoll_wait
-+ _syscall4(int, epoll_wait, int, epfd, struct epoll_event *, events, int, maxevents, int, timeout)
-+ #endif
-++
-++#ifdef __NR_epoll_pwait
-++_syscall5(int, epoll_pwait, int, epfd, struct epoll_event *, events, int, maxevents, int, timeout,
-++	  const sigset_t *, ss)
-++#endif
-+diff --git a/libc/sysdeps/linux/common/stubs.c b/libc/sysdeps/linux/common/stubs.c
-+index 655c640..0e740b1 100644
-+--- a/libc/sysdeps/linux/common/stubs.c
-++++ b/libc/sysdeps/linux/common/stubs.c
-+@@ -63,6 +63,10 @@ make_stub(epoll_ctl)
-+ make_stub(epoll_wait)
-+ #endif
-+ 
-++#ifndef __NR_epoll_pwait
-++make_stub(epoll_pwait)
-++#endif
-++
-+ #ifndef __NR_fdatasync
-+ make_stub(fdatasync)
-+ #endif
-+diff --git a/libc/sysdeps/linux/common/sys/epoll.h b/libc/sysdeps/linux/common/sys/epoll.h
-+index 44e814b..bf196d2 100644
-+--- a/libc/sysdeps/linux/common/sys/epoll.h
-++++ b/libc/sysdeps/linux/common/sys/epoll.h
-+@@ -1,4 +1,4 @@
-+-/* Copyright (C) 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
-++/* Copyright (C) 2002-2006, 2007, 2008, 2009 Free Software Foundation, Inc.
-+    This file is part of the GNU C Library.
-+ 
-+    The GNU C Library is free software; you can redistribute it and/or
-+@@ -22,6 +22,26 @@
-+ #include <stdint.h>
-+ #include <sys/types.h>
-+ 
-++/* Get __sigset_t.  */
-++#include <bits/sigset.h>
-++
-++#ifndef __sigset_t_defined
-++# define __sigset_t_defined
-++typedef __sigset_t sigset_t;
-++#endif
-++
-++
-++#if 0
-++/* Flags to be passed to epoll_create1.  */
-++enum
-++  {
-++    EPOLL_CLOEXEC = 02000000,
-++#define EPOLL_CLOEXEC EPOLL_CLOEXEC
-++    EPOLL_NONBLOCK = 04000
-++#define EPOLL_NONBLOCK EPOLL_NONBLOCK
-++  };
-++#endif
-++
-+ 
-+ enum EPOLL_EVENTS
-+   {
-+@@ -55,9 +75,9 @@ enum EPOLL_EVENTS
-+ 
-+ 
-+ /* Valid opcodes ( "op" parameter ) to issue to epoll_ctl().  */
-+-#define EPOLL_CTL_ADD 1	/* Add a file decriptor to the interface.  */
-+-#define EPOLL_CTL_DEL 2	/* Remove a file decriptor from the interface.  */
-+-#define EPOLL_CTL_MOD 3	/* Change file decriptor epoll_event structure.  */
-++#define EPOLL_CTL_ADD 1	/* Add a file descriptor to the interface.  */
-++#define EPOLL_CTL_DEL 2	/* Remove a file descriptor from the interface.  */
-++#define EPOLL_CTL_MOD 3	/* Change file descriptor epoll_event structure.  */
-+ 
-+ 
-+ typedef union epoll_data
-+@@ -83,6 +103,12 @@ __BEGIN_DECLS
-+    returned by epoll_create() should be closed with close().  */
-+ extern int epoll_create (int __size) __THROW;
-+ 
-++#if 0
-++/* Same as epoll_create but with an FLAGS parameter.  The unused SIZE
-++   parameter has been dropped.  */
-++extern int epoll_create1 (int __flags) __THROW;
-++#endif
-++
-+ 
-+ /* Manipulate an epoll instance "epfd". Returns 0 in case of success,
-+    -1 in case of error ( the "errno" variable will contain the
-+@@ -107,6 +133,16 @@ extern int epoll_ctl (int __epfd, int __op, int __fd,
-+ extern int epoll_wait (int __epfd, struct epoll_event *__events,
-+ 		       int __maxevents, int __timeout);
-+ 
-++
-++/* Same as epoll_wait, but the thread's signal mask is temporarily
-++   and atomically replaced with the one provided as parameter.
-++
-++   This function is a cancellation point and therefore not marked with
-++   __THROW.  */
-++extern int epoll_pwait (int __epfd, struct epoll_event *__events,
-++			int __maxevents, int __timeout,
-++			__const __sigset_t *__ss);
-++
-+ __END_DECLS
-+ 
-+ #endif /* sys/epoll.h */
-+diff --git a/libc/sysdeps/linux/sparc/sys/epoll.h b/libc/sysdeps/linux/sparc/sys/epoll.h
-+new file mode 100644
-+index 0000000..83a61da
-+--- a/dev/null
-++++ b/libc/sysdeps/linux/sparc/sys/epoll.h
-+@@ -0,0 +1,147 @@
-++/* Copyright (C) 2002-2006, 2007, 2008 Free Software Foundation, Inc.
-++   This file is part of the GNU C Library.
-++
-++   The GNU C Library is free software; you can redistribute it and/or
-++   modify it under the terms of the GNU Lesser General Public
-++   License as published by the Free Software Foundation; either
-++   version 2.1 of the License, or (at your option) any later version.
-++
-++   The GNU C Library is distributed in the hope that it will be useful,
-++   but WITHOUT ANY WARRANTY; without even the implied warranty of
-++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-++   Lesser General Public License for more details.
-++
-++   You should have received a copy of the GNU Lesser General Public
-++   License along with the GNU C Library; if not, write to the Free
-++   Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
-++   02111-1307 USA.  */
-++
-++#ifndef	_SYS_EPOLL_H
-++#define	_SYS_EPOLL_H	1
-++
-++#include <stdint.h>
-++#include <sys/types.h>
-++
-++/* Get __sigset_t.  */
-++#include <bits/sigset.h>
-++
-++#ifndef __sigset_t_defined
-++# define __sigset_t_defined
-++typedef __sigset_t sigset_t;
-++#endif
-++
-++
-++#if 0
-++/* Flags to be passed to epoll_create2.  */
-++enum
-++  {
-++    EPOLL_CLOEXEC = 0x400000,
-++#define EPOLL_CLOEXEC EPOLL_CLOEXEC
-++    EPOLL_NONBLOCK = 0x4000
-++#define EPOLL_NONBLOCK EPOLL_NONBLOCK
-++  };
-++#endif
-++
-++
-++enum EPOLL_EVENTS
-++  {
-++    EPOLLIN = 0x001,
-++#define EPOLLIN EPOLLIN
-++    EPOLLPRI = 0x002,
-++#define EPOLLPRI EPOLLPRI
-++    EPOLLOUT = 0x004,
-++#define EPOLLOUT EPOLLOUT
-++    EPOLLRDNORM = 0x040,
-++#define EPOLLRDNORM EPOLLRDNORM
-++    EPOLLRDBAND = 0x080,
-++#define EPOLLRDBAND EPOLLRDBAND
-++    EPOLLWRNORM = 0x100,
-++#define EPOLLWRNORM EPOLLWRNORM
-++    EPOLLWRBAND = 0x200,
-++#define EPOLLWRBAND EPOLLWRBAND
-++    EPOLLMSG = 0x400,
-++#define EPOLLMSG EPOLLMSG
-++    EPOLLERR = 0x008,
-++#define EPOLLERR EPOLLERR
-++    EPOLLHUP = 0x010,
-++#define EPOLLHUP EPOLLHUP
-++    EPOLLRDHUP = 0x2000,
-++#define EPOLLRDHUP EPOLLRDHUP
-++    EPOLLONESHOT = (1 << 30),
-++#define EPOLLONESHOT EPOLLONESHOT
-++    EPOLLET = (1 << 31)
-++#define EPOLLET EPOLLET
-++  };
-++
-++
-++/* Valid opcodes ( "op" parameter ) to issue to epoll_ctl().  */
-++#define EPOLL_CTL_ADD 1	/* Add a file descriptor to the interface.  */
-++#define EPOLL_CTL_DEL 2	/* Remove a file descriptor from the interface.  */
-++#define EPOLL_CTL_MOD 3	/* Change file descriptor epoll_event structure.  */
-++
-++
-++typedef union epoll_data
-++{
-++  void *ptr;
-++  int fd;
-++  uint32_t u32;
-++  uint64_t u64;
-++} epoll_data_t;
-++
-++struct epoll_event
-++{
-++  uint32_t events;	/* Epoll events */
-++  epoll_data_t data;	/* User data variable */
-++};
-++
-++
-++__BEGIN_DECLS
-++
-++/* Creates an epoll instance.  Returns an fd for the new instance.
-++   The "size" parameter is a hint specifying the number of file
-++   descriptors to be associated with the new instance.  The fd
-++   returned by epoll_create() should be closed with close().  */
-++extern int epoll_create (int __size) __THROW;
-++
-++#if 0
-++/* Same as epoll_create but with an additional FLAGS parameter.  */
-++extern int epoll_create2 (int __size, int __flags) __THROW;
-++#endif
-++
-++
-++/* Manipulate an epoll instance "epfd". Returns 0 in case of success,
-++   -1 in case of error ( the "errno" variable will contain the
-++   specific error code ) The "op" parameter is one of the EPOLL_CTL_*
-++   constants defined above. The "fd" parameter is the target of the
-++   operation. The "event" parameter describes which events the caller
-++   is interested in and any associated user data.  */
-++extern int epoll_ctl (int __epfd, int __op, int __fd,
-++		      struct epoll_event *__event) __THROW;
-++
-++
-++/* Wait for events on an epoll instance "epfd". Returns the number of
-++   triggered events returned in "events" buffer. Or -1 in case of
-++   error with the "errno" variable set to the specific error code. The
-++   "events" parameter is a buffer that will contain triggered
-++   events. The "maxevents" is the maximum number of events to be
-++   returned ( usually size of "events" ). The "timeout" parameter
-++   specifies the maximum wait time in milliseconds (-1 == infinite).
-++
-++   This function is a cancellation point and therefore not marked with
-++   __THROW.  */
-++extern int epoll_wait (int __epfd, struct epoll_event *__events,
-++		       int __maxevents, int __timeout);
-++
-++
-++/* Same as epoll_wait, but the thread's signal mask is temporarily
-++   and atomically replaced with the one provided as parameter.
-++
-++   This function is a cancellation point and therefore not marked with
-++   __THROW.  */
-++extern int epoll_pwait (int __epfd, struct epoll_event *__events,
-++			int __maxevents, int __timeout,
-++			__const __sigset_t *__ss);
-++
-++__END_DECLS
-++
-++#endif /* sys/epoll.h */
-+diff --git a/libc/sysdeps/linux/x86_64/sys/epoll.h b/libc/sysdeps/linux/x86_64/sys/epoll.h
-+index 02672d3..6b90d54 100644
-+--- a/libc/sysdeps/linux/x86_64/sys/epoll.h
-++++ b/libc/sysdeps/linux/x86_64/sys/epoll.h
-+@@ -1,4 +1,4 @@
-+-/* Copyright (C) 2002,2003,2004,2005,2006 Free Software Foundation, Inc.
-++/* Copyright (C) 2002,2003,2004,2005,2006,2007,2008 Free Software Foundation, Inc.
-+    This file is part of the GNU C Library.
-+ 
-+    The GNU C Library is free software; you can redistribute it and/or
-+@@ -22,6 +22,26 @@
-+ #include <stdint.h>
-+ #include <sys/types.h>
-+ 
-++/* Get __sigset_t.  */
-++#include <bits/sigset.h>
-++
-++#ifndef __sigset_t_defined
-++# define __sigset_t_defined
-++typedef __sigset_t sigset_t;
-++#endif
-++
-++
-++#if 0
-++/* Flags to be passed to epoll_create1.  */
-++enum
-++  {
-++    EPOLL_CLOEXEC = 02000000,
-++#define EPOLL_CLOEXEC EPOLL_CLOEXEC
-++    EPOLL_NONBLOCK = 04000
-++#define EPOLL_NONBLOCK EPOLL_NONBLOCK
-++  };
-++#endif
-++
-+ 
-+ enum EPOLL_EVENTS
-+   {
-+@@ -45,6 +65,8 @@ enum EPOLL_EVENTS
-+ #define EPOLLERR EPOLLERR
-+     EPOLLHUP = 0x010,
-+ #define EPOLLHUP EPOLLHUP
-++    EPOLLRDHUP = 0x2000,
-++#define EPOLLRDHUP EPOLLRDHUP
-+     EPOLLONESHOT = (1 << 30),
-+ #define EPOLLONESHOT EPOLLONESHOT
-+     EPOLLET = (1 << 31)
-+@@ -81,6 +103,12 @@ __BEGIN_DECLS
-+    returned by epoll_create() should be closed with close().  */
-+ extern int epoll_create (int __size) __THROW;
-+ 
-++#if 0
-++/* Same as epoll_create but with an FLAGS parameter.  The unused SIZE
-++   parameter has been dropped.  */
-++extern int epoll_create1 (int __flags) __THROW;
-++#endif
-++
-+ 
-+ /* Manipulate an epoll instance "epfd". Returns 0 in case of success,
-+    -1 in case of error ( the "errno" variable will contain the
-+@@ -105,6 +133,16 @@ extern int epoll_ctl (int __epfd, int __op, int __fd,
-+ extern int epoll_wait (int __epfd, struct epoll_event *__events,
-+ 		       int __maxevents, int __timeout);
-+ 
-++
-++/* Same as epoll_wait, but the thread's signal mask is temporarily
-++   and atomically replaced with the one provided as parameter.
-++
-++   This function is a cancellation point and therefore not marked with
-++   __THROW.  */
-++extern int epoll_pwait (int __epfd, struct epoll_event *__events,
-++			int __maxevents, int __timeout,
-++			__const __sigset_t *__ss);
-++
-+ __END_DECLS
-+ 
-+ #endif /* sys/epoll.h */
-+--
-+cgit v0.8.2.1
-diff --git a/meta-oe/recipes-core/uclibc/uclibc_git.bb b/meta-oe/recipes-core/uclibc/uclibc_git.bb
-index 3719ea2..cbc8ab8 100644
---- a/meta-oe/recipes-core/uclibc/uclibc_git.bb
-+++ b/meta-oe/recipes-core/uclibc/uclibc_git.bb
-@@ -11,7 +11,7 @@ SRCREV="074930dd7f2a18a7013cdb72cc38136f3be39c40"
- PR_append = "+gitr${SRCPV}"
- 
- require uclibc.inc
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- PROVIDES += "virtual/${TARGET_PREFIX}libc-for-gcc"
- 
- #recent versions uclibc require real kernel headers
-@@ -39,5 +39,6 @@ SRC_URI = "git://uclibc.org/uClibc.git;branch=master;protocol=git \
- 	file://argp-support.patch \
- 	file://argp-headers.patch \
- 	file://remove_attribute_optimize_Os.patch \
-+	file://uclibc-epoll.patch \
- 	"
- S = "${WORKDIR}/git"
+Greetings
+
+Florian
+
 -- 
-1.7.4.1
-
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
