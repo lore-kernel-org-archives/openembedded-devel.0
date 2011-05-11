@@ -1,38 +1,37 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1QK0N7-0000gw-9L; Wed, 11 May 2011 05:46:01 +0200
-Received: by ewy5 with SMTP id 5so31836ewy.6
-	for <multiple recipients>; Tue, 10 May 2011 20:43:15 -0700 (PDT)
+	(envelope-from <raj.khem@gmail.com>) id 1QK169-0005CV-LK
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 11 May 2011 06:32:33 +0200
+Received: by eye27 with SMTP id 27so37695eye.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 May 2011 21:29:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=+x1eKY2YugAHegdTTYyuByjFXq22+5Z+C8Sh+6XpRbo=;
-	b=T9cWWEWD864QUjuJI+52NJlCWfUFytEXeqfwcEcyG1iY0KopMmnlG36LcdQ4lo6/Ct
-	IBVYE1l6qgdX51EV4jBmjozOiBiR9I05yReTsADzCSBT/ST2XHga+4jR88O1EDrmll51
-	tqX1G3rZWkdjeI6/wAk5GArQyCviUpI21hVnY=
+	:message-id:subject:to:cc:content-type:content-transfer-encoding;
+	bh=qJzQ5rfLzmp2jvrvnknHvqRQim10qLhLFAmFhI4WLSA=;
+	b=aLD/yxdDpI6iGR1KXENnTYU1zcgkOfuQVROxSQMG+qGplg40ClGCE2Z5EaygknJ6N/
+	2I1qUlI7DXDUeqVtWgMfzlb+apFSRlU3huIHNIDbZdvu6U1tMBe846DMS1DpjJcD+N3I
+	rOr0dtL7ptIfyKWUyWKPz6r2OAj/wvsrzBoa0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=YvndthH3BCAIu+TheVyEZ0WcgM2Q/jG9fIszUL06HwJBwnCQqp91yDu0nQyic1rnyT
-	n4saX6nhVAbdSWGxCbMpmuojEQnc991fRyk7t9ePDpEptEotAuuTGh6XK6XICRss83CA
-	NNP9gDt9UPNmm+D1JxK+uuDBosWN/z8gH0T3k=
-Received: by 10.14.15.20 with SMTP id e20mr4282400eee.16.1305085395133; Tue,
-	10 May 2011 20:43:15 -0700 (PDT)
+	:cc:content-type:content-transfer-encoding;
+	b=tai2ASSl+2Pfj4R2DxpX/moGKT+ykJtnhmFTTySemiVqDPupglabEymp2jR2XIAekh
+	8ZN8tIRNk+rDIEfR1H6toZsUZo2ORQQpkCFW46EiJu5Ibxdp9M0/FI9rEFDyzNL2CWU5
+	kaioYHaKzm+leqshAs5ewhAe1e+2U0JGDLSVg=
+Received: by 10.14.15.78 with SMTP id e54mr4102795eee.80.1305088179141; Tue,
+	10 May 2011 21:29:39 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.14.53.5 with HTTP; Tue, 10 May 2011 20:42:45 -0700 (PDT)
-In-Reply-To: <BANLkTi=uvN8_u6SQhKfs2BwOnSOCQApKSQ@mail.gmail.com>
-References: <cover.1305035617.git.richard.purdie@linuxfoundation.org>
-	<BANLkTim0hVFjUd+8j5jTR5dv7TwSMk=4qA@mail.gmail.com>
-	<1305036525.30391.275.camel@rex>
-	<BANLkTi=uvN8_u6SQhKfs2BwOnSOCQApKSQ@mail.gmail.com>
+Received: by 10.14.53.5 with HTTP; Tue, 10 May 2011 21:29:09 -0700 (PDT)
+In-Reply-To: <1304968617-4949-7-git-send-email-otavio@ossystems.com.br>
+References: <1304968617-4949-1-git-send-email-otavio@ossystems.com.br>
+	<1304968617-4949-7-git-send-email-otavio@ossystems.com.br>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 10 May 2011 20:42:45 -0700
-Message-ID: <BANLkTinJV3eAmnfx+-dcKkhu3aQy2xEkMQ@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: [OE-core] [PATCH 0/6] RFC Distro config changes
+Date: Tue, 10 May 2011 21:29:09 -0700
+Message-ID: <BANLkTikdBou4+n10aSsdH30w98AA0wuUKg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-oe][PATCH v4 07/12] libiconv: drop hack since gettext was being inherited
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,44 +45,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 May 2011 03:46:01 -0000
+X-List-Received-Date: Wed, 11 May 2011 04:32:33 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
----------- Forwarded message ----------
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, May 10, 2011 at 8:35 PM
-Subject: Re: [OE-core] [PATCH 0/6] RFC Distro config changes
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-
-
-On Tue, May 10, 2011 at 7:08 AM, Richard Purdie
-<richard.purdie@linuxfoundation.org> wrote:
->> THere is something wrong with git.
->> If I browse to the 2nd url I get:
->> Bad object id: rpurdie/distro
->> going to git and navigating to the branch gives the same result.
->>
->> =C2=A0Anyway, although I am not able to review the changes on git, a thu=
-mbs up
->> for the initiative.
+On Mon, May 9, 2011 at 12:16 PM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+> =C2=A0.../recipes-support/libiconv/libiconv_1.13.1.bb =C2=A0 =C2=A0| =C2=
+=A0 =C2=A05 +----
+> =C2=A01 files changed, 1 insertions(+), 4 deletions(-)
 >
-> I've noticed this happening with branches on that repository for the
-> past couple of days, its not just this branch.
+> diff --git a/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb b/meta-o=
+e/recipes-support/libiconv/libiconv_1.13.1.bb
+> index 4db70cb..868314b 100644
+> --- a/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
+> +++ b/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
+> @@ -8,10 +8,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb6734=
+63ab874e80d47fae504 \
+> =C2=A0BBCLASSEXTEND =3D "native nativesdk"
 >
-> Khem/Cliff/Tom: Who might be able to look into and help fix this?
+> =C2=A0PROVIDES =3D "virtual/libiconv"
+> -PR =3D "r1"
+> -
+> -#gettext.class cant be inherit here so use this hack
+> -DEPENDS =3D "${@['','gettext-native'][bb.data.getVar('USE_NLS', d, 1) =
+=3D=3D 'yes']}"
+> +PR =3D "r2"
+>
+> =C2=A0EXTRA_OECONF +=3D =C2=A0"${@['--disable-nls','--enable-nls'][bb.dat=
+a.getVar('USE_NLS', d, 1) =3D=3D 'yes']}"
+>
 
-Hi
-
-This was a url rewrite problem when I tried to redirect gitweb traffic to c=
-git
-the regexp was too liberal. I have rewritten the rewrite rules and now
-everything should be hunky dory
-
-Let me know if you run into problems
-
-Sorry for inconvenience
-
--Khem
+even this setting of EXTRA_OECONF can be dropped since --enable-nls
+and --disable-nls are also taken care by gettext bbclass
+> --
+> 1.7.2.5
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
