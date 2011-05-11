@@ -1,44 +1,29 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1QKG0R-0002of-SU
+Received: from 64.mail-out.ovh.net ([91.121.185.65])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1QKGDo-00031j-Ce
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 May 2011 22:27:39 +0200
-Received: by fxm19 with SMTP id 19so711720fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 May 2011 13:24:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=QlzCQwZ5M5FRRFDrmaEhHXKsE8gW4w4B9uWt0gO4RwY=;
-	b=AqOJnIaJ5lDpGrNBVjRyOIXo+C0vg6jHwQdnFwRTNhELz4/D4g1B64Z+9i1s9TNcT4
-	tOI5QdIYvPoUrr5z4rRFdtdcpLcDlicsk3nM7xl1Dk/1ZJ7mqQFXql6ZN2A+jXW+fEuH
-	ubEODIAp+dstAbBo5XmmCU5/vGvO5RIeATJwg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=qeR0IFGrP/1W2D2o4ASyNZQGxaguNk3i9g/Qhaj8mINdlyz2WHmGNxBVBQk+MS08vP
-	XXWxDFw6jBMBoMiNyjvCVfeckWUaICBzvWRs6x1aB+n05dWcuTB6zlmlUJ1Fz0wptG1m
-	mhA/+ns3DQi6BCwUPrFnZBHgoqTTfjMGK0UvU=
-Received: by 10.223.66.208 with SMTP id o16mr813538fai.122.1305145492507;
-	Wed, 11 May 2011 13:24:52 -0700 (PDT)
-Received: from s42.loc (85-127-250-41.dynamic.xdsl-line.inode.at
-	[85.127.250.41])
-	by mx.google.com with ESMTPS id p16sm204586fax.45.2011.05.11.13.24.50
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 11 May 2011 13:24:51 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.75)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1QKFy2-0004z0-Ah; Wed, 11 May 2011 22:25:10 +0200
-Date: Wed, 11 May 2011 22:25:10 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	Wed, 11 May 2011 22:41:28 +0200
+Received: (qmail 17708 invoked by uid 503); 11 May 2011 20:08:24 -0000
+Received: from b6.ovh.net (HELO mail412.ha.ovh.net) (213.186.33.56)
+	by 64.mail-out.ovh.net with SMTP; 11 May 2011 20:08:24 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 11 May 2011 22:38:43 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 11 May 2011 22:38:41 +0200
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110511202510.GG7657@mx.loc>
-References: <1305062085.9982.62.camel@mattotaupa>
-	<1305133911.2421.29.camel@phil-desktop>
+Date: Wed, 11 May 2011 22:30:01 +0200
+Message-Id: <1305145805-14609-3-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1305145805-14609-1-git-send-email-eric@eukrea.com>
+References: <1305145805-14609-1-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-In-Reply-To: <1305133911.2421.29.camel@phil-desktop>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: minimal-uclibc: systemd fails with `src/manager.c:257:42: error: 'EPOLL_CLOEXEC' undeclared (first use in this function)`
+X-Ovh-Tracer-Id: 17568823623319072075
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: [PATCH 2/6] minimal: prefer qt 4.7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,30 +37,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 May 2011 20:27:40 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 11 May 2011 20:41:28 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, May 11, 2011 at 06:11:51PM +0100, Phil Blundell wrote:
->On Tue, 2011-05-10 at 23:14 +0200, Paul Menzel wrote:
->> I am no uClibc expert, but do you know if uClibc will provide
->> `EPOLL_CLOEXEC` in the near future? How should systemd fix that?
->
->It's not just EPOLL_CLOEXEC: uClibc seems to be missing epoll_create1()
->entirely.  As far as I know there's nothing complex about that, though:
->it's just a standard syscall wrapper, so I don't know why it would have
->been deliberately left out.  I guess you'd have to ask the uClibc h4x0rs
->about that.
->
->There probably is no trivial workaround available to systemd.  If you
->wanted a quick hack to make it work then you could call
->syscall(SYS_epoll_create1, O_CLOEXEC) manually.  Or you could perhaps
->eliminate the usage of EPOLL_CLOEXEC in favour of a separate fcntl()
->call, but that may not be safe if systemd is multithreaded.
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+---
+ conf/distro/minimal.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-It was only omitted until now since nobody asked for it.
+diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
+index 090a4db..18bcfae 100644
+--- a/conf/distro/minimal.conf
++++ b/conf/distro/minimal.conf
+@@ -115,7 +115,7 @@ require conf/distro/include/preferred-opie-versions-1.2.5.inc
+ 
+ PREFERRED_PROVIDER_opkg ?= "opkg"
+ PREFERRED_PROVIDER_virtual/update-alternatives ?= "opkg"
+-PREFERRED_QT_VERSION ?= "4.7.2"
++PREFERRED_QT_VERSION ?= "4.7.3"
+ PREFERRED_VERSION_qt4-tools-native = "${PREFERRED_QT_VERSION}"
+ PREFERRED_VERSION_qt4-tools-sdk = "${PREFERRED_QT_VERSION}"
+ PREFERRED_VERSION_qt4-embedded = "${PREFERRED_QT_VERSION}"
+-- 
+1.7.0.4
 
-You should be set if you can trick someone into updating to
-c91c3a2b27f5909e190cde4518383864298e82af or later.
 
 
