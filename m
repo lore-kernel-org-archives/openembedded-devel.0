@@ -1,34 +1,24 @@
-Received: from [77.233.226.4] (helo=mail.doredevelopment.dk)
+Received: from dub0-omc1-s3.dub0.hotmail.com ([157.55.0.202])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eha@dev.doredevelopment.dk>) id 1QKOc5-00048z-2s
+	(envelope-from <l.bolognini@hotmail.it>) id 1QKREf-0007DF-LQ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 May 2011 07:39:05 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.doredevelopment.dk (Postfix) with ESMTP id E6AEB3EF5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 May 2011 07:36:12 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at dev.doredevelopment.dk
-Received: from mail.doredevelopment.dk ([127.0.0.1])
-	by localhost (public.doredevelopment.dk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id 8e6sVsEMjhj3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 May 2011 07:36:10 +0200 (CEST)
-Received: from [192.168.1.189] (0x55532124.adsl.cybercity.dk [85.83.33.36])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: eha)
-	by mail.doredevelopment.dk (Postfix) with ESMTPSA id 91AC8254
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 May 2011 07:36:10 +0200 (CEST)
-From: Esben Haabendal <eha@dev.doredevelopment.dk>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <BANLkTik19x9evsK+6uZ73FXyjyJKB1O-vA@mail.gmail.com>
-References: <BANLkTik19x9evsK+6uZ73FXyjyJKB1O-vA@mail.gmail.com>
-Organization: DoreDevelopment ApS
-Date: Thu, 12 May 2011 07:36:06 +0200
-Message-ID: <1305178566.2166.2.camel@eha.ulstruplund.dk>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: Another race failure, not sure if this is a hard dependency or an inflight staging which races with another configure??
+	Thu, 12 May 2011 10:27:06 +0200
+Received: from DUB107-W41 ([157.55.0.237]) by dub0-omc1-s3.dub0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.4675); 
+	Thu, 12 May 2011 01:22:59 -0700
+Message-ID: <DUB107-w41DACD15A70DBAF0FFD5F998890@phx.gbl>
+X-Originating-IP: [78.6.111.196]
+From: Luca Bolognini <l.bolognini@hotmail.it>
+To: Openembedded Mailing List <openembedded-devel@lists.openembedded.org>,
+	Arago Mailing List <arago-devel@gforge.ti.com>
+Date: Thu, 12 May 2011 10:22:59 +0200
+Importance: Normal
+MIME-Version: 1.0
+X-OriginalArrivalTime: 12 May 2011 08:22:59.0393 (UTC)
+	FILETIME=[CDA3EB10:01CC107D]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: cybaslt@hotmail.com
+Subject: apache2-native and modphp trouble
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,40 +32,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2011 05:39:05 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-
-On Thu, 2011-05-12 at 01:58 +0200, Leon Woestenberg wrote:
-> Hello,
-> 
-> I think I found another build race here (must love multi-core machines).
-> 
-> perl-native is still being staged while file-native tries to run perl
-> stuff resulting in "| perl: error while loading shared libraries:
-> libperl.so: cannot open shared object file: No such file or
-> directory".
-> 
-> Restarting bitbake continues the build (note that perl native sysroot
-> staging finishes just after file-native failing).
-> 
-> Now, I have been thinking about these races; even though we might not
-> have a dependency on perl, a configure stage may probe for perl, and
-> if it exists, starts to run tests against it.
-> So either perl must be present, or not at all. I.e. atomicly staged in sysroot.
-> 
-> Of course, could be this IS a hard dependency after all.
-> 
-> I'll investigate later, here is a small piece of log for your eyes.
-
-I know I am kind of repeating myself, but these kind of problems do not
-arise when using a per-recipe staging as I have proposed (and doing in
-OE-lite).
-
-I for one, always prefer to design out race-conditions instead of having
-a continous (and always up-hill) battle with them.
-
-/Esben
+X-List-Received-Date: Thu, 12 May 2011 08:27:06 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
 
+Hallo=2Cwhy=2C in recipe apache2-native_2.2.14.bb=2C passing from PR=3Dr1 t=
+o PR=3Dr2=2C do_stage has been deleted and replaced with do_install task?
+This causes modphp configuration to fail:| Sorry=2C I cannot run apxs.  Pos=
+sible reasons follow:|| 1. Perl is not installed| 2. apxs was not found. Tr=
+y to pass the path using --with-apxs2=3D/path/to/apxs| 3. Apache was not bu=
+ilt using --enable-so (the apxs usage page is displayed)|| The output of /h=
+ome/bolognini/diskp2/diskp2.11/oe/arago-tmp/sysroots/i686-linux/usr/bin/apx=
+s follows:| cannot open /home/bolognini/diskp2/diskp2.11/oe/arago-tmp/sysro=
+ots/i686-linux/usr/build/config_vars.mk: No such file or directory at /home=
+/bolognini/diskp2/diskp2.11/oe/arago-tmp/sysroots/i686-linux/usr/bin/apxs l=
+ine 218.| configure: error: AbortingNOTE: Task failed: /home/bolognini/disk=
+p2/diskp2.11/oe/arago-tmp/work/armv7a-none-linux-gnueabi/modphp-5.1.6-r3/te=
+mp/log.do_configure.14249ERROR: TaskFailed event exception=2C abortingERROR=
+: Build of /home/bolognini/diskp2/diskp2.11/oe/arago-oe-dev/recipes/modphp/=
+modphp_5.1.6.bb do_configure failedERROR: Task 12 (/home/bolognini/diskp2/d=
+iskp2.11/oe/arago-oe-dev/recipes/modphp/modphp_5.1.6.bb=2C do_configure) fa=
+iledNOTE: Tasks Summary: Attempted 405 tasks of which 405 didn't need to be=
+ rerun and 1 failed.ERROR: '/home/bolognini/diskp2/diskp2.11/oe/arago-oe-de=
+v/recipes/modphp/modphp_5.1.6.bb' failed
+as already pointed out by David Abdurachmanov ( http://comments.gmane.org/g=
+mane.linux.distributions.angstrom.devel/4586 )
+By the way=2C if I replace r2 recipe with r1=2C rebuild apache2 package and=
+ then succesfully build modphp=2C apache2 segfaults as libphp5.so is loaded=
+ with LoadModule directive inside httpd.conf.This was accurately described =
+by Raffaele Recalcati ( https://gforge.ti.com/pipermail/arago-devel/2010-Se=
+ptember/000312.html )=20
+Have people committing r2 recipe of apache2-native ever tried to build modp=
+hp?Does anyone succeed in getting apache2-2.2.14 and modphp-5.1.6 work toge=
+ther in boards such as beagleboard or something else (it doesn't matter the=
+ board)?I think this is an old issue but it seems to me that no solution ha=
+s been found yet.
+Thank you=2CLuca
+-------------------------Luca Bologninil.bolognini@hotmail.it
+
+
+ 		 	   		  =
 
