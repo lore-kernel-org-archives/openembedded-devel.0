@@ -1,32 +1,32 @@
 Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koansoftware@gmail.com>) id 1QKRN7-0007Tx-Jj
+	(envelope-from <koansoftware@gmail.com>) id 1QKRNF-0007YC-T3
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 May 2011 10:35:49 +0200
+	Thu, 12 May 2011 10:35:58 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 924622C835
+	by wiki.koala.it (Postfix) with ESMTP id 782962C823
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 May 2011 08:23:37 +0000 (UTC)
+	Thu, 12 May 2011 08:22:52 +0000 (UTC)
 Received: from wiki.koala.it ([127.0.0.1])
 	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0VS1M9Z5dXQq
+	with ESMTP id KIH1ZDyJ8zTq
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 May 2011 08:23:30 +0000 (UTC)
+	Thu, 12 May 2011 08:22:46 +0000 (UTC)
 Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 65C582C7DB
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id ED71A2C7DB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 May 2011 08:23:29 +0000 (UTC)
-Message-ID: <4DCB991B.70202@gmail.com>
-Date: Thu, 12 May 2011 10:23:55 +0200
+	Thu, 12 May 2011 08:22:45 +0000 (UTC)
+Message-ID: <4DCB98F0.6020009@gmail.com>
+Date: Thu, 12 May 2011 10:23:12 +0200
 From: Marco Cavallini <koansoftware@gmail.com>
 Organization: Marco Cavallini
 User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1298214559-9650-1-git-send-email-tom_rini@mentor.com>
-	<1298214559-9650-3-git-send-email-tom_rini@mentor.com>
-In-Reply-To: <1298214559-9650-3-git-send-email-tom_rini@mentor.com>
-Subject: Re: [PATCH 2/4] kaeilos 2009: Pin gvfs to 1.6.6
+References: <1305145805-14609-1-git-send-email-eric@eukrea.com>
+	<1305145805-14609-5-git-send-email-eric@eukrea.com>
+In-Reply-To: <1305145805-14609-5-git-send-email-eric@eukrea.com>
+Subject: Re: [PATCH 4/6] kaeilos-2009: prefer qt 4.7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,31 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2011 08:35:49 -0000
+X-List-Received-Date: Thu, 12 May 2011 08:35:58 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Tom Rini ha scritto, Il 20/02/2011 16:09:
-> We're doing this since glib-2.0 is pinned.
->=20
-> Signed-off-by: Tom Rini <tom_rini@mentor.com>
+Eric B=C3=A9nard ha scritto, Il 11/05/2011 22:30:
+> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+> Cc: Marco Cavallini <m.cavallini@koansoftware.com>
 > ---
->  .../include/kaeilos-2009-preferred-versions.inc    |    1 +
->  1 files changed, 1 insertions(+), 0 deletions(-)
+>  .../include/kaeilos-2009-preferred-versions.inc    |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
 >=20
 > diff --git a/conf/distro/include/kaeilos-2009-preferred-versions.inc b/=
 conf/distro/include/kaeilos-2009-preferred-versions.inc
-> index cf0f65d..0125724 100644
+> index 498f5fb..27c78d6 100644
 > --- a/conf/distro/include/kaeilos-2009-preferred-versions.inc
 > +++ b/conf/distro/include/kaeilos-2009-preferred-versions.inc
-> @@ -26,6 +26,7 @@ PREFERRED_VERSION_gst-pulse 	=3D "0.9.7"
->  PREFERRED_VERSION_gtk+		=3D "2.20.1"
->  PREFERRED_VERSION_gtk+-native	=3D "2.20.1"
->  PREFERRED_VERSION_gtkmm		=3D "2.20.0"
-> +PREFERRED_VERSION_gvfs		=3D "1.6.6"
->  PREFERRED_VERSION_hal		=3D "0.5.14"
->  PREFERRED_VERSION_libgemwidget	=3D "1.0"
->  PREFERRED_VERSION_libgpephone	=3D "0.4"
+> @@ -61,7 +61,7 @@ PREFERRED_VERSION_python-pycairo =3D "1.8.0"
+>  KAEILOS_WX_VERSION ?=3D "2.8.10"
+>  PREFERRED_VERSION_wxwidgets =3D "${KAEILOS_WX_VERSION}"
+> =20
+> -KAEILOS_QT_VERSION ?=3D "4.7.2"
+> +KAEILOS_QT_VERSION ?=3D "4.7.3"
+>  PREFERRED_VERSION_qt4-tools-native =3D "${KAEILOS_QT_VERSION}"
+>  PREFERRED_VERSION_qt4-tools-sdk =3D "${KAEILOS_QT_VERSION}"
+>  PREFERRED_VERSION_qt4-embedded =3D "${KAEILOS_QT_VERSION}"
 
 
 Acked-by: Marco Cavallini <m.cavallini@koansoftware.com>
