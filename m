@@ -1,40 +1,37 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QKdiT-00069c-PV
+	(envelope-from <needemesleepe@gmail.com>) id 1QKdt1-0006N9-OY
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 May 2011 23:46:41 +0200
-Received: by bwz5 with SMTP id 5so1895927bwz.6
+	Thu, 12 May 2011 23:57:36 +0200
+Received: by pzk36 with SMTP id 36so946367pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 May 2011 14:43:53 -0700 (PDT)
+	Thu, 12 May 2011 14:54:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=2T29XkkEDW39c+7OZoTRmMw2SXrnzwWYq15dP4DjNJQ=;
-	b=VfP70bC3kLvv+i+/pqEI+GjvlyNJkEzYC33T1ciTwDgdE9M0VEB0lmYSeMWq9Kne5n
-	qESVwx0HxNTqUAwskPhJimAOykWxQe5pNeNpXSFKaftUMdkUfiuhCrGoYv76Mvdz52sJ
-	/CRzoAyof8FB0SmUMY5ABG61lhVsLRigeIktU=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=NQzotFnGrnkvc9+y6WtyrXgxXQ+WvRaVQUIx0ruWOyk=;
+	b=e3x/qvLScOSNLn6YT/+mP4A4CNj2Jd0SXFnKgQOyq1hByJ3FQ+/EJYzvzdhvu46vim
+	1W7xaIowPKePP5VZsthSPsJqgVRyNixoyfhRKlYZQb7UctppWGeeyjNnG8AAQ+nYn5/b
+	806ZffMbV+2eguEOdn22ZlI1zv20Gr0FUhiwk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=syLbiipBNP1YAMaLzeW+2hqKi0l5kQkNmTlyFpwcguGrlw5Yr2MOPpXujeACrP9V8n
-	QNCjOGJo4H3yThV0om/6x2lp3fC7LPWfjODT1FI7m8OlRvxLAEN+cXNi9arvC9GL9GV3
-	Lf+IRmUq1tfhWNpE4TWsBajju0QUON5SRwL2Y=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Mi2nEjsdyGiIsBTtKEIAWGapJPEHWJLdza5paMMCD5GUPJEkmbCvyvDoS9uvWRdwxh
+	UIfyYy6TGaZPXdrkJg8P3W8ISXjo7xAq7FD0WtX/JlrjtGBi/JGFURGueiY/BXN25qFL
+	EHzf1Xf0Eim46sAsAO6SjpUpiLfJw9Rxgcuko=
 MIME-Version: 1.0
-Received: by 10.205.33.194 with SMTP id sp2mr731271bkb.27.1305236633836; Thu,
-	12 May 2011 14:43:53 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.79.70 with HTTP; Thu, 12 May 2011 14:43:53 -0700 (PDT)
-In-Reply-To: <1305235863-16025-2-git-send-email-eric@eukrea.com>
-References: <1305235863-16025-1-git-send-email-eric@eukrea.com>
-	<1305235863-16025-2-git-send-email-eric@eukrea.com>
-Date: Thu, 12 May 2011 18:43:53 -0300
-X-Google-Sender-Auth: JJtyq5SnF01lI1f_3keQkbTmFHM
-Message-ID: <BANLkTinBH96fP6zAw8FoQiHmD9HYmv8Ufg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by 10.68.49.73 with SMTP id s9mr991452pbn.117.1305237286852; Thu, 12
+	May 2011 14:54:46 -0700 (PDT)
+Received: by 10.68.41.97 with HTTP; Thu, 12 May 2011 14:54:46 -0700 (PDT)
+In-Reply-To: <1305236006.13652.41.camel@mattotaupa>
+References: <BANLkTimHpb2Jyf=QYk_p0VL95jdNQJGCog@mail.gmail.com>
+	<1305236006.13652.41.camel@mattotaupa>
+Date: Thu, 12 May 2011 17:54:46 -0400
+Message-ID: <BANLkTimdLk4S_0zjM8NTwXSxrTU_epdC+Q@mail.gmail.com>
+From: Martin Bures <needemesleepe@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/3] qt4-native: also build lrelease
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: wpa-supplicant-0.7.inc patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,22 +45,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2011 21:46:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 12 May 2011 21:57:36 -0000
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 12, 2011 at 18:31, Eric B=E9nard <eric@eukrea.com> wrote:
-> as this is nedded to build translations files
+Hi, Paul -
+
+I will take a look at the policy and try to update the patch tomorrow.
+
+As for your questions/comments about .config.  That was how the recipe was
+when I found it - I was just trying to make minimal modifications from what
+was there to get it working.  I agree that it could be changed to use
+defconfig.  As with the patch submission guidelines, I will take a look and
+see if this change as-suggested works correctly tomorrow and modify and
+resubmit the patch accordingly.
+
+best regards,
+martin.
+
+On Thu, May 12, 2011 at 5:33 PM, Paul Menzel <
+paulepanter@users.sourceforge.net> wrote:
+
+> Dear Martin,
 >
-> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
-
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
-
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
-
+>
+> Am Donnerstag, den 12.05.2011, 16:53 -0400 schrieb Martin Bures:
+> > The wpa-supplicant recipe does not place dbus configuration files even
+> > though dbus is enabled in the .config.
+>
+> you can add this to the commit message too.
+>
+> > The following patch fixes this for me.
+>
+> Thank you very much for the patch. Unfortunately we cannot commit this
+> yet, since at least your Signed-off-by line is missing. Please take a
+> look at the commit policy [1].
+>
+> > From b8d6a52070f678371aef194fc0df37c6911e1952 Mon Sep 17 00:00:00 2001
+> > From: Martin Bures <mbures@zoll.com>
+>
+> You should decide what address to use and also take that for the
+> Signed-off-by line.
+>
+> > Date: Thu, 12 May 2011 16:35:29 -0400
+> > Subject: [PATCH] Fixed issue where dbus configuration is not detected.
+>  This prevented
+> >  wpa-supplicant dbus support from being included.
+>
+> Please use a short commit summary and an elaborate commit message
+> (body).
+>
+> wpa-supplicant-0.7.inc: use `.config` in the source directory `${S}`
+>
+> Using the `.config` in the working directory `${WORKDIR}` =85
+>
+> > ---
+> >  recipes/wpa-supplicant/wpa-supplicant-0.7.inc |    6 +++---
+> >  1 files changed, 3 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+> b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+> > index 722f5fa..6e2f754 100644
+> > --- a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+> > +++ b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+> > @@ -50,15 +50,15 @@ do_install () {
+> >         install -m 600 ${WORKDIR}/defaults-sane
+> ${D}${sysconfdir}/default/wpa
+> >         install -m 600 ${WORKDIR}/wpa_supplicant.conf-sane
+> ${D}${sysconfdir}/wpa_supplicant.conf
+> >
+> > -       if grep -q ^CONFIG_CTRL_IFACE_DBUS=3Dy .config || grep -q
+> ^CONFIG_CTRL_IFACE_DBUS_NEW=3Dy .config; then
+> > +       if grep -q ^CONFIG_CTRL_IFACE_DBUS=3Dy ${S}/.config || grep -q
+> ^CONFIG_CTRL_IFACE_DBUS_NEW=3Dy ${S}/.config; then
+>
+> I still do not quite understand the change. Looking at
+>
+>        do_configure () {
+>                install -m 0755 ${WORKDIR}/defconfig .config
+>                if [ "${@base_contains('COMBINED_FEATURES', 'madwifi', 1, =
+0,
+> d)}" =3D "1" ]; then
+>                        echo "CONFIG_DRIVER_MADWIFI=3Dy" >> .config
+>                        echo "CFLAGS +=3D -I${STAGING_INCDIR}/madwifi-ng" =
+>>
+> .config
+>                fi
+>        }
+>
+> `.config` should be created in `${WORKDIR}` as a copy of `defconfig`.
+> Why do you now consider `.config` in the source directory? Maybe you
+> should adapt the `defconfig` shipped by OpenEmbedded?
+>
+> >                 install -d ${D}/${sysconfdir}/dbus-1/system.d
+> >                 install -m 644 ${S}/dbus/dbus-wpa_supplicant.conf
+> ${D}/${sysconfdir}/dbus-1/system.d
+> >                 install -d ${D}/${datadir}/dbus-1/system-services
+> > -               if grep -q ^CONFIG_CTRL_IFACE_DBUS=3Dy .config; then
+> > +               if grep -q ^CONFIG_CTRL_IFACE_DBUS=3Dy ${S}/.config; th=
+en
+> >                         sed -i -e s:/sbin:${sbindir}:g
+> ${S}/dbus/fi.epitest.hostap.WPASupplicant.service
+> >                         install -m 644
+> ${S}/dbus/fi.epitest.hostap.WPASupplicant.service
+> ${D}/${datadir}/dbus-1/system-services
+> >                 fi
+> > -               if grep -q ^CONFIG_CTRL_IFACE_DBUS_NEW=3Dy .config; the=
+n
+> > +               if grep -q ^CONFIG_CTRL_IFACE_DBUS_NEW=3Dy ${S}/.config=
+;
+> then
+> >                         sed -i -e s:/sbin:${sbindir}:g
+> ${S}/dbus/fi.w1.wpa_supplicant1.service
+> >                         install -m 644
+> ${S}/dbus/fi.w1.wpa_supplicant1.service
+> ${D}/${datadir}/dbus-1/system-services
+> >                 fi
+>
+> I do not know the recipe, so please excuse my questions.
+>
+>
+> Thanks,
+>
+> Paul
+>
+>
+> [1] http://openembedded.org/index.php/Commit_Policy
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
