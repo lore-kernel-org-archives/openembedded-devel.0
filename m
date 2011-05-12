@@ -1,22 +1,31 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QKRjN-0000DK-FC for openembedded-devel@lists.openembedded.org;
-	Thu, 12 May 2011 10:58:49 +0200
-Received: from f053044015.adsl.alicedsl.de ([78.53.44.15]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QKRi1-00083p-Gu for openembedded-devel@lists.openembedded.org;
-	Thu, 12 May 2011 08:57:25 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from 14.70.mail-out.ovh.net ([178.33.45.63] helo=70.mail-out.ovh.net)
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1QKSu7-0004Nu-8P
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 May 2011 12:14:01 +0200
+Received: (qmail 17511 invoked by uid 503); 12 May 2011 09:13:10 -0000
+Received: from b6.ovh.net (HELO mail640.ha.ovh.net) (213.186.33.56)
+	by 70.mail-out.ovh.net with SMTP; 12 May 2011 09:13:10 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 12 May 2011 11:11:14 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 12 May 2011 11:11:12 +0200
+Message-ID: <4DCBA430.1020108@eukrea.com>
+Date: Thu, 12 May 2011 11:11:12 +0200
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1305145805-14609-1-git-send-email-eric@eukrea.com>
 References: <1305145805-14609-1-git-send-email-eric@eukrea.com>
-Date: Thu, 12 May 2011 10:56:02 +0200
-Message-ID: <1305190562.4254.16.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
+	<1305190562.4254.16.camel@mattotaupa>
+In-Reply-To: <1305190562.4254.16.camel@mattotaupa>
+X-Ovh-Tracer-Id: 11830956221970230601
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
 Subject: Re: Update qt to 4.7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,46 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2011 08:58:49 -0000
-X-Groupsio-MsgNum: 31937
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-0829ysLJ8EK2zqzR7YEh"
+X-List-Received-Date: Thu, 12 May 2011 10:14:01 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
---=-0829ysLJ8EK2zqzR7YEh
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi Paul,
 
-Dear Eric,
+On 12/05/2011 10:56, Paul Menzel wrote:
+> Am Mittwoch, den 11.05.2011, 22:29 +0200 schrieb Eric Bénard:
+>
+>> Please test these recipes you are interested in as for now I only compile
+>> tested qt4-embedded&  qt4-native.
+>
+> if you could take a look at my build problem reported in this thread [1]
+> that would be awesome.
+>
+>
+Will see if I can find a way to reproduce the thing
 
-
-Am Mittwoch, den 11.05.2011, 22:29 +0200 schrieb Eric B=C3=A9nard:
-
-> Please test these recipes you are interested in as for now I only compile
-> tested qt4-embedded & qt4-native.
-
-if you could take a look at my build problem reported in this thread [1]
-that would be awesome.
-
-
-Thanks,
-
-Paul
+Eric
 
 
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-May/032634=
-.html
-
---=-0829ysLJ8EK2zqzR7YEh
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3LoKIACgkQPX1aK2wOHVigfwCbB6VO2Onf9Gj6T7JP1uwQXxmL
-4qoAn1YrZRg7TXkuYWmBva8YEdoV/KNd
-=06oG
------END PGP SIGNATURE-----
-
---=-0829ysLJ8EK2zqzR7YEh--
