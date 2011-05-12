@@ -1,29 +1,40 @@
-Received: from 64.mail-out.ovh.net ([91.121.185.65])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1QKded-0005dQ-CA
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <otavio.salvador@gmail.com>) id 1QKdhT-0005zX-AB
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 May 2011 23:42:43 +0200
-Received: (qmail 10085 invoked by uid 503); 12 May 2011 21:09:27 -0000
-Received: from b9.ovh.net (HELO mail411.ha.ovh.net) (213.186.33.59)
-	by 64.mail-out.ovh.net with SMTP; 12 May 2011 21:09:27 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 12 May 2011 23:39:52 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 12 May 2011 23:39:51 +0200
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 May 2011 23:31:02 +0200
-Message-Id: <1305235863-16025-3-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1305235863-16025-1-git-send-email-eric@eukrea.com>
-References: <1305235863-16025-1-git-send-email-eric@eukrea.com>
+	Thu, 12 May 2011 23:45:39 +0200
+Received: by bwz5 with SMTP id 5so1895264bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 May 2011 14:42:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=ZwDoLVIXFB2WUoY9Oa9IM5ZtJlaa6HNpPXLzJp+HIB8=;
+	b=lgO3FbfRyXBJQ9oDYACLl02z5FJLxZ/T9W/AeGWlTQ2DoQ+Nq/KJ0ZynqWCCXqcJAk
+	DynP1HKu/ATHMEHsJUEUzbixxp7iimmw3Na2qAVUlWhTrxigKnegX5UwDaV/yRMuQzPT
+	VkETQukUV/6Bu9Sou7s/HqEslMTf56mi++xzc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=OGh/wRJ7BUa5hwUkclxJdqBSv4qoHbX7SpLf+r67xjNpimsWnaxo6ODeApDfbXgzP2
+	ifcPMMgUnF/ohzYwLpydm7LAme/1z7ohIPfQCK4w2Ypa1j1jTxoj9nr5vv4zsjOBtqQX
+	2J/JEmR4HwRkC3nuowJLVu9eKQ9z/mm+JCVak=
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 6027786626366680395
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.500015/N
-Subject: [PATCH 2/3] qt4.inc: give the right name to variable qmake will use
+Received: by 10.204.49.138 with SMTP id v10mr729690bkf.108.1305236571089; Thu,
+	12 May 2011 14:42:51 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.79.70 with HTTP; Thu, 12 May 2011 14:42:51 -0700 (PDT)
+In-Reply-To: <1305235863-16025-4-git-send-email-eric@eukrea.com>
+References: <1305235863-16025-1-git-send-email-eric@eukrea.com>
+	<1305235863-16025-4-git-send-email-eric@eukrea.com>
+Date: Thu, 12 May 2011 18:42:51 -0300
+X-Google-Sender-Auth: 6wzrSyRMFkCGKnokx1q9eRru39U
+Message-ID: <BANLkTinwmLXrAupvEe6jUnf0jRJuFJwVXw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 3/3] qt4-4.7.3: add translations'support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,36 +48,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2011 21:42:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 12 May 2011 21:45:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-this should prevent to have to manually copy binaries for the build
-system built by qt4-native to the source tree when cross compiling qt.
+On Thu, May 12, 2011 at 18:31, Eric B=E9nard <eric@eukrea.com> wrote:
+> this patch should bring back translations support in qt4.
+>
+> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- recipes/qt4/qt4.inc |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
-diff --git a/recipes/qt4/qt4.inc b/recipes/qt4/qt4.inc
-index 52fa146..dc27fe2 100644
---- a/recipes/qt4/qt4.inc
-+++ b/recipes/qt4/qt4.inc
-@@ -17,8 +17,9 @@ EXTRA_OEMAKE = "-e"
- EXTRA_ENV = 'QMAKE="${STAGING_BINDIR_NATIVE}/qmake2 -after \
-              INCPATH+=${STAGING_INCDIR}/freetype2 LIBS+=-L${STAGING_LIBDIR}" \
-              QMAKESPEC="${QMAKESPEC}" LINK="${CXX} -Wl,-rpath-link,${STAGING_LIBDIR}" \
--             AR="${TARGET_PREFIX}ar cqs" \
--             MOC="${STAGING_BINDIR_NATIVE}/moc4" UIC="${STAGING_BINDIR_NATIVE}/uic4" MAKE="make -e"'
-+             AR="${TARGET_PREFIX}ar cqs" QMAKE_LRELEASE="${STAGING_BINDIR_NATIVE}/lrelease4" \
-+             QMAKE_RCC="${STAGING_BINDIR_NATIVE}/rcc4" QMAKE_MOC="${STAGING_BINDIR_NATIVE}/moc4" \
-+             QMAKE_UIC="${STAGING_BINDIR_NATIVE}/uic4" MAKE="make -e"'
- 
- export QT_CONF_PATH="${WORKDIR}/qt.conf"
- 
--- 
-1.7.0.4
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
