@@ -1,26 +1,27 @@
-Received: from vms173003pub.verizon.net ([206.46.173.3])
+Received: from vms173001pub.verizon.net ([206.46.173.1])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1QKY5x-0006qH-M7
+	(envelope-from <denis@denix.org>) id 1QKYyC-0007wL-Oc
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 May 2011 17:46:33 +0200
+	Thu, 12 May 2011 18:42:41 +0200
 Received: from gandalf.denix.org ([unknown] [108.18.140.4])
-	by vms173003.mailsrvcs.net
+	by vms173001.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LL300CY2ABQL289@vms173003.mailsrvcs.net> for
+	2009)) with ESMTPA id <0LL30058KCXJQLT2@vms173001.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Thu,
-	12 May 2011 10:43:15 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5750214AF5B; Thu,
-	12 May 2011 11:43:02 -0400 (EDT)
-Date: Thu, 12 May 2011 11:43:02 -0400
+	12 May 2011 11:39:25 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id C314114AF5B; Thu,
+	12 May 2011 12:39:19 -0400 (EDT)
+Date: Thu, 12 May 2011 12:39:19 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20110512154302.GC21678@denix.org>
-References: <1305065862-22878-1-git-send-email-Chase.Maupin@ti.com>
+Message-id: <20110512163919.GD21678@denix.org>
+References: <1305013151-17485-1-git-send-email-Martin.Jansa@gmail.com>
+	<1305019695.8000.132.camel@phil-desktop>
+	<20110510093616.GB3673@jama.jama.net>
 MIME-version: 1.0
-In-reply-to: <1305065862-22878-1-git-send-email-Chase.Maupin@ti.com>
+In-reply-to: <20110510093616.GB3673@jama.jama.net>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: Re: [PATCH] pcsc-lite: make configuration file a separate	package
+Subject: Re: [PATCH 1/2] recipes: fix LICENSE fields
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,87 +35,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2011 15:46:33 -0000
+X-List-Received-Date: Thu, 12 May 2011 16:42:41 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Tue, May 10, 2011 at 05:17:42PM -0500, Chase Maupin wrote:
-> * Move the reader.conf file to be part of a separate package
->   so that it is not installed by default.
-> * This is done because individual readers that implements an
->   IFDHandler library need to be able to install their reader.conf
->   file in the /etc/reader.conf.d directory.  Without this change
+On Tue, May 10, 2011 at 11:36:16AM +0200, Martin Jansa wrote:
+> On Tue, May 10, 2011 at 10:28:15AM +0100, Phil Blundell wrote:
+> > On Tue, 2011-05-10 at 09:39 +0200, Martin Jansa wrote:
+> > >   | /OE/tmpdir-shr/work/armv4t-oe-linux-gnueabi/pixman-0.22.0-r5.0/temp/run.SRC_DISTRIBUTECOMMAND.17340: line 95: /pixman: No such file or directory
+> > 
+> > If '&' in ${LICENSE} is breaking SRC_DISTRIBUTECOMMAND then that
+> > suggests there is a bug in that code (probably some sort of missing
+> > quotes).  Removing the &s might be a fine thing to do anyway, but it
+> > would also be a good idea to track down and fix the underlying bug.
+> 
+> it calls cd tmp/deploy/sources/$license/pixman
+> where with $license == '&' (because LICENSE field is splitted by ' ' and
+> then '|'), it ends doing cd on background and then complaing about /pixman
+> 
+> Directory named & even when created with right backslash
+> is still hard to use, so I think it would be better to have QA check 
+> that LICENSE field has sane value, even better when we have list of
+> possible values etc.
 
-Chase,
+I would agree with Phil that fixing distribute_sources is required, but I'd go 
+even further as to say that the current implementation of distribute_sources 
+is quite bad. It splits the LICENSE field into tokens based on the wrong 
+assumptions that all the whitespaces are used to separate multiple licenses. 
+In other words, "Public Domain" is a valid license and shouldn't be replaced 
+with "PD". What are you going to do with "GPLv2+ w/ GCC RLE"? Which stands for 
+"GPL version 2 (or later) with GCC Runtime Library Exception" and is a valid 
+license with an exception... Sorry, but "GPL+libraryexception" is just bogus 
+(and it's not a personal remark - I do understand your constrains, see below).
 
-Sorry, it did not occur to me yesterday, when helping with the patch, but I 
-just realised now that /etc/reader.conf.d (like any other dir.d denotion) 
-should expect a set of config files and not just one specific one.
+I understand that distribute_sources is quite important and useful. So, maybe 
+the correct way is to adopt a proper and stricter syntax for the LICENSE 
+field, which uses some other characters to separate multiple licenses. Say, 
+something like ":" or "|" should work. Using "," would be even better, but I'm 
+afraid it can easily be used inside the license name on its own... Basically, 
+something along the lines of "GPL:MIT:Public Domain:Texas A&M Proprietary" etc.
 
-So, I started checking the sources and the ChangeLog from pcsc-lite and got it 
-confirmed - you can pretty much drop a set of files into that directory and 
-all of them will be parsed for the configuration. So, since the default file 
-is only a template with all the configuration commented out, you should be 
-safe to install your own config files in that directory with different names. 
-That way you don't need any changes to the pcsc-lite recipe...
-
-One of the relative enties from ChangeLog:
-- Add the ability to parse all the configuration files of a directory
-  instead of just one configuration file. update-reader.conf is then now
-  obsolete.
+Any comments or objections?
 
 -- 
 Denys
-
->   those packages will conflict with the reader.conf file installed
->   by the pcsc-lite package:
->     * NOTE: the reader.conf file in the package is a commented out
->             template file, not an actual working configuration
->             file.
-> * Using this change IFDHandler packages can use RCONFLICT with
->   the pcsc-lite-collateral package to let users know that these
->   packages cannot co-exist.
-> * Mark the configuration file an such so that when the package is
->   updated the user's changes are not lost.
-> * Bump the PR.
-> 
-> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-> ---
->  recipes/pcsc-lite/pcsc-lite_1.5.2.bb |    5 +++++
->  1 files changed, 5 insertions(+), 0 deletions(-)
-> 
-> diff --git a/recipes/pcsc-lite/pcsc-lite_1.5.2.bb b/recipes/pcsc-lite/pcsc-lite_1.5.2.bb
-> index b4af08d..88401b6 100644
-> --- a/recipes/pcsc-lite/pcsc-lite_1.5.2.bb
-> +++ b/recipes/pcsc-lite/pcsc-lite_1.5.2.bb
-> @@ -5,6 +5,8 @@ LICENSE = "BSD"
->  DEPENDS = "hal"
->  RDEPENDS_${PN} = "hal"
->  
-> +PR = "r1"
-> +
->  SRC_URI = "https://alioth.debian.org/frs/download.php/2795/pcsc-lite-${PV}.tar.bz2 \
->             file://pcscd.init "
->  
-> @@ -26,8 +28,11 @@ do_install() {
->  }
->  
->  PACKAGES =+ "libpcsclite"
-> +PACKAGES =+ "${PN}-collateral"
->  
->  FILES_libpcsclite = "${libdir}/libpcsclite.so.*"
-> +FILES_${PN}-collateral = "${sysconfdir}/reader.conf.d/*"
-> +CONFFILES_${PN}-collateral = "${sysconfdir}/reader.conf.d/*"
->  
->  SRC_URI[md5sum] = "d7d466621bec39354351f09349f6374c"
->  SRC_URI[sha256sum] = "a0c11b0b5cc46d4c4ec499b875cfdc4e766fdf12fe2f6ea635e1b11ab7b8821e"
-> -- 
-> 1.7.0.4
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
