@@ -1,38 +1,34 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from [77.233.226.4] (helo=mail.doredevelopment.dk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heroor@gmail.com>) id 1QKNLX-0003PO-KH
+	(envelope-from <eha@dev.doredevelopment.dk>) id 1QKOc5-00048z-2s
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 May 2011 06:17:55 +0200
-Received: by ywg8 with SMTP id 8so447187ywg.6
+	Thu, 12 May 2011 07:39:05 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.doredevelopment.dk (Postfix) with ESMTP id E6AEB3EF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 May 2011 21:15:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=poksDZtckTacStNyLohimXYrp3pfcvUhmcxNbBcjtnU=;
-	b=ffwUhL6HnKM9wyt3e2+ZPHVqzpphU8is9TthucBhOlE3XQFjhxdEsITQWYwnK7nYVU
-	pfbKbuZQkH4vvAz53GO+43MiipxDt9SHTDtCEBsIHLJbgHfUnXlCmTA6kKnbpT2SGmmL
-	N+f7lmXSZJxEGMEfszadEOvPNxeQ7d09Iw+0g=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=GUK8p8xjZ8PDGH2uOOHitWPBYJydMJAL2PAjCGzrlAMRKjV2mmRnL1U1idqLlSKwq5
-	+fu4nfgwRonnvY7SFMe++uSc/kHPvYrHEBxZiQfxOBQQNPkb6UlKki5BWaAf7wjZBVPD
-	/QHX2qJ66yPukdcXhQFBBxp72iW3q0NbRZYD8=
-Received: by 10.236.181.38 with SMTP id k26mr6858652yhm.520.1305173707280;
-	Wed, 11 May 2011 21:15:07 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id s36sm525916ano.1.2011.05.11.21.15.04
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 11 May 2011 21:15:06 -0700 (PDT)
-From: Siddharth Heroor <heroor@gmail.com>
+	Thu, 12 May 2011 07:36:12 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at dev.doredevelopment.dk
+Received: from mail.doredevelopment.dk ([127.0.0.1])
+	by localhost (public.doredevelopment.dk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id 8e6sVsEMjhj3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 May 2011 07:36:10 +0200 (CEST)
+Received: from [192.168.1.189] (0x55532124.adsl.cybercity.dk [85.83.33.36])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: eha)
+	by mail.doredevelopment.dk (Postfix) with ESMTPSA id 91AC8254
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 May 2011 07:36:10 +0200 (CEST)
+From: Esben Haabendal <eha@dev.doredevelopment.dk>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 May 2011 09:44:52 +0530
-Message-Id: <1305173692-19917-3-git-send-email-heroor@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1305173692-19917-1-git-send-email-heroor@gmail.com>
-References: <1305173692-19917-1-git-send-email-heroor@gmail.com>
-Cc: Siddharth Heroor <heroor@ti.com>
-Subject: [PATCHv2 3/3] sysvinit: bump PR for ti816x serial console change
+In-Reply-To: <BANLkTik19x9evsK+6uZ73FXyjyJKB1O-vA@mail.gmail.com>
+References: <BANLkTik19x9evsK+6uZ73FXyjyJKB1O-vA@mail.gmail.com>
+Organization: DoreDevelopment ApS
+Date: Thu, 12 May 2011 07:36:06 +0200
+Message-ID: <1305178566.2166.2.camel@eha.ulstruplund.dk>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: Another race failure, not sure if this is a hard dependency or an inflight staging which races with another configure??
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,32 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2011 04:17:55 -0000
+X-List-Received-Date: Thu, 12 May 2011 05:39:05 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-From: Siddharth Heroor <heroor@ti.com>
+On Thu, 2011-05-12 at 01:58 +0200, Leon Woestenberg wrote:
+> Hello,
+> 
+> I think I found another build race here (must love multi-core machines).
+> 
+> perl-native is still being staged while file-native tries to run perl
+> stuff resulting in "| perl: error while loading shared libraries:
+> libperl.so: cannot open shared object file: No such file or
+> directory".
+> 
+> Restarting bitbake continues the build (note that perl native sysroot
+> staging finishes just after file-native failing).
+> 
+> Now, I have been thinking about these races; even though we might not
+> have a dependency on perl, a configure stage may probe for perl, and
+> if it exists, starts to run tests against it.
+> So either perl must be present, or not at all. I.e. atomicly staged in sysroot.
+> 
+> Of course, could be this IS a hard dependency after all.
+> 
+> I'll investigate later, here is a small piece of log for your eyes.
 
-* A new inittab is needed, so bump PR to regenerate it.
+I know I am kind of repeating myself, but these kind of problems do not
+arise when using a per-recipe staging as I have proposed (and doing in
+OE-lite).
 
-Signed-off-by: Siddharth Heroor <heroor@ti.com>
----
- recipes/sysvinit/sysvinit_2.86.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+I for one, always prefer to design out race-conditions instead of having
+a continous (and always up-hill) battle with them.
 
-diff --git a/recipes/sysvinit/sysvinit_2.86.bb b/recipes/sysvinit/sysvinit_2.86.bb
-index dacc397..7eba447 100644
---- a/recipes/sysvinit/sysvinit_2.86.bb
-+++ b/recipes/sysvinit/sysvinit_2.86.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "System-V like init."
- SECTION = "base"
- LICENSE = "GPLv2+"
- HOMEPAGE = "http://freshmeat.net/projects/sysvinit/"
--PR = "r64"
-+PR = "r65"
- 
- # USE_VT and SERIAL_CONSOLE are generally defined by the MACHINE .conf.
- # Set PACKAGE_ARCH appropriately.
--- 
-1.7.0.4
+/Esben
 
 
 
