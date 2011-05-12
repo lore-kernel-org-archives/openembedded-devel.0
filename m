@@ -1,24 +1,24 @@
-Received: from dub0-omc1-s3.dub0.hotmail.com ([157.55.0.202])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <l.bolognini@hotmail.it>) id 1QKREf-0007DF-LQ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 May 2011 10:27:06 +0200
-Received: from DUB107-W41 ([157.55.0.237]) by dub0-omc1-s3.dub0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 12 May 2011 01:22:59 -0700
-Message-ID: <DUB107-w41DACD15A70DBAF0FFD5F998890@phx.gbl>
-X-Originating-IP: [78.6.111.196]
-From: Luca Bolognini <l.bolognini@hotmail.it>
-To: Openembedded Mailing List <openembedded-devel@lists.openembedded.org>,
-	Arago Mailing List <arago-devel@gforge.ti.com>
-Date: Thu, 12 May 2011 10:22:59 +0200
-Importance: Normal
-MIME-Version: 1.0
-X-OriginalArrivalTime: 12 May 2011 08:22:59.0393 (UTC)
-	FILETIME=[CDA3EB10:01CC107D]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: cybaslt@hotmail.com
-Subject: apache2-native and modphp trouble
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QKRMf-0007Op-FH for openembedded-devel@lists.openembedded.org;
+	Thu, 12 May 2011 10:35:21 +0200
+Received: from f053044015.adsl.alicedsl.de ([78.53.44.15]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QKRLJ-00074l-8P for openembedded-devel@lists.openembedded.org;
+	Thu, 12 May 2011 08:33:57 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1305145805-14609-3-git-send-email-eric@eukrea.com>
+References: <1305145805-14609-1-git-send-email-eric@eukrea.com>
+	<1305145805-14609-3-git-send-email-eric@eukrea.com>
+Date: Thu, 12 May 2011 10:32:34 +0200
+Message-ID: <1305189154.4254.4.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH 2/6] minimal: prefer qt 4.7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,45 +32,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2011 08:27:06 -0000
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Thu, 12 May 2011 08:35:21 -0000
+X-Groupsio-MsgNum: 31928
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Q6Nu2vh0kiso7EMuqoB5"
+
+--=-Q6Nu2vh0kiso7EMuqoB5
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-
-Hallo=2Cwhy=2C in recipe apache2-native_2.2.14.bb=2C passing from PR=3Dr1 t=
-o PR=3Dr2=2C do_stage has been deleted and replaced with do_install task?
-This causes modphp configuration to fail:| Sorry=2C I cannot run apxs.  Pos=
-sible reasons follow:|| 1. Perl is not installed| 2. apxs was not found. Tr=
-y to pass the path using --with-apxs2=3D/path/to/apxs| 3. Apache was not bu=
-ilt using --enable-so (the apxs usage page is displayed)|| The output of /h=
-ome/bolognini/diskp2/diskp2.11/oe/arago-tmp/sysroots/i686-linux/usr/bin/apx=
-s follows:| cannot open /home/bolognini/diskp2/diskp2.11/oe/arago-tmp/sysro=
-ots/i686-linux/usr/build/config_vars.mk: No such file or directory at /home=
-/bolognini/diskp2/diskp2.11/oe/arago-tmp/sysroots/i686-linux/usr/bin/apxs l=
-ine 218.| configure: error: AbortingNOTE: Task failed: /home/bolognini/disk=
-p2/diskp2.11/oe/arago-tmp/work/armv7a-none-linux-gnueabi/modphp-5.1.6-r3/te=
-mp/log.do_configure.14249ERROR: TaskFailed event exception=2C abortingERROR=
-: Build of /home/bolognini/diskp2/diskp2.11/oe/arago-oe-dev/recipes/modphp/=
-modphp_5.1.6.bb do_configure failedERROR: Task 12 (/home/bolognini/diskp2/d=
-iskp2.11/oe/arago-oe-dev/recipes/modphp/modphp_5.1.6.bb=2C do_configure) fa=
-iledNOTE: Tasks Summary: Attempted 405 tasks of which 405 didn't need to be=
- rerun and 1 failed.ERROR: '/home/bolognini/diskp2/diskp2.11/oe/arago-oe-de=
-v/recipes/modphp/modphp_5.1.6.bb' failed
-as already pointed out by David Abdurachmanov ( http://comments.gmane.org/g=
-mane.linux.distributions.angstrom.devel/4586 )
-By the way=2C if I replace r2 recipe with r1=2C rebuild apache2 package and=
- then succesfully build modphp=2C apache2 segfaults as libphp5.so is loaded=
- with LoadModule directive inside httpd.conf.This was accurately described =
-by Raffaele Recalcati ( https://gforge.ti.com/pipermail/arago-devel/2010-Se=
-ptember/000312.html )=20
-Have people committing r2 recipe of apache2-native ever tried to build modp=
-hp?Does anyone succeed in getting apache2-2.2.14 and modphp-5.1.6 work toge=
-ther in boards such as beagleboard or something else (it doesn't matter the=
- board)?I think this is an old issue but it seems to me that no solution ha=
-s been found yet.
-Thank you=2CLuca
--------------------------Luca Bologninil.bolognini@hotmail.it
+Dear Khem, dear Eric,
 
 
- 		 	   		  =
+Am Mittwoch, den 11.05.2011, 22:30 +0200 schrieb Eric B=C3=A9nard:
+> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+> Cc: Khem Raj <raj.khem@gmail.com>
+> ---
+>  conf/distro/minimal.conf |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
+> index 090a4db..18bcfae 100644
+> --- a/conf/distro/minimal.conf
+> +++ b/conf/distro/minimal.conf
+> @@ -115,7 +115,7 @@ require conf/distro/include/preferred-opie-versions-1=
+.2.5.inc
+> =20
+>  PREFERRED_PROVIDER_opkg ?=3D "opkg"
+>  PREFERRED_PROVIDER_virtual/update-alternatives ?=3D "opkg"
+> -PREFERRED_QT_VERSION ?=3D "4.7.2"
+> +PREFERRED_QT_VERSION ?=3D "4.7.3"
+>  PREFERRED_VERSION_qt4-tools-native =3D "${PREFERRED_QT_VERSION}"
+>  PREFERRED_VERSION_qt4-tools-sdk =3D "${PREFERRED_QT_VERSION}"
+>  PREFERRED_VERSION_qt4-embedded =3D "${PREFERRED_QT_VERSION}"
 
+sorry for the slight off-topic question. But I how I understand minimal,
+it normally takes the latest recipes available. So could setting the Qt
+version be actually be dropped in a future patch?
+
+
+Thanks,
+
+Paul
+
+--=-Q6Nu2vh0kiso7EMuqoB5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3LmxsACgkQPX1aK2wOHVgZ5QCeP+qESQwvSvr04fxJtgFFO073
+uuMAoIoxwzo7EEYE1OYrQ3fpC0m1tLYN
+=SYv9
+-----END PGP SIGNATURE-----
+
+--=-Q6Nu2vh0kiso7EMuqoB5--
