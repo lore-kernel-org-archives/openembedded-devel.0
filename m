@@ -1,25 +1,38 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QKeBV-0007CX-19 for openembedded-devel@lists.openembedded.org;
-	Fri, 13 May 2011 00:16:41 +0200
-Received: from f053044015.adsl.alicedsl.de ([78.53.44.15]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QKeA9-00089k-DI for openembedded-devel@lists.openembedded.org;
-	Thu, 12 May 2011 22:15:17 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <BANLkTimdLk4S_0zjM8NTwXSxrTU_epdC+Q@mail.gmail.com>
-References: <BANLkTimHpb2Jyf=QYk_p0VL95jdNQJGCog@mail.gmail.com>
-	<1305236006.13652.41.camel@mattotaupa>
-	<BANLkTimdLk4S_0zjM8NTwXSxrTU_epdC+Q@mail.gmail.com>
-Date: Fri, 13 May 2011 00:13:53 +0200
-Message-ID: <1305238433.13652.47.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: wpa-supplicant-0.7.inc patch
+	(envelope-from <wmills@ti.com>)
+	id 1QKeEB-0007Jm-8P; Fri, 13 May 2011 00:19:27 +0200
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id p4CM5i03023116
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 12 May 2011 17:05:44 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id p4CM5iEl021430;
+	Thu, 12 May 2011 17:05:44 -0500 (CDT)
+Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p4CM5i5k006963;
+	Thu, 12 May 2011 17:05:44 -0500 (CDT)
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE73.ent.ti.com
+	(157.170.170.88) with Microsoft SMTP Server id 8.3.106.1;
+	Thu, 12 May 2011 17:05:43 -0500
+Received: from gtwmills.gt.design.ti.com (gtwmills.gt.design.ti.com
+	[158.218.100.52])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
+	p4CM5hdG006246;	Thu, 12 May 2011 17:05:43 -0500
+Message-ID: <4DCC59B7.1070309@ti.com>
+Date: Thu, 12 May 2011 18:05:43 -0400
+From: William Mills <wmills@ti.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
+MIME-Version: 1.0
+To: Darren Hart <dvhart@linux.intel.com>
+References: <4DCC3BA6.3010406@windriver.com> <4DCC4A51.9010309@linux.intel.com>
+	<4DCC4D17.7000600@linux.intel.com>
+In-Reply-To: <4DCC4D17.7000600@linux.intel.com>
+Cc: poky <poky@yoctoproject.org>, "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [poky] Commit and Patch message guidelines - fifth draft
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,70 +46,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2011 22:16:41 -0000
-X-Groupsio-MsgNum: 31963
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-x5IwvwfHe3WKYa3/UB8v"
+X-List-Received-Date: Thu, 12 May 2011 22:19:27 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---=-x5IwvwfHe3WKYa3/UB8v
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 05/12/2011 05:11 PM, Darren Hart wrote:
+> One more thing. There is a great deal of cross-posting to the various
+> lists. We should discourage this. At least mentioning somewhere in here
+> that patches should be sent to the appropriate list with maintainers and
+> involved developers on CC and not cross posted would be a help.
 
-Dear Martin,
+Ok, so I am going to go ahead and ask the dumb question.  Where is the 
+write up that say what list is for what?
 
+It seems to me there is a whole bunch of discussion happening on the 
+poky list about making changes that that would effect everyone using 
+openembedded-core.  Do we have two lists for discussion of stuff that 
+effect the oe-core?
 
-Am Donnerstag, den 12.05.2011, 17:54 -0400 schrieb Martin Bures:
-
-> I will take a look at the policy and try to update the patch tomorrow.
-
-thanks.
-
-> As for your questions/comments about .config.  That was how the recipe wa=
-s
-> when I found it - I was just trying to make minimal modifications from wh=
-at
-> was there to get it working.  I agree that it could be changed to use
-> defconfig.  As with the patch submission guidelines, I will take a look a=
-nd
-> see if this change as-suggested works correctly tomorrow and modify and
-> resubmit the patch accordingly.
-
-Please also take a look at commit aa35ba5c [1] and maybe even CC the
-author and committer.
-
-        commit aa35ba5cf7e1bf30fb2edb1408c0b599ec89290a
-        Author: Steve Sakoman <steve@sakoman.com>
-        Date:   Tue Apr 19 08:40:52 2011 -0700
-       =20
-            wpa-supplicant: Enable CONFIG_CTRL_IFACE_DBUS and CONFIG_CTRL_I=
-FACE_DBUS_NEW
-           =20
-            Signed-off-by: Steve Sakoman <steve@sakoman.com>
-            Signed-off-by: Koen Kooi <koen@openembedded.org>
-
-I do not know what build configuration you use. Please remember to write
-down what version you are using and what distribution and machine.
+-- Bill
 
 
-Thanks,
-
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Daa35ba5=
-cf7e1bf30fb2edb1408c0b599ec89290a
-
---=-x5IwvwfHe3WKYa3/UB8v
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3MW6EACgkQPX1aK2wOHVg1ZACeIlCkTWi6RC6YtPeTE6kbd4Bd
-VaoAmgKHrXtdbjBemt3dxlCpymCee58f
-=B4Rc
------END PGP SIGNATURE-----
-
---=-x5IwvwfHe3WKYa3/UB8v--
