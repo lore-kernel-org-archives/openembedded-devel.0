@@ -1,33 +1,36 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1QKXbz-0006IK-2d
+	(envelope-from <otavio.salvador@gmail.com>) id 1QKXzg-0006i1-W4
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 May 2011 17:15:35 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1QKXZG-0003Am-Ve from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 May 2011 08:12:47 -0700
-Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 12 May 2011 08:12:46 -0700
-Received: from [172.30.80.16] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
-	Thu, 12 May 2011 08:12:45 -0700
-Message-ID: <4DCBF8D9.3090002@mentor.com>
-Date: Thu, 12 May 2011 08:12:25 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <iqde25$jrd$1@dough.gmane.org>
-In-Reply-To: <iqde25$jrd$1@dough.gmane.org>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 12 May 2011 15:12:46.0736 (UTC)
-	FILETIME=[0CD6B900:01CC10B7]
-Subject: Re: [2011.03-maintenance] Pull request #18
+	Thu, 12 May 2011 17:40:05 +0200
+Received: by gxk3 with SMTP id 3so610911gxk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 May 2011 08:37:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
+	:x-mailer; bh=iE6EE2DXlfo4EdDEvRC9GckGyIakJzJSds+qQ2nwkY4=;
+	b=Eexlun5VKpYde0djs4cIVhzQ1sdkBsT7RN2XZ4diXwfSI4RovARiayGt5z5XNQ0yMx
+	wOQK1QbHJ++0Hksci6Vy9pL4zpKdrhmQXmycrdR1mAl86ACzydoYtyCMax47wG6C2+HC
+	bZnqrQjbK6MBUK8qxkFSCRS2Y8LkkLJ8aWtSw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=WxgScUKLot/BK5Bu8krpEGn5JmRLxu0JwqdO7ZKQT6O5ysDvAkDrR7lVVcmid8XQct
+	fHk5NHZft10I0CVm077L1y7K0AJuPdPIXVURMAopTEYaC4k2FAOFfRbMusSME4+375td
+	jmNq0FB+E7dekdorpaY6CQ3PAQWfoRf8uvOtQ=
+Received: by 10.236.191.66 with SMTP id f42mr389549yhn.345.1305214636488;
+	Thu, 12 May 2011 08:37:16 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id c66sm628875yhj.70.2011.05.12.08.37.14
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 12 May 2011 08:37:15 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 12 May 2011 15:37:05 +0000
+Message-Id: <1305214625-416-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH v1] libiconv: drop EXTRA_OECONF as it is handled by gettext class
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,61 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2011 15:15:35 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 12 May 2011 15:40:05 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ .../recipes-support/libiconv/libiconv_1.13.1.bb    |    4 +---
+ 1 files changed, 1 insertions(+), 3 deletions(-)
 
-On 05/11/2011 12:32 AM, Koen Kooi wrote:
-> Tom,
-> 
-> Please pull the 11 commits from here:
-> 
-> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-> Branch: 2011.03-maintenance
-> 
-> Koen Kooi (6):
->       libgles-omap3: prune source a bit better
->       libgles-omap3: make initscript work with both busybox and bash
->       libgles-omap3: update 4.03 release to 02
->       libgles-omap3 4.03.00.02: make it the default
->       nmap 3.81: fix license
->       linux-omap-psp 2.6.32: support accept4 call
-> 
-> Otavio Salvador (1):
->       wrapper/install: add -t support
-> 
-> Petr Štetiar (1):
->       zeromq: add new recipe for version 2.1.6
-> 
-> Philip Balister (1):
->       uhd : Enable usrp e100 utilities and package them seperately.
-> 
-> Steve Sakoman (2):
->       wpa-supplicant: Enable CONFIG_CTRL_IFACE_DBUS and
->       omap3-sgx-modules 4.03.00.02: fix build for latest kernels
-> 
-> 
-> All commits are cherry-picks from .dev
+diff --git a/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb b/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
+index 868314b..35f4e2d 100644
+--- a/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
++++ b/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
+@@ -8,9 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+ BBCLASSEXTEND = "native nativesdk"
+ 
+ PROVIDES = "virtual/libiconv"
+-PR = "r2"
+-
+-EXTRA_OECONF +=  "${@['--disable-nls','--enable-nls'][bb.data.getVar('USE_NLS', d, 1) == 'yes']}"
++PR = "r3"
+ 
+ SRC_URI += "file://autoconf.patch"
+ 
+-- 
+1.7.2.5
 
-This has been applied, thanks!
-
-- -- 
-Tom Rini
-Mentor Graphics Corporation
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iQEcBAEBAgAGBQJNy/jSAAoJEI4NMjfc3nJxFsUIAIcQoULGw1GHc8R5EdeUakrk
-52nyHf/Pfyt2UexXrKouhg0roVTlCzhw/jmBOW0Dn2lZ/JW4aGJODIek1IvqoN2F
-gln7aEPPZikdHUphOjCB3cM19dONJPtNzasWm1Iwky4rjKR+JgT1sP4XX6zgtUvH
-by1HrYWGMDOuRYG5L+Rpbg5PCue82VCzCf0bfr9KeDsY1a11a4IbyIvk3hjiHJRT
-vWCzmB6bxIcAF9Rjd5Uqm9TklQLUMSWpEE3n7H+71oLzTGd+o7A8+v9EGmtMmNMo
-5eAJ1xbtxt/A3nGvzWRcAtZUe0OF2yVlUiqUp6vAo5aI0fi9DZQgOipaGJmPs6c=
-=V5Mp
------END PGP SIGNATURE-----
 
 
