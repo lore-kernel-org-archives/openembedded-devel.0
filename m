@@ -1,36 +1,26 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from vms173003pub.verizon.net ([206.46.173.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QKXzg-0006i1-W4
+	(envelope-from <denis@denix.org>) id 1QKY5x-0006qH-M7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 May 2011 17:40:05 +0200
-Received: by gxk3 with SMTP id 3so610911gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 May 2011 08:37:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
-	:x-mailer; bh=iE6EE2DXlfo4EdDEvRC9GckGyIakJzJSds+qQ2nwkY4=;
-	b=Eexlun5VKpYde0djs4cIVhzQ1sdkBsT7RN2XZ4diXwfSI4RovARiayGt5z5XNQ0yMx
-	wOQK1QbHJ++0Hksci6Vy9pL4zpKdrhmQXmycrdR1mAl86ACzydoYtyCMax47wG6C2+HC
-	bZnqrQjbK6MBUK8qxkFSCRS2Y8LkkLJ8aWtSw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	b=WxgScUKLot/BK5Bu8krpEGn5JmRLxu0JwqdO7ZKQT6O5ysDvAkDrR7lVVcmid8XQct
-	fHk5NHZft10I0CVm077L1y7K0AJuPdPIXVURMAopTEYaC4k2FAOFfRbMusSME4+375td
-	jmNq0FB+E7dekdorpaY6CQ3PAQWfoRf8uvOtQ=
-Received: by 10.236.191.66 with SMTP id f42mr389549yhn.345.1305214636488;
-	Thu, 12 May 2011 08:37:16 -0700 (PDT)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id c66sm628875yhj.70.2011.05.12.08.37.14
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 12 May 2011 08:37:15 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Thu, 12 May 2011 17:46:33 +0200
+Received: from gandalf.denix.org ([unknown] [108.18.140.4])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LL300CY2ABQL289@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	12 May 2011 10:43:15 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5750214AF5B; Thu,
+	12 May 2011 11:43:02 -0400 (EDT)
+Date: Thu, 12 May 2011 11:43:02 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 May 2011 15:37:05 +0000
-Message-Id: <1305214625-416-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH v1] libiconv: drop EXTRA_OECONF as it is handled by gettext class
+Message-id: <20110512154302.GC21678@denix.org>
+References: <1305065862-22878-1-git-send-email-Chase.Maupin@ti.com>
+MIME-version: 1.0
+In-reply-to: <1305065862-22878-1-git-send-email-Chase.Maupin@ti.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: Re: [PATCH] pcsc-lite: make configuration file a separate	package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,30 +34,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2011 15:40:05 -0000
+X-List-Received-Date: Thu, 12 May 2011 15:46:33 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- .../recipes-support/libiconv/libiconv_1.13.1.bb    |    4 +---
- 1 files changed, 1 insertions(+), 3 deletions(-)
+On Tue, May 10, 2011 at 05:17:42PM -0500, Chase Maupin wrote:
+> * Move the reader.conf file to be part of a separate package
+>   so that it is not installed by default.
+> * This is done because individual readers that implements an
+>   IFDHandler library need to be able to install their reader.conf
+>   file in the /etc/reader.conf.d directory.  Without this change
 
-diff --git a/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb b/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
-index 868314b..35f4e2d 100644
---- a/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
-+++ b/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
-@@ -8,9 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
- BBCLASSEXTEND = "native nativesdk"
- 
- PROVIDES = "virtual/libiconv"
--PR = "r2"
--
--EXTRA_OECONF +=  "${@['--disable-nls','--enable-nls'][bb.data.getVar('USE_NLS', d, 1) == 'yes']}"
-+PR = "r3"
- 
- SRC_URI += "file://autoconf.patch"
- 
+Chase,
+
+Sorry, it did not occur to me yesterday, when helping with the patch, but I 
+just realised now that /etc/reader.conf.d (like any other dir.d denotion) 
+should expect a set of config files and not just one specific one.
+
+So, I started checking the sources and the ChangeLog from pcsc-lite and got it 
+confirmed - you can pretty much drop a set of files into that directory and 
+all of them will be parsed for the configuration. So, since the default file 
+is only a template with all the configuration commented out, you should be 
+safe to install your own config files in that directory with different names. 
+That way you don't need any changes to the pcsc-lite recipe...
+
+One of the relative enties from ChangeLog:
+- Add the ability to parse all the configuration files of a directory
+  instead of just one configuration file. update-reader.conf is then now
+  obsolete.
+
 -- 
-1.7.2.5
+Denys
 
+>   those packages will conflict with the reader.conf file installed
+>   by the pcsc-lite package:
+>     * NOTE: the reader.conf file in the package is a commented out
+>             template file, not an actual working configuration
+>             file.
+> * Using this change IFDHandler packages can use RCONFLICT with
+>   the pcsc-lite-collateral package to let users know that these
+>   packages cannot co-exist.
+> * Mark the configuration file an such so that when the package is
+>   updated the user's changes are not lost.
+> * Bump the PR.
+> 
+> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> ---
+>  recipes/pcsc-lite/pcsc-lite_1.5.2.bb |    5 +++++
+>  1 files changed, 5 insertions(+), 0 deletions(-)
+> 
+> diff --git a/recipes/pcsc-lite/pcsc-lite_1.5.2.bb b/recipes/pcsc-lite/pcsc-lite_1.5.2.bb
+> index b4af08d..88401b6 100644
+> --- a/recipes/pcsc-lite/pcsc-lite_1.5.2.bb
+> +++ b/recipes/pcsc-lite/pcsc-lite_1.5.2.bb
+> @@ -5,6 +5,8 @@ LICENSE = "BSD"
+>  DEPENDS = "hal"
+>  RDEPENDS_${PN} = "hal"
+>  
+> +PR = "r1"
+> +
+>  SRC_URI = "https://alioth.debian.org/frs/download.php/2795/pcsc-lite-${PV}.tar.bz2 \
+>             file://pcscd.init "
+>  
+> @@ -26,8 +28,11 @@ do_install() {
+>  }
+>  
+>  PACKAGES =+ "libpcsclite"
+> +PACKAGES =+ "${PN}-collateral"
+>  
+>  FILES_libpcsclite = "${libdir}/libpcsclite.so.*"
+> +FILES_${PN}-collateral = "${sysconfdir}/reader.conf.d/*"
+> +CONFFILES_${PN}-collateral = "${sysconfdir}/reader.conf.d/*"
+>  
+>  SRC_URI[md5sum] = "d7d466621bec39354351f09349f6374c"
+>  SRC_URI[sha256sum] = "a0c11b0b5cc46d4c4ec499b875cfdc4e766fdf12fe2f6ea635e1b11ab7b8821e"
+> -- 
+> 1.7.0.4
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
