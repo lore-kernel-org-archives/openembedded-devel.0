@@ -1,24 +1,32 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QKRMf-0007Op-FH for openembedded-devel@lists.openembedded.org;
-	Thu, 12 May 2011 10:35:21 +0200
-Received: from f053044015.adsl.alicedsl.de ([78.53.44.15]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QKRLJ-00074l-8P for openembedded-devel@lists.openembedded.org;
-	Thu, 12 May 2011 08:33:57 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <koansoftware@gmail.com>) id 1QKRN7-0007Tx-Jj
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 May 2011 10:35:49 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 924622C835
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 May 2011 08:23:37 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 0VS1M9Z5dXQq
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 May 2011 08:23:30 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 65C582C7DB
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 May 2011 08:23:29 +0000 (UTC)
+Message-ID: <4DCB991B.70202@gmail.com>
+Date: Thu, 12 May 2011 10:23:55 +0200
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini
+User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1305145805-14609-3-git-send-email-eric@eukrea.com>
-References: <1305145805-14609-1-git-send-email-eric@eukrea.com>
-	<1305145805-14609-3-git-send-email-eric@eukrea.com>
-Date: Thu, 12 May 2011 10:32:34 +0200
-Message-ID: <1305189154.4254.4.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [PATCH 2/6] minimal: prefer qt 4.7.3
+References: <1298214559-9650-1-git-send-email-tom_rini@mentor.com>
+	<1298214559-9650-3-git-send-email-tom_rini@mentor.com>
+In-Reply-To: <1298214559-9650-3-git-send-email-tom_rini@mentor.com>
+Subject: Re: [PATCH 2/4] kaeilos 2009: Pin gvfs to 1.6.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,60 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2011 08:35:21 -0000
-X-Groupsio-MsgNum: 31928
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-Q6Nu2vh0kiso7EMuqoB5"
-
---=-Q6Nu2vh0kiso7EMuqoB5
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 12 May 2011 08:35:49 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Dear Khem, dear Eric,
-
-
-Am Mittwoch, den 11.05.2011, 22:30 +0200 schrieb Eric B=C3=A9nard:
-> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
-> Cc: Khem Raj <raj.khem@gmail.com>
-> ---
->  conf/distro/minimal.conf |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
+Tom Rini ha scritto, Il 20/02/2011 16:09:
+> We're doing this since glib-2.0 is pinned.
 >=20
-> diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
-> index 090a4db..18bcfae 100644
-> --- a/conf/distro/minimal.conf
-> +++ b/conf/distro/minimal.conf
-> @@ -115,7 +115,7 @@ require conf/distro/include/preferred-opie-versions-1=
-.2.5.inc
-> =20
->  PREFERRED_PROVIDER_opkg ?=3D "opkg"
->  PREFERRED_PROVIDER_virtual/update-alternatives ?=3D "opkg"
-> -PREFERRED_QT_VERSION ?=3D "4.7.2"
-> +PREFERRED_QT_VERSION ?=3D "4.7.3"
->  PREFERRED_VERSION_qt4-tools-native =3D "${PREFERRED_QT_VERSION}"
->  PREFERRED_VERSION_qt4-tools-sdk =3D "${PREFERRED_QT_VERSION}"
->  PREFERRED_VERSION_qt4-embedded =3D "${PREFERRED_QT_VERSION}"
+> Signed-off-by: Tom Rini <tom_rini@mentor.com>
+> ---
+>  .../include/kaeilos-2009-preferred-versions.inc    |    1 +
+>  1 files changed, 1 insertions(+), 0 deletions(-)
+>=20
+> diff --git a/conf/distro/include/kaeilos-2009-preferred-versions.inc b/=
+conf/distro/include/kaeilos-2009-preferred-versions.inc
+> index cf0f65d..0125724 100644
+> --- a/conf/distro/include/kaeilos-2009-preferred-versions.inc
+> +++ b/conf/distro/include/kaeilos-2009-preferred-versions.inc
+> @@ -26,6 +26,7 @@ PREFERRED_VERSION_gst-pulse 	=3D "0.9.7"
+>  PREFERRED_VERSION_gtk+		=3D "2.20.1"
+>  PREFERRED_VERSION_gtk+-native	=3D "2.20.1"
+>  PREFERRED_VERSION_gtkmm		=3D "2.20.0"
+> +PREFERRED_VERSION_gvfs		=3D "1.6.6"
+>  PREFERRED_VERSION_hal		=3D "0.5.14"
+>  PREFERRED_VERSION_libgemwidget	=3D "1.0"
+>  PREFERRED_VERSION_libgpephone	=3D "0.4"
 
-sorry for the slight off-topic question. But I how I understand minimal,
-it normally takes the latest recipes available. So could setting the Qt
-version be actually be dropped in a future patch?
+
+Acked-by: Marco Cavallini <m.cavallini@koansoftware.com>
 
 
-Thanks,
+Thank you
 
-Paul
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+   Atmel third party certified consultant
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
+        http://www.KaeilOS.com
 
---=-Q6Nu2vh0kiso7EMuqoB5
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3LmxsACgkQPX1aK2wOHVgZ5QCeP+qESQwvSvr04fxJtgFFO073
-uuMAoIoxwzo7EEYE1OYrQ3fpC0m1tLYN
-=SYv9
------END PGP SIGNATURE-----
-
---=-Q6Nu2vh0kiso7EMuqoB5--
