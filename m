@@ -1,25 +1,34 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1QKpv0-0000WW-7d
+	(envelope-from <stefan@datenfreihafen.org>) id 1QKqSU-0001R1-1x
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 May 2011 12:48:26 +0200
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 13 May 2011 03:44:32 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.64,363,1301900400"; d="scan'208";a="435534748"
-Received: from unknown (HELO helios.localnet) ([10.255.16.107])
-	by azsmga001.ch.intel.com with ESMTP; 13 May 2011 03:44:31 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-Organization: Intel Corporation (UK)
+	Fri, 13 May 2011 13:23:02 +0200
+Received: from [2001:638:602:1183:619e:fa82:d0c3:b1d0] (helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
+	id 1QKqPl-0007wa-8H by authid <stefan@sostec.de> with srv_auth_cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 May 2011 13:20:15 +0200
+Received: from stefan by excalibur.local with local (Exim 4.76)
+	(envelope-from <stefan@excalibur.local>) id 1QKqPj-0000uc-Ni
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 13 May 2011 13:20:11 +0200
+Date: Fri, 13 May 2011 13:20:10 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 May 2011 11:44:27 +0100
-User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic-pae; KDE/4.6.2; i686; ; )
-References: <1305145805-14609-1-git-send-email-eric@eukrea.com>
-	<4DCBF7E3.5030504@mentor.com>
-In-Reply-To: <4DCBF7E3.5030504@mentor.com>
+Message-ID: <20110513112010.GA29302@excalibur.local>
+References: <1304926905-4739-1-git-send-email-stefan@datenfreihafen.org>
 MIME-Version: 1.0
-Message-Id: <201105131144.27612.paul.eggleton@linux.intel.com>
-Subject: Re: Update qt to 4.7.3
+In-Reply-To: <1304926905-4739-1-git-send-email-stefan@datenfreihafen.org>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
+	autolearn=ham version=3.2.5
+Subject: Re: [PATCH] llvm2.7_2.7: Add patch for build errors on newer gcc / glibc combinations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,24 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2011 10:48:26 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 13 May 2011 11:23:02 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Thursday 12 May 2011 16:08:19 Tom Rini wrote:
-> Any idea if this fixes all of the arches that moving to 4.7.2 broke
-> (anything not arm or x86, more or less) ?  Thanks.
+Hello.
 
-Which arches specifically didn't build for you? I have at least managed to 
-build 4.7.3 for x86-64 and MIPS (with oe-core that is).
+On Mon, 2011-05-09 at 09:41, Stefan Schmidt wrote:
+> From: Stefan Schmidt <stefan@buglabs.net>
+> 
+> Its seems there is a stricter header checking again which results in errors like
+> this:
+> error: 'ptrdiff_t' does not name a type
+> 
+> This happens on my Debian SID system. Adding the needed includes fixes the
+> build.
 
-Cheers,
-Paul
+Have I take no reaction as agreement here? ;)
 
--- 
+As it is a build fix I'm going to push this later today if no-one
+objects.
 
-Paul Eggleton
-Intel Open Source Technology Centre
+regards
+Stefan Schmidt
 
 
