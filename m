@@ -1,29 +1,27 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1QKurh-0000nR-AQ
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 May 2011 18:05:21 +0200
-Received: (qmail 22800 invoked by uid 503); 13 May 2011 16:55:58 -0000
-Received: from b9.ovh.net (HELO mail179.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 13 May 2011 16:55:58 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 13 May 2011 18:02:34 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 13 May 2011 18:02:32 +0200
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+Received: from vms173005pub.verizon.net ([206.46.173.5])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <denis@denix.org>)
+	id 1QKvkR-0002Iz-0J; Fri, 13 May 2011 19:01:55 +0200
+Received: from gandalf.denix.org ([unknown] [108.18.140.4])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009))
+	with ESMTPA id <0LL500B0H8IBMVAY@vms173005.mailsrvcs.net>; Fri,
+	13 May 2011 11:59:00 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 7660814AF5B; Fri,
+	13 May 2011 12:58:59 -0400 (EDT)
+Date: Fri, 13 May 2011 12:58:59 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 May 2011 17:53:37 +0200
-Message-Id: <1305302017-5380-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1305235863-16025-4-git-send-email-eric@eukrea.com>
-References: <1305235863-16025-4-git-send-email-eric@eukrea.com>
-MIME-Version: 1.0
-X-Ovh-Tracer-Id: 6203708488550296905
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: [PATCH 3/3 v2] qt4-4.7.3: add translations'support
+Message-id: <20110513165859.GT25606@denix.org>
+References: <BANLkTinm-YXGM0z1CFJamQG7N0Em442VHw@mail.gmail.com>
+	<1305280030.2421.57.camel@phil-desktop>
+MIME-version: 1.0
+In-reply-to: <1305280030.2421.57.camel@phil-desktop>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Cc: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: Where to host new layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,127 +35,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2011 16:05:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 13 May 2011 17:01:55 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-this patch should bring back translations support in qt4.
+On Fri, May 13, 2011 at 10:47:10AM +0100, Phil Blundell wrote:
+> On Fri, 2011-05-13 at 02:10 -0700, Khem Raj wrote:
+> > I have created couple of layers namely meta-slugos (distro layer) and
+> > meta-nslu ( machine layer). I was  looking for place to host those
+> > layers. Would they be good under meta-openembedded ? I dont think
+> > http://www.nslu2-linux.org/
+> > has git infrastructure otherwise that would be one place to put it.
+> 
+> In the longer term I don't think there's any reason we couldn't host
+> those kinds of distro layers on openembedded.org, either in separate
+> repositories or a single shared one.  I know there was some board
+> discussion a few months ago about whether or not oe.org should be in the
+> business of hosting third party BSPs but I'm not quite sure what the
+> outcome of that was.
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
-v2 : build tested for qt4-embedded and qt4-x11-free
----
- recipes/qt4/qt-4.7.3.inc                    |   14 ++++----------
- recipes/qt4/qt-4.7.3/fix-translations.patch |   22 ++++++++++++++++++++++
- recipes/qt4/qt4-embedded.inc                |    2 +-
- recipes/qt4/qt4-x11-free.inc                |    2 +-
- 4 files changed, 28 insertions(+), 12 deletions(-)
- create mode 100644 recipes/qt4/qt-4.7.3/fix-translations.patch
+The outcome for the short term was to allow community-developed layers on 
+openembedded.org (where slugos/nslu should fall into that category, AFAICS) 
+and not yet the commercial layers/BSPs from manufacturers (those should be 
+directed to Yocto or asked to provide own hosting).
 
-diff --git a/recipes/qt4/qt-4.7.3.inc b/recipes/qt4/qt-4.7.3.inc
-index 4e9c96a..4dfebd1 100644
---- a/recipes/qt4/qt-4.7.3.inc
-+++ b/recipes/qt4/qt-4.7.3.inc
-@@ -10,9 +10,11 @@ SRC_URI = "\
- 	file://0006-freetype-host-includes.patch \
- 	file://0001-Added-Openembedded-crossarch-option.patch \
- 	file://0010-phonon-gstreamer-rgb-endianess.patch \
-+	file://fix-translations.patch \
- 	file://g++.conf \
- 	file://linux.conf \
--           "
-+	"
-+
- # Set necessary variables in the profile
- SRC_URI += "file://qte.sh"
- 
-@@ -22,7 +24,7 @@ FILES_${QT_BASE_NAME}-tools                += "${bindir}/qml"
- 
- do_configure_prepend() {
-     for pro in $(find ${S} -name "*.pro") ; do
--        sed -i 's:$$QT_BUILD_TREE/bin/lrelease:${OE_QMAKE_LRELEASE}:g' $pro
-+        sed -i 's:$$LRELEASE:${STAGING_BINDIR_NATIVE}/lrelease4:g' $pro
-     done
- 
-     sed -i s:SEDME:${S}: ${WORKDIR}/linux.conf
-@@ -34,10 +36,6 @@ do_configure_prepend() {
-     ${S}/configure
- }
- 
--do_configure_append() {
--    sed -e '/QMAKE_TARGET /d' -e '/TARGET /d' -i ${S}/translations/Makefile
--}
--
- QT_GLFLAGS ?= ""
- QT_CONFIG_FLAGS += " -javascript-jit -script -scripttools -declarative -xmlpatterns -no-rpath -qt3support -reduce-relocations -silent ${QT_GLFLAGS}"
- 
-@@ -48,10 +46,6 @@ do_compile() {
-     fi
- 
-     unset CFLAGS CXXFLAGS
--    install -m 0755 ${STAGING_BINDIR_NATIVE}/rcc4 ${S}/bin/rcc
--    install -m 0755 ${STAGING_BINDIR_NATIVE}/moc4 ${S}/bin/moc
--    install -m 0755 ${STAGING_BINDIR_NATIVE}/uic4 ${S}/bin/uic
--    install -m 0755 ${STAGING_BINDIR_NATIVE}/lrelease4 ${S}/bin/lrelease
- 
-     oe_runmake ${EXTRA_ENV}
- }
-diff --git a/recipes/qt4/qt-4.7.3/fix-translations.patch b/recipes/qt4/qt-4.7.3/fix-translations.patch
-new file mode 100644
-index 0000000..fe20b5b
---- /dev/null
-+++ b/recipes/qt4/qt-4.7.3/fix-translations.patch
-@@ -0,0 +1,22 @@
-+diff --git a/translations/translations.pro b/translations/translations.pro
-+index cdaf04a..24fa668 100644
-+--- a/translations/translations.pro
-++++ b/translations/translations.pro
-+@@ -20,7 +20,7 @@ updateqm.name = LRELEASE ${QMAKE_FILE_IN}
-+ updateqm.CONFIG += no_link
-+ QMAKE_EXTRA_COMPILERS += updateqm
-+ 
-+-isEmpty(vcproj) {
-++!isEmpty(vcproj) {
-+     QMAKE_LINK = @: IGNORE THIS LINE
-+     OBJECTS_DIR =
-+     win32:CONFIG -= embed_manifest_exe
-+@@ -30,7 +30,7 @@ isEmpty(vcproj) {
-+     phony_src.input = PHONY_DEPS
-+     phony_src.output = phony.c
-+     phony_src.variable_out = GENERATED_SOURCES
-+-    phony_src.commands = echo int main() { return 0; } > phony.c
-++    phony_src.commands = echo \"int main() { return 0; }\" > phony.c
-+     phony_src.name = CREATE phony.c
-+     phony_src.CONFIG += combine
-+     QMAKE_EXTRA_COMPILERS += phony_src
-diff --git a/recipes/qt4/qt4-embedded.inc b/recipes/qt4/qt4-embedded.inc
-index af9d545..79ce005 100644
---- a/recipes/qt4/qt4-embedded.inc
-+++ b/recipes/qt4/qt4-embedded.inc
-@@ -4,7 +4,7 @@ LICENSE = "GPL QPL"
- PRIORITY = "optional"
- HOMEPAGE = "http://www.trolltech.com"
- DEPENDS += "directfb tslib"
--INC_PR = "r28"
-+INC_PR = "r29"
- 
- QT_BASE_NAME ?= "qt4-embedded"
- QT_BASE_LIB  ?= "libqt-embedded"
-diff --git a/recipes/qt4/qt4-x11-free.inc b/recipes/qt4/qt4-x11-free.inc
-index c407422..f63c9d2 100644
---- a/recipes/qt4/qt4-x11-free.inc
-+++ b/recipes/qt4/qt4-x11-free.inc
-@@ -5,7 +5,7 @@ HOMEPAGE = "http://www.trolltech.com"
- LICENSE = "GPL QPL"
- DEPENDS += "virtual/libx11 fontconfig libxft libxext libxrender libxrandr libxcursor"
- 
--INC_PR = "r24"
-+INC_PR = "r25"
- 
- SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-x11-opensource-src-${PV}.tar.gz \
-            file://0001-cross-compile.patch \
+One of the reasons named was infrastructure limitations on openembedded.org as 
+of now. There were several possible solutions to hosting limitations discussed 
+few weeks ago by the board and involved parties...
+
 -- 
-1.7.0.4
-
+Denys
 
 
