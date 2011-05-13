@@ -1,29 +1,26 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <morphis@gravedo.de>) id 1QKsJx-00051c-78
+	(envelope-from <philip@balister.org>) id 1QKtXl-0006mQ-N9
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 May 2011 15:22:21 +0200
-Received: by gravedo.de (Postfix, from userid 5001)
-	id 9CD50799015; Fri, 13 May 2011 15:19:34 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h1108419.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from [192.168.178.21] (dslb-088-071-188-060.pools.arcor-ip.net
-	[88.71.188.60]) by gravedo.de (Postfix) with ESMTPSA id 0055E799010
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 May 2011 15:19:33 +0200 (CEST)
-Message-ID: <4DCD2FE5.6090801@gravedo.de>
-Date: Fri, 13 May 2011 15:19:33 +0200
-From: Simon Busch <morphis@gravedo.de>
+	Fri, 13 May 2011 16:40:42 +0200
+Received: (qmail 28737 invoked by uid 1003); 13 May 2011 14:37:49 -0000
+Received: from unknown (HELO ?192.168.1.167?)
+	(philip@opensdr.com@96.240.165.110)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	13 May 2011 14:37:49 -0000
+Message-ID: <4DCD423C.40802@balister.org>
+Date: Fri, 13 May 2011 10:37:48 -0400
+From: Philip Balister <philip@balister.org>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110422 Lightning/1.0b2 Shredder/3.1.11pre
+	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14 Thunderbird/3.1.10
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <201105131210.17952.sgh@sgh.dk>
-In-Reply-To: <201105131210.17952.sgh@sgh.dk>
-Subject: Re: qt-x11-free_7.7.2 fail configure missing qmake
+References: <BANLkTinm-YXGM0z1CFJamQG7N0Em442VHw@mail.gmail.com>
+	<1305280030.2421.57.camel@phil-desktop>
+In-Reply-To: <1305280030.2421.57.camel@phil-desktop>
+Cc: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: Where to host new layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,26 +34,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2011 13:22:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 13 May 2011 14:40:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 13.05.2011 12:10, S=F8ren Holm wrote:
->=20
-> Hi
->=20
-> Commit 5a6efd58cdc85d08ab9e106c84bbac5110b5aecd makes qt4 fail during c=
-ompilation. It seems like qmake is not compiled or at least not staged.
-> Adding DEPENDS +=3D "qt4-native" does not seem to help since qt4-native=
- is actually build.
->=20
-> I've tried deleting tmp to get a fresh build but with no luck.
+On 05/13/2011 05:47 AM, Phil Blundell wrote:
+> On Fri, 2011-05-13 at 02:10 -0700, Khem Raj wrote:
+>> I have created couple of layers namely meta-slugos (distro layer) and
+>> meta-nslu ( machine layer). I was  looking for place to host those
+>> layers. Would they be good under meta-openembedded ? I dont think
+>> http://www.nslu2-linux.org/
+>> has git infrastructure otherwise that would be one place to put it.
+>
+> I thought the idea was that meta-openembedded would remain distro- and
+> machine- neutral and that the BSP bits would live in separate repos.
+> Whether we want one repo per machine or some kind of shared repository
+> with a bunch of distros in is, I guess, something of an open question.
+>
+> In the short term you could obviously host them on github or somewhere.
+> (I was originally planning to do that with meta-micro, but it turned out
+> to be fractionally more convenient to host it on my own git server so I
+> did that instead.)
+>
+> In the longer term I don't think there's any reason we couldn't host
+> those kinds of distro layers on openembedded.org, either in separate
+> repositories or a single shared one.  I know there was some board
+> discussion a few months ago about whether or not oe.org should be in the
+> business of hosting third party BSPs but I'm not quite sure what the
+> outcome of that was.
 
-I tried compiling qt4-embedded multiply times before commiting the patch
-mentioned above a never get in the situation you desribed. For which
-machine and distro do you try to build qt4?
+I'd like to hear what the slugos guys would like to do.
 
-regards,
-Simon
+Philip
 
 
