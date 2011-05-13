@@ -1,40 +1,30 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QKxH6-00059O-EZ
+	(envelope-from <morphis@gravedo.de>) id 1QKxfb-00065h-0e
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 May 2011 20:40:05 +0200
-Received: by gwb11 with SMTP id 11so1066792gwb.6
+	Fri, 13 May 2011 21:05:03 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 00D90799010; Fri, 13 May 2011 21:02:15 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h1108419.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from [192.168.1.38] (p5B3E79A7.dip.t-dialin.net [91.62.121.167])
+	by gravedo.de (Postfix) with ESMTPSA id ED328798D6F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 May 2011 11:36:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
-	:x-mailer:in-reply-to:references;
-	bh=DGcGVvjK4YGXpzW7ZXRt8+boRwj1SF+YFEg29HcaCZw=;
-	b=UWsww7xeP/hIjwLPSt8GNMlFqlgOsDB0HLtlEVccusvgqVQBIXnaU9NZyM7S7yBlcc
-	nYaVREL2MIGBSLQPK1N+hOWYylFJaX9e6jTGanf+iWlgVWU74mIbRKbry5Ko/2AwF+Ha
-	7q27z7c1GItpAoIWj3D1Biwll852TDflvwlQc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references;
-	b=KqXrL44ab7UckjPOXxDk+cHROYRHzdj+v0DcNR6DZarKHecFF4BCKHZkgmpzCv5gcf
-	+NWhpjsqiI64RYEonYBqq7FFiyPmVEtDghaITyZ/5I3MP4VzJX+Q/AlS3Yjpm2jdoTwO
-	vfEU2qXIYSYXaFts1gSmWnKhkgL6xmMhhKFEw=
-Received: by 10.101.214.10 with SMTP id r10mr1130364anq.75.1305311804091;
-	Fri, 13 May 2011 11:36:44 -0700 (PDT)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id s16sm1855267anj.26.2011.05.13.11.36.41
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 13 May 2011 11:36:43 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Fri, 13 May 2011 21:02:14 +0200 (CEST)
+Message-ID: <4DCD8033.9020206@gravedo.de>
+Date: Fri, 13 May 2011 21:02:11 +0200
+From: Simon Busch <morphis@gravedo.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110422 Lightning/1.0b2 Shredder/3.1.11pre
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 May 2011 18:36:11 +0000
-Message-Id: <1305311771-23547-2-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <1305311771-23547-1-git-send-email-otavio@ossystems.com.br>
-References: <1305311771-23547-1-git-send-email-otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH v1 2/2] pcsc-lite: add version 1.7.2
+References: <201105131210.17952.sgh@sgh.dk> <4DCD2FE5.6090801@gravedo.de>
+	<201105131643.03086.sgh@sgh.dk>
+In-Reply-To: <201105131643.03086.sgh@sgh.dk>
+Subject: Re: qt-x11-free_7.7.2 fail configure missing qmake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,95 +38,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2011 18:40:05 -0000
+X-List-Received-Date: Fri, 13 May 2011 19:05:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- meta-oe/recipes-support/pcsc-lite/files/pcscd.init |   32 +++++++++++++++++++
- .../recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb   |   33 ++++++++++++++++++++
- 2 files changed, 65 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-support/pcsc-lite/files/pcscd.init
- create mode 100644 meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb
+On 13.05.2011 16:43, S=F8ren Holm wrote:
+>=20
+> Angstrom, i686
+>=20
+> Have you tried compiling qt4-x11-free?
+>=20
+> I can send you a buildlog if you'd like.
 
-diff --git a/meta-oe/recipes-support/pcsc-lite/files/pcscd.init b/meta-oe/recipes-support/pcsc-lite/files/pcscd.init
-new file mode 100644
-index 0000000..92385ab
---- /dev/null
-+++ b/meta-oe/recipes-support/pcsc-lite/files/pcscd.init
-@@ -0,0 +1,32 @@
-+#!/bin/sh
-+DAEMON=/usr/sbin/pcscd
-+NAME=pcscd
-+DESC="PCSC Daemon"
-+PIDFILE=/var/run/pcscd/pcscd.pid
-+ARGS=""
-+
-+test -f $DAEMON || exit 0
-+
-+case "$1" in
-+    start)
-+        echo -n "Starting $DESC: $NAME"
-+        start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON -- $ARGS
-+        echo "."
-+        ;;
-+    stop)
-+        echo -n "Stopping $DESC: $NAME"
-+        start-stop-daemon --stop --quiet --pidfile $PIDFILE --exec $DAEMON
-+        echo "."
-+        ;;
-+    restart)
-+        $0 stop
-+        sleep 1
-+        $0 start
-+        ;;
-+    *)
-+        echo "Usage: $0 {start|stop|restart}"
-+        exit 1
-+        ;;
-+esac
-+
-+exit 0
-diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb
-new file mode 100644
-index 0000000..25487de
---- /dev/null
-+++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb
-@@ -0,0 +1,33 @@
-+DESCRIPTION = "PC/SC Lite smart card framework and applications"
-+HOMEPAGE = "http://pcsclite.alioth.debian.org/"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=c8e551349dc346258274f0007679e149"
-+DEPENDS = "udev"
-+PR = "r0"
-+
-+SRC_URI = "https://alioth.debian.org/frs/download.php/3533/pcsc-lite-${PV}.tar.bz2 \
-+           file://pcscd.init "
-+
-+inherit autotools update-rc.d
-+
-+INITSCRIPT_NAME = "pcscd"
-+INITSCRIPT_PARAMS = "defaults"
-+
-+EXTRA_OECONF = " \
-+	--enable-libusb \
-+        --disable-libudev \
-+	--enable-usbdropdir=${libdir}/pcsc/drivers \
-+	"
-+
-+do_install() {
-+	oe_runmake DESTDIR="${D}" install
-+	install -d "${D}/etc/init.d"
-+	install -m 755 "${WORKDIR}/pcscd.init" "${D}/etc/init.d/pcscd"
-+}
-+
-+PACKAGES =+ "libpcsclite"
-+
-+FILES_libpcsclite = "${libdir}/libpcsclite.so.*"
-+
-+SRC_URI[md5sum] = "47e7055cfc14399fdaa1b7a4aa06e5aa"
-+SRC_URI[sha256sum] = "41f13d552eaa2c3978fbb6f2125e81903a0767011d999052fd1a6ee03880b398"
--- 
-1.7.2.5
+Buildlog would be fine. I will take a look into this at this weekend or
+the beginning of the next weeks.
 
+Thanks very much for reporting this problems and I hope we will fix them
+very soon.
+
+regards,
+Simon
 
 
