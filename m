@@ -1,32 +1,32 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1QKoHc-0006Jg-4S
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 May 2011 11:03:40 +0200
-Received: (qmail 7799 invoked by uid 503); 13 May 2011 09:54:14 -0000
-Received: from b9.ovh.net (HELO mail179.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 13 May 2011 09:54:14 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 13 May 2011 11:00:52 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 13 May 2011 11:00:51 +0200
-Message-ID: <4DCCF342.4080500@eukrea.com>
-Date: Fri, 13 May 2011 11:00:50 +0200
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.10
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <raj.khem@gmail.com>)
+	id 1QKoRG-0006Ww-90; Fri, 13 May 2011 11:13:38 +0200
+Received: by ewy5 with SMTP id 5so685516ewy.6
+	for <multiple recipients>; Fri, 13 May 2011 02:10:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:from:date:message-id:subject:to
+	:content-type; bh=MbxOXZYVmRHeaCc+WCsp8VNHI6IBGBstF46C58MNuAU=;
+	b=STLNkH3WzMM5P0htB1mmNgfcSFBQoEjMNN/70XzWexg28OMJPxnu+nGjjt7UDFvVIa
+	bwxGRvLdAzKZfAT2HxcZUftXkyQuyB2km+wMKxCnY6VG7xPX4tA+J+84ywT/IH+ln8Tt
+	IKB7eW5hE1LN+g8lSPeNfDSGRgcDpcszu50Pc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=iHCq97sOxGmiCKJphxf+TTW009rakD/1WGtzngFa28x4l0awRhz2t3gU5evjGaFkz0
+	cZmOBp2hkgCq8fqbO1au78oECrLtx7hguKDhf5ehDakoGml/gXYghrhnzNewtOnOohNy
+	HZQLTouZ1fWGmFar55K8r+odI+rTEKRdvzjcY=
+Received: by 10.14.0.133 with SMTP id 5mr514523eeb.144.1305277848215; Fri, 13
+	May 2011 02:10:48 -0700 (PDT)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1305235863-16025-1-git-send-email-eric@eukrea.com>
-	<1305235863-16025-4-git-send-email-eric@eukrea.com>
-In-Reply-To: <1305235863-16025-4-git-send-email-eric@eukrea.com>
-X-Ovh-Tracer-Id: 17528854175893728585
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH 3/3] qt4-4.7.3: add translations'support
+Received: by 10.14.53.5 with HTTP; Fri, 13 May 2011 02:10:18 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 13 May 2011 02:10:18 -0700
+Message-ID: <BANLkTinm-YXGM0z1CFJamQG7N0Em442VHw@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
+	Mike Westerhof <mike@mwester.net>
+Subject: Where to host new layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,22 +40,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2011 09:03:40 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 13 May 2011 09:13:38 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi,
+Hi Mike and all
 
-On 12/05/2011 23:31, Eric Bénard wrote:
-> this patch should bring back translations support in qt4.
->
-> Signed-off-by: Eric Bénard<eric@eukrea.com>
-> ---
-> it's currently build tested for qt4-embedded.
-> ---
+I have created couple of layers namely meta-slugos (distro layer) and
+meta-nslu ( machine layer). I was  looking for place to host those
+layers. Would they be good under meta-openembedded ? I dont think
+http://www.nslu2-linux.org/
+has git infrastructure otherwise that would be one place to put it.
 
-forget this patch it still contains an error.
+Thanks
 
-Eric
+-Khem
 
 
