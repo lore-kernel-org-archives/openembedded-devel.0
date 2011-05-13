@@ -1,35 +1,35 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1QKwoT-0003sr-2k
+	(envelope-from <stefan@datenfreihafen.org>) id 1QKwp5-0003zW-O6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 May 2011 20:10:09 +0200
+	Fri, 13 May 2011 20:10:47 +0200
 Received: from p4fc7654c.dip.t-dialin.net ([79.199.101.76]
 	helo=excalibur.local) by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1QKwlj-0003oP-K0 by authid <stefan@sostec.de> with srv_auth_cram_md5;
-	Fri, 13 May 2011 20:07:21 +0200
+	id 1QKwmH-0003ov-HN by authid <stefan@sostec.de> with srv_auth_cram_md5;
+	Fri, 13 May 2011 20:07:59 +0200
 Received: from stefan by excalibur.local with local (Exim 4.76)
 	(envelope-from <stefan@excalibur.local>)
-	id 1QKwlh-0002Bq-J7; Fri, 13 May 2011 20:07:17 +0200
-Date: Fri, 13 May 2011 20:07:17 +0200
+	id 1QKwmF-0002Bw-H3; Fri, 13 May 2011 20:07:51 +0200
+Date: Fri, 13 May 2011 20:07:51 +0200
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
-Message-ID: <20110513180717.GD29302@excalibur.local>
+Message-ID: <20110513180751.GE29302@excalibur.local>
 References: <1305290080.2448.3.camel@gnutoo-laptop>
-	<1305290588-7057-2-git-send-email-GNUtoo@no-log.org>
+	<1305290588-7057-3-git-send-email-GNUtoo@no-log.org>
 MIME-Version: 1.0
-In-Reply-To: <1305290588-7057-2-git-send-email-GNUtoo@no-log.org>
+In-Reply-To: <1305290588-7057-3-git-send-email-GNUtoo@no-log.org>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
 User-Agent: Mutt/1.5.21 (2010-09-15)
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+X-Spam-Status: No, score=-4.1 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
 	autolearn=ham version=3.2.5
 Cc: openembedded-devel@lists.openembedded.org,
 	Stefan Schmidt <stefan@buglabs.net>
-Subject: Re: [PATCH 02/12] xserver-common-1.34: sync with oe-core
+Subject: Re: [PATCH 03/12] udev 165: depends on mtd-utils to fix compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,28 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2011 18:10:09 -0000
+X-List-Received-Date: Fri, 13 May 2011 18:10:47 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hello.
 
 On Fri, 2011-05-13 at 14:43, Denis 'GNUtoo' Carikli wrote:
-> Without this patch(that require xserver-common-1.34 to be preferred)
->   Some issues are present, for instance:
->  * xorg starting but not x-window-window manager, unless there is an external
->    window manager script like /etc/X11/Xsession.d/90matchbox-session
->  * xinput-calibrator's calibration not taken into account.
-
-I can't comment on the bigger sync with oe-core, but the
-x-window-manager patch is needed to start for example E17 with this
-setup.
-
-Given that I find it usefull to have more recipes in sync:
+> Without that fix we have:
+>     CC     udev/udev-event.o
+>   In file included from extras/mtd_probe/mtd_probe.c:19:0:
+>   extras/mtd_probe/mtd_probe.h:20:26: fatal error: mtd/mtd-user.h: No such file or directory
+>   compilation terminated.
+> 
+> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 
 Acked-by: Stefan Schmidt <stefan@buglabs.net>
 
-regards
-Stefan Schmidt
+> ---
+>  recipes/udev/udev_165.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes/udev/udev_165.bb b/recipes/udev/udev_165.bb
+> index bad847b..f909256 100644
+> --- a/recipes/udev/udev_165.bb
+> +++ b/recipes/udev/udev_165.bb
+> @@ -3,13 +3,13 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
+>  the hotplug package and requires a kernel not older than 2.6.12."
+>  LICENSE = "GPLv2+"
+>  
+> -PR = "r5"
+> +PR = "r6"
+>  
+>  # Untested
+>  DEFAULT_PREFERENCE = "-1"
+>  
+>  # Needed for udev-extras
+> -DEPENDS = "gperf-native usbutils acl glib-2.0"
+> +DEPENDS = "gperf-native usbutils acl glib-2.0 mtd-utils"
+>  RDEPENDS_${PN} += "module-init-tools-depmod udev-utils"
+>  
+>  SRC_URI = "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
+> -- 
+> 1.7.0.4
+> 
 
 
