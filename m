@@ -1,20 +1,20 @@
 Received: from smtp201.alice.it ([82.57.200.97])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <GNUtoo@no-log.org>) id 1QKrll-0003CT-7l
+	(envelope-from <GNUtoo@no-log.org>) id 1QKrll-0003CT-G7
 	for openembedded-devel@lists.openembedded.org;
 	Fri, 13 May 2011 14:47:01 +0200
 Received: from localhost.localdomain (79.51.85.13) by smtp201.alice.it
 	(8.5.124.08) (authenticated as editempo@alice.it)
-	id 4CC05A4C06BF0167; Fri, 13 May 2011 14:44:12 +0200
+	id 4CC05A4C06BF0178; Fri, 13 May 2011 14:44:14 +0200
 From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 To: Stefan Schmidt <stefan@buglabs.net>
-Date: Fri, 13 May 2011 14:43:01 +0200
-Message-Id: <1305290588-7057-3-git-send-email-GNUtoo@no-log.org>
+Date: Fri, 13 May 2011 14:43:06 +0200
+Message-Id: <1305290588-7057-8-git-send-email-GNUtoo@no-log.org>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1305290080.2448.3.camel@gnutoo-laptop>
 References: <1305290080.2448.3.camel@gnutoo-laptop>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 03/12] udev 165: depends on mtd-utils to fix compilation
+Subject: [PATCH 08/12] matchbox-panel: depend on xterm(matchbox panel contain an xterm launcher)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,37 +30,23 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 13 May 2011 12:47:01 -0000
 
-Without that fix we have:
-    CC     udev/udev-event.o
-  In file included from extras/mtd_probe/mtd_probe.c:19:0:
-  extras/mtd_probe/mtd_probe.h:20:26: fatal error: mtd/mtd-user.h: No such file or directory
-  compilation terminated.
-
 Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 ---
- recipes/udev/udev_165.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes/matchbox-panel/matchbox-panel_0.9.3.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/udev/udev_165.bb b/recipes/udev/udev_165.bb
-index bad847b..f909256 100644
---- a/recipes/udev/udev_165.bb
-+++ b/recipes/udev/udev_165.bb
-@@ -3,13 +3,13 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
- the hotplug package and requires a kernel not older than 2.6.12."
- LICENSE = "GPLv2+"
- 
--PR = "r5"
-+PR = "r6"
- 
- # Untested
- DEFAULT_PREFERENCE = "-1"
- 
- # Needed for udev-extras
--DEPENDS = "gperf-native usbutils acl glib-2.0"
-+DEPENDS = "gperf-native usbutils acl glib-2.0 mtd-utils"
- RDEPENDS_${PN} += "module-init-tools-depmod udev-utils"
- 
- SRC_URI = "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
+diff --git a/recipes/matchbox-panel/matchbox-panel_0.9.3.bb b/recipes/matchbox-panel/matchbox-panel_0.9.3.bb
+index 092d8ba..221f0ad 100644
+--- a/recipes/matchbox-panel/matchbox-panel_0.9.3.bb
++++ b/recipes/matchbox-panel/matchbox-panel_0.9.3.bb
+@@ -1,5 +1,6 @@
+ require matchbox-panel.inc
+-PR ="r6"
++RDEPENDS += "xterm"
++PR ="r7"
+ SRC_URI = "http://projects.o-hand.com/matchbox/sources/${PN}/0.9/${PN}-${PV}.tar.gz \
+ 	   file://mb-applet-battery-repaint-093.patch \
+ 	   file://mb-applet-system-monitor-crash.patch \
 -- 
 1.7.0.4
 
