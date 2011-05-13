@@ -1,32 +1,35 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1QKucY-0008Ts-J1
+Received: from relay1.mentorg.com ([192.94.38.131])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <Tom_Rini@mentor.com>) id 1QKull-0000HP-5l
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 May 2011 17:49:42 +0200
-Received: (qmail 4696 invoked by uid 503); 13 May 2011 16:40:19 -0000
-Received: from b9.ovh.net (HELO mail179.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 13 May 2011 16:40:19 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 13 May 2011 17:46:55 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 13 May 2011 17:46:54 +0200
-Message-ID: <4DCD526E.2080706@eukrea.com>
-Date: Fri, 13 May 2011 17:46:54 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.10
+	Fri, 13 May 2011 17:59:13 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1QKuj3-00071N-2C from Tom_Rini@mentor.com ;
+	Fri, 13 May 2011 08:56:25 -0700
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Fri, 13 May 2011 08:54:26 -0700
+Received: from [172.30.80.18] (147.34.91.1) by svr-orw-fem-05 (147.34.97.43)
+	with Microsoft SMTP Server id 14.1.270.1;
+	Fri, 13 May 2011 08:56:24 -0700
+Message-ID: <4DCD54A7.3080407@mentor.com>
+Date: Fri, 13 May 2011 08:56:23 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <201105131210.17952.sgh@sgh.dk>
-	<f8a3ce78c529edc295cc9d15986d55bd.squirrel@webmail.infeline.org>
-In-Reply-To: <f8a3ce78c529edc295cc9d15986d55bd.squirrel@webmail.infeline.org>
-X-Ovh-Tracer-Id: 5939684958893354313
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: qt-x11-free_7.7.2 fail configure missing qmake
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <1305145805-14609-1-git-send-email-eric@eukrea.com>
+	<4DCBF7E3.5030504@mentor.com>
+	<201105131144.27612.paul.eggleton@linux.intel.com>
+In-Reply-To: <201105131144.27612.paul.eggleton@linux.intel.com>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 13 May 2011 15:54:26.0829 (UTC)
+	FILETIME=[096C63D0:01CC1186]
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Update qt to 4.7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,46 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2011 15:49:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 13 May 2011 15:59:13 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
 Content-Transfer-Encoding: 7bit
 
-Hi,
+On 05/13/2011 03:44 AM, Paul Eggleton wrote:
+> On Thursday 12 May 2011 16:08:19 Tom Rini wrote:
+>> Any idea if this fixes all of the arches that moving to 4.7.2 broke
+>> (anything not arm or x86, more or less) ?  Thanks.
+> 
+> Which arches specifically didn't build for you? I have at least managed to 
+> build 4.7.3 for x86-64 and MIPS (with oe-core that is).
 
-On 13/05/2011 16:28, Eivind Kvedalen wrote:
-> I get the same problem here when trying to compile qt4-embedded_4.7.2.bb.
->
-> Build Configuration:
-> BB_VERSION        = "1.10.2"
-> METADATA_BRANCH   = "master"
-> METADATA_REVISION = "54ab33e"
-> TARGET_ARCH       = "arm"
-> TARGET_OS         = "linux-gnueabi"
-> MACHINE           = "beagleboard"
-> DISTRO            = "angstrom"
-> DISTRO_VERSION    = "v2011.05"
-> TARGET_FPU        = "hard"
->
-interesting here that works fine for 4.7.3 (build host is a Ubuntu 10.04.2 LTS 
-x86 without qmake2 installed) :
-Build Configuration:
-BB_VERSION        = "1.12.0"
-METADATA_BRANCH   = "master"
-METADATA_REVISION = "69bb6a7"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "eukrea-cpuimx25"
-DISTRO            = "angstrom"
-DISTRO_VERSION    = "v2011.05"
-TARGET_FPU        = "soft"
+In openembedded.master, mips*, ppc and sh4 don't compile past 4.7.1 but
+I don't have the exact error handy (I think it was some dependency
+library didn't support the arch).
 
-.../...
-NOTE: package qt4-x11-free-4.7.3-r25.0: task do_build: Succeeded
-
-I'll post an update to the translation patch, can you try them on top of 4.7.3 
-update ?
-
-Thanks,
-Eric
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
