@@ -1,35 +1,40 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1QKww9-0004c4-82
+	(envelope-from <martin.jansa@gmail.com>) id 1QKx0B-0004kJ-3R
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 May 2011 20:18:05 +0200
-Received: from p4fc7654c.dip.t-dialin.net ([79.199.101.76]
-	helo=excalibur.local) by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1QKwtN-0003wn-Fy by authid <stefan@sostec.de> with srv_auth_cram_md5;
-	Fri, 13 May 2011 20:15:17 +0200
-Received: from stefan by excalibur.local with local (Exim 4.76)
-	(envelope-from <stefan@excalibur.local>)
-	id 1QKwtL-0002Ds-IV; Fri, 13 May 2011 20:15:11 +0200
-Date: Fri, 13 May 2011 20:15:11 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
-Message-ID: <20110513181511.GL29302@excalibur.local>
+	Fri, 13 May 2011 20:22:15 +0200
+Received: by fxm19 with SMTP id 19so2166786fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 May 2011 11:19:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=ufk0gj64fCKpdtiQm5Evapa9AQtNIY1ugWBvMSM1ryY=;
+	b=ue6DsHW7wSrztRqtlgiEMHJXoOPUvR+WAtJJOaEL2NKu3lL6MBtulkWUdDH0Om79ga
+	lK2xy50ONyCkz0nWAsclJQAyP5d5AcguOgm/Gp5prboCRM1G0sYw+otGGZj1FpMMxZGV
+	uG/gv5bT3o9RtA50c9xe3k9LfG+mUKpq3Sg0o=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=AjFZMj6Fk6h6ZNJCipLlxyu8TmWRulJRgi5WRp1WmSpSCKVYRy5CsnI4n3NyKTB0b9
+	SlEG+yNmX4OytDN8JW5lenK5zjTSMmyXehX6oQDc7wF4TDWVBOxv0mabIwH+kfFq7iMi
+	fmreTAabPEsMvQn8RZ/3RUqqIVofjerINbLuI=
+Received: by 10.223.25.152 with SMTP id z24mr187613fab.133.1305310764631;
+	Fri, 13 May 2011 11:19:24 -0700 (PDT)
+Received: from localhost ([94.230.152.115])
+	by mx.google.com with ESMTPS id t15sm926349fau.0.2011.05.13.11.19.22
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 13 May 2011 11:19:23 -0700 (PDT)
+Date: Fri, 13 May 2011 20:19:15 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110513181914.GG3162@jama.jama.net>
 References: <1305290080.2448.3.camel@gnutoo-laptop>
-	<1305290588-7057-5-git-send-email-GNUtoo@no-log.org>
+	<1305290588-7057-2-git-send-email-GNUtoo@no-log.org>
 MIME-Version: 1.0
-In-Reply-To: <1305290588-7057-5-git-send-email-GNUtoo@no-log.org>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
+In-Reply-To: <1305290588-7057-2-git-send-email-GNUtoo@no-log.org>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.0 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Cc: openembedded-devel@lists.openembedded.org,
-	Stefan Schmidt <stefan@buglabs.net>
-Subject: Re: [PATCH 05/12] angstrom-2010-preferred-versions.inc: remove xserver-common prefered version
+Subject: Re: [PATCH 02/12] xserver-common-1.34: sync with oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,40 +48,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2011 18:18:05 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 13 May 2011 18:22:15 -0000
+X-Groupsio-MsgNum: 32008
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="oxV4ZoPwBLqAyY+a"
 Content-Disposition: inline
 
-Hello.
+--oxV4ZoPwBLqAyY+a
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2011-05-13 at 14:43, Denis 'GNUtoo' Carikli wrote:
-> Without that fix Angstrom keep choosing xserver-common 1.33 instead of the 1.34 version
-> 
+On Fri, May 13, 2011 at 02:43:00PM +0200, Denis 'GNUtoo' Carikli wrote:
+> Without this patch(that require xserver-common-1.34 to be preferred)
+>   Some issues are present, for instance:
+>  * xorg starting but not x-window-window manager, unless there is an exte=
+rnal
+>    window manager script like /etc/X11/Xsession.d/90matchbox-session
+>  * xinput-calibrator's calibration not taken into account.
+>=20
+> This patch was taken from
+>   meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+>   in git://git.openembedded.net/meta-openembedded at commit
+>   e55afd32d8718534403cb871fc776b7f078250dc
+>=20
 > Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 
-I agree with the change but it is up to the angstrom devs to ACK it.
+Looks good to me
 
-regards
-Stefan Schmidt
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
 > ---
->  .../include/angstrom-2010-preferred-versions.inc   |    1 -
->  1 files changed, 0 insertions(+), 1 deletions(-)
-> 
-> diff --git a/conf/distro/include/angstrom-2010-preferred-versions.inc b/conf/distro/include/angstrom-2010-preferred-versions.inc
-> index 611c4e7..8d4c8ef 100644
-> --- a/conf/distro/include/angstrom-2010-preferred-versions.inc
-> +++ b/conf/distro/include/angstrom-2010-preferred-versions.inc
-> @@ -71,7 +71,6 @@ UDEV_GE_141 = "1"
->  PREFERRED_VERSION_usbutils = "0.86"
->  PREFERRED_VERSION_wpa-supplicant = "0.7.3"
->  PREFERRED_VERSION_wget = "1.11.4"
-> -PREFERRED_VERSION_xserver-common = "1.33"
->  PREFERRED_VERSION_xserver-kdrive = "1.4.0.90"
->  
->  #
-> -- 
-> 1.7.0.4
-> 
+>  recipes/xserver-common/files/gplv2-license.patch |  353 ++++++++++++++++=
+++++++
+>  recipes/xserver-common/xserver-common_1.34.bb    |   45 ++--
+>  2 files changed, 375 insertions(+), 23 deletions(-)
+>  create mode 100644 recipes/xserver-common/files/gplv2-license.patch
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--oxV4ZoPwBLqAyY+a
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
+
+iEYEARECAAYFAk3NdiIACgkQN1Ujt2V2gBwEpACeL81esrrV/N2gXBG0HIlnzqQG
+se4An1gknmyoZ4hfbZ7Bj1hR5hiXTkad
+=4/wO
+-----END PGP SIGNATURE-----
+
+--oxV4ZoPwBLqAyY+a--
