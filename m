@@ -1,41 +1,36 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QKx34-0004qv-Rj
+	(envelope-from <otavio.salvador@gmail.com>) id 1QKxGt-000594-BX
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 May 2011 20:25:14 +0200
-Received: by fxm19 with SMTP id 19so2168710fxm.6
+	Fri, 13 May 2011 20:39:31 +0200
+Received: by yxn22 with SMTP id 22so1067890yxn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 May 2011 11:22:26 -0700 (PDT)
+	Fri, 13 May 2011 11:36:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=YyBaHkThhCk98OQ9qM3kKexBRKS8aP+0B0+Q2hAxJAA=;
-	b=NEJAG1sLUg7w9isAXnL4jqrcOoX7/1JzNz5VoBMBPsfZGB8D4RWONmiCHKYH7FAsYa
-	NgO1sevqk7qelDeMuxORhVyfdH6sIU/ywht7Vp3HiC1dq+nmOfTq+6tjXAs1SOh3XlaP
-	e7DQ9Fug0fGZLx4297AEUwSyzl2mF5wwh4zSg=
+	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
+	:x-mailer; bh=iE6EE2DXlfo4EdDEvRC9GckGyIakJzJSds+qQ2nwkY4=;
+	b=qFEuLsAHx+ZjmbTgkb5tCPOzIDFdejx5UNj0kjRdJfcu3zPaVis+FTqf4n4x0QDEHT
+	ULH7/3zjwatAWCWPyuX42j3NCpacERfbHaxaRV2nPaJKwUGc6h4wQaj7/diArSFcalfo
+	Ph9biJwQumPu31YWpD4DMPWYrPhz0ONzWITdE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=evsKqLAbhdV7mV7onLD8merSENUKRIO+rT+OSklPnwnSDXqdeWBkzuW/ZF1/ID50Yj
-	UJk4RPniSjKYqO5qbskbSQ5aZDG43orCtM7FupWwQdwISLLGjFSdU4B6q2ZJyolDZ3er
-	/PVyDQZiM/ohJKDyLBZLWI1KZgrbJJ0txsNGg=
-Received: by 10.223.87.215 with SMTP id x23mr10103fal.32.1305310946024;
-	Fri, 13 May 2011 11:22:26 -0700 (PDT)
-Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id c22sm924666fat.14.2011.05.13.11.22.24
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=M6zk8kiBt6aBMwQm8UgKdZ8u6zikCRtVMVQOcqKlfG/j36juyRz3yiiuPArRoNkYdj
+	DB6HOzbvtP3rY6EQI8n7zBLL9x3nK2dw8INteJHuf6EWyjY6KFe8yoKUBzC+Yb2iGO9Q
+	vDBW6euS1EOShsIYKf3od7cUgnm+8nJ7mvv1w=
+Received: by 10.101.136.34 with SMTP id o34mr1181337ann.73.1305311801640;
+	Fri, 13 May 2011 11:36:41 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id s16sm1855267anj.26.2011.05.13.11.36.39
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 13 May 2011 11:22:25 -0700 (PDT)
-Date: Fri, 13 May 2011 20:22:17 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
-Message-ID: <20110513182217.GH3162@jama.jama.net>
-References: <1305290080.2448.3.camel@gnutoo-laptop>
-	<1305290702-7166-1-git-send-email-GNUtoo@no-log.org>
-MIME-Version: 1.0
-In-Reply-To: <1305290702-7166-1-git-send-email-GNUtoo@no-log.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 10/12] preferred-shr-versions.inc: remove xserver-common prefered version
+	Fri, 13 May 2011 11:36:40 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 13 May 2011 18:36:10 +0000
+Message-Id: <1305311771-23547-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH v1 1/2] libiconv: drop EXTRA_OECONF as it is handled by gettext class
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,59 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2011 18:25:14 -0000
-X-Groupsio-MsgNum: 32009
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="jIYo0VRlfdMI9fLa"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 13 May 2011 18:39:31 -0000
 
---jIYo0VRlfdMI9fLa
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ .../recipes-support/libiconv/libiconv_1.13.1.bb    |    4 +---
+ 1 files changed, 1 insertions(+), 3 deletions(-)
 
-On Fri, May 13, 2011 at 02:45:01PM +0200, Denis 'GNUtoo' Carikli wrote:
-> Without that fix SHR keep choosing xserver-common 1.33 instead of the 1.3=
-4 version
+diff --git a/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb b/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
+index 868314b..35f4e2d 100644
+--- a/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
++++ b/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
+@@ -8,9 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+ BBCLASSEXTEND = "native nativesdk"
+ 
+ PROVIDES = "virtual/libiconv"
+-PR = "r2"
+-
+-EXTRA_OECONF +=  "${@['--disable-nls','--enable-nls'][bb.data.getVar('USE_NLS', d, 1) == 'yes']}"
++PR = "r3"
+ 
+ SRC_URI += "file://autoconf.patch"
+ 
+-- 
+1.7.2.5
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
->=20
-> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
-> ---
->  conf/distro/include/preferred-shr-versions.inc |    1 -
->  1 files changed, 0 insertions(+), 1 deletions(-)
->=20
-> diff --git a/conf/distro/include/preferred-shr-versions.inc b/conf/distro=
-/include/preferred-shr-versions.inc
-> index 35a4ecd..7df65c5 100644
-> --- a/conf/distro/include/preferred-shr-versions.inc
-> +++ b/conf/distro/include/preferred-shr-versions.inc
-> @@ -18,7 +18,6 @@ PREFERRED_VERSION_linux-libc-headers-native =3D "${LINU=
-X_LIBC_HEADERS_VERSION}"
->  PREFERRED_VERSION_openssh =3D "5.2p1"
-> =20
->  # upgrades used in Angstrom
-> -PREFERRED_VERSION_xserver-common =3D "1.33"
->  PREFERRED_VERSION_xserver-nodm-init =3D "2.0"
->  PREFERRED_VERSION_hal           =3D "0.5.13"
->  PREFERRED_VERSION_wpa-supplicant =3D "0.6.9"
-> --=20
-> 1.7.0.4
->=20
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---jIYo0VRlfdMI9fLa
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk3NdtkACgkQN1Ujt2V2gBwc9wCgmlcbxGJEkFdWwdB1PY6yNO0o
-gw8An33SxnrL+Lz532UYjRGrpnG/uvgM
-=BTtO
------END PGP SIGNATURE-----
-
---jIYo0VRlfdMI9fLa--
