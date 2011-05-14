@@ -1,32 +1,32 @@
-Received: from 1.26.mail-out.ovh.net ([46.105.43.121] helo=26.mail-out.ovh.net)
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1QLM5l-0002D6-9d
+Received: from newsmtp5.atmel.com ([204.2.163.5] helo=sjogate2.atmel.com)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1QLMDd-0002M6-K0
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 May 2011 23:09:42 +0200
-Received: (qmail 7645 invoked by uid 503); 14 May 2011 16:32:53 -0000
-Received: from b6.ovh.net (HELO mail426.ha.ovh.net) (213.186.33.56)
-	by 26.mail-out.ovh.net with SMTP; 14 May 2011 16:32:53 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 14 May 2011 19:06:26 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 14 May 2011 19:06:25 +0200
-Message-ID: <4DCEB690.1070400@eukrea.com>
-Date: Sat, 14 May 2011 19:06:24 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.10
+	Sat, 14 May 2011 23:17:50 +0200
+Received: from csomb01.corp.atmel.com ([10.95.30.150])
+	by sjogate2.atmel.com (8.13.6/8.13.6) with ESMTP id p4EKtWCe022781
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 14 May 2011 13:55:32 -0700 (PDT)
+Received: from hammb01.corp.atmel.com ([10.142.130.20]) by
+	csomb01.corp.atmel.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 14 May 2011 14:58:29 -0600
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-To: pgsellmann@portner-elektronik.at
-References: <201104291145.05479.pgsellmann@portner-elektronik.at>
-In-Reply-To: <201104291145.05479.pgsellmann@portner-elektronik.at>
-X-Ovh-Tracer-Id: 13155295988408626596
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] linux_2.6.38: update support for PcontrolG20 HW rev 2
+Date: Sat, 14 May 2011 21:56:48 +0100
+Message-ID: <F619927BD5260540BACE9E197A0F2A692005F7@hammb01.corp.atmel.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] perl-native fails on Ubuntu 11.04
+Thread-Index: AcwSQ9TgU2ZhokqWTGukEDzmXl5xzwANZwPt
+References: <201105051150.06842.sgh@sgh.dk> <4DC2827E.9020801@mlbassoc.com>
+	<4DCE3FCF.4050706@atmel.com> <4DCE9282.5080603@mentor.com>
+From: "Samuelsson, Ulf" <ulf.samuelsson@atmel.com>
+To: <openembedded-devel@lists.openembedded.org>,
+	<openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 14 May 2011 20:58:29.0644 (UTC)
+	FILETIME=[AD66CCC0:01CC1279]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: perl-native fails on Ubuntu 11.04
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,30 +40,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 May 2011 21:09:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 14 May 2011 21:17:50 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Peter,
+Maybe try that if the others fail?
 
-On 29/04/2011 11:45, Peter Gsellmann wrote:
-> All prototypes hardware rev 1 are drawn back
-> so default should be rev 2
->
-> Signed-off-by: Peter Gsellmann<pgsellmann@portner-elektronik.at>
-> ---
->   recipes/linux/linux-2.6.38/pcontrolg20/defconfig   | 1761 ++++++++++++++++++++
->   .../pcontrolg20/pcontrolg20_2.6.38.patch           |  235 +++
->   recipes/linux/linux_2.6.38.bb                      |    2 +
->   3 files changed, 1998 insertions(+), 0 deletions(-)
->   create mode 100644 recipes/linux/linux-2.6.38/pcontrolg20/defconfig
->   create mode 100644 recipes/linux/linux-2.6.38/pcontrolg20/pcontrolg20_2.6.38.patch
->
-I applied this patch and tried to build the kernel but it seems there is no 
-machine definition for pcontrolg20 : can you please resend a patch serie to 
-add the kernel support and the machine conf file.
+Best Regards
+Ulf Samuelsson
 
-Thanks
-Eric
+
+
+
+-----Ursprungligt meddelande-----
+Fr=E5n: openembedded-devel-bounces@lists.openembedded.org genom Tom Rini
+Skickat: l=F6 2011-05-14 16:32
+Till: openembedded-devel@lists.openembedded.org
+=C4mne: Re: [oe] perl-native fails on Ubuntu 11.04
+=20
+On 05/14/2011 01:39 AM, Ulf Samuelsson wrote:
+> 2011-05-05 12:57, Gary Thomas skrev:
+>> On 05/05/2011 03:50 AM, S=F8ren Holm wrote:
+>>> Please apply this patch to make perl-native build on Ubuntu 11.04
+>>>
+>>> =
+https://gist.github.com/raw/925006/4217f358fb00b5b7f1dfbd1ce5f4afa4f64b0b=
+b0/0001-perl-native-multilib-patch-for-ubuntu-11.04.patch
+>>>
+>>
+>> This patch only works for x86_64 systems.  A corrected version
+>> replaces `uname -m` with * in
+>>   ++test -f /usr/lib/*-linux-gnu/libc.so &&
+>> glibpth=3D"/usr/lib/*-linux-gnu $glibpth"
+>>
+>=20
+>=20
+> Yes ,  Just installed Ubuntu 11.04 on a machine and I tried that patch
+> and failed.
+> 'uname -m`  returns i686  but the library is in i386-linux-gnu
+> I symlinked i686-linux-gnu to i386-linux-gnu, and then the build =
+completes.
+>=20
+> `uname -i`  will return i386 so that is an alternative as well.
+
+On my x86_64 ubuntu 10.04 box it returns unknown, so I think we'll have
+to use the glob.
+
+--=20
+Tom Rini
+Mentor Graphics Corporation
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
