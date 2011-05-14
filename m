@@ -1,34 +1,32 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1QLFwE-0004Ug-Vz
+Received: from 1.26.mail-out.ovh.net ([46.105.43.121] helo=26.mail-out.ovh.net)
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1QLM5l-0002D6-9d
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 May 2011 16:35:27 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1QLFtV-0002Lz-An from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 May 2011 07:32:37 -0700
-Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Sat, 14 May 2011 07:32:37 -0700
-Received: from [172.30.80.14] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
-	Sat, 14 May 2011 07:32:36 -0700
-Message-ID: <4DCE9282.5080603@mentor.com>
-Date: Sat, 14 May 2011 07:32:34 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+	Sat, 14 May 2011 23:09:42 +0200
+Received: (qmail 7645 invoked by uid 503); 14 May 2011 16:32:53 -0000
+Received: from b6.ovh.net (HELO mail426.ha.ovh.net) (213.186.33.56)
+	by 26.mail-out.ovh.net with SMTP; 14 May 2011 16:32:53 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 14 May 2011 19:06:26 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 14 May 2011 19:06:25 +0200
+Message-ID: <4DCEB690.1070400@eukrea.com>
+Date: Sat, 14 May 2011 19:06:24 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.10
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <201105051150.06842.sgh@sgh.dk> <4DC2827E.9020801@mlbassoc.com>
-	<4DCE3FCF.4050706@atmel.com>
-In-Reply-To: <4DCE3FCF.4050706@atmel.com>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 14 May 2011 14:32:37.0162 (UTC)
-	FILETIME=[C57268A0:01CC1243]
-Subject: Re: perl-native fails on Ubuntu 11.04
+To: pgsellmann@portner-elektronik.at
+References: <201104291145.05479.pgsellmann@portner-elektronik.at>
+In-Reply-To: <201104291145.05479.pgsellmann@portner-elektronik.at>
+X-Ovh-Tracer-Id: 13155295988408626596
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] linux_2.6.38: update support for PcontrolG20 HW rev 2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,37 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 May 2011 14:35:27 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 14 May 2011 21:09:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 05/14/2011 01:39 AM, Ulf Samuelsson wrote:
-> 2011-05-05 12:57, Gary Thomas skrev:
->> On 05/05/2011 03:50 AM, Søren Holm wrote:
->>> Please apply this patch to make perl-native build on Ubuntu 11.04
->>>
->>> https://gist.github.com/raw/925006/4217f358fb00b5b7f1dfbd1ce5f4afa4f64b0bb0/0001-perl-native-multilib-patch-for-ubuntu-11.04.patch
->>>
->>
->> This patch only works for x86_64 systems.  A corrected version
->> replaces `uname -m` with * in
->>   ++test -f /usr/lib/*-linux-gnu/libc.so &&
->> glibpth="/usr/lib/*-linux-gnu $glibpth"
->>
-> 
-> 
-> Yes ,  Just installed Ubuntu 11.04 on a machine and I tried that patch
-> and failed.
-> 'uname -m`  returns i686  but the library is in i386-linux-gnu
-> I symlinked i686-linux-gnu to i386-linux-gnu, and then the build completes.
-> 
-> `uname -i`  will return i386 so that is an alternative as well.
+Hi Peter,
 
-On my x86_64 ubuntu 10.04 box it returns unknown, so I think we'll have
-to use the glob.
+On 29/04/2011 11:45, Peter Gsellmann wrote:
+> All prototypes hardware rev 1 are drawn back
+> so default should be rev 2
+>
+> Signed-off-by: Peter Gsellmann<pgsellmann@portner-elektronik.at>
+> ---
+>   recipes/linux/linux-2.6.38/pcontrolg20/defconfig   | 1761 ++++++++++++++++++++
+>   .../pcontrolg20/pcontrolg20_2.6.38.patch           |  235 +++
+>   recipes/linux/linux_2.6.38.bb                      |    2 +
+>   3 files changed, 1998 insertions(+), 0 deletions(-)
+>   create mode 100644 recipes/linux/linux-2.6.38/pcontrolg20/defconfig
+>   create mode 100644 recipes/linux/linux-2.6.38/pcontrolg20/pcontrolg20_2.6.38.patch
+>
+I applied this patch and tried to build the kernel but it seems there is no 
+machine definition for pcontrolg20 : can you please resend a patch serie to 
+add the kernel support and the machine conf file.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Thanks
+Eric
 
 
