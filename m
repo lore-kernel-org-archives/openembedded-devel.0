@@ -1,31 +1,34 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <christian.betz@gmail.com>) id 1QLFpj-0004KK-R3
+	(envelope-from <Tom_Rini@mentor.com>) id 1QLFwE-0004Ug-Vz
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 May 2011 16:28:43 +0200
-Received: by fxm19 with SMTP id 19so2538533fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 May 2011 07:25:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=PaPgblPNVAVX3wCXg/X6UD0PONKqeRveZLxpEE1t56o=;
-	b=s0l6dteocKHr6jrhTd+s8n+Oix56otzDZYnHikZ6D09yo/N5D2pjEwceVNOIsfEOZ6
-	HMD2Ciusr1mbFaJqAL1TAQzBHKOLjmP/7QjYGFfea2wPT8x5ZOx9Q5/+PDn5J7qLy9z2
-	1PC8SgQyjkv1STJ6LxfHBBfiJaqWuVHOfNshM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=kBe4abGCRDJQtIIiNd1Icri3jAG94og+5oWv8Mtix+ngO8hu9KNi7j7V196Rv41f6f
-	X0CIWjfF0Tmwj0i9tizwdhJYVEaxUFfKu9OaADGtVYXaDlRwcBSCnL1nzAVpul38pb8V
-	22/wAalKPVhvPMda68TnP1HUu+joWZCQUgSvg=
+	Sat, 14 May 2011 16:35:27 +0200
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1QLFtV-0002Lz-An from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 14 May 2011 07:32:37 -0700
+Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Sat, 14 May 2011 07:32:37 -0700
+Received: from [172.30.80.14] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
+	(147.34.97.41) with Microsoft SMTP Server id 14.1.270.1;
+	Sat, 14 May 2011 07:32:36 -0700
+Message-ID: <4DCE9282.5080603@mentor.com>
+Date: Sat, 14 May 2011 07:32:34 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
 MIME-Version: 1.0
-Received: by 10.223.27.18 with SMTP id g18mr1162624fac.52.1305383153727; Sat,
-	14 May 2011 07:25:53 -0700 (PDT)
-Received: by 10.223.13.8 with HTTP; Sat, 14 May 2011 07:25:53 -0700 (PDT)
-Date: Sat, 14 May 2011 10:25:53 -0400
-Message-ID: <BANLkTikVtDGTO=04H8kkPdJLH2UtN9JR2A@mail.gmail.com>
-From: Christian Betz <christian.betz@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: patch for acpid-1.0.10, building for i586-generic on x86_64
+To: <openembedded-devel@lists.openembedded.org>
+References: <201105051150.06842.sgh@sgh.dk> <4DC2827E.9020801@mlbassoc.com>
+	<4DCE3FCF.4050706@atmel.com>
+In-Reply-To: <4DCE3FCF.4050706@atmel.com>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 14 May 2011 14:32:37.0162 (UTC)
+	FILETIME=[C57268A0:01CC1243]
+Subject: Re: perl-native fails on Ubuntu 11.04
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,60 +42,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 May 2011 14:28:43 -0000
-X-Groupsio-MsgNum: 32023
-Content-Type: multipart/mixed; boundary=00151748e0a82c784b04a33d338a
+X-List-Received-Date: Sat, 14 May 2011 14:35:27 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 8bit
 
---00151748e0a82c784b04a33d338a
-Content-Type: text/plain; charset=ISO-8859-1
+On 05/14/2011 01:39 AM, Ulf Samuelsson wrote:
+> 2011-05-05 12:57, Gary Thomas skrev:
+>> On 05/05/2011 03:50 AM, Søren Holm wrote:
+>>> Please apply this patch to make perl-native build on Ubuntu 11.04
+>>>
+>>> https://gist.github.com/raw/925006/4217f358fb00b5b7f1dfbd1ce5f4afa4f64b0bb0/0001-perl-native-multilib-patch-for-ubuntu-11.04.patch
+>>>
+>>
+>> This patch only works for x86_64 systems.  A corrected version
+>> replaces `uname -m` with * in
+>>   ++test -f /usr/lib/*-linux-gnu/libc.so &&
+>> glibpth="/usr/lib/*-linux-gnu $glibpth"
+>>
+> 
+> 
+> Yes ,  Just installed Ubuntu 11.04 on a machine and I tried that patch
+> and failed.
+> 'uname -m`  returns i686  but the library is in i386-linux-gnu
+> I symlinked i686-linux-gnu to i386-linux-gnu, and then the build completes.
+> 
+> `uname -i`  will return i386 so that is an alternative as well.
 
-acpid-1.0.10 fails building due to a compiler warning:
+On my x86_64 ubuntu 10.04 box it returns unknown, so I think we'll have
+to use the glob.
 
- libnetlink.c:521:56: error: comparison between signed and unsigned
-integer expressions
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
-I noticed another user mentioning this issue not too long ago. I can't
-say whether the i586 machine type or x86_64 host is the issue, but the
-fix is easy: just add a missing cast.
 
-Christian
-
-----
-
-This is a patch to a patch since the entire libnetlink.c file is part
-of the existing netlink.diff patch
-
---- a/recipes/acpid/acpid-1.0.10/netlink.diff
-+++ b/recipes/acpid/acpid-1.0.10/netlink.diff
-@@ -2019,7 +2019,7 @@ diff -ruN acpid-1.0.10/libnetlink.c
-acpid-1.0.10-netlink2/libnetlink.c
- +
- +int addraw_l(struct nlmsghdr *n, int maxlen, const void *data, int len)
- +{
--+      if ((int)NLMSG_ALIGN(n->nlmsg_len) + NLMSG_ALIGN(len) > maxlen) {
-++      if ((int)NLMSG_ALIGN(n->nlmsg_len) + (int)NLMSG_ALIGN(len) > maxlen) {
- +              fprintf(stderr, "addraw_l ERROR: message exceeded
-bound of %d\n",maxlen);
- +              return -1;
- +      }
-
---00151748e0a82c784b04a33d338a
-Content-Type: text/x-patch; charset=US-ASCII; name="netlink.diff.diff"
-Content-Disposition: attachment; filename="netlink.diff.diff"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_gnon4fzw0
-
-ZGlmZiAtLWdpdCBhL3JlY2lwZXMvYWNwaWQvYWNwaWQtMS4wLjEwL25ldGxpbmsuZGlmZiBiL3Jl
-Y2lwZXMvYWNwaWQvYWNwaWQtMS4wLjEwL25ldGxpbmsuZGlmZgppbmRleCA2MzVjNTUwLi5lYmRl
-YzU4IDEwMDY0NAotLS0gYS9yZWNpcGVzL2FjcGlkL2FjcGlkLTEuMC4xMC9uZXRsaW5rLmRpZmYK
-KysrIGIvcmVjaXBlcy9hY3BpZC9hY3BpZC0xLjAuMTAvbmV0bGluay5kaWZmCkBAIC0yMDE5LDcg
-KzIwMTksNyBAQCBkaWZmIC1ydU4gYWNwaWQtMS4wLjEwL2xpYm5ldGxpbmsuYyBhY3BpZC0xLjAu
-MTAtbmV0bGluazIvbGlibmV0bGluay5jCiArCiAraW50IGFkZHJhd19sKHN0cnVjdCBubG1zZ2hk
-ciAqbiwgaW50IG1heGxlbiwgY29uc3Qgdm9pZCAqZGF0YSwgaW50IGxlbikKICt7Ci0rCWlmICgo
-aW50KU5MTVNHX0FMSUdOKG4tPm5sbXNnX2xlbikgKyBOTE1TR19BTElHTihsZW4pID4gbWF4bGVu
-KSB7CisrCWlmICgoaW50KU5MTVNHX0FMSUdOKG4tPm5sbXNnX2xlbikgKyAoaW50KU5MTVNHX0FM
-SUdOKGxlbikgPiBtYXhsZW4pIHsKICsJCWZwcmludGYoc3RkZXJyLCAiYWRkcmF3X2wgRVJST1I6
-IG1lc3NhZ2UgZXhjZWVkZWQgYm91bmQgb2YgJWRcbiIsbWF4bGVuKTsKICsJCXJldHVybiAtMTsK
-ICsJfQo=
-
---00151748e0a82c784b04a33d338a--
