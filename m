@@ -1,33 +1,23 @@
-Received: from smtprelay-b12.telenor.se ([62.127.194.21])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1QLNvY-0003ym-0y
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 01:07:16 +0200
-Received: from ipb3.telenor.se (ipb3.telenor.se [195.54.127.166])
-	by smtprelay-b12.telenor.se (Postfix) with ESMTP id 9C054EA358
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 May 2011 00:43:45 +0200 (CEST)
-X-SENDER-IP: [83.227.57.42]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AqAlAPAEz01T4zkqPGdsb2JhbAAMmASODwEBAQE3iSK+EYYZBI5EgU2Odw
-X-IronPort-AV: E=Sophos;i="4.64,368,1301868000"; d="scan'208";a="11246847"
-Received: from c-2a39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.247]) ([83.227.57.42])
-	by ipb3.telenor.se with ESMTP; 15 May 2011 00:43:45 +0200
-Message-ID: <4DCF059F.5080403@atmel.com>
-Date: Sun, 15 May 2011 00:43:43 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Thunderbird/3.1.10
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QLOfr-0004PR-Uy for openembedded-devel@lists.openembedded.org;
+	Sun, 15 May 2011 01:55:07 +0200
+Received: from f053039080.adsl.alicedsl.de ([78.53.39.80]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QLOeY-0006Xu-OL for openembedded-devel@lists.openembedded.org;
+	Sat, 14 May 2011 23:53:46 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <201105051150.06842.sgh@sgh.dk>
-	<4DC2827E.9020801@mlbassoc.com>	<4DCE3FCF.4050706@atmel.com>
-	<4DCE9282.5080603@mentor.com>
-	<F619927BD5260540BACE9E197A0F2A692005F7@hammb01.corp.atmel.com>
-In-Reply-To: <F619927BD5260540BACE9E197A0F2A692005F7@hammb01.corp.atmel.com>
-Subject: Re: perl-native fails on Ubuntu 11.04
+In-Reply-To: <BANLkTikVtDGTO=04H8kkPdJLH2UtN9JR2A@mail.gmail.com>
+References: <BANLkTikVtDGTO=04H8kkPdJLH2UtN9JR2A@mail.gmail.com>
+Date: Sun, 15 May 2011 01:52:18 +0200
+Message-ID: <1305417138.3876.4.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: patch for acpid-1.0.10, building for i586-generic on x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,46 +31,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 May 2011 23:07:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 14 May 2011 23:55:08 -0000
+X-Groupsio-MsgNum: 32028
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-BsvzRd5bfis9MsKuiTYk"
+
+--=-BsvzRd5bfis9MsKuiTYk
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-
-> Skickat: l=F6 2011-05-14 16:32
-> Till: openembedded-devel@lists.openembedded.org
-> =C4mne: Re: [oe] perl-native fails on Ubuntu 11.04
->
-> On 05/14/2011 01:39 AM, Ulf Samuelsson wrote:
->> 2011-05-05 12:57, Gary Thomas skrev:
->>> On 05/05/2011 03:50 AM, S=F8ren Holm wrote:
->>>> Please apply this patch to make perl-native build on Ubuntu 11.04
->>>>
->>>> https://gist.github.com/raw/925006/4217f358fb00b5b7f1dfbd1ce5f4afa4f=
-64b0bb0/0001-perl-native-multilib-patch-for-ubuntu-11.04.patch
->>>>
->>> This patch only works for x86_64 systems.  A corrected version
->>> replaces `uname -m` with * in
->>>    ++test -f /usr/lib/*-linux-gnu/libc.so&&
->>> glibpth=3D"/usr/lib/*-linux-gnu $glibpth"
->>>
->>
->> Yes ,  Just installed Ubuntu 11.04 on a machine and I tried that patch
->> and failed.
->> 'uname -m`  returns i686  but the library is in i386-linux-gnu
->> I symlinked i686-linux-gnu to i386-linux-gnu, and then the build compl=
-etes.
->>
->> `uname -i`  will return i386 so that is an alternative as well.
-> On my x86_64 ubuntu 10.04 box it returns unknown, so I think we'll have
-> to use the glob.
->
-
-How about using:
-dirname `find /usr/lib/*-linux-gnu/libc.so`
-
-Best Regards
-Ulf Samuelsson
+Dear Christian,
 
 
+thank you for your patch.
+
+Am Samstag, den 14.05.2011, 10:25 -0400 schrieb Christian Betz:
+> acpid-1.0.10 fails building due to a compiler warning:
+>=20
+>  libnetlink.c:521:56: error: comparison between signed and unsigned
+> integer expressions
+>=20
+> I noticed another user mentioning this issue not too long ago. I can't
+> say whether the i586 machine type or x86_64 host is the issue, but the
+> fix is easy: just add a missing cast.
+>=20
+> Christian
+>=20
+> ----
+>=20
+> This is a patch to a patch since the entire libnetlink.c file is part
+> of the existing netlink.diff patch
+>=20
+> --- a/recipes/acpid/acpid-1.0.10/netlink.diff
+> +++ b/recipes/acpid/acpid-1.0.10/netlink.diff
+> @@ -2019,7 +2019,7 @@ diff -ruN acpid-1.0.10/libnetlink.c
+> acpid-1.0.10-netlink2/libnetlink.c
+>  +
+>  +int addraw_l(struct nlmsghdr *n, int maxlen, const void *data, int len)
+>  +{
+> -+      if ((int)NLMSG_ALIGN(n->nlmsg_len) + NLMSG_ALIGN(len) > maxlen) {
+> ++      if ((int)NLMSG_ALIGN(n->nlmsg_len) + (int)NLMSG_ALIGN(len) > maxl=
+en) {
+>  +              fprintf(stderr, "addraw_l ERROR: message exceeded bound o=
+f %d\n",maxlen);
+>  +              return -1;
+>  +      }
+
+Could you please resend the patch adhering to the commit policy, e. g.
+your Signed-off-by line is missing, and formatted such away, that we can
+use `git am` to apply it. You should use `git format-patch` and for
+example `git send-email`.
+
+If you have a little more time, could you figure out if those patches
+have been sent upstream and if not send them upstream if needed. That
+would be awesome.
 
 
+Thanks,
+
+Paul
+
+
+[1] http://openembedded.org/index.php/Commit_Policy
+
+--=-BsvzRd5bfis9MsKuiTYk
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3PFaQACgkQPX1aK2wOHVi6pgCggwv1sfwAxISeE1At7t+nmaIr
+lmsAnj2VvqzoCIdrQeMFON7go/VIyTTX
+=DYJh
+-----END PGP SIGNATURE-----
+
+--=-BsvzRd5bfis9MsKuiTYk--
