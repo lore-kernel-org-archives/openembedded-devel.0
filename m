@@ -1,30 +1,31 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <morphis@gravedo.de>) id 1QLaGc-0001PK-CR
+	(envelope-from <gary@mlbassoc.com>) id 1QLaJP-0001VM-Ge
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 14:17:50 +0200
-Received: by gravedo.de (Postfix, from userid 5001)
-	id 8EBFE799016; Sun, 15 May 2011 14:15:01 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h1108419.serverkompetenz.net
+	Sun, 15 May 2011 14:20:43 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 53ECA1660197; Sun, 15 May 2011 06:17:53 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2-r929478 (2010-03-31) on
+	hermes.chez-thomas.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from [192.168.178.21] (dslb-088-071-182-216.pools.arcor-ip.net
-	[88.71.182.216]) by gravedo.de (Postfix) with ESMTPSA id DA012799013
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 May 2011 14:15:00 +0200 (CEST)
-Message-ID: <4DCFC3C4.506@gravedo.de>
-Date: Sun, 15 May 2011 14:15:00 +0200
-From: Simon Busch <morphis@gravedo.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110422 Lightning/1.0b2 Shredder/3.1.11pre
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2-r929478
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id AFCE51660197;
+	Sun, 15 May 2011 06:17:51 -0600 (MDT)
+Message-ID: <4DCFC46F.3030300@mlbassoc.com>
+Date: Sun, 15 May 2011 06:17:51 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc13
+	Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <201105131210.17952.sgh@sgh.dk>	<f8a3ce78c529edc295cc9d15986d55bd.squirrel@webmail.infeline.org>	<4DCD526E.2080706@eukrea.com>	<4DCD881C.3080103@eukrea.com>
-	<4DCFC1B6.6090808@gravedo.de>
-In-Reply-To: <4DCFC1B6.6090808@gravedo.de>
-Subject: Re: qt-x11-free_7.7.2 fail configure missing qmake
+References: <201105051150.06842.sgh@sgh.dk>	<4DC2827E.9020801@mlbassoc.com>	<4DCE3FCF.4050706@atmel.com>	<4DCE9282.5080603@mentor.com>	<F619927BD5260540BACE9E197A0F2A692005F7@hammb01.corp.atmel.com>
+	<4DCF059F.5080403@atmel.com>
+In-Reply-To: <4DCF059F.5080403@atmel.com>
+Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Subject: Re: perl-native fails on Ubuntu 11.04
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,75 +39,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2011 12:17:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 15 May 2011 12:20:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-On 15.05.2011 14:06, Simon Busch wrote:
-> On 13.05.2011 21:35, Eric B=E9nard wrote:
->> Hi,
+On 05/14/2011 04:43 PM, Ulf Samuelsson wrote:
+>
+>> Skickat: l=F6 2011-05-14 16:32
+>> Till: openembedded-devel@lists.openembedded.org
+>> =C4mne: Re: [oe] perl-native fails on Ubuntu 11.04
 >>
->>> On 13/05/2011 16:28, Eivind Kvedalen wrote:
->>>> I get the same problem here when trying to compile
->>>> qt4-embedded_4.7.2.bb.
+>> On 05/14/2011 01:39 AM, Ulf Samuelsson wrote:
+>>> 2011-05-05 12:57, Gary Thomas skrev:
+>>>> On 05/05/2011 03:50 AM, S=F8ren Holm wrote:
+>>>>> Please apply this patch to make perl-native build on Ubuntu 11.04
+>>>>>
+>>>>> https://gist.github.com/raw/925006/4217f358fb00b5b7f1dfbd1ce5f4afa4=
+f64b0bb0/0001-perl-native-multilib-patch-for-ubuntu-11.04.patch
+>>>>>
+>>>> This patch only works for x86_64 systems. A corrected version
+>>>> replaces `uname -m` with * in
+>>>> ++test -f /usr/lib/*-linux-gnu/libc.so&&
+>>>> glibpth=3D"/usr/lib/*-linux-gnu $glibpth"
 >>>>
->>>> Build Configuration:
->>>> BB_VERSION =3D "1.10.2"
->>>> METADATA_BRANCH =3D "master"
->>>> METADATA_REVISION =3D "54ab33e"
->>>> TARGET_ARCH =3D "arm"
->>>> TARGET_OS =3D "linux-gnueabi"
->>>> MACHINE =3D "beagleboard"
->>>> DISTRO =3D "angstrom"
->>>> DISTRO_VERSION =3D "v2011.05"
->>>> TARGET_FPU =3D "hard"
->>>>
->> problem reproduced with a clean tmp.
->> this patch restore a part that 5a6efd58cdc85d08ab9e106c84bbac5110b5aec=
-d
->> removed in do_install which seems to be the root of the problem.
->=20
-> I tested this with
->=20
-> # bitbake qt4-native && bitbake qt4-x11-free
->=20
-> and both builds succceeded. Only the qt4-x11-free build prints some
-> WARNINGS I didn't discoverd before:
->=20
->=20
-> WARNING: the following files were installed but not shipped in any pack=
-age:
-> WARNING:   /usr/imports/Qt/labs/particles/libqmlparticlesplugin.so
-> WARNING:   /usr/imports/Qt/labs/particles/qmldir
-> WARNING:   /usr/imports/Qt/labs/particles/.debug/libqmlparticlesplugin.=
-so
-> WARNING:
-> /usr/imports/Qt/labs/folderlistmodel/libqmlfolderlistmodelplugin.so
-> WARNING:   /usr/imports/Qt/labs/folderlistmodel/qmldir
-> WARNING:
-> /usr/imports/Qt/labs/folderlistmodel/.debug/libqmlfolderlistmodelplugin=
-.so
-> WARNING:   /usr/imports/Qt/labs/gestures/libqmlgesturesplugin.so
-> WARNING:   /usr/imports/Qt/labs/gestures/qmldir
-> WARNING:   /usr/imports/Qt/labs/gestures/.debug/libqmlgesturesplugin.so
-> WARNING:   /usr/imports/QtWebKit/libqmlwebkitplugin.so
-> WARNING:   /usr/imports/QtWebKit/qmldir
-> WARNING:   /usr/imports/QtWebKit/.debug/libqmlwebkitplugin.so
-> WARNING:   /usr/lib/fonts/fontdir
-> WARNING:   /usr/lib/qt4/plugins/qmltooling/libtcpserver.so
-> WARNING:   /usr/lib/qt4/plugins/qmltooling/.debug/libtcpserver.so
->=20
-> As this are some quite relevant components (like the QML webkit plugin)
-> they should really get packaged by our qt4-x11-free recipe. Will see if
-> I have the time to provide a patch for this too.
->=20
-> Will send a patch with my changes to the qt4-native.inc file (which are
-> mostly the same as Eric did) after this mail.
+>>>
+>>> Yes , Just installed Ubuntu 11.04 on a machine and I tried that patch
+>>> and failed.
+>>> 'uname -m` returns i686 but the library is in i386-linux-gnu
+>>> I symlinked i686-linux-gnu to i386-linux-gnu, and then the build comp=
+letes.
+>>>
+>>> `uname -i` will return i386 so that is an alternative as well.
+>> On my x86_64 ubuntu 10.04 box it returns unknown, so I think we'll hav=
+e
+>> to use the glob.
+>>
+>
+> How about using:
+> dirname `find /usr/lib/*-linux-gnu/libc.so`
 
-Hm, ok someone was fast than me and already commited the patch without
-mention it here. Thanks Eric!
+That's no different than just the glob
 
-regards,
-Simon
+--=20
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
