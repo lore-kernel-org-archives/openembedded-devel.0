@@ -1,27 +1,24 @@
-Received: from smtprelay-b11.telenor.se ([62.127.194.20])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1QLY3y-0003dB-5g
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 11:56:38 +0200
-Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
-	by smtprelay-b11.telenor.se (Postfix) with ESMTP id 47367EAAF0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 May 2011 09:43:21 +0200 (CEST)
-X-SENDER-IP: [83.227.57.42]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Ais3AOqCz01T4zkqPGdsb2JhbACmFAsBAQEBNzK8OQGMDYYZBJARjnc
-X-IronPort-AV: E=Sophos;i="4.64,368,1301868000"; d="scan'208";a="189784898"
-Received: from c-2a39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	localhost) ([83.227.57.42])
-	by ipb1.telenor.se with ESMTP; 15 May 2011 09:43:21 +0200
-From: ulf.samuelsson@atmel.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QLYoJ-00074H-2s for openembedded-devel@lists.openembedded.org;
+	Sun, 15 May 2011 12:44:31 +0200
+Received: from f053043231.adsl.alicedsl.de ([78.53.43.231]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QLYn0-0008LJ-FW for openembedded-devel@lists.openembedded.org;
+	Sun, 15 May 2011 10:43:10 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 15 May 2011 09:43:17 +0200
-Message-Id: <1305445399-4293-1-git-send-email-ulf.samuelsson@atmel.com>
-X-Mailer: git-send-email 1.7.4.1
-Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Subject: [PATCH 1/3] at91: support linux-2.6.30 exp.4 patchset
+In-Reply-To: <1305433012-13000-2-git-send-email-christian.betz@gmail.com>
+References: <BANLkTikVtDGTO=04H8kkPdJLH2UtN9JR2A@mail.gmail.com>
+	<1305433012-13000-2-git-send-email-christian.betz@gmail.com>
+Date: Sun, 15 May 2011 12:41:40 +0200
+Message-ID: <1305456100.5838.16.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH] fix acpid compiler warning on some platforms
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,115 +32,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2011 09:56:38 -0000
+X-List-Received-Date: Sun, 15 May 2011 10:44:31 -0000
+X-Groupsio-MsgNum: 32045
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-7jeZjNGCqGApl4EYm12s"
 
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+--=-7jeZjNGCqGApl4EYm12s
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
----
- recipes/linux/linux_2.6.30.bb |   62 ++++++++++++++++++++++------------------
- 1 files changed, 34 insertions(+), 28 deletions(-)
-
-diff --git a/recipes/linux/linux_2.6.30.bb b/recipes/linux/linux_2.6.30.bb
-index 4313e36..a49246c 100644
---- a/recipes/linux/linux_2.6.30.bb
-+++ b/recipes/linux/linux_2.6.30.bb
-@@ -26,25 +26,51 @@ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=ke
-            file://aufs2-30.patch \
-            file://defconfig"
- 
--SRC_URI_at91sam9m10ekes = " \
-+AT91_EXPERIMENTAL_4 = " \
- 	   ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=kernel \
- 	   http://maxim.org.za/AT91RM9200/2.6/${PV}-at91.patch.gz;apply=no;name=at91patch \
- 	   ftp://www.at91.com/pub/linux/${PV}-at91/${PV}-at91-exp.${AT91_EXPERIMENTAL}.tar.gz;apply=no;name=at91exp${AT91_EXPERIMENTAL} \
--	   file://at91/exp.${AT91_EXPERIMENTAL}/0001-Configurable-partition-size.patch;apply=yes \
--	   file://at91/exp.${AT91_EXPERIMENTAL}/0002-mach-at91-KConfig-cleanup.patch;apply=yes \
-+	   file://at91/exp.4/0001-Configurable-partition-size.patch;apply=yes \
-+	   file://at91/exp.4/0002-mach-at91-KConfig-cleanup.patch;apply=yes \
- 	   http://linux.hd-wireless.se/pub/Linux/BuildSAM9M10EKES/2.6.30-at91-sdio-irq-support-both-slots.patch;apply=yes;name=owlwifi \
--	   file://exp.${AT91_EXPERIMENTAL}/defconfig"
-+	   file://defconfig"
-+
-+AT91_EXPERIMENTAL_2 = " \
-+	   ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=kernel \
-+	   http://maxim.org.za/AT91RM9200/2.6/2.6.30-at91.patch.gz;apply=yes;name=at91patch \
-+	   ftp://www.at91.com/pub/buildroot/2.6.30-exp.2.patch.bz2;apply=yes;name=at91exp2 \
-+	   file://at91/linux-2.6.30-001-configurable-partition-size.patch.patch \
-+	   file://at91/linux-2.6.30-002-mach-at91-Kconfig.patch \
-+	   file://at91/linux-2.6.30-003-sam9m10g45ek.patch \
-+	   file://defconfig"
- 
- at91sam_patch = " \
- 		"
- 
--do_patch_prepend_at91sam9m10ekes() {
--	bb.build.exec_func('do_apply_at91_exp_patch', d)
--}
-+SRC_URI_at91sam9m10ekes = "${AT91_EXPERIMENTAL_4}"
-+SRC_URI_at91cap9stk	= "${AT91_EXPERIMENTAL_4}"
-+SRC_URI_at91		= "${AT91_EXPERIMENTAL_2}"
-+
-+SRC_URI_append_at91sam9260ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9261ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9263ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9g10ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9g20ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9g20ek_2mmc = ${at91sam_patch}
-+SRC_URI_append_at91sam9g45ekes = ${at91sam_patch}
-+SRC_URI_append_at91sam9m10ekes = ${at91sam_patch}
-+SRC_URI_append_at91sam9m10g45ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9rlek = ${at91sam_patch}
-+SRC_URI_append_at91sam9xeek = ${at91sam_patch}
-+
-+#do_patch_prepend_at91sam9m10ekes() {
-+#	bb.build.exec_func('do_apply_at91_exp_patch', d)
-+#}
-+
-+addtask do_apply_at91_exp_patch before do_patch after do_unpack
- 
- do_apply_at91_exp_patch () {
- 	cd	${WORKDIR}
--	mv	exp.${AT91_EXPERIMENTAL}/defconfig	defconfig
- 	cd	${S}
- 	cat	../${PV}-at91.patch	| patch -p1
- 	for	f in `ls ../${PV}-at91-exp.${AT91_EXPERIMENTAL}/*.patch` ; do
-@@ -52,14 +78,6 @@ do_apply_at91_exp_patch () {
- 	done
- }
- 
--SRC_URI_at91 = " \
--	   ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=kernel \
--	   http://maxim.org.za/AT91RM9200/2.6/2.6.30-at91.patch.gz;apply=yes;name=at91patch \
--	   ftp://www.at91.com/pub/buildroot/2.6.30-exp.2.patch.bz2;apply=yes;name=at91exp2 \
--	   file://at91/linux-2.6.30-001-configurable-partition-size.patch.patch \
--	   file://at91/linux-2.6.30-002-mach-at91-Kconfig.patch \
--	   file://at91/linux-2.6.30-003-sam9m10g45ek.patch \
--	   file://defconfig"
- 
- SRC_URI_ronetix-pm9g45 = " \
- 	   ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=kernel \
-@@ -84,18 +102,6 @@ SRC_URI_ronetix-pm9g45 = " \
- 
- SRC_URI_append_mpc8315e-rdb = " file://mpc8315erdb-add-msi-to-dts.patch"
- 
--SRC_URI_append_at91sam9260ek = ${at91sam_patch}
--SRC_URI_append_at91sam9261ek = ${at91sam_patch}
--SRC_URI_append_at91sam9263ek = ${at91sam_patch}
--SRC_URI_append_at91sam9rlek = ${at91sam_patch} 
--SRC_URI_append_at91sam9g20ek = ${at91sam_patch}
--SRC_URI_append_at91sam9g20ek_2mmc = ${at91sam_patch}
--SRC_URI_append_at91sam9g10ek = ${at91sam_patch}
--SRC_URI_append_at91sam9xeek = ${at91sam_patch}
--SRC_URI_append_at91sam9g45ekes = ${at91sam_patch}
--SRC_URI_append_at91sam9m10ekes = ${at91sam_patch}
--SRC_URI_append_at91sam9m10g45ek = ${at91sam_patch}
--
- # SRC_URI_append_at91sam9263ek = " file://hrw-linux-2.6.30-exp.patch "
- 
- SRC_URI[kernel.md5sum] = "7a80058a6382e5108cdb5554d1609615"
--- 
-1.7.4.1
+Dear Christian,
 
 
+Am Sonntag, den 15.05.2011, 00:16 -0400 schrieb Christian Betz:
 
+thank you for your fast response. Next time please also add the commit
+message. The one you provided in your first message would have been
+enough. You can even change/improve commit messages using `git commit
+--amend` (or `git rebase =E2=80=A6`) before doing `git format-patch =E2=80=
+=A6`.
+
+I will add the commit message when applying your patch.
+
+You also forgot your Signed-off-by line. Please reply to this message
+with just that line since it is required by our commit policy.
+
+Passing `-s` to `git commit` or `git format-patch` adds that line
+automatically to  the commit message.
+
+> ---
+>  recipes/acpid/acpid-1.0.10/netlink.diff |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/recipes/acpid/acpid-1.0.10/netlink.diff b/recipes/acpid/acpi=
+d-1.0.10/netlink.diff
+> index 635c550..ebdec58 100644
+> --- a/recipes/acpid/acpid-1.0.10/netlink.diff
+> +++ b/recipes/acpid/acpid-1.0.10/netlink.diff
+> @@ -2019,7 +2019,7 @@ diff -ruN acpid-1.0.10/libnetlink.c acpid-1.0.10-ne=
+tlink2/libnetlink.c
+>  +
+>  +int addraw_l(struct nlmsghdr *n, int maxlen, const void *data, int len)
+>  +{
+> -+	if ((int)NLMSG_ALIGN(n->nlmsg_len) + NLMSG_ALIGN(len) > maxlen) {
+> ++	if ((int)NLMSG_ALIGN(n->nlmsg_len) + (int)NLMSG_ALIGN(len) > maxlen) {
+>  +		fprintf(stderr, "addraw_l ERROR: message exceeded bound of %d\n",maxl=
+en);
+>  +		return -1;
+>  +	}
+
+
+Thanks,
+
+Paul
+
+--=-7jeZjNGCqGApl4EYm12s
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3PrdgACgkQPX1aK2wOHViE/gCeP2m94QcyDPnIgbeSK/G12Hyl
+vzMAn2odQI1MwSuBldN7YGeaUW9iKeZ5
+=xYjj
+-----END PGP SIGNATURE-----
+
+--=-7jeZjNGCqGApl4EYm12s--
