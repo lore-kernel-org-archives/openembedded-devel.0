@@ -1,27 +1,29 @@
-Received: from smtprelay-b22.telenor.se ([195.54.99.213])
+Received: from smtprelay-b12.telenor.se ([62.127.194.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1QLW1o-0000f4-Bp
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1QLW1o-0000f5-FM
 	for openembedded-devel@lists.openembedded.org;
 	Sun, 15 May 2011 09:46:16 +0200
-Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
-	by smtprelay-b22.telenor.se (Postfix) with ESMTP id 92F90E90B2
+Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
+	by smtprelay-b12.telenor.se (Postfix) with ESMTP id B6084EA7F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 May 2011 09:43:14 +0200 (CEST)
+	Sun, 15 May 2011 09:43:25 +0200 (CEST)
 X-SENDER-IP: [83.227.57.42]
 X-LISTENER: [smtp.bredband.net]
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-Anti-Spam-Result: Ak5wAOqCz01T4zkqPGdsb2JhbACJH45xjgQLAQEBATcyyEeGGQSQEY53
-X-IronPort-AV: E=Sophos;i="4.64,368,1301868000"; d="scan'208";a="189784883"
+X-IronPort-AV: E=Sophos;i="4.64,368,1301868000"; d="scan'208";a="188284185"
 Received: from c-2a39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
 	localhost) ([83.227.57.42])
-	by ipb1.telenor.se with ESMTP; 15 May 2011 09:43:14 +0200
+	by ipb2.telenor.se with ESMTP; 15 May 2011 09:43:25 +0200
 From: ulf.samuelsson@atmel.com
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 15 May 2011 09:43:10 +0200
-Message-Id: <1305445390-4253-1-git-send-email-ulf.samuelsson@atmel.com>
+Date: Sun, 15 May 2011 09:43:18 +0200
+Message-Id: <1305445399-4293-2-git-send-email-ulf.samuelsson@atmel.com>
 X-Mailer: git-send-email 1.7.4.1
+In-Reply-To: <1305445399-4293-1-git-send-email-ulf.samuelsson@atmel.com>
+References: <1305445399-4293-1-git-send-email-ulf.samuelsson@atmel.com>
 Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Subject: [PATCH] at91: Add support for at91cap9stk
+Subject: [PATCH 2/3] at91: Add support for at91cap9stk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
