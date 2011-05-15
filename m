@@ -1,24 +1,24 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QLd4N-00053W-RK for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 17:17:23 +0200
+	id 1QLdL9-0005JC-Ki for openembedded-devel@lists.openembedded.org;
+	Sun, 15 May 2011 17:34:43 +0200
 Received: from f053043231.adsl.alicedsl.de ([78.53.43.231]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QLd35-0007ZD-Iu for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 15:16:03 +0000
+	id 1QLdJq-0008ME-Pd for openembedded-devel@lists.openembedded.org;
+	Sun, 15 May 2011 15:33:23 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4DCE2BF8.50403@eukrea.com>
-References: <1305060012.9982.33.camel@mattotaupa>
-	<1305061022.9982.44.camel@mattotaupa>  <4DCE2BF8.50403@eukrea.com>
-Date: Sun, 15 May 2011 17:14:33 +0200
-Message-ID: <1305472473.5838.546.camel@mattotaupa>
+In-Reply-To: <20110512085420.GD3423@jama.jama.net>
+References: <1305190050.4254.14.camel@mattotaupa>
+	<20110512085420.GD3423@jama.jama.net>
+Date: Sun, 15 May 2011 17:31:52 +0200
+Message-ID: <1305473512.5838.569.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.3 
-Subject: Re: qt4-native: `/usr/include/gnu/stubs.h:9:27: error: gnu/stubs-64.h: No such file or directory` because architecture incorrectly detected
+Subject: Re: libshr-glib: task configure fails with `/bin/sh: gdbus-codegen: command not found`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,105 +32,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2011 15:17:23 -0000
-X-Groupsio-MsgNum: 32055
+X-List-Received-Date: Sun, 15 May 2011 15:34:43 -0000
+X-Groupsio-MsgNum: 32056
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-HghVbhj4CvCAoNQmy3sw"
+	boundary="=-dxULiR1a5QxWSpOztcVv"
 
---=-HghVbhj4CvCAoNQmy3sw
+--=-dxULiR1a5QxWSpOztcVv
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dear Eric,
+Am Donnerstag, den 12.05.2011, 10:54 +0200 schrieb Martin Jansa:
+> On Thu, May 12, 2011 at 10:47:30AM +0200, Paul Menzel wrote:
 
-
-Am Samstag, den 14.05.2011, 09:15 +0200 schrieb Eric B=C3=A9nard:
-
-> On 10/05/2011 22:57, Paul Menzel wrote:
-> > Dear Simon and other OpenEmbedded folks,
-> >
-> >
-> > I am sorry for the wrong subject line. I am fixing it hereby.
-> >
-> >
-> > Am Dienstag, den 10.05.2011, 22:40 +0200 schrieb Paul Menzel:
-> >
-> >> task configure of `qt4-native` fails on my build system which is a Xen
-> >> DomU running a 64-bit Linux kernel but 32-bit user space.
-> >>
-> >>          $ uname -a
-> >>          Linux oe-build-host 2.6.32-5-xen-amd64 #1 SMP Tue Mar 8 00:01=
-:30 UTC 2011 x86_64 GNU/Linux
-> >>          $ dpkg --print-architecture
-> >>          i386
-> >>
-> >> This seems to be a problem in the Qt4 build system which seems to be
-> >> using `uname` to determine the architecture.
-> >>
-> >>          $ more log.do_configure
-> >>          + do_configure
-> >>          + echo o
-> >>          + echo yes
-> >>          + ./configure -prefix /oe/build-angstrom-next/angstrom-dev/sy=
-sroots/i686-linux/usr -L /oe/build-angstrom-next/angstrom-dev/sysroots/i686=
--linux/usr/lib -I /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/=
-usr/include -qt-libjpeg -qt-gif -system-zlib -no-libjpeg -no-libpng -no-lib=
-mng -no-libtiff -no-accessibility -no-cups -no-nas-sound -no-nis -no-openss=
-l -verbose -release -embedded -no-freetype -no-glib -no-iconv -exceptions -=
-xmlpatterns -qt3support -no-fast -silent -no-rpath
-> >>          Which edition of Qt do you want to use ?
-> >>
-> >>          Type 'c' if you want to use the Commercial Edition.
-> >>          Type 'o' if you want to use the Open Source Edition.
-> >>
-> >>
-> >>          Determining system architecture... (Linux:2.6.32-5-xen-amd64:=
-x86_64)
-> >>              64-bit AMD 80x86 (x86_64)
-> >>              'x86_64' is supported
-> >>          System architecture: 'x86_64'
-> >>          Host architecture: 'x86_64'
+> > as a result of I think commit 82f8341d [1]
+> >=20
+> > 	commit 82f8341d6282d6ae29e80eb3cdf312b6deda9b4c
+> > 	Author: Martin Jansa <Martin.Jansa@gmail.com>
+> > 	Date:   Sun May 8 07:08:16 2011 +0200
+> >=20
+> > 		  glib-2.0_git: include gdbus-codegen files in -dev
+> > 		 =20
+> > 		  Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> >=20
+> > I am seeing the following error message in task configure of
+> > `libshr-glib` using `minimal` for `MACHINE =3D "beagleboard"`.
+> >=20
+> > 	[=E2=80=A6]
+> > 	for f in /oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux=
+-gnueabi//usr/share/shr-specs/xml/*.xml; do OUT=3D`echo $f | sed 's/.*\///g=
+; s/^org\.shr\./shr-/g; s/.xml//g; s/\.//g;' | awk  '{ printf tolower($1)}'=
+`; gdbus-codegen  --interface-prefix org.shr --generate-c-code $OUT $f; ech=
+o "#include <$OUT.h>" >> shr-bindings.h; done
+> > 	/bin/sh: gdbus-codegen: command not found
+> > 	/bin/sh: gdbus-codegen: command not found
+> > 	/bin/sh: gdbus-codegen: command not found
+> > 	/bin/sh: gdbus-codegen: command not found
+> > 	/bin/sh: gdbus-codegen: command not found
+> > 	/bin/sh: gdbus-codegen: command not found
+> > 	/bin/sh: gdbus-codegen: command not found
+> > 	/bin/sh: gdbus-codegen: command not found
+> > 	/bin/sh: gdbus-codegen: command not found
+> > 	touch shr-bindings.h
+> > 	[=E2=80=A6]
+> >=20
+> > Is that related?
 >=20
-> this could maybe be fixed by passing -host-arch=3Di386 to configure but t=
-he=20
-> problem is to detect you are running a 32bit userland when uname reports =
-64 bits.
-> bitbake.conf seems also to use uname :
-> BUILD_ARCH :=3D "${@os.uname()[4]}"
+> Not really, gdbus-codegen was provided by gdbus-binding-tool, but this
+> recipe is no longer supported by libshr-glib which now uses newer
+> gdbus-codegen version which was merged to glib sources (2.29.3 and
+> newer)
+> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3D22b4f79261=
+70ec14253a6d60f6d98f5eb3ec7f27
+>=20
+> That's why this _git recipe has
+> DEFAULT_PREFERENCE_shr =3D "1"
+>=20
+> and libshr-glib no longer depends on gdbus-binding-tool, but expects
+> glib-2.0-native to be new enough
+> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3Df6c2ad4e65=
+1383ab09be1f5b394aa7014233cfc5
+>=20
+> and also few more libs/daemons were changed to support newer glib
+> glib-2.0_git: add RREPLACES for gdbus-binding-tool	Martin Jansa
+> libphone-ui: bump SRCREV for glib-2.29	Martin Jansa
+> libshr-glib: bump SRCREV for glib-2.29 support and use gdbus-codegen from=
+ gli...	Martin Jansa
+> phoneuid: bump SRCREV for glib-2.29	Martin Jansa
+> phonefsod: bump SRCREV for glib-2.29
+>=20
+> So if you need any of those, you have to manually clean
+> gdbus-binding-tool-native/gdbus-binding-tool on your buildhost (to clean
+> sysroot and shlibs) and then prefer glib-2.0-2.29.3.
 
-Unfortunately I have not come around a solution to detect this properly.
-I had the same problem with TeX Live [1] and the solution was to add on
-option to override this setting [2].
+Thank you for the explanation.
 
-> maybe something like file `which init` and analysing the output ?
+	DISTRO=3D"shr" bitbake -k libshr-glib
 
-Unfortunately `which init` does not return anything on my Debian
-Sid/unstable system.
+indeed worked after getting `glib-2.0_git` to build on my build host
+[1].
 
-        $ which init
-        $ echo $?
-        1
+I will not get to test newer GLib version with other distributions
+before July.
+
+One slightly off topic question. Where did you get the 2.29.3 or git
+recipe from or did you write it from scratch? I find the ordering in the
+recipe quite confusing.
 
 
-Thank you for looking into this problem,
+Thanks,
 
 Paul
 
 
-[1] http://tug.org/pipermail/tex-live/2009-June/021119.html
-[2] http://tug.org/pipermail/tex-live/2009-June/021124.html
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Ddcf425c=
+5472fdee74885c4f21a851e39c84e6642
 
---=-HghVbhj4CvCAoNQmy3sw
+--=-dxULiR1a5QxWSpOztcVv
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk3P7dkACgkQPX1aK2wOHVhKXwCff1dARNhT5QfOooF19tcitJ45
-zy0AnAx5O8hvK0Yp2mXn/qq+p75wmucM
-=e+Jy
+iEYEABECAAYFAk3P8egACgkQPX1aK2wOHVj5CwCeLZcWwGBJkTRvLTZxEtUei+5m
+/rQAniUUxD0SvG/ejOCavDPR/nNcuhGj
+=fMzt
 -----END PGP SIGNATURE-----
 
---=-HghVbhj4CvCAoNQmy3sw--
+--=-dxULiR1a5QxWSpOztcVv--
