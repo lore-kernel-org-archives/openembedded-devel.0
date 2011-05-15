@@ -1,40 +1,36 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QLjAu-0007BO-QW
+	(envelope-from <otavio.salvador@gmail.com>) id 1QLjAx-0007BR-AM
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 23:48:32 +0200
-Received: by yia13 with SMTP id 13so1354047yia.6
+	Sun, 15 May 2011 23:48:35 +0200
+Received: by gxk3 with SMTP id 3so1459031gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 May 2011 14:45:40 -0700 (PDT)
+	Sun, 15 May 2011 14:45:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
-	:x-mailer:in-reply-to:references;
-	bh=l91Kg+cTLR3A+rSJ5ncszlMP9UZSxfKkjGoFMPULm9s=;
-	b=My6KnCs1cjXVloFiUe36rCCoDbV2GNCqSfOIBuwpCrneJNBQjPaSLJyyyHuvdgM61h
-	NXIRu32gm/v3dHD/emtg6iVZ0dttNg3raYJ0nIZv5/0m/2UrBP7WBB1K/TONjfrrEpCA
-	zrt8nxMR8h+PmHhurzTvLibFLms+tXXtmDWNI=
+	:x-mailer; bh=iE6EE2DXlfo4EdDEvRC9GckGyIakJzJSds+qQ2nwkY4=;
+	b=rCZ6vNwx3uVusgzwjnEs+Ej1FnTumw6tQJzXX71HUYFpfU1EZTxg7y/O8eJOc7SXWA
+	gQKh8+zcCZildd7qaHcfAlHRfXrNzebpHbskS5ciObssxCsSxLZ06M+JAm+HOBXeBhC+
+	vqJXJ6Rf/PsMkJCklpjbx0t738z9GvlzgrDOg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references;
-	b=Bog8PVhaRy7WCyRbeH1uMs/yp5u/14hkPTDlYetQqHbYgoVo67DeUp/L6GRv1RCsXM
-	4N7itkvTBfyqzEzDrR1e8gyZ0CcmVWNJXTbh1jJ/YSaoZpFnH45omi1qafgUds7YXOsl
-	aIR6gSBgvTcRltcK/5ekn+DdKojb2dteBrDm0=
-Received: by 10.236.66.101 with SMTP id g65mr3694747yhd.44.1305495940586;
-	Sun, 15 May 2011 14:45:40 -0700 (PDT)
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=UbsCtpxOalh/VxFPxZyyCPqIHOUnPphqv/lSagIFI4OCQBRD1646rVDGwq04nmfjHu
+	AwwkTD0w/mRL+b9CcY9bALF/+s55Ed3P5qIExZEr18Anx28VKUvbqSXMNcns435Krhxp
+	rd4mi/AAZmRwAUhAU2UyhOB9vJ7Ol+QVIyoDU=
+Received: by 10.236.154.70 with SMTP id g46mr1155959yhk.446.1305495938413;
+	Sun, 15 May 2011 14:45:38 -0700 (PDT)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id l30sm2110499yhn.6.2011.05.15.14.45.38
+	by mx.google.com with ESMTPS id l30sm2110499yhn.6.2011.05.15.14.45.36
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 15 May 2011 14:45:39 -0700 (PDT)
+	Sun, 15 May 2011 14:45:37 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 15 May 2011 21:45:25 +0000
-Message-Id: <1305495926-21490-2-git-send-email-otavio@ossystems.com.br>
+Date: Sun, 15 May 2011 21:45:24 +0000
+Message-Id: <1305495926-21490-1-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <1305495926-21490-1-git-send-email-otavio@ossystems.com.br>
-References: <1305495926-21490-1-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH v1 2/3] libpcsclite: add version 1.7.2
+Subject: [meta-oe][PATCH v1 1/3] libiconv: drop EXTRA_OECONF as it is handled by gettext class
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,100 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2011 21:48:33 -0000
-
-The recipe name libpcsclite has been choosen since this is the most
-important and used part of the project. The daemon itself is optional
-and not always required to be installed.
+X-List-Received-Date: Sun, 15 May 2011 21:48:35 -0000
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- meta-oe/recipes-support/pcsc-lite/files/pcscd.init |   32 +++++++++++++++++
- .../recipes-support/pcsc-lite/libpcsclite_1.7.2.bb |   36 ++++++++++++++++++++
- 2 files changed, 68 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-support/pcsc-lite/files/pcscd.init
- create mode 100644 meta-oe/recipes-support/pcsc-lite/libpcsclite_1.7.2.bb
+ .../recipes-support/libiconv/libiconv_1.13.1.bb    |    4 +---
+ 1 files changed, 1 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/pcsc-lite/files/pcscd.init b/meta-oe/recipes-support/pcsc-lite/files/pcscd.init
-new file mode 100644
-index 0000000..92385ab
---- /dev/null
-+++ b/meta-oe/recipes-support/pcsc-lite/files/pcscd.init
-@@ -0,0 +1,32 @@
-+#!/bin/sh
-+DAEMON=/usr/sbin/pcscd
-+NAME=pcscd
-+DESC="PCSC Daemon"
-+PIDFILE=/var/run/pcscd/pcscd.pid
-+ARGS=""
-+
-+test -f $DAEMON || exit 0
-+
-+case "$1" in
-+    start)
-+        echo -n "Starting $DESC: $NAME"
-+        start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON -- $ARGS
-+        echo "."
-+        ;;
-+    stop)
-+        echo -n "Stopping $DESC: $NAME"
-+        start-stop-daemon --stop --quiet --pidfile $PIDFILE --exec $DAEMON
-+        echo "."
-+        ;;
-+    restart)
-+        $0 stop
-+        sleep 1
-+        $0 start
-+        ;;
-+    *)
-+        echo "Usage: $0 {start|stop|restart}"
-+        exit 1
-+        ;;
-+esac
-+
-+exit 0
-diff --git a/meta-oe/recipes-support/pcsc-lite/libpcsclite_1.7.2.bb b/meta-oe/recipes-support/pcsc-lite/libpcsclite_1.7.2.bb
-new file mode 100644
-index 0000000..6326152
---- /dev/null
-+++ b/meta-oe/recipes-support/pcsc-lite/libpcsclite_1.7.2.bb
-@@ -0,0 +1,36 @@
-+DESCRIPTION = "PC/SC Lite smart card framework and applications"
-+HOMEPAGE = "http://pcsclite.alioth.debian.org/"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=c8e551349dc346258274f0007679e149"
-+DEPENDS = "udev"
-+PR = "r0"
-+
-+SRC_URI = "https://alioth.debian.org/frs/download.php/3533/pcsc-lite-${PV}.tar.bz2 \
-+           file://pcscd.init "
-+
-+SRC_URI[md5sum] = "47e7055cfc14399fdaa1b7a4aa06e5aa"
-+SRC_URI[sha256sum] = "41f13d552eaa2c3978fbb6f2125e81903a0767011d999052fd1a6ee03880b398"
-+
-+inherit autotools update-rc.d
-+
-+INITSCRIPT_PACKAGES = "pcscd"
-+INITSCRIPT_NAME_pcscd = "pcscd"
-+INITSCRIPT_PARAMS_pcscd = "defaults"
-+
-+EXTRA_OECONF = " \
-+	--enable-libusb \
-+	--disable-libudev \
-+	--enable-usbdropdir=${libdir}/pcsc/drivers \
-+	"
-+
-+S = "${WORKDIR}/pcsc-lite-${PV}"
-+
-+do_install() {
-+	oe_runmake DESTDIR="${D}" install
-+	install -d "${D}/etc/init.d"
-+	install -m 755 "${WORKDIR}/pcscd.init" "${D}/etc/init.d/pcscd"
-+}
-+
-+PACKAGES =+ "pcscd"
-+
-+FILES_pcscd = "${bindir}/pscsd ${sysconfdir}/init.d"
+diff --git a/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb b/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
+index 868314b..35f4e2d 100644
+--- a/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
++++ b/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
+@@ -8,9 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+ BBCLASSEXTEND = "native nativesdk"
+ 
+ PROVIDES = "virtual/libiconv"
+-PR = "r2"
+-
+-EXTRA_OECONF +=  "${@['--disable-nls','--enable-nls'][bb.data.getVar('USE_NLS', d, 1) == 'yes']}"
++PR = "r3"
+ 
+ SRC_URI += "file://autoconf.patch"
+ 
 -- 
 1.7.2.5
 
