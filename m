@@ -1,27 +1,27 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QLeAZ-0006jr-Br for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 18:27:51 +0200
-Received: from f053043231.adsl.alicedsl.de ([78.53.43.231]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QLe9F-0001cJ-Mf for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 16:26:30 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from 64.mail-out.ovh.net ([91.121.185.65])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1QLeqQ-0007fE-2z
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 15 May 2011 19:11:06 +0200
+Received: (qmail 15401 invoked by uid 503); 15 May 2011 16:37:34 -0000
+Received: from b9.ovh.net (HELO mail413.ha.ovh.net) (213.186.33.59)
+	by 64.mail-out.ovh.net with SMTP; 15 May 2011 16:37:34 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 15 May 2011 19:08:16 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 15 May 2011 19:08:13 +0200
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <iou12i$88c$1@dough.gmane.org>
-References: <1303134465.3910.63.camel@mattotaupa>
-	<1303134640.3910.67.camel@mattotaupa>	<4DAD7297.2030606@opendreambox.org>
-	<1303506946.4155.81.camel@mattotaupa>
-	<AF97BCF4-CD32-4069-BB81-FECAC104F6D9@dominion.thruhere.net>
-	<1303509611.4155.111.camel@mattotaupa> <iou12i$88c$1@dough.gmane.org>
-Date: Sun, 15 May 2011 18:24:58 +0200
-Message-ID: <1305476698.5838.622.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [RFC] [PATCH 2/2] pkgconfig: add git version
+Date: Sun, 15 May 2011 18:58:46 +0200
+Message-Id: <1305478726-19795-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 611645125539114313
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: [PATCH] busybox-1.18.4: add latest fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,108 +35,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2011 16:27:51 -0000
-X-Groupsio-MsgNum: 32060
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-e/jRAiBGWeMpt6n5UsVa"
+X-List-Received-Date: Sun, 15 May 2011 17:11:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---=-e/jRAiBGWeMpt6n5UsVa
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+hush: fix misparsing of "... do eval a= ...". Closes 3721
 
-Am Samstag, den 23.04.2011, 10:02 +0200 schrieb Koen Kooi:
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes/busybox/busybox_1.18.4.bb |    7 +++++--
+ 1 files changed, 5 insertions(+), 2 deletions(-)
 
-> On 23-04-11 00:00, Paul Menzel wrote:
-> > Date: Sun, 17 Apr 2011 19:19:58 +0200
-> >=20
-> > 1. The revision is close to the upcoming release of pkg-config 0.26. [1=
-]
-> > 2. The patch `sysrootfix.patch` has been merged upstream [2].
-> > 3. No embedded GLib is shipped anymore [3]. Therefore drop patches `aut=
-ofoo.patch` and `glibconfig-sysdefs.h`.
-> >=20
-> > The patch is tested using the following configuration
-> >=20
-> > 	Build Configuration:
-> > 	BB_VERSION        =3D "1.12.0"
-> > 	METADATA_BRANCH   =3D "pkg-config"
-> > 	METADATA_REVISION =3D "d4ae0c5"
-> > 	TARGET_ARCH       =3D "arm"
-> > 	TARGET_OS         =3D "linux-uclibceabi"
-> > 	MACHINE           =3D "beagleboard"
-> > 	DISTRO            =3D "minimal-uclibc"
-> > 	DISTRO_VERSION    =3D "dev-snapshot-20110417"
-> > 	TARGET_FPU        =3D "hard"
-> >=20
-> > and `angstrom-2010.x` and `minimal` too.
-> >=20
-> > [1] http://lists.freedesktop.org/archives/pkg-config/2011-April/000720.=
-html
-> > [2] http://cgit.freedesktop.org/pkg-config/commit/?id=3D66d49f1375fec83=
-8bcd301bb4ca2ef76cee0e47c
-> > [3] http://cgit.freedesktop.org/pkg-config/commit/?id=3D99964eddb593517=
-3fcedfc793e762d7dc7d01bba
-> >=20
-> > Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
->=20
-> Acked-by: Koen Kooi <koen@dominion.thruhere.net>
-
-I did not commit this yet thinking Andreas would give his ack. Today
-pkg-config 0.26 was released. I am testing this right now and will
-update the revision accordingly.
-
-> > ---
-> > v2: change `PV` from `0.26` to `0.25+0.26` to ensure a sane upgrade pat=
-h
-> >=20
-> > 1. How can this recipe used also for the native recipe?
-> > 2. What is `pkg-config-sdk` used for?
-
-I am still do not know what to do about `pkg-config-native` (add
-BBCLASSEXTEND =3D "native"?) and `pkg-config-sdk`.
-
-> > ---
-> >  recipes/pkgconfig/pkgconfig_git.bb |   10 ++++++++++
-> >  1 files changed, 10 insertions(+), 0 deletions(-)
-> >  create mode 100644 recipes/pkgconfig/pkgconfig_git.bb
-> >=20
-> > diff --git a/recipes/pkgconfig/pkgconfig_git.bb b/recipes/pkgconfig/pkg=
-config_git.bb
-> > new file mode 100644
-> > index 0000000..39a5033
-> > --- /dev/null
-> > +++ b/recipes/pkgconfig/pkgconfig_git.bb
-> > @@ -0,0 +1,10 @@
-> > +require ${PN}.inc
-> > +
-> > +SRCREV =3D "7850aeb03a54a15d07b6c243b61033cd379c39d7"
-> > +PV =3D "0.25+0.26"
-> > +PR =3D "${INC_PR}.0"
-> > +PR_append =3D "+gitr${SRCPV}"
-> > +
-> > +SRC_URI =3D "git://anongit.freedesktop.org/pkg-config;protocol=3Dgit"
-> > +
-> > +S =3D "${WORKDIR}/git"
+diff --git a/recipes/busybox/busybox_1.18.4.bb b/recipes/busybox/busybox_1.18.4.bb
+index 0a62d33..68a023a 100644
+--- a/recipes/busybox/busybox_1.18.4.bb
++++ b/recipes/busybox/busybox_1.18.4.bb
+@@ -1,8 +1,11 @@
+ require busybox_1.1x.inc
+ 
+-SRC_URI += "file://fix-iptunnel-location.patch"
++SRC_URI += "file://fix-iptunnel-location.patch \
++	http://busybox.net/downloads/fixes-1.18.4/busybox-1.18.4-hush.patch;name=patch01"
+ 
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ SRC_URI[md5sum] = "b03c5b46ced732679e525a920a1a62f5"
+ SRC_URI[sha256sum] = "4d24d37bd6f1bd153e8cf9a984ec2f32f18464f73ca535e2cc2e8be9694097fa"
++SRC_URI[patch01.md5sum] = "a81f2d7d3bdf1a35ab77c4414a530d38"
++SRC_URI[patch01.sha256sum] = "c87e73ad942d53c8a2a5ffe6037c1cdf52d4b20d3f29caae5fffc7a99009b7cb"
+-- 
+1.7.0.4
 
 
-Thanks,
 
-Paul
-
-
-[1] http://lists.freedesktop.org/archives/pkg-config/2011-May/000744.html
-
---=-e/jRAiBGWeMpt6n5UsVa
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3P/loACgkQPX1aK2wOHVjNiACfa22uFdA87Ect1zarFRLmI5yV
-M10AoIWkFTvI6T26t5uh4s44Rv4XVQT2
-=FgPv
------END PGP SIGNATURE-----
-
---=-e/jRAiBGWeMpt6n5UsVa--
