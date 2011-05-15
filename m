@@ -1,31 +1,30 @@
-Received: from smtprelay-h21.telenor.se ([195.54.99.196])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1QLZQW-0008EL-Oc
+	(envelope-from <morphis@gravedo.de>) id 1QLa8B-00018P-8Y
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 13:24:00 +0200
-Received: from ipb4.telenor.se (ipb4.telenor.se [195.54.127.167])
-	by smtprelay-h21.telenor.se (Postfix) with ESMTP id B4259EA8A1
+	Sun, 15 May 2011 14:09:07 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 52C6A799016; Sun, 15 May 2011 14:06:18 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h1108419.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.3 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from [192.168.178.21] (dslb-088-071-182-216.pools.arcor-ip.net
+	[88.71.182.216]) by gravedo.de (Postfix) with ESMTPSA id 7C301799013
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 May 2011 13:21:06 +0200 (CEST)
-X-SENDER-IP: [83.227.57.42]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AoQ0AH22z01T4zkqPGdsb2JhbAAMiROOcY4PAQEBATeJIsAqhhkEkBGOdw
-X-IronPort-AV: E=Sophos;i="4.64,368,1301868000"; d="scan'208";a="1729887995"
-Received: from c-2a39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.247]) ([83.227.57.42])
-	by ipb4.telenor.se with ESMTP; 15 May 2011 13:21:06 +0200
-Message-ID: <4DCFB721.1030502@atmel.com>
-Date: Sun, 15 May 2011 13:21:05 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Thunderbird/3.1.10
+	Sun, 15 May 2011 14:06:17 +0200 (CEST)
+Message-ID: <4DCFC1B6.6090808@gravedo.de>
+Date: Sun, 15 May 2011 14:06:14 +0200
+From: Simon Busch <morphis@gravedo.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110422 Lightning/1.0b2 Shredder/3.1.11pre
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1305445399-4293-1-git-send-email-ulf.samuelsson@atmel.com>
-	<1305445399-4293-2-git-send-email-ulf.samuelsson@atmel.com>
-In-Reply-To: <1305445399-4293-2-git-send-email-ulf.samuelsson@atmel.com>
-Subject: Re: [PATCH 2/3] at91: Add support for at91cap9stk
+References: <201105131210.17952.sgh@sgh.dk>	<f8a3ce78c529edc295cc9d15986d55bd.squirrel@webmail.infeline.org>	<4DCD526E.2080706@eukrea.com>
+	<4DCD881C.3080103@eukrea.com>
+In-Reply-To: <4DCD881C.3080103@eukrea.com>
+Subject: Re: qt-x11-free_7.7.2 fail configure missing qmake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,50 +38,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2011 11:24:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 15 May 2011 12:09:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-2011-05-15 09:43, ulf.samuelsson@atmel.com skrev:
-Pls ignore this, since this patchset is the result of a flawed script.
-BRE
-Ulf Samuelsson
+On 13.05.2011 21:35, Eric B=E9nard wrote:
+> Hi,
+>=20
+>> On 13/05/2011 16:28, Eivind Kvedalen wrote:
+>>> I get the same problem here when trying to compile
+>>> qt4-embedded_4.7.2.bb.
+>>>
+>>> Build Configuration:
+>>> BB_VERSION =3D "1.10.2"
+>>> METADATA_BRANCH =3D "master"
+>>> METADATA_REVISION =3D "54ab33e"
+>>> TARGET_ARCH =3D "arm"
+>>> TARGET_OS =3D "linux-gnueabi"
+>>> MACHINE =3D "beagleboard"
+>>> DISTRO =3D "angstrom"
+>>> DISTRO_VERSION =3D "v2011.05"
+>>> TARGET_FPU =3D "hard"
+>>>
+> problem reproduced with a clean tmp.
+> this patch restore a part that 5a6efd58cdc85d08ab9e106c84bbac5110b5aecd
+> removed in do_install which seems to be the root of the problem.
 
-> From: Ulf Samuelsson<ulf.samuelsson@atmel.com>
->
-> Signed-off-by: Ulf Samuelsson<ulf.samuelsson@atmel.com>
-> ---
->   conf/machine/at91cap9stk.conf |   21 +++++++++++++++++++++
->   1 files changed, 21 insertions(+), 0 deletions(-)
->   create mode 100644 conf/machine/at91cap9stk.conf
->
-> diff --git a/conf/machine/at91cap9stk.conf b/conf/machine/at91cap9stk.conf
-> new file mode 100644
-> index 0000000..5a6385f
-> --- /dev/null
-> +++ b/conf/machine/at91cap9stk.conf
-> @@ -0,0 +1,21 @@
-> +#@TYPE: Machine
-> +#@Name: Atmel AT91CAP9STK Development Platform
-> +#@DESCRIPTION: Machine configuration for the at91cap9stk board with a at91cap9 processor
-> +
-> +include conf/machine/include/at91-2.6.38.inc
-> +include conf/machine/include/at91-lcd.inc
-> +
-> +# Has linux config file in OpenEmbedded
-> +#
-> +# LINUX26_DEFCONFIG = "at91cap9stk_defconfig"
-> +
-> +
-> +# Supported u-boot machines
-> +UBOOT_MACHINE = "at91cap9adk_config"
-> +
-> +UBOOT_MACHINES = " at91cap9adk "
-> +
-> +AT91BOOTSTRAP_BOARD = " at91cap9stk at91cap9stkdf at91cap9stkf "
-> +
-> +MACHINE_FEATURES += " usbhost "
-> +
+I tested this with
 
+# bitbake qt4-native && bitbake qt4-x11-free
+
+and both builds succceeded. Only the qt4-x11-free build prints some
+WARNINGS I didn't discoverd before:
+
+
+WARNING: the following files were installed but not shipped in any packag=
+e:
+WARNING:   /usr/imports/Qt/labs/particles/libqmlparticlesplugin.so
+WARNING:   /usr/imports/Qt/labs/particles/qmldir
+WARNING:   /usr/imports/Qt/labs/particles/.debug/libqmlparticlesplugin.so
+WARNING:
+/usr/imports/Qt/labs/folderlistmodel/libqmlfolderlistmodelplugin.so
+WARNING:   /usr/imports/Qt/labs/folderlistmodel/qmldir
+WARNING:
+/usr/imports/Qt/labs/folderlistmodel/.debug/libqmlfolderlistmodelplugin.s=
+o
+WARNING:   /usr/imports/Qt/labs/gestures/libqmlgesturesplugin.so
+WARNING:   /usr/imports/Qt/labs/gestures/qmldir
+WARNING:   /usr/imports/Qt/labs/gestures/.debug/libqmlgesturesplugin.so
+WARNING:   /usr/imports/QtWebKit/libqmlwebkitplugin.so
+WARNING:   /usr/imports/QtWebKit/qmldir
+WARNING:   /usr/imports/QtWebKit/.debug/libqmlwebkitplugin.so
+WARNING:   /usr/lib/fonts/fontdir
+WARNING:   /usr/lib/qt4/plugins/qmltooling/libtcpserver.so
+WARNING:   /usr/lib/qt4/plugins/qmltooling/.debug/libtcpserver.so
+
+As this are some quite relevant components (like the QML webkit plugin)
+they should really get packaged by our qt4-x11-free recipe. Will see if
+I have the time to provide a patch for this too.
+
+Will send a patch with my changes to the qt4-native.inc file (which are
+mostly the same as Eric did) after this mail.
+
+regards,
+Simon
 
 
