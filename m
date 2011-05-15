@@ -1,24 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtprelay-h22.telenor.se ([195.54.99.197])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QLYoJ-00074H-2s for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 12:44:31 +0200
-Received: from f053043231.adsl.alicedsl.de ([78.53.43.231]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QLYn0-0008LJ-FW for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 10:43:10 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1QLZQD-0008Ds-RU
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 15 May 2011 13:23:41 +0200
+Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
+	by smtprelay-h22.telenor.se (Postfix) with ESMTP id E400AEABBF
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 May 2011 13:20:50 +0200 (CEST)
+X-SENDER-IP: [83.227.57.42]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AuYcAH22z01T4zkqPGdsb2JhbAAMmASODwEBAQE3vTMBjBiGGQSQEY53
+X-IronPort-AV: E=Sophos;i="4.64,368,1301868000"; d="scan'208";a="188319948"
+Received: from c-2a39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.247]) ([83.227.57.42])
+	by ipb2.telenor.se with ESMTP; 15 May 2011 13:20:50 +0200
+Message-ID: <4DCFB711.6020104@atmel.com>
+Date: Sun, 15 May 2011 13:20:49 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110424 Thunderbird/3.1.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1305433012-13000-2-git-send-email-christian.betz@gmail.com>
-References: <BANLkTikVtDGTO=04H8kkPdJLH2UtN9JR2A@mail.gmail.com>
-	<1305433012-13000-2-git-send-email-christian.betz@gmail.com>
-Date: Sun, 15 May 2011 12:41:40 +0200
-Message-ID: <1305456100.5838.16.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [PATCH] fix acpid compiler warning on some platforms
+References: <1305445399-4293-1-git-send-email-ulf.samuelsson@atmel.com>
+In-Reply-To: <1305445399-4293-1-git-send-email-ulf.samuelsson@atmel.com>
+Subject: Re: [PATCH 1/3] at91: support linux-2.6.30 exp.4 patchset
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,71 +38,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2011 10:44:31 -0000
-X-Groupsio-MsgNum: 32045
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-7jeZjNGCqGApl4EYm12s"
+X-List-Received-Date: Sun, 15 May 2011 11:23:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---=-7jeZjNGCqGApl4EYm12s
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+2011-05-15 09:43, ulf.samuelsson@atmel.com skrev:
 
-Dear Christian,
-
-
-Am Sonntag, den 15.05.2011, 00:16 -0400 schrieb Christian Betz:
-
-thank you for your fast response. Next time please also add the commit
-message. The one you provided in your first message would have been
-enough. You can even change/improve commit messages using `git commit
---amend` (or `git rebase =E2=80=A6`) before doing `git format-patch =E2=80=
-=A6`.
-
-I will add the commit message when applying your patch.
-
-You also forgot your Signed-off-by line. Please reply to this message
-with just that line since it is required by our commit policy.
-
-Passing `-s` to `git commit` or `git format-patch` adds that line
-automatically to  the commit message.
-
+Pls ignore this, since this patchset is the result of a flawed script.
+BRE
+Ulf Samuelsson
+> From: Ulf Samuelsson<ulf.samuelsson@atmel.com>
+>
+> Signed-off-by: Ulf Samuelsson<ulf.samuelsson@atmel.com>
 > ---
->  recipes/acpid/acpid-1.0.10/netlink.diff |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
->=20
-> diff --git a/recipes/acpid/acpid-1.0.10/netlink.diff b/recipes/acpid/acpi=
-d-1.0.10/netlink.diff
-> index 635c550..ebdec58 100644
-> --- a/recipes/acpid/acpid-1.0.10/netlink.diff
-> +++ b/recipes/acpid/acpid-1.0.10/netlink.diff
-> @@ -2019,7 +2019,7 @@ diff -ruN acpid-1.0.10/libnetlink.c acpid-1.0.10-ne=
-tlink2/libnetlink.c
->  +
->  +int addraw_l(struct nlmsghdr *n, int maxlen, const void *data, int len)
->  +{
-> -+	if ((int)NLMSG_ALIGN(n->nlmsg_len) + NLMSG_ALIGN(len) > maxlen) {
-> ++	if ((int)NLMSG_ALIGN(n->nlmsg_len) + (int)NLMSG_ALIGN(len) > maxlen) {
->  +		fprintf(stderr, "addraw_l ERROR: message exceeded bound of %d\n",maxl=
-en);
->  +		return -1;
->  +	}
+>   recipes/linux/linux_2.6.30.bb |   62 ++++++++++++++++++++++------------------
+>   1 files changed, 34 insertions(+), 28 deletions(-)
+>
+> diff --git a/recipes/linux/linux_2.6.30.bb b/recipes/linux/linux_2.6.30.bb
+> index 4313e36..a49246c 100644
+> --- a/recipes/linux/linux_2.6.30.bb
+> +++ b/recipes/linux/linux_2.6.30.bb
+> @@ -26,25 +26,51 @@ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=ke
+>              file://aufs2-30.patch \
+>              file://defconfig"
+>
+> -SRC_URI_at91sam9m10ekes = " \
+> +AT91_EXPERIMENTAL_4 = " \
+>   	   ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=kernel \
+>   	   http://maxim.org.za/AT91RM9200/2.6/${PV}-at91.patch.gz;apply=no;name=at91patch \
+>   	   ftp://www.at91.com/pub/linux/${PV}-at91/${PV}-at91-exp.${AT91_EXPERIMENTAL}.tar.gz;apply=no;name=at91exp${AT91_EXPERIMENTAL} \
+> -	   file://at91/exp.${AT91_EXPERIMENTAL}/0001-Configurable-partition-size.patch;apply=yes \
+> -	   file://at91/exp.${AT91_EXPERIMENTAL}/0002-mach-at91-KConfig-cleanup.patch;apply=yes \
+> +	
+...
 
 
-Thanks,
 
-Paul
-
---=-7jeZjNGCqGApl4EYm12s
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3PrdgACgkQPX1aK2wOHViE/gCeP2m94QcyDPnIgbeSK/G12Hyl
-vzMAn2odQI1MwSuBldN7YGeaUW9iKeZ5
-=xYjj
------END PGP SIGNATURE-----
-
---=-7jeZjNGCqGApl4EYm12s--
