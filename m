@@ -1,27 +1,31 @@
-Received: from 64.mail-out.ovh.net ([91.121.185.65])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1QLeqQ-0007fE-2z
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gary@mlbassoc.com>) id 1QLfMa-0008Gj-5Z
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 19:11:06 +0200
-Received: (qmail 15401 invoked by uid 503); 15 May 2011 16:37:34 -0000
-Received: from b9.ovh.net (HELO mail413.ha.ovh.net) (213.186.33.59)
-	by 64.mail-out.ovh.net with SMTP; 15 May 2011 16:37:34 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 15 May 2011 19:08:16 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 15 May 2011 19:08:13 +0200
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 15 May 2011 18:58:46 +0200
-Message-Id: <1305478726-19795-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.0.4
+	Sun, 15 May 2011 19:44:21 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 8320A16601A6; Sun, 15 May 2011 11:41:29 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2-r929478 (2010-03-31) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2-r929478
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 6C52D166015E;
+	Sun, 15 May 2011 11:41:27 -0600 (MDT)
+Message-ID: <4DD01047.6000007@mlbassoc.com>
+Date: Sun, 15 May 2011 11:41:27 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc13
+	Thunderbird/3.1.7
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 611645125539114313
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: [PATCH] busybox-1.18.4: add latest fix
+To: openembedded-devel@lists.openembedded.org
+References: <201105051150.06842.sgh@sgh.dk>	<4DC2827E.9020801@mlbassoc.com>	<4DCE3FCF.4050706@atmel.com>	<4DCE9282.5080603@mentor.com>	<F619927BD5260540BACE9E197A0F2A692005F7@hammb01.corp.atmel.com>	<4DCF059F.5080403@atmel.com>	<4DCFC46F.3030300@mlbassoc.com>
+	<4DCFD20A.9090907@atmel.com>
+In-Reply-To: <4DCFD20A.9090907@atmel.com>
+Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Subject: Re: perl-native fails on Ubuntu 11.04
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,37 +39,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2011 17:11:06 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 15 May 2011 17:44:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-hush: fix misparsing of "... do eval a= ...". Closes 3721
+On 05/15/2011 07:15 AM, Ulf Samuelsson wrote:
+> 2011-05-15 14:17, Gary Thomas skrev:
+>> On 05/14/2011 04:43 PM, Ulf Samuelsson wrote:
+>>>
+>>>> Skickat: l=F6 2011-05-14 16:32
+>>>> Till: openembedded-devel@lists.openembedded.org
+>>>> =C4mne: Re: [oe] perl-native fails on Ubuntu 11.04
+>>>>
+>>>> On 05/14/2011 01:39 AM, Ulf Samuelsson wrote:
+>>>>> 2011-05-05 12:57, Gary Thomas skrev:
+>>>>>> On 05/05/2011 03:50 AM, S=F8ren Holm wrote:
+>>>>>>> Please apply this patch to make perl-native build on Ubuntu 11.04
+>>>>>>>
+>>>>>>> https://gist.github.com/raw/925006/4217f358fb00b5b7f1dfbd1ce5f4af=
+a4f64b0bb0/0001-perl-native-multilib-patch-for-ubuntu-11.04.patch
+>>>>>>>
+>>>>>> This patch only works for x86_64 systems. A corrected version
+>>>>>> replaces `uname -m` with * in
+>>>>>> ++test -f /usr/lib/*-linux-gnu/libc.so&&
+>>>>>> glibpth=3D"/usr/lib/*-linux-gnu $glibpth"
+>>>>>>
+>>>>>
+>>>>> Yes , Just installed Ubuntu 11.04 on a machine and I tried that pat=
+ch
+>>>>> and failed.
+>>>>> 'uname -m` returns i686 but the library is in i386-linux-gnu
+>>>>> I symlinked i686-linux-gnu to i386-linux-gnu, and then the build co=
+mpletes.
+>>>>>
+>>>>> `uname -i` will return i386 so that is an alternative as well.
+>>>> On my x86_64 ubuntu 10.04 box it returns unknown, so I think we'll h=
+ave
+>>>> to use the glob.
+>>>>
+>>>
+>>> How about using:
+>>> dirname `find /usr/lib/*-linux-gnu/libc.so`
+>>
+>> That's no different than just the glob
+>>
+>
+> I may be mistaken, but I think that with the glob,
+> glibpth will contain "/usr/lib/*-linux-gnu"
+> with the proposed patch,
+> glibpth will contain (on my machine) "/usr/lib/i386-linux-gnu"
+>
+> Not a big difference, I admit, but I think the latter is a tad more eff=
+icient.
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- recipes/busybox/busybox_1.18.4.bb |    7 +++++--
- 1 files changed, 5 insertions(+), 2 deletions(-)
+No, the glob will be expanded in the assignment (globs inside of "" strin=
+gs
+are expanded by the shell)
 
-diff --git a/recipes/busybox/busybox_1.18.4.bb b/recipes/busybox/busybox_1.18.4.bb
-index 0a62d33..68a023a 100644
---- a/recipes/busybox/busybox_1.18.4.bb
-+++ b/recipes/busybox/busybox_1.18.4.bb
-@@ -1,8 +1,11 @@
- require busybox_1.1x.inc
- 
--SRC_URI += "file://fix-iptunnel-location.patch"
-+SRC_URI += "file://fix-iptunnel-location.patch \
-+	http://busybox.net/downloads/fixes-1.18.4/busybox-1.18.4-hush.patch;name=patch01"
- 
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
- 
- SRC_URI[md5sum] = "b03c5b46ced732679e525a920a1a62f5"
- SRC_URI[sha256sum] = "4d24d37bd6f1bd153e8cf9a984ec2f32f18464f73ca535e2cc2e8be9694097fa"
-+SRC_URI[patch01.md5sum] = "a81f2d7d3bdf1a35ab77c4414a530d38"
-+SRC_URI[patch01.sha256sum] = "c87e73ad942d53c8a2a5ffe6037c1cdf52d4b20d3f29caae5fffc7a99009b7cb"
--- 
-1.7.0.4
-
+--=20
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
