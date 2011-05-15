@@ -1,33 +1,36 @@
-Received: from smtprelay-b12.telenor.se ([62.127.194.21])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1QLbDb-0002g4-Bo
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 15:18:47 +0200
-Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
-	by smtprelay-b12.telenor.se (Postfix) with ESMTP id 551B3EA72C
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 May 2011 15:15:56 +0200 (CEST)
-X-SENDER-IP: [83.227.57.42]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AscVAILRz01T4zkqPGdsb2JhbAAMphMBAQEBN8kkhhkEjkSBTY53
-X-IronPort-AV: E=Sophos;i="4.64,369,1301868000"; 
-	d="scan'208,217";a="189838600"
-Received: from c-2a39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.247]) ([83.227.57.42])
-	by ipb1.telenor.se with ESMTP; 15 May 2011 15:15:56 +0200
-Message-ID: <4DCFD20A.9090907@atmel.com>
-Date: Sun, 15 May 2011 15:15:54 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Thunderbird/3.1.10
+	(envelope-from <leon.woestenberg@gmail.com>)
+	id 1QLctf-0004jC-J5; Sun, 15 May 2011 17:06:19 +0200
+Received: by pvc30 with SMTP id 30so1826854pvc.6
+	for <multiple recipients>; Sun, 15 May 2011 08:03:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=dkLcyLHTP7GgwJgXOhUsEZNjqohZMfka3Yetf35jKTA=;
+	b=vprpcq6ddCRK4/lgfNLciIBVtS/oGSjUPaMZqxk7SWCHwmwnoqRbwb4kw72C5LBy2K
+	F8Eqzf8Rd0kscR+sctlUmMpO8C3pbs2nFSIguOp0krdG80CWQHgEq/ZeCp4XpvJKFVbi
+	Me8h2VBXXbckkIk/FhL7CG1eeAz5GyrC0OR7g=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	b=lr/KX/vmnADhsa1x31IBvr7vTkDS+5ImSkp+9suOjeBUM064u2CFbLLNdajkBvNwT0
+	et0cRW7ZE4x5oQqUDIve+jMgignIG8tflR7+dprBqqeb5K5oDMC/WutSKwp1OCEfgAcZ
+	T48TlwDh+tBS9GH2qdhJMr4j0pZUe7wWH9kaA=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <201105051150.06842.sgh@sgh.dk>	<4DC2827E.9020801@mlbassoc.com>	<4DCE3FCF.4050706@atmel.com>	<4DCE9282.5080603@mentor.com>	<F619927BD5260540BACE9E197A0F2A692005F7@hammb01.corp.atmel.com>	<4DCF059F.5080403@atmel.com>
-	<4DCFC46F.3030300@mlbassoc.com>
-In-Reply-To: <4DCFC46F.3030300@mlbassoc.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: perl-native fails on Ubuntu 11.04
+Received: by 10.68.57.42 with SMTP id f10mr5517507pbq.2.1305471806805; Sun, 15
+	May 2011 08:03:26 -0700 (PDT)
+Received: by 10.68.52.232 with HTTP; Sun, 15 May 2011 08:03:26 -0700 (PDT)
+In-Reply-To: <4DCC3BA6.3010406@windriver.com>
+References: <4DCC3BA6.3010406@windriver.com>
+Date: Sun, 15 May 2011 17:03:26 +0200
+Message-ID: <BANLkTikB0P15uj-PveHCPJD-wjyn1gHqFw@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: Mark Hatle <mark.hatle@windriver.com>
+Cc: poky <poky@yoctoproject.org>, openembedded-devel@lists.openembedded.org,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [poky] Commit and Patch message guidelines - fifth draft
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,60 +44,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2011 13:18:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 15 May 2011 15:06:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-2011-05-15 14:17, Gary Thomas skrev:
-> On 05/14/2011 04:43 PM, Ulf Samuelsson wrote:
->>
->>> Skickat: l=F6 2011-05-14 16:32
->>> Till: openembedded-devel@lists.openembedded.org
->>> =C4mne: Re: [oe] perl-native fails on Ubuntu 11.04
->>>
->>> On 05/14/2011 01:39 AM, Ulf Samuelsson wrote:
->>>> 2011-05-05 12:57, Gary Thomas skrev:
->>>>> On 05/05/2011 03:50 AM, S=F8ren Holm wrote:
->>>>>> Please apply this patch to make perl-native build on Ubuntu 11.04
->>>>>>
->>>>>> https://gist.github.com/raw/925006/4217f358fb00b5b7f1dfbd1ce5f4afa=
-4f64b0bb0/0001-perl-native-multilib-patch-for-ubuntu-11.04.patch=20
->>>>>>
->>>>>>
->>>>> This patch only works for x86_64 systems. A corrected version
->>>>> replaces `uname -m` with * in
->>>>> ++test -f /usr/lib/*-linux-gnu/libc.so&&
->>>>> glibpth=3D"/usr/lib/*-linux-gnu $glibpth"
->>>>>
->>>>
->>>> Yes , Just installed Ubuntu 11.04 on a machine and I tried that patc=
-h
->>>> and failed.
->>>> 'uname -m` returns i686 but the library is in i386-linux-gnu
->>>> I symlinked i686-linux-gnu to i386-linux-gnu, and then the build=20
->>>> completes.
->>>>
->>>> `uname -i` will return i386 so that is an alternative as well.
->>> On my x86_64 ubuntu 10.04 box it returns unknown, so I think we'll ha=
-ve
->>> to use the glob.
->>>
->>
->> How about using:
->> dirname `find /usr/lib/*-linux-gnu/libc.so`
+Hello Mark,
+
+On Thu, May 12, 2011 at 9:57 PM, Mark Hatle <mark.hatle@windriver.com> wrote:
+> <...> Let the code
+> tell the story of the mechanics of the change (as much as possible), and let
+> your comment tell the other details -- i.e. what the problem was, how it
+> manifested itself (symptoms), and if necessary, the justification for why the
+> fix was done in manner that it was.
 >
-> That's no different than just the glob
->
+In other words, the long commit message must describe *why* the change
+was needed (instead of what has changed).
 
-I may be mistaken, but I think that with the glob,
-glibpth will contain    "/usr/lib/*-linux-gnu"
-with the proposed patch,
-glibpth will contain (on my machine) "/usr/lib/i386-linux-gnu"
+I find this item the most lacking in current OpenEmbedded/Poky related commits.
 
-Not a big difference, I admit, but I think the latter is a tad more=20
-efficient.
-
-BR
-Ulf Samuelsson
+Thanks for working on this,
+-- 
+Leon
 
 
