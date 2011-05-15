@@ -1,27 +1,27 @@
 Received: from smtprelay-b21.telenor.se ([195.54.99.212])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1QLWWN-0001wM-Ma
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1QLWWW-00020F-Vy
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 10:17:51 +0200
-Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
-	by smtprelay-b21.telenor.se (Postfix) with ESMTP id BDFA6E92A0
+	Sun, 15 May 2011 10:18:01 +0200
+Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
+	by smtprelay-b21.telenor.se (Postfix) with ESMTP id 9484EEAC0D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 May 2011 09:43:05 +0200 (CEST)
+	Sun, 15 May 2011 09:42:42 +0200 (CEST)
 X-SENDER-IP: [83.227.57.42]
 X-LISTENER: [smtp.bredband.net]
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Ais3AOqCz01T4zkqPGdsb2JhbACmFAsBAQEBNzK8OQGMDYYZBJARjnc
-X-IronPort-AV: E=Sophos;i="4.64,368,1301868000"; d="scan'208";a="188284159"
+X-IronPort-Anti-Spam-Result: Ak5wAOqCz01T4zkqPGdsb2JhbACJH45xjgQLAQEBATcyyEeGGQSQEY53
+X-IronPort-AV: E=Sophos;i="4.64,368,1301868000"; d="scan'208";a="189784807"
 Received: from c-2a39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
 	localhost) ([83.227.57.42])
-	by ipb2.telenor.se with ESMTP; 15 May 2011 09:43:05 +0200
+	by ipb1.telenor.se with ESMTP; 15 May 2011 09:42:42 +0200
 From: ulf.samuelsson@atmel.com
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 15 May 2011 09:43:01 +0200
-Message-Id: <1305445381-4215-1-git-send-email-ulf.samuelsson@atmel.com>
+Date: Sun, 15 May 2011 09:42:39 +0200
+Message-Id: <1305445359-4139-1-git-send-email-ulf.samuelsson@atmel.com>
 X-Mailer: git-send-email 1.7.4.1
 Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Subject: [PATCH] at91: support linux-2.6.30 exp.4 patchset
+Subject: [PATCH] Set defaults to at91bootstrap-3.0 and u-boot-2009.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,113 +35,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2011 08:17:51 -0000
+X-List-Received-Date: Sun, 15 May 2011 08:18:01 -0000
 
 From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 
 Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 ---
- recipes/linux/linux_2.6.30.bb |   62 ++++++++++++++++++++++------------------
- 1 files changed, 34 insertions(+), 28 deletions(-)
+ conf/machine/at91sam9m10ekes.conf    |    8 ++++++--
+ conf/machine/include/at91-2.6.30.inc |    6 +++---
+ 2 files changed, 9 insertions(+), 5 deletions(-)
 
-diff --git a/recipes/linux/linux_2.6.30.bb b/recipes/linux/linux_2.6.30.bb
-index 4313e36..a49246c 100644
---- a/recipes/linux/linux_2.6.30.bb
-+++ b/recipes/linux/linux_2.6.30.bb
-@@ -26,25 +26,51 @@ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=ke
-            file://aufs2-30.patch \
-            file://defconfig"
+diff --git a/conf/machine/at91sam9m10ekes.conf b/conf/machine/at91sam9m10ekes.conf
+index 63d97a8..9b00e64 100644
+--- a/conf/machine/at91sam9m10ekes.conf
++++ b/conf/machine/at91sam9m10ekes.conf
+@@ -13,10 +13,14 @@ include conf/machine/include/at91-lcd.inc
+ # Supported u-boot machines
+ #UBOOT_MACHINE = "at91sam9m10g45ek_nandflash_config"
+ #UBOOT_MACHINE = "at91sam9m10g45ek_dataflash_config"
+-UBOOT_MACHINE = "at91sam9m10g45ek_dataflash_cs0_config"
++#UBOOT_MACHINE = "at91sam9m10g45ek_dataflash_cs0_config"
+ #UBOOT_MACHINE = "at91sam9m10g45ek_config"
++UBOOT_MACHINE = "at91sam9m10g45ek_sd"
  
--SRC_URI_at91sam9m10ekes = " \
-+AT91_EXPERIMENTAL_4 = " \
- 	   ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=kernel \
- 	   http://maxim.org.za/AT91RM9200/2.6/${PV}-at91.patch.gz;apply=no;name=at91patch \
- 	   ftp://www.at91.com/pub/linux/${PV}-at91/${PV}-at91-exp.${AT91_EXPERIMENTAL}.tar.gz;apply=no;name=at91exp${AT91_EXPERIMENTAL} \
--	   file://at91/exp.${AT91_EXPERIMENTAL}/0001-Configurable-partition-size.patch;apply=yes \
--	   file://at91/exp.${AT91_EXPERIMENTAL}/0002-mach-at91-KConfig-cleanup.patch;apply=yes \
-+	   file://at91/exp.4/0001-Configurable-partition-size.patch;apply=yes \
-+	   file://at91/exp.4/0002-mach-at91-KConfig-cleanup.patch;apply=yes \
- 	   http://linux.hd-wireless.se/pub/Linux/BuildSAM9M10EKES/2.6.30-at91-sdio-irq-support-both-slots.patch;apply=yes;name=owlwifi \
--	   file://exp.${AT91_EXPERIMENTAL}/defconfig"
-+	   file://defconfig"
+-AT91BOOTSTRAP_BOARD = "at91sam9g45df at91sam9g45ek at91sam9g45nf"
++#UBOOT_MACHINES = "at91sam9m10g45ek_sd at91sam9m10g45ek_nandflash at91sam9m10g45ek_dataflash"
++UBOOT_MACHINES = "at91sam9m10g45ek_sd at91sam9m10g45ek_nandflash at91sam9m10g45ek_dataflash"
 +
-+AT91_EXPERIMENTAL_2 = " \
-+	   ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=kernel \
-+	   http://maxim.org.za/AT91RM9200/2.6/2.6.30-at91.patch.gz;apply=yes;name=at91patch \
-+	   ftp://www.at91.com/pub/buildroot/2.6.30-exp.2.patch.bz2;apply=yes;name=at91exp2 \
-+	   file://at91/linux-2.6.30-001-configurable-partition-size.patch.patch \
-+	   file://at91/linux-2.6.30-002-mach-at91-Kconfig.patch \
-+	   file://at91/linux-2.6.30-003-sam9m10g45ek.patch \
-+	   file://defconfig"
++AT91BOOTSTRAP_BOARD = "at91sam9m10dfes at91sam9m10ekes at91sam9m10nfes at91sam9m10sdu"
  
- at91sam_patch = " \
- 		"
+ MACHINE_FEATURES += "usbhost"
  
--do_patch_prepend_at91sam9m10ekes() {
--	bb.build.exec_func('do_apply_at91_exp_patch', d)
--}
-+SRC_URI_at91sam9m10ekes = "${AT91_EXPERIMENTAL_4}"
-+SRC_URI_at91cap9stk	= "${AT91_EXPERIMENTAL_4}"
-+SRC_URI_at91		= "${AT91_EXPERIMENTAL_2}"
-+
-+SRC_URI_append_at91sam9260ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9261ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9263ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9g10ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9g20ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9g20ek_2mmc = ${at91sam_patch}
-+SRC_URI_append_at91sam9g45ekes = ${at91sam_patch}
-+SRC_URI_append_at91sam9m10ekes = ${at91sam_patch}
-+SRC_URI_append_at91sam9m10g45ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9rlek = ${at91sam_patch}
-+SRC_URI_append_at91sam9xeek = ${at91sam_patch}
-+
-+#do_patch_prepend_at91sam9m10ekes() {
-+#	bb.build.exec_func('do_apply_at91_exp_patch', d)
-+#}
-+
-+addtask do_apply_at91_exp_patch before do_patch after do_unpack
+diff --git a/conf/machine/include/at91-2.6.30.inc b/conf/machine/include/at91-2.6.30.inc
+index e245b15..37a7188 100644
+--- a/conf/machine/include/at91-2.6.30.inc
++++ b/conf/machine/include/at91-2.6.30.inc
+@@ -7,10 +7,10 @@ SOC_FAMILY = "at91"
+ PREFERRED_PROVIDER_virtual/kernel = "linux"
+ PREFERRED_VERSION_linux = "2.6.30"
  
- do_apply_at91_exp_patch () {
- 	cd	${WORKDIR}
--	mv	exp.${AT91_EXPERIMENTAL}/defconfig	defconfig
- 	cd	${S}
- 	cat	../${PV}-at91.patch	| patch -p1
- 	for	f in `ls ../${PV}-at91-exp.${AT91_EXPERIMENTAL}/*.patch` ; do
-@@ -52,14 +78,6 @@ do_apply_at91_exp_patch () {
- 	done
- }
+-PREFERRED_PROVIDER_at91bootstrap = "at91bootstrap_2.13"
+-PREFERRED_VERSION_at91bootstrap = "2.13"
++PREFERRED_PROVIDER_at91bootstrap = "at91bootstrap"
++PREFERRED_VERSION_at91bootstrap = "3.0"
  
--SRC_URI_at91 = " \
--	   ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=kernel \
--	   http://maxim.org.za/AT91RM9200/2.6/2.6.30-at91.patch.gz;apply=yes;name=at91patch \
--	   ftp://www.at91.com/pub/buildroot/2.6.30-exp.2.patch.bz2;apply=yes;name=at91exp2 \
--	   file://at91/linux-2.6.30-001-configurable-partition-size.patch.patch \
--	   file://at91/linux-2.6.30-002-mach-at91-Kconfig.patch \
--	   file://at91/linux-2.6.30-003-sam9m10g45ek.patch \
--	   file://defconfig"
+-PREFERRED_PROVIDER_u-boot = "u-boot_2009.11"
++PREFERRED_PROVIDER_u-boot = "u-boot"
+ PREFERRED_VERSION_u-boot = "2009.11"
  
- SRC_URI_ronetix-pm9g45 = " \
- 	   ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=kernel \
-@@ -84,18 +102,6 @@ SRC_URI_ronetix-pm9g45 = " \
- 
- SRC_URI_append_mpc8315e-rdb = " file://mpc8315erdb-add-msi-to-dts.patch"
- 
--SRC_URI_append_at91sam9260ek = ${at91sam_patch}
--SRC_URI_append_at91sam9261ek = ${at91sam_patch}
--SRC_URI_append_at91sam9263ek = ${at91sam_patch}
--SRC_URI_append_at91sam9rlek = ${at91sam_patch} 
--SRC_URI_append_at91sam9g20ek = ${at91sam_patch}
--SRC_URI_append_at91sam9g20ek_2mmc = ${at91sam_patch}
--SRC_URI_append_at91sam9g10ek = ${at91sam_patch}
--SRC_URI_append_at91sam9xeek = ${at91sam_patch}
--SRC_URI_append_at91sam9g45ekes = ${at91sam_patch}
--SRC_URI_append_at91sam9m10ekes = ${at91sam_patch}
--SRC_URI_append_at91sam9m10g45ek = ${at91sam_patch}
--
- # SRC_URI_append_at91sam9263ek = " file://hrw-linux-2.6.30-exp.patch "
- 
- SRC_URI[kernel.md5sum] = "7a80058a6382e5108cdb5554d1609615"
+ KERNEL_IMAGETYPE = "uImage"
 -- 
 1.7.4.1
 
