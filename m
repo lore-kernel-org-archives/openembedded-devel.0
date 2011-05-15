@@ -1,23 +1,40 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QLdL9-0005JC-Ki for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 17:34:43 +0200
-Received: from f053043231.adsl.alicedsl.de ([78.53.43.231]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QLdJq-0008ME-Pd for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 15:33:23 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <martin.jansa@gmail.com>) id 1QLdS2-0005Vl-2q
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 15 May 2011 17:41:50 +0200
+Received: by fxm19 with SMTP id 19so2886726fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 May 2011 08:38:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=d65VBQEd2ga6aDFKMwW+i6hjxS97l9I0VO62fiK9sBQ=;
+	b=q3JotRLLRImoTwxJAQDOklLT/d46I+Wj1FDkjm5vX2VuhwnYkVawCGrGqc/hMd5770
+	/0nJl4XOqs5p2wxgi/oDO44TvJCieKCTOdqwjguGONkMZKlXOBe435YNWred17/wFsBW
+	UQxcvQNuR6QtE2C/r2pyf8MMSnOerYShv92fI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=EueWDyYK9B8OyXBIcNFBvNgprIKReIsLmb0nFNkd1YuVyerXRQ1EHqEGTL1HxFSoUO
+	Ri1rvQTklFAGCGPnVK8fRuLoQly/Ol2dSB7x4dkm+yx7sBxxwN5ua9pNOK1S66imOLBW
+	36Tu+QjO7oElIruUkWL9wRMvBrHpxfEyQawnM=
+Received: by 10.223.57.5 with SMTP id a5mr2477781fah.90.1305473939162;
+	Sun, 15 May 2011 08:38:59 -0700 (PDT)
+Received: from localhost ([94.230.152.115])
+	by mx.google.com with ESMTPS id 13sm1503751fau.16.2011.05.15.08.38.57
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 15 May 2011 08:38:58 -0700 (PDT)
+Date: Sun, 15 May 2011 17:38:57 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20110512085420.GD3423@jama.jama.net>
+Message-ID: <20110515153857.GF3377@jama.jama.net>
 References: <1305190050.4254.14.camel@mattotaupa>
 	<20110512085420.GD3423@jama.jama.net>
-Date: Sun, 15 May 2011 17:31:52 +0200
-Message-ID: <1305473512.5838.569.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
+	<1305473512.5838.569.camel@mattotaupa>
+MIME-Version: 1.0
+In-Reply-To: <1305473512.5838.569.camel@mattotaupa>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: libshr-glib: task configure fails with `/bin/sh: gdbus-codegen: command not found`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,112 +49,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2011 15:34:43 -0000
-X-Groupsio-MsgNum: 32056
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-dxULiR1a5QxWSpOztcVv"
+X-List-Received-Date: Sun, 15 May 2011 15:41:50 -0000
+X-Groupsio-MsgNum: 32057
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="10jrOL3x2xqLmOsH"
+Content-Disposition: inline
 
---=-dxULiR1a5QxWSpOztcVv
-Content-Type: text/plain; charset="UTF-8"
+--10jrOL3x2xqLmOsH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Am Donnerstag, den 12.05.2011, 10:54 +0200 schrieb Martin Jansa:
-> On Thu, May 12, 2011 at 10:47:30AM +0200, Paul Menzel wrote:
-
-> > as a result of I think commit 82f8341d [1]
-> >=20
-> > 	commit 82f8341d6282d6ae29e80eb3cdf312b6deda9b4c
-> > 	Author: Martin Jansa <Martin.Jansa@gmail.com>
-> > 	Date:   Sun May 8 07:08:16 2011 +0200
-> >=20
-> > 		  glib-2.0_git: include gdbus-codegen files in -dev
-> > 		 =20
-> > 		  Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> >=20
-> > I am seeing the following error message in task configure of
-> > `libshr-glib` using `minimal` for `MACHINE =3D "beagleboard"`.
-> >=20
-> > 	[=E2=80=A6]
-> > 	for f in /oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux=
--gnueabi//usr/share/shr-specs/xml/*.xml; do OUT=3D`echo $f | sed 's/.*\///g=
-; s/^org\.shr\./shr-/g; s/.xml//g; s/\.//g;' | awk  '{ printf tolower($1)}'=
-`; gdbus-codegen  --interface-prefix org.shr --generate-c-code $OUT $f; ech=
-o "#include <$OUT.h>" >> shr-bindings.h; done
-> > 	/bin/sh: gdbus-codegen: command not found
-> > 	/bin/sh: gdbus-codegen: command not found
-> > 	/bin/sh: gdbus-codegen: command not found
-> > 	/bin/sh: gdbus-codegen: command not found
-> > 	/bin/sh: gdbus-codegen: command not found
-> > 	/bin/sh: gdbus-codegen: command not found
-> > 	/bin/sh: gdbus-codegen: command not found
-> > 	/bin/sh: gdbus-codegen: command not found
-> > 	/bin/sh: gdbus-codegen: command not found
-> > 	touch shr-bindings.h
-> > 	[=E2=80=A6]
-> >=20
-> > Is that related?
+On Sun, May 15, 2011 at 05:31:52PM +0200, Paul Menzel wrote:
+> Thank you for the explanation.
 >=20
-> Not really, gdbus-codegen was provided by gdbus-binding-tool, but this
-> recipe is no longer supported by libshr-glib which now uses newer
-> gdbus-codegen version which was merged to glib sources (2.29.3 and
-> newer)
-> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3D22b4f79261=
-70ec14253a6d60f6d98f5eb3ec7f27
+> 	DISTRO=3D"shr" bitbake -k libshr-glib
 >=20
-> That's why this _git recipe has
-> DEFAULT_PREFERENCE_shr =3D "1"
+> indeed worked after getting `glib-2.0_git` to build on my build host
+> [1].
 >=20
-> and libshr-glib no longer depends on gdbus-binding-tool, but expects
-> glib-2.0-native to be new enough
-> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3Df6c2ad4e65=
-1383ab09be1f5b394aa7014233cfc5
+> I will not get to test newer GLib version with other distributions
+> before July.
 >=20
-> and also few more libs/daemons were changed to support newer glib
-> glib-2.0_git: add RREPLACES for gdbus-binding-tool	Martin Jansa
-> libphone-ui: bump SRCREV for glib-2.29	Martin Jansa
-> libshr-glib: bump SRCREV for glib-2.29 support and use gdbus-codegen from=
- gli...	Martin Jansa
-> phoneuid: bump SRCREV for glib-2.29	Martin Jansa
-> phonefsod: bump SRCREV for glib-2.29
->=20
-> So if you need any of those, you have to manually clean
-> gdbus-binding-tool-native/gdbus-binding-tool on your buildhost (to clean
-> sysroot and shlibs) and then prefer glib-2.0-2.29.3.
+> One slightly off topic question. Where did you get the 2.29.3 or git
+> recipe from or did you write it from scratch? I find the ordering in the
+> recipe quite confusing.
 
-Thank you for the explanation.
+Thanks for testing and fix!
 
-	DISTRO=3D"shr" bitbake -k libshr-glib
+The recipe is from meta-oe where I created it from older version in
+oe-core.
 
-indeed worked after getting `glib-2.0_git` to build on my build host
-[1].
+I didn't plan to backport it to oe.dev first, but because I needed
+mrmoku (Klaus Kurzmann) to help me with phoneuid/phonefsod changes I've
+added it to oe.dev too because he is still using oe.dev.
 
-I will not get to test newer GLib version with other distributions
-before July.
+Cheers,
 
-One slightly off topic question. Where did you get the 2.29.3 or git
-recipe from or did you write it from scratch? I find the ordering in the
-recipe quite confusing.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-
-Thanks,
-
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Ddcf425c=
-5472fdee74885c4f21a851e39c84e6642
-
---=-dxULiR1a5QxWSpOztcVv
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+--10jrOL3x2xqLmOsH
+Content-Type: application/pgp-signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v2.0.17 (GNU/Linux)
 
-iEYEABECAAYFAk3P8egACgkQPX1aK2wOHVj5CwCeLZcWwGBJkTRvLTZxEtUei+5m
-/rQAniUUxD0SvG/ejOCavDPR/nNcuhGj
-=fMzt
+iEYEARECAAYFAk3P85EACgkQN1Ujt2V2gBw0+ACfctTuBETw2L8NAU7iUuhf7D1e
+qX4AoInduiwo6wtVGagPzSkauZdqCoIx
+=sn8j
 -----END PGP SIGNATURE-----
 
---=-dxULiR1a5QxWSpOztcVv--
+--10jrOL3x2xqLmOsH--
