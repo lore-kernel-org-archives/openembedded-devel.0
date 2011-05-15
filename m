@@ -1,41 +1,23 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QLdS2-0005Vl-2q
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 17:41:50 +0200
-Received: by fxm19 with SMTP id 19so2886726fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 May 2011 08:38:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=d65VBQEd2ga6aDFKMwW+i6hjxS97l9I0VO62fiK9sBQ=;
-	b=q3JotRLLRImoTwxJAQDOklLT/d46I+Wj1FDkjm5vX2VuhwnYkVawCGrGqc/hMd5770
-	/0nJl4XOqs5p2wxgi/oDO44TvJCieKCTOdqwjguGONkMZKlXOBe435YNWred17/wFsBW
-	UQxcvQNuR6QtE2C/r2pyf8MMSnOerYShv92fI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=EueWDyYK9B8OyXBIcNFBvNgprIKReIsLmb0nFNkd1YuVyerXRQ1EHqEGTL1HxFSoUO
-	Ri1rvQTklFAGCGPnVK8fRuLoQly/Ol2dSB7x4dkm+yx7sBxxwN5ua9pNOK1S66imOLBW
-	36Tu+QjO7oElIruUkWL9wRMvBrHpxfEyQawnM=
-Received: by 10.223.57.5 with SMTP id a5mr2477781fah.90.1305473939162;
-	Sun, 15 May 2011 08:38:59 -0700 (PDT)
-Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id 13sm1503751fau.16.2011.05.15.08.38.57
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 15 May 2011 08:38:58 -0700 (PDT)
-Date: Sun, 15 May 2011 17:38:57 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QLe3m-0006Rs-11 for openembedded-devel@lists.openembedded.org;
+	Sun, 15 May 2011 18:20:50 +0200
+Received: from f053043231.adsl.alicedsl.de ([78.53.43.231]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QLe2T-0001M4-Bh for openembedded-devel@lists.openembedded.org;
+	Sun, 15 May 2011 16:19:29 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110515153857.GF3377@jama.jama.net>
-References: <1305190050.4254.14.camel@mattotaupa>
-	<20110512085420.GD3423@jama.jama.net>
-	<1305473512.5838.569.camel@mattotaupa>
-MIME-Version: 1.0
-In-Reply-To: <1305473512.5838.569.camel@mattotaupa>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: libshr-glib: task configure fails with `/bin/sh: gdbus-codegen: command not found`
+In-Reply-To: <1303134465.3910.63.camel@mattotaupa>
+References: <1303134465.3910.63.camel@mattotaupa>
+Date: Sun, 15 May 2011 18:17:58 +0200
+Message-ID: <1305476278.5838.608.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH 1/2] pkgconfig: refactor to include file `pkgconfig-0.23.inc`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,55 +31,168 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2011 15:41:50 -0000
-X-Groupsio-MsgNum: 32057
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="10jrOL3x2xqLmOsH"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 15 May 2011 16:20:50 -0000
+X-Groupsio-MsgNum: 32058
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-6qRIGT8N8I+BhgUMqwhX"
 
---10jrOL3x2xqLmOsH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--=-6qRIGT8N8I+BhgUMqwhX
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, May 15, 2011 at 05:31:52PM +0200, Paul Menzel wrote:
-> Thank you for the explanation.
+Am Montag, den 18.04.2011, 15:47 +0200 schrieb Paul Menzel:
+> Date: Sun, 17 Apr 2011 22:44:04 +0200
 >=20
-> 	DISTRO=3D"shr" bitbake -k libshr-glib
+> In pkg-config releases after 0.23 no patches need to be applied and OE de=
+faults can be used. Since `pkgconfig-{native,sdk}` also need the common bit=
+s factor those out into `pkgconfig-0.23.inc`.
 >=20
-> indeed worked after getting `glib-2.0_git` to build on my build host
-> [1].
+> This patch is build tested using `angstrom-2010.x` and `minimal{,-uclibc}=
+` for `MACHINE =3D "beagleboard"`.
 >=20
-> I will not get to test newer GLib version with other distributions
-> before July.
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> ---
+>  recipes/pkgconfig/pkgconfig-0.23.inc       |   14 ++++++++++++++
+>  recipes/pkgconfig/pkgconfig-native_0.23.bb |    6 +-----
+>  recipes/pkgconfig/pkgconfig-sdk_0.23.bb    |    6 +-----
+>  recipes/pkgconfig/pkgconfig.inc            |   11 +++--------
+>  recipes/pkgconfig/pkgconfig_0.23.bb        |    7 ++-----
+>  5 files changed, 21 insertions(+), 23 deletions(-)
+>  create mode 100644 recipes/pkgconfig/pkgconfig-0.23.inc
+
+
 >=20
-> One slightly off topic question. Where did you get the 2.29.3 or git
-> recipe from or did you write it from scratch? I find the ordering in the
-> recipe quite confusing.
+> diff --git a/recipes/pkgconfig/pkgconfig-0.23.inc b/recipes/pkgconfig/pkg=
+config-0.23.inc
+> new file mode 100644
+> index 0000000..5f87d28
+> --- /dev/null
+> +++ b/recipes/pkgconfig/pkgconfig-0.23.inc
+> @@ -0,0 +1,14 @@
+> +require pkgconfig.inc
+> +
+> +SRC_URI +=3D " \
+> +            file://autofoo.patch \
+> +            file://sysrootfix.patch \
+> +            file://glibconfig-sysdefs.h \
+> +           "
+> +SRC_URI[md5sum] =3D "d922a88782b64441d06547632fd85744"
+> +SRC_URI[sha256sum] =3D "08a0e072d6a05419a58124db864f0685e6ac96e71b2875bf=
+15ac12714e983b53"
+> +
+> +acpaths =3D "-I ."
+> +do_configure_prepend () {
+> +	install -m 0644 ${WORKDIR}/glibconfig-sysdefs.h glib-1.2.*/
+> +}
+> diff --git a/recipes/pkgconfig/pkgconfig-native_0.23.bb b/recipes/pkgconf=
+ig/pkgconfig-native_0.23.bb
+> index f5f44ac..309077a 100644
+> --- a/recipes/pkgconfig/pkgconfig-native_0.23.bb
+> +++ b/recipes/pkgconfig/pkgconfig-native_0.23.bb
+> @@ -1,11 +1,7 @@
+> -require pkgconfig.inc
+> +require pkgconfig-0.23.inc
+>  FILESDIR =3D "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/pkgconfig-=
+${PV}"
+> =20
+>  PR =3D "${INC_PR}.1"
+> =20
+> -S =3D "${WORKDIR}/pkg-config-${PV}/"
+>  inherit native
+>  DEPENDS =3D ""
+> -
+> -SRC_URI[md5sum] =3D "d922a88782b64441d06547632fd85744"
+> -SRC_URI[sha256sum] =3D "08a0e072d6a05419a58124db864f0685e6ac96e71b2875bf=
+15ac12714e983b53"
+> diff --git a/recipes/pkgconfig/pkgconfig-sdk_0.23.bb b/recipes/pkgconfig/=
+pkgconfig-sdk_0.23.bb
+> index cbe6b81..4efb7bd 100644
+> --- a/recipes/pkgconfig/pkgconfig-sdk_0.23.bb
+> +++ b/recipes/pkgconfig/pkgconfig-sdk_0.23.bb
+> @@ -1,11 +1,7 @@
+> -require pkgconfig.inc
+> +require pkgconfig-0.23.inc
+>  FILESDIR =3D "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/pkgconfig-=
+${PV}"
+> =20
+>  PR =3D "${INC_PR}.1"
+> =20
+> -S =3D "${WORKDIR}/pkg-config-${PV}/"
+>  inherit sdk
+>  DEPENDS =3D ""
+> -
+> -SRC_URI[md5sum] =3D "d922a88782b64441d06547632fd85744"
+> -SRC_URI[sha256sum] =3D "08a0e072d6a05419a58124db864f0685e6ac96e71b2875bf=
+15ac12714e983b53"
+> diff --git a/recipes/pkgconfig/pkgconfig.inc b/recipes/pkgconfig/pkgconfi=
+g.inc
+> index 4edad6a..e6fa5f1 100644
+> --- a/recipes/pkgconfig/pkgconfig.inc
+> +++ b/recipes/pkgconfig/pkgconfig.inc
+> @@ -5,22 +5,17 @@ It replaces the ubiquitous *-config scripts you may hav=
+e \
+>  seen with a single tool."
+>  HOMEPAGE =3D "http://pkg-config.freedesktop.org/wiki/"
+>  LICENSE =3D "GPLv2+"
+> +DEPENDS =3D "glib-2.0"
+>  INC_PR =3D "r8"
+> =20
+>  SRC_URI =3D "http://pkgconfig.freedesktop.org/releases/pkg-config-${PV}.=
+tar.gz \
+> -           file://autofoo.patch \
+> -           file://sysrootfix.patch \
+> -           file://glibconfig-sysdefs.h"
+> +          "
+> =20
+> +# Setting `S` is needed, since the recipe name is `pkgconfig` instead of=
+ `pkg-config`.
+>  S =3D "${WORKDIR}/pkg-config-${PV}/"
+> =20
+>  inherit autotools
+> =20
+> -acpaths =3D "-I ."
+> -do_configure_prepend () {
+> -	install -m 0644 ${WORKDIR}/glibconfig-sysdefs.h glib-1.2.*/
+> -}
+> -
+>  do_install_append() {
+>  	install -d -m 0755 ${D}${libdir}/pkgconfig
+>  }
+> diff --git a/recipes/pkgconfig/pkgconfig_0.23.bb b/recipes/pkgconfig/pkgc=
+onfig_0.23.bb
+> index 39f7010..3d8fe6c 100644
+> --- a/recipes/pkgconfig/pkgconfig_0.23.bb
+> +++ b/recipes/pkgconfig/pkgconfig_0.23.bb
+> @@ -1,9 +1,6 @@
+> -require pkgconfig.inc
+> +require ${PN}.inc
+> +require ${P}.inc
+> =20
+>  PR =3D "${INC_PR}.3"
+> =20
+> -DEPENDS +=3D "glib-2.0"
+>  EXTRA_OECONF =3D "--with-installed-glib"
+> -
+> -SRC_URI[md5sum] =3D "d922a88782b64441d06547632fd85744"
+> -SRC_URI[sha256sum] =3D "08a0e072d6a05419a58124db864f0685e6ac96e71b2875bf=
+15ac12714e983b53"
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Thanks for testing and fix!
 
-The recipe is from meta-oe where I created it from older version in
-oe-core.
-
-I didn't plan to backport it to oe.dev first, but because I needed
-mrmoku (Klaus Kurzmann) to help me with phoneuid/phonefsod changes I've
-added it to oe.dev too because he is still using oe.dev.
-
-Cheers,
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---10jrOL3x2xqLmOsH
-Content-Type: application/pgp-signature
+--=-6qRIGT8N8I+BhgUMqwhX
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAk3P85EACgkQN1Ujt2V2gBw0+ACfctTuBETw2L8NAU7iUuhf7D1e
-qX4AoInduiwo6wtVGagPzSkauZdqCoIx
-=sn8j
+iEYEABECAAYFAk3P/LYACgkQPX1aK2wOHVi8PACfcIRqVVlbpT9JXxR7noGBNpud
+zooAn20kidPi1lyS1uqnGAYwJTICnRoL
+=VQn1
 -----END PGP SIGNATURE-----
 
---10jrOL3x2xqLmOsH--
+--=-6qRIGT8N8I+BhgUMqwhX--
