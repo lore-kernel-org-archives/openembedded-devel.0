@@ -1,26 +1,24 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QLcth-0004jZ-Jh for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 17:06:21 +0200
+	id 1QLd4N-00053W-RK for openembedded-devel@lists.openembedded.org;
+	Sun, 15 May 2011 17:17:23 +0200
 Received: from f053043231.adsl.alicedsl.de ([78.53.43.231]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QLcsO-0007Wr-Qj for openembedded-devel@lists.openembedded.org;
-	Sun, 15 May 2011 15:05:01 +0000
+	id 1QLd35-0007ZD-Iu for openembedded-devel@lists.openembedded.org;
+	Sun, 15 May 2011 15:16:03 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20110513222652.GA3231@mail.familie-heinold.de>
-References: <1305062085.9982.62.camel@mattotaupa>
-	<1305133911.2421.29.camel@phil-desktop> <20110511202510.GG7657@mx.loc>
-	<1305324915.7858.11.camel@mattotaupa>
-	<20110513222652.GA3231@mail.familie-heinold.de>
-Date: Sun, 15 May 2011 17:03:30 +0200
-Message-ID: <1305471810.5838.518.camel@mattotaupa>
+In-Reply-To: <4DCE2BF8.50403@eukrea.com>
+References: <1305060012.9982.33.camel@mattotaupa>
+	<1305061022.9982.44.camel@mattotaupa>  <4DCE2BF8.50403@eukrea.com>
+Date: Sun, 15 May 2011 17:14:33 +0200
+Message-ID: <1305472473.5838.546.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.3 
-Subject: Re: [solved] new uClibc srcrev fails with `unwind-resume.c:31:19: error: expected ')' before 'struct'`
+Subject: Re: qt4-native: `/usr/include/gnu/stubs.h:9:27: error: gnu/stubs-64.h: No such file or directory` because architecture incorrectly detected
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,58 +32,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2011 15:06:21 -0000
-X-Groupsio-MsgNum: 32054
+X-List-Received-Date: Sun, 15 May 2011 15:17:23 -0000
+X-Groupsio-MsgNum: 32055
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-0E3DsKhCsCPI+lGQTTF8"
+	boundary="=-HghVbhj4CvCAoNQmy3sw"
 
---=-0E3DsKhCsCPI+lGQTTF8
+--=-HghVbhj4CvCAoNQmy3sw
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dear Henning,
+Dear Eric,
 
 
-Am Samstag, den 14.05.2011, 00:26 +0200 schrieb Henning Heinold:
+Am Samstag, den 14.05.2011, 09:15 +0200 schrieb Eric B=C3=A9nard:
 
-> first,
+> On 10/05/2011 22:57, Paul Menzel wrote:
+> > Dear Simon and other OpenEmbedded folks,
+> >
+> >
+> > I am sorry for the wrong subject line. I am fixing it hereby.
+> >
+> >
+> > Am Dienstag, den 10.05.2011, 22:40 +0200 schrieb Paul Menzel:
+> >
+> >> task configure of `qt4-native` fails on my build system which is a Xen
+> >> DomU running a 64-bit Linux kernel but 32-bit user space.
+> >>
+> >>          $ uname -a
+> >>          Linux oe-build-host 2.6.32-5-xen-amd64 #1 SMP Tue Mar 8 00:01=
+:30 UTC 2011 x86_64 GNU/Linux
+> >>          $ dpkg --print-architecture
+> >>          i386
+> >>
+> >> This seems to be a problem in the Qt4 build system which seems to be
+> >> using `uname` to determine the architecture.
+> >>
+> >>          $ more log.do_configure
+> >>          + do_configure
+> >>          + echo o
+> >>          + echo yes
+> >>          + ./configure -prefix /oe/build-angstrom-next/angstrom-dev/sy=
+sroots/i686-linux/usr -L /oe/build-angstrom-next/angstrom-dev/sysroots/i686=
+-linux/usr/lib -I /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/=
+usr/include -qt-libjpeg -qt-gif -system-zlib -no-libjpeg -no-libpng -no-lib=
+mng -no-libtiff -no-accessibility -no-cups -no-nas-sound -no-nis -no-openss=
+l -verbose -release -embedded -no-freetype -no-glib -no-iconv -exceptions -=
+xmlpatterns -qt3support -no-fast -silent -no-rpath
+> >>          Which edition of Qt do you want to use ?
+> >>
+> >>          Type 'c' if you want to use the Commercial Edition.
+> >>          Type 'o' if you want to use the Open Source Edition.
+> >>
+> >>
+> >>          Determining system architecture... (Linux:2.6.32-5-xen-amd64:=
+x86_64)
+> >>              64-bit AMD 80x86 (x86_64)
+> >>              'x86_64' is supported
+> >>          System architecture: 'x86_64'
+> >>          Host architecture: 'x86_64'
 >=20
-> Khem and I discovered it too and Khem had a fix for it and I think he wil=
-l
-> push it soon into uclibc-gi tree.
+> this could maybe be fixed by passing -host-arch=3Di386 to configure but t=
+he=20
+> problem is to detect you are running a 32bit userland when uname reports =
+64 bits.
+> bitbake.conf seems also to use uname :
+> BUILD_ARCH :=3D "${@os.uname()[4]}"
 
-thank you. Commit 71d63ed7 [1] indeed fixed it.
+Unfortunately I have not come around a solution to detect this properly.
+I had the same problem with TeX Live [1] and the solution was to add on
+option to override this setting [2].
 
-[=E2=80=A6]
+> maybe something like file `which init` and analysing the output ?
 
-> second you wont be able to compile systemd, after working around as much =
-as possible
-> there are to many CPU_ functions missing in uclibc.
+Unfortunately `which init` does not return anything on my Debian
+Sid/unstable system.
 
-Thank you for the information. I will probably try it anyway to get the
-error message so I can post it somewhere in case anybody else searches
-for this on the Web. Maybe someone steps up and enhances uClibc.
+        $ which init
+        $ echo $?
+        1
 
 
-Thanks,
+Thank you for looking into this problem,
 
 Paul
 
 
-[1] http://git.uclibc.org/uClibc/commit/?id=3D71d63ed75648da9b0b71afabb9c60=
-aaad792c55c
+[1] http://tug.org/pipermail/tex-live/2009-June/021119.html
+[2] http://tug.org/pipermail/tex-live/2009-June/021124.html
 
---=-0E3DsKhCsCPI+lGQTTF8
+--=-HghVbhj4CvCAoNQmy3sw
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk3P60IACgkQPX1aK2wOHVhi8wCcC9ebUVEm3KEWZpPOg/kAv73u
-ppYAn2sxk6zA6lMVqAaVESt4cRa4/xPN
-=lvS2
+iEYEABECAAYFAk3P7dkACgkQPX1aK2wOHVhKXwCff1dARNhT5QfOooF19tcitJ45
+zy0AnAx5O8hvK0Yp2mXn/qq+p75wmucM
+=e+Jy
 -----END PGP SIGNATURE-----
 
---=-0E3DsKhCsCPI+lGQTTF8--
+--=-HghVbhj4CvCAoNQmy3sw--
