@@ -1,36 +1,26 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <leon.woestenberg@gmail.com>)
-	id 1QLctf-0004jC-J5; Sun, 15 May 2011 17:06:19 +0200
-Received: by pvc30 with SMTP id 30so1826854pvc.6
-	for <multiple recipients>; Sun, 15 May 2011 08:03:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=dkLcyLHTP7GgwJgXOhUsEZNjqohZMfka3Yetf35jKTA=;
-	b=vprpcq6ddCRK4/lgfNLciIBVtS/oGSjUPaMZqxk7SWCHwmwnoqRbwb4kw72C5LBy2K
-	F8Eqzf8Rd0kscR+sctlUmMpO8C3pbs2nFSIguOp0krdG80CWQHgEq/ZeCp4XpvJKFVbi
-	Me8h2VBXXbckkIk/FhL7CG1eeAz5GyrC0OR7g=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	b=lr/KX/vmnADhsa1x31IBvr7vTkDS+5ImSkp+9suOjeBUM064u2CFbLLNdajkBvNwT0
-	et0cRW7ZE4x5oQqUDIve+jMgignIG8tflR7+dprBqqeb5K5oDMC/WutSKwp1OCEfgAcZ
-	T48TlwDh+tBS9GH2qdhJMr4j0pZUe7wWH9kaA=
-MIME-Version: 1.0
-Received: by 10.68.57.42 with SMTP id f10mr5517507pbq.2.1305471806805; Sun, 15
-	May 2011 08:03:26 -0700 (PDT)
-Received: by 10.68.52.232 with HTTP; Sun, 15 May 2011 08:03:26 -0700 (PDT)
-In-Reply-To: <4DCC3BA6.3010406@windriver.com>
-References: <4DCC3BA6.3010406@windriver.com>
-Date: Sun, 15 May 2011 17:03:26 +0200
-Message-ID: <BANLkTikB0P15uj-PveHCPJD-wjyn1gHqFw@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: Mark Hatle <mark.hatle@windriver.com>
-Cc: poky <poky@yoctoproject.org>, openembedded-devel@lists.openembedded.org,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [poky] Commit and Patch message guidelines - fifth draft
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QLcth-0004jZ-Jh for openembedded-devel@lists.openembedded.org;
+	Sun, 15 May 2011 17:06:21 +0200
+Received: from f053043231.adsl.alicedsl.de ([78.53.43.231]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QLcsO-0007Wr-Qj for openembedded-devel@lists.openembedded.org;
+	Sun, 15 May 2011 15:05:01 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20110513222652.GA3231@mail.familie-heinold.de>
+References: <1305062085.9982.62.camel@mattotaupa>
+	<1305133911.2421.29.camel@phil-desktop> <20110511202510.GG7657@mx.loc>
+	<1305324915.7858.11.camel@mattotaupa>
+	<20110513222652.GA3231@mail.familie-heinold.de>
+Date: Sun, 15 May 2011 17:03:30 +0200
+Message-ID: <1305471810.5838.518.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [solved] new uClibc srcrev fails with `unwind-resume.c:31:19: error: expected ')' before 'struct'`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,25 +34,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2011 15:06:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 15 May 2011 15:06:21 -0000
+X-Groupsio-MsgNum: 32054
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-0E3DsKhCsCPI+lGQTTF8"
 
-Hello Mark,
+--=-0E3DsKhCsCPI+lGQTTF8
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 12, 2011 at 9:57 PM, Mark Hatle <mark.hatle@windriver.com> wrote:
-> <...> Let the code
-> tell the story of the mechanics of the change (as much as possible), and let
-> your comment tell the other details -- i.e. what the problem was, how it
-> manifested itself (symptoms), and if necessary, the justification for why the
-> fix was done in manner that it was.
->
-In other words, the long commit message must describe *why* the change
-was needed (instead of what has changed).
-
-I find this item the most lacking in current OpenEmbedded/Poky related commits.
-
-Thanks for working on this,
--- 
-Leon
+Dear Henning,
 
 
+Am Samstag, den 14.05.2011, 00:26 +0200 schrieb Henning Heinold:
+
+> first,
+>=20
+> Khem and I discovered it too and Khem had a fix for it and I think he wil=
+l
+> push it soon into uclibc-gi tree.
+
+thank you. Commit 71d63ed7 [1] indeed fixed it.
+
+[=E2=80=A6]
+
+> second you wont be able to compile systemd, after working around as much =
+as possible
+> there are to many CPU_ functions missing in uclibc.
+
+Thank you for the information. I will probably try it anyway to get the
+error message so I can post it somewhere in case anybody else searches
+for this on the Web. Maybe someone steps up and enhances uClibc.
+
+
+Thanks,
+
+Paul
+
+
+[1] http://git.uclibc.org/uClibc/commit/?id=3D71d63ed75648da9b0b71afabb9c60=
+aaad792c55c
+
+--=-0E3DsKhCsCPI+lGQTTF8
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3P60IACgkQPX1aK2wOHVhi8wCcC9ebUVEm3KEWZpPOg/kAv73u
+ppYAn2sxk6zA6lMVqAaVESt4cRa4/xPN
+=lvS2
+-----END PGP SIGNATURE-----
+
+--=-0E3DsKhCsCPI+lGQTTF8--
