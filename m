@@ -1,28 +1,34 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1QLwPM-0003Td-RW
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 13:56:20 +0200
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QLvxT-0003xe-4z
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 13:27:32 +0200
-From: Phil Blundell <philb@gnu.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QLwTv-00040P-Ec for openembedded-devel@lists.openembedded.org;
+	Mon, 16 May 2011 14:01:03 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QLwR8-0006ik-Ln for openembedded-devel@lists.openembedded.org;
+	Mon, 16 May 2011 13:58:10 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 May 2011 13:58:10 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 May 2011 13:58:10 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4DD10E76.1060100@opendreambox.org>
-References: <1303134465.3910.63.camel@mattotaupa>
-	<1303134640.3910.67.camel@mattotaupa>	<4DAD7297.2030606@opendreambox.org>
-	<1303506946.4155.81.camel@mattotaupa>
-	<AF97BCF4-CD32-4069-BB81-FECAC104F6D9@dominion.thruhere.net>
-	<1303509611.4155.111.camel@mattotaupa> <iou12i$88c$1@dough.gmane.org>
-	<1305476698.5838.622.camel@mattotaupa>
-	<4DD10E76.1060100@opendreambox.org>
-Date: Mon, 16 May 2011 12:53:22 +0100
-Message-ID: <1305546802.2429.8.camel@phil-desktop>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 16 May 2011 13:57:56 +0200
+Message-ID: <iqr3g4$4gf$1@dough.gmane.org>
+References: <1305545218.3424.29.camel@rex>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: [RFC] [PATCH 2/2] pkgconfig: add git version
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1305545218.3424.29.camel@rex>
+X-Enigmail-Version: 1.0.1
+Subject: Re: OpenEmbedded Core - Ready for extended users
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,24 +42,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2011 11:56:20 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 16 May 2011 12:01:03 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2011-05-16 at 13:45 +0200, Andreas Oberritter wrote:
-> I still think that using SRCPV in PR is just wrong. SRCPV doesn't change
-> the version of the package but the version of the packaged content.
-> Otherwise it would be called SRCPR.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Agreed.  If you want SRCPV anywhere (and it's not entirely obvious that
-all distros would want it at all), it seems like it should go in either
-PV, PKGV, the DESCRIPTION, or some custom output field.  Jamming it into
-${PR} from the recipe does seem, as you say, "just wrong".
+On 16-05-11 13:26, Richard Purdie wrote:
 
-See also gitpkgv.bbclass which has some further words about this stuff.
+> Things that aren't part of oe-core fall to the meta-oe layer which is
+> where we intend the current wider support contained in oe-devel to be
+> maintained. The people working on meta-oe so far would love to see more
+> contributions. Both repositories are currently working on a "pull" model
+> and people using them so far have felt a benefit to this for code
+> quality.
 
-p.
+The idea is that every layer has a top level README describing how to
+contribute.
 
+For meta-oe:
+http://cgit.openembedded.org/cgit.cgi/meta-openembedded/tree/meta-oe/README
+
+And for meta-angstrom:
+http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-angstrom/tree/README
+
+If someone wants to come up with a standard for the layer README files,
+please do!
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFN0RFEMkyGM64RGpERAps4AJ9WHjtvVSCIkp8AvJ9GtLij/11RGgCePlMc
+oMLNqa9vr5yd99HcV6aqrpY=
+=Gb4s
+-----END PGP SIGNATURE-----
 
 
 
