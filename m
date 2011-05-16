@@ -1,44 +1,34 @@
-Received: from mail-px0-f172.google.com ([209.85.212.172])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QLjg1-0008PV-A7
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 00:20:41 +0200
-Received: by pxi6 with SMTP id 6so3062429pxi.3
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QLrwN-0006OK-CN for openembedded-devel@lists.openembedded.org;
+	Mon, 16 May 2011 09:10:07 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QLrtd-0000Kz-2W for openembedded-devel@lists.openembedded.org;
+	Mon, 16 May 2011 09:07:17 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 May 2011 09:07:17 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 May 2011 15:17:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id
-	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:content-transfer-encoding:in-reply-to
-	:user-agent; bh=ydWxmII3VHa5vnHHu0OM1jfdapRODYBf+rFkn61/pzQ=;
-	b=vIzUSbU5hEyqpE7VHrJo9DUQsbJsLQ/a3hfF16zO3iQdUqyuuN4pirhZomvtnH/dgN
-	k3gZYfxXPACf53d1nw/h/NuHZ1oZDTg/urw2/Yc+DSwLq4h8ZWE23n8w5Sz5Fbw3zU/Y
-	Ig43I1pQ68VbVF5jVOMzv1d9FwUtdzwX4+HW8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	b=uljE/jJboOmYjs3vyaLm4NYifbfdBlwa2Sn5nwPWERi0jU+YzjsYyTiQvyJWW1ASgd
-	83vrHSTatcz0MzIVvU7gWzaizCU0rOiQHkAn844ZWVt6MIwtnztBn1QFoXwwbUhk2SVQ
-	yICFpkwAA4yor19EoZs0ttR4pv7piNrV85vAc=
-Received: by 10.68.66.169 with SMTP id g9mr5869474pbt.527.1305497865958;
-	Sun, 15 May 2011 15:17:45 -0700 (PDT)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id a1sm2859037pbo.91.2011.05.15.15.17.43
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 15 May 2011 15:17:44 -0700 (PDT)
-Date: Sun, 15 May 2011 15:16:47 -0700
-From: Khem Raj <raj.khem@gmail.com>
+	Mon, 16 May 2011 09:07:17 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110515221647.GD24670@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <201105101555.50984.sgh@sgh.dk>
-	<1305059211.9982.18.camel@mattotaupa>
-MIME-Version: 1.0
-In-Reply-To: <1305059211.9982.18.camel@mattotaupa>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: acpid-1.0.10-r5.1 fails compilation
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 16 May 2011 09:06:59 +0200
+Message-ID: <iqqiej$3ie$1@dough.gmane.org>
+References: <1305495926-21490-1-git-send-email-otavio@ossystems.com.br>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1305495926-21490-1-git-send-email-otavio@ossystems.com.br>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [meta-oe][PATCH v1 1/3] libiconv: drop EXTRA_OECONF as it is handled by gettext class
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,37 +42,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2011 22:20:41 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 16 May 2011 07:10:07 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On (10/05/11 22:26), Paul Menzel wrote:
-> Dear Søren,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 15-05-11 23:45, Otavio Salvador wrote:
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+Applied, thanks
+
+> ---
+>  .../recipes-support/libiconv/libiconv_1.13.1.bb    |    4 +---
+>  1 files changed, 1 insertions(+), 3 deletions(-)
 > 
-> > | cc1: warnings being treated as errors
-> > | libnetlink.c: In function 'addraw_l':
-> > | libnetlink.c:521:56: error: comparison between signed and unsigned integer expressions
-> > | make: *** [libnetlink.o] Error 1
-> > | make: *** Waiting for unfinished jobs....
-> > | + die 'oe_runmake failed'
-> > | + oefatal 'oe_runmake failed'
-> > | + echo FATAL: 'oe_runmake failed'
-> > | FATAL: oe_runmake failed
-> > | + exit 1
-> > NOTE: package acpid-1.0.10-r5.1: task do_compile: Failed
-> 
-> I could build it fine using `minimal` as distribution for `MACHINE =
-> "beagleboard"`. You seem to compile for i686. I do not know what differs
-> there.
+> diff --git a/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb b/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
+> index 868314b..35f4e2d 100644
+> --- a/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
+> +++ b/meta-oe/recipes-support/libiconv/libiconv_1.13.1.bb
+> @@ -8,9 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+>  BBCLASSEXTEND = "native nativesdk"
+>  
+>  PROVIDES = "virtual/libiconv"
+> -PR = "r2"
+> -
+> -EXTRA_OECONF +=  "${@['--disable-nls','--enable-nls'][bb.data.getVar('USE_NLS', d, 1) == 'yes']}"
+> +PR = "r3"
+>  
+>  SRC_URI += "file://autoconf.patch"
+>  
 
-code paths are different between arm and x86. Apply this patch 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=616194#15
-
-and if it helps then post a patch for OE
-
--Khem
+iD8DBQFN0M0TMkyGM64RGpERAhakAJ0TcMMQGhMJwVr2N85Ji9g9pLT3uACfWpZY
+flqGMSqF2HjX9RgJ8wjV4ik=
+=WuEb
+-----END PGP SIGNATURE-----
 
 
 
