@@ -1,27 +1,35 @@
-Received: from 1.26.mail-out.ovh.net ([46.105.43.121] helo=26.mail-out.ovh.net)
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1QLwfs-0004ns-T6
+Received: from mail.dream-property.net ([82.149.226.172])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <obi@opendreambox.org>) id 1QLwk9-000503-E3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 14:13:24 +0200
-Received: (qmail 13126 invoked by uid 503); 16 May 2011 11:30:20 -0000
-Received: from b6.ovh.net (HELO mail94.ha.ovh.net) (213.186.33.56)
-	by 26.mail-out.ovh.net with SMTP; 16 May 2011 11:30:19 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 16 May 2011 14:03:54 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 16 May 2011 14:03:53 +0200
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 May 2011 13:54:13 +0200
-Message-Id: <1305546853-12477-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.0.4
+	Mon, 16 May 2011 14:17:50 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 296303150F12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 May 2011 14:14:59 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id 5P9atiwdHPe1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 May 2011 14:14:51 +0200 (CEST)
+Received: from [172.22.22.61] (drms-590c46b9.pool.mediaWays.net [89.12.70.185])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 8E6C23150E26
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 May 2011 14:14:51 +0200 (CEST)
+Message-ID: <4DD11539.5070701@opendreambox.org>
+Date: Mon, 16 May 2011 14:14:49 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 1344605965279276361
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: [PATCH] sip-native: update to 4.12.2
+To: openembedded-devel@lists.openembedded.org
+References: <1302825782-17120-1-git-send-email-obi@opendreambox.org>	<1302825782-17120-2-git-send-email-obi@opendreambox.org>	<4DD10D32.30609@opendreambox.org>
+	<1305546243.2429.1.camel@phil-desktop>
+In-Reply-To: <1305546243.2429.1.camel@phil-desktop>
+Subject: Re: [PATCH 2/2] kernel.bbclass: pass AR, NM and OBJCOPY to make
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,38 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2011 12:13:25 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 16 May 2011 12:17:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-4.12.1 is no more fetchable from the original source
+On 05/16/2011 01:44 PM, Phil Blundell wrote:
+> I'm mildly curious as to what Montavista can have done that requires a
+> custom version of ar.  But the patch looks fine to me anyway.
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- .../{sip-native_4.12.1.bb => sip-native_4.12.2.bb} |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
- rename recipes/sip/{sip-native_4.12.1.bb => sip-native_4.12.2.bb} (86%)
+I don't know whether this change came from Montavista or from the vendor
+supplying the kernel sources. Anyway, someone changed CROSS_COMPILE to
+override the environment, thus using a prefix different from the
+toolchain built by OE.
 
-diff --git a/recipes/sip/sip-native_4.12.1.bb b/recipes/sip/sip-native_4.12.2.bb
-similarity index 86%
-rename from recipes/sip/sip-native_4.12.1.bb
-rename to recipes/sip/sip-native_4.12.2.bb
-index cd43292..ff8f799 100644
---- a/recipes/sip/sip-native_4.12.1.bb
-+++ b/recipes/sip/sip-native_4.12.2.bb
-@@ -7,8 +7,8 @@ LICENSE = "GPL"
- PR = "r0"
- 
- SRC_URI = "http://www.riverbankcomputing.co.uk/static/Downloads/sip4/sip-${PV}.tar.gz"
--SRC_URI[md5sum] = "0f8e8305b14c1812191de2e0ee22fea9"
--SRC_URI[sha256sum] = "e9d66e8830c2a58e6c17b9952710f67d495ddb84ce6f3d89400c8b52913381b5"
-+SRC_URI[md5sum] = "9df80f88e0e4022cdd8a8891c6c38048"
-+SRC_URI[sha256sum] = "3e42bea028a1713558b5b8a317af4195d3b0feaa6c179d99401a7048f1a3cec4"
- S = "${WORKDIR}/sip-${PV}/sipgen"
- 
- inherit qt4x11 native python-dir
--- 
-1.7.0.4
+CROSS_COMPILE   = $(shell if [ -f .mvl_cross_compile ]; then \
+                                  cat .mvl_cross_compile; \
+                          fi)
 
+With the patch applied, the variable CROSS_COMPILE isn't used anymore,
+because all cross-tools are specified on the command line in the same
+manner.
+
+Another way to solve this problem could have been to set CROSS_COMPILE
+on the command line instead of in the environment. I haven't tried that.
+I could create an updated patch if this was preferred.
+
+Regards,
+Andreas
 
 
