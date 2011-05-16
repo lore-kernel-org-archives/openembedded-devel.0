@@ -1,35 +1,25 @@
-Received: from mail.dream-property.net ([82.149.226.172])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1QLyrY-0005Gg-R9
+	(envelope-from <mickey@vanille-media.de>) id 1QM0MH-00029H-C2
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 16:33:36 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id CB4783150F1E
+	Mon, 16 May 2011 18:09:25 +0200
+Received: from [192.168.2.2] (e180160125.adsl.alicedsl.de [85.180.160.125])
+	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id 6626358410E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 16:30:46 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id Ps+vpJsG3Vfy
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 16:30:40 +0200 (CEST)
-Received: from [172.22.22.61] (drms-590c46b9.pool.mediaWays.net [89.12.70.185])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id 7B4953150E00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 16:30:40 +0200 (CEST)
-Message-ID: <4DD1350E.5010108@opendreambox.org>
-Date: Mon, 16 May 2011 16:30:38 +0200
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
-MIME-Version: 1.0
+	Mon, 16 May 2011 18:32:50 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-References: <BANLkTimHpb2Jyf=QYk_p0VL95jdNQJGCog@mail.gmail.com>	<1305236006.13652.41.camel@mattotaupa>	<BANLkTimdLk4S_0zjM8NTwXSxrTU_epdC+Q@mail.gmail.com>	<1305238433.13652.47.camel@mattotaupa>	<BANLkTinkK8Erz22QP=2CbyOReFc9b2YnSw@mail.gmail.com>
-	<4DD132C2.5050303@opendreambox.org>
-In-Reply-To: <4DD132C2.5050303@opendreambox.org>
-Subject: Re: wpa-supplicant-0.7.inc patch
+In-Reply-To: <4DD112EA.6090803@eukrea.com>
+References: <1305541323-19773-1-git-send-email-sgh@sgh.dk>
+	<02AB4574-909D-46A2-98E2-585E7A72BEE5@vanille-media.de>
+	<4DD112EA.6090803@eukrea.com>
+Organization: Vanille-Media
+Date: Mon, 16 May 2011 18:06:50 +0200
+Message-ID: <1305562010.11918.15.camel@saphir>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [PATCH 3/3] angstrom: Prefer Qt 4.7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,46 +33,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2011 14:33:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 16 May 2011 16:09:25 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 05/16/2011 04:20 PM, Andreas Oberritter wrote:
-> On 05/16/2011 04:02 PM, Martin Bures wrote:
->> diff --git a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
->> b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
->> index 7649038..abf01c2 100644
->> --- a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
->> +++ b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
->> @@ -63,6 +63,7 @@ do_install () {
->>      cd ${D}${sysconfdir}/network/ && \
->>      ln -sf ../if-pre-up.d/wpa-supplicant if-post-down.d/wpa-supplicant
->>
->> +    cd ${S}
-> 
-> Sorry for not having replied earlier, but I think the more obvious fix
-> is to not use "cd" at all. How about this?
-> 
-> ln -s ../if-pre-up.d/wpa-supplicant
-> ${D}${sysconfdir}/network/if-post-down.d/wpa-supplicant
-> 
-> (Using ln -f just hides possible errors in this case.)
+Am Montag, den 16.05.2011, 14:04 +0200 schrieb Eric B=C3=A9nard:
+> On 16/05/2011 13:38, Dr. Michael Lauer wrote:
+> > I reckon you tested Qt 4.7.3 with PyQt before deleting 4.7.2...
+>=20
+> oops, I just launched bitbake python-pyqt, sorry I'll revert 4.7.2 dele=
+tion if=20
+> pyqt compilation fails.
 
-Btw, I think your patch is for an outdated version. The problem was
-solved in master by this commit:
+No problem, usually I don't care too much about minor updates,
+however PyQt is _very_ finnicky when it comes to the matching Qt version
+-- and I just repaired it after it broke by a Qt delete some months
+ago ;)
 
-commit aa35ba5cf7e1bf30fb2edb1408c0b599ec89290a
-Author: Steve Sakoman <steve@sakoman.com>
-Date:   Tue Apr 19 08:40:52 2011 -0700
+Thanks,
+--=20
+:M:
 
-    wpa-supplicant: Enable CONFIG_CTRL_IFACE_DBUS and CONFIG_CTRL_IFACE_DBUS_NEW
-    
-    Signed-off-by: Steve Sakoman <steve@sakoman.com>
-    Signed-off-by: Koen Kooi <koen@openembedded.org>
-
-The comment about avoiding "cd" still applies, though.
-
-Regards,
-Andreas
 
 
