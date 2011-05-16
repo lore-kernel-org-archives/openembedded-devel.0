@@ -1,34 +1,24 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from bsmtp4.bon.at ([195.3.86.186] helo=bsmtp.bon.at)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1QLtKV-0000Hi-16
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 10:39:07 +0200
-Received: from [2001:638:602:1183:f075:aaf1:e3b6:b14f] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1QLtHj-0003DK-57 by authid <stefan@sostec.de> with srv_auth_cram_md5;
-	Mon, 16 May 2011 10:36:16 +0200
-Received: from stefan by excalibur.local with local (Exim 4.76)
-	(envelope-from <stefan@excalibur.local>)
-	id 1QLtHh-0006DS-IX; Mon, 16 May 2011 10:36:13 +0200
-Date: Mon, 16 May 2011 10:36:13 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110516083613.GD17194@excalibur.local>
-References: <E1QLsrb-0003on-41@melo.openembedded.org>
-	<20110516081406.GA24971@mi.fu-berlin.de>
+	(envelope-from <pgsellmann@portner-elektronik.at>)
+	id 1QLuYw-00021N-Jf for openembedded-devel@lists.openembedded.org;
+	Mon, 16 May 2011 11:58:06 +0200
+Received: from aspire.localdomain (unknown [88.116.171.82])
+	by bsmtp.bon.at (Postfix) with ESMTP id E61EA130087;
+	Mon, 16 May 2011 11:55:06 +0200 (CEST)
+From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+Organization: PORTNER Elektronik
+To: Eric =?iso-8859-1?q?B=E9nard?= <eric@eukrea.com>
+Date: Mon, 16 May 2011 11:55:05 +0200
+User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
+	)
+References: <201104291145.05479.pgsellmann@portner-elektronik.at>
+	<4DCEB690.1070400@eukrea.com>
+In-Reply-To: <4DCEB690.1070400@eukrea.com>
 MIME-Version: 1.0
-In-Reply-To: <20110516081406.GA24971@mi.fu-berlin.de>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
-	autolearn=ham version=3.2.5
-Cc: openembedded-commits@openembedded.org
-Subject: Re: [oe-commits] Stefan Schmidt : llvm2.7_2.7: Add patch for build	errors on newer gcc / glibc combinations
+Message-Id: <201105161155.05490.pgsellmann@portner-elektronik.at>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] linux_2.6.38: update support for PcontrolG20 HW rev 2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,32 +32,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2011 08:39:07 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 16 May 2011 09:58:06 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Hello.
+Hi Eric!
 
-On Mon, 2011-05-16 at 10:14, Henning Heinold wrote:
-> On Mon, May 16, 2011 at 08:09:15AM +0000, git version control wrote:
-> > +Index: llvm-2.7/include/llvm/ADT/SmallVector.h
-> > +===================================================================
-> > +--- llvm-2.7.orig/include/llvm/ADT/SmallVector.h	2011-05-08 17:07:09.000000000 +0200
-> > ++++ llvm-2.7/include/llvm/ADT/SmallVector.h	2011-05-08 17:07:25.000000000 +0200
-> > +@@ -19,6 +19,7 @@
-> > + #include <cassert>
-> > + #include <cstring>
-> > + #include <memory>
-> > ++#include <stddef.h>
-> > + 
-> 
-> Please use #include <cstddef> we are in c++ code here.
+Am Samstag 14 Mai 2011, 19:06:24 schrieb Eric B=E9nard:
+> Hi Peter,
+>=20
+> On 29/04/2011 11:45, Peter Gsellmann wrote:
+> > All prototypes hardware rev 1 are drawn back
+> > so default should be rev 2
+> >
+> > Signed-off-by: Peter Gsellmann<pgsellmann@portner-elektronik.at>
+> > ---
+> >   recipes/linux/linux-2.6.38/pcontrolg20/defconfig   | 1761 +++++++++++=
++++++++++
+> >   .../pcontrolg20/pcontrolg20_2.6.38.patch           |  235 +++
+> >   recipes/linux/linux_2.6.38.bb                      |    2 +
+> >   3 files changed, 1998 insertions(+), 0 deletions(-)
+> >   create mode 100644 recipes/linux/linux-2.6.38/pcontrolg20/defconfig
+> >   create mode 100644 recipes/linux/linux-2.6.38/pcontrolg20/pcontrolg20=
+_2.6.38.patch
+> >
+> I applied this patch and tried to build the kernel but it seems there is =
+no=20
+> machine definition for pcontrolg20 : can you please resend a patch serie =
+to=20
+> add the kernel support and the machine conf file.
+the machine configuration for pcontrolg20 is still not in a stable state:
+At least the kernel patch is stable, but for the at91bootstrap i have made =
+changes for lowlevel initialization and memory detection which i have to br=
+ing in sync with mainline; right now my at91bootstrap patch looks ugly and =
+would be rejected deservedly.
+Same is for U-boot. I patched a specific git-revision with a number of addi=
+tional commands i need for factory testing.
+Even worse, the perpetual discussions about kernel relocation/decompression=
+ convinced me to evaluate alternatives like barebox.
 
-Thats why I send the patch to ml before to gather some review. :)
+So my ToDo-list is:
+(*) commit kernel.patch
+* commit at91bootstrap.patch
+* commit U-boot or Barebox patches
+* commit conf/machine/pcontrolg20.conf
+* commit recipes/pcontrolg20-image.bb
 
-Will update the patch and test with your suggestion.
+If its ok for you this would be the first commit.
 
-regards
-Stefan Schmidt
+I could commit the pcontrolg20.conf also, but the entries for at91boosttrap=
+ and u-boot would be commented out.
+
+Preferred way?
+
+Peter
 
 
