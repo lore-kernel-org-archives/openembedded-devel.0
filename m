@@ -1,33 +1,23 @@
-Received: from 6.26.mail-out.ovh.net ([46.105.35.144] helo=26.mail-out.ovh.net)
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1QLvCZ-0003TL-OJ
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <philb@gnu.org>) id 1QLvhq-0004S1-0V
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 12:39:03 +0200
-Received: (qmail 31303 invoked by uid 503); 16 May 2011 09:55:59 -0000
-Received: from b6.ovh.net (HELO mail94.ha.ovh.net) (213.186.33.56)
-	by 26.mail-out.ovh.net with SMTP; 16 May 2011 09:55:59 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 16 May 2011 12:29:34 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 16 May 2011 12:29:32 +0200
-Message-ID: <4DD0FC8C.4040104@eukrea.com>
-Date: Mon, 16 May 2011 12:29:32 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.10
-MIME-Version: 1.0
-To: pgsellmann@portner-elektronik.at
-References: <201104291145.05479.pgsellmann@portner-elektronik.at>	<4DCEB690.1070400@eukrea.com>
-	<201105161155.05490.pgsellmann@portner-elektronik.at>
-In-Reply-To: <201105161155.05490.pgsellmann@portner-elektronik.at>
-X-Ovh-Tracer-Id: 18197920195259051428
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] linux_2.6.38: update support for PcontrolG20 HW rev 2
+	Mon, 16 May 2011 13:11:22 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QLvFx-0003wB-G4
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 May 2011 12:42:33 +0200
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20110515221111.GC24670@sakrah.homelinux.org>
+References: <4DC8F3A2.2090005@nedap.com>
+	<20110515221111.GC24670@sakrah.homelinux.org>
+Date: Mon, 16 May 2011 12:08:30 +0100
+Message-ID: <1305544110.2429.0.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,54 +31,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2011 10:39:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 16 May 2011 11:11:22 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hi Peter,
+On Sun, 2011-05-15 at 15:11 -0700, Khem Raj wrote:
+> fwiw. oe-core has a working support for x86_64 architecture it will be
+> worthwhile looking at that
 
-On 16/05/2011 11:55, Peter Gsellmann wrote:
-> Am Samstag 14 Mai 2011, 19:06:24 schrieb Eric Bénard:
->> On 29/04/2011 11:45, Peter Gsellmann wrote:
->>> All prototypes hardware rev 1 are drawn back
->>> so default should be rev 2
->>>
->>> Signed-off-by: Peter Gsellmann<pgsellmann@portner-elektronik.at>
->>> ---
->>>    recipes/linux/linux-2.6.38/pcontrolg20/defconfig   | 1761 ++++++++++++++++++++
->>>    .../pcontrolg20/pcontrolg20_2.6.38.patch           |  235 +++
->>>    recipes/linux/linux_2.6.38.bb                      |    2 +
->>>    3 files changed, 1998 insertions(+), 0 deletions(-)
->>>    create mode 100644 recipes/linux/linux-2.6.38/pcontrolg20/defconfig
->>>    create mode 100644 recipes/linux/linux-2.6.38/pcontrolg20/pcontrolg20_2.6.38.patch
->>>
->> I applied this patch and tried to build the kernel but it seems there is no
->> machine definition for pcontrolg20 : can you please resend a patch serie to
->> add the kernel support and the machine conf file.
-> the machine configuration for pcontrolg20 is still not in a stable state:
-> At least the kernel patch is stable, but for the at91bootstrap i have made changes for lowlevel initialization and memory detection which i have to bring in sync with mainline; right now my at91bootstrap patch looks ugly and would be rejected deservedly.
-> Same is for U-boot. I patched a specific git-revision with a number of additional commands i need for factory testing.
-> Even worse, the perpetual discussions about kernel relocation/decompression convinced me to evaluate alternatives like barebox.
->
-good choice ;-)
+How did oe-core solve the problem with OVERRIDES?
 
-> So my ToDo-list is:
-> (*) commit kernel.patch
-> * commit at91bootstrap.patch
-> * commit U-boot or Barebox patches
-> * commit conf/machine/pcontrolg20.conf
-> * commit recipes/pcontrolg20-image.bb
->
-> If its ok for you this would be the first commit.
->
-> I could commit the pcontrolg20.conf also, but the entries for at91boosttrap and u-boot would be commented out.
+p.
 
-yes a kernel recipe without the machine conf file can't be tested : please 
-send the 2 patches (kernel + conf file), then you will be able to add entries 
-for at91bootstrap & u-boot to the conf file later when you add the support for 
-you board in their respective recipes.
 
-thanks
-Eric
 
 
