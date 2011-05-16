@@ -1,21 +1,20 @@
 Received: from cpe.ge-0-2-0-951.faaqnqu1.customer.tele.dk ([93.167.193.22]
 	helo=mail.mikrofyn.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sgh@sgh.dk>) id 1QLuxz-00030M-EK
+	(envelope-from <sgh@sgh.dk>) id 1QLuyX-00035L-LX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 12:23:59 +0200
+	Mon, 16 May 2011 12:24:33 +0200
 Received: from zemeckis.mikrofyn.local ([10.115.0.50]) by mail.mikrofyn.com
 	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 16 May 2011 12:26:03 +0200
+	Mon, 16 May 2011 12:26:42 +0200
 From: =?UTF-8?q?S=C3=B8ren=20Holm?= <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 May 2011 12:21:24 +0200
-Message-Id: <1305541284-18178-1-git-send-email-sgh@sgh.dk>
+Date: Mon, 16 May 2011 12:22:03 +0200
+Message-Id: <1305541323-19773-1-git-send-email-sgh@sgh.dk>
 X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <BANLkTikH4sOR-aupFyQ9ArqF8iXyk0uGtw@mail.gmail.com>
-References: <BANLkTikH4sOR-aupFyQ9ArqF8iXyk0uGtw@mail.gmail.com>
-X-OriginalArrivalTime: 16 May 2011 10:26:03.0140 (UTC)
-	FILETIME=[A8594C40:01CC13B3]
-Subject: [PATCH 2/3] acpid: Make 1.0.10 compile.
+MIME-Version: 1.0
+X-OriginalArrivalTime: 16 May 2011 10:26:42.0156 (UTC)
+	FILETIME=[BF9AAAC0:01CC13B3]
+Subject: [PATCH 3/3] angstrom: Prefer Qt 4.7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,55 +28,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2011 10:23:59 -0000
+X-List-Received-Date: Mon, 16 May 2011 10:24:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Patch is tested on i686.
-Compilation failed with the following error :
+recipe for Qt 4.7.2 got delete, so prefer 4.7.3 instead.
 
-| i686-angstrom-linux-gcc -march=pentiumpro --sysroot=/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -Wshadow -D_GNU_SOURCE -O2 -g -DVERSION="\"1.0.10\""   -c -o
-sock.o sock.c
-| cc1: warnings being treated as errors
-| libnetlink.c: In function 'addraw_l':
-| libnetlink.c:521:56: error: comparison between signed and unsigned integer expressions
+Signed-off-by: Søren Holm <sgh@sgh.dk>
 ---
- recipes/acpid/acpid-1.0.10/libnetlink.diff |   15 +++++++++++++++
- recipes/acpid/acpid_1.0.10.bb              |    1 +
- 2 files changed, 16 insertions(+), 0 deletions(-)
- create mode 100644 recipes/acpid/acpid-1.0.10/libnetlink.diff
+ .../include/angstrom-2010-preferred-versions.inc   |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/acpid/acpid-1.0.10/libnetlink.diff b/recipes/acpid/acpid-1.0.10/libnetlink.diff
-new file mode 100644
-index 0000000..59ab951
---- /dev/null
-+++ b/recipes/acpid/acpid-1.0.10/libnetlink.diff
-@@ -0,0 +1,15 @@
-+diff --git a/libnetlink.c b/libnetlink.c
-+index 6f1ceea..d34dfe4 100644
-+--- a/libnetlink.c
-++++ b/libnetlink.c
-+@@ -518,8 +518,8 @@ int addattr_l(struct nlmsghdr *n, int maxlen, int type, const void *data,
-+ 
-+ int addraw_l(struct nlmsghdr *n, int maxlen, const void *data, int len)
-+ {
-+-	if ((int)NLMSG_ALIGN(n->nlmsg_len) + NLMSG_ALIGN(len) > maxlen) {
-+-		fprintf(stderr, "addraw_l ERROR: message exceeded bound of %d\n",maxlen);
-++	if ((int)NLMSG_ALIGN(n->nlmsg_len) + (int)NLMSG_ALIGN(len) > maxlen) {
-++	fprintf(stderr, "addraw_l ERROR: message exceeded bound of %d\n",maxlen);
-+ 		return -1;
-+ 	}
-+ 
-diff --git a/recipes/acpid/acpid_1.0.10.bb b/recipes/acpid/acpid_1.0.10.bb
-index 9d3170d..f0a6049 100644
---- a/recipes/acpid/acpid_1.0.10.bb
-+++ b/recipes/acpid/acpid_1.0.10.bb
-@@ -2,6 +2,7 @@ require acpid.inc
- 
- SRC_URI_append = " file://event.c.diff \
-                    file://netlink.diff \
-+                   file://libnetlink.diff \
-                    file://gcc44.diff \
-                    file://acpid-sys-stat.patch \
-                  "
+diff --git a/conf/distro/include/angstrom-2010-preferred-versions.inc b/conf/distro/include/angstrom-2010-preferred-versions.inc
+index 611c4e7..87da854 100644
+--- a/conf/distro/include/angstrom-2010-preferred-versions.inc
++++ b/conf/distro/include/angstrom-2010-preferred-versions.inc
+@@ -1,5 +1,5 @@
+ ANGSTROM_MESA_VERSION = "7.9.1"
+-ANGSTROM_QT_VERSION ?= "4.7.2"
++ANGSTROM_QT_VERSION ?= "4.7.3"
+ ANGSTROM_LIBTOOL_VERSION = "2.4"
+ # Use new sysroot feature
+ LIBTOOL_HAS_SYSROOT = "yes"
 -- 
 1.7.4.1
 
