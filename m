@@ -1,23 +1,36 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail.dream-property.net ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1QLwHx-0007wl-Cd
+	(envelope-from <obi@opendreambox.org>) id 1QLwIE-0008SX-JA
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 13:48:41 +0200
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QLvq4-0003xP-KM
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 13:19:52 +0200
-From: Phil Blundell <philb@gnu.org>
+	Mon, 16 May 2011 13:48:59 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id AEB9A3150F12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 May 2011 13:46:08 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id u6g3b12e+L-S
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 May 2011 13:46:00 +0200 (CEST)
+Received: from [172.22.22.61] (drms-590c46b9.pool.mediaWays.net [89.12.70.185])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 14DDD3150F13
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 May 2011 13:46:00 +0200 (CEST)
+Message-ID: <4DD10E76.1060100@opendreambox.org>
+Date: Mon, 16 May 2011 13:45:58 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4DD10D20.6080005@opendreambox.org>
-References: <1302825782-17120-1-git-send-email-obi@opendreambox.org>
-	<4DD10D20.6080005@opendreambox.org>
-Date: Mon, 16 May 2011 12:45:47 +0100
-Message-ID: <1305546347.2429.3.camel@phil-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: [PATCH 1/2] kernel.bbclass: pass KERNEL_VERSION through legitimize_package_name
+References: <1303134465.3910.63.camel@mattotaupa>	<1303134640.3910.67.camel@mattotaupa>	<4DAD7297.2030606@opendreambox.org>	<1303506946.4155.81.camel@mattotaupa>	<AF97BCF4-CD32-4069-BB81-FECAC104F6D9@dominion.thruhere.net>	<1303509611.4155.111.camel@mattotaupa>
+	<iou12i$88c$1@dough.gmane.org>
+	<1305476698.5838.622.camel@mattotaupa>
+In-Reply-To: <1305476698.5838.622.camel@mattotaupa>
+Subject: Re: [RFC] [PATCH 2/2] pkgconfig: add git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,55 +44,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2011 11:48:41 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 16 May 2011 11:48:59 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-I can't help thinking that, in this day and age, those PKG assignments
-probably belong in some distro configuration rather than the recipe
-itself, and it might be worth thinking about booting them out at some
-point.  But, as long as they are there, your change is obviously
-sensible.
-
-Acked-by: Phil Blundell <philb@gnu.org>
-
-p.
-
-On Mon, 2011-05-16 at 13:40 +0200, Andreas Oberritter wrote:
-> Ping
+On 05/15/2011 06:24 PM, Paul Menzel wrote:
+> Am Samstag, den 23.04.2011, 10:02 +0200 schrieb Koen Kooi:
 > 
-> On 04/15/2011 02:03 AM, Andreas Oberritter wrote:
-> > - KERNEL_VERSION may contain characters unsuitable for package
-> >   names, e.g. underscores. Use legitimize_package_name to replace
-> >   those characters.
-> > 
-> > Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> > ---
-> >  classes/kernel.bbclass |    4 ++--
-> >  1 files changed, 2 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-> > index 0187fb3..bded15d 100644
-> > --- a/classes/kernel.bbclass
-> > +++ b/classes/kernel.bbclass
-> > @@ -245,8 +245,8 @@ RDEPENDS_kernel = "kernel-base"
-> >  # Allow machines to override this dependency if kernel image files are 
-> >  # not wanted in images as standard
-> >  RDEPENDS_kernel-base ?= "kernel-image"
-> > -PKG_kernel-image = "kernel-image-${KERNEL_VERSION}"
-> > -PKG_kernel-base = "kernel-${KERNEL_VERSION}"
-> > +PKG_kernel-image = "kernel-image-${@legitimize_package_name('${KERNEL_VERSION}')}"
-> > +PKG_kernel-base = "kernel-${@legitimize_package_name('${KERNEL_VERSION}')}"
-> >  ALLOW_EMPTY_kernel = "1"
-> >  ALLOW_EMPTY_kernel-base = "1"
-> >  ALLOW_EMPTY_kernel-image = "1"
+>> On 23-04-11 00:00, Paul Menzel wrote:
+>>> Date: Sun, 17 Apr 2011 19:19:58 +0200
+>>>
+>>> 1. The revision is close to the upcoming release of pkg-config 0.26. [1]
+>>> 2. The patch `sysrootfix.patch` has been merged upstream [2].
+>>> 3. No embedded GLib is shipped anymore [3]. Therefore drop patches `autofoo.patch` and `glibconfig-sysdefs.h`.
+>>>
+>>> The patch is tested using the following configuration
+>>>
+>>> 	Build Configuration:
+>>> 	BB_VERSION        = "1.12.0"
+>>> 	METADATA_BRANCH   = "pkg-config"
+>>> 	METADATA_REVISION = "d4ae0c5"
+>>> 	TARGET_ARCH       = "arm"
+>>> 	TARGET_OS         = "linux-uclibceabi"
+>>> 	MACHINE           = "beagleboard"
+>>> 	DISTRO            = "minimal-uclibc"
+>>> 	DISTRO_VERSION    = "dev-snapshot-20110417"
+>>> 	TARGET_FPU        = "hard"
+>>>
+>>> and `angstrom-2010.x` and `minimal` too.
+>>>
+>>> [1] http://lists.freedesktop.org/archives/pkg-config/2011-April/000720.html
+>>> [2] http://cgit.freedesktop.org/pkg-config/commit/?id=66d49f1375fec838bcd301bb4ca2ef76cee0e47c
+>>> [3] http://cgit.freedesktop.org/pkg-config/commit/?id=99964eddb5935173fcedfc793e762d7dc7d01bba
+>>>
+>>> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+>>
+>> Acked-by: Koen Kooi <koen@dominion.thruhere.net>
 > 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> I did not commit this yet thinking Andreas would give his ack.
 
+I still think that using SRCPV in PR is just wrong. SRCPV doesn't change
+the version of the package but the version of the packaged content.
+Otherwise it would be called SRCPR.
 
+>>> +PV = "0.25+0.26"
+>>> +PR = "${INC_PR}.0"
+>>> +PR_append = "+gitr${SRCPV}"
+
+Regards,
+Andreas
 
 
