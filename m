@@ -1,34 +1,34 @@
 Received: from mail.dream-property.net ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1QLyi8-0004xQ-Df
+	(envelope-from <obi@opendreambox.org>) id 1QLyrY-0005Gg-R9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 16:23:52 +0200
+	Mon, 16 May 2011 16:33:36 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id 63B943150E00
+	by mail.dream-property.net (Postfix) with ESMTP id CB4783150F1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 16:21:02 +0200 (CEST)
+	Mon, 16 May 2011 16:30:46 +0200 (CEST)
 X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
 Received: from mail.dream-property.net ([127.0.0.1])
 	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id 5KLHIwrS-Ecm
+	port 10024) with LMTP id Ps+vpJsG3Vfy
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 16:20:53 +0200 (CEST)
+	Mon, 16 May 2011 16:30:40 +0200 (CEST)
 Received: from [172.22.22.61] (drms-590c46b9.pool.mediaWays.net [89.12.70.185])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id F00C03150F1E
+	by mail.dream-property.net (Postfix) with ESMTPSA id 7B4953150E00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 16:20:52 +0200 (CEST)
-Message-ID: <4DD132C2.5050303@opendreambox.org>
-Date: Mon, 16 May 2011 16:20:50 +0200
+	Mon, 16 May 2011 16:30:40 +0200 (CEST)
+Message-ID: <4DD1350E.5010108@opendreambox.org>
+Date: Mon, 16 May 2011 16:30:38 +0200
 From: Andreas Oberritter <obi@opendreambox.org>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
 	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <BANLkTimHpb2Jyf=QYk_p0VL95jdNQJGCog@mail.gmail.com>	<1305236006.13652.41.camel@mattotaupa>	<BANLkTimdLk4S_0zjM8NTwXSxrTU_epdC+Q@mail.gmail.com>	<1305238433.13652.47.camel@mattotaupa>
-	<BANLkTinkK8Erz22QP=2CbyOReFc9b2YnSw@mail.gmail.com>
-In-Reply-To: <BANLkTinkK8Erz22QP=2CbyOReFc9b2YnSw@mail.gmail.com>
+References: <BANLkTimHpb2Jyf=QYk_p0VL95jdNQJGCog@mail.gmail.com>	<1305236006.13652.41.camel@mattotaupa>	<BANLkTimdLk4S_0zjM8NTwXSxrTU_epdC+Q@mail.gmail.com>	<1305238433.13652.47.camel@mattotaupa>	<BANLkTinkK8Erz22QP=2CbyOReFc9b2YnSw@mail.gmail.com>
+	<4DD132C2.5050303@opendreambox.org>
+In-Reply-To: <4DD132C2.5050303@opendreambox.org>
 Subject: Re: wpa-supplicant-0.7.inc patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,38 +43,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2011 14:23:52 -0000
+X-List-Received-Date: Mon, 16 May 2011 14:33:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 05/16/2011 04:02 PM, Martin Bures wrote:
-> diff --git a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
-> b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
-> index 7649038..abf01c2 100644
-> --- a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
-> +++ b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
-> @@ -63,6 +63,7 @@ do_install () {
->      cd ${D}${sysconfdir}/network/ && \
->      ln -sf ../if-pre-up.d/wpa-supplicant if-post-down.d/wpa-supplicant
+On 05/16/2011 04:20 PM, Andreas Oberritter wrote:
+> On 05/16/2011 04:02 PM, Martin Bures wrote:
+>> diff --git a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+>> b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+>> index 7649038..abf01c2 100644
+>> --- a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+>> +++ b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+>> @@ -63,6 +63,7 @@ do_install () {
+>>      cd ${D}${sysconfdir}/network/ && \
+>>      ln -sf ../if-pre-up.d/wpa-supplicant if-post-down.d/wpa-supplicant
+>>
+>> +    cd ${S}
 > 
-> +    cd ${S}
+> Sorry for not having replied earlier, but I think the more obvious fix
+> is to not use "cd" at all. How about this?
+> 
+> ln -s ../if-pre-up.d/wpa-supplicant
+> ${D}${sysconfdir}/network/if-post-down.d/wpa-supplicant
+> 
+> (Using ln -f just hides possible errors in this case.)
 
-Sorry for not having replied earlier, but I think the more obvious fix
-is to not use "cd" at all. How about this?
+Btw, I think your patch is for an outdated version. The problem was
+solved in master by this commit:
 
-ln -s ../if-pre-up.d/wpa-supplicant
-${D}${sysconfdir}/network/if-post-down.d/wpa-supplicant
+commit aa35ba5cf7e1bf30fb2edb1408c0b599ec89290a
+Author: Steve Sakoman <steve@sakoman.com>
+Date:   Tue Apr 19 08:40:52 2011 -0700
 
-(Using ln -f just hides possible errors in this case.)
+    wpa-supplicant: Enable CONFIG_CTRL_IFACE_DBUS and CONFIG_CTRL_IFACE_DBUS_NEW
+    
+    Signed-off-by: Steve Sakoman <steve@sakoman.com>
+    Signed-off-by: Koen Kooi <koen@openembedded.org>
+
+The comment about avoiding "cd" still applies, though.
 
 Regards,
 Andreas
-
->      if grep -q ^CONFIG_CTRL_IFACE_DBUS=y .config || grep -q
-> ^CONFIG_CTRL_IFACE_DBUS_NEW=y .config; then
->          install -d ${D}/${sysconfdir}/dbus-1/system.d
->          install -m 644 ${S}/dbus/dbus-wpa_supplicant.conf
-> ${D}/${sysconfdir}/dbus-1/system.d
-
 
 
