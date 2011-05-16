@@ -1,23 +1,21 @@
 Received: from cpe.ge-0-2-0-951.faaqnqu1.customer.tele.dk ([93.167.193.22]
 	helo=mail.mikrofyn.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sgh@sgh.dk>) id 1QLsP0-00071J-AE
+	(envelope-from <sgh@sgh.dk>) id 1QLsc6-0007If-Fz
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 09:39:42 +0200
-Received: from koontz.localnet ([10.115.1.246]) by mail.mikrofyn.com with
-	Microsoft SMTPSVC(6.0.3790.3959); Mon, 16 May 2011 09:41:50 +0200
-From: =?iso-8859-1?q?S=F8ren_Holm?= <sgh@sgh.dk>
+	Mon, 16 May 2011 09:53:14 +0200
+Received: from zemeckis.mikrofyn.local ([10.115.0.50]) by mail.mikrofyn.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 16 May 2011 09:55:22 +0200
+From: =?UTF-8?q?S=C3=B8ren=20Holm?= <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 May 2011 09:36:51 +0200
-User-Agent: KMail/1.13.6 (Linux/2.6.38-9-generic; KDE/4.6.3; i686; ; )
-References: <201105101555.50984.sgh@sgh.dk>
-	<1305059211.9982.18.camel@mattotaupa>
-	<20110515221647.GD24670@sakrah.homelinux.org>
-In-Reply-To: <20110515221647.GD24670@sakrah.homelinux.org>
-MIME-Version: 1.0
-Message-Id: <201105160936.51355.sgh@sgh.dk>
-X-OriginalArrivalTime: 16 May 2011 07:41:50.0609 (UTC)
-	FILETIME=[B7C86010:01CC139C]
-Subject: Re: acpid-1.0.10-r5.1 fails compilation
+Date: Mon, 16 May 2011 09:50:43 +0200
+Message-Id: <1305532243-7690-1-git-send-email-sgh@sgh.dk>
+X-Mailer: git-send-email 1.7.4.1
+In-Reply-To: <201105160936.51355.sgh@sgh.dk>
+References: <201105160936.51355.sgh@sgh.dk>
+X-OriginalArrivalTime: 16 May 2011 07:55:22.0750 (UTC)
+	FILETIME=[9BDB41E0:01CC139E]
+Subject: [PATCH] acpid: Make 1.0.10 compile.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,25 +29,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2011 07:39:42 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 16 May 2011 07:53:14 -0000
 
-Mandag 16 maj 2011 00:16:47 skrev Khem Raj:
->=20
-> code paths are different between arm and x86. Apply this patch=20
->=20
-> http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D616194#15
->=20
-> and if it helps then post a patch for OE
->=20
+Patch is tested on i686.
+Compilation failed with the following error :
 
-I changed the code like that too before the weekend. I was afraid to post i=
-t because a successfull compilation
-is not a guarantee that it behaves correctly. Thanks, I'll post the change.
+ERROR: Logfile of failure stored in: /home/sgh/oe-new-oe/build-vmc16/tmp/work/i686-angstrom-linux/acpid-1.0.10-r5.1/temp/log.do_compile.14235
+Log data follows:
+| ERROR: Function 'do_compile' failed (see /home/sgh/oe-new-oe/build-vmc16/tmp/work/i686-angstrom-linux/acpid-1.0.10-r5.1/temp/log.do_compile.14235 for further information)
+| + cd /home/sgh/oe-new-oe/build-vmc16/tmp/work/i686-angstrom-linux/acpid-1.0.10-r5.1/acpid-1.0.10
+| + do_compile
+| + oe_runmake 'CC=i686-angstrom-linux-gcc -march=pentiumpro --sysroot=/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux' CROSS=i686-angstrom-linux-
+| + oenote make -j 8 'CC=i686-angstrom-linux-gcc -march=pentiumpro --sysroot=/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux' CROSS=i686-angstrom-linux-
+| + echo NOTE: 'make -j 8 CC=i686-angstrom-linux-gcc -march=pentiumpro --sysroot=/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux CROSS=i686-angstrom-linux-'
+| NOTE: make -j 8 CC=i686-angstrom-linux-gcc -march=pentiumpro --sysroot=/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux CROSS=i686-angstrom-linux-
+| + make -j 8 'CC=i686-angstrom-linux-gcc -march=pentiumpro --sysroot=/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux' CROSS=i686-angstrom-linux-
+| i686-angstrom-linux-gcc -march=pentiumpro --sysroot=/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -Wshadow -D_GNU_SOURCE -O2 -g -DVERSION="\"1.0.10\""   -c -o
+acpid.o acpid.c
+| i686-angstrom-linux-gcc -march=pentiumpro --sysroot=/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -Wshadow -D_GNU_SOURCE -O2 -g -DVERSION="\"1.0.10\""   -c -o
+acpi_ids.o acpi_ids.c
+| i686-angstrom-linux-gcc -march=pentiumpro --sysroot=/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -Wshadow -D_GNU_SOURCE -O2 -g -DVERSION="\"1.0.10\""   -c -o
+connection_list.o connection_list.c
+| i686-angstrom-linux-gcc -march=pentiumpro --sysroot=/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -Wshadow -D_GNU_SOURCE -O2 -g -DVERSION="\"1.0.10\""   -c -o
+event.o event.c
+| i686-angstrom-linux-gcc -march=pentiumpro --sysroot=/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -Wshadow -D_GNU_SOURCE -O2 -g -DVERSION="\"1.0.10\""   -c -o
+input_layer.o input_layer.c
+| i686-angstrom-linux-gcc -march=pentiumpro --sysroot=/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -Wshadow -D_GNU_SOURCE -O2 -g -DVERSION="\"1.0.10\""   -c -o
+libnetlink.o libnetlink.c
+| i686-angstrom-linux-gcc -march=pentiumpro --sysroot=/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -Wshadow -D_GNU_SOURCE -O2 -g -DVERSION="\"1.0.10\""   -c -o
+netlink.o netlink.c
+| i686-angstrom-linux-gcc -march=pentiumpro --sysroot=/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -Wshadow -D_GNU_SOURCE -O2 -g -DVERSION="\"1.0.10\""   -c -o
+proc.o proc.c
+| i686-angstrom-linux-gcc -march=pentiumpro --sysroot=/home/sgh/oe-new-oe/build-vmc16/tmp/sysroots/i686-angstrom-linux -W -Wall -Werror -Wundef -Wshadow -D_GNU_SOURCE -O2 -g -DVERSION="\"1.0.10\""   -c -o
+sock.o sock.c
+| cc1: warnings being treated as errors
+| libnetlink.c: In function 'addraw_l':
+| libnetlink.c:521:56: error: comparison between signed and unsigned integer expressions
+| make: *** [libnetlink.o] Error 1
+| make: *** Waiting for unfinished jobs....
+| + die 'oe_runmake failed'
+| + oefatal 'oe_runmake failed'
+| + echo FATAL: 'oe_runmake failed'
+| FATAL: oe_runmake failed
+| + exit 1
+NOTE: package acpid-1.0.10-r5.1: task do_compile: Failed
+---
+ recipes/acpid/acpid-1.0.10/libnetlink.diff |   15 +++++++++++++++
+ recipes/acpid/acpid_1.0.10.bb              |    1 +
+ 2 files changed, 16 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/acpid/acpid-1.0.10/libnetlink.diff
 
-=2D-=20
-S=F8ren Holm
+diff --git a/recipes/acpid/acpid-1.0.10/libnetlink.diff b/recipes/acpid/acpid-1.0.10/libnetlink.diff
+new file mode 100644
+index 0000000..59ab951
+--- /dev/null
++++ b/recipes/acpid/acpid-1.0.10/libnetlink.diff
+@@ -0,0 +1,15 @@
++diff --git a/libnetlink.c b/libnetlink.c
++index 6f1ceea..d34dfe4 100644
++--- a/libnetlink.c
+++++ b/libnetlink.c
++@@ -518,8 +518,8 @@ int addattr_l(struct nlmsghdr *n, int maxlen, int type, const void *data,
++ 
++ int addraw_l(struct nlmsghdr *n, int maxlen, const void *data, int len)
++ {
++-	if ((int)NLMSG_ALIGN(n->nlmsg_len) + NLMSG_ALIGN(len) > maxlen) {
++-		fprintf(stderr, "addraw_l ERROR: message exceeded bound of %d\n",maxlen);
+++	if ((int)NLMSG_ALIGN(n->nlmsg_len) + (int)NLMSG_ALIGN(len) > maxlen) {
+++	fprintf(stderr, "addraw_l ERROR: message exceeded bound of %d\n",maxlen);
++ 		return -1;
++ 	}
++ 
+diff --git a/recipes/acpid/acpid_1.0.10.bb b/recipes/acpid/acpid_1.0.10.bb
+index 9d3170d..f0a6049 100644
+--- a/recipes/acpid/acpid_1.0.10.bb
++++ b/recipes/acpid/acpid_1.0.10.bb
+@@ -2,6 +2,7 @@ require acpid.inc
+ 
+ SRC_URI_append = " file://event.c.diff \
+                    file://netlink.diff \
++                   file://libnetlink.diff \
+                    file://gcc44.diff \
+                    file://acpid-sys-stat.patch \
+                  "
+-- 
+1.7.4.1
+
 
 
