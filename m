@@ -1,23 +1,34 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from mail.dream-property.net ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mickey@vanille-media.de>) id 1QLwAi-0000H6-OR
+	(envelope-from <obi@opendreambox.org>) id 1QLwCg-0000Tf-O3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 13:41:12 +0200
-Received: from [192.168.1.20] (business-092-079-168-007.static.arcor-ip.net
-	[92.79.168.7])
-	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id 1E24E5840A7
+	Mon, 16 May 2011 13:43:14 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 755EF3150F12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 14:04:37 +0200 (CEST)
-Mime-Version: 1.0 (Apple Message framework v1084)
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-In-Reply-To: <1305541323-19773-1-git-send-email-sgh@sgh.dk>
-Date: Mon, 16 May 2011 13:38:22 +0200
-Message-Id: <02AB4574-909D-46A2-98E2-585E7A72BEE5@vanille-media.de>
-References: <1305541323-19773-1-git-send-email-sgh@sgh.dk>
+	Mon, 16 May 2011 13:40:24 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id gCzdQ+wXbQKo
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 May 2011 13:40:18 +0200 (CEST)
+Received: from [172.22.22.61] (drms-590c46b9.pool.mediaWays.net [89.12.70.185])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 1A6D43150E26
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 May 2011 13:40:18 +0200 (CEST)
+Message-ID: <4DD10D20.6080005@opendreambox.org>
+Date: Mon, 16 May 2011 13:40:16 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1084)
-Subject: Re: [PATCH 3/3] angstrom: Prefer Qt 4.7.3
+References: <1302825782-17120-1-git-send-email-obi@opendreambox.org>
+In-Reply-To: <1302825782-17120-1-git-send-email-obi@opendreambox.org>
+Subject: Re: [PATCH 1/2] kernel.bbclass: pass KERNEL_VERSION through legitimize_package_name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,17 +42,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2011 11:41:13 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 16 May 2011 11:43:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-I reckon you tested Qt 4.7.3 with PyQt before deleting 4.7.2...
+Ping
 
-Cheers,
-
-:M:
-
-
+On 04/15/2011 02:03 AM, Andreas Oberritter wrote:
+> - KERNEL_VERSION may contain characters unsuitable for package
+>   names, e.g. underscores. Use legitimize_package_name to replace
+>   those characters.
+> 
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> ---
+>  classes/kernel.bbclass |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+> index 0187fb3..bded15d 100644
+> --- a/classes/kernel.bbclass
+> +++ b/classes/kernel.bbclass
+> @@ -245,8 +245,8 @@ RDEPENDS_kernel = "kernel-base"
+>  # Allow machines to override this dependency if kernel image files are 
+>  # not wanted in images as standard
+>  RDEPENDS_kernel-base ?= "kernel-image"
+> -PKG_kernel-image = "kernel-image-${KERNEL_VERSION}"
+> -PKG_kernel-base = "kernel-${KERNEL_VERSION}"
+> +PKG_kernel-image = "kernel-image-${@legitimize_package_name('${KERNEL_VERSION}')}"
+> +PKG_kernel-base = "kernel-${@legitimize_package_name('${KERNEL_VERSION}')}"
+>  ALLOW_EMPTY_kernel = "1"
+>  ALLOW_EMPTY_kernel-base = "1"
+>  ALLOW_EMPTY_kernel-image = "1"
 
 
 
