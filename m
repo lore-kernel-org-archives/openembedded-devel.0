@@ -1,25 +1,36 @@
-Received: from bsmtp4.bon.at ([195.3.86.186] helo=bsmtp.bon.at)
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pgsellmann@portner-elektronik.at>)
-	id 1QLyCB-0008K8-GK for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 15:50:51 +0200
-Received: from aspire.localdomain (unknown [88.116.171.82])
-	by bsmtp.bon.at (Postfix) with ESMTP id BFD682C400F;
-	Mon, 16 May 2011 15:47:56 +0200 (CEST)
-From: Peter Gsellmann <pgsellmann@portner-elektronik.at>
-Organization: PORTNER Elektronik
-To: Eric =?iso-8859-1?q?B=E9nard?= <eric@eukrea.com>
-Date: Mon, 16 May 2011 15:47:55 +0200
-User-Agent: KMail/1.13.5 (Linux/2.6.32.26-175.fc12.x86_64; KDE/4.4.5; x86_64; ;
-	)
-References: <201104291145.05479.pgsellmann@portner-elektronik.at>
-	<201105161155.05490.pgsellmann@portner-elektronik.at>
-	<4DD0FC8C.4040104@eukrea.com>
-In-Reply-To: <4DD0FC8C.4040104@eukrea.com>
-MIME-Version: 1.0
-Message-Id: <201105161547.56204.pgsellmann@portner-elektronik.at>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] linux_2.6.38: update support for PcontrolG20 HW rev 2
+	(envelope-from <otavio.salvador@gmail.com>) id 1QLyFl-0008Vc-Pb
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 May 2011 15:54:36 +0200
+Received: by gwb11 with SMTP id 11so1633023gwb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 May 2011 06:50:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
+	:x-mailer; bh=Yx0nRCM5fq4/PssH0M5iehDPeWimm50Mp7crNlNrp6s=;
+	b=nxtzMeE0HL7oik0oWJUb2T99nQpsYxgtoXBL03Yp2FH5aYgKUe1xGV68K5Qor4s2zw
+	FWlhOeiBbwH5qtpd/lHNPFZnplHS5eJ3lcl8K+/eeGQDXGJyBE3Xg8EUS3VRHWMMNgus
+	P2DxSr7ZRbau9ebfCKcrTqHg3Zp9dAt25Hu4Q=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=P4DyPi3YA433nZ0+l0BmZsy6HPOHX80guIXJ7iPCNl07lfCNLEvgD3gc11m8jAvcAs
+	4xQVPiofpQsus4TOSMMIzsMSjD60Pc3gVx3aDVMD5TgB+LDBY81RBQQA/jTLzyw3JzUS
+	vAoqvgWy1l0xFIGgj5KiGfzDutwOM7omjKHTg=
+Received: by 10.150.207.17 with SMTP id e17mr3463720ybg.383.1305553841886;
+	Mon, 16 May 2011 06:50:41 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id c3sm1555674ybn.9.2011.05.16.06.50.39
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 16 May 2011 06:50:40 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 16 May 2011 13:50:30 +0000
+Message-Id: <1305553830-26165-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH v3] libpcsclite: add version 1.7.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,136 +44,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2011 13:50:51 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 16 May 2011 13:54:36 -0000
 
-Hi Eric!
-Patch is based on 34cb3c31bfd81035870a8242850884edac80aa11
+The recipe name libpcsclite has been choosen since this is the most
+important and used part of the project. The daemon itself is optional
+and not always required to be installed.
 
-Am Montag 16 Mai 2011, 12:29:32 schrieb Eric B=E9nard:
-> Hi Peter,
->=20
-> On 16/05/2011 11:55, Peter Gsellmann wrote:
-> > Am Samstag 14 Mai 2011, 19:06:24 schrieb Eric B=E9nard:
-> >> On 29/04/2011 11:45, Peter Gsellmann wrote:
-> >>> All prototypes hardware rev 1 are drawn back
-> >>> so default should be rev 2
-> >>>
-> >>> Signed-off-by: Peter Gsellmann<pgsellmann@portner-elektronik.at>
-> >>> ---
-> >>>    recipes/linux/linux-2.6.38/pcontrolg20/defconfig   | 1761 ++++++++=
-++++++++++++
-> >>>    .../pcontrolg20/pcontrolg20_2.6.38.patch           |  235 +++
-> >>>    recipes/linux/linux_2.6.38.bb                      |    2 +
-> >>>    3 files changed, 1998 insertions(+), 0 deletions(-)
-> >>>    create mode 100644 recipes/linux/linux-2.6.38/pcontrolg20/defconfig
-> >>>    create mode 100644 recipes/linux/linux-2.6.38/pcontrolg20/pcontrol=
-g20_2.6.38.patch
-> >>>
-> >> I applied this patch and tried to build the kernel but it seems there =
-is no
-> >> machine definition for pcontrolg20 : can you please resend a patch ser=
-ie to
-> >> add the kernel support and the machine conf file.
-> > the machine configuration for pcontrolg20 is still not in a stable stat=
-e:
-> > At least the kernel patch is stable, but for the at91bootstrap i have m=
-ade changes for lowlevel initialization and memory detection which i have t=
-o bring in sync with mainline; right now my at91bootstrap patch looks ugly =
-and would be rejected deservedly.
-> > Same is for U-boot. I patched a specific git-revision with a number of =
-additional commands i need for factory testing.
-> > Even worse, the perpetual discussions about kernel relocation/decompres=
-sion convinced me to evaluate alternatives like barebox.
-> >
-> good choice ;-)
->=20
-> > So my ToDo-list is:
-> > (*) commit kernel.patch
-> > * commit at91bootstrap.patch
-> > * commit U-boot or Barebox patches
-> > * commit conf/machine/pcontrolg20.conf
-> > * commit recipes/pcontrolg20-image.bb
-> >
-> > If its ok for you this would be the first commit.
-> >
-> > I could commit the pcontrolg20.conf also, but the entries for at91boost=
-trap and u-boot would be commented out.
->=20
-> yes a kernel recipe without the machine conf file can't be tested : pleas=
-e=20
-> send the 2 patches (kernel + conf file), then you will be able to add ent=
-ries=20
-> for at91bootstrap & u-boot to the conf file later when you add the suppor=
-t for=20
-> you board in their respective recipes.
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ meta-oe/recipes-support/pcsc-lite/files/pcscd.init |   32 ++++++++++++++++
+ .../recipes-support/pcsc-lite/libpcsclite_1.7.2.bb |   39 ++++++++++++++++++++
+ 2 files changed, 71 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/pcsc-lite/files/pcscd.init
+ create mode 100644 meta-oe/recipes-support/pcsc-lite/libpcsclite_1.7.2.bb
 
-=46rom 69cc3b9bcef7534a18dc780506e5678e0538eb58 Mon Sep 17 00:00:00 2001
-=46rom: Peter Gsellmann <pgsellmann@portner-elektronik.at>
-Date: Mon, 16 May 2011 12:01:43 +0200
-Subject: [PATCH] adding machine PControlG20
-
-This is a no-screen machine.
-=46eaturing NV-RAM, Isolated RS485 (Modbus-RTU), Ethernet switch, ...
-
-Signed-off-by: Peter Gsellmann <pgsellmann@portner-elektronik.at>
-=2D--
- conf/machine/pcontrolg20.conf |   39 +++++++++++++++++++++++++++++++++++++=
-++
- 1 files changed, 39 insertions(+), 0 deletions(-)
- create mode 100644 conf/machine/pcontrolg20.conf
-
-diff --git a/conf/machine/pcontrolg20.conf b/conf/machine/pcontrolg20.conf
+diff --git a/meta-oe/recipes-support/pcsc-lite/files/pcscd.init b/meta-oe/recipes-support/pcsc-lite/files/pcscd.init
 new file mode 100644
-index 0000000..9710de9
-=2D-- /dev/null
-+++ b/conf/machine/pcontrolg20.conf
+index 0000000..92385ab
+--- /dev/null
++++ b/meta-oe/recipes-support/pcsc-lite/files/pcscd.init
+@@ -0,0 +1,32 @@
++#!/bin/sh
++DAEMON=/usr/sbin/pcscd
++NAME=pcscd
++DESC="PCSC Daemon"
++PIDFILE=/var/run/pcscd/pcscd.pid
++ARGS=""
++
++test -f $DAEMON || exit 0
++
++case "$1" in
++    start)
++        echo -n "Starting $DESC: $NAME"
++        start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON -- $ARGS
++        echo "."
++        ;;
++    stop)
++        echo -n "Stopping $DESC: $NAME"
++        start-stop-daemon --stop --quiet --pidfile $PIDFILE --exec $DAEMON
++        echo "."
++        ;;
++    restart)
++        $0 stop
++        sleep 1
++        $0 start
++        ;;
++    *)
++        echo "Usage: $0 {start|stop|restart}"
++        exit 1
++        ;;
++esac
++
++exit 0
+diff --git a/meta-oe/recipes-support/pcsc-lite/libpcsclite_1.7.2.bb b/meta-oe/recipes-support/pcsc-lite/libpcsclite_1.7.2.bb
+new file mode 100644
+index 0000000..48d555b
+--- /dev/null
++++ b/meta-oe/recipes-support/pcsc-lite/libpcsclite_1.7.2.bb
 @@ -0,0 +1,39 @@
-+#@TYPE: Machine
-+#@Name: PControl G20
-+#@DESCRIPTION: Machine configuration for the PControl_G20 with Taskit Stam=
-p9g20.
++DESCRIPTION = "PC/SC Lite smart card framework and applications"
++HOMEPAGE = "http://pcsclite.alioth.debian.org/"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=c8e551349dc346258274f0007679e149"
++DEPENDS = "udev"
++PR = "r0"
 +
-+TARGET_ARCH =3D "arm"
++SRC_URI = "https://alioth.debian.org/frs/download.php/3533/pcsc-lite-${PV}.tar.bz2 \
++           file://pcscd.init "
 +
-+MACHINE_FEATURES =3D "kernel26 ext2 ethernet serial mmc"
-+MACHINE_FEATURES +=3D "usbhost usbgadget"
++SRC_URI[md5sum] = "47e7055cfc14399fdaa1b7a4aa06e5aa"
++SRC_URI[sha256sum] = "41f13d552eaa2c3978fbb6f2125e81903a0767011d999052fd1a6ee03880b398"
 +
-+GUI_MACHINE_CLASS =3D "noscreen"
++inherit autotools update-rc.d
 +
-+PREFERRED_PROVIDER_virtual/kernel =3D "linux"
++EXTRA_OECONF = " \
++	--disable-libusb \
++	--enable-libudev \
++	--enable-usbdropdir=${libdir}/pcsc/drivers \
++	"
 +
-+MACHINE_EXTRA_RRECOMMENDS =3D " \
-+    "
++S = "${WORKDIR}/pcsc-lite-${PV}"
 +
-+PREFERRED_PROVIDER_xserver =3D "xserver-kdrive"
++do_install() {
++	oe_runmake DESTDIR="${D}" install
++	install -d "${D}/${sysconfdir}/init.d"
++	install -m 755 "${WORKDIR}/pcscd.init" "${D}/${sysconfdir}/init.d/pcscd"
 +
-+KERNEL_IMAGETYPE =3D "uImage"
++	# handle vars values
++	sed -i 's,/usr/sbin,${sbindir},g;s,/var,${localstatedir},g' "${D}/${sysconfdir}/init.d/pcscd"
++}
 +
-+PREFERRED_PROVIDER_classpath =3D "classpath-minimal"
-+PREFERRED_PROVIDER_virtual/java-initial =3D "jamvm-initial"
++PACKAGES =+ "pcscd"
 +
-+#don't try to access tty1
-+USE_VT =3D "0"
++INITSCRIPT_PACKAGES = "pcscd"
++INITSCRIPT_NAME_pcscd = "pcscd"
++INITSCRIPT_PARAMS_pcscd = "defaults"
 +
-+SERIAL_CONSOLE =3D "115200 ttyS0"
-+
-+IMAGE_FSTYPES =3D "tar.gz jffs2"
-+
-+IMAGE_ROOTFS_SIZE =3D "1927168"
-+
-+module_autoload_plat_ram   =3D "plat_ram"
-+module_autoload_uio_pdrv   =3D "uio_pdrv"
-+module_autoload_w1_gpio    =3D "w1_gpio"
-+module_autoload_i2c_gpio   =3D "i2c_gpio"
-+module_autoload_g_ether    =3D "g_ether"
-+
-+require conf/machine/include/tune-arm926ejs.inc
-=2D-=20
-1.7.2.3
-
++FILES_pcscd = "${bindir}/pscsd ${sysconfdir}/init.d"
+-- 
+1.7.2.5
 
 
 
