@@ -1,25 +1,23 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mickey@vanille-media.de>) id 1QM0MH-00029H-C2
+	(envelope-from <philb@gnu.org>) id 1QM122-0003By-7V
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 18:09:25 +0200
-Received: from [192.168.2.2] (e180160125.adsl.alicedsl.de [85.180.160.125])
-	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id 6626358410E
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 18:32:50 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Mon, 16 May 2011 18:52:34 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QM0a6-00046B-JF
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 May 2011 18:23:42 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4DD112EA.6090803@eukrea.com>
-References: <1305541323-19773-1-git-send-email-sgh@sgh.dk>
-	<02AB4574-909D-46A2-98E2-585E7A72BEE5@vanille-media.de>
-	<4DD112EA.6090803@eukrea.com>
-Organization: Vanille-Media
-Date: Mon, 16 May 2011 18:06:50 +0200
-Message-ID: <1305562010.11918.15.camel@saphir>
+In-Reply-To: <BANLkTimSNvdsc1BoCk4ofNh4-nFuO5bg2A@mail.gmail.com>
+References: <1305545218.3424.29.camel@rex>
+	<BANLkTimSNvdsc1BoCk4ofNh4-nFuO5bg2A@mail.gmail.com>
+Date: Mon, 16 May 2011 17:49:42 +0100
+Message-ID: <1305564582.2429.90.camel@phil-desktop>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-Subject: Re: [PATCH 3/3] angstrom: Prefer Qt 4.7.3
+X-Mailer: Evolution 2.30.3 
+Subject: Re: OpenEmbedded Core - Ready for extended users
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,26 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2011 16:09:25 -0000
+X-List-Received-Date: Mon, 16 May 2011 16:52:34 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Am Montag, den 16.05.2011, 14:04 +0200 schrieb Eric B=C3=A9nard:
-> On 16/05/2011 13:38, Dr. Michael Lauer wrote:
-> > I reckon you tested Qt 4.7.3 with PyQt before deleting 4.7.2...
->=20
-> oops, I just launched bitbake python-pyqt, sorry I'll revert 4.7.2 dele=
-tion if=20
-> pyqt compilation fails.
+On Mon, 2011-05-16 at 14:52 +0200, Frans Meulenbroeks wrote:
+> I think the community could benefit if you add info (a pointer) in this
+> thread
+> - how to set up a build environment
+> - policies on what goes into oe-core and meta-oe and what not (and how to
+> deal with things that do not go into it)
+> - a migration scenario from the current repo to the new structure (what are
+> we doing with the existing recipes)
+> - how to add new distro's and bsp's
+> 
+> I know some (if not all) info has been sent around over time, but I feel it
+> would help if this announcement would carry the info to get people started
+> (and/or point to a web page that has the above info).
 
-No problem, usually I don't care too much about minor updates,
-however PyQt is _very_ finnicky when it comes to the matching Qt version
--- and I just repaired it after it broke by a Qt delete some months
-ago ;)
+Yes, agreed, I think that would be useful.  The build environment setup
+is certainly a bit different to "classic" oe and it took me a while to
+figure it out.  At the time there didn't seem to be much documentation
+on how that stuff was meant to work, though with hindsight I now suspect
+the Poky manual might have been the place to look.
 
-Thanks,
---=20
-:M:
+p.
+
 
 
 
