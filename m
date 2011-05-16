@@ -1,35 +1,23 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QLs4O-0006ap-6U for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 09:18:24 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QLs1b-0003tP-OY for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 09:15:31 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 09:15:31 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 09:15:31 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from cpe.ge-0-2-0-951.faaqnqu1.customer.tele.dk ([93.167.193.22]
+	helo=mail.mikrofyn.com) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <sgh@sgh.dk>) id 1QLsP0-00071J-AE
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 May 2011 09:39:42 +0200
+Received: from koontz.localnet ([10.115.1.246]) by mail.mikrofyn.com with
+	Microsoft SMTPSVC(6.0.3790.3959); Mon, 16 May 2011 09:41:50 +0200
+From: =?iso-8859-1?q?S=F8ren_Holm?= <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 16 May 2011 09:15:19 +0200
-Message-ID: <iqqiu6$5pp$1@dough.gmane.org>
-References: <1305495926-21490-1-git-send-email-otavio@ossystems.com.br>
-	<1305495926-21490-2-git-send-email-otavio@ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1305495926-21490-2-git-send-email-otavio@ossystems.com.br>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-oe][PATCH v1 2/3] libpcsclite: add version 1.7.2
+Date: Mon, 16 May 2011 09:36:51 +0200
+User-Agent: KMail/1.13.6 (Linux/2.6.38-9-generic; KDE/4.6.3; i686; ; )
+References: <201105101555.50984.sgh@sgh.dk>
+	<1305059211.9982.18.camel@mattotaupa>
+	<20110515221647.GD24670@sakrah.homelinux.org>
+In-Reply-To: <20110515221647.GD24670@sakrah.homelinux.org>
+MIME-Version: 1.0
+Message-Id: <201105160936.51355.sgh@sgh.dk>
+X-OriginalArrivalTime: 16 May 2011 07:41:50.0609 (UTC)
+	FILETIME=[B7C86010:01CC139C]
+Subject: Re: acpid-1.0.10-r5.1 fails compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,45 +31,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2011 07:18:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 16 May 2011 07:39:42 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Mandag 16 maj 2011 00:16:47 skrev Khem Raj:
+>=20
+> code paths are different between arm and x86. Apply this patch=20
+>=20
+> http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D616194#15
+>=20
+> and if it helps then post a patch for OE
+>=20
 
-On 15-05-11 23:45, Otavio Salvador wrote:
-> The recipe name libpcsclite has been choosen since this is the most
-> important and used part of the project. The daemon itself is optional
-> and not always required to be installed.
+I changed the code like that too before the weekend. I was afraid to post i=
+t because a successfull compilation
+is not a guarantee that it behaves correctly. Thanks, I'll post the change.
 
-Wouldn't debian.bbclass already take care of such renaming with proper
-packaging?
-
-
-
-> +++ b/meta-oe/recipes-support/pcsc-lite/libpcsclite_1.7.2.bb
-
-> +INITSCRIPT_PACKAGES = "pcscd"
-> +INITSCRIPT_NAME_pcscd = "pcscd"
-> +INITSCRIPT_PARAMS_pcscd = "defaults"
-
-These should go near the other _pscsd entries
-
-> +
-> +EXTRA_OECONF = " \
-> +	--enable-libusb \
-> +	--disable-libudev \
-
-Please add the proper libusb to DEPENDS and a comment why udev is in
-DEPENDS, but disabled
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFN0M8GMkyGM64RGpERAsJXAJ9aFHqXmtSGZ2rDgvTSnu+5DAPK/wCeNonq
-weHpoQIB5GTXDvMvOjT4d/w=
-=rHle
------END PGP SIGNATURE-----
-
+=2D-=20
+S=F8ren Holm
 
 
