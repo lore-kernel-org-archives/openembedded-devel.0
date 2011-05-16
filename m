@@ -1,35 +1,40 @@
-Received: from mail.dream-property.net ([82.149.226.172])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1QLyOV-0000hU-Db
+	(envelope-from <needemesleepe@gmail.com>) id 1QLyQ7-0000nn-UB
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 16:03:35 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id 056643150F19
+	Mon, 16 May 2011 16:05:16 +0200
+Received: by pzk36 with SMTP id 36so2188544pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 16:00:45 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id ToUsX4JMcQMF
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 16:00:38 +0200 (CEST)
-Received: from [172.22.22.61] (drms-590c46b9.pool.mediaWays.net [89.12.70.185])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id 15F793150F0E
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 16:00:37 +0200 (CEST)
-Message-ID: <4DD12E04.6050602@opendreambox.org>
-Date: Mon, 16 May 2011 16:00:36 +0200
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+	Mon, 16 May 2011 07:02:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=XQJr++NejNrwshvGhGJw9+qbkcVmLQytWhV7LpLjraI=;
+	b=XYcVh3SzyVVQ+1fA1qnfxaZHyigoOHn1YWIRKe0yqUxOTjjT4DfYreBJlXsrZE3YZK
+	XSi0wFBNehCQfZWa2EDGuS1qgs/ex0r86xL7ziZWsaVG82qHlgPusRrFF2fzcWtBhy0R
+	FGVVUimQXAP9sV+HrvXT6oX7K/6uGt2IDFd70=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	b=K45AGSTE8oPwwJBIEAt0JyIQ6KJTjFxQvdefGTfIUsuH8Lroc2k0XN1EweCs+VDGN3
+	kG6mzJLjsFShIrvppDsrRSb7Exo/b8eJeD4KouJhILcNwRyd/JzEYLzHwTEwfdqKKJJh
+	KQjmFwXqKw+IBaqMiUoiksXTqsu7HK9/7VnyU=
 MIME-Version: 1.0
+Received: by 10.68.64.225 with SMTP id r1mr7735139pbs.250.1305554542245; Mon,
+	16 May 2011 07:02:22 -0700 (PDT)
+Received: by 10.68.46.233 with HTTP; Mon, 16 May 2011 07:02:22 -0700 (PDT)
+In-Reply-To: <1305238433.13652.47.camel@mattotaupa>
+References: <BANLkTimHpb2Jyf=QYk_p0VL95jdNQJGCog@mail.gmail.com>
+	<1305236006.13652.41.camel@mattotaupa>
+	<BANLkTimdLk4S_0zjM8NTwXSxrTU_epdC+Q@mail.gmail.com>
+	<1305238433.13652.47.camel@mattotaupa>
+Date: Mon, 16 May 2011 10:02:22 -0400
+Message-ID: <BANLkTinkK8Erz22QP=2CbyOReFc9b2YnSw@mail.gmail.com>
+From: Martin Bures <needemesleepe@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1305546074-18796-1-git-send-email-obi@opendreambox.org>
-	<1305551007.5159.4.camel@mattotaupa>
-In-Reply-To: <1305551007.5159.4.camel@mattotaupa>
-Subject: Re: [PATCH] lib/oe/unpack.py: unpack rar archives
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: steve@sakoman.com
+Subject: Re: wpa-supplicant-0.7.inc patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,44 +48,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2011 14:03:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 16 May 2011 14:05:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 05/16/2011 03:03 PM, Paul Menzel wrote:
-> Am Montag, den 16.05.2011, 11:41 +0000 schrieb Andreas Oberritter:
->> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
->> ---
->>  lib/oe/unpack.py |    2 ++
->>  1 files changed, 2 insertions(+), 0 deletions(-)
->>
->> diff --git a/lib/oe/unpack.py b/lib/oe/unpack.py
->> index 8e8bf36..fa517d8 100644
->> --- a/lib/oe/unpack.py
->> +++ b/lib/oe/unpack.py
->> @@ -96,6 +96,8 @@ def unpack_file(file, destdir, parameters, env=None):
->>              if dos:
->>                  cmd = '%s -a' % cmd
->>              cmd = "%s '%s'" % (cmd, file)
->> +        elif file.endswith('.rar'):
->> +            cmd = 'unrar x %s' % file
->>  
->>      if not unpack or not cmd:
->>          if os.path.isdir(file):
-> 
-> 1. What program needs this? I am just asking to be able to test this.
+I have updated the patch and simplified it a bit.  I do not want to switch
+the recipe to use defconfig instead of .config because defconfig is modified
+by the recipe.
 
-A recipe in a private layer.
+The change simplifies down to just changing the directory back to ${S}.
+Then .config can be found again.  The line above the first test changes the
+pwd and this is the problem.
 
-> 2. Will `unrar-native` automatically be build when such an archive is
-> encountered?
+As I already submitted the patch via email, I will continue for this one and
+use git's submission mechanism in the future.
 
-No. IIRC, adding that dependency created a non-trivial dependency
-problem. I figured it would be preferrable to use the host's unrar.
+Best regards,
+martin.
 
-> Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+From f3f91d271e2f8664b72ed77fc523a733094f701a Mon Sep 17 00:00:00 2001
+From: Martin Bures <needemesleepe@gmail.com>
+Date: Mon, 16 May 2011 09:47:51 -0400
+Subject: [PATCH] wpa-supplicant: fixed .inc recipe to correctly deploy dbus
+configuration
+ files when dbus is configured.
 
-Thanks,
-Andreas
+The current recipe changes the directory, changing the scope such that
+the recipe cannot resolve .config.  When tests are made whether .config
+contains DBUS configurations, it always fails.  This causes the
+placement of DBUS configuration files to always fail.
 
+Signed-off-by: Martin Bures <needemesleepe@gmail.com>
+---
+ recipes/wpa-supplicant/wpa-supplicant-0.7.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+index 7649038..abf01c2 100644
+--- a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
++++ b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+@@ -63,6 +63,7 @@ do_install () {
+     cd ${D}${sysconfdir}/network/ && \
+     ln -sf ../if-pre-up.d/wpa-supplicant if-post-down.d/wpa-supplicant
+
++    cd ${S}
+     if grep -q ^CONFIG_CTRL_IFACE_DBUS=y .config || grep -q
+^CONFIG_CTRL_IFACE_DBUS_NEW=y .config; then
+         install -d ${D}/${sysconfdir}/dbus-1/system.d
+         install -m 644 ${S}/dbus/dbus-wpa_supplicant.conf
+${D}/${sysconfdir}/dbus-1/system.d
+-- 
+1.7.0.4
+
+
+On Thu, May 12, 2011 at 6:13 PM, Paul Menzel <
+paulepanter@users.sourceforge.net> wrote:
+
+> Dear Martin,
+>
+>
+> Am Donnerstag, den 12.05.2011, 17:54 -0400 schrieb Martin Bures:
+>
+> > I will take a look at the policy and try to update the patch tomorrow.
+>
+> thanks.
+>
+> > As for your questions/comments about .config.  That was how the recipe
+> was
+> > when I found it - I was just trying to make minimal modifications from
+> what
+> > was there to get it working.  I agree that it could be changed to use
+> > defconfig.  As with the patch submission guidelines, I will take a look
+> and
+> > see if this change as-suggested works correctly tomorrow and modify and
+> > resubmit the patch accordingly.
+>
+> Please also take a look at commit aa35ba5c [1] and maybe even CC the
+> author and committer.
+>
+>        commit aa35ba5cf7e1bf30fb2edb1408c0b599ec89290a
+>        Author: Steve Sakoman <steve@sakoman.com>
+>        Date:   Tue Apr 19 08:40:52 2011 -0700
+>
+>            wpa-supplicant: Enable CONFIG_CTRL_IFACE_DBUS and
+> CONFIG_CTRL_IFACE_DBUS_NEW
+>
+>            Signed-off-by: Steve Sakoman <steve@sakoman.com>
+>            Signed-off-by: Koen Kooi <koen@openembedded.org>
+>
+> I do not know what build configuration you use. Please remember to write
+> down what version you are using and what distribution and machine.
+>
+>
+> Thanks,
+>
+> Paul
+>
+>
+> [1]
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=aa35ba5cf7e1bf30fb2edb1408c0b599ec89290a
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
