@@ -1,30 +1,30 @@
-Received: from mail.dream-property.net ([82.149.226.172])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1QLwDd-0006Jw-Jt
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 13:44:13 +0200
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <richard.purdie@linuxfoundation.org>)
+	id 1QLwGE-0007aK-9O
+	for openembedded-devel@openembedded.org; Mon, 16 May 2011 13:46:54 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id B27603150E26
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 13:41:21 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id PUOZSapVZhef
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 13:41:15 +0200 (CEST)
-Received: from pepe.dream-property.nete (dreamboxupdate.com [82.149.226.174])
-	by mail.dream-property.net (Postfix) with SMTP id BD0A93150F12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 13:41:14 +0200 (CEST)
-Received: by pepe.dream-property.nete (sSMTP sendmail emulation);
-	Mon, 16 May 2011 11:41:14 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 May 2011 11:41:14 +0000
-Message-Id: <1305546074-18796-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.2.5
-Subject: [PATCH] lib/oe/unpack.py: unpack rar archives
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p4GBR71X018909
+	for <openembedded-devel@openembedded.org>;
+	Mon, 16 May 2011 12:27:07 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 18804-02 for <openembedded-devel@openembedded.org>;
+	Mon, 16 May 2011 12:27:03 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p4GBQx1f018903
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Mon, 16 May 2011 12:27:01 +0100
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Date: Mon, 16 May 2011 12:26:58 +0100
+Message-ID: <1305545218.3424.29.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: OpenEmbedded Core - Ready for extended users
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,28 +38,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2011 11:44:13 -0000
+X-List-Received-Date: Mon, 16 May 2011 11:46:54 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
----
- lib/oe/unpack.py |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+Hi,
 
-diff --git a/lib/oe/unpack.py b/lib/oe/unpack.py
-index 8e8bf36..fa517d8 100644
---- a/lib/oe/unpack.py
-+++ b/lib/oe/unpack.py
-@@ -96,6 +96,8 @@ def unpack_file(file, destdir, parameters, env=None):
-             if dos:
-                 cmd = '%s -a' % cmd
-             cmd = "%s '%s'" % (cmd, file)
-+        elif file.endswith('.rar'):
-+            cmd = 'unrar x %s' % file
- 
-     if not unpack or not cmd:
-         if os.path.isdir(file):
--- 
-1.7.2.5
+The TSC has been tasked with working out how OE and Yocto could work
+together and people have no doubt seen the discussions about OE-Core.
+
+We're now pleased to formally announce that we feel OE-Core is ready for
+exposure to more users and we'd like to encourage people to have a look
+at it and experiment and develop with it.
+
+Just to recap on the background for this, splitting up OE into
+components has been a topic of discussion for a long time, certainly at
+every OEDEM. Until now this hasn't happened partly due to resource
+issues but also lack of tooling and the lack of a well thought out plan.
+We now feel these issues have been addressed and that we have a good
+plan in place. The promotion and use of layers is the only real way OE
+can scale as a project yet stay maintainable and testable.
+
+Things that aren't part of oe-core fall to the meta-oe layer which is
+where we intend the current wider support contained in oe-devel to be
+maintained. The people working on meta-oe so far would love to see more
+contributions. Both repositories are currently working on a "pull" model
+and people using them so far have felt a benefit to this for code
+quality.
+
+Discussion and development on oe-core is happening on the
+openembedded-core mailing list since otherwise it would be hard to
+filter out which patches and discussion were for which repository. We
+look forward to seeing more people getting involved there!
+
+(http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core)
+
+Cheers,
+
+Richard
+(Communicating on behalf of the TSC)
+
+
+
+
+
+
+
 
 
 
