@@ -1,34 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QLwTv-00040P-Ec for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 14:01:03 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QLwR8-0006ik-Ln for openembedded-devel@lists.openembedded.org;
-	Mon, 16 May 2011 13:58:10 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 13:58:10 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1QLwYV-0004D1-P2
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 May 2011 14:05:47 +0200
+Received: by bwz5 with SMTP id 5so4073459bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 13:58:10 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 16 May 2011 05:02:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=patLCy31acAmpubI9MlM8IXj7iDM9jhySCCI7dC/bnk=;
+	b=hVSGWOtvSWlrRwmfdepXlAT1yDdDEwd9rjnATGP9gQAz5m+TMpZKkuthAMnBjAxGE0
+	uoD1ymhBPJBArlKvXCMyNzKVvAeKzpbyODRZ5YEpgPcNsPW0KwBOLDI6Uy6q48aX4Th/
+	o8wl/19DWmO278flndfI51R9wkftjm1K5Mzho=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=c8Aobyjk0F6/lwot3aL4ob2jbLpjes3GNMSSHNRNCbLeoJ9ivXKSuQZgnPUJ4p738r
+	Jib9IM5ecz9ZnBhSh0qXeK0HRkIx6BJUkm4MElTG5XG369KEvfOjv2Qy3IZmirSR4ZkF
+	dhHHaBSb1gsMkrQhgZTF0ioAUmYvpjnqG8ccg=
+MIME-Version: 1.0
+Received: by 10.204.143.88 with SMTP id t24mr2431224bku.189.1305547372625;
+	Mon, 16 May 2011 05:02:52 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.79.70 with HTTP; Mon, 16 May 2011 05:02:52 -0700 (PDT)
+In-Reply-To: <iqqiu6$5pp$1@dough.gmane.org>
+References: <1305495926-21490-1-git-send-email-otavio@ossystems.com.br>
+	<1305495926-21490-2-git-send-email-otavio@ossystems.com.br>
+	<iqqiu6$5pp$1@dough.gmane.org>
+Date: Mon, 16 May 2011 09:02:52 -0300
+X-Google-Sender-Auth: -SWjdOryB0vS8iHBVyQZP0yXwv0
+Message-ID: <BANLkTinQ5v1e6E+1nG2UWzsfCz79yP_sMQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 16 May 2011 13:57:56 +0200
-Message-ID: <iqr3g4$4gf$1@dough.gmane.org>
-References: <1305545218.3424.29.camel@rex>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1305545218.3424.29.camel@rex>
-X-Enigmail-Version: 1.0.1
-Subject: Re: OpenEmbedded Core - Ready for extended users
+Subject: Re: [meta-oe][PATCH v1 2/3] libpcsclite: add version 1.7.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,44 +49,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2011 12:01:03 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 16 May 2011 12:05:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, May 16, 2011 at 04:15, Koen Kooi <koen@dominion.thruhere.net> wrote=
+:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 15-05-11 23:45, Otavio Salvador wrote:
+>> The recipe name libpcsclite has been choosen since this is the most
+>> important and used part of the project. The daemon itself is optional
+>> and not always required to be installed.
+>
+> Wouldn't debian.bbclass already take care of such renaming with proper
+> packaging?
 
-On 16-05-11 13:26, Richard Purdie wrote:
+It does for soname but not for -dev and -doc that is mostly related to
+the library, not the daemon.
 
-> Things that aren't part of oe-core fall to the meta-oe layer which is
-> where we intend the current wider support contained in oe-devel to be
-> maintained. The people working on meta-oe so far would love to see more
-> contributions. Both repositories are currently working on a "pull" model
-> and people using them so far have felt a benefit to this for code
-> quality.
+>> +++ b/meta-oe/recipes-support/pcsc-lite/libpcsclite_1.7.2.bb
+>
+>> +INITSCRIPT_PACKAGES =3D "pcscd"
+>> +INITSCRIPT_NAME_pcscd =3D "pcscd"
+>> +INITSCRIPT_PARAMS_pcscd =3D "defaults"
+>
+> These should go near the other _pscsd entries
+>
+>> +
+>> +EXTRA_OECONF =3D " \
+>> + =A0 =A0 --enable-libusb \
+>> + =A0 =A0 --disable-libudev \
+>
+> Please add the proper libusb to DEPENDS and a comment why udev is in
+> DEPENDS, but disabled
 
-The idea is that every layer has a top level README describing how to
-contribute.
+Fixed. Will post it again.
 
-For meta-oe:
-http://cgit.openembedded.org/cgit.cgi/meta-openembedded/tree/meta-oe/README
-
-And for meta-angstrom:
-http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-angstrom/tree/README
-
-If someone wants to come up with a standard for the layer README files,
-please do!
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFN0RFEMkyGM64RGpERAps4AJ9WHjtvVSCIkp8AvJ9GtLij/11RGgCePlMc
-oMLNqa9vr5yd99HcV6aqrpY=
-=Gb4s
------END PGP SIGNATURE-----
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
