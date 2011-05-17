@@ -1,34 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QME4S-0003Ro-5J for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 08:47:56 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QME1g-0000Lb-Qt for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 08:45:04 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 May 2011 08:45:04 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <eyalreizer@googlemail.com>) id 1QME4x-0003Wo-AI
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 May 2011 08:48:27 +0200
+Received: by gxk3 with SMTP id 3so62007gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 May 2011 08:45:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 16 May 2011 23:45:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=sY09st19aP3Iu3aqGG2H4luIByDAM5or+NUj+nMnl7M=;
+	b=frj68L+49kXzCjVb7bM80PwckqyduTYFLdS+6m1bRNkATJz706cR1iSw6hc5DiI4nG
+	iBp+p0+vXvqcMaqF2NMuPtX4T9DiWoaaQWihIyPyRDMlbFNAguF0Hxz/NiIzEPL8Cj8E
+	NgVp43zKLn4AXSJ4ozvDzhOuP6JVvWrEMFHsQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=T6ecwpPm/pX3sk6D4tMqPcJ9650aEreoyaB470zru4CP3Ooca2LGA+KbALxcMPDfhd
+	DizTTDW4DFS536ZhneCeXoqoiTiCmE/s8txUCQIuDGAwln5eI+SvPQAcRY3usueTwd6+
+	kmJeJLWDisXF4A7HTbsuntmy6TO0Nbssc0j+E=
+Received: by 10.236.154.1 with SMTP id g1mr236191yhk.112.1305614733127;
+	Mon, 16 May 2011 23:45:33 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id h43sm101595yhm.22.2011.05.16.23.45.31
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 16 May 2011 23:45:32 -0700 (PDT)
+From: Eyal Reizer <eyalreizer@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 17 May 2011 08:40:20 +0200
-Message-ID: <iqt58k$59d$2@dough.gmane.org>
-References: <1305578605-17041-1-git-send-email-otavio@ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1305578605-17041-1-git-send-email-otavio@ossystems.com.br>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-oe][PATCH v1] freerdp: update to 2011-05-16 snapshot
+Date: Tue, 17 May 2011 09:45:22 +0300
+Message-Id: <1305614722-5460-1-git-send-email-eyalr@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <y>
+References: <y>
+Cc: Eyal Reizer <eyalr@ti.com>
+Subject: [PATCH] ti-wifi-utils: update to use the latest release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,113 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2011 06:47:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 17 May 2011 06:48:27 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* Change to a newer calibrator version supporting latest mac80211 release.
+* Bump PR number
 
-On 16-05-11 22:43, Otavio Salvador wrote:
-> This version includes major improvements since last version
-> packages. It also had the plugins packages redone so they can be
-> choosen depending on the environment needs.
-> 
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Eyal Reizer <eyalr@ti.com>
+---
+ recipes/ti/ti-wifi-utils_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-This one doesn't have the colourbug you mentioned earlier? And it
-doesn't need xprop anymore, right?
-
-
-> ---
->  meta-oe/recipes-support/freerdp/freerdp.inc    |   40 +++++++++++++++++++----
->  meta-oe/recipes-support/freerdp/freerdp_git.bb |    4 +-
->  2 files changed, 35 insertions(+), 9 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-support/freerdp/freerdp.inc b/meta-oe/recipes-support/freerdp/freerdp.inc
-> index f8402c7..71dab97 100644
-> --- a/meta-oe/recipes-support/freerdp/freerdp.inc
-> +++ b/meta-oe/recipes-support/freerdp/freerdp.inc
-> @@ -3,22 +3,48 @@
->  
->  DESCRIPTION = "FreeRDP RDP client"
->  HOMEPAGE = "http://freerdp.sourceforge.net"
-> -DEPENDS = "virtual/libx11 openssl libxcursor cups alsa-lib"
-> +DEPENDS = "virtual/libx11 openssl libxcursor libxv cups alsa-lib pulseaudio pcsc-lite"
->  SECTION = "x11/network"
->  LICENSE = "Apache-2.0"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
->  
-> -INC_PR = "r0"
-> +INC_PR = "r1"
->  
->  inherit pkgconfig autotools
->  
-> -do_configure_prepend() {
-> -	# workaround gcc linking bug
-> -	find ${S} -name 'Makefile.am' | xargs -n 1 sed 's,-pthread,-lpthread -D_REENTRANT,g' -i
-> -}
-> +EXTRA_OECONF += "--with-smartcard --with-xvideo"
->  
->  do_install_append() {
->  	rm ${D}${libdir}/freerdp/*.a ${D}${libdir}/freerdp/*.la
->  }
->  
-> -RDEPENDS_${PN} += "xprop"
-> +PACKAGES =+ "libfreerdp"
-> +
-> +LEAD_SONAME = "libfreerdp.so"
-> +FILES_libfreerdp = "${libdir}/lib*${SOLIBS}"
-> +
-> +PACKAGES_DYNAMIC = "libfreerdp-plugin-*"
-> +
-> +python populate_packages_prepend () {
-> +        freerdp_root = bb.data.expand('${libdir}/freerdp', d)
-> +
-> +        do_split_packages(d, freerdp_root, '^(audin_.*)\.so$',
-> +                output_pattern='libfreerdp-plugin-%s',
-> +                description='FreeRDP plugin %s',
-> +                prepend=True, extra_depends='libfreerdp-plugin-audin')
-> +
-> +        do_split_packages(d, freerdp_root, '^(rdpsnd_.*)\.so$',
-> +                output_pattern='libfreerdp-plugin-%s',
-> +                description='FreeRDP plugin %s',
-> +                prepend=True, extra_depends='libfreerdp-plugin-rdpsnd')
-> +
-> +        do_split_packages(d, freerdp_root, '^(tsmf_.*)\.so$',
-> +                output_pattern='libfreerdp-plugin-%s',
-> +                description='FreeRDP plugin %s',
-> +                prepend=True, extra_depends='libfreerdp-plugin-tsmf')
-> +
-> +        do_split_packages(d, freerdp_root, '^([^-]*)\.so$',
-> +                output_pattern='libfreerdp-plugin-%s',
-> +                description='FreeRDP plugin %s',
-> +                prepend=True, extra_depends='')
-> +}
-> diff --git a/meta-oe/recipes-support/freerdp/freerdp_git.bb b/meta-oe/recipes-support/freerdp/freerdp_git.bb
-> index fa4ba9a..e135902 100644
-> --- a/meta-oe/recipes-support/freerdp/freerdp_git.bb
-> +++ b/meta-oe/recipes-support/freerdp/freerdp_git.bb
-> @@ -7,9 +7,9 @@ inherit gitpkgv
->  
->  PV = "gitr${SRCPV}"
->  PKGV = "${GITPKGVTAG}"
-> -PR = "${INC_PR}.0"
-> +PR = "${INC_PR}.1"
->  
-> -SRCREV = "7bbde4fb3bc3a781364d0a626c49bc165cc507fd"
-> +SRCREV = "f5aef3be8fac9a02b0c7bbb5424831a7b285e7bb"
->  SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;protocol=git"
->  
->  S = "${WORKDIR}/git"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFN0hhUMkyGM64RGpERAldWAJ4klXnI/UCCepTMCPEGHuUiRu/4QgCgsg4q
-Im7pc9nkpsoXCtHT3lzsIRs=
-=GtPm
------END PGP SIGNATURE-----
+diff --git a/recipes/ti/ti-wifi-utils_git.bb b/recipes/ti/ti-wifi-utils_git.bb
+index 1ee5f2d..8d10051 100644
+--- a/recipes/ti/ti-wifi-utils_git.bb
++++ b/recipes/ti/ti-wifi-utils_git.bb
+@@ -3,11 +3,11 @@ LICENSE = "TI-BSD"
+ 
+ DEPENDS = "libnl"
+ 
+-PR ="r1"
++PR ="r2"
+ PV ="0.0"
+ PR_append = "+gitr${SRCPV}"
+ 
+-SRCREV = "7f63af54eb66e5b2515f92c59fcc19a8065ce481"
++SRCREV = "268dbf03091b632c2697eb8028e90fe40513a9d8"
+ SRC_URI = "git://github.com/gxk/ti-utils.git;protocol=git"
+ 
+ S = "${WORKDIR}/git"
+-- 
+1.7.0.4
 
 
 
