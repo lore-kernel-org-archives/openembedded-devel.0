@@ -1,27 +1,27 @@
 Received: from smtp-out04.msg.oleane.net ([62.161.7.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <christian.charreyre@cioinfoindus.fr>)
-	id 1QMRSA-0004ze-Tx for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 23:05:19 +0200
-Received: from smtp07.msg.oleane.net (smtp07.mail.priv [172.17.20.116]) 
-	by smtp-out04.msg.oleane.net with ESMTP id p4HL2R7h025676
+	id 1QMRaz-0005AS-QD for openembedded-devel@lists.openembedded.org;
+	Tue, 17 May 2011 23:14:25 +0200
+Received: from smtp01.msg.oleane.net (smtp01.mail.priv [172.17.20.110]) 
+	by smtp-out04.msg.oleane.net with ESMTP id p4HLBYIp028710
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 May 2011 23:02:27 +0200
+	Tue, 17 May 2011 23:11:34 +0200
 Received: from localhost.localdomain
 	(AMarseille-551-1-81-135.w92-137.abo.wanadoo.fr [92.137.64.135]) 
-	by smtp07.msg.oleane.net (MTA) with ESMTP id p4HKgOQQ007370;
-	Tue, 17 May 2011 22:42:25 +0200
+	by smtp01.msg.oleane.net (MTA) with ESMTP id p4HKpFeT018730;
+	Tue, 17 May 2011 22:51:15 +0200
 X-Oleane-Rep: REPA
 From: Christian Charreyre <christian.charreyre@cioinfoindus.fr>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 May 2011 22:42:17 +0200
-Message-Id: <1305664937-20683-1-git-send-email-christian.charreyre@cioinfoindus.fr>
+Date: Tue, 17 May 2011 22:51:14 +0200
+Message-Id: <1305665474-22375-1-git-send-email-christian.charreyre@cioinfoindus.fr>
 X-Mailer: git-send-email 1.7.4.1
 X-Spam-Flag: NO
-X-PMX-Spam: Probability=8%
-X-PFSI-Info: PMX 5.6.0.2009776, Antispam-Engine: 2.7.2.376379,
-	Antispam-Data: 2011.5.17.203314 (no antivirus check)
-Subject: [PATCH] libsdl-pango: new recipe for version 0.1.2
+X-PMX-Spam: Probability=10%
+X-PFSI-Info: PMX 5.5.9.395186, Antispam-Engine: 2.7.2.376379,
+	Antispam-Data: 2011.5.17.204216 (no antivirus check)
+Subject: [PATCH] tuxpaint: new recipe for version 0.9.21 (with related recipes)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,428 +35,219 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2011 21:05:19 -0000
+X-List-Received-Date: Tue, 17 May 2011 21:14:26 -0000
 
-This patches creates a new recipe for libsdl-pango.
-It uses debian patches, unless rebootstrap.patch which is very big and doesn't 
-seem necessary for the recipe.
+This creates recipes for tuxpaint (painting software for children).
+There is a recipe for libpaper (library needed by tuxpain), and one
+for tuxpaint-config that allows to configure options graphically.
+
+Tuxpain needs libsdl-pango to be built (sent in previous path).
 
 Signed-off-by: Christian Charreyre <christian.charreyre@cioinfoindus.fr>
 ---
- .../libsdl-pango-0.1.2/am_maintainer_mode.patch    |   10 ++
- .../libsdl/libsdl-pango-0.1.2/api_additions.patch  |  128 +++++++++++++++++++
- .../libsdl/libsdl-pango-0.1.2/blit_overflow.patch  |   32 +++++
- .../libsdl/libsdl-pango-0.1.2/fillrect_crash.patch |   15 +++
- .../libsdl-pango-0.1.2/matrix_declarations.patch   |  131 ++++++++++++++++++++
- recipes/libsdl/libsdl-pango-0.1.2/sans-serif.patch |   13 ++
- recipes/libsdl/libsdl-pango_0.1.2.bb               |   27 ++++
- 7 files changed, 356 insertions(+), 0 deletions(-)
- create mode 100644 recipes/libsdl/libsdl-pango-0.1.2/am_maintainer_mode.patch
- create mode 100644 recipes/libsdl/libsdl-pango-0.1.2/api_additions.patch
- create mode 100644 recipes/libsdl/libsdl-pango-0.1.2/blit_overflow.patch
- create mode 100644 recipes/libsdl/libsdl-pango-0.1.2/fillrect_crash.patch
- create mode 100644 recipes/libsdl/libsdl-pango-0.1.2/matrix_declarations.patch
- create mode 100644 recipes/libsdl/libsdl-pango-0.1.2/sans-serif.patch
- create mode 100644 recipes/libsdl/libsdl-pango_0.1.2.bb
+ recipes/tuxpaint/libpaper_1.1.24.bb             |   12 +++++
+ recipes/tuxpaint/tuxpaint-config/makefile.patch |   53 +++++++++++++++++++++++
+ recipes/tuxpaint/tuxpaint-config_0.0.12.bb      |   29 ++++++++++++
+ recipes/tuxpaint/tuxpaint/makefile.patch        |   43 ++++++++++++++++++
+ recipes/tuxpaint/tuxpaint_0.9.21.bb             |   24 ++++++++++
+ 5 files changed, 161 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/tuxpaint/libpaper_1.1.24.bb
+ create mode 100644 recipes/tuxpaint/tuxpaint-config/makefile.patch
+ create mode 100644 recipes/tuxpaint/tuxpaint-config_0.0.12.bb
+ create mode 100644 recipes/tuxpaint/tuxpaint/makefile.patch
+ create mode 100644 recipes/tuxpaint/tuxpaint_0.9.21.bb
 
-diff --git a/recipes/libsdl/libsdl-pango-0.1.2/am_maintainer_mode.patch b/recipes/libsdl/libsdl-pango-0.1.2/am_maintainer_mode.patch
+diff --git a/recipes/tuxpaint/libpaper_1.1.24.bb b/recipes/tuxpaint/libpaper_1.1.24.bb
 new file mode 100644
-index 0000000..7bc94d2
+index 0000000..c16663d
 --- /dev/null
-+++ b/recipes/libsdl/libsdl-pango-0.1.2/am_maintainer_mode.patch
-@@ -0,0 +1,10 @@
-+--- sdlpango-0.1.2.orig/configure.in
-++++ sdlpango-0.1.2/configure.in
-+@@ -1,6 +1,7 @@
-+ # Process this file with autoconf to produce a configure script.
-+ 
-+ AC_INIT(README)
-++AM_MAINTAINER_MODE
-+ 
-+ # Set various version strings - taken gratefully from the GTk sources
-+ 
-diff --git a/recipes/libsdl/libsdl-pango-0.1.2/api_additions.patch b/recipes/libsdl/libsdl-pango-0.1.2/api_additions.patch
-new file mode 100644
-index 0000000..5c02e79
---- /dev/null
-+++ b/recipes/libsdl/libsdl-pango-0.1.2/api_additions.patch
-@@ -0,0 +1,128 @@
-+Index: SDL_Pango-0.1.2/src/SDL_Pango.c
-+===================================================================
-+--- SDL_Pango-0.1.2.orig/src/SDL_Pango.c	2004-12-10 10:06:33.000000000 +0100
-++++ SDL_Pango-0.1.2/src/SDL_Pango.c	2007-09-18 14:56:35.362379428 +0200
-+@@ -723,13 +723,9 @@
-+     SDL_UnlockSurface(surface);
-+ }
-+ 
-+-/*!
-+-    Create a context which contains Pango objects.
-+ 
-+-    @return A pointer to the context as a SDLPango_Context*.
-+-*/
-+ SDLPango_Context*
-+-SDLPango_CreateContext()
-++SDLPango_CreateContext_GivenFontDesc(const char* font_desc)
-+ {
-+     SDLPango_Context *context = g_malloc(sizeof(SDLPango_Context));
-+     G_CONST_RETURN char *charset;
-+@@ -743,8 +739,7 @@
-+     pango_context_set_language (context->context, pango_language_from_string (charset));
-+     pango_context_set_base_dir (context->context, PANGO_DIRECTION_LTR);
-+ 
-+-    context->font_desc = pango_font_description_from_string(
-+-	MAKE_FONT_NAME (DEFAULT_FONT_FAMILY, DEFAULT_FONT_SIZE));
-++    context->font_desc = pango_font_description_from_string(font_desc);
-+ 
-+     context->layout = pango_layout_new (context->context);
-+ 
-+@@ -762,6 +757,17 @@
-+ }
-+ 
-+ /*!
-++    Create a context which contains Pango objects.
-++
-++    @return A pointer to the context as a SDLPango_Context*.
-++*/
-++SDLPango_Context*
-++SDLPango_CreateContext()
-++{
-++    SDLPango_CreateContext_GivenFontDesc(MAKE_FONT_NAME(DEFAULT_FONT_FAMILY, DEFAULT_FONT_SIZE));
-++}
-++
-++/*!
-+     Free a context.
-+ 
-+     @param *context [i/o] Context to be free
-+@@ -1053,6 +1059,20 @@
-+     pango_layout_set_font_description (context->layout, context->font_desc);
-+ }
-+ 
-++void
-++SDLPango_SetText_GivenAlignment(
-++    SDLPango_Context *context,
-++    const char *text,
-++    int length,
-++    SDLPango_Alignment alignment)
-++{
-++    pango_layout_set_attributes(context->layout, NULL);
-++    pango_layout_set_text (context->layout, text, length);
-++    pango_layout_set_auto_dir (context->layout, TRUE);
-++    pango_layout_set_alignment (context->layout, alignment);
-++    pango_layout_set_font_description (context->layout, context->font_desc);
-++}
-++
-+ /*!
-+     Set plain text to context.
-+     Text must be utf-8.
-+@@ -1067,11 +1087,7 @@
-+     const char *text,
-+     int length)
-+ {
-+-    pango_layout_set_attributes(context->layout, NULL);
-+-    pango_layout_set_text (context->layout, text, length);
-+-    pango_layout_set_auto_dir (context->layout, TRUE);
-+-    pango_layout_set_alignment (context->layout, PANGO_ALIGN_LEFT);
-+-    pango_layout_set_font_description (context->layout, context->font_desc);
-++    SDLPango_SetText_GivenAlignment(context, text, length, SDLPANGO_ALIGN_LEFT);
-+ }
-+ 
-+ /*!
-+Index: SDL_Pango-0.1.2/src/SDL_Pango.h
-+===================================================================
-+--- SDL_Pango-0.1.2.orig/src/SDL_Pango.h	2004-12-10 10:06:33.000000000 +0100
-++++ SDL_Pango-0.1.2/src/SDL_Pango.h	2007-09-18 15:00:41.736419485 +0200
-+@@ -26,6 +26,7 @@
-+ 
-+ #ifndef SDL_PANGO_H
-+ #define SDL_PANGO_H
-++#define SDL_PANGO_HAS_GC_EXTENSIONS
-+ 
-+ #include "SDL.h"
-+ 
-+@@ -109,12 +110,20 @@
-+     SDLPANGO_DIRECTION_NEUTRAL	/*! Neutral */
-+ } SDLPango_Direction;
-+ 
-+-
-++/*!
-++    Specifies alignment of text. See Pango reference for detail
-++*/
-++typedef enum {
-++    SDLPANGO_ALIGN_LEFT,
-++    SDLPANGO_ALIGN_CENTER,
-++    SDLPANGO_ALIGN_RIGHT
-++} SDLPango_Alignment;
-+ 
-+ extern DECLSPEC int SDLCALL SDLPango_Init();
-+ 
-+ extern DECLSPEC int SDLCALL SDLPango_WasInit();
-+ 
-++extern DECLSPEC SDLPango_Context* SDLCALL SDLPango_CreateContext_GivenFontDesc(const char* font_desc);
-+ extern DECLSPEC SDLPango_Context* SDLCALL SDLPango_CreateContext();
-+ 
-+ extern DECLSPEC void SDLCALL SDLPango_FreeContext(
-+@@ -157,6 +166,12 @@
-+     const char *markup,
-+     int length);
-+ 
-++extern DECLSPEC void SDLCALL SDLPango_SetText_GivenAlignment(
-++    SDLPango_Context *context,
-++    const char *text,
-++    int length,
-++    SDLPango_Alignment alignment);
-++
-+ extern DECLSPEC void SDLCALL SDLPango_SetText(
-+     SDLPango_Context *context,
-+     const char *markup,
-diff --git a/recipes/libsdl/libsdl-pango-0.1.2/blit_overflow.patch b/recipes/libsdl/libsdl-pango-0.1.2/blit_overflow.patch
-new file mode 100644
-index 0000000..411d066
---- /dev/null
-+++ b/recipes/libsdl/libsdl-pango-0.1.2/blit_overflow.patch
-@@ -0,0 +1,32 @@
-+Index: sdlpango-0.1.2/src/SDL_Pango.c
-+===================================================================
-+--- sdlpango-0.1.2.orig/src/SDL_Pango.c	2007-10-08 19:44:15.000000000 +0000
-++++ sdlpango-0.1.2/src/SDL_Pango.c	2007-10-08 19:45:27.000000000 +0000
-+@@ -725,16 +725,23 @@
-+     int x = rect->x;
-+     int y = rect->y;
-+ 
-++    if(x < 0) {
-++	width += x; x = 0;
-++    }
-+     if(x + width > surface->w) {
-+ 	width = surface->w - x;
-+-	if(width <= 0)
-+-	    return;
-++    }
-++    if(width <= 0)
-++	return;
-++
-++    if(y < 0) {
-++	height += y; y = 0;
-+     }
-+     if(y + height > surface->h) {
-+ 	height = surface->h - y;
-+-	if(height <= 0)
-+-	    return;
-+     }
-++    if(height <= 0)
-++	return;
-+ 
-+     if(SDL_LockSurface(surface)) {
-+ 	SDL_SetError("surface lock failed");
-diff --git a/recipes/libsdl/libsdl-pango-0.1.2/fillrect_crash.patch b/recipes/libsdl/libsdl-pango-0.1.2/fillrect_crash.patch
-new file mode 100644
-index 0000000..7a41bbf
---- /dev/null
-+++ b/recipes/libsdl/libsdl-pango-0.1.2/fillrect_crash.patch
-@@ -0,0 +1,15 @@
-+Index: SDL_Pango-0.1.2/src/SDL_Pango.c
-+===================================================================
-+--- SDL_Pango-0.1.2.orig/src/SDL_Pango.c	2007-09-18 15:56:12.406223540 +0200
-++++ SDL_Pango-0.1.2/src/SDL_Pango.c	2007-09-18 15:57:27.986530616 +0200
-+@@ -932,7 +932,9 @@
-+     width = PANGO_PIXELS (logical_rect.width);
-+     height = PANGO_PIXELS (logical_rect.height);
-+ 
-+-    SDL_FillRect(surface, NULL, SDL_MapRGBA(surface->format, 0, 0, 0, 0));
-++    if (width && height) {
-++        SDL_FillRect(surface, NULL, SDL_MapRGBA(surface->format, 0, 0, 0, 0));
-++    }
-+ 
-+     if((! context->tmp_ftbitmap) || context->tmp_ftbitmap->width < width
-+ 	|| context->tmp_ftbitmap->rows < height)
-diff --git a/recipes/libsdl/libsdl-pango-0.1.2/matrix_declarations.patch b/recipes/libsdl/libsdl-pango-0.1.2/matrix_declarations.patch
-new file mode 100644
-index 0000000..c35d0a7
---- /dev/null
-+++ b/recipes/libsdl/libsdl-pango-0.1.2/matrix_declarations.patch
-@@ -0,0 +1,131 @@
-+Index: SDL_Pango-0.1.2/src/SDL_Pango.c
-+===================================================================
-+--- SDL_Pango-0.1.2.orig/src/SDL_Pango.c	2007-09-18 15:03:10.732910311 +0200
-++++ SDL_Pango-0.1.2/src/SDL_Pango.c	2007-09-18 15:04:41.970109622 +0200
-+@@ -286,6 +286,59 @@
-+ } contextImpl;
-+ 
-+ 
-++const SDLPango_Matrix _MATRIX_WHITE_BACK
-++    = {255, 0, 0, 0,
-++       255, 0, 0, 0,
-++       255, 0, 0, 0,
-++       255, 255, 0, 0,};
-++
-++/*!
-++    Specifies white back and black letter.
-++*/
-++const SDLPango_Matrix *MATRIX_WHITE_BACK = &_MATRIX_WHITE_BACK;
-++
-++const SDLPango_Matrix _MATRIX_BLACK_BACK
-++    = {0, 255, 0, 0,
-++       0, 255, 0, 0,
-++       0, 255, 0, 0,
-++       255, 255, 0, 0,};
-++/*!
-++    Specifies black back and white letter.
-++*/
-++const SDLPango_Matrix *MATRIX_BLACK_BACK = &_MATRIX_BLACK_BACK;
-++
-++const SDLPango_Matrix _MATRIX_TRANSPARENT_BACK_BLACK_LETTER
-++    = {0, 0, 0, 0,
-++       0, 0, 0, 0,
-++       0, 0, 0, 0,
-++       0, 255, 0, 0,};
-++/*!
-++    Specifies transparent back and black letter.
-++*/
-++const SDLPango_Matrix *MATRIX_TRANSPARENT_BACK_BLACK_LETTER = &_MATRIX_TRANSPARENT_BACK_BLACK_LETTER;
-++
-++const SDLPango_Matrix _MATRIX_TRANSPARENT_BACK_WHITE_LETTER
-++    = {255, 255, 0, 0,
-++       255, 255, 0, 0,
-++       255, 255, 0, 0,
-++       0, 255, 0, 0,};
-++/*!
-++    Specifies transparent back and white letter.
-++*/
-++const SDLPango_Matrix *MATRIX_TRANSPARENT_BACK_WHITE_LETTER = &_MATRIX_TRANSPARENT_BACK_WHITE_LETTER;
-++
-++const SDLPango_Matrix _MATRIX_TRANSPARENT_BACK_TRANSPARENT_LETTER
-++    = {255, 255, 0, 0,
-++       255, 255, 0, 0,
-++       255, 255, 0, 0,
-++       0, 0, 0, 0,};
-++/*!
-++    Specifies transparent back and transparent letter.
-++    This is useful for KARAOKE like rendering.
-++*/
-++const SDLPango_Matrix *MATRIX_TRANSPARENT_BACK_TRANSPARENT_LETTER = &_MATRIX_TRANSPARENT_BACK_TRANSPARENT_LETTER;
-++
-++
-+ /*!
-+     Initialize the Glib and Pango API.
-+     This must be called before using other functions in this library,
-+Index: SDL_Pango-0.1.2/src/SDL_Pango.h
-+===================================================================
-+--- SDL_Pango-0.1.2.orig/src/SDL_Pango.h	2007-09-18 15:03:10.732910311 +0200
-++++ SDL_Pango-0.1.2/src/SDL_Pango.h	2007-09-18 15:06:24.919976401 +0200
-+@@ -47,57 +47,27 @@
-+     Uint8 m[4][4];  /*! Matrix variables */
-+ } SDLPango_Matrix;
-+ 
-+-const SDLPango_Matrix _MATRIX_WHITE_BACK
-+-    = {255, 0, 0, 0,
-+-       255, 0, 0, 0,
-+-       255, 0, 0, 0,
-+-       255, 255, 0, 0,};
-+-
-+ /*!
-+     Specifies white back and black letter.
-+ */
-+-const SDLPango_Matrix *MATRIX_WHITE_BACK = &_MATRIX_WHITE_BACK;
-+-
-+-const SDLPango_Matrix _MATRIX_BLACK_BACK
-+-    = {0, 255, 0, 0,
-+-       0, 255, 0, 0,
-+-       0, 255, 0, 0,
-+-       255, 255, 0, 0,};
-++extern const SDLPango_Matrix *MATRIX_WHITE_BACK;
-+ /*!
-+     Specifies black back and white letter.
-+ */
-+-const SDLPango_Matrix *MATRIX_BLACK_BACK = &_MATRIX_BLACK_BACK;
-+-
-+-const SDLPango_Matrix _MATRIX_TRANSPARENT_BACK_BLACK_LETTER
-+-    = {0, 0, 0, 0,
-+-       0, 0, 0, 0,
-+-       0, 0, 0, 0,
-+-       0, 255, 0, 0,};
-++extern const SDLPango_Matrix *MATRIX_BLACK_BACK;
-+ /*!
-+     Specifies transparent back and black letter.
-+ */
-+-const SDLPango_Matrix *MATRIX_TRANSPARENT_BACK_BLACK_LETTER = &_MATRIX_TRANSPARENT_BACK_BLACK_LETTER;
-+-
-+-const SDLPango_Matrix _MATRIX_TRANSPARENT_BACK_WHITE_LETTER
-+-    = {255, 255, 0, 0,
-+-       255, 255, 0, 0,
-+-       255, 255, 0, 0,
-+-       0, 255, 0, 0,};
-++extern const SDLPango_Matrix *MATRIX_TRANSPARENT_BACK_BLACK_LETTER;
-+ /*!
-+     Specifies transparent back and white letter.
-+ */
-+-const SDLPango_Matrix *MATRIX_TRANSPARENT_BACK_WHITE_LETTER = &_MATRIX_TRANSPARENT_BACK_WHITE_LETTER;
-+-
-+-const SDLPango_Matrix _MATRIX_TRANSPARENT_BACK_TRANSPARENT_LETTER
-+-    = {255, 255, 0, 0,
-+-       255, 255, 0, 0,
-+-       255, 255, 0, 0,
-+-       0, 0, 0, 0,};
-++extern const SDLPango_Matrix *MATRIX_TRANSPARENT_BACK_WHITE_LETTER;
-+ /*!
-+     Specifies transparent back and transparent letter.
-+     This is useful for KARAOKE like rendering.
-+ */
-+-const SDLPango_Matrix *MATRIX_TRANSPARENT_BACK_TRANSPARENT_LETTER = &_MATRIX_TRANSPARENT_BACK_TRANSPARENT_LETTER;
-++extern const SDLPango_Matrix *MATRIX_TRANSPARENT_BACK_TRANSPARENT_LETTER;
-+ 
-+ /*!
-+     Specifies direction of text. See Pango reference for detail
-diff --git a/recipes/libsdl/libsdl-pango-0.1.2/sans-serif.patch b/recipes/libsdl/libsdl-pango-0.1.2/sans-serif.patch
-new file mode 100644
-index 0000000..ccdc815
---- /dev/null
-+++ b/recipes/libsdl/libsdl-pango-0.1.2/sans-serif.patch
-@@ -0,0 +1,13 @@
-+Index: SDL_Pango-0.1.2/src/SDL_Pango.c
-+===================================================================
-+--- SDL_Pango-0.1.2.orig/src/SDL_Pango.c	2007-09-18 15:12:20.736253215 +0200
-++++ SDL_Pango-0.1.2/src/SDL_Pango.c	2007-09-18 15:12:44.621614364 +0200
-+@@ -234,7 +234,7 @@
-+ //! non-zero if initialized
-+ static int IS_INITIALIZED = 0;
-+ 
-+-#define DEFAULT_FONT_FAMILY "Sans"
-++#define DEFAULT_FONT_FAMILY "sans-serif"
-+ #define DEFAULT_FONT_SIZE 12
-+ #define DEFAULT_DPI 96
-+ #define _MAKE_FONT_NAME(family, size) family " " #size
-diff --git a/recipes/libsdl/libsdl-pango_0.1.2.bb b/recipes/libsdl/libsdl-pango_0.1.2.bb
-new file mode 100644
-index 0000000..81b1f00
---- /dev/null
-+++ b/recipes/libsdl/libsdl-pango_0.1.2.bb
-@@ -0,0 +1,27 @@
-+DESCRIPTION = "Simple DirectMedia Layer Pango library."
-+SECTION = "libs/network"
++++ b/recipes/tuxpaint/libpaper_1.1.24.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION = "Paper Library"
++LICENSE = "GPLv2"
++SECTION = "libs"
 +PRIORITY = "optional"
-+DEPENDS = "virtual/libsdl pango"
-+LICENSE = "LGPL"
 +
-+SRC_URI = "http://freefr.dl.sourceforge.net/project/sdlpango/SDL_Pango/${PV}/SDL_Pango-${PV}.tar.gz \
-+	file://am_maintainer_mode.patch \
-+	file://api_additions.patch \
-+	file://matrix_declarations.patch \
-+	file://sans-serif.patch \
-+	file://fillrect_crash.patch \
-+	file://blit_overflow.patch \
-+"
++SRC_URI = "http://ftp.de.debian.org/debian/pool/main/libp/${PN}/${PN}_${PV}.tar.gz"
 +
-+SRC_URI[md5sum] = "85bbf9bb7b1cee0538154dadd045418c"
-+SRC_URI[sha256sum] = "7f75d3b97acf707c696ea126424906204ebfa07660162de925173cdd0257eba4"
-+
-+S = "${WORKDIR}/SDL_Pango-${PV}"
++SRC_URI[md5sum] = "5bc87d494ba470aba54f6d2d51471834"
++SRC_URI[sha256sum] = "38ac28114673d4b175a939d981e0477a0ed9bcaab27033522ecb2ca78ee90c7e"
 +
 +inherit autotools
 +
-+EXTRA_OECONF += "SDL_CONFIG=${STAGING_BINDIR_CROSS}/sdl-config"
+diff --git a/recipes/tuxpaint/tuxpaint-config/makefile.patch b/recipes/tuxpaint/tuxpaint-config/makefile.patch
+new file mode 100644
+index 0000000..e953ee4
+--- /dev/null
++++ b/recipes/tuxpaint/tuxpaint-config/makefile.patch
+@@ -0,0 +1,53 @@
++Author: Christian Charreyre <christian.charreyre@cioinfoindus.fr>
 +
-+do_stage() {
-+	autotools_stage_all
++Correct Makefile to allow definition of PREFIX from environment
++Index: tuxpaint-config-0.0.12/Makefile
++===================================================================
++--- tuxpaint-config-0.0.12.orig/Makefile	2009-05-29 00:08:08.000000000 +0200
+++++ tuxpaint-config-0.0.12/Makefile	2011-05-03 16:01:22.000000000 +0200
++@@ -20,7 +20,7 @@
++ 
++ # Where to install things:
++ 
++-PREFIX=/usr/local
+++PREFIX?=/usr/local
++ 
++ 
++ # Program:
++@@ -53,9 +53,9 @@
++ 
++ ICON_PREFIX=$(PREFIX)/share/pixmaps/
++ X11_ICON_PREFIX=$(PREFIX)/X11R6/include/X11/pixmaps/
++-GNOME_PREFIX=$(shell gnome-config --prefix 2> /dev/null)
++-KDE_PREFIX=$(shell kde-config --install apps --expandvars 2> /dev/null)
++-KDE_ICON_PREFIX=$(shell kde-config --install icon --expandvars 2> /dev/null)
+++GNOME_PREFIX?=$(shell gnome-config --prefix 2> /dev/null)
+++KDE_PREFIX?=$(shell kde-config --install apps --expandvars 2> /dev/null)
+++KDE_ICON_PREFIX?=$(shell kde-config --install icon --expandvars 2> /dev/null)
++ 
++ 
++ # Locale files
++@@ -227,11 +227,11 @@
++ install-kde-icons:
++ 	@echo "...Installing launcher icon graphics into KDE..."
++ 	@if [ "x$(KDE_ICON_PREFIX)" != "x" ]; then \
++-	  cp data/images/icon48x48.png \
+++	  install -m 0644 data/images/icon48x48.png \
++ 		$(KDE_ICON_PREFIX)/hicolor/48x48/apps/tuxpaint-config.png; \
++-	  cp data/images/icon32x32.png \
+++	  install -m 0644 data/images/icon32x32.png \
++ 		$(KDE_ICON_PREFIX)/hicolor/32x32/apps/tuxpaint-config.png; \
++-	  cp data/images/icon16x16.png \
+++	  install -m 0644 data/images/icon16x16.png \
++ 		$(KDE_ICON_PREFIX)/hicolor/16x16/apps/tuxpaint-config.png; \
++ 	fi
++ 
++@@ -306,7 +306,7 @@
++ 	@echo Linking
++ 	$(CXX) $(ALL_CFLAGS) -o tuxpaint-config obj/tuxpaint-config.o 	\
++ 			obj/tuxpaint-config2.o obj/defaults.o $(ARCH_LIBS) \
++-			$(FLTK_LIBS) $(ARCH_LINKS) $(PAPER_LIB)
+++			$(FLTK_LIBS) $(ARCH_LINKS) $(PAPER_LIB) $(LDFLAGS)
++ 
++ 
++ # Build the object for the program!
+diff --git a/recipes/tuxpaint/tuxpaint-config_0.0.12.bb b/recipes/tuxpaint/tuxpaint-config_0.0.12.bb
+new file mode 100644
+index 0000000..0fe2a0f
+--- /dev/null
++++ b/recipes/tuxpaint/tuxpaint-config_0.0.12.bb
+@@ -0,0 +1,29 @@
++DESCRIPTION = "Open Source Drawing Software for Children - Configuration"
++HOMEPAGE = "http://www.tuxpaint.org"
++LICENSE = "GPLv2"
++SECTION = "x11/apps"
++PRIORITY = "optional"
++
++DEPENDS = "fltk tuxpaint"
++
++SRC_URI = "http://freefr.dl.sourceforge.net/project/tuxpaint/${PN}/${PV}/${PN}-${PV}.tar.gz \
++	file://makefile.patch \
++"
++
++SRC_URI[md5sum] = "11ac7654d9670f45c76668317ab6f717"
++SRC_URI[sha256sum] = "9395a1c92e52c3420cabaa0c781b607e6832b5d9b6180902615f102216e1c8fd"
++
++do_compile() {
++	base_do_compile
 +}
++
++do_install() {
++	install -d ${D}/usr/bin
++	install -d ${D}/usr/share/icons/hicolor/48x48/apps
++	install -d ${D}/usr/share/icons/hicolor/32x32/apps
++	install -d ${D}/usr/share/icons/hicolor/16x16/apps
++	PREFIX="${D}/usr" KDE_ICON_PREFIX="${D}/usr/share/icons" KDE_PREFIX="${D}/usr/share" make install
++}
++
++FILES_${PN} += "${datadir}/icons ${datadir}/pixmaps ${datadir}/tuxpaint"
++FILES_${PN}-dbg += "${libdir}/tuxpaint/plugins/.debug"
+diff --git a/recipes/tuxpaint/tuxpaint/makefile.patch b/recipes/tuxpaint/tuxpaint/makefile.patch
+new file mode 100644
+index 0000000..17a02e9
+--- /dev/null
++++ b/recipes/tuxpaint/tuxpaint/makefile.patch
+@@ -0,0 +1,43 @@
++Author: Christian Charreyre <christian.charreyre@cioinfoindus.fr>
++
++Correct Makefile to allow definition of PREFIX from environment
++Index: tuxpaint-0.9.21/Makefile
++===================================================================
++--- tuxpaint-0.9.21.orig/Makefile	2009-04-29 07:18:57.000000000 +0200
+++++ tuxpaint-0.9.21/Makefile	2011-05-03 15:06:46.000000000 +0200
++@@ -94,7 +94,7 @@
++ osx_PREFIX:=/usr/local
++ beos_PREFIX:=/boot/apps/Games/TuxPaint
++ linux_PREFIX:=/usr/local
++-PREFIX:=$($(OS)_PREFIX)
+++PREFIX?=$($(OS)_PREFIX)
++ 
++ 
++ # Root directory to place files when creating packages.
++@@ -103,7 +103,7 @@
++ ifeq ($(PREFIX),./)
++ DESTDIR:=TuxPaint-1
++ else
++-DESTDIR:=$(PKG_ROOT)
+++DESTDIR?=$(PKG_ROOT)
++ endif
++ 
++ # Program:
++@@ -834,7 +834,7 @@
++ 	@echo "...Linking Tux Paint..."
++ 	$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(FRIBIDI_CFLAGS) $(DEFS) \
++ 		-o tuxpaint $^ \
++-		$(SDL_LIBS) $(SVG_LIB) $(ARCH_LINKS)
+++		$(SDL_LIBS) $(SVG_LIB) $(ARCH_LINKS) $(LDFLAGS)
++ 	@$(RSRC_CMD)
++ 	@$(MIMESET_CMD)
++ 
++@@ -998,7 +998,7 @@
++ 
++ #MAGIC_CFLAGS:=-g3 -O2 -fvisibility=hidden -fno-common -W -Wstrict-prototypes -Wmissing-prototypes -Wall $(MAGIC_SDL_CPPFLAGS) -Isrc/
++ MAGIC_CFLAGS:=-g3 -O2 -fno-common -W -Wstrict-prototypes -Wmissing-prototypes -Wall $(MAGIC_SDL_CPPFLAGS) -Isrc/
++-SHARED_FLAGS:=-shared -fpic
+++SHARED_FLAGS:=-shared -fpic $(LDFLAGS)
++ 
++ MAGIC_C:=$(wildcard magic/src/*.c)
++ MAGIC_SO:=$(patsubst magic/src/%.c,magic/%.$(SO_TYPE),$(MAGIC_C))
+diff --git a/recipes/tuxpaint/tuxpaint_0.9.21.bb b/recipes/tuxpaint/tuxpaint_0.9.21.bb
+new file mode 100644
+index 0000000..82234b6
+--- /dev/null
++++ b/recipes/tuxpaint/tuxpaint_0.9.21.bb
+@@ -0,0 +1,24 @@
++DESCRIPTION = "Open Source Drawing Software for Children"
++HOMEPAGE = "http://www.tuxpaint.org"
++LICENSE = "GPLv2"
++SECTION = "x11/apps"
++PRIORITY = "optional"
++
++DEPENDS = "cairo fribidi libpaper librsvg libsdl-image libsdl-mixer libsdl-pango libsdl-ttf"
++
++SRC_URI = "http://freefr.dl.sourceforge.net/project/tuxpaint/${PN}/${PV}/${PN}-${PV}.tar.gz \
++	file://makefile.patch"
++
++SRC_URI[md5sum] = "a88401d1860648098eeed819cff038fa"
++SRC_URI[sha256sum] = "6d4f2b981643b5c937708e5e6cdaf318ae7b5562375327b4b1cb84611e65ede9"
++
++do_compile() {
++	PREFIX="/usr" base_do_compile
++}
++
++do_install() {
++	PREFIX="/usr" PKG_ROOT=${D} make install
++}
++
++FILES_${PN} += "${datadir}/icons ${datadir}/pixmaps ${datadir}/tuxpaint"
++FILES_${PN}-dbg += "${libdir}/tuxpaint/plugins/.debug"
 -- 
 1.7.4.1
 
