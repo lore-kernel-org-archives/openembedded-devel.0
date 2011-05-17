@@ -1,23 +1,36 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QMKbj-0001AB-1f for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 15:46:43 +0200
-Received: from f053033076.adsl.alicedsl.de ([78.53.33.76]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QMKYz-0004R1-0p for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 13:43:53 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <raj.khem@gmail.com>) id 1QMNe6-0000sq-Bz
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 May 2011 19:01:22 +0200
+Received: by ewy5 with SMTP id 5so208749ewy.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 May 2011 09:58:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=UjJUocoJOID4xGWRt6/4vAhtR1Ucc4wLlUtoAS8cf7E=;
+	b=dZYqxeUZxagAUl24hiL/wysDP82BTp0pMqtEdK7/fWlYsHwZLlqZFI3SkhWq50Jjui
+	1E9NpToUatvcXhSBzex2AhNC7LEhiVoXh3+7vj5ad9hYq09gbYw4tcbK/MzfFdxshXjQ
+	SKonCqbI9q19bGk4SYBt/wv7Vzg72jaXnqhts=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=XCAOSfHUcQyP5ceJvMcKdguQ3mzIwNUp80+SBV2GA5OUjR5YqMlnbsGPk+I7a9au7d
+	s8R+wHv6Evz8MTwCukWIiXbJidVtL5fLqHvKgNMsYauj6+Oq/R3r6DRAhvxs0jz85iLI
+	V/EtaH/v2/heltlZ983fdl30CCCymv1s/JaCg=
+Received: by 10.14.10.18 with SMTP id 18mr298345eeu.172.1305651508243; Tue, 17
+	May 2011 09:58:28 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.14.53.78 with HTTP; Tue, 17 May 2011 09:57:58 -0700 (PDT)
+In-Reply-To: <1305619418.4065.4.camel@mattotaupa>
+References: <1305570476-7207-1-git-send-email-raj.khem@gmail.com>
+	<1305619418.4065.4.camel@mattotaupa>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 17 May 2011 09:57:58 -0700
+Message-ID: <BANLkTinNKg=DD2LuhdnAm=k2+T1nZGu=Pg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1305639196-6624-1-git-send-email-noor_ahsan@mentor.com>
-References: <1305639196-6624-1-git-send-email-noor_ahsan@mentor.com>
-Date: Tue, 17 May 2011 15:43:50 +0200
-Message-ID: <1305639830.4065.65.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [PATCH v2] ust: Add new recipe for 0.12 version
+Subject: Re: [meta-oe][PATCH] uclibc_git.bb: Backport epoll implementation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,56 +44,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2011 13:46:43 -0000
-X-Groupsio-MsgNum: 32151
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-NaGUvLQG1iff/oXpGvbj"
-
---=-NaGUvLQG1iff/oXpGvbj
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 17 May 2011 17:01:22 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Am Dienstag, den 17.05.2011, 18:33 +0500 schrieb Noor Ahsan:
-> * Add new recipe of ust for 0.12 version
+On Tue, May 17, 2011 at 1:03 AM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Dear Khem,
+>
+>
+> Am Montag, den 16.05.2011, 11:27 -0700 schrieb raj.khem@gmail.com:
+>> From: Khem Raj <raj.khem@gmail.com>
+>>
+>> Many applications e.g. firefox need it
+>>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ---
+>> =C2=A0.../uclibc/uclibc-git/uclibc-epoll.patch =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 | =C2=A0378 ++++++++++++++++++++
+>> =C2=A0meta-oe/recipes-core/uclibc/uclibc_git.bb =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0| =C2=A0 =C2=A03 +-
+>> =C2=A02 files changed, 380 insertions(+), 1 deletions(-)
+>> =C2=A0create mode 100644 meta-oe/recipes-core/uclibc/uclibc-git/uclibc-e=
+poll.patch
+>
+> [=E2=80=A6]
+>
+> is that patch different from what was merged upstream [1]?
+>
+> If no, could the revision just be updated?
 
-The same comments and questions as in my other mail apply here too.
-Please send a reply with the respective answers.
+yes eventually. So far I have tested the revision we are at and it
+takes time to validate the newer revision which includes many other
+patches along with this one.
 
-> Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
-> ---
->  recipes/lttng/ust_0.12.bb |    4 ++++
->  1 files changed, 4 insertions(+), 0 deletions(-)
->=20
-> diff --git a/recipes/lttng/ust_0.12.bb b/recipes/lttng/ust_0.12.bb
-> new file mode 100644
-> index 0000000..1efb853
-> --- /dev/null
-> +++ b/recipes/lttng/ust_0.12.bb
-> @@ -0,0 +1,4 @@
-> +require ${PN}.inc
-> +
-> +SRC_URI[md5sum] =3D "fae6e324a56016658c5b83ec14ba0043"
-> +SRC_URI[sha256sum] =3D "215b05f47d0c9e3a2934926a7d14fa9c67025db917c3a1f6=
-41df40b08314ab0c"
-
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+>
+>
+> Thanks,
+>
+> Paul
+>
+>
+> [1] http://git.uclibc.org/uClibc/
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
-Thanks,
-
-Paul
-
---=-NaGUvLQG1iff/oXpGvbj
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3Se5YACgkQPX1aK2wOHVj4kQCZARP9AtQMj/0W1PtEaly3La2S
-lpwAnR0YerLtgFQ0Ij97Wxo0gguMHb0V
-=lZeO
------END PGP SIGNATURE-----
-
---=-NaGUvLQG1iff/oXpGvbj--
