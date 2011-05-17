@@ -1,32 +1,23 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1QMExI-0004cT-SQ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 09:44:36 +0200
-Received: (qmail 6271 invoked by uid 503); 17 May 2011 08:35:37 -0000
-Received: from b9.ovh.net (HELO mail627.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 17 May 2011 08:35:37 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 17 May 2011 09:41:45 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 17 May 2011 09:41:43 +0200
-Message-ID: <4DD226B7.7010605@eukrea.com>
-Date: Tue, 17 May 2011 09:41:43 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.10
-MIME-Version: 1.0
-To: ulf.samuelsson@atmel.com
-References: <E1QM4UJ-0000HC-TX@melo.openembedded.org>
-In-Reply-To: <E1QM4UJ-0000HC-TX@melo.openembedded.org>
-X-Ovh-Tracer-Id: 2789698495128776128
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] Ulf Samuelsson : Update at91sam9 images
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QMFIU-0005EX-OM for openembedded-devel@lists.openembedded.org;
+	Tue, 17 May 2011 10:06:30 +0200
+Received: from f053033076.adsl.alicedsl.de ([78.53.33.76]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QMFFj-00035C-V0 for openembedded-devel@lists.openembedded.org;
+	Tue, 17 May 2011 08:03:40 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1305570476-7207-1-git-send-email-raj.khem@gmail.com>
+References: <1305570476-7207-1-git-send-email-raj.khem@gmail.com>
+Date: Tue, 17 May 2011 10:03:38 +0200
+Message-ID: <1305619418.4065.4.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [meta-oe][PATCH] uclibc_git.bb: Backport epoll implementation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,19 +31,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2011 07:44:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 17 May 2011 08:06:30 -0000
+X-Groupsio-MsgNum: 32132
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Lf8MN+eJsa0ejrxRBPiu"
 
-Hi Ulf,
+--=-Lf8MN+eJsa0ejrxRBPiu
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-may you please update the status of your patches in patchwork when you commit 
-them ?
-You actually have 15 in patchwork, most of them seems commited or superseded 
-and it's time consumming to check if they are really commited and delete them 
-from patchwork.
-
-Thanks
-Eric
+Dear Khem,
 
 
+Am Montag, den 16.05.2011, 11:27 -0700 schrieb raj.khem@gmail.com:
+> From: Khem Raj <raj.khem@gmail.com>
+>=20
+> Many applications e.g. firefox need it
+>=20
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  .../uclibc/uclibc-git/uclibc-epoll.patch           |  378 ++++++++++++++=
+++++++
+>  meta-oe/recipes-core/uclibc/uclibc_git.bb          |    3 +-
+>  2 files changed, 380 insertions(+), 1 deletions(-)
+>  create mode 100644 meta-oe/recipes-core/uclibc/uclibc-git/uclibc-epoll.p=
+atch
+
+[=E2=80=A6]
+
+is that patch different from what was merged upstream [1]?
+
+If no, could the revision just be updated?
+
+
+Thanks,
+
+Paul
+
+
+[1] http://git.uclibc.org/uClibc/
+
+--=-Lf8MN+eJsa0ejrxRBPiu
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3SK80ACgkQPX1aK2wOHViZSwCcDE3MUwxaXTSAV0AI5cOxTSAW
+mjwAniJwV2AbKYSTUvpn/BRCI50oASLm
+=9nxY
+-----END PGP SIGNATURE-----
+
+--=-Lf8MN+eJsa0ejrxRBPiu--
