@@ -1,26 +1,26 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QMHlD-0008PH-J1 for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 12:44:19 +0200
+	id 1QMHxi-0000Bf-CY for openembedded-devel@lists.openembedded.org;
+	Tue, 17 May 2011 12:57:14 +0200
 Received: from f053033076.adsl.alicedsl.de ([78.53.33.76]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QMHiT-0007Z3-00 for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 10:41:29 +0000
+	id 1QMHuy-0008NO-1v for openembedded-devel@lists.openembedded.org;
+	Tue, 17 May 2011 10:54:24 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <BANLkTikOynL1MRD721Wc2v9ktmm32V_RVQ@mail.gmail.com>
-References: <BANLkTikH4sOR-aupFyQ9ArqF8iXyk0uGtw@mail.gmail.com>
-	<1305541284-18178-1-git-send-email-sgh@sgh.dk>
-	<1305551284.5159.8.camel@mattotaupa>
-	<BANLkTikOynL1MRD721Wc2v9ktmm32V_RVQ@mail.gmail.com>
-Date: Tue, 17 May 2011 12:41:26 +0200
-Message-ID: <1305628886.4065.35.camel@mattotaupa>
+In-Reply-To: <BANLkTik25d8oDdLDkFKe=Pnw_r=3hB6woA@mail.gmail.com>
+References: <BANLkTikVtDGTO=04H8kkPdJLH2UtN9JR2A@mail.gmail.com>
+	<1305433012-13000-2-git-send-email-christian.betz@gmail.com>
+	<1305456100.5838.16.camel@mattotaupa>
+	<BANLkTik25d8oDdLDkFKe=Pnw_r=3hB6woA@mail.gmail.com>
+Date: Tue, 17 May 2011 12:54:21 +0200
+Message-ID: <1305629661.4065.48.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.3 
-Subject: Re: [PATCH 2/3] acpid: Make 1.0.10 compile.
+Subject: Re: [PATCH] fix acpid compiler warning on some platforms
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,45 +34,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2011 10:44:19 -0000
-X-Groupsio-MsgNum: 32138
+X-List-Received-Date: Tue, 17 May 2011 10:57:14 -0000
+X-Groupsio-MsgNum: 32139
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-rv6sIFmGFtvH2zAEUfMp"
+	boundary="=-alkpokKSldQ/7CCmJqza"
 
---=-rv6sIFmGFtvH2zAEUfMp
+--=-alkpokKSldQ/7CCmJqza
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dear Christian,
+Am Montag, den 16.05.2011, 21:10 -0400 schrieb Christian Betz:
+> Signed-off-by: Christian Betz <christian.betz@gmail.com>
+> ---------------------------------------------------------
+> I'm sorry I missed the part about officially signing off.
 
+No problem. This has happened to all of us. I committed your patch in
+[1]. Please update the state in the patch queue [2].
 
-please adhere to the netiquette and do not top post=20
-[1] and use interleaved style. If no quote is needed just delete it.
-
-
-Am Montag, den 16.05.2011, 21:52 -0400 schrieb Christian Betz:
-> S=C3=B8ren and Paul:
+> Would you mind telling me the sequence of git format-patch and git
+> send-email that you typically use?
 >=20
-> I've officially signed off on my patch in the other thread,
+> This is what I plan to do next time
+>=20
+>   git format-patch -s 2b621ed98259fa87b2e7ad05d4787d2dbf618608
+>   git send-email --annotate 0001-fix-something.patch
+>=20
+> I will put the commit message as the subject and then detail why the
+> fix is needed in my editor in annotate mode.
 
-I committed your patch in [2].
+The subject should just contain the summary and the body further
+information [3]. So what you wanted to write into annotate you should
+put that into the commit message, i. e., when you run `git commit`.
 
-S=C3=B8ren, please update the state of your patch in the patch queue [3].
+So an example work flow could be the following.
 
-> and have also sent an email upstream to ted felix (maintainer of
-> acpid-netlink from which the patch in oe is derived). I'll let you
-> know what I hear back.
+git commit -s # quick note if you are in a hurry
+git commit --amend -s # to improve the commit message
+git rebase -i HEAD~20 # 20 is an example. This way you can reformat/reorder=
+/edit committed patches.
+git format-patch -1 -s # -1 takes the last commit
+git send-email 0001-fix-something.patch # You do not need `--annotate` if y=
+ou formatted and improved everything above.
 
-Great!
 
-> Of course my next question is why debian and oe are not using
-> acpid-netlink, but instead cherry pick certain files and then patch
-> vanilla acpid. I'll see if I can figure that out.
+`-s` is only needed once in that series but it is ignored if the
+Signed-off-by line is already present.
 
-Maybe Ted can also answer that.
+> Or maybe there is an official wiki document you (someone) can point me to=
+?
 
-[=E2=80=A6]
+I found [4] and [5]. The manual pages are also very elaborate and
+accessible using `git help yourcommand`, e. g., `git help format-patch`.
 
 
 Thanks,
@@ -80,21 +93,24 @@ Thanks,
 Paul
 
 
-[1] http://en.opensuse.org/openSUSE:Mailing_list_netiquette
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3De0d2de3=
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3De0d2de3=
 98e156fbdc913cc4decf75c357fcf2b33
-[3] http://openembedded.org/index.php/Patchwork
+[2] http://openembedded.org/index.php/Patchwork
+[3] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-May/032692=
+.html
+[4] http://openembedded.org/index.php/Git
+[5] http://en.opensuse.org/Git
 
---=-rv6sIFmGFtvH2zAEUfMp
+--=-alkpokKSldQ/7CCmJqza
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk3SUNYACgkQPX1aK2wOHVjvNACgibINUDnR5sYqUqZNCgoEVvQW
-XWYAn16gHvGV8rspmT2mXXT8qWvwleLn
-=Mpt8
+iEYEABECAAYFAk3SU90ACgkQPX1aK2wOHVhd5ACeIrkfKvIf/eqtIkvTh3IcNiAO
+WRoAnA2Pq1iaRWJ/dwhSTOefBs8EScgu
+=WLOx
 -----END PGP SIGNATURE-----
 
---=-rv6sIFmGFtvH2zAEUfMp--
+--=-alkpokKSldQ/7CCmJqza--
