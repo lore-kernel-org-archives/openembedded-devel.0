@@ -1,39 +1,32 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders.darander@gmail.com>) id 1QMENM-000495-Lk
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1QMExI-0004cT-SQ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 09:07:28 +0200
-Received: by fxm19 with SMTP id 19so334539fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 May 2011 00:04:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=N0EAgsd+KAOaX9CeCgiL7L6x/t8IknvLONrJUlMSb0A=;
-	b=pvoCip4i16s28WLITZcRN4/ckruVfbe+uUuKIxGx9w/frTK1q8Q+SCy2oAqO1DTY9/
-	rcFsgCYq2aKWAAP6UcdZaHCMi8QEGcxUr+cZRiS2X+ABnDldQLEUGs0XKl7NT+NyCioV
-	k7OTbF0BfdogiLWl4mDlpzOLvum2sOhg/Hxfk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=KfQUtJt6+IdAJ77QbvLm7rnYvsDFRrp8B/QxItCy1kbtjg+Odg36Tzl+aXPG/ymgrz
-	y++ByIQspDEQysUaPhqpVnbiXJfQ0yK05d3PbK/H06GlLhEj8rGLBsH6Rtg463bSf1H0
-	lEiFUjUhKZrK9U6vdaYTpGFx8J1HicyRzTaZw=
+	Tue, 17 May 2011 09:44:36 +0200
+Received: (qmail 6271 invoked by uid 503); 17 May 2011 08:35:37 -0000
+Received: from b9.ovh.net (HELO mail627.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 17 May 2011 08:35:37 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 17 May 2011 09:41:45 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 17 May 2011 09:41:43 +0200
+Message-ID: <4DD226B7.7010605@eukrea.com>
+Date: Tue, 17 May 2011 09:41:43 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.10
 MIME-Version: 1.0
-Received: by 10.223.92.132 with SMTP id r4mr342858fam.142.1305615875515; Tue,
-	17 May 2011 00:04:35 -0700 (PDT)
-Received: by 10.223.93.206 with HTTP; Tue, 17 May 2011 00:04:35 -0700 (PDT)
-In-Reply-To: <iqt55i$59d$1@dough.gmane.org>
-References: <1305545218.3424.29.camel@rex>
-	<BANLkTimSNvdsc1BoCk4ofNh4-nFuO5bg2A@mail.gmail.com>
-	<1305564582.2429.90.camel@phil-desktop>
-	<BANLkTimtfuCEo253ye-96xeo1dsvJgRFBw@mail.gmail.com>
-	<iqt55i$59d$1@dough.gmane.org>
-Date: Tue, 17 May 2011 09:04:35 +0200
-Message-ID: <BANLkTikg=j9+Y-o8CfXEpBbY51u+tBLa8A@mail.gmail.com>
-From: Anders Darander <anders.darander@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: OpenEmbedded Core - Ready for extended users
+To: ulf.samuelsson@atmel.com
+References: <E1QM4UJ-0000HC-TX@melo.openembedded.org>
+In-Reply-To: <E1QM4UJ-0000HC-TX@melo.openembedded.org>
+X-Ovh-Tracer-Id: 2789698495128776128
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] Ulf Samuelsson : Update at91sam9 images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,45 +40,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2011 07:07:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 17 May 2011 07:44:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, May 17, 2011 at 08:38, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> On 17-05-11 08:23, Anders Darander wrote:
->> Yes, this is definitely needed. Which type of new
->> applications/libraries can get into meta-oe, and which are supposed to
->> be kept in higher layers...
->>
->> In what cases can additional versions of the recipe in oe-core be
->> added? E.g. dbus is built using 'EXTRA_OECONF = "--with-x"', which at
->> least on head-less systems seems to be overkill.
->
-> Dbus is a really good example where the above knee-jerk reaction is
-> misplaced :) The --with-x only turns on building dbus-launch, which is x
-> specific, but that's the only bit that is. All the other dbus
-> subpackages lack X dependencies.
+Hi Ulf,
 
-Yes, from that point, Dbus was not the optimal example, I agree...
+may you please update the status of your patches in patchwork when you commit 
+them ?
+You actually have 15 in patchwork, most of them seems commited or superseded 
+and it's time consumming to check if they are really commited and delete them 
+from patchwork.
 
-Though, that was only one example of a package that has either runtime
-or only build-time dependencies on X in some form or another. Earlier,
-in the 2011.03-releases, we had systemd depending on gtk+, which has
-been removed in the lates updates. Thats just another example.
-
-In some cases, removing direct or indirect dependencies like these,
-would be something that we'd like to see integrated upstreams. Of
-course, we are willing to supply patches for that, after a discussion
-on how such things should be handled. Is it desired for package Y or
-isn't it. This could sometimes be to reduce the image size, but in
-cases like dbus, it might only be to reduce build time and
-build-directory size.
-
-In other cases, I assume that we're going to continue keeping our
-patchsets local, as I guess that we probably have quite uncommon
-desires to get a certain packet working without e.g. X or some other
-dependency.
-
-Regards,
-Anders
+Thanks
+Eric
 
 
