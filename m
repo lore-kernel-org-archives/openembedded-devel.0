@@ -1,30 +1,23 @@
-Received: from smtprelay-h21.telenor.se ([195.54.99.196])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1QMR8v-0001TT-70
+	(envelope-from <philb@gnu.org>) id 1QMRHA-0004Kr-CC
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 22:45:25 +0200
-Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
-	by smtprelay-h21.telenor.se (Postfix) with ESMTP id B819AE9DA1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 May 2011 22:42:31 +0200 (CEST)
-X-SENDER-IP: [83.227.57.42]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AtE6AMDc0k1T4zkqPGdsb2JhbAAMiRWOZ44WAQEBATfHXIYZBJARjnc
-X-IronPort-AV: E=Sophos;i="4.65,227,1304287200"; d="scan'208";a="190502512"
-Received: from c-2a39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.244]) ([83.227.57.42])
-	by ipb1.telenor.se with ESMTP; 17 May 2011 22:42:31 +0200
-Message-ID: <4DD2DDB7.4030003@atmel.com>
-Date: Tue, 17 May 2011 22:42:31 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Thunderbird/3.1.10
-MIME-Version: 1.0
+	Tue, 17 May 2011 22:53:56 +0200
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.3])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QMREO-0006A8-N7
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 May 2011 22:51:04 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1304974747-21466-1-git-send-email-schnitzeltony@gmx.de>
-In-Reply-To: <1304974747-21466-1-git-send-email-schnitzeltony@gmx.de>
-Subject: Re: [PATCH 1/2] u-boot: add 2011.03
+In-Reply-To: <1305663890-20372-1-git-send-email-raj.khem@gmail.com>
+References: <1305663890-20372-1-git-send-email-raj.khem@gmail.com>
+Date: Tue, 17 May 2011 21:50:57 +0100
+Message-ID: <1305665458.18415.96.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: [meta-oe][PATCH] uclibc_git.bb: inherit gitpkgv to get PV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,84 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2011 20:45:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 17 May 2011 20:53:56 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-2011-05-09 22:59, Andreas Mueller skrev:
-> Signed-off-by: Andreas Mueller<schnitzeltony@gmx.de>
+On Tue, 2011-05-17 at 13:24 -0700, raj.khem@gmail.com wrote:
+> From: Khem Raj <raj.khem@gmail.com>
+> 
+> use GITPKGVTAG for PV
+> Cleanup unused UCLIBC_BASE
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
->   recipes/u-boot/u-boot_2011.03.bb |   19 +++++++++++++++++++
->   1 files changed, 19 insertions(+), 0 deletions(-)
->   create mode 100644 recipes/u-boot/u-boot_2011.03.bb
->
-> diff --git a/recipes/u-boot/u-boot_2011.03.bb b/recipes/u-boot/u-boot_2011.03.bb
-> new file mode 100644
-> index 0000000..8ab385f
-> --- /dev/null
-> +++ b/recipes/u-boot/u-boot_2011.03.bb
-> @@ -0,0 +1,19 @@
-> +PR = "r0"
-> +require u-boot.inc
-> +
-> +DEFAULT_PREFERENCE = "-1"
-> +
-> +SRC_URI = "ftp://ftp.denx.de/pub/u-boot/u-boot-${PV}.tar.bz2 "
-> +SRC_URI[md5sum] = "91d02124c94368557d0e9ac05fb8c33f"
-> +SRC_URI[sha256sum] = "08677f66d8d4ee542f6599f580cdffdf730544e1803f9d3739117d6f6d68083e"
-> +
-> +
-> +TARGET_LDFLAGS = ""
-> +
-> +inherit base
-> +
-> +do_compile () {
-> +       oe_runmake ${UBOOT_MACHINE}
-> +       oe_runmake all
-> +}
-> +
-I added support for building multiple u-boot targets in 2009.11
-Suggest that this functionality is added in all new u-boot recipes.
-There is a new include file which handles the install.
+>  meta-oe/recipes-core/uclibc/uclibc_git.bb |    6 +++---
+>  1 files changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-core/uclibc/uclibc_git.bb b/meta-oe/recipes-core/uclibc/uclibc_git.bb
+> index cbc8ab8..05eea00 100644
+> --- a/meta-oe/recipes-core/uclibc/uclibc_git.bb
+> +++ b/meta-oe/recipes-core/uclibc/uclibc_git.bb
+> @@ -6,17 +6,17 @@
+>  # UCLIBC_BASE can be set in a distro file, but whether this works depends
+>  # on whether the base patches apply to the selected (SRCDATE) svn release.
 
+I guess that comment should also be removed if UCLIBC_BASE is unused.
 
-PR = "r2"
-require u-boot_r2.inc
+p.
 
-DEFAULT_PREFERENCE = "-1"
-...
-SRC_URI = "ftp://ftp.denx.de/pub/u-boot/u-boot-${PV}.tar.bz2 "
-...
-
-TARGET_LDFLAGS = ""
-
-inherit base
-
-do_compile () {
-     if ! [ "x${UBOOT_MACHINES}" == "x" ] ; then
-         for board in ${UBOOT_MACHINES} ; do
-             if ! [ `grep ${board}_config Makefile | wc -c` == 0 ] ; then
-                 mkdir -p binaries/${board}
-                 oe_runmake O=binaries/${board} distclean
-                 oe_runmake O=binaries/${board} ${board}_config
-                 oe_runmake O=binaries/${board} all
-             fi
-         done
-     else
-            oe_runmake ${UBOOT_MACHINE}
-            oe_runmake all
-     fi
-}
-
-SRC_URI[md5sum] = "d94700614225f53c853dfe714eb5fa47"
-SRC_URI[sha256sum] = 
-"066615314fc90a314823ac975ca2a525a51fdad41802f4088a3a21ce073e8de6"
-
-
-
--- 
-Best Regards
-Ulf Samuelsson
 
 
 
