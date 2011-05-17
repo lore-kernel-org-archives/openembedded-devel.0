@@ -1,26 +1,40 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QMHxi-0000Bf-CY for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 12:57:14 +0200
-Received: from f053033076.adsl.alicedsl.de ([78.53.33.76]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QMHuy-0008NO-1v for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 10:54:24 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <otavio.salvador@gmail.com>) id 1QMJ9U-0001nW-6s
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 May 2011 14:13:28 +0200
+Received: by bwz5 with SMTP id 5so457212bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 May 2011 05:10:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=K/4ZB60oRhz6XEWGagMkRNatp/qfzFzciPKWe82c51E=;
+	b=x31hqT6lShT48wyOS2fUHTSS8CHLUxa94vm1iye20Y1R1EuNKPLAIpazsj0AlccanZ
+	SqZ9gztuJIdw1xDUDjcp141sA6kllx4VedwsjWNsiGbxDgSlosDUPKBe13IKC9lAEY4s
+	2gUZ5SK8F1Oq6hcImYhCLkAzCcUhT1APN4i7Y=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=cE1qAWJdkLqeB5mnz4TjqTgxYrTooGJusEkDHrgbvQEGmfMUvNYA7gHABR0fIZ/rqN
+	h6Gw4iRIrMZupo8b0ibBGQsJBPvJbcGNpOo74n+JmSHnv33pG6EviNYS8G/KKaedyZvF
+	pGSLJTCI89DMOUY3/uRlcbsMRprQes/1zY2C8=
+MIME-Version: 1.0
+Received: by 10.204.7.209 with SMTP id e17mr585253bke.162.1305634234732; Tue,
+	17 May 2011 05:10:34 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.79.70 with HTTP; Tue, 17 May 2011 05:10:34 -0700 (PDT)
+In-Reply-To: <iqt58k$59d$2@dough.gmane.org>
+References: <1305578605-17041-1-git-send-email-otavio@ossystems.com.br>
+	<iqt58k$59d$2@dough.gmane.org>
+Date: Tue, 17 May 2011 09:10:34 -0300
+X-Google-Sender-Auth: taa2_CxpG2SYqD-qYyBFQvqWIME
+Message-ID: <BANLkTimb2BJc7jXqC5sHcaqjpQWUZ2dtMg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <BANLkTik25d8oDdLDkFKe=Pnw_r=3hB6woA@mail.gmail.com>
-References: <BANLkTikVtDGTO=04H8kkPdJLH2UtN9JR2A@mail.gmail.com>
-	<1305433012-13000-2-git-send-email-christian.betz@gmail.com>
-	<1305456100.5838.16.camel@mattotaupa>
-	<BANLkTik25d8oDdLDkFKe=Pnw_r=3hB6woA@mail.gmail.com>
-Date: Tue, 17 May 2011 12:54:21 +0200
-Message-ID: <1305629661.4065.48.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [PATCH] fix acpid compiler warning on some platforms
+Subject: Re: [meta-oe][PATCH v1] freerdp: update to 2011-05-16 snapshot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,83 +48,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2011 10:57:14 -0000
-X-Groupsio-MsgNum: 32139
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-alkpokKSldQ/7CCmJqza"
-
---=-alkpokKSldQ/7CCmJqza
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 17 May 2011 12:13:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Am Montag, den 16.05.2011, 21:10 -0400 schrieb Christian Betz:
-> Signed-off-by: Christian Betz <christian.betz@gmail.com>
-> ---------------------------------------------------------
-> I'm sorry I missed the part about officially signing off.
+On Tue, May 17, 2011 at 03:40, Koen Kooi <koen@dominion.thruhere.net> wrote=
+:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 16-05-11 22:43, Otavio Salvador wrote:
+>> This version includes major improvements since last version
+>> packages. It also had the plugins packages redone so they can be
+>> choosen depending on the environment needs.
+>>
+>> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+>
+> This one doesn't have the colourbug you mentioned earlier? And it
+> doesn't need xprop anymore, right?
 
-No problem. This has happened to all of us. I committed your patch in
-[1]. Please update the state in the patch queue [2].
+Correct. Please merge it.
 
-> Would you mind telling me the sequence of git format-patch and git
-> send-email that you typically use?
->=20
-> This is what I plan to do next time
->=20
->   git format-patch -s 2b621ed98259fa87b2e7ad05d4787d2dbf618608
->   git send-email --annotate 0001-fix-something.patch
->=20
-> I will put the commit message as the subject and then detail why the
-> fix is needed in my editor in annotate mode.
-
-The subject should just contain the summary and the body further
-information [3]. So what you wanted to write into annotate you should
-put that into the commit message, i. e., when you run `git commit`.
-
-So an example work flow could be the following.
-
-git commit -s # quick note if you are in a hurry
-git commit --amend -s # to improve the commit message
-git rebase -i HEAD~20 # 20 is an example. This way you can reformat/reorder=
-/edit committed patches.
-git format-patch -1 -s # -1 takes the last commit
-git send-email 0001-fix-something.patch # You do not need `--annotate` if y=
-ou formatted and improved everything above.
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
-`-s` is only needed once in that series but it is ignored if the
-Signed-off-by line is already present.
-
-> Or maybe there is an official wiki document you (someone) can point me to=
-?
-
-I found [4] and [5]. The manual pages are also very elaborate and
-accessible using `git help yourcommand`, e. g., `git help format-patch`.
-
-
-Thanks,
-
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3De0d2de3=
-98e156fbdc913cc4decf75c357fcf2b33
-[2] http://openembedded.org/index.php/Patchwork
-[3] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-May/032692=
-.html
-[4] http://openembedded.org/index.php/Git
-[5] http://en.opensuse.org/Git
-
---=-alkpokKSldQ/7CCmJqza
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3SU90ACgkQPX1aK2wOHVhd5ACeIrkfKvIf/eqtIkvTh3IcNiAO
-WRoAnA2Pq1iaRWJ/dwhSTOefBs8EScgu
-=WLOx
------END PGP SIGNATURE-----
-
---=-alkpokKSldQ/7CCmJqza--
