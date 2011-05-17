@@ -1,40 +1,24 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QMJ9U-0001nW-6s
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1QMJLL-00020f-KE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 14:13:28 +0200
-Received: by bwz5 with SMTP id 5so457212bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 May 2011 05:10:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=K/4ZB60oRhz6XEWGagMkRNatp/qfzFzciPKWe82c51E=;
-	b=x31hqT6lShT48wyOS2fUHTSS8CHLUxa94vm1iye20Y1R1EuNKPLAIpazsj0AlccanZ
-	SqZ9gztuJIdw1xDUDjcp141sA6kllx4VedwsjWNsiGbxDgSlosDUPKBe13IKC9lAEY4s
-	2gUZ5SK8F1Oq6hcImYhCLkAzCcUhT1APN4i7Y=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=cE1qAWJdkLqeB5mnz4TjqTgxYrTooGJusEkDHrgbvQEGmfMUvNYA7gHABR0fIZ/rqN
-	h6Gw4iRIrMZupo8b0ibBGQsJBPvJbcGNpOo74n+JmSHnv33pG6EviNYS8G/KKaedyZvF
-	pGSLJTCI89DMOUY3/uRlcbsMRprQes/1zY2C8=
-MIME-Version: 1.0
-Received: by 10.204.7.209 with SMTP id e17mr585253bke.162.1305634234732; Tue,
-	17 May 2011 05:10:34 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.79.70 with HTTP; Tue, 17 May 2011 05:10:34 -0700 (PDT)
-In-Reply-To: <iqt58k$59d$2@dough.gmane.org>
-References: <1305578605-17041-1-git-send-email-otavio@ossystems.com.br>
-	<iqt58k$59d$2@dough.gmane.org>
-Date: Tue, 17 May 2011 09:10:34 -0300
-X-Google-Sender-Auth: taa2_CxpG2SYqD-qYyBFQvqWIME
-Message-ID: <BANLkTimb2BJc7jXqC5sHcaqjpQWUZ2dtMg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Tue, 17 May 2011 14:25:43 +0200
+Received: from nat-dem.mentorg.com ([195.212.93.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1QMJIZ-0007dy-EG from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 May 2011 05:22:51 -0700
+Received: from localhost.localdomain ([137.202.156.152]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
+	Tue, 17 May 2011 14:22:47 +0200
+From: Noor Ahsan <noor_ahsan@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v1] freerdp: update to 2011-05-16 snapshot
+Date: Tue, 17 May 2011 17:21:56 +0500
+Message-Id: <1305634916-6132-1-git-send-email-noor_ahsan@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 17 May 2011 12:22:47.0910 (UTC)
+	FILETIME=[21EE2060:01CC148D]
+Subject: [PATCH] Add new recipe for 0.12 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,32 +32,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2011 12:13:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 17 May 2011 12:25:43 -0000
 
-On Tue, May 17, 2011 at 03:40, Koen Kooi <koen@dominion.thruhere.net> wrote=
-:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 16-05-11 22:43, Otavio Salvador wrote:
->> This version includes major improvements since last version
->> packages. It also had the plugins packages redone so they can be
->> choosen depending on the environment needs.
->>
->> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
->
-> This one doesn't have the colourbug you mentioned earlier? And it
-> doesn't need xprop anymore, right?
+* Add new recipe for 0.12 version
 
-Correct. Please merge it.
+Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+---
+ recipes/lttng/ust_0.12.bb |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+diff --git a/recipes/lttng/ust_0.12.bb b/recipes/lttng/ust_0.12.bb
+new file mode 100644
+index 0000000..1efb853
+--- /dev/null
++++ b/recipes/lttng/ust_0.12.bb
+@@ -0,0 +1,4 @@
++require ${PN}.inc
++
++SRC_URI[md5sum] = "fae6e324a56016658c5b83ec14ba0043"
++SRC_URI[sha256sum] = "215b05f47d0c9e3a2934926a7d14fa9c67025db917c3a1f641df40b08314ab0c"
+-- 
+1.6.3.3
+
 
 
