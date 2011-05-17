@@ -1,31 +1,37 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1QMB5x-0004la-Ag; Tue, 17 May 2011 05:37:17 +0200
-Received: by eye27 with SMTP id 27so24916eye.6
-	for <multiple recipients>; Mon, 16 May 2011 20:34:24 -0700 (PDT)
+	(envelope-from <anders.darander@gmail.com>) id 1QMDjH-0002xi-3O
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 May 2011 08:26:03 +0200
+Received: by mail-fx0-f47.google.com with SMTP id 19so319255fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 May 2011 23:23:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:from:date:message-id:subject:to
-	:content-type; bh=jM435ebG/Dj/aLEL3ja+NrXGLA9M6yUPOR99uZReNTw=;
-	b=BlTnIDCoXGzQzrYkun/j2ERLjSm8B9F8Oaikw7MPNU9hBzzeERxs/NdLMgf9qCXyGC
-	zT9lGXZTBqeGBkNF86yR0VPT9qiTNNu6ndMGe1INkzvjMANPWej/VTlidJT5l4CbW85N
-	Oy8UlMV+JDJOz1E2wJ5vj37dZnA9z+e6Fo45A=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=u3kIlUxv+X3OSj1vzvdoDglreIBynSKLA/8vVjlqhyQ=;
+	b=bd6+EeDOWpfQsSCAwXYlDAfC7NkILUDHZL+x2KIfFnO2BZGXyGiMsPhvBijMmiqrUL
+	xRHrkkZg5Gj5TN8kjXBsxTW8NX3UVrFcHMUeVShUvHgFMkffJVqNieQwOWgokAQ9gIKt
+	pN0RxwNfpaA2AuBTxgRhPPVEKeHLYwENZ7Ui4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=Wnei/cpJM4igSC2uywSAM0ZushM1z0x9XlcuN4Z5SgrJDeUvHcXjXfqp9sGjPt+N9O
-	pEVzaA2HvweYQJJ1QPNppw7xU5rmbKtVZdIEOETYQ8eGsjgauuARe41z6KIgwrQ5dtSK
-	P9frbCjpD91SEmQDrp0V3UYQsu6ZO2Uiq1hqw=
-Received: by 10.14.7.198 with SMTP id 46mr42028eep.108.1305603264212; Mon, 16
-	May 2011 20:34:24 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=ilJ4vnVgMsraKImpaQE0hjifIGmRuXICP6ACfDoWUvQa8Pv8aTf1payjEHPeq/pFVP
+	RPNNrp86UbB7L7nyGAMb+8VUNuqO87UWPLJs02y47aCuFFiKitCYvbChMpVCnj6czWSu
+	wM2VeyEXfphVZkytbBldDxHK2hSpc2duLteek=
 MIME-Version: 1.0
-Received: by 10.14.53.78 with HTTP; Mon, 16 May 2011 20:33:54 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 16 May 2011 20:33:54 -0700
-Message-ID: <BANLkTins9Bp0bJ9=08OD7b9cvinJ06r9ng@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: SlugOS layers on top of openembedded-core/meta-openembedded available
+Received: by 10.223.92.132 with SMTP id r4mr300306fam.142.1305613392318; Mon,
+	16 May 2011 23:23:12 -0700 (PDT)
+Received: by 10.223.93.206 with HTTP; Mon, 16 May 2011 23:23:12 -0700 (PDT)
+In-Reply-To: <1305564582.2429.90.camel@phil-desktop>
+References: <1305545218.3424.29.camel@rex>
+	<BANLkTimSNvdsc1BoCk4ofNh4-nFuO5bg2A@mail.gmail.com>
+	<1305564582.2429.90.camel@phil-desktop>
+Date: Tue, 17 May 2011 08:23:12 +0200
+Message-ID: <BANLkTimtfuCEo253ye-96xeo1dsvJgRFBw@mail.gmail.com>
+From: Anders Darander <anders.darander@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: OpenEmbedded Core - Ready for extended users
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,36 +45,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2011 03:37:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 17 May 2011 06:26:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Mon, May 16, 2011 at 18:49, Phil Blundell <philb@gnu.org> wrote:
+> On Mon, 2011-05-16 at 14:52 +0200, Frans Meulenbroeks wrote:
+>> I think the community could benefit if you add info (a pointer) in this
+>> thread
+>> - how to set up a build environment
+>> - policies on what goes into oe-core and meta-oe and what not (and how t=
+o
+>> deal with things that do not go into it)
 
-I have ported over the slugos distributon as collection of layers on
-top of oe-core and meta-oe. There are two new layers
-created namely meta-sluos the distro layer and meta-nslu2 the machine
-layer for nslu2. There is a third repo which is the master
-project which contains the makefile and supporting scripts to do the
-layering and setup. Right now its able to build slugos-images for
-nslu2be based on both uclibc and eglibc
+Yes, this is definitely needed. Which type of new
+applications/libraries can get into meta-oe, and which are supposed to
+be kept in higher layers...
 
-If you are interested to play around please give it a shot. The procedure is
+In what cases can additional versions of the recipe in oe-core be
+added? E.g. dbus is built using 'EXTRA_OECONF =3D "--with-x"', which at
+least on head-less systems seems to be overkill. Still, it's
+preferable (from my point of view) to use as much recipes as possible
+from oe-core, instead of maintaining separate copy in a local layer.
 
-Clone the slugos-setup repo
+>> - a migration scenario from the current repo to the new structure (what =
+are
+>> we doing with the existing recipes)
 
-$ git clone git://github.com/kraj/slugos-setup.git
-$ cd slugos-setup
-$ make
+This is part of what I'm trying to get some time to do now. I've at
+least got sofar as to get the build starting, however, before
+proceeding further on, I've got to double check our local/modified
+copies of a number of recipes (see e.g. the point on dbus above).
 
-and see the magic unfold
+When I'm "finished" converting our distribution/repo; I might get some
+time to try to write up a short text on this (unless someone already
+has done this). However, this is probably a couple of weeks ahead, at
+least.
 
-I would be interested in problem reports anybody runs into.
+>> I know some (if not all) info has been sent around over time, but I feel=
+ it
+>> would help if this announcement would carry the info to get people start=
+ed
+>> (and/or point to a web page that has the above info).
 
-The layer repositories are currently hosted on github.com until they
-find another place
+Yes, an agregated / summarized source for this info is definitely needed.
 
-Enjoy
+> Yes, agreed, I think that would be useful. =A0The build environment setup
+> is certainly a bit different to "classic" oe and it took me a while to
+> figure it out. =A0At the time there didn't seem to be much documentation
+> on how that stuff was meant to work, though with hindsight I now suspect
+> the Poky manual might have been the place to look.
 
--Khem
+I guess that might be right. Currently the move that I'm doing will be
+quite similar to the old oe-style. I've got quite good help by
+studying the angstrom setup scripts. The Poky manual seems to use a
+style where other meta-layers are installed in the poky-tree, however
+I prefer a layout more similar to e.g. angstrom:
+
+own-top level
+|- conf/
+|- bitbake/
+|- openembedded-core/
+|- meta-openembedded/
+
+or the angstrom version:
+own-top level
+|- conf/
+|- bitbake/      // not sure on which level bitbake is kept.
+\ sources/
+  |- openembedded-core
+  |- meta-openembedded
+
+Such a layout makes it a lot easier to keep the top-level in a
+private/public repo, just referencing the oe-core and meta-oe layers
+using git submodules.
+
+Regards,
+Anders Darander
 
 
