@@ -1,27 +1,37 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1QMJsX-0002s1-8q
+	(envelope-from <sakoman@gmail.com>) id 1QMJw7-0003nn-Ug
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 15:00:01 +0200
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1QMJpk-0002MO-TO from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 05:57:09 -0700
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Tue, 17 May 2011 15:03:44 +0200
+Received: by vws2 with SMTP id 2so328354vws.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 May 2011 06:00:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=NRVbZ3dl3vHRVKtdAABOxh2pkH2gxb+YQk9W6h+TtJM=;
+	b=qfK1Z9XIuMVFLBeF8y2I3Sjx0qj9i8eZ1Pvn2TvtWTnUj4pn7rfgI0S5PnGV31FHMw
+	6VXdSPKchFRP8h99gDwS1lAPFOx2Ezhad+3U6zcwxiCY+6x6F6pJWy5B/X0uAiB7jlGv
+	TcX5EOGXxd9NJlmfHc7/zXvNQDUToW9Ljbhqo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	b=diY95UzhwAY1Jmp0mt14pxHXkktZOKbQ8xnHZ1CLA3Xb7uUJ139ATKq0eudtegt+BQ
+	hxvXCFlOwkcs5lgSAG5jCsy/qNuovZYLZgH3If4r++BCo19rvzbinFSBPDkU03ZqXmfV
+	kJzm9pCn5cAMT1s3Z3ILLNyNUW8l29EGQqdbI=
 MIME-Version: 1.0
-Date: Tue, 17 May 2011 14:57:05 +0200
-Message-ID: <989A078976CDAD4CB2DC976EEF70E2A505BF0F8F@eu2-mail.mgc.mentorg.com>
-In-Reply-To: <20110517124220.GB11317@jama.jama.net>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [PATCH v2] Add new recipe for 0.5.4 version.
-Thread-Index: AcwUj/aVdr/aHxLpRkOPWLr5XC8JRwAAdZkA
-References: <1305635011-6171-1-git-send-email-noor_ahsan@mentor.com>
-	<20110517124220.GB11317@jama.jama.net>
-From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2] Add new recipe for 0.5.4 version.
+Received: by 10.52.100.163 with SMTP id ez3mr834749vdb.150.1305637250046; Tue,
+	17 May 2011 06:00:50 -0700 (PDT)
+Received: by 10.52.114.33 with HTTP; Tue, 17 May 2011 06:00:50 -0700 (PDT)
+In-Reply-To: <1305621062.4065.20.camel@mattotaupa>
+References: <1304951256.3791.61.camel@mattotaupa>
+	<1305621062.4065.20.camel@mattotaupa>
+Date: Tue, 17 May 2011 06:00:50 -0700
+Message-ID: <BANLkTi=aVkuikkwxKoQNuQ8fTmHTZOxyhw@mail.gmail.com>
+From: Steve Sakoman <sakoman@gmail.com>
+To: Paul Menzel <paulepanter@users.sourceforge.net>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: gs_9.01: task configure fails with `./base/gp_unix.c:25:37: error: fontconfig/fontconfig.h: No such file or directory`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,66 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2011 13:00:01 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 17 May 2011 13:03:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hello,
+On Tue, May 17, 2011 at 1:31 AM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
 
-Yeah, I missed the recipe/package name in the subject. I am sending
-another patch.
+> I have two problems with this commit though.
+>
+> 1. According to the build logs from Steve [2][3] this recipe fails for
+> him with the same error message.
 
-Regards,
-Noor
+Yes, it did fail that time, but note that it completed successfully on
+that same machine as well as a different machine subsequently with no
+changes to the recipe!
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-Martin Jansa
-Sent: Tuesday, May 17, 2011 5:42 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [PATCH v2] Add new recipe for 0.5.4 version.
+I can't explain why that is, but we need to figure it out!  Perhaps a
+missing dependency or a parallel build issue??
 
-On Tue, May 17, 2011 at 05:23:31PM +0500, Noor Ahsan wrote:
-> * Added a new recipe for 0.5.4 version
->=20
-> Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+> 2. The recipe of `gs_8.64` was improved beforehand [4] and the above
+> mentioned problem fixed (it still does not work though). Why was the new
+> version not based on the old one?
 
-Commit message should start with package_name:
+Probably because this the 9.01 recipe has been sitting around in one
+of my experimental branches for quite a few months and Koen pulled
+quite recently.  So I likely based it off the version prior to
+Graham's changes.
 
-from "Add new recipe for 0.5.4 version." in Subject I have no idea what
-are you talking about and have to open e-mail body.. which is not that
-bad as displaying whole commit if it gets commited :).
+We should probably apply Graham's modifications to 9.01 also.
 
-Regards,
+Have you tried that yet?
 
-> ---
->  recipes/lttng/userspace-rcu_0.5.4.bb |    3 +++
->  1 files changed, 3 insertions(+), 0 deletions(-)
->=20
-> diff --git a/recipes/lttng/userspace-rcu_0.5.4.bb=20
-> b/recipes/lttng/userspace-rcu_0.5.4.bb
-> new file mode 100644
-> index 0000000..e0d98e5
-> --- /dev/null
-> +++ b/recipes/lttng/userspace-rcu_0.5.4.bb
-> @@ -0,0 +1,3 @@
-> +require ${PN}.inc
-> +SRC_URI[md5sum] =3D "04147d24749be75200173859839207f7"
-> +SRC_URI[sha256sum] =3D
-"02aedbb16c16bd034e246d5c9637a9232be559c66fc2fe4eb28948e234bd89f1"
-> --
-> 1.6.3.3
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Steve
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> Thanks,
+>
+> Paul
+>
+>
+>> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=49a0babada7f58fc583d299cfc16c22fc3e42fc2
+> [2] http://build.sakoman.com/packages/11697/
+> [3] http://build.sakoman.com/public/logs/task/82709.txt
+> [4] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=74d7b8e7a0c52178a8a111415586eb15d802a88b
+>
 
 
