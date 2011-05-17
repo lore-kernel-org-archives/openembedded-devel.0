@@ -1,24 +1,23 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1QMKSe-0000ll-Ta
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 15:37:21 +0200
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1QMKPn-0005eJ-In from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 06:34:23 -0700
-Received: from localhost.localdomain ([137.202.156.152]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Tue, 17 May 2011 15:33:54 +0200
-From: Noor Ahsan <noor_ahsan@mentor.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QMKaE-00012z-H5 for openembedded-devel@lists.openembedded.org;
+	Tue, 17 May 2011 15:45:10 +0200
+Received: from f053033076.adsl.alicedsl.de ([78.53.33.76]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QMKXU-0004Qo-7M for openembedded-devel@lists.openembedded.org;
+	Tue, 17 May 2011 13:42:20 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 May 2011 18:32:48 +0500
-Message-Id: <1305639168-6590-1-git-send-email-noor_ahsan@mentor.com>
-X-Mailer: git-send-email 1.6.3.3
-X-OriginalArrivalTime: 17 May 2011 13:33:55.0285 (UTC)
-	FILETIME=[117BE050:01CC1497]
-Subject: [PATCH v3] userspace-rcu: Add new recipe for 0.5.4 version.
+In-Reply-To: <1305639168-6590-1-git-send-email-noor_ahsan@mentor.com>
+References: <1305639168-6590-1-git-send-email-noor_ahsan@mentor.com>
+Date: Tue, 17 May 2011 15:42:18 +0200
+Message-ID: <1305639738.4065.63.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH v3] userspace-rcu: Add new recipe for 0.5.4 version.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,26 +31,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2011 13:37:21 -0000
+X-List-Received-Date: Tue, 17 May 2011 13:45:10 -0000
+X-Groupsio-MsgNum: 32150
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-w8bJNHxpjhJbcDHUXUsZ"
 
-* Added a new recipe of userspace-rcu for 0.5.4 version
+--=-w8bJNHxpjhJbcDHUXUsZ
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
----
- recipes/lttng/userspace-rcu_0.5.4.bb |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+Am Dienstag, den 17.05.2011, 18:32 +0500 schrieb Noor Ahsan:
+> * Added a new recipe of userspace-rcu for 0.5.4 version
 
-diff --git a/recipes/lttng/userspace-rcu_0.5.4.bb b/recipes/lttng/userspace-rcu_0.5.4.bb
-new file mode 100644
-index 0000000..e0d98e5
---- /dev/null
-+++ b/recipes/lttng/userspace-rcu_0.5.4.bb
-@@ -0,0 +1,3 @@
-+require ${PN}.inc
-+SRC_URI[md5sum] = "04147d24749be75200173859839207f7"
-+SRC_URI[sha256sum] = "02aedbb16c16bd034e246d5c9637a9232be559c66fc2fe4eb28948e234bd89f1"
--- 
-1.6.3.3
+Well this item is redundant to the commit message, so the committer
+should remove it.
+
+Will you send a follow up patch to remove `userspace-rcu_0.4.6.bb`
+afterward? Or are there still users?
+
+What build configuration has this patch been tested with?
+
+You do not have to resend the patch. Just answer the questions in a
+reply.
+
+> Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+> ---
+>  recipes/lttng/userspace-rcu_0.5.4.bb |    3 +++
+>  1 files changed, 3 insertions(+), 0 deletions(-)
+>=20
+> diff --git a/recipes/lttng/userspace-rcu_0.5.4.bb b/recipes/lttng/userspa=
+ce-rcu_0.5.4.bb
+> new file mode 100644
+> index 0000000..e0d98e5
+> --- /dev/null
+> +++ b/recipes/lttng/userspace-rcu_0.5.4.bb
+> @@ -0,0 +1,3 @@
+> +require ${PN}.inc
+> +SRC_URI[md5sum] =3D "04147d24749be75200173859839207f7"
+> +SRC_URI[sha256sum] =3D "02aedbb16c16bd034e246d5c9637a9232be559c66fc2fe4e=
+b28948e234bd89f1"
+
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
 
 
+Thanks,
 
+Paul
+
+--=-w8bJNHxpjhJbcDHUXUsZ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3SezoACgkQPX1aK2wOHVi1nwCfWizFkp4Dn8/DY6o+9UtE+Xtn
+/GUAnjpFz6RFNNeqejS2v4NwvHxJHE3X
+=gXIN
+-----END PGP SIGNATURE-----
+
+--=-w8bJNHxpjhJbcDHUXUsZ--
