@@ -1,39 +1,39 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eyalreizer@googlemail.com>) id 1QME4x-0003Wo-AI
+	(envelope-from <anders.darander@gmail.com>) id 1QMENM-000495-Lk
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 May 2011 08:48:27 +0200
-Received: by gxk3 with SMTP id 3so62007gxk.6
+	Tue, 17 May 2011 09:07:28 +0200
+Received: by fxm19 with SMTP id 19so334539fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 May 2011 23:45:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=sY09st19aP3Iu3aqGG2H4luIByDAM5or+NUj+nMnl7M=;
-	b=frj68L+49kXzCjVb7bM80PwckqyduTYFLdS+6m1bRNkATJz706cR1iSw6hc5DiI4nG
-	iBp+p0+vXvqcMaqF2NMuPtX4T9DiWoaaQWihIyPyRDMlbFNAguF0Hxz/NiIzEPL8Cj8E
-	NgVp43zKLn4AXSJ4ozvDzhOuP6JVvWrEMFHsQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=T6ecwpPm/pX3sk6D4tMqPcJ9650aEreoyaB470zru4CP3Ooca2LGA+KbALxcMPDfhd
-	DizTTDW4DFS536ZhneCeXoqoiTiCmE/s8txUCQIuDGAwln5eI+SvPQAcRY3usueTwd6+
-	kmJeJLWDisXF4A7HTbsuntmy6TO0Nbssc0j+E=
-Received: by 10.236.154.1 with SMTP id g1mr236191yhk.112.1305614733127;
-	Mon, 16 May 2011 23:45:33 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id h43sm101595yhm.22.2011.05.16.23.45.31
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 16 May 2011 23:45:32 -0700 (PDT)
-From: Eyal Reizer <eyalreizer@googlemail.com>
+	Tue, 17 May 2011 00:04:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=N0EAgsd+KAOaX9CeCgiL7L6x/t8IknvLONrJUlMSb0A=;
+	b=pvoCip4i16s28WLITZcRN4/ckruVfbe+uUuKIxGx9w/frTK1q8Q+SCy2oAqO1DTY9/
+	rcFsgCYq2aKWAAP6UcdZaHCMi8QEGcxUr+cZRiS2X+ABnDldQLEUGs0XKl7NT+NyCioV
+	k7OTbF0BfdogiLWl4mDlpzOLvum2sOhg/Hxfk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=KfQUtJt6+IdAJ77QbvLm7rnYvsDFRrp8B/QxItCy1kbtjg+Odg36Tzl+aXPG/ymgrz
+	y++ByIQspDEQysUaPhqpVnbiXJfQ0yK05d3PbK/H06GlLhEj8rGLBsH6Rtg463bSf1H0
+	lEiFUjUhKZrK9U6vdaYTpGFx8J1HicyRzTaZw=
+MIME-Version: 1.0
+Received: by 10.223.92.132 with SMTP id r4mr342858fam.142.1305615875515; Tue,
+	17 May 2011 00:04:35 -0700 (PDT)
+Received: by 10.223.93.206 with HTTP; Tue, 17 May 2011 00:04:35 -0700 (PDT)
+In-Reply-To: <iqt55i$59d$1@dough.gmane.org>
+References: <1305545218.3424.29.camel@rex>
+	<BANLkTimSNvdsc1BoCk4ofNh4-nFuO5bg2A@mail.gmail.com>
+	<1305564582.2429.90.camel@phil-desktop>
+	<BANLkTimtfuCEo253ye-96xeo1dsvJgRFBw@mail.gmail.com>
+	<iqt55i$59d$1@dough.gmane.org>
+Date: Tue, 17 May 2011 09:04:35 +0200
+Message-ID: <BANLkTikg=j9+Y-o8CfXEpBbY51u+tBLa8A@mail.gmail.com>
+From: Anders Darander <anders.darander@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 May 2011 09:45:22 +0300
-Message-Id: <1305614722-5460-1-git-send-email-eyalr@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <y>
-References: <y>
-Cc: Eyal Reizer <eyalr@ti.com>
-Subject: [PATCH] ti-wifi-utils: update to use the latest release
+Subject: Re: OpenEmbedded Core - Ready for extended users
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,36 +47,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2011 06:48:27 -0000
+X-List-Received-Date: Tue, 17 May 2011 07:07:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* Change to a newer calibrator version supporting latest mac80211 release.
-* Bump PR number
+On Tue, May 17, 2011 at 08:38, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> On 17-05-11 08:23, Anders Darander wrote:
+>> Yes, this is definitely needed. Which type of new
+>> applications/libraries can get into meta-oe, and which are supposed to
+>> be kept in higher layers...
+>>
+>> In what cases can additional versions of the recipe in oe-core be
+>> added? E.g. dbus is built using 'EXTRA_OECONF = "--with-x"', which at
+>> least on head-less systems seems to be overkill.
+>
+> Dbus is a really good example where the above knee-jerk reaction is
+> misplaced :) The --with-x only turns on building dbus-launch, which is x
+> specific, but that's the only bit that is. All the other dbus
+> subpackages lack X dependencies.
 
-Signed-off-by: Eyal Reizer <eyalr@ti.com>
----
- recipes/ti/ti-wifi-utils_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+Yes, from that point, Dbus was not the optimal example, I agree...
 
-diff --git a/recipes/ti/ti-wifi-utils_git.bb b/recipes/ti/ti-wifi-utils_git.bb
-index 1ee5f2d..8d10051 100644
---- a/recipes/ti/ti-wifi-utils_git.bb
-+++ b/recipes/ti/ti-wifi-utils_git.bb
-@@ -3,11 +3,11 @@ LICENSE = "TI-BSD"
- 
- DEPENDS = "libnl"
- 
--PR ="r1"
-+PR ="r2"
- PV ="0.0"
- PR_append = "+gitr${SRCPV}"
- 
--SRCREV = "7f63af54eb66e5b2515f92c59fcc19a8065ce481"
-+SRCREV = "268dbf03091b632c2697eb8028e90fe40513a9d8"
- SRC_URI = "git://github.com/gxk/ti-utils.git;protocol=git"
- 
- S = "${WORKDIR}/git"
--- 
-1.7.0.4
+Though, that was only one example of a package that has either runtime
+or only build-time dependencies on X in some form or another. Earlier,
+in the 2011.03-releases, we had systemd depending on gtk+, which has
+been removed in the lates updates. Thats just another example.
 
+In some cases, removing direct or indirect dependencies like these,
+would be something that we'd like to see integrated upstreams. Of
+course, we are willing to supply patches for that, after a discussion
+on how such things should be handled. Is it desired for package Y or
+isn't it. This could sometimes be to reduce the image size, but in
+cases like dbus, it might only be to reduce build time and
+build-directory size.
+
+In other cases, I assume that we're going to continue keeping our
+patchsets local, as I guess that we probably have quite uncommon
+desires to get a certain packet working without e.g. X or some other
+dependency.
+
+Regards,
+Anders
 
 
