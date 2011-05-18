@@ -1,37 +1,35 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefflance01@gmail.com>) id 1QMipZ-0003oE-QL
+	(envelope-from <chase.maupin@ti.com>) id 1QMm2s-00080S-8A
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 May 2011 17:38:37 +0200
-Received: by iye7 with SMTP id 7so1531559iye.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 May 2011 08:35:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=4vsZvlrE7sYQgAJKRTxj3DDdVdmWphM+6VwBkuh3PjU=;
-	b=qN3Qf4c6vQK671T67C3gEMaKNm1mSRlXgYpslqpW73ew74ozvy8MLRLoz6wSxlhKrd
-	6Opay1f6SeTKHvTheoSEsscgv+KFezojJ329vttUod2t2ycgyyaksLFIrKHgLGaVND2C
-	NmCgO66GYQBZR6Th5zRoUlWr6N1nI/qfTbf8w=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=stWIYbWSjlgtNy8RzqivRSQU5B4bo/QBEYciuRH97yp7tJd8V/rKsn3DhZfKFDTpTX
-	fh/ZM1TROkLM3P6EzTYN5SxOzUWUT2SseXenOpgcF6beby0G9J00mnONtLtmsfA1nJ8A
-	nwcAuZlVGFdi5WXQZK2/N8PckIsXhvU70kK88=
+	Wed, 18 May 2011 21:04:34 +0200
+Received: from dlep26.itg.ti.com ([157.170.170.121])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id p4IJ1cY4026011
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Wed, 18 May 2011 14:01:38 -0500
+Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p4IJ1c7h023448;
+	Wed, 18 May 2011 14:01:38 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
+	([157.170.170.8]) with mapi; Wed, 18 May 2011 14:01:38 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	"openembedded-commits@openembedded.org"
+	<openembedded-commits@openembedded.org>
+Date: Wed, 18 May 2011 14:01:33 -0500
+Thread-Topic: [oe-commits] Jeff Lance : matrix_gui: Pull in lmbench,
+	multimedia,	EZSDK mods
+Thread-Index: AcwVgLeIcj5ET3Q8QTi4vlyuno+JDAADTsyw
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F08034B055BB4@dlee06.ent.ti.com>
+References: <E1QMkSo-0007sn-QR@melo.openembedded.org>
+In-Reply-To: <E1QMkSo-0007sn-QR@melo.openembedded.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.42.135.194 with SMTP id q2mr2526821ict.63.1305732942441; Wed,
-	18 May 2011 08:35:42 -0700 (PDT)
-Received: by 10.231.13.130 with HTTP; Wed, 18 May 2011 08:35:42 -0700 (PDT)
-In-Reply-To: <1305731874.4389.7.camel@mattotaupa>
-References: <1305819309-11808-1-git-send-email-j-lance1@ti.com>
-	<1305731874.4389.7.camel@mattotaupa>
-Date: Wed, 18 May 2011 10:35:42 -0500
-Message-ID: <BANLkTimGfBryxQQcauPcV0E=VDhUH14KhA@mail.gmail.com>
-From: Jeff Lance <jefflance01@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] matrix_gui: Pull in lmbench,multimedia,EZSDK mods
+Subject: Re: [oe-commits] Jeff Lance : matrix_gui: Pull in lmbench, multimedia, EZSDK mods
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,34 +43,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 May 2011 15:38:38 -0000
-Content-Type: text/plain; charset=windows-1252
+X-List-Received-Date: Wed, 18 May 2011 19:04:34 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
-Paul,
+> -----Original Message-----
+> From: openembedded-commits-bounces@lists.openembedded.org
+> [mailto:openembedded-commits-bounces@lists.openembedded.org] On Behalf
+> Of git version control
+> Sent: Wednesday, May 18, 2011 12:23 PM
+> To: openembedded-commits@openembedded.org
+> Subject: [oe-commits] Jeff Lance : matrix_gui: Pull in lmbench,
+> multimedia, EZSDK mods
+>=20
+> Module: openembedded.git
+> Branch: master
+> Commit: b14cb947a346088d14b0d78d3546314c9d37cdbb
+> URL:
+> http://git.openembedded.org/?p=3Dopenembedded.git&a=3Dcommit;h=3Db14cb947=
+a346
+> 088d14b0d78d3546314c9d37cdbb
+>=20
+> Author: Jeff Lance <jefflance01@gmail.com>
+> Date:   Thu May 19 23:35:09 2011 +0000
+>=20
+> matrix_gui: Pull in lmbench,multimedia,EZSDK mods
+>=20
+> * Update SRCREV to pull in:
+> 	* Multimedia apps
+>         * LMBench apps
+>         * EZSDK updates
+>         * remove Blitrix
+>=20
+> Signed-off-by: Jeff Lance  <j-lance1@ti.com>
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-Thanks I've decided to come back to the present and stay here.
+Acked-by: Chase Maupin <chase.maupin@ti.com>
 
-On Wed, May 18, 2011 at 10:17 AM, Paul Menzel <
-paulepanter@users.sourceforge.net> wrote:
-
-> Am Donnerstag, den 19.05.2011, 10:35 -0500 schrieb Jeff Lance:
->                   ^^^^^^^^^^^^^^^^^^^^^^^
->
->
-> You are still living in the future!
->
-> [=85]
->
->
-> Thanks,
->
-> Paul
->
+>=20
+> ---
+>=20
+>  recipes/ti/matrix-gui-common_1.4.bb |    4 ++--
+>  recipes/ti/matrix-gui-e_1.3.bb      |    4 ++--
+>  recipes/ti/matrix-gui_1.3.bb        |    4 ++--
+>  3 files changed, 6 insertions(+), 6 deletions(-)
+>=20
+> diff --git a/recipes/ti/matrix-gui-common_1.4.bb b/recipes/ti/matrix-
+> gui-common_1.4.bb
+> index d436044..6f7376d 100644
+> --- a/recipes/ti/matrix-gui-common_1.4.bb
+> +++ b/recipes/ti/matrix-gui-common_1.4.bb
+> @@ -4,5 +4,5 @@ require matrix-gui-common.inc
+>  # prebuilt version in the repository.
+>  RRECOMMENDS_${PN} =3D "am-sysinfo"
+>=20
+> -SRCREV =3D "245"
+> -PR =3D "${INC_PR}.9"
+> +SRCREV =3D "249"
+> +PR =3D "${INC_PR}.10"
+> diff --git a/recipes/ti/matrix-gui-e_1.3.bb b/recipes/ti/matrix-gui-
+> e_1.3.bb
+> index fb7e4b3..8f2df1c 100644
+> --- a/recipes/ti/matrix-gui-e_1.3.bb
+> +++ b/recipes/ti/matrix-gui-e_1.3.bb
+> @@ -1,5 +1,5 @@
+>  require matrix-gui-e.inc
+>=20
+> -SRCREV =3D "245"
+> -PR =3D "${INC_PR}.8"
+> +SRCREV =3D "249"
+> +PR =3D "${INC_PR}.9"
+>=20
+> diff --git a/recipes/ti/matrix-gui_1.3.bb b/recipes/ti/matrix-
+> gui_1.3.bb
+> index 2c38fc3..f7e56a3 100644
+> --- a/recipes/ti/matrix-gui_1.3.bb
+> +++ b/recipes/ti/matrix-gui_1.3.bb
+> @@ -1,4 +1,4 @@
+>  require matrix-gui.inc
+>=20
+> -SRCREV =3D "245"
+> -PR =3D "${INC_PR}.4"
+> +SRCREV =3D "249"
+> +PR =3D "${INC_PR}.5"
+>=20
+>=20
 > _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-
+> commits
+
 
