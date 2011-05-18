@@ -1,27 +1,27 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1QMbsG-0000Nh-79
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1QMbt7-0000Sy-Lf
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 May 2011 10:12:56 +0200
+	Wed, 18 May 2011 10:17:24 +0200
 Received: from nat-dem.mentorg.com ([195.212.93.2]
 	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1QMbpS-0000Bz-FZ from Noor_Ahsan@mentor.com 
+	id 1QMbod-00005G-C3 from Noor_Ahsan@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 May 2011 01:10:02 -0700
+	Wed, 18 May 2011 01:09:11 -0700
 X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Date: Wed, 18 May 2011 10:10:00 +0200
-Message-ID: <989A078976CDAD4CB2DC976EEF70E2A505BF106C@eu2-mail.mgc.mentorg.com>
-In-Reply-To: <1305639830.4065.65.camel@mattotaupa>
+Date: Wed, 18 May 2011 10:09:08 +0200
+Message-ID: <989A078976CDAD4CB2DC976EEF70E2A505BF106B@eu2-mail.mgc.mentorg.com>
+In-Reply-To: <1305639738.4065.63.camel@mattotaupa>
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [PATCH v2] ust: Add new recipe for 0.12 version
-Thread-Index: AcwUmIAgO5XBrnCDTF6eYG20eABhKgAmcDbg
-References: <1305639196-6624-1-git-send-email-noor_ahsan@mentor.com>
-	<1305639830.4065.65.camel@mattotaupa>
+Thread-Topic: [oe] [PATCH v3] userspace-rcu: Add new recipe for 0.5.4 version.
+Thread-Index: AcwUmE7G4+5gAAA0RZqTEdptV6OoyAAmhXKw
+References: <1305639168-6590-1-git-send-email-noor_ahsan@mentor.com>
+	<1305639738.4065.63.camel@mattotaupa>
 From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2] ust: Add new recipe for 0.12 version
+Subject: Re: [PATCH v3] userspace-rcu: Add new recipe for 0.5.4 version.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,38 +35,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 May 2011 08:12:56 -0000
+X-List-Received-Date: Wed, 18 May 2011 08:17:24 -0000
 Content-class: urn:content-classes:message
 Content-Type: text/plain;
 	charset="UTF-8"
 Content-Transfer-Encoding: base64
 
-SGVsbG8sDQoNClNhbWUgc3R1ZmYgYXBwbHkgaGVyZSBhcyB3ZWxsLg0KDQpJIGFtIG5vdCBzdXJl
-IHdoZXRoZXIgYW55Ym9keSBlbHNlIGlzIHVzaW5nIG9sZGVyIHZlcnNpb24gb3Igbm90IHdpbGwg
-bm90IGRlbGV0ZSB0aGUgb2xkZXIgdmVyc2lvbi4gSSB0ZXN0ZWQgdGhpcyByZWNpcGUgd2l0aCAN
-CkRJU1RSTyA9ICJhbmdzdHJvbmctMjAxMC54Ig0KTUFDSElORSA9ICJiZWFnbGVib2FyZCINCg0K
-VGhlIG9sZGVyIHZlcnNpb24gZG9lcyBub3Qgc3VwcG9ydCBhcm0gYW5kIG9sZGVyIHJlY2lwZSB0
-aHJvd3MgdGhlIGVycm9yIGluIGRvX2NvbXBpbGUuIE5ld2VyIHZlcnNpb24gaGFzIGJldHRlciBz
-dXBwb3J0IG9mIEFSTS4NCg0KUmVnYXJkcywNCk5vb3INCg0KLS0tLS1PcmlnaW5hbCBNZXNzYWdl
-LS0tLS0NCkZyb206IG9wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRl
-ZC5vcmcgW21haWx0bzpvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRk
-ZWQub3JnXSBPbiBCZWhhbGYgT2YgUGF1bCBNZW56ZWwNClNlbnQ6IFR1ZXNkYXksIE1heSAxNywg
-MjAxMSA2OjQ0IFBNDQpUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5v
-cmcNClN1YmplY3Q6IFJlOiBbb2VdIFtQQVRDSCB2Ml0gdXN0OiBBZGQgbmV3IHJlY2lwZSBmb3Ig
-MC4xMiB2ZXJzaW9uDQoNCkFtIERpZW5zdGFnLCBkZW4gMTcuMDUuMjAxMSwgMTg6MzMgKzA1MDAg
-c2NocmllYiBOb29yIEFoc2FuOg0KPiAqIEFkZCBuZXcgcmVjaXBlIG9mIHVzdCBmb3IgMC4xMiB2
-ZXJzaW9uDQoNClRoZSBzYW1lIGNvbW1lbnRzIGFuZCBxdWVzdGlvbnMgYXMgaW4gbXkgb3RoZXIg
-bWFpbCBhcHBseSBoZXJlIHRvby4NClBsZWFzZSBzZW5kIGEgcmVwbHkgd2l0aCB0aGUgcmVzcGVj
-dGl2ZSBhbnN3ZXJzLg0KDQo+IFNpZ25lZC1vZmYtYnk6IE5vb3IgQWhzYW4gPG5vb3JfYWhzYW5A
-bWVudG9yLmNvbT4NCj4gLS0tDQo+ICByZWNpcGVzL2x0dG5nL3VzdF8wLjEyLmJiIHwgICAgNCAr
-KysrDQo+ICAxIGZpbGVzIGNoYW5nZWQsIDQgaW5zZXJ0aW9ucygrKSwgMCBkZWxldGlvbnMoLSkN
-Cj4gDQo+IGRpZmYgLS1naXQgYS9yZWNpcGVzL2x0dG5nL3VzdF8wLjEyLmJiIGIvcmVjaXBlcy9s
-dHRuZy91c3RfMC4xMi5iYiBuZXcgDQo+IGZpbGUgbW9kZSAxMDA2NDQgaW5kZXggMDAwMDAwMC4u
-MWVmYjg1Mw0KPiAtLS0gL2Rldi9udWxsDQo+ICsrKyBiL3JlY2lwZXMvbHR0bmcvdXN0XzAuMTIu
-YmINCj4gQEAgLTAsMCArMSw0IEBADQo+ICtyZXF1aXJlICR7UE59LmluYw0KPiArDQo+ICtTUkNf
-VVJJW21kNXN1bV0gPSAiZmFlNmUzMjRhNTYwMTY2NThjNWI4M2VjMTRiYTAwNDMiDQo+ICtTUkNf
-VVJJW3NoYTI1NnN1bV0gPSAiMjE1YjA1ZjQ3ZDBjOWUzYTI5MzQ5MjZhN2QxNGZhOWM2NzAyNWRi
-OTE3YzNhMWY2NDFkZjQwYjA4MzE0YWIwYyINCg0KQWNrZWQtYnk6IFBhdWwgTWVuemVsIDxwYXVs
-ZXBhbnRlckB1c2Vycy5zb3VyY2Vmb3JnZS5uZXQ+DQoNCg0KVGhhbmtzLA0KDQpQYXVsDQo=
+SGVsbG8sDQoNCkkgYW0gbm90IHN1cmUgd2hldGhlciBhbnlib2R5IGVsc2UgaXMgdXNpbmcgb2xk
+ZXIgdmVyc2lvbiBvciBub3Qgd2lsbCBub3QgZGVsZXRlIHRoZSBvbGRlciB2ZXJzaW9uLiBJIHRl
+c3RlZCB0aGlzIHJlY2lwZSB3aXRoIA0KRElTVFJPID0gImFuZ3N0cm9uZy0yMDEwLngiDQpNQUNI
+SU5FID0gImJlYWdsZWJvYXJkIg0KDQpUaGUgb2xkZXIgdmVyc2lvbiBkb2VzIG5vdCBzdXBwb3J0
+IGFybSBhbmQgb2xkZXIgcmVjaXBlIHRocm93cyB0aGUgZXJyb3IgaW4gZG9fY29tcGlsZS4gTmV3
+ZXIgdmVyc2lvbiBoYXMgYmV0dGVyIHN1cHBvcnQgb2YgQVJNLg0KDQoNClJlZ2FyZHMsDQpOb29y
+DQoNCi0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQpGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
+Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnIFttYWlsdG86b3BlbmVtYmVkZGVkLWRldmVs
+LWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mIFBhdWwgTWVuemVs
+DQpTZW50OiBUdWVzZGF5LCBNYXkgMTcsIDIwMTEgNjo0MiBQTQ0KVG86IG9wZW5lbWJlZGRlZC1k
+ZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQpTdWJqZWN0OiBSZTogW29lXSBbUEFUQ0ggdjNd
+IHVzZXJzcGFjZS1yY3U6IEFkZCBuZXcgcmVjaXBlIGZvciAwLjUuNCB2ZXJzaW9uLg0KDQpBbSBE
+aWVuc3RhZywgZGVuIDE3LjA1LjIwMTEsIDE4OjMyICswNTAwIHNjaHJpZWIgTm9vciBBaHNhbjoN
+Cj4gKiBBZGRlZCBhIG5ldyByZWNpcGUgb2YgdXNlcnNwYWNlLXJjdSBmb3IgMC41LjQgdmVyc2lv
+bg0KDQpXZWxsIHRoaXMgaXRlbSBpcyByZWR1bmRhbnQgdG8gdGhlIGNvbW1pdCBtZXNzYWdlLCBz
+byB0aGUgY29tbWl0dGVyIHNob3VsZCByZW1vdmUgaXQuDQoNCldpbGwgeW91IHNlbmQgYSBmb2xs
+b3cgdXAgcGF0Y2ggdG8gcmVtb3ZlIGB1c2Vyc3BhY2UtcmN1XzAuNC42LmJiYCBhZnRlcndhcmQ/
+IE9yIGFyZSB0aGVyZSBzdGlsbCB1c2Vycz8NCg0KV2hhdCBidWlsZCBjb25maWd1cmF0aW9uIGhh
+cyB0aGlzIHBhdGNoIGJlZW4gdGVzdGVkIHdpdGg/DQoNCllvdSBkbyBub3QgaGF2ZSB0byByZXNl
+bmQgdGhlIHBhdGNoLiBKdXN0IGFuc3dlciB0aGUgcXVlc3Rpb25zIGluIGEgcmVwbHkuDQoNCj4g
+U2lnbmVkLW9mZi1ieTogTm9vciBBaHNhbiA8bm9vcl9haHNhbkBtZW50b3IuY29tPg0KPiAtLS0N
+Cj4gIHJlY2lwZXMvbHR0bmcvdXNlcnNwYWNlLXJjdV8wLjUuNC5iYiB8ICAgIDMgKysrDQo+ICAx
+IGZpbGVzIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgMCBkZWxldGlvbnMoLSkNCj4gDQo+IGRp
+ZmYgLS1naXQgYS9yZWNpcGVzL2x0dG5nL3VzZXJzcGFjZS1yY3VfMC41LjQuYmIgDQo+IGIvcmVj
+aXBlcy9sdHRuZy91c2Vyc3BhY2UtcmN1XzAuNS40LmJiDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0
+DQo+IGluZGV4IDAwMDAwMDAuLmUwZDk4ZTUNCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9yZWNp
+cGVzL2x0dG5nL3VzZXJzcGFjZS1yY3VfMC41LjQuYmINCj4gQEAgLTAsMCArMSwzIEBADQo+ICty
+ZXF1aXJlICR7UE59LmluYw0KPiArU1JDX1VSSVttZDVzdW1dID0gIjA0MTQ3ZDI0NzQ5YmU3NTIw
+MDE3Mzg1OTgzOTIwN2Y3Ig0KPiArU1JDX1VSSVtzaGEyNTZzdW1dID0gIjAyYWVkYmIxNmMxNmJk
+MDM0ZTI0NmQ1Yzk2MzdhOTIzMmJlNTU5YzY2ZmMyZmU0ZWIyODk0OGUyMzRiZDg5ZjEiDQoNCkFj
+a2VkLWJ5OiBQYXVsIE1lbnplbCA8cGF1bGVwYW50ZXJAdXNlcnMuc291cmNlZm9yZ2UubmV0Pg0K
+DQoNClRoYW5rcywNCg0KUGF1bA0K
 
 
