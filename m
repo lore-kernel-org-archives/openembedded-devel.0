@@ -1,35 +1,24 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefflance01@gmail.com>) id 1QMhyz-0002g7-I8
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 May 2011 16:44:17 +0200
-Received: by gxk3 with SMTP id 3so602810gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 May 2011 07:41:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=4hdoJ8qKWtOqku9GWktXGYHaphWljQqUldq9fdE8QHc=;
-	b=bb93TnaLBizwRvJhHeQxPplerFUFvNfVJwNRKJpz36jKUqQQnlAdYmKs7rzDZpcuR3
-	RN0RCE0qTGh56GHMYnzxKf6fpFulb8hREgVLVeGjgk4XX30HIW6D3Ol+fXvCT74kDwts
-	xckzFc0uh+yJeS6XeTqdv/TQZUdmj3hSgWAsE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=RhSE7ByIn800BMaNOSGwf8qG5ARbdGuNuzImeqxMbt7cfcZXehIA/KY1G/0En6VwtR
-	7h8M0EXCEn6BYT9KX4DlOHQZ9uhPThc79OyHp4jiBY5RZUXw2JYNMRkNgkD3ibP2xQsX
-	ztnjSAPLn0czJGEx45SS2zxBidzostFjOwXoA=
-Received: by 10.151.130.7 with SMTP id h7mr1484667ybn.366.1305729681789;
-	Wed, 18 May 2011 07:41:21 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id x37sm1143431ana.8.2011.05.18.07.41.19
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 18 May 2011 07:41:20 -0700 (PDT)
-From: Jeff Lance <jefflance01@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QMiH8-0003Io-O1 for openembedded-devel@lists.openembedded.org;
+	Wed, 18 May 2011 17:03:02 +0200
+Received: from f053038139.adsl.alicedsl.de ([78.53.38.139]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QMiEP-0000Z8-74 for openembedded-devel@lists.openembedded.org;
+	Wed, 18 May 2011 15:00:13 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 May 2011 10:35:09 -0500
-Message-Id: <1305819309-11808-1-git-send-email-j-lance1@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: Jeff Lance <j-lance1@ti.com>
-Subject: [PATCH] matrix_gui: Pull in lmbench,multimedia,EZSDK mods
+In-Reply-To: <EC51CDB0807A51469E0C9CB8CF72D65F03323CEDC7@dnce02.ent.ti.com>
+References: <y> <1305614722-5460-1-git-send-email-eyalr@ti.com>
+	<EC51CDB0807A51469E0C9CB8CF72D65F03323CEDC7@dnce02.ent.ti.com>
+Date: Wed, 18 May 2011 17:00:07 +0200
+Message-ID: <1305730807.4389.6.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: Ping: [PATCH] ti-wifi-utils: update to use the latest release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,58 +32,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 May 2011 14:44:17 -0000
+X-List-Received-Date: Wed, 18 May 2011 15:03:02 -0000
+X-Groupsio-MsgNum: 32180
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-5cWI/Qf3tQ+c4YhQSWi4"
 
-* Update SRCREV to pull in:
-	* Multimedia apps
-        * LMBench apps
-        * EZSDK updates
-        * remove Blitrix
+--=-5cWI/Qf3tQ+c4YhQSWi4
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Jeff Lance  <j-lance1@ti.com>
----
- recipes/ti/matrix-gui-common_1.4.bb |    4 ++--
- recipes/ti/matrix-gui-e_1.3.bb      |    4 ++--
- recipes/ti/matrix-gui_1.3.bb        |    4 ++--
- 3 files changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/recipes/ti/matrix-gui-common_1.4.bb b/recipes/ti/matrix-gui-common_1.4.bb
-index d436044..6f7376d 100644
---- a/recipes/ti/matrix-gui-common_1.4.bb
-+++ b/recipes/ti/matrix-gui-common_1.4.bb
-@@ -4,5 +4,5 @@ require matrix-gui-common.inc
- # prebuilt version in the repository.
- RRECOMMENDS_${PN} = "am-sysinfo"
- 
--SRCREV = "245"
--PR = "${INC_PR}.9"
-+SRCREV = "249"
-+PR = "${INC_PR}.10"
-diff --git a/recipes/ti/matrix-gui-e_1.3.bb b/recipes/ti/matrix-gui-e_1.3.bb
-index fb7e4b3..8f2df1c 100644
---- a/recipes/ti/matrix-gui-e_1.3.bb
-+++ b/recipes/ti/matrix-gui-e_1.3.bb
-@@ -1,5 +1,5 @@
- require matrix-gui-e.inc
- 
--SRCREV = "245"
--PR = "${INC_PR}.8"
-+SRCREV = "249"
-+PR = "${INC_PR}.9"
- 
-diff --git a/recipes/ti/matrix-gui_1.3.bb b/recipes/ti/matrix-gui_1.3.bb
-index 2c38fc3..f7e56a3 100644
---- a/recipes/ti/matrix-gui_1.3.bb
-+++ b/recipes/ti/matrix-gui_1.3.bb
-@@ -1,4 +1,4 @@
- require matrix-gui.inc
- 
--SRCREV = "245"
--PR = "${INC_PR}.4"
-+SRCREV = "249"
-+PR = "${INC_PR}.5"
--- 
-1.7.0.4
+Dear Eyal,
 
 
+Am Mittwoch, den 18.05.2011, 16:37 +0200 schrieb Reizer, Eyal:
 
+> Is there anything holding this patch from being accepted?
+
+Koen pushed it already yesterday [1].
+
+Please update the state in OE=E2=80=99s patch queue [2].
+
+
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D16fcbc6=
+a76e6dcdd15f36163cd47e6c0702c29f5
+[2] http://openembedded.org/index.php/Patchwork
+
+--=-5cWI/Qf3tQ+c4YhQSWi4
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3T3vcACgkQPX1aK2wOHVgFOwCdH0bdZp3sxR3ZZ07u4gbyob0c
+hboAoIb4V6EZ/Ql7T0DqaPTq5p/JIOq6
+=nDwB
+-----END PGP SIGNATURE-----
+
+--=-5cWI/Qf3tQ+c4YhQSWi4--
