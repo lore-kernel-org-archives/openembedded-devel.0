@@ -1,22 +1,36 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QMiYK-0003Ye-N7 for openembedded-devel@lists.openembedded.org;
-	Wed, 18 May 2011 17:20:48 +0200
-Received: from f053038139.adsl.alicedsl.de ([78.53.38.139]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QMiVb-000176-SE for openembedded-devel@lists.openembedded.org;
-	Wed, 18 May 2011 15:18:00 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1305819309-11808-1-git-send-email-j-lance1@ti.com>
+	(envelope-from <jefflance01@gmail.com>) id 1QMipZ-0003oE-QL
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 18 May 2011 17:38:37 +0200
+Received: by iye7 with SMTP id 7so1531559iye.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 May 2011 08:35:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=4vsZvlrE7sYQgAJKRTxj3DDdVdmWphM+6VwBkuh3PjU=;
+	b=qN3Qf4c6vQK671T67C3gEMaKNm1mSRlXgYpslqpW73ew74ozvy8MLRLoz6wSxlhKrd
+	6Opay1f6SeTKHvTheoSEsscgv+KFezojJ329vttUod2t2ycgyyaksLFIrKHgLGaVND2C
+	NmCgO66GYQBZR6Th5zRoUlWr6N1nI/qfTbf8w=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=stWIYbWSjlgtNy8RzqivRSQU5B4bo/QBEYciuRH97yp7tJd8V/rKsn3DhZfKFDTpTX
+	fh/ZM1TROkLM3P6EzTYN5SxOzUWUT2SseXenOpgcF6beby0G9J00mnONtLtmsfA1nJ8A
+	nwcAuZlVGFdi5WXQZK2/N8PckIsXhvU70kK88=
+MIME-Version: 1.0
+Received: by 10.42.135.194 with SMTP id q2mr2526821ict.63.1305732942441; Wed,
+	18 May 2011 08:35:42 -0700 (PDT)
+Received: by 10.231.13.130 with HTTP; Wed, 18 May 2011 08:35:42 -0700 (PDT)
+In-Reply-To: <1305731874.4389.7.camel@mattotaupa>
 References: <1305819309-11808-1-git-send-email-j-lance1@ti.com>
-Date: Wed, 18 May 2011 17:17:54 +0200
-Message-ID: <1305731874.4389.7.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
+	<1305731874.4389.7.camel@mattotaupa>
+Date: Wed, 18 May 2011 10:35:42 -0500
+Message-ID: <BANLkTimGfBryxQQcauPcV0E=VDhUH14KhA@mail.gmail.com>
+From: Jeff Lance <jefflance01@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [PATCH] matrix_gui: Pull in lmbench,multimedia,EZSDK mods
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,39 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 May 2011 15:20:48 -0000
-X-Groupsio-MsgNum: 32181
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-4UaBlVbRHXDByg54sCuc"
-
---=-4UaBlVbRHXDByg54sCuc
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 18 May 2011 15:38:38 -0000
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: quoted-printable
 
-Am Donnerstag, den 19.05.2011, 10:35 -0500 schrieb Jeff Lance:
-                   ^^^^^^^^^^^^^^^^^^^^^^^
+Paul,
 
+Thanks I've decided to come back to the present and stay here.
 
-You are still living in the future!
+On Wed, May 18, 2011 at 10:17 AM, Paul Menzel <
+paulepanter@users.sourceforge.net> wrote:
 
-[=E2=80=A6]
+> Am Donnerstag, den 19.05.2011, 10:35 -0500 schrieb Jeff Lance:
+>                   ^^^^^^^^^^^^^^^^^^^^^^^
+>
+>
+> You are still living in the future!
+>
+> [=85]
+>
+>
+> Thanks,
+>
+> Paul
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
-
-Thanks,
-
-Paul
-
---=-4UaBlVbRHXDByg54sCuc
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3T4yIACgkQPX1aK2wOHVj75ACeOzf+uHUiDNkWFznWIQFQhNy8
-+jAAmwQzJdc7d2jfb7vqMZK1b10DUF89
-=dRDR
------END PGP SIGNATURE-----
-
---=-4UaBlVbRHXDByg54sCuc--
