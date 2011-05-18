@@ -1,37 +1,37 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QMoua-0003Pr-Fq
+	(envelope-from <martin.jansa@gmail.com>) id 1QMoud-0003Pr-7R
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 May 2011 00:08:12 +0200
+	Thu, 19 May 2011 00:08:15 +0200
 Received: by mail-fx0-f47.google.com with SMTP id 19so1851802fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 May 2011 15:05:19 -0700 (PDT)
+	Wed, 18 May 2011 15:05:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:subject:date:message-id:x-mailer
 	:in-reply-to:references;
-	bh=dNMvkqDrjee5fN+Hhc594pQg2zoG9trWM9hWl1+U9dE=;
-	b=azY4iap1IPIXRTPQfbXnafbcVewSY+RNXckGOmiaO1ksVUupWHBCUtc5Ee+CrlrgLv
-	rxzdR9Lsow9BgRK6X1r7KEPtf5g4Cuj+blOlrfDu7RIrYtKsFtMti2ZJMV7ca6Kvt6tR
-	TcGJiQK0D1bYn9Vrt/l9Z+3PcMpzbBxrvegjU=
+	bh=YD3/ebCElUfwzy0kmh9Yp+WzW6SWlGxR+1Li0c9OPV4=;
+	b=f1MHXFwUEmcSkbapkR4A5TIqt2/9HG8WZ9cFWOPRsuO4LhtXzUJVs/oBEhk2dn15c2
+	ONILFkNcsH5A5TQaKfv0U5wB9Nn4ySUKRgub9EU+WRk5whSVKzM6TYtZFniX97yziIpI
+	QdO4bQ8XWo8CV8UP7aAtGz3ZoKk1ivNF2FacU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=SjgV9p75Rt3on4yiluAV8UmaT6hVKyDlAu6A2JRcpwAJLq6un2gT8RhSrcyFROU+pH
-	wACqiXUBpluqgihHVo0c4C1mJNpvIxkQ134V5r7mu1cgrjdFw6LCiXfd9Shh7T8Jr9XN
-	oObb3XcDm7LWb8EQG6Es2HmhUNRKHTFIO52xo=
-Received: by 10.223.17.68 with SMTP id r4mr3007678faa.62.1305756319870;
-	Wed, 18 May 2011 15:05:19 -0700 (PDT)
+	b=NRoJWq4zgRxgsmWtQlhsWExl7nF8IJI5RY9u7IdGBc4zHRH3xeZ9Gz89XV+7zw45jC
+	dWqhBTVu5ZvZC2B3QwowT+YZkbtQho/kfJ5CFee+yr8mS1rm7DJpMM3BSk6OfSmbxsIW
+	/qA3s6yY15eypH0z8Q1x5qZlZytdnYvjGhjVE=
+Received: by 10.223.6.198 with SMTP id a6mr2933798faa.126.1305756322404;
+	Wed, 18 May 2011 15:05:22 -0700 (PDT)
 Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id 14sm809671fas.6.2011.05.18.15.05.18
+	by mx.google.com with ESMTPS id a28sm808378faa.28.2011.05.18.15.05.21
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 18 May 2011 15:05:19 -0700 (PDT)
+	Wed, 18 May 2011 15:05:21 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 May 2011 00:05:17 +0200
-Message-Id: <9cb1277b5ed2bd227fc05bbfc27e27b2cb7f3756.1305756266.git.Martin.Jansa@gmail.com>
+Date: Thu, 19 May 2011 00:05:20 +0200
+Message-Id: <10d8c7ae116e231ed175e3a021e8e22d70a2141c.1305756266.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.5.rc3
 In-Reply-To: <cover.1305756266.git.Martin.Jansa@gmail.com>
 References: <cover.1305756266.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 1/2] glib-2.0: use PN instead of glib-2.0 in PACKAGES and FILES
+Subject: [meta-oe][PATCH 2/2] glib-2.0: append libffi and python-argparse to DEPENDS_virtclass-native, drop gdbus-serialization test
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,34 +45,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 May 2011 22:08:12 -0000
+X-List-Received-Date: Wed, 18 May 2011 22:08:15 -0000
 
-* otherwise notes like this are shown:
-  NOTE: multiple providers are available for runtime glib-2.0-utils (glib-2.0-nativesdk, glib-2.0)
-  NOTE: consider defining a PREFERRED_PROVIDER entry to match glib-2.0-utils
+* DEPENDS_virtclass-native is defined in glib.inc so normal DEPENDS are
+  ignored for -native builds
+* gdbus-serialization test causes circular dependency dbus-glib, and
+  because we cannot add dbus to DEPENDS then we had to drop this test
+  so apply dcf425c5472fdee74885c4f21a851e39c84e6642 from oe.dev
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-core/glib-2.0/glib.inc |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-core/glib-2.0/glib-2.0_git.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/recipes-core/glib-2.0/glib.inc b/meta-oe/recipes-core/glib-2.0/glib.inc
-index 8786fe5..9eafbd8 100644
---- a/meta-oe/recipes-core/glib-2.0/glib.inc
-+++ b/meta-oe/recipes-core/glib-2.0/glib.inc
-@@ -18,10 +18,10 @@ require glib-2.0.inc
- DEPENDS = "glib-2.0-native gtk-doc-native zip dbus"
- DEPENDS_virtclass-native = "gtk-doc-native pkgconfig-native gettext-native dbus-native"
- DEPENDS_virtclass-nativesdk = "libtool-nativesdk"
--PACKAGES =+ "glib-2.0-utils "
-+PACKAGES =+ "${PN}-utils "
+diff --git a/meta-oe/recipes-core/glib-2.0/glib-2.0_git.bb b/meta-oe/recipes-core/glib-2.0/glib-2.0_git.bb
+index 51b0448..34fcaf6 100644
+--- a/meta-oe/recipes-core/glib-2.0/glib-2.0_git.bb
++++ b/meta-oe/recipes-core/glib-2.0/glib-2.0_git.bb
+@@ -6,12 +6,13 @@ PR = "r1"
+ DEFAULT_PREFERENCE = "-1"
  
- LEAD_SONAME = "libglib-2.0.*"
--FILES_glib-2.0-utils = "${bindir}/*"
-+FILES_${PN}-utils = "${bindir}/*"
+ DEPENDS += "libffi python-argparse-native"
++DEPENDS_virtclass-native += "libffi-native python-argparse-native"
  
- inherit autotools pkgconfig gettext
- 
+ SRC_URI = "git://git.gnome.org/glib;protocol=git;branch=master \
+            file://configure-libtool.patch \
+            file://60_wait-longer-for-threads-to-die.patch \
+            file://g_once_init_enter.patch \
+-	   file://remove.test.for.qsort_r.patch \
++           file://remove.test.for.qsort_r.patch \
+           "
+ SRCREV = "d97cbc6731deab137770bc0fe9c69b06f689f5b4"
+ PV = "2.29.3+gitr${SRCPV}"
+@@ -27,4 +28,5 @@ do_configure_prepend() {
+   # missing ${topdir}/gtk-doc.make and --disable-gtk-doc* is not enough, because it calls gtkdocize (not provided by gtk-doc-native)
+   sed -i '/^docs/d' ${S}/configure.ac
+   sed -i 's/SUBDIRS = . m4macros glib gmodule gthread gobject gio tests po docs/SUBDIRS = . m4macros glib gmodule gthread gobject gio tests po/g' ${S}/Makefile.am
++  sed -i -e "s:TEST_PROGS += gdbus-serialization::g"  ${S}/gio/tests/Makefile.am
+ }
 -- 
 1.7.5.rc3
 
