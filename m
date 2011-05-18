@@ -1,27 +1,36 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1QMbt7-0000Sy-Lf
+	(envelope-from <eyalr@ti.com>) id 1QMhvD-0002ZE-Eo
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 May 2011 10:17:24 +0200
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1QMbod-00005G-C3 from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 May 2011 01:09:11 -0700
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Wed, 18 May 2011 10:09:08 +0200
-Message-ID: <989A078976CDAD4CB2DC976EEF70E2A505BF106B@eu2-mail.mgc.mentorg.com>
-In-Reply-To: <1305639738.4065.63.camel@mattotaupa>
+	Wed, 18 May 2011 16:40:23 +0200
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id p4IEbQWa003254
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Wed, 18 May 2011 09:37:27 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id p4IEbQTd023248;
+	Wed, 18 May 2011 09:37:26 -0500 (CDT)
+Received: from DNCE73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p4IEbQEB003543;
+	Wed, 18 May 2011 09:37:26 -0500 (CDT)
+Received: from dnce02.ent.ti.com ([137.167.131.106]) by DNCE73.ent.ti.com
+	([137.167.130.158]) with mapi; Wed, 18 May 2011 16:37:25 +0200
+From: "Reizer, Eyal" <eyalr@ti.com>
+To: Eyal Reizer <eyalreizer@googlemail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 18 May 2011 16:37:23 +0200
+Thread-Topic: Ping: [PATCH] ti-wifi-utils: update to use the latest release
+Thread-Index: AcwUXgdFWBSiMAgsQEWChAq9t8CF9gBCuy7w
+Message-ID: <EC51CDB0807A51469E0C9CB8CF72D65F03323CEDC7@dnce02.ent.ti.com>
+References: <y> <1305614722-5460-1-git-send-email-eyalr@ti.com>
+In-Reply-To: <1305614722-5460-1-git-send-email-eyalr@ti.com>
+Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [PATCH v3] userspace-rcu: Add new recipe for 0.5.4 version.
-Thread-Index: AcwUmE7G4+5gAAA0RZqTEdptV6OoyAAmhXKw
-References: <1305639168-6590-1-git-send-email-noor_ahsan@mentor.com>
-	<1305639738.4065.63.camel@mattotaupa>
-From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v3] userspace-rcu: Add new recipe for 0.5.4 version.
+acceptlanguage: en-US
+MIME-Version: 1.0
+Subject: Ping: [PATCH] ti-wifi-utils: update to use the latest release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,43 +44,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 May 2011 08:17:24 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 18 May 2011 14:40:23 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-SGVsbG8sDQoNCkkgYW0gbm90IHN1cmUgd2hldGhlciBhbnlib2R5IGVsc2UgaXMgdXNpbmcgb2xk
-ZXIgdmVyc2lvbiBvciBub3Qgd2lsbCBub3QgZGVsZXRlIHRoZSBvbGRlciB2ZXJzaW9uLiBJIHRl
-c3RlZCB0aGlzIHJlY2lwZSB3aXRoIA0KRElTVFJPID0gImFuZ3N0cm9uZy0yMDEwLngiDQpNQUNI
-SU5FID0gImJlYWdsZWJvYXJkIg0KDQpUaGUgb2xkZXIgdmVyc2lvbiBkb2VzIG5vdCBzdXBwb3J0
-IGFybSBhbmQgb2xkZXIgcmVjaXBlIHRocm93cyB0aGUgZXJyb3IgaW4gZG9fY29tcGlsZS4gTmV3
-ZXIgdmVyc2lvbiBoYXMgYmV0dGVyIHN1cHBvcnQgb2YgQVJNLg0KDQoNClJlZ2FyZHMsDQpOb29y
-DQoNCi0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQpGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
-Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnIFttYWlsdG86b3BlbmVtYmVkZGVkLWRldmVs
-LWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mIFBhdWwgTWVuemVs
-DQpTZW50OiBUdWVzZGF5LCBNYXkgMTcsIDIwMTEgNjo0MiBQTQ0KVG86IG9wZW5lbWJlZGRlZC1k
-ZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQpTdWJqZWN0OiBSZTogW29lXSBbUEFUQ0ggdjNd
-IHVzZXJzcGFjZS1yY3U6IEFkZCBuZXcgcmVjaXBlIGZvciAwLjUuNCB2ZXJzaW9uLg0KDQpBbSBE
-aWVuc3RhZywgZGVuIDE3LjA1LjIwMTEsIDE4OjMyICswNTAwIHNjaHJpZWIgTm9vciBBaHNhbjoN
-Cj4gKiBBZGRlZCBhIG5ldyByZWNpcGUgb2YgdXNlcnNwYWNlLXJjdSBmb3IgMC41LjQgdmVyc2lv
-bg0KDQpXZWxsIHRoaXMgaXRlbSBpcyByZWR1bmRhbnQgdG8gdGhlIGNvbW1pdCBtZXNzYWdlLCBz
-byB0aGUgY29tbWl0dGVyIHNob3VsZCByZW1vdmUgaXQuDQoNCldpbGwgeW91IHNlbmQgYSBmb2xs
-b3cgdXAgcGF0Y2ggdG8gcmVtb3ZlIGB1c2Vyc3BhY2UtcmN1XzAuNC42LmJiYCBhZnRlcndhcmQ/
-IE9yIGFyZSB0aGVyZSBzdGlsbCB1c2Vycz8NCg0KV2hhdCBidWlsZCBjb25maWd1cmF0aW9uIGhh
-cyB0aGlzIHBhdGNoIGJlZW4gdGVzdGVkIHdpdGg/DQoNCllvdSBkbyBub3QgaGF2ZSB0byByZXNl
-bmQgdGhlIHBhdGNoLiBKdXN0IGFuc3dlciB0aGUgcXVlc3Rpb25zIGluIGEgcmVwbHkuDQoNCj4g
-U2lnbmVkLW9mZi1ieTogTm9vciBBaHNhbiA8bm9vcl9haHNhbkBtZW50b3IuY29tPg0KPiAtLS0N
-Cj4gIHJlY2lwZXMvbHR0bmcvdXNlcnNwYWNlLXJjdV8wLjUuNC5iYiB8ICAgIDMgKysrDQo+ICAx
-IGZpbGVzIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgMCBkZWxldGlvbnMoLSkNCj4gDQo+IGRp
-ZmYgLS1naXQgYS9yZWNpcGVzL2x0dG5nL3VzZXJzcGFjZS1yY3VfMC41LjQuYmIgDQo+IGIvcmVj
-aXBlcy9sdHRuZy91c2Vyc3BhY2UtcmN1XzAuNS40LmJiDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0
-DQo+IGluZGV4IDAwMDAwMDAuLmUwZDk4ZTUNCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9yZWNp
-cGVzL2x0dG5nL3VzZXJzcGFjZS1yY3VfMC41LjQuYmINCj4gQEAgLTAsMCArMSwzIEBADQo+ICty
-ZXF1aXJlICR7UE59LmluYw0KPiArU1JDX1VSSVttZDVzdW1dID0gIjA0MTQ3ZDI0NzQ5YmU3NTIw
-MDE3Mzg1OTgzOTIwN2Y3Ig0KPiArU1JDX1VSSVtzaGEyNTZzdW1dID0gIjAyYWVkYmIxNmMxNmJk
-MDM0ZTI0NmQ1Yzk2MzdhOTIzMmJlNTU5YzY2ZmMyZmU0ZWIyODk0OGUyMzRiZDg5ZjEiDQoNCkFj
-a2VkLWJ5OiBQYXVsIE1lbnplbCA8cGF1bGVwYW50ZXJAdXNlcnMuc291cmNlZm9yZ2UubmV0Pg0K
-DQoNClRoYW5rcywNCg0KUGF1bA0K
+Hi,
+
+Is there anything holding this patch from being accepted?
+
+Best Regards,
+Eyal Reizer
+
+> -----Original Message-----
+> From: Eyal Reizer [mailto:eyalreizer@googlemail.com]
+> Sent: Tuesday, May 17, 2011 9:45 AM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Reizer, Eyal
+> Subject: [PATCH] ti-wifi-utils: update to use the latest release
+>=20
+> * Change to a newer calibrator version supporting latest mac80211
+> release.
+> * Bump PR number
+>=20
+> Signed-off-by: Eyal Reizer <eyalr@ti.com>
+> ---
+>  recipes/ti/ti-wifi-utils_git.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/recipes/ti/ti-wifi-utils_git.bb b/recipes/ti/ti-wifi-
+> utils_git.bb
+> index 1ee5f2d..8d10051 100644
+> --- a/recipes/ti/ti-wifi-utils_git.bb
+> +++ b/recipes/ti/ti-wifi-utils_git.bb
+> @@ -3,11 +3,11 @@ LICENSE =3D "TI-BSD"
+>=20
+>  DEPENDS =3D "libnl"
+>=20
+> -PR =3D"r1"
+> +PR =3D"r2"
+>  PV =3D"0.0"
+>  PR_append =3D "+gitr${SRCPV}"
+>=20
+> -SRCREV =3D "7f63af54eb66e5b2515f92c59fcc19a8065ce481"
+> +SRCREV =3D "268dbf03091b632c2697eb8028e90fe40513a9d8"
+>  SRC_URI =3D "git://github.com/gxk/ti-utils.git;protocol=3Dgit"
+>=20
+>  S =3D "${WORKDIR}/git"
+> --
+> 1.7.0.4
+
 
 
