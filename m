@@ -1,23 +1,17 @@
-Received: from smtp202.alice.it ([82.57.200.98])
+Received: from dd20204.kasserver.com ([85.13.140.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <GNUtoo@no-log.org>) id 1QN9wj-0000rL-HX
+	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1QNBIA-0004rR-8z
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 May 2011 22:35:50 +0200
-Received: from [10.10.20.100] (79.51.85.13) by smtp202.alice.it (8.5.124.08)
-	(authenticated as editempo@alice.it)
-	id 4CC7FB5F03800DE1 for openembedded-devel@lists.openembedded.org;
-	Thu, 19 May 2011 22:32:53 +0200
-From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+	Fri, 20 May 2011 00:02:02 +0200
+Received: from localhost (95-90-75-76-dynip.superkabel.de [95.90.75.76])
+	by dd20204.kasserver.com (Postfix) with ESMTPSA id 7DB6912A0288;
+	Thu, 19 May 2011 23:50:02 +0200 (CEST)
+From: Bernhard.Guillon@opensimpad.org
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ir3q8v$eqc$1@dough.gmane.org>
-References: <1305290080.2448.3.camel@gnutoo-laptop>
-	<1305290588-7057-5-git-send-email-GNUtoo@no-log.org>
-	<ir3q8v$eqc$1@dough.gmane.org>
-Date: Thu, 19 May 2011 22:32:52 +0200
-Message-ID: <1305837172.4279.0.camel@gnutoo-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: [PATCH 05/12] angstrom-2010-preferred-versions.inc: remove xserver-common prefered version
+Date: Thu, 19 May 2011 23:50:42 +0200
+Message-Id: <1305841842-2431-1-git-send-email-Bernhard.Guillon@opensimpad.org>
+X-Mailer: git-send-email 1.7.5.1
+Subject: [PATCH] opkg-utils: port arfile.py patch to opkg-utils, bump PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,23 +25,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 May 2011 20:35:50 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 19 May 2011 22:02:02 -0000
 
-On Thu, 2011-05-19 at 21:15 +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> On 13-05-11 14:43, Denis 'GNUtoo' Carikli wrote:
-> > Without that fix Angstrom keep choosing xserver-common 1.33 instead of the 1.34 version
-> > 
-> > Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
-> 
-> Acked-by: Koen Kooi <koen@dominion.thruhere.net>
-Thanks a lot.
+From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
 
-Denis.
+We need this patch for opkg as well
+
+original commit b3da649ee25374f284d03ebce5843b6326559f73
+original Author: Scott Anderson <o2e@saaworld.com>
+original commit message:
+ipkg-utils: Make arfile.py handle six digit UIDs
+
+Essentially, the problem is that arfile.py is splitting the ar header with
+white-space instead of fixed-width fields, so two fields would get treated
+as a single field.  This makes things better than before as it now honors
+the fixed field widths.
+
+Signed-off-by: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
+---
+ .../opkg-utils/arfile_header_split.patch           |   17 +++++++++++++++++
+ recipes/opkg-utils/opkg-utils_svn.bb               |    3 ++-
+ 2 files changed, 19 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/opkg-utils/opkg-utils/arfile_header_split.patch
+
+diff --git a/recipes/opkg-utils/opkg-utils/arfile_header_split.patch b/recipes/opkg-utils/opkg-utils/arfile_header_split.patch
+new file mode 100644
+index 0000000..4640367
+--- /dev/null
++++ b/recipes/opkg-utils/opkg-utils/arfile_header_split.patch
+@@ -0,0 +1,17 @@
++--- ipkg-utils/arfile.py.orig	2010-09-29 13:38:15.000000000 -0700
+++++ ipkg-utils/arfile.py	2010-10-01 16:06:00.000000000 -0700
++@@ -74,7 +74,12 @@
++             if l == "\n":
++                 l = self.f.readline()
++                 if not l: break
++             l = l.replace('`', '')
++-            descriptor = l.split()
+++            # Field lengths from /usr/include/ar.h:
+++            ar_field_lens = [ 16, 12, 6, 6, 8, 10, 2 ]
+++            descriptor = []
+++            for field_len in ar_field_lens:
+++                descriptor.append(l[:field_len].strip())
+++                l = l[field_len:]
++ #            print descriptor
++             size = int(descriptor[5])
++             memberName = descriptor[0][:-1]
+diff --git a/recipes/opkg-utils/opkg-utils_svn.bb b/recipes/opkg-utils/opkg-utils_svn.bb
+index 6b8d3ea..a8f2cb7 100644
+--- a/recipes/opkg-utils/opkg-utils_svn.bb
++++ b/recipes/opkg-utils/opkg-utils_svn.bb
+@@ -6,10 +6,11 @@ RDEPENDS_${PN} = "python"
+ RDEPENDS_${PN}_virtclass-native = ""
+ SRCREV = "4747"
+ PV = "0.1.8+svnr${SRCPV}"
+-PR = "r6"
++PR = "r7"
+ 
+ SRC_URI = "svn://svn.openmoko.org/trunk/src/host/;module=opkg-utils;proto=http \
+            file://index-ignore-filenotfound.patch \
++           file://arfile_header_split.patch \
+            file://mtime-int.patch"
+ 
+ S = "${WORKDIR}/opkg-utils"
+-- 
+1.7.0.4
 
 
 
