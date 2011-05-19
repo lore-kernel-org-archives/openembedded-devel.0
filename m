@@ -1,40 +1,35 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>)
-	id 1QN8jf-0007CK-Bj; Thu, 19 May 2011 21:18:15 +0200
-Received: by eye27 with SMTP id 27so1015796eye.6
-	for <multiple recipients>; Thu, 19 May 2011 12:15:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
-	:date:x-google-sender-auth:message-id:subject:to:cc:content-type
-	:content-transfer-encoding;
-	bh=NKFZIu6KyPKHOmlhYbUi8QjXoK34+unNnj2UsGHdrzI=;
-	b=bf99bzi5GgpcEouKI1QcwUXiKvfQ5WvyzceDnNz6ne5E/o4NWrGN3hPWOj4965K7hP
-	yoeAEO2PoF35J3Ru9IlRan7iF1zGDrskCBN7x/HQqAkXARAb2GO5HKyZd+mafy7vxH/H
-	KeupWH5rGOoND33AjEptNuqagrXMmn5gBx2pk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type
-	:content-transfer-encoding;
-	b=kRPDAg71Ioc8SutApFMNHZ0VR8WolYSFpToZ4XQ+ONgB8y9ECZOnD8GU3Vg8Ig7lYV
-	zKUfg+3YJMaqnfCDWls8EDWuiAi/Iiw9C5TogXf5XuJb14QTggBAh0qwBsegMjs1InSe
-	1KpCmJsM3BudUoCTlsRMp9ZdNwovtzV6KX7ps=
-Received: by 10.204.181.7 with SMTP id bw7mr1085997bkb.16.1305832519270; Thu,
-	19 May 2011 12:15:19 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.205.82.12 with HTTP; Thu, 19 May 2011 12:14:59 -0700 (PDT)
-In-Reply-To: <BANLkTimEO3P8JmjcS9s50yqJWB=nBAkq+Q@mail.gmail.com>
-References: <E1QN7Sg-0003y1-3F@happy.bec-systems.com>
-	<BANLkTimEO3P8JmjcS9s50yqJWB=nBAkq+Q@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 19 May 2011 12:14:59 -0700
-X-Google-Sender-Auth: wPc6St3Fe2Kfe5-XHHUYqfzTHuI
-Message-ID: <BANLkTinY3fkK5oK58EC-yXmW37VZkbiV4w@mail.gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] OE Changelog for 2011-4-8 to 2011-4-15
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QN8kJ-0007ID-KY for openembedded-devel@lists.openembedded.org;
+	Thu, 19 May 2011 21:18:55 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QN8hS-0000WD-9K for openembedded-devel@lists.openembedded.org;
+	Thu, 19 May 2011 21:15:58 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 May 2011 21:15:58 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 May 2011 21:15:58 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 19 May 2011 21:15:43 +0200
+Message-ID: <ir3q8v$eqc$1@dough.gmane.org>
+References: <1305290080.2448.3.camel@gnutoo-laptop>
+	<1305290588-7057-5-git-send-email-GNUtoo@no-log.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1305290588-7057-5-git-send-email-GNUtoo@no-log.org>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH 05/12] angstrom-2010-preferred-versions.inc: remove xserver-common prefered version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,24 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 May 2011 19:18:15 -0000
+X-List-Received-Date: Thu, 19 May 2011 19:18:55 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Thu, May 19, 2011 at 11:43 AM, Cliff Brake <cliff.brake@gmail.com> wrote=
-:
-> Are there any other repos or maillists that I should include in this
-> report? =C2=A0I'm trying to increase visibility in what all the projects
-> are doing, so we can reduce duplication of work in various layers.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-There's a meta-slugos now, and pb is hosting a meta-micro. Those are
-all that come to mind off the top of my head. Not sure how much you
-want to include :)
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+On 13-05-11 14:43, Denis 'GNUtoo' Carikli wrote:
+> Without that fix Angstrom keep choosing xserver-common 1.33 instead of the 1.34 version
+> 
+> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+
+Acked-by: Koen Kooi <koen@dominion.thruhere.net>
+
+> ---
+>  .../include/angstrom-2010-preferred-versions.inc   |    1 -
+>  1 files changed, 0 insertions(+), 1 deletions(-)
+> 
+> diff --git a/conf/distro/include/angstrom-2010-preferred-versions.inc b/conf/distro/include/angstrom-2010-preferred-versions.inc
+> index 611c4e7..8d4c8ef 100644
+> --- a/conf/distro/include/angstrom-2010-preferred-versions.inc
+> +++ b/conf/distro/include/angstrom-2010-preferred-versions.inc
+> @@ -71,7 +71,6 @@ UDEV_GE_141 = "1"
+>  PREFERRED_VERSION_usbutils = "0.86"
+>  PREFERRED_VERSION_wpa-supplicant = "0.7.3"
+>  PREFERRED_VERSION_wget = "1.11.4"
+> -PREFERRED_VERSION_xserver-common = "1.33"
+>  PREFERRED_VERSION_xserver-kdrive = "1.4.0.90"
+>  
+>  #
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFN1WxfMkyGM64RGpERAoC3AJ9ClB7ncb3A/E0qtLWXFVBlWJ4cZgCgpYph
+p5/R5/DZGEqYCfUt5BFj9pw=
+=+mNZ
+-----END PGP SIGNATURE-----
+
 
 
