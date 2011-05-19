@@ -1,42 +1,37 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders.darander@gmail.com>) id 1QMwWN-0006j1-A5
+	(envelope-from <eyalr@ti.com>) id 1QMwwq-0001Ee-EU
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 May 2011 08:15:43 +0200
-Received: by fxm19 with SMTP id 19so2038614fxm.6
+	Thu, 19 May 2011 08:43:04 +0200
+Received: from dlep26.itg.ti.com ([157.170.170.121])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id p4J6e95v014197
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 May 2011 23:12:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=hwmnEWp6EL0LJ1K07GJ6iu9UzCr8FarCDaLVk3Ftmh0=;
-	b=pahW8KVsF5m+w3fL+i9xx/LAFQHRKcYSNcU1XLzcPqtWXZp/I5EjHDXF79sYZWbMsv
-	s0LI1zfBwY8wp50OP8NZuEntRBvqut+nvcJ7mAiN0kt0XSg13PKVh2LUu9xZG2zJ3XcZ
-	vew0jW/KJYTp10xA3s0s4ICPVjzTnbvAXiqPY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=f0qOaDQvB1SlinBO7NLZ3SxSLyIHA4vJ3YeuRyO2O1SZZCUqhy5abOxcIlv2wrhk2P
-	yF25LYsgj/MFINRK+0RkQN0Iv/6nxZ2Ok/HYVW1JmHdimgNX8eriLUjroi3v8NIekcaM
-	U/mYcVbESRUY7BI9aWQjQfd0MPq84ekLbjiQw=
+	Thu, 19 May 2011 01:40:09 -0500
+Received: from DNCE73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p4J6e86J000510
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 May 2011 01:40:09 -0500 (CDT)
+Received: from dnce02.ent.ti.com ([137.167.131.106]) by DNCE73.ent.ti.com
+	([137.167.130.158]) with mapi; Thu, 19 May 2011 08:40:08 +0200
+From: "Reizer, Eyal" <eyalr@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 19 May 2011 08:40:05 +0200
+Thread-Topic: Pull Request: [PATCH] ti-wifi-utils: update to use the latest
+	release
+Thread-Index: AcwVbFsGA5lFnHj7RmCPK3DaqAFEawAgo2mw
+Message-ID: <EC51CDB0807A51469E0C9CB8CF72D65F03323CEF86@dnce02.ent.ti.com>
+References: <y> <1305614722-5460-1-git-send-email-eyalr@ti.com>
+	<EC51CDB0807A51469E0C9CB8CF72D65F03323CEDC7@dnce02.ent.ti.com>
+	<1305730807.4389.6.camel@mattotaupa>
+In-Reply-To: <1305730807.4389.6.camel@mattotaupa>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.223.25.152 with SMTP id z24mr3480898fab.133.1305785567963;
-	Wed, 18 May 2011 23:12:47 -0700 (PDT)
-Received: by 10.223.93.206 with HTTP; Wed, 18 May 2011 23:12:47 -0700 (PDT)
-In-Reply-To: <1305661792.3424.285.camel@rex>
-References: <1305545218.3424.29.camel@rex>
-	<BANLkTimSNvdsc1BoCk4ofNh4-nFuO5bg2A@mail.gmail.com>
-	<1305564582.2429.90.camel@phil-desktop>
-	<BANLkTimtfuCEo253ye-96xeo1dsvJgRFBw@mail.gmail.com>
-	<iqt55i$59d$1@dough.gmane.org>
-	<BANLkTikg=j9+Y-o8CfXEpBbY51u+tBLa8A@mail.gmail.com>
-	<20110517092550.GG1544@ibawizard.net>
-	<1305661792.3424.285.camel@rex>
-Date: Thu, 19 May 2011 08:12:47 +0200
-Message-ID: <BANLkTinsMC13prQ6z6RiEc-1150OO_KSsw@mail.gmail.com>
-From: Anders Darander <anders.darander@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: OpenEmbedded Core - Ready for extended users
+Subject: Pull Request: [PATCH] ti-wifi-utils: update to use the latest release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,61 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 May 2011 06:15:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 19 May 2011 06:43:04 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Tue, May 17, 2011 at 21:49, Richard Purdie
-<richard.purdie@linuxfoundation.org> wrote:
-> On Tue, 2011-05-17 at 11:25 +0200, Petr =C5=A0tetiar wrote:
->> Anders Darander <anders.darander@gmail.com> [2011-05-17 09:04:35]:
->> > Though, that was only one example of a package that has either runtime
->> > or only build-time dependencies on X in some form or another. Earlier,
->> > in the 2011.03-releases, we had systemd depending on gtk+, which has
->> > been removed in the lates updates. Thats just another example.
->>
->> Don't worry, you're not alone in that feeling, actually I think, that we=
-'re
->> quite a large group fighting with this :-) One day the image has 1700 ta=
-sks,
->> after one rebase within a week timespan it grows almost to 3000, don't m=
-ention
->> bluetooth and similar stuff etc. Well, I'm also looking forward to see, =
-how it
->> will change with oe-core.
->
-> These are issues we need to address I think everyone agrees on that.
-> What we do need is some overall architectural way to handle it though
-> rather and doing it adhoc on a case by case basis. There has been some
-> discussion on the OE-Core list about it but I don't think we've reached
-> any conclusion.
-
-I had some trouble locating these discussions on the oe-core list. Do
-you have hint/link towards those discussions? I'd be interested to
-read them and see what ideas has been discussed.
-
-> Out of interesting are there any new proposals on how to handle this?
-> I'm interested in proposals that are thought through to details like how
-> distros handle differences and being able to identify which
-> configurations are used when presented with packages...
-
-Has there been any proposals earlier?
-
-Sorry, no real ideas at the moment. The main alterniatives, I guess,
-are to conditionally add depends and configure options based on
-either:
-* More variables. Although this could lead to _a lot more_ variables
-in the end. (I.e. see the recent discussion on the oe-core list on
-task-base etc.)
-*  On if certain other recipes are selected. I'm not sure that this is
-even possible? (I haven't looked that much into bitbake and recipe
-parsing) This is solution is obviously a lot easier when using e.g.
-Kconfig-based configurations, like Buildroot.
-
-I'm not sure of which option is the best, or if there is another
-better option...
-
-Regards,
-Anders
+SGksDQoNCkNvdWxkIHlvdSBwbGVhc2UgcHVsbCB0aGUgYmVsb3cgcGF0Y2ggdG8gdGhlIDIwMTEu
+MDMtbWFpbnRlbmFuY2UgYnJhbmNoLg0KDQpodHRwOi8vY2dpdC5vcGVuZW1iZWRkZWQub3JnL2Nn
+aXQuY2dpL29wZW5lbWJlZGRlZC9jb21taXQvP2lkPTE2ZmNiYzZhNzZlNmRjZGQxNWYzNjE2M2Nk
+NDdlNmMwNzAyYzI5ZjUNCg0KQmVzdCBSZWdhcmRzLA0KRXlhbCBSZWl6ZXINCg0KDQoNCj4gLS0t
+LS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogb3BlbmVtYmVkZGVkLWRldmVsLWJvdW5j
+ZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBbbWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbC1i
+b3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddIE9uIEJlaGFsZiBPZg0KPiBQYXVsIE1lbnpl
+bA0KPiBTZW50OiBXZWRuZXNkYXksIE1heSAxOCwgMjAxMSA2OjAwIFBNDQo+IFRvOiBvcGVuZW1i
+ZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBTdWJqZWN0OiBSZTogW29lXSBQ
+aW5nOiBbUEFUQ0hdIHRpLXdpZmktdXRpbHM6IHVwZGF0ZSB0byB1c2UgdGhlIGxhdGVzdA0KPiBy
+ZWxlYXNlDQo+IA0KPiBEZWFyIEV5YWwsDQo+IA0KPiANCj4gQW0gTWl0dHdvY2gsIGRlbiAxOC4w
+NS4yMDExLCAxNjozNyArMDIwMCBzY2hyaWViIFJlaXplciwgRXlhbDoNCj4gDQo+ID4gSXMgdGhl
+cmUgYW55dGhpbmcgaG9sZGluZyB0aGlzIHBhdGNoIGZyb20gYmVpbmcgYWNjZXB0ZWQ/DQo+IA0K
+PiBLb2VuIHB1c2hlZCBpdCBhbHJlYWR5IHllc3RlcmRheSBbMV0uDQo+IA0KPiBQbGVhc2UgdXBk
+YXRlIHRoZSBzdGF0ZSBpbiBPReKAmXMgcGF0Y2ggcXVldWUgWzJdLg0KPiANCj4gDQo+IFRoYW5r
+cywNCj4gDQo+IFBhdWwNCj4gDQo+IA0KPiBbMV0NCj4gaHR0cDovL2NnaXQub3BlbmVtYmVkZGVk
+Lm9yZy9jZ2l0LmNnaS9vcGVuZW1iZWRkZWQvY29tbWl0Lz9pZD0xNmZjYmM2YTcNCj4gNmU2ZGNk
+ZDE1ZjM2MTYzY2Q0N2U2YzA3MDJjMjlmNQ0KPiBbMl0gaHR0cDovL29wZW5lbWJlZGRlZC5vcmcv
+aW5kZXgucGhwL1BhdGNod29yaw0K
 
 
