@@ -1,34 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QNVRA-0005lg-4i for openembedded-devel@lists.openembedded.org;
-	Fri, 20 May 2011 21:32:40 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QNVOE-0006oZ-75 for openembedded-devel@lists.openembedded.org;
-	Fri, 20 May 2011 21:29:38 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 May 2011 21:29:38 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 May 2011 21:29:38 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 20 May 2011 21:29:24 +0200
-Message-ID: <ir6fek$pn6$1@dough.gmane.org>
-References: <1305916565-15441-1-git-send-email-raj.khem@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1305916565-15441-1-git-send-email-raj.khem@gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-oe][PATCH] kernel.bbclass: pass KERNEL_VERSION through legitimize_package_name
+	(envelope-from <jkridner@beagleboard.org>)
+	id 1QNYRG-0000Kq-Qy; Sat, 21 May 2011 00:44:58 +0200
+Received: by vws2 with SMTP id 2so3481763vws.6
+	for <multiple recipients>; Fri, 20 May 2011 15:42:01 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.52.114.194 with SMTP id ji2mr246676vdb.41.1305931318963; Fri,
+	20 May 2011 15:41:58 -0700 (PDT)
+Received: by 10.52.107.226 with HTTP; Fri, 20 May 2011 15:41:58 -0700 (PDT)
+Received: by 10.52.107.226 with HTTP; Fri, 20 May 2011 15:41:58 -0700 (PDT)
+In-Reply-To: <BANLkTikD_rL_YqGjiv1MGpf_xWexB=LmKw@mail.gmail.com>
+References: <E1QN7Sg-0003y1-3F@happy.bec-systems.com>
+	<BANLkTimEO3P8JmjcS9s50yqJWB=nBAkq+Q@mail.gmail.com>
+	<BANLkTikD_rL_YqGjiv1MGpf_xWexB=LmKw@mail.gmail.com>
+Date: Fri, 20 May 2011 18:41:58 -0400
+Message-ID: <BANLkTi=NpTtq=YWUgRSBghXygBtjrTCKJw@mail.gmail.com>
+From: Jason Kridner <jkridner@beagleboard.org>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: Beagle Board <beagleboard@googlegroups.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [OE-core] OE Changelog for 2011-4-8 to 2011-4-15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,53 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 May 2011 19:32:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 20 May 2011 22:44:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+i'd be very interested in seeing this (weekly-only, without follow-ups, ie.
+in the bcc) on beagleboard@googlegroups.com and would encourage linaro,
+yocto, ubuntu, debian, fedora, gentoo, libav, etc projects generating
+regular status reports relevant to ARM developers to do the same.
 
-On 20-05-11 20:36, raj.khem@gmail.com wrote:
-> From: Andreas Oberritter <obi@opendreambox.org>
-> 
-> - KERNEL_VERSION may contain characters unsuitable for package
->   names, e.g. underscores. Use legitimize_package_name to replace
->   those characters.
-> 
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> Acked-by: Phil Blundell <philb@gnu.org>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+On May 19, 2011 1:43 PM, "Cliff Brake" <cliff.brake@gmail.com> wrote:
 
-I cherry-picked it before I read this mail :)
+Are there any other repos or maillists that I should include in this
+report?  I'm trying to increase visibility in what all the projects
+are doing, so we can reduce duplication of work in various layers.
 
-> ---
->  meta-oe/classes/kernel.bbclass |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
-> index e1e8197..7498c2c 100644
-> --- a/meta-oe/classes/kernel.bbclass
-> +++ b/meta-oe/classes/kernel.bbclass
-> @@ -238,8 +238,8 @@ RDEPENDS_kernel = "kernel-base"
->  # Allow machines to override this dependency if kernel image files are 
->  # not wanted in images as standard
->  RDEPENDS_kernel-base ?= "kernel-image"
-> -PKG_kernel-image = "kernel-image-${KERNEL_VERSION}"
-> -PKG_kernel-base = "kernel-${KERNEL_VERSION}"
-> +PKG_kernel-image = "kernel-image-${@legitimize_package_name('${KERNEL_VERSION}')}"
-> +PKG_kernel-base = "kernel-${@legitimize_package_name('${KERNEL_VERSION}')}"
->  ALLOW_EMPTY_kernel = "1"
->  ALLOW_EMPTY_kernel-base = "1"
->  ALLOW_EMPTY_kernel-image = "1"
+Thanks,
+Cliff
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+On Thu, May 19, 2011 at 1:56 PM, <cliff.brake@gmail.com> wrote: >
+================================...
+--
+=================
+http://bec-systems.com
 
-iD8DBQFN1sEUMkyGM64RGpERAjvUAJ9gAyp9fGBU7hcAew6Wdz5plpPQlQCeOaBj
-1921JJIJCRaUxllK+OjYX1g=
-=4BLe
------END PGP SIGNATURE-----
-
-
+_______________________________________________
+Openembedded-core mailing list
+Openembedded-core@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
 
