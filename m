@@ -1,35 +1,36 @@
-Received: from mail-px0-f172.google.com ([209.85.212.172])
+Received: from mail-gx0-f179.google.com ([209.85.161.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QNUbW-00046D-MW
+	(envelope-from <otavio.salvador@gmail.com>) id 1QNVLE-0005OJ-5C
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 May 2011 20:39:18 +0200
-Received: by pxi6 with SMTP id 6so2978255pxi.3
+	Fri, 20 May 2011 21:26:32 +0200
+Received: by gxk1 with SMTP id 1so1538918gxk.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 May 2011 11:36:20 -0700 (PDT)
+	Fri, 20 May 2011 12:23:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=aXzyG5Sw8VWBN7zW3J31oYNZ0sNf/5gQoGl0xcA6A7s=;
-	b=oGuFUYvY3bs2ALbFSLz+A5Hp5wLYfPHVrxaPVQ22au0AtuaQr6NmzIKcJKaOHnIVlG
-	EHuMV765ikPFKuqeFHr6q7DujLZufCYHnaL8yLsyMYGpjII3HQwNRza2Z+tAXTr1zRuS
-	bCXfKf5fzTeOrqPqBtyj+9Crgm6ZNqBPhdJNQ=
+	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
+	:x-mailer; bh=CySOh4NuKW3F330Z6NZykwPC+2L3ZHghu9liganZ+tc=;
+	b=A2SzoxMCwSWuUMg9NwBaZWD5/Fosr6x5fl7VJhkyRB86lwiQqdEK4BLaVFt3XSr6zM
+	BkkfSeLjZyEAlplTyTkxge/Wz9+fHPYqXq8rcRbggyFxZbDwf8W2zxR3MLN15jkYQxHR
+	1c0eHDPc9WG7ysXy3qosEcUEQTUIXVy0QWSkk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=LZqBzBpFpPB48CnZN4uHycqH+H6DvrPFfBn7KeCmAK8xMG8UVj+3MJGPb6FurHzh9n
-	vHv6gy7P/mZQpv5KWh0N8XnEK8xzfEzwlRn0GzW5IokZIVJYZX2hqlDtYPWfuIOru+um
-	nOOiQQzqH6MkcOaJ5FuePvvR5u8y++mptBK+Y=
-Received: by 10.68.16.135 with SMTP id g7mr7654164pbd.486.1305916580615;
-	Fri, 20 May 2011 11:36:20 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id v6sm2532919pbc.27.2011.05.20.11.36.18
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=wCqL/skOhqXwU6tTPGKu4Rt1wFcakgdo/+ERs8mLh/503wA2u3tWwlNR0oW5213dEd
+	IFHOz/GD+bAfbJadFEnmD3So/LdljuwoSNG9bMSMIT4EK/L9jJv4ABaMjXKZ4EwYFOsI
+	1irBQw8oxfOsukToMngdAnqtdZ+rJTBp9PPw0=
+Received: by 10.91.65.8 with SMTP id s8mr911600agk.203.1305919414487;
+	Fri, 20 May 2011 12:23:34 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id w1sm2821186anh.10.2011.05.20.12.23.31
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 20 May 2011 11:36:19 -0700 (PDT)
-From: raj.khem@gmail.com
+	Fri, 20 May 2011 12:23:32 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 May 2011 11:36:05 -0700
-Message-Id: <1305916565-15441-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-Subject: [meta-oe][PATCH] kernel.bbclass: pass KERNEL_VERSION through legitimize_package_name
+Date: Fri, 20 May 2011 19:23:03 +0000
+Message-Id: <cover.1305917406.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH 0/3] Pull request from O.S. Systems tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,38 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 May 2011 18:39:18 -0000
+X-List-Received-Date: Fri, 20 May 2011 19:26:32 -0000
 
-From: Andreas Oberritter <obi@opendreambox.org>
+The following changes since commit 5d96769da5d7acdd700f6f1a45f417e840e5a7d8:
 
-- KERNEL_VERSION may contain characters unsuitable for package
-  names, e.g. underscores. Use legitimize_package_name to replace
-  those characters.
+  uclibc: Rename uclibc-libargp -> uclibc-argp and uclibc-libbacktrace -> uclibc-backtrace (2011-05-20 09:08:09 +0200)
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-Acked-by: Phil Blundell <philb@gnu.org>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/classes/kernel.bbclass |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe.git master
+  https://github.com/OSSystems/meta-oe/tree/master
 
-diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
-index e1e8197..7498c2c 100644
---- a/meta-oe/classes/kernel.bbclass
-+++ b/meta-oe/classes/kernel.bbclass
-@@ -238,8 +238,8 @@ RDEPENDS_kernel = "kernel-base"
- # Allow machines to override this dependency if kernel image files are 
- # not wanted in images as standard
- RDEPENDS_kernel-base ?= "kernel-image"
--PKG_kernel-image = "kernel-image-${KERNEL_VERSION}"
--PKG_kernel-base = "kernel-${KERNEL_VERSION}"
-+PKG_kernel-image = "kernel-image-${@legitimize_package_name('${KERNEL_VERSION}')}"
-+PKG_kernel-base = "kernel-${@legitimize_package_name('${KERNEL_VERSION}')}"
- ALLOW_EMPTY_kernel = "1"
- ALLOW_EMPTY_kernel-base = "1"
- ALLOW_EMPTY_kernel-image = "1"
+Otavio Salvador (3):
+  xorg-xserver/xorg-xserver-common.inc: do not install modules' .la
+    files
+  freerdp-extension-xpunlimited: add git version
+  freerdp: fix homepage field
+
+ .../xorg-xserver/xorg-xserver-common.inc           |    4 +-
+ .../freerdp/freerdp-extension-xpunlimited_git.bb   |   23 ++++++++++++++++++++
+ meta-oe/recipes-support/freerdp/freerdp.inc        |    2 +-
+ 3 files changed, 26 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp-extension-xpunlimited_git.bb
+
 -- 
-1.7.4.1
+1.7.2.5
 
 
 
