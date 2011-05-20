@@ -1,17 +1,35 @@
-Received: from dd20204.kasserver.com ([85.13.140.93])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1QNBIA-0004rR-8z
+	(envelope-from <raj.khem@gmail.com>) id 1QNFdx-000873-K9
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 May 2011 00:02:02 +0200
-Received: from localhost (95-90-75-76-dynip.superkabel.de [95.90.75.76])
-	by dd20204.kasserver.com (Postfix) with ESMTPSA id 7DB6912A0288;
-	Thu, 19 May 2011 23:50:02 +0200 (CEST)
-From: Bernhard.Guillon@opensimpad.org
+	Fri, 20 May 2011 04:40:49 +0200
+Received: by pwj9 with SMTP id 9so1569957pwj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 May 2011 19:37:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=LnO95mO9Ur6Wz/JgMWF2k9DFWVmieYEj5EO5QRJ8mWo=;
+	b=egvyTJ1r3emJNwKFrFbi5f9n9OFwfqAtPFjlIJ6haGo3xkJMKD9nZjKRCuw2ib3mBE
+	r/kN1vDxzhEBD4MvZv7EcHRlbjL7v59XXoItGRZTjKO3vAMf/yK8nMlW36HGuWt+BLsy
+	qNluuMVOqD22Ci3lHQF67bAfp3h3e9veZH7h4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=xOY4zt2NantNCJvaIip20K5bWmoCEUYuEe838cWPA+mLBshpkyNluo/xFs1q6kYDT2
+	nwsiuTCcVHxZTDOCfon3QxjcijHu5HjEnaYEGpD8RlolWQRVaYb5TeBhlrYAVTAZ2UEW
+	4DeDnGzdz9qqyv6CxBfUfyGRZkihAjdvkV6KA=
+Received: by 10.68.0.10 with SMTP id 10mr5855762pba.443.1305859072266;
+	Thu, 19 May 2011 19:37:52 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id z5sm2146049pbb.5.2011.05.19.19.37.50
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 19 May 2011 19:37:51 -0700 (PDT)
+From: raj.khem@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 May 2011 23:50:42 +0200
-Message-Id: <1305841842-2431-1-git-send-email-Bernhard.Guillon@opensimpad.org>
-X-Mailer: git-send-email 1.7.5.1
-Subject: [PATCH] opkg-utils: port arfile.py patch to opkg-utils, bump PR
+Date: Thu, 19 May 2011 19:37:38 -0700
+Message-Id: <1305859058-7475-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [meta-oe][PATCH] uclibc: Rename uclibc-libargp -> uclibc-argp and uclibc-libbacktrace -> uclibc-backtrace
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -25,71 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 May 2011 22:02:02 -0000
+X-List-Received-Date: Fri, 20 May 2011 02:40:49 -0000
 
-From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
+From: Khem Raj <raj.khem@gmail.com>
 
-We need this patch for opkg as well
-
-original commit b3da649ee25374f284d03ebce5843b6326559f73
-original Author: Scott Anderson <o2e@saaworld.com>
-original commit message:
-ipkg-utils: Make arfile.py handle six digit UIDs
-
-Essentially, the problem is that arfile.py is splitting the ar header with
-white-space instead of fixed-width fields, so two fields would get treated
-as a single field.  This makes things better than before as it now honors
-the fixed field widths.
-
-Signed-off-by: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../opkg-utils/arfile_header_split.patch           |   17 +++++++++++++++++
- recipes/opkg-utils/opkg-utils_svn.bb               |    3 ++-
- 2 files changed, 19 insertions(+), 1 deletions(-)
- create mode 100644 recipes/opkg-utils/opkg-utils/arfile_header_split.patch
+ meta-oe/recipes-core/uclibc/uclibc.inc |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes/opkg-utils/opkg-utils/arfile_header_split.patch b/recipes/opkg-utils/opkg-utils/arfile_header_split.patch
-new file mode 100644
-index 0000000..4640367
---- /dev/null
-+++ b/recipes/opkg-utils/opkg-utils/arfile_header_split.patch
-@@ -0,0 +1,17 @@
-+--- ipkg-utils/arfile.py.orig	2010-09-29 13:38:15.000000000 -0700
-++++ ipkg-utils/arfile.py	2010-10-01 16:06:00.000000000 -0700
-+@@ -74,7 +74,12 @@
-+             if l == "\n":
-+                 l = self.f.readline()
-+                 if not l: break
-+             l = l.replace('`', '')
-+-            descriptor = l.split()
-++            # Field lengths from /usr/include/ar.h:
-++            ar_field_lens = [ 16, 12, 6, 6, 8, 10, 2 ]
-++            descriptor = []
-++            for field_len in ar_field_lens:
-++                descriptor.append(l[:field_len].strip())
-++                l = l[field_len:]
-+ #            print descriptor
-+             size = int(descriptor[5])
-+             memberName = descriptor[0][:-1]
-diff --git a/recipes/opkg-utils/opkg-utils_svn.bb b/recipes/opkg-utils/opkg-utils_svn.bb
-index 6b8d3ea..a8f2cb7 100644
---- a/recipes/opkg-utils/opkg-utils_svn.bb
-+++ b/recipes/opkg-utils/opkg-utils_svn.bb
-@@ -6,10 +6,11 @@ RDEPENDS_${PN} = "python"
- RDEPENDS_${PN}_virtclass-native = ""
- SRCREV = "4747"
- PV = "0.1.8+svnr${SRCPV}"
--PR = "r6"
-+PR = "r7"
+diff --git a/meta-oe/recipes-core/uclibc/uclibc.inc b/meta-oe/recipes-core/uclibc/uclibc.inc
+index ca2b929..3e21b4e 100644
+--- a/meta-oe/recipes-core/uclibc/uclibc.inc
++++ b/meta-oe/recipes-core/uclibc/uclibc.inc
+@@ -59,7 +59,7 @@ RDEPENDS_${PN}-dev = "linux-libc-headers-dev"
  
- SRC_URI = "svn://svn.openmoko.org/trunk/src/host/;module=opkg-utils;proto=http \
-            file://index-ignore-filenotfound.patch \
-+           file://arfile_header_split.patch \
-            file://mtime-int.patch"
+ INHIBIT_DEFAULT_DEPS = "1"
  
- S = "${WORKDIR}/opkg-utils"
+-PACKAGES =+ "ldd uclibc-utils-dbg uclibc-utils uclibc-gconv uclibc-thread-db uclibc-libargp uclibc-libbacktrace"
++PACKAGES =+ "ldd uclibc-utils-dbg uclibc-utils uclibc-gconv uclibc-thread-db uclibc-argp uclibc-backtrace"
+ 
+ LEAD_SONAME = "libc.so"
+ 
+@@ -92,8 +92,8 @@ FILES_uclibc-utils = "${bindir} ${sbindir}"
+ FILES_uclibc-utils-dbg += "${bindir}/.debug ${sbindir}/.debug"
+ FILES_uclibc-gconv = "${libdir}/gconv"
+ FILES_uclibc-thread-db = "${base_libdir}/libthread_db*"
+-FILES_uclibc-libuargp = "${base_libdir}/libuargp-*.so ${base_libdir}/libuargp*.so.*"
+-FILES_uclibc-libubacktrace = "${base_libdir}/libubacktrace-*.so ${base_libdir}/libubacktrace*.so.*"
++FILES_uclibc-argp = "${base_libdir}/libuargp-*.so ${base_libdir}/libuargp*.so.*"
++FILES_uclibc-backtrace = "${base_libdir}/libubacktrace-*.so ${base_libdir}/libubacktrace*.so.*"
+ 
+ RPROVIDES_uclibc-dev += "libc-dev virtual-libc-dev"
+ # uclibc does not really have libsegfault but then using the one from glibc is also not
 -- 
-1.7.0.4
+1.7.4.1
 
 
 
