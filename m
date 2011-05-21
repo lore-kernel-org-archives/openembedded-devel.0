@@ -1,34 +1,17 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp202.alice.it ([82.57.200.98])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QNfj9-0001YX-Kn for openembedded-devel@lists.openembedded.org;
-	Sat, 21 May 2011 08:31:55 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QNfgJ-0005Jv-N6 for openembedded-devel@lists.openembedded.org;
-	Sat, 21 May 2011 08:28:59 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 May 2011 08:28:59 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 May 2011 08:28:59 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <GNUtoo@no-log.org>) id 1QNmDQ-0003zn-T5
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 21 May 2011 15:27:37 +0200
+Received: from localhost.localdomain (95.244.3.148) by smtp202.alice.it
+	(8.5.124.08) (authenticated as editempo@alice.it)
+	id 4CC7FB5F03883A0E; Sat, 21 May 2011 15:24:38 +0200
+From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 21 May 2011 08:28:42 +0200
-Message-ID: <ir7m2q$k18$1@dough.gmane.org>
-References: <cover.1305917406.git.otavio@ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <cover.1305917406.git.otavio@ossystems.com.br>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-oe][PATCH 0/3] Pull request from O.S. Systems tree
+Date: Sat, 21 May 2011 15:24:33 +0200
+Message-Id: <1305984274-18073-1-git-send-email-GNUtoo@no-log.org>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH 1/2] xserver-common: add support for the htcdream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,45 +25,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 May 2011 06:31:55 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 21 May 2011 13:27:37 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Without that patch the DPI of the htcdream is the default DPI
+  which is incorrect.
 
-On 20-05-11 21:23, Otavio Salvador wrote:
-> The following changes since commit 5d96769da5d7acdd700f6f1a45f417e840e5a7d8:
-> 
->   uclibc: Rename uclibc-libargp -> uclibc-argp and uclibc-libbacktrace -> uclibc-backtrace (2011-05-20 09:08:09 +0200)
-> 
-> are available in the git repository at:
->   git://github.com/OSSystems/meta-oe.git master
->   https://github.com/OSSystems/meta-oe/tree/master
-> 
-> Otavio Salvador (3):
->   xorg-xserver/xorg-xserver-common.inc: do not install modules' .la
->     files
->   freerdp-extension-xpunlimited: add git version
->   freerdp: fix homepage field
+Note that the htc dreams's /proc/cpuinfo machine name is trout
 
-Thanks, applied
+Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+---
+ .../xserver-common/files/Xserver.htcdream.patch    |   14 ++++++++++++++
+ recipes/xserver-common/xserver-common_1.34.bb      |    3 ++-
+ 2 files changed, 16 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/xserver-common/files/Xserver.htcdream.patch
 
-> 
->  .../xorg-xserver/xorg-xserver-common.inc           |    4 +-
->  .../freerdp/freerdp-extension-xpunlimited_git.bb   |   23 ++++++++++++++++++++
->  meta-oe/recipes-support/freerdp/freerdp.inc        |    2 +-
->  3 files changed, 26 insertions(+), 3 deletions(-)
->  create mode 100644 meta-oe/recipes-support/freerdp/freerdp-extension-xpunlimited_git.bb
-> 
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFN11uaMkyGM64RGpERAgxWAKCbyjSHGrIz2dBRDspG4daRTeW6RwCfQapF
-HfexCieUv50c1L+DXBdtmkw=
-=i8FC
------END PGP SIGNATURE-----
+diff --git a/recipes/xserver-common/files/Xserver.htcdream.patch b/recipes/xserver-common/files/Xserver.htcdream.patch
+new file mode 100644
+index 0000000..11842a2
+--- /dev/null
++++ b/recipes/xserver-common/files/Xserver.htcdream.patch
+@@ -0,0 +1,14 @@
++Index: xserver-common-1.34/X11/xserver-common
++===================================================================
++--- xserver-common-1.34.orig/X11/xserver-common	2011-05-20 23:37:56.031433456 +0200
+++++ xserver-common-1.34/X11/xserver-common	2011-05-20 23:39:56.451433492 +0200
++@@ -126,6 +126,9 @@
++         "htc_tornado")
++             ARGS="$ARGS -hide-cursor"
++             DPI="100" ;;
+++        "trout")
+++            DPI="181"
+++            ARGS="$ARGS -dpi ${DPI}";;
++         "generic_omap1510/1610/1710")
++             ARGS="$ARGS -screen ${SCREEN_SIZE}"
++             DPI="225" ;;
+diff --git a/recipes/xserver-common/xserver-common_1.34.bb b/recipes/xserver-common/xserver-common_1.34.bb
+index d8c29d1..0b2da5b 100644
+--- a/recipes/xserver-common/xserver-common_1.34.bb
++++ b/recipes/xserver-common/xserver-common_1.34.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "Common X11 scripts and support files"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ # we are using a gpe-style Makefile
+ inherit gpe
+@@ -20,6 +20,7 @@ SRC_URI_append = " \
+                    file://Xserver.add.nocursor.for.gta.patch \
+                    file://Xserver.add.dpi.for.gta.patch \
+                    file://Xserver.n900.patch \
++                   file://Xserver.htcdream.patch \
+ "
+ 
+ 
+-- 
+1.7.0.4
 
 
 
