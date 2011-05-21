@@ -1,27 +1,34 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jkridner@beagleboard.org>)
-	id 1QNYRG-0000Kq-Qy; Sat, 21 May 2011 00:44:58 +0200
-Received: by vws2 with SMTP id 2so3481763vws.6
-	for <multiple recipients>; Fri, 20 May 2011 15:42:01 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.52.114.194 with SMTP id ji2mr246676vdb.41.1305931318963; Fri,
-	20 May 2011 15:41:58 -0700 (PDT)
-Received: by 10.52.107.226 with HTTP; Fri, 20 May 2011 15:41:58 -0700 (PDT)
-Received: by 10.52.107.226 with HTTP; Fri, 20 May 2011 15:41:58 -0700 (PDT)
-In-Reply-To: <BANLkTikD_rL_YqGjiv1MGpf_xWexB=LmKw@mail.gmail.com>
-References: <E1QN7Sg-0003y1-3F@happy.bec-systems.com>
-	<BANLkTimEO3P8JmjcS9s50yqJWB=nBAkq+Q@mail.gmail.com>
-	<BANLkTikD_rL_YqGjiv1MGpf_xWexB=LmKw@mail.gmail.com>
-Date: Fri, 20 May 2011 18:41:58 -0400
-Message-ID: <BANLkTi=NpTtq=YWUgRSBghXygBtjrTCKJw@mail.gmail.com>
-From: Jason Kridner <jkridner@beagleboard.org>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: Beagle Board <beagleboard@googlegroups.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] OE Changelog for 2011-4-8 to 2011-4-15
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QNfj9-0001YX-Kn for openembedded-devel@lists.openembedded.org;
+	Sat, 21 May 2011 08:31:55 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QNfgJ-0005Jv-N6 for openembedded-devel@lists.openembedded.org;
+	Sat, 21 May 2011 08:28:59 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 21 May 2011 08:28:59 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 21 May 2011 08:28:59 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 21 May 2011 08:28:42 +0200
+Message-ID: <ir7m2q$k18$1@dough.gmane.org>
+References: <cover.1305917406.git.otavio@ossystems.com.br>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <cover.1305917406.git.otavio@ossystems.com.br>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [meta-oe][PATCH 0/3] Pull request from O.S. Systems tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,31 +42,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 May 2011 22:44:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 21 May 2011 06:31:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-i'd be very interested in seeing this (weekly-only, without follow-ups, ie.
-in the bcc) on beagleboard@googlegroups.com and would encourage linaro,
-yocto, ubuntu, debian, fedora, gentoo, libav, etc projects generating
-regular status reports relevant to ARM developers to do the same.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On May 19, 2011 1:43 PM, "Cliff Brake" <cliff.brake@gmail.com> wrote:
+On 20-05-11 21:23, Otavio Salvador wrote:
+> The following changes since commit 5d96769da5d7acdd700f6f1a45f417e840e5a7d8:
+> 
+>   uclibc: Rename uclibc-libargp -> uclibc-argp and uclibc-libbacktrace -> uclibc-backtrace (2011-05-20 09:08:09 +0200)
+> 
+> are available in the git repository at:
+>   git://github.com/OSSystems/meta-oe.git master
+>   https://github.com/OSSystems/meta-oe/tree/master
+> 
+> Otavio Salvador (3):
+>   xorg-xserver/xorg-xserver-common.inc: do not install modules' .la
+>     files
+>   freerdp-extension-xpunlimited: add git version
+>   freerdp: fix homepage field
 
-Are there any other repos or maillists that I should include in this
-report?  I'm trying to increase visibility in what all the projects
-are doing, so we can reduce duplication of work in various layers.
+Thanks, applied
 
-Thanks,
-Cliff
+> 
+>  .../xorg-xserver/xorg-xserver-common.inc           |    4 +-
+>  .../freerdp/freerdp-extension-xpunlimited_git.bb   |   23 ++++++++++++++++++++
+>  meta-oe/recipes-support/freerdp/freerdp.inc        |    2 +-
+>  3 files changed, 26 insertions(+), 3 deletions(-)
+>  create mode 100644 meta-oe/recipes-support/freerdp/freerdp-extension-xpunlimited_git.bb
+> 
 
-On Thu, May 19, 2011 at 1:56 PM, <cliff.brake@gmail.com> wrote: >
-================================...
---
-=================
-http://bec-systems.com
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-_______________________________________________
-Openembedded-core mailing list
-Openembedded-core@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
+iD8DBQFN11uaMkyGM64RGpERAgxWAKCbyjSHGrIz2dBRDspG4daRTeW6RwCfQapF
+HfexCieUv50c1L+DXBdtmkw=
+=i8FC
+-----END PGP SIGNATURE-----
+
+
 
