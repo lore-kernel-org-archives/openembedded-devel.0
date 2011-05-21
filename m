@@ -1,21 +1,24 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QNpXI-0007d8-0i for openembedded-devel@lists.openembedded.org;
-	Sat, 21 May 2011 19:00:20 +0200
-Received: from f053038077.adsl.alicedsl.de ([78.53.38.77]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QNpUc-00078d-Ep for openembedded-devel@lists.openembedded.org;
-	Sat, 21 May 2011 16:57:34 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1QNuH4-0000Rs-44
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 22 May 2011 00:03:54 +0200
+Received: (qmail invoked by alias); 21 May 2011 22:00:55 -0000
+Received: from p5B0A11A0.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.17.160]
+	by mail.gmx.net (mp070) with SMTP; 22 May 2011 00:00:55 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/WiUolIkrWYXZpMwf2qlKAWcLpOqgDFQllBQ2md/
+	VF7gu1a3e+afa1
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 May 2011 18:57:22 +0200
-Message-ID: <1305997042.12054.71.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: minimal-uclibc: pulseaudio: task compile fails with `./.libs/libpulsecommon-0.9.22.so: undefined reference to `backtrace_symbols'`
+Date: Sun, 22 May 2011 00:01:33 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.35.13-91.fc14.x86_64; KDE/4.6.2; x86_64; ;
+	)
+MIME-Version: 1.0
+Message-Id: <201105220001.36288.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: perl fail during compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,69 +32,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 May 2011 17:00:20 -0000
-X-Groupsio-MsgNum: 32232
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-imgc2O9VECmVGU4z9VQP"
-
---=-imgc2O9VECmVGU4z9VQP
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 21 May 2011 22:03:54 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
 Dear OE folks,
 
+with the latest OE I get an error compiling perl. The log I get is:
 
-with the latest change for uClibc=20
+| LD_LIBRARY_PATH=/home/Superandy/tmp/work/armv7a-angstrom-linux-
+gnueabi/perl-5.10.1-r22/perl-5.10.1${LD_LIBRARY_PATH:+:}$LD_LIBRARY_PATH arm-
+angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-
+abi=softfp -mthumb-interwork -mno-thumb --
+sysroot=/home/Superandy/tmp/sysroots/armv7a-angstrom-linux-gnueabi -Wl,-O1 -
+Wl,--hash-style=gnu -o miniperl \
+|       gv.o toke.o perly.o pad.o regcomp.o dump.o util.o mg.o reentr.o mro.o 
+hv.o av.o run.o pp_hot.o sv.o pp.o scope.o pp_ctl.o pp_sys.o doop.o doio.o 
+regexec.o utf8.o taint.o deb.o universal.o xsutils.o globals.o perlio.o 
+perlapi.o numeric.o mathoms.o locale.o pp_pack.o pp_sort.o  \
+|     miniperlmain.o opmini.o perlmini.o -lnsl -ldl -lm -lcrypt -lutil -lpthread 
+-lc
+| mv -f miniperl miniperl-target
+| ln -s hostperl miniperl
+| LD_LIBRARY_PATH=/home/Superandy/tmp/work/armv7a-angstrom-linux-
+gnueabi/perl-5.10.1-r22/perl-5.10.1${LD_LIBRARY_PATH:+:}$LD_LIBRARY_PATH  
+./miniperl -Ilib make_patchnum.pl
+| env: ./perl5.10.1.real: No such file or directory
+| make[1]: *** [lib/Config_git.pl] Error 127
+| make[1]: Leaving directory `/home/Superandy/tmp/work/armv7a-angstrom-linux-
+gnueabi/perl-5.10.1-r22/perl-5.10.1'
+| make[1]: Entering directory `/home/Superandy/tmp/work/armv7a-angstrom-linux-
+gnueabi/perl-5.10.1-r22/perl-5.10.1'
+| LD_LIBRARY_PATH=/home/Superandy/tmp/work/armv7a-angstrom-linux-
+gnueabi/perl-5.10.1-r22/perl-5.10.1${LD_LIBRARY_PATH:+:}$LD_LIBRARY_PATH  
+./miniperl -Ilib autodoc.pl
+| env: ./perl5.10.1.real: No such file or directory
+| make[1]: *** [pod/perlapi.pod] Error 127
+| make[1]: Leaving directory `/home/Superandy/tmp/work/armv7a-angstrom-linux-
+gnueabi/perl-5.10.1-r22/perl-5.10.1'
+| make: *** [perl] Error 2
+| + die 'oe_runmake failed'
+| + oefatal 'oe_runmake failed'
+| + echo FATAL: 'oe_runmake failed'
+| FATAL: oe_runmake failed
+| + exit 1
+NOTE: package perl-5.10.1-r22: task do_compile: Failed
 
-        commit 2a1c9e1ee5eb8067592d26100b563dd2ae7be00d
-        Author: Henning Heinold <heinold@inf.fu-berlin.de>
-        Date:   Mon May 2 22:49:36 2011 +0200
-       =20
-            ulibc: bump git to version 71d63ed75648da9b0b71afabb9c60aaad792=
-c55c and add some features
-           =20
-            * enable backtrace support and put libubacktrace into own packa=
-ge, needed by firefox
-            * added one patch from Timo Ter=C3=A4s to implement RTLD_NO, ne=
-eded by openjdk
-            * added one patch from Timo Ter=C3=A4s  implement ORIGIN_PATH, =
-needed by openjdk
-            * remove fts-support.patch, because is applied upstream
-            * bump PR
 
-task compile of `pulseaudio_0.9.22.bb` fails with the following error.
+Without looking into the commits I reverted the latest changes 
 
-        [=E2=80=A6]
-          CCLD   pulseaudio
-        ./.libs/libpulsecommon-0.9.22.so: undefined reference to `backtrace=
-_symbols'
-        ./.libs/libpulsecommon-0.9.22.so: undefined reference to `backtrace=
-'
-        collect2: ld returned 1 exit status
-        make[3]: *** [pulseaudio] Error 1
+86fde1fe0281cc8c9d2bf1012d8eff5e24a69e55 and
+1e255fbd296e95ff178d66c4a1fe4875a988d7e1
+
+and perl bulds again. Could sombody please take care?
+
+Thanks
+
+Andreas
 
 
-Thanks,
-
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D2a1c9e1=
-ee5eb8067592d26100b563dd2ae7be00d
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/screen/=
-screen-4.0.3/no-stropts.patch
-
---=-imgc2O9VECmVGU4z9VQP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3X7vIACgkQPX1aK2wOHVjpDQCgi7ilPaCdN0t9ioIMxOR8W04c
-45gAnikYrBw/asD7A9kiyUeX6oSL+NDx
-=dJYp
------END PGP SIGNATURE-----
-
---=-imgc2O9VECmVGU4z9VQP--
