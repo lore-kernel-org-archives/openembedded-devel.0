@@ -1,34 +1,25 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QOWBG-0003Mb-2l for openembedded-devel@lists.openembedded.org;
-	Mon, 23 May 2011 16:32:26 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QOW8K-0006OA-PR for openembedded-devel@lists.openembedded.org;
-	Mon, 23 May 2011 16:29:24 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 May 2011 16:29:24 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 May 2011 16:29:24 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <sledz@dresearch.de>) id 1QOWFy-00045k-L5
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 23 May 2011 16:37:18 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id D351849128A;
+	Mon, 23 May 2011 16:07:14 +0200 (CEST)
+Received: from fsc-480-012-88.intern.dresearch.de ([10.32.10.177]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
+	Mon, 23 May 2011 16:07:14 +0200
+Received: by fsc-480-012-88.intern.dresearch.de (Postfix, from userid 1002)
+	id 707627208D; Mon, 23 May 2011 16:07:14 +0200 (CEST)
+From: Steffen Sledz <sledz@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 23 May 2011 16:29:13 +0200
-Message-ID: <irdqvp$7b8$1@dough.gmane.org>
-References: <cover.1306157341.git.otavio@ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <cover.1306157341.git.otavio@ossystems.com.br>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-oe][PATCH 0/4] Pull request with udev changes from O.S. Systems tree
+Date: Mon, 23 May 2011 16:07:07 +0200
+Message-Id: <1306159627-10568-1-git-send-email-sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.1
+X-OriginalArrivalTime: 23 May 2011 14:07:14.0853 (UTC)
+	FILETIME=[B7CC3D50:01CC1952]
+Subject: [PATCH] apr-util: disable odbc support to avoid QA error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,46 +33,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 May 2011 14:32:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 23 May 2011 14:37:18 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+The odbc checker part of the configure script seems to be buggy and
+may add host pathes to compiler and linker options:
 
-On 23-05-11 15:30, Otavio Salvador wrote:
-> The following changes since commit c6b34871dc0fdd3c1e6a24f2a635505deaa28b20:
-> 
->   freerdp: fix homepage field (2011-05-21 08:27:10 +0200)
-> 
-> are available in the git repository at:
->   git://github.com/OSSystems/meta-oe.git master
->   https://github.com/OSSystems/meta-oe/tree/master
-> 
-> Otavio Salvador (4):
->   udev: fix init script indenting
->   udev: fix action used during startup
->   udev: remove udev.inc since it was not being in use
->   udev: move ConsoleKit files to udev-consolekit
+--------->snip<--------
+ checking for odbc_config... /usr/bin/odbc_config
+   adding "-I/usr/include" to CPPFLAGS
+   adding "-L/usr/lib" to LDFLAGS
+   setting LIBS to "-L/usr/lib -lodbc"
+--------->snip<--------
 
-Thanks for the changes, I will push them after some testing.
+Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+---
+ recipes/apr/apr-util_1.3.10.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-
-> 
->  meta-oe/recipes-core/udev/udev.inc    |  101 ---------------------------------
->  meta-oe/recipes-core/udev/udev/init   |   44 +++++++-------
->  meta-oe/recipes-core/udev/udev_168.bb |    9 ++-
->  3 files changed, 29 insertions(+), 125 deletions(-)
->  delete mode 100644 meta-oe/recipes-core/udev/udev.inc
-> 
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFN2m84MkyGM64RGpERAl3rAJwInyhCcQ7KdkkjPemMCRxranyNmQCePVSJ
-EThW8Soef07bvPn1CMaELNM=
-=cquM
------END PGP SIGNATURE-----
+diff --git a/recipes/apr/apr-util_1.3.10.bb b/recipes/apr/apr-util_1.3.10.bb
+index ee32ddd..32b568e 100644
+--- a/recipes/apr/apr-util_1.3.10.bb
++++ b/recipes/apr/apr-util_1.3.10.bb
+@@ -3,7 +3,7 @@ SECTION = "libs"
+ DEPENDS = "apr expat gdbm"
+ LICENSE = "Apache License, Version 2.0"
+ 
+-PR = "r0"
++PR = "r1"
+ 
+ SRC_URI = "${APACHE_MIRROR}/apr/${P}.tar.gz \
+            file://configfix.patch \
+@@ -15,6 +15,7 @@ EXTRA_OECONF = "--with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \
+ 		--without-sqlite2 \
+ 		--without-sqlite3 \
+ 		--without-pgsql \
++		--without-odbc \
+ 		--with-expat=${STAGING_DIR_HOST}${layout_prefix}"
+ 
+ SRC_URI[md5sum] = "82acd25cf3df8c72eba44eaee8b80c19"
+-- 
+1.7.1
 
 
 
