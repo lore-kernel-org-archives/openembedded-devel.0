@@ -1,42 +1,42 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QOVGO-0000ky-Kp
+	(envelope-from <otavio.salvador@gmail.com>) id 1QOVGR-0000l5-Eg
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 May 2011 15:33:41 +0200
-Received: by yia13 with SMTP id 13so2200538yia.6
+	Mon, 23 May 2011 15:33:43 +0200
+Received: by gxk3 with SMTP id 3so2261769gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 May 2011 06:30:40 -0700 (PDT)
+	Mon, 23 May 2011 06:30:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
 	:x-mailer:in-reply-to:references:in-reply-to:references;
-	bh=oXFIl1lk6Xl1viZammkKnjF309AoPBwfVyhrIDOYng0=;
-	b=VcWnji+OHR2/01wblP1ueywfl+g27VbveWQggQVwbGH1eM2S84p3Vk8pLVelmcly8y
-	9QjcsXaOcZxLKkTUui4m9xdZUKW5Lz7c6FS/5aA4DTcivdQedvjWxgFkfktDfahTk0Z+
-	HfiwZFelVXjcTKBAuYaLOzLUD2yDAtLidAOFo=
+	bh=i/tQQQR+IaMksnJdUk4zPP+c0PzceGdzGU+dmi/f94M=;
+	b=oWH2wfmG9x8Xxb4Q8yrM2qWd14JbT19qkoFJTQREZCrlchWVkzeDIRnnpfjSQKDA0o
+	5Pjh1Ci/RWHNq81WZdh3BRAAuNkJZgYosbNmFj03aRdp+XNUi1ECLyVQVNZ4SS7BHJoJ
+	Fq29oO4Hi/IzjSvyZ1wIJFPcZeSibJ4xmTPVQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=p9UFz1vqbYv58+9n9w8yqrnPI4LN6gDRTKYP1o+c2Hlro4J0iVk3trFii80lenSRzq
-	6n7489TMTtY6CvVTjxZyao+6QYuIu4xCTJrNBc51OKzjq3i9mf3Ge2f/ON2lLk3SxMf2
-	pwxyw3drIMIHXiaX8NFlvNlaBk6zEKOQSrjDY=
-Received: by 10.150.239.11 with SMTP id m11mr2964160ybh.424.1306157439968;
-	Mon, 23 May 2011 06:30:39 -0700 (PDT)
+	b=SHnXFzVyby+MFBM2fym8+6St6dQDHrcFP5obhZZoIBaUc5joKLdx1J29pHYB/BXhqG
+	wm6uShOMZuR+TOnkJvrlacHCbWKCk5A+9uOJy8uRlmohFIWSrsLOH5zEgGbU/5c+lMTK
+	GSinx4UVuBmvFS+lM13mFIi8H7BGb60qxG5iw=
+Received: by 10.150.255.36 with SMTP id c36mr2981688ybi.56.1306157442649;
+	Mon, 23 May 2011 06:30:42 -0700 (PDT)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id q29sm2723749yba.17.2011.05.23.06.30.37
+	by mx.google.com with ESMTPS id q29sm2723749yba.17.2011.05.23.06.30.40
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 23 May 2011 06:30:38 -0700 (PDT)
+	Mon, 23 May 2011 06:30:41 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 May 2011 13:30:21 +0000
-Message-Id: <d71b62e25f631afc7fc9a26ff34a7e5274c07cc5.1306157341.git.otavio@ossystems.com.br>
+Date: Mon, 23 May 2011 13:30:22 +0000
+Message-Id: <a5e16c72b819ec7728d3ec2ef469f9ce9e734d49.1306157341.git.otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <cover.1306157341.git.otavio@ossystems.com.br>
 References: <cover.1306157341.git.otavio@ossystems.com.br>
 In-Reply-To: <cover.1306157341.git.otavio@ossystems.com.br>
 References: <cover.1306157341.git.otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 1/4] udev: fix init script indenting
+Subject: [meta-oe][PATCH 2/4] udev: fix action used during startup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,89 +50,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 May 2011 13:33:41 -0000
+X-List-Received-Date: Mon, 23 May 2011 13:33:43 -0000
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- meta-oe/recipes-core/udev/udev/init |   44 +++++++++++++++++-----------------
- 1 files changed, 22 insertions(+), 22 deletions(-)
+ meta-oe/recipes-core/udev/udev/init   |    4 ++--
+ meta-oe/recipes-core/udev/udev_168.bb |    2 ++
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/meta-oe/recipes-core/udev/udev/init b/meta-oe/recipes-core/udev/udev/init
-index c0ecdfc..808d9e9 100644
+index 808d9e9..ecc357d 100644
 --- a/meta-oe/recipes-core/udev/udev/init
 +++ b/meta-oe/recipes-core/udev/udev/init
-@@ -18,10 +18,10 @@ export TZ=/etc/localtime
- [ -f /etc/udev/udev.conf ] && . /etc/udev/udev.conf
+@@ -65,10 +65,10 @@ echo -e '\000\000\000\000' > /proc/sys/kernel/hotplug
  
- kill_udevd() {
--        if [ -x /sbin/pidof ]; then
--                pid=`/sbin/pidof -x udevd`
--                [ -n "$pid" ] && kill $pid
--        fi
-+	if [ -x /sbin/pidof ]; then
-+		pid=`/sbin/pidof -x udevd`
-+		[ -n "$pid" ] && kill $pid
-+	fi
- }
+ /sbin/udevadm control --env STARTUP=1
+ if [ "$not_first_boot" != "" ];then
+-	/sbin/udevadm trigger --subsystem-nomatch=tty --subsystem-nomatch=mem --subsystem-nomatch=vc --subsystem-nomatch=vtconsole --subsystem-nomatch=misc --subsystem-nomatch=dcon --subsystem-nomatch=pci_bus  --subsystem-nomatch=graphics	--subsystem-nomatch=backlight --subsystem-nomatch=video4linux  --subsystem-nomatch=platform
++	/sbin/udevadm trigger --subsystem-nomatch=tty --subsystem-nomatch=mem --subsystem-nomatch=vc --subsystem-nomatch=vtconsole --subsystem-nomatch=misc --subsystem-nomatch=dcon --subsystem-nomatch=pci_bus  --subsystem-nomatch=graphics	--subsystem-nomatch=backlight --subsystem-nomatch=video4linux  --subsystem-nomatch=platform --action=add
+ 	(/sbin/udevadm settle --timeout=8; /sbin/udevadm control --env STARTUP=)&
+ else
+-	/sbin/udevadm trigger
++	/sbin/udevadm trigger --action=add
+ 	/sbin/udevadm settle
+ fi
  
- export ACTION=add
-@@ -30,9 +30,9 @@ echo "Starting udev"
+diff --git a/meta-oe/recipes-core/udev/udev_168.bb b/meta-oe/recipes-core/udev/udev_168.bb
+index 4e34c0d..eaba889 100644
+--- a/meta-oe/recipes-core/udev/udev_168.bb
++++ b/meta-oe/recipes-core/udev/udev_168.bb
+@@ -35,6 +35,8 @@ SRC_URI += " \
+        file://udev-compat-wrapper-patch \
+ "
  
- # mount the tmpfs on /dev, if not already done
- LANG=C awk "\$2 == \"/dev\" && \$3 == \"tmpfs\" { exit 1 }" /proc/mounts && {
--        mount -n -o mode=0755 -t tmpfs none "/dev"
--        mkdir -m 0755 /dev/pts
--        mkdir -m 1777 /dev/shm
-+	mount -n -o mode=0755 -t tmpfs none "/dev"
-+	mkdir -m 0755 /dev/pts
-+	mkdir -m 1777 /dev/shm
- }
++PR = "r1"
++
+ inherit update-rc.d autotools
  
- if [ "$DEVCACHE" != "" ]; then
-@@ -42,10 +42,10 @@ if [ "$DEVCACHE" != "" ]; then
- 	[ -r /proc/devices ] && cat /proc/devices > /tmp/devices || touch /tmp/devices
- 	[ -r /proc/atags ] && cat /proc/atags > /tmp/atags || touch /tmp/atags
- 	if [ -e $DEVCACHE ] && \
--	   cmp -s /tmp/uname /etc/udev/saved.uname && \
--	   cmp -s /tmp/cmdline /etc/udev/saved.cmdline && \
--	   cmp -s /tmp/devices /etc/udev/saved.devices && \
--	   cmp -s /tmp/atags /etc/udev/saved.atags; then
-+		cmp -s /tmp/uname /etc/udev/saved.uname && \
-+		cmp -s /tmp/cmdline /etc/udev/saved.cmdline && \
-+		cmp -s /tmp/devices /etc/udev/saved.devices && \
-+		cmp -s /tmp/atags /etc/udev/saved.atags; then
- 		(cd /; tar xf $DEVCACHE > /dev/null 2>&1)
- 		not_first_boot=1
- 	fi
-@@ -59,17 +59,17 @@ fi
- # make_extra_nodes
- kill_udevd > "/dev/null" 2>&1
- 
--        # trigger the sorted events
--        echo -e '\000\000\000\000' > /proc/sys/kernel/hotplug
--        /sbin/udevd -d
-+# trigger the sorted events
-+echo -e '\000\000\000\000' > /proc/sys/kernel/hotplug
-+/sbin/udevd -d
- 
--        /sbin/udevadm control --env STARTUP=1
--		if [ "$not_first_boot" != "" ];then
--			/sbin/udevadm trigger --subsystem-nomatch=tty --subsystem-nomatch=mem --subsystem-nomatch=vc --subsystem-nomatch=vtconsole --subsystem-nomatch=misc --subsystem-nomatch=dcon --subsystem-nomatch=pci_bus  --subsystem-nomatch=graphics  --subsystem-nomatch=backlight --subsystem-nomatch=video4linux  --subsystem-nomatch=platform
--			(/sbin/udevadm settle --timeout=8; /sbin/udevadm control --env STARTUP=)&
--		else
--			/sbin/udevadm trigger
--			/sbin/udevadm settle
--		fi
-+/sbin/udevadm control --env STARTUP=1
-+if [ "$not_first_boot" != "" ];then
-+	/sbin/udevadm trigger --subsystem-nomatch=tty --subsystem-nomatch=mem --subsystem-nomatch=vc --subsystem-nomatch=vtconsole --subsystem-nomatch=misc --subsystem-nomatch=dcon --subsystem-nomatch=pci_bus  --subsystem-nomatch=graphics	--subsystem-nomatch=backlight --subsystem-nomatch=video4linux  --subsystem-nomatch=platform
-+	(/sbin/udevadm settle --timeout=8; /sbin/udevadm control --env STARTUP=)&
-+else
-+	/sbin/udevadm trigger
-+	/sbin/udevadm settle
-+fi
- 
- exit 0
+ EXTRA_OECONF += " --with-udev-prefix= \
 -- 
 1.7.2.5
 
