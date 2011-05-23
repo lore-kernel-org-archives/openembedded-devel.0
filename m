@@ -1,21 +1,36 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QOQ1o-00038z-JQ for openembedded-devel@lists.openembedded.org;
-	Mon, 23 May 2011 09:58:16 +0200
-Received: from f053037237.adsl.alicedsl.de ([78.53.37.237]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QOPzA-0006wO-Ad for openembedded-devel@lists.openembedded.org;
-	Mon, 23 May 2011 07:55:32 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <otavio.salvador@gmail.com>) id 1QOVGL-0000kq-Jz
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 23 May 2011 15:33:37 +0200
+Received: by gwb11 with SMTP id 11so2199777gwb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 May 2011 06:30:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
+	:x-mailer; bh=jQQOzWLQzxkM5E1J6xlNEMUNyt2c+er7LbcNOS00kFw=;
+	b=TAGBrvvyikFKoGJKG5Y8G3xdWiseRvgfqxaZfxVqpmVtdFZANGxcxHkXGbdpkxEC/M
+	oKojb6XTtLQllf7Oq3YGtUoGNmE9AJlv3VmmeZQPI6AOOq9Uu4xB8R1jV3hl157teqs2
+	gfwtQHS8fonGfVsEkLoNmeTpPMyKcLOk0eLxU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=PiRg7UfUcPbMTrpn1IOThD8oJkq3Fq+10y3qvQx6mI2kC7lUBqb+JRrPaJ6B/Js9hH
+	xb/K9Jhk9BBxz/Hn6+lOLiO/jcIoTmQ/KntAw8FPCX3EnHi6yVAYZVG1ytnk4i6bNV4A
+	iWLRpLkzmKBnduZpWbFSG1rVylV6QRK65mURk=
+Received: by 10.151.79.14 with SMTP id g14mr2783879ybl.187.1306157436804;
+	Mon, 23 May 2011 06:30:36 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id q29sm2723749yba.17.2011.05.23.06.30.33
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 23 May 2011 06:30:35 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 May 2011 09:55:16 +0200
-Message-ID: <1306137316.4269.2.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: [PATCH] libecj-bootstrap_3.6*: update `SRC_URI` to `archive.eclipse.org` to fix fetch error
+Date: Mon, 23 May 2011 13:30:20 +0000
+Message-Id: <cover.1306157341.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH 0/4] Pull request with udev changes from O.S. Systems tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,105 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 May 2011 07:58:16 -0000
-X-Groupsio-MsgNum: 32242
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-yvsCqjS01YqYqa8u4Utk"
+X-List-Received-Date: Mon, 23 May 2011 13:33:37 -0000
 
---=-yvsCqjS01YqYqa8u4Utk
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit c6b34871dc0fdd3c1e6a24f2a635505deaa28b20:
 
-Date: Mon, 23 May 2011 09:41:29 +0200
+  freerdp: fix homepage field (2011-05-21 08:27:10 +0200)
 
-Task fetch fails with the following error message using `minimal{,-uclibc}`=
- which uses `libecj-bootstrap_3.6.1`.
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe.git master
+  https://github.com/OSSystems/meta-oe/tree/master
 
-	NOTE: fetch http://mirrors.ibiblio.org/pub/mirrors/eclipse/eclipse/downloa=
-ds/drops/R-3.6.1-201009090800/ecjsrc-3.6.1.zip
-	NOTE: fetch http://mirrors.openembedded.org/ecjsrc-3.6.1.zip
-	NOTE: fetch http://sources.openembedded.org/ecjsrc-3.6.1.zip
-	ERROR: Function 'Fetch failed: Unable to fetch URL http://mirrors.ibiblio.=
-org/pub/mirrors/eclipse/eclipse/downloads/drops/R-3.6.1-201009090800/ecjsrc=
--3.6.1.zip from any source.' failed
-	--2011-05-23 08:58:59--  http://mirrors.ibiblio.org/pub/mirrors/eclipse/ec=
-lipse/downloads/drops/R-3.6.1-201009090800/ecjsrc-3.6.1.zip
-	 Resolving mirrors.ibiblio.org... 152.19.134.44
-	 Connecting to mirrors.ibiblio.org|152.19.134.44|:80... connected.
-	 HTTP request sent, awaiting response... 404 Not Found
-	 2011-05-23 08:58:59 ERROR 404: Not Found.
+Otavio Salvador (4):
+  udev: fix init script indenting
+  udev: fix action used during startup
+  udev: remove udev.inc since it was not being in use
+  udev: move ConsoleKit files to udev-consolekit
 
-	 --2011-05-23 08:59:00--  http://mirrors.openembedded.org/ecjsrc-3.6.1.zip
-	 Resolving mirrors.openembedded.org... 82.197.159.157
-	 Connecting to mirrors.openembedded.org|82.197.159.157|:80... failed: No r=
-oute to host.
-	 --2011-05-23 08:59:03--  http://sources.openembedded.org/ecjsrc-3.6.1.zip
-	 Resolving sources.openembedded.org... 140.211.169.165
-	 Connecting to sources.openembedded.org|140.211.169.165|:80... connected.
-	 HTTP request sent, awaiting response... 404 Not Found
-	 2011-05-23 08:59:03 ERROR 404: Not Found.
+ meta-oe/recipes-core/udev/udev.inc    |  101 ---------------------------------
+ meta-oe/recipes-core/udev/udev/init   |   44 +++++++-------
+ meta-oe/recipes-core/udev/udev_168.bb |    9 ++-
+ 3 files changed, 29 insertions(+), 125 deletions(-)
+ delete mode 100644 meta-oe/recipes-core/udev/udev.inc
 
-The source files are not available on the ibiblio mirror [1] anymore. Using=
- `angstrom-2010.x` the source from `libecj-boostrap-3.6.bb` can still be fe=
-tched from the =C8=A6ngstr=C3=B6m mirror.
+-- 
+1.7.2.5
 
-Therefore update `SRC_URI` to point to the Eclipse archive, where the sourc=
-es are still available, but which seems to be quite slow.
 
-[1] http://mirrors.ibiblio.org/pub/mirrors/eclipse/eclipse/downloads/drops/
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
- recipes/ecj/libecj-bootstrap_3.6.1.bb |    2 +-
- recipes/ecj/libecj-bootstrap_3.6.bb   |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes/ecj/libecj-bootstrap_3.6.1.bb b/recipes/ecj/libecj-boo=
-tstrap_3.6.1.bb
-index 66e3fc1..b3e4c26 100644
---- a/recipes/ecj/libecj-bootstrap_3.6.1.bb
-+++ b/recipes/ecj/libecj-bootstrap_3.6.1.bb
-@@ -3,7 +3,7 @@ require libecj-bootstrap.inc
- PR =3D "r0"
-=20
- SRC_URI =3D " \
--	   http://mirrors.ibiblio.org/pub/mirrors/eclipse/eclipse/downloads/drops=
-/R-3.6.1-201009090800/ecjsrc-${PV}.zip \
-+	   http://archive.eclipse.org/eclipse/downloads/drops/R-3.6.1-20100909080=
-0/ecjsrc-${PV}.zip \
-=20
-           "
-=20
-diff --git a/recipes/ecj/libecj-bootstrap_3.6.bb b/recipes/ecj/libecj-boots=
-trap_3.6.bb
-index faece53..67e4e9b 100644
---- a/recipes/ecj/libecj-bootstrap_3.6.bb
-+++ b/recipes/ecj/libecj-bootstrap_3.6.bb
-@@ -3,7 +3,7 @@ require libecj-bootstrap.inc
- PR =3D "r0"
-=20
- SRC_URI =3D " \
--	   http://mirrors.ibiblio.org/pub/mirrors/eclipse/eclipse/downloads/drops=
-/R-3.6-201006080911/ecjsrc-${PV}.zip \
-+	   http://archive.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/=
-ecjsrc-${PV}.zip \
-           "
-=20
- SRC_URI[md5sum] =3D "25975087b48145eef4ff5f161e792f3e"
---=20
-1.7.5.1
-
---=-yvsCqjS01YqYqa8u4Utk
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3aEt8ACgkQPX1aK2wOHVgA9ACfUWKPeWxYTNEww71342g3swGW
-apcAoIq/Atxb+gf6sS8EMuCfCnXacmht
-=OiWL
------END PGP SIGNATURE-----
-
---=-yvsCqjS01YqYqa8u4Utk--
