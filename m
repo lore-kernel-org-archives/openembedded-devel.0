@@ -1,25 +1,38 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1QOc1y-0003hr-AU
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1QOcMr-0004PM-S3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 May 2011 22:47:14 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.3])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QObz6-0001xM-0z
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 May 2011 22:44:16 +0200
-From: Phil Blundell <philb@gnu.org>
+	Mon, 23 May 2011 23:08:49 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id D31C71100286;
+	Mon, 23 May 2011 23:05:50 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 4B9541100281;
+	Mon, 23 May 2011 23:05:50 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.0 required=5.0 tests=BAYES_40 autolearn=ham
+	version=3.3.1
+Received: from rhein.familie-heinold.de (f052225194.adsl.alicedsl.de
+	[78.52.225.194]) by mail.familie-heinold.de (Postfix) with ESMTPA;
+	Mon, 23 May 2011 23:05:50 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 11DDD3C0DE; Mon, 23 May 2011 23:04:46 +0200 (CEST)
+Date: Mon, 23 May 2011 23:04:46 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1306183247.15595.12.camel@computer>
-References: <1302085494.2267.20.camel@computer>
-	<1302086637.14449.353.camel@phil-desktop>
-	<1306183247.15595.12.camel@computer>
-Date: Mon, 23 May 2011 21:44:06 +0100
-Message-ID: <1306183446.3120.0.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: fennec fonts too small
+Message-ID: <20110523210445.GA8884@rhein.zuhause.netz>
+References: <201105231555.38190.pgsellmann@portner-elektronik.at>
+	<20110523140549.GF3235@jama.jama.net>
+MIME-Version: 1.0
+In-Reply-To: <20110523140549.GF3235@jama.jama.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: Sorry, 4340f07345392b2c4c2017142cce40e407d219af
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,22 +46,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 May 2011 20:47:14 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 23 May 2011 21:08:49 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Mon, 2011-05-23 at 22:40 +0200, Lukas-David Gorris wrote:
-> Then something seems to go wrong with this auto dpi detection mechanism.
-> Might it detect the dpi correctly but not set the font accordingly?
-> That makes me wonder if my Xserver even knows the current screen dpi.
-> How does it get that information? It does know the resolution since that
-> is an essential part of xorg.conf but does it know the screen size? How
-> to investigate futher?
+Hi,
 
-What does xdpyinfo say?
+Paul Menzel already found this strange bug too, but I don't have the time at the moment to look at it.
 
-p.
-
-
+Bye Henning
 
 
