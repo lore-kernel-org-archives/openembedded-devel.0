@@ -1,37 +1,40 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1QOclB-0004uG-Md
+	(envelope-from <martin.jansa@gmail.com>) id 1QOmPV-0001H2-5z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 May 2011 23:33:57 +0200
-Received: by vws2 with SMTP id 2so5068921vws.6
+	Tue, 24 May 2011 09:52:13 +0200
+Received: by fxm19 with SMTP id 19so5072747fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 May 2011 14:30:56 -0700 (PDT)
+	Tue, 24 May 2011 00:49:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
-	:date:x-google-sender-auth:message-id:subject:to:content-type;
-	bh=0YxP7PqKm5I+WWgX2vcazAfEYNaxGbfpDgjYtXO2uuk=;
-	b=T4QhTEI3eGCHe+izQOj6suiOR6RTpvSqaTkurIRduGsEkS7EVMc0JR1dYL88su1y+I
-	JZSGSJk7vMKqYeedjTW6AB7HoNJDAXAd9nisR9uMHoMoaFMLB6FXBVEK2rkWijL+kvh0
-	6xGfziO9j2up+3tQOWYS+JI0g3dXQ7izYuPII=
+	h=domainkey-signature:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=V0smVb5Md48JmLjkADbO3a2+AH0t2c6NJM/27dBHCFY=;
+	b=wpdGgbVgoGKR4dcjxuve87esoiW5pv1gUx+YZI32kmh5lkDGvY20CrddW/Gg02htz0
+	H3PsmmcJol8GQaXcyS0wzTBiWbdzpHDyQ8HIowsAgmUO34MpHVQz+itcL9VM0NVaU5Tk
+	qjbYDcwnhc0fdW1U21IK2G6sHg3OS4nVtVDNg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=f5akmRjU/KpMtAQp0Vdg7lcXs6SPjb6od3LdiKDnE973hzkp7OZDpStAUM1vIKjj7J
-	5hlWc5HSjHBg+REu8RTAYJI17rLH1GWqMG58iQuoUDZaR+OPu7n0IxkMjcx3+tEjyvNX
-	lVK0Lsp7wNjy9g6vNyOhnkJkb58OcQpk7yzuo=
-Received: by 10.52.32.102 with SMTP id h6mr4156921vdi.34.1306186255725; Mon,
-	23 May 2011 14:30:55 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.52.183.162 with HTTP; Mon, 23 May 2011 14:30:35 -0700 (PDT)
-In-Reply-To: <1306185965.5948.19.camel@utx.lan>
-References: <1306185965.5948.19.camel@utx.lan>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 23 May 2011 14:30:35 -0700
-X-Google-Sender-Auth: oOe6e3V35oax82R-ezOW8ayHoFk
-Message-ID: <BANLkTikddk3Ft89jpeXAtstHdow-kXJ0=g@mail.gmail.com>
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=kv7lLCJ1w3MShIX/ZR2BEzbgC0REHHDlhh/WqVsVozjyhcoVjjKHGSP/ljA03/cBAk
+	W0DMgQo8G0WWh5f8uswOzzYcj39eicMaFFa8+zSPuhiMhtDzv3Ubc5hCwtcykloA9CrE
+	221KnLyCAyGM/8x3TGz7nkBJXJoBbh/OpVPeQ=
+Received: by 10.223.158.72 with SMTP id e8mr3298635fax.39.1306223352186;
+	Tue, 24 May 2011 00:49:12 -0700 (PDT)
+Received: from localhost ([94.230.152.115])
+	by mx.google.com with ESMTPS id c22sm2600744fat.14.2011.05.24.00.49.10
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 24 May 2011 00:49:11 -0700 (PDT)
+Date: Tue, 24 May 2011 09:49:04 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: RFC: Remove -e from default EXTRA_OEMAKE
+Message-ID: <20110524074904.GA3222@jama.jama.net>
+References: <E1QOdTp-0005Io-SJ@melo.openembedded.org>
+MIME-Version: 1.0
+In-Reply-To: <E1QOdTp-0005Io-SJ@melo.openembedded.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-commits@openembedded.org
+Subject: Re: [oe-commits] Stanislav Brabec : bluez-hcidump: Fix declaration clash ( remove definition of ntoh64() already present in bluetooth.h).
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,52 +48,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 May 2011 21:33:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 24 May 2011 07:52:13 -0000
+X-Groupsio-MsgNum: 32263
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="zhXaljGHf11kAtnf"
+Content-Disposition: inline
 
-On Mon, May 23, 2011 at 2:26 PM, Stanislav Brabec <utx@penguin.cz> wrote:
->
-> EXTRA_OEMAKE contains -e by default for years (in bitbake.conf). In my
-> opinion it causes more bad than good.
->
-> It makes live simpler in (rare) cases when Makefile proposes its own
-> default CFLAGS without chance to easily change them from outside, but it
-> causes subtle (and often overseen) breakages in many other cases. For
-> example "-e" in EXTRA_OEMAKE caused breakage of crda (tested with GNU
-> make 3.82):
-> ifeq ($(USE_OPENSSL),1)
-> CFLAGS += -DUSE_OPENSSL
-> endif
->
-> As you can check, there are several hundreds of recipes that need to
-> override this default. Also autotools.bbclass,
-> distutils-common-base.bbclass, qmake_base.bbclass and kernel.bbclass
-> remove "-e" from default make flags. It means that at least 6000 recipes
-> remove "-e" from EXTRA_OEMAKE.
->
-> That is why I think that "-e" should not be a default. If needed, it
-> would be easy to add it for particular recipes.
+--zhXaljGHf11kAtnf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I have to agree, here. The biggest problem, I think, in addition to
-the above breakage, is that it's too much "magic". It's too implicit.
-It might simplify recipe creation in some cases, but that isn't
-necessarily a good thing. If you're creating a recipe for a
-non-autotools thing, you need to sit down and read its makefiles.
-Hoping and crossing your fingers that the default behavior will work
-is just asking for trouble. It would be better for things to not "just
-work" for regular make and make the user read the makefiles and pass
-the vars explicitly in EXTRA_OEMAKE, which thereby increases their
-knowledge of the system, and encodes more of that knowledge in the
-recipe for future maintenance.
+On Mon, May 23, 2011 at 10:20:05PM +0000, git version control wrote:
+> Module: openembedded.git
+> Branch: master
+> Commit: 880742f2072a3acb10637b4de7230b55910920b8
+> URL:    http://git.openembedded.org/?p=3Dopenembedded.git&a=3Dcommit;h=3D=
+880742f2072a3acb10637b4de7230b55910920b8
+>=20
+> Author: Stanislav Brabec <utx@penguin.cz>
+> Date:   Mon May 23 22:08:30 2011 +0000
+>=20
+> bluez-hcidump: Fix declaration clash (remove definition of ntoh64() alrea=
+dy present in bluetooth.h).
+> Signed-off-by: Stanislav Brabec <utx@penguin.cz>
 
-It took me a heck of a lot of trial and error to come up with the -e
-MAKEFLAGS='' hack to make sure the -e only took effect at the toplevel
-make -- more trouble than its worth.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+BTW: this patch is already upstream and also in meta-openembedded
 
+http://git.openembedded.org/cgit.cgi/meta-openembedded/commit/?id=3D852ac4b=
+589adb186191ad70a2fa3472d5b351ec4
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--zhXaljGHf11kAtnf
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
+
+iEYEARECAAYFAk3bYvAACgkQN1Ujt2V2gBwkEACfQeJrACNWB7fnbvPB7g4uGxtj
+R2AAn01HK61pT18PP/uFydp4olMGJEjd
+=6yTc
+-----END PGP SIGNATURE-----
+
+--zhXaljGHf11kAtnf--
