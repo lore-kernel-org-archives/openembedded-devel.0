@@ -1,23 +1,36 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QPIuA-00017i-Cw for openembedded-devel@lists.openembedded.org;
-	Wed, 25 May 2011 20:34:02 +0200
-Received: from f053034074.adsl.alicedsl.de ([78.53.34.74]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QPIrZ-0002OJ-IE for openembedded-devel@lists.openembedded.org;
-	Wed, 25 May 2011 18:31:21 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <irjgl2$jur$1@dough.gmane.org>
-References: <1306336287-23286-1-git-send-email-eyalr@ti.com>
-	<1306345185.4888.2.camel@mattotaupa>  <irjgl2$jur$1@dough.gmane.org>
-Date: Wed, 25 May 2011 20:31:00 +0200
-Message-ID: <1306348260.28917.1.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
+	(envelope-from <eyalr@ti.com>) id 1QPJ2K-0001Jn-V1
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 25 May 2011 20:42:29 +0200
+Received: from dlep33.itg.ti.com ([157.170.170.112])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id p4PIdPqF014426
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 May 2011 13:39:25 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep33.itg.ti.com (8.13.7/8.13.7) with ESMTP id p4PIdO4Q023910
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 May 2011 13:39:24 -0500 (CDT)
+Received: from dnce72.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p4PIdOcr011365
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 May 2011 13:39:24 -0500 (CDT)
+Received: from dnce02.ent.ti.com ([137.167.131.106]) by dnce72.ent.ti.com
+	([137.167.131.87]) with mapi; Wed, 25 May 2011 20:39:23 +0200
+From: "Reizer, Eyal" <eyalr@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 25 May 2011 20:39:22 +0200
+Thread-Topic: [oe] [PATCHv2] wpa-gui-e: build the latest version from git
+	sources
+Thread-Index: AcwbCfVZzt5NXRKnQVOu6+1n+DiY/QAARtL/
+Message-ID: <ywa29wecfmoiay384gigi9ta.1306348962906@email.android.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
 Subject: Re: [PATCHv2] wpa-gui-e: build the latest version from git sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,58 +45,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 May 2011 18:34:02 -0000
-X-Groupsio-MsgNum: 32295
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-rKeaaHY78d3zj7chu7kK"
+X-List-Received-Date: Wed, 25 May 2011 18:42:29 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
---=-rKeaaHY78d3zj7chu7kK
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Am Mittwoch, den 25.05.2011, 20:09 +0200 schrieb Koen Kooi:
-
-> On 25-05-11 19:39, Paul Menzel wrote:
-> > Am Mittwoch, den 25.05.2011, 18:11 +0300 schrieb Eyal Reizer:
-> >> Builds wpa-gui for qt4-embedded from the latest wpa-supplicant (0.8x)
-> >> git sources
-> >>
-> >> update based on comments from comunity members.
-> >=20
-> > This is only useful for reviews and therefore should go after the `---`
-> > so that it is not included into the commit message.
-> >=20
-> >> Signed-off-by: Eyal Reizer <eyalr@ti.com>
-> >> ---
-> >>  recipes/wpa-supplicant/wpa-gui-e_git.bb |   29 ++++++++++++++++++++++=
-+++++++
-> >=20
-> > Why do you use that recipe name?
->=20
-> '-e' is for qt/e builds and '' or '-qt4' for qt4/x11 builds
-
-[=E2=80=A6]
-
-> >> +S =3D "${WORKDIR}/git/wpa_supplicant/wpa_gui-qt4"
-
-So the Qt4 version is build?
+UG9zdGluZyBmcm9tIG1vYmlsZS4uLg0KDQpTYW1lIHNvdXJjZSBjb2RlIGlzIHVzZWQgZm9yIHF0
+NGUgYW5kIHF0NHguDQpUaGUgSU5IRVJJVCBsaW5lIHNlbGVjdCBxdDRlLg0KDQoNCg0KUGF1bCBN
+ZW56ZWwgPHBhdWxlcGFudGVyQHVzZXJzLnNvdXJjZWZvcmdlLm5ldD4gd3JvdGU6DQoNCg0KQW0g
+TWl0dHdvY2gsIGRlbiAyNS4wNS4yMDExLCAyMDowOSArMDIwMCBzY2hyaWViIEtvZW4gS29vaToN
+Cg0KPiBPbiAyNS0wNS0xMSAxOTozOSwgUGF1bCBNZW56ZWwgd3JvdGU6DQo+ID4gQW0gTWl0dHdv
+Y2gsIGRlbiAyNS4wNS4yMDExLCAxODoxMSArMDMwMCBzY2hyaWViIEV5YWwgUmVpemVyOg0KPiA+
+PiBCdWlsZHMgd3BhLWd1aSBmb3IgcXQ0LWVtYmVkZGVkIGZyb20gdGhlIGxhdGVzdCB3cGEtc3Vw
+cGxpY2FudCAoMC44eCkNCj4gPj4gZ2l0IHNvdXJjZXMNCj4gPj4NCj4gPj4gdXBkYXRlIGJhc2Vk
+IG9uIGNvbW1lbnRzIGZyb20gY29tdW5pdHkgbWVtYmVycy4NCj4gPg0KPiA+IFRoaXMgaXMgb25s
+eSB1c2VmdWwgZm9yIHJldmlld3MgYW5kIHRoZXJlZm9yZSBzaG91bGQgZ28gYWZ0ZXIgdGhlIGAt
+LS1gDQo+ID4gc28gdGhhdCBpdCBpcyBub3QgaW5jbHVkZWQgaW50byB0aGUgY29tbWl0IG1lc3Nh
+Z2UuDQo+ID4NCj4gPj4gU2lnbmVkLW9mZi1ieTogRXlhbCBSZWl6ZXIgPGV5YWxyQHRpLmNvbT4N
+Cj4gPj4gLS0tDQo+ID4+ICByZWNpcGVzL3dwYS1zdXBwbGljYW50L3dwYS1ndWktZV9naXQuYmIg
+fCAgIDI5ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrDQo+ID4NCj4gPiBXaHkgZG8geW91
+IHVzZSB0aGF0IHJlY2lwZSBuYW1lPw0KPg0KPiAnLWUnIGlzIGZvciBxdC9lIGJ1aWxkcyBhbmQg
+Jycgb3IgJy1xdDQnIGZvciBxdDQveDExIGJ1aWxkcw0KDQpb4oCmXQ0KDQo+ID4+ICtTID0gIiR7
+V09SS0RJUn0vZ2l0L3dwYV9zdXBwbGljYW50L3dwYV9ndWktcXQ0Ig0KDQpTbyB0aGUgUXQ0IHZl
+cnNpb24gaXMgYnVpbGQ/DQoNCg0KVGhhbmtzLA0KDQpQYXVsDQo=
 
 
-Thanks,
-
-Paul
-
---=-rKeaaHY78d3zj7chu7kK
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3dSt4ACgkQPX1aK2wOHVgRzACfZ/Zh6h981djwJl1maA39Es8A
-SXAAnjv1HXA0ypkDm/WVy/virM2Klj+c
-=ZFsW
------END PGP SIGNATURE-----
-
---=-rKeaaHY78d3zj7chu7kK--
