@@ -1,40 +1,22 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1QPDxQ-0003c8-FJ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 May 2011 15:17:04 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 622EF110022F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 May 2011 15:13:59 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id B22351100226
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 May 2011 15:13:58 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (g225145225.adsl.alicedsl.de
-	[92.225.145.225]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 May 2011 15:13:58 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 1C55B3C0DE; Wed, 25 May 2011 15:13:05 +0200 (CEST)
-Date: Wed, 25 May 2011 15:13:04 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QPE2Z-0003kg-Qe for openembedded-devel@lists.openembedded.org;
+	Wed, 25 May 2011 15:22:23 +0200
+Received: from f053034074.adsl.alicedsl.de ([78.53.34.74]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QPDzy-0004XG-HN for openembedded-devel@lists.openembedded.org;
+	Wed, 25 May 2011 13:19:42 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110525131304.GA11519@mail.familie-heinold.de>
-References: <y>
- <1306328337-19285-1-git-send-email-eyalr@ti.com>
-MIME-Version: 1.0
 In-Reply-To: <1306328337-19285-1-git-send-email-eyalr@ti.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
+References: <y>  <1306328337-19285-1-git-send-email-eyalr@ti.com>
+Date: Wed, 25 May 2011 15:19:21 +0200
+Message-ID: <1306329561.10056.63.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
 Subject: Re: [PATCH] wpa-gui-e: build the latest version from git sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -49,19 +31,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 May 2011 13:17:04 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 25 May 2011 13:22:23 -0000
+X-Groupsio-MsgNum: 32283
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Ek0/NK4J6QwQpdLS6yuw"
 
-On Wed, May 25, 2011 at 03:58:57PM +0300, Eyal Reizer wrote:
+--=-Ek0/NK4J6QwQpdLS6yuw
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Dear Eyal,
+
+
+please check your `git send-email` setup. Somehow it has the following
+in the massage header
+
+        In-Reply-To: <y>
+        References: <y>
+
+and your message from Wednesday (Wed, 18 May 2011 16:37:23 +0200) does
+too.
+
+        References: <y> <1305614722-5460-1-git-send-email-eyalr@ti.com>
+        In-Reply-To: <1305614722-5460-1-git-send-email-eyalr@ti.com>
+
+Therefore the threading gets messed up.
+
+On Mi, 2011-05-25 at 15:58 +0300, Eyal Reizer wrote:
+> Builds wpa-gui for qt4-embedded from the latest wpa-supplicant (0.8x)
+> git sources
+
+Which build configuration did you use for testing?
+
+> Signed-off-by: Eyal Reizer <eyalr@ti.com>
+> ---
+>  recipes/wpa-supplicant/wpa-gui-e_git.bb |   32 +++++++++++++++++++++++++=
+++++++
+>  1 files changed, 32 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/wpa-supplicant/wpa-gui-e_git.bb
+>=20
+> diff --git a/recipes/wpa-supplicant/wpa-gui-e_git.bb b/recipes/wpa-suppli=
+cant/wpa-gui-e_git.bb
+> new file mode 100644
+> index 0000000..1c990c6
+> --- /dev/null
+> +++ b/recipes/wpa-supplicant/wpa-gui-e_git.bb
+
+The other recipes are named just `wpa-gui_=E2=80=A6.bb`. Why `-e` and not
+`-qt4`?
+
+> @@ -0,0 +1,32 @@
+> +DESCRIPTION =3D "Qt embedded interface for choosing which configured net=
+work \
+> +to connect to. It also provides a method for browsing 802.11 SSID scan \
+> +results, an event history log of messages generated by wpa_supplicant, a=
+nd \
+> +a method to add or edit wpa_supplicant networks."
+> +SECTION =3D "network"
+> +LICENSE =3D "GPL BSD"
+> +HOMEPAGE =3D "http://hostap.epitest.fi/wpa_supplicant/"
+> +RDEPENDS_${PN} =3D "wpa-supplicant"
+> +RRECOMMENDS_${PN} =3D "glibc-gconv-utf-16"
+
+Please order the variables according to the style guide [1].
+
+> +
+> +SRCREV =3D "b8fb017272ed4794339978c9fbc0e74571a44728"
+> +PR =3D "r0"
+> +PV =3D "0.7.3+0.8.0-rc"
+> +PR_append =3D "+gitr${SRCPV}"
+> +
+> +DEFAULT_PREFERENCE =3D "-1"
+
+Since it is a new recipe name and not packaged yet and `PROVIDES` is not
+set, I guess you can leave `DP =3D "-1"` out.
+
+> +
+> +SRC_URI =3D "git://w1.fi/srv/git/hostap.git;protocol=3Dgit"
+> +
+> +S =3D "${WORKDIR}/git/wpa_supplicant/wpa_gui-qt4"
+> +
+> +inherit qt4e
+> +ARM_INSTRUCTION_SET =3D "arm"
+> +
+> +do_install () {
+> +       install -d ${D}${bindir}
 > +       install -d ${D}${datadir}/wpa_gui
 > +       install -d ${D}${datadir}/applications
+> +       install -m 755 wpa_gui ${D}/${bindir}/wpa_gui-e
+> +}
+> +
+> +
 
-Hi,
+You do not need the last two empty lines.
 
-why are these dir's needed, when you don't install something
-into it?
-
-Bye Henning
+If you have some time you could create an include file and build test
+and remove old `wpa-gui` versions.
 
 
+Thanks,
+
+Paul
+
+
+[1] http://openembedded.org/index.php/Styleguide
+
+--=-Ek0/NK4J6QwQpdLS6yuw
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3dAdkACgkQPX1aK2wOHVg2gQCdHfoEC4P/qAWLhH9mL3jqpDLj
+vwIAn0VIaazP1Ew6YiFn+NAO7kACc4zV
+=fnXU
+-----END PGP SIGNATURE-----
+
+--=-Ek0/NK4J6QwQpdLS6yuw--
