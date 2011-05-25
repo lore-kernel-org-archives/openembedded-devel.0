@@ -1,22 +1,33 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail.dream-property.net ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QPE2Z-0003kg-Qe for openembedded-devel@lists.openembedded.org;
-	Wed, 25 May 2011 15:22:23 +0200
-Received: from f053034074.adsl.alicedsl.de ([78.53.34.74]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QPDzy-0004XG-HN for openembedded-devel@lists.openembedded.org;
-	Wed, 25 May 2011 13:19:42 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <obi@opendreambox.org>) id 1QPEJJ-00045G-Bw
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 25 May 2011 15:39:41 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 080BE31480A6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 May 2011 15:36:40 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id ajzCGhJ5mgLN
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 May 2011 15:36:33 +0200 (CEST)
+Received: from [172.22.22.61] (drms-4d0153df.pool.mediaWays.net [77.1.83.223])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 440043146861
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 May 2011 15:36:33 +0200 (CEST)
+Message-ID: <4DDD05E0.4070504@opendreambox.org>
+Date: Wed, 25 May 2011 15:36:32 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
+References: <y> <1306328337-19285-1-git-send-email-eyalr@ti.com>
 In-Reply-To: <1306328337-19285-1-git-send-email-eyalr@ti.com>
-References: <y>  <1306328337-19285-1-git-send-email-eyalr@ti.com>
-Date: Wed, 25 May 2011 15:19:21 +0200
-Message-ID: <1306329561.10056.63.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
 Subject: Re: [PATCH] wpa-gui-e: build the latest version from git sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,89 +42,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 May 2011 13:22:23 -0000
-X-Groupsio-MsgNum: 32283
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-Ek0/NK4J6QwQpdLS6yuw"
+X-List-Received-Date: Wed, 25 May 2011 13:39:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---=-Ek0/NK4J6QwQpdLS6yuw
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hello Eyal,
 
-Dear Eyal,
+thanks for your contribution. See some comments below:
 
-
-please check your `git send-email` setup. Somehow it has the following
-in the massage header
-
-        In-Reply-To: <y>
-        References: <y>
-
-and your message from Wednesday (Wed, 18 May 2011 16:37:23 +0200) does
-too.
-
-        References: <y> <1305614722-5460-1-git-send-email-eyalr@ti.com>
-        In-Reply-To: <1305614722-5460-1-git-send-email-eyalr@ti.com>
-
-Therefore the threading gets messed up.
-
-On Mi, 2011-05-25 at 15:58 +0300, Eyal Reizer wrote:
+On 05/25/2011 02:58 PM, Eyal Reizer wrote:
 > Builds wpa-gui for qt4-embedded from the latest wpa-supplicant (0.8x)
 > git sources
-
-Which build configuration did you use for testing?
-
+> 
 > Signed-off-by: Eyal Reizer <eyalr@ti.com>
 > ---
->  recipes/wpa-supplicant/wpa-gui-e_git.bb |   32 +++++++++++++++++++++++++=
-++++++
+>  recipes/wpa-supplicant/wpa-gui-e_git.bb |   32 +++++++++++++++++++++++++++++++
 >  1 files changed, 32 insertions(+), 0 deletions(-)
 >  create mode 100644 recipes/wpa-supplicant/wpa-gui-e_git.bb
->=20
-> diff --git a/recipes/wpa-supplicant/wpa-gui-e_git.bb b/recipes/wpa-suppli=
-cant/wpa-gui-e_git.bb
+> 
+> diff --git a/recipes/wpa-supplicant/wpa-gui-e_git.bb b/recipes/wpa-supplicant/wpa-gui-e_git.bb
 > new file mode 100644
 > index 0000000..1c990c6
 > --- /dev/null
 > +++ b/recipes/wpa-supplicant/wpa-gui-e_git.bb
-
-The other recipes are named just `wpa-gui_=E2=80=A6.bb`. Why `-e` and not
-`-qt4`?
-
 > @@ -0,0 +1,32 @@
-> +DESCRIPTION =3D "Qt embedded interface for choosing which configured net=
-work \
+> +DESCRIPTION = "Qt embedded interface for choosing which configured network \
 > +to connect to. It also provides a method for browsing 802.11 SSID scan \
-> +results, an event history log of messages generated by wpa_supplicant, a=
-nd \
+> +results, an event history log of messages generated by wpa_supplicant, and \
 > +a method to add or edit wpa_supplicant networks."
-> +SECTION =3D "network"
-> +LICENSE =3D "GPL BSD"
-> +HOMEPAGE =3D "http://hostap.epitest.fi/wpa_supplicant/"
-> +RDEPENDS_${PN} =3D "wpa-supplicant"
-> +RRECOMMENDS_${PN} =3D "glibc-gconv-utf-16"
+> +SECTION = "network"
+> +LICENSE = "GPL BSD"
 
-Please order the variables according to the style guide [1].
+Which GPL version?
 
-> +
-> +SRCREV =3D "b8fb017272ed4794339978c9fbc0e74571a44728"
-> +PR =3D "r0"
-> +PV =3D "0.7.3+0.8.0-rc"
-> +PR_append =3D "+gitr${SRCPV}"
-> +
-> +DEFAULT_PREFERENCE =3D "-1"
+> +HOMEPAGE = "http://hostap.epitest.fi/wpa_supplicant/"
+> +RDEPENDS_${PN} = "wpa-supplicant"
+> +RRECOMMENDS_${PN} = "glibc-gconv-utf-16"
 
-Since it is a new recipe name and not packaged yet and `PROVIDES` is not
-set, I guess you can leave `DP =3D "-1"` out.
+What is this recommendation good for?
 
 > +
-> +SRC_URI =3D "git://w1.fi/srv/git/hostap.git;protocol=3Dgit"
+> +SRCREV = "b8fb017272ed4794339978c9fbc0e74571a44728"
+> +PR = "r0"
+
+PR = "r0" is the default and can be removed.
+
+> +PV = "0.7.3+0.8.0-rc"
+> +PR_append = "+gitr${SRCPV}"
+
+SRCPV should not be used in PR (even if it's been copied from another
+recipe which does it wrong).
+
+Regards,
+Andreas
+
 > +
-> +S =3D "${WORKDIR}/git/wpa_supplicant/wpa_gui-qt4"
+> +DEFAULT_PREFERENCE = "-1"
+> +
+> +SRC_URI = "git://w1.fi/srv/git/hostap.git;protocol=git"
+> +
+> +S = "${WORKDIR}/git/wpa_supplicant/wpa_gui-qt4"
 > +
 > +inherit qt4e
-> +ARM_INSTRUCTION_SET =3D "arm"
+> +ARM_INSTRUCTION_SET = "arm"
 > +
 > +do_install () {
 > +       install -d ${D}${bindir}
@@ -124,29 +115,5 @@ set, I guess you can leave `DP =3D "-1"` out.
 > +
 > +
 
-You do not need the last two empty lines.
-
-If you have some time you could create an include file and build test
-and remove old `wpa-gui` versions.
 
 
-Thanks,
-
-Paul
-
-
-[1] http://openembedded.org/index.php/Styleguide
-
---=-Ek0/NK4J6QwQpdLS6yuw
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3dAdkACgkQPX1aK2wOHVg2gQCdHfoEC4P/qAWLhH9mL3jqpDLj
-vwIAn0VIaazP1Ew6YiFn+NAO7kACc4zV
-=fnXU
------END PGP SIGNATURE-----
-
---=-Ek0/NK4J6QwQpdLS6yuw--
