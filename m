@@ -1,35 +1,25 @@
-Received: from mail-px0-f172.google.com ([209.85.212.172])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QP5sw-0006Ny-Jy
+Received: from stoexhub01.domain01.net ([83.145.59.142]
+	helo=stoexhub02.domain01.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <anders@chargestorm.se>) id 1QP7C9-0007xH-3X
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 May 2011 06:39:54 +0200
-Received: by pxi6 with SMTP id 6so5438190pxi.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 May 2011 21:36:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=+8YI0fRA5HMLREBWTc4WOMnUu9yL4ziVKL+4jH3sKDQ=;
-	b=thvgy9PhWYYFefzvZpjhemxNDyWiZEk00VUJhNzIx5TdLWj9quNMJVjsA32TsLvHZf
-	YUm5rMDyfO9kqQ6yz5V8nQwGDiNSRsQ5mr0Y6zkoq02VRxqIowbsWuQlJwT/3hwiFJiy
-	iwdddrbtW+LnCYl08XF21o4iauezPa2PIQ45M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=JpQSOH0lS4M9t7llQdxgTrwTIZRPGC1nO3I+ubMkbYdlyuFSreBF3IGF7NaB3kzVM9
-	iuecuzm8Ylq7nlEctkqn78wBXWORPPPlhflZ6YoBGV5bVpvPM/i1eJ57SbLbHMpvuM0P
-	qdcU5iRu9Pf9zZnUoCZaZsvQF0kJK4I8j0Ojg=
-Received: by 10.68.63.9 with SMTP id c9mr591400pbs.71.1306298211486;
-	Tue, 24 May 2011 21:36:51 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id 5sm5433269pbn.25.2011.05.24.21.36.49
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 24 May 2011 21:36:50 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 May 2011 21:36:45 -0700
-Message-Id: <1306298205-20707-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-Subject: [meta-oe][PATCH] gcc-4.6.inc: Always build runtime in ARM mode.
+	Wed, 25 May 2011 08:03:49 +0200
+Received: from STOEXMBXC03.domain01.net
+	([fe80:0000:0000:0000:99c4:3913:164.170.217.90]) by
+	stoexhub02.domain01.net
+	([10.12.10.2]) with mapi; Wed, 25 May 2011 08:00:46 +0200
+From: Anders Darander <anders@chargestorm.se>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 25 May 2011 08:00:45 +0200
+Thread-Topic: kbd and console-tools collision when using systemd
+Thread-Index: AQHMGqEWRh23y3NpkEyLUcwODaS5Mg==
+Message-ID: <AEF4F94AE6BD724F91B503AC1AFED2392C5E8391CF@STOEXMBXC03.domain01.net>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+Subject: kbd and console-tools collision when using systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,28 +33,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 May 2011 04:39:54 -0000
+X-List-Received-Date: Wed, 25 May 2011 06:03:49 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-devtools/gcc/gcc-4.6.inc |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+We have recently switched our local distro to use systemd for the init-proc=
+ess. This works fine for our HW-target (apart from some non-optimal configu=
+ration, but that is something we're looking into). Our HW-target is based o=
+n the at91sam9g20.
 
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.inc b/meta-oe/recipes-devtools/gcc/gcc-4.6.inc
-index a5e64be..b86c6fb 100644
---- a/meta-oe/recipes-devtools/gcc/gcc-4.6.inc
-+++ b/meta-oe/recipes-devtools/gcc/gcc-4.6.inc
-@@ -16,6 +16,8 @@ BINV = "${PV}.0"
- 
- PR = "r0"
- 
-+ARM_INSTRUCTION_SET = "arm"
-+
- DEPENDS =+ "mpfr gmp libmpc"
- NATIVEDEPS = "mpfr-native gmp-native gettext-native libmpc-native"
- 
--- 
-1.7.4.1
+However, sometime later, we tried to rebuild our distro for qemuarm, to eas=
+e the work on some of the systemd configuration. Qemuarm (just as any other=
+ Qemu-target) adds keyboard to the machine-features, and task-boot.bb trans=
+lates this into the inclusion of the keymaps package, which in turns draws =
+in console-tools. This is where we are getting problems.
 
+Local distro uses task-boot.bb
+Qemu -> keymps -> RDEPENDS console-tools
+Systemd -> RRECOMMENDS kbd
+
+This leads to lots of clashes with e.g. usr/bin/dumpkeys, usr/bin/unicode_s=
+top etc.
+Currently we have solved this by using a local copy of task-boot.bb in one =
+of our layers, which lets the machine feature keyboard include kbd-keymaps =
+instead of keymaps.
+
+Is there some better/simpler way (maintainence wise) to solve the problem? =
+Or is the local task-boot.bb the best way to handle it? (It's always better=
+ to try to reduce the amount of local copies, to be able to benefit from th=
+e community, and to easier contribute back).
+
+Is there some way we could make such a change using e.g. a .bbappend?=20
+
+Regards,
+Anders
+
+--=20
+Anders Darander
+ChargeStorm AB               =
 
 
