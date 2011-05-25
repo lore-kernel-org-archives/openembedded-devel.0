@@ -1,23 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-px0-f172.google.com ([209.85.212.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QOyj0-0004Al-K4 for openembedded-devel@lists.openembedded.org;
-	Tue, 24 May 2011 23:01:10 +0200
-Received: from f053046177.adsl.alicedsl.de ([78.53.46.177]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QOygO-0001nO-D6 for openembedded-devel@lists.openembedded.org;
-	Tue, 24 May 2011 20:58:28 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <raj.khem@gmail.com>) id 1QP5sw-0006Ny-Jy
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 25 May 2011 06:39:54 +0200
+Received: by pxi6 with SMTP id 6so5438190pxi.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 May 2011 21:36:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=+8YI0fRA5HMLREBWTc4WOMnUu9yL4ziVKL+4jH3sKDQ=;
+	b=thvgy9PhWYYFefzvZpjhemxNDyWiZEk00VUJhNzIx5TdLWj9quNMJVjsA32TsLvHZf
+	YUm5rMDyfO9kqQ6yz5V8nQwGDiNSRsQ5mr0Y6zkoq02VRxqIowbsWuQlJwT/3hwiFJiy
+	iwdddrbtW+LnCYl08XF21o4iauezPa2PIQ45M=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=JpQSOH0lS4M9t7llQdxgTrwTIZRPGC1nO3I+ubMkbYdlyuFSreBF3IGF7NaB3kzVM9
+	iuecuzm8Ylq7nlEctkqn78wBXWORPPPlhflZ6YoBGV5bVpvPM/i1eJ57SbLbHMpvuM0P
+	qdcU5iRu9Pf9zZnUoCZaZsvQF0kJK4I8j0Ojg=
+Received: by 10.68.63.9 with SMTP id c9mr591400pbs.71.1306298211486;
+	Tue, 24 May 2011 21:36:51 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id 5sm5433269pbn.25.2011.05.24.21.36.49
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 24 May 2011 21:36:50 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1306159627-10568-1-git-send-email-sledz@dresearch-fe.de>
-References: <1306159627-10568-1-git-send-email-sledz@dresearch-fe.de>
-Date: Tue, 24 May 2011 22:58:09 +0200
-Message-ID: <1306270689.22299.12.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [PATCH] apr-util: disable odbc support to avoid QA error
+Date: Tue, 24 May 2011 21:36:45 -0700
+Message-Id: <1306298205-20707-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [meta-oe][PATCH] gcc-4.6.inc: Always build runtime in ARM mode.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,84 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 May 2011 21:01:10 -0000
-X-Groupsio-MsgNum: 32267
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-LHh6/KAH9ACpVCGizw4i"
+X-List-Received-Date: Wed, 25 May 2011 04:39:54 -0000
 
---=-LHh6/KAH9ACpVCGizw4i
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-devtools/gcc/gcc-4.6.inc |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-Am Montag, den 23.05.2011, 16:07 +0200 schrieb Steffen Sledz:
-> The odbc checker part of the configure script seems to be buggy and
-> may add host pathes to compiler and linker options:
-
-s/patches/paths/
-
->
-> --------->snip<--------
->  checking for odbc_config... /usr/bin/odbc_config
->    adding "-I/usr/include" to CPPFLAGS
->    adding "-L/usr/lib" to LDFLAGS
->    setting LIBS to "-L/usr/lib -lodbc"
-> --------->snip<--------
-
-Did you report that problem upstream?
-
-Why is that a QA error? I would have guessed that the compilation would
-fail.
-
-> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
-> ---
->  recipes/apr/apr-util_1.3.10.bb |    3 ++-
->  1 files changed, 2 insertions(+), 1 deletions(-)
->=20
-> diff --git a/recipes/apr/apr-util_1.3.10.bb b/recipes/apr/apr-util_1.3.10=
-.bb
-> index ee32ddd..32b568e 100644
-> --- a/recipes/apr/apr-util_1.3.10.bb
-> +++ b/recipes/apr/apr-util_1.3.10.bb
-> @@ -3,7 +3,7 @@ SECTION =3D "libs"
->  DEPENDS =3D "apr expat gdbm"
->  LICENSE =3D "Apache License, Version 2.0"
-> =20
-> -PR =3D "r0"
-> +PR =3D "r1"
-> =20
->  SRC_URI =3D "${APACHE_MIRROR}/apr/${P}.tar.gz \
->             file://configfix.patch \
-> @@ -15,6 +15,7 @@ EXTRA_OECONF =3D "--with-apr=3D${STAGING_BINDIR_CROSS}/=
-apr-1-config \
->  		--without-sqlite2 \
->  		--without-sqlite3 \
->  		--without-pgsql \
-> +		--without-odbc \
->  		--with-expat=3D${STAGING_DIR_HOST}${layout_prefix}"
-> =20
->  SRC_URI[md5sum] =3D "82acd25cf3df8c72eba44eaee8b80c19"
-
-Anyway, since `odbc_config` does not seem to be packaged for
-OpenEmbedded, disabling that option seems like a sane thing.
-
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.inc b/meta-oe/recipes-devtools/gcc/gcc-4.6.inc
+index a5e64be..b86c6fb 100644
+--- a/meta-oe/recipes-devtools/gcc/gcc-4.6.inc
++++ b/meta-oe/recipes-devtools/gcc/gcc-4.6.inc
+@@ -16,6 +16,8 @@ BINV = "${PV}.0"
+ 
+ PR = "r0"
+ 
++ARM_INSTRUCTION_SET = "arm"
++
+ DEPENDS =+ "mpfr gmp libmpc"
+ NATIVEDEPS = "mpfr-native gmp-native gettext-native libmpc-native"
+ 
+-- 
+1.7.4.1
 
 
-Thanks,
 
-Paul
-
---=-LHh6/KAH9ACpVCGizw4i
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3cG9wACgkQPX1aK2wOHVjgxgCeNLxrDR+YHI2FFjrgBahnn46Q
-C+MAn3AHbCnwA8m/ZNBPz0UEZEONy19f
-=X8kJ
------END PGP SIGNATURE-----
-
---=-LHh6/KAH9ACpVCGizw4i--
