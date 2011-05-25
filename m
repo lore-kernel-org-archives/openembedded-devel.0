@@ -1,36 +1,36 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders.darander@gmail.com>) id 1QPEl7-00051F-5p
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 May 2011 16:08:25 +0200
-Received: by fxm19 with SMTP id 19so6130331fxm.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QPEsT-0005EF-QK for openembedded-devel@lists.openembedded.org;
+	Wed, 25 May 2011 16:16:01 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QPEpV-0006UI-VA for openembedded-devel@lists.openembedded.org;
+	Wed, 25 May 2011 16:12:57 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 May 2011 16:12:57 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 May 2011 07:05:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=krRL2q3w/OijNwX9m8HVQBdAvgnQU3lzUwX+JZdorYY=;
-	b=rySc+yQfPixulQzPcQ9CbNZVLVyxpTEEiOX5CsV7X4Q0JzbjZQskYUl+uCjTWiTdIz
-	B++F4JQl+1bFbJ0QS+BHq/XaN7wAB6LqfXy+gtpCMH1TdXY/x4jkIo+2rPOmrrkhOlLC
-	O9I5T5g8UozrbNzioZQVfkLzgpEnojtT0YruQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=ZguPNWAMaihBCDCcjyjSW9vJgIkv5arVc5iRHn/7RSsZIlZUPrZFTUpsJaUKB+2PWD
-	ME3cpbTjVZRSIsRAFmMxDRMxswZa9eHymw/OwPwA4LDLy3pl7ZimpivPLLa4C4H/mGEM
-	aNZWn7uxMUcOhDfdb2vqeKKE15QXOZawkO+Ow=
-MIME-Version: 1.0
-Received: by 10.223.25.152 with SMTP id z24mr5261126fab.133.1306332322788;
-	Wed, 25 May 2011 07:05:22 -0700 (PDT)
-Received: by 10.223.93.206 with HTTP; Wed, 25 May 2011 07:05:22 -0700 (PDT)
-In-Reply-To: <iri8ce$acf$1@dough.gmane.org>
-References: <AEF4F94AE6BD724F91B503AC1AFED2392C5E8391CF@STOEXMBXC03.domain01.net>
-	<iri8ce$acf$1@dough.gmane.org>
-Date: Wed, 25 May 2011 16:05:22 +0200
-Message-ID: <BANLkTinKOubx9XLKn-0fbW796egGL+rTZw@mail.gmail.com>
-From: Anders Darander <anders.darander@gmail.com>
+	Wed, 25 May 2011 16:12:57 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: kbd and console-tools collision when using systemd
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 25 May 2011 16:12:45 +0200
+Message-ID: <irj2ot$fj8$1@dough.gmane.org>
+References: <y>
+	<1306328337-19285-1-git-send-email-eyalr@ti.com>	<4DDD05E0.4070504@opendreambox.org>
+	<1306332204.10056.81.camel@mattotaupa>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1306332204.10056.81.camel@mattotaupa>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH] wpa-gui-e: build the latest version from git sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,69 +44,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 May 2011 14:08:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 25 May 2011 14:16:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, May 25, 2011 at 08:42, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> On 25-05-11 08:00, Anders Darander wrote:
->> We have recently switched our local distro to use systemd for the
->> init-process. This works fine for our HW-target (apart from some
->> non-optimal configuration, but that is something we're looking into).
->> Our HW-target is based on the at91sam9g20.
->
-> That's good to hear!
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Yep, although we still have some configurations left in order to get a
-clean boot, systemd seems to be really nice. We just have to relearn
-how to create a good init-sequence.
-
->> Local distro uses task-boot.bb Qemu -> keymps -> RDEPENDS
->> console-tools Systemd -> RRECOMMENDS kbd
+On 25-05-11 16:03, Paul Menzel wrote:
+> Dear Andreas, dear Eyal,
+> 
+> 
+> On Mi, 2011-05-25 at 15:36 +0200, Andreas Oberritter wrote:
+> 
+>> On 05/25/2011 02:58 PM, Eyal Reizer wrote:
+> 
+> […]
+> 
+>>> +SRCREV = "b8fb017272ed4794339978c9fbc0e74571a44728"
+>>> +PR = "r0"
 >>
->> This leads to lots of clashes with e.g. usr/bin/dumpkeys,
->> usr/bin/unicode_stop etc. Currently we have solved this by using a
->> local copy of task-boot.bb in one of our layers, which lets the
->> machine feature keyboard include kbd-keymaps instead of keymaps.
+>> PR = "r0" is the default and can be removed.
+> 
+> it seems there are different opinions on this topic. At least the manual
+> says differently.
+> 
+>         Note
+>         
+>         It is good practice to always define PR in your recipes, even
+>         for the "r0" release, so that when editing the recipe it is
+>         clear that the PR number needs to be updated.
+>         
+>         You should always increment PR when modifying a recipe.
+>         Sometimes this can be avoided if the change will have no effect
+>         on the actual packages generated by the recipe, such as updating
+>         the SRC_URI to point to a new host. If in any doubt then you
+>         should increase the PR regardless of what has been changed.
+>         
+>         The PR value should never be decremented. If you accidentally
+>         submit a large PR value for example then it should be left at
+>         the value and just increased for new releases, not reset back to
+>         a lower version.
+> 
+>>> +PV = "0.7.3+0.8.0-rc"
+>>> +PR_append = "+gitr${SRCPV}"
+>>
+>> SRCPV should not be used in PR (even if it's been copied from another
+>> recipe which does it wrong).
+> 
+> I am still confused about this one. That is why I still have not
+> committed the pkg-config patch yet [2]. Could the right way be
+> documented in the manual.
 
-> You can work on this problem on two fronts:
->
-> 1) disable the vconsole service in systemd
+It is completely OK to use it in PR if you want the hash in PR, but not PV.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-I have to admit that I'll have to look further into this. Though, I'd
-guess that the vconsole service might be usefull on the qemu-target...
+iD8DBQFN3Q5dMkyGM64RGpERAhwhAKCKxo/HdbjYY90JHWbgtyiGCMwLFQCgiaRa
+HB1AMRMFaS/r4+iF6S6wa5M=
+=XI4d
+-----END PGP SIGNATURE-----
 
-> 2) switch task-boot to kbd
-
-Yes, this is the solution we're currently using. (Using a local copy
-of task-boot.bb).
-
-> Option 1) is avoiding the real problem, but it's nice to have anyway,
-> since "most" of the OE platforms work well enough with fbcon to not need
-> fancy keymaps and fonts.
-
-Hm, maybe we could disable the vconsole-service anyway... I haven't
-really looked into that part yet. Doing that we might very well be
-able to get rid of the RRECOMMEND on kbd... Well, I'm just guessing
-here. kbd should be pretty useless on the real HW-target, so this
-might actually be a better long-term solution in _this_ product.
-
-> I briefly looked at kbd vs console-tools during systemd bringup and it
-> seems that kbd is the best long term answer.
-
-That should definitely be the best long-term solution for a general system.
-
-I wonder what the size differences between kbd, kbd-keymaps etc. vs.
-console-tools and keymaps would be. It might be worthwhile to check,
-if the kbd based solution isn't much larger, it might be possible to
-change the default in task-boot.bb. At least on a long term. (Also
-remembering that quite a few desktop distros has switched to kbd).
-
-> Systemd v28 will also drop the dependency on hwclock, so your system can
-> be even smaller :)
-
-Ah, that's good to know!
-
-Regards,
-Anders
 
 
