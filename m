@@ -1,32 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QPDNU-0002NF-IX for openembedded-devel@lists.openembedded.org;
-	Wed, 25 May 2011 14:39:56 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QPDKZ-000095-Bc for openembedded-devel@lists.openembedded.org;
-	Wed, 25 May 2011 14:36:55 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 May 2011 14:36:55 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1QPDa6-0002dH-Qb
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 25 May 2011 14:52:58 +0200
+Received: by fxm19 with SMTP id 19so6071028fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 May 2011 14:36:55 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 25 May 2011 05:49:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:subject:date:message-id:x-mailer;
+	bh=hErMVozO4lDV1+lqbEsrwthzYhKBVCJ5wEF1GLAIoyM=;
+	b=ExsmKqwHAkEKSF2XDtdrG9xVUgekCxVOZUbPEF2WLreEcXw5h9Gnqy0Kp5N8sfU/xd
+	L4wfGBCvKpSYKCqObyKj6JgIhVA0eBmgz/bpdZsnH9fdhv7WiS8BGX86vrIvO35QhgkE
+	CZ6rX7a13PDIbzjdLi31M+b5QM9+5yPh2wssQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer;
+	b=dOSI+naZJf7iS+5UjnQ5s0wdZx5maCtlsqJnJFwfMt/x0JCA1R3Tk8T0mQGSOEPDXo
+	uBNmCql8ZBdunEwfLiyR4/k3XnEMiXU9EDNENNB6MBoPZYNy5SAX2xm5KpxhcIFuGLyi
+	jMld/aGBaaVfFpLfzR31DnnfBA1H5CNHtlSCY=
+Received: by 10.223.62.77 with SMTP id w13mr938336fah.53.1306327796487;
+	Wed, 25 May 2011 05:49:56 -0700 (PDT)
+Received: from localhost ([94.230.152.115])
+	by mx.google.com with ESMTPS id d18sm220946fak.7.2011.05.25.05.49.54
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 25 May 2011 05:49:55 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 25 May 2011 14:36:39 +0200
-Message-ID: <irit4n$8p3$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-X-Enigmail-Version: 1.0.1
-Subject: [2011.03-maintenance] Pull request #18
+Date: Wed, 25 May 2011 14:49:48 +0200
+Message-Id: <cover.1306327689.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.5.rc3
+Subject: [meta-oe][PATCH 0/2] Pull request #10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,51 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 May 2011 12:39:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 25 May 2011 12:52:58 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Please merge following patches.
 
-Tom,
+Pull URL: git://git.openembedded.org/meta-openembedded-contrib
+  Branch: jansa/meta-oe
+  Browse: http://git.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/meta-oe
 
-Please pull the 8 commits from here:
+Thanks,
+    Martin Jansa <Martin.Jansa@gmail.com>
+---
 
-URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-Branch: 2011.03-maintenance
 
-Christian Charreyre (1):
-      python-numpy: add missing runtime dependencies
+Martin Jansa (2):
+  xserver-xorg: upgrade to 1.10.1.901 and return randr-support patch
+  xf86-video-glamo: fix build with gcc-4.6
 
-Eyal Reizer (1):
-      ti-wifi-utils: update to use the latest release
+ ...-glamo-kms-driver-drop-unused-xf86_config.patch |   35 +++++
+ .../xorg-driver/xf86-video-glamo_git.bb            |    3 +-
+ ...ack-assume-pixman-supports-overlapped-blt.patch |    0
+ .../hack-fbdev-ignore-return-mode.patch            |    0
+ .../xserver-xorg-1.10.1.901/randr-support.patch    |  131 ++++++++++++++++++++
+ .../replace-pkgconfig-sdkdir-poking.patch          |    0
+ ...r-xorg_1.10.1.bb => xserver-xorg_1.10.1.901.bb} |    7 +-
+ 7 files changed, 172 insertions(+), 4 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0001-glamo-kms-driver-drop-unused-xf86_config.patch
+ rename meta-oe/recipes-graphics/xorg-xserver/{xserver-xorg-1.10.1 => xserver-xorg-1.10.1.901}/hack-assume-pixman-supports-overlapped-blt.patch (100%)
+ rename meta-oe/recipes-graphics/xorg-xserver/{xserver-xorg-1.10.1 => xserver-xorg-1.10.1.901}/hack-fbdev-ignore-return-mode.patch (100%)
+ create mode 100644 meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.1.901/randr-support.patch
+ rename meta-oe/recipes-graphics/xorg-xserver/{xserver-xorg-1.10.1 => xserver-xorg-1.10.1.901}/replace-pkgconfig-sdkdir-poking.patch (100%)
+ rename meta-oe/recipes-graphics/xorg-xserver/{xserver-xorg_1.10.1.bb => xserver-xorg_1.10.1.901.bb} (85%)
 
-Jeff Lance (1):
-      matrix_gui: Pull in lmbench,multimedia,EZSDK mods
-
-Koen Kooi (3):
-      dttsp: fix DEPENDS
-      sdrshell-qt4: fix DEPENDS and update SRCREV
-      bigbuckbunny: fix SRC_URI
-
-Tom Rini (2):
-      openssh.inc: Don't use ${libdir}exec
-      lmbench: Rework for binaries in /usr/bin
-
-All plain cherry-picks from .dev.
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFN3PfXMkyGM64RGpERAvCSAJ9ycM5Pe2siVeLnFq3F7vrvkF2spACfYH28
-XGW/alReoP/1DCOopyQO5Wk=
-=duxP
------END PGP SIGNATURE-----
+-- 
+1.7.5.rc3
 
 
 
