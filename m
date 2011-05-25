@@ -1,37 +1,23 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eyalr@ti.com>) id 1QPJ2K-0001Jn-V1
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 May 2011 20:42:29 +0200
-Received: from dlep33.itg.ti.com ([157.170.170.112])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id p4PIdPqF014426
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 May 2011 13:39:25 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep33.itg.ti.com (8.13.7/8.13.7) with ESMTP id p4PIdO4Q023910
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 May 2011 13:39:24 -0500 (CDT)
-Received: from dnce72.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p4PIdOcr011365
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 May 2011 13:39:24 -0500 (CDT)
-Received: from dnce02.ent.ti.com ([137.167.131.106]) by dnce72.ent.ti.com
-	([137.167.131.87]) with mapi; Wed, 25 May 2011 20:39:23 +0200
-From: "Reizer, Eyal" <eyalr@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 25 May 2011 20:39:22 +0200
-Thread-Topic: [oe] [PATCHv2] wpa-gui-e: build the latest version from git
-	sources
-Thread-Index: AcwbCfVZzt5NXRKnQVOu6+1n+DiY/QAARtL/
-Message-ID: <ywa29wecfmoiay384gigi9ta.1306348962906@email.android.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-Subject: Re: [PATCHv2] wpa-gui-e: build the latest version from git sources
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QPJ3E-0001P9-0f for openembedded-devel@lists.openembedded.org;
+	Wed, 25 May 2011 20:43:24 +0200
+Received: from f053034074.adsl.alicedsl.de ([78.53.34.74]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QPJ0c-0002Vx-9b for openembedded-devel@lists.openembedded.org;
+	Wed, 25 May 2011 18:40:43 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4DDD43AA.2040107@gmx.net>
+References: <1306099474.5994.112.camel@mattotaupa> <4DDD43AA.2040107@gmx.net>
+Date: Wed, 25 May 2011 20:40:21 +0200
+Message-ID: <1306348821.28917.9.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: =?UTF-8?B?UmU6IGljZWR0ZWE2LW5hdGl2ZTogdGFzayBjb21waWxlIGZhaWxzIHdpdGggYHVuemlwOiBjYW5ub3QgZmluZCB6aXBmaWxlIGRpcmVjdG9yeSBpbiBvbmUgb2YgL29lL2J1aWxkLWFuZ3N0cm9tLW5leHQvYW5nc3Ryb20tZGV2L3N5c3Jvb3RzL2k2ODYtbGludXgvdXNyL2Jpbi91bnppcCBvciDigKZg?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,28 +31,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 May 2011 18:42:29 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 25 May 2011 18:43:24 -0000
+X-Groupsio-MsgNum: 32297
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-L6E4he4M9auurTRik8Fa"
 
-UG9zdGluZyBmcm9tIG1vYmlsZS4uLg0KDQpTYW1lIHNvdXJjZSBjb2RlIGlzIHVzZWQgZm9yIHF0
-NGUgYW5kIHF0NHguDQpUaGUgSU5IRVJJVCBsaW5lIHNlbGVjdCBxdDRlLg0KDQoNCg0KUGF1bCBN
-ZW56ZWwgPHBhdWxlcGFudGVyQHVzZXJzLnNvdXJjZWZvcmdlLm5ldD4gd3JvdGU6DQoNCg0KQW0g
-TWl0dHdvY2gsIGRlbiAyNS4wNS4yMDExLCAyMDowOSArMDIwMCBzY2hyaWViIEtvZW4gS29vaToN
-Cg0KPiBPbiAyNS0wNS0xMSAxOTozOSwgUGF1bCBNZW56ZWwgd3JvdGU6DQo+ID4gQW0gTWl0dHdv
-Y2gsIGRlbiAyNS4wNS4yMDExLCAxODoxMSArMDMwMCBzY2hyaWViIEV5YWwgUmVpemVyOg0KPiA+
-PiBCdWlsZHMgd3BhLWd1aSBmb3IgcXQ0LWVtYmVkZGVkIGZyb20gdGhlIGxhdGVzdCB3cGEtc3Vw
-cGxpY2FudCAoMC44eCkNCj4gPj4gZ2l0IHNvdXJjZXMNCj4gPj4NCj4gPj4gdXBkYXRlIGJhc2Vk
-IG9uIGNvbW1lbnRzIGZyb20gY29tdW5pdHkgbWVtYmVycy4NCj4gPg0KPiA+IFRoaXMgaXMgb25s
-eSB1c2VmdWwgZm9yIHJldmlld3MgYW5kIHRoZXJlZm9yZSBzaG91bGQgZ28gYWZ0ZXIgdGhlIGAt
-LS1gDQo+ID4gc28gdGhhdCBpdCBpcyBub3QgaW5jbHVkZWQgaW50byB0aGUgY29tbWl0IG1lc3Nh
-Z2UuDQo+ID4NCj4gPj4gU2lnbmVkLW9mZi1ieTogRXlhbCBSZWl6ZXIgPGV5YWxyQHRpLmNvbT4N
-Cj4gPj4gLS0tDQo+ID4+ICByZWNpcGVzL3dwYS1zdXBwbGljYW50L3dwYS1ndWktZV9naXQuYmIg
-fCAgIDI5ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrDQo+ID4NCj4gPiBXaHkgZG8geW91
-IHVzZSB0aGF0IHJlY2lwZSBuYW1lPw0KPg0KPiAnLWUnIGlzIGZvciBxdC9lIGJ1aWxkcyBhbmQg
-Jycgb3IgJy1xdDQnIGZvciBxdDQveDExIGJ1aWxkcw0KDQpb4oCmXQ0KDQo+ID4+ICtTID0gIiR7
-V09SS0RJUn0vZ2l0L3dwYV9zdXBwbGljYW50L3dwYV9ndWktcXQ0Ig0KDQpTbyB0aGUgUXQ0IHZl
-cnNpb24gaXMgYnVpbGQ/DQoNCg0KVGhhbmtzLA0KDQpQYXVsDQo=
+--=-L6E4he4M9auurTRik8Fa
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Dear Robert,
 
 
+Am Mittwoch, den 25.05.2011, 20:00 +0200 schrieb Robert Schuster:
+
+> greetings from the GDB cave ....
+>=20
+> I now what is going wrong with unzip and ... whoa this is so weird ...
+>=20
+> Am 22.05.2011 23:24, schrieb Paul Menzel:
+> >         Importing binaries from component CORBA_DIST
+> >         ( cd  /oe/build-angstrom-next/angstrom-dev/work/i686-linux/iced=
+tea6-native-1.7.10-r4.0/icedtea6-1.7.10/openjdk-ecj/build/linux-x86 && /oe/=
+build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/bin/unzip -o /oe/b=
+uild-angstrom-next/angstrom-dev/work/i686-linux/icedtea6-native-1.7.10-r4.0=
+/icedtea6-1.7.10/openjdk-ecj/build/linux-x86/corba/dist/lib/bin.zip )
+> >         Archive:  /oe/build-angstrom-next/angstrom-dev/sysroots/i686-li=
+nux/usr/bin/unzip
+> >           End-of-central-directory signature not found.  Either this fi=
+le is not
+> >           a zipfile, or it constitutes one disk of a multi-part archive=
+.  In the
+> >           latter case the central directory and zipfile comment will be=
+ found on
+> >           the last disk(s) of this archive.
+> >         note:  /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux=
+/usr/bin/unzip may be a plain executable, not an archive
+> >         unzip:  cannot find zipfile directory in one of /oe/build-angst=
+rom-next/angstrom-dev/sysroots/i686-linux/usr/bin/unzip or /oe/build-angstr=
+om-next/angstrom-dev/sysroots/i686-linux/usr/bin/unzip.zip, and cannot find=
+ /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/bin/unzip.ZIP=
+, period.
+> >         make[4]: *** [/oe/build-angstrom-next/angstrom-dev/work/i686-li=
+nux/icedtea6-native-1.7.10-r4.0/icedtea6-1.7.10/openjdk-ecj/build/linux-x86=
+/tmp/java/components_imported] Error 9
+> >=20
+> > Running the command directly works fine though.
+> >=20
+> >         $ /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/=
+bin/unzip -o /oe/build-angstrom-next/angstrom-dev/work/i686-linux/icedtea6-=
+native-1.7.10-r4.0/icedtea6-1.7.10/openjdk-ecj/build/linux-x86/corba/dist/l=
+ib/bin.zip
+> >         Archive:  /oe/build-angstrom-next/angstrom-dev/work/i686-linux/=
+icedtea6-native-1.7.10-r4.0/icedtea6-1.7.10/openjdk-ecj/build/linux-x86/cor=
+ba/dist/lib/bin.zip
+> >           inflating: lib/orb.idl            =20
+> >           inflating: lib/ir.idl
+> The thing is. You are tweaking the IcedTea build by declaring the
+> makefile variable UNZIP through the command-line. For programs that are
+> called from this make process the variables turn into environment
+> variables ...
+> And this is where the shit hits the fan: As it turns out Info-Zip's
+> unzip understand an arcane way of declaring the file to be unzipped.
+> Through an environment variable called: UNZIP (!!!)
+>=20
+> To find this out I did nothing less than running an OE-called unzip and
+> a manually called unzip process run under gdb and compare what they do
+> in the beginning step by step.
+
+Great analysis. I could not have done it and only used `gdb` to create a
+backtrace for the developers.
+
+> Here a shorter explanation of what I mean:
+>=20
+> UNZIP=3Dxyz /home/rschus-oe/panda/tmp/sysroots/x86_64-linux/usr/bin/unzip
+> blablafoo
+> unzip:  cannot find or open xyz, xyz.zip or xyz.ZIP.
+>=20
+> So apparently UNZIP is in our case set to the zip file executable
+> already to please the openjdk build.
+>=20
+> I don't have an immediate idea how to fix it properly. I'd vote for
+> patching our unzip not to use that variable (It still has another one
+> called UNZIP_OPTS for the same use).
+
+Well as far as I understand the manual, `UNZIP_OPTS` should be used for
+VMS, but could also be used for other operating systems.
+
+Actually I would think to solve this, by patching OpenJDK to use another
+variable and report that upstream. I suggest for example UNZIP_EXE for
+unzip executable.
+
+I do not know how if the unzip developers have decided on this issue to
+rename remove that variable and how many programs use this feature.
+
+> Last but not least: Our unzip recipe sucks. It does not enforce OE build
+> flags and does not prevent that the called makefile strips the binary.
+> There are also newer version of unzip out there (ours is from 2005).
+> I'll plan on fixing all of the above.
+
+That would be awesome.
+
+I am sorry for opening Pandora=E2=80=99s box.
+
+
+Thanks,
+
+Paul
+
+--=-L6E4he4M9auurTRik8Fa
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3dTRUACgkQPX1aK2wOHViTywCfYwErKNQU3LIDNsOpXCRanUzs
+ZwEAoITXyQwsLee1j35NfOXicU3GB3y5
+=I1Dw
+-----END PGP SIGNATURE-----
+
+--=-L6E4he4M9auurTRik8Fa--
