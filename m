@@ -1,23 +1,27 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QPI6Z-0008Ov-E6 for openembedded-devel@lists.openembedded.org;
-	Wed, 25 May 2011 19:42:47 +0200
-Received: from f053034074.adsl.alicedsl.de ([78.53.34.74]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QPI3y-0007gW-DU for openembedded-devel@lists.openembedded.org;
-	Wed, 25 May 2011 17:40:06 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <thebohemian@gmx.net>) id 1QPIQQ-0000am-6r
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 25 May 2011 20:03:18 +0200
+Received: (qmail invoked by alias); 25 May 2011 18:00:15 -0000
+Received: from 230.118.101.84.rev.sfr.net (EHLO [192.168.42.72])
+	[84.101.118.230]
+	by mail.gmx.net (mp070) with SMTP; 25 May 2011 20:00:15 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+cSvQimoacvt7oA+212pQQownJw8SLmviX3R+jgP
+	A+fhHOZ6cevfPO
+Message-ID: <4DDD43AA.2040107@gmx.net>
+Date: Wed, 25 May 2011 20:00:10 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110424 Thunderbird/3.1.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1306336287-23286-1-git-send-email-eyalr@ti.com>
-References: <1306336287-23286-1-git-send-email-eyalr@ti.com>
-Date: Wed, 25 May 2011 19:39:45 +0200
-Message-ID: <1306345185.4888.2.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [PATCHv2] wpa-gui-e: build the latest version from git sources
+References: <1306099474.5994.112.camel@mattotaupa>
+In-Reply-To: <1306099474.5994.112.camel@mattotaupa>
+X-Enigmail-Version: 1.1.2
+X-Y-GMX-Trusted: 0
+Subject: =?UTF-8?B?UmU6IGljZWR0ZWE2LW5hdGl2ZTogdGFzayBjb21waWxlIGZhaWxzIHdpdGggYHVuemlwOiBjYW5ub3QgZmluZCB6aXBmaWxlIGRpcmVjdG9yeSBpbiBvbmUgb2YgL29lL2J1aWxkLWFuZ3N0cm9tLW5leHQvYW5nc3Ryb20tZGV2L3N5c3Jvb3RzL2k2ODYtbGludXgvdXNyL2Jpbi91bnppcCBvciDigKZg?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,93 +35,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 May 2011 17:42:47 -0000
-X-Groupsio-MsgNum: 32292
-Content-Type: multipart/signed; micalg="pgp-sha1";
+X-List-Received-Date: Wed, 25 May 2011 18:03:18 -0000
+X-Groupsio-MsgNum: 32293
+Content-Type: multipart/signed; micalg=pgp-sha1;
 	protocol="application/pgp-signature";
-	boundary="=-+xEMAFIvVNmasdsGyweh"
+	boundary="------------enig46D67A467F9616A100C6D2C5"
 
---=-+xEMAFIvVNmasdsGyweh
-Content-Type: text/plain; charset="UTF-8"
+--------------enig46D67A467F9616A100C6D2C5
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Am Mittwoch, den 25.05.2011, 18:11 +0300 schrieb Eyal Reizer:
-> Builds wpa-gui for qt4-embedded from the latest wpa-supplicant (0.8x)
-> git sources
+Hi Paul,
+greetings from the GDB cave ....
+
+I now what is going wrong with unzip and ... whoa this is so weird ...
+
+Am 22.05.2011 23:24, schrieb Paul Menzel:
+>         Importing binaries from component CORBA_DIST
+>         ( cd  /oe/build-angstrom-next/angstrom-dev/work/i686-linux/iced=
+tea6-native-1.7.10-r4.0/icedtea6-1.7.10/openjdk-ecj/build/linux-x86 && /o=
+e/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/bin/unzip -o /=
+oe/build-angstrom-next/angstrom-dev/work/i686-linux/icedtea6-native-1.7.1=
+0-r4.0/icedtea6-1.7.10/openjdk-ecj/build/linux-x86/corba/dist/lib/bin.zip=
+ )
+>         Archive:  /oe/build-angstrom-next/angstrom-dev/sysroots/i686-li=
+nux/usr/bin/unzip
+>           End-of-central-directory signature not found.  Either this fi=
+le is not
+>           a zipfile, or it constitutes one disk of a multi-part archive=
+=2E  In the
+>           latter case the central directory and zipfile comment will be=
+ found on
+>           the last disk(s) of this archive.
+>         note:  /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux=
+/usr/bin/unzip may be a plain executable, not an archive
+>         unzip:  cannot find zipfile directory in one of /oe/build-angst=
+rom-next/angstrom-dev/sysroots/i686-linux/usr/bin/unzip or /oe/build-angs=
+trom-next/angstrom-dev/sysroots/i686-linux/usr/bin/unzip.zip, and cannot =
+find /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/bin/unz=
+ip.ZIP, period.
+>         make[4]: *** [/oe/build-angstrom-next/angstrom-dev/work/i686-li=
+nux/icedtea6-native-1.7.10-r4.0/icedtea6-1.7.10/openjdk-ecj/build/linux-x=
+86/tmp/java/components_imported] Error 9
 >=20
-> update based on comments from comunity members.
-
-This is only useful for reviews and therefore should go after the `---`
-so that it is not included into the commit message.
-
-> Signed-off-by: Eyal Reizer <eyalr@ti.com>
-> ---
->  recipes/wpa-supplicant/wpa-gui-e_git.bb |   29 +++++++++++++++++++++++++=
-++++
-
-Why do you use that recipe name?
-
->  1 files changed, 29 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/wpa-supplicant/wpa-gui-e_git.bb
+> Running the command directly works fine though.
 >=20
-> diff --git a/recipes/wpa-supplicant/wpa-gui-e_git.bb b/recipes/wpa-suppli=
-cant/wpa-gui-e_git.bb
-> new file mode 100644
-> index 0000000..18a1422
-> --- /dev/null
-> +++ b/recipes/wpa-supplicant/wpa-gui-e_git.bb
-> @@ -0,0 +1,29 @@
-> +DESCRIPTION =3D "Qt embedded interface for choosing which configured net=
-work \
-> +to connect to. It also provides a method for browsing 802.11 SSID scan \
-> +results, an event history log of messages generated by wpa_supplicant, a=
-nd \
-> +a method to add or edit wpa_supplicant networks."
-> +SECTION =3D "network"
-> +LICENSE =3D "GPLv2 | BSD"
-> +HOMEPAGE =3D "http://hostap.epitest.fi/wpa_supplicant/"
-> +RDEPENDS_${PN} =3D "wpa-supplicant"
+>         $ /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/=
+bin/unzip -o /oe/build-angstrom-next/angstrom-dev/work/i686-linux/icedtea=
+6-native-1.7.10-r4.0/icedtea6-1.7.10/openjdk-ecj/build/linux-x86/corba/di=
+st/lib/bin.zip
+>         Archive:  /oe/build-angstrom-next/angstrom-dev/work/i686-linux/=
+icedtea6-native-1.7.10-r4.0/icedtea6-1.7.10/openjdk-ecj/build/linux-x86/c=
+orba/dist/lib/bin.zip
+>           inflating: lib/orb.idl            =20
+>           inflating: lib/ir.idl
+The thing is. You are tweaking the IcedTea build by declaring the
+makefile variable UNZIP through the command-line. For programs that are
+called from this make process the variables turn into environment
+variables ...
+And this is where the shit hits the fan: As it turns out Info-Zip's
+unzip understand an arcane way of declaring the file to be unzipped.
+Through an environment variable called: UNZIP (!!!)
 
-Please sort it after the style guide.
+To find this out I did nothing less than running an OE-called unzip and
+a manually called unzip process run under gdb and compare what they do
+in the beginning step by step.
 
-> +
-> +SRCREV =3D "b8fb017272ed4794339978c9fbc0e74571a44728"
-> +PR =3D "r0"
-> +PV =3D "0.7.3+0.8.0-rc"
-> +PR_append =3D "+gitr${SRCPV}"
-> +
-> +DEFAULT_PREFERENCE =3D "-1"
+Here a shorter explanation of what I mean:
 
-Why is this still here?
+UNZIP=3Dxyz /home/rschus-oe/panda/tmp/sysroots/x86_64-linux/usr/bin/unzip=
 
-> +
-> +SRC_URI =3D "git://w1.fi/srv/git/hostap.git;protocol=3Dgit"
-> +
-> +S =3D "${WORKDIR}/git/wpa_supplicant/wpa_gui-qt4"
-> +
-> +inherit qt4e
-> +ARM_INSTRUCTION_SET =3D "arm"
-> +
-> +do_install () {
-> +       install -d ${D}${bindir}
-> +       install -m 755 wpa_gui ${D}/${bindir}/wpa_gui-e
-> +}
+blablafoo
+unzip:  cannot find or open xyz, xyz.zip or xyz.ZIP.
+
+So apparently UNZIP is in our case set to the zip file executable
+already to please the openjdk build.
+
+I don't have an immediate idea how to fix it properly. I'd vote for
+patching our unzip not to use that variable (It still has another one
+called UNZIP_OPTS for the same use).
+
+Last but not least: Our unzip recipe sucks. It does not enforce OE build
+flags and does not prevent that the called makefile strips the binary.
+There are also newer version of unzip out there (ours is from 2005).
+I'll plan on fixing all of the above.
+
+Regards,
+Robert
 
 
-Thanks,
 
-Paul
-
---=-+xEMAFIvVNmasdsGyweh
+--------------enig46D67A467F9616A100C6D2C5
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
 
-iEYEABECAAYFAk3dPtsACgkQPX1aK2wOHVjpRQCeIxRB8OLZq87mLYR56Co3CKFz
-KqMAnih0rZQzzjGXtN/y6/pa9si+F6qs
-=UZss
+iEYEARECAAYFAk3dQ64ACgkQG9cfwmwwEtoLTQCfSUJVYZDt1D7dNj5+aKGXQiPx
+mLkAnijfCMy0xVFTs8aso+jXzi4EtgoL
+=AMeM
 -----END PGP SIGNATURE-----
 
---=-+xEMAFIvVNmasdsGyweh--
+--------------enig46D67A467F9616A100C6D2C5--
