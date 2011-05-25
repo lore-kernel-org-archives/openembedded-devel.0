@@ -1,25 +1,22 @@
 Received: from mailout-de.gmx.net ([213.165.64.22])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <thebohemian@gmx.net>) id 1QPAFW-0003Xf-Pe
+	(envelope-from <thebohemian@gmx.net>) id 1QPAXe-0003tf-KE
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 May 2011 11:19:31 +0200
-Received: (qmail invoked by alias); 25 May 2011 09:16:23 -0000
+	Wed, 25 May 2011 11:38:14 +0200
+Received: (qmail invoked by alias); 25 May 2011 09:35:12 -0000
 Received: from 230.118.101.84.rev.sfr.net (EHLO [192.168.42.72])
 	[84.101.118.230]
-	by mail.gmx.net (mp058) with SMTP; 25 May 2011 11:16:23 +0200
+	by mail.gmx.net (mp052) with SMTP; 25 May 2011 11:35:12 +0200
 X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX19yzCFeMtdycFYORp1KjdviffsC4YJ5ZXFDaGT3cs
-	f4lJc08i/OvOau
-Message-ID: <4DDCC8E1.5060302@gmx.net>
-Date: Wed, 25 May 2011 11:16:17 +0200
+X-Provags-ID: V01U2FsdGVkX1/4Oh4XbxH4GuIM3ekn/Tcnretsss0g/5Ab8uKHga
+	Za91i1YzZ+/K+l
+Message-ID: <4DDCCD4C.1080902@gmx.net>
+Date: Wed, 25 May 2011 11:35:08 +0200
 From: Robert Schuster <thebohemian@gmx.net>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
 	rv:1.9.2.17) Gecko/20110424 Thunderbird/3.1.10
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	Henning Heinold <h.heinold@tarent.de>,
-	Paul Menzel <paulepanter@users.sourceforge.net>, 
-	pgsellmann@portner-elektronik.at
+To: openembedded-devel@lists.openembedded.org
 References: <1306099474.5994.112.camel@mattotaupa>
 In-Reply-To: <1306099474.5994.112.camel@mattotaupa>
 X-Enigmail-Version: 1.1.2
@@ -38,28 +35,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 May 2011 09:19:31 -0000
-X-Groupsio-MsgNum: 32273
+X-List-Received-Date: Wed, 25 May 2011 09:38:14 -0000
+X-Groupsio-MsgNum: 32274
 Content-Type: multipart/signed; micalg=pgp-sha1;
 	protocol="application/pgp-signature";
-	boundary="------------enigB483F8FFC7060AEA3287BC4C"
+	boundary="------------enig8E893B8DCE6D98F3DF645D88"
 
---------------enigB483F8FFC7060AEA3287BC4C
+--------------enig8E893B8DCE6D98F3DF645D88
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
-I'll look into this.
 
-Regards,
-Robert
-
-Am 22.05.2011 23:24, schrieb Paul Menzel:
-> Dear OE folks,
->=20
->=20
-> even with the latest patches send to the list [1].
->=20
 >         Importing binaries from component CORBA_DIST
 >         ( cd  /oe/build-angstrom-next/angstrom-dev/work/i686-linux/iced=
 tea6-native-1.7.10-r4.0/icedtea6-1.7.10/openjdk-ecj/build/linux-x86 && /o=
@@ -86,37 +73,16 @@ ip.ZIP, period.
 >         make[4]: *** [/oe/build-angstrom-next/angstrom-dev/work/i686-li=
 nux/icedtea6-native-1.7.10-r4.0/icedtea6-1.7.10/openjdk-ecj/build/linux-x=
 86/tmp/java/components_imported] Error 9
->=20
-> Running the command directly works fine though.
->=20
->         $ /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/=
-bin/unzip -o /oe/build-angstrom-next/angstrom-dev/work/i686-linux/icedtea=
-6-native-1.7.10-r4.0/icedtea6-1.7.10/openjdk-ecj/build/linux-x86/corba/di=
-st/lib/bin.zip
->         Archive:  /oe/build-angstrom-next/angstrom-dev/work/i686-linux/=
-icedtea6-native-1.7.10-r4.0/icedtea6-1.7.10/openjdk-ecj/build/linux-x86/c=
-orba/dist/lib/bin.zip
->           inflating: lib/orb.idl            =20
->           inflating: lib/ir.idl
->=20
->=20
-> Thanks,
->=20
-> Paul
->=20
->=20
-> [1] http://patches.openembedded.org/patch/4621/
->=20
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Did you notice that somehow the makefile tries to unpack the file
+'/oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/bin/unzip'.=
+ I
+smell some shell-quoting problem or similar.
+
+Regards,
+Robert
 
 
-
---------------enigB483F8FFC7060AEA3287BC4C
+--------------enig8E893B8DCE6D98F3DF645D88
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
@@ -125,9 +91,9 @@ Content-Disposition: attachment; filename="signature.asc"
 Version: GnuPG v1.4.10 (GNU/Linux)
 Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
 
-iEYEARECAAYFAk3cyOQACgkQG9cfwmwwEtp3GQCglYMdr1d1x/JQRbSFp7LJtkZj
-dawAniCIA9PY9YgYN5CFYn26NunztiRB
-=1I/m
+iEYEARECAAYFAk3czU8ACgkQG9cfwmwwEtq67ACcCD+FRzqUXb+ZWJRrsCUYc9Le
+sTcAnA4o9vjSLOzVk9sHlOh9z0bAE5Ou
+=xnNR
 -----END PGP SIGNATURE-----
 
---------------enigB483F8FFC7060AEA3287BC4C--
+--------------enig8E893B8DCE6D98F3DF645D88--
