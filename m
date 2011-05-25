@@ -1,24 +1,23 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <morphis@gravedo.de>) id 1QPHDU-00074h-EY
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 May 2011 18:45:52 +0200
-Received: by gravedo.de (Postfix, from userid 5001)
-	id C173A799017; Wed, 25 May 2011 18:42:48 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h1108419.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from localhost (dslb-088-071-254-068.pools.arcor-ip.net
-	[88.71.254.68]) by gravedo.de (Postfix) with ESMTPSA id BAA83799014;
-	Wed, 25 May 2011 18:42:45 +0200 (CEST)
-From: Simon Busch <morphis@gravedo.de>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QPI6Z-0008Ov-E6 for openembedded-devel@lists.openembedded.org;
+	Wed, 25 May 2011 19:42:47 +0200
+Received: from f053034074.adsl.alicedsl.de ([78.53.34.74]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QPI3y-0007gW-DU for openembedded-devel@lists.openembedded.org;
+	Wed, 25 May 2011 17:40:06 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 May 2011 18:42:42 +0200
-Message-Id: <1306341762-14961-1-git-send-email-morphis@gravedo.de>
-X-Mailer: git-send-email 1.7.4.1
-Subject: [PATCH] python-2.6.6: backport pkgconfig support from version 2.7.1 and bump PR
+In-Reply-To: <1306336287-23286-1-git-send-email-eyalr@ti.com>
+References: <1306336287-23286-1-git-send-email-eyalr@ti.com>
+Date: Wed, 25 May 2011 19:39:45 +0200
+Message-ID: <1306345185.4888.2.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCHv2] wpa-gui-e: build the latest version from git sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,141 +31,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 May 2011 16:45:52 -0000
+X-List-Received-Date: Wed, 25 May 2011 17:42:47 -0000
+X-Groupsio-MsgNum: 32292
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-+xEMAFIvVNmasdsGyweh"
 
-Version 2.6.6 of python does not have support for pkgconfig and 2.7.1 is not yet ready in
-OE so I back-ported the new pkgconfig feature to 2.6.6.
+--=-+xEMAFIvVNmasdsGyweh
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Simon Busch <morphis@gravedo.de>
----
- .../python/python-2.6.6/pkgconfig-support.patch    |   94 ++++++++++++++++++++
- recipes/python/python_2.6.6.bb                     |    3 +-
- 2 files changed, 96 insertions(+), 1 deletions(-)
- create mode 100644 recipes/python/python-2.6.6/pkgconfig-support.patch
+Am Mittwoch, den 25.05.2011, 18:11 +0300 schrieb Eyal Reizer:
+> Builds wpa-gui for qt4-embedded from the latest wpa-supplicant (0.8x)
+> git sources
+>=20
+> update based on comments from comunity members.
 
-diff --git a/recipes/python/python-2.6.6/pkgconfig-support.patch b/recipes/python/python-2.6.6/pkgconfig-support.patch
-new file mode 100644
-index 0000000..d970b00
---- /dev/null
-+++ b/recipes/python/python-2.6.6/pkgconfig-support.patch
-@@ -0,0 +1,94 @@
-+diff -Naur Python-2.6.6-orig/Makefile.pre.in Python-2.6.6/Makefile.pre.in
-+--- Python-2.6.6-orig/Makefile.pre.in	2010-08-02 00:05:31.000000000 +0200
-++++ Python-2.6.6/Makefile.pre.in	2011-05-24 21:16:19.943550002 +0200
-+@@ -763,6 +763,9 @@
-+ 	(cd $(DESTDIR)$(BINDIR); $(LN) python$(VERSION)$(EXE) $(PYTHON))
-+ 	-rm -f $(DESTDIR)$(BINDIR)/python-config
-+ 	(cd $(DESTDIR)$(BINDIR); $(LN) -s python$(VERSION)-config python-config)
-++	-test -d $(DESTDIR)$(LIBPC) || $(INSTALL) -d -m $(DIRMODE) $(DESTDIR)$(LIBPC)
-++	-rm -f $(DESTDIR)$(LIBPC)/python.pc
-++	(cd $(DESTDIR)$(LIBPC); $(LN) -s python-$(VERSION).pc python.pc)
-+ 
-+ # Install the interpreter with $(VERSION) affixed
-+ # This goes into $(exec_prefix)
-+@@ -936,8 +939,12 @@
-+ # Install the library and miscellaneous stuff needed for extending/embedding
-+ # This goes into $(exec_prefix)
-+ LIBPL=		$(LIBP)/config
-++
-++# pkgconfig directory
-++LIBPC=		$(LIBDIR)/pkgconfig
-++
-+ libainstall:	all
-+-	@for i in $(LIBDIR) $(LIBP) $(LIBPL); \
-++	@for i in $(LIBDIR) $(LIBP) $(LIBPL) $(LIBPC); \
-+ 	do \
-+ 		if test ! -d $(DESTDIR)$$i; then \
-+ 			echo "Creating directory $$i"; \
-+@@ -964,6 +971,7 @@
-+ 	$(INSTALL_DATA) Modules/Setup $(DESTDIR)$(LIBPL)/Setup
-+ 	$(INSTALL_DATA) Modules/Setup.local $(DESTDIR)$(LIBPL)/Setup.local
-+ 	$(INSTALL_DATA) Modules/Setup.config $(DESTDIR)$(LIBPL)/Setup.config
-++	$(INSTALL_DATA) Misc/python.pc $(DESTDIR)$(LIBPC)/python-$(VERSION).pc
-+ 	$(INSTALL_SCRIPT) $(srcdir)/Modules/makesetup $(DESTDIR)$(LIBPL)/makesetup
-+ 	$(INSTALL_SCRIPT) $(srcdir)/install-sh $(DESTDIR)$(LIBPL)/install-sh
-+ 	# Substitution happens here, as the completely-expanded BINDIR
-+@@ -1159,7 +1167,8 @@
-+ # Keep configure and Python-ast.[ch], it's possible they can't be generated
-+ distclean: clobber
-+ 	-rm -f core Makefile Makefile.pre config.status \
-+-		Modules/Setup Modules/Setup.local Modules/Setup.config
-++		Modules/Setup Modules/Setup.local Modules/Setup.config \
-++		Misc/python.pc
-+ 	find $(srcdir) '(' -name '*.fdc' -o -name '*~' \
-+ 			   -o -name '[@,#]*' -o -name '*.old' \
-+ 			   -o -name '*.orig' -o -name '*.rej' \
-+diff -Naur Python-2.6.6-orig/Misc/python.pc.in Python-2.6.6/Misc/python.pc.in
-+--- Python-2.6.6-orig/Misc/python.pc.in	1970-01-01 01:00:00.000000000 +0100
-++++ Python-2.6.6/Misc/python.pc.in	2011-05-24 21:09:22.733550002 +0200
-+@@ -0,0 +1,13 @@
-++prefix=@prefix@
-++exec_prefix=@exec_prefix@
-++libdir=@libdir@
-++includedir=@includedir@
-++
-++Name: Python
-++Description: Python library
-++Requires: 
-++Version: @VERSION@
-++Libs.private: @LIBS@
-++Libs: -L${libdir} -lpython@VERSION@
-++Cflags: -I${includedir}/python@VERSION@ 
-++
-+diff -Naur Python-2.6.6-orig/configure Python-2.6.6/configure
-+--- Python-2.6.6-orig/configure	2010-05-25 04:27:03.000000000 +0200
-++++ Python-2.6.6/configure	2011-05-24 21:14:55.553550001 +0200
-+@@ -12863,7 +12863,7 @@
-+ $as_echo "done" >&6; }
-+ 
-+ # generate output files
-+-ac_config_files="$ac_config_files Makefile.pre Modules/Setup.config"
-++ac_config_files="$ac_config_files Makefile.pre Modules/Setup.config Misc/python.pc"
-+ 
-+ cat >confcache <<\_ACEOF
-+ # This file is a shell script that caches the results of configure
-+@@ -13557,6 +13557,7 @@
-+     "Mac/Resources/app/Info.plist") CONFIG_FILES="$CONFIG_FILES Mac/Resources/app/Info.plist" ;;
-+     "Makefile.pre") CONFIG_FILES="$CONFIG_FILES Makefile.pre" ;;
-+     "Modules/Setup.config") CONFIG_FILES="$CONFIG_FILES Modules/Setup.config" ;;
-++    "Misc/python.pc") CONFIG_FILES="$CONFIG_FILES Misc/python.pc" ;;
-+ 
-+   *) as_fn_error "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
-+   esac
-+diff -Naur Python-2.6.6-orig/configure.in Python-2.6.6/configure.in
-+--- Python-2.6.6-orig/configure.in	2010-05-25 04:27:03.000000000 +0200
-++++ Python-2.6.6/configure.in	2011-05-24 21:09:53.733550001 +0200
-+@@ -3935,7 +3935,7 @@
-+ AC_MSG_RESULT(done)
-+ 
-+ # generate output files
-+-AC_CONFIG_FILES(Makefile.pre Modules/Setup.config)
-++AC_CONFIG_FILES(Makefile.pre Modules/Setup.config Misc/python.pc)
-+ AC_OUTPUT
-+ 
-+ echo "creating Modules/Setup"
-diff --git a/recipes/python/python_2.6.6.bb b/recipes/python/python_2.6.6.bb
-index 3c054bb..eacc5c2 100644
---- a/recipes/python/python_2.6.6.bb
-+++ b/recipes/python/python_2.6.6.bb
-@@ -3,7 +3,7 @@ DEPENDS = "python-native db gdbm openssl readline sqlite3 tcl zlib\
-            ${@base_contains('DISTRO_FEATURES', 'tk', 'tk', '', d)}"
- DEPENDS_sharprom = "python-native db readline zlib gdbm openssl"
- # set to .0 on every increase of INC_PR
--PR = "${INC_PR}.2"
-+PR = "${INC_PR}.3"
- 
- SRC_URI = "\
-   http://www.python.org/ftp/python/${PV}/Python-${PV}.tar.bz2 \
-@@ -17,6 +17,7 @@ SRC_URI = "\
-   file://ipv6-cross.patch \
-   file://python-module-rpath-fix.patch \
-   file://sitecustomize.py \
-+  file://pkgconfig-support.patch \
- "
- SRC_URI[md5sum] = "cf4e6881bb84a7ce6089e4a307f71f14"
- SRC_URI[sha256sum] = "134c5e0736bae2e5570d0b915693374f11108ded63c35a23a35d282737d2ce83"
--- 
-1.7.4.1
+This is only useful for reviews and therefore should go after the `---`
+so that it is not included into the commit message.
+
+> Signed-off-by: Eyal Reizer <eyalr@ti.com>
+> ---
+>  recipes/wpa-supplicant/wpa-gui-e_git.bb |   29 +++++++++++++++++++++++++=
+++++
+
+Why do you use that recipe name?
+
+>  1 files changed, 29 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/wpa-supplicant/wpa-gui-e_git.bb
+>=20
+> diff --git a/recipes/wpa-supplicant/wpa-gui-e_git.bb b/recipes/wpa-suppli=
+cant/wpa-gui-e_git.bb
+> new file mode 100644
+> index 0000000..18a1422
+> --- /dev/null
+> +++ b/recipes/wpa-supplicant/wpa-gui-e_git.bb
+> @@ -0,0 +1,29 @@
+> +DESCRIPTION =3D "Qt embedded interface for choosing which configured net=
+work \
+> +to connect to. It also provides a method for browsing 802.11 SSID scan \
+> +results, an event history log of messages generated by wpa_supplicant, a=
+nd \
+> +a method to add or edit wpa_supplicant networks."
+> +SECTION =3D "network"
+> +LICENSE =3D "GPLv2 | BSD"
+> +HOMEPAGE =3D "http://hostap.epitest.fi/wpa_supplicant/"
+> +RDEPENDS_${PN} =3D "wpa-supplicant"
+
+Please sort it after the style guide.
+
+> +
+> +SRCREV =3D "b8fb017272ed4794339978c9fbc0e74571a44728"
+> +PR =3D "r0"
+> +PV =3D "0.7.3+0.8.0-rc"
+> +PR_append =3D "+gitr${SRCPV}"
+> +
+> +DEFAULT_PREFERENCE =3D "-1"
+
+Why is this still here?
+
+> +
+> +SRC_URI =3D "git://w1.fi/srv/git/hostap.git;protocol=3Dgit"
+> +
+> +S =3D "${WORKDIR}/git/wpa_supplicant/wpa_gui-qt4"
+> +
+> +inherit qt4e
+> +ARM_INSTRUCTION_SET =3D "arm"
+> +
+> +do_install () {
+> +       install -d ${D}${bindir}
+> +       install -m 755 wpa_gui ${D}/${bindir}/wpa_gui-e
+> +}
 
 
+Thanks,
 
+Paul
+
+--=-+xEMAFIvVNmasdsGyweh
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3dPtsACgkQPX1aK2wOHVjpRQCeIxRB8OLZq87mLYR56Co3CKFz
+KqMAnih0rZQzzjGXtN/y6/pa9si+F6qs
+=UZss
+-----END PGP SIGNATURE-----
+
+--=-+xEMAFIvVNmasdsGyweh--
