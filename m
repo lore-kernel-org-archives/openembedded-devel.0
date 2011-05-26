@@ -1,23 +1,17 @@
-Received: from dd20204.kasserver.com ([85.13.140.93])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1QPgmk-0005ik-An
+Received: from oh-69-34-21-229.sta.embarqhsd.net ([69.34.21.229]
+	helo=happy.bec-systems.com) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <cliff.brake@gmail.com>) id 1QPhFX-000766-Un
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 May 2011 22:03:59 +0200
-Received: from myhost (95-90-75-76-dynip.superkabel.de [95.90.75.76])
-	by dd20204.kasserver.com (Postfix) with ESMTPSA id 22FD612A0378
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 May 2011 22:00:56 +0200 (CEST)
-Date: Thu, 26 May 2011 22:01:37 +0200 (CEST)
-From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
-X-X-Sender: nice@myhost
+	Thu, 26 May 2011 22:33:44 +0200
+Received: from cbrake by happy.bec-systems.com with local (Exim 4.72)
+	(envelope-from <cliff.brake@gmail.com>) id 1QPgjX-0008Sj-CD
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 26 May 2011 16:00:39 -0400
+Date: Thu, 26 May 2011 16:00:39 -0400
+Message-Id: <E1QPgjX-0008Sj-CD@happy.bec-systems.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4DDBD4A8.9070904@hale.at>
-Message-ID: <alpine.LNX.2.00.1105262200440.1522@myhost>
-References: <1305841842-2431-1-git-send-email-Bernhard.Guillon@opensimpad.org>
-	<4DDBD4A8.9070904@hale.at>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-MIME-Version: 1.0
-Subject: Re: [PATCH] opkg-utils: port arfile.py patch to opkg-utils, bump PR
+From: cbrake <cliff.brake@gmail.com>
+Subject: testing branch 2011-05-26
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,22 +25,8 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 May 2011 20:03:59 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Thu, 26 May 2011 20:33:44 -0000
 
-
-
-On Tue, 24 May 2011, Bernhard Guillon wrote:
-
-> Hi all,
->
-> please give me an ACK or NACK.
->
-> If no one complains I will push this patch this thursday :)
-
-Ok, pushed...
-
-Best regards
-Bernhard
+master has been merged to testing-next and is ready for clean builds
 
 
