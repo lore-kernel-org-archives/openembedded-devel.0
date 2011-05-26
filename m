@@ -1,22 +1,25 @@
-Received: from mga01.intel.com ([192.55.52.88])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1QPNPZ-0006yR-4L
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 May 2011 01:22:45 +0200
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 25 May 2011 16:18:22 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.65,269,1304319600"; 
-   d="scan'208";a="7708118"
-Received: from unknown (HELO helios.localnet) ([10.255.12.184])
-	by fmsmga002.fm.intel.com with ESMTP; 25 May 2011 16:18:22 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 May 2011 00:18:21 +0100
-User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic-pae; KDE/4.6.2; i686; ; )
+Received: from p3plsmtpa07-06.prod.phx3.secureserver.net ([173.201.192.235])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <mike@mwester.net>) id 1QPR8V-0002Lc-SJ
+	for Openembedded-devel@lists.openembedded.org;
+	Thu, 26 May 2011 05:21:24 +0200
+Received: (qmail 26415 invoked from network); 26 May 2011 03:11:40 -0000
+Received: from unknown (209.242.7.132)
+	by p3plsmtpa07-06.prod.phx3.secureserver.net (173.201.192.235) with
+	ESMTP; 26 May 2011 03:11:40 -0000
+Message-ID: <4DDDC4E6.3080209@mwester.net>
+Date: Wed, 25 May 2011 22:11:34 -0500
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-Message-Id: <201105260018.21341.paul.eggleton@linux.intel.com>
-Subject: RFC: removal of Opie 1.2.4 recipes
+To: Khem Raj <raj.khem@gmail.com>
+References: <BANLkTinm-YXGM0z1CFJamQG7N0Em442VHw@mail.gmail.com>
+In-Reply-To: <BANLkTinm-YXGM0z1CFJamQG7N0Em442VHw@mail.gmail.com>
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: Where to host new layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,27 +33,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 May 2011 23:22:45 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
+X-List-Received-Date: Thu, 26 May 2011 03:21:24 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi all,
+On 5/13/2011 4:10 AM, Khem Raj wrote:
+> Hi Mike and all
+> 
+> I have created couple of layers namely meta-slugos (distro layer) and
+> meta-nslu ( machine layer). I was  looking for place to host those
+> layers. Would they be good under meta-openembedded ? I dont think
+> http://www.nslu2-linux.org/
+> has git infrastructure otherwise that would be one place to put it.
+> 
+> Thanks
+> 
+> -Khem
 
-I have been asked if I would consider removing the Opie 1.2.4 recipes from oe-
-dev. I think this is a good idea - Opie 1.2.5 has been out for a while now and 
-as far as I am aware upgrading shouldn't present any serious difficulties that 
-would require someone to use 1.2.4 instead.
+Thanks Khem!
 
-Unless there are objections I will remove the 1.2.4 recipes and update all 
-distro version includes early next week.
+Tom has indicated that he'll set up the appropriate GIT infrastructure
+to properly host these.  I'm still traveling, but should be back next
+week -- so that would be a good time to see if we can move the repos
+from the github location they're currently at.  Again, thanks for doing
+this!
 
-Thanks,
-Paul
+-Mike (mwester)
 
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
