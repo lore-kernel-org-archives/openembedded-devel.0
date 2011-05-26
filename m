@@ -1,21 +1,21 @@
-Received: from newsmtp5.atmel.com ([204.2.163.5] helo=sjogate2.atmel.com)
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ludovic.desroches@atmel.com>) id 1QPbk5-0003cO-Cb
+	(envelope-from <philip@balister.org>) id 1QPbkQ-0003dC-JS
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 May 2011 16:40:53 +0200
-Received: from meyreuil.atmel.fr ([10.159.254.132])
-	by sjogate2.atmel.com (8.13.6/8.13.6) with ESMTP id p4QEDW1O019556
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 May 2011 07:13:32 -0700 (PDT)
-Received: from bendor.rfo.atmel.com ([10.159.245.201])
-	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id p4QEGTa17145; 
-	Thu, 26 May 2011 16:16:29 +0200 (MEST)
-From: Ludovic Desroches <ludovic.desroches@atmel.com>
+	Thu, 26 May 2011 16:41:19 +0200
+Received: (qmail 12114 invoked by uid 1003); 26 May 2011 14:38:04 -0000
+Received: from unknown (HELO ?192.168.0.15?)
+	(philip@opensdr.com@75.136.226.183)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	26 May 2011 14:38:03 -0000
+Message-ID: <4DDE65C5.7050605@balister.org>
+Date: Thu, 26 May 2011 10:37:57 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14 Thunderbird/3.1.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 May 2011 17:25:19 +0200
-Message-Id: <1306423519-31114-1-git-send-email-ludovic.desroches@atmel.com>
-X-Mailer: git-send-email 1.7.5
-Subject: [PATCH] tiobench: add recipe
+Subject: [2011.03-maintenance] Pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,99 +29,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 May 2011 14:40:53 -0000
+X-List-Received-Date: Thu, 26 May 2011 14:41:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Ludovic Desroches <ludovic.desroches@atmel.com>
----
- recipes/tiobench/files/tiobench-makefile.patch |   42 ++++++++++++++++++++++++
- recipes/tiobench/tiobench_0.3.3.bb             |   27 +++++++++++++++
- 2 files changed, 69 insertions(+), 0 deletions(-)
- create mode 100644 recipes/tiobench/files/tiobench-makefile.patch
- create mode 100644 recipes/tiobench/tiobench_0.3.3.bb
+Tom,
 
-diff --git a/recipes/tiobench/files/tiobench-makefile.patch b/recipes/tiobench/files/tiobench-makefile.patch
-new file mode 100644
-index 0000000..23e7a43
---- /dev/null
-+++ b/recipes/tiobench/files/tiobench-makefile.patch
-@@ -0,0 +1,42 @@
-+--- a/Makefile	2011-05-26 07:48:46.341400974 +0200
-++++ b/Makefile	2011-05-26 10:54:48.631400818 +0200
-+@@ -1,8 +1,10 @@
-+ # Makefile for tiotest
-+ 
-+-CC=gcc
-++CROSS_COMPILE?=
-++CC=$(CROSS_COMPILE)gcc
-+ #CFLAGS=-O3 -fomit-frame-pointer -Wall
-+ CFLAGS=-O2 -Wall
-++LDFLAGS?=
-+ 
-+ #DEFINES=-DUSE_MMAP 
-+ #-DUSE_MADVISE
-+@@ -14,16 +16,15 @@
-+ 
-+ #DEFINES=
-+ 
-+-LINK=gcc
-+ EXE=tiotest
-+ PROJECT=tiobench
-+ # do it once instead of each time referenced
-+ VERSION=$(shell egrep "tiotest v[0-9]+.[0-9]+" tiotest.c | cut -d " " -f 7 | sed "s/v//g")
-+ DISTNAME=$(PROJECT)-$(VERSION)
-+ INSTALL=install
-+-PREFIX=/usr/local
-++PREFIX?=/usr/local
-+ BINDIR=$(PREFIX)/bin
-+-DOCDIR=/usr/local/doc/$(DISTNAME)
-++DOCDIR=$(PREFIX)/doc/$(DISTNAME)
-+ 
-+ all: $(EXE)
-+ 
-+@@ -34,7 +35,7 @@
-+ 	$(CC) -c $(CFLAGS) $(DEFINES) tiotest.c -o tiotest.o
-+ 
-+ $(EXE): tiotest.o crc32.o
-+-	$(LINK) -o $(EXE) tiotest.o crc32.o -lpthread
-++	$(CC) -o $(EXE) tiotest.o crc32.o -lpthread $(LDFLAGS)
-+ 	@echo
-+ 	@echo "./tiobench.pl --help for usage options"
-+ 	@echo
-diff --git a/recipes/tiobench/tiobench_0.3.3.bb b/recipes/tiobench/tiobench_0.3.3.bb
-new file mode 100644
-index 0000000..829373f
---- /dev/null
-+++ b/recipes/tiobench/tiobench_0.3.3.bb
-@@ -0,0 +1,27 @@
-+DESCRIPTION = "Threaded I/O tester"
-+HOMEPAGE = "http://sourceforge.net/projects/tiobench/"
-+PROVIDES = "tiobench" 
-+LICENSE = "GPL"
-+RDEPENDS = "\
-+    perl \
-+    perl-module-strict \
-+    perl-module-getopt-long \
-+    perl-module-overload \
-+    perl-module-exporter-heavy \
-+    "		
-+PR = "r0"
-+
-+SRC_URI = "\
-+    http://sourceforge.net/projects/tiobench/files/tiobench/0.3.3/tiobench-0.3.3.tar.gz \
-+    file://tiobench-makefile.patch \
-+    "
-+SRC_URI[md5sum] = "bf485bf820e693c79e6bd2a38702a128"
-+SRC_URI[sha256sum] = "8ad011059a35ac70cdb5e3d3999ceee44a8e8e9078926844b0685b7ea9db2bcc"
-+
-+do_compile() {
-+    make CROSS_COMPILE=${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}
-+}
-+
-+do_install() {
-+    make install PREFIX=${D}
-+}
--- 
-1.7.0.4
+Can you pull the following fixes from:
 
+git://github.com/balister/openembedded.git
+branch: balister/2011.3-maintenance/pull-1
+
+Patrik Dahlström (1):
+       firefox: add correct CFLAGS and LIBS of libIDL-2.0
+
+Philip Balister (3):
+       libosip2 : Upgrade from version 3.1 to 3.5
+       ortp : Upgrade from version 0.13.1 to 0.16.5.
+       uhd : Upgrade from 003.000.001 to 003.001.000.
+
+Roderick Taylor (1):
+       system-tools-backends: don't use build machine's automake-1.7
+
+
+These are all cherry-picks from .dev.
+
+Thanks,
+
+Philip
 
 
