@@ -1,36 +1,35 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heroor@gmail.com>) id 1QPS4J-0003IS-KK
+	(envelope-from <eyalreizer@googlemail.com>) id 1QPVHa-0001ld-Rs
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 May 2011 06:21:07 +0200
-Received: by qwh5 with SMTP id 5so194542qwh.6
+	Thu, 26 May 2011 09:47:03 +0200
+Received: by gwb11 with SMTP id 11so191630gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 May 2011 21:18:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=fqmcreYska8aumpyrvs/E734RdbqT5czxF/bNA66qVw=;
-	b=fXHf7rib+eLPyGxRM9GGZm+geXoapYVqV9eIURXMAgKWvJoqMUUdQdpk2eEZOevCO7
-	IFrL4hDt94iPmQkFz3oLri7q7HkTWzopYR3qurmtEHQRq+mLqjZ8N7+8cwfSTSu9eiiE
-	7eGLQ+Bq5hUeT0bQ3BUTAojGbbca2Y/jAfLBM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=PRlr3mpt+sz39Uvc2kglfvozRORa2l6BDO3PR3LWi3h6++BIH91UBwJxGpV9giSgxi
-	iQ8iQXw9Pj3Yl25fxclS4yUFHKY2Na84Aivinp6dz4gyr/1j98wAXQgkNXRzf9ffhROZ
-	d192c6fMbq6Sv7gHDed/bPLgbt1/ds7WsYtKI=
-MIME-Version: 1.0
-Received: by 10.224.212.196 with SMTP id gt4mr258537qab.74.1306383483533; Wed,
-	25 May 2011 21:18:03 -0700 (PDT)
-Received: by 10.224.73.130 with HTTP; Wed, 25 May 2011 21:18:03 -0700 (PDT)
-In-Reply-To: <1305173692-19917-3-git-send-email-heroor@gmail.com>
-References: <1305173692-19917-1-git-send-email-heroor@gmail.com>
-	<1305173692-19917-3-git-send-email-heroor@gmail.com>
-Date: Thu, 26 May 2011 09:48:03 +0530
-Message-ID: <BANLkTimmZrhueqYPBaxob7Ksd7T_Sauitg@mail.gmail.com>
-From: Siddharth Heroor <heroor@gmail.com>
+	Thu, 26 May 2011 00:43:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=s8cdJWOv2z4ueD9HT+cZ4kKu5Zns9Y6uzyfyg6mQneM=;
+	b=x4ZTALVxWdRkgt7Syo31sBv4uLsXEBVeNhyh0NcRVvDNj6T0lCPuKeLD+yHtX5Rhn5
+	uDjU25tVJ5Dy2M7KeXja9/00Yub8jWFj7p9Hdw8O7X4qnrBBuZVpgsHINtARJMThR+Nd
+	5dcByyxsmzg64A2GTt02YP03kCmaAH/BZgp0g=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=nQPLbrb0vVSZ8eDZhcvLpR/MJ2CXiFCr/7kl7yhM8g7fDMwC6yYtGKVcFL+HPqs4Gw
+	Ou278JBEXo9ktTARJar5oLV0PYfRPq2+oqXT2LSw7E7LRmvqZ8YvdOFIdTxOu/OOfuTa
+	zMsRWm06wKUILyTi6qMfDD3kdesdHv4561HkU=
+Received: by 10.150.169.1 with SMTP id r1mr568153ybe.216.1306395838855;
+	Thu, 26 May 2011 00:43:58 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id r10sm370147ybl.9.2011.05.26.00.43.56
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 26 May 2011 00:43:58 -0700 (PDT)
+From: Eyal Reizer <eyalreizer@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCHv2 3/3] sysvinit: bump PR for ti816x serial console change
+Date: Thu, 26 May 2011 10:43:17 +0300
+Message-Id: <1306395797-24560-1-git-send-email-eyalr@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCHv3] wpa-gui-e: build the latest version from git sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,46 +43,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 May 2011 04:21:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 26 May 2011 07:47:03 -0000
 
-On Thu, May 12, 2011 at 9:44 AM, Siddharth Heroor <heroor@gmail.com> wrote:
-> From: Siddharth Heroor <heroor@ti.com>
->
-> * A new inittab is needed, so bump PR to regenerate it.
->
-> Signed-off-by: Siddharth Heroor <heroor@ti.com>
+Builds wpa-gui for qt4-embedded from the latest wpa-supplicant (0.8x)
+git sources
 
-Ping. Has this been pushed?
+Signed-off-by: Eyal Reizer <eyalr@ti.com>
+---
+ recipes/wpa-supplicant/wpa-gui-e_git.bb |   29 +++++++++++++++++++++++++++++
+ 1 files changed, 29 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/wpa-supplicant/wpa-gui-e_git.bb
 
-> ---
-> =A0recipes/sysvinit/sysvinit_2.86.bb | =A0 =A02 +-
-> =A01 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/recipes/sysvinit/sysvinit_2.86.bb b/recipes/sysvinit/sysvini=
-t_2.86.bb
-> index dacc397..7eba447 100644
-> --- a/recipes/sysvinit/sysvinit_2.86.bb
-> +++ b/recipes/sysvinit/sysvinit_2.86.bb
-> @@ -2,7 +2,7 @@ DESCRIPTION =3D "System-V like init."
-> =A0SECTION =3D "base"
-> =A0LICENSE =3D "GPLv2+"
-> =A0HOMEPAGE =3D "http://freshmeat.net/projects/sysvinit/"
-> -PR =3D "r64"
-> +PR =3D "r65"
->
-> =A0# USE_VT and SERIAL_CONSOLE are generally defined by the MACHINE .conf=
-.
-> =A0# Set PACKAGE_ARCH appropriately.
-> --
-> 1.7.0.4
->
->
+diff --git a/recipes/wpa-supplicant/wpa-gui-e_git.bb b/recipes/wpa-supplicant/wpa-gui-e_git.bb
+new file mode 100644
+index 0000000..cedf53f
+--- /dev/null
++++ b/recipes/wpa-supplicant/wpa-gui-e_git.bb
+@@ -0,0 +1,29 @@
++DESCRIPTION = "Qt embedded interface for choosing which configured network \
++to connect to. It also provides a method for browsing 802.11 SSID scan \
++results, an event history log of messages generated by wpa_supplicant, and \
++a method to add or edit wpa_supplicant networks."
++
++HOMEPAGE = "http://hostap.epitest.fi/wpa_supplicant/"
++SECTION = "network"
++LICENSE = "GPLv2 | BSD"
++RDEPENDS_${PN} = "wpa-supplicant"
++
++SRCREV = "b8fb017272ed4794339978c9fbc0e74571a44728"
++
++PV = "0.7.3+0.8.0-rc"
++PR = "r0"
++PR_append = "+gitr${SRCPV}"
++
++SRC_URI = "git://w1.fi/srv/git/hostap.git;protocol=git"
++
++S = "${WORKDIR}/git/wpa_supplicant/wpa_gui-qt4"
++
++inherit qt4e
++ARM_INSTRUCTION_SET = "arm"
++
++do_install () {
++       install -d ${D}${bindir}
++       install -m 755 wpa_gui ${D}/${bindir}/wpa_gui-e
++}
++
++
+-- 
+1.7.0.4
 
-
-
---=20
-Sid
 
 
