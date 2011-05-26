@@ -1,25 +1,36 @@
-Received: from p3plsmtpa07-06.prod.phx3.secureserver.net ([173.201.192.235])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <mike@mwester.net>) id 1QPR8V-0002Lc-SJ
-	for Openembedded-devel@lists.openembedded.org;
-	Thu, 26 May 2011 05:21:24 +0200
-Received: (qmail 26415 invoked from network); 26 May 2011 03:11:40 -0000
-Received: from unknown (209.242.7.132)
-	by p3plsmtpa07-06.prod.phx3.secureserver.net (173.201.192.235) with
-	ESMTP; 26 May 2011 03:11:40 -0000
-Message-ID: <4DDDC4E6.3080209@mwester.net>
-Date: Wed, 25 May 2011 22:11:34 -0500
-From: Mike Westerhof <mike@mwester.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heroor@gmail.com>) id 1QPS4J-0003IS-KK
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 26 May 2011 06:21:07 +0200
+Received: by qwh5 with SMTP id 5so194542qwh.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 May 2011 21:18:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=fqmcreYska8aumpyrvs/E734RdbqT5czxF/bNA66qVw=;
+	b=fXHf7rib+eLPyGxRM9GGZm+geXoapYVqV9eIURXMAgKWvJoqMUUdQdpk2eEZOevCO7
+	IFrL4hDt94iPmQkFz3oLri7q7HkTWzopYR3qurmtEHQRq+mLqjZ8N7+8cwfSTSu9eiiE
+	7eGLQ+Bq5hUeT0bQ3BUTAojGbbca2Y/jAfLBM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=PRlr3mpt+sz39Uvc2kglfvozRORa2l6BDO3PR3LWi3h6++BIH91UBwJxGpV9giSgxi
+	iQ8iQXw9Pj3Yl25fxclS4yUFHKY2Na84Aivinp6dz4gyr/1j98wAXQgkNXRzf9ffhROZ
+	d192c6fMbq6Sv7gHDed/bPLgbt1/ds7WsYtKI=
 MIME-Version: 1.0
-To: Khem Raj <raj.khem@gmail.com>
-References: <BANLkTinm-YXGM0z1CFJamQG7N0Em442VHw@mail.gmail.com>
-In-Reply-To: <BANLkTinm-YXGM0z1CFJamQG7N0Em442VHw@mail.gmail.com>
-Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: Where to host new layers
+Received: by 10.224.212.196 with SMTP id gt4mr258537qab.74.1306383483533; Wed,
+	25 May 2011 21:18:03 -0700 (PDT)
+Received: by 10.224.73.130 with HTTP; Wed, 25 May 2011 21:18:03 -0700 (PDT)
+In-Reply-To: <1305173692-19917-3-git-send-email-heroor@gmail.com>
+References: <1305173692-19917-1-git-send-email-heroor@gmail.com>
+	<1305173692-19917-3-git-send-email-heroor@gmail.com>
+Date: Thu, 26 May 2011 09:48:03 +0530
+Message-ID: <BANLkTimmZrhueqYPBaxob7Ksd7T_Sauitg@mail.gmail.com>
+From: Siddharth Heroor <heroor@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCHv2 3/3] sysvinit: bump PR for ti816x serial console change
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,32 +44,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 May 2011 03:21:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 26 May 2011 04:21:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 5/13/2011 4:10 AM, Khem Raj wrote:
-> Hi Mike and all
-> 
-> I have created couple of layers namely meta-slugos (distro layer) and
-> meta-nslu ( machine layer). I was  looking for place to host those
-> layers. Would they be good under meta-openembedded ? I dont think
-> http://www.nslu2-linux.org/
-> has git infrastructure otherwise that would be one place to put it.
-> 
-> Thanks
-> 
-> -Khem
+On Thu, May 12, 2011 at 9:44 AM, Siddharth Heroor <heroor@gmail.com> wrote:
+> From: Siddharth Heroor <heroor@ti.com>
+>
+> * A new inittab is needed, so bump PR to regenerate it.
+>
+> Signed-off-by: Siddharth Heroor <heroor@ti.com>
 
-Thanks Khem!
+Ping. Has this been pushed?
 
-Tom has indicated that he'll set up the appropriate GIT infrastructure
-to properly host these.  I'm still traveling, but should be back next
-week -- so that would be a good time to see if we can move the repos
-from the github location they're currently at.  Again, thanks for doing
-this!
+> ---
+> =A0recipes/sysvinit/sysvinit_2.86.bb | =A0 =A02 +-
+> =A01 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/sysvinit/sysvinit_2.86.bb b/recipes/sysvinit/sysvini=
+t_2.86.bb
+> index dacc397..7eba447 100644
+> --- a/recipes/sysvinit/sysvinit_2.86.bb
+> +++ b/recipes/sysvinit/sysvinit_2.86.bb
+> @@ -2,7 +2,7 @@ DESCRIPTION =3D "System-V like init."
+> =A0SECTION =3D "base"
+> =A0LICENSE =3D "GPLv2+"
+> =A0HOMEPAGE =3D "http://freshmeat.net/projects/sysvinit/"
+> -PR =3D "r64"
+> +PR =3D "r65"
+>
+> =A0# USE_VT and SERIAL_CONSOLE are generally defined by the MACHINE .conf=
+.
+> =A0# Set PACKAGE_ARCH appropriately.
+> --
+> 1.7.0.4
+>
+>
 
--Mike (mwester)
 
+
+--=20
+Sid
 
 
