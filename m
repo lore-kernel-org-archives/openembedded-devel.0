@@ -1,33 +1,22 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1QQ1BC-0003IJ-Cw
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1QQ3yu-0006Xj-Ql
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 May 2011 19:50:34 +0200
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1QQ18E-000188-T8 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 May 2011 10:47:30 -0700
-Received: from SVR-ORW-FEM-03.mgc.mentorg.com ([147.34.97.39]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Fri, 27 May 2011 10:44:22 -0700
-Received: from [172.30.80.104] (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
-	(147.34.97.39) with Microsoft SMTP Server id 14.1.289.1;
-	Fri, 27 May 2011 10:47:30 -0700
-Message-ID: <4DDFE3AF.60900@mentor.com>
-Date: Fri, 27 May 2011 10:47:27 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <irmf2a$fje$1@dough.gmane.org>
-In-Reply-To: <irmf2a$fje$1@dough.gmane.org>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 27 May 2011 17:44:22.0235 (UTC)
-	FILETIME=[B65FFAB0:01CC1C95]
-Subject: Re: [2011.03-maintenance] Pull request #19
+	Fri, 27 May 2011 22:50:05 +0200
+Received: (qmail invoked by alias); 27 May 2011 20:46:59 -0000
+Received: from p5B0A2270.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.34.112]
+	by mail.gmx.net (mp040) with SMTP; 27 May 2011 22:46:59 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/AvJFGvhbAeFj12ZynJHZeM45yt12jwQ+FIMScvc
+	NhdrPnBixbhy12
+From: Andreas Mueller <schnitzeltony@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 27 May 2011 22:47:53 +0200
+Message-Id: <1306529273-9450-1-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.4.4
+X-Y-GMX-Trusted: 0
+Subject: [PATCH] utils.bbclass: modify create_wrapper to correctly follow symlinks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,53 +30,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 May 2011 17:50:34 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 May 2011 20:50:05 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* taken from OE-Core [1]
+* thanks Khem for pointing out[2]
+* fixes build failure perl
 
-On 05/26/2011 02:00 PM, Koen Kooi wrote:
-> Tom,
-> 
-> Please pull the 6 commits from here:
-> 
-> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-> Branch: 2011.03-maintenance
-> 
-> Anand Balagopalakrishnan (2):
->       libgles-omap3: Add wsegl.h to the destination include directory
->       qt4: Fix the include path for SGX PowerVR drivers
-> 
-> Koen Kooi (4):
->       qt4 4.6.3: bump PR for wsegl header change
->       linux-omap 2.6.39: initial add with beagleboard support
->       linux-omap 2.6.39: sync with meta-texasinstruments
->       linux-omap 2.6.39: sync with meta-texasinstruments
-> 
-> 
-> The kernel and gles ones are cherry-picks, the qt4 ones only picked up
-> the 4.6.x changes and not the 4.7.x changes.
-> And yes, I was stupid enough to use the same commit message for 2
-> different commits in .dev.
+| env: ./perl5.10.1.real: No such file or directory
+| make[1]: *** [pod/perlapi.pod] Error 127
 
-This has been applied, thanks!
+[1] http://git.openembedded.org/cgit.cgi/openembedded-core/commit/?id=a10bd976f4cef54ac50b0c82f885c17a26e5989f
+[2] http://lists.linuxtogo.org/pipermail/openembedded-core/2011-May/002975.html
 
-- -- 
-Tom Rini
-Mentor Graphics Corporation
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
+---
+ classes/utils.bbclass |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-iQEcBAEBAgAGBQJN3+OvAAoJEI4NMjfc3nJxg6IH/07+nJXQ7xp7xAn3+KrjoUzF
-qlNz4mP7+nW0KQu+SKRi57HnKlcyHuk3DrM7aFLUh6zXj4iF+MJFFyC8sX1v1/KW
-LW+bsUJLbKJNYGPpQY+o9GA/y+BCTW7/txkq7FcRzy/qj7RQs7yI/l5y8jt/0e3L
-OUkdkK4q/x6VRS0zLSnm8UtZSxEQ5kb1LNMxZkIANJyrgqR1vdVTz3P3ubF17ur9
-8AM7tNC+7bJZjUVbCxfCTJpPnonEwVYfFecbQJAyQqBT8bd1I23WNmQvGJ7syDi8
-KbGcvVRMnPZ8e3GYnupUk5R6mtlfrzKTdWIkCOzfzR0Tmf+nreyd1zqp+HCl7ZM=
-=up3Y
------END PGP SIGNATURE-----
+diff --git a/classes/utils.bbclass b/classes/utils.bbclass
+index 7591d47..936f7fd 100644
+--- a/classes/utils.bbclass
++++ b/classes/utils.bbclass
+@@ -407,7 +407,8 @@ create_wrapper () {
+    cmdname=`basename $cmd`.real
+    cat <<END >$cmd
+ #!/bin/sh
+-exec env $@ \`dirname \$0\`/$cmdname "\$@"
++realpath=\`readlink -fn \$0\`
++exec env $@ \`dirname \$realpath\`/$cmdname "\$@"
+ END
+    chmod +x $cmd
+ }
+-- 
+1.7.4.4
+
 
 
