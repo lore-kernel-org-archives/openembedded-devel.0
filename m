@@ -1,34 +1,33 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QQ02w-0001r2-BK
+	(envelope-from <Tom_Rini@mentor.com>) id 1QQ1Av-0003E0-AI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 May 2011 18:37:58 +0200
-Received: by fxm19 with SMTP id 19so1698982fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 May 2011 09:34:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=DTDKXQDwJNW+5j1FGtNhAS8P/fG8ojMW4//4eTIm5rA=;
-	b=rCkA2p/1mwPeSq9OuUII9gBe29PBpIIpH4sbUOc0C3pLXge2E8ge33QYE/LOgNScDU
-	ZOB8ixwbI4jFPi8Az8+73YpbdPYdb/cx5Qc4qakdLCetCRNKv8hPHNgOjlotPx3tmhnR
-	icbZ7xAUBuW+/7VQ7uXwWjKcQM3aycEdgL2sc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=J0rpd8vIw2JDm5hg+q56aeLU9qZqoxX+5eTdP4iE/DLKapvp3Ebo7WsIBGTSxCuGJa
-	HyETps9pI9l5L8qeXZ/6E8vLHbgZKE0DkEhzxFmtqzgZW1yijRfbKhHXTwy//gNxE1LE
-	uA8pHvu1r9FarahN+8guCfJeS4IzivwnxLQXM=
-Received: by 10.223.13.207 with SMTP id d15mr2647803faa.38.1306513766367;
-	Fri, 27 May 2011 09:29:26 -0700 (PDT)
-Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id m26sm732295fab.34.2011.05.27.09.29.24
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 27 May 2011 09:29:25 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 May 2011 18:29:14 +0200
-Message-Id: <1306513754-31678-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.5.rc3
-Subject: [meta-oe][PATCH] connman: add gnutls to depends and move iptables dependency also to .inc file
+	Fri, 27 May 2011 19:50:21 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1QQ17v-00016N-Ab from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 May 2011 10:47:11 -0700
+Received: from SVR-ORW-FEM-03.mgc.mentorg.com ([147.34.97.39]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Fri, 27 May 2011 10:44:02 -0700
+Received: from [172.30.80.104] (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
+	(147.34.97.39) with Microsoft SMTP Server id 14.1.289.1;
+	Fri, 27 May 2011 10:47:10 -0700
+Message-ID: <4DDFE39C.60100@mentor.com>
+Date: Fri, 27 May 2011 10:47:08 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <4DDE65C5.7050605@balister.org>
+In-Reply-To: <4DDE65C5.7050605@balister.org>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 27 May 2011 17:44:02.0625 (UTC)
+	FILETIME=[AAAFBB10:01CC1C95]
+Subject: Re: [2011.03-maintenance] Pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,40 +41,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 May 2011 16:37:58 -0000
+X-List-Received-Date: Fri, 27 May 2011 17:50:24 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-connectivity/connman/connman.inc   |    2 +-
- .../recipes-connectivity/connman/connman_0.73.bb   |    2 --
- 2 files changed, 1 insertions(+), 3 deletions(-)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/meta-oe/recipes-connectivity/connman/connman.inc b/meta-oe/recipes-connectivity/connman/connman.inc
-index 0a662d8..7edef34 100644
---- a/meta-oe/recipes-connectivity/connman/connman.inc
-+++ b/meta-oe/recipes-connectivity/connman/connman.inc
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e \
-                     file://src/main.c;beginline=1;endline=20;md5=4b55b550fa6b33cc2055ef30dd262b3e"
- 
- # we need to define the depends here, the dynamic stuff is too late
--DEPENDS  = "libnl wpa-supplicant dbus glib-2.0 ppp busybox dhcp resolvconf bluez4"
-+DEPENDS  = "libnl wpa-supplicant dbus glib-2.0 ppp busybox dhcp resolvconf bluez4 iptables gnutls"
- 
- EXTRA_OECONF += "\
-     ac_cv_path_WPASUPPLICANT=/usr/sbin/wpa_supplicant \
-diff --git a/meta-oe/recipes-connectivity/connman/connman_0.73.bb b/meta-oe/recipes-connectivity/connman/connman_0.73.bb
-index 3d0815f..6ef4302 100644
---- a/meta-oe/recipes-connectivity/connman/connman_0.73.bb
-+++ b/meta-oe/recipes-connectivity/connman/connman_0.73.bb
-@@ -1,6 +1,4 @@
- require connman.inc
--# connman requires libXtables now
--DEPENDS += "iptables"
- PR = "r1"
- 
- EXTRA_OECONF += "\
--- 
-1.7.5.rc3
+On 05/26/2011 07:37 AM, Philip Balister wrote:
+> Tom,
+> 
+> Can you pull the following fixes from:
+> 
+> git://github.com/balister/openembedded.git
+> branch: balister/2011.3-maintenance/pull-1
+> 
+> Patrik Dahlström (1):
+>       firefox: add correct CFLAGS and LIBS of libIDL-2.0
+> 
+> Philip Balister (3):
+>       libosip2 : Upgrade from version 3.1 to 3.5
+>       ortp : Upgrade from version 0.13.1 to 0.16.5.
+>       uhd : Upgrade from 003.000.001 to 003.001.000.
+> 
+> Roderick Taylor (1):
+>       system-tools-backends: don't use build machine's automake-1.7
+> 
+> 
+> These are all cherry-picks from .dev.
 
+This has been applied, thanks!
+
+- -- 
+Tom Rini
+Mentor Graphics Corporation
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iQEcBAEBAgAGBQJN3+OXAAoJEI4NMjfc3nJxPC4IAIBEKbFe5/ey9AwLuJ2176Ly
+ex1SSV/4ZG3uockIh9EqOVkuvuHsvNKf5qzjuvrLeOUGF+FEYkQu+tjKGF8402fn
+PsrqMhxwN4qg7vz1BqQC4jlyRoYZtmaBmMOugm28myuC7Hc7U5NikA+7lBfQd9fm
+rYfqL2oryXhAlUWM4A8t+6m7RHL7/4Bcv5+5qaWQ5WrBsImTi5FaJx8SzTdIKd81
+HklaKR3RJlnAJBK1kmHMO2LEwRg2fk5HaNw9A1jKgnnywRYU4ueZ5fzaj/0rYEWW
+D01oLQ0SeoTqqpMJEP8vUANUQSWg4UmI+7o9MPdba8sIU5kjO/TwcSxD1X8gh0A=
+=whxV
+-----END PGP SIGNATURE-----
 
 
