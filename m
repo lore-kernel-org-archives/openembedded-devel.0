@@ -1,32 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QPhjB-00080v-JA for openembedded-devel@lists.openembedded.org;
-	Thu, 26 May 2011 23:04:21 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QPhgE-0008LN-Ka for openembedded-devel@lists.openembedded.org;
-	Thu, 26 May 2011 23:01:18 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 May 2011 23:01:18 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1QQ02w-0001r2-BK
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 May 2011 18:37:58 +0200
+Received: by fxm19 with SMTP id 19so1698982fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 May 2011 23:01:18 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 27 May 2011 09:34:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=DTDKXQDwJNW+5j1FGtNhAS8P/fG8ojMW4//4eTIm5rA=;
+	b=rCkA2p/1mwPeSq9OuUII9gBe29PBpIIpH4sbUOc0C3pLXge2E8ge33QYE/LOgNScDU
+	ZOB8ixwbI4jFPi8Az8+73YpbdPYdb/cx5Qc4qakdLCetCRNKv8hPHNgOjlotPx3tmhnR
+	icbZ7xAUBuW+/7VQ7uXwWjKcQM3aycEdgL2sc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=J0rpd8vIw2JDm5hg+q56aeLU9qZqoxX+5eTdP4iE/DLKapvp3Ebo7WsIBGTSxCuGJa
+	HyETps9pI9l5L8qeXZ/6E8vLHbgZKE0DkEhzxFmtqzgZW1yijRfbKhHXTwy//gNxE1LE
+	uA8pHvu1r9FarahN+8guCfJeS4IzivwnxLQXM=
+Received: by 10.223.13.207 with SMTP id d15mr2647803faa.38.1306513766367;
+	Fri, 27 May 2011 09:29:26 -0700 (PDT)
+Received: from localhost ([94.230.152.115])
+	by mx.google.com with ESMTPS id m26sm732295fab.34.2011.05.27.09.29.24
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 27 May 2011 09:29:25 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 26 May 2011 23:00:58 +0200
-Message-ID: <irmf2a$fje$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-X-Enigmail-Version: 1.0.1
-Subject: [2011.03-maintenance] Pull request #19
+Date: Fri, 27 May 2011 18:29:14 +0200
+Message-Id: <1306513754-31678-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.5.rc3
+Subject: [meta-oe][PATCH] connman: add gnutls to depends and move iptables dependency also to .inc file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,47 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 May 2011 21:04:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 May 2011 16:37:58 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-connectivity/connman/connman.inc   |    2 +-
+ .../recipes-connectivity/connman/connman_0.73.bb   |    2 --
+ 2 files changed, 1 insertions(+), 3 deletions(-)
 
-Tom,
-
-Please pull the 6 commits from here:
-
-URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-Branch: 2011.03-maintenance
-
-Anand Balagopalakrishnan (2):
-      libgles-omap3: Add wsegl.h to the destination include directory
-      qt4: Fix the include path for SGX PowerVR drivers
-
-Koen Kooi (4):
-      qt4 4.6.3: bump PR for wsegl header change
-      linux-omap 2.6.39: initial add with beagleboard support
-      linux-omap 2.6.39: sync with meta-texasinstruments
-      linux-omap 2.6.39: sync with meta-texasinstruments
-
-
-The kernel and gles ones are cherry-picks, the qt4 ones only picked up
-the 4.6.x changes and not the 4.7.x changes.
-And yes, I was stupid enough to use the same commit message for 2
-different commits in .dev.
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFN3r+KMkyGM64RGpERAkd+AJ4iXkGN7hxsJo8mvMVO6d5Gox2WlQCeJq8l
-2COrP1N7NcKtbFYEBrJAHiw=
-=dXS7
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-connectivity/connman/connman.inc b/meta-oe/recipes-connectivity/connman/connman.inc
+index 0a662d8..7edef34 100644
+--- a/meta-oe/recipes-connectivity/connman/connman.inc
++++ b/meta-oe/recipes-connectivity/connman/connman.inc
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e \
+                     file://src/main.c;beginline=1;endline=20;md5=4b55b550fa6b33cc2055ef30dd262b3e"
+ 
+ # we need to define the depends here, the dynamic stuff is too late
+-DEPENDS  = "libnl wpa-supplicant dbus glib-2.0 ppp busybox dhcp resolvconf bluez4"
++DEPENDS  = "libnl wpa-supplicant dbus glib-2.0 ppp busybox dhcp resolvconf bluez4 iptables gnutls"
+ 
+ EXTRA_OECONF += "\
+     ac_cv_path_WPASUPPLICANT=/usr/sbin/wpa_supplicant \
+diff --git a/meta-oe/recipes-connectivity/connman/connman_0.73.bb b/meta-oe/recipes-connectivity/connman/connman_0.73.bb
+index 3d0815f..6ef4302 100644
+--- a/meta-oe/recipes-connectivity/connman/connman_0.73.bb
++++ b/meta-oe/recipes-connectivity/connman/connman_0.73.bb
+@@ -1,6 +1,4 @@
+ require connman.inc
+-# connman requires libXtables now
+-DEPENDS += "iptables"
+ PR = "r1"
+ 
+ EXTRA_OECONF += "\
+-- 
+1.7.5.rc3
 
 
 
