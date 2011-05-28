@@ -1,34 +1,29 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QQKFI-000717-DU
+	(envelope-from <morphis@gravedo.de>) id 1QQKX1-0007UQ-8b
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 28 May 2011 16:12:04 +0200
-Received: by mail-fx0-f47.google.com with SMTP id 19so2120968fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 May 2011 07:09:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=RkgEjIMG78n41ZMeuY9sEXhmlYnmjOThL4d6SJ7d3oQ=;
-	b=UdStsjIUR89X8HTKlL9JF7zdy8Q2+NeTo6P84m6vsMm1q0LOPZnh+9sUgiJU0n43xC
-	K6VTFFRZnldVeH6ea5WDlrvAXJ40p4i4kezyACV8tsgMWhU49MqaEanI/H8enmkXTyRf
-	J7mGvKR7zEJmLxqfdYtp3L+KxpQz6tJHHmR/A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=KwJZpOwurqZ/eshGd7FcgL11KFPdM2kofPJtsHfAVwIEUuPS1vaKaLhAedbyUvdApf
-	aYEZw/iV2Zn74kfE1mQvCiOkvaryMIW7g32NiidjwZPFfhFWSG6LE2pnR1YrjptRBpck
-	oRa3skhqgNlmWmRgpetXUaUCOAxNE60peuPnM=
-Received: by 10.223.48.139 with SMTP id r11mr3555925faf.63.1306591694238;
-	Sat, 28 May 2011 07:08:14 -0700 (PDT)
-Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id 11sm171732fax.12.2011.05.28.07.08.12
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 28 May 2011 07:08:13 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 28 May 2011 16:08:01 +0200
-Message-Id: <cover.1306591578.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.5.rc3
-Subject: [meta-oe][PATCH 0/2] Pull request #11
+	Sat, 28 May 2011 16:30:23 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 45BDF799021; Sat, 28 May 2011 16:27:19 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h1108419.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.1 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from [192.168.1.37] (p5489BC57.dip.t-dialin.net [84.137.188.87])
+	by gravedo.de (Postfix) with ESMTPSA id 5D1C479901E;
+	Sat, 28 May 2011 16:27:18 +0200 (CEST)
+Message-ID: <4DE10645.9050108@gravedo.de>
+Date: Sat, 28 May 2011 16:27:17 +0200
+From: Simon Busch <morphis@gravedo.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110422 Lightning/1.0b2 Shredder/3.1.11pre
+MIME-Version: 1.0
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <20110528080123.GR3222@jama.jama.net>
+In-Reply-To: <20110528080123.GR3222@jama.jama.net>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: qt4-x11-free with PACKAGE_ARCH=palmpre :/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,30 +37,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 May 2011 14:12:04 -0000
+X-List-Received-Date: Sat, 28 May 2011 14:30:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-The following changes since commit 7f9dbc16002bacf2ccc040a2de3ddc134e5fbbad:
+On 28.05.2011 10:01, Martin Jansa wrote:
+> Hi,
+> 
+> 8a8dbc88232935835c1698cdf162bdf02fc1701b
+> qt4-embedded: add palmpre specific profile script and bump PR
+> 
+> sets PACKAGE_ARCH_palmpre = "${MACHINE_ARCH}" only in 
+> qt4-embedded.inc, but machine specific file
+> qt4/files/palmpre/qte.sh
+> is included *also* in shared qt-${PV}.inc SRC_URI
+> 
+> ./qt-4.7.3.inc:SRC_URI += "file://qte.sh"
+> ./qt-4.6.3.inc:SRC_URI += "file://qte.sh"
+> ./qt4-embedded.inc:SRC_URI += "file://qte.sh"
+> 
+> which makes qt4-x11-free also MACHINE_ARCH because of 
+> utils.bbclass:machine_paths
+> 
+> I don't see qte.sh used in qt4-x11-free so I'm going to remove it from
+> .inc file as well as PACKAGE_ARCH_palmpre which is detected fine by
+> utils.bbclass.
 
-  gcc-4.6: Update with patches from gcc-4_6-branch and linaro 2011.05 release (2011-05-28 09:36:14 +0200)
+Ok, I didn't that PACKAGE_ARCH is automatically set to MACHINE_ARCH when
+I include a file subdirectory specific for that machine I am building for.
 
-are available in the git repository at:
-  git+ssh://git@git.openembedded.org/meta-openembedded-contrib jansa/meta-oe
-  http://cgit.openembedded.org/cgit.cgi/git+ssh://git@git.openembedded.org/meta-openembedded-contrib/log/?h=jansa/meta-oe
+> I'll attach patch, please test, because I'm using qt4-x11-free only.
 
-Martin Jansa (2):
-  gconf: depend on polkit not policykit
-  policykit: drop recipes, oe-core has newer versions named right
-    polkit
+Will comment on the patch in a separate mail after I build the
+qt4-embedded version with the patch included.
 
- meta-oe/recipes-gnome/gnome/gconf_2.28.0.bb        |    4 +-
- .../policykit/policykit-gnome_0.96.bb              |   25 -------
- meta-oe/recipes-gnome/policykit/policykit_0.96.bb  |   67 --------------------
- 3 files changed, 2 insertions(+), 94 deletions(-)
- delete mode 100644 meta-oe/recipes-gnome/policykit/policykit-gnome_0.96.bb
- delete mode 100644 meta-oe/recipes-gnome/policykit/policykit_0.96.bb
-
--- 
-1.7.5.rc3
-
+regards,
+Simon
 
 
