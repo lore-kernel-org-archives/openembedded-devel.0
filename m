@@ -1,39 +1,39 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QQo2T-00039A-Vy
+	(envelope-from <martin.jansa@gmail.com>) id 1QQo2g-00039A-PU
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 May 2011 00:00:50 +0200
+	Mon, 30 May 2011 00:01:02 +0200
 Received: by mail-fx0-f47.google.com with SMTP id 19so2550305fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 May 2011 14:57:44 -0700 (PDT)
+	Sun, 29 May 2011 14:57:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
 	:in-reply-to:references:in-reply-to:references;
-	bh=76lna1+nNrD5svVy1UtKz7/Ujn0PK9WzHR7au8btbto=;
-	b=kD0Io+3r80E/7HxRAGEDSxM2LYlUR7qMWPQVYEjkNjAaeNl+j0u+5QjxqH8YxFcZv4
-	1RIMwa0S5KFvLWDWOH0dvCcnROwyc6qFDZnEVX8K5TMNXb7mElSU6ITQD/15hHl3dUmB
-	0JbHz0iCvjbvz8BcX5DmSkgX3bgDukFojiil8=
+	bh=oH5QVAZ7Gwelngh6HzIfJt5zqNoU1aGkfRtalEYzp3U=;
+	b=nM6jzQ911G3X1ZD33InvQHpQMbEILvYT7tifaRapHo4SKnk0rwZ2VK7wBcf1/gQo1/
+	pgk12o+zJkmLHVeV5wV/bFX3Gv5e2arXI72dJhhn71eS95rTrw+uxURvlqzo3nVgw5bk
+	HSygDqZqJHyGdHd2ltkYbilzVRpzFUMpsOhbQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=YJm46psqK0/D2PjLIZYKooBm7jn9ooLRgtbJYqw5u/erWeIp+rhI5gM4ZQnjpl9Bt1
-	aR8F+oEe3eaur6KBFkH72ljgE+F1SvBZTVRMJhqnbkEcMIcSsA7dbkCxflZYexYz82gh
-	ciIBJBJL4nTmYdski0Z8FRib75RExOFMUnkQA=
-Received: by 10.223.127.210 with SMTP id h18mr1253365fas.71.1306706263976;
-	Sun, 29 May 2011 14:57:43 -0700 (PDT)
+	b=qP9dYGdK8myaSxBVeJHZxJuKhnqQB7QhpaSmGiBkWr3fLrIORR+LIM3aBncecKlub0
+	EfeDhRvt1Avdp9md58uP4iN3OUS2a1TLGZG/hz2+Q2gYFkiqoPsmNFKR6mw3DkZgJ8e9
+	GL8CgfbdMZ5hKrO5OFDPnkbO3AxfhaR/TyEaM=
+Received: by 10.223.40.85 with SMTP id j21mr4852069fae.22.1306706277517;
+	Sun, 29 May 2011 14:57:57 -0700 (PDT)
 Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id x15sm525354fah.46.2011.05.29.14.57.42
+	by mx.google.com with ESMTPS id q14sm526507faa.27.2011.05.29.14.57.56
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 29 May 2011 14:57:43 -0700 (PDT)
+	Sun, 29 May 2011 14:57:56 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 May 2011 23:56:37 +0200
-Message-Id: <c4925771f056829e9f123d33e5b7be1cf4d0a0f3.1306706130.git.Martin.Jansa@gmail.com>
+Date: Sun, 29 May 2011 23:56:39 +0200
+Message-Id: <7c152332af7df3a4f6ddc991740c2c4fb8e7e375.1306706130.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.5.rc3
 In-Reply-To: <355a220b55867ef7a2fd485fbc1fcb76c06ef5d1.1306706130.git.Martin.Jansa@gmail.com>
 References: <355a220b55867ef7a2fd485fbc1fcb76c06ef5d1.1306706130.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1306706130.git.Martin.Jansa@gmail.com>
 References: <cover.1306706130.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 12/14] nfs-utils: import from OE rev d4f0211e2078d5033ae0dee74664de5520d8392d
+Subject: [meta-oe][PATCH 14/14] tcpdump: import from OE rev d4f0211e2078d5033ae0dee74664de5520d8392d
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,425 +51,224 @@ X-List-Received-Date: Sun, 29 May 2011 22:01:46 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../nfs-utils-S_ISREG-missing-include.patch        |   33 +++++
- .../nfs-utils-tools-unset-cflags.patch             |   92 ++++++++++++
- .../nfs-utils-1.1.2/nfs-utils-uclibc-compile.patch |   49 +++++++
- .../nfs-utils/nfs-utils-1.1.2/nfsserver            |  149 ++++++++++++++++++++
- .../recipes-support/nfs-utils/nfs-utils_1.1.2.bb   |   54 +++++++
- 5 files changed, 377 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-support/nfs-utils/nfs-utils-1.1.2/nfs-utils-S_ISREG-missing-include.patch
- create mode 100644 meta-oe/recipes-support/nfs-utils/nfs-utils-1.1.2/nfs-utils-tools-unset-cflags.patch
- create mode 100644 meta-oe/recipes-support/nfs-utils/nfs-utils-1.1.2/nfs-utils-uclibc-compile.patch
- create mode 100644 meta-oe/recipes-support/nfs-utils/nfs-utils-1.1.2/nfsserver
- create mode 100644 meta-oe/recipes-support/nfs-utils/nfs-utils_1.1.2.bb
+ .../0001-minimal-IEEE802.15.4-allowed.patch        |   22 ++++++++++
+ .../tcpdump/tcpdump-4.1.1/configure.patch          |   29 +++++++++++++
+ .../tcpdump/tcpdump-4.1.1/ipv6-cross.patch         |   41 +++++++++++++++++++
+ .../tcpdump-4.1.1/tcpdump_configure_no_-O2.patch   |   42 ++++++++++++++++++++
+ meta-oe/recipes-support/tcpdump/tcpdump_4.1.1.bb   |   42 ++++++++++++++++++++
+ 5 files changed, 176 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/tcpdump/tcpdump-4.1.1/0001-minimal-IEEE802.15.4-allowed.patch
+ create mode 100644 meta-oe/recipes-support/tcpdump/tcpdump-4.1.1/configure.patch
+ create mode 100644 meta-oe/recipes-support/tcpdump/tcpdump-4.1.1/ipv6-cross.patch
+ create mode 100644 meta-oe/recipes-support/tcpdump/tcpdump-4.1.1/tcpdump_configure_no_-O2.patch
+ create mode 100644 meta-oe/recipes-support/tcpdump/tcpdump_4.1.1.bb
 
-diff --git a/meta-oe/recipes-support/nfs-utils/nfs-utils-1.1.2/nfs-utils-S_ISREG-missing-include.patch b/meta-oe/recipes-support/nfs-utils/nfs-utils-1.1.2/nfs-utils-S_ISREG-missing-include.patch
+diff --git a/meta-oe/recipes-support/tcpdump/tcpdump-4.1.1/0001-minimal-IEEE802.15.4-allowed.patch b/meta-oe/recipes-support/tcpdump/tcpdump-4.1.1/0001-minimal-IEEE802.15.4-allowed.patch
 new file mode 100644
-index 0000000..6b2c75e
+index 0000000..9d3d60d
 --- /dev/null
-+++ b/meta-oe/recipes-support/nfs-utils/nfs-utils-1.1.2/nfs-utils-S_ISREG-missing-include.patch
-@@ -0,0 +1,33 @@
-+diff -uNr nfs-utils-1.1.2.orig//utils/exportfs/exportfs.c nfs-utils-1.1.2/utils/exportfs/exportfs.c
-+--- nfs-utils-1.1.2.orig//utils/exportfs/exportfs.c	2008-03-14 16:46:29.000000000 +0100
-++++ nfs-utils-1.1.2/utils/exportfs/exportfs.c	2010-05-26 10:31:23.000000000 +0200
-+@@ -19,6 +19,7 @@
-+ #include <getopt.h>
-+ #include <netdb.h>
-+ #include <errno.h>
-++#include <sys/stat.h>
-+ #include "xmalloc.h"
-+ #include "misc.h"
-+ #include "nfslib.h"
-+diff -uNr nfs-utils-1.1.2.orig//utils/mount/mount.c nfs-utils-1.1.2/utils/mount/mount.c
-+--- nfs-utils-1.1.2.orig//utils/mount/mount.c	2008-03-14 16:46:29.000000000 +0100
-++++ nfs-utils-1.1.2/utils/mount/mount.c	2010-05-26 10:31:32.000000000 +0200
-+@@ -24,6 +24,7 @@
++++ b/meta-oe/recipes-support/tcpdump/tcpdump-4.1.1/0001-minimal-IEEE802.15.4-allowed.patch
+@@ -0,0 +1,22 @@
++From: Sergey Lapin <slapin@slind.org>
++Date: Wed, 28 Jan 2009 16:34:15 +0300
++Subject: [PATCH] minimal IEEE802.15.4 allowed
++
++---
++ tcpdump.c |    3 +++
++ 1 files changed, 3 insertions(+), 0 deletions(-)
++
++diff --git a/tcpdump.c b/tcpdump.c
++index 06683af..fbc944c 100644
++--- a/tcpdump.c
+++++ b/tcpdump.c
++@@ -282,6 +282,9 @@ static struct printer printers[] = {
++ #ifdef DLT_MFR
++ 	{ mfr_if_print,		DLT_MFR },
++ #endif
+++#ifdef DLT_IEEE802_15_4
+++	{ raw_if_print, DLT_IEEE802_15_4 },
+++#endif
++ #if defined(DLT_BLUETOOTH_HCI_H4_WITH_PHDR) && defined(HAVE_PCAP_BLUETOOTH_H)
++ 	{ bt_if_print,		DLT_BLUETOOTH_HCI_H4_WITH_PHDR},
++ #endif
+diff --git a/meta-oe/recipes-support/tcpdump/tcpdump-4.1.1/configure.patch b/meta-oe/recipes-support/tcpdump/tcpdump-4.1.1/configure.patch
+new file mode 100644
+index 0000000..3697420
+--- /dev/null
++++ b/meta-oe/recipes-support/tcpdump/tcpdump-4.1.1/configure.patch
+@@ -0,0 +1,29 @@
++---
++ aclocal.m4   |    1 -
++ configure.in |    1 +
++ 2 files changed, 1 insertions(+), 1 deletions(-)
++
++diff --git a/aclocal.m4 b/aclocal.m4
++index 40b5866..0c662b0 100644
++--- a/aclocal.m4
+++++ b/aclocal.m4
++@@ -40,7 +40,6 @@ dnl
++ AC_DEFUN(AC_LBL_C_INIT_BEFORE_CC,
++     [AC_PREREQ(2.50)
++     AC_BEFORE([$0], [AC_LBL_C_INIT])
++-    AC_BEFORE([$0], [AC_PROG_CC])
++     AC_BEFORE([$0], [AC_LBL_FIXINCLUDES])
++     AC_BEFORE([$0], [AC_LBL_DEVEL])
++     AC_ARG_WITH(gcc, [  --without-gcc           don't use gcc])
++diff --git a/configure.in b/configure.in
++index 11257c9..7f9591c 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -19,6 +19,7 @@ AC_REVISION($Revision: 1.204 $)
++ AC_PREREQ(2.50)
++ AC_INIT(tcpdump.c)
 + 
-+ #include <unistd.h>
+++AC_PROG_CC
++ AC_CANONICAL_HOST
++ 
++ AC_LBL_C_INIT_BEFORE_CC(V_CCOPT, V_INCLS)
+diff --git a/meta-oe/recipes-support/tcpdump/tcpdump-4.1.1/ipv6-cross.patch b/meta-oe/recipes-support/tcpdump/tcpdump-4.1.1/ipv6-cross.patch
+new file mode 100644
+index 0000000..7eba2c5
+--- /dev/null
++++ b/meta-oe/recipes-support/tcpdump/tcpdump-4.1.1/ipv6-cross.patch
+@@ -0,0 +1,41 @@
++---
++ configure.in |   12 ++++++++----
++ 1 files changed, 8 insertions(+), 4 deletions(-)
++
++diff --git a/configure.in b/configure.in
++index eb3e5e8..11257c9 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -181,8 +181,9 @@ yes)   AC_MSG_RESULT(yes)
++        ipv6=no
++        ;;
++   esac ],
++-
++-  AC_TRY_RUN([ /* AF_INET6 available check */
+++[
+++  if test x"$cross_compiling" != "xyes"; then
+++    AC_TRY_RUN([ /* AF_INET6 avalable check */
 + #include <sys/types.h>
-++#include <sys/stat.h>
-+ #include <stdio.h>
-+ #include <string.h>
-+ #include <errno.h>
-+diff -uNr nfs-utils-1.1.2.orig//utils/mount/network.c nfs-utils-1.1.2/utils/mount/network.c
-+--- nfs-utils-1.1.2.orig//utils/mount/network.c	2008-03-14 16:46:29.000000000 +0100
-++++ nfs-utils-1.1.2/utils/mount/network.c	2010-05-26 10:31:35.000000000 +0200
-+@@ -37,6 +37,7 @@
-+ #include <rpc/pmap_prot.h>
-+ #include <rpc/pmap_clnt.h>
 + #include <sys/socket.h>
-++#include <sys/stat.h>
++ main()
++@@ -201,7 +202,10 @@ main()
++   ipv6=no],
++ [ AC_MSG_RESULT(no)
++   ipv6=no]
++-))
+++  )
+++else
+++  AC_MSG_FAILURE([Unable to check for ipv6 when crosscompiling, please specify.])
+++fi])
 + 
-+ #include "xcommon.h"
-+ #include "mount.h"
-diff --git a/meta-oe/recipes-support/nfs-utils/nfs-utils-1.1.2/nfs-utils-tools-unset-cflags.patch b/meta-oe/recipes-support/nfs-utils/nfs-utils-1.1.2/nfs-utils-tools-unset-cflags.patch
++ ipv6type=unknown
++ ipv6lib=none
++@@ -316,7 +320,7 @@ if test "$ipv6" = "yes" -a "$ipv6lib" != "none"; then
++ fi
++ 
++ 
++-if test "$ipv6" = "yes"; then
+++if test x"$cross_compiling" != "xyes" -a "$ipv6" = "yes"; then
++ 	#
++ 	# XXX - on Tru64 UNIX 5.1, there is no "getaddrinfo()"
++ 	# function in libc; there are "ngetaddrinfo()" and
+diff --git a/meta-oe/recipes-support/tcpdump/tcpdump-4.1.1/tcpdump_configure_no_-O2.patch b/meta-oe/recipes-support/tcpdump/tcpdump-4.1.1/tcpdump_configure_no_-O2.patch
 new file mode 100644
-index 0000000..16bdebf
+index 0000000..7929da5
 --- /dev/null
-+++ b/meta-oe/recipes-support/nfs-utils/nfs-utils-1.1.2/nfs-utils-tools-unset-cflags.patch
-@@ -0,0 +1,92 @@
-+Index: nfs-utils-1.1.2/tools/Makefile.am
-+===================================================================
-+--- nfs-utils-1.1.2.orig/tools/Makefile.am	2008-03-14 08:46:29.000000000 -0700
-++++ nfs-utils-1.1.2/tools/Makefile.am	2009-03-04 01:58:50.000000000 -0800
-+@@ -5,7 +5,10 @@
-+ if CONFIG_RPCGEN
-+ OPTDIRS += rpcgen
-+ endif
-+-
-++CFLAGS=$(CFLAGS_FOR_BUILD)
-++CPPFLAGS=$(CPPFLAGS_FOR_BUILD)
-++CXXFLAGS=$(CXXFLAGS_FOR_BUILD)
-++LDFLAGS=$(LDFLAGS_FOR_BUILD)
-+ SUBDIRS = locktest rpcdebug nlmtest $(OPTDIRS)
-+ 
-+ MAINTAINERCLEANFILES = Makefile.in
-+Index: nfs-utils-1.1.2/tools/locktest/Makefile.am
-+===================================================================
-+--- nfs-utils-1.1.2.orig/tools/locktest/Makefile.am	2008-03-14 08:46:29.000000000 -0700
-++++ nfs-utils-1.1.2/tools/locktest/Makefile.am	2009-03-04 01:58:50.000000000 -0800
-+@@ -1,12 +1,13 @@
-+ ## Process this file with automake to produce Makefile.in
-+ 
-+ CC=$(CC_FOR_BUILD)
-++CFLAGS=$(CFLAGS_FOR_BUILD)
-++CPPFLAGS=$(CPPFLAGS_FOR_BUILD)
-++CXXFLAGS=$(CXXFLAGS_FOR_BUILD)
-++LDFLAGS=$(LDFLAGS_FOR_BUILD)
-+ LIBTOOL = @LIBTOOL@ --tag=CC
-+ 
-+ noinst_PROGRAMS = testlk
-+ testlk_SOURCES = testlk.c
-+-testlk_CFLAGS=$(CFLAGS_FOR_BUILD)
-+-testlk_CPPFLAGS=$(CPPFLAGS_FOR_BUILD)
-+-testlk_LDFLAGS=$(LDFLAGS_FOR_BUILD)
-+ 
-+ MAINTAINERCLEANFILES = Makefile.in
-+Index: nfs-utils-1.1.2/tools/nlmtest/Makefile.am
-+===================================================================
-+--- nfs-utils-1.1.2.orig/tools/nlmtest/Makefile.am	2008-03-14 08:46:29.000000000 -0700
-++++ nfs-utils-1.1.2/tools/nlmtest/Makefile.am	2009-03-04 01:58:50.000000000 -0800
-+@@ -1,5 +1,8 @@
-+ ## Process this file with automake to produce Makefile.in
-+-
-++CFLAGS=$(CFLAGS_FOR_BUILD)
-++CPPFLAGS=$(CPPFLAGS_FOR_BUILD)
-++CXXFLAGS=$(CXXFLAGS_FOR_BUILD)
-++LDFLAGS=$(LDFLAGS_FOR_BUILD)
-+ EXTRA_DIST = \
-+ 	README \
-+ 	host.h \
-+Index: nfs-utils-1.1.2/tools/rpcgen/Makefile.am
-+===================================================================
-+--- nfs-utils-1.1.2.orig/tools/rpcgen/Makefile.am	2008-03-14 08:46:29.000000000 -0700
-++++ nfs-utils-1.1.2/tools/rpcgen/Makefile.am	2009-03-04 01:58:50.000000000 -0800
-+@@ -1,6 +1,10 @@
-+ ## Process this file with automake to produce Makefile.in
-+ 
-+ CC=$(CC_FOR_BUILD)
-++CFLAGS=$(CFLAGS_FOR_BUILD)
-++CPPFLAGS=$(CPPFLAGS_FOR_BUILD)
-++CXXFLAGS=$(CXXFLAGS_FOR_BUILD)
-++LDFLAGS=$(LDFLAGS_FOR_BUILD)
-+ LIBTOOL = @LIBTOOL@ --tag=CC
-+ 
-+ noinst_PROGRAMS = rpcgen
-+@@ -9,10 +13,6 @@
-+ 		 rpc_util.c rpc_sample.c rpc_output.h rpc_parse.h \
-+ 		 rpc_scan.h rpc_util.h
-+ 
-+-rpcgen_CFLAGS=$(CFLAGS_FOR_BUILD)
-+-rpcgen_CPPLAGS=$(CPPFLAGS_FOR_BUILD)
-+-rpcgen_LDFLAGS=$(LDFLAGS_FOR_BUILD)
-+-
-+ MAINTAINERCLEANFILES = Makefile.in
-+ 
-+ EXTRA_DIST = rpcgen.new.1
-+Index: nfs-utils-1.1.2/tools/rpcdebug/Makefile.am
-+===================================================================
-+--- nfs-utils-1.1.2.orig/tools/rpcdebug/Makefile.am	2009-03-04 02:01:41.000000000 -0800
-++++ nfs-utils-1.1.2/tools/rpcdebug/Makefile.am	2009-03-04 02:02:42.000000000 -0800
-+@@ -1,6 +1,10 @@
-+ ## Process this file with automake to produce Makefile.in
-+ 
-+ CC=$(CC_FOR_BUILD)
-++CFLAGS=$(CFLAGS_FOR_BUILD)
-++CPPFLAGS=$(CPPFLAGS_FOR_BUILD)
-++CXXFLAGS=$(CXXFLAGS_FOR_BUILD)
-++LDFLAGS=$(LDFLAGS_FOR_BUILD)
-+ LIBTOOL = @LIBTOOL@ --tag=CC
-+ 
-+ man8_MANS = rpcdebug.man
-diff --git a/meta-oe/recipes-support/nfs-utils/nfs-utils-1.1.2/nfs-utils-uclibc-compile.patch b/meta-oe/recipes-support/nfs-utils/nfs-utils-1.1.2/nfs-utils-uclibc-compile.patch
-new file mode 100644
-index 0000000..f242ead
---- /dev/null
-+++ b/meta-oe/recipes-support/nfs-utils/nfs-utils-1.1.2/nfs-utils-uclibc-compile.patch
-@@ -0,0 +1,49 @@
-+--- a/support/nfs/svc_socket.c.org	2007-05-11 03:40:57 +0000
-++++ b/support/nfs/svc_socket.c	2007-10-24 15:20:05 +0000
-+@@ -67,8 +67,13 @@
-+   memset (&addr, 0, sizeof (addr));
-+   addr.sin_family = AF_INET;
-+ 
-++#ifdef __UCLIBC__
-++  rpcp = getrpcbynumber (number);
-++  ret = 0;
-++#else
-+   ret = getrpcbynumber_r (number, &rpcbuf, rpcdata, sizeof rpcdata,
-+ 			  &rpcp);
-++#endif
-+   if (ret == 0 && rpcp != NULL)
-+     {
-+       /* First try name.  */
-+--- a/utils/mountd/cache.c.org	2007-05-11 03:40:57 +0000
-++++ b/utils/mountd/cache.c	2007-10-24 15:21:53 +0000
-+@@ -131,6 +131,7 @@
-+ 	pw = getpwuid(uid);
-+ 	if (!pw)
-+ 		rv = -1;
-++#ifndef __UCLIBC__
-+ 	else {
-+ 		rv = getgrouplist(pw->pw_name, pw->pw_gid, groups, &ngroups);
-+ 		if (rv == -1 && ngroups >= 100) {
-+@@ -142,6 +143,7 @@
-+ 						  groups, &ngroups);
-+ 		}
-+ 	}
-++#endif
-+ 	qword_printint(f, uid);
-+ 	qword_printint(f, time(0)+30*60);
-+ 	if (rv >= 0) {
-+--- a/tools/rpcgen/rpc_cout.c.org	2007-05-11 03:40:57 +0000
-++++ b/tools/rpcgen/rpc_cout.c	2007-10-24 15:23:17 +0000
-+@@ -647,7 +647,11 @@
-+ 	int freed=0;
-+ 
-+ 	if(flag == PUT)
-++#ifdef __UCLIBC__
-++		f_print(fout,"\t\t IXDR_PUT_");
-++#else
-+ 		f_print(fout,"\t\t (void) IXDR_PUT_");
-++#endif
-+ 	else    
-+ 		if(rel== REL_ALIAS)
-+ 			f_print(fout,"\t\t objp->%s = IXDR_GET_",decl->name);
++++ b/meta-oe/recipes-support/tcpdump/tcpdump-4.1.1/tcpdump_configure_no_-O2.patch
+@@ -0,0 +1,42 @@
++---
++ configure |    8 ++++----
++ 1 files changed, 4 insertions(+), 4 deletions(-)
 +
-diff --git a/meta-oe/recipes-support/nfs-utils/nfs-utils-1.1.2/nfsserver b/meta-oe/recipes-support/nfs-utils/nfs-utils-1.1.2/nfsserver
++diff --git a/configure b/configure
++index cb51d19..73d51af 100755
++--- a/configure
+++++ b/configure
++@@ -2691,13 +2691,13 @@ if test "$ac_test_CFLAGS" = set; then
++   CFLAGS=$ac_save_CFLAGS
++ elif test $ac_cv_prog_cc_g = yes; then
++   if test "$GCC" = yes; then
++-    CFLAGS="-g -O2"
+++    CFLAGS="-g"
++   else
++     CFLAGS="-g"
++   fi
++ else
++   if test "$GCC" = yes; then
++-    CFLAGS="-O2"
+++    CFLAGS=""
++   else
++     CFLAGS=
++   fi
++@@ -2830,7 +2830,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
++     if test "$GCC" = yes ; then
++ 	    if test "$SHLICC2" = yes ; then
++ 		    ac_cv_lbl_gcc_vers=2
++-		    V_CCOPT="-O2"
+++		    V_CCOPT=""
++ 	    else
++ 		    { echo "$as_me:$LINENO: checking gcc version" >&5
++ echo $ECHO_N "checking gcc version... $ECHO_C" >&6; }
++@@ -2847,7 +2847,7 @@ fi
++ 		    { echo "$as_me:$LINENO: result: $ac_cv_lbl_gcc_vers" >&5
++ echo "${ECHO_T}$ac_cv_lbl_gcc_vers" >&6; }
++ 		    if test $ac_cv_lbl_gcc_vers -gt 1 ; then
++-			    V_CCOPT="-O2"
+++			    V_CCOPT=""
++ 		    fi
++ 	    fi
++     else
+diff --git a/meta-oe/recipes-support/tcpdump/tcpdump_4.1.1.bb b/meta-oe/recipes-support/tcpdump/tcpdump_4.1.1.bb
 new file mode 100644
-index 0000000..b4c7662
+index 0000000..109bc77
 --- /dev/null
-+++ b/meta-oe/recipes-support/nfs-utils/nfs-utils-1.1.2/nfsserver
-@@ -0,0 +1,149 @@
-+#!/bin/sh
-+#
-+# Startup script for nfs-utils
-+#
-+#
-+# The environment variable NFS_SERVERS may be set in /etc/default/nfsd
-+# Other control variables may be overridden here too
-+test -r /etc/default/nfsd && . /etc/default/nfsd
-+#
-+# Location of executables:
-+test -x "$NFS_MOUNTD" || NFS_MOUNTD=/usr/sbin/rpc.mountd
-+test -x "$NFS_NFSD" || NFS_NFSD=/usr/sbin/rpc.nfsd
-+test -x "$NFS_STATD" || NFS_STATD=/usr/sbin/rpc.statd
-+#
-+# The user mode program must also exist (it just starts the kernel
-+# threads using the kernel module code).
-+test -x "$NFS_MOUNTD" || exit 0
-+test -x "$NFS_NFSD" || exit 0
-+#
-+# Default is 8 threads, value is settable between 1 and the truely
-+# ridiculous 99
-+test "$NFS_SERVERS" -gt 0 && test "$NFS_SERVERS" -lt 100 || NFS_SERVERS=8
-+#
-+# The default state directory is /var/lib/nfs
-+test -n "$NFS_STATEDIR" || NFS_STATEDIR=/var/lib/nfs
-+#
-+#----------------------------------------------------------------------
-+# Startup and shutdown functions.
-+#  Actual startup/shutdown is at the end of this file.
-+#directories
-+create_directories(){
-+	echo -n 'creating NFS state directory: '
-+	mkdir -p "$NFS_STATEDIR"
-+	(	cd "$NFS_STATEDIR"
-+		umask 077
-+		mkdir -p sm sm.bak
-+		test -w sm/state || {
-+			rm -f sm/state
-+			:>sm/state
-+		}
-+		umask 022
-+		for file in xtab etab smtab rmtab
-+		do
-+			test -w "$file" || {
-+				rm -f "$file"
-+				:>"$file"
-+			}
-+		done
-+	)
-+	echo done
-+}
-+#mountd
-+start_mountd(){
-+	echo -n 'starting mountd: '
-+	start-stop-daemon --start --exec "$NFS_MOUNTD" -- "-f /etc/exports $@"
-+	echo done
-+}
-+stop_mountd(){
-+	echo -n 'stopping mountd: '
-+	start-stop-daemon --stop --quiet --exec "$NFS_MOUNTD"
-+	echo done
-+}
-+#
-+#nfsd
-+start_nfsd(){
-+	echo -n "starting $1 nfsd kernel threads: "
-+	start-stop-daemon --start --exec "$NFS_NFSD" -- "$@"
-+	echo done
-+}
-+delay_nfsd(){
-+	for delay in 0 1 2 3 4 5 6 7 8 9 
-+	do
-+		if pidof nfsd >/dev/null
-+		then
-+			echo -n .
-+			sleep 1
-+		else
-+			return 0
-+		fi
-+	done
-+	return 1
-+}
-+stop_nfsd(){
-+	# WARNING: this kills any process with the executable
-+	# name 'nfsd'.
-+	echo -n 'stopping nfsd: '
-+	start-stop-daemon --stop --quiet --signal 1 --name nfsd
-+	if delay_nfsd || {
-+		echo failed
-+		echo ' using signal 9: '
-+		start-stop-daemon --stop --quiet --signal 9 --name nfsd
-+		delay_nfsd
-+	}
-+	then
-+		echo done
-+		# This will remove, recursively, dependencies
-+		echo -n 'removing nfsd kernel module: '
-+		if modprobe -r nfsd
-+		then
-+			echo done
-+		else
-+			echo failed
-+		fi
-+	else
-+		echo failed
-+	fi
-+}
-+
-+#statd
-+start_statd(){
-+	echo -n "starting statd: "
-+	start-stop-daemon --start --exec "$NFS_STATD"
-+	echo done
-+}
-+stop_statd(){
-+	# WARNING: this kills any process with the executable
-+	# name 'statd'.
-+	echo -n 'stopping statd: '
-+	start-stop-daemon --stop --quiet --signal 1 --name statd
-+	echo done
-+}
-+#----------------------------------------------------------------------
-+#
-+# supported options:
-+#  start
-+#  stop
-+#  reload: reloads the exports file
-+#  restart: stops and starts mountd
-+#FIXME: need to create the /var/lib/nfs/... directories
-+case "$1" in
-+start)	create_directories
-+	start_nfsd "$NFS_SERVERS"
-+	start_mountd
-+	start_statd
-+	test -r /etc/exports && exportfs -a;;
-+stop)	exportfs -ua
-+	stop_statd
-+	stop_mountd
-+	stop_nfsd;;
-+reload)	test -r /etc/exports && exportfs -r;;
-+restart)exportfs -ua
-+	stop_mountd
-+	stop_statd
-+	# restart does not restart the kernel threads,
-+	# only the user mode processes
-+	start_mountd
-+	start_statd
-+	test -r /etc/exports && exportfs -a;;
-+esac
-diff --git a/meta-oe/recipes-support/nfs-utils/nfs-utils_1.1.2.bb b/meta-oe/recipes-support/nfs-utils/nfs-utils_1.1.2.bb
-new file mode 100644
-index 0000000..9510b30
---- /dev/null
-+++ b/meta-oe/recipes-support/nfs-utils/nfs-utils_1.1.2.bb
-@@ -0,0 +1,54 @@
-+DESCRIPTION = "userspace utilities for kernel nfs"
-+PRIORITY = "optional"
++++ b/meta-oe/recipes-support/tcpdump/tcpdump_4.1.1.bb
+@@ -0,0 +1,42 @@
++DESCRIPTION = "A sophisticated network protocol analyzer"
++HOMEPAGE = "http://www.tcpdump.org/"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=1d4b0366557951c84a94fabe3529f867"
 +SECTION = "console/network"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
++PRIORITY = "optional"
++DEPENDS = "libpcap"
++PR = "r1"
 +
-+PR = "r9"
++SRC_URI = " \
++	http://www.tcpdump.org/release/tcpdump-${PV}.tar.gz \
++	file://tcpdump_configure_no_-O2.patch \
++	file://0001-minimal-IEEE802.15.4-allowed.patch \
++	file://ipv6-cross.patch \
++	file://configure.patch \
++"
 +
-+DEPENDS = "util-linux tcp-wrappers libevent"
++inherit autotools
++# ac_cv_linux_vers=${ac_cv_linux_vers=2}
 +
-+SRC_URI = "${SOURCEFORGE_MIRROR}/nfs/nfs-utils-${PV}.tar.gz \
-+	file://nfs-utils-tools-unset-cflags.patch \
-+	file://nfs-utils-uclibc-compile.patch \
-+	file://nfs-utils-S_ISREG-missing-include.patch \
-+	file://nfsserver \
-+   "
++EXTRA_OECONF = "--without-crypto \
++		${@base_contains('DISTRO_FEATURES', 'ipv6', '--enable-ipv6', '--disable-ipv6', d)}"
 +
-+S = "${WORKDIR}/nfs-utils-${PV}/"
-+
-+PARALLEL_MAKE = ""
-+
-+# Only kernel-module-nfsd is required here (but can be built-in)  - the nfsd module will
-+# pull in the remainder of the dependencies.
-+RDEPENDS_${PN} = "portmap"
-+RRECOMMENDS_${PN} = "kernel-module-nfsd"
-+
-+INITSCRIPT_NAME = "nfsserver"
-+# The server has no dependencies at the user run levels, so just put
-+# it in at the default levels.  It must be terminated before the network
-+# in the shutdown levels, but that works fine.
-+INITSCRIPT_PARAMS = "defaults"
-+
-+inherit autotools update-rc.d
-+
-+EXTRA_OECONF = "--with-statduser=nobody \
-+		--enable-nfsv3 \
-+		--disable-nfsv4 \
-+		--disable-gss \
-+		--with-statedir=/var/lib/nfs"
-+
-+INHIBIT_AUTO_STAGE = "1"
++do_configure() {
++	# AC_CHECK_LIB(dlpi.. was looking to host /lib
++	sed -i 's:-L/lib:-L${STAGING_LIBDIR}:g' ./configure.in
++        
++	gnu-configize
++	autoconf
++	oe_runconf
++	sed -i 's:/usr/lib:${STAGING_LIBDIR}:' ./Makefile
++	sed -i 's:/usr/include:${STAGING_INCDIR}:' ./Makefile
++}
 +
 +do_install_append() {
-+	install -d ${D}${sysconfdir}/init.d
-+	install -m 0755 ${WORKDIR}/nfsserver ${D}${sysconfdir}/init.d/nfsserver
-+
-+	rm ${D}${sbindir}/rpcdebug
++	# tcpdump 4.0.0 installs a copy to /usr/sbin/tcpdump.4.0.0
++	rm -f ${D}${sbindir}/tcpdump.${PV}
 +}
 +
-+PACKAGES =+ "nfs-utils-client"
-+FILES_nfs-utils-client = "${base_sbindir}/*mount.nfs*"
++SRC_URI[md5sum] = "d0dd58bbd6cd36795e05c6f1f74420b0"
++SRC_URI[sha256sum] = "e6cd4bbd61ec7adbb61ba8352c4b4734f67b8caaa845d88cb826bc0b9f1e7f0a"
 +
-+SRC_URI[md5sum] = "76ee9274c2b867839427eba91b327f03"
-+SRC_URI[sha256sum] = "1d09b1c133e4eed9d2df07ead4eba813e6993875c39e66d7b4081287029d4033"
 -- 
 1.7.5.rc3
 
