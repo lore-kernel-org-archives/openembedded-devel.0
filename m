@@ -1,39 +1,39 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QQlY3-0007YZ-9e
+	(envelope-from <martin.jansa@gmail.com>) id 1QQlY3-0007aA-HD
 	for openembedded-devel@lists.openembedded.org;
 	Sun, 29 May 2011 21:21:15 +0200
-Received: by mail-fx0-f47.google.com with SMTP id 19so2510774fxm.6
+Received: by mail-bw0-f47.google.com with SMTP id 5so2753022bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 29 May 2011 12:18:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
 	:in-reply-to:references:in-reply-to:references;
-	bh=NMmLxnYjNiYtkeo9AJulYJtqpqbCJwSI9tw+gN5KeKk=;
-	b=ITJHwfPxyezVM9kP6l6XQfPugWsa7hdNV0mFhf6rr79Fy7dnszXNexxG0zZNnKSasH
-	o/ysa/3dh6wiKw/hBCUAKhyzow/Y85MFOeH0L9DTgWrv/506lqJj7C+bE2p3iwQWsISl
-	5IHMHPpHM36RQ8mwTbp7I//qwibR3lK9VMS2g=
+	bh=6hB0iNnmAoFIUr8lnHAS2qqk0QGYXo8Rw1IUFKulbno=;
+	b=WaVcjiwcTwO2Fs1UIdBQSxYMp/Uzqot/eJ07YJCUeBvUP9Sdy0Z76FAK4TJ7r6N270
+	ucyWLzWbHDMqLGuyddDrW6E57QcHm/BmGjq4fAByQRzAE3ijO4PEOx0Vk4npUAJeO8P0
+	XWUoDHTw52o6rwhXSXGwjEm5qQBhIT0oNLM9s=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=d1Vv3dNVxUM02CEUc971RvPKJ2iXA4n3thcdZHR7hj/Csx/8el++TqauE5BRcs89jy
-	AhWq3fSS56A/ULUZZIw/m0ZXnE4afKS6vaKNLT1XHBPRnUdtoKcExGp0MNhMOFF/4/Z0
-	nNl65JDQ3Hjpls26BlLVrkg0dSQWsnjX4gIQo=
-Received: by 10.223.5.212 with SMTP id 20mr4734913faw.40.1306696690242;
-	Sun, 29 May 2011 12:18:10 -0700 (PDT)
+	b=mARXa9SyYIL+wjGfZOe/CdF6OtGgrA12n18I2YtFKo55c6F86JkkXz2DKYOaGqjA+u
+	3HFteu5SQk/mFU59EVT7cI6W4W4sH/TK5f61WKD/z0Gmb28Lh5dAJdQ4g6kbDTKyfI2n
+	SKxjgBG8UEymsXa5oYfTwpOz4JULZJIDkyyK0=
+Received: by 10.204.233.15 with SMTP id jw15mr1741821bkb.48.1306696681709;
+	Sun, 29 May 2011 12:18:01 -0700 (PDT)
 Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id q10sm498437fan.8.2011.05.29.12.18.09
+	by mx.google.com with ESMTPS id a28sm339912fak.3.2011.05.29.12.18.00
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 29 May 2011 12:18:09 -0700 (PDT)
+	Sun, 29 May 2011 12:18:01 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 May 2011 21:17:19 +0200
-Message-Id: <5883891cc16ab0372b9c16838da7bf6020478b8d.1306696348.git.Martin.Jansa@gmail.com>
+Date: Sun, 29 May 2011 21:17:17 +0200
+Message-Id: <ef5ab6f3d19ef468f63e358f6750bc40b8f8a6a9.1306696348.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.5.rc3
 In-Reply-To: <e6bbc59f3f64c410233cb840174a8972d4ac1664.1306696348.git.Martin.Jansa@gmail.com>
 References: <e6bbc59f3f64c410233cb840174a8972d4ac1664.1306696348.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1306696348.git.Martin.Jansa@gmail.com>
 References: <cover.1306696348.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 09/16] gd: import from OE rev d4f0211e2078d5033ae0dee74664de5520d8392d
+Subject: [meta-oe][PATCH 07/16] foxtrotgps: import from OE rev d4f0211e2078d5033ae0dee74664de5520d8392d
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,40 +51,32 @@ X-List-Received-Date: Sun, 29 May 2011 19:21:15 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb |   24 +++++++++++++++++++++
- 1 files changed, 24 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb
+ .../recipes-support/foxtrotgps/foxtrotgps_1.0.1.bb |   16 ++++++++++++++++
+ 1 files changed, 16 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/foxtrotgps/foxtrotgps_1.0.1.bb
 
-diff --git a/meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb b/meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb
+diff --git a/meta-oe/recipes-support/foxtrotgps/foxtrotgps_1.0.1.bb b/meta-oe/recipes-support/foxtrotgps/foxtrotgps_1.0.1.bb
 new file mode 100644
-index 0000000..7660ad9
+index 0000000..8b685ac
 --- /dev/null
-+++ b/meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb
-@@ -0,0 +1,24 @@
-+SECTION = "libs"
-+LICENSE = "GD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=c97638cafd3581eb87abd37332137669"
-+DESCRIPTION = "gd is a library used to create PNG, JPEG, or WBMP images."
-+DEPENDS = "freetype libpng jpeg zlib"
-+PR = "r4"
++++ b/meta-oe/recipes-support/foxtrotgps/foxtrotgps_1.0.1.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "FoxtrotGPS is a map and GPS application using OpenStreetMap"
++AUTHOR = "Joshua Judson Rosen <rozzin@geekspace.com>"
++HOMEPAGE = "http://www.foxtrotgps.org/"
++SECTION = "x11/applications"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
++PRIORITY = "optional"
++DEPENDS = "curl gtk+ gconf libglade sqlite3 libexif gpsd"
 +
-+SRC_URI = "http://www.libgd.org/releases/gd-2.0.36RC1.tar.gz"
-+SRC_URI[md5sum] = "39ac48e6d5e0012a3bd2248a0102f209"
-+SRC_URI[sha256sum] = "dd7c1795271221b9237769b96b8cec7fbdc5db7b8954d864ead51fc1296a6ac8"
++SRC_URI = "http://www.foxtrotgps.org/releases/${P}.tar.gz"
++SRC_URI[md5sum] = "982d14cdb0439cc4d6aa6cefc232124d"
++SRC_URI[sha256sum] = "059158fd8e61137e2e6d6e01685add7fb85cce8483faa99efb01187f2ba50841"
 +
-+S = "${WORKDIR}/gd-2.0.36RC1"
++inherit autotools pkgconfig
 +
-+inherit autotools binconfig gettext
-+
-+EXTRA_OECONF += " --with-zlib=${STAGING_LIBDIR}/.. \
-+                  --with-png=${STAGING_LIBDIR}/.. \
-+                  --with-jpeg=${STAGING_LIBDIR}/.. \
-+                  --with-freetype \
-+                  --without-fontconfig \
-+                  --without-xpm \
-+                  --without-x"
-+
-+EXTRA_OEMAKE = 'LDFLAGS="${LDFLAGS}"'
++RRECOMMENDS_${PN} = "gpsd"
 -- 
 1.7.5.rc3
 
