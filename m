@@ -1,39 +1,39 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QQo20-00039A-BS
+	(envelope-from <martin.jansa@gmail.com>) id 1QQo27-00039A-57
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 May 2011 00:00:20 +0200
+	Mon, 30 May 2011 00:00:27 +0200
 Received: by mail-fx0-f47.google.com with SMTP id 19so2550305fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 May 2011 14:57:15 -0700 (PDT)
+	Sun, 29 May 2011 14:57:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
 	:in-reply-to:references:in-reply-to:references;
-	bh=3rdJF3GPy4u/pt/XvBr044899/dHo7n0uEkdCgQpcTQ=;
-	b=Ju1Gonn2XWSggkeXqc0sKakv0cgJ9B643SamneRKAddp3vX609PwkkN1VtB2bPRrAw
-	oselhpThRUaHCsgmkg1u7lBnH0FphTgt4qJP6pGQl+H24DfFF0MNVDUmKGVIGpipinzY
-	MHw7qT07bfYrYUkDeS4vTAfoPuGco3+aQwW88=
+	bh=bIQyIHINhxaLsk3VQZT9uDiVZpryss20rHavnJ86zMs=;
+	b=mx061hIdT73ulM1qRYPaQUOX3535mmZiNfeoekORxOKmlz+PBDo7D29ynRfeJyzn5X
+	EruE9TOq/8zvoyUEen2hqtsv0mdtqy0J4sVrQdzt9yIuoFyeKff+DjNbrPt0Z8IJqrx+
+	fc5EwQ3grLZBpgF3TM4Qv7qifKCuzt2xk9VRE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=OObdDSF6+8Qq9soQ3/cH0284YBxheFfr7EgPVuPHON0tjzHzvu+eAMnzEZZpB5Q/y+
-	HP6K3fy/DDXqNZh2impF6758VL/r7hTx6YWSD2U28JWlFvRU8l49uDWuDMwbqhAMHkJ3
-	GxYPEyo8Bh6+QG15JYD9f00/ly4tC7ixupDEY=
-Received: by 10.223.97.142 with SMTP id l14mr4763251fan.137.1306706235170;
-	Sun, 29 May 2011 14:57:15 -0700 (PDT)
+	b=bJzxCuiIn3shH11DDPTNnd4BaFH6DxcNQJb6KiFSipE2dwbKROCHlvkIZ8EMLxcYKG
+	VbYLsx8dOFao/Lgyl4f20rTjf2BQ7X+8yJuTBk1ybvoIfGeRjQPlA4p4s0jzFZx9ju7F
+	hXOUjnhHjECYfsb0AYN9eGli0nX958mNNK/3s=
+Received: by 10.223.40.85 with SMTP id j21mr4851713fae.22.1306706241967;
+	Sun, 29 May 2011 14:57:21 -0700 (PDT)
 Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id x15sm526849fah.22.2011.05.29.14.57.14
+	by mx.google.com with ESMTPS id l26sm526869fam.21.2011.05.29.14.57.20
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 29 May 2011 14:57:14 -0700 (PDT)
+	Sun, 29 May 2011 14:57:21 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 May 2011 23:56:33 +0200
-Message-Id: <d2ba873c63d3ab95c7b9cef09006f1e0d4da6351.1306706130.git.Martin.Jansa@gmail.com>
+Date: Sun, 29 May 2011 23:56:34 +0200
+Message-Id: <1323a6d7b580bb3a75ff14fd752fca88886323f7.1306706130.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.5.rc3
 In-Reply-To: <355a220b55867ef7a2fd485fbc1fcb76c06ef5d1.1306706130.git.Martin.Jansa@gmail.com>
 References: <355a220b55867ef7a2fd485fbc1fcb76c06ef5d1.1306706130.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1306706130.git.Martin.Jansa@gmail.com>
 References: <cover.1306706130.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 08/14] ltrace: import from OE rev d4f0211e2078d5033ae0dee74664de5520d8392d
+Subject: [meta-oe][PATCH 09/14] pxaregs: import from OE rev d4f0211e2078d5033ae0dee74664de5520d8392d
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,334 +47,156 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 May 2011 22:00:20 -0000
+X-List-Received-Date: Sun, 29 May 2011 22:00:27 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-support/ltrace/files/add-sysdep.patch  |   13 +++
- .../ltrace/files/ltrace-compile.patch              |   80 +++++++++++++++++++
- .../files/ltrace-fix-sysdep_h-dependency.patch     |   33 ++++++++
- .../ltrace/files/ltrace-mips-remove-CP.patch       |   12 +++
- .../recipes-support/ltrace/files/ltrace-mips.patch |   36 +++++++++
- .../recipes-support/ltrace/files/ltrace-ppc.patch  |   11 +++
- meta-oe/recipes-support/ltrace/ltrace_0.5.3.bb     |   81 ++++++++++++++++++++
- 7 files changed, 266 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-support/ltrace/files/add-sysdep.patch
- create mode 100644 meta-oe/recipes-support/ltrace/files/ltrace-compile.patch
- create mode 100644 meta-oe/recipes-support/ltrace/files/ltrace-fix-sysdep_h-dependency.patch
- create mode 100644 meta-oe/recipes-support/ltrace/files/ltrace-mips-remove-CP.patch
- create mode 100644 meta-oe/recipes-support/ltrace/files/ltrace-mips.patch
- create mode 100644 meta-oe/recipes-support/ltrace/files/ltrace-ppc.patch
- create mode 100644 meta-oe/recipes-support/ltrace/ltrace_0.5.3.bb
+ .../recipes-support/pxaregs/pxaregs-1.14/Makefile  |    3 ++
+ .../recipes-support/pxaregs/pxaregs-1.14/i2c.patch |   15 ++++++++++++
+ .../pxaregs/pxaregs-1.14/munmap.patch              |   22 +++++++++++++++++
+ .../pxaregs/pxaregs-1.14/serial.patch              |   14 +++++++++++
+ .../recipes-support/pxaregs/pxaregs-1.14/usb.patch |   17 +++++++++++++
+ meta-oe/recipes-support/pxaregs/pxaregs_1.14.bb    |   25 ++++++++++++++++++++
+ 6 files changed, 96 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/pxaregs/pxaregs-1.14/Makefile
+ create mode 100644 meta-oe/recipes-support/pxaregs/pxaregs-1.14/i2c.patch
+ create mode 100644 meta-oe/recipes-support/pxaregs/pxaregs-1.14/munmap.patch
+ create mode 100644 meta-oe/recipes-support/pxaregs/pxaregs-1.14/serial.patch
+ create mode 100644 meta-oe/recipes-support/pxaregs/pxaregs-1.14/usb.patch
+ create mode 100644 meta-oe/recipes-support/pxaregs/pxaregs_1.14.bb
 
-diff --git a/meta-oe/recipes-support/ltrace/files/add-sysdep.patch b/meta-oe/recipes-support/ltrace/files/add-sysdep.patch
+diff --git a/meta-oe/recipes-support/pxaregs/pxaregs-1.14/Makefile b/meta-oe/recipes-support/pxaregs/pxaregs-1.14/Makefile
 new file mode 100644
-index 0000000..1d0432f
+index 0000000..00b7d52
 --- /dev/null
-+++ b/meta-oe/recipes-support/ltrace/files/add-sysdep.patch
-@@ -0,0 +1,13 @@
-+Index: ltrace-0.5.3/Makefile.in
-+===================================================================
-+--- ltrace-0.5.3.orig/Makefile.in	2009-10-23 22:06:08.130304691 -0700
-++++ ltrace-0.5.3/Makefile.in	2009-10-23 22:06:53.160369614 -0700
-+@@ -39,6 +39,8 @@ ltrace:		main.o libltrace.a
-+ libltrace.a: 	sysdeps/sysdep.o $(OBJ)
-+ 		$(AR) rcv $@ $^
-+ 
-++$(OBJ):		sysdeps/sysdep.o
-++
-+ sysdeps/sysdep.o: dummy
-+ 		$(MAKE) -C sysdeps/$(OS)
-+ 
-diff --git a/meta-oe/recipes-support/ltrace/files/ltrace-compile.patch b/meta-oe/recipes-support/ltrace/files/ltrace-compile.patch
++++ b/meta-oe/recipes-support/pxaregs/pxaregs-1.14/Makefile
+@@ -0,0 +1,3 @@
++
++
++all: pxaregs
+diff --git a/meta-oe/recipes-support/pxaregs/pxaregs-1.14/i2c.patch b/meta-oe/recipes-support/pxaregs/pxaregs-1.14/i2c.patch
 new file mode 100644
-index 0000000..4784deb
+index 0000000..36983ec
 --- /dev/null
-+++ b/meta-oe/recipes-support/ltrace/files/ltrace-compile.patch
-@@ -0,0 +1,80 @@
-+Index: ltrace-0.5.3/common.h
++++ b/meta-oe/recipes-support/pxaregs/pxaregs-1.14/i2c.patch
+@@ -0,0 +1,15 @@
++Index: pxaregs-1.14/pxaregs.c
 +===================================================================
-+--- ltrace-0.5.3.orig/common.h	2009-10-23 23:13:45.700282578 -0700
-++++ ltrace-0.5.3/common.h	2009-10-23 23:14:13.550371553 -0700
-+@@ -1,3 +1,5 @@
-++#ifndef COMMON_H
-++#define COMMON_H
-+ #include <sys/types.h>
-+ #include <sys/time.h>
-+ #include <stdio.h>
-+@@ -251,3 +253,5 @@ extern void * sym2addr(Process *, struct
-+ #if 0				/* not yet */
-+ extern int umoven(Process * proc, void * addr, int len, void * laddr);
-+ #endif
-++#endif
-++
-+Index: ltrace-0.5.3/configure
-+===================================================================
-+--- ltrace-0.5.3.orig/configure	2009-10-23 23:13:45.630316494 -0700
-++++ ltrace-0.5.3/configure	2009-10-23 23:13:59.672869527 -0700
-+@@ -30,7 +30,7 @@ int main () {
-+   return cplus_demangle();
-+ }
-+ EOF
-+-if gcc conftest.c -liberty 2>/dev/null
-++if $CC conftest.c -liberty 2>/dev/null
-+ then
-+   HAVE_LIBIBERTY=1
-+   echo "yes"
-+@@ -48,7 +48,7 @@ int main () {
-+   return __cxa_demangle();
-+ }
-+ EOF
-+-if gcc conftest.c -lsupc++ 2>/dev/null
-++if $CC conftest.c -lsupc++ 2>/dev/null
-+ then
-+   HAVE_LIBSUPC__=1
-+   echo "yes"
-+@@ -67,7 +67,7 @@ int main () {
-+   return 0;
-+ }
-+ EOF
-+-if gcc conftest.c 2>/dev/null
-++if $CC conftest.c 2>/dev/null
-+ then
-+   HAVE_ELF_C_READ_MMAP=1
-+   echo "yes"
-+@@ -77,15 +77,12 @@ else
-+ fi
-+ rm -f conftest.c a.out
++--- pxaregs-1.14.orig/pxaregs.c
+++++ pxaregs-1.14/pxaregs.c
++@@ -21,10 +21,6 @@
++ #include <fcntl.h>
++ #include <ctype.h>
 + 
-+-CC=gcc
-+-CPPFLAGS=' -I /usr/include/libelf'
-+ CFLAGS='-g -O2'
-+ LIBS='-lelf -lsupc++ -liberty '
-+-INSTALL='/usr/bin/install -c'
-++INSTALL='install -c'
-+ iquote='-iquote '
-+ iquoteend=''
-+ 
-+-prefix=/usr/local
-+ sysconfdir='${prefix}/etc'
-+ bindir='${prefix}/bin'
-+ mandir='${prefix}/share/man'
-+Index: ltrace-0.5.3/debug.h
-+===================================================================
-+--- ltrace-0.5.3.orig/debug.h	2009-10-23 23:13:45.670276809 -0700
-++++ ltrace-0.5.3/debug.h	2009-10-23 23:14:26.440319785 -0700
-+@@ -1,3 +1,5 @@
-++#ifndef DEBUG_H
-++#define DEBUG_H
-+ #include <features.h>
-+ 
-+ /* debug levels:
-+@@ -14,4 +16,4 @@ void debug_(int level, const char *file,
-+ int xinfdump(long, void *, int);
-+ 
-+ # define debug(level, expr...) debug_(level, __FILE__, __LINE__, expr)
++-#include <linux/i2c.h>
++-#include <linux/i2c-dev.h>
 +-
-++#endif
-diff --git a/meta-oe/recipes-support/ltrace/files/ltrace-fix-sysdep_h-dependency.patch b/meta-oe/recipes-support/ltrace/files/ltrace-fix-sysdep_h-dependency.patch
++-
++ // fd for /dev/mem
++ static int fd = -1;
++ 
+diff --git a/meta-oe/recipes-support/pxaregs/pxaregs-1.14/munmap.patch b/meta-oe/recipes-support/pxaregs/pxaregs-1.14/munmap.patch
 new file mode 100644
-index 0000000..b9e5f7f
+index 0000000..a9c4b95
 --- /dev/null
-+++ b/meta-oe/recipes-support/ltrace/files/ltrace-fix-sysdep_h-dependency.patch
-@@ -0,0 +1,33 @@
-+Index: ltrace-0.5.3/sysdeps/linux-gnu/Makefile
++++ b/meta-oe/recipes-support/pxaregs/pxaregs-1.14/munmap.patch
+@@ -0,0 +1,22 @@
++Index: pxaregs-1.14/pxaregs.c
 +===================================================================
-+--- ltrace-0.5.3.orig/sysdeps/linux-gnu/Makefile
-++++ ltrace-0.5.3/sysdeps/linux-gnu/Makefile
-+@@ -12,7 +12,10 @@ CPPFLAGS	+=	-I$(TOPDIR)/sysdeps/linux-gn
++--- pxaregs-1.14.orig/pxaregs.c
+++++ pxaregs-1.14/pxaregs.c
++@@ -1794,7 +1794,7 @@ static int getmem(u32 addr)
++    regaddr = map + (addr & MAP_MASK);
 + 
-+ OBJ		=	events.o trace.o proc.o breakpoint.o
++    val = *(u32*) regaddr;
++-   munmap(0,MAP_SIZE);
+++   munmap(map,MAP_SIZE);
 + 
-+-all:		sysdep.h signalent.h syscallent.h arch_syscallent.h signalent1.h syscallent1.h ../sysdep.o
-++HDRS		=	sysdep.h signalent.h syscallent.h arch_syscallent.h \
-++			signalent1.h syscallent1.h
++    return val;
++ }
++@@ -1829,7 +1829,7 @@ static void putmem(u32 addr, u32 val)
++    regaddr = map + (addr & MAP_MASK);
++ 
++    *(u32*) regaddr = val;
++-   munmap(0,MAP_SIZE);
+++   munmap(map,MAP_SIZE);
++ }
++ 
++ static u32 lastaddr = 0;
+diff --git a/meta-oe/recipes-support/pxaregs/pxaregs-1.14/serial.patch b/meta-oe/recipes-support/pxaregs/pxaregs-1.14/serial.patch
+new file mode 100644
+index 0000000..0685385
+--- /dev/null
++++ b/meta-oe/recipes-support/pxaregs/pxaregs-1.14/serial.patch
+@@ -0,0 +1,14 @@
++Index: pxaregs-1.14/pxaregs.c
++===================================================================
++--- pxaregs-1.14.orig/pxaregs.c
+++++ pxaregs-1.14/pxaregs.c
++@@ -78,6 +78,9 @@ static struct reg_info regs[] = {
++ { "ISAR",      0x403016A0,  0, 0xffffffff, 'x', "I2C Slave Address Register" },
++ { "ISAR_SA",   0x403016A0,  0, 0x0000007f, 'x', "I2C Slave Address" },
++ 
+++{ "HW_MCR",    0x41600010,  0, 0xffffffff, 'x', "HWUART Modem Control Register" },
+++{ "HW_MSR",    0x41600018,  0, 0xffffffff, 'x', "HWUART Modem Status Register" },
 ++
-++all:		../sysdep.o
++ { "PMCR",      0x40F00000,  0, 0xffffffff, 'x', "Power Manager Control Register (3-23)" },
++ { "PMCR_IDAE", 0x40F00000,  0, 0x00000001, 'd', "PM imprecise data abort abort signal" },
 + 
-+ sysdep.h:	$(ARCH)/arch.h
-+ 		cat $(ARCH)/arch.h > sysdep.h
-+@@ -49,12 +52,14 @@ arch_syscallent.h:
-+ os.o:		$(OBJ)
-+ 		$(CC) -nostdlib -r -o os.o $(OBJ)
+diff --git a/meta-oe/recipes-support/pxaregs/pxaregs-1.14/usb.patch b/meta-oe/recipes-support/pxaregs/pxaregs-1.14/usb.patch
+new file mode 100644
+index 0000000..59f21fe
+--- /dev/null
++++ b/meta-oe/recipes-support/pxaregs/pxaregs-1.14/usb.patch
+@@ -0,0 +1,17 @@
++Index: pxaregs-1.14/pxaregs.c
++===================================================================
++--- pxaregs-1.14.orig/pxaregs.c
+++++ pxaregs-1.14/pxaregs.c
++@@ -78,6 +78,12 @@ static struct reg_info regs[] = {
++ { "ISAR",      0x403016A0,  0, 0xffffffff, 'x', "I2C Slave Address Register" },
++ { "ISAR_SA",   0x403016A0,  0, 0x0000007f, 'x', "I2C Slave Address" },
 + 
-++$(OBJ):		$(HDRS)
+++{ "UP2OCR",    0x40600020,  0, 0xffffffff, 'x', "USB Port 2 Output Control Register" },
+++{ "UP2OCR_SEOS", 0x40600020, 24, 7, 'x', "USB Port 2 Single-Ended Output Select" },
+++{ "UP2OCR_HXOE", 0x40600020, 17, 1, 'x', "USB Port 2 Tranceiver OE" },
+++{ "UP2OCR_HXS",  0x40600020, 16, 1, 'x', "USB Port 2 Tranceiver Output Select" },
+++{ "UP2OCR_IDON", 0x40600020, 10, 1, 'x', "OTG ID Read Enable" },
 ++
-+ $(ARCH)/arch.o:	dummy
-+ 		$(MAKE) -C $(ARCH)
++ { "HW_MCR",    0x41600010,  0, 0xffffffff, 'x', "HWUART Modem Control Register" },
++ { "HW_MSR",    0x41600018,  0, 0xffffffff, 'x', "HWUART Modem Status Register" },
 + 
-+ clean:
-+ 		$(MAKE) -C $(ARCH) clean
-+-		rm -f $(OBJ) sysdep.h signalent.h signalent1.h syscallent.h arch_syscallent.h
-+-		rm -f syscallent1.h os.o sysdep.o ../sysdep.o
-++		rm -f $(HDRS)
-++		rm -f $(OBJ) os.o sysdep.o ../sysdep.o
-+ 
-+ dummy:
-diff --git a/meta-oe/recipes-support/ltrace/files/ltrace-mips-remove-CP.patch b/meta-oe/recipes-support/ltrace/files/ltrace-mips-remove-CP.patch
+diff --git a/meta-oe/recipes-support/pxaregs/pxaregs_1.14.bb b/meta-oe/recipes-support/pxaregs/pxaregs_1.14.bb
 new file mode 100644
-index 0000000..2af193d
+index 0000000..d5a5b4b
 --- /dev/null
-+++ b/meta-oe/recipes-support/ltrace/files/ltrace-mips-remove-CP.patch
-@@ -0,0 +1,12 @@
-+Index: ltrace-0.5.3/sysdeps/linux-gnu/mipsel/trace.c
-+===================================================================
-+--- ltrace-0.5.3.orig/sysdeps/linux-gnu/mipsel/trace.c	2009-10-23 23:15:59.822783128 -0700
-++++ ltrace-0.5.3/sysdeps/linux-gnu/mipsel/trace.c	2009-10-23 23:16:10.441268788 -0700
-+@@ -127,7 +127,6 @@ gimme_arg(enum tof type, Process *proc, 
-+ 			return ret;
-+ 		} else {
-+ 			// If we need this, I think we can look at [sp+16] for arg_num==4.
-+-			CP;
-+ 			return 0;
-+ 		}
-+ 	}
-diff --git a/meta-oe/recipes-support/ltrace/files/ltrace-mips.patch b/meta-oe/recipes-support/ltrace/files/ltrace-mips.patch
-new file mode 100644
-index 0000000..6df5e21
---- /dev/null
-+++ b/meta-oe/recipes-support/ltrace/files/ltrace-mips.patch
-@@ -0,0 +1,36 @@
-+Index: ltrace-0.5.3/sysdeps/linux-gnu/mipsel/plt.c
-+===================================================================
-+--- ltrace-0.5.3.orig/sysdeps/linux-gnu/mipsel/plt.c	2009-10-23 23:25:59.292780574 -0700
-++++ ltrace-0.5.3/sysdeps/linux-gnu/mipsel/plt.c	2009-10-23 23:26:22.671522220 -0700
-+@@ -1,4 +1,4 @@
-+-#include <debug.h>
-++#include "debug.h"
-+ #include <gelf.h>
-+ #include <sys/ptrace.h>
-+ #include "common.h"
-+Index: ltrace-0.5.3/sysdeps/linux-gnu/mipsel/regs.c
-+===================================================================
-+--- ltrace-0.5.3.orig/sysdeps/linux-gnu/mipsel/regs.c	2009-10-23 23:25:59.312777529 -0700
-++++ ltrace-0.5.3/sysdeps/linux-gnu/mipsel/regs.c	2009-10-23 23:26:08.190311896 -0700
-+@@ -4,7 +4,6 @@
-+ #include <sys/types.h>
-+ #include <sys/ptrace.h>
-+ #include <asm/ptrace.h>
-+-#include <linux/user.h>
-+ 
-+ #include "common.h"
-+ #include "mipsel.h"
-+Index: ltrace-0.5.3/handle_event.c
-+===================================================================
-+--- ltrace-0.5.3.orig/handle_event.c	2009-10-23 23:29:48.780274445 -0700
-++++ ltrace-0.5.3/handle_event.c	2009-10-23 23:37:32.260284055 -0700
-+@@ -573,7 +573,8 @@ handle_breakpoint(Event *event) {
-+ 			void *old_addr;
-+ 			struct library_symbol *sym= event->proc->callstack[i].c_un.libfunc;
-+ 			assert(sym);
-+-			old_addr = dict_find_entry(event->proc->breakpoints, sym2addr(event->proc, sym))->addr;
-++			struct Breakpoint *tbp = dict_find_entry(event->proc->breakpoints, sym2addr(event->proc, sym));
-++			old_addr = tbp->addr;
-+ 			addr=sym2addr(event->proc,sym);
-+ 			assert(old_addr !=0 && addr !=0);
-+ 			if(addr != old_addr){
-diff --git a/meta-oe/recipes-support/ltrace/files/ltrace-ppc.patch b/meta-oe/recipes-support/ltrace/files/ltrace-ppc.patch
-new file mode 100644
-index 0000000..d5ea0f0
---- /dev/null
-+++ b/meta-oe/recipes-support/ltrace/files/ltrace-ppc.patch
-@@ -0,0 +1,11 @@
-+Index: ltrace-0.5.3/sysdeps/linux-gnu/ppc/plt.c
-+===================================================================
-+--- ltrace-0.5.3.orig/sysdeps/linux-gnu/ppc/plt.c	2009-11-15 03:46:14.459233772 +0300
-++++ ltrace-0.5.3/sysdeps/linux-gnu/ppc/plt.c	2009-11-15 03:46:25.299232646 +0300
-+@@ -1,5 +1,6 @@
-+ #include <gelf.h>
-+ #include "common.h"
-++#include "ptrace.h"
-+ 
-+ GElf_Addr
-+ arch_plt_sym_val(struct ltelf *lte, size_t ndx, GElf_Rela * rela) {
-diff --git a/meta-oe/recipes-support/ltrace/ltrace_0.5.3.bb b/meta-oe/recipes-support/ltrace/ltrace_0.5.3.bb
-new file mode 100644
-index 0000000..b2f5574
---- /dev/null
-+++ b/meta-oe/recipes-support/ltrace/ltrace_0.5.3.bb
-@@ -0,0 +1,81 @@
-+DESCRIPTION = "ltrace shows runtime library call information for dynamically linked executables."
-+HOMEPAGE = "http://ltrace.alioth.debian.org"
-+SECTION = "devel"
-+DEPENDS = "libelf binutils"
++++ b/meta-oe/recipes-support/pxaregs/pxaregs_1.14.bb
+@@ -0,0 +1,25 @@
++DESCRIPTION = "Tool to display and modify PXA registers at runtime"
 +LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
++LIC_FILES_CHKSUM = "file://pxaregs.c;endline=12;md5=2cb6b33300eacdec4d7299bc42533740"
++AUTHOR = "Holger Schurig <hs4233@mail.mn-solutions.de>"
++HOMEPAGE = "http://www.mn-logistik.de/unsupported/pxa250/"
 +
-+PR = "r3"
++SRC_URI = "http://www.mn-logistik.de/unsupported/pxa250/pxaregs.c \
++           file://i2c.patch \
++           file://munmap.patch \
++           file://serial.patch \
++           file://usb.patch "
 +
-+# ltrace is not ported to sh3/sh4 targets at this time
-+COMPATIBLE_TARGET_SYS = (?!sh[34])
-+
-+SRC_URI = "\
-+  ${DEBIAN_MIRROR}/main/l/ltrace/ltrace_${PV}.orig.tar.gz;name=archive \
-+  ${DEBIAN_MIRROR}/main/l/ltrace/ltrace_${PV}-2.diff.gz;name=patch \
-+  file://add-sysdep.patch \
-+  file://ltrace-compile.patch \
-+  file://ltrace-mips-remove-CP.patch \
-+  file://ltrace-mips.patch \
-+  file://ltrace-ppc.patch \
-+  file://ltrace-fix-sysdep_h-dependency.patch \
-+"
-+inherit autotools
-+
-+export TARGET_CFLAGS = "${SELECTED_OPTIMIZATION} -isystem ${STAGING_INCDIR}"
-+TARGET_CC_ARCH += "${LDFLAGS}"
-+
-+do_configure_prepend() {
-+	case ${TARGET_ARCH} in
-+		arm*)  ln -sf ./linux-gnu sysdeps/linux-gnueabi ;;
-+		mips*)  ln -sf ./mipsel sysdeps/linux-gnu/mips ;;
-+	esac
-+	sed -e 's:uname -m:echo @HOST_CPU@:' \
-+		sysdeps/linux-gnu/Makefile > sysdeps/linux-gnu/Makefile.in
-+
-+}
++S = "${WORKDIR}"
 +
 +do_compile() {
-+	case ${TARGET_ARCH} in
-+		alpha*)   LTRACE_ARCH=alpha ;;
-+		arm*)     LTRACE_ARCH=arm ;;
-+		cris*)    LTRACE_ARCH=cris ;;
-+		hppa*)    LTRACE_ARCH=parisc ;;
-+		i*86*)    LTRACE_ARCH=i386 ;;
-+		ia64*)    LTRACE_ARCH=ia64 ;;
-+		mips*)    LTRACE_ARCH=mips ;;
-+		m68k*)    LTRACE_ARCH=m68k ;;
-+		powerpc*) LTRACE_ARCH=ppc ;;
-+		s390*)    LTRACE_ARCH=s390 ;;
-+		sh*)      LTRACE_ARCH=sh ;;
-+		sparc64*) LTRACE_ARCH=sparc64 ;;
-+		sparc*)   LTRACE_ARCH=sparc ;;
-+		x86_64*)  LTRACE_ARCH=x86_64 ;;
-+	esac
-+	oe_runmake LDFLAGS=${TARGET_LDFLAGS} LIBS="-lsupc++ -liberty -Wl,-Bstatic -lelf -Wl,-Bdynamic" ${EXTRA_OEMAKE} ARCH=${LTRACE_ARCH}
++    ${CC} pxaregs.c -o pxaregs ${CFLAGS} ${LDFLAGS}
 +}
 +
 +do_install() {
-+	case ${TARGET_ARCH} in
-+		alpha*)   LTRACE_ARCH=alpha ;;
-+		arm*)     LTRACE_ARCH=arm ;;
-+		cris*)    LTRACE_ARCH=cris ;;
-+		hppa*)    LTRACE_ARCH=parisc ;;
-+		i*86*)    LTRACE_ARCH=i386 ;;
-+		ia64*)    LTRACE_ARCH=ia64 ;;
-+		mips*)    LTRACE_ARCH=mips ;;
-+		m68k*)    LTRACE_ARCH=m68k ;;
-+		powerpc*) LTRACE_ARCH=ppc ;;
-+		s390*)    LTRACE_ARCH=s390 ;;
-+		sh*)      LTRACE_ARCH=sh ;;
-+		sparc64*) LTRACE_ARCH=sparc64 ;;
-+		sparc*)   LTRACE_ARCH=sparc ;;
-+		x86_64*)  LTRACE_ARCH=x86_64 ;;
-+	esac
-+	oe_runmake install ${EXTRA_OEMAKE} ARCH=${LTRACE_ARCH} DESTDIR=${D}
++	install -d ${D}${sbindir}/
++	install -m 0755 pxaregs ${D}${sbindir}/
 +}
 +
-+SRC_URI[archive.md5sum] = "3fa7fe715ab879db08bd06d1d59fd90f"
-+SRC_URI[archive.sha256sum] = "5c6627d6d5a98a92ca4661cfc16378b182cc46a9ec479ebf7e6121ee3fe2be32"
-+SRC_URI[patch.md5sum] = "969baa0900646c0262b2d505b9fef154"
-+SRC_URI[patch.sha256sum] = "f647d7c2f2b0d1dbddd632f3a17fef670aed3ebf5fbe6c1633337acac1eba8e3"
++SRC_URI[md5sum] = "a43baa88842cd5926dbffb6fb87624f6"
++SRC_URI[sha256sum] = "f339b91cd8ab348052c36b36d20033e4bffc3666bc836ff72d5704f025e1c057"
 -- 
 1.7.5.rc3
 
