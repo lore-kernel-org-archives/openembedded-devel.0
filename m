@@ -1,39 +1,39 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QQlYX-0007YZ-9E
+	(envelope-from <martin.jansa@gmail.com>) id 1QQlYZ-0007YZ-DP
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 May 2011 21:21:45 +0200
+	Sun, 29 May 2011 21:21:48 +0200
 Received: by mail-fx0-f47.google.com with SMTP id 19so2510774fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 May 2011 12:18:40 -0700 (PDT)
+	Sun, 29 May 2011 12:18:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
 	:in-reply-to:references:in-reply-to:references;
-	bh=YGFQl7BnisuqKkyRzDzYRaehzsqUSkdniLeB7Hd6rLs=;
-	b=eOyCXm+5wozDIoPivwpvMYDasZVu9vGCVkKdAUg+5Na/l3AURV/+KmaTgA6nSLo61p
-	jeWmZicSy1S22REw043WhuqSGezURLIQWtSziaWuCct+xntt2Wuxs1Vk77rgnY3e86oV
-	GWLPI5lanEXaX4CBIDN/5WHUl95V7TtLZ/q88=
+	bh=I2Cq7L6UQg8avaJJNPar40KhcvQtH0SzluWRZ7s8c+E=;
+	b=c95+Xo1+HQzHu3E7Zn0v2IUufhoad9go8MMcjsRObmpDyNz4+jR2Qd7Isy4+Tmk9cN
+	bTa6qygi6SWk/KspC65UOHu0c4IS5VGeSz1JYYkXg6NASsFsvitkmXUr3Ds5svtmEgX0
+	WKIP5RQIvSyoye7+hvMl4ryR2HgJvkOnSiM4U=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=THTgCZJZrz3njjhNyhNUzZnXGTZHRW9bnMQsr33Lu8aFEZMdgfHS45a6CSxDjf7aPr
-	U1ACt8raBNUBEFYElhhv52L/yiYFKWrcGhKgUnDVdUmjniWZqb5Sjv5Od11tvwuil/QT
-	ToVMfX28VBRLtVPvv3enDIVu1yuv5eP5mnwpw=
-Received: by 10.223.68.193 with SMTP id w1mr4773083fai.42.1306696700847;
-	Sun, 29 May 2011 12:18:20 -0700 (PDT)
+	b=nPtrRFPdieY8m/i6Ag2IFGD85/Gy/EyxwOYABvhOe2JZB60p4Bl4HUXjav/vWvfUdb
+	GOS2Gqr4p8rcoKP8dow6YQwQN8l50TpoiSjhr4JwJmdrtnTjD6z9r8jZeD8BbXOCQuAJ
+	quph8zqh2vOYRmIt1ijaR2UvI31wvd7/DjfbM=
+Received: by 10.223.75.146 with SMTP id y18mr4731773faj.61.1306696722331;
+	Sun, 29 May 2011 12:18:42 -0700 (PDT)
 Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id l26sm497952fah.14.2011.05.29.12.18.19
+	by mx.google.com with ESMTPS id r10sm497324fah.26.2011.05.29.12.18.40
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 29 May 2011 12:18:20 -0700 (PDT)
+	Sun, 29 May 2011 12:18:41 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 May 2011 21:17:22 +0200
-Message-Id: <fa4ed171dfb0c9d8ce5400a508ef4b1479f34101.1306696348.git.Martin.Jansa@gmail.com>
+Date: Sun, 29 May 2011 21:17:26 +0200
+Message-Id: <5629e3806fbf1f8adbe9eeed0742ea8224f7a63c.1306696348.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.5.rc3
 In-Reply-To: <e6bbc59f3f64c410233cb840174a8972d4ac1664.1306696348.git.Martin.Jansa@gmail.com>
 References: <e6bbc59f3f64c410233cb840174a8972d4ac1664.1306696348.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1306696348.git.Martin.Jansa@gmail.com>
 References: <cover.1306696348.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 12/16] portaudio: import from OE rev d4f0211e2078d5033ae0dee74664de5520d8392d
+Subject: [meta-oe][PATCH 16/16] navit: import from OE rev d4f0211e2078d5033ae0dee74664de5520d8392d
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,47 +47,749 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 May 2011 19:22:06 -0000
+X-List-Received-Date: Sun, 29 May 2011 19:26:49 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-support/portaudio/portaudio-v19_svn.bb |   27 ++++++++++++++++++++
- 1 files changed, 27 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
+ meta-oe/recipes-support/navit/navit-fpu.inc        |    6 +
+ meta-oe/recipes-support/navit/navit-icons/GPL-2    |  339 ++++++++++++++++++++
+ .../recipes-support/navit/navit-icons/configure.in |   70 ++++
+ meta-oe/recipes-support/navit/navit-icons_svn.bb   |   35 ++
+ meta-oe/recipes-support/navit/navit.inc            |   93 ++++++
+ meta-oe/recipes-support/navit/navit/maps.xml       |   24 ++
+ meta-oe/recipes-support/navit/navit/navit.xml      |   45 +++
+ meta-oe/recipes-support/navit/navit/osd.xml        |   15 +
+ meta-oe/recipes-support/navit/navit/plugins.xml    |    6 +
+ meta-oe/recipes-support/navit/navit/speech.xml     |    8 +
+ meta-oe/recipes-support/navit/navit_svn.bb         |    8 +
+ 11 files changed, 649 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/navit/navit-fpu.inc
+ create mode 100644 meta-oe/recipes-support/navit/navit-icons/GPL-2
+ create mode 100644 meta-oe/recipes-support/navit/navit-icons/configure.in
+ create mode 100644 meta-oe/recipes-support/navit/navit-icons_svn.bb
+ create mode 100644 meta-oe/recipes-support/navit/navit.inc
+ create mode 100644 meta-oe/recipes-support/navit/navit/maps.xml
+ create mode 100644 meta-oe/recipes-support/navit/navit/navit.xml
+ create mode 100644 meta-oe/recipes-support/navit/navit/osd.xml
+ create mode 100644 meta-oe/recipes-support/navit/navit/plugins.xml
+ create mode 100644 meta-oe/recipes-support/navit/navit/speech.xml
+ create mode 100644 meta-oe/recipes-support/navit/navit_svn.bb
 
-diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb b/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
+diff --git a/meta-oe/recipes-support/navit/navit-fpu.inc b/meta-oe/recipes-support/navit/navit-fpu.inc
 new file mode 100644
-index 0000000..a897a3d
+index 0000000..d333b92
 --- /dev/null
-+++ b/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
-@@ -0,0 +1,27 @@
-+DESCRIPTION = "A portable audio library"
-+SECTION = "libs/multimedia"
-+PRIORITY = "optional"
-+LICENSE = "PortAudio"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=26107732c2ab637c5710446fcfaf02df"
-+SRCREV = "1387"
-+PV = "v19+svnr${SRCPV}"
-+PR = "r0"
++++ b/meta-oe/recipes-support/navit/navit-fpu.inc
+@@ -0,0 +1,6 @@
 +
-+SRC_URI = "svn://www.portaudio.com/repos/portaudio;module=trunk;proto=http"
-+S = "${WORKDIR}/trunk"
++def get_navit_fpu_setting(bb, d):
++	if bb.data.getVar('TARGET_FPU', d, 1) in [ 'soft' ]:
++		return "--enable-avoid-float"
++	return ""
++
+diff --git a/meta-oe/recipes-support/navit/navit-icons/GPL-2 b/meta-oe/recipes-support/navit/navit-icons/GPL-2
+new file mode 100644
+index 0000000..d511905
+--- /dev/null
++++ b/meta-oe/recipes-support/navit/navit-icons/GPL-2
+@@ -0,0 +1,339 @@
++		    GNU GENERAL PUBLIC LICENSE
++		       Version 2, June 1991
++
++ Copyright (C) 1989, 1991 Free Software Foundation, Inc.,
++ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
++ Everyone is permitted to copy and distribute verbatim copies
++ of this license document, but changing it is not allowed.
++
++			    Preamble
++
++  The licenses for most software are designed to take away your
++freedom to share and change it.  By contrast, the GNU General Public
++License is intended to guarantee your freedom to share and change free
++software--to make sure the software is free for all its users.  This
++General Public License applies to most of the Free Software
++Foundation's software and to any other program whose authors commit to
++using it.  (Some other Free Software Foundation software is covered by
++the GNU Lesser General Public License instead.)  You can apply it to
++your programs, too.
++
++  When we speak of free software, we are referring to freedom, not
++price.  Our General Public Licenses are designed to make sure that you
++have the freedom to distribute copies of free software (and charge for
++this service if you wish), that you receive source code or can get it
++if you want it, that you can change the software or use pieces of it
++in new free programs; and that you know you can do these things.
++
++  To protect your rights, we need to make restrictions that forbid
++anyone to deny you these rights or to ask you to surrender the rights.
++These restrictions translate to certain responsibilities for you if you
++distribute copies of the software, or if you modify it.
++
++  For example, if you distribute copies of such a program, whether
++gratis or for a fee, you must give the recipients all the rights that
++you have.  You must make sure that they, too, receive or can get the
++source code.  And you must show them these terms so they know their
++rights.
++
++  We protect your rights with two steps: (1) copyright the software, and
++(2) offer you this license which gives you legal permission to copy,
++distribute and/or modify the software.
++
++  Also, for each author's protection and ours, we want to make certain
++that everyone understands that there is no warranty for this free
++software.  If the software is modified by someone else and passed on, we
++want its recipients to know that what they have is not the original, so
++that any problems introduced by others will not reflect on the original
++authors' reputations.
++
++  Finally, any free program is threatened constantly by software
++patents.  We wish to avoid the danger that redistributors of a free
++program will individually obtain patent licenses, in effect making the
++program proprietary.  To prevent this, we have made it clear that any
++patent must be licensed for everyone's free use or not licensed at all.
++
++  The precise terms and conditions for copying, distribution and
++modification follow.
++
++		    GNU GENERAL PUBLIC LICENSE
++   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
++
++  0. This License applies to any program or other work which contains
++a notice placed by the copyright holder saying it may be distributed
++under the terms of this General Public License.  The "Program", below,
++refers to any such program or work, and a "work based on the Program"
++means either the Program or any derivative work under copyright law:
++that is to say, a work containing the Program or a portion of it,
++either verbatim or with modifications and/or translated into another
++language.  (Hereinafter, translation is included without limitation in
++the term "modification".)  Each licensee is addressed as "you".
++
++Activities other than copying, distribution and modification are not
++covered by this License; they are outside its scope.  The act of
++running the Program is not restricted, and the output from the Program
++is covered only if its contents constitute a work based on the
++Program (independent of having been made by running the Program).
++Whether that is true depends on what the Program does.
++
++  1. You may copy and distribute verbatim copies of the Program's
++source code as you receive it, in any medium, provided that you
++conspicuously and appropriately publish on each copy an appropriate
++copyright notice and disclaimer of warranty; keep intact all the
++notices that refer to this License and to the absence of any warranty;
++and give any other recipients of the Program a copy of this License
++along with the Program.
++
++You may charge a fee for the physical act of transferring a copy, and
++you may at your option offer warranty protection in exchange for a fee.
++
++  2. You may modify your copy or copies of the Program or any portion
++of it, thus forming a work based on the Program, and copy and
++distribute such modifications or work under the terms of Section 1
++above, provided that you also meet all of these conditions:
++
++    a) You must cause the modified files to carry prominent notices
++    stating that you changed the files and the date of any change.
++
++    b) You must cause any work that you distribute or publish, that in
++    whole or in part contains or is derived from the Program or any
++    part thereof, to be licensed as a whole at no charge to all third
++    parties under the terms of this License.
++
++    c) If the modified program normally reads commands interactively
++    when run, you must cause it, when started running for such
++    interactive use in the most ordinary way, to print or display an
++    announcement including an appropriate copyright notice and a
++    notice that there is no warranty (or else, saying that you provide
++    a warranty) and that users may redistribute the program under
++    these conditions, and telling the user how to view a copy of this
++    License.  (Exception: if the Program itself is interactive but
++    does not normally print such an announcement, your work based on
++    the Program is not required to print an announcement.)
++
++These requirements apply to the modified work as a whole.  If
++identifiable sections of that work are not derived from the Program,
++and can be reasonably considered independent and separate works in
++themselves, then this License, and its terms, do not apply to those
++sections when you distribute them as separate works.  But when you
++distribute the same sections as part of a whole which is a work based
++on the Program, the distribution of the whole must be on the terms of
++this License, whose permissions for other licensees extend to the
++entire whole, and thus to each and every part regardless of who wrote it.
++
++Thus, it is not the intent of this section to claim rights or contest
++your rights to work written entirely by you; rather, the intent is to
++exercise the right to control the distribution of derivative or
++collective works based on the Program.
++
++In addition, mere aggregation of another work not based on the Program
++with the Program (or with a work based on the Program) on a volume of
++a storage or distribution medium does not bring the other work under
++the scope of this License.
++
++  3. You may copy and distribute the Program (or a work based on it,
++under Section 2) in object code or executable form under the terms of
++Sections 1 and 2 above provided that you also do one of the following:
++
++    a) Accompany it with the complete corresponding machine-readable
++    source code, which must be distributed under the terms of Sections
++    1 and 2 above on a medium customarily used for software interchange; or,
++
++    b) Accompany it with a written offer, valid for at least three
++    years, to give any third party, for a charge no more than your
++    cost of physically performing source distribution, a complete
++    machine-readable copy of the corresponding source code, to be
++    distributed under the terms of Sections 1 and 2 above on a medium
++    customarily used for software interchange; or,
++
++    c) Accompany it with the information you received as to the offer
++    to distribute corresponding source code.  (This alternative is
++    allowed only for noncommercial distribution and only if you
++    received the program in object code or executable form with such
++    an offer, in accord with Subsection b above.)
++
++The source code for a work means the preferred form of the work for
++making modifications to it.  For an executable work, complete source
++code means all the source code for all modules it contains, plus any
++associated interface definition files, plus the scripts used to
++control compilation and installation of the executable.  However, as a
++special exception, the source code distributed need not include
++anything that is normally distributed (in either source or binary
++form) with the major components (compiler, kernel, and so on) of the
++operating system on which the executable runs, unless that component
++itself accompanies the executable.
++
++If distribution of executable or object code is made by offering
++access to copy from a designated place, then offering equivalent
++access to copy the source code from the same place counts as
++distribution of the source code, even though third parties are not
++compelled to copy the source along with the object code.
++
++  4. You may not copy, modify, sublicense, or distribute the Program
++except as expressly provided under this License.  Any attempt
++otherwise to copy, modify, sublicense or distribute the Program is
++void, and will automatically terminate your rights under this License.
++However, parties who have received copies, or rights, from you under
++this License will not have their licenses terminated so long as such
++parties remain in full compliance.
++
++  5. You are not required to accept this License, since you have not
++signed it.  However, nothing else grants you permission to modify or
++distribute the Program or its derivative works.  These actions are
++prohibited by law if you do not accept this License.  Therefore, by
++modifying or distributing the Program (or any work based on the
++Program), you indicate your acceptance of this License to do so, and
++all its terms and conditions for copying, distributing or modifying
++the Program or works based on it.
++
++  6. Each time you redistribute the Program (or any work based on the
++Program), the recipient automatically receives a license from the
++original licensor to copy, distribute or modify the Program subject to
++these terms and conditions.  You may not impose any further
++restrictions on the recipients' exercise of the rights granted herein.
++You are not responsible for enforcing compliance by third parties to
++this License.
++
++  7. If, as a consequence of a court judgment or allegation of patent
++infringement or for any other reason (not limited to patent issues),
++conditions are imposed on you (whether by court order, agreement or
++otherwise) that contradict the conditions of this License, they do not
++excuse you from the conditions of this License.  If you cannot
++distribute so as to satisfy simultaneously your obligations under this
++License and any other pertinent obligations, then as a consequence you
++may not distribute the Program at all.  For example, if a patent
++license would not permit royalty-free redistribution of the Program by
++all those who receive copies directly or indirectly through you, then
++the only way you could satisfy both it and this License would be to
++refrain entirely from distribution of the Program.
++
++If any portion of this section is held invalid or unenforceable under
++any particular circumstance, the balance of the section is intended to
++apply and the section as a whole is intended to apply in other
++circumstances.
++
++It is not the purpose of this section to induce you to infringe any
++patents or other property right claims or to contest validity of any
++such claims; this section has the sole purpose of protecting the
++integrity of the free software distribution system, which is
++implemented by public license practices.  Many people have made
++generous contributions to the wide range of software distributed
++through that system in reliance on consistent application of that
++system; it is up to the author/donor to decide if he or she is willing
++to distribute software through any other system and a licensee cannot
++impose that choice.
++
++This section is intended to make thoroughly clear what is believed to
++be a consequence of the rest of this License.
++
++  8. If the distribution and/or use of the Program is restricted in
++certain countries either by patents or by copyrighted interfaces, the
++original copyright holder who places the Program under this License
++may add an explicit geographical distribution limitation excluding
++those countries, so that distribution is permitted only in or among
++countries not thus excluded.  In such case, this License incorporates
++the limitation as if written in the body of this License.
++
++  9. The Free Software Foundation may publish revised and/or new versions
++of the General Public License from time to time.  Such new versions will
++be similar in spirit to the present version, but may differ in detail to
++address new problems or concerns.
++
++Each version is given a distinguishing version number.  If the Program
++specifies a version number of this License which applies to it and "any
++later version", you have the option of following the terms and conditions
++either of that version or of any later version published by the Free
++Software Foundation.  If the Program does not specify a version number of
++this License, you may choose any version ever published by the Free Software
++Foundation.
++
++  10. If you wish to incorporate parts of the Program into other free
++programs whose distribution conditions are different, write to the author
++to ask for permission.  For software which is copyrighted by the Free
++Software Foundation, write to the Free Software Foundation; we sometimes
++make exceptions for this.  Our decision will be guided by the two goals
++of preserving the free status of all derivatives of our free software and
++of promoting the sharing and reuse of software generally.
++
++			    NO WARRANTY
++
++  11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
++FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN
++OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
++PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED
++OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
++MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE ENTIRE RISK AS
++TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE
++PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING,
++REPAIR OR CORRECTION.
++
++  12. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
++WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
++REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES,
++INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING
++OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED
++TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY
++YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER
++PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE
++POSSIBILITY OF SUCH DAMAGES.
++
++		     END OF TERMS AND CONDITIONS
++
++	    How to Apply These Terms to Your New Programs
++
++  If you develop a new program, and you want it to be of the greatest
++possible use to the public, the best way to achieve this is to make it
++free software which everyone can redistribute and change under these terms.
++
++  To do so, attach the following notices to the program.  It is safest
++to attach them to the start of each source file to most effectively
++convey the exclusion of warranty; and each file should have at least
++the "copyright" line and a pointer to where the full notice is found.
++
++    <one line to give the program's name and a brief idea of what it does.>
++    Copyright (C) <year>  <name of author>
++
++    This program is free software; you can redistribute it and/or modify
++    it under the terms of the GNU General Public License as published by
++    the Free Software Foundation; either version 2 of the License, or
++    (at your option) any later version.
++
++    This program is distributed in the hope that it will be useful,
++    but WITHOUT ANY WARRANTY; without even the implied warranty of
++    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++    GNU General Public License for more details.
++
++    You should have received a copy of the GNU General Public License along
++    with this program; if not, write to the Free Software Foundation, Inc.,
++    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
++
++Also add information on how to contact you by electronic and paper mail.
++
++If the program is interactive, make it output a short notice like this
++when it starts in an interactive mode:
++
++    Gnomovision version 69, Copyright (C) year name of author
++    Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
++    This is free software, and you are welcome to redistribute it
++    under certain conditions; type `show c' for details.
++
++The hypothetical commands `show w' and `show c' should show the appropriate
++parts of the General Public License.  Of course, the commands you use may
++be called something other than `show w' and `show c'; they could even be
++mouse-clicks or menu items--whatever suits your program.
++
++You should also get your employer (if you work as a programmer) or your
++school, if any, to sign a "copyright disclaimer" for the program, if
++necessary.  Here is a sample; alter the names:
++
++  Yoyodyne, Inc., hereby disclaims all copyright interest in the program
++  `Gnomovision' (which makes passes at compilers) written by James Hacker.
++
++  <signature of Ty Coon>, 1 April 1989
++  Ty Coon, President of Vice
++
++This General Public License does not permit incorporating your program into
++proprietary programs.  If your program is a subroutine library, you may
++consider it more useful to permit linking proprietary applications with the
++library.  If this is what you want to do, use the GNU Lesser General
++Public License instead of this License.
+diff --git a/meta-oe/recipes-support/navit/navit-icons/configure.in b/meta-oe/recipes-support/navit/navit-icons/configure.in
+new file mode 100644
+index 0000000..4ffc7b0
+--- /dev/null
++++ b/meta-oe/recipes-support/navit/navit-icons/configure.in
+@@ -0,0 +1,70 @@
++AC_INIT(navit, 0.2.0)
++SOURCE_MODE=svn
++
++AM_INIT_AUTOMAKE
++AM_CONFIG_HEADER(config.h)
++
++AC_SUBST(SOURCE_MODE)
++AM_CONDITIONAL(SOURCE_MODE_SVN, [test "x${SOURCE_MODE}" = "xsvn"])
++
++if test "x${SOURCE_MODE}" = "xsvn" ; then
++	USE_MAINTAINER_MODE=yes
++else
++	USE_MAINTAINER_MODE=no
++fi
++
++AC_DEFUN([AM_MAINTAINER_MODE],
++[AC_MSG_CHECKING([whether to enable maintainer-specific portions of Makefiles])
++  dnl maintainer-mode is enabled by default (reason of inclusion of this function)
++  AC_ARG_ENABLE(maintainer-mode,
++[  --enable-maintainer-mode  enable make rules and dependencies not useful
++                          (and sometimes confusing) to the casual installer],
++      USE_MAINTAINER_MODE=$enableval)
++  AC_MSG_RESULT([$USE_MAINTAINER_MODE])
++  AM_CONDITIONAL(MAINTAINER_MODE, [test $USE_MAINTAINER_MODE = yes])
++  MAINT=$MAINTAINER_MODE_TRUE
++  AC_SUBST(MAINT)dnl
++]
++)
++
++AU_DEFUN([jm_MAINTAINER_MODE], [AM_MAINTAINER_MODE])
++
++AM_MAINTAINER_MODE
++
++# svg
++AC_ARG_ENABLE(svg, [  --disable-svg        disable Scalable Vector Graphics], enable_svg=$enableval, enable_svg=yes)
++AC_ARG_ENABLE(svg2png, [  --disable-svg2png        disable conversion of svgs to pngs], enable_svg2png=$enableval, enable_svg2png=yes)
++AC_ARG_ENABLE(svg2png-scaling, [  --enable-svg2png-scaling   enable conversion of svgs to pngs with specified sizes], SVG2PNG_SCALES=$enableval, SVG2PNG_SCALES="8 16 32 48 96")
++AC_ARG_ENABLE(svg2png-scaling-flag, [  --enable-svg2png-scaling-flag   enable conversion of flag svgs to pngs with specified sizes], SVG2PNG_SCALES_FLAG=$enableval, SVG2PNG_SCALES_FLAG="8 16 32 48 96")
++AC_ARG_ENABLE(svg2png-scaling-nav, [  --enable-svg2png-scaling-nav   enable conversion of nav svgs to pngs with specified sizes], SVG2PNG_SCALES_NAV=$enableval, SVG2PNG_SCALES_NAV="8 16 32 48 96")
++AC_ARG_WITH(svg2png-use-convert, [  --with-svg2png-use-convert   use imagemagick's convert for png creation], SVG2PNG_CONVERTER="convert")
++AC_ARG_WITH(svg2png-use-rsvg-convert, [  --with-svg2png-use-rsvg-convert   use librsvg's rsvg-convert for png creation], SVG2PNG_CONVERTER="rsvg-convert")
++AC_ARG_WITH(svg2png-use-inkscape, [  --with-svg2png-use-inkscape   use inkscapes internal convert routines for png creation], SVG2PNG_CONVERTER="inkscape")
++AC_ARG_WITH(svg2png-use-ksvgtopng4, [  --with-svg2png-use-ksvgtopng4   use kde4's ksvgtopng4 for png creation], SVG2PNG_CONVERTER="ksvgtopng4")
++AC_ARG_WITH(svg2png-use-ksvgtopng, [  --with-svg2png-use-ksvgtopng   use kde3's convert for png creation], SVG2PNG_CONVERTER="ksvgtopng")
++if test "x${enable_svg2png}" = "xyes" ; then
++    if test "x${SVG2PNG_CONVERTER}" = "x"; then
++        SVG2PNG_CONVERTER="ksvgtopng ksvgtopng4 rsvg-convert inkscape convert"
++    fi
++    AC_PATH_PROGS([SVG2PNG], ${SVG2PNG_CONVERTER}, [none])
++    if test "x${SVG2PNG}" = "xnone"; then
++        enable_svg2png="no"
++    fi
++fi
++AC_SUBST(SVG2PNG)
++AC_SUBST(SVG2PNG_SCALES)
++AC_SUBST(SVG2PNG_SCALES_FLAG)
++AC_SUBST(SVG2PNG_SCALES_NAV)
++AM_CONDITIONAL(USE_SVG2PNG_SCALES, test "x${SVG2PNG_SCALES}" != "xyes" -a "x${SVG2PNG_SCALES}" != "x")
++AM_CONDITIONAL(USE_SVG2PNG_SCALES_FLAG, test "x${SVG2PNG_SCALES_FLAG}" != "xyes" -a "x${SVG2PNG_SCALES_FLAG}" != "x")
++AM_CONDITIONAL(USE_SVG2PNG_SCALES_NAV, test "x${SVG2PNG_SCALES_NAV}" != "xyes" -a "x${SVG2PNG_SCALES_NAV}" != "x")
++AM_CONDITIONAL(USE_SVG2PNG, test "x${enable_svg2png}" = "xyes")
++AM_CONDITIONAL(USE_SVG, test "x${enable_svg}" = "xyes")
++AM_CONDITIONAL(SUPPORT_WIN32, [test "x$win32" = "xyes"])
++
++AC_CONFIG_FILES([
++Makefile
++])
++
++AC_OUTPUT
++
+diff --git a/meta-oe/recipes-support/navit/navit-icons_svn.bb b/meta-oe/recipes-support/navit/navit-icons_svn.bb
+new file mode 100644
+index 0000000..116ff43
+--- /dev/null
++++ b/meta-oe/recipes-support/navit/navit-icons_svn.bb
+@@ -0,0 +1,35 @@
++DESCRIPTION = "Navit is a car navigation system with routing engine."
++LICENSE = "GPLv2"
++# taken from main navit package
++LIC_FILES_CHKSUM = "file://${WORKDIR}/GPL-2;md5=751419260aa954499f7abaabaa882bbe"
++SECTION = "x11/applications"
++DEPENDS = "glib-2.0 gtk+ imagemagick-native librsvg-native"
++
++#only icons present in the package
++PACKAGE_ARCH = "all"
++
++PV = "0.1.0+svnr${SRCPV}"
++PR = "r2"
++
++EXTRA_OECONF = "--disable-binding-python --disable-gui-sdl --disable-samplemap --enable-avoid-float --enable-avoid-unaligned  --enable-svg2png-scaling-flag=32 --disable-speech-speech-dispatcher"
++
++S = "${WORKDIR}/xpm"
 +
 +inherit autotools
 +
-+TESTS = "  pa_devs patest1      patest_hang patest_many                   patest_prime patest_sine patest_stop     patest_write_sine        \
-+pa_fuzz    patest_buffer        patest_in_overflow  patest_maxsines       patest_read_record  patest_sine8         patest_sync              \
-+pa_minlat  patest_callbackstop  patest_latency      patest_multi_sine     patest_record       patest_sine_formats  patest_toomanysines      \
-+paqa_devs  patest_clip          patest_leftright    patest_out_underflow  patest_ringmix      patest_sine_time     patest_underflow         \
-+paqa_errs  patest_dither        patest_longsine     patest_pink           patest_saw          patest_start_stop    patest_wire"
++FILES_${PN} = " /usr/share/navit/xpm/"
 +
-+# DEFINES = PA_USE_OSS=1 HAVE_LIBPTHREAD=1
-+# DEFINES += PA_LITTLE_ENDIAN
++SRCREV = "3915"
 +
-+# INCLUDEPATH = ../pa_common
++#use different URL than navit_svn does, to prevent upgrade/downgrade cycle in downloads dir
++SRC_URI = "svn://anonymous@navit.svn.sourceforge.net/svnroot/navit/trunk/navit/navit;module=xpm;proto=https \
++           file://GPL-2 \
++           file://configure.in"
 +
-+PACKAGES += "portaudio-examples"
-+FILES_portaudio-examples = "${bindir}"
++do_configure_prepend() {
++  cp ${WORKDIR}/configure.in ${S}/
++  # replace include with just xpmdir variable
++  sed -i 's#.*Makefile.inc.*#xpmdir=$(pkgdatadir)/xpm#g' ${S}/Makefile.am
++  # don't install desktopfile and icons
++  sed -i 's/^\(EXTRADIST.*\) $(DESKTOPFILE_DATA) $(ICON128_DATA) $(ICON22_DATA) \(.*\)$/\1\2/g' ${S}/Makefile.am
++}
+diff --git a/meta-oe/recipes-support/navit/navit.inc b/meta-oe/recipes-support/navit/navit.inc
+new file mode 100644
+index 0000000..25a7b8d
+--- /dev/null
++++ b/meta-oe/recipes-support/navit/navit.inc
+@@ -0,0 +1,93 @@
++DESCRIPTION = "Navit is a car navigation system with routing engine."
++LICENSE = "GPLv2 LGPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=a4c51733b63d82df87995454bdc4b654 \
++                    file://LGPL-2;md5=3214f080875748938ba060314b4f727d \
++                    file://GPL-2;md5=751419260aa954499f7abaabaa882bbe \
++"
++
++SECTION = "x11/applications"
++DEPENDS = "glib-2.0 gtk+ qt4-x11-free gd gypsy librsvg-native"
++RDEPENDS_${PN} = " navit-icons ${PN}-config "
++RDEPENDS_${PN}-gui-qml = "qt4-plugin-imageformat-svg"
++RRECOMMENDS_${PN} = "gpsd ${PN}-dbus ${PN}-speech-cmdline ${PN}-gui-internal ${PN}-graphics-gtk"
++RSUGGESTS_${PN} = "flite-alsa espeak ${PN}-speech-dbus ${PN}-gui-gtk ${PN}-gui-qml ${PN}-graphics-sdl ${PN}-graphics-qt ${PN}-maptool"
++
++PE = "1"
++INC_PR = "r8"
++
++inherit autotools gettext
++
++EXTRA_OECONF += " \
++  --disable-binding-python \
++  --disable-samplemap \
++  --enable-avoid-unaligned \
++  --enable-graphics-qt-qpainter \
++  --enable-gui-qml \
++  --enable-svg2png-scaling-flag=32 \
++  --disable-speech-speech-dispatcher \
++  --enable-cache-size=20971520 \
++"
++
++#  --enable-avoid-float \
++#check for TARGET_FPU=soft and inform configure of the result so it can disable some floating points
++require navit-fpu.inc
++EXTRA_OECONF += "${@get_navit_fpu_setting(bb, d)}"
++
++PACKAGES =+ "${PN}-maptool ${PN}-config ${PN}-dbus ${PN}-speech-cmdline ${PN}-speech-dbus ${PN}-gui-gtk ${PN}-gui-internal ${PN}-gui-qml ${PN}-graphics-sdl ${PN}-graphics-gtk ${PN}-graphics-qt"
++
++EXTRA_AUTORECONF = " -I m4"
++
++CONFFILES_${PN}-config += "${datadir}/navit/navit.default.xml \
++                    ${datadir}/navit/navit.xml \
++                    ${datadir}/navit/maps.xml \
++                    ${datadir}/navit/osd.xml \
++                    ${datadir}/navit/speech.xml \
++                    ${datadir}/navit/plugins.xml \
++                   "
++
++SRC_URI += "file://navit.xml \
++            file://maps.xml \
++            file://osd.xml \
++            file://speech.xml \
++            file://plugins.xml \
++           "
++
++FILES_${PN} += "${libdir}/${PN}/*/*.so"
++FILES_${PN}-dbg += "${libdir}/${PN}/*/.debug"
++FILES_${PN}-maptool = " ${bindir}/maptool "
++FILES_${PN}-config = " ${datadir}/navit/*.xml "
++FILES_${PN}-dbus = " ${datadir}/dbus-1/services/ ${libdir}/${PN}/binding/libbinding_dbus.so "
++FILES_${PN}-speech-cmdline = " ${libdir}/${PN}/speech/libspeech_cmdline.so "
++FILES_${PN}-speech-dbus = " ${libdir}/${PN}/speech/libspeech_dbus.so "
++FILES_${PN}-gui-gtk = " ${libdir}/${PN}/gui/libgui_gtk.so "
++FILES_${PN}-gui-qml = " ${libdir}/${PN}/gui/libgui_qml.so ${datadir}/navit/skins/ "
++FILES_${PN}-gui-internal = " ${libdir}/${PN}/gui/libgui_internal.so "
++FILES_${PN}-graphics-sdl = " ${libdir}/${PN}/graphics/libgraphics_sdl.so "
++FILES_${PN}-graphics-qt = " ${libdir}/${PN}/graphics/libgraphics_qt_qpainter.so "
++FILES_${PN}-graphics-gtk = " ${libdir}/${PN}/graphics/libgraphics_gtk_drawing_area.so "
++
++do_configure_prepend() {
++  #Remove xpm building, replaced by icons in own package
++  sed -i 's/\(.*SUBDIRS.*\) xpm\( \|$\)\(.*\)/\1\2\3/g' ${S}/navit/Makefile.am
++  # MOC=`$PKG_CONFIG QtGui --variable=moc_location` returns only /usr/bin/moc4 which is not available on hosts without Qt
++  sed -i "s#MOC=#MOC=${STAGING_DIR_NATIVE}#g" ${S}/configure.in
++}
++
++do_install_append() {
++        install -d ${D}${datadir}/applications/
++        install -m 0644 ${S}/navit/xpm/desktop_icons/navit.desktop ${D}${datadir}/applications/
++        install -d ${D}${datadir}/pixmaps/
++        install -m 0644 ${S}/navit/xpm/desktop_icons/128x128/navit.png ${D}${datadir}/pixmaps/
++	# fix QA issue
++	sed -i 's#Categories=GTK;Utility;Geography;#Categories=Graphics;#g' ${D}${datadir}/applications/navit.desktop
++
++	rm ${D}${libdir}/${PN}/*/*.la
++
++        #Use split config
++        mv ${D}${datadir}/navit/navit.xml ${D}${datadir}/navit/navit.default.xml
++        install -m 0644 ${WORKDIR}/navit.xml ${D}${datadir}/navit/navit.xml
++        install -m 0644 ${WORKDIR}/maps.xml ${D}${datadir}/navit/maps.xml
++        install -m 0644 ${WORKDIR}/osd.xml ${D}${datadir}/navit/osd.xml
++        install -m 0644 ${WORKDIR}/speech.xml ${D}${datadir}/navit/speech.xml
++        install -m 0644 ${WORKDIR}/plugins.xml ${D}${datadir}/navit/plugins.xml
++}
+diff --git a/meta-oe/recipes-support/navit/navit/maps.xml b/meta-oe/recipes-support/navit/navit/maps.xml
+new file mode 100644
+index 0000000..6f59f20
+--- /dev/null
++++ b/meta-oe/recipes-support/navit/navit/maps.xml
+@@ -0,0 +1,24 @@
++                <!-- If you have the reiseplaner maps installed, set enabled="yes" in the next line and set the path correctly -->
++                <mapset enabled="no">
++                        <map type="mg" enabled="yes" data="/opt/reiseplaner/travel/DE.map"/>
++                        <map type="mg" enabled="yes" data="/opt/reiseplaner/travel/DE.map/smp1.smp"/>
++                        <map type="mg" enabled="yes" data="/opt/reiseplaner/travel/DE.map/smp2.smp"/>
++                        <map type="mg" enabled="yes" data="/opt/reiseplaner/travel/DE.map/smp3.smp"/>
++                        <map type="mg" enabled="yes" data="/opt/reiseplaner/travel/DE.map/smp4.smp"/>
++                        <map type="mg" enabled="yes" data="/opt/reiseplaner/travel/DE.map/smp5.smp"/>
++                </mapset>
++
++                <!-- If you dont want to use the sample map, either set enabled="no" in the next line or remove the xml file from the maps directory -->
++                <mapset enabled="no">
++                        <xi:include href="$NAVIT_SHAREDIR/maps/*.xml"/>
++                </mapset>
++
++                <!-- Mapset template for openstreetmaps -->
++                <mapset enabled="yes">
++                        <map type="binfile" enabled="yes" data="/media/mmc2/MapsNavit/osm_europe.bin"/>
++                </mapset>
++
++                <!-- Mapset template for garmin maps -->
++                <mapset enabled="no">
++                        <map type="garmin" enabled="yes" data="/path/to/img" debug="4"/>
++                </mapset>
+diff --git a/meta-oe/recipes-support/navit/navit/navit.xml b/meta-oe/recipes-support/navit/navit/navit.xml
+new file mode 100644
+index 0000000..58c8c22
+--- /dev/null
++++ b/meta-oe/recipes-support/navit/navit/navit.xml
+@@ -0,0 +1,45 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE config SYSTEM "navit.dtd">
++<config xmlns:xi="http://www.w3.org/2001/XInclude">
++	<xi:include href="/usr/share/navit/plugins.xml"/>
++	<xi:include href="/usr/share/navit/navit.default.xml" xpointer="xpointer(/config/debug)"/>
++
++	<navit center="4808 N 1134 E" zoom="256" tracking="1" orientation="-1" recent_dest="10" drag_bitmap="1">
++		<graphics type="gtk_drawing_area"/>
++		<gui type="gtk" enabled="no" menubar="1" toolbar="1" statusbar="1"/>
++		<xi:include href="/usr/share/navit/navit.default.xml" xpointer="xpointer(/config/navit/gui[@type='internal'])"/>
++		<!-- or comment gtk version above and try:
++		opkg install navit-graphics-qt
++		opkg install navit-gui-qml
++		<graphics type="qt_qpainter"/>
++		<gui type="qml" enabled="yes" menubar="1" toolbar="1" statusbar="1"/>
++		-->
++		<xi:include href="/usr/share/navit/osd.xml"/>
++		<log enabled="no" type="textfile_debug" data="debug_%Y%m%d-%i.txt" flush_size="1000" flush_time="30"/>
++		<vehicle name="Local GPS" profilename="car" enabled="yes" active="1" source="gpsd://localhost" gpsd_query="w+xj">
++			<!-- <log type="gpx" attr_types="position_time_iso8601,position_direction,position_speed,profilename,position_radius" data="track_%Y%m%d-%i.gpx" flush_size="1000" flush_time="30"/> -->
++		</vehicle>
++
++		<vehicle name="Demo" profilename="car" enabled="no" active="yes" source="demo://"/>
++
++		<!-- For the cumulative displacement filter to be enabled, set cdf_histsize="x" here, with x being an integer somewhere around 4 -->
++		<tracking cdf_histsize="0"/>
++
++		<xi:include href="/usr/share/navit/navit.default.xml" xpointer="xpointer(/config/navit/vehicleprofile[@name='car'])"/>
++		<xi:include href="/usr/share/navit/navit.default.xml" xpointer="xpointer(/config/navit/vehicleprofile[@name='bike'])"/>
++		<xi:include href="/usr/share/navit/navit.default.xml" xpointer="xpointer(/config/navit/vehicleprofile[@name='pedestrian'])"/>
++		<xi:include href="/usr/share/navit/navit.default.xml" xpointer="xpointer(/config/navit/vehicleprofile[@name='horse'])"/>
++
++		<route destination_distance="50"/>
++
++		<xi:include href="/usr/share/navit/navit.default.xml" xpointer="xpointer(/config/navit/navigation)"/>
++
++		<xi:include href="/usr/share/navit/speech.xml"/>
++		<xi:include href="/usr/share/navit/maps.xml"/>
++
++		<xi:include href="/usr/share/navit/navit.default.xml" xpointer="xpointer(/config/navit/layout[@name='Car'])"/>
++		<xi:include href="/usr/share/navit/navit.default.xml" xpointer="xpointer(/config/navit/layout[@name='Car-dark'])"/>
++		<xi:include href="/usr/share/navit/navit.default.xml" xpointer="xpointer(/config/navit/layout[@name='Bike'])"/>
++		<xi:include href="/usr/share/navit/navit.default.xml" xpointer="xpointer(/config/navit/layout[@name='T@H'])"/>
++	</navit>
++</config>
+diff --git a/meta-oe/recipes-support/navit/navit/osd.xml b/meta-oe/recipes-support/navit/navit/osd.xml
+new file mode 100644
+index 0000000..2d0f9ff
+--- /dev/null
++++ b/meta-oe/recipes-support/navit/navit/osd.xml
+@@ -0,0 +1,15 @@
++                <!-- osd items allow to position display and control items directly on top of the map: -->
++                <osd enabled="no" type="compass"/>
++                <osd enabled="no" type="eta"/>
++                <osd enabled="no" type="navigation_distance_to_target"/>
++                <osd enabled="no" type="navigation"/>
++                <osd enabled="no" type="navigation_distance_to_next"/>
++                <osd enabled="no" type="navigation_next_turn"/>
++
++                <!-- Commands include gui_internal_menu, gui_internal_fullscreen, zoom_in and zoom_out.
++                         Usage of negative values change the button origins. x="0" y="0" specifies the top left, x="-0" y="-0" the bottom right corner.
++                         It's always the top left corner of the icon, so you need to consider the icon's size when you enter the values. -->
++                <osd enabled="no" type="button" x="0" y="0" command="gui.fullscreen()" src="toggle_fullscreen.xpm"/>
++                <osd enabled="no" type="button" x="-96" y="0" command="gui.menu()" src="menu.xpm"/>
++                <osd enabled="no" type="button" x="-96" y="-96" command="zoom_in()" src="zoom_in.xpm"/>
++                <osd enabled="no" type="button" x="0" y="-96" command="zoom_out()" src="zoom_out.xpm"/>
+diff --git a/meta-oe/recipes-support/navit/navit/plugins.xml b/meta-oe/recipes-support/navit/navit/plugins.xml
+new file mode 100644
+index 0000000..015b055
+--- /dev/null
++++ b/meta-oe/recipes-support/navit/navit/plugins.xml
+@@ -0,0 +1,6 @@
++<plugins>
++	<plugin path="$NAVIT_LIBDIR/*/${NAVIT_LIBPREFIX}lib*.so" ondemand="yes"/>
++	<plugin path="$NAVIT_LIBDIR/autoload/${NAVIT_LIBPREFIX}lib*.so"/>
++	<plugin path="$NAVIT_LIBDIR/*/${NAVIT_LIBPREFIX}libbinding_dbus.so" active="yes"/>
++	<plugin path="$NAVIT_LIBDIR/*/${NAVIT_LIBPREFIX}libgraphics_null.so" active="no"/>
++</plugins>
+diff --git a/meta-oe/recipes-support/navit/navit/speech.xml b/meta-oe/recipes-support/navit/navit/speech.xml
+new file mode 100644
+index 0000000..28c4990
+--- /dev/null
++++ b/meta-oe/recipes-support/navit/navit/speech.xml
+@@ -0,0 +1,8 @@
++                <!-- Navit provides speech output in text format.
++                         If you have a speech synthesizer like festival lite installed, you can get turn by turn directions out of navit. Please set the "cps"-value to how many characters your tts engine approximately speaks per second.
++                         The default is text output to the shell -->
++                <!-- <speech type="cmdline" data="echo 'Fix the speech tag in navit.xml to let navit say:' '%s'" cps="15"/> -->
++                <!-- <speech type="cmdline" data="espeak -s 150 -v czech '%s' &amp;"/> -->
++                <!-- <speech type="cmdline" data="flite -t '%s'"/> -->
++                <!-- <speech type="cmdline" data="/usr/local/bin/say.sh '%s'"/> -->
++                <speech type="cmdline" data="espeak '%s' &amp;"/>
+diff --git a/meta-oe/recipes-support/navit/navit_svn.bb b/meta-oe/recipes-support/navit/navit_svn.bb
+new file mode 100644
+index 0000000..b5484fa
+--- /dev/null
++++ b/meta-oe/recipes-support/navit/navit_svn.bb
+@@ -0,0 +1,8 @@
++require navit.inc
++
++SRCREV = "4495"
++PV = "0.2.0+svnr${SRCPV}"
++PR = "${INC_PR}.12"
++
++S = "${WORKDIR}/navit"
++SRC_URI += "svn://anonymous@navit.svn.sourceforge.net/svnroot/navit/trunk;module=navit;proto=http "
 -- 
 1.7.5.rc3
 
