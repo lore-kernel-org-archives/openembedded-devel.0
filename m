@@ -1,42 +1,35 @@
 Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QR3oJ-0007dQ-Bq
+	(envelope-from <otavio.salvador@gmail.com>) id 1QR3uc-0007ud-Ds
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 May 2011 16:51:15 +0200
-Received: by mail-gw0-f47.google.com with SMTP id 11so1566881gwb.6
+	Mon, 30 May 2011 16:57:46 +0200
+Received: by gwb11 with SMTP id 11so1569218gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 07:48:09 -0700 (PDT)
+	Mon, 30 May 2011 07:54:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
-	:x-mailer:in-reply-to:references:in-reply-to:references;
-	bh=7z69zDFBg8CjwdOf1irqk1zrj/N0g+LbdDXFUSAv9c4=;
-	b=LYEh7h8Cd4bdrMHe8Ixii4CwXU/+RzA/qpDa1Zv6dLeFgVCVShzJf7z0FyH3+s01qb
-	79ZPtZCvvADxfaYadHibHLKJj7RD1AISFVQxYkqSOddAnmhICRjGZ1xQVHx+sPAHpgBJ
-	pZzAUZdahgyfJT/y3BObnHKAf/P6DV7ukpIso=
+	h=domainkey-signature:sender:from:to:subject:date:message-id:x-mailer; 
+	bh=EwfMp8BxxwGV4gkRkMAeVqsxO2jmt4UnSUCNcdpD+4E=;
+	b=mUwpjI4Ws/mU3Dj4miDAT5tIo8rDC3oH1ChpCI9CZxZ7dM5spsRIWIpK9jNk5f/2E1
+	5R+/Xht/w2PfL8cYTPoBW5m2ROOHaNvi76bA7a7QtY/ryTQdhCDreZx/86XHLon6s7hA
+	wzPwJQSXNIgS2mC0Y4IKxi2dWvdkLSbfN2R30=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references;
-	b=BJv4zrTd9aOQyJe0GAyRzELdrryew1wP41sEIRbQYTX315KeNaux8ZUNuqNmocnB2l
-	y0a6FjxFo7sCaOX9ehg2GGjk47g6b5G+c1Gi9gQQoI7zyLkqt5H/WzeVlFWi5FqnqOzI
-	RAOLlpWz/eCJeNU5FbTJCTk3I+NBwAREBRvyg=
-Received: by 10.91.145.6 with SMTP id x6mr4197417agn.152.1306766888953;
-	Mon, 30 May 2011 07:48:08 -0700 (PDT)
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	b=efHzrQFq4jp8rCXMZ91EkP25SehVjQhubAHv6mBsJGPJZie3So5Fi6cjEBHDajb22k
+	vEOQHY+j+LhYkW0wQg1Ts/V9JRQ0hny/bNVe9AUJvUaSgJNT0RZ5ARzF35A4OjsLyZbp
+	58yKpx7kcCF/fE25hrzkK3GFukBgq0iEOig0U=
+Received: by 10.236.176.230 with SMTP id b66mr6043434yhm.247.1306767275370;
+	Mon, 30 May 2011 07:54:35 -0700 (PDT)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id c21sm3346170ana.50.2011.05.30.07.48.06
+	by mx.google.com with ESMTPS id e48sm2530494yhk.56.2011.05.30.07.54.33
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 30 May 2011 07:48:07 -0700 (PDT)
+	Mon, 30 May 2011 07:54:34 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 May 2011 14:47:55 +0000
-Message-Id: <4b2cadd8890cb648045efa34ff601734486e1b51.1306766797.git.otavio@ossystems.com.br>
+Date: Mon, 30 May 2011 14:54:06 +0000
+Message-Id: <1306767263-29895-1-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1306766797.git.otavio@ossystems.com.br>
-References: <cover.1306766797.git.otavio@ossystems.com.br>
-In-Reply-To: <cover.1306766797.git.otavio@ossystems.com.br>
-References: <cover.1306766797.git.otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 1/1] freerdp-extension-xpunlimited: bump to fix a cache issue SRCREV
+Subject: Pending patches done by O.S. Systems before using oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,32 +43,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 May 2011 14:51:15 -0000
+X-List-Received-Date: Mon, 30 May 2011 14:57:46 -0000
 
-The cache of servers needs to be stored into a directory into user
-$HOME and was failing in case it doesn't exist. This revision fixes
-it.
+Hello,
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- .../freerdp/freerdp-extension-xpunlimited_git.bb   |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/meta-oe/recipes-support/freerdp/freerdp-extension-xpunlimited_git.bb b/meta-oe/recipes-support/freerdp/freerdp-extension-xpunlimited_git.bb
-index 7e67a63..4fc6928 100644
---- a/meta-oe/recipes-support/freerdp/freerdp-extension-xpunlimited_git.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp-extension-xpunlimited_git.bb
-@@ -14,7 +14,7 @@ PR = "r0"
- 
- inherit pkgconfig cmake
- 
--SRCREV = "7b3b8538c8cb863f720ba5351aebc220e126a4b7"
-+SRCREV = "d27f90a0128c687ce74cc922dba8b7eeb33f0654"
- SRC_URI = "git://github.com/OSSystems/FreeRDP-Extension-XPUnlimited.git;protocol=git"
- 
- S = "${WORKDIR}/git"
--- 
-1.7.2.5
+I do believe those patches are useful and then I am resending them up
+to date against current dev tip. Please review and merge them as you
+wish.
 
 
 
