@@ -1,35 +1,31 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QR4C0-0001WH-Il for openembedded-devel@lists.openembedded.org;
-	Mon, 30 May 2011 17:15:44 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QR490-0008S1-0H for openembedded-devel@lists.openembedded.org;
-	Mon, 30 May 2011 17:12:38 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 17:12:37 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <koansoftware@gmail.com>) id 1QR4N4-0001mo-4j
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 30 May 2011 17:27:10 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id D27C32C812
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 17:12:37 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 30 May 2011 15:22:55 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id px7FrxoaT6CV
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 May 2011 15:22:50 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 3D57C2C7D2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 May 2011 15:22:50 +0000 (UTC)
+Message-ID: <4DE3B68B.4080108@gmail.com>
+Date: Mon, 30 May 2011 17:23:55 +0200
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini
+User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 30 May 2011 17:12:20 +0200
-Message-ID: <is0c4k$fjg$1@dough.gmane.org>
-References: <cover.1306766797.git.otavio@ossystems.com.br>
-	<4b2cadd8890cb648045efa34ff601734486e1b51.1306766797.git.otavio@ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4b2cadd8890cb648045efa34ff601734486e1b51.1306766797.git.otavio@ossystems.com.br>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-oe][PATCH 1/1] freerdp-extension-xpunlimited: bump to fix a cache issue SRCREV
+References: <4DE352E5.7090604@gmail.com> <is0a7n$4j8$1@dough.gmane.org>
+In-Reply-To: <is0a7n$4j8$1@dough.gmane.org>
+Subject: Re: Error building qt4e-base-image with angstrom-2010.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,46 +39,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 May 2011 15:15:44 -0000
+X-List-Received-Date: Mon, 30 May 2011 15:27:10 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Merged into master, thanks
-
-On 30-05-11 16:47, Otavio Salvador wrote:
-> The cache of servers needs to be stored into a directory into user
-> $HOME and was failing in case it doesn't exist. This revision fixes
-> it.
+Koen Kooi ha scritto, Il 30/05/2011 16:39:
+> On 30-05-11 10:18, Marco Cavallini wrote:
+>> Hi,
+>> I'm facing to a problem building qt4e-base-image with angstrom-2010.x on
+>> a Debian lenny host, is it normal?
+>> http://pastebin.com/6SnFSYs6
+>> I suspect a Debian lenny issue with new OE stuff.
 > 
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->  .../freerdp/freerdp-extension-xpunlimited_git.bb   |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
+> I just tried this on my debian box (dunno which version):
 > 
-> diff --git a/meta-oe/recipes-support/freerdp/freerdp-extension-xpunlimited_git.bb b/meta-oe/recipes-support/freerdp/freerdp-extension-xpunlimited_git.bb
-> index 7e67a63..4fc6928 100644
-> --- a/meta-oe/recipes-support/freerdp/freerdp-extension-xpunlimited_git.bb
-> +++ b/meta-oe/recipes-support/freerdp/freerdp-extension-xpunlimited_git.bb
-> @@ -14,7 +14,7 @@ PR = "r0"
->  
->  inherit pkgconfig cmake
->  
-> -SRCREV = "7b3b8538c8cb863f720ba5351aebc220e126a4b7"
-> +SRCREV = "d27f90a0128c687ce74cc922dba8b7eeb33f0654"
->  SRC_URI = "git://github.com/OSSystems/FreeRDP-Extension-XPUnlimited.git;protocol=git"
->  
->  S = "${WORKDIR}/git"
+> NOTE: package qt4-embedded-4.7.3-r33.1: task do_build: Succeeded
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFN47PUMkyGM64RGpERAmRFAJ9rMI3We8JBOU1NC6rFfnC4da/uFQCfTSSW
-IZqWnjQ1P5uhzjxa6QGm8Cc=
-=1M0f
------END PGP SIGNATURE-----
-
+Thank you Koen for your confirmation test.
 
 
