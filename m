@@ -1,35 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from newsmtp5.atmel.com ([204.2.163.5] helo=sjogate2.atmel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QQvw7-0007v5-FK for openembedded-devel@lists.openembedded.org;
-	Mon, 30 May 2011 08:26:47 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QQvt7-0007dn-KN for openembedded-devel@lists.openembedded.org;
-	Mon, 30 May 2011 08:23:41 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 08:23:41 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <ludovic.desroches@atmel.com>) id 1QQwJ1-0008J3-Ho
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 30 May 2011 08:50:27 +0200
+Received: from meyreuil.atmel.fr ([10.159.254.132])
+	by sjogate2.atmel.com (8.13.6/8.13.6) with ESMTP id p4U6iBbm002920
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 08:23:41 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 29 May 2011 23:44:11 -0700 (PDT)
+Received: from [127.0.0.1] ([10.159.245.147])
+	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id p4U6l9a00546; 
+	Mon, 30 May 2011 08:47:09 +0200 (MEST)
+Message-ID: <4DE33D6A.9060206@atmel.com>
+Date: Mon, 30 May 2011 08:47:06 +0200
+From: Ludovic Desroches <ludovic.desroches@atmel.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.9.2.17) Gecko/20110414 Lightning/1.0b2 Thunderbird/3.1.10
+	ThunderBrowse/3.3.5
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 30 May 2011 08:23:33 +0200
-Message-ID: <irvd51$kf9$1@dough.gmane.org>
-References: <355a220b55867ef7a2fd485fbc1fcb76c06ef5d1.1306706130.git.Martin.Jansa@gmail.com>	<c424bae29966b789e50eb4112a9d95a2b7833942.1306706130.git.Martin.Jansa@gmail.com>	<1306720135.5979.1.camel@perseus>
-	<20110530053016.GE18119@jama.jama.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <20110530053016.GE18119@jama.jama.net>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-oe][PATCH 07/14] libelf: import from OE rev d4f0211e2078d5033ae0dee74664de5520d8392d
+References: <1306423519-31114-1-git-send-email-ludovic.desroches@atmel.com>
+	<1306534870.4137.11.camel@mattotaupa>
+In-Reply-To: <1306534870.4137.11.camel@mattotaupa>
+Subject: Re: [PATCH] tiobench: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,37 +35,142 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 May 2011 06:26:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 30 May 2011 06:50:28 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello,
 
-On 30-05-11 07:30, Martin Jansa wrote:
-> On Sun, May 29, 2011 at 06:48:55PM -0700, Khem Raj wrote:
->> On Sun, 2011-05-29 at 23:56 +0200, Martin Jansa wrote:
->>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+On 5/28/2011 12:21 AM, Paul Menzel wrote:
+> Dear Ludovic,
+>
+>
+> thank you for your contribution.
+>
+> Am Donnerstag, den 26.05.2011, 17:25 +0200 schrieb Ludovic Desroches:
+>
+> please add the version of the program you are adding to the commit
+> summary next time.
+>
+> What build configuration did you use for testing?
+I was using a simple task-base image with the tiobench package on atmel 
+boards.
+
+>> Signed-off-by: Ludovic Desroches<ludovic.desroches@atmel.com>
+>> ---
+>>   recipes/tiobench/files/tiobench-makefile.patch |   42 ++++++++++++++++++++++++
+>>   recipes/tiobench/tiobench_0.3.3.bb             |   27 +++++++++++++++
+>>   2 files changed, 69 insertions(+), 0 deletions(-)
+>>   create mode 100644 recipes/tiobench/files/tiobench-makefile.patch
+>>   create mode 100644 recipes/tiobench/tiobench_0.3.3.bb
 >>
->> You do not need to import libelf recipe. oe-core provides libelf via
->> elfutils change the depending recipes to depend on elfutils instead.
-> 
-> OK, thanks! Will test and update patch.
-> koen: should I update patch in same branch or send new patch removing
-> libelf and changing deps?
+>> diff --git a/recipes/tiobench/files/tiobench-makefile.patch b/recipes/tiobench/files/tiobench-makefile.patch
+>> new file mode 100644
+>> index 0000000..23e7a43
+>> --- /dev/null
+>> +++ b/recipes/tiobench/files/tiobench-makefile.patch
+> Please add a header to the patch, if it has been sent upstream.
+Ok  I will do that.
 
-updating the branch would be good enough for me.
+>> @@ -0,0 +1,42 @@
+>> +--- a/Makefile	2011-05-26 07:48:46.341400974 +0200
+>> ++++ b/Makefile	2011-05-26 10:54:48.631400818 +0200
+>> +@@ -1,8 +1,10 @@
+>> + # Makefile for tiotest
+>> +
+>> +-CC=gcc
+>> ++CROSS_COMPILE?=
+>> ++CC=$(CROSS_COMPILE)gcc
+> Would `CC?=gcc` not work too?
+I will try.
 
-regards,
+>> + #CFLAGS=-O3 -fomit-frame-pointer -Wall
+>> + CFLAGS=-O2 -Wall
+>> ++LDFLAGS?=
+>> +
+>> + #DEFINES=-DUSE_MMAP
+>> + #-DUSE_MADVISE
+>> +@@ -14,16 +16,15 @@
+>> +
+>> + #DEFINES=
+>> +
+>> +-LINK=gcc
+> Just use `LINK?=$(CC)`?
+Same as previous one.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+>> + EXE=tiotest
+>> + PROJECT=tiobench
+>> + # do it once instead of each time referenced
+>> + VERSION=$(shell egrep "tiotest v[0-9]+.[0-9]+" tiotest.c | cut -d " " -f 7 | sed "s/v//g")
+>> + DISTNAME=$(PROJECT)-$(VERSION)
+>> + INSTALL=install
+>> +-PREFIX=/usr/local
+>> ++PREFIX?=/usr/local
+>> + BINDIR=$(PREFIX)/bin
+>> +-DOCDIR=/usr/local/doc/$(DISTNAME)
+>> ++DOCDIR=$(PREFIX)/doc/$(DISTNAME)
+>> +
+>> + all: $(EXE)
+>> +
+>> +@@ -34,7 +35,7 @@
+>> + 	$(CC) -c $(CFLAGS) $(DEFINES) tiotest.c -o tiotest.o
+>> +
+>> + $(EXE): tiotest.o crc32.o
+>> +-	$(LINK) -o $(EXE) tiotest.o crc32.o -lpthread
+>> ++	$(CC) -o $(EXE) tiotest.o crc32.o -lpthread $(LDFLAGS)
+>> + 	@echo
+>> + 	@echo "./tiobench.pl --help for usage options"
+>> + 	@echo
+>> diff --git a/recipes/tiobench/tiobench_0.3.3.bb b/recipes/tiobench/tiobench_0.3.3.bb
+>> new file mode 100644
+>> index 0000000..829373f
+>> --- /dev/null
+>> +++ b/recipes/tiobench/tiobench_0.3.3.bb
+>> @@ -0,0 +1,27 @@
+>> +DESCRIPTION = "Threaded I/O tester"
+>> +HOMEPAGE = "http://sourceforge.net/projects/tiobench/"
+>> +PROVIDES = "tiobench"
+>> +LICENSE = "GPL"
+>> +RDEPENDS = "\
+>> +    perl \
+>> +    perl-module-strict \
+>> +    perl-module-getopt-long \
+>> +    perl-module-overload \
+>> +    perl-module-exporter-heavy \
+>> +    "		
+> There is unneeded white space at the end. `git diff --check` is your
+> friend before a commit.
+>
+> Please sort the above variable according to the style guide [1].
+Ok.
 
-iD8DBQFN4zflMkyGM64RGpERAhRpAJ9HSrlrJvJe3Hh//DOSmPsRWBNccwCgoKcA
-vIjuY40aCNQ5tvsEMWODoeY=
-=Oewp
------END PGP SIGNATURE-----
+>> +PR = "r0"
+>> +
+>> +SRC_URI = "\
+>> +    http://sourceforge.net/projects/tiobench/files/tiobench/0.3.3/tiobench-0.3.3.tar.gz \
+>> +    file://tiobench-makefile.patch \
+>> +    "
+>> +SRC_URI[md5sum] = "bf485bf820e693c79e6bd2a38702a128"
+>> +SRC_URI[sha256sum] = "8ad011059a35ac70cdb5e3d3999ceee44a8e8e9078926844b0685b7ea9db2bcc"
+>> +
+>> +do_compile() {
+>> +    make CROSS_COMPILE=${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}
+>> +}
+> Is `oe_runmake` and passing the  available?
+>
+>> +
+>> +do_install() {
+>> +    make install PREFIX=${D}
+>> +}
+> Is not that the default? If you need to pass options you can add those
+> to `EXTRA_OEMAKE`. If this does not work, you should still try to use
+> `oe_runmake` if it is available.
+Thanks for these tips, I will try to apply all your advices and I will 
+send you a new version.
+
+Regards
+
+Ludovic
 
 
 
