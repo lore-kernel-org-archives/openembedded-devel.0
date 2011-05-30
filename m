@@ -1,31 +1,21 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from newsmtp5.atmel.com ([204.2.163.5] helo=sjogate2.atmel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koansoftware@gmail.com>) id 1QR4N4-0001mo-4j
+	(envelope-from <ludovic.desroches@atmel.com>) id 1QR4X2-00029C-Ef
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 May 2011 17:27:10 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id D27C32C812
+	Mon, 30 May 2011 17:37:28 +0200
+Received: from meyreuil.atmel.fr ([10.159.254.132])
+	by sjogate2.atmel.com (8.13.6/8.13.6) with ESMTP id p4UFV7f8024271
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 15:22:55 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id px7FrxoaT6CV
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 15:22:50 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 3D57C2C7D2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 15:22:50 +0000 (UTC)
-Message-ID: <4DE3B68B.4080108@gmail.com>
-Date: Mon, 30 May 2011 17:23:55 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini
-User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
-MIME-Version: 1.0
+	Mon, 30 May 2011 08:31:08 -0700 (PDT)
+Received: from bendor.rfo.atmel.com ([10.159.245.201])
+	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id p4UFY6a21945; 
+	Mon, 30 May 2011 17:34:06 +0200 (MEST)
+From: Ludovic Desroches <ludovic.desroches@atmel.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4DE352E5.7090604@gmail.com> <is0a7n$4j8$1@dough.gmane.org>
-In-Reply-To: <is0a7n$4j8$1@dough.gmane.org>
-Subject: Re: Error building qt4e-base-image with angstrom-2010.x
+Date: Mon, 30 May 2011 18:43:14 +0200
+Message-Id: <09fa504b75a241d161f6263aa74393d19993b075.1306760475.git.ludovic.desroches@atmel.com>
+X-Mailer: git-send-email 1.7.5
+Subject: [PATCH v2] tiobench: add new recipe for 0.3.3 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,22 +29,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 May 2011 15:27:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 30 May 2011 15:37:28 -0000
 
-Koen Kooi ha scritto, Il 30/05/2011 16:39:
-> On 30-05-11 10:18, Marco Cavallini wrote:
->> Hi,
->> I'm facing to a problem building qt4e-base-image with angstrom-2010.x on
->> a Debian lenny host, is it normal?
->> http://pastebin.com/6SnFSYs6
->> I suspect a Debian lenny issue with new OE stuff.
-> 
-> I just tried this on my debian box (dunno which version):
-> 
-> NOTE: package qt4-embedded-4.7.3-r33.1: task do_build: Succeeded
+Signed-off-by: Ludovic Desroches <ludovic.desroches@atmel.com>
+---
+ recipes/tiobench/files/tiobench-makefile.patch |   47 ++++++++++++++++++++++++
+ recipes/tiobench/tiobench_0.3.3.bb             |   28 ++++++++++++++
+ 2 files changed, 75 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/tiobench/files/tiobench-makefile.patch
+ create mode 100644 recipes/tiobench/tiobench_0.3.3.bb
 
-Thank you Koen for your confirmation test.
+diff --git a/recipes/tiobench/files/tiobench-makefile.patch b/recipes/tiobench/files/tiobench-makefile.patch
+new file mode 100644
+index 0000000..f924c1b
+--- /dev/null
++++ b/recipes/tiobench/files/tiobench-makefile.patch
+@@ -0,0 +1,47 @@
++Author: Ludovic Desroches <ludovic.desroches@atmel.com>
++
++Adapt tiobench to OE
++Index: Makefile
++===================================================================
++--- a/Makefile	2011-05-26 07:48:46.341400974 +0200
+++++ b/Makefile	2011-05-30 06:32:38.091401358 +0200
++@@ -1,8 +1,9 @@
++ # Makefile for tiotest
++ 
++-CC=gcc
+++CC?=gcc
++ #CFLAGS=-O3 -fomit-frame-pointer -Wall
++ CFLAGS=-O2 -Wall
+++LDFLAGS?=
++ 
++ #DEFINES=-DUSE_MMAP 
++ #-DUSE_MADVISE
++@@ -14,16 +15,16 @@
++ 
++ #DEFINES=
++ 
++-LINK=gcc
+++LINK?=$(CC)
++ EXE=tiotest
++ PROJECT=tiobench
++ # do it once instead of each time referenced
++ VERSION=$(shell egrep "tiotest v[0-9]+.[0-9]+" tiotest.c | cut -d " " -f 7 | sed "s/v//g")
++ DISTNAME=$(PROJECT)-$(VERSION)
++ INSTALL=install
++-PREFIX=/usr/local
+++PREFIX?=/usr/local
++ BINDIR=$(PREFIX)/bin
++-DOCDIR=/usr/local/doc/$(DISTNAME)
+++DOCDIR=$(PREFIX)/doc/$(DISTNAME)
++ 
++ all: $(EXE)
++ 
++@@ -34,7 +35,7 @@
++ 	$(CC) -c $(CFLAGS) $(DEFINES) tiotest.c -o tiotest.o
++ 
++ $(EXE): tiotest.o crc32.o
++-	$(LINK) -o $(EXE) tiotest.o crc32.o -lpthread
+++	$(LINK) -o $(EXE) tiotest.o crc32.o -lpthread $(LDFLAGS)
++ 	@echo
++ 	@echo "./tiobench.pl --help for usage options"
++ 	@echo
+diff --git a/recipes/tiobench/tiobench_0.3.3.bb b/recipes/tiobench/tiobench_0.3.3.bb
+new file mode 100644
+index 0000000..c469ea9
+--- /dev/null
++++ b/recipes/tiobench/tiobench_0.3.3.bb
+@@ -0,0 +1,28 @@
++DESCRIPTION = "Threaded I/O tester"
++HOMEPAGE = "http://sourceforge.net/projects/tiobench/"
++LICENSE = "GPL"
++RDEPENDS = "\
++    perl \
++    perl-module-strict \
++    perl-module-getopt-long \
++    perl-module-overload \
++    perl-module-exporter-heavy \
++    "
++PR = "r0"
++
++SRC_URI = "\
++    http://sourceforge.net/projects/tiobench/files/tiobench/0.3.3/tiobench-0.3.3.tar.gz \
++    file://tiobench-makefile.patch \
++    "
++SRC_URI[md5sum] = "bf485bf820e693c79e6bd2a38702a128"
++SRC_URI[sha256sum] = "8ad011059a35ac70cdb5e3d3999ceee44a8e8e9078926844b0685b7ea9db2bcc"
++
++EXTRA_OEMAKE = "PREFIX=${D}"
++
++do_compile() {
++    oe_runmake
++}
++
++do_install() {
++    oe_runmake install
++}
+-- 
+1.7.0.4
+
 
 
