@@ -1,35 +1,40 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QR3uc-0007ud-Ds
+	(envelope-from <otavio.salvador@gmail.com>) id 1QR3ui-0007v0-Ez
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 May 2011 16:57:46 +0200
-Received: by gwb11 with SMTP id 11so1569218gwb.6
+	Mon, 30 May 2011 16:57:52 +0200
+Received: by yxn22 with SMTP id 22so1569081yxn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 07:54:35 -0700 (PDT)
+	Mon, 30 May 2011 07:54:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:sender:from:to:subject:date:message-id:x-mailer; 
-	bh=EwfMp8BxxwGV4gkRkMAeVqsxO2jmt4UnSUCNcdpD+4E=;
-	b=mUwpjI4Ws/mU3Dj4miDAT5tIo8rDC3oH1ChpCI9CZxZ7dM5spsRIWIpK9jNk5f/2E1
-	5R+/Xht/w2PfL8cYTPoBW5m2ROOHaNvi76bA7a7QtY/ryTQdhCDreZx/86XHLon6s7hA
-	wzPwJQSXNIgS2mC0Y4IKxi2dWvdkLSbfN2R30=
+	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
+	:x-mailer:in-reply-to:references;
+	bh=fMiDEBJD15zdXq8VmHz8S2eac7/O1WTwlLeuUgz9KGg=;
+	b=qI8jmX4crGXy4IrvXGLcQjp2luFLWQYx5s7ZNvPq9OKZ2yK2i4ZISVpGqvWQCNP8Iv
+	LNs5X2w6s6RnIqljKVsbLGSZHZwufRUltxgyn6bFwGKHCyicQFHar+zQVIPWdPBKSBEu
+	ruSjsyTphoEftVudxt0lUDquPI2b4+yHZoO3M=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer;
-	b=efHzrQFq4jp8rCXMZ91EkP25SehVjQhubAHv6mBsJGPJZie3So5Fi6cjEBHDajb22k
-	vEOQHY+j+LhYkW0wQg1Ts/V9JRQ0hny/bNVe9AUJvUaSgJNT0RZ5ARzF35A4OjsLyZbp
-	58yKpx7kcCF/fE25hrzkK3GFukBgq0iEOig0U=
-Received: by 10.236.176.230 with SMTP id b66mr6043434yhm.247.1306767275370;
-	Mon, 30 May 2011 07:54:35 -0700 (PDT)
+	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references;
+	b=LS/mlCBgdNyvL/VBaoe9MNbqWWB95jVNwA7EBY3eX/pD2qLEhDm408eJ6IV2FJBIGn
+	l2OH9TMAY6beYdfoDm9pJ/KKtmjaY2MCsaseqWDf6hNvCjXMSoW+F25quQmrZJLu2Tbm
+	bAZLqgqjGWmuVTbzFkMN0qTYszU761j0kTqIQ=
+Received: by 10.236.189.41 with SMTP id b29mr6027011yhn.251.1306767283530;
+	Mon, 30 May 2011 07:54:43 -0700 (PDT)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id e48sm2530494yhk.56.2011.05.30.07.54.33
+	by mx.google.com with ESMTPS id e48sm2530494yhk.56.2011.05.30.07.54.41
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 30 May 2011 07:54:34 -0700 (PDT)
+	Mon, 30 May 2011 07:54:42 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 May 2011 14:54:06 +0000
-Message-Id: <1306767263-29895-1-git-send-email-otavio@ossystems.com.br>
+Date: Mon, 30 May 2011 14:54:09 +0000
+Message-Id: <1306767263-29895-4-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
-Subject: Pending patches done by O.S. Systems before using oe-core
+In-Reply-To: <1306767263-29895-1-git-send-email-otavio@ossystems.com.br>
+References: <1306767263-29895-1-git-send-email-otavio@ossystems.com.br>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [PATCH 03/17] xorg-xserver-common.inc: drop .la files from packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,13 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 May 2011 14:57:46 -0000
+X-List-Received-Date: Mon, 30 May 2011 14:57:52 -0000
 
-Hello,
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ recipes/xorg-xserver/xorg-xserver-common.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-I do believe those patches are useful and then I am resending them up
-to date against current dev tip. Please review and merge them as you
-wish.
+diff --git a/recipes/xorg-xserver/xorg-xserver-common.inc b/recipes/xorg-xserver/xorg-xserver-common.inc
+index 0f379e7..fd5492c 100644
+--- a/recipes/xorg-xserver/xorg-xserver-common.inc
++++ b/recipes/xorg-xserver/xorg-xserver-common.inc
+@@ -108,4 +108,5 @@ FILES_${PN}-multimedia-modules = "${libdir}/xorg/modules/multimedia/*drv*"
+ 
+ do_install_append () {
+ 	ln -sf ${datadir}/fonts/X11 ${D}/${libdir}/X11/fonts
++	find ${D}/${libdir} -name '*.la' -exec rm '{}' ';'
+ }
+-- 
+1.7.1
 
 
 
