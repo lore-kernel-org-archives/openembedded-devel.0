@@ -1,29 +1,23 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koansoftware@gmail.com>) id 1QQxjb-0002Fr-OG
-	for Openembedded-devel@lists.openembedded.org;
-	Mon, 30 May 2011 10:21:59 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 053D32C812
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 08:17:47 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7Pzb2UxyO323
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 08:17:42 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 8DB652C7D2
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 08:17:41 +0000 (UTC)
-Message-ID: <4DE352E5.7090604@gmail.com>
-Date: Mon, 30 May 2011 10:18:45 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini
-User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
-MIME-Version: 1.0
-To: Openembedded-devel@lists.openembedded.org
-Subject: Error building qt4e-base-image with angstrom-2010.x
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QQxzt-0002aO-Hh for openembedded-devel@lists.openembedded.org;
+	Mon, 30 May 2011 10:38:49 +0200
+Received: from f053035189.adsl.alicedsl.de ([78.53.35.189]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QQxxN-0007HR-DL for openembedded-devel@lists.openembedded.org;
+	Mon, 30 May 2011 08:36:13 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4DE352E5.7090604@gmail.com>
+References: <4DE352E5.7090604@gmail.com>
+Date: Mon, 30 May 2011 10:35:42 +0200
+Message-ID: <1306744542.4106.31.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: Error building qt4e-base-image with angstrom-2010.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,19 +31,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 May 2011 08:21:59 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 30 May 2011 08:38:49 -0000
+X-Groupsio-MsgNum: 32373
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-riI8IMh4TiaKCn7WpTN7"
 
-Hi,
-I'm facing to a problem building qt4e-base-image with angstrom-2010.x on
-a Debian lenny host, is it normal?
-http://pastebin.com/6SnFSYs6
-I suspect a Debian lenny issue with new OE stuff.
+--=-riI8IMh4TiaKCn7WpTN7
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Any hint would be appreciated.
-TIA
---
-Marco
+Dear Marco,
 
 
+Am Montag, den 30.05.2011, 10:18 +0200 schrieb Marco Cavallini:
+
+> I'm facing to a problem building qt4e-base-image with angstrom-2010.x on
+> a Debian lenny host, is it normal?
+> http://pastebin.com/6SnFSYs6
+
+please always paste the logs into the message so that people do not need
+to open a browser, can comment inline and have everything in the archive
+too.
+
+> I suspect a Debian lenny issue with new OE stuff.
+
+I would not think so, because the tool chain used for compiling is build
+extra (native/sysroot).
+
+> Any hint would be appreciated.
+
+Does it build with another distribution or tool chain? Did the build
+ever work for you?
+
+
+Thanks,
+
+Paul
+
+--=-riI8IMh4TiaKCn7WpTN7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3jVs0ACgkQPX1aK2wOHVgZKgCcC5BducMG6KRjNg6ZUkUiCDNg
+62gAoIXY8xbMYTv9MDRXtHeh70l+YIG8
+=YXMd
+-----END PGP SIGNATURE-----
+
+--=-riI8IMh4TiaKCn7WpTN7--
