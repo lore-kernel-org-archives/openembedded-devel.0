@@ -1,31 +1,43 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koansoftware@gmail.com>) id 1QQybj-0003Sr-MN
+	(envelope-from <martin.jansa@gmail.com>) id 1QQyrG-0003jU-SW
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 May 2011 11:17:55 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 399DB2C812
+	Mon, 30 May 2011 11:33:58 +0200
+Received: by fxm19 with SMTP id 19so2755926fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 09:13:43 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id QE8J-yr0-wgu
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 09:13:38 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 318652C7D2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 09:13:38 +0000 (UTC)
-Message-ID: <4DE36002.6060904@gmail.com>
-Date: Mon, 30 May 2011 11:14:42 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini
-User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
-MIME-Version: 1.0
+	Mon, 30 May 2011 02:30:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=EiW3IItgWFAlB1dTLHz/klAIvAlcuQIChtCRDVonV70=;
+	b=vkhukDZ1GuTzH0n3LHPvF0sfCRc0/yzIDAWhbLKpr8YakQsswwfQNuWBdnT73+IMY2
+	UKxFWnrywtz3513JctpBhwX/0JsoT+8Ena/mCAdeZklCsZ4crmkdifaoHSmBYWWKhmfF
+	1Mu3vQJkOP+GraC6dyhmybW2qRtoagZtAwi2k=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=unzj27CFfU9X8LSdxpgtWSJnC+c4dmiWb4a+/FJrql9qOQcLJXiv/1Pa499LU13GGr
+	r5Oa2cmwFhMECIEes6UWLXZrqa72zyfvG+0Idrpkjad8h8HfJjZCJslhKxNhggJM5O+o
+	g0J7hpKClu4jOwCv6UN30avBjM5RiF1IZm0B0=
+Received: by 10.223.143.6 with SMTP id s6mr3420209fau.74.1306747846589;
+	Mon, 30 May 2011 02:30:46 -0700 (PDT)
+Received: from localhost ([94.230.152.115])
+	by mx.google.com with ESMTPS id n7sm660283fam.43.2011.05.30.02.30.45
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 30 May 2011 02:30:45 -0700 (PDT)
+Date: Mon, 30 May 2011 11:30:39 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4DE352E5.7090604@gmail.com> <1306744542.4106.31.camel@mattotaupa>
-In-Reply-To: <1306744542.4106.31.camel@mattotaupa>
-Subject: Re: Error building qt4e-base-image with angstrom-2010.x
+Message-ID: <20110530093039.GF18119@jama.jama.net>
+References: <355a220b55867ef7a2fd485fbc1fcb76c06ef5d1.1306706130.git.Martin.Jansa@gmail.com>
+	<c424bae29966b789e50eb4112a9d95a2b7833942.1306706130.git.Martin.Jansa@gmail.com>
+	<1306720135.5979.1.camel@perseus>
+	<20110530053016.GE18119@jama.jama.net>
+	<irvd51$kf9$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <irvd51$kf9$1@dough.gmane.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCH 07/14] libelf: import from OE rev d4f0211e2078d5033ae0dee74664de5520d8392d
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,82 +51,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 May 2011 09:17:56 -0000
-Content-Type: multipart/mixed; boundary="------------050003050904060805020905"
+X-List-Received-Date: Mon, 30 May 2011 09:33:58 -0000
+X-Groupsio-MsgNum: 32375
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="gneEPciiIl/aKvOT"
+Content-Disposition: inline
 
---------------050003050904060805020905
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+--gneEPciiIl/aKvOT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Paul Menzel ha scritto, Il 30/05/2011 10:35:
-> Dear Marco,
-> 
-> 
-> Am Montag, den 30.05.2011, 10:18 +0200 schrieb Marco Cavallini:
-> 
->> I'm facing to a problem building qt4e-base-image with angstrom-2010.x on
->> a Debian lenny host, is it normal?
->> http://pastebin.com/6SnFSYs6
-> 
-> please always paste the logs into the message so that people do not need
-> to open a browser, can comment inline and have everything in the archive
-> too.
+On Mon, May 30, 2011 at 08:23:33AM +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> On 30-05-11 07:30, Martin Jansa wrote:
+> > On Sun, May 29, 2011 at 06:48:55PM -0700, Khem Raj wrote:
+> >> On Sun, 2011-05-29 at 23:56 +0200, Martin Jansa wrote:
+> >>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> >>
+> >> You do not need to import libelf recipe. oe-core provides libelf via
+> >> elfutils change the depending recipes to depend on elfutils instead.
+> >=20
+> > OK, thanks! Will test and update patch.
+> > koen: should I update patch in same branch or send new patch removing
+> > libelf and changing deps?
+>=20
+> updating the branch would be good enough for me.
 
-See attachment.
+updated branch pushed
+libelf removed and ltrace DEPENDS updated and moved to recipes-devtools
+devmem2 removed from branch because it was already applied :)
 
+Regards,
 
->> I suspect a Debian lenny issue with new OE stuff.
-> 
-> I would not think so, because the tool chain used for compiling is build
-> extra (native/sysroot).
-> 
->> Any hint would be appreciated.
-> 
-> Does it build with another distribution or tool chain? Did the build
-> ever work for you?
-> 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-I built smoothly until March 2011, today I'm unable to build using
-angstrom-2010.x nor kaeilos
+--gneEPciiIl/aKvOT
+Content-Type: application/pgp-signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
 
-TIA
---
-Marco
+iEYEARECAAYFAk3jY78ACgkQN1Ujt2V2gBxKIACfXG9VumGXMLv9+9xaz55c27qu
+26sAn0nVnEnsnZZrVznka+b5NE0aJ/Oc
+=9zUa
+-----END PGP SIGNATURE-----
 
-d-emb-arm/qrc_WebKit.o .rcc/release-shared-emb-arm/qrc_WebKit.cpp
-| In file included from ../../../../include/QtCore/qstring.h:1:0,
-|                  from ../WebKit/qt/Api/qwebsettings.h:25,
-|                  from ../WebKit/qt/Api/qwebpage.h:24,
-|                  from ../WebKit/qt/Api/qwebpage.cpp:23:
-| ../../../../include/QtCore/../../src/corelib/tools/qstring.h: At global scope:
-| ../../../../include/QtCore/../../src/corelib/tools/qstring.h:187:17: note: the mangling of 'va_list' has changed in GCC 4.4
-| In file included from ../../../../include/QtCore/qstring.h:1:0,
-|                  from .moc/release-shared-emb-arm/../../../WebKit/qt/Api/qwebsettings.h:25,
-|                  from .moc/release-shared-emb-arm/../../../WebKit/qt/Api/qwebpage.h:24,
-|                  from .moc/release-shared-emb-arm/../../../WebKit/qt/Api/qwebinspector.h:24,
-|                  from .moc/release-shared-emb-arm/moc_qwebinspector.cpp:10:
-| ../../../../include/QtCore/../../src/corelib/tools/qstring.h:187:17: note: the mangling of 'va_list' has changed in GCC 4.4
-| rm -f libQtWebKitE.so.4.7.3 libQtWebKitE.so libQtWebKitE.so.4 libQtWebKitE.so.4.7
-| arm-angstrom-linux-gnueabi-g++ -march=armv5te -mtune=arm926ej-s -mthumb-interwork -mno-thumb --sysroot=/home/koan/devel/build/angstrom/tmp/sysroots/armv5te-angstrom-linux-gnueabi -Wl,-rpath-link,/home/koan/devel/build/angstrom/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=gnu -Wl,--no-undefined -Wl,--gc-sections -Wl,--no-undefined -Wl,-rpath-link,/home/koan/devel/build/angstrom/tmp/work/armv5te-angstrom-linux-gnueabi/qt4-embedded-4.7.3-r33.1/qt-everywhere-opensource-src-4.7.3/lib -Wl,-rpath-link,../JavaScriptCore/release -Wl,-rpath-link,/home/koan/devel/build/angstrom/tmp/work/armv5te-angstrom-linux-gnueabi/qt4-embedded-4.7.3-r33.1/qt-everywhere-opensource-src-4.7.3/lib -shared -Wl,-Bsymbolic-functions -Wl,-soname,libQtWebKitE.so.4
-
-...
-
-| /home/koan/devel/build/angstrom/tmp/sysroots/x86_64-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: BFD (GNU Binutils) 2.20.1.20100303 internal error, aborting at /home/koan/devel/build/angstrom/tmp/work/armv5te-angstrom-linux-gnueabi/binutils-cross-2.20.1-r14.4/binutils-2.20.1/bfd/merge.c line 876 in _bfd_merged_section_offset
-|
-| /home/koan/devel/build/angstrom/tmp/sysroots/x86_64-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: Please report this bug.
-|
-| collect2: ld returned 1 exit status
-| make[1]: *** [../../../../lib/libQtWebKitE.so.4.7.3] Error 1
-| make[1]: Leaving directory `/home/koan/devel/build/angstrom/tmp/work/armv5te-angstrom-linux-gnueabi/qt4-embedded-4.7.3-r33.1/qt-everywhere-opensource-src-4.7.3/src/3rdparty/webkit/WebCore'
-| make: *** [sub-webkit-make_default-ordered] Error 2
-| FATAL: oe_runmake failed
-| ERROR: Function do_compile failed
-NOTE: package qt4-embedded-4.7.3-r33.1: task do_compile: Failed
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /home/koan/devel/openembedded/recipes/qt4/qt4-embedded_4.7.3.bb do_compile failed
-ERROR: Task 400 (/home/koan/devel/openembedded/recipes/qt4/qt4-embedded_4.7.3.bb, do_compile) failed with 256
-ERROR: '/home/koan/devel/openembedded/recipes/qt4/qt4-embedded_4.7.3.bb' failed
-ERROR: '/home/koan/devel/openembedded/recipes/qt4/qt4-embedded_4.7.3.bb' failed
-
---------------050003050904060805020905--
+--gneEPciiIl/aKvOT--
