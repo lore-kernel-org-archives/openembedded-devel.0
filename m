@@ -1,35 +1,35 @@
-Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
-	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1QQz3q-0003yK-P0
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 May 2011 11:46:58 +0200
-Received: (qmail 27718 invoked from network); 30 May 2011 11:43:52 +0200
-Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
-	by leibniz.math.fu-berlin.de with SMTP; 30 May 2011 11:43:52 +0200
-X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
-Received: from math.fu-berlin.de ([160.45.40.10])
-	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
-	port 10024) with SMTP id Zj+NGL6nZmRO
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QR0oY-0002cr-Eu for openembedded-devel@lists.openembedded.org;
+	Mon, 30 May 2011 13:39:18 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QR0lX-0007S7-VF for openembedded-devel@lists.openembedded.org;
+	Mon, 30 May 2011 13:36:11 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 May 2011 13:36:11 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 11:43:40 +0200 (CEST)
-Received: (Qmail 27595 invoked from network); 30 May 2011 11:43:40 +0200
-Received: From andorra.imp.fu-berlin.de (160.45.42.84)
-	by leibniz.math.fu-berlin.de with SMTP; 30 May 2011 09:43:40 -0000
-Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.72 #1
-	(Debian)) id 1QQz0e-0004vM-8X
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2011 11:43:40 +0200
-Date: Mon, 30 May 2011 11:43:40 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Mon, 30 May 2011 13:36:11 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110530094340.GA25907@mail.familie-heinold.de>
-References: <4DE352E5.7090604@gmail.com> <1306744542.4106.31.camel@mattotaupa>
-	<4DE36002.6060904@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <4DE36002.6060904@gmail.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-Subject: Re: Error building qt4e-base-image with angstrom-2010.x
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 30 May 2011 13:35:59 +0200
+Message-ID: <irvvev$vsj$1@dough.gmane.org>
+References: <355a220b55867ef7a2fd485fbc1fcb76c06ef5d1.1306706130.git.Martin.Jansa@gmail.com>	<c424bae29966b789e50eb4112a9d95a2b7833942.1306706130.git.Martin.Jansa@gmail.com>	<1306720135.5979.1.camel@perseus>	<20110530053016.GE18119@jama.jama.net>	<irvd51$kf9$1@dough.gmane.org>
+	<20110530093039.GF18119@jama.jama.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <20110530093039.GF18119@jama.jama.net>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [meta-oe][PATCH 07/14] libelf: import from OE rev d4f0211e2078d5033ae0dee74664de5520d8392d
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,14 +43,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 May 2011 09:46:58 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 30 May 2011 11:39:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-in March you didnt build qt 4.7.3 for sure.
+On 30-05-11 11:30, Martin Jansa wrote:
+> On Mon, May 30, 2011 at 08:23:33AM +0200, Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 30-05-11 07:30, Martin Jansa wrote:
+>>> On Sun, May 29, 2011 at 06:48:55PM -0700, Khem Raj wrote:
+>>>> On Sun, 2011-05-29 at 23:56 +0200, Martin Jansa wrote:
+>>>>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>>>>
+>>>> You do not need to import libelf recipe. oe-core provides libelf via
+>>>> elfutils change the depending recipes to depend on elfutils instead.
+>>>
+>>> OK, thanks! Will test and update patch.
+>>> koen: should I update patch in same branch or send new patch removing
+>>> libelf and changing deps?
+>>
+>> updating the branch would be good enough for me.
+> 
+> updated branch pushed
+> libelf removed and ltrace DEPENDS updated and moved to recipes-devtools
+> devmem2 removed from branch because it was already applied :)
 
-Bye Henning
+I cherry-picked devmem2 since I needed it for something in meta-ti I had
+already pushed :)
+
+Anyway, the rest is in as well now.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFN44EeMkyGM64RGpERAp2sAKC43/IKsjZ5rP9PDLOHuxs9l1Z0NwCgoXm1
+R10Mh9E8khV0LK9wkGZAOxk=
+=mxOk
+-----END PGP SIGNATURE-----
+
 
 
