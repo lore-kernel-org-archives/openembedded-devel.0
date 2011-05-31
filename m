@@ -1,23 +1,39 @@
-Received: from katalix.com ([82.103.140.233] helo=mail.katalix.com)
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <celston@katalix.com>) id 1QRPNM-00043Q-6P
+	(envelope-from <kergoth@gmail.com>) id 1QRPS5-0004CX-6l
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 May 2011 15:52:52 +0200
-Received: from [192.168.1.100] (188-220-141-241.zone11.bethere.co.uk
-	[188.220.141.241])
-	(using TLSv1 with cipher DHE-RSA-CAMELLIA256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: chris)
-	by mail.katalix.com (Postfix) with ESMTPSA id 252ABA62071
+	Tue, 31 May 2011 15:57:45 +0200
+Received: by vxd7 with SMTP id 7so3659922vxd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 May 2011 14:33:49 +0100 (BST)
-From: Chris Elston <celston@katalix.com>
+	Tue, 31 May 2011 06:54:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
+	:date:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=4ZUcdWgBRtZyZ2FQnmywn9ZeABSkxhG44xaIaLV99AI=;
+	b=rfUW52EMGtLSrg/rwulzhLwf4Az4CbFH4872g9CBhBiyHpoyq6kFIlHQB3k7bE29xu
+	dMmTr+kUtJ3ks7LDNojx72JznEfYP7TIy9aKD4gLFYdJs3fDyX0PfCtF6G4m8V7qD60K
+	WHDJjWVoHJhKI3vsyunVbU95y85jCxFtYUiog=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	b=d6bcvblNWO3zikzlPxgbIH28R9XylvQm8mycukxKgCCnOQ96kpbVlswfiMDXH6Z5kF
+	jsr4ioFNOlaWzJ8lvDUXupoNLW9aSayPABxrdXl7QtPOZbsWM7LTSEqtK6T78mKjnlGb
+	PX2lhWGp0KeXgBK2tcT/F9lTbdWymIzDKGchU=
+Received: by 10.52.181.166 with SMTP id dx6mr873999vdc.35.1306850075039; Tue,
+	31 May 2011 06:54:35 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.52.101.134 with HTTP; Tue, 31 May 2011 06:54:15 -0700 (PDT)
+In-Reply-To: <1306848827.5488.18.camel@desktop.home>
+References: <1306848827.5488.18.camel@desktop.home>
+From: Chris Larson <clarson@kergoth.com>
+Date: Tue, 31 May 2011 06:54:15 -0700
+X-Google-Sender-Auth: IlkcEgJIJ8cfWh1VwGsX90SHXAs
+Message-ID: <BANLkTim=p04=JHRP+cvnbifVcUx_a76e0A@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Organization: Katalix Systems Ltd
-Date: Tue, 31 May 2011 14:33:47 +0100
-Message-Id: <1306848827.5488.18.camel@desktop.home>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 (2.26.3-1.fc11) 
-Subject: oe-core and mercurial
+Subject: Re: oe-core and mercurial
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,35 +47,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 May 2011 13:52:52 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 31 May 2011 13:57:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-I'm just getting started with oe (specifically oe-core) and ran into a
-confusing problem that took me a minute or two to sort out.
+On Tue, May 31, 2011 at 6:33 AM, Chris Elston <celston@katalix.com> wrote:
+> So the question is, does the OEandYourDistro page need updating for
+> oe-core? In which case, where do I request a wiki account to do so? =C2=
+=A0Or
+> alternatively, should oe-core include the mercurial-native recipe to
+> cover this case? =C2=A0Discuss :-)
 
-The instructions here (which I think are for oe, not core)
-http://www.openembedded.org/index.php/OEandYourDistro don't mention that
-you need mercurial, whereas the page here:
-http://www.openembedded.org/index.php/Required_software
-does.
-
-I believe that this doesn't matter for oe because it has the
-mercurial-native recipe, but this isn't the case for oe-core.
-
-Admittedly sanity.bbclass does check for the presence of hg and warn
-that it's missing. I initially didn't see this message and as far as I
-could tell my bitbake command returned success having only built the
-native recipes.
-
-So the question is, does the OEandYourDistro page need updating for
-oe-core? In which case, where do I request a wiki account to do so?  Or
-alternatively, should oe-core include the mercurial-native recipe to
-cover this case?  Discuss :-)
-
-Cheers,
-
-Chris.
-
+I would think oe-core should contain the recipe and use it as
+appropriate when hg:// is in SRC_URI, personally.
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
