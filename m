@@ -1,37 +1,34 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QRQgH-0000rB-L8
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 May 2011 17:16:30 +0200
-Received: by bwz5 with SMTP id 5so4266501bwz.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QRQu0-0001BA-V1 for openembedded-devel@lists.openembedded.org;
+	Tue, 31 May 2011 17:30:41 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QRQqy-0000Wb-Ch for openembedded-devel@lists.openembedded.org;
+	Tue, 31 May 2011 17:27:32 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 31 May 2011 17:27:32 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 May 2011 08:13:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:date:x-google-sender-auth
-	:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=f5hm3t5npXRzcQlxFcaU+df/w20ij3FjzsP7LnLo8Iw=;
-	b=TU9/gLxdGC376aBHWadIwm3kt9wnk11+johTaJFkYpD8FSx7ui8v5kgzkWdZvds+zi
-	Vbjk78jIwqktX6FrvGPEK22zmfrW3M8wHkGQy8FiVs0kEGzFe0kLfLgtCWp/jSqvHlzX
-	ODl6/qfXQEHWSKeGCpCYMmG51lyeOpfc0V/64=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:cc:content-type:content-transfer-encoding;
-	b=C7g61rIn51db4BH1EokqsSW72xLbbKOXoLx2upaiU43uoxa+hUndRHHgbvD9g3WeFX
-	V8K2PBhyyb/E4Sdpy53T82c5cc8WHdoEUEPZmxQYSVmVvAMFezBTdYC+Q1xSt28mKGzI
-	YCsRSwqfvgDt5SzCz6RLMQAa+mT6xZBo5Oiws=
-MIME-Version: 1.0
-Received: by 10.204.47.18 with SMTP id l18mr5816596bkf.31.1306854800315; Tue,
-	31 May 2011 08:13:20 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.78.203 with HTTP; Tue, 31 May 2011 08:13:20 -0700 (PDT)
-Date: Tue, 31 May 2011 15:13:20 +0000
-X-Google-Sender-Auth: KaD_B3r8xljW6f6Rwu-_E6eNaNs
-Message-ID: <BANLkTi=qZLnR+PJX7yV+=MnD=rkNJAh9Cw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: [meta-oe] udev 171 is broken
+	Tue, 31 May 2011 17:27:32 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 31 May 2011 17:27:20 +0200
+Message-ID: <is31co$63t$1@dough.gmane.org>
+References: <BANLkTi=qZLnR+PJX7yV+=MnD=rkNJAh9Cw@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <BANLkTi=qZLnR+PJX7yV+=MnD=rkNJAh9Cw@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [meta-oe] udev 171 is broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,21 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 May 2011 15:16:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 31 May 2011 15:30:41 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Our system stoped to work and all the probing has starting to fail. We
-tracked it down to udev 171 update. It used to work fine but now fails
-completely. Reverting back to udev 164 fixes it.
+On 31-05-11 17:13, Otavio Salvador wrote:
+> Hello,
+> 
+> Our system stoped to work and all the probing has starting to fail. We
+> tracked it down to udev 171 update. It used to work fine but now fails
+> completely. Reverting back to udev 164 fixes it.
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Hmm, it works on all the platforms I tested. What kind of failures are
+you getting? And more importantly, which kernel versions are you using?
+Have a look at
+http://git.kernel.org/?p=linux/hotplug/udev.git;a=blob;f=README;h=f85637068547d681c6b79686e9add05abf1d44ca;hb=171
+to see what requirements there are for the kernel.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFN5QjYMkyGM64RGpERAjtBAJ9+76ix2K5Ip0n3ImMMa3KFy9pEoQCffmTt
+LeIUhTaS8/KJk7II/3z+/G4=
+=YByW
+-----END PGP SIGNATURE-----
+
 
 
