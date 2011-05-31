@@ -1,35 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QRRy4-0003TW-B9 for openembedded-devel@lists.openembedded.org;
-	Tue, 31 May 2011 18:38:56 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QRRv1-0002D0-JJ for openembedded-devel@lists.openembedded.org;
-	Tue, 31 May 2011 18:35:47 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 May 2011 18:35:47 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1QRS25-0003hj-Mt
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 31 May 2011 18:43:05 +0200
+Received: by bwz5 with SMTP id 5so4356731bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 May 2011 18:35:47 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 31 May 2011 09:39:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=gXT0uLzN2V2BlcKBNSmRgEQVNJuz60tLd+8HEcHseTY=;
+	b=f7aNFgCgL6pqiDtkzzidDfcl7sog3y95sfYlsh6EvfvDdJFAJMc3+7srqy6ryNOja3
+	l/edQwFyr4wYkJ7N0jrVQs/R4QqQ8oFCkYxDIE6Mz+2YdjQt90lX5wOZZ2DInTTC4DK2
+	RW8d1bYtoU/ckLnGyVjN9JNR/aSuyCB4jT2yg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=kcLqBZV4iCYuG5kaZ/Vv6xPvV8+XU2bkVhcWkH4ThXBXyKFyu3ZGbA4qmT6qn9ZFEI
+	dGkEMYdJUj7A09mOTeMIdp3OLnyvzT8XQyuQ/JkhNoxSXGQfeERdzp/HM4p4ZxWJoXaw
+	EVX5zveIKBxQ3I1JZIzvRzzvGo/lBA39vqJO4=
+MIME-Version: 1.0
+Received: by 10.204.7.211 with SMTP id e19mr5705455bke.139.1306859996206; Tue,
+	31 May 2011 09:39:56 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.78.203 with HTTP; Tue, 31 May 2011 09:39:56 -0700 (PDT)
+In-Reply-To: <is31co$63t$1@dough.gmane.org>
+References: <BANLkTi=qZLnR+PJX7yV+=MnD=rkNJAh9Cw@mail.gmail.com>
+	<is31co$63t$1@dough.gmane.org>
+Date: Tue, 31 May 2011 16:39:56 +0000
+X-Google-Sender-Auth: rPa7crlXLZZnzD3TmUbUsMGS1VY
+Message-ID: <BANLkTimE2Y=zrWtyWPKekDeUpcmdfFNENA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 31 May 2011 18:35:33 +0200
-Message-ID: <is35cl$1jv$1@dough.gmane.org>
-References: <cover.1306856963.git.Martin.Jansa@gmail.com>	<b2a70421756ef2cc7d59c82fb4cd02141e99a52c.1306856963.git.Martin.Jansa@gmail.com>
-	<20110531155728.GA23647@jama.jama.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <20110531155728.GA23647@jama.jama.net>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-oe][PATCH 1/3] xserver-xorg: upgrade from 1.10.1.902 to 1.10.2 and replace part of randr-support.patch with upstream patch
+Subject: Re: [meta-oe] udev 171 is broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,42 +48,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 May 2011 16:38:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 31 May 2011 16:43:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, May 31, 2011 at 15:27, Koen Kooi <koen@dominion.thruhere.net> wrote=
+:
+> Hmm, it works on all the platforms I tested. What kind of failures are
+> you getting? And more importantly, which kernel versions are you using?
 
-On 31-05-11 17:57, Martin Jansa wrote:
-> On Tue, May 31, 2011 at 05:49:53PM +0200, Martin Jansa wrote:
->> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->> ---
-> 
->> -EXTRA_OECONF += " ${CONFIG_MANAGER_OPTION} ${XINERAMA} --disable-kdrive --disable-xephyr --disable-xsdl --disable-xfake --disable-xfbdev --disable-dmx"
->> +EXTRA_OECONF += " ${CONFIG_MANAGER_OPTION} ${XINERAMA} --disable-xsdl --disable-xfake --disable-xfbdev --disable-dmx"
->>  EXTRA_OECONF += " --enable-dri2 --disable-unit-tests --disable-docs --disable-devel-docs"
->>  
->>  export LDFLAGS += " -ldl "
-> 
-> I forgot to update commit message, but I've also enabled kdrive/xephyr
-> per otavio request from oe.dev where it did ICE with gcc-4.5
-> 
-> With gcc-4.6 from meta-oe it builds fine, would be great if someone with
-> gcc-4.5 from meta-oe or gcc-4.6.0/gcc-4.5.0 from oe-core test it before
-> merging it.
+It doesn't load any module on the system. I am using 2.6.37 and it
+does work fine with udev 164 and previous meta-oe one too.
 
-NOTE: package xserver-xorg-2_1.10.2-r19.0: task do_package_write_ipk:
-Succeeded
-
-That's with gcc 4.5 from meta-oe
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFN5RjVMkyGM64RGpERAv1lAJ0WqF3O/dPkqct2pBI6GIfqi9M0VgCfU0VP
-ka4YCQGKHLC+Yo9OaLRbXeo=
-=YcuN
------END PGP SIGNATURE-----
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
