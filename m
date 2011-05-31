@@ -1,40 +1,42 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1QRSlt-0005F5-6G
+	(envelope-from <otavio.salvador@gmail.com>) id 1QRTaC-0001uM-Vf
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 May 2011 19:30:25 +0200
-Received: by vws2 with SMTP id 2so3886731vws.6
+	Tue, 31 May 2011 20:22:25 +0200
+Received: by bwz5 with SMTP id 5so4453691bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 May 2011 10:27:15 -0700 (PDT)
+	Tue, 31 May 2011 11:19:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
-	:date:x-google-sender-auth:message-id:subject:to:content-type
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=sS7GWqziJ0CV1OmT5V7G5s8Abl2Xn6pU0odIhq2Sd9Y=;
-	b=iijYVe+bG7RYEdYwZaTgGo3uCki+O2HcFdRnbJc5BzzcmCT+amfyhzz1R0O9Y22hiY
-	+uGNI62GpX8Kuk/QXi/w7Xjk2qK8afMWuHpp3nrvX3VahlVg7sQhnIdpzX8fDbvr4+2q
-	NeubyqdQBvL/qc+QvoyZ0rq8/LQ9fwIYdUZ2c=
+	bh=JoFOniRD3I8gAhxMR0z57IZN1K9LObGIqr7ZXHr4jhk=;
+	b=C8FBATsibi0isOHP6GO7KWnW8iqvPvi3m3/xQVLXwPwSJFbS/QSg4YfW/N7YoBUjv4
+	lKRZQ4M+GPVtz0Dx/uDEwlcvYoRzyB3oRbPaMS4qlIqvEpyAIoq9eZ/6Ce31lBkQJaMO
+	831J7nt9UIeTYAbURgPm7ett2Zpw0BkSuQNMc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	b=J19gd49sCNlb2wzpQ+KdpcdKYgskA2eQ556kyuv7wgYNXIVz1dH7WtOIUOQ1ES4Gb3
-	JcHRrGQRXnWHxZzQxgWJI4TRzQsax3hwW8l+37kOBJJNHTdpg0mEdeaMxP4M7xDPZEmV
-	XoaAJ5FOhuFUWca/Nu7G+XbV+LSU64nIfFhNU=
-Received: by 10.52.106.166 with SMTP id gv6mr3846635vdb.275.1306862835058;
-	Tue, 31 May 2011 10:27:15 -0700 (PDT)
+	b=J2mz7JZwiOcBCmBai+aFUTXl70VQQQanzxaMjvk5eZZ4njTxH01qQ5Sv4ESYl8UMVb
+	Scqjpc3RJiqKIu1tFZG/lyZSqHYqlHdn4hR8eRauEdUXgFRVyU/0e/zbHM2OONNgLFJT
+	p42UbGsTf5oNITYZ+ofWa+S2TAYB+jndbEdoI=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.52.101.134 with HTTP; Tue, 31 May 2011 10:26:55 -0700 (PDT)
-In-Reply-To: <BANLkTiks=fC27YHTaNEbFwObRGO0U=cVeg@mail.gmail.com>
-References: <1306848827.5488.18.camel@desktop.home>
-	<BANLkTiks=fC27YHTaNEbFwObRGO0U=cVeg@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 31 May 2011 10:26:55 -0700
-X-Google-Sender-Auth: hNnrzc3YN5DU99NOcTxtY_L4yRo
-Message-ID: <BANLkTinQC8bZ=3PJFDoGagcHAq4B75hbTA@mail.gmail.com>
+Received: by 10.205.82.67 with SMTP id ab3mr5680570bkc.166.1306865955119; Tue,
+	31 May 2011 11:19:15 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.78.203 with HTTP; Tue, 31 May 2011 11:19:15 -0700 (PDT)
+In-Reply-To: <is38b0$k1j$1@dough.gmane.org>
+References: <BANLkTi=qZLnR+PJX7yV+=MnD=rkNJAh9Cw@mail.gmail.com>
+	<is31co$63t$1@dough.gmane.org>
+	<BANLkTimE2Y=zrWtyWPKekDeUpcmdfFNENA@mail.gmail.com>
+	<is38b0$k1j$1@dough.gmane.org>
+Date: Tue, 31 May 2011 18:19:15 +0000
+X-Google-Sender-Auth: 81j2hNssDbggQMZ09vMr0vi5GY8
+Message-ID: <BANLkTi=C56_ztMy5NnWv9KyOgL2VbVrN7Q@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: oe-core and mercurial
+Subject: Re: [meta-oe] udev 171 is broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,25 +50,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 May 2011 17:30:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 31 May 2011 18:22:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 31, 2011 at 10:04 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> =C2=A0Or
->> alternatively, should oe-core include the mercurial-native recipe to
->> cover this case? =C2=A0Discuss :-)
->>
->
-> Well it can but usually OE does not need a captive version of mercurial
-> so it can use the one installed on the build machine.
+On Tue, May 31, 2011 at 17:25, Koen Kooi <koen@dominion.thruhere.net> wrote=
+:
+...
+> I was thinking of putting it back in, could you try creating a rule with
+...
 
-Which is what ASSUME_PROVIDED is for..
+I didn't try it yet but seems logical to support it out of box.
+Otherwise udev could rrecomends udev-extra-rules so it also works by
+default. If someone put it on bad-recomendation then he/she can handle
+it.
+
 --=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
