@@ -1,39 +1,40 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QRRG5-0001kr-1a
+	(envelope-from <martin.jansa@gmail.com>) id 1QRROo-0002dp-1l
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 May 2011 17:53:29 +0200
-Received: by mail-fx0-f47.google.com with SMTP id 19so3664488fxm.6
+	Tue, 31 May 2011 18:02:33 +0200
+Received: by fxm19 with SMTP id 19so3671356fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 May 2011 08:50:21 -0700 (PDT)
+	Tue, 31 May 2011 08:57:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references:in-reply-to:references;
-	bh=OkXvLGu8Vn/TFOII12ipKPKMxmBhXripHfP1jEJA3oU=;
-	b=kli88/gEbshLJC9FlygIzKTJaO+TaqLvMWCYx7KDmBwY6Ch3fmW8jHThXDTagIILbD
-	fgTrYwSdSCdRBRlv4wkM+fMkxdahpqJ3RuUOI5TYqx+FJCRrku0iwG4y7fygsThe+q3E
-	kcrzrHPw9TW7j4uOIYMi79m/Hk2Mi2peKi1+g=
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=WJ3xvSLNLxbmX7lHzT9sRQnp07tJkfKNw5B3dokJwYY=;
+	b=TvYDxnrGhMb5I8/370k1SfnpaYR2pQnh0Y+07tdmLPTcZZDqU15htDh6lKvf/4K6ay
+	Iboe5XtbWT1aG32e9fi911wntrCqJATh+SjSTuOm/1c1+8ywb3JXV/XBIUjDmbvGvRi1
+	RJcgWvSthJ7c3Dw2IDyDHVqG4163jBC4/gRs4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=c7SXsgeA96IWkXAqEXfGCsSIDbVGU5UaKWqLeJ+6Lq9d/f+eB2k1eNT8KCHWB7WkpZ
-	EkJlyVdllLAmIVM7vKzJuX+sLuHB25Bfu9mKhfdgnHMLCZS2S42IM+xD12N24Pc6MEBn
-	6sSQDa4TAzFnPOiFtITmTz6rT1fZ5MqCa7Q80=
-Received: by 10.223.156.9 with SMTP id u9mr4911513faw.70.1306857014392;
-	Tue, 31 May 2011 08:50:14 -0700 (PDT)
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=Aimy+iKzAsKx2y+cBPyA+FY98CNiDavGo/OVJU/JBCNG76fYdDXhU2jEYjIJL/5nMC
+	uF7JB14rNfbRpdT6Nrfle8AtVRRUgn0Q4dnybVWafzLkLbqnXEVF8DyzJsddJUy0lDNB
+	NkaycLljveby6Buiv/KNNyseUkUlZ94jZZ9PQ=
+Received: by 10.223.145.78 with SMTP id c14mr160183fav.75.1306857456085;
+	Tue, 31 May 2011 08:57:36 -0700 (PDT)
 Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id n15sm88349fag.18.2011.05.31.08.50.13
+	by mx.google.com with ESMTPS id h1sm92028fag.11.2011.05.31.08.57.34
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 31 May 2011 08:50:13 -0700 (PDT)
+	Tue, 31 May 2011 08:57:35 -0700 (PDT)
+Date: Tue, 31 May 2011 17:57:29 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 31 May 2011 17:49:55 +0200
-Message-Id: <af2f1de23c491cdd25e80011971a9019f20c8f47.1306856963.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.5.3
-In-Reply-To: <b2a70421756ef2cc7d59c82fb4cd02141e99a52c.1306856963.git.Martin.Jansa@gmail.com>
-References: <b2a70421756ef2cc7d59c82fb4cd02141e99a52c.1306856963.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1306856963.git.Martin.Jansa@gmail.com>
+Message-ID: <20110531155728.GA23647@jama.jama.net>
 References: <cover.1306856963.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/3] gpsd, tangogps, foxtrotgps, navit: move to new recipes-navigation
+	<b2a70421756ef2cc7d59c82fb4cd02141e99a52c.1306856963.git.Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <b2a70421756ef2cc7d59c82fb4cd02141e99a52c.1306856963.git.Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCH 1/3] xserver-xorg: upgrade from 1.10.1.902 to 1.10.2 and replace part of randr-support.patch with upstream patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,122 +48,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 May 2011 15:53:29 -0000
+X-List-Received-Date: Tue, 31 May 2011 16:02:33 -0000
+X-Groupsio-MsgNum: 32431
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="d6Gm4EdcadzBjdND"
+Content-Disposition: inline
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../foxtrotgps/foxtrotgps_1.0.1.bb                 |    0
- .../gpsd/gpsd-2.95/60-gpsd.rules                   |    0
- .../gpsd/gpsd-2.95/gpsd                            |    0
- .../gpsd/gpsd-2.95/gpsd-default                    |    0
- .../gpsd/gpsd-2.95/libtool.patch                   |    0
- .../gpsd/gpsd_2.95.bb                              |    0
- .../navit/navit-fpu.inc                            |    0
- .../navit/navit-icons/GPL-2                        |    0
- .../navit/navit-icons/configure.in                 |    0
- .../navit/navit-icons_svn.bb                       |    0
- .../navit/navit.inc                                |    0
- .../navit/navit/maps.xml                           |    0
- .../navit/navit/navit.xml                          |    0
- .../navit/navit/osd.xml                            |    0
- .../navit/navit/plugins.xml                        |    0
- .../navit/navit/speech.xml                         |    0
- .../navit/navit_svn.bb                             |    0
- .../tangogps/tangogps_0.99.4.bb                    |    0
- 18 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/{recipes-support => recipes-navigation}/foxtrotgps/foxtrotgps_1.0.1.bb (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/gpsd/gpsd-2.95/60-gpsd.rules (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/gpsd/gpsd-2.95/gpsd (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/gpsd/gpsd-2.95/gpsd-default (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/gpsd/gpsd-2.95/libtool.patch (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/gpsd/gpsd_2.95.bb (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/navit/navit-fpu.inc (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/navit/navit-icons/GPL-2 (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/navit/navit-icons/configure.in (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/navit/navit-icons_svn.bb (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/navit/navit.inc (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/navit/navit/maps.xml (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/navit/navit/navit.xml (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/navit/navit/osd.xml (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/navit/navit/plugins.xml (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/navit/navit/speech.xml (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/navit/navit_svn.bb (100%)
- rename meta-oe/{recipes-support => recipes-navigation}/tangogps/tangogps_0.99.4.bb (100%)
+--d6Gm4EdcadzBjdND
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-support/foxtrotgps/foxtrotgps_1.0.1.bb b/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.0.1.bb
-similarity index 100%
-rename from meta-oe/recipes-support/foxtrotgps/foxtrotgps_1.0.1.bb
-rename to meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.0.1.bb
-diff --git a/meta-oe/recipes-support/gpsd/gpsd-2.95/60-gpsd.rules b/meta-oe/recipes-navigation/gpsd/gpsd-2.95/60-gpsd.rules
-similarity index 100%
-rename from meta-oe/recipes-support/gpsd/gpsd-2.95/60-gpsd.rules
-rename to meta-oe/recipes-navigation/gpsd/gpsd-2.95/60-gpsd.rules
-diff --git a/meta-oe/recipes-support/gpsd/gpsd-2.95/gpsd b/meta-oe/recipes-navigation/gpsd/gpsd-2.95/gpsd
-similarity index 100%
-rename from meta-oe/recipes-support/gpsd/gpsd-2.95/gpsd
-rename to meta-oe/recipes-navigation/gpsd/gpsd-2.95/gpsd
-diff --git a/meta-oe/recipes-support/gpsd/gpsd-2.95/gpsd-default b/meta-oe/recipes-navigation/gpsd/gpsd-2.95/gpsd-default
-similarity index 100%
-rename from meta-oe/recipes-support/gpsd/gpsd-2.95/gpsd-default
-rename to meta-oe/recipes-navigation/gpsd/gpsd-2.95/gpsd-default
-diff --git a/meta-oe/recipes-support/gpsd/gpsd-2.95/libtool.patch b/meta-oe/recipes-navigation/gpsd/gpsd-2.95/libtool.patch
-similarity index 100%
-rename from meta-oe/recipes-support/gpsd/gpsd-2.95/libtool.patch
-rename to meta-oe/recipes-navigation/gpsd/gpsd-2.95/libtool.patch
-diff --git a/meta-oe/recipes-support/gpsd/gpsd_2.95.bb b/meta-oe/recipes-navigation/gpsd/gpsd_2.95.bb
-similarity index 100%
-rename from meta-oe/recipes-support/gpsd/gpsd_2.95.bb
-rename to meta-oe/recipes-navigation/gpsd/gpsd_2.95.bb
-diff --git a/meta-oe/recipes-support/navit/navit-fpu.inc b/meta-oe/recipes-navigation/navit/navit-fpu.inc
-similarity index 100%
-rename from meta-oe/recipes-support/navit/navit-fpu.inc
-rename to meta-oe/recipes-navigation/navit/navit-fpu.inc
-diff --git a/meta-oe/recipes-support/navit/navit-icons/GPL-2 b/meta-oe/recipes-navigation/navit/navit-icons/GPL-2
-similarity index 100%
-rename from meta-oe/recipes-support/navit/navit-icons/GPL-2
-rename to meta-oe/recipes-navigation/navit/navit-icons/GPL-2
-diff --git a/meta-oe/recipes-support/navit/navit-icons/configure.in b/meta-oe/recipes-navigation/navit/navit-icons/configure.in
-similarity index 100%
-rename from meta-oe/recipes-support/navit/navit-icons/configure.in
-rename to meta-oe/recipes-navigation/navit/navit-icons/configure.in
-diff --git a/meta-oe/recipes-support/navit/navit-icons_svn.bb b/meta-oe/recipes-navigation/navit/navit-icons_svn.bb
-similarity index 100%
-rename from meta-oe/recipes-support/navit/navit-icons_svn.bb
-rename to meta-oe/recipes-navigation/navit/navit-icons_svn.bb
-diff --git a/meta-oe/recipes-support/navit/navit.inc b/meta-oe/recipes-navigation/navit/navit.inc
-similarity index 100%
-rename from meta-oe/recipes-support/navit/navit.inc
-rename to meta-oe/recipes-navigation/navit/navit.inc
-diff --git a/meta-oe/recipes-support/navit/navit/maps.xml b/meta-oe/recipes-navigation/navit/navit/maps.xml
-similarity index 100%
-rename from meta-oe/recipes-support/navit/navit/maps.xml
-rename to meta-oe/recipes-navigation/navit/navit/maps.xml
-diff --git a/meta-oe/recipes-support/navit/navit/navit.xml b/meta-oe/recipes-navigation/navit/navit/navit.xml
-similarity index 100%
-rename from meta-oe/recipes-support/navit/navit/navit.xml
-rename to meta-oe/recipes-navigation/navit/navit/navit.xml
-diff --git a/meta-oe/recipes-support/navit/navit/osd.xml b/meta-oe/recipes-navigation/navit/navit/osd.xml
-similarity index 100%
-rename from meta-oe/recipes-support/navit/navit/osd.xml
-rename to meta-oe/recipes-navigation/navit/navit/osd.xml
-diff --git a/meta-oe/recipes-support/navit/navit/plugins.xml b/meta-oe/recipes-navigation/navit/navit/plugins.xml
-similarity index 100%
-rename from meta-oe/recipes-support/navit/navit/plugins.xml
-rename to meta-oe/recipes-navigation/navit/navit/plugins.xml
-diff --git a/meta-oe/recipes-support/navit/navit/speech.xml b/meta-oe/recipes-navigation/navit/navit/speech.xml
-similarity index 100%
-rename from meta-oe/recipes-support/navit/navit/speech.xml
-rename to meta-oe/recipes-navigation/navit/navit/speech.xml
-diff --git a/meta-oe/recipes-support/navit/navit_svn.bb b/meta-oe/recipes-navigation/navit/navit_svn.bb
-similarity index 100%
-rename from meta-oe/recipes-support/navit/navit_svn.bb
-rename to meta-oe/recipes-navigation/navit/navit_svn.bb
-diff --git a/meta-oe/recipes-support/tangogps/tangogps_0.99.4.bb b/meta-oe/recipes-navigation/tangogps/tangogps_0.99.4.bb
-similarity index 100%
-rename from meta-oe/recipes-support/tangogps/tangogps_0.99.4.bb
-rename to meta-oe/recipes-navigation/tangogps/tangogps_0.99.4.bb
--- 
-1.7.5.3
+On Tue, May 31, 2011 at 05:49:53PM +0200, Martin Jansa wrote:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
 
+> -EXTRA_OECONF +=3D " ${CONFIG_MANAGER_OPTION} ${XINERAMA} --disable-kdriv=
+e --disable-xephyr --disable-xsdl --disable-xfake --disable-xfbdev --disabl=
+e-dmx"
+> +EXTRA_OECONF +=3D " ${CONFIG_MANAGER_OPTION} ${XINERAMA} --disable-xsdl =
+--disable-xfake --disable-xfbdev --disable-dmx"
+>  EXTRA_OECONF +=3D " --enable-dri2 --disable-unit-tests --disable-docs --=
+disable-devel-docs"
+> =20
+>  export LDFLAGS +=3D " -ldl "
 
+I forgot to update commit message, but I've also enabled kdrive/xephyr
+per otavio request from oe.dev where it did ICE with gcc-4.5
 
+With gcc-4.6 from meta-oe it builds fine, would be great if someone with
+gcc-4.5 from meta-oe or gcc-4.6.0/gcc-4.5.0 from oe-core test it before
+merging it.
+
+If it still fails to build then we can disable it again or fix toolchain
+if it's worth it..
+
+Cheers,
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--d6Gm4EdcadzBjdND
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
+
+iEYEARECAAYFAk3lD+gACgkQN1Ujt2V2gByRVwCfYotwOch2UgsVoB4xUqOM/Quv
+qjgAn3xUyKj4BjOJHYIMT6mwmhGUckx4
+=9Cm2
+-----END PGP SIGNATURE-----
+
+--d6Gm4EdcadzBjdND--
