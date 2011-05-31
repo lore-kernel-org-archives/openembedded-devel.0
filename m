@@ -1,24 +1,35 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1QRPkb-00053Y-L4
+	(envelope-from <Tom_Rini@mentor.com>) id 1QRQSz-0008Dl-El
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 May 2011 16:16:53 +0200
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QRPha-0000lh-GL
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 May 2011 16:13:46 +0200
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4DE4F1D0.1020508@gmail.com>
-References: <4DE352E5.7090604@gmail.com> <is0a7n$4j8$1@dough.gmane.org>
-	<4DE491DA.2000404@gmail.com> <1306848351.2525.492.camel@phil-desktop>
-	<4DE4F1D0.1020508@gmail.com>
-Date: Tue, 31 May 2011 15:13:45 +0100
-Message-ID: <1306851225.2525.497.camel@phil-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: Error building qt4e-base-image with angstrom-2010.x
+	Tue, 31 May 2011 17:02:48 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1QRQPv-0004qY-RK from Tom_Rini@mentor.com ;
+	Tue, 31 May 2011 07:59:35 -0700
+Received: from SVR-ORW-FEM-02.mgc.mentorg.com ([147.34.96.206]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Tue, 31 May 2011 07:56:07 -0700
+Received: from [172.30.80.84] (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
+	(147.34.96.168) with Microsoft SMTP Server id 14.1.289.1;
+	Tue, 31 May 2011 07:59:34 -0700
+Message-ID: <4DE50256.1020000@mentor.com>
+Date: Tue, 31 May 2011 07:59:34 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+MIME-Version: 1.0
+To: Paul Menzel <paulepanter@users.sourceforge.net>
+References: <201105220001.36288.schnitzeltony@gmx.de>	
+	<201105220143.54594.schnitzeltony@gmx.de>
+	<1306782978.4106.483.camel@mattotaupa>
+In-Reply-To: <1306782978.4106.483.camel@mattotaupa>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 31 May 2011 14:56:07.0735 (UTC)
+	FILETIME=[DF3C8470:01CC1FA2]
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] Revert "perl-native: create_wrapper on perl${PV} too"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,44 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 May 2011 14:16:53 -0000
+X-List-Received-Date: Tue, 31 May 2011 15:02:49 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2011-05-31 at 15:49 +0200, Marco Cavallini wrote:
-> Phil Blundell ha scritto, Il 31/05/2011 15:25:
-> > On Tue, 2011-05-31 at 08:59 +0200, Marco Cavallini wrote:
-> >> BTW looks like I have a major problem with gcc 4.4 and armel - the ABI
-> >> of va_list changed (for c++ libraries)
-> > 
-> > Why is this a problem? 
->
-> Phil,
-> looks like the problem is gcc-4.3 on the Host side (Debian Lenny x86_64)
-> and besides I wonder if I'm the only one OE user using this distro I'm
-> doing a backup of the whole system and planned to upgrade to Squeeze
-> tomorrow.
+On 05/30/2011 12:16 PM, Paul Menzel wrote:
+> From: Paul Menzel <paulepanter@users.sourceforge.net>
+> Date: Mon, 30 May 2011 21:08:24 +0200
 > 
-> This is the output:
+> This reverts commit 1e255fbd296e95ff178d66c4a1fe4875a988d7e1.
 > 
-> /home/koan/devel/build/angstrom/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-initial-4.5-r36.1+svnr170880/gcc-4_5-branch/gcc/config/arm/neon.md:5730:
-> internal compiler error: Segmentation fault
-> | Please submit a full bug report,
-> | with preprocessed source if appropriate.
-> | See <file:///usr/share/doc/gcc-4.3/README.Bugs> for instructions.
+> 	Author: Tom Rini <tom_rini@mentor.com>
+> 	Date:   Mon May 16 13:06:33 2011 -0700
+> 
+> 		  perl-native: create_wrapper on perl${PV} too
+> 
+> 		  perl${PV} becomes hostperl when building for the target so we need a
+> 		  wrapper on that too.
+> 
+> 		  Signed-off-by: Tom Rini <tom_rini@mentor.com>
+> 
+> It breaks task compile of perl using `angstrom-2010.x` or `minimal{,-uclibc}` for `MACHINE = "beagleboard"` [1].
 
-That certainly does indicate a bug in your host gcc (if it's
-reproducible in the same place) or a broken computer (if it occurs at
-different, random places).  Assuming the first, you might be able to
-work around it by building the cross gcc with less optimisation, but if
-you're going to upgrade to squeeze anyway then that probably will solve
-the problem too.
+Didn't another change go in which fixes this go in?
 
-This doesn't seem to have anything to do with the thing you originally
-mentioned (ARM va_list ABI change in gcc 4.4) though.
-
-p.
-
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
