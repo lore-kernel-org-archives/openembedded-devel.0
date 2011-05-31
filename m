@@ -1,35 +1,35 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QRSQh-0004XU-3d
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 May 2011 19:08:31 +0200
-Received: by wye20 with SMTP id 20so3980746wye.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QRSkk-0005A3-Ee for openembedded-devel@lists.openembedded.org;
+	Tue, 31 May 2011 19:29:15 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QRShj-0006dO-05 for openembedded-devel@lists.openembedded.org;
+	Tue, 31 May 2011 19:26:07 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 31 May 2011 19:26:06 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 May 2011 10:05:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=TKNzbH6CXiYRCHahtqcI4dRwRgoWqYp1DFMTNbgD7zw=;
-	b=QiXUQNusDgFQ5j7RaTr90GbXVP664Uek5A4NPwjS8X9upzw6Rjt7uoGT52OteWlXnM
-	ZsFiC0z7guBMxrvfhHPYdm27gyTV1SXWNhEUHZL5/5CTsaOFdD3VA/jttJpdmF8mNFFV
-	D3S03EqLDw5gThcxPkJm9ZtvgKS3YJcaNOtXI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=fqQ9INs3ejwVBVemZG4CPrpbJkgJLiBR3AzZ5SKoWj/WABsMqfXEDUt+h2qWiQEiWs
-	wPr1WCOBHF0x5e5ytWjiiie1altIl+gb2oIDoSTwHw9MnDOlt63GroLzqk9FKRyQwTJJ
-	wn7ytW45MOQe4ji2DKWolbTOz2HQ+T/g8BWY0=
-Received: by 10.216.67.72 with SMTP id i50mr6221726wed.29.1306861521109; Tue,
-	31 May 2011 10:05:21 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.216.28.19 with HTTP; Tue, 31 May 2011 10:04:51 -0700 (PDT)
-In-Reply-To: <1306848827.5488.18.camel@desktop.home>
-References: <1306848827.5488.18.camel@desktop.home>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 31 May 2011 10:04:51 -0700
-Message-ID: <BANLkTiks=fC27YHTaNEbFwObRGO0U=cVeg@mail.gmail.com>
+	Tue, 31 May 2011 19:26:06 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: oe-core and mercurial
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 31 May 2011 19:25:52 +0200
+Message-ID: <is38b0$k1j$1@dough.gmane.org>
+References: <BANLkTi=qZLnR+PJX7yV+=MnD=rkNJAh9Cw@mail.gmail.com>	<is31co$63t$1@dough.gmane.org>
+	<BANLkTimE2Y=zrWtyWPKekDeUpcmdfFNENA@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <BANLkTimE2Y=zrWtyWPKekDeUpcmdfFNENA@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [meta-oe] udev 171 is broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,55 +43,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 May 2011 17:08:31 -0000
+X-List-Received-Date: Tue, 31 May 2011 17:29:15 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Tue, May 31, 2011 at 6:33 AM, Chris Elston <celston@katalix.com> wrote:
-> I'm just getting started with oe (specifically oe-core) and ran into a
-> confusing problem that took me a minute or two to sort out.
->
-> The instructions here (which I think are for oe, not core)
-> http://www.openembedded.org/index.php/OEandYourDistro don't mention that
-> you need mercurial, whereas the page here:
-> http://www.openembedded.org/index.php/Required_software
-> does.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
+On 31-05-11 18:39, Otavio Salvador wrote:
+> On Tue, May 31, 2011 at 15:27, Koen Kooi <koen@dominion.thruhere.net> wrote:
+>> Hmm, it works on all the platforms I tested. What kind of failures are
+>> you getting? And more importantly, which kernel versions are you using?
+> 
+> It doesn't load any module on the system. I am using 2.6.37 and it
+> does work fine with udev 164 and previous meta-oe one too.
 
-that page needs updating
+That's expected, the OE modprobe rule move to udev-extra-rules:
 
->
-> I believe that this doesn't matter for oe because it has the
-> mercurial-native recipe, but this isn't the case for oe-core.
->
-> Admittedly sanity.bbclass does check for the presence of hg and warn
-> that it's missing. I initially didn't see this message and as far as I
-> could tell my bitbake command returned success having only built the
-> native recipes.
->
-> So the question is, does the OEandYourDistro page need updating for
-> oe-core? In which case, where do I request a wiki account to do so?
+http://cgit.openembedded.org/cgit.cgi/meta-openembedded/commit/?id=7aa7dd55db8db6ec350c743ce42eb469395a3208
 
-yes send request to Tom King. account creation is protected for spamming
-reasons.
+I was thinking of putting it back in, could you try creating a rule with
 
-=C2=A0Or
-> alternatively, should oe-core include the mercurial-native recipe to
-> cover this case? =C2=A0Discuss :-)
->
+ACTION=="add", DEVPATH=="/devices/*", ENV{MODALIAS}=="?*",
+RUN+="/sbin/modprobe $env{MODALIAS}"
 
-Well it can but usually OE does not need a captive version of mercurial
-so it can use the one installed on the build machine.
+and rebooting?
 
-> Cheers,
->
-> Chris.
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFN5SSgMkyGM64RGpERAkG5AJ4x3sF4pb0ahPW7zW7uSMHVy788dQCfYc4g
+KjXhd+Ih2usYzPLftl6ewBc=
+=RUMT
+-----END PGP SIGNATURE-----
+
 
 
