@@ -1,42 +1,34 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from ns.awellconnected.net ([83.167.180.132]
+	helo=edison.awellconnected.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QRTaC-0001uM-Vf
+	(envelope-from <lukas@htc-linux.org>) id 1QRXQX-0007Md-Vu
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 May 2011 20:22:25 +0200
-Received: by bwz5 with SMTP id 5so4453691bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 May 2011 11:19:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=JoFOniRD3I8gAhxMR0z57IZN1K9LObGIqr7ZXHr4jhk=;
-	b=C8FBATsibi0isOHP6GO7KWnW8iqvPvi3m3/xQVLXwPwSJFbS/QSg4YfW/N7YoBUjv4
-	lKRZQ4M+GPVtz0Dx/uDEwlcvYoRzyB3oRbPaMS4qlIqvEpyAIoq9eZ/6Ce31lBkQJaMO
-	831J7nt9UIeTYAbURgPm7ett2Zpw0BkSuQNMc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=J2mz7JZwiOcBCmBai+aFUTXl70VQQQanzxaMjvk5eZZ4njTxH01qQ5Sv4ESYl8UMVb
-	Scqjpc3RJiqKIu1tFZG/lyZSqHYqlHdn4hR8eRauEdUXgFRVyU/0e/zbHM2OONNgLFJT
-	p42UbGsTf5oNITYZ+ofWa+S2TAYB+jndbEdoI=
+	Wed, 01 Jun 2011 00:28:42 +0200
+Received: from localhost.awellconnected.net ([127.0.0.1] helo=localhost)
+	by edison.awellconnected.net with esmtpa (Exim 4.69)
+	(envelope-from <lukas@htc-linux.org>)
+	id 1QRXNC-0005Yh-20; Tue, 31 May 2011 23:25:14 +0100
+Received: from 172.17.29.222 ([172.17.29.222]) by webmail.htc-linux.org
+	(Horde Framework) with HTTP; Tue, 31 May 2011 23:25:13 +0100
+Message-ID: <20110531232513.19296umd0ei7gu0w@webmail.htc-linux.org>
+Date: Tue, 31 May 2011 23:25:13 +0100
+From: Lukas-David Gorris <lukas@htc-linux.org>
+To: openembedded-devel@lists.openembedded.org, shr-devel@lists.shr-project.org
+References: <20110531114917.33186l97l89fv3oc@webmail.htc-linux.org>
+	<20110531115612.15355h3xwavjtjyo@webmail.htc-linux.org>
+In-Reply-To: <20110531115612.15355h3xwavjtjyo@webmail.htc-linux.org>
 MIME-Version: 1.0
-Received: by 10.205.82.67 with SMTP id ab3mr5680570bkc.166.1306865955119; Tue,
-	31 May 2011 11:19:15 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.78.203 with HTTP; Tue, 31 May 2011 11:19:15 -0700 (PDT)
-In-Reply-To: <is38b0$k1j$1@dough.gmane.org>
-References: <BANLkTi=qZLnR+PJX7yV+=MnD=rkNJAh9Cw@mail.gmail.com>
-	<is31co$63t$1@dough.gmane.org>
-	<BANLkTimE2Y=zrWtyWPKekDeUpcmdfFNENA@mail.gmail.com>
-	<is38b0$k1j$1@dough.gmane.org>
-Date: Tue, 31 May 2011 18:19:15 +0000
-X-Google-Sender-Auth: 81j2hNssDbggQMZ09vMr0vi5GY8
-Message-ID: <BANLkTi=C56_ztMy5NnWv9KyOgL2VbVrN7Q@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe] udev 171 is broken
+User-Agent: Internet Messaging Program (IMP) H3 (4.3.9)
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - edison.awellconnected.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - htc-linux.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: Re: oebb.sh oe-core with non-angstrom distro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,26 +42,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 May 2011 18:22:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 31 May 2011 22:28:42 -0000
+Content-Type: text/plain;
+ charset=ISO-8859-1;
+ DelSp="Yes";
+ format="flowed"
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 31, 2011 at 17:25, Koen Kooi <koen@dominion.thruhere.net> wrote=
-:
-...
-> I was thinking of putting it back in, could you try creating a rule with
-...
+Quoting Lukas-David Gorris <lukas@htc-linux.org>:
 
-I didn't try it yet but seems logical to support it out of box.
-Otherwise udev could rrecomends udev-extra-rules so it also works by
-default. If someone put it on bad-recomendation then he/she can handle
-it.
+> Quoting Lukas-David Gorris <lukas@htc-linux.org>:
+>
+>> Hi,
+>>
+>> Is it possible to use the =20
+>> http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/setup-scripts/ set=
+up =20
+>> scripts for a non-angstrom distro?
+>>
+>> I tried to do this as explained in the following:
+>>
+>> git clone git://git.angstrom-distribution.org/setup-scripts
+>> cd setup-scripts
+>> git checkout -b oe-core remotes/origin/oe-core
+>>
+>> Now I replace =A8angstrom...=A8 with =A8shr=A8 in DISTRO=3D in oebb.sh a=
+nd run
+>>
+>> ./oebb.sh config htcleo #I added htcleo machine in the meta-smartphone l=
+ayer
+>>
+>> ./oebb.sh bitbake shr-image
+>>
+>> This will end up with bitbake trying to use some angstrom scripts =20
+>> and then fail. It would be very nice to make the distro =20
+>> configurable in oebb.sh. I suppose extra configurations for the =20
+>> non-angstrom distro will be needed but I am uncertain how to go =20
+>> about this. Maybe we can add a new branch for SHR specific oebb.sh ?
+>>
+>> Best regards
+>>
+>> Lukas
+>>
+>>
+>
+> Thanks to Heiner I just found the first problem.The meta-shr layer =20
+> that provides everything specific to the shr distro must be included =20
+> for this to work.
+>
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Patch for git://git.angstrom-distribution.org/setup-scripts,oe-core =20
+for use with SHR distro:
+
+
+diff --git a/conf/local.conf b/conf/local.conf
+index a641121..69ac50e 100644
+--- a/conf/local.conf
++++ b/conf/local.conf
+@@ -19,7 +19,7 @@ IMAGE_FSTYPES +=3D "tar.bz2"
+  PARALLEL_MAKE     =3D "-j2"
+  BB_NUMBER_THREADS =3D "2"
+
+-DISTRO   =3D "angstrom-2010.x"
++DISTRO   =3D "shr"
+
+  # Set terminal types by default it expects gnome-terminal
+  # but we chose xterm
+diff --git a/oebb.sh b/oebb.sh
+index 43697ab..49afaa8 100755
+--- a/oebb.sh
++++ b/oebb.sh
+@@ -66,7 +66,7 @@ else
+      =20
+#--------------------------------------------------------------------------
+      # Specify distribution information
+      =20
+#--------------------------------------------------------------------------
+-    DISTRO=3D"angstrom-2010.x"
++    DISTRO=3D"shr"
+      DISTRO_DIRNAME=3D`echo $DISTRO | sed s#[.-]#_#g`
+
+      echo "export SCRIPTS_BASE_VERSION=3D${BASE_VERSION}" > ${OE_ENV_FILE}
+@@ -253,7 +253,6 @@ BBFILES =3D ""
+  # Add your overlay location to BBLAYERS
+  # Make sure to have a conf/layers.conf in there
+  BBLAYERS =3D " \\
+-  \${TOPDIR}/sources/meta-angstrom \\
+    \${TOPDIR}/sources/meta-openembedded/meta-oe \\
+    \${TOPDIR}/sources/meta-openembedded/meta-efl \\
+    \${TOPDIR}/sources/meta-openembedded/meta-gpe \\
+@@ -266,6 +265,8 @@ BBLAYERS =3D " \\
+    \${TOPDIR}/sources/meta-smartphone/meta-openmoko \\
+    \${TOPDIR}/sources/meta-smartphone/meta-palm \\
+    \${TOPDIR}/sources/meta-smartphone/meta-zaurus \\
++  \${TOPDIR}/sources/meta-smartphone/meta-shr \\
++  \${TOPDIR}/sources/meta-smartphone/meta-fso \\
+    \${TOPDIR}/sources/meta-intel/meta-sugarbay \\
+    \${TOPDIR}/sources/meta-intel/meta-crownbay \\
+    \${TOPDIR}/sources/meta-intel/meta-emenlow \\
+diff --git a/sources/layers.txt b/sources/layers.txt
+index 45c68d2..0d96a70 100644
+--- a/sources/layers.txt
++++ b/sources/layers.txt
+@@ -1,11 +1,10 @@
+  # Name,repo-uri,branch,rev
+  bitbake,git://git.openembedded.net/bitbake,master,HEAD
+-meta-angstrom,git://git.angstrom-distribution.org/meta-angstrom,master,HEA=
+D
+-meta-openembedded,git://git.openembedded.net/meta-openembedded,master,HEAD
++meta-openembedded,git://git.openembedded.net/meta-openembedded-contrib,shr=
+,HEAD
+  =20
+meta-texasinstruments,git://git.angstrom-distribution.org/meta-texasinstrum=
+ents,master,HEAD
+  meta-efikamx,git://github.com/kraj/meta-efikamx.git,master,HEAD
+  meta-nslu2,git://github.com/kraj/meta-nslu2.git,master,HEAD
+  =20
+meta-smartphone,http://git.shr-project.org/repo/meta-smartphone.git,master,=
+HEAD
+  meta-intel,git://git.yoctoproject.org/meta-intel,master,HEAD
+  meta-xilinx,git://git.yoctoproject.org/meta-xilinx,master,HEAD
+-openembedded-core,https://github.com/openembedded/oe-core.git,master,HEAD
++openembedded-core,git://git.openembedded.net/openembedded-core-contrib,shr=
+,HEAD
+
 
 
