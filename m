@@ -1,39 +1,24 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1QRPS5-0004CX-6l
+	(envelope-from <philb@gnu.org>) id 1QRPkb-00053Y-L4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 May 2011 15:57:45 +0200
-Received: by vxd7 with SMTP id 7so3659922vxd.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 May 2011 06:54:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
-	:date:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=4ZUcdWgBRtZyZ2FQnmywn9ZeABSkxhG44xaIaLV99AI=;
-	b=rfUW52EMGtLSrg/rwulzhLwf4Az4CbFH4872g9CBhBiyHpoyq6kFIlHQB3k7bE29xu
-	dMmTr+kUtJ3ks7LDNojx72JznEfYP7TIy9aKD4gLFYdJs3fDyX0PfCtF6G4m8V7qD60K
-	WHDJjWVoHJhKI3vsyunVbU95y85jCxFtYUiog=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	b=d6bcvblNWO3zikzlPxgbIH28R9XylvQm8mycukxKgCCnOQ96kpbVlswfiMDXH6Z5kF
-	jsr4ioFNOlaWzJ8lvDUXupoNLW9aSayPABxrdXl7QtPOZbsWM7LTSEqtK6T78mKjnlGb
-	PX2lhWGp0KeXgBK2tcT/F9lTbdWymIzDKGchU=
-Received: by 10.52.181.166 with SMTP id dx6mr873999vdc.35.1306850075039; Tue,
-	31 May 2011 06:54:35 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.52.101.134 with HTTP; Tue, 31 May 2011 06:54:15 -0700 (PDT)
-In-Reply-To: <1306848827.5488.18.camel@desktop.home>
-References: <1306848827.5488.18.camel@desktop.home>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 31 May 2011 06:54:15 -0700
-X-Google-Sender-Auth: IlkcEgJIJ8cfWh1VwGsX90SHXAs
-Message-ID: <BANLkTim=p04=JHRP+cvnbifVcUx_a76e0A@mail.gmail.com>
+	Tue, 31 May 2011 16:16:53 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QRPha-0000lh-GL
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 31 May 2011 16:13:46 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: oe-core and mercurial
+In-Reply-To: <4DE4F1D0.1020508@gmail.com>
+References: <4DE352E5.7090604@gmail.com> <is0a7n$4j8$1@dough.gmane.org>
+	<4DE491DA.2000404@gmail.com> <1306848351.2525.492.camel@phil-desktop>
+	<4DE4F1D0.1020508@gmail.com>
+Date: Tue, 31 May 2011 15:13:45 +0100
+Message-ID: <1306851225.2525.497.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: Error building qt4e-base-image with angstrom-2010.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,24 +32,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 May 2011 13:57:45 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 31 May 2011 14:16:53 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Tue, May 31, 2011 at 6:33 AM, Chris Elston <celston@katalix.com> wrote:
-> So the question is, does the OEandYourDistro page need updating for
-> oe-core? In which case, where do I request a wiki account to do so? =C2=
-=A0Or
-> alternatively, should oe-core include the mercurial-native recipe to
-> cover this case? =C2=A0Discuss :-)
+On Tue, 2011-05-31 at 15:49 +0200, Marco Cavallini wrote:
+> Phil Blundell ha scritto, Il 31/05/2011 15:25:
+> > On Tue, 2011-05-31 at 08:59 +0200, Marco Cavallini wrote:
+> >> BTW looks like I have a major problem with gcc 4.4 and armel - the ABI
+> >> of va_list changed (for c++ libraries)
+> > 
+> > Why is this a problem? 
+>
+> Phil,
+> looks like the problem is gcc-4.3 on the Host side (Debian Lenny x86_64)
+> and besides I wonder if I'm the only one OE user using this distro I'm
+> doing a backup of the whole system and planned to upgrade to Squeeze
+> tomorrow.
+> 
+> This is the output:
+> 
+> /home/koan/devel/build/angstrom/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-initial-4.5-r36.1+svnr170880/gcc-4_5-branch/gcc/config/arm/neon.md:5730:
+> internal compiler error: Segmentation fault
+> | Please submit a full bug report,
+> | with preprocessed source if appropriate.
+> | See <file:///usr/share/doc/gcc-4.3/README.Bugs> for instructions.
 
-I would think oe-core should contain the recipe and use it as
-appropriate when hg:// is in SRC_URI, personally.
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+That certainly does indicate a bug in your host gcc (if it's
+reproducible in the same place) or a broken computer (if it occurs at
+different, random places).  Assuming the first, you might be able to
+work around it by building the cross gcc with less optimisation, but if
+you're going to upgrade to squeeze anyway then that probably will solve
+the problem too.
+
+This doesn't seem to have anything to do with the thing you originally
+mentioned (ARM va_list ABI change in gcc 4.4) though.
+
+p.
+
+
 
 
