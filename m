@@ -1,42 +1,34 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QRrtT-0007ZB-Vu
+	(envelope-from <martin.jansa@gmail.com>) id 1QRsnO-0000n1-RP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Jun 2011 22:19:56 +0200
-Received: by yia13 with SMTP id 13so88400yia.6
+	Wed, 01 Jun 2011 23:17:43 +0200
+Received: by fxm19 with SMTP id 19so400155fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jun 2011 13:16:41 -0700 (PDT)
+	Wed, 01 Jun 2011 14:14:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
-	:x-mailer:in-reply-to:references:in-reply-to:references;
-	bh=NLb4pMKZlebSL50VipMAmJrQYp/KKdTlqSbxOIn2sKc=;
-	b=Kv+T6LdQDLqkHv0M1vejGgAMDny8fyBOTryKSVw8/Iza22qXOnNQrE/HC6JoKpYtaf
-	sNQcFzuPABWnkNcV2Yt0R+IDvq1Dsa9nmbMnHEO1BBPjrB7hcrUf7NrmZhPOwY8H2wlK
-	kkmwI6Rt8nwH9G+MD9V9CPqVxu97DJ7zo/sOE=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=iOwJxWXimRdMczDNMV/4Yuv2Z4FsyC+gQJj5A77FG/Q=;
+	b=LZCWPPFWcxjzudrarsVKL2NmftOXePzGKhPpR0cJ+Qa01rzMIpNnkNH5ihisFtqV1n
+	+4Nrs0L33yF0S+UrRjV9X/RJpNN43iawokzsmswbqiKjY+OcYGeB+aYtZEO295y9g94M
+	JvOWNDxVjtLJr1OR7yeLAY+cGeLMmzlYN5Fgg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references;
-	b=OP853fiBiFet5A9ZmGDFfASoJiNxlnbYBZf02mpbpueiD9nYiNy0spuYPfKQ0oPa2j
-	s7Jhm7JloZm9FOkM2m1oC7bxKv8wjtAyLMfI4dBS89lBHLIbq3Y0ysI9hzM9sIT2C8Gl
-	UV4QF4GG+T3Ni61cYsPKxpO/RLoKn9pqmf4Mc=
-Received: by 10.236.186.101 with SMTP id v65mr8929658yhm.94.1306959401471;
-	Wed, 01 Jun 2011 13:16:41 -0700 (PDT)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id t43sm1478016yhm.70.2011.06.01.13.16.39
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=RPI0Qz9B7vhSTP3PnBAIbI9eSM5YBv3JJusDoD0HFFAsXyN0qhuKw/Q7lZIJBDLh/m
+	iSCug9HX1z998hLCnXn+qSIAOFY1uG2EmvcJZ27xPceM6k99268cmQGZkv30eLP4lzgN
+	NkONvYeXXqeC9codpmmp8hh3Rnzir17ya5fJ4=
+Received: by 10.223.57.86 with SMTP id b22mr1237643fah.95.1306962871790;
+	Wed, 01 Jun 2011 14:14:31 -0700 (PDT)
+Received: from localhost ([94.230.152.115])
+	by mx.google.com with ESMTPS id r10sm537261fah.26.2011.06.01.14.14.30
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 01 Jun 2011 13:16:40 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Wed, 01 Jun 2011 14:14:30 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Jun 2011 20:16:15 +0000
-Message-Id: <82a4381c9ac475d989220cb27924f02a6154d3b1.1306959338.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1306959338.git.otavio@ossystems.com.br>
-References: <cover.1306959338.git.otavio@ossystems.com.br>
-In-Reply-To: <cover.1306959338.git.otavio@ossystems.com.br>
-References: <cover.1306959338.git.otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 5/5] pcsc-lite: rdepends on ccid and drop init script
+Date: Wed,  1 Jun 2011 23:14:26 +0200
+Message-Id: <cover.1306962838.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.5.3
+Subject: [meta-oe][PATCH 0/2] Pull request #15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,52 +42,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jun 2011 20:19:56 -0000
+X-List-Received-Date: Wed, 01 Jun 2011 21:17:43 -0000
 
-We use auto-start feature by default as it is provided by ccid and
-works out of box for most use cases.
+Initial bits are already in oe-core so it's time to push this too.
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- .../recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb   |   15 +++------------
- 1 files changed, 3 insertions(+), 12 deletions(-)
+The following changes since commit 7da05acc4665dcfcd008e6ce698169b8e9503b33:
 
-diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb
-index 7d235d6..14a0ba0 100644
---- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb
-+++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb
-@@ -3,10 +3,10 @@ HOMEPAGE = "http://pcsclite.alioth.debian.org/"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c8e551349dc346258274f0007679e149"
- DEPENDS = "udev"
--PR = "r0"
-+RDEPENDS += "ccid"
-+PR = "r1"
- 
--SRC_URI = "https://alioth.debian.org/frs/download.php/3533/pcsc-lite-${PV}.tar.bz2 \
--           file://pcscd.init "
-+SRC_URI = "https://alioth.debian.org/frs/download.php/3533/pcsc-lite-${PV}.tar.bz2"
- 
- SRC_URI[md5sum] = "47e7055cfc14399fdaa1b7a4aa06e5aa"
- SRC_URI[sha256sum] = "41f13d552eaa2c3978fbb6f2125e81903a0767011d999052fd1a6ee03880b398"
-@@ -21,15 +21,6 @@ EXTRA_OECONF = " \
- 
- S = "${WORKDIR}/pcsc-lite-${PV}"
- 
--do_install() {
--	oe_runmake DESTDIR="${D}" install
--	install -d "${D}/${sysconfdir}/init.d"
--	install -m 755 "${WORKDIR}/pcscd.init" "${D}/${sysconfdir}/init.d/pcscd"
--
--	# handle vars values
--	sed -i 's,/usr/sbin,${sbindir},g;s,/var,${localstatedir},g' "${D}/${sysconfdir}/init.d/pcscd"
--}
--
- PACKAGES =+ "${PN}-lib"
- 
- INITSCRIPT_NAME = "pcscd"
+  udev-extra-rules: remove modprobe rule, it has moved back to udev (2011-05-31 20:37:45 +0200)
+
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/allarch
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/allarch
+
+Martin Jansa (2):
+  siteinfo: add allarch-linux target
+  recipes: use allarch.bbclass instead just PACKAGE_ARCH = all
+
+ .../recipes-efl/e17/illume-keyboards-shr_git.bb    |    4 ++--
+ meta-oe/classes/siteinfo.bbclass                   |    1 +
+ meta-oe/recipes-extended/tzdata/tzdata.inc         |    4 ++--
+ .../font-update-common/font-update-common_0.1.bb   |    4 +++-
+ .../recipes-graphics/tasks/task-fonts-truetype.bb  |    4 ++--
+ .../ttf-fonts/ttf-arphic-uming_20080216.bb         |    2 +-
+ .../recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb  |    2 +-
+ .../recipes-graphics/ttf-fonts/ttf-droid_git.bb    |    2 +-
+ .../recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb |    2 +-
+ .../ttf-fonts/ttf-hunkyfonts_0.3.0.bb              |    2 +-
+ .../ttf-fonts/ttf-liberation_0.2.bb                |    2 +-
+ .../recipes-graphics/ttf-fonts/ttf-mplus_027.bb    |    2 +-
+ .../ttf-fonts/ttf-sazanami_20040629.bb             |    2 +-
+ .../ttf-fonts/ttf-ubuntu-font-family_0.69.bb       |    2 +-
+ .../ttf-fonts/ttf-wqy-zenhei_0.6.26.bb             |    1 +
+ meta-oe/recipes-graphics/ttf-fonts/ttf.inc         |    2 +-
+ .../xserver-common/xserver-common_1.34.bb          |    4 ++--
+ .../xserver-nodm-init/xserver-nodm-init_2.0.bb     |    4 ++--
+ .../ca-certificates_20090814+nmu2.bb               |    2 +-
+ meta-oe/recipes-support/fbset/fbset-modes.bb       |    4 ++--
+ .../mime-support/mime-support_3.44.bb              |    4 ++--
+ .../recipes-support/poppler/poppler-data_0.4.0.bb  |    5 ++---
+ 22 files changed, 32 insertions(+), 29 deletions(-)
+
 -- 
-1.7.2.5
+1.7.5.3
 
 
 
