@@ -1,32 +1,36 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <george.huntingtoniii@gmail.com>) id 1QRpdC-0004im-Sr
-	for Openembedded-devel@lists.openembedded.org;
-	Wed, 01 Jun 2011 19:54:59 +0200
-Received: by gwb11 with SMTP id 11so20739gwb.6
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jun 2011 10:51:47 -0700 (PDT)
+	(envelope-from <otavio.salvador@gmail.com>) id 1QRrtE-0007X3-Li
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Jun 2011 22:19:40 +0200
+Received: by ywg8 with SMTP id 8so89031ywg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Jun 2011 13:16:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=EI1W/s8z2Fi30s/M0ZD1z4YnCs/pRYoTnTvgbIl8oN8=;
-	b=Ko3dfWCDh3Jv7AJoNfzN8yFcOPyFFMNmUNzar9KA8yHUq+U16KpoC2FglTLjzfjjWw
-	lXkmF+Tb8dPzoovThLdrzScrByMKfBfd/JMpzF+yV+bhI6UPMWensuo5i8zQ5SpsBXVG
-	vs/+5a5wtz68eN0oKhhOTv9dEUnE2yeWh7S3w=
+	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
+	:x-mailer; bh=vJrkZxsg1tE8pPKMV6GYlMHkDgc/fKmvsKggNyKQpIw=;
+	b=uFy6F7RMXl8xxGndSupyDDm8CeCAXVdmoXpWrKNxkMZsSY3w1VKF+XW7CbtQmoqrl5
+	iXIRa2j5cFBDZk2o9SrbBHZC72WX8t3tz9xSrd6fSDZZmUKpjfwDD2YZgO87iC5vqBpQ
+	W4UBx4dC5Xjk8T0GKeAnSP0ibdYTRqpEKj/VY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=MJHO9rD0SeJOleWMXVMfeoBYCWJbTjVdveH9eOQFF87bCnhfJDmhwRyGxJBuo37pNs
-	tFAzXdi7+0WPNdbrVYlUbC+dVjzn8QPgjvfjCXcZS76D2H17dWgBnEKQnqRb6MY+q+6K
-	TYeEQwXYS/aXnAOm2x6m9LOP6bujqg5erkdFs=
-MIME-Version: 1.0
-Received: by 10.236.180.101 with SMTP id i65mr9631349yhm.493.1306950707436;
-	Wed, 01 Jun 2011 10:51:47 -0700 (PDT)
-Received: by 10.236.154.201 with HTTP; Wed, 1 Jun 2011 10:51:47 -0700 (PDT)
-Date: Wed, 1 Jun 2011 13:51:47 -0400
-Message-ID: <BANLkTik9khWBXixj=_LDj5pGdi=PO=0WbA@mail.gmail.com>
-From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
-To: Openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: [PATCH] perl-native multilib patch for ubuntu 11.04
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=p6genfkICXRf4BFMBfOUzVNeOE2IaFycbZi6FgKpTASVKksnfBKG1hMMQsy+bzfsx4
+	jh2oyNBMQxgTG7CfBdhgEvPlQSv79yzQr+Vj90QFXh56VthGDwyFolsvIs7xVsg+LgXG
+	f7xcNyyeZcYQQo6fYdNXcip4N729o7zId+4pY=
+Received: by 10.236.143.172 with SMTP id l32mr8312622yhj.457.1306959388122;
+	Wed, 01 Jun 2011 13:16:28 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id t43sm1478016yhm.70.2011.06.01.13.16.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 01 Jun 2011 13:16:27 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  1 Jun 2011 20:16:10 +0000
+Message-Id: <cover.1306959338.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH 0/5] Pending patches on O.S. Systems tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,76 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jun 2011 17:54:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 01 Jun 2011 20:19:40 -0000
 
-When I try to build perl-native under ubuntu 11.04 x86_64 from
-2011.03-maintenance branch
-it fails unless I cherry-pick
-commit 86fde1fe0281cc8c9d2bf1012d8eff5e24a69e55  can we put this in
-the 2011.03-maintenance branch?
+The following changes since commit 7da05acc4665dcfcd008e6ce698169b8e9503b33:
 
-cherry-pick: 86fde1fe0281cc8c9d2bf1012d8eff5e24a69e55
-Tested-by: george huntington <george.huntingtoniii@gmail.com>
+  udev-extra-rules: remove modprobe rule, it has moved back to udev (2011-05-31 20:37:45 +0200)
 
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe master
+  https://github.com/OSSystems/meta-oe/tree/master
 
+Otavio Salvador (5):
+  inih: bump SRCREV
+  freerdp: bump SRCREV to 20110530 snapshot
+  udev-extra-rules: refactor mount.sh script
+  ccid: add 1.4.4 version recipe
+  pcsc-lite: rdepends on ccid and drop init script
 
+ meta-oe/recipes-core/udev/udev-extra-rules.bb      |    2 +-
+ .../recipes-core/udev/udev-extra-rules/mount.sh    |   28 +++++++------------
+ meta-oe/recipes-support/ccid/ccid_1.4.4.bb         |   18 ++++++++++++
+ meta-oe/recipes-support/freerdp/freerdp_git.bb     |    4 +-
+ meta-oe/recipes-support/inih/libinih_git.bb        |    4 +-
+ .../recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb   |   15 ++--------
+ 6 files changed, 36 insertions(+), 35 deletions(-)
+ create mode 100644 meta-oe/recipes-support/ccid/ccid_1.4.4.bb
 
-Original patch from Scott Ellis
-Modified by US replacing `uname -m` by '*' to support non x86_64 targets
-(based on recommendations on the mailing list)
-
-Signed-off-by: Scott Ellis <scott@jumpnowtek.com>
-Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
----
- recipes/perl/files/ubuntu-11.04-multiarch.patch |   12 ++++++++++++
- recipes/perl/perl-native_5.10.1.bb              |    3 +++
- 2 files changed, 15 insertions(+), 0 deletions(-)
-
-diff --git a/recipes/perl/files/ubuntu-11.04-multiarch.patch
-b/recipes/perl/files/ubuntu-11.04-multiarch.patch
-new file mode 100644
-index 0000000..4f51eb3
---- /dev/null
-+++ b/recipes/perl/files/ubuntu-11.04-multiarch.patch
-@@ -0,0 +1,12 @@
-+diff --git perl-5.10.1/Configure-orig perl-5.10.1/Configure
-+index 5508fd2..8ee7dae 100755
-+--- perl-5.10.1/Configure-orig
-++++ perl-5.10.1/Configure
-+@@ -1311,6 +1311,7 @@ glibpth="/lib /usr/lib /lib64 /usr/lib64 $xlibpth"
-+ glibpth="$glibpth /usr/ccs/lib /usr/ucblib /usr/local/lib"
-+ test -f /usr/shlib/libc.so && glibpth="/usr/shlib $glibpth"
-+ test -f /shlib/libc.so     && glibpth="/shlib $glibpth"
-++test -f /usr/lib/*-linux-gnu/libc.so && glibpth="/usr/lib/*-linux-gnu
-$glibpth"
-+ test -d /usr/lib64         && glibpth="$glibpth /lib64 /usr/lib64
-/usr/local/lib64"
-+
-+ : Private path used by Configure to find libraries.  Its value
-diff --git a/recipes/perl/perl-native_5.10.1.bb b/recipes/perl/
-perl-native_5.10.1.bb
-index 5aa0c7b..3dafc10 100644
---- a/recipes/perl/perl-native_5.10.1.bb
-+++ b/recipes/perl/perl-native_5.10.1.bb
-@@ -20,6 +20,7 @@ SRC_URI = "
-http://ftp.funet.fi/pub/CPAN/src/perl-${PV}.tar.gz;name=perl-${PV} \
-            file://native-nopacklist.patch \
-            file://native-perlinc.patch \
-    file://perl-fix-cross-library-check.patch \
-+           file://ubuntu-11.04-multiarch.patch \
-    "
-
- SRC_URI[perl-5.10.1.md5sum] = "b9b2fdb957f50ada62d73f43ee75d044"
-@@ -29,6 +30,8 @@ S = "${WORKDIR}/perl-${PV}"
-
- inherit native
-
-+export LD="${CC}"
-+
- do_configure () {
-     ./Configure \
-         -Dcc="${CC}" \
 -- 
-1.7.4.1
+1.7.2.5
+
+
 
