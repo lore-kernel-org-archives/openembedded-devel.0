@@ -1,26 +1,17 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from pd95cb174.dip0.t-ipconnect.de ([217.92.177.116]
+	helo=fsc-480-012-88.intern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>)
-	id 1QRf1k-0004pT-B9; Wed, 01 Jun 2011 08:35:36 +0200
-Received: by wwb17 with SMTP id 17so4827984wwb.24
-	for <multiple recipients>; Tue, 31 May 2011 23:32:00 -0700 (PDT)
-Received: by 10.216.141.1 with SMTP id f1mr6860679wej.35.1306909919863;
-	Tue, 31 May 2011 23:31:59 -0700 (PDT)
-Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id g2sm427173weg.14.2011.05.31.23.31.58
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 31 May 2011 23:31:58 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1084)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <BANLkTi=mR7KKfXxiwiF1ZFA6epxx8hfaug@mail.gmail.com>
-Date: Wed, 1 Jun 2011 08:31:56 +0200
-Message-Id: <129A9155-4B39-48EA-86A6-39EFB55D5AE6@dominion.thruhere.net>
-References: <BANLkTi=mR7KKfXxiwiF1ZFA6epxx8hfaug@mail.gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-X-Mailer: Apple Mail (2.1084)
-Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] Parsing errors
+	(envelope-from <sledz@dresearch.de>) id 1QRfI9-0005Gm-CX
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Jun 2011 08:52:33 +0200
+Received: by fsc-480-012-88.intern.dresearch.de (Postfix, from userid 1002)
+	id 625397207D; Wed,  1 Jun 2011 08:39:12 +0200 (CEST)
+From: Steffen Sledz <sledz@dresearch-fe.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  1 Jun 2011 08:39:00 +0200
+Message-Id: <1306910340-25453-1-git-send-email-sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] iotop: add missing runtime dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,41 +25,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jun 2011 06:35:36 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 01 Jun 2011 06:52:33 -0000
 
+Fixes runtime error:
 
-Op 1 jun 2011, om 00:45 heeft Khem Raj het volgende geschreven:
+  "No module named locale
+   To run an uninstalled copy of iotop,
+   launch iotop.py in the top directory"
 
-> Hi
->=20
-> In slugos when I updated to today's snapshot of oe-core  and meta-oe
-> its giving me this
->=20
-> ERROR: Information not available for target 'all-linux'
->=20
->                                                  | ETA:  00:00:37
-> ERROR: Error parsing
-> =
-/home/kraj/work/slugos/meta-openembedded/meta-oe/recipes-core/systemd/syst=
-emd-compat-units.bb:
-> Failure expanding variable SITEINFO_ENDIANESS, expression was
-> ${@siteinfo_get_endianess(d)} which triggered exce
+Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+---
+ recipes/iotop/iotop_0.2.1.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/recipes/iotop/iotop_0.2.1.bb b/recipes/iotop/iotop_0.2.1.bb
+index 12ccc77..0d3e387 100644
+--- a/recipes/iotop/iotop_0.2.1.bb
++++ b/recipes/iotop/iotop_0.2.1.bb
+@@ -1,8 +1,8 @@
+ HOMEPAGE = "http://guichaz.free.fr/iotop/"
+ LICENSE = "GPL"
+-PR = "r3"
++PR = "r4"
+ 
+-RDEPENDS_${PN} = "python-distutils python-curses python-setuptools python-textutils"
++RDEPENDS_${PN} = "python-distutils python-curses python-setuptools python-textutils python-codecs"
+ 
+ SRC_URI = "http://guichaz.free.fr/iotop/files/${PN}-${PV}.tar.bz2"
+ 
+-- 
+1.7.1
 
-ENDIANNESS is spelled with 3 Ns, so that might explain your problems. =
-See
-
-=
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D87dc166bad=
-e8722af4076c8644cac6a0a437826f
-=
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D45fc36a32f=
-b23c513833d7e27fb4b9cd8be68fb5
-
-regards,
-
-Koen=
 
 
