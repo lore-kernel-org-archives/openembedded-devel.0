@@ -1,20 +1,28 @@
-Received: from ns1.gatteins.it ([193.58.239.94])
+Received: from ns.penguin.cz ([84.21.108.25])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <matteo.facchinetti@sirius-es.it>) id 1QRldb-0007ip-Rn
+	(envelope-from <utx@penguin.cz>) id 1QRmpK-0000Zm-5G
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Jun 2011 15:39:07 +0200
-X-Virus-Scanned: amavisd-new at gattei.com
-Received: from localhost.localdomain (78-134-90-180.dynamic.eolo.it
-	[78.134.90.180])
-	by ns1.gatteins.it (Postfix) with ESMTPA id 951E6DEFEE;
-	Wed,  1 Jun 2011 15:30:11 +0200 (MEST)
-From: Matteo Facchinetti <matteo.facchinetti@sirius-es.it>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Jun 2011 15:29:40 +0200
-Message-Id: <1306934980-19272-1-git-send-email-matteo.facchinetti@sirius-es.it>
-X-Mailer: git-send-email 1.7.0.4
-Cc: Matteo Facchinetti <engineering@sirius-es.it>
-Subject: [PATCH] wxbase_2.8.9: fix includepath for SDL dependency
+	Wed, 01 Jun 2011 16:55:18 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 692281417191;
+	Wed,  1 Jun 2011 16:55:17 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Ko4mPoW3SrUO; Wed,  1 Jun 2011 16:55:17 +0200 (CEST)
+Received: from [10.20.5.32] (nat.scz.novell.com [213.151.88.252])
+	by ns.penguin.cz (Postfix) with ESMTP id 85DFC1416BC5;
+	Wed,  1 Jun 2011 16:55:14 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
+To: Paul Menzel <paulepanter@users.sourceforge.net>
+In-Reply-To: <1306930030.4315.63.camel@mattotaupa>
+References: <1306930030.4315.63.camel@mattotaupa>
+Date: Wed, 01 Jun 2011 16:52:04 +0200
+Message-ID: <1306939924.23523.20.camel@oct.suse.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.1 
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] lynx: fix checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,38 +36,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jun 2011 13:39:07 -0000
+X-List-Received-Date: Wed, 01 Jun 2011 14:55:18 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-From: Matteo Facchinetti <engineering@sirius-es.it>
+Paul Menzel wrote:
+> Date: Wed, 1 Jun 2011 13:41:59 +0200
+> 
+> This is a fixup for commit 06d31dc0 [1]
 
-Compile task fail with error:
-| CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/SDL
-| cc1plus: internal compiler error: in add_path, at c-incpath.c:425
+> 	ERROR: The checksums for "/oe/downloads/lynx2.8.7.tar.bz2" did not match.
+> 		MD5: expected "cb936aef812e4e463ab86cbbe14d4db9", got "493af4c77ef6761e3f0157cd1be033a0"
+> 		SHA256: expected "301bda96ad3cd5032805e8d5315a42061a11e472e3d3a7baee3a2879517ef627", got "40ec9774deb4a7acf69e1bcfb5e272a3857ccc17e20d923255d64cb5dbe55dad"
 
-Fix it forcing right path in configuration.
+> I did not push this patch, because I find it strange that the checksums
+> are incorrect when you did not copy it. Do you have an idea what might
+> have gone wrong?
 
+wget -N http://lynx.isc.org/lynx2.8.7/lynx2.8.7.tar.bz2
+md5sum lynx2.8.7.tar.bz2
+493af4c77ef6761e3f0157cd1be033a0  lynx2.8.7.tar.bz2
+ls -al lynx2.8.7.tar.bz2
+-rw-r--r-- 1 sbrabec users 2432045 Jul  6  2009 lynx2.8.7.tar.bz2
 
-Signed-off-by: Matteo Facchinetti <engineering@sirius-es.it>
----
- recipes/wxwidgets/wxbase_2.8.9.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+For comparison with my copy:
+ls -al ~/sources/lynx2.8.7.tar.bz2
+-rw-r--r-- 1 sbrabec users 2436801 Jun 21  2010 /OE/home/sources/lynx2.8.7.tar.bz2
 
-diff --git a/recipes/wxwidgets/wxbase_2.8.9.bb b/recipes/wxwidgets/wxbase_2.8.9.bb
-index fb18710..7d593ad 100644
---- a/recipes/wxwidgets/wxbase_2.8.9.bb
-+++ b/recipes/wxwidgets/wxbase_2.8.9.bb
-@@ -9,7 +9,8 @@ SRC_URI += "file://Makefile.in.patch"
- EXTRA_OECONF = " --disable-gui \
-                  --enable-largefile \
-                  --enable-gpe \
--                 --without-subdirs"
-+                 --without-subdirs \
-+                 --with-sdl-prefix=${D}"
- 
- LEAD_SONAME = "libwx_base-2.8.so"
- 
+I had this recipe in my experimental repo for some time and it seems
+that they silently changed (downgraded?) the main tarball in time
+between. I can confirm your checksum with the fresh download.
+
+It looks pretty strange. The new tarball misses one security update.
+Maybe they did a mistake.
+
+My (byte-to-byte equal) copy is now available as
+http://lynx.isc.org/current/lynx2.8.7rel.2.tar.bz2
+
 -- 
-1.7.0.4
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
 
