@@ -1,42 +1,26 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QRdcC-0002I7-7i
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Jun 2011 07:05:08 +0200
-Received: by fxm19 with SMTP id 19so4088079fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 May 2011 22:01:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=43lM1wZA0jVQkA4F4+uQuNZH9oAlEnaVRB/l/cNUTpc=;
-	b=aXJKMtmIGzRXMW+fgpr491tLilT2ivVVWo7JulT+XdPcuRknTgvXT9njM7QWiOk4V/
-	2hl3q0WVjnlxUmq8NydlK4+9qVDn7k3jq+s1ixwriMusAJAr+bqNOT+wKYIwMQI/oJBL
-	EwyJ0r66x3pSAN1hoO2MoJ9WS92yQwc9egWv0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=pankjSnYN6BHa/KET6VkRg+mc3Emjzk0G5ZBA9kgGKnLLbagGDbOhil9UhRFUUx7D9
-	M4Ks64b699qsA4swd9m7oqmOfdb2cgfkKWBXEUzMUk01xvzSomVXyoqYQvs5O7jWmLTt
-	SwsNkHdUivKBhobmEVZpC/RmZ+a5mZG1uxiLs=
-Received: by 10.223.16.136 with SMTP id o8mr1996279faa.21.1306904518042;
-	Tue, 31 May 2011 22:01:58 -0700 (PDT)
-Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id 11sm236686fax.12.2011.05.31.22.01.56
+	(envelope-from <koen@dominion.thruhere.net>)
+	id 1QRf1k-0004pT-B9; Wed, 01 Jun 2011 08:35:36 +0200
+Received: by wwb17 with SMTP id 17so4827984wwb.24
+	for <multiple recipients>; Tue, 31 May 2011 23:32:00 -0700 (PDT)
+Received: by 10.216.141.1 with SMTP id f1mr6860679wej.35.1306909919863;
+	Tue, 31 May 2011 23:31:59 -0700 (PDT)
+Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
+	by mx.google.com with ESMTPS id g2sm427173weg.14.2011.05.31.23.31.58
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 31 May 2011 22:01:57 -0700 (PDT)
-Date: Wed, 1 Jun 2011 07:01:51 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110601050151.GE23647@jama.jama.net>
-References: <20110531114917.33186l97l89fv3oc@webmail.htc-linux.org>
-	<20110531115612.15355h3xwavjtjyo@webmail.htc-linux.org>
-	<20110531232513.19296umd0ei7gu0w@webmail.htc-linux.org>
-	<4DE5A3A0.1070508@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <4DE5A3A0.1070508@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: oebb.sh oe-core with non-angstrom distro
+	Tue, 31 May 2011 23:31:58 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1084)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <BANLkTi=mR7KKfXxiwiF1ZFA6epxx8hfaug@mail.gmail.com>
+Date: Wed, 1 Jun 2011 08:31:56 +0200
+Message-Id: <129A9155-4B39-48EA-86A6-39EFB55D5AE6@dominion.thruhere.net>
+References: <BANLkTi=mR7KKfXxiwiF1ZFA6epxx8hfaug@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+X-Mailer: Apple Mail (2.1084)
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: Re: [OE-core] Parsing errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,48 +34,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jun 2011 05:05:08 -0000
-X-Groupsio-MsgNum: 32442
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="5oH/S/bF6lOfqCQb"
-Content-Disposition: inline
-
---5oH/S/bF6lOfqCQb
+X-List-Received-Date: Wed, 01 Jun 2011 06:35:36 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 31, 2011 at 07:27:44PM -0700, Khem Raj wrote:
-> I guess SHR needs a master projects on similar lines. Using angstrom=20
-> scripts may not be the correct thing to do. Martin might already have=20
-> something. But similar to angstrom scripts there is slugos master=20
-> repository for layer management and configuration.
+
+Op 1 jun 2011, om 00:45 heeft Khem Raj het volgende geschreven:
+
+> Hi
 >=20
-> git://github.com/kraj/slugos-setup.git
+> In slugos when I updated to today's snapshot of oe-core  and meta-oe
+> its giving me this
 >=20
-> I think distro's should have such a repo so they do not have conflict of=
-=20
-> interest and can do things without pinching others toes.
+> ERROR: Information not available for target 'all-linux'
+>=20
+>                                                  | ETA:  00:00:37
+> ERROR: Error parsing
+> =
+/home/kraj/work/slugos/meta-openembedded/meta-oe/recipes-core/systemd/syst=
+emd-compat-units.bb:
+> Failure expanding variable SITEINFO_ENDIANESS, expression was
+> ${@siteinfo_get_endianess(d)} which triggered exce
 
-Yes we have..
-http://git.shr-project.org/git/?p=3Dshr-makefile.git;a=3Dsummary
-with shr-core (shr based on oe-core and other layers) support since
-2011-03-02 :). But Lukas doesn't like Makefile for some reason..
 
-Cheers,
+ENDIANNESS is spelled with 3 Ns, so that might explain your problems. =
+See
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+=
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D87dc166bad=
+e8722af4076c8644cac6a0a437826f
+=
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D45fc36a32f=
+b23c513833d7e27fb4b9cd8be68fb5
 
---5oH/S/bF6lOfqCQb
-Content-Type: application/pgp-signature
+regards,
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
+Koen=
 
-iEYEARECAAYFAk3lx78ACgkQN1Ujt2V2gBy04QCcDKNe8A7HrxewBcvZOtPxD+UQ
-zrIAoKnPDBsE5JAywlfWdWCEnPIwY7AN
-=A+Hw
------END PGP SIGNATURE-----
 
---5oH/S/bF6lOfqCQb--
