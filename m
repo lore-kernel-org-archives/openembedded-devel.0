@@ -1,42 +1,42 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QRrtL-0007YO-Gm
+	(envelope-from <otavio.salvador@gmail.com>) id 1QRrtT-0007ZB-Vu
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Jun 2011 22:19:48 +0200
-Received: by gwb11 with SMTP id 11so84913gwb.6
+	Wed, 01 Jun 2011 22:19:56 +0200
+Received: by yia13 with SMTP id 13so88400yia.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jun 2011 13:16:36 -0700 (PDT)
+	Wed, 01 Jun 2011 13:16:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
 	:x-mailer:in-reply-to:references:in-reply-to:references;
-	bh=x2H7ifsjQ7Ub+S3s1tJFrBAnn9xsZmGs+9DrtzBQnhY=;
-	b=S4H9U6F9keh+Qt3HoL39Y+EMEq117vOlaHy4QEIC47AWjKi2uy134sWxHldCgqVoNk
-	uBvI5/IMaJWg9cb0w6wgtlhbzDi1XZzFBHw7RTBv5WQ19slhrhMs325kBQgHa9F+KDD6
-	cAKCuxKUZ1OMXRh8soZc9G4wyYRysnRPC6yc4=
+	bh=NLb4pMKZlebSL50VipMAmJrQYp/KKdTlqSbxOIn2sKc=;
+	b=Kv+T6LdQDLqkHv0M1vejGgAMDny8fyBOTryKSVw8/Iza22qXOnNQrE/HC6JoKpYtaf
+	sNQcFzuPABWnkNcV2Yt0R+IDvq1Dsa9nmbMnHEO1BBPjrB7hcrUf7NrmZhPOwY8H2wlK
+	kkmwI6Rt8nwH9G+MD9V9CPqVxu97DJ7zo/sOE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=SPv7XZQypr0gGQdgOtbaK9Ob4Ctjwk1Im30RXyKa6xAwGfPxtyeRawuU4ZiA4lVMuF
-	qkAD296gZ7Jy7eN5VUbZVtpp0ZH/LnfFVxs1nd43UmzBfm3CqNph1xIvLBNHYkthFUHX
-	66VmwZtEHqxgikW6kvL8O6iBIkJDwmRNMKTig=
-Received: by 10.236.175.99 with SMTP id y63mr10254558yhl.155.1306959395922;
-	Wed, 01 Jun 2011 13:16:35 -0700 (PDT)
+	b=OP853fiBiFet5A9ZmGDFfASoJiNxlnbYBZf02mpbpueiD9nYiNy0spuYPfKQ0oPa2j
+	s7Jhm7JloZm9FOkM2m1oC7bxKv8wjtAyLMfI4dBS89lBHLIbq3Y0ysI9hzM9sIT2C8Gl
+	UV4QF4GG+T3Ni61cYsPKxpO/RLoKn9pqmf4Mc=
+Received: by 10.236.186.101 with SMTP id v65mr8929658yhm.94.1306959401471;
+	Wed, 01 Jun 2011 13:16:41 -0700 (PDT)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id t43sm1478016yhm.70.2011.06.01.13.16.32
+	by mx.google.com with ESMTPS id t43sm1478016yhm.70.2011.06.01.13.16.39
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 01 Jun 2011 13:16:34 -0700 (PDT)
+	Wed, 01 Jun 2011 13:16:40 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Jun 2011 20:16:13 +0000
-Message-Id: <ebdf8fe6846253d74f1260d65894c54d7e8146c1.1306959338.git.otavio@ossystems.com.br>
+Date: Wed,  1 Jun 2011 20:16:15 +0000
+Message-Id: <82a4381c9ac475d989220cb27924f02a6154d3b1.1306959338.git.otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <cover.1306959338.git.otavio@ossystems.com.br>
 References: <cover.1306959338.git.otavio@ossystems.com.br>
 In-Reply-To: <cover.1306959338.git.otavio@ossystems.com.br>
 References: <cover.1306959338.git.otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 3/5] udev-extra-rules: refactor mount.sh script
+Subject: [meta-oe][PATCH 5/5] pcsc-lite: rdepends on ccid and drop init script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,105 +50,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jun 2011 20:19:48 -0000
+X-List-Received-Date: Wed, 01 Jun 2011 20:19:56 -0000
 
-Avoids a fork for using cat and do a whitespace cleanup.
+We use auto-start feature by default as it is provided by ccid and
+works out of box for most use cases.
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- meta-oe/recipes-core/udev/udev-extra-rules.bb      |    2 +-
- .../recipes-core/udev/udev-extra-rules/mount.sh    |   28 +++++++------------
- 2 files changed, 11 insertions(+), 19 deletions(-)
+ .../recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb   |   15 +++------------
+ 1 files changed, 3 insertions(+), 12 deletions(-)
 
-diff --git a/meta-oe/recipes-core/udev/udev-extra-rules.bb b/meta-oe/recipes-core/udev/udev-extra-rules.bb
-index f114b1a..dfd4080 100644
---- a/meta-oe/recipes-core/udev/udev-extra-rules.bb
-+++ b/meta-oe/recipes-core/udev/udev-extra-rules.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Extra udev rules"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb
+index 7d235d6..14a0ba0 100644
+--- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb
++++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb
+@@ -3,10 +3,10 @@ HOMEPAGE = "http://pcsclite.alioth.debian.org/"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=c8e551349dc346258274f0007679e149"
+ DEPENDS = "udev"
+-PR = "r0"
++RDEPENDS += "ccid"
++PR = "r1"
  
--PR = "r1"
-+PR = "r2"
+-SRC_URI = "https://alioth.debian.org/frs/download.php/3533/pcsc-lite-${PV}.tar.bz2 \
+-           file://pcscd.init "
++SRC_URI = "https://alioth.debian.org/frs/download.php/3533/pcsc-lite-${PV}.tar.bz2"
  
- SRC_URI = " \
-        file://automount.rules \
-diff --git a/meta-oe/recipes-core/udev/udev-extra-rules/mount.sh b/meta-oe/recipes-core/udev/udev-extra-rules/mount.sh
-index 81bcfba..67c2b4b 100644
---- a/meta-oe/recipes-core/udev/udev-extra-rules/mount.sh
-+++ b/meta-oe/recipes-core/udev/udev-extra-rules/mount.sh
-@@ -1,7 +1,7 @@
- #!/bin/sh
- #
- # Called from udev
--# Attemp to mount any added block devices 
-+# Attemp to mount any added block devices
- # and remove any removed devices
- #
+ SRC_URI[md5sum] = "47e7055cfc14399fdaa1b7a4aa06e5aa"
+ SRC_URI[sha256sum] = "41f13d552eaa2c3978fbb6f2125e81903a0767011d999052fd1a6ee03880b398"
+@@ -21,15 +21,6 @@ EXTRA_OECONF = " \
  
-@@ -10,7 +10,7 @@ PMOUNT="/usr/bin/pmount"
- UMOUNT="/bin/umount"
- name="`basename "$DEVNAME"`"
+ S = "${WORKDIR}/pcsc-lite-${PV}"
  
--for line in `cat /etc/udev/mount.blacklist | grep -v ^#`
-+for line in `grep -v ^# /etc/udev/mount.blacklist`
- do
- 	if ( echo "$DEVNAME" | grep -q "$line" )
- 	then
-@@ -19,9 +19,9 @@ do
- 	fi
- done
- 
--automount() {	
-+automount() {
- 	! test -d "/media/$name" && mkdir -p "/media/$name"
--	
-+
- 	if ! $MOUNT -t auto -o async,relatime $DEVNAME "/media/$name"
- 	then
- 		#logger "mount.sh/automount" "$MOUNT -t auto $DEVNAME \"/media/$name\" failed!"
-@@ -31,7 +31,7 @@ automount() {
- 		touch "/tmp/.automount-$name"
- 	fi
- }
--	
-+
- rm_dir() {
- 	# We do not want to rm -r populated directories
- 	if test "`find "$1" | wc -l | tr -d " "`" -lt 2 -a -d "$1"
-@@ -46,27 +46,19 @@ if [ "$ACTION" = "add" ] && [ -n "$DEVNAME" ]; then
- 	if [ -x "$PMOUNT" ]; then
- 		$PMOUNT $DEVNAME 2> /dev/null
- 	elif [ -x $MOUNT ]; then
--    		$MOUNT $DEVNAME 2> /dev/null
-+			$MOUNT $DEVNAME 2> /dev/null
- 	fi
--	
--	# If the device isn't mounted at this point, it isn't configured in fstab
--	# 20061107: Small correction: The rootfs partition may be called just "rootfs" and not by
--	# 	    its true device name so this would break. If the rootfs is mounted on two places
--	#	    during boot, it confuses the heck out of fsck. So Im auto-adding the root-partition
--	#	    to /etc/udev/mount.blacklist via postinst 
- 
--	cat /proc/mounts | awk '{print $1}' | grep -q "^$DEVNAME$" || automount 
--	
-+	# Avoid remounting devices (e.g: rootfs)
-+	awk '{print $1}' /proc/mounts | grep -q "^$DEVNAME$" || automount
- fi
- 
+-do_install() {
+-	oe_runmake DESTDIR="${D}" install
+-	install -d "${D}/${sysconfdir}/init.d"
+-	install -m 755 "${WORKDIR}/pcscd.init" "${D}/${sysconfdir}/init.d/pcscd"
 -
+-	# handle vars values
+-	sed -i 's,/usr/sbin,${sbindir},g;s,/var,${localstatedir},g' "${D}/${sysconfdir}/init.d/pcscd"
+-}
 -
- if [ "$ACTION" = "remove" ] && [ -x "$UMOUNT" ] && [ -n "$DEVNAME" ]; then
--	for mnt in `cat /proc/mounts | grep "$DEVNAME" | cut -f 2 -d " " `
-+	for mnt in `grep "$DEVNAME" /proc/mounts | cut -f 2 -d " " `
- 	do
- 		$UMOUNT -l $mnt
- 	done
--	
-+
- 	# Remove empty directories from auto-mounter
- 	test -e "/tmp/.automount-$name" && rm_dir "/media/$name"
- fi
+ PACKAGES =+ "${PN}-lib"
+ 
+ INITSCRIPT_NAME = "pcscd"
 -- 
 1.7.2.5
 
