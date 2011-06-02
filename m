@@ -1,36 +1,39 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lazy.gopher@gmail.com>) id 1QS9Ds-0000x5-Mf
+	(envelope-from <martin.jansa@gmail.com>) id 1QS9FV-00012m-8d
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jun 2011 16:50:08 +0200
-Received: by fxm19 with SMTP id 19so865023fxm.6
+	Thu, 02 Jun 2011 16:51:50 +0200
+Received: by bwz5 with SMTP id 5so1155504bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jun 2011 07:46:57 -0700 (PDT)
+	Thu, 02 Jun 2011 07:48:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=TRadLzanNm4Ul0ylX2z1dtfkOQgk9c9C8jU5upAl66A=;
-	b=oceEXJyykqSpd1YFBNlVTNpgxYvvQaNpx2twWgzo9jF668E5vc7JMuLi2oGHtm0fA9
-	Oa5P98cHhfNiKefGtDQ+G97QiHSOQ/Jlmlq2WGbKeJM6uUj+ggE642n0Zp2v1OzG+8ml
-	chP/dSF0eZFFWsANEpw2fcIpPehkBtsrkVXrg=
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=o4DjW87SmzZ3xjR49rMTWRMjxjR7MX7O/qk+lJ67rNM=;
+	b=IJEKdWQl9XKndu3GEoYvhnfA1wc/UmygF1FyV4HpiHAnxgrODHzmB5hhnYnn4DroUf
+	9OS562iQcug7+0B1sXTxdxdmk+ev9lX0TKLUVZ6j5buI/uSKuhMMxOJsLpvIbrhseV/J
+	KOpou/R+EI7ufqZLqBwwEUg9gZsoO0lEO1JWg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=SG7ugKC+q8jBI5IlOLwLnlSGsPAKuyyLTHEoUIBCjj49p3uJI8peyvVr9Z+0vhZlRx
-	f0BqZy0aEV1vGPXoAuuD6mVFfbvq1EJObAMyCwf04wLlAWy8kR3F9VLx+4dd2yhSq9pe
-	ss8eGZr1kdHuWVW2JgncDZdReATvhvgZ5iHtI=
-MIME-Version: 1.0
-Received: by 10.223.41.89 with SMTP id n25mr949519fae.7.1307026017091; Thu, 02
-	Jun 2011 07:46:57 -0700 (PDT)
-Received: by 10.223.2.210 with HTTP; Thu, 2 Jun 2011 07:46:57 -0700 (PDT)
-In-Reply-To: <1307024348.4241.20.camel@mattotaupa>
-References: <4DE798CF.8010602@balister.org>
-	<1307024348.4241.20.camel@mattotaupa>
-Date: Thu, 2 Jun 2011 16:46:57 +0200
-Message-ID: <BANLkTik6+Xn3Gv_ui-Du1B3FJB66Wtm1eg@mail.gmail.com>
-From: Maksym Parkachov <lazy.gopher@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=pBcNWHFHRAu1rPzTLGKlqCvTMBb8VF2uTPkbbog6+UwejrsmG0XvY8Q+EoVnBnlYVM
+	eFlHvr7DI2bJT2+7icPmuq63m3sbZYLrAXRtqEMNjy+yv4dgq5329hAQ74pCBDR3VcYx
+	lYOR4y4mYOhnXI68g+IxrD3n6nPdhmoXSxJl0=
+Received: by 10.204.126.29 with SMTP id a29mr749452bks.167.1307026117405;
+	Thu, 02 Jun 2011 07:48:37 -0700 (PDT)
+Received: from localhost ([94.230.152.115])
+	by mx.google.com with ESMTPS id ek1sm509974bkb.21.2011.06.02.07.48.35
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 02 Jun 2011 07:48:36 -0700 (PDT)
+Date: Thu, 2 Jun 2011 16:48:29 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: ICE from zeroc
+Message-ID: <20110602144829.GI3281@jama.jama.net>
+References: <1307025867-12077-1-git-send-email-morphis@gravedo.de>
+MIME-Version: 1.0
+In-Reply-To: <1307025867-12077-1-git-send-email-morphis@gravedo.de>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH] minimal: add weak assigned DISTRO_FEED_CONFIGS variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,57 +47,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jun 2011 14:50:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 02 Jun 2011 14:51:50 -0000
+X-Groupsio-MsgNum: 32479
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="6TC23+W66xmFESAX"
+Content-Disposition: inline
+
+--6TC23+W66xmFESAX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Philip,
+On Thu, Jun 02, 2011 at 04:44:27PM +0200, Simon Busch wrote:
+> Some distros are based on the minimal distro but want to supply another f=
+eed configuration.
+> As minimal uses DISTRO_EXTRA_RDEPENDS to pull distro-feed-configs into th=
+e builded image
+> the new weak assigned variable DISTRO_FEED_CONFIGS makes it possible to s=
+pecify another
+> feed configuration.
 
-I did submit the reworked patch, and its got commited with
+isn't
+DISTRO_FEED_PREFIX
+DISTRO_FEED_URI
+in
+recipes/meta/distro-feed-configs.bb
+enought to modify default distro-feed-configs?
 
-2704fd5da32a9759976c2cc02bdff5234d732788
-
-recepies/zeroc/... is the path.
+and if not cannot we change distro-feed-configs.bb to allow such
+modifications?
 
 Regards,
-Maksym Parkachov.
 
-On Thu, Jun 2, 2011 at 4:19 PM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> Am Donnerstag, den 02.06.2011, 10:06 -0400 schrieb Philip Balister:
->> A "while back" I thought I saw a recipe for ICE (Internet Communications
->> Engine) get posted to the list. I meant to go back and look at it, and
->> now I can't find it.
->>
->> Did this really happen?
->
-> Yes. Jayen Ashar send a patch to the list on Thu, 25 Nov 2010 16:46:43
-> +1100 (25.11.2010 06:46:43) with subject =C2=BB[oe] [PATCH] IceE: New
-> program=C2=AB [1].
->
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0Message-Id: <1290664003-17257-1-git-send-email=
--jayen@cse.unsw.edu.au>
->
->> Is the person that submitted it redaing this?
->
-> Adding him to CC he now definitely is.
->
-> I am sending you the mbox file of the thread privately.
->
->
-> Thanks,
->
-> Paul
->
->
-> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-November=
-/027236.html
->
+>=20
+> Signed-off-by: Simon Busch <morphis@gravedo.de>
+> ---
+>  conf/distro/minimal.conf |    4 +++-
+>  1 files changed, 3 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
+> index 18bcfae..edac24f 100644
+> --- a/conf/distro/minimal.conf
+> +++ b/conf/distro/minimal.conf
+> @@ -53,6 +53,8 @@ INHERIT +=3D "package_ipk"
+>  IMAGE_FSTYPES ?=3D "tar.gz jffs2"
+>  PREFERRED_PKG_FORMAT ?=3D "ipk"
+> =20
+> +DISTRO_FEED_CONFIGS ?=3D "distro-feed-configs"
+> +
+>  # Put links to sources in deploy/sources to make it easier for people to=
+ be GPL compliant
+>  INHERIT +=3D "src_distribute_local"
+>  SRC_DIST_LOCAL ?=3D "symlink"
+> @@ -135,7 +137,7 @@ DISTRO_EXTRA_APPS +=3D '${@base_conditional("DISTRO_T=
+YPE", "release", "", "task-cl
+>  # util-linux-ng-mount util-linux-ng-umount: busybox mount is broken
+>  # angstrom-libc-fixup-hack: fixes an obscure bug with libc.so symlink
+>  DISTRO_EXTRA_RDEPENDS +=3D "\
+> -  distro-feed-configs \
+> +  ${DISTRO_FEED_CONFIGS} \
+>    util-linux-ng-mount util-linux-ng-umount \
+>    angstrom-libc-fixup-hack \
+>    ${DISTRO_EXTRA_APPS} \
+> --=20
+> 1.7.4.1
+>=20
+>=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--6TC23+W66xmFESAX
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
+
+iEUEARECAAYFAk3nor0ACgkQN1Ujt2V2gBxi9gCRAQW2wc8v+Hsdis/HH1EwwhK5
+cQCgp7pd1ax/RXnaH6r9l3FLBYv6844=
+=6hk6
+-----END PGP SIGNATURE-----
+
+--6TC23+W66xmFESAX--
