@@ -1,34 +1,33 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pprakash@ti.com>) id 1QRvc4-0003zY-M9
+	(envelope-from <Tom_Rini@mentor.com>) id 1QRvpv-0004Ae-Om
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jun 2011 02:18:12 +0200
-Received: from dlep34.itg.ti.com ([157.170.170.115])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id p520DuZC011824
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 1 Jun 2011 19:13:56 -0500
-Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
-	by dlep34.itg.ti.com (8.13.7/8.13.8) with ESMTP id p520DtvZ020905
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 1 Jun 2011 19:13:56 -0500 (CDT)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p520DtjI029143
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 1 Jun 2011 19:13:55 -0500 (CDT)
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE73.ent.ti.com
-	(157.170.170.88) with Microsoft SMTP Server id 8.3.106.1;
-	Wed, 1 Jun 2011 19:13:55 -0500
-Received: from localhost.localdomain (armmpuhw.am.dhcp.ti.com
-	[128.247.107.103])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
-	p520Dtqc016441;	Wed, 1 Jun 2011 19:13:55 -0500
-From: Punya Prakash <pprakash@ti.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 1 Jun 2011 14:40:45 -0500
-Message-ID: <1306957245-7248-1-git-send-email-pprakash@ti.com>
-X-Mailer: git-send-email 1.7.0.4
+	Thu, 02 Jun 2011 02:32:32 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1QRvmr-0004PE-B2 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Jun 2011 17:29:21 -0700
+Received: from SVR-ORW-FEM-02.mgc.mentorg.com ([147.34.96.206]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 1 Jun 2011 17:25:46 -0700
+Received: from [172.30.80.84] (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
+	(147.34.96.168) with Microsoft SMTP Server id 14.1.289.1;
+	Wed, 1 Jun 2011 17:29:20 -0700
+Message-ID: <4DE6D95E.5080205@mentor.com>
+Date: Wed, 1 Jun 2011 17:29:18 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
 MIME-Version: 1.0
-Subject: [PATCH] mcf-camera-app: Add new recipe for matrix camera streaming application
+To: <openembedded-devel@lists.openembedded.org>
+References: <1306782450.4106.481.camel@mattotaupa>
+In-Reply-To: <1306782450.4106.481.camel@mattotaupa>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 02 Jun 2011 00:25:46.0204 (UTC)
+	FILETIME=[9D9AC1C0:01CC20BB]
+Subject: Re: base.bbclass: Why is `oe_runmake install` not the default for `do_install()`?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,56 +41,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jun 2011 00:18:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 02 Jun 2011 00:32:32 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
-* Support for media controller framework
-	* Create and set-up link
- 	* Configuration of format for each pad
- 	* Streaming for specified duration
+On 05/30/2011 12:07 PM, Paul Menzel wrote:
+> Dear OE folks,
+> 
+> 
+> editing the `tiobench` recipe I was wondering why `do_install()` has no
+> default like `oe_runmake install` set in `base.bbclass`.
 
-Signed-off-by Punya Prakash <pprakash@ti.com>
----
- recipes/ti/mcf-camera-app_1.0.bb |   28 ++++++++++++++++++++++++++++
- 1 files changed, 28 insertions(+), 0 deletions(-)
- create mode 100644 recipes/ti/mcf-camera-app_1.0.bb
+There's not a common enough way to make sure it tries to write to ${D}
+when we don't know what the build system is, other than someones Makefile.
 
-diff --git a/recipes/ti/mcf-camera-app_1.0.bb b/recipes/ti/mcf-camera-app_1.0.bb
-new file mode 100644
-index 0000000..e2f9e60
---- /dev/null
-+++ b/recipes/ti/mcf-camera-app_1.0.bb
-@@ -0,0 +1,28 @@
-+DESCRIPTION = "MCF Camera Application"
-+HOMEPAGE = "https://gforge.ti.com/gf/project/mcf_camera_app/"
-+LICENSE = "BSD"
-+SECTION = "system"
-+PRIORITY = "optional"
-+
-+SRCREV = "3"
-+PR = "r0"
-+
-+DEPENDS += "virtual/kernel"
-+
-+PLATFORM_am37x-evm = "am3715"
-+PLATFORM_beagleboard = "am3715"
-+
-+INSANE_SKIP_${PN} = "True"
-+
-+SRC_URI = "svn://gforge.ti.com/svn/mcf_camera_app/;module=trunk;proto=https;user=anonymous;pswd=''"
-+
-+S = "${WORKDIR}/trunk"
-+
-+do_compile() {
-+	export CROSS_COMPILE=${TARGET_PREFIX}
-+	make LINUXKERNEL_INSTALL_DIR="${STAGING_KERNEL_DIR}" PLATFORM="${PLATFORM}"
-+}
-+
-+do_install() {
-+	make DESTDIR=${D} install
-+}
 -- 
-1.7.0.4
-
+Tom Rini
+Mentor Graphics Corporation
 
 
