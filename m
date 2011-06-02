@@ -1,25 +1,25 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QS3iB-0007JL-4C for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jun 2011 10:57:34 +0200
+	id 1QS3tN-0007qQ-QX for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Jun 2011 11:08:38 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QS3eY-0003s4-6t for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jun 2011 10:53:18 +0200
+	id 1QS3qK-0008W8-6O for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Jun 2011 11:05:28 +0200
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jun 2011 10:53:17 +0200
+	Thu, 02 Jun 2011 11:05:28 +0200
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jun 2011 10:53:17 +0200
+	Thu, 02 Jun 2011 11:05:28 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 02 Jun 2011 10:53:02 +0200
-Message-ID: <is7j1e$j7h$1@dough.gmane.org>
+Date: Thu, 02 Jun 2011 11:05:14 +0200
+Message-ID: <is7job$ne4$1@dough.gmane.org>
 References: <cover.1306962838.git.Martin.Jansa@gmail.com>	<is6d2d$11c$1@dough.gmane.org>
 	<20110602043530.GF3281@jama.jama.net>
 Mime-Version: 1.0
@@ -43,7 +43,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jun 2011 08:57:34 -0000
+X-List-Received-Date: Thu, 02 Jun 2011 09:08:38 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
@@ -76,30 +76,15 @@ On 02-06-11 06:35, Martin Jansa wrote:
 > Can you please test with
 > http://patches.openembedded.org/patch/5265/
 > applied to oe-core?
-> 
-> Strange this I've seen this error after it was renamed s/all/allarch 
-> http://git.openembedded.net/cgit.cgi/openembedded-core/commit/?id=5d7d4e1ed9bedf2b6510796d76ea8f94739b9de2
-> and allarch was missing in oe-core/meta/classes/siteinfo.bbclass
-> and then I still see it with allarch missing in
-> meta-oe/classes/siteinfo.bbclass
-> 
-> looks like both siteinfo.bbclass are sometimes used
 
-The class in meta-oe has all the methods from after the big overhaul in
-.dev and the old ones before the overhaul that match oe-core. We need
-both since meta-oe gets recipes from both .dev and -core.
-I hope siteinfo in oe-core gets updated to the one after the overhaul to
-reduce the divergence.
-
-regards,
-
-Koen
+That doesn't help, but I fixed it and will push the fix + the 2 merge
+requests later today.
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFN509uMkyGM64RGpERAsvbAJ4kBs4S1LSYU1yXz5pMo+sbVbpGaACfe18S
-F1Tnz3Pt8AaetMIngkYN+Mw=
-=EfrM
+iD8DBQFN51JKMkyGM64RGpERAgR4AJ4tz2AyL/suz9HALoLAxOV5LXmvzQCfdn2r
+gv1RKWI03mCWdmGmfOZ+Nag=
+=Efw2
 -----END PGP SIGNATURE-----
 
 
