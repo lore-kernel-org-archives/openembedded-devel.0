@@ -1,32 +1,37 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1QRvpv-0004Ae-Om
+	(envelope-from <kergoth@gmail.com>) id 1QRvwO-0004JD-DC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jun 2011 02:32:32 +0200
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1QRvmr-0004PE-B2 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Jun 2011 17:29:21 -0700
-Received: from SVR-ORW-FEM-02.mgc.mentorg.com ([147.34.96.206]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 1 Jun 2011 17:25:46 -0700
-Received: from [172.30.80.84] (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
-	(147.34.96.168) with Microsoft SMTP Server id 14.1.289.1;
-	Wed, 1 Jun 2011 17:29:20 -0700
-Message-ID: <4DE6D95E.5080205@mentor.com>
-Date: Wed, 1 Jun 2011 17:29:18 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+	Thu, 02 Jun 2011 02:39:12 +0200
+Received: by bwz5 with SMTP id 5so627024bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Jun 2011 17:36:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
+	:date:x-google-sender-auth:message-id:subject:to:content-type;
+	bh=1DrwMpXsIiJ6lap47unGSu+wEpEyyqGi3pnGUDnWyNQ=;
+	b=aovRYREW41HK00bK4mv8my03nghDiM9cSRyQ9LLyVj1A+PM5Ih/NlTK8LFjv+f4d7b
+	pK8x9eTYjv5v/0h9Q4VjPQFIv20/g/nzjTo+eeGhJwI+D3XuZFRY3A+kMFZwAl3HsvHn
+	zXqPYyEKPP7G5lWVmt/i2RM3eA50kn8S0Dceg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=V3uwGr0q9nw2nUsB53aW048bPUyBDGT8Au2T9UYAMC1V5Gy6fxatYWjrGGLXtCBFfR
+	jF/5/P9y/eoTZCepw9xFUt4+8MZkYwlH1Vdyw24ngjba9fO6U+r2E60fgRy30qeaChCY
+	wB0OHqHYYVgte6uHGcyyS9GTJnw7FHuiZ7dIY=
+Received: by 10.204.19.18 with SMTP id y18mr90826bka.179.1306974937115; Wed,
+	01 Jun 2011 17:35:37 -0700 (PDT)
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
+Sender: kergoth@gmail.com
+Received: by 10.204.38.7 with HTTP; Wed, 1 Jun 2011 17:35:17 -0700 (PDT)
+In-Reply-To: <4DE6D95E.5080205@mentor.com>
 References: <1306782450.4106.481.camel@mattotaupa>
-In-Reply-To: <1306782450.4106.481.camel@mattotaupa>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 02 Jun 2011 00:25:46.0204 (UTC)
-	FILETIME=[9D9AC1C0:01CC20BB]
+	<4DE6D95E.5080205@mentor.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Wed, 1 Jun 2011 17:35:17 -0700
+X-Google-Sender-Auth: jGvNvNZdYYkan53nEs6Fu1V0CZ8
+Message-ID: <BANLkTi=m9O5AJv+FWsJmn+FrCQh55dUgpg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: base.bbclass: Why is `oe_runmake install` not the default for `do_install()`?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,22 +46,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jun 2011 00:32:32 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Jun 2011 00:39:12 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 05/30/2011 12:07 PM, Paul Menzel wrote:
-> Dear OE folks,
-> 
-> 
-> editing the `tiobench` recipe I was wondering why `do_install()` has no
-> default like `oe_runmake install` set in `base.bbclass`.
+On Wed, Jun 1, 2011 at 5:29 PM, Tom Rini <tom_rini@mentor.com> wrote:
+> There's not a common enough way to make sure it tries to write to ${D}
+> when we don't know what the build system is, other than someones Makefile.
 
-There's not a common enough way to make sure it tries to write to ${D}
-when we don't know what the build system is, other than someones Makefile.
-
+Yeah, like Tom says -- with autoconf, we know we can use DESTDIR, but
+there's no standard mechanism for custom make-based buildsystems, and
+some don't have such a variable at all (until we patch them in).
 -- 
-Tom Rini
-Mentor Graphics Corporation
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
