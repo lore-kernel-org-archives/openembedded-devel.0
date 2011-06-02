@@ -1,29 +1,33 @@
-Received: from ns.penguin.cz ([84.21.108.25])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <utx@penguin.cz>) id 1QS755-0002c4-8w
+	(envelope-from <anandb@ti.com>) id 1QS7dy-0007Bj-OC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jun 2011 14:32:55 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id C09E61417191;
-	Thu,  2 Jun 2011 14:32:56 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id BhBmdhkzAk8C; Thu,  2 Jun 2011 14:32:56 +0200 (CEST)
-Received: from [10.20.5.32] (nat.scz.novell.com [213.151.88.252])
-	by ns.penguin.cz (Postfix) with ESMTP id 518671416BA8;
-	Thu,  2 Jun 2011 14:32:55 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1306939924.23523.20.camel@oct.suse.cz>
-References: <1306930030.4315.63.camel@mattotaupa>
-	<1306939924.23523.20.camel@oct.suse.cz>
-Date: Thu, 02 Jun 2011 14:29:44 +0200
-Message-ID: <1307017784.23523.29.camel@oct.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.1 
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
-Subject: Re: [PATCH] lynx: fix checksums
+	Thu, 02 Jun 2011 15:08:59 +0200
+Received: from dbdp20.itg.ti.com ([172.24.170.38])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id p52D30Eg008393
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 2 Jun 2011 08:03:03 -0500
+Received: from dbde70.ent.ti.com (localhost [127.0.0.1])
+	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id p52D30l7024314
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 2 Jun 2011 18:33:00 +0530 (IST)
+Received: from dbde02.ent.ti.com ([172.24.170.145]) by dbde70.ent.ti.com
+	([172.24.170.148]) with mapi; Thu, 2 Jun 2011 18:33:00 +0530
+From: "Balagopalakrishnan, Anand" <anandb@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 2 Jun 2011 18:32:58 +0530
+Thread-Topic: [PATCH] libgles-omap3: Specify the Window System to be updated
+	in powervr.ini
+Thread-Index: AcwhJWWUqVsnIR8ASRGBSe2lGR1TgQ==
+Message-ID: <2A3DCF3DA181AD40BDE86A3150B27B6B03751C140E@dbde02.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+Subject: [PATCH] libgles-omap3: Specify the Window System to be updated in powervr.ini
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,25 +41,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jun 2011 12:32:55 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Jun 2011 13:08:59 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Stanislav Brabec wrote:
+From a5a2d6f4356db3a8be1c7cb536d78af834aa60f9 Mon Sep 17 00:00:00 2001
+From: Anand Balagopalakrishnan <anandb@ti.com>
+Date: Thu, 26 May 2011 21:11:50 +0530
+Subject: [PATCH] libgles-omap3: Specify the Window System to be updated in =
+powervr.ini
 
-> I had this recipe in my experimental repo for some time and it seems
-> that they silently changed (downgraded?) the main tarball in time
-> between. I can confirm your checksum with the fresh download.
-> 
-> It looks pretty strange. The new tarball misses one security update.
-> Maybe they did a mistake.
+* SGX driver looks at /etc/powervr.ini for the Window System to be used.
+  This patch introduces a variable to specify which Window System should
+  be specified in powervr.ini file.
+* By having this variable, it's easy to override the default Window System
+  through a config file or amendment
 
-Here is the answer:
-http://lists.nongnu.org/archive/html/lynx-dev/2011-06/msg00003.html
+Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+---
+ recipes/powervr-drivers/libgles-omap3.inc |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+diff --git a/recipes/powervr-drivers/libgles-omap3.inc b/recipes/powervr-dr=
+ivers/libgles-omap3.inc
+index db7681d..36c311d 100644
+--- a/recipes/powervr-drivers/libgles-omap3.inc
++++ b/recipes/powervr-drivers/libgles-omap3.inc
+@@ -28,6 +28,8 @@ ES3LOCATION ?=3D "${S}/gfx_rel_es3.x"
+ ES5LOCATION ?=3D "${S}/gfx_rel_es5.x"
+ ES6LOCATION ?=3D "${S}/gfx_rel_es6.x"
+=20
++LIBGLESWINDOWSYSTEM ?=3D "libpvrPVR2D_FRONTWSEGL.so.1"
++
+ do_configure() {
+ 	# Attempt to fix up the worst offenders for file permissions
+ 	for i in $(find ${S} -name "*.h") $(find ${S} -name "*.c") $(find ${S} -n=
+ame "Make*") ; do
+@@ -152,7 +154,7 @@ do_install () {
+=20
+ 	install -d ${D}${sysconfdir}
+ 	echo "[default]" > ${D}${sysconfdir}/powervr.ini
+-	echo "WindowSystem=3DlibpvrPVR2D_FRONTWSEGL.so.1" >> ${D}${sysconfdir}/po=
+wervr.ini
++	echo "WindowSystem=3D${LIBGLESWINDOWSYSTEM}" >> ${D}${sysconfdir}/powervr=
+.ini
+=20
+ 	# The ES2.x, ES3.x, ES5.x and ES6.x CPUs have different SGX hardware, so =
+we need to install multiple sets of userspace
+=20
+--=20
+1.7.4.1
 
 
 
