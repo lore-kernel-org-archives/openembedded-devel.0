@@ -1,34 +1,31 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QSDJN-0008Js-OY for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jun 2011 21:12:13 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QSDGE-0006YL-Gg for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jun 2011 21:08:50 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jun 2011 21:08:50 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <shanevolpe@gmail.com>) id 1QSDlT-0000e6-IM
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Jun 2011 21:41:07 +0200
+Received: by bwz5 with SMTP id 5so1425964bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jun 2011 21:08:50 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 02 Jun 2011 12:37:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:from:date:message-id:subject:to
+	:content-type; bh=uPQVVOG2hB4kD5kt+cNUfIeWqpMXNwT8oOu6i+xA4ig=;
+	b=LpmruTCKRAQkc0mR0UQQlDWvBZuGDfa2d7cMAdaE73kKPzHbgtOMe8z39GgTi5TgUm
+	ryneQdsG9h6tanSSDpbsyEjwQQKcI51bQ+DVOP3JDxmt8yqccn8T18eXrTNN/prNAd85
+	x3OkCy3AYxzeOrqUfUCNBcRyhHiSJUUaTgq/4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=b2AF8gQvi267NLUx30T9CjANKuVjc1LLrIRAv0C6cWlQOKUbYdsjaeBZlj19Gmh1ne
+	RQ9CtMsiiYp46H9k+81H2aYHv7t9zMZdIqlVG7UtwZnkABt1UUNfwuGqT8D2Lj/H6n4+
+	yALxUQKp9nhHZieimBmGu0a5mOvsE3sMNGPi8=
+Received: by 10.204.46.132 with SMTP id j4mr1084992bkf.86.1307043475621; Thu,
+	02 Jun 2011 12:37:55 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.204.69.194 with HTTP; Thu, 2 Jun 2011 12:37:34 -0700 (PDT)
+From: Shane Volpe <shanevolpe@gmail.com>
+Date: Thu, 2 Jun 2011 15:37:34 -0400
+Message-ID: <BANLkTimetpu_sD=1ESGaQ-x_oY3xKiDPVA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 02 Jun 2011 21:08:33 +0200
-Message-ID: <is8n3h$p57$1@dough.gmane.org>
-References: <cover.1307040582.git.Martin.Jansa@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <cover.1307040582.git.Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-oe][PATCH 0/2] Pull request #16
+Subject: TCL Memory tests
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,49 +39,187 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jun 2011 19:12:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Jun 2011 19:41:07 -0000
+X-Groupsio-MsgNum: 32488
+Content-Type: multipart/mixed; boundary=0016e6dd890312060404a4bfc675
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--0016e6dd890312060404a4bfc675
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Thanks, applied
+All,
+I've been using openOCD for a little over a week now and I'm quite
+impressed. =A0I've decided to write a series of memory tests for it
+using the TCL interface. I've never used TCL before and I do not have
+much=A0experience=A0with openOCD yet so I'm sure my implementation is less
+than perfect. I've attached the memory tests to this email.  I'm
+hoping others will find them useful and give me additional suggestions
+or help in cleaning up the TCL code!  One thing I do not like is I had
+to set a local variable in each test for the BUSSIZE as the global
+variable TCL option did not seem to work for me.
 
-On 02-06-11 20:51, Martin Jansa wrote:
-> gobject-introspection from oe-core is not compatible with glib-2.0_git
-> we have here, added newer version also with D_P -1 (as glib-2.0) has.
-> 
-> The following changes since commit e69c7519399c06e82e25dcbfdd300e975393b00a:
-> 
->   connman: enable service when using systemd (2011-06-02 16:26:04 +0200)
-> 
-> are available in the git repository at:
->   git://git.openembedded.org/meta-openembedded-contrib jansa/meta-oe
->   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/meta-oe
-> 
-> Martin Jansa (2):
->   gobject-introspection: add newer git version compatible with
->     glib-2.0_git
->   gobject-introspection: move to recipes-gnome to match oe-core
->     structure
-> 
->  .../use-usr-bin-env-for-python.patch               |    0
->  .../gnome}/gobject-introspection_0.9.10.bb         |    0
->  .../gnome/gobject-introspection_git.bb             |   33 ++++++++++++++++++++
->  3 files changed, 33 insertions(+), 0 deletions(-)
->  rename meta-oe/{recipes-devtools/gobject-introspection => recipes-gnome/gnome}/gobject-introspection/use-usr-bin-env-for-python.patch (100%)
->  rename meta-oe/{recipes-devtools/gobject-introspection => recipes-gnome/gnome}/gobject-introspection_0.9.10.bb (100%)
->  create mode 100644 meta-oe/recipes-gnome/gnome/gobject-introspection_git.bb
-> 
+Again the attached file is untested and written by a novice (me).
+I will post any fixes or changes I make in the future.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+The memory tests are a port (algorithms 100% copied) from the
+following site and are public domain:
+http://www.netrino.com/Embedded-Systems/How-To/Memory-Test-Suite-C
+Regards,
+Shane
 
-iD8DBQFN59+xMkyGM64RGpERAhcjAKCZuSl5whdoDQfoo3+Pp/pBczvgpACdFzs3
-zxi3McxB8eFGylvGY7l8UOA=
-=3I0H
------END PGP SIGNATURE-----
+--0016e6dd890312060404a4bfc675
+Content-Type: application/x-tcl; name="memtest.tcl"
+Content-Disposition: attachment; filename="memtest.tcl"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_gog2s0h90
 
+CiMqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKgojICoKIyAqIEZ1bmN0aW9uOiAgICBtZW1UZXN0
+RGF0YUJ1cygpCiMgKgojICogRGVzY3JpcHRpb246IFRlc3QgdGhlIGRhdGEgYnVzIHdpcmluZyBp
+biBhIG1lbW9yeSByZWdpb24gYnkKIyAqICAgICAgICAgICAgICBwZXJmb3JtaW5nIGEgd2Fsa2lu
+ZyAxJ3MgdGVzdCBhdCBhIGZpeGVkIGFkZHJlc3MKIyAqICAgICAgICAgICAgICB3aXRoaW4gdGhh
+dCByZWdpb24uICBUaGUgYWRkcmVzcyAoYW5kIGhlbmNlIHRoZQojICogICAgICAgICAgICAgIG1l
+bW9yeSByZWdpb24pIGlzIHNlbGVjdGVkIGJ5IHRoZSBjYWxsZXIuCiMgKgkJIFBvcnRlZCBmcm9t
+OgojICoJCSBodHRwOi8vd3d3Lm5ldHJpbm8uY29tL0VtYmVkZGVkLVN5c3RlbXMvSG93LVRvL01l
+bW9yeS1UZXN0LVN1aXRlLUMKIyAqIE5vdGVzOiAgICAgICAKIyAqCiMgKiBSZXR1cm5zOiAgICAg
+MCBpZiB0aGUgdGVzdCBzdWNjZWVkcy4gIAojICogICAgICAgICAgICAgIEEgbm9uLXplcm8gcmVz
+dWx0IGlzIHRoZSBmaXJzdCBwYXR0ZXJuIHRoYXQgZmFpbGVkLgojICoKIyoqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqCgpwcm9jIG1lbVRlc3REYXRhQnVzIHsgYWRkcmVzcyB9IHsKICBzZXQgIEJV
+U1NJWkUgMzIKICBzZXQgd29yZHNpemUgW2V4cHIgJEJVU1NJWkUvOF0KICBwdXRzICJSdW5uaW5n
+IG1lbVRlc3REYXRhQnVzIgoKICBmb3Ige3NldCBpIDB9IHskaSA8ICRCVVNTSVpFfSB7aW5jciBp
+fSB7CgkjU2hpZnQgYml0CglzZXQgcGF0dGVybiBbZXhwciB7MSA8PCAkaX1dCgoJI3dyaXRlIHBh
+dHRlcm4gdG8gbWVtb3J5IQoJbWVtd3JpdGUzMiAkYWRkcmVzcyAkcGF0dGVybgoJCgkjUmVhZCBw
+YXR0ZXJuIGZyb20gbWVtb3J5IQoJc2V0IGRhdGEgW21lbXJlYWQzMiAkYWRkcmVzc10KCQoJaWYg
+eyRkYXRhICE9ICRwYXR0ZXJufSB7CgkgIHB1dHMgIkZBSUxFRCBEQVRBQlVTOiBBZGRyZXNzOiAk
+YWRkcmVzcywgUGF0dGVybjogJHBhdHRlcm4sIFJldHVybmVkOiAkZGF0YSIKCX0KICB9CiAgCiAg
+Cn0KCiMqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKgojICoKIyAqIEZ1bmN0aW9uOiAgICBtZW1U
+ZXN0QWRkcmVzc0J1cygpCiMgKgojICogICAgICAgICAgICAgIHBlcmZvcm1pbmcgYSB3YWxraW5n
+IDEncyB0ZXN0IG9uIHRoZSByZWxldmFudCBiaXRzCiMgKiAgICAgICAgICAgICAgb2YgdGhlIGFk
+ZHJlc3MgYW5kIGNoZWNraW5nIGZvciBhbGlhc2luZy4gVGhpcyB0ZXN0CiMgKiAgICAgICAgICAg
+ICAgd2lsbCBmaW5kIHNpbmdsZS1iaXQgYWRkcmVzcyBmYWlsdXJlcyBzdWNoIGFzIHN0dWNrCiMg
+KiAgICAgICAgICAgICAgLWhpZ2gsIHN0dWNrLWxvdywgYW5kIHNob3J0ZWQgcGlucy4gIFRoZSBi
+YXNlIGFkZHJlc3MKIyAqICAgICAgICAgICAgICBhbmQgc2l6ZSBvZiB0aGUgcmVnaW9uIGFyZSBz
+ZWxlY3RlZCBieSB0aGUgY2FsbGVyLgojICoJCSBQb3J0ZWQgZnJvbToKIyAqCQkgaHR0cDovL3d3
+dy5uZXRyaW5vLmNvbS9FbWJlZGRlZC1TeXN0ZW1zL0hvdy1Uby9NZW1vcnktVGVzdC1TdWl0ZS1D
+CgojICogTm90ZXM6ICAgICAgIEZvciBiZXN0IHJlc3VsdHMsIHRoZSBzZWxlY3RlZCBiYXNlIGFk
+ZHJlc3Mgc2hvdWxkCiMgKiAgICAgICAgICAgICAgaGF2ZSBlbm91Z2ggTFNCIDAncyB0byBndWFy
+YW50ZWUgc2luZ2xlIGFkZHJlc3MgYml0CiMgKiAgICAgICAgICAgICAgY2hhbmdlcy4gIEZvciBl
+eGFtcGxlLCB0byB0ZXN0IGEgNjQtS2J5dGUgcmVnaW9uLCAKIyAqICAgICAgICAgICAgICBzZWxl
+Y3QgYSBiYXNlIGFkZHJlc3Mgb24gYSA2NC1LYnl0ZSBib3VuZGFyeS4gIEFsc28sIAojICogICAg
+ICAgICAgICAgIHNlbGVjdCB0aGUgcmVnaW9uIHNpemUgYXMgYSBwb3dlci1vZi10d28tLWlmIGF0
+IGFsbCAKIyAqICAgICAgICAgICAgICBwb3NzaWJsZS4KIyAqCiMgKiBSZXR1cm5zOiAgICAgTlVM
+TCBpZiB0aGUgdGVzdCBzdWNjZWVkcy4gIAojICogICAgICAgICAgICAgIEEgbm9uLXplcm8gcmVz
+dWx0IGlzIHRoZSBmaXJzdCBhZGRyZXNzIGF0IHdoaWNoIGFuCiMgKiAgICAgICAgICAgICAgYWxp
+YXNpbmcgcHJvYmxlbSB3YXMgdW5jb3ZlcmVkLiAgQnkgZXhhbWluaW5nIHRoZQojICogICAgICAg
+ICAgICAgIGNvbnRlbnRzIG9mIG1lbW9yeSwgaXQgbWF5IGJlIHBvc3NpYmxlIHRvIGdhdGhlcgoj
+ICogICAgICAgICAgICAgIGFkZGl0aW9uYWwgaW5mb3JtYXRpb24gYWJvdXQgdGhlIHByb2JsZW0u
+CiMgKgojKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioKcHJvYyBtZW1UZXN0QWRkcmVzc0J1cyB7
+IGJhc2VBZGRyZXNzIG5CeXRlcyB9IHsKICBzZXQgQlVTU0laRSAzMgogIHNldCB3b3Jkc2l6ZSBb
+ZXhwciAkQlVTU0laRS84XQogIHNldCBhZGRyZXNzTWFzayBbZXhwciAkbkJ5dGVzLyR3b3Jkc2l6
+ZSAtIDFdCiAgc2V0IHBhdHRlcm4JIDB4QUFBQUFBQUEKICBzZXQgYW50aXBhdHRlcm4gMHg1NTU1
+NTU1NQogCiAgcHV0cyAiYWRkcmVzc01hc2s6IFtjb252ZXJ0VG9IZXggJGFkZHJlc3NNYXNrICR3
+b3Jkc2l6ZV0iCgogIHB1dHMgIlJ1bm5pbmcgbWVtVGVzdEFkZHJlc3NCdXMiCiAKICAjV3JpdGUg
+dGhlIGRlZmF1bHQgcGF0dGVybiBhdCBlYWNoIG9mIHRoZSBwb3dlci1vZi10d28gb2Zmc2V0cy4K
+ICBwdXRzICJtZW1UZXN0QWRkcmVzc0J1czogV3JpdGUgdGhlIGRlZmF1bHQgcGF0dGVybiBhdCBl
+YWNoIG9mIHRoZSBwb3dlci1vZi10d28gb2Zmc2V0cy4iCiAgZm9yIHtzZXQgb2Zmc2V0ICR3b3Jk
+c2l6ZX0ge1tleHByICRvZmZzZXQgJiAkYWRkcmVzc01hc2tdICE9IDB9IHtzZXQgb2Zmc2V0IFtl
+eHByICRvZmZzZXQgPDwgMV0gfSB7ICAgICAgCiAgICBzZXQgYWRkciBbZXhwciAkYmFzZUFkZHJl
+c3MgKyAkb2Zmc2V0XQojICAgIHB1dHMgIkFkZHI6ICRhZGRyIFBhdHRlcm46ICRwYXR0ZXJuIgog
+ICAgbWVtd3JpdGUzMiAkYWRkciAkcGF0dGVybgogIH0KICAKICAjQ2hlY2sgZm9yIGFkZHJlc3Mg
+Yml0cyBzdHVjayBoaWdoLgogIHB1dHMgIm1lbVRlc3RBZGRyZXNzQnVzOiBDaGVja2luZyBmb3Ig
+YWRkcmVzcyBiaXRzIHN0dWNrIGhpZ2guLiIKICBtZW13cml0ZTMyICRiYXNlQWRkcmVzcyAkYW50
+aXBhdHRlcm4KICAKICBmb3Ige3NldCBvZmZzZXQgJHdvcmRzaXplfSB7W2V4cHIgJG9mZnNldCAm
+ICRhZGRyZXNzTWFza10gIT0gMH0ge3NldCBvZmZzZXQgW2V4cHIgJG9mZnNldCA8PCAxXX0gewog
+ICAgIHNldCBhZGRyIFtleHByICRiYXNlQWRkcmVzcyArICRvZmZzZXRdCiAgICAgc2V0IGRhdGEg
+W21lbXJlYWQzMiAkYWRkcl0KICAgIAkKICAgICBpZiB7JGRhdGEgIT0gJHBhdHRlcm59IHsKCXB1
+dHMgIkZBSUxFRCBEQVRBX0FERFJfQlVTX1NISUdIOiBBZGRyZXNzOiBbY29udmVydFRvSGV4ICRh
+ZGRyICR3b3Jkc2l6ZV0sIFBhdHRlcm46IFtjb252ZXJ0VG9IZXggJHBhdHRlcm4gJHdvcmRzaXpl
+XSwgUmV0dXJuZWQ6IFtjb252ZXJ0VG9IZXggJGRhdGEgJHdvcmRzaXplXSIKICAgICB9ICAgICAg
+ICAgCiAgfQogIAogICNDaGVjayBmb3IgYWRkcmVzcyBiaXRzIHN0dWNrIGxvdyBvciBzaG9ydGVk
+LgogIHB1dHMgIm1lbVRlc3RBZGRyZXNzQnVzOiBDaGVja2luZyBmb3IgYWRkcmVzcyBiaXRzIHN0
+dWNrIGxvdyBvciBzaG9ydGVkLi4iCiAgbWVtd3JpdGUzMiAkYmFzZUFkZHJlc3MgJHBhdHRlcm4K
+ICBmb3Ige3NldCB0ZXN0T2Zmc2V0ICR3b3Jkc2l6ZX0ge1tleHByICR0ZXN0T2Zmc2V0ICYgJGFk
+ZHJlc3NNYXNrXSAhPSAwfSB7c2V0IHRlc3RPZmZzZXQgW2V4cHIgJHRlc3RPZmZzZXQgPDwgMV0g
+fSB7CiAgICBzZXQgYWRkciBbZXhwciAkYmFzZUFkZHJlc3MgKyAkdGVzdE9mZnNldF0KICAgIG1l
+bXdyaXRlMzIgJGFkZHIgJGFudGlwYXR0ZXJuCiAgICAKICAgIHNldCBkYXRhIFttZW1yZWFkMzIg
+JGJhc2VBZGRyZXNzXQogICAgaWYgeyRkYXRhICE9ICRwYXR0ZXJufSB7CiAgICAgIHB1dHMgIkZB
+SUxFRCBEQVRBX0FERFJfQlVTX1NMT1c6IEFkZHJlc3M6IFtjb252ZXJ0VG9IZXggJGFkZHIgJHdv
+cmRzaXplXSwgUGF0dGVybjogW2NvbnZlcnRUb0hleCAkcGF0dGVybiAkd29yZHNpemVdLCBSZXR1
+cm5lZDogW2NvbnZlcnRUb0hleCAkZGF0YSAkd29yZHNpemVdIgogICAgfSAgICAgICAgIAogICAg
+CiAgICAgIGZvciB7c2V0IG9mZnNldCAkd29yZHNpemV9IHtbZXhwciAkb2Zmc2V0ICYgJGFkZHJl
+c3NNYXNrXSAhPSAwfSB7c2V0IG9mZnNldCBbZXhwciAkb2Zmc2V0IDw8IDFdfSB7CgkgICAgc2V0
+IGFkZHIgW2V4cHIgJGJhc2VBZGRyZXNzICsgJG9mZnNldF0KCSAgICBzZXQgZGF0YSBbbWVtcmVh
+ZDMyICRiYXNlQWRkcmVzc10KCiAgICAgICAgICAgIGlmIHsoKCRkYXRhICE9ICRwYXR0ZXJuKSAm
+JiAoJG9mZnNldCAhPSAkdGVzdE9mZnNldCkpfSB7CgkgICAgICBwdXRzICJGQUlMRUQgREFUQV9B
+RERSX0JVU19TTE9XMjogQWRkcmVzczogW2NvbnZlcnRUb0hleCAkYWRkciAkd29yZHNpemVdLCBQ
+YXR0ZXJuOiBbY29udmVydFRvSGV4ICRwYXR0ZXJuICR3b3Jkc2l6ZV0sIFJldHVybmVkOiBbY29u
+dmVydFRvSGV4ICRkYXRhICR3b3Jkc2l6ZV0sIG9mZnNldDogW2NvbnZlcnRUb0hleCAkb2Zmc2V0
+ICR3b3Jkc2l6ZV0sIHRlc3RPZmZzZXQgW2NvbnZlcnRUb0hleCAkdGVzdE9mZnNldCAkd29yZHNp
+emVdIiAgICAgIAoJICAgIH0KICAgICAgICB9CglzZXQgYWRkciBbZXhwciAkYmFzZUFkZHJlc3Mg
+KyAkdGVzdE9mZnNldF0KCW1lbXdyaXRlMzIgJGFkZHIgJHBhdHRlcm4KICAgfQoKfQoKIyoqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqCiMgKgojICogRnVuY3Rpb246ICAgIG1lbVRlc3REZXZpY2Uo
+KQojICoKIyAqIERlc2NyaXB0aW9uOiBUZXN0IHRoZSBpbnRlZ3JpdHkgb2YgYSBwaHlzaWNhbCBt
+ZW1vcnkgZGV2aWNlIGJ5CiMgKiAgICAgICAgICAgICAgcGVyZm9ybWluZyBhbiBpbmNyZW1lbnQv
+ZGVjcmVtZW50IHRlc3Qgb3ZlciB0aGUKIyAqICAgICAgICAgICAgICBlbnRpcmUgcmVnaW9uLiAg
+SW4gdGhlIHByb2Nlc3MgZXZlcnkgc3RvcmFnZSBiaXQgCiMgKiAgICAgICAgICAgICAgaW4gdGhl
+IGRldmljZSBpcyB0ZXN0ZWQgYXMgYSB6ZXJvIGFuZCBhIG9uZS4gIFRoZQojICogICAgICAgICAg
+ICAgIGJhc2UgYWRkcmVzcyBhbmQgdGhlIHNpemUgb2YgdGhlIHJlZ2lvbiBhcmUKIyAqICAgICAg
+ICAgICAgICBzZWxlY3RlZCBieSB0aGUgY2FsbGVyLgojICoJCSBQb3J0ZWQgZnJvbToKIyAqCQkg
+aHR0cDovL3d3dy5uZXRyaW5vLmNvbS9FbWJlZGRlZC1TeXN0ZW1zL0hvdy1Uby9NZW1vcnktVGVz
+dC1TdWl0ZS1DCiMgKiBOb3RlczogICAgICAgCiMgKgojICogUmV0dXJuczogICAgIE5VTEwgaWYg
+dGhlIHRlc3Qgc3VjY2VlZHMuCiMgKgojICogICAgICAgICAgICAgIEEgbm9uLXplcm8gcmVzdWx0
+IGlzIHRoZSBmaXJzdCBhZGRyZXNzIGF0IHdoaWNoIGFuCiMgKiAgICAgICAgICAgICAgaW5jb3Jy
+ZWN0IHZhbHVlIHdhcyByZWFkIGJhY2suICBCeSBleGFtaW5pbmcgdGhlCiMgKiAgICAgICAgICAg
+ICAgY29udGVudHMgb2YgbWVtb3J5LCBpdCBtYXkgYmUgcG9zc2libGUgdG8gZ2F0aGVyCiMgKiAg
+ICAgICAgICAgICAgYWRkaXRpb25hbCBpbmZvcm1hdGlvbiBhYm91dCB0aGUgcHJvYmxlbS4KIyAq
+CiMqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKgpwcm9jIG1lbVRlc3REZXZpY2UgeyBiYXNlQWRk
+cmVzcyBuQnl0ZXMgfSB7CiAgc2V0IEJVU1NJWkUgMzIKICBzZXQgd29yZHNpemUgW2V4cHIgJEJV
+U1NJWkUvOF0KIAogIHNldCBuV29yZHMgW2V4cHIgJG5CeXRlcy8kd29yZHNpemVdCiAgcHV0cyAi
+UnVubmluZyBtZW1UZXN0RGV2aWNlIgogCiAgI0ZpbGwgbWVtb3J5IHdpdGggYSBrbm93biBwYXR0
+ZXJuLgogIHB1dHMgIm1lbVRlc3REZXZpY2U6IEZpbGxpbmcgbWVtb3J5IHdpdGggYSBrbm93biBw
+YXR0ZXJuIgogIGZvciB7c2V0IHBhdHRlcm4gMTsgc2V0IG9mZnNldCAwfSB7JG9mZnNldCA8ICRu
+V29yZHN9IHtpbmNyIHBhdHRlcm47IGluY3Igb2Zmc2V0ICR3b3Jkc2l6ZX0gewogICAgbWVtd3Jp
+dGUzMiBbZXhwciAkYmFzZUFkZHJlc3MgKyAkb2Zmc2V0XSAkcGF0dGVybgogIH0KCiAgI0NoZWNr
+IGVhY2ggbG9jYXRpb24gYW5kIGludmVydCBpdCBmb3IgdGhlIHNlY29uZCBwYXNzLgogIHB1dHMg
+Im1lbVRlc3REZXZpY2U6IENoZWNraW5nIGVhY2ggbG9jYXRpb24gYW5kIGludmVydGluZyBpdCBm
+b3IgdGhlIHNlY29uZCBwYXNzLiIKICBmb3Ige3NldCBwYXR0ZXJuIDE7IHNldCBvZmZzZXQgMH0g
+eyRvZmZzZXQgPCAkbldvcmRzfSB7aW5jciBwYXR0ZXJuOyBpbmNyIG9mZnNldCAkd29yZHNpemV9
+IHsKICAgIHNldCBhZGRyIFtleHByICRiYXNlQWRkcmVzcyArICRvZmZzZXRdCiAgICBzZXQgZGF0
+YSBbbWVtcmVhZDMyICRhZGRyXQoKICAgIGlmIHskZGF0YSAhPSAkcGF0dGVybn0gewogICAgICBw
+dXRzICJGQUlMRUQgbWVtVGVzdERldmljZV9wYXR0ZXJuOiBBZGRyZXNzOiBbY29udmVydFRvSGV4
+ICRhZGRyICR3b3Jkc2l6ZV0sIFBhdHRlcm46IFtjb252ZXJ0VG9IZXggJHBhdHRlcm4gJHdvcmRz
+aXplXSwgUmV0dXJuZWQ6IFtjb252ZXJ0VG9IZXggJGRhdGEgJHdvcmRzaXplXSwgb2Zmc2V0OiBb
+Y29udmVydFRvSGV4ICRvZmZzZXQgJHdvcmRzaXplXSIgICAgICAJCiAgICB9CiAKICAgIHNldCBh
+bnRpUGF0dGVybiBbZXhwciB+JHBhdHRlcm5dCiAgICBtZW13cml0ZTMyIFtleHByICRiYXNlQWRk
+cmVzcyArICRvZmZzZXRdICRhbnRpUGF0dGVybiAgICAKICB9CiAgCiAgI0NoZWNrIGVhY2ggbG9j
+YXRpb24gZm9yIHRoZSBpbnZlcnRlZCBwYXR0ZXJuIGFuZCB6ZXJvIGl0LgogIHB1dHMgIm1lbVRl
+c3REZXZpY2U6IENoZWNraW5nIGVhY2ggbG9jYXRpb24gZm9yIHRoZSBpbnZlcnRlZCBwYXR0ZXJu
+IGFuZCB6ZXJvaW5nIGl0LiIKICBmb3Ige3NldCBwYXR0ZXJuIDE7IHNldCBvZmZzZXQgMH0geyRv
+ZmZzZXQgPCAkbldvcmRzfSB7aW5jciBwYXR0ZXJuOyBpbmNyIG9mZnNldCAkd29yZHNpemV9IHsK
+ICAgIHNldCBhbnRpUGF0dGVybiBbZXhwciB+JHBhdHRlcm5dCiAgICBzZXQgYWRkciBbZXhwciAk
+YmFzZUFkZHJlc3MgKyAkb2Zmc2V0XQogICAgc2V0IGRhdGEgW21lbXJlYWQzMiAkYWRkcl0KICAg
+IHNldCBkYXRhSGV4IFtjb252ZXJ0VG9IZXggJGRhdGEgJHdvcmRzaXplXQogICAgc2V0IGFudGlQ
+YXR0ZXJuSGV4IFtjb252ZXJ0VG9IZXggJGFudGlQYXR0ZXJuICR3b3Jkc2l6ZV0KICAgIGlmIHtb
+ZXhwciAkZGF0YUhleCAhPSAkYW50aVBhdHRlcm5IZXhdfSB7CiAgICAgIHB1dHMgIkZBSUxFRCBt
+ZW1UZXN0RGV2aWNlX2FudGlwYXR0ZXJuOiBBZGRyZXNzOiBbY29udmVydFRvSGV4ICRhZGRyICR3
+b3Jkc2l6ZV0sIGFudGlQYXR0ZXJuOiAkYW50aVBhdHRlcm5IZXgsIFJldHVybmVkOiAkZGF0YUhl
+eCwgb2Zmc2V0OiAkb2Zmc2V0IiAgICAgIAkKICAgICAgfQogICAgfQp9IAoKCnByb2MgcnVuQWxs
+TWVtVGVzdHMge2Jhc2VBZGRyZXNzIG5CeXRlc30gewogIG1lbVRlc3REYXRhQnVzICRiYXNlQWRk
+cmVzcwogIG1lbVRlc3RBZGRyZXNzQnVzICRiYXNlQWRkcmVzcyAkbkJ5dGVzCiAgbWVtVGVzdERl
+dmljZSAkYmFzZUFkZHJlc3MgJG5CeXRlcwp9CgoKcHJvYyBtZW13cml0ZTMyIHtBRERSIERBVEF9
+IHsKICAgIHNldCBmb28oMCkgJERBVEEKICAgIGlmICFbIGNhdGNoIHsgb2NkX2FycmF5Mm1lbSBm
+b28gMzIgJEFERFIgMSAgfSBtc2cgXSB7CiAgICAgICAgcmV0dXJuICRmb28oMCkKICAgIH0gZWxz
+ZSB7CiAgICAgICAgZXJyb3IgIm1lbXdyaXRlMzI6ICRtc2ciCiAgICB9Cn0KCgpwcm9jIG1lbXJl
+YWQzMiB7QUREUn0gewogICAgc2V0IGZvbygwKSAwCiAgICBpZiAhWyBjYXRjaCB7IG9jZF9tZW0y
+YXJyYXkgZm9vIDMyICRBRERSIDEgIH0gbXNnIF0gewogICAgICAgIHJldHVybiAkZm9vKDApCiAg
+ICB9IGVsc2UgewogICAgICAgIGVycm9yICJtZW1yZWFkMzI6ICRtc2ciCiAgICB9Cn0KCnByb2Mg
+Y29udmVydFRvSGV4IHt2YWx1ZSB3b3Jkc2l6ZX0gewogIHNldCBkYXRhaGV4IFtmb3JtYXQgIiVY
+IiAkdmFsdWVdCiAgc2V0IGhleHZhbCBbc3RyaW5nIHJhbmdlICRkYXRhaGV4IGVuZC1bZXhwciAo
+JHdvcmRzaXplKjIpIC0xXSBlbmRdCiAgcmV0dXJuICIweCRoZXh2YWwiCgp9Cg==
 
-
+--0016e6dd890312060404a4bfc675--
