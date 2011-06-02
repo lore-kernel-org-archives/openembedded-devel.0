@@ -1,39 +1,25 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QSD2h-0007Ng-MX
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jun 2011 20:54:51 +0200
-Received: by mail-bw0-f47.google.com with SMTP id 5so1385143bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jun 2011 11:51:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references:in-reply-to:references;
-	bh=J/cee4TJSzpFCyN50i9xpFPzlYSEGZDygf1BDlTaYmA=;
-	b=H+tbayW+yPUlA2RB5bxX3vo2/x8ci/T1CQWgR7JUNH5F29YmzRxR812VPcQHGuprIT
-	ygVrtQDcKa9hMVS2OfThXcNkcDSgkZ/s0VuuA01WA73DRLe52Q+Fix4ftUjXdatfAJhe
-	fiyzFMZuQSMS1OXuOc5yZFSTQjJLaYwHFetcA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=wem0JxfTJkjm3/MmanyZcCtIi15xsRbncdjGqquuqNuSYWymvTuE4DfObM74EHdNjw
-	+zOEkOjP5pKBVY48U18VaNHa8JKNZK+wi4fDS7VuDlsKG/I325kFR2v94YEkqPOo1Jtr
-	QTlq/WxkmxDfXZx/N4JuTQ4gRuwll0CIXW2Ds=
-Received: by 10.204.26.215 with SMTP id f23mr1086055bkc.140.1307040702068;
-	Thu, 02 Jun 2011 11:51:42 -0700 (PDT)
-Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id ag6sm683169bkc.18.2011.06.02.11.51.40
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 02 Jun 2011 11:51:41 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QSDBW-00083L-5z for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Jun 2011 21:03:58 +0200
+Received: from f053037130.adsl.alicedsl.de ([78.53.37.130]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QSD93-00053P-OO for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Jun 2011 19:01:26 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Jun 2011 20:51:35 +0200
-Message-Id: <05f2ea8983cb1476e8bc618a2076d08552099e71.1307040582.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.5.3
-In-Reply-To: <1eefebc5e34260c875302a181cb80724bad4303d.1307040582.git.Martin.Jansa@gmail.com>
-References: <1eefebc5e34260c875302a181cb80724bad4303d.1307040582.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1307040582.git.Martin.Jansa@gmail.com>
-References: <cover.1307040582.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/2] gobject-introspection: move to recipes-gnome to match oe-core structure
+In-Reply-To: <1307038832.4241.79.camel@mattotaupa>
+References: <1306933759.5710.2.camel@mattotaupa>
+	<1306940182.23523.23.camel@oct.suse.cz>
+	<1307038832.4241.79.camel@mattotaupa>
+Date: Thu, 02 Jun 2011 21:00:46 +0200
+Message-ID: <1307041246.4241.103.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [solved] gammu: task compile fails with `/oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/lib/libcurl.so: could not read symbols: File in wrong format`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,32 +33,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jun 2011 18:54:51 -0000
+X-List-Received-Date: Thu, 02 Jun 2011 19:03:58 -0000
+X-Groupsio-MsgNum: 32485
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-EiK7egIRTSazPby7c7/I"
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../use-usr-bin-env-for-python.patch               |    0
- .../gnome}/gobject-introspection_0.9.10.bb         |    0
- .../gnome}/gobject-introspection_git.bb            |    0
- 3 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/{recipes-devtools/gobject-introspection => recipes-gnome/gnome}/gobject-introspection/use-usr-bin-env-for-python.patch (100%)
- rename meta-oe/{recipes-devtools/gobject-introspection => recipes-gnome/gnome}/gobject-introspection_0.9.10.bb (100%)
- rename meta-oe/{recipes-devtools/gobject-introspection => recipes-gnome/gnome}/gobject-introspection_git.bb (100%)
+--=-EiK7egIRTSazPby7c7/I
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-devtools/gobject-introspection/gobject-introspection/use-usr-bin-env-for-python.patch b/meta-oe/recipes-gnome/gnome/gobject-introspection/use-usr-bin-env-for-python.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gobject-introspection/gobject-introspection/use-usr-bin-env-for-python.patch
-rename to meta-oe/recipes-gnome/gnome/gobject-introspection/use-usr-bin-env-for-python.patch
-diff --git a/meta-oe/recipes-devtools/gobject-introspection/gobject-introspection_0.9.10.bb b/meta-oe/recipes-gnome/gnome/gobject-introspection_0.9.10.bb
-similarity index 100%
-rename from meta-oe/recipes-devtools/gobject-introspection/gobject-introspection_0.9.10.bb
-rename to meta-oe/recipes-gnome/gnome/gobject-introspection_0.9.10.bb
-diff --git a/meta-oe/recipes-devtools/gobject-introspection/gobject-introspection_git.bb b/meta-oe/recipes-gnome/gnome/gobject-introspection_git.bb
-similarity index 100%
-rename from meta-oe/recipes-devtools/gobject-introspection/gobject-introspection_git.bb
-rename to meta-oe/recipes-gnome/gnome/gobject-introspection_git.bb
--- 
-1.7.5.3
+Am Donnerstag, den 02.06.2011, 20:20 +0200 schrieb Paul Menzel:
+> Am Mittwoch, den 01.06.2011, 16:56 +0200 schrieb Stanislav Brabec:
+> > Paul Menzel wrote:
+
+> > > task compile of `gammu` fails with the following error message using
+> > >         /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/=
+lib/libcurl.so: could not read symbols: File in wrong format
+> >=20
+> > Could you try to add curl to DEPENDS and try again (note that you have
+> > to include do_configure call again). Maybe I overseen this dependency.
+>=20
+> Adding `curl` to `DEPENDS` fixes this issue. It is strange that it is
+> looking into the stanging area (=C2=BBFile in wrong format=C2=AB).
+>=20
+> I will commit the fix.
+
+I committed it in 0fe0f7d5 [1].
 
 
+Thanks,
 
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D0fe0f7d=
+5629578839192153c012a05a192dc2b41
+
+--=-EiK7egIRTSazPby7c7/I
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3n3d4ACgkQPX1aK2wOHVjpbACghY0eQxRH/rq5w9g8/NiPeOvN
+YSYAn3ctw4HpdeEYEi52YihqYCi7owQq
+=A6kw
+-----END PGP SIGNATURE-----
+
+--=-EiK7egIRTSazPby7c7/I--
