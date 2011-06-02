@@ -1,23 +1,24 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QS8n0-0000U1-8W for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jun 2011 16:22:22 +0200
-Received: from f053037130.adsl.alicedsl.de ([78.53.37.130]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QS8kU-00019K-Ui; Thu, 02 Jun 2011 14:19:48 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <morphis@gravedo.de>) id 1QS9BU-0000px-WD
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Jun 2011 16:47:41 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 7BE48799015; Thu,  2 Jun 2011 16:44:31 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h1108419.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.1 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from localhost (p5489A9CE.dip.t-dialin.net [84.137.169.206])
+	by gravedo.de (Postfix) with ESMTPSA id B6E77798D74;
+	Thu,  2 Jun 2011 16:44:30 +0200 (CEST)
+From: Simon Busch <morphis@gravedo.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4DE798CF.8010602@balister.org>
-References: <4DE798CF.8010602@balister.org>
-Date: Thu, 02 Jun 2011 16:19:08 +0200
-Message-ID: <1307024348.4241.20.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Cc: Jayen Ashar <jayen@cse.unsw.edu.au>
-Subject: Re: ICE from zeroc
+Date: Thu,  2 Jun 2011 16:44:27 +0200
+Message-Id: <1307025867-12077-1-git-send-email-morphis@gravedo.de>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [PATCH] minimal: add weak assigned DISTRO_FEED_CONFIGS variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,56 +32,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jun 2011 14:22:22 -0000
-X-Groupsio-MsgNum: 32476
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-36V1sUh70MxfeJTDj0Ce"
+X-List-Received-Date: Thu, 02 Jun 2011 14:47:41 -0000
 
---=-36V1sUh70MxfeJTDj0Ce
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Some distros are based on the minimal distro but want to supply another feed configuration.
+As minimal uses DISTRO_EXTRA_RDEPENDS to pull distro-feed-configs into the builded image
+the new weak assigned variable DISTRO_FEED_CONFIGS makes it possible to specify another
+feed configuration.
 
-Am Donnerstag, den 02.06.2011, 10:06 -0400 schrieb Philip Balister:
-> A "while back" I thought I saw a recipe for ICE (Internet Communications=
-=20
-> Engine) get posted to the list. I meant to go back and look at it, and=
-=20
-> now I can't find it.
->=20
-> Did this really happen?
+Signed-off-by: Simon Busch <morphis@gravedo.de>
+---
+ conf/distro/minimal.conf |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-Yes. Jayen Ashar send a patch to the list on Thu, 25 Nov 2010 16:46:43
-+1100 (25.11.2010 06:46:43) with subject =C2=BB[oe] [PATCH] IceE: New
-program=C2=AB [1].
+diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
+index 18bcfae..edac24f 100644
+--- a/conf/distro/minimal.conf
++++ b/conf/distro/minimal.conf
+@@ -53,6 +53,8 @@ INHERIT += "package_ipk"
+ IMAGE_FSTYPES ?= "tar.gz jffs2"
+ PREFERRED_PKG_FORMAT ?= "ipk"
+ 
++DISTRO_FEED_CONFIGS ?= "distro-feed-configs"
++
+ # Put links to sources in deploy/sources to make it easier for people to be GPL compliant
+ INHERIT += "src_distribute_local"
+ SRC_DIST_LOCAL ?= "symlink"
+@@ -135,7 +137,7 @@ DISTRO_EXTRA_APPS += '${@base_conditional("DISTRO_TYPE", "release", "", "task-cl
+ # util-linux-ng-mount util-linux-ng-umount: busybox mount is broken
+ # angstrom-libc-fixup-hack: fixes an obscure bug with libc.so symlink
+ DISTRO_EXTRA_RDEPENDS += "\
+-  distro-feed-configs \
++  ${DISTRO_FEED_CONFIGS} \
+   util-linux-ng-mount util-linux-ng-umount \
+   angstrom-libc-fixup-hack \
+   ${DISTRO_EXTRA_APPS} \
+-- 
+1.7.4.1
 
-	Message-Id: <1290664003-17257-1-git-send-email-jayen@cse.unsw.edu.au>
-
-> Is the person that submitted it redaing this?
-
-Adding him to CC he now definitely is.
-
-I am sending you the mbox file of the thread privately.
 
 
-Thanks,
-
-Paul
-
-
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-November/0=
-27236.html
-
---=-36V1sUh70MxfeJTDj0Ce
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3nm9YACgkQPX1aK2wOHVho3QCfQeY5nljNSJkrmW8rYUh83yvB
-No0AnRp2k62YChv7omc8P9w8OGvXKIMy
-=/2j3
------END PGP SIGNATURE-----
-
---=-36V1sUh70MxfeJTDj0Ce--
