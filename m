@@ -1,33 +1,34 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1QSDFc-0008D4-5Q
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jun 2011 21:08:12 +0200
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1QSDCW-0003Jy-QW from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jun 2011 12:05:00 -0700
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Thu, 2 Jun 2011 12:01:21 -0700
-Received: from [172.30.80.84] (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
-	(147.34.97.43) with Microsoft SMTP Server id 14.1.289.1;
-	Thu, 2 Jun 2011 12:05:00 -0700
-Message-ID: <4DE7DED8.3000209@mentor.com>
-Date: Thu, 2 Jun 2011 12:04:56 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <BANLkTik9khWBXixj=_LDj5pGdi=PO=0WbA@mail.gmail.com>
-In-Reply-To: <BANLkTik9khWBXixj=_LDj5pGdi=PO=0WbA@mail.gmail.com>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 02 Jun 2011 19:01:21.0829 (UTC)
-	FILETIME=[76589550:01CC2157]
-Subject: Re: [PATCH] perl-native multilib patch for ubuntu 11.04
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QSDJN-0008Js-OY for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Jun 2011 21:12:13 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QSDGE-0006YL-Gg for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Jun 2011 21:08:50 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Jun 2011 21:08:50 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Jun 2011 21:08:50 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 02 Jun 2011 21:08:33 +0200
+Message-ID: <is8n3h$p57$1@dough.gmane.org>
+References: <cover.1307040582.git.Martin.Jansa@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <cover.1307040582.git.Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [meta-oe][PATCH 0/2] Pull request #16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,41 +42,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jun 2011 19:08:12 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
+X-List-Received-Date: Thu, 02 Jun 2011 19:12:13 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 06/01/2011 10:51 AM, George C. Huntington, III wrote:
-> When I try to build perl-native under ubuntu 11.04 x86_64 from
-> 2011.03-maintenance branch
-> it fails unless I cherry-pick
-> commit 86fde1fe0281cc8c9d2bf1012d8eff5e24a69e55  can we put this in
-> the 2011.03-maintenance branch?
+Thanks, applied
+
+On 02-06-11 20:51, Martin Jansa wrote:
+> gobject-introspection from oe-core is not compatible with glib-2.0_git
+> we have here, added newer version also with D_P -1 (as glib-2.0) has.
 > 
-> cherry-pick: 86fde1fe0281cc8c9d2bf1012d8eff5e24a69e55
-> Tested-by: george huntington <george.huntingtoniii@gmail.com>
+> The following changes since commit e69c7519399c06e82e25dcbfdd300e975393b00a:
+> 
+>   connman: enable service when using systemd (2011-06-02 16:26:04 +0200)
+> 
+> are available in the git repository at:
+>   git://git.openembedded.org/meta-openembedded-contrib jansa/meta-oe
+>   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/meta-oe
+> 
+> Martin Jansa (2):
+>   gobject-introspection: add newer git version compatible with
+>     glib-2.0_git
+>   gobject-introspection: move to recipes-gnome to match oe-core
+>     structure
+> 
+>  .../use-usr-bin-env-for-python.patch               |    0
+>  .../gnome}/gobject-introspection_0.9.10.bb         |    0
+>  .../gnome/gobject-introspection_git.bb             |   33 ++++++++++++++++++++
+>  3 files changed, 33 insertions(+), 0 deletions(-)
+>  rename meta-oe/{recipes-devtools/gobject-introspection => recipes-gnome/gnome}/gobject-introspection/use-usr-bin-env-for-python.patch (100%)
+>  rename meta-oe/{recipes-devtools/gobject-introspection => recipes-gnome/gnome}/gobject-introspection_0.9.10.bb (100%)
+>  create mode 100644 meta-oe/recipes-gnome/gnome/gobject-introspection_git.bb
+> 
 
-I've applied this.  Or rather, patchwork and pw-am.sh didn't agree this
-would apply but I re-did the cherry-pick myself and added a note that
-you did the testing and pushed it.  Thanks!
-
-- -- 
-Tom Rini
-Mentor Graphics Corporation
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+Version: GnuPG v1.4.5 (Darwin)
 
-iQEcBAEBAgAGBQJN597UAAoJEI4NMjfc3nJxIZEIALmF7OIKlc5nfdWs+dBQkIDT
-Ft9lybnSGegBYSMnsAhQzJ6PnP0L0T83Kiy9h+LBRLDm7WFnadnALlI3JfVpqpvc
-n5offZe3cq8DMtt1Oky3BVy2RwkU5eGYq8NIkPVmOhYTIEphNk1ehrdFF8E75vqL
-Lsc3PZ25StD1YzDHQxQS9QidegagYF71QeS8Yk80aPDYVBCiinT0KG7aVJeExIzo
-asgMYG4k2JeLRVhMWgnyKVI8hZlQlGZQHCEk5DKCidG9l1jWkbspEh8wJfRZWzVP
-DW/M3VPII1Bb5PgtnR0C4H5XxlvaxJ0Id7M6BP+oTH7Ssd6NT3ycylVugwHdFCI=
-=GrZ2
+iD8DBQFN59+xMkyGM64RGpERAhcjAKCZuSl5whdoDQfoo3+Pp/pBczvgpACdFzs3
+zxi3McxB8eFGylvGY7l8UOA=
+=3I0H
 -----END PGP SIGNATURE-----
+
 
 
