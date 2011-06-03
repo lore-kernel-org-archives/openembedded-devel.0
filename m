@@ -1,24 +1,30 @@
-Received: from ns1.gatteins.it ([193.58.239.94])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <matteo.facchinetti@sirius-es.it>) id 1QSSlR-0006FL-U3
+	(envelope-from <morphis@gravedo.de>) id 1QSWxr-0005Ka-1e
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Jun 2011 13:42:05 +0200
-X-Virus-Scanned: amavisd-new at gattei.com
-Received: from [10.16.100.107] (78-134-95-148.dynamic.eolo.it [78.134.95.148])
-	by ns1.gatteins.it (Postfix) with ESMTPA id 494C3DEFC4
+	Fri, 03 Jun 2011 18:11:11 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 60884799012; Fri,  3 Jun 2011 18:08:00 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h1108419.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.1 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from [192.168.1.37] (p5B3E652D.dip.t-dialin.net [91.62.101.45])
+	by gravedo.de (Postfix) with ESMTPSA id 24641798D74
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Jun 2011 13:39:05 +0200 (MEST)
-Message-ID: <4DE8C7CD.3020803@sirius-es.it>
-Date: Fri, 03 Jun 2011 13:38:53 +0200
-From: Matteo Facchinetti <matteo.facchinetti@sirius-es.it>
+	Fri,  3 Jun 2011 18:07:57 +0200 (CEST)
+Message-ID: <4DE906D9.8000708@gravedo.de>
+Date: Fri, 03 Jun 2011 18:07:53 +0200
+From: Simon Busch <morphis@gravedo.de>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110424 Thunderbird/3.1.10
+	rv:1.9.2.17) Gecko/20110422 Lightning/1.0b2 Shredder/3.1.11pre
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1306934980-19272-1-git-send-email-matteo.facchinetti@sirius-es.it>
-	<is5oca$sls$1@dough.gmane.org>
-In-Reply-To: <is5oca$sls$1@dough.gmane.org>
-Subject: Re: [PATCH] wxbase_2.8.9: fix includepath for SDL dependency
+References: <1307025867-12077-1-git-send-email-morphis@gravedo.de>
+	<20110602144829.GI3281@jama.jama.net>
+In-Reply-To: <20110602144829.GI3281@jama.jama.net>
+Subject: Re: [PATCH] minimal: add weak assigned DISTRO_FEED_CONFIGS variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,63 +38,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jun 2011 11:42:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 03 Jun 2011 16:11:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 06/01/2011 06:11 PM, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 01-06-11 15:29, Matteo Facchinetti wrote:
->> From: Matteo Facchinetti<engineering@sirius-es.it>
->>
->> Compile task fail with error:
->> | CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/SDL
->> | cc1plus: internal compiler error: in add_path, at c-incpath.c:425
->>
->> Fix it forcing right path in configuration.
->>
->>
->> Signed-off-by: Matteo Facchinetti<engineering@sirius-es.it>
->> ---
->>   recipes/wxwidgets/wxbase_2.8.9.bb |    3 ++-
->>   1 files changed, 2 insertions(+), 1 deletions(-)
->>
->> diff --git a/recipes/wxwidgets/wxbase_2.8.9.bb b/recipes/wxwidgets/wxbase_2.8.9.bb
->> index fb18710..7d593ad 100644
->> --- a/recipes/wxwidgets/wxbase_2.8.9.bb
->> +++ b/recipes/wxwidgets/wxbase_2.8.9.bb
->> @@ -9,7 +9,8 @@ SRC_URI += "file://Makefile.in.patch"
->>   EXTRA_OECONF = " --disable-gui \
->>                    --enable-largefile \
->>                    --enable-gpe \
->> -                 --without-subdirs"
->> +                 --without-subdirs \
->> +                 --with-sdl-prefix=${D}"
-> Usually that means you end with with references to $WORKDIR in the
-> target binaries, is this one safe?
->
-mmmm...
-While checking about it I have discovered a mistake:
+On 02.06.2011 16:48, Martin Jansa wrote:
+> On Thu, Jun 02, 2011 at 04:44:27PM +0200, Simon Busch wrote:
+>> Some distros are based on the minimal distro but want to supply another feed configuration.
+>> As minimal uses DISTRO_EXTRA_RDEPENDS to pull distro-feed-configs into the builded image
+>> the new weak assigned variable DISTRO_FEED_CONFIGS makes it possible to specify another
+>> feed configuration.
+> 
+> isn't
+> DISTRO_FEED_PREFIX
+> DISTRO_FEED_URI
+> in
+> recipes/meta/distro-feed-configs.bb
+> enought to modify default distro-feed-configs?
+> 
+> and if not cannot we change distro-feed-configs.bb to allow such
+> modifications?
 
-In this case "--with-sdl-prefix" is used only for the basepath where 
-sdl-config script is located.
+Maybe you are right and it is the better solution to stay with
+distro-feed-configs.bb as general solution. The details why I did an own
+feed configuration is I don't want all PACKAGE_EXTRA_ARCHS as additional
+feed configs. Why should a image which is flashed to a armv4 device pull
+the feed configs for a armv7a?
 
-Configure script set:
-SDL_CONFIG=$sdl_prefix/bin/sdl-config
+When I have a armv7a device it only needs to get the armv7 +
+MACHINE_ARCH + all feed configs from the remote host for an update and
+nothing more.
 
-Then, if sdl-config is found (located in that position), it says to 
-wxbase the right path where SDL library is located.
-Binaries seems to be created exactly like the other libraries.
+The best solution to archive this is as far as I see to make
+distro-feed-configs machine specific and don't add PACKAGE_EXTRA_ARCHS
+as feed configuration anymore. For poky-feed-config-opkg in oe-core it's
+already the case.
 
-For this reason the only right way I've found is to use:
---with-sdl-prefix="${STAGING_BINDIR_CROSS}/.."
-
-Is it goes well?
-
-if yes I prepare v2 of this patch...
-
-
+regards,
+Simon
 
 
