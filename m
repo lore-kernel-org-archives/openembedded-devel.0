@@ -1,24 +1,24 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from ns1.gatteins.it ([193.58.239.94])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>)
-	id 1QSRsZ-0005FF-QJ; Fri, 03 Jun 2011 12:45:26 +0200
-Received: by wwb17 with SMTP id 17so1305862wwb.24
-	for <multiple recipients>; Fri, 03 Jun 2011 03:40:32 -0700 (PDT)
-Received: by 10.216.50.10 with SMTP id y10mr712544web.21.1307097602815;
-	Fri, 03 Jun 2011 03:40:02 -0700 (PDT)
-Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id h43sm761469wes.35.2011.06.03.03.40.01
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 03 Jun 2011 03:40:02 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 3 Jun 2011 12:40:00 +0200
-Message-Id: <5D911BEB-8636-442D-9AB3-44EF4763B750@dominion.thruhere.net>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Mime-Version: 1.0 (Apple Message framework v1084)
-X-Mailer: Apple Mail (2.1084)
-Subject: HEADS UP: sys_accept4() syscall and recent udevs
+	(envelope-from <matteo.facchinetti@sirius-es.it>) id 1QSSlR-0006FL-U3
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 03 Jun 2011 13:42:05 +0200
+X-Virus-Scanned: amavisd-new at gattei.com
+Received: from [10.16.100.107] (78-134-95-148.dynamic.eolo.it [78.134.95.148])
+	by ns1.gatteins.it (Postfix) with ESMTPA id 494C3DEFC4
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  3 Jun 2011 13:39:05 +0200 (MEST)
+Message-ID: <4DE8C7CD.3020803@sirius-es.it>
+Date: Fri, 03 Jun 2011 13:38:53 +0200
+From: Matteo Facchinetti <matteo.facchinetti@sirius-es.it>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110424 Thunderbird/3.1.10
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <1306934980-19272-1-git-send-email-matteo.facchinetti@sirius-es.it>
+	<is5oca$sls$1@dough.gmane.org>
+In-Reply-To: <is5oca$sls$1@dough.gmane.org>
+Subject: Re: [PATCH] wxbase_2.8.9: fix includepath for SDL dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,41 +32,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jun 2011 10:45:26 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 03 Jun 2011 11:42:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 06/01/2011 06:11 PM, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 01-06-11 15:29, Matteo Facchinetti wrote:
+>> From: Matteo Facchinetti<engineering@sirius-es.it>
+>>
+>> Compile task fail with error:
+>> | CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/SDL
+>> | cc1plus: internal compiler error: in add_path, at c-incpath.c:425
+>>
+>> Fix it forcing right path in configuration.
+>>
+>>
+>> Signed-off-by: Matteo Facchinetti<engineering@sirius-es.it>
+>> ---
+>>   recipes/wxwidgets/wxbase_2.8.9.bb |    3 ++-
+>>   1 files changed, 2 insertions(+), 1 deletions(-)
+>>
+>> diff --git a/recipes/wxwidgets/wxbase_2.8.9.bb b/recipes/wxwidgets/wxbase_2.8.9.bb
+>> index fb18710..7d593ad 100644
+>> --- a/recipes/wxwidgets/wxbase_2.8.9.bb
+>> +++ b/recipes/wxwidgets/wxbase_2.8.9.bb
+>> @@ -9,7 +9,8 @@ SRC_URI += "file://Makefile.in.patch"
+>>   EXTRA_OECONF = " --disable-gui \
+>>                    --enable-largefile \
+>>                    --enable-gpe \
+>> -                 --without-subdirs"
+>> +                 --without-subdirs \
+>> +                 --with-sdl-prefix=${D}"
+> Usually that means you end with with references to $WORKDIR in the
+> target binaries, is this one safe?
+>
+mmmm...
+While checking about it I have discovered a mistake:
 
-Last night I tried to help Tom R. debug boot failures and it turned out =
-that he was missing the sys_accept4() syscall. This morning I helped a =
-coworker with the same problem. So let's summarize the situation:
+In this case "--with-sdl-prefix" is used only for the basepath where 
+sdl-config script is located.
 
- 1) recent udevs (>165) depend on the accept4() syscall
- 2) kernel 2.6.28 added that syscall, but didn't wire it up for all =
-archs
- 3) kernel 2.6.36 wired it up for ARM
+Configure script set:
+SDL_CONFIG=$sdl_prefix/bin/sdl-config
 
-So to get a working recent udev on ARM you need to do the following:
+Then, if sdl-config is found (located in that position), it says to 
+wxbase the right path where SDL library is located.
+Binaries seems to be created exactly like the other libraries.
 
- a) use >=3D 2.6.36 as linux libc headers or cherry-pick this one:
-      21d93e2e29722d7832f61cc56d73fb953ee6578e ARM: 6329/1: wire up =
-sys_accept4() on ARM
- b) cherry-pick the above into your kernel, cherry-pick works cleanly =
-for at least the 2.6.32 and 2.6.35 kernels I tried it on
+For this reason the only right way I've found is to use:
+--with-sdl-prefix="${STAGING_BINDIR_CROSS}/.."
 
-And if you want to use systemd:
+Is it goes well?
 
- c) cherry-pick 676db4af043014e852f67ba0349dae0071bd11f3 cgroupfs: =
-create /sys/fs/cgroup to mount cgroupfs
+if yes I prepare v2 of this patch...
 
-If you're using a prebuilt toolchain, contact your toolchain vender to =
-get a headerset and c library with that syscall and optionally things =
-like signalfd(). OE-core users only need to check b) if they are using =
-their own <2.6.36 kernels.
 
-regards,
-
-Koen=
 
 
