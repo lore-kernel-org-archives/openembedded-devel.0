@@ -1,41 +1,24 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QSLSb-0003ML-Ow
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Jun 2011 05:54:09 +0200
-Received: by bwz5 with SMTP id 5so1741547bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jun 2011 20:50:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=CSdP64cJ51ES8RJxQYMsMfgCyITwmO9Ofi6AeeBed/0=;
-	b=N1FelBwQ3QP4lV2eNtR/OZpLyM2bgvXC9XWrlV3dmdgwgDc9vpRHPVLEr1T7fSuOsF
-	XTj4S0gi61ZM6nSaaFWIT+ckkOsGSIRuLAKpxkfAjql8+BW0YsKH64yDjCM56btw+Oy2
-	fqyoVV6fwRrjqxB05tvO8Dfv5pl2uYYrhj/7I=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=esZML0HZE2kPwrxAaWfFfmhA70YIuMe9lDrzMKMn3IKD0+oQBv/X6SiUo+9LhsU6Z8
-	7r4ccpfqZEtlCw/5QGl13qlvXewYQ7etwHeLVVRffCuESdGlOmQzkKrovPhZ+9IZGLHl
-	ugjMsTgYFg9yU4p9WUga8cDGMQ8pAnpWO6MBk=
-Received: by 10.204.140.18 with SMTP id g18mr1403352bku.59.1307073045767;
-	Thu, 02 Jun 2011 20:50:45 -0700 (PDT)
-Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id 16sm939125bkm.14.2011.06.02.20.50.43
+	(envelope-from <koen@dominion.thruhere.net>)
+	id 1QSRsZ-0005FF-QJ; Fri, 03 Jun 2011 12:45:26 +0200
+Received: by wwb17 with SMTP id 17so1305862wwb.24
+	for <multiple recipients>; Fri, 03 Jun 2011 03:40:32 -0700 (PDT)
+Received: by 10.216.50.10 with SMTP id y10mr712544web.21.1307097602815;
+	Fri, 03 Jun 2011 03:40:02 -0700 (PDT)
+Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
+	by mx.google.com with ESMTPS id h43sm761469wes.35.2011.06.03.03.40.01
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 02 Jun 2011 20:50:44 -0700 (PDT)
-Date: Fri, 3 Jun 2011 05:50:37 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110603035037.GJ3281@jama.jama.net>
-References: <cover.1307040582.git.Martin.Jansa@gmail.com>
-	<1eefebc5e34260c875302a181cb80724bad4303d.1307040582.git.Martin.Jansa@gmail.com>
-	<201106021452.38054.raj.khem@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <201106021452.38054.raj.khem@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 1/2] gobject-introspection: add newer git version compatible with glib-2.0_git
+	Fri, 03 Jun 2011 03:40:02 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 3 Jun 2011 12:40:00 +0200
+Message-Id: <5D911BEB-8636-442D-9AB3-44EF4763B750@dominion.thruhere.net>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0 (Apple Message framework v1084)
+X-Mailer: Apple Mail (2.1084)
+Subject: HEADS UP: sys_accept4() syscall and recent udevs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,93 +32,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jun 2011 03:54:09 -0000
-X-Groupsio-MsgNum: 32494
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="GU3/x65mZ6MFE8p3"
-Content-Disposition: inline
-
---GU3/x65mZ6MFE8p3
+X-List-Received-Date: Fri, 03 Jun 2011 10:45:26 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 02, 2011 at 02:52:37PM -0700, Khem Raj wrote:
-> On Thursday, June 02, 2011 11:51:34 AM Martin Jansa=20
-> wrote:
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> >  .../gobject-introspection_git.bb                   |  =20
-> 33
-> > ++++++++++++++++++++ 1 files changed, 33=20
-> insertions(+), 0 deletions(-)
-> >  create mode 100644
-> > meta-oe/recipes-devtools/gobject-
-> introspection/gobject-introspection_git.b
-> > b
-> >=20
-> > diff --git
-> > a/meta-oe/recipes-devtools/gobject-
-> introspection/gobject-introspection_git
-> > .bb
-> > b/meta-oe/recipes-devtools/gobject-
-> introspection/gobject-introspection_git
-> > .bb new file mode 100644
-> > index 0000000..2a7f30c
-> > --- /dev/null
-> > +++
-> > b/meta-oe/recipes-devtools/gobject-
-> introspection/gobject-introspection_git
-> > .bb @@ -0,0 +1,33 @@
-> > +# NOTE: WIP! This recipe does not cross-compile=20
-> atm., only -native
-> > +DEPENDS =3D "glib-2.0 libffi python-native gobject-
-> introspection-native"
-> > +DEPENDS_virtclass-native =3D "libffi-native python-
-> native bison-native
-> > flex-native" +BBCLASSEXTEND =3D "native"
-> > +
-> > +SRC_URI =3D "git://git.gnome.org/gobject-
-> introspection;protocol=3Dgit \
-> > +  file://use-usr-bin-env-for-python.patch \
-> > +"
-> > +
-> > +LICENSE =3D "GPLv2+ & LGPLv2+"
-> > +LIC_FILES_CHKSUM =3D
-> >=20
-> "file://COPYING.tools;md5=3D94d55d512a9ba36caa9b7df079bae19f=20
-> \ +		  =20
-> >=20
-> file://COPYING.lib;md5=3D3bf50002aefd002f49e7bb854063f7e7"
-> > +
-> > +SRCREV =3D "8d64bc23d2b837421ecf9c7b0e4b8d5d95ca0d21"
-> > +PV =3D "1.29.0+gitr${SRCPV}"
-> > +DEFAULT_PREFERENCE =3D "-1"
->=20
-> why DP -1
+Hi,
 
-because it's for glib-2.0_git with DP -1 and both are development
-snapshots. glib-2.0_git was added mostly for it's gdbus-codegen
-integration (before we had this in separate recipe gdbus-binding-tool,
-because it was also separate repo). And it needs also changed code and
-command line arguments to call gdbus-codegen were changed... so we've
-updated SHR code for it but I wanted to give other people more time
-before making it new default version.
-=20
-Regards,
+Last night I tried to help Tom R. debug boot failures and it turned out =
+that he was missing the sys_accept4() syscall. This morning I helped a =
+coworker with the same problem. So let's summarize the situation:
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+ 1) recent udevs (>165) depend on the accept4() syscall
+ 2) kernel 2.6.28 added that syscall, but didn't wire it up for all =
+archs
+ 3) kernel 2.6.36 wired it up for ARM
 
---GU3/x65mZ6MFE8p3
-Content-Type: application/pgp-signature
+So to get a working recent udev on ARM you need to do the following:
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
+ a) use >=3D 2.6.36 as linux libc headers or cherry-pick this one:
+      21d93e2e29722d7832f61cc56d73fb953ee6578e ARM: 6329/1: wire up =
+sys_accept4() on ARM
+ b) cherry-pick the above into your kernel, cherry-pick works cleanly =
+for at least the 2.6.32 and 2.6.35 kernels I tried it on
 
-iEYEARECAAYFAk3oWg0ACgkQN1Ujt2V2gBwVzACfd6PLxuZMtVonIivD0pVUdpAM
-+voAnRhb7/YbxDU9Vj8a3G26+t6u7vJY
-=TK1D
------END PGP SIGNATURE-----
+And if you want to use systemd:
 
---GU3/x65mZ6MFE8p3--
+ c) cherry-pick 676db4af043014e852f67ba0349dae0071bd11f3 cgroupfs: =
+create /sys/fs/cgroup to mount cgroupfs
+
+If you're using a prebuilt toolchain, contact your toolchain vender to =
+get a headerset and c library with that syscall and optionally things =
+like signalfd(). OE-core users only need to check b) if they are using =
+their own <2.6.36 kernels.
+
+regards,
+
+Koen=
+
+
