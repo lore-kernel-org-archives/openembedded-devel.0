@@ -1,35 +1,20 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QSZAG-00083w-9q for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Jun 2011 20:32:08 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QSZ7B-0006R8-29 for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Jun 2011 20:28:57 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Jun 2011 20:28:56 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Jun 2011 20:28:56 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QSurI-0007Hk-8S for openembedded-devel@lists.openembedded.org;
+	Sat, 04 Jun 2011 19:42:00 +0200
+Received: from f053045003.adsl.alicedsl.de ([78.53.45.3] helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QSuos-0007kv-1T; Sat, 04 Jun 2011 17:39:30 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 03 Jun 2011 20:28:44 +0200
-Message-ID: <isb94s$svu$1@dough.gmane.org>
-References: <1307025867-12077-1-git-send-email-morphis@gravedo.de>	<20110602144829.GI3281@jama.jama.net>	<4DE906D9.8000708@gravedo.de>	<isb1dt$cop$1@dough.gmane.org>	<4DE90A55.7020107@gravedo.de>	<isb2ll$krf$1@dough.gmane.org>
-	<4DE90EA6.3060703@gravedo.de>
+Date: Sat, 04 Jun 2011 19:38:46 +0200
+Message-ID: <1307209126.4456.21.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4DE90EA6.3060703@gravedo.de>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] minimal: add weak assigned DISTRO_FEED_CONFIGS variable
+X-Mailer: Evolution 2.32.3 
+Cc: Eric BENARD <eric@eukrea.com>
+Subject: [PATCH] Revert "busybox_1.18.4.bb: Fix checksums of busybox-1.18.4-hush.patch"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,102 +28,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jun 2011 18:32:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 04 Jun 2011 17:42:00 -0000
+X-Groupsio-MsgNum: 32504
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-BuPo7fVq5TYpAQbZsFbh"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-BuPo7fVq5TYpAQbZsFbh
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 03-06-11 18:41, Simon Busch wrote:
-> On 03.06.2011 18:38, Koen Kooi wrote:
->> On 03-06-11 18:22, Simon Busch wrote:
->>> On 03.06.2011 18:17, Koen Kooi wrote:
->>>> On 03-06-11 18:07, Simon Busch wrote:
->>>>> On 02.06.2011 16:48, Martin Jansa wrote:
->>>>>> On Thu, Jun 02, 2011 at 04:44:27PM +0200, Simon Busch wrote:
->>>>>>> Some distros are based on the minimal distro but want to supply another feed configuration.
->>>>>>> As minimal uses DISTRO_EXTRA_RDEPENDS to pull distro-feed-configs into the builded image
->>>>>>> the new weak assigned variable DISTRO_FEED_CONFIGS makes it possible to specify another
->>>>>>> feed configuration.
->>>>>>
->>>>>> isn't
->>>>>> DISTRO_FEED_PREFIX
->>>>>> DISTRO_FEED_URI
->>>>>> in
->>>>>> recipes/meta/distro-feed-configs.bb
->>>>>> enought to modify default distro-feed-configs?
->>>>>>
->>>>>> and if not cannot we change distro-feed-configs.bb to allow such
->>>>>> modifications?
->>>>
->>>>> Maybe you are right and it is the better solution to stay with
->>>>> distro-feed-configs.bb as general solution. The details why I did an own
->>>>> feed configuration is I don't want all PACKAGE_EXTRA_ARCHS as additional
->>>>> feed configs. Why should a image which is flashed to a armv4 device pull
->>>>> the feed configs for a armv7a?
->>>>
->>>>> When I have a armv7a device it only needs to get the armv7 +
->>>>> MACHINE_ARCH + all feed configs from the remote host for an update and
->>>>> nothing more.
->>>>
->>>>> The best solution to archive this is as far as I see to make
->>>>> distro-feed-configs machine specific and don't add PACKAGE_EXTRA_ARCHS
->>>>> as feed configuration anymore. For poky-feed-config-opkg in oe-core it's
->>>>> already the case.
->>>>
->>>> It's also the case for angstrom-feed-configs, which got used as template
->>>> for the distro-feed-configs recipe.
->>
->>> Damn it, I missed the PACKAGE_ARCH line within the distro-feed-configs
->>> recipe. But the issue with PACKAGE_EXTRA_ARCHS is still remaining ...
->>
->>> As I see angstrom-feed-configs uses PACKAGE_ARCHS which includes
->>> PACKAGE_ARCHS, but why should I update the feed on my machine for an
->>> architecture I am not running on? So I would propose to only add feeds
->>> for all, ${MACHINE_ARCH} and ${TARGET_ARCH} (whats with noarch, any as
->>> they are listed in bitbake.conf? they are only relicts from old times?).
->>
->> root@usrp-e1xx:~# ls /etc/opkg/
->> arch.conf  base-feed.conf  debug-feed.conf  gstreamer-feed.conf
->> noarch-feed.conf  opkg.conf  perl-feed.conf  python-feed.conf
->> sdk-feed.conf  usrp-e1xx-feed.conf
->>
->> root@usrp-e1xx:~# grep arm /etc/opkg/*
->> /etc/opkg/arch.conf:arch arm 16
->> /etc/opkg/arch.conf:arch armv4 21
->> /etc/opkg/arch.conf:arch armv4t 26
->> /etc/opkg/arch.conf:arch armv5te 31
->> /etc/opkg/arch.conf:arch armv6 36
->> /etc/opkg/arch.conf:arch armv7 41
->> /etc/opkg/arch.conf:arch armv7a 46
->> /etc/opkg/base-feed.conf:src/gz base
->> http://feeds.angstrom-distribution.org/feeds/next/ipk/eglibc/armv7a/base
->> /etc/opkg/debug-feed.conf:src/gz debug
->> http://feeds.angstrom-distribution.org/feeds/next/ipk/eglibc/armv7a/debug
->> /etc/opkg/gstreamer-feed.conf:src/gz gstreamer
->> http://feeds.angstrom-distribution.org/feeds/next/ipk/eglibc/armv7a/gstreamer
->> /etc/opkg/perl-feed.conf:src/gz perl
->> http://feeds.angstrom-distribution.org/feeds/next/ipk/eglibc/armv7a/perl
->> /etc/opkg/python-feed.conf:src/gz python
->> http://feeds.angstrom-distribution.org/feeds/next/ipk/eglibc/armv7a/python
->> /etc/opkg/usrp-e1xx-feed.conf:src/gz usrp-e1xx
->> http://eu.feeds.angstrom-distribution.org/feeds/next/ipk/eglibc/armv7a/machine/usrp-e1xx
->> root@usrp-e1xx:~#
->>
->> So only armv7a there, not armv6 and armv5te, armv4t, etc there.
-> 
-> Yeah, thats the case for angstrom-feed-configs but not
-> distro-feed-configs ...
+Date: Sat, 4 Jun 2011 19:35:03 +0200
 
-Yes, that's what I said in my email.
+This reverts commit 688b8dc036f504ae1bdf1736bf211a0c62de03f8.
+
+        commit 688b8dc036f504ae1bdf1736bf211a0c62de03f8
+        Author: Khem Raj <raj.khem@gmail.com>
+        Date:   Fri Jun 3 11:38:12 2011 -0700
+       =20
+            busybox_1.18.4.bb: Fix checksums of busybox-1.18.4-hush.patch
+           =20
+            Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+The old checksums are the ones I get when downloading the patch.
+
+        $ zless minimal-dev/work/armv7a-oe-linux-gnueabi/busybox-1.18.4-r43=
+.2/temp/log.do_fetch
+        NOTE: The checksums for 'busybox-1.18.4-hush.patch' did not match.
+        Expected MD5: '91005640b4b434ab5029fa5a0349a33c' and Got: 'a81f2d7d=
+3bdf1a35ab77c4414a530d38'
+        Expected SHA256: 'e76da947c40784c9a0527c38b1e9edb615c80cfe911d28b9d=
+8a5d67a492bf67c' and Got: 'c87e73ad942d53c8a2a5ffe6037c1cdf52d4b20d3f29caae=
+5fffc7a99009b7cb'
+        NOTE: Your checksums:
+        SRC_URI[patch01.md5sum] =3D "a81f2d7d3bdf1a35ab77c4414a530d38"
+        SRC_URI[patch01.sha256sum] =3D "c87e73ad942d53c8a2a5ffe6037c1cdf52d=
+4b20d3f29caae5fffc7a99009b7cb"
+
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+CC: Khem Raj <raj.khem@gmail.com>
+CC: Eric BENARD <eric@eukrea.com>
+---
+ recipes/busybox/busybox_1.18.4.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes/busybox/busybox_1.18.4.bb b/recipes/busybox/busybox_1.=
+18.4.bb
+index b72510d..68a023a 100644
+--- a/recipes/busybox/busybox_1.18.4.bb
++++ b/recipes/busybox/busybox_1.18.4.bb
+@@ -7,5 +7,5 @@ PR =3D "${INC_PR}.2"
+=20
+ SRC_URI[md5sum] =3D "b03c5b46ced732679e525a920a1a62f5"
+ SRC_URI[sha256sum] =3D "4d24d37bd6f1bd153e8cf9a984ec2f32f18464f73ca535e2cc=
+2e8be9694097fa"
+-SRC_URI[patch01.md5sum] =3D "91005640b4b434ab5029fa5a0349a33c"
+-SRC_URI[patch01.sha256sum] =3D "e76da947c40784c9a0527c38b1e9edb615c80cfe91=
+1d28b9d8a5d67a492bf67c"
++SRC_URI[patch01.md5sum] =3D "a81f2d7d3bdf1a35ab77c4414a530d38"
++SRC_URI[patch01.sha256sum] =3D "c87e73ad942d53c8a2a5ffe6037c1cdf52d4b20d3f=
+29caae5fffc7a99009b7cb"
+--=20
+1.7.5.3
+
+--=-BuPo7fVq5TYpAQbZsFbh
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iD8DBQFN6SfcMkyGM64RGpERAhdLAJ0dadfJRZvJFUlvCQz41CnJbf1mbgCgpfQW
-MtmNJrvRKRxTwDPJc0CfJdM=
-=/+Se
+iEYEABECAAYFAk3qbaYACgkQPX1aK2wOHVhQrgCfYq5wQgaAf8tV57y+b9v+kuh0
+E5MAn2dodoF9S37xcYsD21LIX9qJtl+T
+=wgSc
 -----END PGP SIGNATURE-----
 
-
-
+--=-BuPo7fVq5TYpAQbZsFbh--
