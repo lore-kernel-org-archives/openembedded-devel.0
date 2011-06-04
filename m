@@ -1,21 +1,34 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QSvCo-0007vh-08 for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Jun 2011 20:04:14 +0200
-Received: from f053045003.adsl.alicedsl.de ([78.53.45.3] helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QSvAO-0000c9-0S; Sat, 04 Jun 2011 18:01:44 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QSvHs-00084B-OT for openembedded-devel@lists.openembedded.org;
+	Sat, 04 Jun 2011 20:09:28 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QSvEl-00038q-Nu for openembedded-devel@lists.openembedded.org;
+	Sat, 04 Jun 2011 20:06:15 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 04 Jun 2011 20:06:15 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 04 Jun 2011 20:06:15 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1307209126.4456.21.camel@mattotaupa>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 04 Jun 2011 20:05:58 +0200
+Message-ID: <isds66$5r3$1@dough.gmane.org>
 References: <1307209126.4456.21.camel@mattotaupa>
-Date: Sat, 04 Jun 2011 20:01:00 +0200
-Message-ID: <1307210460.4456.24.camel@mattotaupa>
+	<1307210460.4456.24.camel@mattotaupa>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Cc: Eric BENARD <eric@eukrea.com>
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1307210460.4456.24.camel@mattotaupa>
+X-Enigmail-Version: 1.0.1
 Subject: Re: [PATCH] Revert "busybox_1.18.4.bb: Fix checksums of busybox-1.18.4-hush.patch"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,74 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Jun 2011 18:04:14 -0000
-X-Groupsio-MsgNum: 32505
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-ghI2jacjrL5iy06W8+1n"
+X-List-Received-Date: Sat, 04 Jun 2011 18:09:28 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-ghI2jacjrL5iy06W8+1n
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Dear OpenEmbedded folks,
+On 04-06-11 20:01, Paul Menzel wrote:
 
+> Another solution would be to handle all patches in OpenEmbedded
+> directly.
 
-Am Samstag, den 04.06.2011, 19:38 +0200 schrieb Paul Menzel:
-> Date: Sat, 4 Jun 2011 19:35:03 +0200
->=20
-> This reverts commit 688b8dc036f504ae1bdf1736bf211a0c62de03f8.
->=20
->         commit 688b8dc036f504ae1bdf1736bf211a0c62de03f8
->         Author: Khem Raj <raj.khem@gmail.com>
->         Date:   Fri Jun 3 11:38:12 2011 -0700
->        =20
->             busybox_1.18.4.bb: Fix checksums of busybox-1.18.4-hush.patch
->            =20
->             Signed-off-by: Khem Raj <raj.khem@gmail.com>
->=20
-> The old checksums are the ones I get when downloading the patch.
->=20
->         $ zless minimal-dev/work/armv7a-oe-linux-gnueabi/busybox-1.18.4-r=
-43.2/temp/log.do_fetch
->         NOTE: The checksums for 'busybox-1.18.4-hush.patch' did not match=
-.
->         Expected MD5: '91005640b4b434ab5029fa5a0349a33c' and Got: 'a81f2d=
-7d3bdf1a35ab77c4414a530d38'
->         Expected SHA256: 'e76da947c40784c9a0527c38b1e9edb615c80cfe911d28b=
-9d8a5d67a492bf67c' and Got: 'c87e73ad942d53c8a2a5ffe6037c1cdf52d4b20d3f29ca=
-ae5fffc7a99009b7cb'
->         NOTE: Your checksums:
->         SRC_URI[patch01.md5sum] =3D "a81f2d7d3bdf1a35ab77c4414a530d38"
->         SRC_URI[patch01.sha256sum] =3D "c87e73ad942d53c8a2a5ffe6037c1cdf5=
-2d4b20d3f29caae5fffc7a99009b7cb"
-
-[=E2=80=A6]
-
-Please ignore this patch as I had the old patch file in cached my
-download directory.
-
-Is there a way in BitBake to check and redownload a file if the
-checksums do not match?
-
-Another solution would be to handle all patches in OpenEmbedded
-directly.
-
-
-Thanks,
-
-Paul
-
---=-ghI2jacjrL5iy06W8+1n
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
+That is what I have been saying for a while now...
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAk3qctwACgkQPX1aK2wOHVjc/QCeIrbDn6/5By5qaBULg7jRnFLX
-enAAmwdGbpMLLc4ldy0TSjN6yABFi94T
-=sJqa
+iD8DBQFN6nQGMkyGM64RGpERAkZbAJ9pE5fAuNMdnKbpPB2ChXInOAtgAACgsSLr
+/xXZSPeVhGjaDJpTxUyL+t4=
+=xeAs
 -----END PGP SIGNATURE-----
 
---=-ghI2jacjrL5iy06W8+1n--
+
+
