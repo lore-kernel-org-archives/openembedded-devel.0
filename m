@@ -1,33 +1,34 @@
-Received: from ns.penguin.cz ([84.21.108.25])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <utx@penguin.cz>) id 1QTcna-0003Sd-Jj
+	(envelope-from <nmacmunn@gmail.com>) id 1QTdbU-0004XK-CF
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Jun 2011 18:37:07 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id D7B5B1416BB2
+	Mon, 06 Jun 2011 19:28:43 +0200
+Received: by iye7 with SMTP id 7so3670975iye.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Jun 2011 18:37:19 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 2WaUwpzbxRP0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Jun 2011 18:37:19 +0200 (CEST)
-Received: from [10.20.5.32] (nat.scz.novell.com [213.151.88.252])
-	by ns.penguin.cz (Postfix) with ESMTP id B822A1416BA8
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Jun 2011 18:37:19 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	Mon, 06 Jun 2011 10:23:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=jWFe7zGLXioVcIuH/11VjbTMZNdiAcedo4dIQBvJbNU=;
+	b=p7btyKg61fFiOqapmoyqa5vIlxM9gOtgOmJwtJn/ZzGm6UHpmz9fgkS9Z6Emr0y3SB
+	a1xJyzdJTzcbDtZ2Ux7JdQ++vkxRYNGz+TXFS5+iucj5a7BxoKcAKrIuN9G9yMij8Txw
+	RzOPL4Zu014qaTdXQsRzw1kV0YlPNBdKlbAWI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=t7Pywcq6oSXMu5BgKjtN9UwwHWlKs2aoTJuIwMQf/OnrMgEqvW8+LVP88rfpTlqINV
+	x3S7Hw6mXOqnVrbI0o5xr/mBIAaenkj1uYO3plJUpRfEOSJ3VIqTVezOHwnTV8GsZQ2p
+	9assEHSE30yDI93pq506hu7YBXWZnA3UcN+Zw=
+Received: by 10.42.29.69 with SMTP id q5mr9121288icc.353.1307381032758;
+	Mon, 06 Jun 2011 10:23:52 -0700 (PDT)
+Received: from localhost.localdomain ([74.3.164.55])
+	by mx.google.com with ESMTPS id ex14sm2864745icb.13.2011.06.06.10.23.50
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 06 Jun 2011 10:23:51 -0700 (PDT)
+From: Neil MacMunn <nmacmunn@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1307038832.4241.79.camel@mattotaupa>
-References: <1306933759.5710.2.camel@mattotaupa>
-	<1306940182.23523.23.camel@oct.suse.cz>
-	<1307038832.4241.79.camel@mattotaupa>
-Date: Mon, 06 Jun 2011 18:33:48 +0200
-Message-ID: <1307378028.8178.14.camel@oct.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.1 
-Subject: Re: gammu: task compile fails with `/oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/usr/lib/libcurl.so: could not read symbols: File in wrong format`
+Date: Mon,  6 Jun 2011 10:20:49 -0700
+Message-Id: <1307380849-31354-1-git-send-email-neil@gumstix.com>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] openocd: added v0.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,36 +42,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jun 2011 16:37:07 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 06 Jun 2011 17:28:43 -0000
 
-Paul Menzel wrote:
-> Am Mittwoch, den 01.06.2011, 16:56 +0200 schrieb Stanislav Brabec:
-> > Paul Menzel wrote:
-> > > Dear Stanislav,
-> > > task compile of `gammu` fails with the following error message usin=
-g
-> > >         /oe/build-angstrom-next/angstrom-dev/sysroots/i686-linux/us=
-r/lib/libcurl.so: could not read symbols: File in wrong format
-> >=20
-> > Could you try to add curl to DEPENDS and try again (note that you hav=
-e
-> > to include do_configure call again). Maybe I overseen this dependency=
-.
->=20
-> Adding `curl` to `DEPENDS` fixes this issue. It is strange that it is
-> looking into the stanging area (=C2=BBFile in wrong format=C2=AB).
+* includes patch to prevent CROSS COMPILE Badness
+* configure requires --enable-maintainer-mode to generate version.texi
 
-It is not strange: Target platform instance of curl was not found but
-there was a native curl library in the config path. Attempt to link
-against it found a file in wrong format (library for another platform).
+Signed-off-by: Neil MacMunn <neil@gumstix.com>
+---
+ .../openocd/files/make-include-path-relative.patch |   13 +++++++++++
+ recipes/openocd/openocd_0.4.bb                     |   23 ++++++++++++++++++++
+ 2 files changed, 36 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/openocd/files/make-include-path-relative.patch
+ create mode 100644 recipes/openocd/openocd_0.4.bb
 
-See the sysroots/i686-linux part of the path.
-
---=20
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+diff --git a/recipes/openocd/files/make-include-path-relative.patch b/recipes/openocd/files/make-include-path-relative.patch
+new file mode 100644
+index 0000000..d9a5147
+--- /dev/null
++++ b/recipes/openocd/files/make-include-path-relative.patch
+@@ -0,0 +1,13 @@
++diff --git a/configure.in.orig b/configure.in
++index 4681aeb..07f57f3 100644
++--- a/configure.in
+++++ b/configure.in.modified
++@@ -186,7 +186,7 @@ then
++       LDFLAGS="$LDFLAGS -Wl,-rpath,$OCDxprefix/lib"
++     fi
++     # The "INCDIR" is also usable
++-    CFLAGS="$CFLAGS -I$includedir"
+++    CFLAGS="$CFLAGS -I$sysroot/include"
++ fi
++ 
++ AC_ARG_WITH(ftd2xx,
+diff --git a/recipes/openocd/openocd_0.4.bb b/recipes/openocd/openocd_0.4.bb
+new file mode 100644
+index 0000000..e74b5fe
+--- /dev/null
++++ b/recipes/openocd/openocd_0.4.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "Free and Open On-Chip Debugging, In-System Programming and Boundary-Scan Testing"
++HOMEPAGE = "http://openocd.berlios.de/"
++LICENSE = "GPL"
++SRCREV = "56e74908d17d740db0a376f354c21e6608e8af8d"
++PV = "0.4"
++PR = "r0"
++
++DEPENDS = "libftdi"
++EXTRA_OECONF = " --enable-ft2232_libftdi --disable-werror --enable-maintainer-mode"
++
++SRC_URI = "git://openocd.git.sourceforge.net/gitroot/openocd/openocd;protocol=http;branch=master \
++          file://make-include-path-relative.patch"
++S = "${WORKDIR}/git"
++
++inherit autotools
++
++do_configure_append() {
++	for i in $(find ${S} -name Makefile) ; do
++		sed -i -e 's:-I/usr/include:${STAGING_INCDIR}:g' $i
++		sed -i -e 's:-L/usr/lib:-L${STAGING_LIBDIR}:g' $i
++	done
++}
++
+-- 
+1.7.1
 
 
 
