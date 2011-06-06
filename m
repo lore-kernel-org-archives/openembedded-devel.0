@@ -1,35 +1,34 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eyalreizer@googlemail.com>) id 1QTSlg-0004mN-J8
+	(envelope-from <stefan@datenfreihafen.org>) id 1QTV3x-0007l6-A2
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Jun 2011 07:54:29 +0200
-Received: by gwb11 with SMTP id 11so1476934gwb.6
+	Mon, 06 Jun 2011 10:21:29 +0200
+Received: from [2001:638:602:1183:bc26:8b83:6b5:fa96] (helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
+	id 1QTV0n-0008Fq-3L by authid <stefan@sostec.de> with srv_auth_cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 05 Jun 2011 22:51:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=4WqRy7HQ8lUvjMO4yxyC7SDTUevzrVcJmwzLXIT2/X0=;
-	b=KuQccvRI2y2L2ye5qXc18UvbecI2C0+hN4Tqp+DkfF8wRaGsQp4JFlTjh46M6iG1AX
-	Kqnnr3sEVC/LNCNU3c3ByXYHxyzNz2RwThFzKJ508fiPGH6nVvKnOb03V0dubfx/BjWV
-	9ehdt25+lCqpXB+1JiXem8g89HhKJGaEWhAxU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=v/zNpjm5Hp8w8KzURWFMrC+U128lfCWHVCYLk3oJHIRm6ydrVG5g4SNlHiiglT1Qpc
-	iD4Z8eyr+C7ariq3XsLJIQINliH6oFRYGU0AbdJUCeNvQSXw0wxtz6zlitAtZXvGK4bQ
-	C2sbVXQHq5rROOpHMAyVHavgykRjFZGSk8Y18=
-Received: by 10.151.84.5 with SMTP id m5mr3884697ybl.33.1307339467939;
-	Sun, 05 Jun 2011 22:51:07 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id u32sm3074328ann.4.2011.06.05.22.51.05
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 05 Jun 2011 22:51:06 -0700 (PDT)
-From: Eyal Reizer <eyalreizer@googlemail.com>
+	Mon, 06 Jun 2011 10:18:14 +0200
+Received: from stefan by excalibur.local with local (Exim 4.76)
+	(envelope-from <stefan@excalibur.local>) id 1QTV0m-0007es-23
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Jun 2011 10:18:12 +0200
+Date: Mon, 6 Jun 2011 10:18:12 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Jun 2011 08:57:05 +0300
-Message-Id: <1307339825-22007-1-git-send-email-eyalr@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Subject: [PATCHv2] ti-wifi-utils: install calibrator ini files to rootfs
+Message-ID: <20110606081812.GF25995@excalibur.local>
+References: <20110530072614.GA10662@excalibur.local>
+MIME-Version: 1.0
+In-Reply-To: <20110530072614.GA10662@excalibur.local>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
+	autolearn=ham version=3.2.5
+Subject: Re: Interest in an 2011.06/07 release?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,52 +42,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jun 2011 05:54:29 -0000
+X-List-Received-Date: Mon, 06 Jun 2011 08:21:29 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-In order to perform wifi calibration the calibrator needs to be
-provided with a reference NVS file that matches the wifi chip and the
-radio module that is being used.
+Hello.
 
-This patch install these ini files to the root file system along with
-the calibrator itself.
+On Mon, 2011-05-30 at 09:26, Stefan Schmidt wrote:
+> 
+> Are people out there that want to make a 2011.06/07 release happen? If
+> yes you would need to have someone handle the release like Khem and
+> Tom did for the last two.
 
-Signed-off-by: Eyal Reizer <eyalr@ti.com>
----
- recipes/ti/ti-wifi-utils_git.bb |   13 ++++++++++++-
- 1 files changed, 12 insertions(+), 1 deletions(-)
+Nobody expressed interest here. We can skip the release and focus on
+2011.03-maintenance and an upcoming oe-core release then.
 
-diff --git a/recipes/ti/ti-wifi-utils_git.bb b/recipes/ti/ti-wifi-utils_git.bb
-index 8d10051..f193f27 100644
---- a/recipes/ti/ti-wifi-utils_git.bb
-+++ b/recipes/ti/ti-wifi-utils_git.bb
-@@ -3,7 +3,7 @@ LICENSE = "TI-BSD"
- 
- DEPENDS = "libnl"
- 
--PR ="r2"
-+PR ="r3"
- PV ="0.0"
- PR_append = "+gitr${SRCPV}"
- 
-@@ -17,5 +17,16 @@ CFLAGS += " -DCONFIG_LIBNL20"
- 
- do_install() {
- 	install -d ${D}${bindir}
-+	install -d ${D}${datadir}/ti/wifi-utils/ini_files/127x
-+	install -d ${D}${datadir}/ti/wifi-utils/ini_files/128x
-+
- 	install -m 0755 calibrator ${D}${bindir}/	
-+	install -m 0755 ${S}/ini_files/127x/* ${D}${datadir}/ti/wifi-utils/ini_files/127x
-+	install -m 0755 ${S}/ini_files/128x/* ${D}${datadir}/ti/wifi-utils/ini_files/128x
- }
-+
-+FILES_${PN} +=" \
-+	${datadir}/ti/wifi-utils/ini_files/127x \
-+	${datadir}/ti/wifi-utils/ini_files/128x \
-+	"
-+
--- 
-1.7.0.4
-
+regards
+Stefan Schmidt
 
 
