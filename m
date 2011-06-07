@@ -1,24 +1,33 @@
-Received: from vms173019pub.verizon.net ([206.46.173.19])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1QU1SZ-0008N8-B2
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Jun 2011 20:57:03 +0200
-Received: from gandalf.denix.org ([unknown] [108.18.140.4])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LMF00MGKOGWF5K4@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	07 Jun 2011 13:53:25 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 15CF914AF5D; Tue,
-	07 Jun 2011 14:53:20 -0400 (EDT)
-Date: Tue, 07 Jun 2011 14:53:20 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QU1gY-0000XU-8t for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Jun 2011 21:11:30 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QU1dN-0007ci-Vi for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Jun 2011 21:08:13 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Jun 2011 21:08:13 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Jun 2011 21:08:13 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20110607185320.GB2512@denix.org>
-References: <iskpst$avh$1@dough.gmane.org>
-MIME-version: 1.0
-In-reply-to: <iskpst$avh$1@dough.gmane.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 07 Jun 2011 21:07:59 +0200
+Message-ID: <islsuf$gad$1@dough.gmane.org>
+References: <iskpst$avh$1@dough.gmane.org> <20110607185320.GB2512@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <20110607185320.GB2512@denix.org>
+X-Enigmail-Version: 1.0.1
 Subject: Re: [2011.03-maintenance] Pull request #20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,64 +42,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jun 2011 18:57:03 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 07 Jun 2011 19:11:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jun 07, 2011 at 11:09:49AM +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Tom,
-> 
-> Please pull the 9 commits from here:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Are there 9 or 7 commits?
+On 07-06-11 20:53, Denys Dmytriyenko wrote:
+> On Tue, Jun 07, 2011 at 11:09:49AM +0200, Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> Tom,
+>>
+>> Please pull the 9 commits from here:
+> 
+> Are there 9 or 7 commits?
 
-> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-> Branch: 2011.03-maintenance
+I fail at simple math :) 7 commits.
 
-Also, I forgot the HTTP link to gitweb/cgit of your branch, can you provide 
-one? Thanks.
+>> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+>> Branch: 2011.03-maintenance
+> 
+> Also, I forgot the HTTP link to gitweb/cgit of your branch, can you provide 
+> one? Thanks.
 
+http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=2011.03-maintenance
 
-And one more question, not directly related to this pull request - has anyone 
-else seen cgit.oe.org showing the last commit instead of the log of all the 
-commits in a branch? From time to time I keep seeing this odd behavior...
+> And one more question, not directly related to this pull request - has anyone 
+> else seen cgit.oe.org showing the last commit instead of the log of all the 
+> commits in a branch? From time to time I keep seeing this odd behavior...
 
--- 
-Denys
+I haven't seen it, but it could be cache corruption for the page.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFN7ncPMkyGM64RGpERAtKUAJ92G/zkgcM27SFoDNEY3BfH36eiQQCgm3iQ
+sknyADeGhpjKyBNswQJbsVM=
+=pNyx
+-----END PGP SIGNATURE-----
 
-> Chris Larson (4):
->       sourceipk: allow override of the section
->       sourceipk: use tar to get the files copied, rather than cp
->       sourceipk: deal with compileconfigs only when it exists
->       sourceipk: exclude temp dirs when S == WORKDIR
-> 
-> Koen Kooi (3):
->       linux-omap 2.6.39: sync with meta-texasinstruments for bootup fixe
->       linux-omap 2.6.39: sync with meta-texasinstruments again
->       libxaw: fix depchains
-> 
-> These are all cherry-picks from .dev
-> 
-> regards,
-> 
-> Koen
-> 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> 
-> iD8DBQFN7erdMkyGM64RGpERAkiwAJ4iS5aYsyrCGje1mlcpqOjsX6I+ZwCgkHCC
-> v96DkbOoQW5EpP4ghFGb+3o=
-> =Rpm0
-> -----END PGP SIGNATURE-----
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
