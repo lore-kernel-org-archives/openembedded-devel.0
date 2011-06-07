@@ -1,27 +1,25 @@
-Received: from vms173017pub.verizon.net ([206.46.173.17])
+Received: from vms173001pub.verizon.net ([206.46.173.1])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1QU2Fv-000117-Ln
+	(envelope-from <denis@denix.org>) id 1QU2iW-0001ih-Sq
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Jun 2011 21:48:03 +0200
+	Tue, 07 Jun 2011 22:17:37 +0200
 Received: from gandalf.denix.org ([unknown] [108.18.140.4])
-	by vms173017.mailsrvcs.net
+	by vms173001.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LMF00GZAO1U8RT2@vms173017.mailsrvcs.net> for
+	2009)) with ESMTPA id <0LMF00CPDS6SN6C2@vms173001.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Tue,
-	07 Jun 2011 13:44:24 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 8F21514AF5D; Tue,
-	07 Jun 2011 14:44:18 -0400 (EDT)
-Date: Tue, 07 Jun 2011 14:44:18 -0400
+	07 Jun 2011 15:13:54 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id A5ABE14AF5D; Tue,
+	07 Jun 2011 16:13:40 -0400 (EDT)
+Date: Tue, 07 Jun 2011 16:13:40 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20110607184418.GA2512@denix.org>
-References: <1307369743-14738-1-git-send-email-j-lance1@ti.com>
-	<1307370959.4011.17.camel@mattotaupa>
-	<BANLkTikbajbPaptoGjE=bwZrCsE+KyyTHw@mail.gmail.com>
+Message-id: <20110607201340.GC2512@denix.org>
+References: <1306055299-22875-1-git-send-email-eyalr@ti.com>
 MIME-version: 1.0
-In-reply-to: <BANLkTikbajbPaptoGjE=bwZrCsE+KyyTHw@mail.gmail.com>
+In-reply-to: <1306055299-22875-1-git-send-email-eyalr@ti.com>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH 1/1] matrix_gui: Update SRCREV
+Subject: Re: [PATCHv2] tzcdode-native: modify to use the latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,115 +33,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jun 2011 19:48:03 -0000
+X-List-Received-Date: Tue, 07 Jun 2011 20:17:37 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Mon, Jun 06, 2011 at 10:58:57AM -0500, Jeff Lance wrote:
-> Paul,
-> 
-> Thanks for the help. I will use -s now. Previously I was hand typing in the
-> commit message.
-> I will resubmit a corrected version of this patch.
+On Sun, May 22, 2011 at 12:08:19PM +0300, Eyal Reizer wrote:
+> * tzcode-native_2011b is not available anymore for download
 
-I agree with all Paul's comments, except the one requiring From and SoB fields 
-to match - in some cases it's not possible, especially when people try to 
-avoid inline patches being mangled by corporate mail servers...
+Eyal,
+
+oe.dev already has 2011e version, while maintenance is slightly behind with 
+2011b. Please submit the patch to move from 2011e instead of 2011b.
+
+I'll try to include it in my next pull request. Thanks.
 
 -- 
 Denys
 
-> On Mon, Jun 6, 2011 at 9:35 AM, Paul Menzel <
-> paulepanter@users.sourceforge.net> wrote:
+> Signed-off-by: Eyal Reizer <eyalr@ti.com>
+> ---
+>  ...code-native_2011b.bb => tzcode-native_2011g.bb} |   11 ++++++-----
+>  1 files changed, 6 insertions(+), 5 deletions(-)
+>  rename recipes/tzcode/{tzcode-native_2011b.bb => tzcode-native_2011g.bb} (51%)
 > 
-> > Dear Jeff,
-> >
-> > Am Montag, den 06.06.2011, 09:15 -0500 schrieb Jeff Lance:
-> >
-> > you can make the commit subject more informational by writing the
-> > following.
-> >
-> >        matrix_gui: Update SRCREV to revision 257
-> >
-> > >       * Adding arm only multimedia apps to am37x
-> > >       * Wifi updates to am37x, am180x
-> > >       * Adding to am180x, am37x, am35x, beagle:
-> > >               * Oprofile example
-> >
-> > do you copy those lines from `git log`? `git log` adds indentation in
-> > front of the commit message. Please use `git format-patch`.
-> >
-> > > Signed-off-by  Jeff Lance   <j-lance1@ti.com>
-> >
-> > A colon ?:? is missing and it is formatting strangely. Please use the
-> > option `-s`.
-> >
-> > As I wrote often enough please make sure the From and Signed-off-by
-> > field match.
-> >
-> > > ---
-> > >  recipes/ti/matrix-gui-common_1.4.bb |    4 ++--
-> > >  recipes/ti/matrix-gui-e_1.3.bb      |    4 ++--
-> > >  recipes/ti/matrix-gui_1.3.bb        |    4 ++--
-> > >  3 files changed, 6 insertions(+), 6 deletions(-)
-> > >
-> > > diff --git a/recipes/ti/matrix-gui-common_1.4.bb b/recipes/ti/
-> > matrix-gui-common_1.4.bb
-> > > index 6f7376d..0b4b25b 100644
-> > > --- a/recipes/ti/matrix-gui-common_1.4.bb
-> > > +++ b/recipes/ti/matrix-gui-common_1.4.bb
-> > > @@ -4,5 +4,5 @@ require matrix-gui-common.inc
-> > >  # prebuilt version in the repository.
-> > >  RRECOMMENDS_${PN} = "am-sysinfo"
-> > >
-> > > -SRCREV = "249"
-> > > -PR = "${INC_PR}.10"
-> > > +SRCREV = "257"
-> >
-> > Would it be beneficial to add `SRCREV` to `matrix-gui.inc` and require
-> > that everywhere?
-> >
-> > > +PR = "${INC_PR}.11"
-> > > diff --git a/recipes/ti/matrix-gui-e_1.3.bb b/recipes/ti/
-> > matrix-gui-e_1.3.bb
-> > > index 8f2df1c..a6eb17f 100644
-> > > --- a/recipes/ti/matrix-gui-e_1.3.bb
-> > > +++ b/recipes/ti/matrix-gui-e_1.3.bb
-> > > @@ -1,5 +1,5 @@
-> > >  require matrix-gui-e.inc
-> > >
-> > > -SRCREV = "249"
-> > > -PR = "${INC_PR}.9"
-> > > +SRCREV = "257"
-> > > +PR = "${INC_PR}.10"
-> > >
-> > > diff --git a/recipes/ti/matrix-gui_1.3.bb b/recipes/ti/matrix-gui_1.3.bb
-> > > index f7e56a3..51678df 100644
-> > > --- a/recipes/ti/matrix-gui_1.3.bb
-> > > +++ b/recipes/ti/matrix-gui_1.3.bb
-> > > @@ -1,4 +1,4 @@
-> > >  require matrix-gui.inc
-> > >
-> > > -SRCREV = "249"
-> > > -PR = "${INC_PR}.5"
-> > > +SRCREV = "257"
-> > > +PR = "${INC_PR}.6"
-> >
-> > Reviewed-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> >
-> > I did not build or runtest though.
-> >
-> >
-> > Thanks,
-> >
-> > Paul
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
-> >
+> diff --git a/recipes/tzcode/tzcode-native_2011b.bb b/recipes/tzcode/tzcode-native_2011g.bb
+> similarity index 51%
+> rename from recipes/tzcode/tzcode-native_2011b.bb
+> rename to recipes/tzcode/tzcode-native_2011g.bb
+> index 30996d9..65d8cec 100644
+> --- a/recipes/tzcode/tzcode-native_2011b.bb
+> +++ b/recipes/tzcode/tzcode-native_2011g.bb
+> @@ -6,11 +6,12 @@ require tzcode-native.inc
+>  # Also, tzdata (and it is needed to build tzcode) version can differ from
+>  # tzcode version, thus this variable
+>  
+> -TZDATA_PV = "2011b"
+> +TZDATA_PV = "2011g"
+>  
+>  PR = "${INC_PR}.0"
+>  
+> -SRC_URI[tzcode-2011b.md5sum] = "c63a1425f7252aef1fe54a258cdccff8"
+> -SRC_URI[tzcode-2011b.sha256sum] = "8031d05102e5c5109521a282aaab0629680bec82db783c716905802313678d67"
+> -SRC_URI[tzdata-2011b.md5sum] = "9eaf3ca354c42a32bd28e623539bf0e0"
+> -SRC_URI[tzdata-2011b.sha256sum] = "ff45f5ddc2ec925249626d00d7bc2ffff587e0956a1d8245517a023bf27e4cc9"
+> +SRC_URI[tzcode-2011g.md5sum] = "ecb564279b28c5b184421c525d997d6c"
+> +SRC_URI[tzcode-2011g.sha256sum] = "636c735d8df1276cc8ab88bc31bb36a21f91ed34e26d181303ecd8fe48021bc2"
+> +SRC_URI[tzdata-2011g.md5sum] = "a068c27e7e426fdb12ab0c88506df20d"
+> +SRC_URI[tzdata-2011g.sha256sum] = "01a2a189eeda63baacc5e68e6c13afffc7edce182102fffc53acbf35e8703d3c"
+> +
+> -- 
+> 1.7.0.4
+> 
+> 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
