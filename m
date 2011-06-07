@@ -1,26 +1,35 @@
-Received: from smtp23.4emm.com ([69.18.222.9])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <james@digitalmatter.com.au>) id 1QTmYj-0005EG-6O
+	(envelope-from <heroor@gmail.com>) id 1QTo3m-0001S7-DC
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Jun 2011 05:02:25 +0200
-Received: from MBX20.4emm.local ([fe80::5895:fdc9:8838:234]) by
-	HUB23.4emm.local ([::1]) with mapi; Mon, 6 Jun 2011 22:58:03 -0400
-From: James Limbouris <james@digitalmatter.com.au>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [PATCH] Modified populate-volatile.sh to atomically update
-	volatile.cache,
-	to avoid power loss issues. Signed-off-by: jameslimbouris
-	<james@digitalmatter.com.au>
-Thread-Index: AcwkvlSGygjhJTaOQounm4FwOVlgFg==
-Date: Tue, 7 Jun 2011 02:58:47 +0000
-Message-ID: <840A81C1B782724A8EB52725BD519EFF02E499@MBX20.4emm.local>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
+	Tue, 07 Jun 2011 06:38:34 +0200
+Received: by qyk27 with SMTP id 27so2789164qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Jun 2011 21:35:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=tRQAk+BTj0j9lYSsy38k+f++XeN2zF/Au5kt9ab18Ag=;
+	b=IWpVLs8Bm6DHr+2JwKVkob+zCOXqkqEc6z0p2xJ0y6jT6pAxBw8pqiuVKAbw9eGFvL
+	LB/Szq+Sfwzmz7pNBZhFSgR3L4qyBaDHsvt2bi+/6YTIzC1m5xBL3agnXEkc0RjIXRm1
+	CQatdJmTMgqp92vPVdua/MF5C8AwscEAAJsek=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=aSsoiY+1X4jlq+SderpLBUFUtNDhsFJTycLyoIdC9E2lFfvbG5qEcp0zEBzPqGqAvo
+	W7xEiDy0uOwH0EuzCrjosnq9C4yBaHWwacnHli/TOuyFl2ESmFH2SSTptx2p9xFtef9B
+	4BKSDyMpofW+oE4zqvzZg7bEkDs8FySn40Yjs=
 MIME-Version: 1.0
-Cc: James Limbouris <james@digitalmatter.com.au>
-Subject: [PATCH] Modified populate-volatile.sh to atomically update volatile.cache, to avoid power loss issues. Signed-off-by: jameslimbouris <james@digitalmatter.com.au>
+Received: by 10.224.108.66 with SMTP id e2mr2412416qap.208.1307421315960; Mon,
+	06 Jun 2011 21:35:15 -0700 (PDT)
+Received: by 10.224.67.200 with HTTP; Mon, 6 Jun 2011 21:35:15 -0700 (PDT)
+In-Reply-To: <2A3DCF3DA181AD40BDE86A3150B27B6B03751C140E@dbde02.ent.ti.com>
+References: <2A3DCF3DA181AD40BDE86A3150B27B6B03751C140E@dbde02.ent.ti.com>
+Date: Tue, 7 Jun 2011 10:05:15 +0530
+Message-ID: <BANLkTi=XBb_9MdRt+DwT2x8mV=agBi1L2Q@mail.gmail.com>
+From: Siddharth Heroor <heroor@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] libgles-omap3: Specify the Window System to be updated in powervr.ini
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,73 +43,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jun 2011 03:02:25 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 07 Jun 2011 04:38:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
----
- .../initscripts-1.0/populate-volatile.sh           |   10 ++++++----
- 1 files changed, 6 insertions(+), 4 deletions(-)
+On Thu, Jun 2, 2011 at 6:32 PM, Balagopalakrishnan, Anand <anandb@ti.com> w=
+rote:
+> From a5a2d6f4356db3a8be1c7cb536d78af834aa60f9 Mon Sep 17 00:00:00 2001
+> From: Anand Balagopalakrishnan <anandb@ti.com>
+> Date: Thu, 26 May 2011 21:11:50 +0530
+> Subject: [PATCH] libgles-omap3: Specify the Window System to be updated i=
+n powervr.ini
+>
+> * SGX driver looks at /etc/powervr.ini for the Window System to be used.
+> =A0This patch introduces a variable to specify which Window System should
+> =A0be specified in powervr.ini file.
+> * By having this variable, it's easy to override the default Window Syste=
+m
+> =A0through a config file or amendment
+>
+> Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+Acked-by: Siddharth Heroor <heroor@ti.com>
 
-diff --git a/recipes/initscripts/initscripts-1.0/populate-volatile.sh b/rec=
-ipes/initscripts/initscripts-1.0/populate-volatile.sh
-index 3bb3d94..e355680 100755
---- a/recipes/initscripts/initscripts-1.0/populate-volatile.sh
-+++ b/recipes/initscripts/initscripts-1.0/populate-volatile.sh
-@@ -14,7 +14,7 @@ create_file() {
- 	chown ${TUSER}.${TGROUP} $1 || echo \"Failed to set owner -${TUSER}- for =
--$1-.\" >/dev/tty0 2>&1;=20
- 	chmod ${TMODE} $1 || echo \"Failed to set mode -${TMODE}- for -$1-.\" >/d=
-ev/tty0 2>&1 "=20
-=20
--	test "$VOLATILE_ENABLE_CACHE" =3D yes && echo "$EXEC" >> /etc/volatile.ca=
-che
-+	test "$VOLATILE_ENABLE_CACHE" =3D yes && echo "$EXEC" >> /etc/volatile.ca=
-che.build
-=20
- 	[ -e "$1" ] && {
- 	  [ "${VERBOSE}" !=3D "no" ] && echo "Target already exists. Skipping."
-@@ -29,7 +29,7 @@ mk_dir() {
- 	chown ${TUSER}.${TGROUP} $1 || echo \"Failed to set owner -${TUSER}- for =
--$1-.\" >/dev/tty0 2>&1;=20
- 	chmod ${TMODE} $1 || echo \"Failed to set mode -${TMODE}- for -$1-.\" >/d=
-ev/tty0 2>&1 "
-=20
--	test "$VOLATILE_ENABLE_CACHE" =3D yes && echo "$EXEC" >> /etc/volatile.ca=
-che
-+	test "$VOLATILE_ENABLE_CACHE" =3D yes && echo "$EXEC" >> /etc/volatile.ca=
-che.build
- =09
- 	[ -e "$1" ] && {
- 	  [ "${VERBOSE}" !=3D "no" ] && echo "Target already exists. Skipping."
-@@ -41,7 +41,7 @@ mk_dir() {
- link_file() {
- 	EXEC=3D"test -e \"$2\" -o -L $2 || ln -s \"$1\" \"$2\" >/dev/tty0 2>&1"=20
-=20
--	test "$VOLATILE_ENABLE_CACHE" =3D yes && echo "	$EXEC" >> /etc/volatile.c=
-ache
-+	test "$VOLATILE_ENABLE_CACHE" =3D yes && echo "	$EXEC" >> /etc/volatile.c=
-ache.build
- =09
- 	[ -e "$2" ] && {
- 	  echo "Cannot create link over existing -${TNAME}-." >&2
-@@ -164,8 +164,10 @@ if test -e /etc/volatile.cache -a "$VOLATILE_ENABLE_CA=
-CHE" =3D "yes" -a "x$1" !=3D "
- then
- 	sh /etc/volatile.cache
- else=09
--	rm -f /etc/volatile.cache
-+	rm -f /etc/volatile.cache /etc/volatile.cache.build
- 	for file in `ls -1 "${CFGDIR}" | sort`; do
- 		apply_cfgfile "${CFGDIR}/${file}"
- 	done
-+=09
-+	[ -e /etc/volatile.cache.build ] && sync && mv /etc/volatile.cache.build =
-/etc/volatile.cache
- fi
+> ---
+> =A0recipes/powervr-drivers/libgles-omap3.inc | =A0 =A04 +++-
+> =A01 files changed, 3 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/powervr-drivers/libgles-omap3.inc b/recipes/powervr-=
+drivers/libgles-omap3.inc
+> index db7681d..36c311d 100644
+> --- a/recipes/powervr-drivers/libgles-omap3.inc
+> +++ b/recipes/powervr-drivers/libgles-omap3.inc
+> @@ -28,6 +28,8 @@ ES3LOCATION ?=3D "${S}/gfx_rel_es3.x"
+> =A0ES5LOCATION ?=3D "${S}/gfx_rel_es5.x"
+> =A0ES6LOCATION ?=3D "${S}/gfx_rel_es6.x"
+>
+> +LIBGLESWINDOWSYSTEM ?=3D "libpvrPVR2D_FRONTWSEGL.so.1"
+> +
+> =A0do_configure() {
+> =A0 =A0 =A0 =A0# Attempt to fix up the worst offenders for file permissio=
+ns
+> =A0 =A0 =A0 =A0for i in $(find ${S} -name "*.h") $(find ${S} -name "*.c")=
+ $(find ${S} -name "Make*") ; do
+> @@ -152,7 +154,7 @@ do_install () {
+>
+> =A0 =A0 =A0 =A0install -d ${D}${sysconfdir}
+> =A0 =A0 =A0 =A0echo "[default]" > ${D}${sysconfdir}/powervr.ini
+> - =A0 =A0 =A0 echo "WindowSystem=3DlibpvrPVR2D_FRONTWSEGL.so.1" >> ${D}${=
+sysconfdir}/powervr.ini
+> + =A0 =A0 =A0 echo "WindowSystem=3D${LIBGLESWINDOWSYSTEM}" >> ${D}${sysco=
+nfdir}/powervr.ini
+>
+> =A0 =A0 =A0 =A0# The ES2.x, ES3.x, ES5.x and ES6.x CPUs have different SG=
+X hardware, so we need to install multiple sets of userspace
+>
+> --
+> 1.7.4.1
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
+
 --=20
-1.7.3.4
-
+Sid
 
 
