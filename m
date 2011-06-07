@@ -1,26 +1,24 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from vms173001pub.verizon.net ([206.46.173.1])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QU3Rg-0002tm-RX for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Jun 2011 23:04:16 +0200
-Received: from f053039014.adsl.alicedsl.de ([78.53.39.14]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QU3PK-0004gU-Fp for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Jun 2011 21:01:50 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <denis@denix.org>) id 1QU4PK-00043R-EW
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Jun 2011 00:05:54 +0200
+Received: from gandalf.denix.org ([unknown] [108.18.140.4])
+	by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LMF00GMVX88LPMA@vms173001.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	07 Jun 2011 17:02:32 -0500 (CDT)
+Received: from localhost (unknown [166.137.11.90])
+	by gandalf.denix.org (Postfix) with ESMTPA id 556BD14AF56	for
+	<openembedded-devel@lists.openembedded.org>; Tue,
+	07 Jun 2011 18:02:28 -0400 (EDT)
+Date: Tue, 07 Jun 2011 18:02:25 -0400
+Message-id: <slrce13dugdp8so962me2fjx.1307483961661@email.android.com>
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20110607184418.GA2512@denix.org>
-References: <1307369743-14738-1-git-send-email-j-lance1@ti.com>
-	<1307370959.4011.17.camel@mattotaupa>
-	<BANLkTikbajbPaptoGjE=bwZrCsE+KyyTHw@mail.gmail.com>
-	<20110607184418.GA2512@denix.org>
-Date: Tue, 07 Jun 2011 23:00:59 +0200
-Message-ID: <1307480459.4073.18.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: different addresses in author/From and Signed-off-by (was: [PATCH 1/1] matrix_gui: Update SRCREV)
+MIME-version: 1.0
+Subject: Re: different addresses in author/From and Signed-off-by (was: [PATCH 1/1] matrix_gui: Update SRCREV)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,58 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jun 2011 21:04:16 -0000
-X-Groupsio-MsgNum: 32558
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-YWSlOUSeGKgcUOz+Ppnf"
+X-List-Received-Date: Tue, 07 Jun 2011 22:05:54 -0000
+Content-type: text/plain; charset=utf-8
+Content-transfer-encoding: base64
 
---=-YWSlOUSeGKgcUOz+Ppnf
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Am Dienstag, den 07.06.2011, 14:44 -0400 schrieb Denys Dmytriyenko:
-
-[=E2=80=A6]
-
-> I agree with all Paul's comments, except the one requiring From and SoB f=
-ields=20
-> to match - in some cases it's not possible, especially when people try to=
-=20
-> avoid inline patches being mangled by corporate mail servers...
-
-Easy enough. Just add
-
-From: Jeff Lance <j-lance1@ti.com>
-
-to the beginning of the message and `git am` will take this for the
-author field.
-
-        $ git help am
-        [=E2=80=A6]
-                "From: " and "Subject: " lines starting the body override t=
-he
-               respective commit author name and title values taken from th=
-e headers.
-        [=E2=80=A6]
-
-I do not know where this can be configured, but it should be.
+Q29ycmVjdCwgdGhhdCBzaG91bGQgYmUgY29udHJvbGxlZCBieSBzZW5kZW1haWwuZW52ZWxvcGVz
+ZW5kZXIgY29uZmlndXJhdGlvbiBvcHRpb25zIGlmIHlvdSBhbHdheXMgc2VuZCB0byB0aGUgbGlz
+dCB1bmRlciBkaWZmZXJlbnQgZW1haWwgYWRkcmVzcy4gQlRXLCBzb3JyeSBmb3IgdG9wIHBvc3Rp
+bmcuIAoKRGVueXMKClBhdWwgTWVuemVsIDxwYXVsZXBhbnRlckB1c2Vycy5zb3VyY2Vmb3JnZS5u
+ZXQ+IHdyb3RlOgoKPkFtIERpZW5zdGFnLCBkZW4gMDcuMDYuMjAxMSwgMTQ6NDQgLTA0MDAgc2No
+cmllYiBEZW55cyBEbXl0cml5ZW5rbzoKPgo+W+KApl0KPgo+PiBJIGFncmVlIHdpdGggYWxsIFBh
+dWwncyBjb21tZW50cywgZXhjZXB0IHRoZSBvbmUgcmVxdWlyaW5nIEZyb20gYW5kIFNvQiBmaWVs
+ZHMgCj4+IHRvIG1hdGNoIC0gaW4gc29tZSBjYXNlcyBpdCdzIG5vdCBwb3NzaWJsZSwgZXNwZWNp
+YWxseSB3aGVuIHBlb3BsZSB0cnkgdG8gCj4+IGF2b2lkIGlubGluZSBwYXRjaGVzIGJlaW5nIG1h
+bmdsZWQgYnkgY29ycG9yYXRlIG1haWwgc2VydmVycy4uLgo+Cj5FYXN5IGVub3VnaC4gSnVzdCBh
+ZGQKPgo+RnJvbTogSmVmZiBMYW5jZSA8ai1sYW5jZTFAdGkuY29tPgo+Cj50byB0aGUgYmVnaW5u
+aW5nIG9mIHRoZSBtZXNzYWdlIGFuZCBgZ2l0IGFtYCB3aWxsIHRha2UgdGhpcyBmb3IgdGhlCj5h
+dXRob3IgZmllbGQuCj4KPiAgICAgICAgJCBnaXQgaGVscCBhbQo+ICAgICAgICBb4oCmXQo+ICAg
+ICAgICAgICAgICAgICJGcm9tOiAiIGFuZCAiU3ViamVjdDogIiBsaW5lcyBzdGFydGluZyB0aGUg
+Ym9keSBvdmVycmlkZSB0aGUKPiAgICAgICAgICAgICAgIHJlc3BlY3RpdmUgY29tbWl0IGF1dGhv
+ciBuYW1lIGFuZCB0aXRsZSB2YWx1ZXMgdGFrZW4gZnJvbSB0aGUgaGVhZGVycy4KPiAgICAgICAg
+W+KApl0KPgo+SSBkbyBub3Qga25vdyB3aGVyZSB0aGlzIGNhbiBiZSBjb25maWd1cmVkLCBidXQg
+aXQgc2hvdWxkIGJlLgo+Cj4KPlRoYW5rcywKPgo+UGF1bAo+Cj5fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+T3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcg
+bGlzdAo+T3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcKPmh0dHA6Ly9s
+aXN0cy5saW51eHRvZ28ub3JnL2NnaS1iaW4vbWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQt
+ZGV2ZWwK
 
 
-Thanks,
 
-Paul
-
---=-YWSlOUSeGKgcUOz+Ppnf
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3ukYAACgkQPX1aK2wOHVhdrgCfQWKvSXG7zrA5tCalcc3tZ3RY
-SjgAn3w1zRtqol0Tm9q8GsCInETk34/k
-=u4z8
------END PGP SIGNATURE-----
-
---=-YWSlOUSeGKgcUOz+Ppnf--
