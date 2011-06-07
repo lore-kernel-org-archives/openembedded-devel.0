@@ -1,45 +1,42 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <guillaume.beraudo@gmail.com>) id 1QTwLh-00075n-8q
+	(envelope-from <martin.jansa@gmail.com>) id 1QTwSR-0007GA-0s
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Jun 2011 15:29:52 +0200
-Received: by wye20 with SMTP id 20so4066642wye.6
+	Tue, 07 Jun 2011 15:36:35 +0200
+Received: by bwz5 with SMTP id 5so4910967bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Jun 2011 06:23:59 -0700 (PDT)
+	Tue, 07 Jun 2011 06:33:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:sender:date:from:to:cc:subject:message-id
-	:in-reply-to:references:organization:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=Vz62VaMdFnFEHLU96H6G3h9h6azXvSleV2DG8iy5z3Y=;
-	b=fy1C2h1aDUvoAfmLekMBbFq7MqH/VUhAlqhOFyeQZUce0OHh3an8yMz4kUrt2VzEUl
-	rBWCeu4McQYEwFvQV6su0vIt/gCC2uCXc0gmbghgmTcBYj18u3gZZ8wj0/Z4a2V3Eiqx
-	TTE3pzt885+JUdBqPj/9/a6aFqK4wZOxIKSb4=
+	h=domainkey-signature:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=3PuaJI41TZYMTz4nno2xDT7PNnxuJzahOLSQa00u6C0=;
+	b=yDk0iOlEi8P3ZgM7Six5Hccr/Iy+rCJSbshDlsibXjzxIuLhhJP3GvOAgTHUKd5kpo
+	UjP6OA8v0a3a4T9F2Xeof05R9QdFtZfw+eMbNiLhTcs7OOGIyOb9GtrcVYjNNnEDnm9W
+	y4tbXHLfkuhs8ARjtwqr3UamvuPbGM7/fMCsc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:date:from:to:cc:subject:message-id:in-reply-to:references
-	:organization:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	b=LOETyAoDfUVRZivRp0v2+rj4v9YRxM8ajYef7w2j1Lx8nzJ1TmiaQ92615+eufeRhe
-	NnRs/MBCXRDkh7HkKBs71oFH0IVHFSv366Zx+b2uOX/VC434VGquZP73RcQTP3LHTe12
-	z9MgFIi37LYvwwgWdiF1xNaCBNylXjyguYPxo=
-Received: by 10.217.7.72 with SMTP id z50mr5917012wes.60.1307453039568;
-	Tue, 07 Jun 2011 06:23:59 -0700 (PDT)
-Received: from guibc (vig38-2-81-56-113-2.fbx.proxad.net [81.56.113.2])
-	by mx.google.com with ESMTPS id w58sm2866725weq.25.2011.06.07.06.23.58
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=iSoYplPtGf6UsLLDPZKZ0w1EZk7IfZ80pyvOvqNsoLNNTT0qplD7AHx7p1h3RYzOj0
+	d+HZXheV0phlEC9XMcCCf5LKxT5UVq6ZV2xFmUtB2FksrpWSobq+PusPUWvAhbY7gWLz
+	7qCunCX5QW7N4QrnL3RQGjKw3wO2tak1EbtQY=
+Received: by 10.204.15.75 with SMTP id j11mr911330bka.100.1307453597793;
+	Tue, 07 Jun 2011 06:33:17 -0700 (PDT)
+Received: from localhost ([94.230.152.115])
+	by mx.google.com with ESMTPS id ek1sm4181331bkb.9.2011.06.07.06.33.16
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 07 Jun 2011 06:23:59 -0700 (PDT)
-Sender: guillaume beraudo <guillaume.beraudo@gmail.com>
-Date: Tue, 7 Jun 2011 15:23:54 +0200
-From: Guillaume BERAUDO <guillaume.beraudo@belledonne-communications.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110607152354.7ff67c49@guibc>
-In-Reply-To: <20110607124151.GA23137@jama.jama.net>
+	Tue, 07 Jun 2011 06:33:17 -0700 (PDT)
+Date: Tue, 7 Jun 2011 15:33:10 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Guillaume BERAUDO <guillaume.beraudo@belledonne-communications.com>
+Message-ID: <20110607133310.GC23137@jama.jama.net>
 References: <guillaume.beraudo@belledonne-communications.com>
 	<1307448812-27299-1-git-send-email-guillaume.beraudo@belledonne-communications.com>
 	<20110607124151.GA23137@jama.jama.net>
-Organization: Belledonne Communications
-X-Mailer: Claws Mail 3.7.6 (GTK+ 2.20.1; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Cc: martin.jansa@gmail.com
+	<20110607152354.7ff67c49@guibc>
+MIME-Version: 1.0
+In-Reply-To: <20110607152354.7ff67c49@guibc>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH] linphone: added recipe for v3.4.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -54,72 +51,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jun 2011 13:29:53 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 07 Jun 2011 13:36:35 -0000
+X-Groupsio-MsgNum: 32547
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="eHhjakXzOLJAF9wJ"
+Content-Disposition: inline
 
-Sorry, I missed your other comments.
-See below for my answers.
+--eHhjakXzOLJAF9wJ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> > --git a/recipes/linphone/linphone-common_3.4.3.inc
-> > b/recipes/linphone/linphone-common_3.4.3.inc new file mode 100644
-> > index 0000000..5865ab0 --- /dev/null
-> > +++ b/recipes/linphone/linphone-common_3.4.3.inc
-> > @@ -0,0 +1,11 @@
-> > +
-> > +SRC_URI =
-> > "${SAVANNAH_MIRROR}/releases/linphone/3.4.x/sources/linphone-3.4.3.tar.gz
-> > \
-> > +	file://cif10fps.patch"
-> where is this file?
+On Tue, Jun 07, 2011 at 03:23:54PM +0200, Guillaume BERAUDO wrote:
+> Sorry, I missed your other comments.
+> See below for my answers.
+>=20
+> > > --git a/recipes/linphone/linphone-common_3.4.3.inc
+> > > b/recipes/linphone/linphone-common_3.4.3.inc new file mode 100644
+> > > index 0000000..5865ab0 --- /dev/null
+> > > +++ b/recipes/linphone/linphone-common_3.4.3.inc
+> > > @@ -0,0 +1,11 @@
+> > > +
+> > > +SRC_URI =3D
+> > > "${SAVANNAH_MIRROR}/releases/linphone/3.4.x/sources/linphone-3.4.3.ta=
+r.gz
+> > > \
+> > > +	file://cif10fps.patch"
+> > where is this file?
+>=20
+> It is a mistake, this patch should not be added.
+>=20
+>=20
+>=20
+> > > +require linphone-common.inc
+> > > diff --git a/recipes/linphone/linphone_3.4.3+nogtk.bb
+> > > b/recipes/linphone/linphone_3.4.3+nogtk.bb new file mode 100644
+> > > index 0000000..9bec7b1
+> > > --- /dev/null
+> > > +++ b/recipes/linphone/linphone_3.4.3+nogtk.bb
+> >
+> > what does +nogtk mean in version?
+>=20
+> It is possible to compile linphone with or without gtk GUI.
 
-It is a mistake, this patch should not be added.
+then I think it's better as part of package name
+linphone-nogtk_3.4.3
 
+otherwise you risk user getting upgrade on target
+=66rom linphone-3.4.3+nogtk to linphone-3.4.4+gtk
 
+> I wrote another recipe for linphone 3.4.3 with gtk GUI.
+> It will be sent for review later.
+>=20
+>=20
+> > > @@ -0,0 +1,9 @@
+> > > +DESCRIPTION =3D "Audio/video SIP-based IP phone (console edition)"
+> > > +HOMEPAGE =3D "http://www.linphone.org/?lang=3Dus"
+> > > +LICENSE =3D "GPLv2"
+> > > +PR=3D"r6"
+> > > +
+> > > +DEFAULT_PREFERENCE =3D "2"
+> >=20
+> > why D_P =3D "2" when all other recipes have default D_P =3D "1" and this
+> > has highest PV?
+>=20
+> Ok, I will correct it.
+>=20
+>=20
+> >=20
+> > > +OVERRIDES_append =3D ":video:console"
+> >=20
+> > This looks like someone trying to implement USE flags in OE :). But
+> > I'm not sure it's right way and I haven't noticed this used in any
+> > other recipe. So it would be better to discuss first.
+>=20
+> I am new to openembedded and thus may have missed something in the
+> documentations. Can you point me to some elegant way to implement
+> recipe flavours?
 
-> > +require linphone-common.inc
-> > diff --git a/recipes/linphone/linphone_3.4.3+nogtk.bb
-> > b/recipes/linphone/linphone_3.4.3+nogtk.bb new file mode 100644
-> > index 0000000..9bec7b1
-> > --- /dev/null
-> > +++ b/recipes/linphone/linphone_3.4.3+nogtk.bb
->
-> what does +nogtk mean in version?
+I don't think TSC agreed on some sort of USE-flag solution or policy
+yet, but keeping shared EXTRA_OECONF in linphone-3.4.3.inc and then
+EXTRA_OECONF_append with nogtk specific options in separate files like
+linphone-nogtk_3.4.3.bb would be easier to understand (at least to me),
+even when not so "elegant" as your OVERRIDES solution.
 
-It is possible to compile linphone with or without gtk GUI.
+Regards,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-I wrote another recipe for linphone 3.4.3 with gtk GUI.
-It will be sent for review later.
+--eHhjakXzOLJAF9wJ
+Content-Type: application/pgp-signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
 
-> > @@ -0,0 +1,9 @@
-> > +DESCRIPTION = "Audio/video SIP-based IP phone (console edition)"
-> > +HOMEPAGE = "http://www.linphone.org/?lang=us"
-> > +LICENSE = "GPLv2"
-> > +PR="r6"
-> > +
-> > +DEFAULT_PREFERENCE = "2"
-> 
-> why D_P = "2" when all other recipes have default D_P = "1" and this
-> has highest PV?
+iEYEARECAAYFAk3uKJYACgkQN1Ujt2V2gBw2igCgp2hn80a6l0waeWtQaDYIiowD
+t5gAn0dAFrMCNAWTbCx1Y+AWzgHjlooo
+=/q4d
+-----END PGP SIGNATURE-----
 
-Ok, I will correct it.
-
-
-> 
-> > +OVERRIDES_append = ":video:console"
-> 
-> This looks like someone trying to implement USE flags in OE :). But
-> I'm not sure it's right way and I haven't noticed this used in any
-> other recipe. So it would be better to discuss first.
-
-I am new to openembedded and thus may have missed something in the
-documentations. Can you point me to some elegant way to implement
-recipe flavours?
-
-
-Thanks,
-
-Guillaume
-
-
+--eHhjakXzOLJAF9wJ--
