@@ -1,21 +1,23 @@
-Received: from outbound.icp-qv1-irony-out5.iinet.net.au ([203.59.1.105])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <james@digitalmatter.com.au>) id 1QTt7Q-0007Xl-HG
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Jun 2011 12:02:40 +0200
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AqEGAK/v7U3LO4Se/2dsb2JhbABTl3COKHfKB4YhBIZ2jn2KaQ
-X-IronPort-AV: E=Sophos;i="4.65,331,1304265600"; d="scan'208";a="272198555"
-Received: from unknown (HELO gentoo_vm.DMA.local) ([203.59.132.158])
-	by outbound.icp-qv1-irony-out5.iinet.net.au with ESMTP;
-	07 Jun 2011 17:34:42 +0800
-From: James Limbouris <james@digitalmatter.com.au>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QTtKo-0007mc-JL for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Jun 2011 12:16:30 +0200
+Received: from f053039014.adsl.alicedsl.de ([78.53.39.14]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QTtIR-0004ie-OL for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Jun 2011 10:14:03 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Jun 2011 17:35:26 +0800
-Message-Id: <1307439326-12974-1-git-send-email-james@digitalmatter.com.au>
-X-Mailer: git-send-email 1.7.3.4
-Cc: James Limbouris <james@digitalmatter.com.au>
-Subject: [PATCH v2] initscripts: Modify 'populate-volatile.sh' to atomically update 'volatile.cache'
+In-Reply-To: <1307439326-12974-1-git-send-email-james@digitalmatter.com.au>
+References: <1307439326-12974-1-git-send-email-james@digitalmatter.com.au>
+Date: Tue, 07 Jun 2011 12:13:14 +0200
+Message-ID: <1307441594.4064.19.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH v2] initscripts: Modify 'populate-volatile.sh' to atomically update 'volatile.cache'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,64 +31,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jun 2011 10:02:41 -0000
+X-List-Received-Date: Tue, 07 Jun 2011 10:16:30 -0000
+X-Groupsio-MsgNum: 32539
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Z5+zducv82Y9jw/MqMhG"
 
-When power is lost before a new volatile.cache has been flushed to disk,
-it can be corrupted, leaving the volatiles uncreated and causing software failure.
-Using a temporary file on the same volume and renaming it avoids this issue.
-The file is sync'd before the rename to avoid problems with newer caching filesystems,
-in which the rename is atomic, but the contents of the file may not yet be flushed.
+--=-Z5+zducv82Y9jw/MqMhG
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: James Limbouris <james@digitalmatter.com.au>
----
- .../initscripts-1.0/populate-volatile.sh           |   10 ++++++----
- 1 files changed, 6 insertions(+), 4 deletions(-)
-
-diff --git a/recipes/initscripts/initscripts-1.0/populate-volatile.sh b/recipes/initscripts/initscripts-1.0/populate-volatile.sh
-index 3bb3d94..e355680 100755
---- a/recipes/initscripts/initscripts-1.0/populate-volatile.sh
-+++ b/recipes/initscripts/initscripts-1.0/populate-volatile.sh
-@@ -14,7 +14,7 @@ create_file() {
- 	chown ${TUSER}.${TGROUP} $1 || echo \"Failed to set owner -${TUSER}- for -$1-.\" >/dev/tty0 2>&1; 
- 	chmod ${TMODE} $1 || echo \"Failed to set mode -${TMODE}- for -$1-.\" >/dev/tty0 2>&1 " 
- 
--	test "$VOLATILE_ENABLE_CACHE" = yes && echo "$EXEC" >> /etc/volatile.cache
-+	test "$VOLATILE_ENABLE_CACHE" = yes && echo "$EXEC" >> /etc/volatile.cache.build
- 
- 	[ -e "$1" ] && {
- 	  [ "${VERBOSE}" != "no" ] && echo "Target already exists. Skipping."
-@@ -29,7 +29,7 @@ mk_dir() {
- 	chown ${TUSER}.${TGROUP} $1 || echo \"Failed to set owner -${TUSER}- for -$1-.\" >/dev/tty0 2>&1; 
- 	chmod ${TMODE} $1 || echo \"Failed to set mode -${TMODE}- for -$1-.\" >/dev/tty0 2>&1 "
- 
--	test "$VOLATILE_ENABLE_CACHE" = yes && echo "$EXEC" >> /etc/volatile.cache
-+	test "$VOLATILE_ENABLE_CACHE" = yes && echo "$EXEC" >> /etc/volatile.cache.build
- 	
- 	[ -e "$1" ] && {
- 	  [ "${VERBOSE}" != "no" ] && echo "Target already exists. Skipping."
-@@ -41,7 +41,7 @@ mk_dir() {
- link_file() {
- 	EXEC="test -e \"$2\" -o -L $2 || ln -s \"$1\" \"$2\" >/dev/tty0 2>&1" 
- 
--	test "$VOLATILE_ENABLE_CACHE" = yes && echo "	$EXEC" >> /etc/volatile.cache
-+	test "$VOLATILE_ENABLE_CACHE" = yes && echo "	$EXEC" >> /etc/volatile.cache.build
- 	
- 	[ -e "$2" ] && {
- 	  echo "Cannot create link over existing -${TNAME}-." >&2
-@@ -164,8 +164,10 @@ if test -e /etc/volatile.cache -a "$VOLATILE_ENABLE_CACHE" = "yes" -a "x$1" != "
- then
- 	sh /etc/volatile.cache
- else	
--	rm -f /etc/volatile.cache
-+	rm -f /etc/volatile.cache /etc/volatile.cache.build
- 	for file in `ls -1 "${CFGDIR}" | sort`; do
- 		apply_cfgfile "${CFGDIR}/${file}"
- 	done
-+	
-+	[ -e /etc/volatile.cache.build ] && sync && mv /etc/volatile.cache.build /etc/volatile.cache
- fi
--- 
-1.7.3.4
+Dear James,
 
 
+thank you for the updated patch.
 
+Am Dienstag, den 07.06.2011, 17:35 +0800 schrieb James Limbouris:
+> When power is lost before a new volatile.cache has been flushed to disk,
+> it can be corrupted, leaving the volatiles uncreated and causing software=
+ failure.
+
+So the device is still booting up although the power is lost? I am still
+confused how this patch can fix this. I am sorry for my ignorance.
+
+> Using a temporary file on the same volume and renaming it avoids this iss=
+ue.
+> The file is sync'd before the rename to avoid problems with newer caching=
+ filesystems,
+> in which the rename is atomic, but the contents of the file may not yet b=
+e flushed.
+>=20
+> Signed-off-by: James Limbouris <james@digitalmatter.com.au>
+
+I will commit your patch during the next days to leave some time for
+others to comment/review.
+
+> ---
+>  .../initscripts-1.0/populate-volatile.sh           |   10 ++++++----
+>  1 files changed, 6 insertions(+), 4 deletions(-)
+
+[=E2=80=A6]
+
+
+Thanks,
+
+Paul
+
+--=-Z5+zducv82Y9jw/MqMhG
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3t+boACgkQPX1aK2wOHVhtIQCeNbQl0jCIufPanwOmdedwHGL9
+m9EAoIYyPbfvm15kYafqM3+vvc0LQZbK
+=0ffG
+-----END PGP SIGNATURE-----
+
+--=-Z5+zducv82Y9jw/MqMhG--
