@@ -1,34 +1,44 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QUCPG-0008Qq-EH for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Jun 2011 08:38:22 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QUCM4-0004fU-Cx for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Jun 2011 08:35:04 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Jun 2011 08:35:04 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1QUDJD-0001C3-7r
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Jun 2011 09:36:11 +0200
+Received: by pzk36 with SMTP id 36so122055pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Jun 2011 08:35:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 08 Jun 2011 08:33:07 +0200
-Message-ID: <isn533$4n1$2@dough.gmane.org>
-References: <cover.1307513108.git.Martin.Jansa@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <cover.1307513108.git.Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [meta-efl][PATCH 0/3] Pull request #7
+	Wed, 08 Jun 2011 00:32:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:references:in-reply-to:mime-version
+	:content-transfer-encoding:content-type:message-id:cc:x-mailer:from
+	:subject:date:to;
+	bh=fFb9wEoP692pPnPvPqpj+KebyIZ/TvmQlaDx+rv57sI=;
+	b=ianBy+PIQO+occy5+HNkiN5GgP72DVMEyxeQN/8gBtbPuxiMhTHUnE0uOoC2R//s37
+	FhsyPtvv3RZIt+Cu1trydC/QEJL48iQaakuJnLri2spErVD2MWCh1y58CMCoiH/6PNYL
+	QAHhwg71WErkG6k44GkG0Vo2otOIbaRfBH4q8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=references:in-reply-to:mime-version:content-transfer-encoding
+	:content-type:message-id:cc:x-mailer:from:subject:date:to;
+	b=xshTRlCCfdY6Ha12BZUrvStpWxMwta2Lj6meMAKS6c3wjNcCqd4mpirXdj8BKB+DhW
+	Pa8bL4q7jBoCl/p4QdBtl+ef3Rr54P6MMh/yjQakfmE/qkRxC/WeQioTgjXcGfuwQuKC
+	cqjOhC3URzUZQ0ZoduGzIg/OZz6jnTRHl6ED8=
+Received: by 10.68.65.77 with SMTP id v13mr526340pbs.442.1307518372030;
+	Wed, 08 Jun 2011 00:32:52 -0700 (PDT)
+Received: from [192.168.1.81] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id k9sm304000pbc.22.2011.06.08.00.32.50
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 08 Jun 2011 00:32:51 -0700 (PDT)
+References: <1307481663432021500@rkmorris.us>
+In-Reply-To: <1307481663432021500@rkmorris.us>
+Mime-Version: 1.0 (iPad Mail 8J2)
+Message-Id: <1349E329-09C7-4F49-8E9B-466687D453D9@gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Mailer: iPad Mail (8J2)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 8 Jun 2011 00:33:43 -0700
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: Builds Failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,38 +52,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jun 2011 06:38:22 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 08 Jun 2011 07:36:11 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-On 08-06-11 08:06, Martin Jansa wrote:
-> Hi, please merge following patches.
-> 
-> The following changes since commit 92492f8596ae74044f0cbf1813c22ba6f18f742c:
-> 
->   systemd-compat-units: disable old style 'networking' script for the time being (2011-06-06 13:08:15 +0200)
-> 
-> are available in the git repository at:
->   git://git.openembedded.org/meta-openembedded-contrib jansa/meta-efl
->   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/meta-efl
-> 
-> Martin Jansa (3):
->   e-base,e-wm: bump EFL_SRCREV and remove illume1 from e-wm
->   eve: update LICENSE fields and remove patch applied upstream
->   webkit-efl: import from OE rev
->     d4f0211e2078d5033ae0dee74664de5520d8392d
 
-Merged these as well. Let's get pkgconfig fixed in oe-core :)
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+On Jun 7, 2011, at 2:21 PM, Russell Morris <openembedded@rkmorris.us> wrote:=
 
-iD8DBQFN7xejMkyGM64RGpERAvFkAJwNCJHVfc+FVhRb2nX1GXVppw89YwCfY40U
-qqjhSdQrwpjNFisM5gTxCt0=
-=7Gs8
------END PGP SIGNATURE-----
 
+> Hi,
+>=20
+> I am trying to build OE with the latest source (i.e. from MASTER) - but im=
+ages that used to work are now failing (x11-gpe-image, console-image). The f=
+ailure seems to be in bash, as you can see in the attached log files.
+>=20
+> Is this a known issue?
+>=20
+
+What's the version of patch you are using ? Or your host distro
+> Thanks!
+>=20
+> ... Russell
+>=20
+> <x11-gpe-image.log>
+> <console-image.log>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
