@@ -1,25 +1,40 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1QU8V4-0008SI-VU
+	(envelope-from <martin.jansa@gmail.com>) id 1QUB5n-0006Fj-QO
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Jun 2011 04:28:07 +0200
-Received: from gandalf.denix.org ([unknown] [108.18.140.4])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LMG006AA9CQNDJ2@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	07 Jun 2011 21:24:27 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 6B70314AF5D; Tue,
-	07 Jun 2011 22:24:26 -0400 (EDT)
-Date: Tue, 07 Jun 2011 22:24:26 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 08 Jun 2011 07:14:11 +0200
+Received: by bwz5 with SMTP id 5so135105bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Jun 2011 22:10:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=wXZs5V2wTb/hphSyMY6TFMSGONLLSUMA8s4Qu9ihOTI=;
+	b=DmHHQt+NYW33EcnDwDlO1sBvvdBpc6/P7imYvyQuYVvrl1Xeelp4oHK7NRnB8IHIjK
+	4VlGuvCCb7NcRZxZXtvccuisuUl8JSMH/tlMq7VxScdW2bVmK7P2iw+Wn7lWk4/CQpU8
+	jLPuyUUV+y4SZCI9umXAgEyBupr9Prfnvhyng=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=C1UNKin+CyViC5FIqhUBreDzjv8JcwloInvbXmVtzkJrNc3Te2h3W6aHet42zI/kOY
+	juHUbCsZ7a2XF8w5d1ZldTXmCyA0ZJGwFw3VIiXSvyL23QXJWzD2P5s4F3VPSmU8KF8I
+	0LQZ9CMXmxVVN1bOhqmd5NK7MgTZUxj1GbR38=
+Received: by 10.204.233.11 with SMTP id jw11mr232052bkb.32.1307509853356;
+	Tue, 07 Jun 2011 22:10:53 -0700 (PDT)
+Received: from localhost ([94.230.152.115])
+	by mx.google.com with ESMTPS id j7sm166588bka.20.2011.06.07.22.10.51
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 07 Jun 2011 22:10:52 -0700 (PDT)
+Date: Wed, 8 Jun 2011 07:10:50 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20110608022426.GD2512@denix.org>
-References: <2A3DCF3DA181AD40BDE86A3150B27B6B0375258FF2@dbde02.ent.ti.com>
-MIME-version: 1.0
-In-reply-to: <2A3DCF3DA181AD40BDE86A3150B27B6B0375258FF2@dbde02.ent.ti.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH] qt-4.6.3: update qt's powervr graphics driver	plugin to work with SGX DDK v1.6
+Message-ID: <20110608051050.GE23137@jama.jama.net>
+References: <iskpst$avh$1@dough.gmane.org>
+ <20110607185320.GB2512@denix.org>
+MIME-Version: 1.0
+In-Reply-To: <20110607185320.GB2512@denix.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [2011.03-maintenance] Pull request #20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,73 +48,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jun 2011 02:28:07 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 08 Jun 2011 05:14:11 -0000
+X-Groupsio-MsgNum: 32563
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="tVmo9FyGdCe4F4YN"
+Content-Disposition: inline
 
-On Sun, Jun 05, 2011 at 06:52:24PM +0530, Balagopalakrishnan, Anand wrote:
-> Can we include this patch in OpenEmbedded? This is a critical patch to 
-> enable support for latest PowerVR drivers in Qt.
-> 
-> Regards,
-> Anand
+--tVmo9FyGdCe4F4YN
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Anand,
+On Tue, Jun 07, 2011 at 02:53:20PM -0400, Denys Dmytriyenko wrote:
+> And one more question, not directly related to this pull request - has an=
+yone=20
+> else seen cgit.oe.org showing the last commit instead of the log of all t=
+he=20
+> commits in a branch? From time to time I keep seeing this odd behavior...
 
-Two comments:
+Yes I've noticed it few times too.
 
-1. When you move files around as [large] part of the patch, please use -M 
-option for git-format-patch to avoid whole "remove-old-file-add-new-file". 
-Below [1] is the example of how your re-applied patch looks like one-liner 
-when generated with the above option.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-2. Your MUA/MTA (Outlook/Exchange) mangled the patch, so it couldn't be 
-applied anymore - I had to manually repeat the same steps to reproduce the 
-patch. The problem was that in the original wsegl2-support patch there were 
-some extra whitespaces, which got lost in the mail, as Outlook decided they 
-were not needed... BTW, it wouldn't be a problem if you used -M option when 
-creating the patch. Anyway, please consider sending patches directly using 
-git-send-email or, if you absolutely cannot avoid Outlook/Exchange, please 
-then attach them...
+--tVmo9FyGdCe4F4YN
+Content-Type: application/pgp-signature
 
-[1] Re-generated patch:
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
 
-From e992a948b8a542e1f500342fca0a991f47bfbe9c Mon Sep 17 00:00:00 2001
-From: Denys Dmytriyenko <denys@ti.com>
-Date: Tue, 7 Jun 2011 21:54:58 -0400
-Subject: [PATCH] qt-4.6.3: update qt's powervr graphics driver plugin to work with SGX DDK v1.6
+iEYEARECAAYFAk3vBFoACgkQN1Ujt2V2gBz36ACdHgo4D89a4KkFS6jSEjzfnq+W
+YWEAoJ6x9wCHi3qvx7h3k3H/DObZUxMV
+=Sz9Q
+-----END PGP SIGNATURE-----
 
-* The wsegl2 patch is required to build Qt with the latest SGX PowerVR drivers
-* Moved the wsegl2 patch from qt4/qt-4.7.3 to qt4/files
-* Added the wsegl2 patch to qt-4.6.3
-
-Note: This is the "massaged in" version of the original patch from Anand
-Balagopalakrishnan <anandb@ti.com> as it was mangled and couldn't be applied.
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- .../{qt-4.7.3 => files}/0001-wsegl2-support.patch  |    0
- recipes/qt4/qt-4.6.3.inc                           |    1 +
- 2 files changed, 1 insertions(+), 0 deletions(-)
- rename recipes/qt4/{qt-4.7.3 => files}/0001-wsegl2-support.patch (100%)
-
-diff --git a/recipes/qt4/qt-4.7.3/0001-wsegl2-support.patch b/recipes/qt4/files/0001-wsegl2-support.patch
-similarity index 100%
-rename from recipes/qt4/qt-4.7.3/0001-wsegl2-support.patch
-rename to recipes/qt4/files/0001-wsegl2-support.patch
-diff --git a/recipes/qt4/qt-4.6.3.inc b/recipes/qt4/qt-4.6.3.inc
-index 36c6a56..1d5df70 100644
---- a/recipes/qt4/qt-4.6.3.inc
-+++ b/recipes/qt4/qt-4.6.3.inc
-@@ -15,6 +15,7 @@ SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-everywhere-opensource-src-${PV}.
-            file://0010-no-simpledecoration-example.patch \
-            file://fix-config-tests.patch \
-            file://qt-config.patch \
-+           file://0001-wsegl2-support.patch \
-            file://g++.conf \
-            file://linux.conf \
-            "
--- 
-1.7.0.4
-
-
+--tVmo9FyGdCe4F4YN--
