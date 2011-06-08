@@ -1,42 +1,33 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1QUMUk-0002q1-1J
+	(envelope-from <Tom_Rini@mentor.com>) id 1QUNXv-0003pg-Bz
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Jun 2011 19:24:42 +0200
-Received: from p4fc773cd.dip.t-dialin.net ([79.199.115.205]
-	helo=excalibur.local) by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1QUMRY-0001wg-1A by authid <stefan@sostec.de> with srv_auth_cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Jun 2011 19:21:25 +0200
-Received: from stefan by excalibur.local with local (Exim 4.76)
-	(envelope-from <stefan@excalibur.local>) id 1QUMRW-0001Fq-C2
+	Wed, 08 Jun 2011 20:32:03 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1QUNUk-00003S-7B from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Jun 2011 19:21:22 +0200
-Date: Wed, 8 Jun 2011 19:21:21 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110608172121.GB30722@excalibur.local>
-References: <0C757E680E33864AB113392C7E83F910BE5183@GSX300A.mxchg.m.corp>
-	<1307534514.2529.4780.camel@phil-desktop>
-	<0C757E680E33864AB113392C7E83F910BE5185@GSX300A.mxchg.m.corp>
-	<1307535707.2529.4783.camel@phil-desktop>
-	<0C757E680E33864AB113392C7E83F910BE5186@GSX300A.mxchg.m.corp>
-	<iso6bf$lu8$1@dough.gmane.org>
-	<0C757E680E33864AB113392C7E83F910BE5188@GSX300A.mxchg.m.corp>
-	<20110608165027.GA30722@excalibur.local>
-	<0C757E680E33864AB113392C7E83F910BE5189@GSX300A.mxchg.m.corp>
+	Wed, 08 Jun 2011 11:28:46 -0700
+Received: from SVR-ORW-FEM-03.mgc.mentorg.com ([147.34.97.39]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 8 Jun 2011 11:24:36 -0700
+Received: from [172.30.36.148] (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
+	(147.34.97.39) with Microsoft SMTP Server id 14.1.289.1;
+	Wed, 8 Jun 2011 11:28:44 -0700
+Message-ID: <4DEFBF58.1010903@mentor.com>
+Date: Wed, 8 Jun 2011 11:28:40 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
 MIME-Version: 1.0
-In-Reply-To: <0C757E680E33864AB113392C7E83F910BE5189@GSX300A.mxchg.m.corp>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Subject: Re: Amend recipes which do not contain a (new) target machine in COMPATIBLE_MACHINE
+To: <openembedded-devel@lists.openembedded.org>
+References: <1307481663432021500@rkmorris.us>
+In-Reply-To: <1307481663432021500@rkmorris.us>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 08 Jun 2011 18:24:36.0766 (UTC)
+	FILETIME=[52812BE0:01CC2609]
+Subject: Re: Builds Failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,32 +41,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jun 2011 17:24:42 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 08 Jun 2011 18:32:03 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Hello.
-
-On Wed, 2011-06-08 at 19:02, Hauser, Wolfgang (external) wrote:
-> >With archive you mean the release bracnh with all maintenance patches?
+On 06/07/2011 02:21 PM, Russell Morris wrote:
+> Hi,
 > 
-> >What packages do you
-> >see failing and whats your distro, etc?
-> 
-> I took the tar file from OE git server (release-2011.03.tar.gz) and use
-> distribution angstom-2010x as a base for my own system.
+> I am trying to build OE with the latest source (i.e. from MASTER) -
+> but images that used to work are now failing (x11-gpe-image,
+> console-image). The failure seems to be in bash, as you can see in
+> the attached log files.
 
-OK so its the fixed release tarball without any patches we applied in
-the maintenance branch.
+Ah ha!  So, what's going on here is that upstream patches that we fetch
+have the 'bad' behavior of encoding '..' into the path and newer
+versions of 'patch' fail to apply these due to security concerns.
 
-I'm using angstrom 2008 here but I think Koen does build both distros
-from 2011.03
+We can kludge around this by making the recipe use say 'git' as the
+patch apply tool but someone should go yell at upstream.  Or we need to
+update to a newer version of bash where maybe upstream is publishing
+better behaved patches.
 
-> I have to check the exact error again, that may take bit.
-
-No problem, take your time.
-
-regards
-Stefan Schmidt
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
