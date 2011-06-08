@@ -1,50 +1,29 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail2.eads.net ([80.156.45.114] helo=mail.eads.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <guillaume.beraudo@gmail.com>) id 1QUEBl-0004fA-27
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Jun 2011 10:32:33 +0200
-Received: by wye20 with SMTP id 20so186067wye.6
+	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
+	id 1QUHEe-00043P-5Q for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Jun 2011 13:47:44 +0200
+Received: from gsx3071-vs5.mxchg.m.corp ([53.147.176.148])
+	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id p58BiQT3002613
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Jun 2011 01:29:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:sender:date:from:to:cc:subject:message-id
-	:in-reply-to:references:organization:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=0tQgA/yWb1KqGk4F7UF6U/m2b0I3cVC0WSWXugnkO0A=;
-	b=Vrf4AuaSY1LqEQGybi/L1dGfXex2BlP41fFc+Td1sE74YtSxhfX1ewhq7u977cXcdn
-	AP+5WCXHKXKv8VGGcKsm1DejnJDi7zYlnjDaW6I2PBjMRgAxedfb6oPf65/XuJVcxswU
-	kRyxhk61iqS2YYeKQpznp7jweBiKM0HXUvb8E=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:date:from:to:cc:subject:message-id:in-reply-to:references
-	:organization:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	b=tlbzCZDjo0SiSGwFvAyHMIQeYQ653ORE7XYu41ix9uRSxqE83TZq9wC/AY9TZ6HMjt
-	7tnl8Zq00yFPCaPUxp611DZ3kEkDhesFuwORnu8PkfmTg9JvBBUcKmNcPs/qj123iAkV
-	OgRRr/8uzeqLgf671TzpuT+k6/eu1NhlMlmyY=
-Received: by 10.216.68.2 with SMTP id k2mr4538746wed.90.1307521754546;
-	Wed, 08 Jun 2011 01:29:14 -0700 (PDT)
-Received: from guibc (dra38-9-78-249-57-20.fbx.proxad.net [78.249.57.20])
-	by mx.google.com with ESMTPS id n20sm133830weq.39.2011.06.08.01.29.13
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 08 Jun 2011 01:29:14 -0700 (PDT)
-Sender: guillaume beraudo <guillaume.beraudo@gmail.com>
-Date: Wed, 8 Jun 2011 10:29:10 +0200
-From: Guillaume BERAUDO <guillaume.beraudo@belledonne-communications.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20110608102910.50c67a63@guibc>
-In-Reply-To: <20110607151843.GD23137@jama.jama.net>
-References: <guillaume.beraudo@belledonne-communications.com>
-	<1307448812-27299-1-git-send-email-guillaume.beraudo@belledonne-communications.com>
-	<20110607124151.GA23137@jama.jama.net>
-	<20110607152354.7ff67c49@guibc>
-	<20110607133310.GC23137@jama.jama.net>
-	<20110607162358.44a38bcf@guibc>
-	<20110607151843.GD23137@jama.jama.net>
-Organization: Belledonne Communications
-X-Mailer: Claws Mail 3.7.6 (GTK+ 2.20.1; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] linphone: added recipe for v3.4.3
+	Wed, 8 Jun 2011 13:44:27 +0200
+Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
+	gsx3071-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Wed, 8 Jun 2011 13:44:21 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Wed, 8 Jun 2011 13:44:21 +0200
+Message-ID: <0C757E680E33864AB113392C7E83F910BE5183@GSX300A.mxchg.m.corp>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: Amend recipes which do not contain a (new) target machine in
+	COMPATIBLE_MACHINE 
+Thread-Index: Acwl0WhgwOjFExfAQTyBi6QdXNqSPQ==
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 08 Jun 2011 11:44:21.0311 (UTC)
+	FILETIME=[682D8CF0:01CC25D1]
+Subject: Amend recipes which do not contain a (new) target machine in COMPATIBLE_MACHINE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,89 +37,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jun 2011 08:32:33 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 08 Jun 2011 11:47:44 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Hello,
 
-> > > > > > +OVERRIDES_append = ":video:console"
-> > > > > 
-> > > > > This looks like someone trying to implement USE flags in
-> > > > > OE :). But I'm not sure it's right way and I haven't noticed
-> > > > > this used in any other recipe. So it would be better to
-> > > > > discuss first.
-> > > > 
-> > > > I am new to openembedded and thus may have missed something in
-> > > > the documentations. Can you point me to some elegant way to
-> > > > implement recipe flavours?
-> > > 
-> > > I don't think TSC agreed on some sort of USE-flag solution or
-> > > policy yet, but keeping shared EXTRA_OECONF in linphone-3.4.3.inc
-> > > and then EXTRA_OECONF_append with nogtk specific options in
-> > > separate files like linphone-nogtk_3.4.3.bb would be easier to
-> > > understand (at least to me), even when not so "elegant" as your
-> > > OVERRIDES solution.
+I added a new machine definition for our hardware (hardware is almost
+like beagleboard xM) and want to add the specific patches and
+configurations by using the amend class in my additional layer.
 
-With your advice, a typical linphone recipe would contain a block like
-this:
+If I amend the kernel recipe (linux-omap-psp_2.6.32.bb) for machines
+contained in COMPATIBLE_MACHINE, the amend.inc is found and my
+amendments are done well (for omap3evm and beagleboard).
 
-# With video
-DEPENDS_append = " libxv ffmpeg libv4l"
-EXTRA_OECONF_append = "
---with-ffmpeg=${STAGING_DIR_HOST}${layout_exec_prefix} --enable-video"
+If I want to build the kernel for my machine, the kernel recipe
+linux-omap-psp_2.6.32.bb was skipped in case of not containing my new
+machine in COMPATIBLE_MACHINE and the wrong kernel is build.
 
-# Without video
-#EXTRA_OECONF_append = " --disable-video"
+I need only a view additions to the linux-omap-psp-2.6.32 kernel so I
+don't want to copy the original recipe into my layer and change it. I
+have to build my system for omap3evm, beagleboard and our specific
+hardware.
 
+Is there a possibility to avoid the skipping of the kernel recipe for a
+machine not contained in COMPATIBLE_MACHINE ? Or add the machine for
+amending somewhere ?
 
-# GTK GUI
-DEPENDS_append = " gtk+"
-PROVIDES_append = " linphone"
-PACKAGES_prepend = "${PN}-dbg ${PN} ${PN}-doc ${PN}-dev ${PN}-locale "
-EXTRA_OECONF_append = " --enable-gtk_ui=yes"
-
-# Without GTK GUI
-#EXTRA_OECONF_append = " --enable-gtk_ui=no"
-
-
-Though it is easier at first glance I feel it error prone.
-When creating a new recipe, it is easy to forget uncommenting
-directives.
-
-Is it blocking to use my initial solution with OVERRIDES?
-If yes, what about using a "@base_conditional"?
-Eg:
-LINPHONE_FLAVOUR_WITH_GTK = '1'
-@base_conditional('LINPHONE_FLAVOUR_WITH_GTK', '1', 'something when
-active', 'something when inactive')
-
-This would keep the recipes simple and avoid using any OVERRIDES or
-_append.
-
-
-
-> > There is also some conditionnals with the DEPENDS.
-> > What is the use of all the "DEPENDS_some-package-name" directives?
-> > Isn't it identical to only use the global "DEPENDS"?
-> 
-> Yes it looks weird and broken on quick glance.
-> but "shared" DEPENDS = "foo" in linphone-3.4.3.inc and DEPENDS_append
-> = "gtk+" in linphone-gtk_1.2.4.bb makes sense
->  
-> > I removed all the RDEPENDS stuff. Can you confirm it was
-> > unnecessary?
-> 
-> all linked .so providers should be picked to rdepends automatically by
-> package.bbclass so only extra stuff like linphone-gtk-config would be
-> needed in extra RDEPENDS_${PN} in linphone-gtk_1.2.4.bb.
-
-Isn't the "inherit pkgconfig" managing it already?
-
-Also, do you thing this line is of any use?
-"export PKG_CONFIG=${STAGING_BINDIR_NATIVE}/pkg-config"
+I use the 2011.03 release and bitbake version 1.10.2.
 
 Regards
-Guillaume
+Wolfgang
 
 
