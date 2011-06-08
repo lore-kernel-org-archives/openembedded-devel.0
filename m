@@ -1,33 +1,21 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QUHPk-0004EI-W2 for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Jun 2011 13:59:13 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QUHMa-0001Ap-HA for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Jun 2011 13:55:56 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Jun 2011 13:55:56 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Jun 2011 13:55:56 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <philb@gnu.org>) id 1QUHVY-0004hJ-KC
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Jun 2011 14:05:12 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QUHSO-0007Qr-CA
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Jun 2011 14:01:56 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 08 Jun 2011 13:55:43 +0200
-Message-ID: <isnnvv$n8f$1@dough.gmane.org>
-References: <0C757E680E33864AB113392C7E83F910BE5183@GSX300A.mxchg.m.corp>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
 In-Reply-To: <0C757E680E33864AB113392C7E83F910BE5183@GSX300A.mxchg.m.corp>
-X-Enigmail-Version: 1.0.1
+References: <0C757E680E33864AB113392C7E83F910BE5183@GSX300A.mxchg.m.corp>
+Date: Wed, 08 Jun 2011 13:01:54 +0100
+Message-ID: <1307534514.2529.4780.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
 Subject: Re: Amend recipes which do not contain a (new) target machine in COMPATIBLE_MACHINE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,45 +30,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jun 2011 11:59:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 08 Jun 2011 12:05:12 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 08-06-11 13:44, Hauser, Wolfgang (external) wrote:
-> Hello,
-> 
-> I added a new machine definition for our hardware (hardware is almost
-> like beagleboard xM) and want to add the specific patches and
-> configurations by using the amend class in my additional layer.
-> 
-> If I amend the kernel recipe (linux-omap-psp_2.6.32.bb) for machines
-> contained in COMPATIBLE_MACHINE, the amend.inc is found and my
-> amendments are done well (for omap3evm and beagleboard).
-> 
-> If I want to build the kernel for my machine, the kernel recipe
-> linux-omap-psp_2.6.32.bb was skipped in case of not containing my new
-> machine in COMPATIBLE_MACHINE and the wrong kernel is build.
-> 
-> I need only a view additions to the linux-omap-psp-2.6.32 kernel so I
-> don't want to copy the original recipe into my layer and change it. I
-> have to build my system for omap3evm, beagleboard and our specific
-> hardware.
-> 
+On Wed, 2011-06-08 at 13:44 +0200, Hauser, Wolfgang (external) wrote:
 > Is there a possibility to avoid the skipping of the kernel recipe for a
 > machine not contained in COMPATIBLE_MACHINE ? Or add the machine for
 > amending somewhere ?
 
-Stupid question: why not send patches to add your machine to OE?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Can you not just arrange for your layer to add your own machine to the
+recipe's COMPATIBLE_MACHINE definition?
 
-iD8DBQFN72M/MkyGM64RGpERAhLTAJ9qHNv0eInsZR/TlEroTi9tEV2aawCfdVJg
-OpHnn2F0ulVD9E8Jh6fPMDc=
-=S3P7
------END PGP SIGNATURE-----
+p.
+
+
 
 
 
