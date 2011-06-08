@@ -1,34 +1,38 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QUBtS-0007KK-UE
+	(envelope-from <martin.jansa@gmail.com>) id 1QUBtc-0007KK-Jc
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Jun 2011 08:05:30 +0200
-Received: by bwz5 with SMTP id 5so158058bwz.6
+	Wed, 08 Jun 2011 08:05:40 +0200
+Received: by mail-bw0-f47.google.com with SMTP id 5so158058bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Jun 2011 23:02:13 -0700 (PDT)
+	Tue, 07 Jun 2011 23:02:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=64ARwSOpZH3Z2XJJJmiupMjIZ0jv/VIhPLvFdzFe3rw=;
-	b=bccj8O1N5elQIjgxuHa+2n8jK/oVDbZsI2BC7v6Gut56yQzT1Fq9G0fcivJtuC8vKD
-	BJ+hhC/8fMqlYIdB+9paywzn9Ld8eI3rxNll7hd4/PkQkSMzMZ40Pqm9n5R7zpUGJQHI
-	QVV0cc54mdm047OHgmuSUflGSD0MFaF33lRV4=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=UZHH+3rKpTp9PP8cj7z+QwGnWn9xTD0oNGD8/MyNKk8=;
+	b=OgDPcdPVBhkqfHUp6CsuaubB3/+chv0rIu2sgyfrO8YgDFmZwsqmDM3eXtt6LvhxaK
+	OzRMhThuCx/hIp4GW49vAlTVdIq6Yc6+dhNRtf58Fbd2S2Fw2TGoyeVPOQr2Dvx0GV5g
+	GxshesvLZcsLV4ZAwucm5VuNAeDg3masQecxs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=K+4nSQ4VK22AdqnY30lnm+eDYuvutqrrPHJQsC8Ty6ZYzWA/3PIVrGXHyaL10ZwCNa
-	ugVg3df4XMCVeBvJogGCAmXl+wRqq/hsr4EKH7gX8ly/X7STZrJgLgAQLPAB19bCskKz
-	fHm7OfKI7DWP681ASfEM+OHhzgP19jJqIT440=
-Received: by 10.204.127.68 with SMTP id f4mr178766bks.42.1307512933000;
-	Tue, 07 Jun 2011 23:02:13 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=QCfU+LCbmGAZ7kcfTIdoPiDD/D7H7A3UdRzyjKe/LZXpV/K9nwxr7YGSEW3ZpAcpju
+	wdQqOe3D3iaqDvLILcvTftBDVN6qm2W5yrKKtDHI0pHsYwxcN2FxzOqY/l2KvpeYDe18
+	Iow60C2w9a8tMlVEWuw5lP7TYHAys0bRhUvC8=
+Received: by 10.204.26.132 with SMTP id e4mr444846bkc.142.1307512944768;
+	Tue, 07 Jun 2011 23:02:24 -0700 (PDT)
 Received: from localhost ([94.230.152.115])
-	by mx.google.com with ESMTPS id k16sm202007bks.13.2011.06.07.23.02.11
+	by mx.google.com with ESMTPS id j7sm203961bka.8.2011.06.07.23.02.23
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 07 Jun 2011 23:02:12 -0700 (PDT)
+	Tue, 07 Jun 2011 23:02:24 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Jun 2011 08:02:03 +0200
-Message-Id: <cover.1307512818.git.Martin.Jansa@gmail.com>
+Date: Wed,  8 Jun 2011 08:02:14 +0200
+Message-Id: <0993200e91b132f35bf18124e0366a190cc84722.1307512818.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.5.3
-Subject: [meta-oe][PATCH 0/2] Pull request #17
+In-Reply-To: <cover.1307512818.git.Martin.Jansa@gmail.com>
+References: <cover.1307512818.git.Martin.Jansa@gmail.com>
+Cc: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Subject: [meta-oe][PATCH 1/2] vala[-native]: 0.12.0 -> 0.12.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,34 +46,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jun 2011 06:05:31 -0000
+X-List-Received-Date: Wed, 08 Jun 2011 06:05:40 -0000
 
-The following changes since commit 92492f8596ae74044f0cbf1813c22ba6f18f742c:
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 
-  systemd-compat-units: disable old style 'networking' script for the time being (2011-06-06 13:08:15 +0200)
-
-are available in the git repository at:
-  git://git.openembedded.org/meta-openembedded-contrib jansa/meta-oe
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/meta-oe
-
-Martin Jansa (1):
-  check: import from OE rev d4f0211e2078d5033ae0dee74664de5520d8392d
-
-Michael 'Mickey' Lauer (1):
-  vala[-native]: 0.12.0 -> 0.12.1
-
- meta-oe/recipes-devtools/vala/vala_0.12.0.bb       |    7 -------
- meta-oe/recipes-devtools/vala/vala_0.12.1.bb       |    7 +++++++
- meta-oe/recipes-support/check/check_0.9.5.bb       |   20 ++++++++++++++++++++
- ...graphs-in-macro-names-to-unbreak-autoconf.patch |   18 ++++++++++++++++++
- .../check/files/configure_fix.patch                |   12 ++++++++++++
- 5 files changed, 57 insertions(+), 7 deletions(-)
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-devtools/vala/vala_0.12.0.bb |    7 -------
+ meta-oe/recipes-devtools/vala/vala_0.12.1.bb |    7 +++++++
+ 2 files changed, 7 insertions(+), 7 deletions(-)
  delete mode 100644 meta-oe/recipes-devtools/vala/vala_0.12.0.bb
  create mode 100644 meta-oe/recipes-devtools/vala/vala_0.12.1.bb
- create mode 100644 meta-oe/recipes-support/check/check_0.9.5.bb
- create mode 100644 meta-oe/recipes-support/check/files/check-m4-am-path-check-use-quadrigraphs-in-macro-names-to-unbreak-autoconf.patch
- create mode 100644 meta-oe/recipes-support/check/files/configure_fix.patch
 
+diff --git a/meta-oe/recipes-devtools/vala/vala_0.12.0.bb b/meta-oe/recipes-devtools/vala/vala_0.12.0.bb
+deleted file mode 100644
+index 9ca89db..0000000
+--- a/meta-oe/recipes-devtools/vala/vala_0.12.0.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require vala.inc
+-SRC_URI = "ftp://ftp.gnome.org/pub/GNOME/sources/vala/0.12/vala-0.12.0.tar.bz2"
+-
+-FILES_${PN} += "${datadir}/vala-0.12/vapi"
+-
+-SRC_URI[md5sum] = "b11fafaa705085342156312e356b6ff2"
+-SRC_URI[sha256sum] = "9a398e16fba2c78c9bcadb05e489c9bc318e34901d43451ac5d2ce4bc46b1225"
+diff --git a/meta-oe/recipes-devtools/vala/vala_0.12.1.bb b/meta-oe/recipes-devtools/vala/vala_0.12.1.bb
+new file mode 100644
+index 0000000..1049ed6
+--- /dev/null
++++ b/meta-oe/recipes-devtools/vala/vala_0.12.1.bb
+@@ -0,0 +1,7 @@
++require vala.inc
++SRC_URI = "ftp://ftp.gnome.org/pub/GNOME/sources/vala/0.12/vala-${PV}.tar.bz2"
++
++FILES_${PN} += "${datadir}/vala-0.12/vapi"
++
++SRC_URI[md5sum] = "bf35262cc611de447147d01cbac33767"
++SRC_URI[sha256sum] = "d9a2be21bb8ab88eab838e7f3a4d0aaa2a1fddf35615dca32bef6a0051f58ea8"
 -- 
 1.7.5.3
 
