@@ -1,21 +1,31 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail2.eads.net ([80.156.45.114] helo=mail.eads.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1QUHVY-0004hJ-KC
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Jun 2011 14:05:12 +0200
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QUHSO-0007Qr-CA
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Jun 2011 14:01:56 +0200
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <0C757E680E33864AB113392C7E83F910BE5183@GSX300A.mxchg.m.corp>
+	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
+	id 1QUHWT-0004ma-5j for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Jun 2011 14:06:09 +0200
+Received: from gsx3072-vs5.mxchg.m.corp ([53.147.176.149])
+	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id p58C2pUs004801
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 8 Jun 2011 14:02:52 +0200
+Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
+	gsx3072-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Wed, 8 Jun 2011 14:02:46 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Wed, 8 Jun 2011 14:02:45 +0200
+Message-ID: <0C757E680E33864AB113392C7E83F910BE5184@GSX300A.mxchg.m.corp>
+In-Reply-To: <isnnvv$n8f$1@dough.gmane.org>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Amend recipes which do not contain a (new) target machine
+	in COMPATIBLE_MACHINE
+Thread-Index: Acwl0xojLnrkgB2VSWign2Q0afRkAgAAGIEg
 References: <0C757E680E33864AB113392C7E83F910BE5183@GSX300A.mxchg.m.corp>
-Date: Wed, 08 Jun 2011 13:01:54 +0100
-Message-ID: <1307534514.2529.4780.camel@phil-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
+	<isnnvv$n8f$1@dough.gmane.org>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 08 Jun 2011 12:02:46.0390 (UTC)
+	FILETIME=[FADB3960:01CC25D3]
 Subject: Re: Amend recipes which do not contain a (new) target machine in COMPATIBLE_MACHINE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,20 +40,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jun 2011 12:05:12 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 08 Jun 2011 12:06:09 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 2011-06-08 at 13:44 +0200, Hauser, Wolfgang (external) wrote:
-> Is there a possibility to avoid the skipping of the kernel recipe for a
-> machine not contained in COMPATIBLE_MACHINE ? Or add the machine for
-> amending somewhere ?
+>Stupid question: why not send patches to add your machine to OE?
 
-Can you not just arrange for your layer to add your own machine to the
-recipe's COMPATIBLE_MACHINE definition?
-
-p.
-
+Because it is a uncommon special hardware, not available on the shelf.
 
 
 
