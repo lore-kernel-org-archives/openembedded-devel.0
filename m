@@ -1,43 +1,25 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1QUe0h-0001DO-AN
+	(envelope-from <sledz@dresearch-fe.de>) id 1QUew0-0002an-DA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Jun 2011 14:06:51 +0200
-Received: from [2001:638:602:1183:512:e5ca:4ebb:3ee] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1QUdxU-0004im-01 by authid <stefan@sostec.de> with srv_auth_cram_md5
+	Thu, 09 Jun 2011 15:06:05 +0200
+Received: by fxm19 with SMTP id 19so1096850fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Jun 2011 14:03:33 +0200
-Received: from stefan by excalibur.local with local (Exim 4.76)
-	(envelope-from <stefan@excalibur.local>) id 1QUdxT-0002tw-F9
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Jun 2011 14:03:31 +0200
-Date: Thu, 9 Jun 2011 14:03:31 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110609120331.GB24788@excalibur.local>
-References: <1307534514.2529.4780.camel@phil-desktop>
-	<0C757E680E33864AB113392C7E83F910BE5185@GSX300A.mxchg.m.corp>
-	<1307535707.2529.4783.camel@phil-desktop>
-	<0C757E680E33864AB113392C7E83F910BE5186@GSX300A.mxchg.m.corp>
-	<iso6bf$lu8$1@dough.gmane.org>
-	<0C757E680E33864AB113392C7E83F910BE5188@GSX300A.mxchg.m.corp>
-	<20110608165027.GA30722@excalibur.local>
-	<0C757E680E33864AB113392C7E83F910BE5189@GSX300A.mxchg.m.corp>
-	<20110608172121.GB30722@excalibur.local>
-	<0C757E680E33864AB113392C7E83F910BE518A@GSX300A.mxchg.m.corp>
+	Thu, 09 Jun 2011 06:02:45 -0700 (PDT)
+Received: by 10.223.28.19 with SMTP id k19mr749091fac.139.1307624564727;
+	Thu, 09 Jun 2011 06:02:44 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id q10sm648731fan.32.2011.06.09.06.02.43
+	(version=SSLv3 cipher=OTHER); Thu, 09 Jun 2011 06:02:44 -0700 (PDT)
+Message-ID: <4DF0C472.4030608@dresearch-fe.de>
+Date: Thu, 09 Jun 2011 15:02:42 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110414 SUSE/3.1.10 Thunderbird/3.1.10
 MIME-Version: 1.0
-In-Reply-To: <0C757E680E33864AB113392C7E83F910BE518A@GSX300A.mxchg.m.corp>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
-	autolearn=ham version=3.2.5
-Subject: Re: Amend recipes which do not contain a (new) target machine in COMPATIBLE_MACHINE
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Distros supporting older kernels?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,29 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jun 2011 12:06:51 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 09 Jun 2011 13:06:05 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hello.
+Hi Distro Maintainers,
 
-On Thu, 2011-06-09 at 11:42, Hauser, Wolfgang (external) wrote:
-> 
-> >> I have to check the exact error again, that may take bit.
-> 
-> It's not a problem with bitbake 1.12.0, the system (debian lenny) I have
-> to use to compile my system don't have python 2.6.0 installed, it uses
-> 2.5.2 so bitbake 1.12.0 won't run.
+as you could read in earlier messages of mine, we're forced to use an older kernel version (2.6.24) for our hardware. This brings a lot of problems as you can imagine (e.g. we're also bound to udev-141).
 
-OK, that is expected.
+Until now we've used angstrom-2008.1 with some own patches according to the linux-libc-headers and udev versions for our hardware which were reasonably not accepted by the Angstrom maintainers (see discussions [1] or [2]).
 
-> Sorry for complaining about an
-> "error". It was a view month ago I set up the OE environment, so I
-> forgot the reason why I have to use bitbake 1.10.8.
+In there current situation (angstrom-2008.1 is deprecated, the new layer concept will come up) we're looking for a new, better, less hacky solution.
 
-Thanks for checking.
+My first question therefor is if there are any distros explicitely supporting older kernels (pre 2.6.27) yet? Or are willing to work on it?
 
-regards
-Stefan Schmidt
+[1] <http://thread.gmane.org/gmane.comp.handhelds.openembedded/32375>
+[2] <http://thread.gmane.org/gmane.comp.handhelds.openembedded/42628>
+
+Thx,
+Steffen
+
+PS: Does anybody know a good overview which Linux Kernel API changes were made in which kernel version?
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
