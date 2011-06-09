@@ -1,32 +1,26 @@
-Received: from mail2.eads.net ([80.156.45.114] helo=mail.eads.net)
+Received: from ns1.gatteins.it ([193.58.239.94])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
-	id 1QUboA-0003yP-48 for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Jun 2011 11:45:46 +0200
-Received: from gsx3071-vs5.mxchg.m.corp ([53.147.176.148])
-	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id p599gWKl019798
+	(envelope-from <matteo.facchinetti@sirius-es.it>) id 1QUcix-0002K9-FR
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 09 Jun 2011 12:44:27 +0200
+X-Virus-Scanned: amavisd-new at gattei.com
+Received: from [10.16.100.107] (78-134-105-170.dynamic.eolo.it
+	[78.134.105.170])
+	by ns1.gatteins.it (Postfix) with ESMTPA id 10538DEF28
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Jun 2011 11:42:33 +0200
-Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
-	gsx3071-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 9 Jun 2011 11:42:27 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Thu,  9 Jun 2011 12:41:16 +0200 (MEST)
+Message-ID: <4DF0A343.6040608@sirius-es.it>
+Date: Thu, 09 Jun 2011 12:41:07 +0200
+From: Matteo Facchinetti <matteo.facchinetti@sirius-es.it>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110424 Thunderbird/3.1.10
 MIME-Version: 1.0
-Date: Thu, 9 Jun 2011 11:42:27 +0200
-Message-ID: <0C757E680E33864AB113392C7E83F910BE518A@GSX300A.mxchg.m.corp>
-In-Reply-To: <20110608172121.GB30722@excalibur.local>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Amend recipes which do not contain a (new) target machine
-	in COMPATIBLE_MACHINE
-Thread-Index: AcwmAK3v89zR2vBOQMCPezyWq3+U+wAh2kEg
-References: <0C757E680E33864AB113392C7E83F910BE5183@GSX300A.mxchg.m.corp><1307534514.2529.4780.camel@phil-desktop><0C757E680E33864AB113392C7E83F910BE5185@GSX300A.mxchg.m.corp><1307535707.2529.4783.camel@phil-desktop><0C757E680E33864AB113392C7E83F910BE5186@GSX300A.mxchg.m.corp><iso6bf$lu8$1@dough.gmane.org><0C757E680E33864AB113392C7E83F910BE5188@GSX300A.mxchg.m.corp><20110608165027.GA30722@excalibur.local><0C757E680E33864AB113392C7E83F910BE5189@GSX300A.mxchg.m.corp>
-	<20110608172121.GB30722@excalibur.local>
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 09 Jun 2011 09:42:27.0190 (UTC)
-	FILETIME=[8B090160:01CC2689]
-Subject: Re: Amend recipes which do not contain a (new) target machine in COMPATIBLE_MACHINE
+To: openembedded-devel@lists.openembedded.org
+References: <1307541389-2401-1-git-send-email-matteo.facchinetti@sirius-es.it>
+	<1307551786.4193.25.camel@mattotaupa>
+In-Reply-To: <1307551786.4193.25.camel@mattotaupa>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH v2] wxbase_2.8.9: fix includepath for SDL dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,25 +34,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jun 2011 09:45:46 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 09 Jun 2011 10:44:27 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+
+On 06/08/2011 06:49 PM, Paul Menzel wrote:
+> Am Mittwoch, den 08.06.2011, 15:56 +0200 schrieb Matteo Facchinetti:
+>> From: Matteo Facchinetti<engineering@sirius-es.it>
+>>
+>> Compile task fail with error:
+>> | CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/SDL
+>> | cc1plus: internal compiler error: in add_path, at c-incpath.c:425
+>>
+>> Fix it forcing right path in configuration.
+> It builds fine for me without this patch using `minimal` for `MACHINE =
+> "beagleboard"`. How can I reproduce your build error?
+>
+
+wx_base configure script checks the presence of sdl-config in your host 
+system (and not in your cross-build system) Then use it to know SDL 
+include PATH. (sdlconfig --cflags).
+this path is wrong for your cross-compiling ( usually -I/usr/include/SDL ).
+
+At first, to reproduce the problem you have to install SDL lib in your 
+host system.
+I don't know if you could reproduce exactly the same crash.
+  (however I'm using a IA64 64bit host system and my target is powerpc 
+32 (e300c3 core).)
+
+If you doesn't have SDL lib in your host, problem disappear because 
+wx_base configure doesn't use it.
+
+After apply this patch, your cross_compile system start check and use 
+the right sdl-config (for me located in 
+"$BUILDDIR"/sysroots/x86_64-linux/usr/ppce300c3/bin/sdl-config ).
+
+For compile wx_base with SDL you have to create an image with this 
+dependency.
+I don't know if the `minimal` one is sufficient. I'm using `console-image` .
 
 
->> I have to check the exact error again, that may take bit.
+>> Signed-off-by: Matteo Facchinetti<engineering@sirius-es.it>
+>> ---
+>>   recipes/wxwidgets/wxbase_2.8.9.bb |    3 ++-
+>>   1 files changed, 2 insertions(+), 1 deletions(-)
+>>
+>> diff --git a/recipes/wxwidgets/wxbase_2.8.9.bb b/recipes/wxwidgets/wxbase_2.8.9.bb
+>> index fb18710..b87da11 100644
+>> --- a/recipes/wxwidgets/wxbase_2.8.9.bb
+>> +++ b/recipes/wxwidgets/wxbase_2.8.9.bb
+>> @@ -9,7 +9,8 @@ SRC_URI += "file://Makefile.in.patch"
+>>   EXTRA_OECONF = " --disable-gui \
+>>                    --enable-largefile \
+>>                    --enable-gpe \
+>> -                 --without-subdirs"
+>> +                 --without-subdirs \
+>> +                 --with-sdl-prefix=${STAGING_BINDIR_CROSS}/.."
+> Maybe add `\` to the end and put the `"` to the new line so that future
+> patches will be smaller.
+ok
 
-It's not a problem with bitbake 1.12.0, the system (debian lenny) I have
-to use to compile my system don't have python 2.6.0 installed, it uses
-2.5.2 so bitbake 1.12.0 won't run. Sorry for complaining about an
-"error". It was a view month ago I set up the OE environment, so I
-forgot the reason why I have to use bitbake 1.10.8.
-
-My amendment is working now, the kernel compiles and I have to test the
-"metal".
-
-thanks and regards
-Wolfgang
+> -                 --without-subdirs"
+> +                 --without-subdirs \
+> +                 --with-sdl-prefix=${STAGING_BINDIR_CROSS}/.. \
+> +                 "
+>
+>>   LEAD_SONAME = "libwx_base-2.8.so"
+>
+> Thanks,
+>
+> Paul
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
