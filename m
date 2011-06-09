@@ -1,26 +1,43 @@
-Received: from ns1.gatteins.it ([193.58.239.94])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <matteo.facchinetti@sirius-es.it>) id 1QUcix-0002K9-FR
+	(envelope-from <stefan@datenfreihafen.org>) id 1QUe0h-0001DO-AN
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Jun 2011 12:44:27 +0200
-X-Virus-Scanned: amavisd-new at gattei.com
-Received: from [10.16.100.107] (78-134-105-170.dynamic.eolo.it
-	[78.134.105.170])
-	by ns1.gatteins.it (Postfix) with ESMTPA id 10538DEF28
+	Thu, 09 Jun 2011 14:06:51 +0200
+Received: from [2001:638:602:1183:512:e5ca:4ebb:3ee] (helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
+	id 1QUdxU-0004im-01 by authid <stefan@sostec.de> with srv_auth_cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jun 2011 12:41:16 +0200 (MEST)
-Message-ID: <4DF0A343.6040608@sirius-es.it>
-Date: Thu, 09 Jun 2011 12:41:07 +0200
-From: Matteo Facchinetti <matteo.facchinetti@sirius-es.it>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110424 Thunderbird/3.1.10
-MIME-Version: 1.0
+	Thu, 09 Jun 2011 14:03:33 +0200
+Received: from stefan by excalibur.local with local (Exim 4.76)
+	(envelope-from <stefan@excalibur.local>) id 1QUdxT-0002tw-F9
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 09 Jun 2011 14:03:31 +0200
+Date: Thu, 9 Jun 2011 14:03:31 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1307541389-2401-1-git-send-email-matteo.facchinetti@sirius-es.it>
-	<1307551786.4193.25.camel@mattotaupa>
-In-Reply-To: <1307551786.4193.25.camel@mattotaupa>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH v2] wxbase_2.8.9: fix includepath for SDL dependency
+Message-ID: <20110609120331.GB24788@excalibur.local>
+References: <1307534514.2529.4780.camel@phil-desktop>
+	<0C757E680E33864AB113392C7E83F910BE5185@GSX300A.mxchg.m.corp>
+	<1307535707.2529.4783.camel@phil-desktop>
+	<0C757E680E33864AB113392C7E83F910BE5186@GSX300A.mxchg.m.corp>
+	<iso6bf$lu8$1@dough.gmane.org>
+	<0C757E680E33864AB113392C7E83F910BE5188@GSX300A.mxchg.m.corp>
+	<20110608165027.GA30722@excalibur.local>
+	<0C757E680E33864AB113392C7E83F910BE5189@GSX300A.mxchg.m.corp>
+	<20110608172121.GB30722@excalibur.local>
+	<0C757E680E33864AB113392C7E83F910BE518A@GSX300A.mxchg.m.corp>
+MIME-Version: 1.0
+In-Reply-To: <0C757E680E33864AB113392C7E83F910BE518A@GSX300A.mxchg.m.corp>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
+	autolearn=ham version=3.2.5
+Subject: Re: Amend recipes which do not contain a (new) target machine in COMPATIBLE_MACHINE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,81 +51,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jun 2011 10:44:27 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 09 Jun 2011 12:06:51 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 06/08/2011 06:49 PM, Paul Menzel wrote:
-> Am Mittwoch, den 08.06.2011, 15:56 +0200 schrieb Matteo Facchinetti:
->> From: Matteo Facchinetti<engineering@sirius-es.it>
->>
->> Compile task fail with error:
->> | CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/SDL
->> | cc1plus: internal compiler error: in add_path, at c-incpath.c:425
->>
->> Fix it forcing right path in configuration.
-> It builds fine for me without this patch using `minimal` for `MACHINE =
-> "beagleboard"`. How can I reproduce your build error?
->
+Hello.
 
-wx_base configure script checks the presence of sdl-config in your host 
-system (and not in your cross-build system) Then use it to know SDL 
-include PATH. (sdlconfig --cflags).
-this path is wrong for your cross-compiling ( usually -I/usr/include/SDL ).
+On Thu, 2011-06-09 at 11:42, Hauser, Wolfgang (external) wrote:
+> 
+> >> I have to check the exact error again, that may take bit.
+> 
+> It's not a problem with bitbake 1.12.0, the system (debian lenny) I have
+> to use to compile my system don't have python 2.6.0 installed, it uses
+> 2.5.2 so bitbake 1.12.0 won't run.
 
-At first, to reproduce the problem you have to install SDL lib in your 
-host system.
-I don't know if you could reproduce exactly the same crash.
-  (however I'm using a IA64 64bit host system and my target is powerpc 
-32 (e300c3 core).)
+OK, that is expected.
 
-If you doesn't have SDL lib in your host, problem disappear because 
-wx_base configure doesn't use it.
+> Sorry for complaining about an
+> "error". It was a view month ago I set up the OE environment, so I
+> forgot the reason why I have to use bitbake 1.10.8.
 
-After apply this patch, your cross_compile system start check and use 
-the right sdl-config (for me located in 
-"$BUILDDIR"/sysroots/x86_64-linux/usr/ppce300c3/bin/sdl-config ).
+Thanks for checking.
 
-For compile wx_base with SDL you have to create an image with this 
-dependency.
-I don't know if the `minimal` one is sufficient. I'm using `console-image` .
-
-
->> Signed-off-by: Matteo Facchinetti<engineering@sirius-es.it>
->> ---
->>   recipes/wxwidgets/wxbase_2.8.9.bb |    3 ++-
->>   1 files changed, 2 insertions(+), 1 deletions(-)
->>
->> diff --git a/recipes/wxwidgets/wxbase_2.8.9.bb b/recipes/wxwidgets/wxbase_2.8.9.bb
->> index fb18710..b87da11 100644
->> --- a/recipes/wxwidgets/wxbase_2.8.9.bb
->> +++ b/recipes/wxwidgets/wxbase_2.8.9.bb
->> @@ -9,7 +9,8 @@ SRC_URI += "file://Makefile.in.patch"
->>   EXTRA_OECONF = " --disable-gui \
->>                    --enable-largefile \
->>                    --enable-gpe \
->> -                 --without-subdirs"
->> +                 --without-subdirs \
->> +                 --with-sdl-prefix=${STAGING_BINDIR_CROSS}/.."
-> Maybe add `\` to the end and put the `"` to the new line so that future
-> patches will be smaller.
-ok
-
-> -                 --without-subdirs"
-> +                 --without-subdirs \
-> +                 --with-sdl-prefix=${STAGING_BINDIR_CROSS}/.. \
-> +                 "
->
->>   LEAD_SONAME = "libwx_base-2.8.so"
->
-> Thanks,
->
-> Paul
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+regards
+Stefan Schmidt
 
 
