@@ -1,35 +1,35 @@
 Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <jefro.net@gmail.com>)
-	id 1QV9x0-0000t5-0D; Sat, 11 Jun 2011 00:13:11 +0200
-Received: by iye7 with SMTP id 7so2779102iye.6
-	for <multiple recipients>; Fri, 10 Jun 2011 15:09:47 -0700 (PDT)
+	id 1QV9yA-0000zz-Sh; Sat, 11 Jun 2011 00:14:24 +0200
+Received: by iye7 with SMTP id 7so2779736iye.6
+	for <multiple recipients>; Fri, 10 Jun 2011 15:11:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:sender:date:x-google-sender-auth
 	:message-id:subject:from:to:content-type;
-	bh=Y7qdPfFzmM6q7sbP13qqPGf/3sztCn91yYxLTPnwEcI=;
-	b=T6d66/5k86RIjl+gsPJgko1BZFwy2BxfllwpBSCut+s+XzsnGRdLJplRD2UL7XuWtZ
-	+1xgVrtOFhYbwYeMXOteBRdOm4M45t/gyXOnRxpo1jhEYYmLUW6DC0tw1vYDbzf+ldnk
-	fmJemF5+9sktPyftj03EMjZ2jAjObstnzyVDE=
+	bh=qwT1TBVeyoccexPtP2CPqdgVXAfrfGmN2aMvA7BuLlY=;
+	b=n0lbhLQDHF19isyZAWNYgnYzNez2BirYFjasyuIoGgR60pTTmAHHVtm+k5LOR+F/LF
+	qPH3ZAXNuNhwSDEovYxGl1uDNHoGALL71NmJ/tSJ5fy8NPLGp3hl5TT9DklFbwJt1+7Q
+	HdC13UMQm5LkTb6KkS2XutYKwV5w31Pdvi/Jk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
 	:from:to:content-type;
-	b=j/ur/JvFFihjk3RGiJ5bp7yYRFM/nJc7QdX4oh22y/70AFsdcCiTfsiHhetRFZBBn1
-	hhDvq+3zl0XPh0ZxLXhL0TlkMhsrtUdFY75QjYIeTIdkVoFeIuUsS+/xvEhwip0ROUxS
-	OLjV8GMJutt1DFIPyEW/Vwp6GOoIgL8NfqVGE=
+	b=KvMwdHlj2VHr+9rj43fg+OYU5dKx8pxrS9BpkXK49+ti1LFrlR6ijAKOimiM8/4y6e
+	NLqhAUdT5LXiQOf8o4T5204As9Tv34aqS+lBYi7/7tICneXI2DGOvlHXfiY+f5pWlXle
+	eh3QrPP6bqjZY782BtAMCmKImbTvPTDvJJYvE=
 MIME-Version: 1.0
-Received: by 10.42.96.131 with SMTP id j3mr1209476icn.191.1307743786810; Fri,
-	10 Jun 2011 15:09:46 -0700 (PDT)
+Received: by 10.42.132.129 with SMTP id d1mr2654972ict.526.1307743861026; Fri,
+	10 Jun 2011 15:11:01 -0700 (PDT)
 Sender: jefro.net@gmail.com
-Received: by 10.42.217.71 with HTTP; Fri, 10 Jun 2011 15:09:46 -0700 (PDT)
-Date: Fri, 10 Jun 2011 15:09:46 -0700
-X-Google-Sender-Auth: wv4HvWp7_bzcZWNFj-c01ntbbpg
-Message-ID: <BANLkTinUZuZ8tN+4owRWU8Kb9fdn4CYSmA@mail.gmail.com>
+Received: by 10.42.217.71 with HTTP; Fri, 10 Jun 2011 15:11:01 -0700 (PDT)
+Date: Fri, 10 Jun 2011 15:11:01 -0700
+X-Google-Sender-Auth: AjjzfjwXFjqC5G8fJBZ3mVOONUs
+Message-ID: <BANLkTikKfWjz8ExK=hvW4yejEJGL5GaWkw@mail.gmail.com>
 From: Jeff Osier-Mixon <jefro@jefro.net>
 To: openembedded-core <openembedded-core@lists.openembedded.org>, 
 	openembedded-devel@lists.openembedded.org, tsc <tsc@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: OE-TSC minutes 26-May-2011
+Subject: OE-TSC minutes 02-Jun-2011
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,338 +43,424 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jun 2011 22:13:11 -0000
+X-List-Received-Date: Fri, 10 Jun 2011 22:14:24 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-OE-TSC minutes 26-May-2011
+OE-TSC minutes 02-Jun-2011
 
-Attending: Tom, Khem, Koen, Richard, Mark
+Attending: Koen, Khem, Richard, Tom, Mark (had to leave early)
 Apologies: Stefan
-Sitting in on drums: Jefro
+
+Agenda:
 
 01) Meeting chair
 
-Jefro
+RP
 
 02) Ask for topics
-RP - bitbake and override expansion
+
+infrastructure SIG
+
+mailinglist police
+--> RP to send email to yocto folks
+
+khem notes that oe-core ml does not enable patch attachments
+--> mailman needs to be patched (koen)
 
 03) Action items from last week:
 --> GNOME discussion to ml (all)
-hasn't happened yet
+still needs to happen
 
 --> release issues to ml, interest in 2011.06 (stefan)
-not yet? didn't see it, Tom will start discussion soon if it doesn't appear
-discussion here of bitbake, override expansion - take to ml
-
---> look at migrating bitbake mailing list (RP)
-done
 
 04) TSC structure, voting for members, etc.
-still waiting on board
-RP suggests a less formal IRC meeting weekly
-discussion of role of the TSC and this meeting - becoming a SIG?
-discussion of Yocto SIG vs. OE SIG
-continue discussion
+members elections should be done now and we're waiting on the result, then
+the TSC elections should happen
+--> discuss one member standing down next week, RP volunteers
 
 05) Status updates:
       - oe-core
-  meta-oe now has sytemd support
       - contrib guidelines
       - bsp guidelines
       - metadata layer splitting
       - infrastructure
-  Tom King working with Linux Foundation, Jefro helping
-
 
 Raw Transcript
 
-(12:58:11 PM) fray: ha
-(12:58:16 PM) Tartarus: Ha
-(12:58:31 PM) Jefro: I'm taking roll call with "ha"s
-(1:01:44 PM) koen: stefan sent his apologies iirc
-(1:01:53 PM) Jefro: ah, ok - thanks
-(1:02:06 PM) RP__: ha!
-(1:02:43 PM) Tartarus: 4 is a quorum yes?
-(1:03:06 PM) fray: ya
-(1:03:06 PM) Jefro: I believe so - do you guys want to wait a bit for khem?
-(1:03:31 PM) RP__: I'd suggest we start at 5 past
-(1:03:37 PM) Tartarus: As I said, I've gotta leave at half past for another
-meeting that came up this morning
-(1:03:46 PM) Tartarus: but sure, 2 min
-(1:03:49 PM) RP__: meantime we can decide on the chair
-(1:04:12 PM) Jefro: what do you guys think of appointing a chair for 1 month
-or so? not that this takes up a large amount of time, but still
-(1:04:24 PM) RP__: Jefro: I'm indifferent
-(1:04:34 PM) ***RP__ volunteers if nobody else does
-(1:04:39 PM) Jefro: RP__ did it last time
-(1:04:48 PM) ***RP__ did do it last week but doesn't really mind
-(1:04:55 PM) Jefro: I can take the duty if no one minds a non-voting member
-(1:05:11 PM) ***RP__ doesn't object
-(1:05:17 PM) Tartarus: same
-(1:05:24 PM) Jefro: ok
-(1:05:47 PM) Jefro: then as chair I will move on to #2 and ask for any
-topics that didn't go out in last email
-(1:06:04 PM) Jefro: http://pastebin.com/JADncdCV
-(1:06:22 PM) Tartarus: nothing from me
-(1:06:36 PM) Jefro: fray?
-(1:06:40 PM) fray: yes, here
-(1:06:44 PM) fray: sorry.. got interupted
-(1:06:44 PM) Jefro: any new topics?
-(1:06:51 PM) RP__: I don't have anything to add
-(1:06:55 PM) fray: no i didn't see anything from what you sent out
-(1:06:59 PM) RP__: ah, maybe one thing
-(1:06:59 PM) Jefro: ok
-(1:07:06 PM) RP__: bitbake and override expansion
-(1:07:15 PM) Jefro: added.  anything from koen?
-(1:07:25 PM) koen: not really
-(1:07:32 PM) Jefro: cool
-(1:07:38 PM) Jefro: that "effective meeting" stuff actually works
-(1:07:51 PM) Jefro: moving on to #3, action items - GNOME discussion to
-mailing list, did that happen?
-(1:08:19 PM) RP__: not yet
-(1:09:05 PM) Jefro: ok.  stefan was to discuss interest in a 2011.06 release
-on the ml, did that happen?
-(1:09:13 PM) ***RP__ doesn't know
-(1:09:17 PM) Jefro: I didn't see it
-(1:09:24 PM) ***RP__ did migrate the bitbake mailing list
-(1:09:44 PM) Jefro: very cool
-(1:09:56 PM) Jefro: do you want to now launch into discussing bitbake and
-override expansion?
-(1:10:14 PM) Tartarus: Real quick
-(1:10:32 PM) Tartarus: 2011.06 or so is something we have talked about doing
-before, but If it doesn't pop up on the ML soon
-(1:10:36 PM) Tartarus: I'll try and start it
-(1:10:47 PM) RP__: Tartarus: I think the feeling last week was there might
-not be a need
-(1:10:53 PM) Tartarus: OK
-(1:10:56 PM) RP__: Tartarus: but needs public discussion
-(1:10:57 PM) Tartarus: I also need to read the minutes
-(1:11:10 PM) ***Tartarus is still in un-bury mode
-(1:11:12 PM) RP__: re: the override expansion, I just wanted to highlight
-the email on the oe-core list
-(1:11:15 PM) koen: .03 is working well and time is better spent on oe-core
-(1:11:28 PM) RP__: "[OE-core] RDEPENDS_${PN} and virtclass-native"
-(1:11:35 PM) fray: ya.. if there is a desire for .06, it can/should be
-done.. but right now I see everything around oe-core and .03
-(1:11:36 PM) ***RP__ agrees with koen
-(1:11:56 PM) Tartarus: AI, I need to read the minutes of last week ;)
-(1:11:58 PM) RP__: fwiw Yocto finds 6 month cycles to be better than 3 month
-ones
-(1:12:13 PM) RP__: still too much to get done in 6 month ones
-(1:12:30 PM) ***Jefro remembers 3-month release cycles at Cygnus back in
-early days, with a shudder
-(1:12:32 PM) koen: the idea was to do lightweight releases
-(1:12:48 PM) ***RP__ knows, I was just commenting
-(1:12:58 PM) RP__: DId anyone read that thread I mentioned on the oe-core
-list?
-(1:13:09 PM) koen: I did
-(1:13:26 PM) koen: and it went woosh over my head
-(1:13:31 PM) RP__: The reason I ask is that we have some inconsistencies in
-what bitbake is doing and they hurt us and are likely going to stop us
-cleaning up native.bbclass
-(1:13:47 PM) RP__: but if we change things there are backwards compatibility
-issies
-(1:13:49 PM) Tartarus: I can imagine what's in it, i'll try and read it
-before the weekend
-(1:14:04 PM) RP__: summary, each time you run d.update_data() the data store
-changes
-(1:14:18 PM) RP__: when we expand overrides, we leave the original variable
-in place
-(1:14:35 PM) koen: RP__: we're moving override order around anyway, so
-things have to get vetted anyway
-(1:14:38 PM) RP__: I know Chris has run into this before, tried changing it
-to a rename and the world ended
-(1:14:54 PM) fray: it makes me wonder if we should be using latest bitbake +
-.03 release..
-(1:15:10 PM) RP__: koen: backwards compatibility with oe-dev is my big worry
-(1:15:25 PM) RP__: options could include two code paths and a flag to switch
-between the,
-(1:15:28 PM) RP__: them
-(1:15:36 PM) Tartarus: At some point we will need to pause the old repo,
-imho
-(1:15:47 PM) Tartarus: So maybe it's time for a 1.14.0/1.15.0
-(1:15:54 PM) RP__: bitbake is meant to have a stable api
-(1:15:55 PM) Tartarus: and 1.14.x is the EOL for old oe-dev
-(1:16:30 PM) RP__: anyhow, I wanted to hightlight to people there is an
-issue looming on the horizon
-(1:16:48 PM) RP__: if I need to explain the issue more I can do so but
-probably best on the mailing list
-(1:17:02 PM) Tartarus: k
-(1:17:23 PM) khem [~khem@99-57-141-118.lightspeed.sntcca.sbcglobal.net]
-entered the room.
-(1:17:23 PM) mode (+v khem) by ChanServ
-(1:17:31 PM) RP__: fwiw, the code in native.bbclass is horrible and shoudn't
-be needed
-(1:17:33 PM) RP__: hi khem
-(1:17:39 PM) khem: hi
-(1:17:47 PM) RP__: khem: we only have Tartarus for another 12 mins
-(1:17:55 PM) khem: I am having connectivity problems
-(1:17:55 PM) RP__: khem: so we've moving fast and have started
-(1:18:00 PM) khem: sure
-(1:18:15 PM) RP__: Jefro: time for 04?
-(1:18:18 PM) Jefro: yes
-(1:18:24 PM) RP__: khem: http://pastebin.com/JADncdCV
-(1:18:30 PM) khem: thx
-(1:18:37 PM) RP__: Jefro: perhaps you could explain what this means? :)
-(1:19:05 PM) Jefro: first, I don't see any action items for the bitbake
-discussion - anything
-(1:19:18 PM) RP__: Jefro: people to read the thread
-(1:19:18 PM) Jefro: continue on mailing list?
-(1:19:24 PM) RP__: Jefro: yes
-(1:19:26 PM) Jefro: ok, noted
-(1:19:54 PM) Jefro: for 04), there was discussion for the last two weeks on
-TSC structure, whether it would be an interest group or a hands-on group in
-the future
-(1:20:08 PM) Jefro: I didn't see a final decision on that
-(1:20:16 PM) koen: are we still waiting for the board to call for elections?
-(1:20:33 PM) RP__: koen: memebership elections then there will be tsc vote
-(1:20:37 PM) khem: yes i think
-(1:20:41 PM) koen: iirc stefan was asking about election ordering as well
-(1:20:58 PM) RP__: the thing that seemed to come out of the discussions was
-we could do with a time when interested parties get together on public irc
-and talk about issues
-(1:21:15 PM) Jefro: I believe RP was going to contact the board to ask if
-they were planning to call for elections
-(1:21:28 PM) RP__: Jefro: I did and the response was as above
-(1:21:42 PM) Jefro: dang, all you guys type faster than me today
-(1:21:45 PM) RP__: Order was clearly stated in the minutes of one of the
-early meetings
-(1:21:56 PM) ***RP__ spends all day typing :/
-(1:22:40 PM) Jefro: ok - membership elections won't happen until October
-IIRC, so punt this topic until then?
-(1:22:43 PM) khem: yes I think it was starting with me
-(1:22:48 PM) koen: the order was stated, but do we need to follow it?
-(1:22:48 PM) RP__: Does anyone object to having a convention of slightly
-less formal and more public irc meeting once a week?
-(1:22:59 PM) fray: ya.. we're going to have to leave it to the board.. there
-is nothing we can do..
-(1:23:02 PM) koen: e.g. if someone really wants to give his seat
-(1:23:03 PM) RP__: Jefro: no, membership vote is happening *now*
-(1:23:04 PM) fray: (other then resign.. but that won't fix it)
-(1:23:24 PM) fray: ahh ok
-(1:23:31 PM) khem: RP__: what is this meeting about going to be
-(1:23:34 PM) RP__: koen: if someone wants to give up their seat and
-volunteer that is fine
-(1:23:34 PM) Jefro: RP__ ah, I see
-(1:23:47 PM) khem: RP__: are we going to convert this meeting to the one you
-propose
-(1:23:57 PM) RP__: khem: I'm raising that question
-(1:24:15 PM) khem: sure idea sounds good to me
-(1:24:17 PM) RP__: It would be more of an OE-Core interest group meeting
-(1:24:50 PM) khem: yeah that will put it in better context
-(1:25:09 PM) RP__: but I think some convention of a specific time would
-perhaps be helpful and we would likely get wider input which I think could
-be good
-(1:25:14 PM) Jefro: are there things this TSC does other than oe-core that
-should be maintained?
-(1:25:32 PM) khem: RP__: timing wise it could be a challange
-(1:25:33 PM) RP__: The TSC would then meet less frequently and act as the
-ultimate tie breaker as original designed
-(1:25:50 PM) RP__: TSC is still needed, just more in its original role
-(1:25:56 PM) koen: RP__: the original design also said the tsc is proactive
-(1:26:05 PM) RP__: khem: yes, that will be tricky
-(1:26:08 PM) fray: I see the TSC still doing policy, guidelines, etc..
-(1:26:12 PM) RP__: koen: well, it still can be :)
-(1:26:12 PM) khem: RP__: I still think meeting TSC folks often keeps some
-directions flowing
-(1:26:15 PM) khem: into  project
-(1:26:45 PM) RP__: in some ways these things should happen on the mailing
-lists more though
-(1:26:58 PM) Jefro: RP__'s suggestion sounds reasonable from a community
-perspective. I'
-(1:27:07 PM) Jefro: m not sure anyone reads the minutes from this meeting.
-(1:27:13 PM) khem: I am ok with SIG meeting and taking TSC meetings as you
-suggest
-(1:27:40 PM) koen: keep in mind that a SIG has no officia; power
-(1:27:55 PM) khem: right
-(1:28:00 PM) koen: it shouldn't matter much in oe-core, but still
-(1:28:07 PM) khem: so TSC folks have to bring a different hat
-(1:28:11 PM) Tartarus: My 2 cents before I have to run off
-(1:28:29 PM) RP__: koen: I think as maintainers and major contributors,
-people do hold power
-(1:28:31 PM) Tartarus: I like the direction we get in having a group of
-people that are interested meet and discuss things frequently and keep stuff
-on track
-(1:28:50 PM) Tartarus: But I suspect we'll have some complaints about that
-being what the ML is for, which is also true
-(1:29:02 PM) Tartarus: But if we don't have the meetings take too long, that
-should be fine
-(1:29:04 PM) RP__: Tartarus: Mailing lists have a place, so do specific
-meetings
-(1:29:17 PM) RP__: both provide a different kind of focus
-(1:29:18 PM) Tartarus: a weekly chance to poke RP or myself and so on about
-something to make sure they don't forget is good
-(1:29:21 PM) Jefro: Tartarus - do you think the complaints might be
-alleviated if the logs from online meetings are posted there?
-(1:29:24 PM) Tartarus: We've all had stuff slip past before
-(1:29:27 PM) khem: RP__: first I think a call to form SIG should be done
-(1:30:06 PM) Tartarus left the room.
-(1:31:15 PM) RP__: ok, so does someone want to make the call for the IG?
-(1:31:56 PM) RP__: khem: sounds good to me
-(1:31:59 PM) Jefro: and Tom's comments seemed positive to me, with some
-reservations
-(1:32:06 PM) Jefro: any nays?
-(1:32:13 PM) RP__: We can at least try this, see how it works out
-(1:32:36 PM) Jefro: koen's opinion is the only one missing
-(1:32:55 PM) koen: I have no strong opinion on it
-(1:32:56 PM) fray: I support the creation of an IG
-(1:33:18 PM) koen: but if we go with an IG, should we try to make it an
-official yocto IG?
-(1:33:27 PM) koen: or am I a fw org charts behind?
-(1:33:38 PM) khem: I dont think IG need's TSCs blessing anyone can start and
-IG. am I right >
-(1:33:58 PM) RP__: khem: I think the TSC can comment that they support the
-idea
-(1:34:08 PM) RP__: but anyone can attempt to start one
-(1:34:20 PM) Jefro: my impression was that this is an OE interest group, not
-a Yocto interest group, but I could be mistaken. does OE have a process for
-starting an IG?
-(1:34:25 PM) koen: oh, before I forget: meta-oe now has sytemd support
-(1:34:38 PM) khem: koen: :) cool
-(1:34:41 PM) RP__: koen: We could make it a Yocto IG if we wanted. Its an
-interesting point. Depends how OE and Yocto are going to position themselves
-relative to each other
-(1:34:57 PM) RP__: Jefro: no policy, we get to make that up ;-)
-(1:35:13 PM) RP__: I'd suggest it doesn't need a formal policy, it would
-just be a meeting convention
-(1:35:18 PM) Jefro: RP__ lol - I'm asking because if it is a Yocto list, I
-have an action item :)
-(1:35:29 PM) RP__: Jefro: true :)
-(1:36:38 PM) koen: I wonder if we get an actual discussion for the new tsc
-votes
-(1:36:43 PM) khem: btw, I had one item that I wanted to bring up was some
-funds donation to osuosl that Tom K brought up
-(1:36:59 PM) koen: khem: did we get the new gbit switch?
-(1:37:24 PM) Jefro: This is an interesting border case, as oe-core is the
-one component that is fully in both OE and Yocto
-(1:37:25 PM) khem: koen: Tom did not get funds I think its still under
-decision
-(1:37:49 PM) Jefro: I suggest staying on focus with the interest group until
-done, then moving on to infrrastructure (and I have a short update on that)
-(1:38:09 PM) khem: Jefro: ok. I thought we were done with agenda
-(1:38:23 PM) RP__: khem: I thought Tom was getting some funding?
-(1:38:40 PM) khem: RP__: he is waiting on OE e.v.
-(1:38:58 PM) Jefro: regarding infrastructure - I have been working with Tom
-K and Linux Foundation
-(1:39:15 PM) Jefro: new servers are on the way, being donated through LF but
-the process takes a while
-(1:39:17 PM) khem: Jefro: ok
-(1:39:27 PM) fray: Something just came up.. I've got to leave.. sorry..
-(1:39:34 PM) Jefro: fray seeya
-(1:39:47 PM) RP__: fray: happens, ttfn :/
-(1:40:09 PM) Jefro: LF is now in touch with Tom K and they are coordinating
-an eventual trip to OSU for Tom to set things up after they arrive
-(1:40:26 PM) RP__: That is what I heard too :)
-(1:40:32 PM) Jefro: My assumption is that 1/2 travel expenses are included,
-not sure about the switch.
-(1:40:46 PM) Jefro: I'll be interested to hear how Tom does with pinging the
-community.
-(1:41:47 PM) Jefro: that's all I know about infrastructure :) didn't mean to
-grind anything to a halt.
-(1:46:23 PM) Jefro: officially I think this meeting is over, if anyone else
-needs to leave
-
+(12:59:30 PM) Tartarus: roll call?
+(12:59:34 PM) Jefro: is it just me, or does this channel now log activity
+for a day or so?
+(12:59:35 PM) koen: aye
+(12:59:59 PM) Jefro: I see fray khem koen RP__ Tartarus - a quorum.  is
+stefan still out?
+(1:00:13 PM) fray: I'm here this minute, but I have to leave...
+(1:00:32 PM) fray: I'll stick around as long as I can...
+(1:01:07 PM) khem: I am here
+(1:01:16 PM) Jefro: fray ok - I think that still leaves 4
+(1:01:29 PM) ***RP__ is here
+(1:01:55 PM) Tartarus: yeah, at least 4, did stefan say anything before
+hand??
+(1:02:27 PM) Jefro: not to me
+(1:02:46 PM) ***RP__ doesn't remember anything
+(1:02:55 PM) Tartarus: Give him 'till 5 past?
+(1:03:19 PM) Tartarus: do we have an agenda up yet?
+(1:03:21 PM) Jefro: ok.  fray, any burning issues you need to discuss before
+you go?
+(1:03:26 PM) Jefro: Tartarus I was just building one
+(1:03:51 PM) ***Jefro 's week has been plagued with hardware issues, both
+computer and human
+(1:03:51 PM) fray: Just that I havn't gotten to the final rev of the commit
+guidelines yet..  I won't be able to get to that until the morning
+(1:03:59 PM) fray: (but I finally cleared everything else off my schedule)
+(1:04:10 PM) RP__: fray: lucky you :)
+(1:04:17 PM) Jefro: fray I was going to get together with you for some
+guidelines of some kind...
+(1:04:56 PM) fray: yes we still need to do that..
+(1:05:08 PM) fray: Most of my day tomorrow is open, except around noon..
+(well as of right now)
+(1:05:23 PM) Jefro: fray cool, I'll try to contact you relatively early
+given the time dif
+(1:05:51 PM) Jefro: anyone have a problem following the same agenda as last
+time?
+(1:05:56 PM) Jefro: meeting chair is #1
+(1:06:37 PM) fray: ok, I've got to go.. sorry.
+(1:06:47 PM) Jefro: fray seeya
+(1:06:48 PM) Tartarus: Jefro, didn't we talk about letting you chair last
+week?
+(1:06:51 PM) Tartarus: or am I crazy?
+(1:06:54 PM) koen: didn't we volunteer Jefro ?
+(1:07:00 PM) ***RP__ volunteers this week
+(1:07:02 PM) Jefro: Tartarus you may be crazy.. :)  I thought that was for
+last week
+(1:07:08 PM) Jefro: http://pastebin.com/JADncdCV is last week's agenda.  any
+modifications or additions?
+(1:07:08 PM) RP__: jefro did last week I think
+(1:07:35 PM) koen: tom k ask for an hw IG
+(1:08:07 PM) RP__: ok, I'll chair
+(1:08:11 PM) Tartarus: s/hw/infrastructure/
+(1:08:17 PM) RP__: agenda looks good apart from listing things we've closed
+on
+(1:08:30 PM) ***Jefro notes RP__  as chair
+(1:08:47 PM) RP__: Koen wants to add the hw IG to the agenda
+(1:08:53 PM) RP__: anything else for 03?
+(1:08:56 PM) RP__: we 02?
+(1:08:59 PM) RP__: er, 02
+(1:09:26 PM) Tartarus: not here
+(1:09:33 PM) koen: yeah, mailinglist police
+(1:09:44 PM) koen: e.g. stop people from posting oe-core stuff to poky only
+(1:10:00 PM) RP__: koen: Yocto folks are working on that
+(1:10:37 PM) ***Jefro notes infrastructure SIG discussion topic
+(1:10:37 PM) RP__: koen: Most have got the message but those who haven't are
+getting reminded
+(1:10:47 PM) khem: and sometimes cross posting too much
+(1:10:57 PM) khem: patches in particular
+(1:11:00 PM) RP__: khem: emails have been sent about that too
+(1:11:20 PM) Jefro: does that cover the mailinglist police topic?
+(1:11:35 PM) RP__: I will sent out a reminder to the yocto people. I think
+that covers it unless anyone has anything else to add?
+(1:11:43 PM) khem: oe-core does not allow attaching patches
+(1:11:47 PM) khem: is that intentional
+(1:11:52 PM) RP__: khem: no
+(1:12:18 PM) RP__: koen: any idea why its doing that (as our mailman admin
+;-)) ?
+(1:12:21 PM) khem: so if I compose email and add patch as attachment it
+strips out the patch and sends the bare message
+(1:12:33 PM) khem: more than 1 person has seen this problem
+(1:12:39 PM) koen: either the mime type is messed up or the attachment is
+too large
+(1:12:55 PM) khem: no patches are 1-2 liners
+(1:13:13 PM) khem: and patch can be generated by git diff
+(1:13:21 PM) khem: it strips it
+(1:13:44 PM) koen: the cases I've seen is where the mime type is messed up
+(1:14:17 PM) koen: since I'm not fluent in mailman, can't we just tell
+people to not attach patches?
+(1:14:18 PM) khem: for me same mutt sends it fine to oe-devel same is
+stripped by oe-core AFAICT
+(1:15:08 PM) khem: koen: http://support.tigertech.net/mailman-attachments
+(1:16:44 PM) Jefro: sorry to interrupt - is this an education issue ("send
+patches to patches list instead of oe-core") or a mailman issue ("enable
+oe-core ml to handle patches") ?
+(1:17:00 PM) RP__: I think we need to fix mailman
+(1:17:05 PM) RP__: there is likely a config error
+(1:17:17 PM) RP__: koen: If you can't find it, let me know the password and
+I'll take a look
+(1:17:27 PM) RP__: So, 03)
+(1:17:39 PM) RP__: GNOME discussion still needs to happen on the mailing
+list IMO
+(1:17:51 PM) Tartarus: Agree
+(1:18:05 PM) Tartarus: Anyone in the room now that needs a poke to reply or
+start a discussion?
+(1:18:16 PM) Tartarus: If so, consider yourself poked
+(1:18:45 PM) Jefro: Stefan had the action item 2 weeks ago, last week
+Tartarus said he would do it if it didn't happen
+(1:18:56 PM) Tartarus: That was re 2011.06
+(1:18:58 PM) Tartarus: stefan started
+(1:19:02 PM) RP__: ok, cool
+(1:19:04 PM) Jefro: ah - sorry
+(1:19:08 PM) RP__: and the bitbake list migrated
+(1:19:11 PM) Tartarus: I read, and haven't said anything since no one else
+has said yes, we need it
+(1:19:25 PM) Tartarus: So, lets see
+(1:19:26 PM) Jefro: no one has volunteered to start a GNOME discussion yet
+(1:19:32 PM) RP__: ok, I think we can consider that issue closed then
+(1:19:37 PM) Tartarus: That was the 30th
+(1:19:41 PM) Tartarus: give folks the rest of the week
+(1:19:48 PM) Jefro: RP__ closed bitbake issue
+(1:19:50 PM) Tartarus: And if no one pops up saying no, we must have another
+oe.dev release
+(1:19:55 PM) Tartarus: close it
+(1:20:02 PM) RP__: agreed
+(1:20:09 PM) Tartarus: koen, don't you have a stake in GNOME stuff?
+(1:20:15 PM) Jefro: Tartarus sounds good - decide next week re 2011.06?
+(1:20:17 PM) koen: yes
+(1:20:27 PM) koen: I get hassled at work now to add gnome stuff
+(1:20:29 PM) Tartarus: koen: Can you start the GNOME discussion off?
+(1:20:36 PM) koen: but I get hassled more for other things
+(1:20:40 PM) Tartarus: Ha
+(1:20:58 PM) RP__: personally, I think a core in oe-core makes sense and all
+the other bits in a later component of meta-oe or a separate repo, I don't
+mind which
+(1:21:09 PM) RP__: (for gnome)
+(1:21:16 PM) RP__: but I will say as much on the mailing list
+(1:21:38 PM) RP__: For 04, the members elections should be done now and
+we're waiting on the result, then the TSC elections should happen
+(1:21:59 PM) RP__: Last week we talked about someone volunteering to step
+out the TSC. Did we close on that?
+(1:22:21 PM) Jefro: no closure that I saw
+(1:22:22 PM) ***Jefro sent out the minutes about 1/2 hr ago
+(1:22:53 PM) RP__: Ok, let me volunteer to stand down at the first election
+(1:23:02 PM) Jefro: stefan mentioned something about it two or three weeks
+ago as I recall
+(1:23:23 PM) RP__: stefan isn't here so that doesn't help us
+(1:23:49 PM) Jefro: true - fray is gone as well. I suggest deferring that
+discussion to next week, and requiring all TSC members to attend.
+(1:23:52 PM) Tartarus: RP__, I think none of us want you to stand down,
+given your position in oe-core
+(1:24:01 PM) ***Jefro thought RP was joking
+(1:24:13 PM) RP__: Tartarus: doesn't matter really, I have to stand for
+election at some point
+(1:24:25 PM) koen: we can just reelect him
+(1:24:29 PM) RP__: Jefro: I'm serious
+(1:24:46 PM) ***RP__ hopes he might get reelected, if I don't I stop having
+to attend these meetings
+(1:24:52 PM) RP__: :)
+(1:25:48 PM) Tartarus: So, in sum, we need a TSC meeting where everyone
+attends, asap
+(1:25:57 PM) RP__: I don't think it matters
+(1:25:57 PM) Tartarus: Or a off-the-ML thread?
+(1:26:09 PM) RP__: I can go first and then we can worry about the rest at a
+later meeting
+(1:26:19 PM) Tartarus: Er
+(1:26:30 PM) Tartarus: isn't the problem we have more members than the
+normal charter allows right now?
+(1:26:39 PM) Tartarus: and we have (or had) a schedule for each of us
+standing for election
+(1:26:51 PM) Tartarus: But the problem is that once that happens, unless
+someone looses, we'll have too many folks
+(1:27:04 PM) Tartarus: And either need to change the official charter, or
+have someone volunteer not to be elected
+(1:27:14 PM) RP__: Well, eventually we'll be left with no seat for someone
+(1:27:35 PM) Tartarus: Right, which is why we're seeing if someone wants to
+step down, yes?
+(1:27:51 PM) RP__: Its not up to us
+(1:27:58 PM) RP__: There will be 5 elections. What I'm saying is that I'll
+volunteer my seat as the first one to be elected
+(1:28:17 PM) RP__: The board will call for candidates, I will stand, I don't
+know who else will and we see who gets elected
+(1:28:19 PM) Jefro: that is different indeed from volunteering to stand down
+:)
+(1:28:44 PM) Tartarus: Well, I'm confused now
+(1:28:51 PM) Tartarus: Since that wasn't the last plan
+(1:28:57 PM) khem: We were going alphabetically
+(1:29:02 PM) Tartarus: Or are we putting all seats up at once?
+(1:29:03 PM) RP__: People didn't seem happy with the last plan
+(1:29:19 PM) ***koen has no problems with RPs plan
+(1:29:57 PM) RP__: There will be 5 elections, one at a time, spread over a
+period of time
+(1:30:01 PM) khem: so how  does it go now ? every seat gets elected one by
+one ?
+(1:30:07 PM) khem: ok
+(1:30:09 PM) Tartarus: So, i think I get it
+(1:30:11 PM) RP__: For each one there will be a call for candidates
+(1:30:16 PM) Jefro: so.. electing seats rather than individuals
+(1:30:17 PM) Tartarus: It sounds to me like a wording change over the last
+plan
+(1:30:22 PM) khem: ok
+(1:30:34 PM) Tartarus: So, whichever
+(1:31:01 PM) RP__: There are 5 seats and for each of which there is an
+election
+(1:31:34 PM) RP__: Separate call for candidates and then people vote
+(1:31:46 PM) khem: ok sounds a good plan
+(1:32:08 PM) Jefro: RP__ who gets to organize and manage the vote?  is that
+the board's responsibility?
+(1:32:15 PM) RP__: Jefro: yes
+(1:32:28 PM) RP__: Jefro: this is all documented procedure for the e.V.
+(1:32:34 PM) Jefro: got it
+(1:33:32 PM) RP__: So we wait for the board, we as a TSC just need to work
+out how six become five
+(1:34:05 PM) RP__: After one of the elections some who has given up their
+seat will not be re-elected
+(1:34:27 PM) RP__: Everyone happy?
+(1:34:50 PM) ***RP__ takes that as a yes
+(1:34:56 PM) RP__: 05) status updates
+(1:35:16 PM) RP__: oe-core seems to be gaining momentum and certainly has
+some healthy patch turnover
+(1:35:21 PM) koen: I will manage the betting pool when the usual suspect
+gets confused about voting again
+(1:35:36 PM) RP__: yes there have been odd issues but I think we're dealing
+with them ok
+(1:35:42 PM) RP__: Does anyone have any comments on oe-core?
+(1:35:47 PM) Tartarus: Yeah, I do
+(1:36:00 PM) Tartarus: Do the autobuilders folks use currently have
+no-distro configs in them?
+(1:36:11 PM) Tartarus: I know we have poky, and I'm almost sure we have
+angstrom and probably shr
+(1:36:14 PM) RP__: Tartarus: Not the yocto ones
+(1:36:32 PM) RP__: Tartarus: We're basically waiting on hardware atm
+(1:36:37 PM) Tartarus: Would that be something we can put on the yocto ones?
+ Or does OE need to come up with the HW for that?
+(1:37:00 PM) Tartarus: RP__: can we at least add a single config to what's
+going on now in the yocto one?
+(1:37:07 PM) RP__: Tartarus: We have plans in place to be able to take extra
+stuff but its six weeks off at least
+(1:37:33 PM) RP__: Tartarus: I can put in the request but I know I'll get
+screamed at
+(1:37:53 PM) RP__: Tartarus: let me see what I can do
+(1:37:53 PM) Tartarus: RP__: I think we really must have it, since that's
+the default oe-core setting
+(1:37:56 PM) Tartarus: thanks
+(1:38:23 PM) koen: tom k mentioned he wanted to to a pure oe-core
+autobuilder
+(1:38:24 PM) RP__: Tartarus: keep in mind that we did slim the poky shim
+layer down to the bare minimal
+(1:38:28 PM) koen: but he needs hw for that as well
+(1:38:39 PM) RP__: Yes, I think Tom will ultimately do this
+(1:38:42 PM) Tartarus: RP__: yes, but still, since oe-core is supposed to
+work on its own
+(1:38:48 PM) RP__: but he's waiting for the same source of hardware as Yocto
+(1:38:52 PM) Tartarus: We really really should have at least one autobuilder
+confirming that's not dying
+(1:38:54 PM) Jefro: RP__ not quite
+(1:38:56 PM) RP__: Tartarus: I know it is
+(1:39:13 PM) RP__: Jefro: In what way is this different?
+(1:39:17 PM) Jefro: OE hardware is being donated by LF, who is waiting for
+the donator to get back. there is progress in this way.
+(1:39:26 PM) Jefro: Yocto's hardware is coming from a different source.
+(1:39:46 PM) khem: RP__: I still think we need to work out a way so there is
+no need for gcc 4.6 in meta-oe
+(1:39:49 PM) RP__: Jefro: Lets talk offline about that
+(1:39:53 PM) Jefro: RP__ yup
+(1:39:55 PM) RP__: Jefro: You have partial info
+(1:40:42 PM) RP__: khem: What is the current problem there?
+(1:41:05 PM) RP__: khem: Is it just the linaro patches?
+(1:41:11 PM) khem: RP__: yes
+(1:41:26 PM) khem: RP__: I was think if we could just bbappend them
+(1:41:43 PM) koen: khem: what I did for 4.5 was to only have the .bbs
+(1:41:45 PM) RP__: khem: That would work too
+(1:41:48 PM) koen: khem: the logic is in the .incs
+(1:41:56 PM) khem: yeah
+(1:42:13 PM) RP__: Lets take that to the mailing list
+(1:42:23 PM) RP__: Anything else on oe-core?
+(1:42:42 PM) khem: release
+(1:43:10 PM) khem: I think we need some sort of release plan for oe-core
+(1:43:45 PM) RP__: My current thinking is to time something with yocto's
+1.1?
+(1:44:04 PM) Jefro: I remembered there being a plan to release on .03 and
+.09
+(1:44:14 PM) khem: I think half yearly release would be optimum
+(1:44:23 PM) RP__: coming up to that point yocto will want to stabilise so
+that would benefit the oe-core release too
+(1:44:35 PM) koen: I talked with Martin and my impression is that the
+oe-core + meta-oe combo lacks too much to be usefull as a release
+(1:45:03 PM) khem: koen: lacks ? in what sense
+(1:45:05 PM) RP__: koen: what does it lack?
+(1:45:21 PM) koen: martin can't build his usual images with it
+(1:45:29 PM) koen: and I can't build my usual angstrom images with it
+(1:45:50 PM) RP__: wouldn't some of the layers release at the same time?
+(1:46:00 PM) khem: koen: so thats something we can roll into a release plan
+ may be for oe
+(1:46:02 PM) RP__: or release a version at some point which would work with
+the releases oe-core?
+(1:46:27 PM) koen: RP__: that's my point, an oe-core only release would not
+buy "us" much
+(1:46:39 PM) RP__: koen: you miss my point
+(1:46:51 PM) khem: koen: so you mean it should be distro releases ?
+(1:47:17 PM) RP__: koen: ideally it would be good if angstrom could release
+at some point based on the oe-core release for the oe-core layer
+(1:47:27 PM) khem: I still think folks can pick up  a oe-core release and
+build their software around it
+(1:47:54 PM) koen: RP__: I don't have enough working to call something a
+release with a straight face
+(1:48:02 PM) koen: RP__: and I think neither does martin
+(1:48:03 PM) RP__: koen: not yet
+(1:48:13 PM) khem: with git submodules its easy since it locks the
+submodules by commit ids
+(1:48:17 PM) RP__: koen: you don't think you'll be there in 3 months?
+(1:48:58 PM) koen: RP__: realistically, no
+(1:49:12 PM) RP__: koen: which areas are the concerns in?
+(1:49:19 PM) ***RP__ is worried by this
+(1:49:31 PM) khem: I think we need more recipes into meta-oe
+(1:49:32 PM) koen: the big one in terms of recipes is a complete gnome 2.32
+stack
+(1:49:54 PM) koen: the big one in terms of base system is work out why
+things like console setup are screwed
+(1:49:55 PM) RP__: ok, so its the meta-oe issue, not something about oe-core
+itself
+(1:50:11 PM) khem: I think oe-core plays into it as well
+(1:50:17 PM) RP__: It would be good to have a working list of things with
+oe-core that are problems
+(1:50:17 PM) khem: indirectly
+(1:50:23 PM) RP__: those I can try and help with directly
+(1:50:37 PM) RP__: meta-oe does need community help and may take a little
+longer
+(1:50:57 PM) khem: a release would bring over some devs
+(1:51:28 PM) RP__: I think oe-core needs to release. Whether meta-oe does or
+not at the 09 point I don't know
+(1:51:30 PM) koen: RP__: I'm not against an oe-core release, but by the
+looks of it only oe-core would release
+(1:51:41 PM) RP__: koen: we have to start somewhere
+(1:52:25 PM) khem: may be initially only yocto will be based of release and
+slowly other distros will fall in as we go
+(1:52:57 PM) khem: angstrom clearly has wide coverage and lot of different
+images to consider
+(1:52:57 PM) koen: RP__: that's very true, but we have to be carefull in the
+messaging
+(1:53:18 PM) RP__: koen: no argument from me
+(1:53:59 PM) khem: we can discuss it more next week
+(1:54:14 PM) koen: btw, 15 more members for the e.V.
+(1:54:35 PM) Jefro: koen is there a link?
+(1:54:41 PM) khem: good
+(1:54:51 PM) RP__: ok, we have 5 mins left
+(1:55:16 PM) RP__: I think if anyone has status updates on contrib
+guidelines, bsp guidelines metadata layer splitting
+(1:55:17 PM) khem: siteinfo in oe-core needs some makeover from oe.dev
+(1:55:18 PM) RP__: raise them now
+(1:55:21 PM) koen: Jefro: mail is underway
+(1:55:25 PM) RP__: remaining topic was infrastructure
+(1:55:28 PM) Jefro: koen cool
+(1:55:48 PM) RP__: I think Yocto setup an interest group for this
+(1:55:51 PM) Jefro: infrastructure we kind of covered earlier.  Tom has
+linked up with LF and things are progressing.
+(1:55:51 PM) koen: RP__: I raised the layer splitting internally at TI,
+people are going to try out the current angstrom setup and report back
+(1:56:06 PM) RP__: Can the OE and Yocto groups work together or is there a
+reason to keep them separate?
+(1:56:09 PM) Jefro: Yocto has a Yocto Infrastructure SIG, which Tom can join
+if he likes - maybe should
+(1:56:17 PM) Jefro: I talk with him a few times a week
+(1:56:55 PM) ***RP__ proposes Tom should join the Yocto group rather than
+form a separate one
+(1:57:09 PM) RP__: at least see if that can work
+(1:57:25 PM) Jefro: I think the orgs can definitely help each other out
+here. I'll take action item to talk with Tom.
+(1:57:29 PM) RP__: koen: sounds good, I'd be interested to know how that
+foes
+(1:57:32 PM) RP__: er, goes
+(1:57:46 PM) ***RP__ needs to put the light on as touch typing isn't working
+well
+(1:58:24 PM) RP__: Anything else anyone wants to talk about?>
+(1:58:29 PM) khem: not me
+(1:58:33 PM) Tartarus: not me
 
 -- 
 Jeff Osier-Mixon http://jefro.net/blog
