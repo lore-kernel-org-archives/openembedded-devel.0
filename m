@@ -1,33 +1,39 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1QVAUJ-0001W6-QJ
+	(envelope-from <raj.khem@gmail.com>) id 1QVB84-0002Vu-7f
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Jun 2011 00:47:35 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1QVAR5-0005N6-Gm from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Jun 2011 15:44:15 -0700
-Received: from SVR-ORW-FEM-03.mgc.mentorg.com ([147.34.97.39]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Fri, 10 Jun 2011 15:44:15 -0700
-Received: from [172.30.36.148] (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
-	(147.34.97.39) with Microsoft SMTP Server id 14.1.289.1;
-	Fri, 10 Jun 2011 15:44:14 -0700
-Message-ID: <4DF29E37.9020204@mentor.com>
-Date: Fri, 10 Jun 2011 15:44:07 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+	Sat, 11 Jun 2011 01:28:41 +0200
+Received: by pvc30 with SMTP id 30so1529719pvc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Jun 2011 16:25:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id
+	:mail-followup-to:mime-version:content-type:content-disposition
+	:user-agent; bh=ZFvbPCGk3MBdUQojCBS7JHzxKRmVzhY2LlLkR+BlxG0=;
+	b=aLotbCh0A3ZJIdL/uvNnherfyJwYtXNCTVGv6SQUd+G31gYthed3OcX/a8irgI2KjS
+	h4Q4NnKQpetUqZAE22ZpR+rE6iVatTPyMYlD03INdblGgqCmnX+ZMpbkF/8EFlorI3Ic
+	JLAUUMWUb04jeIyzM1DgfEukcC9YZp+fTDDDs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mail-followup-to:mime-version
+	:content-type:content-disposition:user-agent;
+	b=NynkgWphz1cqguZF53rDGo51yiqeF4E7ukJw93R2Neii2F37pZ5WSgvkHQDh7tHf6R
+	bZJwBUKv9U2Nr1TdE5P/P4/vpDRG+Bi/IcTEDw/I9fEmTM9wCGkXCveXUzLwM7fVo/c9
+	af3kBQztF3C09s3bGPB7giZYwr8fSv0f9XOOY=
+Received: by 10.68.38.133 with SMTP id g5mr1249956pbk.83.1307748317667;
+	Fri, 10 Jun 2011 16:25:17 -0700 (PDT)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id c5sm2681229pbj.9.2011.06.10.16.25.15
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 10 Jun 2011 16:25:16 -0700 (PDT)
+Date: Fri, 10 Jun 2011 16:24:55 -0700
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110610232455.GA20068@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1307713686-30844-1-git-send-email-gchiii@mtiemail.com>
-In-Reply-To: <1307713686-30844-1-git-send-email-gchiii@mtiemail.com>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 10 Jun 2011 22:44:15.0375 (UTC)
-	FILETIME=[ECE7C1F0:01CC27BF]
-Subject: Re: [2011.03-maintenance] fakeroot: Move from not fetchable 1.14.5	to 1.15.1
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: git remote prune is needed on oe github mirror
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,50 +47,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jun 2011 22:47:36 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 10 Jun 2011 23:28:42 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi
 
-On 06/10/2011 06:48 AM, George C. Huntington III wrote:
-> From: Florian Boor <florian.boor@kernelconcepts.de>
-> 
-> Fakeroot 1.14.5 was not fetchable any more. Updating to 1.15.1.
-> 
-> Test environment:
->     BB_VERSION        = "1.10.2"
->     METADATA_BRANCH   = "org.openembedded.dev"
->     TARGET_ARCH       = "arm"
->     TARGET_OS         = "linux-gnueabi"
->     MACHINE           = "mainstone"
->     DISTRO            = "minimal"
->     DISTRO_VERSION    = "dev-snapshot-20110504"
->     TARGET_FPU        = "soft"
-> 
-> Signed-off-by: Florian Boor <florian.boor@kernelconcepts.de>
+I see that oe-core when cloned from github still shows the 'maste'
+remote branch which has already been deleted in oe-core repo.
 
-For 2011.03-maintenance I'm going to NAK this.  A mirror setup is
-required as we aren't trying to keep up to date with the tzdata/tzcode
-mess and these are available via the angstrom mirror (and if needed
-could be put on the regular OE mirror).  Thanks for your interest in the
-stable branch, all the same!
+So we need to run 'git remote prune origin' periodically or somthing
+similar operation. It seems it does not get the removal information
+when the mirror is updated
 
-- -- 
-Tom Rini
-Mentor Graphics Corporation
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+Thanks
 
-iQEcBAEBAgAGBQJN8p4uAAoJEI4NMjfc3nJxBFQH/3V2UzwjerwjMX2fWcRfAyBC
-Gbm0uVhc81JmO1csGyXkVsm8iNURI0sNvq+bvOJ/ZKOgaFcITuTjWPhhM5rUYPC/
-bt2X8w6s996FISA0BewfTg3c+znf3ybfH+s5aecEyT81FpbiBeKnhiQ+suQHagOR
-f9Ev/DsWGko5PQYRXQNxcHXouw+tT+JSt6+0jSr2qZD1vEr8GC5iuwpjIAuC32ja
-0mKvNBhrk5mE1RTC7LozRIqJQbGl3GqDnyvm5I4AUGRsR9r5M6M5D2+6sAGv1JJH
-aamhmSXND5NfJgmrETQNXL5AAhDCfxy958s4SPRGmf+StAn8Sr15pqEaigJoGkY=
-=mMob
------END PGP SIGNATURE-----
+-- 
+-Khem
 
 
