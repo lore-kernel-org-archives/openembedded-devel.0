@@ -1,24 +1,20 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from rs69.luxsci.com ([64.49.254.154])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QUxh4-0006Ka-Dz for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Jun 2011 11:07:54 +0200
-Received: from f053035141.adsl.alicedsl.de ([78.53.35.141]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QUxek-0002jp-T1 for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Jun 2011 09:05:31 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gchiii@mtiemail.com>) id 1QV2Ct-0005Ui-Si
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 10 Jun 2011 15:57:04 +0200
+Received: from thing2.microtoolsinc.com
+	(adsl-76-255-12-150.dsl.mrdnct.sbcglobal.net [76.255.12.150])
+	(authenticated bits=0)
+	by rs69.luxsci.com (8.13.8/8.13.8) with ESMTP id p5ADm6wv017956
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
+	Fri, 10 Jun 2011 08:48:11 -0500
+From: "George C. Huntington III" <gchiii@mtiemail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4DF0A343.6040608@sirius-es.it>
-References: <1307541389-2401-1-git-send-email-matteo.facchinetti@sirius-es.it>
-	<1307551786.4193.25.camel@mattotaupa> <4DF0A343.6040608@sirius-es.it>
-Date: Fri, 10 Jun 2011 11:04:34 +0200
-Message-ID: <1307696674.4148.7.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [PATCH v2] wxbase_2.8.9: fix includepath for SDL dependency
+Date: Fri, 10 Jun 2011 09:48:06 -0400
+Message-Id: <1307713686-30844-1-git-send-email-gchiii@mtiemail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [2011.03-maintenance] fakeroot: Move from not fetchable 1.14.5 to 1.15.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,82 +28,150 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jun 2011 09:07:54 -0000
-X-Groupsio-MsgNum: 32609
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-dAgKjzKBwsNUzQOLb0nj"
+X-List-Received-Date: Fri, 10 Jun 2011 13:57:04 -0000
 
---=-dAgKjzKBwsNUzQOLb0nj
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Florian Boor <florian.boor@kernelconcepts.de>
 
-Am Donnerstag, den 09.06.2011, 12:41 +0200 schrieb Matteo Facchinetti:
-> On 06/08/2011 06:49 PM, Paul Menzel wrote:
-> > Am Mittwoch, den 08.06.2011, 15:56 +0200 schrieb Matteo Facchinetti:
-> >> From: Matteo Facchinetti<engineering@sirius-es.it>
-> >>
-> >> Compile task fail with error:
-> >> | CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/SDL
-> >> | cc1plus: internal compiler error: in add_path, at c-incpath.c:425
-> >>
-> >> Fix it forcing right path in configuration.
-> > It builds fine for me without this patch using `minimal` for `MACHINE =
-=3D
-> > "beagleboard"`. How can I reproduce your build error?
->=20
-> wx_base configure script checks the presence of sdl-config in your host=
-=20
-> system (and not in your cross-build system) Then use it to know SDL=20
-> include PATH. (sdlconfig --cflags).
-> this path is wrong for your cross-compiling ( usually -I/usr/include/SDL =
-).
->=20
-> At first, to reproduce the problem you have to install SDL lib in your=
-=20
-> host system.
+Fakeroot 1.14.5 was not fetchable any more. Updating to 1.15.1.
 
-Ok, I do not have it installed.
+Test environment:
+    BB_VERSION        = "1.10.2"
+    METADATA_BRANCH   = "org.openembedded.dev"
+    TARGET_ARCH       = "arm"
+    TARGET_OS         = "linux-gnueabi"
+    MACHINE           = "mainstone"
+    DISTRO            = "minimal"
+    DISTRO_VERSION    = "dev-snapshot-20110504"
+    TARGET_FPU        = "soft"
 
-> I don't know if you could reproduce exactly the same crash.
->   (however I'm using a IA64 64bit host system and my target is powerpc=
-=20
-> 32 (e300c3 core).)
->=20
-> If you doesn't have SDL lib in your host, problem disappear because=20
-> wx_base configure doesn't use it.
->=20
-> After apply this patch, your cross_compile system start check and use=20
-> the right sdl-config (for me located in=20
-> "$BUILDDIR"/sysroots/x86_64-linux/usr/ppce300c3/bin/sdl-config ).
->=20
-> For compile wx_base with SDL you have to create an image with this=20
-> dependency.
-> I don't know if the `minimal` one is sufficient. I'm using `console-image=
-`.
+Signed-off-by: Florian Boor <florian.boor@kernelconcepts.de>
+---
+ recipes/fakeroot/fakeroot-1.14.5/fix-prefix.patch  |   15 ---------------
+ .../fakeroot-1.14.5/quiet-getopt-check.patch       |   12 ------------
+ recipes/fakeroot/fakeroot-1.15.1/fix-prefix.patch  |   15 +++++++++++++++
+ .../fakeroot-1.15.1/quiet-getopt-check.patch       |   12 ++++++++++++
+ recipes/fakeroot/fakeroot_1.14.5.bb                |   10 ----------
+ recipes/fakeroot/fakeroot_1.15.1.bb                |   10 ++++++++++
+ 6 files changed, 37 insertions(+), 37 deletions(-)
+ delete mode 100644 recipes/fakeroot/fakeroot-1.14.5/fix-prefix.patch
+ delete mode 100644 recipes/fakeroot/fakeroot-1.14.5/quiet-getopt-check.patch
+ create mode 100644 recipes/fakeroot/fakeroot-1.15.1/fix-prefix.patch
+ create mode 100644 recipes/fakeroot/fakeroot-1.15.1/quiet-getopt-check.patch
+ delete mode 100644 recipes/fakeroot/fakeroot_1.14.5.bb
+ create mode 100644 recipes/fakeroot/fakeroot_1.15.1.bb
 
-Thank you for the explanation. I think it is generally discourage to
-have arbitrary build behavior in OE recipes.
+diff --git a/recipes/fakeroot/fakeroot-1.14.5/fix-prefix.patch b/recipes/fakeroot/fakeroot-1.14.5/fix-prefix.patch
+deleted file mode 100644
+index 72e7528..0000000
+--- a/recipes/fakeroot/fakeroot-1.14.5/fix-prefix.patch
++++ /dev/null
+@@ -1,15 +0,0 @@
+-This is not needed, kept just for reference.
+-
+---- fakeroot-1.14.5.orig/scripts/fakeroot.in	2009-11-15 04:09:21.000000000 +0100
+-+++ fakeroot-1.14.5/scripts/fakeroot.in	2011-01-12 20:10:02.897300394 +0100
+-@@ -30,8 +30,8 @@ fatal ()
+- }
+- 
+- # strip /bin/fakeroot to find install prefix
+--FAKEROOT_PREFIX=@prefix@
+--FAKEROOT_BINDIR=@bindir@
+-+FAKEROOT_BINDIR=`dirname $0`
+-+FAKEROOT_PREFIX=`dirname ${FAKEROOT_BINDIR}`
+- 
+- USEABSLIBPATH=@LDPRELOADABS@
+- LIB=lib@fakeroot_transformed@@DLSUFFIX@
+diff --git a/recipes/fakeroot/fakeroot-1.14.5/quiet-getopt-check.patch b/recipes/fakeroot/fakeroot-1.14.5/quiet-getopt-check.patch
+deleted file mode 100644
+index bcb9083..0000000
+--- a/recipes/fakeroot/fakeroot-1.14.5/quiet-getopt-check.patch
++++ /dev/null
+@@ -1,12 +0,0 @@
+-busybox provided getopt prints the help-text on stderr.
+---- fakeroot-1.14.5.orig/scripts/fakeroot.in	2009-11-15 04:09:21.000000000 +0100
+-+++ fakeroot-1.14.5/scripts/fakeroot.in	2011-01-12 20:11:50.059891996 +0100
+-@@ -43,7 +43,7 @@ export FAKED_MODE
+- 
+- libfound=no
+- 
+--GETOPTEST=`getopt --version`
+-+GETOPTEST=`getopt --version 2> /dev/null`
+- case $GETOPTEST in
+- getopt*) # GNU getopt
+-     FAKE_TEMP=`getopt -l lib: -l faked: -l unknown-is-real -l fd-base: -l version -l help -- +l:f:i:s:ub:vh "$@"`
+diff --git a/recipes/fakeroot/fakeroot-1.15.1/fix-prefix.patch b/recipes/fakeroot/fakeroot-1.15.1/fix-prefix.patch
+new file mode 100644
+index 0000000..72e7528
+--- /dev/null
++++ b/recipes/fakeroot/fakeroot-1.15.1/fix-prefix.patch
+@@ -0,0 +1,15 @@
++This is not needed, kept just for reference.
++
++--- fakeroot-1.14.5.orig/scripts/fakeroot.in	2009-11-15 04:09:21.000000000 +0100
+++++ fakeroot-1.14.5/scripts/fakeroot.in	2011-01-12 20:10:02.897300394 +0100
++@@ -30,8 +30,8 @@ fatal ()
++ }
++ 
++ # strip /bin/fakeroot to find install prefix
++-FAKEROOT_PREFIX=@prefix@
++-FAKEROOT_BINDIR=@bindir@
+++FAKEROOT_BINDIR=`dirname $0`
+++FAKEROOT_PREFIX=`dirname ${FAKEROOT_BINDIR}`
++ 
++ USEABSLIBPATH=@LDPRELOADABS@
++ LIB=lib@fakeroot_transformed@@DLSUFFIX@
+diff --git a/recipes/fakeroot/fakeroot-1.15.1/quiet-getopt-check.patch b/recipes/fakeroot/fakeroot-1.15.1/quiet-getopt-check.patch
+new file mode 100644
+index 0000000..bcb9083
+--- /dev/null
++++ b/recipes/fakeroot/fakeroot-1.15.1/quiet-getopt-check.patch
+@@ -0,0 +1,12 @@
++busybox provided getopt prints the help-text on stderr.
++--- fakeroot-1.14.5.orig/scripts/fakeroot.in	2009-11-15 04:09:21.000000000 +0100
+++++ fakeroot-1.14.5/scripts/fakeroot.in	2011-01-12 20:11:50.059891996 +0100
++@@ -43,7 +43,7 @@ export FAKED_MODE
++ 
++ libfound=no
++ 
++-GETOPTEST=`getopt --version`
+++GETOPTEST=`getopt --version 2> /dev/null`
++ case $GETOPTEST in
++ getopt*) # GNU getopt
++     FAKE_TEMP=`getopt -l lib: -l faked: -l unknown-is-real -l fd-base: -l version -l help -- +l:f:i:s:ub:vh "$@"`
+diff --git a/recipes/fakeroot/fakeroot_1.14.5.bb b/recipes/fakeroot/fakeroot_1.14.5.bb
+deleted file mode 100644
+index ff6844d..0000000
+--- a/recipes/fakeroot/fakeroot_1.14.5.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require fakeroot.inc
+-PR = "${INC_PR}.0"
+-
+-SRC_URI =+ "\
+-  ${DEBIAN_MIRROR}/main/f/fakeroot/fakeroot_${PV}.orig.tar.bz2 \
+-  file://quiet-getopt-check.patch \
+-"
+-
+-SRC_URI[md5sum] = "659a1f3a36554abfc2a3eaad2fdc0604"
+-SRC_URI[sha256] = "b035c834944bf9482027f48c388de8492e96609825265ac03f05408d0b3aae68"
+diff --git a/recipes/fakeroot/fakeroot_1.15.1.bb b/recipes/fakeroot/fakeroot_1.15.1.bb
+new file mode 100644
+index 0000000..4c625ca
+--- /dev/null
++++ b/recipes/fakeroot/fakeroot_1.15.1.bb
+@@ -0,0 +1,10 @@
++require fakeroot.inc
++PR = "${INC_PR}.0"
++
++SRC_URI =+ "\
++  ${DEBIAN_MIRROR}/main/f/fakeroot/fakeroot_${PV}.orig.tar.bz2 \
++  file://quiet-getopt-check.patch \
++"
++
++SRC_URI[md5sum] = "248c408b1e06e776c5739871b49bd968"
++SRC_URI[sha256sum] = "45fbb9ad611f33224cc09954963dde563cc80fe58c76feb25b6e98550b81729a"
+-- 
+1.7.4.1
 
-Do you need to use SDL? Is it generally needed when using wxbase? If yes
-the dependency to sdl should be added and `--with-sdl` passed to
-configure.
 
 
-Thanks,
-
-Paul
-
---=-dAgKjzKBwsNUzQOLb0nj
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk3x3iIACgkQPX1aK2wOHVjW7gCeIhhMbb37SQ+OK2PtgwcCyJOx
-xV8An1oI11hcrG3gPnwYDh124GF6/11b
-=BHFb
------END PGP SIGNATURE-----
-
---=-dAgKjzKBwsNUzQOLb0nj--
