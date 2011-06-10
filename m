@@ -1,26 +1,32 @@
-Received: from rs69.luxsci.com ([64.49.254.154])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gchiii@mtiemail.com>) id 1QV2Jo-00060n-Rr
+	(envelope-from <needemesleepe@gmail.com>) id 1QV3NB-0004Tg-Ip
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Jun 2011 16:04:14 +0200
-Received: from [192.168.0.165] (adsl-76-255-12-150.dsl.mrdnct.sbcglobal.net
-	[76.255.12.150]) (authenticated bits=0)
-	by rs69.luxsci.com (8.13.8/8.13.8) with ESMTP id p5AE0nHl004141
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	Fri, 10 Jun 2011 17:11:45 +0200
+Received: by pzk36 with SMTP id 36so1350420pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jun 2011 09:00:51 -0500
-Message-ID: <4DF22391.70703@mtiemail.com>
-Date: Fri, 10 Jun 2011 10:00:49 -0400
-From: "George C. Huntington III" <gchiii@mtiemail.com>
-Organization: MicroTools, Inc.
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
+	Fri, 10 Jun 2011 08:08:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=503gFJCt6xKPT4gug1fE/eUbYp2sVV+SvDKp/Gmylnw=;
+	b=Ai4WW/7EA/XfpL76HpU2qL3oXM0SnNLk9KUKFax/NxoR2Gu7+03k0GH4cvDyp2K6SO
+	ioaEfCJaBfCfB0shz7XPRI0kKJINKtOVuPC3ON/vh/G5SysMSCZvfBW9VOMs5ToQdkaC
+	B7R/c7dRtogT5CiVQHz+F7l5yZyNbTvzYBqq0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=Kn+aKvm9fO45eVa6BpM2wgwgc4x53LP5w4usi+XCt2QdAu6fNwe6jA8NE2JDc9Nl3V
+	CK6ZDE0KEznLPunWNX3AayxR6pgbhW7u/m2jAdzRO2dMw5WswQ1DCv+5GJuaZnLIUyGX
+	iW07pgbeWyLx6Wr1RbhKa1z3393dL09lwdq+8=
 MIME-Version: 1.0
+Received: by 10.68.19.227 with SMTP id i3mr987407pbe.303.1307718503270; Fri,
+	10 Jun 2011 08:08:23 -0700 (PDT)
+Received: by 10.68.40.161 with HTTP; Fri, 10 Jun 2011 08:08:23 -0700 (PDT)
+Date: Fri, 10 Jun 2011 11:08:23 -0400
+Message-ID: <BANLkTin341=s1g=vSKKJU-QECTBKKwkpgg@mail.gmail.com>
+From: Martin Bures <needemesleepe@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1307713686-30844-1-git-send-email-gchiii@mtiemail.com>
-In-Reply-To: <1307713686-30844-1-git-send-email-gchiii@mtiemail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [2011.03-maintenance] fakeroot: Move from not fetchable 1.14.5 to 1.15.1
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: [PATCH] /contrib/python/generate-manifest-2.6.py: added contextlib to included modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,156 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jun 2011 14:04:14 -0000
+X-List-Received-Date: Fri, 10 Jun 2011 15:11:45 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-please apply to 2011.03-maintenance branch
+* Added the contextlib library to python-lang subsection.  This module was
+built but
+ not included in any python- package.  This library is part of the
+ Python runtime services and is a collection of utilities to support
+ with-statements.
 
-Cherry-picked from 085dc5e99abf98772bfb44f3f25320418d500740
-Tested-By: George C. Huntington III <gchiii@mtiemail.com>
+Signed-off-by: Martin Bures <needemesleepe@gmail.com>
+---
+ contrib/python/generate-manifest-2.6.py |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-On 06/10/2011 09:48 AM, George C. Huntington III wrote:
-> From: Florian Boor <florian.boor@kernelconcepts.de>
->
-> Fakeroot 1.14.5 was not fetchable any more. Updating to 1.15.1.
->
-> Test environment:
->     BB_VERSION        = "1.10.2"
->     METADATA_BRANCH   = "org.openembedded.dev"
->     TARGET_ARCH       = "arm"
->     TARGET_OS         = "linux-gnueabi"
->     MACHINE           = "mainstone"
->     DISTRO            = "minimal"
->     DISTRO_VERSION    = "dev-snapshot-20110504"
->     TARGET_FPU        = "soft"
->
-> Signed-off-by: Florian Boor <florian.boor@kernelconcepts.de>
-> ---
->  recipes/fakeroot/fakeroot-1.14.5/fix-prefix.patch  |   15 ---------------
->  .../fakeroot-1.14.5/quiet-getopt-check.patch       |   12 ------------
->  recipes/fakeroot/fakeroot-1.15.1/fix-prefix.patch  |   15 +++++++++++++++
->  .../fakeroot-1.15.1/quiet-getopt-check.patch       |   12 ++++++++++++
->  recipes/fakeroot/fakeroot_1.14.5.bb                |   10 ----------
->  recipes/fakeroot/fakeroot_1.15.1.bb                |   10 ++++++++++
->  6 files changed, 37 insertions(+), 37 deletions(-)
->  delete mode 100644 recipes/fakeroot/fakeroot-1.14.5/fix-prefix.patch
->  delete mode 100644 recipes/fakeroot/fakeroot-1.14.5/quiet-getopt-check.patch
->  create mode 100644 recipes/fakeroot/fakeroot-1.15.1/fix-prefix.patch
->  create mode 100644 recipes/fakeroot/fakeroot-1.15.1/quiet-getopt-check.patch
->  delete mode 100644 recipes/fakeroot/fakeroot_1.14.5.bb
->  create mode 100644 recipes/fakeroot/fakeroot_1.15.1.bb
->
-> diff --git a/recipes/fakeroot/fakeroot-1.14.5/fix-prefix.patch b/recipes/fakeroot/fakeroot-1.14.5/fix-prefix.patch
-> deleted file mode 100644
-> index 72e7528..0000000
-> --- a/recipes/fakeroot/fakeroot-1.14.5/fix-prefix.patch
-> +++ /dev/null
-> @@ -1,15 +0,0 @@
-> -This is not needed, kept just for reference.
-> -
-> ---- fakeroot-1.14.5.orig/scripts/fakeroot.in	2009-11-15 04:09:21.000000000 +0100
-> -+++ fakeroot-1.14.5/scripts/fakeroot.in	2011-01-12 20:10:02.897300394 +0100
-> -@@ -30,8 +30,8 @@ fatal ()
-> - }
-> - 
-> - # strip /bin/fakeroot to find install prefix
-> --FAKEROOT_PREFIX=@prefix@
-> --FAKEROOT_BINDIR=@bindir@
-> -+FAKEROOT_BINDIR=`dirname $0`
-> -+FAKEROOT_PREFIX=`dirname ${FAKEROOT_BINDIR}`
-> - 
-> - USEABSLIBPATH=@LDPRELOADABS@
-> - LIB=lib@fakeroot_transformed@@DLSUFFIX@
-> diff --git a/recipes/fakeroot/fakeroot-1.14.5/quiet-getopt-check.patch b/recipes/fakeroot/fakeroot-1.14.5/quiet-getopt-check.patch
-> deleted file mode 100644
-> index bcb9083..0000000
-> --- a/recipes/fakeroot/fakeroot-1.14.5/quiet-getopt-check.patch
-> +++ /dev/null
-> @@ -1,12 +0,0 @@
-> -busybox provided getopt prints the help-text on stderr.
-> ---- fakeroot-1.14.5.orig/scripts/fakeroot.in	2009-11-15 04:09:21.000000000 +0100
-> -+++ fakeroot-1.14.5/scripts/fakeroot.in	2011-01-12 20:11:50.059891996 +0100
-> -@@ -43,7 +43,7 @@ export FAKED_MODE
-> - 
-> - libfound=no
-> - 
-> --GETOPTEST=`getopt --version`
-> -+GETOPTEST=`getopt --version 2> /dev/null`
-> - case $GETOPTEST in
-> - getopt*) # GNU getopt
-> -     FAKE_TEMP=`getopt -l lib: -l faked: -l unknown-is-real -l fd-base: -l version -l help -- +l:f:i:s:ub:vh "$@"`
-> diff --git a/recipes/fakeroot/fakeroot-1.15.1/fix-prefix.patch b/recipes/fakeroot/fakeroot-1.15.1/fix-prefix.patch
-> new file mode 100644
-> index 0000000..72e7528
-> --- /dev/null
-> +++ b/recipes/fakeroot/fakeroot-1.15.1/fix-prefix.patch
-> @@ -0,0 +1,15 @@
-> +This is not needed, kept just for reference.
-> +
-> +--- fakeroot-1.14.5.orig/scripts/fakeroot.in	2009-11-15 04:09:21.000000000 +0100
-> ++++ fakeroot-1.14.5/scripts/fakeroot.in	2011-01-12 20:10:02.897300394 +0100
-> +@@ -30,8 +30,8 @@ fatal ()
-> + }
-> + 
-> + # strip /bin/fakeroot to find install prefix
-> +-FAKEROOT_PREFIX=@prefix@
-> +-FAKEROOT_BINDIR=@bindir@
-> ++FAKEROOT_BINDIR=`dirname $0`
-> ++FAKEROOT_PREFIX=`dirname ${FAKEROOT_BINDIR}`
-> + 
-> + USEABSLIBPATH=@LDPRELOADABS@
-> + LIB=lib@fakeroot_transformed@@DLSUFFIX@
-> diff --git a/recipes/fakeroot/fakeroot-1.15.1/quiet-getopt-check.patch b/recipes/fakeroot/fakeroot-1.15.1/quiet-getopt-check.patch
-> new file mode 100644
-> index 0000000..bcb9083
-> --- /dev/null
-> +++ b/recipes/fakeroot/fakeroot-1.15.1/quiet-getopt-check.patch
-> @@ -0,0 +1,12 @@
-> +busybox provided getopt prints the help-text on stderr.
-> +--- fakeroot-1.14.5.orig/scripts/fakeroot.in	2009-11-15 04:09:21.000000000 +0100
-> ++++ fakeroot-1.14.5/scripts/fakeroot.in	2011-01-12 20:11:50.059891996 +0100
-> +@@ -43,7 +43,7 @@ export FAKED_MODE
-> + 
-> + libfound=no
-> + 
-> +-GETOPTEST=`getopt --version`
-> ++GETOPTEST=`getopt --version 2> /dev/null`
-> + case $GETOPTEST in
-> + getopt*) # GNU getopt
-> +     FAKE_TEMP=`getopt -l lib: -l faked: -l unknown-is-real -l fd-base: -l version -l help -- +l:f:i:s:ub:vh "$@"`
-> diff --git a/recipes/fakeroot/fakeroot_1.14.5.bb b/recipes/fakeroot/fakeroot_1.14.5.bb
-> deleted file mode 100644
-> index ff6844d..0000000
-> --- a/recipes/fakeroot/fakeroot_1.14.5.bb
-> +++ /dev/null
-> @@ -1,10 +0,0 @@
-> -require fakeroot.inc
-> -PR = "${INC_PR}.0"
-> -
-> -SRC_URI =+ "\
-> -  ${DEBIAN_MIRROR}/main/f/fakeroot/fakeroot_${PV}.orig.tar.bz2 \
-> -  file://quiet-getopt-check.patch \
-> -"
-> -
-> -SRC_URI[md5sum] = "659a1f3a36554abfc2a3eaad2fdc0604"
-> -SRC_URI[sha256] = "b035c834944bf9482027f48c388de8492e96609825265ac03f05408d0b3aae68"
-> diff --git a/recipes/fakeroot/fakeroot_1.15.1.bb b/recipes/fakeroot/fakeroot_1.15.1.bb
-> new file mode 100644
-> index 0000000..4c625ca
-> --- /dev/null
-> +++ b/recipes/fakeroot/fakeroot_1.15.1.bb
-> @@ -0,0 +1,10 @@
-> +require fakeroot.inc
-> +PR = "${INC_PR}.0"
-> +
-> +SRC_URI =+ "\
-> +  ${DEBIAN_MIRROR}/main/f/fakeroot/fakeroot_${PV}.orig.tar.bz2 \
-> +  file://quiet-getopt-check.patch \
-> +"
-> +
-> +SRC_URI[md5sum] = "248c408b1e06e776c5739871b49bd968"
-> +SRC_URI[sha256sum] = "45fbb9ad611f33224cc09954963dde563cc80fe58c76feb25b6e98550b81729a"
->   
+diff --git a/contrib/python/generate-manifest-2.6.py b/contrib/python/
+generate-manifest-2.6.py
+index 1b11266..0a56c43 100755
+--- a/contrib/python/generate-manifest-2.6.py
++++ b/contrib/python/generate-manifest-2.6.py
+@@ -256,7 +256,7 @@ if __name__ == "__main__":
+     m.addPackage( "${PN}-lang", "Python Low-Level Language Support",
+"${PN}-core",
+     "lib-dynload/_bisect.so lib-dynload/_collections.so
+lib-dynload/_heapq.so lib-dynload/_weakref.so lib-dynload/_functools.so " +
+     "lib-dynload/array.so lib-dynload/itertools.so lib-dynload/operator.so
+lib-dynload/parser.so " +
+-    "atexit.* bisect.* code.* codeop.* collections.* dis.* functools.*
+heapq.* inspect.* keyword.* opcode.* symbol.* repr.* token.* " +
++    "atexit.* bisect.* contextlib* code.* codeop.* collections.* dis.*
+functools.* heapq.* inspect.* keyword.* opcode.* symbol.* repr.* token.* " +
+     "tokenize.* traceback.* weakref.*" )
 
+     m.addPackage( "${PN}-logging", "Python Logging Support", "${PN}-core
+${PN}-io ${PN}-lang ${PN}-pickle ${PN}-stringold",
+-- 
+1.7.0.4
 
