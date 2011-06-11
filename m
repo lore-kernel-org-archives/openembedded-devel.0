@@ -1,23 +1,32 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1QVJQv-0001D3-2s
+	(envelope-from <rizwancodes@gmail.com>) id 1QVMiU-0000H7-Qv
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Jun 2011 10:20:41 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.3])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QVJNh-0000gL-Md
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Jun 2011 10:17:21 +0200
-From: Phil Blundell <philb@gnu.org>
+	Sat, 11 Jun 2011 13:51:02 +0200
+Received: by iwn19 with SMTP id 19so1085682iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Jun 2011 04:47:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=9nqCgrDkUiUVZCwMAsibNP8AeMR6y8pWyYGSIafy76Y=;
+	b=J3tJQn+EfZ+8NBebX/snFoV3FuHehNp+YA+BWPJqbNv+cFQJBtzMqfrnyg72jXVZbU
+	vBUxnaNng4FROg7OQIQdei6iallR8DN65rJK+NDH+M7dviY0GKYXwkaLwYLkPO/7i6+L
+	O65MU935xDpRnOPXvItsb9i0dnKGLc1DLpnuw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=plMBbedLQoez2rQ1HRbaGEyBDpsZvbGjBp6TCz1lp6GpaH8JS4loqm8hx7rTXpOFRv
+	Wr2qixbOt9SHQz/RuTFAqfvleme/gwq4NGcAgToeIA/BO+iPAC665q54aKmbMrqfvUly
+	60Ilw3QxhNOub8zO8M/SXJAZkE2GUzkLGGlIY=
+MIME-Version: 1.0
+Received: by 10.43.54.146 with SMTP id vu18mr3808013icb.296.1307792856666;
+	Sat, 11 Jun 2011 04:47:36 -0700 (PDT)
+Received: by 10.42.80.75 with HTTP; Sat, 11 Jun 2011 04:47:36 -0700 (PDT)
+Date: Sat, 11 Jun 2011 17:17:36 +0530
+Message-ID: <BANLkTimZyhdvFmUpRnfazze6RcKp9KEswg@mail.gmail.com>
+From: Rizwan Shaik <rizwancodes@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20110610232455.GA20068@sakrah.homelinux.org>
-References: <20110610232455.GA20068@sakrah.homelinux.org>
-Date: Sat, 11 Jun 2011 09:17:15 +0100
-Message-ID: <1307780235.3307.13.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: git remote prune is needed on oe github mirror
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Issue of unable to unmount USB
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,22 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Jun 2011 08:20:41 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 11 Jun 2011 11:51:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, 2011-06-10 at 16:24 -0700, Khem Raj wrote:
-> I see that oe-core when cloned from github still shows the 'maste'
-> remote branch which has already been deleted in oe-core repo.
-> 
-> So we need to run 'git remote prune origin' periodically or somthing
-> similar operation. It seems it does not get the removal information
-> when the mirror is updated
+Hi,
 
-Ah yes, well spotted.  Done.
-
-p.
+I am facing an issue of not able to unmount the USB device after attaching
+it to my alioth board.
+Getting the error as below.
+                       org.freedesktop.Hal.Device.volume.Unknown Failure
+                         Can not open /media/.hal-mtab
+"unmount" through command line is working fine.
 
 
+Please help me.
 
+Thanks in advance.
 
