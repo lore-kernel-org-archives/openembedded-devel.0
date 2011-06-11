@@ -1,39 +1,23 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QVB84-0002Vu-7f
+	(envelope-from <philb@gnu.org>) id 1QVJQv-0001D3-2s
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Jun 2011 01:28:41 +0200
-Received: by pvc30 with SMTP id 30so1529719pvc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jun 2011 16:25:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id
-	:mail-followup-to:mime-version:content-type:content-disposition
-	:user-agent; bh=ZFvbPCGk3MBdUQojCBS7JHzxKRmVzhY2LlLkR+BlxG0=;
-	b=aLotbCh0A3ZJIdL/uvNnherfyJwYtXNCTVGv6SQUd+G31gYthed3OcX/a8irgI2KjS
-	h4Q4NnKQpetUqZAE22ZpR+rE6iVatTPyMYlD03INdblGgqCmnX+ZMpbkF/8EFlorI3Ic
-	JLAUUMWUb04jeIyzM1DgfEukcC9YZp+fTDDDs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:mime-version
-	:content-type:content-disposition:user-agent;
-	b=NynkgWphz1cqguZF53rDGo51yiqeF4E7ukJw93R2Neii2F37pZ5WSgvkHQDh7tHf6R
-	bZJwBUKv9U2Nr1TdE5P/P4/vpDRG+Bi/IcTEDw/I9fEmTM9wCGkXCveXUzLwM7fVo/c9
-	af3kBQztF3C09s3bGPB7giZYwr8fSv0f9XOOY=
-Received: by 10.68.38.133 with SMTP id g5mr1249956pbk.83.1307748317667;
-	Fri, 10 Jun 2011 16:25:17 -0700 (PDT)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id c5sm2681229pbj.9.2011.06.10.16.25.15
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 10 Jun 2011 16:25:16 -0700 (PDT)
-Date: Fri, 10 Jun 2011 16:24:55 -0700
-From: Khem Raj <raj.khem@gmail.com>
+	Sat, 11 Jun 2011 10:20:41 +0200
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.3])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QVJNh-0000gL-Md
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 11 Jun 2011 10:17:21 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110610232455.GA20068@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: git remote prune is needed on oe github mirror
+In-Reply-To: <20110610232455.GA20068@sakrah.homelinux.org>
+References: <20110610232455.GA20068@sakrah.homelinux.org>
+Date: Sat, 11 Jun 2011 09:17:15 +0100
+Message-ID: <1307780235.3307.13.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: git remote prune is needed on oe github mirror
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,22 +31,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jun 2011 23:28:42 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 11 Jun 2011 08:20:41 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hi
+On Fri, 2011-06-10 at 16:24 -0700, Khem Raj wrote:
+> I see that oe-core when cloned from github still shows the 'maste'
+> remote branch which has already been deleted in oe-core repo.
+> 
+> So we need to run 'git remote prune origin' periodically or somthing
+> similar operation. It seems it does not get the removal information
+> when the mirror is updated
 
-I see that oe-core when cloned from github still shows the 'maste'
-remote branch which has already been deleted in oe-core repo.
+Ah yes, well spotted.  Done.
 
-So we need to run 'git remote prune origin' periodically or somthing
-similar operation. It seems it does not get the removal information
-when the mirror is updated
+p.
 
-Thanks
 
--- 
--Khem
 
 
