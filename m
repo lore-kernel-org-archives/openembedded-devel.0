@@ -1,34 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QVjCK-0002CF-Rr for openembedded-devel@lists.openembedded.org;
-	Sun, 12 Jun 2011 13:51:21 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QVj94-0003Ov-BA for openembedded-devel@lists.openembedded.org;
-	Sun, 12 Jun 2011 13:47:58 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Jun 2011 13:47:58 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1QVs9C-00079X-Q8
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 12 Jun 2011 23:24:43 +0200
+Received: by yxe1 with SMTP id 1so740727yxe.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Jun 2011 13:47:58 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sun, 12 Jun 2011 13:47:45 +0200
-Message-ID: <it2911$eb0$1@dough.gmane.org>
+	Sun, 12 Jun 2011 14:21:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=6lVKBRVk99B1H2F7hLDUQLaBUh+UdmtzPLS7J4LOoOc=;
+	b=sNh9Ok5wNXGbUHy6klay3PK3usEO8to42udYO6hVJgJwwq5QsOKm9flzxz/d0/++7r
+	wQ1kWVdGwnbtqz/FwTSzOHEbrrtQmPWSmfilRzBC2wYTAp4tcZsInw9XFP6cSBqDQQZN
+	fJUfqOUwVjKFKbCbL9qWZJLKJPMCstCDVLyfw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=tYQqM50VQyhuq8sr7ObA8ol6hj6MoguGK9CSN2x8B6eFuIDxfzTJvKpSbCxtavAorm
+	4T/2QcQKGlbXFOJxkRZuheoQXVHd8CCHZY43D0e5NvpT3/YpTVw0SLN0p4pW20/TOw6j
+	aMejjvqwwASzyFgsJpwQ3l1l+EebGZbYuohsk=
+MIME-Version: 1.0
+Received: by 10.91.197.14 with SMTP id z14mr5510661agp.172.1307913678911; Sun,
+	12 Jun 2011 14:21:18 -0700 (PDT)
+Received: by 10.90.68.2 with HTTP; Sun, 12 Jun 2011 14:21:18 -0700 (PDT)
+In-Reply-To: <4DF48491.6070901@dresearch-fe.de>
 References: <4DF0C472.4030608@dresearch-fe.de> <4DF14C7E.7000701@gmail.com>
 	<4DF48491.6070901@dresearch-fe.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4DF48491.6070901@dresearch-fe.de>
-X-Enigmail-Version: 1.0.1
+Date: Sun, 12 Jun 2011 23:21:18 +0200
+Message-ID: <BANLkTimz3W1447Q-WBL=d=4ZVvcbm=xAsQ@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Distros supporting older kernels?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,16 +45,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Jun 2011 11:51:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 12 Jun 2011 21:24:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+2011/6/12 Steffen Sledz <sledz@dresearch-fe.de>
 
-On 12-06-11 11:19, Steffen Sledz wrote:
 > On 10.06.2011 00:43, Khem Raj wrote:
+>
 >> On 06/09/2011 06:02 AM, Steffen Sledz wrote:
+>>
 >>> Hi Distro Maintainers,
 >>>
 >>> as you could read in earlier messages of mine, we're forced to use an
@@ -71,55 +72,61 @@ On 12-06-11 11:19, Steffen Sledz wrote:
 >>> My first question therefor is if there are any distros explicitely
 >>> supporting older kernels (pre 2.6.27) yet? Or are willing to work on it?
 >>>
+>>>
+>> I guess a machine layer on top of oe-core could be something you can work
+>> out and add/override needed recipes in this layer.
 >>
->> I guess a machine layer on top of oe-core could be something you can
->> work out and add/override needed recipes in this layer.
-> 
+>
 > I think it's not that easy.
-> 
+>
 > For kernels prior to 2.6.27 you can't use a lot of core components (e.g.
 > udev with versions higher than 141 or eggdbus) which *a lot of other
 > components* depend on.
-> 
-> The underlying problem are some kernel API functions like inotify_init1
-> or epoll_create1. Some distros (e.g. Angstrom) use linux-libc-headers
-> 2.6.31 which is higher then 2.6.27 (what in my opinion conflicts with
-> [1]). So there's no chance to detect the mentioned kernel functions
-> correctly at compile time. :(
-> 
-> As a consequence you have to check this in *all* programs at runtime.
-> This is a good wish but hard to realize. E.g. the udev maintainers
-> itself rejected a related patch[2] and say that they are not willing to
-> support older kernel versions.
-> 
+>
+> The underlying problem are some kernel API functions like inotify_init1 or
+> epoll_create1. Some distros (e.g. Angstrom) use linux-libc-headers 2.6.31
+> which is higher then 2.6.27 (what in my opinion conflicts with [1]). So
+> there's no chance to detect the mentioned kernel functions correctly at
+> compile time. :(
+>
+> As a consequence you have to check this in *all* programs at runtime. This
+> is a good wish but hard to realize. E.g. the udev maintainers itself
+> rejected a related patch[2] and say that they are not willing to support
+> older kernel versions.
+>
 > So in my opinion there are two possible ways:
-> 
+>
 > 1. Use only the old supported versions of the components (udev-141 and
 > glib-dbus instead of eggdbus) with all the consequences for other programs.
-> 
+>
 > 2. Determine *all* critical kernel functions, look for *all* the places
 > where these are used, and patch them.
-> 
+>
 > Both are a lot more than some override recipes. So i think this needs an
 > own distro with all the maintenance and testing.
+>
+> Regards,
+> Steffen
+>
+> [1] "but a program built against newer kernel headers may not work on an
+> older kernel" <
+> http://git.kernel.org/?p=linux/kernel/git/torvalds/linux-2.6.git;a=blob_plain;f=Documentation/make/headers_install.txt;hb=HEAD
+> >
+> [2] <http://thread.gmane.org/gmane.linux.hotplug.devel/16590>
+>
+>
+> Steffen, I feel it really depends on what you are aiming at. For our
+products we typically freeze on a certain version; if there are bugs that
+hurt us we either fix them (backporting a patch) or move to a newer version
+of that specific recipe (and stick it in a local overlay).
 
-3) Cut your losses and update your kernel port. At some point it just
-isn't economically feasible aymore to bend userspace against an obsolete
-kernel.
+E.g. some of our maintenance is done on a monotone revision that was frozen
+a few years ago.
+I feel if you have to use an older kernel and have a dedicated image (e.g.
+because you are doing a real embedded control system) you might be better
+off doing the same.
+The newest packages are not necessarily better for you, and typically newer
+versions tend not to become smaller (but ofc exceptions exist).
 
-I'm still stuck with 2.6.32 at work for a lot of customers, which is
-accumulating more and more backports.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFN9KdhMkyGM64RGpERArsBAKCcIqGbU9C7qjirf9YAU4xUBdAKMACfV50G
-GOjNf7icEEzOcx81w0N64Uk=
-=SMzJ
------END PGP SIGNATURE-----
-
-
+Frans
 
