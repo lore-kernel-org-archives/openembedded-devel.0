@@ -1,34 +1,37 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pespin.shar@gmail.com>) id 1QWCPk-000098-8Y
+	(envelope-from <aguirre.nicolas@gmail.com>) id 1QWCfv-0000U5-UK
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Jun 2011 21:03:08 +0200
-Received: by wye20 with SMTP id 20so3898682wye.6
+	Mon, 13 Jun 2011 21:19:52 +0200
+Received: by pvc30 with SMTP id 30so2372543pvc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jun 2011 11:59:44 -0700 (PDT)
+	Mon, 13 Jun 2011 12:16:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=5iy0Wat/c1yrAcsPDLGBKZLcESpyBnxb4kG6z65Mwxo=;
-	b=Js00SwY4yvTjPZ8jA/F9Lt2dV8YrIrV7X5NWAZOeSbvA69dSJ0Jf5GFxmq226UnTsV
-	5v4We+5FSvb6blj+W22WKmLDrCVRJg8kK7veKU9Cpnm6wowvTRbAB2tRSliRQEikONZY
-	6Qh7b6W+vCcgI/r0i6jFwcVHxuk+Siuj5jQKE=
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=OdZeTJKFyrCUQfSLNodEGMNScwZIPgLZm8II0JBU3k4=;
+	b=lZ1L+imGAXrkdVbMEWtOXCSu33m1LT4R5GTW9ZGhgo5IFx/PszvGDfAT1qCLHelA+p
+	9ijgGEu9zqRWFFGQz8+hofl/sOZxcNRBGLweN1R1XZzLbJ67VEjSgUb8CC57XSQ3j/Fx
+	ri9nqx2HTjAzCva6+hERTkz5bUd9ZtAQmww48=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=v8GMkp7u6YFQ+gPGwkN2ZXemadwNunRXCtIQyHBlaUJPPtkNLFI/+IWlJ6IFCP/gqm
-	+YX/99ty+gJ60MtiVU3/eP8XY5VQlaTCLvGuulMKk05lPwhgffAkmnJTh3lMrF6+isid
-	/5BFzSyfA58GE+iPPloGBP1dg8BaepgBnRy9c=
-Received: by 10.227.162.133 with SMTP id v5mr5362397wbx.14.1307991583948;
-	Mon, 13 Jun 2011 11:59:43 -0700 (PDT)
-Received: from localhost.localdomain ([90.163.82.81])
-	by mx.google.com with ESMTPS id p21sm4435131wbh.40.2011.06.13.11.59.42
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 13 Jun 2011 11:59:43 -0700 (PDT)
-From: Pau Espin Pedrol <pespin.shar@gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=xJ1+eEiztlMZxjLxCEYkZQgi3Y0qrZQFbhPEizTX/btffh2xh/DsfEnGgHoMbQfhLK
+	EaGXYOXf3Xy1OnqV4qjpyrOcuytEYV4luiNEbRhu6rVIPqk/NfHAiv0gsJh1jfNoZcvx
+	S4P0To4aeODIZePVLEk0jjFONQVSBFefxZ620=
+Received: by 10.68.28.136 with SMTP id b8mr2292096pbh.457.1307992586265; Mon,
+	13 Jun 2011 12:16:26 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.68.62.225 with HTTP; Mon, 13 Jun 2011 12:16:06 -0700 (PDT)
+In-Reply-To: <BANLkTi=4kSE18LPqTyEgYRmZViJ4f+gGgw@mail.gmail.com>
+References: <1307987531-2625-1-git-send-email-pespin.shar@gmail.com>
+	<1307988638.4081.5.camel@mattotaupa>
+	<BANLkTi=4kSE18LPqTyEgYRmZViJ4f+gGgw@mail.gmail.com>
+From: Nicolas Aguirre <aguirre.nicolas@gmail.com>
+Date: Mon, 13 Jun 2011 21:16:06 +0200
+Message-ID: <BANLkTinVfs_kznrr9C9G2jtS516ud99Ltw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Jun 2011 20:59:34 +0200
-Message-Id: <1307991574-6143-1-git-send-email-pespin.shar@gmail.com>
-X-Mailer: git-send-email 1.7.5.rc3
-Subject: [PATCH v2] enjoy: add alsa and autodetect gst modules.
+Subject: Re: [PATCH] enjoy: add alsa and autodetect gst modules. Without autodetect, enjoy segfaults. Without alsa, no sound is played
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,42 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jun 2011 19:03:08 -0000
+X-List-Received-Date: Mon, 13 Jun 2011 19:19:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Without autodetect, enjoy segfaults. Without alsa, no sound is played.
+2011/6/13 Pau Espin Pedrol <pespin.shar@gmail.com>:
+> Hi, thanks for reviewing it ;)
+>
+> 2011/6/13 Paul Menzel <paulepanter@users.sourceforge.net>
+>
+>> Please also paste the important parts of the segfault into the commit
+>> message.
+>>
+>
+> I don't have the segfault right now because I've using buil enjoy with th=
+is
+> patch for few days since now. Basically it seems that emotion is using
+> autodetect gst pipe element, which in turn is using alsa.
+>
+> I think it was this file/line in emotion:
+> emotion_gstreamer_pipeline.c: =A0 sink =3D
+> gst_element_factory_make("autoaudiosink", "audiosink");
+>
+> I'm using SHR distro.
+>
+> I'll send new patch version now.
+>
+> --
+> Pau Espin Pedrol
+> mail/jabber: pespin.shar@gmail.com
+> http://blog.espeweb.net
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-That happens because emotion needs them to play as shown in its source code:
-emotion_gstreamer_pipeline.c:   sink = gst_element_factory_make("autoaudiosink", "audiosink");
+If you think there is a problem in emotion, we could fix it upstream ?
 
-Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com>
----
- recipes/e17/enjoy_svn.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes/e17/enjoy_svn.bb b/recipes/e17/enjoy_svn.bb
-index eab81b4..d709eb7 100644
---- a/recipes/e17/enjoy_svn.bb
-+++ b/recipes/e17/enjoy_svn.bb
-@@ -3,7 +3,7 @@ LICENSE = "LGPLv3"
- DEPENDS = "evas ecore edje elementary emotion lightmediascanner"
- SRCREV = "${EFL_SRCREV}"
- PV = "0.0+svnr${SRCPV}"
--PR = "r4"
-+PR = "r5"
- 
- DEPENDS += "gst-plugins-good ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'gst-plugins-ugly', d)}"
- 
-@@ -13,7 +13,7 @@ DEPENDS += "gst-plugins-good ${@base_conditional('ENTERPRISE_DISTRO', '1', '', '
- #4th needed for flac playback
- #5th needed binary to create db
- RDEPENDS += "\
--	gst-plugin-typefindfunctions gst-plugin-playbin gst-plugin-volume gst-plugin-decodebin2  \
-+	gst-plugin-typefindfunctions gst-plugin-playbin gst-plugin-volume gst-plugin-decodebin2  gst-plugin-alsa gst-plugin-autodetect \
- 	${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'gst-plugin-mad gst-plugin-id3demux', d)} \
- 	gst-plugin-ogg gst-plugin-ivorbisdec \
- 	gst-plugin-flac \
--- 
-1.7.5.rc3
-
+--=20
+Nicolas Aguirre
+Mail: aguirre.nicolas@gmail.com
+Web: http://enna.geexbox.org
+Blog: http://dev.enlightenment.fr/~captainigloo/
 
 
