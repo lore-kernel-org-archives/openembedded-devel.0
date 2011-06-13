@@ -1,28 +1,23 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <msmith@cbnco.com>) id 1QWBRs-0001Ed-0P
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Jun 2011 20:01:16 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id B49B7D5192B
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jun 2011 13:57:52 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 24439-09 for <openembedded-devel@lists.openembedded.org>; 
-	Mon, 13 Jun 2011 13:57:52 -0400 (EDT)
-Received: from [172.20.22.83] (dmzgw2.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 8AB8FD3E7B3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jun 2011 13:57:52 -0400 (EDT)
-Message-ID: <4DF64F9F.5030309@cbnco.com>
-Date: Mon, 13 Jun 2011 13:57:51 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: bitbake says do_rootfs fails without even forking it
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QWBeD-0005Ac-Ic for openembedded-devel@lists.openembedded.org;
+	Mon, 13 Jun 2011 20:14:01 +0200
+Received: from f053040080.adsl.alicedsl.de ([78.53.40.80]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QWBbx-0000Ic-Pu for openembedded-devel@lists.openembedded.org;
+	Mon, 13 Jun 2011 18:11:41 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1307987531-2625-1-git-send-email-pespin.shar@gmail.com>
+References: <1307987531-2625-1-git-send-email-pespin.shar@gmail.com>
+Date: Mon, 13 Jun 2011 20:10:38 +0200
+Message-ID: <1307988638.4081.5.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH] enjoy: add alsa and autodetect gst modules. Without autodetect, enjoy segfaults. Without alsa, no sound is played
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,52 +31,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jun 2011 18:01:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 13 Jun 2011 18:14:02 -0000
+X-Groupsio-MsgNum: 32635
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-iqSoldqEoXBDoEzrQeI7"
 
-Hi,
+--=-iqSoldqEoXBDoEzrQeI7
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I'm using a fairly old oe-dev tree from late 2010. I upgraded bitbake to 
-the 1.12 branch recently and haven't been able to build an image. This 
-is what bitbake reports:
+Dear Pau,
 
 
-DEBUG: Executing task do_rootfs
-NOTE: package toastix-image-20.12-r0: task do_rootfs: Started
-DEBUG: Zero size logfn 
-/home/michael/git/toastix/tmp/work/shogo2-oe-linux-gnueabi/toastix-image-20.12-r0/temp/log.do_rootfs.28992, 
-removing
-ERROR: Task 12 
-(/home/michael/git/toastix/public/recipes/images/toastix-image.bb, 
-do_rootfs) failed with exit code '1'
+thank you for your contribution.
 
-In strace, I can see a child process (or thread) is writing the 
-run.do_rootfs file; checking the size of the log file; deleting the log 
-file; sending an event back on a pipe; and calling exit_group(1).
+Am Montag, den 13.06.2011, 19:52 +0200 schrieb Pau Espin Pedrol:
 
-It doesn't actually execute the run.do_rootfs file.
+The commit summary is a bit long. Please add a blank line in between and
+add your Signed-off-by line according to the commit policy [1].
 
-I can execute the rootfs script manually:
+Please also paste the important parts of the segfault into the commit
+message.
 
-tmp/sysroots/x86_64-linux/bin/fakeroot -- bash -c \
-	'. run.do_rootfs.17415 && do_rootfs'
+What system did you use for testing?
 
-and it fails, after a while, when rootfs_deb_do_rootfs tries to call 
-"log_check rootfs". log_check() is defined in image.bbclass, but somehow 
-it didn't make it into the run.do_rootfs script, even though the next 
-function up in image.bbclass, insert_feed_uris, was included.
+> ---
+>  recipes/e17/enjoy_svn.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/recipes/e17/enjoy_svn.bb b/recipes/e17/enjoy_svn.bb
+> index eab81b4..d709eb7 100644
+> --- a/recipes/e17/enjoy_svn.bb
+> +++ b/recipes/e17/enjoy_svn.bb
+> @@ -3,7 +3,7 @@ LICENSE =3D "LGPLv3"
+>  DEPENDS =3D "evas ecore edje elementary emotion lightmediascanner"
+>  SRCREV =3D "${EFL_SRCREV}"
+>  PV =3D "0.0+svnr${SRCPV}"
+> -PR =3D "r4"
+> +PR =3D "r5"
+> =20
+>  DEPENDS +=3D "gst-plugins-good ${@base_conditional('ENTERPRISE_DISTRO', =
+'1', '', 'gst-plugins-ugly', d)}"
+> =20
+> @@ -13,7 +13,7 @@ DEPENDS +=3D "gst-plugins-good ${@base_conditional('ENT=
+ERPRISE_DISTRO', '1', '', '
+>  #4th needed for flac playback
+>  #5th needed binary to create db
+>  RDEPENDS +=3D "\
+> -	gst-plugin-typefindfunctions gst-plugin-playbin gst-plugin-volume gst-p=
+lugin-decodebin2  \
+> +	gst-plugin-typefindfunctions gst-plugin-playbin gst-plugin-volume gst-p=
+lugin-decodebin2  gst-plugin-alsa gst-plugin-autodetect \
+>  	${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'gst-plugin-mad gst-p=
+lugin-id3demux', d)} \
+>  	gst-plugin-ogg gst-plugin-ivorbisdec \
+>  	gst-plugin-flac \
 
-Questions:
-1. What's the mechanism by which log_check is supposed to be included in 
-the run.do_rootfs script?
-2. Is anyone else using oe-dev with bitbake 1.12? It doesn't look like 
-much has changed in the image classes since late 2010, so whatever 
-problem I'm having, I'd think others could be having it, too.
-3. How can I figure out why bitbake is not running the do_rootfs script? 
-Passing lots of -D flags didn't help.
+Otherwise this looks good. Please resend as =E2=80=9Cv2=E2=80=9D [2].
+
 
 Thanks,
-Mike
+
+Paul
 
 
+[1] http://openembedded.org/index.php/Commit_Policy
+[2] http://openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmbedded
+
+--=-iqSoldqEoXBDoEzrQeI7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk32Up0ACgkQPX1aK2wOHVhDVACfeZncFHwygnpCjdvA2pk3geJR
+2AQAn3gz0x0k4GwvthuidCoAzFeZVp8b
+=O4XJ
+-----END PGP SIGNATURE-----
+
+--=-iqSoldqEoXBDoEzrQeI7--
