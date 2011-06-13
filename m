@@ -1,35 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QW86g-0005Sf-IO for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Jun 2011 16:27:10 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QW83Q-0005od-8l for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Jun 2011 16:23:48 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jun 2011 16:23:48 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <pespin.shar@gmail.com>) id 1QWBMU-0000RD-92
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 13 Jun 2011 19:55:42 +0200
+Received: by wwi18 with SMTP id 18so2758926wwi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jun 2011 16:23:48 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 13 Jun 2011 10:52:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=DFAR7JvIYrD9NrepbR2TqNtf49hiCXo5SL4EbnFPpxQ=;
+	b=PnZpBXjGD6VOfqazZHYCYdNlzKKEhVcZscwwYAt6ALZC84SY0oOkGOMKcoQFI4RH/o
+	AciZdBdo4juOuxMD1JH2JheAtN1M/nQcTVnAgrsNWPAwbFvK197lkRx5K+Zzff5Od5IR
+	q0OK7K4vYflnNAh3lrStljNngmp6NTnM/1yOU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=NqV7kSq6E55b1jBotK3olLY7LtDuCicD+Js/GqSQCuRhcItTh50yl6VJKQ0DhXgM1c
+	m5FB1n0BXG5JXBPgwkfSFR8rWDyKz9VimxTbKV+UJxWsYLZny24K0a8g9RnuPtN5oHti
+	+/Pm4R2FiCyyccF4QExoWkhbW27ja2z5YWv4A=
+Received: by 10.227.54.6 with SMTP id o6mr5476507wbg.83.1307987538101;
+	Mon, 13 Jun 2011 10:52:18 -0700 (PDT)
+Received: from localhost.localdomain ([90.163.82.81])
+	by mx.google.com with ESMTPS id ex2sm4392966wbb.65.2011.06.13.10.52.16
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 13 Jun 2011 10:52:17 -0700 (PDT)
+From: Pau Espin Pedrol <pespin.shar@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 13 Jun 2011 16:23:33 +0200
-Message-ID: <it56h5$u14$1@dough.gmane.org>
-References: <1307713686-30844-1-git-send-email-gchiii@mtiemail.com>	<4DF29E37.9020204@mentor.com>
-	<BANLkTik+vDEFKeV3U+CdF5Qg3xx2ApzTvQ@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <BANLkTik+vDEFKeV3U+CdF5Qg3xx2ApzTvQ@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [2011.03-maintenance] fakeroot: Move from not fetchable 1.14.5 to 1.15.1
+Date: Mon, 13 Jun 2011 19:52:11 +0200
+Message-Id: <1307987531-2625-1-git-send-email-pespin.shar@gmail.com>
+X-Mailer: git-send-email 1.7.5.rc3
+Subject: [PATCH] enjoy: add alsa and autodetect gst modules. Without autodetect, enjoy segfaults. Without alsa, no sound is played
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,59 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jun 2011 14:27:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 13 Jun 2011 17:55:42 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+---
+ recipes/e17/enjoy_svn.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-The angstrom mirror has that, among other goodies
-
-On 13-06-11 16:11, George C. Huntington, III wrote:
-> I've tried to find the fakeroot_1.14.5.orig.tar.bz2, does anyone have this
-> mirrored?
-> 
-> 
-> On Fri, Jun 10, 2011 at 6:44 PM, Tom Rini <tom_rini@mentor.com> wrote:
-> 
-> On 06/10/2011 06:48 AM, George C. Huntington III wrote:
->>>> From: Florian Boor <florian.boor@kernelconcepts.de>
->>>>
->>>> Fakeroot 1.14.5 was not fetchable any more. Updating to 1.15.1.
->>>>
->>>> Test environment:
->>>>     BB_VERSION        = "1.10.2"
->>>>     METADATA_BRANCH   = "org.openembedded.dev"
->>>>     TARGET_ARCH       = "arm"
->>>>     TARGET_OS         = "linux-gnueabi"
->>>>     MACHINE           = "mainstone"
->>>>     DISTRO            = "minimal"
->>>>     DISTRO_VERSION    = "dev-snapshot-20110504"
->>>>     TARGET_FPU        = "soft"
->>>>
->>>> Signed-off-by: Florian Boor <florian.boor@kernelconcepts.de>
-> 
-> For 2011.03-maintenance I'm going to NAK this.  A mirror setup is
-> required as we aren't trying to keep up to date with the tzdata/tzcode
-> mess and these are available via the angstrom mirror (and if needed
-> could be put on the regular OE mirror).  Thanks for your interest in the
-> stable branch, all the same!
-> 
->>
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFN9h1lMkyGM64RGpERAmawAKChxN1zI85TyiLwV5PVKFMbIEb+ZQCfbdsr
-rul9gWorOumVf8PVOX4gg/A=
-=XLwJ
------END PGP SIGNATURE-----
+diff --git a/recipes/e17/enjoy_svn.bb b/recipes/e17/enjoy_svn.bb
+index eab81b4..d709eb7 100644
+--- a/recipes/e17/enjoy_svn.bb
++++ b/recipes/e17/enjoy_svn.bb
+@@ -3,7 +3,7 @@ LICENSE = "LGPLv3"
+ DEPENDS = "evas ecore edje elementary emotion lightmediascanner"
+ SRCREV = "${EFL_SRCREV}"
+ PV = "0.0+svnr${SRCPV}"
+-PR = "r4"
++PR = "r5"
+ 
+ DEPENDS += "gst-plugins-good ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'gst-plugins-ugly', d)}"
+ 
+@@ -13,7 +13,7 @@ DEPENDS += "gst-plugins-good ${@base_conditional('ENTERPRISE_DISTRO', '1', '', '
+ #4th needed for flac playback
+ #5th needed binary to create db
+ RDEPENDS += "\
+-	gst-plugin-typefindfunctions gst-plugin-playbin gst-plugin-volume gst-plugin-decodebin2  \
++	gst-plugin-typefindfunctions gst-plugin-playbin gst-plugin-volume gst-plugin-decodebin2  gst-plugin-alsa gst-plugin-autodetect \
+ 	${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'gst-plugin-mad gst-plugin-id3demux', d)} \
+ 	gst-plugin-ogg gst-plugin-ivorbisdec \
+ 	gst-plugin-flac \
+-- 
+1.7.5.rc3
 
 
 
