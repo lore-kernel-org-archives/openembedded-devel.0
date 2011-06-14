@@ -1,35 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QWVtB-0004lR-PD for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jun 2011 17:50:49 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QWVpq-0006Ex-Tk for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jun 2011 17:47:22 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jun 2011 17:47:22 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1QWWrX-0006RA-WF
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 14 Jun 2011 18:53:12 +0200
+Received: by vws2 with SMTP id 2so5172754vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jun 2011 17:47:22 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 14 Jun 2011 09:49:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
+	:x-mailer; bh=OsCVXGRxdDUYSU/Ayy1wA4motW2nMz/ehPMiYfuihWs=;
+	b=fuwQK8FFFJH/cNw2Ng1ZwsITlhE7HUMkZZ/xejpYrHsOTl/HabEVIAoi1Nlw4xU+xM
+	Wv3UeMVXQEukSZ24eZPp/LIeqze+w/gA+rgYvP5LLB67in5UtsjtS41I3201PHoSBUJd
+	QE7YufyUBPGHfR9UviTvPjbC/QTD1Y9zMgev0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=SRcTKNZJbC8rbYmpxCXRIdhRcirQTwVj8WVwd05z40hW/PP6bVDdgtO0c4ZE+mvFas
+	pR2V0OsR4U4zELTkKdYveuieKO6+wakKR+liO96xtRK0OQ8vi1QGR4sTGeaD/T3iJfgz
+	f4TUMjacxvLFQH1SM1o4gylCoJbfnMIJL5Q7c=
+Received: by 10.52.76.162 with SMTP id l2mr9869581vdw.140.1308070186185;
+	Tue, 14 Jun 2011 09:49:46 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id bt2sm2307123vdc.12.2011.06.14.09.49.43
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 14 Jun 2011 09:49:45 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 14 Jun 2011 17:47:07 +0200
-Message-ID: <it7vpr$n45$1@dough.gmane.org>
-References: <4DF6DBCE.7010404@gmail.com> <it731q$utn$1@dough.gmane.org>
-	<20110614153843.GB1324@denix.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <20110614153843.GB1324@denix.org>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] ti-dsplink: Fixed location of toolchain
+Date: Tue, 14 Jun 2011 16:49:31 +0000
+Message-Id: <cover.1308070134.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [[meta-oe][PATCH 0/3] Pending fixes in O.S. Systems tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,35 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jun 2011 15:50:49 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 14 Jun 2011 16:53:12 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+The following changes since commit 797fc635c1a693abb07392a22e0b001bc331f633:
 
-On 14-06-11 17:38, Denys Dmytriyenko wrote:
-> On Tue, Jun 14, 2011 at 09:36:26AM +0200, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 14-06-11 05:55, Joel A Fernandes wrote:
->>> ti-dsplink: Fixed location of toolchain to build ti-dsplink.
->>
->> It sadly really needs an absolute path to the tools :(
-> 
-> So, what was this patch trying to fix anyway? Is there something broken?
+  gvfs: the sftp plugin only works with openssh-ssh (2011-06-13 20:20:15 +0200)
 
-Using an external toolchain without your import magic and then
-overriding TOOLCHAINPATH in local.conf is broken. You might call it
-broken by design :)
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe master
+  https://github.com/OSSystems/meta-oe/tree/master
 
-iD8DBQFN94J7MkyGM64RGpERAufjAJ0byRdnVm9SmVJ0Hlqsyv+BJv75uwCggF42
-qeHxFXcjNMNr11nIr+Knmio=
-=mZHT
------END PGP SIGNATURE-----
+Otavio Salvador (3):
+  xf86-video-geode: add 2.11.12 version recipe
+  freerdp: bump SRCREV to gather fixes
+  freerdp-extension-xpunlimited: bump SRCREV due library renaming
+
+ .../xorg-driver/xf86-video-geode_2.11.12.bb        |   11 +++++++++++
+ .../freerdp/freerdp-extension-xpunlimited_git.bb   |    2 +-
+ meta-oe/recipes-support/freerdp/freerdp_git.bb     |    2 +-
+ 3 files changed, 13 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.12.bb
+
+-- 
+1.7.2.5
 
 
 
