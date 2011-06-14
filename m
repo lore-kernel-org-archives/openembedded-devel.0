@@ -1,22 +1,25 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1QWPnB-000402-Ua
+	(envelope-from <sledz@dresearch-fe.de>) id 1QWQlv-0005fV-Tw
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jun 2011 11:20:14 +0200
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>)
-	id 1QWPju-00040N-Mz; Tue, 14 Jun 2011 11:16:50 +0200
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1308037783-31218-1-git-send-email-james@digitalmatter.com.au>
-References: <1308037783-31218-1-git-send-email-james@digitalmatter.com.au>
-Date: Tue, 14 Jun 2011 10:16:49 +0100
-Message-ID: <1308043009.25285.219.camel@phil-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Cc: James Limbouris <james@digitalmatter.com.au>
-Subject: Re: [PATCH] prelink: Added prelink-20100106, which works on ARM.
+	Tue, 14 Jun 2011 12:23:00 +0200
+Received: by yxe1 with SMTP id 1so1561285yxe.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Jun 2011 03:19:34 -0700 (PDT)
+Received: by 10.236.9.105 with SMTP id 69mr6236384yhs.391.1308046774302;
+	Tue, 14 Jun 2011 03:19:34 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id o47sm3327156yhn.16.2011.06.14.03.19.32
+	(version=SSLv3 cipher=OTHER); Tue, 14 Jun 2011 03:19:32 -0700 (PDT)
+Message-ID: <4DF735B3.1020106@dresearch-fe.de>
+Date: Tue, 14 Jun 2011 12:19:31 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110414 SUSE/3.1.10 Thunderbird/3.1.10
+MIME-Version: 1.0
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [2011.03-maintenance] Pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,61 +33,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jun 2011 09:20:14 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 14 Jun 2011 10:23:00 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Tue, 2011-06-14 at 15:49 +0800, James Limbouris wrote:
-> This version of prelink, together with a patch by
-> Carsten Munk <carsten@maemo.org>, taken from MeeGo,
-> fixes an ARM incompatibility with 20090925.
-> 
-> Signed-off-by: James Limbouris <james@digitalmatter.com.au>
-> ---
->  .../prelink-20100106-arm-fix.patch                 |   86 ++++++++++++++++++++
->  recipes/prelink/prelink_20100106.bb                |   53 ++++++++++++
->  2 files changed, 139 insertions(+), 0 deletions(-)
->  create mode 100755 recipes/prelink/prelink-20100106/prelink-20100106-arm-fix.patch
->  create mode 100644 recipes/prelink/prelink_20100106.bb
-> 
-> diff --git a/recipes/prelink/prelink-20100106/prelink-20100106-arm-fix.patch b/recipes/prelink/prelink-20100106/prelink-20100106-arm-fix.patch
-> new file mode 100755
-> index 0000000..a694541
-> --- /dev/null
-> +++ b/recipes/prelink/prelink-20100106/prelink-20100106-arm-fix.patch
-> @@ -0,0 +1,86 @@
-> +diff -ru prelink-old/src/arch-arm.c prelink/src/arch-arm.c
-> +--- prelink-old/src/arch-arm.c	2009-06-15 07:37:50.000000000 -0400
-> ++++ prelink/src/arch-arm.c	2010-08-17 03:35:05.000000000 -0400
-> +@@ -832,7 +832,7 @@
-> +   .R_COPY = R_ARM_COPY,
-> +   .R_RELATIVE = R_ARM_RELATIVE,
-> +   .rtype_class_valid = RTYPE_CLASS_VALID,
-> +-  .dynamic_linker = "/lib/ld-linux.so.2",
-> ++  .dynamic_linker = "/lib/ld-linux.so.3",
+Please pull some commits from here:
 
-That looks like it's going to break OABI binaries.  I'm not sure to what
-extent we care about those anymore, but I'm not sure I would describe
-this as a "fix" exactly.
+URI: git@git.openembedded.org:openembedded
+Branch: sledz/maintenance
 
-> +-  switch (vfork ())
-> ++  switch (pid=fork ())
-> +     {
-> +     case -1:
-> +       error (0, errno, "Could not run %s", path);
-> +@@ -63,7 +65,9 @@
-> + 	  close (p[1]);
-> + 	}
-> +       dup2 (1, 2);
-> +-      execve (path, argv, envp);
-> ++      while (*envp) 
-> ++        putenv(*envp++);
-> ++      execv (path, argv);
-> +       _exit (127);
+Most commits are hipox machine specific. One allows building kernel with newer GNU make. All are part of oe master.
 
-What's that about?
+Thx,
+Steffen
 
-p.
-
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
