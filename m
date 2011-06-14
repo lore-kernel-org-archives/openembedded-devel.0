@@ -1,34 +1,25 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QWXG1-0003lJ-KI for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jun 2011 19:18:30 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QWXCj-0001cw-Ig for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jun 2011 19:15:05 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jun 2011 19:15:05 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jun 2011 19:15:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 14 Jun 2011 19:14:46 +0200
-Message-ID: <it84u6$qbq$1@dough.gmane.org>
-References: <cover.1308070134.git.otavio@ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+	(envelope-from <mark.hatle@windriver.com>)
+	id 1QWYfw-0000MD-EB; Tue, 14 Jun 2011 20:49:20 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
+	by mail.windriver.com (8.14.3/8.14.3) with ESMTP id p5EIjrlu019935
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 14 Jun 2011 11:45:53 -0700 (PDT)
+Received: from Macintosh-5.local (172.25.36.226) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.1.255.0;
+	Tue, 14 Jun 2011 11:45:53 -0700
+Message-ID: <4DF7AC60.3050803@windriver.com>
+Date: Tue, 14 Jun 2011 13:45:52 -0500
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <cover.1308070134.git.otavio@ossystems.com.br>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [[meta-oe][PATCH 0/3] Pending fixes in O.S. Systems tree
+	rv:1.9.2.17) Gecko/20110414 Thunderbird/3.1.10
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>, Patches and discussions about
+	the oe-core layer <openembedded-core@lists.openembedded.org>
+Cc: tsc@lists.openembedded.org
+Subject: The Commit and Patch Message Guidelines -- Approved
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,36 +33,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jun 2011 17:18:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 14 Jun 2011 18:49:20 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On behalf of the Technical Steering Committee,
 
-On 14-06-11 18:49, Otavio Salvador wrote:
-> The following changes since commit 797fc635c1a693abb07392a22e0b001bc331f633:
-> 
->   gvfs: the sftp plugin only works with openssh-ssh (2011-06-13 20:20:15 +0200)
-> 
-> are available in the git repository at:
->   git://github.com/OSSystems/meta-oe master
->   https://github.com/OSSystems/meta-oe/tree/master
-> 
-> Otavio Salvador (3):
->   xf86-video-geode: add 2.11.12 version recipe
->   freerdp: bump SRCREV to gather fixes
->   freerdp-extension-xpunlimited: bump SRCREV due library renaming
+I am happy to announce the approval of the final version of the Commit and Patch
+Message Guidelines.
 
-I have queued all three and will push them out after I build test them,
-which has hit a snag in eglibc patching today.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Thank you to everyone who contributed to document.  If anyone has any questions,
+comments or concerns feel free to let me or any of the other TSC members know.
 
-iD8DBQFN95cGMkyGM64RGpERAgqDAJ9IGRny1bN8fDB8LtX6sloHR4nDuQCgphMl
-Qb9c+++fpPxaKurpRIxdtGE=
-=hPln
------END PGP SIGNATURE-----
+See http://wiki.openembedded.org/index.php/Commit_Patch_Message_Guidelines
 
+Some of you may be wondering what this is, below is a snippet from the guidelines.
+
+This set of guidelines is intended to help both the developer and reviewers of
+changes determine reasonable patch headers and change commit messages. Often
+when working with the code, you forget that not everyone is as familiar with the
+problem and/or fix as you are. Often the next person in the code doesn't
+understand what or why something is done so they quickly look at patch header
+and commit messages. Unless these messages are clear it will be difficult to
+understand the relevance of a given change and how future changes may impact
+previous decisions.
+
+This policy refers both to patches that are being applied by recipes as well as
+commit messages that are part of the source control system, usually git. A patch
+file needs a header in order to describe the specific changes that are made
+within that patch, while a commit message describes one or more changes to the
+overall project or system. Both the patch headers and commit messages require
+the same attention and basic details, however the purposes of the messages are
+slightly different. A commit message documents all of the changes made as part
+of a commit, while a patch header documents items specific to a single patch. In
+many cases the patch header can also be used as the commit message.
+
+This policy does not cover the testing of the changes, or the technical criteria
+for accepting a patch.
+
+By following these guidelines we will have a better record of the problems and
+solutions made over the course of development. It will also help establish a
+clear provenance of all of the code and changes.
+
+Approved by the Technical Steering Committee 2011/06/09.
 
 
