@@ -1,25 +1,22 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QWQlv-0005fV-Tw
+Received: from static.88-198-71-155.clients.your-server.de ([88.198.71.155]
+	helo=socrates.bennee.com) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <kernel-hacker@bennee.com>) id 1QWRnU-00008C-KI
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jun 2011 12:23:00 +0200
-Received: by yxe1 with SMTP id 1so1561285yxe.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jun 2011 03:19:34 -0700 (PDT)
-Received: by 10.236.9.105 with SMTP id 69mr6236384yhs.391.1308046774302;
-	Tue, 14 Jun 2011 03:19:34 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116])
-	by mx.google.com with ESMTPS id o47sm3327156yhn.16.2011.06.14.03.19.32
-	(version=SSLv3 cipher=OTHER); Tue, 14 Jun 2011 03:19:32 -0700 (PDT)
-Message-ID: <4DF735B3.1020106@dresearch-fe.de>
-Date: Tue, 14 Jun 2011 12:19:31 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110414 SUSE/3.1.10 Thunderbird/3.1.10
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: [2011.03-maintenance] Pull request
+	Tue, 14 Jun 2011 13:28:43 +0200
+Received: from localhost ([127.0.0.1] helo=sloy.cambridgebroadband.com)
+	by socrates.bennee.com with esmtp (Exim 4.72)
+	(envelope-from <kernel-hacker@bennee.com>)
+	id 1QWR6r-0006f7-D6; Tue, 14 Jun 2011 12:44:37 +0200
+From: kernel-hacker@bennee.com
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 14 Jun 2011 11:44:19 +0100
+Message-Id: <1308048259-6125-1-git-send-email-kernel-hacker@bennee.com>
+X-Mailer: git-send-email 1.7.5.4
+X-SA-Exim-Connect-IP: 127.0.0.1
+X-SA-Exim-Mail-From: kernel-hacker@bennee.com
+X-SA-Exim-Scanned: No (on socrates.bennee.com); SAEximRunCond expanded to false
+Cc: Alex Bennee <ajb@cbnl.com>
+Subject: [PATCH] linux-atm: cleanup build file to remove extraneous stuff
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,27 +30,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jun 2011 10:23:00 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 14 Jun 2011 11:28:43 -0000
 
-Please pull some commits from here:
+From: Alex Bennee <ajb@cbnl.com>
 
-URI: git@git.openembedded.org:openembedded
-Branch: sledz/maintenance
+The recipe inherited a bunch of un-deeded guff from the previous
+version which wasn't needed. The normal make install mechanics ensure
+the packages are correctly created.
 
-Most commits are hipox machine specific. One allows building kernel with newer GNU make. All are part of oe master.
+I have added a install_append to install the very useful aping binary
+which upstream don't include in the normal install.
 
-Thx,
-Steffen
+Signed-off-by: Alex Bennee <ajb@cbnl.com>
+---
+ recipes/linux-atm/linux-atm_2.5.1.bb |   34 +++++++---------------------------
+ 1 files changed, 7 insertions(+), 27 deletions(-)
 
+diff --git a/recipes/linux-atm/linux-atm_2.5.1.bb b/recipes/linux-atm/linux-atm_2.5.1.bb
+index 04af91b..7cc596b 100644
+--- a/recipes/linux-atm/linux-atm_2.5.1.bb
++++ b/recipes/linux-atm/linux-atm_2.5.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://linux-atm.sourceforge.net/"
+ SECTION = "libs"
+ PRIORITY = "optional"
+ DEPENDS = "virtual/kernel flex flex-native"
+-PR = "r1"
++PR = "r2"
+ LICENSE = "GPL LGPL"
+ 
+ SRC_URI = "http://heanet.dl.sourceforge.net/sourceforge/linux-atm/linux-atm-${PV}.tgz;name=tgz"
+@@ -14,37 +14,17 @@ SRC_URI[tgz.sha256sum] = "6bc60fe53c9e9c828a6d7f3675da11ad7fb54491863584e01c1051
+ 
+ inherit autotools pkgconfig flow-lossage
+ 
+-
+-headers_include="atmd.h atm.h atmsap.h"
+-headers_arpd="atmarp.h atmarpd.h"
+-
+-binarys_sbin="maint/atmaddr maint/atmloop lane/bus ilmid/ilmid mpoad/mpcd arpd/atmarp sigd/atmsigd maint/enitune lane/lecs led/zeppelin arpd/atmarpd maint/atmtcp maint/esi lane/les maint/zntune"
+-binarys_bin="test/aread maint/atmdiag maint/atmdump test/awrite maint/saaldump maint/sonetdiag test/ttcp_atm"
+-
+-
+ do_compile_prepend() {
+ 	oe_runmake -C ${S}/src/qgen AR='${BUILD_AR}' CPP='${BUILD_CPP}' CC='${BUILD_CC}' CFLAGS='${BUILD_CFLAGS}' DEFS='-I${S}/src -I. -I../.. -DHAVE_CONFIG_H' CPPFLAGS='${BUILD_CPPFLAGS}' LD='${BUILD_LD}' LDFLAGS='${BUILD_LDFLAGS}' qgen
+ 	oe_runmake -C ${S}/src/qgen DEFS='-I${S}/src -I. -I../.. -DHAVE_CONFIG_H' all
+ }
+ 
+-do_stage () {
+-	oe_libinstall -so -C src/lib libatm ${STAGING_LIBDIR}
+-
+-	for i in ${headers_include}; do
+-		install -m 0644 src/include/$i ${STAGING_INCDIR}/$i
+-	done
+-
+-	for i in ${headers_arpd}; do
+-		install -m 0644 src/arpd/$i ${STAGING_INCDIR}/$i
+-	done
+-
+-	for i in ${binarys_sbin}; do
+-		install -m 0755 src/$i ${STAGING_BINDIR}/`basename $i`
+-	done
++# The upstream declares some binaries as _noinst in automake
++# even though they are quite useful.
+ 
+-	for i in ${binarys_bin}; do
+-		install -m 0755 src/$i ${STAGING_BINDIR}/`basename $i`
++extra_bins="src/test/.libs/aping"
++do_install_append() {
++	for i in ${extra_bins}; do
++	    install -m 0644 $i ${D}${bindir}/
+ 	done
+ }
+-
+-
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+1.7.5.4
+
 
 
