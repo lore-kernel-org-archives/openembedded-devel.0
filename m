@@ -1,34 +1,25 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from vms173001pub.verizon.net ([206.46.173.1])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1QWVXK-0004B1-9s
+	(envelope-from <denis@denix.org>) id 1QWVlS-0004TH-J9
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jun 2011 17:28:15 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1QWVTz-0005li-QU from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jun 2011 08:24:47 -0700
-Received: from SVR-ORW-FEM-03.mgc.mentorg.com ([147.34.97.39]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Tue, 14 Jun 2011 08:24:47 -0700
-Received: from [172.30.80.132] (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
-	(147.34.97.39) with Microsoft SMTP Server id 14.1.289.1;
-	Tue, 14 Jun 2011 08:24:46 -0700
-Message-ID: <4DF77D33.7080407@mentor.com>
-Date: Tue, 14 Jun 2011 08:24:35 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <4DF735B3.1020106@dresearch-fe.de>
-	<4DF767F9.3070500@dresearch-fe.de>
-In-Reply-To: <4DF767F9.3070500@dresearch-fe.de>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 14 Jun 2011 15:24:47.0630 (UTC)
-	FILETIME=[32282AE0:01CC2AA7]
-Subject: Re: [2011.03-maintenance] Pull request (suspended)
+	Tue, 14 Jun 2011 17:42:50 +0200
+Received: from gandalf.denix.org ([unknown] [108.18.140.4])
+	by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LMS004XBE4JQBA3@vms173001.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	14 Jun 2011 10:38:56 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3E69F14AF5D; Tue,
+	14 Jun 2011 11:38:43 -0400 (EDT)
+Date: Tue, 14 Jun 2011 11:38:43 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20110614153843.GB1324@denix.org>
+References: <4DF6DBCE.7010404@gmail.com> <it731q$utn$1@dough.gmane.org>
+MIME-version: 1.0
+In-reply-to: <it731q$utn$1@dough.gmane.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [PATCH] ti-dsplink: Fixed location of toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,41 +33,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jun 2011 15:28:15 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 14 Jun 2011 15:42:50 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 06/14/2011 06:54 AM, Steffen Sledz wrote:
-> On 14.06.2011 12:19, Steffen Sledz wrote:
->> Please pull some commits from here:
->>
->> URI: git@git.openembedded.org:openembedded
->> Branch: sledz/maintenance
->>
->> Most commits are hipox machine specific. One allows building kernel
->> with newer GNU make. All are part of oe master.
+On Tue, Jun 14, 2011 at 09:36:26AM +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> Please suspend this pull request!
+> On 14-06-11 05:55, Joel A Fernandes wrote:
+> > ti-dsplink: Fixed location of toolchain to build ti-dsplink.
+> 
+> It sadly really needs an absolute path to the tools :(
 
-Noted, thanks.
+So, what was this patch trying to fix anyway? Is there something broken?
 
-- -- 
-Tom Rini
-Mentor Graphics Corporation
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+-- 
+Denys
 
-iQEcBAEBAgAGBQJN930uAAoJEI4NMjfc3nJxlWwIAJuwiOdtJ/R37A1pw+BlqAQZ
-9CIQxYQUkyoIgBz+UyS7ctJO6wQK02DTw/Yj1XfxQ2O1Gi/YA1AaoBsIMbmOMLQH
-+ZG/gojTk0TfRmzFojmrezbOXd/a/hgYGsR49+GOqSWU2DGqA28/QfEukJ+O+mBk
-Bkw4PfMrVsmsaiwo2Ttm5jYy5Uv1+jpL6eMdBq2F9EL6DSuiBRw1I9ZMRCH2yy4a
-UlN5CgmLpzr9eonQE2IGYwKSfHhMWdElODpaJ6tL/WLR8sgMWk/JW6ZDNgnntlPC
-Ofx8RAOBAA8po5T+WXFAR3v/NiYDl84F427CregB8OV/0qJgHuF/9bak9dlGyCk=
-=oUyk
------END PGP SIGNATURE-----
+
+> > Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
+> > ---
+> >  recipes/ti/ti-dsplink.inc |   34 +++++++++++++++++-----------------
+> >  1 files changed, 17 insertions(+), 17 deletions(-)
+> > 
+> > diff --git a/recipes/ti/ti-dsplink.inc b/recipes/ti/ti-dsplink.inc
+> > index c48ec41..bbdc35a 100644
+> > --- a/recipes/ti/ti-dsplink.inc
+> > +++ b/recipes/ti/ti-dsplink.inc
+> > @@ -94,23 +94,23 @@ do_compile() {
+> >      # Build the gpp user space library
+> >      cd ${DSPLINK}/gpp/src/api && make \
+> >        CROSS_COMPILE="${TARGET_PREFIX}" \
+> > -      CC="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc" \
+> > -      AR="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ar" \
+> > -      LD="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ld" \
+> > -      COMPILER="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc" \
+> > -      ARCHIVER="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ar" \
+> > +      CC="${CC}" \
+> > +      AR="${AR}" \
+> > +      LD="${LD}" \
+> > +      COMPILER="${CC}" \
+> > +      ARCHIVER="${AR}" \
+> >        KERNEL_DIR="${STAGING_KERNEL_DIR}" \
+> >        all
+> >  
+> >      # Build the gpp kernel space (debug and release)
+> >      cd ${DSPLINK}/gpp/src && make \
+> > -      OBJDUMP="${TARGET_PREFIX}objdump" \
+> > +      OBJDUMP="${OBJDUMP}" \
+> >        CROSS_COMPILE="${TARGET_PREFIX}" \
+> > -      CC="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc" \
+> > -      AR="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ar" \
+> > -      LD="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ld" \
+> > -      COMPILER="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc" \
+> > -      ARCHIVER="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ar" \
+> > +      CC="${CC}" \
+> > +      AR="${AR}" \
+> > +      LD="${LD}" \
+> > +      COMPILER="${CC}" \
+> > +      ARCHIVER="${AR}" \
+> >        KERNEL_DIR="${STAGING_KERNEL_DIR}" \
+> >        BASE_BUILDOS="${STAGING_KERNEL_DIR}" \
+> >        all
+> > @@ -122,12 +122,12 @@ do_compile() {
+> >        OSINC_PLATFORM="${TOOLCHAIN_PATH}/lib/gcc/${TARGET_SYS}/$(${TARGET_PREFIX}gcc -dumpversion)/include" \
+> >        OSINC_TARGET="${BASE_TOOLCHAIN}/target/usr/include" \
+> >        CROSS_COMPILE="${TARGET_PREFIX}" \
+> > -      CC="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc" \
+> > -      LD="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc" \
+> > -      AR="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ar" \
+> > -      COMPILER="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc" \
+> > -      LINKER="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc" \
+> > -      ARCHIVER="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ar" \
+> > +      CC="${CC}" \
+> > +      AR="${AR}" \
+> > +      LD="${LD}" \
+> > +      COMPILER="${CC}" \
+> > +      ARCHIVER="${AR}" \
+> > +      LINKER="${CC}" \
+> >        KERNEL_DIR="${STAGING_KERNEL_DIR}" \
+> >        all
+> 
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> 
+> iD8DBQFN9w96MkyGM64RGpERAkk+AJ9kAE91Op6450wG1xySGpAa3drFXQCfSNcO
+> F1rBpao1N5wwWAlNk6kwiqU=
+> =x1pA
+> -----END PGP SIGNATURE-----
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
