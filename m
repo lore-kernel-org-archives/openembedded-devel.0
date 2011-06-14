@@ -1,22 +1,23 @@
-Received: from static.88-198-71-155.clients.your-server.de ([88.198.71.155]
-	helo=socrates.bennee.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kernel-hacker@bennee.com>) id 1QWRnU-00008C-KI
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jun 2011 13:28:43 +0200
-Received: from localhost ([127.0.0.1] helo=sloy.cambridgebroadband.com)
-	by socrates.bennee.com with esmtp (Exim 4.72)
-	(envelope-from <kernel-hacker@bennee.com>)
-	id 1QWR6r-0006f7-D6; Tue, 14 Jun 2011 12:44:37 +0200
-From: kernel-hacker@bennee.com
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QWSvl-0004ND-Er for openembedded-devel@lists.openembedded.org;
+	Tue, 14 Jun 2011 14:41:17 +0200
+Received: from f053042077.adsl.alicedsl.de ([78.53.42.77]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QWStW-0000kR-4l for openembedded-devel@lists.openembedded.org;
+	Tue, 14 Jun 2011 12:38:58 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Jun 2011 11:44:19 +0100
-Message-Id: <1308048259-6125-1-git-send-email-kernel-hacker@bennee.com>
-X-Mailer: git-send-email 1.7.5.4
-X-SA-Exim-Connect-IP: 127.0.0.1
-X-SA-Exim-Mail-From: kernel-hacker@bennee.com
-X-SA-Exim-Scanned: No (on socrates.bennee.com); SAEximRunCond expanded to false
-Cc: Alex Bennee <ajb@cbnl.com>
-Subject: [PATCH] linux-atm: cleanup build file to remove extraneous stuff
+In-Reply-To: <1308037783-31218-1-git-send-email-james@digitalmatter.com.au>
+References: <1308037783-31218-1-git-send-email-james@digitalmatter.com.au>
+Date: Tue, 14 Jun 2011 14:37:53 +0200
+Message-ID: <1308055073.4220.38.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH] prelink: Added prelink-20100106, which works on ARM.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,81 +31,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jun 2011 11:28:43 -0000
+X-List-Received-Date: Tue, 14 Jun 2011 12:41:17 -0000
+X-Groupsio-MsgNum: 32655
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-JDWoaImx6xw8I9zwlajM"
 
-From: Alex Bennee <ajb@cbnl.com>
+--=-JDWoaImx6xw8I9zwlajM
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The recipe inherited a bunch of un-deeded guff from the previous
-version which wasn't needed. The normal make install mechanics ensure
-the packages are correctly created.
+Am Dienstag, den 14.06.2011, 15:49 +0800 schrieb James Limbouris:
+> This version of prelink, together with a patch by
+> Carsten Munk <carsten@maemo.org>, taken from MeeGo,
+> fixes an ARM incompatibility with 20090925.
+>=20
+> Signed-off-by: James Limbouris <james@digitalmatter.com.au>
 
-I have added a install_append to install the very useful aping binary
-which upstream don't include in the normal install.
+What build configuration do you use for testing? Using `angstrom-2010.x`
+or `minimal{,-uclibc}` for `MACHINE =3D "beagleboard"` `elfutils_0.143.bb`
+does not even compile.
 
-Signed-off-by: Alex Bennee <ajb@cbnl.com>
----
- recipes/linux-atm/linux-atm_2.5.1.bb |   34 +++++++---------------------------
- 1 files changed, 7 insertions(+), 27 deletions(-)
+With =C8=A6ngstr=C3=B6m the error is the following.
 
-diff --git a/recipes/linux-atm/linux-atm_2.5.1.bb b/recipes/linux-atm/linux-atm_2.5.1.bb
-index 04af91b..7cc596b 100644
---- a/recipes/linux-atm/linux-atm_2.5.1.bb
-+++ b/recipes/linux-atm/linux-atm_2.5.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://linux-atm.sourceforge.net/"
- SECTION = "libs"
- PRIORITY = "optional"
- DEPENDS = "virtual/kernel flex flex-native"
--PR = "r1"
-+PR = "r2"
- LICENSE = "GPL LGPL"
- 
- SRC_URI = "http://heanet.dl.sourceforge.net/sourceforge/linux-atm/linux-atm-${PV}.tgz;name=tgz"
-@@ -14,37 +14,17 @@ SRC_URI[tgz.sha256sum] = "6bc60fe53c9e9c828a6d7f3675da11ad7fb54491863584e01c1051
- 
- inherit autotools pkgconfig flow-lossage
- 
--
--headers_include="atmd.h atm.h atmsap.h"
--headers_arpd="atmarp.h atmarpd.h"
--
--binarys_sbin="maint/atmaddr maint/atmloop lane/bus ilmid/ilmid mpoad/mpcd arpd/atmarp sigd/atmsigd maint/enitune lane/lecs led/zeppelin arpd/atmarpd maint/atmtcp maint/esi lane/les maint/zntune"
--binarys_bin="test/aread maint/atmdiag maint/atmdump test/awrite maint/saaldump maint/sonetdiag test/ttcp_atm"
--
--
- do_compile_prepend() {
- 	oe_runmake -C ${S}/src/qgen AR='${BUILD_AR}' CPP='${BUILD_CPP}' CC='${BUILD_CC}' CFLAGS='${BUILD_CFLAGS}' DEFS='-I${S}/src -I. -I../.. -DHAVE_CONFIG_H' CPPFLAGS='${BUILD_CPPFLAGS}' LD='${BUILD_LD}' LDFLAGS='${BUILD_LDFLAGS}' qgen
- 	oe_runmake -C ${S}/src/qgen DEFS='-I${S}/src -I. -I../.. -DHAVE_CONFIG_H' all
- }
- 
--do_stage () {
--	oe_libinstall -so -C src/lib libatm ${STAGING_LIBDIR}
--
--	for i in ${headers_include}; do
--		install -m 0644 src/include/$i ${STAGING_INCDIR}/$i
--	done
--
--	for i in ${headers_arpd}; do
--		install -m 0644 src/arpd/$i ${STAGING_INCDIR}/$i
--	done
--
--	for i in ${binarys_sbin}; do
--		install -m 0755 src/$i ${STAGING_BINDIR}/`basename $i`
--	done
-+# The upstream declares some binaries as _noinst in automake
-+# even though they are quite useful.
- 
--	for i in ${binarys_bin}; do
--		install -m 0755 src/$i ${STAGING_BINDIR}/`basename $i`
-+extra_bins="src/test/.libs/aping"
-+do_install_append() {
-+	for i in ${extra_bins}; do
-+	    install -m 0644 $i ${D}${bindir}/
- 	done
- }
--
--
--- 
-1.7.5.4
+| strip.c: In function 'process_file':
+| strip.c:301:7: error: implicit declaration of function 'stat64'
+| strip.c:335:3: error: implicit declaration of function 'fstat64'
+| strip.c:356:63: error: 'ACCESSPERMS' undeclared (first use in this functi=
+on)
+| strip.c:356:63: note: each undeclared identifier is reported only once fo=
+r each function it appears in
+| strip.c: In function 'handle_elf':
+| strip.c:1641:4: error: implicit declaration of function 'fchmod'
+| make[2]: *** [strip.o] Error 1
 
 
+Thanks,
 
+Paul
+
+--=-JDWoaImx6xw8I9zwlajM
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk33ViEACgkQPX1aK2wOHViSlgCfTG9tQ9ydkPrviAZn5NxBvrSO
+l6IAoIBgAr8NIaRacthu+GsPzqVLpdFD
+=3VuD
+-----END PGP SIGNATURE-----
+
+--=-JDWoaImx6xw8I9zwlajM--
