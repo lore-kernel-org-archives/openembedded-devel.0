@@ -1,31 +1,39 @@
-Received: from vms173007pub.verizon.net ([206.46.173.7])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <openembedded@rkmorris.us>) id 1QWGbA-000483-V6
+	(envelope-from <agnel.joel@gmail.com>) id 1QWKml-0000qG-FP
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jun 2011 01:31:14 +0200
-Received: from server ([unknown] [71.164.183.134]) by vms173007.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LMR007A2561VC60@vms173007.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	13 Jun 2011 18:27:37 -0500 (CDT)
-Received: from server (127.0.0.1) by server (Axigen)
-	with ESMTPSA id 34991D; Mon, 13 Jun 2011 18:27:30 -0500
-Received: from [192.168.1.3] by rkmorris.us with HTTP; Mon,
-	13 Jun 2011 18:27:27 -0500
-From: Russell Morris <openembedded@rkmorris.us>
-Date: Mon, 13 Jun 2011 18:27:27 -0500
-X-Mailer: Axigen WebMail
+	Tue, 14 Jun 2011 05:59:28 +0200
+Received: by ywg8 with SMTP id 8so2572415ywg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Jun 2011 20:56:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
+	:cc:subject:content-type:content-transfer-encoding;
+	bh=O49ltndEvFX3QOyj419jB1a5WeEKGFZ4BFE0u+dtY90=;
+	b=CPPlz9g6k66T4x7tpcl+vk4Z6n8J4MRXEZp1P9yfxjcrYzhrJuUUSWHU8/fY/vuXjI
+	yhwdpx14mNodjs9arU5uZJUrCnq/wr7lb4teOtsFZcLqdgEiFjFGibsV9gIblJQqw56v
+	+Szhnpr22gfk4s91iMLHlaH0b6Hs3Rk2RdtTc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:content-type:content-transfer-encoding;
+	b=RsYa9zBtyOinjx99RLtl+mRezmMi+pD6hlN+tEg5z4Mzwe/lyBryLkJu3aamuUaQj5
+	rxFkaeX77bhkFr8/oO19rtTlTyE3lSSNeP2CPItmSp6pRnA7qOXaPo1IwdjesQr/bpN1
+	UWEdtMZUjYVAJOegkhTTesoAg0gg3rg41jknM=
+Received: by 10.101.2.1 with SMTP id e1mr5974507ani.18.1308023761943;
+	Mon, 13 Jun 2011 20:56:01 -0700 (PDT)
+Received: from [192.168.1.109] (cpe-76-184-244-226.tx.res.rr.com
+	[76.184.244.226])
+	by mx.google.com with ESMTPS id c35sm6283829anp.11.2011.06.13.20.56.00
+	(version=SSLv3 cipher=OTHER); Mon, 13 Jun 2011 20:56:01 -0700 (PDT)
+Message-ID: <4DF6DBCE.7010404@gmail.com>
+Date: Mon, 13 Jun 2011 22:55:58 -0500
+From: Joel A Fernandes <agnel.joel@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@lists.openembedded.org
-Message-id: <1308007647883960500@rkmorris.us>
-In-reply-to: <4DEFBF58.1010903@mentor.com>
-References: <1307481663432021500@rkmorris.us> <4DEFBF58.1010903@mentor.com>
-Importance: Normal
-MIME-version: 1.0
-X-AxigenVirus-Level: 1
-X-AxigenSpam-Level: 1
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Builds Failing
+Cc: "Kridner, Jason" <jdk@ti.com>, Koen <k-kooi@ti.com>
+Subject: [PATCH] ti-dsplink: Fixed location of toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,53 +47,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jun 2011 23:31:14 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Tue, 14 Jun 2011 03:59:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hi,
-Perhaps a dumb question, but ... do I need to do this? I can give it a try=
- (though I'm not quite sure I understand what needs to be changed). Just tr=
-ying to figure out how to get this working again.
-Thanks!
-... Russell
+ti-dsplink: Fixed location of toolchain to build ti-dsplink.
+
+Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
+---
+ recipes/ti/ti-dsplink.inc |   34 +++++++++++++++++-----------------
+ 1 files changed, 17 insertions(+), 17 deletions(-)
+
+diff --git a/recipes/ti/ti-dsplink.inc b/recipes/ti/ti-dsplink.inc
+index c48ec41..bbdc35a 100644
+--- a/recipes/ti/ti-dsplink.inc
++++ b/recipes/ti/ti-dsplink.inc
+@@ -94,23 +94,23 @@ do_compile() {
+     # Build the gpp user space library
+     cd ${DSPLINK}/gpp/src/api && make \
+       CROSS_COMPILE="${TARGET_PREFIX}" \
+-      CC="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc" \
+-      AR="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ar" \
+-      LD="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ld" \
+-      COMPILER="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc" \
+-      ARCHIVER="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ar" \
++      CC="${CC}" \
++      AR="${AR}" \
++      LD="${LD}" \
++      COMPILER="${CC}" \
++      ARCHIVER="${AR}" \
+       KERNEL_DIR="${STAGING_KERNEL_DIR}" \
+       all
+ 
+     # Build the gpp kernel space (debug and release)
+     cd ${DSPLINK}/gpp/src && make \
+-      OBJDUMP="${TARGET_PREFIX}objdump" \
++      OBJDUMP="${OBJDUMP}" \
+       CROSS_COMPILE="${TARGET_PREFIX}" \
+-      CC="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc" \
+-      AR="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ar" \
+-      LD="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ld" \
+-      COMPILER="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc" \
+-      ARCHIVER="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ar" \
++      CC="${CC}" \
++      AR="${AR}" \
++      LD="${LD}" \
++      COMPILER="${CC}" \
++      ARCHIVER="${AR}" \
+       KERNEL_DIR="${STAGING_KERNEL_DIR}" \
+       BASE_BUILDOS="${STAGING_KERNEL_DIR}" \
+       all
+@@ -122,12 +122,12 @@ do_compile() {
+       OSINC_PLATFORM="${TOOLCHAIN_PATH}/lib/gcc/${TARGET_SYS}/$(${TARGET_PREFIX}gcc -dumpversion)/include" \
+       OSINC_TARGET="${BASE_TOOLCHAIN}/target/usr/include" \
+       CROSS_COMPILE="${TARGET_PREFIX}" \
+-      CC="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc" \
+-      LD="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc" \
+-      AR="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ar" \
+-      COMPILER="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc" \
+-      LINKER="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc" \
+-      ARCHIVER="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ar" \
++      CC="${CC}" \
++      AR="${AR}" \
++      LD="${LD}" \
++      COMPILER="${CC}" \
++      ARCHIVER="${AR}" \
++      LINKER="${CC}" \
+       KERNEL_DIR="${STAGING_KERNEL_DIR}" \
+       all
+ 
 
 
-On Wed, 06/08/2011 01:28 PM, Tom Rini <tom_rini@mentor.com> wrote:
-> On 06/07/2011 02:21 PM, Russell Morris wrote:
-> > Hi,
-> >=20
-> > I am trying to build OE with the latest source (i.e. from MASTER) -
-> > but images that used to work are now failing (x11-gpe-image,
-> > console-image). The failure seems to be in bash, as you can see in
-> > the attached log files.
->=20
-> Ah ha!  So, what's going on here is that upstream patches that we fetch
-> have the 'bad' behavior of encoding '..' into the path and newer
-> versions of 'patch' fail to apply these due to security concerns.
->=20
-> We can kludge around this by making the recipe use say 'git' as the
-> patch apply tool but someone should go yell at upstream.  Or we need to
-> update to a newer version of bash where maybe upstream is publishing
-> better behaved patches.
->=20
-> --
-> Tom Rini
-> Mentor Graphics Corporation
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-From pespin.shar@gmail.com Tue Jun 14 03:23:40 2011
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pespin.shar@gmail.com>) id 1QWIM0-0006Fb-GV
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jun 2011 03:23:40 +0200
-Received: by wye20 with SMTP id 20so4105275wye.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jun 2011 18:20:15 -0700 (PDT)
-DKIM-Signature: v
