@@ -1,28 +1,29 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mark.hatle@windriver.com>) id 1QWghl-0003H8-W3
+	(envelope-from <sledz@dresearch-fe.de>) id 1QWjCo-0001Xm-OD
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jun 2011 05:23:46 +0200
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
-	by mail.windriver.com (8.14.3/8.14.3) with ESMTP id p5F3KJFn007089
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 15 Jun 2011 08:03:58 +0200
+Received: by fxm19 with SMTP id 19so193989fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jun 2011 20:20:19 -0700 (PDT)
-Received: from Macintosh-5.local (172.25.36.226) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.1.255.0;
-	Tue, 14 Jun 2011 20:20:18 -0700
-Message-ID: <4DF824F2.3050204@windriver.com>
-Date: Tue, 14 Jun 2011 22:20:18 -0500
-From: Mark Hatle <mark.hatle@windriver.com>
-Organization: Wind River Systems
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.2.17) Gecko/20110414 Thunderbird/3.1.10
+	Tue, 14 Jun 2011 23:00:32 -0700 (PDT)
+Received: by 10.223.143.6 with SMTP id s6mr103750fau.74.1308117632743;
+	Tue, 14 Jun 2011 23:00:32 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id l26sm34884fah.14.2011.06.14.23.00.30
+	(version=SSLv3 cipher=OTHER); Tue, 14 Jun 2011 23:00:31 -0700 (PDT)
+Message-ID: <4DF84A7D.2080803@dresearch-fe.de>
+Date: Wed, 15 Jun 2011 08:00:29 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110414 SUSE/3.1.10 Thunderbird/3.1.10
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1308037783-31218-1-git-send-email-james@digitalmatter.com.au>	<1308043009.25285.219.camel@phil-desktop>	<840A81C1B782724A8EB52725BD519EFF02EA9D@MBX20.4emm.local>
-	<4DF820DD.30606@windriver.com>
-In-Reply-To: <4DF820DD.30606@windriver.com>
-Subject: Re: [PATCH] prelink: Added prelink-20100106, which works on ARM.
+To: openembedded-devel@lists.openembedded.org
+References: <4DF0C472.4030608@dresearch-fe.de>
+	<4DF14C7E.7000701@gmail.com>	<4DF48491.6070901@dresearch-fe.de>
+	<it2911$eb0$1@dough.gmane.org>
+In-Reply-To: <it2911$eb0$1@dough.gmane.org>
+Subject: Re: Distros supporting older kernels?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,115 +37,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jun 2011 03:23:46 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 15 Jun 2011 06:03:58 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 6/14/11 10:02 PM, Mark Hatle wrote:
-> Have you looked at:
-> 
-> http://git.yoctoproject.org/cgit/cgit.cgi/prelink-cross/
-> 
-> As far as I'm aware, this version works properly for all of the expected
-> targets, including ARM.
-> 
-> If it doesn't work, someone should submit a patch to the maintainer (me) and
-> we'll get things resolved.
-> 
-> The Yocto prelinker contains both local (on-target) as well as cross-prelinking
-> support... (This is already integrated into oe-core)
-
-Forgot to note, look at the cross_prelink branch.  This is the head of tree for
-the embedded items.  The "master" is a mirror of the current SVN tree from Jakub
-Jelinek.
-
-The ld-linux... patch hunk is already there, and in a better shape then the one
-proposed.  Both the ld-linux.so.2 and ld-linux.so.3 are supported.
-
-> --Mark
-> 
-> On 6/14/11 8:16 PM, James Limbouris wrote:
->> On Tuesday, 14 June 2011 5:17 PM, Phil Blundell wrote:
->>> On Tue, 2011-06-14 at 15:49 +0800, James Limbouris wrote:
->>>> This version of prelink, together with a patch by Carsten Munk
->>>> <carsten@maemo.org>, taken from MeeGo, fixes an ARM incompatibility
->>>> with 20090925.
+On 12.06.2011 13:47, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 12-06-11 11:19, Steffen Sledz wrote:
+>> On 10.06.2011 00:43, Khem Raj wrote:
+>>> On 06/09/2011 06:02 AM, Steffen Sledz wrote:
+>>>> Hi Distro Maintainers,
 >>>>
->>>> Signed-off-by: James Limbouris <james@digitalmatter.com.au>
->>>> ---
->>>>  .../prelink-20100106-arm-fix.patch                 |   86 ++++++++++++++++++++
->>>>  recipes/prelink/prelink_20100106.bb                |   53 ++++++++++++
->>>>  2 files changed, 139 insertions(+), 0 deletions(-)  create mode
->>>> 100755 recipes/prelink/prelink-20100106/prelink-20100106-arm-fix.patch
->>>>  create mode 100644 recipes/prelink/prelink_20100106.bb
+>>>> as you could read in earlier messages of mine, we're forced to use an
+>>>> older kernel version (2.6.24) for our hardware. This brings a lot of
+>>>> problems as you can imagine (e.g. we're also bound to udev-141).
 >>>>
->>>> diff --git
->>>> a/recipes/prelink/prelink-20100106/prelink-20100106-arm-fix.patch
->>>> b/recipes/prelink/prelink-20100106/prelink-20100106-arm-fix.patch
->>>> new file mode 100755
->>>> index 0000000..a694541
->>>> --- /dev/null
->>>> +++ b/recipes/prelink/prelink-20100106/prelink-20100106-arm-fix.patch
->>>> @@ -0,0 +1,86 @@
->>>> +diff -ru prelink-old/src/arch-arm.c prelink/src/arch-arm.c
->>>> +--- prelink-old/src/arch-arm.c	2009-06-15 07:37:50.000000000 -0400
->>>> ++++ prelink/src/arch-arm.c	2010-08-17 03:35:05.000000000 -0400
->>>> +@@ -832,7 +832,7 @@
->>>> +   .R_COPY = R_ARM_COPY,
->>>> +   .R_RELATIVE = R_ARM_RELATIVE,
->>>> +   .rtype_class_valid = RTYPE_CLASS_VALID,
->>>> +-  .dynamic_linker = "/lib/ld-linux.so.2",
->>>> ++  .dynamic_linker = "/lib/ld-linux.so.3",
+>>>> Until now we've used angstrom-2008.1 with some own patches according to
+>>>> the linux-libc-headers and udev versions for our hardware which were
+>>>> reasonably not accepted by the Angstrom maintainers (see discussions [1]
+>>>> or [2]).
+>>>>
+>>>> In there current situation (angstrom-2008.1 is deprecated, the new layer
+>>>> concept will come up) we're looking for a new, better, less hacky
+>>>> solution.
+>>>>
+>>>> My first question therefor is if there are any distros explicitely
+>>>> supporting older kernels (pre 2.6.27) yet? Or are willing to work on it?
+>>>>
 >>>
->>> That looks like it's going to break OABI binaries.  I'm not sure to what extent
->>> we care about those anymore, but I'm not sure I would describe this as a
->>> "fix" exactly.
->>>
->>>> +-  switch (vfork ())
->>>> ++  switch (pid=fork ())
->>>> +     {
->>>> +     case -1:
->>>> +       error (0, errno, "Could not run %s", path); @@ -63,7 +65,9 @@
->>>> + 	  close (p[1]);
->>>> + 	}
->>>> +       dup2 (1, 2);
->>>> +-      execve (path, argv, envp);
->>>> ++      while (*envp)
->>>> ++        putenv(*envp++);
->>>> ++      execv (path, argv);
->>>> +       _exit (127);
->>>
->>> What's that about?
->>>
->>> p.
+>>> I guess a machine layer on top of oe-core could be something you can
+>>> work out and add/override needed recipes in this layer.
 >>
->> Hi,
+>> I think it's not that easy.
 >>
->> I believe the vfork() changes are for qemu compatibility - I don't know what the issue was exactly.
+>> For kernels prior to 2.6.27 you can't use a lot of core components (e.g.
+>> udev with versions higher than 141 or eggdbus) which *a lot of other
+>> components* depend on.
 >>
->> I didn't realise the linker version was for EABI/OABI compatibility - I guess prelink should determine the ABI and choose accordingly... 
->> But I don't have any OABI binaries on my system at all...
->> So we can:
->> 	1. Fix it properly
->> 	2. Switch from OABI only to EABI only
->> 	3. Make a prelink-eabi recipe.
+>> The underlying problem are some kernel API functions like inotify_init1
+>> or epoll_create1. Some distros (e.g. Angstrom) use linux-libc-headers
+>> 2.6.31 which is higher then 2.6.27 (what in my opinion conflicts with
+>> [1]). So there's no chance to detect the mentioned kernel functions
+>> correctly at compile time. :(
 >>
->> I don't really have the patience for 1., since I have no OABI binaries. Does anyone have any preferences here?
+>> As a consequence you have to check this in *all* programs at runtime.
+>> This is a good wish but hard to realize. E.g. the udev maintainers
+>> itself rejected a related patch[2] and say that they are not willing to
+>> support older kernel versions.
 >>
->> Regards,
->> James
+>> So in my opinion there are two possible ways:
 >>
+>> 1. Use only the old supported versions of the components (udev-141 and
+>> glib-dbus instead of eggdbus) with all the consequences for other programs.
 >>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>> 2. Determine *all* critical kernel functions, look for *all* the places
+>> where these are used, and patch them.
+>>
+>> Both are a lot more than some override recipes. So i think this needs an
+>> own distro with all the maintenance and testing.
+>
+> 3) Cut your losses and update your kernel port. At some point it just
+> isn't economically feasible aymore to bend userspace against an obsolete
+> kernel.
 
+You can believe me, we would like to do nothing more than this.
+
+But unfortunately we got only one big patch of more than 10000 lines against 2.6.24 from the CPU manufacturer (ex Oxford Semiconductors, now PLX Technology).
+
+We do not have the power to split up and port this code to newer kernel versions and the manufacturer is not willing to do it. :(
+
+Regards,
+Steffen
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
