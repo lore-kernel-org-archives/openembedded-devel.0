@@ -1,45 +1,22 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from smtp23.4emm.com ([69.18.222.9])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <guillaume.beraudo@gmail.com>) id 1QWm4n-0003bC-S4
+	(envelope-from <james@digitalmatter.com.au>) id 1QWmHb-0007fq-LN
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jun 2011 11:07:53 +0200
-Received: by bwz5 with SMTP id 5so333510bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jun 2011 02:04:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:sender:date:from:to:cc:subject:message-id
-	:in-reply-to:references:organization:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=CGEqE9XExyDcy0Gpj9CQQ5T9Sfy/L2Ipuaw48Jcmogc=;
-	b=DuVgRWajTI+w/gvzUMw5Y97xlsPsTkkgoSvY3WqXZ8V8+wbI6LboCTzMvMv/h4atST
-	8QOVvZL7ij3Hr/bSz8T18wm17iXsNtDFg8G6dcMse12lYwls9gq4uSioBs2gB3Qr1NNY
-	kAAjp9QbTTYFHRWzIimfus+HyV1n2S6+QetbY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:date:from:to:cc:subject:message-id:in-reply-to:references
-	:organization:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	b=ukbVcT5GybQ2SbMJlifmkj/JUa3RjFQAq+l6yaAoQgFTwpo7YUWq1KIECVobd+ZFR7
-	zBhcJSmur3sb/PIzDQCRAioTa83QLbW0HdW7q7hO6tvj3cEWqdZmM+rf7fFwVyEnLJHm
-	q093lB7HJJUNyx74kURcSvChjHeyEUDQgIisw=
-Received: by 10.204.141.146 with SMTP id m18mr281832bku.25.1308128667682;
-	Wed, 15 Jun 2011 02:04:27 -0700 (PDT)
-Received: from guibc (vig38-2-81-56-113-2.fbx.proxad.net [81.56.113.2])
-	by mx.google.com with ESMTPS id k10sm238427bkq.10.2011.06.15.02.04.26
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 15 Jun 2011 02:04:27 -0700 (PDT)
-Sender: guillaume beraudo <guillaume.beraudo@gmail.com>
-Date: Wed, 15 Jun 2011 11:04:22 +0200
-From: Guillaume BERAUDO <guillaume.beraudo@belledonne-communications.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110615110422.128307b8@guibc>
-In-Reply-To: <1308128099.25285.1321.camel@phil-desktop>
-References: <guillaume.beraudo@belledonne-communications.com>
-	<1308127322-5248-1-git-send-email-guillaume.beraudo@belledonne-communications.com>
-	<1308128099.25285.1321.camel@phil-desktop>
-Organization: Belledonne Communications
-X-Mailer: Claws Mail 3.7.6 (GTK+ 2.20.1; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: [PATCH v2] linphone: added recipe for v3.4.3
+	Wed, 15 Jun 2011 11:21:08 +0200
+Received: from MBX20.4emm.local ([fe80::5895:fdc9:8838:234]) by
+	HUB23.4emm.local ([::1]) with mapi; Wed, 15 Jun 2011 05:17:38 -0400
+From: James Limbouris <james@digitalmatter.com.au>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [PATCH] prelink: Added prelink-20100106, which works on ARM.
+Thread-Index: AcwrOxC6qQMyGyBET7ODWtfFgEOJvQ==
+Date: Wed, 15 Jun 2011 09:18:09 +0000
+Message-ID: <840A81C1B782724A8EB52725BD519EFF02EAF4@MBX20.4emm.local>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+MIME-Version: 1.0
+Subject: Re: [PATCH] prelink: Added prelink-20100106, which works on ARM.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,15 +30,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jun 2011 09:07:54 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 15 Jun 2011 09:21:08 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-> > +/home/guillaume/dev/linphone-embedded/oe/files/igep0020
-> > \ No newline at end of file
-> 
-> Er?  That patch doesn't look quite right to me.
+On Tue, 14 Jun 2011 22:20:18 -0500, Mark Hatle wrote:
+> On 6/14/11 10:02 PM, Mark Hatle wrote:
+> > Have you looked at:
+> >
+> > http://git.yoctoproject.org/cgit/cgit.cgi/prelink-cross/
+> >
+> > As far as I'm aware, this version works properly for all of the expecte=
+d
+> > targets, including ARM.
+> >
+> > If it doesn't work, someone should submit a patch to the maintainer (me=
+)
+> and
+> > we'll get things resolved.
+> >
+> > The Yocto prelinker contains both local (on-target) as well as cross-
+> prelinking
+> > support... (This is already integrated into oe-core)
+>=20
+> Forgot to note, look at the cross_prelink branch.  This is the head of tr=
+ee for
+> the embedded items.  The "master" is a mirror of the current SVN tree fro=
+m
+> Jakub
+> Jelinek.
+>=20
+> The ld-linux... patch hunk is already there, and in a better shape then t=
+he one
+> proposed.  Both the ld-linux.so.2 and ld-linux.so.3 are supported.
+>=20
+> > --Mark
 
-Thanks Phil, I send updated patch.
+Hi,
+
+Thanks for the link - looks like the right way to go. Would it be a waste o=
+f time to copy
+the oe-core prelink and elfutils to vanilla oe? I'm a little confused about=
+ the relationship
+between the two branches, and the status of oe-core. Should I be working wi=
+th local
+overlays, until things stabilise, or trying to push changes across?
+
+James
+
 
 
