@@ -1,23 +1,40 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QWmx3-0000kG-4E for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jun 2011 12:03:57 +0200
-Received: from f053045092.adsl.alicedsl.de ([78.53.45.92]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QWmup-0005XM-3i for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jun 2011 10:01:39 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <7f3cc6bd9bc16d66b66f7fded64aff1b1f8c3820.1308070134.git.otavio@ossystems.com.br>
+	(envelope-from <otavio.salvador@gmail.com>) id 1QWp6y-0005TO-59
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Jun 2011 14:22:20 +0200
+Received: by bwz5 with SMTP id 5so458113bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Jun 2011 05:18:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=T1LRfpxqgKYZK/qqa+gOAhRO8VrXce/Lzfd9LEPnwnE=;
+	b=UAGmcFfba55WQx4LLGyY6+tg/cy7sf19DDpX4sYDROt6f4aGeWo6YFpR7ZLz+J5Kdy
+	vXj9EHsQmKrNERNe3DzdS41PeNcHGcVOqX/uW8WJNaYe5ms16pu481dT/eo41dw94wiz
+	xQ8YLQe9S53WnIjEOX+Bi9ZUs2+Q8rOskoKJA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=x5Y2b5HwbyZw+WDGPSd67k4lzUzFdJHK8rdhbrWYey4N47rruFcKSngm2cVbBx6B7n
+	Orgak1CsQ5dpRXaV4eCh/9FxPZMK+oPIVG3G/eO36y7kvy06LGJTf2pRL/nqU+KKFKS3
+	EoDSSoWdAk1nFknsliuwfbE8iL2qnwvTdRZM4=
+MIME-Version: 1.0
+Received: by 10.204.84.75 with SMTP id i11mr453673bkl.184.1308140333585; Wed,
+	15 Jun 2011 05:18:53 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.116.82 with HTTP; Wed, 15 Jun 2011 05:18:53 -0700 (PDT)
+In-Reply-To: <1308132031.4304.9.camel@mattotaupa>
 References: <cover.1308070134.git.otavio@ossystems.com.br>
 	<7f3cc6bd9bc16d66b66f7fded64aff1b1f8c3820.1308070134.git.otavio@ossystems.com.br>
-Date: Wed, 15 Jun 2011 12:00:31 +0200
-Message-ID: <1308132031.4304.9.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
+	<1308132031.4304.9.camel@mattotaupa>
+Date: Wed, 15 Jun 2011 12:18:53 +0000
+X-Google-Sender-Auth: RfDB25YRUkkyk8wipJLrcf3aEYg
+Message-ID: <BANLkTi=Qkq50xcTwbC76wSiSKf1WR9AhKw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [[meta-oe][PATCH 3/3] freerdp-extension-xpunlimited: bump SRCREV due library renaming
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,68 +49,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jun 2011 10:03:57 -0000
-X-Groupsio-MsgNum: 32685
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-K0EiicpCid+rNKG17N7H"
-
---=-K0EiicpCid+rNKG17N7H
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 15 Jun 2011 12:22:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Dear Otavio,
+On Wed, Jun 15, 2011 at 10:00, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> nitpick: I think it is due *to*.
+
+AFAIK Koen has already put it on his queue.
+
+> Additionally it would be nice, if you could be more elaborate what
+> library was renamed. An URL would be good enough.
+
+FreeRDP has not a big refactoring and thus libfreerdp has been renamed
+to libfreerdp-core.
+
+> Additionally in my opinion it would be great if you could add a short
+> note what build configuration you used for testing.
+
+I don't see this on commit messages comming to the ml; why is it need
+for this case?
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
-Am Dienstag, den 14.06.2011, 16:49 +0000 schrieb Otavio Salvador:
-
-nitpick: I think it is due *to*.
-
-Additionally it would be nice, if you could be more elaborate what
-library was renamed. An URL would be good enough.
-
-Additionally in my opinion it would be great if you could add a short
-note what build configuration you used for testing.
-
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->  .../freerdp/freerdp-extension-xpunlimited_git.bb   |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-support/freerdp/freerdp-extension-xpunlimite=
-d_git.bb b/meta-oe/recipes-support/freerdp/freerdp-extension-xpunlimited_gi=
-t.bb
-> index 4fc6928..c9721f4 100644
-> --- a/meta-oe/recipes-support/freerdp/freerdp-extension-xpunlimited_git.b=
-b
-> +++ b/meta-oe/recipes-support/freerdp/freerdp-extension-xpunlimited_git.b=
-b
-> @@ -14,7 +14,7 @@ PR =3D "r0"
-> =20
->  inherit pkgconfig cmake
-> =20
-> -SRCREV =3D "d27f90a0128c687ce74cc922dba8b7eeb33f0654"
-> +SRCREV =3D "e952627ff4c116b4ce8541c91cb96bd5422c4a0d"
->  SRC_URI =3D "git://github.com/OSSystems/FreeRDP-Extension-XPUnlimited.gi=
-t;protocol=3Dgit"
-> =20
->  S =3D "${WORKDIR}/git"
-
-
-Thanks,
-
-Paul
-
---=-K0EiicpCid+rNKG17N7H
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk34gr8ACgkQPX1aK2wOHVikAgCfXlyP1jULjMRp3wS57ozMUWJY
-Y4oAn309DPOROeHEdptiDQtoiata9gtk
-=9KeF
------END PGP SIGNATURE-----
-
---=-K0EiicpCid+rNKG17N7H--
