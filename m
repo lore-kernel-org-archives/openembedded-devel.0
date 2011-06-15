@@ -1,36 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp22.4emm.com ([69.18.222.8])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QWZVO-0007fU-6G for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jun 2011 21:42:34 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QWZS3-0006DI-LV for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jun 2011 21:39:03 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jun 2011 21:39:03 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jun 2011 21:39:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 14 Jun 2011 21:38:43 +0200
-Message-ID: <it8dc3$fn1$1@dough.gmane.org>
-References: <4DF6DBCE.7010404@gmail.com>
-	<it731q$utn$1@dough.gmane.org>	<20110614153843.GB1324@denix.org>
-	<it7vpr$n45$1@dough.gmane.org> <20110614193117.GD1324@denix.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <20110614193117.GD1324@denix.org>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] ti-dsplink: Fixed location of toolchain
+	(envelope-from <james@digitalmatter.com.au>) id 1QWemJ-0008PB-Da
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Jun 2011 03:20:19 +0200
+Received: from MBX20.4emm.local ([fe80::5895:fdc9:8838:234]) by
+	HUB22.4emm.local ([fe80::7cff:1819:796a:2546%14]) with mapi;
+	Tue, 14 Jun 2011 21:13:30 -0400
+From: James Limbouris <james@digitalmatter.com.au>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [PATCH] prelink: Added prelink-20100106, which works on ARM.
+Thread-Index: AQHMKnN6SfrLtVwp10y0WKgfnodR7JS9mtfw
+Date: Wed, 15 Jun 2011 01:16:22 +0000
+Message-ID: <840A81C1B782724A8EB52725BD519EFF02EA9D@MBX20.4emm.local>
+References: <1308037783-31218-1-git-send-email-james@digitalmatter.com.au>
+	<1308043009.25285.219.camel@phil-desktop>
+In-Reply-To: <1308043009.25285.219.camel@phil-desktop>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+MIME-Version: 1.0
+Subject: Re: [PATCH] prelink: Added prelink-20100106, which works on ARM.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,55 +34,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jun 2011 19:42:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 15 Jun 2011 01:20:19 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 14-06-11 21:31, Denys Dmytriyenko wrote:
-> On Tue, Jun 14, 2011 at 05:47:07PM +0200, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 14-06-11 17:38, Denys Dmytriyenko wrote:
->>> On Tue, Jun 14, 2011 at 09:36:26AM +0200, Koen Kooi wrote:
->>>> -----BEGIN PGP SIGNED MESSAGE-----
->>>> Hash: SHA1
->>>>
->>>> On 14-06-11 05:55, Joel A Fernandes wrote:
->>>>> ti-dsplink: Fixed location of toolchain to build ti-dsplink.
->>>>
->>>> It sadly really needs an absolute path to the tools :(
->>>
->>> So, what was this patch trying to fix anyway? Is there something broken?
->>
->> Using an external toolchain without your import magic and then
->> overriding TOOLCHAINPATH in local.conf is broken. You might call it
->> broken by design :)
-> 
-> As you know, the design is hindered by requirements, so ease up! :)
-> 
-> As of the "import magic" - there is nothing magical about it, it just sets up 
-> TOOLCHAIN_PATH and TOOLCHAIN_SYSPATH automatically. Otherwise you'd have to 
-> set at least TOOLCHAIN_PATH manually and it works. So, I still don't see what 
-> exactly is broken and needs to be fixed.
-
-Joel setup his tree the wrong way
-
-> BTW, the requirements for absolute toolchain path come from dsplink and not 
-> the external toolchain, AFAICR...
-
-dsplink and others, yes.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFN97jDMkyGM64RGpERAimXAKC70bo3sUyDf+/jzJux/n8mXRurYgCgqsEt
-RT2PAYT1EIeptDARW/MoEcE=
-=Yfp9
------END PGP SIGNATURE-----
-
+T24gVHVlc2RheSwgMTQgSnVuZSAyMDExIDU6MTcgUE0sIFBoaWwgQmx1bmRlbGwgd3JvdGU6DQo+
+IE9uIFR1ZSwgMjAxMS0wNi0xNCBhdCAxNTo0OSArMDgwMCwgSmFtZXMgTGltYm91cmlzIHdyb3Rl
+Og0KPiA+IFRoaXMgdmVyc2lvbiBvZiBwcmVsaW5rLCB0b2dldGhlciB3aXRoIGEgcGF0Y2ggYnkg
+Q2Fyc3RlbiBNdW5rDQo+ID4gPGNhcnN0ZW5AbWFlbW8ub3JnPiwgdGFrZW4gZnJvbSBNZWVHbywg
+Zml4ZXMgYW4gQVJNIGluY29tcGF0aWJpbGl0eQ0KPiA+IHdpdGggMjAwOTA5MjUuDQo+ID4NCj4g
+PiBTaWduZWQtb2ZmLWJ5OiBKYW1lcyBMaW1ib3VyaXMgPGphbWVzQGRpZ2l0YWxtYXR0ZXIuY29t
+LmF1Pg0KPiA+IC0tLQ0KPiA+ICAuLi4vcHJlbGluay0yMDEwMDEwNi1hcm0tZml4LnBhdGNoICAg
+ICAgICAgICAgICAgICB8ICAgODYgKysrKysrKysrKysrKysrKysrKysNCj4gPiAgcmVjaXBlcy9w
+cmVsaW5rL3ByZWxpbmtfMjAxMDAxMDYuYmIgICAgICAgICAgICAgICAgfCAgIDUzICsrKysrKysr
+KysrKw0KPiA+ICAyIGZpbGVzIGNoYW5nZWQsIDEzOSBpbnNlcnRpb25zKCspLCAwIGRlbGV0aW9u
+cygtKSAgY3JlYXRlIG1vZGUNCj4gPiAxMDA3NTUgcmVjaXBlcy9wcmVsaW5rL3ByZWxpbmstMjAx
+MDAxMDYvcHJlbGluay0yMDEwMDEwNi1hcm0tZml4LnBhdGNoDQo+ID4gIGNyZWF0ZSBtb2RlIDEw
+MDY0NCByZWNpcGVzL3ByZWxpbmsvcHJlbGlua18yMDEwMDEwNi5iYg0KPiA+DQo+ID4gZGlmZiAt
+LWdpdA0KPiA+IGEvcmVjaXBlcy9wcmVsaW5rL3ByZWxpbmstMjAxMDAxMDYvcHJlbGluay0yMDEw
+MDEwNi1hcm0tZml4LnBhdGNoDQo+ID4gYi9yZWNpcGVzL3ByZWxpbmsvcHJlbGluay0yMDEwMDEw
+Ni9wcmVsaW5rLTIwMTAwMTA2LWFybS1maXgucGF0Y2gNCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDc1
+NQ0KPiA+IGluZGV4IDAwMDAwMDAuLmE2OTQ1NDENCj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysr
+IGIvcmVjaXBlcy9wcmVsaW5rL3ByZWxpbmstMjAxMDAxMDYvcHJlbGluay0yMDEwMDEwNi1hcm0t
+Zml4LnBhdGNoDQo+ID4gQEAgLTAsMCArMSw4NiBAQA0KPiA+ICtkaWZmIC1ydSBwcmVsaW5rLW9s
+ZC9zcmMvYXJjaC1hcm0uYyBwcmVsaW5rL3NyYy9hcmNoLWFybS5jDQo+ID4gKy0tLSBwcmVsaW5r
+LW9sZC9zcmMvYXJjaC1hcm0uYwkyMDA5LTA2LTE1IDA3OjM3OjUwLjAwMDAwMDAwMCAtMDQwMA0K
+PiA+ICsrKysgcHJlbGluay9zcmMvYXJjaC1hcm0uYwkyMDEwLTA4LTE3IDAzOjM1OjA1LjAwMDAw
+MDAwMCAtMDQwMA0KPiA+ICtAQCAtODMyLDcgKzgzMiw3IEBADQo+ID4gKyAgIC5SX0NPUFkgPSBS
+X0FSTV9DT1BZLA0KPiA+ICsgICAuUl9SRUxBVElWRSA9IFJfQVJNX1JFTEFUSVZFLA0KPiA+ICsg
+ICAucnR5cGVfY2xhc3NfdmFsaWQgPSBSVFlQRV9DTEFTU19WQUxJRCwNCj4gPiArLSAgLmR5bmFt
+aWNfbGlua2VyID0gIi9saWIvbGQtbGludXguc28uMiIsDQo+ID4gKysgIC5keW5hbWljX2xpbmtl
+ciA9ICIvbGliL2xkLWxpbnV4LnNvLjMiLA0KPiANCj4gVGhhdCBsb29rcyBsaWtlIGl0J3MgZ29p
+bmcgdG8gYnJlYWsgT0FCSSBiaW5hcmllcy4gIEknbSBub3Qgc3VyZSB0byB3aGF0IGV4dGVudA0K
+PiB3ZSBjYXJlIGFib3V0IHRob3NlIGFueW1vcmUsIGJ1dCBJJ20gbm90IHN1cmUgSSB3b3VsZCBk
+ZXNjcmliZSB0aGlzIGFzIGENCj4gImZpeCIgZXhhY3RseS4NCj4gDQo+ID4gKy0gIHN3aXRjaCAo
+dmZvcmsgKCkpDQo+ID4gKysgIHN3aXRjaCAocGlkPWZvcmsgKCkpDQo+ID4gKyAgICAgew0KPiA+
+ICsgICAgIGNhc2UgLTE6DQo+ID4gKyAgICAgICBlcnJvciAoMCwgZXJybm8sICJDb3VsZCBub3Qg
+cnVuICVzIiwgcGF0aCk7IEBAIC02Myw3ICs2NSw5IEBADQo+ID4gKyAJICBjbG9zZSAocFsxXSk7
+DQo+ID4gKyAJfQ0KPiA+ICsgICAgICAgZHVwMiAoMSwgMik7DQo+ID4gKy0gICAgICBleGVjdmUg
+KHBhdGgsIGFyZ3YsIGVudnApOw0KPiA+ICsrICAgICAgd2hpbGUgKCplbnZwKQ0KPiA+ICsrICAg
+ICAgICBwdXRlbnYoKmVudnArKyk7DQo+ID4gKysgICAgICBleGVjdiAocGF0aCwgYXJndik7DQo+
+ID4gKyAgICAgICBfZXhpdCAoMTI3KTsNCj4gDQo+IFdoYXQncyB0aGF0IGFib3V0Pw0KPiANCj4g
+cC4NCg0KSGksDQoNCkkgYmVsaWV2ZSB0aGUgdmZvcmsoKSBjaGFuZ2VzIGFyZSBmb3IgcWVtdSBj
+b21wYXRpYmlsaXR5IC0gSSBkb24ndCBrbm93IHdoYXQgdGhlIGlzc3VlIHdhcyBleGFjdGx5Lg0K
+DQpJIGRpZG4ndCByZWFsaXNlIHRoZSBsaW5rZXIgdmVyc2lvbiB3YXMgZm9yIEVBQkkvT0FCSSBj
+b21wYXRpYmlsaXR5IC0gSSBndWVzcyBwcmVsaW5rIHNob3VsZCBkZXRlcm1pbmUgdGhlIEFCSSBh
+bmQgY2hvb3NlIGFjY29yZGluZ2x5Li4uIA0KQnV0IEkgZG9uJ3QgaGF2ZSBhbnkgT0FCSSBiaW5h
+cmllcyBvbiBteSBzeXN0ZW0gYXQgYWxsLi4uDQpTbyB3ZSBjYW46DQoJMS4gRml4IGl0IHByb3Bl
+cmx5DQoJMi4gU3dpdGNoIGZyb20gT0FCSSBvbmx5IHRvIEVBQkkgb25seQ0KCTMuIE1ha2UgYSBw
+cmVsaW5rLWVhYmkgcmVjaXBlLg0KDQpJIGRvbid0IHJlYWxseSBoYXZlIHRoZSBwYXRpZW5jZSBm
+b3IgMS4sIHNpbmNlIEkgaGF2ZSBubyBPQUJJIGJpbmFyaWVzLiBEb2VzIGFueW9uZSBoYXZlIGFu
+eSBwcmVmZXJlbmNlcyBoZXJlPw0KDQpSZWdhcmRzLA0KSmFtZXMNCg0KDQo=
 
 
