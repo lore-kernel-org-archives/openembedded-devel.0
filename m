@@ -1,34 +1,45 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QWlov-0005sp-5i for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jun 2011 10:51:29 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QWlld-0006AN-3d for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jun 2011 10:48:05 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jun 2011 10:48:05 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <guillaume.beraudo@gmail.com>) id 1QWlvA-0002u8-J2
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Jun 2011 10:57:58 +0200
+Received: by wwb17 with SMTP id 17so176877wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jun 2011 10:48:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 15 Jun 2011 01:54:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:sender:date:from:to:cc:subject:message-id
+	:in-reply-to:references:organization:x-mailer:mime-version
+	:content-type:content-transfer-encoding;
+	bh=RDmgppYteOGonBuft6+DLp27bZLjPN5T/EI/vggvry4=;
+	b=UYu34f97w5zo6Dlkh22wOE+1DIPXkLbrmz4PLtPSztWTGFlPkyKlPOZCOBUmRho00P
+	OZA1Nu7HoGgByBRDIrALz/8Q8HWCblr7VFV5uhf9YWlsKGJt5qrQIFaazT1THGP6xk1W
+	ktYyqRfDymtPSKewF1hYgJXJtM6Z4rVmKsEwU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:date:from:to:cc:subject:message-id:in-reply-to:references
+	:organization:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	b=BmTQQae4fFYpvFv06CGL2dTaqCTrrYrunLqT+p1aW9Q8Rn2/Qkd3KxlIGMODGNH4Dp
+	9oXHIgvKJpiHv2iBubaYK43YKkNspBLPEqpx5D6eqbZQYmXbmTY+fLJZsWlP8126GhGi
+	sCDHMw2exF4T2+bb67hgM4fVS+WTZdldExndU=
+Received: by 10.216.62.137 with SMTP id y9mr1774406wec.107.1308128070490;
+	Wed, 15 Jun 2011 01:54:30 -0700 (PDT)
+Received: from guibc (vig38-2-81-56-113-2.fbx.proxad.net [81.56.113.2])
+	by mx.google.com with ESMTPS id n20sm122415weq.15.2011.06.15.01.54.29
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 15 Jun 2011 01:54:30 -0700 (PDT)
+Sender: guillaume beraudo <guillaume.beraudo@gmail.com>
+Date: Wed, 15 Jun 2011 10:54:25 +0200
+From: Guillaume BERAUDO <guillaume.beraudo@belledonne-communications.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 15 Jun 2011 10:47:52 +0200
-Message-ID: <it9rjp$l8s$1@dough.gmane.org>
+Message-ID: <20110615105425.3aa40c88@guibc>
+In-Reply-To: <it9rjp$l8s$1@dough.gmane.org>
 References: <guillaume.beraudo@belledonne-communications.com>
 	<1308127322-5248-1-git-send-email-guillaume.beraudo@belledonne-communications.com>
+	<it9rjp$l8s$1@dough.gmane.org>
+Organization: Belledonne Communications
+X-Mailer: Claws Mail 3.7.6 (GTK+ 2.20.1; x86_64-pc-linux-gnu)
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1308127322-5248-1-git-send-email-guillaume.beraudo@belledonne-communications.com>
-X-Enigmail-Version: 1.0.1
+Cc: koen@dominion.thruhere.net
 Subject: Re: [PATCH v2] linphone: added recipe for v3.4.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,26 +54,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jun 2011 08:51:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 15 Jun 2011 08:57:58 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi Koen,
 
-On 15-06-11 10:42, Guillaume Beraudo wrote:
-> Recipe support linphone built with video support and without GTK.
+> > * included IGEPv2 specific patch to get audio playback at 8KHz rate.
 > 
-> * included IGEPv2 specific patch to get audio playback at 8KHz rate.
+> Is it igep specific, twl4030 specific, arm specific or something else?
 
-Is it igep specific, twl4030 specific, arm specific or something else?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+It is not arm specific as it is needed by none of the numerous
+Android softphones out there.
 
-iD8DBQFN+HG4MkyGM64RGpERAr0YAKCYNAp1VSXRLHIsWdeUbPmQFBFqogCgsyeK
-dicl9mBp7UK7xsCqzlzCREY=
-=WmD8
------END PGP SIGNATURE-----
+It is required by my igepv2 board (IGEPv2 RC - OMAP3530).
 
+
+I have no other twl4030 powered board.
+
+
+Regards
 
 
