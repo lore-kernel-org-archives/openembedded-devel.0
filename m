@@ -1,28 +1,29 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1QWrn8-0006Zh-2u
+	(envelope-from <sledz@dresearch-fe.de>) id 1QWusY-00019i-Vl
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jun 2011 17:14:02 +0200
-Received: by wwb17 with SMTP id 17so486701wwb.24
+	Wed, 15 Jun 2011 20:31:51 +0200
+Received: by fxm19 with SMTP id 19so692003fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jun 2011 08:10:35 -0700 (PDT)
-Received: by 10.216.0.206 with SMTP id 56mr2232549web.112.1308150635273;
-	Wed, 15 Jun 2011 08:10:35 -0700 (PDT)
-Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id u64sm312172weq.4.2011.06.15.08.10.34
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 15 Jun 2011 08:10:34 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1084)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <4DF8CAB7.8020403@dresearch-fe.de>
-Date: Wed, 15 Jun 2011 17:10:29 +0200
-Message-Id: <6FAE1562-AA38-44BC-B757-01AC8EB65BD9@dominion.thruhere.net>
+	Wed, 15 Jun 2011 11:28:24 -0700 (PDT)
+Received: by 10.223.33.80 with SMTP id g16mr32145fad.125.1308162504295;
+	Wed, 15 Jun 2011 11:28:24 -0700 (PDT)
+Received: from mobil-400-586.intern.dresearch.de (recycler-gw.in-dsl.de
+	[217.197.85.167])
+	by mx.google.com with ESMTPS id o23sm381105faa.9.2011.06.15.11.28.20
+	(version=SSLv3 cipher=OTHER); Wed, 15 Jun 2011 11:28:21 -0700 (PDT)
+Message-ID: <4DF8F9C3.8000908@dresearch-fe.de>
+Date: Wed, 15 Jun 2011 20:28:19 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110414 SUSE/3.1.10 Thunderbird/3.1.10
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
 References: <4DF735B3.1020106@dresearch-fe.de>	<4DF767F9.3070500@dresearch-fe.de>	<4DF77D33.7080407@mentor.com>	<4DF8B96D.7090605@dresearch-fe.de>
 	<itae90$9a0$1@dough.gmane.org> <4DF8CAB7.8020403@dresearch-fe.de>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-X-Mailer: Apple Mail (2.1084)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance] Pull request (resume)
+	<6FAE1562-AA38-44BC-B757-01AC8EB65BD9@dominion.thruhere.net>
+In-Reply-To: <6FAE1562-AA38-44BC-B757-01AC8EB65BD9@dominion.thruhere.net>
+Subject: Re: [2011.03-maintenance] Pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,36 +37,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jun 2011 15:14:02 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 15 Jun 2011 18:31:51 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
+On 15.06.2011 16:06, Koen Kooi wrote:
+ > Which commits are in that branch? Could you please post a pull request
+ > formatted similar to the other requests?
 
-Op 15 jun 2011, om 17:07 heeft Steffen Sledz het volgende geschreven:
+Please pull some commits from here:
 
-> On 15.06.2011 16:06, Koen Kooi wrote:
->> Which commits are in that branch? Could you please post a pull =
-request
->> formatted similar to the other requests?
->=20
-> Is there a guide which informationen such a message should contain in =
-which format?
->=20
-> Can git prepare a summary for it (i just branched from =
-2011.03-maintenance and cherry-picked some commits from master)?
+URI: git@git.openembedded.org:openembedded
+Branch: sledz/maintenance
 
-I tend to use this one:
+Mario Schuknecht (2):
+       linux-libc-headers-2.6.24: add additional tcp ioctl (for hipox machine only)
+       linux-2.6.24: optimize flash timings (hipox machine only)
 
-koen@dominion:/OE/angstrom-2008/sources/openembedded$ git shortlog =
-origin/2011.03-maintenance..2011.03-maintenance
-Koen Kooi (1):
-      x-load git: 1.5.0 sorts lower than 1.44ss, so bump PE
+Steffen Sledz (6):
+       linux-2.6.24: add support for AMIC flashes (e.g. A29L160AT)
+       linux-2.6.24: allow building kernel with newer GNU make
+       linux-2.6.24: disable 2nd SATA port (hipox machine only)
+       linux-2.6.24: enable some more kernel debug options (hipox machine only)
+       linux-2.6.24: fix diff pathes in hipox machine specific patch file
+       linux-2.6.24: fix a buggy patch file for hipox machine
+       linux-2.6.24: add another 4N-GALAXY.DE PID to ftdi_sio driver
 
-But you could also use:
+Thilo Fromm (3):
+       linux-2.6.24: fix 1/2-byte read access to PCI config space (hipox machine only)
+       linux-2.6.24: add PCI abort handler (hipox machine only)
+       linux-2.6.24: enable some more diagnostic options (hipox machine only)
 
-koen@dominion:/OE/angstrom-2008/sources/openembedded$ git cherry -v
-+ 067da6cb5ce5aac4a793fdf59769ff5cc0eadce4 x-load git: 1.5.0 sorts lower =
-than 1.44ss, so bump PE
+Most commits are hipox machine specific kernel config modifications or kernel code fixes.
 
+One commit enables building kernel 2.6.24 with newer GNU make.
+
+Another one backports support for AMIC flashes.
+
+All are part of oe master.
+
+Thx,
+Steffen
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
