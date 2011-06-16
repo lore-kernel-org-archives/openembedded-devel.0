@@ -1,38 +1,35 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefflance01@gmail.com>) id 1QXJyK-0006HY-ML
+	(envelope-from <jefflance01@gmail.com>) id 1QXJyL-0006HZ-09
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Jun 2011 23:19:28 +0200
-Received: by gyd5 with SMTP id 5so467983gyd.6
+	Thu, 16 Jun 2011 23:19:31 +0200
+Received: by ywa12 with SMTP id 12so517597ywa.6
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 16 Jun 2011 14:16:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=bugh1bU33TflWfCCRPhg2DJz1mcbwaeRJ2QIkTEnSMI=;
-	b=DdW2LPxv7zDiv2mJWoFSXjxHZSFhaySaAH0UAYu9st+HAy82Hw2JK57qrLp6kvZZuP
-	kW+f3yurmHf8ie6LfPzAOINEtqz81IIE2veTsOUat6SGVsm92A6GmefTbckRy2OVOla0
-	3+Je/9+cMIJL7NVx08TUlosmYAYKEB7QGJDIc=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=g0VbcD5jVwv+GBuqCVU+/SnpGsoDxRp1o3kqmce3NOA=;
+	b=Q9kpujVUAMd2xVaUIA862fBxNl+4ZxX98DylLXgrf/rGSW6zuQrQVsq+p3qCdy3xb1
+	mQt0fc3qu21WbRn5lktbo5SU6UC1FrfEswrAQsb1C6GRYwnil2SzfRO7wNECZO7tQCH0
+	goj7yY3y+CfhozOP2R0RKZCkX/860uEFheC1E=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=Rb7Obj6k3q5/XjEiDwNzxD5PgK2ZVK9j8cI/xk+xCgD4uQBbjXRaGEe8lsf/YwcYiz
-	xSCbe8VPt/WRdqa2NfpqKD4nYA9vvlybV3bnmOR/WAPJWBTLXbo46hLXVQV6IiiYXfPJ
-	No9hZmZLVF8hT8PXelZfCZi1sZQ+Kugs3fSAI=
-Received: by 10.150.48.16 with SMTP id v16mr1569984ybv.421.1308258960338;
-	Thu, 16 Jun 2011 14:16:00 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=yAkxXYWB6n84b9VH05IPH0/kxEG63iky3D+EN7HBoacB1zeU0rzvda9BhTAjEJdI9A
+	AkfRuZtEfQqMcA5TZ9DiNtCIpYTf3BhR10CHnf+O1oeUpoEf+2IzEte40r00O/vF2evw
+	ZQk0900lgost8RIhAVMI4leLHqtN7B08TDTjc=
+Received: by 10.151.68.20 with SMTP id v20mr1681351ybk.65.1308258958363;
+	Thu, 16 Jun 2011 14:15:58 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
-	by mx.google.com with ESMTPS id t4sm474336ybe.27.2011.06.16.14.15.59
+	by mx.google.com with ESMTPS id t4sm474336ybe.27.2011.06.16.14.15.57
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 16 Jun 2011 14:15:59 -0700 (PDT)
+	Thu, 16 Jun 2011 14:15:57 -0700 (PDT)
 From: Jeff Lance <jefflance01@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Jun 2011 16:13:09 -0500
-Message-Id: <1308258789-9959-2-git-send-email-j-lance1@ti.com>
+Date: Thu, 16 Jun 2011 16:13:08 -0500
+Message-Id: <1308258789-9959-1-git-send-email-j-lance1@ti.com>
 X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1308258789-9959-1-git-send-email-j-lance1@ti.com>
-References: <1308258789-9959-1-git-send-email-j-lance1@ti.com>
 Cc: Jeff Lance <j-lance1@ti.com>
-Subject: [PATCH 2/2] matrix_gui: Add beagleboard platform support
+Subject: [PATCH 1/2] matrix_gui: Update SRCREV to revision 265
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,81 +45,55 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 16 Jun 2011 21:19:31 -0000
 
-* Previously beagleboard was using the am3715 support files
+* ti816x - Rework runOMTB script
+* am3517 - Remove Can and WIFI apps
+* am3715 - Add four new power apps
+* Add Oprofile apps to all am platforms
+* Remove LMBench app "write throughput" from all am platforms
+* Add beagle board platform support
 
 Signed-off-by: Jeff Lance <j-lance1@ti.com>
 ---
- recipes/ti/matrix-gui-common.inc |    4 ++--
- recipes/ti/matrix-gui-e.inc      |    4 ++--
- recipes/ti/matrix-gui.inc        |    4 ++--
+ recipes/ti/matrix-gui-common_1.4.bb |    4 ++--
+ recipes/ti/matrix-gui-e_1.3.bb      |    4 ++--
+ recipes/ti/matrix-gui_1.3.bb        |    4 ++--
  3 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/recipes/ti/matrix-gui-common.inc b/recipes/ti/matrix-gui-common.inc
-index 0ed72b5..7a46549 100644
---- a/recipes/ti/matrix-gui-common.inc
-+++ b/recipes/ti/matrix-gui-common.inc
-@@ -4,7 +4,7 @@ LICENSE = "BSD"
- SECTION = "multimedia"
- PRIORITY = "optional"
+diff --git a/recipes/ti/matrix-gui-common_1.4.bb b/recipes/ti/matrix-gui-common_1.4.bb
+index 0b4b25b..c241e85 100644
+--- a/recipes/ti/matrix-gui-common_1.4.bb
++++ b/recipes/ti/matrix-gui-common_1.4.bb
+@@ -4,5 +4,5 @@ require matrix-gui-common.inc
+ # prebuilt version in the repository.
+ RRECOMMENDS_${PN} = "am-sysinfo"
  
--INC_PR = "r9"
-+INC_PR = "r10"
+-SRCREV = "257"
+-PR = "${INC_PR}.11"
++SRCREV = "265"
++PR = "${INC_PR}.12"
+diff --git a/recipes/ti/matrix-gui-e_1.3.bb b/recipes/ti/matrix-gui-e_1.3.bb
+index a6eb17f..87a79fb 100644
+--- a/recipes/ti/matrix-gui-e_1.3.bb
++++ b/recipes/ti/matrix-gui-e_1.3.bb
+@@ -1,5 +1,5 @@
+ require matrix-gui-e.inc
  
- COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x|ti814x)"
+-SRCREV = "257"
+-PR = "${INC_PR}.10"
++SRCREV = "265"
++PR = "${INC_PR}.11"
  
-@@ -14,7 +14,7 @@ PLATFORM_omapl138 = "omapl138"
- PLATFORM_omap3evm = "omap3530"
- PLATFORM_dm37x-evm = "dm3730"
- PLATFORM_am37x-evm = "am3715"
--PLATFORM_beagleboard = "am3715"
-+PLATFORM_beagleboard = "beagleboard"
- PLATFORM_ti816x = "ti816x"
- PLATFORM_ti814x = "ti814x"
- PLATFORM_am180x-evm = "am180x"
-diff --git a/recipes/ti/matrix-gui-e.inc b/recipes/ti/matrix-gui-e.inc
-index 7158d90..b67b6fa 100644
---- a/recipes/ti/matrix-gui-e.inc
-+++ b/recipes/ti/matrix-gui-e.inc
-@@ -4,7 +4,7 @@ LICENSE = "BSD"
- SECTION = "multimedia"
- PRIORITY = "optional"
+diff --git a/recipes/ti/matrix-gui_1.3.bb b/recipes/ti/matrix-gui_1.3.bb
+index 51678df..4dc4021 100644
+--- a/recipes/ti/matrix-gui_1.3.bb
++++ b/recipes/ti/matrix-gui_1.3.bb
+@@ -1,4 +1,4 @@
+ require matrix-gui.inc
  
--INC_PR = "r23"
-+INC_PR = "r24"
- 
- COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x|ti814x)"
- 
-@@ -14,7 +14,7 @@ PLATFORM_omapl138 = "omapl138"
- PLATFORM_omap3evm = "omap3530"
- PLATFORM_dm37x-evm = "dm3730"
- PLATFORM_am37x-evm = "am3715"
--PLATFORM_beagleboard = "am3715"
-+PLATFORM_beagleboard = "beagleboard"
- PLATFORM_ti816x = "ti816x"
- PLATFORM_ti814x = "ti814x"
- PLATFORM_am180x-evm = "am180x"
-diff --git a/recipes/ti/matrix-gui.inc b/recipes/ti/matrix-gui.inc
-index 3dd0e10..e231db2 100644
---- a/recipes/ti/matrix-gui.inc
-+++ b/recipes/ti/matrix-gui.inc
-@@ -4,7 +4,7 @@ LICENSE = "BSD"
- SECTION = "multimedia"
- PRIORITY = "optional"
- 
--INC_PR = "r21"
-+INC_PR = "r22"
- 
- COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x|ti814x)"
- 
-@@ -14,7 +14,7 @@ PLATFORM_omapl138 = "omapl138"
- PLATFORM_omap3evm = "omap3530"
- PLATFORM_dm37x-evm = "dm3730"
- PLATFORM_am37x-evm = "am3715"
--PLATFORM_beagleboard = "am3715"
-+PLATFORM_beagleboard = "beagleboard"
- PLATFORM_ti816x = "ti816x"
- PLATFORM_ti814x = "ti814x"
- PLATFORM_am180x-evm = "am180x"
+-SRCREV = "257"
+-PR = "${INC_PR}.6"
++SRCREV = "265"
++PR = "${INC_PR}.7"
 -- 
 1.7.0.4
 
