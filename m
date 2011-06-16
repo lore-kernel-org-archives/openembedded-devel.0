@@ -1,35 +1,35 @@
-Received: from 12.98.mail-out.ovh.net ([178.32.114.28]
-	helo=98.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1QXE3S-0007RB-Pt
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <chasemaupin03@gmail.com>) id 1QXIIw-0003ym-BW
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Jun 2011 17:00:22 +0200
-Received: from mail26.ha.ovh.net (b9.ovh.net [213.186.33.59])
-	by 98.mail-out.ovh.net (Postfix) with SMTP id 5C9E84CE059
+	Thu, 16 Jun 2011 21:32:38 +0200
+Received: by gyd5 with SMTP id 5so417200gyd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jun 2011 16:50:25 +0200 (CEST)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 16 Jun 2011 16:50:33 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 16 Jun 2011 16:50:30 +0200
-Message-ID: <4DFA1835.5040108@eukrea.com>
-Date: Thu, 16 Jun 2011 16:50:29 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.10
-MIME-Version: 1.0
+	Thu, 16 Jun 2011 12:29:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=ws+rugLjkxV5p+oSc25//+xE7ZKj/73272qmvd5ExX4=;
+	b=rq0zY4MMcrovpLHhEnoBc7cZcxOoShLCN/pB7FsWkcwd9H+iSP/CXw7+/hQQB8Eng/
+	ddRa2wvj94bACV6BNxP/744bXb5mZOyIUUoMIExGsB3TjDNSUB1ZA4TxFMKXuxc5TrP5
+	N5gtj8+nT6dGk0J3J13UCdHsK6O205slTX6yk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=N4aLGdJFI0A970cjI5XZnie7yltTbyQMJnB8GTahmQjZFarI5YfhfSKOiSubCFOdIb
+	0vCoaEVX5/pvCvjllPs+leJIb2MqoxgUMUFXATQVlfIBOcSLMxTs6nk1XDJ4GGK+1739
+	qRF0aG8/9XfE6szB6CGCIKCRqZhelavYh8UEA=
+Received: by 10.236.78.227 with SMTP id g63mr2059304yhe.438.1308252549430;
+	Thu, 16 Jun 2011 12:29:09 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id o47sm1174084yhn.2.2011.06.16.12.29.06
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 16 Jun 2011 12:29:07 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1308173139-15748-1-git-send-email-eric@eukrea.com>	<4DF94D6A.8090509@mentor.com>	<BANLkTinmc_Wp-vFoKuRe_LpFdwmVeU8bnQ@mail.gmail.com>
-	<4DFA1078.7090808@mentor.com>
-In-Reply-To: <4DFA1078.7090808@mentor.com>
-X-Ovh-Tracer-Id: 1744581906947485001
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -80
-Subject: Re: [PATCH 2011.03] eeze 1.0.0: fix checksums
+Date: Thu, 16 Jun 2011 14:29:03 -0500
+Message-Id: <1308252543-24363-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: Greg Turner <gregturner@ti.com>, Chase Maupin <Chase.Maupin@ti.com>
+Subject: [PATCH] kernel bbclass: add the crypto directory to staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,26 +43,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jun 2011 15:00:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 16 Jun 2011 19:32:38 -0000
 
-Hi Tom,
+* Add the include/crypto directory from the kernel to the list
+  of directories to be staged.
+* This directory contains the cryptodev.h file required by other
+  drivers and applications.
+* Not including this directory leads to build errors of being
+  unable to find the cryptodev.h file.
 
-On 16/06/2011 16:17, Tom Rini wrote:
-> On 06/15/2011 10:27 PM, Martin Jansa wrote:
->> I guess it won't be repeated with each release.. you can cherry-pick
->> my commit with better commit message explaining what was changed from
->> master (or Eric can send pull request for that, I'm away from my
->> workstation and I'm not using 2010.13)
->>
->> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=79d295c31e64e972608d5dde5d57e6250d7ca77c
->
-> Eric, can you please re-submit with a cherry-pick of this?  Thanks!
->
-yes I didn't even checked in master for a fix ... I also have a few other 
-fixes but needs to test them against master before sending them.
+Signed-off-by: Greg Turner <gregturner@ti.com>
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+---
+ classes/kernel.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Eric
+diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+index 8817186..bd7b23f 100644
+--- a/classes/kernel.bbclass
++++ b/classes/kernel.bbclass
+@@ -188,7 +188,7 @@ sysroot_stage_all_append() {
+ 	mkdir -p $kerneldir/include/asm-generic
+ 	cp -fR include/asm-generic/* $kerneldir/include/asm-generic/
+ 
+-	for entry in drivers/crypto drivers/media include/generated include/linux include/net include/pcmcia include/media include/acpi include/sound include/video include/scsi include/trace include/mtd include/rdma include/drm include/xen crypto/ocf; do
++	for entry in drivers/crypto drivers/media include/generated include/linux include/net include/pcmcia include/media include/acpi include/sound include/video include/scsi include/trace include/mtd include/rdma include/drm include/xen crypto/ocf include/crypto; do
+ 		if [ -d $entry ]; then
+ 			mkdir -p $kerneldir/$entry
+ 			cp -fR $entry/* $kerneldir/$entry/
+-- 
+1.7.0.4
+
 
 
