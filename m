@@ -1,31 +1,38 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1QXJsG-00065I-Ps
+	(envelope-from <jefflance01@gmail.com>) id 1QXJyK-0006HY-ML
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Jun 2011 23:13:17 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1QXJot-0002px-SX from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Jun 2011 14:09:43 -0700
-Received: from SVR-ORW-FEM-02.mgc.mentorg.com ([147.34.96.206]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 16 Jun 2011 14:09:43 -0700
-Received: from [172.30.80.132] (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
-	(147.34.96.168) with Microsoft SMTP Server id 14.1.289.1;
-	Thu, 16 Jun 2011 14:09:42 -0700
-Message-ID: <4DFA7108.5020103@mentor.com>
-Date: Thu, 16 Jun 2011 14:09:28 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 16 Jun 2011 21:09:43.0746 (UTC)
-	FILETIME=[B6D45A20:01CC2C69]
-Subject: 2011.03-maintenance policy change
+	Thu, 16 Jun 2011 23:19:28 +0200
+Received: by gyd5 with SMTP id 5so467983gyd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Jun 2011 14:16:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=bugh1bU33TflWfCCRPhg2DJz1mcbwaeRJ2QIkTEnSMI=;
+	b=DdW2LPxv7zDiv2mJWoFSXjxHZSFhaySaAH0UAYu9st+HAy82Hw2JK57qrLp6kvZZuP
+	kW+f3yurmHf8ie6LfPzAOINEtqz81IIE2veTsOUat6SGVsm92A6GmefTbckRy2OVOla0
+	3+Je/9+cMIJL7NVx08TUlosmYAYKEB7QGJDIc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=Rb7Obj6k3q5/XjEiDwNzxD5PgK2ZVK9j8cI/xk+xCgD4uQBbjXRaGEe8lsf/YwcYiz
+	xSCbe8VPt/WRdqa2NfpqKD4nYA9vvlybV3bnmOR/WAPJWBTLXbo46hLXVQV6IiiYXfPJ
+	No9hZmZLVF8hT8PXelZfCZi1sZQ+Kugs3fSAI=
+Received: by 10.150.48.16 with SMTP id v16mr1569984ybv.421.1308258960338;
+	Thu, 16 Jun 2011 14:16:00 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
+	by mx.google.com with ESMTPS id t4sm474336ybe.27.2011.06.16.14.15.59
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 16 Jun 2011 14:15:59 -0700 (PDT)
+From: Jeff Lance <jefflance01@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 16 Jun 2011 16:13:09 -0500
+Message-Id: <1308258789-9959-2-git-send-email-j-lance1@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1308258789-9959-1-git-send-email-j-lance1@ti.com>
+References: <1308258789-9959-1-git-send-email-j-lance1@ti.com>
+Cc: Jeff Lance <j-lance1@ti.com>
+Subject: [PATCH 2/2] matrix_gui: Add beagleboard platform support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,37 +46,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jun 2011 21:13:17 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 16 Jun 2011 21:19:31 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* Previously beagleboard was using the am3715 support files
 
-Hi all,
+Signed-off-by: Jeff Lance <j-lance1@ti.com>
+---
+ recipes/ti/matrix-gui-common.inc |    4 ++--
+ recipes/ti/matrix-gui-e.inc      |    4 ++--
+ recipes/ti/matrix-gui.inc        |    4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
 
-As part of this weeks TSC meeting, an agenda item was brought up about
-the 2011.03-maintenance branch and oe-core / etc.  I have now updated
-the policy about where changes need to be before they can be included in
-2011.03-maintenance to include being in oe-core / meta-oe or other
-relevant public layer instead of being only in the oe.dev master branch.
- This is not a policy change, but a clarification of what was there
-previously.  Thanks all!
+diff --git a/recipes/ti/matrix-gui-common.inc b/recipes/ti/matrix-gui-common.inc
+index 0ed72b5..7a46549 100644
+--- a/recipes/ti/matrix-gui-common.inc
++++ b/recipes/ti/matrix-gui-common.inc
+@@ -4,7 +4,7 @@ LICENSE = "BSD"
+ SECTION = "multimedia"
+ PRIORITY = "optional"
+ 
+-INC_PR = "r9"
++INC_PR = "r10"
+ 
+ COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x|ti814x)"
+ 
+@@ -14,7 +14,7 @@ PLATFORM_omapl138 = "omapl138"
+ PLATFORM_omap3evm = "omap3530"
+ PLATFORM_dm37x-evm = "dm3730"
+ PLATFORM_am37x-evm = "am3715"
+-PLATFORM_beagleboard = "am3715"
++PLATFORM_beagleboard = "beagleboard"
+ PLATFORM_ti816x = "ti816x"
+ PLATFORM_ti814x = "ti814x"
+ PLATFORM_am180x-evm = "am180x"
+diff --git a/recipes/ti/matrix-gui-e.inc b/recipes/ti/matrix-gui-e.inc
+index 7158d90..b67b6fa 100644
+--- a/recipes/ti/matrix-gui-e.inc
++++ b/recipes/ti/matrix-gui-e.inc
+@@ -4,7 +4,7 @@ LICENSE = "BSD"
+ SECTION = "multimedia"
+ PRIORITY = "optional"
+ 
+-INC_PR = "r23"
++INC_PR = "r24"
+ 
+ COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x|ti814x)"
+ 
+@@ -14,7 +14,7 @@ PLATFORM_omapl138 = "omapl138"
+ PLATFORM_omap3evm = "omap3530"
+ PLATFORM_dm37x-evm = "dm3730"
+ PLATFORM_am37x-evm = "am3715"
+-PLATFORM_beagleboard = "am3715"
++PLATFORM_beagleboard = "beagleboard"
+ PLATFORM_ti816x = "ti816x"
+ PLATFORM_ti814x = "ti814x"
+ PLATFORM_am180x-evm = "am180x"
+diff --git a/recipes/ti/matrix-gui.inc b/recipes/ti/matrix-gui.inc
+index 3dd0e10..e231db2 100644
+--- a/recipes/ti/matrix-gui.inc
++++ b/recipes/ti/matrix-gui.inc
+@@ -4,7 +4,7 @@ LICENSE = "BSD"
+ SECTION = "multimedia"
+ PRIORITY = "optional"
+ 
+-INC_PR = "r21"
++INC_PR = "r22"
+ 
+ COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x|ti814x)"
+ 
+@@ -14,7 +14,7 @@ PLATFORM_omapl138 = "omapl138"
+ PLATFORM_omap3evm = "omap3530"
+ PLATFORM_dm37x-evm = "dm3730"
+ PLATFORM_am37x-evm = "am3715"
+-PLATFORM_beagleboard = "am3715"
++PLATFORM_beagleboard = "beagleboard"
+ PLATFORM_ti816x = "ti816x"
+ PLATFORM_ti814x = "ti814x"
+ PLATFORM_am180x-evm = "am180x"
+-- 
+1.7.0.4
 
-- -- 
-Tom Rini
-Mentor Graphics Corporation
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iQEcBAEBAgAGBQJN+nEDAAoJEI4NMjfc3nJxfMsH/AhGtKb9ZeOpOp09AUO3Nv73
-nFeKG6lVtJqrLPKhXwA0OiOe+z/G15tofBiOY/TjYpGCFvs/TwrWMOBeagXraRBF
-I++UzSuIGz6OBZQMGupYXsW3ILY+6Cdbcno1lCuB6ZRF02P+dBE2Fic+qTFHhSrm
-NPyzP4itk9KuvR8kr1olNna6lo//jQGORIgRCQAbBFlWFBXfm7fp3icv5zMU2OsS
-YCVZvpLWHM+8IeKOxJDN5DKfVs1xAYxDL9CasxScM8Zw1QSJvdBVcqb6hXeZmkXT
-k9S4JPPn3N6ktW5YkhrJI3q3IN/S+rax1bfgWX69CTV9zqllefbDkfjXTzPBAkY=
-=tKF+
------END PGP SIGNATURE-----
 
 
