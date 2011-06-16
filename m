@@ -1,35 +1,34 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefflance01@gmail.com>) id 1QXJyL-0006HZ-09
+	(envelope-from <Tom_Rini@mentor.com>) id 1QXLu5-0003tM-PX
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Jun 2011 23:19:31 +0200
-Received: by ywa12 with SMTP id 12so517597ywa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jun 2011 14:16:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=g0VbcD5jVwv+GBuqCVU+/SnpGsoDxRp1o3kqmce3NOA=;
-	b=Q9kpujVUAMd2xVaUIA862fBxNl+4ZxX98DylLXgrf/rGSW6zuQrQVsq+p3qCdy3xb1
-	mQt0fc3qu21WbRn5lktbo5SU6UC1FrfEswrAQsb1C6GRYwnil2SzfRO7wNECZO7tQCH0
-	goj7yY3y+CfhozOP2R0RKZCkX/860uEFheC1E=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=yAkxXYWB6n84b9VH05IPH0/kxEG63iky3D+EN7HBoacB1zeU0rzvda9BhTAjEJdI9A
-	AkfRuZtEfQqMcA5TZ9DiNtCIpYTf3BhR10CHnf+O1oeUpoEf+2IzEte40r00O/vF2evw
-	ZQk0900lgost8RIhAVMI4leLHqtN7B08TDTjc=
-Received: by 10.151.68.20 with SMTP id v20mr1681351ybk.65.1308258958363;
-	Thu, 16 Jun 2011 14:15:58 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
-	by mx.google.com with ESMTPS id t4sm474336ybe.27.2011.06.16.14.15.57
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 16 Jun 2011 14:15:57 -0700 (PDT)
-From: Jeff Lance <jefflance01@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Jun 2011 16:13:08 -0500
-Message-Id: <1308258789-9959-1-git-send-email-j-lance1@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: Jeff Lance <j-lance1@ti.com>
-Subject: [PATCH 1/2] matrix_gui: Update SRCREV to revision 265
+	Fri, 17 Jun 2011 01:23:13 +0200
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1QXLqi-0003zA-I5 from Tom_Rini@mentor.com ;
+	Thu, 16 Jun 2011 16:19:44 -0700
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Thu, 16 Jun 2011 16:19:44 -0700
+Received: from [172.30.80.132] (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
+	(147.34.97.43) with Microsoft SMTP Server id 14.1.289.1;
+	Thu, 16 Jun 2011 16:19:43 -0700
+Message-ID: <4DFA8F80.3050101@mentor.com>
+Date: Thu, 16 Jun 2011 16:19:28 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+MIME-Version: 1.0
+To: Steffen Sledz <sledz@dresearch-fe.de>
+References: <4DF735B3.1020106@dresearch-fe.de>	<4DF767F9.3070500@dresearch-fe.de>
+	<4DF77D33.7080407@mentor.com> <4DF8B96D.7090605@dresearch-fe.de>
+In-Reply-To: <4DF8B96D.7090605@dresearch-fe.de>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 16 Jun 2011 23:19:44.0399 (UTC)
+	FILETIME=[E06189F0:01CC2C7B]
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [2011.03-maintenance] Pull request (resume)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,59 +42,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jun 2011 21:19:31 -0000
+X-List-Received-Date: Thu, 16 Jun 2011 23:23:14 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-* ti816x - Rework runOMTB script
-* am3517 - Remove Can and WIFI apps
-* am3715 - Add four new power apps
-* Add Oprofile apps to all am platforms
-* Remove LMBench app "write throughput" from all am platforms
-* Add beagle board platform support
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Jeff Lance <j-lance1@ti.com>
----
- recipes/ti/matrix-gui-common_1.4.bb |    4 ++--
- recipes/ti/matrix-gui-e_1.3.bb      |    4 ++--
- recipes/ti/matrix-gui_1.3.bb        |    4 ++--
- 3 files changed, 6 insertions(+), 6 deletions(-)
+On 06/15/2011 06:53 AM, Steffen Sledz wrote:
+> On 14.06.2011 17:24, Tom Rini wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 06/14/2011 06:54 AM, Steffen Sledz wrote:
+>>> On 14.06.2011 12:19, Steffen Sledz wrote:
+>>>> Please pull some commits from here:
+>>>>
+>>>> URI: git@git.openembedded.org:openembedded
+>>>> Branch: sledz/maintenance
+>>>>
+>>>> Most commits are hipox machine specific. One allows building kernel
+>>>> with newer GNU make. All are part of oe master.
+>>>
+>>> Please suspend this pull request!
+>>
+>> Noted, thanks.
+> 
+> OK, branch is ready for pulling now.
 
-diff --git a/recipes/ti/matrix-gui-common_1.4.bb b/recipes/ti/matrix-gui-common_1.4.bb
-index 0b4b25b..c241e85 100644
---- a/recipes/ti/matrix-gui-common_1.4.bb
-+++ b/recipes/ti/matrix-gui-common_1.4.bb
-@@ -4,5 +4,5 @@ require matrix-gui-common.inc
- # prebuilt version in the repository.
- RRECOMMENDS_${PN} = "am-sysinfo"
- 
--SRCREV = "257"
--PR = "${INC_PR}.11"
-+SRCREV = "265"
-+PR = "${INC_PR}.12"
-diff --git a/recipes/ti/matrix-gui-e_1.3.bb b/recipes/ti/matrix-gui-e_1.3.bb
-index a6eb17f..87a79fb 100644
---- a/recipes/ti/matrix-gui-e_1.3.bb
-+++ b/recipes/ti/matrix-gui-e_1.3.bb
-@@ -1,5 +1,5 @@
- require matrix-gui-e.inc
- 
--SRCREV = "257"
--PR = "${INC_PR}.10"
-+SRCREV = "265"
-+PR = "${INC_PR}.11"
- 
-diff --git a/recipes/ti/matrix-gui_1.3.bb b/recipes/ti/matrix-gui_1.3.bb
-index 51678df..4dc4021 100644
---- a/recipes/ti/matrix-gui_1.3.bb
-+++ b/recipes/ti/matrix-gui_1.3.bb
-@@ -1,4 +1,4 @@
- require matrix-gui.inc
- 
--SRCREV = "257"
--PR = "${INC_PR}.6"
-+SRCREV = "265"
-+PR = "${INC_PR}.7"
--- 
-1.7.0.4
+This is now applied, thanks!
 
+- -- 
+Tom Rini
+Mentor Graphics Corporation
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iQEcBAEBAgAGBQJN+o94AAoJEI4NMjfc3nJx1q0IANBE8/WYVzFlx/R6gj1aULP1
+rJfGKtsaLr7jTIWlwn84VfT8Hau6dyDR9ld/zWYE/fmFHb76bZLBSTo5QQ3MZzY3
+g6B+VyyjhbBtbakEsT6zGJThYsf59ef4sZHbQdVcjS9o/offbxQsDyInsvsDyWQc
+Vl+G3fWS0SuAhwPDjQeO/C2AsXTFJW8w9ygiTwJLyOmiBBTCS/NGLGYH5JN5lVl9
+DgQ9lm0AxtrBRafxTJxl1sxhqkAuOP3ff97bzOxe19qJMIM/0b2mOwYuWirrzN4c
+ehvL1OTFwkXGatJ0k0QBJxhBeA0Xa9iJ4l5aFVFD7KiELa9IH5KdQ2aCIjT2DQk=
+=yEHU
+-----END PGP SIGNATURE-----
 
 
