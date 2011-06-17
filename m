@@ -1,34 +1,34 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1QXLu5-0003tM-PX
+	(envelope-from <kg4ysn@gmail.com>) id 1QXZkJ-0002zX-K5
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Jun 2011 01:23:13 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1QXLqi-0003zA-I5 from Tom_Rini@mentor.com ;
-	Thu, 16 Jun 2011 16:19:44 -0700
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 16 Jun 2011 16:19:44 -0700
-Received: from [172.30.80.132] (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
-	(147.34.97.43) with Microsoft SMTP Server id 14.1.289.1;
-	Thu, 16 Jun 2011 16:19:43 -0700
-Message-ID: <4DFA8F80.3050101@mentor.com>
-Date: Thu, 16 Jun 2011 16:19:28 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
-MIME-Version: 1.0
-To: Steffen Sledz <sledz@dresearch-fe.de>
-References: <4DF735B3.1020106@dresearch-fe.de>	<4DF767F9.3070500@dresearch-fe.de>
-	<4DF77D33.7080407@mentor.com> <4DF8B96D.7090605@dresearch-fe.de>
-In-Reply-To: <4DF8B96D.7090605@dresearch-fe.de>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 16 Jun 2011 23:19:44.0399 (UTC)
-	FILETIME=[E06189F0:01CC2C7B]
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance] Pull request (resume)
+	Fri, 17 Jun 2011 16:10:03 +0200
+Received: by iwn19 with SMTP id 19so2206653iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Jun 2011 07:06:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=cP211Vlgo877/4DJV3u80OCKtROui4/QOSlupDvLACo=;
+	b=BjATzDLm/h+xvzZwyCAqZGg7P8JqfEZ0EGp3cwZd+YJV3GxeaEdeViW/et5rnBia7m
+	Vvuzp+28HxxqUSzl6jrzzKOjgN4Rk/zBZerAKkTVGNLOoouPGfa9VRzGgB5t6bz5QYF5
+	K6ZGMi1+Yx4xS6b8CfLQD0o7pLRRlbeoraT3U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=PJGRFHSZIZUqDd6DF2hbGrTv75jbVJCYXW/HO0CSO/0K2FkwvBHnneYONgbrb5yBp0
+	pNjznOkn7AgZDlyDvBvoBNc0hboZOJ0VwDvgDJBz2Um8PQ57Tzv1xmbhgrhw76+njTOo
+	ZpJsgNCS+KSbZY8eiv5HtoHBkIBhlAIfcGMO4=
+Received: by 10.42.154.73 with SMTP id p9mr1984192icw.378.1308319593684;
+	Fri, 17 Jun 2011 07:06:33 -0700 (PDT)
+Received: from localhost.localdomain ([173.8.168.17])
+	by mx.google.com with ESMTPS id d8sm2619495icy.9.2011.06.17.07.06.32
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 17 Jun 2011 07:06:33 -0700 (PDT)
+From: Chris Verges <kg4ysn@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 17 Jun 2011 07:06:05 -0700
+Message-Id: <1308319565-29375-1-git-send-email-kg4ysn@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [PATCH] libtinyxml: added recipe for v2.6.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,50 +42,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jun 2011 23:23:14 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 17 Jun 2011 14:10:03 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+tinyxml is a small C++ library for parsing XML data on embedded
+systems.  Currently, no recipe exists in OE for tinyxml, so this
+patch attempts to rectify that.
 
-On 06/15/2011 06:53 AM, Steffen Sledz wrote:
-> On 14.06.2011 17:24, Tom Rini wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 06/14/2011 06:54 AM, Steffen Sledz wrote:
->>> On 14.06.2011 12:19, Steffen Sledz wrote:
->>>> Please pull some commits from here:
->>>>
->>>> URI: git@git.openembedded.org:openembedded
->>>> Branch: sledz/maintenance
->>>>
->>>> Most commits are hipox machine specific. One allows building kernel
->>>> with newer GNU make. All are part of oe master.
->>>
->>> Please suspend this pull request!
->>
->> Noted, thanks.
-> 
-> OK, branch is ready for pulling now.
+Signed-off-by: Chris Verges <kg4ysn@gmail.com>
+---
+ recipes/libtinyxml/libtinyxml_2.6.2.bb |   37 ++++++++++++++++++++++++++++++++
+ 1 files changed, 37 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/libtinyxml/libtinyxml_2.6.2.bb
 
-This is now applied, thanks!
+diff --git a/recipes/libtinyxml/libtinyxml_2.6.2.bb b/recipes/libtinyxml/libtinyxml_2.6.2.bb
+new file mode 100644
+index 0000000..6693e5c
+--- /dev/null
++++ b/recipes/libtinyxml/libtinyxml_2.6.2.bb
+@@ -0,0 +1,37 @@
++DESCRIPTION = "a simple, small, minimal, C++ XML parser"
++HOMEPAGE = "http://www.sourceforge.net/projects/tinyxml"
++LICENSE = "zlib"
++SECTION = "libs"
++
++PR = "r3"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/tinyxml/tinyxml_2_6_2.tar.gz"
++
++S = "${WORKDIR}/tinyxml"
++
++do_compile() {
++	${CXX} ${CXXFLAGS} -I${S} -c -o ${S}/tinyxml.o ${S}/tinyxml.cpp
++	${CXX} ${CXXFLAGS} -I${S} -c -o ${S}/tinyxmlerror.o ${S}/tinyxmlerror.cpp
++	${CXX} ${CXXFLAGS} -I${S} -c -o ${S}/tinyxmlparser.o ${S}/tinyxmlparser.cpp
++	${CXX} ${CXXFLAGS} \
++			-shared \
++			-Wl,-soname,libtinyxml.so.${PV} \
++			-o ${S}/libtinyxml.so.${PV} \
++			${LDFLAGS} \
++			${S}/tinyxml.o \
++			${S}/tinyxmlparser.o \
++			${S}/tinyxmlerror.o
++}
++
++do_install() {
++	install -d ${D}${libdir}
++	install -m 0755 ${S}/libtinyxml.so.${PV} ${D}${libdir}
++	ln -sf libtinyxml.so.${PV} ${D}${libdir}/libtinyxml.so
++
++	install -d ${D}${includedir}
++	install -m 0666 ${S}/tinyxml.h ${D}${includedir}
++}
++
++SRC_URI[md5sum] = "c1b864c96804a10526540c664ade67f0"
++SRC_URI[sha256sum] = "15bdfdcec58a7da30adc87ac2b078e4417dbe5392f3afb719f9ba6d062645593"
++
+-- 
+1.7.4.1
 
-- -- 
-Tom Rini
-Mentor Graphics Corporation
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iQEcBAEBAgAGBQJN+o94AAoJEI4NMjfc3nJx1q0IANBE8/WYVzFlx/R6gj1aULP1
-rJfGKtsaLr7jTIWlwn84VfT8Hau6dyDR9ld/zWYE/fmFHb76bZLBSTo5QQ3MZzY3
-g6B+VyyjhbBtbakEsT6zGJThYsf59ef4sZHbQdVcjS9o/offbxQsDyInsvsDyWQc
-Vl+G3fWS0SuAhwPDjQeO/C2AsXTFJW8w9ygiTwJLyOmiBBTCS/NGLGYH5JN5lVl9
-DgQ9lm0AxtrBRafxTJxl1sxhqkAuOP3ff97bzOxe19qJMIM/0b2mOwYuWirrzN4c
-ehvL1OTFwkXGatJ0k0QBJxhBeA0Xa9iJ4l5aFVFD7KiELa9IH5KdQ2aCIjT2DQk=
-=yEHU
------END PGP SIGNATURE-----
 
 
