@@ -1,25 +1,17 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from smtp202.alice.it ([82.57.200.98])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>)
-	id 1QXaDu-0004Cc-3W; Fri, 17 Jun 2011 16:40:38 +0200
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 17 Jun 2011 07:37:08 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.65,381,1304319600"; d="scan'208";a="14506322"
-Received: from unknown (HELO helios.localnet) ([10.255.16.248])
-	by azsmga001.ch.intel.com with ESMTP; 17 Jun 2011 07:37:07 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: "Patches and discussions about the oe-core layer"
-	<openembedded-core@lists.openembedded.org>, 
-	openembedded-devel@lists.openembedded.org
-Date: Fri, 17 Jun 2011 15:37:06 +0100
-User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic-pae; KDE/4.6.2; i686; ; )
-References: <4DFB6412.4050501@gmail.com>
-	<864A0D4F-2C76-4A16-8557-A130FD68A6BB@dominion.thruhere.net>
-In-Reply-To: <864A0D4F-2C76-4A16-8557-A130FD68A6BB@dominion.thruhere.net>
-MIME-Version: 1.0
-Message-Id: <201106171537.06113.paul.eggleton@linux.intel.com>
-Subject: Re: [OE-core] call for participation on openembedded-users mailing list
+	(envelope-from <GNUtoo@no-log.org>) id 1QXaVc-0004mv-53
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 17 Jun 2011 16:58:56 +0200
+Received: from localhost.localdomain (95.244.3.148) by smtp202.alice.it
+	(8.5.124.08) (authenticated as editempo@alice.it)
+	id 4DEE15AB003380CF; Fri, 17 Jun 2011 16:55:27 +0200
+From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 17 Jun 2011 16:55:22 +0200
+Message-Id: <1308322522-11406-1-git-send-email-GNUtoo@no-log.org>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH] bitbake.conf: remove -e from LZMA_COMPRESSION_LEVEL because no such option exist in lzma
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,25 +25,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jun 2011 14:40:38 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 17 Jun 2011 14:58:56 -0000
 
-On Friday 17 June 2011 15:28:56 Koen Kooi wrote:
-> So let's really close that list and discuss things on oe-devel and oe-core
-> ml 
+Without this patch we have:
+  + cpio -o -H newc
+  + lzma -c -e -9
+  lzma: invalid option -- 'e'
+during a initramfs-kexecboot-klibc-image.
 
-I'm on the oe-users mailing list and occasionally help people out, but I have 
-to agree with Koen here. It hardly gets any traffic and the nature of OE is that 
-every user is a developer or considers themselves so.
+Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+---
+ conf/bitbake.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Cheers,
-Paul
-
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index 17a494d..9e67320 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -149,7 +149,7 @@ QEMU_OPTIONS_armv7a   = "-cpu cortex-a8"
+ 
+ # default compression levels
+ XZ_COMPRESSION_LEVEL ?= "-e -9"
+-LZMA_COMPRESSION_LEVEL ?= "-e -9"
++LZMA_COMPRESSION_LEVEL ?= "-9"
+ 
+ # default integrity check
+ XZ_INTEGRITY_CHECK ?= "crc32"
 -- 
+1.7.0.4
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
