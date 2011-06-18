@@ -1,25 +1,34 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <thebohemian@gmx.net>) id 1QXpPW-0001rr-Lt
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Jun 2011 08:53:38 +0200
-Received: (qmail invoked by alias); 18 Jun 2011 06:50:09 -0000
-Received: from e178186048.adsl.alicedsl.de (EHLO [192.168.0.196])
-	[85.178.186.48]
-	by mail.gmx.net (mp044) with SMTP; 18 Jun 2011 08:50:09 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/QdfRKtCfQAZfZYBfUzEWIVxjwshJ024i815lpB6
-	rknzuHHVtBiDGc
-Message-ID: <4DFC4A9F.9080104@gmx.net>
-Date: Sat, 18 Jun 2011 08:50:07 +0200
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110424 Thunderbird/3.1.10
-MIME-Version: 1.0
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QXqRI-0002yB-1G for openembedded-devel@lists.openembedded.org;
+	Sat, 18 Jun 2011 09:59:32 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QXqNw-0008Bt-1x for openembedded-devel@lists.openembedded.org;
+	Sat, 18 Jun 2011 09:56:04 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 18 Jun 2011 09:56:04 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 18 Jun 2011 09:56:04 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 1.1.2
-X-Y-GMX-Trusted: 0
-Subject: FYI: Snowball (new low-cost board similar to beagle/panda)
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 18 Jun 2011 09:55:50 +0200
+Message-ID: <ithlm6$sgq$1@dough.gmane.org>
+References: <4DFC4A9F.9080104@gmx.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <4DFC4A9F.9080104@gmx.net>
+X-Enigmail-Version: 1.0.1
+Subject: Re: FYI: Snowball (new low-cost board similar to beagle/panda)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,41 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Jun 2011 06:53:39 -0000
-X-Groupsio-MsgNum: 32731
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig4E1BD5213605E91FD1401592"
+X-List-Received-Date: Sat, 18 Jun 2011 07:59:32 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---------------enig4E1BD5213605E91FD1401592
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Hi,
-ST/Ericson made a low-cost Cortex-A9 (like beagle and panda) and nobody
-knows about it. What a terrible marketing ... !
+On 18-06-11 08:50, Robert Schuster wrote:
+> Hi,
+> ST/Ericson made a low-cost Cortex-A9 (like beagle and panda) and nobody
+> knows about it. What a terrible marketing ... !
 
-So, here is my attempt to make at least OpenEmbedded people know about
-this gem:
+Not really terrible marketing, the board ships with a kernel they refuse
+to release the source for!
 
-http://www.youtube.com/watch?v=3DKhAETIPrhCg
-
-Regards,
-Robert
-
-
---------------enig4E1BD5213605E91FD1401592
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
+But still, it would be nice to add OE support for it, once they stop
+violating the GPL.
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEARECAAYFAk38Sp8ACgkQG9cfwmwwEtq3AwCfTXdy4+X7hoFhboN+OI4e5xjw
-ga4AnjVlwqvcNC52sEUqpvFbk3Ra0Rmk
-=lBys
+iD8DBQFN/FoGMkyGM64RGpERAnHKAJ4sr2avIUUPCjNGYqweWGkqcM0WfQCcC+9K
+x8vAMRyd1N2MxvZy1/2HPQE=
+=3wEb
 -----END PGP SIGNATURE-----
 
---------------enig4E1BD5213605E91FD1401592--
+
+
