@@ -1,20 +1,21 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1QYE9c-0005BU-7v
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Jun 2011 11:18:52 +0200
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id 3327A1D360C1; Sun, 19 Jun 2011 11:15:21 +0200 (CEST)
-Date: Sun, 19 Jun 2011 11:15:21 +0200
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QYEU4-0005wd-7I for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Jun 2011 11:40:00 +0200
+Received: from f053044243.adsl.alicedsl.de ([78.53.44.243]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QYEQj-0002w5-1O for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Jun 2011 09:36:33 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110619091521.GC23890@ibawizard.net>
-References: <4DFC4A9F.9080104@gmx.net> <4DFC51D6.5080508@eukrea.com>
-MIME-Version: 1.0
-In-Reply-To: <4DFC51D6.5080508@eukrea.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: FYI: Snowball (new low-cost board similar to beagle/panda)
+Date: Sun, 19 Jun 2011 11:36:30 +0200
+Message-ID: <1308476190.18748.6.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Git server error: `fatal: read error: Connection reset by peer`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,51 +29,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Jun 2011 09:18:52 -0000
-Content-Type: text/plain; charset=iso-8859-2
-Content-Disposition: inline
+X-List-Received-Date: Sun, 19 Jun 2011 09:40:00 -0000
+X-Groupsio-MsgNum: 32746
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-5PIYpOfuAUGeeOoU5yJd"
+
+--=-5PIYpOfuAUGeeOoU5yJd
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Eric B=E9nard <eric@eukrea.com> [2011-06-18 09:20:54]:
-
-> it was announced on linux devices :
-> http://www.linuxfordevices.com/c/a/News/Calao-Systems-Snowball/ but as =
-you
-> can see on their "community" site there are not much news since this da=
-te :
-> http://www.igloocommunity.org/
-
-I wonder, if that SOC used on this board is going to be as "easily" sourc=
-eable
-as it's the Omap4 on Pandaboard. Or it's meant to be sourced in the huge
-quantities only also?
-
-> If you want to pay for an "open" board to become a "free" beta tester f=
-or=20
-> an other phone/tablet cpu manufacturer you can also wait for =20
-> http://www.origenboard.org/
-
-Ditto.
-
-And I sometimes wonder, which company is going to trademark some of the
-buzzwords around the "free/open/community" first or even patent some kind=
- of
-"free/open/community" work flow :-)
-
-> Next one in the list may be using an iMX6 from Freescale (in the page, =
-this
-> one is said to also target industrial applications and not only
-> phones/tablets) :
-> http://www.freescale.com/webapp/sps/site/overview.jsp?code=3DIMX6X_SERI=
-ES
-> which will surely have its equivalent of the i.MX53's QSB :
-> http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=3DIMX53Q=
-SB
-
-Good to know, I was wondering last week, what is that Loco board in the L=
-inux
-kernel tree :-)
-
--- ynezz
+Dear OE administrators,
 
 
+`git remote update` fails using `git://git.openembedded.org/openembedded`.
+
+        $ git remote update
+        Fetching origin
+        fatal: read error: Connection reset by peer
+        error: Could not fetch origin
+
+
+Thanks,
+
+Paul
+
+--=-5PIYpOfuAUGeeOoU5yJd
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk39wxgACgkQPX1aK2wOHVjIyACeM7g68Rs2DNYD0lWa+QyRZpm2
+zI0An0ZTfsgiwQ9CPeD//Jc3OqZWpKSq
+=orAV
+-----END PGP SIGNATURE-----
+
+--=-5PIYpOfuAUGeeOoU5yJd--
