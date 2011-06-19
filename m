@@ -1,35 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QYGKn-0005pd-KI for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Jun 2011 13:38:33 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QYGHQ-0004eT-EU for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Jun 2011 13:35:04 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Jun 2011 13:35:04 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Jun 2011 13:35:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1QYH53-0006oY-Ik
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Jun 2011 14:26:21 +0200
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 19 Jun 2011 05:21:44 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.65,388,1304319600"; d="scan'208";a="16822961"
+Received: from unknown (HELO helios.localnet) ([10.255.16.219])
+	by orsmga001.jf.intel.com with ESMTP; 19 Jun 2011 05:21:43 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sun, 19 Jun 2011 13:31:40 +0200
-Message-ID: <itkmms$j7n$2@dough.gmane.org>
-References: <4DFC4A9F.9080104@gmx.net> <4DFC51D6.5080508@eukrea.com>
-	<20110619091521.GC23890@ibawizard.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <20110619091521.GC23890@ibawizard.net>
-X-Enigmail-Version: 1.0.1
-Subject: Re: FYI: Snowball (new low-cost board similar to beagle/panda)
+Date: Sun, 19 Jun 2011 13:21:41 +0100
+User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic-pae; KDE/4.6.2; i686; ; )
+References: <cover.1308417391.git.paul.eggleton@linux.intel.com>
+	<6b59e5c689dd1963371df90cc749d2f7c5b969da.1308417391.git.paul.eggleton@linux.intel.com>
+	<itkdlh$801$1@dough.gmane.org>
+In-Reply-To: <itkdlh$801$1@dough.gmane.org>
+MIME-Version: 1.0
+Message-Id: <201106191321.41883.paul.eggleton@linux.intel.com>
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe] [PATCH 2/3] qmake2: remove qmake2 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,38 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Jun 2011 11:38:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 19 Jun 2011 12:26:21 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 19-06-11 11:15, Petr Štetiar wrote:
-> Eric Bénard <eric@eukrea.com> [2011-06-18 09:20:54]:
+On Sunday 19 June 2011 09:57:21 Koen Kooi wrote:
+> On 18-06-11 20:57, Paul Eggleton wrote:
+> > This is a leftover from oe-dev and is not needed by anything in meta-oe -
+> > qmake is being build as part of qt4-tools-native.
 > 
->> it was announced on linux devices :
->> http://www.linuxfordevices.com/c/a/News/Calao-Systems-Snowball/ but as you
->> can see on their "community" site there are not much news since this date :
->> http://www.igloocommunity.org/
-> 
-> I wonder, if that SOC used on this board is going to be as "easily" sourceable
-> as it's the Omap4 on Pandaboard. Or it's meant to be sourced in the huge
-> quantities only also?
+> I'm going to drop this patch, since we still need it for the target
+> qmake binary.
 
-FWIW, you can get the AM45xx in low quantities from TI soon if you want
-something in the OMAP4 family.
+Hmm, I'd kind of missed that as a possibility, and qmake's not being provided 
+by qt4-{embedded|x11-free}-tools either. There's got to be a better solution 
+to this, but for now as you say qmake2 is it.
 
-regards,
+Cheers,
+Paul
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+-- 
 
-iD8DBQFN/d4cMkyGM64RGpERAgt4AJ9yTax4vRZZS5j2Z2KvqGcVYWnlgwCgrpjO
-AusAxt6rvCGNk4ckrY38kBk=
-=ZdXK
------END PGP SIGNATURE-----
-
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
