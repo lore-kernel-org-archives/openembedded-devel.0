@@ -1,21 +1,36 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1QYDgB-0003kV-6J
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Jun 2011 10:48:27 +0200
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id 1AE3B1D360C1; Sun, 19 Jun 2011 10:44:55 +0200 (CEST)
-Date: Sun, 19 Jun 2011 10:44:55 +0200
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QYDm6-00042I-K9 for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Jun 2011 10:54:34 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QYDij-0007DS-9v for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Jun 2011 10:51:05 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 19 Jun 2011 10:51:05 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 19 Jun 2011 10:51:05 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110619084455.GB23890@ibawizard.net>
-References: <4DFC4A9F.9080104@gmx.net> <4DFC51D6.5080508@eukrea.com>
-	<BANLkTinUqsr2E6HN_ZQhMhMnpnP77TJDpg@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <BANLkTinUqsr2E6HN_ZQhMhMnpnP77TJDpg@mail.gmail.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: FYI: Snowball (new low-cost board similar to beagle/panda)
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sun, 19 Jun 2011 10:50:52 +0200
+Message-ID: <itkd9c$657$1@dough.gmane.org>
+References: <4DFB6412.4050501@gmail.com>	<864A0D4F-2C76-4A16-8557-A130FD68A6BB@dominion.thruhere.net>
+	<201106171537.06113.paul.eggleton@linux.intel.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <201106171537.06113.paul.eggleton@linux.intel.com>
+X-Enigmail-Version: 1.0.1
+Cc: openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] call for participation on openembedded-users mailing list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,34 +44,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Jun 2011 08:48:27 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 19 Jun 2011 08:54:34 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Han Hartgers <han.hartgers@gmail.com> [2011-06-18 23:28:04]:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> It looks to be in a similar league as the Beagleboard xM.  It has a more
-> memory, Sata, 2 SD card slots.  But at the down side complicated expansion
-> connector and less USB ports.
+On 17-06-11 16:37, Paul Eggleton wrote:
+> On Friday 17 June 2011 15:28:56 Koen Kooi wrote:
+>> So let's really close that list and discuss things on oe-devel and oe-core
+>> ml 
+> 
+> I'm on the oe-users mailing list and occasionally help people out, but I have 
+> to agree with Koen here. It hardly gets any traffic and the nature of OE is that 
+> every user is a developer or considers themselves so.
 
-What do you mean by 'complicated expansion connector'. Is it complicated to
-get the connector/part? Or is it expensive?
+If I did it right then mailman will send an autoresponse to each oe-user
+mail telling people to use oe-devel and/or oe-core instead.
 
-> The main advantage of this board would be the hardware video encoder and
-> decoder and the better(?) software stack for that part. But I don't know if
-> it is really as good as mentioned on the website.  But a bit of a strange
-> choice to have a good hardware encoder/decoder but no dvi/hdmi connector
-> (needs a daughter board.) This (better supported?) hardware encoder/decoder
-> would push this cortex-a8 to the level of (or beyond) the Pandaboard with
-> it's dual core Cortex-a9 on this video point.
+regards,
 
-As always, it depends on your use case(s), plans and ideas, but for example I
-prefer LVDS over HDMI and as another example, I've C3/C4 and no XM, because
-there's simply no NAND flash. Simply said, there won't be some universal board
-which would suit all of us :-)
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-And I think, that the competition is always good.
+iD8DBQFN/bhsMkyGM64RGpERAn2YAKCb37RPHS2UZzittqQeoB1UWDVG6QCgrntC
+mcC+17LbmSJENtMxwBdQlNE=
+=N0fk
+-----END PGP SIGNATURE-----
 
--- ynezz
 
 
