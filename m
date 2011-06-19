@@ -1,36 +1,34 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QYDm6-00042I-K9 for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Jun 2011 10:54:34 +0200
+	id 1QYDpx-0004B1-Vg for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Jun 2011 10:58:34 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QYDij-0007DS-9v for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Jun 2011 10:51:05 +0200
+	id 1QYDmb-0008Uy-8b for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Jun 2011 10:55:05 +0200
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Jun 2011 10:51:05 +0200
+	Sun, 19 Jun 2011 10:55:05 +0200
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Jun 2011 10:51:05 +0200
+	Sun, 19 Jun 2011 10:55:05 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sun, 19 Jun 2011 10:50:52 +0200
-Message-ID: <itkd9c$657$1@dough.gmane.org>
-References: <4DFB6412.4050501@gmail.com>	<864A0D4F-2C76-4A16-8557-A130FD68A6BB@dominion.thruhere.net>
-	<201106171537.06113.paul.eggleton@linux.intel.com>
+Date: Sun, 19 Jun 2011 10:52:11 +0200
+Message-ID: <itkdbr$657$2@dough.gmane.org>
+References: <cover.1308417391.git.paul.eggleton@linux.intel.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <201106171537.06113.paul.eggleton@linux.intel.com>
+In-Reply-To: <cover.1308417391.git.paul.eggleton@linux.intel.com>
 X-Enigmail-Version: 1.0.1
-Cc: openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] call for participation on openembedded-users mailing list
+Subject: Re: [meta-oe] [PATCH 0/3] Qt4 tidy up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,34 +42,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Jun 2011 08:54:34 -0000
+X-List-Received-Date: Sun, 19 Jun 2011 08:58:34 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 17-06-11 16:37, Paul Eggleton wrote:
-> On Friday 17 June 2011 15:28:56 Koen Kooi wrote:
->> So let's really close that list and discuss things on oe-devel and oe-core
->> ml 
+On 18-06-11 20:57, Paul Eggleton wrote:
+> A few patches to tidy up Qt4 in meta-oe.
 > 
-> I'm on the oe-users mailing list and occasionally help people out, but I have 
-> to agree with Koen here. It hardly gets any traffic and the nature of OE is that 
-> every user is a developer or considers themselves so.
+> The following changes since commit c85efd2281af4556854107768d7583a8208b6647:
+> 
+>   rsyslog: add 5.8.0 (2011-06-17 19:45:58 +0200)
+> 
+> are available in the git repository at:
+>   git://git.openembedded.org/meta-openembedded-contrib paule/qt4-bbappend
+>   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/qt4-bbappend
+> 
+> Paul Eggleton (3):
+>   qt4: replace recipes with bbappends
+>   qmake2: remove qmake2 recipe
+>   qt4: remove qt4-tools-sdk
 
-If I did it right then mailman will send an autoresponse to each oe-user
-mail telling people to use oe-devel and/or oe-core instead.
+Thanks, I queued them up for testing.
 
-regards,
 
-Koen
+> 
+>  .../recipes-qt/qt4/files/0001-cross-compile.patch  |   36 ---
+>  .../recipes-qt/qt4/files/0001-fix-mkspecs.patch    |  102 -------
+>  .../qt4/files/0002-fix-resinit-declaration.patch   |   22 --
+>  meta-oe/recipes-qt/qt4/files/0004-no-qmake.patch   |   26 --
+>  .../qt4/files/0006-freetype-host-includes.patch    |   24 --
+>  .../recipes-qt/qt4/files/0008-qt-lib-infix.patch   |   36 ---
+>  .../recipes-qt/qt4/files/0009-support-2bpp.patch   |  299 -------------------
+>  .../files/0010-no-simpledecoration-example.patch   |   14 -
+>  meta-oe/recipes-qt/qt4/files/common.pro            |  108 -------
+>  .../recipes-qt/qt4/files/compile.test-lflags.patch |   13 -
+>  .../recipes-qt/qt4/files/configure-lflags.patch    |   13 -
+>  meta-oe/recipes-qt/qt4/files/configure-paths.patch |   21 --
+>  .../recipes-qt/qt4/files/fix-config-tests.patch    |   36 ---
+>  meta-oe/recipes-qt/qt4/files/g++.conf              |   53 ----
+>  .../recipes-qt/qt4/files/hack-out-pg_config.patch  |   30 --
+>  meta-oe/recipes-qt/qt4/files/linux-oe-qmake.conf   |   82 -----
+>  meta-oe/recipes-qt/qt4/files/linux.conf            |   54 ----
+>  meta-oe/recipes-qt/qt4/files/mips-relocate.patch   |   28 --
+>  .../recipes-qt/qt4/files/qmake-exists-check.patch  |   18 --
+>  meta-oe/recipes-qt/qt4/files/qmake-hack.diff       |   15 -
+>  meta-oe/recipes-qt/qt4/files/qt-config.patch       |   24 --
+>  meta-oe/recipes-qt/qt4/files/qte.sh                |    7 -
+>  .../qt4/files/qthelp-lib-qtclucene.patch           |   86 ------
+>  meta-oe/recipes-qt/qt4/files/use-lflags-last.patch |   22 --
+>  .../recipes-qt/qt4/qmake2-sdk/linux-oe-qmake.conf  |    1 -
+>  meta-oe/recipes-qt/qt4/qmake2.inc                  |   69 -----
+>  meta-oe/recipes-qt/qt4/qmake2/linux-oe-qmake.conf  |    1 -
+>  meta-oe/recipes-qt/qt4/qmake2_2.10a.bb             |   60 ----
+>  meta-oe/recipes-qt/qt4/qt-4.7.2.inc                |   58 ----
+>  .../0001-Added-Openembedded-crossarch-option.patch |   44 ---
+>  meta-oe/recipes-qt/qt4/qt-4.7.2/g++.conf           |   60 ----
+>  .../qt4/qt-4.7.2/hack-out-pg2-4.7.0.patch          |   19 --
+>  meta-oe/recipes-qt/qt4/qt-4.7.2/linux.conf         |   66 ----
+>  meta-oe/recipes-qt/qt4/qt4-embedded.inc            |   34 ---
+>  .../qt4-embedded/0006-freetype-host-includes.patch |   20 --
+>  meta-oe/recipes-qt/qt4/qt4-embedded_4.7.2.bb       |   10 -
+>  meta-oe/recipes-qt/qt4/qt4-embedded_4.7.3.bbappend |    5 +
+>  meta-oe/recipes-qt/qt4/qt4-tools-native.inc        |   77 -----
+>  meta-oe/recipes-qt/qt4/qt4-tools-native_4.7.2.bb   |   13 -
+>  meta-oe/recipes-qt/qt4/qt4-tools-nativesdk.inc     |  111 -------
+>  .../recipes-qt/qt4/qt4-tools-nativesdk_4.7.2.bb    |    6 -
+>  meta-oe/recipes-qt/qt4/qt4-tools-sdk.inc           |   88 ------
+>  meta-oe/recipes-qt/qt4/qt4-tools-sdk_4.7.2.bb      |    8 -
+>  meta-oe/recipes-qt/qt4/qt4-x11-free.inc            |   20 --
+>  .../qt4/qt4-x11-free/0003-no-tools.patch           |   18 --
+>  .../qt4-x11-free/0006-freetype-host-includes.patch |   20 --
+>  .../qt4-x11-free/0007-openssl-host-includes.patch  |   20 --
+>  .../qt4/qt4-x11-free/0008-qt-lib-infix.patch       |   34 ---
+>  meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.2.bb       |   12 -
+>  meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.3.bbappend |    5 +
+>  meta-oe/recipes-qt/qt4/qt4.inc                     |  314 --------------------
+>  meta-oe/recipes-qt/qt4/qt4_arch.inc                |   25 --
+>  52 files changed, 10 insertions(+), 2377 deletions(-)
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/0001-cross-compile.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/0001-fix-mkspecs.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/0002-fix-resinit-declaration.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/0004-no-qmake.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/0006-freetype-host-includes.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/0008-qt-lib-infix.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/0009-support-2bpp.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/0010-no-simpledecoration-example.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/common.pro
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/compile.test-lflags.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/configure-lflags.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/configure-paths.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/fix-config-tests.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/g++.conf
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/hack-out-pg_config.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/linux-oe-qmake.conf
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/linux.conf
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/mips-relocate.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/qmake-exists-check.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/qmake-hack.diff
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/qt-config.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/qte.sh
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/qthelp-lib-qtclucene.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/files/use-lflags-last.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qmake2-sdk/linux-oe-qmake.conf
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qmake2.inc
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qmake2/linux-oe-qmake.conf
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qmake2_2.10a.bb
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt-4.7.2.inc
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt-4.7.2/0001-Added-Openembedded-crossarch-option.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt-4.7.2/g++.conf
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt-4.7.2/hack-out-pg2-4.7.0.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt-4.7.2/linux.conf
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4-embedded.inc
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4-embedded/0006-freetype-host-includes.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4-embedded_4.7.2.bb
+>  create mode 100644 meta-oe/recipes-qt/qt4/qt4-embedded_4.7.3.bbappend
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4-tools-native.inc
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4-tools-native_4.7.2.bb
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4-tools-nativesdk.inc
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4-tools-nativesdk_4.7.2.bb
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4-tools-sdk.inc
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4-tools-sdk_4.7.2.bb
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4-x11-free.inc
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4-x11-free/0003-no-tools.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4-x11-free/0006-freetype-host-includes.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4-x11-free/0007-openssl-host-includes.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4-x11-free/0008-qt-lib-infix.patch
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.2.bb
+>  create mode 100644 meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.3.bbappend
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4.inc
+>  delete mode 100644 meta-oe/recipes-qt/qt4/qt4_arch.inc
+> 
+
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFN/bhsMkyGM64RGpERAn2YAKCb37RPHS2UZzittqQeoB1UWDVG6QCgrntC
-mcC+17LbmSJENtMxwBdQlNE=
-=N0fk
+iD8DBQFN/bi7MkyGM64RGpERAqpsAKCbOWApflc+cKt5VwRRfGQbDUDrOgCfTC+L
+4CdDudnfuTkb4lkhBcs6syc=
+=zWyB
 -----END PGP SIGNATURE-----
 
 
