@@ -1,37 +1,37 @@
-Received: from 5.97.mail-out.ovh.net ([188.165.48.85] helo=97.mail-out.ovh.net)
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1QYIbF-0002NH-E0
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Jun 2011 16:03:41 +0200
-Received: from mail422.ha.ovh.net (b9.ovh.net [213.186.33.59])
-	by 97.mail-out.ovh.net (Postfix) with SMTP id 33B684AAE62
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Jun 2011 12:22:23 +0200 (CEST)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 19 Jun 2011 12:21:00 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 19 Jun 2011 12:20:59 +0200
-Message-ID: <4DFDCD8B.9080309@eukrea.com>
-Date: Sun, 19 Jun 2011 12:20:59 +0200
-From: =?ISO-8859-2?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.10
+	(envelope-from <raj.khem@gmail.com>)
+	id 1QYIjg-0002Xk-Fl; Sun, 19 Jun 2011 16:12:24 +0200
+Received: by pzk36 with SMTP id 36so3299187pzk.6
+	for <multiple recipients>; Sun, 19 Jun 2011 07:08:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=zvzxUZJQEsh/isbPW20Szm3XHGos/SyH5nqEY/WkmbY=;
+	b=BGXvJKuqa5WsTRcHBl2s9kS82QQ9oD4Ihr0W6pEAordhWdPSQtv+XQITREoDKD2VRg
+	eqkdijHWm3QMqSUPzq9MG8DVI1a1RLGXEkohS/kwNtLVHCyTlvlbOa4HQM347uuHFAJJ
+	UTYRKOCjRr1xBOvKTCYIUkLJWZk+Vb9w84pws=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	b=NGdzcaPDTOCQj2l9jfWwPWGAuB0Fz13cEaH5MpXmoSHz4fe2EpiimnREEPyY7ZtcH1
+	x7b7/VhWf7yHhkyty8+HYPWLZhDxZk0VIsskxintV6g97fNZbN3xDhmGLkt2AWyw0byx
+	HfQUWKxZrrwuca8JIyqleGbtp2hOLz5qJa/Ss=
+Received: by 10.68.43.227 with SMTP id z3mr1806244pbl.160.1308492532207; Sun,
+	19 Jun 2011 07:08:52 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.68.55.195 with HTTP; Sun, 19 Jun 2011 07:08:22 -0700 (PDT)
+In-Reply-To: <itkd9c$657$1@dough.gmane.org>
+References: <4DFB6412.4050501@gmail.com>
+	<864A0D4F-2C76-4A16-8557-A130FD68A6BB@dominion.thruhere.net>
+	<201106171537.06113.paul.eggleton@linux.intel.com>
+	<itkd9c$657$1@dough.gmane.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 19 Jun 2011 07:08:22 -0700
+Message-ID: <BANLkTimcL7wD_4R3rMRwYdgCt-OhDOY6wQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4DFC4A9F.9080104@gmx.net> <4DFC51D6.5080508@eukrea.com>
-	<20110619091521.GC23890@ibawizard.net>
-In-Reply-To: <20110619091521.GC23890@ibawizard.net>
-X-Ovh-Tracer-Id: 14810931801649360201
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -112
-X-VR-SPAMCAUSE: Vade Retro 01.322.06 AV+AS Profile: OVH; Bailout: 300;
-	Url TLD (8); (-100); linux2x (-20)
-Subject: Re: FYI: Snowball (new low-cost board similar to beagle/panda)
+Cc: openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] call for participation on openembedded-users mailing list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,61 +45,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Jun 2011 14:03:41 -0000
-Content-Type: text/plain; charset=ISO-8859-2; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 19 Jun 2011 14:12:24 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 19/06/2011 11:15, Petr =A9tetiar wrote:
-> Eric B=E9nard<eric@eukrea.com>  [2011-06-18 09:20:54]:
+On Sun, Jun 19, 2011 at 1:50 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
->> it was announced on linux devices :
->> http://www.linuxfordevices.com/c/a/News/Calao-Systems-Snowball/ but as=
- you
->> can see on their "community" site there are not much news since this d=
-ate :
->> http://www.igloocommunity.org/
+> On 17-06-11 16:37, Paul Eggleton wrote:
+>> On Friday 17 June 2011 15:28:56 Koen Kooi wrote:
+>>> So let's really close that list and discuss things on oe-devel and oe-core
+>>> ml
+>>
+>> I'm on the oe-users mailing list and occasionally help people out, but I have
+>> to agree with Koen here. It hardly gets any traffic and the nature of OE is that
+>> every user is a developer or considers themselves so.
 >
-> I wonder, if that SOC used on this board is going to be as "easily" sou=
-rceable
-> as it's the Omap4 on Pandaboard. Or it's meant to be sourced in the hug=
-e
-> quantities only also?
->
-OMAP4 is actually not easily sourceable, TI's web site says :
-"This product is intended for high-volume wireless OEMs and ODMs and is n=
-ot=20
-available through distributors."
+> If I did it right then mailman will send an autoresponse to each oe-user
+> mail telling people to use oe-devel and/or oe-core instead.
 
->> If you want to pay for an "open" board to become a "free" beta tester =
-for
->> an other phone/tablet cpu manufacturer you can also wait for
->> http://www.origenboard.org/
->
-> Ditto.
->
-> And I sometimes wonder, which company is going to trademark some of the
-> buzzwords around the "free/open/community" first or even patent some ki=
-nd of
-> "free/open/community" work flow :-)
->
->> Next one in the list may be using an iMX6 from Freescale (in the page,=
- this
->> one is said to also target industrial applications and not only
->> phones/tablets) :
->> http://www.freescale.com/webapp/sps/site/overview.jsp?code=3DIMX6X_SER=
-IES
->> which will surely have its equivalent of the i.MX53's QSB :
->> http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=3DIMX53=
-QSB
->
-> Good to know, I was wondering last week, what is that Loco board in the=
- Linux
-> kernel tree :-)
->
-loco is qsb here again it's not clear why they chose loco for the board n=
-ame=20
-in the kernel and qsb for the product name on the shelf ...
 
-Eric
+perfect ! thanks for doing it
+>
+> regards,
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFN/bhsMkyGM64RGpERAn2YAKCb37RPHS2UZzittqQeoB1UWDVG6QCgrntC
+> mcC+17LbmSJENtMxwBdQlNE=
+> =N0fk
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
