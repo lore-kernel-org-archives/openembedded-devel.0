@@ -1,28 +1,22 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <morphis@gravedo.de>) id 1QYNPG-00016y-Sk
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Jun 2011 21:11:39 +0200
-Received: by gravedo.de (Postfix, from userid 5001)
-	id E7E30799014; Sun, 19 Jun 2011 21:08:09 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h1108419.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from [192.168.178.21] (dslb-088-071-183-050.pools.arcor-ip.net
-	[88.71.183.50]) by gravedo.de (Postfix) with ESMTPSA id 3F0D779900F;
-	Sun, 19 Jun 2011 21:08:09 +0200 (CEST)
-Message-ID: <4DFE4918.9000800@gravedo.de>
-Date: Sun, 19 Jun 2011 21:08:08 +0200
-From: Simon Busch <morphis@gravedo.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110422 Lightning/1.0b2 Shredder/3.1.11pre
-MIME-Version: 1.0
-To: Paul Menzel <paulepanter@users.sourceforge.net>
-References: <1308477368.18748.7.camel@mattotaupa>
-In-Reply-To: <1308477368.18748.7.camel@mattotaupa>
-Cc: openembedded-devel@lists.openembedded.org
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QYOLc-0004Ln-I7 for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Jun 2011 22:11:57 +0200
+Received: from f053044243.adsl.alicedsl.de ([78.53.44.243]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QYOIH-0002hy-Io for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Jun 2011 20:08:30 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4DFE4918.9000800@gravedo.de>
+References: <1308477368.18748.7.camel@mattotaupa> <4DFE4918.9000800@gravedo.de>
+Date: Sun, 19 Jun 2011 22:08:25 +0200
+Message-ID: <1308514105.4141.27.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
 Subject: Re: [PATCH] shiboken: Add `apiextrator-native` to `DEPENDS`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -37,22 +31,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Jun 2011 19:11:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 19 Jun 2011 20:11:57 -0000
+X-Groupsio-MsgNum: 32757
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-t9ocYR1MQAXilv0c47CD"
 
-On 19.06.2011 11:56, Paul Menzel wrote:
-> unfortunately I am not able to test this, because of Qt4 build problems [1]. 
-> Could you please test this.
+--=-t9ocYR1MQAXilv0c47CD
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I gave this a quick run an I am fine with it. You can put my
+Am Sonntag, den 19.06.2011, 21:08 +0200 schrieb Simon Busch:
+> On 19.06.2011 11:56, Paul Menzel wrote:
+> > unfortunately I am not able to test this, because of Qt4 build problems=
+ [1].=20
+> > Could you please test this.
+>=20
+> I gave this a quick run an I am fine with it. You can put my
+>=20
+> Acked-by: Simon Busch <morphis@gravedo.de>
+>=20
+> below the commit.
 
-Acked-by: Simon Busch <morphis@gravedo.de>
+Thank you. I pushed it in 1b9260e7 [1] and updated the state in the
+patch queue.
 
-below the commit.
-
-regards,
-Simon
-
+	$ ~/src/patchwork/apps/patchwork/bin/pwclient update -s Accepted -c 1b9260=
+e7a6c756d6938821f013a41c371065980a 6125
 
 
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D1b9260e=
+7a6c756d6938821f013a41c371065980a
+
+--=-t9ocYR1MQAXilv0c47CD
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk3+VzkACgkQPX1aK2wOHViLOgCggrRJalpcs5jyDOjfnBY8HisJ
+lPkAnjf+Bgf3PhkUNngnxA5HvgdCkH2Z
+=KXeV
+-----END PGP SIGNATURE-----
+
+--=-t9ocYR1MQAXilv0c47CD--
