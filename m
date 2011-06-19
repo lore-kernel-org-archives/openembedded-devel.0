@@ -1,37 +1,23 @@
-Received: from mail-pz0-f50.google.com ([209.85.210.50])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1QYJ2F-0002tr-SV; Sun, 19 Jun 2011 16:31:36 +0200
-Received: by pzk2 with SMTP id 2so3145001pzk.9
-	for <multiple recipients>; Sun, 19 Jun 2011 07:28:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=8tGR3Sf0LYZx3EoTIY+ONg48EBEYJsMnVW8V5hdW3gA=;
-	b=otgoGpVY1aYhDBPRXhUdTsQ3f6wUUXhqaTAuQCDzTpOdLi4U59GzHdc+lYdELt/tYR
-	rQCdKDfL7AGv8eT8PzhbZTY/aCaIR6kPHdclTjJUW9FVpYpdw3+he6qd4+q+IdYml+hE
-	2W3L9JE+1mKPDZCaxSGkOJmlAhsXvL1Xt+f9U=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	b=fu2slhcAt6Bs26Os43gKl9synlFdqQgNtzDlrko/lz5+rD6nCmmVyzlAyZM+gnxq/p
-	1e5FRwQWe+2XgD46uuk5mrK9YhBhWQBCeh/TAxxaREVB9LmV2JAG5XZOAC1owiFf6dOZ
-	u6TbnbA1rTm4AXktJMUXdXhmG0WhZEdJ4+rCo=
-Received: by 10.68.36.234 with SMTP id t10mr1748472pbj.361.1308493683351; Sun,
-	19 Jun 2011 07:28:03 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.68.55.195 with HTTP; Sun, 19 Jun 2011 07:27:33 -0700 (PDT)
-In-Reply-To: <201106191521.15698.paul.eggleton@linux.intel.com>
-References: <4DFB6412.4050501@gmail.com> <itkd9c$657$1@dough.gmane.org>
-	<BANLkTimcL7wD_4R3rMRwYdgCt-OhDOY6wQ@mail.gmail.com>
-	<201106191521.15698.paul.eggleton@linux.intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 19 Jun 2011 07:27:33 -0700
-Message-ID: <BANLkTimA9rkeZjQb8=PqviXYhRP1OtuMnA@mail.gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] call for participation on openembedded-users mailing list
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QYMz1-0006xD-2p for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Jun 2011 20:44:31 +0200
+Received: from f053044243.adsl.alicedsl.de ([78.53.44.243]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QYMvf-0007v6-Ue for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Jun 2011 18:41:04 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1308007552.1831.1.camel@mattotaupa>
+References: <1308007552.1831.1.camel@mattotaupa>
+Date: Sun, 19 Jun 2011 20:41:00 +0200
+Message-ID: <1308508860.4141.25.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [RFC][PATCH] libyajl_git: Add Git dbcba50b7 version (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,33 +31,156 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Jun 2011 14:31:36 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 19 Jun 2011 18:44:31 -0000
+X-Groupsio-MsgNum: 32755
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-+Ti/Y+TUxiYSbjPRd/nb"
 
-On Sun, Jun 19, 2011 at 7:21 AM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> On Sunday 19 June 2011 15:08:22 Khem Raj wrote:
->> On Sun, Jun 19, 2011 at 1:50 AM, Koen Kooi <koen@dominion.thruhere.net>
-> wrote:
->> > If I did it right then mailman will send an autoresponse to each oe-user
->> > mail telling people to use oe-devel and/or oe-core instead.
->>
->> perfect ! thanks for doing it
->
-> I've also updated our mailing lists page [1] on the wiki to reflect this.
+--=-+Ti/Y+TUxiYSbjPRd/nb
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-double kudos !
+Am Dienstag, den 14.06.2011, 01:25 +0200 schrieb Paul Menzel:
+> Date: Mon, 13 Jun 2011 19:24:12 +0200
+>=20
+> XBMC Git requires on YAJL now [1].
+>=20
+> [1] https://github.com/xbmc/xbmc/commit/3565ad579e9b80f4be57db901d3fe44d9=
+bfac87d
+>=20
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> ---
+> I still have to problems.
+>=20
+> 1. Is the correct recipe name yajl =E2=80=93 as the project calls itself =
+=E2=80=93 or libyajl since it is a library?
+> 2. During the first BitBake run, task package_stage fails with the follow=
+ing error (please note that here the used recipe name was `yajl`).
+>=20
+> 	ERROR: Error executing a python function in /oe/openembedded/recipes/yaj=
+l/yajl_git.bb:
+> 	ShellSyntaxError: Unexpected EOF
+>=20
+> 	ERROR: The stack trace of python calls that resulted in this exception/f=
+ailure was:
+> 	ERROR:   File "do_package_stage", line 87, in <module>
+> 	ERROR:=20
+> 	ERROR:   File "do_package_stage", line 81, in do_package_stage
+> 	ERROR:=20
+> 	ERROR:   File "/oe/bitbake/lib/bb/build.py", line 171, in exec_func
+> 	ERROR:     exec_func_shell(func, d, runfile, cwd=3Dadir)
+> 	ERROR:=20
+> 	ERROR:   File "/oe/bitbake/lib/bb/build.py", line 224, in exec_func_shel=
+l
+> 	ERROR:     data.emit_func(function, script, d)
+> 	ERROR:=20
+> 	ERROR:   File "/oe/bitbake/lib/bb/data.py", line 260, in emit_func
+> 	ERROR:     newdeps =3D bb.codeparser.ShellParser().parse_shell(d.getVar(=
+func, True))
+> 	ERROR:=20
+> 	ERROR:   File "/oe/bitbake/lib/bb/codeparser.py", line 247, in parse_she=
+ll
+> 	ERROR:     raise sherrors.ShellSyntaxError("Unexpected EOF")
+> 	ERROR:=20
+> 	ERROR: The code that was being executed was:
+> 	ERROR:      0083:    bb.build.exec_func("staging_package_installer", d)
+> 	ERROR:      0084:    bb.utils.unlockfile(lf)
+> 	ERROR:      0085:
+> 	ERROR:      0086:
+> 	ERROR:  *** 0087:do_package_stage(d)
+> 	ERROR:      0088:
+> 	ERROR: (file: 'do_package_stage', lineno: 87, function: <module>)
+> 	ERROR:      0077:    oe_run(d, "cp -PpR %s.do_* %s/" % (stampfn, destdir=
+))
+> 	ERROR:      0078:
+> 	ERROR:      0079:    pstage_set_pkgmanager(d)
+> 	ERROR:      0080:    bb.build.exec_func("staging_helper", d)
+> 	ERROR:  *** 0081:    bb.build.exec_func("staging_packager", d)
+> 	ERROR:      0082:    lf =3D bb.utils.lockfile(bb.data.expand("/oe/build-=
+angstrom-next/angstrom-dev/sysroots/staging.lock", d))
+> 	ERROR:      0083:    bb.build.exec_func("staging_package_installer", d)
+> 	ERROR:      0084:    bb.utils.unlockfile(lf)
+> 	ERROR:      0085:
+> 	ERROR: (file: 'do_package_stage', lineno: 81, function: do_package_stage=
+)
+> 	ERROR: Function 'do_package_stage' failed
+> 	+ cd /oe/build-angstrom-next/angstrom-dev/work/armv7a-angstrom-linux-gnu=
+eabi/yajl-git-r0/git
+> 	+ staging_helper
+> 	+ conffile=3D/oe/build-angstrom-next/angstrom-dev/pstage/opkg.conf
+> 	+ mkdir -p /oe/build-angstrom-next/angstrom-dev/pstage/pstaging_lists
+> 	+ arch=3Darmv7a-linux-gnueabi
+> 	+ '[' '!' -e /oe/build-angstrom-next/angstrom-dev/pstage/opkg.conf ']'
+> 	++ grep -c ' armv7a-linux-gnueabi ' /oe/build-angstrom-next/angstrom-dev=
+/pstage/opkg.conf
+> 	+ '[' 1 -eq 0 ']'
+> 	+ '[' '!' -e /oe/build-angstrom-next/angstrom-dev/usr/lib/opkg/info/ ']'
+> 	+ '[' '!' -e /oe/build-angstrom-next/angstrom-dev/usr/lib/ipkg/ ']'
 
->
-> Cheers,
-> Paul
->
-> [1] http://www.openembedded.org/index.php/Mailing_lists
->
-> --
->
-> Paul Eggleton
-> Intel Open Source Technology Centre
->
+This happens with BitBake 1.12.x and master. Does anyone have an idea
+what might be wrong.
 
 
+Thanks,
+
+Paul
+
+
+> Running `bitbake yajl` afterward works fine then.
+> ---
+>  recipes/libyajl/libyajl_git.bb |   25 +++++++++++++++++++++++++
+>  1 files changed, 25 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/libyajl/libyajl_git.bb
+>=20
+> diff --git a/recipes/libyajl/libyajl_git.bb b/recipes/libyajl/libyajl_git=
+.bb
+> new file mode 100644
+> index 0000000..eb3d821
+> --- /dev/null
+> +++ b/recipes/libyajl/libyajl_git.bb
+> @@ -0,0 +1,25 @@
+> +DESCRIPTION =3D "Yet Another JSON Library. YAJL is a small event-driven =
+(SAX-style) JSON parser written in ANSI C, and a small validating JSON gene=
+rator."
+> +AUTHOR =3D "Lloyd Hilaiel"
+> +HOMEPAGE =3D "http://lloyd.github.com/yajl/"
+> +SECTION =3D "libs
+> +PRIORITY =3D "optional"
+> +LICENSE =3D "ISC"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D74f541bd9a2b6c8e5d0714bcdc327=
+f32"
+> +
+> +DEPENDS =3D "ruby"
+> +
+> +inherit gitpkgv
+> +PKGV =3D "v${GITPKGVTAG}"
+> +
+> +# This gets reset to the proper version with PKGV above
+> +PV =3D "git"
+> +PR =3D "r0"
+> +
+> +inherit cmake pkgconfig
+> +
+> +SRCREV =3D "dbcba50b7785170d89bfeddaf2b41fe3f3ffacf4"
+> +
+> +SRC_URI =3D "git://github.com/lloyd/yajl;protocol=3Dgit \
+> +          "
+> +
+> +S =3D "${WORKDIR}/git"
+> --=20
+> 1.7.5.4
+
+--=-+Ti/Y+TUxiYSbjPRd/nb
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEUEABECAAYFAk3+QrwACgkQPX1aK2wOHVjzzgCY4Z0bPLmWlXEX7SzTXZm2/026
+1ACdGgVlbF2FLULK44C/Xw/5EvraChk=
+=EmQq
+-----END PGP SIGNATURE-----
+
+--=-+Ti/Y+TUxiYSbjPRd/nb--
