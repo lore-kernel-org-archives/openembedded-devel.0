@@ -1,26 +1,37 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from 5.97.mail-out.ovh.net ([188.165.48.85] helo=97.mail-out.ovh.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1QYH53-0006oY-Ik
+	(envelope-from <eric@eukrea.com>) id 1QYIbF-0002NH-E0
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Jun 2011 14:26:21 +0200
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 19 Jun 2011 05:21:44 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.65,388,1304319600"; d="scan'208";a="16822961"
-Received: from unknown (HELO helios.localnet) ([10.255.16.219])
-	by orsmga001.jf.intel.com with ESMTP; 19 Jun 2011 05:21:43 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 19 Jun 2011 13:21:41 +0100
-User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic-pae; KDE/4.6.2; i686; ; )
-References: <cover.1308417391.git.paul.eggleton@linux.intel.com>
-	<6b59e5c689dd1963371df90cc749d2f7c5b969da.1308417391.git.paul.eggleton@linux.intel.com>
-	<itkdlh$801$1@dough.gmane.org>
-In-Reply-To: <itkdlh$801$1@dough.gmane.org>
+	Sun, 19 Jun 2011 16:03:41 +0200
+Received: from mail422.ha.ovh.net (b9.ovh.net [213.186.33.59])
+	by 97.mail-out.ovh.net (Postfix) with SMTP id 33B684AAE62
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 19 Jun 2011 12:22:23 +0200 (CEST)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 19 Jun 2011 12:21:00 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 19 Jun 2011 12:20:59 +0200
+Message-ID: <4DFDCD8B.9080309@eukrea.com>
+Date: Sun, 19 Jun 2011 12:20:59 +0200
+From: =?ISO-8859-2?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.10
 MIME-Version: 1.0
-Message-Id: <201106191321.41883.paul.eggleton@linux.intel.com>
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe] [PATCH 2/3] qmake2: remove qmake2 recipe
+To: openembedded-devel@lists.openembedded.org
+References: <4DFC4A9F.9080104@gmx.net> <4DFC51D6.5080508@eukrea.com>
+	<20110619091521.GC23890@ibawizard.net>
+In-Reply-To: <20110619091521.GC23890@ibawizard.net>
+X-Ovh-Tracer-Id: 14810931801649360201
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -112
+X-VR-SPAMCAUSE: Vade Retro 01.322.06 AV+AS Profile: OVH; Bailout: 300;
+	Url TLD (8); (-100); linux2x (-20)
+Subject: Re: FYI: Snowball (new low-cost board similar to beagle/panda)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,29 +45,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Jun 2011 12:26:21 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 19 Jun 2011 14:03:41 -0000
+Content-Type: text/plain; charset=ISO-8859-2; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-On Sunday 19 June 2011 09:57:21 Koen Kooi wrote:
-> On 18-06-11 20:57, Paul Eggleton wrote:
-> > This is a leftover from oe-dev and is not needed by anything in meta-oe -
-> > qmake is being build as part of qt4-tools-native.
-> 
-> I'm going to drop this patch, since we still need it for the target
-> qmake binary.
+On 19/06/2011 11:15, Petr =A9tetiar wrote:
+> Eric B=E9nard<eric@eukrea.com>  [2011-06-18 09:20:54]:
+>
+>> it was announced on linux devices :
+>> http://www.linuxfordevices.com/c/a/News/Calao-Systems-Snowball/ but as=
+ you
+>> can see on their "community" site there are not much news since this d=
+ate :
+>> http://www.igloocommunity.org/
+>
+> I wonder, if that SOC used on this board is going to be as "easily" sou=
+rceable
+> as it's the Omap4 on Pandaboard. Or it's meant to be sourced in the hug=
+e
+> quantities only also?
+>
+OMAP4 is actually not easily sourceable, TI's web site says :
+"This product is intended for high-volume wireless OEMs and ODMs and is n=
+ot=20
+available through distributors."
 
-Hmm, I'd kind of missed that as a possibility, and qmake's not being provided 
-by qt4-{embedded|x11-free}-tools either. There's got to be a better solution 
-to this, but for now as you say qmake2 is it.
+>> If you want to pay for an "open" board to become a "free" beta tester =
+for
+>> an other phone/tablet cpu manufacturer you can also wait for
+>> http://www.origenboard.org/
+>
+> Ditto.
+>
+> And I sometimes wonder, which company is going to trademark some of the
+> buzzwords around the "free/open/community" first or even patent some ki=
+nd of
+> "free/open/community" work flow :-)
+>
+>> Next one in the list may be using an iMX6 from Freescale (in the page,=
+ this
+>> one is said to also target industrial applications and not only
+>> phones/tablets) :
+>> http://www.freescale.com/webapp/sps/site/overview.jsp?code=3DIMX6X_SER=
+IES
+>> which will surely have its equivalent of the i.MX53's QSB :
+>> http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=3DIMX53=
+QSB
+>
+> Good to know, I was wondering last week, what is that Loco board in the=
+ Linux
+> kernel tree :-)
+>
+loco is qsb here again it's not clear why they chose loco for the board n=
+ame=20
+in the kernel and qsb for the product name on the shelf ...
 
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Eric
 
 
