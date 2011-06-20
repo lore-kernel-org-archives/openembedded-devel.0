@@ -1,24 +1,36 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1QYlrr-00006W-Ee
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <jefflance01@gmail.com>) id 1QYmnj-00016B-Ku
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Jun 2011 23:18:47 +0200
-Received: (qmail invoked by alias); 20 Jun 2011 21:15:14 -0000
-Received: from p5B0A3BB3.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.59.179]
-	by mail.gmx.net (mp057) with SMTP; 20 Jun 2011 23:15:14 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18TtLJdKX0ToG2xwkoQqLGm5WSlWLFSN2fUthQ6Tn
-	UcPScdN+CScBeF
-From: Andreas Mueller <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Jun 2011 23:16:47 +0200
-User-Agent: KMail/1.13.7 (Linux/2.6.35.13-92.fc14.x86_64; KDE/4.6.3; x86_64; ;
-	)
+	Tue, 21 Jun 2011 00:18:36 +0200
+Received: by iwn19 with SMTP id 19so4502398iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Jun 2011 15:15:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=KNZk/p30DPWlHXH/1/kjsCR75Ip6W6Ld55QvUJ9b3x8=;
+	b=I0oZtOeWPM6siOc/0pLNO+Nse8Lg5Tei5NqPEZL+QDAAazuw1dQ+ielJ3EvgyBMU/Q
+	99bXDd4EZxr0kjuZgH9jvSupkEmsdchXYri8t7xIGIEDAC7c9ZqtYmHYp0GfHMt/sMUQ
+	kcVOLXQk/mV1lKyUZnfXMYGwkXLVds9/KRLNI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=xkER3gU6a/M1lCv+AoJW94B1qJJZpneJf4+gSpDEH6VbrDHSTCf/jeuBJSI19cxM8K
+	jhT9hciKiJH6foQunGikUimC/YTmfrF+st0br7U733Wg7vpp3ZNkM3IKX6OSDT0Baxyw
+	tYbtAHcU+t7bIVnBJYpAR2TXaF/bXX2QgL/w8=
 MIME-Version: 1.0
-Message-Id: <201106202316.47662.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: udev 171 caching working propely?
+Received: by 10.42.157.73 with SMTP id c9mr6670564icx.135.1308608101603; Mon,
+	20 Jun 2011 15:15:01 -0700 (PDT)
+Received: by 10.231.40.11 with HTTP; Mon, 20 Jun 2011 15:15:01 -0700 (PDT)
+In-Reply-To: <1308258789-9959-1-git-send-email-j-lance1@ti.com>
+References: <1308258789-9959-1-git-send-email-j-lance1@ti.com>
+Date: Mon, 20 Jun 2011 17:15:01 -0500
+Message-ID: <BANLkTimvWcWiGSChFpbKZ7OEc+isoFTLEA@mail.gmail.com>
+From: Jeff Lance <jefflance01@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: [PATCH 1/2] matrix_gui: Update SRCREV to revision 265
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,37 +44,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jun 2011 21:18:47 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 20 Jun 2011 22:18:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Dear OE-folks,
+Ping on these 2 patches.
 
-Working with lastest classic oe master and angstrom it seems udev caching is not 
-working as expected. On *every* boot I get:
+Thanks,
 
->Remounting root file system...
->Caching udev devnodes
->Populating dev cachemv: can't rename '/dev/shm/uname': No such file or directory
+Jeff Lance
 
-I don't know why this change came in but there was a change of storage location 
-in Tom's commit few days ago [1]. To me it seems that
+---------- Forwarded message ----------
+From: Jeff Lance <jefflance01@gmail.com>
+Date: Thu, Jun 16, 2011 at 4:13 PM
+Subject: [PATCH 1/2] matrix_gui: Update SRCREV to revision 265
+To: openembedded-devel@lists.openembedded.org
+Cc: Jeff Lance <j-lance1@ti.com>
 
-1. The files created by udev (init) get lost at remount so udev-cache (cache) is 
-unable to find
-2. Since this error occures not only at first boot the recipe's 
-pkg_postinst_udev_append() seems never being executed. To check I added a simple 
-echo 'foo text' 
-in this function but 'foo text' is not found in log of first boot.
 
-Suggestions welcome
+* ti816x - Rework runOMTB script
+* am3517 - Remove Can and WIFI apps
+* am3715 - Add four new power apps
+* Add Oprofile apps to all am platforms
+* Remove LMBench app "write throughput" from all am platforms
+* Add beagle board platform support
 
-Cheers
+Signed-off-by: Jeff Lance <j-lance1@ti.com>
+---
+ recipes/ti/matrix-gui-common_1.4.bb |    4 ++--
+ recipes/ti/matrix-gui-e_1.3.bb      |    4 ++--
+ recipes/ti/matrix-gui_1.3.bb        |    4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
 
-Andreas
+diff --git a/recipes/ti/matrix-gui-common_1.4.bb b/recipes/ti/
+matrix-gui-common_1.4.bb
+index 0b4b25b..c241e85 100644
+--- a/recipes/ti/matrix-gui-common_1.4.bb
++++ b/recipes/ti/matrix-gui-common_1.4.bb
+@@ -4,5 +4,5 @@ require matrix-gui-common.inc
+ # prebuilt version in the repository.
+ RRECOMMENDS_${PN} = "am-sysinfo"
 
-[1] 
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=ca688dd2de58dbec865ac7e70fab4d2c373ad822
+-SRCREV = "257"
+-PR = "${INC_PR}.11"
++SRCREV = "265"
++PR = "${INC_PR}.12"
+diff --git a/recipes/ti/matrix-gui-e_1.3.bb b/recipes/ti/matrix-gui-e_1.3.bb
+index a6eb17f..87a79fb 100644
+--- a/recipes/ti/matrix-gui-e_1.3.bb
++++ b/recipes/ti/matrix-gui-e_1.3.bb
+@@ -1,5 +1,5 @@
+ require matrix-gui-e.inc
 
+-SRCREV = "257"
+-PR = "${INC_PR}.10"
++SRCREV = "265"
++PR = "${INC_PR}.11"
+
+diff --git a/recipes/ti/matrix-gui_1.3.bb b/recipes/ti/matrix-gui_1.3.bb
+index 51678df..4dc4021 100644
+--- a/recipes/ti/matrix-gui_1.3.bb
++++ b/recipes/ti/matrix-gui_1.3.bb
+@@ -1,4 +1,4 @@
+ require matrix-gui.inc
+
+-SRCREV = "257"
+-PR = "${INC_PR}.6"
++SRCREV = "265"
++PR = "${INC_PR}.7"
+--
+1.7.0.4
 
