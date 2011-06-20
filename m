@@ -1,21 +1,21 @@
 Received: from [178.16.156.2] (helo=office.altell.ru)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <khimov@altell.ru>) id 1QYd8c-0006oD-FH
+	(envelope-from <khimov@altell.ru>) id 1QYdCg-0000jM-62
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Jun 2011 13:59:31 +0200
+	Mon, 20 Jun 2011 14:03:42 +0200
 Received: from sencha.localnet (unknown [192.168.1.169])
-	by mail.altell.local (Postfix) with ESMTPS id 9138154CA;
-	Mon, 20 Jun 2011 15:55:51 +0400 (MSD)
+	by mail.altell.local (Postfix) with ESMTPS id 482D254C5;
+	Mon, 20 Jun 2011 15:52:52 +0400 (MSD)
 From: Roman I Khimov <khimov@altell.ru>
 Organization: Altell Ltd.
 To: Paul Menzel <paulepanter@users.sourceforge.net>
-Date: Mon, 20 Jun 2011 15:55:51 +0400
+Date: Mon, 20 Jun 2011 15:52:51 +0400
 User-Agent: KMail/1.13.6 (Linux/2.6.37.6-0.5-desktop; KDE/4.6.0; x86_64; ; )
 References: <1308568797.5090.24.camel@mattotaupa>
 In-Reply-To: <1308568797.5090.24.camel@mattotaupa>
 MIME-Version: 1.0
-Message-Id: <201106201555.51413.khimov@altell.ru>
-X-Altell-MailScanner-ID: 9138154CA.316F4
+Message-Id: <201106201552.52013.khimov@altell.ru>
+X-Altell-MailScanner-ID: 482D254C5.A2EEE
 X-Altell-MailScanner: Found to be clean
 X-Altell-MailScanner-From: khimov@altell.ru
 X-Spam-Status: No
@@ -34,7 +34,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jun 2011 11:59:31 -0000
+X-List-Received-Date: Mon, 20 Jun 2011 12:03:42 -0000
 Content-Type: Text/Plain;
   charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -43,8 +43,8 @@ Content-Transfer-Encoding: 7bit
 > OpenEmbedded mirror, since it is not available anymore upstream [1]
 > (only 2.07 and 2.08).
 
-Or maybe you can get it from here:
-http://mirror.ihug.co.nz/CPAN/modules/by-category/12_Opt_Arg_Param_Proc/User/MARKOV/
-(found by quick googling)
+I have it available here and can attach to e-mail (52k) if there are no 
+objections. But I think it's easier to update version in OE, shouldn't be 
+problematic.
 
 
