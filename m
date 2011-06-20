@@ -1,36 +1,33 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefflance01@gmail.com>) id 1QYmnj-00016B-Ku
+	(envelope-from <Tom_Rini@mentor.com>) id 1QYnJt-0001fP-4A
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Jun 2011 00:18:36 +0200
-Received: by iwn19 with SMTP id 19so4502398iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jun 2011 15:15:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=KNZk/p30DPWlHXH/1/kjsCR75Ip6W6Ld55QvUJ9b3x8=;
-	b=I0oZtOeWPM6siOc/0pLNO+Nse8Lg5Tei5NqPEZL+QDAAazuw1dQ+ielJ3EvgyBMU/Q
-	99bXDd4EZxr0kjuZgH9jvSupkEmsdchXYri8t7xIGIEDAC7c9ZqtYmHYp0GfHMt/sMUQ
-	kcVOLXQk/mV1lKyUZnfXMYGwkXLVds9/KRLNI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=xkER3gU6a/M1lCv+AoJW94B1qJJZpneJf4+gSpDEH6VbrDHSTCf/jeuBJSI19cxM8K
-	jhT9hciKiJH6foQunGikUimC/YTmfrF+st0br7U733Wg7vpp3ZNkM3IKX6OSDT0Baxyw
-	tYbtAHcU+t7bIVnBJYpAR2TXaF/bXX2QgL/w8=
+	Tue, 21 Jun 2011 00:51:50 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1QYnGU-00057I-3g from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 20 Jun 2011 15:48:18 -0700
+Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 20 Jun 2011 15:43:08 -0700
+Received: from [172.30.80.125] (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
+	(147.34.97.43) with Microsoft SMTP Server id 14.1.289.1;
+	Mon, 20 Jun 2011 15:48:17 -0700
+Message-ID: <4DFFCE1D.1070507@mentor.com>
+Date: Mon, 20 Jun 2011 15:47:57 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
 MIME-Version: 1.0
-Received: by 10.42.157.73 with SMTP id c9mr6670564icx.135.1308608101603; Mon,
-	20 Jun 2011 15:15:01 -0700 (PDT)
-Received: by 10.231.40.11 with HTTP; Mon, 20 Jun 2011 15:15:01 -0700 (PDT)
-In-Reply-To: <1308258789-9959-1-git-send-email-j-lance1@ti.com>
-References: <1308258789-9959-1-git-send-email-j-lance1@ti.com>
-Date: Mon, 20 Jun 2011 17:15:01 -0500
-Message-ID: <BANLkTimvWcWiGSChFpbKZ7OEc+isoFTLEA@mail.gmail.com>
-From: Jeff Lance <jefflance01@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: [PATCH 1/2] matrix_gui: Update SRCREV to revision 265
+To: <openembedded-devel@lists.openembedded.org>
+References: <201106202316.47662.schnitzeltony@gmx.de>
+In-Reply-To: <201106202316.47662.schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 20 Jun 2011 22:43:08.0063 (UTC)
+	FILETIME=[6CEA42F0:01CC2F9B]
+Subject: Re: udev 171 caching working propely?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,73 +41,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jun 2011 22:18:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 20 Jun 2011 22:51:50 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Ping on these 2 patches.
+On 06/20/2011 02:16 PM, Andreas Mueller wrote:
+> Dear OE-folks,
+> 
+> Working with lastest classic oe master and angstrom it seems udev caching is not 
+> working as expected. On *every* boot I get:
+> 
+>> Remounting root file system...
+>> Caching udev devnodes
+>> Populating dev cachemv: can't rename '/dev/shm/uname': No such file or directory
+> 
+> I don't know why this change came in but there was a change of storage location 
+> in Tom's commit few days ago [1]. To me it seems that
+> 
+> 1. The files created by udev (init) get lost at remount so udev-cache (cache) is 
+> unable to find
+> 2. Since this error occures not only at first boot the recipe's 
+> pkg_postinst_udev_append() seems never being executed. To check I added a simple 
+> echo 'foo text' 
+> in this function but 'foo text' is not found in log of first boot.
+> 
+> Suggestions welcome
 
-Thanks,
+Did udev change behaviors at some point then?  I've been using an older
+udev and didn't run into that problem.  I changed from /tmp to /dev/shm
+since we don't know that /tmp is writable at that point so we were
+instead getting errors there.  I wonder if we should just switch to
+re-creating the contents for that step?
 
-Jeff Lance
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
----------- Forwarded message ----------
-From: Jeff Lance <jefflance01@gmail.com>
-Date: Thu, Jun 16, 2011 at 4:13 PM
-Subject: [PATCH 1/2] matrix_gui: Update SRCREV to revision 265
-To: openembedded-devel@lists.openembedded.org
-Cc: Jeff Lance <j-lance1@ti.com>
-
-
-* ti816x - Rework runOMTB script
-* am3517 - Remove Can and WIFI apps
-* am3715 - Add four new power apps
-* Add Oprofile apps to all am platforms
-* Remove LMBench app "write throughput" from all am platforms
-* Add beagle board platform support
-
-Signed-off-by: Jeff Lance <j-lance1@ti.com>
----
- recipes/ti/matrix-gui-common_1.4.bb |    4 ++--
- recipes/ti/matrix-gui-e_1.3.bb      |    4 ++--
- recipes/ti/matrix-gui_1.3.bb        |    4 ++--
- 3 files changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/recipes/ti/matrix-gui-common_1.4.bb b/recipes/ti/
-matrix-gui-common_1.4.bb
-index 0b4b25b..c241e85 100644
---- a/recipes/ti/matrix-gui-common_1.4.bb
-+++ b/recipes/ti/matrix-gui-common_1.4.bb
-@@ -4,5 +4,5 @@ require matrix-gui-common.inc
- # prebuilt version in the repository.
- RRECOMMENDS_${PN} = "am-sysinfo"
-
--SRCREV = "257"
--PR = "${INC_PR}.11"
-+SRCREV = "265"
-+PR = "${INC_PR}.12"
-diff --git a/recipes/ti/matrix-gui-e_1.3.bb b/recipes/ti/matrix-gui-e_1.3.bb
-index a6eb17f..87a79fb 100644
---- a/recipes/ti/matrix-gui-e_1.3.bb
-+++ b/recipes/ti/matrix-gui-e_1.3.bb
-@@ -1,5 +1,5 @@
- require matrix-gui-e.inc
-
--SRCREV = "257"
--PR = "${INC_PR}.10"
-+SRCREV = "265"
-+PR = "${INC_PR}.11"
-
-diff --git a/recipes/ti/matrix-gui_1.3.bb b/recipes/ti/matrix-gui_1.3.bb
-index 51678df..4dc4021 100644
---- a/recipes/ti/matrix-gui_1.3.bb
-+++ b/recipes/ti/matrix-gui_1.3.bb
-@@ -1,4 +1,4 @@
- require matrix-gui.inc
-
--SRCREV = "257"
--PR = "${INC_PR}.6"
-+SRCREV = "265"
-+PR = "${INC_PR}.7"
---
-1.7.0.4
 
