@@ -1,21 +1,25 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1QZ0Ro-0002XF-GD
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <embedded@gmx.net>) id 1QZ11R-0003Gq-TU
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Jun 2011 14:52:52 +0200
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QZ0OP-0002ey-EF
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Jun 2011 14:49:21 +0200
-From: Phil Blundell <philb@gnu.org>
+	Tue, 21 Jun 2011 15:29:41 +0200
+Received: (qmail invoked by alias); 21 Jun 2011 13:19:26 -0000
+Received: from mx.3alitydigital.de (EHLO gport016linuxx64.localnet)
+	[212.144.240.82]
+	by mail.gmx.net (mp018) with SMTP; 21 Jun 2011 15:19:26 +0200
+X-Authenticated: #118086913
+X-Provags-ID: V01U2FsdGVkX1+0zul/VVS0nsy+8SkhZZUObiO4phEVyLeQv6y/aC
+	iWmwAWPWFsnnyd
+From: "A. Schallenberg" <embedded@gmx.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201106211432.22700.embedded@gmx.net>
+Date: Tue, 21 Jun 2011 15:19:22 +0200
+User-Agent: KMail/1.13.5 (Linux/2.6.35-28-generic; KDE/4.5.5; x86_64; ; )
 References: <201106211432.22700.embedded@gmx.net>
-Date: Tue, 21 Jun 2011 13:49:20 +0100
-Message-ID: <1308660560.21613.16.camel@phil-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
+	<1308660560.21613.16.camel@phil-desktop>
+In-Reply-To: <1308660560.21613.16.camel@phil-desktop>
+MIME-Version: 1.0
+Message-Id: <201106211519.23045.embedded@gmx.net>
+X-Y-GMX-Trusted: 0
 Subject: Re: openssl-native-1.0.0d-r14.0 compile fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,47 +34,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jun 2011 12:52:52 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 21 Jun 2011 13:29:42 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2011-06-21 at 14:32 +0200, A. Schallenberg wrote:
-> I tried to compile Angstrom (which is based on openembedded). 
-> Unfortunately it fails with a message that is very similar to the
-> one Robert Schuster reported on 07 Mar 2011.
-> (Since I wasn't subscribed to this list back then I cannot reply
-> to his mail now.)
-> 
-> Here is what I get:
-> 
-> Log data follows:
-> | + do_compile
-> | + oe_runmake
-> | + oenote make -e MAKEFLAGS=
-> | + echo NOTE: 'make -e MAKEFLAGS='
-> | NOTE: make -e MAKEFLAGS=
-> | + make -e MAKEFLAGS=
-> | make: *** No targets specified and no makefile found.  Stop.
-> | + die 'oe_runmake failed'
-> | + oefatal 'oe_runmake failed'
-> | + echo FATAL: 'oe_runmake failed'
-> | FATAL: oe_runmake failed
-> | + exit 1
-> NOTE: package openssl-native-1.0.0d-r14.0: task do_compile: Failed
-> 
-> I didn't find any Makefile that "touch"ing would make it compile.
-> 
-> Has anybody an idea what I am doing wrong?
-> Wrong toolchain? Wrong distro version selection?
+Hi,
 
-It isn't likely that your choice of toolchain is causing this problem,
-since the package in question is a -native one.  From the error you
-pasted it looks as though the recipe has simply failed to unpack any
-source code, or at least not the complete source code.  What do you have
-in the WORKDIR at that point?
+Am Dienstag, 21. Juni 2011, um 14:49:20 schrieb Phil Blundell:
+> ...
+> It isn't likely that your choice of toolchain is causing this problem,
+> since the package in question is a -native one.  From the error you
+> pasted it looks as though the recipe has simply failed to unpack any
+> source code, or at least not the complete source code.  What do you have
+> in the WORKDIR at that point?
+> ...
 
-p.
+Is this the directory in question?
 
+> setup-scripts$ find sources/openembedded/recipes/openssl/
+sources/openembedded/recipes/openssl/
+sources/openembedded/recipes/openssl/ocf-linux_20100325.bb
+sources/openembedded/recipes/openssl/openssl.inc
+sources/openembedded/recipes/openssl/openssl-native_1.0.0d.bb
+sources/openembedded/recipes/openssl/openssl_0.9.8m.bb
+sources/openembedded/recipes/openssl/ocf-linux.inc
+sources/openembedded/recipes/openssl/openssl_1.0.0d.bb
+sources/openembedded/recipes/openssl/openssl-native_0.9.8m.bb
+sources/openembedded/recipes/openssl/openssl-1.0.0d
+sources/openembedded/recipes/openssl/openssl-1.0.0d/engines-install-in-libdir-
+ssl.patch
+sources/openembedded/recipes/openssl/openssl-1.0.0d/shared-libs.patch
+sources/openembedded/recipes/openssl/openssl-1.0.0d/oe-ldflags.patch
+sources/openembedded/recipes/openssl/openssl-1.0.0d/libdeps-first.patch
+sources/openembedded/recipes/openssl/openssl-1.0.0d/debian.patch
+sources/openembedded/recipes/openssl/openssl-1.0.0d/configure-targets.patch
+sources/openembedded/recipes/openssl/openssl-0.9.8m
+sources/openembedded/recipes/openssl/openssl-0.9.8m/shared-libs.patch
+sources/openembedded/recipes/openssl/openssl-0.9.8m/oe-ldflags.patch
+sources/openembedded/recipes/openssl/openssl-0.9.8m/Configure-nios2.patch
+sources/openembedded/recipes/openssl/openssl-0.9.8m/debian.patch
+sources/openembedded/recipes/openssl/openssl-0.9.8m/configure-targets.patch
 
+Best,
+Andreas
 
 
