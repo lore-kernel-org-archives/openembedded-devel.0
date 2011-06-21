@@ -1,27 +1,36 @@
-Received: from [178.16.156.2] (helo=office.altell.ru)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <khimov@altell.ru>) id 1QZ2HA-0004Yv-R3
+Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
+	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1QZ4Hj-0007PB-80
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Jun 2011 16:50:00 +0200
-Received: from sencha.localnet (unknown [192.168.1.169])
-	by mail.altell.local (Postfix) with ESMTPS id 5336854CF
+	Tue, 21 Jun 2011 18:58:57 +0200
+Received: (qmail 12040 invoked from network); 21 Jun 2011 18:55:03 +0200
+Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
+	by leibniz.math.fu-berlin.de with SMTP; 21 Jun 2011 18:55:03 +0200
+X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
+Received: from math.fu-berlin.de ([160.45.40.10])
+	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
+	port 10024) with SMTP id V5HOykEQeofU
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jun 2011 18:46:20 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
+	Tue, 21 Jun 2011 18:54:51 +0200 (CEST)
+Received: (Qmail 11963 invoked from network); 21 Jun 2011 18:54:51 +0200
+Received: From andorra.imp.fu-berlin.de (160.45.42.84)
+	by leibniz.math.fu-berlin.de with SMTP; 21 Jun 2011 16:54:51 -0000
+Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.72 #1
+	(Debian)) id 1QZ4Dy-0000ud-Ur
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Jun 2011 18:54:50 +0200
+Date: Tue, 21 Jun 2011 18:54:50 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Jun 2011 18:46:20 +0400
-User-Agent: KMail/1.13.6 (Linux/2.6.37.6-0.5-desktop; KDE/4.6.0; x86_64; ; )
-References: <1308252543-24363-1-git-send-email-Chase.Maupin@ti.com>
-	<131E5DFBE7373E4C8D813795A6AA7F08034B416E85@dlee06.ent.ti.com>
-In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F08034B416E85@dlee06.ent.ti.com>
+Message-ID: <20110621165450.GA1953@mi.fu-berlin.de>
+References: <201106211432.22700.embedded@gmx.net>
+	<1308660560.21613.16.camel@phil-desktop>
+	<201106211519.23045.embedded@gmx.net>
 MIME-Version: 1.0
-Message-Id: <201106211846.20092.khimov@altell.ru>
-X-Altell-MailScanner-ID: 5336854CF.7A2E7
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-Spam-Status: No
-Subject: Re: [PATCH] kernel bbclass: add the crypto directory to staging
+In-Reply-To: <201106211519.23045.embedded@gmx.net>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+Subject: Re: openssl-native-1.0.0d-r14.0 compile fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,13 +44,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jun 2011 14:50:01 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 21 Jun 2011 16:58:57 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-> Ping on this patch.  I've seen one ACK so far.
+On Tue, Jun 21, 2011 at 03:19:22PM +0200, A. Schallenberg wrote:
+> Hi,
+> 
+> Am Dienstag, 21. Juni 2011, um 14:49:20 schrieb Phil Blundell:
+> > ...
+> > It isn't likely that your choice of toolchain is causing this problem,
+> > since the package in question is a -native one.  From the error you
+> > pasted it looks as though the recipe has simply failed to unpack any
+> > source code, or at least not the complete source code.  What do you have
+> > in the WORKDIR at that point?
+> > ...
+> 
+> Is this the directory in question?
+> 
+> > setup-scripts$ find sources/openembedded/recipes/openssl/
+> sources/openembedded/recipes/openssl/
+> sources/openembedded/recipes/openssl/ocf-linux_20100325.bb
+> sources/openembedded/recipes/openssl/openssl.inc
+> sources/openembedded/recipes/openssl/openssl-native_1.0.0d.bb
+> sources/openembedded/recipes/openssl/openssl_0.9.8m.bb
+> sources/openembedded/recipes/openssl/ocf-linux.inc
+> sources/openembedded/recipes/openssl/openssl_1.0.0d.bb
+> sources/openembedded/recipes/openssl/openssl-native_0.9.8m.bb
+> sources/openembedded/recipes/openssl/openssl-1.0.0d
+> sources/openembedded/recipes/openssl/openssl-1.0.0d/engines-install-in-libdir-
+> ssl.patch
+> sources/openembedded/recipes/openssl/openssl-1.0.0d/shared-libs.patch
+> sources/openembedded/recipes/openssl/openssl-1.0.0d/oe-ldflags.patch
+> sources/openembedded/recipes/openssl/openssl-1.0.0d/libdeps-first.patch
+> sources/openembedded/recipes/openssl/openssl-1.0.0d/debian.patch
+> sources/openembedded/recipes/openssl/openssl-1.0.0d/configure-targets.patch
+> sources/openembedded/recipes/openssl/openssl-0.9.8m
+> sources/openembedded/recipes/openssl/openssl-0.9.8m/shared-libs.patch
+> sources/openembedded/recipes/openssl/openssl-0.9.8m/oe-ldflags.patch
+> sources/openembedded/recipes/openssl/openssl-0.9.8m/Configure-nios2.patch
+> sources/openembedded/recipes/openssl/openssl-0.9.8m/debian.patch
+> sources/openembedded/recipes/openssl/openssl-0.9.8m/configure-targets.patch
+> 
+> Best,
+> Andreas
 
-Acked-by: Roman I Khimov <khimov@altell.ru>
+No,
+
+if you would have read the oe-manual, you would have found
+that the workdir is TMPDIR(set in local.conf)/work/arch-tripple/recipename-version
+
+Bye Henning
 
 
