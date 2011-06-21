@@ -1,32 +1,34 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ka6sox@gmail.com>) id 1QZ6QD-0003So-8M
+	(envelope-from <Tom_Rini@mentor.com>) id 1QZ8bk-0007hW-ME
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Jun 2011 21:15:37 +0200
-Received: by iym10 with SMTP id 10so72909iym.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jun 2011 12:12:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=O5u9EJutcYM8JEVj5DRwoPR7ANd/vlgQ8c5UtFTsQTk=;
-	b=MlsH42Nbxb4+kxyHKZuJrdF4OmKe6dPxOJ5aguOX6s3sE6aU3OmtoIiDUXVcy7HVhi
-	ljyHKajCb2s82z+O9Nhczqm+3I9R+cX9znCeRMdh0JqXj7fKAoEeH+4WC0nkNVclt97r
-	u0WXln03Qpdnht/u7HQzCoFRI2oq05voSWziw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Up1vu3altBVC8xZdMwZURsGyIDI1ieJ8Re7gq1xnJ2yi4O1ALl+yDHEZzxY1Zi5X+B
-	hmmv+YIlPhKONqYcIaKXs986DdZj1oT5q1TU1IzRcKJuFxUXtLRM84w6K2Bku6R3gXdi
-	VNgoiX0j/TxKdMfFvvXLhNQmkJLH9jTUEoDYQ=
+	Tue, 21 Jun 2011 23:35:40 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1QZ8YJ-0002G8-89 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Jun 2011 14:32:07 -0700
+Received: from SVR-ORW-FEM-03.mgc.mentorg.com ([147.34.97.39]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Tue, 21 Jun 2011 14:26:52 -0700
+Received: from [172.30.80.125] (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
+	(147.34.97.39) with Microsoft SMTP Server id 14.1.289.1;
+	Tue, 21 Jun 2011 14:32:06 -0700
+Message-ID: <4E010DC1.1090600@mentor.com>
+Date: Tue, 21 Jun 2011 14:31:45 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
 MIME-Version: 1.0
-Received: by 10.42.159.68 with SMTP id k4mr6892498icx.117.1308683523102; Tue,
-	21 Jun 2011 12:12:03 -0700 (PDT)
-Received: by 10.42.218.201 with HTTP; Tue, 21 Jun 2011 12:12:03 -0700 (PDT)
-Date: Tue, 21 Jun 2011 12:12:03 -0700
-Message-ID: <BANLkTinAMvMDotaPXj3zdY5q+H_6mDpzqw@mail.gmail.com>
-From: Tom King <ka6sox@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Melo issues
+To: <openembedded-devel@lists.openembedded.org>
+References: <201106202316.47662.schnitzeltony@gmx.de>
+	<4DFFCE1D.1070507@mentor.com>
+In-Reply-To: <4DFFCE1D.1070507@mentor.com>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 21 Jun 2011 21:26:52.0422 (UTC)
+	FILETIME=[F0089A60:01CC3059]
+Subject: Re: udev 171 caching working propely?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,18 +42,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jun 2011 19:15:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 21 Jun 2011 21:35:40 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
-there is a huge traffic spike I'm seeing that is running the apache server
-OOM.
+On 06/20/2011 03:47 PM, Tom Rini wrote:
+> On 06/20/2011 02:16 PM, Andreas Mueller wrote:
+>> Dear OE-folks,
+>>
+>> Working with lastest classic oe master and angstrom it seems udev caching is not 
+>> working as expected. On *every* boot I get:
+>>
+>>> Remounting root file system...
+>>> Caching udev devnodes
+>>> Populating dev cachemv: can't rename '/dev/shm/uname': No such file or directory
+>>
+>> I don't know why this change came in but there was a change of storage location 
+>> in Tom's commit few days ago [1]. To me it seems that
+>>
+>> 1. The files created by udev (init) get lost at remount so udev-cache (cache) is 
+>> unable to find
+>> 2. Since this error occures not only at first boot the recipe's 
+>> pkg_postinst_udev_append() seems never being executed. To check I added a simple 
+>> echo 'foo text' 
+>> in this function but 'foo text' is not found in log of first boot.
+>>
+>> Suggestions welcome
+> 
+> Did udev change behaviors at some point then?  I've been using an older
+> udev and didn't run into that problem.  I changed from /tmp to /dev/shm
+> since we don't know that /tmp is writable at that point so we were
+> instead getting errors there.  I wonder if we should just switch to
+> re-creating the contents for that step?
 
-So I'm converting to nginx/varnish
+I've gone with this change and some quick testing on a board.
 
-Probably tonight .eu time.
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
-will email list about this.
-
-Tom
-(for the Infra Team)
 
