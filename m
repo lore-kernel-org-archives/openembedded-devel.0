@@ -1,24 +1,32 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jay@jay-tech.ru>)
-	id 1QZ6L8-0003Gx-3U; Tue, 21 Jun 2011 21:10:22 +0200
-Received: by bwz5 with SMTP id 5so217065bwz.6
-	for <multiple recipients>; Tue, 21 Jun 2011 12:06:48 -0700 (PDT)
-Received: by 10.204.16.130 with SMTP id o2mr2404147bka.211.1308683208525; Tue,
-	21 Jun 2011 12:06:48 -0700 (PDT)
+	(envelope-from <ka6sox@gmail.com>) id 1QZ6QD-0003So-8M
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Jun 2011 21:15:37 +0200
+Received: by iym10 with SMTP id 10so72909iym.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Jun 2011 12:12:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=O5u9EJutcYM8JEVj5DRwoPR7ANd/vlgQ8c5UtFTsQTk=;
+	b=MlsH42Nbxb4+kxyHKZuJrdF4OmKe6dPxOJ5aguOX6s3sE6aU3OmtoIiDUXVcy7HVhi
+	ljyHKajCb2s82z+O9Nhczqm+3I9R+cX9znCeRMdh0JqXj7fKAoEeH+4WC0nkNVclt97r
+	u0WXln03Qpdnht/u7HQzCoFRI2oq05voSWziw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=Up1vu3altBVC8xZdMwZURsGyIDI1ieJ8Re7gq1xnJ2yi4O1ALl+yDHEZzxY1Zi5X+B
+	hmmv+YIlPhKONqYcIaKXs986DdZj1oT5q1TU1IzRcKJuFxUXtLRM84w6K2Bku6R3gXdi
+	VNgoiX0j/TxKdMfFvvXLhNQmkJLH9jTUEoDYQ=
 MIME-Version: 1.0
-Sender: jay@jay-tech.ru
-Received: by 10.204.65.18 with HTTP; Tue, 21 Jun 2011 12:06:28 -0700 (PDT)
-X-Originating-IP: [78.106.51.81]
-From: Yury Bushmelev <jay4mail@gmail.com>
-Date: Tue, 21 Jun 2011 23:06:28 +0400
-X-Google-Sender-Auth: TLTc9vgbjgCoqJs2ihhgMaNL1-w
-Message-ID: <BANLkTikeZVGKk8cTX8Bji2kWSyPRS8vatg@mail.gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	Yocto Project <yocto@yoctoproject.org>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: [cross-post] OE web- and git-server are down
+Received: by 10.42.159.68 with SMTP id k4mr6892498icx.117.1308683523102; Tue,
+	21 Jun 2011 12:12:03 -0700 (PDT)
+Received: by 10.42.218.201 with HTTP; Tue, 21 Jun 2011 12:12:03 -0700 (PDT)
+Date: Tue, 21 Jun 2011 12:12:03 -0700
+Message-ID: <BANLkTinAMvMDotaPXj3zdY5q+H_6mDpzqw@mail.gmail.com>
+From: Tom King <ka6sox@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Melo issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,22 +40,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jun 2011 19:10:22 -0000
+X-List-Received-Date: Tue, 21 Jun 2011 19:15:37 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hello!
+there is a huge traffic spike I'm seeing that is running the apache server
+OOM.
 
-We have some problems on machine which are running OE web-site, OE
-git-server and patchwork.
-Our admins crew are working hardly to resolve this.
+So I'm converting to nginx/varnish
 
-Please use our git mirror: https://github.com/openembedded/openembedded.git
+Probably tonight .eu time.
 
-Thanks for your patience.
+will email list about this.
 
-P.S. This is cross-post. Please check your replies if any :)
-
--- 
-Yury Bushmelev
-
+Tom
+(for the Infra Team)
 
