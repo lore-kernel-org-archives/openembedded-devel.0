@@ -1,20 +1,27 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QZWKH-0007Mg-Fx for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Jun 2011 00:55:13 +0200
-Received: from f053036030.adsl.alicedsl.de ([78.53.36.30]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QZWH0-000276-C8; Wed, 22 Jun 2011 22:51:50 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <Tom_Rini@mentor.com>) id 1QZXDr-0008L9-Dm
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Jun 2011 01:52:39 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1QZXAO-00060X-87 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Jun 2011 16:49:04 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 22 Jun 2011 16:43:43 -0700
+Received: from localhost.localdomain ([172.30.80.154]) by
+	na2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 22 Jun 2011 17:49:02 -0600
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Jun 2011 00:51:18 +0200
-Message-ID: <1308783078.21159.17.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: libfso-qt-embedded: Do not override `DEPENDS`
+Date: Wed, 22 Jun 2011 16:49:00 -0700
+Message-Id: <1308786540-27041-1-git-send-email-tom_rini@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+X-OriginalArrivalTime: 22 Jun 2011 23:49:02.0819 (UTC)
+	FILETIME=[F6F5A330:01CC3136]
+Subject: [meta-oe][PATCH] kernel.bbclass: Stage System.map with KERNEL_VERSION suffix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,73 +35,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jun 2011 22:55:13 -0000
-X-Groupsio-MsgNum: 32795
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-k304XbOjUnKeaQKGDWoT"
+X-List-Received-Date: Wed, 22 Jun 2011 23:52:39 -0000
 
---=-k304XbOjUnKeaQKGDWoT
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Without this, images will fail now that kernel-abiversion is back.
 
-Date: Wed, 22 Jun 2011 23:41:38 +0200
-
-Using `=3D` instead of `+=3D` overrides the dependencies declared in `libfs=
-o-qt.inc`.
-
-Task configure therefore fails with the following errors.
-
-1. `fso-specs` is not found.
-
- 	checking for SPECS... no
-	configure: error: Package requirements (fso-specs >=3D 2011.06.01.1) were =
-not met:
-
-	No package 'fso-specs' found
-
-2. `qfsodbusxml2cpp` is not found.
-
-	checking for QFSODBUSXML2CPP... no
-	configure: error: Package requirements (qfsodbusxml2cpp >=3D 0.7.0) were n=
-ot met:
-
-	No package 'qfsodbusxml2cpp' found
-
-Using `+=3D` solves these problems and is built tested using `minimal` for =
-`MACHINE =3D "beagleboard"`.
-
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-CC: Simon Busch <morphis@gravedo.de>
+Signed-off-by: Tom Rini <tom_rini@mentor.com>
 ---
- recipes/freesmartphone/libfso-qt-embedded_git.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ meta-oe/classes/kernel.bbclass |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/freesmartphone/libfso-qt-embedded_git.bb b/recipes/fre=
-esmartphone/libfso-qt-embedded_git.bb
-index 647f439..641cf8d 100644
---- a/recipes/freesmartphone/libfso-qt-embedded_git.bb
-+++ b/recipes/freesmartphone/libfso-qt-embedded_git.bb
-@@ -2,5 +2,5 @@ require libfso-qt.inc
-=20
- PR =3D "${INC_PR}.0"
-=20
--DEPENDS =3D "qt4-embedded"
-+DEPENDS +=3D "qt4-embedded"
- EXTRA_OECONF_append =3D "--enable-qt-embedded"
---=20
-1.7.5.4
+diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
+index 743ca68..ecd3313 100644
+--- a/meta-oe/classes/kernel.bbclass
++++ b/meta-oe/classes/kernel.bbclass
+@@ -155,6 +155,7 @@ kernel_do_install() {
+ 		cp -fR ${S}/* $kerneldir
+ 	fi
+ 	install -m 0644 ${KERNEL_OUTPUT} $kerneldir/${KERNEL_IMAGETYPE}
++	install -m 0644 System.map $kerneldir/System.map-${KERNEL_VERSION}
+ 
+ 	#
+ 	# Clean and remove files not needed for building modules.
+-- 
+1.7.0.4
 
---=-k304XbOjUnKeaQKGDWoT
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk4CceUACgkQPX1aK2wOHViopACfQ5yLm2J7MeWJ1YL4QhPRPHQw
-cxQAnjYdbXSor+oBw3NGPBI7/Vg6vKQK
-=6oGr
------END PGP SIGNATURE-----
-
---=-k304XbOjUnKeaQKGDWoT--
