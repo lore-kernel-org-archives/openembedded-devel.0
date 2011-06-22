@@ -1,33 +1,25 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from vms173001pub.verizon.net ([206.46.173.1])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QZUPp-0004og-LT for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Jun 2011 22:52:49 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QZUMM-0004on-12 for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Jun 2011 22:49:14 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jun 2011 22:49:14 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jun 2011 22:49:14 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <denis@denix.org>) id 1QZUja-0005S0-Lt
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Jun 2011 23:13:14 +0200
+Received: from gandalf.denix.org ([unknown] [108.18.140.4])
+	by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LN700IQGMQZ58E5@vms173001.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	22 Jun 2011 16:09:11 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0E2A614AF5D; Wed,
+	22 Jun 2011 17:08:59 -0400 (EDT)
+Date: Wed, 22 Jun 2011 17:08:59 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 22 Jun 2011 22:48:59 +0200
-Message-ID: <ittkfr$n5n$1@dough.gmane.org>
+Message-id: <20110622210858.GG1324@denix.org>
 References: <1308769321-26192-1-git-send-email-j-lance1@ti.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1308769321-26192-1-git-send-email-j-lance1@ti.com>
-X-Enigmail-Version: 1.0.1
+	<ittkfr$n5n$1@dough.gmane.org>
+MIME-version: 1.0
+In-reply-to: <ittkfr$n5n$1@dough.gmane.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
 Subject: Re: [PATCH 1/1] matrix-tui: Update to arago toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,24 +34,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jun 2011 20:52:49 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Jun 2011 21:13:14 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Wed, Jun 22, 2011 at 10:48:59PM +0200, Koen Kooi wrote:
+> On 22-06-11 21:02, Jeff Lance wrote:
+> > * Modify to use arago MACHINE name for platforms
+> 
+> This seems to use OE machine names, not arago ones.
 
-On 22-06-11 21:02, Jeff Lance wrote:
-> * Modify to use arago MACHINE name for platforms
+Technically correct. But since Arago is just an OE distro, the machine names 
+are the same. It's like arguing that omap3evm is not Angstrom machine... :)
 
-This seems to use OE machine names, not arago ones.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFOAlU7MkyGM64RGpERArNMAKCKDhoL6RlXDoer6iTxSqSSS/kz5gCgl7a/
-QWX5DbueV0sa410g3jcZ/HU=
-=a3L3
------END PGP SIGNATURE-----
-
+-- 
+Denys
 
 
