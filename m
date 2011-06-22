@@ -1,26 +1,36 @@
-Received: from vms173001pub.verizon.net ([206.46.173.1])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1QZUja-0005S0-Lt
+	(envelope-from <andrea.adami@gmail.com>) id 1QZVRq-00061w-U1
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Jun 2011 23:13:14 +0200
-Received: from gandalf.denix.org ([unknown] [108.18.140.4])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LN700IQGMQZ58E5@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	22 Jun 2011 16:09:11 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0E2A614AF5D; Wed,
-	22 Jun 2011 17:08:59 -0400 (EDT)
-Date: Wed, 22 Jun 2011 17:08:59 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 22 Jun 2011 23:58:59 +0200
+Received: by pwi1 with SMTP id 1so956610pwi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Jun 2011 14:55:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=wouUPXPPtFHmDGHFG2Eot2ImY9iyEvChxzA3v5J8g90=;
+	b=I09WsVX08kcWIkkxDzFiuFgdZ3h/tNvlftRFdR6Gdv+GU+SlZAtIvsyuaSWeVoGZ+o
+	fuhC/12YwxHPeJTtL1NIKOSyDMYJoji0f9c0UO8dVUb5QA7/bOparupb8A6yf1ewXXMy
+	+2z9k9mX4eQv9LjOZDLpfcHZvdXIFGhewfeM0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=mM2VBn6bXBIsWS3WLim22lo1QPRkmT+zV1K/G3TozsheXa7HTTDeq8p3sUS7r2sQ49
+	4onM+9mdI18P1EodeVXhY2rsMNtCuuOyvPwzxX6zg9mgyPFr2HBUX0TCkeYKSz7JnPwk
+	srkL00gALGabfjYmyrVkjU9XWoAM40djz/xDw=
+MIME-Version: 1.0
+Received: by 10.143.21.27 with SMTP id y27mr293756wfi.127.1308779711863; Wed,
+	22 Jun 2011 14:55:11 -0700 (PDT)
+Received: by 10.142.174.6 with HTTP; Wed, 22 Jun 2011 14:55:11 -0700 (PDT)
+In-Reply-To: <1308762019-12145-1-git-send-email-GNUtoo@no-log.org>
+References: <1308758438.21613.101.camel@phil-desktop>
+	<1308762019-12145-1-git-send-email-GNUtoo@no-log.org>
+Date: Wed, 22 Jun 2011 23:55:11 +0200
+Message-ID: <BANLkTi=WMRtCCpVf7fnS5B84PoVNxXoSyg@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20110622210858.GG1324@denix.org>
-References: <1308769321-26192-1-git-send-email-j-lance1@ti.com>
-	<ittkfr$n5n$1@dough.gmane.org>
-MIME-version: 1.0
-In-reply-to: <ittkfr$n5n$1@dough.gmane.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH 1/1] matrix-tui: Update to arago toolchain
+Subject: Re: [PATCH v3] conf/bitbake: improve compression image handling and adapt linux-kexecboot.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,20 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jun 2011 21:13:14 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 22 Jun 2011 21:58:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 22, 2011 at 10:48:59PM +0200, Koen Kooi wrote:
-> On 22-06-11 21:02, Jeff Lance wrote:
-> > * Modify to use arago MACHINE name for platforms
-> 
-> This seems to use OE machine names, not arago ones.
+...
+-IMAGE_CMD_cpio.lzma =3D "type cpio >/dev/null; cd ${IMAGE_ROOTFS} &&
+(find . | cpio -o -H newc | lzma -c ${LZMA_COMPRESSION_LEVEL}
+>${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma)
+${EXTRA_IMAGECMD}"
 
-Technically correct. But since Arago is just an OE distro, the machine names 
-are the same. It's like arguing that omap3evm is not Angstrom machine... :)
++IMAGE_CMD_cpio.lzma =3D "type cpio >/dev/null; cd ${IMAGE_ROOTFS} &&
+(find . | cpio -o -H newc | xz --format=3Dlzma -c
+${LZMA_COMPRESSION_LEVEL} --check=3D${XZ_INTEGRITY_CHECK}
+${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma) ${EXTRA_IMAGECMD}"
 
--- 
-Denys
+
+Hello, thx for refreshing the patch.
+
+being that we have =A0two vars:
+XZ_COMPRESSION_LEVEL ?=3D "-e -9"
+LZMA_COMPRESSION_LEVEL ?=3D "-e -9"
+
+wouldn't it better to use  =A0XZ_COMPRESSION_LEVEL?
+Remember (man xz) that lzma-utils '-9' is equivalent to xz-utils '-8'
+in terms of dictionary/ram needed for decompression.
+
+Regards
+
+Andrea
 
 
