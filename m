@@ -1,27 +1,20 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <embedded@gmx.net>) id 1QZIIW-000894-RF
+Received: from mga11.intel.com ([192.55.52.93])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1QZJZM-0003EF-6v
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Jun 2011 09:56:29 +0200
-Received: (qmail invoked by alias); 22 Jun 2011 07:52:35 -0000
-Received: from mx.3alitydigital.de (EHLO gport016linuxx64.localnet)
-	[212.144.240.82]
-	by mail.gmx.net (mp072) with SMTP; 22 Jun 2011 09:52:35 +0200
-X-Authenticated: #118086913
-X-Provags-ID: V01U2FsdGVkX1/V6ppgPvbVQtxUMK09KMMB/irHoxIxiZUDMKvIEU
-	D9IXZhcwdP2IGf
-From: "A. Schallenberg" <embedded@gmx.net>
+	Wed, 22 Jun 2011 11:17:56 +0200
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 22 Jun 2011 02:13:16 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.65,405,1304319600"; d="scan'208";a="21341675"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.255.17.16])
+	by fmsmga001.fm.intel.com with ESMTP; 22 Jun 2011 02:13:15 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Jun 2011 09:51:18 +0200
-User-Agent: KMail/1.13.5 (Linux/2.6.35-28-generic; KDE/4.5.5; x86_64; ; )
-References: <201106211432.22700.embedded@gmx.net>
-	<1308660560.21613.16.camel@phil-desktop>
-	<201106211519.23045.embedded@gmx.net>
-In-Reply-To: <201106211519.23045.embedded@gmx.net>
-MIME-Version: 1.0
-Message-Id: <201106220951.18472.embedded@gmx.net>
-X-Y-GMX-Trusted: 0
-Subject: Re: openssl-native-1.0.0d-r14.0 compile fails
+Date: Wed, 22 Jun 2011 10:13:14 +0100
+Message-Id: <1308733994-3571-1-git-send-email-paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [PATCH] classes/native*.bbclass: fix error during parse with bitbake master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,97 +28,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jun 2011 07:56:29 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 22 Jun 2011 09:17:56 -0000
 
-Hello,
+Fixes "AttributeError: 'NoneType' object has no attribute 'split'" during
+parsing with bitbake master. We should not be calling explode_deps with
+None as the argument, so check for that before calling it.
 
-thank you, Henning, for pointing me to the correct directory.
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ classes/native.bbclass    |    5 ++++-
+ classes/nativesdk.bbclass |    5 ++++-
+ 2 files changed, 8 insertions(+), 2 deletions(-)
 
-Its contents are:
-openssl-1.0.0d> ls
-ACKNOWLEDGMENTS
-apps
-bugs
-certs
-CHANGES
-CHANGES.SSLeay
-config
-Configure
-crypto
-demos
-doc
-engines
-e_os2.h
-e_os.h
-=46AQ
-include
-INSTALL
-install.com
-INSTALL.DJGPP
-INSTALL.MacOS
-INSTALL.NW
-INSTALL.OS2
-INSTALL.VMS
-INSTALL.W32
-INSTALL.W64
-INSTALL.WCE
-libcrypto.a
-LICENSE
-MacOS
-Makefile
-Makefile.org
-Makefile.shared
-makevms.com
-ms
-Netware
-NEWS
-openssl.doxy
-openssl.ld
-openssl.spec
-os2
-patches
-perl
-PROBLEMS
-README
-README.ASN1
-README.ENGINE
-shlib
-ssl
-test
-times
-tools
-util
-VMS
+diff --git a/classes/native.bbclass b/classes/native.bbclass
+index 1e7a6ec..e9d48a3 100644
+--- a/classes/native.bbclass
++++ b/classes/native.bbclass
+@@ -116,7 +116,10 @@ python __anonymous () {
+     if "native" in (bb.data.getVar('BBCLASSEXTEND', d, True) or ""):
+         pn = bb.data.getVar("PN", d, True)
+         depends = bb.data.getVar("DEPENDS_virtclass-native", d, True)
+-        deps = bb.utils.explode_deps(depends)
++        if depends:
++            deps = bb.utils.explode_deps(depends)
++        else:
++            deps = []
+         newdeps = []
+         for dep in deps:
+             if dep.endswith("-cross"):
+diff --git a/classes/nativesdk.bbclass b/classes/nativesdk.bbclass
+index 6689399..7a8f385 100644
+--- a/classes/nativesdk.bbclass
++++ b/classes/nativesdk.bbclass
+@@ -59,7 +59,10 @@ OVERRIDES =. "virtclass-nativesdk:"
+ python __anonymous () {
+     pn = bb.data.getVar("PN", d, True)
+     depends = bb.data.getVar("DEPENDS_virtclass-nativesdk", d, True)
+-    deps = bb.utils.explode_deps(depends)
++    if depends:
++        deps = bb.utils.explode_deps(depends)
++    else:
++        deps = []
+     newdeps = []
+     for dep in deps:
+         if dep.endswith("-native") or dep.endswith("-cross"):
+-- 
+1.7.4.1
 
-I tried "touch"ing this Makefile (like Robert suggested
-on his mail on this list in March) but it didn't help.
-
-So it seems that the files are downloaded and extracted.
-The message
-"make: *** No targets specified and no makefile found.  Stop."
-is a bit strange, since here is a Makefile.
-
-Best,
-Andreas
-=2D-=20
-=46irmware developer
-=2D-------------------------------------------
-=46ON:+49-(0)8233-78994-18
-=46AX:+49-(0)8233-78994-28
-mailto:Andreas.Schallenberg@3alitydigital.de
-http://www.3alitydigital.de
-=2D-------------------------------------------
-
-3ality Digital Systems GmbH
-Gut Mergenthau
-D-86438 Kissing / Bavaria / Germany
-=2D-------------------------------------------
-
-Gesch=E4ftsf=FChrer/CEO: Steve Schklair
-Sitz der Gesellschaft: Kissing
-Registergericht Augsburg, HRB 16421
 
 
