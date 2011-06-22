@@ -1,22 +1,22 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1QZK6k-0003x6-3w
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1QZKZC-0004eA-H5
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Jun 2011 11:52:26 +0200
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QZK3K-000368-4P
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Jun 2011 11:48:54 +0200
-From: Phil Blundell <philb@gnu.org>
+	Wed, 22 Jun 2011 12:21:51 +0200
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 22 Jun 2011 03:18:15 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.65,405,1304319600"; d="scan'208";a="16773374"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.255.17.16])
+	by orsmga002.jf.intel.com with ESMTP; 22 Jun 2011 03:18:14 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1308733994-3571-1-git-send-email-paul.eggleton@linux.intel.com>
-References: <1308733994-3571-1-git-send-email-paul.eggleton@linux.intel.com>
-Date: Wed, 22 Jun 2011 10:48:52 +0100
-Message-ID: <1308736132.21613.68.camel@phil-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: [PATCH] classes/native*.bbclass: fix error during parse with bitbake master
+Date: Wed, 22 Jun 2011 11:18:14 +0100
+Message-Id: <1308737894-5494-1-git-send-email-paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.4.1
+In-Reply-To: <1308736132.21613.68.camel@phil-desktop>
+References: <1308736132.21613.68.camel@phil-desktop>
+Subject: [PATCH v2] classes/native*.bbclass: fix error during parse with bitbake master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,26 +30,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jun 2011 09:52:26 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Jun 2011 10:21:51 -0000
 
-On Wed, 2011-06-22 at 10:13 +0100, Paul Eggleton wrote:
->          depends = bb.data.getVar("DEPENDS_virtclass-native", d, True)
-> -        deps = bb.utils.explode_deps(depends)
-> +        if depends:
-> +            deps = bb.utils.explode_deps(depends)
-> +        else:
-> +            deps = []
+Fixes "AttributeError: 'NoneType' object has no attribute 'split'" during
+parsing with bitbake master. We should not be calling explode_deps with
+None as the argument, so ensure the value isn't None.
 
-Can't you just make the first line be something like
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ classes/native.bbclass    |    2 +-
+ classes/nativesdk.bbclass |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-depends = bb.data.getVar("DEPENDS_virtclass-native", d, True) or ""
-
-?
-
-p.
-
+diff --git a/classes/native.bbclass b/classes/native.bbclass
+index 1e7a6ec..6f30471 100644
+--- a/classes/native.bbclass
++++ b/classes/native.bbclass
+@@ -115,7 +115,7 @@ python __anonymous () {
+ 
+     if "native" in (bb.data.getVar('BBCLASSEXTEND', d, True) or ""):
+         pn = bb.data.getVar("PN", d, True)
+-        depends = bb.data.getVar("DEPENDS_virtclass-native", d, True)
++        depends = bb.data.getVar("DEPENDS_virtclass-native", d, True) or ""
+         deps = bb.utils.explode_deps(depends)
+         newdeps = []
+         for dep in deps:
+diff --git a/classes/nativesdk.bbclass b/classes/nativesdk.bbclass
+index 6689399..6607abf 100644
+--- a/classes/nativesdk.bbclass
++++ b/classes/nativesdk.bbclass
+@@ -58,7 +58,7 @@ OVERRIDES =. "virtclass-nativesdk:"
+ 
+ python __anonymous () {
+     pn = bb.data.getVar("PN", d, True)
+-    depends = bb.data.getVar("DEPENDS_virtclass-nativesdk", d, True)
++    depends = bb.data.getVar("DEPENDS_virtclass-nativesdk", d, True) or ""
+     deps = bb.utils.explode_deps(depends)
+     newdeps = []
+     for dep in deps:
+-- 
+1.7.4.1
 
 
 
