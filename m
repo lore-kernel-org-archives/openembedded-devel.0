@@ -1,42 +1,18 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from smtp202.alice.it ([82.57.200.98])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QZOfm-0001gM-Im
+	(envelope-from <GNUtoo@no-log.org>) id 1QZPrK-0004bY-96
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Jun 2011 16:44:55 +0200
-Received: by pzk36 with SMTP id 36so631742pzk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jun 2011 07:41:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=Cb6A8HYwKK1+hLpjH22uKL7tr9PBnaA4P3cmNreI9T8=;
-	b=n8jCSunVuvj++Dr4NUr4q5hXgJLWimFvjqbLZ5nDd+nrD0HX5AZh5A2aprytVsXPC1
-	D7Y6tJwGkyT/iHFOJsIjcS5S5J9fmd7flMGfbXX+AeeDjwMoXf12peJu/KFU0QiF5CgN
-	UKvBuTnkPoxfCiDqfn/+5Ua47K0gTWw1Z7aH0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=vGvUwb1SkmNwQCle4Sy/JQijmsCGPK0K0hFh1JEnBxGNH/fQbAIHvByxKsYTK7cKn0
-	VhGXzbWKk8EwYxZ8YTKxgHUcHQjX9PorB1AYDlS+AxCYjkPAurdImC+dUabJOilvK8rb
-	8yUqKRwcLpD1LwGOHllzUry1I6WUMBvi0S6nk=
-Received: by 10.68.39.2 with SMTP id l2mr379345pbk.192.1308753678926;
-	Wed, 22 Jun 2011 07:41:18 -0700 (PDT)
-Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id n8sm480894pbh.73.2011.06.22.07.41.16
-	(version=SSLv3 cipher=OTHER); Wed, 22 Jun 2011 07:41:17 -0700 (PDT)
-Message-ID: <4E01FF0B.5050604@gmail.com>
-Date: Wed, 22 Jun 2011 07:41:15 -0700
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110516 Lightning/1.0b2 Thunderbird/3.1.10
-MIME-Version: 1.0
+	Wed, 22 Jun 2011 18:00:54 +0200
+Received: from localhost.localdomain (79.44.158.230) by smtp202.alice.it
+	(8.5.124.08) (authenticated as editempo@alice.it)
+	id 4DEE15AB0049D644; Wed, 22 Jun 2011 17:57:19 +0200
+From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-References: <guillaume.beraudo@belledonne-communications.com>	<1308128541-5714-1-git-send-email-guillaume.beraudo@belledonne-communications.com>
-	<20110622131659.4399ce87@guibc>
-In-Reply-To: <20110622131659.4399ce87@guibc>
-Subject: Re: [PATCH v3] linphone: added recipe for v3.4.3
+Date: Wed, 22 Jun 2011 17:57:11 +0200
+Message-Id: <1308758231-32758-1-git-send-email-GNUtoo@no-log.org>
+X-Mailer: git-send-email 1.7.0.4
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [PATCH v2] conf/bitbake: improve compression image handling and adapt linux-kexecboot.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,193 +26,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jun 2011 14:44:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 22 Jun 2011 16:00:54 -0000
 
-On 06/22/2011 04:16 AM, Guillaume BERAUDO wrote:
-> Hi all,
->
->
-> What is the process for getting this patch merged?
->
->
+From: Otavio Salvador <otavio@ossystems.com.br>
 
-send pull request for meta-oe
+ * add GZIP_COMPRESSION_LEVEL
+ * add BZIP2_COMPRESSION_LEVEL
+ * use xz-native to generate lzma images
 
-> Regards,
->
-> Guillaume
->
-> Le Wed, 15 Jun 2011 11:02:21 +0200,
-> Guillaume Beraudo<guillaume.beraudo@belledonne-communications.com>  a
-> écrit :
->
->> Recipe support linphone built with video support and without GTK.
->>
->> * included IGEPv2 specific patch to get audio playback at 8KHz rate.
->> * included infrastructure to create flavoured recipes
->>          - with(out) video
->>          - with(out) gtk
->> * removed dependency on:
->>          - obsolete disable-gtk-doc.patch;
->>          - cryptic b64_assert.patch;
->>          - already upstream preferences-segv.patch;
->>          - already upstream fix.unused.variable.patch
->> ---
->>   recipes/linphone/files/igep0020/alsa_8khz.patch |   13 +++++
->>   recipes/linphone/linphone-common.inc            |   61
->> +++++++++++++++++++++++
->> recipes/linphone/linphone-common_3.4.3.inc      |   11 ++++
->> recipes/linphone/linphone-nogtk_3.4.3.bb        |   15 ++++++ 4 files
->> changed, 100 insertions(+), 0 deletions(-) create mode 100644
->> recipes/linphone/files/igep0020/alsa_8khz.patch create mode 100644
->> recipes/linphone/linphone-common.inc create mode 100644
->> recipes/linphone/linphone-common_3.4.3.inc create mode 100644
->> recipes/linphone/linphone-nogtk_3.4.3.bb
->>
->> diff --git a/recipes/linphone/files/igep0020/alsa_8khz.patch
->> b/recipes/linphone/files/igep0020/alsa_8khz.patch new file mode 100644
->> index 0000000..17774d4
->> --- /dev/null
->> +++ b/recipes/linphone/files/igep0020/alsa_8khz.patch
->> @@ -0,0 +1,13 @@
->> +--- linphone/mediastreamer2/src/alsa.c_orig	2011-05-24
->> 12:39:33.824600109 +0200 ++++
->> linphone/mediastreamer2/src/alsa.c	2011-05-24
->> 12:40:04.760407404 +0200 +@@ -32,8 +32,8 @@
->> + /*in case of troubles with a particular driver, try incrementing
->> ALSA_PERIOD_SIZE
->> + to 512, 1024, 2048, 4096...
->> + then try incrementing the number of periods*/
->> +-#define ALSA_PERIODS 8
->> +-#define ALSA_PERIOD_SIZE 256
->> ++#define ALSA_PERIODS 4
->> ++#define ALSA_PERIOD_SIZE 512
->> +
->> + /*uncomment the following line if you have problems with an alsa
->> driver
->> + having sound quality trouble:*/
->> diff --git a/recipes/linphone/linphone-common.inc
->> b/recipes/linphone/linphone-common.inc new file mode 100644
->> index 0000000..a9d0f5b
->> --- /dev/null
->> +++ b/recipes/linphone/linphone-common.inc
->> @@ -0,0 +1,61 @@
->> +inherit autotools pkgconfig gettext
->> +#export PKG_CONFIG=${STAGING_BINDIR_NATIVE}/pkg-config
->> +
->> +SECTION = "x11/network"
->> +SECTION_liblinphone = "libs/network"
->> +SECTION_libmediastreamer = "libs/network"
->> +SECTION_libortp = "libs/network"
->> +SECTION_linphonec =  "console/network"
->> +
->> +DEPENDS = "intltool readline libosip2 libexosip2 speex alsa-lib \
->> +	${@base_conditional('LINPHONE_FLAVOUR_WITH_VIDEO', '1', '
->> libxv ffmpeg libv4l', '', d)} \
->> +	${@base_conditional('LINPHONE_FLAVOUR_WITH_GTK', '1', '
->> gtk+', '', d)} \
->> +	"
->> +
->> +PROVIDES = "linphonec liblinphone libmediastreamer libortp \
->> +	${@base_conditional('LINPHONE_FLAVOUR_WITH_GTK', '1', '
->> linphone', '', d)}" +
->> +SRC_URI_append_igep0020 = " file://alsa_8khz.patch"
->> +
->> +
->> +do_install_append(){
->> +	install -d ${D}${bindir}
->> +	install -m 0755 ${S}/coreapi/.libs/test_ecc
->> ${D}${bindir}/test_ecc
->> +	install -m 0755 ${S}/coreapi/.libs/test_lsd
->> ${D}${bindir}/test_lsd +}
->> +
->> +EXTRA_OECONF = " \
->> +	${@base_conditional('LINPHONE_FLAVOUR_WITH_VIDEO', '1',
->> '--with-ffmpeg=${STAGING_DIR_HOST}${layout_exec_prefix}
->> --enable-video', '--disable-video', d)} \
->> +        --enable-alsa \
->> +        --with-osip=${STAGING_DIR_HOST}${layout_exec_prefix} \
->> +        --with-readline=${STAGING_DIR_HOST}${layout_exec_prefix} \
->> +        --with-speex=${STAGING_DIR_HOST}${layout_exec_prefix} \
->> +        --disable-manual \
->> +	--enable-console_ui=yes \
->> +	--enable-gtk_ui=${@base_conditional('LINPHONE_FLAVOUR_WITH_GTK',
->> '1', 'yes', 'no', d)} \
->> +	--with-realprefix=/usr \
->> +	"
->> +
->> +PACKAGES = " \
->> +	${@base_conditional('LINPHONE_FLAVOUR_WITH_GTK', '1',
->> '${PN}-dbg ${PN} ${PN}-doc ${PN}-dev ${PN}-locale', '', d)} \
->> +	${PN}-console linphone-rings liblinphone
->> libmediastreamer-bin libmediastreamer libortp ${PN}-utils" +
->> +FILES_${PN} = " \
->> +	    ${bindir}/linphone \
->> +            ${datadir}/linphone \
->> + 	    ${datadir}/pixmaps \
->> +	    ${datadir}/applications \
->> +	    ${datadir}/gnome/apps \
->> +	    ${datadir}/sounds/linphone/hello8000.wav \
->> +	    ${datadir}/sounds/linphone/hello16000.wav \
->> +	    ${datadir}/images/nowebcamCIF.jpg \
->> +	    "
->> +
->> +FILES_${PN}-console = "${bindir}/linphonec ${bindir}/linphonecsh
->> ${bindir}/sipomatic ${datadir}/sounds/linphone/ringback.wav"
->> +FILES_${PN}-rings = "${datadir}/sounds/linphone/rings"
->> +FILES_liblinphone = "${libdir}/liblinphone.so.*"
->> +FILES_libmediastreamer-bin = "/usr/libexec/mediastream"
->> +FILES_libmediastreamer = "${libdir}/libmediastreamer.so.*"
->> +FILES_libortp = "${libdir}/libortp.so.*" +FILES_${PN}-dev +=
->> "${libdir}/*.a ${libdir}/*.la ${libdir}/pkgconfig ${includedir}"
->> +FILES_${PN}-utils = "${bindir}/test_ecc ${bindir}/test_lsd" diff
->> --git a/recipes/linphone/linphone-common_3.4.3.inc
->> b/recipes/linphone/linphone-common_3.4.3.inc new file mode 100644
->> index 0000000..bbf6e8d --- /dev/null
->> +++ b/recipes/linphone/linphone-common_3.4.3.inc
->> @@ -0,0 +1,11 @@
->> +
->> +SRC_URI =
->> "${SAVANNAH_MIRROR}/releases/linphone/3.4.x/sources/linphone-3.4.3.tar.gz
->> \
->> +	"
->> +
->> +SRC_URI[md5sum] = "66e21f36d62c2094f7b4360262c46f20"
->> +SRC_URI[sha256sum] =
->> "92e7a0a01f2bb53bfaa4d7de4972e63ad528731154c36e05a9b6ba097e296692" +
->> +S = "${WORKDIR}/linphone-3.4.3"
->> +
->> +
->> +require linphone-common.inc
->> diff --git a/recipes/linphone/linphone-nogtk_3.4.3.bb
->> b/recipes/linphone/linphone-nogtk_3.4.3.bb new file mode 100644
->> index 0000000..83ad0c3
->> --- /dev/null
->> +++ b/recipes/linphone/linphone-nogtk_3.4.3.bb
->> @@ -0,0 +1,15 @@
->> +DESCRIPTION = "Audio/video SIP-based IP phone (console edition)"
->> +HOMEPAGE = "http://www.linphone.org/?lang=us"
->> +LICENSE = "GPLv2"
->> +PR="r1"
->> +
->> +DEFAULT_PREFERENCE = "1"
->> +
->> +# Build without GTK
->> +LINPHONE_FLAVOUR_WITH_GTK = '0'
->> +
->> +# Build with video
->> +LINPHONE_FLAVOUR_WITH_VIDEO = '1'
->> +
->> +
->> +require linphone-common_3.4.3.inc
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Kexecboot.inc needed to be adjusted in order to reflect the dependency
+  change from lzma-native to xz-native
+
+The initramfs.cpio.gz were tested with linux-kexecboot on nokia900.
+
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+---
+ conf/bitbake.conf                 |   22 ++++++++++++----------
+ recipes/linux/linux-kexecboot.inc |    4 ++--
+ 2 files changed, 14 insertions(+), 12 deletions(-)
+
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index 17a494d..299537a 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -150,6 +150,8 @@ QEMU_OPTIONS_armv7a   = "-cpu cortex-a8"
+ # default compression levels
+ XZ_COMPRESSION_LEVEL ?= "-e -9"
+ LZMA_COMPRESSION_LEVEL ?= "-e -9"
++GZIP_COMPRESSION_LEVEL ?= "-9"
++BZIP2_COMPRESSION_LEVEL ?= "-9"
+ 
+ # default integrity check
+ XZ_INTEGRITY_CHECK ?= "crc32"
+@@ -384,14 +386,14 @@ IMAGE_CMD_jffs2 = "mkfs.jffs2 -x lzo --root=${IMAGE_ROOTFS} --faketime --output=
+ IMAGE_CMD_yaffs2 = "mkyaffs2image ${EXTRA_IMAGECMD} ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.yaffs2"
+ IMAGE_CMD_cramfs = "mkcramfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cramfs ${EXTRA_IMAGECMD}"
+ IMAGE_CMD_ext2 = "genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext2 ${EXTRA_IMAGECMD}"
+-IMAGE_CMD_ext2.gz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.gz ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2 ${EXTRA_IMAGECMD}; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext2.gz"
+-IMAGE_CMD_ext2.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext2 ${EXTRA_IMAGECMD}; bzip2 -f -9 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext2; mv ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext2.bz2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext2.bz2"
++IMAGE_CMD_ext2.gz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.gz ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2 ${EXTRA_IMAGECMD}; gzip -f ${GZIP_COMPRESSION_LEVEL} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext2.gz"
++IMAGE_CMD_ext2.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext2 ${EXTRA_IMAGECMD}; bzip2 -f ${BZIP2_COMPRESSION_LEVEL} ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext2; mv ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext2.bz2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext2.bz2"
+ IMAGE_CMD_ext3 = "genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3"
+-IMAGE_CMD_ext3.gz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.gz ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3.gz"
+-IMAGE_CMD_ext3.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext3; bzip2 -f -9 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext3; mv ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext3.bz2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3.bz2"
++IMAGE_CMD_ext3.gz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.gz ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; gzip -f ${GZIP_COMPRESSION_LEVEL} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3.gz"
++IMAGE_CMD_ext3.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext3; bzip2 -f ${BZIP2_COMPRESSION_LEVEL} ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext3; mv ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext3.bz2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3.bz2"
+ IMAGE_CMD_ext4 = "genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac;"
+-IMAGE_CMD_ext4.gz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.gz ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4; set +e;e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.gz"
+-IMAGE_CMD_ext4.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; bzip2 -f -9 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4; mv ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4.bz2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.bz2"
++IMAGE_CMD_ext4.gz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.gz ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4; set +e;e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; gzip -f ${GZIP_COMPRESSION_LEVEL} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.gz"
++IMAGE_CMD_ext4.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; bzip2 -f ${BZIP2_COMPRESSION_LEVEL} ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4; mv ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4.bz2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.bz2"
+ IMAGE_CMD_ext4.xz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.xz; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; xz -c ${XZ_COMPRESSION_LEVEL} --check=${XZ_INTEGRITY_CHECK} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 > ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.xz ; rm -f ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ; rmdir ${DEPLOY_DIR_IMAGE}/tmp.xz"
+ 
+ IMAGE_CMD_squashfs = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs ${EXTRA_IMAGECMD} -noappend"
+@@ -401,10 +403,10 @@ IMAGE_CMD_tar.gz = "cd ${IMAGE_ROOTFS} && tar -zcvf ${DEPLOY_DIR_IMAGE}/${IMAGE_
+ IMAGE_CMD_tar.bz2 = "cd ${IMAGE_ROOTFS} && tar -jcvf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.tar.bz2 ."
+ IMAGE_CMD_tar.xz = "cd ${IMAGE_ROOTFS} && tar --xz -cvf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.tar.xz ."
+ IMAGE_CMD_cpio = "cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio) ${EXTRA_IMAGECMD}"
+-IMAGE_CMD_cpio.gz = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | gzip -c -9 >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz) ${EXTRA_IMAGECMD}"
++IMAGE_CMD_cpio.gz = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | gzip -c ${GZIP_COMPRESSION_LEVEL} >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz) ${EXTRA_IMAGECMD}"
+ IMAGE_CMD_cpio.xz = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | xz -c ${XZ_COMPRESSION_LEVEL} --check=${XZ_INTEGRITY_CHECK} > ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.xz) ${EXTRA_IMAGECMD}"
+-IMAGE_CMD_cpio.gz.u-boot = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | gzip -c -9 >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz) ${EXTRA_IMAGECMD}; mkimage -A ${UBOOT_ARCH} -O linux -T ramdisk -C gzip -n ${IMAGE_NAME} -d ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz.u-boot"
+-IMAGE_CMD_cpio.lzma = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | lzma -c ${LZMA_COMPRESSION_LEVEL} >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma) ${EXTRA_IMAGECMD}"
++IMAGE_CMD_cpio.gz.u-boot = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | gzip -c ${GZIP_COMPRESSION_LEVEL} >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz) ${EXTRA_IMAGECMD}; mkimage -A ${UBOOT_ARCH} -O linux -T ramdisk -C gzip -n ${IMAGE_NAME} -d ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz.u-boot"
++IMAGE_CMD_cpio.lzma = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | xz --format=lzma -c ${LZMA_COMPRESSION_LEVEL} --check=${XZ_INTEGRITY_CHECK} >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma) ${EXTRA_IMAGECMD}"
+ IMAGE_CMD_ubi = "echo \[ubifs\] > ubinize.cfg ; echo mode=ubi >> ubinize.cfg ; echo image=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img >> ubinize.cfg ; echo vol_id=0 >> ubinize.cfg ; echo vol_type=dynamic >> ubinize.cfg ; echo vol_name=${UBI_VOLNAME} >> ubinize.cfg ; echo vol_flags=autoresize >> ubinize.cfg;mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img ${MKUBIFS_ARGS} && ubinize -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ${UBINIZE_ARGS} ubinize.cfg"
+ IMAGE_CMD_ubifs = "mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img ${MKUBIFS_ARGS}"
+ 
+@@ -435,7 +437,7 @@ IMAGE_DEPENDS_ext4.gz = "genext2fs-native e2fsprogs-native"
+ IMAGE_DEPENDS_ext4.bz2 = "genext2fs-native e2fsprogs-native"
+ IMAGE_DEPENDS_ext4.xz = "genext2fs-native e2fsprogs-native xz-native"
+ IMAGE_DEPENDS_cpio.gz.u-boot = "u-boot-mkimage-native"
+-IMAGE_DEPENDS_cpio.lzma = "lzma-native"
++IMAGE_DEPENDS_cpio.lzma = "xz-native"
+ IMAGE_DEPENDS_cpio.xz = "xz-native"
+ IMAGE_DEPENDS_squashfs = "squashfs-tools-native"
+ IMAGE_DEPENDS_squashfs-lzma = "squashfs-tools-native"
+diff --git a/recipes/linux/linux-kexecboot.inc b/recipes/linux/linux-kexecboot.inc
+index efa45f2..d1bf6aa 100644
+--- a/recipes/linux/linux-kexecboot.inc
++++ b/recipes/linux/linux-kexecboot.inc
+@@ -1,5 +1,5 @@
+ # We set INC_PR here, since a change in the kexecboot recipe will need to get picked up by *all* the kernels:
+-INC_PR = "r39"
++INC_PR = "r40"
+ 
+ inherit kernel siteinfo
+ 
+@@ -57,7 +57,7 @@ def kernel_version_less_or_equal(variable, checkvalue, truevalue, falsevalue, d)
+ 
+ # force lzma compression for kernel (linux-kexecboot >= 2.6.32)
+ # force lzma compression for initramfs (linux-kexecboot >= 2.6.30)
+-DEPENDS += '${@kernel_version_less_or_equal("PV", "2.6.29", "", "lzma-native", d)}'
++DEPENDS += '${@kernel_version_less_or_equal("PV", "2.6.29", "", "xz-native", d)}'
+ 
+ KERNEL_COMPRESSION = '${@kernel_version_less_or_equal("PV", "2.6.31", "", "CONFIG_KERNEL_LZMA=y", d)}'
+ 
+-- 
+1.7.0.4
 
 
 
