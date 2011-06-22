@@ -1,35 +1,34 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefflance01@gmail.com>) id 1QZSme-0003iw-FX
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Jun 2011 21:08:16 +0200
-Received: by gyd12 with SMTP id 12so490166gyd.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QZUPp-0004og-LT for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Jun 2011 22:52:49 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QZUMM-0004on-12 for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Jun 2011 22:49:14 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Jun 2011 22:49:14 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jun 2011 12:04:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=+Haq8CZ1oL98dq4R3wW2mqHlurh/KY3MVNPICtkMEgk=;
-	b=Birs5+Pdjb8iQsAVsoMhPe3YAKw4cR8J5H2NxlMZboZlCrj7BCAYMLa7mUh+Ijf4Fq
-	4T1AQWWOfAFbsbkrhi9XBGmELV50R4e/qUDmfMq/Euo4osKuIwbywYhtC1bSvoebVqgn
-	xwlSUuEiuFEbVQyLsv1zfwDDBGsCMU3CrFbs8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=CHA7jEakz373j+9O4x9l1vDrNCQ9I5laD22X1e3UqPLRfBAIJ3dkMuQb5VF1iCh4tx
-	FcczNX8qQi/R4ZzbXiW6+FHrLYNcTwsOkLAoE08X9lppXSOEGOlls4WGMwvEYp1iUZM2
-	eHg9sUPJi2JJpvtAJ5gEOVDIA/sPiLrd1dAxg=
-Received: by 10.236.155.135 with SMTP id j7mr1156858yhk.100.1308769478126;
-	Wed, 22 Jun 2011 12:04:38 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id i61sm513956yhe.61.2011.06.22.12.04.36
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 22 Jun 2011 12:04:37 -0700 (PDT)
-From: Jeff Lance <jefflance01@gmail.com>
+	Wed, 22 Jun 2011 22:49:14 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Jun 2011 14:02:01 -0500
-Message-Id: <1308769321-26192-1-git-send-email-j-lance1@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: Jeff Lance <j-lance1@ti.com>
-Subject: [PATCH 1/1] matrix-tui: Update to arago toolchain
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 22 Jun 2011 22:48:59 +0200
+Message-ID: <ittkfr$n5n$1@dough.gmane.org>
+References: <1308769321-26192-1-git-send-email-j-lance1@ti.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1308769321-26192-1-git-send-email-j-lance1@ti.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH 1/1] matrix-tui: Update to arago toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,72 +42,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jun 2011 19:08:16 -0000
+X-List-Received-Date: Wed, 22 Jun 2011 20:52:49 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-* Modify to use arago MACHINE name for platforms
-* Add all Sitara platforms
-* Update SRCREV to 41
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Jeff Lance <j-lance1@ti.com>
----
- recipes/ti/matrix-tui.inc    |   12 +++---------
- recipes/ti/matrix-tui_1.1.bb |    4 ++--
- 2 files changed, 5 insertions(+), 11 deletions(-)
+On 22-06-11 21:02, Jeff Lance wrote:
+> * Modify to use arago MACHINE name for platforms
 
-diff --git a/recipes/ti/matrix-tui.inc b/recipes/ti/matrix-tui.inc
-index 1ad8aa8..a3793d3 100644
---- a/recipes/ti/matrix-tui.inc
-+++ b/recipes/ti/matrix-tui.inc
-@@ -9,13 +9,6 @@ INC_PR = "r7"
- 
- COMPATIBLE_MACHINE = "(omapl138|omap3)"
- 
--PLATFORM_am37x-evm = "am3715"
--PLATFORM_beagleboard = "am3715"
--PLATFORM_am3517-evm = "am3517"
--PLATFORM_am180x-evm = "am180x"
--PLATFORM_am181x-evm = "am181x"
--PLATFORM_da850-omapl138-evm = "am180x"
--
- SRC_URI = "svn://gforge.ti.com/svn/matrix_tui/;module=trunk;proto=https;user=anonymous;pswd='' \
- 	file://init \
- "
-@@ -28,7 +21,7 @@ S = "${WORKDIR}/trunk"
- #INITSCRIPT_PARAMS = "defaults 99"
- 
- do_configure() {
--	sed -i -e 's:PATH=${LINUX_DEVKIT_PATH}/arm-none-linux-gnueabi:PATH ?= ${LINUX_DEVKIT_PATH}/arm-none-linux-gnueabi:' makefile.init
-+	sed -i -e 's:PATH=${LINUX_DEVKIT_PATH}/arm-arago-linux-gnueabi:PATH ?= ${LINUX_DEVKIT_PATH}/arm-arago-linux-gnueabi:' makefile.init
- 	sed -i -e 's|LIBS :=|LIBS := ${LDFLAGS} |' Release/objects.mk
- }
- 
-@@ -39,11 +32,12 @@ do_compile() {
- 	export TUI_INCLUDE_PATH=${STAGING_INCDIR}
- 	export XML_INCLUDE_PATH=${STAGING_INCDIR}/libxml2
- 	export TUI_LIB_PATH=${STAGING_LIBDIR}
-+	export PLATFORM=${MACHINE}
- 	make release
- }
- 
- do_install() {
--	export PLATFORM=${PLATFORM}
-+	export PLATFORM=${MACHINE}
- 	make DESTDIR=${D} install
- 	install -d ${D}${sysconfdir}/init.d/
- 	install -c -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/matrix-tui
-diff --git a/recipes/ti/matrix-tui_1.1.bb b/recipes/ti/matrix-tui_1.1.bb
-index 9814d5f..7e95d62 100644
---- a/recipes/ti/matrix-tui_1.1.bb
-+++ b/recipes/ti/matrix-tui_1.1.bb
-@@ -1,4 +1,4 @@
- require matrix-tui.inc
- 
--SRCREV = "37"
--PR = "${INC_PR}.4"
-+SRCREV = "41"
-+PR = "${INC_PR}.5"
--- 
-1.7.0.4
+This seems to use OE machine names, not arago ones.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFOAlU7MkyGM64RGpERArNMAKCKDhoL6RlXDoer6iTxSqSSS/kz5gCgl7a/
+QWX5DbueV0sa410g3jcZ/HU=
+=a3L3
+-----END PGP SIGNATURE-----
 
 
 
