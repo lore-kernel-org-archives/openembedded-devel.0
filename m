@@ -1,36 +1,35 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1QZVRq-00061w-U1
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Jun 2011 23:58:59 +0200
-Received: by pwi1 with SMTP id 1so956610pwi.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QZVUn-0006Vz-3L for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Jun 2011 00:02:01 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QZVRM-00022C-Fx for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Jun 2011 23:58:28 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Jun 2011 23:58:28 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jun 2011 14:55:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=wouUPXPPtFHmDGHFG2Eot2ImY9iyEvChxzA3v5J8g90=;
-	b=I09WsVX08kcWIkkxDzFiuFgdZ3h/tNvlftRFdR6Gdv+GU+SlZAtIvsyuaSWeVoGZ+o
-	fuhC/12YwxHPeJTtL1NIKOSyDMYJoji0f9c0UO8dVUb5QA7/bOparupb8A6yf1ewXXMy
-	+2z9k9mX4eQv9LjOZDLpfcHZvdXIFGhewfeM0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=mM2VBn6bXBIsWS3WLim22lo1QPRkmT+zV1K/G3TozsheXa7HTTDeq8p3sUS7r2sQ49
-	4onM+9mdI18P1EodeVXhY2rsMNtCuuOyvPwzxX6zg9mgyPFr2HBUX0TCkeYKSz7JnPwk
-	srkL00gALGabfjYmyrVkjU9XWoAM40djz/xDw=
-MIME-Version: 1.0
-Received: by 10.143.21.27 with SMTP id y27mr293756wfi.127.1308779711863; Wed,
-	22 Jun 2011 14:55:11 -0700 (PDT)
-Received: by 10.142.174.6 with HTTP; Wed, 22 Jun 2011 14:55:11 -0700 (PDT)
-In-Reply-To: <1308762019-12145-1-git-send-email-GNUtoo@no-log.org>
-References: <1308758438.21613.101.camel@phil-desktop>
-	<1308762019-12145-1-git-send-email-GNUtoo@no-log.org>
-Date: Wed, 22 Jun 2011 23:55:11 +0200
-Message-ID: <BANLkTi=WMRtCCpVf7fnS5B84PoVNxXoSyg@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Wed, 22 Jun 2011 23:58:28 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH v3] conf/bitbake: improve compression image handling and adapt linux-kexecboot.inc
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 22 Jun 2011 23:58:13 +0200
+Message-ID: <ittohl$fn7$1@dough.gmane.org>
+References: <1308769321-26192-1-git-send-email-j-lance1@ti.com>	<ittkfr$n5n$1@dough.gmane.org>
+	<20110622210858.GG1324@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <20110622210858.GG1324@denix.org>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH 1/1] matrix-tui: Update to arago toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,34 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jun 2011 21:58:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 22 Jun 2011 22:02:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-...
--IMAGE_CMD_cpio.lzma =3D "type cpio >/dev/null; cd ${IMAGE_ROOTFS} &&
-(find . | cpio -o -H newc | lzma -c ${LZMA_COMPRESSION_LEVEL}
->${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma)
-${EXTRA_IMAGECMD}"
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-+IMAGE_CMD_cpio.lzma =3D "type cpio >/dev/null; cd ${IMAGE_ROOTFS} &&
-(find . | cpio -o -H newc | xz --format=3Dlzma -c
-${LZMA_COMPRESSION_LEVEL} --check=3D${XZ_INTEGRITY_CHECK}
-${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma) ${EXTRA_IMAGECMD}"
+On 22-06-11 23:08, Denys Dmytriyenko wrote:
+> On Wed, Jun 22, 2011 at 10:48:59PM +0200, Koen Kooi wrote:
+>> On 22-06-11 21:02, Jeff Lance wrote:
+>>> * Modify to use arago MACHINE name for platforms
+>>
+>> This seems to use OE machine names, not arago ones.
+> 
+> Technically correct. But since Arago is just an OE distro, the machine names 
+> are the same. It's like arguing that omap3evm is not Angstrom machine... :)
 
+But since arago is not present in OE we shouldn't make such mistakes in
+commit messages, no?
 
-Hello, thx for refreshing the patch.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-being that we have =A0two vars:
-XZ_COMPRESSION_LEVEL ?=3D "-e -9"
-LZMA_COMPRESSION_LEVEL ?=3D "-e -9"
+iD8DBQFOAmV1MkyGM64RGpERAm98AJ9Dr4/KQ+RCKIdCIYapLoNfVeTKggCgmdCl
+/PBldHthKj8lIYWqUBfCFp0=
+=wdiK
+-----END PGP SIGNATURE-----
 
-wouldn't it better to use  =A0XZ_COMPRESSION_LEVEL?
-Remember (man xz) that lzma-utils '-9' is equivalent to xz-utils '-8'
-in terms of dictionary/ram needed for decompression.
-
-Regards
-
-Andrea
 
 
