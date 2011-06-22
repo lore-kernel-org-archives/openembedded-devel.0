@@ -1,34 +1,27 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1QZ8bk-0007hW-ME
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <embedded@gmx.net>) id 1QZIIW-000894-RF
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Jun 2011 23:35:40 +0200
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1QZ8YJ-0002G8-89 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Jun 2011 14:32:07 -0700
-Received: from SVR-ORW-FEM-03.mgc.mentorg.com ([147.34.97.39]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Tue, 21 Jun 2011 14:26:52 -0700
-Received: from [172.30.80.125] (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
-	(147.34.97.39) with Microsoft SMTP Server id 14.1.289.1;
-	Tue, 21 Jun 2011 14:32:06 -0700
-Message-ID: <4E010DC1.1090600@mentor.com>
-Date: Tue, 21 Jun 2011 14:31:45 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+	Wed, 22 Jun 2011 09:56:29 +0200
+Received: (qmail invoked by alias); 22 Jun 2011 07:52:35 -0000
+Received: from mx.3alitydigital.de (EHLO gport016linuxx64.localnet)
+	[212.144.240.82]
+	by mail.gmx.net (mp072) with SMTP; 22 Jun 2011 09:52:35 +0200
+X-Authenticated: #118086913
+X-Provags-ID: V01U2FsdGVkX1/V6ppgPvbVQtxUMK09KMMB/irHoxIxiZUDMKvIEU
+	D9IXZhcwdP2IGf
+From: "A. Schallenberg" <embedded@gmx.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 22 Jun 2011 09:51:18 +0200
+User-Agent: KMail/1.13.5 (Linux/2.6.35-28-generic; KDE/4.5.5; x86_64; ; )
+References: <201106211432.22700.embedded@gmx.net>
+	<1308660560.21613.16.camel@phil-desktop>
+	<201106211519.23045.embedded@gmx.net>
+In-Reply-To: <201106211519.23045.embedded@gmx.net>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <201106202316.47662.schnitzeltony@gmx.de>
-	<4DFFCE1D.1070507@mentor.com>
-In-Reply-To: <4DFFCE1D.1070507@mentor.com>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 21 Jun 2011 21:26:52.0422 (UTC)
-	FILETIME=[F0089A60:01CC3059]
-Subject: Re: udev 171 caching working propely?
+Message-Id: <201106220951.18472.embedded@gmx.net>
+X-Y-GMX-Trusted: 0
+Subject: Re: openssl-native-1.0.0d-r14.0 compile fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,43 +35,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jun 2011 21:35:40 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Jun 2011 07:56:29 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On 06/20/2011 03:47 PM, Tom Rini wrote:
-> On 06/20/2011 02:16 PM, Andreas Mueller wrote:
->> Dear OE-folks,
->>
->> Working with lastest classic oe master and angstrom it seems udev caching is not 
->> working as expected. On *every* boot I get:
->>
->>> Remounting root file system...
->>> Caching udev devnodes
->>> Populating dev cachemv: can't rename '/dev/shm/uname': No such file or directory
->>
->> I don't know why this change came in but there was a change of storage location 
->> in Tom's commit few days ago [1]. To me it seems that
->>
->> 1. The files created by udev (init) get lost at remount so udev-cache (cache) is 
->> unable to find
->> 2. Since this error occures not only at first boot the recipe's 
->> pkg_postinst_udev_append() seems never being executed. To check I added a simple 
->> echo 'foo text' 
->> in this function but 'foo text' is not found in log of first boot.
->>
->> Suggestions welcome
-> 
-> Did udev change behaviors at some point then?  I've been using an older
-> udev and didn't run into that problem.  I changed from /tmp to /dev/shm
-> since we don't know that /tmp is writable at that point so we were
-> instead getting errors there.  I wonder if we should just switch to
-> re-creating the contents for that step?
+Hello,
 
-I've gone with this change and some quick testing on a board.
+thank you, Henning, for pointing me to the correct directory.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Its contents are:
+openssl-1.0.0d> ls
+ACKNOWLEDGMENTS
+apps
+bugs
+certs
+CHANGES
+CHANGES.SSLeay
+config
+Configure
+crypto
+demos
+doc
+engines
+e_os2.h
+e_os.h
+=46AQ
+include
+INSTALL
+install.com
+INSTALL.DJGPP
+INSTALL.MacOS
+INSTALL.NW
+INSTALL.OS2
+INSTALL.VMS
+INSTALL.W32
+INSTALL.W64
+INSTALL.WCE
+libcrypto.a
+LICENSE
+MacOS
+Makefile
+Makefile.org
+Makefile.shared
+makevms.com
+ms
+Netware
+NEWS
+openssl.doxy
+openssl.ld
+openssl.spec
+os2
+patches
+perl
+PROBLEMS
+README
+README.ASN1
+README.ENGINE
+shlib
+ssl
+test
+times
+tools
+util
+VMS
+
+I tried "touch"ing this Makefile (like Robert suggested
+on his mail on this list in March) but it didn't help.
+
+So it seems that the files are downloaded and extracted.
+The message
+"make: *** No targets specified and no makefile found.  Stop."
+is a bit strange, since here is a Makefile.
+
+Best,
+Andreas
+=2D-=20
+=46irmware developer
+=2D-------------------------------------------
+=46ON:+49-(0)8233-78994-18
+=46AX:+49-(0)8233-78994-28
+mailto:Andreas.Schallenberg@3alitydigital.de
+http://www.3alitydigital.de
+=2D-------------------------------------------
+
+3ality Digital Systems GmbH
+Gut Mergenthau
+D-86438 Kissing / Bavaria / Germany
+=2D-------------------------------------------
+
+Gesch=E4ftsf=FChrer/CEO: Steve Schklair
+Sitz der Gesellschaft: Kissing
+Registergericht Augsburg, HRB 16421
 
 
