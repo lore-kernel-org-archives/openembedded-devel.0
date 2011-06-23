@@ -1,20 +1,30 @@
-Received: from smtp201.alice.it ([82.57.200.97])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <GNUtoo@no-log.org>) id 1QZpeW-0005E2-Va
+	(envelope-from <morphis@gravedo.de>) id 1QZpfR-0005PA-TH
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Jun 2011 21:33:25 +0200
-Received: from localhost.localdomain (79.50.137.190) by smtp201.alice.it
-	(8.5.124.08) (authenticated as editempo@alice.it)
-	id 4DEE12FE00501DFE; Thu, 23 Jun 2011 21:29:48 +0200
-From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Jun 2011 21:29:44 +0200
-Message-Id: <1308857384-25527-1-git-send-email-GNUtoo@no-log.org>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <BANLkTi=WMRtCCpVf7fnS5B84PoVNxXoSyg@mail.gmail.com>
-References: <BANLkTi=WMRtCCpVf7fnS5B84PoVNxXoSyg@mail.gmail.com>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH v4] conf/bitbake: improve compression image handling and adapt linux-kexecboot.inc
+	Thu, 23 Jun 2011 21:34:21 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 678CD15E0002; Thu, 23 Jun 2011 21:30:48 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h1108419.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.3 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from [192.168.178.21] (dslb-088-070-150-144.pools.arcor-ip.net
+	[88.70.150.144])
+	by gravedo.de (Postfix) with ESMTPSA id 0333515E0001;
+	Thu, 23 Jun 2011 21:30:45 +0200 (CEST)
+Message-ID: <4E039465.4040104@gravedo.de>
+Date: Thu, 23 Jun 2011 21:30:45 +0200
+From: Simon Busch <morphis@gravedo.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110422 Lightning/1.0b2 Shredder/3.1.11pre
+MIME-Version: 1.0
+To: Paul Menzel <paulepanter@users.sourceforge.net>
+References: <1308783016.21159.16.camel@mattotaupa>
+In-Reply-To: <1308783016.21159.16.camel@mattotaupa>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: libshiboken: Do not override `DEPENDS`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,76 +38,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jun 2011 19:33:25 -0000
+X-List-Received-Date: Thu, 23 Jun 2011 19:34:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Otavio Salvador <otavio@ossystems.com.br>
+On 23.06.2011 00:50, Paul Menzel wrote:
+> Date: Mon, 20 Jun 2011 18:01:13 +0200
+> 
+> This is a fix up for commit 1b9260e7 [1].
+> 
+> 	commit 1b9260e7a6c756d6938821f013a41c371065980a
+> 	Author: Paul Menzel <paulepanter@users.sourceforge.net>
+> 	Date:   Sun Jun 19 11:45:37 2011 +0200
+> 
+> 		  shiboken: Add `apiextrator-native` to `DEPENDS`
+> 
+> This commit does not fix the mentioned error, that
+> `ApiExtractorConfig.cmake` is not built, since by using `=` instead of `
+> +=` the dependencies from the include file `shiboken.inc` are overriden
+> in the recipe.
+> 
+> This patch fixes the error and is built tested using `minimal` for
+> `MACHINE = "beagleboard"`.
+> 
+> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=1b9260e7a6c756d6938821f013a41c371065980a
 
-We now use xz-native to generate lzma images
+Thanks again Paul for spotting this! Feel free to put my
 
-Kexecboot.inc needed to be adjusted in order to reflect the dependency
-  change from lzma-native to xz-native
+Acked-by: Simon Busch <morphis@gravedo.de>
 
-The initramfs.cpio.gz were tested with linux-kexecboot on nokia900.
+below the patch and push it!
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
----
- conf/bitbake.conf                 |    5 ++---
- recipes/linux/linux-kexecboot.inc |    4 ++--
- 2 files changed, 4 insertions(+), 5 deletions(-)
+(don't know why I did the same error twice ... next time I should look a
+little longer on my recipes to spot this stupid mistakes :)
 
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index 17a494d..66dfaba 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -149,7 +149,6 @@ QEMU_OPTIONS_armv7a   = "-cpu cortex-a8"
- 
- # default compression levels
- XZ_COMPRESSION_LEVEL ?= "-e -9"
--LZMA_COMPRESSION_LEVEL ?= "-e -9"
- 
- # default integrity check
- XZ_INTEGRITY_CHECK ?= "crc32"
-@@ -404,7 +403,7 @@ IMAGE_CMD_cpio = "cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc >${DEPLOY_DIR_
- IMAGE_CMD_cpio.gz = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | gzip -c -9 >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz) ${EXTRA_IMAGECMD}"
- IMAGE_CMD_cpio.xz = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | xz -c ${XZ_COMPRESSION_LEVEL} --check=${XZ_INTEGRITY_CHECK} > ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.xz) ${EXTRA_IMAGECMD}"
- IMAGE_CMD_cpio.gz.u-boot = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | gzip -c -9 >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz) ${EXTRA_IMAGECMD}; mkimage -A ${UBOOT_ARCH} -O linux -T ramdisk -C gzip -n ${IMAGE_NAME} -d ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz.u-boot"
--IMAGE_CMD_cpio.lzma = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | lzma -c ${LZMA_COMPRESSION_LEVEL} >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma) ${EXTRA_IMAGECMD}"
-+IMAGE_CMD_cpio.lzma = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | xz --format=lzma -c ${XZ_COMPRESSION_LEVEL} --check=${XZ_INTEGRITY_CHECK} >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma) ${EXTRA_IMAGECMD}"
- IMAGE_CMD_ubi = "echo \[ubifs\] > ubinize.cfg ; echo mode=ubi >> ubinize.cfg ; echo image=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img >> ubinize.cfg ; echo vol_id=0 >> ubinize.cfg ; echo vol_type=dynamic >> ubinize.cfg ; echo vol_name=${UBI_VOLNAME} >> ubinize.cfg ; echo vol_flags=autoresize >> ubinize.cfg;mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img ${MKUBIFS_ARGS} && ubinize -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ${UBINIZE_ARGS} ubinize.cfg"
- IMAGE_CMD_ubifs = "mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img ${MKUBIFS_ARGS}"
- 
-@@ -435,7 +434,7 @@ IMAGE_DEPENDS_ext4.gz = "genext2fs-native e2fsprogs-native"
- IMAGE_DEPENDS_ext4.bz2 = "genext2fs-native e2fsprogs-native"
- IMAGE_DEPENDS_ext4.xz = "genext2fs-native e2fsprogs-native xz-native"
- IMAGE_DEPENDS_cpio.gz.u-boot = "u-boot-mkimage-native"
--IMAGE_DEPENDS_cpio.lzma = "lzma-native"
-+IMAGE_DEPENDS_cpio.lzma = "xz-native"
- IMAGE_DEPENDS_cpio.xz = "xz-native"
- IMAGE_DEPENDS_squashfs = "squashfs-tools-native"
- IMAGE_DEPENDS_squashfs-lzma = "squashfs-tools-native"
-diff --git a/recipes/linux/linux-kexecboot.inc b/recipes/linux/linux-kexecboot.inc
-index efa45f2..d1bf6aa 100644
---- a/recipes/linux/linux-kexecboot.inc
-+++ b/recipes/linux/linux-kexecboot.inc
-@@ -1,5 +1,5 @@
- # We set INC_PR here, since a change in the kexecboot recipe will need to get picked up by *all* the kernels:
--INC_PR = "r39"
-+INC_PR = "r40"
- 
- inherit kernel siteinfo
- 
-@@ -57,7 +57,7 @@ def kernel_version_less_or_equal(variable, checkvalue, truevalue, falsevalue, d)
- 
- # force lzma compression for kernel (linux-kexecboot >= 2.6.32)
- # force lzma compression for initramfs (linux-kexecboot >= 2.6.30)
--DEPENDS += '${@kernel_version_less_or_equal("PV", "2.6.29", "", "lzma-native", d)}'
-+DEPENDS += '${@kernel_version_less_or_equal("PV", "2.6.29", "", "xz-native", d)}'
- 
- KERNEL_COMPRESSION = '${@kernel_version_less_or_equal("PV", "2.6.31", "", "CONFIG_KERNEL_LZMA=y", d)}'
- 
--- 
-1.7.0.4
-
+regards,
+Simon
 
 
