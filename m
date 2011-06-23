@@ -1,35 +1,28 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QZsXK-0007Q0-Q7
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1QZsna-0007mv-IS
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Jun 2011 00:38:11 +0200
-Received: by pwi1 with SMTP id 1so1621271pwi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jun 2011 15:34:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=KUPHXO9Cweo7xKpCxmy6OdA5McEHg7RUuvvg1IgmjMY=;
-	b=LSkwWF/WP66ZOjF4JfpAW+tFKxy5mpc9p2uwarjulBpUvO7eGIT28o1qQk96QJ1zVt
-	QA30LUcL74Yw67WMDKM/kxMKLN83aZQJrPgVQk0L7KzkHF3HrLTO1m49WclgfZNhhFUU
-	J7gbdfiMz5mkozWws761/iZNRo83yzZNd9AgY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=uol8V46F2bWjE8JORg6j9PB5IOhSX7Ctjj4HCg9ztsezEgSF+2fsPU7eqqs9I3ZD1/
-	cPUYJF/ujMDfXga5GCvIs+4lT56PsGrJNP6fb9rcex9JICZ7nF9L8c9mW1P1zxKtbiLy
-	KhLZwrBUFP+Kr9uaqs+oki2ldSlnGw8ejBiVY=
-Received: by 10.68.37.69 with SMTP id w5mr1459641pbj.422.1308868473995;
-	Thu, 23 Jun 2011 15:34:33 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id p5sm1536158pbd.92.2011.06.23.15.34.32
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Jun 2011 15:34:33 -0700 (PDT)
-From: raj.khem@gmail.com
+	Fri, 24 Jun 2011 00:54:58 +0200
+Received: (qmail invoked by alias); 23 Jun 2011 22:51:21 -0000
+Received: from p5B0A330D.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.51.13]
+	by mail.gmx.net (mp002) with SMTP; 24 Jun 2011 00:51:21 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX19zmaUVHG1zfSVSe2ycHutRn+QBGql37eCN+Zhltj
+	I8ZY2tYblUD1OC
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Jun 2011 15:34:29 -0700
-Message-Id: <1308868469-32653-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-Subject: [meta-oe][PATCH] gcc-4.6: Change the bbappend to match oe-core changes
+Date: Fri, 24 Jun 2011 00:52:58 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.35.13-92.fc14.x86_64; KDE/4.6.3; x86_64; ;
+	)
+References: <201106202316.47662.schnitzeltony@gmx.de>
+	<201106232258.06911.schnitzeltony@gmx.de>
+	<iu0cut$d9l$1@dough.gmane.org>
+In-Reply-To: <iu0cut$d9l$1@dough.gmane.org>
+MIME-Version: 1.0
+Message-Id: <201106240052.59211.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: udev 171 caching working propely?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,200 +36,198 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jun 2011 22:38:12 -0000
+X-List-Received-Date: Thu, 23 Jun 2011 22:54:58 -0000
+X-Groupsio-MsgNum: 32818
+Content-Type: Multipart/Mixed;
+  boundary="Boundary-00=_LP8AO/dG7yBW6Vm"
 
-From: Khem Raj <raj.khem@gmail.com>
+--Boundary-00=_LP8AO/dG7yBW6Vm
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../linaro/gcc-4.6-linaro-r106720.patch            |    0
- .../linaro/gcc-4.6-linaro-r106723.patch            |    0
- .../linaro/gcc-4.6-linaro-r106729.patch            |    0
- .../linaro/gcc-4.6-linaro-r106733.patch            |    0
- .../linaro/gcc-4.6-linaro-r106737.patch            |    0
- .../linaro/gcc-4.6-linaro-r106738.patch            |    0
- .../linaro/gcc-4.6-linaro-r106739.patch            |    0
- .../linaro/gcc-4.6-linaro-r106740.patch            |    0
- .../linaro/gcc-4.6-linaro-r106741.patch            |    0
- .../linaro/gcc-4.6-linaro-r106742.patch            |    0
- .../linaro/gcc-4.6-linaro-r106743.patch            |    0
- .../linaro/gcc-4.6-linaro-r106744.patch            |    0
- .../linaro/gcc-4.6-linaro-r106746.patch            |    0
- .../linaro/gcc-4.6-linaro-r106747.patch            |    0
- .../linaro/gcc-4.6-linaro-r106750.patch            |    0
- .../linaro/gcc-4.6-linaro-r106751.patch            |    0
- .../linaro/gcc-4.6-linaro-r106753.patch            |    0
- .../linaro/gcc-4.6-linaro-r106754.patch            |    0
- .../linaro/gcc-4.6-linaro-r106755.patch            |    0
- meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc    |    2 +-
- ....0.bbappend => gcc-cross-canadian_4.6.bbappend} |    0
- ...6.0.bbappend => gcc-cross-initial_4.6.bbappend} |    0
- ...bappend => gcc-cross-intermediate_4.6.bbappend} |    0
- ...cross_4.6.0.bbappend => gcc-cross_4.6.bbappend} |    0
- ....bbappend => gcc-crosssdk-initial_4.6.bbappend} |    0
- ...pend => gcc-crosssdk-intermediate_4.6.bbappend} |    0
- ...dk_4.6.0.bbappend => gcc-crosssdk_4.6.bbappend} |    0
- ...ime_4.6.0.bbappend => gcc-runtime_4.6.bbappend} |    0
- .../gcc/{gcc_4.6.0.bbappend => gcc_4.6.bbappend}   |    0
- .../{libgcc_4.6.0.bbappend => libgcc_4.6.bbappend} |    0
- 30 files changed, 1 insertions(+), 1 deletions(-)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106720.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106723.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106729.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106733.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106737.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106738.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106739.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106740.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106741.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106742.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106743.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106744.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106746.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106747.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106750.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106751.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106753.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106754.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-4.6.0 => gcc-4.6}/linaro/gcc-4.6-linaro-r106755.patch (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-cross-canadian_4.6.0.bbappend => gcc-cross-canadian_4.6.bbappend} (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-cross-initial_4.6.0.bbappend => gcc-cross-initial_4.6.bbappend} (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-cross-intermediate_4.6.0.bbappend => gcc-cross-intermediate_4.6.bbappend} (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-cross_4.6.0.bbappend => gcc-cross_4.6.bbappend} (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-crosssdk-initial_4.6.0.bbappend => gcc-crosssdk-initial_4.6.bbappend} (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-crosssdk-intermediate_4.6.0.bbappend => gcc-crosssdk-intermediate_4.6.bbappend} (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-crosssdk_4.6.0.bbappend => gcc-crosssdk_4.6.bbappend} (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc-runtime_4.6.0.bbappend => gcc-runtime_4.6.bbappend} (100%)
- rename meta-oe/recipes-devtools/gcc/{gcc_4.6.0.bbappend => gcc_4.6.bbappend} (100%)
- rename meta-oe/recipes-devtools/gcc/{libgcc_4.6.0.bbappend => libgcc_4.6.bbappend} (100%)
+On Thursday, June 23, 2011 11:58:53 PM Koen Kooi wrote:
+> On 23-06-11 22:58, Andreas Mueller wrote:
+> > On Tuesday, June 21, 2011 11:31:45 PM Tom Rini wrote:
+> >> On 06/20/2011 03:47 PM, Tom Rini wrote:
+> >>> On 06/20/2011 02:16 PM, Andreas Mueller wrote:
+> >>>> Dear OE-folks,
+> >>>> 
+> >>>> Working with lastest classic oe master and angstrom it seems udev
+> >>>> caching is not
+> >>>> 
+> >>>> working as expected. On *every* boot I get:
+> >>>>> Remounting root file system...
+> >>>>> Caching udev devnodes
+> >>>>> Populating dev cachemv: can't rename '/dev/shm/uname': No such file
+> >>>>> or directory
+> >>>> 
+> >>>> I don't know why this change came in but there was a change of storage
+> >>>> location in Tom's commit few days ago [1]. To me it seems that
+> >>>> 
+> >>>> 1. The files created by udev (init) get lost at remount so udev-cache
+> >>>> (cache) is unable to find
+> >>>> 2. Since this error occures not only at first boot the recipe's
+> >>>> pkg_postinst_udev_append() seems never being executed. To check I
+> >>>> added a simple echo 'foo text'
+> >>>> in this function but 'foo text' is not found in log of first boot.
+> >>>> 
+> >>>> Suggestions welcome
+> >>> 
+> >>> Did udev change behaviors at some point then?  I've been using an older
+> >>> udev and didn't run into that problem.  I changed from /tmp to /dev/shm
+> >>> since we don't know that /tmp is writable at that point so we were
+> >>> instead getting errors there.  I wonder if we should just switch to
+> >>> re-creating the contents for that step?
+> >> 
+> >> I've gone with this change and some quick testing on a board.
+> > 
+> > Hi Tom,
+> > 
+> > thanks for taking care and sorry for late response - yesterday I had one
+> > of these nightmares at the job...
+> > 
+> > Now I tested the patch for two machines and sorry I am afraid to waste
+> > your time again:
+> > 
+> > First machine is overo with linux-omap-psp-2.6.32 and a hub connected to
+> > the OTG connector. The kernel detects USB devices at a very early boot
+> > state long before udev starts (see end of file 'overo' attached). udev
+> > caching seems to work without errors.
+> > 
+> > Second machine is tx28 with linux-2.6.38.5 (freescale imx28 based - I
+> > will send patches when stable). This shows different behaviours on first
+> > and all further boots (see udev-*boot attached). Problem is that after
+> > second boot nothing connected to USB is detected / working. By deleting
+> > /etc/udev/saved.* and rebooting all USB devices work fine and log looks
+> > similar as first boot.
+> > 
+> > Before I merged your patch I know the USB devices were working properly
+> > on tx28. Don't misunderstand me: I think before your patch cache was
+> > never read. Now you fixed this and it seems reading the cache does not
+> > work (on my half cooked machine only?).
+> > 
+> > I will have further investigations on this...
+> 
+> With 171 you shouldn't need caching anymore, triggering has been sped up
+> considerably, could you try disable caching and see how much it impacts
+> your boot time?
+Uncached feels slower. Populating all devices takes 5-10s. Is there a simple way 
+to create time stamps for boot messages? On the other hand: compressing and 
+uncompressing the device nodes also takes significant time on my machine.
 
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106720.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106720.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106720.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106720.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106723.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106723.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106723.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106723.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106729.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106729.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106729.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106729.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106733.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106733.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106733.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106733.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106737.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106737.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106737.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106737.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106738.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106738.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106738.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106738.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106739.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106739.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106739.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106739.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106740.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106740.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106740.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106740.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106741.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106741.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106741.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106741.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106742.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106742.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106742.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106742.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106743.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106743.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106743.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106743.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106744.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106744.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106744.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106744.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106746.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106746.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106746.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106746.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106747.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106747.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106747.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106747.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106750.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106750.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106750.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106750.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106751.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106751.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106751.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106751.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106753.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106753.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106753.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106753.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106754.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106754.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106754.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106754.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106755.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106755.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-4.6.0/linaro/gcc-4.6-linaro-r106755.patch
-rename to meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106755.patch
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc b/meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc
-index 38167bf..059f441 100644
---- a/meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc
-+++ b/meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc
-@@ -1,3 +1,3 @@
- # this will prepend this layer to FILESPATH
--FILESEXTRAPATHS := "${THISDIR}/gcc-4.6.0"
-+FILESEXTRAPATHS := "${THISDIR}/gcc-4.6"
- PRINC = "0"
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-cross-canadian_4.6.0.bbappend b/meta-oe/recipes-devtools/gcc/gcc-cross-canadian_4.6.bbappend
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-cross-canadian_4.6.0.bbappend
-rename to meta-oe/recipes-devtools/gcc/gcc-cross-canadian_4.6.bbappend
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-cross-initial_4.6.0.bbappend b/meta-oe/recipes-devtools/gcc/gcc-cross-initial_4.6.bbappend
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-cross-initial_4.6.0.bbappend
-rename to meta-oe/recipes-devtools/gcc/gcc-cross-initial_4.6.bbappend
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-cross-intermediate_4.6.0.bbappend b/meta-oe/recipes-devtools/gcc/gcc-cross-intermediate_4.6.bbappend
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-cross-intermediate_4.6.0.bbappend
-rename to meta-oe/recipes-devtools/gcc/gcc-cross-intermediate_4.6.bbappend
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-cross_4.6.0.bbappend b/meta-oe/recipes-devtools/gcc/gcc-cross_4.6.bbappend
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-cross_4.6.0.bbappend
-rename to meta-oe/recipes-devtools/gcc/gcc-cross_4.6.bbappend
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-crosssdk-initial_4.6.0.bbappend b/meta-oe/recipes-devtools/gcc/gcc-crosssdk-initial_4.6.bbappend
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-crosssdk-initial_4.6.0.bbappend
-rename to meta-oe/recipes-devtools/gcc/gcc-crosssdk-initial_4.6.bbappend
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.6.0.bbappend b/meta-oe/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.6.bbappend
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.6.0.bbappend
-rename to meta-oe/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.6.bbappend
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-crosssdk_4.6.0.bbappend b/meta-oe/recipes-devtools/gcc/gcc-crosssdk_4.6.bbappend
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-crosssdk_4.6.0.bbappend
-rename to meta-oe/recipes-devtools/gcc/gcc-crosssdk_4.6.bbappend
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-runtime_4.6.0.bbappend b/meta-oe/recipes-devtools/gcc/gcc-runtime_4.6.bbappend
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc-runtime_4.6.0.bbappend
-rename to meta-oe/recipes-devtools/gcc/gcc-runtime_4.6.bbappend
-diff --git a/meta-oe/recipes-devtools/gcc/gcc_4.6.0.bbappend b/meta-oe/recipes-devtools/gcc/gcc_4.6.bbappend
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/gcc_4.6.0.bbappend
-rename to meta-oe/recipes-devtools/gcc/gcc_4.6.bbappend
-diff --git a/meta-oe/recipes-devtools/gcc/libgcc_4.6.0.bbappend b/meta-oe/recipes-devtools/gcc/libgcc_4.6.bbappend
-similarity index 100%
-rename from meta-oe/recipes-devtools/gcc/libgcc_4.6.0.bbappend
-rename to meta-oe/recipes-devtools/gcc/libgcc_4.6.bbappend
--- 
-1.7.4.1
+I modified the udev init script in the way that additional messages are created 
+and error messages are not eaten up (see attachment). Log for cache disabled 
+shows that there are some things not working properly on my new machine
 
+| Starting udev
+| make_extra_nodes
+| kill_udevd
+| trigger the sorted events
+| starting udevd again
+| cannot open /dev/null
+| udev0
+| FATAL: Module platform:flexcan not found.
+| insmod /lib/modules/2.6.38.5/kernel/drivers/usb/host/ehci-hcd.ko 
+...
 
+I'll take some time to follow this..
 
+Andreas
+
+--Boundary-00=_LP8AO/dG7yBW6Vm
+Content-Type: application/x-shellscript;
+  name="udev"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename="udev"
+
+#!/bin/sh -e
+
+### BEGIN INIT INFO
+# Provides:          udev
+# Required-Start:    mountvirtfs
+# Required-Stop:     
+# Default-Start:     S
+# Default-Stop:
+# Short-Description: Start udevd, populate /dev and load drivers.
+### END INIT INFO
+
+export TZ=/etc/localtime
+
+[ -d /sys/class ] || exit 1
+[ -r /proc/mounts ] || exit 1
+[ -x /sbin/udevd ] || exit 1
+[ -f /etc/default/udev ] && . /etc/default/udev
+[ -f /etc/udev/udev.conf ] && . /etc/udev/udev.conf
+
+kill_udevd() {
+	echo 'kill_udevd'
+        if [ -x /sbin/pidof ]; then
+		echo 'exec kill_udevd1'
+                pid=`/sbin/pidof -x udevd`
+		echo 'exec kill_udevd2'
+                [ -n "$pid" ] && kill $pid
+        fi
+}
+
+export ACTION=add
+# propagate /dev from /sys
+echo "Starting udev"
+
+# mount the tmpfs on /dev, if not already done
+LANG=C awk "\$2 == \"/dev\" && \$3 == \"tmpfs\" { exit 1 }" /proc/mounts && {
+        mount -n -o mode=0755 -t tmpfs none "/dev"
+        mkdir -m 0755 /dev/pts
+        mkdir -m 1777 /dev/shm
+}
+
+if [ "$DEVCACHE" != "" ]; then
+	# Invalidate udev cache if the kernel or its bootargs/cmdline have changed
+	[ -x /bin/uname ] && /bin/uname -mrspv > /dev/shm/uname || touch /dev/shm/uname
+	[ -r /proc/cmdline ] && cat /proc/cmdline > /dev/shm/cmdline || touch /dev/shm/cmdline
+	[ -r /proc/devices ] && cat /proc/devices > /dev/shm/devices || touch /dev/shm/devices
+	[ -r /proc/atags ] && cat /proc/atags > /dev/shm/atags || touch /dev/shm/atags
+	if [ -e $DEVCACHE ] && \
+	   cmp -s /dev/shm/uname /etc/udev/saved.uname && \
+	   cmp -s /dev/shm/cmdline /etc/udev/saved.cmdline && \
+	   cmp -s /dev/shm/devices /etc/udev/saved.devices && \
+	   cmp -s /dev/shm/atags /etc/udev/saved.atags; then
+		echo 'udev writing cache -> tar...'
+		(cd /; tar xf $DEVCACHE)
+		not_first_boot=1
+	fi
+fi
+
+if [ ! -e "/lib/modules/$(uname -r)"/modules.dep ] ; then
+	echo 'uname'
+	mkdir -p /lib/modules/$(uname -r)
+	echo 'depmod'
+	depmod -ae
+fi
+
+echo 'make_extra_nodes'
+kill_udevd
+
+        echo 'trigger the sorted events'
+        echo -e '\000\000\000\000' > /proc/sys/kernel/hotplug
+        echo 'starting udevd again'
+        /sbin/udevd -d
+        echo 'udev0'
+
+        /sbin/udevadm control --env STARTUP=1
+		if [ "$not_first_boot" != "" ];then
+			echo 'udev1'
+			/sbin/udevadm trigger --subsystem-nomatch=tty --subsystem-nomatch=mem --subsystem-nomatch=vc --subsystem-nomatch=vtconsole --subsystem-nomatch=misc --subsystem-nomatch=dcon --subsystem-nomatch=pci_bus  --subsystem-nomatch=graphics  --subsystem-nomatch=backlight --subsystem-nomatch=video4linux  --subsystem-nomatch=platform
+			echo 'udev2'
+			/sbin/udevadm settle --timeout=8
+			echo 'udev3'
+			/sbin/udevadm control --env STARTUP=
+		else
+			/sbin/udevadm trigger
+			/sbin/udevadm settle
+		fi
+
+exit 0
+
+--Boundary-00=_LP8AO/dG7yBW6Vm--
