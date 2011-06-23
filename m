@@ -1,29 +1,34 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mark.hatle@windriver.com>) id 1QZl5e-00053c-Op
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Jun 2011 16:41:07 +0200
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
-	by mail.windriver.com (8.14.3/8.14.3) with ESMTP id p5NEbTrV021702
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QZl6B-00059s-Mz for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Jun 2011 16:41:43 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QZl2W-0001k1-UX for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Jun 2011 16:37:52 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Jun 2011 16:37:52 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jun 2011 07:37:29 -0700 (PDT)
-Received: from Macintosh-5.local (172.25.36.227) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.1.255.0;
-	Thu, 23 Jun 2011 07:37:29 -0700
-Message-ID: <4E034FA8.60902@windriver.com>
-Date: Thu, 23 Jun 2011 09:37:28 -0500
-From: Mark Hatle <mark.hatle@windriver.com>
-Organization: Wind River Systems
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.2.17) Gecko/20110414 Thunderbird/3.1.10
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
+	Thu, 23 Jun 2011 16:37:52 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 23 Jun 2011 16:37:40 +0200
+Message-ID: <itvj3k$1p9$1@dough.gmane.org>
 References: <4E03211B.40205@freyther.de>	<1308828119.21613.138.camel@phil-desktop>	<4E032546.6000308@freyther.de>
 	<1308839149.21613.165.camel@phil-desktop>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
 In-Reply-To: <1308839149.21613.165.camel@phil-desktop>
-X-MIME-Autoconverted: from 8bit to quoted-printable by mail.windriver.com id
-	p5NEbTrV021702
+X-Enigmail-Version: 1.0.1
 Subject: Re: RFC One recipe with two git repository as sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,53 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jun 2011 14:41:07 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 23 Jun 2011 14:41:43 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 6/23/11 9:25 AM, Phil Blundell wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 23-06-11 16:25, Phil Blundell wrote:
 > On Thu, 2011-06-23 at 13:36 +0200, Holger Freyther wrote:
 >> On 06/23/2011 01:21 PM, Phil Blundell wrote:
 >>> On Thu, 2011-06-23 at 13:18 +0200, Holger Freyther wrote:
->>>> -        destdir =3D os.path.join(destdir, "git/")
->>>> +        destsuffix =3D ud.parm.get("destsuffix", "git/")
+>>>> -        destdir = os.path.join(destdir, "git/")
+>>>> +        destsuffix = ud.parm.get("destsuffix", "git/")
 >>>> +        print destsuffix
->>>> +        destdir =3D os.path.join(destdir, destsuffix)
+>>>> +        destdir = os.path.join(destdir, destsuffix)
 >>>
->>> I think that "print" might be extraneous, but other than this your pa=
-tch
->>> looks awesome.  I think this would resolve the problem that I was hav=
-ing
+>>> I think that "print" might be extraneous, but other than this your patch
+>>> looks awesome.  I think this would resolve the problem that I was having
 >>> in.
 >>
->> great, yeah the print is bogus and the question if and how this applie=
-s to
->> fetch/git.py is also unresolved (i had a quick look but have not found=
- the
+>> great, yeah the print is bogus and the question if and how this applies to
+>> fetch/git.py is also unresolved (i had a quick look but have not found the
 >> dirname it uses to create the tarball).
->=20
+> 
 > I'm not entirely clear on what's going on with fetch vs fetch2 at all,
-> in terms of whether fetch is going away at some point or the two of the=
-m
-> are meant to be existing in parallel.  Can one of the TSC =C3=BCberhack=
-ers
+> in terms of whether fetch is going away at some point or the two of them
+> are meant to be existing in parallel.  Can one of the TSC überhackers
 > shed any light on what the intent is there?
->=20
 
-"fetch" is remaining for compatibility for the time being.  I believe the=
- intent
-is that fetch will go away when compatibility is no longer needed or desi=
-red.
+Fetch2 is being used in OE-core, fetch is there for "old-style" OE like
+.dev and 2011.03-maintenance.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
---Mark
-
-> p.
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+iD8DBQFOA0+0MkyGM64RGpERAsmAAJ9D/PrqNupsL/pIF6ClrD39r+RZhQCgpbM+
+Rj2c9UxKldqANJJiua4rRNA=
+=xv3k
+-----END PGP SIGNATURE-----
 
 
 
