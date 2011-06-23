@@ -1,35 +1,37 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QZl6B-00059s-Mz for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Jun 2011 16:41:43 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QZl2W-0001k1-UX for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Jun 2011 16:37:52 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jun 2011 16:37:52 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <jefflance01@gmail.com>) id 1QZl8I-0005JG-VO
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Jun 2011 16:43:51 +0200
+Received: by iym10 with SMTP id 10so1729507iym.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jun 2011 16:37:52 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 23 Jun 2011 07:40:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=OcCanK5s+8sV0AON/wdyNdtJ5y9CbnsVz7tD2Sc1trY=;
+	b=CTfMiombHcFsYvTcAXbAg77LNamkdW0A73eu0Y/huGKxoNApf7Twq61RP2QA4gUzTJ
+	ZroJLPpPe0Q6MpHigZkz8MSaV56uOKZcdX0IT6bBwMxAYkN2/uCbtFuTeSK3n3llpWea
+	16VtPshpuzG3x+6Ilq1q2CdWbXuWi0G4oEZW4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=GOCcSsMRX7IGu17Yc0VlAwML/tudp3GWXq76VLkL+412Eb8v/chIaW19jSGrjIIS0H
+	+ky1QRhGr8BUEAc1ljx1qMFJIiEEuBOV+169t/TlYgQyvOoRuW0rCktd61e95d/Ll7rt
+	cdSTAdWGEh4d4vUwMa35ep6Sy6vhWDez55Jk0=
+MIME-Version: 1.0
+Received: by 10.231.64.148 with SMTP id e20mr1826912ibi.91.1308840014820; Thu,
+	23 Jun 2011 07:40:14 -0700 (PDT)
+Received: by 10.231.40.11 with HTTP; Thu, 23 Jun 2011 07:40:14 -0700 (PDT)
+In-Reply-To: <ittkfr$n5n$1@dough.gmane.org>
+References: <1308769321-26192-1-git-send-email-j-lance1@ti.com>
+	<ittkfr$n5n$1@dough.gmane.org>
+Date: Thu, 23 Jun 2011 09:40:14 -0500
+Message-ID: <BANLkTik+3Oa+CWr8YUnDsvOGfdPJiBDoCg@mail.gmail.com>
+From: Jeff Lance <jefflance01@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 23 Jun 2011 16:37:40 +0200
-Message-ID: <itvj3k$1p9$1@dough.gmane.org>
-References: <4E03211B.40205@freyther.de>	<1308828119.21613.138.camel@phil-desktop>	<4E032546.6000308@freyther.de>
-	<1308839149.21613.165.camel@phil-desktop>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1308839149.21613.165.camel@phil-desktop>
-X-Enigmail-Version: 1.0.1
-Subject: Re: RFC One recipe with two git repository as sources
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH 1/1] matrix-tui: Update to arago toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,44 +45,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jun 2011 14:41:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 23 Jun 2011 14:43:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Denys, Koen,
 
-On 23-06-11 16:25, Phil Blundell wrote:
-> On Thu, 2011-06-23 at 13:36 +0200, Holger Freyther wrote:
->> On 06/23/2011 01:21 PM, Phil Blundell wrote:
->>> On Thu, 2011-06-23 at 13:18 +0200, Holger Freyther wrote:
->>>> -        destdir = os.path.join(destdir, "git/")
->>>> +        destsuffix = ud.parm.get("destsuffix", "git/")
->>>> +        print destsuffix
->>>> +        destdir = os.path.join(destdir, destsuffix)
->>>
->>> I think that "print" might be extraneous, but other than this your patch
->>> looks awesome.  I think this would resolve the problem that I was having
->>> in.
->>
->> great, yeah the print is bogus and the question if and how this applies to
->> fetch/git.py is also unresolved (i had a quick look but have not found the
->> dirname it uses to create the tarball).
-> 
-> I'm not entirely clear on what's going on with fetch vs fetch2 at all,
-> in terms of whether fetch is going away at some point or the two of them
-> are meant to be existing in parallel.  Can one of the TSC überhackers
-> shed any light on what the intent is there?
+I will submit a v2 patch which removes the "sed" and changes the commit
+comment to "OE MACHINE".
 
-Fetch2 is being used in OE-core, fetch is there for "old-style" OE like
-.dev and 2011.03-maintenance.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+On Wed, Jun 22, 2011 at 3:48 PM, Koen Kooi <koen@dominion.thruhere.net>wrote:
 
-iD8DBQFOA0+0MkyGM64RGpERAsmAAJ9D/PrqNupsL/pIF6ClrD39r+RZhQCgpbM+
-Rj2c9UxKldqANJJiua4rRNA=
-=xv3k
------END PGP SIGNATURE-----
-
-
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 22-06-11 21:02, Jeff Lance wrote:
+> > * Modify to use arago MACHINE name for platforms
+>
+> This seems to use OE machine names, not arago ones.
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFOAlU7MkyGM64RGpERArNMAKCKDhoL6RlXDoer6iTxSqSSS/kz5gCgl7a/
+> QWX5DbueV0sa410g3jcZ/HU=
+> =a3L3
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
