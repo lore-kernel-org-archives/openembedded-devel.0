@@ -1,45 +1,20 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <guillaume.beraudo@gmail.com>) id 1QZfKc-0006ia-Ce
+	(envelope-from <holger+oe@freyther.de>) id 1QZhzQ-0008Ju-3l
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Jun 2011 10:32:10 +0200
-Received: by fxm19 with SMTP id 19so1289257fxm.6
+	Thu, 23 Jun 2011 13:22:28 +0200
+Received: from [192.168.0.101] (91-64-95-94-dynip.superkabel.de [91.64.95.94])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id 3FD1E1B10C03
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jun 2011 01:28:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:sender:date:from:to:cc:subject:message-id
-	:in-reply-to:references:organization:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=d5WZEpkFYkYtLuwHANiAAe/lITezfF+w74nRMN7Ndaw=;
-	b=MeD37XbY9YVRXNhQR7hqMr+zXFn08WuLXruWY5UPUYlwbirMxAri4F8KYi2gl11/07
-	tPcP0cMowXH7i9+E2DC0PaRmfYPEvCJxkE6pyG7B4dOYsNISqD0zD24eSQZUagdl9dqm
-	4Q/H/VQ3ywYDN6wbS1tiDSyAogF2cRR0iBd7g=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:date:from:to:cc:subject:message-id:in-reply-to:references
-	:organization:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	b=errG+INJ6nYNJkV876t+y+slWUpzPI8Yg8lZ4J8Xb2HFfI8jXaubkEK0NOPdpTl9FB
-	+kWsZFl3Xq7aAXyMMsLi9V9SkbBlanuf8Q7/yUUg2gdWXimbW3vZTV6vpaKx/TpquCKc
-	fB8ODEsEMU/fFRCyxc8vOROnWEz8z94ct3YBE=
-Received: by 10.223.75.138 with SMTP id y10mr2291180faj.36.1308817715353;
-	Thu, 23 Jun 2011 01:28:35 -0700 (PDT)
-Received: from guibc (vig38-2-81-56-113-2.fbx.proxad.net [81.56.113.2])
-	by mx.google.com with ESMTPS id n15sm824647fag.42.2011.06.23.01.28.34
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Jun 2011 01:28:34 -0700 (PDT)
-Sender: guillaume beraudo <guillaume.beraudo@gmail.com>
-Date: Thu, 23 Jun 2011 10:28:30 +0200
-From: Guillaume BERAUDO <guillaume.beraudo@belledonne-communications.com>
+	Thu, 23 Jun 2011 11:26:01 +0000 (UTC)
+Message-ID: <4E03211B.40205@freyther.de>
+Date: Thu, 23 Jun 2011 13:18:51 +0200
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110516 Lightning/1.0b2 Thunderbird/3.1.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110623102830.6075f466@guibc>
-In-Reply-To: <4E01FF0B.5050604@gmail.com>
-References: <guillaume.beraudo@belledonne-communications.com>
-	<1308128541-5714-1-git-send-email-guillaume.beraudo@belledonne-communications.com>
-	<20110622131659.4399ce87@guibc> <4E01FF0B.5050604@gmail.com>
-Organization: Belledonne Communications
-X-Mailer: Claws Mail 3.7.6 (GTK+ 2.20.1; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: [PATCH v3] linphone: added recipe for v3.4.3
+Subject: RFC One recipe with two git repository as sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,19 +28,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jun 2011 08:32:10 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Thu, 23 Jun 2011 11:22:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-> > What is the process for getting this patch merged?
->
-> send pull request for meta-oe
-> 
+Hi all,
 
-Sorry for this stupid question, but how to do it?
+I have some messy source (as the cleanup is going on), I need to pull the new
+code from one repo and some files from the old one. Now in the recipes I have:
 
-Is there a better documentation than 
-http://www.openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmbedded ?
+SRC_URI = "git://git@....git;protocol=ssh;name=first \
+           git://git@....git;protocol=ssh;name=second"
+SRCREV_FORMAT = "first-rsecond"
+SRCREV_first = "ABC"
+SRCREV_second = "DEF"
+PV = "0.0+git${SRCPV}"
+(too bad that we have inconsistency between git, gitr again)
+
+This is all fluffy, the right things seem to be cloned but there is only one
+${WORKDIR}/git and one or the other will end up in there. Somehow I think we
+had something like this before but here is the proposal:
+
+Introduce a ;destsuffix=DEST so the code will be checked out to DEST/ instead
+of git/.
+
+
+comments?
+	holger
+
+
+commit e45b5b3b917eaba42052760c82c9b4ca57670136
+Author: Holger Hans Peter Freyther <holger@moiji-mobile.com>
+Date:   Thu Jun 23 04:50:13 2011 +0800
+
+    fetch2/git: Allow to specify the name of the checkout directory
+
+diff --git a/bitbake/lib/bb/fetch2/git.py b/bitbake/lib/bb/fetch2/git.py
+index 6979bea..4d45b48 100644
+--- a/bitbake/lib/bb/fetch2/git.py
++++ b/bitbake/lib/bb/fetch2/git.py
+@@ -209,7 +209,9 @@ class Git(FetchMethod):
+         else:
+             readpathspec = ""
+
+-        destdir = os.path.join(destdir, "git/")
++        destsuffix = ud.parm.get("destsuffix", "git/")
++        print destsuffix
++        destdir = os.path.join(destdir, destsuffix)
+         if os.path.exists(destdir):
+             bb.utils.prunedir(destdir)
 
 
 
