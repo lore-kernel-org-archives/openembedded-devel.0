@@ -1,35 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Qa0G8-0002aj-0z for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Jun 2011 08:52:56 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Qa0Cf-00058a-Oz for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Jun 2011 08:49:21 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Jun 2011 08:49:21 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Jun 2011 08:49:21 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 24 Jun 2011 08:49:00 +0200
-Message-ID: <iu1c11$48f$1@dough.gmane.org>
-References: <201106202316.47662.schnitzeltony@gmx.de>	<201106232258.06911.schnitzeltony@gmx.de>	<iu0cut$d9l$1@dough.gmane.org>
-	<201106240052.59211.schnitzeltony@gmx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <201106240052.59211.schnitzeltony@gmx.de>
-X-Enigmail-Version: 1.0.1
-Subject: Re: udev 171 caching working propely?
+	(envelope-from <philip@balister.org>) id 1Qa2Rh-0001WD-7V
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Jun 2011 11:13:01 +0200
+Received: (qmail 1171 invoked by uid 1003); 24 Jun 2011 09:09:24 -0000
+Received: from unknown (HELO ?10.128.152.16?)
+	(philip@opensdr.com@217.64.247.158)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	24 Jun 2011 09:09:24 -0000
+Message-ID: <4E045441.1030900@balister.org>
+Date: Fri, 24 Jun 2011 11:09:21 +0200
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14 Thunderbird/3.1.10
+MIME-Version: 1.0
+To: openembedded-members@lists.openembedded.org
+References: <20110624035311.GA22825@denix.org>
+	<m3k4cbof23.fsf@x201s.gr8dns.org>
+In-Reply-To: <m3k4cbof23.fsf@x201s.gr8dns.org>
+Cc: openembedded-core@lists.openembedded.org,
+	Dirk Hohndel <hohndel@infradead.org>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: Minutes: OpenEmbedded eV Board meeting, 20-Jun-2011
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,108 +35,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jun 2011 06:52:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 24 Jun 2011 09:13:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 24-06-11 00:52, Andreas Mueller wrote:
-> On Thursday, June 23, 2011 11:58:53 PM Koen Kooi wrote:
->> On 23-06-11 22:58, Andreas Mueller wrote:
->>> On Tuesday, June 21, 2011 11:31:45 PM Tom Rini wrote:
->>>> On 06/20/2011 03:47 PM, Tom Rini wrote:
->>>>> On 06/20/2011 02:16 PM, Andreas Mueller wrote:
->>>>>> Dear OE-folks,
->>>>>>
->>>>>> Working with lastest classic oe master and angstrom it seems udev
->>>>>> caching is not
->>>>>>
->>>>>> working as expected. On *every* boot I get:
->>>>>>> Remounting root file system...
->>>>>>> Caching udev devnodes
->>>>>>> Populating dev cachemv: can't rename '/dev/shm/uname': No such file
->>>>>>> or directory
->>>>>>
->>>>>> I don't know why this change came in but there was a change of storage
->>>>>> location in Tom's commit few days ago [1]. To me it seems that
->>>>>>
->>>>>> 1. The files created by udev (init) get lost at remount so udev-cache
->>>>>> (cache) is unable to find
->>>>>> 2. Since this error occures not only at first boot the recipe's
->>>>>> pkg_postinst_udev_append() seems never being executed. To check I
->>>>>> added a simple echo 'foo text'
->>>>>> in this function but 'foo text' is not found in log of first boot.
->>>>>>
->>>>>> Suggestions welcome
->>>>>
->>>>> Did udev change behaviors at some point then?  I've been using an older
->>>>> udev and didn't run into that problem.  I changed from /tmp to /dev/shm
->>>>> since we don't know that /tmp is writable at that point so we were
->>>>> instead getting errors there.  I wonder if we should just switch to
->>>>> re-creating the contents for that step?
->>>>
->>>> I've gone with this change and some quick testing on a board.
->>>
->>> Hi Tom,
->>>
->>> thanks for taking care and sorry for late response - yesterday I had one
->>> of these nightmares at the job...
->>>
->>> Now I tested the patch for two machines and sorry I am afraid to waste
->>> your time again:
->>>
->>> First machine is overo with linux-omap-psp-2.6.32 and a hub connected to
->>> the OTG connector. The kernel detects USB devices at a very early boot
->>> state long before udev starts (see end of file 'overo' attached). udev
->>> caching seems to work without errors.
->>>
->>> Second machine is tx28 with linux-2.6.38.5 (freescale imx28 based - I
->>> will send patches when stable). This shows different behaviours on first
->>> and all further boots (see udev-*boot attached). Problem is that after
->>> second boot nothing connected to USB is detected / working. By deleting
->>> /etc/udev/saved.* and rebooting all USB devices work fine and log looks
->>> similar as first boot.
->>>
->>> Before I merged your patch I know the USB devices were working properly
->>> on tx28. Don't misunderstand me: I think before your patch cache was
->>> never read. Now you fixed this and it seems reading the cache does not
->>> work (on my half cooked machine only?).
->>>
->>> I will have further investigations on this...
+On 06/24/2011 09:37 AM, Dirk Hohndel wrote:
+> On Thu, 23 Jun 2011 23:53:11 -0400, Denys Dmytriyenko<denis@denix.org>  wrote:
+>> Minutes: OpenEmbedded eV Board meeting, 20-Jun-2011
 >>
->> With 171 you shouldn't need caching anymore, triggering has been sped up
->> considerably, could you try disable caching and see how much it impacts
->> your boot time?
-> Uncached feels slower. Populating all devices takes 5-10s. Is there a simple way 
-> to create time stamps for boot messages? 
+>> Agenda:
+>> 06) call for donation
+>> * OE needs an income stream - another call for donations in the mailing lists
+>> * denix to check if TI can make another donation
+>>    ** may be difficult, as TI and other companies are LF/Yocto members and pay
+>> dues
+>>    ** thus, latest LF donations to OE as a "feedback" channel make sense
+>
+> We (or more likely, the Board) should establish clearly how this OE
+> income stream should work.
+>
+> Do we (the OE members) WANT to have the LF provide a well defined
+> reasonable income stream to OE? Then RP or I can trigger that
+> conversation with Jim Zemlin, Exec Director of the LF.
+>
+> Or do we PREFER to solicit independent donations to avoid the perception
+> of being dependent on LF? In that case please talk to DaveS or me about
+> an Intel donation to OE.
 
-Another test would be to unload the kernel modules and do:
+This is a very good question.
 
-killall udevd ; time ( udevadm trigger ; udevadm settle )
+I would like to see the eV have a steady income from a diverse group of 
+people. At the same time, any income is helpful.
 
-That takes about 1s on my beagleboard and 3.5s on my hawkboard.
+A reliable income stream allows the board to make long term plans. We 
+need to provide the nas-admin group at OSUOSL with better financial 
+support to cover our infrastructure needs as the project grows.
 
-Systemd keeps a track of it, have a look at the bright red portions of
-the graphs:
+Basically, we have two sources of income, corporate sponsorship and 
+individual donations. As a board member, I would like to hear from the 
+membership what people think, both about how we should spend money and 
+how we should raise money.
 
-http://dominion.thruhere.net/koen/angstrom/systemd/beagleboardC5-ubi-201106171148.svg
-http://dominion.thruhere.net/koen/angstrom/systemd/hawkboard.svg
-
-I my case the caching wasn't needed, but if it starts taking >4s on
-'slow' systems and >2s on 'fast' systems it is worth considering.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFOBDNcMkyGM64RGpERAi2nAKCMs41YobWWtBg0SqT6RGLVeH2z0QCfTkN1
-hvCaKPRpAR4HhvuHLWKRPRY=
-=Uy6Y
------END PGP SIGNATURE-----
-
+Philip
 
 
