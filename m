@@ -1,22 +1,40 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QaEBE-00054x-Iz for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Jun 2011 23:44:48 +0200
-Received: from f053043042.adsl.alicedsl.de ([78.53.43.42]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QaE7z-0002nd-39; Fri, 24 Jun 2011 21:41:27 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <kergoth@gmail.com>) id 1QaEk7-0005pk-Uk
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Jun 2011 00:20:53 +0200
+Received: by vws2 with SMTP id 2so2577737vws.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Jun 2011 15:17:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
+	:date:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=7EIXlsQbNSzJHmk61EImIfiIF0hboiiC632rdVQC6ww=;
+	b=AjDxuPPGqWnUTJdfzV/pzxdHGYKhQhr8/3SMiIIS1viScaOUU5mmey1XOjABgnGmYh
+	GqwB7xVkrHer5hsrkNXU4DDef0aoWjIqhpw+96jq+WE/Rn1tEp5+hJFOsCXh/lUC1HTV
+	Kuwbn74peK7078ODqoHez8jPeBO2z3jv1C4vo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	b=S7Bf6+8lZVFeLzYBPuswg+kY2Cj00skJsTaoMLDqGNKX3/BOKg9ciUv+8Xa+QPvGwI
+	qGio3o8I6c58n0CaI8+TDrmpJ2lhi7F5ys26QOGGMGzZQ8Je92SDye/P+Fr/HEZP1E7X
+	3Z3sK/V6JVWT4kBPUCbuFV4xTfLzGQw0Jg8mg=
+Received: by 10.52.116.33 with SMTP id jt1mr5377319vdb.249.1308953834062; Fri,
+	24 Jun 2011 15:17:14 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.52.181.2 with HTTP; Fri, 24 Jun 2011 15:16:54 -0700 (PDT)
+In-Reply-To: <BANLkTi=_HKbs2iXrsBUDaX-1VfbzbiSqDQ@mail.gmail.com>
+References: <BANLkTikPPYWL_-4qv+584CHgzt1DCzFeog@mail.gmail.com>
+	<BANLkTi=_HKbs2iXrsBUDaX-1VfbzbiSqDQ@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Fri, 24 Jun 2011 15:16:54 -0700
+X-Google-Sender-Auth: 5YDjspLURwto3XzpBYbcEVFUZHg
+Message-ID: <BANLkTik=imKi8tqkt_L1-GQ4PyJFWabnNA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Jun 2011 23:41:11 +0200
-Message-ID: <1308951671.6255.14.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Cc: Michael 'Mickey' Lauer <mickey@vanille-media.de>,
-	Klaus Kurzmann <mok@fluxnetz.de>
-Subject: libgisi: task compile fails with `posix-ext.vapi:7.5-7.30: error: `Posix' already contains a definition for `INET_ADDRSTRLEN'`
+Subject: Re: Packaging from devshell
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,70 +48,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jun 2011 21:44:48 -0000
-X-Groupsio-MsgNum: 32828
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-LHNObAzlkjmZQx1kgaWx"
-
---=-LHNObAzlkjmZQx1kgaWx
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 24 Jun 2011 22:20:53 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Dear OE folks,
+On Fri, Jun 24, 2011 at 2:40 PM, Joel A Fernandes <agnel.joel@gmail.com> wr=
+ote:
+> I use devshell for compiling by running a bitbake generated do_compile sh=
+ell
+> script in work/ for my package, this helps me develop faster as I can ski=
+p
+> over parsing and other repetitive stages.
+>
+> However I'm not able to do the same with do_package_write, as the shell
+> script for the same appears to have an =C2=A0empty function:
+>
+> do_package_write() {
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0:
+> }
+>
+> Could anyone suggest which script =C2=A0should I execute to package from
+> devshell?
+
+Nearly all of the packaging process is done from python code, not shell.
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
-task compile of libgisi c993ee694ea98597d619a1ffae397d3416233354 fails
-with the following error using `minimal` for `MACHINE =3D "beagleboard"`.
-
-
-        /oe/build-minimal-eglibc/minimal-dev/sysroots/i686-linux/usr/bin/va=
-lac -C --basedir .. --vapidir ../data --vapidir ../vapi --pkg glib-2.0 --pk=
-g gio-2.0 --pkg libgisi --pkg posix --pkg posix-ext --header gisicomm.h --l=
-ibrary gisicomm-0.0 gisicomm.vala
-        posix-ext.vapi:7.5-7.30: error: `Posix' already contains a definiti=
-on for `INET_ADDRSTRLEN'
-            const int INET_ADDRSTRLEN;
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-        posix.vapi:476.2-476.34: note: previous definition of `INET_ADDRSTR=
-LEN' was here
-                public const int INET_ADDRSTRLEN;
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        posix-ext.vapi:8.5-8.31: error: `Posix' already contains a definiti=
-on for `INET6_ADDRSTRLEN'
-            const int INET6_ADDRSTRLEN;
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        posix.vapi:478.2-478.35: note: previous definition of `INET6_ADDRST=
-RLEN' was here
-                public const int INET6_ADDRSTRLEN;
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        posix-ext.vapi:4.2-4.25: error: `Posix' already contains a definiti=
-on for `inet_ntop'
-                unowned string inet_ntop (int af, void* src, uint8[] dst);
-                ^^^^^^^^^^^^^^^^^^^^^^^^
-        posix.vapi:485.2-485.25: note: previous definition of `inet_ntop' w=
-as here
-                unowned string inet_ntop (int af, void* src, uint8[] dst);
-                ^^^^^^^^^^^^^^^^^^^^^^^^
-        Compilation failed: 3 error(s), 0 warning(s)
-
-Please forward that to the appropriate people.
-
-
-Thanks,
-
-Paul
-
---=-LHNObAzlkjmZQx1kgaWx
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk4FBHcACgkQPX1aK2wOHVh17wCfdlDv+REPMy/zhodEsCc4Chd6
-YI8An1vBGkcXiI7vk1cMgmT2E916TLhL
-=LRdW
------END PGP SIGNATURE-----
-
---=-LHNObAzlkjmZQx1kgaWx--
