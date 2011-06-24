@@ -1,39 +1,24 @@
-Received: from na3sys009aob118.obsmtp.com ([74.125.149.243] helo=psmtp.com)
+Received: from vms173013pub.verizon.net ([206.46.173.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <bengardiner@nanometrics.ca>) id 1QZvrt-0003Kg-Ft
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Jun 2011 04:12:07 +0200
-Received: from mail-yx0-f182.google.com ([209.85.213.182]) (using TLSv1) by
-	na3sys009aob118.postini.com ([74.125.148.12]) with SMTP
-	ID DSNKTgPxFCBFP2SrK9MWFAvnnTiD2xIDo34k@postini.com;
-	Thu, 23 Jun 2011 19:08:00 PDT
-Received: by yxl31 with SMTP id 31so1279677yxl.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jun 2011 19:06:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=nanometrics.ca; s=google;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=NR3uPKFZNgY0AYnuWlDfueamdwbUTaa9awjas92SuG4=;
-	b=mhi2OqjvkRIOb0/svfWpUuEZYUUvONkM0Sxr1SEQhKYAYIh9YUmJraJ8FYKdNz7jnu
-	LbP5Vi2MTW8Wr9VLZxhTYsiAJ9i/WKGsQzuA1tmZszncDmAN50Tgwn8rMyVn+U4IsVzl
-	8pjosBC2C3geevmAn6/3Z9OHqnz3tPiiyyjdI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=nanometrics.ca; s=google;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=AFB6SSYHS9hOR/C4tyZPhjhsFV02W9FQFCWVwX6sAIWG6XzjDgwi05UkhJNgqGeXDn
-	vFRooXbyFk5JmzHvBwP09fXvJ7Wc0+WJ7JdNXHSiA9RHc5+miTzrXq19kz3yTvOljBfT
-	XCsbpjb4oKZhZa7XLYKQCYBqJkYRq6l0t38D8=
-Received: by 10.151.87.14 with SMTP id p14mr2707795ybl.145.1308855409164;
-	Thu, 23 Jun 2011 11:56:49 -0700 (PDT)
-Received: from localhost.localdomain ([206.191.47.130])
-	by mx.google.com with ESMTPS id m17sm24109ybg.22.2011.06.23.11.56.47
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Jun 2011 11:56:48 -0700 (PDT)
-From: Ben Gardiner <bengardiner@nanometrics.ca>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Jun 2011 14:56:46 -0400
-Message-Id: <1308855406-3914-1-git-send-email-bengardiner@nanometrics.ca>
-X-Mailer: git-send-email 1.7.4.1
-Subject: [PATCH] raptor: add libxml2 DEPENDS
+	(envelope-from <denis@denix.org>)
+	id 1QZxVl-00053R-K5; Fri, 24 Jun 2011 05:56:54 +0200
+Received: from gandalf.denix.org ([unknown] [108.18.140.4])
+	by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009))
+	with ESMTPA id <0LNA00I8804N3YK1@vms173013.mailsrvcs.net>; Thu,
+	23 Jun 2011 22:53:16 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 2CCE514AF5D; Thu,
+	23 Jun 2011 23:53:11 -0400 (EDT)
+Date: Thu, 23 Jun 2011 23:53:11 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org,
+	openembedded-members@lists.openembedded.org
+Message-id: <20110624035311.GA22825@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Minutes: OpenEmbedded eV Board meeting, 20-Jun-2011
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,35 +32,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jun 2011 02:12:07 -0000
+X-List-Received-Date: Fri, 24 Jun 2011 03:56:54 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-The configure script of raptor allows either expat or libxml; the default is libxml.
+Minutes: OpenEmbedded eV Board meeting, 20-Jun-2011
 
-Add libxml2 to DEPENDS of raptor to fix broken raptor build in clean-tree.
+Attendees:
 
-Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+Michael Lauer (mickey)
+Philip Balister (Crofton)
+Florian Boor (florian)
+Denys Dmytriyenko (denix)
 
----
-Tested on the maintenance-2011.03 branch.
+Agenda:
 
----
- recipes/raptor/raptor_1.4.21.bb |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+00) congratulate Mickey with the recent birth of his daughter
 
-diff --git a/recipes/raptor/raptor_1.4.21.bb b/recipes/raptor/raptor_1.4.21.bb
-index edceff9..e14d75b 100644
---- a/recipes/raptor/raptor_1.4.21.bb
-+++ b/recipes/raptor/raptor_1.4.21.bb
-@@ -4,6 +4,7 @@ HOMEPAGE = "http://librdf.org/raptor/"
- LICENSE = "LGPL 2.1/GPL 2/Apache 2.0"
- PR = "r0"
- SRC_URI = "http://download.librdf.org/source/raptor-${PV}.tar.gz"
-+DEPENDS = "libxml2"
- 
- inherit autotools pkgconfig
- 
--- 
-1.7.4.1
+01) denix agrees to take meeting minutes
+
+02) state the agenda topics, collect any last minute additions:
+* current status of hosting services
+* funding the purchase of a network switch for the servers
+* general discussion of eV budget, spendings
+* another call for donations
+* TSC election proposal from RP
+* upcoming events and the creation of a "show" box
+
+03) discussed the current state of OE hosting services
+* list of funding requested by infrastructure team (Tom King) reduced to the 
+network switch
+* other items were resolved with the help of The Linux Foundation:
+  ** LF sponsors Tom's travel
+  ** LF donates hosting servers
+* denix asked for clarification of what is being donated and whom it's donated 
+to (i.e. is there a lease being signed?):
+  ** LF grant/donation is not directly to OE eV, but rather to nas-admin group 
+at OSUOSL that serves OE infrastructure among other Open Source projects
+  ** the remaining piece of equipment OE eV needs to fund is the network 
+switch
+  ** Board to ask Tom for more details for the following:
+    = hardware side, preferably accompanied by pictures of the actual rack and 
+equipment
+    = organization charts and interactions of the involved parties: Tom, OE 
+infrastructure team, nas-admin, OSUOSL etc.
+
+04) approve to fund the network switch
+* estimated at $1500 = ~800-1000 eur
+* somewhat expensive, server grade - "not the type used at home"
+* Board to trust Tom on selecting the right switch
+* figure out the way to transfer money to nas-admin/OSUOSL
+  ** Tom to coordinate
+
+05) OE eV budget
+* currently there is around 3000 eur in the bank
+* florian to check with the bank in Germany if possible to open a debit/credit 
+card linked with the eV account
+* preferably without annual or any idle fees
+
+06) call for donation
+* OE needs an income stream - another call for donations in the mailing lists
+* denix to check if TI can make another donation
+  ** may be difficult, as TI and other companies are LF/Yocto members and pay 
+dues
+  ** thus, latest LF donations to OE as a "feedback" channel make sense
+
+07) review RP's proposal of TSC re-election
+* proposal is for Richard and Stefan to step down first and run elections for 
+1 seat
+* then continue with one-at-a-time elections going forward
+* alternative is to elect the entire TSC at once:
+  ** deemed unnecessary and bad for the project
+* agree and approve RP/TSC proposal
+* Board to initiate the election process:
+  ** announce another round of candidates for 1 TSC seat, discussion phase, 
+call for votes (Mickey)
+* discuss the voting logistics - ask if Graeme can help with counting the 
+votes, or use one of the proposed software
+* Crofton says Graeme is on travel for next 2 weeks, but agreed to count the 
+votes after that
+  ** that gives proper timing for announcement, discussion and call for votes 
+phases
+
+08) upcoming events and show box
+* agree to allow spending up to 500 eur at florian's discretion on the show 
+box
+* ac adapters, multiplugs, switch, accesspoint, flyers, posters, tft + cables, 
+tape, some lights
+* include some dev boards, donated by companies
+* some of the items already exist and were previously donated
+* need table cloth, which exists, but needs washing
+* ELC-E in Prague in October
+* agree to schedule the General Assembly at ELC-E (Crofton)
+* Crofton to talk to Jefro/RP about reserving a room
+
+09) Board to have another meeting in 3 weeks
+* around 8th-10th of July
 
 
 
