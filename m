@@ -1,24 +1,35 @@
-Received: from vms173013pub.verizon.net ([206.46.173.13])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>)
-	id 1QZxVl-00053R-K5; Fri, 24 Jun 2011 05:56:54 +0200
-Received: from gandalf.denix.org ([unknown] [108.18.140.4])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009))
-	with ESMTPA id <0LNA00I8804N3YK1@vms173013.mailsrvcs.net>; Thu,
-	23 Jun 2011 22:53:16 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 2CCE514AF5D; Thu,
-	23 Jun 2011 23:53:11 -0400 (EDT)
-Date: Thu, 23 Jun 2011 23:53:11 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org,
-	openembedded-members@lists.openembedded.org
-Message-id: <20110624035311.GA22825@denix.org>
-MIME-version: 1.0
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Minutes: OpenEmbedded eV Board meeting, 20-Jun-2011
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Qa0G8-0002aj-0z for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Jun 2011 08:52:56 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Qa0Cf-00058a-Oz for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Jun 2011 08:49:21 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Jun 2011 08:49:21 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Jun 2011 08:49:21 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 24 Jun 2011 08:49:00 +0200
+Message-ID: <iu1c11$48f$1@dough.gmane.org>
+References: <201106202316.47662.schnitzeltony@gmx.de>	<201106232258.06911.schnitzeltony@gmx.de>	<iu0cut$d9l$1@dough.gmane.org>
+	<201106240052.59211.schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <201106240052.59211.schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.0.1
+Subject: Re: udev 171 caching working propely?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,102 +43,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jun 2011 03:56:54 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 24 Jun 2011 06:52:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Minutes: OpenEmbedded eV Board meeting, 20-Jun-2011
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Attendees:
+On 24-06-11 00:52, Andreas Mueller wrote:
+> On Thursday, June 23, 2011 11:58:53 PM Koen Kooi wrote:
+>> On 23-06-11 22:58, Andreas Mueller wrote:
+>>> On Tuesday, June 21, 2011 11:31:45 PM Tom Rini wrote:
+>>>> On 06/20/2011 03:47 PM, Tom Rini wrote:
+>>>>> On 06/20/2011 02:16 PM, Andreas Mueller wrote:
+>>>>>> Dear OE-folks,
+>>>>>>
+>>>>>> Working with lastest classic oe master and angstrom it seems udev
+>>>>>> caching is not
+>>>>>>
+>>>>>> working as expected. On *every* boot I get:
+>>>>>>> Remounting root file system...
+>>>>>>> Caching udev devnodes
+>>>>>>> Populating dev cachemv: can't rename '/dev/shm/uname': No such file
+>>>>>>> or directory
+>>>>>>
+>>>>>> I don't know why this change came in but there was a change of storage
+>>>>>> location in Tom's commit few days ago [1]. To me it seems that
+>>>>>>
+>>>>>> 1. The files created by udev (init) get lost at remount so udev-cache
+>>>>>> (cache) is unable to find
+>>>>>> 2. Since this error occures not only at first boot the recipe's
+>>>>>> pkg_postinst_udev_append() seems never being executed. To check I
+>>>>>> added a simple echo 'foo text'
+>>>>>> in this function but 'foo text' is not found in log of first boot.
+>>>>>>
+>>>>>> Suggestions welcome
+>>>>>
+>>>>> Did udev change behaviors at some point then?  I've been using an older
+>>>>> udev and didn't run into that problem.  I changed from /tmp to /dev/shm
+>>>>> since we don't know that /tmp is writable at that point so we were
+>>>>> instead getting errors there.  I wonder if we should just switch to
+>>>>> re-creating the contents for that step?
+>>>>
+>>>> I've gone with this change and some quick testing on a board.
+>>>
+>>> Hi Tom,
+>>>
+>>> thanks for taking care and sorry for late response - yesterday I had one
+>>> of these nightmares at the job...
+>>>
+>>> Now I tested the patch for two machines and sorry I am afraid to waste
+>>> your time again:
+>>>
+>>> First machine is overo with linux-omap-psp-2.6.32 and a hub connected to
+>>> the OTG connector. The kernel detects USB devices at a very early boot
+>>> state long before udev starts (see end of file 'overo' attached). udev
+>>> caching seems to work without errors.
+>>>
+>>> Second machine is tx28 with linux-2.6.38.5 (freescale imx28 based - I
+>>> will send patches when stable). This shows different behaviours on first
+>>> and all further boots (see udev-*boot attached). Problem is that after
+>>> second boot nothing connected to USB is detected / working. By deleting
+>>> /etc/udev/saved.* and rebooting all USB devices work fine and log looks
+>>> similar as first boot.
+>>>
+>>> Before I merged your patch I know the USB devices were working properly
+>>> on tx28. Don't misunderstand me: I think before your patch cache was
+>>> never read. Now you fixed this and it seems reading the cache does not
+>>> work (on my half cooked machine only?).
+>>>
+>>> I will have further investigations on this...
+>>
+>> With 171 you shouldn't need caching anymore, triggering has been sped up
+>> considerably, could you try disable caching and see how much it impacts
+>> your boot time?
+> Uncached feels slower. Populating all devices takes 5-10s. Is there a simple way 
+> to create time stamps for boot messages? 
 
-Michael Lauer (mickey)
-Philip Balister (Crofton)
-Florian Boor (florian)
-Denys Dmytriyenko (denix)
+Another test would be to unload the kernel modules and do:
 
-Agenda:
+killall udevd ; time ( udevadm trigger ; udevadm settle )
 
-00) congratulate Mickey with the recent birth of his daughter
+That takes about 1s on my beagleboard and 3.5s on my hawkboard.
 
-01) denix agrees to take meeting minutes
+Systemd keeps a track of it, have a look at the bright red portions of
+the graphs:
 
-02) state the agenda topics, collect any last minute additions:
-* current status of hosting services
-* funding the purchase of a network switch for the servers
-* general discussion of eV budget, spendings
-* another call for donations
-* TSC election proposal from RP
-* upcoming events and the creation of a "show" box
+http://dominion.thruhere.net/koen/angstrom/systemd/beagleboardC5-ubi-201106171148.svg
+http://dominion.thruhere.net/koen/angstrom/systemd/hawkboard.svg
 
-03) discussed the current state of OE hosting services
-* list of funding requested by infrastructure team (Tom King) reduced to the 
-network switch
-* other items were resolved with the help of The Linux Foundation:
-  ** LF sponsors Tom's travel
-  ** LF donates hosting servers
-* denix asked for clarification of what is being donated and whom it's donated 
-to (i.e. is there a lease being signed?):
-  ** LF grant/donation is not directly to OE eV, but rather to nas-admin group 
-at OSUOSL that serves OE infrastructure among other Open Source projects
-  ** the remaining piece of equipment OE eV needs to fund is the network 
-switch
-  ** Board to ask Tom for more details for the following:
-    = hardware side, preferably accompanied by pictures of the actual rack and 
-equipment
-    = organization charts and interactions of the involved parties: Tom, OE 
-infrastructure team, nas-admin, OSUOSL etc.
+I my case the caching wasn't needed, but if it starts taking >4s on
+'slow' systems and >2s on 'fast' systems it is worth considering.
 
-04) approve to fund the network switch
-* estimated at $1500 = ~800-1000 eur
-* somewhat expensive, server grade - "not the type used at home"
-* Board to trust Tom on selecting the right switch
-* figure out the way to transfer money to nas-admin/OSUOSL
-  ** Tom to coordinate
+regards,
 
-05) OE eV budget
-* currently there is around 3000 eur in the bank
-* florian to check with the bank in Germany if possible to open a debit/credit 
-card linked with the eV account
-* preferably without annual or any idle fees
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-06) call for donation
-* OE needs an income stream - another call for donations in the mailing lists
-* denix to check if TI can make another donation
-  ** may be difficult, as TI and other companies are LF/Yocto members and pay 
-dues
-  ** thus, latest LF donations to OE as a "feedback" channel make sense
-
-07) review RP's proposal of TSC re-election
-* proposal is for Richard and Stefan to step down first and run elections for 
-1 seat
-* then continue with one-at-a-time elections going forward
-* alternative is to elect the entire TSC at once:
-  ** deemed unnecessary and bad for the project
-* agree and approve RP/TSC proposal
-* Board to initiate the election process:
-  ** announce another round of candidates for 1 TSC seat, discussion phase, 
-call for votes (Mickey)
-* discuss the voting logistics - ask if Graeme can help with counting the 
-votes, or use one of the proposed software
-* Crofton says Graeme is on travel for next 2 weeks, but agreed to count the 
-votes after that
-  ** that gives proper timing for announcement, discussion and call for votes 
-phases
-
-08) upcoming events and show box
-* agree to allow spending up to 500 eur at florian's discretion on the show 
-box
-* ac adapters, multiplugs, switch, accesspoint, flyers, posters, tft + cables, 
-tape, some lights
-* include some dev boards, donated by companies
-* some of the items already exist and were previously donated
-* need table cloth, which exists, but needs washing
-* ELC-E in Prague in October
-* agree to schedule the General Assembly at ELC-E (Crofton)
-* Crofton to talk to Jefro/RP about reserving a room
-
-09) Board to have another meeting in 3 weeks
-* around 8th-10th of July
+iD8DBQFOBDNcMkyGM64RGpERAi2nAKCMs41YobWWtBg0SqT6RGLVeH2z0QCfTkN1
+hvCaKPRpAR4HhvuHLWKRPRY=
+=Uy6Y
+-----END PGP SIGNATURE-----
 
 
 
