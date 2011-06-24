@@ -1,35 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Qa8aq-0002ss-Nq for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Jun 2011 17:46:52 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Qa8XL-000762-Ui for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Jun 2011 17:43:15 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Jun 2011 17:43:15 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <kergoth@gmail.com>) id 1QaAsE-0007nY-QA
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Jun 2011 20:12:58 +0200
+Received: by pwi1 with SMTP id 1so2108718pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Jun 2011 17:43:15 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 24 Jun 2011 11:09:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=ggvrvgS6kmAEeDOWPOtbCaudEZj1+acsBBgDELJ3fyw=;
+	b=xFF5PPIS9aEcKIwg/G45FxtXOGOuZAw5/I2v6cmnT1uqi0y3AbFvtFq/rIRZ7ld1UN
+	F1mrmCvxWhXatpWctKyrKtyvIPjm7P6x6HYDIbys0vhGqbd632BDbd9iSrAhOuJh6uQV
+	JHSBc43IUbrD1MxJSm2C0pu21GMRHjIxqwRmw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=APjhpTQLf4q+qwaGp7WrwHF0o3vc3CiboNFHVYtOddy0Wbz4gPv62gzmdiijbUr1If
+	5sDpfHEHVCF2S8fblAsq0LS/KhfX8HzqY/lEjTgsy/SuYRQVWnXkPb2v28ixFKaDM+pE
+	7hRbDVULvHIvgRWkaXSZUVLuLGcY1eEKFwHh8=
+Received: by 10.68.1.103 with SMTP id 7mr1933387pbl.81.1308938961145;
+	Fri, 24 Jun 2011 11:09:21 -0700 (PDT)
+Received: from localhost.localdomain (ip24-251-173-232.ph.ph.cox.net
+	[24.251.173.232])
+	by mx.google.com with ESMTPS id b8sm2217515pbj.62.2011.06.24.11.09.18
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 24 Jun 2011 11:09:19 -0700 (PDT)
+From: Chris Larson <kergoth@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 24 Jun 2011 17:43:04 +0200
-Message-ID: <iu2ba8$u05$1@dough.gmane.org>
-References: <201106202316.47662.schnitzeltony@gmx.de>	<201106240052.59211.schnitzeltony@gmx.de>	<iu1c11$48f$1@dough.gmane.org>
-	<201106241649.52323.schnitzeltony@gmx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <201106241649.52323.schnitzeltony@gmx.de>
-X-Enigmail-Version: 1.0.1
-Subject: Re: udev 171 caching working propely?
+Date: Fri, 24 Jun 2011 11:09:14 -0700
+Message-Id: <1308938954-10349-1-git-send-email-kergoth@gmail.com>
+X-Mailer: git-send-email 1.7.5.4
+Cc: Chris Larson <chris_larson@mentor.com>
+Subject: [PATCH] initscripts: don't background volatile creation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,150 +44,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jun 2011 15:46:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 24 Jun 2011 18:12:59 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+From: Chris Larson <chris_larson@mentor.com>
 
-On 24-06-11 16:49, Andreas Mueller wrote:
-> On Friday, June 24, 2011 08:49:00 AM Koen Kooi wrote:
->> On 24-06-11 00:52, Andreas Mueller wrote:
->>> On Thursday, June 23, 2011 11:58:53 PM Koen Kooi wrote:
->>>> On 23-06-11 22:58, Andreas Mueller wrote:
->>>>> On Tuesday, June 21, 2011 11:31:45 PM Tom Rini wrote:
->>>>>> On 06/20/2011 03:47 PM, Tom Rini wrote:
->>>>>>> On 06/20/2011 02:16 PM, Andreas Mueller wrote:
->>>>>>>> Dear OE-folks,
->>>>>>>>
->>>>>>>> Working with lastest classic oe master and angstrom it seems udev
->>>>>>>> caching is not
->>>>>>>>
->>>>>>>> working as expected. On *every* boot I get:
->>>>>>>>> Remounting root file system...
->>>>>>>>> Caching udev devnodes
->>>>>>>>> Populating dev cachemv: can't rename '/dev/shm/uname': No such file
->>>>>>>>> or directory
->>>>>>>>
->>>>>>>> I don't know why this change came in but there was a change of
->>>>>>>> storage location in Tom's commit few days ago [1]. To me it seems
->>>>>>>> that
->>>>>>>>
->>>>>>>> 1. The files created by udev (init) get lost at remount so
->>>>>>>> udev-cache (cache) is unable to find
->>>>>>>> 2. Since this error occures not only at first boot the recipe's
->>>>>>>> pkg_postinst_udev_append() seems never being executed. To check I
->>>>>>>> added a simple echo 'foo text'
->>>>>>>> in this function but 'foo text' is not found in log of first boot.
->>>>>>>>
->>>>>>>> Suggestions welcome
->>>>>>>
->>>>>>> Did udev change behaviors at some point then?  I've been using an
->>>>>>> older udev and didn't run into that problem.  I changed from /tmp to
->>>>>>> /dev/shm since we don't know that /tmp is writable at that point so
->>>>>>> we were instead getting errors there.  I wonder if we should just
->>>>>>> switch to re-creating the contents for that step?
->>>>>>
->>>>>> I've gone with this change and some quick testing on a board.
->>>>>
->>>>> Hi Tom,
->>>>>
->>>>> thanks for taking care and sorry for late response - yesterday I had
->>>>> one of these nightmares at the job...
->>>>>
->>>>> Now I tested the patch for two machines and sorry I am afraid to waste
->>>>> your time again:
->>>>>
->>>>> First machine is overo with linux-omap-psp-2.6.32 and a hub connected
->>>>> to the OTG connector. The kernel detects USB devices at a very early
->>>>> boot state long before udev starts (see end of file 'overo' attached).
->>>>> udev caching seems to work without errors.
->>>>>
->>>>> Second machine is tx28 with linux-2.6.38.5 (freescale imx28 based - I
->>>>> will send patches when stable). This shows different behaviours on
->>>>> first and all further boots (see udev-*boot attached). Problem is that
->>>>> after second boot nothing connected to USB is detected / working. By
->>>>> deleting /etc/udev/saved.* and rebooting all USB devices work fine and
->>>>> log looks similar as first boot.
->>>>>
->>>>> Before I merged your patch I know the USB devices were working properly
->>>>> on tx28. Don't misunderstand me: I think before your patch cache was
->>>>> never read. Now you fixed this and it seems reading the cache does not
->>>>> work (on my half cooked machine only?).
->>>>>
->>>>> I will have further investigations on this...
->>>>
->>>> With 171 you shouldn't need caching anymore, triggering has been sped up
->>>> considerably, could you try disable caching and see how much it impacts
->>>> your boot time?
->>>
->>> Uncached feels slower. Populating all devices takes 5-10s. Is there a
->>> simple way to create time stamps for boot messages?
->>
->> Another test would be to unload the kernel modules and do:
->>
->> killall udevd ; time ( udevadm trigger ; udevadm settle )
->>
->> That takes about 1s on my beagleboard and 3.5s on my hawkboard.
->>
->> Systemd keeps a track of it, have a look at the bright red portions of
->> the graphs:
->>
->> http://dominion.thruhere.net/koen/angstrom/systemd/beagleboardC5-ubi-201106
->> 171148.svg http://dominion.thruhere.net/koen/angstrom/systemd/hawkboard.svg
->>
->> I my case the caching wasn't needed, but if it starts taking >4s on
->> 'slow' systems and >2s on 'fast' systems it is worth considering.
->>
-> News from udev-journey: 
-> 
-> I did modify the udev-init script so that I could see that  
-> 
-> | udevadm trigger ; udevadm settle 
-> 
-> lasted for ~10s!
-> 
-> That made me think (usually that is not my domain..); Why is my board so slow 
-> and why refuses udev to work proper for it? Checking all written I fell over 
-> udev msg in one of my previous mails
-> 
-> | insmod /lib/modules/2.6.38.5/kernel/drivers/usb/host/ehci-hcd.ko
-> 
-> So I decided to change in kernel-config
-> -CONFIG_USB_HID=m
-> +CONFIG_USB_HID=y
-> 
-> -CONFIG_USB_EHCI_HCD=m
-> +CONFIG_USB_EHCI_HCD=y
-> 
-> This make the tx28 board now working very similar to my overo board: USB devices 
-> are detected at a very early state of boot and udev is much faster now and USB 
-> is working as expected. Also hotplugging seems to work.
+This fix is courtesy Chris Hallinan. There is/can be assumptions made in
+the volatiles file that they're processed in order (e.g. directory
+created, then files within that directory), yet the script processes
+them in parallel, backgrounding the operations. This is racy, and means
+it's possible to end up with dependent files/dirs not created before the
+bits that need them.
 
-It does make the kernel boot ±1.5s slower, but that will still give you
-a big win in userspace.
+It's likely that this will have a performance impact, but I haven't
+benchmarked it. Better that we behave correctly than quickly. We can
+look back into improving the speed of this, without breaking
+dependencies, in the future.
 
-> I would say it's 
-> partytime but still there is
-> 
-> | udevd[588]: error: runtime directory '/run/udev' not writable, for now falling 
-> back to '/dev/.udev'
-> | <30>udevd[589]: starting version 171
+Signed-off-by: Chris Larson <chris_larson@mentor.com>
+---
+ .../initscripts-1.0/populate-volatile.sh           |   12 ++++++------
+ recipes/initscripts/initscripts_1.0.bb             |    2 +-
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
-We don't support /run in oe.dev yet, the oe-core version of angstrom
-does since it's required for systemd support.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFOBLCIMkyGM64RGpERAlYQAJ0fbU+ruFljsfkXcB2x2Uki+T4yzgCgroEa
-tDe2l4nnMZAyp+Ag7tQKcEQ=
-=w2Xr
------END PGP SIGNATURE-----
+diff --git a/recipes/initscripts/initscripts-1.0/populate-volatile.sh b/recipes/initscripts/initscripts-1.0/populate-volatile.sh
+index f0a45ea..d9ec1b7 100755
+--- a/recipes/initscripts/initscripts-1.0/populate-volatile.sh
++++ b/recipes/initscripts/initscripts-1.0/populate-volatile.sh
+@@ -19,7 +19,7 @@ create_file() {
+ 	[ -e "$1" ] && {
+ 	  [ "${VERBOSE}" != "no" ] && echo "Target already exists. Skipping."
+ 	} || {
+-	  eval $EXEC &
++	  eval $EXEC
+ 	}
+ }
+ 
+@@ -34,7 +34,7 @@ mk_dir() {
+ 	[ -e "$1" ] && {
+ 	  [ "${VERBOSE}" != "no" ] && echo "Target already exists. Skipping."
+ 	} || {
+-	  eval $EXEC &
++	  eval $EXEC
+ 	}
+ }
+ 
+@@ -46,7 +46,7 @@ link_file() {
+ 	[ -e "$2" ] && {
+ 	  echo "Cannot create link over existing -${TNAME}-." >&2
+ 	} || {
+-	  eval $EXEC &
++	  eval $EXEC
+ 	}
+ }
+ 
+@@ -123,7 +123,7 @@ apply_cfgfile() {
+       TSOURCE="$TLTARGET"
+       [ -L "${TNAME}" ] || {
+         [ "${VERBOSE}" != "no" ] && echo "Creating link -${TNAME}- pointing to -${TSOURCE}-."
+-        link_file "${TSOURCE}" "${TNAME}" &
++        link_file "${TSOURCE}" "${TNAME}"
+         }
+       continue
+       }
+@@ -142,10 +142,10 @@ apply_cfgfile() {
+ 
+     case "${TTYPE}" in
+       "f")  [ "${VERBOSE}" != "no" ] && echo "Creating file -${TNAME}-."
+-            create_file "${TNAME}" &
++            create_file "${TNAME}"
+ 	    ;;
+       "d")  [ "${VERBOSE}" != "no" ] && echo "Creating directory -${TNAME}-."
+-            mk_dir "${TNAME}" &
++            mk_dir "${TNAME}"
+ 	    # Add check to see if there's an entry in fstab to mount.
+ 	    ;;
+       *)    [ "${VERBOSE}" != "no" ] && echo "Invalid type -${TTYPE}-."
+diff --git a/recipes/initscripts/initscripts_1.0.bb b/recipes/initscripts/initscripts_1.0.bb
+index 87a0e99..adf8594 100644
+--- a/recipes/initscripts/initscripts_1.0.bb
++++ b/recipes/initscripts/initscripts_1.0.bb
+@@ -4,7 +4,7 @@ PRIORITY = "required"
+ DEPENDS = "makedevs"
+ RDEPENDS_${PN} = "makedevs"
+ LICENSE = "GPL"
+-PR = "r128"
++PR = "r129"
+ 
+ SRC_URI = "file://functions \
+            file://halt \
+-- 
+1.7.5.4
 
 
 
