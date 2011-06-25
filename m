@@ -1,21 +1,29 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QaS0t-00081Y-BM for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Jun 2011 14:31:03 +0200
-Received: from f053043248.adsl.alicedsl.de ([78.53.43.248]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QaRxe-0001TM-Iu for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Jun 2011 12:27:42 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <morphis@gravedo.de>) id 1QaShV-0000P9-It
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Jun 2011 15:15:05 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id C294B799015; Sat, 25 Jun 2011 15:11:29 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h1108419.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.3 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from [192.168.178.21] (dslb-088-071-183-236.pools.arcor-ip.net
+	[88.71.183.236]) by gravedo.de (Postfix) with ESMTPSA id F3D55798DEA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 25 Jun 2011 15:11:28 +0200 (CEST)
+Message-ID: <4E05DE80.4070507@gravedo.de>
+Date: Sat, 25 Jun 2011 15:11:28 +0200
+From: Simon Busch <morphis@gravedo.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:5.0) Gecko/20110603 Thunderbird/5.0b1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 25 Jun 2011 14:27:25 +0200
-Message-ID: <1309004845.4286.11.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: =?UTF-8?B?YXVyb3JhOiB0YXNrIGNvbmZpZ3VyZSBmYWlscyB3aXRoICdjb25maWd1cmU6IGVycm9yOiBQYWNrYWdlIHJlcXVpcmVtZW50cyAoUXRDb3JlRSA+PSA0LjcuMCDigKYn?=
+References: <1309004845.4286.11.camel@mattotaupa>
+In-Reply-To: <1309004845.4286.11.camel@mattotaupa>
+Subject: =?UTF-8?B?UmU6IGF1cm9yYTogdGFzayBjb25maWd1cmUgZmFpbHMgd2l0aCAnY29uZmlndXJlOiBlcnJvcjogUGFja2FnZSByZXF1aXJlbWVudHMgKFF0Q29yZUUgPj0gNC43LjAg4oCmJw==?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,54 +37,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Jun 2011 12:31:04 -0000
-X-Groupsio-MsgNum: 32834
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-7i91+nqc8opO1jKy/nlC"
-
---=-7i91+nqc8opO1jKy/nlC
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 25 Jun 2011 13:15:05 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-Dear Aurora/OE folks,
+On 25.06.2011 14:27, Paul Menzel wrote:
+> using `minimal` for `MACHINE =3D "beagleboard"` and doing `bitbake -k
+> aurora-fb-image` task configure of `aurora` fails with the following
+> error message.
+>
+>          [=85]
+>          checking for FSOFRAMEWORK... yes
+>            Qt base directory explicitly set to qtopia
+>          checking for QT... no
+>          configure: error: Package requirements (QtCoreE>=3D 4.7.0
+>                  QtGuiE>=3D 4.7.0
+>                  QtDeclarativeE>=3D 4.7.0) were not met:
+>
+>          No package 'QtCoreE' found
+>          No package 'QtGuiE' found
+>          No package 'QtDeclarativeE' found
+>          [=85]
+>
+> `qt4-embedded-4.7.3-r33.1` is build as a dependency and I do not know
+> what Qt packages contain the needed dependencies.
+
+You are sure qt4-embedded is already successfully build and installed in=20
+sysroots? As qt4-embedded is only pulled in with the runtime dependency=20
+on pyside-embedded but with the latest version of aurora you need=20
+qt4-embedded as build dependency. This needs to be fixed.
+
+In the aurora/development branch [1] it is already fixed. This branch=20
+includes a lot of work on the aurora distribution itself but I don't=20
+have the time to bring it all upstream. After the 0.1 version of aurora=20
+I want to switch to a meta-aurora and let the classic oe branch die. So=20
+it's the question if we want to have all this in OE-classic.
+
+regards,
+Simon
+
+[1]:=20
+http://git.freesmartphone.org/?p=3Dopenembedded.git;a=3Dshortlog;h=3Drefs=
+/heads/aurora/development
 
 
-using `minimal` for `MACHINE =3D "beagleboard"` and doing `bitbake -k
-aurora-fb-image` task configure of `aurora` fails with the following
-error message.
-
-        [=E2=80=A6]
-        checking for FSOFRAMEWORK... yes
-          Qt base directory explicitly set to qtopia
-        checking for QT... no
-        configure: error: Package requirements (QtCoreE >=3D 4.7.0
-                QtGuiE >=3D 4.7.0
-                QtDeclarativeE >=3D 4.7.0) were not met:
-       =20
-        No package 'QtCoreE' found
-        No package 'QtGuiE' found
-        No package 'QtDeclarativeE' found
-        [=E2=80=A6]
-
-`qt4-embedded-4.7.3-r33.1` is build as a dependency and I do not know
-what Qt packages contain the needed dependencies.
 
 
-Thanks,
-
-Paul
-
---=-7i91+nqc8opO1jKy/nlC
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk4F1CcACgkQPX1aK2wOHVjsZwCeJRdrJBFXIxRGUFIbhFqmnLNJ
-/PAAn2aQyDjOUmW1KUO9CcxQjf1Rtfrt
-=mN2Q
------END PGP SIGNATURE-----
-
---=-7i91+nqc8opO1jKy/nlC--
