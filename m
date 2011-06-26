@@ -1,24 +1,30 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1QalL9-0002bE-7G
+Received: from gravedo.de ([85.214.79.159])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <morphis@gravedo.de>) id 1QalZq-0002tN-VT
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 26 Jun 2011 11:09:15 +0200
-Received: (qmail invoked by alias); 26 Jun 2011 09:05:36 -0000
-Received: from p5B0A39F3.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.57.243]
-	by mail.gmx.net (mp031) with SMTP; 26 Jun 2011 11:05:36 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1++s4Zkv9m+Ox0nYAghcr5qjYho3eb8P2/5krjvm0
-	UzJ9mXmKIO1Nsg
-From: Andreas Mueller <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 26 Jun 2011 11:07:18 +0200
-User-Agent: KMail/1.13.7 (Linux/2.6.35.13-92.fc14.x86_64; KDE/4.6.3; x86_64; ;
-	)
+	Sun, 26 Jun 2011 11:24:27 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id E3F7715E0001; Sun, 26 Jun 2011 11:20:49 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h1108419.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from [192.168.178.21] (dslb-088-071-243-109.pools.arcor-ip.net
+	[88.71.243.109]) by gravedo.de (Postfix) with ESMTPSA id E71F3799012
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 26 Jun 2011 11:20:46 +0200 (CEST)
+Message-ID: <4E06F9ED.9080305@gravedo.de>
+Date: Sun, 26 Jun 2011 11:20:45 +0200
+From: Simon Busch <morphis@gravedo.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:5.0) Gecko/20110624 Thunderbird/5.0b2
 MIME-Version: 1.0
-Message-Id: <201106261107.18783.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: git / patchwork at wiki missing
+To: openembedded-devel@lists.openembedded.org
+References: <1309004845.4286.11.camel@mattotaupa> <4E05DE80.4070507@gravedo.de>
+	<1309015972.20483.6.camel@mattotaupa>
+In-Reply-To: <1309015972.20483.6.camel@mattotaupa>
+Subject: Re: [PATCH] aurora: Add `qt4-embedded` to `DEPENDS`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,16 +38,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Jun 2011 09:09:15 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
+X-List-Received-Date: Sun, 26 Jun 2011 09:24:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi,
+On 25.06.2011 17:32, Paul Menzel wrote:
+> From: Paul Menzel<paulepanter@users.sourceforge.net>
+> Date: Sat, 25 Jun 2011 16:47:02 +0200
+>
+> Task configure fails with the following error using `minimal` for `MACHINE = "beagleboard"`.
+>
+>          checking for FSOFRAMEWORK... yes
+>            Qt base directory explicitly set to qtopia
+>          checking for QT... no
+>          configure: error: Package requirements (QtCoreE>= 4.7.0
+>                  QtGuiE>= 4.7.0
+>                  QtDeclarativeE>= 4.7.0) were not met:
+>
+>          No package 'QtCoreE' found
+>          No package 'QtGuiE' found
+>          No package 'QtDeclarativeE' found
+>
+> Adding `qt4-embedded` to `DEPENDS` fixes this error [1].
+>
+> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-June/033590.html
+>
+> Signed-off-by: Paul Menzel<paulepanter@users.sourceforge.net>
 
-since a few days the links to git server and patchwork (and maybe others) are 
-missing in the left lower part of the wiki main page. Is that indended?
-
-Andreas
+Acked-by: Simon Busch <morphis@gravedo.de>
 
 
