@@ -1,39 +1,35 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1QbCTP-0004nk-DB
+	(envelope-from <raj.khem@gmail.com>) id 1QbHbe-00012B-Uj
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Jun 2011 16:07:36 +0200
-Received: by vxa37 with SMTP id 37so3711205vxa.6
+	Mon, 27 Jun 2011 21:36:27 +0200
+Received: by pvf24 with SMTP id 24so3242641pvf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jun 2011 07:03:50 -0700 (PDT)
+	Mon, 27 Jun 2011 12:32:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
-	:date:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=aloJJYc5i372+C9ZsIA+Z0tnbanHnKAiZu76P4dLX+8=;
-	b=FOYOF6XxGMi6xtYJicvcsFu7uvyqEgpDsETOmk7Ktu4fFWKIAx0nV1MFQ5HhvoIVYE
-	L7z1mBKGB7ycu+YyHyNBn9Gnr1kKoX1d7peWZsx4yvFzxv1F7VNjgnR7AawrWtN7QuQb
-	gMztskA240ECfD0GJrGRcsjZnfDDh5RZYzO58=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=gRo3FZldii8MX3lcpnoLLJ8Rwo1UlA+DQe4ewORMugI=;
+	b=ag/dmXGfzpbSnEVYC+w90d9oWTuNkfB5Q3H4UmOVsNZvfQCchLq2G2IYPdVmmDIQUY
+	uQDP40T8DUr8j0vrqbdD8FTRLCjSeZNpcd7zjqYfHzqDuZEOnI0XLXIHx3DVvitg9x/M
+	j00UmaYlTtXv65BMkNKBZAZjnYX0zIfwSIlmA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	b=oLsh0rHohwTYlfrBPdTyhGxFBfRtpXhSeJfIjVvDcDtUIbde8RwW5DCikgMukbTkmB
-	aSrSETu8EtCM/HRtQ0tv7vR/csig/aareiCGXwRFtqydcbm3a11NtUeKyo3azTKTtSVI
-	T+uo4t9JB7FmvVFLyrliAmVZUyOGNXC0J+4xk=
-Received: by 10.52.116.33 with SMTP id jt1mr8832435vdb.249.1309183430067; Mon,
-	27 Jun 2011 07:03:50 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.52.181.2 with HTTP; Mon, 27 Jun 2011 07:03:30 -0700 (PDT)
-In-Reply-To: <1309183130.21613.317.camel@phil-desktop>
-References: <1309183130.21613.317.camel@phil-desktop>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 27 Jun 2011 07:03:30 -0700
-X-Google-Sender-Auth: DqY9PsuMJq-MZGRnGPF-AZNPNH8
-Message-ID: <BANLkTikPttPdPM6JmL0=S8h5eg4D0Z6fCA@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Dglm5M4VYWYazHJMw/XGb8fI2UH7vbV+7+HZbRkoWw98MbgbepJj1vhi8rRO6ErfZ0
+	Ooge3BuT86qsMKCYrO/lyWwp9/tnzBs65xWmSeUfT90DjBMshUzRPC8Agyw7EI1/lq19
+	73J03bO3qducUwIAa7Y0u+bjCc6qJUQOujBME=
+Received: by 10.68.50.161 with SMTP id d1mr2974244pbo.439.1309203165814;
+	Mon, 27 Jun 2011 12:32:45 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id q5sm1051694pbk.10.2011.06.27.12.32.45
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 27 Jun 2011 12:32:45 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Remove SHELL from preserved_envvars_exported?
+Date: Mon, 27 Jun 2011 12:32:41 -0700
+Message-Id: <1309203161-25143-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [meta-oe][PATCH] gcc-common-4.6.inc: Set ARM_INSTRUCTION_SET to arm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,47 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jun 2011 14:07:36 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 27 Jun 2011 19:36:27 -0000
 
-On Mon, Jun 27, 2011 at 6:58 AM, Phil Blundell <philb@gnu.org> wrote:
-> One of my colleagues pointed out to me just now that $SHELL is, somewhat
-> surprisingly, passed through to bitbake subprocesses from the calling
-> environment. =C2=A0Under most circumstances this would be fairly benign s=
-ince
-> few things actually care about that variable, but it turns out that:
->
-> a) flock(1) has the misfeature of using $SHELL rather than /bin/sh if
-> the former is set in the environment (in contrast to system(3), which
-> always uses /bin/sh); and
->
-> b) zsh has the misfeature of always reading ~/.zshenv even if it was
-> invoked as "zsh -c ...".
->
-> So the net result of all this is that, if you are using zsh as your
-> interactive shell, the contents of your .zshenv end up in the
-> environment for everything that's run under flock and bad results can
-> potentially ensue. =C2=A0In our particular case my colleague was setting
-> $PATH from his .zshenv with predictably unfortunate consequences.
->
-> It isn't very obvious to me that having SHELL whitelisted is sensible
-> for anything except interactive tasks. =C2=A0Does anybody know of a reaso=
-n
-> why it needs to be included everywhere?
->
+Otherwise it will compile libgcc in thumb mode when thumb
+mode is selected and libgcc in thumb mode does not work
+well.
 
-I don't know why it is the way it is right  now, but I want to jump in
-here and say that as another zsh user, this has bitten me multiple
-times before as well. I actually have SHELL overridden in my
-~/.oe/conf/site.conf to work around it for now. I agree that it should
-probably not be exported other than for interactive tasks, for what
-it's worth.
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+
+diff --git a/meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc b/meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc
+index 059f441..e5a1fba 100644
+--- a/meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc
++++ b/meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc
+@@ -1,3 +1,4 @@
+ # this will prepend this layer to FILESPATH
+ FILESEXTRAPATHS := "${THISDIR}/gcc-4.6"
+-PRINC = "0"
++PRINC = "1"
++ARM_INSTRUCTION_SET = "arm"
+-- 
+1.7.4.1
+
 
 
