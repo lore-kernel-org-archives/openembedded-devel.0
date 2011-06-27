@@ -1,41 +1,32 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QbIL6-0002xi-Fg
+	(envelope-from <rcvengr2@gmail.com>) id 1QbIOk-00037j-MG
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Jun 2011 22:23:24 +0200
-Received: by wwi18 with SMTP id 18so20474wwi.24
+	Mon, 27 Jun 2011 22:27:10 +0200
+Received: by bwf20 with SMTP id 20so1827860bwf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jun 2011 13:19:44 -0700 (PDT)
+	Mon, 27 Jun 2011 13:23:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=i1Zcrz0kAt/VqMUPyPXoaEh2NwFklRjBPhOr7iRT7BQ=;
-	b=pefers+GRQCNvCFkL813dSvmOP4gD8CedURxsGpdX6Si8pauA9xuwXuC+QuDK9YwBk
-	xBOkaGUTU0O0kTo6P94ULZTS0fqkPnZxtE1D+i9KCDHkX/DmNZ9zNV7A1OV0XAZoyZDE
-	8oIprSk5sf5U2QP1uQp+zxmxZkFVIRw5Tfg2c=
+	h=domainkey-signature:mime-version:from:date:message-id:subject:to
+	:content-type; bh=Nn9e1hYl3MirfDeQiF48vcS53MSQT+DyJSCtYxoFKrc=;
+	b=lSgS4/WaWW9ez5CScDiUznYpaull+k5S0p4Ew+nZxpoh+tY+Ps7q0bW8th5zgn9Goo
+	b37HrqFpaDqC4FZDq0M+xt9c+02d0IUu+AmfMjylxL3dol7RSuC7gfBd5VtxRHFTvHmw
+	C5V+3gJuSirw1l4NILgq+5oD19gfGU+kyJqeM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=HIKpxM24hddcKtQu+NcilUFRkqiKixBdy1zMfzeIADADkjPZmuY1ngn7JmBEMOhNRO
-	XKF4tLzz68GpaIe39fEyJ6me6bPdn9KOiQx/3A6HhM5P4Z5tkIBN0oJz+AOT/HzEvntR
-	fcfjCMU/gPcfiz0U7hQaCfpMjke2YzzXX4iO4=
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=jQUWwvqdZR2k4/65O/7i5+Xy1UbTNIa5U4umcAvnKrtH6BvhJsPAY7WHE97y54SiOi
+	wXnuKZeNld6PLZ9OHvYFkeLhNivfQV819ajyIyKXY+wkGuhwxEduS2zYPzvL4ONjueQi
+	mKGTcETraRNmagiMXNMA2UxDrXLbIXZ/60KF0=
+Received: by 10.205.82.139 with SMTP id ac11mr4662972bkc.196.1309206210140;
+	Mon, 27 Jun 2011 13:23:30 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.216.142.133 with SMTP id i5mr782862wej.43.1309205983415; Mon,
-	27 Jun 2011 13:19:43 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.216.89.210 with HTTP; Mon, 27 Jun 2011 13:19:43 -0700 (PDT)
-In-Reply-To: <1309204699.21379.141.camel@mattotaupa>
-References: <cover.1309203431.git.otavio@ossystems.com.br>
-	<0a7128c3166d0729292e664918b76cf5b7074fe5.1309203431.git.otavio@ossystems.com.br>
-	<1309204699.21379.141.camel@mattotaupa>
-Date: Mon, 27 Jun 2011 17:19:43 -0300
-X-Google-Sender-Auth: Y8yFpnRDouRMo5FrxSUtANAyrZ8
-Message-ID: <BANLkTim+B0d3-E=0xVCuaYBBPBYEj5KjOg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by 10.204.153.212 with HTTP; Mon, 27 Jun 2011 13:23:10 -0700 (PDT)
+From: Bob Cvengros <rcvengr2@gmail.com>
+Date: Mon, 27 Jun 2011 15:23:10 -0500
+Message-ID: <BANLkTik1SX0BQ=rdoJorZN0UWcK1Mnn9Qg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [[meta-oe][PATCH 1/4] xf86-video-geode: add 2.11.12 version
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: python-numpy cannot find libraries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,26 +40,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jun 2011 20:23:24 -0000
+X-List-Received-Date: Mon, 27 Jun 2011 20:27:10 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 27, 2011 at 16:58, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-...
->> +DESCRIPTION =3D "X.org server -- Geode GX2/LX display driver"
->> +PE =3D "1"
->
-> please remove the `PE` line as I wrote already in the last review.
+Hi,
 
-Did it locally for next pull request.
+I am having a problem compiling python-numpy similar to that posted
+here<http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-April/031840.html>,
+however this issue does not appear to have been resolved.
+
+The cross compiler cannot find the correct libraries and seems to be looking
+for the libraries on my host machine path rather than the libraries created
+for my ARM device. Specifically, I find the following in the resultant
+log.do_compile.4120 file:
 
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+----------------------------------------------------
+$ bitbake -f -c compile python-numpy
 
+......
+
+Running from numpy source directory.
+F2PY Version 2
+blas_opt_info:
+blas_mkl_info:
+/home/rcvengr2/oe/tmp/work/armv7a-angstrom-linux-gnueabi/python-numpy-1.4.1-ml0/numpy-1.4.1/numpy/distutils/system_info.py:520:
+UserWarning: Specified path /opt/intel/mkl/9.1.023/lib/32/ is invalid.
+  warnings.warn('Specified path %s is invalid.' % d)
+  NOT AVAILABLE
+
+atlas_blas_threads_info:
+Setting PTATLAS=ATLAS
+  *libraries ptf77blas,ptcblas,atlas not found in
+/home/rcvengr2/oe/tmp//sysroots/x86_64-linux/usr/lib*
+  *libraries ptf77blas,ptcblas,atlas not found in /usr/local/lib*
+Setting PTATLAS=ATLAS
+Setting PTATLAS=ATLAS
+  FOUND:
+    libraries = ['ptf77blas', 'ptcblas', 'atlas']
+    library_dirs = ['/usr/lib64/atlas-base']
+    language = c
+    include_dirs = ['/usr/include/atlas']
+
+
+*And later:*
+*
+*
+Could not locate executable arm-angstrom-linux-gnueabi-g77 -march=armv7-a
+-mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb
+--sysroot=/home/rcvengr2/oe/tmp//sysroots/armv7a-angstrom-linux-gnueabi
+Could not locate executable g77
+Could not locate executable f77
+customize IntelFCompiler
+Could not locate executable ifort
+Could not locate executable ifc
+customize LaheyFCompiler
+Could not locate executable lf95
+customize PGroupFCompiler
+Could not locate executable pgf90
+customize AbsoftFCompiler
+Could not locate executable f90
+customize NAGFCompiler
+Found executable /usr/bin/f95
+nag: no Fortran 77 compiler found
+
+
+....and so on
+------------------------------------------------------
+
+do_compile eventually throws an error because it cannot recognize the ATLAS
+code, but I have traced it back to not being able to find the libraries
+listed. Given the provided link, this problem is not unique to my situation.
+I wish I could fix it, but my technical skills are not up to the task. I
+could use some help resolving the issue.
+
+Thanks,
+Bob Cvengros
 
