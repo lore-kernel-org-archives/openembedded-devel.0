@@ -1,42 +1,24 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QbHhU-0001DS-5M
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Jun 2011 21:42:28 +0200
-Received: by yib18 with SMTP id 18so2108672yib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jun 2011 12:38:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
-	:x-mailer:in-reply-to:references:in-reply-to:references;
-	bh=pQwBipphpnjbRxyimjbdtE1jCty4iLytE6SD9OI7Mvc=;
-	b=CZaOXakiWxck1/Ceg3JRmYWKV9FFb3uGZ0lWVR864bhJ9396KaQCdyBVZUCx4dSmz/
-	snp6+I8pyyUVrBab/TD/5NolcjTEjm2MuXcsic+RgS1YKWWY4ULAFu+Maob8aTLKiDfc
-	z869WixrHwhcKmMLV3FL7cife/PBFvWDsoYtU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references;
-	b=QijQ1GYbt+ronL47eKfXaqR/lahOvurd7ICPMCvzRWzHrrjjPAe2D8K/Oec0FfhRTR
-	RVzNoY/tjKC1N1wWGUoS5mWLio2U1FTzfPn/sPyCKFRiVDdD3Xq+iTaUvDaIeJFAI9Bg
-	HSEsFvtTzXdbVsA4aZuRwvqwRZZIrmkzhPVhk=
-Received: by 10.150.251.9 with SMTP id y9mr3954097ybh.371.1309203527335;
-	Mon, 27 Jun 2011 12:38:47 -0700 (PDT)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id e24sm3675890yhk.51.2011.06.27.12.38.45
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 27 Jun 2011 12:38:46 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QbI0N-0002OT-T1 for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Jun 2011 22:01:59 +0200
+Received: from f053041087.adsl.alicedsl.de ([78.53.41.87]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QbHxC-0000kz-2B for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Jun 2011 19:58:42 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Jun 2011 19:38:25 +0000
-Message-Id: <f441489e8e744b0125c7dce7e9cb2f9ce0798971.1309203431.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1309203431.git.otavio@ossystems.com.br>
+In-Reply-To: <0a7128c3166d0729292e664918b76cf5b7074fe5.1309203431.git.otavio@ossystems.com.br>
 References: <cover.1309203431.git.otavio@ossystems.com.br>
-In-Reply-To: <cover.1309203431.git.otavio@ossystems.com.br>
-References: <cover.1309203431.git.otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [[meta-oe][PATCH 4/4] inih: bump SRCREV to sync with upstream r12
+	<0a7128c3166d0729292e664918b76cf5b7074fe5.1309203431.git.otavio@ossystems.com.br>
+Date: Mon, 27 Jun 2011 21:58:19 +0200
+Message-ID: <1309204699.21379.141.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [[meta-oe][PATCH 1/4] xf86-video-geode: add 2.11.12 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,32 +32,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jun 2011 19:42:28 -0000
+X-List-Received-Date: Mon, 27 Jun 2011 20:02:00 -0000
+X-Groupsio-MsgNum: 32849
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-4TjnKl0Df1fqgGKNpFOY"
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- meta-oe/recipes-support/inih/libinih_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+--=-4TjnKl0Df1fqgGKNpFOY
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-support/inih/libinih_git.bb b/meta-oe/recipes-support/inih/libinih_git.bb
-index f750bdb..fbdb520 100644
---- a/meta-oe/recipes-support/inih/libinih_git.bb
-+++ b/meta-oe/recipes-support/inih/libinih_git.bb
-@@ -6,10 +6,10 @@ PKGV = "${GITPKGVTAG}"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dae28cbf28207425e0d0b3eb835f4bde"
- 
--PR = "r1"
-+PR = "r2"
- 
- # The github repository provides a cmake and pkg-config integration
--SRCREV = "af230b4c7ef2529413ffc37cee513ef8f35c9598"
-+SRCREV = "7ab5f69cde1e921f58d0ef00fa8039d8ea311226"
- SRC_URI = "git://github.com/OSSystems/inih.git;protocol=git"
- 
- S = "${WORKDIR}/git"
--- 
-1.7.2.5
+Am Montag, den 27.06.2011, 19:38 +0000 schrieb Otavio Salvador:
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>  .../xorg-driver/xf86-video-geode_2.11.12.bb        |   11 +++++++++++
+>  1 files changed, 11 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-geode=
+_2.11.12.bb
+>=20
+> diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.1=
+2.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.12.bb
+> new file mode 100644
+> index 0000000..d14d63e
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.12.bb
+> @@ -0,0 +1,11 @@
+> +require xorg-driver-video.inc
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df8ad89d9d9a024f19d7dcc5acb044=
+a42"
+> +
+> +DESCRIPTION =3D "X.org server -- Geode GX2/LX display driver"
+> +PE =3D "1"
+
+please remove the `PE` line as I wrote already in the last review.
+
+> +PR =3D "${INC_PR}.0"
+> +
+> +SRC_URI[md5sum] =3D "a99c521db731c2f1df309057a8465e4c"
+> +SRC_URI[sha256sum] =3D "28d845d727d99bfa4d4b93c5486ec01b72eb222e0910a766=
+089db1103b1c2d92"
+> +
+> +COMPATIBLE_HOST =3D "i.86.*-linux"
 
 
+Thanks,
 
+Paul
+
+--=-4TjnKl0Df1fqgGKNpFOY
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk4I4NsACgkQPX1aK2wOHViECwCeNoOg+jUP11d9pLSmqrdcuM1i
+gfYAnip2vstnOsc7u5WVL51BXvwLqzK3
+=40mj
+-----END PGP SIGNATURE-----
+
+--=-4TjnKl0Df1fqgGKNpFOY--
