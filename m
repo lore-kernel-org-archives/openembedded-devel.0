@@ -1,29 +1,25 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <morphis@gravedo.de>) id 1Qalgd-00032c-OJ
+	(envelope-from <sledz@dresearch-fe.de>) id 1QbAyp-0002dk-2f
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 26 Jun 2011 11:31:27 +0200
-Received: by gravedo.de (Postfix, from userid 5001)
-	id 4A0C1799015; Sun, 26 Jun 2011 11:27:51 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h1108419.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=6.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from [192.168.178.21] (dslb-088-071-243-109.pools.arcor-ip.net
-	[88.71.243.109]) by gravedo.de (Postfix) with ESMTPSA id 8DE80799012
+	Mon, 27 Jun 2011 14:31:55 +0200
+Received: by bwf20 with SMTP id 20so1434389bwf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Jun 2011 11:27:50 +0200 (CEST)
-Message-ID: <4E06FB94.7080300@gravedo.de>
-Date: Sun, 26 Jun 2011 11:27:48 +0200
-From: Simon Busch <morphis@gravedo.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0b2
+	Mon, 27 Jun 2011 05:28:15 -0700 (PDT)
+Received: by 10.204.22.15 with SMTP id l15mr4285767bkb.46.1309177694798;
+	Mon, 27 Jun 2011 05:28:14 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id l24sm4138763bkw.15.2011.06.27.05.28.13
+	(version=SSLv3 cipher=OTHER); Mon, 27 Jun 2011 05:28:14 -0700 (PDT)
+Message-ID: <4E08775C.7020706@dresearch-fe.de>
+Date: Mon, 27 Jun 2011 14:28:12 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110414 SUSE/3.1.10 Thunderbird/3.1.10
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1308951671.6255.14.camel@mattotaupa>
-In-Reply-To: <1308951671.6255.14.camel@mattotaupa>
-Subject: Re: libgisi: task compile fails with `posix-ext.vapi:7.5-7.30: error: `Posix' already contains a definition for `INET_ADDRSTRLEN'`
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Doxygen integration?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,49 +33,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Jun 2011 09:31:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 27 Jun 2011 12:31:55 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 24.06.2011 23:41, Paul Menzel wrote:
-> Dear OE folks,
->
->
-> task compile of libgisi c993ee694ea98597d619a1ffae397d3416233354 fails
-> with the following error using `minimal` for `MACHINE = "beagleboard"`.
->
->
->          /oe/build-minimal-eglibc/minimal-dev/sysroots/i686-linux/usr/bin/valac -C --basedir .. --vapidir ../data --vapidir ../vapi --pkg glib-2.0 --pkg gio-2.0 --pkg libgisi --pkg posix --pkg posix-ext --header gisicomm.h --library gisicomm-0.0 gisicomm.vala
->          posix-ext.vapi:7.5-7.30: error: `Posix' already contains a definition for `INET_ADDRSTRLEN'
->              const int INET_ADDRSTRLEN;
->              ^^^^^^^^^^^^^^^^^^^^^^^^^^
->          posix.vapi:476.2-476.34: note: previous definition of `INET_ADDRSTRLEN' was here
->                  public const int INET_ADDRSTRLEN;
->                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->          posix-ext.vapi:8.5-8.31: error: `Posix' already contains a definition for `INET6_ADDRSTRLEN'
->              const int INET6_ADDRSTRLEN;
->              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
->          posix.vapi:478.2-478.35: note: previous definition of `INET6_ADDRSTRLEN' was here
->                  public const int INET6_ADDRSTRLEN;
->                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->          posix-ext.vapi:4.2-4.25: error: `Posix' already contains a definition for `inet_ntop'
->                  unowned string inet_ntop (int af, void* src, uint8[] dst);
->                  ^^^^^^^^^^^^^^^^^^^^^^^^
->          posix.vapi:485.2-485.25: note: previous definition of `inet_ntop' was here
->                  unowned string inet_ntop (int af, void* src, uint8[] dst);
->                  ^^^^^^^^^^^^^^^^^^^^^^^^
->          Compilation failed: 3 error(s), 0 warning(s)
+Do OE/bitbake currently have an integration (a bitbake stage?) of Doxygen[1] to generate documentation from the sources?
 
-We need to bump libgisi SRCREV to the latest one:
+If yes, does it also support linking e.g. documentation from linked libraries via TAGFILES?
 
-SRCREV = "ee474b2bf7a10b244d52f5333b195609003762cf"
+If not, what would be the best way to do something like this?
 
-As with the latest changes to libgisi the mentioned posix-ext is removed 
-and it's using only posix as dependency.
+Regards,
+Steffen
 
-Will provide a patch to fix this later.
+[1] http://www.doxygen.org/
 
-regards,
-Simon
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
