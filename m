@@ -1,25 +1,20 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QbAyp-0002dk-2f
+	(envelope-from <philb@gnu.org>) id 1QbCOV-0004fg-LM
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Jun 2011 14:31:55 +0200
-Received: by bwf20 with SMTP id 20so1434389bwf.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jun 2011 05:28:15 -0700 (PDT)
-Received: by 10.204.22.15 with SMTP id l15mr4285767bkb.46.1309177694798;
-	Mon, 27 Jun 2011 05:28:14 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116])
-	by mx.google.com with ESMTPS id l24sm4138763bkw.15.2011.06.27.05.28.13
-	(version=SSLv3 cipher=OTHER); Mon, 27 Jun 2011 05:28:14 -0700 (PDT)
-Message-ID: <4E08775C.7020706@dresearch-fe.de>
-Date: Mon, 27 Jun 2011 14:28:12 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110414 SUSE/3.1.10 Thunderbird/3.1.10
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Doxygen integration?
+	Mon, 27 Jun 2011 16:02:31 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QbCKz-0008Ln-CY
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Jun 2011 15:58:53 +0200
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 27 Jun 2011 14:58:50 +0100
+Message-ID: <1309183130.21613.317.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Remove SHELL from preserved_envvars_exported?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,28 +28,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jun 2011 12:31:55 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 27 Jun 2011 14:02:31 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Do OE/bitbake currently have an integration (a bitbake stage?) of Doxygen[1] to generate documentation from the sources?
+One of my colleagues pointed out to me just now that $SHELL is, somewhat
+surprisingly, passed through to bitbake subprocesses from the calling
+environment.  Under most circumstances this would be fairly benign since
+few things actually care about that variable, but it turns out that:
 
-If yes, does it also support linking e.g. documentation from linked libraries via TAGFILES?
+a) flock(1) has the misfeature of using $SHELL rather than /bin/sh if
+the former is set in the environment (in contrast to system(3), which
+always uses /bin/sh); and
 
-If not, what would be the best way to do something like this?
+b) zsh has the misfeature of always reading ~/.zshenv even if it was
+invoked as "zsh -c ...".
 
-Regards,
-Steffen
+So the net result of all this is that, if you are using zsh as your
+interactive shell, the contents of your .zshenv end up in the
+environment for everything that's run under flock and bad results can
+potentially ensue.  In our particular case my colleague was setting
+$PATH from his .zshenv with predictably unfortunate consequences.
 
-[1] http://www.doxygen.org/
+It isn't very obvious to me that having SHELL whitelisted is sensible
+for anything except interactive tasks.  Does anybody know of a reason
+why it needs to be included everywhere?
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+p.
+
+
 
 
