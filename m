@@ -1,35 +1,36 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QbHbe-00012B-Uj
+	(envelope-from <otavio.salvador@gmail.com>) id 1QbHhL-0001BU-R2
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Jun 2011 21:36:27 +0200
-Received: by pvf24 with SMTP id 24so3242641pvf.6
+	Mon, 27 Jun 2011 21:42:19 +0200
+Received: by gxk3 with SMTP id 3so1595989gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jun 2011 12:32:46 -0700 (PDT)
+	Mon, 27 Jun 2011 12:38:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=gRo3FZldii8MX3lcpnoLLJ8Rwo1UlA+DQe4ewORMugI=;
-	b=ag/dmXGfzpbSnEVYC+w90d9oWTuNkfB5Q3H4UmOVsNZvfQCchLq2G2IYPdVmmDIQUY
-	uQDP40T8DUr8j0vrqbdD8FTRLCjSeZNpcd7zjqYfHzqDuZEOnI0XLXIHx3DVvitg9x/M
-	j00UmaYlTtXv65BMkNKBZAZjnYX0zIfwSIlmA=
+	h=domainkey-signature:sender:from:to:cc:subject:date:message-id
+	:x-mailer; bh=2ynxWTRsqw1mR/BEXSmPEktImK/nvNLJFwBoJv0jiY8=;
+	b=QmZ6XA+FpuTtkPU+sW7gseeZy2poeuf30qmbkJ7JgksnownXzfL+y4gaE7h/PObXQZ
+	7SM+5DK/iNW6UeeZpKiRGFG5L+Ir3957b2lhPuuXVESqm2AHcETOYDZlmy0PL1FqswW0
+	vsCKbgtfVgS5FrKrKzgNzfPDRk2+ZiRftkRsA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=Dglm5M4VYWYazHJMw/XGb8fI2UH7vbV+7+HZbRkoWw98MbgbepJj1vhi8rRO6ErfZ0
-	Ooge3BuT86qsMKCYrO/lyWwp9/tnzBs65xWmSeUfT90DjBMshUzRPC8Agyw7EI1/lq19
-	73J03bO3qducUwIAa7Y0u+bjCc6qJUQOujBME=
-Received: by 10.68.50.161 with SMTP id d1mr2974244pbo.439.1309203165814;
-	Mon, 27 Jun 2011 12:32:45 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id q5sm1051694pbk.10.2011.06.27.12.32.45
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=g9BPjL2R3XjO37z89sMr0mt4cPfqjSSKcAdnwoBNAe97Ls9S3NWv3r7scJ/RobpsGw
+	WvqhGt2JGY7kSO+t/WXvKfhoxGr+w0XwaH3pJP9KCfo/TQXG48vSlCl183BZ3mDeLcEF
+	YSC9SjGG7RrRf7F+X1nqsoYbPSvx3OJVKHJmQ=
+Received: by 10.236.138.197 with SMTP id a45mr10311531yhj.510.1309203518642;
+	Mon, 27 Jun 2011 12:38:38 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id e24sm3675890yhk.51.2011.06.27.12.38.35
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 27 Jun 2011 12:32:45 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Mon, 27 Jun 2011 12:38:36 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Jun 2011 12:32:41 -0700
-Message-Id: <1309203161-25143-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-Subject: [meta-oe][PATCH] gcc-common-4.6.inc: Set ARM_INSTRUCTION_SET to arm
+Date: Mon, 27 Jun 2011 19:38:21 +0000
+Message-Id: <cover.1309203431.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [[meta-oe][PATCH 0/4] O.S. Systems changes pending for merging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,29 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jun 2011 19:36:27 -0000
+X-List-Received-Date: Mon, 27 Jun 2011 19:42:20 -0000
 
-Otherwise it will compile libgcc in thumb mode when thumb
-mode is selected and libgcc in thumb mode does not work
-well.
+The following changes since commit 9e3f9dddd2d498a603c0e9eb8bf77d3476a21940:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+  systemd: bump SRCREV to get the new daemons (2011-06-27 20:15:37 +0200)
 
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc b/meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc
-index 059f441..e5a1fba 100644
---- a/meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc
-+++ b/meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc
-@@ -1,3 +1,4 @@
- # this will prepend this layer to FILESPATH
- FILESEXTRAPATHS := "${THISDIR}/gcc-4.6"
--PRINC = "0"
-+PRINC = "1"
-+ARM_INSTRUCTION_SET = "arm"
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe master
+  https://github.com/OSSystems/meta-oe/tree/master
+
+Otavio Salvador (4):
+  xf86-video-geode: add 2.11.12 version
+  freerdp: bump SRCREV to gather fixes
+  freerdp-extension-xpunlimited: bump SRCREV to fix a build failure
+  inih: bump SRCREV to sync with upstream r12
+
+ .../xorg-driver/xf86-video-geode_2.11.12.bb        |   11 +++++++++++
+ .../freerdp/freerdp-extension-xpunlimited_git.bb   |    2 +-
+ meta-oe/recipes-support/freerdp/freerdp_git.bb     |    2 +-
+ meta-oe/recipes-support/inih/libinih_git.bb        |    4 ++--
+ 4 files changed, 15 insertions(+), 4 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.12.bb
+
 -- 
-1.7.4.1
+1.7.2.5
 
 
 
