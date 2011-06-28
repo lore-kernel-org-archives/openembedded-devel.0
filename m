@@ -1,35 +1,35 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefflance01@gmail.com>) id 1QbKUn-0006I5-06
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jun 2011 00:41:33 +0200
-Received: by ywa12 with SMTP id 12so2170523ywa.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QbSDn-0002hm-GT for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Jun 2011 08:56:31 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QbSAF-00041J-0c for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Jun 2011 08:52:51 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Jun 2011 08:52:51 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jun 2011 15:37:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=uW9H2LeBOB+Exju+uZaEM1zkUrC2o3mUX2l6krLvqUU=;
-	b=MLMgPtiyB3+gaLcyqynPAQnZXcLzqDslUXqenxoMqrJRUzRVn0RBe80/AkfcfrSi5t
-	JZ8m1EYNQEkMnFKKQwBx55acoIpEtiRIgeY3Trcrfq4nkGeKhYIZ0l2CGOcUsF8fdZD2
-	QlVbTAZDCtB5A21V+qen96K3jo6JUC7cUcAI0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=n8zphVFHD9vnw+CkZV/k5wzpGkG0T7G/gg+niS+IdFB3Tk/3pr5S2lU1szSY3Yk38a
-	7OnKlHsISH+Wa0tihPGqCssv6Otm/Y5tVLLxIFI48UqeFQdHSnSQzRoFLaTjEIIBtGJu
-	goxN/0jIId7sb+gsD6jf7W7+X+ZilbPoOTTto=
-Received: by 10.151.115.10 with SMTP id s10mr5230959ybm.271.1309214270536;
-	Mon, 27 Jun 2011 15:37:50 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id w70sm3783110yhl.17.2011.06.27.15.37.49
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 27 Jun 2011 15:37:50 -0700 (PDT)
-From: Jeff Lance <jefflance01@gmail.com>
+	Tue, 28 Jun 2011 08:52:51 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Jun 2011 17:35:25 -0500
-Message-Id: <1309214125-3523-1-git-send-email-j-lance1@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: Jeff Lance <j-lance1@ti.com>
-Subject: [PATCH 1/1] am-benchmarks: Remove platform dependencies
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 28 Jun 2011 08:52:38 +0200
+Message-ID: <iubtnm$jkv$1@dough.gmane.org>
+References: <201104102145.44766.patda293@student.liu.se>
+	<1309207347.21379.147.camel@mattotaupa>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1309207347.21379.147.camel@mattotaupa>
+X-Enigmail-Version: 1.0.1
+Subject: Re: python-numpy prone to use host libraries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,59 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jun 2011 22:41:33 -0000
+X-List-Received-Date: Tue, 28 Jun 2011 06:56:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-* Remove platform dependencies and use architecture dependencies instead
-* Use OE BASE_PACKAGE_ARCH to determine architecture
-* Update the SRCREV to revision 65
-* Update the recipe revision to 1.3
-NOTE - architecure dependency and INSANE_SKIP can be removed once CFLAGS can be passed into CCSv5 project makefile
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Jeff Lance <j-lance1@ti.com>
----
- recipes/ti/am-benchmarks_1.3.bb |   31 +++++++++++++++++++++++++++++++
- 1 files changed, 31 insertions(+), 0 deletions(-)
- create mode 100644 recipes/ti/am-benchmarks_1.3.bb
+On 27-06-11 22:42, Paul Menzel wrote:
+> Dear Patrik,
+> 
+> 
+> Am Sonntag, den 10.04.2011, 21:45 +0200 schrieb Patrik Dahlström (student):
+> 
+> […]
+> 
+>> I am however uncertain on how to proceed with this and could use some 
+>> assistance.
+> 
+> did you find a “generic” solution for this problem?
 
-diff --git a/recipes/ti/am-benchmarks_1.3.bb b/recipes/ti/am-benchmarks_1.3.bb
-new file mode 100644
-index 0000000..f4182b3
---- /dev/null
-+++ b/recipes/ti/am-benchmarks_1.3.bb
-@@ -0,0 +1,31 @@
-+#NOTE: This package is currently only supported for the Angstrom
-+#      distribution.  Other distributions and toolchains may or
-+#      may not work.
-+
-+DESCRIPTION = "AM Benchmarks"
-+HOMEPAGE = "https://gforge.ti.com/gf/project/am_benchmarks/"
-+LICENSE = "BSD"
-+SECTION = "system"
-+PRIORITY = "optional"
-+
-+SRCREV = "65"
-+PR = "r2+svnr${SRCPV}"
-+
-+INSANE_SKIP_${PN} = "True"
-+
-+SRC_URI = "svn://gforge.ti.com/svn/am_benchmarks/;module=trunk;proto=https;user=anonymous;pswd=''"
-+
-+S = "${WORKDIR}/trunk"
-+
-+do_compile() {
-+	# don't build debug version
-+	touch debug
-+	export CROSS_COMPILE=${TARGET_PREFIX}
-+	export ARCH=${BASE_PACKAGE_ARCH}
-+	make release 
-+}
-+
-+do_install() {
-+	export ARCH=${BASE_PACKAGE_ARCH}
-+	make DESTDIR=${D} install
-+}
--- 
-1.7.0.4
+It requires redoing the numpy buildsystem, it is broken by design. I
+tried to teach it about crosscompiling and sysroots last year, but gave
+up after a few days :(
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFOCXo2MkyGM64RGpERAggYAJ0VMl1Ttg0QGqNCrmBhdlhnp9yPzgCgldQf
+d5EbEv+2sn1ssE10DGkigsM=
+=Sx4L
+-----END PGP SIGNATURE-----
 
 
 
