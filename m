@@ -1,28 +1,36 @@
-Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1QbWu3-0003B0-5F
+	(envelope-from <otavio.salvador@gmail.com>) id 1QbXfD-0004gB-D0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jun 2011 13:56:27 +0200
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Tue, 28 Jun 2011 13:52:46 +0200
-X-TM-IMSS-Message-ID: <070bf03a000045e8@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.0) id 070bf03a000045e8 ;
-	Tue, 28 Jun 2011 13:52:45 +0200
-Message-ID: <4E09C08E.1030702@nedap.com>
-Date: Tue, 28 Jun 2011 13:52:46 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110516 Lightning/1.0b2 Thunderbird/3.1.10
+	Tue, 28 Jun 2011 14:45:11 +0200
+Received: by wwi18 with SMTP id 18so150538wwi.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Jun 2011 05:41:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=d6sxd8tpdFa22dIGI8CAMzV81JVJ4fk0XuYEPaq8gMY=;
+	b=jVDBLr1RJi/RyHdBO4lgRuZv7+ph4K2ohRHrN9/SPb2FWKEKudiu4UOcWeGYZn26Vy
+	mezyuUgqycY4JvSG6+lAV0GC93JoptgszubcKh49ufE2vXgaQAn5+lIv9RkfveaUpqJg
+	PaVto0B7ycnkh/B9y1QOCCVgFY5carNxXqmCc=
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <4E09926B.2000406@nedap.com>	<BANLkTikvCycdv2g58Z_m3_14yj=nA9-+xg@mail.gmail.com>	<4E09A393.2050000@nedap.com>
-	<BANLkTikXtSracNZvm2KMH87UKjBYv4xcsA@mail.gmail.com>
-In-Reply-To: <BANLkTikXtSracNZvm2KMH87UKjBYv4xcsA@mail.gmail.com>
-X-OriginalArrivalTime: 28 Jun 2011 11:52:46.0080 (UTC)
-	FILETIME=[E54E3000:01CC3589]
-Subject: Re: how to change system files
+Received: by 10.217.1.197 with SMTP id n47mr487631wes.28.1309264890149; Tue,
+	28 Jun 2011 05:41:30 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.216.89.210 with HTTP; Tue, 28 Jun 2011 05:41:30 -0700 (PDT)
+In-Reply-To: <iubtqj$jkv$2@dough.gmane.org>
+References: <cover.1309203431.git.otavio@ossystems.com.br>
+	<0a7128c3166d0729292e664918b76cf5b7074fe5.1309203431.git.otavio@ossystems.com.br>
+	<1309204699.21379.141.camel@mattotaupa>
+	<BANLkTim+B0d3-E=0xVCuaYBBPBYEj5KjOg@mail.gmail.com>
+	<iubtqj$jkv$2@dough.gmane.org>
+Date: Tue, 28 Jun 2011 09:41:30 -0300
+X-Google-Sender-Auth: qIGfKhdizEDA__uXX8eVkzKuj0s
+Message-ID: <BANLkTikBsLBRS_bxtXPE6c4qrm6vmKGK3Q@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [[meta-oe][PATCH 1/4] xf86-video-geode: add 2.11.12 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,21 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jun 2011 11:56:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 28 Jun 2011 12:45:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 06/28/2011 01:46 PM, Anders Darander wrote:
-> On Tue, Jun 28, 2011 at 11:49, Jaap de Jong<jaap.dejong@nedap.com>  wrote:
->> On 06/28/2011 11:23 AM, Anders Darander wrote:
->> Yeah, but what if I decide at a certain point in time to change the
->> /etc/network/interfaces file?
->> Normally I would increment PR in the bb file and then build it.
->> And finally at the target I would do opkg upgrade.
-> Just as Phil said, you increment PR in your .bbappend-file.
->
-> I'm oftend appending to the PR in my .bbappend-files.
-Thanks! I will try it.
+On Tue, Jun 28, 2011 at 03:54, Koen Kooi <koen@dominion.thruhere.net> wrote=
+:
+> Do you mean you updated the branch or that you will do another pull reque=
+st?
 
+I can do either. I was going to send another pull request but I think
+it is better to push it to the branch and you get it fixed from there.
+
+Can be?
+
+Branch updated.
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
