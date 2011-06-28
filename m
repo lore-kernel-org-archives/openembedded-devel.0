@@ -1,33 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QbZhY-0000Ak-Fn for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jun 2011 16:55:44 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QbZe0-0008PS-Vq for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jun 2011 16:52:04 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jun 2011 16:52:04 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1QbZpA-0000l8-1D
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Jun 2011 17:03:36 +0200
+Received: by bwf20 with SMTP id 20so308716bwf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jun 2011 16:52:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 28 Jun 2011 16:51:51 +0200
-Message-ID: <iucpq7$uav$1@dough.gmane.org>
+	Tue, 28 Jun 2011 07:59:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=Nw+fFGlsgBdzt5HCpfxG8ktgEpcPfuRqL7Hfd4vskp4=;
+	b=NXZa25hR1Eq+wLkpuAAwuMQP7y78QaY+xQ5n5kezO4qa2RweGxXXfTrRroggfqdfW+
+	VEBYg6ZFmKpl1LiayhMSZaCDbSgZRvyR+w8UAkC2sPr/0tqUf4zd/2UjlY4+WgJVPsT4
+	RFDRLhLr3sx2vdO7dqFyBInRluiqxQJjrqaD0=
+MIME-Version: 1.0
+Received: by 10.204.14.147 with SMTP id g19mr5856011bka.11.1309273191604; Tue,
+	28 Jun 2011 07:59:51 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.73.70 with HTTP; Tue, 28 Jun 2011 07:59:51 -0700 (PDT)
+In-Reply-To: <iucpq7$uav$1@dough.gmane.org>
 References: <cover.1309272010.git.otavio@ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <cover.1309272010.git.otavio@ossystems.com.br>
-X-Enigmail-Version: 1.0.1
+	<iucpq7$uav$1@dough.gmane.org>
+Date: Tue, 28 Jun 2011 11:59:51 -0300
+X-Google-Sender-Auth: awTFYgJXMUVloM4rxdwQiyIjKwE
+Message-ID: <BANLkTinqwZhxLGtp997dgKh9BmAD02LU-A@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH 0/2] Fix parse errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,40 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jun 2011 14:55:44 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 28 Jun 2011 15:03:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, Jun 28, 2011 at 11:51, Koen Kooi <koen@dominion.thruhere.net> wrote=
+:
+> I'm not going pull those in, since the whole point was to not make them
+> machine specific. RP has pushed a workaround for it so parsing
+> continues. I'll push a proper fix for systemd later.
 
-On 28-06-11 16:40, Otavio Salvador wrote:
-> The following changes since commit 15a5642b2a4df41dc0adf9d250cd5085eaf1d69b:
-> 
->   libcap2: drop, it's in oe-core already (2011-06-28 14:57:03 +0200)
-> 
-> are available in the git repository at:
->   git://github.com/OSSystems/meta-oe master
->   https://github.com/OSSystems/meta-oe/tree/master
-> 
-> Otavio Salvador (2):
->   systemd: set all packages PACKAGE_ARCH to MACHINE_ARCH
->   task-x11: set all packages PACKAGE_ARCH to MACHINE_ARCH
+What's the difference if the package will be built from same source?
 
-I'm not going pull those in, since the whole point was to not make them
-machine specific. RP has pushed a workaround for it so parsing
-continues. I'll push a proper fix for systemd later.
+In case you change anything you'll need to rebuild all packages anyway
+so I see no gain in having it per package.
 
-regards,
+Mind to clarify it?
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFOCeqHMkyGM64RGpERAk+QAKCW9ftWIjd/MjH7+fmOoJl0rcEb9gCgrMry
-VQA0yMOKkxirwJ9W7fp5GRA=
-=AhO0
------END PGP SIGNATURE-----
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
