@@ -1,25 +1,28 @@
-Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1QbTpY-0006yz-3S
+	(envelope-from <anders.darander@gmail.com>) id 1QbUZH-0004GD-B4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jun 2011 10:39:36 +0200
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Tue, 28 Jun 2011 10:35:54 +0200
-X-TM-IMSS-Message-ID: <0657b66900003a90@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.0) id 0657b66900003a90 ;
-	Tue, 28 Jun 2011 10:35:54 +0200
-Message-ID: <4E09926B.2000406@nedap.com>
-Date: Tue, 28 Jun 2011 10:35:55 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110516 Lightning/1.0b2 Thunderbird/3.1.10
+	Tue, 28 Jun 2011 11:26:51 +0200
+Received: by vxa37 with SMTP id 37so4024vxa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Jun 2011 02:23:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=pJ53po98cC+gvuRoBa2RLuvmsPC/a4gLML3+lq8ZA3s=;
+	b=mM1ToXxmDIRk2YzmSx/iBlonrJa6U0HrGT4SjFAUB3TBBHBWA5tiF1ZBdjm1KzUEO8
+	v/nF+H9oEitzYHeBPpyo40GMpCt4mdicdYTooN03MdSW3GG4OkAcPtSGby84QqHV05tm
+	K8I2Ic5oXXYzPDNDClGy/LQX+I2dyqK+vR5pk=
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 28 Jun 2011 08:35:54.0945 (UTC)
-	FILETIME=[65520310:01CC356E]
-Subject: how to change system files
+Received: by 10.52.176.106 with SMTP id ch10mr9760932vdc.155.1309252985769;
+	Tue, 28 Jun 2011 02:23:05 -0700 (PDT)
+Received: by 10.52.108.33 with HTTP; Tue, 28 Jun 2011 02:23:05 -0700 (PDT)
+In-Reply-To: <4E09926B.2000406@nedap.com>
+References: <4E09926B.2000406@nedap.com>
+Date: Tue, 28 Jun 2011 11:23:05 +0200
+Message-ID: <BANLkTikvCycdv2g58Z_m3_14yj=nA9-+xg@mail.gmail.com>
+From: Anders Darander <anders.darander@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: how to change system files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,25 +36,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jun 2011 08:39:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 28 Jun 2011 09:26:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi All,
+On Tue, Jun 28, 2011 at 10:35, Jaap de Jong <jaap.dejong@nedap.com> wrote:
+> What is the best way to change files like /etc/network/interfaces?
+> I have about 5 files or so that already are supplied by (default) packages;
+> they are not in 1 package.
+> I would like to have them in one package that I own so that I can easily
+> update them, but this is not necessary.
+> Is overlays the way to go?
 
-annoying question here...
+I'm handling this by using .bbappend's in a local layer.
+This won't give you one package, rather the ability to replace/add files (e.g.
+/etc/network/interfaces) in the standard packages.
 
-What is the best way to change files like /etc/network/interfaces?
-I have about 5 files or so that already are supplied by (default) 
-packages; they are not in 1 package.
-I would like to have them in one package that I own so that I can easily 
-update them, but this is not necessary.
-Is overlays the way to go?
-
-Thanks!
-Jaap
-
-
-
+Regards,
+Anders
 
 
