@@ -1,36 +1,31 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QbbcL-0003YB-5m
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Qbbvc-0004Bp-7n
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jun 2011 18:58:29 +0200
-Received: by bwf20 with SMTP id 20so412253bwf.6
+	Tue, 28 Jun 2011 19:18:24 +0200
+Received: by gxk3 with SMTP id 3so172518gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jun 2011 09:54:44 -0700 (PDT)
+	Tue, 28 Jun 2011 10:14:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=wvA05jGkcij7noCSxX/mLWt0h58gpG1pVho3QckAQBg=;
-	b=BkmsYAXk5MbmVEoIsxgquc1h3Tizo2rRTxH3s27yYDXaIur59LmdBuMs9oA7XrrZyD
-	LgUQJv9kaArFJHCfVynnyZxhIYxXpNY3ymDolvDTgXAmbtGf9K6ztrv7oLNUDc0w6ZNl
-	kVxjxoDg4+61u/2CxRkmnlg4n5OCw88gZkzpM=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=9HvIVkZt1ME0eoE+HQ4NEQFGOt4ILXt5jJyMNXLuCl8=;
+	b=vlWS3q3IPd/lY+8F2UWqwytXH7SlR2xvklnordAF6XIbV1oyhOZnFT7qfnJVyC8RWH
+	tEH/4dE/jV4DKTFtzAwB3bc1rVOeZxyefBPPxRTkcA1bO/w0WQQPSb6OAF/sKAqjMDTY
+	o6taZfr2UmaqGzZKj736pSW7EehmTCsHS8ZO4=
 MIME-Version: 1.0
-Received: by 10.204.39.14 with SMTP id d14mr5582788bke.200.1309280084615; Tue,
-	28 Jun 2011 09:54:44 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.73.70 with HTTP; Tue, 28 Jun 2011 09:54:44 -0700 (PDT)
-In-Reply-To: <iud0mc$e52$1@dough.gmane.org>
+Received: by 10.91.21.37 with SMTP id y37mr8668857agi.63.1309281281872; Tue,
+	28 Jun 2011 10:14:41 -0700 (PDT)
+Received: by 10.90.75.8 with HTTP; Tue, 28 Jun 2011 10:14:41 -0700 (PDT)
+In-Reply-To: <iucsbb$gp2$1@dough.gmane.org>
 References: <cover.1309272010.git.otavio@ossystems.com.br>
 	<iucpq7$uav$1@dough.gmane.org>
 	<BANLkTinqwZhxLGtp997dgKh9BmAD02LU-A@mail.gmail.com>
 	<iucsbb$gp2$1@dough.gmane.org>
-	<BANLkTimmBeR1COc-BRuASQf3O3g20uhkxg@mail.gmail.com>
-	<iud0mc$e52$1@dough.gmane.org>
-Date: Tue, 28 Jun 2011 13:54:44 -0300
-X-Google-Sender-Auth: 6VDP7uTx3SODK3nKR4xywwjTfqc
-Message-ID: <BANLkTikUF5FUaoyWDzJ61dnj7JmNo876eA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+Date: Tue, 28 Jun 2011 19:14:41 +0200
+Message-ID: <BANLkTinrcfQvNW4=s5vbjD=8FhaqVYpbEQ@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [meta-oe][PATCH 0/2] Fix parse errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,31 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jun 2011 16:58:29 -0000
+X-List-Received-Date: Tue, 28 Jun 2011 17:18:24 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 28, 2011 at 13:49, Koen Kooi <koen@dominion.thruhere.net> wrote=
-:
->> Can you describe a use case?
+2011/6/28 Koen Kooi <koen@dominion.thruhere.net>
+
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> Rolling out a fix for the generic package without having to rebuild it N
-> times.
+> On 28-06-11 16:59, Otavio Salvador wrote:
+> > On Tue, Jun 28, 2011 at 11:51, Koen Kooi <koen@dominion.thruhere.net>
+> wrote:
+> >> I'm not going pull those in, since the whole point was to not make them
+> >> machine specific. RP has pushed a workaround for it so parsing
+> >> continues. I'll push a proper fix for systemd later.
+> >
+> > What's the difference if the package will be built from same source?
+> >
+> > In case you change anything you'll need to rebuild all packages anyway
+> > so I see no gain in having it per package.
+>
+> It makes it easier to deploy updates for the main packages (e.g.
+> sysvinit, systemd) to all the targets without having to build it for all
+> targets. It's a weird optimization, but makes life a lot easier for
+> people needing to support a ton of machines :)
+>
 
-When doing this fix you should bump PR, right? in this case, this will
-be (or ought to be) rebuild for all machines thus for me seems it will
-be the same end result.
+Hm. saving some CPU cycles and wall clock time makes life a lot easier.
+Guess you haven't too much of a life then :-)
+No kidding, why not keep things simple. and elegant.
+(and actually people needing to maintain a lot of machines and keeping them
+up to date is somewhat an oddity anyway; My experience is that most embedded
+developers need to support only a few machines and typically freeze their
+sources and stabilize their product).
 
-The only use case I see is very risky since it fully depends on the
-developper to know which machine it needs to be build to and like.
-This IMO is wrong and the risk of forget a need rebuild is bigger then
-the reduction of build and cpu cycles.
-
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
-
+Have fun!
+Frans
 
