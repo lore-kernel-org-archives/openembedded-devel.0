@@ -1,34 +1,25 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QbSPf-0003Q1-7Z for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jun 2011 09:08:47 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QbSM6-0000Zo-Ja for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jun 2011 09:05:06 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jun 2011 09:05:06 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jun 2011 09:05:06 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 28 Jun 2011 08:56:31 +0200
-Message-ID: <iubtuv$jkv$3@dough.gmane.org>
-References: <1309214125-3523-1-git-send-email-j-lance1@ti.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1309214125-3523-1-git-send-email-j-lance1@ti.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH 1/1] am-benchmarks: Remove platform dependencies
+	(envelope-from <jaap.dejong@nedap.com>) id 1QbTpY-0006yz-3S
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Jun 2011 10:39:36 +0200
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Tue, 28 Jun 2011 10:35:54 +0200
+X-TM-IMSS-Message-ID: <0657b66900003a90@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.0) id 0657b66900003a90 ;
+	Tue, 28 Jun 2011 10:35:54 +0200
+Message-ID: <4E09926B.2000406@nedap.com>
+Date: Tue, 28 Jun 2011 10:35:55 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110516 Lightning/1.0b2 Thunderbird/3.1.10
+MIME-Version: 1.0
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 28 Jun 2011 08:35:54.0945 (UTC)
+	FILETIME=[65520310:01CC356E]
+Subject: how to change system files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,28 +33,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jun 2011 07:08:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 28 Jun 2011 08:39:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi All,
 
-On 28-06-11 00:35, Jeff Lance wrote:
-> * Remove platform dependencies and use architecture dependencies instead
-> * Use OE BASE_PACKAGE_ARCH to determine architecture
-> * Update the SRCREV to revision 65
-> * Update the recipe revision to 1.3
-> NOTE - architecure dependency and INSANE_SKIP can be removed once CFLAGS can be passed into CCSv5 project makefile
+annoying question here...
 
-NAK, patch the makefiles in OE to work with CFLAGS and LDFLAGS.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+What is the best way to change files like /etc/network/interfaces?
+I have about 5 files or so that already are supplied by (default) 
+packages; they are not in 1 package.
+I would like to have them in one package that I own so that I can easily 
+update them, but this is not necessary.
+Is overlays the way to go?
 
-iD8DBQFOCXsfMkyGM64RGpERAukZAJ9h255ZZXglaxGDa9NacD+P/VoDwACeMC8u
-VDbzOnP2HcuoztWijKjWjqI=
-=nFoX
------END PGP SIGNATURE-----
+Thanks!
+Jaap
+
+
 
 
 
