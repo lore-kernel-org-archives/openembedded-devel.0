@@ -1,31 +1,33 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Qbbvc-0004Bp-7n
+	(envelope-from <Tom_Rini@mentor.com>) id 1Qbbxo-0004Ij-OZ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jun 2011 19:18:24 +0200
-Received: by gxk3 with SMTP id 3so172518gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jun 2011 10:14:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=9HvIVkZt1ME0eoE+HQ4NEQFGOt4ILXt5jJyMNXLuCl8=;
-	b=vlWS3q3IPd/lY+8F2UWqwytXH7SlR2xvklnordAF6XIbV1oyhOZnFT7qfnJVyC8RWH
-	tEH/4dE/jV4DKTFtzAwB3bc1rVOeZxyefBPPxRTkcA1bO/w0WQQPSb6OAF/sKAqjMDTY
-	o6taZfr2UmaqGzZKj736pSW7EehmTCsHS8ZO4=
+	Tue, 28 Jun 2011 19:20:40 +0200
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1QbbuE-0002lh-AO from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Jun 2011 10:16:58 -0700
+Received: from SVR-ORW-FEM-03.mgc.mentorg.com ([147.34.97.39]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Tue, 28 Jun 2011 10:16:58 -0700
+Received: from [172.30.80.197] (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
+	(147.34.97.39) with Microsoft SMTP Server id 14.1.289.1;
+	Tue, 28 Jun 2011 10:16:57 -0700
+Message-ID: <4E0A0C85.80103@mentor.com>
+Date: Tue, 28 Jun 2011 10:16:53 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
 MIME-Version: 1.0
-Received: by 10.91.21.37 with SMTP id y37mr8668857agi.63.1309281281872; Tue,
-	28 Jun 2011 10:14:41 -0700 (PDT)
-Received: by 10.90.75.8 with HTTP; Tue, 28 Jun 2011 10:14:41 -0700 (PDT)
-In-Reply-To: <iucsbb$gp2$1@dough.gmane.org>
-References: <cover.1309272010.git.otavio@ossystems.com.br>
-	<iucpq7$uav$1@dough.gmane.org>
-	<BANLkTinqwZhxLGtp997dgKh9BmAD02LU-A@mail.gmail.com>
-	<iucsbb$gp2$1@dough.gmane.org>
-Date: Tue, 28 Jun 2011 19:14:41 +0200
-Message-ID: <BANLkTinrcfQvNW4=s5vbjD=8FhaqVYpbEQ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+To: <openembedded-devel@lists.openembedded.org>
+References: <cover.1309272010.git.otavio@ossystems.com.br>	<iucpq7$uav$1@dough.gmane.org>	<BANLkTinqwZhxLGtp997dgKh9BmAD02LU-A@mail.gmail.com>	<iucsbb$gp2$1@dough.gmane.org>	<BANLkTimmBeR1COc-BRuASQf3O3g20uhkxg@mail.gmail.com>	<iud0mc$e52$1@dough.gmane.org>
+	<BANLkTikUF5FUaoyWDzJ61dnj7JmNo876eA@mail.gmail.com>
+In-Reply-To: <BANLkTikUF5FUaoyWDzJ61dnj7JmNo876eA@mail.gmail.com>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 28 Jun 2011 17:16:58.0168 (UTC)
+	FILETIME=[2FA74380:01CC35B7]
 Subject: Re: [meta-oe][PATCH 0/2] Fix parse errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,40 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jun 2011 17:18:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 28 Jun 2011 17:20:41 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
-2011/6/28 Koen Kooi <koen@dominion.thruhere.net>
+On 06/28/2011 09:54 AM, Otavio Salvador wrote:
+> On Tue, Jun 28, 2011 at 13:49, Koen Kooi <koen@dominion.thruhere.net> wrote:
+>>> Can you describe a use case?
+>>
+>> Rolling out a fix for the generic package without having to rebuild it N
+>> times.
+> 
+> When doing this fix you should bump PR, right? in this case, this will
+> be (or ought to be) rebuild for all machines thus for me seems it will
+> be the same end result.
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 28-06-11 16:59, Otavio Salvador wrote:
-> > On Tue, Jun 28, 2011 at 11:51, Koen Kooi <koen@dominion.thruhere.net>
-> wrote:
-> >> I'm not going pull those in, since the whole point was to not make them
-> >> machine specific. RP has pushed a workaround for it so parsing
-> >> continues. I'll push a proper fix for systemd later.
-> >
-> > What's the difference if the package will be built from same source?
-> >
-> > In case you change anything you'll need to rebuild all packages anyway
-> > so I see no gain in having it per package.
->
-> It makes it easier to deploy updates for the main packages (e.g.
-> sysvinit, systemd) to all the targets without having to build it for all
-> targets. It's a weird optimization, but makes life a lot easier for
-> people needing to support a ton of machines :)
->
+It will be, yes.  What Koen is saying is that if you're a feed using
+distribution you don't NEED to kick off the build for N machines, just N
+architectures (since you can use sysvinit-getty-r2 and sysvinit-r3 just
+fine, if there weren't any changes to the getty subpackage).
 
-Hm. saving some CPU cycles and wall clock time makes life a lot easier.
-Guess you haven't too much of a life then :-)
-No kidding, why not keep things simple. and elegant.
-(and actually people needing to maintain a lot of machines and keeping them
-up to date is somewhat an oddity anyway; My experience is that most embedded
-developers need to support only a few machines and typically freeze their
-sources and stabilize their product).
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
-Have fun!
-Frans
 
