@@ -1,38 +1,33 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QbcQ6-0004vn-Ta
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1QbcZJ-00055N-Ks
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jun 2011 19:49:54 +0200
-Received: by bwf20 with SMTP id 20so454154bwf.6
+	Tue, 28 Jun 2011 19:59:25 +0200
+Received: by gxk3 with SMTP id 3so189570gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jun 2011 10:46:13 -0700 (PDT)
+	Tue, 28 Jun 2011 10:55:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=E1fVIbZNXoHErozl1f3lsx8c33S+I3l24uvAS0FjmaA=;
-	b=Mw35pQykaXa/GtGQt1A4uah8FQgJB3yNz1ImYkWBDDBZrC0GQhUVDYuIOEXK9Piuxm
-	gHTxUPh2o1iv1555aZCzlnyyWx4pJtFMHzVeyM01QXPRwmCh2gCxZZFoG2ilvfo8viFf
-	UJr91WaR+tpNs0GAMC6Um9UzK/hLIKID5is1Y=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=laU7ul5e07V9xOPSaJCC/Xj3Q4ojiE2hadfPTJQ2Sf8=;
+	b=pG3cKQS9/GpPW235OhdPMHj0OKtJ6VgTNm7VQVEC13EFNEFB4KcDH+K6ZYprKU1MS5
+	NeC32Kn0iDTJKHkUOzwR49yRJDibKk6SOIu6v4TSIrl02c62MeL/utTaZVXFMD8LSlGB
+	o4qW3uo5j1PEwkbQgjd2mkHGOa7IyhX/xLC28=
 MIME-Version: 1.0
-Received: by 10.204.127.14 with SMTP id e14mr2492681bks.65.1309283173418; Tue,
-	28 Jun 2011 10:46:13 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.73.70 with HTTP; Tue, 28 Jun 2011 10:46:13 -0700 (PDT)
-In-Reply-To: <4E0A0C85.80103@mentor.com>
+Received: by 10.91.4.21 with SMTP id g21mr7173928agi.198.1309283740875; Tue,
+	28 Jun 2011 10:55:40 -0700 (PDT)
+Received: by 10.90.75.8 with HTTP; Tue, 28 Jun 2011 10:55:40 -0700 (PDT)
+In-Reply-To: <4E0A0D7B.3000602@mentor.com>
 References: <cover.1309272010.git.otavio@ossystems.com.br>
 	<iucpq7$uav$1@dough.gmane.org>
 	<BANLkTinqwZhxLGtp997dgKh9BmAD02LU-A@mail.gmail.com>
 	<iucsbb$gp2$1@dough.gmane.org>
-	<BANLkTimmBeR1COc-BRuASQf3O3g20uhkxg@mail.gmail.com>
-	<iud0mc$e52$1@dough.gmane.org>
-	<BANLkTikUF5FUaoyWDzJ61dnj7JmNo876eA@mail.gmail.com>
-	<4E0A0C85.80103@mentor.com>
-Date: Tue, 28 Jun 2011 14:46:13 -0300
-X-Google-Sender-Auth: v-S_5FCx-9ts15o6vz-AzlDDt38
-Message-ID: <BANLkTi=MbLTvKeV=9Tj+XQhZweR5NSXL+Q@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	<BANLkTinrcfQvNW4=s5vbjD=8FhaqVYpbEQ@mail.gmail.com>
+	<4E0A0D7B.3000602@mentor.com>
+Date: Tue, 28 Jun 2011 19:55:40 +0200
+Message-ID: <BANLkTiknObFkD03qK=QxDeOc4oNaJJN0VA@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [meta-oe][PATCH 0/2] Fix parse errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,25 +42,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jun 2011 17:49:55 -0000
+X-List-Received-Date: Tue, 28 Jun 2011 17:59:26 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 28, 2011 at 14:16, Tom Rini <tom_rini@mentor.com> wrote:
-> It will be, yes. =A0What Koen is saying is that if you're a feed using
-> distribution you don't NEED to kick off the build for N machines, just N
-> architectures (since you can use sysvinit-getty-r2 and sysvinit-r3 just
-> fine, if there weren't any changes to the getty subpackage).
+2011/6/28 Tom Rini <tom_rini@mentor.com>
 
-This is broken by design my POV; the right way to handle is to split
-the package (as Koen has did) but IMO having this on /one/ binary
-package of same recipe is wrong.
+> On 06/28/2011 10:14 AM, Frans Meulenbroeks wrote:
+> > 2011/6/28 Koen Kooi <koen@dominion.thruhere.net>
+> >
+> >> -----BEGIN PGP SIGNED MESSAGE-----
+> >> Hash: SHA1
+> >>
+> >> On 28-06-11 16:59, Otavio Salvador wrote:
+> >>> On Tue, Jun 28, 2011 at 11:51, Koen Kooi <koen@dominion.thruhere.net>
+> >> wrote:
+> >>>> I'm not going pull those in, since the whole point was to not make
+> them
+> >>>> machine specific. RP has pushed a workaround for it so parsing
+> >>>> continues. I'll push a proper fix for systemd later.
+> >>>
+> >>> What's the difference if the package will be built from same source?
+> >>>
+> >>> In case you change anything you'll need to rebuild all packages anyway
+> >>> so I see no gain in having it per package.
+> >>
+> >> It makes it easier to deploy updates for the main packages (e.g.
+> >> sysvinit, systemd) to all the targets without having to build it for all
+> >> targets. It's a weird optimization, but makes life a lot easier for
+> >> people needing to support a ton of machines :)
+> >>
+> >
+> > Hm. saving some CPU cycles and wall clock time makes life a lot easier.
+> > Guess you haven't too much of a life then :-)
+> > No kidding, why not keep things simple. and elegant.
+> > (and actually people needing to maintain a lot of machines and keeping
+> them
+> > up to date is somewhat an oddity anyway; My experience is that most
+> embedded
+> > developers need to support only a few machines and typically freeze their
+> > sources and stabilize their product).
+>
+> Really?  One of those big requests we see a lot is for things like "how
+> can I support the N different revs of the board for this product".
+> Looking over at the kernel side of things that was one of the drivers
+> for device tree stuff.  So yes, outside of community based distributions
+> like Angstrom and SHR and SlugOS and ... there are commercial uses for
+> this change as well.  And it doesn't change the world of one machine
+> embedded products at all.
+>
+>
+The vendors of embedded products I am aware of (and then I'm talking about
+TV's, NAS-es, Audio systems etc etc but also boards running embedded linux
+code) focus on stability. Actually none of my managers ever cared if we were
+running the latest version of Linux. They do care about stability and
+maturity. Some of the products I need to care about still use a 2.6.24
+kernel. No way this is going to move. Customers are happy with the product,
+and do not care about kernel etc, so for these products only some bug fixing
+is done. And yes, we have boards with multiple revs, but we try to keep the
+changes small and localized. This might mean some kernel fixes, but
+generally no upgrades to newer versions or so.
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Of course this is my experience and other places might do things
+differently. And of course this is going off-topic.
 
+Have fun! Frans.
 
