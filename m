@@ -1,35 +1,34 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QbSG7-0002o4-Qm for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jun 2011 08:58:55 +0200
+	id 1QbSKp-0003Hn-K3 for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Jun 2011 09:03:47 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QbSCP-0004pp-3y for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jun 2011 08:55:05 +0200
+	id 1QbSHF-0006rs-5J for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Jun 2011 09:00:05 +0200
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jun 2011 08:55:05 +0200
+	Tue, 28 Jun 2011 09:00:05 +0200
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jun 2011 08:55:05 +0200
+	Tue, 28 Jun 2011 09:00:05 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 28 Jun 2011 08:54:11 +0200
-Message-ID: <iubtqj$jkv$2@dough.gmane.org>
-References: <cover.1309203431.git.otavio@ossystems.com.br>	<0a7128c3166d0729292e664918b76cf5b7074fe5.1309203431.git.otavio@ossystems.com.br>	<1309204699.21379.141.camel@mattotaupa>
-	<BANLkTim+B0d3-E=0xVCuaYBBPBYEj5KjOg@mail.gmail.com>
+Date: Tue, 28 Jun 2011 08:57:32 +0200
+Message-ID: <iubu0s$jkv$4@dough.gmane.org>
+References: <1309203161-25143-1-git-send-email-raj.khem@gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <BANLkTim+B0d3-E=0xVCuaYBBPBYEj5KjOg@mail.gmail.com>
+In-Reply-To: <1309203161-25143-1-git-send-email-raj.khem@gmail.com>
 X-Enigmail-Version: 1.0.1
-Subject: Re: [[meta-oe][PATCH 1/4] xf86-video-geode: add 2.11.12 version
+Subject: Re: [meta-oe][PATCH] gcc-common-4.6.inc: Set ARM_INSTRUCTION_SET to arm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,35 +42,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jun 2011 06:58:55 -0000
+X-List-Received-Date: Tue, 28 Jun 2011 07:03:47 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 27-06-11 22:19, Otavio Salvador wrote:
-> On Mon, Jun 27, 2011 at 16:58, Paul Menzel
-> <paulepanter@users.sourceforge.net> wrote:
-> ...
->>> +DESCRIPTION = "X.org server -- Geode GX2/LX display driver"
->>> +PE = "1"
->>
->> please remove the `PE` line as I wrote already in the last review.
+On 27-06-11 21:32, Khem Raj wrote:
+> Otherwise it will compile libgcc in thumb mode when thumb
+> mode is selected and libgcc in thumb mode does not work
+> well.
 > 
-> Did it locally for next pull request.
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc |    3 ++-
+>  1 files changed, 2 insertions(+), 1 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc b/meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc
+> index 059f441..e5a1fba 100644
+> --- a/meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc
+> +++ b/meta-oe/recipes-devtools/gcc/gcc-common-4.6.inc
+> @@ -1,3 +1,4 @@
+>  # this will prepend this layer to FILESPATH
+>  FILESEXTRAPATHS := "${THISDIR}/gcc-4.6"
+> -PRINC = "0"
+> +PRINC = "1"
+> +ARM_INSTRUCTION_SET = "arm"
 
-Do you mean you updated the branch or that you will do another pull request?
-
-regards,
-
-Koen
+Thanks, applied.
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFOCXqTMkyGM64RGpERAogzAJ4h9D2Ea6fu/3YUopR/4tJj6L47YACggYiA
-I59eHjrzxa93wzF6GWfoKgU=
-=DLih
+iD8DBQFOCXtbMkyGM64RGpERArJkAJ0Z3VLPnr/R5V/q54eMDv+7hU5NUQCcCbPU
+OPr+3vAQzTwSq5HQRStntPQ=
+=yR3e
 -----END PGP SIGNATURE-----
 
 
