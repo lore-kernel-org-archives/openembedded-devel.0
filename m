@@ -1,33 +1,38 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Qbc1m-0004Qr-8d
+	(envelope-from <otavio.salvador@gmail.com>) id 1QbcQ6-0004vn-Ta
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jun 2011 19:24:46 +0200
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1QbbyC-00039F-IW from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jun 2011 10:21:04 -0700
-Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Tue, 28 Jun 2011 10:20:41 -0700
-Received: from [172.30.80.197] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.1.289.1;
-	Tue, 28 Jun 2011 10:21:04 -0700
-Message-ID: <4E0A0D7B.3000602@mentor.com>
-Date: Tue, 28 Jun 2011 10:20:59 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+	Tue, 28 Jun 2011 19:49:54 +0200
+Received: by bwf20 with SMTP id 20so454154bwf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Jun 2011 10:46:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=E1fVIbZNXoHErozl1f3lsx8c33S+I3l24uvAS0FjmaA=;
+	b=Mw35pQykaXa/GtGQt1A4uah8FQgJB3yNz1ImYkWBDDBZrC0GQhUVDYuIOEXK9Piuxm
+	gHTxUPh2o1iv1555aZCzlnyyWx4pJtFMHzVeyM01QXPRwmCh2gCxZZFoG2ilvfo8viFf
+	UJr91WaR+tpNs0GAMC6Um9UzK/hLIKID5is1Y=
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <cover.1309272010.git.otavio@ossystems.com.br>	<iucpq7$uav$1@dough.gmane.org>	<BANLkTinqwZhxLGtp997dgKh9BmAD02LU-A@mail.gmail.com>	<iucsbb$gp2$1@dough.gmane.org>
-	<BANLkTinrcfQvNW4=s5vbjD=8FhaqVYpbEQ@mail.gmail.com>
-In-Reply-To: <BANLkTinrcfQvNW4=s5vbjD=8FhaqVYpbEQ@mail.gmail.com>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 28 Jun 2011 17:20:41.0671 (UTC)
-	FILETIME=[B4DF1D70:01CC35B7]
+Received: by 10.204.127.14 with SMTP id e14mr2492681bks.65.1309283173418; Tue,
+	28 Jun 2011 10:46:13 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.73.70 with HTTP; Tue, 28 Jun 2011 10:46:13 -0700 (PDT)
+In-Reply-To: <4E0A0C85.80103@mentor.com>
+References: <cover.1309272010.git.otavio@ossystems.com.br>
+	<iucpq7$uav$1@dough.gmane.org>
+	<BANLkTinqwZhxLGtp997dgKh9BmAD02LU-A@mail.gmail.com>
+	<iucsbb$gp2$1@dough.gmane.org>
+	<BANLkTimmBeR1COc-BRuASQf3O3g20uhkxg@mail.gmail.com>
+	<iud0mc$e52$1@dough.gmane.org>
+	<BANLkTikUF5FUaoyWDzJ61dnj7JmNo876eA@mail.gmail.com>
+	<4E0A0C85.80103@mentor.com>
+Date: Tue, 28 Jun 2011 14:46:13 -0300
+X-Google-Sender-Auth: v-S_5FCx-9ts15o6vz-AzlDDt38
+Message-ID: <BANLkTi=MbLTvKeV=9Tj+XQhZweR5NSXL+Q@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH 0/2] Fix parse errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,52 +47,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jun 2011 17:24:46 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 28 Jun 2011 17:49:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 06/28/2011 10:14 AM, Frans Meulenbroeks wrote:
-> 2011/6/28 Koen Kooi <koen@dominion.thruhere.net>
-> 
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 28-06-11 16:59, Otavio Salvador wrote:
->>> On Tue, Jun 28, 2011 at 11:51, Koen Kooi <koen@dominion.thruhere.net>
->> wrote:
->>>> I'm not going pull those in, since the whole point was to not make them
->>>> machine specific. RP has pushed a workaround for it so parsing
->>>> continues. I'll push a proper fix for systemd later.
->>>
->>> What's the difference if the package will be built from same source?
->>>
->>> In case you change anything you'll need to rebuild all packages anyway
->>> so I see no gain in having it per package.
->>
->> It makes it easier to deploy updates for the main packages (e.g.
->> sysvinit, systemd) to all the targets without having to build it for all
->> targets. It's a weird optimization, but makes life a lot easier for
->> people needing to support a ton of machines :)
->>
-> 
-> Hm. saving some CPU cycles and wall clock time makes life a lot easier.
-> Guess you haven't too much of a life then :-)
-> No kidding, why not keep things simple. and elegant.
-> (and actually people needing to maintain a lot of machines and keeping them
-> up to date is somewhat an oddity anyway; My experience is that most embedded
-> developers need to support only a few machines and typically freeze their
-> sources and stabilize their product).
+On Tue, Jun 28, 2011 at 14:16, Tom Rini <tom_rini@mentor.com> wrote:
+> It will be, yes. =A0What Koen is saying is that if you're a feed using
+> distribution you don't NEED to kick off the build for N machines, just N
+> architectures (since you can use sysvinit-getty-r2 and sysvinit-r3 just
+> fine, if there weren't any changes to the getty subpackage).
 
-Really?  One of those big requests we see a lot is for things like "how
-can I support the N different revs of the board for this product".
-Looking over at the kernel side of things that was one of the drivers
-for device tree stuff.  So yes, outside of community based distributions
-like Angstrom and SHR and SlugOS and ... there are commercial uses for
-this change as well.  And it doesn't change the world of one machine
-embedded products at all.
+This is broken by design my POV; the right way to handle is to split
+the package (as Koen has did) but IMO having this on /one/ binary
+package of same recipe is wrong.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
