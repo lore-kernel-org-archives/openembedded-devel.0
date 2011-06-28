@@ -1,29 +1,27 @@
-Received: from mail-fx0-f51.google.com ([209.85.161.51])
+Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders.darander@gmail.com>) id 1QbWnc-00032w-JE
+	(envelope-from <jaap.dejong@nedap.com>) id 1QbWu3-0003B0-5F
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jun 2011 13:49:48 +0200
-Received: by fxh10 with SMTP id 10so140355fxh.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jun 2011 04:46:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=WjvnidDIi0rfvqBedeedAVftYPOjjtadFzlIVYceY+0=;
-	b=k9B2N7z7rST+bI2w1NEpZLPwOJ3NLqFqhsqD/RK1pLNSLE80dOmxe1H8naDnU48Yza
-	V9K4B4ksKeNtXNfiJglocTeguGFR/p4RauZBTzyXaoRh1sgd2xPvYOi7eWyaBlXZLlPr
-	U/+cyVWkM/IqJJBgFWy3lkb5P1PwGKMR5G0H4=
+	Tue, 28 Jun 2011 13:56:27 +0200
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Tue, 28 Jun 2011 13:52:46 +0200
+X-TM-IMSS-Message-ID: <070bf03a000045e8@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.0) id 070bf03a000045e8 ;
+	Tue, 28 Jun 2011 13:52:45 +0200
+Message-ID: <4E09C08E.1030702@nedap.com>
+Date: Tue, 28 Jun 2011 13:52:46 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110516 Lightning/1.0b2 Thunderbird/3.1.10
 MIME-Version: 1.0
-Received: by 10.223.51.4 with SMTP id b4mr1355917fag.93.1309261566676; Tue, 28
-	Jun 2011 04:46:06 -0700 (PDT)
-Received: by 10.223.111.130 with HTTP; Tue, 28 Jun 2011 04:46:06 -0700 (PDT)
-In-Reply-To: <4E09A393.2050000@nedap.com>
-References: <4E09926B.2000406@nedap.com>
-	<BANLkTikvCycdv2g58Z_m3_14yj=nA9-+xg@mail.gmail.com>
-	<4E09A393.2050000@nedap.com>
-Date: Tue, 28 Jun 2011 13:46:06 +0200
-Message-ID: <BANLkTikXtSracNZvm2KMH87UKjBYv4xcsA@mail.gmail.com>
-From: Anders Darander <anders.darander@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <4E09926B.2000406@nedap.com>	<BANLkTikvCycdv2g58Z_m3_14yj=nA9-+xg@mail.gmail.com>	<4E09A393.2050000@nedap.com>
+	<BANLkTikXtSracNZvm2KMH87UKjBYv4xcsA@mail.gmail.com>
+In-Reply-To: <BANLkTikXtSracNZvm2KMH87UKjBYv4xcsA@mail.gmail.com>
+X-OriginalArrivalTime: 28 Jun 2011 11:52:46.0080 (UTC)
+	FILETIME=[E54E3000:01CC3589]
 Subject: Re: how to change system files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,21 +36,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jun 2011 11:49:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 28 Jun 2011 11:56:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jun 28, 2011 at 11:49, Jaap de Jong <jaap.dejong@nedap.com> wrote:
-> On 06/28/2011 11:23 AM, Anders Darander wrote:
-> Yeah, but what if I decide at a certain point in time to change the
-> /etc/network/interfaces file?
-> Normally I would increment PR in the bb file and then build it.
-> And finally at the target I would do opkg upgrade.
+On 06/28/2011 01:46 PM, Anders Darander wrote:
+> On Tue, Jun 28, 2011 at 11:49, Jaap de Jong<jaap.dejong@nedap.com>  wrote:
+>> On 06/28/2011 11:23 AM, Anders Darander wrote:
+>> Yeah, but what if I decide at a certain point in time to change the
+>> /etc/network/interfaces file?
+>> Normally I would increment PR in the bb file and then build it.
+>> And finally at the target I would do opkg upgrade.
+> Just as Phil said, you increment PR in your .bbappend-file.
+>
+> I'm oftend appending to the PR in my .bbappend-files.
+Thanks! I will try it.
 
-Just as Phil said, you increment PR in your .bbappend-file.
-
-I'm oftend appending to the PR in my .bbappend-files.
-
-Regards,
-Anders
 
 
