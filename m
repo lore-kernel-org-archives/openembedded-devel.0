@@ -1,26 +1,33 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1Qbwp9-00008K-NI; Wed, 29 Jun 2011 17:37:07 +0200
-Received: by pvf24 with SMTP id 24so915953pvf.6
-	for <multiple recipients>; Wed, 29 Jun 2011 08:33:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=3DqjJqBx5b2uXQEC2EJIsZ0edH6kWiZfTsv+1diMF2Q=;
-	b=eodBnybzOJZy08CXlFC0RwoNjQjo2kr1+KdoqU7Kki9Bg3EIYD0pSuC+Dm3tYuDw/7
-	3DaOHsedcl7TI92aigNxtKuXI7OffcYiXXK0xuACdi9jSa3dmMqaq7VVTw6DcRFd269G
-	HYjsv0qIqszuU7UsUDGP0aU5WSGPwG8YDT9QU=
-Received: by 10.68.36.234 with SMTP id t10mr1173331pbj.361.1309361604175; Wed,
-	29 Jun 2011 08:33:24 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.68.48.105 with HTTP; Wed, 29 Jun 2011 08:32:54 -0700 (PDT)
-In-Reply-To: <201106291728.47032.schnitzeltony@gmx.de>
-References: <201106291728.47032.schnitzeltony@gmx.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 29 Jun 2011 08:32:54 -0700
-Message-ID: <BANLkTin06jiHrgrf2C3eEbkdVrtcYyOShQ@mail.gmail.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Qbwtt-0000Ji-3t for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Jun 2011 17:42:01 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QbwqG-0001Ps-Tw for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Jun 2011 17:38:16 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Jun 2011 17:38:16 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Jun 2011 17:38:16 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 29 Jun 2011 17:38:04 +0200
+Message-ID: <iufgss$dfn$1@dough.gmane.org>
+References: <201106291728.47032.schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <201106291728.47032.schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.0.1
 Cc: openembedded-core@lists.openembedded.org
 Subject: Re: In which meta/layer is a home for not yet supported machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -36,42 +43,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jun 2011 15:37:08 -0000
+X-List-Received-Date: Wed, 29 Jun 2011 15:42:01 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jun 29, 2011 at 8:28 AM, Andreas Mueller <schnitzeltony@gmx.de> wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 29-06-11 17:28, Andreas Mueller wrote:
 > Hi,
->
-> just started to collect first oe-core experiences and would like to get the
+> 
+> just started to collect first oe-core experiences and would like to get the 
 > hardware on my (or friend's) desk supported. To check already available I did
->
+> 
 > find -name "*.conf" | grep machine
->
+> 
 > and miss
->
+> 
 > o gumstix overo ( http://www.gumstix.com/store/index.php?cPath=33 )
-> o tx28 ( http://www.karo-electronics.com/tx28.html / have prepared support for
-> oe but would like to get this to oe-core )
-> o mx28evk (
-> http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=MCIMX28EVKJ&fr=g
-> )
->
-> In which meta/layer is the first place for configurations/bootloader/kernels?
 
+I know Steve Sakoman is working on OE-core, so we might see an gumstix
+layer soon.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-you would need meta layer for the new machines. There already are some layers
-checkout angstrom if the machines do not fit into those existing you
-can create a new
-layer something like meta-gumstix
->
-> Regards
->
-> Andreas
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+iD8DBQFOC0bcMkyGM64RGpERAvNRAJ9pteDdIiX0gMXidaukLIPcAhrA7gCeLRs/
+EhA3O27U1XrmEuSwNSi3s5s=
+=UZdp
+-----END PGP SIGNATURE-----
+
 
 
