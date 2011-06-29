@@ -1,26 +1,23 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1Qbx1l-0000VT-4K
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <philb@gnu.org>) id 1Qbx5l-0000dE-Tr
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Jun 2011 17:50:09 +0200
-Received: (qmail invoked by alias); 29 Jun 2011 15:46:23 -0000
-Received: from p5B0A22BD.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.34.189]
-	by mail.gmx.net (mp015) with SMTP; 29 Jun 2011 17:46:23 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1+JH3UhOqaJK0Gl1/TGDomKwQUyP17zcwyyGZIcAj
-	ey7Y9tnYLHCdLE
-From: Andreas Mueller <schnitzeltony@gmx.de>
+	Wed, 29 Jun 2011 17:54:17 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Qbx2D-0001Fo-Jo
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Jun 2011 17:50:37 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Jun 2011 17:48:08 +0200
-User-Agent: KMail/1.13.7 (Linux/2.6.35.13-92.fc14.x86_64; KDE/4.6.3; x86_64; ;
-	)
+In-Reply-To: <201106291748.09067.schnitzeltony@gmx.de>
 References: <201106291728.47032.schnitzeltony@gmx.de>
 	<BANLkTin06jiHrgrf2C3eEbkdVrtcYyOShQ@mail.gmail.com>
-In-Reply-To: <BANLkTin06jiHrgrf2C3eEbkdVrtcYyOShQ@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <201106291748.09067.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
+	<201106291748.09067.schnitzeltony@gmx.de>
+Date: Wed, 29 Jun 2011 16:50:35 +0100
+Message-ID: <1309362635.2551.62.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
 Subject: Re: In which meta/layer is a home for not yet supported machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,30 +32,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jun 2011 15:50:09 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Wed, 29 Jun 2011 15:54:18 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Wednesday, June 29, 2011 05:32:54 PM Khem Raj wrote:
-> you would need meta layer for the new machines. There already are some
-> layers checkout angstrom 
-AFAIK there is no machine conf in angstrom
-> if the machines do not fit into those existing
-> you can create a new
-> layer something like meta-gumstix
-Open and maintain git-repos
+On Wed, 2011-06-29 at 17:48 +0200, Andreas Mueller wrote:
+> Open and maintain git-repos
+> 
+> meta-gumstix
+> meta-freescale
+> meta-karo
+> 
+> and get them supported by angstrom? Is that a solution for a hobbyist dev (not 
+> working for one of these companies)? 
 
-meta-gumstix
-meta-freescale
-meta-karo
+Yes, that's pretty much the size of it.  Creating the repos is fairly
+trivial, you can host them on github or gitorious or anywhere you like.
+Maintaining them ought to also be fairly low-effort since a basic
+machine layer doesn't actually need to contain very much.
 
-and get them supported by angstrom? Is that a solution for a hobbyist dev (not 
-working for one of these companies)? Or wait until the companies will get this 
-done?
+p.
 
-sorry but maybe I am missing something
-
-Andreas
 
 
