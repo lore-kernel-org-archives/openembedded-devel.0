@@ -1,35 +1,34 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QbjnN-0007ry-Pg
+	(envelope-from <otavio.salvador@gmail.com>) id 1Qbjno-0007tY-Ut
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Jun 2011 03:42:25 +0200
-Received: by pwi1 with SMTP id 1so580611pwi.6
+	Wed, 29 Jun 2011 03:42:53 +0200
+Received: by bwf20 with SMTP id 20so775161bwf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jun 2011 18:38:43 -0700 (PDT)
+	Tue, 28 Jun 2011 18:39:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=U8AUAR3IYLdFetzkIUyBj1M+CV3GrL+4PCxLSJI21D4=;
-	b=cGjNxslN0hDnQzG6Ur9z4TRXTR+PYqgC7pcuYTAW9cMxWhYOq4n7pAh9WX8Ishsboj
-	s+4C6wr7KxVOUxlAIJ7dR0tii3XawFRPGqg6oCMVXZs5ThxjGD9fGVuNILyfMNLHBlKP
-	s9PKnPsgPYuKTPwZA0IS5gk0IAvPbCODBBZHY=
-Received: by 10.68.34.101 with SMTP id y5mr334215pbi.139.1309311522893;
-	Tue, 28 Jun 2011 18:38:42 -0700 (PDT)
-Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id q5sm539120pbk.58.2011.06.28.18.38.42
-	(version=SSLv3 cipher=OTHER); Tue, 28 Jun 2011 18:38:42 -0700 (PDT)
-Message-ID: <4E0A8221.8070304@gmail.com>
-Date: Tue, 28 Jun 2011 18:38:41 -0700
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110516 Lightning/1.0b2 Thunderbird/3.1.10
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=5pSLpYOZ1MONtS7ruplVnPGunZKM4NAWzXK5rBxlLFE=;
+	b=l6gdMUcZ4eGERrqeRf++tG7F/xEixUFp6hB/XHusApPpSSIOH2B0j5y6zXw+mo+hFl
+	LSmvHJXLt7iL3KW6EZI7C0iS7CguLSHrjM/EiGbWleMr+/asNxrBD3FcLh5vRE99O04M
+	OmPJtcakxFC7uxFWxveKSMPXnzqUOj5I8ucZQ=
 MIME-Version: 1.0
+Received: by 10.204.39.14 with SMTP id d14mr166379bke.200.1309311546069; Tue,
+	28 Jun 2011 18:39:06 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.73.70 with HTTP; Tue, 28 Jun 2011 18:39:06 -0700 (PDT)
+In-Reply-To: <4E0A75FB.5080204@gmail.com>
+References: <cover.1309203431.git.otavio@ossystems.com.br>
+	<0a7128c3166d0729292e664918b76cf5b7074fe5.1309203431.git.otavio@ossystems.com.br>
+	<4E0A75FB.5080204@gmail.com>
+Date: Tue, 28 Jun 2011 22:39:06 -0300
+X-Google-Sender-Auth: tj6oBATkvoCgzaSaQ1flyyZRAho
+Message-ID: <BANLkTiknFLCGKUvGACm_asA9vrt3bmdH1Q@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-References: <w4liwla3gm.wl%peter@chubb.wattle.id.au>	<4E0A7A7A.6040900@gmail.com>
-	<w4ei2da142.wl%peter@chubb.wattle.id.au>
-In-Reply-To: <w4ei2da142.wl%peter@chubb.wattle.id.au>
-Subject: Re: gettext-native fails to build
+Subject: Re: [[meta-oe][PATCH 1/4] xf86-video-geode: add 2.11.12 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,20 +42,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jun 2011 01:42:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 29 Jun 2011 01:42:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 06/28/2011 06:16 PM, Peter Chubb wrote:
-> Khem>  are you using oe.dev or oe-core ?  oe-core has these races
-> Khem>  solved
+On Tue, Jun 28, 2011 at 21:46, Khem Raj <raj.khem@gmail.com> wrote:
+...
+>> +COMPATIBLE_HOST =3D "i.86.*-linux"
 >
-> oe.dev.  I'll try again with the core branch.
->
-FWIW here are my notes on how to use oe-core for angstrom
+> Is it available for strictly x86 or can x86_64 use it.
 
-http://sakrah.homelinux.org/blog/2011/03/using-openembedded-core-to-build-angstrom-for-qemu/
+x86 only AFAIK.
 
--Khem
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
