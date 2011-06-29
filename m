@@ -1,18 +1,20 @@
 Received: from lemon.ertos.nicta.com.au ([203.143.174.143]
 	helo=lemon.ken.nicta.com.au) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <peter.chubb@nicta.com.au>) id 1Qbiec-0005qp-1z
+	(envelope-from <peter.chubb@nicta.com.au>) id 1QbimC-00062L-9U
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Jun 2011 02:29:18 +0200
-Received: from [2402:1800:4000:2:21d:e0ff:fe35:2bed] (port=40512
+	Wed, 29 Jun 2011 02:37:08 +0200
+Received: from [2402:1800:4000:2:21d:e0ff:fe35:2bed] (port=51820
 	helo=croc.chubb.wattle.id.au) by lemon.ken.nicta.com.au with esmtpsa
 	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
-	(envelope-from <peter.chubb@nicta.com.au>) id 1Qbiaw-0000Z6-FU
+	(envelope-from <peter.chubb@nicta.com.au>) id 1QbiiZ-0000eS-7t
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Jun 2011 10:25:35 +1000
-Date: Wed, 29 Jun 2011 10:25:29 +1000
-Message-ID: <w4liwla3gm.wl%peter@chubb.wattle.id.au>
+	Wed, 29 Jun 2011 10:33:25 +1000
+Date: Wed, 29 Jun 2011 10:33:22 +1000
+Message-ID: <w4iprpa33h.wl%peter@chubb.wattle.id.au>
 From: Peter Chubb <peter.chubb@nicta.com.au>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <w4liwla3gm.wl%peter@chubb.wattle.id.au>
+References: <w4liwla3gm.wl%peter@chubb.wattle.id.au>
 User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI/1.14.6 (Maruoka)
 	FLIM/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL/10.8 Emacs/23.3
 	(x86_64-pc-linux-gnu) MULE/6.0 (HANACHIRUSATO)
@@ -27,11 +29,11 @@ X-SA-Exim-Mail-From: peter.chubb@nicta.com.au
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
 	lemon.ken.nicta.com.au
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.8 required=5.0 tests=AWL,BAYES_00,NO_RELAYS
+X-Spam-Status: No, score=-2.7 required=5.0 tests=AWL,BAYES_00,NO_RELAYS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:11 +0000)
 X-SA-Exim-Scanned: Yes (on lemon.ken.nicta.com.au)
-Subject: gettext-native fails to build
+Subject: Re: gettext-native fails to build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,43 +47,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jun 2011 00:29:18 -0000
+X-List-Received-Date: Wed, 29 Jun 2011 00:37:08 -0000
 Content-Type: text/plain; charset=US-ASCII
 
+I changed BB_NUMBER_THREADS to 1 and got a bit further (I delete the
+tmp directory again before this run...)
 
-On a clean checkout from this morning's git, I did:
-   bitbake gettext-native
-and saw:
- | + oe_autoreconf
-| + '[' 'x-I /usr/src/oe/tmp-zaurus/work/x86_64-linux/gettext-native-0.18-r6/gettext-0.18/gnulib-local/m4/         -I /usr/src/oe/tmp-zaurus/work/x86_64-linux/gettext-native-0.18-r6/gettext-0.18/gettext-runtime/m4      -I /usr/src/oe/tmp-zaurus/work/x86_64-linux/gettext-native-0.18-r6/gettext-0.18/gettext-tools/m4' = xdefault ']'
-| + acpaths='-I /usr/src/oe/tmp-zaurus/work/x86_64-linux/gettext-native-0.18-r6/gettext-0.18/gnulib-local/m4/      -I /usr/src/oe/tmp-zaurus/work/x86_64-linux/gettext-native-0.18-r6/gettext-0.18/gettext-runtime/m4      -I /usr/src/oe/tmp-zaurus/work/x86_64-linux/gettext-native-0.18-r6/gettext-0.18/gettext-tools/m4'
-| ++ sed 's/.* //;s/\.[0-9]\+$//'
-| ++ automake --version
-| ++ head -n 1
-| + AUTOV=1.11
-| + install -d /usr/src/oe/tmp-zaurus/sysroots/x86_64-linux/usr/share/aclocal
-| + install -d /usr/src/oe/tmp-zaurus/sysroots/x86_64-linux/usr/share/aclocal-1.11
-| + acpaths='-I /usr/src/oe/tmp-zaurus/work/x86_64-linux/gettext-native-0.18-r6/gettext-0.18/gnulib-local/m4/      -I /usr/src/oe/tmp-zaurus/work/x86_64-linux/gettext-native-0.18-r6/gettext-0.18/gettext-runtime/m4      -I /usr/src/oe/tmp-zaurus/work/x86_64-linux/gettext-native-0.18-r6/gettext-0.18/gettext-tools/m4 -I/usr/src/oe/tmp-zaurus/sysroots/x86_64-linux/usr/share/aclocal-1.11 -I /usr/src/oe/tmp-zaurus/sysroots/x86_64-linux/usr/share/aclocal'
-| + echo --exclude=autopoint
-| + grep -q aclocal
-| + rm -f aclocal.m4
-| + '[' -e configure.in ']'
-| + CONFIGURE_AC=configure.ac
-| + grep '^[[:space:]]*AM_GLIB_GNU_GETTEXT' configure.ac
-| + grep '^[[:space:]]*AM_GNU_GETTEXT' configure.ac
-| ++ sed -n -e '/^[[:space:]]*AC_CONFIG_MACRO_DIR/s|[^(]*([[]*\([^])]*\)[]]*)|\1|p' configure.ac
-| + for aux in m4 '`sed -n -e '\''/^[[:space:]]*AC_CONFIG_MACRO_DIR/s|[^(]*([[]*\([^])]*\)[]]*)|\1|p'\'' $CONFIGURE_AC`'
-| + mkdir -p m4
-| + autoreconf -Wcross --verbose --install --force --exclude=autopoint -I /usr/src/oe/tmp-zaurus/work/x86_64-linux/gettext-native-0.18-r6/gettext-0.18/gnulib-local/m4/ -I /usr/src/oe/tmp-zaurus/work/x86_64-linux/gettext-native-0.18-r6/gettext-0.18/gettext-runtime/m4 -I /usr/src/oe/tmp-zaurus/work/x86_64-linux/gettext-native-0.18-r6/gettext-0.18/gettext-tools/m4 -I/usr/src/oe/tmp-zaurus/sysroots/x86_64-linux/usr/share/aclocal-1.11 -I /usr/src/oe/tmp-zaurus/sysroots/x86_64-linux/usr/share/aclocal
-| /usr/bin/autoreconf: unrecognized option `--exclude=autopoint'
-| Try `/usr/bin/autoreconf --help' for more information.
-| + oefatal 'autoreconf execution failed.'
-| + echo FATAL: 'autoreconf execution failed.'
-| FATAL: autoreconf execution failed.
-| + exit 1
+Now autotools gets built and staged before gettext-native.  I see
+instead:
 
-Should oe not be using its own version of autotools?  Should not
-gettext-native require autotools as a prerequisite?
+libtool: link: ccache gcc -std=gnu99 -isystem/usr/src/oe/tmp-zaurus/sysroots/x86_64-linux/usr/include -O2 -g -Wl,-rpath -Wl,\$ORIGIN/../lib -Wl,-rpath-link -Wl,/usr/src/oe/tmp-zaurus/sysroots/x86_64-linux/usr/lib -Wl,-rpath -Wl,/usr/src/oe/tmp-zaurus/sysroots/x86_64-linux/usr/lib -Wl,-O1 -o .libs/msgcmp msgcmp-msgcmp.o msgcmp-msgl-fsearch.o  -L/usr/src/oe/tmp-zaurus/sysroots/x86_64-linux/usr/lib ./.libs/libgettextsrc.so -lm -Wl,-rpath -Wl,/usr/src/oe/tmp-zaurus/sysroots/x86_64-linux/usr/lib
+| /usr/bin/ldERROR: Function 'do_compile' failed (see /usr/src/oe/tmp-zaurus/work/x86_64-linux/gettext-native-0.18-r6/temp/log.do_compile.31884 for further information)
+| : msgcmp-msgl-fsearch.o: undefined reference to symbol 'hash_insert_entry'
+| /usr/bin/ld: note: 'hash_insert_entry' is defined in DSO /usr/src/oe/tmp-zaurus/work/x86_64-linux/gettext-native-0.18-r6/gettext-0.18/gettext-tools/gnulib-lib/.libs/libgettextlib-0.18.so so try adding it to the linker command line
+| /usr/src/oe/tmp-zaurus/work/x86_64-linux/gettext-native-0.18-r6/gettext-0.18/gettext-tools/gnulib-lib/.libs/libgettextlib-0.18.so: could not read symbols: Invalid operation
+| collect2: ld returned 1 exit status
+| make[4]: *** [msgcmp] Error 1
+| make[4]: Leaving directory `/usr/src/oe/tmp-zaurus/work/x86_64-linux/gettext-native-0.18-r6/gettext-0.18/gettext-tools/src'
+| make[3]: *** [all] Error 2
+
+I don't quite understand this -- running nm on libgettextlib-0.18.so
+shows all the symbols there.
+
+Peter C
 --
 Dr Peter Chubb  http://www.gelato.unsw.edu.au  peterc AT gelato.unsw.edu.au
 http://www.ertos.nicta.com.au           ERTOS within National ICT Australia
