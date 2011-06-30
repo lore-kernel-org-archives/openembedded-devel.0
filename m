@@ -1,22 +1,26 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from einhorn.in-berlin.de ([192.109.42.8] ident=root)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1QcELA-0002eX-70
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Jun 2011 12:19:20 +0200
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QcEHa-0000cW-SV
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Jun 2011 12:15:38 +0200
-From: Phil Blundell <philb@gnu.org>
+	(envelope-from <sledz@fensuse.internal.dresearch-fe.de>)
+	id 1QcERl-0002no-Cq for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Jun 2011 12:26:09 +0200
+X-Envelope-From: sledz@fensuse.internal.dresearch-fe.de
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116]) (authenticated bits=0)
+	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
+	p5UAMQYo027386
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
+	Thu, 30 Jun 2011 12:22:26 +0200
+Received: by fensuse.internal.dresearch-fe.de (Postfix, from userid 1000)
+	id B17CD442EDE; Thu, 30 Jun 2011 12:22:25 +0200 (CEST)
+From: Steffen Sledz <sledz@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4E0C4BF3.2050701@dresearch-fe.de>
-References: <4E0C4BF3.2050701@dresearch-fe.de>
-Date: Thu, 30 Jun 2011 11:15:37 +0100
-Message-ID: <1309428937.2551.107.camel@phil-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: Any reasons not to use "newer" ppp?
+Date: Thu, 30 Jun 2011 12:22:15 +0200
+Message-Id: <1309429335-3762-1-git-send-email-sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.6
+In-Reply-To: <1309428937.2551.107.camel@phil-desktop>
+References: <1309428937.2551.107.camel@phil-desktop>
+X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
+Subject: [PATCH] ppp: 2.4.5 seems to be ready for oe-dev too
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,23 +34,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jun 2011 10:19:20 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 30 Jun 2011 10:26:09 -0000
 
-On Thu, 2011-06-30 at 12:12 +0200, Steffen Sledz wrote:
-> The current oe-dev master contains recipes for 2.4.4 and 2.4.5, but both are DEFAULT_PREFERENCE = "-1", so 2.4.3 is used by default.
-> 
-> We hit a problem in LCP open/close handling which is fixed in the newer versions.
-> 
-> Is there any reason *not* to go to 2.4.5?
+Oe-core is using 2.4.5 and it works OK there.
 
-Oe-core is using 2.4.5 and presumably it works OK there.  Judging from
-the commit messages there is no good reason for 2.4.5 to have been set
-D_P=-1 in oe.dev, so I think you should be safe to upgrade.
+Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+---
+ recipes/ppp/ppp_2.4.5.bb |    2 --
+ 1 files changed, 0 insertions(+), 2 deletions(-)
 
-p.
-
+diff --git a/recipes/ppp/ppp_2.4.5.bb b/recipes/ppp/ppp_2.4.5.bb
+index 2b6b6f7..86d5ae5 100644
+--- a/recipes/ppp/ppp_2.4.5.bb
++++ b/recipes/ppp/ppp_2.4.5.bb
+@@ -4,8 +4,6 @@ HOMEPAGE = "http://samba.org/ppp/"
+ DEPENDS = "libpcap"
+ LICENSE = "BSD GPLv2"
+ PR = "r1"
+-# Not well tested
+-DEFAULT_PREFERENCE = "-1"
+ 
+ PARALLEL_MAKE = ""
+ 
+-- 
+1.7.6
 
 
 
