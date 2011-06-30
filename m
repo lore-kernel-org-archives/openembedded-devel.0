@@ -1,24 +1,34 @@
-Received: from einhorn.in-berlin.de ([192.109.42.8] ident=root)
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@fensuse.internal.dresearch-fe.de>)
-	id 1QcBrn-0007ST-MK for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Jun 2011 09:40:52 +0200
-X-Envelope-From: sledz@fensuse.internal.dresearch-fe.de
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116]) (authenticated bits=0)
-	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
-	p5U7XZTr008455
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
-	Thu, 30 Jun 2011 09:33:35 +0200
-Received: by fensuse.internal.dresearch-fe.de (Postfix, from userid 1000)
-	id DE8E6442A6B; Thu, 30 Jun 2011 09:33:34 +0200 (CEST)
-From: Steffen Sledz <sledz@dresearch-fe.de>
+	(envelope-from <raj.khem@gmail.com>) id 1QcCRR-00042M-J5
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Jun 2011 10:17:41 +0200
+Received: by pzk36 with SMTP id 36so1783599pzk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Jun 2011 01:13:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=Jl1m51H44+Sq01RfGLP3nTgCu6OXY0dU2RuIVRoTJBY=;
+	b=kuai4AytjuvDy04ECBI7/bFU7J5lS0zOfmnpGIrtmhkmEsEBwWaV4xicoIk8DUsCwL
+	fLcxQVx6l/EKXlxlMlUMM54615PwPyYUEOuagXb717/vg+IEfHubSEfKd+0TrVNdRZyt
+	OQPKCzqA7cQKU43ZtHlrBNy3k0aRKxnjZC7r0=
+Received: by 10.142.131.1 with SMTP id e1mr804506wfd.292.1309421595596;
+	Thu, 30 Jun 2011 01:13:15 -0700 (PDT)
+Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id e13sm1325509wfd.13.2011.06.30.01.13.14
+	(version=SSLv3 cipher=OTHER); Thu, 30 Jun 2011 01:13:15 -0700 (PDT)
+Message-ID: <4E0C3019.3070601@gmail.com>
+Date: Thu, 30 Jun 2011 01:13:13 -0700
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110516 Lightning/1.0b2 Thunderbird/3.1.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 30 Jun 2011 09:33:31 +0200
-Message-Id: <1309419211-20670-1-git-send-email-sledz@dresearch-fe.de>
-X-Mailer: git-send-email 1.7.6
-X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
-Subject: [PATCH] udev: avoid udev stopping persistent pppd connections
+References: <4E0C00ED.40407@gmail.com>
+In-Reply-To: <4E0C00ED.40407@gmail.com>
+Subject: Re: [PATCH] linux-omap-psp-2.6.32 kernel: Fixed User-button GPIO to correct value for -xM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,42 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jun 2011 07:40:52 -0000
+X-List-Received-Date: Thu, 30 Jun 2011 08:17:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Mario Schuknecht <schuknecht@dresearch-fe.de>
+On 06/29/2011 09:51 PM, Joel A Fernandes wrote:
+> Signed-off-by: Joel A Fernandes<agnel.joel@gmail.com>
+> ---
+>   ...agle-cleaned-up-board-revision-conditions.patch |    4 ++--
+>   1 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/recipes/linux/linux-omap-psp-2.6.32/beagleboard-xmc/0008-omap3-beagle-cleaned-up-board-revision-conditions.patch b/recipes/linux/linux-omap-psp-2.6.32/beagleboard-xmc/0008-omap3-beagle-cleaned-up-board-revision-conditions.patch
+> index 513a101..fb91cb6 100644
+> --- a/recipes/linux/linux-omap-psp-2.6.32/beagleboard-xmc/0008-omap3-beagle-cleaned-up-board-revision-conditions.patch
+> +++ b/recipes/linux/linux-omap-psp-2.6.32/beagleboard-xmc/0008-omap3-beagle-cleaned-up-board-revision-conditions.patch
+> @@ -143,8 +143,8 @@ index 4bde54b..664a9c6 100644
+>    	omap3_beagle_i2c_init();
+>
+>   -	if (cpu_is_omap3630()) {
+> -+	if ((omap3_beagle_get_rev() != OMAP3BEAGLE_BOARD_XMAB)&&
+> -+		(omap3_beagle_get_rev() != OMAP3BEAGLE_BOARD_XMC)) {
+> ++	if ((omap3_beagle_get_rev() == OMAP3BEAGLE_BOARD_XMAB) ||
+> ++		(omap3_beagle_get_rev() == OMAP3BEAGLE_BOARD_XMC)) {
+>    		gpio_buttons[0].gpio = 4;
+>    	}
+>
 
-When a pppd session is disconnected it triggers the udev to ifdown the
-ppp link which kills pppd and inhibits a reconnection.
-
-Now avoid udev stopping ppp connections.
-
-See also:
- https://bugs.launchpad.net/ubuntu/+source/ifupdown/+bug/396804
- https://bugs.launchpad.net/ubuntu/+source/ifupdown/+bug/78043
- http://ubuntuforums.org/showthread.php?t=1177021
- http://rants.atmurray.net/2007/01/pppd-persist-not-so-persist-with-udev.html
-
-Signed-off-by: Mario Schuknecht <schuknecht@dresearch-fe.de>
-Acked-by: Steffen Sledz <sledz@dresearch-fe.de>
----
- recipes/udev/udev/network.sh |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
-
-diff --git a/recipes/udev/udev/network.sh b/recipes/udev/udev/network.sh
-index 182c26d..d287855 100644
---- a/recipes/udev/udev/network.sh
-+++ b/recipes/udev/udev/network.sh
-@@ -9,6 +9,8 @@ test -x /sbin/cardctl && exit 0
- # We get two "add" events for hostap cards due to wifi0
- echo "$INTERFACE" | grep -q wifi && exit 0
- 
-+# Avoid udev stopping persistent ppp connections
-+echo "$INTERFACE" | grep -q ppp && exit 0
- 
- # Check if /etc/init.d/network has been run yet to see if we are 
- # called by starting /etc/rcS.d/S03udev and not by hotplugging a device
--- 
-1.7.6
-
+while the patch seems good it does not follow the submission guidelines.
 
 
