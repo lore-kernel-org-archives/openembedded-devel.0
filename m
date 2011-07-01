@@ -1,37 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Qcg7i-0008VW-LH for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Jul 2011 17:59:18 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Qcg45-0003oj-Uz for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Jul 2011 17:55:33 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Jul 2011 17:55:33 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1QcglF-0000yd-Dv
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Jul 2011 18:40:09 +0200
+Received: by iwn4 with SMTP id 4so3217547iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Jul 2011 17:55:33 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 01 Jul 2011 09:36:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=E/FIFqGTlySjlKQKF4VJ+oJBxTOeZHJKOhBnVNQVQp8=;
+	b=un225XZtnflyHn4MnUOVoHe+AV5OJMBj2H/06tc23R3aZvuGV/icZ8R0WfZ2k8DVQD
+	E4C7UrvjIs+aY/iGLtGLklNIUTf4ivLSHB9q9tHDLChi9KKvSvIwMuhg9xytjKh4OtBG
+	uT3mVdjVTwMnVbzx0ai2Rc2EaBVihWnn+yVDI=
+Received: by 10.42.157.67 with SMTP id c3mr3078645icx.95.1309538183744;
+	Fri, 01 Jul 2011 09:36:23 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id j1sm1949813ibg.38.2011.07.01.09.36.22
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 01 Jul 2011 09:36:23 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 01 Jul 2011 17:55:22 +0200
-Message-ID: <iukqla$apc$1@dough.gmane.org>
-References: <4E0C4BF3.2050701@dresearch-fe.de>
-	<1309428937.2551.107.camel@phil-desktop>
-	<4E0DEA22.1040308@dresearch-fe.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
-In-Reply-To: <4E0DEA22.1040308@dresearch-fe.de>
-X-Enigmail-Version: 1.2
-Cc: openembedded-core@lists.openembedded.org
-Subject: Re: Any reasons not to use "newer" ppp?
+Date: Fri,  1 Jul 2011 09:36:10 -0700
+Message-Id: <1309538171-28964-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [PATCH 1/2] htop: Link with libubacktrace when compiling for uclibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,60 +38,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jul 2011 15:59:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 01 Jul 2011 16:40:09 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-support/htop/htop_0.9.bb |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
 
-Op 01-07-11 17:39, Steffen Sledz schreef:
-> On 30.06.2011 12:15, Phil Blundell wrote:
->> On Thu, 2011-06-30 at 12:12 +0200, Steffen Sledz wrote:
->>> The current oe-dev master contains recipes for 2.4.4 and 2.4.5,
->>> but both are DEFAULT_PREFERENCE = "-1", so 2.4.3 is used by
->>> default.
->>> 
->>> We hit a problem in LCP open/close handling which is fixed in the
->>> newer versions.
->>> 
->>> Is there any reason *not* to go to 2.4.5?
->> 
->> Oe-core is using 2.4.5 and presumably it works OK there.  Judging
->> from the commit messages there is no good reason for 2.4.5 to have
->> been set D_P=-1 in oe.dev, so I think you should be safe to
->> upgrade.
-> 
-> While making some investingations in this i hit another problem.
-> 
-> The recipe *ppp_2.4.5.bb* in *oe-core* contains lines like these: 
-> ------------------>snip<------------------- FILES_${PN}-dbg +=
-> "${libdir}/pppd/2.4.3/.debug" FILES_ppp-oa       =
-> "/usr/lib/pppd/2.4.3/pppoatm.so" FILES_ppp-oe       =
-> "/usr/sbin/pppoe-discovery /usr/lib/pppd/2.4.3/rp-pppoe.so" 
-> FILES_ppp-radius   = "/usr/lib/pppd/2.4.3/radius.so
-> /usr/lib/pppd/2.4.3/radattr.so /usr/lib/pppd/2.4.3/radrealms.so" 
-> FILES_ppp-winbind  = "/usr/lib/pppd/2.4.3/winbind.so" 
-> FILES_ppp-minconn  = "/usr/lib/pppd/2.4.3/minconn.so" 
-> FILES_ppp-password = "/usr/lib/pppd/2.4.3/pass*.so" 
-> ------------------>snip<-------------------
-> 
-> I can't imagine that it is intentionally to have hardcoded pathes
-> with *2.4.3* in it here.
-> 
-> The ppp_2.4.5.bb recipe in oe-dev looks much cleaner. Is there
-> someone who feels as a maintainer of ppp and can do some housekeeping
-> here?
-
-The OE-core recipe also has a ton of QA errors being reported, so I
-wouldn't use that as an example of how to do things.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFODe3qMkyGM64RGpERAj5XAJ9cHJUSIcJ6sS6bqfNYSTYB6/KgSgCeNxZk
-i6REs8lKOlBywYBoXpzt+PA=
-=5yYU
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-support/htop/htop_0.9.bb b/meta-oe/recipes-support/htop/htop_0.9.bb
+index eb207aa..25dac4c 100644
+--- a/meta-oe/recipes-support/htop/htop_0.9.bb
++++ b/meta-oe/recipes-support/htop/htop_0.9.bb
+@@ -9,9 +9,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c312653532e8e669f30e5ec8bdc23be3"
+ DEPENDS = "ncurses"
+ RDEPENDS_${PN} = "ncurses-terminfo"
+ 
++PR = "r1"
++
+ SRC_URI = "${SOURCEFORGE_MIRROR}/htop/htop-${PV}.tar.gz \
+            file://remove-proc-test.patch"
+ 
++LDFLAGS_append_libc-uclibc = " -lubacktrace"
++
+ inherit autotools
+ 
+ SRC_URI[md5sum] = "7c5507f35f363f3f40183a2ba3c561f8"
+-- 
+1.7.4.1
 
 
 
