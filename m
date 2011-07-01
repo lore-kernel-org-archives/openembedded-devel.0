@@ -1,24 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QcL5c-0003DW-23 for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Jun 2011 19:31:44 +0200
-Received: from f053041173.adsl.alicedsl.de ([78.53.41.173]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QcL27-0005SC-Ge for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Jun 2011 17:28:07 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <raj.khem@gmail.com>) id 1QcWUX-0006mT-Ua
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Jul 2011 07:42:14 +0200
+Received: by iym10 with SMTP id 10so2785402iym.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Jun 2011 22:38:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=KDu9iyjpdkTAhlu7pfoy6d6r+9Q4BWZsemDMbc8zoxQ=;
+	b=knWE5195ygfFFVTam2q8CYRCgpxx3gxVwRpaRRd5CdMYV1IUu6r3B3wsItEO50KMih
+	+Fy2SaUuPTFWfGibGFfH3gs7B3esq0NAchcQ0iJOzWYR2IrSYdVkshsmo/wkeSWcjkhR
+	pfT2CjqYify0wLmLUH9wRsg1v7NHansRMWMag=
+Received: by 10.231.39.74 with SMTP id f10mr2493997ibe.199.1309498708785;
+	Thu, 30 Jun 2011 22:38:28 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id q15sm1652751ibb.65.2011.06.30.22.38.27
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 30 Jun 2011 22:38:28 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1309429335-3762-1-git-send-email-sledz@dresearch-fe.de>
-References: <1309428937.2551.107.camel@phil-desktop>
-	<1309429335-3762-1-git-send-email-sledz@dresearch-fe.de>
-Date: Thu, 30 Jun 2011 19:28:00 +0200
-Message-ID: <1309454880.4401.32.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [PATCH] ppp: 2.4.5 seems to be ready for oe-dev too
+Date: Thu, 30 Jun 2011 22:38:18 -0700
+Message-Id: <1309498698-13369-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [meta-oe][PATCH] systemd_git.bb: Alias mkostemp() to mkstemp() for uclibc targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,72 +38,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jun 2011 17:31:44 -0000
-X-Groupsio-MsgNum: 32923
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-9StOF3fQmgSb9W6hOTSf"
+X-List-Received-Date: Fri, 01 Jul 2011 05:42:14 -0000
 
---=-9StOF3fQmgSb9W6hOTSf
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../systemd/systemd/paper-over-mkostemp.patch      |   19 +++++++++++++++++++
+ meta-oe/recipes-core/systemd/systemd_git.bb        |    3 ++-
+ 2 files changed, 21 insertions(+), 1 deletions(-)
+ create mode 100644 meta-oe/recipes-core/systemd/systemd/paper-over-mkostemp.patch
 
-Am Donnerstag, den 30.06.2011, 12:22 +0200 schrieb Steffen Sledz:
+diff --git a/meta-oe/recipes-core/systemd/systemd/paper-over-mkostemp.patch b/meta-oe/recipes-core/systemd/systemd/paper-over-mkostemp.patch
+new file mode 100644
+index 0000000..ca10440
+--- /dev/null
++++ b/meta-oe/recipes-core/systemd/systemd/paper-over-mkostemp.patch
+@@ -0,0 +1,19 @@
++uclibc does not have mkostemp() so we redefine it to use mkstemp()
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++Index: git/src/macro.h
++===================================================================
++--- git.orig/src/macro.h	2011-06-30 10:33:53.000000000 -0700
+++++ git/src/macro.h	2011-06-30 15:07:28.285270006 -0700
++@@ -27,6 +27,10 @@
++ #include <sys/uio.h>
++ #include <inttypes.h>
++ 
+++#ifdef __UCLIBC__
+++/* uclibc does not implement mkostemp GNU extention */
+++#define mkostemp(x,y) mkstemp(x)
+++#endif
++ #define _printf_attr_(a,b) __attribute__ ((format (printf, a, b)))
++ #define _sentinel_ __attribute__ ((sentinel))
++ #define _noreturn_ __attribute__((noreturn))
+diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
+index 2a313e0..c750b2f 100644
+--- a/meta-oe/recipes-core/systemd/systemd_git.bb
++++ b/meta-oe/recipes-core/systemd/systemd_git.bb
+@@ -15,7 +15,7 @@ inherit gitpkgv
+ PKGV = "v${GITPKGVTAG}"
+ 
+ PV = "git"
+-PR = "r3"
++PR = "r4"
+ 
+ inherit autotools vala
+ 
+@@ -23,6 +23,7 @@ SRCREV = "8585357a0e5e9f4d56e999d7cd1a73e77ae0eb80"
+ 
+ SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
+            file://0001-systemd-disable-xml-file-stuff-and-introspection.patch \
++           file://paper-over-mkostemp.patch \
+           "
+ 
+ S = "${WORKDIR}/git"
+-- 
+1.7.4.1
 
-ppp_2.4.5: remove `DP =3D "-1"`
-
-is a more appropriate and precise commit summary in my opinion.
-
-> Oe-core is using 2.4.5 and it works OK there.
->=20
-> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
-> ---
->  recipes/ppp/ppp_2.4.5.bb |    2 --
->  1 files changed, 0 insertions(+), 2 deletions(-)
->=20
-> diff --git a/recipes/ppp/ppp_2.4.5.bb b/recipes/ppp/ppp_2.4.5.bb
-> index 2b6b6f7..86d5ae5 100644
-> --- a/recipes/ppp/ppp_2.4.5.bb
-> +++ b/recipes/ppp/ppp_2.4.5.bb
-> @@ -4,8 +4,6 @@ HOMEPAGE =3D "http://samba.org/ppp/"
->  DEPENDS =3D "libpcap"
->  LICENSE =3D "BSD GPLv2"
->  PR =3D "r1"
-> -# Not well tested
-> -DEFAULT_PREFERENCE =3D "-1"
-> =20
->  PARALLEL_MAKE =3D ""
-
-I am getting the following warning when building the recipe with
-`minimal{,-uclibc}` which I do not get with PPP 2.4.3.
-
-        NOTE: package ppp-2.4.5-r1: task do_qa_staging: Started
-        WARNING: the following files were installed but not shipped in any =
-package:
-        WARNING:   /usr/lib/pppd/2.4.5/pppol2tp.so
-        WARNING:   /usr/lib/pppd/2.4.5/openl2tp.so
-
-Could you fix this in a separate patch before committing this patch?
-
-With the points above fixed/done this patch is
-
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
 
 
-Thanks,
-
-Paul
-
---=-9StOF3fQmgSb9W6hOTSf
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk4MshsACgkQPX1aK2wOHVjXeQCfT4oP3voF4NjtEbC7emrtwdJC
-cJIAn09+mfFkR9rrjg6satrTlLb4Hc7w
-=oGC3
------END PGP SIGNATURE-----
-
---=-9StOF3fQmgSb9W6hOTSf--
