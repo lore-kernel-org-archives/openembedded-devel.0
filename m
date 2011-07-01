@@ -1,30 +1,30 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QcWZI-0006vL-3h
+	(envelope-from <sledz@dresearch-fe.de>) id 1QcWzk-00082Y-62
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Jul 2011 07:47:08 +0200
-Received: by iwn4 with SMTP id 4so2789488iwn.6
+	Fri, 01 Jul 2011 08:14:28 +0200
+Received: by bwf20 with SMTP id 20so2776519bwf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jun 2011 22:43:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=uU1batWrhP2ebjUQMtjTHsy5eEQF9Yih1x6yL/+vWQs=;
-	b=rx1GgAp5IvTmNRuf5cq9HEbBQ7O7XXU5jgayfMlcsKBbYWdGwJ2VtryO38MDCU+C4B
-	IaiCp5MXz2Og1X6uy/nUVcFeSMjh+I+tyq94BP+QVXAQxi1KVE3jJpKjEVgKA81OneRN
-	xzmLJCPvUc4XpSezBrb6ueCOkWO+sDLiqu+ZI=
-Received: by 10.231.81.133 with SMTP id x5mr2365428ibk.161.1309499003377;
-	Thu, 30 Jun 2011 22:43:23 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id x13sm1659880ibh.16.2011.06.30.22.43.22
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 30 Jun 2011 22:43:22 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 30 Jun 2011 23:10:44 -0700 (PDT)
+Received: by 10.204.3.21 with SMTP id 21mr2701553bkl.6.1309500640913;
+	Thu, 30 Jun 2011 23:10:40 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id e6sm2689808bka.23.2011.06.30.23.10.38
+	(version=SSLv3 cipher=OTHER); Thu, 30 Jun 2011 23:10:39 -0700 (PDT)
+Message-ID: <4E0D64DE.50804@dresearch-fe.de>
+Date: Fri, 01 Jul 2011 08:10:38 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:5.0) Gecko/20110624 Thunderbird/5.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 30 Jun 2011 22:43:13 -0700
-Message-Id: <1309498993-13565-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-Subject: [meta-oe][PATCH] systemd_git.bb: Add patch to disable --nonet option
+References: <1309428937.2551.107.camel@phil-desktop>
+	<1309429335-3762-1-git-send-email-sledz@dresearch-fe.de>
+	<1309454880.4401.32.camel@mattotaupa>
+In-Reply-To: <1309454880.4401.32.camel@mattotaupa>
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: [PATCH] ppp: 2.4.5 seems to be ready for oe-dev too
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,82 +38,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jul 2011 05:47:08 -0000
+X-List-Received-Date: Fri, 01 Jul 2011 06:14:28 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+On 30.06.2011 19:28, Paul Menzel wrote:
+> ppp_2.4.5: remove `DP = "-1"`
+> 
+> is a more appropriate and precise commit summary in my opinion.
 
-Hi I am not particularly happy with this patch but by letting xsltproc
-download stylesheets from internet it atleast compiles the thing. But
-its very slow. So any better solution if someone has suggestion please
-by all means
+yepp
 
--Khem
+>> Oe-core is using 2.4.5 and it works OK there.
+>>
+>> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+>> ---
+>>  recipes/ppp/ppp_2.4.5.bb |    2 --
+>>  1 files changed, 0 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/recipes/ppp/ppp_2.4.5.bb b/recipes/ppp/ppp_2.4.5.bb
+>> index 2b6b6f7..86d5ae5 100644
+>> --- a/recipes/ppp/ppp_2.4.5.bb
+>> +++ b/recipes/ppp/ppp_2.4.5.bb
+>> @@ -4,8 +4,6 @@ HOMEPAGE = "http://samba.org/ppp/"
+>>  DEPENDS = "libpcap"
+>>  LICENSE = "BSD GPLv2"
+>>  PR = "r1"
+>> -# Not well tested
+>> -DEFAULT_PREFERENCE = "-1"
+>>  
+>>  PARALLEL_MAKE = ""
+> 
+> I am getting the following warning when building the recipe with
+> `minimal{,-uclibc}` which I do not get with PPP 2.4.3.
+> 
+>         NOTE: package ppp-2.4.5-r1: task do_qa_staging: Started
+>         WARNING: the following files were installed but not shipped in any package:
+>         WARNING:   /usr/lib/pppd/2.4.5/pppol2tp.so
+>         WARNING:   /usr/lib/pppd/2.4.5/openl2tp.so
+> 
+> Could you fix this in a separate patch before committing this patch?
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../systemd/systemd/use-nonet-for-docbook.patch    |   30 ++++++++++++++++++++
- meta-oe/recipes-core/systemd/systemd_git.bb        |    3 +-
- 2 files changed, 32 insertions(+), 1 deletions(-)
- create mode 100644 meta-oe/recipes-core/systemd/systemd/use-nonet-for-docbook.patch
+Can please someone of the oe-core guys check if the problem is fixed there? And cherry-pick the fix to oe-dev master in that case.
 
-diff --git a/meta-oe/recipes-core/systemd/systemd/use-nonet-for-docbook.patch b/meta-oe/recipes-core/systemd/systemd/use-nonet-for-docbook.patch
-new file mode 100644
-index 0000000..e8aa537
---- /dev/null
-+++ b/meta-oe/recipes-core/systemd/systemd/use-nonet-for-docbook.patch
-@@ -0,0 +1,30 @@
-+We get errors like
-+
-+| /bin/mkdir -p man/ && /home/kraj/work/angstrom/build/tmp-angstrom_2010_x-uclibc/sysroots/x86_64-linux/usr/bin/xsltproc -o man/systemd.1 --nonet --param funcsynopsis.style
-+ "'ansi'" http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl man/systemd.xml
-+| I/O error : Attempt to load network entity http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
-+| warning: failed to load external entity "http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"
-+| cannot parse http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
-+| make[1]: *** [man/systemd.1] Error 4
-+| make[1]: Leaving directory `/home/kraj/work/angstrom/build/tmp-angstrom_2010_x-uclibc/work/armv5teb-angstrom-linux-uclibceabi/systemd-git-r4/git'
-+| make: *** [all] Error 2
-+| + die 'oe_runmake failed'
-+| + bbfatal 'oe_runmake failed'
-+| + echo 'ERROR: oe_runmake failed'
-+| ERROR: oe_runmake failed
-+| + exit 1
-+
-+This patch disables --nonet option to xsltproc
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+--- git/Makefile.am.org	2011-06-30 16:07:21.715269183 -0700
-++++ git/Makefile.am	2011-06-30 16:07:26.805269182 -0700
-+@@ -1315,7 +1315,6 @@ endif
-+ 
-+ if HAVE_XSLTPROC
-+ XSLTPROC_FLAGS = \
-+-	--nonet \
-+ 	--param funcsynopsis.style "'ansi'"
-+ 
-+ XSLTPROC_PROCESS_MAN = \
-diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
-index c750b2f..40b93b8 100644
---- a/meta-oe/recipes-core/systemd/systemd_git.bb
-+++ b/meta-oe/recipes-core/systemd/systemd_git.bb
-@@ -15,7 +15,7 @@ inherit gitpkgv
- PKGV = "v${GITPKGVTAG}"
- 
- PV = "git"
--PR = "r4"
-+PR = "r5"
- 
- inherit autotools vala
- 
-@@ -24,6 +24,7 @@ SRCREV = "8585357a0e5e9f4d56e999d7cd1a73e77ae0eb80"
- SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
-            file://0001-systemd-disable-xml-file-stuff-and-introspection.patch \
-            file://paper-over-mkostemp.patch \
-+           file://use-nonet-for-docbook.patch \
-           "
- 
- S = "${WORKDIR}/git"
+Thx,
+Steffen
+
 -- 
-1.7.4.1
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
