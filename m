@@ -1,30 +1,32 @@
 Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Qcndd-0001bu-Gk
+	(envelope-from <raj.khem@gmail.com>) id 1Qcnde-0001bx-2h
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Jul 2011 02:00:45 +0200
-Received: by pzk36 with SMTP id 36so1087562pzk.6
+	Sat, 02 Jul 2011 02:00:46 +0200
+Received: by pzk36 with SMTP id 36so1087568pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Jul 2011 16:56:59 -0700 (PDT)
+	Fri, 01 Jul 2011 16:57:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=dSQhDxeapCGH1nLN6fuajVqNksD/MilCa4LbeB3tqx8=;
-	b=oQ+unyhMhmw5lN3+LMBBWt6Qa8bNJCS/QJYEAKcgV8dSVN4eGd26b5ebLX20eDfw6v
-	HJx7DwkLJ/kaCXIKPYZpE7TucE+qcrz+hodX0gkWV5ks4vG4Q83bWJxSi41/yxpW8jeX
-	rrXJVjYm8pVqG323iWBCSiAqY6dRGOrUk2yWo=
-Received: by 10.68.35.103 with SMTP id g7mr4201980pbj.471.1309564619249;
-	Fri, 01 Jul 2011 16:56:59 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=6thAfurwJ0A2sOOHgJOwm3gio1x2cfRVi/yT5vAsbEU=;
+	b=CNhExSNK/xB8+FD+IVIncbYNA6MEJv+xcdWnuo6qjCP0qzJIdD+KFT9I4eHyIyUo2j
+	7lgvwcEScGf3oWOupy9hDTxmOz8KH0zBrIs6861w39yeRz9U6HQCjPqagx0wJSiXUVzN
+	i6SVIJQfxLrGFAIt1GPLw1gHjGEJyutq/ae4o=
+Received: by 10.142.135.4 with SMTP id i4mr1638374wfd.34.1309564620289;
+	Fri, 01 Jul 2011 16:57:00 -0700 (PDT)
 Received: from localhost.localdomain
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id k4sm2253885pbl.43.2011.07.01.16.56.57
+	by mx.google.com with ESMTPS id k4sm2253885pbl.43.2011.07.01.16.56.59
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 01 Jul 2011 16:56:58 -0700 (PDT)
+	Fri, 01 Jul 2011 16:56:59 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Jul 2011 16:56:47 -0700
-Message-Id: <1309564608-32683-1-git-send-email-raj.khem@gmail.com>
+Date: Fri,  1 Jul 2011 16:56:48 -0700
+Message-Id: <1309564608-32683-2-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.4.1
-Subject: [meta-oe][PATCH 1/2] kernel.bbclass: Sync with oe-core
+In-Reply-To: <1309564608-32683-1-git-send-email-raj.khem@gmail.com>
+References: <1309564608-32683-1-git-send-email-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/2] gcc-4.5: Edit defaults.h in ${B} instead of ${S}, and t-oe in ${B}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,98 +40,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Jul 2011 00:00:45 -0000
+X-List-Received-Date: Sat, 02 Jul 2011 00:00:46 -0000
 
-This syncs the class with oe-core after 3.0 changes
+This patches are from oe-core needed after shared sourcedir changes to
+oe-core
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/classes/kernel.bbclass |   22 ++++++----------------
- 1 files changed, 6 insertions(+), 16 deletions(-)
+ meta-oe/recipes-devtools/gcc/gcc-4.5.inc           |    3 +-
+ .../gcc/gcc-4.5/use-defaults.h-and-t-oe-in-B.patch |   57 ++++++++++++++++++++
+ 2 files changed, 59 insertions(+), 1 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/gcc/gcc-4.5/use-defaults.h-and-t-oe-in-B.patch
 
-diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
-index 2d051f4..9043b4e 100644
---- a/meta-oe/classes/kernel.bbclass
-+++ b/meta-oe/classes/kernel.bbclass
-@@ -1,7 +1,7 @@
- inherit linux-kernel-base module_strip
+diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.5.inc b/meta-oe/recipes-devtools/gcc/gcc-4.5.inc
+index 30a9692..abd3088 100644
+--- a/meta-oe/recipes-devtools/gcc/gcc-4.5.inc
++++ b/meta-oe/recipes-devtools/gcc/gcc-4.5.inc
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
  
- PROVIDES += "virtual/kernel"
--DEPENDS += "virtual/${TARGET_PREFIX}gcc virtual/${TARGET_PREFIX}depmod-${@get_kernelmajorversion('${PV}')} virtual/${TARGET_PREFIX}gcc${KERNEL_CCSUFFIX} update-modules"
-+DEPENDS += "virtual/${TARGET_PREFIX}gcc virtual/${TARGET_PREFIX}depmod virtual/${TARGET_PREFIX}gcc${KERNEL_CCSUFFIX} update-modules"
  
- # we include gcc above, we dont need virtual/libc
- INHIBIT_DEFAULT_DEPS = "1"
-@@ -65,7 +65,6 @@ KERNEL_IMAGEDEST = "boot"
- export CMDLINE_CONSOLE = "console=${@bb.data.getVar("KERNEL_CONSOLE",d,1) or "ttyS0"}"
+ PV = "4.5"
+-INC_PR = "r38"
++INC_PR = "r39"
  
- KERNEL_VERSION = "${@get_kernelversion('${B}')}"
--KERNEL_MAJOR_VERSION = "${@get_kernelmajorversion('${KERNEL_VERSION}')}"
+ # BINV should be incremented after updating to a revision
+ # after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
+@@ -216,6 +216,7 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH};proto=http \
+        file://gcc-poison-parameters.patch \
+        file://gcc-ppc-config-fix.patch \
+        file://gcc-ppc-include-config-linux.h.patch \
++       file://use-defaults.h-and-t-oe-in-B.patch \
+        "
  
- KERNEL_LOCALVERSION ?= ""
- 
-@@ -85,9 +84,6 @@ KERNEL_ALT_IMAGETYPE ??= ""
- kernel_do_compile() {
- 	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
- 	oe_runmake include/linux/version.h CC="${KERNEL_CC}" LD="${KERNEL_LD}"
--	if [ "${KERNEL_MAJOR_VERSION}" != "2.6" ]; then
--		oe_runmake dep CC="${KERNEL_CC}" LD="${KERNEL_LD}"
--	fi
- 	oe_runmake ${KERNEL_IMAGETYPE} ${KERNEL_ALT_IMAGETYPE} CC="${KERNEL_CC}" LD="${KERNEL_LD}"
- }
- 
-@@ -123,9 +119,7 @@ kernel_do_install() {
- 	install -m 0644 vmlinux ${D}/boot/vmlinux-${KERNEL_VERSION}
- 	[ -e Module.symvers ] && install -m 0644 Module.symvers ${D}/boot/Module.symvers-${KERNEL_VERSION}
- 	install -d ${D}/etc/modutils
--	if [ "${KERNEL_MAJOR_VERSION}" = "2.6" ]; then
--		install -d ${D}/etc/modprobe.d
--	fi
-+	install -d ${D}/etc/modprobe.d
- 
- 	#
- 	# Support for external module building - create a minimal copy of the
-@@ -267,7 +261,7 @@ if [ ! -e "$D/lib/modules/${KERNEL_VERSION}" ]; then
- 	mkdir -p $D/lib/modules/${KERNEL_VERSION}
- fi
- if [ -n "$D" ]; then
--	${HOST_PREFIX}depmod-${KERNEL_MAJOR_VERSION} -A -b $D -F ${STAGING_KERNEL_DIR}/System.map-${KERNEL_VERSION} ${KERNEL_VERSION}
-+	${HOST_PREFIX}depmod -A -b $D -F ${STAGING_KERNEL_DIR}/System.map-${KERNEL_VERSION} ${KERNEL_VERSION}
- else
- 	depmod -a
- fi
-@@ -275,7 +269,7 @@ fi
- 
- pkg_postinst_modules () {
- if [ -n "$D" ]; then
--	${HOST_PREFIX}depmod-${KERNEL_MAJOR_VERSION} -A -b $D -F ${STAGING_KERNEL_DIR}/System.map-${KERNEL_VERSION} ${KERNEL_VERSION}
-+	${HOST_PREFIX}depmod -A -b $D -F ${STAGING_KERNEL_DIR}/System.map-${KERNEL_VERSION} ${KERNEL_VERSION}
- else
- 	depmod -a
- 	update-modules || true
-@@ -348,9 +342,8 @@ python populate_packages_prepend () {
- 			kernelver_stripped = m.group(1)
- 		path = bb.data.getVar("PATH", d, 1)
- 		host_prefix = bb.data.getVar("HOST_PREFIX", d, 1) or ""
--		major_version = bb.data.getVar('KERNEL_MAJOR_VERSION', d, 1)
- 
--		cmd = "PATH=\"%s\" %sdepmod-%s -n -a -r -b %s -F %s/boot/System.map-%s %s" % (path, host_prefix, major_version, dvar, dvar, kernelver, kernelver_stripped)
-+		cmd = "PATH=\"%s\" %sdepmod -n -a -r -b %s -F %s/boot/System.map-%s %s" % (path, host_prefix, dvar, dvar, kernelver, kernelver_stripped)
- 		f = os.popen(cmd, 'r')
- 
- 		deps = {}
-@@ -427,10 +420,7 @@ python populate_packages_prepend () {
- 		# Write out any modconf fragment
- 		modconf = bb.data.getVar('module_conf_%s' % basename, d, 1)
- 		if modconf:
--			if bb.data.getVar("KERNEL_MAJOR_VERSION", d, 1) == "2.6":
--				name = '%s/etc/modprobe.d/%s.conf' % (dvar, basename)
--			else:
--				name = '%s/etc/modutils/%s.conf' % (dvar, basename)
-+			name = '%s/etc/modprobe.d/%s.conf' % (dvar, basename)
- 			f = open(name, 'w')
- 			f.write("%s\n" % modconf)
- 			f.close()
+ # Language Overrides
+diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.5/use-defaults.h-and-t-oe-in-B.patch b/meta-oe/recipes-devtools/gcc/gcc-4.5/use-defaults.h-and-t-oe-in-B.patch
+new file mode 100644
+index 0000000..c93e6ca
+--- /dev/null
++++ b/meta-oe/recipes-devtools/gcc/gcc-4.5/use-defaults.h-and-t-oe-in-B.patch
+@@ -0,0 +1,57 @@
++Upstream-Status: Pending
++
++Use the defaults.h in ${B} instead of ${S}, and t-oe in ${B}, so that
++the source can be shared between gcc-cross-initial,
++gcc-cross-intermediate, gcc-cross, gcc-runtime, and also the sdk build.
++---
++ gcc/Makefile.in  |    2 +-
++ gcc/configure    |    4 ++--
++ gcc/configure.ac |    4 ++--
++ 3 files changed, 5 insertions(+), 5 deletions(-)
++
++diff --git a/gcc/Makefile.in b/gcc/Makefile.in
++index d91f93a..03ee2bd 100644
++--- a/gcc/Makefile.in
+++++ b/gcc/Makefile.in
++@@ -461,7 +461,7 @@ LIMITS_H_TEST = [ -f $(SYSTEM_HEADER_DIR)/limits.h ]
++ TARGET_SYSTEM_ROOT = @TARGET_SYSTEM_ROOT@
++ 
++ xmake_file=@xmake_file@
++-tmake_file=@tmake_file@
+++tmake_file=@tmake_file@ ./t-oe
++ TM_ENDIAN_CONFIG=@TM_ENDIAN_CONFIG@
++ TM_MULTILIB_CONFIG=@TM_MULTILIB_CONFIG@
++ TM_MULTILIB_EXCEPTIONS_CONFIG=@TM_MULTILIB_EXCEPTIONS_CONFIG@
++diff --git a/gcc/configure b/gcc/configure
++index f440fa2..dafb0c1 100755
++--- a/gcc/configure
+++++ b/gcc/configure
++@@ -10838,8 +10838,8 @@ for f in $tm_file; do
++        tm_include_list="${tm_include_list} $f"
++        ;;
++     defaults.h )
++-       tm_file_list="${tm_file_list} \$(srcdir)/$f"
++-       tm_include_list="${tm_include_list} $f"
+++       tm_file_list="${tm_file_list} ./$f"
+++       tm_include_list="${tm_include_list} ./$f"
++        ;;
++     * )
++        tm_file_list="${tm_file_list} \$(srcdir)/config/$f"
++diff --git a/gcc/configure.ac b/gcc/configure.ac
++index d003091..ba422e6 100644
++--- a/gcc/configure.ac
+++++ b/gcc/configure.ac
++@@ -1652,8 +1652,8 @@ for f in $tm_file; do
++        tm_include_list="${tm_include_list} $f"
++        ;;
++     defaults.h )
++-       tm_file_list="${tm_file_list} \$(srcdir)/$f"
++-       tm_include_list="${tm_include_list} $f"
+++       tm_file_list="${tm_file_list} ./$f"
+++       tm_include_list="${tm_include_list} ./$f"
++        ;;
++     * )
++        tm_file_list="${tm_file_list} \$(srcdir)/config/$f"
++-- 
++1.7.1
++
 -- 
 1.7.4.1
 
