@@ -1,23 +1,38 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <holger+oe@freyther.de>) id 1Qcdy8-0005i3-0l
+	(envelope-from <raj.khem@gmail.com>) id 1Qce8c-0005uC-PF
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Jul 2011 15:41:16 +0200
-Received: from [192.168.0.101] (91-64-95-94-dynip.superkabel.de [91.64.95.94])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 7D12B1B10C09;
-	Fri,  1 Jul 2011 13:45:20 +0000 (UTC)
-Message-ID: <4E0DCD9A.4030508@freyther.de>
-Date: Fri, 01 Jul 2011 15:37:30 +0200
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110516 Lightning/1.0b2 Thunderbird/3.1.10
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	bitbake-devel@lists.openembedded.org
-References: <4E03211B.40205@freyther.de>
-	<1308828119.21613.138.camel@phil-desktop>
-In-Reply-To: <1308828119.21613.138.camel@phil-desktop>
-Subject: Re: RFC One recipe with two git repository as sources
+	Fri, 01 Jul 2011 15:52:06 +0200
+Received: by iym10 with SMTP id 10so3070214iym.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 Jul 2011 06:48:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=references:in-reply-to:mime-version:content-transfer-encoding
+	:content-type:message-id:cc:x-mailer:from:subject:date:to;
+	bh=exEZC1bWPEZgoxh/J2wPFBFf/UKGURWFXxDvyz7mDAY=;
+	b=XCaP7S0YXdx1pwvrf+xRqp9Ik+6Q+IJaZ4d7RWr5oJbteAtL1g2YnMcp6pZEOrAweH
+	ywqOUEkN1PpXsy1RbaCE9OzQgldZcAAHv1KZ5CBV8+ktL7M4mKnxct0Iqeecq3dSHrTi
+	JI2X8XSUasH76NWInmh92dQysWOaXO20bS0Ps=
+Received: by 10.42.158.10 with SMTP id f10mr2242414icx.433.1309528100823;
+	Fri, 01 Jul 2011 06:48:20 -0700 (PDT)
+Received: from [192.168.1.81] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id e23sm1877194ibe.40.2011.07.01.06.48.19
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 01 Jul 2011 06:48:19 -0700 (PDT)
+References: <1309498698-13369-1-git-send-email-raj.khem@gmail.com>
+	<1309513723.2633.32.camel@phil-desktop>
+In-Reply-To: <1309513723.2633.32.camel@phil-desktop>
+Mime-Version: 1.0 (iPad Mail 8J2)
+Message-Id: <BDFA7941-3D06-4F4E-8E0A-00F6B4D7E920@gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Mailer: iPad Mail (8J2)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 1 Jul 2011 06:48:37 -0700
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] systemd_git.bb: Alias mkostemp() to mkstemp() for uclibc targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,68 +46,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jul 2011 13:41:16 -0000
-X-Groupsio-MsgNum: 32933
-Content-Type: multipart/mixed; boundary="------------010704050509060801000306"
-
---------------010704050509060801000306
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 01 Jul 2011 13:52:07 -0000
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset=us-ascii
 
-On 06/23/2011 01:21 PM, Phil Blundell wrote:
-> On Thu, 2011-06-23 at 13:18 +0200, Holger Freyther wrote:
->> -        destdir = os.path.join(destdir, "git/")
->> +        destsuffix = ud.parm.get("destsuffix", "git/")
->> +        print destsuffix
->> +        destdir = os.path.join(destdir, destsuffix)
+
+
+On Jul 1, 2011, at 2:48 AM, Phil Blundell <philb@gnu.org> wrote:
+
+> On Thu, 2011-06-30 at 22:38 -0700, Khem Raj wrote:
+>> ++#ifdef __UCLIBC__
+>> ++/* uclibc does not implement mkostemp GNU extention */
+>> ++#define mkostemp(x,y) mkstemp(x)
+>> ++#endif
 > 
-> I think that "print" might be extraneous, but other than this your patch
-> looks awesome.  I think this would resolve the problem that I was having
-> in
-> http://lists.linuxtogo.org/pipermail/openembedded-core/2011-June/004375.html and to which I never found a solution which didn't involve patching bitbake.
+> Is that safe?  It would be nice to have some commentary in the patch
+> explaining why the flags are not required for systemd to operate
+> correctly.  If it genuinely doesn't need to be using mkostemp() then
+> perhaps this change should just be made upstream for all libcs.
 > 
-
-Hi all,
-
-updated patch without the debug print statement in it. what do you think?
-could this be applied to the bitbake repository?
-
-holger
-
---------------010704050509060801000306
-Content-Type: text/x-patch;
- name="0001-fetch2-git-Allow-to-specify-the-name-of-the-checkout.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename*0="0001-fetch2-git-Allow-to-specify-the-name-of-the-checkout.pa";
- filename*1="tch"
-
-From 5f58446bd2022c149b58a9f8faf738d1b56597a6 Mon Sep 17 00:00:00 2001
-From: Holger Hans Peter Freyther <zecke@selfish.org>
-Date: Thu, 23 Jun 2011 04:50:13 +0800
-Subject: [PATCH] fetch2/git: Allow to specify the name of the checkout directory
-
-Signed-off-by: Holger Hans Peter Freyther <holger@moiji-mobile.com>
----
- lib/bb/fetch2/git.py |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
-
-diff --git a/lib/bb/fetch2/git.py b/lib/bb/fetch2/git.py
-index f3bc793..534c87d 100644
---- a/lib/bb/fetch2/git.py
-+++ b/lib/bb/fetch2/git.py
-@@ -212,7 +212,8 @@ class Git(FetchMethod):
-         else:
-             readpathspec = ""
- 
--        destdir = os.path.join(destdir, "git/")
-+        destsuffix = ud.parm.get("destsuffix", "git/")
-+        destdir = os.path.join(destdir, destsuffix)
-         if os.path.exists(destdir):
-             bb.utils.prunedir(destdir)
- 
--- 
-1.7.4.1
+right
+I have to test it eglibc systems 
+> p.
+> 
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
---------------010704050509060801000306--
