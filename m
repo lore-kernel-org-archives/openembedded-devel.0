@@ -1,30 +1,32 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from vms173001pub.verizon.net ([206.46.173.1])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QdOvH-0005bX-31
+	(envelope-from <openembedded@rkmorris.us>) id 1QdVQ5-00049D-Ja
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Jul 2011 17:49:27 +0200
-Received: by pzk36 with SMTP id 36so1953844pzk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Jul 2011 08:45:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=wG6zhrf3hqjZNdxJ7WCDjEBOYWm9GRlLIU8w+djDmx4=;
-	b=hhH1hQEIAVwez3R42KIK4LIJ0h7Ho+il5pekKM6u13+iCKU3o3WsvSQIaoy2DfkDJm
-	D7BQIfTkapENDiGuszs15hGv0cT6u1MvbcgZU9G9eM3FgUUEuTiiK1bGATYeSZHjk5eJ
-	HyU5hM+6dyhn/U43hugg098hrEA/ieC7uaBPk=
-Received: by 10.68.55.9 with SMTP id n9mr6490122pbp.513.1309707632421;
-	Sun, 03 Jul 2011 08:40:32 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id i9sm3343734pbk.68.2011.07.03.08.40.31
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 03 Jul 2011 08:40:31 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Mon, 04 Jul 2011 00:45:41 +0200
+Received: from server ([unknown] [173.74.34.213]) by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LNS005KS1KYOP10@vms173001.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	03 Jul 2011 16:41:22 -0500 (CDT)
+Received: from server (127.0.0.1) by server (Axigen)
+	with ESMTPSA id 15A968; Sun, 03 Jul 2011 16:41:17 -0500
+Received: from [192.168.1.2] by rkmorris.us with HTTP; Sun,
+	03 Jul 2011 16:41:16 -0500
+From: Russell Morris <openembedded@rkmorris.us>
+Date: Sun, 03 Jul 2011 16:41:16 -0500
+X-Mailer: Axigen WebMail
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  3 Jul 2011 08:40:27 -0700
-Message-Id: <1309707627-1572-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-Subject: [meta-oe][PATCH v3] systemd: Replace use of %m in printf formats
+Message-id: <1309729276205539500@rkmorris.us>
+In-reply-to: <1308515164700783500@rkmorris.us>
+References: <1307481663432021500@rkmorris.us> <4DEFBF58.1010903@mentor.com>
+	<1308007647883960500@rkmorris.us> <4DF8119C.2000106@mentor.com>
+	<1308515164700783500@rkmorris.us>
+Importance: Normal
+MIME-version: 1.0
+X-AxigenVirus-Level: 1
+X-AxigenSpam-Level: 2
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Builds Failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,456 +40,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Jul 2011 15:49:27 -0000
+X-List-Received-Date: Sun, 03 Jul 2011 22:45:42 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-The patch is applied optionally only to uclibc builds
-Also move the mkostemp replacement patch to uclibc only list
+Has anyone had any luck with bash lately? I can't get it to build - so even=
+ console-image fails.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../systemd/systemd/format-replace-m-uclibc.patch  |  402 ++++++++++++++++++++
- meta-oe/recipes-core/systemd/systemd_git.bb        |    8 +-
- 2 files changed, 408 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch
+=20
 
-diff --git a/meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch b/meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch
-new file mode 100644
-index 0000000..3b9ed31
---- /dev/null
-+++ b/meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch
-@@ -0,0 +1,402 @@
-+Patch from Henning. %m is a glibc only thing. For uclibc we need to do it
-+differently. So we use static strings instead of mallocing them and free'ing
-+
-+I dont know if upstream systemd have plans to make systemd work on non
-+glibc system libraries if not then this patch would not make sense for 
-+upstream
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Index: git/src/mount-setup.c
-+===================================================================
-+--- git.orig/src/mount-setup.c	2011-07-03 08:24:43.892018457 -0700
-++++ git/src/mount-setup.c	2011-07-03 08:35:23.592956700 -0700
-+@@ -147,10 +147,11 @@
-+ 
-+         for (;;) {
-+                 MountPoint p;
-+-                char *controller, *where;
-++                char controller[30];
-++                char *where;
-+                 int enabled = false;
-+ 
-+-                if (fscanf(f, "%ms %*i %*i %i", &controller, &enabled) != 2) {
-++                if (fscanf(f, "%29s %*i %*i %i", controller, &enabled) != 2) {
-+ 
-+                         if (feof(f))
-+                                 break;
-+@@ -161,12 +162,10 @@
-+                 }
-+ 
-+                 if (!enabled) {
-+-                        free(controller);
-+                         continue;
-+                 }
-+ 
-+                 if (asprintf(&where, "/sys/fs/cgroup/%s", controller) < 0) {
-+-                        free(controller);
-+                         r = -ENOMEM;
-+                         goto finish;
-+                 }
-+@@ -180,7 +179,6 @@
-+                 p.fatal = false;
-+ 
-+                 r = mount_one(&p);
-+-                free(controller);
-+                 free(where);
-+ 
-+                 if (r < 0)
-+Index: git/src/socket-util.c
-+===================================================================
-+--- git.orig/src/socket-util.c	2011-07-03 08:24:43.892018457 -0700
-++++ git/src/socket-util.c	2011-07-03 08:25:38.242098176 -0700
-+@@ -192,7 +192,7 @@
-+ int socket_address_parse_netlink(SocketAddress *a, const char *s) {
-+         int family;
-+         unsigned group = 0;
-+-        char* sfamily = NULL;
-++        char sfamily[50];
-+         assert(a);
-+         assert(s);
-+ 
-+@@ -200,17 +200,14 @@
-+         a->type = SOCK_RAW;
-+ 
-+         errno = 0;
-+-        if (sscanf(s, "%ms %u", &sfamily, &group) < 1)
-++        if (sscanf(s, "%49s %u", &sfamily, &group) < 1)
-+                 return errno ? -errno : -EINVAL;
-+ 
-+         if ((family = netlink_family_from_string(sfamily)) < 0)
-+                 if (safe_atoi(sfamily, &family) < 0) {
-+-                        free(sfamily);
-+                         return -EINVAL;
-+                 }
-+ 
-+-        free(sfamily);
-+-
-+         a->sockaddr.nl.nl_family = AF_NETLINK;
-+         a->sockaddr.nl.nl_groups = group;
-+ 
-+Index: git/src/cryptsetup-generator.c
-+===================================================================
-+--- git.orig/src/cryptsetup-generator.c	2011-07-03 08:24:43.892018457 -0700
-++++ git/src/cryptsetup-generator.c	2011-07-03 08:25:38.252098188 -0700
-+@@ -260,7 +260,7 @@
-+ 
-+         for (;;) {
-+                 char line[LINE_MAX], *l;
-+-                char *name = NULL, *device = NULL, *password = NULL, *options = NULL;
-++                char name[50], device[50], password[50], options[50] = NULL;
-+                 int k;
-+ 
-+                 if (!(fgets(line, sizeof(line), f)))
-+@@ -272,7 +272,7 @@
-+                 if (*l == '#' || *l == 0)
-+                         continue;
-+ 
-+-                if ((k = sscanf(l, "%ms %ms %ms %ms", &name, &device, &password, &options)) < 2 || k > 4) {
-++                if ((k = sscanf(l, "%s %s %s %s", &name, &device, &password, &options)) < 2 || k > 4) {
-+                         log_error("Failed to parse /etc/crypttab:%u, ignoring.", n);
-+                         r = EXIT_FAILURE;
-+                         goto next;
-+@@ -281,11 +281,7 @@
-+                 if (create_disk(name, device, password, options) < 0)
-+                         r = EXIT_FAILURE;
-+ 
-+-        next:
-+-                free(name);
-+-                free(device);
-+-                free(password);
-+-                free(options);
-++        next:;
-+         }
-+ 
-+ finish:
-+Index: git/src/swap.c
-+===================================================================
-+--- git.orig/src/swap.c	2011-07-03 08:24:43.892018457 -0700
-++++ git/src/swap.c	2011-07-03 08:34:20.512864178 -0700
-+@@ -1043,11 +1043,12 @@
-+         (void) fscanf(m->proc_swaps, "%*s %*s %*s %*s %*s\n");
-+ 
-+         for (i = 1;; i++) {
-+-                char *dev = NULL, *d;
-++                char *d;
-++                char dev[20];
-+                 int prio = 0, k;
-+ 
-+                 if ((k = fscanf(m->proc_swaps,
-+-                                "%ms "  /* device/file */
-++                                "%19s "  /* device/file */
-+                                 "%*s "  /* type of swap */
-+                                 "%*s "  /* swap size */
-+                                 "%*s "  /* used */
-+@@ -1058,12 +1059,10 @@
-+                                 break;
-+ 
-+                         log_warning("Failed to parse /proc/swaps:%u.", i);
-+-                        free(dev);
-+                         continue;
-+                 }
-+ 
-+                 d = cunescape(dev);
-+-                free(dev);
-+ 
-+                 if (!d)
-+                         return -ENOMEM;
-+Index: git/src/tmpfiles.c
-+===================================================================
-+--- git.orig/src/tmpfiles.c	2011-07-03 08:24:43.892018457 -0700
-++++ git/src/tmpfiles.c	2011-07-03 08:25:38.272098222 -0700
-+@@ -66,7 +66,7 @@
-+ typedef struct Item {
-+         char type;
-+ 
-+-        char *path;
-++        char path[50];
-+         uid_t uid;
-+         gid_t gid;
-+         mode_t mode;
-+@@ -619,7 +619,6 @@
-+ static void item_free(Item *i) {
-+         assert(i);
-+ 
-+-        free(i->path);
-+         free(i);
-+ }
-+ 
-+@@ -654,7 +653,7 @@
-+ 
-+ static int parse_line(const char *fname, unsigned line, const char *buffer) {
-+         Item *i, *existing;
-+-        char *mode = NULL, *user = NULL, *group = NULL, *age = NULL;
-++        char mode[50], user[50], group[50], age[50];
-+         Hashmap *h;
-+         int r;
-+ 
-+@@ -669,17 +668,17 @@
-+ 
-+         if (sscanf(buffer,
-+                    "%c "
-+-                   "%ms "
-+-                   "%ms "
-+-                   "%ms "
-+-                   "%ms "
-+-                   "%ms",
-++                   "%s "
-++                   "%s "
-++                   "%s "
-++                   "%s "
-++                   "%s",
-+                    &i->type,
-+                    &i->path,
-+-                   &mode,
-+-                   &user,
-+-                   &group,
-+-                   &age) < 2) {
-++                   mode,
-++                   user,
-++                   group,
-++                   age) < 2) {
-+                 log_error("[%s:%u] Syntax error.", fname, line);
-+                 r = -EIO;
-+                 goto finish;
-+@@ -793,11 +792,6 @@
-+         r = 0;
-+ 
-+ finish:
-+-        free(user);
-+-        free(group);
-+-        free(mode);
-+-        free(age);
-+-
-+         if (i)
-+                 item_free(i);
-+ 
-+Index: git/src/mount.c
-+===================================================================
-+--- git.orig/src/mount.c	2011-07-03 08:24:43.892018457 -0700
-++++ git/src/mount.c	2011-07-03 08:33:43.112809328 -0700
-+@@ -24,6 +24,7 @@
-+ #include <mntent.h>
-+ #include <sys/epoll.h>
-+ #include <signal.h>
-++#include <string.h>
-+ 
-+ #include "unit.h"
-+ #include "mount.h"
-+@@ -1555,7 +1556,13 @@
-+ static int mount_load_proc_self_mountinfo(Manager *m, bool set_flags) {
-+         int r = 0;
-+         unsigned i;
-+-        char *device, *path, *options, *options2, *fstype, *d, *p, *o;
-++        char *d, *p, *o;
-++        char device[50];
-++        char path[50];
-++        char options[50];
-++        char options2[50];
-++        char fstype[50];
-++
-+ 
-+         assert(m);
-+ 
-+@@ -1564,26 +1571,26 @@
-+         for (i = 1;; i++) {
-+                 int k;
-+ 
-+-                device = path = options = options2 = fstype = d = p = o = NULL;
-++                d = p = o = NULL;
-+ 
-+                 if ((k = fscanf(m->proc_self_mountinfo,
-+                                 "%*s "       /* (1) mount id */
-+                                 "%*s "       /* (2) parent id */
-+                                 "%*s "       /* (3) major:minor */
-+                                 "%*s "       /* (4) root */
-+-                                "%ms "       /* (5) mount point */
-+-                                "%ms"        /* (6) mount options */
-++                                "%49s "       /* (5) mount point */
-++                                "%49s"        /* (6) mount options */
-+                                 "%*[^-]"     /* (7) optional fields */
-+                                 "- "         /* (8) separator */
-+-                                "%ms "       /* (9) file system type */
-+-                                "%ms"        /* (10) mount source */
-+-                                "%ms"        /* (11) mount options 2 */
-++                                "%49s "       /* (9) file system type */
-++                                "%49s"        /* (10) mount source */
-++                                "%49s"        /* (11) mount options 2 */
-+                                 "%*[^\n]",   /* some rubbish at the end */
-+-                                &path,
-+-                                &options,
-+-                                &fstype,
-+-                                &device,
-+-                                &options2)) != 5) {
-++                                path,
-++                                options,
-++                                fstype,
-++                                device,
-++                                options2)) != 5) {
-+ 
-+                         if (k == EOF)
-+                                 break;
-+@@ -1607,22 +1614,12 @@
-+                         r = k;
-+ 
-+ clean_up:
-+-                free(device);
-+-                free(path);
-+-                free(options);
-+-                free(options2);
-+-                free(fstype);
-+                 free(d);
-+                 free(p);
-+                 free(o);
-+         }
-+ 
-+ finish:
-+-        free(device);
-+-        free(path);
-+-        free(options);
-+-        free(options2);
-+-        free(fstype);
-+         free(d);
-+         free(p);
-+         free(o);
-+Index: git/src/umount.c
-+===================================================================
-+--- git.orig/src/umount.c	2011-07-03 08:24:43.892018457 -0700
-++++ git/src/umount.c	2011-07-03 08:33:06.732755969 -0700
-+@@ -60,7 +60,9 @@
-+ 
-+ static int mount_points_list_get(MountPoint **head) {
-+         FILE *proc_self_mountinfo;
-+-        char *path, *p;
-++        char *p;
-++        char path[50];
-++
-+         unsigned int i;
-+         int r;
-+ 
-+@@ -72,17 +74,17 @@
-+         for (i = 1;; i++) {
-+                 int k;
-+                 MountPoint *m;
-+-                char *root;
-++                char root[50];
-+                 bool skip_ro;
-+ 
-+-                path = p = NULL;
-++                p = NULL;
-+ 
-+                 if ((k = fscanf(proc_self_mountinfo,
-+                                 "%*s "       /* (1) mount id */
-+                                 "%*s "       /* (2) parent id */
-+                                 "%*s "       /* (3) major:minor */
-+-                                "%ms "       /* (4) root */
-+-                                "%ms "       /* (5) mount point */
-++                                "%49s "       /* (4) root */
-++                                "%49s "       /* (5) mount point */
-+                                 "%*s"        /* (6) mount options */
-+                                 "%*[^-]"     /* (7) optional fields */
-+                                 "- "         /* (8) separator */
-+@@ -90,24 +92,21 @@
-+                                 "%*s"        /* (10) mount source */
-+                                 "%*s"        /* (11) mount options 2 */
-+                                 "%*[^\n]",   /* some rubbish at the end */
-+-                                &root,
-+-                                &path)) != 2) {
-++                                root,
-++                                path)) != 2) {
-+                         if (k == EOF)
-+                                 break;
-+ 
-+                         log_warning("Failed to parse /proc/self/mountinfo:%u.", i);
-+ 
-+-                        free(path);
-+                         continue;
-+                 }
-+ 
-+                 /* If we encounter a bind mount, don't try to remount
-+                  * the source dir too early */
-+                 skip_ro = !streq(root, "/");
-+-                free(root);
-+ 
-+                 p = cunescape(path);
-+-                free(path);
-+ 
-+                 if (!p) {
-+                         r = -ENOMEM;
-+@@ -152,28 +151,28 @@
-+ 
-+         for (i = 2;; i++) {
-+                 MountPoint *swap;
-+-                char *dev = NULL, *d;
-++                char *d;
-++                char dev[50];
-++
-+                 int k;
-+ 
-+                 if ((k = fscanf(proc_swaps,
-+-                                "%ms " /* device/file */
-++                                "%50s " /* device/file */
-+                                 "%*s " /* type of swap */
-+                                 "%*s " /* swap size */
-+                                 "%*s " /* used */
-+                                 "%*s\n", /* priority */
-+-                                &dev)) != 1) {
-++                                dev)) != 1) {
-+ 
-+                         if (k == EOF)
-+                                 break;
-+ 
-+                         log_warning("Failed to parse /proc/swaps:%u.", i);
-+ 
-+-                        free(dev);
-+                         continue;
-+                 }
-+ 
-+                 if (endswith(dev, "(deleted)")) {
-+-                        free(dev);
-+                         continue;
-+                 }
-+ 
-diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
-index 40b93b8..e5115f7 100644
---- a/meta-oe/recipes-core/systemd/systemd_git.bb
-+++ b/meta-oe/recipes-core/systemd/systemd_git.bb
-@@ -15,7 +15,7 @@ inherit gitpkgv
- PKGV = "v${GITPKGVTAG}"
- 
- PV = "git"
--PR = "r5"
-+PR = "r6"
- 
- inherit autotools vala
- 
-@@ -23,9 +23,13 @@ SRCREV = "8585357a0e5e9f4d56e999d7cd1a73e77ae0eb80"
- 
- SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
-            file://0001-systemd-disable-xml-file-stuff-and-introspection.patch \
--           file://paper-over-mkostemp.patch \
-            file://use-nonet-for-docbook.patch \
-+           ${UCLIBCPATCHES} \
-           "
-+UCLIBCPATCHES = ""
-+UCLIBCPATCHES_libc-uclibc = "file://paper-over-mkostemp.patch \
-+                             file://format-replace-m-uclibc.patch \
-+                            "
- 
- S = "${WORKDIR}/git"
- 
--- 
-1.7.4.1
+Thanks!
+
+=20
+
+... Russell
+
+=20
 
 
 
+On Sun, 06/19/2011 03:26 PM, Russell Morris <openembedded@rkmorris.us> wro=
+te:
+
+
+>=20
+
+
+Hi,
+
+>=20
+Sorry for the delay - out of town for a few days, just got back to this.
+
+>=20
+I did what you mentioned below, modified the recipe for bash_3.2 ... but n=
+ow a new error ... :-). Here is what I get,
+
+>=20
+
+NOTE: Running task 3201 of 6177 (ID: 3047, /mnt/OpenEmbedded/openembedded/=
+recipes/bash/bash_3.2.bb, do_setscene)
+NOTE: package bash-3.2-r13: task do_setscene: Started
+NOTE: package bash-3.2-r13: task do_setscene: Succeeded
+NOTE: Running task 3202 of 6177 (ID: 3046, /mnt/OpenEmbedded/openembedded/=
+recipes/bash/bash_3.2.bb, do_fetch)
+NOTE: package bash-3.2-r13: task do_fetch: Started
+NOTE: package bash-3.2-r13: task do_fetch: Succeeded
+NOTE: Running task 3203 of 6177 (ID: 3039, /mnt/OpenEmbedded/openembedded/=
+recipes/bash/bash_3.2.bb, do_unpack)
+NOTE: package bash-3.2-r13: task do_unpack: Started
+NOTE: package bash-3.2-r13: task do_unpack: Succeeded
+NOTE: Running task 3637 of 6177 (ID: 3040, /mnt/OpenEmbedded/openembedded/=
+recipes/bash/bash_3.2.bb, do_patch)
+NOTE: package bash-3.2-r13: task do_patch: Started
+ERROR: Execution of 'git --git-dir=3D. apply -p0 /mnt/OpenEmbedded/sources=
+/bash32-001' failed with exit code 1:
+error: No changes
+
+>=20
+NOTE: package bash-3.2-r13: task patch_do_patch: Failed
+ERROR: Function 'patch_do_patch' failed
+ERROR: Task 3040 (/mnt/OpenEmbedded/openembedded/recipes/bash/bash_3.2.bb,=
+ do_patch) failed with exit code '1'
+ERROR: '/mnt/OpenEmbedded/openembedded/recipes/bash/bash_3.2.bb' failed
+
+>=20
+Thoughts?
+
+>=20
+Thanks,
+... Russell
+
+>=20
+> On Tue, 06/14/2011 08:57 PM, Tom Rini <tom_rini@mentor.com> wrote:
+>=20
+>=20
+On 06/13/2011 04:27 PM, Russell Morris wrote:
+> > Hi,
+> > Perhaps a dumb question, but ... do I need to do this? I can give it a=
+ try (though I'm not quite sure I understand what needs to be changed). Jus=
+t trying to figure out how to get this working again.
+> > Thanks!
+>=20
+> Since you have a failing setup, yes, please :)
+>=20
+> To make git be used as the patch tool, add
+> PATCHTOOL =3D "git" to the recipe, increase the PR and add a comment abo=
+ut
+> why we do this.
+>=20
+> --
+> Tom Rini
+> Mentor Graphics Corporation
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+From ozgungunay@gmail.com Mon Jul 04 08:12:19 2011
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <ozgungunay@gmail.com>) id 1QdcOJ-0007U5-6Z
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Jul 2011 08:12:19 +0200
+Received: by gyd12 with SMTP id 12so1996337gyd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 03 Jul 2011 23:08:30 -0700 (PDT)
+DKIM-Signature: v
