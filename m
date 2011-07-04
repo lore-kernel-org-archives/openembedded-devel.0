@@ -1,31 +1,22 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QdfDh-0003Ln-Gi
+	(envelope-from <philb@gnu.org>) id 1Qdfgw-0003hh-E7
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Jul 2011 11:13:33 +0200
-Received: by bwf20 with SMTP id 20so4504789bwf.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jul 2011 02:09:45 -0700 (PDT)
-Received: by 10.204.136.1 with SMTP id p1mr1918643bkt.105.1309770584214;
-	Mon, 04 Jul 2011 02:09:44 -0700 (PDT)
-Received: from mobil-400-586.intern.dresearch.de
-	(pd95cb174.dip0.t-ipconnect.de [217.92.177.116])
-	by mx.google.com with ESMTPS id e16sm4723429bke.6.2011.07.04.02.09.42
-	(version=SSLv3 cipher=OTHER); Mon, 04 Jul 2011 02:09:43 -0700 (PDT)
-Message-ID: <4E118356.2000104@dresearch-fe.de>
-Date: Mon, 04 Jul 2011 11:09:42 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
-MIME-Version: 1.0
+	Mon, 04 Jul 2011 11:43:46 +0200
+Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1QdfdI-0004r8-7Z
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Jul 2011 11:40:00 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1309454880.4401.32.camel@mattotaupa>
-	<1309768279-4797-2-git-send-email-sledz@dresearch-fe.de>
-	<1309769664.4472.26.camel@mattotaupa>
-In-Reply-To: <1309769664.4472.26.camel@mattotaupa>
-X-Enigmail-Version: 1.2
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
-Subject: Re: [PATCH v2 2/2] ppp-2.4.5: remove `DP = "-1"`
+In-Reply-To: <1309654060-29955-1-git-send-email-raj.khem@gmail.com>
+References: <1309654060-29955-1-git-send-email-raj.khem@gmail.com>
+Date: Mon, 04 Jul 2011 10:39:59 +0100
+Message-ID: <1309772399.2633.97.camel@phil-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+Subject: Re: [meta-oe][PATCH v2] systemd: Replace use of %m in printf formats
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,37 +30,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jul 2011 09:13:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 04 Jul 2011 09:43:46 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On 04.07.2011 10:54, Paul Menzel wrote:
-> Am Montag, den 04.07.2011, 10:31 +0200 schrieb Steffen Sledz:
->> Oe-core is using 2.4.5 and it works OK there.
->> 
->> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de> --- recipes/ppp/ppp_2.4.5.bb |    4 +--- 1 files changed, 1 insertions(+), 3 deletions(-)
->> 
->> diff --git a/recipes/ppp/ppp_2.4.5.bb b/recipes/ppp/ppp_2.4.5.bb index 883b695..faab816 100644 --- a/recipes/ppp/ppp_2.4.5.bb +++ b/recipes/ppp/ppp_2.4.5.bb @@ -3,9 +3,7 @@ DESCRIPTION = "Point-to-Point Protocol (PPP) daemon" HOMEPAGE = "http://samba.org/ppp/" DEPENDS = "libpcap" LICENSE = "BSD GPLv2" -PR = "r2" -# Not well tested -DEFAULT_PREFERENCE = "-1" +PR = "r3"
-> 
-> Is a bump of `PR` needed? The package content does not change, does it?
+On Sat, 2011-07-02 at 17:47 -0700, Khem Raj wrote:
+> +-        if ((fd = mkostemp(temp, O_CLOEXEC|O_CREAT|O_WRONLY)) < 0) {
+> ++        if ((fd = mkstemp(temp)) < 0) {
 
-Not really. I'll revert that before pushing.
+This change looks like it will effectively remove O_CLOEXEC without
+reinstating it anywhere else.  Have you verified this is a safe thing to
+do?
 
->> PARALLEL_MAKE = ""
-> 
-> Is the build still failing when doing a parallel build?
+> +-        fd = mkostemp(path, O_RDWR|O_CLOEXEC);
+> ++        fd = mkstemp(path);
 
-No idea. And not enough time to check it. Sorry.
+Likewise.
 
-Steffen
+> ++		char dev[20];
+> +                 int prio = 0, k;
+> + 
+> +                 if ((k = fscanf(m->proc_swaps,
+> +-                                "%ms "  /* device/file */
+> ++                                "%19s "  /* device/file */
+> +                                 "%*s "  /* type of swap */
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+Is 19 characters definitely enough?  If this is potentially a pathname
+then it could be much longer than that.
+
+p.
+
+
 
 
