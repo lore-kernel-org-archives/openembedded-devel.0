@@ -1,19 +1,28 @@
-Received: from stoexhub01.domain01.net ([83.145.59.142])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1QddDZ-0000Hm-2X
+	(envelope-from <sledz@dresearch-fe.de>) id 1Qdeh8-0002Cr-Ul
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Jul 2011 09:05:17 +0200
-Received: from localhost (193.235.91.228) by STOEXHUB01.domain01.net
-	(10.12.10.1) with Microsoft SMTP Server id 8.3.137.0; Mon, 4 Jul 2011
-	09:01:29 +0200
-From: Anders Darander <anders@chargestorm.se>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 4 Jul 2011 09:01:13 +0200
-Message-ID: <1309762873-2004-1-git-send-email-anders@chargestorm.se>
-X-Mailer: git-send-email 1.7.4.1
+	Mon, 04 Jul 2011 10:39:56 +0200
+Received: by bwf20 with SMTP id 20so4485503bwf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 04 Jul 2011 01:36:07 -0700 (PDT)
+Received: by 10.205.35.1 with SMTP id su1mr5336812bkb.129.1309768566995;
+	Mon, 04 Jul 2011 01:36:06 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id t9sm5341298bkn.20.2011.07.04.01.36.05
+	(version=SSLv3 cipher=OTHER); Mon, 04 Jul 2011 01:36:05 -0700 (PDT)
+Message-ID: <4E117B74.9080904@dresearch-fe.de>
+Date: Mon, 04 Jul 2011 10:36:04 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:5.0) Gecko/20110624 Thunderbird/5.0
 MIME-Version: 1.0
-Cc: Anders Darander <anders@chargestorm.se>
-Subject: [PATCH] tzcode-native: update tzcode and tzdata versions
+To: openembedded-devel@lists.openembedded.org
+References: <1309419211-20670-1-git-send-email-sledz@dresearch-fe.de>
+In-Reply-To: <1309419211-20670-1-git-send-email-sledz@dresearch-fe.de>
+X-Enigmail-Version: 1.2
+Subject: Re: [PATCH] udev: avoid udev stopping persistent pppd connections
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,41 +36,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jul 2011 07:05:17 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 04 Jul 2011 08:39:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Anders Darander <anders@chargestorm.se>
----
- ...code-native_2011e.bb => tzcode-native_2011g.bb} |   10 +++++-----
- 1 files changed, 5 insertions(+), 5 deletions(-)
- rename recipes/tzcode/{tzcode-native_2011e.bb => tzcode-native_2011g.bb} (56%)
+On 30.06.2011 09:33, Steffen Sledz wrote:
+> From: Mario Schuknecht <schuknecht@dresearch-fe.de>
+> 
+> When a pppd session is disconnected it triggers the udev to ifdown the
+> ppp link which kills pppd and inhibits a reconnection.
+> 
+> Now avoid udev stopping ppp connections.
+> 
+> See also:
+>  https://bugs.launchpad.net/ubuntu/+source/ifupdown/+bug/396804
+>  https://bugs.launchpad.net/ubuntu/+source/ifupdown/+bug/78043
+>  http://ubuntuforums.org/showthread.php?t=1177021
+>  http://rants.atmurray.net/2007/01/pppd-persist-not-so-persist-with-udev.html
+> 
+> Signed-off-by: Mario Schuknecht <schuknecht@dresearch-fe.de>
+> Acked-by: Steffen Sledz <sledz@dresearch-fe.de>
+> ---
+>  recipes/udev/udev/network.sh |    2 ++
+>  1 files changed, 2 insertions(+), 0 deletions(-)
+> 
+> diff --git a/recipes/udev/udev/network.sh b/recipes/udev/udev/network.sh
+> index 182c26d..d287855 100644
+> --- a/recipes/udev/udev/network.sh
+> +++ b/recipes/udev/udev/network.sh
+> @@ -9,6 +9,8 @@ test -x /sbin/cardctl && exit 0
+>  # We get two "add" events for hostap cards due to wifi0
+>  echo "$INTERFACE" | grep -q wifi && exit 0
+>  
+> +# Avoid udev stopping persistent ppp connections
+> +echo "$INTERFACE" | grep -q ppp && exit 0
+>  
+>  # Check if /etc/init.d/network has been run yet to see if we are 
+>  # called by starting /etc/rcS.d/S03udev and not by hotplugging a device
 
-diff --git a/recipes/tzcode/tzcode-native_2011e.bb b/recipes/tzcode/tzcode-native_2011g.bb
-similarity index 56%
-rename from recipes/tzcode/tzcode-native_2011e.bb
-rename to recipes/tzcode/tzcode-native_2011g.bb
-index 280840c..d4ac755 100644
---- a/recipes/tzcode/tzcode-native_2011e.bb
-+++ b/recipes/tzcode/tzcode-native_2011g.bb
-@@ -9,11 +9,11 @@ LIC_FILES_CHKSUM = "file://README;md5=3ae8198f82258417ce29066d3b034035"
- # Also, tzdata (and it is needed to build tzcode) version can differ from
- # tzcode version, thus this variable
- 
--TZDATA_PV = "2011e"
-+TZDATA_PV = "2011h"
- 
- PR = "${INC_PR}.0"
- 
--SRC_URI[tzcode-2011e.md5sum] = "fbfc05dbf9ebcfe7c4bba18549870173"
--SRC_URI[tzcode-2011e.sha256sum] = "8fb00f8763aa51d83d6f3190d144124bb7176ca829fc08823d6205297bf0426b"
--SRC_URI[tzdata-2011e.md5sum] = "044a07072300a0ee72b046e5a9a4ec90"
--SRC_URI[tzdata-2011e.sha256sum] = "44fef01de4589a4979eb6b5fdbbfd21a3b135852af1ecbfb9e0368ae47392c79"
-+SRC_URI[tzcode-2011g.md5sum] = "ecb564279b28c5b184421c525d997d6c"
-+SRC_URI[tzcode-2011g.sha256sum] = "636c735d8df1276cc8ab88bc31bb36a21f91ed34e26d181303ecd8fe48021bc2"
-+SRC_URI[tzdata-2011h.md5sum] = "546d27b6c1e5e1097bd512651815017f"
-+SRC_URI[tzdata-2011h.sha256sum] = "c098786d053736dd18d4f1fbebdf41554c6fd702a36f75c18f1c66712d2abc24"
+Ping!
+
 -- 
-1.7.4.1
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
