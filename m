@@ -1,22 +1,21 @@
-Received: from stoexhub01.domain01.net ([83.145.59.142]
-	helo=stoexhub02.domain01.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1Qe4Rj-0007sa-AS
+Received: from stoexhub01.domain01.net ([83.145.59.142])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <anders@chargestorm.se>) id 1Qe4U7-0008Tq-H3
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Jul 2011 14:09:43 +0200
-Received: from localhost (193.235.91.228) by stoexhub02.domain01.net
-	(10.12.10.2) with Microsoft SMTP Server id 8.3.137.0; Tue, 5 Jul 2011
-	14:05:52 +0200
+	Tue, 05 Jul 2011 14:12:11 +0200
+Received: from localhost (193.235.91.228) by STOEXHUB01.domain01.net
+	(10.12.10.1) with Microsoft SMTP Server id 8.3.137.0; Tue, 5 Jul 2011
+	14:08:21 +0200
 From: Anders Darander <anders@chargestorm.se>
+Organization: ChargeStorm AB
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 5 Jul 2011 14:05:49 +0200
-Message-ID: <0ead9e0f4eec3daeeb18b234bc8eb5bfd460e932.1309866872.git.anders@chargestorm.se>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <cover.1309866872.git.anders@chargestorm.se>
+Date: Tue, 5 Jul 2011 14:08:25 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.39-2-amd64; KDE/4.6.4; x86_64; ; )
 References: <cover.1309866872.git.anders@chargestorm.se>
+In-Reply-To: <cover.1309866872.git.anders@chargestorm.se>
 MIME-Version: 1.0
-X-GFI-SMTP-Submission: 1
-Cc: Anders Darander <anders@chargestorm.se>
-Subject: [meta-oe][PATCH 1/1] kernel.bbclass: make external module compile
+Message-ID: <201107051408.25753.anders@chargestorm.se>
+Subject: Re: [PATCH 0/1] Fix external module compilations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,31 +29,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jul 2011 12:09:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 05 Jul 2011 12:12:12 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-When compiling external modules, scripts/basic/fixdep and scripts/mod/modpost, is wanted.
-Do not remove too much from the staged kernel sources.
 
-Signed-off-by: Anders Darander <anders@chargestorm.se>
----
- meta-oe/classes/kernel.bbclass |    1 -
- 1 files changed, 0 insertions(+), 1 deletions(-)
+* Anders Darander Anders Darander <anders@chargestorm.se> [07/05/11 02:04 PM]:
+> When compiling an external module, the compilation errors out, when
+> scripts/basic/fixdep and later on scripts/mod/modpost is being requested.
+>
 
-diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
-index 89aeb92..34aaf17 100644
---- a/meta-oe/classes/kernel.bbclass
-+++ b/meta-oe/classes/kernel.bbclass
-@@ -161,7 +161,6 @@ kernel_do_install() {
- 	# and include files.
- 	#
- 	oe_runmake -C $kerneldir CC="${KERNEL_CC}" LD="${KERNEL_LD}" clean
--	make -C $kerneldir _mrproper_scripts
- 	find $kerneldir -path $kerneldir/scripts -prune -o -name "*.[csS]" -exec rm '{}' \;
- 	find $kerneldir/Documentation -name "*.txt" -exec rm '{}' \;
- 
--- 
-1.7.4.1
+Forget about this e-mail. 
+I've just sent an new one, with meta-oe in the subject.
 
+Cheers,
+Anders
 
 
