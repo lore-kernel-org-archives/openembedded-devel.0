@@ -1,20 +1,32 @@
-Received: from smtp206.alice.it ([82.57.200.102])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <GNUtoo@no-log.org>) id 1QeUGP-00054V-9D
+	(envelope-from <agnel.joel@gmail.com>) id 1QeUKf-0005BU-TH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jul 2011 17:43:45 +0200
-Received: from gnutoo-desktop.localnet (79.50.137.190) by smtp206.alice.it
-	(8.5.124.08) (authenticated as editempo)
-	id 4DE63E32039BD872; Wed, 6 Jul 2011 17:34:31 +0200
-From: "Denis 'GNUtoo' Carikli" <GNUtoo@no-log.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 6 Jul 2011 17:34:30 +0200
-User-Agent: KMail/1.13.5 (Linux/2.6.35-28-generic; KDE/4.5.5; i686; ; )
-References: <CACrTVgKyLQ1UDqzUAcJACrsraPYfcOZf7c8HdfQOJsgTAx-r7A@mail.gmail.com>
-In-Reply-To: <CACrTVgKyLQ1UDqzUAcJACrsraPYfcOZf7c8HdfQOJsgTAx-r7A@mail.gmail.com>
+	Wed, 06 Jul 2011 17:48:11 +0200
+Received: by iym10 with SMTP id 10so55958iym.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Jul 2011 08:44:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=gjvj0RTuls4gsj8SEipPne2mSWJ4p5YkaDMN2zBFBMU=;
+	b=iRTp9bqFm0WT0WbaGkHa/r51TRows9/3MICIpijVHdN9h754+C8EUmhH/c2RsNL8Pi
+	w8h8XHlMYWwWUkRujXe9/jyOE1L3/F4NihCgGlGf2Z7BvSKDwJyXlbDeOxMrKOqwYEJT
+	FI9gUPQhMPorBTWnON6v8BhUKaeSh3kQdaxdY=
 MIME-Version: 1.0
-Message-Id: <201107061734.31202.GNUtoo@no-log.org>
-Subject: Re: [PATCH-proposal] fix vlc building (-fPIC error) by patching live555 recipe
+Received: by 10.231.82.197 with SMTP id c5mr7826108ibl.131.1309967058254; Wed,
+	06 Jul 2011 08:44:18 -0700 (PDT)
+Received: by 10.231.174.73 with HTTP; Wed, 6 Jul 2011 08:44:18 -0700 (PDT)
+In-Reply-To: <1309945216.4518.8.camel@mattotaupa>
+References: <1309915643-16401-1-git-send-email-agnel.joel@gmail.com>
+	<1309945216.4518.8.camel@mattotaupa>
+Date: Wed, 6 Jul 2011 10:44:18 -0500
+Message-ID: <CAD=GYpYaf5qeGMypdADi-2yUXqgtNbJDbJYao0MijakNoxuaGA@mail.gmail.com>
+From: Joel A Fernandes <agnel.joel@gmail.com>
+To: Paul Menzel <paulepanter@users.sourceforge.net>
+Cc: joelagnel@ti.com, k-kooi@ti.com, openembedded-devel@lists.openembedded.org,
+	jdk@ti.com
+Subject: Re: [PATCH] beagleboard-test-scripts: Add a script flash-fs.sh for flashing NAND.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,22 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jul 2011 15:43:45 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 06 Jul 2011 15:48:11 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
->Let me know if it is not good enough, and if the patch is accepted.
-hi,
-First thanks for the patch, unfortunately it's in the wrong format, you should 
-rather use git (git add + git commit + git format-patch + git-send-email ) as 
-described in the patch sending guide:
-http://www.openembedded.org/index.php/How_to_submit_a_patch_for_dummies
+Hi Paul,
 
-Then I wonder what is fix-makefile.
+Thanks for your suggestions. I will make the requested changes,
 
-I'd like vlc to get fixed. Thanks again for caring about vlc.
+>> =A0do_install() {
+>> @@ -28,4 +28,7 @@ do_install() {
+>> =A0 =A0for i in ${TEST_FILES}; do
+>> =A0 =A0 =A0install -m 0755 ${S}/${i} ${D}/${bindir}
+>> =A0 =A0done
+>> + =A0# Add =A0script to flash the NAND if it exists and if there is a va=
+lid image to flash on bootup.
+>
+> =95 After =BBAdd a space can be removed.
+> =95 =BBon bootup=AB is not clear to me. Does the BB have to be rebooted a=
+nd
+> then the image is flashed?
 
-Denis.
+In boards with a NAND device, an image is written to the NAND if the
+SD Card has an image. This is during startup.
+
+Regards,
+Joel
 
 
