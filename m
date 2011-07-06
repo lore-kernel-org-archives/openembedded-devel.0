@@ -1,36 +1,29 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eyalr@ti.com>) id 1QeOxU-00072X-9m
+Received: from hd5b91d02.k46641.sta.perspektivbredband.net ([213.185.29.2]
+	helo=fg-dc1.flatfrog.local) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <orjan.friberg@flatfrog.com>) id 1QePJJ-0007Nx-Aj
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jul 2011 12:03:53 +0200
-Received: from dlep33.itg.ti.com ([157.170.170.112])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id p669sKIh007265
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Wed, 6 Jul 2011 04:54:20 -0500
-Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
-	by dlep33.itg.ti.com (8.13.7/8.13.8) with ESMTP id p669sK2v002493;
-	Wed, 6 Jul 2011 04:54:20 -0500 (CDT)
-Received: from DNCE73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p669s4QM024210;
-	Wed, 6 Jul 2011 04:54:20 -0500 (CDT)
-Received: from dnce02.ent.ti.com ([137.167.131.106]) by DNCE73.ent.ti.com
-	([137.167.130.158]) with mapi; Wed, 6 Jul 2011 11:54:17 +0200
-From: "Reizer, Eyal" <eyalr@ti.com>
-To: Eyal Reizer <eyalreizer@googlemail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 6 Jul 2011 11:54:16 +0200
-Thread-Topic: Ping:RE: [PATCH] ti-wifi-utils: fix unaligned data access
-Thread-Index: Acw6SepiAGaVrmNLQM6N13+NOYsQwwBeKdig
-Message-ID: <EC51CDB0807A51469E0C9CB8CF72D65F0332A752B7@dnce02.ent.ti.com>
-References: <1309784224-8174-1-git-send-email-eyalr@ti.com>
-In-Reply-To: <1309784224-8174-1-git-send-email-eyalr@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Wed, 06 Jul 2011 12:26:25 +0200
+Received: from [192.168.123.162] (192.168.123.162) by fg-dc1.flatfrog.local
+	(192.168.123.3) with Microsoft SMTP Server id 8.3.83.0; Wed, 6 Jul 2011
+	12:21:13 +0200
+Message-ID: <4E14370F.8080508@flatfrog.com>
+Date: Wed, 6 Jul 2011 12:21:03 +0200
+From: Orjan Friberg <of@flatfrog.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.18) Gecko/20110616 Lightning/1.0b2 Thunderbird/3.1.11
 MIME-Version: 1.0
-Subject: Ping:RE: [PATCH] ti-wifi-utils: fix unaligned data access
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <4E142E2F.6040101@flatfrog.com>
+	<20110706095258.GA2230@mail.familie-heinold.de>
+In-Reply-To: <20110706095258.GA2230@mail.familie-heinold.de>
+Received-SPF: None (fg-dc1.flatfrog.local: of@flatfrog.com does not
+	designate permitted sender hosts)
+X-TM-AS-Product-Ver: SMEX-8.6.0.1168-6.500.1024-18242.004
+X-TM-AS-Result: No--2.542300-8.000000-31
+X-TM-AS-User-Approved-Sender: No
+X-TM-AS-User-Blocked-Sender: No
+Subject: Re: Discouraged kernels 2.6.35+?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,54 +37,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jul 2011 10:03:53 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 06 Jul 2011 10:26:25 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Pinging on this patch.
+On 2011-07-06 11:52, Henning Heinold wrote:
+> If you are needed to use the dsp you have to stick to .32
 
-Best Regards,
-Eyal Reizer
+Are there DSP-related packages that don't work with later kernels 
+(dsplink, codec engine) or something else?
 
-> -----Original Message-----
-> From: Eyal Reizer [mailto:eyalreizer@googlemail.com]
-> Sent: Monday, July 04, 2011 3:57 PM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Reizer, Eyal
-> Subject: [PATCH] ti-wifi-utils: fix unaligned data access
->=20
-> update the recipe to use a new commit from upstream which fixes
-> unaligned
-> data access errors reported when using the calibrator tool on an am180x
-> (armv5) platform
->=20
-> Signed-off-by: Eyal Reizer <eyalr@ti.com>
-> ---
->  recipes/ti/ti-wifi-utils_git.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/recipes/ti/ti-wifi-utils_git.bb b/recipes/ti/ti-wifi-
-> utils_git.bb
-> index 9855775..87ca2c9 100644
-> --- a/recipes/ti/ti-wifi-utils_git.bb
-> +++ b/recipes/ti/ti-wifi-utils_git.bb
-> @@ -3,11 +3,11 @@ LICENSE =3D "TI-BSD"
->=20
->  DEPENDS =3D "libnl"
->=20
-> -PR =3D"r3"
-> +PR =3D"r4"
->  PV =3D"0.0"
->  PR_append =3D "+gitr${SRCPV}"
->=20
-> -SRCREV =3D "268dbf03091b632c2697eb8028e90fe40513a9d8"
-> +SRCREV =3D "8737db9372e714e265d3f575573d14c3379ab9fc"
->  SRC_URI =3D "git://github.com/gxk/ti-utils.git;protocol=3Dgit"
->=20
->  S =3D "${WORKDIR}/git"
-> --
-> 1.7.0.4
-
+-- 
+Orjan Friberg
+FlatFrog Laboratories AB
 
 
