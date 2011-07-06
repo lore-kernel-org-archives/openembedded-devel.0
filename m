@@ -1,31 +1,31 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <agnel.joel@gmail.com>) id 1QeaQb-00086l-NF
+	(envelope-from <agnel.joel@gmail.com>) id 1QeaSi-0008Cz-U7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jul 2011 00:18:41 +0200
-Received: by gyd12 with SMTP id 12so197008gyd.6
+	Thu, 07 Jul 2011 00:20:53 +0200
+Received: by yib18 with SMTP id 18so199502yib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jul 2011 15:14:50 -0700 (PDT)
+	Wed, 06 Jul 2011 15:17:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=chHC5s/zKbd1ltlqen7Q82M9fqFcyXewpNpBEVU9sxU=;
-	b=qTDylhOp90UAswP/h6X/GrdfB26FqqLbz0P4B+4PqrNsSFUOBPD//elPlsrU4P8hkM
-	z70KHZLVUi5bU3XcjONwjQZA1pKsrWdILHhPsltGgIgl77jze0W8Ze0sKdX26urp45mT
-	5QNsELAwJ3Sr/2iZB6yQn3VbfkflO4t78g/Nk=
-Received: by 10.91.145.4 with SMTP id x4mr324771agn.152.1309990490424;
-	Wed, 06 Jul 2011 15:14:50 -0700 (PDT)
+	bh=2J4shhOKf3LEHlvRgjPhFw3AT4bHLnjfmLXv+5AQ6kQ=;
+	b=ceZOKWOTD2sxRLkijf9NzL2FkLE/cGuB8Aw8Eh4Ep1CeQy8vLcE2ddU8CptMhJKQWe
+	B64WESIttZ+lFYt3fiMSpBnz3XxrdUz3P6XarmkwhbG0BhqiLmGXG4yJ3Iu3HYoRQ31W
+	AcbpU8OShox3FeomUrfOUQeAfPfnNOH5LrCd0=
+Received: by 10.236.77.66 with SMTP id c42mr92747yhe.481.1309990621812;
+	Wed, 06 Jul 2011 15:17:01 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id h36sm1025140anm.16.2011.07.06.15.14.48
+	by mx.google.com with ESMTPS id h70sm5970583yhk.1.2011.07.06.15.17.00
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 06 Jul 2011 15:14:49 -0700 (PDT)
+	Wed, 06 Jul 2011 15:17:01 -0700 (PDT)
 From: Joel A Fernandes <agnel.joel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Jul 2011 17:11:45 -0500
-Message-Id: <1309990305-4246-1-git-send-email-agnel.joel@gmail.com>
+Date: Wed,  6 Jul 2011 17:14:07 -0500
+Message-Id: <1309990447-4283-1-git-send-email-agnel.joel@gmail.com>
 X-Mailer: git-send-email 1.7.0.4
 Cc: joelagnel@ti.com, Joel A Fernandes <agnel.joel@gmail.com>, jdk@ti.com,
 	k-kooi@ti.com
-Subject: [PATCH] libxml: Deleted patch that is already applied in source tarball
+Subject: [PATCH v2] libxml: Deleted patch that is already applied in source tarball
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,13 +39,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jul 2011 22:18:41 -0000
+X-List-Received-Date: Wed, 06 Jul 2011 22:20:53 -0000
 
-This deletes a patch that appears to be already applied to the checked out source and is causing do_patch in libxml2
-to fail when bitbaking beagleboard-validation-base-image
+* Deleted a patch that appears to be already applied to the checked out source and is causing do_patch in libxml2 to fail
 
 Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
 ---
+Changes since previous patch:
+ Update commit summary to be more relevant.
+
 Not sure if should bump the PR in this case? If not, please ignore this note
 
  .../0cbeb50ee03ce582a0c979c70d8fbf030e270c37.patch |   29 --------------------
