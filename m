@@ -1,30 +1,27 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ozgungunay@gmail.com>) id 1QeTIZ-0003zh-4b
+	(envelope-from <sylvain.pare@gmail.com>) id 1QeTyN-0004q6-R5
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jul 2011 16:41:55 +0200
-Received: by gyd12 with SMTP id 12so2870872gyd.6
+	Wed, 06 Jul 2011 17:25:07 +0200
+Received: by qyk30 with SMTP id 30so2548213qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jul 2011 07:38:04 -0700 (PDT)
+	Wed, 06 Jul 2011 08:21:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	bh=DomRuadfmlxaV/TA6JfcdwEdNhqqwHPjgc7zO/5P2f4=;
-	b=q+Xxg4P/0PQOCzdkm6tXMa0yH8DF9w6la55saUqFEKkk3v787yCrkZez3237Qjujdx
-	eu09Jb0nLJquY9N0UOwEnMThDE3Zc/HSpgbsUhuyqDlYz6pllB6qToeCX1uVrDornVda
-	176KiwWZcpvulKVubQvJkfgPu4E80e+5tPoKQ=
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=vGpfQXkbvb5JyQjD8P95p/fDiLSEYH3gRw9oLqNMJSc=;
+	b=wuEHjLaU29w80uj2trZ3wgs3mJ92bNNlvMLPCn9qPgTETF7rnIaR3YhDTra9NO95Oo
+	+egcPhrP5BScisJZjJvWxh0QtDw/naK1XmNvG2iJWud/U6PBoxXsQx/meLD2N8Tf4tJ3
+	zgHQp0uJCIpi+86raCxMzqO9CeADeMdXIzO8Y=
+Received: by 10.229.79.20 with SMTP id n20mr6421357qck.275.1309965677107; Wed,
+	06 Jul 2011 08:21:17 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.151.25.12 with SMTP id c12mr7554690ybj.417.1309963081970; Wed,
-	06 Jul 2011 07:38:01 -0700 (PDT)
-Sender: ozgungunay@gmail.com
-Received: by 10.150.198.11 with HTTP; Wed, 6 Jul 2011 07:38:01 -0700 (PDT)
-Date: Wed, 6 Jul 2011 17:38:01 +0300
-X-Google-Sender-Auth: puDK1-xjrTP0maj88Z5ZFoX57YA
-Message-ID: <CAPeX=+uCtwx_jTURr5juwsGE58ZJcC7v4xT9kb3b-F2xPbcjQw@mail.gmail.com>
-From: Ozgun <ozgun.gunay@gmail.com>
+Received: by 10.229.215.206 with HTTP; Wed, 6 Jul 2011 08:20:57 -0700 (PDT)
+From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
+Date: Wed, 6 Jul 2011 17:20:57 +0200
+Message-ID: <CACrTVgKyLQ1UDqzUAcJACrsraPYfcOZf7c8HdfQOJsgTAx-r7A@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: gcc-cross-initial compile failure
+Subject: [PATCH-proposal] fix vlc building (-fPIC error) by patching live555 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,56 +35,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jul 2011 14:41:55 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 06 Jul 2011 15:25:08 -0000
+X-Groupsio-MsgNum: 33011
+Content-Type: multipart/mixed; boundary=00163646d9b3da1bc404a76826ea
 
-The build is failing on gcc-cross-initial;
-NOTE: package gcc-cross-initial-4.4.4-r8.1: task do_compile: Failed
-ERROR: Function 'do_compile' failed (see
-/home/ozgun/tmp/work/i686-linux/gcc-cross-initial-4.4.4-r8.1/temp/log.do_compile.18907
-for further information)
-ERROR: Task 3612 (/work/openembedded/recipes/gcc/gcc-cross-initial_4.4.4.bb,
-do_compile) failed with exit code '1'
-ERROR: '/work/openembedded/recipes/gcc/gcc-cross-initial_4.4.4.bb' failed
+--00163646d9b3da1bc404a76826ea
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
+Hi,
 
+Attached a patch to fix this kind of error while building VLC :
 
-From log.do_compile.18907;
-In file included from
-/home/ozgun/tmp/work/i686-linux/gcc-cross-initial-4.4.4-r8.1/gcc-4.4.4/gcc/tree.h:30:0,
-                 from
-/home/ozgun/tmp/work/i686-linux/gcc-cross-initial-4.4.4-r8.1/gcc-4.4.4/gcc/c-lang.c:27:
-/home/ozgun/tmp/work/i686-linux/gcc-cross-initial-4.4.4-r8.1/gcc-4.4.4/gcc/double-int.h:24:17:
-fatal error: gmp.h: No such file or directory
-compilation terminated.
-make[3]: *** [c-lang.o] Error 1
-make[3]: Leaving directory
-`/home/ozgun/tmp/work/i686-linux/gcc-cross-initial-4.4.4-r8.1/gcc-4.4.4/build.i686-linux.i686-linux/gcc'
-make[2]: *** [all-stage1-gcc] Error 2
-make[2]: Leaving directory
-`/home/ozgun/tmp/work/i686-linux/gcc-cross-initial-4.4.4-r8.1/gcc-4.4.4/build.i686-linux.i686-linux'
-make[1]: *** [stage1-bubble] Error 2
-make[1]: Leaving directory
-`/home/ozgun/tmp/work/i686-linux/gcc-cross-initial-4.4.4-r8.1/gcc-4.4.4/build.i686-linux.i686-linux'
-make: *** [all] Error 2
-+ die 'oe_runmake failed'
-+ oefatal 'oe_runmake failed'
-+ echo FATAL: 'oe_runmake failed'
-FATAL: oe_runmake failed
-+ exit 1
+libliveMedia.a: relocation R_ARM_MOVW_ABS_NC against `a local symbol' can
+not be used when making a shared object; recompile with -fPIC
+|
+/home/sylvain/dev/SHR-Build/shr-unstable/tmp/sysroots/armv7a-oe-linux-gnuea=
+bi/usr/lib/libliveMedia.a:
+could not read symbols: Bad value
+| collect2: ld returned 1 exit status
 
+Let me know if it is not good enough, and if the patch is accepted.
 
+Thanks by advance.
 
-From gcc-4.4.4.inc;
-DEPENDS = "mpfr gmp"
-NATIVEDEPS = "mpfr-native gmp-native"
+Regards,
 
-gcc depends mpfr gmp, therefore compiler needs mpfr.h gmp.h
-But these files are located under their own folder
-(/work/i686-linux/gmp-native-5.0.1-r1.1/gmp-5.0.1/gmp.h) ,not under gcc
-folder.
+Sylvain Par=E9 (aka GarthPS)
 
-Wondering how can you overcome this problem?
+--00163646d9b3da1bc404a76826ea
+Content-Type: application/octet-stream; 
+	name="fix-fPIC-error-onbuilding-vlc.patch"
+Content-Disposition: attachment; 
+	filename="fix-fPIC-error-onbuilding-vlc.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_gpsfo38j0
 
-Thanks,
+ZGlmZiAtLWdpdCBhL3JlY2lwZXMvbGl2ZTU1NS9saXZlNTU1LmluYyBiL3JlY2lwZXMvbGl2ZTU1
+NS9saXZlNTU1LmluYwppbmRleCAxNGU5N2JiLi43OTUxYjQ2IDEwMDY0NAotLS0gYS9yZWNpcGVz
+L2xpdmU1NTUvbGl2ZTU1NS5pbmMKKysrIGIvcmVjaXBlcy9saXZlNTU1L2xpdmU1NTUuaW5jCkBA
+IC0xOCw3ICsxOCw5IEBAIFRBUkdFVF9DQ19BUkNIICs9ICIke0xERkxBR1N9IgogCiBkb19jb25m
+aWd1cmUoKSB7CiAJY3AgJHtXT1JLRElSfS9jb25maWcubGludXgtY3Jvc3MgLgorICAgICAgICBl
+Y2hvICJDT01QSUxFX09QVFMrPSIgLWZQSUMgIiIgPj4gY29uZmlnLmxpbnV4LWNyb3NzCiAJLi9n
+ZW5NYWtlZmlsZXMgbGludXgtY3Jvc3MKKyAgICAgICAgZmluZCAuIC1uYW1lICdNYWtlZmlsZScg
+LWV4ZWMgZml4LW1ha2VmaWxlIHt9IFw7CiB9CiAKIGRvX2NvbXBpbGUoKSB7Cg==
 
+--00163646d9b3da1bc404a76826ea--
