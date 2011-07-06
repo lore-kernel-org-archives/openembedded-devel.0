@@ -1,36 +1,24 @@
-Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
-	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1QeQ78-00009X-CS
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jul 2011 13:17:55 +0200
-Received: (qmail 18145 invoked from network); 6 Jul 2011 13:14:06 +0200
-Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
-	by leibniz.math.fu-berlin.de with SMTP; 6 Jul 2011 13:14:06 +0200
-X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
-Received: from math.fu-berlin.de ([160.45.40.10])
-	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
-	port 10024) with SMTP id Y2e1QemIBH83
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jul 2011 13:13:55 +0200 (CEST)
-Received: (Qmail 18071 invoked from network); 6 Jul 2011 13:13:55 +0200
-Received: From andorra.imp.fu-berlin.de (160.45.42.84)
-	by leibniz.math.fu-berlin.de with SMTP; 6 Jul 2011 11:13:55 -0000
-Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.72 #1
-	(Debian)) id 1QeQ3H-0002ig-46; Wed, 06 Jul 2011 13:13:55 +0200
-Date: Wed, 6 Jul 2011 13:13:55 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: Orjan Friberg <of@flatfrog.com>
-Message-ID: <20110706111354.GA8641@mi.fu-berlin.de>
-References: <4E142E2F.6040101@flatfrog.com>
-	<20110706095258.GA2230@mail.familie-heinold.de>
-	<4E14370F.8080508@flatfrog.com>
-MIME-Version: 1.0
-In-Reply-To: <4E14370F.8080508@flatfrog.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Sender: Heinold <heinold@mi.fu-berlin.de>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: Discouraged kernels 2.6.35+?
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QeQOb-0000S6-9N for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Jul 2011 13:35:57 +0200
+Received: from f053037185.adsl.alicedsl.de ([78.53.37.185]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QeQLD-0006TK-FC for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Jul 2011 11:32:27 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <d0771ab59e5a19cd41045ecaf5f390926a78e229.1309949770.git.a.sappia@biotechware.com>
+References: <cover.1309949770.git.a.sappia@biotechware.com>
+	<d0771ab59e5a19cd41045ecaf5f390926a78e229.1309949770.git.a.sappia@biotechware.com>
+Date: Wed, 06 Jul 2011 13:32:07 +0200
+Message-ID: <1309951927.4583.2.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH 1/1] dbus-glib-native and dbus-glib were not compiling. This patch corrects dbus-glib-native to install required files in order to let dbus-glib to compile on target.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,23 +32,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jul 2011 11:17:55 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 06 Jul 2011 11:35:57 -0000
+X-Groupsio-MsgNum: 33004
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-+L4JhiKnGNuXOQVAW97W"
 
-On Wed, Jul 06, 2011 at 12:21:03PM +0200, Orjan Friberg wrote:
-> On 2011-07-06 11:52, Henning Heinold wrote:
->> If you are needed to use the dsp you have to stick to .32
->
-> Are there DSP-related packages that don't work with later kernels  
-> (dsplink, codec engine) or something else?
+--=-+L4JhiKnGNuXOQVAW97W
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi again,
-
-can't say for sure, that is only my knowledge from asking and hearing.
-
-Koen Kooi may help you better or try to ask on the #beagle on irc.freenode.net
-
-Bye Henning
+Dear Alessandro,
 
 
+Am Mittwoch, den 06.07.2011, 13:12 +0200 schrieb Alessandro Sappia:
+
+unfortunately you seem to have forgotten to insert line breaks when
+composing the commit message. Please correct that for example using `git
+commit --amend`.
+
+Please also follow OE=E2=80=99s commit policy [1] and resend your patch as =
+v2
+[2].
+
+> Signed-off-by: Alessandro Sappia <a.sappia@biotechware.com>
+> ---
+>  recipes/dbus/dbus-glib.inc     |    4 ++--
+>  recipes/dbus/dbus-glib_0.86.bb |    4 ++--
+>  2 files changed, 4 insertions(+), 4 deletions(-)
+
+
+Thanks,
+
+Paul
+
+
+[1] http://openembedded.org/index.php/Commit_Policy
+[2] http://openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmbedded
+
+--=-+L4JhiKnGNuXOQVAW97W
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk4UR6QACgkQPX1aK2wOHVi5qACcC/+LdIX/1fOTG5lBgknrD0xa
+agUAn2rwgSe3DvErNeVJRDXDfSlqKZQI
+=X6r2
+-----END PGP SIGNATURE-----
+
+--=-+L4JhiKnGNuXOQVAW97W--
