@@ -1,31 +1,23 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <agnel.joel@gmail.com>) id 1QeaSi-0008Cz-U7
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jul 2011 00:20:53 +0200
-Received: by yib18 with SMTP id 18so199502yib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jul 2011 15:17:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=2J4shhOKf3LEHlvRgjPhFw3AT4bHLnjfmLXv+5AQ6kQ=;
-	b=ceZOKWOTD2sxRLkijf9NzL2FkLE/cGuB8Aw8Eh4Ep1CeQy8vLcE2ddU8CptMhJKQWe
-	B64WESIttZ+lFYt3fiMSpBnz3XxrdUz3P6XarmkwhbG0BhqiLmGXG4yJ3Iu3HYoRQ31W
-	AcbpU8OShox3FeomUrfOUQeAfPfnNOH5LrCd0=
-Received: by 10.236.77.66 with SMTP id c42mr92747yhe.481.1309990621812;
-	Wed, 06 Jul 2011 15:17:01 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id h70sm5970583yhk.1.2011.07.06.15.17.00
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 06 Jul 2011 15:17:01 -0700 (PDT)
-From: Joel A Fernandes <agnel.joel@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qeagc-0008Rp-Ho for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Jul 2011 00:35:15 +0200
+Received: from f053037185.adsl.alicedsl.de ([78.53.37.185]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QeadE-0006tE-Mq for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Jul 2011 22:31:44 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Jul 2011 17:14:07 -0500
-Message-Id: <1309990447-4283-1-git-send-email-agnel.joel@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: joelagnel@ti.com, Joel A Fernandes <agnel.joel@gmail.com>, jdk@ti.com,
-	k-kooi@ti.com
-Subject: [PATCH v2] libxml: Deleted patch that is already applied in source tarball
+In-Reply-To: <1309990305-4246-1-git-send-email-agnel.joel@gmail.com>
+References: <1309990305-4246-1-git-send-email-agnel.joel@gmail.com>
+Date: Thu, 07 Jul 2011 00:31:23 +0200
+Message-ID: <1309991483.4583.46.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH] libxml: Deleted patch that is already applied in source tarball
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,71 +31,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jul 2011 22:20:53 -0000
+X-List-Received-Date: Wed, 06 Jul 2011 22:35:15 -0000
+X-Groupsio-MsgNum: 33025
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-bo1Wfq6gwPciMXyCL1uI"
 
-* Deleted a patch that appears to be already applied to the checked out source and is causing do_patch in libxml2 to fail
+--=-bo1Wfq6gwPciMXyCL1uI
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
----
-Changes since previous patch:
- Update commit summary to be more relevant.
+Am Mittwoch, den 06.07.2011, 17:11 -0500 schrieb Joel A Fernandes:
+> This deletes a patch that appears to be already applied to the checked ou=
+t source and is causing do_patch in libxml2
+> to fail when bitbaking beagleboard-validation-base-image
 
-Not sure if should bump the PR in this case? If not, please ignore this note
+This is strange. I do not get this error with `bitbake -k libxml2`. And
+according to `git log recipes/libxml/` the patch has been there from the
+beginning so somebody else should have hit this too already. Can you
+check your set up and post exactly what branch and build configuration
+you are using. It would be great if you could run another build with a
+clean build (and download(?)) directory.
 
- .../0cbeb50ee03ce582a0c979c70d8fbf030e270c37.patch |   29 --------------------
- recipes/libxml/libxml2_2.7.8.bb                    |    1 -
- 2 files changed, 0 insertions(+), 30 deletions(-)
- delete mode 100644 recipes/libxml/libxml2-2.7.8/0cbeb50ee03ce582a0c979c70d8fbf030e270c37.patch
+What do you mean by =C2=BBchecked out=C2=AB? The downloaded archive?
 
-diff --git a/recipes/libxml/libxml2-2.7.8/0cbeb50ee03ce582a0c979c70d8fbf030e270c37.patch b/recipes/libxml/libxml2-2.7.8/0cbeb50ee03ce582a0c979c70d8fbf030e270c37.patch
-deleted file mode 100644
-index f94350d..0000000
---- a/recipes/libxml/libxml2-2.7.8/0cbeb50ee03ce582a0c979c70d8fbf030e270c37.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--From 0cbeb50ee03ce582a0c979c70d8fbf030e270c37 Mon Sep 17 00:00:00 2001
--From: Daniel Veillard <veillard@redhat.com>
--Date: Mon, 15 Nov 2010 11:06:29 +0000
--Subject: Fix a potential memory access error
--
--in case of a previus allocation error
-----
--diff --git a/xpath.c b/xpath.c
--index 4d6826d..81e33f6 100644
----- a/xpath.c
--+++ b/xpath.c
--@@ -3575,13 +3575,13 @@ xmlXPathNodeSetAdd(xmlNodeSetPtr cur, xmlNodePtr val) {
--     } else if (cur->nodeNr == cur->nodeMax) {
--         xmlNodePtr *temp;
-- 
---        cur->nodeMax *= 2;
---	temp = (xmlNodePtr *) xmlRealloc(cur->nodeTab, cur->nodeMax *
--+	temp = (xmlNodePtr *) xmlRealloc(cur->nodeTab, cur->nodeMax * 2 *
-- 				      sizeof(xmlNodePtr));
-- 	if (temp == NULL) {
-- 	    xmlXPathErrMemory(NULL, "growing nodeset\n");
-- 	    return;
-- 	}
--+        cur->nodeMax *= 2;
-- 	cur->nodeTab = temp;
--     }
--     if (val->type == XML_NAMESPACE_DECL) {
----
--cgit v0.8.3.1
-diff --git a/recipes/libxml/libxml2_2.7.8.bb b/recipes/libxml/libxml2_2.7.8.bb
-index 1a71c2b..7d0c451 100644
---- a/recipes/libxml/libxml2_2.7.8.bb
-+++ b/recipes/libxml/libxml2_2.7.8.bb
-@@ -1,7 +1,6 @@
- require libxml2.inc
- 
- SRC_URI += "\
--  file://0cbeb50ee03ce582a0c979c70d8fbf030e270c37.patch \
-   file://df83c17e5a2646bd923f75e5e507bc80d73c9722.patch \
-   file://fec31bcd452e77c10579467ca87a785b41115de6.patch \
-   file://00819877651b87842ed878898ba17dba489820f0.patch \
--- 
-1.7.0.4
+> Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
+> ---
+> Not sure if should bump the PR in this case? If not, please ignore this n=
+ote
+
+If it really fixes a build error I guess no PR bump would be needed,
+since the package content should not change.
+
+[=E2=80=A6]
 
 
+Thanks,
 
+Paul
+
+--=-bo1Wfq6gwPciMXyCL1uI
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk4U4jsACgkQPX1aK2wOHViR4QCfVtlp5KsPoo5MJ/oeQ2Zi/IfJ
+4FUAn0EOIc+yOgQtAcuoH1nqQE4ANX+W
+=TUsh
+-----END PGP SIGNATURE-----
+
+--=-bo1Wfq6gwPciMXyCL1uI--
