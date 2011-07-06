@@ -1,34 +1,31 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sylvain.pare@gmail.com>) id 1Qea9t-0007oo-Fq
+	(envelope-from <agnel.joel@gmail.com>) id 1QeaQb-00086l-NF
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jul 2011 00:02:06 +0200
-Received: by qwh5 with SMTP id 5so195975qwh.6
+	Thu, 07 Jul 2011 00:18:41 +0200
+Received: by gyd12 with SMTP id 12so197008gyd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jul 2011 14:55:40 -0700 (PDT)
+	Wed, 06 Jul 2011 15:14:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=S1DYSvnMUiGkXa4XUlIs29c8KUwTKIJuotMDNDWpp8s=;
-	b=GpNSC0ifi+XvG8psfa3k30UnjQhRMw0tIIFNCwQ3HMypKLp95pWtTGhF4zqi+amEw0
-	WOX8EI6PLeAy6LDg6zLjc7HXjQJAXQEzdCSMlhFV5CH3EKlinvooa2YArrDeI7L1WlaL
-	cH2KJAC/ndqvkDem2fS9z0D8fTfLIgjEGS0ng=
-Received: by 10.229.57.129 with SMTP id c1mr75123qch.47.1309989340156; Wed, 06
-	Jul 2011 14:55:40 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.229.215.206 with HTTP; Wed, 6 Jul 2011 14:55:20 -0700 (PDT)
-In-Reply-To: <CACrTVgLG+DcK=p0G4D0sfVy44Dm0WnVrH+yf3u2241_DkNguhw@mail.gmail.com>
-References: <CACrTVgKyLQ1UDqzUAcJACrsraPYfcOZf7c8HdfQOJsgTAx-r7A@mail.gmail.com>
-	<201107061734.31202.GNUtoo@no-log.org>
-	<CACrTVgJ6hYwz8bbJPowEN_jb5A+hd4vVr_T4qQONdtKd8gGv_g@mail.gmail.com>
-	<CACrTVgLG+DcK=p0G4D0sfVy44Dm0WnVrH+yf3u2241_DkNguhw@mail.gmail.com>
-From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
-Date: Wed, 6 Jul 2011 23:55:20 +0200
-Message-ID: <CACrTVgK1=Kmy-ZHXCreTWrizA=ihJTbJoXWO7ny-1=e6-ds6vg@mail.gmail.com>
-To: "Denis 'GNUtoo' Carikli" <GNUtoo@no-log.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH-proposal] fix vlc building (-fPIC error) by patching live555 recipe
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=chHC5s/zKbd1ltlqen7Q82M9fqFcyXewpNpBEVU9sxU=;
+	b=qTDylhOp90UAswP/h6X/GrdfB26FqqLbz0P4B+4PqrNsSFUOBPD//elPlsrU4P8hkM
+	z70KHZLVUi5bU3XcjONwjQZA1pKsrWdILHhPsltGgIgl77jze0W8Ze0sKdX26urp45mT
+	5QNsELAwJ3Sr/2iZB6yQn3VbfkflO4t78g/Nk=
+Received: by 10.91.145.4 with SMTP id x4mr324771agn.152.1309990490424;
+	Wed, 06 Jul 2011 15:14:50 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id h36sm1025140anm.16.2011.07.06.15.14.48
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 06 Jul 2011 15:14:49 -0700 (PDT)
+From: Joel A Fernandes <agnel.joel@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  6 Jul 2011 17:11:45 -0500
+Message-Id: <1309990305-4246-1-git-send-email-agnel.joel@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: joelagnel@ti.com, Joel A Fernandes <agnel.joel@gmail.com>, jdk@ti.com,
+	k-kooi@ti.com
+Subject: [PATCH] libxml: Deleted patch that is already applied in source tarball
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,86 +39,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jul 2011 22:02:06 -0000
-X-Groupsio-MsgNum: 33022
-Content-Type: multipart/mixed; boundary=000e0cdf8e964794c104a76da98b
+X-List-Received-Date: Wed, 06 Jul 2011 22:18:41 -0000
 
---000e0cdf8e964794c104a76da98b
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+This deletes a patch that appears to be already applied to the checked out source and is causing do_patch in libxml2
+to fail when bitbaking beagleboard-validation-base-image
 
-ok sorry for the noise.. last time with INC_PR updated
-
-From d8eaabb63088dc68b7bba3f5a6ac6a31e65a36e6 Mon Sep 17 00:00:00 2001
-From: =3D?UTF-8?q?Sylvain=3D20'GarthPS'=3D20Par=3DC3=3DA9?=3D <sylvain.pare=
-@gmail.com>
-Date: Wed, 6 Jul 2011 23:53:42 +0200
-Subject: [PATCH] live555 recipe: added -fPIC flag need by VLC to build with
-live555 support
-MIME-Version: 1.0
-Content-Type: text/plain; charset=3DUTF-8
-Content-Transfer-Encoding: 8bit
-
-Signed-off-by: Sylvain 'GarthPS' Par=E9 <sylvain.pare@gmail.com>
+Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
 ---
- recipes/live555/live555.inc |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+Not sure if should bump the PR in this case? If not, please ignore this note
 
-diff --git a/recipes/live555/live555.inc b/recipes/live555/live555.inc
-index 14e97bb..f1e21dc 100644
---- a/recipes/live555/live555.inc
-+++ b/recipes/live555/live555.inc
-@@ -7,7 +7,7 @@ HOMEPAGE =3D "http://live.com/"
- LICENSE =3D "LGPL"
- SECTION =3D "devel"
+ .../0cbeb50ee03ce582a0c979c70d8fbf030e270c37.patch |   29 --------------------
+ recipes/libxml/libxml2_2.7.8.bb                    |    1 -
+ 2 files changed, 0 insertions(+), 30 deletions(-)
+ delete mode 100644 recipes/libxml/libxml2-2.7.8/0cbeb50ee03ce582a0c979c70d8fbf030e270c37.patch
 
--INC_PR =3D "r1"
-+INC_PR =3D "r2"
+diff --git a/recipes/libxml/libxml2-2.7.8/0cbeb50ee03ce582a0c979c70d8fbf030e270c37.patch b/recipes/libxml/libxml2-2.7.8/0cbeb50ee03ce582a0c979c70d8fbf030e270c37.patch
+deleted file mode 100644
+index f94350d..0000000
+--- a/recipes/libxml/libxml2-2.7.8/0cbeb50ee03ce582a0c979c70d8fbf030e270c37.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 0cbeb50ee03ce582a0c979c70d8fbf030e270c37 Mon Sep 17 00:00:00 2001
+-From: Daniel Veillard <veillard@redhat.com>
+-Date: Mon, 15 Nov 2010 11:06:29 +0000
+-Subject: Fix a potential memory access error
+-
+-in case of a previus allocation error
+----
+-diff --git a/xpath.c b/xpath.c
+-index 4d6826d..81e33f6 100644
+---- a/xpath.c
+-+++ b/xpath.c
+-@@ -3575,13 +3575,13 @@ xmlXPathNodeSetAdd(xmlNodeSetPtr cur, xmlNodePtr val) {
+-     } else if (cur->nodeNr == cur->nodeMax) {
+-         xmlNodePtr *temp;
+- 
+--        cur->nodeMax *= 2;
+--	temp = (xmlNodePtr *) xmlRealloc(cur->nodeTab, cur->nodeMax *
+-+	temp = (xmlNodePtr *) xmlRealloc(cur->nodeTab, cur->nodeMax * 2 *
+- 				      sizeof(xmlNodePtr));
+- 	if (temp == NULL) {
+- 	    xmlXPathErrMemory(NULL, "growing nodeset\n");
+- 	    return;
+- 	}
+-+        cur->nodeMax *= 2;
+- 	cur->nodeTab = temp;
+-     }
+-     if (val->type == XML_NAMESPACE_DECL) {
+---
+-cgit v0.8.3.1
+diff --git a/recipes/libxml/libxml2_2.7.8.bb b/recipes/libxml/libxml2_2.7.8.bb
+index 1a71c2b..7d0c451 100644
+--- a/recipes/libxml/libxml2_2.7.8.bb
++++ b/recipes/libxml/libxml2_2.7.8.bb
+@@ -1,7 +1,6 @@
+ require libxml2.inc
+ 
+ SRC_URI += "\
+-  file://0cbeb50ee03ce582a0c979c70d8fbf030e270c37.patch \
+   file://df83c17e5a2646bd923f75e5e507bc80d73c9722.patch \
+   file://fec31bcd452e77c10579467ca87a785b41115de6.patch \
+   file://00819877651b87842ed878898ba17dba489820f0.patch \
+-- 
+1.7.0.4
 
- URLV =3D
-"${@bb.data.getVar('PV',d,1)[0:4]}.${@bb.data.getVar('PV',d,1)[4:6]}.${@bb.=
-data.getVar('PV',d,1)[6:8]}"
- SRC_URI =3D "http://www.live555.com/liveMedia/public/live.${URLV}.tar.gz \
-@@ -18,6 +18,7 @@ TARGET_CC_ARCH +=3D "${LDFLAGS}"
 
- do_configure() {
-     cp ${WORKDIR}/config.linux-cross .
-+    echo "COMPILE_OPTS+=3D" -fPIC "" >> config.linux-cross
-     ./genMakefiles linux-cross
- }
 
---=20
-1.7.4.1
-
---000e0cdf8e964794c104a76da98b
-Content-Type: application/octet-stream; 
-	name="0001-live555-recipe-added-fPIC-flag-need-by-VLC-to-build-.patch"
-Content-Disposition: attachment; 
-	filename="0001-live555-recipe-added-fPIC-flag-need-by-VLC-to-build-.patch"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_gpstt4x01
-
-RnJvbSBkOGVhYWJiNjMwODhkYzY4YjdiYmEzZjVhNmFjNmEzMWU2NWEzNmU2IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiA9P1VURi04P3E/U3lsdmFpbj0yMCdHYXJ0aFBTJz0yMFBhcj1D
-Mz1BOT89IDxzeWx2YWluLnBhcmVAZ21haWwuY29tPgpEYXRlOiBXZWQsIDYgSnVsIDIwMTEgMjM6
-NTM6NDIgKzAyMDAKU3ViamVjdDogW1BBVENIXSBsaXZlNTU1IHJlY2lwZTogYWRkZWQgLWZQSUMg
-ZmxhZyBuZWVkIGJ5IFZMQyB0byBidWlsZCB3aXRoIGxpdmU1NTUgc3VwcG9ydApNSU1FLVZlcnNp
-b246IDEuMApDb250ZW50LVR5cGU6IHRleHQvcGxhaW47IGNoYXJzZXQ9VVRGLTgKQ29udGVudC1U
-cmFuc2Zlci1FbmNvZGluZzogOGJpdAoKU2lnbmVkLW9mZi1ieTogU3lsdmFpbiAnR2FydGhQUycg
-UGFyw6kgPHN5bHZhaW4ucGFyZUBnbWFpbC5jb20+Ci0tLQogcmVjaXBlcy9saXZlNTU1L2xpdmU1
-NTUuaW5jIHwgICAgMyArKy0KIDEgZmlsZXMgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAxIGRl
-bGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3JlY2lwZXMvbGl2ZTU1NS9saXZlNTU1LmluYyBiL3Jl
-Y2lwZXMvbGl2ZTU1NS9saXZlNTU1LmluYwppbmRleCAxNGU5N2JiLi5mMWUyMWRjIDEwMDY0NAot
-LS0gYS9yZWNpcGVzL2xpdmU1NTUvbGl2ZTU1NS5pbmMKKysrIGIvcmVjaXBlcy9saXZlNTU1L2xp
-dmU1NTUuaW5jCkBAIC03LDcgKzcsNyBAQCBIT01FUEFHRSA9ICJodHRwOi8vbGl2ZS5jb20vIgog
-TElDRU5TRSA9ICJMR1BMIgogU0VDVElPTiA9ICJkZXZlbCIKIAotSU5DX1BSID0gInIxIgorSU5D
-X1BSID0gInIyIgogCiBVUkxWID0gIiR7QGJiLmRhdGEuZ2V0VmFyKCdQVicsZCwxKVswOjRdfS4k
-e0BiYi5kYXRhLmdldFZhcignUFYnLGQsMSlbNDo2XX0uJHtAYmIuZGF0YS5nZXRWYXIoJ1BWJyxk
-LDEpWzY6OF19IgogU1JDX1VSSSA9ICJodHRwOi8vd3d3LmxpdmU1NTUuY29tL2xpdmVNZWRpYS9w
-dWJsaWMvbGl2ZS4ke1VSTFZ9LnRhci5neiBcCkBAIC0xOCw2ICsxOCw3IEBAIFRBUkdFVF9DQ19B
-UkNIICs9ICIke0xERkxBR1N9IgogCiBkb19jb25maWd1cmUoKSB7CiAJY3AgJHtXT1JLRElSfS9j
-b25maWcubGludXgtY3Jvc3MgLgorCWVjaG8gIkNPTVBJTEVfT1BUUys9IiAtZlBJQyAiIiA+PiBj
-b25maWcubGludXgtY3Jvc3MKIAkuL2dlbk1ha2VmaWxlcyBsaW51eC1jcm9zcwogfQogCi0tIAox
-LjcuNC4xCgo=
-
---000e0cdf8e964794c104a76da98b--
