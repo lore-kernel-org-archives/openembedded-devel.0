@@ -1,23 +1,27 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from snvl-smtp1.trimble.com ([155.63.64.31])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Qeagc-0008Rp-Ho for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jul 2011 00:35:15 +0200
-Received: from f053037185.adsl.alicedsl.de ([78.53.37.185]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QeadE-0006tE-Mq for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jul 2011 22:31:44 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1309990305-4246-1-git-send-email-agnel.joel@gmail.com>
-References: <1309990305-4246-1-git-send-email-agnel.joel@gmail.com>
-Date: Thu, 07 Jul 2011 00:31:23 +0200
-Message-ID: <1309991483.4583.46.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [PATCH] libxml: Deleted patch that is already applied in source tarball
+	(envelope-from <Bernard_Mentink@trimble.com>) id 1QebX7-0000uj-L7
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Jul 2011 01:29:30 +0200
+Received: (qmail 21790 invoked by uid 501); 6 Jul 2011 16:25:37 -0700
+Received: from 10.3.0.166 by snvl-smtp1.trimble.com (envelope-from
+	<Bernard_Mentink@trimble.com>, uid 108) with qmail-scanner-2.08 
+	(clamdscan: 0.97.1/13285. avast: v3.2.0/110705-1. sophie:
+	3.06/3.21.0/4.67. spamassassin: 3.3.1. Clear:RC:1(10.3.0.166):. 
+	Processed in 0.012643 secs); 06 Jul 2011 23:25:37 -0000
+Received: from unknown (HELO nzc-ap-xch-02.ap.trimblecorp.net) (10.3.0.166)
+	by snvl-smtp1.trimble.com with SMTP; 6 Jul 2011 16:25:37 -0700
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Thu, 7 Jul 2011 11:25:35 +1200
+Message-ID: <F7C0AA5DD1508F4789E10B6CC9BB75DB04A78E50@nzc-ap-xch-02.ap.trimblecorp.net>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: Debugging u-boot
+Thread-Index: Acw8NAIxfaQ3zLffTFqj7EcndEQjmQ==
+From: "Bernard Mentink" <Bernard_Mentink@trimble.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Debugging u-boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,55 +35,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jul 2011 22:35:15 -0000
-X-Groupsio-MsgNum: 33025
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-bo1Wfq6gwPciMXyCL1uI"
-
---=-bo1Wfq6gwPciMXyCL1uI
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 06 Jul 2011 23:29:30 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-Am Mittwoch, den 06.07.2011, 17:11 -0500 schrieb Joel A Fernandes:
-> This deletes a patch that appears to be already applied to the checked ou=
-t source and is causing do_patch in libxml2
-> to fail when bitbaking beagleboard-validation-base-image
+Hi All,
 
-This is strange. I do not get this error with `bitbake -k libxml2`. And
-according to `git log recipes/libxml/` the patch has been there from the
-beginning so somebody else should have hit this too already. Can you
-check your set up and post exactly what branch and build configuration
-you are using. It would be great if you could run another build with a
-clean build (and download(?)) directory.
+Can some one please tell me how to debug u-boot  on my target. I have
+built u-boot for similar hardware and I want to debug with gdb, but
+cannot even find the cross-compile version of gdb,
+It does not exist in the directory
+"build/tmp/sysroots/i686-linux/usr/armv6/bin/" where the other
+cross-compile tools live ..
 
-What do you mean by =C2=BBchecked out=C2=AB? The downloaded archive?
+I want to execute "${CROSS_COMPILE}gdb u-boot"
+ .. and breakpoint at some very early symbol ..... Some steps to
+achieving this would be much appreciated ..
 
-> Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
-> ---
-> Not sure if should bump the PR in this case? If not, please ignore this n=
-ote
-
-If it really fixes a build error I guess no PR bump would be needed,
-since the package content should not change.
-
-[=E2=80=A6]
+Many Thanks,
+Bernie
 
 
-Thanks,
 
-Paul
 
---=-bo1Wfq6gwPciMXyCL1uI
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk4U4jsACgkQPX1aK2wOHViR4QCfVtlp5KsPoo5MJ/oeQ2Zi/IfJ
-4FUAn0EOIc+yOgQtAcuoH1nqQE4ANX+W
-=TUsh
------END PGP SIGNATURE-----
-
---=-bo1Wfq6gwPciMXyCL1uI--
