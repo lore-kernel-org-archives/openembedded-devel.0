@@ -1,38 +1,36 @@
-Received: from slow3-v.mail.gandi.net ([217.70.178.89])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <a.sappia@biotechware.com>) id 1QeQ5P-0008QI-Mn
+Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
+	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1QeQ78-00009X-CS
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jul 2011 13:16:07 +0200
-X-WhiteListed: mail was accepted with no delay
-X-WhiteListed: mail was accepted with no delay
-Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
-	[217.70.183.196])
-	by slow3-v.mail.gandi.net (Postfix) with ESMTP id 9619739389
+	Wed, 06 Jul 2011 13:17:55 +0200
+Received: (qmail 18145 invoked from network); 6 Jul 2011 13:14:06 +0200
+Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
+	by leibniz.math.fu-berlin.de with SMTP; 6 Jul 2011 13:14:06 +0200
+X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
+Received: from math.fu-berlin.de ([160.45.40.10])
+	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
+	port 10024) with SMTP id Y2e1QemIBH83
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jul 2011 13:12:19 +0200 (CEST)
-X-Originating-IP: 217.70.178.129
-Received: from mfilter12-d.gandi.net (mfilter12-d.gandi.net [217.70.178.129])
-	by relay4-d.mail.gandi.net (Postfix) with ESMTP id 028C9172070;
-	Wed,  6 Jul 2011 13:12:19 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mfilter12-d.gandi.net
-X-Amavis-Alert: BAD HEADER SECTION, MIME error: error: part did not end with
-	expected boundary
-Received: from relay4-d.mail.gandi.net ([217.70.183.196])
-	by mfilter12-d.gandi.net (mfilter12-d.gandi.net [10.0.15.180])
-	(amavisd-new, port 10024)
-	with ESMTP id bnT8mbESkDoO; Wed,  6 Jul 2011 13:12:17 +0200 (CEST)
-X-Originating-IP: 87.241.57.98
-Received: from localhost.localdomain (fireone.i3p.it [87.241.57.98])
-	(Authenticated sender: a.sappia@biotechware.com)
-	by relay4-d.mail.gandi.net (Postfix) with ESMTPSA id E40BE17207E;
-	Wed,  6 Jul 2011 13:12:16 +0200 (CEST)
-From: Alessandro Sappia <a.sappia@biotechware.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Jul 2011 13:12:09 +0200
-Message-Id: <cover.1309949770.git.a.sappia@biotechware.com>
-X-Mailer: git-send-email 1.7.4.1
+	Wed,  6 Jul 2011 13:13:55 +0200 (CEST)
+Received: (Qmail 18071 invoked from network); 6 Jul 2011 13:13:55 +0200
+Received: From andorra.imp.fu-berlin.de (160.45.42.84)
+	by leibniz.math.fu-berlin.de with SMTP; 6 Jul 2011 11:13:55 -0000
+Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.72 #1
+	(Debian)) id 1QeQ3H-0002ig-46; Wed, 06 Jul 2011 13:13:55 +0200
+Date: Wed, 6 Jul 2011 13:13:55 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: Orjan Friberg <of@flatfrog.com>
+Message-ID: <20110706111354.GA8641@mi.fu-berlin.de>
+References: <4E142E2F.6040101@flatfrog.com>
+	<20110706095258.GA2230@mail.familie-heinold.de>
+	<4E14370F.8080508@flatfrog.com>
 MIME-Version: 1.0
-Subject: [PATCH 0/1] dbus-glib-native and dbus-glib corrected
+In-Reply-To: <4E14370F.8080508@flatfrog.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Sender: Heinold <heinold@mi.fu-berlin.de>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: Discouraged kernels 2.6.35+?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,46 +44,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jul 2011 11:16:07 -0000
-Content-Type: multipart/mixed; boundary="------------1.7.4.1"
+X-List-Received-Date: Wed, 06 Jul 2011 11:17:55 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------1.7.4.1
-Content-Type: text/plain; charset=UTF-8; format=fixed
-Content-Transfer-Encoding: quoted-printable
+On Wed, Jul 06, 2011 at 12:21:03PM +0200, Orjan Friberg wrote:
+> On 2011-07-06 11:52, Henning Heinold wrote:
+>> If you are needed to use the dsp you have to stick to .32
+>
+> Are there DSP-related packages that don't work with later kernels  
+> (dsplink, codec engine) or something else?
 
-Hi all,
-dbus-glib-native and dbus-glib were not compiling.=20
-Reason were in how the dbus-glib.inc and dbus-glib_0.86.bb were wrote.
-The patch clears what the recipe has to do for each target compilation.
+Hi again,
 
-More info from http://www.mail-archive.com/openembedded-devel@lists.opene=
-mbedded.org/msg10184.html
-[cut]
-> I suspect that code could well have come from Poky. In this case the
-> native recipe generates a file which is then used by the target builds.
-> It can't be generated in the target recipe as that would mean running
-> target binaries.
-[cut]
+can't say for sure, that is only my knowledge from asking and hearing.
 
-Patch compiles and dbus-glib works on target device (tested with mini2440=
-).
+Koen Kooi may help you better or try to ask on the #beagle on irc.freenode.net
 
-Regards,
-
-Alessandro
-
-Alessandro Sappia (1):
-  dbus-glib-native and dbus-glib were not compiling. This patch
-    corrects dbus-glib-native to install required files in order to let
-    dbus-glib to compile on target.
-
- recipes/dbus/dbus-glib.inc     |    4 ++--
- recipes/dbus/dbus-glib_0.86.bb |    4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
-
---=20
-1.7.4.1
+Bye Henning
 
 
-
---------------1.7.4.1--
