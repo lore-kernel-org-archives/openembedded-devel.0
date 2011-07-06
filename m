@@ -1,23 +1,30 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mickey@vanille-media.de>) id 1QeSHu-0002rC-UF
+	(envelope-from <ozgungunay@gmail.com>) id 1QeTIZ-0003zh-4b
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jul 2011 15:37:10 +0200
-Received: from [192.168.1.7] (business-092-079-168-007.static.arcor-ip.net
-	[92.79.168.7])
-	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id 87355584083; 
-	Wed,  6 Jul 2011 16:03:51 +0200 (CEST)
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-Mime-Version: 1.0 (Apple Message framework v1244.3)
-Date: Wed, 6 Jul 2011 15:33:22 +0200
-References: <1309953840.14569.YahooMailRC@web27507.mail.ukl.yahoo.com>
+	Wed, 06 Jul 2011 16:41:55 +0200
+Received: by gyd12 with SMTP id 12so2870872gyd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Jul 2011 07:38:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=DomRuadfmlxaV/TA6JfcdwEdNhqqwHPjgc7zO/5P2f4=;
+	b=q+Xxg4P/0PQOCzdkm6tXMa0yH8DF9w6la55saUqFEKkk3v787yCrkZez3237Qjujdx
+	eu09Jb0nLJquY9N0UOwEnMThDE3Zc/HSpgbsUhuyqDlYz6pllB6qToeCX1uVrDornVda
+	176KiwWZcpvulKVubQvJkfgPu4E80e+5tPoKQ=
+MIME-Version: 1.0
+Received: by 10.151.25.12 with SMTP id c12mr7554690ybj.417.1309963081970; Wed,
+	06 Jul 2011 07:38:01 -0700 (PDT)
+Sender: ozgungunay@gmail.com
+Received: by 10.150.198.11 with HTTP; Wed, 6 Jul 2011 07:38:01 -0700 (PDT)
+Date: Wed, 6 Jul 2011 17:38:01 +0300
+X-Google-Sender-Auth: puDK1-xjrTP0maj88Z5ZFoX57YA
+Message-ID: <CAPeX=+uCtwx_jTURr5juwsGE58ZJcC7v4xT9kb3b-F2xPbcjQw@mail.gmail.com>
+From: Ozgun <ozgun.gunay@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <5D08B536-6159-44B4-BFB2-5139A88BF2A7@vanille-media.de>
-X-Mailer: Apple Mail (2.1244.3)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: fabien comte <comte_fabien@yahoo.fr>
-Subject: Update proposals
+Subject: gcc-cross-initial compile failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,37 +38,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jul 2011 13:37:11 -0000
-Content-Type: text/plain;
-	charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 06 Jul 2011 14:41:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Forwarding this to the proper list address,
-please note that openembedded-devel-owner is for administrative =
-purposes.
+The build is failing on gcc-cross-initial;
+NOTE: package gcc-cross-initial-4.4.4-r8.1: task do_compile: Failed
+ERROR: Function 'do_compile' failed (see
+/home/ozgun/tmp/work/i686-linux/gcc-cross-initial-4.4.4-r8.1/temp/log.do_compile.18907
+for further information)
+ERROR: Task 3612 (/work/openembedded/recipes/gcc/gcc-cross-initial_4.4.4.bb,
+do_compile) failed with exit code '1'
+ERROR: '/work/openembedded/recipes/gcc/gcc-cross-initial_4.4.4.bb' failed
 
-> Von: fabien comte <comte_fabien@yahoo.fr>
-> Betreff: Update proposals
-> Datum: 6. Juli 2011 14:04:00 MESZ
-> An: openembedded-devel-owner@lists.openembedded.org
->=20
-> Hello,
-> =20
-> This archive contain some updates for recipes. Could you integrate it =
-?
->=20
-> All are ok but I cannot rebuild jamvm 1.5.4 since icedted build fails. =
-Could you fix icedted if you want that I test jamvm again (i did it few =
-month before and it worked) ?
->=20
-> =20
-> I hope that it will help some users.
->=20
-> =20
-> Fabien
->=20
 
-Cheers,
 
-:M:=
+From log.do_compile.18907;
+In file included from
+/home/ozgun/tmp/work/i686-linux/gcc-cross-initial-4.4.4-r8.1/gcc-4.4.4/gcc/tree.h:30:0,
+                 from
+/home/ozgun/tmp/work/i686-linux/gcc-cross-initial-4.4.4-r8.1/gcc-4.4.4/gcc/c-lang.c:27:
+/home/ozgun/tmp/work/i686-linux/gcc-cross-initial-4.4.4-r8.1/gcc-4.4.4/gcc/double-int.h:24:17:
+fatal error: gmp.h: No such file or directory
+compilation terminated.
+make[3]: *** [c-lang.o] Error 1
+make[3]: Leaving directory
+`/home/ozgun/tmp/work/i686-linux/gcc-cross-initial-4.4.4-r8.1/gcc-4.4.4/build.i686-linux.i686-linux/gcc'
+make[2]: *** [all-stage1-gcc] Error 2
+make[2]: Leaving directory
+`/home/ozgun/tmp/work/i686-linux/gcc-cross-initial-4.4.4-r8.1/gcc-4.4.4/build.i686-linux.i686-linux'
+make[1]: *** [stage1-bubble] Error 2
+make[1]: Leaving directory
+`/home/ozgun/tmp/work/i686-linux/gcc-cross-initial-4.4.4-r8.1/gcc-4.4.4/build.i686-linux.i686-linux'
+make: *** [all] Error 2
++ die 'oe_runmake failed'
++ oefatal 'oe_runmake failed'
++ echo FATAL: 'oe_runmake failed'
+FATAL: oe_runmake failed
++ exit 1
+
+
+
+From gcc-4.4.4.inc;
+DEPENDS = "mpfr gmp"
+NATIVEDEPS = "mpfr-native gmp-native"
+
+gcc depends mpfr gmp, therefore compiler needs mpfr.h gmp.h
+But these files are located under their own folder
+(/work/i686-linux/gmp-native-5.0.1-r1.1/gmp-5.0.1/gmp.h) ,not under gcc
+folder.
+
+Wondering how can you overcome this problem?
+
+Thanks,
 
