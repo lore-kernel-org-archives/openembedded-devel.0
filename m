@@ -1,30 +1,31 @@
-Received: from snvl-smtp1.trimble.com ([155.63.64.31])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Bernard_Mentink@trimble.com>) id 1QeuFw-0005vY-Py
+	(envelope-from <agnel.joel@gmail.com>) id 1QewA6-0005Wy-NM
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jul 2011 21:29:01 +0200
-Received: (qmail 15218 invoked by uid 501); 7 Jul 2011 12:25:06 -0700
-Received: from 10.3.0.166 by snvl-smtp1.trimble.com (envelope-from
-	<Bernard_Mentink@trimble.com>, uid 108) with qmail-scanner-2.08 
-	(clamdscan: 0.97.1/13290. avast: v3.2.0/110706-1. sophie:
-	3.06/3.21.0/4.67. spamassassin: 3.3.1. Clear:RC:1(10.3.0.166):. 
-	Processed in 0.035486 secs); 07 Jul 2011 19:25:06 -0000
-Received: from unknown (HELO nzc-ap-xch-02.ap.trimblecorp.net) (10.3.0.166)
-	by snvl-smtp1.trimble.com with SMTP; 7 Jul 2011 12:25:06 -0700
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Fri, 8 Jul 2011 07:25:04 +1200
-Message-ID: <F7C0AA5DD1508F4789E10B6CC9BB75DB04A78FCB@nzc-ap-xch-02.ap.trimblecorp.net>
-In-Reply-To: <CAE21AQq6YfPtuqxKfBs5cCGvBeO4ALk4d+_iZpZOpGZyBUNETw@mail.gmail.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Debugging u-boot
-Thread-Index: Acw8SH8Z2+rrnmCsSu+F0BLqgSxSBwAkpItA
-References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04A78E50@nzc-ap-xch-02.ap.trimblecorp.net><CAE21AQpLShYH+82swduxQLWtpTGtTawuywbt2WxXHUTB5+9zDQ@mail.gmail.com><F7C0AA5DD1508F4789E10B6CC9BB75DB04A78EBC@nzc-ap-xch-02.ap.trimblecorp.net>
-	<CAE21AQq6YfPtuqxKfBs5cCGvBeO4ALk4d+_iZpZOpGZyBUNETw@mail.gmail.com>
-From: "Bernard Mentink" <Bernard_Mentink@trimble.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: Debugging u-boot
+	Thu, 07 Jul 2011 23:31:11 +0200
+Received: by yib18 with SMTP id 18so614005yib.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Jul 2011 14:26:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=lIf8ciYrrko3nz9p9FOyLZnTcKJdBw9Njk04iTscHZw=;
+	b=hYTaEmbS/IwhQHQU45lT0ETEKZj8w6PVXkCUDK+EzSdGape+heywbQ4A20J62s3OQM
+	p3yYE136noKr5o07M74BUc6OIv8QoWkaJuq50lmRtJyP/Lkp6pMvZnIjI8a1kCvBxPVa
+	PC83jq0bfN/MJdWOYlqRZngtb49RtoXc0GyY8=
+Received: by 10.236.67.47 with SMTP id i35mr1687793yhd.66.1310074018047;
+	Thu, 07 Jul 2011 14:26:58 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id c69sm624804yhm.15.2011.07.07.14.26.56
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 07 Jul 2011 14:26:57 -0700 (PDT)
+From: Joel A Fernandes <agnel.joel@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  7 Jul 2011 16:23:56 -0500
+Message-Id: <1310073836-11556-1-git-send-email-agnel.joel@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: joelagnel@ti.com, beagleboard@googlegroups.com,
+	Joel A Fernandes <agnel.joel@gmail.com>, jdk@ti.com, k-kooi@ti.com
+Subject: [PATCH v3] beagleboard-test-scripts: Add a script flash-fs.sh for flashing NAND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,208 +39,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jul 2011 19:29:01 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 07 Jul 2011 21:31:11 -0000
 
-Hi Charles,
+This script flashes the NAND of a BeagleBoard if:
+  * The user-button is pressed
+  * There is a valid image on the SD Card to flash
+  * The board has NAND
 
-Tried that but got the following linker error:
+Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
+---
+Changes since v2:
+  User button is checked before flashing of the board
 
----------------------------------------------------------- error =
----------------------------------------
-| =
-/home/bernie/Stuff/build/tmp/sysroots/i686-linux/usr/armv6/arm-angstrom-l=
-inux-gnueabi/bin/ld: failed to merge target specific data of file =
-emutls_s.o
-| =
-/home/bernie/Stuff/build/tmp/sysroots/i686-linux/usr/armv6/arm-angstrom-l=
-inux-gnueabi/bin/ld: error: =
-/home/bernie/Stuff/build/tmp/work/i686-armv6-sdk-angstrom-linux-gnueabi/g=
-cc-cross-sdk-4.5-r36.2+svnr170880/gcc-4_5-branch/build.i686-linux.arm-ang=
-strom-linux-gnueabi/./gcc/crtendS.o uses VFP register arguments, =
-./libgcc_s.so.1.tmp does not
-| =
-/home/bernie/Stuff/build/tmp/sysroots/i686-linux/usr/armv6/arm-angstrom-l=
-inux-gnueabi/bin/ld: failed to merge target specific data of file =
-/home/bernie/Stuff/build/tmp/work/i686-armv6-sdk-angstrom-linux-gnueabi/g=
-cc-cross-sdk-4.5-r36.2+svnr170880/gcc-4_5-branch/build.i686-linux.arm-ang=
-strom-linux-gnueabi/./gcc/crtendS.o
-| collect2: ld returned 1 exit status
-| make[2]: *** [libgcc_s.so] Error 1
-| make[2]: Leaving directory =
-`/home/bernie/Stuff/build/tmp/work/i686-armv6-sdk-angstrom-linux-gnueabi/=
-gcc-cross-sdk-4.5-r36.2+svnr170880/gcc-4_5-branch/build.i686-linux.arm-an=
-gstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libgcc'
-| make[1]: *** [all-target-libgcc] Error 2
-| make[1]: Leaving directory =
-`/home/bernie/Stuff/build/tmp/work/i686-armv6-sdk-angstrom-linux-gnueabi/=
-gcc-cross-sdk-4.5-r36.2+svnr170880/gcc-4_5-branch/build.i686-linux.arm-an=
-gstrom-linux-gnueabi'
-| make: *** [all] Error 2
-| + die 'oe_runmake failed'
-| + oefatal 'oe_runmake failed'
-| + echo FATAL
-NOTE: package gcc-cross-sdk-4.5-r36.2+svnr170880: task do_compile: =
-Failed
-ERROR: Function 'do_compile' failed (see =
-/home/bernie/Stuff/build/tmp/work/i686-armv6-sdk-angstrom-linux-gnueabi/g=
-cc-cross-sdk-4.5-r36.2+svnr170880/temp/log.do_compile.14514 for further =
-information)
-ERROR: Task 594 =
-(/home/bernie/Stuff/openembedded/recipes/gcc/gcc-cross-sdk_4.5.bb, =
-do_compile) failed with exit code '1'
-ERROR: =
-'/home/bernie/Stuff/openembedded/recipes/gcc/gcc-cross-sdk_4.5.bb' =
-failed
--------------------------------------------------------------------------=
-----------------------------
+This is based on Jason's review:
+http://groups.google.com/group/beagleboard/msg/835de9a37c3a340a
 
-Any idea what it could be?=20
+ .../beagleboard/beagleboard-test-scripts_git.bb    |   14 +++++++++++---
+ 1 files changed, 11 insertions(+), 3 deletions(-)
 
-Cheers,
-bernie
+diff --git a/recipes/beagleboard/beagleboard-test-scripts_git.bb b/recipes/beagleboard/beagleboard-test-scripts_git.bb
+index be0d059..3f3cc56 100644
+--- a/recipes/beagleboard/beagleboard-test-scripts_git.bb
++++ b/recipes/beagleboard/beagleboard-test-scripts_git.bb
+@@ -1,14 +1,18 @@
+ ## Reminder:  The correct spacing for a variable is FOO = "BAR"  in : PR="r1"
+ DESCRIPTION = "BeagleBoard test scripts"
+ HOMEPAGE = "http://beagleboad.org/support"
+-PR = "r2"
++PR = "r3"
+ 
+-SRC_URI = "git://gitorious.org/beagleboard-validation/scripts.git;protocol=git \
++SRC_URI = "git://gitorious.org/~joelf/beagleboard-validation/validation-scripts.git;protocol=git \
+ "
+ 
+-SRCREV = "473dd2ab20d866be6168c9f992c2c9e74e485c9d"
++SRCREV = "513bfa2e99822150ea5845f3a33c349029cb7c13"
+ S = "${WORKDIR}/git"
+ 
++inherit update-rc.d
++INITSCRIPT_NAME = "flash-fs.sh"
++INITSCRIPT_PARAMS = "start 99 2 3 4 5 ."
++
+ do_install() {
+   TEST_FILES=" \
+     testaudio \
+@@ -28,4 +32,8 @@ do_install() {
+   for i in ${TEST_FILES}; do
+     install -m 0755 ${S}/${i} ${D}/${bindir}
+   done
++  # A script to flash NAND if the board has it, and if there is valid image to flash on the SD Card.
++  # We also register it as an init script so that the SD Card auto-flashes to NAND during boot.
++  install -d ${D}/${sysconfdir}/init.d/
++  install -m 0755 ${S}/flashing/flash-fs.sh ${D}/${sysconfdir}/init.d/flash-fs.sh
+ }
+-- 
+1.7.0.4
 
-=20
-
-
--------------------------------------------------------------------------=
------------------
-I want to die peacefully in my sleep, like my grandfather, not screaming =
-and yelling like the passengers in his car.
-
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org =
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of =
-Charles Manning
-Sent: Thursday, 7 July 2011 1:52 p.m.
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] Debugging u-boot
-
-On Thu, Jul 7, 2011 at 1:13 PM, Bernard Mentink =
-<Bernard_Mentink@trimble.com> wrote:
-> Hi Charles,
->
-> Didn't know you were lurking on this list ... ;-)
-
-You can run but you can't hide.
-
->
-> I have built for the angstom distro (arm-angstrom-linux-gnueabi-*),=20
-> but the tools got put in my project path I described in my earlier =
-email, but There was no GDB included for some reason ..
-
-The regular toolchian than oe builds for its own purposes does not use =
-gdb because gdb is not needed for building. That toolchain is intended =
-for use within OE bitbakery only.
-
-A meta-toolchain is built as a standalone toolchain intended for use =
-outside of OE (eg. if you pull u-boot to a standalone directory for =
-development purposes or want to do your own app development outside of
-OE.)
-
->
-> How do you build the meta-toolchain, and how will that help.
-
-
-bitbake meta-toolchain.
-
-This makes a toolchain which you can unpack thus:
-
-$ cd /
-$ sudo tar xvjf
-${OETOP}/tmp/deploy/glibc/sdk/angstrom-2009.X-test-20110301-armv7a-linux-=
-gnueabi-toolchain.tar.bz2
-
-[NB your toolchain name will be something different]
-
-
-To set up all the paths etc use
-
-. /usr/local/angstrom/arm/environment-setup
-
-Google openembedded metatoolchain will also give some interesting info.
-
-NB If you're building apps and need extra libraries you will need to =
-make your own SDK. That's a bit more effort and you don't need all that =
-just for gdbing u-boot
-
--- Charles
-
->
-> Cheers,
-> Bernie
->
->
-> ----------------------------------------------------------------------
-> -------------------- I want to die peacefully in my sleep, like my=20
-> grandfather, not screaming and yelling like the passengers in his car.
->
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org=20
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf=20
-> Of Charles Manning
-> Sent: Thursday, 7 July 2011 12:38 p.m.
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] Debugging u-boot
->
-> Bernie
->
-> What toolchain are you building?
->
-> If you build meta-toolchain that should build all the stuff you can =
-put into /usr/local/angstrom/arm/... which includes gdb.
->
-> That should then work with a JTAG debugger etc.
->
-> -- Charles
->
->
-> On Thu, Jul 7, 2011 at 11:25 AM, Bernard Mentink =
-<Bernard_Mentink@trimble.com> wrote:
->> Hi All,
->>
->> Can some one please tell me how to debug u-boot =A0on my target. I =
-have=20
->> built u-boot for similar hardware and I want to debug with gdb, but=20
->> cannot even find the cross-compile version of gdb, It does not exist=20
->> in the directory "build/tmp/sysroots/i686-linux/usr/armv6/bin/" where =
-
->> the other cross-compile tools live ..
->>
->> I want to execute "${CROSS_COMPILE}gdb u-boot"
->> =A0.. and breakpoint at some very early symbol ..... Some steps to=20
->> achieving this would be much appreciated ..
->>
->> Many Thanks,
->> Bernie
->>
->>
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-deve
->> l
->>
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
