@@ -1,24 +1,24 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QesGQ-00030E-OW for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jul 2011 19:21:22 +0200
+	id 1Qesgg-0000oM-EV for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Jul 2011 19:48:30 +0200
 Received: from g225080076.adsl.alicedsl.de ([92.225.80.76]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QesD4-00055s-23 for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jul 2011 17:17:54 +0000
+	id 1QesdK-00064y-0I for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Jul 2011 17:45:02 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <a975594904046a990cda00ae9d968315fa36433a.1310045515.git.michael.lippautz@gmail.com>
+In-Reply-To: <52d3dbb81758055099740c437667671b45974a2d.1310045515.git.michael.lippautz@gmail.com>
 References: <cover.1310045515.git.michael.lippautz@gmail.com>
-	<a975594904046a990cda00ae9d968315fa36433a.1310045515.git.michael.lippautz@gmail.com>
-Date: Thu, 07 Jul 2011 19:17:31 +0200
-Message-ID: <1310059051.4153.2.camel@mattotaupa>
+	<52d3dbb81758055099740c437667671b45974a2d.1310045515.git.michael.lippautz@gmail.com>
+Date: Thu, 07 Jul 2011 19:44:39 +0200
+Message-ID: <1310060679.4153.6.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.3 
-Subject: Re: [meta-oe][PATCHv2 2/4] python-sqlalchemy: Add version 0.7.1 (initial recipe)
+Subject: Re: [meta-oe][PATCHv2 4/4] start-stop-daemon: Add version 1.16.0.2 (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,71 +32,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jul 2011 17:21:22 -0000
-X-Groupsio-MsgNum: 33052
+X-List-Received-Date: Thu, 07 Jul 2011 17:48:30 -0000
+X-Groupsio-MsgNum: 33053
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-BwB8tovu2DDFqbtqVUYG"
+	boundary="=-3V2YEhLRxlrRtMLTHF92"
 
---=-BwB8tovu2DDFqbtqVUYG
+--=-3V2YEhLRxlrRtMLTHF92
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 Am Donnerstag, den 07.07.2011, 15:36 +0200 schrieb Michael Lippautz:
+> Provides a stand-lone s-s-d that is extracted from dpkg of the correspond=
+ing
+> version.
+>=20
+> * dpkg_1.16.0.2 is hostedd on sources.oe.org, since debian wipes old vers=
+ions
+>   from their mirrors
+> * Installing only s-s-d (binary) would be covered by automake rules.
+>   Documentation would be missing. Thus install all and purge non s-s-d fi=
+les.
+>=20
 > Signed-off-by: Michael Lippautz <michael.lippautz@gmail.com>
 > ---
->  .../python/python-sqlalchemy_0.7.1.bb              |   16 ++++++++++++++=
-++
->  1 files changed, 16 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-devtools/python/python-sqlalchemy_0.7=
-.1.bb
+>  .../start-stop-daemon_1.16.0.2.bb                  |   31 ++++++++++++++=
+++++++
+>  1 files changed, 31 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-support/start-stop-daemon/start-stop-=
+daemon_1.16.0.2.bb
 >=20
-> diff --git a/meta-oe/recipes-devtools/python/python-sqlalchemy_0.7.1.bb b=
-/meta-oe/recipes-devtools/python/python-sqlalchemy_0.7.1.bb
+> diff --git a/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_=
+1.16.0.2.bb b/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1=
+.16.0.2.bb
 > new file mode 100644
-> index 0000000..a50ce2e
+> index 0000000..9b1084a
 > --- /dev/null
-> +++ b/meta-oe/recipes-devtools/python/python-sqlalchemy_0.7.1.bb
-> @@ -0,0 +1,16 @@
-> +DESCRIPTION =3D "Python SQL toolkit and Object Relational Mapper that gi=
-ves \
-> +application developers the full power and flexibility of SQL"
-> +HOMEPAGE =3D "http://www.sqlalchemy.org/"
-> +LICENSE =3D "MIT"        =20
+> +++ b/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.16.0.=
+2.bb
+> @@ -0,0 +1,31 @@
+> +DESCRIPTION =3D "Debian's start-stop-daemon utility extracted from the d=
+pkg \
+> +package"
+> +LICENSE =3D "PD"
+> +LIC_FILES_CHKSUM =3D "file://utils/start-stop-daemon.c;md5=3Da963623e458=
+8f70122865aaa7a370ce4"
+> +# start-stop-daemon is usually shipped by dpkg
+> +RCONFLICS_${PN} =3D "dpkg"=20
 
-This line has trailing white space. Please check those using `git diff
---check` or read the output from Git when committing stuff.
+Trailing whitespace again.
 
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3De88f48967a8bd1fe88f5425f7e659=
-dbf"
-> +RDEPENDS_${PN} +=3D "python-numbers"
 > +PR =3D "r0"
 > +
-> +SRCNAME =3D "SQLAlchemy"
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/sqlalchemy/${SRCNAME}-${PV}.tar.gz"
-> +SRC_URI[md5sum] =3D "76e2e1e48b8047f1ca7023f143374aef"
-> +SRC_URI[sha256sum] =3D "eedd2d63d6404d9bbe3c4c6a63a5442d2c2650b862f9c10f=
-721cfae4a735d05a"
+> +SRC_URI =3D "http://sources.openembedded.org/dpkg_${PV}.tar.bz2"
+> +SRC_URI[md5sum] =3D "d211a84f38987771a49ad1c0f144334a"
+> +SRC_URI[sha256sum] =3D "2a3d4ba83c743b3f004533fdd52372cb7b22f5c1da2042d0=
+a31bbcc2b54c0ea5"
 > +
-> +S =3D "${WORKDIR}/${SRCNAME}-${PV}"
+> +inherit autotools gettext
 > +
-> +inherit setuptools
+> +S =3D "${WORKDIR}/dpkg-${PV}"
+> +
+> +EXTRA_OECONF =3D " \
+> +  --with-start-stop-daemon \
+> +  --without-bz2 \
+> +  --without-deselect \
+> +  --without-install-info \
+> +  --without-selinux \
+> +  --without-update-alternatives \
+> +"
+> +
+> +do_install_append () {
+> +  # remove everything that is not related to start-stop-daemon, since th=
+ere
+> +  # is no explicit rule for only installing ssd
+> +  find ${D} -type f -not -name "*start-stop-daemon*" -exec rm {} \;
+> +  find ${D} -depth -type d -empty -exec rmdir {} \;
+> +}
+
+Just looking at the recipe, the recipe in oe-dev [1] seems to do this
+differently and calls `update-alternatives` too. Is that not needed
+anymore and is copying the C file to the repository not working anymore?
 
 
 Thanks,
 
 Paul
 
---=-BwB8tovu2DDFqbtqVUYG
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/start-s=
+top-daemon/start-stop-daemon_1.9.18.bb?id=3D529b445f1122e3d0de7acff980fa0af=
+114368157
+
+--=-3V2YEhLRxlrRtMLTHF92
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk4V6iUACgkQPX1aK2wOHVgJiQCfaAt4tYGlOii0zTTiY9WJIH5A
-YsoAn0rRJ+JBqmZkhncFwC03G/G6flC9
-=/Rgc
+iEYEABECAAYFAk4V8IcACgkQPX1aK2wOHVhYXwCePvZCvtSFkdZGo4pCVBRFIRBz
+T+YAn2tq6XdWfgAZtX3sQkk+euUC8KsM
+=0Ry5
 -----END PGP SIGNATURE-----
 
---=-BwB8tovu2DDFqbtqVUYG--
+--=-3V2YEhLRxlrRtMLTHF92--
