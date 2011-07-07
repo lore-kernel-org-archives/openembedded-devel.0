@@ -1,31 +1,31 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <agnel.joel@gmail.com>) id 1QehGH-0002XC-Mt
+	(envelope-from <agnel.joel@gmail.com>) id 1QehPT-0002hd-Nu
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jul 2011 07:36:29 +0200
-Received: by gxk3 with SMTP id 3so288340gxk.6
+	Thu, 07 Jul 2011 07:45:59 +0200
+Received: by ywa12 with SMTP id 12so274522ywa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jul 2011 22:32:38 -0700 (PDT)
+	Wed, 06 Jul 2011 22:42:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=maVvuIhnkG98bTXyxoTKsZzxXb8IanSEtQe+CcdTp2s=;
-	b=uAVK4DDuDcOOLFxaFLeF2CHmytPa/+QptpVpe1p8GdwZUqJtX7N2Beeb8aJXj5scmh
-	uJRW5qtIhSz3ruJbbJZ/VhzllKCwD3B89a7YlDOTq5KrI1lsnteSbqbUIQ3fx1MUwskx
-	R87l2Ye2xtEdo15HdlBBVSC/XajpM8nr9zjdI=
-Received: by 10.151.154.8 with SMTP id g8mr603344ybo.29.1310016757322;
-	Wed, 06 Jul 2011 22:32:37 -0700 (PDT)
+	bh=rpJd/cwHsJHNojBFLXkWUG3FyRBe3+JuRLbN5jg3Un8=;
+	b=SsgMGSZb5z6Hz+lh2/VplTrlZg2B+hwEHQrstcgFvr5q60ZGKOm+Ur/r4PnhWegmlm
+	BPgubqx+cKqzoN4K338ChpF3JYYT7SkxSh7BVgVJduJLVKp/BjxWDwBULYkIVh+IQKUy
+	5Z6Em0R2DAyOBhUG9OVZvcDwhUm9x1gphEL/Y=
+Received: by 10.236.46.74 with SMTP id q50mr403956yhb.275.1310017328121;
+	Wed, 06 Jul 2011 22:42:08 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id o6sm267712yba.17.2011.07.06.22.32.36
+	by mx.google.com with ESMTPS id e24sm1316696yhk.65.2011.07.06.22.42.06
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 06 Jul 2011 22:32:36 -0700 (PDT)
+	Wed, 06 Jul 2011 22:42:07 -0700 (PDT)
 From: Joel A Fernandes <agnel.joel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Jul 2011 00:29:23 -0500
-Message-Id: <1310016563-8871-1-git-send-email-agnel.joel@gmail.com>
+Date: Thu,  7 Jul 2011 00:38:58 -0500
+Message-Id: <1310017138-8936-1-git-send-email-agnel.joel@gmail.com>
 X-Mailer: git-send-email 1.7.0.4
 Cc: joelagnel@ti.com, beagleboard@googlegroups.com, k-kooi@ti.com,
 	Joel A Fernandes <agnel.joel@gmail.com>, jdk@ti.com, beagle@list.ti.com
-Subject: [PATCH] pulseaudio: Run as system-wide instance instead of per-user
+Subject: [PATCH v2] pulseaudio: Run as system-wide instance instead of per-user
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,7 +39,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jul 2011 05:36:29 -0000
+X-List-Received-Date: Thu, 07 Jul 2011 05:45:59 -0000
 
 * Pulseaudio running as per-user is opening audio devices and blocking everyone else from getting access
   to the device. The problem is it doesn't even seem to be allowing applications to connect to it, this
@@ -47,9 +47,12 @@ X-List-Received-Date: Thu, 07 Jul 2011 05:36:29 -0000
 
 Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
 ---
+Changes since earlier version:
+ Sorry I didn't bump the PR! Resending it again
+
  .../pulseaudio-system-mode-startup.sh              |    4 ++++
- recipes/pulseaudio/pulseaudio_0.9.22.bb            |   15 +++++++++++++++
- 2 files changed, 19 insertions(+), 0 deletions(-)
+ recipes/pulseaudio/pulseaudio_0.9.22.bb            |   17 ++++++++++++++++-
+ 2 files changed, 20 insertions(+), 1 deletions(-)
  create mode 100755 recipes/pulseaudio/pulseaudio-0.9.21/pulseaudio-system-mode-startup.sh
 
 diff --git a/recipes/pulseaudio/pulseaudio-0.9.21/pulseaudio-system-mode-startup.sh b/recipes/pulseaudio/pulseaudio-0.9.21/pulseaudio-system-mode-startup.sh
@@ -63,9 +66,17 @@ index 0000000..528ceb9
 +echo "Starting Pulseaudio in system mode.."
 +pulseaudio --log-target=syslog --system
 diff --git a/recipes/pulseaudio/pulseaudio_0.9.22.bb b/recipes/pulseaudio/pulseaudio_0.9.22.bb
-index 2368829..6d3adc4 100644
+index 2368829..1bc6816 100644
 --- a/recipes/pulseaudio/pulseaudio_0.9.22.bb
 +++ b/recipes/pulseaudio/pulseaudio_0.9.22.bb
+@@ -1,6 +1,6 @@
+ require pulseaudio.inc
+ 
+-PR = ${INC_PR}.2
++PR = ${INC_PR}.3
+ 
+ DEPENDS += "gdbm speex"
+ 
 @@ -12,6 +12,10 @@ FILESPATHPKG =. "pulseaudio-0.9.21:"
  
  inherit gettext
