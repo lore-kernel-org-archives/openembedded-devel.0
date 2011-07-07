@@ -1,31 +1,31 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cdhmanning@gmail.com>) id 1Qedoe-0003WJ-7t
+	(envelope-from <agnel.joel@gmail.com>) id 1QehGH-0002XC-Mt
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jul 2011 03:55:44 +0200
-Received: by ewy5 with SMTP id 5so173728ewy.6
+	Thu, 07 Jul 2011 07:36:29 +0200
+Received: by gxk3 with SMTP id 3so288340gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jul 2011 18:51:53 -0700 (PDT)
+	Wed, 06 Jul 2011 22:32:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=hJF1/+GsoSR6L9+Z/leIrznE55TRtqJFsuoUVYRGvBY=;
-	b=SrXHABHdY4ByWZkHIsa0zRjF4VTy/F6ngrl4+wbC+u0sUJp0S3Xh8j+Fxl+y5b9UGD
-	ZQ9aGUwgJiBR25LQcmAVWiorfWF+Ix/W61QeJJOk9xKho5eekZ3aXg2dRl1X6Cpz4RIw
-	sE7dKkRGOFenDmJs8nv1rcHgU0rB4MxRcKedg=
-MIME-Version: 1.0
-Received: by 10.213.107.147 with SMTP id b19mr2052567ebp.7.1310003511733; Wed,
-	06 Jul 2011 18:51:51 -0700 (PDT)
-Received: by 10.213.31.141 with HTTP; Wed, 6 Jul 2011 18:51:51 -0700 (PDT)
-In-Reply-To: <F7C0AA5DD1508F4789E10B6CC9BB75DB04A78EBC@nzc-ap-xch-02.ap.trimblecorp.net>
-References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04A78E50@nzc-ap-xch-02.ap.trimblecorp.net>
-	<CAE21AQpLShYH+82swduxQLWtpTGtTawuywbt2WxXHUTB5+9zDQ@mail.gmail.com>
-	<F7C0AA5DD1508F4789E10B6CC9BB75DB04A78EBC@nzc-ap-xch-02.ap.trimblecorp.net>
-Date: Thu, 7 Jul 2011 13:51:51 +1200
-Message-ID: <CAE21AQq6YfPtuqxKfBs5cCGvBeO4ALk4d+_iZpZOpGZyBUNETw@mail.gmail.com>
-From: Charles Manning <cdhmanning@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=maVvuIhnkG98bTXyxoTKsZzxXb8IanSEtQe+CcdTp2s=;
+	b=uAVK4DDuDcOOLFxaFLeF2CHmytPa/+QptpVpe1p8GdwZUqJtX7N2Beeb8aJXj5scmh
+	uJRW5qtIhSz3ruJbbJZ/VhzllKCwD3B89a7YlDOTq5KrI1lsnteSbqbUIQ3fx1MUwskx
+	R87l2Ye2xtEdo15HdlBBVSC/XajpM8nr9zjdI=
+Received: by 10.151.154.8 with SMTP id g8mr603344ybo.29.1310016757322;
+	Wed, 06 Jul 2011 22:32:37 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id o6sm267712yba.17.2011.07.06.22.32.36
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 06 Jul 2011 22:32:36 -0700 (PDT)
+From: Joel A Fernandes <agnel.joel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Debugging u-boot
+Date: Thu,  7 Jul 2011 00:29:23 -0500
+Message-Id: <1310016563-8871-1-git-send-email-agnel.joel@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: joelagnel@ti.com, beagleboard@googlegroups.com, k-kooi@ti.com,
+	Joel A Fernandes <agnel.joel@gmail.com>, jdk@ti.com, beagle@list.ti.com
+Subject: [PATCH] pulseaudio: Run as system-wide instance instead of per-user
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,124 +39,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jul 2011 01:55:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 07 Jul 2011 05:36:29 -0000
 
-On Thu, Jul 7, 2011 at 1:13 PM, Bernard Mentink
-<Bernard_Mentink@trimble.com> wrote:
-> Hi Charles,
->
-> Didn't know you were lurking on this list ... ;-)
+* Pulseaudio running as per-user is opening audio devices and blocking everyone else from getting access
+  to the device. The problem is it doesn't even seem to be allowing applications to connect to it, this
+  patch starts it up in system mode instead which is tested and known to work
 
-You can run but you can't hide.
+Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
+---
+ .../pulseaudio-system-mode-startup.sh              |    4 ++++
+ recipes/pulseaudio/pulseaudio_0.9.22.bb            |   15 +++++++++++++++
+ 2 files changed, 19 insertions(+), 0 deletions(-)
+ create mode 100755 recipes/pulseaudio/pulseaudio-0.9.21/pulseaudio-system-mode-startup.sh
 
->
-> I have built for the angstom distro (arm-angstrom-linux-gnueabi-*), but t=
-he tools got put in my project path I described in my earlier email, but
-> There was no GDB included for some reason ..
+diff --git a/recipes/pulseaudio/pulseaudio-0.9.21/pulseaudio-system-mode-startup.sh b/recipes/pulseaudio/pulseaudio-0.9.21/pulseaudio-system-mode-startup.sh
+new file mode 100755
+index 0000000..528ceb9
+--- /dev/null
++++ b/recipes/pulseaudio/pulseaudio-0.9.21/pulseaudio-system-mode-startup.sh
+@@ -0,0 +1,4 @@
++#!/bin/sh
++
++echo "Starting Pulseaudio in system mode.."
++pulseaudio --log-target=syslog --system
+diff --git a/recipes/pulseaudio/pulseaudio_0.9.22.bb b/recipes/pulseaudio/pulseaudio_0.9.22.bb
+index 2368829..6d3adc4 100644
+--- a/recipes/pulseaudio/pulseaudio_0.9.22.bb
++++ b/recipes/pulseaudio/pulseaudio_0.9.22.bb
+@@ -12,6 +12,10 @@ FILESPATHPKG =. "pulseaudio-0.9.21:"
+ 
+ inherit gettext
+ 
++inherit update-rc.d
++INITSCRIPT_NAME = "pulseaudio.sh"
++INITSCRIPT_PARAMS = "start 99 2 3 4 5 ."
++
+ #SRC_URI += "\
+ #  file://buildfix.patch \
+ #  file://autoconf_version.patch \
+@@ -27,6 +31,7 @@ SRC_URI += "\
+   file://armv4+v5asm.patch \
+   file://fixbluezbuild.patch \
+   file://ubacktrace.patch \
++  file://pulseaudio-system-mode-startup.sh \
+ "
+ 
+ #do_compile_prepend() {
+@@ -37,3 +42,13 @@ SRC_URI += "\
+ 
+ SRC_URI[md5sum] = "ca85ab470669b05e100861654cf5eb3c"
+ SRC_URI[sha256sum] = "c6019324395117a258c048a6db5e9734551cc2c61dc35b46403ff00d64be55f0"
++
++do_install_append() {
++  # init script to start pulseaudio system-wide
++  install -d ${D}/${sysconfdir}/init.d/
++  install -m 0755 ${WORKDIR}/pulseaudio-system-mode-startup.sh ${D}/${sysconfdir}/init.d/pulseaudio.sh
++
++  # Disable startup of pulseaudio as a per-user instance
++  chmod -x ${D}/${bindir}/start-pulseaudio-x11
++}
++
+-- 
+1.7.0.4
 
-The regular toolchian than oe builds for its own purposes does not use
-gdb because gdb is not needed for building. That toolchain is intended
-for use within OE bitbakery only.
-
-A meta-toolchain is built as a standalone toolchain intended for use
-outside of OE (eg. if you pull u-boot to a standalone directory for
-development purposes or want to do your own app development outside of
-OE.)
-
->
-> How do you build the meta-toolchain, and how will that help.
-
-
-bitbake meta-toolchain.
-
-This makes a toolchain which you can unpack thus:
-
-$ cd /
-$ sudo tar xvjf
-${OETOP}/tmp/deploy/glibc/sdk/angstrom-2009.X-test-20110301-armv7a-linux-gn=
-ueabi-toolchain.tar.bz2
-
-[NB your toolchain name will be something different]
-
-
-To set up all the paths etc use
-
-. /usr/local/angstrom/arm/environment-setup
-
-Google openembedded metatoolchain will also give some interesting info.
-
-NB If you're building apps and need extra libraries you will need to
-make your own SDK. That's a bit more effort and you don't need all
-that just for gdbing u-boot
-
--- Charles
-
->
-> Cheers,
-> Bernie
->
->
-> -------------------------------------------------------------------------=
------------------
-> I want to die peacefully in my sleep, like my grandfather, not screaming =
-and yelling like the passengers in his car.
->
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-bounces@lists.openembedded.org] On Behalf Of Charles Manning
-> Sent: Thursday, 7 July 2011 12:38 p.m.
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] Debugging u-boot
->
-> Bernie
->
-> What toolchain are you building?
->
-> If you build meta-toolchain that should build all the stuff you can put i=
-nto /usr/local/angstrom/arm/... which includes gdb.
->
-> That should then work with a JTAG debugger etc.
->
-> -- Charles
->
->
-> On Thu, Jul 7, 2011 at 11:25 AM, Bernard Mentink <Bernard_Mentink@trimble=
-.com> wrote:
->> Hi All,
->>
->> Can some one please tell me how to debug u-boot =A0on my target. I have
->> built u-boot for similar hardware and I want to debug with gdb, but
->> cannot even find the cross-compile version of gdb, It does not exist
->> in the directory "build/tmp/sysroots/i686-linux/usr/armv6/bin/" where
->> the other cross-compile tools live ..
->>
->> I want to execute "${CROSS_COMPILE}gdb u-boot"
->> =A0.. and breakpoint at some very early symbol ..... Some steps to
->> achieving this would be much appreciated ..
->>
->> Many Thanks,
->> Bernie
->>
->>
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
