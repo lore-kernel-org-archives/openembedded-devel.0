@@ -1,26 +1,32 @@
-Received: from mail.dawning.com ([63.247.149.203])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <awaterman@dawning.com>) id 1QeoHp-0004s5-13
+	(envelope-from <michael.lippautz@gmail.com>) id 1Qeonh-0008Vc-3Y
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jul 2011 15:06:33 +0200
-Received: from victoria.dawning.com by mail.dawning.com (MDaemon PRO v9.5.4)
-	with ESMTP id 28-md50000009227.msg
+	Thu, 07 Jul 2011 15:39:29 +0200
+Received: by bwf20 with SMTP id 20so1009142bwf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Jul 2011 09:00:23 -0400
-Message-ID: <4E15ACD2.4010104@dawning.com>
-Date: Thu, 07 Jul 2011 08:55:46 -0400
-From: Alex Waterman <awaterman@dawning.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14 Thunderbird/3.1.10
-MIME-Version: 1.0
+	Thu, 07 Jul 2011 06:35:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=AI4F/Nmswg998s2eFiHZIxBtWu9/mxEFW0+fTnD+/9M=;
+	b=SQ6qUQTIU+GNVOiHB8MW4m+BzcajqLqSPV7EWptORwAGivGEi9Viu2Wc+8DZ7qG0dZ
+	SYGcARzqDpxgkWrR2/IK5XPKXTSjF0l1jGEiVs9bVgPIcRkhQnQ4yIMGQNDNRXPlAyXc
+	AD9YXvU+6dwO0Tj4+fNBgPSAgZ+1/X/IccomM=
+Received: by 10.204.39.68 with SMTP id f4mr752932bke.17.1310045737705;
+	Thu, 07 Jul 2011 06:35:37 -0700 (PDT)
+Received: from localhost.localdomain (wgr614v6.plus.sbg.ac.at
+	[141.201.137.156])
+	by mx.google.com with ESMTPS id l24sm8547068bkw.15.2011.07.07.06.35.36
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 07 Jul 2011 06:35:37 -0700 (PDT)
+From: Michael Lippautz <michael.lippautz@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Authenticated-Sender: awaterman@dawning.com
-X-Spam-Processed: mail.dawning.com, Thu, 07 Jul 2011 09:00:23 -0400
-	(not processed: message from trusted or authenticated source)
-X-Return-Path: awaterman@dawning.com
-X-Envelope-From: awaterman@dawning.com
-X-MDaemon-Deliver-To: openembedded-devel@lists.openembedded.org
-Subject: Build fail for eglibc
+Date: Thu,  7 Jul 2011 15:35:55 +0200
+Message-Id: <50751d1b7570089f6aba5072807372c7a31be373.1310045515.git.michael.lippautz@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+In-Reply-To: <cover.1310045515.git.michael.lippautz@gmail.com>
+References: <cover.1310045515.git.michael.lippautz@gmail.com>
+Subject: [meta-oe][PATCHv2 1/4] python-pyudev: Add version 0.11 (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,73 +40,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jul 2011 13:06:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 07 Jul 2011 13:39:29 -0000
 
-
-Hello List,
-
-I have been trying to compile cacao for a development platform using 
-openembedded. I have built a tool chain using crosstool-ng targeting
-arm-none-linux-gnueabi, and have set up openembedded following the getting
-started page on the wiki.
-
-However, I run into an issue with eglibc. I get a make error during the compile
-for eglibc:
-
-... snip ...
-| make[2]: Entering directory `/home/alex/bb-build/tmp/work/armv5te-none-linux-gnueabi/eglibc-2.12-r21.8+svnr13230/eglibc-2_12/libc/nss'
-| Makefile:85: *** OPTION_EGLIBC_NSSWITCH_FIXED_CONFIG variable left unset.  Stop.
-| make[2]: Leaving directory `/home/alex/bb-build/tmp/work/armv5te-none-linux-gnueabi/eglibc-2.12-r21.8+svnr13230/eglibc-2_12/libc/nss'
-| make[1]: *** [nss/subdir_lib] Error 2
-... snip ...
-
-I am using the latest git tree, as of 15 minutes ago.
-
-Any help or advice would be greatly appreciated. Are there any work arounds?
-Or fixes?
-
-Oh, and my local.conf file:
-
+Signed-off-by: Michael Lippautz <michael.lippautz@gmail.com>
 ---
-# Source directory.
-DL_DIR = "${HOME}/bitbake-sources"
+ .../recipes-devtools/python/python-pyudev_0.11.bb  |   22 ++++++++++++++++++++
+ 1 files changed, 22 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/python/python-pyudev_0.11.bb
 
-# BB files...
-BBFILES = "/usr/openembedded/recipes/*/*.bb"
-
-# Our machine in question...
-MACHINE = "at91sam9m10g45ek"
-TARGET_ARCH = "arm"
-
-# Target operating system.
-TARGET_OS = "linux"
-DISTRO = "minimal"
-
-# Tool chain ralated stuff.
-TOOLCHAIN_VENDOR = "-none"
-TOOLCHAIN_TYPE = "external"
-TOOLCHAIN_BRAND = "x-tool"
-TOOLCHAIN_PATH = "/usr/alex-embeded"
-
-# Output image type.
-IMAGE_FSTYPES = "jffs2"
-
-# Other things
-BBINCLUDELOGS = "yes"
-
-SRCPV = "${@bb.fetch.get_srcrev(d)}"
----
-
-Best Regards,
-Alex
-
+diff --git a/meta-oe/recipes-devtools/python/python-pyudev_0.11.bb b/meta-oe/recipes-devtools/python/python-pyudev_0.11.bb
+new file mode 100644
+index 0000000..03a948a
+--- /dev/null
++++ b/meta-oe/recipes-devtools/python/python-pyudev_0.11.bb
+@@ -0,0 +1,22 @@
++DESCRIPTION = "A libudev binding"
++HOMEPAGE = "http://pypi.python.org/pypi/pyudev"
++SECTION = "devel/python"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
++PR = "r0"
++
++SRCNAME = "pyudev"
++SRC_URI = "http://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
++SRC_URI[md5sum] = "dca4e69da387f9a6683ee4b5c27ca66a"
++SRC_URI[sha256sum] = "0acfa500219f4bcf711f35c1b2041d035b4bf5f302eca5038572ee788d9e584a"
++
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
++inherit setuptools
++
++RDEPENDS_${PN} = "\
++  python-ctypes \
++  python-subprocess \
++  python-misc \
++  libudev \
++"
 -- 
-Alex Waterman
-Computer Engineer
-Phone: 215-896-4920
-Email: awaterman@dawning.com
+1.7.3.4
 
 
 
