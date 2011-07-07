@@ -1,25 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from snvl-smtp1.trimble.com ([155.63.64.31])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Qet80-0001s3-JC for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jul 2011 20:16:44 +0200
-Received: from g225080076.adsl.alicedsl.de ([92.225.80.76]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Qet4e-0007ZC-9A for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jul 2011 18:13:16 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1310060679.4153.6.camel@mattotaupa>
-References: <cover.1310045515.git.michael.lippautz@gmail.com>
-	<52d3dbb81758055099740c437667671b45974a2d.1310045515.git.michael.lippautz@gmail.com>
-	<1310060679.4153.6.camel@mattotaupa>
-Date: Thu, 07 Jul 2011 20:12:53 +0200
-Message-ID: <1310062373.4153.13.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [meta-oe][PATCHv2 4/4] start-stop-daemon: Add version 1.16.0.2 (initial recipe)
+	(envelope-from <Bernard_Mentink@trimble.com>) id 1QeuFw-0005vY-Py
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Jul 2011 21:29:01 +0200
+Received: (qmail 15218 invoked by uid 501); 7 Jul 2011 12:25:06 -0700
+Received: from 10.3.0.166 by snvl-smtp1.trimble.com (envelope-from
+	<Bernard_Mentink@trimble.com>, uid 108) with qmail-scanner-2.08 
+	(clamdscan: 0.97.1/13290. avast: v3.2.0/110706-1. sophie:
+	3.06/3.21.0/4.67. spamassassin: 3.3.1. Clear:RC:1(10.3.0.166):. 
+	Processed in 0.035486 secs); 07 Jul 2011 19:25:06 -0000
+Received: from unknown (HELO nzc-ap-xch-02.ap.trimblecorp.net) (10.3.0.166)
+	by snvl-smtp1.trimble.com with SMTP; 7 Jul 2011 12:25:06 -0700
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Fri, 8 Jul 2011 07:25:04 +1200
+Message-ID: <F7C0AA5DD1508F4789E10B6CC9BB75DB04A78FCB@nzc-ap-xch-02.ap.trimblecorp.net>
+In-Reply-To: <CAE21AQq6YfPtuqxKfBs5cCGvBeO4ALk4d+_iZpZOpGZyBUNETw@mail.gmail.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Debugging u-boot
+Thread-Index: Acw8SH8Z2+rrnmCsSu+F0BLqgSxSBwAkpItA
+References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04A78E50@nzc-ap-xch-02.ap.trimblecorp.net><CAE21AQpLShYH+82swduxQLWtpTGtTawuywbt2WxXHUTB5+9zDQ@mail.gmail.com><F7C0AA5DD1508F4789E10B6CC9BB75DB04A78EBC@nzc-ap-xch-02.ap.trimblecorp.net>
+	<CAE21AQq6YfPtuqxKfBs5cCGvBeO4ALk4d+_iZpZOpGZyBUNETw@mail.gmail.com>
+From: "Bernard Mentink" <Bernard_Mentink@trimble.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: Debugging u-boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,133 +38,208 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jul 2011 18:16:44 -0000
-X-Groupsio-MsgNum: 33056
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-4HGWzonM7B1C/sXyCEMy"
-
---=-4HGWzonM7B1C/sXyCEMy
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 07 Jul 2011 19:29:01 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-Am Donnerstag, den 07.07.2011, 19:44 +0200 schrieb Paul Menzel:
-> Am Donnerstag, den 07.07.2011, 15:36 +0200 schrieb Michael Lippautz:
-> > Provides a stand-lone s-s-d that is extracted from dpkg of the correspo=
-nding
-> > version.
-> >=20
-> > * dpkg_1.16.0.2 is hostedd on sources.oe.org, since debian wipes old ve=
-rsions
-> >   from their mirrors
-> > * Installing only s-s-d (binary) would be covered by automake rules.
-> >   Documentation would be missing. Thus install all and purge non s-s-d =
-files.
-> >=20
-> > Signed-off-by: Michael Lippautz <michael.lippautz@gmail.com>
-> > ---
-> >  .../start-stop-daemon_1.16.0.2.bb                  |   31 ++++++++++++=
-++++++++
-> >  1 files changed, 31 insertions(+), 0 deletions(-)
-> >  create mode 100644 meta-oe/recipes-support/start-stop-daemon/start-sto=
-p-daemon_1.16.0.2.bb
-> >=20
-> > diff --git a/meta-oe/recipes-support/start-stop-daemon/start-stop-daemo=
-n_1.16.0.2.bb b/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon=
-_1.16.0.2.bb
-> > new file mode 100644
-> > index 0000000..9b1084a
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.16.=
-0.2.bb
-> > @@ -0,0 +1,31 @@
-> > +DESCRIPTION =3D "Debian's start-stop-daemon utility extracted from the=
- dpkg \
-> > +package"
-> > +LICENSE =3D "PD"
-> > +LIC_FILES_CHKSUM =3D "file://utils/start-stop-daemon.c;md5=3Da963623e4=
-588f70122865aaa7a370ce4"
-> > +# start-stop-daemon is usually shipped by dpkg
-> > +RCONFLICS_${PN} =3D "dpkg"=20
->=20
-> Trailing whitespace again.
->=20
-> > +PR =3D "r0"
-> > +
-> > +SRC_URI =3D "http://sources.openembedded.org/dpkg_${PV}.tar.bz2"
-> > +SRC_URI[md5sum] =3D "d211a84f38987771a49ad1c0f144334a"
-> > +SRC_URI[sha256sum] =3D "2a3d4ba83c743b3f004533fdd52372cb7b22f5c1da2042=
-d0a31bbcc2b54c0ea5"
-> > +
-> > +inherit autotools gettext
-> > +
-> > +S =3D "${WORKDIR}/dpkg-${PV}"
-> > +
-> > +EXTRA_OECONF =3D " \
-> > +  --with-start-stop-daemon \
-> > +  --without-bz2 \
-> > +  --without-deselect \
-> > +  --without-install-info \
-> > +  --without-selinux \
-> > +  --without-update-alternatives \
-> > +"
-> > +
-> > +do_install_append () {
-> > +  # remove everything that is not related to start-stop-daemon, since =
-there
-> > +  # is no explicit rule for only installing ssd
-> > +  find ${D} -type f -not -name "*start-stop-daemon*" -exec rm {} \;
-> > +  find ${D} -depth -type d -empty -exec rmdir {} \;
-> > +}
->=20
-> Just looking at the recipe, the recipe in oe-dev [1] seems to do this
-> differently and calls `update-alternatives` too. Is that not needed
-> anymore and is copying the C file to the repository not working anymore?
+Hi Charles,
 
-I ported your patch to oe-dev and using `minimal-uclibc` it fails with
-the following error.
+Tried that but got the following linker error:
 
-        statcmd.c:369:2: warning: statement with no effect
-        querycmd.c: In function 'main':
-        querycmd.c:683:3: warning: statement with no effect
-        querycmd.c:684:3: warning: statement with no effect
-          CCLD   dpkg
-          CCLD   dpkg-divert
-          CCLD   dpkg-trigger
-        archives.o: In function `fd_writeback_init':
-        /oe/build-minimal-uclibc/minimal-uclibc-dev/work/armv7a-oe-linux-uc=
-libceabi/start-stop-daemon-1.16.0.2-r0/dpkg-1.16.0.2/src/archives.c:73: und=
-efined reference to `sync_file_range'
-        archives.o: In function `tar_writeback_barrier':
-        /oe/build-minimal-uclibc/minimal-uclibc-dev/work/armv7a-oe-linux-uc=
-libceabi/  CCLD   dpkg-statoverride
-        start-stop-daemon-1.16.0.2-r0/dpkg-1.16.0.2/src/archives.c:894: und=
-efined reference to `sync_file_range'
-        collect2: ld returned 1 exit status
-        make[2]: *** [dpkg] Error 1
+---------------------------------------------------------- error =
+---------------------------------------
+| =
+/home/bernie/Stuff/build/tmp/sysroots/i686-linux/usr/armv6/arm-angstrom-l=
+inux-gnueabi/bin/ld: failed to merge target specific data of file =
+emutls_s.o
+| =
+/home/bernie/Stuff/build/tmp/sysroots/i686-linux/usr/armv6/arm-angstrom-l=
+inux-gnueabi/bin/ld: error: =
+/home/bernie/Stuff/build/tmp/work/i686-armv6-sdk-angstrom-linux-gnueabi/g=
+cc-cross-sdk-4.5-r36.2+svnr170880/gcc-4_5-branch/build.i686-linux.arm-ang=
+strom-linux-gnueabi/./gcc/crtendS.o uses VFP register arguments, =
+./libgcc_s.so.1.tmp does not
+| =
+/home/bernie/Stuff/build/tmp/sysroots/i686-linux/usr/armv6/arm-angstrom-l=
+inux-gnueabi/bin/ld: failed to merge target specific data of file =
+/home/bernie/Stuff/build/tmp/work/i686-armv6-sdk-angstrom-linux-gnueabi/g=
+cc-cross-sdk-4.5-r36.2+svnr170880/gcc-4_5-branch/build.i686-linux.arm-ang=
+strom-linux-gnueabi/./gcc/crtendS.o
+| collect2: ld returned 1 exit status
+| make[2]: *** [libgcc_s.so] Error 1
+| make[2]: Leaving directory =
+`/home/bernie/Stuff/build/tmp/work/i686-armv6-sdk-angstrom-linux-gnueabi/=
+gcc-cross-sdk-4.5-r36.2+svnr170880/gcc-4_5-branch/build.i686-linux.arm-an=
+gstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libgcc'
+| make[1]: *** [all-target-libgcc] Error 2
+| make[1]: Leaving directory =
+`/home/bernie/Stuff/build/tmp/work/i686-armv6-sdk-angstrom-linux-gnueabi/=
+gcc-cross-sdk-4.5-r36.2+svnr170880/gcc-4_5-branch/build.i686-linux.arm-an=
+gstrom-linux-gnueabi'
+| make: *** [all] Error 2
+| + die 'oe_runmake failed'
+| + oefatal 'oe_runmake failed'
+| + echo FATAL
+NOTE: package gcc-cross-sdk-4.5-r36.2+svnr170880: task do_compile: =
+Failed
+ERROR: Function 'do_compile' failed (see =
+/home/bernie/Stuff/build/tmp/work/i686-armv6-sdk-angstrom-linux-gnueabi/g=
+cc-cross-sdk-4.5-r36.2+svnr170880/temp/log.do_compile.14514 for further =
+information)
+ERROR: Task 594 =
+(/home/bernie/Stuff/openembedded/recipes/gcc/gcc-cross-sdk_4.5.bb, =
+do_compile) failed with exit code '1'
+ERROR: =
+'/home/bernie/Stuff/openembedded/recipes/gcc/gcc-cross-sdk_4.5.bb' =
+failed
+-------------------------------------------------------------------------=
+----------------------------
 
-Building `start-stop-daemon-1.9.18-r1` works fine.
+Any idea what it could be?=20
+
+Cheers,
+bernie
+
+=20
 
 
-Thanks,
+-------------------------------------------------------------------------=
+-----------------
+I want to die peacefully in my sleep, like my grandfather, not screaming =
+and yelling like the passengers in his car.
 
-Paul
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org =
+[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of =
+Charles Manning
+Sent: Thursday, 7 July 2011 1:52 p.m.
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] Debugging u-boot
+
+On Thu, Jul 7, 2011 at 1:13 PM, Bernard Mentink =
+<Bernard_Mentink@trimble.com> wrote:
+> Hi Charles,
+>
+> Didn't know you were lurking on this list ... ;-)
+
+You can run but you can't hide.
+
+>
+> I have built for the angstom distro (arm-angstrom-linux-gnueabi-*),=20
+> but the tools got put in my project path I described in my earlier =
+email, but There was no GDB included for some reason ..
+
+The regular toolchian than oe builds for its own purposes does not use =
+gdb because gdb is not needed for building. That toolchain is intended =
+for use within OE bitbakery only.
+
+A meta-toolchain is built as a standalone toolchain intended for use =
+outside of OE (eg. if you pull u-boot to a standalone directory for =
+development purposes or want to do your own app development outside of
+OE.)
+
+>
+> How do you build the meta-toolchain, and how will that help.
 
 
-> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/start=
--stop-daemon/start-stop-daemon_1.9.18.bb?id=3D529b445f1122e3d0de7acff980fa0=
-af114368157
+bitbake meta-toolchain.
 
---=-4HGWzonM7B1C/sXyCEMy
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+This makes a toolchain which you can unpack thus:
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+$ cd /
+$ sudo tar xvjf
+${OETOP}/tmp/deploy/glibc/sdk/angstrom-2009.X-test-20110301-armv7a-linux-=
+gnueabi-toolchain.tar.bz2
 
-iEYEABECAAYFAk4V9yUACgkQPX1aK2wOHVj2VQCfbMXKz+JgKeTOBDky5Wp5Dy75
-6/EAn1VgjtUNe8c9uuPOSHmQcv/d2PBI
-=Y8gT
------END PGP SIGNATURE-----
+[NB your toolchain name will be something different]
 
---=-4HGWzonM7B1C/sXyCEMy--
+
+To set up all the paths etc use
+
+. /usr/local/angstrom/arm/environment-setup
+
+Google openembedded metatoolchain will also give some interesting info.
+
+NB If you're building apps and need extra libraries you will need to =
+make your own SDK. That's a bit more effort and you don't need all that =
+just for gdbing u-boot
+
+-- Charles
+
+>
+> Cheers,
+> Bernie
+>
+>
+> ----------------------------------------------------------------------
+> -------------------- I want to die peacefully in my sleep, like my=20
+> grandfather, not screaming and yelling like the passengers in his car.
+>
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org=20
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf=20
+> Of Charles Manning
+> Sent: Thursday, 7 July 2011 12:38 p.m.
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] Debugging u-boot
+>
+> Bernie
+>
+> What toolchain are you building?
+>
+> If you build meta-toolchain that should build all the stuff you can =
+put into /usr/local/angstrom/arm/... which includes gdb.
+>
+> That should then work with a JTAG debugger etc.
+>
+> -- Charles
+>
+>
+> On Thu, Jul 7, 2011 at 11:25 AM, Bernard Mentink =
+<Bernard_Mentink@trimble.com> wrote:
+>> Hi All,
+>>
+>> Can some one please tell me how to debug u-boot =A0on my target. I =
+have=20
+>> built u-boot for similar hardware and I want to debug with gdb, but=20
+>> cannot even find the cross-compile version of gdb, It does not exist=20
+>> in the directory "build/tmp/sysroots/i686-linux/usr/armv6/bin/" where =
+
+>> the other cross-compile tools live ..
+>>
+>> I want to execute "${CROSS_COMPILE}gdb u-boot"
+>> =A0.. and breakpoint at some very early symbol ..... Some steps to=20
+>> achieving this would be much appreciated ..
+>>
+>> Many Thanks,
+>> Bernie
+>>
+>>
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-deve
+>> l
+>>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
