@@ -1,23 +1,24 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QeiTK-0003u3-6k for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jul 2011 08:54:02 +0200
+	id 1Qeid7-0004SI-NX for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Jul 2011 09:04:09 +0200
 Received: from f053040030.adsl.alicedsl.de ([78.53.40.30]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QeiPw-0004pi-Sh; Thu, 07 Jul 2011 06:50:33 +0000
+	id 1QeiZj-0004x4-TT; Thu, 07 Jul 2011 07:00:40 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <CAD=GYpZKhaBrJFFpYUSjGft6Eu6sq88YGtNPf+gjAj1bBUCwOA@mail.gmail.com>
-References: <CAD=GYpZKhaBrJFFpYUSjGft6Eu6sq88YGtNPf+gjAj1bBUCwOA@mail.gmail.com>
-Date: Thu, 07 Jul 2011 08:50:11 +0200
-Message-ID: <1310021411.4532.14.camel@mattotaupa>
+In-Reply-To: <1310017138-8936-1-git-send-email-agnel.joel@gmail.com>
+References: <1310017138-8936-1-git-send-email-agnel.joel@gmail.com>
+Date: Thu, 07 Jul 2011 09:00:18 +0200
+Message-ID: <1310022018.4532.21.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.3 
-Cc: Joel Fernandes <agnel.joel@gmail.com>
-Subject: Re: [PATCH] libxml: Deleted patch that is already applied in source tarball
+Cc: joelagnel@ti.com, Joel A Fernandes <agnel.joel@gmail.com>, jdk@ti.com,
+	beagle@list.ti.com, k-kooi@ti.com
+Subject: Re: [PATCH v2] pulseaudio: Run as system-wide instance instead of per-user
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,130 +32,134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jul 2011 06:54:02 -0000
-X-Groupsio-MsgNum: 33034
+X-List-Received-Date: Thu, 07 Jul 2011 07:04:09 -0000
+X-Groupsio-MsgNum: 33035
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-uWUJr5b5KfhPPpxiL8OQ"
+	boundary="=-VhitDRdfBHwUWjut3Pj1"
 
---=-uWUJr5b5KfhPPpxiL8OQ
+--=-VhitDRdfBHwUWjut3Pj1
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 Dear Joel,
 
 
-Am Mittwoch, den 06.07.2011, 20:41 -0500 schrieb Joel A Fernandes:
+Am Donnerstag, den 07.07.2011, 00:38 -0500 schrieb Joel A Fernandes:
+> * Pulseaudio running as per-user is opening audio devices and blocking ev=
+eryone else from getting access
+>   to the device. The problem is it doesn't even seem to be allowing appli=
+cations to connect to it, this
+>   patch starts it up in system mode instead which is tested and known to =
+work
 
-> Sorry I am unable to reply to your email on libxml2 as I'm a
-> digest-mode subscriber so I have started another thread. Could I be
-> kept on the CC-list by replying-to-all?
+thank you for the patch. Could you post your error and check with the
+PulseAudio guys what the cause is? There are very responsive on their
+mailing list, which moved to freedesktop.org recently.
 
-I will try to remember that. By the way, you do not have to put me into
-CC as I am reading the list. ;-)
+As far as I understood system mode can sometimes be the right thing to
+do but most of the time it is just a configuration error. Running PA and
+printing out the debug messages should give you a clue.
 
-> My build configuration is:
-> DISTRO=3D"angstrom-2010.x"
-> MACHINE=3D"beagleboard"
+> Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
+> ---
+> Changes since earlier version:
+>  Sorry I didn't bump the PR! Resending it again
 >=20
-> git branch: org.openembedded.dev
+>  .../pulseaudio-system-mode-startup.sh              |    4 ++++
+>  recipes/pulseaudio/pulseaudio_0.9.22.bb            |   17 ++++++++++++++=
+++-
+>  2 files changed, 20 insertions(+), 1 deletions(-)
+>  create mode 100755 recipes/pulseaudio/pulseaudio-0.9.21/pulseaudio-syste=
+m-mode-startup.sh
+>=20
+> diff --git a/recipes/pulseaudio/pulseaudio-0.9.21/pulseaudio-system-mode-=
+startup.sh b/recipes/pulseaudio/pulseaudio-0.9.21/pulseaudio-system-mode-st=
+artup.sh
+> new file mode 100755
+> index 0000000..528ceb9
+> --- /dev/null
+> +++ b/recipes/pulseaudio/pulseaudio-0.9.21/pulseaudio-system-mode-startup=
+.sh
+> @@ -0,0 +1,4 @@
+> +#!/bin/sh
+> +
+> +echo "Starting Pulseaudio in system mode.."
+> +pulseaudio --log-target=3Dsyslog --system
+> diff --git a/recipes/pulseaudio/pulseaudio_0.9.22.bb b/recipes/pulseaudio=
+/pulseaudio_0.9.22.bb
+> index 2368829..1bc6816 100644
+> --- a/recipes/pulseaudio/pulseaudio_0.9.22.bb
+> +++ b/recipes/pulseaudio/pulseaudio_0.9.22.bb
+> @@ -1,6 +1,6 @@
+>  require pulseaudio.inc
+> =20
+> -PR =3D ${INC_PR}.2
+> +PR =3D ${INC_PR}.3
+> =20
+>  DEPENDS +=3D "gdbm speex"
+> =20
+> @@ -12,6 +12,10 @@ FILESPATHPKG =3D. "pulseaudio-0.9.21:"
+> =20
+>  inherit gettext
+> =20
+> +inherit update-rc.d
+> +INITSCRIPT_NAME =3D "pulseaudio.sh"
+> +INITSCRIPT_PARAMS =3D "start 99 2 3 4 5 ."
+> +
+>  #SRC_URI +=3D "\
+>  #  file://buildfix.patch \
+>  #  file://autoconf_version.patch \
+> @@ -27,6 +31,7 @@ SRC_URI +=3D "\
+>    file://armv4+v5asm.patch \
+>    file://fixbluezbuild.patch \
+>    file://ubacktrace.patch \
+> +  file://pulseaudio-system-mode-startup.sh \
+>  "
+> =20
+>  #do_compile_prepend() {
+> @@ -37,3 +42,13 @@ SRC_URI +=3D "\
+> =20
+>  SRC_URI[md5sum] =3D "ca85ab470669b05e100861654cf5eb3c"
+>  SRC_URI[sha256sum] =3D "c6019324395117a258c048a6db5e9734551cc2c61dc35b46=
+403ff00d64be55f0"
+> +
+> +do_install_append() {
+> +  # init script to start pulseaudio system-wide
+> +  install -d ${D}/${sysconfdir}/init.d/
+> +  install -m 0755 ${WORKDIR}/pulseaudio-system-mode-startup.sh ${D}/${sy=
+sconfdir}/init.d/pulseaudio.sh
 
-You can use master as this name is just there for historical reasons.
+If I remember correctly that is configurable in the config files for PA
+under `/etc/pulse/`.
 
-> Uncompressing the sources from the downloaded archive
-> libxml2-2.7.8.tar.gz shows that the patch in
-> recipes/libxml/libxml2-2.7.8/0cbeb50ee03ce582a0c979c70d8fbf030e270c37.pat=
-ch
-> has already been applied to xpath.c
+> +  # Disable startup of pulseaudio as a per-user instance
+> +  chmod -x ${D}/${bindir}/start-pulseaudio-x11
 
-Still it is strange, that it does not complain on my end.
+Is that needed? It is an unexpected change for the user having to find
+out that s/he has to make a program under `/usr/bin/` executable to run
+it.
 
-> Could your build configuration be pulling a different recipe?
+> +}
+> +
 
-It does not look like it.
-
-        $ bitbake -c patch libxml2
-        NOTE: Out of date cache found, rebuilding...
-        [=E2=80=A6]
-        Parsing recipes: 100% |#########################################| T=
-ime: 00:01:29
-        Parsing of 7201 .bb files complete (0 cached, 7201 parsed). 7857 ta=
-rgets, 309 skipped, 0 masked, 0 errors.
-       =20
-        Build Configuration:
-        BB_VERSION        =3D "1.12.0"
-        METADATA_BRANCH   =3D "master"
-        METADATA_REVISION =3D "529b445"
-        TARGET_ARCH       =3D "arm"
-        TARGET_OS         =3D "linux-gnueabi"
-        MACHINE           =3D "beagleboard"
-        DISTRO            =3D "angstrom"
-        DISTRO_VERSION    =3D "v2011.07"
-        TARGET_FPU        =3D "hard"
-       =20
-        NOTE: Resolving any missing task queue dependencies
-        NOTE: Preparing runqueue
-        NOTE: Executing RunQueue Tasks
-        NOTE: Removing stamps: /oe/build-angstrom-next/angstrom-dev/stamps/=
-armv7a-angstrom-linux-gnueabi/libxml2-2.7.8-r9.1.*
-        NOTE: Running task 10 of 13 (ID: 3, /oe/openembedded/recipes/libxml=
-/libxml2_2.7.8.bb, do_setscene)
-        NOTE: package libxml2-2.7.8-r9.1: task do_setscene: Started
-        NOTE: package libxml2-2.7.8-r9.1: task do_setscene: Succeeded
-        NOTE: Running task 11 of 13 (ID: 2, /oe/openembedded/recipes/libxml=
-/libxml2_2.7.8.bb, do_fetch)
-        NOTE: package libxml2-2.7.8-r9.1: task do_fetch: Started
-        NOTE: package libxml2-2.7.8-r9.1: task do_fetch: Succeeded
-        NOTE: Running task 12 of 13 (ID: 0, /oe/openembedded/recipes/libxml=
-/libxml2_2.7.8.bb, do_unpack)
-        NOTE: package libxml2-2.7.8-r9.1: task do_unpack: Started
-        NOTE: package libxml2-2.7.8-r9.1: task do_unpack: Succeeded
-        NOTE: Running task 13 of 13 (ID: 1, /oe/openembedded/recipes/libxml=
-/libxml2_2.7.8.bb, do_patch)
-        NOTE: package libxml2-2.7.8-r9.1: task do_patch: Started
-        NOTE: package libxml2-2.7.8-r9.1: task do_patch: Succeeded
-        NOTE: Tasks Summary: Attempted 13 tasks of which 9 didn't need to b=
-e rerun and 0 failed.
-
-Here is my check.
-
-        $ md5sum libxml2-2.7.8.tar.gz=20
-        8127a65e8c3b08856093099b52599c86  libxml2-2.7.8.tar.gz
-        $ tar xvf libxml2-2.7.8.tar.gz=20
-        [=E2=80=A6]
-        $ zless -N libxml2-2.7.8/xpath.c
-           3575     } else if (cur->nodeNr =3D=3D cur->nodeMax) {
-           3576         xmlNodePtr *temp;
-           3577=20
-           3578         cur->nodeMax *=3D 2;
-           3579         temp =3D (xmlNodePtr *) xmlRealloc(cur->nodeTab, cu=
-r->nodeMax *
-           3580                                       sizeof(xmlNodePtr));
-           3581         if (temp =3D=3D NULL) {
-           3582             xmlXPathErrMemory(NULL, "growing nodeset\n");
-           3583             return;
-           3584         }
-           3585         cur->nodeTab =3D temp;
-           3586     }
-
-Please remember that the sources are patched in the build directory
-after the task patch has been executed.
+Please do not add empty lines.
 
 
 Thanks,
 
 Paul
 
---=-uWUJr5b5KfhPPpxiL8OQ
+--=-VhitDRdfBHwUWjut3Pj1
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk4VVxcACgkQPX1aK2wOHVgy1QCfegb91fn8lsgPKL9He4Grb+tG
-ZwcAnRvyGIqKoRfvfoqLJA6W+KK5Fs6w
-=QJZZ
+iEYEABECAAYFAk4VWYEACgkQPX1aK2wOHVgMIQCfQIkPIoyboZiD/eOlXBhuKNPp
+9aQAmwfAlhlINzWSoVmAkPj5xtiPLqr/
+=4UTB
 -----END PGP SIGNATURE-----
 
---=-uWUJr5b5KfhPPpxiL8OQ--
+--=-VhitDRdfBHwUWjut3Pj1--
