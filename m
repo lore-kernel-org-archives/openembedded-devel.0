@@ -1,38 +1,26 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from mail.dawning.com ([63.247.149.203])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1QenJ0-0001H5-Ie
+	(envelope-from <awaterman@dawning.com>) id 1QeoHp-0004s5-13
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jul 2011 14:03:42 +0200
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id p67BxoF0027578
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Thu, 07 Jul 2011 15:06:33 +0200
+Received: from victoria.dawning.com by mail.dawning.com (MDaemon PRO v9.5.4)
+	with ESMTP id 28-md50000009227.msg
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 7 Jul 2011 06:59:50 -0500
-Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id p67BxouV026644
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 7 Jul 2011 06:59:50 -0500 (CDT)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p67BxoDZ015261
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 7 Jul 2011 06:59:50 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
-	([157.170.170.88]) with mapi; Thu, 7 Jul 2011 06:59:49 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 7 Jul 2011 06:59:47 -0500
-Thread-Topic: [oe] [PATCH] ti-wifi-utils: fix unaligned data access
-Thread-Index: Acw6Sf/26xWdB/+XToOAqQnsUimNhACU1UMw
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F08034B5C5050@dlee06.ent.ti.com>
-References: <1309784224-8174-1-git-send-email-eyalr@ti.com>
-In-Reply-To: <1309784224-8174-1-git-send-email-eyalr@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Thu, 07 Jul 2011 09:00:23 -0400
+Message-ID: <4E15ACD2.4010104@dawning.com>
+Date: Thu, 07 Jul 2011 08:55:46 -0400
+From: Alex Waterman <awaterman@dawning.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc14 Thunderbird/3.1.10
 MIME-Version: 1.0
-Subject: Re: [PATCH] ti-wifi-utils: fix unaligned data access
+To: openembedded-devel@lists.openembedded.org
+X-Authenticated-Sender: awaterman@dawning.com
+X-Spam-Processed: mail.dawning.com, Thu, 07 Jul 2011 09:00:23 -0400
+	(not processed: message from trusted or authenticated source)
+X-Return-Path: awaterman@dawning.com
+X-Envelope-From: awaterman@dawning.com
+X-MDaemon-Deliver-To: openembedded-devel@lists.openembedded.org
+Subject: Build fail for eglibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,58 +34,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jul 2011 12:03:42 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 07 Jul 2011 13:06:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Eyal Reizer
-> Sent: Monday, July 04, 2011 7:57 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] [PATCH] ti-wifi-utils: fix unaligned data access
->=20
-> update the recipe to use a new commit from upstream which fixes
-> unaligned
-> data access errors reported when using the calibrator tool on an am180x
-> (armv5) platform
->=20
-> Signed-off-by: Eyal Reizer <eyalr@ti.com>
 
-Acked-by: Chase Maupin <chase.maupin@ti.com>
+Hello List,
 
-> ---
->  recipes/ti/ti-wifi-utils_git.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/recipes/ti/ti-wifi-utils_git.bb b/recipes/ti/ti-wifi-
-> utils_git.bb
-> index 9855775..87ca2c9 100644
-> --- a/recipes/ti/ti-wifi-utils_git.bb
-> +++ b/recipes/ti/ti-wifi-utils_git.bb
-> @@ -3,11 +3,11 @@ LICENSE =3D "TI-BSD"
->=20
->  DEPENDS =3D "libnl"
->=20
-> -PR =3D"r3"
-> +PR =3D"r4"
->  PV =3D"0.0"
->  PR_append =3D "+gitr${SRCPV}"
->=20
-> -SRCREV =3D "268dbf03091b632c2697eb8028e90fe40513a9d8"
-> +SRCREV =3D "8737db9372e714e265d3f575573d14c3379ab9fc"
->  SRC_URI =3D "git://github.com/gxk/ti-utils.git;protocol=3Dgit"
->=20
->  S =3D "${WORKDIR}/git"
-> --
-> 1.7.0.4
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+I have been trying to compile cacao for a development platform using 
+openembedded. I have built a tool chain using crosstool-ng targeting
+arm-none-linux-gnueabi, and have set up openembedded following the getting
+started page on the wiki.
+
+However, I run into an issue with eglibc. I get a make error during the compile
+for eglibc:
+
+... snip ...
+| make[2]: Entering directory `/home/alex/bb-build/tmp/work/armv5te-none-linux-gnueabi/eglibc-2.12-r21.8+svnr13230/eglibc-2_12/libc/nss'
+| Makefile:85: *** OPTION_EGLIBC_NSSWITCH_FIXED_CONFIG variable left unset.  Stop.
+| make[2]: Leaving directory `/home/alex/bb-build/tmp/work/armv5te-none-linux-gnueabi/eglibc-2.12-r21.8+svnr13230/eglibc-2_12/libc/nss'
+| make[1]: *** [nss/subdir_lib] Error 2
+... snip ...
+
+I am using the latest git tree, as of 15 minutes ago.
+
+Any help or advice would be greatly appreciated. Are there any work arounds?
+Or fixes?
+
+Oh, and my local.conf file:
+
+---
+# Source directory.
+DL_DIR = "${HOME}/bitbake-sources"
+
+# BB files...
+BBFILES = "/usr/openembedded/recipes/*/*.bb"
+
+# Our machine in question...
+MACHINE = "at91sam9m10g45ek"
+TARGET_ARCH = "arm"
+
+# Target operating system.
+TARGET_OS = "linux"
+DISTRO = "minimal"
+
+# Tool chain ralated stuff.
+TOOLCHAIN_VENDOR = "-none"
+TOOLCHAIN_TYPE = "external"
+TOOLCHAIN_BRAND = "x-tool"
+TOOLCHAIN_PATH = "/usr/alex-embeded"
+
+# Output image type.
+IMAGE_FSTYPES = "jffs2"
+
+# Other things
+BBINCLUDELOGS = "yes"
+
+SRCPV = "${@bb.fetch.get_srcrev(d)}"
+---
+
+Best Regards,
+Alex
+
+-- 
+Alex Waterman
+Computer Engineer
+Phone: 215-896-4920
+Email: awaterman@dawning.com
+
 
 
