@@ -1,25 +1,33 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1QewOt-0008JS-31
+	(envelope-from <jkridner@beagleboard.org>) id 1Qez3c-0003iZ-V9
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jul 2011 23:46:23 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.3])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1QewLB-00064w-By
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jul 2011 23:42:33 +0200
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <CAMKF1so3q=Q_CQU3D5oYO_qgJOtcQqvWeHiRs=i=t5_mNbKY0A@mail.gmail.com>
-References: <1309654060-29955-1-git-send-email-raj.khem@gmail.com>
-	<1309772399.2633.97.camel@phil-desktop>
-	<CAMKF1so3q=Q_CQU3D5oYO_qgJOtcQqvWeHiRs=i=t5_mNbKY0A@mail.gmail.com>
-Date: Thu, 07 Jul 2011 22:42:17 +0100
-Message-ID: <1310074937.18564.8.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [meta-oe][PATCH v2] systemd: Replace use of %m in printf formats
+	Fri, 08 Jul 2011 02:36:37 +0200
+Received: by bwf20 with SMTP id 20so1642943bwf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Jul 2011 17:32:44 -0700 (PDT)
+Received: by 10.204.23.6 with SMTP id p6mr92888bkb.368.1310085164583;
+	Thu, 07 Jul 2011 17:32:44 -0700 (PDT)
+Received: from mail-bw0-f47.google.com (mail-bw0-f47.google.com
+	[209.85.214.47])
+	by mx.google.com with ESMTPS id k5sm8945498bka.5.2011.07.07.17.32.42
+	(version=SSLv3 cipher=OTHER); Thu, 07 Jul 2011 17:32:43 -0700 (PDT)
+Received: by bwf20 with SMTP id 20so1642927bwf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Jul 2011 17:32:42 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.205.81.208 with SMTP id zz16mr74292bkb.372.1310085162179; Thu,
+	07 Jul 2011 17:32:42 -0700 (PDT)
+Received: by 10.204.102.139 with HTTP; Thu, 7 Jul 2011 17:32:42 -0700 (PDT)
+In-Reply-To: <1310073836-11556-1-git-send-email-agnel.joel@gmail.com>
+References: <1310073836-11556-1-git-send-email-agnel.joel@gmail.com>
+Date: Thu, 7 Jul 2011 20:32:42 -0400
+Message-ID: <CA+T6QP=c0eij6buvs-7MFCDVmwWheAsz8dL4K1n2+V=TQ_vyxw@mail.gmail.com>
+From: Jason Kridner <jkridner@beagleboard.org>
+To: beagleboard@googlegroups.com
+Cc: joelagnel@ti.com, k-kooi@ti.com, Joel A Fernandes <agnel.joel@gmail.com>,
+	openembedded-devel@lists.openembedded.org, jdk@ti.com
+Subject: Re: [beagleboard] [PATCH v3] beagleboard-test-scripts: Add a script flash-fs.sh for flashing NAND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,52 +41,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jul 2011 21:46:23 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 08 Jul 2011 00:36:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2011-07-05 at 14:14 -0700, Khem Raj wrote:
-> On Mon, Jul 4, 2011 at 2:39 AM, Phil Blundell <philb@gnu.org> wrote:
-> > On Sat, 2011-07-02 at 17:47 -0700, Khem Raj wrote:
-> >> +-        if ((fd = mkostemp(temp, O_CLOEXEC|O_CREAT|O_WRONLY)) < 0) {
-> >> ++        if ((fd = mkstemp(temp)) < 0) {
-> >
-> > This change looks like it will effectively remove O_CLOEXEC without
-> > reinstating it anywhere else.  Have you verified this is a safe thing to
-> > do?
-> 
-> Initial tests on uclibc seems to work well. but this needs more testing
-> thats why the patch is only applied for uclibc based systems
+On Thu, Jul 7, 2011 at 5:23 PM, Joel A Fernandes <agnel.joel@gmail.com> wro=
+te:
+> This script flashes the NAND of a BeagleBoard if:
+> =A0* The user-button is pressed
+> =A0* There is a valid image on the SD Card to flash
+> =A0* The board has NAND
+>
+> Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
 
-Just to reiterate what I mentioned on IRC the other day, I don't think
-empirical testing is the right way to address this problem, at least not
-in isolation.  Absent an exceptionally comprehensive testsuite, there is
-too much risk that some kind of failure would be overlooked.  I think
-code inspection is required here to establish whether O_CLOEXEC is
-needed and what to do about it.  The easy answer to the latter is
-probably just to add an appropriate fcntl() call.
+Acked-by: Jason Kridner <jkridner@beagleboard.org>
 
-> >> ++            char dev[20];
-> >> +                 int prio = 0, k;
-> >> +
-> >> +                 if ((k = fscanf(m->proc_swaps,
-> >> +-                                "%ms "  /* device/file */
-> >> ++                                "%19s "  /* device/file */
-> >> +                                 "%*s "  /* type of swap */
-> >
-> > Is 19 characters definitely enough?  If this is potentially a pathname
-> > then it could be much longer than that.
-> >
-> 
-> it just reads /dev/* so should be ok.
+> ---
+> Changes since v2:
+> =A0User button is checked before flashing of the board
+>
+> This is based on Jason's review:
+> http://groups.google.com/group/beagleboard/msg/835de9a37c3a340a
+>
+> =A0.../beagleboard/beagleboard-test-scripts_git.bb =A0 =A0| =A0 14 ++++++=
++++++---
+> =A01 files changed, 11 insertions(+), 3 deletions(-)
+>
+> diff --git a/recipes/beagleboard/beagleboard-test-scripts_git.bb b/recipe=
+s/beagleboard/beagleboard-test-scripts_git.bb
+> index be0d059..3f3cc56 100644
+> --- a/recipes/beagleboard/beagleboard-test-scripts_git.bb
+> +++ b/recipes/beagleboard/beagleboard-test-scripts_git.bb
+> @@ -1,14 +1,18 @@
+> =A0## Reminder: =A0The correct spacing for a variable is FOO =3D "BAR" =
+=A0in : PR=3D"r1"
+> =A0DESCRIPTION =3D "BeagleBoard test scripts"
+> =A0HOMEPAGE =3D "http://beagleboad.org/support"
+> -PR =3D "r2"
+> +PR =3D "r3"
+>
+> -SRC_URI =3D "git://gitorious.org/beagleboard-validation/scripts.git;prot=
+ocol=3Dgit \
+> +SRC_URI =3D "git://gitorious.org/~joelf/beagleboard-validation/validatio=
+n-scripts.git;protocol=3Dgit \
+> =A0"
+>
+> -SRCREV =3D "473dd2ab20d866be6168c9f992c2c9e74e485c9d"
+> +SRCREV =3D "513bfa2e99822150ea5845f3a33c349029cb7c13"
 
-I haven't checked the actual code, but the implication from the variable
-names and comments shown above is that it's reading /proc/swaps.  If
-that's the case then, in the situation where you're swapping to a file,
-the pathnames involved could be arbitrarily long.
+Thanks!
 
-p.
-
-
+> =A0S =3D "${WORKDIR}/git"
+>
+> +inherit update-rc.d
+> +INITSCRIPT_NAME =3D "flash-fs.sh"
+> +INITSCRIPT_PARAMS =3D "start 99 2 3 4 5 ."
+> +
+> =A0do_install() {
+> =A0 TEST_FILES=3D" \
+> =A0 =A0 testaudio \
+> @@ -28,4 +32,8 @@ do_install() {
+> =A0 for i in ${TEST_FILES}; do
+> =A0 =A0 install -m 0755 ${S}/${i} ${D}/${bindir}
+> =A0 done
+> + =A0# A script to flash NAND if the board has it, and if there is valid =
+image to flash on the SD Card.
+> + =A0# We also register it as an init script so that the SD Card auto-fla=
+shes to NAND during boot.
+> + =A0install -d ${D}/${sysconfdir}/init.d/
+> + =A0install -m 0755 ${S}/flashing/flash-fs.sh ${D}/${sysconfdir}/init.d/=
+flash-fs.sh
+> =A0}
+> --
+> 1.7.0.4
 
 
