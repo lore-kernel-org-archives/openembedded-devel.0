@@ -1,29 +1,26 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kg4ysn@gmail.com>) id 1QfCWx-0000et-EL
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jul 2011 16:59:48 +0200
-Received: by vxa37 with SMTP id 37so1631429vxa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jul 2011 07:55:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=yqwiltNnJecZlThqJepW/WpFJbjiPHPRHYeXyERZZZY=;
-	b=aNrKuyDSkYuo55Ev9wH6e9zCWs0W4OgwmCnNeEiOgSwMmR/FWRpMiEtNB9ibpHa8KU
-	t0umHnkVPf4TlBtKIIar4DLSSt8Hm/J/p63WJztDgqxSejl8Fh6tHzqwrGC3itRPKEvI
-	b2vZh4OFPP1y17PY2rfINwI5hYXZuFKptRAj8=
-MIME-Version: 1.0
-Received: by 10.220.6.135 with SMTP id 7mr740705vcz.201.1310136951171; Fri, 08
-	Jul 2011 07:55:51 -0700 (PDT)
-Received: by 10.220.176.194 with HTTP; Fri, 8 Jul 2011 07:55:51 -0700 (PDT)
-In-Reply-To: <CAG4_upTi2CKyBMig3jsSGesFikj_qXeQ87x4e5Yv0i3USO0Lww@mail.gmail.com>
-References: <CAG4_upTi2CKyBMig3jsSGesFikj_qXeQ87x4e5Yv0i3USO0Lww@mail.gmail.com>
-Date: Fri, 8 Jul 2011 07:55:51 -0700
-Message-ID: <CAG4_upRV2mYJ6UAUzZkhji9XxDi6o0Y3bVYRmE=Z0qacbXgztg@mail.gmail.com>
-From: Chris Verges <kg4ysn@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QfDSn-0002Hy-Ql for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Jul 2011 17:59:33 +0200
+Received: from f053043179.adsl.alicedsl.de ([78.53.43.179]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QfDPR-0003wH-MB for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Jul 2011 15:56:06 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Using ${DATE} in PR
+In-Reply-To: <CAD=GYpZX9Y5JbQH9YQ7Ozu6Kp6uf72ooFiys-2Ga_aR_q29R6A@mail.gmail.com>
+References: <1310017138-8936-1-git-send-email-agnel.joel@gmail.com>
+	<1310022018.4532.21.camel@mattotaupa>
+	<CAD=GYpaAHX=RiS98pXAqE3bRbBs6gsbXQoSCdcs8+9u=2F267w@mail.gmail.com>
+	<CAD=GYpZX9Y5JbQH9YQ7Ozu6Kp6uf72ooFiys-2Ga_aR_q29R6A@mail.gmail.com>
+Date: Fri, 08 Jul 2011 17:55:40 +0200
+Message-ID: <1310140540.4517.1.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH v2] pulseaudio: Run as system-wide instance instead of per-user
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,47 +34,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jul 2011 14:59:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 08 Jul 2011 15:59:33 -0000
+X-Groupsio-MsgNum: 33077
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-qKrE4HiRxvOWkpRGUcSe"
+
+--=-qKrE4HiRxvOWkpRGUcSe
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Using ${DATE} didn't work, but I was able to use a similar trick to
-get this working:
+Am Donnerstag, den 07.07.2011, 21:55 -0500 schrieb Joel A Fernandes:
+> >> As far as I understood system mode can sometimes be the right thing to
+> >> do but most of the time it is just a configuration error. Running PA a=
+nd
+> >> printing out the debug messages should give you a clue.
+> >
+> > Pulseaudio isn't printing any debug messages to syslog or stdout ( -vv
+> > -log-level pulseaudio options )
+> >
+> > Here was the thread on BeagleBoard mailing list that discusses this iss=
+ue:
+> > http://groups.google.com/group/beagleboard/browse_thread/thread/4dc8248=
+3a8d000fb/ccbd0e21fa5e89a0
+> >
+> > I will post the details of the problem on the pulseaudio mailing list
+> > and try to get some other alternatives.
+> >
+> > For now, can we temporarily merge this patch while I followup with them=
+?
+>=20
+> Here is a discussion I started on the pulseaudio list:
+> http://lists.freedesktop.org/archives/pulseaudio-discuss/2011-July/010565=
+.html
 
-BUILD_DATE ?=3D "${@time.strftime('%Y%m%d', time.gmtime())}"
-PR =3D "r5.${BUILD_DATE}.0"
+Thank you very much for bringing this issue to upstreams attention.
 
-Perhaps because ${DATE} in bitbake.conf is declared without the "${@"
-tag this causes a more "static" interpretation of the variable?
-
-Hope this helps someone else in the future,
-Chris
-
-On Fri, Jul 8, 2011 at 7:21 AM, Chris Verges <kg4ysn@gmail.com> wrote:
-> Hi all,
->
-> I'm attempting to use the ${DATE} variable from
-> openembedded/conf/bitbake.conf in the PR value of a local overlay
-> recipe. =A0The idea is to create a recipe that will automatically
-> rebuild each day. =A0(The recipe itself is creates a small text file in
-> /etc that tracks the build date.) =A0BitBake is at 1.12.0, and OE is on
-> 2011.03-maintenance.
->
-> Unfortunately, the following didn't work as I expected:
->
-> PR =3D "r5.${DATE}.0"
->
-> (I use the "r5" prefix field to increment in case I make any major
-> changes to the PR format, and the "0" suffix field to increment any
-> minor changes to the recipe itself.)
->
-> The expected behavior is that the recipe will automatically rebuild
-> each day. =A0The actual behavior is that the recipe does not rebuild.
->
-> Does anyone have any ideas on what I'm overlooking?
->
-> Thanks,
-> Chris
->
+Regarding to pushing this patch, I am still a little confused since you
+wrote to the PA list you are using PA 0.9.15 and your patch is against
+0.9.22.
 
 
+Thanks,
+
+Paul
+
+--=-qKrE4HiRxvOWkpRGUcSe
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk4XKHYACgkQPX1aK2wOHVhjowCfb094I2WrBtBNmJVUkob92v1a
+KBcAnAjEFzD+R9SgeQJnuE9d2tDv1t4P
+=bK9E
+-----END PGP SIGNATURE-----
+
+--=-qKrE4HiRxvOWkpRGUcSe--
