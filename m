@@ -1,23 +1,26 @@
-Received: from rs69.luxsci.com ([64.49.254.154])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gchiii@mtiemail.com>) id 1QfBvf-0008PK-V7
+	(envelope-from <kg4ysn@gmail.com>) id 1QfC7Q-0000Ek-TR
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jul 2011 16:21:16 +0200
-Received: from thing2.microtoolsinc.com
-	(adsl-76-255-12-150.dsl.mrdnct.sbcglobal.net [76.255.12.150])
-	(authenticated bits=0)
-	by rs69.luxsci.com (8.13.8/8.13.8) with ESMTP id p68EH5V2028876
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
-	Fri, 8 Jul 2011 09:17:17 -0500
-From: "George C. Huntington III" <gchiii@mtiemail.com>
+	Fri, 08 Jul 2011 16:33:25 +0200
+Received: by vws2 with SMTP id 2so1648282vws.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 08 Jul 2011 07:29:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=WXq/ppbU1akcgsTrOzOkLQh+71AxxkYSFt7G+gRG3/g=;
+	b=rVzOw0mP0IIhCJL/iV92SHlC+pNznwb4onLyZOGJ+t2YG3WY/AMkO3rFzA4RIDg37Z
+	yTRTtZ0BRA0l6HIculUvMKQiDsb438nFSy/PISxISE522cpmNcaLq9DaXEQPogH/fNiX
+	lLPxmxOwEXwerMy51FX/zWNqPn7qu/zZllDTM=
+MIME-Version: 1.0
+Received: by 10.220.6.135 with SMTP id 7mr727718vcz.201.1310134893329; Fri, 08
+	Jul 2011 07:21:33 -0700 (PDT)
+Received: by 10.220.176.194 with HTTP; Fri, 8 Jul 2011 07:21:33 -0700 (PDT)
+Date: Fri, 8 Jul 2011 07:21:33 -0700
+Message-ID: <CAG4_upTi2CKyBMig3jsSGesFikj_qXeQ87x4e5Yv0i3USO0Lww@mail.gmail.com>
+From: Chris Verges <kg4ysn@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Jul 2011 10:17:01 -0400
-Message-Id: <1310134621-25789-2-git-send-email-gchiii@mtiemail.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <1310134621-25789-1-git-send-email-gchiii@mtiemail.com>
-References: <1310134621-25789-1-git-send-email-gchiii@mtiemail.com>
-Cc: Robert Schuster <r.schuster@tarent.de>, Stefan Schmidt <stefan@buglabs.net>
-Subject: [2011.03-maintenance] cacao-native_hg: Fix cacao-shutdownguard.patch
+Subject: Using ${DATE} in PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,105 +34,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jul 2011 14:21:16 -0000
+X-List-Received-Date: Fri, 08 Jul 2011 14:33:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Robert Schuster <r.schuster@tarent.de>
+Hi all,
 
-The patch contained some left-over debug code which can result into problems if
-other programs (like configure) relays on the output of the JVM
+I'm attempting to use the ${DATE} variable from
+openembedded/conf/bitbake.conf in the PR value of a local overlay
+recipe.  The idea is to create a recipe that will automatically
+rebuild each day.  (The recipe itself is creates a small text file in
+/etc that tracks the build date.)  BitBake is at 1.12.0, and OE is on
+2011.03-maintenance.
 
-Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
----
- recipes/cacao/cacao-native_hg.bb              |    2 +-
- recipes/cacao/files/cacao-shutdownguard.patch |   32 +++++++++++++-----------
- 2 files changed, 18 insertions(+), 16 deletions(-)
+Unfortunately, the following didn't work as I expected:
 
-diff --git a/recipes/cacao/cacao-native_hg.bb b/recipes/cacao/cacao-native_hg.bb
-index dc35ce8..020dee3 100644
---- a/recipes/cacao/cacao-native_hg.bb
-+++ b/recipes/cacao/cacao-native_hg.bb
-@@ -1,7 +1,7 @@
- require cacao-native.inc
- 
- PV = "1.1.0+hgr${SRCPV}"
--PR = "r4"
-+PR = "r5"
- 
- SRCREV = "c7bf150bfa46"
- SRC_URI = "hg://mips.complang.tuwien.ac.at/hg/;module=cacao;rev=${SRCREV} \
-diff --git a/recipes/cacao/files/cacao-shutdownguard.patch b/recipes/cacao/files/cacao-shutdownguard.patch
-index b89170c..b0d9d92 100644
---- a/recipes/cacao/files/cacao-shutdownguard.patch
-+++ b/recipes/cacao/files/cacao-shutdownguard.patch
-@@ -1,6 +1,7 @@
--diff -r c7bf150bfa46 src/threads/posix/mutex-posix.hpp
----- a/src/threads/posix/mutex-posix.hpp	Fri Mar 11 23:35:56 2011 +0100
--+++ b/src/threads/posix/mutex-posix.hpp	Fri Apr 01 16:16:07 2011 +0200
-+Index: cacao/src/threads/posix/mutex-posix.hpp
-+===================================================================
-+--- cacao.orig/src/threads/posix/mutex-posix.hpp	2011-03-08 13:13:00.000000000 +0100
-++++ cacao/src/threads/posix/mutex-posix.hpp	2011-05-10 11:51:48.534869875 +0200
- @@ -53,6 +53,9 @@
-  
-  	inline void lock();
-@@ -80,9 +81,10 @@ diff -r c7bf150bfa46 src/threads/posix/mutex-posix.hpp
-  #else
-  
-  // This structure must have the same layout as the class above.
--diff -r c7bf150bfa46 src/threads/posix/thread-posix.cpp
----- a/src/threads/posix/thread-posix.cpp	Fri Mar 11 23:35:56 2011 +0100
--+++ b/src/threads/posix/thread-posix.cpp	Fri Apr 01 16:16:07 2011 +0200
-+Index: cacao/src/threads/posix/thread-posix.cpp
-+===================================================================
-+--- cacao.orig/src/threads/posix/thread-posix.cpp	2011-03-17 10:41:29.000000000 +0100
-++++ cacao/src/threads/posix/thread-posix.cpp	2011-05-10 11:51:48.534869875 +0200
- @@ -74,6 +74,23 @@
-  #include "vm/string.hpp"
-  #include "vm/vm.hpp"
-@@ -107,9 +109,10 @@ diff -r c7bf150bfa46 src/threads/posix/thread-posix.cpp
-  #if defined(ENABLE_STATISTICS)
-  # include "vm/statistics.h"
-  #endif
--diff -r c7bf150bfa46 src/vm/vm.cpp
----- a/src/vm/vm.cpp	Fri Mar 11 23:35:56 2011 +0100
--+++ b/src/vm/vm.cpp	Fri Apr 01 16:16:07 2011 +0200
-+Index: cacao/src/vm/vm.cpp
-+===================================================================
-+--- cacao.orig/src/vm/vm.cpp	2011-03-17 10:41:29.000000000 +0100
-++++ cacao/src/vm/vm.cpp	2011-05-10 11:56:36.564882762 +0200
- @@ -52,6 +52,7 @@
-  
-  #include "native/vm/nativevm.hpp"
-@@ -141,12 +144,10 @@ diff -r c7bf150bfa46 src/vm/vm.cpp
-  
-  /* vm_run **********************************************************************
-  
--@@ -1865,6 +1882,15 @@
-+@@ -1865,6 +1882,13 @@
-  
-  void vm_shutdown(s4 status)
-  {
--+	log_println("vm_shutdown");
--+
- +	if (VM::get_current()->shutdown_guard())
- +	{
- +		/* Shutdown in progress by another thread already.
-@@ -157,9 +158,10 @@ diff -r c7bf150bfa46 src/vm/vm.cpp
-  	if (opt_verbose 
-  #if defined(ENABLE_STATISTICS)
-  		|| opt_getcompilingtime || opt_stat
--diff -r c7bf150bfa46 src/vm/vm.hpp
----- a/src/vm/vm.hpp	Fri Mar 11 23:35:56 2011 +0100
--+++ b/src/vm/vm.hpp	Fri Apr 01 16:16:07 2011 +0200
-+Index: cacao/src/vm/vm.hpp
-+===================================================================
-+--- cacao.orig/src/vm/vm.hpp	2011-03-08 13:13:00.000000000 +0100
-++++ cacao/src/vm/vm.hpp	2011-05-10 11:51:48.554844342 +0200
- @@ -64,6 +64,7 @@
-  	bool    _initializing;
-  	bool    _created;
--- 
-1.7.4.1
+PR = "r5.${DATE}.0"
 
+(I use the "r5" prefix field to increment in case I make any major
+changes to the PR format, and the "0" suffix field to increment any
+minor changes to the recipe itself.)
+
+The expected behavior is that the recipe will automatically rebuild
+each day.  The actual behavior is that the recipe does not rebuild.
+
+Does anyone have any ideas on what I'm overlooking?
+
+Thanks,
+Chris
 
 
