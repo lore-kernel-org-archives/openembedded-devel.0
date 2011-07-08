@@ -1,35 +1,35 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Qf3Ll-0004Pa-09
+	(envelope-from <raj.khem@gmail.com>) id 1Qf3WG-0004aP-At
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jul 2011 07:11:37 +0200
-Received: by iwn4 with SMTP id 4so1543028iwn.6
+	Fri, 08 Jul 2011 07:22:28 +0200
+Received: by iwn4 with SMTP id 4so1548189iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Jul 2011 22:07:44 -0700 (PDT)
+	Thu, 07 Jul 2011 22:18:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=message-id:date:from:user-agent:mime-version:to:subject:references
 	:in-reply-to:content-type:content-transfer-encoding;
-	bh=94/9LOW1OmKbUTiX6HxPUQ5S0ATRVquUVB6oSJNbmo4=;
-	b=kFIaM1w2v82lQfk2Om4gv16PIiw77mbfk0rLbaAx7AAZEVc/L9VXysmEsWEOCJ330H
-	00AVTq2g73/vcyhLWei0zOFPg+dF8pVxWF6iwfAd6EYCC7HcFokaLBLLTBiLGRRYvKV0
-	DZWMs2DayV8hwA3yLXhm1odYt5T++eRLA9uqM=
-Received: by 10.42.132.71 with SMTP id c7mr1753115ict.147.1310101662979;
-	Thu, 07 Jul 2011 22:07:42 -0700 (PDT)
+	bh=dxguZWLUu/ZBfSdCSKq6LK2+1161s3+ypXaw9Dmbz3E=;
+	b=j4LA0fhpymng4+m1du0Q/krREqfcxuyOanGrwAXxLrrZ/36EJnWPDKC/som0hC7tIB
+	PGaKh7pSPU7sN+ks6gxmEr4cQXmP/msJ6QI3wtTmXxhTBqjvV2/wdRoFxdDsMUIt/sw5
+	JXdeXvpchTTqNz4y7m5RPLM5Z3gyfF5AsRCbw=
+Received: by 10.231.200.20 with SMTP id eu20mr1423210ibb.24.1310102315423;
+	Thu, 07 Jul 2011 22:18:35 -0700 (PDT)
 Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id w11sm5845016ibw.41.2011.07.07.22.07.41
-	(version=SSLv3 cipher=OTHER); Thu, 07 Jul 2011 22:07:42 -0700 (PDT)
-Message-ID: <4E16909C.7080600@gmail.com>
-Date: Thu, 07 Jul 2011 22:07:40 -0700
+	by mx.google.com with ESMTPS id m18sm1850895ibc.62.2011.07.07.22.18.34
+	(version=SSLv3 cipher=OTHER); Thu, 07 Jul 2011 22:18:34 -0700 (PDT)
+Message-ID: <4E169329.3050702@gmail.com>
+Date: Thu, 07 Jul 2011 22:18:33 -0700
 From: Khem Raj <raj.khem@gmail.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 	rv:1.9.2.17) Gecko/20110516 Lightning/1.0b2 Thunderbird/3.1.10
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <CACrTVgKyLQ1UDqzUAcJACrsraPYfcOZf7c8HdfQOJsgTAx-r7A@mail.gmail.com>	<201107061734.31202.GNUtoo@no-log.org>	<CACrTVgJ6hYwz8bbJPowEN_jb5A+hd4vVr_T4qQONdtKd8gGv_g@mail.gmail.com>
-	<CACrTVgLG+DcK=p0G4D0sfVy44Dm0WnVrH+yf3u2241_DkNguhw@mail.gmail.com>
-In-Reply-To: <CACrTVgLG+DcK=p0G4D0sfVy44Dm0WnVrH+yf3u2241_DkNguhw@mail.gmail.com>
-Subject: Re: [PATCH-proposal] fix vlc building (-fPIC error) by patching live555 recipe
+References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04A78E50@nzc-ap-xch-02.ap.trimblecorp.net><CAE21AQpLShYH+82swduxQLWtpTGtTawuywbt2WxXHUTB5+9zDQ@mail.gmail.com><F7C0AA5DD1508F4789E10B6CC9BB75DB04A78EBC@nzc-ap-xch-02.ap.trimblecorp.net>	<CAE21AQq6YfPtuqxKfBs5cCGvBeO4ALk4d+_iZpZOpGZyBUNETw@mail.gmail.com>
+	<F7C0AA5DD1508F4789E10B6CC9BB75DB04A78FCB@nzc-ap-xch-02.ap.trimblecorp.net>
+In-Reply-To: <F7C0AA5DD1508F4789E10B6CC9BB75DB04A78FCB@nzc-ap-xch-02.ap.trimblecorp.net>
+Subject: Re: Debugging u-boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,50 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jul 2011 05:11:38 -0000
+X-List-Received-Date: Fri, 08 Jul 2011 05:22:28 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 07/06/2011 02:44 PM, Sylvain Paré wrote:
-> Patch attached. removed unneeded line
+On 07/07/2011 12:25 PM, Bernard Mentink wrote:
+> Hi Charles,
 >
+> Tried that but got the following linker error:
 >
->  From 9e01ea60bf7790f1250ef24a317507e255f3f947 Mon Sep 17 00:00:00 2001
-> From: =?UTF-8?q?Sylvain=20'GarthPS'=20Par=C3=A9?=<sylvain.pare@gmail.com>
-> Date: Wed, 6 Jul 2011 23:36:14 +0200
-> Subject: [PATCH] live555 recipe: added -fPIC flag need by VLC to build with
-> live555 support
-> MIME-Version: 1.0
-> Content-Type: text/plain; charset=UTF-8
-> Content-Transfer-Encoding: 8bit
->
-> Signed-off-by: Sylvain 'GarthPS' Paré<sylvain.pare@gmail.com>
-> ---
->   recipes/live555/live555.inc |    1 +
->   1 files changed, 1 insertions(+), 0 deletions(-)
->
-> diff --git a/recipes/live555/live555.inc b/recipes/live555/live555.inc
-> index 14e97bb..6de57cb 100644
-> --- a/recipes/live555/live555.inc
-> +++ b/recipes/live555/live555.inc
-> @@ -18,6 +18,7 @@ TARGET_CC_ARCH += "${LDFLAGS}"
->
->   do_configure() {
->       cp ${WORKDIR}/config.linux-cross .
-> +    echo "COMPILE_OPTS+=" -fPIC "">>  config.linux-cross
+> ---------------------------------------------------------- error ---------------------------------------
+> | /home/bernie/Stuff/build/tmp/sysroots/i686-linux/usr/armv6/arm-angstrom-linux-gnueabi/bin/ld: failed to merge target specific data of file emutls_s.o
+> | /home/bernie/Stuff/build/tmp/sysroots/i686-linux/usr/armv6/arm-angstrom-linux-gnueabi/bin/ld: error: /home/bernie/Stuff/build/tmp/work/i686-armv6-sdk-angstrom-linux-gnueabi/gcc-cross-sdk-4.5-r36.2+svnr170880/gcc-4_5-branch/build.i686-linux.arm-angstrom-linux-gnueabi/./gcc/crtendS.o uses VFP register arguments, ./libgcc_s.so.1.tmp does not
+> | /home/bernie/Stuff/build/tmp/sysroots/i686-linux/usr/armv6/arm-angstrom-linux-gnueabi/bin/ld: failed to merge target specific data of file /home/bernie/Stuff/build/tmp/work/i686-armv6-sdk-angstrom-linux-gnueabi/gcc-cross-sdk-4.5-r36.2+svnr170880/gcc-4_5-branch/build.i686-linux.arm-angstrom-linux-gnueabi/./gcc/crtendS.o
+> | collect2: ld returned 1 exit status
+> | make[2]: *** [libgcc_s.so] Error 1
 
-Did you try adding -fPIC to CFLAGS
+this means there is fp ABI gotcha is it on latest oe.dev ? I remember 
+fixing the hard FP build on oe.dev  see commit 
+888c1f3a2e103793bc03488d2051ee4683f7516a
 
->       ./genMakefiles linux-cross
->   }
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+I dont know if that was picked for 2011.03 release branch
 
 
