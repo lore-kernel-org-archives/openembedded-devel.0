@@ -1,27 +1,38 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QfDXH-0002mZ-FV for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jul 2011 18:04:13 +0200
-Received: from f053043179.adsl.alicedsl.de ([78.53.43.179]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QfDTv-0003xj-Et; Fri, 08 Jul 2011 16:00:43 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1310140540.4517.1.camel@mattotaupa>
+	(envelope-from <agnel.joel@gmail.com>) id 1QfGVY-0006Zo-2Q
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Jul 2011 21:14:36 +0200
+Received: by wwi18 with SMTP id 18so1851911wwi.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 08 Jul 2011 12:10:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=WRvyh5EJGkmO1zTUbPyj4hAD+nbt5SIQONy8ddHNh6M=;
+	b=i4pbB3hzqck19gaOO/2FOuBTqc+RXhweG0CVZ+MYtWsRjCuwCpBTKTt7mECJ+Bntgq
+	3MmpeeY9tXlZpJkqX/bTpZqe071mZx4q6udozwmm4EO5kK0XzswWBi767bBIoN6q6est
+	AGe/nqSRGByOn1qDN97QcYMIblsC8UOKZuWXg=
+MIME-Version: 1.0
+Received: by 10.227.10.31 with SMTP id n31mr2084212wbn.97.1310152243115; Fri,
+	08 Jul 2011 12:10:43 -0700 (PDT)
+Received: by 10.227.200.15 with HTTP; Fri, 8 Jul 2011 12:10:43 -0700 (PDT)
+In-Reply-To: <13872098A06B02418CF379A158C0F14601620D1E2B@dnce02.ent.ti.com>
 References: <1310017138-8936-1-git-send-email-agnel.joel@gmail.com>
 	<1310022018.4532.21.camel@mattotaupa>
 	<CAD=GYpaAHX=RiS98pXAqE3bRbBs6gsbXQoSCdcs8+9u=2F267w@mail.gmail.com>
 	<CAD=GYpZX9Y5JbQH9YQ7Ozu6Kp6uf72ooFiys-2Ga_aR_q29R6A@mail.gmail.com>
 	<1310140540.4517.1.camel@mattotaupa>
-Date: Fri, 08 Jul 2011 18:00:18 +0200
-Message-ID: <1310140818.4517.3.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Cc: joelagnel@ti.com, Joel A Fernandes <agnel.joel@gmail.com>, jdk@ti.com,
-	k-kooi@ti.com
+	<1310140818.4517.3.camel@mattotaupa>
+	<13872098A06B02418CF379A158C0F14601620D1E2B@dnce02.ent.ti.com>
+Date: Fri, 8 Jul 2011 14:10:43 -0500
+Message-ID: <CAD=GYpZgya_v86J+OhDUN-rQXnXGBDT3QT-HXTj_+G0sKme7wA@mail.gmail.com>
+From: Joel A Fernandes <agnel.joel@gmail.com>
+To: "Kooi, Koen" <k-kooi@ti.com>
+Cc: "Kridner, Jason" <jdk@ti.com>, "Fernandes, Joel A" <joelagnel@ti.com>,
+	Paul Menzel <paulepanter@users.sourceforge.net>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH v2] pulseaudio: Run as system-wide instance instead of per-user
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,67 +47,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jul 2011 16:04:13 -0000
-X-Groupsio-MsgNum: 33078
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-9MgMxy7TzEkF+BI/jSnb"
+X-List-Received-Date: Fri, 08 Jul 2011 19:14:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-9MgMxy7TzEkF+BI/jSnb
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Fri, Jul 8, 2011 at 11:07 AM, Kooi, Koen <k-kooi@ti.com> wrote:
+> (posting from the airport)
+>
+> If I understood correctly Joel is going to try out 0.9.22 to see if that fixes session mode, and it not, try to make systemmode a separate recipe that both .15 and .22 could optionally use.
+>
+> Joel, please correct me if I'm wrong :)
 
-[Just adding back everyone to CC list.]
+Hi Koen,
+
+That's right :)
+
+While I'm doing a build, I am also posting detailed logs to pulseaudio
+ML about the failure of an older version, just incase.
+
+Just mentioning that I'm setting PREFERRED_VERSION_pulseaudio to
+0.9.22 in conf/.../angstrom-2008-preferred-versions.inc
+
+I do recall from the phone that you mentioned something about an
+"armv7" specific variable but I couldn't find it. Let me know if
+setting the above mentioned variable is ok.
+
+Thanks and Have a safe flight.
+
+Regards,
+Joel
 
 
-Am Freitag, den 08.07.2011, 17:55 +0200 schrieb Paul Menzel:
-> Am Donnerstag, den 07.07.2011, 21:55 -0500 schrieb Joel A Fernandes:
-> > >> As far as I understood system mode can sometimes be the right thing =
-to
-> > >> do but most of the time it is just a configuration error. Running PA=
- and
-> > >> printing out the debug messages should give you a clue.
-> > >
-> > > Pulseaudio isn't printing any debug messages to syslog or stdout ( -v=
-v
-> > > -log-level pulseaudio options )
-> > >
-> > > Here was the thread on BeagleBoard mailing list that discusses this i=
-ssue:
-> > > http://groups.google.com/group/beagleboard/browse_thread/thread/4dc82=
-483a8d000fb/ccbd0e21fa5e89a0
-> > >
-> > > I will post the details of the problem on the pulseaudio mailing list
-> > > and try to get some other alternatives.
-> > >
-> > > For now, can we temporarily merge this patch while I followup with th=
-em?
-> >=20
-> > Here is a discussion I started on the pulseaudio list:
-> > http://lists.freedesktop.org/archives/pulseaudio-discuss/2011-July/0105=
-65.html
->=20
-> Thank you very much for bringing this issue to upstreams attention.
->=20
-> Regarding to pushing this patch, I am still a little confused since you
-> wrote to the PA list you are using PA 0.9.15 and your patch is against
-> 0.9.22.
->=20
->=20
-> Thanks,
->=20
-> Paul
-
---=-9MgMxy7TzEkF+BI/jSnb
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk4XKZIACgkQPX1aK2wOHVjv6gCfS51Onqh9VrzU7tjddxvcFxNz
-omQAnjl6QJAHSv7bLu+skeGFftEPK1OO
-=ohsN
------END PGP SIGNATURE-----
-
---=-9MgMxy7TzEkF+BI/jSnb--
