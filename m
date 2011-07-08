@@ -1,31 +1,35 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <agnel.joel@gmail.com>) id 1Qf2hE-0003a5-Of
+	(envelope-from <raj.khem@gmail.com>) id 1Qf3Ll-0004Pa-09
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jul 2011 06:29:45 +0200
-Received: by gxk3 with SMTP id 3so708143gxk.6
+	Fri, 08 Jul 2011 07:11:37 +0200
+Received: by iwn4 with SMTP id 4so1543028iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Jul 2011 21:25:52 -0700 (PDT)
+	Thu, 07 Jul 2011 22:07:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=hNFXrF3ekWG/O+kMH73ocrOZV1XDUo+uf4cbTqe2A34=;
-	b=u/USXUi2tplnBb+8LAx/mGOuE4z6uhN0K9jA7kaVBME6EmvonSGyiCLvXETSAJydmG
-	EvQOQkAdOQWHXUO6Rkn5H1qOQsh9mpV1DuJ6OChhWIYubXRto4bQG2jSQ6AeMLLWRU13
-	BAg+GMCMBsKUOlVp9F5oZqgKt+m+GGFThQ6es=
-Received: by 10.236.190.164 with SMTP id e24mr1930271yhn.270.1310099151203;
-	Thu, 07 Jul 2011 21:25:51 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id f4sm3921264yhn.69.2011.07.07.21.25.49
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 07 Jul 2011 21:25:50 -0700 (PDT)
-From: Joel A Fernandes <agnel.joel@gmail.com>
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=94/9LOW1OmKbUTiX6HxPUQ5S0ATRVquUVB6oSJNbmo4=;
+	b=kFIaM1w2v82lQfk2Om4gv16PIiw77mbfk0rLbaAx7AAZEVc/L9VXysmEsWEOCJ330H
+	00AVTq2g73/vcyhLWei0zOFPg+dF8pVxWF6iwfAd6EYCC7HcFokaLBLLTBiLGRRYvKV0
+	DZWMs2DayV8hwA3yLXhm1odYt5T++eRLA9uqM=
+Received: by 10.42.132.71 with SMTP id c7mr1753115ict.147.1310101662979;
+	Thu, 07 Jul 2011 22:07:42 -0700 (PDT)
+Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id w11sm5845016ibw.41.2011.07.07.22.07.41
+	(version=SSLv3 cipher=OTHER); Thu, 07 Jul 2011 22:07:42 -0700 (PDT)
+Message-ID: <4E16909C.7080600@gmail.com>
+Date: Thu, 07 Jul 2011 22:07:40 -0700
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110516 Lightning/1.0b2 Thunderbird/3.1.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Jul 2011 23:22:42 -0500
-Message-Id: <1310098962-13326-1-git-send-email-agnel.joel@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: joelagnel@ti.com, beagleboard@googlegroups.com, k-kooi@ti.com,
-	Joel A Fernandes <agnel.joel@gmail.com>, g-coley1@ti.com, jdk@ti.com
-Subject: [PATCH v4] beagleboard-test-scripts: Add a script flash-fs.sh for flashing NAND
+References: <CACrTVgKyLQ1UDqzUAcJACrsraPYfcOZf7c8HdfQOJsgTAx-r7A@mail.gmail.com>	<201107061734.31202.GNUtoo@no-log.org>	<CACrTVgJ6hYwz8bbJPowEN_jb5A+hd4vVr_T4qQONdtKd8gGv_g@mail.gmail.com>
+	<CACrTVgLG+DcK=p0G4D0sfVy44Dm0WnVrH+yf3u2241_DkNguhw@mail.gmail.com>
+In-Reply-To: <CACrTVgLG+DcK=p0G4D0sfVy44Dm0WnVrH+yf3u2241_DkNguhw@mail.gmail.com>
+Subject: Re: [PATCH-proposal] fix vlc building (-fPIC error) by patching live555 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,62 +43,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jul 2011 04:29:45 -0000
+X-List-Received-Date: Fri, 08 Jul 2011 05:11:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-This script flashes the NAND of a BeagleBoard if:
-  * There is a valid image on the SD Card to flash
-  * The board has NAND
+On 07/06/2011 02:44 PM, Sylvain Paré wrote:
+> Patch attached. removed unneeded line
+>
+>
+>  From 9e01ea60bf7790f1250ef24a317507e255f3f947 Mon Sep 17 00:00:00 2001
+> From: =?UTF-8?q?Sylvain=20'GarthPS'=20Par=C3=A9?=<sylvain.pare@gmail.com>
+> Date: Wed, 6 Jul 2011 23:36:14 +0200
+> Subject: [PATCH] live555 recipe: added -fPIC flag need by VLC to build with
+> live555 support
+> MIME-Version: 1.0
+> Content-Type: text/plain; charset=UTF-8
+> Content-Transfer-Encoding: 8bit
+>
+> Signed-off-by: Sylvain 'GarthPS' Paré<sylvain.pare@gmail.com>
+> ---
+>   recipes/live555/live555.inc |    1 +
+>   1 files changed, 1 insertions(+), 0 deletions(-)
+>
+> diff --git a/recipes/live555/live555.inc b/recipes/live555/live555.inc
+> index 14e97bb..6de57cb 100644
+> --- a/recipes/live555/live555.inc
+> +++ b/recipes/live555/live555.inc
+> @@ -18,6 +18,7 @@ TARGET_CC_ARCH += "${LDFLAGS}"
+>
+>   do_configure() {
+>       cp ${WORKDIR}/config.linux-cross .
+> +    echo "COMPILE_OPTS+=" -fPIC "">>  config.linux-cross
 
-Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
----
-Changes since v3:
-* User button changes for flashing have been removed as it seemed unstable and we would like to have a
-revision which we're using for the BeagleBoard image that's being shipped with a BeagleBoard C5 board.
+Did you try adding -fPIC to CFLAGS
 
-We're calling this version of the build "Alpha", the "Beta" will have the flash-with-userbutton feature
-
-* flash-fs.sh renamed to to flash-nand-fs.sh after suggestion from Khem
-
- .../beagleboard/beagleboard-test-scripts_git.bb    |   14 +++++++++++---
- 1 files changed, 11 insertions(+), 3 deletions(-)
-
-diff --git a/recipes/beagleboard/beagleboard-test-scripts_git.bb b/recipes/beagleboard/beagleboard-test-scripts_git.bb
-index be0d059..0ee7954 100644
---- a/recipes/beagleboard/beagleboard-test-scripts_git.bb
-+++ b/recipes/beagleboard/beagleboard-test-scripts_git.bb
-@@ -1,14 +1,18 @@
- ## Reminder:  The correct spacing for a variable is FOO = "BAR"  in : PR="r1"
- DESCRIPTION = "BeagleBoard test scripts"
- HOMEPAGE = "http://beagleboad.org/support"
--PR = "r2"
-+PR = "r3"
- 
--SRC_URI = "git://gitorious.org/beagleboard-validation/scripts.git;protocol=git \
-+SRC_URI = "git://gitorious.org/~joelf/beagleboard-validation/validation-scripts.git;protocol=git \
- "
- 
--SRCREV = "473dd2ab20d866be6168c9f992c2c9e74e485c9d"
-+SRCREV = "2df76857155fbd462527c2b00ee83214483f0594"
- S = "${WORKDIR}/git"
- 
-+inherit update-rc.d
-+INITSCRIPT_NAME = "flash-nand-fs.sh"
-+INITSCRIPT_PARAMS = "start 99 2 3 4 5 ."
-+
- do_install() {
-   TEST_FILES=" \
-     testaudio \
-@@ -28,4 +32,8 @@ do_install() {
-   for i in ${TEST_FILES}; do
-     install -m 0755 ${S}/${i} ${D}/${bindir}
-   done
-+  # A script to flash NAND if the board has it, and if there is valid image to flash on the SD Card.
-+  # We also register it as an init script so that the SD Card auto-flashes to NAND during boot.
-+  install -d ${D}/${sysconfdir}/init.d/
-+  install -m 0755 ${S}/flashing/flash-nand-fs.sh ${D}/${sysconfdir}/init.d/flash-nand-fs.sh
- }
--- 
-1.7.0.4
+>       ./genMakefiles linux-cross
+>   }
+>
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
