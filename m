@@ -1,36 +1,33 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <agnel.joel@gmail.com>) id 1QfLUO-0003Us-0W
+	(envelope-from <agnel.joel@gmail.com>) id 1QfLVs-0003aV-Ga
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Jul 2011 02:33:44 +0200
-Received: by iwn4 with SMTP id 4so2285330iwn.6
+	Sat, 09 Jul 2011 02:35:16 +0200
+Received: by ywa12 with SMTP id 12so1039624ywa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jul 2011 17:29:50 -0700 (PDT)
+	Fri, 08 Jul 2011 17:31:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=eAwCYcsvDrwlEXCl9c1FDGYsI4OYSwmWnlmufK6Wk6I=;
-	b=DMk3/4/faXyGGX9CnEJfxqGxKCO3HOXxHC2dhuzCNTkK3XyK5+g/Sc/LUEQ6XEIlMA
-	DXJhnRV10gMVpw15tsimYL7fVh0SvnKSKeaViYaduGDsrG/mdWOjWMKvnqI39DLFE1WC
-	Kg4sPRC/lev5DXSjZJPE7VHu0FYI3w0AiNKoo=
-MIME-Version: 1.0
-Received: by 10.231.203.136 with SMTP id fi8mr2282061ibb.181.1310171390297;
-	Fri, 08 Jul 2011 17:29:50 -0700 (PDT)
-Received: by 10.231.174.73 with HTTP; Fri, 8 Jul 2011 17:29:50 -0700 (PDT)
-In-Reply-To: <1310140818.4517.3.camel@mattotaupa>
-References: <1310017138-8936-1-git-send-email-agnel.joel@gmail.com>
-	<1310022018.4532.21.camel@mattotaupa>
-	<CAD=GYpaAHX=RiS98pXAqE3bRbBs6gsbXQoSCdcs8+9u=2F267w@mail.gmail.com>
-	<CAD=GYpZX9Y5JbQH9YQ7Ozu6Kp6uf72ooFiys-2Ga_aR_q29R6A@mail.gmail.com>
-	<1310140540.4517.1.camel@mattotaupa>
-	<1310140818.4517.3.camel@mattotaupa>
-Date: Fri, 8 Jul 2011 19:29:50 -0500
-Message-ID: <CAD=GYpYxH6E3rho_vW3Q9ncXna7EPHK5M=icjFn0eQ3v7YJ=Lw@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=8eO2SKtstKZJq2IlqibHgyHvNdLsD+FDOdJhF6oHcpI=;
+	b=eAb5JGQbL3q6/GIPb6tG0nBcoQZDG68Ri5GWwDAmuVvk7Qmj0IJsDcXjlrwbqElIP4
+	RuQcjZLsp6v+81WKpAfIC8Gt/WMpP+AZ+JCvMv80BHAyWvvYn/4L6R0Hdtw4v0ONdyyv
+	ZXxPJ3wsItzG1+cKIILuK7KCAurtQzY45ncck=
+Received: by 10.236.113.164 with SMTP id a24mr521959yhh.130.1310171099371;
+	Fri, 08 Jul 2011 17:24:59 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id j65sm5100784yhm.54.2011.07.08.17.24.58
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 08 Jul 2011 17:24:58 -0700 (PDT)
 From: Joel A Fernandes <agnel.joel@gmail.com>
-To: Paul Menzel <paulepanter@users.sourceforge.net>
-Cc: joelagnel@ti.com, k-kooi@ti.com, openembedded-devel@lists.openembedded.org,
-	jdk@ti.com
-Subject: Re: [PATCH v2] pulseaudio: Run as system-wide instance instead of per-user
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  8 Jul 2011 19:21:49 -0500
+Message-Id: <1310170909-3533-1-git-send-email-agnel.joel@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: joelagnel@ti.com, Colin Guthrie <gmane@colin.guthr.ie>,
+	beagleboard@googlegroups.com, smcnam@gmail.com,
+	Paul Menzel <paulepanter@users.sourceforge.net>,
+	Joel A Fernandes <agnel.joel@gmail.com>, k-kooi@ti.com, jdk@ti.com
+Subject: [PATCH] pulseaudio: Switch to version version 0.9.22 for Angstrom 2011.03
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,54 +41,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Jul 2011 00:33:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 09 Jul 2011 00:35:16 -0000
 
-Hi Paul,
+This fixes all the issues noticed earlier with pulseaudio 0.9.15:
+ * Pulseaudio keeping audio devices busy when run as per-user instance
+ * Failure of pactl, pacmd etc to connect to the pulseaudio server
 
-Can we ignore this patch and use one I just submitted titled
-"pulseaudio: Switch to version version 0.9.22 for Angstrom 2011.03"?
+Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
+---
+Notes:
+* This has to go into the OpenEmbedded 2011.03-maintenance branch as there is no such configration file in the master branch
+* Please ignore the earlier patch "pulseaudio: Run as system-wide instance instead of per-user"
 
-Thanks for reviewing my patch,
+Applying this and the patch titled "beagleboard-test-scripts: Add a script flash-fs.sh for flashing NAND" will mark the
+"Alpha" build of the C5 image. Can this be tagged?
 
-Regards,
-Joel
+Things to go into "Beta":
+* User button fixes (kernel and flashing scripts)
+* U-boot fixes for EHCI timeouts when doing a tftpboot
 
-On Fri, Jul 8, 2011 at 11:00 AM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> [Just adding back everyone to CC list.]
->
->
-> Am Freitag, den 08.07.2011, 17:55 +0200 schrieb Paul Menzel:
->> Am Donnerstag, den 07.07.2011, 21:55 -0500 schrieb Joel A Fernandes:
->> > >> As far as I understood system mode can sometimes be the right thing to
->> > >> do but most of the time it is just a configuration error. Running PA and
->> > >> printing out the debug messages should give you a clue.
->> > >
->> > > Pulseaudio isn't printing any debug messages to syslog or stdout ( -vv
->> > > -log-level pulseaudio options )
->> > >
->> > > Here was the thread on BeagleBoard mailing list that discusses this issue:
->> > > http://groups.google.com/group/beagleboard/browse_thread/thread/4dc82483a8d000fb/ccbd0e21fa5e89a0
->> > >
->> > > I will post the details of the problem on the pulseaudio mailing list
->> > > and try to get some other alternatives.
->> > >
->> > > For now, can we temporarily merge this patch while I followup with them?
->> >
->> > Here is a discussion I started on the pulseaudio list:
->> > http://lists.freedesktop.org/archives/pulseaudio-discuss/2011-July/010565.html
->>
->> Thank you very much for bringing this issue to upstreams attention.
->>
->> Regarding to pushing this patch, I am still a little confused since you
->> wrote to the PA list you are using PA 0.9.15 and your patch is against
->> 0.9.22.
->>
->>
->> Thanks,
->>
->> Paul
->
+ conf/distro/angstrom-2008.1.conf                   |    3 +++
+ .../include/angstrom-2008-preferred-versions.inc   |    2 +-
+ 2 files changed, 4 insertions(+), 1 deletions(-)
+
+diff --git a/conf/distro/angstrom-2008.1.conf b/conf/distro/angstrom-2008.1.conf
+index ae1ed4c..7b4f25a 100644
+--- a/conf/distro/angstrom-2008.1.conf
++++ b/conf/distro/angstrom-2008.1.conf
+@@ -121,6 +121,9 @@ PREFERRED_VERSION_binutils_avr32 = "2.17"
+ PREFERRED_VERSION_binutils-cross_avr32 = "2.17"
+ PREFERRED_VERSION_binutils-cross-sdk_avr32 = "2.17"
+ 
++ANGSTROM_PULSEAUDIO_VERSION		= "0.9.15"
++ANGSTROM_PULSEAUDIO_VERSION_armv7a	= "0.9.22"
++
+ PREFERRED_PROVIDER_dbus-glib             = "dbus-glib"
+ PREFERRED_PROVIDER_hotplug               = "udev"
+ PREFERRED_PROVIDER_opkg                 ?= "opkg"
+diff --git a/conf/distro/include/angstrom-2008-preferred-versions.inc b/conf/distro/include/angstrom-2008-preferred-versions.inc
+index b5b524a..e4b8bf1 100644
+--- a/conf/distro/include/angstrom-2008-preferred-versions.inc
++++ b/conf/distro/include/angstrom-2008-preferred-versions.inc
+@@ -44,7 +44,7 @@ PREFERRED_VERSION_pango-native     = "1.24.4"
+ #PREFERRED_VERSION_pixman	= "0.13.2"
+ PREFERRED_VERSION_pkgconfig	= "0.23"
+ PREFERRED_VERSION_pkgconfig-native = "0.23"
+-PREFERRED_VERSION_pulseaudio 	= "0.9.15"
++PREFERRED_VERSION_pulseaudio 	= "${ANGSTROM_PULSEAUDIO_VERSION}"
+ PREFERRED_VERSION_python-pycairo = "1.8.0"
+ PREFERRED_VERSION_qt4-tools-native = "${ANGSTROM_QT_VERSION}"
+ PREFERRED_VERSION_qt4-tools-sdk = "${ANGSTROM_QT_VERSION}"
+-- 
+1.7.0.4
+
 
 
