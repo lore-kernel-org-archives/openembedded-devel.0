@@ -1,33 +1,30 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1QfZIj-0007dC-H3
+	(envelope-from <kg4ysn@gmail.com>) id 1QfZgb-00083d-7w
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Jul 2011 17:18:37 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1QfZEy-0005vb-6S from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Jul 2011 08:14:44 -0700
-Received: from SVR-ORW-FEM-03.mgc.mentorg.com ([147.34.97.39]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Sat, 9 Jul 2011 08:14:44 -0700
-Received: from [172.30.80.17] (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
-	(147.34.97.39) with Microsoft SMTP Server id 14.1.289.1;
-	Sat, 9 Jul 2011 08:14:43 -0700
-Message-ID: <4E187052.9010402@mentor.com>
-Date: Sat, 9 Jul 2011 08:14:26 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+	Sat, 09 Jul 2011 17:43:17 +0200
+Received: by vxa37 with SMTP id 37so2218053vxa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 09 Jul 2011 08:39:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=bHWmzwRTan+J3HTI9LO0Z5BuE+RsAFRY0/sNi8U2D+Q=;
+	b=mSc0ga8QamIchwnYZJ4RrUPDjGUedR6r6CrKj88ygmUvbJssRw6P9u0PAIMaIPtmc4
+	OVcdjrsgY3LFJ8kZyXvGmbOdqon6kdzPveyJ9wR0CeeZuKc74/t2AhdXKl5rMSpVoNyC
+	PUsdOKGzlIt6VFVxiUCoXYZxIWbwXp6rRJof0=
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1310134621-25789-1-git-send-email-gchiii@mtiemail.com>
-In-Reply-To: <1310134621-25789-1-git-send-email-gchiii@mtiemail.com>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 09 Jul 2011 15:14:44.0039 (UTC)
-	FILETIME=[EEB73D70:01CC3E4A]
-Subject: Re: [2011.03-maintenance]
+Received: by 10.220.6.135 with SMTP id 7mr1017771vcz.201.1310225962845; Sat,
+	09 Jul 2011 08:39:22 -0700 (PDT)
+Received: by 10.220.176.194 with HTTP; Sat, 9 Jul 2011 08:39:22 -0700 (PDT)
+In-Reply-To: <CAG4_upRV2mYJ6UAUzZkhji9XxDi6o0Y3bVYRmE=Z0qacbXgztg@mail.gmail.com>
+References: <CAG4_upTi2CKyBMig3jsSGesFikj_qXeQ87x4e5Yv0i3USO0Lww@mail.gmail.com>
+	<CAG4_upRV2mYJ6UAUzZkhji9XxDi6o0Y3bVYRmE=Z0qacbXgztg@mail.gmail.com>
+Date: Sat, 9 Jul 2011 08:39:22 -0700
+Message-ID: <CAG4_upTMVvPXt8T0A4fVoFTaNxRho1_MAU=nmdp7+woJJ6ReqQ@mail.gmail.com>
+From: Chris Verges <kg4ysn@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Using ${DATE} in PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,44 +38,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Jul 2011 15:18:37 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 09 Jul 2011 15:43:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Update on this ... it turns out that touching the recipe file (i.e.
+updating the last accessed timestamp on the file) is what caused
+things to rebuild.  Is there a way to tell bitbake to ignore caching a
+recipe and/or always reevaluate the PR value in the recipe itself?
 
-On 07/08/2011 07:17 AM, George C. Huntington III wrote:
-> Cherry-pick: 0f0ee32d7045bc75ce9759805d04874499f1c958
-> Tested-by: George C. Huntington III <gchiii@mtiemail.com>
-> 
-> please add this to the 2011.03-maintenance branch
-> (sorry, i think i screwed up my last attempt to send this request)
-> 
-> 
-> Robert Schuster (1):
->   cacao-native_hg: Fix cacao-shutdownguard.patch
-> 
->  recipes/cacao/cacao-native_hg.bb              |    2 +-
->  recipes/cacao/files/cacao-shutdownguard.patch |   32 +++++++++++++-----------
->  2 files changed, 18 insertions(+), 16 deletions(-)
+Thanks,
+Chris
 
-Applied, thanks!
-
-- -- 
-Tom Rini
-Mentor Graphics Corporation
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iQEcBAEBAgAGBQJOGHBNAAoJEI4NMjfc3nJxuOsH/1O/ZfgfQgeBC1LsPmlMFAIN
-KZZORUK8fr1fTnkX6ANcCm3vSGWlxLG+1M3K0tr877aQ6Zi9FCqfHQHwVo328wlW
-r/sU5sipDQksaIhRkbgjUSr2wojTDd2OLaHcn0SOGdQ30ZAOMffK+uh9p4SwUbDF
-ccVX9SyOJzS/jZ2JlbVzKGsVh9TeL0XQuScx/+YZ2/s98bp7VFxNixktQSXBh9Vf
-Rn6hD9lTInPQKZtX02JFCyyyNzcG+r6auV+GkBD5FPFjkY1oPar+mNPFoEBhKOFl
-rxrWiDCiHz+y08WW1s17wRaHr9VunGhZH5qF1MwK59jUVIcYWmhmg4SbGZcXqg4=
-=gHu5
------END PGP SIGNATURE-----
+On Fri, Jul 8, 2011 at 7:55 AM, Chris Verges <kg4ysn@gmail.com> wrote:
+> Using ${DATE} didn't work, but I was able to use a similar trick to
+> get this working:
+>
+> BUILD_DATE ?=3D "${@time.strftime('%Y%m%d', time.gmtime())}"
+> PR =3D "r5.${BUILD_DATE}.0"
+>
+> Perhaps because ${DATE} in bitbake.conf is declared without the "${@"
+> tag this causes a more "static" interpretation of the variable?
+>
+> Hope this helps someone else in the future,
+> Chris
+>
+> On Fri, Jul 8, 2011 at 7:21 AM, Chris Verges <kg4ysn@gmail.com> wrote:
+>> Hi all,
+>>
+>> I'm attempting to use the ${DATE} variable from
+>> openembedded/conf/bitbake.conf in the PR value of a local overlay
+>> recipe. =A0The idea is to create a recipe that will automatically
+>> rebuild each day. =A0(The recipe itself is creates a small text file in
+>> /etc that tracks the build date.) =A0BitBake is at 1.12.0, and OE is on
+>> 2011.03-maintenance.
+>>
+>> Unfortunately, the following didn't work as I expected:
+>>
+>> PR =3D "r5.${DATE}.0"
+>>
+>> (I use the "r5" prefix field to increment in case I make any major
+>> changes to the PR format, and the "0" suffix field to increment any
+>> minor changes to the recipe itself.)
+>>
+>> The expected behavior is that the recipe will automatically rebuild
+>> each day. =A0The actual behavior is that the recipe does not rebuild.
+>>
+>> Does anyone have any ideas on what I'm overlooking?
+>>
+>> Thanks,
+>> Chris
+>>
+>
 
 
