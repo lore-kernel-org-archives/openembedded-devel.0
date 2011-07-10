@@ -1,35 +1,30 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kg4ysn@gmail.com>) id 1QfiQr-0002Ev-MK
+	(envelope-from <agnel.joel@gmail.com>) id 1Qg3qV-0007nD-DS
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Jul 2011 03:03:39 +0200
-Received: by pwi1 with SMTP id 1so1892720pwi.6
+	Mon, 11 Jul 2011 01:55:32 +0200
+Received: by ewy5 with SMTP id 5so1163857ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Jul 2011 17:59:42 -0700 (PDT)
+	Sun, 10 Jul 2011 16:51:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=0NFd9RgPcibX34Fsa8obo43DeCI+nxRQVBtslcYi0gQ=;
-	b=gsY4E+eoZQPac8+4ta9orevYNhbHVsgvhbzbcsrdM99roXk1UFEJyu/A2lEQFL6F8X
-	ByDgH+Fw489haBfF+fwRjFxDgNZUM7r1SgujhaSp0r67HlrtfNpGTnkcVF3zyy5+XdD1
-	38S15o3q7HBfN+bgvOiiVjM7/lGUPTE2DI9Vo=
-Received: by 10.68.17.164 with SMTP id p4mr5184348pbd.328.1310259582368;
-	Sat, 09 Jul 2011 17:59:42 -0700 (PDT)
-Received: from cverges-dev-lnx ([173.8.168.17])
-	by mx.google.com with ESMTPS id q5sm7377250pbk.42.2011.07.09.17.59.40
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 09 Jul 2011 17:59:41 -0700 (PDT)
-Date: Sat, 9 Jul 2011 17:59:03 -0700
-From: Chris Verges <kg4ysn@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110710005903.GA22302@cverges-dev-lnx>
-References: <CAG4_upTi2CKyBMig3jsSGesFikj_qXeQ87x4e5Yv0i3USO0Lww@mail.gmail.com>
-	<CAG4_upRV2mYJ6UAUzZkhji9XxDi6o0Y3bVYRmE=Z0qacbXgztg@mail.gmail.com>
-	<CAG4_upTMVvPXt8T0A4fVoFTaNxRho1_MAU=nmdp7+woJJ6ReqQ@mail.gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=KuwLUiM1DL/NpvM+E7VSoJoqDU1mnM33fqhDamOgLWM=;
+	b=osPy4OZHNyqyqxY3xxVRRMPKJnjsRsWLCOtyzgiB+sJh/YBds3NA+27eaM7x9ZIrVA
+	0Q77FwQvWT5JsNM4Oi0gDSjHuD0Zm1+QsedZd78HS9vR1Rn+TsfoCePufZnBnRWuZVtF
+	X0X5pfklSps5KXeoVwdM8slo4TGJLaLvQ0DEs=
 MIME-Version: 1.0
-In-Reply-To: <CAG4_upTMVvPXt8T0A4fVoFTaNxRho1_MAU=nmdp7+woJJ6ReqQ@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: Using ${DATE} in PR
+Received: by 10.213.105.135 with SMTP id t7mr828234ebo.22.1310341895798; Sun,
+	10 Jul 2011 16:51:35 -0700 (PDT)
+Received: by 10.213.105.210 with HTTP; Sun, 10 Jul 2011 16:51:35 -0700 (PDT)
+In-Reply-To: <1309968166-23347-1-git-send-email-agnel.joel@gmail.com>
+References: <1309968166-23347-1-git-send-email-agnel.joel@gmail.com>
+Date: Sun, 10 Jul 2011 18:51:35 -0500
+Message-ID: <CAD=GYpbbzjU0_3mJcUuqNEzhv5=qXAjdcew95033WifxzVGkLw@mail.gmail.com>
+From: Joel A Fernandes <agnel.joel@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Joel A Fernandes <agnel.joel@gmail.com>, jdk@ti.com, k-kooi@ti.com
+Subject: Re: [PATCH v3] linux-omap-psp: Fix the user button GPIO to the correct value for a BeagleBoard-xM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,47 +38,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jul 2011 01:03:47 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 10 Jul 2011 23:55:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jul 09, 2011 at 08:39:22AM -0700, Chris Verges wrote:
-> On Fri, Jul 8, 2011 at 7:55 AM, Chris Verges <kg4ysn@gmail.com> wrote:
-> > Using ${DATE} didn't work, but I was able to use a similar trick to
-> > get this working:
-> >
-> > BUILD_DATE ?= "${@time.strftime('%Y%m%d', time.gmtime())}"
-> > PR = "r5.${BUILD_DATE}.0"
+Hi,
+
+On Wed, Jul 6, 2011 at 11:02 AM, Joel A Fernandes <agnel.joel@gmail.com> wr=
+ote:
+> The user-button wasn't working for me with the the linux-omap-psp-2.6.32 =
+kernel, this change fixes it. I noticed the correct value in the linux-omap=
+-2.6.39 sources
 >
-> Update on this ... it turns out that touching the recipe file (i.e.
-> updating the last accessed timestamp on the file) is what caused
-> things to rebuild.  Is there a way to tell bitbake to ignore caching a
-> recipe and/or always reevaluate the PR value in the recipe itself?
+> Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
+> ---
+> Changes since v2:
+> * Bumped PR
+> * Made the commit summary more descriptive, removed full stop
+>
+> =A0conf/machine/include/omap3.inc =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ | =A0 =A02 +-
+> =A0...agle-cleaned-up-board-revision-conditions.patch | =A0 =A04 ++--
+> =A02 files changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.=
+inc
 
-Hi list,
+Could this patch be ACKed and/or applied to the dev and maintenance trees?
 
-Apologies for the top posting before.  The only mail client I had
-available was gmail's web interface, which isn't too netiquette
-friendly.
-
-I did some more digging into the BitBake sources.  I found the
-__BB_DONT_CACHE variable declared in bitbake/lib/bb/cache.py, and have
-set it to a value of "1" in the recipe that is using a dynamically
-generated PR value.  I'll test tomorrow to see if it truly fixed things.
-
-The recipe so far:
-
-   # Prevent BitBake from caching this recipe
-   __BB_DONT_CACHE = "1"
-
-   # The PR value is formatted as 'rX.DATE.Y' where 'X' is incremented
-   # only if the PR format changes, 'DATE' is dynamically generated by
-   # BitBake itself, and 'Y' should be incremented each time the recipe
-   # is manually changed.
-   PR = "r3.${DATE}.7"
-
-Hope this helps anyone else looking to do tracking on nightly builds.
-
-Chris
+Thanks
+Joel
 
 
