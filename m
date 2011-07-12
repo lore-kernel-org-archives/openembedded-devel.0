@@ -1,30 +1,33 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QggU8-0007cO-CP
+	(envelope-from <Tom_Rini@mentor.com>) id 1QghBa-0008JZ-LJ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jul 2011 19:11:00 +0200
-Received: by iym10 with SMTP id 10so4960195iym.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jul 2011 10:07:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=iOMOdVEJsz3rkJoxZ9Gxdg6ITXdm+NE+hj4igmHBQkQ=;
-	b=MFbonVJoxjgAD8f4mGBi1vKBBxYj68MxJszcucjDagMOX0mKI1CC6EXcejs5YadFom
-	3E44lM6uc2LMYcy4GlrcdH31PO9xaAaMA3X4W0/NDsN3O2sq4j7cX4yzzgale73l46l0
-	cbgqIX3xGfLsmOB35pWXILnj9VkpwyIpYGDwE=
-Received: by 10.42.7.73 with SMTP id d9mr167604icd.55.1310490422237;
-	Tue, 12 Jul 2011 10:07:02 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id j7sm858185icq.14.2011.07.12.10.07.00
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 12 Jul 2011 10:07:01 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Jul 2011 10:07:57 -0700
-Message-Id: <1310490477-11752-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-Subject: [meta-oe][PATCH] icon-naming-utils-native: Fix long path to perl in icon-name-mapping
+	Tue, 12 Jul 2011 19:55:54 +0200
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1Qggq8-00030V-7y from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Jul 2011 10:33:44 -0700
+Received: from SVR-ORW-FEM-02.mgc.mentorg.com ([147.34.96.206]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Tue, 12 Jul 2011 10:33:44 -0700
+Received: from [172.30.80.17] (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
+	(147.34.96.168) with Microsoft SMTP Server id 14.1.289.1;
+	Tue, 12 Jul 2011 10:33:43 -0700
+Message-ID: <4E1C8576.5030700@mentor.com>
+Date: Tue, 12 Jul 2011 10:33:42 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <ive9aj$16a$2@dough.gmane.org>
+In-Reply-To: <ive9aj$16a$2@dough.gmane.org>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 12 Jul 2011 17:33:44.0091 (UTC)
+	FILETIME=[D9036EB0:01CC40B9]
+Subject: Re: [2011.03-maintenance] Pull request #21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,45 +41,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jul 2011 17:11:00 -0000
+X-List-Received-Date: Tue, 12 Jul 2011 17:55:54 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
-From: Tom Rini <tom_rini@mentor.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-This is imported from oe.dev
+On 07/11/2011 12:38 AM, Koen Kooi wrote:
+> Tom,
+> 
+> Please pull the 6 commits from here:
+> 
+> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+> Branch: 2011.03-maintenance
+> 
+> Joel A Fernandes (4):
+>       linux-omap: Disable UART sleep timeout to avoid serial port probs
+>       angstrom: Use pulseaudio version 0.9.22 for armv7a architecture
+>       beagleboard-test-scripts: Add a script flash-fs.sh for flashing
+>       linux-omap-psp: Fix the user button GPIO to the correct value for
+> 
+> Koen Kooi (2):
+>       x-load git: 1.5.0 sorts lower than 1.44ss, so bump PE
+>       linux-omap-psp 2.6.32: bump PR
+> 
+> These are all cherry-picks from .dev, except for the pulseaudio one
+> since it's an angstrom 2008 only change.
 
-Signed-off-by: Tom Rini <tom_rini@mentor.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../icon-naming-utils/icon-naming-utils_0.8.90.bb  |    7 +++++++
- 1 files changed, 7 insertions(+), 0 deletions(-)
+Applied, thanks.
 
-diff --git a/meta-oe/recipes-devtools/icon-naming-utils/icon-naming-utils_0.8.90.bb b/meta-oe/recipes-devtools/icon-naming-utils/icon-naming-utils_0.8.90.bb
-index c10b8bf..ddd1e20 100644
---- a/meta-oe/recipes-devtools/icon-naming-utils/icon-naming-utils_0.8.90.bb
-+++ b/meta-oe/recipes-devtools/icon-naming-utils/icon-naming-utils_0.8.90.bb
-@@ -3,6 +3,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
- DEPENDS = "libxml-simple-perl-native"
- 
-+PR = "r1"
-+
- SRC_URI = "http://tango.freedesktop.org/releases/icon-naming-utils-${PV}.tar.gz"
- SRC_URI[md5sum] = "2c5c7a418e5eb3268f65e21993277fba"
- SRC_URI[sha256sum] = "044ab2199ed8c6a55ce36fd4fcd8b8021a5e21f5bab028c0a7cdcf52a5902e1c"
-@@ -11,6 +13,11 @@ S = "${WORKDIR}/icon-naming-utils-${PV}"
- 
- inherit autotools
- 
-+do_configure_append() {
-+        # replace paths to STAGING_BINDIR_NATIVE/perl with ${bindir}/perl
-+        sed -i -e "1s:#!.*:#! /usr/bin/env perl:" ${S}/icon-name-mapping.pl.in
-+}
-+
- FILES_${PN} += "${datadir}/dtds"
- 
- BBCLASSEXTEND = "native"
--- 
-1.7.4.1
+- -- 
+Tom Rini
+Mentor Graphics Corporation
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
 
+iQEcBAEBAgAGBQJOHIVvAAoJEI4NMjfc3nJxIPoIAKtAli/apah1ZJKfkZ2jqewz
+Mt+oApuqXwQM2rxy5FU9XqYBRRYMOV8JRiElNZlh/xK+XadcfdE4wC6uczS9n/e/
+4hIlU0fIQkBMLwCpNM9tOBHaNjapsvr+6/wJs7WlW0ZpSHpjJLxSOmJiXPLVsfgQ
+Cs1eSxatBPW3RQJiUHHi97IrrPGcrFmBF+9v8PAEHJhtd04wyzlk9U7XX0HgQe7A
+QrcADX1QGjSV6C5TomhNcwRCoaZeJsmh/Lxyx8CR3k8TICjsYFpnQuTVw2d82Vdk
+a/HjYxz3u/a6JnVHbrJRXwxi1Ljos1HNa91gOIUlS6i5im+nVfYua2m32zcRULc=
+=MXn2
+-----END PGP SIGNATURE-----
 
 
