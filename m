@@ -1,22 +1,33 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1QgZme-0005ES-Kq
+	(envelope-from <kg4ysn@gmail.com>) id 1Qgdj1-0000Or-Mu
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jul 2011 12:01:40 +0200
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 12 Jul 2011 02:43:50 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.65,520,1304319600"; d="scan'208";a="26665826"
-Received: from unknown (HELO helios.localnet) ([10.255.17.183])
-	by orsmga001.jf.intel.com with ESMTP; 12 Jul 2011 02:42:55 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Tue, 12 Jul 2011 16:14:33 +0200
+Received: by iwn4 with SMTP id 4so4757717iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jul 2011 07:09:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=JoFegFtQ+O2T/VoQl6CA35n4f4kTdhzTPTdBE3ZM6pc=;
+	b=lXwUlMWBfXOUjxd7p3+zORjE2l3hyYRCA/zlZMohhAgrKP0vCwugEWDl5SvAiMis97
+	fk6ADSSlRsOgwfJ+QBcRt2caw2AX+gMcsgRaICJTbxO5+gvzIhKRaMN1EiZBdoHCpJAI
+	3LHU0AyLJGuolUngj90WjO4bbvwdVvqkVElrI=
+Received: by 10.43.62.13 with SMTP id wy13mr6501110icb.342.1310479772293;
+	Tue, 12 Jul 2011 07:09:32 -0700 (PDT)
+Received: from cverges-dev-lnx ([173.8.168.17])
+	by mx.google.com with ESMTPS id a5sm880907icb.15.2011.07.12.07.09.30
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 12 Jul 2011 07:09:31 -0700 (PDT)
+Date: Tue, 12 Jul 2011 07:08:47 -0700
+From: Chris Verges <kg4ysn@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Jul 2011 10:42:53 +0100
-User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic-pae; KDE/4.6.2; i686; ; )
+Message-ID: <20110712140847.GA788@cverges-dev-lnx>
 References: <0564089300001e7d@nedap.com>
-In-Reply-To: <0564089300001e7d@nedap.com>
+	<201107121042.53976.paul.eggleton@linux.intel.com>
 MIME-Version: 1.0
-Message-Id: <201107121042.53976.paul.eggleton@linux.intel.com>
+In-Reply-To: <201107121042.53976.paul.eggleton@linux.intel.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: bbappend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,35 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jul 2011 10:01:41 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 12 Jul 2011 14:14:33 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tuesday 12 July 2011 09:58:01 Jaap de Jong wrote:
-> I need some help concerning bbappend.
-> I've created a bbappend file:
+On Tue, Jul 12, 2011 at 10:42:53AM +0100, Paul Eggleton wrote:
+> FILESEXTRAPATHS is only available in oe-core. For classic OE you need
+> to use something like:
 > 
->     FILESEXTRAPATHS := "${THISDIR}/files"
->     SRC_URI += "file://xyzzy.patch"
-> 
-> If I run a bitbake it complains about missing ..../xyzzy.patch
-> When I change the bbappend file to this:
-> 
->     SRC_URI += "file:///absolute-path-to-the-file/files/xyzzy.patch"
+> THISDIR := "${@os.path.dirname(bb.data.getVar('FILE', d, True))}"
+> FILESPATHBASE_prepend := "${THISDIR}/files:"
 
-FILESEXTRAPATHS is only available in oe-core. For classic OE you need to use 
-something like:
+Hi Paul,
 
-THISDIR := "${@os.path.dirname(bb.data.getVar('FILE', d, True))}"
-FILESPATHBASE_prepend := "${THISDIR}/files:"
+Thanks for clarifying and proposing a workaround.  It looks like PRINC
+is similar, where it is only available in oe-core.  It seems like the
+code related to incrementing the PR variable is a several-line fix, so
+is this something that can be abstracted into a class file in the
+local-overlay?
 
-Cheers,
-Paul
+Thanks again,
+Chris
 
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
