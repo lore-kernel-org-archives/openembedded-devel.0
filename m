@@ -1,34 +1,30 @@
-Received: from moutng.kundenserver.de ([212.227.17.8])
+Received: from tritech.se ([91.191.137.61])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Borutta@schoeps.de>) id 1Qgz1N-0006Fn-0e
+	(envelope-from <Mats.Karrman@tritech.se>) id 1QgzTJ-000751-ER
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jul 2011 14:58:33 +0200
-Received: from ZEUS.schoeps.local (pd95ba764.dip0.t-ipconnect.de
-	[217.91.167.100])
-	by mrelayeu.kundenserver.de (node=mrbap2) with ESMTP (Nemesis)
-	id 0LkAig-1RENKF1zuE-00bT3a; Wed, 13 Jul 2011 14:30:33 +0200
-Received: from ZEUS.schoeps.local ([fe80::71f0:3b18:ef63:ee9c]) by
-	ZEUS.schoeps.local ([fe80::71f0:3b18:ef63:ee9c%10]) with mapi;
-	Wed, 13 Jul 2011 14:30:31 +0200
-From: Christian Borutta <Borutta@schoeps.de>
+	Wed, 13 Jul 2011 15:27:25 +0200
+Received: from post.tritech.se (post.tritech.se [10.75.60.100])
+	by tritech.se (8.14.3/8.14.3) with ESMTP id p6DDNMpn014573
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jul 2011 15:23:27 +0200
+Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
+	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
+	14.01.0270.001; Wed, 13 Jul 2011 15:23:23 +0200
+From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 13 Jul 2011 14:30:15 +0200
 Thread-Topic: using i2c on a mx28evk
-Thread-Index: AcxBWJ5pFBYD1L5iTGuri3lGNGnqIQ==
-Message-ID: <311EE95A63F86C4E960B402004EAD7E310AF74E158@ZEUS.schoeps.local>
-Accept-Language: en-US, de-DE
+Thread-Index: AcxBWJ5pFBYD1L5iTGuri3lGNGnqIQABuC0P
+Date: Wed, 13 Jul 2011 13:23:22 +0000
+Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C06C364@post.tritech.se>
+References: <311EE95A63F86C4E960B402004EAD7E310AF74E158@ZEUS.schoeps.local>
+In-Reply-To: <311EE95A63F86C4E960B402004EAD7E310AF74E158@ZEUS.schoeps.local>
+Accept-Language: en-US, sv-SE
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-acceptlanguage: en-US, de-DE
+x-originating-ip: [194.132.137.34]
 MIME-Version: 1.0
-X-Provags-ID: V02:K0:xnHiUBrfNmE7+FjlqSkEwN+Iok+ikP8VfoMWgJ9IqED
-	A1YDaHFQXsRm5pYuVk8xeASBUUrOkBFFe8yY0Scdeq8LcZe+r0
-	Zy58RoffeTfX/xVY5njtZjtLvUCPNQQeB7lORdzDTB+goT7c0E
-	t+a+Rb7qaOvpj/GUk0REu6F3kbfW4IcKX+VauuZXpXrio4xzw+
-	5qCSfMk/1rERQKWmSZQ3A==
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: using i2c on a mx28evk
+Subject: Re: using i2c on a mx28evk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,40 +38,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jul 2011 12:58:33 -0000
-Content-Language: de-DE
+X-List-Received-Date: Wed, 13 Jul 2011 13:27:25 -0000
+Content-Language: en-US
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
-
+Hi,=0A=
+=0A=
+Some "generic" clues:=0A=
+Kernel modules are installed in the file system by adding "kernel-modules" =
+to "IMAGE_INSTALL". =0A=
+Some packages build their modules separately and then you need to add somet=
+hing like "kernel-module-XYZ" to "IMAGE_INSTALL", this should be visible fr=
+om the respective recipe.=0A=
+=0A=
+Hope this helps,=0A=
+Mats=0A=
+=0A=
+________________________________________=0A=
+From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
+-bounces@lists.openembedded.org] on behalf of Christian Borutta [Borutta@sc=
+hoeps.de]=0A=
+Sent: Wednesday, July 13, 2011 2:30 PM=0A=
+To: openembedded-devel@lists.openembedded.org=0A=
+Subject: [oe] using i2c on a mx28evk=0A=
+=0A=
+Hello,=0A=
+=0A=
 I'm running an Angstr=F6m Linux on a Freescale mx28evk board. For using the=
  i2c ports of the board I compiled and installed the packages i2c and i2c-d=
-ev, but the Kernelmoduls are missing.
-
-While booting the system sends the message:
-
-" FATAL: Module i2c-pxa not found.
-   FATAL: Module i2c-pxa not found."
-
+ev, but the Kernelmoduls are missing.=0A=
+=0A=
+While booting the system sends the message:=0A=
+=0A=
+" FATAL: Module i2c-pxa not found.=0A=
+   FATAL: Module i2c-pxa not found."=0A=
+=0A=
 I'm neither able to load the modules with modprobe nor do I find the module=
-s ( I think one of them is  i2c-dev.ko) anywhere in the filesystem.
-
-Can anybody help me solving this issue?
-
-Christian Borutta
-
-Schoeps Mikrofone
-Schalltechnik Dr.-Ing. Schoeps GmbH
-Spitalstr. 20
-76227 Karlsruhe - Germany
-
-Phone:+49 (0)721-94320-42
-Fax: +49 (0)721-94320-50
-www.schoeps.de
-
-Sitz der Gesellschaft: Karlsruhe
-Amtsgericht Mannheim, HRB Nr. 102442
-Gesch=E4ftsf=FChrer: Ulrich Schoeps, Dr. Helmut Wittek
+s ( I think one of them is  i2c-dev.ko) anywhere in the filesystem.=0A=
+=0A=
+Can anybody help me solving this issue?=0A=
+=0A=
+Christian Borutta=0A=
+=0A=
+Schoeps Mikrofone=0A=
+Schalltechnik Dr.-Ing. Schoeps GmbH=0A=
+Spitalstr. 20=0A=
+76227 Karlsruhe - Germany=0A=
+=0A=
+Phone:+49 (0)721-94320-42=0A=
+Fax: +49 (0)721-94320-50=0A=
+www.schoeps.de=0A=
+=0A=
+Sitz der Gesellschaft: Karlsruhe=0A=
+Amtsgericht Mannheim, HRB Nr. 102442=0A=
+Gesch=E4ftsf=FChrer: Ulrich Schoeps, Dr. Helmut Wittek=0A=
+=0A=
+_______________________________________________=0A=
+Openembedded-devel mailing list=0A=
+Openembedded-devel@lists.openembedded.org=0A=
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=0A=
 
 
