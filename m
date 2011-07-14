@@ -1,34 +1,30 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from mail2.eads.net ([80.156.45.114] helo=mail.eads.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dexuan.cui@intel.com>) id 1QhJL3-0001FK-T4
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jul 2011 12:40:14 +0200
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 14 Jul 2011 03:35:09 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.65,528,1304319600"; d="scan'208";a="27142895"
-Received: from pgsmsx602.gar.corp.intel.com ([10.221.43.81])
-	by azsmga001.ch.intel.com with ESMTP; 14 Jul 2011 03:35:08 -0700
-Received: from shsmsx602.ccr.corp.intel.com (10.239.4.104) by
-	pgsmsx602.gar.corp.intel.com (10.221.43.81) with Microsoft SMTP Server
-	(TLS) id 8.2.255.0; Thu, 14 Jul 2011 18:35:04 +0800
-Received: from shsmsx502.ccr.corp.intel.com ([10.239.4.96]) by
-	SHSMSX602.ccr.corp.intel.com ([10.239.4.104]) with mapi;
-	Thu, 14 Jul 2011 18:35:04 +0800
-From: "Cui, Dexuan" <dexuan.cui@intel.com>
-To: Koen Kooi <koen@openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 Jul 2011 18:35:02 +0800
-Thread-Topic: Did the chromium recipe even build fine in OE?
-Thread-Index: AcxCEbBRF2KGleTeRua/dweDWhAvlg==
-Message-ID: <1865303E0DED764181A9D882DEF65FB6A7FC150F62@shsmsx502.ccr.corp.intel.com>
-Accept-Language: zh-CN, en-US
+	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
+	id 1QhJwR-00026h-UR for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Jul 2011 13:18:52 +0200
+Received: from gsx3071-vs5.mxchg.m.corp ([53.147.176.148])
+	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id p6EBEvCf001854
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Jul 2011 13:14:58 +0200
+Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
+	gsx3071-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Thu, 14 Jul 2011 13:14:54 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Thu, 14 Jul 2011 13:14:54 +0200
+Message-ID: <0C757E680E33864AB113392C7E83F910BE51A8@GSX300A.mxchg.m.corp>
+In-Reply-To: <F7C0AA5DD1508F4789E10B6CC9BB75DB04AD2583@nzc-ap-xch-02.ap.trimblecorp.net>
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-acceptlanguage: zh-CN, en-US
-MIME-Version: 1.0
-Subject: Did the chromium recipe even build fine in OE?
+Thread-Topic: [oe] Errors on fetching files
+Thread-Index: AcxBtExly/vNi83sSXGI/YQ7IQnTLAAYdH7g
+References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04AD2583@nzc-ap-xch-02.ap.trimblecorp.net>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 14 Jul 2011 11:14:54.0149 (UTC)
+	FILETIME=[41BD0750:01CC4217]
+Subject: Re: Errors on fetching files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,44 +38,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jul 2011 10:40:14 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 14 Jul 2011 11:18:52 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-Hi all, I'm trying to port the chromium recipe from OE to Poky.  After some=
- investigation, I doubt it could ever build in OE?
+>So the question is if wget works from the command line why does it not
+>work from bitbake .... Unless it uses another method to get the file,
+>but I see nothing in the .bb file to indicate what
+>program is used ..
 
-1) The last update to the recipe happened in Apr, 2010 -- 15 months ago. Si=
-nce that, the locations of some repos have changed, e.g., in custom_cached_=
-svn, the locations of native_client, JavaScriptCore, WebCore and WebKit/chr=
-omium have changed; looks pywebsocket and patched-ffmpeg-mt have been dropp=
-ed from the repos. So I updated and commented them accordingly to make do_f=
-etch and do_fetch_post pass.
-BTW: the size of the whole source codes is really big -- more than 3G bytes=
-!
+Hello,
 
-2) The file include.gypi is for ARM only, so I belive the recipe was only t=
-ested for ARM target, if there was any test?
-So I moved the file into the same directory where gypi.patch is in and upda=
-td include.gypi by changing 'target_arch' to 'ia32' and replacing 'armv7' a=
-nd 'arm' to 'ia32'.
+OE doesn't use the http_proxy variables from environment !
 
-With my changes, do_configure can pass, but do_compile fails (A sligher lon=
-ger long is at http://pastebin.com/8w9LJTsa) :
-| /bin/sh: /bin/i586-poky-linux-ar: No such file or directory
-| make: *** [out/Release/obj.target/v8/tools/gyp/libv8_nosnapshot.a] Error =
-127
+Normaly the BB_ENV_EXTRAWHITE environment Variable is used to import
+environment variables into OE environment. But it is reported, that this
+dosn't work with http_proxy somehow.
 
-The 'sysroot' include.gyp is empty. This might be the cause?=20
+Put your proxy settings into ~/.wgetrc (local user setting) or
+/etc/wgetrc (system wide setting).=20
+For svn put it into ~/.subversion/servers.=20
+For git search in google for settings and try it, I haven't much luck
+with it.
 
-I'm trying to look into this.=20
-Please comment.
-Any suggestion is appreciated!
-
-Thanks,
--- Dexuan
-
-
+Regards
+Wolfgang
 
 
