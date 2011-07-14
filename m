@@ -1,37 +1,34 @@
-Received: from moutng.kundenserver.de ([212.227.17.8])
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Borutta@schoeps.de>) id 1QhJKU-0001Cg-BP
+	(envelope-from <dexuan.cui@intel.com>) id 1QhJL3-0001FK-T4
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jul 2011 12:39:39 +0200
-Received: from ZEUS.schoeps.local (pd95ba764.dip0.t-ipconnect.de
-	[217.91.167.100])
-	by mrelayeu.kundenserver.de (node=mreu3) with ESMTP (Nemesis)
-	id 0MeYyR-1Qqt38269f-00QCiD; Thu, 14 Jul 2011 12:29:53 +0200
-Received: from ZEUS.schoeps.local ([fe80::71f0:3b18:ef63:ee9c]) by
-	ZEUS.schoeps.local ([fe80::71f0:3b18:ef63:ee9c%10]) with mapi;
-	Thu, 14 Jul 2011 12:29:51 +0200
-From: Christian Borutta <Borutta@schoeps.de>
-To: "openembedded-devel@lists.openembedded.org"
+	Thu, 14 Jul 2011 12:40:14 +0200
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga101.ch.intel.com with ESMTP; 14 Jul 2011 03:35:09 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.65,528,1304319600"; d="scan'208";a="27142895"
+Received: from pgsmsx602.gar.corp.intel.com ([10.221.43.81])
+	by azsmga001.ch.intel.com with ESMTP; 14 Jul 2011 03:35:08 -0700
+Received: from shsmsx602.ccr.corp.intel.com (10.239.4.104) by
+	pgsmsx602.gar.corp.intel.com (10.221.43.81) with Microsoft SMTP Server
+	(TLS) id 8.2.255.0; Thu, 14 Jul 2011 18:35:04 +0800
+Received: from shsmsx502.ccr.corp.intel.com ([10.239.4.96]) by
+	SHSMSX602.ccr.corp.intel.com ([10.239.4.104]) with mapi;
+	Thu, 14 Jul 2011 18:35:04 +0800
+From: "Cui, Dexuan" <dexuan.cui@intel.com>
+To: Koen Kooi <koen@openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 Jul 2011 12:29:47 +0200
-Thread-Topic: [oe] using i2c on a mx28evk
-Thread-Index: AcxBf85ZUx67ioa2RHyKvYN29/6/TwAkEKzQ
-Message-ID: <311EE95A63F86C4E960B402004EAD7E310AF74E175@ZEUS.schoeps.local>
-References: <311EE95A63F86C4E960B402004EAD7E310AF74E158@ZEUS.schoeps.local>
-	<201107131846.45901.schnitzeltony@gmx.de>
-	<201107131909.27208.schnitzeltony@gmx.de>
-In-Reply-To: <201107131909.27208.schnitzeltony@gmx.de>
-Accept-Language: en-US, de-DE
+Date: Thu, 14 Jul 2011 18:35:02 +0800
+Thread-Topic: Did the chromium recipe even build fine in OE?
+Thread-Index: AcxCEbBRF2KGleTeRua/dweDWhAvlg==
+Message-ID: <1865303E0DED764181A9D882DEF65FB6A7FC150F62@shsmsx502.ccr.corp.intel.com>
+Accept-Language: zh-CN, en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-acceptlanguage: en-US, de-DE
+acceptlanguage: zh-CN, en-US
 MIME-Version: 1.0
-X-Provags-ID: V02:K0:aqVwD/sygm00Uulz0r32YKbdPJCd+x7Fat043vi9C7V
-	21ulhhK8MzPn77bASIpcMIWKHEGHOXH5Jf1TooGpHzu+zw7zeV
-	6QYO696nx3sslHTxDj34YQqIs42KbD+e+9L6ElvIM0uFVBBD8b
-	B4+xrxXRff2m3ic9deV8W+2CH6bB+q2qFrNsYceDWdWFZeMY3O
-	VOfk61alHq29IiaqnAYIw==
-Subject: Re: using i2c on a mx28evk
+Subject: Did the chromium recipe even build fine in OE?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,48 +42,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jul 2011 10:39:39 -0000
-Content-Language: de-DE
+X-List-Received-Date: Thu, 14 Jul 2011 10:40:14 -0000
+Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
+Hi all, I'm trying to port the chromium recipe from OE to Poky.  After some=
+ investigation, I doubt it could ever build in OE?
+
+1) The last update to the recipe happened in Apr, 2010 -- 15 months ago. Si=
+nce that, the locations of some repos have changed, e.g., in custom_cached_=
+svn, the locations of native_client, JavaScriptCore, WebCore and WebKit/chr=
+omium have changed; looks pywebsocket and patched-ffmpeg-mt have been dropp=
+ed from the repos. So I updated and commented them accordingly to make do_f=
+etch and do_fetch_post pass.
+BTW: the size of the whole source codes is really big -- more than 3G bytes=
+!
+
+2) The file include.gypi is for ARM only, so I belive the recipe was only t=
+ested for ARM target, if there was any test?
+So I moved the file into the same directory where gypi.patch is in and upda=
+td include.gypi by changing 'target_arch' to 'ia32' and replacing 'armv7' a=
+nd 'arm' to 'ia32'.
+
+With my changes, do_configure can pass, but do_compile fails (A sligher lon=
+ger long is at http://pastebin.com/8w9LJTsa) :
+| /bin/sh: /bin/i586-poky-linux-ar: No such file or directory
+| make: *** [out/Release/obj.target/v8/tools/gyp/libv8_nosnapshot.a] Error =
+127
+
+The 'sysroot' include.gyp is empty. This might be the cause?=20
+
+I'm trying to look into this.=20
+Please comment.
+Any suggestion is appreciated!
+
+Thanks,
+-- Dexuan
 
 
-On Wednesday, July 13, 2011 06:46:45 PM Andreas Mueller wrote:
-> I checked the recipe i2c: In the file I2c.init this recipe wants to
-> modprobe i2c- pxa. Without having further background on this recipe it
-> seems that it is not meant for any board but pxa based ( can anybody
-> confirm ? )
-> Additional this packet wants to modprobe i2c-dev. This is not the oe-deve=
-l-
-> packet but a wrapper kernel-module for creating a device node in /dev. I
-> will later modify the kernel configuration so that i2c-dev is created and
-> see which modules are created...
->In file i2c-api.c you can find
->
->*   @file   i2c-api.c
->*
->*   @brief  This file contains the implementation for performing I2C opera=
-tions
->*           on the gumstix.
-
->that does not look generic...
-
->Anyway: I will create a patch so that the package kernel-module-i2c-dev is=
-=20
->created.
-
-I've tried your patch, but it didn't help. Maybe we need to set CONFIG_I2C_=
-GPIO in the kernel configuration?
-
->A bit off-topic: Would you like to test the oe-core version with the meta =
-layer=20
->found in https://gitorious.org/schnitzeltony-oe-meta/meta-freescale ?
-
-I would like to test your oe-core version with meta layer but I'm not shure=
- how to do that.
-
-
-Christian
 
 
