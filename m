@@ -1,33 +1,24 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QhO57-0008CG-9R for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jul 2011 17:44:05 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QhO1E-0000Rd-J9 for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jul 2011 17:40:04 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jul 2011 17:40:04 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jul 2011 17:40:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1QhOHL-0008PM-0J
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Jul 2011 17:56:43 +0200
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 14 Jul 2011 08:51:33 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.65,529,1304319600"; d="scan'208";a="27239895"
+Received: from unknown (HELO helios.localnet) ([10.255.17.207])
+	by azsmga001.ch.intel.com with ESMTP; 14 Jul 2011 08:51:32 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 14 Jul 2011 17:39:20 +0200
-Message-ID: <ivn2j8$68o$2@dough.gmane.org>
+Date: Thu, 14 Jul 2011 16:51:31 +0100
+User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic-pae; KDE/4.6.2; i686; ; )
 References: <cover.1310656986.git.paul.eggleton@linux.intel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
-In-Reply-To: <cover.1310656986.git.paul.eggleton@linux.intel.com>
-X-Enigmail-Version: 1.2
+	<ivn2j8$68o$2@dough.gmane.org>
+In-Reply-To: <ivn2j8$68o$2@dough.gmane.org>
+MIME-Version: 1.0
+Message-Id: <201107141651.31497.paul.eggleton@linux.intel.com>
+Cc: Koen Kooi <koen@dominion.thruhere.net>
 Subject: Re: [meta-oe] [PATCH 0/3] minor cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,37 +33,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jul 2011 15:44:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Jul 2011 15:56:43 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thursday 14 July 2011 16:39:20 Koen Kooi wrote:
+> These 2 don't apply anymore after the cleanup I did today, could you
+> please rebase them?
 
-Op 14-07-11 17:25, Paul Eggleton schreef:
-> Tidy up a few things in meta-openembedded.
-> 
-> The following changes since commit
-> 7a8b1010e850b0338f05eacf181e78462355eac6:
-> 
-> icon-naming-utils: Inherit perlnative (2011-07-13 09:01:16 +0200)
-> 
-> are available in the git repository at: 
-> git://git.openembedded.org/meta-openembedded-contrib paule/cleanup 
-> http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/cleanup
->
->  Paul Eggleton (3): Drop PRIORITY variable pango: remove inherit of
-> flow-lossage.bbclass
+Done, re-pushed the paule/cleanup contrib branch (only the PRIORITY removal 
+patch remains).
 
-These 2 don't apply anymore after the cleanup I did today, could you
-please rebase them?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Cheers,
+Paul
 
-iD8DBQFOHw2oMkyGM64RGpERAp8AAKC8LQJUbhHkKH4nRB/YVe86TacojQCgtBs8
-pEaN1xqrZI4ILCMGpxtlhfE=
-=RXrT
------END PGP SIGNATURE-----
+-- 
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
