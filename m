@@ -1,27 +1,27 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <agnel.joel@gmail.com>) id 1QhTxJ-0006sF-JG
+	(envelope-from <agnel.joel@gmail.com>) id 1QhU7T-00074F-VR
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jul 2011 00:00:27 +0200
-Received: by gyd12 with SMTP id 12so326745gyd.6
+	Fri, 15 Jul 2011 00:10:56 +0200
+Received: by ywa12 with SMTP id 12so328781ywa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jul 2011 14:56:25 -0700 (PDT)
+	Thu, 14 Jul 2011 15:06:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
 	bh=G4hoTurD4t+hDDd/Oq3j16zLA5Kk9Jn6/By5YBbfjm4=;
-	b=Vphb7Vs7j75JbKbW2d0o1TujdqrHE+qwSgPcqJzwYrXSeG1sxOXeyGq2y+jaOoB4o/
-	wzkhIPoqktaDJ0QY1w+zuzw2k1FkRMBoe5ytOayMNU1pwlxnzoQAVT72uH6D1edDqvqQ
-	CJjlh/Hw0rzaKh95Hr/ULzxiD68G+BMeoB0g8=
-Received: by 10.101.131.36 with SMTP id i36mr2679979ann.103.1310680585155;
-	Thu, 14 Jul 2011 14:56:25 -0700 (PDT)
+	b=lzrjvH1UDoEIKZ6tmy3rrpVEeMaPBHjYMx41TaAyIRqY9nZ9+IhX+hEb5eCpaCILcH
+	87ocymlbc+DoLKj611ft1Mqfn78gxFPBRVxV9r1+A5szpviYZob05mmS15bjsJAWf0OC
+	y5Y90phWH679xwODWQ+IWz/V48+1ElDI2RhWs=
+Received: by 10.90.37.5 with SMTP id k5mr2874491agk.168.1310681214779;
+	Thu, 14 Jul 2011 15:06:54 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id v9sm640922anv.30.2011.07.14.14.56.23
+	by mx.google.com with ESMTPS id q19sm606806ank.47.2011.07.14.15.06.53
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 14 Jul 2011 14:56:24 -0700 (PDT)
+	Thu, 14 Jul 2011 15:06:53 -0700 (PDT)
 From: Joel A Fernandes <agnel.joel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Jul 2011 16:52:33 -0500
-Message-Id: <1310680353-1980-1-git-send-email-agnel.joel@gmail.com>
+Date: Thu, 14 Jul 2011 17:03:01 -0500
+Message-Id: <1310680981-2394-1-git-send-email-agnel.joel@gmail.com>
 X-Mailer: git-send-email 1.7.0.4
 Cc: s-kipisz2@ti.com, joelagnel@ti.com, Joel A Fernandes <agnel.joel@gmail.com>,
 	jdk@ti.com, k-kooi@ti.com
@@ -39,7 +39,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jul 2011 22:00:27 -0000
+X-List-Received-Date: Thu, 14 Jul 2011 22:10:56 -0000
 
 This fixes MMC errors due to timeouts, and is borrowed from linux-omap-2.6.39 recipe (as noticed by Jason Kridner)
 
