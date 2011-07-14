@@ -1,31 +1,31 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <agnel.joel@gmail.com>) id 1QhTvF-0006Pq-Ty
+	(envelope-from <agnel.joel@gmail.com>) id 1QhTxJ-0006sF-JG
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jul 2011 23:58:18 +0200
-Received: by yib18 with SMTP id 18so327918yib.6
+	Fri, 15 Jul 2011 00:00:27 +0200
+Received: by gyd12 with SMTP id 12so326745gyd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jul 2011 14:54:17 -0700 (PDT)
+	Thu, 14 Jul 2011 14:56:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=Yr99x/+hxBZNXQkPREe3F1hRj7VyGj/ey5M4wZ6/NWE=;
-	b=gmAp0XRQRckGeVqtP0Fp/p0MZxb8TE2q1mPRFnTMLl8U8flT3UfxAycowOyy/jMerV
-	fQeHOYqi8BKb0qKj17BvL+rQ4NqrnZ8+qR1n1mvsM+LENq/w7rhxv9ci1W6dnJ4L5U2z
-	tlO/rSLZzzAW7ST93Uq7cl6XRwqIFRnrlx1qM=
-Received: by 10.150.208.15 with SMTP id f15mr2990841ybg.422.1310680457475;
-	Thu, 14 Jul 2011 14:54:17 -0700 (PDT)
+	bh=G4hoTurD4t+hDDd/Oq3j16zLA5Kk9Jn6/By5YBbfjm4=;
+	b=Vphb7Vs7j75JbKbW2d0o1TujdqrHE+qwSgPcqJzwYrXSeG1sxOXeyGq2y+jaOoB4o/
+	wzkhIPoqktaDJ0QY1w+zuzw2k1FkRMBoe5ytOayMNU1pwlxnzoQAVT72uH6D1edDqvqQ
+	CJjlh/Hw0rzaKh95Hr/ULzxiD68G+BMeoB0g8=
+Received: by 10.101.131.36 with SMTP id i36mr2679979ann.103.1310680585155;
+	Thu, 14 Jul 2011 14:56:25 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id k21sm87971ybd.6.2011.07.14.14.54.15
+	by mx.google.com with ESMTPS id v9sm640922anv.30.2011.07.14.14.56.23
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 14 Jul 2011 14:54:16 -0700 (PDT)
+	Thu, 14 Jul 2011 14:56:24 -0700 (PDT)
 From: Joel A Fernandes <agnel.joel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Jul 2011 16:50:24 -0500
-Message-Id: <1310680224-1872-1-git-send-email-agnel.joel@gmail.com>
+Date: Thu, 14 Jul 2011 16:52:33 -0500
+Message-Id: <1310680353-1980-1-git-send-email-agnel.joel@gmail.com>
 X-Mailer: git-send-email 1.7.0.4
 Cc: s-kipisz2@ti.com, joelagnel@ti.com, Joel A Fernandes <agnel.joel@gmail.com>,
 	jdk@ti.com, k-kooi@ti.com
-Subject: [PATCH] linux-omap-psp: Added patch by Steve Sakoman to fix timeout errors
+Subject: [PATCHi v2] linux-omap-psp: Added patch by Steve Sakoman to fix timeout errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,12 +39,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jul 2011 21:58:18 -0000
+X-List-Received-Date: Thu, 14 Jul 2011 22:00:27 -0000
 
-This fixes MMC errors due to timeouts, out was noticed by Jason Kridner in in the linux-omap-2.6.39 recipe
+This fixes MMC errors due to timeouts, and is borrowed from linux-omap-2.6.39 recipe (as noticed by Jason Kridner)
 
 Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
 ---
+Changes since earlier patch:
+ * Fixed commit summary
+
 Some useful links shared by Jason:
 http://www.mail-archive.com/linux-omap@vger.kernel.org/msg42214.html
 http://cgit.openembedded.net/cgit.cgi/openembedded/tree/recipes/linux/linux-omap-2.6.39/sakoman/0024-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patchRelevant links:
