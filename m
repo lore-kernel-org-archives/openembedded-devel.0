@@ -1,30 +1,31 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QhRr4-00041k-Df
+	(envelope-from <agnel.joel@gmail.com>) id 1QhTvF-0006Pq-Ty
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jul 2011 21:45:51 +0200
-Received: by pvf24 with SMTP id 24so528555pvf.6
+	Thu, 14 Jul 2011 23:58:18 +0200
+Received: by yib18 with SMTP id 18so327918yib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jul 2011 12:41:49 -0700 (PDT)
+	Thu, 14 Jul 2011 14:54:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=INq0qmGWQAmTK8IyN2+AudOZM0MXzrPgIFOzxm72t7A=;
-	b=GYqvQEc3jdMMLVAWp5luEQztoKFOW8Sx1LW3ZffBWbOK+i+tQ/psLIipsB3FRuuL1c
-	Sccn3w2i9QR2M8tzGPya8fcq7+Jt+/ehRT/G0fBeIm2UAa/5QNr7d2n8BCpXBxy8vYB6
-	i05il1li0cP0d2VnV3AWSi/VeAEfbj7PESRss=
-Received: by 10.68.14.98 with SMTP id o2mr3519254pbc.10.1310672509102; Thu, 14
-	Jul 2011 12:41:49 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.68.62.36 with HTTP; Thu, 14 Jul 2011 12:41:18 -0700 (PDT)
-In-Reply-To: <ivnfns$uho$1@dough.gmane.org>
-References: <1310626478-31452-1-git-send-email-raj.khem@gmail.com>
-	<ivnfns$uho$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 14 Jul 2011 12:41:18 -0700
-Message-ID: <CAMKF1spTH+AQK5V52QJ0WpUFqrXXNgcKq6N6A=ci0qbfzNWoDA@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=Yr99x/+hxBZNXQkPREe3F1hRj7VyGj/ey5M4wZ6/NWE=;
+	b=gmAp0XRQRckGeVqtP0Fp/p0MZxb8TE2q1mPRFnTMLl8U8flT3UfxAycowOyy/jMerV
+	fQeHOYqi8BKb0qKj17BvL+rQ4NqrnZ8+qR1n1mvsM+LENq/w7rhxv9ci1W6dnJ4L5U2z
+	tlO/rSLZzzAW7ST93Uq7cl6XRwqIFRnrlx1qM=
+Received: by 10.150.208.15 with SMTP id f15mr2990841ybg.422.1310680457475;
+	Thu, 14 Jul 2011 14:54:17 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id k21sm87971ybd.6.2011.07.14.14.54.15
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 14 Jul 2011 14:54:16 -0700 (PDT)
+From: Joel A Fernandes <agnel.joel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] classes/testlab: Enhance to dump license information
+Date: Thu, 14 Jul 2011 16:50:24 -0500
+Message-Id: <1310680224-1872-1-git-send-email-agnel.joel@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: s-kipisz2@ti.com, joelagnel@ti.com, Joel A Fernandes <agnel.joel@gmail.com>,
+	jdk@ti.com, k-kooi@ti.com
+Subject: [PATCH] linux-omap-psp: Added patch by Steve Sakoman to fix timeout errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,143 +39,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jul 2011 19:45:51 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 14 Jul 2011 21:58:18 -0000
 
-On Thu, Jul 14, 2011 at 12:23 PM, Koen Kooi <koen@dominion.thruhere.net> wr=
-ote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 14-07-11 08:54, Khem Raj schreef:
->> It will now additionally create a new file which will contain list of li=
-censes of installed packages in a given image.
->>
->> The fix to get the package name is there because the packages which cont=
-ains epoch PE in the version string were not being constructed correctly si=
-nce opkg-cl would dump 'epoch:version' for Version string but the real ipk =
-did not have 'epoch' in its name. e.g.
->>
->> for armv5te/libopkg0_0.1.8+svnr609-r2_armv5te.ipk
->>
->> Package: libopkg0 Version: 1:0.1.8+svnr609-r2
->>
->> as you can see version contained in ipk is not containing the 'epoch'
->>
->> so we have to eliminate 'epoch' from version we get from opkg-cl to for =
-the installed ipk name correctly.
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com> --- meta-oe/classes/testlab=
-.bbclass | =C2=A0 =C2=A08 +++++++- 1 files changed, 7 insertions(+), 1 dele=
-tions(-)
->>
->> diff --git a/meta-oe/classes/testlab.bbclass b/meta-oe/classes/testlab.b=
-bclass index cd59782..fd37242 100644 --- a/meta-oe/classes/testlab.bbclass =
-+++ b/meta-oe/classes/testlab.bbclass @@ -36,7 +36,10 @@ if [ -e =C2=A0${IM=
-AGE_ROOTFS}/etc/opkg ] && [ "${ONLINE_PACKAGE_MANAGEMENT}" =3D "full" echo =
--e
->> "digraph depends {\n =C2=A0 =C2=A0node [shape=3Dplaintext]" > ${TESTLAB_=
-DIR}/depends.dot
->>
->> for pkg in $(opkg-cl ${IPKG_ARGS} list_installed | awk '{print $1}') ; d=
-o - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 opkg-cl ${IPKG_ARGS} info $pkg | gre=
-p -B 7 -A 7 "^Status.* \(\(installed\)\|\(unpacked\)\)" | awk '/^Package/ {=
-printf $2"_"} /^Version/ {printf $2"_"} /^Archi/ {print $2".ipk"}' =C2=A0>>=
- ${TESTLAB_DIR}/installed-packages.txt
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 name=3D`opkg-cl ${IPKG_ARGS}=
- info $pkg | grep -B 7 -A 7 "^Status.* \(\(installed\)\|\(unpacked\)\)" | a=
-wk '/^Package/ {printf $2"_"}'` + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0name=3D=
-$name`opkg-cl ${IPKG_ARGS} info $pkg | grep -B 7 -A 7 "^Status.* \(\(instal=
-led\)\|\(unpacked\)\)" | awk -F: '/^Version/ {printf $NF"_"}' | sed
->> 's/^\s*//g'` + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0na=
-me=3D$name`opkg-cl ${IPKG_ARGS} info $pkg | grep -B 7 -A 7 "^Status.* \(\(i=
-nstalled\)\|\(unpacked\)\)" | awk '/^Archi/ {print $2".ipk"}'` + =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 echo $name >>${TESTLAB_DIR}/installed-packa=
-ges.txt
->>
->> for depends in $(opkg-cl ${IPKG_ARGS} info $pkg | grep ^Depends) ; do ec=
-ho "$pkg OPP $depends;" | grep -v "(" | grep -v ")" | grep -v "$pkg OPP Dep=
-ends" | sed -e 's:,::g' -e 's:-:_:g' -e 's:\.:_:g' -e 's:+::g' |sed 's:OPP:=
-->:g' >> ${TESTLAB_DIR}/depends.dot @@ -65,6 +68,9 @@ if [ -e
->> ${IMAGE_ROOTFS}/etc/opkg ] && [ "${ONLINE_PACKAGE_MANAGEMENT}" =3D "full=
-" du -k $(find ${DEPLOY_DIR_IPK} -name "$file") | head -n1 done | grep "\.i=
-pk" | sed -e s:${DEPLOY_DIR_IPK}::g | sort -n -r | awk '{print $1 "\tKiB " =
-$2}' > ${TESTLAB_DIR}/installed-package-sizes.txt
->>
->> + =C2=A0 =C2=A0 for file in $(cat ${TESTLAB_DIR}/installed-packages.txt)=
- ; do + =C2=A0 =C2=A0 =C2=A0 =C2=A0 echo "`find ${DEPLOY_DIR_IPK} -name "$f=
-ile" | xargs opkg-list-fields | grep ^License | sed -e 's/^.*:[ \t]*//g'`" =
-'=3D' $file + =C2=A0 done | awk -F=3D '{printf("%50s:%s\n", $1, $2)}' > ${T=
-ESTLAB_DIR}/installed-package-licenses.txt # Log
->> results to a git controlled directory structure than can be pushed to a =
-remote location if [ "${TESTLABLOG}" =3D "remote" ] && [ -n "${TESTLABREMOT=
-EDIR}" ] ; then TESTLABLOGDIR=3D"${MACHINE_ARCH}/${TCLIBC}/${IMAGE_BASENAME=
-}"
->
-> I like the idea, but I'm not fond of the formatting:
->
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0MIT : angstrom-feed-configs_1.0-r15_qemuarm.ipk
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0MIT : angstrom-task-boot_1.0-r1_qemuarm.ipk
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0MIT : angstrom-version_v2011.07-core-r9_qemuarm.ipk
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 GPLv2+ & LGPLv2.1+ : avahi-daemon_0.6.30-r4=
-_armv5te.ipk
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 GPLv2+ & LGPLv2.1+ : avahi-systemd_0.6.30-r=
-4_armv5te.ipk
->
-> [..]
->
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 GPLv2 & LGPLv2 & BSD & MIT : libext2fs2_1.41.14-r1_armv5te.ipk
-> GCC RUNTIME LIBRARY EXCEPTION & GPLv2 & GPLv3 & LGPLv2.1 & LGPLv3 : libgc=
-c1_4.5-r39.1+svnr175127_armv5te.ipk
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 GPLv2+ & LGPLv2.1+ : libgcrypt11_1.4.6-r0_a=
-rmv5te.ipk
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 LGPLv2+ & BSD & PD : libglib-2.0-0_2.28.8-r=
-2_armv5te.ipk
->
-> As you can see it breaks with stupidly long licenses like gcc.
+This fixes MMC errors due to timeouts, out was noticed by Jason Kridner in in the linux-omap-2.6.39 recipe
 
-yes. I tried several formats the license strings can go as long as 100
-columns so I decided to use something average
-I also thought of reversing the columns but ipk names can be
-horrendously long as well.
+Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
+---
+Some useful links shared by Jason:
+http://www.mail-archive.com/linux-omap@vger.kernel.org/msg42214.html
+http://cgit.openembedded.net/cgit.cgi/openembedded/tree/recipes/linux/linux-omap-2.6.39/sakoman/0024-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patchRelevant links:
 
-I'm wondering if we shouldn't just add an extra column in install*packages*=
-.
+The link to the patch in org.openembedded.dev:
+http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/linux-omap-2.6.39/sakoman/0024-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch?h=org.openembedded.dev
 
-I am not averse to do that but it might be better telling if license
-infos are in a file of its own. plus if we have to run
-supposedly newer pass of some other feature then we wont be able to
-use installed_packages.txt with our processing.
+ ...mc-Adjust-dto-to-eliminate-timeout-errors.patch |   22 ++++++++++++++++++++
+ recipes/linux/linux-omap_2.6.32.bb                 |    1 +
+ 2 files changed, 23 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/linux/linux-omap-2.6.32/0010-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch
 
->
-> regards,
->
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFOH0I8MkyGM64RGpERAkT+AJ4h2TQz0kfhB8Gr90S+zyFl66vruACgn/9K
-> s1qBVPCzyTzj6+tJpbDylyc=3D
-> =3DE1O3
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/recipes/linux/linux-omap-2.6.32/0010-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch b/recipes/linux/linux-omap-2.6.32/0010-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch
+new file mode 100644
+index 0000000..ae5a7aa
+--- /dev/null
++++ b/recipes/linux/linux-omap-2.6.32/0010-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch
+@@ -0,0 +1,22 @@
++From 26a79f408bd41ad7b4a47f2683909d3fc1575eab Mon Sep 17 00:00:00 2001
++From: Steve Sakoman <steve@sakoman.com>
++Date: Wed, 12 Jan 2011 05:54:55 -0800
++Subject: [PATCH 24/31] omap: mmc: Adjust dto to eliminate timeout errors
++
++A number of SD card types were experiencing timeout errors.  This
++could also lead to data corruption in some cases.
++
++This fix proposed by Sukumar Ghoral of TI.
++---
++diff --git a/drivers/mmc/host/omap_hsmmc.c b/drivers/mmc/host/omap_hsmmc.c
++index 9646a75..ef458d6 100644
++--- a/drivers/mmc/host/omap_hsmmc.c
+++++ b/drivers/mmc/host/omap_hsmmc.c
++@@ -1032,6 +1032,7 @@ static void set_data_timeout(struct omap_hsmmc_host *host,
++ 	cycle_ns = 1000000000 / (clk_get_rate(host->fclk) / clkd);
++ 	timeout = timeout_ns / cycle_ns;
++ 	timeout += timeout_clks;
+++	timeout *= 2;
++ 	if (timeout) {
++ 		while ((timeout & 0x80000000) == 0) {
++ 			dto += 1;
+diff --git a/recipes/linux/linux-omap_2.6.32.bb b/recipes/linux/linux-omap_2.6.32.bb
+index 348ec96..404387f 100644
+--- a/recipes/linux/linux-omap_2.6.32.bb
++++ b/recipes/linux/linux-omap_2.6.32.bb
+@@ -33,6 +33,7 @@ file://0005-ARM-OMAP-add-support-for-TCT-Zippy-to-Beagle-board.patch \
+ file://0006-ARM-OMAP-Make-beagle-u-boot-partition-writable.patch \
+ file://0007-ASoC-enable-audio-capture-by-default-for-twl4030.patch \
+ file://0009-MTD-NAND-omap2-proper-fix-for-subpage-read-ECC-error.patch \
++file://0010-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch \
+ file://madc/0009-drivers-mfd-add-twl4030-madc-driver.patch \
+ file://madc/0010-ARM-OMAP-Add-twl4030-madc-support-to-Overo.patch \
+ file://madc/0011-ARM-OMAP-Add-twl4030-madc-support-to-Beagle.patch \
+-- 
+1.7.0.4
+
 
 
