@@ -1,24 +1,28 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QhUJq-0007IA-Qy for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jul 2011 00:23:42 +0200
-Received: from f053033096.adsl.alicedsl.de ([78.53.33.96]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QhUGb-0007aW-El; Thu, 14 Jul 2011 22:20:21 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1QhUNv-0007Qy-E7
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Jul 2011 00:27:55 +0200
+Received: (qmail invoked by alias); 14 Jul 2011 22:23:55 -0000
+Received: from p4FDF0026.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.223.0.38]
+	by mail.gmx.net (mp060) with SMTP; 15 Jul 2011 00:23:55 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/1XgcJ1i71bv1p3A/BpVFnQnH2eP1lyRbZkAb7nB
+	otAfN9aCNExN88
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1310680981-2394-1-git-send-email-agnel.joel@gmail.com>
-References: <1310680981-2394-1-git-send-email-agnel.joel@gmail.com>
-Date: Fri, 15 Jul 2011 00:19:42 +0200
-Message-ID: <1310681982.20700.9.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Cc: s-kipisz2@ti.com, joelagnel@ti.com, Joel A Fernandes <agnel.joel@gmail.com>,
-	jdk@ti.com, k-kooi@ti.com
-Subject: Re: [PATCHi v2] linux-omap-psp: Added patch by Steve Sakoman to fix timeout errors
+Date: Fri, 15 Jul 2011 00:25:55 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.35.13-92.fc14.x86_64; KDE/4.6.3; x86_64; ;
+	)
+References: <311EE95A63F86C4E960B402004EAD7E310AF74E158@ZEUS.schoeps.local>
+	<201107131909.27208.schnitzeltony@gmx.de>
+	<311EE95A63F86C4E960B402004EAD7E310AF74E175@ZEUS.schoeps.local>
+In-Reply-To: <311EE95A63F86C4E960B402004EAD7E310AF74E175@ZEUS.schoeps.local>
+MIME-Version: 1.0
+Message-Id: <201107150025.56255.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: using i2c on a mx28evk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,125 +36,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jul 2011 22:23:42 -0000
-X-Groupsio-MsgNum: 33162
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-bdlyH28nYojztZmwoaS6"
+X-List-Received-Date: Thu, 14 Jul 2011 22:27:55 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
---=-bdlyH28nYojztZmwoaS6
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Thursday, July 14, 2011 12:29:47 PM Christian Borutta wrote:
+> On Wednesday, July 13, 2011 06:46:45 PM Andreas Mueller wrote:
+> > I checked the recipe i2c: In the file I2c.init this recipe wants to
+> > modprobe i2c- pxa. Without having further background on this recipe it
+> > seems that it is not meant for any board but pxa based ( can anybody
+> > confirm ? )
+> > Additional this packet wants to modprobe i2c-dev. This is not the
+> > oe-devel- packet but a wrapper kernel-module for creating a device node
+> > in /dev. I will later modify the kernel configuration so that i2c-dev is
+> > created and see which modules are created...
+> >
+> >In file i2c-api.c you can find
+> >
+> >*   @file   i2c-api.c
+> >*
+> >*   @brief  This file contains the implementation for performing I2C
+> >operations *           on the gumstix.
+> >
+> >that does not look generic...
+> >
+> >Anyway: I will create a patch so that the package kernel-module-i2c-dev is
+> >created.
+> 
+> I've tried your patch, but it didn't help. Maybe we need to set
+> CONFIG_I2C_GPIO in the kernel configuration?
+Did you install  kernel-module-i2c-dev? Do you have an i2c dev node then? How 
+about removing i2c-pxa form the i2c init script?
+> 
+> >A bit off-topic: Would you like to test the oe-core version with the meta
+> >layer found in https://gitorious.org/schnitzeltony-oe-meta/meta-freescale
+> >?
+> 
+> I would like to test your oe-core version with meta layer but I'm not shure
+> how to do that.
+Something like http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-
+angstrom/tree/README and http://sakrah.homelinux.org/blog/2011/03/using-
+openembedded-core-to-build-angstrom-for-qemu/
 
-Dear Joel,
+o    git clone git://git.angstrom-distribution.org/setup-scripts
+o    cd setup-scripts
+o    git checkout origin/oe-core -b oe-core
+o    add in sources/layers a line with
+         openembedded-core,git://gitorious.org/schnitzeltony-oe-meta/meta-
+freescale.git,master,HEAD
+o    ./oebb.sh config mx28evk
+o    ./oebb.sh update
+o    check if the settings in conf/*.conf meat your directory preferences
+o    check if you find ${TOPDIR}/sources/meta-openembedded/meta-xfce \ in 
+bblayers.conf
+o    bitbake console-image
 
+Hope it helps
 
-Am Donnerstag, den 14.07.2011, 17:03 -0500 schrieb Joel A Fernandes:
-
-in my opinion the commit summary should be the following.
-
-Add patch to fix MMC errors due to timeouts
-
-The name of the author can go into the commit message.
-
-> This fixes MMC errors due to timeouts, and is borrowed from linux-omap-2.=
-6.39 recipe (as noticed by Jason Kridner)
-
-Did somebody actually experience this problem or this this precaution?
-If the forme could you please add a link to the problem report?
-
-> Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
-> ---
-> Changes since earlier patch:
->  * Fixed commit summary
->=20
-> Some useful links shared by Jason:
-> http://www.mail-archive.com/linux-omap@vger.kernel.org/msg42214.html
-> http://cgit.openembedded.net/cgit.cgi/openembedded/tree/recipes/linux/lin=
-ux-omap-2.6.39/sakoman/0024-omap-mmc-Adjust-dto-to-eliminate-timeout-errors=
-.patchRelevant links:
-
-At the end there is missing a line break.
-
-> The link to the patch in org.openembedded.dev:
-> http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/lin=
-ux-omap-2.6.39/sakoman/0024-omap-mmc-Adjust-dto-to-eliminate-timeout-errors=
-.patch?h=3Dorg.openembedded.dev
-
-I would like to see those information in the commit message.
-
->  ...mc-Adjust-dto-to-eliminate-timeout-errors.patch |   22 ++++++++++++++=
-++++++
->  recipes/linux/linux-omap_2.6.32.bb                 |    1 +
->  2 files changed, 23 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/linux/linux-omap-2.6.32/0010-omap-mmc-Adjust-=
-dto-to-eliminate-timeout-errors.patch
->=20
-> diff --git a/recipes/linux/linux-omap-2.6.32/0010-omap-mmc-Adjust-dto-to-=
-eliminate-timeout-errors.patch b/recipes/linux/linux-omap-2.6.32/0010-omap-=
-mmc-Adjust-dto-to-eliminate-timeout-errors.patch
-> new file mode 100644
-> index 0000000..ae5a7aa
-> --- /dev/null
-> +++ b/recipes/linux/linux-omap-2.6.32/0010-omap-mmc-Adjust-dto-to-elimina=
-te-timeout-errors.patch
-> @@ -0,0 +1,22 @@
-> +From 26a79f408bd41ad7b4a47f2683909d3fc1575eab Mon Sep 17 00:00:00 2001
-> +From: Steve Sakoman <steve@sakoman.com>
-> +Date: Wed, 12 Jan 2011 05:54:55 -0800
-> +Subject: [PATCH 24/31] omap: mmc: Adjust dto to eliminate timeout errors
-> +
-> +A number of SD card types were experiencing timeout errors.  This
-> +could also lead to data corruption in some cases.
-> +
-> +This fix proposed by Sukumar Ghoral of TI.
-> +---
-> +diff --git a/drivers/mmc/host/omap_hsmmc.c b/drivers/mmc/host/omap_hsmmc=
-.c
-> +index 9646a75..ef458d6 100644
-> +--- a/drivers/mmc/host/omap_hsmmc.c
-> ++++ b/drivers/mmc/host/omap_hsmmc.c
-> +@@ -1032,6 +1032,7 @@ static void set_data_timeout(struct omap_hsmmc_hos=
-t *host,
-> + 	cycle_ns =3D 1000000000 / (clk_get_rate(host->fclk) / clkd);
-> + 	timeout =3D timeout_ns / cycle_ns;
-> + 	timeout +=3D timeout_clks;
-> ++	timeout *=3D 2;
-> + 	if (timeout) {
-> + 		while ((timeout & 0x80000000) =3D=3D 0) {
-> + 			dto +=3D 1;
-> diff --git a/recipes/linux/linux-omap_2.6.32.bb b/recipes/linux/linux-oma=
-p_2.6.32.bb
-> index 348ec96..404387f 100644
-> --- a/recipes/linux/linux-omap_2.6.32.bb
-> +++ b/recipes/linux/linux-omap_2.6.32.bb
-> @@ -33,6 +33,7 @@ file://0005-ARM-OMAP-add-support-for-TCT-Zippy-to-Beagl=
-e-board.patch \
->  file://0006-ARM-OMAP-Make-beagle-u-boot-partition-writable.patch \
->  file://0007-ASoC-enable-audio-capture-by-default-for-twl4030.patch \
->  file://0009-MTD-NAND-omap2-proper-fix-for-subpage-read-ECC-error.patch \
-> +file://0010-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch \
->  file://madc/0009-drivers-mfd-add-twl4030-madc-driver.patch \
->  file://madc/0010-ARM-OMAP-Add-twl4030-madc-support-to-Overo.patch \
->  file://madc/0011-ARM-OMAP-Add-twl4030-madc-support-to-Beagle.patch \
-
-Otherwise this looks good.
+Andreas
 
 
-Thanks,
-
-Paul
-
---=-bdlyH28nYojztZmwoaS6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk4fa34ACgkQPX1aK2wOHVhTxQCffHLWCXAL8KvudNg2JuFGCaOr
-rEcAnRuDGo3oww03HFqMdOZk+Cu6Hkef
-=9WUO
------END PGP SIGNATURE-----
-
---=-bdlyH28nYojztZmwoaS6--
