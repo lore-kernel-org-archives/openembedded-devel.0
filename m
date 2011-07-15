@@ -1,31 +1,26 @@
-Received: from 75-148-42-21-colorado.hfc.comcastbusiness.net ([75.148.42.21]
-	helo=judge.camp.se-eng.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ray.danks@se-eng.com>) id 1Qhpwc-0005Iz-6G
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jul 2011 23:29:10 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by judge.camp.se-eng.com (Postfix) with ESMTP id 447D720C947D;
-	Fri, 15 Jul 2011 15:25:08 -0600 (MDT)
-X-Virus-Scanned: amavisd-new at camp.se-eng.com
-Received: from judge.camp.se-eng.com ([127.0.0.1])
-	by localhost (judge.camp.se-eng.com [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id ZdZ8ffTh5Y9O; Fri, 15 Jul 2011 15:25:02 -0600 (MDT)
-Received: from [172.20.202.150] (beast.camp.se-eng.com [172.20.202.150])
-	by judge.camp.se-eng.com (Postfix) with ESMTPSA id 1981E20C9473;
-	Fri, 15 Jul 2011 15:25:02 -0600 (MDT)
-Message-ID: <4E20B04D.6060504@se-eng.com>
-Date: Fri, 15 Jul 2011 15:25:33 -0600
-From: Raymond Danks <ray.danks@se-eng.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.17) Gecko/20110424 Lightning/1.0b2 Thunderbird/3.1.10
+Received: from mail-pz0-f44.google.com ([209.85.210.44])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <raj.khem@gmail.com>)
+	id 1QhqEH-0005X2-V0; Fri, 15 Jul 2011 23:47:26 +0200
+Received: by pzk5 with SMTP id 5so2645272pzk.3
+	for <multiple recipients>; Fri, 15 Jul 2011 14:43:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:cc:content-type;
+	bh=ekg3XEOrnFfx51xhkzgvy28RzxpBOPXFS83NVPKlTTM=;
+	b=CppZGA/HUSHu9e+U/zu6eiad0VcjAvR+ubBG3qEnbyQKARpHyyu6GBpG36Bjz8p8GW
+	iumdFNi1n1ek/ChscDY6yWtkIu3au/XqxN1iLZjYKE6qZ2a/EUjoViR+mXyLST4AWUJD
+	k0DVn2ctAX7qufw841uogfq/9wmgEFUIm0IHA=
+Received: by 10.68.14.98 with SMTP id o2mr5271298pbc.10.1310766204068; Fri, 15
+	Jul 2011 14:43:24 -0700 (PDT)
 MIME-Version: 1.0
-To: Paul Menzel <paulepanter@users.sourceforge.net>, 
-	openembedded-devel@lists.openembedded.org
-References: <4E20710B.6060906@se-eng.com> <1310755702.3995.17.camel@mattotaupa>
-In-Reply-To: <1310755702.3995.17.camel@mattotaupa>
-Cc: coreboot@coreboot.org
-Subject: Re: [PATCH 1/2] Add mkelfimage and support for generating kernel+initrd ELF payloads to OpenEmbedded
+Received: by 10.68.62.36 with HTTP; Fri, 15 Jul 2011 14:42:54 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 15 Jul 2011 14:42:54 -0700
+Message-ID: <CAMKF1spOJJP=qdDbYpcnArUR1rjvJznXXiB7KAqQNT5R7J8N_Q@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Cc: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Populating meta-oe with new patches on oe.dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,188 +34,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jul 2011 21:29:10 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 15 Jul 2011 21:47:26 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Thanks Paul.  I am putting together new patches to address your feedback=20
-on style guide, mailer line-feed, and patch format/commit policy.
+Hello
 
-As far as the build configuration this was tested on is concerned, this=20
-is Ubuntu 10.04 x86_64-linux targeting i686-oe-linux using a one-off of=20
-the i686-generic.conf machine targeting a 4MB flash part.
+As we all know that next release of OpenEmbedded is slated based on
+oe-core, I would like to request submitters and committers of
+the patches for oe.dev to port the patches to meta-oe or any other
+layer that is suitable for a given patch. Any new recipes
+being added to oe.dev should definitely go into the new layered structure
 
-Thanks again,
-Ray
+Please follow the commit guidelines for meta-oe/oe-core and submit the
+appropriate pull requests so that when we cut out the next release we
+don't miss any of those patches.
 
-On 07/15/2011 12:48 PM, Paul Menzel wrote:
-> Dear Raymond,
->
->
-> I am putting you in CC not knowing if you read the lists.
->
->
-> Am Freitag, den 15.07.2011, 10:55 -0600 schrieb Raymond Danks:
->
-> The correct commit summary is
->
-> 	mkelfimage: Add version c045b4cc from Git (initial recipe)
->
->> On x86, and ELF image file may be stored as a coreboot payload.  This
-> s/and/an/
->
->> image file may be a kernel or a kernel+initrd.
->>
->> Documentation on this has been started on the coreboot wiki:
->> http://www.coreboot.org/Mkelfimage
->>
->> We have seen success using the mkelfimage utility to construct a
->> kernel+initrd image using the micro-image OpenEmbedded image as an ini=
-trd.
->> http://www.se-eng.com/wiki/index.php/Open_Embedded_Setup
-> What is your build configuration for testing this recipe?
->
->> The first patch contains the meta files for the mkelfimage utility in
->> OpenEmbedded.
-> Please remove that line above. The commit message should be describing
-> the commit only.
->
-> Unfortunately we cannot commit your patch, especially because your
-> Signed-off-by line is missing =E2=80=93 you can add `-s` to the Git com=
-mands
-> `git commit` or `git format-patch` and your mailer mangled the patch by
-> automatic line breaks.
->
-> Please follow the commit policy [1] and it would be great if you could
-> send us a corrected patch [2].
->
->> ---
->>    recipes/mkelfimage/files/no-stack-protector.patch |   11 ++++++++++=
-+
->>    recipes/mkelfimage/mkelfimage-native_git.bb       |   11 ++++++++++=
-+
->>    recipes/mkelfimage/mkelfimage.inc                 |    3 +++
->>    recipes/mkelfimage/mkelfimage_git.bb              |   17 ++++++++++=
-+++++++
->>    4 files changed, 42 insertions(+), 0 deletions(-)
->>    create mode 100644 recipes/mkelfimage/files/no-stack-protector.patc=
-h
->>    create mode 100644 recipes/mkelfimage/mkelfimage-native_git.bb
->>    create mode 100644 recipes/mkelfimage/mkelfimage.inc
->>    create mode 100644 recipes/mkelfimage/mkelfimage_git.bb
->>
->> diff --git a/recipes/mkelfimage/files/no-stack-protector.patch
->> b/recipes/mkelfimage/files/no-stack-protector.patch
->> new file mode 100644
->> index 0000000..135de8d
->> --- /dev/null
->> +++ b/recipes/mkelfimage/files/no-stack-protector.patch
->> @@ -0,0 +1,11 @@
->> +--- mkelfImage/Makefile.orig    2011-06-17 15:20:46.816870941 -0600
->> ++++ mkelfImage/Makefile    2011-06-17 15:20:59.619382362 -0600
-> Please add a header describing this patch [3].
->
->> +@@ -14,7 +14,7 @@
->> + pkglibdir =3D $(libdir)/$(PACKAGE)
->> + pkgincludedir =3D $(includedir)/$(PACKAGE)
->> +
->> +-CPPFLAGS=3D-DVERSION=3D'"$(VERSION)"' -DRELEASE_DATE=3D'"$(RELEASE_D=
-ATE)"'
->> -I include
-> Here you can see an automatic line break.
->
->> ++CPPFLAGS=3D-fno-stack-protector -DVERSION=3D'"$(VERSION)"'
->> -DRELEASE_DATE=3D'"$(RELEASE_DATE)"' -I include $(CFLAGS) $(LDFLAGS)
->> + HOST_CPPFLAGS=3D$(CPPFLAGS)
->> + I386_CPPFLAGS=3D$(CPPFLAGS) -I arch/i386/include
->> + IA64_CPPFLAGS=3D$(CPPFLAGS) -I arch/ia64/include
-> Please send that patch separately to the coreboot list if it is useful
-> for upstream. You should be able to use Gerrit and you also need a
-> Signed-off-by line [4].
->
->> diff --git a/recipes/mkelfimage/mkelfimage-native_git.bb
->> b/recipes/mkelfimage/mkelfimage-native_git.bb
->> new file mode 100644
->> index 0000000..e2f251e
->> --- /dev/null
->> +++ b/recipes/mkelfimage/mkelfimage-native_git.bb
->> @@ -0,0 +1,11 @@
->> +require mkelfimage_${PV}.bb
->> +inherit native
->> +
->> +do_stage () {
-> Please follow the style guide [5], i. e., no space before `()`.
->
->> +    install -m 0755 objdir/sbin/mkelfImage ${STAGING_BINDIR}/
->> +}
-> `do_stage ()` is deprecated [6].
->
->> +
->> +do_install () {
->> +    :
->> +}
->> +
->> diff --git a/recipes/mkelfimage/mkelfimage.inc
->> b/recipes/mkelfimage/mkelfimage.inc
->> new file mode 100644
->> index 0000000..e06ed67
->> --- /dev/null
->> +++ b/recipes/mkelfimage/mkelfimage.inc
->> @@ -0,0 +1,3 @@
->> +LICENSE =3D "GPLv2"
->> +DESCRIPTION =3D "A utility to create ELF boot images from Linux kerne=
-l
->> images"
->> +SECTION =3D "console/utils"
-> Please order those as in the style guide and please also add the
-> `HOMEPAGE` variable.
->
->> diff --git a/recipes/mkelfimage/mkelfimage_git.bb
->> b/recipes/mkelfimage/mkelfimage_git.bb
->> new file mode 100644
->> index 0000000..7855f58
->> --- /dev/null
->> +++ b/recipes/mkelfimage/mkelfimage_git.bb
->> @@ -0,0 +1,17 @@
->> +require mkelfimage.inc
->> +
->> +SRCREV =3D "c045b4cc458a62dbb1dd99ae6a9343e52d1fe1e0"
->> +PV =3D "1.0.0+gitr${SRCPV}"
->> +PR =3D "r1"
-> We start with `r0`.
->
->> +
->> +S =3D "${WORKDIR}/git/util/mkelfImage"
->> +
->> +SRC_URI =3D
->> "git://review.coreboot.org/p/coreboot;protocol=3Dhttp;branch=3Dmaster =
-\
->> +       file://no-stack-protector.patch"
->> +
->> +DEFAULT_PREFERENCE =3D "1"
-> Not needed since this is the only recipe.
->
->> +
->> +inherit autotools
->> +
->> +SRC_URI[md5sum] =3D "719b22bdd34431203f9349250c67c5e3"
->> +SRC_URI[sha256sum] =3D
->> "9186e6e7302f38c1f77b763f0f14843fabc873ac7c81ede8ee094a47055668b5"
-> Is that needed? There is no archive as far as I know.
->
->
-> Thanks,
->
-> Paul
->
->
-> [1] http://openembedded.org/index.php/Commit_Policy
-> [2] http://openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmbe=
-dded
-> [3] http://openembedded.org/index.php/Commit_Patch_Message_Guidelines
-> [4] http://www.coreboot.org/Development_Guidelines
-> [5] http://openembedded.org/index.php/Styleguide
-> [6] http://openembedded.org/index.php/Legacy_staging
+Thanks for your cooperation and help
 
+-Khem
 
 
