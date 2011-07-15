@@ -1,30 +1,30 @@
 Received: from 75-148-42-21-colorado.hfc.comcastbusiness.net ([75.148.42.21]
 	helo=judge.camp.se-eng.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raymondd@se-eng.com>) id 1Qhrdn-0007cz-Kq
+	(envelope-from <raymondd@se-eng.com>) id 1Qhrdn-0007cy-Kq
 	for openembedded-devel@lists.openembedded.org;
 	Sat, 16 Jul 2011 01:17:52 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by judge.camp.se-eng.com (Postfix) with ESMTP id A3E0620C9488
+	by judge.camp.se-eng.com (Postfix) with ESMTP id 3D10620C9486
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jul 2011 17:04:24 -0600 (MDT)
+	Fri, 15 Jul 2011 17:04:25 -0600 (MDT)
 X-Virus-Scanned: amavisd-new at camp.se-eng.com
 Received: from judge.camp.se-eng.com ([127.0.0.1])
 	by localhost (judge.camp.se-eng.com [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with ESMTP id CVIKoX8zUn2B; Fri, 15 Jul 2011 17:04:23 -0600 (MDT)
+	with ESMTP id rAaav26lYyjf; Fri, 15 Jul 2011 17:04:24 -0600 (MDT)
 Received: from beast (beast.camp.se-eng.com [172.20.202.150])
-	by judge.camp.se-eng.com (Postfix) with ESMTP id 6F63C20C9473;
-	Fri, 15 Jul 2011 17:04:23 -0600 (MDT)
+	by judge.camp.se-eng.com (Postfix) with ESMTP id 9658420C947D;
+	Fri, 15 Jul 2011 17:04:24 -0600 (MDT)
 Received: by beast (Postfix, from userid 1000)
-	id D5DB12C959; Fri, 15 Jul 2011 17:04:54 -0600 (MDT)
+	id 1B6572C959; Fri, 15 Jul 2011 17:04:56 -0600 (MDT)
 From: Raymond Danks <ray.danks@se-eng.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Jul 2011 17:04:37 -0600
-Message-Id: <1310771078-18629-1-git-send-email-ray.danks@se-eng.com>
+Date: Fri, 15 Jul 2011 17:04:38 -0600
+Message-Id: <1310771078-18629-2-git-send-email-ray.danks@se-eng.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <4E20710B.6060906@se-eng.com>
 References: <4E20710B.6060906@se-eng.com>
-Subject: [PATCH 1/2 v2] mkelfimage: Add version c045b4cc from Git (initial recipe)
+Subject: [PATCH 2/2 v2] conf/bitbake.conf: Add support for generating kernel+initrd ELF coreboot payloads
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,71 +48,52 @@ http://www.coreboot.org/Mkelfimage
 We have seen success using the mkelfimage utility to construct a kernel+initrd image using the micro-image OpenEmbedded image as an initrd.
 http://www.se-eng.com/wiki/index.php/Open_Embedded_Setup
 
-Build tested using Ubuntu 10.04 x86_64-linux targeting i686-oe-linux using a one-off of the i686-generic.conf machine targeting a 4MB flash part.
+To use, set a new type "elf" to IMAGE_FSTYPES in conf/local.conf on x86 targets:
+IMAGE_FSTYPES = "cpio.gz elf"
+
+You may also override the kernel parameters that are embedded in the elf file:
+IMAGE_KERNELPARAMS = "ramdisk_size=32768 root=/dev/ram0 rw console="
+
+The image binary ${TMPDIR}/deploy/images/${MACHINE}/*.elf may be added to the coreboot configuration in Kconfig (CONFIG_PAYLOAD_FILE)
 
 Signed-off-by: Raymond Danks <ray.danks@se-eng.com>
 ---
 v2:
- * Updated meta files to adhere to StyleGuide
-   - No need for separate target and native .bb files anymore.
-   - Remove .inc
- * Document no-stack-protector.patch
  * Update commit summary and log.
+   - Include test and usage steps.
  * Add Signed-off-by
 
- recipes/mkelfimage/files/no-stack-protector.patch |   17 +++++++++++++++++
- recipes/mkelfimage/mkelfimage_git.bb              |   18 ++++++++++++++++++
- 2 files changed, 35 insertions(+), 0 deletions(-)
- create mode 100644 recipes/mkelfimage/files/no-stack-protector.patch
- create mode 100644 recipes/mkelfimage/mkelfimage_git.bb
+ conf/bitbake.conf |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/mkelfimage/files/no-stack-protector.patch b/recipes/mkelfimage/files/no-stack-protector.patch
-new file mode 100644
-index 0000000..f81bf16
---- /dev/null
-+++ b/recipes/mkelfimage/files/no-stack-protector.patch
-@@ -0,0 +1,17 @@
-+Gcc 4.1 comes with an SSP https://wiki.ubuntu.com/GccSsp
-+
-+This is disabled to work around '__stack_chk_fail' symbol not found failures in the mkelfimage build.
-+
-+http://www.coreboot.org/FAQ/Obsolete#How_do_I_fix_stack_chk_fail_errors.3F
-+
-+--- mkelfImage/Makefile.orig	2011-06-17 15:20:46.816870941 -0600
-++++ mkelfImage/Makefile	2011-06-17 15:20:59.619382362 -0600
-+@@ -14,7 +14,7 @@
-+ pkglibdir = $(libdir)/$(PACKAGE)
-+ pkgincludedir = $(includedir)/$(PACKAGE)
-+ 
-+-CPPFLAGS=-DVERSION='"$(VERSION)"' -DRELEASE_DATE='"$(RELEASE_DATE)"' -I include
-++CPPFLAGS=-fno-stack-protector -DVERSION='"$(VERSION)"' -DRELEASE_DATE='"$(RELEASE_DATE)"' -I include $(CFLAGS) $(LDFLAGS)
-+ HOST_CPPFLAGS=$(CPPFLAGS)
-+ I386_CPPFLAGS=$(CPPFLAGS) -I arch/i386/include
-+ IA64_CPPFLAGS=$(CPPFLAGS) -I arch/ia64/include
-diff --git a/recipes/mkelfimage/mkelfimage_git.bb b/recipes/mkelfimage/mkelfimage_git.bb
-new file mode 100644
-index 0000000..2184f81
---- /dev/null
-+++ b/recipes/mkelfimage/mkelfimage_git.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "A utility to create ELF boot images from Linux kernel images"
-+HOMEPAGE = "http://www.coreboot.org/Mkelfimage"
-+SECTION = "devel"
-+LICENSE = "GPLv2"
-+
-+SRCREV = "c045b4cc458a62dbb1dd99ae6a9343e52d1fe1e0"
-+PV = "1.0.0+gitr${SRCPV}"
-+PR = "r0"
-+
-+SRC_URI = "git://review.coreboot.org/p/coreboot;protocol=http;branch=master \
-+	   file://no-stack-protector.patch"
-+
-+S = "${WORKDIR}/git/util/mkelfImage"
-+
-+inherit autotools
-+
-+NATIVE_INSTALL_WORKS = "1"
-+BBCLASSEXTEND = "native"
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index 66dfaba..1ab72e1 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -375,6 +375,7 @@ IMAGE_BASENAME = "${PN}"
+ IMAGE_NAME = "${IMAGE_BASENAME}-${MACHINE}-${DATETIME}"
+ IMAGE_LINK_NAME = "${IMAGE_BASENAME}-${MACHINE}"
+ IMAGE_EXTRA_SPACE = 10240
++IMAGE_KERNELPARAMS = "ramdisk_size=32768 root=/dev/ram0 rw console="
+ 
+ UBI_VOLNAME ?= "${MACHINE}-rootfs"
+ 
+@@ -406,6 +407,7 @@ IMAGE_CMD_cpio.gz.u-boot = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find .
+ IMAGE_CMD_cpio.lzma = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | xz --format=lzma -c ${XZ_COMPRESSION_LEVEL} --check=${XZ_INTEGRITY_CHECK} >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma) ${EXTRA_IMAGECMD}"
+ IMAGE_CMD_ubi = "echo \[ubifs\] > ubinize.cfg ; echo mode=ubi >> ubinize.cfg ; echo image=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img >> ubinize.cfg ; echo vol_id=0 >> ubinize.cfg ; echo vol_type=dynamic >> ubinize.cfg ; echo vol_name=${UBI_VOLNAME} >> ubinize.cfg ; echo vol_flags=autoresize >> ubinize.cfg;mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img ${MKUBIFS_ARGS} && ubinize -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ${UBINIZE_ARGS} ubinize.cfg"
+ IMAGE_CMD_ubifs = "mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img ${MKUBIFS_ARGS}"
++IMAGE_CMD_elf = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | gzip -c -9 >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz) ; rm -f ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.elf ;  mkelfImage --append='${IMAGE_KERNELPARAMS}' --kernel=${STAGING_DIR}/${MACHINE}${HOST_VENDOR}-${HOST_OS}/kernel/bzImage --initrd=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz --output=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.elf ${EXTRA_IMAGECMD}"
+ 
+ EXTRA_IMAGECMD = ""
+ EXTRA_IMAGECMD_jffs2 = ""
+@@ -440,6 +442,7 @@ IMAGE_DEPENDS_squashfs = "squashfs-tools-native"
+ IMAGE_DEPENDS_squashfs-lzma = "squashfs-tools-native"
+ IMAGE_DEPENDS_ubi = "mtd-utils-native"
+ IMAGE_DEPENDS_ubifs = "mtd-utils-native"
++IMAGE_DEPENDS_elf = "virtual/kernel mkelfimage-native"
+ 
+ EXTRA_IMAGEDEPENDS = ""
+ 
 -- 
 1.7.0.4
 
