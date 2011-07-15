@@ -1,29 +1,34 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1QhUju-00083K-1i
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jul 2011 00:50:38 +0200
-Received: by pvf24 with SMTP id 24so654674pvf.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Qhcv6-0006ys-1z for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Jul 2011 09:34:44 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QhcrE-0006CX-8H for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Jul 2011 09:30:44 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Jul 2011 09:30:44 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jul 2011 15:46:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=T9JDGZODkm3vLkcTYVdRBUHggorrqVvw/gGldqAXZZg=;
-	b=hBGu0MMpTENCAmEvbRe/Ka4QsirQVkVL8hfKQ9iPxsyq5UOMsnQnTC182EDj/mWwMd
-	IOCuL6raGdwbnDlfa9D0Arc7KHGDkDeadCrARU2QdUOtIvQ6IzVV/lUUPr1KWtIuCCTY
-	4OK4a4IZzkGFJIdth9q3wPdUSCq1XB4fuxpik=
-MIME-Version: 1.0
-Received: by 10.142.226.15 with SMTP id y15mr1184512wfg.232.1310683596483;
-	Thu, 14 Jul 2011 15:46:36 -0700 (PDT)
-Received: by 10.142.239.3 with HTTP; Thu, 14 Jul 2011 15:46:36 -0700 (PDT)
-In-Reply-To: <E1QhN6O-00071x-W4@melo.openembedded.org>
-References: <E1QhN6O-00071x-W4@melo.openembedded.org>
-Date: Fri, 15 Jul 2011 00:46:36 +0200
-Message-ID: <CAAQYJAtNSxi_-e4iyN7h7Z7oW7-kfmnezOszN507Gz8OWq=6nA@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Fri, 15 Jul 2011 09:30:44 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] Andrea Adami : kernel.bbclass: remove unintended change of INITRAMFS_TASK
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 15 Jul 2011 09:30:30 +0200
+Message-ID: <ivoqam$nge$1@dough.gmane.org>
+References: <1310682924-2629-1-git-send-email-agnel.joel@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6;
+	rv:5.0) Gecko/20110624 Thunderbird/5.0
+In-Reply-To: <1310682924-2629-1-git-send-email-agnel.joel@gmail.com>
+X-Enigmail-Version: 1.2
+Subject: Re: [PATCH v3] linux-omap-psp: Added patch to fix MMC timeout errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,70 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jul 2011 22:50:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 15 Jul 2011 07:34:44 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jul 14, 2011 at 4:41 PM, git version control
-<git@git.openembedded.org> wrote:
-> Module: openembedded-core.git
-> Branch: master
-> Commit: df31400ef89c14b45860feb906d4355d5f7de0c7
-> URL: =A0 =A0http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dco=
-mmit;h=3Ddf31400ef89c14b45860feb906d4355d5f7de0c7
->
-> Author: Andrea Adami <andrea.adami@gmail.com>
-> Date: =A0 Thu Jul 14 00:50:26 2011 +0200
->
-> kernel.bbclass: remove unintended change of INITRAMFS_TASK
->
-> * during an unfortunate round of tests right before commiting the patch
-> * do_configure[depends] became =A0kernel_do_configure[depends]
-> * Nonsense!
-> * As documented in commit 4dfef62dfe54a3b2c557a6df81d155adc1e03ccb
-> * of OpenEmbedded git server, this must be in do_configure[depends]
-> * to do the magic.
->
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
->
-> ---
->
-> =A0meta/classes/kernel.bbclass | =A0 =A02 +-
-> =A01 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/meta/classes/kernel.bbclass b/meta/classes/kernel.bbclass
-> index b71a650..d1f6480 100644
-> --- a/meta/classes/kernel.bbclass
-> +++ b/meta/classes/kernel.bbclass
-> @@ -195,7 +195,7 @@ kernel_do_configure() {
-> =A0 =A0 =A0 =A0fi
-> =A0}
->
-> -kernel_do_configure[depends] +=3D "${INITRAMFS_TASK}"
-> +do_configure[depends] +=3D "${INITRAMFS_TASK}"
->
-> =A0do_menuconfig() {
-> =A0 =A0 =A0 =A0 export DISPLAY=3D'${DISPLAY}'
->
->
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
+Op 15-07-11 00:35, Joel A Fernandes schreef:
+> This fixes MMC errors due to timeouts, and is borrowed from Steve Sakoman's patch for the linux-omap-2.6.39 recipe (as noticed by Jason Kridner)
+> 
+> Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com> --- Changes since v2: * Applied the patch to the correct recipe (linux-omap-psp-2.6.32 instead of linux-omap-2.6.32) (Sorry!) * Moved author name to commit message> A link shared by Jason discussing the issue: 
+> http://www.mail-archive.com/linux-omap@vger.kernel.org/msg42214.html
 
-Hello,
+That needs to go in to the summary
 
-just FYI I was confused by the kernel.bbclass in meta-openembedded.
-This one has the kernel_do_configure[depends].
+> Paul, This is an actual problem that we experience and this patch seems to fix it.
+> 
+> Patch: http://cgit.openembedded.net/cgit.cgi/openembedded/tree/recipes/linux/linux-omap-2.6.39/sakoman/0024-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch ---
 
-I'd suggest to remove this kernel.bbclass asap, merging eventual
-missing bits in oe-core.
-(At least apply this same fix as in oe-core)
+And you're missing a
 
-Regards
+- -MACHINE_KERNEL_PR_append = "e+gitr${SRCREV}"
++MACHINE_KERNEL_PR_append = "f+gitr${SRCREV}"
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Andrea
+iD8DBQFOH+yWMkyGM64RGpERAjfIAJ0bAsRWsVUdkUIaVm5jcYEZ6dE4bACfVyBL
+AuQu1mFvLC4wXniyiweDJb8=
+=6zgI
+-----END PGP SIGNATURE-----
+
 
 
