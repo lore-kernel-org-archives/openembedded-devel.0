@@ -1,30 +1,35 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from thoth.sbs.de ([192.35.17.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <agnel.joel@gmail.com>) id 1Qhtkh-0001U4-4i
+	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1Qi2uX-0006dd-Tw
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Jul 2011 03:33:07 +0200
-Received: by yxi19 with SMTP id 19so793090yxi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jul 2011 18:29:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=sMIbywliVQx+U0JXutQ0p/h1vrhs36F1yhocyHJn0bs=;
-	b=pVFWwx0WweTE/RfpFX92U630gXBahN5Az06BaHe+z9PVUREbsaaykO1e7h5KXBz4wX
-	jmligEGvFECjptlzMJvN9SStdoEp5/8Sl/li36QvB7KF6KDeeQyKamDt5DkddHKjfd2M
-	/TGhVWSdjoB7PZOZaqNkc2qGbNEiD/RqE2vpI=
-Received: by 10.236.145.66 with SMTP id o42mr5959820yhj.61.1310779440038;
-	Fri, 15 Jul 2011 18:24:00 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id z28sm1655452yhn.21.2011.07.15.18.23.58
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 15 Jul 2011 18:23:59 -0700 (PDT)
-From: Joel A Fernandes <agnel.joel@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Jul 2011 20:19:58 -0500
-Message-Id: <1310779198-20764-1-git-send-email-agnel.joel@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: joelagnel@ti.com, beagleboard@googlegroups.com, k-kooi@ti.com, jdk@ti.com
-Subject: [PATCH] beagleboard-test-scripts: BeagleBoard userbutton detection for flashing
+	Sat, 16 Jul 2011 13:19:54 +0200
+Received: from mail2.siemens.de (localhost [127.0.0.1])
+	by thoth.sbs.de (8.13.6/8.13.6) with ESMTP id p6GBFpqw003074;
+	Sat, 16 Jul 2011 13:15:53 +0200
+Received: from DEMCHP99ET1MSX.ww902.siemens.net
+	(demchp99et1msx.ww902.siemens.net [139.25.131.180])
+	by mail2.siemens.de (8.13.6/8.13.6) with ESMTP id p6GBFnoL031828
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=FAIL);
+	Sat, 16 Jul 2011 13:15:50 +0200
+Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.162]) by
+	DEMCHP99ET1MSX.ww902.siemens.net ([139.25.131.180]) with mapi;
+	Sat, 16 Jul 2011 13:15:49 +0200
+From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Sat, 16 Jul 2011 13:15:46 +0200
+Thread-Topic: [oe] PSTAGE_MIRROR not working with file:// uri
+Thread-Index: AcxDKnj0st4jYErMQY6a+KG9JkQZMQAfc4pg
+Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819E015756958F@DEMCHP99E35MSX.ww902.siemens.net>
+References: <09D9BE2AC4AA764DABAA8C91E48D819E0157569474@DEMCHP99E35MSX.ww902.siemens.net>
+	<4E209D45.9000802@mentor.com>
+In-Reply-To: <4E209D45.9000802@mentor.com>
+Accept-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: de-DE
+MIME-Version: 1.0
+Subject: Re: PSTAGE_MIRROR not working with file:// uri
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,65 +43,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Jul 2011 01:33:07 -0000
+X-List-Received-Date: Sat, 16 Jul 2011 11:19:54 -0000
+Content-Language: de-DE
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-* Build and install a userbutton tool to detect state of the user button on a BeagleBoard from /dev/input/event0
-* Install a user.txt and uEnv.txt to /boot, Narcissus will copy from here to the FAT partition of an SD Card
+Hi Tom,
 
-Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
----
-This is an effort to be able to build an SD Card image for the BeagleBoard that can be used optionally for flashing
-an image to NAND if the user button is pressed. This patch makes sure that the root filesystem is ready with the scripts
-and programs required for Narcissus to build such an image.
+Thanks, it helped. The key in your code was to return bb.fetch.localpath() =
+- which was not the case in the version we used (release-2010.12)
 
-This patch can be safely merged in even if the Narcissus hasn't yet been (as it was just submitted)
+Anyone interessed in the patch? As far as I can see, this has not been fixe=
+d yet in openembedded HEAD.
 
-The related Narcissus patch is here:
-http://groups.google.com/group/beagleboard/browse_thread/thread/c0dd79f8e5fb26ae
+With kind regards,
+Fabrice Aeschbacher
 
- .../beagleboard/beagleboard-test-scripts_git.bb    |   12 ++++++++++--
- 1 files changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/beagleboard/beagleboard-test-scripts_git.bb b/recipes/beagleboard/beagleboard-test-scripts_git.bb
-index 0ee7954..bb0e6e4 100644
---- a/recipes/beagleboard/beagleboard-test-scripts_git.bb
-+++ b/recipes/beagleboard/beagleboard-test-scripts_git.bb
-@@ -1,18 +1,22 @@
- ## Reminder:  The correct spacing for a variable is FOO = "BAR"  in : PR="r1"
- DESCRIPTION = "BeagleBoard test scripts"
- HOMEPAGE = "http://beagleboad.org/support"
--PR = "r3"
-+PR = "r4"
- 
- SRC_URI = "git://gitorious.org/~joelf/beagleboard-validation/validation-scripts.git;protocol=git \
- "
- 
--SRCREV = "2df76857155fbd462527c2b00ee83214483f0594"
-+SRCREV = "f7ba1b49190003af524f1a768ec887955a9994a0"
- S = "${WORKDIR}/git"
- 
- inherit update-rc.d
- INITSCRIPT_NAME = "flash-nand-fs.sh"
- INITSCRIPT_PARAMS = "start 99 2 3 4 5 ."
- 
-+do_compile() {
-+    ${CC} -o userbutton-pressed ${CFLAGS} ${LDFLAGS} flashing/userbutton-pressed.c
-+}
-+
- do_install() {
-   TEST_FILES=" \
-     testaudio \
-@@ -36,4 +40,8 @@ do_install() {
-   # We also register it as an init script so that the SD Card auto-flashes to NAND during boot.
-   install -d ${D}/${sysconfdir}/init.d/
-   install -m 0755 ${S}/flashing/flash-nand-fs.sh ${D}/${sysconfdir}/init.d/flash-nand-fs.sh
-+  install -m 0755 userbutton-pressed ${D}/${bindir}/userbutton-pressed
-+  install -d ${D}/boot/
-+  install -m 0755 ${S}/flashing/user.txt ${D}/boot/user.txt
-+  install -m 0755 ${S}/flashing/uEnv.txt ${D}/boot/uEnv.txt
- }
--- 
-1.7.0.4
-
+> -----Urspr=FCngliche Nachricht-----
+> Von: openembedded-devel-bounces@lists.openembedded.org=20
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] Im=20
+> Auftrag von Tom Rini
+> Gesendet: Freitag, 15. Juli 2011 22:04
+> An: openembedded-devel@lists.openembedded.org
+> Betreff: Re: [oe] PSTAGE_MIRROR not working with file:// uri
+>=20
+> On 07/15/2011 01:48 AM, Aeschbacher, Fabrice wrote:
+> > Hi,
+> >=20
+> > [bitbake 1.12 / OE 2010.12]
+> >=20
+> > I am facing a quite strange issue with packaged-staging=20
+> (INHERIT +=3D "packaged-staging" in local.conf) when trying to=20
+> use a pre-built toolchain.
+> [snip]
+> > I guess this must already have worked, mainly because of=20
+> this comment in the .bbclass:
+> >=20
+> >   # To use the prebuilt pstage packages, save them away..
+> >   # $ rsync --delete -a tmp/pstage/ /there/oe/build/pstage_mirror
+> >   # .. and use it as mirror in your conf/local.conf:
+> >   # PSTAGE_MIRROR =3D "file:///there/oe/build/pstage_mirror"
+> >=20
+> > So I wondered if someone can confirm that PSTAGE_MIRROR has=20
+> already worked with a file:/// uri,
+> > and could see what I am missing here.
+>=20
+> Internally we have code like http://pastebin.com/cb1Nen97 and=20
+> file URIs
+> work.  Try merging the two and see if that fixes things?
+>=20
+> --=20
+> Tom Rini
+> Mentor Graphics Corporation
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> =
 
 
