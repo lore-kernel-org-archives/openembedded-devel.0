@@ -1,25 +1,33 @@
-Received: from vms173001pub.verizon.net ([206.46.173.1])
+Received: from thoth.sbs.de ([192.35.17.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1QiUNM-0002Au-Pd
+	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1QiWUQ-0004E0-J1
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jul 2011 18:39:29 +0200
-Received: from gandalf.denix.org ([unknown] [108.18.140.4])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009))
-	with ESMTPA id <0LOH00IE3KPZOJB2@vms173001.mailsrvcs.net>; Sun,
-	17 Jul 2011 11:35:00 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 848F514AF5D; Sun,
-	17 Jul 2011 12:34:47 -0400 (EDT)
-Date: Sun, 17 Jul 2011 12:34:47 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-members@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-id: <20110717163447.GF21964@denix.org>
-MIME-version: 1.0
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Minutes: OpenEmbedded eV Board meeting, 11-Jul-2011
+	Sun, 17 Jul 2011 20:54:54 +0200
+Received: from mail3.siemens.de (localhost [127.0.0.1])
+	by thoth.sbs.de (8.13.6/8.13.6) with ESMTP id p6HIoqua032727;
+	Sun, 17 Jul 2011 20:50:52 +0200
+Received: from DEMCHP99ET0MSX.ww902.siemens.net
+	(demchp99et0msx.ww902.siemens.net [139.25.131.181])
+	by mail3.siemens.de (8.13.6/8.13.6) with ESMTP id p6HIooUW013771
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=FAIL);
+	Sun, 17 Jul 2011 20:50:50 +0200
+Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.162]) by
+	DEMCHP99ET0MSX.ww902.siemens.net ([139.25.131.181]) with mapi;
+	Sun, 17 Jul 2011 20:50:49 +0200
+From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Sun, 17 Jul 2011 20:50:47 +0200
+Thread-Topic: [oe] [PATCH] packaged-staging: fixed fetching from
+	PSTAGE_MIRROR with file:// uri
+Thread-Index: AcxEsnD7k8AHUxXwQ9mm48hN1/9XXw==
+Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819E0157569594@DEMCHP99E35MSX.ww902.siemens.net>
+Accept-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: de-DE
+MIME-Version: 1.0
+Subject: [PATCH] packaged-staging: fixed fetching from PSTAGE_MIRROR with file:// uri
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,104 +41,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jul 2011 16:39:29 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sun, 17 Jul 2011 18:54:54 -0000
+Content-Language: de-DE
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Minutes: OpenEmbedded eV Board meeting, 11-Jul-2011
+Packaged-staging:
 
-Attendees:
+* This patch fixes fetching pre-built staging packages from PSTAGE_MIRROR h=
+aving file:// uri
+  (thanks to Tom Rini for helping me fixing this)
 
-Michael Lauer (mickey)
-Philip Balister (Crofton)
-Florian Boor (florian)
-Denys Dmytriyenko (denix)
+Signed-off-by: Fabrice Aeschbacher <fabrice.aeschbacher@siemens.com>
+---
+ classes/packaged-staging.bbclass |    9 ++++++---
+ 1 files changed, 6 insertions(+), 3 deletions(-)
 
-
-00) action items from last meeting:
-* call for TSC elections (Mickey) - done
-* call for OE eV General Assembly (Crofton) - done
-* status update on sending money for the switch
-  ** florian is waiting for additional info (bank address) from Jeff (OSUOSL) to initiate the transfer
-  ** once received, florian has to go to the bank in person to make the transfer
-  ** sent the reminder to Jeff, the required info was received after the meeting
-* check and open a credit/debit card for simple money transfers
-  ** florian to take care when at the bank
-* call for donations
-  ** denix checked with TI, waiting for after Yocto budget is approved to see if any money left after LF and Yocto fees
-  ** Intel offered a donation too - need to follow up with Dirk or DaveSt
-  ** encourage people to make individual donations
-
-01) agenda:
-* TSC elections
-* LF server donation status
-* more financial/donation discussion
-* financial contributions to OSUOSL for hosting OE
-* some/any financial support from LF/Yocto
-
-02) TSC elections
-* call for TSC candidates was made
-* 2 weeks period is over - only 1 candidate (RP)
-* is call for votes required?
-* can one candidate be accepted by acllamation?
-* there were no reminders at the end of 2 weeks encouraging more candidates
-  ** should the reminder be sent now and period extended by 1-2 days?
-  ** Board decides by majority that 2 weeks were enough for anyone interested to propose their candidacy
-* Board agrees to suggest electing RP by acclamation on the list (Mickey)
-  ** if nobody objects, close the voting and announce the results
-* make a note to send reminders next time before the 2-week application/discussion/voting period is over
-* during GA we should discuss and/or update the statutes covering this situation (acclamation) in detail
-
-03) LF server donation status
-* still in the process - the previous hardware specs were scrapped
-* while talking to involved parties, it's not clear who's the legal recipient of the donation
-  ** Tom King is in the talks with LF and OSUOSL directly
-  ** are the servers donated to OSUOSL/nas-admin or OE eV/Board?
-* need to talk to LF to clarify things
-  ** who are the people involved, who's overseeing, paperwork?
-  ** Crofton on travel, denix to cover for him during next Yocto-AB meeting and raise the above questions
-* suggest involved parties (Tom, LF, OSUOSL) to copy the Board (board@openembedded.org) in ongoing discussions instead of direct peer-to-peer emails or random IRC chats
-* possibly hold a conference call to make the process more transparent
-
-04) is the corporate donation procedure documented?
-* check the Wiki, update if needed
-* there is some form needed to be filled
-  ** Crofton has the copy from previous TI donation
-  ** florian will work with Intel, consult with Crofton for any legal aspects
-
-05) individual donations
-* denix makes first individual donation through PayPal
-  ** hopes to inspire others to donate... :)
-* Crofton to donate an SSD
-
-06) financial contributions to OSUOSL
-* Tom reports that OE is consuming most of the free resources provided by OSUOSL to Open Source projects
-  ** OE needs to be a good citizen and contribute financially back to OSUOSL, like other projects
-* Mickey: what's consuming the resources - web, git?
-  ** According to Tom, git traffic is up, plus oe.org source mirror contributes to network traffic
-  ** Also autobuilders doing regression testing on Angstrom and oe-core - cpu/disk load
-* Estimate the amount of financial contribution to OSUOSL
-  ** Still under discussion, Tom suggesting around $300-$500 per year?
-  ** to offset the free hosting and bandwidth...
-* Tom estimates to have 4-8 physical servers for OE in the near future
-
-07) financial support from LF/Yocto
-* LF is already supporting OE
-  ** server donation
-  ** sponsoring Tom's travel to the site for admin work
-  ** offering travel sponsorship to key OE people for big events?
-* some OE community members are suggesting that Yocto should provide additional financial support to OE
-  ** to help with OE's ongoing expenses
-  ** to support oe-core/meta-oe development, hosting and regression testing
-  ** not talking about big money though
-
-08) agree on next Board meeting
-* next meeting is either Aug 8-12 or short one the last week of July for financial updates
-* need to start fomalizing the budget and concrete financial goals
-
-09) anyone attending CCC?
-* http://events.ccc.de/camp/2011
-* http://en.wikipedia.org/wiki/Chaos_Communication_Camp
-
+diff --git a/classes/packaged-staging.bbclass b/classes/packaged-staging.bb=
+class
+index 29a3238..c60e271 100644
+--- a/classes/packaged-staging.bbclass
++++ b/classes/packaged-staging.bbclass
+@@ -200,10 +200,13 @@ def staging_fetch(stagepkg, d):
+         try:
+             bb.fetch.init([srcuri], pd)
+             bb.fetch.go(pd, [srcuri])
++            stagepkg =3D bb.fetch.localpath(srcuri, pd)
+         except Exception, ex:
+-	    bb.debug(1, "Failed to fetch staging package %s: %s" % (bn, ex))
++            bb.debug(1, "Failed to fetch staging package %s: %s" % (bn, ex=
+))
+         else:
+-	    bb.debug(1, "Fetched staging package %s" % bn)
++            bb.debug(1, "Fetched staging package %s" % bn)
++
++        return stagepkg
+=20
+ PSTAGE_TASKS_COVERED =3D "fetch unpack munge patch configure qa_configure =
+rig_locales compile sizecheck install deploy package populate_sysroot packa=
+ge_write_deb package_write_ipk package_write package_stage qa_staging"
+=20
+@@ -222,7 +225,7 @@ python packagestage_scenefunc () {
+=20
+     stagepkg =3D bb.data.expand("${PSTAGE_PKG}", d)
+     if not os.path.exists(stagepkg):
+-        staging_fetch(stagepkg, d)
++        stagepkg =3D staging_fetch(stagepkg, d)
+=20
+     if os.path.exists(stagepkg):
+         pstage_set_pkgmanager(d)
+--=20
+1.7.2.5=
 
 
