@@ -1,35 +1,22 @@
-Received: from mail-ey0-f178.google.com ([209.85.215.178])
+Received: from hsvwanfw1-nat.mentorg.com ([139.181.24.34] helo=alm.mentorg.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <agnel.joel@gmail.com>) id 1QipTo-0004FM-B0
+	(envelope-from <tom_rini@mentor.com>) id 1QisqA-0002LK-6C
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jul 2011 17:11:32 +0200
-Received: by eye4 with SMTP id 4so1630660eye.37
+	Mon, 18 Jul 2011 20:46:50 +0200
+Received: from localhost.localdomain ([134.86.97.33])
+	by alm.mentorg.com (8.12.10/8.12.10) with ESMTP id p6IIXkMg018455
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jul 2011 08:07:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=HKqWUKsGUjNcx0u7BZ1k17KffbrP46Hh4QaWB/ybfZs=;
-	b=ZUb9hsMkF6fciwLmdEm2BKtRvnSzkg4I5q82d1qN8oC5ip/UpCWRPmEMwYQVKhrmh8
-	HDOqfNc345Ox58dYDbNH9+9teQNlVKwtY/VNL6/YqYUBo2sdk03sAXTMTnVAjbbFdSt8
-	SQk2dz+hderA7bu6yTI3hVAGkKKWqdy4YeA9E=
-MIME-Version: 1.0
-Received: by 10.213.108.80 with SMTP id e16mr843172ebp.22.1311001257753; Mon,
-	18 Jul 2011 08:00:57 -0700 (PDT)
-Received: by 10.213.105.210 with HTTP; Mon, 18 Jul 2011 08:00:57 -0700 (PDT)
-In-Reply-To: <BEB18489-3664-4E3B-AF0F-2F2C6D6B61B0@beagleboard.org>
-References: <CAD=GYpbJaYh9iViHjocf24z98LKnsH0Mq7cBy_9p_hULf1gYnQ@mail.gmail.com>
-	<670B4FBB-C6E9-46CD-81DA-FDD94A88A3FB@dominion.thruhere.net>
-	<CAD=GYpboKqsD2A1D2CX5eDC_vhrz4ctgxicE8JORdY3sVEAC5w@mail.gmail.com>
-	<BEB18489-3664-4E3B-AF0F-2F2C6D6B61B0@beagleboard.org>
-Date: Mon, 18 Jul 2011 10:00:57 -0500
-Message-ID: <CAD=GYpYcu7d+XGx2yX2adErPg-HDxgDG7JNdnsWXO+EuFny5qg@mail.gmail.com>
-From: Joel A Fernandes <agnel.joel@gmail.com>
-To: beagleboard@googlegroups.com
-Cc: openembedded-devel@lists.openembedded.org,
-	Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>, "Kridner, Jason" <jdk@ti.com>
-Subject: Re: [beagleboard] Re: [Angstrom-devel] Bitbake build failure of Angstrom
+	Mon, 18 Jul 2011 13:33:46 -0500
+From: Tom Rini <tom_rini@mentor.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 18 Jul 2011 11:33:41 -0700
+Message-Id: <77d8aec24367e1b062cf529087d581039a2c8e98.1311013624.git.tom_rini@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <cover.1311013624.git.tom_rini@mentor.com>
+References: <cover.1311013624.git.tom_rini@mentor.com>
+In-Reply-To: <cover.1311013624.git.tom_rini@mentor.com>
+References: <cover.1311013624.git.tom_rini@mentor.com>
+Subject: [meta-oe][PATCH 1/2] guile: Move 'configure-fix.patch' to guile-1.8.7 dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,45 +30,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jul 2011 15:11:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 18 Jul 2011 18:46:50 -0000
 
-Hi Koen,
+This patch is used by both native and target recipes.
 
-On Mon, Jul 18, 2011 at 2:27 AM, Koen Kooi <koen@beagleboard.org> wrote:
->
-> Op 18 jul 2011, om 09:13 heeft Joel A Fernandes het volgende geschreven:
->
->> Hi Koen,
->>
->> Nice to hear from you.
->>
->> On Mon, Jul 18, 2011 at 2:00 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
->>>
->>> Op 18 jul 2011, om 07:16 heeft Joel A Fernandes het volgende geschreven:
->>>
->>>> Hi,
->>>>
->>>> I am attempting to manually rebuild the BeagleBoard validation image
->>>> using bitbake.
->>>>
->>>> For this, I used the revision found in /etc/angstrom-version of an
->>>> image I built with Narcissus. The OE revision I used referring to the
->>>> above version file is: a1f31c757d2514e946737d60789c6f9f05ce38eb (Which
->>>> happens to be my fix for GPIO)
->>>>
->>>> Now, when I run a "bitbake beagleboard-validation-gnome-image -k "
->>>
->>> Why are you using -k ?
->>
->> Not sure if it matters? Even if I don't pass -k, the errors still show up.
->
-> You're still not answering my question :)
->
+Signed-off-by: Tom Rini <tom_rini@mentor.com>
+---
+ .../configure-fix.patch                            |    0
+ 1 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/recipes-support/guile/{guile-native-1.8.7 => guile-1.8.7}/configure-fix.patch (100%)
 
-I thought I'd let the build continue as much as it could to save time later.
+diff --git a/meta-oe/recipes-support/guile/guile-native-1.8.7/configure-fix.patch b/meta-oe/recipes-support/guile/guile-1.8.7/configure-fix.patch
+similarity index 100%
+rename from meta-oe/recipes-support/guile/guile-native-1.8.7/configure-fix.patch
+rename to meta-oe/recipes-support/guile/guile-1.8.7/configure-fix.patch
+-- 
+1.7.0.4
 
-Thanks,
-Joel
 
 
