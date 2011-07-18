@@ -1,84 +1,38 @@
-Received: from cheddar.halon.org.uk ([217.10.144.130])
+Received: from mail-ey0-f178.google.com ([209.85.215.178])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <steve.mcintyre+caf_=stevelinaro=einval.com@linaro.org>)
-	id 1QipD4-0003RL-0e for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jul 2011 16:54:14 +0200
-Received: from bsmtp by cheddar.halon.org.uk with local-bsmtp (Exim 4.72)
-	(envelope-from <steve.mcintyre+caf_=stevelinaro=einval.com@linaro.org>)
-	id 1QiorZ-0001sY-Is for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jul 2011 15:32:01 +0100
-Received: from stemci01 by e102122-lin with local (Exim 4.72)
-	(envelope-from <steve.mcintyre+caf_=stevelinaro=einval.com@linaro.org>)
-	id 1Qioqu-0005fL-W8 for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jul 2011 15:31:21 +0100
-Resent-From: Steve McIntyre <steve.mcintyre@linaro.org>
-Resent-Date: Mon, 18 Jul 2011 15:31:20 +0100
-Resent-Message-ID: <20110718143120.GF8763@linaro.org>
-Resent-To: openembedded-devel@lists.openembedded.org
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on cheddar.halon.org.uk
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-	SUSPICIOUS_RECIPS autolearn=no version=3.3.1
-Received: from mail-vw0-f53.google.com ([209.85.212.53])
-	by cheddar.halon.org.uk with esmtps (TLS1.0:RSA_ARCFOUR_SHA1:16)
-	(Exim 4.72)
-	(envelope-from <steve.mcintyre+caf_=stevelinaro=einval.com@linaro.org>)
-	id 1Qio8V-0008PY-Jg
-	for stevelinaro@einval.com; Mon, 18 Jul 2011 14:45:27 +0100
-Received: by vws13 with SMTP id 13so2513535vws.12
-	for <stevelinaro@einval.com>; Mon, 18 Jul 2011 06:45:21 -0700 (PDT)
-Received: by 10.52.22.235 with SMTP id h11mr6268531vdf.468.1310996721474;
-	Mon, 18 Jul 2011 06:45:21 -0700 (PDT)
-X-Forwarded-To: stevelinaro@einval.com
-X-Forwarded-For: steve.mcintyre@linaro.org stevelinaro@einval.com
-Received: by 10.52.108.37 with SMTP id hh5cs82029vdb;
-	Mon, 18 Jul 2011 06:45:21 -0700 (PDT)
-Received: by 10.227.10.31 with SMTP id n31mr5514550wbn.97.1310996719777;
-	Mon, 18 Jul 2011 06:45:19 -0700 (PDT)
-Received: from mombin.canonical.com (mombin.canonical.com [91.189.95.16])
-	by mx.google.com with ESMTP id ei15si7824186wbb.98.2011.07.18.06.45.19; 
-	Mon, 18 Jul 2011 06:45:19 -0700 (PDT)
-Received-SPF: neutral (google.com: 91.189.95.16 is neither permitted nor
-	denied by best guess record for domain of
-	cross-distro-bounces@lists.linaro.org) client-ip=91.189.95.16; 
-Authentication-Results: mx.google.com;
-	spf=neutral (google.com: 91.189.95.16 is neither
-	permitted nor denied by best guess record for domain of
-	cross-distro-bounces@lists.linaro.org)
-	smtp.mail=cross-distro-bounces@lists.linaro.org
-Received: from localhost ([127.0.0.1] helo=mombin.canonical.com)
-	by mombin.canonical.com with esmtp (Exim 4.71)
-	(envelope-from <cross-distro-bounces@lists.linaro.org>)
-	id 1Qio8M-0000Ky-Na; Mon, 18 Jul 2011 13:45:18 +0000
-Received: from cheddar.halon.org.uk ([217.10.144.130])
-	by mombin.canonical.com with esmtp (Exim 4.71)
-	(envelope-from <steve.mcintyre@linaro.org>)
-	id 1Qio8L-0000Ke-1W; Mon, 18 Jul 2011 13:45:17 +0000
-Received: from bsmtp by cheddar.halon.org.uk with local-bsmtp (Exim 4.72)
-	(envelope-from <steve.mcintyre@linaro.org>)
-	id 1Qio86-0008Gy-LR; Mon, 18 Jul 2011 14:45:02 +0100
-Received: from stemci01 by e102122-lin with local (Exim 4.72)
-	(envelope-from <steve.mcintyre@linaro.org>)
-	id 1Qio7k-0002vl-6G; Mon, 18 Jul 2011 14:44:40 +0100
-Date: Mon, 18 Jul 2011 14:44:40 +0100
-From: Steve McIntyre <steve.mcintyre@linaro.org>
-To: Fedora ARM <arm@lists.fedoraproject.org>,
-	Debian ARM <debian-arm@lists.debian.org>, MeeGo Dev <meego-dev@meego.com>, 
-	Gentoo Dev <gentoo-embedded@lists.gentoo.org>,
-	OpenEmbedded Devel <openembedded-devel@lists.openembedded.org>,
-	Ubuntu Devel <ubuntu-devel@lists.ubuntu.com>
-Message-ID: <20110718134440.GB23466@linaro.org>
+	(envelope-from <agnel.joel@gmail.com>) id 1QipTo-0004FM-B0
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Jul 2011 17:11:32 +0200
+Received: by eye4 with SMTP id 4so1630660eye.37
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Jul 2011 08:07:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=HKqWUKsGUjNcx0u7BZ1k17KffbrP46Hh4QaWB/ybfZs=;
+	b=ZUb9hsMkF6fciwLmdEm2BKtRvnSzkg4I5q82d1qN8oC5ip/UpCWRPmEMwYQVKhrmh8
+	HDOqfNc345Ox58dYDbNH9+9teQNlVKwtY/VNL6/YqYUBo2sdk03sAXTMTnVAjbbFdSt8
+	SQk2dz+hderA7bu6yTI3hVAGkKKWqdy4YeA9E=
 MIME-Version: 1.0
-X-attached: unknown
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-BeenThere: cross-distro@lists.linaro.org
-X-Mailman-Version: 2.1.13
-Precedence: list
-Sender: cross-distro-bounces@lists.linaro.org
-Errors-To: cross-distro-bounces@lists.linaro.org
-Cc: cross-distro@lists.linaro.org, linaro-dev@lists.linaro.org
-Subject: ARM: new cross-distro@ list
+Received: by 10.213.108.80 with SMTP id e16mr843172ebp.22.1311001257753; Mon,
+	18 Jul 2011 08:00:57 -0700 (PDT)
+Received: by 10.213.105.210 with HTTP; Mon, 18 Jul 2011 08:00:57 -0700 (PDT)
+In-Reply-To: <BEB18489-3664-4E3B-AF0F-2F2C6D6B61B0@beagleboard.org>
+References: <CAD=GYpbJaYh9iViHjocf24z98LKnsH0Mq7cBy_9p_hULf1gYnQ@mail.gmail.com>
+	<670B4FBB-C6E9-46CD-81DA-FDD94A88A3FB@dominion.thruhere.net>
+	<CAD=GYpboKqsD2A1D2CX5eDC_vhrz4ctgxicE8JORdY3sVEAC5w@mail.gmail.com>
+	<BEB18489-3664-4E3B-AF0F-2F2C6D6B61B0@beagleboard.org>
+Date: Mon, 18 Jul 2011 10:00:57 -0500
+Message-ID: <CAD=GYpYcu7d+XGx2yX2adErPg-HDxgDG7JNdnsWXO+EuFny5qg@mail.gmail.com>
+From: Joel A Fernandes <agnel.joel@gmail.com>
+To: beagleboard@googlegroups.com
+Cc: openembedded-devel@lists.openembedded.org,
+	Discussion of the angstrom distribution development
+	<angstrom-distro-devel@linuxtogo.org>, "Kridner, Jason" <jdk@ti.com>
+Subject: Re: [beagleboard] Re: [Angstrom-devel] Bitbake build failure of Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
+X-Mailman-Version: 2.1.11
+Precedence: list
 Reply-To: openembedded-devel@lists.openembedded.org
 List-Id: Using the OpenEmbedded metadata to build Distributions
 	<openembedded-devel.lists.openembedded.org>
@@ -89,37 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jul 2011 14:54:14 -0000
-Content-Disposition: inline
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 18 Jul 2011 15:11:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi folks,
+Hi Koen,
 
-Many GNU/Linux distributions are doing some ARM porting; this tends to
-result in work duplication, and there doesn't seem to be a general
-purpose forum to bring ARM porters together.
+On Mon, Jul 18, 2011 at 2:27 AM, Koen Kooi <koen@beagleboard.org> wrote:
+>
+> Op 18 jul 2011, om 09:13 heeft Joel A Fernandes het volgende geschreven:
+>
+>> Hi Koen,
+>>
+>> Nice to hear from you.
+>>
+>> On Mon, Jul 18, 2011 at 2:00 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+>>>
+>>> Op 18 jul 2011, om 07:16 heeft Joel A Fernandes het volgende geschreven:
+>>>
+>>>> Hi,
+>>>>
+>>>> I am attempting to manually rebuild the BeagleBoard validation image
+>>>> using bitbake.
+>>>>
+>>>> For this, I used the revision found in /etc/angstrom-version of an
+>>>> image I built with Narcissus. The OE revision I used referring to the
+>>>> above version file is: a1f31c757d2514e946737d60789c6f9f05ce38eb (Which
+>>>> happens to be my fix for GPIO)
+>>>>
+>>>> Now, when I run a "bitbake beagleboard-validation-gnome-image -k "
+>>>
+>>> Why are you using -k ?
+>>
+>> Not sure if it matters? Even if I don't pass -k, the errors still show up.
+>
+> You're still not answering my question :)
+>
 
-We're inviting developers of GNU/Linux distributions with an interest
-in ARM to join a new "cross-distro" list, hosted at Linaro:
+I thought I'd let the build continue as much as it could to save time later.
 
-   http://lists.linaro.org/mailman/listinfo/cross-distro
-
-Any ARM Linux / Free Software discussion is welcome on the list, for
-instance porting software to build on ARM, toolchain problems, dealing
-with new ABIs, Thumb-2, NEON, kernel problems, announcement of new
-tools etc.
-
-Cheers,
--- 
-Steve McIntyre                                steve.mcintyre@linaro.org
-<http://www.linaro.org/> Linaro.org | Open source software for ARM SoCs
-
-
-_______________________________________________
-cross-distro mailing list
-cross-distro@lists.linaro.org
-http://lists.linaro.org/mailman/listinfo/cross-distro
-
+Thanks,
+Joel
 
 
