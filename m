@@ -1,30 +1,29 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chasemaupin03@gmail.com>) id 1QivTn-0006zc-8v
+	(envelope-from <george.huntingtoniii@gmail.com>) id 1QivWk-000765-51
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jul 2011 23:35:55 +0200
-Received: by gxk3 with SMTP id 3so1547263gxk.6
+	Mon, 18 Jul 2011 23:39:03 +0200
+Received: by gwb11 with SMTP id 11so1545809gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jul 2011 14:31:50 -0700 (PDT)
+	Mon, 18 Jul 2011 14:33:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=mpHCFAilx7aGpfRSkws1jK3yhaINfGThIEgw0UAtpfM=;
-	b=oVwpbAYEraWFz8HcxvBmPi56fx3eIPc5rEVQ7xK9grBCacIzkpxambaVQzTVUCV0kH
-	0botnyiC5ACExROwJgjK05Wq+84PrvEm8p5vk8B4jlOd+kzEwSNZPosA5hgQ6vZqLFA7
-	nycIpzbzKndPZPhBD/E01m8xAcRb7589s8gxs=
-Received: by 10.236.182.130 with SMTP id o2mr8690119yhm.77.1311024710267;
-	Mon, 18 Jul 2011 14:31:50 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id o47sm111273yhn.2.2011.07.18.14.31.48
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 18 Jul 2011 14:31:48 -0700 (PDT)
-From: Chase Maupin <chasemaupin03@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=uNxfUPjvd4PQ18agCNnYrndyAUskcqLh4OUJbbpS7EU=;
+	b=pY06Q7GeaPbj7T/LC/vLZy+Tl/D5gJuGP4J+fV3uV2f/B7fWe+ZXlLrBwVvc4mjzr1
+	buPJHc5MeJMfZ2v4JalFK5Sh7KoOfrpFkHXFk/rXFTIvjIizmy7PLIHVKrXlVWoHASF+
+	YV4SjpFWWZklXvX6cdKAWZHc9ca4RULJj3mhs=
+MIME-Version: 1.0
+Received: by 10.236.123.132 with SMTP id v4mr8197475yhh.509.1311024467953;
+	Mon, 18 Jul 2011 14:27:47 -0700 (PDT)
+Received: by 10.236.95.42 with HTTP; Mon, 18 Jul 2011 14:27:47 -0700 (PDT)
+In-Reply-To: <CAG4_upS3oVQVwdiEkx55V2xHbZpFqaho4LuFfDG1nczgTT2WYQ@mail.gmail.com>
+References: <CAG4_upS3oVQVwdiEkx55V2xHbZpFqaho4LuFfDG1nczgTT2WYQ@mail.gmail.com>
+Date: Mon, 18 Jul 2011 17:27:47 -0400
+Message-ID: <CAFu+nvGHewuHF9vJFqfXq5cj_B3tF0cXjAy3KK1W4quCPYeNEA@mail.gmail.com>
+From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Jul 2011 16:31:45 -0500
-Message-Id: <1311024705-23811-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH] nodejs: Add patch to compile with GCC 4.3.3
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Problems accessing openembedded.org?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,89 +37,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jul 2011 21:35:55 -0000
+X-List-Received-Date: Mon, 18 Jul 2011 21:39:03 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* Add a patch to nodejs to allow compiling with GCC versions
-  less than or equal to 4.3.3.
-* Define the function nodejs_get_gcc_ver to allow applying the
-  patch conditionally based on compiler version.
-* Patch based on post at https://github.com/joyent/node/issues/883
+I am having the same problem.
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
----
- ...01-Add-missing-compiler-flags-for-GCC-4.3.patch |   34 ++++++++++++++++++++
- recipes/nodejs/nodejs_0.4.2.bb                     |   10 ++++++
- 2 files changed, 44 insertions(+), 0 deletions(-)
- create mode 100644 recipes/nodejs/files/0001-Add-missing-compiler-flags-for-GCC-4.3.patch
+On Mon, Jul 18, 2011 at 5:25 PM, Chris Verges <kg4ysn@gmail.com> wrote:
 
-diff --git a/recipes/nodejs/files/0001-Add-missing-compiler-flags-for-GCC-4.3.patch b/recipes/nodejs/files/0001-Add-missing-compiler-flags-for-GCC-4.3.patch
-new file mode 100644
-index 0000000..080b88f
---- /dev/null
-+++ b/recipes/nodejs/files/0001-Add-missing-compiler-flags-for-GCC-4.3.patch
-@@ -0,0 +1,34 @@
-+From 7cb51ed25b688be08825950ce3f5ce2ad38e3f95 Mon Sep 17 00:00:00 2001
-+From: Chase Maupin <Chase.Maupin@ti.com>
-+Date: Tue, 12 Jul 2011 11:00:48 -0500
-+Subject: [PATCH] Add missing compiler flags for GCC 4.3
-+
-+* When compiling nodejs for GCC 4.3.3 you need to also add the
-+  flag -fno-tree-sink.
-+* This patch was taken from the thread at:
-+    * https://github.com/joyent/node/issues/883
-+* Believe that no action is taken on this change upstream because
-+  it is GCC 4.3.3 specific and is not required for GCC 4.5
-+
-+Upstream-Status: Denied
-+
-+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-+---
-+ deps/v8/SConstruct |    1 +
-+ 1 files changed, 1 insertions(+), 0 deletions(-)
-+
-+diff --git a/deps/v8/SConstruct b/deps/v8/SConstruct
-+index b2542fd..31c4c7b 100644
-+--- a/deps/v8/SConstruct
-++++ b/deps/v8/SConstruct
-+@@ -210,6 +210,7 @@ LIBRARY_FLAGS = {
-+     },
-+     'arch:arm': {
-+       'CPPDEFINES':   ['V8_TARGET_ARCH_ARM'],
-++      'CCFLAGS': ['-fno-tree-sink'],
-+       'unalignedaccesses:on' : {
-+         'CPPDEFINES' : ['CAN_USE_UNALIGNED_ACCESSES=1']
-+       },
-+-- 
-+1.7.0.4
-+
-diff --git a/recipes/nodejs/nodejs_0.4.2.bb b/recipes/nodejs/nodejs_0.4.2.bb
-index 40787b4..a06247b 100644
---- a/recipes/nodejs/nodejs_0.4.2.bb
-+++ b/recipes/nodejs/nodejs_0.4.2.bb
-@@ -4,11 +4,21 @@ LICENSE = "MIT"
- 
- DEPENDS = "openssl"
- 
-+PR = "r1"
-+
-+def nodejs_get_gcc_version(d):
-+    import subprocess,os,bb
-+    if os.path.exists(bb.data.getVar('TOOLCHAIN_PATH', d, 1)+'/bin/'+bb.data.getVar('TARGET_PREFIX', d, 1)+'gcc'):
-+        return subprocess.Popen([bb.data.getVar('TOOLCHAIN_PATH', d, 1)+'/bin/'+bb.data.getVar('TARGET_PREFIX', d, 1)+'gcc', '-v'], stderr=subprocess.PIPE).communicate()[1].splitlines()[-1].split()[2]
-+
- SRC_URI = " \
-   http://nodejs.org/dist/node-v${PV}.tar.gz \
-   file://libev-cross-cc_${PV}.patch \
- "
- 
-+# This patch should only be applied for earlier GCC versions.
-+SRC_URI += "${@["", "file://0001-Add-missing-compiler-flags-for-GCC-4.3.patch"][nodejs_get_gcc_version(d) <= "4.3.3"]}"
-+
- SRC_URI[md5sum] = "9e9e791e125f6a601ebc663dc99c72a8"
- SRC_URI[sha256sum] = "09b1100ca6828eedbe52418fbeb3352d71c0b1ff3344c44a5af3efb80c5b908c"
- 
--- 
-1.7.0.4
-
-
+> I'm having problems accessing openembedded.org, including both the web
+> page and GIT repository.  Anyone else seeing the same issue?
+>
+> Thanks,
+> Chris
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
