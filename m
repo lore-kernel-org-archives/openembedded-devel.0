@@ -1,24 +1,21 @@
 Received: from mailrelay04.sunrise.ch ([194.158.229.47]
 	helo=smtp-be-02.be08.sunrise.ch)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dv@vollmann.ch>) id 1Qj4ey-0004G5-Ln
+	(envelope-from <dv@vollmann.ch>) id 1Qj6SR-0003CT-5s
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jul 2011 09:24:04 +0200
+	Tue, 19 Jul 2011 11:19:16 +0200
 Received: from [192.168.26.14] (212-98-43-140.static.adslpremium.ch
 	[212.98.43.140])
 	by smtp-be-02.be08.sunrise.ch (8.13.1/8.12.10) with ESMTP id
-	p6J7KFwT016522; Tue, 19 Jul 2011 09:20:15 +0200
-Message-ID: <4E253020.4050001@vollmann.ch>
-Date: Tue, 19 Jul 2011 09:20:00 +0200
+	p6IJGcLA023950; Mon, 18 Jul 2011 21:16:40 +0200
+Message-ID: <4E248688.1030902@vollmann.ch>
+Date: Mon, 18 Jul 2011 21:16:24 +0200
 From: Detlef Vollmann <dv@vollmann.ch>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
 	rv:1.9.2.18) Gecko/20110617 Thunderbird/3.1.11
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4E248688.1030902@vollmann.ch> <4E249F56.8030907@vollmann.ch>
-	<CABcZANnmZwTK147Vwgv8j9omd7xNQQK5EKT99_UEctC2itw3Jw@mail.gmail.com>
-In-Reply-To: <CABcZANnmZwTK147Vwgv8j9omd7xNQQK5EKT99_UEctC2itw3Jw@mail.gmail.com>
-Subject: Re: preferred version not available
+Subject: preferred version not available
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,24 +29,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jul 2011 07:24:04 -0000
+X-List-Received-Date: Tue, 19 Jul 2011 09:19:16 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 07/18/11 23:05, Chris Larson wrote:
-> On Mon, Jul 18, 2011 at 2:02 PM, Detlef Vollmann<dv@vollmann.ch>  wrote:
->> Ok, I found the problem: PREFERRED_VERSION refers to PV inside
->> the recipe, not to the part of the filename after '_'.
->> As I tinker with PV inside the recipe, bitbake is actually correct
->> that a PV 'githead' is not available for linux-taurus.
->
-> All variables which are typically set by the filename can be
-> overridden. Those are simply defaults. See the definitions of PN, PV,
-> and PR in bitbake.conf.
-Yes, I knew that (I actually wrote the line changing the PV myself).
-What surprised me (though it makes sense) that PREFERRED_VERSION
-refers to PV, and not directly to a part of the filename.
-It's probably still too much of 'make' history in my brain...
+Hello,
+
+this one really drives me crazy.
+
+Here's what I do:
+$ bitbake -D -D -D -D -g linux-taurus | fgrep linux-taurus
+DEBUG: Cache: /src/ccp-oe/taurus/recipes/linux/linux-taurus_githead.bb 
+is not cached
+DEBUG: BB /src/ccp-oe/taurus/recipes/linux/linux-taurus_githead.bb: 
+handle(data)
+DEBUG: LOAD /src/ccp-oe/taurus/recipes/linux/linux-taurus_githead.bb
+DEBUG: CONF /src/ccp-oe/taurus/recipes/linux/linux-taurus_githead.bb:5: 
+including recipes/linux/ccp-linux.inc
+DEBUG: providers for linux-taurus are: ['linux-taurus']
+NOTE: preferred version githead of linux-taurus not available (for item 
+linux-taurus)
+
+It already starts with the first 'DEBUG' line: Why is it not cached.
+I have some other recipes for linux-taurus with version numbers that
+don't get parsed again because they are cached.
+But I can live with that.
+What really drives me nuts is the last line: it clearly parsed
+linux-taurus_githead.bb before, doesn't give me any error on it,
+but then tells me 'preferred version githead of linux-taurus not
+available'.  It's clearly there, so why is it not available?
+
+The interesting thing is that I don't have any problems with my
+other *_githead.bb recipes, only with the linux kernel...
+
+I'd really appreciate any help!
 
    Detlef
 
