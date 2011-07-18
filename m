@@ -1,28 +1,28 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <george.huntingtoniii@gmail.com>) id 1QivWk-000765-51
+	(envelope-from <kg4ysn@gmail.com>) id 1QivhZ-0007P7-Hj
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jul 2011 23:39:03 +0200
-Received: by gwb11 with SMTP id 11so1545809gwb.6
+	Mon, 18 Jul 2011 23:50:09 +0200
+Received: by vws2 with SMTP id 2so2789667vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jul 2011 14:33:21 -0700 (PDT)
+	Mon, 18 Jul 2011 14:46:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=uNxfUPjvd4PQ18agCNnYrndyAUskcqLh4OUJbbpS7EU=;
-	b=pY06Q7GeaPbj7T/LC/vLZy+Tl/D5gJuGP4J+fV3uV2f/B7fWe+ZXlLrBwVvc4mjzr1
-	buPJHc5MeJMfZ2v4JalFK5Sh7KoOfrpFkHXFk/rXFTIvjIizmy7PLIHVKrXlVWoHASF+
-	YV4SjpFWWZklXvX6cdKAWZHc9ca4RULJj3mhs=
+	:content-type; bh=RNpgXVZqGQHDrvay2nrvXEMEic6eAmvhW05RbojSWAE=;
+	b=Qg3jvwAiYZyt8aiXEaodM6pcIc5CpavENJPsjFgtcEdJL9DCKhQ8ID8C70rD4e9Jyt
+	Nxu76PIjMGOnu8LgQcUp3ihf0mcN07ABQL5URJ00fGHlmsrlfXOaOU9TWK3D27RWdsOy
+	u59Buc4VZZyz1/vHFghlxS4fzj7/V76zltQOM=
 MIME-Version: 1.0
-Received: by 10.236.123.132 with SMTP id v4mr8197475yhh.509.1311024467953;
-	Mon, 18 Jul 2011 14:27:47 -0700 (PDT)
-Received: by 10.236.95.42 with HTTP; Mon, 18 Jul 2011 14:27:47 -0700 (PDT)
-In-Reply-To: <CAG4_upS3oVQVwdiEkx55V2xHbZpFqaho4LuFfDG1nczgTT2WYQ@mail.gmail.com>
+Received: by 10.220.152.147 with SMTP id g19mr872885vcw.260.1311025164028;
+	Mon, 18 Jul 2011 14:39:24 -0700 (PDT)
+Received: by 10.220.178.130 with HTTP; Mon, 18 Jul 2011 14:39:23 -0700 (PDT)
+In-Reply-To: <CAFu+nvGHewuHF9vJFqfXq5cj_B3tF0cXjAy3KK1W4quCPYeNEA@mail.gmail.com>
 References: <CAG4_upS3oVQVwdiEkx55V2xHbZpFqaho4LuFfDG1nczgTT2WYQ@mail.gmail.com>
-Date: Mon, 18 Jul 2011 17:27:47 -0400
-Message-ID: <CAFu+nvGHewuHF9vJFqfXq5cj_B3tF0cXjAy3KK1W4quCPYeNEA@mail.gmail.com>
-From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
+	<CAFu+nvGHewuHF9vJFqfXq5cj_B3tF0cXjAy3KK1W4quCPYeNEA@mail.gmail.com>
+Date: Mon, 18 Jul 2011 14:39:24 -0700
+Message-ID: <CAG4_upSOyjX7KhEVrbC8pYPfY-RZay-kcOevSjWunBmcHO=LqA@mail.gmail.com>
+From: Chris Verges <kg4ysn@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Problems accessing openembedded.org?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -37,22 +37,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jul 2011 21:39:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 18 Jul 2011 21:50:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-I am having the same problem.
+On Mon, Jul 18, 2011 at 2:27 PM, George C. Huntington, III
+<george.huntingtoniii@gmail.com> wrote:
+> I am having the same problem.
 
-On Mon, Jul 18, 2011 at 5:25 PM, Chris Verges <kg4ysn@gmail.com> wrote:
+I just checked in on the IRC list.  Looks like melo is having some
+hardware fits at the moment.  Sounds like they're working on it.
 
-> I'm having problems accessing openembedded.org, including both the web
-> page and GIT repository.  Anyone else seeing the same issue?
->
-> Thanks,
-> Chris
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Chris
+
 
