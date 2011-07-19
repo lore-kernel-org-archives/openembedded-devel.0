@@ -1,31 +1,34 @@
-Received: from tritech.se ([91.191.137.61])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Mats.Karrman@tritech.se>) id 1QjArY-0001RU-5t
+	(envelope-from <kergoth@gmail.com>) id 1QjBx0-0003C2-4m
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jul 2011 16:01:28 +0200
-Received: from post.tritech.se (post.tritech.se [10.75.60.100])
-	by tritech.se (8.14.3/8.14.3) with ESMTP id p6JDvHbk028983
+	Tue, 19 Jul 2011 17:11:10 +0200
+Received: by vxh2 with SMTP id 2so2718443vxh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jul 2011 15:57:22 +0200
-Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
-	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
-	14.01.0270.001; Tue, 19 Jul 2011 15:57:18 +0200
-From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: Added header file to linux kernel - how to export
-Thread-Index: AcxGD4ih4YSdUb0mRcCpV/r1/P2CaQADDFeK
-Date: Tue, 19 Jul 2011 13:57:17 +0000
-Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C06CA7F@post.tritech.se>
-References: <ED3E0BCACD909541BA94A34C4A164D4C06CA55@post.tritech.se>
-In-Reply-To: <ED3E0BCACD909541BA94A34C4A164D4C06CA55@post.tritech.se>
-Accept-Language: en-US, sv-SE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [194.132.137.34]
+	Tue, 19 Jul 2011 08:07:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=qcK7pY3dAkVVF5H2VwhJkY2ccOy1eszh3uB4571yIHY=;
+	b=Swz3hLSwsUIz8RMf47ctze6ClTBJpfNfEnrxzN4z60u0l6v18en61pMlUtZ02RZqs6
+	iuAHCI0dJXTN3Hj72MHghpBc6BiMzhGBDCQZd2ABRquDrgGumrwQsnXTWFkq8m2TjfZs
+	3kj2vVtXxgX2wSZM6MTvMTiWvDQe5ATu4Q9zk=
+Received: by 10.52.73.234 with SMTP id o10mr3149650vdv.174.1311088024091; Tue,
+	19 Jul 2011 08:07:04 -0700 (PDT)
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Added header file to linux kernel - how to export
+Sender: kergoth@gmail.com
+Received: by 10.52.181.104 with HTTP; Tue, 19 Jul 2011 08:06:43 -0700 (PDT)
+In-Reply-To: <4E253020.4050001@vollmann.ch>
+References: <4E248688.1030902@vollmann.ch> <4E249F56.8030907@vollmann.ch>
+	<CABcZANnmZwTK147Vwgv8j9omd7xNQQK5EKT99_UEctC2itw3Jw@mail.gmail.com>
+	<4E253020.4050001@vollmann.ch>
+From: Chris Larson <clarson@kergoth.com>
+Date: Tue, 19 Jul 2011 08:06:44 -0700
+X-Google-Sender-Auth: lUlDUBJ3UFERc30B3mWG2qU1e-4
+Message-ID: <CABcZANmEtiVPuYE_RQ4A9kupeEagt2LT7EGF1nkTK2YAKQvVaA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: preferred version not available
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,27 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jul 2011 14:01:28 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Tue, 19 Jul 2011 15:11:10 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Tue, Jul 19, 2011 at 12:20 AM, Detlef Vollmann <dv@vollmann.ch> wrote:
+> On 07/18/11 23:05, Chris Larson wrote:
+>>
+>> On Mon, Jul 18, 2011 at 2:02 PM, Detlef Vollmann<dv@vollmann.ch> =C2=A0w=
+rote:
+>>>
+>>> Ok, I found the problem: PREFERRED_VERSION refers to PV inside
+>>> the recipe, not to the part of the filename after '_'.
+>>> As I tinker with PV inside the recipe, bitbake is actually correct
+>>> that a PV 'githead' is not available for linux-taurus.
+>>
+>> All variables which are typically set by the filename can be
+>> overridden. Those are simply defaults. See the definitions of PN, PV,
+>> and PR in bitbake.conf.
+>
+> Yes, I knew that (I actually wrote the line changing the PV myself).
+> What surprised me (though it makes sense) that PREFERRED_VERSION
+> refers to PV, and not directly to a part of the filename.
 
-I have made a patch to the linux kernel, involving adding some ioctl's. Rel=
-evant definitions are in a .h file. Now I need to access this .h file from =
-another recipe (that builds a utility using those ioctl's) but the headers =
-in sysroots/xxx-linux/usr/include are put there (by linux-libc-headers?) lo=
-ng before the target Linux kernel is patched and built.
-
-I'm thinking about adding a do_install_append to the linux recipe but that =
-doesn't feel right. Neither does adding a path from the util recipe build t=
-o the work folder of linux kernel. Third alternative would be to build the =
-driver as an LKM but I really like to have it built into the kernel...
-
-If any of you have some good advice here I would be very happy!
-
-Best Regards,
-Mats
+I'm not sure why that would be surprising. PN, PV, and PR are what are
+used. The fact that they default to being based on the filename is
+just an artifact of how oe does things. You could quite easily change
+that, and make it required to set them all in the recipe. Bitbake does
+*not* care about the filename, other than in determining what bbappend
+to apply to the recipe when an append exists.
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
