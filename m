@@ -1,22 +1,40 @@
-Received: from hsvwanfw1-nat.mentorg.com ([139.181.24.34] helo=alm.mentorg.com)
+Received: from thoth.sbs.de ([192.35.17.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom_rini@mentor.com>) id 1QjCQ2-0003p0-Sy
+	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1QjF2T-0004yO-Qs
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jul 2011 17:41:40 +0200
-Received: from localhost.localdomain ([134.86.97.33])
-	by alm.mentorg.com (8.12.10/8.12.10) with ESMTP id p6JFYIMg027736
+	Tue, 19 Jul 2011 20:29:02 +0200
+Received: from mail2.siemens.de (localhost [127.0.0.1])
+	by thoth.sbs.de (8.13.6/8.13.6) with ESMTP id p6JIEGll031912
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jul 2011 10:34:18 -0500
-From: Tom Rini <tom_rini@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Jul 2011 08:34:18 -0700
-Message-Id: <77d8aec24367e1b062cf529087d581039a2c8e98.1311089581.git.tom_rini@mentor.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <cover.1311089581.git.tom_rini@mentor.com>
-References: <cover.1311089581.git.tom_rini@mentor.com>
-In-Reply-To: <cover.1311089581.git.tom_rini@mentor.com>
-References: <cover.1311089581.git.tom_rini@mentor.com>
-Subject: [meta-oe][PATCH v2 1/2] guile: Move 'configure-fix.patch' to guile-1.8.7 dir
+	Tue, 19 Jul 2011 20:14:16 +0200
+Received: from DEMCHP99ET0MSX.ww902.siemens.net
+	(demchp99et0msx.ww902.siemens.net [139.25.131.181])
+	by mail2.siemens.de (8.13.6/8.13.6) with ESMTP id p6JIEFfQ026143
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jul 2011 20:14:16 +0200
+Received: from DEMCHP99ET4MSX.ww902.siemens.net (139.25.131.174) by
+	DEMCHP99ET0MSX.ww902.siemens.net (139.25.131.181) with Microsoft SMTP
+	Server (TLS) id 8.3.192.1; Tue, 19 Jul 2011 20:14:15 +0200
+Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.162]) by
+	DEMCHP99ET4MSX.ww902.siemens.net ([139.25.131.174]) with mapi;
+	Tue, 19 Jul 2011 20:14:15 +0200
+From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Tue, 19 Jul 2011 20:14:14 +0200
+Thread-Topic: Added header file to linux kernel - how to export
+Thread-Index: AcxGD4ih4YSdUb0mRcCpV/r1/P2CaQADDFeKAACs9iA=
+Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819E0157569991@DEMCHP99E35MSX.ww902.siemens.net>
+References: <ED3E0BCACD909541BA94A34C4A164D4C06CA55@post.tritech.se>
+	<ED3E0BCACD909541BA94A34C4A164D4C06CA7F@post.tritech.se>
+In-Reply-To: <ED3E0BCACD909541BA94A34C4A164D4C06CA7F@post.tritech.se>
+Accept-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: de-DE
+MIME-Version: 1.0
+Subject: Re: Added header file to linux kernel - how to export
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,22 +48,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jul 2011 15:41:40 -0000
+X-List-Received-Date: Tue, 19 Jul 2011 18:29:02 -0000
+Content-Language: de-DE
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-This patch is used by both native and target recipes.
+Hi,
 
-Signed-off-by: Tom Rini <tom_rini@mentor.com>
----
- .../configure-fix.patch                            |    0
- 1 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/recipes-support/guile/{guile-native-1.8.7 => guile-1.8.7}/configure-fix.patch (100%)
+Your could put something like this:
 
-diff --git a/meta-oe/recipes-support/guile/guile-native-1.8.7/configure-fix.patch b/meta-oe/recipes-support/guile/guile-1.8.7/configure-fix.patch
-similarity index 100%
-rename from meta-oe/recipes-support/guile/guile-native-1.8.7/configure-fix.patch
-rename to meta-oe/recipes-support/guile/guile-1.8.7/configure-fix.patch
--- 
-1.7.0.4
+do_stage_append() {
+	cp ${S}/my_ioctl.h ${STAGING_KERNEL_DIR}/include/linux
+}
 
+in your recipes/linux<xxx>.bb
+
+With kind regards,
+   Fabrice
+
+> -----Urspr=FCngliche Nachricht-----
+> Von: openembedded-devel-bounces@lists.openembedded.org=20
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] Im=20
+> Auftrag von Mats K=E4rrman
+> Gesendet: Dienstag, 19. Juli 2011 15:57
+> An: openembedded-devel@lists.openembedded.org
+> Betreff: [oe] Added header file to linux kernel - how to export
+>=20
+> Hi,
+>=20
+> I have made a patch to the linux kernel, involving adding=20
+> some ioctl's. Relevant definitions are in a .h file. Now I=20
+> need to access this .h file from another recipe (that builds=20
+> a utility using those ioctl's) but the headers in=20
+> sysroots/xxx-linux/usr/include are put there (by=20
+> linux-libc-headers?) long before the target Linux kernel is=20
+> patched and built.
+>=20
+> I'm thinking about adding a do_install_append to the linux=20
+> recipe but that doesn't feel right. Neither does adding a=20
+> path from the util recipe build to the work folder of linux=20
+> kernel. Third alternative would be to build the driver as an=20
+> LKM but I really like to have it built into the kernel...
+>=20
+> If any of you have some good advice here I would be very happy!
+>=20
+> Best Regards,
+> Mats
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> =
 
 
