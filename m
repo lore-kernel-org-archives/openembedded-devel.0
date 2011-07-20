@@ -1,31 +1,34 @@
 Received: from mail-fx0-f51.google.com ([209.85.161.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Qjdv6-0003D0-I5
+	(envelope-from <martin.jansa@gmail.com>) id 1QjdvE-0003D0-79
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jul 2011 23:03:04 +0200
+	Wed, 20 Jul 2011 23:03:12 +0200
 Received: by mail-fx0-f51.google.com with SMTP id 10so2387421fxh.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jul 2011 13:59:00 -0700 (PDT)
+	Wed, 20 Jul 2011 13:59:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=J0w1GZsP0h34A9nJzM/BLTEivfEn89ane0U+4cobpo0=;
-	b=UQxQttlcK/cKDQfv6Y/o7IQH9Z6lbNvHaUGsrszf/poB+kKkCiaggZAGQ+dlR90a/S
-	dperFbEQC7ZPHUL/wWaWALhauX2owa2aLkGZq46YazLrn2WDk8VsFz+S72ly+cq8kfxc
-	OqChN/vzWPPscSutxv7Y7TMGg0rW9n1JGiGAI=
-Received: by 10.223.28.7 with SMTP id k7mr812694fac.70.1311195540171;
-	Wed, 20 Jul 2011 13:59:00 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=+EM0BLpb7KJ1h+BHkz0GQQk0v5J8Q9F1YO5xPCdvlp8=;
+	b=sgex+LtyxlY4MtXHzcb17knvMxj0Di/KLFjRN2DGnW4HzE0QSwO2N381vjTArwfktP
+	V8xEYJZ26+4rPkmTwESD/ME6rn7cj2ErEpg1bL/MhQ6CrG1I7iWaL8j+XmhsSYH//z24
+	S4WXFZ//CnCdonf20+GsE0WREAmTfsUTHOKOc=
+Received: by 10.223.14.204 with SMTP id h12mr8852840faa.89.1311195547880;
+	Wed, 20 Jul 2011 13:59:07 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id s10sm927020fah.46.2011.07.20.13.58.58
+	by mx.google.com with ESMTPS id 28sm930458fax.27.2011.07.20.13.59.06
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 20 Jul 2011 13:58:59 -0700 (PDT)
+	Wed, 20 Jul 2011 13:59:06 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Jul 2011 22:58:46 +0200
-Message-Id: <ac2a5d6d9f55737cc5a6297303722d9188e37b33.1311195484.git.Martin.Jansa@gmail.com>
+Date: Wed, 20 Jul 2011 22:58:47 +0200
+Message-Id: <6b97e0156fb4c6b2d208ade8221d1a216f420dc3.1311195484.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.6
+In-Reply-To: <ac2a5d6d9f55737cc5a6297303722d9188e37b33.1311195484.git.Martin.Jansa@gmail.com>
+References: <ac2a5d6d9f55737cc5a6297303722d9188e37b33.1311195484.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1311195484.git.Martin.Jansa@gmail.com>
 References: <cover.1311195484.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 1/5] vala-dbus-binding-tool: inherit perlnative
+Subject: [meta-oe][PATCH 2/5] pidgin: inherit perlnative
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,7 +42,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jul 2011 21:03:04 -0000
+X-List-Received-Date: Wed, 20 Jul 2011 21:03:12 -0000
 
 * otherwise perl from host is used and if there isn't libxml-parser-perl
   installed on host it fails with:
@@ -47,21 +50,22 @@ X-List-Received-Date: Wed, 20 Jul 2011 21:03:04 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../vala-dbus-binding-tool.inc                     |    2 +-
+ meta-oe/recipes-support/pidgin/pidgin.inc |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool.inc b/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool.inc
-index d86e923..a59488d 100644
---- a/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool.inc
-+++ b/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool.inc
-@@ -11,6 +11,6 @@ export XDG_DATA_DIRS = "${STAGING_DATADIR}"
+diff --git a/meta-oe/recipes-support/pidgin/pidgin.inc b/meta-oe/recipes-support/pidgin/pidgin.inc
+index 91d5176..9d21976 100644
+--- a/meta-oe/recipes-support/pidgin/pidgin.inc
++++ b/meta-oe/recipes-support/pidgin/pidgin.inc
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ DEPENDS = "python startup-notification avahi gtk+ ncurses gnutls virtual/libintl gstreamer dbus"
+ INC_PR = "r0"
  
- SRC_URI = "http://downloads.freesmartphone.org/sources/vala-dbus-binding-tool-${PV}.tar.bz2;name=archive"
+-inherit autotools gettext pkgconfig gconf
++inherit autotools gettext pkgconfig gconf perlnative
  
--inherit autotools
-+inherit autotools perlnative
- 
- BBCLASSEXTEND = "native"
+ EXTRA_OECONF = " \
+ 		--enable-vv \
 -- 
 1.7.6
 
