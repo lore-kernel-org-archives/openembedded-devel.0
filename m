@@ -1,26 +1,29 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <Alexander.Stohr@gmx.de>) id 1QjXHC-00023Z-16
+Received: from mail-fx0-f51.google.com ([209.85.161.51])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <martin.jansa@gmail.com>) id 1Qjdv5-0003D0-FG
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jul 2011 15:57:26 +0200
-Received: (qmail 20262 invoked by uid 0); 20 Jul 2011 13:26:39 -0000
-Received: from 193.8.40.126 by www038.gmx.net with HTTP;
-	Wed, 20 Jul 2011 15:26:36 +0200 (CEST)
-Date: Wed, 20 Jul 2011 15:26:36 +0200
-From: "Alexander Stohr" <Alexander.Stohr@gmx.de>
-Message-ID: <20110720132636.276450@gmx.net>
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, fpletz@franz-pletz.org,
-	genext2fs-devel@lists.sourceforge.net
-X-Authenticated: #15156664
-X-Flags: 0001
-X-Mailer: WWW-Mail 6100 (Global Message Exchange)
-X-Priority: 3
-X-Provags-ID: V01U2FsdGVkX18hMuhn210hrlL8sv1kgnq8wJVFgpoLpqOrjIst+0
-	nkhtk4DNL0yTwV5xJBdqa9upaxPpTIeQns2w== 
-X-GMX-UID: uOUUfcxcPTR+Ho921jIwmpw5c2tpZAui
-Cc: tytso@mit.edu, xavier.bestel@free.fr
-Subject: genext2fs: patch for fixing inode based symlink string length limit
+	Wed, 20 Jul 2011 23:03:03 +0200
+Received: by fxh10 with SMTP id 10so2387421fxh.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Jul 2011 13:58:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=PXE1B/GqmKrKd4Xi+r/aK7HItnqTKOx08z+VPOROvPE=;
+	b=BfEAn/VOYCP47mRv4WO1ujOfH6CkYpcL6Lla8CqD8shTgqFXfRGGZiRsj/aFGZ2v1G
+	OFW8LvGEYSxmpDPyBF9+RO5/+K04xAfSkcRMcVyXg1X683gaJuV6ee36rCX7zL5IUtOk
+	42Yktugx1CpyQvJrig6idr1aA8Cgb0nhDaO/s=
+Received: by 10.204.154.194 with SMTP id p2mr2609342bkw.257.1311195525239;
+	Wed, 20 Jul 2011 13:58:45 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id q1sm4070484faa.1.2011.07.20.13.58.42
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 20 Jul 2011 13:58:43 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 20 Jul 2011 22:58:35 +0200
+Message-Id: <cover.1311195484.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.6
+Subject: [meta-oe][PATCH 0/5] Pull request #18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,62 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jul 2011 13:57:26 -0000
-X-Groupsio-MsgNum: 33245
-Content-Type: multipart/mixed; boundary="========GMX276451311168396334696"
+X-List-Received-Date: Wed, 20 Jul 2011 21:03:03 -0000
 
---========GMX276451311168396334696
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+The following changes since commit 037a063303d35c2fab8097d977aa5625c916c565:
 
-below patch fixes a problem with symlinks where the target string had exactly 59 chars and the needed terminating null character.
+  connman: update to 0.76 (2011-07-20 09:13:00 +0200)
 
-(where the problem hits: when a fs with such entries gets checked by e2fsck
-then those tool detects it as a problem and offers to delete that symlink.
-if running an automated fixing cycle it would kill me all those symlinks.)
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/meta-oe
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/meta-oe
 
-regards, Alex.
+Martin Jansa (5):
+  vala-dbus-binding-tool: inherit perlnative
+  pidgin: inherit perlnative
+  tangogps: add misssing dependency bluez4
+  bluez4: add missing dependency usbpath
+  vala-terminal: inherit perlnative
 
-PS: in a test bed with a generated image file i am further seeing a note from e2fsck about a fs with revision zero but feature flags are set.
-thats reported as a fs problem and a fix is suggested by a y/n query.
-
+ meta-oe/recipes-connectivity/bluez/bluez4_4.93.bb  |    2 +-
+ .../vala-dbus-binding-tool.inc                     |    2 +-
+ .../recipes-navigation/tangogps/tangogps_0.99.4.bb |    2 +-
+ meta-oe/recipes-support/pidgin/pidgin.inc          |    2 +-
+ .../vala-terminal/vala-terminal_git.bb             |    2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
 
 -- 
-NEU: FreePhone - 0ct/min Handyspartarif mit Geld-zurück-Garantie!		
-Jetzt informieren: http://www.gmx.net/de/go/freephone
+1.7.6
 
---========GMX276451311168396334696
-Content-Type: text/x-patch;
- charset="iso-8859-15";
- name="genext2fs.c-fix-symlink-len.diff"
-Content-Transfer-Encoding: 8bit
-Content-Disposition: attachment; filename="genext2fs.c-fix-symlink-len.diff"
 
-diff -Nru genext2fs-1.4.1.orig/genext2fs.c genext2fs-1.4.1/genext2fs.c
---- genext2fs-1.4.1.orig/genext2fs.c	2011-07-20 10:57:24.000000000 +0200
-+++ genext2fs-1.4.1/genext2fs.c	2011-07-20 14:34:11.000000000 +0200
-@@ -1415,9 +1415,10 @@
- 	uint32 nod = mknod_fs(fs, parent_nod, name, FM_IFLNK | FM_IRWXU | FM_IRWXG | FM_IRWXO, uid, gid, 0, 0, ctime, mtime);
- 	extend_blk(fs, nod, 0, - (int)get_nod(fs, nod)->i_blocks / INOBLK);
- 	get_nod(fs, nod)->i_size = size;
--	if(size <= 4 * (EXT2_TIND_BLOCK+1))
-+	if(size < 4 * (EXT2_TIND_BLOCK+1))
- 	{
- 		strncpy((char*)get_nod(fs, nod)->i_block, (char*)b, size);
-+		((char*)get_nod(fs, nod)->i_block)[size+1] = '\0';
- 		return nod;
- 	}
- 	extend_blk(fs, nod, b, rndup(size, BLOCKSIZE) / BLOCKSIZE);
-@@ -1643,6 +1644,10 @@
- 			switch(st.st_mode & S_IFMT)
- 			{
- 				case S_IFLNK:
-+					if((st.st_mode & S_IFMT) == S_IFREG || st.st_size >= 4 * (EXT2_TIND_BLOCK+1))
-+						stats->nblocks += (st.st_size + BLOCKSIZE - 1) / BLOCKSIZE;
-+					stats->ninodes++;
-+					break;
- 				case S_IFREG:
- 					if((st.st_mode & S_IFMT) == S_IFREG || st.st_size > 4 * (EXT2_TIND_BLOCK+1))
- 						stats->nblocks += (st.st_size + BLOCKSIZE - 1) / BLOCKSIZE;
 
---========GMX276451311168396334696--
