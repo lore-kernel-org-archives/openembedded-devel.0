@@ -1,34 +1,34 @@
-Received: from mail-fx0-f51.google.com ([209.85.161.51])
+Received: from mail-ey0-f178.google.com ([209.85.215.178])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QjdvT-0003D0-Mk
+	(envelope-from <martin.jansa@gmail.com>) id 1Qjdve-0003FR-KP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jul 2011 23:03:27 +0200
-Received: by mail-fx0-f51.google.com with SMTP id 10so2387421fxh.10
+	Wed, 20 Jul 2011 23:03:38 +0200
+Received: by eye4 with SMTP id 4so1612948eye.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jul 2011 13:59:23 -0700 (PDT)
+	Wed, 20 Jul 2011 13:59:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=y5ml9nF2GcdwpsDQlm32/TcUhhKq+jkkmgijYOvNxPg=;
-	b=Bv5sUil10QxihEICDupdOtTWsWTH019ZCpkPslr2W8A8dgnvJIWMTtJ0LlAMKb9ZSE
-	lKNWnta/mUjD7Y+CT9uEYsLwHR9xOmCK5jGKfdP0LicihNcRfmkXHSsRM06CgB9G14DN
-	mhej8N6O+4AmITidhEV1MMBxLI8f8mQxWN1mI=
-Received: by 10.223.24.17 with SMTP id t17mr194507fab.143.1311195563360;
-	Wed, 20 Jul 2011 13:59:23 -0700 (PDT)
+	bh=2O2yPDXV7L3wST9YlKLOfM2nS3G/h5+a303JHJeZFqo=;
+	b=CMN/cOIYvp2LeWUr+fVtr4JUCKWvKQh0lT1e7VHl8XwXs3BN1jLfV9B1Mi+CmfkRgY
+	RKhEh3uKCavYzy/+uLBm4LFFuTmBSqlbaSPZW1w/6uq5XR7QpGxAAvudFZd1y/5K2mhs
+	uJNiwrRNfVDE5/GqGUleyaFVq+v3gq/j42F1c=
+Received: by 10.205.83.194 with SMTP id ah2mr2709922bkc.49.1311195571174;
+	Wed, 20 Jul 2011 13:59:31 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id s10sm927243fah.46.2011.07.20.13.59.21
+	by mx.google.com with ESMTPS id s16sm4070252fah.0.2011.07.20.13.59.29
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 20 Jul 2011 13:59:22 -0700 (PDT)
+	Wed, 20 Jul 2011 13:59:30 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Jul 2011 22:58:49 +0200
-Message-Id: <30479bfbd667bc29553eae73b1bab78f4cb248a4.1311195484.git.Martin.Jansa@gmail.com>
+Date: Wed, 20 Jul 2011 22:58:50 +0200
+Message-Id: <d497df9ff76e945d268b95c558977f98df671371.1311195484.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.6
 In-Reply-To: <ac2a5d6d9f55737cc5a6297303722d9188e37b33.1311195484.git.Martin.Jansa@gmail.com>
 References: <ac2a5d6d9f55737cc5a6297303722d9188e37b33.1311195484.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1311195484.git.Martin.Jansa@gmail.com>
 References: <cover.1311195484.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 4/5] bluez4: add missing dependency usbpath
+Subject: [meta-oe][PATCH 5/5] vala-terminal: inherit perlnative
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,26 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jul 2011 21:03:27 -0000
+X-List-Received-Date: Wed, 20 Jul 2011 21:03:38 -0000
+
+* otherwise perl from host is used and if there isn't libxml-parser-perl
+  installed on host it fails with:
+  checking for XML::Parser... configure: error: XML::Parser perl module is required for intltool
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-connectivity/bluez/bluez4_4.93.bb |    2 +-
+ .../vala-terminal/vala-terminal_git.bb             |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4_4.93.bb b/meta-oe/recipes-connectivity/bluez/bluez4_4.93.bb
-index ab85776..7688986 100644
---- a/meta-oe/recipes-connectivity/bluez/bluez4_4.93.bb
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4_4.93.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e \
-                     file://COPYING.LIB;md5=fb504b67c50331fc78734fed90fb0e09 \
-                     file://src/main.c;beginline=1;endline=24;md5=9bc54b93cd7e17bf03f52513f39f926e \
-                     file://sbc/sbc.c;beginline=1;endline=25;md5=1a40781ed30d50d8639323a184aeb191"
--DEPENDS = "udev gst-plugins-base alsa-lib libusb dbus-glib libnl"
-+DEPENDS = "udev gst-plugins-base alsa-lib libusb dbus-glib libnl usbpath"
- RDEPENDS_${PN}-dev = "bluez-hcidump"
+diff --git a/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb b/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
+index 1900b6f..2549fd6 100644
+--- a/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
++++ b/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
+@@ -8,7 +8,7 @@ PV = "1.1.1+gitr${SRCPV}"
+ PE = "1"
+ PR = "r1"
  
- ASNEEDED = ""
+-inherit autotools
++inherit autotools perlnative
+ 
+ SRC_URI = "${FREESMARTPHONE_GIT}/vala-terminal.git;protocol=git;branch=master"
+ S = "${WORKDIR}/git"
 -- 
 1.7.6
 
