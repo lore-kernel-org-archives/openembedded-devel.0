@@ -1,35 +1,23 @@
-Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1QjT1M-0005fH-Vz
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1QjT7H-0005pL-F7
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jul 2011 11:24:50 +0200
-Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
-	by outpost1.zedat.fu-berlin.de (Exim 4.69)
-	for openembedded-devel@lists.openembedded.org with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1QjSiC-0001Ws-Aa>; Wed, 20 Jul 2011 11:05:00 +0200
-Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
-	by relay1.zedat.fu-berlin.de (Exim 4.69)
-	for openembedded-devel@lists.openembedded.org with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1QjSiC-0002YM-8L>; Wed, 20 Jul 2011 11:05:00 +0200
-Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
-	4.72) id 1QjSiC-0001Gf-5l
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jul 2011 11:05:00 +0200
-Date: Wed, 20 Jul 2011 11:05:00 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Wed, 20 Jul 2011 11:30:55 +0200
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 20 Jul 2011 02:26:48 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,233,1309762800"; d="scan'208";a="29336639"
+Received: from unknown (HELO helios.localnet) ([10.255.17.201])
+	by azsmga001.ch.intel.com with ESMTP; 20 Jul 2011 02:26:47 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110720090459.GA3173@mi.fu-berlin.de>
-References: <ED3E0BCACD909541BA94A34C4A164D4C06CA55@post.tritech.se>
-	<ED3E0BCACD909541BA94A34C4A164D4C06CA7F@post.tritech.se>
-	<09D9BE2AC4AA764DABAA8C91E48D819E0157569991@DEMCHP99E35MSX.ww902.siemens.net>
+Date: Wed, 20 Jul 2011 10:26:46 +0100
+User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic-pae; KDE/4.6.2; i686; ; )
+References: <4E269D1F.9070009@nedap.com>
+In-Reply-To: <4E269D1F.9070009@nedap.com>
 MIME-Version: 1.0
-In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819E0157569991@DEMCHP99E35MSX.ww902.siemens.net>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Sender: Heinold <heinold@mi.fu-berlin.de>
-X-Originating-IP: 160.45.42.84
-Subject: Re: Added header file to linux kernel - how to export
+Message-Id: <201107201026.46169.paul.eggleton@linux.intel.com>
+Subject: Re: best practice .inc files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,29 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jul 2011 09:24:50 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 20 Jul 2011 09:30:55 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jul 19, 2011 at 08:14:14PM +0200, Aeschbacher, Fabrice wrote:
-> Hi,
-> 
-> Your could put something like this:
-> 
-> do_stage_append() {
-> 	cp ${S}/my_ioctl.h ${STAGING_KERNEL_DIR}/include/linux
-> }
-> 
-> in your recipes/linux<xxx>.bb
-> 
-> With kind regards,
->    Fabrice
+On Wednesday 20 July 2011 10:17:19 Jaap de Jong wrote:
+> I'm using the 2010.12 release.
+> I've created my own u-boot_2010.09.bb file in my local repository.
+> In it is aline
+>      require u-boot.inc
+> (every u-boot*.bb recipe has it)
+> Now I need a copy of the openembedded/recipes/u-boot/u-boot.inc in my
+> local repository to get it bitbaked.
+> (Well actually I've symlinked the file)
+> I think both solutions are not optimal.
+> Is there a way to this in a more gentle way?
 
-Hi,
+If you use the path starting from the base i.e. "require recipes/u-boot/u-
+boot.inc" it should work.
 
-do_stage shouldn't be used anymore. Do it via do_install method.
+Cheers,
+Paul
 
+-- 
 
-Bye Henning
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
