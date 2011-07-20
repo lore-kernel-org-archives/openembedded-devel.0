@@ -1,40 +1,26 @@
-Received: from david.siemens.de ([192.35.17.14])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1QjX4z-0001rT-Bj
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <Alexander.Stohr@gmx.de>) id 1QjXHC-00023Z-16
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jul 2011 15:44:49 +0200
-Received: from mail3.siemens.de (localhost [127.0.0.1])
-	by david.siemens.de (8.13.6/8.13.6) with ESMTP id p6KDSisF001369
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jul 2011 15:28:44 +0200
-Received: from DEMCHP99ET0MSX.ww902.siemens.net
-	(demchp99et0msx.ww902.siemens.net [139.25.131.181])
-	by mail3.siemens.de (8.13.6/8.13.6) with ESMTP id p6KDShlb028466
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jul 2011 15:28:44 +0200
-Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.162]) by
-	DEMCHP99ET0MSX.ww902.siemens.net ([139.25.131.181]) with mapi;
-	Wed, 20 Jul 2011 15:28:43 +0200
-From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 20 Jul 2011 15:28:42 +0200
-Thread-Topic: [oe] Added header file to linux kernel - how to export
-Thread-Index: AcxGD4ih4YSdUb0mRcCpV/r1/P2CaQADDFeKAACs9iAAIzpLAAAMqOUPAACMLCA=
-Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819E0157569AF9@DEMCHP99E35MSX.ww902.siemens.net>
-References: <ED3E0BCACD909541BA94A34C4A164D4C06CA55@post.tritech.se>
-	<ED3E0BCACD909541BA94A34C4A164D4C06CA7F@post.tritech.se>
-	<09D9BE2AC4AA764DABAA8C91E48D819E0157569991@DEMCHP99E35MSX.ww902.siemens.net>,
-	<20110720090459.GA3173@mi.fu-berlin.de>
-	<ED3E0BCACD909541BA94A34C4A164D4C06CB64@post.tritech.se>
-In-Reply-To: <ED3E0BCACD909541BA94A34C4A164D4C06CB64@post.tritech.se>
-Accept-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: de-DE
+	Wed, 20 Jul 2011 15:57:26 +0200
+Received: (qmail 20262 invoked by uid 0); 20 Jul 2011 13:26:39 -0000
+Received: from 193.8.40.126 by www038.gmx.net with HTTP;
+	Wed, 20 Jul 2011 15:26:36 +0200 (CEST)
+Date: Wed, 20 Jul 2011 15:26:36 +0200
+From: "Alexander Stohr" <Alexander.Stohr@gmx.de>
+Message-ID: <20110720132636.276450@gmx.net>
 MIME-Version: 1.0
-Subject: Re: Added header file to linux kernel - how to export
+To: openembedded-devel@lists.openembedded.org, fpletz@franz-pletz.org,
+	genext2fs-devel@lists.sourceforge.net
+X-Authenticated: #15156664
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX18hMuhn210hrlL8sv1kgnq8wJVFgpoLpqOrjIst+0
+	nkhtk4DNL0yTwV5xJBdqa9upaxPpTIeQns2w== 
+X-GMX-UID: uOUUfcxcPTR+Ho921jIwmpw5c2tpZAui
+Cc: tytso@mit.edu, xavier.bestel@free.fr
+Subject: genext2fs: patch for fixing inode based symlink string length limit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,85 +34,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jul 2011 13:44:49 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 20 Jul 2011 13:57:26 -0000
+X-Groupsio-MsgNum: 33245
+Content-Type: multipart/mixed; boundary="========GMX276451311168396334696"
 
-Mats,
+--========GMX276451311168396334696
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-Installing myfile.h during do_install() certainly works for you right now.
+below patch fixes a problem with symlinks where the target string had exactly 59 chars and the needed terminating null character.
 
-But it won't if you plan to use packaged-staging in the future. Hence my ad=
-vice to do this rather during do_stage()
+(where the problem hits: when a fs with such entries gets checked by e2fsck
+then those tool detects it as a problem and offers to delete that symlink.
+if running an automated fixing cycle it would kill me all those symlinks.)
 
-With kind regards,
-   Fabrice
+regards, Alex.
 
-> -----Urspr=FCngliche Nachricht-----
-> Von: openembedded-devel-bounces@lists.openembedded.org=20
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] Im=20
-> Auftrag von Mats K=E4rrman
-> Gesendet: Mittwoch, 20. Juli 2011 15:14
-> An: openembedded-devel@lists.openembedded.org
-> Betreff: Re: [oe] Added header file to linux kernel - how to export
->=20
-> @ Fabrice & Henning:
->=20
-> Thank you both for your support! I ended up with:
->=20
-> ## Export patched in header files for access by other recipes
-> do_install_append_mymachine() {
->         cp ${S}/arch/powerpc/include/asm/myfile.h=20
-> ${STAGING_DIR_TARGET}${includedir}/asm/
-> }
->=20
-> Works fine but I'm a bit confused about the number of=20
-> "STAGING_" definitions in the environment. It's not always=20
-> easy to pick the right one, e.g. STAGING_DIR_TARGET and=20
-> STAGING_DIR_HOST both points to the same location...
->=20
-> Best Regards,
-> Mats
->=20
-> ________________________________________
-> From: openembedded-devel-bounces@lists.openembedded.org=20
-> [openembedded-devel-bounces@lists.openembedded.org] on behalf=20
-> of Henning Heinold [heinold@inf.fu-berlin.de]
-> Sent: Wednesday, July 20, 2011 11:05 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] Added header file to linux kernel - how to export
->=20
-> On Tue, Jul 19, 2011 at 08:14:14PM +0200, Aeschbacher, Fabrice wrote:
-> > Hi,
-> >
-> > Your could put something like this:
-> >
-> > do_stage_append() {
-> >       cp ${S}/my_ioctl.h ${STAGING_KERNEL_DIR}/include/linux
-> > }
-> >
-> > in your recipes/linux<xxx>.bb
-> >
-> > With kind regards,
-> >    Fabrice
->=20
-> Hi,
->=20
-> do_stage shouldn't be used anymore. Do it via do_install method.
->=20
->=20
-> Bye Henning
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> =
+PS: in a test bed with a generated image file i am further seeing a note from e2fsck about a fs with revision zero but feature flags are set.
+thats reported as a fs problem and a fix is suggested by a y/n query.
 
 
+-- 
+NEU: FreePhone - 0ct/min Handyspartarif mit Geld-zurück-Garantie!		
+Jetzt informieren: http://www.gmx.net/de/go/freephone
+
+--========GMX276451311168396334696
+Content-Type: text/x-patch;
+ charset="iso-8859-15";
+ name="genext2fs.c-fix-symlink-len.diff"
+Content-Transfer-Encoding: 8bit
+Content-Disposition: attachment; filename="genext2fs.c-fix-symlink-len.diff"
+
+diff -Nru genext2fs-1.4.1.orig/genext2fs.c genext2fs-1.4.1/genext2fs.c
+--- genext2fs-1.4.1.orig/genext2fs.c	2011-07-20 10:57:24.000000000 +0200
++++ genext2fs-1.4.1/genext2fs.c	2011-07-20 14:34:11.000000000 +0200
+@@ -1415,9 +1415,10 @@
+ 	uint32 nod = mknod_fs(fs, parent_nod, name, FM_IFLNK | FM_IRWXU | FM_IRWXG | FM_IRWXO, uid, gid, 0, 0, ctime, mtime);
+ 	extend_blk(fs, nod, 0, - (int)get_nod(fs, nod)->i_blocks / INOBLK);
+ 	get_nod(fs, nod)->i_size = size;
+-	if(size <= 4 * (EXT2_TIND_BLOCK+1))
++	if(size < 4 * (EXT2_TIND_BLOCK+1))
+ 	{
+ 		strncpy((char*)get_nod(fs, nod)->i_block, (char*)b, size);
++		((char*)get_nod(fs, nod)->i_block)[size+1] = '\0';
+ 		return nod;
+ 	}
+ 	extend_blk(fs, nod, b, rndup(size, BLOCKSIZE) / BLOCKSIZE);
+@@ -1643,6 +1644,10 @@
+ 			switch(st.st_mode & S_IFMT)
+ 			{
+ 				case S_IFLNK:
++					if((st.st_mode & S_IFMT) == S_IFREG || st.st_size >= 4 * (EXT2_TIND_BLOCK+1))
++						stats->nblocks += (st.st_size + BLOCKSIZE - 1) / BLOCKSIZE;
++					stats->ninodes++;
++					break;
+ 				case S_IFREG:
+ 					if((st.st_mode & S_IFMT) == S_IFREG || st.st_size > 4 * (EXT2_TIND_BLOCK+1))
+ 						stats->nblocks += (st.st_size + BLOCKSIZE - 1) / BLOCKSIZE;
+
+--========GMX276451311168396334696--
