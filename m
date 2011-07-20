@@ -1,34 +1,34 @@
 Received: from mail-fx0-f51.google.com ([209.85.161.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QjdvE-0003D0-79
+	(envelope-from <martin.jansa@gmail.com>) id 1QjdvO-0003D0-An
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jul 2011 23:03:12 +0200
+	Wed, 20 Jul 2011 23:03:22 +0200
 Received: by mail-fx0-f51.google.com with SMTP id 10so2387421fxh.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jul 2011 13:59:07 -0700 (PDT)
+	Wed, 20 Jul 2011 13:59:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=+EM0BLpb7KJ1h+BHkz0GQQk0v5J8Q9F1YO5xPCdvlp8=;
-	b=sgex+LtyxlY4MtXHzcb17knvMxj0Di/KLFjRN2DGnW4HzE0QSwO2N381vjTArwfktP
-	V8xEYJZ26+4rPkmTwESD/ME6rn7cj2ErEpg1bL/MhQ6CrG1I7iWaL8j+XmhsSYH//z24
-	S4WXFZ//CnCdonf20+GsE0WREAmTfsUTHOKOc=
-Received: by 10.223.14.204 with SMTP id h12mr8852840faa.89.1311195547880;
-	Wed, 20 Jul 2011 13:59:07 -0700 (PDT)
+	bh=oCP5fqqmx+mbT6WSnlsWTy2b0pQnmO0rBmU6GnC8CQk=;
+	b=XwPXP0Ar7I25mtKMJz1Zcg+mng9hIfIvHyaubn/lwPipCRzutlGaQMHvlHKL2IgrYY
+	6SmaGaDXvHL2BJfkRb8aEdlU+9eoTuVkXENmksZFNcc/yfNf0ztTeyhQFNOWM/TgUb+u
+	xLLUsOw3bMR+XWZ5Fs3+Q2GgFbWkGQYsGiL2E=
+Received: by 10.223.43.1 with SMTP id u1mr835283fae.38.1311195555649;
+	Wed, 20 Jul 2011 13:59:15 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id 28sm930458fax.27.2011.07.20.13.59.06
+	by mx.google.com with ESMTPS id d6sm928682fak.34.2011.07.20.13.59.13
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 20 Jul 2011 13:59:06 -0700 (PDT)
+	Wed, 20 Jul 2011 13:59:14 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Jul 2011 22:58:47 +0200
-Message-Id: <6b97e0156fb4c6b2d208ade8221d1a216f420dc3.1311195484.git.Martin.Jansa@gmail.com>
+Date: Wed, 20 Jul 2011 22:58:48 +0200
+Message-Id: <447df9835c2d2e2144119b8a784c6042dc2b7e55.1311195484.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.6
 In-Reply-To: <ac2a5d6d9f55737cc5a6297303722d9188e37b33.1311195484.git.Martin.Jansa@gmail.com>
 References: <ac2a5d6d9f55737cc5a6297303722d9188e37b33.1311195484.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1311195484.git.Martin.Jansa@gmail.com>
 References: <cover.1311195484.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/5] pidgin: inherit perlnative
+Subject: [meta-oe][PATCH 3/5] tangogps: add misssing dependency bluez4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,30 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jul 2011 21:03:12 -0000
-
-* otherwise perl from host is used and if there isn't libxml-parser-perl
-  installed on host it fails with:
-  checking for XML::Parser... configure: error: XML::Parser perl module is required for intltool
+X-List-Received-Date: Wed, 20 Jul 2011 21:03:22 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/pidgin/pidgin.inc |    2 +-
+ .../recipes-navigation/tangogps/tangogps_0.99.4.bb |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/recipes-support/pidgin/pidgin.inc b/meta-oe/recipes-support/pidgin/pidgin.inc
-index 91d5176..9d21976 100644
---- a/meta-oe/recipes-support/pidgin/pidgin.inc
-+++ b/meta-oe/recipes-support/pidgin/pidgin.inc
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- DEPENDS = "python startup-notification avahi gtk+ ncurses gnutls virtual/libintl gstreamer dbus"
- INC_PR = "r0"
+diff --git a/meta-oe/recipes-navigation/tangogps/tangogps_0.99.4.bb b/meta-oe/recipes-navigation/tangogps/tangogps_0.99.4.bb
+index d583637..e04f0a5 100644
+--- a/meta-oe/recipes-navigation/tangogps/tangogps_0.99.4.bb
++++ b/meta-oe/recipes-navigation/tangogps/tangogps_0.99.4.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://tangogps.org/"
+ SECTION = "x11/applications"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+-DEPENDS = "curl gtk+ gconf sqlite3 libexif libsoup-2.4"
++DEPENDS = "curl gtk+ gconf sqlite3 libexif libsoup-2.4 bluez4"
  
--inherit autotools gettext pkgconfig gconf
-+inherit autotools gettext pkgconfig gconf perlnative
- 
- EXTRA_OECONF = " \
- 		--enable-vv \
+ SRC_URI = "http://www.tangogps.org/downloads/${P}.tar.gz"
+ SRC_URI[md5sum] = "0f07ede94a21eb84f5e017fa88a1fc3d"
 -- 
 1.7.6
 
