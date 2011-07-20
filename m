@@ -1,34 +1,29 @@
-Received: from mail-ey0-f178.google.com ([209.85.215.178])
+Received: from mail-fx0-f51.google.com ([209.85.161.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Qjdve-0003FR-KP
+	(envelope-from <martin.jansa@gmail.com>) id 1QjdxX-0003hE-L4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jul 2011 23:03:38 +0200
-Received: by eye4 with SMTP id 4so1612948eye.37
+	Wed, 20 Jul 2011 23:05:37 +0200
+Received: by fxh10 with SMTP id 10so2390408fxh.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jul 2011 13:59:31 -0700 (PDT)
+	Wed, 20 Jul 2011 14:01:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=2O2yPDXV7L3wST9YlKLOfM2nS3G/h5+a303JHJeZFqo=;
-	b=CMN/cOIYvp2LeWUr+fVtr4JUCKWvKQh0lT1e7VHl8XwXs3BN1jLfV9B1Mi+CmfkRgY
-	RKhEh3uKCavYzy/+uLBm4LFFuTmBSqlbaSPZW1w/6uq5XR7QpGxAAvudFZd1y/5K2mhs
-	uJNiwrRNfVDE5/GqGUleyaFVq+v3gq/j42F1c=
-Received: by 10.205.83.194 with SMTP id ah2mr2709922bkc.49.1311195571174;
-	Wed, 20 Jul 2011 13:59:31 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=cNnR+WGVRcawRKiXriCFG0byB/R4OXpXVuwanmvICU4=;
+	b=knEd1YSxrFcyPlGkDpO5HBB6zfHnDkqWi/y95JDo9rJEkbjF9Bx3mZ+Y+cblq1w4vd
+	SQTByqvbM0YYgYY67uA3/47jgHPQq238ciiBR7zjGldGJ5Z2uAfukaBhR3jFBo4LJ8fj
+	tKRbSFGdM3a4Wn710Gmvl3ATCGvNyXhqXgnN4=
+Received: by 10.223.55.209 with SMTP id v17mr1157610fag.77.1311195689229;
+	Wed, 20 Jul 2011 14:01:29 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id s16sm4070252fah.0.2011.07.20.13.59.29
+	by mx.google.com with ESMTPS id f7sm184101faa.32.2011.07.20.14.01.27
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 20 Jul 2011 13:59:30 -0700 (PDT)
+	Wed, 20 Jul 2011 14:01:28 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Jul 2011 22:58:50 +0200
-Message-Id: <d497df9ff76e945d268b95c558977f98df671371.1311195484.git.Martin.Jansa@gmail.com>
+Date: Wed, 20 Jul 2011 23:01:19 +0200
+Message-Id: <cover.1311195655.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.6
-In-Reply-To: <ac2a5d6d9f55737cc5a6297303722d9188e37b33.1311195484.git.Martin.Jansa@gmail.com>
-References: <ac2a5d6d9f55737cc5a6297303722d9188e37b33.1311195484.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1311195484.git.Martin.Jansa@gmail.com>
-References: <cover.1311195484.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 5/5] vala-terminal: inherit perlnative
+Subject: [meta-gnome][PATCH 0/2] Pull request #1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,30 +37,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jul 2011 21:03:38 -0000
+X-List-Received-Date: Wed, 20 Jul 2011 21:05:37 -0000
 
-* otherwise perl from host is used and if there isn't libxml-parser-perl
-  installed on host it fails with:
-  checking for XML::Parser... configure: error: XML::Parser perl module is required for intltool
+The following changes since commit 037a063303d35c2fab8097d977aa5625c916c565:
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../vala-terminal/vala-terminal_git.bb             |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+  connman: update to 0.76 (2011-07-20 09:13:00 +0200)
 
-diff --git a/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb b/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
-index 1900b6f..2549fd6 100644
---- a/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
-+++ b/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
-@@ -8,7 +8,7 @@ PV = "1.1.1+gitr${SRCPV}"
- PE = "1"
- PR = "r1"
- 
--inherit autotools
-+inherit autotools perlnative
- 
- SRC_URI = "${FREESMARTPHONE_GIT}/vala-terminal.git;protocol=git;branch=master"
- S = "${WORKDIR}/git"
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/meta-gnome
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/meta-gnome
+
+Martin Jansa (2):
+  libgnome-keyring: inherit perlnative
+  gconf: inherit perlnative
+
+ meta-gnome/recipes-gnome/gconf/gconf_2.32.4.bb     |    2 +-
+ .../libgnome/libgnome-keyring_2.32.0.bb            |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
 -- 
 1.7.6
 
