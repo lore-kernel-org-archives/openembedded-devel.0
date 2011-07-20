@@ -1,25 +1,35 @@
-Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
+Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1QjSy0-0005YQ-H7
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1QjT1M-0005fH-Vz
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jul 2011 11:21:20 +0200
-Received: from nvs0066 ([10.91.8.1]) by smtp.nedap.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 20 Jul 2011 11:17:10 +0200
-X-TM-IMSS-Message-ID: <23c4586a00010928@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 23c4586a00010928 ;
-	Wed, 20 Jul 2011 11:16:34 +0200
-Message-ID: <4E269D1F.9070009@nedap.com>
-Date: Wed, 20 Jul 2011 11:17:19 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.18) Gecko/20110617 Lightning/1.0b2 Thunderbird/3.1.11
+	Wed, 20 Jul 2011 11:24:50 +0200
+Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
+	by outpost1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1QjSiC-0001Ws-Aa>; Wed, 20 Jul 2011 11:05:00 +0200
+Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
+	by relay1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1QjSiC-0002YM-8L>; Wed, 20 Jul 2011 11:05:00 +0200
+Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
+	4.72) id 1QjSiC-0001Gf-5l
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Jul 2011 11:05:00 +0200
+Date: Wed, 20 Jul 2011 11:05:00 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110720090459.GA3173@mi.fu-berlin.de>
+References: <ED3E0BCACD909541BA94A34C4A164D4C06CA55@post.tritech.se>
+	<ED3E0BCACD909541BA94A34C4A164D4C06CA7F@post.tritech.se>
+	<09D9BE2AC4AA764DABAA8C91E48D819E0157569991@DEMCHP99E35MSX.ww902.siemens.net>
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 20 Jul 2011 09:17:10.0743 (UTC)
-	FILETIME=[CE194E70:01CC46BD]
-Subject: best practice .inc files
+In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819E0157569991@DEMCHP99E35MSX.ww902.siemens.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Sender: Heinold <heinold@mi.fu-berlin.de>
+X-Originating-IP: 160.45.42.84
+Subject: Re: Added header file to linux kernel - how to export
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,28 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jul 2011 09:21:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 20 Jul 2011 09:24:50 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi All,
+On Tue, Jul 19, 2011 at 08:14:14PM +0200, Aeschbacher, Fabrice wrote:
+> Hi,
+> 
+> Your could put something like this:
+> 
+> do_stage_append() {
+> 	cp ${S}/my_ioctl.h ${STAGING_KERNEL_DIR}/include/linux
+> }
+> 
+> in your recipes/linux<xxx>.bb
+> 
+> With kind regards,
+>    Fabrice
 
-I was wondering what the best way is to do this.
+Hi,
 
-I'm using the 2010.12 release.
-I've created my own u-boot_2010.09.bb file in my local repository.
-In it is aline
-     require u-boot.inc
-(every u-boot*.bb recipe has it)
-Now I need a copy of the openembedded/recipes/u-boot/u-boot.inc in my 
-local repository to get it bitbaked.
-(Well actually I've symlinked the file)
-I think both solutions are not optimal.
-Is there a way to this in a more gentle way?
-
-Thanks!
-Jaap
+do_stage shouldn't be used anymore. Do it via do_install method.
 
 
+Bye Henning
 
 
