@@ -1,34 +1,24 @@
-Received: from mail-fx0-f51.google.com ([209.85.161.51])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Qjdxo-0003hE-7q
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jul 2011 23:05:52 +0200
-Received: by mail-fx0-f51.google.com with SMTP id 10so2390408fxh.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jul 2011 14:01:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=6v4rKaIV9nh+qteAt+IxoJBWTxhtzuRtVkRCiDoDW6g=;
-	b=dASLlWZUACbd/SZn38rVqKd4mukT8unSMh4Df+E1ECcERGtTqIm2Sxzmcc37V6q1zE
-	UOao9TvObcjXXbWmustLLDW50kjb5rl1ybB2cO7O6unqeEwGBLkKajJ0etjsTmH3ChlH
-	uNImenAboZO6EQ3JfT/Z2JcI3g5GbDTEXEPB8=
-Received: by 10.223.161.80 with SMTP id q16mr1520482fax.36.1311195707884;
-	Wed, 20 Jul 2011 14:01:47 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id 12sm430484fad.16.2011.07.20.14.01.46
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 20 Jul 2011 14:01:46 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qjdy5-0003vY-5M for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Jul 2011 23:06:09 +0200
+Received: from f053035220.adsl.alicedsl.de ([78.53.35.220]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qjduw-0000Fv-C3; Wed, 20 Jul 2011 21:02:54 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Jul 2011 23:01:31 +0200
-Message-Id: <9889a654eb742dc18ec8d859312899510b5de15e.1311195655.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.6
-In-Reply-To: <5b1d75d8c68175e831c7b3ba7d2d9d056be9bffb.1311195655.git.Martin.Jansa@gmail.com>
-References: <5b1d75d8c68175e831c7b3ba7d2d9d056be9bffb.1311195655.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1311195655.git.Martin.Jansa@gmail.com>
-References: <cover.1311195655.git.Martin.Jansa@gmail.com>
-Subject: [meta-gnome][PATCH 2/2] gconf: inherit perlnative
+In-Reply-To: <j05t3l$kj8$1@dough.gmane.org>
+References: <1311121620-27630-1-git-send-email-agnel.joel@gmail.com>
+	<j05t3l$kj8$1@dough.gmane.org>
+Date: Wed, 20 Jul 2011 23:02:01 +0200
+Message-ID: <1311195721.6129.5.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Cc: s-kipisz2@ti.com, joelagnel@ti.com, jdk@ti.com, k-kooi@ti.com
+Subject: Re: [PATCH v2] linux-omap-psp, linux-omap: Added patch to fix MMC timeout errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,32 +32,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jul 2011 21:05:52 -0000
+X-List-Received-Date: Wed, 20 Jul 2011 21:06:09 -0000
+X-Groupsio-MsgNum: 33255
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-b7DV8D2qxC7eL+5egE8e"
 
-* otherwise perl from host is used and if there isn't libxml-parser-perl
-  installed on host it fails with:
-  checking for XML::Parser... configure: error: XML::Parser perl module is required for intltool
+--=-b7DV8D2qxC7eL+5egE8e
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-gnome/recipes-gnome/gconf/gconf_2.32.4.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Am Mittwoch, den 20.07.2011, 08:37 +0200 schrieb Koen Kooi:
 
-diff --git a/meta-gnome/recipes-gnome/gconf/gconf_2.32.4.bb b/meta-gnome/recipes-gnome/gconf/gconf_2.32.4.bb
-index 8f64638..1d5a857 100644
---- a/meta-gnome/recipes-gnome/gconf/gconf_2.32.4.bb
-+++ b/meta-gnome/recipes-gnome/gconf/gconf_2.32.4.bb
-@@ -20,7 +20,7 @@ SRC_URI[archive.sha256sum] = "46030c09422603dbb72f13b5dd592dcc01fbc13562b9e94daf
- EXTRA_OECONF = " --without-openldap --disable-gtk-doc --enable-gtk --with-gtk=2.0 --enable-gsettings-backend=yes POLKIT_POLICY_FILE_VALIDATE=true"
- ORBIT_IDL_SRC = "${STAGING_BINDIR_NATIVE}/orbit-idl-2"
- 
--inherit autotools gettext
-+inherit autotools gettext perlnative
- 
- EXTRA_OEMAKE = 'ORBIT_IDL="${ORBIT_IDL_SRC}"'
- 
--- 
-1.7.6
+> Op 20-07-11 02:27, Joel A Fernandes schreef:
+> > This fixes MMC errors due to timeouts on certain SD Cards, following su=
+ggestions to set dto to 14 by Jason Kridner and Steven Kipisz
+> >=20
+> > Details of the issue: http://talk.maemo.org/showthread.php?p=3D1000707#=
+post1000707
+>=20
+> This patch doesn't apply to .dev
+
+I guess because it was intended for maintenance. Joel, I think the
+policy is that patches should go to master first.
+
+> > --- Changes since earlier patch: * Set dto to 14 instead of doubling ti=
+meout
+> >=20
+> > Other notes: * We have confirmation that this patch fixes the issue, so=
+ it is safe to apply to the maintentance tree
+> >=20
+> > * Also please revert the earlier patch from the dev tree titled "linux-=
+omap-psp: Added patch to fix MMC timeout errors" (commit 93e91091c7e2864274=
+207cc7c59e3f64e453f843)
+>=20
+> We don't work like that.
+
+I think the problem is that the version was bumped and decreasing it
+when reverting does not work.
+
+Therefore either send a patch reverting the previous commit but
+increasing the version or send a patch updating the MMC patch.
 
 
+Thanks,
 
+Paul
+
+
+PS: Joel, do I still need to CC everyone? I guess Koen is reading the
+list anyhow.
+
+--=-b7DV8D2qxC7eL+5egE8e
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk4nQkQACgkQPX1aK2wOHVhVXwCfY1Ahq8snaTJbNCTDH+hgP+Lr
+TBwAnRZfj+GbvqE/SKdCWad2/41MrY+r
+=2FH3
+-----END PGP SIGNATURE-----
+
+--=-b7DV8D2qxC7eL+5egE8e--
