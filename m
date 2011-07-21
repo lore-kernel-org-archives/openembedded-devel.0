@@ -1,34 +1,29 @@
-Received: from mail-fx0-f51.google.com ([209.85.161.51])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QjnKw-0000YP-0O
+Received: from cernan.electric.net ([72.35.23.19] helo=bean.electric.net)
+	by linuxtogo.org with esmtp (Exim 4.72) (envelope-from
+	<mstirling=openembedded-devel=lists.openembedded.org=dfhkgqas@ad-holdings.co.uk>)
+	id 1Qjoht-0002m2-3u for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Jul 2011 10:34:09 +0200
+Received: from 1Qjno3-0004MJ-WB by bean.electric.net with emc1-ok (Exim 4.76)
+	(envelope-from <mstirling@ad-holdings.co.uk>) id 1Qjno5-0004Pl-Uz
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jul 2011 09:06:22 +0200
-Received: by fxh10 with SMTP id 10so3074757fxh.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2011 00:01:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=R3Q32hmZB61FXt1RFUKiuoJTrgZYWfkMZHRNWGJLIp4=;
-	b=T3re+4cZS2nk1OiZyPejJD+ezTQ3IwqI0085YxUMvILxQZOsh/hpUjvhIP4I1uW1Ut
-	Yw8HhRixrqpq7pxqJL34W5efGdD0w2Y6obMW1BU3odprYewq69n6J1lDdTs+wDS34c92
-	50wqLb50WTsO/96ygWnZW14/cVSrXorBmZpj4=
-Received: by 10.223.76.17 with SMTP id a17mr2108664fak.32.1311231711364;
-	Thu, 21 Jul 2011 00:01:51 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id f7sm463093faa.32.2011.07.21.00.01.49
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 21 Jul 2011 00:01:49 -0700 (PDT)
-Date: Thu, 21 Jul 2011 09:01:43 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 21 Jul 2011 00:36:29 -0700
+Received: by emcmailer; Thu, 21 Jul 2011 00:36:29 -0700
+Received: from [213.218.221.154] (helo=localhost.localdomain)
+	by bean.electric.net with esmtpa (Exim 4.76)
+	(envelope-from <mstirling@ad-holdings.co.uk>)
+	id 1Qjno3-0004MJ-WB; Thu, 21 Jul 2011 00:36:28 -0700
+From: Mike Stirling <mstirling@ad-holdings.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110721070142.GE3443@jama.jama.net>
-References: <cover.1311195484.git.Martin.Jansa@gmail.com>
-	<j08gt2$tdv$1@dough.gmane.org>
+Date: Thu, 21 Jul 2011 08:36:23 +0100
+Message-Id: <1311233783-17093-1-git-send-email-mstirling@ad-holdings.co.uk>
+X-Mailer: git-send-email 1.7.0.4
+X-Outbound-IP: 213.218.221.154
+X-Env-From: mstirling@ad-holdings.co.uk
+X-PolicySMART: 794533, 1449348, 1449354
 MIME-Version: 1.0
-In-Reply-To: <j08gt2$tdv$1@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 0/5] Pull request #18
+X-Virus-Status: Scanned by VirusSMART (c)
+Cc: Mike Stirling <mstirling@chipwrights.com>
+Subject: [PATCH] vblade: Pass LDFLAGS to final link. Fixes GNU_HASH QA error.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,64 +37,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2011 07:06:23 -0000
-X-Groupsio-MsgNum: 33263
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="UBnjLfzoMQYIXCvq"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 21 Jul 2011 08:34:09 -0000
 
---UBnjLfzoMQYIXCvq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Mike Stirling <mstirling@chipwrights.com>
 
-On Thu, Jul 21, 2011 at 08:27:46AM +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 20-07-11 22:58, Martin Jansa schreef:
-> > The following changes since commit 037a063303d35c2fab8097d977aa5625c916=
-c565:
-> >=20
-> >   connman: update to 0.76 (2011-07-20 09:13:00 +0200)
-> >=20
-> > are available in the git repository at:
-> >   git://git.openembedded.org/meta-openembedded-contrib jansa/meta-oe
-> >   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?=
-h=3Djansa/meta-oe
-> >=20
-> > Martin Jansa (5):
-> >   vala-dbus-binding-tool: inherit perlnative
-> >   pidgin: inherit perlnative
-> >   tangogps: add misssing dependency bluez4
-> >   bluez4: add missing dependency usbpath
-> >   vala-terminal: inherit perlnative
->=20
-> Thanks, I pulled these in and will push to the OE servers once ssh gets f=
-ixed. In the meantime, it's at github: https://github.com/koenkooi/meta-oe/=
-commits/master
+Signed-off-by: Mike Stirling <mstirling@chipwrights.com>
+---
+ recipes/vblade/files/ldflags.patch |   12 ++++++++++++
+ recipes/vblade/vblade_19.bb        |    5 +++--
+ 2 files changed, 15 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/vblade/files/ldflags.patch
 
-Thanks,
+diff --git a/recipes/vblade/files/ldflags.patch b/recipes/vblade/files/ldflags.patch
+new file mode 100644
+index 0000000..3350513
+--- /dev/null
++++ b/recipes/vblade/files/ldflags.patch
+@@ -0,0 +1,12 @@
++diff -urN vblade-19.orig/makefile vblade-19/makefile
++--- vblade-19.orig/makefile	2011-07-20 15:45:43.851538824 +0100
+++++ vblade-19/makefile	2011-07-20 15:46:26.863358466 +0100
++@@ -11,7 +11,7 @@
++ O=aoe.o bpf.o ${PLATFORM}.o ata.o
++ 
++ vblade: $O
++-	${CC} -o vblade $O
+++	${CC} ${LDFLAGS} -o vblade $O
++ 
++ aoe.o : aoe.c config.h dat.h fns.h makefile
++ 	${CC} ${CFLAGS} -c $<
+diff --git a/recipes/vblade/vblade_19.bb b/recipes/vblade/vblade_19.bb
+index f100a46..7b3504a 100644
+--- a/recipes/vblade/vblade_19.bb
++++ b/recipes/vblade/vblade_19.bb
+@@ -1,10 +1,11 @@
+ DESCRIPTION = "Virtual EtherDrive blade AoE target"
+ SECTION = "console/network"
+-PR = "r1"
++PR = "r2"
+ LICENSE = "GPL"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/aoetools/${PN}-${PV}.tgz \
+-	   file://cross.patch"
++	   file://cross.patch \
++	   file://ldflags.patch"
+ 
+ inherit autotools
+ 
+-- 
+1.7.0.4
 
-maybe wait with push a bit more please as there is discussion about
-similar patch series on oe-core and Tom maybe has better fix for it (but
-that fix doesn't work for me sofar).
 
-Regards,
+Closed IPTV, the new safe and secure deterministic IP Video solution from Dedicated Micros, is now shipping through selected distributors.
+- Come and see this award winning plug and play, IP Video innovation at one of our Roadshows around the UK visit: https://www.dedicatedmicros.com/europe/ClosedIPTVRoadshow2011
+- Contact our Customer Services Team for more information regarding how to enter the world of safe and secure hybrid IP and analogue video surveillance systems.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---UBnjLfzoMQYIXCvq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk4nztYACgkQN1Ujt2V2gBwPKACdEyRY//I4RLLTsjrJatXFApUL
-7U0AmgMwCddZpgW3HvW2AXjiZKHVrvXC
-=m8Kb
------END PGP SIGNATURE-----
-
---UBnjLfzoMQYIXCvq--
