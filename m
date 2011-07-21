@@ -1,29 +1,23 @@
-Received: from cernan.electric.net ([72.35.23.19] helo=bean.electric.net)
-	by linuxtogo.org with esmtp (Exim 4.72) (envelope-from
-	<mstirling=openembedded-devel=lists.openembedded.org=dfhkgqas@ad-holdings.co.uk>)
-	id 1Qjoht-0002m2-3u for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jul 2011 10:34:09 +0200
-Received: from 1Qjno3-0004MJ-WB by bean.electric.net with emc1-ok (Exim 4.76)
-	(envelope-from <mstirling@ad-holdings.co.uk>) id 1Qjno5-0004Pl-Uz
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jul 2011 00:36:29 -0700
-Received: by emcmailer; Thu, 21 Jul 2011 00:36:29 -0700
-Received: from [213.218.221.154] (helo=localhost.localdomain)
-	by bean.electric.net with esmtpa (Exim 4.76)
-	(envelope-from <mstirling@ad-holdings.co.uk>)
-	id 1Qjno3-0004MJ-WB; Thu, 21 Jul 2011 00:36:28 -0700
-From: Mike Stirling <mstirling@ad-holdings.co.uk>
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QjpZY-000450-BO for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Jul 2011 11:29:36 +0200
+Received: from f053034050.adsl.alicedsl.de ([78.53.34.50]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QjpWQ-0005Pr-CT; Thu, 21 Jul 2011 09:26:22 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Jul 2011 08:36:23 +0100
-Message-Id: <1311233783-17093-1-git-send-email-mstirling@ad-holdings.co.uk>
-X-Mailer: git-send-email 1.7.0.4
-X-Outbound-IP: 213.218.221.154
-X-Env-From: mstirling@ad-holdings.co.uk
-X-PolicySMART: 794533, 1449348, 1449354
-MIME-Version: 1.0
-X-Virus-Status: Scanned by VirusSMART (c)
+In-Reply-To: <1311233783-17093-1-git-send-email-mstirling@ad-holdings.co.uk>
+References: <1311233783-17093-1-git-send-email-mstirling@ad-holdings.co.uk>
+Date: Thu, 21 Jul 2011 11:25:29 +0200
+Message-ID: <1311240329.3538.11.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
 Cc: Mike Stirling <mstirling@chipwrights.com>
-Subject: [PATCH] vblade: Pass LDFLAGS to final link. Fixes GNU_HASH QA error.
+Subject: Re: [PATCH] vblade: Pass LDFLAGS to final link. Fixes GNU_HASH QA error.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,59 +31,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2011 08:34:09 -0000
+X-List-Received-Date: Thu, 21 Jul 2011 09:29:36 -0000
+X-Groupsio-MsgNum: 33265
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-0r3lwe7bK5LHmHqa3mWQ"
 
-From: Mike Stirling <mstirling@chipwrights.com>
+--=-0r3lwe7bK5LHmHqa3mWQ
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Mike Stirling <mstirling@chipwrights.com>
----
- recipes/vblade/files/ldflags.patch |   12 ++++++++++++
- recipes/vblade/vblade_19.bb        |    5 +++--
- 2 files changed, 15 insertions(+), 2 deletions(-)
- create mode 100644 recipes/vblade/files/ldflags.patch
-
-diff --git a/recipes/vblade/files/ldflags.patch b/recipes/vblade/files/ldflags.patch
-new file mode 100644
-index 0000000..3350513
---- /dev/null
-+++ b/recipes/vblade/files/ldflags.patch
-@@ -0,0 +1,12 @@
-+diff -urN vblade-19.orig/makefile vblade-19/makefile
-+--- vblade-19.orig/makefile	2011-07-20 15:45:43.851538824 +0100
-++++ vblade-19/makefile	2011-07-20 15:46:26.863358466 +0100
-+@@ -11,7 +11,7 @@
-+ O=aoe.o bpf.o ${PLATFORM}.o ata.o
-+ 
-+ vblade: $O
-+-	${CC} -o vblade $O
-++	${CC} ${LDFLAGS} -o vblade $O
-+ 
-+ aoe.o : aoe.c config.h dat.h fns.h makefile
-+ 	${CC} ${CFLAGS} -c $<
-diff --git a/recipes/vblade/vblade_19.bb b/recipes/vblade/vblade_19.bb
-index f100a46..7b3504a 100644
---- a/recipes/vblade/vblade_19.bb
-+++ b/recipes/vblade/vblade_19.bb
-@@ -1,10 +1,11 @@
- DESCRIPTION = "Virtual EtherDrive blade AoE target"
- SECTION = "console/network"
--PR = "r1"
-+PR = "r2"
- LICENSE = "GPL"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/aoetools/${PN}-${PV}.tgz \
--	   file://cross.patch"
-+	   file://cross.patch \
-+	   file://ldflags.patch"
- 
- inherit autotools
- 
--- 
-1.7.0.4
+Dear Mike,
 
 
-Closed IPTV, the new safe and secure deterministic IP Video solution from Dedicated Micros, is now shipping through selected distributors.
-- Come and see this award winning plug and play, IP Video innovation at one of our Roadshows around the UK visit: https://www.dedicatedmicros.com/europe/ClosedIPTVRoadshow2011
-- Contact our Customer Services Team for more information regarding how to enter the world of safe and secure hybrid IP and analogue video surveillance systems.
+thank you for your patch.
+
+Am Donnerstag, den 21.07.2011, 08:36 +0100 schrieb Mike Stirling:
+> From: Mike Stirling <mstirling@chipwrights.com>
+>
+> Signed-off-by: Mike Stirling <mstirling@chipwrights.com>
+> ---
+>  recipes/vblade/files/ldflags.patch |   12 ++++++++++++
+>  recipes/vblade/vblade_19.bb        |    5 +++--
+>  2 files changed, 15 insertions(+), 2 deletions(-)
+>  create mode 100644 recipes/vblade/files/ldflags.patch
+>=20
+> diff --git a/recipes/vblade/files/ldflags.patch b/recipes/vblade/files/ld=
+flags.patch
+> new file mode 100644
+> index 0000000..3350513
+> --- /dev/null
+> +++ b/recipes/vblade/files/ldflags.patch
+
+Could you please add a patch header [1]?
+
+It would be great if you could send the patch (and the other one)
+upstream [2] too or check if it has been fixed in vblade 20.
+
+> @@ -0,0 +1,12 @@
+> +diff -urN vblade-19.orig/makefile vblade-19/makefile
+> +--- vblade-19.orig/makefile	2011-07-20 15:45:43.851538824 +0100
+> ++++ vblade-19/makefile	2011-07-20 15:46:26.863358466 +0100
+> +@@ -11,7 +11,7 @@
+> + O=3Daoe.o bpf.o ${PLATFORM}.o ata.o
+> +=20
+> + vblade: $O
+> +-	${CC} -o vblade $O
+> ++	${CC} ${LDFLAGS} -o vblade $O
+> +=20
+> + aoe.o : aoe.c config.h dat.h fns.h makefile
+> + 	${CC} ${CFLAGS} -c $<
+> diff --git a/recipes/vblade/vblade_19.bb b/recipes/vblade/vblade_19.bb
+> index f100a46..7b3504a 100644
+> --- a/recipes/vblade/vblade_19.bb
+> +++ b/recipes/vblade/vblade_19.bb
+> @@ -1,10 +1,11 @@
+>  DESCRIPTION =3D "Virtual EtherDrive blade AoE target"
+>  SECTION =3D "console/network"
+> -PR =3D "r1"
+> +PR =3D "r2"
+>  LICENSE =3D "GPL"
+> =20
+>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/aoetools/${PN}-${PV}.tgz \
+> -	   file://cross.patch"
+> +	   file://cross.patch \
+> +	   file://ldflags.patch"
+> =20
+>  inherit autotools
+
+I build tested this patch on `angstrom-2010.x` and `minimal{,-uclibc}`
+for `MACHINE =3D "beagleboard"`.
+
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
 
 
+Thanks,
+
+Paul
+
+
+[1] http://openembedded.org/index.php/Commit_Patch_Message_Guidelines
+[2] http://aoetools.sourceforge.net/
+
+--=-0r3lwe7bK5LHmHqa3mWQ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEUEABECAAYFAk4n8IgACgkQPX1aK2wOHVhauQCY9rXRxzNQvSy02sl59E4JrB7H
+1ACfXoqNKyehDGrdr8ntaN6FoX2YlF4=
+=mkD0
+-----END PGP SIGNATURE-----
+
+--=-0r3lwe7bK5LHmHqa3mWQ--
