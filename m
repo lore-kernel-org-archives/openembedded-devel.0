@@ -1,32 +1,31 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f51.google.com ([209.85.161.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QjyqB-0006KP-7p for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jul 2011 21:23:23 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QjymD-0002iO-0n for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jul 2011 21:19:17 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2011 21:19:17 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1QjyuF-0006T9-Kd
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Jul 2011 21:27:35 +0200
+Received: by fxh10 with SMTP id 10so4073274fxh.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2011 21:19:17 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 21 Jul 2011 12:23:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=Gb34Ki+zmG5pxtkcR/05U/rQHs8Srt18AXYxA6ETwzA=;
+	b=e3fi3EGFHsedk66rTmmAsOkY9xlTdAC+qDbKEiaay+wEkUbZaisMxJtjn7aXrM0e0O
+	5yGlsdiGGuqWw1CImNHEgT7XrQOg/jUS1VfV50/IVU2pzEoIRAMyKN7j+dxhG+oSVoM9
+	+0Ao8wDGsqbKJmlTTmcnxpZHtn83DhVoVuZvI=
+Received: by 10.223.76.137 with SMTP id c9mr767105fak.62.1311276207625;
+	Thu, 21 Jul 2011 12:23:27 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id h10sm1588285fai.19.2011.07.21.12.23.25
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 21 Jul 2011 12:23:26 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 21 Jul 2011 21:18:54 +0200
-Message-ID: <j09u33$ovb$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
-X-Enigmail-Version: 1.2
-Subject: [2011.03-maintenance] Pull request #22
+Date: Thu, 21 Jul 2011 21:23:14 +0200
+Message-Id: <6d30a1f529038189a2f6e228066050d6b203baac.1311276122.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.6
+In-Reply-To: <cover.1311276122.git.Martin.Jansa@gmail.com>
+References: <cover.1311276122.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 1/4] connman: remove if_alg.h test from configure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,45 +39,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2011 19:23:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Jul 2011 19:27:35 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* we're not building alg-test and if_alg.h needs newer linux-libc-headers than many distributions prefer now
 
-Tom,
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-connectivity/connman/connman_0.76.bb   |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-Please pull the 4 commits from here:
-
-URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-Branch: 2011.03-maintenance
-
-Joel A Fernandes (2):
-      linux-omap-psp: Added patch to fix MMC timeout errors
-      beagleboard-test-scripts: BeagleBoard userbutton detection for flashing
-
-Koen Kooi (1):
-      gst-plugins-good 0.10.28: bump PR for pulseaudio .15 -> .22 update
-
-chase maupin (1):
-      nodejs: Add patch to compile with GCC 4.3.3
-
-2 cherry-pick, the nodejs is a backport since the version in .dev isn't in maintenance and gst-plugins-good is local to maintenance since the pulse update was local as well.
-
-I'll do a seperate #23 with some more beagle kernel updates later this week.
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD4DBQFOKHueMkyGM64RGpERApIGAJjJTzkChaf2EKHhRNTaHoQbx6iLAJ43KaUB
-EyIR8kDGgN0bHiZzPFrapQ==
-=20YW
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-connectivity/connman/connman_0.76.bb b/meta-oe/recipes-connectivity/connman/connman_0.76.bb
+index 8257be5..cb84caa 100644
+--- a/meta-oe/recipes-connectivity/connman/connman_0.76.bb
++++ b/meta-oe/recipes-connectivity/connman/connman_0.76.bb
+@@ -25,7 +25,9 @@ SRC_URI  = "\
+ SRC_URI[md5sum] = "59b4cfd9fa4f736f7a2d88ee0c758fe9"
+ SRC_URI[sha256sum] = "bf58fa72454bb63033da8f847a4709dbdfe64c000056a93a7504240cb31c1321"
+ 
+-# alg-test doesn't build, so disable that
++# alg-test doesn't build, so disable that and test for if_alg.h as this header is only in 2.6.39
+ do_configure_prepend() {
+ 	sed -i 's:tools/alg-test ::g' Makefile.am
++	sed -i 's:AC_CHECK_HEADERS(linux/if_alg.h, dummy=yes,::g;
++	        s:AC_MSG_ERROR(User-space algorithm header files are required))::g' configure.ac
+ }
+-- 
+1.7.6
 
 
 
