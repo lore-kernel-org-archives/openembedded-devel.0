@@ -1,29 +1,30 @@
 Received: from mail-fx0-f51.google.com ([209.85.161.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Qjyxa-0006nb-Go
+	(envelope-from <philippedeswert@gmail.com>) id 1Qk1qZ-0002uK-Vy
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jul 2011 21:31:02 +0200
-Received: by fxh10 with SMTP id 10so4077570fxh.10
+	Fri, 22 Jul 2011 00:36:00 +0200
+Received: by fxh10 with SMTP id 10so4316241fxh.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2011 12:26:55 -0700 (PDT)
+	Thu, 21 Jul 2011 15:31:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=j4XTdPqvy0n+uogfKKZI7sSzswcekWbcCCe4OkStylc=;
-	b=hFIT1vLo2qRL9eL1D3YtMR+/7VFFHDWmCDAkQhq7bal+Bs9cDSZaQIyaLlI7Y66F3j
-	Nay8t9Ae79VwzuaXl7hmKnm6d3Sw8Y1oxbbWiuQPls1A7nxPUn106uFEB09pHBeAzBjZ
-	BeRXR+I0b+CenJBXvkszOzuDWnbkJ1wXUMR24=
-Received: by 10.223.85.155 with SMTP id o27mr744256fal.109.1311276191335;
-	Thu, 21 Jul 2011 12:23:11 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id p17sm1586779fak.25.2011.07.21.12.23.08
+	bh=Aix97U7czs9BNIkmvQdYBTYJDbAy+AUesxG9uuyPE74=;
+	b=vgWiI7jEMtTj3pKFgldXJ6e+UR9bdzOSK0bNU6pXq+LykH1uqw5FCL7E/fP5fFZwQJ
+	6vXjvvWt3sJqlpqvsMIPlEFjhQGOWYS0F0YADzvBGViwefhHVCfSnvuGBIp09Cj/v+nV
+	EDBnOQE1BsgB2jQiYfVT+nOlohamPs+4GEXVo=
+Received: by 10.204.8.89 with SMTP id g25mr227790bkg.10.1311287512078;
+	Thu, 21 Jul 2011 15:31:52 -0700 (PDT)
+Received: from localhost.localdomain (a83-245-252-47.elisa-laajakaista.fi
+	[83.245.252.47])
+	by mx.google.com with ESMTPS id f13sm331160bku.18.2011.07.21.15.31.50
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 21 Jul 2011 12:23:09 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 21 Jul 2011 15:31:51 -0700 (PDT)
+From: Philippe De Swert <philippedeswert@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Jul 2011 21:23:00 +0200
-Message-Id: <cover.1311276122.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.6
-Subject: [meta-oe][PATCH 0/4] Pull request #19
+Date: Fri, 22 Jul 2011 01:31:04 +0300
+Message-Id: <1311287464-13001-1-git-send-email-philippedeswert@gmail.com>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [PATCH] gpe-mini-browser2_svn : remove fixes SRCREV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,36 +38,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2011 19:31:02 -0000
+X-List-Received-Date: Thu, 21 Jul 2011 22:36:00 -0000
 
-The following changes since commit 059369b22fddb5e69536d37c29cb064c3d1372ae:
+* SCREV points to a broken revision which crashes due to badly initialized g_threads
+  See http://bugs.openembedded.org/show_bug.cgi?id=5409
 
-  gconf: inherit perlnative (2011-07-21 08:26:14 +0200)
+Signed-off-by: Philippe De Swert <philippedeswert@gmail.com>
+---
+ recipes/gpe-mini-browser/gpe-mini-browser2_svn.bb |    2 --
+ 1 files changed, 0 insertions(+), 2 deletions(-)
 
-are available in the git repository at:
-  git://git.openembedded.org/meta-openembedded-contrib jansa/meta-oe
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/meta-oe
-
-Martin Jansa (4):
-  connman: remove if_alg.h test from configure
-  tangogps: fix build with curl-7.21.8 and newer
-  foxtrotgps: fix build with curl-7.21.8 and newer
-  xf86-video-glamo: bump SRCREV, remove upstream applied patch
-
- .../recipes-connectivity/connman/connman_0.76.bb   |    4 +-
- ...efine-GLAMO_CMDQ_MAX_COUNT-instead-of-mag.patch |   66 --------------------
- .../xorg-driver/xf86-video-glamo_git.bb            |    5 +-
- .../foxtrotgps-1.0.1/remove.unused.header.patch    |   40 ++++++++++++
- .../foxtrotgps/foxtrotgps_1.0.1.bb                 |    6 +-
- .../tangogps-0.99.4/remove.unused.header.patch     |   37 +++++++++++
- .../recipes-navigation/tangogps/tangogps_0.99.4.bb |    4 +-
- 7 files changed, 89 insertions(+), 73 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0001-glamo-drm-define-GLAMO_CMDQ_MAX_COUNT-instead-of-mag.patch
- create mode 100644 meta-oe/recipes-navigation/foxtrotgps/foxtrotgps-1.0.1/remove.unused.header.patch
- create mode 100644 meta-oe/recipes-navigation/tangogps/tangogps-0.99.4/remove.unused.header.patch
-
+diff --git a/recipes/gpe-mini-browser/gpe-mini-browser2_svn.bb b/recipes/gpe-mini-browser/gpe-mini-browser2_svn.bb
+index 6bc89c8..2aa55b4 100644
+--- a/recipes/gpe-mini-browser/gpe-mini-browser2_svn.bb
++++ b/recipes/gpe-mini-browser/gpe-mini-browser2_svn.bb
+@@ -2,8 +2,6 @@ DEPENDS = "gtk+ glib-2.0 libgpewidget webkit-gtk"
+ PV = "0.0.1+svnr${SRCPV}"
+ PR = "r0"
+ 
+-SRCREV = "9900"
+-
+ inherit autotools
+ 
+ SRC_URI = "${GPE_EXTRA_SVN}"
 -- 
-1.7.6
+1.7.2.5
 
 
 
