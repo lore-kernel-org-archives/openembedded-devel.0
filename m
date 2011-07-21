@@ -1,34 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from tritech.se ([91.191.137.61])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Qjmuc-0008Gj-KE for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jul 2011 08:39:10 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Qjmqf-00063s-Ee for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jul 2011 08:35:05 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2011 08:35:05 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <Mats.Karrman@tritech.se>) id 1QjnIP-0000Su-TA
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Jul 2011 09:03:46 +0200
+Received: from post.tritech.se (post.tritech.se [10.75.60.100])
+	by tritech.se (8.14.3/8.14.3) with ESMTP id p6L6xXEg000964
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2011 08:35:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 21 Jul 2011 08:29:51 +0200
-Message-ID: <j08h0v$tdv$3@dough.gmane.org>
-References: <1311199325-7532-1-git-send-email-agnel.joel@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
-In-Reply-To: <1311199325-7532-1-git-send-email-agnel.joel@gmail.com>
-X-Enigmail-Version: 1.2
-Subject: Re: [PATCH v2] linux-omap-psp, linux-omap: Added patch to fix MMC timeout errors
+	Thu, 21 Jul 2011 08:59:38 +0200
+Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
+	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
+	14.01.0270.001; Thu, 21 Jul 2011 08:59:33 +0200
+From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] Added header file to linux kernel - how to export
+Thread-Index: AcxGD4ih4YSdUb0mRcCpV/r1/P2CaQADDFeKAACs9iAAIzpLAAAMqOUPAACMLCAAImt/tg==
+Date: Thu, 21 Jul 2011 06:59:32 +0000
+Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C06CC57@post.tritech.se>
+References: <ED3E0BCACD909541BA94A34C4A164D4C06CA55@post.tritech.se>
+	<ED3E0BCACD909541BA94A34C4A164D4C06CA7F@post.tritech.se>
+	<09D9BE2AC4AA764DABAA8C91E48D819E0157569991@DEMCHP99E35MSX.ww902.siemens.net>,
+	<20110720090459.GA3173@mi.fu-berlin.de>
+	<ED3E0BCACD909541BA94A34C4A164D4C06CB64@post.tritech.se>,
+	<09D9BE2AC4AA764DABAA8C91E48D819E0157569AF9@DEMCHP99E35MSX.ww902.siemens.net>
+In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819E0157569AF9@DEMCHP99E35MSX.ww902.siemens.net>
+Accept-Language: en-US, sv-SE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [194.132.137.34]
+MIME-Version: 1.0
+Subject: Re: Added header file to linux kernel - how to export
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,60 +43,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2011 06:39:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Jul 2011 07:03:46 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Op 21-07-11 00:02, Joel A Fernandes schreef:
-> This fixes MMC errors due to timeouts on certain SD Cards following suggestions to set dto to 14 by Jason Kridner and Steven Kipisz
-> 
-> Details of the issue: http://talk.maemo.org/showthread.php?p=1000707#post1000707 --- Changes since v1: * Made patch to apply to org.openembedded.dev branch * Bumped PR of respective recipes
-> 
-> ...mc-Adjust-dto-to-eliminate-timeout-errors.patch |   27 ++++++++++++++ ...mc-Adjust-dto-to-eliminate-timeout-errors.patch |   39 +++++++++++--------- recipes/linux/linux-omap-psp_2.6.32.bb             |    2 +- recipes/linux/linux-omap_2.6.39.bb                 |    3 +-
-
-Could you please split that in 2? And for the .39 kernel, the master recipe is in meta-ti, not in .dev: http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-texasinstruments/tree/recipes-kernel/linux/linux-omap_2.6.39.bb?id=7018fe0a81fa33c6d73d6296d25517b5d427d0a7
-
-
-> 4 files changed, 52 insertions(+), 19 deletions(-) create mode 100644 recipes/linux/linux-omap-2.6.39/beagle/0006-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch
-> 
-> diff --git a/recipes/linux/linux-omap-2.6.39/beagle/0006-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch b/recipes/linux/linux-omap-2.6.39/beagle/0006-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch new file mode 100644 index 0000000..7a563b7 --- /dev/null +++
-> b/recipes/linux/linux-omap-2.6.39/beagle/0006-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch @@ -0,0 +1,27 @@ +From bd0b2f97c48aa6aac0c6a494f1c6ba5af5de486b Mon Sep 17 00:00:00 2001 +From: Joel A Fernandes <agnel.joel@gmail.com> +Date: Mon, 18 Jul 2011 23:13:41 -0500 +Subject: [PATCH]
-> omap_hsmmc: Set dto to max value of 14 to avoid SD Card timeouts + +Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com> +--- + drivers/mmc/host/omap_hsmmc.c |    3 +++ + 1 files changed, 3 insertions(+), 0 deletions(-) + +diff --git a/drivers/mmc/host/omap_hsmmc.c
-> b/drivers/mmc/host/omap_hsmmc.c +index 9646a75..7443647 100644 +--- a/drivers/mmc/host/omap_hsmmc.c ++++ b/drivers/mmc/host/omap_hsmmc.c +@@ -1049,6 +1049,9 @@ static void set_data_timeout(struct omap_hsmmc_host *host, + 			dto = 14; + 	} + ++	/* Set dto to max value of 14 to avoid SD Card
-> timeouts */ ++	dto = 14; ++ + 	reg &= ~DTO_MASK; + 	reg |= dto << DTO_SHIFT; + 	OMAP_HSMMC_WRITE(host->base, SYSCTL, reg); +-- +1.7.0.4 + diff --git a/recipes/linux/linux-omap-psp-2.6.32/0047-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch
-> b/recipes/linux/linux-omap-psp-2.6.32/0047-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch index 4867d3f..7a563b7 100644 --- a/recipes/linux/linux-omap-psp-2.6.32/0047-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch +++
-> b/recipes/linux/linux-omap-psp-2.6.32/0047-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch @@ -1,22 +1,27 @@ -From 26a79f408bd41ad7b4a47f2683909d3fc1575eab Mon Sep 17 00:00:00 2001 -From: Steve Sakoman <steve@sakoman.com> -Date: Wed, 12 Jan 2011 05:54:55 -0800 -Subject: [PATCH] omap: mmc:
-> Adjust dto to eliminate timeout errors +From bd0b2f97c48aa6aac0c6a494f1c6ba5af5de486b Mon Sep 17 00:00:00 2001 +From: Joel A Fernandes <agnel.joel@gmail.com> +Date: Mon, 18 Jul 2011 23:13:41 -0500 +Subject: [PATCH] omap_hsmmc: Set dto to max value of 14 to avoid SD Card timeouts
-> 
-> -A number of SD card types were experiencing timeout errors.  This -could also lead to data corruption in some cases. - -This fix proposed by Sukumar Ghoral of TI. +Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com> --- + drivers/mmc/host/omap_hsmmc.c |    3 +++ + 1 files changed, 3
-> insertions(+), 0 deletions(-) + diff --git a/drivers/mmc/host/omap_hsmmc.c b/drivers/mmc/host/omap_hsmmc.c -index 9646a75..ef458d6 100644 +index 9646a75..7443647 100644 --- a/drivers/mmc/host/omap_hsmmc.c +++ b/drivers/mmc/host/omap_hsmmc.c -@@ -1032,6 +1032,7 @@ static void
-> set_data_timeout(struct omap_hsmmc_host *host, - 	cycle_ns = 1000000000 / (clk_get_rate(host->fclk) / clkd); - 	timeout = timeout_ns / cycle_ns; - 	timeout += timeout_clks; -+	timeout *= 2; - 	if (timeout) { - 		while ((timeout & 0x80000000) == 0) { - 			dto += 1; +@@ -1049,6 +1049,9 @@ static
-> void set_data_timeout(struct omap_hsmmc_host *host, + 			dto = 14; + 	} + ++	/* Set dto to max value of 14 to avoid SD Card timeouts */ ++	dto = 14; ++ + 	reg &= ~DTO_MASK; + 	reg |= dto << DTO_SHIFT; + 	OMAP_HSMMC_WRITE(host->base, SYSCTL, reg); +-- +1.7.0.4 + diff --git
-> a/recipes/linux/linux-omap-psp_2.6.32.bb b/recipes/linux/linux-omap-psp_2.6.32.bb index 91de194..31de659 100644 --- a/recipes/linux/linux-omap-psp_2.6.32.bb +++ b/recipes/linux/linux-omap-psp_2.6.32.bb @@ -9,7 +9,7 @@ COMPATIBLE_MACHINE =
-> "am3517-crane|beagleboard|omap3evm|am3517-evm|dm37x-evm|am3 SRCREV = "5fc29e7b2a76a64a739f857858ef0b98294aa155"
-> 
-> # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc -MACHINE_KERNEL_PR_append = "f+gitr${SRCREV}" +MACHINE_KERNEL_PR_append = "g+gitr${SRCREV}"
-> 
-> SRC_URI = "git://arago-project.org/git/projects/linux-omap3.git;protocol=http;branch=master \ file://0001-Added-Crane-Board-support.patch \ diff --git a/recipes/linux/linux-omap_2.6.39.bb b/recipes/linux/linux-omap_2.6.39.bb index 5b1c797..5566c0d 100644 --- a/recipes/linux/linux-omap_2.6.39.bb 
-> +++ b/recipes/linux/linux-omap_2.6.39.bb @@ -7,7 +7,7 @@ COMPATIBLE_MACHINE = "(beagleboard)"
-> 
-> # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc SRCREV_pn-${PN} = "v2.6.39" -MACHINE_KERNEL_PR_append = "h" +MACHINE_KERNEL_PR_append = "i"
-> 
-> FILESPATHPKG_prepend = "linux-omap-2.6.39:"
-> 
-> @@ -52,6 +52,7 @@ SRC_URI_append = " \ file://beagle/0003-OMAP3-beagle-add-MADC-support.patch \ file://beagle/0004-OMAP3-beagle-add-regulators-for-camera-interface.patch \ file://beagle/0005-OMAP3-beagle-HACK-add-in-1GHz-OPP.patch \ +
-> file://beagle/0006-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch \ \ file://camera/0001-Add-driver-for-Aptina-Micron-mt9p031-sensor.patch \ file://camera/0002-v4l-Add-mt9v032-sensor-driver.patch \
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFOJ8dfMkyGM64RGpERAtMmAJ9E1pKW0VA3ofR/v7R0UoUGoUhjDwCeIIko
-hOGT22eesWJbF9RNYcCaKSs=
-=xXhT
------END PGP SIGNATURE-----
-
+@ Fabrice=0A=
+OK, I hear what you're saying.=0A=
+I've read about "packaged staging" and it seem to be "a good thing" (http:/=
+/marcin.juszkiewicz.com.pl/2008/07/01/packaged-staging-and-what-it-gives/).=
+=0A=
+I did try using "oe_stage_append_mymachine()" but got an error saying somet=
+hing like "there is no oe_stage so you can't append, use oe_stage() instead=
+". So I tried "oe_stage_mymachine()" but still got the same error... Then I=
+ tried "oe_stage()" that worked but I don't wan't to do it "unqualified". (=
+I'm using OE "tested_2010-12-30", maybe this is fixed in later releases.)=
+=0A=
+=0A=
+@ Henning=0A=
+Regarding not using "do_stage" I found this: "https://wiki.yoctoproject.org=
+/wiki/Merging_packages_from_OpenEmbedded" and know that Yocto and OE are ge=
+tting closer involved. Also I found posts about "kernel_do_stage()" from ke=
+rnel.bbclass but I have no such function in my OE version.=0A=
+This info "http://openembedded.org/index.php/Legacy_staging" suggests STAGI=
+NG_INCDIR -> ${D}${includedir} but that doesn't make sense to me because I =
+want the file where other recipes could reach it.=0A=
+I have seen your comments on other posts also saying "don't use do_stage". =
+Could you please point me off to somewhere where I could get the background=
+ and what would be "the right" way to do this?=0A=
+=0A=
+Best regards,=0A=
+Mats=0A=
+=0A=
+________________________________________=0A=
+From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
+-bounces@lists.openembedded.org] on behalf of Aeschbacher, Fabrice [Fabrice=
+.Aeschbacher@siemens.com]=0A=
+Sent: Wednesday, July 20, 2011 3:28 PM=0A=
+To: openembedded-devel@lists.openembedded.org=0A=
+Subject: Re: [oe] Added header file to linux kernel - how to export=0A=
+=0A=
+Mats,=0A=
+=0A=
+Installing myfile.h during do_install() certainly works for you right now.=
+=0A=
+=0A=
+But it won't if you plan to use packaged-staging in the future. Hence my ad=
+vice to do this rather during do_stage()=0A=
+=0A=
+With kind regards,=0A=
+   Fabrice=0A=
+=0A=
+> -----Urspr=FCngliche Nachricht-----=0A=
+> Von: openembedded-devel-bounces@lists.openembedded.org=0A=
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] Im=0A=
+> Auftrag von Mats K=E4rrman=0A=
+> Gesendet: Mittwoch, 20. Juli 2011 15:14=0A=
+> An: openembedded-devel@lists.openembedded.org=0A=
+> Betreff: Re: [oe] Added header file to linux kernel - how to export=0A=
+>=0A=
+> @ Fabrice & Henning:=0A=
+>=0A=
+> Thank you both for your support! I ended up with:=0A=
+>=0A=
+> ## Export patched in header files for access by other recipes=0A=
+> do_install_append_mymachine() {=0A=
+>         cp ${S}/arch/powerpc/include/asm/myfile.h=0A=
+> ${STAGING_DIR_TARGET}${includedir}/asm/=0A=
+> }=0A=
+>=0A=
+> Works fine but I'm a bit confused about the number of=0A=
+> "STAGING_" definitions in the environment. It's not always=0A=
+> easy to pick the right one, e.g. STAGING_DIR_TARGET and=0A=
+> STAGING_DIR_HOST both points to the same location...=0A=
+>=0A=
+> Best Regards,=0A=
+> Mats=0A=
+>=0A=
+> ________________________________________=0A=
+> From: openembedded-devel-bounces@lists.openembedded.org=0A=
+> [openembedded-devel-bounces@lists.openembedded.org] on behalf=0A=
+> of Henning Heinold [heinold@inf.fu-berlin.de]=0A=
+> Sent: Wednesday, July 20, 2011 11:05 AM=0A=
+> To: openembedded-devel@lists.openembedded.org=0A=
+> Subject: Re: [oe] Added header file to linux kernel - how to export=0A=
+>=0A=
+> On Tue, Jul 19, 2011 at 08:14:14PM +0200, Aeschbacher, Fabrice wrote:=0A=
+> > Hi,=0A=
+> >=0A=
+> > Your could put something like this:=0A=
+> >=0A=
+> > do_stage_append() {=0A=
+> >       cp ${S}/my_ioctl.h ${STAGING_KERNEL_DIR}/include/linux=0A=
+> > }=0A=
+> >=0A=
+> > in your recipes/linux<xxx>.bb=0A=
+> >=0A=
+> > With kind regards,=0A=
+> >    Fabrice=0A=
+>=0A=
+> Hi,=0A=
+>=0A=
+> do_stage shouldn't be used anymore. Do it via do_install method.=0A=
+>=0A=
+>=0A=
+> Bye Henning=0A=
+>=0A=
+> _______________________________________________=0A=
+> Openembedded-devel mailing list=0A=
+> Openembedded-devel@lists.openembedded.org=0A=
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=0A=
+>=0A=
+> _______________________________________________=0A=
+> Openembedded-devel mailing list=0A=
+> Openembedded-devel@lists.openembedded.org=0A=
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=0A=
+>=0A=
+_______________________________________________=0A=
+Openembedded-devel mailing list=0A=
+Openembedded-devel@lists.openembedded.org=0A=
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=0A=
 
 
