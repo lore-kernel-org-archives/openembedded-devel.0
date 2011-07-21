@@ -1,30 +1,31 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <richard.purdie@linuxfoundation.org>)
-	id 1QjqKm-0005Ju-Kd for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jul 2011 12:18:24 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p6LA5i7j031705;
-	Thu, 21 Jul 2011 11:05:44 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 30977-05; Thu, 21 Jul 2011 11:05:40 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p6LA5Z7Y031699
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Thu, 21 Jul 2011 11:05:35 +0100
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <lynn.xin.lin@gmail.com>) id 1QjrSo-0006jP-JR
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Jul 2011 13:30:54 +0200
+Received: by vxh2 with SMTP id 2so891058vxh.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Jul 2011 04:26:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=ARHeyJkerrWWHLzZlANiMywaj8rJRdPdVPircO2CMDM=;
+	b=aRjYDLttT4+8T7OgCvVJDs/Qa4Y8vYp9D4A940BXmm3YalVpZCEm4HnHeLw8U3ab2W
+	R3xMi4iJywS4OOGZ8IlUM/oSoZpYxCkKIERvm2WyaeVhlp0kN+GRlRTWFptPESd7YMX6
+	mtAd0RbR6Pwf1hVWdjMKPjFbxTgvMrH6Vjve8=
+MIME-Version: 1.0
+Received: by 10.52.22.177 with SMTP id e17mr113482vdf.215.1311247595669; Thu,
+	21 Jul 2011 04:26:35 -0700 (PDT)
+Received: by 10.52.166.200 with HTTP; Thu, 21 Jul 2011 04:26:35 -0700 (PDT)
+Received: by 10.52.166.200 with HTTP; Thu, 21 Jul 2011 04:26:35 -0700 (PDT)
+In-Reply-To: <ED3E0BCACD909541BA94A34C4A164D4C06CA7F@post.tritech.se>
+References: <ED3E0BCACD909541BA94A34C4A164D4C06CA55@post.tritech.se>
+	<ED3E0BCACD909541BA94A34C4A164D4C06CA7F@post.tritech.se>
+Date: Thu, 21 Jul 2011 19:26:35 +0800
+Message-ID: <CAPgpnMT50=cABZYTDeCbD7MuPBqaXGfZnZE9B2MQQdZdWw9C9w@mail.gmail.com>
+From: Lynn Lin <lynn.xin.lin@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <CAHQecY4g64igX0+=-Rsr==sDe+YmTKNhNhpk-7eKe069u2aP2A@mail.gmail.com>
-References: <CAHQecY4g64igX0+=-Rsr==sDe+YmTKNhNhpk-7eKe069u2aP2A@mail.gmail.com>
-Date: Thu, 21 Jul 2011 11:05:30 +0100
-Message-ID: <1311242730.2344.76.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: Tom King <ka6sox@gmail.com>
-Subject: Re: git server
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Added header file to linux kernel - how to export
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,28 +39,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2011 10:18:24 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Jul 2011 11:30:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 2011-07-20 at 20:10 -0700, Tom King wrote:
-> approximately 0400UTC the git server was migrated from the failing Melo
-> instance to another instance on another machine while we continue to
-> troubleshoot melo.
-
-Fir reference the machine ssh keys changed as a result of this
-triggering security warnings. 
-
-Something is also wrong with the bitbake repository as I can no longer
-access it:
-
-$ git pull
-fatal: 'repositories/bitbake.git' does not appear to be a git repository
-fatal: The remote end hung up unexpectedly
-
-Cheers,
-
-Richard
-
-
+=E5=9C=A8 2011-7-19 =E4=B8=8B=E5=8D=889:58=EF=BC=8C"Mats K=C3=A4rrman" <Mat=
+s.Karrman@tritech.se>=E5=86=99=E9=81=93=EF=BC=9A
+>
+> Hi,
+>
+> I have made a patch to the linux kernel, involving adding some ioctl's.
+Relevant definitions are in a .h file. Now I need to access this .h file
+from another recipe (that builds a utility using those ioctl's) but the
+headers in sysroots/xxx-linux/usr/include are put there (by
+linux-libc-headers?) long before the target Linux kernel is patched and
+built.
+>
+> I'm thinking about adding a do_install_append to the linux recipe but tha=
+t
+doesn't feel right. Neither does adding a path from the util recipe build t=
+o
+the work folder of linux kernel. Third alternative would be to build the
+driver as an LKM but I really like to have it built into the kernel...
+>
+> If any of you have some good advice here I would be very happy!
+>
+> Best Regards,
+> Mats
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
