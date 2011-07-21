@@ -1,30 +1,23 @@
-Received: from mail-fx0-f51.google.com ([209.85.161.51])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philippedeswert@gmail.com>) id 1Qk1qZ-0002uK-Vy
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jul 2011 00:36:00 +0200
-Received: by fxh10 with SMTP id 10so4316241fxh.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2011 15:31:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=Aix97U7czs9BNIkmvQdYBTYJDbAy+AUesxG9uuyPE74=;
-	b=vgWiI7jEMtTj3pKFgldXJ6e+UR9bdzOSK0bNU6pXq+LykH1uqw5FCL7E/fP5fFZwQJ
-	6vXjvvWt3sJqlpqvsMIPlEFjhQGOWYS0F0YADzvBGViwefhHVCfSnvuGBIp09Cj/v+nV
-	EDBnOQE1BsgB2jQiYfVT+nOlohamPs+4GEXVo=
-Received: by 10.204.8.89 with SMTP id g25mr227790bkg.10.1311287512078;
-	Thu, 21 Jul 2011 15:31:52 -0700 (PDT)
-Received: from localhost.localdomain (a83-245-252-47.elisa-laajakaista.fi
-	[83.245.252.47])
-	by mx.google.com with ESMTPS id f13sm331160bku.18.2011.07.21.15.31.50
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 21 Jul 2011 15:31:51 -0700 (PDT)
-From: Philippe De Swert <philippedeswert@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qk2CD-0003MD-2T for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Jul 2011 00:58:21 +0200
+Received: from f053034050.adsl.alicedsl.de ([78.53.34.50]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qk295-0004t0-Mj for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Jul 2011 22:55:08 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Jul 2011 01:31:04 +0300
-Message-Id: <1311287464-13001-1-git-send-email-philippedeswert@gmail.com>
-X-Mailer: git-send-email 1.7.2.5
-Subject: [PATCH] gpe-mini-browser2_svn : remove fixes SRCREV
+In-Reply-To: <1311287464-13001-1-git-send-email-philippedeswert@gmail.com>
+References: <1311287464-13001-1-git-send-email-philippedeswert@gmail.com>
+Date: Fri, 22 Jul 2011 00:54:13 +0200
+Message-ID: <1311288853.7847.6.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH] gpe-mini-browser2_svn : remove fixes SRCREV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,31 +31,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2011 22:36:00 -0000
+X-List-Received-Date: Thu, 21 Jul 2011 22:58:21 -0000
+X-Groupsio-MsgNum: 33282
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Mpj22q4TtEy4J1FFReKj"
 
-* SCREV points to a broken revision which crashes due to badly initialized g_threads
-  See http://bugs.openembedded.org/show_bug.cgi?id=5409
+--=-Mpj22q4TtEy4J1FFReKj
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Philippe De Swert <philippedeswert@gmail.com>
----
- recipes/gpe-mini-browser/gpe-mini-browser2_svn.bb |    2 --
- 1 files changed, 0 insertions(+), 2 deletions(-)
-
-diff --git a/recipes/gpe-mini-browser/gpe-mini-browser2_svn.bb b/recipes/gpe-mini-browser/gpe-mini-browser2_svn.bb
-index 6bc89c8..2aa55b4 100644
---- a/recipes/gpe-mini-browser/gpe-mini-browser2_svn.bb
-+++ b/recipes/gpe-mini-browser/gpe-mini-browser2_svn.bb
-@@ -2,8 +2,6 @@ DEPENDS = "gtk+ glib-2.0 libgpewidget webkit-gtk"
- PV = "0.0.1+svnr${SRCPV}"
- PR = "r0"
- 
--SRCREV = "9900"
--
- inherit autotools
- 
- SRC_URI = "${GPE_EXTRA_SVN}"
--- 
-1.7.2.5
+Dear Philippe,
 
 
+thank you for your patch.
 
+Am Freitag, den 22.07.2011, 01:31 +0300 schrieb Philippe De Swert:
+> * SCREV points to a broken revision which crashes due to badly initialize=
+d g_threads
+>   See http://bugs.openembedded.org/show_bug.cgi?id=3D5409
+>=20
+> Signed-off-by: Philippe De Swert <philippedeswert@gmail.com>
+> ---
+>  recipes/gpe-mini-browser/gpe-mini-browser2_svn.bb |    2 --
+>  1 files changed, 0 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/recipes/gpe-mini-browser/gpe-mini-browser2_svn.bb b/recipes/=
+gpe-mini-browser/gpe-mini-browser2_svn.bb
+> index 6bc89c8..2aa55b4 100644
+> --- a/recipes/gpe-mini-browser/gpe-mini-browser2_svn.bb
+> +++ b/recipes/gpe-mini-browser/gpe-mini-browser2_svn.bb
+> @@ -2,8 +2,6 @@ DEPENDS =3D "gtk+ glib-2.0 libgpewidget webkit-gtk"
+>  PV =3D "0.0.1+svnr${SRCPV}"
+>  PR =3D "r0"
+> =20
+> -SRCREV =3D "9900"
+> -
+
+Please do not remove the `SRCREV` but replace it by a valid and working
+revision. Otherwise the builds would not be reproducible.
+
+>  inherit autotools
+> =20
+>  SRC_URI =3D "${GPE_EXTRA_SVN}"
+
+
+Thanks,
+
+Paul
+
+
+--=-Mpj22q4TtEy4J1FFReKj
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk4org8ACgkQPX1aK2wOHVgzXQCfXX7gwkbjJMF91xsRIiag8sdV
+4bkAmgLVER3EuzOgUPHzxDrSv2JzB8XU
+=g++r
+-----END PGP SIGNATURE-----
+
+--=-Mpj22q4TtEy4J1FFReKj--
