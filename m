@@ -1,39 +1,27 @@
-Received: from c2bthomr10.btconnect.com ([213.123.20.128]
-	helo=mail.btconnect.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <smith@trdeo.co.uk>)
-	id 1QkDcD-0005kW-Hb; Fri, 22 Jul 2011 13:09:57 +0200
-Received: from host109-149-246-170.range109-149.btcentralplus.com (EHLO
-	_192.168.0.12_) ([109.149.246.170]) by c2bthomr10.btconnect.com
-	with ESMTP id DTT14005; Fri, 22 Jul 2011 12:04:44 +0100 (BST)
-From: Rob Smith <smith@trdeo.co.uk>
+Received: from cernan.electric.net ([72.35.23.19] helo=out2a.electric.net)
+	by linuxtogo.org with esmtp (Exim 4.72) (envelope-from
+	<mstirling=openembedded-devel=lists.openembedded.org=dfhkgqas@ad-holdings.co.uk>)
+	id 1QkDs0-000651-2v for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Jul 2011 13:26:16 +0200
+Received: from 1QkCKy-0007n3-Ve by out2a.electric.net with emc1-ok (Exim 4.76)
+	(envelope-from <mstirling@ad-holdings.co.uk>)
+	id 1QkCKz-0007oN-Uf; Fri, 22 Jul 2011 02:48:05 -0700
+Received: by emcmailer; Fri, 22 Jul 2011 02:48:05 -0700
+Received: from [213.218.221.154] (helo=localhost.localdomain)
+	by out2a.electric.net with esmtpa (Exim 4.72)
+	(envelope-from <mstirling@ad-holdings.co.uk>)
+	id 1QkCKy-0007n3-Ve; Fri, 22 Jul 2011 02:48:05 -0700
+From: Mike Stirling <mstirling@ad-holdings.co.uk>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1311330120.1861.13.camel@avalanches>
-References: <1311330120.1861.13.camel@avalanches>
-Date: Fri, 22 Jul 2011 12:04:42 +0100
-Message-ID: <1311332682.1861.17.camel@avalanches>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-X-Mirapoint-IP-Reputation: reputation=Fair-1, source=Queried,
-	refid=tid=0001.0A0B0303.4E29594B.00AB, actions=tag
-X-Junkmail-Premium-Raw: score=7/50, refid=2.7.2:2011.7.22.94516:17:7.586,
-	ip=109.149.246.170, rules=__BOUNCE_CHALLENGE_SUBJ,
-	__BOUNCE_NDR_SUBJ_EXEMPT, __TO_MALFORMED_2,
-	__TO_NO_NAME, __CT, __CT_TEXT_PLAIN, __HAS_MSGID,
-	__SANE_MSGID, INVALID_MSGID_NO_FQDN, __MIME_VERSION,
-	__HAS_X_MAILER, __CTE, __ANY_URI, __URI_NO_WWW,
-	__CP_MEDIA_BODY, __CP_URI_IN_BODY, BODY_SIZE_1700_1799,
-	BODYTEXTP_SIZE_3000_LESS, __MIME_TEXT_ONLY,
-	RDNS_GENERIC_POOLED, BODY_SIZE_5000_LESS,
-	RDNS_SUSP_GENERIC, RDNS_SUSP, BODY_SIZE_2000_LESS,
-	BODY_SIZE_7000_LESS
-X-Junkmail-Status: score=10/50, host=c2bthomr10.btconnect.com
-X-Junkmail-Signature-Raw: score=unknown,
-	refid=str=0001.0A0B0208.4E29594C.01EF,ss=1,fgs=0,
-	ip=0.0.0.0, so=2010-07-22 22:03:31,
-	dmn=2009-09-10 00:05:08, mode=multiengine
-X-Junkmail-IWF: false
-Cc: openembedded-devel@linuxtogo.org
-Subject: Re: Problem with task do_package_update_index_ipk
+Date: Fri, 22 Jul 2011 10:47:29 +0100
+Message-Id: <1311328049-22455-1-git-send-email-mstirling@ad-holdings.co.uk>
+X-Mailer: git-send-email 1.7.0.4
+X-Outbound-IP: 213.218.221.154
+X-Env-From: mstirling@ad-holdings.co.uk
+X-PolicySMART: 794533
+X-Virus-Status: Scanned by VirusSMART (c)
+Cc: Mike Stirling <mstirling@chipwrights.com>
+Subject: [PATCH] vblade: Fix GNU_HASH QA error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,60 +35,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jul 2011 11:09:57 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 22 Jul 2011 11:26:16 -0000
 
-Hello Again,
+From: Mike Stirling <mstirling@chipwrights.com>
 
-I've managed to discover what the problem was... It turns out the
-ipk.lock file was still present in my deploy directory, which seems to
-have completely messed things up. 
+Build fails QA with (at least) external-toolchain-csl.  Fix patches makefile to pass OE's LDFLAGS to linker.
 
-The location of the .lock file was tmp/deploy/glibc/, and when present
-the do_package_update_index_ipk task just hung forever. Perhaps this
-should be a bug report, as there should have at least been a warning
-message.
+Upstream-Status: Pending - issue still exists in vblade-20
 
-Anyway, just for info.
+Signed-off-by: Mike Stirling <mstirling@chipwrights.com>
+---
+ recipes/vblade/files/ldflags.patch |   12 ++++++++++++
+ recipes/vblade/vblade_19.bb        |    5 +++--
+ 2 files changed, 15 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/vblade/files/ldflags.patch
 
-Cheers
-Rob
-
-On Fri, 2011-07-22 at 11:22 +0100, Rob Smith wrote:
-> Hello,
-> 
-> I've encountered a strange problem that seems to have arisen from
-> nowhere. Essentially, when I try to bitbake an image
-> (omap3-console-image), the process gets completely stuck in the task
-> do_package_update_index_ipk. Its currently been running for over 4
-> hours. Yesterday, it was working fine, and would take only a few minutes
-> for that task to complete.
-> 
-> This morning, all I changed was some configure options for the packages
-> gst-plugins-base and gst-plugins-good, cleaned them, and then rebuilt,
-> using these commands:
-> 
-> # bitbake gst-plugins-base -c clean
-> # bitbake gst-plugins-base
-> # bitbake gst-plugins-good -c clean
-> # bitbake gst-plugins-good
-> # bitbake omap3-console-image
-> 
-> This last command gets stuck in the do_package_update_index_ipk task.
-> What exactly does this task do, and is there anything I can do to fix
-> this? Is there an index file that might be corrupt?
-> 
-> Thanks for any help,
-> Regards
-> Rob Smih
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+diff --git a/recipes/vblade/files/ldflags.patch b/recipes/vblade/files/ldflags.patch
+new file mode 100644
+index 0000000..3350513
+--- /dev/null
++++ b/recipes/vblade/files/ldflags.patch
+@@ -0,0 +1,12 @@
++diff -urN vblade-19.orig/makefile vblade-19/makefile
++--- vblade-19.orig/makefile	2011-07-20 15:45:43.851538824 +0100
+++++ vblade-19/makefile	2011-07-20 15:46:26.863358466 +0100
++@@ -11,7 +11,7 @@
++ O=aoe.o bpf.o ${PLATFORM}.o ata.o
++ 
++ vblade: $O
++-	${CC} -o vblade $O
+++	${CC} ${LDFLAGS} -o vblade $O
++ 
++ aoe.o : aoe.c config.h dat.h fns.h makefile
++ 	${CC} ${CFLAGS} -c $<
+diff --git a/recipes/vblade/vblade_19.bb b/recipes/vblade/vblade_19.bb
+index f100a46..7b3504a 100644
+--- a/recipes/vblade/vblade_19.bb
++++ b/recipes/vblade/vblade_19.bb
+@@ -1,10 +1,11 @@
+ DESCRIPTION = "Virtual EtherDrive blade AoE target"
+ SECTION = "console/network"
+-PR = "r1"
++PR = "r2"
+ LICENSE = "GPL"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/aoetools/${PN}-${PV}.tgz \
+-	   file://cross.patch"
++	   file://cross.patch \
++	   file://ldflags.patch"
+ 
+ inherit autotools
+ 
+-- 
+1.7.0.4
 
 
 
