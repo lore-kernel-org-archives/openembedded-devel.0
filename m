@@ -1,37 +1,25 @@
-Received: from mail-fx0-f51.google.com ([209.85.161.51])
+Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QkFg6-0000Ab-0l
+	(envelope-from <jaap.dejong@nedap.com>) id 1QkGJ6-0001En-N2
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jul 2011 15:22:06 +0200
-Received: by fxh10 with SMTP id 10so5361563fxh.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jul 2011 06:17:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=1lLY2SHPJwjMz1x6QuINdbxjJCZ0i6K4C1bXZp/k+2U=;
-	b=Uz78ismA3nhfMXLPjvRjpobYxY+DWqs8CVSlXxjbJcDU1x3FcHdu3CIDHAhvF9hBc2
-	D9a2Cz/LgBdVYCq8XzlUYd53Gc6EUlemUZVm27tuaONUWiOv8OJ1xzfZU+RxLnBQ7cPJ
-	cQH2WfGkAfejj1xximhsIGofdk9VKL9JRO79Y=
-Received: by 10.223.54.79 with SMTP id p15mr309839fag.10.1311340676420;
-	Fri, 22 Jul 2011 06:17:56 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id w11sm2044286faj.14.2011.07.22.06.17.54
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 22 Jul 2011 06:17:54 -0700 (PDT)
-Date: Fri, 22 Jul 2011 15:17:48 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110722131748.GD3767@jama.jama.net>
-References: <1311287464-13001-1-git-send-email-philippedeswert@gmail.com>
-	<1311288853.7847.6.camel@mattotaupa>
-	<CAPsFW+QbVj089SmBAWtMU3xX2yPxghQmpsF=qAUZhpcnVLvKdA@mail.gmail.com>
-	<20110722123449.GC3767@jama.jama.net>
-	<CAPsFW+R4MH_dSPX5sit65u7j7=+pwp5R4dNT9=QQPUcy=-PG5Q@mail.gmail.com>
+	Fri, 22 Jul 2011 16:02:24 +0200
+Received: from nvs0066 ([10.91.8.1]) by smtp.nedap.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Fri, 22 Jul 2011 15:58:16 +0200
+X-TM-IMSS-Message-ID: <2f125792000167e3@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 2f125792000167e3 ;
+	Fri, 22 Jul 2011 15:57:35 +0200
+Message-ID: <4E298200.1040302@nedap.com>
+Date: Fri, 22 Jul 2011 15:58:24 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.18) Gecko/20110617 Lightning/1.0b2 Thunderbird/3.1.11
 MIME-Version: 1.0
-In-Reply-To: <CAPsFW+R4MH_dSPX5sit65u7j7=+pwp5R4dNT9=QQPUcy=-PG5Q@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] gpe-mini-browser2_svn : remove fixes SRCREV
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 22 Jul 2011 13:58:16.0118 (UTC)
+	FILETIME=[6778CD60:01CC4877]
+Subject: strange error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,79 +33,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jul 2011 13:22:06 -0000
-X-Groupsio-MsgNum: 33289
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="MIdTMoZhcV1D07fI"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 22 Jul 2011 14:02:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---MIdTMoZhcV1D07fI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+funny error when the OE_BASE dirname contains "-OS"
+It looks like it all occurrences in the gcc line with "-OS" are replaced 
+by "-O1S" leading to a wrong path...
 
-On Fri, Jul 22, 2011 at 04:06:43PM +0300, Philippe De Swert wrote:
-> Hi,
->=20
-> Thanks for clarifying Martin.
->=20
-> On 22/07/2011, Martin Jansa <martin.jansa@gmail.com> wrote:
-> > On Fri, Jul 22, 2011 at 03:18:37PM +0300, Philippe De Swert wrote:
-> >> I already wondered who added one (as I originally added the svn
-> >> recipe). Anyway I thought the whole idea of _svn etc were to have
-> >> bleeding edge builds. If we wanted stable there would be a versioned
-> >> recipe.
-> >
-> > If you want it bleeding then you or your distribution will set
-> >
-> > SRCREV_pn-gpe-mini-browser2 =3D "${AUTOREV}"
-> >
-> > in local.conf or some distro .inc file
-> > like there is
-> > conf/distro/include/shr-autorev.inc
-> > conf/distro/include/fso-autorev.inc
-> > etc.
-> >
-> > but for rest of world is better to say which SRCREV was tested and
-> > should work for everybody.
->=20
-> Ok so things have changed since I made the recipe. Still catching up
-> on all the new things in OE.
 
-BTW: let's go to catch some oe-core :)
 
-Looking on that commit it was me changing SRCREV in recipe
+| make[1]: Entering directory 
+`/home/jdj/OE-OS/build/tmp-angstrom_2008_1/work/i686-linux/libgcrypt-native-1.4.1-r0/libgcrypt-1.4.1'
+| Making all in mpi
+| make[2]: Entering directory 
+`/home/jdj/OE-OS/build/tmp-angstrom_2008_1/work/i686-linux/libgcrypt-native-1.4.1-r0/libgcrypt-1.4.1/mpi'
+| make[2]: Nothing to be done for `all'.
+| make[2]: Leaving directory 
+`/home/jdj/OE-OS/build/tmp-angstrom_2008_1/work/i686-linux/libgcrypt-native-1.4.1-r0/libgcrypt-1.4.1/mpi'
+| Making all in cipher
+| make[2]: Entering directory 
+`/home/jdj/OE-OS/build/tmp-angstrom_2008_1/work/i686-linux/libgcrypt-native-1.4.1-r0/libgcrypt-1.4.1/cipher'
+| `echo /bin/sh ../i686-linux-libtool --tag=CC   --mode=compile gcc 
+-DHAVE_CONFIG_H -I. -I..  -I../src -I../src  
+-isystem/home/jdj/OE-OS/build/tmp-angstrom_2008_1/sysroots/i686-linux/usr/include 
+-I/home/jdj/OE-OS/build/tmp-angstrom_2008_1/sysroots/i686-linux/usr/include 
+-isystem/home/jdj/OE-OS/build/tmp-angstrom_2008_1/sysroots/i686-linux/usr/include 
+-O2 -g -fvisibility=hidden -Wall -Wpointer-arith -c ./tiger.c | sed -e 
+'s/-O[2-9s]*/-O1/g' `
+| i686-linux-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../src 
+-I../src 
+-isystem/home/jdj/OE-O1S/build/tmp-angstrom_2008_1/sysroots/i686-linux/usr/include 
+-I/home/jdj/OE-O1S/build/tmp-angstrom_2008_1/sysroots/i686-linux/usr/include 
+-isystem/home/jdj/OE-O1S/build/tmp-angstrom_2008_1/sysroots/i686-linux/usr/include 
+-O1 -g -fvisibility=hidden -Wall -Wpointer-arith -c ./tiger.c  -fPIC 
+-DPIC -o .libs/tiger.o
+| In file included from ../src/visibility.h:245:0,
+|                  from ../src/g10lib.h:39,
+|                  from ./tiger.c:26:
+| ../src/gcrypt.h:29:23: fatal error: gpg-error.h: No such file or directory
+| compilation terminated.
+| make[2]: *** [tiger.lo] Error 1
+| make[2]: Leaving directory 
+`/home/jdj/OE-OS/build/tmp-angstrom_2008_1/work/i686-linux/libgcrypt-native-1.4.1-r0/libgcrypt-1.4.1/cipher'
+| make[1]: *** [all-recursive] Error 1
+| make[1]: Leaving directory 
+`/home/jdj/OE-OS/build/tmp-angstrom_2008_1/work/i686-linux/libgcrypt-native-1.4.1-r0/libgcrypt-1.4.1'
+| make: *** [all] Error 2
+| + die 'oe_runmake failed'
+| + oefatal 'oe_runmake failed'
+| + echo FATAL: 'oe_runmake failed'
+| FATAL: oe_runmake failed
+| + exit 1
+NOTE: package libgcrypt-native-1.4.1-r0: task do_compile: Failed
 
-gpe-mini-browser2_svn
--SRCREV =3D "9819"
-+SRCREV =3D "9900"
-because there was
--SRCREV_pn-gpe-mini-browser2 ?=3D "9900"
-in conf/distro/include/sane-srcrevs.inc which was included by default
-and removed later after moving all SRCREVs to corresponding recipes.
 
-and before that it was converted from SRCDATE to SRCREV (+ in recipe
-SRCREV was added)
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3De7814af64674=
-5ab8c6884c817d00475be3cd94e1
 
-later SRCREV upgraded to 9900 by
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3De7814af64674=
-5ab8c6884c817d00475be3cd94e1
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---MIdTMoZhcV1D07fI
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk4peHsACgkQN1Ujt2V2gBxLGQCeLaqPVCK4JbDXjIqYD8OH0x+x
-f/AAoK9x9YqHg2yU1N7zuLx9TGL5qXWC
-=v2bU
------END PGP SIGNATURE-----
-
---MIdTMoZhcV1D07fI--
