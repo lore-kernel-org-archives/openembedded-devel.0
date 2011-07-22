@@ -1,23 +1,36 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QkJfF-00015J-TD for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jul 2011 19:37:29 +0200
-Received: from f053038164.adsl.alicedsl.de ([78.53.38.164]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QkJc9-0007rl-Se for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jul 2011 17:34:18 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <raj.khem@gmail.com>) id 1QkMHM-00054e-KD
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Jul 2011 22:25:01 +0200
+Received: by yxi19 with SMTP id 19so1501958yxi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Jul 2011 13:20:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=VyqW1cOT6roFmlIdqmkuD2RgUAyXKk5obWRvXmyeZsU=;
+	b=KOU/DU8eVYL/YqAqsktCu8ix4WhUV/xcQ4oj/sM8Qkh2PJ1nv5YDjsmsxqo8uJek8J
+	Cof/4GlnvQH+cIbEbgBo12z9nsPBQ0k1JJIfzTNdlaTKi/RpuqXcCp2hZ/gXNOVvKNdB
+	s3CMmrS0i0qx9bxGCwSKPNS7Dp4T0iwtNdgZE=
+Received: by 10.142.60.21 with SMTP id i21mr1051354wfa.389.1311366050735;
+	Fri, 22 Jul 2011 13:20:50 -0700 (PDT)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id l7sm2030316pbh.58.2011.07.22.13.20.48
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 22 Jul 2011 13:20:48 -0700 (PDT)
+Date: Fri, 22 Jul 2011 13:21:13 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1311354305-24120-1-git-send-email-a.sappia@biotechware.com>
-References: <1311354305-24120-1-git-send-email-a.sappia@biotechware.com>
-Date: Fri, 22 Jul 2011 19:33:21 +0200
-Message-ID: <1311356001.3984.4.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [PATCH v3]] dbus-glib-native and dbus-glib were not compiling. This patch corrects dbus-glib-native to install required files in order to let dbus-glib to compile on target.
+Message-ID: <20110722202113.GA19631@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1307648104-24260-1-git-send-email-raj.khem@gmail.com>
+	<4E29B25D.8030503@balister.org>
+MIME-Version: 1.0
+In-Reply-To: <4E29B25D.8030503@balister.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH] gcc: Package libstdc++ gdb python helpers into dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,54 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jul 2011 17:37:30 -0000
-X-Groupsio-MsgNum: 33295
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-w6BunObgvl+5vLP6T0nZ"
+X-List-Received-Date: Fri, 22 Jul 2011 20:25:02 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=-w6BunObgvl+5vLP6T0nZ
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On (22/07/11 13:24), Philip Balister wrote:
+> On 06/09/2011 03:35 PM, Khem Raj wrote:
+> >People are seeing these errrors from ldconfig
+> >libstdc++.so.6.0.14-gdb.py is not an ELF file - it has the wrong magic
+> >bytes at the start.
+> >
+> >this file is moved into gdb's autoload directory
+> >if it exists there then gdb will find it when debugging
+> >and it wont be in the paths where ldconfig looks for
+> >libraries.
+> >
+> >Signed-off-by: Khem Raj<raj.khem@gmail.com>
+> 
+> Finally,
+> 
+> Tested-by: Philip Balister <philip@balister.org>
+> 
+> No more annoying message when I run ldconfig. Getting this fix in
+> will reduce my support emails by a small, but noticeable amount.
 
-Dear Alessandro,
+thanks for testing it out. I have installed in in oe.dev/master
 
-
-Am Freitag, den 22.07.2011, 19:05 +0200 schrieb Alessandro Sappia:
-
-unfortunately your commit message does not follow the commit policy [1].
-Please take a look at the commit log example [2].
-
-Could you please send a v4 with the proper returns included and style
-followed.
-
-> Signed-off-by: Alessandro Sappia <a.sappia@biotechware.com>
-> ---
->  recipes/dbus/dbus-glib.inc     |    8 ++++----
->  recipes/dbus/dbus-glib_0.86.bb |    7 +------
->  2 files changed, 5 insertions(+), 10 deletions(-)
-
-[=E2=80=A6]
-
-
-Thanks,
-
-Paul
+-Khem
 
 
-[1] http://openembedded.org/index.php/Commit_Policy
-[2] http://openembedded.org/index.php/Commit_log_example
 
---=-w6BunObgvl+5vLP6T0nZ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk4ptFwACgkQPX1aK2wOHVjbpwCfakFsxLmHYu2XgUEaiRlVhUfY
-hZIAnj9scO60+AQFRcIuYPfa4wiug/Fq
-=bDx8
------END PGP SIGNATURE-----
-
---=-w6BunObgvl+5vLP6T0nZ--
