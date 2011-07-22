@@ -1,27 +1,29 @@
-Received: from cernan.electric.net ([72.35.23.19] helo=out2a.electric.net)
-	by linuxtogo.org with esmtp (Exim 4.72) (envelope-from
-	<mstirling=openembedded-devel=lists.openembedded.org=dfhkgqas@ad-holdings.co.uk>)
-	id 1QkDs0-000651-2v for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jul 2011 13:26:16 +0200
-Received: from 1QkCKy-0007n3-Ve by out2a.electric.net with emc1-ok (Exim 4.76)
-	(envelope-from <mstirling@ad-holdings.co.uk>)
-	id 1QkCKz-0007oN-Uf; Fri, 22 Jul 2011 02:48:05 -0700
-Received: by emcmailer; Fri, 22 Jul 2011 02:48:05 -0700
-Received: from [213.218.221.154] (helo=localhost.localdomain)
-	by out2a.electric.net with esmtpa (Exim 4.72)
-	(envelope-from <mstirling@ad-holdings.co.uk>)
-	id 1QkCKy-0007n3-Ve; Fri, 22 Jul 2011 02:48:05 -0700
-From: Mike Stirling <mstirling@ad-holdings.co.uk>
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <philippedeswert@gmail.com>) id 1QkEkh-0007Gi-0p
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Jul 2011 14:22:47 +0200
+Received: by qwh5 with SMTP id 5so1193355qwh.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Jul 2011 05:18:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=1ND7KBs9trcLdPAFWhE31iP9m+k5qJAIxQOh7tcnYXc=;
+	b=qDg1bLVt/pw3oLeXneEnccnaFwbWXEmQl57ChzklK5c3F0ZwWYSnfjGYGXNRSVf4zy
+	5C8zqWxNDrrg+Uda9ByJXSzXj19urv8PQL/Fsc3qD/lRoJ34w8NuWgj81/9xZybEVx0B
+	lV6P3WPX18eKxKU0vhpNXVEvRvowpyN1wE2c0=
+MIME-Version: 1.0
+Received: by 10.224.195.201 with SMTP id ed9mr1108782qab.128.1311337117932;
+	Fri, 22 Jul 2011 05:18:37 -0700 (PDT)
+Received: by 10.229.190.82 with HTTP; Fri, 22 Jul 2011 05:18:37 -0700 (PDT)
+In-Reply-To: <1311288853.7847.6.camel@mattotaupa>
+References: <1311287464-13001-1-git-send-email-philippedeswert@gmail.com>
+	<1311288853.7847.6.camel@mattotaupa>
+Date: Fri, 22 Jul 2011 15:18:37 +0300
+Message-ID: <CAPsFW+QbVj089SmBAWtMU3xX2yPxghQmpsF=qAUZhpcnVLvKdA@mail.gmail.com>
+From: Philippe De Swert <philippedeswert@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Jul 2011 10:47:29 +0100
-Message-Id: <1311328049-22455-1-git-send-email-mstirling@ad-holdings.co.uk>
-X-Mailer: git-send-email 1.7.0.4
-X-Outbound-IP: 213.218.221.154
-X-Env-From: mstirling@ad-holdings.co.uk
-X-PolicySMART: 794533
-X-Virus-Status: Scanned by VirusSMART (c)
-Cc: Mike Stirling <mstirling@chipwrights.com>
-Subject: [PATCH] vblade: Fix GNU_HASH QA error
+Subject: Re: [PATCH] gpe-mini-browser2_svn : remove fixes SRCREV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,59 +37,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jul 2011 11:26:16 -0000
+X-List-Received-Date: Fri, 22 Jul 2011 12:22:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Mike Stirling <mstirling@chipwrights.com>
+Hi Paul,
 
-Build fails QA with (at least) external-toolchain-csl.  Fix patches makefile to pass OE's LDFLAGS to linker.
+On 22/07/2011, Paul Menzel <paulepanter@users.sourceforge.net> wrote:
+> thank you for your patch.
 
-Upstream-Status: Pending - issue still exists in vblade-20
+Thank you for the review.
 
-Signed-off-by: Mike Stirling <mstirling@chipwrights.com>
----
- recipes/vblade/files/ldflags.patch |   12 ++++++++++++
- recipes/vblade/vblade_19.bb        |    5 +++--
- 2 files changed, 15 insertions(+), 2 deletions(-)
- create mode 100644 recipes/vblade/files/ldflags.patch
+> Please do not remove the `SRCREV` but replace it by a valid and working
+> revision. Otherwise the builds would not be reproducible.
+>
 
-diff --git a/recipes/vblade/files/ldflags.patch b/recipes/vblade/files/ldflags.patch
-new file mode 100644
-index 0000000..3350513
---- /dev/null
-+++ b/recipes/vblade/files/ldflags.patch
-@@ -0,0 +1,12 @@
-+diff -urN vblade-19.orig/makefile vblade-19/makefile
-+--- vblade-19.orig/makefile	2011-07-20 15:45:43.851538824 +0100
-++++ vblade-19/makefile	2011-07-20 15:46:26.863358466 +0100
-+@@ -11,7 +11,7 @@
-+ O=aoe.o bpf.o ${PLATFORM}.o ata.o
-+ 
-+ vblade: $O
-+-	${CC} -o vblade $O
-++	${CC} ${LDFLAGS} -o vblade $O
-+ 
-+ aoe.o : aoe.c config.h dat.h fns.h makefile
-+ 	${CC} ${CFLAGS} -c $<
-diff --git a/recipes/vblade/vblade_19.bb b/recipes/vblade/vblade_19.bb
-index f100a46..7b3504a 100644
---- a/recipes/vblade/vblade_19.bb
-+++ b/recipes/vblade/vblade_19.bb
-@@ -1,10 +1,11 @@
- DESCRIPTION = "Virtual EtherDrive blade AoE target"
- SECTION = "console/network"
--PR = "r1"
-+PR = "r2"
- LICENSE = "GPL"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/aoetools/${PN}-${PV}.tgz \
--	   file://cross.patch"
-+	   file://cross.patch \
-+	   file://ldflags.patch"
- 
- inherit autotools
- 
--- 
-1.7.0.4
+I already wondered who added one (as I originally added the svn
+recipe). Anyway I thought the whole idea of _svn etc were to have
+bleeding edge builds. If we wanted stable there would be a versioned
+recipe.
 
+Of course I can add a new SRCREV but it defeats the whole purpose of
+the recipe...
+
+Cheers,
+
+Philippe
 
 
