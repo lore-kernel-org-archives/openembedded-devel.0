@@ -1,36 +1,23 @@
-Received: from slow3-v.mail.gandi.net ([217.70.178.89])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <a.sappia@biotechware.com>) id 1QkJEV-0000IN-RD
+	(envelope-from <philip@balister.org>) id 1QkJX0-0000nx-NG
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jul 2011 19:09:51 +0200
-X-WhiteListed: mail was accepted with no delay
-X-WhiteListed: mail was accepted with no delay
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net
-	[217.70.183.195])
-	by slow3-v.mail.gandi.net (Postfix) with ESMTP id 1A14338CD3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jul 2011 19:05:44 +0200 (CEST)
-X-Originating-IP: 217.70.178.134
-Received: from mfilter4-d.gandi.net (mfilter4-d.gandi.net [217.70.178.134])
-	by relay3-d.mail.gandi.net (Postfix) with ESMTP id 3FF12A8086;
-	Fri, 22 Jul 2011 19:05:34 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mfilter4-d.gandi.net
-Received: from relay3-d.mail.gandi.net ([217.70.183.195])
-	by mfilter4-d.gandi.net (mfilter4-d.gandi.net [10.0.15.180])
-	(amavisd-new, port 10024)
-	with ESMTP id baEmGGH7cGDa; Fri, 22 Jul 2011 19:05:32 +0200 (CEST)
-X-Originating-IP: 87.241.57.98
-Received: from localhost.localdomain (fireone.i3p.it [87.241.57.98])
-	(Authenticated sender: a.sappia@biotechware.com)
-	by relay3-d.mail.gandi.net (Postfix) with ESMTPSA id EBA5FA807F;
-	Fri, 22 Jul 2011 19:05:31 +0200 (CEST)
-From: Alessandro Sappia <a.sappia@biotechware.com>
+	Fri, 22 Jul 2011 19:28:58 +0200
+Received: (qmail 15697 invoked by uid 1003); 22 Jul 2011 17:24:46 -0000
+Received: from unknown (HELO ?192.168.1.167?)
+	(philip@opensdr.com@96.240.162.216)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	22 Jul 2011 17:24:46 -0000
+Message-ID: <4E29B25D.8030503@balister.org>
+Date: Fri, 22 Jul 2011 13:24:45 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.18) Gecko/20110621 Fedora/3.1.11-1.fc14 Thunderbird/3.1.11
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Jul 2011 19:05:05 +0200
-Message-Id: <1311354305-24120-1-git-send-email-a.sappia@biotechware.com>
-X-Mailer: git-send-email 1.7.4.1
-Cc: Alessandro Sappia <a.sappia@biotechware.com>
-Subject: [PATCH v3]] dbus-glib-native and dbus-glib were not compiling. This patch corrects dbus-glib-native to install required files in order to let dbus-glib to compile on target.
+References: <1307648104-24260-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1307648104-24260-1-git-send-email-raj.khem@gmail.com>
+Subject: Re: [PATCH] gcc: Package libstdc++ gdb python helpers into dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,64 +31,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jul 2011 17:09:51 -0000
+X-List-Received-Date: Fri, 22 Jul 2011 17:28:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Alessandro Sappia <a.sappia@biotechware.com>
----
- recipes/dbus/dbus-glib.inc     |    8 ++++----
- recipes/dbus/dbus-glib_0.86.bb |    7 +------
- 2 files changed, 5 insertions(+), 10 deletions(-)
+On 06/09/2011 03:35 PM, Khem Raj wrote:
+> People are seeing these errrors from ldconfig
+> libstdc++.so.6.0.14-gdb.py is not an ELF file - it has the wrong magic
+> bytes at the start.
+>
+> this file is moved into gdb's autoload directory
+> if it exists there then gdb will find it when debugging
+> and it wont be in the paths where ldconfig looks for
+> libraries.
+>
+> Signed-off-by: Khem Raj<raj.khem@gmail.com>
 
-diff --git a/recipes/dbus/dbus-glib.inc b/recipes/dbus/dbus-glib.inc
-index c1c1813..7208e91 100644
---- a/recipes/dbus/dbus-glib.inc
-+++ b/recipes/dbus/dbus-glib.inc
-@@ -21,19 +21,19 @@ inherit autotools pkgconfig gettext
- 
- BBCLASSEXTEND = "native"
- 
--do_configure_prepend() {
-+do_configure() {
-         install -m 0644 ${STAGING_DATADIR_NATIVE}/dbus/dbus-bus-introspect.xml ${S}/tools/
-         install -m 0644 ${STAGING_DATADIR_NATIVE}/dbus/dbus-glib-bindings.h ${S}/tools/
--
-+        autotools_do_configure
- }
- 
- do_configure_virtclass-native() {
-         autotools_do_configure
- }
- 
--do_install_virtclass-native() {
--        autotools_do_install
-+do_install_append_virtclass-native() {
-         install -d ${D}${datadir}/dbus
-+        install -m 0644 dbus-bus-introspect.xml ${D}${datadir}/dbus
-         install -m 0644 tools/dbus-glib-bindings.h ${D}${datadir}/dbus
- }
- 
-diff --git a/recipes/dbus/dbus-glib_0.86.bb b/recipes/dbus/dbus-glib_0.86.bb
-index ce87d5d..ff9a2d6 100644
---- a/recipes/dbus/dbus-glib_0.86.bb
-+++ b/recipes/dbus/dbus-glib_0.86.bb
-@@ -1,14 +1,9 @@
- require dbus-glib.inc
- 
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
- 
- SRC_URI_virtclass-native += "file://run-with-tmp-session-bus.patch"
- 
--do_install_virtclass-native_prepend() {
--        install -d ${D}${datadir}/dbus
--        install -m 0644 dbus-bus-introspect.xml ${D}${datadir}/dbus
--}
--
- SRC_URI[md5sum] = "cd0ab148fb0c786fc88be49d19971f50"
- SRC_URI[sha256sum] = "5351a6e7f38ffc641c34b4a4cdd9bed1c1dc7043a501096bac00a2876ea90bdc"
- 
--- 
-1.7.4.1
+Finally,
 
+Tested-by: Philip Balister <philip@balister.org>
+
+No more annoying message when I run ldconfig. Getting this fix in will 
+reduce my support emails by a small, but noticeable amount.
+
+Philip
+
+
+> ---
+>   recipes/gcc/gcc-4.5.inc            |    2 +-
+>   recipes/gcc/gcc-package-cross.inc  |    8 +++++++-
+>   recipes/gcc/gcc-package-target.inc |    4 ++++
+>   3 files changed, 12 insertions(+), 2 deletions(-)
+>
+> diff --git a/recipes/gcc/gcc-4.5.inc b/recipes/gcc/gcc-4.5.inc
+> index aa5bb00..69229ef 100644
+> --- a/recipes/gcc/gcc-4.5.inc
+> +++ b/recipes/gcc/gcc-4.5.inc
+> @@ -8,7 +8,7 @@ DEPENDS = "mpfr gmp libmpc libelf"
+>   NATIVEDEPS = "mpfr-native gmp-native libmpc-native"
+>
+>
+> -INC_PR = "r36"
+> +INC_PR = "r37"
+>
+>   SRCREV = "170880"
+>   PV = "4.5"
+> diff --git a/recipes/gcc/gcc-package-cross.inc b/recipes/gcc/gcc-package-cross.inc
+> index f9a7eeb..1533069 100644
+> --- a/recipes/gcc/gcc-package-cross.inc
+> +++ b/recipes/gcc/gcc-package-cross.inc
+> @@ -4,7 +4,7 @@ PACKAGE_STRIP = "no"
+>
+>   SHLIBSDIR = "${STAGING_DIR_TARGET}/shlibs"
+>
+> -PACKAGES = "libgcc libssp libstdc++ libg2c libgfortran"
+> +PACKAGES = "libgcc libssp libstdc++ libg2c libgfortran libstdc++-dev libgcc-dev"
+>
+>   # Called from within gcc-cross, so libdir is set wrong
+>   FILES_libg2c = "${target_libdir}/libg2c.so.*"
+> @@ -18,6 +18,7 @@ FILES_libgcc-dev = "${target_libdir}/libgcc_s.so"
+>
+>   FILES_libstdc++ = "${target_libdir}/libstdc++.so.*"
+>
+> +FILES_libstdc++-dev = "${target_datadir}/gdb/auto-load/${libdir}/libstdc++.so.*-gdb.py*"
+>   do_install () {
+>   	oe_runmake 'DESTDIR=${D}' install
+>   	install -d ${D}${target_base_libdir}
+> @@ -68,5 +69,10 @@ GROUP ( libgcc_s.so.1 libgcc.a )">  ${D}${target_libdir}/libgcc_s.so
+>   	# We use libiberty from binutils or binutils-cross
+>   	rm -f ${D}${libdir}/libiberty.a
+>   	rm -f ${D}${target_libdir}/libiberty.a
+> +	if [ -f ${D}${target_libdir}/libstdc++.so.*-gdb.py ]; then
+> +		# move the gdb python helpers to gdb auto-load directory
+> +		install -d ${D}${target_datadir}/gdb/auto-load${target_libdir}
+> +		mv -f ${D}${target_libdir}/libstdc++.so.*-gdb.py* ${D}${target_datadir}/gdb/auto-load${target_libdir}
+> +	fi
+>   }
+>
+> diff --git a/recipes/gcc/gcc-package-target.inc b/recipes/gcc/gcc-package-target.inc
+> index 5cfe47b..959b9ec 100644
+> --- a/recipes/gcc/gcc-package-target.inc
+> +++ b/recipes/gcc/gcc-package-target.inc
+> @@ -83,6 +83,7 @@ FILES_libstdc++-dev = "\
+>     ${libdir}/libsupc++.la \
+>     ${libdir}/libsupc++.a \
+>   "
+> +FILES_libstdc++-dev += "${datadir}/gdb/auto-load/${libdir}/libstdc++.so.*-gdb.py*"
+>
+>   FILES_libgfortran-dev = "${libdir}/libgfortran.a \
+>                            ${libdir}/libgfortran.so \
+> @@ -168,4 +169,7 @@ GROUP ( libgcc_s.so.1 libgcc.a )">  ${D}${libdir}/libgcc_s.so
+>
+>   	# Remove precompiled c++ headers as they are really big
+>   	rm -rf ${D}${includedir}/c++/${BINV}/${TARGET_SYS}/bits/*.gch
+> +	# move the gdb python helpers to gdb auto-load directory
+> +	install -d ${D}${datadir}/gdb/auto-load/${libdir}
+> +	mv ${D}${libdir}/libstdc++.so.*-gdb.py* ${D}${datadir}/gdb/auto-load${libdir}
+>   }
 
 
