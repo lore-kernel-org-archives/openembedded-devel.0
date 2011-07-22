@@ -1,28 +1,25 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1QkGNB-0001LV-QQ
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <Alexander.Stohr@gmx.de>) id 1QkGml-0003Ci-J7
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jul 2011 16:06:38 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 145A09AA1BA; Fri, 22 Jul 2011 08:02:29 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 62FFE9AA1B9;
-	Fri, 22 Jul 2011 08:02:27 -0600 (MDT)
-Message-ID: <4E2982F3.1030802@mlbassoc.com>
-Date: Fri, 22 Jul 2011 08:02:27 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc15 Thunderbird/3.1.10
+	Fri, 22 Jul 2011 16:33:04 +0200
+Received: (qmail 14389 invoked by uid 0); 22 Jul 2011 14:22:15 -0000
+Received: from 193.8.40.126 by www007.gmx.net with HTTP;
+	Fri, 22 Jul 2011 16:22:14 +0200 (CEST)
+Date: Fri, 22 Jul 2011 16:22:14 +0200
+From: "Alexander Stohr" <Alexander.Stohr@gmx.de>
+Message-ID: <20110722142214.326020@gmx.net>
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4E298200.1040302@nedap.com>
-In-Reply-To: <4E298200.1040302@nedap.com>
-Subject: Re: strange error
+X-Authenticated: #15156664
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX18xgi0w7Swxntiw/LxsXoy/B7ZKJzIzIQcQMFSQ8F
+	Ratv7gYJOabq+W/Z+Rw6EQYLwiGZepplikZw== 
+X-GMX-UID: 3sFPJDIJaHItecIXwSUlP1JiamdhZESR
+Cc: tytso@mit.edu, fpletz@franz-pletz.org, xavier.bestel@free.fr
+Subject: [PATCH] openembedded bitbake conf: fix for file system image creation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,57 +33,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jul 2011 14:06:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 22 Jul 2011 14:33:04 -0000
+X-Groupsio-MsgNum: 33292
+Content-Type: multipart/mixed; boundary="========GMX32602131134453416697"
 
-On 07/22/2011 07:58 AM, Jaap de Jong wrote:
-> funny error when the OE_BASE dirname contains "-OS"
-> It looks like it all occurrences in the gcc line with "-OS" are replaced by "-O1S" leading to a wrong path...
+--========GMX32602131134453416697
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-This is just one manifestation that seems to happen any time the build directory name contains "-".
-My practice is to just avoid naming my OE build trees with "-" in them.
+i've come to the insight that the tool "genext2fs"
+does a very limited job in respect to what i would
+consider current file system standards.
 
-> | make[1]: Entering directory `/home/jdj/OE-OS/build/tmp-angstrom_2008_1/work/i686-linux/libgcrypt-native-1.4.1-r0/libgcrypt-1.4.1'
-> | Making all in mpi
-> | make[2]: Entering directory `/home/jdj/OE-OS/build/tmp-angstrom_2008_1/work/i686-linux/libgcrypt-native-1.4.1-r0/libgcrypt-1.4.1/mpi'
-> | make[2]: Nothing to be done for `all'.
-> | make[2]: Leaving directory `/home/jdj/OE-OS/build/tmp-angstrom_2008_1/work/i686-linux/libgcrypt-native-1.4.1-r0/libgcrypt-1.4.1/mpi'
-> | Making all in cipher
-> | make[2]: Entering directory `/home/jdj/OE-OS/build/tmp-angstrom_2008_1/work/i686-linux/libgcrypt-native-1.4.1-r0/libgcrypt-1.4.1/cipher'
-> | `echo /bin/sh ../i686-linux-libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I.. -I../src -I../src
-> -isystem/home/jdj/OE-OS/build/tmp-angstrom_2008_1/sysroots/i686-linux/usr/include -I/home/jdj/OE-OS/build/tmp-angstrom_2008_1/sysroots/i686-linux/usr/include
-> -isystem/home/jdj/OE-OS/build/tmp-angstrom_2008_1/sysroots/i686-linux/usr/include -O2 -g -fvisibility=hidden -Wall -Wpointer-arith -c ./tiger.c | sed -e 's/-O[2-9s]*/-O1/g' `
-> | i686-linux-libtool: compile: gcc -DHAVE_CONFIG_H -I. -I.. -I../src -I../src -isystem/home/jdj/OE-O1S/build/tmp-angstrom_2008_1/sysroots/i686-linux/usr/include
-> -I/home/jdj/OE-O1S/build/tmp-angstrom_2008_1/sysroots/i686-linux/usr/include -isystem/home/jdj/OE-O1S/build/tmp-angstrom_2008_1/sysroots/i686-linux/usr/include -O1 -g
-> -fvisibility=hidden -Wall -Wpointer-arith -c ./tiger.c -fPIC -DPIC -o .libs/tiger.o
-> | In file included from ../src/visibility.h:245:0,
-> | from ../src/g10lib.h:39,
-> | from ./tiger.c:26:
-> | ../src/gcrypt.h:29:23: fatal error: gpg-error.h: No such file or directory
-> | compilation terminated.
-> | make[2]: *** [tiger.lo] Error 1
-> | make[2]: Leaving directory `/home/jdj/OE-OS/build/tmp-angstrom_2008_1/work/i686-linux/libgcrypt-native-1.4.1-r0/libgcrypt-1.4.1/cipher'
-> | make[1]: *** [all-recursive] Error 1
-> | make[1]: Leaving directory `/home/jdj/OE-OS/build/tmp-angstrom_2008_1/work/i686-linux/libgcrypt-native-1.4.1-r0/libgcrypt-1.4.1'
-> | make: *** [all] Error 2
-> | + die 'oe_runmake failed'
-> | + oefatal 'oe_runmake failed'
-> | + echo FATAL: 'oe_runmake failed'
-> | FATAL: oe_runmake failed
-> | + exit 1
-> NOTE: package libgcrypt-native-1.4.1-r0: task do_compile: Failed
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+it does what its name says: generating an ext2 file system.
+it does _not_:
+- generate an UUID
+- set the revision level to >0 (that might indicate an ext3 file system)
+- set the members that come with a revision >0
 
+if later on a "tune2fs -j" is applied to such an ext2 file system (as specified by OE bitbake.conf)
+then a journal is created making it effectively an ext3 file system.
+this step does _not_:
+- generate an UUID
+- set the revision level to >0 (that might indicate an ext3 file system)
+- set the members that come with a revision >0
+this might or might not be correct in terms of the tool.
+with my limited knowledge level=0 might not be allowed to receive a journal - or alternatively when the journal is added the level value and members should see an update.
+
+my short term choice was the addition of "e2fschk -y <image>" to my local version of the OE bitbake.conf file. (see patch below. Note: that my local file is not a current version, ext4 and misc packer formats are missing but you should be able to get the clue on the subject.)
+this step _does_:
+- generate an UUID
+- set the revision level to >0 (that might indicate an ext3 file system)
+- set the members that come with a revision >0
+
+as a result i get sane, checked and thus most probably working file system image. any later fs check on the image will either succeed or fail depending on what changes the file system has seen since its creation.
+if that step is not applied i would never be able to automatically verify the file system since it had errors inside at already its release time.
+
+regards, Alex.
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+NEU: FreePhone - 0ct/min Handyspartarif mit Geld-zurück-Garantie!		
+Jetzt informieren: http://www.gmx.net/de/go/freephone
 
+--========GMX32602131134453416697
+Content-Type: text/x-patch; charset="iso-8859-15"; name="bitbake.conf.diff"
+Content-Transfer-Encoding: 8bit
+Content-Disposition: attachment; filename="bitbake.conf.diff"
 
+--- bitbake.conf.orig	2011-07-22 15:56:09.000000000 +0200
++++ bitbake.conf	2011-07-22 15:55:18.000000000 +0200
+@@ -330,8 +330,8 @@
+ IMAGE_CMD_cramfs = "mkcramfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cramfs ${EXTRA_IMAGECMD}"
+ IMAGE_CMD_ext2 = "genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext2 ${EXTRA_IMAGECMD}"
+ IMAGE_CMD_ext2.gz = "rm -rf ${DEPLOY_DIR_IMAGE}/tmp.gz && mkdir ${DEPLOY_DIR_IMAGE}/tmp.gz; genext2fs -b ${IMAGE_ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2 ${EXTRA_IMAGECMD}; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext2.gz; rmdir ${DEPLOY_DIR_IMAGE}/tmp.gz"
+-IMAGE_CMD_ext3 = "genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3"
+-IMAGE_CMD_ext3.gz = "rm -rf ${DEPLOY_DIR_IMAGE}/tmp.gz && mkdir ${DEPLOY_DIR_IMAGE}/tmp.gz; genext2fs -b ${IMAGE_ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3.gz; rmdir ${DEPLOY_DIR_IMAGE}/tmp.gz"
++IMAGE_CMD_ext3 = "genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3; e2fsck -y ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3"
++IMAGE_CMD_ext3.gz = "rm -rf ${DEPLOY_DIR_IMAGE}/tmp.gz && mkdir ${DEPLOY_DIR_IMAGE}/tmp.gz; genext2fs -b ${IMAGE_ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; e2fsck -y ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3.gz; rmdir ${DEPLOY_DIR_IMAGE}/tmp.gz"
+ IMAGE_CMD_squashfs = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs ${EXTRA_IMAGECMD} -noappend"
+ IMAGE_CMD_squashfs-lzma = "mksquashfs-lzma ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs-lzma ${EXTRA_IMAGECMD} -noappend"
+ IMAGE_CMD_tar = "cd ${IMAGE_ROOTFS} && tar -cvf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.tar ."
+
+--========GMX32602131134453416697--
