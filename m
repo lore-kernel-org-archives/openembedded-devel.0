@@ -1,23 +1,23 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1QkJX0-0000nx-NG
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jul 2011 19:28:58 +0200
-Received: (qmail 15697 invoked by uid 1003); 22 Jul 2011 17:24:46 -0000
-Received: from unknown (HELO ?192.168.1.167?)
-	(philip@opensdr.com@96.240.162.216)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	22 Jul 2011 17:24:46 -0000
-Message-ID: <4E29B25D.8030503@balister.org>
-Date: Fri, 22 Jul 2011 13:24:45 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.18) Gecko/20110621 Fedora/3.1.11-1.fc14 Thunderbird/3.1.11
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QkJfF-00015J-TD for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Jul 2011 19:37:29 +0200
+Received: from f053038164.adsl.alicedsl.de ([78.53.38.164]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QkJc9-0007rl-Se for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Jul 2011 17:34:18 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1307648104-24260-1-git-send-email-raj.khem@gmail.com>
-In-Reply-To: <1307648104-24260-1-git-send-email-raj.khem@gmail.com>
-Subject: Re: [PATCH] gcc: Package libstdc++ gdb python helpers into dev package
+In-Reply-To: <1311354305-24120-1-git-send-email-a.sappia@biotechware.com>
+References: <1311354305-24120-1-git-send-email-a.sappia@biotechware.com>
+Date: Fri, 22 Jul 2011 19:33:21 +0200
+Message-ID: <1311356001.3984.4.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH v3]] dbus-glib-native and dbus-glib were not compiling. This patch corrects dbus-glib-native to install required files in order to let dbus-glib to compile on target.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,102 +31,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jul 2011 17:28:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 22 Jul 2011 17:37:30 -0000
+X-Groupsio-MsgNum: 33295
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-w6BunObgvl+5vLP6T0nZ"
 
-On 06/09/2011 03:35 PM, Khem Raj wrote:
-> People are seeing these errrors from ldconfig
-> libstdc++.so.6.0.14-gdb.py is not an ELF file - it has the wrong magic
-> bytes at the start.
->
-> this file is moved into gdb's autoload directory
-> if it exists there then gdb will find it when debugging
-> and it wont be in the paths where ldconfig looks for
-> libraries.
->
-> Signed-off-by: Khem Raj<raj.khem@gmail.com>
+--=-w6BunObgvl+5vLP6T0nZ
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Finally,
-
-Tested-by: Philip Balister <philip@balister.org>
-
-No more annoying message when I run ldconfig. Getting this fix in will 
-reduce my support emails by a small, but noticeable amount.
-
-Philip
+Dear Alessandro,
 
 
+Am Freitag, den 22.07.2011, 19:05 +0200 schrieb Alessandro Sappia:
+
+unfortunately your commit message does not follow the commit policy [1].
+Please take a look at the commit log example [2].
+
+Could you please send a v4 with the proper returns included and style
+followed.
+
+> Signed-off-by: Alessandro Sappia <a.sappia@biotechware.com>
 > ---
->   recipes/gcc/gcc-4.5.inc            |    2 +-
->   recipes/gcc/gcc-package-cross.inc  |    8 +++++++-
->   recipes/gcc/gcc-package-target.inc |    4 ++++
->   3 files changed, 12 insertions(+), 2 deletions(-)
->
-> diff --git a/recipes/gcc/gcc-4.5.inc b/recipes/gcc/gcc-4.5.inc
-> index aa5bb00..69229ef 100644
-> --- a/recipes/gcc/gcc-4.5.inc
-> +++ b/recipes/gcc/gcc-4.5.inc
-> @@ -8,7 +8,7 @@ DEPENDS = "mpfr gmp libmpc libelf"
->   NATIVEDEPS = "mpfr-native gmp-native libmpc-native"
->
->
-> -INC_PR = "r36"
-> +INC_PR = "r37"
->
->   SRCREV = "170880"
->   PV = "4.5"
-> diff --git a/recipes/gcc/gcc-package-cross.inc b/recipes/gcc/gcc-package-cross.inc
-> index f9a7eeb..1533069 100644
-> --- a/recipes/gcc/gcc-package-cross.inc
-> +++ b/recipes/gcc/gcc-package-cross.inc
-> @@ -4,7 +4,7 @@ PACKAGE_STRIP = "no"
->
->   SHLIBSDIR = "${STAGING_DIR_TARGET}/shlibs"
->
-> -PACKAGES = "libgcc libssp libstdc++ libg2c libgfortran"
-> +PACKAGES = "libgcc libssp libstdc++ libg2c libgfortran libstdc++-dev libgcc-dev"
->
->   # Called from within gcc-cross, so libdir is set wrong
->   FILES_libg2c = "${target_libdir}/libg2c.so.*"
-> @@ -18,6 +18,7 @@ FILES_libgcc-dev = "${target_libdir}/libgcc_s.so"
->
->   FILES_libstdc++ = "${target_libdir}/libstdc++.so.*"
->
-> +FILES_libstdc++-dev = "${target_datadir}/gdb/auto-load/${libdir}/libstdc++.so.*-gdb.py*"
->   do_install () {
->   	oe_runmake 'DESTDIR=${D}' install
->   	install -d ${D}${target_base_libdir}
-> @@ -68,5 +69,10 @@ GROUP ( libgcc_s.so.1 libgcc.a )">  ${D}${target_libdir}/libgcc_s.so
->   	# We use libiberty from binutils or binutils-cross
->   	rm -f ${D}${libdir}/libiberty.a
->   	rm -f ${D}${target_libdir}/libiberty.a
-> +	if [ -f ${D}${target_libdir}/libstdc++.so.*-gdb.py ]; then
-> +		# move the gdb python helpers to gdb auto-load directory
-> +		install -d ${D}${target_datadir}/gdb/auto-load${target_libdir}
-> +		mv -f ${D}${target_libdir}/libstdc++.so.*-gdb.py* ${D}${target_datadir}/gdb/auto-load${target_libdir}
-> +	fi
->   }
->
-> diff --git a/recipes/gcc/gcc-package-target.inc b/recipes/gcc/gcc-package-target.inc
-> index 5cfe47b..959b9ec 100644
-> --- a/recipes/gcc/gcc-package-target.inc
-> +++ b/recipes/gcc/gcc-package-target.inc
-> @@ -83,6 +83,7 @@ FILES_libstdc++-dev = "\
->     ${libdir}/libsupc++.la \
->     ${libdir}/libsupc++.a \
->   "
-> +FILES_libstdc++-dev += "${datadir}/gdb/auto-load/${libdir}/libstdc++.so.*-gdb.py*"
->
->   FILES_libgfortran-dev = "${libdir}/libgfortran.a \
->                            ${libdir}/libgfortran.so \
-> @@ -168,4 +169,7 @@ GROUP ( libgcc_s.so.1 libgcc.a )">  ${D}${libdir}/libgcc_s.so
->
->   	# Remove precompiled c++ headers as they are really big
->   	rm -rf ${D}${includedir}/c++/${BINV}/${TARGET_SYS}/bits/*.gch
-> +	# move the gdb python helpers to gdb auto-load directory
-> +	install -d ${D}${datadir}/gdb/auto-load/${libdir}
-> +	mv ${D}${libdir}/libstdc++.so.*-gdb.py* ${D}${datadir}/gdb/auto-load${libdir}
->   }
+>  recipes/dbus/dbus-glib.inc     |    8 ++++----
+>  recipes/dbus/dbus-glib_0.86.bb |    7 +------
+>  2 files changed, 5 insertions(+), 10 deletions(-)
+
+[=E2=80=A6]
 
 
+Thanks,
+
+Paul
+
+
+[1] http://openembedded.org/index.php/Commit_Policy
+[2] http://openembedded.org/index.php/Commit_log_example
+
+--=-w6BunObgvl+5vLP6T0nZ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk4ptFwACgkQPX1aK2wOHVjbpwCfakFsxLmHYu2XgUEaiRlVhUfY
+hZIAnj9scO60+AQFRcIuYPfa4wiug/Fq
+=bDx8
+-----END PGP SIGNATURE-----
+
+--=-w6BunObgvl+5vLP6T0nZ--
