@@ -1,23 +1,36 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1Qkefi-0006Hz-Sv
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jul 2011 18:03:23 +0200
-Received: (qmail 23020 invoked by uid 1003); 23 Jul 2011 15:59:12 -0000
-Received: from unknown (HELO ?192.168.1.167?)
-	(philip@opensdr.com@96.240.162.216)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	23 Jul 2011 15:59:12 -0000
-Message-ID: <4E2AEFCE.7060406@balister.org>
-Date: Sat, 23 Jul 2011 11:59:10 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.18) Gecko/20110621 Fedora/3.1.11-1.fc14 Thunderbird/3.1.11
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Qkgo2-0008PZ-UP for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jul 2011 20:20:07 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Qkgk2-0001jq-BN for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jul 2011 20:15:58 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 23 Jul 2011 20:15:58 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 23 Jul 2011 20:15:58 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1307648104-24260-1-git-send-email-raj.khem@gmail.com>	<4E29B25D.8030503@balister.org>	<20110722202113.GA19631@sakrah.homelinux.org>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 23 Jul 2011 20:15:43 +0200
+Message-ID: <j0f34f$3a5$1@dough.gmane.org>
+References: <1307648104-24260-1-git-send-email-raj.khem@gmail.com>
+	<4E29B25D.8030503@balister.org>
+	<20110722202113.GA19631@sakrah.homelinux.org>
 	<CAG4_upTZ9cjZG-jrcj7NSWhwrb539yUqVm89HUCdxrk97JWi_A@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:5.0) Gecko/20110624 Thunderbird/5.0
 In-Reply-To: <CAG4_upTZ9cjZG-jrcj7NSWhwrb539yUqVm89HUCdxrk97JWi_A@mail.gmail.com>
+X-Enigmail-Version: 1.2
 Subject: Re: [PATCH] gcc: Package libstdc++ gdb python helpers into dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,29 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jul 2011 16:03:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 23 Jul 2011 18:20:07 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 07/23/2011 11:09 AM, Chris Verges wrote:
-> On Fri, Jul 22, 2011 at 1:21 PM, Khem Raj<raj.khem@gmail.com>  wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Op 23-07-11 17:09, Chris Verges schreef:
+> On Fri, Jul 22, 2011 at 1:21 PM, Khem Raj <raj.khem@gmail.com> wrote:
 >> On (22/07/11 13:24), Philip Balister wrote:
 >>> On 06/09/2011 03:35 PM, Khem Raj wrote:
->>>> People are seeing these errrors from ldconfig
->>>> libstdc++.so.6.0.14-gdb.py is not an ELF file - it has the wrong magic
->>>> bytes at the start.
->>>
->>> No more annoying message when I run ldconfig. Getting this fix in
->>> will reduce my support emails by a small, but noticeable amount.
->>
+>>>> People are seeing these errrors from ldconfig libstdc++.so.6.0.14-gdb.py is not an ELF file - it has the wrong magic bytes at the start.
+>>> 
+>>> No more annoying message when I run ldconfig. Getting this fix in will reduce my support emails by a small, but noticeable amount.
+>> 
 >> thanks for testing it out. I have installed in in oe.dev/master
->
-> Would it be worth a cherry-pick of this into 2011.03-maintenance?
-> I've been seeing it there with gcc 4.4.4, too, and have the same issue
-> with questions that pop up about it.
+> 
+> Would it be worth a cherry-pick of this into 2011.03-maintenance? I've been seeing it there with gcc 4.4.4, too, and have the same issue with questions that pop up about it.
 
-I'm going to look at this "soon".
+I've already cherry-picked it and will send a pull request after Tom applies my previous one. Likely after the weekend.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Philip
+iD8DBQFOKw/PMkyGM64RGpERApWRAJ93vxrpac0kZ5RcyRIIcms/jSW1XwCfdplH
+NJAt+VjSEYEwiRt2fQBpyX0=
+=IpRi
+-----END PGP SIGNATURE-----
+
 
 
