@@ -1,35 +1,29 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QkMHM-00054e-KD
+	(envelope-from <kg4ysn@gmail.com>) id 1QkdtU-0005Pb-IP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jul 2011 22:25:01 +0200
-Received: by yxi19 with SMTP id 19so1501958yxi.6
+	Sat, 23 Jul 2011 17:13:32 +0200
+Received: by vws2 with SMTP id 2so2461608vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jul 2011 13:20:51 -0700 (PDT)
+	Sat, 23 Jul 2011 08:09:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=VyqW1cOT6roFmlIdqmkuD2RgUAyXKk5obWRvXmyeZsU=;
-	b=KOU/DU8eVYL/YqAqsktCu8ix4WhUV/xcQ4oj/sM8Qkh2PJ1nv5YDjsmsxqo8uJek8J
-	Cof/4GlnvQH+cIbEbgBo12z9nsPBQ0k1JJIfzTNdlaTKi/RpuqXcCp2hZ/gXNOVvKNdB
-	s3CMmrS0i0qx9bxGCwSKPNS7Dp4T0iwtNdgZE=
-Received: by 10.142.60.21 with SMTP id i21mr1051354wfa.389.1311366050735;
-	Fri, 22 Jul 2011 13:20:50 -0700 (PDT)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id l7sm2030316pbh.58.2011.07.22.13.20.48
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 22 Jul 2011 13:20:48 -0700 (PDT)
-Date: Fri, 22 Jul 2011 13:21:13 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110722202113.GA19631@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=TJqboPWoKTw/8rdPau76Cf8IlcOmr0JEcCvlkvwUIr4=;
+	b=Fh6C2yCV01RNMaJKrsW4GtqqGQK1up2jvvH+h9JXyBJQWHOTqnVrc/YLqJG6vtty86
+	ZTMBAAk0neQJRC2ap17mWHo5hP0A2XviNl1zF2xvS8fNx9/9DGI3ksCsUcxG45Ygf+Na
+	0U4ntwtby29De3eV/sul4+ItRpQlMb50wvw3Y=
+MIME-Version: 1.0
+Received: by 10.52.99.7 with SMTP id em7mr2720863vdb.131.1311433761309; Sat,
+	23 Jul 2011 08:09:21 -0700 (PDT)
+Received: by 10.220.63.3 with HTTP; Sat, 23 Jul 2011 08:09:21 -0700 (PDT)
+In-Reply-To: <20110722202113.GA19631@sakrah.homelinux.org>
 References: <1307648104-24260-1-git-send-email-raj.khem@gmail.com>
 	<4E29B25D.8030503@balister.org>
-MIME-Version: 1.0
-In-Reply-To: <4E29B25D.8030503@balister.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+	<20110722202113.GA19631@sakrah.homelinux.org>
+Date: Sat, 23 Jul 2011 08:09:21 -0700
+Message-ID: <CAG4_upTZ9cjZG-jrcj7NSWhwrb539yUqVm89HUCdxrk97JWi_A@mail.gmail.com>
+From: Chris Verges <kg4ysn@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH] gcc: Package libstdc++ gdb python helpers into dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,33 +38,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jul 2011 20:25:02 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 23 Jul 2011 15:13:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On (22/07/11 13:24), Philip Balister wrote:
-> On 06/09/2011 03:35 PM, Khem Raj wrote:
-> >People are seeing these errrors from ldconfig
-> >libstdc++.so.6.0.14-gdb.py is not an ELF file - it has the wrong magic
-> >bytes at the start.
-> >
-> >this file is moved into gdb's autoload directory
-> >if it exists there then gdb will find it when debugging
-> >and it wont be in the paths where ldconfig looks for
-> >libraries.
-> >
-> >Signed-off-by: Khem Raj<raj.khem@gmail.com>
-> 
-> Finally,
-> 
-> Tested-by: Philip Balister <philip@balister.org>
-> 
-> No more annoying message when I run ldconfig. Getting this fix in
-> will reduce my support emails by a small, but noticeable amount.
+On Fri, Jul 22, 2011 at 1:21 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On (22/07/11 13:24), Philip Balister wrote:
+>> On 06/09/2011 03:35 PM, Khem Raj wrote:
+>> >People are seeing these errrors from ldconfig
+>> >libstdc++.so.6.0.14-gdb.py is not an ELF file - it has the wrong magic
+>> >bytes at the start.
+>>
+>> No more annoying message when I run ldconfig. Getting this fix in
+>> will reduce my support emails by a small, but noticeable amount.
+>
+> thanks for testing it out. I have installed in in oe.dev/master
 
-thanks for testing it out. I have installed in in oe.dev/master
+Would it be worth a cherry-pick of this into 2011.03-maintenance?
+I've been seeing it there with gcc 4.4.4, too, and have the same issue
+with questions that pop up about it.
 
--Khem
-
+Thanks,
+Chris
 
 
