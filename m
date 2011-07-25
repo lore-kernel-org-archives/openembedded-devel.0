@@ -1,25 +1,30 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1QlS26-0004Ov-DD
+	(envelope-from <agnel.joel@gmail.com>) id 1QlUVy-0006dC-IE
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jul 2011 22:45:46 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.3])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1QlRy4-00012T-AX
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jul 2011 22:41:36 +0200
-From: Phil Blundell <philb@gnu.org>
+	Tue, 26 Jul 2011 01:24:46 +0200
+Received: by gyd12 with SMTP id 12so2598037gyd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Jul 2011 16:20:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=hFuZsmY3mz7llosd8IIomZaS9n2xOI+Is9mvUJKA1TA=;
+	b=qCg68SYkom50Jk0L7wdMxmkA2RqDHtW2OH4WuTiawVQ4lyc1s2gR5gcF1N/BTE62Lj
+	UFY7HbEb/3dVSrC5EP3/ju/QoRPSxKRcY05LrLUTW1YCbLyr91cH5Ig60dOSNeWpZUZw
+	TxMDVgmQDv2WPiQEnzZffqEydmNy7Gv5gvih8=
+Received: by 10.150.175.20 with SMTP id x20mr1657736ybe.352.1311636033413;
+	Mon, 25 Jul 2011 16:20:33 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id x11sm1249633ybg.28.2011.07.25.16.20.32
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 25 Jul 2011 16:20:32 -0700 (PDT)
+From: Joel A Fernandes <agnel.joel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c1ad379acab6c0bbe50c200c46bd7951@smithers>
-References: <aca10ad4ca204fe1dbc0276dbffed2b2@smithers>
-	<1311624488.3098.14.camel@lenovo.internal.reciva.com>
-	<c1ad379acab6c0bbe50c200c46bd7951@smithers>
-Date: Mon, 25 Jul 2011 21:41:30 +0100
-Message-ID: <1311626490.3098.22.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: i18n problems with eglibc
+Date: Mon, 25 Jul 2011 18:15:18 -0500
+Message-Id: <1311635718-13579-1-git-send-email-agnel.joel@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: jdk@ti.com, k-kooi@ti.com
+Subject: [meta-texasinstruments] [PATCH] linux-omap: Fix MMC timeout Errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,30 +38,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jul 2011 20:45:46 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 25 Jul 2011 23:24:46 -0000
 
-On Mon, 2011-07-25 at 15:34 -0500, Robert Brick wrote:
-> I should have mentioned it in my initial mail.  I believe that the
-> glibc message catalog is installed correctly.
-> 
-> root@cpc3xx:/bin# ls -l /usr/share/locale/es/LC_MESSAGES/
-> total 232
-> -rw-r--r-- 1 root root 110655 jul 23 13:57 coreutils.mo
-> -rw-r--r-- 1 root root 120808 jul 21 01:15 libc.mo
-> root@cpc3xx:/bin#
-> 
-> Is there any other file other than .../es/LC_MESSAGES/libc.mo that make
-> up the message catalog?
+This fixes MMC errors due to timeouts on certain SD Cards following suggestions
+to set dto to 14 by Jason Kridner and Steven Kipisz
 
-Oh, very strange then.  That does look correct; as far as I know libc.mo
-is the only file you should need to get localised output from glibc.
+Details of the issue:
+http://talk.maemo.org/showthread.php?p=1000707#post1000707
 
-What does the output from "strace -f ls /nonexistent" look like?
+This fix proposed by Sukumar Ghoral of TI.
+---
+Changes:
+Generated a patch that applies to meta-texasinstruments as suggested by Koen in the post at [1]
 
-p.
+[1] http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg19995.html
 
+ ...mc-Adjust-dto-to-eliminate-timeout-errors.patch |   33 ++++++++++++++++++++
+ recipes-kernel/linux/linux-omap_2.6.39.bb          |    1 +
+ 2 files changed, 34 insertions(+), 0 deletions(-)
+ create mode 100644 recipes-kernel/linux/linux-omap-2.6.39/beagle/0007-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch
+
+diff --git a/recipes-kernel/linux/linux-omap-2.6.39/beagle/0007-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch b/recipes-kernel/linux/linux-omap-2.6.39/beagle/0007-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch
+new file mode 100644
+index 0000000..8cd314c
+--- /dev/null
++++ b/recipes-kernel/linux/linux-omap-2.6.39/beagle/0007-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch
+@@ -0,0 +1,33 @@
++From bd0b2f97c48aa6aac0c6a494f1c6ba5af5de486b Mon Sep 17 00:00:00 2001
++From: Steve Sakoman <steve@sakoman.com>
++Date: Mon, 18 Jul 2011 23:13:41 -0500
++Subject: [PATCH] omap_hsmmc: Set dto to max value of 14 to avoid SD Card timeouts
++
++This fixes MMC errors due to timeouts on certain SD Cards following suggestions
++to set dto to 14 by Jason Kridner and Steven Kipisz
++
++Details of the issue:
++http://talk.maemo.org/showthread.php?p=1000707#post1000707
++
++This fix was originally proposed by Sukumar Ghoral of TI.
++---
++ drivers/mmc/host/omap_hsmmc.c |    3 +++
++ 1 files changed, 3 insertions(+), 0 deletions(-)
++
++diff --git a/drivers/mmc/host/omap_hsmmc.c b/drivers/mmc/host/omap_hsmmc.c
++index 9646a75..7443647 100644
++--- a/drivers/mmc/host/omap_hsmmc.c
+++++ b/drivers/mmc/host/omap_hsmmc.c
++@@ -1049,6 +1049,9 @@ static void set_data_timeout(struct omap_hsmmc_host *host,
++ 			dto = 14;
++ 	}
++ 
+++	/* Set dto to max value of 14 to avoid SD Card timeouts */
+++	dto = 14;
+++
++ 	reg &= ~DTO_MASK;
++ 	reg |= dto << DTO_SHIFT;
++ 	OMAP_HSMMC_WRITE(host->base, SYSCTL, reg);
++-- 
++1.7.0.4
++
+diff --git a/recipes-kernel/linux/linux-omap_2.6.39.bb b/recipes-kernel/linux/linux-omap_2.6.39.bb
+index c92846d..e3b6f3c 100644
+--- a/recipes-kernel/linux/linux-omap_2.6.39.bb
++++ b/recipes-kernel/linux/linux-omap_2.6.39.bb
+@@ -54,6 +54,7 @@ SRC_URI_append = " \
+            file://beagle/0004-OMAP3-beagle-add-regulators-for-camera-interface.patch \
+            file://beagle/0005-OMAP3-beagle-HACK-add-in-1GHz-OPP.patch \
+            file://beagle/0006-OMAP3-BEAGLE-fix-RTC.patch \
++           file://beagle/0007-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch \
+            \
+            file://camera/0001-Add-driver-for-Aptina-Micron-mt9p031-sensor.patch \
+            file://camera/0002-v4l-Add-mt9v032-sensor-driver.patch \
+-- 
+1.7.0.4
 
 
 
