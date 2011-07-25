@@ -1,24 +1,24 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1QlOqC-0002DX-CA
+	(envelope-from <koen@dominion.thruhere.net>) id 1QlQyg-00025Y-48
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jul 2011 19:21:16 +0200
-Received: by wwi14 with SMTP id 14so1481947wwi.0
+	Mon, 25 Jul 2011 21:38:11 +0200
+Received: by wwi18 with SMTP id 18so3680841wwi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jul 2011 10:17:04 -0700 (PDT)
-Received: by 10.216.136.160 with SMTP id w32mr795236wei.30.1311614223810;
-	Mon, 25 Jul 2011 10:17:03 -0700 (PDT)
+	Mon, 25 Jul 2011 12:33:57 -0700 (PDT)
+Received: by 10.216.182.72 with SMTP id n50mr819476wem.57.1311622436941;
+	Mon, 25 Jul 2011 12:33:56 -0700 (PDT)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id fx12sm4487250wbb.42.2011.07.25.10.17.02
+	by mx.google.com with ESMTPS id b13sm4580746wbh.7.2011.07.25.12.33.55
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 25 Jul 2011 10:17:03 -0700 (PDT)
+	Mon, 25 Jul 2011 12:33:56 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Jul 2011 19:16:51 +0200
-Message-Id: <1311614211-2977-1-git-send-email-koen@dominion.thruhere.net>
+Date: Mon, 25 Jul 2011 21:33:42 +0200
+Message-Id: <1311622422-22620-1-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.6.6.1
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-efl] evas: add new style GL config options
+Subject: [meta-efl] places: fix build e-module: inherit gettext
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,44 +32,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jul 2011 17:21:16 -0000
-
-The config options changed recently, but we keep both to allow bisecting EFL_SRCREVs
+X-List-Received-Date: Mon, 25 Jul 2011 19:38:11 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- meta-efl/recipes-efl/efl/evas.inc |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+ meta-efl/recipes-efl/e17/e-module.inc  |    2 +-
+ meta-efl/recipes-efl/e17/places_svn.bb |    5 -----
+ 2 files changed, 1 insertions(+), 6 deletions(-)
 
-diff --git a/meta-efl/recipes-efl/efl/evas.inc b/meta-efl/recipes-efl/efl/evas.inc
-index 4e6f328..3f7eed3 100644
---- a/meta-efl/recipes-efl/efl/evas.inc
-+++ b/meta-efl/recipes-efl/efl/evas.inc
-@@ -8,7 +8,7 @@ DEPENDS_virtclass-native = "freetype-native libxext-native libpng-native jpeg-na
- inherit efl
+diff --git a/meta-efl/recipes-efl/e17/e-module.inc b/meta-efl/recipes-efl/e17/e-module.inc
+index 3834a2e..97081aa 100644
+--- a/meta-efl/recipes-efl/e17/e-module.inc
++++ b/meta-efl/recipes-efl/e17/e-module.inc
+@@ -7,7 +7,7 @@ INC_PR = "r5"
  
- BBCLASSEXTEND = "native"
--INC_PR = "r1"
-+INC_PR = "r2"
- FILESPATHPKG =. "${BPN}-${PV}:${BPN}:"
+ SRCNAME = "E-MODULES-EXTRA/${PN}"
  
- python populate_packages_prepend () {
-@@ -158,6 +158,7 @@ EXTRA_OECONF = "${EVAS_OECONF} \
-                 --disable-convert-32-rgb-rot-180 \
-                 --enable-convert-32-rgb-rot-270 \
-                 --enable-gl-x11 \
-+                --enable-gl-xlib \
-                 --enable-gl-flavor-gles \
-                 --enable-gles-variety-${GLES} \
- "
-@@ -165,6 +166,7 @@ EXTRA_OECONF_virtclass-native = "${EVAS_OECONF} \
-                 --disable-software-x11 \
-                 --disable-software-16-x11 \
-                 --disable-gl-x11 \
-+                --disable-gl-xlib \
-                 --disable-xrender-x11 \
-                 --disable-image-loader-gif \
-                 --disable-image-loader-svg \
+-inherit e
++inherit e gettext
+ SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};proto=http;scmdata=keep"
+ S = "${WORKDIR}/${SRCNAME}"
+ 
+diff --git a/meta-efl/recipes-efl/e17/places_svn.bb b/meta-efl/recipes-efl/e17/places_svn.bb
+index f447745..0abe138 100644
+--- a/meta-efl/recipes-efl/e17/places_svn.bb
++++ b/meta-efl/recipes-efl/e17/places_svn.bb
+@@ -6,10 +6,5 @@ PR = "${INC_PR}.0"
+ 
+ require e-module.inc
+ 
+-do_configure_prepend() {
+-       sed -i -e /po/d -e /AM_GNU_GETTEXT/d configure.ac
+-       sed -i -e s:\ po::g Makefile.am
+-}
+-
+ # Calls /usr/bin/eject for media
+ RRECOMMENDS_${PN} += "eject"
 -- 
 1.6.6.1
 
