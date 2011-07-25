@@ -1,26 +1,33 @@
-Received: from qmta04.westchester.pa.mail.comcast.net ([76.96.62.40])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <bb1@halebob.net>) id 1QlO47-0000g0-Cx
+	(envelope-from <Tom_Rini@mentor.com>) id 1QlOQU-0001Hs-5Z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jul 2011 18:31:35 +0200
-Received: from omta17.westchester.pa.mail.comcast.net ([76.96.62.89])
-	by qmta04.westchester.pa.mail.comcast.net with comcast
-	id CGPy1h0041vXlb854GSN2u; Mon, 25 Jul 2011 16:26:22 +0000
-Received: from smithers.halebob.net ([69.255.41.253])
-	by omta17.westchester.pa.mail.comcast.net with comcast
-	id CGSL1h00s5TjpzZ3dGSM3Q; Mon, 25 Jul 2011 16:26:21 +0000
-Received: from www.halebob.net (smithers.halebob.net [192.168.1.6])
-	by smithers.halebob.net (8.13.8/8.13.8) with ESMTP id p6PGQJmK018069
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jul 2011 12:26:19 -0400
+	Mon, 25 Jul 2011 18:54:42 +0200
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1QlOA0-0002rv-4w from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Jul 2011 09:37:40 -0700
+Received: from SVR-ORW-FEM-02.mgc.mentorg.com ([147.34.96.206]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Mon, 25 Jul 2011 09:37:39 -0700
+Received: from [172.30.80.87] (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
+	(147.34.96.168) with Microsoft SMTP Server id 14.1.289.1;
+	Mon, 25 Jul 2011 09:37:39 -0700
+Message-ID: <4E2D9BD1.4040206@mentor.com>
+Date: Mon, 25 Jul 2011 09:37:37 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.18) Gecko/20110617 Lightning/1.0b2 Thunderbird/3.1.11
 MIME-Version: 1.0
-Date: Mon, 25 Jul 2011 11:26:19 -0500
-From: Robert Brick <bb1@halebob.net>
 To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <aca10ad4ca204fe1dbc0276dbffed2b2@smithers>
-X-Sender: bb1@halebob.net
-User-Agent: Roundcube Webmail/0.4
-Subject: i18n problems with eglibc
+References: <j0gpgh$97a$1@dough.gmane.org>
+In-Reply-To: <j0gpgh$97a$1@dough.gmane.org>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 25 Jul 2011 16:37:39.0961 (UTC)
+	FILETIME=[2B34AE90:01CC4AE9]
+Subject: Re: [2011.03-maintenance] Pull request #23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,34 +41,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jul 2011 16:31:35 -0000
-Content-Type: text/plain;
- charset=UTF-8;
- format=flowed
+X-List-Received-Date: Mon, 25 Jul 2011 16:54:42 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
 Content-Transfer-Encoding: 7bit
 
-Hello.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I'm trying to get the es_US.UTF-8 locale working with OE. I've 
-included
-nls support and IMAGE_LINGUAS="es_US.utf8" in my image and set
-LANG=es_US.UTF-8 on the target, however I only get partial message
-translation on the target when using coreutils's ls command. Here is 
-the output from ls
-when requesting the contents of a non-existent directory:
+On 07/24/2011 02:43 AM, Koen Kooi wrote:
+> Tom,
+> 
+> Please pull the 2 commits from here:
+> 
+> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+> Branch: 2011.03-maintenance
+> 
+> Khem Raj (1):
+>       gcc: Package libstdc++ gdb python helpers into dev package
+> 
+> Koen Kooi (1):
+>       pulseaudio: make it work out of the box * reuse 'audio' group as access group
+> 
+> 2 cherry-picks from .dev
 
-root@cpc3xx:/bin [1]# ls /nonexistent
-ls: no se puede acceder a /nonexistent: No such file or directory
-root@cpc3xx:/bin [2]#
+Applied, thanks.
 
-I was expecting to see:
-ls: no se puede acceder a /non: No existe el fichero o el directorio
+- -- 
+Tom Rini
+Mentor Graphics Corporation
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
 
-The first part of the output has the es translation, but not the 
-second
-part.
-
-Anyone have any idea why? Thanks in advance.
-
+iQEcBAEBAgAGBQJOLZvMAAoJEI4NMjfc3nJxhPoIAKQF8TPczT9x5IHmumaBT/RM
+R+E4PyhPsC2OyIcEJQAuDL64Ucbr4hffxflOaQJWVljs/w7sqeOfxeD8jzVDzd1t
+Yp84p9k2+Kw4xd26zAkyg6Ugy1DAKJYJRQMQpMHrsIXs9Vvho9TIJLxaVcjBv1H7
+RIgGOUadbyt1gVSUeO+5kGf1LP8meayfirr0ITGNwNW6OV4jhNwaFfq5HWTWjn4o
+18oOhgwzPS/LRA19pmbv8Nqlo2BoAuEBsfLEybIFI03Djr7VSOf1Vv5KZmhgxGGs
+m3oVDennTIpuaRl2st6PpdLwXjA422Rsfa4KMZrihtXT4qtqueVp0Rrq5i1edX8=
+=FepC
+-----END PGP SIGNATURE-----
 
 
