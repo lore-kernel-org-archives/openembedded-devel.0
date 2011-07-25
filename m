@@ -1,33 +1,24 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1QlOQU-0001Hs-5Z
+	(envelope-from <koen@dominion.thruhere.net>) id 1QlOqC-0002DX-CA
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jul 2011 18:54:42 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1QlOA0-0002rv-4w from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jul 2011 09:37:40 -0700
-Received: from SVR-ORW-FEM-02.mgc.mentorg.com ([147.34.96.206]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Mon, 25 Jul 2011 09:37:39 -0700
-Received: from [172.30.80.87] (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
-	(147.34.96.168) with Microsoft SMTP Server id 14.1.289.1;
-	Mon, 25 Jul 2011 09:37:39 -0700
-Message-ID: <4E2D9BD1.4040206@mentor.com>
-Date: Mon, 25 Jul 2011 09:37:37 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.18) Gecko/20110617 Lightning/1.0b2 Thunderbird/3.1.11
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <j0gpgh$97a$1@dough.gmane.org>
-In-Reply-To: <j0gpgh$97a$1@dough.gmane.org>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 25 Jul 2011 16:37:39.0961 (UTC)
-	FILETIME=[2B34AE90:01CC4AE9]
-Subject: Re: [2011.03-maintenance] Pull request #23
+	Mon, 25 Jul 2011 19:21:16 +0200
+Received: by wwi14 with SMTP id 14so1481947wwi.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Jul 2011 10:17:04 -0700 (PDT)
+Received: by 10.216.136.160 with SMTP id w32mr795236wei.30.1311614223810;
+	Mon, 25 Jul 2011 10:17:03 -0700 (PDT)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
+	by mx.google.com with ESMTPS id fx12sm4487250wbb.42.2011.07.25.10.17.02
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 25 Jul 2011 10:17:03 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 25 Jul 2011 19:16:51 +0200
+Message-Id: <1311614211-2977-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.6.6.1
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-efl] evas: add new style GL config options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,45 +32,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jul 2011 16:54:42 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 25 Jul 2011 17:21:16 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+The config options changed recently, but we keep both to allow bisecting EFL_SRCREVs
 
-On 07/24/2011 02:43 AM, Koen Kooi wrote:
-> Tom,
-> 
-> Please pull the 2 commits from here:
-> 
-> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-> Branch: 2011.03-maintenance
-> 
-> Khem Raj (1):
->       gcc: Package libstdc++ gdb python helpers into dev package
-> 
-> Koen Kooi (1):
->       pulseaudio: make it work out of the box * reuse 'audio' group as access group
-> 
-> 2 cherry-picks from .dev
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-efl/recipes-efl/efl/evas.inc |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-Applied, thanks.
+diff --git a/meta-efl/recipes-efl/efl/evas.inc b/meta-efl/recipes-efl/efl/evas.inc
+index 4e6f328..3f7eed3 100644
+--- a/meta-efl/recipes-efl/efl/evas.inc
++++ b/meta-efl/recipes-efl/efl/evas.inc
+@@ -8,7 +8,7 @@ DEPENDS_virtclass-native = "freetype-native libxext-native libpng-native jpeg-na
+ inherit efl
+ 
+ BBCLASSEXTEND = "native"
+-INC_PR = "r1"
++INC_PR = "r2"
+ FILESPATHPKG =. "${BPN}-${PV}:${BPN}:"
+ 
+ python populate_packages_prepend () {
+@@ -158,6 +158,7 @@ EXTRA_OECONF = "${EVAS_OECONF} \
+                 --disable-convert-32-rgb-rot-180 \
+                 --enable-convert-32-rgb-rot-270 \
+                 --enable-gl-x11 \
++                --enable-gl-xlib \
+                 --enable-gl-flavor-gles \
+                 --enable-gles-variety-${GLES} \
+ "
+@@ -165,6 +166,7 @@ EXTRA_OECONF_virtclass-native = "${EVAS_OECONF} \
+                 --disable-software-x11 \
+                 --disable-software-16-x11 \
+                 --disable-gl-x11 \
++                --disable-gl-xlib \
+                 --disable-xrender-x11 \
+                 --disable-image-loader-gif \
+                 --disable-image-loader-svg \
+-- 
+1.6.6.1
 
-- -- 
-Tom Rini
-Mentor Graphics Corporation
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iQEcBAEBAgAGBQJOLZvMAAoJEI4NMjfc3nJxhPoIAKQF8TPczT9x5IHmumaBT/RM
-R+E4PyhPsC2OyIcEJQAuDL64Ucbr4hffxflOaQJWVljs/w7sqeOfxeD8jzVDzd1t
-Yp84p9k2+Kw4xd26zAkyg6Ugy1DAKJYJRQMQpMHrsIXs9Vvho9TIJLxaVcjBv1H7
-RIgGOUadbyt1gVSUeO+5kGf1LP8meayfirr0ITGNwNW6OV4jhNwaFfq5HWTWjn4o
-18oOhgwzPS/LRA19pmbv8Nqlo2BoAuEBsfLEybIFI03Djr7VSOf1Vv5KZmhgxGGs
-m3oVDennTIpuaRl2st6PpdLwXjA422Rsfa4KMZrihtXT4qtqueVp0Rrq5i1edX8=
-=FepC
------END PGP SIGNATURE-----
 
 
