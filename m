@@ -1,24 +1,23 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1QlQyg-00025Y-48
+	(envelope-from <philb@gnu.org>) id 1QlRVp-0003m6-0n
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jul 2011 21:38:11 +0200
-Received: by wwi18 with SMTP id 18so3680841wwi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jul 2011 12:33:57 -0700 (PDT)
-Received: by 10.216.182.72 with SMTP id n50mr819476wem.57.1311622436941;
-	Mon, 25 Jul 2011 12:33:56 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id b13sm4580746wbh.7.2011.07.25.12.33.55
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 25 Jul 2011 12:33:56 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Mon, 25 Jul 2011 22:12:25 +0200
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.3])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1QlRRm-00011B-V3
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Jul 2011 22:08:15 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Jul 2011 21:33:42 +0200
-Message-Id: <1311622422-22620-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.6.6.1
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-efl] places: fix build e-module: inherit gettext
+In-Reply-To: <aca10ad4ca204fe1dbc0276dbffed2b2@smithers>
+References: <aca10ad4ca204fe1dbc0276dbffed2b2@smithers>
+Date: Mon, 25 Jul 2011 21:08:08 +0100
+Message-ID: <1311624488.3098.14.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: i18n problems with eglibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,44 +31,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jul 2011 19:38:11 -0000
+X-List-Received-Date: Mon, 25 Jul 2011 20:12:25 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-efl/recipes-efl/e17/e-module.inc  |    2 +-
- meta-efl/recipes-efl/e17/places_svn.bb |    5 -----
- 2 files changed, 1 insertions(+), 6 deletions(-)
+On Mon, 2011-07-25 at 11:26 -0500, Robert Brick wrote:
+> root@cpc3xx:/bin [1]# ls /nonexistent
+> ls: no se puede acceder a /nonexistent: No such file or directory
+> root@cpc3xx:/bin [2]#
+> 
+> I was expecting to see:
+> ls: no se puede acceder a /non: No existe el fichero o el directorio
+> 
+> The first part of the output has the es translation, but not the 
+> second
+> part.
+> 
+> Anyone have any idea why? Thanks in advance.
 
-diff --git a/meta-efl/recipes-efl/e17/e-module.inc b/meta-efl/recipes-efl/e17/e-module.inc
-index 3834a2e..97081aa 100644
---- a/meta-efl/recipes-efl/e17/e-module.inc
-+++ b/meta-efl/recipes-efl/e17/e-module.inc
-@@ -7,7 +7,7 @@ INC_PR = "r5"
- 
- SRCNAME = "E-MODULES-EXTRA/${PN}"
- 
--inherit e
-+inherit e gettext
- SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};proto=http;scmdata=keep"
- S = "${WORKDIR}/${SRCNAME}"
- 
-diff --git a/meta-efl/recipes-efl/e17/places_svn.bb b/meta-efl/recipes-efl/e17/places_svn.bb
-index f447745..0abe138 100644
---- a/meta-efl/recipes-efl/e17/places_svn.bb
-+++ b/meta-efl/recipes-efl/e17/places_svn.bb
-@@ -6,10 +6,5 @@ PR = "${INC_PR}.0"
- 
- require e-module.inc
- 
--do_configure_prepend() {
--       sed -i -e /po/d -e /AM_GNU_GETTEXT/d configure.ac
--       sed -i -e s:\ po::g Makefile.am
--}
--
- # Calls /usr/bin/eject for media
- RRECOMMENDS_${PN} += "eject"
--- 
-1.6.6.1
+It sounds as though the message catalogs for glibc itself aren't getting
+installed for some reason.  The first step would be to check whether
+that's really the case, and then I guess the second step would be to
+debug rootfs_ipk to find out why not.
+
+p.
+
 
 
 
