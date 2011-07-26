@@ -1,23 +1,27 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from snvl-smtp1.trimble.com ([155.63.64.31])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QlpVS-0007d0-BA for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Jul 2011 23:49:38 +0200
-Received: from f053039182.adsl.alicedsl.de ([78.53.39.182]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QlpSR-0000ic-0d for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Jul 2011 21:46:31 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4E2F0089.2020103@softplc.com>
-References: <4E2F0089.2020103@softplc.com>
-Date: Tue, 26 Jul 2011 23:45:25 +0200
-Message-ID: <1311716725.3735.563.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [PATCH] enhance lib/oe/unpack.py for ".tar.lzma" files
+	(envelope-from <Bernard_Mentink@trimble.com>) id 1QlpbN-0007ly-Le
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Jul 2011 23:55:46 +0200
+Received: (qmail 26056 invoked by uid 501); 26 Jul 2011 14:51:31 -0700
+Received: from 10.3.0.166 by snvl-smtp1.trimble.com (envelope-from
+	<Bernard_Mentink@trimble.com>, uid 108) with qmail-scanner-2.08 
+	(clamdscan: 0.97.1/13361. avast: v3.2.0/110725-1. sophie:
+	3.06/3.21.0/4.67. spamassassin: 3.3.1. Clear:RC:1(10.3.0.166):. 
+	Processed in 0.030896 secs); 26 Jul 2011 21:51:31 -0000
+Received: from unknown (HELO nzc-ap-xch-02.ap.trimblecorp.net) (10.3.0.166)
+	by snvl-smtp1.trimble.com with SMTP; 26 Jul 2011 14:51:31 -0700
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Wed, 27 Jul 2011 09:51:28 +1200
+Message-ID: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B1F8B5@nzc-ap-xch-02.ap.trimblecorp.net>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: Kernel load address issue
+Thread-Index: AcxL3ixhju5iEE6KQd227paPZ9oLdQ==
+From: "Bernard Mentink" <Bernard_Mentink@trimble.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Kernel load address issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,52 +35,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jul 2011 21:49:38 -0000
-X-Groupsio-MsgNum: 33342
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-PHr7OdvwhZDccTn4oXN8"
-
---=-PHr7OdvwhZDccTn4oXN8
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 26 Jul 2011 21:55:46 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-Am Dienstag, den 26.07.2011, 12:59 -0500 schrieb Dick Hollenbeck:
-> The boys a mingw started packaging binutils as .tar.lzma files.
-> This is the only trick I found to unpack them.  It works.
-> (I am trying to revitalize canadian-sdk at newer component versions.)
 
-Please follow the commit policy [1][2]. At least your Signed-off-by line
-is missing and the commit summary does not follow the pattern(?).
+Hi Guys,
 
-Please resend your patch as =C2=BBv2=C2=AB [3] and update the state of your=
- patch
-in the patch queue [4].
+I am new to OE, but have managed to get u-boot working on my target, got
+TFTP working so I can transfer a kernel to RAM.
+I have modified my conf/local.conf file so that when a kernel is built a
+uImage binary is created that u-boot can use. (added line
+KERNEL_IMAGETYPE =3D "uImage")
 
-Otherwise your patch looks fine. Is it guaranteed that `tar` supports
-`lzma`?
+However When I try to boot the image in the bootloader, I get this:
+
+uboot> bootm 0x80300000
+## Booting kernel from Legacy Image at 80300000 ...
+   Image Name:   Angstrom/2.6.36/mx31ads
+   Created:      2011-07-26  19:55:31 UTC
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    1765856 Bytes =3D 1.7 MiB
+   Load Address: 20008000
+   Entry Point:  20008000
+   Verifying Checksum ... OK
+   Loading Kernel Image ...   <-- gets stuck here! ...
+
+The Load Address is wrong, my ram starts at 0x80000000 ... can someone
+tell me how to change this? I presume mkimage is responsible for this as
+the kernel is configured as relocatable ..
+
+Many Thanks,
+Bernie
 
 
-Thanks,
-
-Paul
 
 
-[1] http://openembedded.org/index.php/Commit_Policy
-[2] http://openembedded.org/index.php/Commit_log_example
-[3] http://openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmbedded
-[4] http://openembedded.org/index.php/Patchwork
 
---=-PHr7OdvwhZDccTn4oXN8
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk4vNXUACgkQPX1aK2wOHVjWcwCdHtuD5DW6RNYE4VpSdZQhJ/P5
-mPgAn1wXWQffkdx6169zX4xaqVcKimPH
-=YaBY
------END PGP SIGNATURE-----
-
---=-PHr7OdvwhZDccTn4oXN8--
