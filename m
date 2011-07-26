@@ -1,34 +1,29 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from relay3-d.mail.gandi.net ([217.70.183.195])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QlcYm-0002HL-RF
+	(envelope-from <a.sappia@biotechware.com>) id 1QldtU-0001Ki-0Y
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Jul 2011 10:00:12 +0200
-Received: by ewy5 with SMTP id 5so175807ewy.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jul 2011 00:56:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=LHXxxFg238HjReqgjzRKL72Qrll11SLo7eR4/Q3ND44=;
-	b=mYnkUDlt28/G6+D7nK27bssujmTXYhNusTLu45Cm2N4Shq3cLti+S4zg7huR0qPwnI
-	zELdcufatrOu9M6jQBra/O9w6xCVG3pfCFERnW45fy51ttt/4gRudYNBF1XH8eVKDWS2
-	qNWKZ2WWQJXwRkQq5MfW9WJZ2WAUm97gkfxD8=
-Received: by 10.205.82.5 with SMTP id aa5mr866625bkc.33.1311666959948;
-	Tue, 26 Jul 2011 00:55:59 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id g11sm75793bku.49.2011.07.26.00.55.57
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 26 Jul 2011 00:55:58 -0700 (PDT)
-Date: Tue, 26 Jul 2011 09:55:51 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 26 Jul 2011 11:25:40 +0200
+X-Originating-IP: 217.70.178.134
+Received: from mfilter4-d.gandi.net (mfilter4-d.gandi.net [217.70.178.134])
+	by relay3-d.mail.gandi.net (Postfix) with ESMTP id 08F53A808F;
+	Tue, 26 Jul 2011 11:21:29 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mfilter4-d.gandi.net
+Received: from relay3-d.mail.gandi.net ([217.70.183.195])
+	by mfilter4-d.gandi.net (mfilter4-d.gandi.net [10.0.15.180])
+	(amavisd-new, port 10024)
+	with ESMTP id WQ7ZsrIAPT3g; Tue, 26 Jul 2011 11:21:27 +0200 (CEST)
+X-Originating-IP: 87.241.57.98
+Received: from localhost.localdomain (fireone.i3p.it [87.241.57.98])
+	(Authenticated sender: a.sappia@biotechware.com)
+	by relay3-d.mail.gandi.net (Postfix) with ESMTPSA id 746AEA8081;
+	Tue, 26 Jul 2011 11:21:27 +0200 (CEST)
+From: Alessandro Sappia <a.sappia@biotechware.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110726075550.GE25533@jama.jama.net>
-References: <1311666362-4023-1-git-send-email-koen@dominion.thruhere.net>
-MIME-Version: 1.0
-In-Reply-To: <1311666362-4023-1-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [RFCv2 meta-efl] e(fl).bbclass: don't override PACKAGES, but add to it
+Date: Tue, 26 Jul 2011 11:21:16 +0200
+Message-Id: <1311672076-9599-1-git-send-email-a.sappia@biotechware.com>
+X-Mailer: git-send-email 1.7.4.1
+Cc: Alessandro Sappia <a.sappia@biotechware.com>
+Subject: [PATCH v4] dbus-glib: corrected native and cross recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,87 +37,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jul 2011 08:00:12 -0000
-X-Groupsio-MsgNum: 33329
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="NGIwU0kFl1Z1A3An"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 26 Jul 2011 09:25:40 -0000
 
---NGIwU0kFl1Z1A3An
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* dbus-glib require some source files generated during native build
+  in order to build on target.
 
-On Tue, Jul 26, 2011 at 09:46:02AM +0200, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Alessandro Sappia <a.sappia@biotechware.com>
+---
+ recipes/dbus/dbus-glib.inc     |    8 ++++----
+ recipes/dbus/dbus-glib_0.86.bb |    7 +------
+ 2 files changed, 5 insertions(+), 10 deletions(-)
 
-Acked-by:  Martin Jansa <Martin.Jansa@gmail.com>
+diff --git a/recipes/dbus/dbus-glib.inc b/recipes/dbus/dbus-glib.inc
+index c1c1813..7208e91 100644
+--- a/recipes/dbus/dbus-glib.inc
++++ b/recipes/dbus/dbus-glib.inc
+@@ -21,19 +21,19 @@ inherit autotools pkgconfig gettext
+ 
+ BBCLASSEXTEND = "native"
+ 
+-do_configure_prepend() {
++do_configure() {
+         install -m 0644 ${STAGING_DATADIR_NATIVE}/dbus/dbus-bus-introspect.xml ${S}/tools/
+         install -m 0644 ${STAGING_DATADIR_NATIVE}/dbus/dbus-glib-bindings.h ${S}/tools/
+-
++        autotools_do_configure
+ }
+ 
+ do_configure_virtclass-native() {
+         autotools_do_configure
+ }
+ 
+-do_install_virtclass-native() {
+-        autotools_do_install
++do_install_append_virtclass-native() {
+         install -d ${D}${datadir}/dbus
++        install -m 0644 dbus-bus-introspect.xml ${D}${datadir}/dbus
+         install -m 0644 tools/dbus-glib-bindings.h ${D}${datadir}/dbus
+ }
+ 
+diff --git a/recipes/dbus/dbus-glib_0.86.bb b/recipes/dbus/dbus-glib_0.86.bb
+index ce87d5d..ff9a2d6 100644
+--- a/recipes/dbus/dbus-glib_0.86.bb
++++ b/recipes/dbus/dbus-glib_0.86.bb
+@@ -1,14 +1,9 @@
+ require dbus-glib.inc
+ 
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ SRC_URI_virtclass-native += "file://run-with-tmp-session-bus.patch"
+ 
+-do_install_virtclass-native_prepend() {
+-        install -d ${D}${datadir}/dbus
+-        install -m 0644 dbus-bus-introspect.xml ${D}${datadir}/dbus
+-}
+-
+ SRC_URI[md5sum] = "cd0ab148fb0c786fc88be49d19971f50"
+ SRC_URI[sha256sum] = "5351a6e7f38ffc641c34b4a4cdd9bed1c1dc7043a501096bac00a2876ea90bdc"
+ 
+-- 
+1.7.4.1
 
-> ---
->  meta-efl/classes/e.bbclass   |    6 +++---
->  meta-efl/classes/efl.bbclass |    4 ++--
->  2 files changed, 5 insertions(+), 5 deletions(-)
->=20
-> diff --git a/meta-efl/classes/e.bbclass b/meta-efl/classes/e.bbclass
-> index 88a1f6a..c803399 100644
-> --- a/meta-efl/classes/e.bbclass
-> +++ b/meta-efl/classes/e.bbclass
-> @@ -18,9 +18,9 @@ do_configure_append() {
->  export CURL_CONFIG =3D "${STAGING_BINDIR_CROSS}/curl-config"
->  export FREETYPE_CONFIG =3D "${STAGING_BINDIR_CROSS}/freetype-config"
-> =20
-> -# This construction is stupid, someone with more E knowledge should chan=
-ge it to =3D+ or something
-> -# And it's in efl.bbclass as well....
-> -PACKAGES =3D "${PN}-dbg ${PN}-themes ${PN} ${PN}-dev ${PN}-doc ${PN}-lib=
- ${PN}-static"
-> +PACKAGES =3D+ "${PN}-themes"
-> +PACKAGES +=3D "${PN}-lib"
-> +
->  FILES_${PN}-lib =3D "${libdir}/lib*.so.*"
->  FILES_${PN}-themes =3D "${datadir}/${PN}/themes ${datadir}/${PN}/data ${=
-datadir}/${PN}/fonts ${datadir}/${PN}/pointers ${datadir}/${PN}/images ${da=
-tadir}/${PN}/users ${datadir}/${PN}/images ${datadir}/${PN}/styles"
->  FILES_${PN}-dev +=3D "${includedir} ${libdir}/lib*.so"
-> diff --git a/meta-efl/classes/efl.bbclass b/meta-efl/classes/efl.bbclass
-> index 2dc6fc2..f90dc1c 100644
-> --- a/meta-efl/classes/efl.bbclass
-> +++ b/meta-efl/classes/efl.bbclass
-> @@ -19,8 +19,8 @@ do_install_prepend () {
->  	done
->  }
-> =20
-> -# This construction is stupid, someone with more E knowledge should chan=
-ge it to =3D+ or something
-> -PACKAGES =3D "${PN}-dbg ${PN} ${PN}-themes ${PN}-dev ${PN}-doc ${PN}-tes=
-ts ${PN}-static"
-> +PACKAGES =3D+ "${PN}-themes"
-> +PACKAGES +=3D "${PN}-tests"
-> =20
->  FILES_${PN} =3D "${libdir}/*.so.* \
->                 ${libdir}/edje/modules/${PN}/*/module.so \
-> --=20
-> 1.6.6.1
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---NGIwU0kFl1Z1A3An
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk4ucwYACgkQN1Ujt2V2gByuNgCfYgOtStc9WisrLKw+kKuvz6sm
-YC8An0pPDUrxfgFsgf5P1qF67Ph0ade9
-=++40
------END PGP SIGNATURE-----
-
---NGIwU0kFl1Z1A3An--
