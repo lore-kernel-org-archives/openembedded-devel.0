@@ -1,29 +1,24 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <agnel.joel@gmail.com>) id 1QlbVA-0006lw-2h
+	(envelope-from <koen@dominion.thruhere.net>) id 1QlbZu-0008F3-QM
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Jul 2011 08:52:24 +0200
-Received: by ewy5 with SMTP id 5so130906ewy.6
+	Tue, 26 Jul 2011 08:57:18 +0200
+Received: by wwi18 with SMTP id 18so121103wwi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jul 2011 23:48:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=YjZqQh90c9ZMmAhPpPl0gGF2naYLvNcgSHAh6BuzxZ8=;
-	b=eZKRREyWGKFZm57+shxWWKbkFjfs7J2b3fvlBABFzmEQzvxz4uaz85/Bsq8Cjf5Krf
-	oMw8/qTL/zRsEJE+z2pDhzY1+a/ytWHcHFMuqWz8bMRJoEgHOol43BAIRRRRM15JAxAB
-	a6fVcysTMbKUDB7Uis2uFBZCmExT1XRxCtZnI=
-MIME-Version: 1.0
-Received: by 10.213.15.69 with SMTP id j5mr611722eba.98.1311662891255; Mon, 25
-	Jul 2011 23:48:11 -0700 (PDT)
-Received: by 10.213.105.210 with HTTP; Mon, 25 Jul 2011 23:48:11 -0700 (PDT)
-In-Reply-To: <j0lhht$s8o$2@dough.gmane.org>
-References: <1311642479-11502-1-git-send-email-agnel.joel@gmail.com>
-	<j0lhht$s8o$2@dough.gmane.org>
-Date: Tue, 26 Jul 2011 01:48:11 -0500
-Message-ID: <CAD=GYpbC38vkZJoWc80DJaC-++wzw+UyJrphcLWzi2hx2dVccg@mail.gmail.com>
-From: Joel A Fernandes <agnel.joel@gmail.com>
+	Mon, 25 Jul 2011 23:53:06 -0700 (PDT)
+Received: by 10.227.11.137 with SMTP id t9mr4864601wbt.9.1311663185813;
+	Mon, 25 Jul 2011 23:53:05 -0700 (PDT)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
+	by mx.google.com with ESMTPS id fp3sm146576wbb.30.2011.07.25.23.53.03
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 25 Jul 2011 23:53:04 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] beagleboard-test-scripts: userbutton state detection: Remove userspace scripts
+Date: Tue, 26 Jul 2011 08:52:57 +0200
+Message-Id: <1311663177-19331-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.6.6.1
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [RFC meta-efl] e(fl).bbclass: don't override PACKAGES, but add to it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,24 +32,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jul 2011 06:52:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 26 Jul 2011 06:57:19 -0000
 
-On Mon, Jul 25, 2011 at 11:58 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 26-07-11 03:07, Joel A Fernandes schreef:
->> Have U-boot detect if user button was pressed and set a boot argument so that user space can use this information
->
-> Where's the matching u-boot patch?
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-efl/classes/e.bbclass   |    6 +++---
+ meta-efl/classes/efl.bbclass |    4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-There's no U-boot patch, the user.txt file installed by this recipe
-will contain the extra boot argument.
+diff --git a/meta-efl/classes/e.bbclass b/meta-efl/classes/e.bbclass
+index 88a1f6a..ebf1da8 100644
+--- a/meta-efl/classes/e.bbclass
++++ b/meta-efl/classes/e.bbclass
+@@ -18,9 +18,9 @@ do_configure_append() {
+ export CURL_CONFIG = "${STAGING_BINDIR_CROSS}/curl-config"
+ export FREETYPE_CONFIG = "${STAGING_BINDIR_CROSS}/freetype-config"
+ 
+-# This construction is stupid, someone with more E knowledge should change it to =+ or something
+-# And it's in efl.bbclass as well....
+-PACKAGES = "${PN}-dbg ${PN}-themes ${PN} ${PN}-dev ${PN}-doc ${PN}-lib ${PN}-static"
++PACKAGES =+ "${PN}-themes"
++PACKAGES += "${PN}-lib ${PN}-tests"
++
+ FILES_${PN}-lib = "${libdir}/lib*.so.*"
+ FILES_${PN}-themes = "${datadir}/${PN}/themes ${datadir}/${PN}/data ${datadir}/${PN}/fonts ${datadir}/${PN}/pointers ${datadir}/${PN}/images ${datadir}/${PN}/users ${datadir}/${PN}/images ${datadir}/${PN}/styles"
+ FILES_${PN}-dev += "${includedir} ${libdir}/lib*.so"
+diff --git a/meta-efl/classes/efl.bbclass b/meta-efl/classes/efl.bbclass
+index 2dc6fc2..c831439 100644
+--- a/meta-efl/classes/efl.bbclass
++++ b/meta-efl/classes/efl.bbclass
+@@ -19,8 +19,8 @@ do_install_prepend () {
+ 	done
+ }
+ 
+-# This construction is stupid, someone with more E knowledge should change it to =+ or something
+-PACKAGES = "${PN}-dbg ${PN} ${PN}-themes ${PN}-dev ${PN}-doc ${PN}-tests ${PN}-static"
++PACKAGES =+ "${PN}-themes"
++PACKAGES += "${PN}-lib ${PN}-tests"
+ 
+ FILES_${PN} = "${libdir}/*.so.* \
+                ${libdir}/edje/modules/${PN}/*/module.so \
+-- 
+1.6.6.1
 
-Thanks,
-Joel
-
-[1]
 
 
