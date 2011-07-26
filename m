@@ -1,30 +1,34 @@
-Received: from snvl-smtp1.trimble.com ([155.63.64.31])
+Received: from relay3-d.mail.gandi.net ([217.70.183.195])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Bernard_Mentink@trimble.com>) id 1QlqE8-0000n8-8H
+	(envelope-from <a.sappia@biotechware.com>) id 1Qlr8n-0004GB-IG
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Jul 2011 00:35:48 +0200
-Received: (qmail 32451 invoked by uid 501); 26 Jul 2011 15:31:33 -0700
-Received: from 10.3.0.166 by snvl-smtp1.trimble.com (envelope-from
-	<Bernard_Mentink@trimble.com>, uid 108) with qmail-scanner-2.08 
-	(clamdscan: 0.97.1/13361. avast: v3.2.0/110725-1. sophie:
-	3.06/3.21.0/4.67. spamassassin: 3.3.1. Clear:RC:1(10.3.0.166):. 
-	Processed in 0.035369 secs); 26 Jul 2011 22:31:33 -0000
-Received: from unknown (HELO nzc-ap-xch-02.ap.trimblecorp.net) (10.3.0.166)
-	by snvl-smtp1.trimble.com with SMTP; 26 Jul 2011 15:31:33 -0700
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Wed, 27 Jul 2011 10:31:31 +1200
-Message-ID: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B1F8E2@nzc-ap-xch-02.ap.trimblecorp.net>
-In-Reply-To: <20110726222646.GB15286@jama.jama.net>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Kernel load address issue
-Thread-Index: AcxL4y7TQKezOhfeRxKVlxIm0o5YhAAAEKhg
-References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B1F8B5@nzc-ap-xch-02.ap.trimblecorp.net><20110726220305.GA15286@jama.jama.net><F7C0AA5DD1508F4789E10B6CC9BB75DB04B1F8D9@nzc-ap-xch-02.ap.trimblecorp.net>
-	<20110726222646.GB15286@jama.jama.net>
-From: "Bernard Mentink" <Bernard_Mentink@trimble.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: Kernel load address issue
+	Wed, 27 Jul 2011 01:34:21 +0200
+X-Originating-IP: 217.70.178.137
+Received: from mfilter8-d.gandi.net (mfilter8-d.gandi.net [217.70.178.137])
+	by relay3-d.mail.gandi.net (Postfix) with ESMTP id 0992DA8070;
+	Wed, 27 Jul 2011 01:30:10 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mfilter8-d.gandi.net
+Received: from relay3-d.mail.gandi.net ([217.70.183.195])
+	by mfilter8-d.gandi.net (mfilter8-d.gandi.net [10.0.15.180])
+	(amavisd-new, port 10024)
+	with ESMTP id UokdSYNkvxd7; Wed, 27 Jul 2011 01:30:08 +0200 (CEST)
+X-Originating-IP: 87.0.212.22
+Received: from [192.168.1.13]
+	(host22-212-dynamic.0-87-r.retail.telecomitalia.it [87.0.212.22])
+	(Authenticated sender: a.sappia@biotechware.com)
+	by relay3-d.mail.gandi.net (Postfix) with ESMTPSA id 20D62A8073;
+	Wed, 27 Jul 2011 01:30:07 +0200 (CEST)
+From: Alessandro Sappia <a.sappia@biotechware.com>
+To: openembedded-devel@lists.openembedded.org, koen@dominion.thruhere.net
+In-Reply-To: <1311672076-9599-1-git-send-email-a.sappia@biotechware.com>
+References: <1311672076-9599-1-git-send-email-a.sappia@biotechware.com>
+Organization: Biotechware srl
+Date: Wed, 27 Jul 2011 01:30:06 +0200
+Message-ID: <1311723006.1924.6.camel@BlackBox-LX>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH v4] dbus-glib: corrected native and cross recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,142 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jul 2011 22:35:48 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-Hi Martin,
-
-Thanks for that (and to Gary for the same answer) ..
-
-By the way, where do I find this sort of information out? I especially
-would like to know how to configure the kernel, modify source code etc,
-Within the openembedded system ..
-
-Are there some good "howto's" out there?
-
-Thanks,
-Bernie=20
+X-List-Received-Date: Tue, 26 Jul 2011 23:34:21 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
 
-------------------------------------------------------------------------
-------------------
-I want to die peacefully in my sleep, like my grandfather, not screaming
-and yelling like the passengers in his car.
+Koen Kooi - 2011-07-26 09:39:21
+> 
+> 
+> Op 26-07-11 11:21, Alessandro Sappia schreef:
+> > * dbus-glib require some source files generated during native build in order to build on target.
+> > 
+> > Signed-off-by: Alessandro Sappia <a.sappia@biotechware.com> --- recipes/dbus/dbus-glib.inc     |    8 ++++---- recipes/dbus/dbus-glib_0.86.bb |    7 +------ 2 files changed, 5 insertions(+), 10 deletions(-)
+> > 
+> > diff --git a/recipes/dbus/dbus-glib.inc b/recipes/dbus/dbus-glib.inc index c1c1813..7208e91 100644 --- a/recipes/dbus/dbus-glib.inc +++ b/recipes/dbus/dbus-glib.inc @@ -21,19 +21,19 @@ inherit autotools pkgconfig gettext
+> > 
+> > BBCLASSEXTEND = "native"
+> > 
+> > -do_configure_prepend() { +do_configure() { install -m 0644 ${STAGING_DATADIR_NATIVE}/dbus/dbus-bus-introspect.xml ${S}/tools/ install -m 0644 ${STAGING_DATADIR_NATIVE}/dbus/dbus-glib-bindings.h ${S}/tools/ - +        autotools_do_configure }
+> > 
+> > do_configure_virtclass-native() { autotools_do_configure }
+> > 
+> > -do_install_virtclass-native() { -        autotools_do_install +do_install_append_virtclass-native() { install -d ${D}${datadir}/dbus +        install -m 0644 dbus-bus-introspect.xml ${D}${datadir}/dbus install -m 0644 tools/dbus-glib-bindings.h ${D}${datadir}/dbus }
+> 
+> Out of curiousity, why are you mixing the 2 styles (append/prepend vs replacement) in this commit?
+> 
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-Martin Jansa
-Sent: Wednesday, 27 July 2011 10:27 a.m.
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] Kernel load address issue
+This is because, didn't checked why, do_configure_prepend() didn't worked seamless, while do_install_append works fine for me.
+Before further investigation occurs, as this build is needed for those starting now to build I wrote this way.
+A better solution would be available if a virtclass-cross would exists, while now we have just virtclass-sdk and virtclass-native.
 
-On Wed, Jul 27, 2011 at 10:14:50AM +1200, Bernard Mentink wrote:
-> Many thanks for the reply,
->=20
-> By the way where is the machine.conf file, I can't seem to find it=20
-> anywhere ..
+Are you OK with the patch ?
 
-in your case probably
-conf/machine/mx31ads.conf or something like that
+Regards,
 
-I meant ${MACHINE}.conf and machine.conf was just example, sorry I
-wasn't clear.
-
-Cheers,
-
->=20
-> Cheers,
-> Bernie
->=20
->=20
-> ----------------------------------------------------------------------
-> --
-> ------------------
-> I want to die peacefully in my sleep, like my grandfather, not=20
-> screaming and yelling like the passengers in his car.
->=20
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf=20
-> Of Martin Jansa
-> Sent: Wednesday, 27 July 2011 10:03 a.m.
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] Kernel load address issue
->=20
-> On Wed, Jul 27, 2011 at 09:51:28AM +1200, Bernard Mentink wrote:
-> >=20
-> > Hi Guys,
-> >=20
-> > I am new to OE, but have managed to get u-boot working on my target,
-
-> > got TFTP working so I can transfer a kernel to RAM.
-> > I have modified my conf/local.conf file so that when a kernel is=20
-> > built
->=20
-> > a uImage binary is created that u-boot can use. (added line=20
-> > KERNEL_IMAGETYPE =3D "uImage")
-> >=20
-> > However When I try to boot the image in the bootloader, I get this:
-> >=20
-> > uboot> bootm 0x80300000
-> > ## Booting kernel from Legacy Image at 80300000 ...
-> >    Image Name:   Angstrom/2.6.36/mx31ads
-> >    Created:      2011-07-26  19:55:31 UTC
-> >    Image Type:   ARM Linux Kernel Image (uncompressed)
-> >    Data Size:    1765856 Bytes =3D 1.7 MiB
-> >    Load Address: 20008000
-> >    Entry Point:  20008000
->=20
-> machine.conf can define
-> UBOOT_ENTRYPOINT =3D "0x80008000"
-> UBOOT_LOADADDRESS =3D "0x80008000"
->=20
-> both used in kernel.bbclass
-> /OE/dev/classes/kernel.bbclass:UBOOT_ENTRYPOINT ?=3D "20008000"
-> /OE/dev/classes/kernel.bbclass:UBOOT_LOADADDRESS ?=3D=20
-> "${UBOOT_ENTRYPOINT}"
-> /OE/dev/classes/kernel.bbclass:            uboot-mkimage -A
-> ${UBOOT_ARCH} -O linux -T kernel -C none -a ${UBOOT_LOADADDRESS} -e=20
-> $ENTRYPOINT -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin=20
-> arch/${ARCH}/boot/uImage
->=20
-> Cheers,
->=20
-> >    Verifying Checksum ... OK
-> >    Loading Kernel Image ...   <-- gets stuck here! ...
-> >=20
-> > The Load Address is wrong, my ram starts at 0x80000000 ... can=20
-> > someone
->=20
-> > tell me how to change this? I presume mkimage is responsible for=20
-> > this as the kernel is configured as relocatable ..
-> >=20
-> > Many Thanks,
-> > Bernie
-> >=20
-> >=20
-> >=20
-> >=20
-> >=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-dev
-> > el
->=20
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
+Alessandro
 
