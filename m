@@ -1,34 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QleB2-0001cP-P2 for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Jul 2011 11:43:48 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Qle6u-00008P-Kp for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Jul 2011 11:39:32 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jul 2011 11:39:32 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jul 2011 11:39:32 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 26 Jul 2011 11:39:21 +0200
-Message-ID: <j0m209$qob$1@dough.gmane.org>
-References: <1311672076-9599-1-git-send-email-a.sappia@biotechware.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
-In-Reply-To: <1311672076-9599-1-git-send-email-a.sappia@biotechware.com>
-X-Enigmail-Version: 1.2
-Subject: Re: [PATCH v4] dbus-glib: corrected native and cross recipe.
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1QllEC-0001mF-G1
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Jul 2011 19:15:32 +0200
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 26 Jul 2011 10:11:18 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,269,1309762800"; d="scan'208";a="32200695"
+Received: from unknown (HELO helios.localnet) ([10.255.17.235])
+	by orsmga001.jf.intel.com with ESMTP; 26 Jul 2011 10:11:17 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org,
+	Richard Purdie <richard.purdie@linuxfoundation.org>
+Date: Tue, 26 Jul 2011 18:11:16 +0100
+User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic-pae; KDE/4.6.2; i686; ; )
+References: <CAMKF1spOJJP=qdDbYpcnArUR1rjvJznXXiB7KAqQNT5R7J8N_Q@mail.gmail.com>
+	<1310919171.4288.19.camel@mattotaupa>
+In-Reply-To: <1310919171.4288.19.camel@mattotaupa>
+MIME-Version: 1.0
+Message-Id: <201107261811.16319.paul.eggleton@linux.intel.com>
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: Populating meta-oe with new patches on oe.dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,36 +34,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jul 2011 09:43:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 26 Jul 2011 17:15:32 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Sunday 17 July 2011 17:12:51 Paul Menzel wrote:
+> unfortunately as someone not having followed the creation of oe-core and
+> meta-oe, I fill somewhat lost. Is there a comprehensive document
+> somewhere as Russell also asked for?
 
-Op 26-07-11 11:21, Alessandro Sappia schreef:
-> * dbus-glib require some source files generated during native build in order to build on target.
-> 
-> Signed-off-by: Alessandro Sappia <a.sappia@biotechware.com> --- recipes/dbus/dbus-glib.inc     |    8 ++++---- recipes/dbus/dbus-glib_0.86.bb |    7 +------ 2 files changed, 5 insertions(+), 10 deletions(-)
-> 
-> diff --git a/recipes/dbus/dbus-glib.inc b/recipes/dbus/dbus-glib.inc index c1c1813..7208e91 100644 --- a/recipes/dbus/dbus-glib.inc +++ b/recipes/dbus/dbus-glib.inc @@ -21,19 +21,19 @@ inherit autotools pkgconfig gettext
-> 
-> BBCLASSEXTEND = "native"
-> 
-> -do_configure_prepend() { +do_configure() { install -m 0644 ${STAGING_DATADIR_NATIVE}/dbus/dbus-bus-introspect.xml ${S}/tools/ install -m 0644 ${STAGING_DATADIR_NATIVE}/dbus/dbus-glib-bindings.h ${S}/tools/ - +        autotools_do_configure }
-> 
-> do_configure_virtclass-native() { autotools_do_configure }
-> 
-> -do_install_virtclass-native() { -        autotools_do_install +do_install_append_virtclass-native() { install -d ${D}${datadir}/dbus +        install -m 0644 dbus-bus-introspect.xml ${D}${datadir}/dbus install -m 0644 tools/dbus-glib-bindings.h ${D}${datadir}/dbus }
+I've just written one here:
 
-Out of curiousity, why are you mixing the 2 styles (append/prepend vs replacement) in this commit?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+ http://www.openembedded.org/index.php/OpenEmbedded-Core
 
-iD8DBQFOLotJMkyGM64RGpERAtxQAJ9fx8JYvkmBFWQfT2l7psyH1YVZtACgjhtM
-PrBwskppuQwnIaNDdwCqFQU=
-=G6gv
------END PGP SIGNATURE-----
+May not be complete but I think it covers most things.
+ 
+> 1. Compared to former oe.dev activity looking at meta-oe there are only
+> a handful of people doing contributions and a lot of recipes are
+> missing. I have the feeling that a lot of developers where left out in
+> the process of creating the new infrastructure and I do not know if they
+> just develop their private branches based on oe.dev or if they use
+> meta-oe and I have not noticed this.
 
+So, the meta-oe repository consists of meta-oe layer plus a few other more 
+clearly defined layers (meta-gnome, meta-efl etc.) The meta-oe layer exists to 
+provide a place for recipes that don't necessarily belong in OE-core but are 
+required by multiple other metadata layers, so we avoid duplication. I would 
+hope that many recipes that are around well-defined themes would be in their 
+own layers rather than the meta-oe layer itself (e.g. all EFL recipes go in 
+meta-efl). There's definitely work to be done in bringing over recipes to the 
+new ecosystem, sure, but that will come in time. Are there specific pieces you 
+are missing?
+
+You're right in that there aren't many people contributing to meta-oe (and the 
+other layers within the meta-oe repository) at the moment; I think that's 
+because most existing developers have been content to stay using OE-dev or 
+their own private branches thereof as they have done for a long time. Perhaps 
+we could have done a better job of promoting OE-core within the wider OE 
+community, but that's probably because we all had our heads down trying to get 
+things into shape :) I think we're now reaching the point where people should 
+be able to make the switch to OE-core and not hit too many issues, other than 
+the lack of some recipes (and the latter is not too difficult to remedy).
+
+> 2. Looking at the weekly changelogs sent to the lists I see a lot of
+> duplicated commits in each layer. Why is that needed? Is not that a
+> design problem of the layers?
+
+If you mean the duplication between bitbake & oe-core and "meta-yocto" (which 
+really isn't just the meta-yocto layer, it's the whole of Poky), that's the 
+result of the tool Cliff uses to do the reports which doesn't have a way to 
+restrict itself to a subdirectory of a repository. I hope that's something 
+Cliff can address at some point in the future.
+
+> 3. I find the `recipe-*section*/` directories difficult to handle to
+> finding a recipe. Before I would use `recipe/` and then tab completion
+> and now I have to search for it. Are others uncomfortable with this?
+
+I'm used to it now but it did feel a bit strange to begin with. I think 
+Richard's idea was to avoid too many levels of directories; he can perhaps 
+comment further.
+ 
+> 4. What images are available in/for oe-core/meta-openembedded? I liked
+> for example `minimal{,-uclibc}`? `find . -name minimal*` in `oe-core` or
+> `meta-oe` did not give any result. Not to mention the images for
+> BeagleBoard or `micro-image` for the recently sent patches for payload
+> creation for coreboot
+
+OE-core provides a number of images, but the main ones are core-image-minimal 
+and core-image-sato. Other layers add their own images as appropriate, e.g. 
+meta-angstrom provides systemd-gnome-image.
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
