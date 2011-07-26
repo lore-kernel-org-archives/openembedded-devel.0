@@ -1,28 +1,30 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1QlbkV-0000dE-77
+	(envelope-from <agnel.joel@gmail.com>) id 1QlcD4-0001HL-Hu
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Jul 2011 09:08:15 +0200
-Received: by wyg30 with SMTP id 30so93458wyg.6
+	Tue, 26 Jul 2011 09:37:46 +0200
+Received: by gwb11 with SMTP id 11so73889gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jul 2011 00:04:02 -0700 (PDT)
-Received: by 10.216.60.4 with SMTP id t4mr4305032wec.101.1311663842146;
-	Tue, 26 Jul 2011 00:04:02 -0700 (PDT)
-Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id m38sm107090weq.21.2011.07.26.00.04.00
+	Tue, 26 Jul 2011 00:33:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=R6oQXLyFAoi3WdHFZCnx8uQogFgxtAX7Fk97/x3Rpl0=;
+	b=pdoHXlC0CLTKI/mM9OlQrBojW+id3FKEi6rnNZZ4vzjqWS5EkdZWh5K57jGEcY4XuG
+	N4dfunQ42hedGmwT35Mes2Yc4MqOKqw0Lzx9iPD++0LL7dP9oMPev1MqBYJCIutWE8O7
+	YMg5oTbpQvOlDdg0fPhxyjQBJBImV+9gJnuMk=
+Received: by 10.151.15.20 with SMTP id s20mr5470363ybi.81.1311665612788;
+	Tue, 26 Jul 2011 00:33:32 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id e21sm192279ano.51.2011.07.26.00.33.31
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 26 Jul 2011 00:04:01 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1244.3)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <20110726070039.GD25533@jama.jama.net>
-Date: Tue, 26 Jul 2011 09:03:55 +0200
-Message-Id: <EE934BD9-BB14-47D8-BF1C-A59EFEC27B0E@dominion.thruhere.net>
-References: <1311663177-19331-1-git-send-email-koen@dominion.thruhere.net>
-	<20110726070039.GD25533@jama.jama.net>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Mailer: Apple Mail (2.1244.3)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC meta-efl] e(fl).bbclass: don't override PACKAGES, but add to it
+	Tue, 26 Jul 2011 00:33:32 -0700 (PDT)
+From: Joel A Fernandes <agnel.joel@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 26 Jul 2011 02:27:41 -0500
+Message-Id: <1311665261-11839-1-git-send-email-agnel.joel@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: k-kooi@ti.com
+Subject: [meta-texasinstruments] [PATCH v3] linux-omap: Fix MMC timeout Errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,67 +38,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jul 2011 07:08:15 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 26 Jul 2011 07:37:46 -0000
 
+This fixes MMC errors due to timeouts on certain SD Cards following suggestions
+to set dto to 14 by Jason Kridner and Steven Kipisz
 
-Op 26 jul. 2011, om 09:00 heeft Martin Jansa het volgende geschreven:
+Details of the issue:
+http://talk.maemo.org/showthread.php?p=1000707#post1000707
 
-> On Tue, Jul 26, 2011 at 08:52:57AM +0200, Koen Kooi wrote:
->> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->> ---
->> meta-efl/classes/e.bbclass   |    6 +++---
->> meta-efl/classes/efl.bbclass |    4 ++--
->> 2 files changed, 5 insertions(+), 5 deletions(-)
->>=20
->> diff --git a/meta-efl/classes/e.bbclass b/meta-efl/classes/e.bbclass
->> index 88a1f6a..ebf1da8 100644
->> --- a/meta-efl/classes/e.bbclass
->> +++ b/meta-efl/classes/e.bbclass
->> @@ -18,9 +18,9 @@ do_configure_append() {
->> export CURL_CONFIG =3D "${STAGING_BINDIR_CROSS}/curl-config"
->> export FREETYPE_CONFIG =3D "${STAGING_BINDIR_CROSS}/freetype-config"
->>=20
->> -# This construction is stupid, someone with more E knowledge should =
-change it to =3D+ or something
->> -# And it's in efl.bbclass as well....
->> -PACKAGES =3D "${PN}-dbg ${PN}-themes ${PN} ${PN}-dev ${PN}-doc =
-${PN}-lib ${PN}-static"
->> +PACKAGES =3D+ "${PN}-themes"
->> +PACKAGES +=3D "${PN}-lib ${PN}-tests"
->=20
-> ${PN}-tests wasn't in original PACKAGES
->=20
->> FILES_${PN}-lib =3D "${libdir}/lib*.so.*"
->> FILES_${PN}-themes =3D "${datadir}/${PN}/themes ${datadir}/${PN}/data =
-${datadir}/${PN}/fonts ${datadir}/${PN}/pointers ${datadir}/${PN}/images =
-${datadir}/${PN}/users ${datadir}/${PN}/images ${datadir}/${PN}/styles"
->> FILES_${PN}-dev +=3D "${includedir} ${libdir}/lib*.so"
->> diff --git a/meta-efl/classes/efl.bbclass =
-b/meta-efl/classes/efl.bbclass
->> index 2dc6fc2..c831439 100644
->> --- a/meta-efl/classes/efl.bbclass
->> +++ b/meta-efl/classes/efl.bbclass
->> @@ -19,8 +19,8 @@ do_install_prepend () {
->> 	done
->> }
->>=20
->> -# This construction is stupid, someone with more E knowledge should =
-change it to =3D+ or something
->> -PACKAGES =3D "${PN}-dbg ${PN} ${PN}-themes ${PN}-dev ${PN}-doc =
-${PN}-tests ${PN}-static"
->> +PACKAGES =3D+ "${PN}-themes"
->> +PACKAGES +=3D "${PN}-lib ${PN}-tests"
->=20
-> ${PN}-lib wasn't in original PACKAGES
+This fix proposed by Sukumar Ghoral of TI.
 
-I did that to keep them in sync between the 2 classes. I can restore =
-them to the original settings if you wish, I have no strong preference =
-either way.
+Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
+---
+Generated a patch that applies to meta-texasinstruments as suggested by Koen in the post at [1]
 
-regards,
+Changes in v2:
+* Bumped PR
 
-Koen=
+Changes in v3:
+* Added SOB line
+
+[1] http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg19995.html
+
+ ...mc-Adjust-dto-to-eliminate-timeout-errors.patch |   33 ++++++++++++++++++++
+ recipes-kernel/linux/linux-omap_2.6.39.bb          |    3 +-
+ 2 files changed, 35 insertions(+), 1 deletions(-)
+ create mode 100644 recipes-kernel/linux/linux-omap-2.6.39/beagle/0007-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch
+
+diff --git a/recipes-kernel/linux/linux-omap-2.6.39/beagle/0007-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch b/recipes-kernel/linux/linux-omap-2.6.39/beagle/0007-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch
+new file mode 100644
+index 0000000..8cd314c
+--- /dev/null
++++ b/recipes-kernel/linux/linux-omap-2.6.39/beagle/0007-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch
+@@ -0,0 +1,33 @@
++From bd0b2f97c48aa6aac0c6a494f1c6ba5af5de486b Mon Sep 17 00:00:00 2001
++From: Steve Sakoman <steve@sakoman.com>
++Date: Mon, 18 Jul 2011 23:13:41 -0500
++Subject: [PATCH] omap_hsmmc: Set dto to max value of 14 to avoid SD Card timeouts
++
++This fixes MMC errors due to timeouts on certain SD Cards following suggestions
++to set dto to 14 by Jason Kridner and Steven Kipisz
++
++Details of the issue:
++http://talk.maemo.org/showthread.php?p=1000707#post1000707
++
++This fix was originally proposed by Sukumar Ghoral of TI.
++---
++ drivers/mmc/host/omap_hsmmc.c |    3 +++
++ 1 files changed, 3 insertions(+), 0 deletions(-)
++
++diff --git a/drivers/mmc/host/omap_hsmmc.c b/drivers/mmc/host/omap_hsmmc.c
++index 9646a75..7443647 100644
++--- a/drivers/mmc/host/omap_hsmmc.c
+++++ b/drivers/mmc/host/omap_hsmmc.c
++@@ -1049,6 +1049,9 @@ static void set_data_timeout(struct omap_hsmmc_host *host,
++ 			dto = 14;
++ 	}
++ 
+++	/* Set dto to max value of 14 to avoid SD Card timeouts */
+++	dto = 14;
+++
++ 	reg &= ~DTO_MASK;
++ 	reg |= dto << DTO_SHIFT;
++ 	OMAP_HSMMC_WRITE(host->base, SYSCTL, reg);
++-- 
++1.7.0.4
++
+diff --git a/recipes-kernel/linux/linux-omap_2.6.39.bb b/recipes-kernel/linux/linux-omap_2.6.39.bb
+index c92846d..a22e81f 100644
+--- a/recipes-kernel/linux/linux-omap_2.6.39.bb
++++ b/recipes-kernel/linux/linux-omap_2.6.39.bb
+@@ -7,7 +7,7 @@ COMPATIBLE_MACHINE = "(beagleboard)"
+ 
+ # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
+ SRCREV_pn-${PN} = "v2.6.39"
+-MACHINE_KERNEL_PR_append = "n"
++MACHINE_KERNEL_PR_append = "o"
+ 
+ FILESPATHPKG_prepend = "linux-omap-2.6.39:"
+ 
+@@ -54,6 +54,7 @@ SRC_URI_append = " \
+            file://beagle/0004-OMAP3-beagle-add-regulators-for-camera-interface.patch \
+            file://beagle/0005-OMAP3-beagle-HACK-add-in-1GHz-OPP.patch \
+            file://beagle/0006-OMAP3-BEAGLE-fix-RTC.patch \
++           file://beagle/0007-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch \
+            \
+            file://camera/0001-Add-driver-for-Aptina-Micron-mt9p031-sensor.patch \
+            file://camera/0002-v4l-Add-mt9v032-sensor-driver.patch \
+-- 
+1.7.0.4
+
 
 
