@@ -1,30 +1,29 @@
-Received: from snvl-smtp1.trimble.com ([155.63.64.31])
+Received: from mail-pz0-f43.google.com ([209.85.210.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Bernard_Mentink@trimble.com>) id 1Qm9kc-0008LA-D9
+	(envelope-from <raj.khem@gmail.com>) id 1Qm9lH-0008Qe-B0
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Jul 2011 21:26:38 +0200
-Received: (qmail 8584 invoked by uid 501); 27 Jul 2011 12:22:22 -0700
-Received: from 10.3.0.166 by snvl-smtp1.trimble.com (envelope-from
-	<Bernard_Mentink@trimble.com>, uid 108) with qmail-scanner-2.08 
-	(clamdscan: 0.97.1/13367. avast: v3.2.0/110726-1. sophie:
-	3.06/3.21.0/4.67. spamassassin: 3.3.1. Clear:RC:1(10.3.0.166):. 
-	Processed in 0.034044 secs); 27 Jul 2011 19:22:22 -0000
-Received: from unknown (HELO nzc-ap-xch-02.ap.trimblecorp.net) (10.3.0.166)
-	by snvl-smtp1.trimble.com with SMTP; 27 Jul 2011 12:22:22 -0700
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Wed, 27 Jul 2011 21:27:19 +0200
+Received: by pzk1 with SMTP id 1so3213558pzk.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Jul 2011 12:23:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=Awf+CNVbY/dXvA7jRE6m2JWkZK+JuVFnuu/0lT2R8xs=;
+	b=k3ev1c+KF9b7z6++jxjokn1Py3G6MZPN/U+J+SNyTqjR5Z3F+jPX/T0g1wbBtoGoKH
+	eFd3UIEzbxAnu3Lhr1fPu/dluyxBDM03FqDkc4v7E440tfbvV2T1syFPnlqwV/koTunO
+	AL3ohiSXMYuFTLhISjxvZijEa6ERiVcJlkhTs=
+Received: by 10.68.29.200 with SMTP id m8mr280955pbh.278.1311794582075; Wed,
+	27 Jul 2011 12:23:02 -0700 (PDT)
 MIME-Version: 1.0
-Date: Thu, 28 Jul 2011 07:22:20 +1200
-Message-ID: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B1FAA0@nzc-ap-xch-02.ap.trimblecorp.net>
-In-Reply-To: <20110727141213.GA8582@cverges-dev-lnx>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Kernel load address issue
-Thread-Index: AcxMZ1mrWtaINDXfR2O7LIJOJROaEQAKRWgg
-References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B1F8B5@nzc-ap-xch-02.ap.trimblecorp.net><20110726220305.GA15286@jama.jama.net><F7C0AA5DD1508F4789E10B6CC9BB75DB04B1F8D9@nzc-ap-xch-02.ap.trimblecorp.net><20110726222646.GB15286@jama.jama.net><F7C0AA5DD1508F4789E10B6CC9BB75DB04B1F8E2@nzc-ap-xch-02.ap.trimblecorp.net><F7C0AA5DD1508F4789E10B6CC9BB75DB04B1F9D5@nzc-ap-xch-02.ap.trimblecorp.net><ED3E0BCACD909541BA94A34C4A164D4C4003C1EB@post.tritech.se>
-	<20110727141213.GA8582@cverges-dev-lnx>
-From: "Bernard Mentink" <Bernard_Mentink@trimble.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: Kernel load address issue
+Received: by 10.68.65.130 with HTTP; Wed, 27 Jul 2011 12:22:32 -0700 (PDT)
+In-Reply-To: <1311792635-17715-1-git-send-email-tom_rini@mentor.com>
+References: <1311792635-17715-1-git-send-email-tom_rini@mentor.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 27 Jul 2011 12:22:32 -0700
+Message-ID: <CAMKF1sqmoDG_YGu-6-BrD2T4iekUnVXdGTyOhQkaHaGUpJTiDQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] rp-pppoe: Resync the 3.8 recipe with oe.dev and cleanup patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,71 +37,199 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jul 2011 19:26:38 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Wed, 27 Jul 2011 19:27:19 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi Chris,
+On Wed, Jul 27, 2011 at 11:50 AM, Tom Rini <tom_rini@mentor.com> wrote:
+> - Update HOMEPAGE (from oe.dev)
+> - Bump PR to match oe.dev (will sync the next bits back over)
+> - Add Upstream-Status to all patches and a description to the ones
+> =C2=A0missing descriptions.
+>
+> Signed-off-by: Tom Rini <tom_rini@mentor.com>
+> ---
+> =C2=A0.../rp-pppoe/rp-pppoe-3.8/configure_in_cross.patch | =C2=A0 =C2=A06=
+ ++++++
+> =C2=A0.../rp-pppoe-3.8/dont-swallow-errors.patch =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 | =C2=A0 =C2=A04 ++++
+> =C2=A0.../rp-pppoe-3.8/pppoe-src-restrictions.patch =C2=A0 =C2=A0 =C2=A0|=
+ =C2=A0 =C2=A02 ++
+> =C2=A0.../rp-pppoe/rp-pppoe-3.8/top-autoconf.patch =C2=A0 =C2=A0 =C2=A0 |=
+ =C2=A0 =C2=A02 ++
+> =C2=A0.../rp-pppoe/rp-pppoe-3.8/update-config.patch =C2=A0 =C2=A0 =C2=A0|=
+ =C2=A0 =C2=A02 ++
+> =C2=A0.../rp-pppoe/rp-pppoe-3.8/use-ldflags.patch =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0| =C2=A0 =C2=A04 ++++
+> =C2=A0.../recipes-connectivity/rp-pppoe/rp-pppoe_3.8.bb =C2=A0| =C2=A0 =
+=C2=A06 +++---
+> =C2=A07 files changed, 23 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/configure=
+_in_cross.patch b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/config=
+ure_in_cross.patch
+> index 381a44d..1896759 100644
+> --- a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/configure_in_cro=
+ss.patch
+> +++ b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/configure_in_cro=
+ss.patch
+> @@ -1,3 +1,9 @@
+> +Update the configure script to cross-compiling with OE. =C2=A0This hard-=
+codes
+> +a few target paths, reworks a few tests to be more friendly for cross
+> +and drops other tests.
+> +
+> +Upstream-Status: Inappropriate [build system specific changes]
+> +
+> =C2=A0Index: src/configure.in
+> =C2=A0=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> =C2=A0--- rp-pppoe-3.8.orig/src/configure.in 2006-04-03 00:29:42.00000000=
+0 +1000
+> diff --git a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/dont-swal=
+low-errors.patch b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/dont-=
+swallow-errors.patch
+> index 81ce2db..f2f681a 100644
+> --- a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/dont-swallow-err=
+ors.patch
+> +++ b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/dont-swallow-err=
+ors.patch
+> @@ -1,3 +1,7 @@
+> +Further fixup to the configure scripts to not swallow errors
+> +
+> +Upstream-Status: Unsubmitted
 
-Many thanks for that. However I only have a uImage in my build, no =
-zImage so can't do a diff to find the offset, is there another way to =
-find that out?=20
-Maybe you or someone else knows what script in openembedded calls the =
-mkimage utility so I can find what parameters are passed ..
+this should be set to "Pending" to match the rest.
 
-By the way, I set UBOOT_LOADADDRESS and UBOOT_ENTRYPOINT to be the same =
-(0x80400000, a bit past u-boot and the environment) in my config file, I =
-am not sure if the entry point should be the same as the load address.
+> +
+> =C2=A0--- a/src/configure.in.org =C2=A0 =C2=A0 2008-01-14 21:08:38.000000=
+000 +0200
+> =C2=A0+++ a/src/configure.in 2008-01-14 21:20:09.000000000 +0200
+> =C2=A0@@ -208,7 +208,7 @@
+> diff --git a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/pppoe-src=
+-restrictions.patch b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/pp=
+poe-src-restrictions.patch
+> index e7e1c2e..b3ad3d4 100644
+> --- a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/pppoe-src-restri=
+ctions.patch
+> +++ b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/pppoe-src-restri=
+ctions.patch
+> @@ -3,6 +3,8 @@ Relax restrictions on the PPPoE src address, as per debia=
+n bug
+>
+> =C2=A0 http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D293811
+>
+> +Upstream-Status: Backport [from Debian]
+> +
+> =C2=A0--- rp-pppoe-3.8.orig/src/discovery.c
+> =C2=A0+++ rp-pppoe-3.8/src/discovery.c
+> =C2=A0@@ -376,8 +376,8 @@
+> diff --git a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/top-autoc=
+onf.patch b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/top-autoconf=
+.patch
+> index e3b0482..4fe73d0 100644
+> --- a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/top-autoconf.pat=
+ch
+> +++ b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/top-autoconf.pat=
+ch
+> @@ -4,6 +4,8 @@ S. This adds enough autoconf at the top level to allow it=
+ to be
+> =C2=A0called there - all it does is run a sub autoconf stuff in the src
+> =C2=A0directory.
+>
+> +Upstream-Status: Inappropriate [build system specific change]
+> +
+> =C2=A0Index: rp-pppoe-3.8/Makefile.am
+> =C2=A0=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> =C2=A0--- /dev/null =C2=A01970-01-01 00:00:00.000000000 +0000
+> diff --git a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/update-co=
+nfig.patch b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/update-conf=
+ig.patch
+> index 5642e3c..3499f37 100644
+> --- a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/update-config.pa=
+tch
+> +++ b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/update-config.pa=
+tch
+> @@ -6,6 +6,8 @@ The path for the plugin is wrong, it's now part of ppp an=
+d is in a
+> =C2=A0ppp's plugin lib directory. If no path is specified then that's whe=
+re
+> =C2=A0ppp looks, so that's what we do here.
+>
+> +Upstream-Status: Inappropriate
+> +
+> =C2=A0Index: rp-pppoe-3.8/configs/pppoe.conf
+> =C2=A0=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> =C2=A0--- rp-pppoe-3.8.orig/configs/pppoe.conf =C2=A0 =C2=A0 =C2=A0 2006-=
+04-03 00:29:41.000000000 +1000
+> diff --git a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/use-ldfla=
+gs.patch b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/use-ldflags.p=
+atch
+> index 1209631..da445b3 100644
+> --- a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/use-ldflags.patc=
+h
+> +++ b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/use-ldflags.patc=
+h
+> @@ -1,3 +1,7 @@
+> +Make the Makefile obey LDFLAGS.
+> +
+> +Upstream-Status: Unsubmitted
 
-Cheers,
-Bernie
+ditto
 
--------------------------------------------------------------------------=
------------------
-I want to die peacefully in my sleep, like my grandfather, not screaming =
-and yelling like the passengers in his car.
-
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org =
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of =
-Chris Verges
-Sent: Thursday, 28 July 2011 2:12 a.m.
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] Kernel load address issue
-
-On Wed, Jul 27, 2011 at 06:00:07AM +0000, Mats K=E4rrman wrote:
-> Starting kernel ...
->=20
-> And there it hangs ... I don't know who printed out the "Starting=20
-> kernel" was it uboot or the kernel?  If uboot, how do I pass kernel=20
-> arguments (i.e the console serial params) with this method of booting?
-
-Hi Bernie,
-
-I've experienced this before when the UBOOT_LOADADDRESS and =
-UBOOT_ENTRYPOINT values in the machine config file for OpenEmbedded =
-aren't properly set to the correct value.  You may want to double check =
-those values.
-
-Also, try setting your bootm address just a tag higher in memory than =
-the actual UBOOT_ENTRYPOINT.  I forgot what the exact uboot-mkimage =
-header put on the uImage is, but you can do a hex diff between the =
-zImage and uImage files to figure it out.  That offset can sometimes =
-cause some odd booting problems.
-
-So if your ENTRYPOINT is 0x8300000 and the uboot-mkimage offset is 0xC0, =
-for example, you'd need to bootm 0x83000C0.  (Again, double check the =
-uboot-mkimage offset.)
-
-Good luck,
-Chris
-
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> +
+> =C2=A0--- a/src/Makefile.in =C2=A02006-04-02 18:29:42.000000000 +0400
+> =C2=A0+++ b/src/Makefile.in =C2=A02010-04-16 17:51:31.000000000 +0400
+> =C2=A0@@ -67,16 +67,16 @@ all: $(TARGETS)
+> diff --git a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe_3.8.bb b/meta=
+-oe/recipes-connectivity/rp-pppoe/rp-pppoe_3.8.bb
+> index 371d82e..673633a 100644
+> --- a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe_3.8.bb
+> +++ b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe_3.8.bb
+> @@ -1,12 +1,12 @@
+> =C2=A0DESCRIPTION =3D "A user-mode PPPoE client and server suite for Linu=
+x"
+> -HOMEPAGE =3D "http://www.roaringpenguin.com/en/penguin/openSourceProduct=
+s/rpPppoe"
+> +HOMEPAGE =3D "http://www.roaringpenguin.com/products/pppoe"
+> =C2=A0SECTION =3D "console/network"
+> =C2=A0LICENSE =3D "GPLv2"
+> =C2=A0LIC_FILES_CHKSUM =3D "file://doc/LICENSE;md5=3Da194eaefae2be54ee322=
+1339b10d0581"
+> =C2=A0RDEPENDS_${PN} =3D "ppp"
+> =C2=A0RDEPENDS_${PN}-server =3D "${PN}"
+> =C2=A0RRECOMMENDS_${PN} =3D "ppp-oe"
+> -PR =3D "r7"
+> +PR =3D "r8"
+>
+> =C2=A0SRC_URI =3D "http://www.roaringpenguin.com/files/download/${P}.tar.=
+gz \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://top-autoconf.patch \
+> @@ -14,7 +14,7 @@ SRC_URI =3D "http://www.roaringpenguin.com/files/downlo=
+ad/${P}.tar.gz \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://pppoe-src-restrictions.pa=
+tch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://update-config.patch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://dont-swallow-errors.patch=
+ \
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://use-ldflags.patch \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://use-ldflags.patch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://pppoe-server.default \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://pppoe-server.init"
+>
+> --
+> 1.7.0.4
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
