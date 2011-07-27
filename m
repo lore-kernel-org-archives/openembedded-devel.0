@@ -1,34 +1,32 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Qm6km-0004wf-Bd
+	(envelope-from <kergoth@gmail.com>) id 1Qm6nT-00054i-7n
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Jul 2011 18:14:36 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1Qm6gh-0003Aa-DU from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Jul 2011 09:10:23 -0700
-Received: from SVR-ORW-FEM-03.mgc.mentorg.com ([147.34.97.39]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Wed, 27 Jul 2011 09:10:23 -0700
-Received: from [172.30.80.87] (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
-	(147.34.97.39) with Microsoft SMTP Server id 14.1.289.1;
-	Wed, 27 Jul 2011 09:10:22 -0700
-Message-ID: <4E303868.5030905@mentor.com>
-Date: Wed, 27 Jul 2011 09:10:16 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.18) Gecko/20110617 Lightning/1.0b2 Thunderbird/3.1.11
+	Wed, 27 Jul 2011 18:17:23 +0200
+Received: by vxh2 with SMTP id 2so1389648vxh.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Jul 2011 09:13:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=G9sC89tbRQ6YYXNFUiW7YpVABYmGdh1PDNPg9sBGq8E=;
+	b=EKqkYC6zTAECJ5jqY0zohc8g/8eI9206srW4AaTiWHS5dDImNkyLOZT4d3ui+v0xbh
+	VtnjzbEXJjNn0cWPHVp1RLcYqhnI/DUrViU22syvrUXdbdaVT+YXSEimxGLSNlqh4pt+
+	lexrCpK9kZlNy5qia5lC3SIK4bFCKWzTpsMAs=
+Received: by 10.52.75.234 with SMTP id f10mr253955vdw.241.1311783188080; Wed,
+	27 Jul 2011 09:13:08 -0700 (PDT)
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1311709612-3664-1-git-send-email-tom_rini@mentor.com>	<1311710326.3735.447.camel@mattotaupa>
-	<1311777017.18419.20.camel@mattotaupa>
-In-Reply-To: <1311777017.18419.20.camel@mattotaupa>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 27 Jul 2011 16:10:23.0242 (UTC)
-	FILETIME=[B078AEA0:01CC4C77]
-Subject: Re: [meta-oe] patch review for meta-oe
+Sender: kergoth@gmail.com
+Received: by 10.52.181.104 with HTTP; Wed, 27 Jul 2011 09:12:48 -0700 (PDT)
+In-Reply-To: <4E301F87.8040609@dresearch-fe.de>
+References: <4E301F87.8040609@dresearch-fe.de>
+From: Chris Larson <clarson@kergoth.com>
+Date: Wed, 27 Jul 2011 09:12:48 -0700
+X-Google-Sender-Auth: zF_lVdHeMP3uLfypgTsRVe8-ZHg
+Message-ID: <CABcZANnYw1Njsi=8BUr0=Mf-O78VEXF9XJQy5-Oqm66+=A7nQQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: understanding overlays
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,53 +40,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jul 2011 16:14:36 -0000
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 27 Jul 2011 16:17:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 07/27/2011 07:30 AM, Paul Menzel wrote:
-> Dear Koen, dear Tom,
-> 
-> 
-> I am surprised that you applied Tom’s patch without incorporating my
-> review.
-> 
->         commit 77d31f8d3027f6ef96bff61da4bf22cf9618bf21
->         Author:     Tom Rini <tom_rini@mentor.com>
->         AuthorDate: Wed Jul 27 03:46:52 2011 +0000
->         Commit:     Koen Kooi <koen@dominion.thruhere.net>
->         CommitDate: Tue Jul 26 21:51:39 2011 +0200
->         
->             rp-pppoe: Port from oe.dev
->             
->             The difference between this and oe.dev are:
->             - Reset PR
->             - Add bitfields site variable to the endian site file
->               This was wrong in oe.dev for BE (mips).
->             - Add LIC_FILES_CHKSUM
->             
->             Signed-off-by: Tom Rini <tom_rini@mentor.com>
->             Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> 
-> First of all, the dates do not make any sense at all, so it looks like
-> you applied it already three minutes after Tom had sent the patch.
-> 
-> I would suggest, that patches get a little more time for review before
-> you apply them, which is of course disadvantageous for people wanted to
-> see their patches applied right away.
-> 
-> But I would like to prevent that “messy” patches get applied to the new
-> repositories to get a better quality.
-> 
-> So Tom, it would be nice if you could sent improvement patches to fix
-> the `HOMEPAGE` field, the patch headers and the whitespace. The `PR`
-> cannot be fixed now.
+On Wed, Jul 27, 2011 at 7:24 AM, Steffen Sledz <sledz@dresearch-fe.de> wrot=
+e:
+> I'm not really familiar with the oe/bitbake overlay details. So please fo=
+rgive me if this is a faq. ;-)
+>
+> Is the overlay package or file based?
+>
+> Or in other words is the following scenario possible?
+>
+> base layer:
+>
+> =C2=A0recipes/
+> =C2=A0 =C2=A0foo/
+> =C2=A0 =C2=A0 =C2=A0foo.inc
+> =C2=A0 =C2=A0 =C2=A0foo_x.y.z.bb
+>
+> overlay:
+>
+> =C2=A0recipes/
+> =C2=A0 =C2=A0foo/
+> =C2=A0 =C2=A0 =C2=A0foo.inc
+>
+> And than build foo-x.y.z with the foo.inc from the overlay.
 
-Yeah, we were both bad here (I shouldn't have asked Koen and he shoulda
-said no).  I'll post an update with your changes incorporated later today.
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+That depends. If the .bb does 'require foo.inc', then no, it will use
+the local one. If it does 'require recipes/foo/foo.inc', then yes, it
+will use the overlay one, assuming the overlay is before the main
+layer in your BBLAYERS.
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
