@@ -1,30 +1,26 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QmJWp-0006DU-H2
+	(envelope-from <sledz@dresearch-fe.de>) id 1QmKMn-0007LG-Jg
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jul 2011 07:53:03 +0200
-Received: by fxg11 with SMTP id 11so1016142fxg.6
+	Thu, 28 Jul 2011 08:46:45 +0200
+Received: by fxg11 with SMTP id 11so1054969fxg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jul 2011 22:48:48 -0700 (PDT)
-Received: by 10.205.80.3 with SMTP id zs3mr173455bkb.273.1311832126543;
-	Wed, 27 Jul 2011 22:48:46 -0700 (PDT)
+	Wed, 27 Jul 2011 23:42:30 -0700 (PDT)
+Received: by 10.204.9.197 with SMTP id m5mr225943bkm.38.1311835350360;
+	Wed, 27 Jul 2011 23:42:30 -0700 (PDT)
 Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
 	[217.92.177.116])
-	by mx.google.com with ESMTPS id h7sm157883bkd.12.2011.07.27.22.48.44
-	(version=SSLv3 cipher=OTHER); Wed, 27 Jul 2011 22:48:45 -0700 (PDT)
-Message-ID: <4E30F83B.3080907@dresearch-fe.de>
-Date: Thu, 28 Jul 2011 07:48:43 +0200
+	by mx.google.com with ESMTPS id d5sm168445bkt.13.2011.07.27.23.42.28
+	(version=SSLv3 cipher=OTHER); Wed, 27 Jul 2011 23:42:29 -0700 (PDT)
+Message-ID: <4E3104D3.7050702@dresearch-fe.de>
+Date: Thu, 28 Jul 2011 08:42:27 +0200
 From: Steffen Sledz <sledz@dresearch-fe.de>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:5.0) Gecko/20110624 Thunderbird/5.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4E301F87.8040609@dresearch-fe.de>
-	<CABcZANnYw1Njsi=8BUr0=Mf-O78VEXF9XJQy5-Oqm66+=A7nQQ@mail.gmail.com>
-In-Reply-To: <CABcZANnYw1Njsi=8BUr0=Mf-O78VEXF9XJQy5-Oqm66+=A7nQQ@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Enigmail-Version: 1.2
-Cc: Chris Larson <clarson@kergoth.com>
-Subject: Re: understanding overlays
+Subject: [2011.03-maintenance] Problem building gcc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,39 +34,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jul 2011 05:53:03 -0000
+X-List-Received-Date: Thu, 28 Jul 2011 06:46:45 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 27.07.2011 18:12, Chris Larson wrote:
-> On Wed, Jul 27, 2011 at 7:24 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
->> I'm not really familiar with the oe/bitbake overlay details. So please forgive me if this is a faq. ;-)
->>
->> Is the overlay package or file based?
->>
->> Or in other words is the following scenario possible?
->>
->> base layer:
->>
->>  recipes/
->>    foo/
->>      foo.inc
->>      foo_x.y.z.bb
->>
->> overlay:
->>
->>  recipes/
->>    foo/
->>      foo.inc
->>
->> And than build foo-x.y.z with the foo.inc from the overlay.
-> 
-> That depends. If the .bb does 'require foo.inc', then no, it will use
-> the local one. If it does 'require recipes/foo/foo.inc', then yes, it
-> will use the overlay one, assuming the overlay is before the main
-> layer in your BBLAYERS.
+I've problems building gcc from the 2011.03-maintenance branch. The do_install step fails with
 
-Thx. What about files referenced e.g. in SRC_URI? I assume that always the ones from the 'highest' layer are used. Right?
+| + mv '/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/gcc-4.3.3-r24.1/image/usr/lib/libstdc++.so.*-gdb.py*' /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/gcc-4.3.3-r24.1/image/usr/share/gdb/auto-load/usr/lib
+| mv: cannot stat `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/gcc-4.3.3-r24.1/image/usr/lib/libstdc++.so.*-gdb.py*': No such file or directory
+NOTE: package gcc-4.3.3-r24.1: task do_install: Failed
+ERROR: Function 'do_install' failed (see /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/gcc-4.3.3-r24.1/temp/log.do_install.14408 for further information)
+ERROR: Task 2 (/home/sledz/work/angstrom-setup-scripts/sources/openembedded/recipes/gcc/gcc_4.3.3.bb, do_install) failed with exit code '1'
+ERROR: '/home/sledz/work/angstrom-setup-scripts/sources/openembedded/recipes/gcc/gcc_4.3.3.bb' failed
+
+A way to reproduce the problem is using the current Ångström oebb.sh script:
+
+  MACHINE=beagleboard ./oebb.sh bitbake gcc
+
+My build host is running a 64-bit openSUSE 11.4.
 
 -- 
 DResearch Fahrzeugelektronik GmbH
