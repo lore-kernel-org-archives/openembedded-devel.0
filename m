@@ -1,31 +1,37 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QmSuk-0004tr-N9 for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jul 2011 17:54:23 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QmSqb-0007Si-O6 for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jul 2011 17:50:05 +0200
-Received: from 207.59.80.172 ([207.59.80.172])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jul 2011 17:50:05 +0200
-Received: from dpsmith by 207.59.80.172 with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jul 2011 17:50:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <kg4ysn@gmail.com>) id 1QmUxC-00018Y-5m
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 28 Jul 2011 20:05:42 +0200
+Received: by vxh2 with SMTP id 2so2352076vxh.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Jul 2011 10:59:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=wlqtbkNcX3vQIqGNAuJRvYDsfNhheNTHa3T4Q31FyoA=;
+	b=DkgPDgtRPbRtCMRAg3X6F0UO9Zj7ZtlgZggeluw1JiIYSz8yE9Rs6X7D6IiEIh065B
+	souFq1g2+guNVeXqxIPYDAkavhtjrb2hXyBSc4jwOZvrfVhCWvl+UF4/G7hgXuuBAv+d
+	QX0nlobrpdAYaYWmfY1uObv2H5J6vX2mNAtYc=
+MIME-Version: 1.0
+Received: by 10.220.2.130 with SMTP id 2mr83567vcj.155.1311875998400; Thu, 28
+	Jul 2011 10:59:58 -0700 (PDT)
+Received: by 10.220.63.3 with HTTP; Thu, 28 Jul 2011 10:59:58 -0700 (PDT)
+In-Reply-To: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B1FAA0@nzc-ap-xch-02.ap.trimblecorp.net>
+References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B1F8B5@nzc-ap-xch-02.ap.trimblecorp.net>
+	<20110726220305.GA15286@jama.jama.net>
+	<F7C0AA5DD1508F4789E10B6CC9BB75DB04B1F8D9@nzc-ap-xch-02.ap.trimblecorp.net>
+	<20110726222646.GB15286@jama.jama.net>
+	<F7C0AA5DD1508F4789E10B6CC9BB75DB04B1F8E2@nzc-ap-xch-02.ap.trimblecorp.net>
+	<F7C0AA5DD1508F4789E10B6CC9BB75DB04B1F9D5@nzc-ap-xch-02.ap.trimblecorp.net>
+	<ED3E0BCACD909541BA94A34C4A164D4C4003C1EB@post.tritech.se>
+	<20110727141213.GA8582@cverges-dev-lnx>
+	<F7C0AA5DD1508F4789E10B6CC9BB75DB04B1FAA0@nzc-ap-xch-02.ap.trimblecorp.net>
+Date: Thu, 28 Jul 2011 10:59:58 -0700
+Message-ID: <CAG4_upQ48037cxN9QOLU06KUJzRT_hcaFaeanCAbTjr=VBY8TA@mail.gmail.com>
+From: Chris Verges <kg4ysn@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Daniel Smith <dpsmith@praxiseng.com>
-Date: Thu, 28 Jul 2011 11:47:28 -0400
-Message-ID: <j0s0bb$brf$1@dough.gmane.org>
-References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A25E@nzc-ap-xch-02.ap.trimblecorp.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: 207.59.80.172
-User-Agent: Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20110624 Thunderbird/5.0
-In-Reply-To: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A25E@nzc-ap-xch-02.ap.trimblecorp.net>
-Subject: Re: Kernel boot problems
+Subject: Re: Kernel load address issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,67 +45,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jul 2011 15:54:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Jul 2011 18:05:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 7/27/2011 10:20 PM, Bernard Mentink wrote:
-> Hi Guys,
+Apologies for the top posting on this one ...
+
+You can easily generate a zImage.  If you have devshell enabled, type
+"bitbake linux -c devshell" and browse under arch/*/boot/... to find
+your vmlinux image.
+
+Try bootm 0x840000A0.  This works on my system.
+
+Chris
+
+On Wed, Jul 27, 2011 at 12:22 PM, Bernard Mentink
+<Bernard_Mentink@trimble.com> wrote:
+> Hi Chris,
 >
-> I have got a bit further with my efforts to boot linux on an imx31 based
-> platform using u-boot.
+> Many thanks for that. However I only have a uImage in my build, no zImage=
+ so can't do a diff to find the offset, is there another way to find that o=
+ut?
+> Maybe you or someone else knows what script in openembedded calls the mki=
+mage utility so I can find what parameters are passed ..
 >
-> My console output is now:
+> By the way, I set UBOOT_LOADADDRESS and UBOOT_ENTRYPOINT to be the same (=
+0x80400000, a bit past u-boot and the environment) in my config file, I am =
+not sure if the entry point should be the same as the load address.
 >
-> ----------------------------------------------------------------
-> uboot>  bootm 80100000
-> ## Booting kernel from Legacy Image at 80100000 ...
->     Image Name:   Angstrom/2.6.36/mx31ads
->     Created:      2011-07-28   2:03:27 UTC
->     Image Type:   ARM Linux Kernel Image (uncompressed)
->     Data Size:    1586172 Bytes = 1.5 MiB
->     Load Address: 8f000000
->     Entry Point:  8f000000
->     Verifying Checksum ... OK
->     Loading Kernel Image ... OK
-> OK
->
-> Starting kernel ...
->
-> Uncompressing Linux... done, booting the kernel.
-> -------------------------------------------------------------------
->
-> So it seems to be getting to the 1st part of the kernel boot process,
-> then hangs (I presume the last line comes from kernel code.)
-> I don't know if the kernel is hanging, or if I don't have any more
-> serial out ....
-> I am passing "console=ttymxc0,115200" to the kernel ..
-> Can someone confirm:
-> A) If I have the correct Entry point, or does this need to be offset
-> into the kernel? ..
-> B) Is the serial console parameters correct?
-> C) What is the correct way to set up the memory map? (my ram starts at
-> 0x80000000, ends at 0x8fffffff)
-> D) Is there a way to debug initial kernel stuff with serial output?
-> In the above, I have decompressed the kernel to the top of the 256M ram,
-> but have only advertised 120M via the bootloader   ... for now, not
-> knowing what is correct and not wanting the kernel
-> to stomp all over itself running in ram.
->
-> Many Thanks,
+> Cheers,
 > Bernie
-
-For (A), I ran into a similar issue cns3xxx which has a similar core as 
-your imx31. You can see the thread here (http://goo.gl/HEOVK). Basically 
-go look in the Makefile.boot for your sub-arch and see what is set for 
-the zreladdr. If it is different than 0x20008000, then in your kernel 
-recipe you need to set the UBOOT_ENTRYPOINT and UBOOT_LOADADDRESS to 
-your zreladdr.
-
-Hope that helps!
-
-V/r,
-Daniel P. Smith
-
+>
+> -------------------------------------------------------------------------=
+-----------------
+> I want to die peacefully in my sleep, like my grandfather, not screaming =
+and yelling like the passengers in his car.
+>
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-bounces@lists.openembedded.org] On Behalf Of Chris Verges
+> Sent: Thursday, 28 July 2011 2:12 a.m.
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] Kernel load address issue
+>
+> On Wed, Jul 27, 2011 at 06:00:07AM +0000, Mats K=E4rrman wrote:
+>> Starting kernel ...
+>>
+>> And there it hangs ... I don't know who printed out the "Starting
+>> kernel" was it uboot or the kernel? =A0If uboot, how do I pass kernel
+>> arguments (i.e the console serial params) with this method of booting?
+>
+> Hi Bernie,
+>
+> I've experienced this before when the UBOOT_LOADADDRESS and UBOOT_ENTRYPO=
+INT values in the machine config file for OpenEmbedded aren't properly set =
+to the correct value. =A0You may want to double check those values.
+>
+> Also, try setting your bootm address just a tag higher in memory than the=
+ actual UBOOT_ENTRYPOINT. =A0I forgot what the exact uboot-mkimage header p=
+ut on the uImage is, but you can do a hex diff between the zImage and uImag=
+e files to figure it out. =A0That offset can sometimes cause some odd booti=
+ng problems.
+>
+> So if your ENTRYPOINT is 0x8300000 and the uboot-mkimage offset is 0xC0, =
+for example, you'd need to bootm 0x83000C0. =A0(Again, double check the ubo=
+ot-mkimage offset.)
+>
+> Good luck,
+> Chris
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
