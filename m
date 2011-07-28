@@ -1,29 +1,31 @@
-Received: from mail-pz0-f43.google.com ([209.85.210.43])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QmSV1-0002os-Uh
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jul 2011 17:27:48 +0200
-Received: by pzk1 with SMTP id 1so4749730pzk.16
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jul 2011 08:23:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=mN3uwxWoSlCWtQFKGtbUlZGWyOup0PsXbr/p+2d1PgQ=;
-	b=CeqvRn2Z+bSVSiRK7gI34FpndKJy+4WlR5YYxHQoCU5aGHKAK3gh7O/0G2Jf94DxkP
-	25UppDdG/2CQyDGpHiQ3x2wGsLp3SHuXmsdXXnvCFFZLoXxH/MXqS0BWPnvwifku5IKK
-	7BrnjPcbLRa0BOMz8aJY3ujBtnodvSCLqWQqo=
-Received: by 10.68.34.35 with SMTP id w3mr380969pbi.144.1311866611116; Thu, 28
-	Jul 2011 08:23:31 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.68.65.130 with HTTP; Thu, 28 Jul 2011 08:23:01 -0700 (PDT)
-In-Reply-To: <j0r3md$jq5$1@dough.gmane.org>
-References: <4E3104D3.7050702@dresearch-fe.de> <j0r3md$jq5$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 28 Jul 2011 08:23:01 -0700
-Message-ID: <CAMKF1spsmfABvkBBv6s-WCmZAFVKyFuC+42+of85Y6zBQUKW2w@mail.gmail.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QmSuk-0004tr-N9 for openembedded-devel@lists.openembedded.org;
+	Thu, 28 Jul 2011 17:54:23 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QmSqb-0007Si-O6 for openembedded-devel@lists.openembedded.org;
+	Thu, 28 Jul 2011 17:50:05 +0200
+Received: from 207.59.80.172 ([207.59.80.172])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Jul 2011 17:50:05 +0200
+Received: from dpsmith by 207.59.80.172 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Jul 2011 17:50:05 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance] Problem building gcc
+From: Daniel Smith <dpsmith@praxiseng.com>
+Date: Thu, 28 Jul 2011 11:47:28 -0400
+Message-ID: <j0s0bb$brf$1@dough.gmane.org>
+References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A25E@nzc-ap-xch-02.ap.trimblecorp.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: 207.59.80.172
+User-Agent: Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20110624 Thunderbird/5.0
+In-Reply-To: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A25E@nzc-ap-xch-02.ap.trimblecorp.net>
+Subject: Re: Kernel boot problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,81 +39,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jul 2011 15:27:48 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 28 Jul 2011 15:54:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jul 28, 2011 at 12:38 AM, Koen Kooi <koen@dominion.thruhere.net> wr=
-ote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+On 7/27/2011 10:20 PM, Bernard Mentink wrote:
+> Hi Guys,
 >
-> Op 28-07-11 08:42, Steffen Sledz schreef:
->> I've problems building gcc from the 2011.03-maintenance branch. The do_i=
-nstall step fails with
->>
->> | + mv '/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_=
-1/work/armv7a-angstrom-linux-gnueabi/gcc-4.3.3-r24.1/image/usr/lib/libstdc+=
-+.so.*-gdb.py*'
->> /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/a=
-rmv7a-angstrom-linux-gnueabi/gcc-4.3.3-r24.1/image/usr/share/gdb/auto-load/=
-usr/lib | mv: cannot stat
->> `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/=
-armv7a-angstrom-linux-gnueabi/gcc-4.3.3-r24.1/image/usr/lib/libstdc++.so.*-=
-gdb.py*': No such file or directory NOTE: package gcc-4.3.3-r24.1: task do_=
-install: Failed ERROR: Function 'do_install' failed (see
->> /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/a=
-rmv7a-angstrom-linux-gnueabi/gcc-4.3.3-r24.1/temp/log.do_install.14408 for =
-further information) ERROR: Task 2 (/home/sledz/work/angstrom-setup-scripts=
-/sources/openembedded/recipes/gcc/gcc_4.3.3.bb, do_install) failed with
->> exit code '1' ERROR: '/home/sledz/work/angstrom-setup-scripts/sources/op=
-enembedded/recipes/gcc/gcc_4.3.3.bb' failed
->>
->> A way to reproduce the problem is using the current =C3=85ngstr=C3=B6m o=
-ebb.sh script:
->>
->> MACHINE=3Dbeagleboard ./oebb.sh bitbake gcc
->>
->> My build host is running a 64-bit openSUSE 11.4.
->>
+> I have got a bit further with my efforts to boot linux on an imx31 based
+> platform using u-boot.
 >
-> Can you try:
+> My console output is now:
 >
-> diff --git a/recipes/gcc/gcc-package-target.inc b/recipes/gcc/gcc-package=
--target.inc
-> index 33567da..7d3f4ae 100644
-> - --- a/recipes/gcc/gcc-package-target.inc
-> +++ b/recipes/gcc/gcc-package-target.inc
-> @@ -171,5 +171,5 @@ GROUP ( libgcc_s.so.1 libgcc.a )" > ${D}${libdir}/lib=
-gcc_s.so
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0rm -rf ${D}${includedir}/c++/${BINV}/${TARGET_=
-SYS}/bits/*.gch
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0# move the gdb python helpers to gdb auto-load=
- directory
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0install -d ${D}${datadir}/gdb/auto-load/${libd=
-ir}
-> - - =C2=A0 =C2=A0 =C2=A0 mv ${D}${libdir}/libstdc++.so.*-gdb.py* ${D}${da=
-tadir}/gdb/auto-load${libdir}
-> + =C2=A0 =C2=A0 =C2=A0 mv ${D}${libdir}/libstdc++.so.*-gdb.py* ${D}${data=
-dir}/gdb/auto-load${libdir} || true
-> =C2=A0}
+> ----------------------------------------------------------------
+> uboot>  bootm 80100000
+> ## Booting kernel from Legacy Image at 80100000 ...
+>     Image Name:   Angstrom/2.6.36/mx31ads
+>     Created:      2011-07-28   2:03:27 UTC
+>     Image Type:   ARM Linux Kernel Image (uncompressed)
+>     Data Size:    1586172 Bytes = 1.5 MiB
+>     Load Address: 8f000000
+>     Entry Point:  8f000000
+>     Verifying Checksum ... OK
+>     Loading Kernel Image ... OK
+> OK
+>
+> Starting kernel ...
+>
+> Uncompressing Linux... done, booting the kernel.
+> -------------------------------------------------------------------
+>
+> So it seems to be getting to the 1st part of the kernel boot process,
+> then hangs (I presume the last line comes from kernel code.)
+> I don't know if the kernel is hanging, or if I don't have any more
+> serial out ....
+> I am passing "console=ttymxc0,115200" to the kernel ..
+> Can someone confirm:
+> A) If I have the correct Entry point, or does this need to be offset
+> into the kernel? ..
+> B) Is the serial console parameters correct?
+> C) What is the correct way to set up the memory map? (my ram starts at
+> 0x80000000, ends at 0x8fffffff)
+> D) Is there a way to debug initial kernel stuff with serial output?
+> In the above, I have decompressed the kernel to the top of the 256M ram,
+> but have only advertised 120M via the bootloader   ... for now, not
+> knowing what is correct and not wanting the kernel
+> to stomp all over itself running in ram.
+>
+> Many Thanks,
+> Bernie
 
-so these are not generated for gcc 4.3 ? in any case this patch seems ok to=
- me
+For (A), I ran into a similar issue cns3xxx which has a similar core as 
+your imx31. You can see the thread here (http://goo.gl/HEOVK). Basically 
+go look in the Makefile.boot for your sub-arch and see what is set for 
+the zreladdr. If it is different than 0x20008000, then in your kernel 
+recipe you need to set the UBOOT_ENTRYPOINT and UBOOT_LOADADDRESS to 
+your zreladdr.
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFOMRINMkyGM64RGpERAmHUAJ9ujUhTt4aw9jT49EaNRY7cUuD7hgCeOsBJ
-> vcTtJYmXd5igGAygUTQr5Og=3D
-> =3Dnwkq
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Hope that helps!
+
+V/r,
+Daniel P. Smith
+
 
 
