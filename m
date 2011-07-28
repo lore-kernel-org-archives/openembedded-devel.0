@@ -1,24 +1,27 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1QmMfo-0002FT-UL
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jul 2011 11:14:32 +0200
-Received: by wyg30 with SMTP id 30so1769828wyg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jul 2011 02:10:17 -0700 (PDT)
-Received: by 10.227.55.66 with SMTP id t2mr1060005wbg.109.1311844217766;
-	Thu, 28 Jul 2011 02:10:17 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id n21sm517015wed.19.2011.07.28.02.10.16
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 28 Jul 2011 02:10:17 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QmMlY-0002Pt-S1 for openembedded-devel@lists.openembedded.org;
+	Thu, 28 Jul 2011 11:20:28 +0200
+Received: from f053037148.adsl.alicedsl.de ([78.53.37.148]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QmMiY-0006UD-TX for openembedded-devel@lists.openembedded.org;
+	Thu, 28 Jul 2011 09:17:23 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 28 Jul 2011 11:10:12 +0200
-Message-Id: <1311844212-23277-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.6.6.1
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [2011.03-maintenance] gcc-package-target: fix for gcc 4.3.x
+In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819E0159D9D1BC@DEMCHP99E35MSX.ww902.siemens.net>
+References: <09D9BE2AC4AA764DABAA8C91E48D819E0157569594@DEMCHP99E35MSX.ww902.siemens.net>
+	<1310930168.4288.47.camel@mattotaupa>
+	<09D9BE2AC4AA764DABAA8C91E48D819E0157569595@DEMCHP99E35MSX.ww902.siemens.net>
+	<1310934411.4288.98.camel@mattotaupa> <4E2368E7.2050500@mentor.com>
+	<09D9BE2AC4AA764DABAA8C91E48D819E0159D9D1BC@DEMCHP99E35MSX.ww902.siemens.net>
+Date: Thu, 28 Jul 2011 11:16:13 +0200
+Message-ID: <1311844573.3627.10.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH v2] packaged-staging: fixed fetching from PSTAGE_MIRROR with file:// uri
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,26 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jul 2011 09:14:33 -0000
+X-List-Received-Date: Thu, 28 Jul 2011 09:20:28 -0000
+X-Groupsio-MsgNum: 33372
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-R3s72nCcXuMphxK0MJnx"
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- recipes/gcc/gcc-package-target.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+--=-R3s72nCcXuMphxK0MJnx
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/recipes/gcc/gcc-package-target.inc b/recipes/gcc/gcc-package-target.inc
-index 33567da..7d3f4ae 100644
---- a/recipes/gcc/gcc-package-target.inc
-+++ b/recipes/gcc/gcc-package-target.inc
-@@ -171,5 +171,5 @@ GROUP ( libgcc_s.so.1 libgcc.a )" > ${D}${libdir}/libgcc_s.so
- 	rm -rf ${D}${includedir}/c++/${BINV}/${TARGET_SYS}/bits/*.gch
- 	# move the gdb python helpers to gdb auto-load directory
- 	install -d ${D}${datadir}/gdb/auto-load/${libdir}
--	mv ${D}${libdir}/libstdc++.so.*-gdb.py* ${D}${datadir}/gdb/auto-load${libdir}
-+	mv ${D}${libdir}/libstdc++.so.*-gdb.py* ${D}${datadir}/gdb/auto-load${libdir} || true
- }
--- 
-1.6.6.1
+Dear Fabrice,
 
 
+Am Donnerstag, den 28.07.2011, 10:44 +0200 schrieb Aeschbacher, Fabrice:
 
+> Would it be possible for someone having write access to commit this patch=
+:
+>=20
+> http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-July/033967.=
+html
+
+[=E2=80=A6]
+
+I am sorry for the delay. I will push your patch as soon as possible.
+
+
+Thanks,
+
+Paul
+
+--=-R3s72nCcXuMphxK0MJnx
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk4xKN0ACgkQPX1aK2wOHVhz2gCfamY8hw7/mrAL9SyDFfXmlHXV
+UywAn1q8Rp0DReLzFMcr23RUCg5cl0wk
+=x2ET
+-----END PGP SIGNATURE-----
+
+--=-R3s72nCcXuMphxK0MJnx--
