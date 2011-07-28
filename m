@@ -1,28 +1,26 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QmOZh-0005KA-2O
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1QmOeZ-0005SO-Ss
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jul 2011 13:16:21 +0200
-Received: by fxg11 with SMTP id 11so1279451fxg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jul 2011 04:12:05 -0700 (PDT)
-Received: by 10.204.143.4 with SMTP id s4mr311243bku.98.1311851189735;
-	Thu, 28 Jul 2011 04:06:29 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116])
-	by mx.google.com with ESMTPS id t2sm244722bku.0.2011.07.28.04.06.28
-	(version=SSLv3 cipher=OTHER); Thu, 28 Jul 2011 04:06:28 -0700 (PDT)
-Message-ID: <4E3142B3.10109@dresearch-fe.de>
-Date: Thu, 28 Jul 2011 13:06:27 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
+	Thu, 28 Jul 2011 13:21:24 +0200
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 28 Jul 2011 04:17:07 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,281,1309762800"; d="scan'208";a="31188898"
+Received: from unknown (HELO helios.localnet) ([10.255.17.244])
+	by orsmga002.jf.intel.com with ESMTP; 28 Jul 2011 04:17:06 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Jaap de Jong <jaap.dejong@nedap.com>
+Date: Thu, 28 Jul 2011 12:17:05 +0100
+User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic-pae; KDE/4.6.2; i686; ; )
+References: <4E31324C.3030901@nedap.com>
+	<201107281131.58174.paul.eggleton@linux.intel.com>
+	<4E314453.8080107@nedap.com>
+In-Reply-To: <4E314453.8080107@nedap.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1311844212-23277-1-git-send-email-koen@dominion.thruhere.net>
-In-Reply-To: <1311844212-23277-1-git-send-email-koen@dominion.thruhere.net>
-X-Enigmail-Version: 1.2
-Subject: Re: [2011.03-maintenance] gcc-package-target: fix for gcc 4.3.x
+Message-Id: <201107281217.05726.paul.eggleton@linux.intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: how to apply bbappend selectively
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,37 +34,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jul 2011 11:16:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 28 Jul 2011 11:21:24 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On 28.07.2011 11:10, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->  recipes/gcc/gcc-package-target.inc |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
-> 
-> diff --git a/recipes/gcc/gcc-package-target.inc b/recipes/gcc/gcc-package-target.inc
-> index 33567da..7d3f4ae 100644
-> --- a/recipes/gcc/gcc-package-target.inc
-> +++ b/recipes/gcc/gcc-package-target.inc
-> @@ -171,5 +171,5 @@ GROUP ( libgcc_s.so.1 libgcc.a )" > ${D}${libdir}/libgcc_s.so
->  	rm -rf ${D}${includedir}/c++/${BINV}/${TARGET_SYS}/bits/*.gch
->  	# move the gdb python helpers to gdb auto-load directory
->  	install -d ${D}${datadir}/gdb/auto-load/${libdir}
-> -	mv ${D}${libdir}/libstdc++.so.*-gdb.py* ${D}${datadir}/gdb/auto-load${libdir}
-> +	mv ${D}${libdir}/libstdc++.so.*-gdb.py* ${D}${datadir}/gdb/auto-load${libdir} || true
->  }
+On Thursday 28 July 2011 12:13:23 Jaap de Jong wrote:
+> But it will still create processor-related packages instead of
+> machine-related.
+> I probably need some magic flag set to get it machine-related (or
+> perhaps better: image-related)?
 
-Acked-by: Steffen Sledz <sledz@dresearch-fe.de>
+Well, PACKAGE_ARCH_somemachine = "${MACHINE_ARCH}" will do that; although if 
+you're manipulating SRC_URI then it's supposed to set that automatically.
+
+Cheers,
+Paul
 
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
