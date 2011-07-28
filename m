@@ -1,30 +1,26 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1QmQ7y-00079t-8n
+	(envelope-from <sledz@dresearch-fe.de>) id 1QmR0h-0000Yo-Pp
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jul 2011 14:55:57 +0200
-Received: by gxk3 with SMTP id 3so1823183gxk.6
+	Thu, 28 Jul 2011 15:52:24 +0200
+Received: by ewy5 with SMTP id 5so2022956ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jul 2011 05:51:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=3Pg6w7swDP/z57hnGKkM9ep3W8sTUxHew1mFvcpfu54=;
-	b=DDq0cICTL5tsqArCUvzjFqHXvmdJhioZXZbkcWTrebbZBgnfRDprWnzkoTvAV3FU4P
-	sWHLUqJfoQup6mrKchEY0hs7SPLLhE7ExPwIUTTxGguHyp3ifuyoOtPfTWAAf5tfqB/O
-	KD0eGBlPG4mGZfCYL52Yhq9P6f1/wnkypoFuY=
+	Thu, 28 Jul 2011 06:48:08 -0700 (PDT)
+Received: by 10.204.148.89 with SMTP id o25mr7926bkv.261.1311860887702;
+	Thu, 28 Jul 2011 06:48:07 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id t2sm290095bku.33.2011.07.28.06.48.05
+	(version=SSLv3 cipher=OTHER); Thu, 28 Jul 2011 06:48:05 -0700 (PDT)
+Message-ID: <4E316894.1020100@dresearch-fe.de>
+Date: Thu, 28 Jul 2011 15:48:04 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:5.0) Gecko/20110624 Thunderbird/5.0
 MIME-Version: 1.0
-Received: by 10.142.204.3 with SMTP id b3mr667340wfg.213.1311857468284; Thu,
-	28 Jul 2011 05:51:08 -0700 (PDT)
-Received: by 10.142.141.2 with HTTP; Thu, 28 Jul 2011 05:51:08 -0700 (PDT)
-In-Reply-To: <4E314658.2040900@mlbassoc.com>
-References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A25E@nzc-ap-xch-02.ap.trimblecorp.net>
-	<4E314658.2040900@mlbassoc.com>
-Date: Thu, 28 Jul 2011 14:51:08 +0200
-Message-ID: <CAAQYJAuuFLX0X+7gs=q3653F4cq_1XLE3U+QWECx7uQV_znuMw@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: Kernel boot problems
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Enigmail-Version: 1.2
+Subject: [2011.03-maintenance] Pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,61 +34,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jul 2011 12:55:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 28 Jul 2011 13:52:24 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jul 28, 2011 at 1:22 PM, Gary Thomas <gary@mlbassoc.com> wrote:
-> On 2011-07-27 20:20, Bernard Mentink wrote:
->>
->> Hi Guys,
->>
->> I have got a bit further with my efforts to boot linux on an imx31 based
->> platform using u-boot.
->>
->> My console output is now:
->>
->> ----------------------------------------------------------------
->> uboot> =A0bootm 80100000
->> ## Booting kernel from Legacy Image at 80100000 ...
->> =A0 =A0Image Name: =A0 Angstrom/2.6.36/mx31ads
->> =A0 =A0Created: =A0 =A0 =A02011-07-28 =A0 2:03:27 UTC
->> =A0 =A0Image Type: =A0 ARM Linux Kernel Image (uncompressed)
->> =A0 =A0Data Size: =A0 =A01586172 Bytes =3D 1.5 MiB
->> =A0 =A0Load Address: 8f000000
->> =A0 =A0Entry Point: =A08f000000
->> =A0 =A0Verifying Checksum ... OK
->> =A0 =A0Loading Kernel Image ... OK
->> OK
->>
->> Starting kernel ...
->>
->> Uncompressing Linux... done, booting the kernel.
->> -------------------------------------------------------------------
->>
->> So it seems to be getting to the 1st part of the kernel boot process,
->> then hangs (I presume the last line comes from kernel code.)
->> I don't know if the kernel is hanging, or if I don't have any more
->> serial out ....
->> I am passing "console=3Dttymxc0,115200" to the kernel ..
->> Can someone confirm:
->> A) If I have the correct Entry point, or does this need to be offset
->> into the kernel? ..
->> B) Is the serial console parameters correct?
->> C) What is the correct way to set up the memory map? (my ram starts at
->> 0x80000000, ends at 0x8fffffff)
->> D) Is there a way to debug initial kernel stuff with serial output?
->> In the above, I have decompressed the kernel to the top of the 256M ram,
->> but have only advertised 120M via the bootloader =A0 ... for now, not
->> knowing what is correct and not wanting the kernel
->> to stomp all over itself running in ram.
->
-<cut>
+Tom,
 
-In answer to D) there is earlyprintk using a custom-compiled debug-kernel
+Please pull the 10 commits from here:
 
-Regards
+URI: git://git.openembedded.org/openembedded
+Branch: sledz/maintenance
 
-Andrea
+Eric Bénard (1):
+      apr-util: add 1.3.10
+
+Mario Schuknecht (3):
+      udev: avoid udev stopping persistent pppd connections
+      linux-2.6.24: enable tun device support (hipox machine only)
+      linux-2.6.24: fix deadlock situation in gmac driver (hipox machine only)
+
+Steffen Sledz (6):
+      linux-2.6.24: fix diff pathes in hipox machine specific patch file
+      linux-2.6.24: fix a buggy patch file for hipox machine
+      ppp-2.4.5: own package for PPPoL2TP plugin
+      ppp-2.4.5: remove `DP = "-1"`
+      iotop: add missing runtime dependency
+      apr-util: disable odbc support to avoid QA error
+
+All of them are in oe master. The linux commits are specific to our hipox machine. All others are bugfixes only.
+
+Thx,
+Steffen
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
