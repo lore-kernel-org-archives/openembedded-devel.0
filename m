@@ -1,29 +1,31 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from snvl-smtp1.trimble.com ([155.63.64.31])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1QmYN5-0005Ha-0G
+	(envelope-from <Bernard_Mentink@trimble.com>) id 1QmYrM-0006Ay-Vr
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jul 2011 23:43:59 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 5DB8416604CA; Thu, 28 Jul 2011 15:39:43 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=4.0 tests=ALL_TRUSTED,BAYES_00,
-	DRUGS_MUSCLE autolearn=no version=3.3.2
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 6F43816604C9;
-	Thu, 28 Jul 2011 15:39:41 -0600 (MDT)
-Message-ID: <4E31D71D.9010109@mlbassoc.com>
-Date: Thu, 28 Jul 2011 15:39:41 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.17) Gecko/20110428 Fedora/3.1.10-1.fc15 Thunderbird/3.1.10
+	Fri, 29 Jul 2011 00:15:17 +0200
+Received: (qmail 19874 invoked by uid 501); 28 Jul 2011 15:10:59 -0700
+Received: from 10.3.0.166 by snvl-smtp1.trimble.com (envelope-from
+	<Bernard_Mentink@trimble.com>, uid 108) with qmail-scanner-2.08 
+	(clamdscan: 0.97.2/13370. avast: v3.2.0/110727-1. sophie:
+	3.06/3.21.0/4.67. spamassassin: 3.3.1. Clear:RC:1(10.3.0.166):. 
+	Processed in 0.042937 secs); 28 Jul 2011 22:10:59 -0000
+Received: from unknown (HELO nzc-ap-xch-02.ap.trimblecorp.net) (10.3.0.166)
+	by snvl-smtp1.trimble.com with SMTP; 28 Jul 2011 15:10:58 -0700
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-To: Bernard Mentink <Bernard_Mentink@trimble.com>
+Date: Fri, 29 Jul 2011 10:10:57 +1200
+Message-ID: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A3D8@nzc-ap-xch-02.ap.trimblecorp.net>
+In-Reply-To: <4E31D71D.9010109@mlbassoc.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Kernel boot problems
+Thread-Index: AcxNbuDsnV4KAQifRzuDXJ3LtHU8rAAAwUXw
 References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A25E@nzc-ap-xch-02.ap.trimblecorp.net>
 	<4E314658.2040900@mlbassoc.com>
 	<F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A35C@nzc-ap-xch-02.ap.trimblecorp.net>
-In-Reply-To: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A35C@nzc-ap-xch-02.ap.trimblecorp.net>
+	<4E31D71D.9010109@mlbassoc.com>
+From: "Bernard Mentink" <Bernard_Mentink@trimble.com>
+To: "Gary Thomas" <gary@mlbassoc.com>
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Kernel boot problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -39,15 +41,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jul 2011 21:43:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Jul 2011 22:15:17 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Gary,
+
+Further down I see a confirmation of the boot params ... i.e
+console=3Dttymxc0,115200
+
+8030d600: 73747369 206e6920 656e6f5a 64726f20    ists in Zone ord
+8030d610: 202c7265 69626f6d 7974696c 6f726720    er, mobility gro
+8030d620: 6e697075 6e6f2067 5420202e 6c61746f    uping on.  Total
+8030d630: 67617020 203a7365 31353233 353c0a32     pages: 32512.<5
+8030d640: 72654b3e 206c656e 6d6d6f63 20646e61    >Kernel command
+8030d650: 656e696c 6f63203a 6c6f736e 74743d65    line: console=3Dtt
+8030d660: 63786d79 31312c30 30303235 3e363c0a    ymxc0,115200.<6>
+8030d670: 20444950 68736168 62617420 6520656c    PID hash table e
+8030d680: 6972746e 203a7365 20323135 64726f28    ntries: 512 (ord
+8030d690: 203a7265 202c312d 38343032 74796220    er: -1, 2048 byt
+8030d6a0: 0a297365 443e363c 72746e65 61632079    es).<6>Dentry ca
+8030d6b0: 20656863 68736168 62617420 6520656c    che hash table e
+8030d6c0: 6972746e 203a7365 38333631 6f282034    ntries: 16384 (o
+8030d6d0: 72656472 2c34203a 35353620 62203633    rder: 4, 65536 b
+8030d6e0: 73657479 363c0a29 6f6e493e 632d6564    ytes).<6>Inode-c
+8030d6f0: 65686361 73616820 61742068 20656c62    ache hash table
+
+The only mention of serial port is:
+
+8030df00: 20656e69 69676572 72657473 3c0a6465    ine registered.<
+8030df10: 6f693e36 68637320 6c756465 63207265    6>io scheduler c
+8030df20: 72207166 73696765 65726574 64282064    fq registered (d
+8030df30: 75616665 0a29746c 533e363c 61697265    efault).<6>Seria
+8030df40: 49203a6c 6420584d 65766972 353c0a72    l: IMX driver.<5
+8030df50: 7968703e 70616d73 616c7020 726f6674    >physmap platfor
+8030df60: 6c66206d 20687361 69766564 203a6563    m flash device:
+8030df70: 30303230 30303030 20746120 30303061    02000000 at a000
+8030df80: 30303030 3e363c0a 73796870 2d70616d    0000.<6>physmap-
+8030df90: 73616c66 3a302e68 756f4620 3120646e    flash.0: Found 1
+8030dfa0: 36317820 76656420 73656369 20746120     x16 devices at
+8030dfb0: 20307830 31206e69 69622d36 61622074    0x0 in 16-bit ba
+8030dfc0: 202e6b6e 756e614d 74636166 72657275    nk. Manufacturer
+8030dfd0: 20444920 30307830 39383030 69684320     ID 0x000089 Chi
+8030dfe0: 44492070 30783020 31393830 353c0a63    p ID 0x00891c.<5
+8030dff0: 7075533e 74726f70 726f6620 6d6f6320    >Support for com
+
+.. And yes I did turn on early debug in the kernel config .. But I don't
+see any extra messages out the serial port.
+How can I check that my .config changes have propagated through ok? ..
+
+
+Regards,
+bernie
+=20
+
+
+------------------------------------------------------------------------
+------------------
+I want to die peacefully in my sleep, like my grandfather, not screaming
+and yelling like the passengers in his car.
+
+-----Original Message-----
+From: Gary Thomas [mailto:gary@mlbassoc.com]=20
+Sent: Friday, 29 July 2011 9:40 a.m.
+To: Bernard Mentink
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] Kernel boot problems
 
 On 2011-07-28 14:51, Bernard Mentink wrote:
 > Many thanks for that,
 >
-> I had a look through the buffer and I see pretty much normal bootup text
-> ... It just isn't coming out of the serial port ..
+> I had a look through the buffer and I see pretty much normal bootup=20
+> text ... It just isn't coming out of the serial port ..
 >
 > The only error I saw was the following:
 > -----------------------------------------
@@ -55,8 +122,8 @@ On 2011-07-28 14:51, Bernard Mentink wrote:
 > 8030cf90: 20746f6e 6e65706f 6f6f7220 65642074    not open root de
 > 8030cfa0: 65636976 6e282220 296c6c75 726f2022    vice "(null)" or
 > 8030cfb0: 6b6e7520 6e776f6e 6f6c622d 32286b63     unknown-block(2
-> 8030cfc0: 64646100 66663d72 66666666 303a6666    .addr=ffffffff:0
-> 8030cfd0: 69202c31 2d3d7172 000a2931 20393830    1, irq=-1)..089
+> 8030cfc0: 64646100 66663d72 66666666 303a6666    .addr=3Dffffffff:0
+> 8030cfd0: 69202c31 2d3d7172 000a2931 20393830    1, irq=3D-1)..089
 > 8030cfe0: 30373178 20000a29 30307830 63313938    x170).. 0x00891c
 > 8030cff0: 2030000a 7830202d 65666666 30303030    ..0 - 0xfffe0000
 > 8030d000: 28202020 36393820 29426b20 2020200a       ( 896 kB).
@@ -102,7 +169,7 @@ On 2011-07-28 14:51, Bernard Mentink wrote:
 > 8030d430: 6d6f632d 69746170 20656c62 636f7270    -compatible proc
 > 8030d440: 6f737365 345b2072 62373031 5d343633    essor [4107b364]
 > 8030d450: 76657220 6f697369 2034206e 4d524128     revision 4 (ARM
-> 8030d460: 45543676 202c294a 303d7263 33356330    v6TEJ), cr=00c53
+> 8030d460: 45543676 202c294a 303d7263 33356330    v6TEJ), cr=3D00c53
 > 8030d470: 0a663738 433e343c 203a5550 54504956    87f.<4>CPU: VIPT
 > 8030d480: 6e6f6e20 61696c61 676e6973 74616420     nonaliasing dat
 > 8030d490: 61632061 2c656863 50495620 6f6e2054    a cache, VIPT no
@@ -127,33 +194,38 @@ On 2011-07-28 14:51, Bernard Mentink wrote:
 > 8030d5c0: 0a646576 203e373c 726f4e20 206c616d    ved.<7>   Normal
 > ----------------------------------------------------------------------
 >
-> I am not sure why it is not printing out the port, my boot param =
-> "console=ttymxc0,115200"
-> And the relevent part of conf/machine/mx31ads.conf = SERIAL_CONSOLE =
+> I am not sure why it is not printing out the port, my boot param =3D=20
+> "console=3Dttymxc0,115200"
+> And the relevent part of conf/machine/mx31ads.conf =3D SERIAL_CONSOLE =
+=3D=20
 > "115200 ttymxc0"
 >
 > Any idea's?
 
-If you look a bit further you may see some messages about what the serial
-ports are called, e.g. on my OMAP/3530 I see these messages:
-   omap_uart.0: ttyO0 at MMIO 0x4806a000 (irq = 72) is a OMAP UART0
+If you look a bit further you may see some messages about what the
+serial ports are called, e.g. on my OMAP/3530 I see these messages:
+   omap_uart.0: ttyO0 at MMIO 0x4806a000 (irq =3D 72) is a OMAP UART0
    console [ttyO0] enabled
-   omap_uart.1: ttyO1 at MMIO 0x4806c000 (irq = 73) is a OMAP UART1
-   omap_uart.2: ttyO2 at MMIO 0x49020000 (irq = 74) is a OMAP UART2
+   omap_uart.1: ttyO1 at MMIO 0x4806c000 (irq =3D 73) is a OMAP UART1
+   omap_uart.2: ttyO2 at MMIO 0x49020000 (irq =3D 74) is a OMAP UART2
 
-I don't have an iMX31 available so it's hard to know what they are called.
+I don't have an iMX31 available so it's hard to know what they are
+called.
 
-Did you try enabling the early print messages like was suggested?  If it works
-these can be a big help.  Your problem is that the kernel is getting started,
-albeit failing because of no root file system but that's the next step.  If
-the console=XXX selection on the command line is incorrect, there will be
-no place for the bootup messages to go, hence the silence.
+Did you try enabling the early print messages like was suggested?  If it
+works these can be a big help.  Your problem is that the kernel is
+getting started, albeit failing because of no root file system but
+that's the next step.  If the console=3DXXX selection on the command =
+line
+is incorrect, there will be no place for the bootup messages to go,
+hence the silence.
 
 
-> ------------------------------------------------------------------------
+> ----------------------------------------------------------------------
+> --
 > ------------------
-> I want to die peacefully in my sleep, like my grandfather, not screaming
-> and yelling like the passengers in his car.
+> I want to die peacefully in my sleep, like my grandfather, not=20
+> screaming and yelling like the passengers in his car.
 >
 > -----Original Message-----
 > From: Gary Thomas [mailto:gary@mlbassoc.com]
@@ -166,7 +238,7 @@ no place for the bootup messages to go, hence the silence.
 >>
 >> Hi Guys,
 >>
->> I have got a bit further with my efforts to boot linux on an imx31
+>> I have got a bit further with my efforts to boot linux on an imx31=20
 >> based platform using u-boot.
 >>
 >> My console output is now:
@@ -177,7 +249,7 @@ no place for the bootup messages to go, hence the silence.
 >>      Image Name:   Angstrom/2.6.36/mx31ads
 >>      Created:      2011-07-28   2:03:27 UTC
 >>      Image Type:   ARM Linux Kernel Image (uncompressed)
->>      Data Size:    1586172 Bytes = 1.5 MiB
+>>      Data Size:    1586172 Bytes =3D 1.5 MiB
 >>      Load Address: 8f000000
 >>      Entry Point:  8f000000
 >>      Verifying Checksum ... OK
@@ -190,34 +262,38 @@ no place for the bootup messages to go, hence the silence.
 >> -------------------------------------------------------------------
 >>
 >> So it seems to be getting to the 1st part of the kernel boot process,
->> then hangs (I presume the last line comes from kernel code.) I don't
+
+>> then hangs (I presume the last line comes from kernel code.) I don't=20
 >> know if the kernel is hanging, or if I don't have any more serial out
+
 >> ....
->> I am passing "console=ttymxc0,115200" to the kernel ..
+>> I am passing "console=3Dttymxc0,115200" to the kernel ..
 >> Can someone confirm:
->> A) If I have the correct Entry point, or does this need to be offset
+>> A) If I have the correct Entry point, or does this need to be offset=20
 >> into the kernel? ..
 >> B) Is the serial console parameters correct?
->> C) What is the correct way to set up the memory map? (my ram starts at
+>> C) What is the correct way to set up the memory map? (my ram starts=20
+>> at
 >
 >> 0x80000000, ends at 0x8fffffff)
 >> D) Is there a way to debug initial kernel stuff with serial output?
 >> In the above, I have decompressed the kernel to the top of the 256M
 > ram,
 >> but have only advertised 120M via the bootloader   ... for now, not
->> knowing what is correct and not wanting the kernel to stomp all over
+>> knowing what is correct and not wanting the kernel to stomp all over=20
 >> itself running in ram.
 >
-> Analyzing this failure can be hard.  If you have some sort of JTAG setup
-> you might be able to break in at this point, figure out where it's
-> hanging up, etc.
+> Analyzing this failure can be hard.  If you have some sort of JTAG=20
+> setup you might be able to break in at this point, figure out where=20
+> it's hanging up, etc.
 >
-> Even if you don't have JTAG, there might be some crumbs left around for
-> you to look at.  Linux keeps everything that goes to the "console" in a
-> circular buffer __log_buf[].  Look up that symbol in System.map (which
-> will be found in your linux build tree).  Here's the tricky part - the
-> map will show a logical address, but U-Boot only knows physical
-> addresses.
+> Even if you don't have JTAG, there might be some crumbs left around=20
+> for you to look at.  Linux keeps everything that goes to the "console"
+
+> in a circular buffer __log_buf[].  Look up that symbol in System.map=20
+> (which will be found in your linux build tree).  Here's the tricky=20
+> part - the map will show a logical address, but U-Boot only knows=20
+> physical addresses.
 > Normally the mapping is pretty easy, e.g. on my OMAP/3530 I might see:
 >     $ grep __log_buf linux-2.6.37/System.map
 >     c0527058 b __log_buf
@@ -232,13 +308,16 @@ no place for the bootup messages to go, hence the silence.
 >     805270b8: 754a2069 3232206c 3a393020 303a3135    i Jul 22 09:51:0
 >        ...
 >
-> Keep looking through this buffer until it stops with useful characters.
-> That may tell you where the kernel got hung up and why.  If you find
+> Keep looking through this buffer until it stops with useful
+characters.
+> That may tell you where the kernel got hung up and why.  If you find=20
 > only garbage, it may be more difficult to tell.
 >
 > Note: hopefully your board has a RESET button which you can use to get
+
 > back into U-Boot once the kernel boot process hangs.  Power cycling to
-> reset the board won't work as the contents of RAM will likely be
+
+> reset the board won't work as the contents of RAM will likely be=20
 > destroyed.
 >
 >
@@ -248,7 +327,7 @@ no place for the bootup messages to go, hence the silence.
 > MLB Associates              |    Embedded world
 > ------------------------------------------------------------
 
--- 
+--
 ------------------------------------------------------------
 Gary Thomas                 |  Consulting for the
 MLB Associates              |    Embedded world
