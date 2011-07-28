@@ -1,29 +1,40 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from goliath.siemens.de ([192.35.17.28])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QmLyg-0001D5-MJ
+	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1QmMRy-0001ef-GY
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jul 2011 10:29:58 +0200
-Received: by fxg11 with SMTP id 11so1137140fxg.6
+	Thu, 28 Jul 2011 11:00:29 +0200
+Received: from mail2.siemens.de (localhost [127.0.0.1])
+	by goliath.siemens.de (8.13.6/8.13.6) with ESMTP id p6S8iOq4026994
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jul 2011 01:25:43 -0700 (PDT)
-Received: by 10.204.2.154 with SMTP id 26mr220475bkj.300.1311841543338;
-	Thu, 28 Jul 2011 01:25:43 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116])
-	by mx.google.com with ESMTPS id i14sm192194bkd.39.2011.07.28.01.25.41
-	(version=SSLv3 cipher=OTHER); Thu, 28 Jul 2011 01:25:42 -0700 (PDT)
-Message-ID: <4E311D05.1000906@dresearch-fe.de>
-Date: Thu, 28 Jul 2011 10:25:41 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
+	Thu, 28 Jul 2011 10:44:24 +0200
+Received: from DEMCHP99ET3MSX.ww902.siemens.net
+	(demchp99et3msx.ww902.siemens.net [139.25.131.243])
+	by mail2.siemens.de (8.13.6/8.13.6) with ESMTP id p6S8iOoE025624
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Jul 2011 10:44:24 +0200
+Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.243]) by
+	DEMCHP99ET3MSX.ww902.siemens.net ([139.25.131.243]) with mapi;
+	Thu, 28 Jul 2011 10:43:48 +0200
+From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 28 Jul 2011 10:44:23 +0200
+Thread-Topic: [oe] [PATCH v2] packaged-staging: fixed fetching from
+	PSTAGE_MIRROR with file:// uri
+Thread-Index: AcxE1RJFnJo0fWU1Sz6FnHns1oaThgILOOPQ
+Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819E0159D9D1BC@DEMCHP99E35MSX.ww902.siemens.net>
+References: <09D9BE2AC4AA764DABAA8C91E48D819E0157569594@DEMCHP99E35MSX.ww902.siemens.net>
+	<1310930168.4288.47.camel@mattotaupa>
+	<09D9BE2AC4AA764DABAA8C91E48D819E0157569595@DEMCHP99E35MSX.ww902.siemens.net>
+	<1310934411.4288.98.camel@mattotaupa> <4E2368E7.2050500@mentor.com>
+In-Reply-To: <4E2368E7.2050500@mentor.com>
+Accept-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: de-DE
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4E3104D3.7050702@dresearch-fe.de> <j0r3md$jq5$1@dough.gmane.org>
-In-Reply-To: <j0r3md$jq5$1@dough.gmane.org>
-X-Enigmail-Version: 1.2
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [2011.03-maintenance] Problem building gcc
+Subject: Re: [PATCH v2] packaged-staging: fixed fetching from PSTAGE_MIRROR with file:// uri
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,37 +48,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jul 2011 08:29:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 28 Jul 2011 09:00:29 -0000
+Content-Language: de-DE
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On 28.07.2011 09:38, Koen Kooi wrote:
-> Op 28-07-11 08:42, Steffen Sledz schreef:
->> I've problems building gcc from the 2011.03-maintenance branch. The do_install step fails with
-> 
->> | + mv '/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/gcc-4.3.3-r24.1/image/usr/lib/libstdc++.so.*-gdb.py*' /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/gcc-4.3.3-r24.1/image/usr/share/gdb/auto-load/usr/lib | mv: cannot stat `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/gcc-4.3.3-r24.1/image/usr/lib/libstdc++.so.*-gdb.py*': No such file or directory NOTE: package gcc-4.3.3-r24.1: task do_install: Failed ERROR: Function 'do_install' failed (see /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/gcc-4.3.3-r24.1/temp/log.do_install.14408 for further information) ERROR: Task 2 (/home/sledz/work/angstrom-setup-scripts/sources/openembedded/recipes/gcc/gcc_4.3.3.bb, do_install) failed with exit code '1' ERROR:
->> '/home/sledz/work/angstrom-setup-scripts/sources/openembedded/recipes/gcc/gcc_4.3.3.bb' failed
-> 
->> A way to reproduce the problem is using the current Ångström oebb.sh script:
-> 
->> MACHINE=beagleboard ./oebb.sh bitbake gcc
-> 
->> My build host is running a 64-bit openSUSE 11.4.
-> 
-> 
-> Can you try:
-> 
-> diff --git a/recipes/gcc/gcc-package-target.inc b/recipes/gcc/gcc-package-target.inc index 33567da..7d3f4ae 100644 --- a/recipes/gcc/gcc-package-target.inc +++ b/recipes/gcc/gcc-package-target.inc @@ -171,5 +171,5 @@ GROUP ( libgcc_s.so.1 libgcc.a )" > ${D}${libdir}/libgcc_s.so rm -rf ${D}${includedir}/c++/${BINV}/${TARGET_SYS}/bits/*.gch # move the gdb python helpers to gdb auto-load directory install -d ${D}${datadir}/gdb/auto-load/${libdir} -       mv ${D}${libdir}/libstdc++.so.*-gdb.py* ${D}${datadir}/gdb/auto-load${libdir} +       mv ${D}${libdir}/libstdc++.so.*-gdb.py* ${D}${datadir}/gdb/auto-load${libdir} || true }
+Hi,
 
-Yepp. This works.
+Would it be possible for someone having write access to commit this patch:
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-July/033967.ht=
+ml
+
+With kind regards,
+Fabrice
+
+> -----Urspr=FCngliche Nachricht-----
+> Von: openembedded-devel-bounces@lists.openembedded.org=20
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] Im=20
+> Auftrag von Tom Rini
+> Gesendet: Montag, 18. Juli 2011 00:58
+> An: openembedded-devel@lists.openembedded.org
+> Betreff: Re: [oe] [PATCH v2] packaged-staging: fixed fetching=20
+> from PSTAGE_MIRROR with file:// uri
+>=20
+> >> Signed-off-by: Fabrice Aeschbacher=20
+...
+> > Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+...
+> Acked-by: Tom Rini <tom_rini@mentor.com>
 
 
