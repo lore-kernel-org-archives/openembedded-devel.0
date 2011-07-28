@@ -1,24 +1,34 @@
-Received: from rs69.luxsci.com ([64.49.254.154])
+Received: from na3sys009aog108.obsmtp.com ([74.125.149.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gchiii@mtiemail.com>) id 1QmWWy-0002rh-Jd
+	(envelope-from <bengardiner@nanometrics.ca>) id 1QmXUB-0003zX-FW
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jul 2011 21:46:04 +0200
-Received: from [192.168.0.165] (adsl-76-255-12-150.dsl.mrdnct.sbcglobal.net
-	[76.255.12.150]) (authenticated bits=0)
-	by rs69.luxsci.com (8.13.8/8.13.8) with ESMTP id p6SJfhPR029451
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=NOT)
+	Thu, 28 Jul 2011 22:47:15 +0200
+Received: from mail-qy0-f180.google.com ([209.85.216.180]) (using TLSv1) by
+	na3sys009aob108.postini.com ([74.125.148.12]) with SMTP
+	ID DSNKTjHJ0kZ6Gqp6+YqT4PA4cDZkY/Gr3dqc@postini.com;
+	Thu, 28 Jul 2011 13:43:01 PDT
+Received: by mail-qy0-f180.google.com with SMTP id 30so2038075qyk.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jul 2011 14:41:44 -0500
-Message-ID: <4E31BB77.5000500@mtiemail.com>
-Date: Thu, 28 Jul 2011 15:41:43 -0400
-From: "George C. Huntington III" <gchiii@mtiemail.com>
-Organization: MicroTools, Inc.
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.18) Gecko/20110625 Remi/fc11 Thunderbird/3.1.11
-MIME-Version: 1.0
+	Thu, 28 Jul 2011 13:42:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=nanometrics.ca; s=google;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=pLpBVeB3zY8ZubzumTI7xlGpzwRJ6nWqildnHx3n/4M=;
+	b=ie+gpN0fInEWU4wsjjru5X6ig0grziq/eeXGFYki3K/NpIiWjXm/xCUWQNf9BWcrBE
+	lNYmQnJnemLSCVKc9qqdW7uL/2odOs/fZWzZKXSo6W1b+ZRIEM+QhonCGe70hlYc4oya
+	gZLLZRLuM/0sxp0Zc32PNjzAdTWd1TKzu1RPg=
+Received: by 10.229.190.211 with SMTP id dj19mr384371qcb.95.1311884394792;
+	Thu, 28 Jul 2011 13:19:54 -0700 (PDT)
+Received: from localhost.localdomain ([206.191.47.130])
+	by mx.google.com with ESMTPS id q9sm920439qct.32.2011.07.28.13.19.53
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 28 Jul 2011 13:19:53 -0700 (PDT)
+From: Ben Gardiner <bengardiner@nanometrics.ca>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 1.1.2
-Subject: image level user manipulation
+Date: Thu, 28 Jul 2011 16:19:46 -0400
+Message-Id: <1311884386-21622-1-git-send-email-bengardiner@nanometrics.ca>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [2011.03-maintenance]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,18 +42,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jul 2011 19:46:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Jul 2011 20:47:16 -0000
 
-are there any classes or layers that let you create users on an image
-for the 2011.03-maintenance branch?
+Cherry-pick: f1d24b5a986233f869364eb109476f5184e76d10
+Tested-by: Ben Gardiner <bengardiner@nanometrics.ca>
 
-i want to create some custom users and home directories.  I think I can
-do it via the ROOTFS_POSTPROCESS_COMMAND, but it feels like there should
-be a better way.  is there a way to run the addgroup and adduser tools
-natively but in such a way that they work their magic on the root
-filesystem being created?
+please add this to the 2011.03-maintenance branch
+
+Ben Gardiner (1):
+  raptor: add libxml2 DEPENDS
+
+ recipes/raptor/raptor_1.4.21.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+-- 
+1.7.4.1
 
 
 
