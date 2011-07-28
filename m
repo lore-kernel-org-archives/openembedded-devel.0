@@ -1,34 +1,27 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from snvl-smtp1.trimble.com ([155.63.64.31])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Qm9uL-0000Dn-Dk
+	(envelope-from <Bernard_Mentink@trimble.com>) id 1QmGGt-0007ro-JS
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Jul 2011 21:42:02 +0200
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1Qm9oL-0001as-P2 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Jul 2011 12:30:29 -0700
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Wed, 27 Jul 2011 12:30:29 -0700
-Received: from [172.30.80.87] (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
-	(147.34.97.43) with Microsoft SMTP Server id 14.1.289.1;
-	Wed, 27 Jul 2011 12:30:28 -0700
-Message-ID: <4E30674E.2070207@mentor.com>
-Date: Wed, 27 Jul 2011 12:30:22 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.18) Gecko/20110617 Lightning/1.0b2 Thunderbird/3.1.11
+	Thu, 28 Jul 2011 04:24:23 +0200
+Received: (qmail 19230 invoked by uid 501); 27 Jul 2011 19:20:06 -0700
+Received: from 10.3.0.166 by snvl-smtp1.trimble.com (envelope-from
+	<Bernard_Mentink@trimble.com>, uid 108) with qmail-scanner-2.08 
+	(clamdscan: 0.97.1/13367. avast: v3.2.0/110726-1. sophie:
+	3.06/3.21.0/4.67. spamassassin: 3.3.1. Clear:RC:1(10.3.0.166):. 
+	Processed in 0.031326 secs); 28 Jul 2011 02:20:06 -0000
+Received: from unknown (HELO nzc-ap-xch-02.ap.trimblecorp.net) (10.3.0.166)
+	by snvl-smtp1.trimble.com with SMTP; 27 Jul 2011 19:20:06 -0700
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
+Date: Thu, 28 Jul 2011 14:20:04 +1200
+Message-ID: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A25E@nzc-ap-xch-02.ap.trimblecorp.net>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: Kernel boot problems
+Thread-Index: AcxMzNy/L32rsx8hRHyk2BQ2+K7EBw==
+From: "Bernard Mentink" <Bernard_Mentink@trimble.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1311792635-17715-1-git-send-email-tom_rini@mentor.com>
-	<CAMKF1sqmoDG_YGu-6-BrD2T4iekUnVXdGTyOhQkaHaGUpJTiDQ@mail.gmail.com>
-In-Reply-To: <CAMKF1sqmoDG_YGu-6-BrD2T4iekUnVXdGTyOhQkaHaGUpJTiDQ@mail.gmail.com>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 27 Jul 2011 19:30:29.0587 (UTC)
-	FILETIME=[A4CF8A30:01CC4C93]
-Subject: Re: [meta-oe][PATCH] rp-pppoe: Resync the 3.8 recipe with oe.dev and cleanup patches
+Subject: Kernel boot problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,57 +35,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jul 2011 19:42:02 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Jul 2011 02:24:24 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On 07/27/2011 12:22 PM, Khem Raj wrote:
-> On Wed, Jul 27, 2011 at 11:50 AM, Tom Rini <tom_rini@mentor.com> wrote:
->> - Update HOMEPAGE (from oe.dev)
->> - Bump PR to match oe.dev (will sync the next bits back over)
->> - Add Upstream-Status to all patches and a description to the ones
->>  missing descriptions.
->>
->> Signed-off-by: Tom Rini <tom_rini@mentor.com>
->> ---
->>  .../rp-pppoe/rp-pppoe-3.8/configure_in_cross.patch |    6 ++++++
->>  .../rp-pppoe-3.8/dont-swallow-errors.patch         |    4 ++++
->>  .../rp-pppoe-3.8/pppoe-src-restrictions.patch      |    2 ++
->>  .../rp-pppoe/rp-pppoe-3.8/top-autoconf.patch       |    2 ++
->>  .../rp-pppoe/rp-pppoe-3.8/update-config.patch      |    2 ++
->>  .../rp-pppoe/rp-pppoe-3.8/use-ldflags.patch        |    4 ++++
->>  .../recipes-connectivity/rp-pppoe/rp-pppoe_3.8.bb  |    6 +++---
->>  7 files changed, 23 insertions(+), 3 deletions(-)
->>
->> diff --git a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/configure_in_cross.patch b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/configure_in_cross.patch
->> index 381a44d..1896759 100644
->> --- a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/configure_in_cross.patch
->> +++ b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/configure_in_cross.patch
->> @@ -1,3 +1,9 @@
->> +Update the configure script to cross-compiling with OE.  This hard-codes
->> +a few target paths, reworks a few tests to be more friendly for cross
->> +and drops other tests.
->> +
->> +Upstream-Status: Inappropriate [build system specific changes]
->> +
->>  Index: src/configure.in
->>  ===================================================================
->>  --- rp-pppoe-3.8.orig/src/configure.in 2006-04-03 00:29:42.000000000 +1000
->> diff --git a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/dont-swallow-errors.patch b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/dont-swallow-errors.patch
->> index 81ce2db..f2f681a 100644
->> --- a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/dont-swallow-errors.patch
->> +++ b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/dont-swallow-errors.patch
->> @@ -1,3 +1,7 @@
->> +Further fixup to the configure scripts to not swallow errors
->> +
->> +Upstream-Status: Unsubmitted
-> 
-> this should be set to "Pending" to match the rest.
 
-Bah, should have checked the wiki harder.
+Hi Guys,
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+I have got a bit further with my efforts to boot linux on an imx31 based
+platform using u-boot.
+
+My console output is now:
+
+----------------------------------------------------------------
+uboot> bootm 80100000
+## Booting kernel from Legacy Image at 80100000 ...
+   Image Name:   Angstrom/2.6.36/mx31ads
+   Created:      2011-07-28   2:03:27 UTC
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    1586172 Bytes =3D 1.5 MiB
+   Load Address: 8f000000
+   Entry Point:  8f000000
+   Verifying Checksum ... OK
+   Loading Kernel Image ... OK
+OK
+
+Starting kernel ...
+
+Uncompressing Linux... done, booting the kernel.
+-------------------------------------------------------------------
+
+So it seems to be getting to the 1st part of the kernel boot process,
+then hangs (I presume the last line comes from kernel code.)
+I don't know if the kernel is hanging, or if I don't have any more
+serial out ....
+I am passing "console=3Dttymxc0,115200" to the kernel ..
+Can someone confirm:
+A) If I have the correct Entry point, or does this need to be offset
+into the kernel? ..
+B) Is the serial console parameters correct?
+C) What is the correct way to set up the memory map? (my ram starts at
+0x80000000, ends at 0x8fffffff)
+D) Is there a way to debug initial kernel stuff with serial output?
+In the above, I have decompressed the kernel to the top of the 256M ram,
+but have only advertised 120M via the bootloader   ... for now, not
+knowing what is correct and not wanting the kernel
+to stomp all over itself running in ram.
+
+Many Thanks,
+Bernie
+
+
+
 
 
