@@ -1,34 +1,30 @@
 Received: from snvl-smtp1.trimble.com ([155.63.64.31])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Bernard_Mentink@trimble.com>) id 1QmbnH-0000xX-Bb
+	(envelope-from <Bernard_Mentink@trimble.com>) id 1Qmc9J-0001J8-Jt
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jul 2011 03:23:16 +0200
-Received: (qmail 31681 invoked by uid 501); 28 Jul 2011 18:18:57 -0700
+	Fri, 29 Jul 2011 03:46:02 +0200
+Received: (qmail 25991 invoked by uid 501); 28 Jul 2011 18:41:44 -0700
 Received: from 10.3.0.166 by snvl-smtp1.trimble.com (envelope-from
 	<Bernard_Mentink@trimble.com>, uid 108) with qmail-scanner-2.08 
 	(clamdscan: 0.97.2/13370. avast: v3.2.0/110727-1. sophie:
 	3.06/3.21.0/4.67. spamassassin: 3.3.1. Clear:RC:1(10.3.0.166):. 
-	Processed in 0.045888 secs); 29 Jul 2011 01:18:57 -0000
+	Processed in 0.049816 secs); 29 Jul 2011 01:41:44 -0000
 Received: from unknown (HELO nzc-ap-xch-02.ap.trimblecorp.net) (10.3.0.166)
-	by snvl-smtp1.trimble.com with SMTP; 28 Jul 2011 18:18:57 -0700
+	by snvl-smtp1.trimble.com with SMTP; 28 Jul 2011 18:41:43 -0700
 X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Date: Fri, 29 Jul 2011 13:18:55 +1200
-Message-ID: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A4B1@nzc-ap-xch-02.ap.trimblecorp.net>
-In-Reply-To: <4E31E59B.7030806@mlbassoc.com>
+Date: Fri, 29 Jul 2011 13:41:42 +1200
+Message-ID: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A4C0@nzc-ap-xch-02.ap.trimblecorp.net>
+In-Reply-To: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A4B1@nzc-ap-xch-02.ap.trimblecorp.net>
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 Thread-Topic: [oe] Kernel boot problems
-Thread-Index: AcxNd4Z7RLcI9yluTRCd7XfiyddcKQAFRUKw
-References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A25E@nzc-ap-xch-02.ap.trimblecorp.net>
-	<4E314658.2040900@mlbassoc.com>
-	<F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A35C@nzc-ap-xch-02.ap.trimblecorp.net>
-	<4E31D71D.9010109@mlbassoc.com>
-	<F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A3D8@nzc-ap-xch-02.ap.trimblecorp.net>
-	<4E31E59B.7030806@mlbassoc.com>
+Thread-Index: AcxNd4Z7RLcI9yluTRCd7XfiyddcKQAFRUKwAAD3weA=
+References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A25E@nzc-ap-xch-02.ap.trimblecorp.net><4E314658.2040900@mlbassoc.com><F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A35C@nzc-ap-xch-02.ap.trimblecorp.net><4E31D71D.9010109@mlbassoc.com><F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A3D8@nzc-ap-xch-02.ap.trimblecorp.net><4E31E59B.7030806@mlbassoc.com>
+	<F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A4B1@nzc-ap-xch-02.ap.trimblecorp.net>
 From: "Bernard Mentink" <Bernard_Mentink@trimble.com>
-To: "Gary Thomas" <gary@mlbassoc.com>
-Cc: openembedded-devel@lists.openembedded.org
+To: <openembedded-devel@lists.openembedded.org>,
+	"Gary Thomas" <gary@mlbassoc.com>
 Subject: Re: Kernel boot problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,17 +39,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jul 2011 01:23:16 -0000
+X-List-Received-Date: Fri, 29 Jul 2011 01:46:02 -0000
 Content-class: urn:content-classes:message
 Content-Type: text/plain;
 	charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+
+=20
+
 
 Hi Gary,
 
 Did as you suggested .. no printout from serial_imx_probe() is seen, so
 I guess it isn't been called, will have to trace it back to see why not.
 This is going to be tedious ..
+
+EDIT: However the function imx_serial_init() is being called and
+completes without errors, so I don't know why the probe is not being
+called ..
+Any ideas?
 
 Thanks,
 bernie=20
@@ -65,7 +69,7 @@ I want to die peacefully in my sleep, like my grandfather, not screaming
 and yelling like the passengers in his car.
 
 -----Original Message-----
-From: Gary Thomas [mailto:gary@mlbassoc.com]=20
+From: Gary Thomas [mailto:gary@mlbassoc.com]
 Sent: Friday, 29 July 2011 10:42 a.m.
 To: Bernard Mentink
 Cc: openembedded-devel@lists.openembedded.org
@@ -387,5 +391,10 @@ Fr
 Gary Thomas                 |  Consulting for the
 MLB Associates              |    Embedded world
 ------------------------------------------------------------
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
