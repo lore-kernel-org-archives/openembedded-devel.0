@@ -1,21 +1,24 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mga06.intel.com ([134.134.136.21] helo=orsmga101.jf.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QmsN7-0000rE-SV for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jul 2011 21:05:21 +0200
-Received: from f053039036.adsl.alicedsl.de ([78.53.39.36]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QmsK9-0003Rz-R0 for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jul 2011 19:02:18 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <elizabeth.flanagan@intel.com>) id 1QmtuH-0002WH-2P
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 29 Jul 2011 22:43:41 +0200
+Received: from mail-gx0-f180.google.com ([209.85.161.180])
+	by mga02.intel.com with ESMTP/TLS/RC4-SHA; 29 Jul 2011 13:38:18 -0700
+Received: by gxk10 with SMTP id 10so5547253gxk.25
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 29 Jul 2011 13:38:17 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.236.184.228 with SMTP id s64mr806206yhm.510.1311971896630;
+	Fri, 29 Jul 2011 13:38:16 -0700 (PDT)
+Received: by 10.236.108.9 with HTTP; Fri, 29 Jul 2011 13:38:16 -0700 (PDT)
+In-Reply-To: <1311966065.3882.90.camel@mattotaupa>
+References: <1311966065.3882.90.camel@mattotaupa>
+Date: Fri, 29 Jul 2011 13:38:16 -0700
+Message-ID: <CAPhnLPCgMbBuDOns-YYQRvgV-b3WW6cHLi3Tjxhc2zC00Z=zrA@mail.gmail.com>
+From: "Flanagan, Elizabeth" <elizabeth.flanagan@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Jul 2011 21:01:05 +0200
-Message-ID: <1311966065.3882.90.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: [PATCH 2/2] iceauth: Add `LICENSE = "MIT-X"`
+Subject: Re: [PATCH 2/2] iceauth: Add `LICENSE = "MIT-X"`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,68 +32,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jul 2011 19:05:21 -0000
-X-Groupsio-MsgNum: 33397
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-1NR06H1oZk7ls02/Qp14"
-
---=-1NR06H1oZk7ls02/Qp14
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 29 Jul 2011 20:43:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Date: Fri, 29 Jul 2011 20:47:22 +0200
+On Fri, Jul 29, 2011 at 12:01 PM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Date: Fri, 29 Jul 2011 20:47:22 +0200
+>
+> This license is listed online for example at the Web site of XFree86 [1],=
+ Debian [2]. No name of the license is mentioned there. Gentoo just uses =
+=BBMIT=AB [3].
+>
+> There are some packages in OpenEmbedded using `MIT-X` and I guess they re=
+fer to the same license. I prefer =BBX/MIT=AB derived from the chapter name=
+ of [1] =BBMIT/X Licenses=AB.
 
-This license is listed online for example at the Web site of XFree86 [1], D=
-ebian [2]. No name of the license is mentioned there. Gentoo just uses =C2=
-=BBMIT=C2=AB [3].
+The LICENSE field generally has a few requirements to work correctly
+for license.bbclass. One, it should be python-esque to parse
+correctly. Two, it should use one of two standards. If you look in
+meta/files/common-licenses you'll see a list of license text from
+SPDX. If you look in license.bbclass, you'll also see a bunch of
+mappings for backwards compatability:
 
-There are some packages in OpenEmbedded using `MIT-X` and I guess they refe=
-r to the same license. I prefer =C2=BBX/MIT=C2=AB derived from the chapter =
-name of [1] =C2=BBMIT/X Licenses=C2=AB.
+SPDXLICENSEMAP[MIT-X] =3D "MIT"
 
-[1] http://www.xfree86.org/current/LICENSE5.html
-[2] http://packages.debian.org/changelogs/pool/main/x/x11-xserver-utils/x11=
--xserver-utils_7.6+3/x11-xserver-utils.copyright
-[3] http://gpo.zugaina.org/x11-apps/iceauth/euscan
+LICENSE should use either the file name in common-licenses, or, the
+mapping. In this case, we have the mapping for LICENSE, so MIT-X is
+perfectly valid.
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
-I do not know anything about license names and just checked the WWW. It wou=
-ld be great if the OE crowd could decide on one name and use it consistentl=
-y.
----
- recipes/xorg-app/iceauth_1.0.4.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+-b
 
-diff --git a/recipes/xorg-app/iceauth_1.0.4.bb b/recipes/xorg-app/iceauth_1=
-.0.4.bb
-index e3b465f..bef5afb 100644
---- a/recipes/xorg-app/iceauth_1.0.4.bb
-+++ b/recipes/xorg-app/iceauth_1.0.4.bb
-@@ -1,7 +1,8 @@
- DESCRIPTION =3D "Tool for manipulating ICE protocol authorization records"
-+LICENSE =3D "MIT-X"
- DEPENDS +=3D "libice"
- PE =3D "1"
--PR =3D "${INC_PR}.1"
-+PR =3D "${INC_PR}.2"
-=20
- require xorg-app-common.inc
-=20
---=20
-1.7.5.4
+>
+> [1] http://www.xfree86.org/current/LICENSE5.html
+> [2] http://packages.debian.org/changelogs/pool/main/x/x11-xserver-utils/x=
+11-xserver-utils_7.6+3/x11-xserver-utils.copyright
+> [3] http://gpo.zugaina.org/x11-apps/iceauth/euscan
+>
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> ---
+> I do not know anything about license names and just checked the WWW. It w=
+ould be great if the OE crowd could decide on one name and use it consisten=
+tly.
 
---=-1NR06H1oZk7ls02/Qp14
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+Agreed.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+> ---
+> =A0recipes/xorg-app/iceauth_1.0.4.bb | =A0 =A03 ++-
+> =A01 files changed, 2 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/xorg-app/iceauth_1.0.4.bb b/recipes/xorg-app/iceauth=
+_1.0.4.bb
+> index e3b465f..bef5afb 100644
+> --- a/recipes/xorg-app/iceauth_1.0.4.bb
+> +++ b/recipes/xorg-app/iceauth_1.0.4.bb
+> @@ -1,7 +1,8 @@
+> =A0DESCRIPTION =3D "Tool for manipulating ICE protocol authorization reco=
+rds"
+> +LICENSE =3D "MIT-X"
+> =A0DEPENDS +=3D "libice"
+> =A0PE =3D "1"
+> -PR =3D "${INC_PR}.1"
+> +PR =3D "${INC_PR}.2"
+>
+> =A0require xorg-app-common.inc
+>
+> --
+> 1.7.5.4
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
-iEYEABECAAYFAk4zA3EACgkQPX1aK2wOHVjcygCeKGXVCEjyjcFrwXmXezzJn5hT
-+V0AnRe4kOoqeepAuPOtltWO4sJAhMVW
-=haZF
------END PGP SIGNATURE-----
 
---=-1NR06H1oZk7ls02/Qp14--
