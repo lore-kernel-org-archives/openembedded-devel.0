@@ -1,28 +1,33 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1QmuOw-0003az-Sc
+Received: from relay1.mentorg.com ([192.94.38.131])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <Tom_Rini@mentor.com>) id 1QmuXY-00042x-SV
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jul 2011 23:15:22 +0200
-Received: (qmail invoked by alias); 29 Jul 2011 21:11:05 -0000
-Received: from p4FDF15A5.dip.t-dialin.net (EHLO localhost.localdomain)
-	[79.223.21.165]
-	by mail.gmx.net (mp003) with SMTP; 29 Jul 2011 23:11:05 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/XtAI1nD3XjDAhh1fAqsuK3J3DAW5tSMTrP7quDc
-	/FLPfV4/sQVj33
-From: Andreas Mueller <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Jul 2011 23:13:42 +0200
-User-Agent: KMail/1.13.7 (Linux/2.6.35.13-92.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-References: <1311966065.3882.90.camel@mattotaupa>
-	<201107292248.49790.schnitzeltony@gmx.de>
-	<1311973524.3882.135.camel@mattotaupa>
-In-Reply-To: <1311973524.3882.135.camel@mattotaupa>
+	Fri, 29 Jul 2011 23:24:17 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1QmuTQ-00024l-VJ from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 29 Jul 2011 14:20:01 -0700
+Received: from SVR-ORW-FEM-03.mgc.mentorg.com ([147.34.97.39]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Fri, 29 Jul 2011 14:17:00 -0700
+Received: from [172.30.80.87] (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
+	(147.34.97.39) with Microsoft SMTP Server id 14.1.289.1;
+	Fri, 29 Jul 2011 14:20:00 -0700
+Message-ID: <4E3323F6.5050407@mentor.com>
+Date: Fri, 29 Jul 2011 14:19:50 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.18) Gecko/20110617 Lightning/1.0b2 Thunderbird/3.1.11
 MIME-Version: 1.0
-Message-Id: <201107292313.43192.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: [PATCH 2/2] iceauth: Add `LICENSE = "MIT-X"`
+To: <openembedded-devel@lists.openembedded.org>
+References: <1311884386-21622-1-git-send-email-bengardiner@nanometrics.ca>
+In-Reply-To: <1311884386-21622-1-git-send-email-bengardiner@nanometrics.ca>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 29 Jul 2011 21:17:00.0952 (UTC)
+	FILETIME=[DB2FF180:01CC4E34]
+Subject: Re: [2011.03-maintenance]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,80 +41,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jul 2011 21:15:23 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 29 Jul 2011 21:24:17 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Friday, July 29, 2011 11:05:24 PM Paul Menzel wrote:
-> Am Freitag, den 29.07.2011, 22:48 +0200 schrieb Andreas Mueller:
-> > On Friday, July 29, 2011 09:01:05 PM Paul Menzel wrote:
-> > > Date: Fri, 29 Jul 2011 20:47:22 +0200
-> > >=20
-> > > This license is listed online for example at the Web site of XFree86
-> > > [1], Debian [2]. No name of the license is mentioned there. Gentoo
-> > > just uses =BBMIT=AB [3].
-> > >=20
-> > > There are some packages in OpenEmbedded using `MIT-X` and I guess they
-> > > refer to the same license. I prefer =BBX/MIT=AB derived from the chap=
-ter
-> > > name of [1] =BBMIT/X Licenses=AB.
-> > >=20
-> > > [1] http://www.xfree86.org/current/LICENSE5.html
-> > > [2]
-> > > http://packages.debian.org/changelogs/pool/main/x/x11-xserver-utils/x=
-11
-> > > -xs erver-utils_7.6+3/x11-xserver-utils.copyright [3]
-> > > http://gpo.zugaina.org/x11-apps/iceauth/euscan
-> >=20
-> > oe-core seems to prefer MIT too [1].
->=20
-> They named the file name MIT. But a lot of `xorg*` packages seem to use
-> `MIT-X`, especially `xorg-app/xorg-app-common.inc`.
->=20
->         $ git grep MIT-X
->         meta/classes/license.bbclass:SPDXLICENSEMAP[MIT-X] =3D "MIT"
->         meta/recipes-graphics/xcb/libxcb.inc:LICENSE =3D "MIT-X"
->         meta/recipes-graphics/xcb/xcb-proto.inc:LICENSE =3D "MIT-X"
->         meta/recipes-graphics/xorg-app/xorg-app-common.inc:LICENSE =3D
-> "MIT-X" meta/recipes-graphics/xorg-driver/xf86-driver-common.inc:LICENSE =
-=3D
-> "MIT-X" meta/recipes-graphics/xorg-driver/xf86-video-omapfb_git.bb:LICENSE
-> =3D "MIT-X" meta/recipes-graphics/xorg-font/xorg-font-common.inc:LICENSE =
-=3D
-> "MIT-X" meta/recipes-graphics/xorg-lib/xorg-lib-common.inc:LICENSE =3D
-> "MIT-X" meta/recipes-graphics/xorg-proto/xorg-proto-common.inc:LICENSE =3D
-> "MIT-X" meta/recipes-graphics/xorg-util/xorg-util-common.inc:LICENSE =3D
-> "MIT-X" meta/recipes-graphics/xorg-xserver/xserver-xf86-common.inc:LICENSE
-> =3D "MIT-X"
-> meta/recipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bb:LICENSE =3D
-> "MIT-X"
->=20
-> So is this patch superfluous, because `LICENSE` is defined in the
-> include file?
->=20
-> Regarding the name, in oe.dev most other recipes from The Open Group
-> have `LICENSE =3D "MIT"`.
->=20
-> Is it useful to set `LICENSE` in an include file? We should decide that
-> first.
->=20
-> > iceauth license looks same but appends additional sentence.
->=20
-> Actually the wording is quite different besides the capitalized
-> paragraph.
->=20
-> > So if no objections I will coose MIT in next version of patch for
-> > meta-oe.
->=20
-> It is even inconsistent in oe-core, so I really do not care much. But
-> first the question above needs to be answered.
->=20
-> And Andreas, you could wait until I update the recipe in oe.dev and just
-> copy it then to save you some time.
->=20
-Sure :-)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Andreas
+On 07/28/2011 01:19 PM, Ben Gardiner wrote:
+> Cherry-pick: f1d24b5a986233f869364eb109476f5184e76d10
+> Tested-by: Ben Gardiner <bengardiner@nanometrics.ca>
+> 
+> please add this to the 2011.03-maintenance branch
+> 
+> Ben Gardiner (1):
+>   raptor: add libxml2 DEPENDS
+> 
+>  recipes/raptor/raptor_1.4.21.bb |    1 +
+>  1 files changed, 1 insertions(+), 0 deletions(-)
+
+Applied, thanks!
+
+- -- 
+Tom Rini
+Mentor Graphics Corporation
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iQEcBAEBAgAGBQJOMyPuAAoJEI4NMjfc3nJxDyQH/A0XKovaPl5gz9JmXaOU8gIa
+d6xcftM8qgilCl244zGPCg6GqgjsFrlitxo51gZmcsXB9Uhg9lczC94ywicvoXTt
+EhbmkegBO0B5VSFk1cvVm92/NRJen7WnwRWR99DCn8wWYevx59RXU3cvRNFNHgS/
+Q+Wue5HGiYullZM3zTES8C90bLwvIAHey1dgp5HjHoFVSE5BklgqfgJl+4fwe63X
+2fH7DBC+dhFQD4bq5Qr1TRzucc8mQ5vS1EDHdV3xPj3EUbOwucJcOAMNm7yzpKxj
+s+c4CVI6RI1FKG6KWyZS13UCUa5e59hvOKnY9Rwd50aAsW/CmJYgUWNlfqdr6H8=
+=RV/E
+-----END PGP SIGNATURE-----
 
 
