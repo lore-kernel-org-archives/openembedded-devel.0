@@ -1,23 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Qn9gH-0002be-Qk for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Jul 2011 15:34:17 +0200
-Received: from f053040092.adsl.alicedsl.de ([78.53.40.92]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Qn9dK-0006IV-DP for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Jul 2011 13:31:14 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QnBW0-0004zz-3v for openembedded-devel@lists.openembedded.org;
+	Sat, 30 Jul 2011 17:31:48 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QnBRr-0004JH-QA for openembedded-devel@lists.openembedded.org;
+	Sat, 30 Jul 2011 17:27:31 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 30 Jul 2011 17:27:31 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 30 Jul 2011 17:27:31 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201107301510.01746.schnitzeltony@gmx.de>
-References: <201107301510.01746.schnitzeltony@gmx.de>
-Date: Sat, 30 Jul 2011 15:30:00 +0200
-Message-ID: <1312032600.3650.45.camel@mattotaupa>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 30 Jul 2011 17:27:20 +0200
+Message-ID: <j117so$upr$1@dough.gmane.org>
+References: <201107301242.41215.schnitzeltony@gmx.de>
+	<201107301312.14146.schnitzeltony@gmx.de>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [RFC] oe style-guide change
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:5.0) Gecko/20110624 Thunderbird/5.0
+In-Reply-To: <201107301312.14146.schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.2
+Subject: Re: fakeroot 1.14.5 source is missing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,82 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Jul 2011 13:34:17 -0000
-X-Groupsio-MsgNum: 33412
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-8FFJmMBqDxhmn1uU5hPr"
+X-List-Received-Date: Sat, 30 Jul 2011 15:31:48 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-8FFJmMBqDxhmn1uU5hPr
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Dear Andreas,
+Op 30-07-11 13:12, Andreas Mueller schreef:
+> On Saturday, July 30, 2011 12:42:40 PM Andreas Mueller wrote:
+>> Hi guys,
+>> 
+>> I tried to build an image based on gumstix overo-2011 branch [1] but the sources for fakeroot 1.14.5 can not be downloaded.
+>> 
+>> ERROR: fakeroot-native-1.14.5: ftp://ftp.debian.org/debian/pool/main/f/fakeroot/fakeroot_1.14.5.orig.tar.b z2 cannot check archive integrity
+>> 
+>> In [2] I saw that it is it is not there ( anymore ? ).
+>> 
+>> As far as I can see we have the same issue in mainline oe 2011.03-maintenance.
+>> 
+>> [1] http://gitorious.org/gumstix-oe/mainline/commits/overo-2011.03 [2] ftp://ftp.debian.org/debian/pool/main/f/fakeroot/
+>> 
+> I don't know how to create the 'official' pull request bur I think we need to pull
+> 
+> commit 085dc5e99abf98772bfb44f3f25320418d500740 Author: Florian Boor <florian.boor@kernelconcepts.de> Date:   Thu May 5 11:28:09 2011 +0200
+> 
+> fakeroot: Move from not fetchable 1.14.5 to 1.15.1
+> 
+> Fakeroot 1.14.5 was not fetchable any more. Updating to 1.15.1.
+> 
+> Test environment: BB_VERSION        = "1.10.2" METADATA_BRANCH   = "org.openembedded.dev" TARGET_ARCH       = "arm" TARGET_OS         = "linux-gnueabi" MACHINE           = "mainstone" DISTRO            = "minimal" DISTRO_VERSION    = "dev-snapshot-20110504" TARGET_FPU        = "soft"
+> 
+> Signed-off-by: Florian Boor <florian.boor@kernelconcepts.de>
+> 
+> into 2011.03-maintenance.
 
-
-Am Samstag, den 30.07.2011, 15:10 +0200 schrieb Andreas Mueller:
-
-> working on xfce I face a problem with our style-guide (and I think there =
-are=20
-> other packets affected too e.g gnome recipes?):
->=20
-> In the xfce.bbclass there is a SRC_URI created from recipe name. This fit=
-s for=20
-> 95% of the recipes. Following style-guide [1] I would add patches by writ=
-ing=20
-> something like
->=20
-> SRC_URI +=3D "foo.patch"
-> inherit xfce
->=20
-> Problem is that xfce.bbclass sets SRC_URI with
->=20
-> SRC_URI  =3D ...
->=20
-> Since I want to give recipes the chance to overwrite the suggestion comin=
-g from=20
-> xfce.bbclass ( e.g thunar souce starts with capital letter ) I cannot wri=
-te=20
-> something like
->=20
-> SRC_URI =3D+ ..
->=20
-> in xfce.bbclass.
->=20
-> Therfore I suggest to have the style-guide changed so that we have
->=20
-> inherit ...=20
-> SRC_URI
-> S
->=20
-> What do our gurus think about this?
-
-It would be nice to know why the ordering is this way the first place. I
-do not know that and therefore your proposal sounds reasonable.
-
-In a lot of cases `SRC_URI` is set in an include file which is than
-included using `require xfce.inc` in the very first line.
-
-I do not know when classes are preferred over include files.
-
-
-Thanks,
-
-Paul
-
-
-> [1] http://wiki.openembedded.org/index.php/Styleguide
-
---=-8FFJmMBqDxhmn1uU5hPr
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-June/033373.html
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAk40B1gACgkQPX1aK2wOHVhUHwCeIZQpCHxVqL49A44RAmj5FcCg
-KEAAniaEprgBZr53wa/4j5KZr89Z3KLM
-=W+Ay
+iD8DBQFONCLYMkyGM64RGpERAqsYAJwLnvUe7fKAmA9HeOEti1LxU7cLBgCgi5ag
+jsG6WtTJWRZOvVbI2z2g/vk=
+=H4or
 -----END PGP SIGNATURE-----
 
---=-8FFJmMBqDxhmn1uU5hPr--
+
+
