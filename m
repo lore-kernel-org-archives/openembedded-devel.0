@@ -1,36 +1,33 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QnD8t-0007K4-Ag
+	(envelope-from <agnel.joel@gmail.com>) id 1QnEHt-0000MN-4S
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Jul 2011 19:16:25 +0200
-Received: by iyj12 with SMTP id 12so5693297iyj.6
+	Sat, 30 Jul 2011 20:29:25 +0200
+Received: by ewy5 with SMTP id 5so2660422ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Jul 2011 10:07:32 -0700 (PDT)
+	Sat, 30 Jul 2011 11:25:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:organization:user-agent:in-reply-to
-	:references:mime-version:content-transfer-encoding:content-type;
-	bh=Ra7Gbb4P/R9r6drMYaGSvoxt22ZrYGimHXfb6ISeNz8=;
-	b=Unu372H7MFX+4uWLsh2ofnTHWR89N5PyWsDAbNJBFqJmG58TCHfKluXPLZ5qSvhLkX
-	sW0riNLVOrIQ/Ft4CYeEuyTpbJufSy57SW5SExb3UP1wcSbPrdmLqtsDEPdjUJaNw8Ju
-	9YxjIxqVGt0ZK3S1TEumY/2DbWSfQlLmOyM9c=
-Received: by 10.142.1.12 with SMTP id 12mr1772006wfa.19.1312045650479;
-	Sat, 30 Jul 2011 10:07:30 -0700 (PDT)
-Received: from perseus.localnet (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id g4sm3426037pbj.41.2011.07.30.10.07.28
-	(version=SSLv3 cipher=OTHER); Sat, 30 Jul 2011 10:07:28 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 30 Jul 2011 10:07:25 -0700
-Message-ID: <1536968.X2sCWL0zD8@perseus>
-Organization: Sakrah
-User-Agent: KMail/4.7.0  (Linux/2.6.38-10-generic; KDE/4.7.0; i686; ; )
-In-Reply-To: <4E30F83B.3080907@dresearch-fe.de>
-References: <4E301F87.8040609@dresearch-fe.de>
-	<CABcZANnYw1Njsi=8BUr0=Mf-O78VEXF9XJQy5-Oqm66+=A7nQQ@mail.gmail.com>
-	<4E30F83B.3080907@dresearch-fe.de>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=RCbsVzB1vRHH/PdMURfu1JlVbLAEq37YVY5vw6VJLLU=;
+	b=eIJDAf0mGbtvBJN9tIkJTO78ohA1Q7kKoRer/9LB/ZPMfffrIbpTfDJYuC08ww6wQS
+	XbkKJT3I4QHAGzWgYKtYSAZ3LQNWWSWw1H5Mz/8X3pQy0z7Nqr+lfWe9jgiToIuVy3YF
+	2GjnYDVjOIIDHKXckyJmhP+R8PvrovUHwEu2s=
 MIME-Version: 1.0
-Subject: Re: understanding overlays
+Received: by 10.213.102.9 with SMTP id e9mr309510ebo.91.1312050304786; Sat, 30
+	Jul 2011 11:25:04 -0700 (PDT)
+Received: by 10.213.113.196 with HTTP; Sat, 30 Jul 2011 11:25:04 -0700 (PDT)
+In-Reply-To: <BAF0F415-E659-485C-855F-271AD4ABE73B@beagleboard.org>
+References: <1311980287-31536-1-git-send-email-agnel.joel@gmail.com>
+	<BAF0F415-E659-485C-855F-271AD4ABE73B@beagleboard.org>
+Date: Sat, 30 Jul 2011 13:25:04 -0500
+Message-ID: <CAD=GYpbN-8O1yWnbPGE_XLThnBSAoKosw2998Hq1MqWMjbMQAg@mail.gmail.com>
+From: Joel A Fernandes <agnel.joel@gmail.com>
+To: Koen Kooi <koen@beagleboard.org>
+Cc: Joel A Fernandes <joelagnel@ti.com>, beagleboard@googlegroups.com,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Jason Kridner <jdk@ti.com>
+Subject: Re: [beagleboard] [PATCH] gst-plugins-good: v4l2src: Make Leapoard Imaging VGA Camera work out of the box
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,50 +41,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Jul 2011 17:16:25 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Sat, 30 Jul 2011 18:29:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thursday, July 28, 2011 07:48:43 AM Steffen Sledz wrote:
-> On 27.07.2011 18:12, Chris Larson wrote:
-> > On Wed, Jul 27, 2011 at 7:24 AM, Steffen Sledz <sledz@dresearch-fe.de> 
-wrote:
-> >> I'm not really familiar with the oe/bitbake overlay details. So please
-> >> forgive me if this is a faq. ;-)
-> >> 
-> >> Is the overlay package or file based?
-> >> 
-> >> Or in other words is the following scenario possible?
-> >> 
-> >> base layer:
-> >>  recipes/
-> >>  
-> >>    foo/
-> >>    
-> >>      foo.inc
-> >>      foo_x.y.z.bb
-> >> 
-> >> overlay:
-> >>  recipes/
-> >>  
-> >>    foo/
-> >>    
-> >>      foo.inc
-> >> 
-> >> And than build foo-x.y.z with the foo.inc from the overlay.
-> > 
-> > That depends. If the .bb does 'require foo.inc', then no, it will use
-> > the local one. If it does 'require recipes/foo/foo.inc', then yes, it
-> > will use the overlay one, assuming the overlay is before the main
-> > layer in your BBLAYERS.
-> 
-> Thx. What about files referenced e.g. in SRC_URI? I assume that always the
-> ones from the 'highest' layer are used. Right?
+On Sat, Jul 30, 2011 at 2:31 AM, Koen Kooi <koen@beagleboard.org> wrote:
+>
+> Op 30 jul. 2011, om 00:58 heeft Joel A Fernandes het volgende geschreven:
+>
+>> Format enumeration in Gstreamer expects drivers to implement VIDIOC_ENUM=
+_FMT and if not, it calls
+>> VIDIOC_TRY_FMT on a set of "emulated formats" which could be unsupported=
+ resulting in failure of
+>> the format negotiation stage [1]
+>>
+>> We add UYVY to the set of formats making the mt9v113 sensor in this came=
+ra board and other sensors
+>> that don't support the emulated formats work out-of-the box without need=
+ing a caps filter element
+>>
+>> [1] http://lists.freedesktop.org/archives/gstreamer-devel/2011-July/0324=
+25.html
+>>
+>> Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
+>> ---
+>> ...-UYVY-color-format-to-the-list-of-enumera.patch | =A0 43 ++++++++++++=
+++++++++
+>> recipes/gstreamer/gst-plugins-good_0.10.28.bb =A0 =A0 =A0| =A0 =A04 +-
+>> 2 files changed, 46 insertions(+), 1 deletions(-)
+>> create mode 100644 recipes/gstreamer/gst-plugins-good/0001-v4l2src-Add-U=
+YVY-color-format-to-the-list-of-enumera.patch
+>>
+>> diff --git a/recipes/gstreamer/gst-plugins-good/0001-v4l2src-Add-UYVY-co=
+lor-format-to-the-list-of-enumera.patch b/recipes/gstreamer/gst-plugins-goo=
+d/0001-v4l2src-Add-UYVY-color-format-to-the-list-of-enumera.patch
+>> new file mode 100644
+>> index 0000000..88a0125
+>> --- /dev/null
+>> +++ b/recipes/gstreamer/gst-plugins-good/0001-v4l2src-Add-UYVY-color-for=
+mat-to-the-list-of-enumera.patch
+>> @@ -0,0 +1,43 @@
+>> +From d5a1f365bfd4420912735709bcb8004d3ad7226c Mon Sep 17 00:00:00 2001
+>> +From: Joel A Fernandes <agnel.joel@gmail.com>
+>> +Date: Fri, 29 Jul 2011 17:23:43 -0500
+>> +Subject: [PATCH] v4l2src: Add UYVY color format to the list of enumerat=
+ions
+>> +
+>> +OMAP3 ISP returns -EINVAL for VIDIOC_ENUM_FMT ioctl on video node. Due =
+to this, format negotiation fails. This adds UYVY format to the list of enu=
+merations.
+>
+> I must be missing something, but what has negotation failure to do with a=
+dding a new format? I would expect adding new formats not to have any effec=
+t if negotiation fails.
 
-It will consider the BBFILE_PRIORITY for recipe files. but .inc and other 
-metadata are searched in order of paths in BBPATH
+The way it works is:
 
--- 
-Khem Raj
+Enumerate formats -> Negotiate formats between source and sink pads
+and set the format
+
+Enumerate formats doesn't return UYVY (The driver is supposed to
+return this but ENUM_FMT ioctl is not implemented in ISP like I was
+saying). Due to this, the negotiate function is either unable to find
+a matching format on the sink pad (if you used a UYVY caps filter
+element) or fails to set the format if you used a more general
+element.
+
+>
+> Anyway, could you add a 'upstream-status' tag to the patch as described i=
+n http://wiki.openembedded.org/index.php/Commit_Patch_Message_Guidelines#Pa=
+tch_Header_Recommendations ?
+
+This patch is more like a harmless hack which works around a
+limitation of the driver. It is unlikely that it will be accepted by
+upstream or if it should even be submitted as an RFC. Considering
+this, would it be ok if I prepended "HACK!" to the title? I noticed
+this in your 1GHz patches
+
+Thanks,
+Joel
 
 
