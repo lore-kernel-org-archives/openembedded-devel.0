@@ -1,24 +1,23 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1Qn9Qm-0002Mq-2E
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Jul 2011 15:18:16 +0200
-Received: (qmail invoked by alias); 30 Jul 2011 13:07:17 -0000
-Received: from p4FDF1F3D.dip.t-dialin.net (EHLO localhost.localdomain)
-	[79.223.31.61]
-	by mail.gmx.net (mp054) with SMTP; 30 Jul 2011 15:07:17 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1+2RwYaaEG2nzFtDYnESJyCnKsRdwcnY5xkKzrmun
-	sxQJt2uO//xsr7
-From: Andreas Mueller <schnitzeltony@gmx.de>
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qn9gH-0002be-Qk for openembedded-devel@lists.openembedded.org;
+	Sat, 30 Jul 2011 15:34:17 +0200
+Received: from f053040092.adsl.alicedsl.de ([78.53.40.92]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qn9dK-0006IV-DP for openembedded-devel@lists.openembedded.org;
+	Sat, 30 Jul 2011 13:31:14 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 30 Jul 2011 15:10:01 +0200
-User-Agent: KMail/1.13.7 (Linux/2.6.35.13-92.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-MIME-Version: 1.0
-Message-Id: <201107301510.01746.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: [RFC] oe style-guide change
+In-Reply-To: <201107301510.01746.schnitzeltony@gmx.de>
+References: <201107301510.01746.schnitzeltony@gmx.de>
+Date: Sat, 30 Jul 2011 15:30:00 +0200
+Message-ID: <1312032600.3650.45.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [RFC] oe style-guide change
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,45 +31,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Jul 2011 13:18:16 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 30 Jul 2011 13:34:17 -0000
+X-Groupsio-MsgNum: 33412
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-8FFJmMBqDxhmn1uU5hPr"
 
-Hi,
+--=-8FFJmMBqDxhmn1uU5hPr
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-working on xfce I face a problem with our style-guide (and I think there are 
-other packets affected too e.g gnome recipes?):
-
-In the xfce.bbclass there is a SRC_URI created from recipe name. This fits for 
-95% of the recipes. Following style-guide [1] I would add patches by writing 
-something like
-
-SRC_URI += "foo.patch"
-inherit xfce
-
-Problem is that xfce.bbclass sets SRC_URI with
-
-SRC_URI  = ...
-
-Since I want to give recipes the chance to overwrite the suggestion coming from 
-xfce.bbclass ( e.g thunar souce starts with capital letter ) I cannot write 
-something like
-
-SRC_URI =+ ..
-
-in xfce.bbclass.
-
-Therfore I suggest to have the style-guide changed so that we have
-
-inherit ... 
-SRC_URI
-S
-
-What do our gurus think about this?
-
-Andreas
-
-[1] http://wiki.openembedded.org/index.php/Styleguide
+Dear Andreas,
 
 
+Am Samstag, den 30.07.2011, 15:10 +0200 schrieb Andreas Mueller:
+
+> working on xfce I face a problem with our style-guide (and I think there =
+are=20
+> other packets affected too e.g gnome recipes?):
+>=20
+> In the xfce.bbclass there is a SRC_URI created from recipe name. This fit=
+s for=20
+> 95% of the recipes. Following style-guide [1] I would add patches by writ=
+ing=20
+> something like
+>=20
+> SRC_URI +=3D "foo.patch"
+> inherit xfce
+>=20
+> Problem is that xfce.bbclass sets SRC_URI with
+>=20
+> SRC_URI  =3D ...
+>=20
+> Since I want to give recipes the chance to overwrite the suggestion comin=
+g from=20
+> xfce.bbclass ( e.g thunar souce starts with capital letter ) I cannot wri=
+te=20
+> something like
+>=20
+> SRC_URI =3D+ ..
+>=20
+> in xfce.bbclass.
+>=20
+> Therfore I suggest to have the style-guide changed so that we have
+>=20
+> inherit ...=20
+> SRC_URI
+> S
+>=20
+> What do our gurus think about this?
+
+It would be nice to know why the ordering is this way the first place. I
+do not know that and therefore your proposal sounds reasonable.
+
+In a lot of cases `SRC_URI` is set in an include file which is than
+included using `require xfce.inc` in the very first line.
+
+I do not know when classes are preferred over include files.
+
+
+Thanks,
+
+Paul
+
+
+> [1] http://wiki.openembedded.org/index.php/Styleguide
+
+--=-8FFJmMBqDxhmn1uU5hPr
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk40B1gACgkQPX1aK2wOHVhUHwCeIZQpCHxVqL49A44RAmj5FcCg
+KEAAniaEprgBZr53wa/4j5KZr89Z3KLM
+=W+Ay
+-----END PGP SIGNATURE-----
+
+--=-8FFJmMBqDxhmn1uU5hPr--
