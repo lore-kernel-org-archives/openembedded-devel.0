@@ -1,32 +1,21 @@
-Received: from snvl-smtp1.trimble.com ([155.63.64.31])
+Received: from mailrelay3.sunrise.ch ([194.158.229.31]
+	helo=smtp-be-01.be08.sunrise.ch)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Bernard_Mentink@trimble.com>) id 1QnfQx-00022Q-BL
+	(envelope-from <dv@vollmann.ch>) id 1QngHN-00038T-8V
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Aug 2011 01:28:35 +0200
-Received: (qmail 13232 invoked by uid 501); 31 Jul 2011 16:24:14 -0700
-Received: from 10.3.0.166 by snvl-smtp1.trimble.com (envelope-from
-	<Bernard_Mentink@trimble.com>, uid 108) with qmail-scanner-2.08 
-	(clamdscan: 0.97.2/13382. avast: v3.2.0/110730-1. sophie:
-	3.06/3.22.0/4.68. spamassassin: 3.3.1. Clear:RC:1(10.3.0.166):. 
-	Processed in 0.0444 secs); 31 Jul 2011 23:24:14 -0000
-Received: from unknown (HELO nzc-ap-xch-02.ap.trimblecorp.net) (10.3.0.166)
-	by snvl-smtp1.trimble.com with SMTP; 31 Jul 2011 16:24:14 -0700
+	Mon, 01 Aug 2011 02:22:45 +0200
+Received: from [192.168.26.14] (212-98-43-140.static.adslpremium.ch
+	[212.98.43.140])
+	by smtp-be-01.be08.sunrise.ch (8.13.1/8.12.10) with ESMTP id
+	p6VMU7OW022915; Mon, 1 Aug 2011 00:30:08 +0200
+Message-ID: <4E35D761.1000202@vollmann.ch>
+Date: Mon, 01 Aug 2011 00:29:53 +0200
+From: Detlef Vollmann <dv@vollmann.ch>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.18) Gecko/20110617 Thunderbird/3.1.11
 MIME-Version: 1.0
-x-mimeole: Produced By Microsoft Exchange V6.5
-Date: Mon, 1 Aug 2011 11:24:12 +1200
-Message-ID: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A692@nzc-ap-xch-02.ap.trimblecorp.net>
-In-Reply-To: <201108011117.04548.manningc2@actrix.gen.nz>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Serial Console name for i.mx31
-Thread-Index: AcxP1/prD4IVKe3QTqSD33e+pf5ThQAACl3Q
-References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A5EB@nzc-ap-xch-02.ap.trimblecorp.net>
-	<F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A657@nzc-ap-xch-02.ap.trimblecorp.net>
-	<201108011117.04548.manningc2@actrix.gen.nz>
-From: "Bernard Mentink" <Bernard_Mentink@trimble.com>
-To: "Charles Manning" <manningc2@actrix.gen.nz>,
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: Serial Console name for i.mx31
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [2011.03-maintenance] Bogus check in kernel.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,148 +29,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Jul 2011 23:28:35 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 01 Aug 2011 00:22:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-=20
-Hi Charles,
+kernel.bbclass has the following in kernel_do_compile:
+   oe_runmake include/linux/version.h CC="${KERNEL_CC}" LD="${KERNEL_LD}"
+   if [ "${KERNEL_MAJOR_VERSION}" != "2.6" ]; then
+           oe_runmake dep CC="${KERNEL_CC}" LD="${KERNEL_LD}"
+   fi
 
-Thanks, but I thought that it was obvious that I am hooked upto the 1st
-imx31 serial port as I am using ttymxc0 .. ;-)
-I have tried seeing if I am getting output on any other serial port (we
-have 4 of the 5 brought out to connectors ..)
+The check for KERNEL_MAJOR_VERSION here is bogus, it will always
+be "None", because the expansion of KERNEL_MAJOR_VERSION requires
+include/linux/version.h, but that file doesn't exist when the
+variable is expanded.
+The problem doesn't cause any harm here, as "make dep" on newer
+kernels just issues a warning, but it irritates once you look at
+run.do_compile for hunting down any other errors...
 
-The example .config file for the imx shows a kernel argument of
-"console=3Dttymxc0,115200" with no parity/bits setting so I don't think
-That will make any difference ... But I will try it.
+If anybody cares, I'll provide a patch that just calls "make dep"
+unconditionally.
 
-Cheers,
-B.
-
-
-
-
------Original Message-----
-From: Charles Manning [mailto:manningc2@actrix.gen.nz]=20
-Sent: Monday, 1 August 2011 11:17 a.m.
-To: openembedded-devel@lists.openembedded.org
-Cc: Bernard Mentink
-Subject: Re: [oe] Serial Console name for i.mx31
-
-Bernie
-
-You have to hook up to the UART that is wired to what you're watching.
-Nobody on this list knows what serial port you are connected to.
-
-NB That the early console stuff is set up as a console through console
-initialisation. THis is not the same as setting up the serial ports for
-driver usage.
-
-As for the actual setting, it does not look good compared to what I am
-used to because it does not set all the parameters.
-
-console=3Dttymxc0,115200n8
-
-But what actually is used will depend on the console setup (search for
-console in the imx31 serial driver code.
-
-
-
-On Monday 01 August 2011 10:44:07 Bernard Mentink wrote:
-> Hi,
->
-> Can anyone verify what the kernel command line option should be to use
-> the first imx31 uart? As far as I can tell it is
-> "console=3Dttymxc0,115200"
->
-> The reason I ask, is that I am seeing the kernel messages in the ram
-> kernel ring buffer, but not seing them come out the serial console.
->
-> I am porting linux to our own hardware which is similar to the LogicPD
-> LiteKit platform (I have compiled the kernel for this platform ..)
->
-> Debugging into the serial driver in ../drivers/serial/mx31  .. I see
-the
-> function init_serial_init() being called ( .. and it's printk message
-is
-> in the buffer) but I am not seeing the serial_imx_probe() being called
-> ..
->
-> I do not understand the the registering of platform drivers enough to
-> work out how the kernel connects the diver with the hardware .... Can
-> someone enlighten me on how to debug this further ..... Or even better
-> just tell me to use the correct command line option and it all bursts
-> into life  :-)
->
-> Thanks,
-> Bernie
->
-> In addition:
->
-> I added the earlyprintk command to the kernel command line and I do
-see
-> these messages. i.e:
->
-> Starting kernel ...
->
-> Uncompressing Linux... done, booting the kernel.
-> Linux version 2.6.36.1 (bmentink@2570-ArchBox) (gcc version 4.5.3
-> 20110311 (prerelease) (GCC) ) #7 P
-> REEMPT Mon Aug 1 09:51:34 NZST 2011
-> CPU: ARMv6-compatible processor [4107b364] revision 4 (ARMv6TEJ),
-> cr=3D00c5387f
-> CPU: VIPT nonaliasing data cache, VIPT nonaliasing instruction cache
-> Machine: LogicPD i.MX31 SOM
-> bootconsole [earlycon0] enabled
-> Memory policy: ECC disabled, Data cache writeback
-> Built 1 zonelists in Zone order, mobility grouping on.  Total pages:
-> 32512
-> Kernel command line: console=3Dttymxc,115200
-> earlyprintk=3Dserial,ttymxc0,115200,keep
-> PID hash table entries: 512 (order: -1, 2048 bytes)
-> Dentry cache hash table entries: 16384 (order: 4, 65536 bytes)
-> Inode-cache hash table entries: 8192 (order: 3, 32768 bytes)
-> Memory: 128MB =3D 128MB total
-> Memory: 126744k/126744k available, 4328k reserved, 0K highmem
-> Virtual kernel memory layout:
->     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
->     fixmap  : 0xfff00000 - 0xfffe0000   ( 896 kB)
->     DMA     : 0xffc00000 - 0xffe00000   (   2 MB)
->     vmalloc : 0xc8800000 - 0xf4000000   ( 696 MB)
->     lowmem  : 0xc0000000 - 0xc8000000   ( 128 MB)
->     modules : 0xbf000000 - 0xc0000000   (  16 MB)
->       .init : 0xc0008000 - 0xc001e000   (  88 kB)
->       .text : 0xc001e000 - 0xc02e1000   (2828 kB)
->       .data : 0xc02f6000 - 0xc030c6e0   (  90 kB)
-> Hierarchical RCU implementation.
->         RCU-based detection of stalled CPUs is disabled.
->         Verbose stalled-CPUs detection is disabled.
-> NR_IRQS:180
-> MXC IRQ initialized
-> MXC GPIO hardware
->
-> So it seems there is nothing wrong with the "ttymxc0" port assignment
-> ... It's just the main serial console is just not working ..
->
-> Cheers,
-> B.
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
+Regards,
+   Detlef
 
 
