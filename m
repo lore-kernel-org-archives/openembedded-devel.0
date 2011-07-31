@@ -1,30 +1,27 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from snvl-smtp1.trimble.com ([155.63.64.31])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <agnel.joel@gmail.com>) id 1QndbY-0004gQ-Bp
+	(envelope-from <Bernard_Mentink@trimble.com>) id 1QndxT-0008UX-Fj
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 31 Jul 2011 23:31:24 +0200
-Received: by gxk3 with SMTP id 3so3298543gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Jul 2011 14:27:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=oTB8BZmPRGrzJaG6DDm4CAmOpziWDe5PGTdEYuMbL4c=;
-	b=H05ZVd0U05ViEDCoiDkAvfyvZ5948+vffx50hb3EgontCXC3DPbIVH1aRiqiH7yTWn
-	2OBNJB7iEG3JGj7rrAC+iXbUdboPC8sQNnctDJdrrekzt09f5OVo/uhTBDMGm3P1InQC
-	5SpKOiBPD1eOLk/7Kut5eslJxBakU5E2ZqaPI=
-Received: by 10.101.165.40 with SMTP id s40mr2730958ano.23.1312147624232;
-	Sun, 31 Jul 2011 14:27:04 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id v9sm4309309anv.30.2011.07.31.14.27.02
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 31 Jul 2011 14:27:03 -0700 (PDT)
-From: Joel A Fernandes <agnel.joel@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 31 Jul 2011 16:21:09 -0500
-Message-Id: <1312147269-2099-1-git-send-email-agnel.joel@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: joelagnel@ti.com, beagleboard@googlegroups.com, jdk@ti.com, k-kooi@ti.com
-Subject: [PATCH v2] gst-plugins-good: v4l2src: Make Leapoard Imaging VGA Camera work out of the box
+	Sun, 31 Jul 2011 23:54:03 +0200
+Received: (qmail 23458 invoked by uid 501); 31 Jul 2011 14:49:42 -0700
+Received: from 10.3.0.166 by snvl-smtp1.trimble.com (envelope-from
+	<Bernard_Mentink@trimble.com>, uid 108) with qmail-scanner-2.08 
+	(clamdscan: 0.97.2/13382. avast: v3.2.0/110730-1. sophie:
+	3.06/3.22.0/4.68. spamassassin: 3.3.1. Clear:RC:1(10.3.0.166):. 
+	Processed in 0.012162 secs); 31 Jul 2011 21:49:42 -0000
+Received: from unknown (HELO nzc-ap-xch-02.ap.trimblecorp.net) (10.3.0.166)
+	by snvl-smtp1.trimble.com with SMTP; 31 Jul 2011 14:49:41 -0700
+MIME-Version: 1.0
+x-mimeole: Produced By Microsoft Exchange V6.5
+Date: Mon, 1 Aug 2011 09:49:39 +1200
+Message-ID: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7A5EB@nzc-ap-xch-02.ap.trimblecorp.net>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: Serial Console name for i.mx31
+Thread-Index: AcxPy79qVTNBJrIwTR24WgL9ktGKJw==
+From: "Bernard Mentink" <Bernard_Mentink@trimble.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Serial Console name for i.mx31
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,97 +35,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Jul 2011 21:31:24 -0000
+X-List-Received-Date: Sun, 31 Jul 2011 21:54:03 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Format enumeration in Gstreamer expects drivers to implement VIDIOC_ENUM_FMT and if not, it calls
-VIDIOC_TRY_FMT on a set of "emulated formats" which could be unsupported resulting in failure of
-the format negotiation stage [1]
 
-We add UYVY to the set of formats making the mt9v113 sensor in this camera board and other sensors
-that don't support the emulated formats work out-of-the box without needing a caps filter element
+Hi,
 
-Upstream-Status: Inappropriate
-- This patch is a quick work around for a limitation of the ISP driver's lack of support of the
-VIDIOC_ENUM_FMT IOCTL [2]
+Can anyone verify what the kernel command line option should be to use
+the first imx31 uart? As far as I can tell it is
+"console=3Dttymxc0,115200"
 
-[1] http://lists.freedesktop.org/archives/gstreamer-devel/2011-July/032425.html
-[2] http://www.mail-archive.com/linux-media@vger.kernel.org/msg29718.html
+The reason I ask, is that I am seeing the kernel messages in the ram
+kernel ring buffer, but not seing them come out the serial console.
 
-Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
----
-Changes since v1:
-* Added Upstream-Status
+I am porting linux to our own hardware which is similar to the LogicPD
+LiteKit platform (I have compiled the kernel for this platform ..)
 
- ...-UYVY-color-format-to-the-list-of-enumera.patch |   43 ++++++++++++++++++++
- recipes/gstreamer/gst-plugins-good_0.10.28.bb      |    4 +-
- 2 files changed, 46 insertions(+), 1 deletions(-)
- create mode 100644 recipes/gstreamer/gst-plugins-good/0001-v4l2src-Add-UYVY-color-format-to-the-list-of-enumera.patch
+Debugging into the serial driver in ../drivers/serial/mx31  .. I see the
+function init_serial_init() being called ( .. and it's printk message is
+in the buffer)
+but I am not seeing the serial_imx_probe() being called ..
 
-diff --git a/recipes/gstreamer/gst-plugins-good/0001-v4l2src-Add-UYVY-color-format-to-the-list-of-enumera.patch b/recipes/gstreamer/gst-plugins-good/0001-v4l2src-Add-UYVY-color-format-to-the-list-of-enumera.patch
-new file mode 100644
-index 0000000..88a0125
---- /dev/null
-+++ b/recipes/gstreamer/gst-plugins-good/0001-v4l2src-Add-UYVY-color-format-to-the-list-of-enumera.patch
-@@ -0,0 +1,43 @@
-+From d5a1f365bfd4420912735709bcb8004d3ad7226c Mon Sep 17 00:00:00 2001
-+From: Joel A Fernandes <agnel.joel@gmail.com>
-+Date: Fri, 29 Jul 2011 17:23:43 -0500
-+Subject: [PATCH] v4l2src: Add UYVY color format to the list of enumerations
-+
-+OMAP3 ISP returns -EINVAL for VIDIOC_ENUM_FMT ioctl on video node. Due to this, format negotiation fails. This adds UYVY format to the list of enumerations.
-+
-+Signed-off-by: Joel A Fernandes <agnel.joel@gmail.com>
-+---
-+ sys/v4l2/gstv4l2object.c |   17 +++++++++++++++++
-+ 1 files changed, 17 insertions(+), 0 deletions(-)
-+
-+diff --git a/sys/v4l2/gstv4l2object.c b/sys/v4l2/gstv4l2object.c
-+index 7e15489..e04c0fd 100644
-+--- a/sys/v4l2/gstv4l2object.c
-++++ b/sys/v4l2/gstv4l2object.c
-+@@ -1025,6 +1025,23 @@ gst_v4l2_object_fill_format_list (GstV4l2Object * v4l2object)
-+         (GCompareFunc) format_cmp_func);
-+   }
-+ 
-++/* Add UYVY format to the list of enumerations */
-++  format = g_new0 (struct v4l2_fmtdesc, 1);
-++  format->type = (enum v4l2_buf_type)-1;
-++  format->index = n;
-++  format->flags = 0;
-++  format->pixelformat = V4L2_PIX_FMT_UYVY;
-++  v4l2object->formats = g_slist_insert_sorted (v4l2object->formats, format,
-++      (GCompareFunc) format_cmp_func);
-++
-++  GST_INFO_OBJECT (v4l2object->element, "index:       %u", format->index);
-++  GST_INFO_OBJECT (v4l2object->element, "type:        %d", format->type);
-++  GST_INFO_OBJECT (v4l2object->element, "flags:       %08x", format->flags);
-++  GST_INFO_OBJECT (v4l2object->element, "description: '%s'",
-++      format->description);
-++  GST_INFO_OBJECT (v4l2object->element, "pixelformat: %" GST_FOURCC_FORMAT,
-++        GST_FOURCC_ARGS (format->pixelformat));
-++
-+ #ifndef GST_DISABLE_GST_DEBUG
-+   {
-+     GSList *l;
-+-- 
-+1.7.0.4
-+
-diff --git a/recipes/gstreamer/gst-plugins-good_0.10.28.bb b/recipes/gstreamer/gst-plugins-good_0.10.28.bb
-index a398f4c..b93236b 100644
---- a/recipes/gstreamer/gst-plugins-good_0.10.28.bb
-+++ b/recipes/gstreamer/gst-plugins-good_0.10.28.bb
-@@ -1,6 +1,8 @@
- require gst-plugins.inc
- 
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
-+
-+SRC_URI += "file://0001-v4l2src-Add-UYVY-color-format-to-the-list-of-enumera.patch"
- 
- SRC_URI[archive.md5sum] = "6ef1588921f59d85c44ee2e49a3c97a0"
- SRC_URI[archive.sha256sum] = "adfbce68b9fbadb7a7aeda2227af6afe1928ef025af4158726617b9d6834b028"
--- 
-1.7.0.4
+I do not understand the the registering of platform drivers enough to
+work out how the kernel connects the diver with the hardware .... Can
+someone enlighten me
+on how to debug this further ..... Or even better just tell me to use
+the correct command line option and it all bursts into life  :-)
+
+Thanks,
+Bernie=20
+
+
+
 
 
 
