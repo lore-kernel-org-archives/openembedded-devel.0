@@ -1,24 +1,34 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1QnpMH-0002tg-7j
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Aug 2011 12:04:25 +0200
-Received: by wyg30 with SMTP id 30so1556057wyg.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QnpOu-000340-F8 for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Aug 2011 12:07:08 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QnpKg-0001xh-Qz for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Aug 2011 12:02:46 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Aug 2011 12:02:46 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Aug 2011 03:00:03 -0700 (PDT)
-Received: by 10.227.13.77 with SMTP id b13mr5604892wba.54.1312192803390;
-	Mon, 01 Aug 2011 03:00:03 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id 20sm4035233wbw.19.2011.08.01.03.00.02
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 01 Aug 2011 03:00:02 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Mon, 01 Aug 2011 12:02:46 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Aug 2011 11:59:58 +0200
-Message-Id: <1312192798-18259-1-git-send-email-koen@openembedded.org>
-X-Mailer: git-send-email 1.6.6.1
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: [PATCH] gtk-icon-cache bbclass: only add runtime dependencies on hicolor-icon-theme when installing icons
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 01 Aug 2011 12:02:30 +0200
+Message-ID: <j15tjm$3pe$1@dough.gmane.org>
+References: <4E36790A.4020406@nedap.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:5.0) Gecko/20110624 Thunderbird/5.0
+In-Reply-To: <4E36790A.4020406@nedap.com>
+X-Enigmail-Version: 1.2
+Subject: Re: bblayers and PRINC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,53 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Aug 2011 10:04:26 -0000
+X-List-Received-Date: Mon, 01 Aug 2011 10:07:08 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Also import a fix from OE-core for setting the loader dir.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Tested with gnome-icon-theme and libsoup recipes on angstrom.
+Op 01-08-11 11:59, Jaap de Jong schreef:
+> Hi All,
+> 
+> if created my own udev_151.bbappend to change some of the files in the original package:
+> 
+> THISDIR := "${@os.path.dirname(bb.data.getVar('FILE', d, True))}" FILESPATHBASE_prepend := "${THISDIR}/${PN}-${PV}:"
+> 
+> #PRINC = 1 PR .= ".1"
+> 
+> PRINC doesn't seem to work.
 
-Signed-off-by: Koen Kooi <koen@openembedded.org>
----
- classes/gtk-icon-cache.bbclass |   11 +++++++----
- 1 files changed, 7 insertions(+), 4 deletions(-)
+PRINC only works with an OE-core setup similar like this one: http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-angstrom/tree/README
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-diff --git a/classes/gtk-icon-cache.bbclass b/classes/gtk-icon-cache.bbclass
-index 2449e95..d9b5d1b 100644
---- a/classes/gtk-icon-cache.bbclass
-+++ b/classes/gtk-icon-cache.bbclass
-@@ -1,6 +1,4 @@
- FILES_${PN} += "${datadir}/icons/hicolor"
--# Only add runtime dependency on hicolor-icon-theme for target recipes
--RDEPENDS_${PN} += "${@['', 'hicolor-icon-theme']['${PN}' == '${BPN}']}"
- 
- # This could run on the host as icon cache files are architecture independent,
- # but there is no gtk-update-icon-cache built natively.
-@@ -10,7 +8,7 @@ if [ "x$D" != "x" ]; then
- fi
- 
- # Update the pixbuf loaders in case they haven't been registered yet
--gdk-pixbuf-query-loaders > /etc/gtk-2.0/gdk-pixbuf.loaders
-+GDK_PIXBUF_MODULEDIR=${libdir}/gdk-pixbuf-2.0/2.10.0/loaders gdk-pixbuf-query-loaders --update-cache
- 
- for icondir in /usr/share/icons/* ; do
-     if [ -d $icondir ] ; then
-@@ -35,7 +33,12 @@ python populate_packages_append () {
- 		icon_dir = '%s/%s/%s/icons' % (pkgdest, pkg, bb.data.getVar('datadir', d, 1))
- 		if not os.path.exists(icon_dir):
- 			continue
--		
-+
-+		bb.note("adding hicolor-icon-theme dependency to %s" % pkg)	
-+		rdepends = bb.data.getVar('RDEPENDS', d, 1)
-+		rdepends += "hicolor-icon-theme"
-+		bb.data.setVar('RDEPENDS', rdepends, d)
-+	
- 		bb.note("adding gtk-icon-cache postinst and postrm scripts to %s" % pkg)
- 		
- 		postinst = bb.data.getVar('pkg_postinst_%s' % pkg, d, 1) or bb.data.getVar('pkg_postinst', d, 1)
--- 
-1.6.6.1
+iD8DBQFONnm2MkyGM64RGpERAjbLAJ9m/I8RL7W0EWGQv2NZ1ow3O8Z37ACfQnUR
+++Y15B6zYAdo5FxsZg8haFA=
+=3BpN
+-----END PGP SIGNATURE-----
 
 
 
