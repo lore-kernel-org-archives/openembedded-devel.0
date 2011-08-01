@@ -1,24 +1,29 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail2.eads.net ([80.156.45.114] helo=mail.eads.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>)
-	id 1QnosP-0001oQ-Du; Mon, 01 Aug 2011 11:33:33 +0200
-Received: from cambridge.roku.com ([81.142.160.137] helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.72) (envelope-from <philb@gnu.org>)
-	id 1QnooF-0000ZX-Js; Mon, 01 Aug 2011 11:29:15 +0200
-From: Phil Blundell <philb@gnu.org>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Date: Mon, 01 Aug 2011 10:29:14 +0100
-In-Reply-To: <4E367018.7020709@dresearch-fe.de>
-References: <4E364EB1.8050800@dresearch-fe.de>
-	<1312189251.30326.498.camel@phil-desktop>
-	<4E367018.7020709@dresearch-fe.de>
-X-Mailer: Evolution 3.0.2- 
-Message-ID: <1312190955.30326.508.camel@phil-desktop>
-Mime-Version: 1.0
-Cc: Koen Kooi <koen@openembedded.org>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: unnecessary dependencies?
+	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
+	id 1Qnouv-0001vg-86 for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Aug 2011 11:36:09 +0200
+Received: from gsx3071-vs5.mxchg.m.corp ([53.147.176.148])
+	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id p719VswK010929
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 1 Aug 2011 11:31:55 +0200
+Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
+	gsx3071-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Mon, 1 Aug 2011 11:31:50 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Mon, 1 Aug 2011 11:31:50 +0200
+Message-ID: <0C757E680E33864AB113392C7E83F910BE51C4@GSX300A.mxchg.m.corp>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: 2011.03-maintenance: eglibc-binary-localedata packages missing
+	on image
+Thread-Index: AcxQLdbj0xBF8M90R7GQsHc7Qq9t5Q==
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 01 Aug 2011 09:31:50.0054 (UTC)
+	FILETIME=[D72A8460:01CC502D]
+Subject: 2011.03-maintenance: eglibc-binary-localedata packages missing on image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,31 +37,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Aug 2011 09:33:33 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 01 Aug 2011 09:36:09 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2011-08-01 at 11:21 +0200, Steffen Sledz wrote:
-> On 01.08.2011 11:00, Phil Blundell wrote:
-> > On Mon, 2011-08-01 at 08:58 +0200, Steffen Sledz wrote:
-> >> We are working on an application which requires libgssdp.
-> >>
-> >> libgssdp requires libsoup, libsoup inherits gnome, gnome inherits gtk-icon-cache, gtk-icon-cache rdepends hicolor-icon-theme. So this icon theme (probably a lot more gnome stuff) unnecessarily allocates place in our image (we do not have a GUI). :(
-> >>
-> >> Are these deps really necessary?
-> > 
-> > It sounds as though libsoup possibly shouldn't be inheriting gnome.  Can
-> > you figure out whether gtk-icon-cache is actually doing anything useful
-> > in this case?
-> 
-> "libsoup is an HTTP client/server library" only. I can't really see any need for GUI componenets.
+Hello,
 
-Indeed, though the description alone probably isn't a strong basis on
-which to make that decision.  Does it actually install any icons?  If
-no, it doesn't need gtk-icon-cache.
+we want to install our generated locales on our image offline, therefor
+we use following settings:
 
-p.
+local.conf:
 
+ENABLE_BINARY_LOCALE_GENERATION =3D "1"
+LOCALE_GENERATION_WITH_CROSS-LOCALEDEF =3D "1"
+GLIBC_INTERNAL_USE_BINARY_LOCALE =3D "compile"
+GLIBC_GENERATE_LOCALES =3D "en_US.UTF-8 en_GB.UTF-8 de_DE.UTF-8
+de_CH.UTF-8 es_ES.
+UTF-8 fr_FR.UTF-8 fr_CH.UTF-8 it_IT.UTF-8 it_CH.UTF-8"
 
+xx-image.bb:
+
+IMAGE_LINGUAS =3D "en-us en-gb de-de de-ch es-es fr-fr fr-ch it-it =
+it-ch"
+
+ROOTFS_POSTPROCESS_COMMAND +=3D "install_linguas;"
+
+The packages locale-base-* are installed properly, but the
+eglibc-binary-localedata are not installed in the image, so the needed
+data for the locale support are missing.
+
+If we examine the locale-base- packages with dpkg, there is an entry
+"eglibc-binary-localedata-..." in "provides" this seem to be wrong.
+(should that not be a dependency only?)
+
+dpkg-deb -I locale-base-de-de_2.12-r21.8+svnr12323.9_armv7a.ipk
+ new debian package, version 2.0.
+ size 906 bytes: control archive=3D 608 bytes.
+     808 bytes,    14 lines      control             =20
+ Package: locale-base-de-de
+ Version: 2.12-r21.8+svnr12323.9
+ Description: Embedded GNU C Library
+ Section: libs
+ Priority: required
+ Maintainer: Angstrom Developers <angstrom-distro-devel@linuxtogo.org>
+ License: LGPL
+ Architecture: armv7a
+ OE: eglibc
+ Homepage: http://www.eglibc.org/home
+ Build: <unknown>/9426
+ Depends: eglibc-binary-localedata-de.de
+ Provides: virtual-locale-de-de, virtual-locale-de,
+eglibc-binary-localedata-de.de
+ Source: svn://svn.eglibc.org/branches;module=3Deglibc-2_12;proto=3Dsvn
+file://eglibc-svn-arm-lowlevellock-include-tls.patch
+file://IO-acquire-lock-fix.patch file://shorten-build-commands.patch
+file://sh4_set_fpscr_2.12.patch file://sh4_local-fpscr_values.patch
+file://eglibc-dont-cache-slibdir.patch
+file://armv4-eabi-compile-fix.patch file://etc/ld.so.conf
+file://generate-supported.mk=20
+
+What is going wrong here ?
 
 
