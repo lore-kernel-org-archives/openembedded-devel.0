@@ -1,27 +1,29 @@
-Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1Qnpew-0003TI-Hd
+	(envelope-from <sledz@dresearch-fe.de>) id 1Qnsey-00027C-3q
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Aug 2011 12:23:43 +0200
-Received: from nvs0066 ([10.91.8.1]) by smtp.nedap.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Mon, 1 Aug 2011 12:19:19 +0200
-X-TM-IMSS-Message-ID: <61c93538000291f8@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 61c93538000291f8 ;
-	Mon, 1 Aug 2011 12:18:20 +0200
-Message-ID: <4E367DA8.3030307@nedap.com>
-Date: Mon, 01 Aug 2011 12:19:20 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.18) Gecko/20110617 Lightning/1.0b2 Thunderbird/3.1.11
+	Mon, 01 Aug 2011 15:35:56 +0200
+Received: by ewy5 with SMTP id 5so3016881ewy.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Aug 2011 06:31:36 -0700 (PDT)
+Received: by 10.204.147.138 with SMTP id l10mr1316267bkv.113.1312205495859;
+	Mon, 01 Aug 2011 06:31:35 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id t19sm1323091bku.40.2011.08.01.06.31.34
+	(version=SSLv3 cipher=OTHER); Mon, 01 Aug 2011 06:31:34 -0700 (PDT)
+Message-ID: <4E36AAB5.4080307@dresearch-fe.de>
+Date: Mon, 01 Aug 2011 15:31:33 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:5.0) Gecko/20110624 Thunderbird/5.0
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <4E36790A.4020406@nedap.com> <j15tjm$3pe$1@dough.gmane.org>
-In-Reply-To: <j15tjm$3pe$1@dough.gmane.org>
-X-OriginalArrivalTime: 01 Aug 2011 10:19:19.0449 (UTC)
-	FILETIME=[7989B090:01CC5034]
-Subject: Re: bblayers and PRINC
+To: openembedded-devel@lists.openembedded.org
+References: <1312192798-18259-1-git-send-email-koen@openembedded.org>
+In-Reply-To: <1312192798-18259-1-git-send-email-koen@openembedded.org>
+X-Enigmail-Version: 1.2
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: Re: [PATCH] gtk-icon-cache bbclass: only add runtime dependencies on hicolor-icon-theme when installing icons
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,33 +37,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Aug 2011 10:23:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 01 Aug 2011 13:35:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 08/01/2011 12:02 PM, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 01-08-11 11:59, Jaap de Jong schreef:
->> Hi All,
->>
->> if created my own udev_151.bbappend to change some of the files in the original package:
->>
->> THISDIR := "${@os.path.dirname(bb.data.getVar('FILE', d, True))}" FILESPATHBASE_prepend := "${THISDIR}/${PN}-${PV}:"
->>
->> #PRINC = 1 PR .= ".1"
->>
->> PRINC doesn't seem to work.
-> PRINC only works with an OE-core setup similar like this one: http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-angstrom/tree/README
->
+On 01.08.2011 11:59, Koen Kooi wrote:
+> Also import a fix from OE-core for setting the loader dir.
+> 
+> Tested with gnome-icon-theme and libsoup recipes on angstrom.
+> 
+> Signed-off-by: Koen Kooi <koen@openembedded.org>
 
-I know PRINC only works with oe-core, that's why I'm using `PR .= ".1"`
-That works with all my other *.bbappend recipes but not for udev; if you 
-look at the bitbake log at the end you can see that it does some strange 
-things...
-At this moment I must stay with release-2010.12.
+Acked-by: Steffen Sledz <sledz@dresearch-fe.de>
 
-Jaap
+Thx for this. Would be nice, if this patch could find it's way to 2011.03-maintenance branch too.
+
+> ---
+>  classes/gtk-icon-cache.bbclass |   11 +++++++----
+>  1 files changed, 7 insertions(+), 4 deletions(-)
+> 
+> diff --git a/classes/gtk-icon-cache.bbclass b/classes/gtk-icon-cache.bbclass
+> index 2449e95..d9b5d1b 100644
+> --- a/classes/gtk-icon-cache.bbclass
+> +++ b/classes/gtk-icon-cache.bbclass
+> @@ -1,6 +1,4 @@
+>  FILES_${PN} += "${datadir}/icons/hicolor"
+> -# Only add runtime dependency on hicolor-icon-theme for target recipes
+> -RDEPENDS_${PN} += "${@['', 'hicolor-icon-theme']['${PN}' == '${BPN}']}"
+>  
+>  # This could run on the host as icon cache files are architecture independent,
+>  # but there is no gtk-update-icon-cache built natively.
+> @@ -10,7 +8,7 @@ if [ "x$D" != "x" ]; then
+>  fi
+>  
+>  # Update the pixbuf loaders in case they haven't been registered yet
+> -gdk-pixbuf-query-loaders > /etc/gtk-2.0/gdk-pixbuf.loaders
+> +GDK_PIXBUF_MODULEDIR=${libdir}/gdk-pixbuf-2.0/2.10.0/loaders gdk-pixbuf-query-loaders --update-cache
+>  
+>  for icondir in /usr/share/icons/* ; do
+>      if [ -d $icondir ] ; then
+> @@ -35,7 +33,12 @@ python populate_packages_append () {
+>  		icon_dir = '%s/%s/%s/icons' % (pkgdest, pkg, bb.data.getVar('datadir', d, 1))
+>  		if not os.path.exists(icon_dir):
+>  			continue
+> -		
+> +
+> +		bb.note("adding hicolor-icon-theme dependency to %s" % pkg)	
+> +		rdepends = bb.data.getVar('RDEPENDS', d, 1)
+> +		rdepends += "hicolor-icon-theme"
+> +		bb.data.setVar('RDEPENDS', rdepends, d)
+> +	
+>  		bb.note("adding gtk-icon-cache postinst and postrm scripts to %s" % pkg)
+>  		
+>  		postinst = bb.data.getVar('pkg_postinst_%s' % pkg, d, 1) or bb.data.getVar('pkg_postinst', d, 1)
+
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
