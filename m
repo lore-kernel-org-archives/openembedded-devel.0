@@ -1,35 +1,27 @@
-Received: from mail-ey0-f178.google.com ([209.85.215.178])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <agnel.joel@gmail.com>) id 1QnuLO-0005f3-Uz
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1Qnz5G-0005bO-Mm
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Aug 2011 17:23:50 +0200
-Received: by eye4 with SMTP id 4so6440023eye.37
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Aug 2011 08:19:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=pt/SUGybhvVwrFyT5PGNDA6UvagafYoCNzsuld6c5tU=;
-	b=Z0StUObgjEn8S5qp0u+SBNQZuudSDIzAxVWJCP481VhJEkXB32l3K65wruOq2hFd8+
-	ua4txNPdo5swTOM7IOyFQ5MRy5IAfzcaCEQJWfRRIrq4e0QkRsj5PcA6kA95u9S9uNu9
-	G+trTB6udNBK6Ugi10fwcCDcxLngUCnUn/FFY=
+	Mon, 01 Aug 2011 22:27:30 +0200
+Received: (qmail invoked by alias); 01 Aug 2011 20:23:10 -0000
+Received: from p4FDF0322.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.223.3.34]
+	by mail.gmx.net (mp013) with SMTP; 01 Aug 2011 22:23:10 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1+aFbFmZdea1byqI9IWcEMj8rpTzd+eMqopRr7dc1
+	MYVjXfvDp+XnEv
+From: Andreas Mueller <schnitzeltony@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 1 Aug 2011 22:26:03 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.35.13-92.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <1311960660-7876-1-git-send-email-schnitzeltony@gmx.de>
+	<1311963724.3882.85.camel@mattotaupa>
+In-Reply-To: <1311963724.3882.85.camel@mattotaupa>
 MIME-Version: 1.0
-Received: by 10.213.3.198 with SMTP id 6mr790219ebo.15.1312211970296; Mon, 01
-	Aug 2011 08:19:30 -0700 (PDT)
-Received: by 10.213.113.196 with HTTP; Mon, 1 Aug 2011 08:19:30 -0700 (PDT)
-In-Reply-To: <4E365C54.3000205@gmail.com>
-References: <1311980287-31536-1-git-send-email-agnel.joel@gmail.com>
-	<BAF0F415-E659-485C-855F-271AD4ABE73B@beagleboard.org>
-	<CAD=GYpbN-8O1yWnbPGE_XLThnBSAoKosw2998Hq1MqWMjbMQAg@mail.gmail.com>
-	<4E365C54.3000205@gmail.com>
-Date: Mon, 1 Aug 2011 10:19:30 -0500
-Message-ID: <CAD=GYpah28zXcTtMtWN-5LPKExfFBHJj+hVEDuK=UUjUqq5KJA@mail.gmail.com>
-From: Joel A Fernandes <agnel.joel@gmail.com>
-To: Vladimir Pantelic <vladoman@gmail.com>
-Cc: Jason Kridner <jdk@ti.com>, Joel A Fernandes <joelagnel@ti.com>,
-	beagleboard@googlegroups.com, Koen Kooi <koen@beagleboard.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [beagleboard] [PATCH] gst-plugins-good: v4l2src: Make Leapoard Imaging VGA Camera work out of the box
+Message-Id: <201108012226.03700.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: [meta-oe] iceauth: Import from oe-dev and minor cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,55 +35,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Aug 2011 15:23:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 01 Aug 2011 20:27:30 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-6"
+Content-Transfer-Encoding: 7bit
 
-Hi Vladimir,
+On Friday, July 29, 2011 08:22:04 PM Paul Menzel wrote:
+> Dear Andreas,
+> 
+> 
+> thank you for your patch.
+> 
+> Am Freitag, den 29.07.2011, 19:31 +0200 schrieb Andreas Mueller:
+> 
+> When importing from somewhere please always reference the used commit id
+> as requested in the guidelines [1]. Also mentioning the version in the
+> summary would be nice.
+> 
+> 	iceauth: Import 1.0.4 from oe.dev
+> 
+> > Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
+> > ---
+> > 
+> >  meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb |   10 ++++++++++
+> >  1 files changed, 10 insertions(+), 0 deletions(-)
+> >  create mode 100644 meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb
+> > 
+> > diff --git a/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb
+> > b/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb new file mode
+> > 100644
+> > index 0000000..e98c0cb
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb
+> > @@ -0,0 +1,10 @@
+> > +DESCRIPTION = "Tool for manipulating ICE protocol authorization records"
+> > +LIC_FILES_CHKSUM = "file://COPYING;md5=13f70acf3c27f5f834bbc954df775f8e"
+> 
+> What license is it?
+As you said: MIT-X is included by xorg-app-common.inc
+> 
+> > +PR = "${INC_PR}.0"
+> > +
+> > +DEPENDS += " libice"
+> 
+> This should go in front of PR according to the style guide [2].
+Do you want V2 with different sequence?
+> 
+> > +
+> > +require xorg-app-common.inc
+> > +
+> > +SRC_URI[md5sum] = "bb2e4d2611047f7c5a1a82ec956a9de4"
+> > +SRC_URI[sha256sum] =
+> > "0ee6fd4554f0131b1ed526ee00b9cf643e7dc97eb70fb51448848ef2f349938d"
+> 
+> I will try to make the updates in oe.dev and maybe you can resync
+> afterward.
+Sorry for the impatience, but I am about to send out a patch series for xfce48 
+and xfce4-session RDEPENDs on iceauth to work properly.
 
-On Mon, Aug 1, 2011 at 2:57 AM, Vladimir Pantelic <vladoman@gmail.com> wrot=
-e:
-> Joel A Fernandes wrote:
->
->>>> =A0+From d5a1f365bfd4420912735709bcb8004d3ad7226c Mon Sep 17 00:00:00 =
-2001
->>>> =A0+From: Joel A Fernandes<agnel.joel@gmail.com>
->>>> =A0+Date: Fri, 29 Jul 2011 17:23:43 -0500
->>>> =A0+Subject: [PATCH] v4l2src: Add UYVY color format to the list of
->>>> enumerations
->>>> =A0+
->>>> =A0+OMAP3 ISP returns -EINVAL for VIDIOC_ENUM_FMT ioctl on video node.=
- Due
->>>> to this, format negotiation fails. This adds UYVY format to the list o=
-f
->>>> enumerations.
->>>
->>> =A0I must be missing something, but what has negotation failure to do w=
-ith
->>> adding a new format? I would expect adding new formats not to have any
->>> effect if negotiation fails.
->>
->> The way it works is:
->>
->> Enumerate formats -> =A0Negotiate formats between source and sink pads
->> and set the format
->>
->> Enumerate formats doesn't return UYVY (The driver is supposed to
->> return this but ENUM_FMT ioctl is not implemented in ISP like I was
->> saying). Due to this, the negotiate function is either unable to find
->> a matching format on the sink pad (if you used a UYVY caps filter
->> element) or fails to set the format if you used a more general
->> element.
->
-> and why not make ENUM_FMT ioctl return what is needed??? Instead
-> of "hacking" the gst driver?
->
->
-
-That'll be a hack as well:
-http://www.mail-archive.com/linux-media@vger.kernel.org/msg29718.html
-
-Regards,
-Joel
+Andreas 
 
 
