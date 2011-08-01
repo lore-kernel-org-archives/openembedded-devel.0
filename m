@@ -1,29 +1,35 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-ey0-f178.google.com ([209.85.215.178])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1Qnsey-00027C-3q
+	(envelope-from <agnel.joel@gmail.com>) id 1QnuLO-0005f3-Uz
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Aug 2011 15:35:56 +0200
-Received: by ewy5 with SMTP id 5so3016881ewy.6
+	Mon, 01 Aug 2011 17:23:50 +0200
+Received: by eye4 with SMTP id 4so6440023eye.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Aug 2011 06:31:36 -0700 (PDT)
-Received: by 10.204.147.138 with SMTP id l10mr1316267bkv.113.1312205495859;
-	Mon, 01 Aug 2011 06:31:35 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116])
-	by mx.google.com with ESMTPS id t19sm1323091bku.40.2011.08.01.06.31.34
-	(version=SSLv3 cipher=OTHER); Mon, 01 Aug 2011 06:31:34 -0700 (PDT)
-Message-ID: <4E36AAB5.4080307@dresearch-fe.de>
-Date: Mon, 01 Aug 2011 15:31:33 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
+	Mon, 01 Aug 2011 08:19:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=pt/SUGybhvVwrFyT5PGNDA6UvagafYoCNzsuld6c5tU=;
+	b=Z0StUObgjEn8S5qp0u+SBNQZuudSDIzAxVWJCP481VhJEkXB32l3K65wruOq2hFd8+
+	ua4txNPdo5swTOM7IOyFQ5MRy5IAfzcaCEQJWfRRIrq4e0QkRsj5PcA6kA95u9S9uNu9
+	G+trTB6udNBK6Ugi10fwcCDcxLngUCnUn/FFY=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1312192798-18259-1-git-send-email-koen@openembedded.org>
-In-Reply-To: <1312192798-18259-1-git-send-email-koen@openembedded.org>
-X-Enigmail-Version: 1.2
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: Re: [PATCH] gtk-icon-cache bbclass: only add runtime dependencies on hicolor-icon-theme when installing icons
+Received: by 10.213.3.198 with SMTP id 6mr790219ebo.15.1312211970296; Mon, 01
+	Aug 2011 08:19:30 -0700 (PDT)
+Received: by 10.213.113.196 with HTTP; Mon, 1 Aug 2011 08:19:30 -0700 (PDT)
+In-Reply-To: <4E365C54.3000205@gmail.com>
+References: <1311980287-31536-1-git-send-email-agnel.joel@gmail.com>
+	<BAF0F415-E659-485C-855F-271AD4ABE73B@beagleboard.org>
+	<CAD=GYpbN-8O1yWnbPGE_XLThnBSAoKosw2998Hq1MqWMjbMQAg@mail.gmail.com>
+	<4E365C54.3000205@gmail.com>
+Date: Mon, 1 Aug 2011 10:19:30 -0500
+Message-ID: <CAD=GYpah28zXcTtMtWN-5LPKExfFBHJj+hVEDuK=UUjUqq5KJA@mail.gmail.com>
+From: Joel A Fernandes <agnel.joel@gmail.com>
+To: Vladimir Pantelic <vladoman@gmail.com>
+Cc: Jason Kridner <jdk@ti.com>, Joel A Fernandes <joelagnel@ti.com>,
+	beagleboard@googlegroups.com, Koen Kooi <koen@beagleboard.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [beagleboard] [PATCH] gst-plugins-good: v4l2src: Make Leapoard Imaging VGA Camera work out of the box
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,68 +43,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Aug 2011 13:35:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 01 Aug 2011 15:23:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 01.08.2011 11:59, Koen Kooi wrote:
-> Also import a fix from OE-core for setting the loader dir.
-> 
-> Tested with gnome-icon-theme and libsoup recipes on angstrom.
-> 
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
+Hi Vladimir,
 
-Acked-by: Steffen Sledz <sledz@dresearch-fe.de>
+On Mon, Aug 1, 2011 at 2:57 AM, Vladimir Pantelic <vladoman@gmail.com> wrot=
+e:
+> Joel A Fernandes wrote:
+>
+>>>> =A0+From d5a1f365bfd4420912735709bcb8004d3ad7226c Mon Sep 17 00:00:00 =
+2001
+>>>> =A0+From: Joel A Fernandes<agnel.joel@gmail.com>
+>>>> =A0+Date: Fri, 29 Jul 2011 17:23:43 -0500
+>>>> =A0+Subject: [PATCH] v4l2src: Add UYVY color format to the list of
+>>>> enumerations
+>>>> =A0+
+>>>> =A0+OMAP3 ISP returns -EINVAL for VIDIOC_ENUM_FMT ioctl on video node.=
+ Due
+>>>> to this, format negotiation fails. This adds UYVY format to the list o=
+f
+>>>> enumerations.
+>>>
+>>> =A0I must be missing something, but what has negotation failure to do w=
+ith
+>>> adding a new format? I would expect adding new formats not to have any
+>>> effect if negotiation fails.
+>>
+>> The way it works is:
+>>
+>> Enumerate formats -> =A0Negotiate formats between source and sink pads
+>> and set the format
+>>
+>> Enumerate formats doesn't return UYVY (The driver is supposed to
+>> return this but ENUM_FMT ioctl is not implemented in ISP like I was
+>> saying). Due to this, the negotiate function is either unable to find
+>> a matching format on the sink pad (if you used a UYVY caps filter
+>> element) or fails to set the format if you used a more general
+>> element.
+>
+> and why not make ENUM_FMT ioctl return what is needed??? Instead
+> of "hacking" the gst driver?
+>
+>
 
-Thx for this. Would be nice, if this patch could find it's way to 2011.03-maintenance branch too.
+That'll be a hack as well:
+http://www.mail-archive.com/linux-media@vger.kernel.org/msg29718.html
 
-> ---
->  classes/gtk-icon-cache.bbclass |   11 +++++++----
->  1 files changed, 7 insertions(+), 4 deletions(-)
-> 
-> diff --git a/classes/gtk-icon-cache.bbclass b/classes/gtk-icon-cache.bbclass
-> index 2449e95..d9b5d1b 100644
-> --- a/classes/gtk-icon-cache.bbclass
-> +++ b/classes/gtk-icon-cache.bbclass
-> @@ -1,6 +1,4 @@
->  FILES_${PN} += "${datadir}/icons/hicolor"
-> -# Only add runtime dependency on hicolor-icon-theme for target recipes
-> -RDEPENDS_${PN} += "${@['', 'hicolor-icon-theme']['${PN}' == '${BPN}']}"
->  
->  # This could run on the host as icon cache files are architecture independent,
->  # but there is no gtk-update-icon-cache built natively.
-> @@ -10,7 +8,7 @@ if [ "x$D" != "x" ]; then
->  fi
->  
->  # Update the pixbuf loaders in case they haven't been registered yet
-> -gdk-pixbuf-query-loaders > /etc/gtk-2.0/gdk-pixbuf.loaders
-> +GDK_PIXBUF_MODULEDIR=${libdir}/gdk-pixbuf-2.0/2.10.0/loaders gdk-pixbuf-query-loaders --update-cache
->  
->  for icondir in /usr/share/icons/* ; do
->      if [ -d $icondir ] ; then
-> @@ -35,7 +33,12 @@ python populate_packages_append () {
->  		icon_dir = '%s/%s/%s/icons' % (pkgdest, pkg, bb.data.getVar('datadir', d, 1))
->  		if not os.path.exists(icon_dir):
->  			continue
-> -		
-> +
-> +		bb.note("adding hicolor-icon-theme dependency to %s" % pkg)	
-> +		rdepends = bb.data.getVar('RDEPENDS', d, 1)
-> +		rdepends += "hicolor-icon-theme"
-> +		bb.data.setVar('RDEPENDS', rdepends, d)
-> +	
->  		bb.note("adding gtk-icon-cache postinst and postrm scripts to %s" % pkg)
->  		
->  		postinst = bb.data.getVar('pkg_postinst_%s' % pkg, d, 1) or bb.data.getVar('pkg_postinst', d, 1)
-
-
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+Regards,
+Joel
 
 
