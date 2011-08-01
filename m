@@ -1,24 +1,24 @@
 Received: from mailout-de.gmx.net ([213.165.64.22])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1Qnzf8-0006xS-Ov
+	(envelope-from <schnitzeltony@gmx.de>) id 1Qnzf9-0006xi-Bu
 	for openembedded-devel@lists.openembedded.org;
 	Mon, 01 Aug 2011 23:04:35 +0200
-Received: (qmail invoked by alias); 01 Aug 2011 21:00:14 -0000
+Received: (qmail invoked by alias); 01 Aug 2011 21:00:15 -0000
 Received: from p4FDF0322.dip.t-dialin.net (EHLO localhost.localdomain)
 	[79.223.3.34]
-	by mail.gmx.net (mp054) with SMTP; 01 Aug 2011 23:00:14 +0200
+	by mail.gmx.net (mp054) with SMTP; 01 Aug 2011 23:00:15 +0200
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/yiVMT1TvyGYAiONOfMZE1QyYFtCSPkiiROUwc6c
-	zdFqGR8PWYLI4C
+X-Provags-ID: V01U2FsdGVkX19vFr4vivhvmjnAElEetoQK0slQ1Lx+/ckVZIgUTv
+	wGIvb4bGMqe50c
 From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Aug 2011 23:02:53 +0200
-Message-Id: <1312232577-7948-16-git-send-email-schnitzeltony@gmx.de>
+Date: Mon,  1 Aug 2011 23:02:54 +0200
+Message-Id: <1312232577-7948-17-git-send-email-schnitzeltony@gmx.de>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1312232577-7948-1-git-send-email-schnitzeltony@gmx.de>
 References: <1312232577-7948-1-git-send-email-schnitzeltony@gmx.de>
 X-Y-GMX-Trusted: 0
-Subject: [meta-oe 15/19] thunar: Add initial recipe with version 1.2.2
+Subject: [meta-oe 16/19] xfdesktop: Add initial recipe with version 4.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,39 +34,37 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 01 Aug 2011 21:04:35 -0000
 
-* thunar crashes silently but since it is required by xfdesktop the patch is
-  send out
 
 Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
 ---
- .../thunar/thunar/relative-symlinks-docs.patch     |   28 ++++++++++++++++
- meta-xfce/recipes-xfce/thunar/thunar_1.2.2.bb      |   34 ++++++++++++++++++++
- 2 files changed, 62 insertions(+), 0 deletions(-)
- create mode 100644 meta-xfce/recipes-xfce/thunar/thunar/relative-symlinks-docs.patch
- create mode 100644 meta-xfce/recipes-xfce/thunar/thunar_1.2.2.bb
+ .../xfdesktop/relative-symlinks-docs.patch         |   28 ++++++++++++++++++++
+ .../recipes-xfce/xfdesktop/xfdesktop_4.8.2.bb      |   19 +++++++++++++
+ 2 files changed, 47 insertions(+), 0 deletions(-)
+ create mode 100644 meta-xfce/recipes-xfce/xfdesktop/xfdesktop/relative-symlinks-docs.patch
+ create mode 100644 meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.8.2.bb
 
-diff --git a/meta-xfce/recipes-xfce/thunar/thunar/relative-symlinks-docs.patch b/meta-xfce/recipes-xfce/thunar/thunar/relative-symlinks-docs.patch
+diff --git a/meta-xfce/recipes-xfce/xfdesktop/xfdesktop/relative-symlinks-docs.patch b/meta-xfce/recipes-xfce/xfdesktop/xfdesktop/relative-symlinks-docs.patch
 new file mode 100644
-index 0000000..26f35be
+index 0000000..fa70f6e
 --- /dev/null
-+++ b/meta-xfce/recipes-xfce/thunar/thunar/relative-symlinks-docs.patch
++++ b/meta-xfce/recipes-xfce/xfdesktop/xfdesktop/relative-symlinks-docs.patch
 @@ -0,0 +1,28 @@
-+From 3123ef0e38d18b6dfda644abeb4da48520aa7cb9 Mon Sep 17 00:00:00 2001
++From 90e191cc4719172aa84e6a8ae694a6f2d6ee8989 Mon Sep 17 00:00:00 2001
 +From: Andreas Mueller <schnitzeltony@gmx.de>
-+Date: Thu, 21 Jul 2011 23:18:47 +0200
++Date: Fri, 22 Jul 2011 00:05:15 +0200
 +Subject: [PATCH] docs: On installation create relative paths in symlinks to
 + images
 +
 +
 +Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
 +---
-+ docs/manual/Makefile.am |    2 +-
++ doc/manual/Makefile.am |    2 +-
 + 1 files changed, 1 insertions(+), 1 deletions(-)
 +
-+diff --git a/docs/manual/Makefile.am b/docs/manual/Makefile.am
-+index 57c7c00..5207733 100644
-+--- a/docs/manual/Makefile.am
-++++ b/docs/manual/Makefile.am
++diff --git a/doc/manual/Makefile.am b/doc/manual/Makefile.am
++index 646821d..cbf79e1 100644
++--- a/doc/manual/Makefile.am
+++++ b/doc/manual/Makefile.am
 +@@ -20,7 +20,7 @@ install-data-local:
 + 			done; \
 + 			if test x"$$lang" != x"C" -a ! -d $(srcdir)/images/$$lang; then \
@@ -79,46 +77,31 @@ index 0000000..26f35be
 +-- 
 +1.7.4.4
 +
-diff --git a/meta-xfce/recipes-xfce/thunar/thunar_1.2.2.bb b/meta-xfce/recipes-xfce/thunar/thunar_1.2.2.bb
+diff --git a/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.8.2.bb b/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.8.2.bb
 new file mode 100644
-index 0000000..c978855
+index 0000000..c3be330
 --- /dev/null
-+++ b/meta-xfce/recipes-xfce/thunar/thunar_1.2.2.bb
-@@ -0,0 +1,34 @@
-+DESCRIPTION = "File manager for the Xfce Desktop Environment"
-+SECTION = "x11"
++++ b/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.8.2.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "Xfce4 Desktop Manager"
++SECTION = "x11/base"
 +LICENSE = "GPLv2"
 +LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+DEPENDS = "exo gtk+ gdk-pixbuf libxfce4util libxfce4ui libsm dbus-glib startup-notification libnotify"
++DEPENDS = "gtk+ libxfce4util libxfce4ui libwnck xfconf dbus-glib thunar garcon exo"
 +
 +PR = "r0"
 +
 +inherit xfce
 +
 +# SRC_URI must follow inherited one
-+SRC_URI = "http://archive.xfce.org/src/xfce/${PN}/${@'${PV}'[0:3]}/Thunar-${PV}.tar.bz2 \
-+           file://relative-symlinks-docs.patch \
++SRC_URI += " \
++    file://relative-symlinks-docs.patch \
 +"
 +
-+S = "${WORKDIR}/Thunar-${PV}/"
++FILES_${PN} += "${datadir}/xfce4/backdrops"
 +
-+
-+# no/minimum(default)/yes/full(fails <- Werror)
-+#EXTRA_OECONF += "--enable-debug=yes"
-+
-+FILES_${PN} += "${libdir}/thunarx-2/* \
-+                ${libdir}/xfce4/panel/plugins/* \
-+                ${libdir}/Thunar/[Tt]hunar* \
-+                ${datadir}/dbus-1 \
-+                ${datadir}/Thunar \
-+                ${datadir}/xfce4/panel-plugins/*"
-+
-+FILES_${PN}-dbg += "${libdir}/thunarx-2/.debug/ \
-+                    ${libdir}/xfce4/panel/plugins/.debug/ \
-+                    ${libdir}/Thunar/.debug/"
-+
-+SRC_URI[md5sum] = "a86df0212db71e61f459bda6bc7b7fb6"
-+SRC_URI[sha256sum] = "56b07dddde423ae7854c5edd433948a912c27afe2a60689ffc50df3d981e90f6"
++SRC_URI[md5sum] = "ed25d59f478afda552d121e96657d16f"
++SRC_URI[sha256sum] = "9d0a48c4e9ed6723a3f9a1c5303e2bbe9b04a3b483c52472da46881df4595e71"
 -- 
 1.7.4.4
 
