@@ -1,29 +1,26 @@
-Received: from mail2.eads.net ([80.156.45.114] helo=mail.eads.net)
+Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
-	id 1Qnouv-0001vg-86 for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Aug 2011 11:36:09 +0200
-Received: from gsx3071-vs5.mxchg.m.corp ([53.147.176.148])
-	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id p719VswK010929
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 1 Aug 2011 11:31:55 +0200
-Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
-	gsx3071-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Mon, 1 Aug 2011 11:31:50 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <jaap.dejong@nedap.com>) id 1QnpLt-0002qt-4e
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Aug 2011 12:04:01 +0200
+Received: from nvs0066 ([10.91.8.1]) by smtp.nedap.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 1 Aug 2011 11:59:38 +0200
+X-TM-IMSS-Message-ID: <61b72c75000290a3@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 61b72c75000290a3 ;
+	Mon, 1 Aug 2011 11:58:38 +0200
+Message-ID: <4E36790A.4020406@nedap.com>
+Date: Mon, 01 Aug 2011 11:59:38 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.18) Gecko/20110617 Lightning/1.0b2 Thunderbird/3.1.11
 MIME-Version: 1.0
-Date: Mon, 1 Aug 2011 11:31:50 +0200
-Message-ID: <0C757E680E33864AB113392C7E83F910BE51C4@GSX300A.mxchg.m.corp>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: 2011.03-maintenance: eglibc-binary-localedata packages missing
-	on image
-Thread-Index: AcxQLdbj0xBF8M90R7GQsHc7Qq9t5Q==
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 01 Aug 2011 09:31:50.0054 (UTC)
-	FILETIME=[D72A8460:01CC502D]
-Subject: 2011.03-maintenance: eglibc-binary-localedata packages missing on image
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 01 Aug 2011 09:59:38.0106 (UTC)
+	FILETIME=[B9670DA0:01CC5031]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: bblayers and PRINC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,67 +34,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Aug 2011 09:36:09 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 01 Aug 2011 10:04:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello,
+Hi All,
 
-we want to install our generated locales on our image offline, therefor
-we use following settings:
+if created my own udev_151.bbappend to change some of the files in the 
+original package:
 
-local.conf:
+    THISDIR := "${@os.path.dirname(bb.data.getVar('FILE', d, True))}"
+    FILESPATHBASE_prepend := "${THISDIR}/${PN}-${PV}:"
 
-ENABLE_BINARY_LOCALE_GENERATION =3D "1"
-LOCALE_GENERATION_WITH_CROSS-LOCALEDEF =3D "1"
-GLIBC_INTERNAL_USE_BINARY_LOCALE =3D "compile"
-GLIBC_GENERATE_LOCALES =3D "en_US.UTF-8 en_GB.UTF-8 de_DE.UTF-8
-de_CH.UTF-8 es_ES.
-UTF-8 fr_FR.UTF-8 fr_CH.UTF-8 it_IT.UTF-8 it_CH.UTF-8"
+    #PRINC = 1
+    PR .= ".1"
 
-xx-image.bb:
+PRINC doesn't seem to work.
+So I tried to fool around with PR and PR_append; It works ok with my 
+other bbappend recipes.
+bitbake base-image fails!
+If I look at the udev files/directories created I see ipk's without '.1' 
+and 2 directories: 1 with and 1 without '.1'
+(I removed everything before)
 
-IMAGE_LINGUAS =3D "en-us en-gb de-de de-ch es-es fr-fr fr-ch it-it =
-it-ch"
+    build/tmp-angstrom_2008_1/deploy/glibc/ipk/armv5te/udev-dbg_151-r21.6_armv5te.ipk
+    build/tmp-angstrom_2008_1/deploy/glibc/ipk/armv5te/udev-dev_151-r21.6_armv5te.ipk
 
-ROOTFS_POSTPROCESS_COMMAND +=3D "install_linguas;"
+    build/tmp-angstrom_2008_1/work/armv5te-angstrom-linux-gnueabi/udev-151-r21
+    build/tmp-angstrom_2008_1/work/armv5te-angstrom-linux-gnueabi/udev-151-r21.1
 
-The packages locale-base-* are installed properly, but the
-eglibc-binary-localedata are not installed in the image, so the needed
-data for the locale support are missing.
+Without "PR .= .1" I get more files:
 
-If we examine the locale-base- packages with dpkg, there is an entry
-"eglibc-binary-localedata-..." in "provides" this seem to be wrong.
-(should that not be a dependency only?)
+    build/tmp-angstrom_2008_1/deploy/glibc/ipk/armv5te/udev_151-r21.6_armv5te.ipk
+    build/tmp-angstrom_2008_1/deploy/glibc/ipk/armv5te/udev-dbg_151-r21.6_armv5te.ipk
+    build/tmp-angstrom_2008_1/deploy/glibc/ipk/armv5te/udev-dev_151-r21.6_armv5te.ipk
+    build/tmp-angstrom_2008_1/deploy/glibc/ipk/armv5te/udev-doc_151-r21.6_armv5te.ipk
+    build/tmp-angstrom_2008_1/deploy/glibc/ipk/armv5te/udev-utils_151-r21.6_armv5te.ipk
 
-dpkg-deb -I locale-base-de-de_2.12-r21.8+svnr12323.9_armv7a.ipk
- new debian package, version 2.0.
- size 906 bytes: control archive=3D 608 bytes.
-     808 bytes,    14 lines      control             =20
- Package: locale-base-de-de
- Version: 2.12-r21.8+svnr12323.9
- Description: Embedded GNU C Library
- Section: libs
- Priority: required
- Maintainer: Angstrom Developers <angstrom-distro-devel@linuxtogo.org>
- License: LGPL
- Architecture: armv7a
- OE: eglibc
- Homepage: http://www.eglibc.org/home
- Build: <unknown>/9426
- Depends: eglibc-binary-localedata-de.de
- Provides: virtual-locale-de-de, virtual-locale-de,
-eglibc-binary-localedata-de.de
- Source: svn://svn.eglibc.org/branches;module=3Deglibc-2_12;proto=3Dsvn
-file://eglibc-svn-arm-lowlevellock-include-tls.patch
-file://IO-acquire-lock-fix.patch file://shorten-build-commands.patch
-file://sh4_set_fpscr_2.12.patch file://sh4_local-fpscr_values.patch
-file://eglibc-dont-cache-slibdir.patch
-file://armv4-eabi-compile-fix.patch file://etc/ld.so.conf
-file://generate-supported.mk=20
+    build/tmp-angstrom_2008_1/work/armv5te-angstrom-linux-gnueabi/udev-151-r21
 
-What is going wrong here ?
+Any ideas?
+
+Jaap
+
+
+Build Configuration:
+BB_VERSION        = "1.12.0"
+METADATA_BRANCH   = "release-2010.12"
+METADATA_REVISION = "dec3967"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "at91sam9263ek"
+DISTRO            = "angstrom"
+DISTRO_VERSION    = "2010.12"
+TARGET_FPU        = "soft"
+
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing RunQueue Tasks
+NOTE: Running task 540 of 4063 (ID: 497, 
+/oe/sources/openembedded/recipes/udev/udev_151.bb, do_setscene)
+NOTE: package udev-151-r21.1: task do_setscene: Started
+NOTE: package udev-151-r21.1: task do_setscene: Succeeded
+NOTE: Running task 3807 of 4063 (ID: 496, 
+/oe/sources/openembedded/recipes/udev/udev_151.bb, do_fetch)
+NOTE: package udev-151-r21.1: task do_fetch: Started
+NOTE: package udev-151-r21.1: task do_fetch: Succeeded
+NOTE: Running task 3808 of 4063 (ID: 489, 
+/oe/sources/openembedded/recipes/udev/udev_151.bb, do_unpack)
+NOTE: package udev-151-r21.1: task do_unpack: Started
+NOTE: package udev-151-r21.1: task do_unpack: Succeeded
+NOTE: Running task 3809 of 4063 (ID: 490, 
+/oe/sources/openembedded/recipes/udev/udev_151.bb, do_patch)
+NOTE: package udev-151-r21.1: task do_patch: Started
+NOTE: package udev-151-r21.1: task do_patch: Succeeded
+NOTE: Running task 3810 of 4063 (ID: 498, 
+/oe/sources/openembedded/recipes/udev/udev_151.bb, do_configure)
+NOTE: package udev-151-r21.1: task do_configure: Started
+NOTE: package udev-151-r21.1: task do_configure: Succeeded
+NOTE: Running task 3811 of 4063 (ID: 499, 
+/oe/sources/openembedded/recipes/udev/udev_151.bb, do_qa_configure)
+NOTE: package udev-151-r21.1: task do_qa_configure: Started
+NOTE: package udev-151-r21.1: task do_qa_configure: Succeeded
+NOTE: Running task 3812 of 4063 (ID: 500, 
+/oe/sources/openembedded/recipes/udev/udev_151.bb, do_compile)
+NOTE: package udev-151-r21.1: task do_compile: Started
+NOTE: package udev-151-r21.1: task do_compile: Succeeded
+NOTE: Running task 3813 of 4063 (ID: 491, 
+/oe/sources/openembedded/recipes/udev/udev_151.bb, do_install)
+NOTE: package udev-151-r21.1: task do_install: Started
+NOTE: package udev-151-r21.1: task do_install: Succeeded
+NOTE: Running task 3814 of 4063 (ID: 492, 
+/oe/sources/openembedded/recipes/udev/udev_151.bb, do_populate_sysroot)
+NOTE: Running task 3815 of 4063 (ID: 501, 
+/oe/sources/openembedded/recipes/udev/udev_151.bb, do_package)
+NOTE: package udev-151-r21.1: task do_populate_sysroot: Started
+NOTE: package udev-151-r21.1: task do_package: Started
+NOTE: package udev-151-r21.1: task do_populate_sysroot: Succeeded
+NOTE: Running task 3952 of 4063 (ID: 493, 
+/oe/sources/openembedded/recipes/udev/udev_151.bb, do_qa_staging)
+NOTE: package udev-151-r21.1: task do_qa_staging: Started
+NOTE: package udev-151-r21.1: task do_qa_staging: Succeeded
+NOTE: package udev-151-r21.1: task do_package: Succeeded
+NOTE: Running task 4002 of 4063 (ID: 502, 
+/oe/sources/openembedded/recipes/udev/udev_151.bb, do_package_write_ipk)
+NOTE: package udev-151-r21.1: task do_package_write_ipk: Started
+Packaged contents of udev-dbg into 
+/oe/build/tmp-angstrom_2008_1/deploy/glibc/ipk/armv5te/udev-dbg_151-r21.6_armv5te.ipk
+Packaged contents of udev-dev into 
+/oe/build/tmp-angstrom_2008_1/deploy/glibc/ipk/armv5te/udev-dev_151-r21.6_armv5te.ipk
+NOTE: package udev-151-r21: task do_package_write_ipk: Succeeded
+NOTE: Running task 4058 of 4063 (ID: 494, 
+/oe/sources/openembedded/recipes/udev/udev_151.bb, do_package_write)
+NOTE: Running task 4059 of 4063 (ID: 18, 
+/oe/sources/mylayer/recipes/my-tweaks/base-image.bb, 
+do_package_update_index_ipk)
+NOTE: package base-image-1.0-r0: task do_package_update_index_ipk: Started
+NOTE: package udev-151-r21.1: task do_package_write: Started
+NOTE: package udev-151-r21.1: task do_package_write: Succeeded
+NOTE: Running task 4060 of 4063 (ID: 495, 
+/oe/sources/openembedded/recipes/udev/udev_151.bb, do_package_stage)
+NOTE: package udev-151-r21.1: task do_package_stage: Started
+NOTE: package udev-151-r21: task do_package_stage: Succeeded
 
 
