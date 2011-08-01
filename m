@@ -1,28 +1,29 @@
-Received: from mail-ey0-f178.google.com ([209.85.215.178])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1Qnoik-0001Ds-CX
+	(envelope-from <sledz@dresearch-fe.de>) id 1Qnokw-0001Nj-I5
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Aug 2011 11:23:34 +0200
-Received: by eye4 with SMTP id 4so6149768eye.37
+	Mon, 01 Aug 2011 11:25:50 +0200
+Received: by fxg11 with SMTP id 11so4888789fxg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Aug 2011 02:19:14 -0700 (PDT)
-Received: by 10.204.78.7 with SMTP id i7mr1267547bkk.166.1312190354304;
-	Mon, 01 Aug 2011 02:19:14 -0700 (PDT)
+	Mon, 01 Aug 2011 02:21:31 -0700 (PDT)
+Received: by 10.204.34.130 with SMTP id l2mr1267036bkd.170.1312190490768;
+	Mon, 01 Aug 2011 02:21:30 -0700 (PDT)
 Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
 	[217.92.177.116])
-	by mx.google.com with ESMTPS id a5sm188787bkq.17.2011.08.01.02.19.12
-	(version=SSLv3 cipher=OTHER); Mon, 01 Aug 2011 02:19:12 -0700 (PDT)
-Message-ID: <4E366F8F.9070005@dresearch-fe.de>
-Date: Mon, 01 Aug 2011 11:19:11 +0200
+	by mx.google.com with ESMTPS id i14sm1253553bkd.6.2011.08.01.02.21.29
+	(version=SSLv3 cipher=OTHER); Mon, 01 Aug 2011 02:21:30 -0700 (PDT)
+Message-ID: <4E367018.7020709@dresearch-fe.de>
+Date: Mon, 01 Aug 2011 11:21:28 +0200
 From: Steffen Sledz <sledz@dresearch-fe.de>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:5.0) Gecko/20110624 Thunderbird/5.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <4E364EB1.8050800@dresearch-fe.de>
-	<CACW_hTaqobWjz4WWneZ1JsfPTeGu8iu=FeinU62sum4-1rkvfw@mail.gmail.com>
-In-Reply-To: <CACW_hTaqobWjz4WWneZ1JsfPTeGu8iu=FeinU62sum4-1rkvfw@mail.gmail.com>
+	<1312189251.30326.498.camel@phil-desktop>
+In-Reply-To: <1312189251.30326.498.camel@phil-desktop>
 X-Enigmail-Version: 1.2
+Cc: Koen Kooi <koen@openembedded.org>
 Subject: Re: unnecessary dependencies?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -37,28 +38,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Aug 2011 09:23:34 -0000
+X-List-Received-Date: Mon, 01 Aug 2011 09:25:50 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 01.08.2011 10:35, Frans Meulenbroeks wrote:
-> 2011/8/1 Steffen Sledz <sledz@dresearch-fe.de>
-> 
+On 01.08.2011 11:00, Phil Blundell wrote:
+> On Mon, 2011-08-01 at 08:58 +0200, Steffen Sledz wrote:
 >> We are working on an application which requires libgssdp.
 >>
->> libgssdp requires libsoup, libsoup inherits gnome, gnome inherits
->> gtk-icon-cache, gtk-icon-cache rdepends hicolor-icon-theme. So this icon
->> theme (probably a lot more gnome stuff) unnecessarily allocates place in our
->> image (we do not have a GUI). :(
+>> libgssdp requires libsoup, libsoup inherits gnome, gnome inherits gtk-icon-cache, gtk-icon-cache rdepends hicolor-icon-theme. So this icon theme (probably a lot more gnome stuff) unnecessarily allocates place in our image (we do not have a GUI). :(
 >>
 >> Are these deps really necessary?
->>
->>
-> I know this does not answer your question, but if you do not have a GUI
-> maybe libgssdp is not the best choice for your project.
-> You could consider another upnp library (e.g. libupnp).
+> 
+> It sounds as though libsoup possibly shouldn't be inheriting gnome.  Can
+> you figure out whether gtk-icon-cache is actually doing anything useful
+> in this case?
 
-libupnp supports UPnP 1.0 only and in addition we need SSDP only (not full UPnP).
+"libsoup is an HTTP client/server library" only. I can't really see any need for GUI componenets.
 
 -- 
 DResearch Fahrzeugelektronik GmbH
