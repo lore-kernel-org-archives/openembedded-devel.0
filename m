@@ -1,23 +1,26 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QoMwE-0008WG-M3 for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Aug 2011 23:55:46 +0200
-Received: from f053037105.adsl.alicedsl.de ([78.53.37.105]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QoMs6-000670-CH for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Aug 2011 21:51:30 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1312309735-1628-1-git-send-email-josua.mayer97@googlemail.com>
-References: <1312309735-1628-1-git-send-email-josua.mayer97@googlemail.com>
-Date: Tue, 02 Aug 2011 23:51:25 +0200
-Message-ID: <1312321885.3658.262.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [PATCH] mokomaze: fix project urls
+	(envelope-from <agnel.joel@gmail.com>)
+	id 1QoN2T-0000d3-1w; Wed, 03 Aug 2011 00:02:13 +0200
+Received: by ewy5 with SMTP id 5so150006ewy.6
+	for <multiple recipients>; Tue, 02 Aug 2011 14:57:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:cc:content-type;
+	bh=90hSYsLm/uV1ebtmxBOCZD23dbJb5kSr/lqO0MTW2gI=;
+	b=apM/4InezMovU0UdIu6SJ7DPRAbp/9ujaHQ34umoz7h+NeCe5dm7Qx9dp7yE09I1Np
+	NU7GI8endnPLXS8hTe2b9hfoWErLxqkPD+3L1xpe9OYo942Ms9/vHj8h10fFhnrsCAQr
+	4H8mi0WAyACKO6G0g6yVlRsULogx63INbPU8k=
+MIME-Version: 1.0
+Received: by 10.213.3.198 with SMTP id 6mr3592ebo.15.1312322270464; Tue, 02
+	Aug 2011 14:57:50 -0700 (PDT)
+Received: by 10.213.113.196 with HTTP; Tue, 2 Aug 2011 14:57:50 -0700 (PDT)
+Date: Tue, 2 Aug 2011 16:57:50 -0500
+Message-ID: <CAD=GYpYeDmU6CN1MzztiKsf+tfOrWgBmkGfQoSpSRhoToDDskg@mail.gmail.com>
+From: Joel A Fernandes <agnel.joel@gmail.com>
+To: openembedded-core@lists.openembedded.org
+Cc: "Kooi, Koen" <k-kooi@ti.com>, openembedded-devel@lists.openembedded.org,
+	"Kridner, Jason" <jdk@ti.com>
+Subject: systemd-gnome-image do_rootfs failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,92 +34,303 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Aug 2011 21:55:46 -0000
-X-Groupsio-MsgNum: 33482
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-ISxajjmKcgEvmkXRPJTX"
+X-List-Received-Date: Tue, 02 Aug 2011 22:02:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-ISxajjmKcgEvmkXRPJTX
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+I'd like to report a possible problem with oe-core that I'm not sure how to fix:
 
-Dear Josua,
+On running a "bitbake systemd-gnome-image", the do_rootfs stage fails
+saying certain packages are missing.
 
+On digging further, I find that the opkg.conf that opkg-cl uses (in
+image.bbclass do_rootfs function) has the following contents:
 
-thank you for your patch. (I will try to push your other patches as soon
-as possible.)
+arch all 1
+arch any 6
+arch noarch 11
+arch arm 16
+arch beagleboard 21
+src oe file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk
+src oe-all file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/all
+src oe-beagleboard
+file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/beagleboard
 
-Am Dienstag, den 02.08.2011, 20:28 +0200 schrieb Josua Mayer:
-> * Mokomaze moved to sourceforge
->   Homepage and download link were changed accordingly
+But there is no entry for:
+file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/armv7a
 
-Please start the commit summary with a capital letter.
+As a result, many packages like xserver-xorg are not found by opkg and
+the do_rootfs stage fails.
 
-> Signed-off-by: Josua Mayer <josua.mayer97@googlemail.com>
-> ---
->  recipes/mokomaze/mokomaze_0.5.5.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/recipes/mokomaze/mokomaze_0.5.5.bb b/recipes/mokomaze/mokoma=
-ze_0.5.5.bb
-> index 9ef8771..d4c2541 100644
-> --- a/recipes/mokomaze/mokomaze_0.5.5.bb
-> +++ b/recipes/mokomaze/mokomaze_0.5.5.bb
-> @@ -1,5 +1,5 @@
->  DESCRIPTION =3D "Classic game where you control a steel ball by tilting =
-a wooden labyrinth"
-> -HOMEPAGE =3D "http://mokomaze.projects.openmoko.org/"
-> +HOMEPAGE =3D "http://mokomaze.sourceforge.net/"
->  SECTION =3D "x11/games"
->  PRIORITY =3D "optional"
->  LICENSE =3D "GPLv3"
-> @@ -9,7 +9,7 @@ RRECOMMENDS_${PN}_shr =3D "fsoraw"
->  PV =3D "0.5.5+git8"
->  PR =3D "r7"
-> =20
-> -SRC_URI =3D "http://mokomaze.projects.openmoko.org/files/${PN}-${PV}.tar=
-.gz"
-> +SRC_URI =3D "http://mokomaze.sourceforge.net/files/${PN}-${PV}.tar.gz"
+This could be a potential problem in package_generate_ipkg_conf in
+./openembedded-core/meta/classes/package_ipk.bbclass (?)
 
-There is a variable `SOURCEFORGE_MIRROR` defined. Can you try to use
-that?
-
-        $ git grep SOURCEFORGE_MIRROR
-        conf/bitbake.conf:SOURCEFORGE_MIRROR =3D "http://downloads.sourcefo=
-rge.net"
-        [=E2=80=A6]
-
->  SRC_URI_append_shr =3D " file://fsoraw.patch"
->  SRC_URI_append_shr =3D " file://0001-Fix-accelerometers-with-2.6.34-kern=
-els.patch"
->  SRC_URI_append_shr =3D " file://0001-Fix-vibration-on-gta02-with-2.6.34-=
-kernel.patch"
-
-When sending iterations of patches, please also note under the first
-`---` what you changed in the iterations.
-
-        ---
-        v2: Remove bogus `From` line.
-        ---
-         recipes/mokomaze/mokomaze_0.5.5.bb |    4 ++--
-        [=E2=80=A6]
+Here is the build log:
+[..]
+++ echo any
+++ sed -e s/arm/i686/
++ sdkarch=any
++ extension=-nativesdk
++ '[' any = all -o any = any -o any = noarch ']'
++ extension=
++ '[' -e /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/any/Packages
+']'
++ for arch in '$ipkgarchs'
++ '[' -e /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/noarch/Packages
+']'
+++ echo noarch
+++ sed -e s/arm/i686/
++ sdkarch=noarch
++ extension=-nativesdk
++ '[' noarch = all -o noarch = any -o noarch = noarch ']'
++ extension=
++ '[' -e /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/noarch/Packages
+']'
++ for arch in '$ipkgarchs'
++ '[' -e /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/arm/Packages
+']'
+++ echo arm
+++ sed -e s/arm/i686/
++ sdkarch=i686
++ extension=-nativesdk
++ '[' i686 = all -o i686 = any -o i686 = noarch ']'
++ '[' -e /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/i686-nativesdk/Packages
+']'
++ for arch in '$ipkgarchs'
++ '[' -e /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/beagleboard/Packages
+']'
++ echo 'src oe-beagleboard
+file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/beagleboard'
+++ echo beagleboard
+++ sed -e s/arm/i686/
++ sdkarch=beagleboard
++ extension=-nativesdk
++ '[' beagleboard = all -o beagleboard = any -o beagleboard = noarch ']'
++ '[' -e /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/beagleboard-nativesdk/Packages
+']'
++ multilib_archs=
++ mkdir -p /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/temp/
++ STATUS=/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs/var/lib/opkg/status
++ mkdir -p /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs/var/lib/opkg
++ opkg-cl -f /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/opkg.conf
+-o /home/joel/angstrom-o
+e/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs
+--force-overwrite update
+Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/Packages.
+Updated list of available packages in
+/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs//v
+ar/lib/opkg/lists/oe.
+Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/all/Packages.
+Updated list of available packages in
+/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs//v
+ar/lib/opkg/lists/oe-all.
+Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/beagleboard/Packages.
+Updated list of available packages in
+/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs//v
+ar/lib/opkg/lists/oe-beagleboard.
++ export INSTALL_PACKAGES_ATTEMPTONLY_IPK=
++ INSTALL_PACKAGES_ATTEMPTONLY_IPK=
++ export INSTALL_PACKAGES_LINGUAS_IPK=locale-base-en-us
++ INSTALL_PACKAGES_LINGUAS_IPK=locale-base-en-us
++ export INSTALL_TASK_IPK=rootfs
++ INSTALL_TASK_IPK=rootfs
++ export INSTALL_ROOTFS_IPK=/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs
++ INSTALL_ROOTFS_IPK=/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs
++ export INSTALL_CONF_IPK=/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/opkg.conf
++ INSTALL_CONF_IPK=/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/opkg.conf
++ export 'INSTALL_PACKAGES_NORMAL_IPK=connman-plugin-loopback
+openssh-sftp udev e2fsprogs-blkid htop rsyslog cpufrequtils systemd
+connman-plugin-wifi connman task-gnome-themes avahi-daemon
+e2fsprogs-e2fsck task-gnome-fonts task-gnome-apps systemd-compat-units
+connman-systemd task-gnome avahi-utils task-xserver avahi-systemd
+shadow dropbear-systemd tinylogin angstrom-task-boot
+ task-gnome-xserver-base connman-plugin-ethernet'
++ INSTALL_PACKAGES_NORMAL_IPK='connman-plugin-loopback openssh-sftp
+udev e2fsprogs-blkid htop rsyslog cpufrequtils systemd
+connman-plugin-wifi connman task-gnome-themes avahi-daemon e2fspro
+gs-e2fsck task-gnome-fonts task-gnome-apps systemd-compat-units
+connman-systemd task-gnome avahi-utils task-xserver avahi-systemd
+shadow dropbear-systemd tinylogin angstrom-task-boot task-g
+nome-xserver-base connman-plugin-ethernet'
++ export INSTALL_PACKAGES_MULTILIB_IPK=
++ INSTALL_PACKAGES_MULTILIB_IPK=
++ package_install_internal_ipk
++ local target_rootfs=/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs
++ local conffile=/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/opkg.conf
++ local 'package_to_install=connman-plugin-loopback openssh-sftp udev
+e2fsprogs-blkid htop rsyslog cpufrequtils systemd connman-plugin-wifi
+connman task-gnome-themes avahi-daemon e2fsprogs-
+e2fsck task-gnome-fonts task-gnome-apps systemd-compat-units
+connman-systemd task-gnome avahi-utils task-xserver avahi-systemd
+shadow dropbear-systemd tinylogin angstrom-task-boot task-gnom
+e-xserver-base connman-plugin-ethernet'
++ local package_attemptonly=
++ local package_lingusa=
++ local package_multilib=
++ local task=rootfs
++ mkdir -p /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs/var/lib/opkg/
++ local 'ipkg_args=-f
+/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/opkg.conf
+-o /home/joel/a
+ngstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs
+--force-overwrite'
++ opkg-cl -f /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/opkg.conf
+-o /home/joel/angstrom-o
+e/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs
+--force-overwrite update
+Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/Packages.
+Updated list of available packages in
+/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs//v
+ar/lib/opkg/lists/oe.
+Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/all/Packages.
+Updated list of available packages in
+/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs//v
+ar/lib/opkg/lists/oe-all.
+Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/beagleboard/Packages.
+Updated list of available packages in
+/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs//v
+ar/lib/opkg/lists/oe-beagleboard.
++ '[' xlinux-gnueabi = xlinux ']'
++ '[' xlinux-gnueabi = xlinux-gnueabi ']'
++ '[' '!' -z '' ']'
++ '[' '!' -z 'connman-plugin-loopback openssh-sftp udev
+e2fsprogs-blkid htop rsyslog cpufrequtils systemd connman-plugin-wifi
+connman task-gnome-themes avahi-daemon e2fsprogs-e2fsck task-gn
+ome-fonts task-gnome-apps systemd-compat-units connman-systemd
+task-gnome avahi-utils task-xserver avahi-systemd shadow
+dropbear-systemd tinylogin angstrom-task-boot task-gnome-xserver-base
+ connman-plugin-ethernet' ']'
++ opkg-cl -f /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/opkg.conf
+-o /home/joel/angstrom-o
+e/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs
+--force-overwrite install connman-plugin-loopback openssh-sft
+p udev e2fsprogs-blkid htop rsyslog cpufrequtils systemd
+connman-plugin-wifi connman task-gnome-themes avahi-daemon
+e2fsprogs-e2fsck task-gnome-fonts task-gnome-apps systemd-compat-units
+co
+nnman-systemd task-gnome avahi-utils task-xserver avahi-systemd shadow
+dropbear-systemd tinylogin angstrom-task-boot task-gnome-xserver-base
+connman-plugin-ethernet
+Unknown package 'connman-plugin-loopback'.
+Unknown package 'openssh-sftp'.
+Unknown package 'udev'.
+Unknown package 'e2fsprogs-blkid'.
+Unknown package 'htop'.
+Unknown package 'rsyslog'.
+Unknown package 'cpufrequtils'.
+Unknown package 'systemd'.
+Unknown package 'connman-plugin-wifi'.
+Unknown package 'connman'.
+Installing task-gnome-themes (1.0-r9) to root...
+Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/all/task-gnome-themes_1.0-r9_all.ipk.
+Unknown package 'avahi-daemon'.
+Unknown package 'e2fsprogs-e2fsck'.
+Installing task-gnome-fonts (1.0-r9) to root...
+Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/all/task-gnome-fonts_1.0-r9_all.ipk.
+Installing task-gnome-apps (1.0-r9) to root...
+Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/all/task-gnome-apps_1.0-r9_all.ipk.
+Installing systemd-compat-units (1.0-r10) to root...
+Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/all/systemd-compat-units_1.0-r10_all.ipk.
+Unknown package 'connman-systemd'.
+Installing task-gnome (1.0-r9) to root...
+Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/all/task-gnome_1.0-r9_all.ipk.
+task-gnome: unsatisfied recommendation for ofono
+Unknown package 'avahi-utils'.
+Installing task-xserver (1.0-r0) to root...
+Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/beagleboard/task-xserver_1.0-r0_beagleboard.ipk.
+Unknown package 'avahi-systemd'.
+Installing shadow (4.1.4.3-r3) to root...
+Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/beagleboard/shadow_4.1.4.3-r3_beagleboard.ipk.
+Installing dropbear-systemd (v1-r0) to root...
+Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/all/dropbear-systemd_v1-r0_all.ipk.
+Unknown package 'tinylogin'.
+Installing angstrom-task-boot (1.0-r1) to root...
+Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/beagleboard/angstrom-task-boot_1.0-r1_beagleboard.ipk.
+angstrom-feed-configs: unsatisfied recommendation for opkg
+Installing task-gnome-xserver-base (1.0-r9) to root...
+Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/deploy/ipk/all/task-gnome-xserver-base_1.0-r9_all.ipk.
+mime-support: unsatisfied recommendation for file
+Unknown package 'connman-plugin-ethernet'.
+Configuring systemd-compat-units.
+Collected errors:
+ * opkg_install_cmd: Cannot install package connman-plugin-loopback.
+ * opkg_install_cmd: Cannot install package openssh-sftp.
+ * opkg_install_cmd: Cannot install package udev.
+ * opkg_install_cmd: Cannot install package e2fsprogs-blkid.
+ * opkg_install_cmd: Cannot install package htop.
+ * opkg_install_cmd: Cannot install package rsyslog.
+ * opkg_install_cmd: Cannot install package cpufrequtils.
+ * opkg_install_cmd: Cannot install package systemd.
+ * opkg_install_cmd: Cannot install package connman-plugin-wifi.
+ * opkg_install_cmd: Cannot install package connman.
+ * satisfy_dependencies_for: Cannot satisfy the following dependencies
+for task-gnome-themes:
+ *      gnome-icon-theme *      gtk-engine-thinice *
+gtk-engine-redmond95 *  gtk-theme-crux *        gtk-engine-clearlooks
+*         gtk-engine-hcengine *   gtk-theme-clearlooks *
+gnome-icon-theme *      gtk-theme-thinice *     gnome-icon-theme *
+ gtk-engine-crux-engine *        gtk-theme-redmond *
+gtk-engine-glide *      gtk-theme-mist *
+ * opkg_install_cmd: Cannot install package task-gnome-themes.
+ * opkg_install_cmd: Cannot install package avahi-daemon.
+ * opkg_install_cmd: Cannot install package e2fsprogs-e2fsck.
+ * satisfy_dependencies_for: Cannot satisfy the following dependencies
+for task-gnome-fonts:
+ *      mkfontdir *     eglibc (>= 2.12) *      mkfontscale *
+fontconfig *    fontconfig-utils *
+ * opkg_install_cmd: Cannot install package task-gnome-fonts.
+ * satisfy_dependencies_for: Cannot satisfy the following dependencies
+for task-gnome-apps:
+ *      epiphany *      matchbox-terminal *     x11vnc *
+ * opkg_install_cmd: Cannot install package task-gnome-apps.
+ * opkg_install_cmd: Cannot install package connman-systemd.
+ * satisfy_dependencies_for: Cannot satisfy the following dependencies
+for task-gnome:
+ *      gnome-keyring *         gnome-bluetooth *       nautilus *
+ gtk-engine-clearlooks *         gtk-theme-clearlooks *  gdm *
+gnome-settings-daemon *         gnome-panel *   gnome-power-manager *
+ gnome-control-center *  gnome-system-monitor *  upower *
+gnome-disk-utility *    connman-gnome *         connman-plugin-ntpd *
+ gdm-systemd *   gpe-scap *      bash *  udisks *
+ * opkg_install_cmd: Cannot install package task-gnome.
+ * opkg_install_cmd: Cannot install package avahi-utils.
+ * satisfy_dependencies_for: Cannot satisfy the following dependencies
+for task-xserver:
+ *      xserver-xorg *  xf86-input-mouse *      xf86-input-keyboard *
+ xf86-input-evdev *      xf86-video-omapfb *
+ * opkg_install_cmd: Cannot install package task-xserver.
+ * opkg_install_cmd: Cannot install package avahi-systemd.
+ * satisfy_dependencies_for: Cannot satisfy the following dependencies
+for shadow:
+ *      libpam-runtime *        pam-plugin-env *
+pam-plugin-shells *     pam-plugin-faildelay *  pam-plugin-securetty *
+ pam-plugin-limits *     pam-plugin-nologin *    pam-plugin-motd *
+  eglibc (>= 2.12) *      pam-plugin-group *      pam-plugin-mail *
+   pam-plugin-rootok *     libpam (>= 1.1.4) *     pam-plugin-lastlog
+*
+ * opkg_install_cmd: Cannot install package shadow.
+ * satisfy_dependencies_for: Cannot satisfy the following dependencies
+for dropbear-systemd:
+ *      dropbear *      systemd *
+ * opkg_install_cmd: Cannot install package dropbear-systemd.
+ * opkg_install_cmd: Cannot install package tinylogin.
+ * satisfy_dependencies_for: Cannot satisfy the following dependencies
+for angstrom-task-boot:
+ *      busybox *       netbase *       opkg *  base-passwd *
+ * opkg_install_cmd: Cannot install package angstrom-task-boot.
+ * satisfy_dependencies_for: Cannot satisfy the following dependencies
+for task-gnome-xserver-base:
+ *      xvinfo *        dbus-x11 *      xdg-utils *     xhost *
+ xset *  xrandr *        xinetd *        xauth *         xrdb *  xinit
+*
+ * opkg_install_cmd: Cannot install package task-gnome-xserver-base.
+ * opkg_install_cmd: Cannot install package connman-plugin-ethernet.
+ERROR: Function 'do_rootfs' failed (see
+/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/temp/log.do_rootfs.32044
+for further information)
+(END)
 
 
 Thanks,
+Joel
 
-Paul
 
---=-ISxajjmKcgEvmkXRPJTX
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk44cV0ACgkQPX1aK2wOHVhY+gCfS63P7WL5naKS2Mhw4n7pX2fH
-uhkAnRhxksCBb7d2cisdt0Fjs6mDMi0d
-=eBT7
------END PGP SIGNATURE-----
-
---=-ISxajjmKcgEvmkXRPJTX--
