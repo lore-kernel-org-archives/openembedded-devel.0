@@ -1,26 +1,24 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QoBjd-0002DZ-Ea
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1QoCnS-0003yf-9b
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Aug 2011 11:58:01 +0200
-Received: by fxg11 with SMTP id 11so6099302fxg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Aug 2011 02:53:40 -0700 (PDT)
-Received: by 10.204.55.199 with SMTP id v7mr1774949bkg.83.1312278820368;
-	Tue, 02 Aug 2011 02:53:40 -0700 (PDT)
-Received: from mobil-400-586.intern.dresearch.de
-	(pd95cb174.dip0.t-ipconnect.de [217.92.177.116])
-	by mx.google.com with ESMTPS id l1sm1385892bks.61.2011.08.02.02.53.39
-	(version=SSLv3 cipher=OTHER); Tue, 02 Aug 2011 02:53:39 -0700 (PDT)
-Message-ID: <4E37C922.9000205@dresearch-fe.de>
-Date: Tue, 02 Aug 2011 11:53:38 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
+	Tue, 02 Aug 2011 13:06:02 +0200
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga101.ch.intel.com with ESMTP; 02 Aug 2011 04:01:40 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,305,1309762800"; 
+   d="scan'208";a="3347373"
+Received: from unknown (HELO helios.localnet) ([10.255.18.59])
+	by AZSMGA002.ch.intel.com with ESMTP; 02 Aug 2011 04:01:39 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 2 Aug 2011 12:01:38 +0100
+User-Agent: KMail/1.13.6 (Linux/2.6.38-8-generic-pae; KDE/4.6.2; i686; ; )
+References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7AA6B@nzc-ap-xch-02.ap.trimblecorp.net>
+In-Reply-To: <F7C0AA5DD1508F4789E10B6CC9BB75DB04B7AA6B@nzc-ap-xch-02.ap.trimblecorp.net>
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Enigmail-Version: 1.2
-Subject: [2011.03-maintenance] Pull request (net-snmp)
+Message-Id: <201108021201.38367.paul.eggleton@linux.intel.com>
+Subject: Re: Bitbake syntax error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,35 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Aug 2011 09:58:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 02 Aug 2011 11:06:02 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Tom,
+On Tuesday 02 August 2011 02:43:05 Bernard Mentink wrote:
+> I am getting the following error while trying to build the
+> bootstrap-image, my bitbake is version 1.12.0.
+> 
+>...
+> "/home/bmentink/devel/build/tmp/sysroots/i686-linux/usr/bin/opkg-make-in
+> dex", line 128
+> 
+> |     print pkg_dir + "/" + old_filename
+> |     
+> |                 ^
+> | 
+> | SyntaxError: invalid syntax
 
-Please pull the 2 commits from here:
+Someone posted this problem on IRC and eventually discovered that it was that 
+/usr/bin/python was pointing to python3 (which isn't supported by BitBake). Is 
+that what's happening on your system?
 
-URI: git://git.openembedded.org/openembedded
-Branch: sledz/maintenance
-
-Khem Raj (1):
-      net-snmp: Fix build error ./.libs/libnetsnmpmibs.so: undefined reference to `pthread_create'
-
-Steffen Sledz (1):
-      net-snmp: disable libnl use
-
-Both are bugfixes and already in oe-dev master.
-
-Thx,
-Steffen
+Cheers,
+Paul
 
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
