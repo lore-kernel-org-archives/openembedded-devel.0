@@ -1,30 +1,30 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-pz0-f43.google.com ([209.85.210.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>)
-	id 1QoNDx-0000zN-So; Wed, 03 Aug 2011 00:14:05 +0200
-Received: by wyg30 with SMTP id 30so184626wyg.6
-	for <multiple recipients>; Tue, 02 Aug 2011 15:09:44 -0700 (PDT)
-Received: by 10.216.185.19 with SMTP id t19mr2252704wem.8.1312322983989;
-	Tue, 02 Aug 2011 15:09:43 -0700 (PDT)
-Received: from [172.20.2.72] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id r48sm139413weq.2.2011.08.02.15.09.41
+	(envelope-from <raj.khem@gmail.com>) id 1QoNO1-0001NJ-7n
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Aug 2011 00:24:29 +0200
+Received: by pzk1 with SMTP id 1so369556pzk.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Aug 2011 15:20:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=c6MNzXO0mgZeL97Vks1b5ARtWsOn3IIduXtWDTJaibk=;
+	b=AYpEQaYPNTJmilmyy03VMTIlQHp9HcU6TwzldR40c1YOt71qiR6peaTcJvgl3xL6r4
+	35JsAKyKPMmWjvZA6LGdJAhwHjfFtUWGSVFYxHMz1ptEN5fz0WEYOyEIDZvn56+PdlTY
+	9t/E/AyQ4SLKPRH64fi8oBkKGK0t6bF6OaN8Y=
+Received: by 10.68.59.8 with SMTP id v8mr25721pbq.455.1312323605092;
+	Tue, 02 Aug 2011 15:20:05 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id d1sm279201pbj.8.2011.08.02.15.20.04
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 02 Aug 2011 15:09:43 -0700 (PDT)
-References: <CAD=GYpYeDmU6CN1MzztiKsf+tfOrWgBmkGfQoSpSRhoToDDskg@mail.gmail.com>
-In-Reply-To: <CAD=GYpYeDmU6CN1MzztiKsf+tfOrWgBmkGfQoSpSRhoToDDskg@mail.gmail.com>
-Mime-Version: 1.0 (iPhone Mail 8L1)
-Message-Id: <53D0B8FD-2805-4C48-8B5E-669A96CD9962@dominion.thruhere.net>
-X-Mailer: iPhone Mail (8L1)
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 3 Aug 2011 00:09:33 +0200
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Cc: "Kridner, Jason" <jdk@ti.com>, "Kooi, Koen" <k-kooi@ti.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	"openembedded-core@lists.openembedded.org"
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] systemd-gnome-image do_rootfs failure
+	Tue, 02 Aug 2011 15:20:04 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  2 Aug 2011 15:19:53 -0700
+Message-Id: <1312323593-15158-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [PATCH] systemd: Refresh format-replace-m-uclibc.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,402 +38,159 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Aug 2011 22:14:06 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+X-List-Received-Date: Tue, 02 Aug 2011 22:24:29 -0000
 
+This patch needed refresh against latest systemd sources
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../systemd/systemd/format-replace-m-uclibc.patch  |   46 ++++++++++----------
+ 1 files changed, 23 insertions(+), 23 deletions(-)
 
-Op 2 aug. 2011 om 23:57 heeft Joel A Fernandes <agnel.joel@gmail.com> het vo=
-lgende geschreven:
+diff --git a/meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch b/meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch
+index 3b9ed31..48f870b 100644
+--- a/meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch
++++ b/meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch
+@@ -9,9 +9,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ 
+ Index: git/src/mount-setup.c
+ ===================================================================
+---- git.orig/src/mount-setup.c	2011-07-03 08:24:43.892018457 -0700
+-+++ git/src/mount-setup.c	2011-07-03 08:35:23.592956700 -0700
+-@@ -147,10 +147,11 @@
++--- git.orig/src/mount-setup.c	2011-08-02 11:28:04.000000000 -0700
+++++ git/src/mount-setup.c	2011-08-02 11:29:52.818915041 -0700
++@@ -172,10 +172,11 @@
+  
+          for (;;) {
+                  MountPoint p;
+@@ -25,7 +25,7 @@ Index: git/src/mount-setup.c
+  
+                          if (feof(f))
+                                  break;
+-@@ -161,12 +162,10 @@
++@@ -186,12 +187,10 @@
+                  }
+  
+                  if (!enabled) {
+@@ -38,18 +38,18 @@ Index: git/src/mount-setup.c
+                          r = -ENOMEM;
+                          goto finish;
+                  }
+-@@ -180,7 +179,6 @@
++@@ -205,7 +204,6 @@
+                  p.fatal = false;
+  
+-                 r = mount_one(&p);
++                 r = mount_one(&p, true);
+ -                free(controller);
+                  free(where);
+  
+                  if (r < 0)
+ Index: git/src/socket-util.c
+ ===================================================================
+---- git.orig/src/socket-util.c	2011-07-03 08:24:43.892018457 -0700
+-+++ git/src/socket-util.c	2011-07-03 08:25:38.242098176 -0700
++--- git.orig/src/socket-util.c	2011-08-02 11:28:04.000000000 -0700
+++++ git/src/socket-util.c	2011-08-02 11:28:16.178773302 -0700
+ @@ -192,7 +192,7 @@
+  int socket_address_parse_netlink(SocketAddress *a, const char *s) {
+          int family;
+@@ -80,8 +80,8 @@ Index: git/src/socket-util.c
+  
+ Index: git/src/cryptsetup-generator.c
+ ===================================================================
+---- git.orig/src/cryptsetup-generator.c	2011-07-03 08:24:43.892018457 -0700
+-+++ git/src/cryptsetup-generator.c	2011-07-03 08:25:38.252098188 -0700
++--- git.orig/src/cryptsetup-generator.c	2011-08-02 11:28:04.000000000 -0700
+++++ git/src/cryptsetup-generator.c	2011-08-02 11:28:16.458773716 -0700
+ @@ -260,7 +260,7 @@
+  
+          for (;;) {
+@@ -115,8 +115,8 @@ Index: git/src/cryptsetup-generator.c
+  finish:
+ Index: git/src/swap.c
+ ===================================================================
+---- git.orig/src/swap.c	2011-07-03 08:24:43.892018457 -0700
+-+++ git/src/swap.c	2011-07-03 08:34:20.512864178 -0700
++--- git.orig/src/swap.c	2011-08-02 11:28:04.000000000 -0700
+++++ git/src/swap.c	2011-08-02 11:28:16.488773760 -0700
+ @@ -1043,11 +1043,12 @@
+          (void) fscanf(m->proc_swaps, "%*s %*s %*s %*s %*s\n");
+  
+@@ -147,9 +147,9 @@ Index: git/src/swap.c
+                          return -ENOMEM;
+ Index: git/src/tmpfiles.c
+ ===================================================================
+---- git.orig/src/tmpfiles.c	2011-07-03 08:24:43.892018457 -0700
+-+++ git/src/tmpfiles.c	2011-07-03 08:25:38.272098222 -0700
+-@@ -66,7 +66,7 @@
++--- git.orig/src/tmpfiles.c	2011-08-02 11:28:04.000000000 -0700
+++++ git/src/tmpfiles.c	2011-08-02 11:28:16.488773760 -0700
++@@ -67,7 +67,7 @@
+  typedef struct Item {
+          char type;
+  
+@@ -158,7 +158,7 @@ Index: git/src/tmpfiles.c
+          uid_t uid;
+          gid_t gid;
+          mode_t mode;
+-@@ -619,7 +619,6 @@
++@@ -664,7 +664,6 @@
+  static void item_free(Item *i) {
+          assert(i);
+  
+@@ -166,7 +166,7 @@ Index: git/src/tmpfiles.c
+          free(i);
+  }
+  
+-@@ -654,7 +653,7 @@
++@@ -699,7 +698,7 @@
+  
+  static int parse_line(const char *fname, unsigned line, const char *buffer) {
+          Item *i, *existing;
+@@ -175,7 +175,7 @@ Index: git/src/tmpfiles.c
+          Hashmap *h;
+          int r;
+  
+-@@ -669,17 +668,17 @@
++@@ -714,17 +713,17 @@
+  
+          if (sscanf(buffer,
+                     "%c "
+@@ -202,7 +202,7 @@ Index: git/src/tmpfiles.c
+                  log_error("[%s:%u] Syntax error.", fname, line);
+                  r = -EIO;
+                  goto finish;
+-@@ -793,11 +792,6 @@
++@@ -825,11 +824,6 @@
+          r = 0;
+  
+  finish:
+@@ -216,8 +216,8 @@ Index: git/src/tmpfiles.c
+  
+ Index: git/src/mount.c
+ ===================================================================
+---- git.orig/src/mount.c	2011-07-03 08:24:43.892018457 -0700
+-+++ git/src/mount.c	2011-07-03 08:33:43.112809328 -0700
++--- git.orig/src/mount.c	2011-08-02 11:28:04.000000000 -0700
+++++ git/src/mount.c	2011-08-02 11:28:16.488773760 -0700
+ @@ -24,6 +24,7 @@
+  #include <mntent.h>
+  #include <sys/epoll.h>
+@@ -304,8 +304,8 @@ Index: git/src/mount.c
+          free(o);
+ Index: git/src/umount.c
+ ===================================================================
+---- git.orig/src/umount.c	2011-07-03 08:24:43.892018457 -0700
+-+++ git/src/umount.c	2011-07-03 08:33:06.732755969 -0700
++--- git.orig/src/umount.c	2011-08-02 11:28:04.000000000 -0700
+++++ git/src/umount.c	2011-08-02 11:28:16.498773772 -0700
+ @@ -60,7 +60,9 @@
+  
+  static int mount_points_list_get(MountPoint **head) {
+-- 
+1.7.4.1
 
-> I'd like to report a possible problem with oe-core that I'm not sure how t=
-o fix:
-
-./oebb.sh update
-
-
-
-
-
-
-
->=20
-> On running a "bitbake systemd-gnome-image", the do_rootfs stage fails
-> saying certain packages are missing.
->=20
-> On digging further, I find that the opkg.conf that opkg-cl uses (in
-> image.bbclass do_rootfs function) has the following contents:
->=20
-> arch all 1
-> arch any 6
-> arch noarch 11
-> arch arm 16
-> arch beagleboard 21
-> src oe file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2=
-010_x-eglibc/deploy/ipk
-> src oe-all file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstr=
-om_2010_x-eglibc/deploy/ipk/all
-> src oe-beagleboard
-> file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-e=
-glibc/deploy/ipk/beagleboard
->=20
-> But there is no entry for:
-> file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-e=
-glibc/deploy/ipk/armv7a
->=20
-> As a result, many packages like xserver-xorg are not found by opkg and
-> the do_rootfs stage fails.
->=20
-> This could be a potential problem in package_generate_ipkg_conf in
-> ./openembedded-core/meta/classes/package_ipk.bbclass (?)
->=20
-> Here is the build log:
-> [..]
-> ++ echo any
-> ++ sed -e s/arm/i686/
-> + sdkarch=3Dany
-> + extension=3D-nativesdk
-> + '[' any =3D all -o any =3D any -o any =3D noarch ']'
-> + extension=3D
-> + '[' -e /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010=
-_x-eglibc/deploy/ipk/any/Packages
-> ']'
-> + for arch in '$ipkgarchs'
-> + '[' -e /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010=
-_x-eglibc/deploy/ipk/noarch/Packages
-> ']'
-> ++ echo noarch
-> ++ sed -e s/arm/i686/
-> + sdkarch=3Dnoarch
-> + extension=3D-nativesdk
-> + '[' noarch =3D all -o noarch =3D any -o noarch =3D noarch ']'
-> + extension=3D
-> + '[' -e /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010=
-_x-eglibc/deploy/ipk/noarch/Packages
-> ']'
-> + for arch in '$ipkgarchs'
-> + '[' -e /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010=
-_x-eglibc/deploy/ipk/arm/Packages
-> ']'
-> ++ echo arm
-> ++ sed -e s/arm/i686/
-> + sdkarch=3Di686
-> + extension=3D-nativesdk
-> + '[' i686 =3D all -o i686 =3D any -o i686 =3D noarch ']'
-> + '[' -e /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010=
-_x-eglibc/deploy/ipk/i686-nativesdk/Packages
-> ']'
-> + for arch in '$ipkgarchs'
-> + '[' -e /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010=
-_x-eglibc/deploy/ipk/beagleboard/Packages
-> ']'
-> + echo 'src oe-beagleboard
-> file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-e=
-glibc/deploy/ipk/beagleboard'
-> ++ echo beagleboard
-> ++ sed -e s/arm/i686/
-> + sdkarch=3Dbeagleboard
-> + extension=3D-nativesdk
-> + '[' beagleboard =3D all -o beagleboard =3D any -o beagleboard =3D noarch=
- ']'
-> + '[' -e /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010=
-_x-eglibc/deploy/ipk/beagleboard-nativesdk/Packages
-> ']'
-> + multilib_archs=3D
-> + mkdir -p /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_20=
-10_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-=
-r0/temp/
-> + STATUS=3D/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_20=
-10_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-=
-r0/rootfs/var/lib/opkg/status
-> + mkdir -p /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_20=
-10_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-=
-r0/rootfs/var/lib/opkg
-> + opkg-cl -f /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_=
-2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.=
-0-r0/opkg.conf
-> -o /home/joel/angstrom-o
-> e/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-ang=
-strom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs
-> --force-overwrite update
-> Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angst=
-rom_2010_x-eglibc/deploy/ipk/Packages.
-> Updated list of available packages in
-> /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc=
-/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs//=
-v
-> ar/lib/opkg/lists/oe.
-> Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angst=
-rom_2010_x-eglibc/deploy/ipk/all/Packages.
-> Updated list of available packages in
-> /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc=
-/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs//=
-v
-> ar/lib/opkg/lists/oe-all.
-> Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angst=
-rom_2010_x-eglibc/deploy/ipk/beagleboard/Packages.
-> Updated list of available packages in
-> /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc=
-/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs//=
-v
-> ar/lib/opkg/lists/oe-beagleboard.
-> + export INSTALL_PACKAGES_ATTEMPTONLY_IPK=3D
-> + INSTALL_PACKAGES_ATTEMPTONLY_IPK=3D
-> + export INSTALL_PACKAGES_LINGUAS_IPK=3Dlocale-base-en-us
-> + INSTALL_PACKAGES_LINGUAS_IPK=3Dlocale-base-en-us
-> + export INSTALL_TASK_IPK=3Drootfs
-> + INSTALL_TASK_IPK=3Drootfs
-> + export INSTALL_ROOTFS_IPK=3D/home/joel/angstrom-oe/setup-scripts-core/bu=
-ild/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/syste=
-md-gnome-image-1.0-r0/rootfs
-> + INSTALL_ROOTFS_IPK=3D/home/joel/angstrom-oe/setup-scripts-core/build/tmp=
--angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnom=
-e-image-1.0-r0/rootfs
-> + export INSTALL_CONF_IPK=3D/home/joel/angstrom-oe/setup-scripts-core/buil=
-d/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd=
--gnome-image-1.0-r0/opkg.conf
-> + INSTALL_CONF_IPK=3D/home/joel/angstrom-oe/setup-scripts-core/build/tmp-a=
-ngstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-=
-image-1.0-r0/opkg.conf
-> + export 'INSTALL_PACKAGES_NORMAL_IPK=3Dconnman-plugin-loopback
-> openssh-sftp udev e2fsprogs-blkid htop rsyslog cpufrequtils systemd
-> connman-plugin-wifi connman task-gnome-themes avahi-daemon
-> e2fsprogs-e2fsck task-gnome-fonts task-gnome-apps systemd-compat-units
-> connman-systemd task-gnome avahi-utils task-xserver avahi-systemd
-> shadow dropbear-systemd tinylogin angstrom-task-boot
-> task-gnome-xserver-base connman-plugin-ethernet'
-> + INSTALL_PACKAGES_NORMAL_IPK=3D'connman-plugin-loopback openssh-sftp
-> udev e2fsprogs-blkid htop rsyslog cpufrequtils systemd
-> connman-plugin-wifi connman task-gnome-themes avahi-daemon e2fspro
-> gs-e2fsck task-gnome-fonts task-gnome-apps systemd-compat-units
-> connman-systemd task-gnome avahi-utils task-xserver avahi-systemd
-> shadow dropbear-systemd tinylogin angstrom-task-boot task-g
-> nome-xserver-base connman-plugin-ethernet'
-> + export INSTALL_PACKAGES_MULTILIB_IPK=3D
-> + INSTALL_PACKAGES_MULTILIB_IPK=3D
-> + package_install_internal_ipk
-> + local target_rootfs=3D/home/joel/angstrom-oe/setup-scripts-core/build/tm=
-p-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gno=
-me-image-1.0-r0/rootfs
-> + local conffile=3D/home/joel/angstrom-oe/setup-scripts-core/build/tmp-ang=
-strom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-im=
-age-1.0-r0/opkg.conf
-> + local 'package_to_install=3Dconnman-plugin-loopback openssh-sftp udev
-> e2fsprogs-blkid htop rsyslog cpufrequtils systemd connman-plugin-wifi
-> connman task-gnome-themes avahi-daemon e2fsprogs-
-> e2fsck task-gnome-fonts task-gnome-apps systemd-compat-units
-> connman-systemd task-gnome avahi-utils task-xserver avahi-systemd
-> shadow dropbear-systemd tinylogin angstrom-task-boot task-gnom
-> e-xserver-base connman-plugin-ethernet'
-> + local package_attemptonly=3D
-> + local package_lingusa=3D
-> + local package_multilib=3D
-> + local task=3Drootfs
-> + mkdir -p /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_20=
-10_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-=
-r0/rootfs/var/lib/opkg/
-> + local 'ipkg_args=3D-f
-> /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc=
-/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/opkg.con=
-f
-> -o /home/joel/a
-> ngstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagle=
-board-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs
-> --force-overwrite'
-> + opkg-cl -f /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_=
-2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.=
-0-r0/opkg.conf
-> -o /home/joel/angstrom-o
-> e/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-ang=
-strom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs
-> --force-overwrite update
-> Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angst=
-rom_2010_x-eglibc/deploy/ipk/Packages.
-> Updated list of available packages in
-> /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc=
-/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs//=
-v
-> ar/lib/opkg/lists/oe.
-> Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angst=
-rom_2010_x-eglibc/deploy/ipk/all/Packages.
-> Updated list of available packages in
-> /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc=
-/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs//=
-v
-> ar/lib/opkg/lists/oe-all.
-> Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angst=
-rom_2010_x-eglibc/deploy/ipk/beagleboard/Packages.
-> Updated list of available packages in
-> /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc=
-/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs//=
-v
-> ar/lib/opkg/lists/oe-beagleboard.
-> + '[' xlinux-gnueabi =3D xlinux ']'
-> + '[' xlinux-gnueabi =3D xlinux-gnueabi ']'
-> + '[' '!' -z '' ']'
-> + '[' '!' -z 'connman-plugin-loopback openssh-sftp udev
-> e2fsprogs-blkid htop rsyslog cpufrequtils systemd connman-plugin-wifi
-> connman task-gnome-themes avahi-daemon e2fsprogs-e2fsck task-gn
-> ome-fonts task-gnome-apps systemd-compat-units connman-systemd
-> task-gnome avahi-utils task-xserver avahi-systemd shadow
-> dropbear-systemd tinylogin angstrom-task-boot task-gnome-xserver-base
-> connman-plugin-ethernet' ']'
-> + opkg-cl -f /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_=
-2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.=
-0-r0/opkg.conf
-> -o /home/joel/angstrom-o
-> e/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-ang=
-strom-linux-gnueabi/systemd-gnome-image-1.0-r0/rootfs
-> --force-overwrite install connman-plugin-loopback openssh-sft
-> p udev e2fsprogs-blkid htop rsyslog cpufrequtils systemd
-> connman-plugin-wifi connman task-gnome-themes avahi-daemon
-> e2fsprogs-e2fsck task-gnome-fonts task-gnome-apps systemd-compat-units
-> co
-> nnman-systemd task-gnome avahi-utils task-xserver avahi-systemd shadow
-> dropbear-systemd tinylogin angstrom-task-boot task-gnome-xserver-base
-> connman-plugin-ethernet
-> Unknown package 'connman-plugin-loopback'.
-> Unknown package 'openssh-sftp'.
-> Unknown package 'udev'.
-> Unknown package 'e2fsprogs-blkid'.
-> Unknown package 'htop'.
-> Unknown package 'rsyslog'.
-> Unknown package 'cpufrequtils'.
-> Unknown package 'systemd'.
-> Unknown package 'connman-plugin-wifi'.
-> Unknown package 'connman'.
-> Installing task-gnome-themes (1.0-r9) to root...
-> Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angst=
-rom_2010_x-eglibc/deploy/ipk/all/task-gnome-themes_1.0-r9_all.ipk.
-> Unknown package 'avahi-daemon'.
-> Unknown package 'e2fsprogs-e2fsck'.
-> Installing task-gnome-fonts (1.0-r9) to root...
-> Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angst=
-rom_2010_x-eglibc/deploy/ipk/all/task-gnome-fonts_1.0-r9_all.ipk.
-> Installing task-gnome-apps (1.0-r9) to root...
-> Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angst=
-rom_2010_x-eglibc/deploy/ipk/all/task-gnome-apps_1.0-r9_all.ipk.
-> Installing systemd-compat-units (1.0-r10) to root...
-> Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angst=
-rom_2010_x-eglibc/deploy/ipk/all/systemd-compat-units_1.0-r10_all.ipk.
-> Unknown package 'connman-systemd'.
-> Installing task-gnome (1.0-r9) to root...
-> Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angst=
-rom_2010_x-eglibc/deploy/ipk/all/task-gnome_1.0-r9_all.ipk.
-> task-gnome: unsatisfied recommendation for ofono
-> Unknown package 'avahi-utils'.
-> Installing task-xserver (1.0-r0) to root...
-> Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angst=
-rom_2010_x-eglibc/deploy/ipk/beagleboard/task-xserver_1.0-r0_beagleboard.ipk=
-.
-> Unknown package 'avahi-systemd'.
-> Installing shadow (4.1.4.3-r3) to root...
-> Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angst=
-rom_2010_x-eglibc/deploy/ipk/beagleboard/shadow_4.1.4.3-r3_beagleboard.ipk.
-> Installing dropbear-systemd (v1-r0) to root...
-> Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angst=
-rom_2010_x-eglibc/deploy/ipk/all/dropbear-systemd_v1-r0_all.ipk.
-> Unknown package 'tinylogin'.
-> Installing angstrom-task-boot (1.0-r1) to root...
-> Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angst=
-rom_2010_x-eglibc/deploy/ipk/beagleboard/angstrom-task-boot_1.0-r1_beagleboa=
-rd.ipk.
-> angstrom-feed-configs: unsatisfied recommendation for opkg
-> Installing task-gnome-xserver-base (1.0-r9) to root...
-> Downloading file:/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angst=
-rom_2010_x-eglibc/deploy/ipk/all/task-gnome-xserver-base_1.0-r9_all.ipk.
-> mime-support: unsatisfied recommendation for file
-> Unknown package 'connman-plugin-ethernet'.
-> Configuring systemd-compat-units.
-> Collected errors:
-> * opkg_install_cmd: Cannot install package connman-plugin-loopback.
-> * opkg_install_cmd: Cannot install package openssh-sftp.
-> * opkg_install_cmd: Cannot install package udev.
-> * opkg_install_cmd: Cannot install package e2fsprogs-blkid.
-> * opkg_install_cmd: Cannot install package htop.
-> * opkg_install_cmd: Cannot install package rsyslog.
-> * opkg_install_cmd: Cannot install package cpufrequtils.
-> * opkg_install_cmd: Cannot install package systemd.
-> * opkg_install_cmd: Cannot install package connman-plugin-wifi.
-> * opkg_install_cmd: Cannot install package connman.
-> * satisfy_dependencies_for: Cannot satisfy the following dependencies
-> for task-gnome-themes:
-> *      gnome-icon-theme *      gtk-engine-thinice *
-> gtk-engine-redmond95 *  gtk-theme-crux *        gtk-engine-clearlooks
-> *         gtk-engine-hcengine *   gtk-theme-clearlooks *
-> gnome-icon-theme *      gtk-theme-thinice *     gnome-icon-theme *
-> gtk-engine-crux-engine *        gtk-theme-redmond *
-> gtk-engine-glide *      gtk-theme-mist *
-> * opkg_install_cmd: Cannot install package task-gnome-themes.
-> * opkg_install_cmd: Cannot install package avahi-daemon.
-> * opkg_install_cmd: Cannot install package e2fsprogs-e2fsck.
-> * satisfy_dependencies_for: Cannot satisfy the following dependencies
-> for task-gnome-fonts:
-> *      mkfontdir *     eglibc (>=3D 2.12) *      mkfontscale *
-> fontconfig *    fontconfig-utils *
-> * opkg_install_cmd: Cannot install package task-gnome-fonts.
-> * satisfy_dependencies_for: Cannot satisfy the following dependencies
-> for task-gnome-apps:
-> *      epiphany *      matchbox-terminal *     x11vnc *
-> * opkg_install_cmd: Cannot install package task-gnome-apps.
-> * opkg_install_cmd: Cannot install package connman-systemd.
-> * satisfy_dependencies_for: Cannot satisfy the following dependencies
-> for task-gnome:
-> *      gnome-keyring *         gnome-bluetooth *       nautilus *
-> gtk-engine-clearlooks *         gtk-theme-clearlooks *  gdm *
-> gnome-settings-daemon *         gnome-panel *   gnome-power-manager *
-> gnome-control-center *  gnome-system-monitor *  upower *
-> gnome-disk-utility *    connman-gnome *         connman-plugin-ntpd *
-> gdm-systemd *   gpe-scap *      bash *  udisks *
-> * opkg_install_cmd: Cannot install package task-gnome.
-> * opkg_install_cmd: Cannot install package avahi-utils.
-> * satisfy_dependencies_for: Cannot satisfy the following dependencies
-> for task-xserver:
-> *      xserver-xorg *  xf86-input-mouse *      xf86-input-keyboard *
-> xf86-input-evdev *      xf86-video-omapfb *
-> * opkg_install_cmd: Cannot install package task-xserver.
-> * opkg_install_cmd: Cannot install package avahi-systemd.
-> * satisfy_dependencies_for: Cannot satisfy the following dependencies
-> for shadow:
-> *      libpam-runtime *        pam-plugin-env *
-> pam-plugin-shells *     pam-plugin-faildelay *  pam-plugin-securetty *
-> pam-plugin-limits *     pam-plugin-nologin *    pam-plugin-motd *
->  eglibc (>=3D 2.12) *      pam-plugin-group *      pam-plugin-mail *
->   pam-plugin-rootok *     libpam (>=3D 1.1.4) *     pam-plugin-lastlog
-> *
-> * opkg_install_cmd: Cannot install package shadow.
-> * satisfy_dependencies_for: Cannot satisfy the following dependencies
-> for dropbear-systemd:
-> *      dropbear *      systemd *
-> * opkg_install_cmd: Cannot install package dropbear-systemd.
-> * opkg_install_cmd: Cannot install package tinylogin.
-> * satisfy_dependencies_for: Cannot satisfy the following dependencies
-> for angstrom-task-boot:
-> *      busybox *       netbase *       opkg *  base-passwd *
-> * opkg_install_cmd: Cannot install package angstrom-task-boot.
-> * satisfy_dependencies_for: Cannot satisfy the following dependencies
-> for task-gnome-xserver-base:
-> *      xvinfo *        dbus-x11 *      xdg-utils *     xhost *
-> xset *  xrandr *        xinetd *        xauth *         xrdb *  xinit
-> *
-> * opkg_install_cmd: Cannot install package task-gnome-xserver-base.
-> * opkg_install_cmd: Cannot install package connman-plugin-ethernet.
-> ERROR: Function 'do_rootfs' failed (see
-> /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc=
-/work/beagleboard-angstrom-linux-gnueabi/systemd-gnome-image-1.0-r0/temp/log=
-.do_rootfs.32044
-> for further information)
-> (END)
->=20
->=20
-> Thanks,
-> Joel
->=20
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
 
 
