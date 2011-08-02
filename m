@@ -1,28 +1,24 @@
 Received: from mailout-de.gmx.net ([213.165.64.22])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1Qo8Qp-0001j9-A8
+	(envelope-from <schnitzeltony@gmx.de>) id 1Qo97b-0003Hf-M8
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Aug 2011 08:26:23 +0200
-Received: (qmail invoked by alias); 02 Aug 2011 06:22:01 -0000
+	Tue, 02 Aug 2011 09:10:35 +0200
+Received: (qmail invoked by alias); 02 Aug 2011 07:06:14 -0000
 Received: from p4FDF0FCF.dip.t-dialin.net (EHLO localhost.localdomain)
 	[79.223.15.207]
-	by mail.gmx.net (mp044) with SMTP; 02 Aug 2011 08:22:01 +0200
+	by mail.gmx.net (mp002) with SMTP; 02 Aug 2011 09:06:14 +0200
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19/DdIsvOd/Rek8qXwaPT9PHw2a08Alp6gckfk6jk
-	75WwfJCJqPNMrO
+X-Provags-ID: V01U2FsdGVkX1+MdI5ufYeM3C2B68tw9aYjExBPypXEXnqA3tlCir
+	eGsmDar8x9/VuE
 From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 2 Aug 2011 08:24:56 +0200
-User-Agent: KMail/1.13.7 (Linux/2.6.35.13-92.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-References: <1312232577-7948-1-git-send-email-schnitzeltony@gmx.de>
-	<1312232577-7948-2-git-send-email-schnitzeltony@gmx.de>
-	<2217747.GCqkKhOu6O@perseus>
-In-Reply-To: <2217747.GCqkKhOu6O@perseus>
-MIME-Version: 1.0
-Message-Id: <201108020824.56776.schnitzeltony@gmx.de>
+Date: Tue,  2 Aug 2011 09:09:08 +0200
+Message-Id: <1312268948-5879-2-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1312268948-5879-1-git-send-email-schnitzeltony@gmx.de>
+References: <1312268948-5879-1-git-send-email-schnitzeltony@gmx.de>
 X-Y-GMX-Trusted: 0
-Subject: Re: [meta-oe 01/19] meta-xfce: Add layer information
+Subject: [meta-oe v2 1/1] iceauth: Import 1.0.4 from oe.dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,41 +32,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Aug 2011 06:26:23 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 02 Aug 2011 07:10:35 -0000
 
-On Tuesday, August 02, 2011 04:35:15 AM Khem Raj wrote:
-> On Monday, August 01, 2011 11:02:39 PM Andreas Mueller wrote:
-> > Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
-> > ---
-> > 
-> >  meta-xfce/conf/layer.conf |    9 +++++++++
-> >  1 files changed, 9 insertions(+), 0 deletions(-)
-> >  create mode 100644 meta-xfce/conf/layer.conf
-> > 
-> > diff --git a/meta-xfce/conf/layer.conf b/meta-xfce/conf/layer.conf
-> > new file mode 100644
-> > index 0000000..d669e4e
-> > --- /dev/null
-> > +++ b/meta-xfce/conf/layer.conf
-> > @@ -0,0 +1,9 @@
-> > +# We have a conf and classes directory, append to BBPATH
-> > +BBPATH .= ":${LAYERDIR}"
-> > +
-> > +# We have a recipes directory, add to BBFILES
-> > +BBFILES += "${LAYERDIR}/recipes-*/*/*.bb
-> > ${LAYERDIR}/recipes-*/*/*.bbappend" +
-> > +BBFILE_COLLECTIONS += "xfce-layer"
-> > +BBFILE_PATTERN_xfce-layer := "^${LAYERDIR}/"
-> > +BBFILE_PRIORITY_xfce-layer = "7"
-> 
-> it would be nice if there was also a README
-> explaining the dependencies of this layer or any other
-> information that user of this layer needs to know
-Oops - will be done in V2 or further patch..
+The patch was imported from the OpenEmbedded git server
+(git://github.com/openembedded/openembedded.git) as of commit id
+033af22d565adabc05303f88e76e31e7d239756c.
 
-Andreas
+Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
+---
+ meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb |    8 ++++++++
+ 1 files changed, 8 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb
+
+diff --git a/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb b/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb
+new file mode 100644
+index 0000000..168afc2
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "Tool for manipulating ICE protocol authorization records"
++LIC_FILES_CHKSUM = "file://COPYING;md5=13f70acf3c27f5f834bbc954df775f8e"
++DEPENDS += "libice"
++PR = "${INC_PR}.1"
++
++SRC_URI[md5sum] = "bb2e4d2611047f7c5a1a82ec956a9de4"
++SRC_URI[sha256sum] = "0ee6fd4554f0131b1ed526ee00b9cf643e7dc97eb70fb51448848ef2f349938d"
+-- 
+1.7.4.4
+
 
 
