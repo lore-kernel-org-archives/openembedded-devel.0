@@ -1,25 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Qob60-0001g6-ON for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Aug 2011 15:02:49 +0200
-Received: from f053043040.adsl.alicedsl.de ([78.53.43.40]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Qob1t-0000Kf-39 for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Aug 2011 12:58:33 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <raj.khem@gmail.com>) id 1QoePh-0002Di-Kp
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Aug 2011 18:35:21 +0200
+Received: by ywe9 with SMTP id 9so587609ywe.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Aug 2011 09:30:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:organization:user-agent:in-reply-to
+	:references:mime-version:content-transfer-encoding:content-type;
+	bh=cRKMZ0WwLcc9y/op3t7au6dTdJfbHL1rE3U9/PTEEI8=;
+	b=EqptQ0Um2donhCAFswNjX9sTFLl1hMmjNvbNOV8+XYZbft+jKoXat76ScinKqPl5Vb
+	xno+PEj5QF8sQ2piESwK37Ex/I4AcNR3DEEkeWDIVa04UL6X7S0epX5gY+mQVVO/mNLQ
+	iBCubtRg5d2bqLHh1YEv8gP7SEBi/ptAQMNGk=
+Received: by 10.142.66.40 with SMTP id o40mr1592492wfa.380.1312389055296;
+	Wed, 03 Aug 2011 09:30:55 -0700 (PDT)
+Received: from perseus.localnet (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id o6sm1207010pbj.82.2011.08.03.09.30.54
+	(version=SSLv3 cipher=OTHER); Wed, 03 Aug 2011 09:30:54 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4E39412E.8030507@googlemail.com>
-References: <1312311949-3788-1-git-send-email-josua.mayer97@googlemail.com>
-	<1312370150.19311.163.camel@mattotaupa>
-	<4E39412E.8030507@googlemail.com>
-Date: Wed, 03 Aug 2011 14:58:26 +0200
-Message-ID: <1312376306.19311.270.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: `machines/{ion.conf, includes/tune-atom.inc}`: `Your PACKAGE_ARCHS field contains duplicates.` (was: [PATCH v2] mplayer_git: Fix linker error on x86 machines)
+Date: Wed, 03 Aug 2011 09:30:51 -0700
+Message-ID: <16204200.VAzIQNRjoR@perseus>
+Organization: Sakrah
+User-Agent: KMail/4.7.0  (Linux/2.6.38-10-generic; KDE/4.7.0; i686; ; )
+In-Reply-To: <j1b7fv$cac$1@dough.gmane.org>
+References: <1312313539-3772-1-git-send-email-raj.khem@gmail.com>
+	<j1b7fv$cac$1@dough.gmane.org>
+MIME-Version: 1.0
+Subject: Re: [meta-oe][PATCH] gcc-4.6: Bring in linaro patches upto 07.2011 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,49 +43,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Aug 2011 13:02:49 -0000
-X-Groupsio-MsgNum: 33492
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-TeBIaojP017o3QRLTGOT"
+X-List-Received-Date: Wed, 03 Aug 2011 16:35:22 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---=-TeBIaojP017o3QRLTGOT
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Wednesday, August 03, 2011 12:21:51 PM Koen Kooi wrote:
+> Op 02-08-11 21:32, Khem Raj schreef:
+> > I have build/run tested this patch on arm/mips/x86 and on ppc the image
+> > did not build so could not run the image but that a different issue
+> > right now being addressed in oe-core.
+> > 
+> > see
+> > http://lists.linuxtogo.org/pipermail/openembedded-core/2011-August/0073
+> > 43.html
+> > 
+> > Similarily x86-64 built fine but could not do boot testing since it is
+> > broken too see.
+> > 
+> > http://lists.linuxtogo.org/pipermail/openembedded-core/2011-August/00743
+> > 9.html
+> > 
+> > Otherwise angstrom/console-image booted for all above said arches
+> > successfully except ppc x86_64 for the reasons stated earlier. All
+> > builds were done from scratch w/o sstate
+> it doesn't apply for me:
 
-Am Mittwoch, den 03.08.2011, 14:38 +0200 schrieb Josua Mayer:
+it had one really long line and I had to use --no-validate option to get
+git send-email in agreement. I have now pushed it to contrib tree here
 
-[=E2=80=A6]
-
-> I wasn't sure if a PR bump was needed as the patch does not change
-> mplayer in a way that would require people to update it, it only matters
-> to platforms where it didnt compile before so it wasnt available anyway.
-
-True. I just did it because Eric had done it in ff57f14c [1].
-
-> The bitbake error comes from tune-atom.inc:
-> PACKAGE_EXTRA_ARCHS +=3D "x86 i386 i486 i586 i686"
-> I removed the i696 there and it would work. I cant send a patch for this
-> as I do not know whats the correct way to fix this problem.
-
-I do not know that either. Maybe it is fixed in oe-core or meta-oe
-somewhere because they build for x86 more often.
+http://git.openembedded.org/cgit.cgi/meta-openembedded-
+contrib/log/?h=kraj/gcc-4.6-linaro-update
 
 
-Thanks,
 
-Paul
-
---=-TeBIaojP017o3QRLTGOT
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk45RfIACgkQPX1aK2wOHVjuHgCfXFDZexujFJ0uSJ3qtI2udogq
-BgAAn2hDKlUeZS5PB+e7XhyGpLCpFJyE
-=/YHh
------END PGP SIGNATURE-----
-
---=-TeBIaojP017o3QRLTGOT--
