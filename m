@@ -1,34 +1,23 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QoYek-00059T-UW for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Aug 2011 12:26:31 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QoYaV-0000s3-Nu for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Aug 2011 12:22:07 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Aug 2011 12:22:07 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Aug 2011 12:22:07 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QoZUh-0003iu-L8 for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Aug 2011 13:20:11 +0200
+Received: from f053043040.adsl.alicedsl.de ([78.53.43.40]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QoZQZ-0008Ma-WA for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Aug 2011 11:15:56 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 03 Aug 2011 12:21:51 +0200
-Message-ID: <j1b7fv$cac$1@dough.gmane.org>
-References: <1312313539-3772-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1312311949-3788-1-git-send-email-josua.mayer97@googlemail.com>
+References: <1312311949-3788-1-git-send-email-josua.mayer97@googlemail.com>
+Date: Wed, 03 Aug 2011 13:15:50 +0200
+Message-ID: <1312370150.19311.163.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
-In-Reply-To: <1312313539-3772-1-git-send-email-raj.khem@gmail.com>
-X-Enigmail-Version: 1.2
-Subject: Re: [meta-oe][PATCH] gcc-4.6: Bring in linaro patches upto 07.2011 release
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH v2] mplayer_git: Fix linker error on x86 machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,51 +31,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Aug 2011 10:26:31 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 03 Aug 2011 11:20:11 -0000
+X-Groupsio-MsgNum: 33490
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-5K5EK92IVcV2YHEguwr1"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-5K5EK92IVcV2YHEguwr1
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Op 02-08-11 21:32, Khem Raj schreef:
-> I have build/run tested this patch on arm/mips/x86 and on ppc the image did not build so could not run the image but that a different issue right now being addressed in oe-core.
-> 
-> see http://lists.linuxtogo.org/pipermail/openembedded-core/2011-August/007343.html
-> 
-> Similarily x86-64 built fine but could not do boot testing since it is broken too see.
-> 
-> http://lists.linuxtogo.org/pipermail/openembedded-core/2011-August/007439.html
-> 
-> Otherwise angstrom/console-image booted for all above said arches successfully except ppc x86_64 for the reasons stated earlier. All builds were done from scratch w/o sstate
+Dear Josua,
 
-it doesn't apply for me:
 
-$ contrib/patchwork/pw-am.sh 9083 9090
-2011-08-03 12:20:19 URL:http://patches.openembedded.org/patch/9083/mbox/ [248463] -> "pw-am-9083.patch" [1]
-Applying: gcc-4.6: Bring in linaro patches upto 07.2011 release
-/OE/tentacle/sources/meta-openembedded/.git/rebase-apply/patch:63: trailing whitespace.
+thank you for sending a patch iteration with my comments addressed. Just
+a side note, you can use `git commit --amend` to edit the commit message
+of the last commit. I do not know if you used that since the date looks
+different from your initial patch.
 
-/OE/tentacle/sources/meta-openembedded/.git/rebase-apply/patch:142: trailing whitespace.
+Am Dienstag, den 02.08.2011, 21:05 +0200 schrieb Josua Mayer:
+> * fix undefined references  in loader/module.o:
+>   module.c:(.text+0xd60): undefined reference to `report_entry'
+>   module.c:(.text+0xd6a): undefined reference to `report_ret'
+>   module.c:(.text+0xd74): undefined reference to `wrapper_target'
+>   module.c:(.text+0xd7a): undefined reference to `wrapper'
+>   and more of these
+> * Apply already existing patch fix-emu_qtx_api.diff
+>   This patch was already used in mplayer_svn but is needed
+>   for the git version too.
+>=20
+> Signed-off-by: Josua Mayer <josua.mayer97@googlemail.com>
+> ---
+>  recipes/mplayer/mplayer_git.bb |    3 ++-
+>  1 files changed, 2 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/recipes/mplayer/mplayer_git.bb b/recipes/mplayer/mplayer_git=
+.bb
+> index 259ce99..995884b 100644
+> --- a/recipes/mplayer/mplayer_git.bb
+> +++ b/recipes/mplayer/mplayer_git.bb
+> @@ -8,7 +8,8 @@ DEPENDS =3D "libvpx live555 libdvdread libtheora virtual/=
+libsdl ffmpeg xsp zlib li
+>  RDEPENDS_${PN} =3D "mplayer-common"
+>  LICENSE =3D "GPL"
+>  SRC_URI =3D "git://repo.or.cz/mplayer/glamo.git;protocol=3Dgit;branch=3D=
+mplayer2 \
+> -   "
+> +           file://fix-emu_qtx_api.diff \
+> +          "
+> =20
+>  SRC_URI_append_armv7a =3D " \
+>  	   file://0001-video-out-for-omapfb-support.patch \
 
-/OE/tentacle/sources/meta-openembedded/.git/rebase-apply/patch:188: trailing whitespace.
+Long story short I should have looked right away at the commit log for
+the patch file [1]. Reading that it would have been clear that this is
+needed for x86 targets which the ION seems to be. I thought SHR is
+primarily used for ARM mobile devices [2].
 
-/OE/tentacle/sources/meta-openembedded/.git/rebase-apply/patch:200: space before tab in indent.
- 	(const (symbol_ref "((enum attr_tune) arm_tune)")))
-/OE/tentacle/sources/meta-openembedded/.git/rebase-apply/patch:211: trailing whitespace.
+Therefore I always want to have the build configuration output from
+BitBake pasted in messages and commit messages.
 
-fatal: corrupt patch at line 5177
-Patch failed at 0001 gcc-4.6: Bring in linaro patches upto 07.2011 release
-When you have resolved this problem run "git am --resolved".
-If you would prefer to skip this patch, instead run "git am --skip".
-To restore the original branch and stop patching run "git am --abort".
+It would be great if you could bring that patch upstream somehow.
+
+I committed your patch with an improved commit message and a `PR` bump
+(I hope done correctly) in 1a91fc4b [3].
+
+Unfortunately I could not test this because using `DISTRO =3D "shr"` and
+`MACHINE =3D "ion"` fails with the following error message.
+
+        Error, Your PACKAGE_ARCHS field contains duplicates. Perhaps you se=
+t PACKAGE_EXTRA_ARCHS twice accidently through some tune file?
+
+So please remember to be as elaborate as possible and to provide all
+files for others to reproduce your problem. I know looking at the
+archive and commit log not everyone follows this rule but it would have
+saved me quite some time.
+
+
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dff57f14=
+c99a6ff61ffb7f1c533523e3e934f96e5
+[2] http://shr-project.org/trac
+[3] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D1a91fc4=
+b705b0c4f45eb088a2f7aea01ebc9c98e
+
+--=-5K5EK92IVcV2YHEguwr1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iD8DBQFOOSE/MkyGM64RGpERAqkMAJ96qSnwmi8J84y+lwm8adGKt5zR0QCgs+ME
-9RpXMWpHh1PCjoTFBxzhZrY=
-=P34V
+iEYEABECAAYFAk45LeAACgkQPX1aK2wOHVjrUACfbymqYzRBF1vcVmJDk3OhcJKB
+xpMAniDJGAqo2dP0TlPu+MG7Yc62vs0b
+=Trp9
 -----END PGP SIGNATURE-----
 
-
-
+--=-5K5EK92IVcV2YHEguwr1--
