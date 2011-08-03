@@ -1,35 +1,27 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QoePh-0002Di-Kp
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1Qog3H-0005C7-9o
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Aug 2011 18:35:21 +0200
-Received: by ywe9 with SMTP id 9so587609ywe.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Aug 2011 09:30:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:organization:user-agent:in-reply-to
-	:references:mime-version:content-transfer-encoding:content-type;
-	bh=cRKMZ0WwLcc9y/op3t7au6dTdJfbHL1rE3U9/PTEEI8=;
-	b=EqptQ0Um2donhCAFswNjX9sTFLl1hMmjNvbNOV8+XYZbft+jKoXat76ScinKqPl5Vb
-	xno+PEj5QF8sQ2piESwK37Ex/I4AcNR3DEEkeWDIVa04UL6X7S0epX5gY+mQVVO/mNLQ
-	iBCubtRg5d2bqLHh1YEv8gP7SEBi/ptAQMNGk=
-Received: by 10.142.66.40 with SMTP id o40mr1592492wfa.380.1312389055296;
-	Wed, 03 Aug 2011 09:30:55 -0700 (PDT)
-Received: from perseus.localnet (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id o6sm1207010pbj.82.2011.08.03.09.30.54
-	(version=SSLv3 cipher=OTHER); Wed, 03 Aug 2011 09:30:54 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 03 Aug 2011 20:20:19 +0200
+Received: (qmail invoked by alias); 03 Aug 2011 18:15:56 -0000
+Received: from p4FDF1F1E.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.223.31.30]
+	by mail.gmx.net (mp006) with SMTP; 03 Aug 2011 20:15:56 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1+mHGI668imuPe1LJZgs7eMwEhco1KhUrZZPmLW7h
+	riss9fV8XLa5ZV
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 03 Aug 2011 09:30:51 -0700
-Message-ID: <16204200.VAzIQNRjoR@perseus>
-Organization: Sakrah
-User-Agent: KMail/4.7.0  (Linux/2.6.38-10-generic; KDE/4.7.0; i686; ; )
-In-Reply-To: <j1b7fv$cac$1@dough.gmane.org>
-References: <1312313539-3772-1-git-send-email-raj.khem@gmail.com>
-	<j1b7fv$cac$1@dough.gmane.org>
+Date: Wed, 3 Aug 2011 20:18:51 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.35.13-92.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <1312232577-7948-1-git-send-email-schnitzeltony@gmx.de>
+	<j18cmj$j39$2@dough.gmane.org>
+In-Reply-To: <j18cmj$j39$2@dough.gmane.org>
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] gcc-4.6: Bring in linaro patches upto 07.2011 release
+Message-Id: <201108032018.51667.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: [meta-oe 00/19] Add xfce48 desktop system to meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,36 +35,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Aug 2011 16:35:22 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 03 Aug 2011 18:20:19 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Wednesday, August 03, 2011 12:21:51 PM Koen Kooi wrote:
-> Op 02-08-11 21:32, Khem Raj schreef:
-> > I have build/run tested this patch on arm/mips/x86 and on ppc the image
-> > did not build so could not run the image but that a different issue
-> > right now being addressed in oe-core.
-> > 
-> > see
-> > http://lists.linuxtogo.org/pipermail/openembedded-core/2011-August/0073
-> > 43.html
-> > 
-> > Similarily x86-64 built fine but could not do boot testing since it is
-> > broken too see.
-> > 
-> > http://lists.linuxtogo.org/pipermail/openembedded-core/2011-August/00743
-> > 9.html
-> > 
-> > Otherwise angstrom/console-image booted for all above said arches
-> > successfully except ppc x86_64 for the reasons stated earlier. All
-> > builds were done from scratch w/o sstate
-> it doesn't apply for me:
+On Tuesday, August 02, 2011 10:32:19 AM Koen Kooi wrote:
+> Do you have a public repo where this can be pulled from?
 
-it had one really long line and I had to use --no-validate option to get
-git send-email in agreement. I have now pushed it to contrib tree here
+Before pushing to
 
-http://git.openembedded.org/cgit.cgi/meta-openembedded-
-contrib/log/?h=kraj/gcc-4.6-linaro-update
+git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git branch meta-xfce
 
+I did
+
+* rebase the patches on latest meta-openembedded commits
+* Add README ( Khem suggested )
+* xfce-session: Modify commit message ( iceauth now mainline )
+* thunar: Minor modifcation in commit message
+* build-tested xfce-base-image again
+
+Andreas
 
 
