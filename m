@@ -1,35 +1,34 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Qozml-0004c4-TY
+	(envelope-from <Tom_Rini@mentor.com>) id 1Qp1ab-0007Cn-Hb
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Aug 2011 17:24:36 +0200
-Received: by gwb11 with SMTP id 11so58111gwb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Aug 2011 08:20:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=6Gkp50ua1ZZmhBT2TbP04n3c6ic0jgDPnMyVnEdD2fk=;
-	b=EK2NFETSQNmUBZTZjae94jbsp/WOVxhQrshNtoj72Ia25iz/bJBgwdxBlaw+ccICOA
-	17WSjfUcGUwjNdP04DmggONTHKvJ3TD5nbtpxA4Us2d4wewEBLi3sEa4QqWAF6O620Pj
-	ZPno7ED0H0J8yWftyBBSCJUpZKmLX1CQpMM/M=
-Received: by 10.142.44.7 with SMTP id r7mr939710wfr.122.1312471211372;
-	Thu, 04 Aug 2011 08:20:11 -0700 (PDT)
-Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id o6sm2328520pbj.18.2011.08.04.08.20.09
-	(version=SSLv3 cipher=OTHER); Thu, 04 Aug 2011 08:20:09 -0700 (PDT)
-Message-ID: <4E3AB8A7.7050303@gmail.com>
-Date: Thu, 04 Aug 2011 08:20:07 -0700
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:5.0) Gecko/20110627 Thunderbird/5.0
+	Thu, 04 Aug 2011 19:20:09 +0200
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Qp1WI-0005AG-B5 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Aug 2011 10:15:42 -0700
+Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Thu, 4 Aug 2011 10:12:12 -0700
+Received: from [172.30.80.87] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
+	(147.34.97.41) with Microsoft SMTP Server id 14.1.289.1;
+	Thu, 4 Aug 2011 10:15:41 -0700
+Message-ID: <4E3AD3A9.4000101@mentor.com>
+Date: Thu, 4 Aug 2011 10:15:21 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.18) Gecko/20110617 Lightning/1.0b2 Thunderbird/3.1.11
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1312440823-27671-1-git-send-email-raj.khem@gmail.com>
-	<j1din4$v7t$1@dough.gmane.org>
-In-Reply-To: <j1din4$v7t$1@dough.gmane.org>
-Subject: Re: [meta-oe][PATCH] systemd: Link with librt explicitly on uclibc
+To: <openembedded-devel@lists.openembedded.org>
+References: <0C757E680E33864AB113392C7E83F910BE5D9A@GSX300A.mxchg.m.corp>
+	<0C757E680E33864AB113392C7E83F910BE51C7@GSX300A.mxchg.m.corp>
+In-Reply-To: <0C757E680E33864AB113392C7E83F910BE51C7@GSX300A.mxchg.m.corp>
+X-Enigmail-Version: 1.1.1
+X-OriginalArrivalTime: 04 Aug 2011 17:12:12.0015 (UTC)
+	FILETIME=[A66087F0:01CC52C9]
+Subject: Re: 2011.03-maintenance: eglibc-binary-localedata packages	missing on image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,45 +42,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Aug 2011 15:24:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 04 Aug 2011 17:20:09 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On 08/04/2011 12:45 AM, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 04-08-11 08:53, Khem Raj schreef:
->> Latest systemd has started to use mq_* functions which are found on librt in uclibc.
->
-> I'm testing v33 + buildfix (http://cgit.freedesktop.org/systemd/commit/?id=612e58b45b84eda7e1f2a82fdfc006f1ae421cb5) right now, can you resubmit after that went in?
->
+On 08/04/2011 03:10 AM, Hauser, Wolfgang (external) wrote:
+> Ping ...
+> 
+> Has someone an idea how to solve this problem ?
+> 
+> If we examine the angstrom glibc "locale-base-*" packages they have an dependency on the  "glibc-binary-localedata-*" but no provides entry for this package.
 
-ok. I will rebase and resend
+I would look at classes/libc-package.bbclass and
+recipes/eglibc/eglibc-package.inc in oe.dev and see if there's been a
+fix here that needs to be back ported / cherry-picked.
 
->>
->> Signed-off-by: Khem Raj<raj.khem@gmail.com>  --- meta-oe/recipes-core/systemd/systemd_git.bb |    2 ++ 1 files changed, 2 insertions(+), 0 deletions(-)
->>
->> diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb index af4a9ae..fd9bfbd 100644 --- a/meta-oe/recipes-core/systemd/systemd_git.bb +++ b/meta-oe/recipes-core/systemd/systemd_git.bb @@ -29,6 +29,8 @@ UCLIBCPATCHES_libc-uclibc =
->> "file://paper-over-mkostemp.patch \ file://format-replace-m-uclibc.patch \"
->>
->> +LDFLAGS_libc-uclibc_append = " -lrt" + S = "${WORKDIR}/git"
->>
->> SYSTEMDDISTRO ?= "debian"
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFOOk4jMkyGM64RGpERAvTWAJ9nKbzS/bkAoUfbu+jzHSZQ7lCAZgCfR3rY
-> Knrm/e7PSQQZoTdXqKXJBQk=
-> =dJ5W
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
