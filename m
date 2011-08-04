@@ -1,26 +1,30 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QorVH-0003FH-Mz
+	(envelope-from <raj.khem@gmail.com>) id 1Qorsq-0003v6-JS
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Aug 2011 08:34:01 +0200
-Received: by fxg11 with SMTP id 11so482214fxg.6
+	Thu, 04 Aug 2011 08:58:22 +0200
+Received: by pzk2 with SMTP id 2so865190pzk.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Aug 2011 23:29:36 -0700 (PDT)
-Received: by 10.204.152.205 with SMTP id h13mr116821bkw.314.1312439374114;
-	Wed, 03 Aug 2011 23:29:34 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116])
-	by mx.google.com with ESMTPS id g11sm431139bku.49.2011.08.03.23.29.32
-	(version=SSLv3 cipher=OTHER); Wed, 03 Aug 2011 23:29:33 -0700 (PDT)
-Message-ID: <4E3A3C4B.8040208@dresearch-fe.de>
-Date: Thu, 04 Aug 2011 08:29:31 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Enigmail-Version: 1.2
-Subject: [2011.03-maintenance] unsatisfied dependencies to libgcc
+	Wed, 03 Aug 2011 23:53:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=+8LiOCagCmoKTF6LhIRYqBoubofqE/dDkxuz+cRciwQ=;
+	b=naK69Ai9Ws6FauUnFIw8qPR7FEB8HfhC0yicMHBPkiL5b73lrKR02MhGFm03FPGeaX
+	ZSo+pJQVa6n8UZDwfcS67kmnFvyZCQ6BNRnlDBrrS6e8pqA27QTGJbJApJSVnP1HBGlh
+	ejFvFnxxQjVJLHYC8eCESRJSXE15Zf4+R07Ck=
+Received: by 10.143.96.24 with SMTP id y24mr469206wfl.113.1312440836423;
+	Wed, 03 Aug 2011 23:53:56 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id m7sm1877986pbk.70.2011.08.03.23.53.55
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 03 Aug 2011 23:53:55 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  3 Aug 2011 23:53:43 -0700
+Message-Id: <1312440823-27671-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [meta-oe][PATCH] systemd: Link with librt explicitly on uclibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,37 +38,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Aug 2011 06:34:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 04 Aug 2011 06:58:22 -0000
 
-In the last days we switched our local development from an older oe-dev master to 2011.03-maintenance branch and hit an annoying problem.
+Latest systemd has started to use mq_* functions
+which are found on librt in uclibc.
 
-The test builds on various developer machines were successful but the build on our continuous integration server (with exactly the same scripting) ended up with a lot of
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-core/systemd/systemd_git.bb |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-|  * satisfy_dependencies_for: Cannot satisfy the following dependencies for lighttpd:
-|  *    libstdc++6 (>= 4.3.3) *         libgcc1 (>= 4.3.3) *    libgcc1 (>= 4.3.3) *
-|  * opkg_install_cmd: Cannot install package lighttpd.
-
-errors.
-
-After some searching we found that there was no libgcc1_4.3.3-r24.2.6_armv5te.ipk in the deploy area.
-
-I'm not sure which package should produce this but i guess it should come from gcc-cross-4.3.3 (because its recipe version is r24.2.6 in opposite to gcc-4.3.3 r24.1.6).
-
-Looking into the log i hit the fact that the do_rootfs stage for the image was started *before* the do_package_stage of gcc-cross_4.3.3.bb was succeeded.
-
-Any ideas?
-
-PS: Bitbaking gcc-cross explicitly before bitbaking the image wors as a workaround for us at the moment.
-
+diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
+index af4a9ae..fd9bfbd 100644
+--- a/meta-oe/recipes-core/systemd/systemd_git.bb
++++ b/meta-oe/recipes-core/systemd/systemd_git.bb
+@@ -29,6 +29,8 @@ UCLIBCPATCHES_libc-uclibc = "file://paper-over-mkostemp.patch \
+                              file://format-replace-m-uclibc.patch \
+                             "
+ 
++LDFLAGS_libc-uclibc_append = " -lrt"
++
+ S = "${WORKDIR}/git"
+ 
+ SYSTEMDDISTRO ?= "debian"
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+1.7.4.1
+
 
 
