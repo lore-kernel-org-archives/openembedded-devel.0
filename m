@@ -1,34 +1,28 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Qp1ab-0007Cn-Hb
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1Qp49t-0003qM-In
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Aug 2011 19:20:09 +0200
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Qp1WI-0005AG-B5 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Aug 2011 10:15:42 -0700
-Received: from SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Thu, 4 Aug 2011 10:12:12 -0700
-Received: from [172.30.80.87] (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.1.289.1;
-	Thu, 4 Aug 2011 10:15:41 -0700
-Message-ID: <4E3AD3A9.4000101@mentor.com>
-Date: Thu, 4 Aug 2011 10:15:21 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.18) Gecko/20110617 Lightning/1.0b2 Thunderbird/3.1.11
+	Thu, 04 Aug 2011 22:04:45 +0200
+Received: (qmail invoked by alias); 04 Aug 2011 20:00:21 -0000
+Received: from p5B0A21F4.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.33.244]
+	by mail.gmx.net (mp015) with SMTP; 04 Aug 2011 22:00:21 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX18OtgEi+JEOAj57xmOmNmfsBOJjcDfvokhaZTrDV0
+	HfJv8ddxBgkclN
+From: Andreas Mueller <schnitzeltony@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 4 Aug 2011 22:03:17 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.35.13-92.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <1312232577-7948-1-git-send-email-schnitzeltony@gmx.de>
+	<201108032347.47829.schnitzeltony@gmx.de>
+	<j1didm$tc1$2@dough.gmane.org>
+In-Reply-To: <j1didm$tc1$2@dough.gmane.org>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <0C757E680E33864AB113392C7E83F910BE5D9A@GSX300A.mxchg.m.corp>
-	<0C757E680E33864AB113392C7E83F910BE51C7@GSX300A.mxchg.m.corp>
-In-Reply-To: <0C757E680E33864AB113392C7E83F910BE51C7@GSX300A.mxchg.m.corp>
-X-Enigmail-Version: 1.1.1
-X-OriginalArrivalTime: 04 Aug 2011 17:12:12.0015 (UTC)
-	FILETIME=[A66087F0:01CC52C9]
-Subject: Re: 2011.03-maintenance: eglibc-binary-localedata packages	missing on image
+Message-Id: <201108042203.17751.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: [meta-oe 00/19] Add xfce48 desktop system to meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,23 +36,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Aug 2011 17:20:09 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
+X-List-Received-Date: Thu, 04 Aug 2011 20:04:45 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On 08/04/2011 03:10 AM, Hauser, Wolfgang (external) wrote:
-> Ping ...
+On Thursday, August 04, 2011 09:40:38 AM Koen Kooi wrote:
+> Op 03-08-11 23:47, Andreas Mueller schreef:
+> > On Wednesday, August 03, 2011 11:24:44 PM Khem Raj wrote:
+> >> On (03/08/11 22:59), Andreas Mueller wrote:
+> >>> On Wednesday, August 03, 2011 08:48:33 PM Koen Kooi wrote:
+> >>>> Op 03-08-11 20:18, Andreas Mueller schreef:
+> >>>>> On Tuesday, August 02, 2011 10:32:19 AM Koen Kooi wrote:
+> >>>>>> Do you have a public repo where this can be pulled from?
+> >>>>> 
+> >>>>> Before pushing to
+> >>>>> 
+> >>>>> git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git
+> >>>>> branch meta-xfce
+> >>>>> 
+> >>>>> I did
+> >>>>> 
+> >>>>> * rebase the patches on latest meta-openembedded commits * Add README
+> >>>>> ( Khem suggested )
+> >>>> 
+> >>>> small nit: the README doesn't say that it depends on meta-oe for e.g.
+> >>>> iceauth
+> >>> 
+> >>> OK - but what is the correct git workflow to fix
+> >> 
+> >> If commits are not part of upstream or public git repo then I would
+> >> recommend rebase and squash it into the relevant commit.
+> >> 
+> >> but if the cat is out of hat then add it as a new commit
+> > 
+> > hope Koen i playing with the cat...
 > 
-> Has someone an idea how to solve this problem ?
-> 
-> If we examine the angstrom glibc "locale-base-*" packages they have an dependency on the  "glibc-binary-localedata-*" but no provides entry for this package.
-
-I would look at classes/libc-package.bbclass and
-recipes/eglibc/eglibc-package.inc in oe.dev and see if there's been a
-fix here that needs to be back ported / cherry-picked.
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+> I'm playing with the cat, yes, but nothing has been pushed yet, so rebase
+> away :)
+Done
 
 
