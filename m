@@ -1,32 +1,25 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Qoszb-0007FK-Ee for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Aug 2011 10:09:23 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QosvN-0004nw-GN for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Aug 2011 10:05:01 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Aug 2011 10:05:01 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Aug 2011 10:05:01 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 04 Aug 2011 10:04:48 +0200
-Message-ID: <j1djr0$6bp$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
-X-Enigmail-Version: 1.2
-Subject: [2011.03-maintenance] Pull request #22
+	(envelope-from <jaap.dejong@nedap.com>) id 1QouaC-00031j-PW
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Aug 2011 11:51:17 +0200
+Received: from nvs0066 ([10.91.8.1]) by smtp.nedap.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Thu, 4 Aug 2011 11:46:52 +0200
+X-TM-IMSS-Message-ID: <711e7e9200030d3a@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 711e7e9200030d3a ;
+	Thu, 4 Aug 2011 11:45:47 +0200
+Message-ID: <4E3A6A8D.3010301@nedap.com>
+Date: Thu, 04 Aug 2011 11:46:53 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.18) Gecko/20110617 Lightning/1.0b2 Thunderbird/3.1.11
+MIME-Version: 1.0
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 04 Aug 2011 09:46:53.0025 (UTC)
+	FILETIME=[709E3510:01CC528B]
+Subject: exclude (r)depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,39 +33,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Aug 2011 08:09:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 04 Aug 2011 09:51:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Tom,
-
-Please pull the 2 commits from here:
-
-URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-Branch: 2011.03-maintenance
-
-Joel A Fernandes (1):
-      linux-omap-psp: Fix MMC timeout errors
-
-Koen Kooi (1):
-      gtk-icon-cache bbclass: only add runtime dependencies on hicolor-icon-theme when installing icons
-
-These are all cherry-picks from .dev
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFOOlKgMkyGM64RGpERAmVzAKCOt+adxRsp3KTgn8qZG2ALyUN59QCglDEd
-rAQaK955xLYDFGuae4d+ClA=
-=8hbT
------END PGP SIGNATURE-----
+Hi All,
+this is probably simple but I don't know how.
+I've build a simple recipe.
+Bitbake figures it depends on libsqlite0 and libsqlite3-0; which is 
+correct by the way...
+For some reason I don't want the dependencies in the ipk file.
+Is there some flag for this?
+Thanks!
+Jaap
 
 
 
