@@ -1,34 +1,20 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from smtp208.alice.it ([82.57.200.104])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <george.huntingtoniii@gmail.com>) id 1QpRwl-0000zo-EM
+	(envelope-from <andrea.adami@gmail.com>) id 1QpS7e-0001ML-SP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Aug 2011 23:28:47 +0200
-Received: by gwb11 with SMTP id 11so906522gwb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Aug 2011 14:24:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=33lDyhgUgPPU8QiP/ZAQ/yDeg4W/b8R01aQIoj+yb9Y=;
-	b=cOSWbetSAKsI02Oiip/0EdyVn8+D6hZBTm3Df+rhgnegHtVuNQK6NXn578FRWtyXrW
-	qCpkiDC5ZaIfAfydC+fRUM9mHQJyvzkwZ1Vl8reUKRL9m3lbReErvp14oanckDP/I9UB
-	xnCFh/1bEC+1fXOHmuBPnWGM5pyLLwrfuvugQ=
-MIME-Version: 1.0
-Received: by 10.236.185.7 with SMTP id t7mr3838369yhm.45.1312579461983; Fri,
-	05 Aug 2011 14:24:21 -0700 (PDT)
-Received: by 10.236.110.3 with HTTP; Fri, 5 Aug 2011 14:24:21 -0700 (PDT)
-In-Reply-To: <1312577070.14079.26.camel@jjg-linux>
-References: <CAFu+nvEwf_hPbB0a21qJFWAHZqdCkb3MPaKaZcLFgD+xc7cGVw@mail.gmail.com>
-	<4E15F6DD.2020308@mentor.com> <1312553761.14079.22.camel@jjg-linux>
-	<CAFu+nvE3v+VswNB-3ZwF3dFMa42wgeSv6GMBJ4C=bYNpWKKFmw@mail.gmail.com>
-	<20110805151726.GB15632@rhein.zuhause.netz>
-	<CAFu+nvEwGYd-t6n04yn41wd50+5zPoEu=5WVYxOmaWLDdyKdEQ@mail.gmail.com>
-	<1312577070.14079.26.camel@jjg-linux>
-Date: Fri, 5 Aug 2011 17:24:21 -0400
-Message-ID: <CAFu+nvGDUbec-_BVft9-K+Uko95U9CYftk47TWPKh1BA=w7P3g@mail.gmail.com>
-From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: classpath in 2011.03-maintenance
+	Fri, 05 Aug 2011 23:40:03 +0200
+Received: from mizar.localdomain (87.2.250.64) by smtp208.alice.it (8.5.124.08)
+	id 4DE64DF10634C6FE; Fri, 5 Aug 2011 23:30:32 +0200
+From: Andrea Adami <andrea.adami@gmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri,  5 Aug 2011 23:30:15 +0200
+Message-Id: <f4f0e18f46651290556cba9c44f49b2db6177ccb.1312578809.git.andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+In-Reply-To: <cover.1312578809.git.andrea.adami@gmail.com>
+References: <cover.1312578809.git.andrea.adami@gmail.com>
+In-Reply-To: <cover.1312578809.git.andrea.adami@gmail.com>
+References: <cover.1312578809.git.andrea.adami@gmail.com>
+Subject: [PATCH 2/2] klibc.bbclass: shared include for building against klibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,20 +28,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Aug 2011 21:28:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 05 Aug 2011 21:40:03 -0000
 
-the -bootclasspath ''
-part where it uses the single quotes next to eack other, if you replace that
-with ::
-two colons it will magically work
-I think for some reason it doesn't like '' for an empty path but two
-path separators back to back ::
-will work great.
+* from meta-zaurus
+* reworked in meta-smartphones/meta-zaurus
+
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ meta-oe/classes/klibc.bbclass |    9 +++++++++
+ 1 files changed, 9 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/classes/klibc.bbclass
+
+diff --git a/meta-oe/classes/klibc.bbclass b/meta-oe/classes/klibc.bbclass
+new file mode 100644
+index 0000000..d684367
+--- /dev/null
++++ b/meta-oe/classes/klibc.bbclass
+@@ -0,0 +1,9 @@
++# klcc-cross depends on klibc
++DEPENDS =+ "klcc-cross"
++
++export CC=${TARGET_PREFIX}klcc
++
++# reset inherited OE flags to avoid e.g. ggdb3 and keep size small
++export CFLAGS=""
++export CPPFLAGS=""
++export LDFLAGS=""
+-- 
+1.7.3.4
 
 
-
-On Fri, Aug 5, 2011 at 4:44 PM, Jesse Gilles <jgilles@multitech.com> wrote:
-
-> ''
 
