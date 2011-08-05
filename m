@@ -1,39 +1,31 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1QpMMk-0000XS-76
+	(envelope-from <george.huntingtoniii@gmail.com>) id 1QpMXx-0001B4-M8
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Aug 2011 17:31:14 +0200
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id E0D3A110009C
+	Fri, 05 Aug 2011 17:42:49 +0200
+Received: by gwb11 with SMTP id 11so701132gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Aug 2011 17:18:45 +0200 (CEST)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id EF32D1100003
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Aug 2011 17:18:44 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (g225074059.adsl.alicedsl.de
-	[92.225.74.59]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Aug 2011 17:18:44 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 68DDC3C155; Fri,  5 Aug 2011 17:17:27 +0200 (CEST)
-Date: Fri, 5 Aug 2011 17:17:27 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110805151726.GB15632@rhein.zuhause.netz>
+	Fri, 05 Aug 2011 08:38:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=7LsM5vnybOhpJYCMspBhDGGaJ2s0Akpq1RLB3vpG4Yg=;
+	b=FYpQyPu6kOuiZrNZRChsxXJG+HNpdCsbHfo4BQlAp/snce9D6YfFe0MwtUFyMgsoBd
+	jnQRMR2c8eHNITa2HXtTZOz6nIw+BVqbC6YKdVrPleJCf4uzJkOlU6QmFH/sjmXkAJ+S
+	1ZOtDx05VUxaiP8NX9tJlJgXCLkHD2RpLqMdU=
+MIME-Version: 1.0
+Received: by 10.236.184.194 with SMTP id s42mr3085627yhm.447.1312558703003;
+	Fri, 05 Aug 2011 08:38:23 -0700 (PDT)
+Received: by 10.236.110.3 with HTTP; Fri, 5 Aug 2011 08:38:22 -0700 (PDT)
+In-Reply-To: <20110805151726.GB15632@rhein.zuhause.netz>
 References: <CAFu+nvEwf_hPbB0a21qJFWAHZqdCkb3MPaKaZcLFgD+xc7cGVw@mail.gmail.com>
 	<4E15F6DD.2020308@mentor.com> <1312553761.14079.22.camel@jjg-linux>
 	<CAFu+nvE3v+VswNB-3ZwF3dFMa42wgeSv6GMBJ4C=bYNpWKKFmw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAFu+nvE3v+VswNB-3ZwF3dFMa42wgeSv6GMBJ4C=bYNpWKKFmw@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
+	<20110805151726.GB15632@rhein.zuhause.netz>
+Date: Fri, 5 Aug 2011 11:38:22 -0400
+Message-ID: <CAFu+nvEwGYd-t6n04yn41wd50+5zPoEu=5WVYxOmaWLDdyKdEQ@mail.gmail.com>
+From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: classpath in 2011.03-maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,21 +40,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Aug 2011 15:31:14 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 05 Aug 2011 15:42:49 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi,
+I posted a patch that makes the wrapper script return the error code if it
+fails after 5 retries.  it is on patchwork.
+http://patches.openembedded.org/patch/7249/
 
-we made some hacks bescause for some java packages javac fails at random and
-we just try to recompile it for some rounds and have a higher chance to
-get it done. To admit the ecj script is now diffrent from the one I wrote original,
-maybee Stefan Schmidt made some more tweaks.
+I don't know if anyone has reviewed it, but it worked for me.
 
-As side note we did not test classpath compiling for target architecture,
-we only made sure classpath-native works, so we can compile openjdk
-for the target.
 
-Bye Henning
+On Fri, Aug 5, 2011 at 11:17 AM, Henning Heinold
+<heinold@inf.fu-berlin.de>wrote:
 
+> Hi,
+>
+> we made some hacks bescause for some java packages javac fails at random
+> and
+> we just try to recompile it for some rounds and have a higher chance to
+> get it done. To admit the ecj script is now diffrent from the one I wrote
+> original,
+> maybee Stefan Schmidt made some more tweaks.
+>
+> As side note we did not test classpath compiling for target architecture,
+> we only made sure classpath-native works, so we can compile openjdk
+> for the target.
+>
+> Bye Henning
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
