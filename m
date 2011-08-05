@@ -1,29 +1,32 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.eads.net ([80.156.45.113])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QpEfF-00052L-Cz
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Aug 2011 09:17:49 +0200
-Received: by fxg11 with SMTP id 11so1715694fxg.6
+	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
+	id 1QpGTq-0007xF-0Q for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Aug 2011 11:14:10 +0200
+Received: from gsx3071-vs5.mxchg.m.corp ([53.147.176.148])
+	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id p7599eb1005742
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Aug 2011 00:13:25 -0700 (PDT)
-Received: by 10.204.22.15 with SMTP id l15mr553486bkb.408.1312528404950;
-	Fri, 05 Aug 2011 00:13:24 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116])
-	by mx.google.com with ESMTPS id l22sm759459bku.57.2011.08.05.00.13.23
-	(version=SSLv3 cipher=OTHER); Fri, 05 Aug 2011 00:13:23 -0700 (PDT)
-Message-ID: <4E3B9812.9010002@dresearch-fe.de>
-Date: Fri, 05 Aug 2011 09:13:22 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
+	Fri, 5 Aug 2011 11:09:42 +0200
+Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
+	gsx3071-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Fri, 5 Aug 2011 11:09:46 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-References: <4E3A3C4B.8040208@dresearch-fe.de>
-In-Reply-To: <4E3A3C4B.8040208@dresearch-fe.de>
-X-Enigmail-Version: 1.2
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: Re: [2011.03-maintenance] unsatisfied dependencies to libgcc
+Date: Fri, 5 Aug 2011 11:09:46 +0200
+Message-ID: <0C757E680E33864AB113392C7E83F910BE51CA@GSX300A.mxchg.m.corp>
+In-Reply-To: <4E3AD3A9.4000101@mentor.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] 2011.03-maintenance: eglibc-binary-localedata
+	packages	missing on image
+Thread-Index: AcxSyl9eZaJA0zIoSEq5sX817WTkcAAhGTcg
+References: <0C757E680E33864AB113392C7E83F910BE5D9A@GSX300A.mxchg.m.corp><0C757E680E33864AB113392C7E83F910BE51C7@GSX300A.mxchg.m.corp>
+	<4E3AD3A9.4000101@mentor.com>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 05 Aug 2011 09:09:46.0251 (UTC)
+	FILETIME=[6BC535B0:01CC534F]
+Subject: Re: 2011.03-maintenance: eglibc-binary-localedata packages	missing on image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,55 +40,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Aug 2011 07:17:49 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 05 Aug 2011 09:14:10 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On 04.08.2011 08:29, Steffen Sledz wrote:
-> In the last days we switched our local development from an older oe-dev master to 2011.03-maintenance branch and hit an annoying problem.
-> 
-> The test builds on various developer machines were successful but the build on our continuous integration server (with exactly the same scripting) ended up with a lot of
-> 
-> |  * satisfy_dependencies_for: Cannot satisfy the following dependencies for lighttpd:
-> |  *    libstdc++6 (>= 4.3.3) *         libgcc1 (>= 4.3.3) *    libgcc1 (>= 4.3.3) *
-> |  * opkg_install_cmd: Cannot install package lighttpd.
-> 
-> errors.
-> 
-> After some searching we found that there was no libgcc1_4.3.3-r24.2.6_armv5te.ipk in the deploy area.
-> 
-> I'm not sure which package should produce this but i guess it should come from gcc-cross-4.3.3 (because its recipe version is r24.2.6 in opposite to gcc-4.3.3 r24.1.6).
-> 
-> Looking into the log i hit the fact that the do_rootfs stage for the image was started *before* the do_package_stage of gcc-cross_4.3.3.bb was succeeded.
-> 
-> Any ideas?
-> 
-> PS: Bitbaking gcc-cross explicitly before bitbaking the image wors as a workaround for us at the moment.
+>I would look at classes/libc-package.bbclass and
+>recipes/eglibc/eglibc-package.inc in oe.dev and see if there's been a
+>fix here that needs to be back ported / cherry-picked.
 
-I made some research in this and there is something i do not understand.
+Unfortunately there are no changes between the oe.dev
+(remotes/origin/master) and the remotes/origin/2011.03-maintenance.
 
-The task-depends.dot generated by bitbake -g (says
+Does no one use eglibc with locales ?
 
-  "console-image.do_rootfs" [label="console-image do_rootfs\n0:1.0-r0\n/home/sledz/work/angstrom-setup-scripts/sources/openembedded/recipes/images/console-image.bb"]
-  "console-image.do_rootfs" -> "lzo-native.do_populate_sysroot"
-  "console-image.do_rootfs" -> "bluez4.do_populate_sysroot"
-  ...
-
-So do_rootfs depends only on do_populate_sysroot stages. But the do_rootfs stage itself uses opkg to install the packages into the image.
-
-In my understanding this means that all the ipk files need to be available. But this is not guaranteed by the reported dependencies.
-
-A misunderstanding of mine? Or a bug?
-
-Steffen
-
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+Regards
+Wolfgang Hauser
 
 
