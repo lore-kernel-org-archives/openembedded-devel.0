@@ -1,34 +1,30 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <george.huntingtoniii@gmail.com>) id 1QpN5w-0004oK-Bq
+	(envelope-from <raj.khem@gmail.com>) id 1QpQde-0005lv-JN
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Aug 2011 18:17:56 +0200
-Received: by yib18 with SMTP id 18so1841645yib.6
+	Fri, 05 Aug 2011 22:04:58 +0200
+Received: by pzk2 with SMTP id 2so4779699pzk.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Aug 2011 09:13:31 -0700 (PDT)
+	Fri, 05 Aug 2011 13:00:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=lxHF0hMcebIKmrnDO4yDoEwXTrhnoaXmgQXKfwEkRLg=;
-	b=h3xHfVc75sOebhbXSjnrsi5WV+c10rHLIZLAdpHarlwGVizU6hNlMov+C1Bw4u16+3
-	THJ8DuE1iICoyLjz+HT8oLxGLh0/jlqD1vvgw0kizSX/MwIbxN5ca6PsnQwmjZCfPHKQ
-	dOt+3t+0qiqaRzCSfaAMgmvmVPc8KIkXG3KhA=
-MIME-Version: 1.0
-Received: by 10.236.184.105 with SMTP id r69mr3223398yhm.179.1312560811287;
-	Fri, 05 Aug 2011 09:13:31 -0700 (PDT)
-Received: by 10.236.110.3 with HTTP; Fri, 5 Aug 2011 09:13:31 -0700 (PDT)
-In-Reply-To: <20110805154357.GC15632@rhein.zuhause.netz>
-References: <CAFu+nvEwf_hPbB0a21qJFWAHZqdCkb3MPaKaZcLFgD+xc7cGVw@mail.gmail.com>
-	<4E15F6DD.2020308@mentor.com> <1312553761.14079.22.camel@jjg-linux>
-	<CAFu+nvE3v+VswNB-3ZwF3dFMa42wgeSv6GMBJ4C=bYNpWKKFmw@mail.gmail.com>
-	<20110805151726.GB15632@rhein.zuhause.netz>
-	<CAFu+nvEwGYd-t6n04yn41wd50+5zPoEu=5WVYxOmaWLDdyKdEQ@mail.gmail.com>
-	<20110805154357.GC15632@rhein.zuhause.netz>
-Date: Fri, 5 Aug 2011 12:13:31 -0400
-Message-ID: <CAFu+nvG7igrBL7ap784Q3H_XKj8eVXqZLH9PvCBibFFu0qz2yg@mail.gmail.com>
-From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=/zq4K/D5AMfTFvcrgQsdk7lAIL/Dmflgjmntvp7xV4g=;
+	b=k+nQetL6tJ9G9qXNIm/BpiQ8Q0fOh7HarfRq23/qhEDDlds8ywshAFKg7j0qo32Gii
+	5enDO7CI760K6QszPrHLWnRxmnKN1M6LkhLbkZFhHSqPA+fOwMp41DGS8GECDqDj2HmD
+	qZrBrd7r480rlg08syPqL5YSCo0LuJUIOt4vg=
+Received: by 10.142.10.33 with SMTP id 33mr2267020wfj.69.1312574432369;
+	Fri, 05 Aug 2011 13:00:32 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id k3sm3468659pbj.45.2011.08.05.13.00.31
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 05 Aug 2011 13:00:31 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: classpath in 2011.03-maintenance
+Date: Fri,  5 Aug 2011 13:00:18 -0700
+Message-Id: <1312574418-21041-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [meta-oe][PATCH V2] systemd: Link with librt explicitly on uclibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,29 +38,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Aug 2011 16:17:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 05 Aug 2011 20:04:58 -0000
 
-only 2 times under 64 bit
+Latest systemd has started to use mq_* functions
+which are found on librt in uclibc.
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-core/systemd/systemd_git.bb |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
+index 7a35f79..44f2e7f 100644
+--- a/meta-oe/recipes-core/systemd/systemd_git.bb
++++ b/meta-oe/recipes-core/systemd/systemd_git.bb
+@@ -28,6 +28,8 @@ UCLIBCPATCHES_libc-uclibc = "file://paper-over-mkostemp.patch \
+                              file://format-replace-m-uclibc.patch \
+                             "
+ 
++LDFLAGS_libc-uclibc_append = " -lrt"
++
+ S = "${WORKDIR}/git"
+ 
+ SYSTEMDDISTRO ?= "debian"
+-- 
+1.7.4.1
 
 
-On Fri, Aug 5, 2011 at 11:43 AM, Henning Heinold
-<heinold@inf.fu-berlin.de>wrote:
-
-> On Fri, Aug 05, 2011 at 11:38:22AM -0400, George C. Huntington, III wrote:
-> > I posted a patch that makes the wrapper script return the error code if
-> it
-> > fails after 5 retries.  it is on patchwork.
-> > http://patches.openembedded.org/patch/7249/
->
-> Did you try to compile openjdk with it serval times under
-> 32bit and 64bit?
->
-> Bye Henning
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
