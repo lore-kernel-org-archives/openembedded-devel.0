@@ -1,26 +1,26 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kg4ysn@gmail.com>) id 1QpLaM-0007TY-7M
+	(envelope-from <kg4ysn@gmail.com>) id 1QpLcr-0007b5-To
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Aug 2011 16:41:14 +0200
-Received: by vxj14 with SMTP id 14so1879915vxj.6
+	Fri, 05 Aug 2011 16:43:50 +0200
+Received: by vws2 with SMTP id 2so420345vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Aug 2011 07:36:49 -0700 (PDT)
+	Fri, 05 Aug 2011 07:39:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=4XBstFeVY2tdGkViimkG+4RLh/U4SZZmKpwRjTNT8vA=;
-	b=X69UWz0VIwjTgLJiHHfFtIWhidHCk0o/ZHWmREY42zFDVUdSBNywQB0jrIeyTGmvUJ
-	ocQWX9d+cbN1ynTNbP4mbM8IT/eoBGDMIA5ikSLkK8FCH/zeElik5KGdccLZTcMUiXoJ
-	fsOZYDueIyGWss7F9HoIXFFJJ+fs+xONwA/Sw=
+	:content-type; bh=7u+a2y5LujNhoef8q0cnnDLYqFqBQTY8db9XS/QxnWI=;
+	b=JYbcDj1l/C12T/lVGReuB8Xx1lVzhXKkuJFIwppniY4qBo8dOpStQd8WEprMs6Xz5i
+	xMd9bIuCYPAANSiBrbOBTaqN0HTVgXuoOibKPdzcRPkVYXw1hsWp1s/8LNze5d2Vcqsw
+	+Gq3YG9jNf2xDNhLVaL5KeZmlXJX5dCkKK3Lc=
 MIME-Version: 1.0
-Received: by 10.52.32.68 with SMTP id g4mr2260187vdi.216.1312555009011; Fri,
-	05 Aug 2011 07:36:49 -0700 (PDT)
-Received: by 10.220.192.8 with HTTP; Fri, 5 Aug 2011 07:36:48 -0700 (PDT)
-In-Reply-To: <4E3AA37F.4050100@nedap.com>
+Received: by 10.220.168.2 with SMTP id s2mr621007vcy.143.1312555162445; Fri,
+	05 Aug 2011 07:39:22 -0700 (PDT)
+Received: by 10.220.192.8 with HTTP; Fri, 5 Aug 2011 07:39:21 -0700 (PDT)
+In-Reply-To: <j1e83v$73t$1@dough.gmane.org>
 References: <1312464763-4063-1-git-send-email-kg4ysn@gmail.com>
-	<4E3AA37F.4050100@nedap.com>
-Date: Fri, 5 Aug 2011 07:36:48 -0700
-Message-ID: <CAG4_upSn8Zu-2VGcv7ZodPZE1krMPLfREC5VoSQsXgvP+ujutA@mail.gmail.com>
+	<j1e83v$73t$1@dough.gmane.org>
+Date: Fri, 5 Aug 2011 07:39:21 -0700
+Message-ID: <CAG4_upR2Hf+01rHLCEEsZtJx-MARNiw8NcQR1DMhzPKH7pDDow@mail.gmail.com>
 From: Chris Verges <kg4ysn@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
@@ -38,15 +38,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Aug 2011 14:41:14 -0000
+X-List-Received-Date: Fri, 05 Aug 2011 14:43:50 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
 >
-> Why not jump to version 2.1.0 right away...
+> Op 04-08-11 15:32, Chris Verges schreef:
+> > Signed-off-by: Chris Verges <kg4ysn@gmail.com> ---
+> meta-oe/recipes-connectivity/ptpd/ptpd_1.1.0.bb |   19 +++++++++++++++++++
+>
+> You're missing the 'meta-oe' tag in subject
 
 
-My project has a need for 1.1.0, so I bumped to that for now.  I also
-haven't verified the build process to see if 2.x builds the same as 1.x.
+Hi Koen,
+
+Apologies for missing this.  I was following the patch guidelines at
+http://wiki.openembedded.net/index.php/How_to_submit_a_patch_to_OpenEmbedded.
+ What should I have done differently?
+
+Does this actually build with LIC_FILES_CHKSUM lacking?
+>
+
+It builds in the 2011.03-maintenance branch of openembedded, and just
+assumed it would be the same in meta-oe.  This is my first experience with
+meta-oe, so this is good feedback.  What is LIC_FILES_CHKSUM and how should
+I use it?  I didn't see anything in the OE user manual about it, so am
+looking forward to learning.
 
 Thanks,
 Chris
