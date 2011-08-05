@@ -1,36 +1,33 @@
-Received: from mail2.multitech.net ([65.126.90.254] helo=mail2.multitech.com)
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jgilles@multitech.com>) id 1QpSFx-0001km-6D
+	(envelope-from <stefan@datenfreihafen.org>) id 1QpSN2-0001zP-0d
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Aug 2011 23:48:37 +0200
-Received: from mail2.multitech.com (localhost.localdomain [127.0.0.1])
-	by localhost (Email Security Appliance) with SMTP id
-	0410B5AF739_E3C642CB for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Aug 2011 21:44:12 +0000 (GMT)
-Received: from mail.multitech.com (unknown [192.168.11.244])
-	by mail2.multitech.com (Sophos Email Appliance) with ESMTP id
-	DBA0E5AF728_E3C642BF for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Aug 2011 21:44:11 +0000 (GMT)
-X-Ninja-PIM: Scanned by Ninja
-X-Ninja-AttachmentFiltering: (no action)
-Received: from [192.168.52.113] ([192.168.52.113]) by mail.multitech.com with
-	Microsoft SMTPSVC(5.0.2195.7381); Fri, 5 Aug 2011 16:43:35 -0500
-From: Jesse Gilles <jgilles@multitech.com>
+	Fri, 05 Aug 2011 23:55:56 +0200
+Received: from [66.43.64.66] (helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
+	id 1QpSEu-0000cK-Ri by authid <stefan@sostec.de> with srv_auth_cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 05 Aug 2011 23:51:33 +0200
+Received: from stefan by excalibur.local with local (Exim 4.76)
+	(envelope-from <stefan@excalibur.local>) id 1QpSEr-0001zJ-LG
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Aug 2011 23:47:29 +0200
+Date: Fri, 5 Aug 2011 23:47:29 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <CAFu+nvGDUbec-_BVft9-K+Uko95U9CYftk47TWPKh1BA=w7P3g@mail.gmail.com>
+Message-ID: <20110805214729.GA12101@excalibur.local>
 References: <CAFu+nvEwf_hPbB0a21qJFWAHZqdCkb3MPaKaZcLFgD+xc7cGVw@mail.gmail.com>
 	<4E15F6DD.2020308@mentor.com> <1312553761.14079.22.camel@jjg-linux>
 	<CAFu+nvE3v+VswNB-3ZwF3dFMa42wgeSv6GMBJ4C=bYNpWKKFmw@mail.gmail.com>
 	<20110805151726.GB15632@rhein.zuhause.netz>
 	<CAFu+nvEwGYd-t6n04yn41wd50+5zPoEu=5WVYxOmaWLDdyKdEQ@mail.gmail.com>
-	<1312577070.14079.26.camel@jjg-linux>
-	<CAFu+nvGDUbec-_BVft9-K+Uko95U9CYftk47TWPKh1BA=w7P3g@mail.gmail.com>
-Date: Fri, 05 Aug 2011 16:44:10 -0500
-Message-ID: <1312580650.14079.27.camel@jjg-linux>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-OriginalArrivalTime: 05 Aug 2011 21:43:35.0300 (UTC)
-	FILETIME=[BA626440:01CC53B8]
+MIME-Version: 1.0
+In-Reply-To: <CAFu+nvEwGYd-t6n04yn41wd50+5zPoEu=5WVYxOmaWLDdyKdEQ@mail.gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: classpath in 2011.03-maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,21 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Aug 2011 21:48:37 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 05 Aug 2011 21:55:56 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Fri, 2011-08-05 at 17:24 -0400, George C. Huntington, III wrote:
-> the -bootclasspath ''
-> part where it uses the single quotes next to eack other, if you
-> replace that
-> with ::
-> two colons it will magically work
-> I think for some reason it doesn't like '' for an empty path but two
-> path separators back to back ::
-> will work great.
+Hello.
 
-Yes, I had just figured out the same thing :)
+On Fri, 2011-08-05 at 11:38, George C. Huntington, III wrote:
+> I posted a patch that makes the wrapper script return the error code if it
+> fails after 5 retries.  it is on patchwork.
+> http://patches.openembedded.org/patch/7249/
+> 
+> I don't know if anyone has reviewed it, but it worked for me.
 
+It was on my list but I dropped it once the list got to big. ;) Sorry
+for that.
+
+I just started a build with our full image (openjdk for the target and
+many java apps) and we should know more when I'm up again tomorrow.
+Will let you know.
+
+regards
+Stefan Schmidt
 
 
