@@ -1,42 +1,29 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1QpMed-0001Tb-1U
+	(envelope-from <tom.rini@gmail.com>) id 1QpMgD-00027x-8M
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Aug 2011 17:49:43 +0200
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 91CEC110009C
+	Fri, 05 Aug 2011 17:51:21 +0200
+Received: by gwb11 with SMTP id 11so707433gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Aug 2011 17:45:13 +0200 (CEST)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id BC2041100003
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Aug 2011 17:45:12 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (g225074059.adsl.alicedsl.de
-	[92.225.74.59]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Aug 2011 17:45:12 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 72F8D3C155; Fri,  5 Aug 2011 17:43:58 +0200 (CEST)
-Date: Fri, 5 Aug 2011 17:43:58 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110805154357.GC15632@rhein.zuhause.netz>
-References: <CAFu+nvEwf_hPbB0a21qJFWAHZqdCkb3MPaKaZcLFgD+xc7cGVw@mail.gmail.com>
-	<4E15F6DD.2020308@mentor.com> <1312553761.14079.22.camel@jjg-linux>
-	<CAFu+nvE3v+VswNB-3ZwF3dFMa42wgeSv6GMBJ4C=bYNpWKKFmw@mail.gmail.com>
-	<20110805151726.GB15632@rhein.zuhause.netz>
-	<CAFu+nvEwGYd-t6n04yn41wd50+5zPoEu=5WVYxOmaWLDdyKdEQ@mail.gmail.com>
+	Fri, 05 Aug 2011 08:46:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=lFMulU18eiGc9O/WYrnmEc7wS2Gr2xe3a0VKJBuC+6I=;
+	b=S8EmvituxZnW+DQPZC1fhCKEkU/3AUHWNvJ4LqB8JqGoxLdHuVhGNVcGOlpbsIU+wn
+	vOJuyNhxsMMDKkBxhOZaHZtM7CL5/uWD6jyINEGdsUUEyln21yY41sgYlSa+e0B8szC6
+	idLo2sorw62M+z75QMSPqJQ/iat6YnoLxiwxg=
 MIME-Version: 1.0
-In-Reply-To: <CAFu+nvEwGYd-t6n04yn41wd50+5zPoEu=5WVYxOmaWLDdyKdEQ@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: classpath in 2011.03-maintenance
+Received: by 10.42.29.193 with SMTP id s1mr2016261icc.439.1312559214438; Fri,
+	05 Aug 2011 08:46:54 -0700 (PDT)
+Received: by 10.42.228.73 with HTTP; Fri, 5 Aug 2011 08:46:54 -0700 (PDT)
+In-Reply-To: <j1djr0$6bp$1@dough.gmane.org>
+References: <j1djr0$6bp$1@dough.gmane.org>
+Date: Fri, 5 Aug 2011 08:46:54 -0700
+Message-ID: <CA+M6bXmHaXm9-36Ay6DzqpTtRjt6UOx=UjE2Quri_fdGiosyxw@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [2011.03-maintenance] Pull request #22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,18 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Aug 2011 15:49:43 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 05 Aug 2011 15:51:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 05, 2011 at 11:38:22AM -0400, George C. Huntington, III wrote:
-> I posted a patch that makes the wrapper script return the error code if it
-> fails after 5 retries.  it is on patchwork.
-> http://patches.openembedded.org/patch/7249/
+On Thu, Aug 4, 2011 at 1:04 AM, Koen Kooi <koen@dominion.thruhere.net> wrot=
+e:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Tom,
+>
+> Please pull the 2 commits from here:
+>
+> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
+> Branch: 2011.03-maintenance
+>
+> Joel A Fernandes (1):
+> =A0 =A0 =A0linux-omap-psp: Fix MMC timeout errors
+>
+> Koen Kooi (1):
+> =A0 =A0 =A0gtk-icon-cache bbclass: only add runtime dependencies on hicol=
+or-icon-theme when installing icons
+>
+> These are all cherry-picks from .dev
 
-Did you try to compile openjdk with it serval times under
-32bit and 64bit?
+Applied (and setting up some sort of GPG setup for this address is on
+my weekend TODO list).
 
-Bye Henning
+--=20
+Tom
 
 
