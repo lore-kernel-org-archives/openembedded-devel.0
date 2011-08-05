@@ -1,30 +1,35 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail2.multitech.net ([65.126.90.254] helo=mail2.multitech.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QpQde-0005lv-JN
+	(envelope-from <jgilles@multitech.com>) id 1QpRKE-0006T0-VA
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Aug 2011 22:04:58 +0200
-Received: by pzk2 with SMTP id 2so4779699pzk.34
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Aug 2011 13:00:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=/zq4K/D5AMfTFvcrgQsdk7lAIL/Dmflgjmntvp7xV4g=;
-	b=k+nQetL6tJ9G9qXNIm/BpiQ8Q0fOh7HarfRq23/qhEDDlds8ywshAFKg7j0qo32Gii
-	5enDO7CI760K6QszPrHLWnRxmnKN1M6LkhLbkZFhHSqPA+fOwMp41DGS8GECDqDj2HmD
-	qZrBrd7r480rlg08syPqL5YSCo0LuJUIOt4vg=
-Received: by 10.142.10.33 with SMTP id 33mr2267020wfj.69.1312574432369;
-	Fri, 05 Aug 2011 13:00:32 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id k3sm3468659pbj.45.2011.08.05.13.00.31
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 05 Aug 2011 13:00:31 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 05 Aug 2011 22:48:59 +0200
+Received: from mail2.multitech.com (localhost.localdomain [127.0.0.1])
+	by localhost (Email Security Appliance) with SMTP id
+	4CFAF5AF6C2_E3C5631B for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 Aug 2011 20:44:33 +0000 (GMT)
+Received: from mail.multitech.com (unknown [192.168.11.244])
+	by mail2.multitech.com (Sophos Email Appliance) with ESMTP id
+	1FDE65AF6C1_E3C5631F for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 Aug 2011 20:44:33 +0000 (GMT)
+X-Ninja-PIM: Scanned by Ninja
+X-Ninja-AttachmentFiltering: (no action)
+Received: from [192.168.52.113] ([192.168.52.113]) by mail.multitech.com with
+	Microsoft SMTPSVC(5.0.2195.7381); Fri, 5 Aug 2011 15:43:54 -0500
+From: Jesse Gilles <jgilles@multitech.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Aug 2011 13:00:18 -0700
-Message-Id: <1312574418-21041-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-Subject: [meta-oe][PATCH V2] systemd: Link with librt explicitly on uclibc
+In-Reply-To: <CAFu+nvEwGYd-t6n04yn41wd50+5zPoEu=5WVYxOmaWLDdyKdEQ@mail.gmail.com>
+References: <CAFu+nvEwf_hPbB0a21qJFWAHZqdCkb3MPaKaZcLFgD+xc7cGVw@mail.gmail.com>
+	<4E15F6DD.2020308@mentor.com> <1312553761.14079.22.camel@jjg-linux>
+	<CAFu+nvE3v+VswNB-3ZwF3dFMa42wgeSv6GMBJ4C=bYNpWKKFmw@mail.gmail.com>
+	<20110805151726.GB15632@rhein.zuhause.netz>
+	<CAFu+nvEwGYd-t6n04yn41wd50+5zPoEu=5WVYxOmaWLDdyKdEQ@mail.gmail.com>
+Date: Fri, 05 Aug 2011 15:44:30 -0500
+Message-ID: <1312577070.14079.26.camel@jjg-linux>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-OriginalArrivalTime: 05 Aug 2011 20:43:54.0606 (UTC)
+	FILETIME=[641FD8E0:01CC53B0]
+Subject: Re: classpath in 2011.03-maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,31 +43,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Aug 2011 20:04:58 -0000
+X-List-Received-Date: Fri, 05 Aug 2011 20:48:59 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Latest systemd has started to use mq_* functions
-which are found on librt in uclibc.
+On Fri, 2011-08-05 at 11:38 -0400, George C. Huntington, III wrote:
+> I posted a patch that makes the wrapper script return the error code
+> if it
+> fails after 5 retries.  it is on patchwork.
+> http://patches.openembedded.org/patch/7249/
+> 
+> I don't know if anyone has reviewed it, but it worked for me.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-core/systemd/systemd_git.bb |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+I gave it a try and now the classpath build errors out earlier:
 
-diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
-index 7a35f79..44f2e7f 100644
---- a/meta-oe/recipes-core/systemd/systemd_git.bb
-+++ b/meta-oe/recipes-core/systemd/systemd_git.bb
-@@ -28,6 +28,8 @@ UCLIBCPATCHES_libc-uclibc = "file://paper-over-mkostemp.patch \
-                              file://format-replace-m-uclibc.patch \
-                             "
- 
-+LDFLAGS_libc-uclibc_append = " -lrt"
-+
- S = "${WORKDIR}/git"
- 
- SYSTEMDDISTRO ?= "debian"
--- 
-1.7.4.1
+| Adding java source files from srcdir '..'.
+| Adding java source files from VM directory ../vm/reference
+| javac -Xlint:unchecked,cast,divzero,empty,finally,overrides  -J-Xmx768M -source 1.5 -target 1.5 -bootclasspath '' -classpath ../vm/reference:..:../external/w3c_dom:../external/sax:../external/relaxngDatatype:../external/jsr166:.:: -d . @classes
+| Unrecognized option : ../vm/reference:..:../external/w3c_dom:../external/sax:../external/relaxngDatatype:../external/jsr166:.::
+| make[1]: *** [compile-classes] Error 255
+| make[1]: *** Waiting for unfinished jobs....
+| touch resources
+| make[1]: Leaving directory `/home/jjg/projects/angstrom-oe-2011.03/build/tmp/work/armv5te-angstrom-linux-gnueabi/classpath-0.98-r4/classpath-0.98/lib'
+| make: *** [all-recursive] Error 1
+| + die 'oe_runmake failed'
+| + oefatal 'oe_runmake failed'
+| + echo FATAL: 'oe_runmake failed'
+| FATAL: oe_runmake failed
+| + exit 1
+NOTE: package classpath-0.98-r4: task do_compile: Failed
+
+Jesse
 
 
 
