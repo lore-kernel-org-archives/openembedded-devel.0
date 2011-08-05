@@ -1,35 +1,28 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <agnel.joel@gmail.com>)
-	id 1Qp9lL-0002s4-J3; Fri, 05 Aug 2011 04:03:47 +0200
-Received: by fxg11 with SMTP id 11so1500983fxg.6
-	for <multiple recipients>; Thu, 04 Aug 2011 18:59:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=J+i7Vw2o2K3RVs0v8acdFNryL9PE9dwuaOI0JR7UKiA=;
-	b=OexpYq9UoznQee5CEyhuIqE7hAhCS1IqvI0YxeFcvs08iY7Tv5x01swwExft/hhN9X
-	L9Id1SeiZ0BQ/M6C/8UiuVGrYKbxbOlk7NzqfQy2dtbVuJM+nc3EJlU8VTnhuMzj8TiE
-	9/xZhy/vvCrl+/PVDC2BtuNl/Mn8ahWO7lraU=
+	(envelope-from <sledz@dresearch-fe.de>) id 1QpDc1-0003OW-AE
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Aug 2011 08:10:25 +0200
+Received: by fxg11 with SMTP id 11so1661204fxg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Aug 2011 23:06:01 -0700 (PDT)
+Received: by 10.204.141.83 with SMTP id l19mr555332bku.217.1312524361022;
+	Thu, 04 Aug 2011 23:06:01 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id b3sm746738bke.44.2011.08.04.23.05.59
+	(version=SSLv3 cipher=OTHER); Thu, 04 Aug 2011 23:05:59 -0700 (PDT)
+Message-ID: <4E3B8846.2080203@dresearch-fe.de>
+Date: Fri, 05 Aug 2011 08:05:58 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:5.0) Gecko/20110624 Thunderbird/5.0
 MIME-Version: 1.0
-Received: by 10.223.10.76 with SMTP id o12mr1848178fao.88.1312509563320; Thu,
-	04 Aug 2011 18:59:23 -0700 (PDT)
-Received: by 10.223.97.78 with HTTP; Thu, 4 Aug 2011 18:59:23 -0700 (PDT)
-In-Reply-To: <CAD=GYpbOnTOuEsNXiPuoC+cyuyo6MGFh1TqGKf8BB3o=S-YSmA@mail.gmail.com>
-References: <CAG+hza7G2jZDtHQ5iOK3KCwYRGcZ-YPBfUcyMfJuWnKaxJdSKw@mail.gmail.com>
-	<A7A15010-967D-49FD-8E50-27D6ED26E025@dominion.thruhere.net>
-	<CAD=GYpbOnTOuEsNXiPuoC+cyuyo6MGFh1TqGKf8BB3o=S-YSmA@mail.gmail.com>
-Date: Thu, 4 Aug 2011 20:59:23 -0500
-Message-ID: <CAD=GYpYWZYYe0d6dqGyHn0+N5p-QM+VAryomfOfo-CtHMFQUdQ@mail.gmail.com>
-From: Joel A Fernandes <agnel.joel@gmail.com>
-To: Koen Kooi <koen@dominion.thruhere.net>, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Cc: Enrico Butera <enrico.butera@ise-srl.it>,
-	Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-core] gstreamer-ti, questions
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+References: <4E3A3C4B.8040208@dresearch-fe.de>
+In-Reply-To: <4E3A3C4B.8040208@dresearch-fe.de>
+X-Enigmail-Version: 1.2
+Subject: Re: [2011.03-maintenance] unsatisfied dependencies to libgcc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,83 +36,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Aug 2011 02:03:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 05 Aug 2011 06:10:25 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Aug 4, 2011 at 8:04 PM, Joel A Fernandes <agnel.joel@gmail.com> wro=
-te:
-> On Thu, Aug 4, 2011 at 2:44 AM, Koen Kooi <koen@dominion.thruhere.net> wr=
-ote:
->>
->> Op 3 aug. 2011, om 18:28 heeft Enrico Butera het volgende geschreven:
->>
->>> I've started importing bb files from oe classic into
->>> meta-texasinstruments, i still not have a clean build of everything
->>> but here are some "basic" questions:
->>>
->>> - cross compiler binaries:
->>>
->>> in classic oe there were
->>> "sysroots/i686-linux/usr/armv7a/bin/arm-angstrom-linux-gnueabi-[gcc,ld.=
-..]"
->>> and "sysroots/i686-linux/usr/armv7a/arm-angstrom-linux-gnueabi/bin/[gcc=
-,ld...]",
->>> some ti tools use one, some the other. Now there is only
->>> usr/bin/armv7a..... and this "confuses" some ti tools.
->>>
->>> The question is: what is the proper way to handle this? patch gcc
->>> install to have a similar layout to classic oe? patch ti tools to
->>> "fix" them?
->>
->>
->> Joel was running into similar problems with https://github.com/joelagnel=
-/meta-texasinstruments/commits/master can you guys have a look at it togeth=
-er?
->>
->
-> I think its cleaner to have the toolchain to define symlinks in /bin
->
-> I've done this in the gcc-cross recipe in do_install (which is
-> hopefully the right place to do it)
->
-> http://www.hackerbliss.org/joel/cgit/cgit.cgi/oe-core/commit/?id=3D2878a7=
-12aabf839cb4c6e84961b6e8deafacf824
->
-> Now ti-codec-engine codecs, extensions and server builds but the
-> 'apps' fails to build with a linker error.
->
-> Here's the compiler log:
-> [..]
-> #
-> # lnkv5T bin/ti_platforms_evm3530/app_remote.xv5T ...
-> /home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglib=
-c/sysroots/i686-linux/usr/bin/armv7a-angstrom-linux-gnueabi/arm-angstrom-li=
-nux-gnueabi-gcc
-> =A0 -o bin/ti_platforms_evm3530/app_remote.xv5T
-> package/cfg/bin/ti_platforms_evm3530/app_remote/main_native.ov5T
-> package/cfg/bin/ti_platforms_evm3530/app_remote_xv5T.ov5T
-> package/cfg/bin/ti_platforms_evm3530/app_remote/app.ov5T
-> package/cfg/bin/ti_platforms_evm3530/app_remote_xv5T.xdl
-> -L/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-egl=
-ibc/sysroots/i686-linux/usr/bin/armv7a-angstrom-linux-gnueabi/arm-angstrom-=
-linux-gnueabi/lib
-> -lpthread
+On 04.08.2011 08:29, Steffen Sledz wrote:
+> In the last days we switched our local development from an older oe-dev master to 2011.03-maintenance branch and hit an annoying problem.
+> 
+> The test builds on various developer machines were successful but the build on our continuous integration server (with exactly the same scripting) ended up with a lot of
+> 
+> |  * satisfy_dependencies_for: Cannot satisfy the following dependencies for lighttpd:
+> |  *    libstdc++6 (>= 4.3.3) *         libgcc1 (>= 4.3.3) *    libgcc1 (>= 4.3.3) *
+> |  * opkg_install_cmd: Cannot install package lighttpd.
+> 
+> errors.
+> 
+> After some searching we found that there was no libgcc1_4.3.3-r24.2.6_armv5te.ipk in the deploy area.
+> 
+> I'm not sure which package should produce this but i guess it should come from gcc-cross-4.3.3 (because its recipe version is r24.2.6 in opposite to gcc-4.3.3 r24.1.6).
+> 
+> Looking into the log i hit the fact that the do_rootfs stage for the image was started *before* the do_package_stage of gcc-cross_4.3.3.bb was succeeded.
+> 
+> Any ideas?
+> 
+> PS: Bitbaking gcc-cross explicitly before bitbaking the image wors as a workaround for us at the moment.
 
+Another collegue had a similar problem while bitbaking meta-toolchain.
 
-Interestingly the path:
-/home/joel/angstrom-oe/setup-scripts-core/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/i686-linux/usr/bin/armv7a-angstrom-linux-gnueabi/arm-angstrom-linu=
-x-gnueabi/lib
+|  * satisfy_dependencies_for: Cannot satisfy the following dependencies for task-sdk-bare:
+|  * 	libstdc++-dev *
+|  * opkg_install_cmd: Cannot install package task-sdk-bare.
 
-doesn't exist, which explains the symbol errors.
+So it seems it is not a problem of our image recipe.
 
-libgcc contains the symbol `__aeabi_uidivmod'
-
-Does this point to another problem with the toolchain? How would we fix thi=
-s?
-
-thanks,
-Joel
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
