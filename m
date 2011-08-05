@@ -1,29 +1,34 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1QpMgD-00027x-8M
+	(envelope-from <george.huntingtoniii@gmail.com>) id 1QpN5w-0004oK-Bq
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Aug 2011 17:51:21 +0200
-Received: by gwb11 with SMTP id 11so707433gwb.6
+	Fri, 05 Aug 2011 18:17:56 +0200
+Received: by yib18 with SMTP id 18so1841645yib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Aug 2011 08:46:56 -0700 (PDT)
+	Fri, 05 Aug 2011 09:13:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=lFMulU18eiGc9O/WYrnmEc7wS2Gr2xe3a0VKJBuC+6I=;
-	b=S8EmvituxZnW+DQPZC1fhCKEkU/3AUHWNvJ4LqB8JqGoxLdHuVhGNVcGOlpbsIU+wn
-	vOJuyNhxsMMDKkBxhOZaHZtM7CL5/uWD6jyINEGdsUUEyln21yY41sgYlSa+e0B8szC6
-	idLo2sorw62M+z75QMSPqJQ/iat6YnoLxiwxg=
+	:content-type; bh=lxHF0hMcebIKmrnDO4yDoEwXTrhnoaXmgQXKfwEkRLg=;
+	b=h3xHfVc75sOebhbXSjnrsi5WV+c10rHLIZLAdpHarlwGVizU6hNlMov+C1Bw4u16+3
+	THJ8DuE1iICoyLjz+HT8oLxGLh0/jlqD1vvgw0kizSX/MwIbxN5ca6PsnQwmjZCfPHKQ
+	dOt+3t+0qiqaRzCSfaAMgmvmVPc8KIkXG3KhA=
 MIME-Version: 1.0
-Received: by 10.42.29.193 with SMTP id s1mr2016261icc.439.1312559214438; Fri,
-	05 Aug 2011 08:46:54 -0700 (PDT)
-Received: by 10.42.228.73 with HTTP; Fri, 5 Aug 2011 08:46:54 -0700 (PDT)
-In-Reply-To: <j1djr0$6bp$1@dough.gmane.org>
-References: <j1djr0$6bp$1@dough.gmane.org>
-Date: Fri, 5 Aug 2011 08:46:54 -0700
-Message-ID: <CA+M6bXmHaXm9-36Ay6DzqpTtRjt6UOx=UjE2Quri_fdGiosyxw@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
+Received: by 10.236.184.105 with SMTP id r69mr3223398yhm.179.1312560811287;
+	Fri, 05 Aug 2011 09:13:31 -0700 (PDT)
+Received: by 10.236.110.3 with HTTP; Fri, 5 Aug 2011 09:13:31 -0700 (PDT)
+In-Reply-To: <20110805154357.GC15632@rhein.zuhause.netz>
+References: <CAFu+nvEwf_hPbB0a21qJFWAHZqdCkb3MPaKaZcLFgD+xc7cGVw@mail.gmail.com>
+	<4E15F6DD.2020308@mentor.com> <1312553761.14079.22.camel@jjg-linux>
+	<CAFu+nvE3v+VswNB-3ZwF3dFMa42wgeSv6GMBJ4C=bYNpWKKFmw@mail.gmail.com>
+	<20110805151726.GB15632@rhein.zuhause.netz>
+	<CAFu+nvEwGYd-t6n04yn41wd50+5zPoEu=5WVYxOmaWLDdyKdEQ@mail.gmail.com>
+	<20110805154357.GC15632@rhein.zuhause.netz>
+Date: Fri, 5 Aug 2011 12:13:31 -0400
+Message-ID: <CAFu+nvG7igrBL7ap784Q3H_XKj8eVXqZLH9PvCBibFFu0qz2yg@mail.gmail.com>
+From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance] Pull request #22
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: classpath in 2011.03-maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,35 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Aug 2011 15:51:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 05 Aug 2011 16:17:56 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thu, Aug 4, 2011 at 1:04 AM, Koen Kooi <koen@dominion.thruhere.net> wrot=
-e:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Tom,
->
-> Please pull the 2 commits from here:
->
-> URI: git://dominion.thruhere.net/var/cache/git/openembedded.git
-> Branch: 2011.03-maintenance
->
-> Joel A Fernandes (1):
-> =A0 =A0 =A0linux-omap-psp: Fix MMC timeout errors
->
-> Koen Kooi (1):
-> =A0 =A0 =A0gtk-icon-cache bbclass: only add runtime dependencies on hicol=
-or-icon-theme when installing icons
->
-> These are all cherry-picks from .dev
+only 2 times under 64 bit
 
-Applied (and setting up some sort of GPG setup for this address is on
-my weekend TODO list).
 
---=20
-Tom
+On Fri, Aug 5, 2011 at 11:43 AM, Henning Heinold
+<heinold@inf.fu-berlin.de>wrote:
 
+> On Fri, Aug 05, 2011 at 11:38:22AM -0400, George C. Huntington, III wrote:
+> > I posted a patch that makes the wrapper script return the error code if
+> it
+> > fails after 5 retries.  it is on patchwork.
+> > http://patches.openembedded.org/patch/7249/
+>
+> Did you try to compile openjdk with it serval times under
+> 32bit and 64bit?
+>
+> Bye Henning
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
