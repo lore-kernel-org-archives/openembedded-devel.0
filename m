@@ -1,34 +1,34 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1QpSN2-0001zP-0d
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Aug 2011 23:55:56 +0200
-Received: from [66.43.64.66] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1QpSEu-0000cK-Ri by authid <stefan@sostec.de> with srv_auth_cram_md5
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QpcPN-00031c-DD for openembedded-devel@lists.openembedded.org;
+	Sat, 06 Aug 2011 10:39:01 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QpcL7-0000n5-Fh for openembedded-devel@lists.openembedded.org;
+	Sat, 06 Aug 2011 10:34:37 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 06 Aug 2011 10:34:37 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Aug 2011 23:51:33 +0200
-Received: from stefan by excalibur.local with local (Exim 4.76)
-	(envelope-from <stefan@excalibur.local>) id 1QpSEr-0001zJ-LG
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Aug 2011 23:47:29 +0200
-Date: Fri, 5 Aug 2011 23:47:29 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Sat, 06 Aug 2011 10:34:37 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110805214729.GA12101@excalibur.local>
-References: <CAFu+nvEwf_hPbB0a21qJFWAHZqdCkb3MPaKaZcLFgD+xc7cGVw@mail.gmail.com>
-	<4E15F6DD.2020308@mentor.com> <1312553761.14079.22.camel@jjg-linux>
-	<CAFu+nvE3v+VswNB-3ZwF3dFMa42wgeSv6GMBJ4C=bYNpWKKFmw@mail.gmail.com>
-	<20110805151726.GB15632@rhein.zuhause.netz>
-	<CAFu+nvEwGYd-t6n04yn41wd50+5zPoEu=5WVYxOmaWLDdyKdEQ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAFu+nvEwGYd-t6n04yn41wd50+5zPoEu=5WVYxOmaWLDdyKdEQ@mail.gmail.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: classpath in 2011.03-maintenance
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 06 Aug 2011 10:34:24 +0200
+Message-ID: <j1iuag$i4e$1@dough.gmane.org>
+References: <1312574418-21041-1-git-send-email-raj.khem@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:5.0) Gecko/20110624 Thunderbird/5.0
+In-Reply-To: <1312574418-21041-1-git-send-email-raj.khem@gmail.com>
+X-Enigmail-Version: 1.2
+Subject: Re: [meta-oe][PATCH V2] systemd: Link with librt explicitly on uclibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,27 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Aug 2011 21:55:56 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 06 Aug 2011 08:39:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Fri, 2011-08-05 at 11:38, George C. Huntington, III wrote:
-> I posted a patch that makes the wrapper script return the error code if it
-> fails after 5 retries.  it is on patchwork.
-> http://patches.openembedded.org/patch/7249/
+Op 05-08-11 22:00, Khem Raj schreef:
+> Latest systemd has started to use mq_* functions which are found on librt in uclibc.
 > 
-> I don't know if anyone has reviewed it, but it worked for me.
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-It was on my list but I dropped it once the list got to big. ;) Sorry
-for that.
+Thanks, applied
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-I just started a build with our full image (openjdk for the target and
-many java apps) and we should know more when I'm up again tomorrow.
-Will let you know.
+iD8DBQFOPPyQMkyGM64RGpERAspaAKCLPSEnOmzskjhU42yfTPPPMtL6AACgvbp2
+RBriclJTaa8wr+irhgfX0Ag=
+=cCP+
+-----END PGP SIGNATURE-----
 
-regards
-Stefan Schmidt
 
 
