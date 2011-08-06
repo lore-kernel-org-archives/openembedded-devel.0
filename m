@@ -1,35 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QpcUf-0003AH-G7 for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Aug 2011 10:44:29 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QpcQP-0002q5-Fv for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Aug 2011 10:40:05 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Aug 2011 10:40:05 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1QpkvG-00078C-Rq
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 06 Aug 2011 19:44:30 +0200
+Received: by vxj14 with SMTP id 14so2575353vxj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Aug 2011 10:40:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 06 Aug 2011 10:37:14 +0200
-Message-ID: <j1iufq$i4e$2@dough.gmane.org>
-References: <cover.1312578809.git.andrea.adami@gmail.com>
-	<f4f0e18f46651290556cba9c44f49b2db6177ccb.1312578809.git.andrea.adami@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
-In-Reply-To: <f4f0e18f46651290556cba9c44f49b2db6177ccb.1312578809.git.andrea.adami@gmail.com>
-X-Enigmail-Version: 1.2
-Subject: Re: [PATCH 2/2] klibc.bbclass: shared include for building against klibc
+	Sat, 06 Aug 2011 10:40:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=/Cgdmf657HBNmj+cCxxNhgoDQhXaU6g/HpRfT7rBGoU=;
+	b=Fnl6sooD22I0Qb4pz9IeI+sm3BMYl+0Co33epOimnWIuq1g+TdlzLJ52L0/wBJ+uDX
+	haTnr+eGro3lGuVbSlHewK08XEGnq4kwaGKSLPEz7LKUEhvCYdbumzW6WOasPl8o2uEh
+	2ibuIuvJBFv9qIswdd80X7aF4c4gMKHjvWpI4=
+MIME-Version: 1.0
+Received: by 10.52.155.135 with SMTP id vw7mr3460974vdb.238.1312652403646;
+	Sat, 06 Aug 2011 10:40:03 -0700 (PDT)
+Received: by 10.220.203.12 with HTTP; Sat, 6 Aug 2011 10:40:03 -0700 (PDT)
+Date: Sat, 6 Aug 2011 19:40:03 +0200
+Message-ID: <CACW_hTaSmZHdnvvAsvLbZBLCoxKnxdetTGGYbWPMnVGjOBwi4A@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: isuses installing from scratch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,33 +35,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Aug 2011 08:44:29 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 06 Aug 2011 17:44:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi all,
 
-Op 05-08-11 23:30, Andrea Adami schreef:
-> * from meta-zaurus * reworked in meta-smartphones/meta-zaurus
-> 
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com> --- meta-oe/classes/klibc.bbclass |    9 +++++++++ 1 files changed, 9 insertions(+), 0 deletions(-) create mode 100644 meta-oe/classes/klibc.bbclass
-> 
-> diff --git a/meta-oe/classes/klibc.bbclass b/meta-oe/classes/klibc.bbclass new file mode 100644 index 0000000..d684367 --- /dev/null +++ b/meta-oe/classes/klibc.bbclass @@ -0,0 +1,9 @@ +# klcc-cross depends on klibc +DEPENDS =+ "klcc-cross" + +export CC=${TARGET_PREFIX}klcc
+Found the following issues when installing from scratch on ubuntu 11.04
+Decided to use the getting started page.
+http://wiki.openembedded.net/index.php/Getting_started
+This page mentions 1.10.2 from berlios, but the latest version on berlios is
+1.12.0
+Can't change it in the wiki.
 
-please put quotes around that
+And 1.12.0 also needed python-ply iand python-progressbar installed.
 
-> +# reset inherited OE flags to avoid e.g. ggdb3 and keep size small +export CFLAGS="" +export CPPFLAGS="" +export LDFLAGS=""
+And lastly the example for local.conf is not correct:
 
-Stripping takes care of ggdb3, so remove those
+For building a .dev branch, in your local.conf file, you should have at
+least the following three entries. Example for the Angstrom distribution and
+the Openmoko gta01 machine:
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+BBFILES = "/stuff/openembedded/recipes/*/*.bb"
+DISTRO = "angstrom-2010.x"
+MACHINE = "beagleboard"
 
-iD8DBQFOPP06MkyGM64RGpERAiAKAJ4xqRH+AmjUGfb9z8DE3Q89+WGy7wCcD6HQ
-cQKfreqlgsk+dRuwvyZSn1g=
-=irwZ
------END PGP SIGNATURE-----
+The text talks about gta01, example uses beagleboard
 
+Can someone with edit rights fix this?
 
+Thanks! Frans
 
