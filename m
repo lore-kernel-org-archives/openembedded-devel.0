@@ -1,27 +1,30 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-iy0-f171.google.com ([209.85.210.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1Qq7Mt-0006s8-V3
+	(envelope-from <tom.rini@gmail.com>) id 1QqAJO-0001uS-0Y
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Aug 2011 19:42:31 +0200
-Received: by fxg11 with SMTP id 11so3888046fxg.6
+	Sun, 07 Aug 2011 22:51:06 +0200
+Received: by iyf13 with SMTP id 13so9486272iyf.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Aug 2011 10:38:05 -0700 (PDT)
-Received: by 10.204.7.1 with SMTP id b1mr1331590bkb.127.1312738678885;
-	Sun, 07 Aug 2011 10:37:58 -0700 (PDT)
-Received: from [217.197.84.226] (recycler.in-berlin.de [217.197.84.226])
-	by mx.google.com with ESMTPS id r24sm1400143bkr.59.2011.08.07.10.37.56
-	(version=SSLv3 cipher=OTHER); Sun, 07 Aug 2011 10:37:57 -0700 (PDT)
-Message-ID: <4E3ECD6E.7000201@dresearch-fe.de>
-Date: Sun, 07 Aug 2011 19:37:50 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
+	Sun, 07 Aug 2011 13:46:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=vpgFXpJp7CC787kmwjvqyDgUAyD6fepyK10jxCrTqzo=;
+	b=ZGCNKWAWpxOFhj9AoaH0KhUDFv8rkD1322xJ8D5X+yTkvbHPtMk55YuG4++Z3V/YQC
+	0mhkjIMMW1bWoj/3LMCyUhTwuvbU6qANN9alMBtmP5uGuykpMNgFSwkMOjkf3O0kERtC
+	VaWvLwC7K7WIFTVtgDqPY1RZ5aUs26vKHSE84=
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Received: by 10.42.168.66 with SMTP id v2mr4893652icy.104.1312749996805; Sun,
+	07 Aug 2011 13:46:36 -0700 (PDT)
+Received: by 10.42.213.1 with HTTP; Sun, 7 Aug 2011 13:46:36 -0700 (PDT)
+In-Reply-To: <4E3ECD6E.7000201@dresearch-fe.de>
 References: <4E3A3C4B.8040208@dresearch-fe.de>
 	<4E3B9812.9010002@dresearch-fe.de>
-In-Reply-To: <4E3B9812.9010002@dresearch-fe.de>
-Cc: Koen Kooi <koen@openembedded.org>
+	<4E3ECD6E.7000201@dresearch-fe.de>
+Date: Sun, 7 Aug 2011 13:46:36 -0700
+Message-ID: <CA+M6bXkrQyqiSFFxsyZv4mRPUmk82EbdUzSygrBaoyp5zeQ9zA@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [2011.03-maintenance] unsatisfied dependencies to libgcc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,62 +39,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Aug 2011 17:42:32 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 07 Aug 2011 20:51:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Am 05.08.2011 09:13, schrieb Steffen Sledz:
-> On 04.08.2011 08:29, Steffen Sledz wrote:
->> In the last days we switched our local development from an older oe-dev master to 2011.03-maintenance branch and hit an annoying problem.
+On Sun, Aug 7, 2011 at 10:37 AM, Steffen Sledz <sledz@dresearch-fe.de> wrot=
+e:
+> Am 05.08.2011 09:13, schrieb Steffen Sledz:
+>> On 04.08.2011 08:29, Steffen Sledz wrote:
+>>> In the last days we switched our local development from an older oe-dev=
+ master to 2011.03-maintenance branch and hit an annoying problem.
+>>>
+>>> The test builds on various developer machines were successful but the b=
+uild on our continuous integration server (with exactly the same scripting)=
+ ended up with a lot of
+>>>
+>>> | =A0* satisfy_dependencies_for: Cannot satisfy the following dependenc=
+ies for lighttpd:
+>>> | =A0* =A0 =A0libstdc++6 (>=3D 4.3.3) * =A0 =A0 =A0 =A0 libgcc1 (>=3D 4=
+.3.3) * =A0 =A0libgcc1 (>=3D 4.3.3) *
+>>> | =A0* opkg_install_cmd: Cannot install package lighttpd.
+>>>
+>>> errors.
+>>>
+>>> After some searching we found that there was no libgcc1_4.3.3-r24.2.6_a=
+rmv5te.ipk in the deploy area.
+>>>
+>>> I'm not sure which package should produce this but i guess it should co=
+me from gcc-cross-4.3.3 (because its recipe version is r24.2.6 in opposite =
+to gcc-4.3.3 r24.1.6).
+>>>
+>>> Looking into the log i hit the fact that the do_rootfs stage for the im=
+age was started *before* the do_package_stage of gcc-cross_4.3.3.bb was suc=
+ceeded.
+>>>
+>>> Any ideas?
+>>>
+>>> PS: Bitbaking gcc-cross explicitly before bitbaking the image wors as a=
+ workaround for us at the moment.
 >>
->> The test builds on various developer machines were successful but the build on our continuous integration server (with exactly the same scripting) ended up with a lot of
+>> I made some research in this and there is something i do not understand.
 >>
->> |  * satisfy_dependencies_for: Cannot satisfy the following dependencies for lighttpd:
->> |  *    libstdc++6 (>= 4.3.3) *         libgcc1 (>= 4.3.3) *    libgcc1 (>= 4.3.3) *
->> |  * opkg_install_cmd: Cannot install package lighttpd.
+>> The task-depends.dot generated by bitbake -g (says
 >>
->> errors.
+>> =A0 "console-image.do_rootfs" [label=3D"console-image do_rootfs\n0:1.0-r=
+0\n/home/sledz/work/angstrom-setup-scripts/sources/openembedded/recipes/ima=
+ges/console-image.bb"]
+>> =A0 "console-image.do_rootfs" -> "lzo-native.do_populate_sysroot"
+>> =A0 "console-image.do_rootfs" -> "bluez4.do_populate_sysroot"
+>> =A0 ...
 >>
->> After some searching we found that there was no libgcc1_4.3.3-r24.2.6_armv5te.ipk in the deploy area.
+>> So do_rootfs depends only on do_populate_sysroot stages. But the do_root=
+fs stage itself uses opkg to install the packages into the image.
 >>
->> I'm not sure which package should produce this but i guess it should come from gcc-cross-4.3.3 (because its recipe version is r24.2.6 in opposite to gcc-4.3.3 r24.1.6).
+>> In my understanding this means that all the ipk files need to be availab=
+le. But this is not guaranteed by the reported dependencies.
 >>
->> Looking into the log i hit the fact that the do_rootfs stage for the image was started *before* the do_package_stage of gcc-cross_4.3.3.bb was succeeded.
->>
->> Any ideas?
->>
->> PS: Bitbaking gcc-cross explicitly before bitbaking the image wors as a workaround for us at the moment.
-> 
-> I made some research in this and there is something i do not understand.
-> 
-> The task-depends.dot generated by bitbake -g (says
-> 
->   "console-image.do_rootfs" [label="console-image do_rootfs\n0:1.0-r0\n/home/sledz/work/angstrom-setup-scripts/sources/openembedded/recipes/images/console-image.bb"]
->   "console-image.do_rootfs" -> "lzo-native.do_populate_sysroot"
->   "console-image.do_rootfs" -> "bluez4.do_populate_sysroot"
->   ...
-> 
-> So do_rootfs depends only on do_populate_sysroot stages. But the do_rootfs stage itself uses opkg to install the packages into the image.
-> 
-> In my understanding this means that all the ipk files need to be available. But this is not guaranteed by the reported dependencies.
-> 
-> A misunderstanding of mine? Or a bug?
+>> A misunderstanding of mine? Or a bug?
+>
+> Ping!
+>
+> Did everyone read my message?
+>
+> If it really is a misunderstanding of mine, please let me know. But if i'=
+m right this seems to be a critical problem.
 
-Ping!
+It sounds both strange and a correct reading of the task lists, iirc.
+Did we fix this in oe.dev perhaps and just need to pull a change over?
 
-Did everyone read my message?
-
-If it really is a misunderstanding of mine, please let me know. But if i'm right this seems to be a critical problem.
-
-Steffen
-
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+--=20
+Tom
 
 
