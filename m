@@ -1,27 +1,27 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1QpkvG-00078C-Rq
+	(envelope-from <sylvain.pare@gmail.com>) id 1Qq70F-0006UL-LR
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Aug 2011 19:44:30 +0200
-Received: by vxj14 with SMTP id 14so2575353vxj.6
+	Sun, 07 Aug 2011 19:19:07 +0200
+Received: by qyk4 with SMTP id 4so1329922qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Aug 2011 10:40:04 -0700 (PDT)
+	Sun, 07 Aug 2011 10:14:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=/Cgdmf657HBNmj+cCxxNhgoDQhXaU6g/HpRfT7rBGoU=;
-	b=Fnl6sooD22I0Qb4pz9IeI+sm3BMYl+0Co33epOimnWIuq1g+TdlzLJ52L0/wBJ+uDX
-	haTnr+eGro3lGuVbSlHewK08XEGnq4kwaGKSLPEz7LKUEhvCYdbumzW6WOasPl8o2uEh
-	2ibuIuvJBFv9qIswdd80X7aF4c4gMKHjvWpI4=
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=Aps7ynCChds4R4gC/1FfG+QTTq27Tzylm0KXAe9a4C4=;
+	b=VEgOL6O8skxOG4d1nxL5uEbMOIMHOzwkmBliTBgiwrQnIbzh8OWZqEWoLZz77BOY6V
+	q7ZkiXLYU4uNdDIoXvOOPWqQq9d/mNLVsuRy2MqL0i+igKCljVD/Lx9pHcmRElTjkZUb
+	oBEX5s0iZNPT/SnWYnvPo3YkEAFwpB3P2wKVA=
+Received: by 10.229.36.75 with SMTP id s11mr3414940qcd.176.1312737280165; Sun,
+	07 Aug 2011 10:14:40 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.52.155.135 with SMTP id vw7mr3460974vdb.238.1312652403646;
-	Sat, 06 Aug 2011 10:40:03 -0700 (PDT)
-Received: by 10.220.203.12 with HTTP; Sat, 6 Aug 2011 10:40:03 -0700 (PDT)
-Date: Sat, 6 Aug 2011 19:40:03 +0200
-Message-ID: <CACW_hTaSmZHdnvvAsvLbZBLCoxKnxdetTGGYbWPMnVGjOBwi4A@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Received: by 10.229.229.9 with HTTP; Sun, 7 Aug 2011 10:14:20 -0700 (PDT)
+From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
+Date: Sun, 7 Aug 2011 19:14:20 +0200
+Message-ID: <CACrTVg+OATbFizVqggezkfyM_k0i-JVfuBv3FNj0f59JthmvQQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: isuses installing from scratch
+Subject: [PATCH] libpng: upgrade to 1.2.46
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,33 +35,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Aug 2011 17:44:31 -0000
+X-List-Received-Date: Sun, 07 Aug 2011 17:19:07 -0000
+X-Groupsio-MsgNum: 33543
+Content-Type: multipart/mixed; boundary=00163683235c4485fe04a9ed778c
+
+--00163683235c4485fe04a9ed778c
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hi all,
+Hi
 
-Found the following issues when installing from scratch on ubuntu 11.04
-Decided to use the getting started page.
-http://wiki.openembedded.net/index.php/Getting_started
-This page mentions 1.10.2 from berlios, but the latest version on berlios is
-1.12.0
-Can't change it in the wiki.
+Following the release of a new version of libpng oe recipe needs to be
+updated as the target download has moved to history in the ftp
+So does someone can apply this attached file please
+thx.
+best regards
 
-And 1.12.0 also needed python-ply iand python-progressbar installed.
+Sylvain Par=E9 (aka GarthPS)
 
-And lastly the example for local.conf is not correct:
+--00163683235c4485fe04a9ed778c
+Content-Type: application/octet-stream; 
+	name="0002-libpng-upgrade-to-v1.2.46.patch"
+Content-Disposition: attachment; 
+	filename="0002-libpng-upgrade-to-v1.2.46.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_gr29sbid0
 
-For building a .dev branch, in your local.conf file, you should have at
-least the following three entries. Example for the Angstrom distribution and
-the Openmoko gta01 machine:
+RnJvbSA2MzZmZTMzOWYzNDI5NmZjZGYxZDU1NzFjMTQ0YzA0NGM5ZjE2Nzg5IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiA9P1VURi04P3E/U3lsdmFpbj0yMCdHYXJ0aFBTJz0yMFBhcj1D
+Mz1BOT89IDxzeWx2YWluLnBhcmVAZ21haWwuY29tPgpEYXRlOiBTdW4sIDcgQXVnIDIwMTEgMTk6
+MDg6MzAgKzAyMDAKU3ViamVjdDogW1BBVENIIDIvMl0gbGlicG5nOiB1cGdyYWRlIHRvIHYxLjIu
+NDYKTUlNRS1WZXJzaW9uOiAxLjAKQ29udGVudC1UeXBlOiB0ZXh0L3BsYWluOyBjaGFyc2V0PVVU
+Ri04CkNvbnRlbnQtVHJhbnNmZXItRW5jb2Rpbmc6IDhiaXQKCglUaGlzIGFkZHJlc3NlcyB0aGUg
+Zm9sbG93aW5nIHNlY3VyaXR5IGFkdmlzb3JpZXM6CgkJKiBDVkUtMjAxMS0yNjkwCgkJKiBDVkUt
+MjAxMS0yNjkyCgpTaWduZWQtb2ZmLWJ5OiBTeWx2YWluICdHYXJ0aFBTJyBQYXLDqSA8c3lsdmFp
+bi5wYXJlQGdtYWlsLmNvbT4KLS0tCiByZWNpcGVzL2xpYnBuZy9saWJwbmdfMS4yLjQ0LmJiIHwg
+ICAgOCAtLS0tLS0tLQogcmVjaXBlcy9saWJwbmcvbGlicG5nXzEuMi40Ni5iYiB8ICAgIDYgKysr
+KysrCiAyIGZpbGVzIGNoYW5nZWQsIDYgaW5zZXJ0aW9ucygrKSwgOCBkZWxldGlvbnMoLSkKIGRl
+bGV0ZSBtb2RlIDEwMDY0NCByZWNpcGVzL2xpYnBuZy9saWJwbmdfMS4yLjQ0LmJiCiBjcmVhdGUg
+bW9kZSAxMDA2NDQgcmVjaXBlcy9saWJwbmcvbGlicG5nXzEuMi40Ni5iYgoKZGlmZiAtLWdpdCBh
+L3JlY2lwZXMvbGlicG5nL2xpYnBuZ18xLjIuNDQuYmIgYi9yZWNpcGVzL2xpYnBuZy9saWJwbmdf
+MS4yLjQ0LmJiCmRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NAppbmRleCA0YmE3YjIwLi4wMDAwMDAw
+Ci0tLSBhL3JlY2lwZXMvbGlicG5nL2xpYnBuZ18xLjIuNDQuYmIKKysrIC9kZXYvbnVsbApAQCAt
+MSw4ICswLDAgQEAKLXJlcXVpcmUgbGlicG5nLmluYwotCi1QUiA9ICIke0lOQ19QUn0uMCIKLQot
+U1JDX1VSSSArPSAiZmlsZTovL21ha2VmaWxlX2ZpeC5wYXRjaCIKLQotU1JDX1VSSVtsaWJwbmcu
+bWQ1c3VtXSA9ICJlM2FjNzg3OWQ2MmFkMTY2YTZmMGM3NDQxMzkwZDEyYiIKLVNSQ19VUklbbGli
+cG5nLnNoYTI1NnN1bV0gPSAiYjlhYjIwZjFjMmMzYmY2YzQ0NDhmZDliZDhhNGE4OTA1YjkxODEx
+NGQ1ZmFkYTU2Yzk3YmI3NThhMTdiNzIxNSIKZGlmZiAtLWdpdCBhL3JlY2lwZXMvbGlicG5nL2xp
+YnBuZ18xLjIuNDYuYmIgYi9yZWNpcGVzL2xpYnBuZy9saWJwbmdfMS4yLjQ2LmJiCm5ldyBmaWxl
+IG1vZGUgMTAwNjQ0CmluZGV4IDAwMDAwMDAuLmUwMzZiZTUKLS0tIC9kZXYvbnVsbAorKysgYi9y
+ZWNpcGVzL2xpYnBuZy9saWJwbmdfMS4yLjQ2LmJiCkBAIC0wLDAgKzEsNiBAQAorcmVxdWlyZSBs
+aWJwbmcuaW5jCisKK1BSID0gIiR7SU5DX1BSfS4wIgorCitTUkNfVVJJW2xpYnBuZy5tZDVzdW1d
+ID0gImU4YjQzZGM3OGVmOTViMzk0OWFmN2Y5NjFkNzY4NzRiIgorU1JDX1VSSVtsaWJwbmcuc2hh
+MjU2c3VtXSA9ICJhNWU3OTZlMTgwMmIyZTIyMTQ5OGJkYTA5ZmY5ODUwYmM3ZWM5MDY4YjY3ODg5
+NDhjYzJjNDJhZjIxMzkxNGQ4IgotLSAKMS43LjQuMQoK
 
-BBFILES = "/stuff/openembedded/recipes/*/*.bb"
-DISTRO = "angstrom-2010.x"
-MACHINE = "beagleboard"
-
-The text talks about gta01, example uses beagleboard
-
-Can someone with edit rights fix this?
-
-Thanks! Frans
-
+--00163683235c4485fe04a9ed778c--
