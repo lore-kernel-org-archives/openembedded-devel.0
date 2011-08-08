@@ -1,31 +1,29 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail2.multitech.net ([65.126.90.254] helo=mail2.multitech.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <josua.mayer97@googlemail.com>) id 1QqPqE-0000bA-Sl
+	(envelope-from <jgilles@multitech.com>) id 1QqSuT-0001E1-Fo
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Aug 2011 15:26:03 +0200
-Received: by fxg11 with SMTP id 11so4702319fxg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Aug 2011 06:21:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=5P5Vnado3XnOOp5vUCYAzdfmPVWCaPQPBJ+G+7wg2NM=;
-	b=YkFwlrMeX20SXoyWxL6RMXE474h7WRQOX5he8BRFOOa+P0AGRdP5f3Uq1c+BkscLMA
-	I+3UoACoeoISj5JTx7tx0NvGFsVUEDCgZJ9p2jUFaLpOyhg+lusc/YkNJzbyYUjKtXTQ
-	7r3tPfbMvSSXf2acCwDvGW49bbh8KP/hCsVk4=
-Received: by 10.223.68.136 with SMTP id v8mr113419fai.54.1312809694744;
-	Mon, 08 Aug 2011 06:21:34 -0700 (PDT)
-Received: from localhost.localdomain (pD957CD5C.dip.t-dialin.net
-	[217.87.205.92])
-	by mx.google.com with ESMTPS id i16sm185086faa.21.2011.08.08.06.21.31
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 08 Aug 2011 06:21:32 -0700 (PDT)
-From: Josua Mayer <josua.mayer97@googlemail.com>
+	Mon, 08 Aug 2011 18:42:37 +0200
+Received: from mail2.multitech.com (localhost.localdomain [127.0.0.1])
+	by localhost (Email Security Appliance) with SMTP id
+	9C9C25B02F0_E4010F0B for <openembedded-devel@lists.openembedded.org>;
+	Mon,  8 Aug 2011 16:38:08 +0000 (GMT)
+Received: from mail.multitech.com (unknown [192.168.11.244])
+	by mail2.multitech.com (Sophos Email Appliance) with ESMTP id
+	6AD125B02FB_E4010F0F for <openembedded-devel@lists.openembedded.org>;
+	Mon,  8 Aug 2011 16:38:08 +0000 (GMT)
+X-Ninja-PIM: Scanned by Ninja
+X-Ninja-AttachmentFiltering: (no action)
+Received: from localhost.localdomain ([192.168.52.61]) by mail.multitech.com
+	with Microsoft SMTPSVC(5.0.2195.7381); 
+	Mon, 8 Aug 2011 11:37:29 -0500
+From: Jesse Gilles <jgilles@multitech.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Aug 2011 15:21:22 +0200
-Message-Id: <1312809682-11362-1-git-send-email-josua.mayer97@googlemail.com>
-X-Mailer: git-send-email 1.7.5.3
-Subject: [PATCH v2] mokomaze: Update Project URLs
+Date: Mon,  8 Aug 2011 11:38:02 -0500
+Message-Id: <1312821482-32319-1-git-send-email-jgilles@multitech.com>
+X-Mailer: git-send-email 1.7.0.4
+X-OriginalArrivalTime: 08 Aug 2011 16:37:29.0564 (UTC)
+	FILETIME=[76CAB9C0:01CC55E9]
+Subject: [PATCH] jakarta-libs: fix SRC_URIs for avalon-framework, logkit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,42 +37,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Aug 2011 13:26:03 -0000
+X-List-Received-Date: Mon, 08 Aug 2011 16:42:37 -0000
 
-* Mokomaze moved to sourceforge
-  Homepage and download link were changed accordingly
-  SOURCEFORGE_MIRROR cannot be used because the source is not located at http://sourceforge.net/projects/mokomaze/files/ but inside http://mokomaze.sourceforge.net/files/
-
-Signed-off-by: Josua Mayer <josua.mayer97@googlemail.com>
+* code was moved to archive.apache.org
 ---
-v2: tried to use SOURCEFORGE_MIRROR unsucccessfully
-v2: commit summary now starts with a capital letter
----
- recipes/mokomaze/mokomaze_0.5.5.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes/jakarta-libs/avalon-framework-api_4.3.bb |    4 ++--
+ recipes/jakarta-libs/logkit_1.2.2.bb             |    2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes/mokomaze/mokomaze_0.5.5.bb b/recipes/mokomaze/mokomaze_0.5.5.bb
-index 9ef8771..d4c2541 100644
---- a/recipes/mokomaze/mokomaze_0.5.5.bb
-+++ b/recipes/mokomaze/mokomaze_0.5.5.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "Classic game where you control a steel ball by tilting a wooden labyrinth"
--HOMEPAGE = "http://mokomaze.projects.openmoko.org/"
-+HOMEPAGE = "http://mokomaze.sourceforge.net/"
- SECTION = "x11/games"
- PRIORITY = "optional"
- LICENSE = "GPLv3"
-@@ -9,7 +9,7 @@ RRECOMMENDS_${PN}_shr = "fsoraw"
- PV = "0.5.5+git8"
- PR = "r7"
+diff --git a/recipes/jakarta-libs/avalon-framework-api_4.3.bb b/recipes/jakarta-libs/avalon-framework-api_4.3.bb
+index 06fde62..08d560c 100644
+--- a/recipes/jakarta-libs/avalon-framework-api_4.3.bb
++++ b/recipes/jakarta-libs/avalon-framework-api_4.3.bb
+@@ -3,8 +3,8 @@ LICENSE = "AL2.0"
+ AUTHOR = "Apache Software Foundation"
  
--SRC_URI = "http://mokomaze.projects.openmoko.org/files/${PN}-${PV}.tar.gz"
-+SRC_URI = "http://mokomaze.sourceforge.net/files/${PN}-${PV}.tar.gz"
- SRC_URI_append_shr = " file://fsoraw.patch"
- SRC_URI_append_shr = " file://0001-Fix-accelerometers-with-2.6.34-kernels.patch"
- SRC_URI_append_shr = " file://0001-Fix-vibration-on-gta02-with-2.6.34-kernel.patch"
+ SRC_URI = "\
+-	http://www.apache.org/dist/excalibur/avalon-framework/source/${BP}-src.tar.gz;name=archive \
+-	http://www.apache.org/dist/avalon/logkit/source/logkit-1.2.2-src.tar.gz;name=logkit \
++	http://archive.apache.org/dist/excalibur/avalon-framework/source/${BP}-src.tar.gz;name=archive \
++	http://archive.apache.org/dist/avalon/logkit/source/logkit-1.2.2-src.tar.gz;name=logkit \
+ 	"
+ 
+ inherit java-library
+diff --git a/recipes/jakarta-libs/logkit_1.2.2.bb b/recipes/jakarta-libs/logkit_1.2.2.bb
+index c5eceee..39fe897 100644
+--- a/recipes/jakarta-libs/logkit_1.2.2.bb
++++ b/recipes/jakarta-libs/logkit_1.2.2.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "Logging toolkit designed for secure performance orientated loggin
+ LICENSE = "AL2.0"
+ AUTHOR = "Apache Software Foundation"
+ 
+-SRC_URI = "http://www.apache.org/dist/avalon/logkit/source/${BP}-src.tar.gz"
++SRC_URI = "http://archive.apache.org/dist/avalon/logkit/source/${BP}-src.tar.gz"
+ 
+ inherit java-library
+ 
 -- 
-1.7.5.3
+1.7.0.4
 
 
 
