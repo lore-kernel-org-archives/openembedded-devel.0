@@ -1,36 +1,31 @@
-Received: from mail-iy0-f171.google.com ([209.85.210.171])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QqdTQ-0007dM-T5
+	(envelope-from <sledz@dresearch-fe.de>) id 1Qqibt-00083k-0z
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Aug 2011 05:59:25 +0200
-Received: by iyf13 with SMTP id 13so12331797iyf.16
+	Tue, 09 Aug 2011 11:28:29 +0200
+Received: by ewy5 with SMTP id 5so1097192ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Aug 2011 20:54:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:x-enigmail-version:content-type
-	:content-transfer-encoding;
-	bh=cqRyxpRCZm8L5YrtImAfoOlFVlhAhT+tJsEWBTNE0qI=;
-	b=wZ8kfPHYYXmWTxDZ3Hna0F0ulna3k8LFU6BLszV32oJKGOadx2a0PM0xNTQqEtuJHN
-	F3T18oodSH4xlRoDWheLFKLyellMChRIeTc5numos5XIeMppn4m3Rh2SzkprdGA4IV0+
-	BxAT22Kh9pv67fXqndpMxomhhiVJKpqH2ugb4=
-Received: by 10.42.246.1 with SMTP id lw1mr6128031icb.47.1312862094597;
-	Mon, 08 Aug 2011 20:54:54 -0700 (PDT)
-Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id a11sm4699042ibg.55.2011.08.08.20.54.52
-	(version=SSLv3 cipher=OTHER); Mon, 08 Aug 2011 20:54:53 -0700 (PDT)
-Message-ID: <4E40AF8B.4080103@gmail.com>
-Date: Mon, 08 Aug 2011 20:54:51 -0700
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:6.0) Gecko/20110801 Thunderbird/6.0
+	Tue, 09 Aug 2011 02:24:00 -0700 (PDT)
+Received: by 10.213.102.72 with SMTP id f8mr1388226ebo.32.1312881836786;
+	Tue, 09 Aug 2011 02:23:56 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id e9sm2910596eeb.54.2011.08.09.02.23.55
+	(version=SSLv3 cipher=OTHER); Tue, 09 Aug 2011 02:23:55 -0700 (PDT)
+Message-ID: <4E40FCA9.7060204@dresearch-fe.de>
+Date: Tue, 09 Aug 2011 11:23:53 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:5.0) Gecko/20110624 Thunderbird/5.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1312858153686306500@rkmorris.us>
-In-Reply-To: <1312858153686306500@rkmorris.us>
-X-Enigmail-Version: 1.2pre
-Subject: Re: ISO-Codes Build Failing
+References: <4E3A3C4B.8040208@dresearch-fe.de>
+	<4E3B9812.9010002@dresearch-fe.de>
+	<4E3ECD6E.7000201@dresearch-fe.de>
+	<CA+M6bXkrQyqiSFFxsyZv4mRPUmk82EbdUzSygrBaoyp5zeQ9zA@mail.gmail.com>
+In-Reply-To: <CA+M6bXkrQyqiSFFxsyZv4mRPUmk82EbdUzSygrBaoyp5zeQ9zA@mail.gmail.com>
+X-Enigmail-Version: 1.2
+Subject: Re: [2011.03-maintenance] unsatisfied dependencies to libgcc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,51 +39,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Aug 2011 03:59:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Aug 2011 09:28:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 08/08/2011 07:49 PM, Russell Morris wrote:
-> Hi,
+On 07.08.2011 22:46, Tom Rini wrote:
+> On Sun, Aug 7, 2011 at 10:37 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
+>> Am 05.08.2011 09:13, schrieb Steffen Sledz:
+>>> On 04.08.2011 08:29, Steffen Sledz wrote:
+>>>> In the last days we switched our local development from an older oe-dev master to 2011.03-maintenance branch and hit an annoying problem.
+>>>>
+>>>> The test builds on various developer machines were successful but the build on our continuous integration server (with exactly the same scripting) ended up with a lot of
+>>>>
+>>>> |  * satisfy_dependencies_for: Cannot satisfy the following dependencies for lighttpd:
+>>>> |  *    libstdc++6 (>= 4.3.3) *         libgcc1 (>= 4.3.3) *    libgcc1 (>= 4.3.3) *
+>>>> |  * opkg_install_cmd: Cannot install package lighttpd.
+>>>>
+>>>> errors.
+>>>>
+>>>> After some searching we found that there was no libgcc1_4.3.3-r24.2.6_armv5te.ipk in the deploy area.
+>>>>
+>>>> I'm not sure which package should produce this but i guess it should come from gcc-cross-4.3.3 (because its recipe version is r24.2.6 in opposite to gcc-4.3.3 r24.1.6).
+>>>>
+>>>> Looking into the log i hit the fact that the do_rootfs stage for the image was started *before* the do_package_stage of gcc-cross_4.3.3.bb was succeeded.
+>>>>
+>>>> Any ideas?
+>>>>
+>>>> PS: Bitbaking gcc-cross explicitly before bitbaking the image wors as a workaround for us at the moment.
+>>>
+>>> I made some research in this and there is something i do not understand.
+>>>
+>>> The task-depends.dot generated by bitbake -g (says
+>>>
+>>>   "console-image.do_rootfs" [label="console-image do_rootfs\n0:1.0-r0\n/home/sledz/work/angstrom-setup-scripts/sources/openembedded/recipes/images/console-image.bb"]
+>>>   "console-image.do_rootfs" -> "lzo-native.do_populate_sysroot"
+>>>   "console-image.do_rootfs" -> "bluez4.do_populate_sysroot"
+>>>   ...
+>>>
+>>> So do_rootfs depends only on do_populate_sysroot stages. But the do_rootfs stage itself uses opkg to install the packages into the image.
+>>>
+>>> In my understanding this means that all the ipk files need to be available. But this is not guaranteed by the reported dependencies.
+>>>
+>>> A misunderstanding of mine? Or a bug?
+>>
+>> Ping!
+>>
+>> Did everyone read my message?
+>>
+>> If it really is a misunderstanding of mine, please let me know. But if i'm right this seems to be a critical problem.
 > 
-> I have been trying to build angstrom-x-image, but it fails - at
-> iso-codes. The issue may be because Verizon FIOS is now blocking FTP
-> (as more and more ISP's are), but in any case I created a new recipe
-> to correct this (and it works). How do I get this change in to the
-> official OpenEmbedded build (or can I even?)?
-> 
-> Also ... what is the official OE path? I admit, now with
-> OpenEmbedded, core, etc. - it's getting a bit confusing ... :-(. It
-> really seems like (base?) OpenEmbedded is getting quite out of date,
-> but I could be wrong.
-> 
+> It sounds both strange and a correct reading of the task lists, iirc.
+> Did we fix this in oe.dev perhaps and just need to pull a change over?
 
-send patches for meta-openembedded to add the recipe that will make it
-into the new layered metadata based distros.
+The mentioned dependency problem was a misinterpretation of the task-depends.dot.
 
+Aside from the do_populate_sysroot there are the following additional dependencies:
 
-> On to gs next (which seems to be failing during the do_configure
-> stage).
-> 
-> Thanks, ... Russell
-> 
-> _______________________________________________ Openembedded-devel
-> mailing list Openembedded-devel@lists.openembedded.org 
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+ "console-image.do_rootfs" -> "console-image.do_package_update_index_ipk"
+ ...
+ "console-image.do_package_update_index_ipk" -> "gcc-cross.do_package_write_ipk"
+ ...
+ "gcc-cross.do_package_write_ipk" -> "gcc-cross.do_package"
 
+The problem seems to be located more likely somewhere inside the gcc-4.3.3-r24.1/gcc-cross-4.3.3-r24.2 recipes. There seems to be a confusion between those which leads to undetermined results.
 
-- --
-> 
-- -Khem
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+E.g. the content of tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.3.3-r24.2/temp/log.do_package_write_ipk.22477 is:
+------------------------>snip<------------------------
+Packaged contents of libstdc++-dev into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/libstdc++-dev_4.3.3-r24.1.6_armv5te.ipk
+Packaged contents of libgcc-dev into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/libgcc-dev_4.3.3-r24.1.6_armv5te.ipk
+------------------------>snip<------------------------
 
-iEYEARECAAYFAk5Ar4sACgkQuwUzVZGdMxQEYgCffYNw/R3mvw8XZQ8NkOxqKKgO
-Nv0An0g0n9S6r/vW/vKG0HrZ5ktvEgQu
-=HSTm
------END PGP SIGNATURE-----
+The do_package_write_ipk generates ipk-file with *r24.1.6* (which is the PR of gcc) and not *r24.2.6* (which is the PR of gcc).
+
+BTW: Which of the two recipes (gcc/gcc-cross) should provide the libgcc ipk (in my case none of it did)?
+
+Steffen
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
