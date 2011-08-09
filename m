@@ -1,30 +1,36 @@
 Received: from mail-iy0-f171.google.com ([209.85.210.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1Qqcef-0006an-MT
+	(envelope-from <raj.khem@gmail.com>) id 1QqdTQ-0007dM-T5
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Aug 2011 05:06:57 +0200
-Received: by iyf13 with SMTP id 13so12256962iyf.16
+	Tue, 09 Aug 2011 05:59:25 +0200
+Received: by iyf13 with SMTP id 13so12331797iyf.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Aug 2011 20:02:28 -0700 (PDT)
+	Mon, 08 Aug 2011 20:54:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=PO1qiHeOHTX4jxscPtSWTl18Pd62jFZbEqXtany8Kl4=;
-	b=IZs4dbm0tQ0cQ5WfYEVxqA79zUeirCIZVDGmfCl2o/RIu2je9xoMCnCzZrA7Z1ALfw
-	jXbuXtuSFswNybtch8Lt5AH64DqfKPRU9D0ywIskFcLbRxnsFRapT0WT4aBELMrttxXu
-	jh5oj6+Snwa4Z+D9bBdnsGJdbTZztkb+bVH+w=
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:x-enigmail-version:content-type
+	:content-transfer-encoding;
+	bh=cqRyxpRCZm8L5YrtImAfoOlFVlhAhT+tJsEWBTNE0qI=;
+	b=wZ8kfPHYYXmWTxDZ3Hna0F0ulna3k8LFU6BLszV32oJKGOadx2a0PM0xNTQqEtuJHN
+	F3T18oodSH4xlRoDWheLFKLyellMChRIeTc5numos5XIeMppn4m3Rh2SzkprdGA4IV0+
+	BxAT22Kh9pv67fXqndpMxomhhiVJKpqH2ugb4=
+Received: by 10.42.246.1 with SMTP id lw1mr6128031icb.47.1312862094597;
+	Mon, 08 Aug 2011 20:54:54 -0700 (PDT)
+Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id a11sm4699042ibg.55.2011.08.08.20.54.52
+	(version=SSLv3 cipher=OTHER); Mon, 08 Aug 2011 20:54:53 -0700 (PDT)
+Message-ID: <4E40AF8B.4080103@gmail.com>
+Date: Mon, 08 Aug 2011 20:54:51 -0700
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:6.0) Gecko/20110801 Thunderbird/6.0
 MIME-Version: 1.0
-Received: by 10.42.29.193 with SMTP id s1mr6099375icc.439.1312858947818; Mon,
-	08 Aug 2011 20:02:27 -0700 (PDT)
-Received: by 10.42.213.1 with HTTP; Mon, 8 Aug 2011 20:02:27 -0700 (PDT)
-In-Reply-To: <1312827980.683.6.camel@jjg-linux>
-References: <1312821482-32319-1-git-send-email-jgilles@multitech.com>
-	<1312827980.683.6.camel@jjg-linux>
-Date: Mon, 8 Aug 2011 20:02:27 -0700
-Message-ID: <CA+M6bXnpR1x0PRL7Pxgoo4sHxzvLgBGMP9D2rESp3g244xCsxQ@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] jakarta-libs: fix SRC_URIs for avalon-framework, logkit
+References: <1312858153686306500@rkmorris.us>
+In-Reply-To: <1312858153686306500@rkmorris.us>
+X-Enigmail-Version: 1.2pre
+Subject: Re: ISO-Codes Build Failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,23 +44,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Aug 2011 03:06:57 -0000
+X-List-Received-Date: Tue, 09 Aug 2011 03:59:25 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Mon, Aug 8, 2011 at 11:26 AM, Jesse Gilles <jgilles@multitech.com> wrote=
-:
-> Please apply to 2011.03-maintenance. =A0Without this patch, building
-> openjdk from scratch (no sources dir) fails because the
-> avalon-framework-api tarball can't be downloaded. =A0Apache.org put up a
-> placeholder page for http://www.apache.org/dist/excalibur/ that ends up
-> getting downloaded instead of the tarball.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I don't object to the change but it (a) needs to be in oe.dev (or
-oe-core/meta-oe) first and then (b) please send a pull request or git
-send-email of your cherry-pick.  Thanks!
+On 08/08/2011 07:49 PM, Russell Morris wrote:
+> Hi,
+> 
+> I have been trying to build angstrom-x-image, but it fails - at
+> iso-codes. The issue may be because Verizon FIOS is now blocking FTP
+> (as more and more ISP's are), but in any case I created a new recipe
+> to correct this (and it works). How do I get this change in to the
+> official OpenEmbedded build (or can I even?)?
+> 
+> Also ... what is the official OE path? I admit, now with
+> OpenEmbedded, core, etc. - it's getting a bit confusing ... :-(. It
+> really seems like (base?) OpenEmbedded is getting quite out of date,
+> but I could be wrong.
+> 
 
---=20
-Tom
+send patches for meta-openembedded to add the recipe that will make it
+into the new layered metadata based distros.
+
+
+> On to gs next (which seems to be failing during the do_configure
+> stage).
+> 
+> Thanks, ... Russell
+> 
+> _______________________________________________ Openembedded-devel
+> mailing list Openembedded-devel@lists.openembedded.org 
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+- --
+> 
+- -Khem
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEARECAAYFAk5Ar4sACgkQuwUzVZGdMxQEYgCffYNw/R3mvw8XZQ8NkOxqKKgO
+Nv0An0g0n9S6r/vW/vKG0HrZ5ktvEgQu
+=HSTm
+-----END PGP SIGNATURE-----
 
 
