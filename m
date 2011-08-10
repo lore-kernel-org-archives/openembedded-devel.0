@@ -1,32 +1,30 @@
-Received: from mail-ey0-f173.google.com ([209.85.215.173])
+Received: from vms173001pub.verizon.net ([206.46.173.1])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QqjQ8-0000sk-78
+	(envelope-from <openembedded@rkmorris.us>) id 1QqwxP-0000NU-9G
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Aug 2011 12:20:24 +0200
-Received: by eyb7 with SMTP id 7so3899580eyb.18
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Aug 2011 03:15:52 -0700 (PDT)
-Received: by 10.213.2.209 with SMTP id 17mr484735ebk.5.1312884952106;
-	Tue, 09 Aug 2011 03:15:52 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116])
-	by mx.google.com with ESMTPS id x4sm2942439eef.21.2011.08.09.03.15.50
-	(version=SSLv3 cipher=OTHER); Tue, 09 Aug 2011 03:15:50 -0700 (PDT)
-Message-ID: <4E4108D5.5040303@dresearch-fe.de>
-Date: Tue, 09 Aug 2011 12:15:49 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
-MIME-Version: 1.0
+	Wed, 10 Aug 2011 02:47:40 +0200
+Received: from server ([unknown] [173.74.34.213]) by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LPO00FVUSN3WY30@vms173001.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	09 Aug 2011 19:42:44 -0500 (CDT)
+Received: from server (127.0.0.1) by server (Axigen)
+	with ESMTPSA id 2B13EA; Tue, 09 Aug 2011 19:42:33 -0500
+Received: from [192.168.1.5] by rkmorris.us with HTTP; Tue,
+	09 Aug 2011 19:42:32 -0500
+From: Russell Morris <openembedded@rkmorris.us>
+Date: Tue, 09 Aug 2011 19:42:32 -0500
+X-Mailer: Axigen WebMail
 To: openembedded-devel@lists.openembedded.org
-References: <4E3A3C4B.8040208@dresearch-fe.de>
-	<4E3B9812.9010002@dresearch-fe.de>
-	<4E3ECD6E.7000201@dresearch-fe.de>
-	<CA+M6bXkrQyqiSFFxsyZv4mRPUmk82EbdUzSygrBaoyp5zeQ9zA@mail.gmail.com>
-	<4E40FCA9.7060204@dresearch-fe.de>
-In-Reply-To: <4E40FCA9.7060204@dresearch-fe.de>
-X-Enigmail-Version: 1.2
-Subject: Re: [2011.03-maintenance] unsatisfied dependencies to libgcc
+Message-id: <1312936952840869500@rkmorris.us>
+In-reply-to: <4E40AF8B.4080103@gmail.com>
+References: <1312858153686306500@rkmorris.us> <4E40AF8B.4080103@gmail.com>
+Importance: Normal
+MIME-version: 1.0
+X-AxigenVirus-Level: 1
+X-AxigenSpam-Level: 1
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: ISO-Codes Build Failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,15 +38,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Aug 2011 10:20:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 10 Aug 2011 00:47:40 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On 09.08.2011 11:23, Steffen Sledz wrote:
-> The do_package_write_ipk generates ipk-file with *r24.1.6* (which is the PR of gcc) and not *r24.2.6* (which is the PR of gcc).
+Hi,
+I'd be more than happy to - but I admit, I'm a bit lost in meta-openembedd=
+ed. I'm working off OpenEmbedded ... and don't understand the new meta- ite=
+ms, and also can't find this recipe there ... :-(.
+Thanks,... Russell
 
-Sorry, little typo. Should be:
 
-The do_package_write_ipk generates ipk-file with *r24.1.6* (which is the PR of gcc) and not *r24.2.6* (which is the PR of gcc-cross).
-
-
+On Mon, 08/08/2011 10:54 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> On 08/08/2011 07:49 PM, Russell Morris wrote:
+> > Hi,
+> >=20
+> > I have been trying to build angstrom-x-image, but it fails - at
+> > iso-codes. The issue may be because Verizon FIOS is now blocking FTP
+> > (as more and more ISP's are), but in any case I created a new recipe
+> > to correct this (and it works). How do I get this change in to the
+> > official OpenEmbedded build (or can I even?)?
+> >=20
+> > Also ... what is the official OE path? I admit, now with
+> > OpenEmbedded, core, etc. - it's getting a bit confusing ... :-(. It
+> > really seems like (base?) OpenEmbedded is getting quite out of date,
+> > but I could be wrong.
+> >=20
+>=20
+> send patches for meta-openembedded to add the recipe that will make it
+> into the new layered metadata based distros.
+>=20
+>=20
+> > On to gs next (which seems to be failing during the do_configure
+> > stage).
+> >=20
+> > Thanks, ... Russell
+> >=20
+> > _______________________________________________ Openembedded-devel
+> > mailing list Openembedded-devel@lists.openembedded.org=20
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
+>=20
+> - --
+> >=20
+> - -Khem
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.11 (GNU/Linux)
+>=20
+> iEYEARECAAYFAk5Ar4sACgkQuwUzVZGdMxQEYgCffYNw/R3mvw8XZQ8NkOxqKKgO
+> Nv0An0g0n9S6r/vW/vKG0HrZ5ktvEgQu
+> =3DHSTm
+> -----END PGP SIGNATURE-----
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+From agnel.joel@gmail.com Wed Aug 10 03:49:29 2011
+Received: from mail-ey0-f173.google.com ([209.85.215.173])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <agnel.joel@gmail.com>)
+	id 1QqxvF-0001vk-2H; Wed, 10 Aug 2011 03:49:29 +0200
+Received: by eyb7 with SMTP id 7so565086eyb.18
+	for <multiple recipients>; Tue, 09 Aug 2011 18:44:59 -0700 (PDT)
+DKIM-Signature: v
