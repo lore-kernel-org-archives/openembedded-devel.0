@@ -1,37 +1,29 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QrWM4-0000Ya-Iq
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Aug 2011 16:35:28 +0200
-Received: by yxi19 with SMTP id 19so1346184yxi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2011 07:30:56 -0700 (PDT)
+	(envelope-from <jefro.net@gmail.com>)
+	id 1QrXxL-0002VJ-8n; Thu, 11 Aug 2011 18:18:03 +0200
+Received: by ywe9 with SMTP id 9so1427986ywe.6
+	for <multiple recipients>; Thu, 11 Aug 2011 09:13:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:organization:user-agent
-	:in-reply-to:references:mime-version:content-transfer-encoding
-	:content-type; bh=AmPQwd23FIKrWf4VMxUKGn5ZRsF8JWA362edaGg5uX8=;
-	b=arVpX+8b+qL4f1FL2gIzmdjAUrLBeBF08+3zKQ01GnJ8HbQ68+euXiY3+ql8wlvdpG
-	JBCZrN6w3dsYyUS2D3Laj92fjWsdAnCK5Mdi+12kXXhzCIsFeAq1T6HRciVkYYqDIskU
-	a+SmILEKzGN87oAkzf38OncVbxpCMviUIjvC0=
-Received: by 10.42.146.6 with SMTP id h6mr69878icv.421.1313073055408;
-	Thu, 11 Aug 2011 07:30:55 -0700 (PDT)
-Received: from perseus.localnet (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id n14sm1542101ibi.56.2011.08.11.07.30.52
-	(version=SSLv3 cipher=OTHER); Thu, 11 Aug 2011 07:30:53 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Date: Thu, 11 Aug 2011 07:30:44 -0700
-Message-ID: <1615282.kebj4eQ1MV@perseus>
-Organization: Sakrah Inc.
-User-Agent: KMail/4.7.0  (Linux/3.0.0-8-generic; KDE/4.7.0; i686; ; )
-In-Reply-To: <4E439289.3050005@dresearch-fe.de>
-References: <4E3A3C4B.8040208@dresearch-fe.de>
-	<4E40FCA9.7060204@dresearch-fe.de>
-	<4E439289.3050005@dresearch-fe.de>
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=icTSkIuDpaI/16/dKvtz5mmsACKdJr+IFG8jih6pxnA=;
+	b=hk6ISPnZYCRYdHM4xIS4wRfNqx4ppSDkFp4ojz/gHiYCFjEFiVq2dEWs19CXoS40tH
+	oCmfqSmKRrBR2L1BwXND+ZLKYb/vOpJcqnzys9w3uotJgAwKjNP/OE8BQaUCdT6VVvfu
+	nbyX73asaGXTrnVLit8vSsllcWUexNci1iTM8=
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance] unsatisfied dependencies to libgcc
+Received: by 10.42.29.136 with SMTP id r8mr7872338icc.286.1313079210328; Thu,
+	11 Aug 2011 09:13:30 -0700 (PDT)
+Sender: jefro.net@gmail.com
+Received: by 10.42.222.202 with HTTP; Thu, 11 Aug 2011 09:13:30 -0700 (PDT)
+Date: Thu, 11 Aug 2011 09:13:30 -0700
+X-Google-Sender-Auth: wHk1j1AJuxVxF4Ll7its2CinHlE
+Message-ID: <CA+YB3rbj1WupvtgE3evS2fNfm6RN-eaiLzVjE4Y18PxYU16WWg@mail.gmail.com>
+From: Jeff Osier-Mixon <jefro@jefro.net>
+To: openembedded-core <openembedded-core@lists.openembedded.org>, 
+	openembedded-devel@lists.openembedded.org, tsc <tsc@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: MINUTES: OE-TSC meeting 4 August, 2011
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,130 +37,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Aug 2011 14:35:28 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 11 Aug 2011 16:18:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thursday, August 11, 2011 10:27:53 AM Steffen Sledz wrote:
-> On 09.08.2011 11:23, Steffen Sledz wrote:
-> > On 07.08.2011 22:46, Tom Rini wrote:
-> >> On Sun, Aug 7, 2011 at 10:37 AM, Steffen Sledz <sledz@dresearch-fe.de> 
-wrote:
-> >>> Am 05.08.2011 09:13, schrieb Steffen Sledz:
-> >>>> On 04.08.2011 08:29, Steffen Sledz wrote:
-> >>>>> In the last days we switched our local development from an older
-> >>>>> oe-dev master to 2011.03-maintenance branch and hit an annoying
-> >>>>> problem.
-> >>>>> 
-> >>>>> The test builds on various developer machines were successful
-> >>>>> but the build on our continuous integration server (with
-> >>>>> exactly the same scripting) ended up with a lot of>>>>> 
-> >>>>> |  * satisfy_dependencies_for: Cannot satisfy the following
-> >>>>> |  dependencies for lighttpd: *    libstdc++6 (>= 4.3.3) *  
-> >>>>> |        libgcc1 (>= 4.3.3) *    libgcc1 (>= 4.3.3) * *
-> >>>>> |  opkg_install_cmd: Cannot install package lighttpd.
-> >>>>> 
-> >>>>> errors.
-> >>>>> 
-> >>>>> After some searching we found that there was no
-> >>>>> libgcc1_4.3.3-r24.2.6_armv5te.ipk in the deploy area.
-> >>>>> 
-> >>>>> I'm not sure which package should produce this but i guess it
-> >>>>> should come from gcc-cross-4.3.3 (because its recipe version is
-> >>>>> r24.2.6 in opposite to gcc-4.3.3 r24.1.6).
-> >>>>> 
-> >>>>> Looking into the log i hit the fact that the do_rootfs stage for
-> >>>>> the image was started *before* the do_package_stage of
-> >>>>> gcc-cross_4.3.3.bb was succeeded.
-> >>>>> 
-> >>>>> Any ideas?
-> >>>>> 
-> >>>>> PS: Bitbaking gcc-cross explicitly before bitbaking the image
-> >>>>> wors as a workaround for us at the moment.>>>> 
-> >>>> I made some research in this and there is something i do not
-> >>>> understand.
-> >>>> 
-> >>>> The task-depends.dot generated by bitbake -g (says
-> >>>> 
-> >>>>   "console-image.do_rootfs" [label="console-image
-> >>>>   do_rootfs\n0:1.0-r0\n/home/sledz/work/angstrom-setup-scripts/
-> >>>>   sources/openembedded/recipes/images/console-image.bb"]
-> >>>>   "console-image.do_rootfs" -> "lzo-native.do_populate_sysroot"
-> >>>>   "console-image.do_rootfs" -> "bluez4.do_populate_sysroot"
-> >>>>   ...
-> >>>> 
-> >>>> So do_rootfs depends only on do_populate_sysroot stages. But the
-> >>>> do_rootfs stage itself uses opkg to install the packages into the
-> >>>> image.
-> >>>> 
-> >>>> In my understanding this means that all the ipk files need to be
-> >>>> available. But this is not guaranteed by the reported
-> >>>> dependencies.
-> >>>> 
-> >>>> A misunderstanding of mine? Or a bug?
-> >>> 
-> >>> Ping!
-> >>> 
-> >>> Did everyone read my message?
-> >>> 
-> >>> If it really is a misunderstanding of mine, please let me know. But
-> >>> if i'm right this seems to be a critical problem.>> 
-> >> It sounds both strange and a correct reading of the task lists, iirc.
-> >> Did we fix this in oe.dev perhaps and just need to pull a change over?
-> > 
-> > The mentioned dependency problem was a misinterpretation of the
-> > task-depends.dot.> 
-> > Aside from the do_populate_sysroot there are the following additional 
-dependencies:
-> >  "console-image.do_rootfs" ->
-> >  "console-image.do_package_update_index_ipk"
-> >  ...
-> >  "console-image.do_package_update_index_ipk" ->
-> >  "gcc-cross.do_package_write_ipk" ...
-> >  "gcc-cross.do_package_write_ipk" -> "gcc-cross.do_package"
-> > 
-> > The problem seems to be located more likely somewhere inside the
-> > gcc-4.3.3-r24.1/gcc-cross-4.3.3-r24.2 recipes. There seems to be a
-> > confusion between those which leads to undetermined results.
-> > 
-> > E.g. the content of
-> > tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.3.3-r24.2/temp/lo
-> > g.do_package_write_ipk.22477 is:
-> > ------------------------>snip<------------------------
-> > Packaged contents of libstdc++-dev into
-> > /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/libstdc++-de
-> > v_4.3.3-r24.1.6_armv5te.ipk Packaged contents of libgcc-dev into
-> > /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/libgcc-dev_4
-> > .3.3-r24.1.6_armv5te.ipk
-> > ------------------------>snip<------------------------
-> > 
-> > The do_package_write_ipk generates ipk-file with *r24.1.6* (which is the
-> > PR of gcc) and not *r24.2.6* (which is the PR of gcc).
-> > 
-> > BTW: Which of the two recipes (gcc/gcc-cross) should provide the libgcc
-> > ipk (in my case none of it did)?
+OE-TSC meeting 4 August, 2011
+
+Note: There was no meeting on July 28 due to a lack of quorum
+
+Attendees: Richard, Khem, Tom, Mark
+Apologies: Koen
+Note: Jefro
 
 
-It should be probided by both. We provide it in gcc-cross so that people dont
-have to build target gcc just for libgcc.
+Minutes:
 
-> After some bb recipe updates there is a new error of this type.
-> 
-> |  * check_data_file_clashes: Package libgcc-s-dev wants to install file
-> |  /CACHE/hudson/jobs/HydraIP_Linux_release_image/workspace/OE/tmp.6/roo
-> |  tfs/hydraip-hipox-devimage/usr/lib/libgcc_s.so|  
-> | 	But that file is already provided by package  * libgcc-dev
-> | 	
-> |  * opkg_install_cmd: Cannot install package libsqlite3-dev.
-> :
+01) choose a meeting chair
 
-what changes did you do ?
-libgcc dependencies get encoded into ipks
-so you might have to regenerate all ipks for best results.
+RP
 
-I dont know yet what the problem you are seeing could be. I do not see it here
-locally
+02) new topics
 
-> :(
+a. request for post 1.1 focus areas for yocto
 
+03) action items from last week
+
+--> write up which scripts to use (khem)
+done
+
+05) Status updates
+
+multilib is painful, but getting there
+
+      - elections
+quiet period
+
+      - oe-core
+--> RP to issue an RFC on fray's multilib stuff
+done
+      - bsp guidelines
+
+  - "normal" linux recipe in oe-core that people can bbappend
+
+     - metadata layer splitting
+
+     - infrastructure
+
+
+Raw Transcript:
+
+
+(1:21:46 PM) RP__: Ok, so meeting wise is there much the TSC needs to
+discuss?
+(1:21:57 PM) fray: I don't have any thing specific right now
+(1:22:22 PM) Tartarus: just general status I guess
+(1:22:24 PM) RP__: multilib has been a pain but I think we're getting there
+with it now
+(1:22:53 PM) Jefro: do we want a formal meeting, or just to catch up with
+status? there were a few action items from last meeting (2 weeks ago)
+(1:23:06 PM) RP__: stablility hasn't been good, again, I think we're hunting
+down the regressions. The system wide ones should be fixed, there are odd
+issues remaining build wise
+(1:23:18 PM) RP__: Jefro: We could recap the action items?
+(1:23:30 PM) Jefro: yes, coming up in just a sec
+(1:23:52 PM) Tartarus: RP__: where do we stand with more build resources?
+(1:23:56 PM) Tartarus: still "soon" ?
+(1:24:04 PM) RP__: (beagleboard is broken on rpm as the long list of package
+architectures broken rpm, there is an odd rpm locking issue floating around
+and a qemuarm perl one)
+(1:24:22 PM) RP__: Tartarus: The delivery of LF machines is cut down to the
+OE ones
+(1:24:23 PM) fray: RP__ I sent a patch for beagleboard earlier.. I think
+it's being validated
+(1:24:45 PM) Tartarus: RP__: didn't quite parse that, again please?
+(1:24:46 PM) RP__: Tartarus: Intel has managed to get some more autobuilder
+resources which are coming online piece by piece
+(1:24:51 PM) fray: (sent a patch to Saul to look into that is)
+(1:24:55 PM) Tartarus: RP__: ok, good
+(1:25:03 PM) RP__: Tartarus: I'd said the LF was going to get us some
+machines, that won't happen
+(1:25:10 PM) ***Tartarus has the Mentor stuff setup and handed off to
+others, we'll see how it goes
+(1:25:12 PM) RP__: Only the ones promised to OE will
+(1:25:14 PM) Jefro: http://pastebin.com/qbPGBBKK
+(1:25:31 PM) khem: RP__: are those also the oe machines that LF was to
+provide ?
+(1:25:33 PM) RP__: fray: thanks
+(1:25:35 PM) ***Jefro notes, that link is for agenda
+(1:25:46 PM) khem: oh OE will ok
+(1:26:01 PM) khem: RP__: any idea timewise when that will happen
+(1:26:22 PM) RP__: khem: Tom King and Mike Wooster are discussing
+(1:26:26 PM) khem: ok
+(1:27:32 PM) khem: I have managed to run core-image-sato builds for all
+qemus within 24 hrs
+(1:27:44 PM) khem: something we would want for daily testing
+(1:29:46 PM) RP__: ok, do we want to work through the agenda?
+(1:29:51 PM) RP__: I can chair
+(1:29:55 PM) ***Jefro notes RP is chair
+(1:29:56 PM) RP__: Any additional topics?
+(1:30:10 PM) ***RP__ notes the request for post 1.1 focus areas for yocto
+(1:30:42 PM) RP__: khem: any update on item 3 (write up which scripts to
+use)?
+(1:30:42 PM) ***Jefro notes for minutes
+(1:31:07 PM) RP__: elections, I think we're ok there right now
+(1:31:22 PM) RP__: OE-Core, multilib has moved forwards so we can consider
+that done
+(1:31:35 PM) RP__: So its really down to other status updates :)
+(1:31:46 PM) ***RP__ aims for the record for the official meeting
+(1:32:04 PM) RP__: others can jump in... :)
+(1:32:30 PM) fray: only other thing I can think of is that I still intend to
+work on the ARM arch.. but havn't had time due to "life"
+(1:32:40 PM) fray: in short the changes are minor compared to what is
+there..
+(1:33:15 PM) RP__: I agree there are some tweaks still needed in places
+(1:33:35 PM) fray: key is I think the big overhaul work is done at this
+point
+(1:33:38 PM) RP__: I really want to get builds working again and then start
+resolving those issues
+(1:33:54 PM) RP__: Also note that we're going to make a big effort to clean
+up the various open bugs
+(1:34:03 PM) RP__: We've too many of them atm
+(1:34:25 PM) khem: someone was here ..
+(1:34:31 PM) khem: yes my AR is done
+(1:34:44 PM) khem: Paul E replied with the querries
+(1:34:51 PM) khem: that were raised
+(1:36:03 PM) RP__: SO unless anyone has anything else they want to
+add/ask/comment on, I think we're done
+
+-- 
+Jeff Osier-Mixon http://jefro.net/blog
+Yocto Project Community Manager @Intel http://yoctoproject.org
 
