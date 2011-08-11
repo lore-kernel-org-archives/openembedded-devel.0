@@ -1,31 +1,36 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QrQgl-0003jc-IC
+	(envelope-from <raj.khem@gmail.com>) id 1QrWM4-0000Ya-Iq
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Aug 2011 10:32:27 +0200
-Received: by bkbzu17 with SMTP id zu17so877281bkb.6
+	Thu, 11 Aug 2011 16:35:28 +0200
+Received: by yxi19 with SMTP id 19so1346184yxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2011 01:27:56 -0700 (PDT)
-Received: by 10.204.132.7 with SMTP id z7mr2773862bks.240.1313051275836;
-	Thu, 11 Aug 2011 01:27:55 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116])
-	by mx.google.com with ESMTPS id y2sm447151bkd.19.2011.08.11.01.27.53
-	(version=SSLv3 cipher=OTHER); Thu, 11 Aug 2011 01:27:54 -0700 (PDT)
-Message-ID: <4E439289.3050005@dresearch-fe.de>
-Date: Thu, 11 Aug 2011 10:27:53 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	Thu, 11 Aug 2011 07:30:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:organization:user-agent
+	:in-reply-to:references:mime-version:content-transfer-encoding
+	:content-type; bh=AmPQwd23FIKrWf4VMxUKGn5ZRsF8JWA362edaGg5uX8=;
+	b=arVpX+8b+qL4f1FL2gIzmdjAUrLBeBF08+3zKQ01GnJ8HbQ68+euXiY3+ql8wlvdpG
+	JBCZrN6w3dsYyUS2D3Laj92fjWsdAnCK5Mdi+12kXXhzCIsFeAq1T6HRciVkYYqDIskU
+	a+SmILEKzGN87oAkzf38OncVbxpCMviUIjvC0=
+Received: by 10.42.146.6 with SMTP id h6mr69878icv.421.1313073055408;
+	Thu, 11 Aug 2011 07:30:55 -0700 (PDT)
+Received: from perseus.localnet (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id n14sm1542101ibi.56.2011.08.11.07.30.52
+	(version=SSLv3 cipher=OTHER); Thu, 11 Aug 2011 07:30:53 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: Steffen Sledz <sledz@dresearch-fe.de>
+Date: Thu, 11 Aug 2011 07:30:44 -0700
+Message-ID: <1615282.kebj4eQ1MV@perseus>
+Organization: Sakrah Inc.
+User-Agent: KMail/4.7.0  (Linux/3.0.0-8-generic; KDE/4.7.0; i686; ; )
+In-Reply-To: <4E439289.3050005@dresearch-fe.de>
 References: <4E3A3C4B.8040208@dresearch-fe.de>
-	<4E3B9812.9010002@dresearch-fe.de>
-	<4E3ECD6E.7000201@dresearch-fe.de>
-	<CA+M6bXkrQyqiSFFxsyZv4mRPUmk82EbdUzSygrBaoyp5zeQ9zA@mail.gmail.com>
 	<4E40FCA9.7060204@dresearch-fe.de>
-In-Reply-To: <4E40FCA9.7060204@dresearch-fe.de>
-X-Enigmail-Version: 1.2
+	<4E439289.3050005@dresearch-fe.de>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [2011.03-maintenance] unsatisfied dependencies to libgcc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,96 +45,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Aug 2011 08:32:27 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 11 Aug 2011 14:35:28 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On 09.08.2011 11:23, Steffen Sledz wrote:
-> On 07.08.2011 22:46, Tom Rini wrote:
->> On Sun, Aug 7, 2011 at 10:37 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
->>> Am 05.08.2011 09:13, schrieb Steffen Sledz:
->>>> On 04.08.2011 08:29, Steffen Sledz wrote:
->>>>> In the last days we switched our local development from an older oe-dev master to 2011.03-maintenance branch and hit an annoying problem.
->>>>>
->>>>> The test builds on various developer machines were successful but the build on our continuous integration server (with exactly the same scripting) ended up with a lot of
->>>>>
->>>>> |  * satisfy_dependencies_for: Cannot satisfy the following dependencies for lighttpd:
->>>>> |  *    libstdc++6 (>= 4.3.3) *         libgcc1 (>= 4.3.3) *    libgcc1 (>= 4.3.3) *
->>>>> |  * opkg_install_cmd: Cannot install package lighttpd.
->>>>>
->>>>> errors.
->>>>>
->>>>> After some searching we found that there was no libgcc1_4.3.3-r24.2.6_armv5te.ipk in the deploy area.
->>>>>
->>>>> I'm not sure which package should produce this but i guess it should come from gcc-cross-4.3.3 (because its recipe version is r24.2.6 in opposite to gcc-4.3.3 r24.1.6).
->>>>>
->>>>> Looking into the log i hit the fact that the do_rootfs stage for the image was started *before* the do_package_stage of gcc-cross_4.3.3.bb was succeeded.
->>>>>
->>>>> Any ideas?
->>>>>
->>>>> PS: Bitbaking gcc-cross explicitly before bitbaking the image wors as a workaround for us at the moment.
->>>>
->>>> I made some research in this and there is something i do not understand.
->>>>
->>>> The task-depends.dot generated by bitbake -g (says
->>>>
->>>>   "console-image.do_rootfs" [label="console-image do_rootfs\n0:1.0-r0\n/home/sledz/work/angstrom-setup-scripts/sources/openembedded/recipes/images/console-image.bb"]
->>>>   "console-image.do_rootfs" -> "lzo-native.do_populate_sysroot"
->>>>   "console-image.do_rootfs" -> "bluez4.do_populate_sysroot"
->>>>   ...
->>>>
->>>> So do_rootfs depends only on do_populate_sysroot stages. But the do_rootfs stage itself uses opkg to install the packages into the image.
->>>>
->>>> In my understanding this means that all the ipk files need to be available. But this is not guaranteed by the reported dependencies.
->>>>
->>>> A misunderstanding of mine? Or a bug?
->>>
->>> Ping!
->>>
->>> Did everyone read my message?
->>>
->>> If it really is a misunderstanding of mine, please let me know. But if i'm right this seems to be a critical problem.
->>
->> It sounds both strange and a correct reading of the task lists, iirc.
->> Did we fix this in oe.dev perhaps and just need to pull a change over?
-> 
-> The mentioned dependency problem was a misinterpretation of the task-depends.dot.
-> 
-> Aside from the do_populate_sysroot there are the following additional dependencies:
-> 
->  "console-image.do_rootfs" -> "console-image.do_package_update_index_ipk"
->  ...
->  "console-image.do_package_update_index_ipk" -> "gcc-cross.do_package_write_ipk"
->  ...
->  "gcc-cross.do_package_write_ipk" -> "gcc-cross.do_package"
-> 
-> The problem seems to be located more likely somewhere inside the gcc-4.3.3-r24.1/gcc-cross-4.3.3-r24.2 recipes. There seems to be a confusion between those which leads to undetermined results.
-> 
-> E.g. the content of tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.3.3-r24.2/temp/log.do_package_write_ipk.22477 is:
-> ------------------------>snip<------------------------
-> Packaged contents of libstdc++-dev into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/libstdc++-dev_4.3.3-r24.1.6_armv5te.ipk
-> Packaged contents of libgcc-dev into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/libgcc-dev_4.3.3-r24.1.6_armv5te.ipk
-> ------------------------>snip<------------------------
-> 
-> The do_package_write_ipk generates ipk-file with *r24.1.6* (which is the PR of gcc) and not *r24.2.6* (which is the PR of gcc).
-> 
-> BTW: Which of the two recipes (gcc/gcc-cross) should provide the libgcc ipk (in my case none of it did)?
+On Thursday, August 11, 2011 10:27:53 AM Steffen Sledz wrote:
+> On 09.08.2011 11:23, Steffen Sledz wrote:
+> > On 07.08.2011 22:46, Tom Rini wrote:
+> >> On Sun, Aug 7, 2011 at 10:37 AM, Steffen Sledz <sledz@dresearch-fe.de> 
+wrote:
+> >>> Am 05.08.2011 09:13, schrieb Steffen Sledz:
+> >>>> On 04.08.2011 08:29, Steffen Sledz wrote:
+> >>>>> In the last days we switched our local development from an older
+> >>>>> oe-dev master to 2011.03-maintenance branch and hit an annoying
+> >>>>> problem.
+> >>>>> 
+> >>>>> The test builds on various developer machines were successful
+> >>>>> but the build on our continuous integration server (with
+> >>>>> exactly the same scripting) ended up with a lot of>>>>> 
+> >>>>> |  * satisfy_dependencies_for: Cannot satisfy the following
+> >>>>> |  dependencies for lighttpd: *    libstdc++6 (>= 4.3.3) *  
+> >>>>> |        libgcc1 (>= 4.3.3) *    libgcc1 (>= 4.3.3) * *
+> >>>>> |  opkg_install_cmd: Cannot install package lighttpd.
+> >>>>> 
+> >>>>> errors.
+> >>>>> 
+> >>>>> After some searching we found that there was no
+> >>>>> libgcc1_4.3.3-r24.2.6_armv5te.ipk in the deploy area.
+> >>>>> 
+> >>>>> I'm not sure which package should produce this but i guess it
+> >>>>> should come from gcc-cross-4.3.3 (because its recipe version is
+> >>>>> r24.2.6 in opposite to gcc-4.3.3 r24.1.6).
+> >>>>> 
+> >>>>> Looking into the log i hit the fact that the do_rootfs stage for
+> >>>>> the image was started *before* the do_package_stage of
+> >>>>> gcc-cross_4.3.3.bb was succeeded.
+> >>>>> 
+> >>>>> Any ideas?
+> >>>>> 
+> >>>>> PS: Bitbaking gcc-cross explicitly before bitbaking the image
+> >>>>> wors as a workaround for us at the moment.>>>> 
+> >>>> I made some research in this and there is something i do not
+> >>>> understand.
+> >>>> 
+> >>>> The task-depends.dot generated by bitbake -g (says
+> >>>> 
+> >>>>   "console-image.do_rootfs" [label="console-image
+> >>>>   do_rootfs\n0:1.0-r0\n/home/sledz/work/angstrom-setup-scripts/
+> >>>>   sources/openembedded/recipes/images/console-image.bb"]
+> >>>>   "console-image.do_rootfs" -> "lzo-native.do_populate_sysroot"
+> >>>>   "console-image.do_rootfs" -> "bluez4.do_populate_sysroot"
+> >>>>   ...
+> >>>> 
+> >>>> So do_rootfs depends only on do_populate_sysroot stages. But the
+> >>>> do_rootfs stage itself uses opkg to install the packages into the
+> >>>> image.
+> >>>> 
+> >>>> In my understanding this means that all the ipk files need to be
+> >>>> available. But this is not guaranteed by the reported
+> >>>> dependencies.
+> >>>> 
+> >>>> A misunderstanding of mine? Or a bug?
+> >>> 
+> >>> Ping!
+> >>> 
+> >>> Did everyone read my message?
+> >>> 
+> >>> If it really is a misunderstanding of mine, please let me know. But
+> >>> if i'm right this seems to be a critical problem.>> 
+> >> It sounds both strange and a correct reading of the task lists, iirc.
+> >> Did we fix this in oe.dev perhaps and just need to pull a change over?
+> > 
+> > The mentioned dependency problem was a misinterpretation of the
+> > task-depends.dot.> 
+> > Aside from the do_populate_sysroot there are the following additional 
+dependencies:
+> >  "console-image.do_rootfs" ->
+> >  "console-image.do_package_update_index_ipk"
+> >  ...
+> >  "console-image.do_package_update_index_ipk" ->
+> >  "gcc-cross.do_package_write_ipk" ...
+> >  "gcc-cross.do_package_write_ipk" -> "gcc-cross.do_package"
+> > 
+> > The problem seems to be located more likely somewhere inside the
+> > gcc-4.3.3-r24.1/gcc-cross-4.3.3-r24.2 recipes. There seems to be a
+> > confusion between those which leads to undetermined results.
+> > 
+> > E.g. the content of
+> > tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.3.3-r24.2/temp/lo
+> > g.do_package_write_ipk.22477 is:
+> > ------------------------>snip<------------------------
+> > Packaged contents of libstdc++-dev into
+> > /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/libstdc++-de
+> > v_4.3.3-r24.1.6_armv5te.ipk Packaged contents of libgcc-dev into
+> > /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/libgcc-dev_4
+> > .3.3-r24.1.6_armv5te.ipk
+> > ------------------------>snip<------------------------
+> > 
+> > The do_package_write_ipk generates ipk-file with *r24.1.6* (which is the
+> > PR of gcc) and not *r24.2.6* (which is the PR of gcc).
+> > 
+> > BTW: Which of the two recipes (gcc/gcc-cross) should provide the libgcc
+> > ipk (in my case none of it did)?
 
-After some bb recipe updates there is a new error of this type.
 
-|  * check_data_file_clashes: Package libgcc-s-dev wants to install file /CACHE/hudson/jobs/HydraIP_Linux_release_image/workspace/OE/tmp.6/rootfs/hydraip-hipox-devimage/usr/lib/libgcc_s.so
-| 	But that file is already provided by package  * libgcc-dev
-|  * opkg_install_cmd: Cannot install package libsqlite3-dev.
+It should be probided by both. We provide it in gcc-cross so that people dont
+have to build target gcc just for libgcc.
 
-:(
+> After some bb recipe updates there is a new error of this type.
+> 
+> |  * check_data_file_clashes: Package libgcc-s-dev wants to install file
+> |  /CACHE/hudson/jobs/HydraIP_Linux_release_image/workspace/OE/tmp.6/roo
+> |  tfs/hydraip-hipox-devimage/usr/lib/libgcc_s.so|  
+> | 	But that file is already provided by package  * libgcc-dev
+> | 	
+> |  * opkg_install_cmd: Cannot install package libsqlite3-dev.
+> :
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+what changes did you do ?
+libgcc dependencies get encoded into ipks
+so you might have to regenerate all ipks for best results.
+
+I dont know yet what the problem you are seeing could be. I do not see it here
+locally
+
+> :(
 
 
