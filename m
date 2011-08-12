@@ -1,28 +1,35 @@
-Received: from vms173019pub.verizon.net ([206.46.173.19])
+Received: from na3sys009aog125.obsmtp.com ([74.125.149.153])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1Qrlgg-0003Fd-NL
+	(envelope-from <bengardiner@nanometrics.ca>) id 1QrvjP-0001Lm-Ct
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Aug 2011 08:57:46 +0200
-Received: from gandalf.denix.org ([unknown] [108.18.140.4])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LPS008FOZ4KNDO2@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	12 Aug 2011 01:53:08 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3930D14AF5D; Fri,
-	12 Aug 2011 02:53:08 -0400 (EDT)
-Date: Fri, 12 Aug 2011 02:53:08 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Khem Raj <raj.khem@gmail.com>
-Message-id: <20110812065308.GF13857@denix.org>
-References: <1313126272-32091-1-git-send-email-denis@denix.org>
-	<20110812063125.GD13857@denix.org> <4E44CAC2.6010300@gmail.com>
-	<20110812065138.GE13857@denix.org>
-MIME-version: 1.0
-In-reply-to: <20110812065138.GE13857@denix.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] gcc: append PR to S to match oe-core and	fix do_headerfix
+	Fri, 12 Aug 2011 19:41:15 +0200
+Received: from mail-vw0-f52.google.com ([209.85.212.52]) (using TLSv1) by
+	na3sys009aob125.postini.com ([74.125.148.12]) with SMTP
+	ID DSNKTkVkqjNkBqBf1YQwxYwHOmGcKXK/viTp@postini.com;
+	Fri, 12 Aug 2011 10:36:44 PDT
+Received: by mail-vw0-f52.google.com with SMTP id 16so3966728vws.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Aug 2011 10:36:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=nanometrics.ca; s=google;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=g9LVrq0K7ckKNpp5mr4NOCflerw4q5CSCMlbx22/+/g=;
+	b=dPRP7SymM3juGv+T/D+qfEpfAu7RM16KyAYqSLdemT3TPD3yVey3XBJl46bGJZhXGd
+	dFptH5hmH9bgXdx2KCcQ1qsg0n6FdRgBcOGYWKW28olwf3LrdriGov6ovjBM0S0tq8hL
+	U6D5KjvzqtAyonaLUBp1BWZP3GuYDOi4/x1vg=
+Received: by 10.52.182.164 with SMTP id ef4mr1002512vdc.319.1313161136131;
+	Fri, 12 Aug 2011 07:58:56 -0700 (PDT)
+Received: from localhost.localdomain ([206.191.47.130])
+	by mx.google.com with ESMTPS id o3sm1343976vca.26.2011.08.12.07.58.55
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 12 Aug 2011 07:58:55 -0700 (PDT)
+From: Ben Gardiner <bengardiner@nanometrics.ca>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 12 Aug 2011 10:58:53 -0400
+Message-Id: <1313161133-8899-1-git-send-email-bengardiner@nanometrics.ca>
+X-Mailer: git-send-email 1.7.4.1
+Cc: Tom Rini <tom_rini@mentor.com>
+Subject: [2011.03-maintenance] pull-request: mtd-utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,36 +43,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Aug 2011 06:57:46 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 12 Aug 2011 17:41:15 -0000
 
-On Fri, Aug 12, 2011 at 02:51:38AM -0400, Denys Dmytriyenko wrote:
-> On Thu, Aug 11, 2011 at 11:40:02PM -0700, Khem Raj wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> > 
-> > On 08/11/2011 11:31 PM, Denys Dmytriyenko wrote:
-> > > On Fri, Aug 12, 2011 at 01:17:52AM -0400, Denys Dmytriyenko wrote:
-> > >> From: Denys Dmytriyenko <denys@ti.com>
-> > >> 
-> > >> This fixes the gcc-cross-inital failure, as reported here: 
-> > >> http://thread.gmane.org/gmane.comp.handhelds.openembedded.core/6150
-> > >
-> > >> 
-> > > BTW, one of the Linaro patches fails because the file got previously
-> > > updated by do_headerfix(), which runs before do_patch(). A little
-> > > manual intervention is currently required through TERMCMDRUN...
-> > > 
-> > 
-> > would you mind submitting a patch refresh ?
-> 
-> Sure, should follow shortly.
+The following changes since commit c8f2107a4784fabf877fa6750e05655e6092da73:
 
-Ah, forgot to clarify - it wasn't Linaro patch, it was old RP's 
-64bithack.patch. See my other patch in this thread with the fix.
+  gtk-icon-cache bbclass: only add runtime dependencies on hicolor-icon-theme when installing icons (2011-08-04 09:38:55 +0200)
 
--- 
-Denys
+are available in the git repository at:
+  git://github.com/BenGardiner/openembedded.git 2011.03-maintenance-mtdutils
+
+Andrea Adami (3):
+      mtd-utils: upgrade to latest 1.4.4 release (bugfix)
+      mtd-utils: remove broken 1.4.1 version
+      mtd-utils: archive obsolete old versions
+
+Tom Rini (1):
+      mtd-utils-native.inc: Drop lzo-native
+
+ .../mtd/mtd-utils-1.4.1/fix_heap_corruption.patch  |   95 --------------------
+ recipes/mtd/mtd-utils_1.4.1.bb                     |   18 ----
+ recipes/mtd/mtd-utils_1.4.4.bb                     |   34 +++++++
+ recipes/{ => obsolete}/mtd/mtd-utils-native.inc    |    2 +-
+ .../{ => obsolete}/mtd/mtd-utils-native_1.1.0.bb   |    0
+ .../mtd/mtd-utils-native_1.2.0+git.bb              |    0
+ .../{ => obsolete}/mtd/mtd-utils-native_1.3.1.bb   |    0
+ .../{ => obsolete}/mtd/mtd-utils-native_1.4.1.bb   |    0
+ .../mtd/mtd-utils-tests_1.2.0+git.bb               |    0
+ recipes/{ => obsolete}/mtd/mtd-utils.inc           |    0
+ .../add-exclusion-to-mkfs-jffs2-git.patch          |    0
+ .../mtd/mtd-utils/fix-ignoreerrors-git.patch       |    0
+ .../{ => obsolete}/mtd/mtd-utils/lzo_1x-git.patch  |    0
+ recipes/{ => obsolete}/mtd/mtd-utils/lzo_1x.patch  |    0
+ recipes/{ => obsolete}/mtd/mtd-utils_1.1.0.bb      |    0
+ recipes/{ => obsolete}/mtd/mtd-utils_1.2.0+git.bb  |    0
+ recipes/{ => obsolete}/mtd/mtd-utils_1.3.1.bb      |    0
+ 17 files changed, 35 insertions(+), 114 deletions(-)
+ delete mode 100644 recipes/mtd/mtd-utils-1.4.1/fix_heap_corruption.patch
+ delete mode 100644 recipes/mtd/mtd-utils_1.4.1.bb
+ create mode 100644 recipes/mtd/mtd-utils_1.4.4.bb
+ rename recipes/{ => obsolete}/mtd/mtd-utils-native.inc (76%)
+ rename recipes/{ => obsolete}/mtd/mtd-utils-native_1.1.0.bb (100%)
+ rename recipes/{ => obsolete}/mtd/mtd-utils-native_1.2.0+git.bb (100%)
+ rename recipes/{ => obsolete}/mtd/mtd-utils-native_1.3.1.bb (100%)
+ rename recipes/{ => obsolete}/mtd/mtd-utils-native_1.4.1.bb (100%)
+ rename recipes/{ => obsolete}/mtd/mtd-utils-tests_1.2.0+git.bb (100%)
+ rename recipes/{ => obsolete}/mtd/mtd-utils.inc (100%)
+ rename recipes/{ => obsolete}/mtd/mtd-utils/add-exclusion-to-mkfs-jffs2-git.patch (100%)
+ rename recipes/{ => obsolete}/mtd/mtd-utils/fix-ignoreerrors-git.patch (100%)
+ rename recipes/{ => obsolete}/mtd/mtd-utils/lzo_1x-git.patch (100%)
+ rename recipes/{ => obsolete}/mtd/mtd-utils/lzo_1x.patch (100%)
+ rename recipes/{ => obsolete}/mtd/mtd-utils_1.1.0.bb (100%)
+ rename recipes/{ => obsolete}/mtd/mtd-utils_1.2.0+git.bb (100%)
+ rename recipes/{ => obsolete}/mtd/mtd-utils_1.3.1.bb (100%)
 
 
