@@ -1,23 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Qs9Z1-0002lu-Ug for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Aug 2011 10:27:29 +0200
-Received: from f053039208.adsl.alicedsl.de ([78.53.39.208]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Qs9Uq-000248-4Q for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Aug 2011 08:23:08 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <raj.khem@gmail.com>) id 1QsGVJ-0001Bh-I4
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 13 Aug 2011 17:52:05 +0200
+Received: by ywe9 with SMTP id 9so2553024ywe.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 13 Aug 2011 08:47:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=dAvpFvClWsxUQBMdUt3JCs/nno96iVji4zVX27Up7HM=;
+	b=bYRGwed8QPd6SetObedCI5eyjPAx21omXm+1BdRk/0qVzVXgqx7nvlonhM0JENqbCM
+	DWkmi7zjZPAPUnOesgimYnRDp7trpTpVlLlikP9KcGV3gep8YeIMLT/ZLwx0/bc7ixno
+	wjlQx/eMT2DKjM84J7QX/f8YrRiJn48u7Yheo=
+Received: by 10.100.245.35 with SMTP id s35mr2235398anh.84.1313250451085;
+	Sat, 13 Aug 2011 08:47:31 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id d7sm3475310anb.14.2011.08.13.08.47.28
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 13 Aug 2011 08:47:29 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1313190057-17104-1-git-send-email-schnitzeltony@gmx.de>
-References: <1313190057-17104-1-git-send-email-schnitzeltony@gmx.de>
-Date: Sat, 13 Aug 2011 10:22:53 +0200
-Message-ID: <1313223773.3493.19.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [meta-xfce] xfce4-screenshooter: Add new recipe
+Date: Sat, 13 Aug 2011 08:47:15 -0700
+Message-Id: <1313250436-32653-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [meta-oe][PATCH 1/2] ocf-linux: extend to provide native and nativesdk recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,106 +38,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Aug 2011 08:27:29 -0000
-X-Groupsio-MsgNum: 33589
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-hDUj2sjLpT+o1lr+evIZ"
+X-List-Received-Date: Sat, 13 Aug 2011 15:52:05 -0000
 
---=-hDUj2sjLpT+o1lr+evIZ
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-connectivity/openssl/ocf-linux.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-Am Samstag, den 13.08.2011, 01:00 +0200 schrieb Andreas Mueller:
-
-To be consistent with your other commits this should be
-
-	Add initial recipe with version 1.8.0
-
-although =C2=BB=E2=80=A6 recipe for version =E2=80=A6=C2=AB is better as fa=
-r as I know.
-
-> Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
-> ---
->  .../xfce4-screenshooter_1.8.0.bb                   |   18 ++++++++++++++=
-++++
->  1 files changed, 18 insertions(+), 0 deletions(-)
->  create mode 100644 meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-scre=
-enshooter_1.8.0.bb
->=20
-> diff --git a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshoot=
-er_1.8.0.bb b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshoote=
-r_1.8.0.bb
-> new file mode 100644
-> index 0000000..9b008c3
-> --- /dev/null
-> +++ b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.8.=
-0.bb
-> @@ -0,0 +1,18 @@
-> +DESCRIPTION =3D "An application to take screenshots"
-
-=C2=BBAn=C2=AB can be left out.
-
-Please add the following fields.
-
-        HOMEPAGE =3D "http://goodies.xfce.org/projects/applications/xfce4-s=
-creenshooter"
-        SECTION =3D "x11/application"
+diff --git a/meta-oe/recipes-connectivity/openssl/ocf-linux.inc b/meta-oe/recipes-connectivity/openssl/ocf-linux.inc
+index b98f887..f4ec7c9 100644
+--- a/meta-oe/recipes-connectivity/openssl/ocf-linux.inc
++++ b/meta-oe/recipes-connectivity/openssl/ocf-linux.inc
+@@ -22,3 +22,4 @@ do_install() {
+ }
+ 
+ ALLOW_EMPTY = "1"
++BBCLASSEXTEND = "native nativesdk"
+-- 
+1.7.5.4
 
 
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd791728a073bc009b4ffaf00b7599=
-855"
-> +DEPENDS =3D "xfce4-panel libxfce4util libxfce4ui gdk-pixbuf gtk+ glib-2.=
-0 libsoup-2.4 exo libxfixes xext virtual/libx11"
-> +
-> +PR =3D "r0"
-> +
-> +inherit xfce
-> +
-> +# SRC_URI must follow inherited one
-> +SRC_URI =3D "http://archive.xfce.org/src/apps/${PN}//${@'${PV}'[0:3]}/${=
-PN}-${PV}.tar.bz2 \
-> +"
 
-Maybe add an example URL as a comment, so that people not familiar with
-regular expression know what is done here.
-
-> +
-> +FILES_${PN} +=3D "${datadir}/xfce4/panel-plugins/*"
-> +FILES_${PN}-dbg +=3D "${libexecdir}/xfce4/panel-plugins/.debug"
-> +
-> +SRC_URI[md5sum] =3D "b51ab5725418e7258273c4a6402adb02"
-> +SRC_URI[sha256sum] =3D "68748a42ae68c5a8e9ed1c14ec5c741a344ab30b5b325b88=
-12220539548ad83e"
-
-I would put the checksums right below the other `SRC_URI` fields, but
-your other recipes seem to use put it at the end too.
-
-You can put
-
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
-
-to the iteration with these comments addressed.
-
-
-Thanks,
-
-Paul
-
-
-[1] http://wiki.openembedded.org/index.php/Styleguide
-
---=-hDUj2sjLpT+o1lr+evIZ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk5GNF0ACgkQPX1aK2wOHVjvCACeP7hCM3Ah0dPBT3jRmGZrnoeN
-r44AnR5Lwu97Lc+LvhsXA8wZqfhYou1j
-=YSee
------END PGP SIGNATURE-----
-
---=-hDUj2sjLpT+o1lr+evIZ--
