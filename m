@@ -1,32 +1,35 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1QtKwy-0003WK-60
+	(envelope-from <raj.khem@gmail.com>) id 1QtKy9-0003av-KF
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Aug 2011 16:49:04 +0200
-Received: by vwe42 with SMTP id 42so3788383vwe.6
+	Tue, 16 Aug 2011 16:50:17 +0200
+Received: by ywe9 with SMTP id 9so3721459ywe.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2011 07:44:26 -0700 (PDT)
+	Tue, 16 Aug 2011 07:45:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:x-enigmail-version:content-type
 	:content-transfer-encoding;
-	bh=nfMAVHi1ncjAcmxcRZvD2EMg8cxDhX/wHxx1VlTzPEA=;
-	b=c24fkwq1tRXQRDN4IFbB5OgaoGOnJs2bwmNTkLKqdRplbg0jH26b86+s58qCl9UE1q
-	bon30+kCZ7KD7J4v0lbMEPRq2b2UIsWSODRJIBcmQKd+fjC33fijIorwz95y0e9Flwcd
-	c0ShRMpUvYrVM05SiMDR94igU/MeMfMXwmqnU=
-Received: by 10.52.180.67 with SMTP id dm3mr5006125vdc.230.1313505866089; Tue,
-	16 Aug 2011 07:44:26 -0700 (PDT)
+	bh=HefJrBaeL/sQt5IGT+mwj0gTejlIZ5axWqLMvMgrSwQ=;
+	b=dqAXyX/lL1K8IksSoGLKJKi5F//EurcIsA6ro5q9A0Vle9oWkpDEnPh/FoCfyw7fZk
+	tDp8Y1nTTogprFYeP0OuNpGT6xXeLiHTkAj03BM5bwqqdI3J2VV0zehsMAQnqQdE8bWn
+	FQdfvUKo5Qszlt4ksE5JR4Ujqlaw7+WSN4c84=
+Received: by 10.236.173.201 with SMTP id v49mr16072473yhl.244.1313505939671;
+	Tue, 16 Aug 2011 07:45:39 -0700 (PDT)
+Received: from [172.23.10.27] (natint3.juniper.net [66.129.224.36])
+	by mx.google.com with ESMTPS id a29sm114796yhj.59.2011.08.16.07.45.38
+	(version=SSLv3 cipher=OTHER); Tue, 16 Aug 2011 07:45:38 -0700 (PDT)
+Message-ID: <4E4A8290.207@gmail.com>
+Date: Tue, 16 Aug 2011 07:45:36 -0700
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:6.0) Gecko/20110809 Thunderbird/6.0
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.52.108.229 with HTTP; Tue, 16 Aug 2011 07:44:06 -0700 (PDT)
-In-Reply-To: <CAPdp9mxsurYvis_uTuYOFAxcjRW=FF8aVUZ6SrzwJNrPAP4zBQ@mail.gmail.com>
-References: <CAPdp9mxsurYvis_uTuYOFAxcjRW=FF8aVUZ6SrzwJNrPAP4zBQ@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 16 Aug 2011 07:44:06 -0700
-X-Google-Sender-Auth: Y9Fr4m4UUBP-zoAUUScLMdaEm-U
-Message-ID: <CABcZAN=8u78LTN79nFZXYkPw8W0gF=WOWFSLnoXa-ysR91qDhQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Issue of OE with Ubuntu 11.04
+References: <1313500918-26444-1-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1313500918-26444-1-git-send-email-Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.2.1
+Subject: Re: [PATCH] openssl-1.0.0d: use openssl.inc from meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,31 +43,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2011 14:49:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 16 Aug 2011 14:50:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Tue, Aug 16, 2011 at 5:41 AM, Rizwan Shaik <rizwancodes@gmail.com> wrote=
-:
-> I was trying to build the OE desktop image for the PXA300 board in Ubuntu
-> 11.04 and was facing the error of
-> =C2=A0> not able to compile the package guile-native-1.8.5.bb
-> Except the above error all the other packages were build.
-> I have mailed the same error to "OE developer list" and was not able to g=
-et
-> any solution.
-> So, I tried the same build or one can say continued the build in "Ubuntu
-> 10.10" and was able to sucessfully build the package guile-native-1.8.5.b=
-b.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I think you'll need to provide more information than this, like the
-exact log message from your guile-native failure, as I and others do
-builds on 11.04 every day.
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+On 08/16/2011 06:21 AM, Martin JaMa Jansa wrote:
+> * full path was using openssl.inc from oe-core which doesn't have
+> BBCLASSEXTEND and INC_PR
+> 
+> Signed-off-by: Martin JaMa Jansa <Martin.Jansa@gmail.com>
+
+Acked-by: Khem Raj <raj.khem@gmail.com>
+> --- .../recipes-connectivity/openssl/openssl_1.0.0d.bb |    2 +- 1
+> files changed, 1 insertions(+), 1 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-connectivity/openssl/openssl_1.0.0d.bb
+> b/meta-oe/recipes-connectivity/openssl/openssl_1.0.0d.bb index
+> cd5408d..73c8df5 100644 ---
+> a/meta-oe/recipes-connectivity/openssl/openssl_1.0.0d.bb +++
+> b/meta-oe/recipes-connectivity/openssl/openssl_1.0.0d.bb @@ -1,4 +1,4
+> @@ -require recipes-connectivity/openssl/openssl.inc +require
+> openssl.inc
+
+
+that leaked from patch I am trying to convert meta-oe recipes into bbappend.
+> 
+> # For target side versions of openssl enable support for OCF Linux
+> driver # if they are available.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEARECAAYFAk5Kgo8ACgkQuwUzVZGdMxS34ACfXmywmrEmY9MCg2Vrt18KY60p
+lWEAn0AiFozJ4Qf8liEMRuLHeLTVlU1g
+=tc+e
+-----END PGP SIGNATURE-----
 
 
