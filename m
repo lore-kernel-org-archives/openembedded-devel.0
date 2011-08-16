@@ -1,27 +1,31 @@
-Received: from snvl-smtp1.trimble.com ([155.63.64.31])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Bernard_Mentink@trimble.com>) id 1QtQAX-0008Ec-Ja
+	(envelope-from <cliff.brake@gmail.com>) id 1QtQeh-0002mN-G4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Aug 2011 22:23:25 +0200
-Received: (qmail 13706 invoked by uid 501); 16 Aug 2011 13:18:45 -0700
-Received: from 10.3.0.166 by snvl-smtp1.trimble.com (envelope-from
-	<Bernard_Mentink@trimble.com>, uid 108) with qmail-scanner-2.08 
-	(clamdscan: 0.97.2/13443. avast: v3.2.0/110815-1. sophie:
-	3.06/3.22.0/4.68. spamassassin: 3.3.1. Clear:RC:1(10.3.0.166):. 
-	Processed in 0.012307 secs); 16 Aug 2011 20:18:45 -0000
-Received: from unknown (HELO nzc-ap-xch-02.ap.trimblecorp.net) (10.3.0.166)
-	by snvl-smtp1.trimble.com with SMTP; 16 Aug 2011 13:18:45 -0700
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Tue, 16 Aug 2011 22:54:35 +0200
+Received: by yxi19 with SMTP id 19so265551yxi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Aug 2011 13:49:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=vtIKGfquDFDsrM2fMw2V5PCOs1ah5/HguluEcv9dk0o=;
+	b=d60QmDYSLG41KKuZ7ujTwsnGRAMG1tFtNmG3byDaiWHNcOzIB64RLUW/+wBuMty3Cz
+	niOKr6SqOdvciiGJwEQo2E0J/KViXcqBvYwpyi1XpvVZCKRZqit5lqFfnEhk04BcgN6f
+	qtMad5PgCVHuUR0exfsDsntP64Yr48E/3Box8=
 MIME-Version: 1.0
-Date: Wed, 17 Aug 2011 08:16:17 +1200
-Message-ID: <F7C0AA5DD1508F4789E10B6CC9BB75DB04C1AEDA@nzc-ap-xch-02.ap.trimblecorp.net>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: Howto get Video Framebuufer working
-Thread-Index: AcxcUVqqxHCVbTE+SDuPsrX8jJ6BvA==
-From: "Bernard Mentink" <Bernard_Mentink@trimble.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Howto get Video Framebuufer working
+Received: by 10.236.23.6 with SMTP id u6mr509772yhu.230.1313527797477; Tue, 16
+	Aug 2011 13:49:57 -0700 (PDT)
+Received: by 10.236.106.100 with HTTP; Tue, 16 Aug 2011 13:49:57 -0700 (PDT)
+In-Reply-To: <CAMKF1srdqe0GKEYx5N9UTmt0jdJjixDioGRD--m-sU8ZoPT3hA@mail.gmail.com>
+References: <CAOd_LFx5+NyXY4cTZ76yfccaFea8_WsFm2t_ZnkLk1xKD9Xzyw@mail.gmail.com>
+	<1313523876.3630.14.camel@lenovo.internal.reciva.com>
+	<CAMKF1srdqe0GKEYx5N9UTmt0jdJjixDioGRD--m-sU8ZoPT3hA@mail.gmail.com>
+Date: Tue, 16 Aug 2011 16:49:57 -0400
+Message-ID: <CAOd_LFwQk0vCwVw-FEs5JOs9cPe_kbJHBEi9My+VaKtoM0k7Jg@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: error building PXA270 target with oe-core/angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,109 +39,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2011 20:23:26 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Tue, 16 Aug 2011 20:54:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hi Guys,
+On Tue, Aug 16, 2011 at 4:03 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Tue, Aug 16, 2011 at 12:44 PM, Phil Blundell <philb@gnu.org> wrote:
+>> On Tue, 2011-08-16 at 15:32 -0400, Cliff Brake wrote:
+>>> | ../libcpp/libcpp.a(files.o): In function `validate_pch':
+>>> | files.c:(.text+0x1978): undefined reference to `fprintf_unlocked'
+>>> | ../libcpp/libcpp.a(line-map.o): In function `linemap_check_files_exit=
+ed':
+>>> | line-map.c:(.text+0xfa): undefined reference to `fprintf_unlocked'
+>>> | ../libcpp/libcpp.a(line-map.o): In function `linemap_add':
+>>> | line-map.c:(.text+0x258): undefined reference to `fprintf_unlocked'
+>>> | line-map.c:(.text+0x308): undefined reference to `fprintf_unlocked'
+>>> | ../libcpp/libcpp.a(symtab.o): In function `ht_dump_statistics':
+>>> | symtab.c:(.text+0x1cc): undefined reference to `fprintf_unlocked'
+>>
+>> That looks rather like something is wrong with your host's build
+>> environment. =A0Apparently gcc has decided that you have fprintf_unlocke=
+d
+>> and using it would be a good idea. =A0AFAIK, there are no glibcs in the
+>> wild which do actually implement fprintf_unlocked so it seems that gcc
+>> must be mistaken in its belief.
+>>
+>> I think you might need to do a bit of poking at config.log to see what's
+>> up.
+>>
+>
+> Do you have eglibc-nativesdk staged ?
 
-Can anyone give me a helping hand getting graphics/framebuffer working =
-on a new i.mx31 platform.
+No, if I try to bitbake eglibc-nativesdk, it fails trying to compile
+gcc-cross-initial_4.5.
 
-I have configured everything I can think of that is required in the =
-kernel (see relevent section below) and the i.mx31 viddeo driver is =
-definetely getting built. (See the object files below)
+Thanks,
+Cliff
 
-However, I do not see any /dev/fb0 device .... What do I need to do to =
-get one going?
-
-Cheers,
-Bernie.
-
-------------------------------------------  video stuff built =
------------------------------------------------
- ls drivers/video/*.o
-drivers/video/built-in.o     drivers/video/fbcvt.o      =
-drivers/video/fbsysfs.o
-drivers/video/cfbcopyarea.o  drivers/video/fbmem.o      =
-drivers/video/modedb.o
-drivers/video/cfbfillrect.o  drivers/video/fbmon.o      =
-drivers/video/mx3fb.o
-drivers/video/cfbimgblt.o    drivers/video/fb_notify.o
-drivers/video/fbcmap.o       drivers/video/fb.o
-
-
---------------------------------------- kernel config =
----------------------------------------------
-
-#
-# Graphics support
-#
-CONFIG_DRM=3Dm
-# CONFIG_VGASTATE is not set
-# CONFIG_VIDEO_OUTPUT_CONTROL is not set
-CONFIG_FB=3Dy
-# CONFIG_FIRMWARE_EDID is not set
-# CONFIG_FB_DDC is not set
-# CONFIG_FB_BOOT_VESA_SUPPORT is not set
-CONFIG_FB_CFB_FILLRECT=3Dy
-CONFIG_FB_CFB_COPYAREA=3Dy
-CONFIG_FB_CFB_IMAGEBLIT=3Dy
-# CONFIG_FB_CFB_REV_PIXELS_IN_BYTE is not set
-# CONFIG_FB_SYS_FILLRECT is not set
-# CONFIG_FB_SYS_COPYAREA is not set
-# CONFIG_FB_SYS_IMAGEBLIT is not set
-CONFIG_FB_FOREIGN_ENDIAN=3Dy
-CONFIG_FB_BOTH_ENDIAN=3Dy
-# CONFIG_FB_BIG_ENDIAN is not set
-# CONFIG_FB_LITTLE_ENDIAN is not set
-# CONFIG_FB_SYS_FOPS is not set
-# CONFIG_FB_SVGALIB is not set
-# CONFIG_FB_MACMODES is not set
-# CONFIG_FB_BACKLIGHT is not set
-# CONFIG_FB_MODE_HELPERS is not set
-# CONFIG_FB_TILEBLITTING is not set
-
-
-#
-# Frame buffer hardware drivers
-#
-# CONFIG_FB_S1D13XXX is not set
-# CONFIG_FB_VIRTUAL is not set
-# CONFIG_FB_METRONOME is not set
-# CONFIG_FB_MB862XX is not set
-CONFIG_FB_MX3=3Dy
-# CONFIG_FB_BROADSHEET is not set
-CONFIG_BACKLIGHT_LCD_SUPPORT=3Dy
-CONFIG_LCD_CLASS_DEVICE=3Dy
-# CONFIG_LCD_L4F00242T03 is not set
-# CONFIG_LCD_LMS283GF05 is not set
-# CONFIG_LCD_LTV350QV is not set
-# CONFIG_LCD_TDO24M is not set
-# CONFIG_LCD_VGG2432A4 is not set
-# CONFIG_LCD_PLATFORM is not set
-# CONFIG_LCD_S6E63M0 is not set
-CONFIG_BACKLIGHT_CLASS_DEVICE=3Dy
-CONFIG_BACKLIGHT_GENERIC=3Dy
-CONFIG_BACKLIGHT_PWM=3Dy
-# CONFIG_BACKLIGHT_ADP8860 is not set
-
-#
-# Display device support
-#
-CONFIG_DISPLAY_SUPPORT=3Dy
-
-#
-# Display hardware drivers
-#
-
-
-
-
-
-
-
+--=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+http://bec-systems.com
 
 
