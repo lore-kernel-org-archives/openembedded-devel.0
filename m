@@ -1,35 +1,24 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QtKy9-0003av-KF
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Aug 2011 16:50:17 +0200
-Received: by ywe9 with SMTP id 9so3721459ywe.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2011 07:45:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:x-enigmail-version:content-type
-	:content-transfer-encoding;
-	bh=HefJrBaeL/sQt5IGT+mwj0gTejlIZ5axWqLMvMgrSwQ=;
-	b=dqAXyX/lL1K8IksSoGLKJKi5F//EurcIsA6ro5q9A0Vle9oWkpDEnPh/FoCfyw7fZk
-	tDp8Y1nTTogprFYeP0OuNpGT6xXeLiHTkAj03BM5bwqqdI3J2VV0zehsMAQnqQdE8bWn
-	FQdfvUKo5Qszlt4ksE5JR4Ujqlaw7+WSN4c84=
-Received: by 10.236.173.201 with SMTP id v49mr16072473yhl.244.1313505939671;
-	Tue, 16 Aug 2011 07:45:39 -0700 (PDT)
-Received: from [172.23.10.27] (natint3.juniper.net [66.129.224.36])
-	by mx.google.com with ESMTPS id a29sm114796yhj.59.2011.08.16.07.45.38
-	(version=SSLv3 cipher=OTHER); Tue, 16 Aug 2011 07:45:38 -0700 (PDT)
-Message-ID: <4E4A8290.207@gmail.com>
-Date: Tue, 16 Aug 2011 07:45:36 -0700
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:6.0) Gecko/20110809 Thunderbird/6.0
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QtLHH-0004WL-UQ for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Aug 2011 17:10:03 +0200
+Received: from f053034117.adsl.alicedsl.de ([78.53.34.117]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QtLCt-0000uS-QI for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Aug 2011 15:05:32 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1313500918-26444-1-git-send-email-Martin.Jansa@gmail.com>
-In-Reply-To: <1313500918-26444-1-git-send-email-Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.2.1
-Subject: Re: [PATCH] openssl-1.0.0d: use openssl.inc from meta-oe
+In-Reply-To: <c0f2c59a9aca500b4be0c93de85a2a4390b2b115.1313496291.git.anders@chargestorm.se>
+References: <cover.1313496291.git.anders@chargestorm.se>
+	<c0f2c59a9aca500b4be0c93de85a2a4390b2b115.1313496291.git.anders@chargestorm.se>
+Date: Tue, 16 Aug 2011 17:05:26 +0200
+Message-ID: <1313507126.4418.6.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [meta-oe][PATCH v2 1/2] ckermit: import from OE rev 5350bbef01b8979617e3d0fd38939f94f1fa5315
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,43 +32,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2011 14:50:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 16 Aug 2011 15:10:04 -0000
+X-Groupsio-MsgNum: 33631
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-GfShWAcAeIDL2LkfkXBH"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-GfShWAcAeIDL2LkfkXBH
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 08/16/2011 06:21 AM, Martin JaMa Jansa wrote:
-> * full path was using openssl.inc from oe-core which doesn't have
-> BBCLASSEXTEND and INC_PR
-> 
-> Signed-off-by: Martin JaMa Jansa <Martin.Jansa@gmail.com>
-
-Acked-by: Khem Raj <raj.khem@gmail.com>
-> --- .../recipes-connectivity/openssl/openssl_1.0.0d.bb |    2 +- 1
-> files changed, 1 insertions(+), 1 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-connectivity/openssl/openssl_1.0.0d.bb
-> b/meta-oe/recipes-connectivity/openssl/openssl_1.0.0d.bb index
-> cd5408d..73c8df5 100644 ---
-> a/meta-oe/recipes-connectivity/openssl/openssl_1.0.0d.bb +++
-> b/meta-oe/recipes-connectivity/openssl/openssl_1.0.0d.bb @@ -1,4 +1,4
-> @@ -require recipes-connectivity/openssl/openssl.inc +require
-> openssl.inc
+Dear Anders, Koen,
 
 
-that leaked from patch I am trying to convert meta-oe recipes into bbappend.
-> 
-> # For target side versions of openssl enable support for OCF Linux
-> driver # if they are available.
+Am Dienstag, den 16.08.2011, 14:05 +0200 schrieb Anders Darander:
+> Adding LIC_FILES_CHKSUM, otherwise it is identical to the oe version.
+>=20
+> Build tested on a custom ARM9 platform.
+>=20
+> Signed-off-by: Anders Darander <anders@chargestorm.se>
+> ---
+>  meta-oe/recipes-support/ckermit/ckermit_211.bb |   98 ++++++++++++++++++=
+++++++
+>  1 files changed, 98 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-support/ckermit/ckermit_211.bb
+>=20
+> diff --git a/meta-oe/recipes-support/ckermit/ckermit_211.bb b/meta-oe/rec=
+ipes-support/ckermit/ckermit_211.bb
+> new file mode 100644
+> index 0000000..88bc918
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/ckermit/ckermit_211.bb
+> @@ -0,0 +1,98 @@
+> +DESCRIPTION =3D "C-Kermit is a combined serial and network communication=
+ \
+> +software package offering a consistent, medium-independent, \
+> +cross-platform approach to connection establishment, terminal \
+> +sessions, file transfer, character-set translation, and automation \
+> +of communication tasks."
+> +HOMEPAGE =3D "http://www.columbia.edu/kermit/"
+> +SECTION =3D "console/network"
+> +LICENSE =3D "Kermit"
+> +LIC_FILES_CHKSUM =3D "file://COPYING.TXT;md5=3D17dabbd2543933464b6d32083=
+c3a3596"
+> +SRC_URI =3D "ftp://kermit.columbia.edu/kermit/archives/cku${PV}.tar.gz;s=
+ubdir=3D${BPN}-${PV}"
+> +PR =3D "r3"
+
+could you please edit this commit and make that `r0`.
+
+[=E2=80=A6]
+
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+
+
+Thanks,
+
+Paul
+
+--=-GfShWAcAeIDL2LkfkXBH
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAk5Kgo8ACgkQuwUzVZGdMxS34ACfXmywmrEmY9MCg2Vrt18KY60p
-lWEAn0AiFozJ4Qf8liEMRuLHeLTVlU1g
-=tc+e
+iEYEABECAAYFAk5KhzYACgkQPX1aK2wOHVhiZACfXUSl4XgA2UKfBHmDQZUKVQfK
+vPkAn16GAWg2MmifZP9uB565TBUyxlGz
+=K5Ic
 -----END PGP SIGNATURE-----
 
-
+--=-GfShWAcAeIDL2LkfkXBH--
