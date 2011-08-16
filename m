@@ -1,28 +1,34 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QtJ7j-0000ug-JY
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Aug 2011 14:52:03 +0200
-Received: by bkbzu17 with SMTP id zu17so4055914bkb.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QtJ8P-00011B-38 for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Aug 2011 14:52:45 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QtJ3x-0008Hf-FS for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Aug 2011 14:48:09 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Aug 2011 14:48:09 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2011 05:47:26 -0700 (PDT)
-Received: by 10.204.171.66 with SMTP id g2mr1512000bkz.9.1313498845905;
-	Tue, 16 Aug 2011 05:47:25 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116])
-	by mx.google.com with ESMTPS id zx9sm1491bkb.28.2011.08.16.05.47.23
-	(version=SSLv3 cipher=OTHER); Tue, 16 Aug 2011 05:47:24 -0700 (PDT)
-Message-ID: <4E4A66DB.60902@dresearch-fe.de>
-Date: Tue, 16 Aug 2011 14:47:23 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	Tue, 16 Aug 2011 14:48:09 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 16 Aug 2011 14:47:56 +0200
+Message-ID: <j2dots$cu3$1@dough.gmane.org>
+References: <cover.1313496291.git.anders@chargestorm.se>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
 	rv:5.0) Gecko/20110624 Thunderbird/5.0
-MIME-Version: 1.0
-Followup-To: openembedded-devel,<openembedded-devel@lists.openembedded.org>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	angstrom-distro-devel <angstrom-distro-devel@linuxtogo.org>
+In-Reply-To: <cover.1313496291.git.anders@chargestorm.se>
 X-Enigmail-Version: 1.2
-Subject: runlevel
+Subject: Re: [meta-oe][PATCH v2 0/2] Import ckermit recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,28 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2011 12:52:03 -0000
+X-List-Received-Date: Tue, 16 Aug 2011 12:52:45 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-We like to use different init runlevel in our application for different purposes.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Which runlevels are used with which semantics in OE and/or distros using OE (especially Angsrom)?
+Op 16-08-11 14:05, Anders Darander schreef:
+> 
+> Ckermit is useful, not least as an alternative to lrzsz for serial port file-transfer (it has been a lot more robust in a number of cases).
+> 
+> This patch series imports the ckermit recipe from oe-dev. Thereafter, ckermit gets updated to the latest version, which also has the licensed change to BSD 3-clause.
+> 
+> V2: * Rebasing on the latest OE-version * Make sure that the patch is a rename, not add/delete pair.
 
-Does OE support runlevels 7-9 like the linux telinit manpage mentions: "Runlevels 7-9 are also valid, though not really documented. This is because "traditional" Unix variants don't use them."?
+Thanks, I q'd these after the binutils 2.20 patches, so they will go in after that completes its test build.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Regards,
-Steffen
+iD8DBQFOSmb8MkyGM64RGpERAuPWAKCcgNTz/DvNGbx1DkFgs80sPLYwIwCeJ7OM
+Ml3wIw3XHY9XLfdGJUdWA/I=
+=kgBP
+-----END PGP SIGNATURE-----
 
-PS: Followup-To set to <openembedded-devel@lists.openembedded.org>
-
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
 
 
