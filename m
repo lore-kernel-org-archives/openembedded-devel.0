@@ -1,21 +1,32 @@
-Received: from stoexhubfe02.domain01.net ([83.145.59.141])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1QtJuu-0001Id-T3
+	(envelope-from <kergoth@gmail.com>) id 1QtKwy-0003WK-60
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Aug 2011 15:42:54 +0200
-Received: from localhost (193.235.91.228) by stoexhubfe02.domain01.net
-	(10.12.10.7) with Microsoft SMTP Server id 8.3.137.0; Tue, 16 Aug 2011
-	15:38:09 +0200
-From: Anders Darander <anders@chargestorm.se>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 16 Aug 2011 15:38:14 +0200
-Message-ID: <b2a661498def56a184f05a3c7cde1528aa1b0e8d.1313501855.git.anders@chargestorm.se>
-X-Mailer: git-send-email 1.7.5.4
-In-Reply-To: <cover.1313501855.git.anders@chargestorm.se>
-References: <cover.1313501855.git.anders@chargestorm.se>
+	Tue, 16 Aug 2011 16:49:04 +0200
+Received: by vwe42 with SMTP id 42so3788383vwe.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Aug 2011 07:44:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=nfMAVHi1ncjAcmxcRZvD2EMg8cxDhX/wHxx1VlTzPEA=;
+	b=c24fkwq1tRXQRDN4IFbB5OgaoGOnJs2bwmNTkLKqdRplbg0jH26b86+s58qCl9UE1q
+	bon30+kCZ7KD7J4v0lbMEPRq2b2UIsWSODRJIBcmQKd+fjC33fijIorwz95y0e9Flwcd
+	c0ShRMpUvYrVM05SiMDR94igU/MeMfMXwmqnU=
+Received: by 10.52.180.67 with SMTP id dm3mr5006125vdc.230.1313505866089; Tue,
+	16 Aug 2011 07:44:26 -0700 (PDT)
 MIME-Version: 1.0
-X-GFI-SMTP-Submission: 1
-Subject: [meta-oe][PATCH 1/1] connman: conditionally enable wifi and bluetooth
+Sender: kergoth@gmail.com
+Received: by 10.52.108.229 with HTTP; Tue, 16 Aug 2011 07:44:06 -0700 (PDT)
+In-Reply-To: <CAPdp9mxsurYvis_uTuYOFAxcjRW=FF8aVUZ6SrzwJNrPAP4zBQ@mail.gmail.com>
+References: <CAPdp9mxsurYvis_uTuYOFAxcjRW=FF8aVUZ6SrzwJNrPAP4zBQ@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Tue, 16 Aug 2011 07:44:06 -0700
+X-Google-Sender-Auth: Y9Fr4m4UUBP-zoAUUScLMdaEm-U
+Message-ID: <CABcZAN=8u78LTN79nFZXYkPw8W0gF=WOWFSLnoXa-ysR91qDhQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Issue of OE with Ubuntu 11.04
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,52 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2011 13:42:54 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 16 Aug 2011 14:49:04 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Use DISTRO_FEATURES to conditionally depend and enable wifi and bluetooth.
+On Tue, Aug 16, 2011 at 5:41 AM, Rizwan Shaik <rizwancodes@gmail.com> wrote=
+:
+> I was trying to build the OE desktop image for the PXA300 board in Ubuntu
+> 11.04 and was facing the error of
+> =C2=A0> not able to compile the package guile-native-1.8.5.bb
+> Except the above error all the other packages were build.
+> I have mailed the same error to "OE developer list" and was not able to g=
+et
+> any solution.
+> So, I tried the same build or one can say continued the build in "Ubuntu
+> 10.10" and was able to sucessfully build the package guile-native-1.8.5.b=
+b.
 
-Signed-off-by: Anders Darander <anders@chargestorm.se>
----
- meta-oe/recipes-connectivity/connman/connman.inc   |    7 ++++++-
- .../recipes-connectivity/connman/connman_0.76.bb   |    4 ++--
- 2 files changed, 8 insertions(+), 3 deletions(-)
-
-diff --git a/meta-oe/recipes-connectivity/connman/connman.inc b/meta-oe/recipes-connectivity/connman/connman.inc
-index 2652125..284edd2 100644
---- a/meta-oe/recipes-connectivity/connman/connman.inc
-+++ b/meta-oe/recipes-connectivity/connman/connman.inc
-@@ -14,7 +14,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e \
-                     file://src/main.c;beginline=1;endline=20;md5=4b55b550fa6b33cc2055ef30dd262b3e"
- 
- # we need to define the depends here, the dynamic stuff is too late
--DEPENDS  = "wpa-supplicant dbus glib-2.0 ppp busybox dhcp resolvconf bluez4 iptables gnutls ntp"
-+BLUEZDEPENDS = "bluez4"
-+WIFIDEPENDS = "wpa-supplicant"
-+DEPENDS  = "dbus glib-2.0 ppp busybox dhcp resolvconf iptables gnutls ntp \
-+            ${@base_contains('DISTRO_FEATURES', 'bluetooth','${BLUEZDEPENDS}', '', d)} \
-+            ${@base_contains('DISTRO_FEATURES', 'wifi','${WIFIDEPENDS}', '', d)} \
-+            "
- 
- EXTRA_OECONF += "\
-     ac_cv_path_WPASUPPLICANT=/usr/sbin/wpa_supplicant \
-diff --git a/meta-oe/recipes-connectivity/connman/connman_0.76.bb b/meta-oe/recipes-connectivity/connman/connman_0.76.bb
-index cb84caa..abae73a 100644
---- a/meta-oe/recipes-connectivity/connman/connman_0.76.bb
-+++ b/meta-oe/recipes-connectivity/connman/connman_0.76.bb
-@@ -6,8 +6,8 @@ EXTRA_OECONF += "\
-   --enable-threads \
-   --enable-loopback \
-   --enable-ethernet \
--  --enable-wifi \
--  --enable-bluetooth \
-+  ${@base_contains('DISTRO_FEATURES', 'wifi','--enable-wifi', '--disable-wifi', d)} \
-+  ${@base_contains('DISTRO_FEATURES', 'bluetooth','--enable-bluetooth', '--disable-bluetooth', d)} \
-   --enable-ofono \
-   --enable-tools \
-   --disable-polkit \
--- 
-1.7.5.4
-
+I think you'll need to provide more information than this, like the
+exact log message from your guile-native failure, as I and others do
+builds on 11.04 every day.
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
