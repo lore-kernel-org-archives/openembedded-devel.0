@@ -1,27 +1,28 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rizwancodes@gmail.com>) id 1QtJ2F-0000jb-Pf
+	(envelope-from <sledz@dresearch-fe.de>) id 1QtJ7j-0000ug-JY
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Aug 2011 14:46:24 +0200
-Received: by yxi19 with SMTP id 19so3635532yxi.6
+	Tue, 16 Aug 2011 14:52:03 +0200
+Received: by bkbzu17 with SMTP id zu17so4055914bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2011 05:41:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=Sl5+eJ7JCemMdXbDmdlRHthWHO/S0IW8A5kFH1YdN0s=;
-	b=LdxbSXlTl0CcKpa+dVOPsYobMRxqJHgengbQ4T5klpwkkCk0TMYjLRnhuDc7G18C14
-	Nojnki/C6zPcW73yWaGSaCgehq+GlJaV4ZE/S/aW36PiVlkP2bMKPsdO8mUTovKYvdFB
-	KPz/YV1I20aFfFN+YiCGzxATt/vpmmKzKuC6o=
+	Tue, 16 Aug 2011 05:47:26 -0700 (PDT)
+Received: by 10.204.171.66 with SMTP id g2mr1512000bkz.9.1313498845905;
+	Tue, 16 Aug 2011 05:47:25 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id zx9sm1491bkb.28.2011.08.16.05.47.23
+	(version=SSLv3 cipher=OTHER); Tue, 16 Aug 2011 05:47:24 -0700 (PDT)
+Message-ID: <4E4A66DB.60902@dresearch-fe.de>
+Date: Tue, 16 Aug 2011 14:47:23 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:5.0) Gecko/20110624 Thunderbird/5.0
 MIME-Version: 1.0
-Received: by 10.42.35.212 with SMTP id r20mr5385052icd.416.1313498506036; Tue,
-	16 Aug 2011 05:41:46 -0700 (PDT)
-Received: by 10.42.227.195 with HTTP; Tue, 16 Aug 2011 05:41:45 -0700 (PDT)
-Date: Tue, 16 Aug 2011 18:11:45 +0530
-Message-ID: <CAPdp9mxsurYvis_uTuYOFAxcjRW=FF8aVUZ6SrzwJNrPAP4zBQ@mail.gmail.com>
-From: Rizwan Shaik <rizwancodes@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Issue of OE with Ubuntu 11.04
+Followup-To: openembedded-devel,<openembedded-devel@lists.openembedded.org>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	angstrom-distro-devel <angstrom-distro-devel@linuxtogo.org>
+X-Enigmail-Version: 1.2
+Subject: runlevel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,25 +36,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2011 12:46:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 16 Aug 2011 12:52:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Dear Sir/Madam,
+We like to use different init runlevel in our application for different purposes.
 
-I was trying to build the OE desktop image for the PXA300 board in Ubuntu
-11.04 and was facing the error of
-  > not able to compile the package guile-native-1.8.5.bb
-Except the above error all the other packages were build.
-I have mailed the same error to "OE developer list" and was not able to get
-any solution.
-So, I tried the same build or one can say continued the build in "Ubuntu
-10.10" and was able to sucessfully build the package guile-native-1.8.5.bb.
+Which runlevels are used with which semantics in OE and/or distros using OE (especially Angsrom)?
 
-Mailing this to you to find.So that it may be useful and you can find the
-exact reason.
+Does OE support runlevels 7-9 like the linux telinit manpage mentions: "Runlevels 7-9 are also valid, though not really documented. This is because "traditional" Unix variants don't use them."?
 
-Please mail me the exact reason for this build
+Regards,
+Steffen
 
-Thanks in Advance..
-Rizwan Basha Shaik
+PS: Followup-To set to <openembedded-devel@lists.openembedded.org>
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
+
 
