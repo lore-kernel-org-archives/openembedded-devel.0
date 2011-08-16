@@ -1,33 +1,23 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QtEnN-00013G-Sj for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Aug 2011 10:14:45 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QtEir-0007aT-Bj for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Aug 2011 10:10:05 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2011 10:10:05 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2011 10:10:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QtF01-0001P9-0F for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Aug 2011 10:27:49 +0200
+Received: from f053034117.adsl.alicedsl.de ([78.53.34.117]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QtEvO-0007NI-Uw for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Aug 2011 08:23:03 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 16 Aug 2011 10:07:17 +0200
-Message-ID: <j2d8fl$5qf$3@dough.gmane.org>
+In-Reply-To: <j2d8fl$5qf$3@dough.gmane.org>
 References: <1313436905.4058.47.camel@mattotaupa>
+	<j2d8fl$5qf$3@dough.gmane.org>
+Date: Tue, 16 Aug 2011 10:22:57 +0200
+Message-ID: <1313482978.3496.11.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:5.0) Gecko/20110624 Thunderbird/5.0
-In-Reply-To: <1313436905.4058.47.camel@mattotaupa>
-X-Enigmail-Version: 1.2
+X-Mailer: Evolution 2.32.3 
 Subject: Re: Coordination for updating the XBMC recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,49 +32,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2011 08:14:46 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 16 Aug 2011 08:27:49 -0000
+X-Groupsio-MsgNum: 33611
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-ZeVofAplHnxd72SLYaJL"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-ZeVofAplHnxd72SLYaJL
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Op 15-08-11 21:35, Paul Menzel schreef:
-> Dear OE folks and especially Koen,
-> 
-> 
-> Scott Davilla from the XBMC project asked me for build instructions for XBMC for the PandaBoard.
-> 
-> Currently the XBMC recipe does not build for the PandaBoard
-> 
-> COMPATIBLE_MACHINE = "omap3|ti816x"
-> 
-> and 'virtual/egl' is not available for `MACHINE = "omap4430-panda"` in oe.dev. Additionally the recipe is quite outdated.
-> 
-> This is a good occasion to update and clean up the current XBMC recipes.
-> 
-> I have some patches locally and I build test the latest commits for `MACHINE = "beagleboard"` unfortunately still for oe.dev. On LinuxTag you told me that you also had some patches but they conflicted with my pushed commits.
-> 
-> So what is the best way to go forward? Did you already do some work on this so that no wheel is reinvented? Please publish your patches somewhere. That would be awesome.
-> 
-> Without knowing your answer I propose the following.
-> 
-> 1. I try to clean up my patches and push them right to oe.dev? (I could also publish a tree on Gitorious where I am already registered.)
+Am Dienstag, den 16.08.2011, 10:07 +0200 schrieb Koen Kooi:
 
-OE .dev is a dead end, no use working there
+> Op 15-08-11 21:35, Paul Menzel schreef:
+> > Dear OE folks and especially Koen,
+> >=20
+> >=20
+> > Scott Davilla from the XBMC project asked me for build instructions for=
+ XBMC for the PandaBoard.
+> >=20
+> > Currently the XBMC recipe does not build for the PandaBoard
+> >=20
+> > COMPATIBLE_MACHINE =3D "omap3|ti816x"
+> >=20
+> > and 'virtual/egl' is not available for `MACHINE =3D "omap4430-panda"` i=
+n oe.dev. Additionally the recipe is quite outdated.
+> >=20
+> > This is a good occasion to update and clean up the current XBMC recipes=
+.
+> >=20
+> > I have some patches locally and I build test the latest commits for `MA=
+CHINE =3D "beagleboard"` unfortunately still for oe.dev. On LinuxTag you to=
+ld me that you also had some patches but they conflicted with my pushed com=
+mits.
+> >=20
+> > So what is the best way to go forward? Did you already do some work on =
+this so that no wheel is reinvented? Please publish your patches somewhere.=
+ That would be awesome.
+> >=20
+> > Without knowing your answer I propose the following.
+> >=20
+> > 1. I try to clean up my patches and push them right to oe.dev? (I could=
+ also publish a tree on Gitorious where I am already registered.)
+>=20
+> OE .dev is a dead end, no use working there
+>=20
+> > Unfortunately I am only able to build test XBMC as I do not have a setu=
+p BeagleBoard or PandaBoard currently and no time to set them up.
+> >=20
+> > 2. Not having used meta-oe/oe-core it would be great if you could port =
+those to meta-oe.
+>=20
+> Importing the current recipe into meta-oe and working on it there would b=
+e a better idea.
 
-> Unfortunately I am only able to build test XBMC as I do not have a setup BeagleBoard or PandaBoard currently and no time to set them up.
-> 
-> 2. Not having used meta-oe/oe-core it would be great if you could port those to meta-oe.
+Looking more into it, it looks like `virtual/egl` is not yet available
+in meta-oe or oe-core. So that would be quite an effort. Additionally I
+only have a working oe.dev build setup right now.
 
-Importing the current recipe into meta-oe and working on it there would be a better idea.
+Regarding the PandaBoard it looks like there is only `libgles-omap3` and
+nothing for OMAP4. Is that correct?
+
+Do you have some patches you could post somewhere?
+
+
+Thanks,
+
+Paul
+
+--=-ZeVofAplHnxd72SLYaJL
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iD8DBQFOSiU1MkyGM64RGpERAtQBAJ48KoKoh7nft3HvUoSs8V7XIQA3zQCfWwPR
-GMDIt8xZIIeH1HSDnxeY8Rs=
-=UlFH
+iEYEABECAAYFAk5KKOEACgkQPX1aK2wOHVgQ0gCdEDIQnJGL/rBCQsTcUmyBL0Ik
+VuoAn1owY+720EAySwX2L8XnO2sh9iGG
+=HzUn
 -----END PGP SIGNATURE-----
 
-
-
+--=-ZeVofAplHnxd72SLYaJL--
