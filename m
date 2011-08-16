@@ -1,24 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QtLHH-0004WL-UQ for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Aug 2011 17:10:03 +0200
-Received: from f053034117.adsl.alicedsl.de ([78.53.34.117]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QtLCt-0000uS-QI for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Aug 2011 15:05:32 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QtLkl-0001co-7N for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Aug 2011 17:40:31 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QtLgI-0001uX-Kl for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Aug 2011 17:35:54 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Aug 2011 17:35:54 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Aug 2011 17:35:54 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c0f2c59a9aca500b4be0c93de85a2a4390b2b115.1313496291.git.anders@chargestorm.se>
-References: <cover.1313496291.git.anders@chargestorm.se>
-	<c0f2c59a9aca500b4be0c93de85a2a4390b2b115.1313496291.git.anders@chargestorm.se>
-Date: Tue, 16 Aug 2011 17:05:26 +0200
-Message-ID: <1313507126.4418.6.camel@mattotaupa>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 16 Aug 2011 17:35:41 +0200
+Message-ID: <j2e2od$g94$1@dough.gmane.org>
+References: <cover.1313501855.git.anders@chargestorm.se>
+	<b2a661498def56a184f05a3c7cde1528aa1b0e8d.1313501855.git.anders@chargestorm.se>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [meta-oe][PATCH v2 1/2] ckermit: import from OE rev 5350bbef01b8979617e3d0fd38939f94f1fa5315
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:5.0) Gecko/20110624 Thunderbird/5.0
+In-Reply-To: <b2a661498def56a184f05a3c7cde1528aa1b0e8d.1313501855.git.anders@chargestorm.se>
+X-Enigmail-Version: 1.2
+Subject: Re: [meta-oe][PATCH 1/1] connman: conditionally enable wifi and bluetooth
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,74 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2011 15:10:04 -0000
-X-Groupsio-MsgNum: 33631
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-GfShWAcAeIDL2LkfkXBH"
+X-List-Received-Date: Tue, 16 Aug 2011 15:40:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-GfShWAcAeIDL2LkfkXBH
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Dear Anders, Koen,
+Op 16-08-11 15:38, Anders Darander schreef:
+> Use DISTRO_FEATURES to conditionally depend and enable wifi and bluetooth.
+> 
+> Signed-off-by: Anders Darander <anders@chargestorm.se> --- meta-oe/recipes-connectivity/connman/connman.inc   |    7 ++++++- .../recipes-connectivity/connman/connman_0.76.bb   |    4 ++-- 2 files changed, 8 insertions(+), 3 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-connectivity/connman/connman.inc b/meta-oe/recipes-connectivity/connman/connman.inc index 2652125..284edd2 100644 --- a/meta-oe/recipes-connectivity/connman/connman.inc +++ b/meta-oe/recipes-connectivity/connman/connman.inc @@ -14,7 +14,12 @@ LIC_FILES_CHKSUM =
+> "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e \ file://src/main.c;beginline=1;endline=20;md5=4b55b550fa6b33cc2055ef30dd262b3e"
+> 
+> # we need to define the depends here, the dynamic stuff is too late -DEPENDS  = "wpa-supplicant dbus glib-2.0 ppp busybox dhcp resolvconf bluez4 iptables gnutls ntp" +BLUEZDEPENDS = "bluez4" +WIFIDEPENDS = "wpa-supplicant" +DEPENDS  = "dbus glib-2.0 ppp busybox dhcp resolvconf iptables gnutls ntp
+> \ +            ${@base_contains('DISTRO_FEATURES', 'bluetooth','${BLUEZDEPENDS}', '', d)} \ +            ${@base_contains('DISTRO_FEATURES', 'wifi','${WIFIDEPENDS}', '', d)} \
 
-
-Am Dienstag, den 16.08.2011, 14:05 +0200 schrieb Anders Darander:
-> Adding LIC_FILES_CHKSUM, otherwise it is identical to the oe version.
->=20
-> Build tested on a custom ARM9 platform.
->=20
-> Signed-off-by: Anders Darander <anders@chargestorm.se>
-> ---
->  meta-oe/recipes-support/ckermit/ckermit_211.bb |   98 ++++++++++++++++++=
-++++++
->  1 files changed, 98 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-support/ckermit/ckermit_211.bb
->=20
-> diff --git a/meta-oe/recipes-support/ckermit/ckermit_211.bb b/meta-oe/rec=
-ipes-support/ckermit/ckermit_211.bb
-> new file mode 100644
-> index 0000000..88bc918
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/ckermit/ckermit_211.bb
-> @@ -0,0 +1,98 @@
-> +DESCRIPTION =3D "C-Kermit is a combined serial and network communication=
- \
-> +software package offering a consistent, medium-independent, \
-> +cross-platform approach to connection establishment, terminal \
-> +sessions, file transfer, character-set translation, and automation \
-> +of communication tasks."
-> +HOMEPAGE =3D "http://www.columbia.edu/kermit/"
-> +SECTION =3D "console/network"
-> +LICENSE =3D "Kermit"
-> +LIC_FILES_CHKSUM =3D "file://COPYING.TXT;md5=3D17dabbd2543933464b6d32083=
-c3a3596"
-> +SRC_URI =3D "ftp://kermit.columbia.edu/kermit/archives/cku${PV}.tar.gz;s=
-ubdir=3D${BPN}-${PV}"
-> +PR =3D "r3"
-
-could you please edit this commit and make that `r0`.
-
-[=E2=80=A6]
-
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
-
-
-Thanks,
-
-Paul
-
---=-GfShWAcAeIDL2LkfkXBH
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
+Are those helper vars really needed?
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAk5KhzYACgkQPX1aK2wOHVhiZACfXUSl4XgA2UKfBHmDQZUKVQfK
-vPkAn16GAWg2MmifZP9uB565TBUyxlGz
-=K5Ic
+iD8DBQFOSo5NMkyGM64RGpERAjb6AJ9pUdvD2Ida/gShyst/YrVgUfvflwCgkz3y
+afoEW11A6q6GHXyJJer6NfM=
+=OXpK
 -----END PGP SIGNATURE-----
 
---=-GfShWAcAeIDL2LkfkXBH--
+
+
