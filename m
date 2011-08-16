@@ -1,30 +1,27 @@
-Received: from mail-ey0-f173.google.com ([209.85.215.173])
+Received: from snvl-smtp1.trimble.com ([155.63.64.31])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <agnel.joel@gmail.com>) id 1QtQ3D-000824-FW
+	(envelope-from <Bernard_Mentink@trimble.com>) id 1QtQAX-0008Ec-Ja
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Aug 2011 22:15:51 +0200
-Received: by eyb7 with SMTP id 7so222447eyb.18
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2011 13:11:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=CrI45Z/LQsawBt2RXwnjr3cYsHUUGTJmaSy3IoAZ0ag=;
-	b=tidVYQ7kJHZYeHsgdAxsEPIdathub1YHAXcal+Xm3QWZu6TIFn+tgGR2p+cXFGPyf0
-	0jiIrtER7aTtX2WGb6XoJBheXJk6h/4n1VjQ9cZIApPk5Fg430QAwUHRzdeUDPv48yRO
-	7g61CMqwRNlFSsZ2MYku3eZXqgKpNRMvWMhg8=
+	Tue, 16 Aug 2011 22:23:25 +0200
+Received: (qmail 13706 invoked by uid 501); 16 Aug 2011 13:18:45 -0700
+Received: from 10.3.0.166 by snvl-smtp1.trimble.com (envelope-from
+	<Bernard_Mentink@trimble.com>, uid 108) with qmail-scanner-2.08 
+	(clamdscan: 0.97.2/13443. avast: v3.2.0/110815-1. sophie:
+	3.06/3.22.0/4.68. spamassassin: 3.3.1. Clear:RC:1(10.3.0.166):. 
+	Processed in 0.012307 secs); 16 Aug 2011 20:18:45 -0000
+Received: from unknown (HELO nzc-ap-xch-02.ap.trimblecorp.net) (10.3.0.166)
+	by snvl-smtp1.trimble.com with SMTP; 16 Aug 2011 13:18:45 -0700
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Received: by 10.213.3.200 with SMTP id 8mr989876ebo.38.1313525470547; Tue, 16
-	Aug 2011 13:11:10 -0700 (PDT)
-Received: by 10.213.106.8 with HTTP; Tue, 16 Aug 2011 13:11:10 -0700 (PDT)
-In-Reply-To: <j2e2rb$g94$2@dough.gmane.org>
-References: <j2e2rb$g94$2@dough.gmane.org>
-Date: Tue, 16 Aug 2011 15:11:10 -0500
-Message-ID: <CAD=GYpZcqHkLF4AL561ERypO9FSmy87_7iec0-Ph359-DrSAGA@mail.gmail.com>
-From: Joel A Fernandes <agnel.joel@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: "Kridner, Jason" <jdk@ti.com>
-Subject: Re: meta-oe patch status
+Date: Wed, 17 Aug 2011 08:16:17 +1200
+Message-ID: <F7C0AA5DD1508F4789E10B6CC9BB75DB04C1AEDA@nzc-ap-xch-02.ap.trimblecorp.net>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: Howto get Video Framebuufer working
+Thread-Index: AcxcUVqqxHCVbTE+SDuPsrX8jJ6BvA==
+From: "Bernard Mentink" <Bernard_Mentink@trimble.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Howto get Video Framebuufer working
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,70 +35,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2011 20:15:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 16 Aug 2011 20:23:26 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Koen,
+Hi Guys,
 
-Could you pull the first 4 commits from:
-git://github.com/joelagnel/meta-openembedded.git (branch for-koen)
+Can anyone give me a helping hand getting graphics/framebuffer working =
+on a new i.mx31 platform.
 
-These are for gedit and their dependencies, I have verified them with a build.
+I have configured everything I can think of that is required in the =
+kernel (see relevent section below) and the i.mx31 viddeo driver is =
+definetely getting built. (See the object files below)
 
-02f0fee libgnomeprint: Imported from OE classic
-8031b13 libgnomecups: Imported from OE Classic
-d9d57d5 gtksourceview: Imported from OE classic
-cad106a gedit: Imported from OE classic
+However, I do not see any /dev/fb0 device .... What do I need to do to =
+get one going?
 
-I am working on building vlc and mplayer but there are still build
-issues I'm working on, I've documented the issues in this commit [1]
-and will post some RFC patches after doing a clean rebuild.
+Cheers,
+Bernie.
 
-Thanks,
-Joel
+------------------------------------------  video stuff built =
+-----------------------------------------------
+ ls drivers/video/*.o
+drivers/video/built-in.o     drivers/video/fbcvt.o      =
+drivers/video/fbsysfs.o
+drivers/video/cfbcopyarea.o  drivers/video/fbmem.o      =
+drivers/video/modedb.o
+drivers/video/cfbfillrect.o  drivers/video/fbmon.o      =
+drivers/video/mx3fb.o
+drivers/video/cfbimgblt.o    drivers/video/fb_notify.o
+drivers/video/fbcmap.o       drivers/video/fb.o
 
-https://github.com/joelagnel/meta-openembedded/commit/40c15b361400c621a34d33eb01b14c1d831c007b
 
-On Tue, Aug 16, 2011 at 10:37 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Hi,
->
-> The current set of patches I have q'd:
->
-> + 246b0b07f771ef6d096d0ef3e488ea28c56e13c5 binutils-2.20.1: import several patches from Debian
-> + 7de84a29b3dc9b5a8987e3ba6df07de8224debf1 ckermit: import from OE rev 5350bbef01b8979617e3d0fd38939f94f1fa5315
-> + f5ac255987f6ca361ea960296925f46681a2495a ckermit: update to version 9.0
-> + 7f5254273ab360dd53672323896e3579223a2100 nodejs 0.4.2: import from OE rev e02237d7e46e60fbd9eb4a05a308e6adcf916ebb
-> + 0520132f3087eaa2a74a1b985760f15cc28b8d6b libvpx 0.9.5: import from OE rev e02237d7e46e60fbd9eb4a05a308e6adcf916ebb
-> + 567d7b4502679288fa0679e18982a3d90d44922e libav: enable libvpx
-> + 198f50f12b15ee701fdc3bfd99d2955b445d4d0a emprint: add LIC_FILES_CHKSUM
-> + 2bef2cb4ea697f3ff8d18719afe62a405587485b klibc: initial commit of version 1.5.24
-> + a1600343feea4a22da7bfa9ddb817cba787f949b klibc.bbclass: shared include for building against klibc
-> + cbcabe1ca34892c12285418c043ead8ee08d519c openssl-1.0.0d: use openssl.inc from meta-oe
-> + 403753cc6580f283a89d89fa8958bc92e895db4a connman: conditionally enable wifi and bluetooth
->
-> You can view them at https://github.com/koenkooi/meta-oe/commits/master
->
-> If you have any patches I have missed for some reason or another (e.g. missing [meta-oe]) or want to get some fixups in (e.g. reset PR to r0 for new recipes), please respond to this message.
->
-> regards,
->
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFOSo6rMkyGM64RGpERAq2OAJ4pF3eM4Ee8R/yQHb3gXunKC5gLlwCeLxV1
-> dN3d+DglZWDoXhYLiKiXSAI=
-> =/Q7h
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+--------------------------------------- kernel config =
+---------------------------------------------
+
+#
+# Graphics support
+#
+CONFIG_DRM=3Dm
+# CONFIG_VGASTATE is not set
+# CONFIG_VIDEO_OUTPUT_CONTROL is not set
+CONFIG_FB=3Dy
+# CONFIG_FIRMWARE_EDID is not set
+# CONFIG_FB_DDC is not set
+# CONFIG_FB_BOOT_VESA_SUPPORT is not set
+CONFIG_FB_CFB_FILLRECT=3Dy
+CONFIG_FB_CFB_COPYAREA=3Dy
+CONFIG_FB_CFB_IMAGEBLIT=3Dy
+# CONFIG_FB_CFB_REV_PIXELS_IN_BYTE is not set
+# CONFIG_FB_SYS_FILLRECT is not set
+# CONFIG_FB_SYS_COPYAREA is not set
+# CONFIG_FB_SYS_IMAGEBLIT is not set
+CONFIG_FB_FOREIGN_ENDIAN=3Dy
+CONFIG_FB_BOTH_ENDIAN=3Dy
+# CONFIG_FB_BIG_ENDIAN is not set
+# CONFIG_FB_LITTLE_ENDIAN is not set
+# CONFIG_FB_SYS_FOPS is not set
+# CONFIG_FB_SVGALIB is not set
+# CONFIG_FB_MACMODES is not set
+# CONFIG_FB_BACKLIGHT is not set
+# CONFIG_FB_MODE_HELPERS is not set
+# CONFIG_FB_TILEBLITTING is not set
+
+
+#
+# Frame buffer hardware drivers
+#
+# CONFIG_FB_S1D13XXX is not set
+# CONFIG_FB_VIRTUAL is not set
+# CONFIG_FB_METRONOME is not set
+# CONFIG_FB_MB862XX is not set
+CONFIG_FB_MX3=3Dy
+# CONFIG_FB_BROADSHEET is not set
+CONFIG_BACKLIGHT_LCD_SUPPORT=3Dy
+CONFIG_LCD_CLASS_DEVICE=3Dy
+# CONFIG_LCD_L4F00242T03 is not set
+# CONFIG_LCD_LMS283GF05 is not set
+# CONFIG_LCD_LTV350QV is not set
+# CONFIG_LCD_TDO24M is not set
+# CONFIG_LCD_VGG2432A4 is not set
+# CONFIG_LCD_PLATFORM is not set
+# CONFIG_LCD_S6E63M0 is not set
+CONFIG_BACKLIGHT_CLASS_DEVICE=3Dy
+CONFIG_BACKLIGHT_GENERIC=3Dy
+CONFIG_BACKLIGHT_PWM=3Dy
+# CONFIG_BACKLIGHT_ADP8860 is not set
+
+#
+# Display device support
+#
+CONFIG_DISPLAY_SUPPORT=3Dy
+
+#
+# Display hardware drivers
+#
+
+
+
+
+
+
+
 
 
