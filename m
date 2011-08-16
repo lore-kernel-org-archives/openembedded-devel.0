@@ -1,32 +1,25 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QtLoq-0001oB-Eo for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Aug 2011 17:44:44 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QtLkL-0004S5-VJ for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Aug 2011 17:40:05 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2011 17:40:05 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <sledz@dresearch-fe.de>) id 1QtNRh-00057u-Iy
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Aug 2011 19:28:57 +0200
+Received: by bkbzu17 with SMTP id zu17so113387bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2011 17:40:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 16 Aug 2011 17:37:15 +0200
-Message-ID: <j2e2rb$g94$2@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	Tue, 16 Aug 2011 10:24:17 -0700 (PDT)
+Received: by 10.204.185.65 with SMTP id cn1mr1488188bkb.109.1313515456827;
+	Tue, 16 Aug 2011 10:24:16 -0700 (PDT)
+Received: from [217.197.84.226] (recycler.in-berlin.de [217.197.84.226])
+	by mx.google.com with ESMTPS id u14sm85525bkt.62.2011.08.16.10.24.14
+	(version=SSLv3 cipher=OTHER); Tue, 16 Aug 2011 10:24:15 -0700 (PDT)
+Message-ID: <4E4AA7B7.7020006@dresearch-fe.de>
+Date: Tue, 16 Aug 2011 19:24:07 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
 	rv:5.0) Gecko/20110624 Thunderbird/5.0
-X-Enigmail-Version: 1.2
-Subject: meta-oe patch status
+MIME-Version: 1.0
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Tom Rini <tom_rini@mentor.com>
+Subject: [2011.03-maintenance] live555 update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,43 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2011 15:44:44 -0000
+X-List-Received-Date: Tue, 16 Aug 2011 17:28:57 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Is there a chance to update live555 to a newer version by cherry-picking this patch from oe-dev master?
 
-Hi,
+commit b13c2ab570637b176e1411ea3db0ddf412a9f2f3
+Author: Andrea Adami <andrea.adami@gmail.com>
+Date:   Sat Apr 23 23:57:36 2011 +0200
 
-The current set of patches I have q'd:
+    live555: catch up with upstream habits of upgrading and removing tarballs
 
-+ 246b0b07f771ef6d096d0ef3e488ea28c56e13c5 binutils-2.20.1: import several patches from Debian
-+ 7de84a29b3dc9b5a8987e3ba6df07de8224debf1 ckermit: import from OE rev 5350bbef01b8979617e3d0fd38939f94f1fa5315
-+ f5ac255987f6ca361ea960296925f46681a2495a ckermit: update to version 9.0
-+ 7f5254273ab360dd53672323896e3579223a2100 nodejs 0.4.2: import from OE rev e02237d7e46e60fbd9eb4a05a308e6adcf916ebb
-+ 0520132f3087eaa2a74a1b985760f15cc28b8d6b libvpx 0.9.5: import from OE rev e02237d7e46e60fbd9eb4a05a308e6adcf916ebb
-+ 567d7b4502679288fa0679e18982a3d90d44922e libav: enable libvpx
-+ 198f50f12b15ee701fdc3bfd99d2955b445d4d0a emprint: add LIC_FILES_CHKSUM
-+ 2bef2cb4ea697f3ff8d18719afe62a405587485b klibc: initial commit of version 1.5.24
-+ a1600343feea4a22da7bfa9ddb817cba787f949b klibc.bbclass: shared include for building against klibc
-+ cbcabe1ca34892c12285418c043ead8ee08d519c openssl-1.0.0d: use openssl.inc from meta-oe
-+ 403753cc6580f283a89d89fa8958bc92e895db4a connman: conditionally enable wifi and bluetooth
+    Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 
-You can view them at https://github.com/koenkooi/meta-oe/commits/master
+Regards,
+Steffen
 
-If you have any patches I have missed for some reason or another (e.g. missing [meta-oe]) or want to get some fixups in (e.g. reset PR to r0 for new recipes), please respond to this message.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFOSo6rMkyGM64RGpERAq2OAJ4pF3eM4Ee8R/yQHb3gXunKC5gLlwCeLxV1
-dN3d+DglZWDoXhYLiKiXSAI=
-=/Q7h
------END PGP SIGNATURE-----
-
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
