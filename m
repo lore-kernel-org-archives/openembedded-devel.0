@@ -1,21 +1,19 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from stoexhubfe02.domain01.net ([83.145.59.141])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Qt5e1-0007c0-JJ for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Aug 2011 00:28:29 +0200
-Received: from f053038207.adsl.alicedsl.de ([78.53.38.207]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Qt5Zb-000521-Qm for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Aug 2011 22:23:57 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Aug 2011 00:23:52 +0200
-Message-ID: <1313447032.4058.58.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: request for branch in OpenEmbedded Git repository
+	(envelope-from <anders@chargestorm.se>) id 1QtDtG-0007Ip-VG
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Aug 2011 09:16:48 +0200
+Received: from localhost (193.235.91.228) by stoexhubfe02.domain01.net
+	(10.12.10.7) with Microsoft SMTP Server id 8.3.137.0; Tue, 16 Aug 2011
+	09:12:09 +0200
+From: Anders Darander <anders@chargestorm.se>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 16 Aug 2011 09:12:14 +0200
+Message-ID: <cover.1313478102.git.anders@chargestorm.se>
+X-Mailer: git-send-email 1.7.5.4
+MIME-Version: 1.0
+X-GFI-SMTP-Submission: 1
+Subject: [PATCH 0/1] Import ability for libx11 to skip itself
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,43 +27,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Aug 2011 22:28:29 -0000
-X-Groupsio-MsgNum: 33602
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-J2kVRJzc3L3NO5Z0czdE"
+X-List-Received-Date: Tue, 16 Aug 2011 07:16:48 -0000
+Content-Type: text/plain
 
---=-J2kVRJzc3L3NO5Z0czdE
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+As of commit 2f94ff4fdb66755ba2448794baea19315ff96273 in oe-core, libx11 skips
+itself if x11 is not in DISTRO_FEATURES.
 
-Dear Git administrators,
+Meta-oe has its own copy of libx11.inc, thus the commit has to be applied to
+meta-oe also. This patch does the import.
+
+The following changes since commit ceb4a1deaabe81e0acaf9dd179d08736f598203e:
+
+  libxcb 1.7: turn into bbappend (2011-08-15 16:40:14 +0200)
+
+are available in the git repository at:
+  git://github.com/darander/meta-oe libx11
+  https://github.com/darander/meta-oe/tree/libx11
+
+Anders Darander (1):
+  libx11: skip self if x11 not in DISTRO_FEATURES
+
+ meta-oe/recipes-graphics/xorg-lib/libx11.inc |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
+
+-- 
+1.7.5.4
 
 
-I hope this is the right way to ask for this. If not I am sorry.
 
-Could you allow me to push a branch to the repository for my XBMC
-patches? I am not able to run test the patches right now, so it would be
-nice to be able to point people to a branch.
-
-All OE developers can push to it if they want and when it is merged to
-oe.dev the branch can also be deleted. `xbmc` would work as a name.
-
-
-Thanks,
-
-Paul
-
---=-J2kVRJzc3L3NO5Z0czdE
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk5JnHgACgkQPX1aK2wOHVjkJwCfZYaYoB2AfEqGsKRt4l7s1yjo
-F/0AniYZmsJMcGTYzAslELiiZSeFUuty
-=aGDf
------END PGP SIGNATURE-----
-
---=-J2kVRJzc3L3NO5Z0czdE--
