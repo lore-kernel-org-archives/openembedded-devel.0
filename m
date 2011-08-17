@@ -1,30 +1,34 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1QtfMD-0008WD-EW
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Aug 2011 14:36:29 +0200
-Received: by gyg4 with SMTP id 4so662756gyg.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QthpN-0004eB-FO for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Aug 2011 17:14:45 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Qthks-0003tP-2s for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Aug 2011 17:10:06 +0200
+Received: from wsip-70-167-244-14.dc.dc.cox.net ([70.167.244.14])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Aug 2011 17:10:06 +0200
+Received: from theyorks42 by wsip-70-167-244-14.dc.dc.cox.net with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Aug 2011 05:31:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=iNoINvAyNyqwLdCSpAtbMl/S69bUkwJ4BINpTl67TJY=;
-	b=Q5VZofe06Yd7BY56ZxAEoArUG3g4hxF7nIjl2NE8gqYelYA8J+G2hTx8mvHYzJ2ElI
-	Uw2AvuRiyVQEL8IZK5e86rO2GsMWHSUY4oZS1/E75yKe6IsTS13wpLOlEfJAZZe5lAOo
-	2nCHY4VYoszes3WssYW0icHN8Mi5ph0OO2w8Q=
-MIME-Version: 1.0
-Received: by 10.236.184.233 with SMTP id s69mr3050036yhm.94.1313584310312;
-	Wed, 17 Aug 2011 05:31:50 -0700 (PDT)
-Received: by 10.236.106.100 with HTTP; Wed, 17 Aug 2011 05:31:50 -0700 (PDT)
-In-Reply-To: <CAOd_LFyt71x1pYU+LZGLDAbTFBGeS+5YmUtE5-RQkm9WL66jxw@mail.gmail.com>
-References: <CAOd_LFx5+NyXY4cTZ76yfccaFea8_WsFm2t_ZnkLk1xKD9Xzyw@mail.gmail.com>
-	<CAOd_LFyt71x1pYU+LZGLDAbTFBGeS+5YmUtE5-RQkm9WL66jxw@mail.gmail.com>
-Date: Wed, 17 Aug 2011 08:31:50 -0400
-Message-ID: <CAOd_LFxmSkRCm_y7EYBa2szURSeje0CUrXdvX_bo6C6Vzm-DXg@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: error building PXA270 target with oe-core/angstrom
+	Wed, 17 Aug 2011 17:10:06 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Kendall York <theyorks42@yahoo.com>
+Date: Wed, 17 Aug 2011 13:40:34 +0000 (UTC)
+Message-ID: <loom.20110817T153621-464@post.gmane.org>
+References: <76E258664B189C4CBEF125491CA11ECC9445E0CF93@KCINPUNHJCMS01.kpit.com>
+	<AANLkTikH4eGT4ZqBHeL1aiNjwOyNJaETz5Skex_sYo2a@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 70.167.244.14 (Mozilla/5.0 (X11; Linux i686;
+	rv:2.0.1) Gecko/20100101 Firefox/4.0.1)
+Subject: Re: ERROR: Please set the 'PERSISTENT_DIR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,28 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Aug 2011 12:36:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 17 Aug 2011 15:14:45 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Aug 16, 2011 at 5:19 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
-> On Tue, Aug 16, 2011 at 3:32 PM, Cliff Brake <cliff.brake@gmail.com> wrot=
-e:
->> Has anyone build oe-core/angstrom for a PXA270 target recently? =A0I
->> tried spitz, and am getting the following:
->
-> The build that is failing is on a Ubuntu 10.10 machine. =A0The same
-> setup on a Ubuntu 11.04 machine seems to get past gcc-cross-initial,
-> and a beagleboard build on my 10.10 machine that is failing with spitz
-> also seems to be working. =A0Maybe I'll clean and try again.
+Frans Meulenbroeks <fransmeulenbroeks <at> gmail.com> writes:
 
-The failing build seemed to work the 2nd time after I cleaned tmp ,
-and restarted -- strange!
+> 
+> 2010/6/8 Soumya R <Soumya.R <at> kpitcummins.com>:
+> > Hi All ,
+> >
+> >   I am getting the error while configuring the bitbake
+> > [root <at> fedora12 bitbake-1.8.18]# bitbake nano
+> > ERROR: Please set the 'PERSISTENT_DIR' or 'CACHE' variable.
+> > I got the sources of the bitbake and gave following commands
+> > python setup.py build
+> > python setup.py install
+> >
+> >  Please help me out to resolve this error..
+> 
+> I suggest following the instructions:
+> http://wiki.openembedded.net/index.php/Getting_Started
+> guess your local.conf is not ok or not present at all.
+> Google has plenty of pages on this (and some actually carry answers  )
+> 
+> FM
+> 
+Ok so here is the deal. If you followed the getting started guide and only typed
+the Set Enviroment cmds into the terminal than the window you have open is the
+only one that bitbake will work in. You have to set your profile up so that the
+PATH is set for your shell. Or you have to manually set PATH each time you open
+a new terminal window.
 
-Cliff
+Kendall
 
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-http://bec-systems.com
 
 
