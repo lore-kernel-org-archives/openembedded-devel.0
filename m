@@ -1,34 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QthpN-0004eB-FO for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Aug 2011 17:14:45 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Qthks-0003tP-2s for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Aug 2011 17:10:06 +0200
-Received: from wsip-70-167-244-14.dc.dc.cox.net ([70.167.244.14])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Aug 2011 17:10:06 +0200
-Received: from theyorks42 by wsip-70-167-244-14.dc.dc.cox.net with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <agnel.joel@gmail.com>) id 1QthyT-0004qZ-Oi
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Aug 2011 17:24:10 +0200
+Received: by ewy5 with SMTP id 5so429178ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Aug 2011 17:10:06 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 17 Aug 2011 08:19:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=CMkP5CU/OFeHNU4SN1zYyAGYTUm1P1wXIdjL8N1gN6I=;
+	b=WA+hAfqR1Iv46mPeTjdPlqRyeL6dNy54WwNH6wUgI1omerdPy6+OehlZVgAKwWyZ6j
+	TBAhduuvTSLMJ/+b1IA0Z4+a5ARNq67NQQI+kBrLeawGvlguqOKbFLx8lB4f+m0VSYFY
+	WZBDi9+aLjudQTjubUA1/Ag4TXULhhMHYMUmo=
+MIME-Version: 1.0
+Received: by 10.213.26.216 with SMTP id f24mr1219611ebc.2.1313594370784; Wed,
+	17 Aug 2011 08:19:30 -0700 (PDT)
+Received: by 10.213.106.8 with HTTP; Wed, 17 Aug 2011 08:19:30 -0700 (PDT)
+In-Reply-To: <j2fqe3$jor$3@dough.gmane.org>
+References: <j2e2rb$g94$2@dough.gmane.org>
+	<CAD=GYpZcqHkLF4AL561ERypO9FSmy87_7iec0-Ph359-DrSAGA@mail.gmail.com>
+	<j2fqe3$jor$3@dough.gmane.org>
+Date: Wed, 17 Aug 2011 10:19:30 -0500
+Message-ID: <CAD=GYpZn2nq6d8=DDG=oj4jOFQC6=WeMTn+cNcEb-QEhCW8FzA@mail.gmail.com>
+From: Joel A Fernandes <agnel.joel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Kendall York <theyorks42@yahoo.com>
-Date: Wed, 17 Aug 2011 13:40:34 +0000 (UTC)
-Message-ID: <loom.20110817T153621-464@post.gmane.org>
-References: <76E258664B189C4CBEF125491CA11ECC9445E0CF93@KCINPUNHJCMS01.kpit.com>
-	<AANLkTikH4eGT4ZqBHeL1aiNjwOyNJaETz5Skex_sYo2a@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 70.167.244.14 (Mozilla/5.0 (X11; Linux i686;
-	rv:2.0.1) Gecko/20100101 Firefox/4.0.1)
-Subject: Re: ERROR: Please set the 'PERSISTENT_DIR
+Cc: "Kooi, Koen" <k-kooi@ti.com>
+Subject: Re: meta-oe patch status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,39 +40,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Aug 2011 15:14:45 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 17 Aug 2011 15:24:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Frans Meulenbroeks <fransmeulenbroeks <at> gmail.com> writes:
+On Wed, Aug 17, 2011 at 2:25 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Op 16-08-11 22:11, Joel A Fernandes schreef:
+>> Hi Koen,
+>>
+>> Could you pull the first 4 commits from: git://github.com/joelagnel/meta-openembedded.git (branch for-koen)
+>>
+>> These are for gedit and their dependencies, I have verified them with a build.
+>>
+>> 02f0fee libgnomeprint: Imported from OE classic 8031b13 libgnomecups: Imported from OE Classic d9d57d5 gtksourceview: Imported from OE classic cad106a gedit: Imported from OE classic
+>
+> Can you please send them here for review first?
 
-> 
-> 2010/6/8 Soumya R <Soumya.R <at> kpitcummins.com>:
-> > Hi All ,
-> >
-> >   I am getting the error while configuring the bitbake
-> > [root <at> fedora12 bitbake-1.8.18]# bitbake nano
-> > ERROR: Please set the 'PERSISTENT_DIR' or 'CACHE' variable.
-> > I got the sources of the bitbake and gave following commands
-> > python setup.py build
-> > python setup.py install
-> >
-> >  Please help me out to resolve this error..
-> 
-> I suggest following the instructions:
-> http://wiki.openembedded.net/index.php/Getting_Started
-> guess your local.conf is not ok or not present at all.
-> Google has plenty of pages on this (and some actually carry answers  )
-> 
-> FM
-> 
-Ok so here is the deal. If you followed the getting started guide and only typed
-the Set Enviroment cmds into the terminal than the window you have open is the
-only one that bitbake will work in. You have to set your profile up so that the
-PATH is set for your shell. Or you have to manually set PATH each time you open
-a new terminal window.
+Sure, I will post them here as an RFC
 
-Kendall
+thank you,
 
+Joel
+
+
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFOS20DMkyGM64RGpERAlWNAJ93N6pP9yHMEibKNCMvQ5lLo4cXCACeLfJj
+> 83bcU10oO4xfoMNmvs1xQdU=
+> =r6ep
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
