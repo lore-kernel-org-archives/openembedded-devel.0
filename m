@@ -1,28 +1,24 @@
-Received: from mail2.eads.net ([80.156.45.114] helo=mail.eads.net)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
-	id 1QtbNq-00026i-UP; Wed, 17 Aug 2011 10:21:55 +0200
-Received: from gsx3072-vs5.mxchg.m.corp ([53.147.176.149])
-	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id p7H8HKAk029226; 
-	Wed, 17 Aug 2011 10:17:21 +0200
-Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
-	gsx3072-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Wed, 17 Aug 2011 10:17:16 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Wed, 17 Aug 2011 10:17:16 +0200
-Message-ID: <0C757E680E33864AB113392C7E83F910BE51D8@GSX300A.mxchg.m.corp>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: Problems with generating and installing locale packages of
-	eglibc/glibc
-Thread-Index: AcxcthMDPa6h+glHQhC6TR7+CD2whw==
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
-To: <openembedded-devel@lists.openembedded.org>,
-	<openembedded-core@lists.openembedded.org>
-X-OriginalArrivalTime: 17 Aug 2011 08:17:16.0856 (UTC)
-	FILETIME=[138AAB80:01CC5CB6]
-Subject: Problems with generating and installing locale packages of eglibc/glibc
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QtbO4-00029y-Rg for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Aug 2011 10:22:08 +0200
+Received: from f053037177.adsl.alicedsl.de ([78.53.37.177]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QtbJi-0003Zj-0p for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Aug 2011 08:17:38 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1313556715-28652-2-git-send-email-pespin.shar@gmail.com>
+References: <1313556715-28652-1-git-send-email-pespin.shar@gmail.com>
+	<1313556715-28652-2-git-send-email-pespin.shar@gmail.com>
+Date: Wed, 17 Aug 2011 10:17:31 +0200
+Message-ID: <1313569051.4294.11.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH 2/2] enjoy: make it work with shr-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,167 +32,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Aug 2011 08:21:56 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Wed, 17 Aug 2011 08:22:09 -0000
+X-Groupsio-MsgNum: 33663
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Jtw+Ff30W52VhZmvQGqS"
+
+--=-Jtw+Ff30W52VhZmvQGqS
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
-
-we generated some locale packages of eglibc and wanted to install them
-while offline image generation. The locale-base* packages are installed
-properly, but the corresponding packages e.g. eglibc-binary-localedata-*
-are not installed.(the same occurs with glibc).
-we use following settings:
-
-2011.03-mainenance branch
-
-local.conf:
-***
-ENABLE_BINARY_LOCALE_GENERATION =3D "1"
-LOCALE_GENERATION_WITH_CROSS-LOCALEDEF =3D "1"
-GLIBC_INTERNAL_USE_BINARY_LOCALE =3D "compile"
-GLIBC_GENERATE_LOCALES =3D "en_US.UTF-8 en_GB.UTF-8 de_DE.UTF-8
-de_CH.UTF-8 es_ES.
-UTF-8 fr_FR.UTF-8 fr_CH.UTF-8 it_IT.UTF-8 it_CH.UTF-8"
-***
-
-xx-image.bb:
-***
-IMAGE_LINGUAS =3D "en-us en-gb de-de de-ch es-es fr-fr fr-ch it-it =
-it-ch"
-
-ROOTFS_POSTPROCESS_COMMAND +=3D "install_linguas;"
-***
-
-The "locale-base-*" packages (e.g de-de) got following package
-description:
-
-****
-dpkg-deb -I locale-base-de-de_2.12-r21.8+svnr12323.9_armv7a.ipk
- new debian package, version 2.0.
- size 906 bytes: control archive=3D 608 bytes.
-     808 bytes,    14 lines      control             =20
- Package: locale-base-de-de
- Version: 2.12-r21.8+svnr12323.9
- Description: Embedded GNU C Library
- Section: libs
- Priority: required
- Maintainer: Angstrom Developers <angstrom-distro-devel@linuxtogo.org>
- License: LGPL
- Architecture: armv7a
- OE: eglibc
- Homepage: http://www.eglibc.org/home
- Build: <unknown>/9426
- Depends: eglibc-binary-localedata-de.de
- Provides: virtual-locale-de-de, virtual-locale-de,
-eglibc-binary-localedata-de.de
- Source: svn://svn.eglibc.org/branches;module=3Deglibc-2_12;proto=3Dsvn
-file://eglibc-svn-arm-lowlevellock-include-tls.patch
-file://IO-acquire-lock-fix.patch file://shorten-build-commands.patch
-file://sh4_set_fpscr_2.12.patch file://sh4_local-fpscr_values.patch
-file://eglibc-dont-cache-slibdir.patch
-file://armv4-eabi-compile-fix.patch file://etc/ld.so.conf
-file://generate-supported.mk=20
-***
-
-this causes that the corresponding eglibc-binary-localedata-* packages
-are not installed while offline image creation.
-
-The problem is the wrong dependency entry (here: "Depends:
-eglibc-binary-localedata-de.de" package name is
-eglibc-binary-localedata-de-de) and the "self providing" entry (here:
-"Provides: virtual-locale-de-de, virtual-locale-de,
-eglibc-binary-localedata-de.de").
-
-After examine the history of the locale generation, we found a change
-from glibc-package.bbclass to libc-package.bbclass after the
-release-2010.12. Hereby the function "output_locale_binary_rdepends" is
-different.
-
-Version release-2010.12
-glibc-packages.bbclass
-
-***
-	def output_locale_binary_rdepends(name, pkgname, locale,
-encoding):
-		m =3D re.match("(.*)\.(.*)", name)
-		if m:
-			glibc_name =3D "%s.%s" % (m.group(1),
-m.group(2).lower().replace("-",""))
-		else:
-			glibc_name =3D name
-		bb.data.setVar('RDEPENDS_%s' % pkgname,
-legitimize_package_name('glibc-binary-localedata-%s' % glibc_name), d)
-***
-
-Version 2011.03-maintenance:
-libc-packages.bbclass
-
-***
-	def output_locale_binary_rdepends(name, pkgname, locale,
-encoding):
-		m =3D re.match("(.*)_(.*)", name)
-		if m:
-			libc_name =3D "%s.%s" % (m.group(1),
-m.group(2).lower().replace("-",""))
-		else:
-			libc_name =3D name
-		bb.data.setVar('RDEPENDS_%s' % pkgname,
-legitimize_package_name('%s-binary-localedata-%s' \
-			% (bpn, libc_name)), d)
-		rprovides =3D (bb.data.getVar('RPROVIDES_%s' % pkgname, d,
-True) or "").split()
-=09
-rprovides.append(legitimize_package_name('%s-binary-localedata-%s' %
-(bpn, libc_name)))
-		bb.data.setVar('RPROVIDES_%s' % pkgname, "
-".join(rprovides), d)
-***
-
-If we use the old function, the locale packages are processed and
-installed properly.
-
-The "locale-base-*" package description now was:
-
-***
-dpkg-deb -I locale-base-de-de_2.12-r21.8+svnr12323.9_armv7a.ipk
- new debian package, version 2.0.
- size 902 bytes: control archive=3D 604 bytes.
-     776 bytes,    14 lines      control             =20
- Package: locale-base-de-de
- Version: 2.12-r21.8+svnr12323.9
- Description: Embedded GNU C Library
- Section: libs
- Priority: required
- Maintainer: Angstrom Developers <angstrom-distro-devel@linuxtogo.org>
- License: LGPL
- Architecture: armv7a
- OE: eglibc
- Homepage: http://www.eglibc.org/home
- Build: <unknown>/9196
- Depends: eglibc-binary-localedata-de-de
- Provides: virtual-locale-de-de, virtual-locale-de
- Source: svn://svn.eglibc.org/branches;module=3Deglibc-2_12;proto=3Dsvn
-file://eglibc-svn-arm-lowlevellock-include-tls.patch
-file://IO-acquire-lock-fix.patch file://shorten-build-commands.patch
-file://sh4_set_fpscr_2.12.patch file://sh4_local-fpscr_values.patch
-file://eglibc-dont-cache-slibdir.patch
-file://armv4-eabi-compile-fix.patch file://etc/ld.so.conf
-file://generate-supported.mk
-***
-
-Our questions now:
-
-What was the intention of the changes in the function
-"output_locale_binary_rdepends"?
-Is there a problem using the old function for our local installation ?
-What language definition patterns (in GLIBC_GENERATE_LOCALES) should be
-covered by the new function ?
-Is this a bug ?
-
-Regards
-Wolfgang Hauser
+Dear Pau,
 
 
+thank you for your patches.
+
+Am Mittwoch, den 17.08.2011, 06:51 +0200 schrieb Pau Espin Pedrol:
+> * added LIC_FILES_CHKSUM
+
+Please always use present tense in commit messages.
+
+> * added virtual/gettext as it seems it is needed now (it didn't build fin=
+e without it)
+
+What is the exact error? It built fine in oe.dev as far as I remember.
+Additionally should `inherit gettext` be used?
+
+> * RDEPENDS: added new gstreamer module gst-plugins-good-autodetect needed=
+ for enjoy to be able to play files
+> * RDEPENDS: updated all other module names because they changed in shr-co=
+re
+
+Please always send one patch for one change, which makes it easier to
+review. It would be great if you could resend your patch as three
+patches (license, build fix and if feasible each RDEPENDS).
+
+> Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com>
+> ---
+>  meta-efl/recipes-efl/e17/enjoy_svn.bb |   13 ++++++++-----
+>  1 files changed, 8 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/meta-efl/recipes-efl/e17/enjoy_svn.bb b/meta-efl/recipes-efl=
+/e17/enjoy_svn.bb
+> index eab81b4..c6394c7 100644
+> --- a/meta-efl/recipes-efl/e17/enjoy_svn.bb
+> +++ b/meta-efl/recipes-efl/e17/enjoy_svn.bb
+> @@ -5,7 +5,10 @@ SRCREV =3D "${EFL_SRCREV}"
+>  PV =3D "0.0+svnr${SRCPV}"
+>  PR =3D "r4"
+> =20
+> -DEPENDS +=3D "gst-plugins-good ${@base_conditional('ENTERPRISE_DISTRO', =
+'1', '', 'gst-plugins-ugly', d)}"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D0f507c68d42d1cc0fcb507d007112=
+bf2"
+
+Please look at the style guide where to add such fields. In this case it
+is not listed directly but it should go right below `LICENSE`.
+
+> +
+> +
+> +DEPENDS +=3D "virtual/gettext gst-plugins-good ${@base_conditional('ENTE=
+RPRISE_DISTRO', '1', '', 'gst-plugins-ugly', d)}"
+> =20
+>  #1st needed for all formats
+>  #2nd needed for mp3 playback
+> @@ -13,10 +16,10 @@ DEPENDS +=3D "gst-plugins-good ${@base_conditional('E=
+NTERPRISE_DISTRO', '1', '', '
+>  #4th needed for flac playback
+>  #5th needed binary to create db
+>  RDEPENDS +=3D "\
+> -	gst-plugin-typefindfunctions gst-plugin-playbin gst-plugin-volume gst-p=
+lugin-decodebin2  \
+> -	${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'gst-plugin-mad gst-p=
+lugin-id3demux', d)} \
+> -	gst-plugin-ogg gst-plugin-ivorbisdec \
+> -	gst-plugin-flac \
+> +	gst-plugins-base-typefindfunctions gst-plugins-base-playbin gst-plugins=
+-base-volume gst-plugins-base-decodebin2 gst-plugins-good-autodetect \
+> +	${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'gst-plugins-ugly-mad=
+ gst-plugins-good-id3demux', d)} \
+> +	gst-plugins-base-ogg gst-plugins-base-ivorbisdec \
+> +	gst-plugins-good-flac \
+>  	lightmediascanner-test \
+>  	"
+
+
+Thanks,
+
+Paul
+
+
+[1] http://wiki.openembedded.org/index.php/Styleguide
+
+--=-Jtw+Ff30W52VhZmvQGqS
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk5LeRsACgkQPX1aK2wOHVgXmwCcDytkmKuFtH7BwMSaJyEKoSXk
+AP4AnionSpI+KpZGV+3n2cggW1rB6WtM
+=mIgu
+-----END PGP SIGNATURE-----
+
+--=-Jtw+Ff30W52VhZmvQGqS--
