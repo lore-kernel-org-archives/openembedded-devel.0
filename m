@@ -1,34 +1,24 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QtauE-0007PU-Db
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Aug 2011 09:51:18 +0200
-Received: by fxg11 with SMTP id 11so553648fxg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Aug 2011 00:46:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=0KD/8Wy783LRCFguzXSF5+peE/PYc92lgqA8aEHgAX8=;
-	b=u2s3Scc1tjEreiD8G/zlToMKTfPE4/hbReefLo8eh/xzA5Wh2K1HCvobb/PtXQ/9uV
-	cUaNLVgQP9JC0FSrEfi5x01rc6XXsXKSLaAzKAis1D58zMDqHMk7qKzpYrnTScSsmljJ
-	NsBxJoA/aSCb6KgyqTvtbmcon4JZq3hz/skzA=
-Received: by 10.223.149.199 with SMTP id u7mr972608fav.129.1313567199381;
-	Wed, 17 Aug 2011 00:46:39 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b14sm689601fab.19.2011.08.17.00.46.37
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 17 Aug 2011 00:46:38 -0700 (PDT)
-Date: Wed, 17 Aug 2011 09:46:31 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QtbFC-0008Lx-L8 for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Aug 2011 10:12:58 +0200
+Received: from f053037177.adsl.alicedsl.de ([78.53.37.177]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QtbAp-0003YT-Jm for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Aug 2011 08:08:27 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110817074631.GD10195@jama.jama.net>
-References: <1313556715-28652-1-git-send-email-pespin.shar@gmail.com>
-	<j2fqml$jor$4@dough.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <j2fqml$jor$4@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH 1/2] lightmediascanner: added recipe for v0.4.3
+In-Reply-To: <41c00fa60312c83a2a9d8a296430b98f37c1991e.1313561874.git.anders@chargestorm.se>
+References: <cover.1313561874.git.anders@chargestorm.se>
+	<41c00fa60312c83a2a9d8a296430b98f37c1991e.1313561874.git.anders@chargestorm.se>
+Date: Wed, 17 Aug 2011 10:08:20 +0200
+Message-ID: <1313568501.4294.4.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [meta-oe][PATCH v3 2/2] ckermit: update to version 9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,79 +32,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Aug 2011 07:51:18 -0000
-X-Groupsio-MsgNum: 33660
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="6WlEvdN9Dv0WHSBl"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 17 Aug 2011 08:12:58 -0000
+X-Groupsio-MsgNum: 33661
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-/dyQoNJRMBnZLPl9KFCY"
 
---6WlEvdN9Dv0WHSBl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--=-/dyQoNJRMBnZLPl9KFCY
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 17, 2011 at 09:30:29AM +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 17-08-11 06:51, Pau Espin Pedrol schreef:
-> > Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com> --- .../recipes=
--efl/e17/lightmediascanner_0.4.3.0.bb   |   29 ++++++++++++++++++++ 1 files=
- changed, 29 insertions(+), 0 deletions(-) create mode 100644 meta-efl/reci=
-pes-efl/e17/lightmediascanner_0.4.3.0.bb
-> >=20
-> > diff --git a/meta-efl/recipes-efl/e17/lightmediascanner_0.4.3.0.bb b/me=
-ta-efl/recipes-efl/e17/lightmediascanner_0.4.3.0.bb new file mode 100644 in=
-dex 0000000..dd0b283 --- /dev/null +++ b/meta-efl/recipes-efl/e17/lightmedi=
-ascanner_0.4.3.0.bb @@ -0,0 +1,29 @@ +DESCRIPTION =3D "Lightweight media
-> > scanner meant to be used in not-so-powerful devices" +SECTION =3D "libs=
-/multimedia" +AUTHOR =3D "Profusion"
->=20
-> Maybe profusion.mobi might be clearer
->=20
-> > +LICENSE =3D "LGPLv2.1+" +DEPENDS =3D "sqlite3 flac" +SRC_URI =3D "http=
-s://garage.maemo.org/frs/download.php/9439/lightmediascanner-${PV}.tar.bz2"=
- + +PE =3D "1"
->=20
-> meta-efl is a fresh start, so PE can be dropped
->=20
-> > + +inherit autotools pkgconfig + +do_install_append() { +    install -d=
- ${D}/${bindir}/ +    install -m 755 ${WORKDIR}/${PN}-${PV}/src/bin/.libs/t=
-est  ${D}/${bindir}/test-lms +} + + +LIC_FILES_CHKSUM =3D "file://COPYING;m=
-d5=3Da6f89e2100d9b6cdffcea4f398e37343"
->=20
-> Move that next to LICENSE
->=20
-> > +PACKAGES =3D+ "${PN}-test" + +FILES_${PN}-test =3D "${bindir}/test-lms=
-" + +FILES_${PN}-dbg +=3D "${libdir}/${PN}/plugins/.debug" + +SRC_URI[md5su=
-m] =3D "188ff5188cfa0f2504a42934c969cb77" +SRC_URI[sha256sum] =3D "bdbe7665=
-5ad212b936fb3cf6a9ca725e318ddeb57cd7d950d9c8409297d3b0da"
->=20
-> And move those next to SRC_URI
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->=20
-> iD8DBQFOS24VMkyGM64RGpERAlquAJ97wZaWiNLYg41n3q3O9vGiqJ6qaQCfVO5+
-> h0YoTC9/SmvV07UKzu/qdLo=3D
-> =3D55Qv
-> -----END PGP SIGNATURE-----
+Dear Anders,
 
-+ I've already talked with pespin about moving it from recipes-efl/e17 to
-recipes-multimedia or something like that.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Am Mittwoch, den 17.08.2011, 08:25 +0200 schrieb Anders Darander:
+> The update changes the license from kermit to BSD.
+> Remove the NOAPCS compile flag to make the new version compile cleanly.
+>=20
+> Signed-off-by: Anders Darander <anders@chargestorm.se>
 
---6WlEvdN9Dv0WHSBl
+thank you very much for incorporating the review comments. You can add
+my Acked-by line next time to your patch iterations if you want to.
+
+> ---
+>  .../ckermit/{ckermit_211.bb =3D> ckermit_301.bb}     |   54 +++---------=
+--------
+>  1 files changed, 7 insertions(+), 47 deletions(-)
+>  rename meta-oe/recipes-support/ckermit/{ckermit_211.bb =3D> ckermit_301.=
+bb} (49%)
+>=20
+> diff --git a/meta-oe/recipes-support/ckermit/ckermit_211.bb b/meta-oe/rec=
+ipes-support/ckermit/ckermit_301.bb
+> similarity index 49%
+> rename from meta-oe/recipes-support/ckermit/ckermit_211.bb
+> rename to meta-oe/recipes-support/ckermit/ckermit_301.bb
+> index 3715dcc..c789ea5 100644
+> --- a/meta-oe/recipes-support/ckermit/ckermit_211.bb
+> +++ b/meta-oe/recipes-support/ckermit/ckermit_301.bb
+> @@ -5,51 +5,11 @@ sessions, file transfer, character-set translation, and=
+ automation \
+>  of communication tasks."
+>  HOMEPAGE =3D "http://www.columbia.edu/kermit/"
+>  SECTION =3D "console/network"
+> -LICENSE =3D "Kermit"
+> -LIC_FILES_CHKSUM =3D "file://COPYING.TXT;md5=3D17dabbd2543933464b6d32083=
+c3a3596"
+> -SRC_URI =3D "ftp://kermit.columbia.edu/kermit/archives/cku${PV}.tar.gz;s=
+ubdir=3D${BPN}-${PV}"
+> +LICENSE =3D "BSD-3-Clause"
+> +LIC_FILES_CHKSUM =3D "file://COPYING.TXT;md5=3D932ca542d6c6cb8a59a0bcd76=
+ab67cc3"
+> +SRC_URI =3D "ftp://www.columbia.edu/kermit/archives/cku${PV}.tar.gz;subd=
+ir=3D${BPN}-${PV}"
+
+Koen already applied your patches, so this is just a note to please also
+add such changes to the commit message next time. Especially since the
+former URL seems to be the one used on the download page [1].
+
+[=E2=80=A6]
+
+
+Thank you again for your patches,
+
+Paul
+
+
+[1] http://www.columbia.edu/kermit/ck90.html#source
+
+--=-/dyQoNJRMBnZLPl9KFCY
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAk5LcdcACgkQN1Ujt2V2gByOAACfYErJqCt1WxmSUIURTxbWYAgY
-cmQAnih+HkwJimoaYKtZkSPvgS5Hxfp3
-=Ri2W
+iEYEABECAAYFAk5Ldu8ACgkQPX1aK2wOHVinpACfUhK7U7hq1q0YXYyzN5iZdq59
+8gYAn0J1bXTzjY7vmPya/kbAzouzI6RU
+=H+Zg
 -----END PGP SIGNATURE-----
 
---6WlEvdN9Dv0WHSBl--
+--=-/dyQoNJRMBnZLPl9KFCY--
