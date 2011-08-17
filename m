@@ -1,29 +1,30 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1QtR6w-0003r8-67
+	(envelope-from <pespin.shar@gmail.com>) id 1QtYBi-0000oc-2h
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Aug 2011 23:23:46 +0200
-Received: by gyg4 with SMTP id 4so280798gyg.6
+	Wed, 17 Aug 2011 06:57:10 +0200
+Received: by wwe32 with SMTP id 32so456131wwe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2011 14:19:08 -0700 (PDT)
+	Tue, 16 Aug 2011 21:52:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=c+MaNILlWkQ/NSq9RwaD4d7blod8jvdRSVo5WGKuYJE=;
-	b=A8ky5WT7GwU2tBkvboCk8OjrITRO/mL+SeGgyNgZThrFOXeVGmYWzEnuqHTEER6ZuL
-	TMVVXClb/U/MW7WgnvyCaXW5hTtKOt2I6QSS930oMHsVKhVAymq7x8VZ3JDQOl5yZTiQ
-	z5ZBgD15MdbSDUgvOTKTi28TFybEKtOG0fuR0=
-MIME-Version: 1.0
-Received: by 10.236.184.233 with SMTP id s69mr751202yhm.94.1313529547555; Tue,
-	16 Aug 2011 14:19:07 -0700 (PDT)
-Received: by 10.236.106.100 with HTTP; Tue, 16 Aug 2011 14:19:07 -0700 (PDT)
-In-Reply-To: <CAOd_LFx5+NyXY4cTZ76yfccaFea8_WsFm2t_ZnkLk1xKD9Xzyw@mail.gmail.com>
-References: <CAOd_LFx5+NyXY4cTZ76yfccaFea8_WsFm2t_ZnkLk1xKD9Xzyw@mail.gmail.com>
-Date: Tue, 16 Aug 2011 17:19:07 -0400
-Message-ID: <CAOd_LFyt71x1pYU+LZGLDAbTFBGeS+5YmUtE5-RQkm9WL66jxw@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: error building PXA270 target with oe-core/angstrom
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=oSubpdyyHFEuwet+BOlHsRcUQnF8xUxpVfAd5PaWpug=;
+	b=EbEcYB+Kc3YqJ6iJHj3tlAY3V8kF+87WrmDay4lT8AYh7ZeXC5igusnu3dNZavpnss
+	aPEuGyADUmIb+UyAZmjCM3o4CXbtIBZbmTVb+GIGYXgh8OgXChtv2ZT/ka/490dZYOgU
+	FPmIfZIfndDdgh1Q/hp8Jo8cyPUHGIpcLQk84=
+Received: by 10.216.67.134 with SMTP id j6mr430081wed.0.1313556752007;
+	Tue, 16 Aug 2011 21:52:32 -0700 (PDT)
+Received: from localhost.localdomain (70.pool85-50-85.dynamic.orange.es
+	[85.50.85.70])
+	by mx.google.com with ESMTPS id p49sm492690weq.31.2011.08.16.21.52.29
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 16 Aug 2011 21:52:30 -0700 (PDT)
+From: Pau Espin Pedrol <pespin.shar@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 17 Aug 2011 06:51:54 +0200
+Message-Id: <1313556715-28652-1-git-send-email-pespin.shar@gmail.com>
+X-Mailer: git-send-email 1.7.6
+Subject: [PATCH 1/2] lightmediascanner: added recipe for v0.4.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,24 +38,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2011 21:23:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 17 Aug 2011 04:57:10 -0000
 
-On Tue, Aug 16, 2011 at 3:32 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
-> Has anyone build oe-core/angstrom for a PXA270 target recently? =A0I
-> tried spitz, and am getting the following:
+Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com>
+---
+ .../recipes-efl/e17/lightmediascanner_0.4.3.0.bb   |   29 ++++++++++++++++++++
+ 1 files changed, 29 insertions(+), 0 deletions(-)
+ create mode 100644 meta-efl/recipes-efl/e17/lightmediascanner_0.4.3.0.bb
 
-The build that is failing is on a Ubuntu 10.10 machine.  The same
-setup on a Ubuntu 11.04 machine seems to get past gcc-cross-initial,
-and a beagleboard build on my 10.10 machine that is failing with spitz
-also seems to be working.  Maybe I'll clean and try again.
+diff --git a/meta-efl/recipes-efl/e17/lightmediascanner_0.4.3.0.bb b/meta-efl/recipes-efl/e17/lightmediascanner_0.4.3.0.bb
+new file mode 100644
+index 0000000..dd0b283
+--- /dev/null
++++ b/meta-efl/recipes-efl/e17/lightmediascanner_0.4.3.0.bb
+@@ -0,0 +1,29 @@
++DESCRIPTION = "Lightweight media scanner meant to be used in not-so-powerful devices"
++SECTION = "libs/multimedia"
++AUTHOR = "Profusion"
++LICENSE = "LGPLv2.1+"
++DEPENDS = "sqlite3 flac"
++SRC_URI = "https://garage.maemo.org/frs/download.php/9439/lightmediascanner-${PV}.tar.bz2"
++
++PE = "1"
++
++inherit autotools pkgconfig
++
++do_install_append() {
++    install -d ${D}/${bindir}/
++    install -m 755 ${WORKDIR}/${PN}-${PV}/src/bin/.libs/test  ${D}/${bindir}/test-lms
++}
++
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
++
++PACKAGES =+ "${PN}-test"
++
++FILES_${PN}-test = "${bindir}/test-lms"
++
++FILES_${PN}-dbg += "${libdir}/${PN}/plugins/.debug"
++
++SRC_URI[md5sum] = "188ff5188cfa0f2504a42934c969cb77"
++SRC_URI[sha256sum] = "bdbe76655ad212b936fb3cf6a9ca725e318ddeb57cd7d950d9c8409297d3b0da"
++
++
+-- 
+1.7.6
 
-Thanks,
-Cliff
-
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-http://bec-systems.com
 
 
