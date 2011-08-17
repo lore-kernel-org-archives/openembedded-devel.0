@@ -1,30 +1,34 @@
-Received: from stoexhubfe02.domain01.net ([83.145.59.141])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1QtZfX-0004hB-Vf
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Aug 2011 08:32:05 +0200
-Received: from localhost (193.235.91.228) by stoexhubfe02.domain01.net
-	(10.12.10.7) with Microsoft SMTP Server id 8.3.137.0; Wed, 17 Aug 2011
-	08:27:25 +0200
-Date: Wed, 17 Aug 2011 08:27:36 +0200
-From: Anders Darander <anders@chargestorm.se>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <20110817062736.GD7904@chargestorm.se>
-Mail-Followup-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <j2e2rb$g94$2@dough.gmane.org>
-	<20110817060621.GC7904@chargestorm.se>
-MIME-Version: 1.0
-In-Reply-To: <20110817060621.GC7904@chargestorm.se>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-GFI-SMTP-Submission: 1
-Subject: Re: meta-oe patch status
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QtaWg-0006Rv-PE for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Aug 2011 09:26:58 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QtaSE-0000GU-FP for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Aug 2011 09:22:22 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Aug 2011 09:22:22 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Aug 2011 09:22:22 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 17 Aug 2011 09:22:10 +0200
+Message-ID: <j2fq72$jor$1@dough.gmane.org>
+References: <cover.1313561532.git.anders@chargestorm.se>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:5.0) Gecko/20110624 Thunderbird/5.0
+In-Reply-To: <cover.1313561532.git.anders@chargestorm.se>
+X-Enigmail-Version: 1.2
+Subject: Re: [meta-oe][PATCH v2 0/1] connman: conditionally enable bluetooth and wifi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,30 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Aug 2011 06:32:07 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 17 Aug 2011 07:26:58 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-* Anders Darander <anders@chargestorm.se> [110817 08:06]:
- 
-> * Koen Kooi <koen@dominion.thruhere.net> [110816 17:40]:
-> > + 7de84a29b3dc9b5a8987e3ba6df07de8224debf1 ckermit: import from OE rev 5350bbef01b8979617e3d0fd38939f94f1fa5315
-> > + f5ac255987f6ca361ea960296925f46681a2495a ckermit: update to version 9.0
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> I'll about to send a new version of the patch above, resetting PR.
+Op 17-08-11 08:13, Anders Darander schreef:
+> 
+> Let connman depend and enable wifi and bluetooth, only when these are set in the DISTRO_FEATURES.
+> 
+> This reduces build-time, and make a non-x11 build succeed, as bluez4 currently depends on x11 through a dependency chain. (This could/should be fixed in a later patch).
+> 
+> V2: * Remove unnecessarily set variables BLUEZDEPENDS and WIFIDEPENDS.
 
-> > + 403753cc6580f283a89d89fa8958bc92e895db4a connman: conditionally enable wifi and bluetooth
+Q'd both, thanks!
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-> I'll just about sending a new version, removing some unecessarily
-> variable, per Khem request/advice.
+iD8DBQFOS2wiMkyGM64RGpERAsWhAJ0YCG/D/S/U02uqGIpMbS3B9HeO1ACdHKWK
+n+AmsYVGs2W6iBOaBOKDTjY=
+=RqI1
+-----END PGP SIGNATURE-----
 
-My bad again, it was Koen's comments, not Khems.
-
-Cheers,
-Anders
-
--- 
-Anders Darander
-ChargeStorm AB	
 
 
