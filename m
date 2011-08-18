@@ -1,23 +1,24 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <fabian-buettner@gmx.de>) id 1Qu2RP-00026s-Qo
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <philip@balister.org>) id 1Qu2uh-0003Rl-Lv
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Aug 2011 15:15:23 +0200
-Received: (qmail invoked by alias); 18 Aug 2011 13:10:43 -0000
-Received: from lak-31-116.wohnheime.ruhr-uni-bochum.de (EHLO localhost)
-	[134.147.31.116]
-	by mail.gmx.net (mp004) with SMTP; 18 Aug 2011 15:10:43 +0200
-X-Authenticated: #4787129
-X-Provags-ID: V01U2FsdGVkX19H1tRqjvFHlpiXgnG2S11EwVna24JxzVc/GRVKSH
-	E4pP4tr52ZT9+J
-Date: Thu, 18 Aug 2011 15:10:43 +0200
-From: fabian =?iso-8859-15?Q?b=FCttner?= <fabian-buettner@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110818131043.GC26690@golden>
+	Thu, 18 Aug 2011 15:45:39 +0200
+Received: (qmail 19167 invoked by uid 1003); 18 Aug 2011 13:40:51 -0000
+Received: from unknown (HELO ?172.17.171.238?)
+	(philip@opensdr.com@206.191.100.2)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	18 Aug 2011 13:40:51 -0000
+Message-ID: <4E4D1663.7060703@balister.org>
+Date: Thu, 18 Aug 2011 06:40:51 -0700
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.18) Gecko/20110621 Fedora/3.1.11-1.fc14 Thunderbird/3.1.11
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Y-GMX-Trusted: 0
-Subject: [beagleboard] Unable to build Angstrom meta-toolchain
+To: openembedded-devel@lists.openembedded.org
+References: <1f806520f152cbda2bc4aa7cbfde0dbfea7dc9b7.1313655444.git.Martin.Jansa@gmail.com>	<30fb538629c6a307b0e574028a11ae196e8a791f.1313655444.git.Martin.Jansa@gmail.com>	<1313656223.4016.12.camel@mattotaupa>	<20110818083723.GA6465@jama.jama.net>	<1313657121.4016.21.camel@mattotaupa>
+	<4E4CF908.5080107@eukrea.com>
+In-Reply-To: <4E4CF908.5080107@eukrea.com>
+Subject: Re: [meta-efl][PATCH 2/2] e-wm: remove SHR specific patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,34 +32,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2011 13:15:24 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 18 Aug 2011 13:45:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi,
+On 08/18/2011 04:35 AM, Eric Bénard wrote:
+> Hi Paul,
+>
+> Le 18/08/2011 10:45, Paul Menzel a écrit :
+>> Thank you for the explanation. So to find out if some distribution or
+>> machine adapts something I might find interesting I need to look in all
+>> layer (repositories) to find it instead of looking in one recipe.
+>
+> yes, that's one of the "benefits" of using the new OE ...
 
-I am having troubles compiling the Angstrom SDK.
+On the other hand, if a distro or machine adapts something in a way you 
+do not like, it does not impact you.
 
-I used the angstrom-setup-scripts to configure OE, sourced the
-environment settings and built the base-image/console-image with bitbake.
-
-While trying to compile the meta-toolchain, just when bitmake finishes
-downloading task-sdk-bare_1.0-r2.6_armv7a.ipk, I am getting an error 
-output like this:
-
-http://pastie.org/2390409
-
-After that, I tried building the meta-toolchain(i did a bitmake clean
-meta-toolchain) without '-j2' but the error I receive is ultimately the same:
-* satisfy_dependencies_for: Cannot satisfy the following dependencies
-* for task-sdk-bare:
-*   libstdc++-dev * 
-* opkg_install_cmd: Cannot install package task-sdk-bare.
-
-Unfortunately I am too unexperienced with OE/Angstrom to fix bugs like that.
-Maybe someone could give me a hint how to get around this show-stopper?
-
-regards,
-fabian
+Philip
 
 
