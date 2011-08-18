@@ -1,34 +1,33 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from ramkesd003-e.ra.rockwell.com ([205.175.240.251]
+	helo=ramilwsmtp01.ra.rockwell.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QtySi-0008Fr-Bu for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Aug 2011 11:00:28 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QtyOE-000117-Dv for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Aug 2011 10:55:50 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2011 10:55:50 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <mkes@ra.rockwell.com>) id 1Qu0nV-0005gK-Kf
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Aug 2011 13:30:05 +0200
+Received: from cze.ra.rockwell.com ([10.70.136.58])
+	by ramilwsmtp01.ra.rockwell.com (Lotus Domino Release 8.5.2FP2)
+	with ESMTP id 2011081806252484-1128260 ;
+	Thu, 18 Aug 2011 06:25:24 -0500 
+Received: (qmail 68525 invoked from network); 18 Aug 2011 11:25:24 -0000
+Received: from unknown (HELO [10.70.138.68]) ([10.70.138.68])
+	(envelope-sender <mkes@ra.rockwell.com>)
+	by euczprgmult004.cze.ra.rockwell.com (qmail-ldap-1.03) with SMTP
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2011 10:55:50 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	18 Aug 2011 11:25:24 -0000
+Message-ID: <4E4CF6A7.6020901@ra.rockwell.com>
+Date: Thu, 18 Aug 2011 13:25:27 +0200
+From: Miroslav Kes <mkes@ra.rockwell.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.17) Gecko/20110802 Lightning/1.0b3pre Thunderbird/3.1.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 18 Aug 2011 10:55:33 +0200
-Message-ID: <j2ik25$tj2$1@dough.gmane.org>
-References: <cover.1313655444.git.Martin.Jansa@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:6.0) Gecko/20110812 Thunderbird/6.0
-In-Reply-To: <cover.1313655444.git.Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.3
-Subject: Re: [meta-efl][PATCH 0/2] Pull request #8
+X-MIMETrack: Itemize by SMTP Server on
+	RAMilwSMTP01/Milwaukee/RA/Rockwell(Release
+	8.5.2FP2|March 22, 2011) at 08/18/2011 06:25:25 AM,
+	Serialize by Router on RAMilwSMTP01/Milwaukee/RA/Rockwell(Release
+	8.5.2FP2|March 22, 2011) at 08/18/2011 06:25:28 AM,
+	Serialize complete at 08/18/2011 06:25:28 AM
+Subject: inetlib_1.1.1.bb (classpathx) doesn't install inetlib.jar to the sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,34 +41,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2011 09:00:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 18 Aug 2011 11:30:05 -0000
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+I have experienced this error when building the gnumail:
 
-Op 18-08-11 10:17, Martin Jansa schreef:
-> The following changes since commit 3d0b866967529a14268541b85e79cb35981e1aed:
-> 
-> xdotool: import from OE rev 5350bbef01b8979617e3d0fd38939f94f1fa5315 (2011-08-17 23:11:55 +0200)
-> 
-> are available in the git repository at: git://git.openembedded.org/meta-openembedded-contrib jansa/meta-efl http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/meta-efl
-> 
-> Martin Jansa (2): e-base: bump EFL_SRCREV e-wm: remove SHR specific patch
+$ cat log.do_configure
+...
+checking if
+/home/mkes/sources/linux/platform/oebase/builds/beagleboard_gnu/build/tmp/sysroots/i686-linux/usr/bin/javac
+works... yes
+checking for fastjar... fastjar
+checking for
+/home/mkes/sources/linux/platform/oebase/builds/beagleboard_gnu/build/tmp/sysroots/java/activation.jar...
+yes
+checking for
+/home/mkes/sources/linux/platform/oebase/builds/beagleboard_gnu/build/tmp/sysroots/java/inetlib.jar...
+configure: error: can't find inetlib.jar in specified path
 
-I'm out of town till monday, so meta-oe pull requests will have a few days delay till then.
+Really, the inetlib_1.1.1.bb doesn't install the jar to the
+${TMPDIR/sysroots/java. The logs show that the oe_jarinstall() is never
+called with the -s option.
 
-regards,
+I have created a local overlay and added a call to the the java_stage i.e.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+do_install_append() {
+  java_install
+  java_stage
+}
 
-iD8DBQFOTNOFMkyGM64RGpERAvUKAJ40PUB3/10Ls1z0g9p1IyspqcXCrQCgmbCZ
-BqYkmMt5wsI95nxc9B/LBM4=
-=fMbH
------END PGP SIGNATURE-----
+This fixed the problem.
 
+Regards
+
+Mira Kes
 
 
