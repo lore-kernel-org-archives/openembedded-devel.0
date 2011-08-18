@@ -1,35 +1,38 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QtyLU-0007V5-Hz
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Aug 2011 10:53:00 +0200
-Received: by bkbzu17 with SMTP id zu17so1478189bkb.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QtyMi-0007bX-17 for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Aug 2011 10:54:16 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QtyIE-0006ur-Rl for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Aug 2011 10:49:38 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Aug 2011 10:49:38 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2011 01:48:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=wXwDBg6bAUOcTXfhfNdoKqZmFSB09qY1Dncx9dkRTQM=;
-	b=vj5BmsfszrJDn+o3Bd72VR6VM/3vTg7eh+82eu/ylyxu8k86BVwtIWYzdXndjMIz61
-	IMMuKAiUTLoHo7FEmkPOkrlrQQzWjBcCn79j+SmhIL+SdvkhYSAM1XQlq5/uTy4vR2JU
-	d9IOmP9l8N2YBBd0m+xcVZPp88yv2A5LXuD8M=
-Received: by 10.204.233.11 with SMTP id jw11mr213148bkb.270.1313657301412;
-	Thu, 18 Aug 2011 01:48:21 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id z7sm647868bkt.39.2011.08.18.01.48.19
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 18 Aug 2011 01:48:20 -0700 (PDT)
-Date: Thu, 18 Aug 2011 10:48:13 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 18 Aug 2011 10:49:38 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110818084813.GB6465@jama.jama.net>
-References: <cover.1313655217.git.Martin.Jansa@gmail.com>
-	<b70d3308cd1493c12b7e1ba39fbfa5bb38c8ecc1.1313655217.git.Martin.Jansa@gmail.com>
-	<1313656846.4016.18.camel@mattotaupa>
-MIME-Version: 1.0
-In-Reply-To: <1313656846.4016.18.camel@mattotaupa>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 1/3] kexec-tools-klibc: import from meta-zaurus layer
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 18 Aug 2011 10:49:26 +0200
+Message-ID: <j2ijmm$rcq$1@dough.gmane.org>
+References: <1f806520f152cbda2bc4aa7cbfde0dbfea7dc9b7.1313655444.git.Martin.Jansa@gmail.com>
+	<30fb538629c6a307b0e574028a11ae196e8a791f.1313655444.git.Martin.Jansa@gmail.com>
+	<1313656223.4016.12.camel@mattotaupa>
+	<20110818083723.GA6465@jama.jama.net>
+	<1313657121.4016.21.camel@mattotaupa>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:6.0) Gecko/20110812 Thunderbird/6.0
+In-Reply-To: <1313657121.4016.21.camel@mattotaupa>
+X-Enigmail-Version: 1.3
+Subject: Re: [meta-efl][PATCH 2/2] e-wm: remove SHR specific patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,152 +46,183 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2011 08:53:00 -0000
-X-Groupsio-MsgNum: 33687
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="OwLcNYc0lM97+oe1"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 18 Aug 2011 08:54:16 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---OwLcNYc0lM97+oe1
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Thu, Aug 18, 2011 at 10:40:46AM +0200, Paul Menzel wrote:
-> Dear Martin,
->=20
->=20
-> Am Donnerstag, den 18.08.2011, 10:14 +0200 schrieb Martin Jansa:
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->=20
-> please include the commit id as documented in the Commit Patch Message
-> Guidelines [1].
+Op 18-08-11 10:45, Paul Menzel schreef:
+> Am Donnerstag, den 18.08.2011, 10:37 +0200 schrieb Martin Jansa:
+>> On Thu, Aug 18, 2011 at 10:30:23AM +0200, Paul Menzel wrote:
+> 
+> […]
+> 
+>>> sorry for bothering. I do not have an overview yet. Could somebody elaborate if such distribution overrides are now deprecated? Will that patch be applied in the SHR layer?
+>> 
+>> yes, distributions now have own layers to apply own patches and other changes with .bbappend
+>> 
+>> the same should apply to machine overrides
+> 
+> Thank you for the explanation. So to find out if some distribution or machine adapts something I might find interesting I need to look in all layer (repositories) to find it instead of looking in one recipe. Is there trick to do that or is that generally not needed?
 
-OK, I'll add it, but meta-zaurus is just temporary layer so later it
-will be removed completely.
-
-> Why was is not included into meta-oe in the first place? Should it be
-> included in oe-core right away?
-
-It's easier to test it somewhere first and as zaurus layer was first to
-use kexec-tools-klibc for linux-kexecboot then it was added to
-meta-zaurus first and now after tests and cleanup, it's good enough to
-be moved to meta-oe.
-
-It cannot be moved to oe-core, because klibc was added few days ago only
-to meta-oe.
-
->=20
-> > ---
-> >  .../kexec/kexec-tools-klibc-2.0.2/elf.patch        |   94 ++++++++++++=
-+++++++
-> >  .../kexec/kexec-tools-klibc-2.0.2/errno.patch      |   13 +++
-> >  .../kexec/kexec-tools-klibc-2.0.2/other.patch      |   97 ++++++++++++=
-++++++++
-> >  .../kexec/kexec-tools-klibc-2.0.2/string.patch     |   11 ++
-> >  .../kexec/kexec-tools-klibc-2.0.2/syscall.patch    |   46 +++++++++
-> >  .../kexec/kexec-tools-klibc_2.0.2.bb               |   27 ++++++
-> >  6 files changed, 288 insertions(+), 0 deletions(-)
-> >  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.=
-2/elf.patch
-> >  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.=
-2/errno.patch
-> >  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.=
-2/other.patch
-> >  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.=
-2/string.patch
-> >  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.=
-2/syscall.patch
-> >  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc_2.0.=
-2.bb
->=20
-> [=E2=80=A6]
->=20
-> > diff --git a/meta-oe/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb b/=
-meta-oe/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
-> > new file mode 100644
-> > index 0000000..e4f126e
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
-> > @@ -0,0 +1,27 @@
-> > +# the binaries are statically linked against klibc
-> > +require recipes-kernel/kexec/kexec-tools.inc
-> > +SRC_URI[md5sum] =3D "bc401cf3262b25ff7c9a51fc76c8ab91"
-> > +SRC_URI[sha256sum] =3D "549ab65c18a2229b6bf21b6875ca6bbe0e579bca08c354=
-3ce6aaf8287a0b4188"
-> > +
-> > +PR =3D "r6"
->=20
-> Start with "r0" or will that cause problems for the meta-zaurus users?
-
-I can reset it if we don't care about upgrade-path for meta-zaurus
-users..
-
-> > +inherit klibc
-> > +
-> > +FILESPATH =3D. "${FILE_DIRNAME}/kexec-tools-${PV}:"
-> > +
-> > +SRC_URI +=3D "file://elf.patch \
-> > +            file://errno.patch \
-> > +            file://string.patch \
-> > +            file://syscall.patch \
-> > +            file://other.patch \
-> > +            "
-> > +
-> > +S =3D "${WORKDIR}/kexec-tools-${PV}"
-> > +
-> > +EXTRA_OECONF =3D " --without-zlib"
->=20
-> Is `+=3D` needed? Either way the space could be removed in a fix up patch.
-
-klibc.bbclass doesn't add anything to EXTRA_OECONF but you're right +=3D
-can be usefull later when someone finds some option usefull for all
-klibc builds (but I doubt that).
-
-> > +
-> > +PACKAGES =3D+ "kexec-klibc kdump-klibc"
-> > +
-> > +CFLAGS +=3D "-I${STAGING_DIR_HOST}${base_libdir}/klibc/include -I${STA=
-GING_DIR_HOST}${base_libdir}/klibc/include/bits32"
-> > +
-> > +FILES_kexec-klibc =3D "${sbindir}/kexec"
-> > +FILES_kdump-klibc =3D "${sbindir}/kdump"
->=20
-> Reviewed-by: Paul Menzel <paulepanter@users.sourceforge.net>
->=20
->=20
-> Thanks,
-
-Thanks for review!.
-
->=20
-> Paul
->=20
->=20
-> [1] http://wiki.openembedded.org/index.php/Commit_Patch_Message_Guideline=
-s#Importing_from_Elsewhere
-
-
-
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---OwLcNYc0lM97+oe1
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
+koen@dominion:/OE/tentacle/sources/meta-openembedded/meta-oe/recipes-graphics/xdotool$ bitbake-layers show_appends
+<string>:1: DeprecationWarning: Call to deprecated function bb.parse.parse_py.BBHandler.vars_from_file: Please use bb.parse.vars_from_file instead.
+<string>:6: DeprecationWarning: Call to deprecated function bb.which: Please use bb.utils.which instead.
+Parsing recipes..WARNING: No bb files matched BBFILE_PATTERN_htc-layer '^/OE/tentacle/sources/meta-smartphone/meta-htc/'
+WARNING: No bb files matched BBFILE_PATTERN_nokia-layer '^/OE/tentacle/sources/meta-smartphone/meta-nokia/'
+done.
+State of append files:
+atk_1.32.0.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-support/atk/atk_1.32.0.bbappend
+base-files_3.0.14.bb:
+  /OE/tentacle/sources/meta-angstrom/recipes-core/base-files/base-files_3.0.14.bbappend
+clutter_git.bb:
+  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-graphics/clutter/clutter_git.bbappend
+clutter-1.6_1.6.14.bb:
+  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-graphics/clutter/clutter-1.6_1.6.14.bbappend
+formfactor_0.0.bb:
+  /OE/tentacle/sources/meta-intel/meta-sugarbay/recipes-bsp/formfactor/formfactor_0.0.bbappend
+  /OE/tentacle/sources/meta-intel/meta-crownbay/recipes-bsp/formfactor/formfactor_0.0.bbappend
+  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-bsp/formfactor/formfactor_0.0.bbappend
+  /OE/tentacle/sources/meta-intel/meta-fishriver/recipes-bsp/formfactor/formfactor_0.0.bbappend
+  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-bsp/formfactor/formfactor_0.0.bbappend
+  /OE/tentacle/sources/meta-intel/meta-n450/recipes-bsp/formfactor/formfactor_0.0.bbappend
+  /OE/tentacle/sources/meta-openpandora/recipes-bsp/formfactor/formfactor_0.0.bbappend
+  /OE/tentacle/sources/meta-texasinstruments/recipes-bsp/formfactor/formfactor_0.0.bbappend
+gcc_4.6.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc_4.6.bbappend
+WARNING: gcc_4.5.bb: missing append for preferred version
+gcc-cross_4.6.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc-cross_4.6.bbappend
+WARNING: gcc-cross_4.5.bb: missing append for preferred version
+gcc-cross-canadian_4.6.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc-cross-canadian_4.6.bbappend
+WARNING: gcc-cross-canadian_4.5.bb: missing append for preferred version
+gcc-cross-initial_4.6.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc-cross-initial_4.6.bbappend
+WARNING: gcc-cross-initial_4.5.bb: missing append for preferred version
+gcc-cross-intermediate_4.6.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc-cross-intermediate_4.6.bbappend
+WARNING: gcc-cross-intermediate_4.5.bb: missing append for preferred version
+gcc-crosssdk_4.6.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc-crosssdk_4.6.bbappend
+WARNING: gcc-crosssdk_4.5.bb: missing append for preferred version
+gcc-crosssdk-initial_4.6.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc-crosssdk-initial_4.6.bbappend
+WARNING: gcc-crosssdk-initial_4.5.bb: missing append for preferred version
+gcc-crosssdk-intermediate_4.6.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.6.bbappend
+WARNING: gcc-crosssdk-intermediate_4.5.bb: missing append for preferred version
+gcc-runtime_4.6.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc-runtime_4.6.bbappend
+WARNING: gcc-runtime_4.5.bb: missing append for preferred version
+libgcc_4.6.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/libgcc_4.6.bbappend
+WARNING: libgcc_4.5.bb: missing append for preferred version
+libgcrypt_1.4.6.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-support/libgcrypt/libgcrypt_1.4.6.bbappend
+libgpg-error_1.10.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-support/libgpg-error/libgpg-error_1.10.bbappend
+librsvg_2.32.1.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-gnome/recipes-gnome/librsvg/librsvg_2.32.1.bbappend
+libusb-compat_0.1.3.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-support/libusb/libusb-compat_0.1.3.bbappend
+libusb1_1.0.8.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-support/libusb/libusb1_1.0.8.bbappend
+libxcb_1.7.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-graphics/xcb/libxcb_1.7.bbappend
+libxft_2.2.0.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-graphics/xorg-lib/libxft_2.2.0.bbappend
+libxrender_0.9.6.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-graphics/xorg-lib/libxrender_0.9.6.bbappend
+linux-omap_2.6.39.bb:
+  /OE/tentacle/sources/meta-igep/recipes-kernel/linux/linux-omap_2.6.39.bbappend
+netbase_4.45.bb:
+  /OE/tentacle/sources/meta-openpandora/recipes-core/netbase/netbase_4.45.bbappend
+  /OE/tentacle/sources/meta-texasinstruments/recipes-core/netbase/netbase_4.45.bbappend
+qt4-embedded_4.7.3.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-qt/qt4/qt4-embedded_4.7.3.bbappend
+qt4-x11-free_4.7.3.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.3.bbappend
+  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-qt/qt4/qt4-x11-free_4.7.3.bbappend
+renderproto_0.11.1.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-graphics/xorg-proto/renderproto_0.11.1.bbappend
+sysvinit_2.88dsf.bb:
+  /OE/tentacle/sources/meta-angstrom/recipes-core/sysvinit/sysvinit_2.88dsf.bbappend
+task-core-sdk-gmae.bb:
+  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-gnome/tasks/task-core-sdk-gmae.bbappend
+task-core-standalone-gmae-sdk-target.bb:
+  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-gnome/tasks/task-core-standalone-gmae-sdk-target.bbappend
+task-core-tools.bb:
+  /OE/tentacle/sources/meta-intel/meta-sugarbay/recipes-core/tasks/task-core-tools.bbappend
+  /OE/tentacle/sources/meta-intel/meta-crownbay/recipes-core/tasks/task-core-tools.bbappend
+  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-core/tasks/task-core-tools.bbappend
+  /OE/tentacle/sources/meta-intel/meta-fishriver/recipes-core/tasks/task-core-tools.bbappend
+  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-core/tasks/task-core-tools.bbappend
+  /OE/tentacle/sources/meta-intel/meta-n450/recipes-core/tasks/task-core-tools.bbappend
+tiff_3.8.2.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-multimedia/libtiff/tiff_3.8.2.bbappend
+u-boot_git.bb:
+  /OE/tentacle/sources/meta-smartphone/meta-palm/recipes-bsp/u-boot/u-boot_git.bbappend
+WARNING: u-boot_2011.06.bb: missing append for preferred version
+x-load_git.bb:
+  /OE/tentacle/sources/meta-smartphone/meta-palm/recipes-bsp/x-load/x-load_git.bbappend
+x-load_git.bb:
+  /OE/tentacle/sources/meta-smartphone/meta-palm/recipes-bsp/x-load/x-load_git.bbappend
+xcb-proto_1.6.bb:
+  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-graphics/xcb/xcb-proto_1.6.bbappend
+xserver-xf86-config_0.1.bb:
+  /OE/tentacle/sources/meta-intel/meta-sugarbay/recipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+  /OE/tentacle/sources/meta-intel/meta-crownbay/recipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+  /OE/tentacle/sources/meta-intel/meta-fishriver/recipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+  /OE/tentacle/sources/meta-intel/meta-n450/recipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+xserver-xf86-dri-lite_1.9.3.bb (skipped):
+  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-graphics/xorg-xserver/xserver-xf86-dri-lite_1.9.3.bbappend
+initramfs-live-install_1.0.bb (skipped):
+  /OE/tentacle/sources/meta-intel/meta-sugarbay/../common/recipes-core/initrdscripts/initramfs-live-install_1.0.bbappend
+  /OE/tentacle/sources/meta-intel/meta-jasperforest/../common/recipes-core/initrdscripts/initramfs-live-install_1.0.bbappend
+u-boot_git.bb (skipped):
+  /OE/tentacle/sources/meta-smartphone/meta-palm/recipes-bsp/u-boot/u-boot_git.bbappend
+linux-yocto-rt_3.0.bb (skipped):
+  /OE/tentacle/sources/meta-intel/meta-sugarbay/recipes-kernel/linux/linux-yocto-rt_3.0.bbappend
+  /OE/tentacle/sources/meta-intel/meta-crownbay/recipes-kernel/linux/linux-yocto-rt_3.0.bbappend
+  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-kernel/linux/linux-yocto-rt_3.0.bbappend
+  /OE/tentacle/sources/meta-intel/meta-fishriver/recipes-kernel/linux/linux-yocto-rt_3.0.bbappend
+  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-kernel/linux/linux-yocto-rt_3.0.bbappend
+  /OE/tentacle/sources/meta-intel/meta-n450/recipes-kernel/linux/linux-yocto-rt_3.0.bbappend
+linux-yocto_2.6.37.bb (skipped):
+  /OE/tentacle/sources/meta-intel/meta-sugarbay/recipes-kernel/linux/linux-yocto_2.6.37.bbappend
+  /OE/tentacle/sources/meta-intel/meta-crownbay/recipes-kernel/linux/linux-yocto_2.6.37.bbappend
+  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-kernel/linux/linux-yocto_2.6.37.bbappend
+  /OE/tentacle/sources/meta-intel/meta-fishriver/recipes-kernel/linux/linux-yocto_2.6.37.bbappend
+  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-kernel/linux/linux-yocto_2.6.37.bbappend
+  /OE/tentacle/sources/meta-intel/meta-n450/recipes-kernel/linux/linux-yocto_2.6.37.bbappend
+linux-yocto_2.6.34.bb (skipped):
+  /OE/tentacle/sources/meta-intel/meta-crownbay/recipes-kernel/linux/linux-yocto_2.6.34.bbappend
+  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-kernel/linux/linux-yocto_2.6.34.bbappend
+  /OE/tentacle/sources/meta-intel/meta-fishriver/recipes-kernel/linux/linux-yocto_2.6.34.bbappend
+  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-kernel/linux/linux-yocto_2.6.34.bbappend
+  /OE/tentacle/sources/meta-intel/meta-n450/recipes-kernel/linux/linux-yocto_2.6.34.bbappend
+linux-yocto_3.0.bb (skipped):
+  /OE/tentacle/sources/meta-intel/meta-sugarbay/recipes-kernel/linux/linux-yocto_3.0.bbappend
+  /OE/tentacle/sources/meta-intel/meta-fishriver/recipes-kernel/linux/linux-yocto_3.0.bbappend
+  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-kernel/linux/linux-yocto_3.0.bbappend
+xserver-xf86-dri-lite_1.9.3.bb (skipped):
+  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-graphics/xorg-xserver/xserver-xf86-dri-lite_1.9.3.bbappend
+xserver-xf86-dri-lite_1.9.3.bb (skipped):
+  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-graphics/xorg-xserver/xserver-xf86-dri-lite_1.9.3.bbappend
+koen@dominion:/OE/tentacle/sources/meta-openembedded/meta-oe/recipes-graphics/xdotool$
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEARECAAYFAk5M0c0ACgkQN1Ujt2V2gByicQCfX21KIVIIbREQfZI90mbWD62q
-7DQAnicTGOgd55CPP6qqeq5+FgSIU8lB
-=JnIi
+iD8DBQFOTNIWMkyGM64RGpERAtloAJ9Hu0799ZRiFQQCYB2BtlFcLUN3SwCdG+zG
+mog3wHI/7XYRHHpNBkTMSJY=
+=y07A
 -----END PGP SIGNATURE-----
 
---OwLcNYc0lM97+oe1--
+
+
