@@ -1,35 +1,24 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QtyB0-0006wU-If
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Aug 2011 10:42:10 +0200
-Received: by bkbzu17 with SMTP id zu17so1472238bkb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2011 01:37:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=ENrngYi7Kp1xANndpyWPaOm7fTkPvXz8+iS9joVWME4=;
-	b=nTsbkXsoERWckxCMxnFSadwOyP9Lt+td/1JdXsKO4HjT65MFchMEP2A4JEhvk1gQ/7
-	ln2BtmwST4bnfTVo6oIEYf0v5oh0mgsosGcTEmOsT6nAx1L7vLTuWmAi+2CdrnmjUP5Z
-	enFHs9EMXBQu+JGIvpy2CnaEK0r20+Eic+/OM=
-Received: by 10.204.232.196 with SMTP id jv4mr219543bkb.250.1313656651402;
-	Thu, 18 Aug 2011 01:37:31 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id q1sm4265091faa.3.2011.08.18.01.37.29
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 18 Aug 2011 01:37:30 -0700 (PDT)
-Date: Thu, 18 Aug 2011 10:37:23 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QtyE9-00075z-Dk for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Aug 2011 10:45:25 +0200
+Received: from f053044176.adsl.alicedsl.de ([78.53.44.176]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qty9n-0007TP-O0 for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Aug 2011 08:40:55 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110818083723.GA6465@jama.jama.net>
-References: <1f806520f152cbda2bc4aa7cbfde0dbfea7dc9b7.1313655444.git.Martin.Jansa@gmail.com>
-	<30fb538629c6a307b0e574028a11ae196e8a791f.1313655444.git.Martin.Jansa@gmail.com>
-	<1313656223.4016.12.camel@mattotaupa>
-MIME-Version: 1.0
-In-Reply-To: <1313656223.4016.12.camel@mattotaupa>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-efl][PATCH 2/2] e-wm: remove SHR specific patch
+In-Reply-To: <b70d3308cd1493c12b7e1ba39fbfa5bb38c8ecc1.1313655217.git.Martin.Jansa@gmail.com>
+References: <cover.1313655217.git.Martin.Jansa@gmail.com>
+	<b70d3308cd1493c12b7e1ba39fbfa5bb38c8ecc1.1313655217.git.Martin.Jansa@gmail.com>
+Date: Thu, 18 Aug 2011 10:40:46 +0200
+Message-ID: <1313656846.4016.18.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [meta-oe][PATCH 1/3] kexec-tools-klibc: import from meta-zaurus layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,81 +32,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2011 08:42:10 -0000
-X-Groupsio-MsgNum: 33684
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="5vNYLRcllDrimb99"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 18 Aug 2011 08:45:25 -0000
+X-Groupsio-MsgNum: 33685
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-bJFT8MtaxuxfQ96WgmNb"
 
---5vNYLRcllDrimb99
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+--=-bJFT8MtaxuxfQ96WgmNb
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 18, 2011 at 10:30:23AM +0200, Paul Menzel wrote:
-> Dear Martin,
->=20
->=20
-> Am Donnerstag, den 18.08.2011, 10:18 +0200 schrieb Martin Jansa:
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> >  .../e17/e-wm/wizard-module-skipping.patch          |   63 ------------=
---------
-> >  meta-efl/recipes-efl/e17/e-wm_svn.bb               |    4 -
-> >  2 files changed, 0 insertions(+), 67 deletions(-)
-> >  delete mode 100644 meta-efl/recipes-efl/e17/e-wm/wizard-module-skippin=
-g.patch
-> >=20
-> > diff --git a/meta-efl/recipes-efl/e17/e-wm/wizard-module-skipping.patch=
- b/meta-efl/recipes-efl/e17/e-wm/wizard-module-skipping.patch
-> > deleted file mode 100644
-> > index d124325..0000000
-> > --- a/meta-efl/recipes-efl/e17/e-wm/wizard-module-skipping.patch
-> > +++ /dev/null
->=20
-> [=E2=80=A6]
->=20
-> > diff --git a/meta-efl/recipes-efl/e17/e-wm_svn.bb b/meta-efl/recipes-ef=
-l/e17/e-wm_svn.bb
-> > index 9272aab..38257b5 100644
-> > --- a/meta-efl/recipes-efl/e17/e-wm_svn.bb
-> > +++ b/meta-efl/recipes-efl/e17/e-wm_svn.bb
-> > @@ -16,10 +16,6 @@ SRC_URI =3D "\
-> >    file://applications.menu \
-> >  "
-> > =20
-> > -SRC_URI_append_shr =3D " \
-> > -  file://wizard-module-skipping.patch \
-> > -"
-> > -
-> >  EXTRA_OECONF =3D "\
-> >    --with-edje-cc=3D${STAGING_BINDIR_NATIVE}/edje_cc \
-> >    --with-eet-eet=3D${STAGING_BINDIR_NATIVE}/eet \
->=20
-> sorry for bothering. I do not have an overview yet. Could somebody
-> elaborate if such distribution overrides are now deprecated? Will that
-> patch be applied in the SHR layer?
+Dear Martin,
 
-yes, distributions now have own layers to apply own patches and other
-changes with .bbappend
 
-the same should apply to machine overrides
+Am Donnerstag, den 18.08.2011, 10:14 +0200 schrieb Martin Jansa:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-Regards,
+please include the commit id as documented in the Commit Patch Message
+Guidelines [1].
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Why was is not included into meta-oe in the first place? Should it be
+included in oe-core right away?
 
---5vNYLRcllDrimb99
+> ---
+>  .../kexec/kexec-tools-klibc-2.0.2/elf.patch        |   94 ++++++++++++++=
++++++
+>  .../kexec/kexec-tools-klibc-2.0.2/errno.patch      |   13 +++
+>  .../kexec/kexec-tools-klibc-2.0.2/other.patch      |   97 ++++++++++++++=
+++++++
+>  .../kexec/kexec-tools-klibc-2.0.2/string.patch     |   11 ++
+>  .../kexec/kexec-tools-klibc-2.0.2/syscall.patch    |   46 +++++++++
+>  .../kexec/kexec-tools-klibc_2.0.2.bb               |   27 ++++++
+>  6 files changed, 288 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/=
+elf.patch
+>  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/=
+errno.patch
+>  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/=
+other.patch
+>  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/=
+string.patch
+>  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/=
+syscall.patch
+>  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.=
+bb
+
+[=E2=80=A6]
+
+> diff --git a/meta-oe/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb b/me=
+ta-oe/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
+> new file mode 100644
+> index 0000000..e4f126e
+> --- /dev/null
+> +++ b/meta-oe/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
+> @@ -0,0 +1,27 @@
+> +# the binaries are statically linked against klibc
+> +require recipes-kernel/kexec/kexec-tools.inc
+> +SRC_URI[md5sum] =3D "bc401cf3262b25ff7c9a51fc76c8ab91"
+> +SRC_URI[sha256sum] =3D "549ab65c18a2229b6bf21b6875ca6bbe0e579bca08c3543c=
+e6aaf8287a0b4188"
+> +
+> +PR =3D "r6"
+
+Start with "r0" or will that cause problems for the meta-zaurus users?
+
+> +inherit klibc
+> +
+> +FILESPATH =3D. "${FILE_DIRNAME}/kexec-tools-${PV}:"
+> +
+> +SRC_URI +=3D "file://elf.patch \
+> +            file://errno.patch \
+> +            file://string.patch \
+> +            file://syscall.patch \
+> +            file://other.patch \
+> +            "
+> +
+> +S =3D "${WORKDIR}/kexec-tools-${PV}"
+> +
+> +EXTRA_OECONF =3D " --without-zlib"
+
+Is `+=3D` needed? Either way the space could be removed in a fix up patch.
+
+> +
+> +PACKAGES =3D+ "kexec-klibc kdump-klibc"
+> +
+> +CFLAGS +=3D "-I${STAGING_DIR_HOST}${base_libdir}/klibc/include -I${STAGI=
+NG_DIR_HOST}${base_libdir}/klibc/include/bits32"
+> +
+> +FILES_kexec-klibc =3D "${sbindir}/kexec"
+> +FILES_kdump-klibc =3D "${sbindir}/kdump"
+
+Reviewed-by: Paul Menzel <paulepanter@users.sourceforge.net>
+
+
+Thanks,
+
+Paul
+
+
+[1] http://wiki.openembedded.org/index.php/Commit_Patch_Message_Guidelines#=
+Importing_from_Elsewhere
+
+--=-bJFT8MtaxuxfQ96WgmNb
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAk5Mz0MACgkQN1Ujt2V2gBz6xwCfRRmcuJb7UGnln40TlGsHGT73
-kCQAnjuWjRR9srd6UQV8tCdgFne+lvM+
-=ULns
+iEYEABECAAYFAk5M0A4ACgkQPX1aK2wOHVjUXACdEO8cW8H9YKNVhWbk0em167K6
+eG8An3gu3zIZuh4segwHA3HUWbyZ1u7o
+=fxoT
 -----END PGP SIGNATURE-----
 
---5vNYLRcllDrimb99--
+--=-bJFT8MtaxuxfQ96WgmNb--
