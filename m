@@ -1,29 +1,31 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QtxsC-00066e-BM
+	(envelope-from <martin.jansa@gmail.com>) id 1QtxsF-00066e-Mc
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Aug 2011 10:22:45 +0200
-Received: by bkbzu17 with SMTP id zu17so1462221bkb.6
+	Thu, 18 Aug 2011 10:22:47 +0200
+Received: by mail-bw0-f47.google.com with SMTP id zu17so1462221bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2011 01:18:05 -0700 (PDT)
+	Thu, 18 Aug 2011 01:18:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=Oz3bp1y6kmW/sIm7NJRJeJhZz5MJjksD8fdka525R2w=;
-	b=mK3Ox2NHPNEWuo4ZXTGHO4yVwqFzqOF3kHEQwZUWW1/NampNCZFPtBEZrJ6ga45Adp
-	cgzXhnIa3rKKvutFRLON9iKmTOtgFrnt6w0Ppvu6qTlmIapoUbZ6JRjam7/14an5Snej
-	Ym9cvKRTVKtCSUp8dKHW2rFZgwV9uWx1NWtNs=
-Received: by 10.204.232.78 with SMTP id jt14mr196977bkb.190.1313655485056;
-	Thu, 18 Aug 2011 01:18:05 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=lnznBAZPmmy0mx5NGngeS1TpNRZEFUv/Z+Vh1k1mxd0=;
+	b=rfmR+G6nEPfqsVLU+nEpjjbgXASpK5d1rXASs0twrcFm2hu2Y5lcLVh75rVAPTsKhC
+	LN3XG7YOyZYrQdRQ9fwIF1a5uLFgRp2r+w/WYVkEsTFHd7+WPYIgdehH5+GZpqlcsY0J
+	3TzFPjN2HwTD+oexDfgxLHWQjer05HqLP7U9A=
+Received: by 10.204.233.67 with SMTP id jx3mr207437bkb.266.1313655490752;
+	Thu, 18 Aug 2011 01:18:10 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id m24sm643150bkm.0.2011.08.18.01.18.02
+	by mx.google.com with ESMTPS id n9sm639011bkd.40.2011.08.18.01.18.09
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 18 Aug 2011 01:18:03 -0700 (PDT)
+	Thu, 18 Aug 2011 01:18:09 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Aug 2011 10:17:59 +0200
-Message-Id: <cover.1313655444.git.Martin.Jansa@gmail.com>
+Date: Thu, 18 Aug 2011 10:18:05 +0200
+Message-Id: <1f806520f152cbda2bc4aa7cbfde0dbfea7dc9b7.1313655444.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.6
-Subject: [meta-efl][PATCH 0/2] Pull request #8
+In-Reply-To: <cover.1313655444.git.Martin.Jansa@gmail.com>
+References: <cover.1313655444.git.Martin.Jansa@gmail.com>
+Subject: [meta-efl][PATCH 1/2] e-base: bump EFL_SRCREV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,26 +39,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2011 08:22:46 -0000
+X-List-Received-Date: Thu, 18 Aug 2011 08:22:47 -0000
 
-The following changes since commit 3d0b866967529a14268541b85e79cb35981e1aed:
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/classes/e-base.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-  xdotool: import from OE rev 5350bbef01b8979617e3d0fd38939f94f1fa5315 (2011-08-17 23:11:55 +0200)
-
-are available in the git repository at:
-  git://git.openembedded.org/meta-openembedded-contrib jansa/meta-efl
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/meta-efl
-
-Martin Jansa (2):
-  e-base: bump EFL_SRCREV
-  e-wm: remove SHR specific patch
-
- meta-efl/classes/e-base.bbclass                    |    2 +-
- .../e17/e-wm/wizard-module-skipping.patch          |   63 --------------------
- meta-efl/recipes-efl/e17/e-wm_svn.bb               |    4 -
- 3 files changed, 1 insertions(+), 68 deletions(-)
- delete mode 100644 meta-efl/recipes-efl/e17/e-wm/wizard-module-skipping.patch
-
+diff --git a/meta-efl/classes/e-base.bbclass b/meta-efl/classes/e-base.bbclass
+index a2417c5..1b70382 100644
+--- a/meta-efl/classes/e-base.bbclass
++++ b/meta-efl/classes/e-base.bbclass
+@@ -2,7 +2,7 @@ HOMEPAGE = "http://www.enlightenment.org"
+ SRCNAME ?= "${BPN}"
+ 
+ # usually tracks svn trunk HEAD
+-EFL_SRCREV ?= "61696"
++EFL_SRCREV ?= "62492"
+ # revision when 1.0.0 was released, for recipes which don't need rebuild so often
+ EFL_SRCREV_1.0.0 ?= "56356"
+ 
 -- 
 1.7.6
 
