@@ -1,38 +1,31 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QtyMi-0007bX-17 for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Aug 2011 10:54:16 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QtyIE-0006ur-Rl for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Aug 2011 10:49:38 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2011 10:49:38 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1QtyRK-0007mt-8L
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Aug 2011 10:59:02 +0200
+Received: by bkbzu17 with SMTP id zu17so1481462bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2011 10:49:38 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 18 Aug 2011 01:54:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=7oS+JFIzhaO8S3FRKwUNtK7JDb+PqrJYZGFngjBZgdI=;
+	b=JW58AjY5kz1KRuGlu/OVzmOBK5w0bxiUdlgfVx+1cFG9ZarlqcBxD9zfLtsH+0PQZh
+	VrxF0o5JPEpqqnDIRpo0KHvw6WrvTaLjjHoB63iH8Vl7JPVnfyi4JjM62UEZyXymdQ6k
+	1pMPbkmgGue2XVVLhiHYIk4a1rSEJuP4QFj2w=
+Received: by 10.204.224.1 with SMTP id im1mr208373bkb.41.1313657663113;
+	Thu, 18 Aug 2011 01:54:23 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id h26sm648638bkt.52.2011.08.18.01.54.21
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 18 Aug 2011 01:54:22 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 18 Aug 2011 10:49:26 +0200
-Message-ID: <j2ijmm$rcq$1@dough.gmane.org>
-References: <1f806520f152cbda2bc4aa7cbfde0dbfea7dc9b7.1313655444.git.Martin.Jansa@gmail.com>
-	<30fb538629c6a307b0e574028a11ae196e8a791f.1313655444.git.Martin.Jansa@gmail.com>
-	<1313656223.4016.12.camel@mattotaupa>
-	<20110818083723.GA6465@jama.jama.net>
-	<1313657121.4016.21.camel@mattotaupa>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:6.0) Gecko/20110812 Thunderbird/6.0
-In-Reply-To: <1313657121.4016.21.camel@mattotaupa>
-X-Enigmail-Version: 1.3
-Subject: Re: [meta-efl][PATCH 2/2] e-wm: remove SHR specific patch
+Date: Thu, 18 Aug 2011 10:54:11 +0200
+Message-Id: <1313657651-12214-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.6
+In-Reply-To: <20110818084813.GB6465@jama.jama.net>
+References: <20110818084813.GB6465@jama.jama.net>
+Subject: [meta-oe][PATCHv2] kexec-tools-klibc: import from meta-zaurus layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,183 +39,355 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2011 08:54:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 18 Aug 2011 08:59:02 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* http://git.shr-project.org/git/?p=meta-smartphone.git;a=commit;h=437022644822e16804537e42ecfaa011f9e61bc6
+* V2: reset PR (meta-zaurus users have to downgrade or reflash)
+* V2: += used in EXTRA_OECONF, just in case for future changes
 
-Op 18-08-11 10:45, Paul Menzel schreef:
-> Am Donnerstag, den 18.08.2011, 10:37 +0200 schrieb Martin Jansa:
->> On Thu, Aug 18, 2011 at 10:30:23AM +0200, Paul Menzel wrote:
-> 
-> […]
-> 
->>> sorry for bothering. I do not have an overview yet. Could somebody elaborate if such distribution overrides are now deprecated? Will that patch be applied in the SHR layer?
->> 
->> yes, distributions now have own layers to apply own patches and other changes with .bbappend
->> 
->> the same should apply to machine overrides
-> 
-> Thank you for the explanation. So to find out if some distribution or machine adapts something I might find interesting I need to look in all layer (repositories) to find it instead of looking in one recipe. Is there trick to do that or is that generally not needed?
+Reviewed-by: Paul Menzel <paulepanter@users.sourceforge.net>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../kexec/kexec-tools-klibc-2.0.2/elf.patch        |   94 +++++++++++++++++++
+ .../kexec/kexec-tools-klibc-2.0.2/errno.patch      |   13 +++
+ .../kexec/kexec-tools-klibc-2.0.2/other.patch      |   97 ++++++++++++++++++++
+ .../kexec/kexec-tools-klibc-2.0.2/string.patch     |   11 ++
+ .../kexec/kexec-tools-klibc-2.0.2/syscall.patch    |   46 +++++++++
+ .../kexec/kexec-tools-klibc_2.0.2.bb               |   26 +++++
+ 6 files changed, 287 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/elf.patch
+ create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/errno.patch
+ create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/other.patch
+ create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/string.patch
+ create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/syscall.patch
+ create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
 
-koen@dominion:/OE/tentacle/sources/meta-openembedded/meta-oe/recipes-graphics/xdotool$ bitbake-layers show_appends
-<string>:1: DeprecationWarning: Call to deprecated function bb.parse.parse_py.BBHandler.vars_from_file: Please use bb.parse.vars_from_file instead.
-<string>:6: DeprecationWarning: Call to deprecated function bb.which: Please use bb.utils.which instead.
-Parsing recipes..WARNING: No bb files matched BBFILE_PATTERN_htc-layer '^/OE/tentacle/sources/meta-smartphone/meta-htc/'
-WARNING: No bb files matched BBFILE_PATTERN_nokia-layer '^/OE/tentacle/sources/meta-smartphone/meta-nokia/'
-done.
-State of append files:
-atk_1.32.0.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-support/atk/atk_1.32.0.bbappend
-base-files_3.0.14.bb:
-  /OE/tentacle/sources/meta-angstrom/recipes-core/base-files/base-files_3.0.14.bbappend
-clutter_git.bb:
-  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-graphics/clutter/clutter_git.bbappend
-clutter-1.6_1.6.14.bb:
-  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-graphics/clutter/clutter-1.6_1.6.14.bbappend
-formfactor_0.0.bb:
-  /OE/tentacle/sources/meta-intel/meta-sugarbay/recipes-bsp/formfactor/formfactor_0.0.bbappend
-  /OE/tentacle/sources/meta-intel/meta-crownbay/recipes-bsp/formfactor/formfactor_0.0.bbappend
-  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-bsp/formfactor/formfactor_0.0.bbappend
-  /OE/tentacle/sources/meta-intel/meta-fishriver/recipes-bsp/formfactor/formfactor_0.0.bbappend
-  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-bsp/formfactor/formfactor_0.0.bbappend
-  /OE/tentacle/sources/meta-intel/meta-n450/recipes-bsp/formfactor/formfactor_0.0.bbappend
-  /OE/tentacle/sources/meta-openpandora/recipes-bsp/formfactor/formfactor_0.0.bbappend
-  /OE/tentacle/sources/meta-texasinstruments/recipes-bsp/formfactor/formfactor_0.0.bbappend
-gcc_4.6.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc_4.6.bbappend
-WARNING: gcc_4.5.bb: missing append for preferred version
-gcc-cross_4.6.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc-cross_4.6.bbappend
-WARNING: gcc-cross_4.5.bb: missing append for preferred version
-gcc-cross-canadian_4.6.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc-cross-canadian_4.6.bbappend
-WARNING: gcc-cross-canadian_4.5.bb: missing append for preferred version
-gcc-cross-initial_4.6.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc-cross-initial_4.6.bbappend
-WARNING: gcc-cross-initial_4.5.bb: missing append for preferred version
-gcc-cross-intermediate_4.6.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc-cross-intermediate_4.6.bbappend
-WARNING: gcc-cross-intermediate_4.5.bb: missing append for preferred version
-gcc-crosssdk_4.6.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc-crosssdk_4.6.bbappend
-WARNING: gcc-crosssdk_4.5.bb: missing append for preferred version
-gcc-crosssdk-initial_4.6.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc-crosssdk-initial_4.6.bbappend
-WARNING: gcc-crosssdk-initial_4.5.bb: missing append for preferred version
-gcc-crosssdk-intermediate_4.6.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.6.bbappend
-WARNING: gcc-crosssdk-intermediate_4.5.bb: missing append for preferred version
-gcc-runtime_4.6.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/gcc-runtime_4.6.bbappend
-WARNING: gcc-runtime_4.5.bb: missing append for preferred version
-libgcc_4.6.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-devtools/gcc/libgcc_4.6.bbappend
-WARNING: libgcc_4.5.bb: missing append for preferred version
-libgcrypt_1.4.6.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-support/libgcrypt/libgcrypt_1.4.6.bbappend
-libgpg-error_1.10.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-support/libgpg-error/libgpg-error_1.10.bbappend
-librsvg_2.32.1.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-gnome/recipes-gnome/librsvg/librsvg_2.32.1.bbappend
-libusb-compat_0.1.3.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-support/libusb/libusb-compat_0.1.3.bbappend
-libusb1_1.0.8.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-support/libusb/libusb1_1.0.8.bbappend
-libxcb_1.7.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-graphics/xcb/libxcb_1.7.bbappend
-libxft_2.2.0.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-graphics/xorg-lib/libxft_2.2.0.bbappend
-libxrender_0.9.6.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-graphics/xorg-lib/libxrender_0.9.6.bbappend
-linux-omap_2.6.39.bb:
-  /OE/tentacle/sources/meta-igep/recipes-kernel/linux/linux-omap_2.6.39.bbappend
-netbase_4.45.bb:
-  /OE/tentacle/sources/meta-openpandora/recipes-core/netbase/netbase_4.45.bbappend
-  /OE/tentacle/sources/meta-texasinstruments/recipes-core/netbase/netbase_4.45.bbappend
-qt4-embedded_4.7.3.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-qt/qt4/qt4-embedded_4.7.3.bbappend
-qt4-x11-free_4.7.3.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.3.bbappend
-  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-qt/qt4/qt4-x11-free_4.7.3.bbappend
-renderproto_0.11.1.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-graphics/xorg-proto/renderproto_0.11.1.bbappend
-sysvinit_2.88dsf.bb:
-  /OE/tentacle/sources/meta-angstrom/recipes-core/sysvinit/sysvinit_2.88dsf.bbappend
-task-core-sdk-gmae.bb:
-  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-gnome/tasks/task-core-sdk-gmae.bbappend
-task-core-standalone-gmae-sdk-target.bb:
-  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-gnome/tasks/task-core-standalone-gmae-sdk-target.bbappend
-task-core-tools.bb:
-  /OE/tentacle/sources/meta-intel/meta-sugarbay/recipes-core/tasks/task-core-tools.bbappend
-  /OE/tentacle/sources/meta-intel/meta-crownbay/recipes-core/tasks/task-core-tools.bbappend
-  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-core/tasks/task-core-tools.bbappend
-  /OE/tentacle/sources/meta-intel/meta-fishriver/recipes-core/tasks/task-core-tools.bbappend
-  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-core/tasks/task-core-tools.bbappend
-  /OE/tentacle/sources/meta-intel/meta-n450/recipes-core/tasks/task-core-tools.bbappend
-tiff_3.8.2.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-multimedia/libtiff/tiff_3.8.2.bbappend
-u-boot_git.bb:
-  /OE/tentacle/sources/meta-smartphone/meta-palm/recipes-bsp/u-boot/u-boot_git.bbappend
-WARNING: u-boot_2011.06.bb: missing append for preferred version
-x-load_git.bb:
-  /OE/tentacle/sources/meta-smartphone/meta-palm/recipes-bsp/x-load/x-load_git.bbappend
-x-load_git.bb:
-  /OE/tentacle/sources/meta-smartphone/meta-palm/recipes-bsp/x-load/x-load_git.bbappend
-xcb-proto_1.6.bb:
-  /OE/tentacle/sources/meta-openembedded/meta-oe/recipes-graphics/xcb/xcb-proto_1.6.bbappend
-xserver-xf86-config_0.1.bb:
-  /OE/tentacle/sources/meta-intel/meta-sugarbay/recipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
-  /OE/tentacle/sources/meta-intel/meta-crownbay/recipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
-  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
-  /OE/tentacle/sources/meta-intel/meta-fishriver/recipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
-  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
-  /OE/tentacle/sources/meta-intel/meta-n450/recipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
-xserver-xf86-dri-lite_1.9.3.bb (skipped):
-  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-graphics/xorg-xserver/xserver-xf86-dri-lite_1.9.3.bbappend
-initramfs-live-install_1.0.bb (skipped):
-  /OE/tentacle/sources/meta-intel/meta-sugarbay/../common/recipes-core/initrdscripts/initramfs-live-install_1.0.bbappend
-  /OE/tentacle/sources/meta-intel/meta-jasperforest/../common/recipes-core/initrdscripts/initramfs-live-install_1.0.bbappend
-u-boot_git.bb (skipped):
-  /OE/tentacle/sources/meta-smartphone/meta-palm/recipes-bsp/u-boot/u-boot_git.bbappend
-linux-yocto-rt_3.0.bb (skipped):
-  /OE/tentacle/sources/meta-intel/meta-sugarbay/recipes-kernel/linux/linux-yocto-rt_3.0.bbappend
-  /OE/tentacle/sources/meta-intel/meta-crownbay/recipes-kernel/linux/linux-yocto-rt_3.0.bbappend
-  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-kernel/linux/linux-yocto-rt_3.0.bbappend
-  /OE/tentacle/sources/meta-intel/meta-fishriver/recipes-kernel/linux/linux-yocto-rt_3.0.bbappend
-  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-kernel/linux/linux-yocto-rt_3.0.bbappend
-  /OE/tentacle/sources/meta-intel/meta-n450/recipes-kernel/linux/linux-yocto-rt_3.0.bbappend
-linux-yocto_2.6.37.bb (skipped):
-  /OE/tentacle/sources/meta-intel/meta-sugarbay/recipes-kernel/linux/linux-yocto_2.6.37.bbappend
-  /OE/tentacle/sources/meta-intel/meta-crownbay/recipes-kernel/linux/linux-yocto_2.6.37.bbappend
-  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-kernel/linux/linux-yocto_2.6.37.bbappend
-  /OE/tentacle/sources/meta-intel/meta-fishriver/recipes-kernel/linux/linux-yocto_2.6.37.bbappend
-  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-kernel/linux/linux-yocto_2.6.37.bbappend
-  /OE/tentacle/sources/meta-intel/meta-n450/recipes-kernel/linux/linux-yocto_2.6.37.bbappend
-linux-yocto_2.6.34.bb (skipped):
-  /OE/tentacle/sources/meta-intel/meta-crownbay/recipes-kernel/linux/linux-yocto_2.6.34.bbappend
-  /OE/tentacle/sources/meta-intel/meta-emenlow/recipes-kernel/linux/linux-yocto_2.6.34.bbappend
-  /OE/tentacle/sources/meta-intel/meta-fishriver/recipes-kernel/linux/linux-yocto_2.6.34.bbappend
-  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-kernel/linux/linux-yocto_2.6.34.bbappend
-  /OE/tentacle/sources/meta-intel/meta-n450/recipes-kernel/linux/linux-yocto_2.6.34.bbappend
-linux-yocto_3.0.bb (skipped):
-  /OE/tentacle/sources/meta-intel/meta-sugarbay/recipes-kernel/linux/linux-yocto_3.0.bbappend
-  /OE/tentacle/sources/meta-intel/meta-fishriver/recipes-kernel/linux/linux-yocto_3.0.bbappend
-  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-kernel/linux/linux-yocto_3.0.bbappend
-xserver-xf86-dri-lite_1.9.3.bb (skipped):
-  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-graphics/xorg-xserver/xserver-xf86-dri-lite_1.9.3.bbappend
-xserver-xf86-dri-lite_1.9.3.bb (skipped):
-  /OE/tentacle/sources/meta-intel/meta-jasperforest/recipes-graphics/xorg-xserver/xserver-xf86-dri-lite_1.9.3.bbappend
-koen@dominion:/OE/tentacle/sources/meta-openembedded/meta-oe/recipes-graphics/xdotool$
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFOTNIWMkyGM64RGpERAtloAJ9Hu0799ZRiFQQCYB2BtlFcLUN3SwCdG+zG
-mog3wHI/7XYRHHpNBkTMSJY=
-=y07A
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/elf.patch b/meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/elf.patch
+new file mode 100644
+index 0000000..0eef4b4
+--- /dev/null
++++ b/meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/elf.patch
+@@ -0,0 +1,94 @@
++Index: kexec-tools-2.0.2/kexec/kexec-elf-rel.c
++===================================================================
++--- kexec-tools-2.0.2.orig/kexec/kexec-elf-rel.c	2009-09-24 14:15:34.025828340 +0100
+++++ kexec-tools-2.0.2/kexec/kexec-elf-rel.c	2009-09-24 14:15:47.030825302 +0100
++@@ -4,7 +4,7 @@
++ #include <stdio.h>
++ #include <errno.h>
++ #include <stdlib.h>
++-#include "elf.h"
+++#include "../include/elf.h"
++ #include <boot/elf_boot.h>
++ #include "kexec.h"
++ #include "kexec-elf.h"
++Index: kexec-tools-2.0.2/kexec/crashdump.c
++===================================================================
++--- kexec-tools-2.0.2.orig/kexec/crashdump.c	2008-10-31 03:00:38.000000000 +0100
+++++ kexec-tools-2.0.2/kexec/crashdump.c	2009-09-26 11:16:27.000000000 +0200
++@@ -26,7 +26,7 @@
++ #include <sys/types.h>
++ #include <sys/stat.h>
++ #include <unistd.h>
++-#include <elf.h>
+++#include "../../../include/elf.h"
++ #include "kexec.h"
++ #include "crashdump.h"
++ #include "kexec-syscall.h"
++
++Index: kexec-tools-2.0.2/kexec/crashdump-xen.c
++===================================================================
++--- kexec-tools-2.0.2.orig/kexec/crashdump-xen.c	2008-07-15 02:46:43.000000000 +0200
+++++ kexec-tools-2.0.2/kexec/crashdump-xen.c	2009-09-26 11:16:41.000000000 +0200
++@@ -3,7 +3,7 @@
++ #include <stdarg.h>
++ #include <string.h>
++ #include <stdlib.h>
++-#include <elf.h>
+++#include "../../../include/elf.h"
++ #include <errno.h>
++ #include <limits.h>
++ #include <sys/types.h>
++
++Index: kexec-tools-2.0.2/kexec/arch/arm/kexec-elf-rel-arm.c
++===================================================================
++--- kexec-tools-2.0.2.orig/kexec/arch/arm/kexec-elf-rel-arm.c	2009-04-24 14:15:46.934825202 +0100
+++++ kexec-tools-2.0.2/kexec/arch/arm/kexec-elf-rel-arm.c	2009-09-24 14:15:47.014827381 +0100
++@@ -1,5 +1,5 @@
++ #include <stdio.h>
++-#include <elf.h>
+++#include "../../../include/elf.h"
++ #include "../../kexec.h"
++ #include "../../kexec-elf.h"
++
++Index: kexec-tools-2.0.2/kexec/kexec-elf-boot.c
++===================================================================
++--- kexec-tools-2.0.2.orig/kexec/kexec-elf-boot.c	2009-05-16 13:28:19.000000000 +0200
+++++ kexec-tools-2.0.2/kexec/kexec-elf-boot.c	2009-09-16 11:13:28.000000000 +0200
++@@ -22,7 +22,7 @@
++ #include <string.h>
++ #include <stdlib.h>
++ #include <errno.h>
++-#include <elf.h>
+++#include "../include/elf.h"
++ #include <boot/elf_boot.h>
++ #include <ip_checksum.h>
++ #include <x86/x86-linux.h>
++
++Index: kexec-tools-2.0.2/kdump/kdump.c
++===================================================================
++--- kexec-tools-2.0.2.orig/kdump/kdump.c	2009-05-16 13:28:19.000000000 +0200
+++++ kexec-tools-2.0.2/kdump/kdump.c	2009-09-16 11:13:08.000000000 +0200
++@@ -8,7 +8,7 @@
++ #include <sys/stat.h>
++ #include <fcntl.h>
++ #include <endian.h>
++-#include <elf.h>
+++#include "../include/elf.h"
++
++ #if !defined(__BYTE_ORDER) || !defined(__LITTLE_ENDIAN) || !defined(__BIG_ENDIAN)
++ #error Endian defines missing
++
++Index: kexec-tools-2.0.2/kexec/arch/arm/crashdump-arm.c
++===================================================================
++--- kexec-tools-2.0.2.old/kexec/arch/arm/crashdump-arm.c	2010-08-01 15:07:47.000000000 +0200
+++++ kexec-tools-2.0.2/kexec/arch/arm/crashdump-arm.c	2010-07-29 06:19:59.000000000 +0200
++@@ -20,7 +20,7 @@
++  * along with this program; if not, write to the Free Software
++  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++  */
++-#include <elf.h>
+++#include "../../../include/elf.h"
++ #include <errno.h>
++ #include <stdio.h>
++ #include <stdlib.h>
++
+diff --git a/meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/errno.patch b/meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/errno.patch
+new file mode 100644
+index 0000000..c56b5a9
+--- /dev/null
++++ b/meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/errno.patch
+@@ -0,0 +1,13 @@
++Index: kexec-tools-2.0.2/kexec/ifdown.c
++===================================================================
++--- kexec-tools-2.0.2.orig/kexec/ifdown.c	2009-09-24 14:15:34.025828340 +0100
+++++ kexec-tools-2.0.2/kexec/ifdown.c	2009-09-24 14:15:47.014827381 +0100
++@@ -14,7 +14,7 @@
++ #include <sys/ioctl.h>
++ #include <sys/socket.h>
++ #include <sys/time.h>
++-#include <sys/errno.h>
+++#include <errno.h>
++
++ #include <net/if.h>
++ #include <netinet/in.h>
+\ No newline at end of file
+diff --git a/meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/other.patch b/meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/other.patch
+new file mode 100644
+index 0000000..f6efaeb
+--- /dev/null
++++ b/meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/other.patch
+@@ -0,0 +1,97 @@
++Index: kexec-tools-2.0.2/kexec/crashdump-elf.c
++===================================================================
++--- kexec-tools-2.0.2.orig/kexec/crashdump-elf.c	2008-10-31 03:00:38.000000000 +0100
+++++ kexec-tools-2.0.2/kexec/crashdump-elf.c	2009-09-26 11:17:57.000000000 +0200
++@@ -47,7 +47,8 @@
++	if (xen_present())
++		nr_cpus = xen_get_nr_phys_cpus();
++	else
++-		nr_cpus = sysconf(_SC_NPROCESSORS_CONF);
+++		/*nr_cpus = sysconf(_SC_NPROCESSORS_CONF);*/
+++		nr_cpus = 1;
++
++	if (nr_cpus < 0) {
++		return -1;
++
++Index: kexec-tools-2.0.2/kexec/arch/arm/kexec-zImage-arm.c
++===================================================================
++--- kexec-tools-2.0.2.orig/kexec/arch/arm/kexec-zImage-arm.c	2009-04-24 14:15:46.982825391 +0100
+++++ kexec-tools-2.0.2/kexec/arch/arm/kexec-zImage-arm.c	2009-09-26 01:58:20.838624318 +0200
++@@ -2,6 +2,10 @@
++  * - 08/21/2007 ATAG support added by Uli Luckas <u.luckas@road.de>
++  *
++  */
+++
+++/* work around for linux header files */
+++#define __deprecated
+++
++ #define _GNU_SOURCE
++ #define _XOPEN_SOURCE
++ #include <stdio.h>
++
++Index: kexec-tools-2.0.2/kexec/kexec.h
++===================================================================
++--- kexec-tools-2.0.2.orig/kexec/kexec.h	2008-05-16 13:28:19.000000000 +0200
+++++ kexec-tools-2.0.2/kexec/kexec.h	2009-09-16 17:32:15.000000000 +0200
++@@ -204,7 +204,7 @@
++ extern char *slurp_file(const char *filename, off_t *r_size);
++ extern char *slurp_file_len(const char *filename, off_t size);
++ extern char *slurp_decompress_file(const char *filename, off_t *r_size);
++-extern unsigned long virt_to_phys(unsigned long addr);
+++/* extern unsigned long virt_to_phys(unsigned long addr); */
++ extern void add_segment(struct kexec_info *info,
++	const void *buf, size_t bufsz, unsigned long base, size_t memsz);
++ extern void add_segment_phys_virt(struct kexec_info *info,
++
++Index: kexec-tools-2.0.2/Makefile.in
++===================================================================
++--- kexec-tools-2.0.2.orig/Makefile.in	2009-09-29 23:49:47.000000000 +0200
+++++ kexec-tools-2.0.2/Makefile.in	2009-09-29 23:49:09.000000000 +0200
++@@ -46,7 +46,7 @@
++ # where necessary.
++ CPPFLAGS	= @CPPFLAGS@ -I$(srcdir)/include -I$(srcdir)/util_lib/include \
++			-Iinclude/
++-CFLAGS		= @CFLAGS@ -fno-strict-aliasing -Wall -Wstrict-prototypes
+++CFLAGS		= @CFLAGS@ -static -fno-strict-aliasing -Wall -Wstrict-prototypes
++ PURGATORY_EXTRA_CFLAGS = @PURGATORY_EXTRA_CFLAGS@
++ ASFLAGS		= @ASFLAGS@
++ LDFLAGS		= @LDFLAGS@
++
++Index: kexec-tools-2.0.2/util_lib/include/sha256.h
++===================================================================
++--- kexec-tools-2.0.2.orig/util_lib/include/sha256.h	2008-07-15 02:46:43.000000000 +0200
+++++ kexec-tools-2.0.2/util_lib/include/sha256.h		2009-10-02 18:28:45.000000000 +0200
++@@ -1,7 +1,8 @@
++ #ifndef SHA256_H
++ #define SHA256_H
++
++-#include <sys/types.h>
+++//#include <sys/types.h>
+++#include <stddef.h>
++ #include <stdint.h>
++
++ typedef struct
++
++Index: kexec-tools-2.0.2/purgatory/Makefile
++===================================================================
++--- kexec-tools-2.0.2.orig/purgatory/Makefile	2008-10-09 00:32:14.000000000 +0200
+++++ kexec-tools-2.0.2.orig/purgatory/Makefile	2009-10-03 00:28:45.000000000 +0200
++@@ -47,7 +47,7 @@
++ $(PURGATORY): CC=$(TARGET_CC)
++ $(PURGATORY): CFLAGS+=$(PURGATORY_EXTRA_CFLAGS) \
++		      $($(ARCH)_PURGATORY_EXTRA_CFLAGS) \
++-		      -Os -fno-builtin -ffreestanding
+++		      -Os -fno-builtin -ffreestanding -nostdinc
++
++ $(PURGATORY): CPPFLAGS=$($(ARCH)_PURGATORY_EXTRA_CFLAGS) \
++			-I$(srcdir)/purgatory/include \
++@@ -61,7 +61,8 @@
++
++ $(PURGATORY): $(PURGATORY_OBJS)
++	$(MKDIR) -p $(@D)
++-	$(CC) $(LDFLAGS) -o $@ $^
+++#	$(CC) $(LDFLAGS) -o $@ $^
+++	$(LD) $(LDFLAGS) -o $@ $^
++
++ #	$(LD) $(LDFLAGS) $(EXTRA_LDFLAGS) --no-undefined -e purgatory_start -r -o $@ $(PURGATORY_OBJS) $(UTIL_LIB)
++
+diff --git a/meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/string.patch b/meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/string.patch
+new file mode 100644
+index 0000000..7d27e39
+--- /dev/null
++++ b/meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/string.patch
+@@ -0,0 +1,11 @@
++Index: kexec-tools-2.0.2/purgatory/string.c
++===================================================================
++--- kexec-tools-2.0.2.orig/purgatory/string.c	2008-05-16 13:28:19.000000000 +0200
+++++ kexec-tools-2.0.2/purgatory/string.c	2009-09-16 17:49:04.000000000 +0200
++@@ -1,5 +1,5 @@
++ #include <stddef.h>
++-#include <string.h>
+++/* #include <string.h> */
++
++ size_t strnlen(const char *s, size_t max)
++ {
+diff --git a/meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/syscall.patch b/meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/syscall.patch
+new file mode 100644
+index 0000000..ae2e3f6
+--- /dev/null
++++ b/meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/syscall.patch
+@@ -0,0 +1,46 @@
++Index: kexec-tools-2.0.2/kexec/kexec-syscall.h
++===================================================================
++--- kexec-tools-2.0.2.orig/kexec/kexec-syscall.h	2010-07-29 06:19:59.000000000 +0200
+++++ kexec-tools-2.0.2/kexec/kexec-syscall.h	2010-08-02 00:13:39.000000000 +0200
++@@ -2,7 +2,7 @@
++ #define KEXEC_SYSCALL_H
++ 
++ #define __LIBRARY__
++-#include <syscall.h>
+++/*#include <syscall.h>*/
++ #include <sys/syscall.h>
++ #include <unistd.h>
++ 
++@@ -23,6 +23,7 @@
++ #define LINUX_REBOOT_CMD_KEXEC		0x45584543
++ 
++ #ifndef __NR_kexec_load
+++/*
++ #ifdef __i386__
++ #define __NR_kexec_load		283
++ #endif
++@@ -61,19 +62,21 @@
++ #ifndef __NR_kexec_load
++ #error Unknown processor architecture.  Needs a kexec_load syscall number.
++ #endif
+++*/
++ #endif /*ifndef __NR_kexec_load*/
++ 
++ struct kexec_segment;
++-
+++/*
++ static inline long kexec_load(void *entry, unsigned long nr_segments,
++ 			struct kexec_segment *segments, unsigned long flags)
++ {
++ 	return (long) syscall(__NR_kexec_load, entry, nr_segments, segments, flags);
++ }
++-
+++*/
++ static inline long kexec_reboot(void)
++ {
++-	return (long) syscall(__NR_reboot, LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, LINUX_REBOOT_CMD_KEXEC, 0);
+++	//return (long) syscall(__NR_reboot, LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, LINUX_REBOOT_CMD_KEXEC, 0);
+++	return __reboot(LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, LINUX_REBOOT_CMD_KEXEC, 0);
++ }
++ 
++ 
+diff --git a/meta-oe/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb b/meta-oe/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
+new file mode 100644
+index 0000000..9c35330
+--- /dev/null
++++ b/meta-oe/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
+@@ -0,0 +1,26 @@
++# the binaries are statically linked against klibc
++require recipes-kernel/kexec/kexec-tools.inc
++SRC_URI[md5sum] = "bc401cf3262b25ff7c9a51fc76c8ab91"
++SRC_URI[sha256sum] = "549ab65c18a2229b6bf21b6875ca6bbe0e579bca08c3543ce6aaf8287a0b4188"
++
++inherit klibc
++
++FILESPATH =. "${FILE_DIRNAME}/kexec-tools-${PV}:"
++
++SRC_URI += "file://elf.patch \
++            file://errno.patch \
++            file://string.patch \
++            file://syscall.patch \
++            file://other.patch \
++            "
++
++S = "${WORKDIR}/kexec-tools-${PV}"
++
++EXTRA_OECONF += "--without-zlib"
++
++PACKAGES =+ "kexec-klibc kdump-klibc"
++
++CFLAGS += "-I${STAGING_DIR_HOST}${base_libdir}/klibc/include -I${STAGING_DIR_HOST}${base_libdir}/klibc/include/bits32"
++
++FILES_kexec-klibc = "${sbindir}/kexec"
++FILES_kdump-klibc = "${sbindir}/kdump"
+-- 
+1.7.6
 
 
 
