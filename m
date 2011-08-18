@@ -1,24 +1,26 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QtyE9-00075z-Dk for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Aug 2011 10:45:25 +0200
+	id 1QtyIZ-0007HU-Sx for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Aug 2011 10:49:59 +0200
 Received: from f053044176.adsl.alicedsl.de ([78.53.44.176]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Qty9n-0007TP-O0 for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Aug 2011 08:40:55 +0000
+	id 1QtyEE-0007U3-9c for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Aug 2011 08:45:30 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <b70d3308cd1493c12b7e1ba39fbfa5bb38c8ecc1.1313655217.git.Martin.Jansa@gmail.com>
-References: <cover.1313655217.git.Martin.Jansa@gmail.com>
-	<b70d3308cd1493c12b7e1ba39fbfa5bb38c8ecc1.1313655217.git.Martin.Jansa@gmail.com>
-Date: Thu, 18 Aug 2011 10:40:46 +0200
-Message-ID: <1313656846.4016.18.camel@mattotaupa>
+In-Reply-To: <20110818083723.GA6465@jama.jama.net>
+References: <1f806520f152cbda2bc4aa7cbfde0dbfea7dc9b7.1313655444.git.Martin.Jansa@gmail.com>
+	<30fb538629c6a307b0e574028a11ae196e8a791f.1313655444.git.Martin.Jansa@gmail.com>
+	<1313656223.4016.12.camel@mattotaupa>
+	<20110818083723.GA6465@jama.jama.net>
+Date: Thu, 18 Aug 2011 10:45:21 +0200
+Message-ID: <1313657121.4016.21.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.3 
-Subject: Re: [meta-oe][PATCH 1/3] kexec-tools-klibc: import from meta-zaurus layer
+Subject: Re: [meta-efl][PATCH 2/2] e-wm: remove SHR specific patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,117 +34,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2011 08:45:25 -0000
-X-Groupsio-MsgNum: 33685
+X-List-Received-Date: Thu, 18 Aug 2011 08:50:00 -0000
+X-Groupsio-MsgNum: 33686
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-bJFT8MtaxuxfQ96WgmNb"
+	boundary="=-mr205QRlIWXr9zfde9Tg"
 
---=-bJFT8MtaxuxfQ96WgmNb
+--=-mr205QRlIWXr9zfde9Tg
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dear Martin,
-
-
-Am Donnerstag, den 18.08.2011, 10:14 +0200 schrieb Martin Jansa:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-
-please include the commit id as documented in the Commit Patch Message
-Guidelines [1].
-
-Why was is not included into meta-oe in the first place? Should it be
-included in oe-core right away?
-
-> ---
->  .../kexec/kexec-tools-klibc-2.0.2/elf.patch        |   94 ++++++++++++++=
-+++++
->  .../kexec/kexec-tools-klibc-2.0.2/errno.patch      |   13 +++
->  .../kexec/kexec-tools-klibc-2.0.2/other.patch      |   97 ++++++++++++++=
-++++++
->  .../kexec/kexec-tools-klibc-2.0.2/string.patch     |   11 ++
->  .../kexec/kexec-tools-klibc-2.0.2/syscall.patch    |   46 +++++++++
->  .../kexec/kexec-tools-klibc_2.0.2.bb               |   27 ++++++
->  6 files changed, 288 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/=
-elf.patch
->  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/=
-errno.patch
->  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/=
-other.patch
->  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/=
-string.patch
->  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/=
-syscall.patch
->  create mode 100644 meta-oe/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.=
-bb
+Am Donnerstag, den 18.08.2011, 10:37 +0200 schrieb Martin Jansa:
+> On Thu, Aug 18, 2011 at 10:30:23AM +0200, Paul Menzel wrote:
 
 [=E2=80=A6]
 
-> diff --git a/meta-oe/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb b/me=
-ta-oe/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
-> new file mode 100644
-> index 0000000..e4f126e
-> --- /dev/null
-> +++ b/meta-oe/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
-> @@ -0,0 +1,27 @@
-> +# the binaries are statically linked against klibc
-> +require recipes-kernel/kexec/kexec-tools.inc
-> +SRC_URI[md5sum] =3D "bc401cf3262b25ff7c9a51fc76c8ab91"
-> +SRC_URI[sha256sum] =3D "549ab65c18a2229b6bf21b6875ca6bbe0e579bca08c3543c=
-e6aaf8287a0b4188"
-> +
-> +PR =3D "r6"
+> > sorry for bothering. I do not have an overview yet. Could somebody
+> > elaborate if such distribution overrides are now deprecated? Will that
+> > patch be applied in the SHR layer?
+>=20
+> yes, distributions now have own layers to apply own patches and other
+> changes with .bbappend
+>=20
+> the same should apply to machine overrides
 
-Start with "r0" or will that cause problems for the meta-zaurus users?
-
-> +inherit klibc
-> +
-> +FILESPATH =3D. "${FILE_DIRNAME}/kexec-tools-${PV}:"
-> +
-> +SRC_URI +=3D "file://elf.patch \
-> +            file://errno.patch \
-> +            file://string.patch \
-> +            file://syscall.patch \
-> +            file://other.patch \
-> +            "
-> +
-> +S =3D "${WORKDIR}/kexec-tools-${PV}"
-> +
-> +EXTRA_OECONF =3D " --without-zlib"
-
-Is `+=3D` needed? Either way the space could be removed in a fix up patch.
-
-> +
-> +PACKAGES =3D+ "kexec-klibc kdump-klibc"
-> +
-> +CFLAGS +=3D "-I${STAGING_DIR_HOST}${base_libdir}/klibc/include -I${STAGI=
-NG_DIR_HOST}${base_libdir}/klibc/include/bits32"
-> +
-> +FILES_kexec-klibc =3D "${sbindir}/kexec"
-> +FILES_kdump-klibc =3D "${sbindir}/kdump"
-
-Reviewed-by: Paul Menzel <paulepanter@users.sourceforge.net>
+Thank you for the explanation. So to find out if some distribution or
+machine adapts something I might find interesting I need to look in all
+layer (repositories) to find it instead of looking in one recipe. Is
+there trick to do that or is that generally not needed?
 
 
 Thanks,
 
 Paul
 
-
-[1] http://wiki.openembedded.org/index.php/Commit_Patch_Message_Guidelines#=
-Importing_from_Elsewhere
-
---=-bJFT8MtaxuxfQ96WgmNb
+--=-mr205QRlIWXr9zfde9Tg
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk5M0A4ACgkQPX1aK2wOHVjUXACdEO8cW8H9YKNVhWbk0em167K6
-eG8An3gu3zIZuh4segwHA3HUWbyZ1u7o
-=fxoT
+iEYEABECAAYFAk5M0SEACgkQPX1aK2wOHVhgwgCghUwW5/rhZJVEYSNqyYYZF3JR
+b6gAmwbE7/6uTq7spTmiVH+DpDdy8Pip
+=02f/
 -----END PGP SIGNATURE-----
 
---=-bJFT8MtaxuxfQ96WgmNb--
+--=-mr205QRlIWXr9zfde9Tg--
