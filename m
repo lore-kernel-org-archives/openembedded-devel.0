@@ -1,24 +1,23 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1Qu10a-00066r-8F
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <fabian-buettner@gmx.de>) id 1Qu2Ki-0005Ob-K3
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Aug 2011 13:43:36 +0200
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1Qu0Ta-0003iP-G4 from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Aug 2011 04:09:30 -0700
-Received: from localhost.localdomain ([137.202.156.152]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 18 Aug 2011 13:09:29 +0200
-From: "Noor, Ahsan" <noor_ahsan@mentor.com>
+	Thu, 18 Aug 2011 15:08:28 +0200
+Received: (qmail invoked by alias); 18 Aug 2011 12:57:09 -0000
+Received: from lak-31-116.wohnheime.ruhr-uni-bochum.de (EHLO localhost)
+	[134.147.31.116]
+	by mail.gmx.net (mp012) with SMTP; 18 Aug 2011 14:57:09 +0200
+X-Authenticated: #4787129
+X-Provags-ID: V01U2FsdGVkX195uvAhCOp5BtLUta/MnlBXu9aRL9nj4RQDCW3kTk
+	k/n6Tb22mf+dxt
+Date: Thu, 18 Aug 2011 14:57:08 +0200
+From: fabian =?iso-8859-15?Q?b=FCttner?= <fabian-buettner@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Aug 2011 16:09:20 +0500
-Message-Id: <1313665760-21930-1-git-send-email-noor_ahsan@mentor.com>
-X-Mailer: git-send-email 1.7.0.4
-X-OriginalArrivalTime: 18 Aug 2011 11:09:29.0461 (UTC)
-	FILETIME=[4CAAD250:01CC5D97]
-Subject: [PATCH][meta-oe] python-lxml: Added new recipe in meta-oe for 2.2.8 version
+Message-ID: <20110818125708.GB26690@golden>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Y-GMX-Trusted: 0
+Subject: [beagleboard] Unable to build Angstrom meta-toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,57 +31,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2011 11:43:36 -0000
+X-List-Received-Date: Thu, 18 Aug 2011 13:08:28 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: Noor Ahsan <noor_ahsan@mentor.com>
+Hi,
 
-* Added new recipe in meta-oe for 2.2.8 version
+I am having troubles compiling the Angstrom SDK.
 
-Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
----
- .../recipes-devtools/python/python-lxml_2.2.8.bb   |   32 ++++++++++++++++++++
- 1 files changed, 32 insertions(+), 0 deletions(-)
+I used the angstrom-setup-scripts to configure OE, sourced the
+environment
+settings and built the base-image with bitbake.
 
-diff --git a/meta-oe/recipes-devtools/python/python-lxml_2.2.8.bb b/meta-oe/recipes-devtools/python/python-lxml_2.2.8.bb
-new file mode 100644
-index 0000000..b1aac3f
---- /dev/null
-+++ b/meta-oe/recipes-devtools/python/python-lxml_2.2.8.bb
-@@ -0,0 +1,32 @@
-+DESCRIPTION = "Powerful and Pythonic XML processing library combining \
-+libxml2/libxslt with the ElementTree API."
-+HOMEPAGE = "http://codespeak.net/lxml"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=7de92baeb3b7bfaebe72404155fdb346"
-+SRCNAME = "lxml"
-+
-+DEPENDS = "libxml2 libxslt"
-+RDEPENDS_${PN} += "libxml2 libxslt python-compression"
-+
-+SRC_URI = "http://pypi.python.org/packages/source/l/${SRCNAME}/${SRCNAME}-${PV}.tar.gz;name=lxml"
-+SRC_URI[lxml.md5sum] = "d6c612d63a84d79440912a1b29d3b981"
-+SRC_URI[lxml.sha256sum] = "89b73925b5e3295dcf4675cb948007a20eb029fe35c9a162ae19ec11f1abafe5"
-+
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+inherit setuptools
-+
-+DISTUTILS_BUILD_ARGS += " \
-+                     --with-xslt-config='${STAGING_BINDIR_NATIVE}/pkg-config libxslt' \
-+                     --with-xml2-config='${STAGING_BINDIR_NATIVE}/xml2-config' \
-+"
-+
-+DISTUTILS_INSTALL_ARGS += " \
-+                     --with-xslt-config='${STAGING_BINDIR_NATIVE}/pkg-config libxslt' \
-+                     --with-xml2-config='${STAGING_BINDIR_NATIVE}/xml2-config' \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
-+RDEPENDS_${PN}_virtclass-native = "libxml2-native libxslt-native"
-+
-+
--- 
-1.7.0.4
+While trying to compile the meta-toolchain, I am always getting this error 
+when bitmake finishes downloading task-sdk-bare_1.0-r2.6_armv7a.ipk.
+...
+|  * satisfy_dependencies_for: Cannot satisfy the following dependencies
+for task-sdk-bare:
+|  *    libstdc++-dev *
+|  * opkg_install_cmd: Cannot install package task-sdk-bare.
+NOTE: package meta-toolchain-1.0-r0: task do_populate_sdk: Failed
 
+Any clues how to fix this?
+
+regards,
+fabian
 
 
