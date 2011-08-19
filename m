@@ -1,24 +1,28 @@
-Received: from smarthost.techfak.uni-bielefeld.de ([129.70.137.17])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sherbrec@cit-ec.uni-bielefeld.de>)
-	id 1QuLh3-0004KX-Uz for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Aug 2011 11:48:50 +0200
-Received: from [129.70.144.11] (hooge.TechFak.Uni-Bielefeld.DE [129.70.144.11])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: sherbrec)
-	by smarthost.TechFak.Uni-Bielefeld.DE (Postfix) with ESMTPSA id 243E59E;
-	Fri, 19 Aug 2011 11:34:38 +0200 (CEST)
-Message-ID: <4E4E2DFB.5050106@cit-ec.uni-bielefeld.de>
-Date: Fri, 19 Aug 2011 11:33:47 +0200
-From: Stefan Herbrechtsmeier <sherbrec@cit-ec.uni-bielefeld.de>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	(envelope-from <sledz@dresearch-fe.de>) id 1QuO1h-0008Gu-4B
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Aug 2011 14:18:17 +0200
+Received: by bkbzu17 with SMTP id zu17so2419500bkb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Aug 2011 05:13:36 -0700 (PDT)
+Received: by 10.204.133.7 with SMTP id d7mr388015bkt.104.1313756015806;
+	Fri, 19 Aug 2011 05:13:35 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id y7sm1028373bkq.48.2011.08.19.05.13.34
+	(version=SSLv3 cipher=OTHER); Fri, 19 Aug 2011 05:13:34 -0700 (PDT)
+Message-ID: <4E4E536D.7010103@dresearch-fe.de>
+Date: Fri, 19 Aug 2011 14:13:33 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:6.0) Gecko/20110812 Thunderbird/6.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <20110818131043.GC26690@golden>
-	<1313689684.7918.2.camel@eng-phousel-ubuntu>
-In-Reply-To: <1313689684.7918.2.camel@eng-phousel-ubuntu>
-Subject: Re: [beagleboard] Unable to build Angstrom meta-toolchain
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Tom Rini <tom.rini@gmail.com>, Robert Schuster <thebohemian@gmx.net>, 
+	Robert Schuster <robert.schuster@tarent.de>
+X-Enigmail-Version: 1.3
+Subject: [2011.03-maintenance] do_compile failed for cacao_0.99.3.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,55 +36,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2011 09:48:50 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 19 Aug 2011 12:18:17 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Am 18.08.2011 19:48, schrieb Peter Housel:
-> On Thu, 2011-08-18 at 15:10 +0200, fabian b=C3=BCttner wrote:
->> Hi,
->>
->> I am having troubles compiling the Angstrom SDK.
->>
->> I used the angstrom-setup-scripts to configure OE, sourced the
->> environment settings and built the base-image/console-image with bitba=
-ke.
->>
->> While trying to compile the meta-toolchain, just when bitmake finishes
->> downloading task-sdk-bare_1.0-r2.6_armv7a.ipk, I am getting an error
->> output like this:
->>
->> http://pastie.org/2390409
->>
->> After that, I tried building the meta-toolchain(i did a bitmake clean
->> meta-toolchain) without '-j2' but the error I receive is ultimately th=
-e same:
->> * satisfy_dependencies_for: Cannot satisfy the following dependencies
->> * for task-sdk-bare:
->> *   libstdc++-dev *
->> * opkg_install_cmd: Cannot install package task-sdk-bare.
->>
->> Unfortunately I am too unexperienced with OE/Angstrom to fix bugs like=
- that.
->> Maybe someone could give me a hint how to get around this show-stopper=
-?
-> I can confirm that I've been seeing this as well on recent
-> 2011.03-maintenance, but haven't had a chance to troubleshoot the root
-> cause yet.
->
-It was inbtroduced with commit 105d881227d06f31c180dffb777ee63361b2f2b8
-"gcc: Package libstdc++ gdb python helpers into dev package".
-If no helpers exist the empty package will not be generated.
-I have try to add
-ALLOW_EMPTY_libstdc++-dev =3D "1"
-to gcc-package-cross.inc but this breaks meta-toolchain as the files in
-${prefix}/${TARGET_SYS}/usr/include/c++ are missing.
+Executing: MACHINE=beagleboard bitbake cacao
+...
+Build Configuration:
+BB_VERSION        = "1.12.0"
+METADATA_BRANCH   = "2011.03-maintenance"
+METADATA_REVISION = "f9c0bce"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "beagleboard"
+DISTRO            = "angstrom"
+DISTRO_VERSION    = "2011.03"
+TARGET_FPU        = "hard"
+...
+NOTE: package cacao-0.99.3-r11: task do_compile: Started
+ERROR: Logfile of failure stored in: /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/temp/log.do_compile.21957
+Log data follows:
+| + do_compile
+| + base_do_compile
+| + '[' -e Makefile -o -e makefile -o -e GNUmakefile ']'
+| + oe_runmake
+| + oenote make
+| + echo NOTE: make
+| NOTE: make
+| + make
+| make  all-recursive
+| make[1]: Entering directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3'
+...
+| Making all in native
+| make[3]: Entering directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src/native'
+| Making all in include
+| make[4]: Entering directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src/native/include'
+| /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/bin/cacaoh-0.99.3/cacaoh -bootclasspath ../../../src/classes/classes:/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/classpath/glibj.zip -d . java.lang.Class
+| java.lang.ClassNotFoundException: java/lang/Object
+| /bin/sh: line 2: 22021 Aborted                 /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/bin/cacaoh-0.99.3/cacaoh -bootclasspath ../../../src/classes/classes:/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/classpath/glibj.zip -d . $class
+| make[4]: *** [java_lang_Class.h] Error 134
+| make[4]: Leaving directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src/native/include'
+| make[3]: *** [all-recursive] Error 1
+| make[3]: Leaving directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src/native'
+| make[2]: *** [all-recursive] Error 1
+| make[2]: Leaving directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src'
+| make[1]: *** [all-recursive] Error 1
+| make[1]: Leaving directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3'
+| make: *** [all] Error 2
+| + die 'oe_runmake failed'
+| + oefatal 'oe_runmake failed'
+| + echo FATAL: 'oe_runmake failed'
+| FATAL: oe_runmake failed
+| + exit 1
+NOTE: package cacao-0.99.3-r11: task do_compile: Failed
+ERROR: Function 'do_compile' failed (see /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/temp/log.do_compile.21957 for further information)
+ERROR: Task 13 (/home/sledz/work/angstrom-setup-scripts/sources/openembedded/recipes/cacao/cacao_0.99.3.bb, do_compile) failed with exit code '1'
+ERROR: '/home/sledz/work/angstrom-setup-scripts/sources/openembedded/recipes/cacao/cacao_0.99.3.bb' failed
 
-Only removing libstdc++-dev package from gcc-package-cross.inc fix the=20
-problem.
+Standard angstrom-2008.1 setup without any changes.
 
-Regards,
-      Stefan
+Logfiles are saved and available for inspection.
 
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
