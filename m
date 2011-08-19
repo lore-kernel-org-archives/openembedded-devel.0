@@ -1,35 +1,24 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sakoman@gmail.com>) id 1QuR7m-0006nN-Ml
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Aug 2011 17:36:46 +0200
-Received: by qyk4 with SMTP id 4so402613qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2011 08:32:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=D5G/dBIsgYdA1BM0Cz3vVWceg9UBI27Ej5ByY5MhD6Q=;
-	b=ssR6N/REQmZMrWEmB5OB/dE6wyNApSo0q0m6js/7AMUXtndWAl0gjKcVOX+TfwXaJK
-	CCG0GdAYwvyvO5ElaDqHBNzJt1AQ0M9Y2KR9RZSaAxjXIgOtddoEiRjpWtiQ3OSbPdIs
-	2XeCIMEvJAZpqy9wDue6xcJ89JBXcWaQBMV9Y=
-MIME-Version: 1.0
-Received: by 10.52.92.199 with SMTP id co7mr2341667vdb.85.1313767925060; Fri,
-	19 Aug 2011 08:32:05 -0700 (PDT)
-Received: by 10.52.112.161 with HTTP; Fri, 19 Aug 2011 08:32:05 -0700 (PDT)
-In-Reply-To: <4E4E8152.5030500@gmail.com>
-References: <4E3A3C4B.8040208@dresearch-fe.de>
-	<4E40FCA9.7060204@dresearch-fe.de>
-	<4E439289.3050005@dresearch-fe.de> <1615282.kebj4eQ1MV@perseus>
-	<4E44C076.90407@dresearch-fe.de> <4E4E28AB.8010806@dresearch-fe.de>
-	<4E4E717C.2040506@gmail.com>
-	<CAGDS+nm0mLkVnv3EKRYYA8d-uMwoedPq+N2Q1iXP_eyf8OUOVw@mail.gmail.com>
-	<4E4E8152.5030500@gmail.com>
-Date: Fri, 19 Aug 2011 08:32:05 -0700
-Message-ID: <CAGDS+n=Fx-YYC6TbwWsM_xZEw4u0H1n5d8a0jMFwf1q+UZj+XA@mail.gmail.com>
-From: Steve Sakoman <sakoman@gmail.com>
-To: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
-Subject: Re: [2011.03-maintenance] unsatisfied dependencies to libgcc
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QuRGN-00072o-SK for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Aug 2011 17:45:39 +0200
+Received: from f053038167.adsl.alicedsl.de ([78.53.38.167]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QuRC2-0003Mh-Fy for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Aug 2011 15:41:11 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <CACrTVgLU_=OHhepbGWM-m5U_siu_wBjci9-__xSO9ryhYdDh5Q@mail.gmail.com>
+References: <CACrTVg+OATbFizVqggezkfyM_k0i-JVfuBv3FNj0f59JthmvQQ@mail.gmail.com>
+	<CACrTVgLU_=OHhepbGWM-m5U_siu_wBjci9-__xSO9ryhYdDh5Q@mail.gmail.com>
+Date: Fri, 19 Aug 2011 17:40:59 +0200
+Message-ID: <1313768459.3673.48.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: [PATCH] libpng: upgrade to 1.2.46
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,24 +32,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2011 15:36:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 19 Aug 2011 15:45:39 -0000
+X-Groupsio-MsgNum: 33722
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-9gOQAaL4OJyuDCCqWHkO"
+
+--=-9gOQAaL4OJyuDCCqWHkO
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 19, 2011 at 8:29 AM, Khem Raj <raj.khem@gmail.com> wrote:
-
->> Is there an easy way to tell OE to ignore a recommends for either
->> libgcc-dev or libgcc-s-dev? =A0The issue seems to be (at least on my
->> machine) that packages more or less randomly recommend one or the
->> other. =A0Then the image build fails because the two packages supply the
->> same file.
->
-> I dont think there is a way out. I think one of those 2 packages should b=
-e
-> stopped from building
-
-Which do you think should be disabled?
-
-Steve
+Dear Sylvain,
 
 
+Am Freitag, den 19.08.2011, 16:11 +0200 schrieb Sylvain Par=C3=A9:
+
+> I have modified my patch to remove the old filepatch too. patch below :
+
+[=E2=80=A6]
+
+thank you for your patch. I applied after trying to fix up Google Mail=E2=
+=80=99s
+line wrapping, but I failed and therefore had to most of the stuff
+manually. Please try to avoid such issues in the future by using `git
+send-mail` or a =E2=80=9Cgood=E2=80=9D mail program.
+
+The commit is b557ba57 [1].
+
+
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Db557ba5=
+745aa39bb9f0a6a9b3aaca5692bf21339
+
+--=-9gOQAaL4OJyuDCCqWHkO
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk5OhAoACgkQPX1aK2wOHVit9QCfe7P0jrmZ+DkfeKwdrv6ggOzX
+HOsAniJfXzZAWdx8b2or18NyoJjhnpxt
+=qEyg
+-----END PGP SIGNATURE-----
+
+--=-9gOQAaL4OJyuDCCqWHkO--
