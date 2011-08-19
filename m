@@ -1,24 +1,24 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QuP1N-0001z7-QP for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Aug 2011 15:22:01 +0200
-Received: from f053038167.adsl.alicedsl.de ([78.53.38.167]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QuOx3-00031e-58 for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Aug 2011 13:17:33 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <philip@balister.org>) id 1QuP2b-00024z-Ne
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Aug 2011 15:23:18 +0200
+Received: (qmail 25234 invoked by uid 1003); 19 Aug 2011 13:18:35 -0000
+Received: from unknown (HELO ?172.17.171.238?)
+	(philip@opensdr.com@206.191.100.2)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	19 Aug 2011 13:18:35 -0000
+Message-ID: <4E4E62AB.1050603@balister.org>
+Date: Fri, 19 Aug 2011 06:18:35 -0700
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.18) Gecko/20110621 Fedora/3.1.11-1.fc14 Thunderbird/3.1.11
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1313666756.4016.76.camel@mattotaupa>
-References: <1313604363-2973-1-git-send-email-pespin.shar@gmail.com>
-	<1313666756.4016.76.camel@mattotaupa>
-Date: Fri, 19 Aug 2011 15:17:21 +0200
-Message-ID: <1313759841.3673.42.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: minimal-uclibc: ../../src/lib/.libs/liblightmediascanner.so: undefined reference to `libiconv_open' (was: [meta-efl] lightmediascanner: Add version 0.4.3.0 (initial recipe))
+References: <20110818131043.GC26690@golden>	<1313689684.7918.2.camel@eng-phousel-ubuntu>
+	<4E4E2DFB.5050106@cit-ec.uni-bielefeld.de>
+In-Reply-To: <4E4E2DFB.5050106@cit-ec.uni-bielefeld.de>
+Subject: Re: [beagleboard] Unable to build Angstrom meta-toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,50 +32,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2011 13:22:01 -0000
-X-Groupsio-MsgNum: 33712
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-I2OWyCjpSmWR4HrTzRVe"
+X-List-Received-Date: Fri, 19 Aug 2011 13:23:18 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
---=-I2OWyCjpSmWR4HrTzRVe
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 08/19/2011 02:33 AM, Stefan Herbrechtsmeier wrote:
+> Am 18.08.2011 19:48, schrieb Peter Housel:
+>> On Thu, 2011-08-18 at 15:10 +0200, fabian büttner wrote:
+>>> Hi,
+>>>
+>>> I am having troubles compiling the Angstrom SDK.
+>>>
+>>> I used the angstrom-setup-scripts to configure OE, sourced the
+>>> environment settings and built the base-image/console-image with
+>>> bitbake.
+>>>
+>>> While trying to compile the meta-toolchain, just when bitmake finishes
+>>> downloading task-sdk-bare_1.0-r2.6_armv7a.ipk, I am getting an error
+>>> output like this:
+>>>
+>>> http://pastie.org/2390409
+>>>
+>>> After that, I tried building the meta-toolchain(i did a bitmake clean
+>>> meta-toolchain) without '-j2' but the error I receive is ultimately
+>>> the same:
+>>> * satisfy_dependencies_for: Cannot satisfy the following dependencies
+>>> * for task-sdk-bare:
+>>> * libstdc++-dev *
+>>> * opkg_install_cmd: Cannot install package task-sdk-bare.
+>>>
+>>> Unfortunately I am too unexperienced with OE/Angstrom to fix bugs
+>>> like that.
+>>> Maybe someone could give me a hint how to get around this show-stopper?
+>> I can confirm that I've been seeing this as well on recent
+>> 2011.03-maintenance, but haven't had a chance to troubleshoot the root
+>> cause yet.
+>>
+> It was inbtroduced with commit 105d881227d06f31c180dffb777ee63361b2f2b8
+> "gcc: Package libstdc++ gdb python helpers into dev package".
+> If no helpers exist the empty package will not be generated.
+> I have try to add
+> ALLOW_EMPTY_libstdc++-dev = "1"
+> to gcc-package-cross.inc but this breaks meta-toolchain as the files in
+> ${prefix}/${TARGET_SYS}/usr/include/c++ are missing.
+>
+> Only removing libstdc++-dev package from gcc-package-cross.inc fix the
+> problem.
 
-Dear Pau,
+Does anyone know if dv has the same problem? I can't check easily at the 
+moment.
+
+Philip
 
 
-Am Donnerstag, den 18.08.2011, 13:25 +0200 schrieb Paul Menzel:
-
-[=E2=80=A6]
-
-> Furthermore I just wanted to report that the build is failing with
-> uClibc. I contacted upstream but I am not sure what the correct fix is.
-> Please find my attempt attached.
-
-The upstream developer Gustavo provided a patch and this seems to fix
-the build issues. Could you test if the recipe in oe.dev [1] works for
-you.
-
-
-Thank you very much,
-
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D29dc290=
-49a2c1073456f22a94f6e67a647343a64
-
---=-I2OWyCjpSmWR4HrTzRVe
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk5OYmEACgkQPX1aK2wOHVhhHgCdG+L1ztXx2+TNOMy3na6G91Q+
-FigAn0V2nkKSWsBv26FfoeqZavQJMe8J
-=3yWx
------END PGP SIGNATURE-----
-
---=-I2OWyCjpSmWR4HrTzRVe--
