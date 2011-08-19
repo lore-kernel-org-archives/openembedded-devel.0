@@ -1,14 +1,14 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QuYbq-0005Ja-0P for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Aug 2011 01:36:18 +0200
+	id 1QuYgc-0005VS-2N for openembedded-devel@lists.openembedded.org;
+	Sat, 20 Aug 2011 01:41:14 +0200
 Received: from e178250247.adsl.alicedsl.de ([85.178.250.247]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QuYXV-0004QD-U8 for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Aug 2011 23:31:50 +0000
+	id 1QuYcI-0004Qy-AF for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Aug 2011 23:36:46 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <20110819223546.GA10255@golden>
@@ -19,8 +19,8 @@ References: <20110818131043.GC26690@golden>
 	<4E4E7416.1070105@gmail.com> <20110819210316.GB3730@golden>
 	<CAMKF1squXK1aVRy7pHtL_X9niEn6_pJiuTMao8Dd_32o042YEA@mail.gmail.com>
 	<20110819223546.GA10255@golden>
-Date: Sat, 20 Aug 2011 01:31:33 +0200
-Message-ID: <1313796693.3651.11.camel@mattotaupa>
+Date: Sat, 20 Aug 2011 01:34:06 +0200
+Message-ID: <1313796846.3651.13.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.32.3 
 Subject: Re: [beagleboard] Unable to build Angstrom meta-toolchain
@@ -37,13 +37,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2011 23:36:18 -0000
-X-Groupsio-MsgNum: 33738
+X-List-Received-Date: Fri, 19 Aug 2011 23:41:14 -0000
+X-Groupsio-MsgNum: 33739
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-/IXUUNVjm/sXaXx6Blte"
+	boundary="=-L6yCkZQixOe5Fjml9sLQ"
 
---=-/IXUUNVjm/sXaXx6Blte
+--=-L6yCkZQixOe5Fjml9sLQ
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -69,7 +69,7 @@ Adding a please would be nice next time.
 
 > Where do I find the packages-split dir?
 
-In your build directory. For example for `libroxml`.
+In your build directory [1]. For example for `libroxml`.
 
         $ ls angstrom-dev/work/armv7a-angstrom-linux-gnueabi/libroxml-2.1.0=
 -r0/
@@ -89,16 +89,16 @@ Paul
 [1] http://gumstix.org/software-development/open-embedded/161-openembedded-=
 directory-layout.html
 
---=-/IXUUNVjm/sXaXx6Blte
+--=-L6yCkZQixOe5Fjml9sLQ
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk5O8kkACgkQPX1aK2wOHVgOzwCfZxrXKZK53fEltvQYgElRNFeV
-YNYAn2lcmagpnTqC71GX8pV+NcXH3eBD
-=He5V
+iEYEABECAAYFAk5O8u4ACgkQPX1aK2wOHViiKwCfZ6aY+sDOQQXWm7kFjdL0By64
+2nkAn0hJHuCWN2Xr8kG0ssZZ29NK0UNX
+=5zXr
 -----END PGP SIGNATURE-----
 
---=-/IXUUNVjm/sXaXx6Blte--
+--=-L6yCkZQixOe5Fjml9sLQ--
