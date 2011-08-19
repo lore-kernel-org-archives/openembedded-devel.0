@@ -1,24 +1,29 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1QuP2b-00024z-Ne
+	(envelope-from <sylvain.pare@gmail.com>) id 1QuPsB-0003V7-FW
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Aug 2011 15:23:18 +0200
-Received: (qmail 25234 invoked by uid 1003); 19 Aug 2011 13:18:35 -0000
-Received: from unknown (HELO ?172.17.171.238?)
-	(philip@opensdr.com@206.191.100.2)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	19 Aug 2011 13:18:35 -0000
-Message-ID: <4E4E62AB.1050603@balister.org>
-Date: Fri, 19 Aug 2011 06:18:35 -0700
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.18) Gecko/20110621 Fedora/3.1.11-1.fc14 Thunderbird/3.1.11
+	Fri, 19 Aug 2011 16:16:36 +0200
+Received: by qwh5 with SMTP id 5so2128287qwh.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Aug 2011 07:11:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=KvwILkZGzfgLK9YABBl50rUaGuzgeo1lTxyau5o14OU=;
+	b=b+t+sGTpp7XSgworvft6zNWiHVwvKc5KT407qaEIdEuZiuymyhcD1j+jePY6jxe5Lk
+	Wam1U6Jxubpfk9zqPPH3wxFT1LFOEFNSiVoTTAcewXn74vva7LrwECOipnjOB9yewgdd
+	OAHwaAa6PioQp0P1nKZ0KvDqZgj8NJj4yyDIE=
+Received: by 10.224.208.130 with SMTP id gc2mr454195qab.329.1313763114126;
+	Fri, 19 Aug 2011 07:11:54 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.229.239.76 with HTTP; Fri, 19 Aug 2011 07:11:33 -0700 (PDT)
+In-Reply-To: <CACrTVg+OATbFizVqggezkfyM_k0i-JVfuBv3FNj0f59JthmvQQ@mail.gmail.com>
+References: <CACrTVg+OATbFizVqggezkfyM_k0i-JVfuBv3FNj0f59JthmvQQ@mail.gmail.com>
+From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
+Date: Fri, 19 Aug 2011 16:11:33 +0200
+Message-ID: <CACrTVgLU_=OHhepbGWM-m5U_siu_wBjci9-__xSO9ryhYdDh5Q@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20110818131043.GC26690@golden>	<1313689684.7918.2.camel@eng-phousel-ubuntu>
-	<4E4E2DFB.5050106@cit-ec.uni-bielefeld.de>
-In-Reply-To: <4E4E2DFB.5050106@cit-ec.uni-bielefeld.de>
-Subject: Re: [beagleboard] Unable to build Angstrom meta-toolchain
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] libpng: upgrade to 1.2.46
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,56 +37,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2011 13:23:18 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 19 Aug 2011 14:16:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+I have modified my patch to remove the old filepatch too. patch below :
+
+From d953f12a1e311e2417b5564071ed25c700754d89 Mon Sep 17 00:00:00 2001
+From: =3D?UTF-8?q?Sylvain=3D20'GarthPS'=3D20Par=3DC3=3DA9?=3D <sylvain.pare=
+@gmail.com>
+Date: Fri, 19 Aug 2011 15:39:23 +0200
+Subject: [PATCH] libpng: upgrade to v1.2.46 and removed old patch
+MIME-Version: 1.0
+Content-Type: text/plain; charset=3DUTF-8
 Content-Transfer-Encoding: 8bit
 
-On 08/19/2011 02:33 AM, Stefan Herbrechtsmeier wrote:
-> Am 18.08.2011 19:48, schrieb Peter Housel:
->> On Thu, 2011-08-18 at 15:10 +0200, fabian büttner wrote:
->>> Hi,
->>>
->>> I am having troubles compiling the Angstrom SDK.
->>>
->>> I used the angstrom-setup-scripts to configure OE, sourced the
->>> environment settings and built the base-image/console-image with
->>> bitbake.
->>>
->>> While trying to compile the meta-toolchain, just when bitmake finishes
->>> downloading task-sdk-bare_1.0-r2.6_armv7a.ipk, I am getting an error
->>> output like this:
->>>
->>> http://pastie.org/2390409
->>>
->>> After that, I tried building the meta-toolchain(i did a bitmake clean
->>> meta-toolchain) without '-j2' but the error I receive is ultimately
->>> the same:
->>> * satisfy_dependencies_for: Cannot satisfy the following dependencies
->>> * for task-sdk-bare:
->>> * libstdc++-dev *
->>> * opkg_install_cmd: Cannot install package task-sdk-bare.
->>>
->>> Unfortunately I am too unexperienced with OE/Angstrom to fix bugs
->>> like that.
->>> Maybe someone could give me a hint how to get around this show-stopper?
->> I can confirm that I've been seeing this as well on recent
->> 2011.03-maintenance, but haven't had a chance to troubleshoot the root
->> cause yet.
->>
-> It was inbtroduced with commit 105d881227d06f31c180dffb777ee63361b2f2b8
-> "gcc: Package libstdc++ gdb python helpers into dev package".
-> If no helpers exist the empty package will not be generated.
-> I have try to add
-> ALLOW_EMPTY_libstdc++-dev = "1"
-> to gcc-package-cross.inc but this breaks meta-toolchain as the files in
-> ${prefix}/${TARGET_SYS}/usr/include/c++ are missing.
->
-> Only removing libstdc++-dev package from gcc-package-cross.inc fix the
-> problem.
+ This addresses the following security advisories:
 
-Does anyone know if dv has the same problem? I can't check easily at the 
-moment.
+* CVE-2011-2690
 
-Philip
+* CVE-2011-2692
 
+Signed-off-by: Sylvain 'GarthPS' Par=E9 <sylvain.pare@gmail.com>
+---
+ recipes/libpng/files/makefile_fix.patch |   18 ------------------
+ recipes/libpng/libpng_1.2.44.bb         |    8 --------
+ recipes/libpng/libpng_1.2.46.bb         |    6 ++++++
+ 3 files changed, 6 insertions(+), 26 deletions(-)
+ delete mode 100644 recipes/libpng/files/makefile_fix.patch
+ delete mode 100644 recipes/libpng/libpng_1.2.44.bb
+ create mode 100644 recipes/libpng/libpng_1.2.46.bb
+
+diff --git a/recipes/libpng/files/makefile_fix.patch
+b/recipes/libpng/files/makefile_fix.patch
+deleted file mode 100644
+index 3fa8793..0000000
+--- a/recipes/libpng/files/makefile_fix.patch
++++ /dev/null
+@@ -1,18 +0,0 @@
+-Old versions of libtool (1.5.10) used to set ECHO as a side effect. With
+-libtool 2.2.2 we need to do this manually
+-
+-RP - 14/4/08
+-
+-Index: libpng-1.2.16/Makefile.am
+-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+---- libpng-1.2.16.orig/Makefile.am    2008-04-14 14:47:21.000000000 +0100
+-+++ libpng-1.2.16/Makefile.am    2008-04-14 14:47:47.000000000 +0100
+-@@ -102,6 +102,8 @@
+-             >$@.new
+-     mv $@.new $@
+-
+-+ECHO=3Decho
+-+
+- libpng.vers: libpng.sym
+-     rm -f $@ $@.new
+-     $(ECHO) PNG@PNGLIB_MAJOR@@PNGLIB_MINOR@_0 '{global:' > $@.new
+diff --git a/recipes/libpng/libpng_1.2.44.bb b/recipes/libpng/
+libpng_1.2.44.bb
+deleted file mode 100644
+index 4ba7b20..0000000
+--- a/recipes/libpng/libpng_1.2.44.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require libpng.inc
+-
+-PR =3D "${INC_PR}.0"
+-
+-SRC_URI +=3D "file://makefile_fix.patch"
+-
+-SRC_URI[libpng.md5sum] =3D "e3ac7879d62ad166a6f0c7441390d12b"
+-SRC_URI[libpng.sha256sum] =3D
+"b9ab20f1c2c3bf6c4448fd9bd8a4a8905b918114d5fada56c97bb758a17b7215"
+diff --git a/recipes/libpng/libpng_1.2.46.bb b/recipes/libpng/
+libpng_1.2.46.bb
+new file mode 100644
+index 0000000..e036be5
+--- /dev/null
++++ b/recipes/libpng/libpng_1.2.46.bb
+@@ -0,0 +1,6 @@
++require libpng.inc
++
++PR =3D "${INC_PR}.0"
++
++SRC_URI[libpng.md5sum] =3D "e8b43dc78ef95b3949af7f961d76874b"
++SRC_URI[libpng.sha256sum] =3D
+"a5e796e1802b2e221498bda09ff9850bc7ec9068b6788948cc2c42af213914d8"
+--=20
+1.7.4.1
 
