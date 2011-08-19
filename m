@@ -1,28 +1,24 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QuO1h-0008Gu-4B
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Aug 2011 14:18:17 +0200
-Received: by bkbzu17 with SMTP id zu17so2419500bkb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2011 05:13:36 -0700 (PDT)
-Received: by 10.204.133.7 with SMTP id d7mr388015bkt.104.1313756015806;
-	Fri, 19 Aug 2011 05:13:35 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116])
-	by mx.google.com with ESMTPS id y7sm1028373bkq.48.2011.08.19.05.13.34
-	(version=SSLv3 cipher=OTHER); Fri, 19 Aug 2011 05:13:34 -0700 (PDT)
-Message-ID: <4E4E536D.7010103@dresearch-fe.de>
-Date: Fri, 19 Aug 2011 14:13:33 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:6.0) Gecko/20110812 Thunderbird/6.0
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Tom Rini <tom.rini@gmail.com>, Robert Schuster <thebohemian@gmx.net>, 
-	Robert Schuster <robert.schuster@tarent.de>
-X-Enigmail-Version: 1.3
-Subject: [2011.03-maintenance] do_compile failed for cacao_0.99.3.bb
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QuP1N-0001z7-QP for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Aug 2011 15:22:01 +0200
+Received: from f053038167.adsl.alicedsl.de ([78.53.38.167]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QuOx3-00031e-58 for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Aug 2011 13:17:33 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1313666756.4016.76.camel@mattotaupa>
+References: <1313604363-2973-1-git-send-email-pespin.shar@gmail.com>
+	<1313666756.4016.76.camel@mattotaupa>
+Date: Fri, 19 Aug 2011 15:17:21 +0200
+Message-ID: <1313759841.3673.42.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
+Subject: Re: minimal-uclibc: ../../src/lib/.libs/liblightmediascanner.so: undefined reference to `libiconv_open' (was: [meta-efl] lightmediascanner: Add version 0.4.3.0 (initial recipe))
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,74 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2011 12:18:17 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 19 Aug 2011 13:22:01 -0000
+X-Groupsio-MsgNum: 33712
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-I2OWyCjpSmWR4HrTzRVe"
 
-Executing: MACHINE=beagleboard bitbake cacao
-...
-Build Configuration:
-BB_VERSION        = "1.12.0"
-METADATA_BRANCH   = "2011.03-maintenance"
-METADATA_REVISION = "f9c0bce"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "beagleboard"
-DISTRO            = "angstrom"
-DISTRO_VERSION    = "2011.03"
-TARGET_FPU        = "hard"
-...
-NOTE: package cacao-0.99.3-r11: task do_compile: Started
-ERROR: Logfile of failure stored in: /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/temp/log.do_compile.21957
-Log data follows:
-| + do_compile
-| + base_do_compile
-| + '[' -e Makefile -o -e makefile -o -e GNUmakefile ']'
-| + oe_runmake
-| + oenote make
-| + echo NOTE: make
-| NOTE: make
-| + make
-| make  all-recursive
-| make[1]: Entering directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3'
-...
-| Making all in native
-| make[3]: Entering directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src/native'
-| Making all in include
-| make[4]: Entering directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src/native/include'
-| /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/bin/cacaoh-0.99.3/cacaoh -bootclasspath ../../../src/classes/classes:/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/classpath/glibj.zip -d . java.lang.Class
-| java.lang.ClassNotFoundException: java/lang/Object
-| /bin/sh: line 2: 22021 Aborted                 /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/bin/cacaoh-0.99.3/cacaoh -bootclasspath ../../../src/classes/classes:/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/classpath/glibj.zip -d . $class
-| make[4]: *** [java_lang_Class.h] Error 134
-| make[4]: Leaving directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src/native/include'
-| make[3]: *** [all-recursive] Error 1
-| make[3]: Leaving directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src/native'
-| make[2]: *** [all-recursive] Error 1
-| make[2]: Leaving directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src'
-| make[1]: *** [all-recursive] Error 1
-| make[1]: Leaving directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3'
-| make: *** [all] Error 2
-| + die 'oe_runmake failed'
-| + oefatal 'oe_runmake failed'
-| + echo FATAL: 'oe_runmake failed'
-| FATAL: oe_runmake failed
-| + exit 1
-NOTE: package cacao-0.99.3-r11: task do_compile: Failed
-ERROR: Function 'do_compile' failed (see /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/temp/log.do_compile.21957 for further information)
-ERROR: Task 13 (/home/sledz/work/angstrom-setup-scripts/sources/openembedded/recipes/cacao/cacao_0.99.3.bb, do_compile) failed with exit code '1'
-ERROR: '/home/sledz/work/angstrom-setup-scripts/sources/openembedded/recipes/cacao/cacao_0.99.3.bb' failed
+--=-I2OWyCjpSmWR4HrTzRVe
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Standard angstrom-2008.1 setup without any changes.
-
-Logfiles are saved and available for inspection.
-
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+Dear Pau,
 
 
+Am Donnerstag, den 18.08.2011, 13:25 +0200 schrieb Paul Menzel:
+
+[=E2=80=A6]
+
+> Furthermore I just wanted to report that the build is failing with
+> uClibc. I contacted upstream but I am not sure what the correct fix is.
+> Please find my attempt attached.
+
+The upstream developer Gustavo provided a patch and this seems to fix
+the build issues. Could you test if the recipe in oe.dev [1] works for
+you.
+
+
+Thank you very much,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D29dc290=
+49a2c1073456f22a94f6e67a647343a64
+
+--=-I2OWyCjpSmWR4HrTzRVe
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk5OYmEACgkQPX1aK2wOHVhhHgCdG+L1ztXx2+TNOMy3na6G91Q+
+FigAn0V2nkKSWsBv26FfoeqZavQJMe8J
+=3yWx
+-----END PGP SIGNATURE-----
+
+--=-I2OWyCjpSmWR4HrTzRVe--
