@@ -1,29 +1,28 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <fabian-buettner@gmx.de>) id 1QuXjo-0003Vh-Ay
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Aug 2011 00:40:28 +0200
-Received: (qmail invoked by alias); 19 Aug 2011 22:35:47 -0000
-Received: from lak-29-31.wohnheime.ruhr-uni-bochum.de (EHLO localhost)
-	[134.147.29.31]
-	by mail.gmx.net (mp006) with SMTP; 20 Aug 2011 00:35:47 +0200
-X-Authenticated: #4787129
-X-Provags-ID: V01U2FsdGVkX1/gIkpkPnTgZv2j8hnxrQ0ll39XYSBy8u7wrYOVJJ
-	jH4QJ2NaWtf1nf
-Date: Sat, 20 Aug 2011 00:35:46 +0200
-From: fabian =?iso-8859-15?Q?b=FCttner?= <fabian-buettner@gmx.de>
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QuYbq-0005Ja-0P for openembedded-devel@lists.openembedded.org;
+	Sat, 20 Aug 2011 01:36:18 +0200
+Received: from e178250247.adsl.alicedsl.de ([85.178.250.247]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QuYXV-0004QD-U8 for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Aug 2011 23:31:50 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110819223546.GA10255@golden>
+In-Reply-To: <20110819223546.GA10255@golden>
 References: <20110818131043.GC26690@golden>
 	<1313689684.7918.2.camel@eng-phousel-ubuntu>
 	<4E4E2DFB.5050106@cit-ec.uni-bielefeld.de>
-	<4E4E62AB.1050603@balister.org> <4E4E7416.1070105@gmail.com>
-	<20110819210316.GB3730@golden>
+	<4E4E62AB.1050603@balister.org>
+	<4E4E7416.1070105@gmail.com> <20110819210316.GB3730@golden>
 	<CAMKF1squXK1aVRy7pHtL_X9niEn6_pJiuTMao8Dd_32o042YEA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAMKF1squXK1aVRy7pHtL_X9niEn6_pJiuTMao8Dd_32o042YEA@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Y-GMX-Trusted: 0
+	<20110819223546.GA10255@golden>
+Date: Sat, 20 Aug 2011 01:31:33 +0200
+Message-ID: <1313796693.3651.11.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.3 
 Subject: Re: [beagleboard] Unable to build Angstrom meta-toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,89 +37,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2011 22:40:28 -0000
-Content-Type: text/plain; charset=iso-8859-15
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 19 Aug 2011 23:36:18 -0000
+X-Groupsio-MsgNum: 33738
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-/IXUUNVjm/sXaXx6Blte"
 
-On 15:05 Fri 19 Aug     , Khem Raj wrote:
-> On Fri, Aug 19, 2011 at 2:03 PM, fabian büttner <fabian-buettner@gmx.de> wrote:
-> > On 07:32 Fri 19 Aug     , Khem Raj wrote:
-> >> On 8/19/2011 6:18 AM, Philip Balister wrote:
-> >> > On 08/19/2011 02:33 AM, Stefan Herbrechtsmeier wrote:
-> >> >> Am 18.08.2011 19:48, schrieb Peter Housel:
-> >> >>> On Thu, 2011-08-18 at 15:10 +0200, fabian büttner wrote:
-> >> >>>> Hi,
-> >> >>>>
-> >> >>>> I am having troubles compiling the Angstrom SDK.
-> >> >>>>
-> >> >>>> I used the angstrom-setup-scripts to configure OE, sourced the
-> >> >>>> environment settings and built the base-image/console-image with
-> >> >>>> bitbake.
-> >> >>>>
-> >> >>>> While trying to compile the meta-toolchain, just when bitmake finishes
-> >> >>>> downloading task-sdk-bare_1.0-r2.6_armv7a.ipk, I am getting an error
-> >> >>>> output like this:
-> >> >>>>
-> >> >>>> http://pastie.org/2390409
-> >> >>>>
-> >> >>>> After that, I tried building the meta-toolchain(i did a bitmake clean
-> >> >>>> meta-toolchain) without '-j2' but the error I receive is ultimately
-> >> >>>> the same:
-> >> >>>> * satisfy_dependencies_for: Cannot satisfy the following dependencies
-> >> >>>> * for task-sdk-bare:
-> >> >>>> * libstdc++-dev *
-> >> >>>> * opkg_install_cmd: Cannot install package task-sdk-bare.
-> >> >>>>
-> >> >>>> Unfortunately I am too unexperienced with OE/Angstrom to fix bugs
-> >> >>>> like that.
-> >> >>>> Maybe someone could give me a hint how to get around this show-stopper?
-> >> >>> I can confirm that I've been seeing this as well on recent
-> >> >>> 2011.03-maintenance, but haven't had a chance to troubleshoot the root
-> >> >>> cause yet.
-> >> >>>
-> >> >> It was inbtroduced with commit 105d881227d06f31c180dffb777ee63361b2f2b8
-> >> >> "gcc: Package libstdc++ gdb python helpers into dev package".
-> >> >> If no helpers exist the empty package will not be generated.
-> >> >> I have try to add
-> >> >> ALLOW_EMPTY_libstdc++-dev = "1"
-> >> >> to gcc-package-cross.inc but this breaks meta-toolchain as the files in
-> >> >> ${prefix}/${TARGET_SYS}/usr/include/c++ are missing.
-> >> >>
-> >> >> Only removing libstdc++-dev package from gcc-package-cross.inc fix the
-> >> >> problem.
-> >> >
-> >> > Does anyone know if dv has the same problem? I can't check easily at the
-> >> > moment.
-> >>
-> >> what happens if you remove  libstdc++-dev libgcc-dev from PACKAGES in
-> >> recipes/gcc/gcc-package-cross.inc ?
-> >> I will see if I can reproduce it here
-> >> >
-> >> > Philip
-> >> >
-> >> > _______________________________________________
-> >> > Openembedded-devel mailing list
-> >> > Openembedded-devel@lists.openembedded.org
-> >> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >>
-> >
-> > Hi Khem,
-> >
-> > I removed libstdc++-dev and I was able to build meta-toolchain.
-> >
-> 
-> OK now can you send me list of files you have in
-> packages-split dir in gcc-cross build tree do
-> 
-> $ find
-> 
-> and send the output please
+--=-/IXUUNVjm/sXaXx6Blte
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Could you be more specific, I am new here.
-Where do I find the packages-split dir?
+Am Samstag, den 20.08.2011, 00:35 +0200 schrieb fabian b=C3=BCttner:
+> On 15:05 Fri 19 Aug     , Khem Raj wrote:
+> > On Fri, Aug 19, 2011 at 2:03 PM, fabian b=C3=BCttner <fabian-buettner@g=
+mx.de> wrote:
 
-regards,
-fabian
+[=E2=80=A6]
+
+> > > I removed libstdc++-dev and I was able to build meta-toolchain.
+> >=20
+> > OK now can you send me list of files you have in
+> > packages-split dir in gcc-cross build tree do
+> >=20
+> > $ find
+> >=20
+> > and send the output please
+>=20
+> Could you be more specific, I am new here.
+
+Adding a please would be nice next time.
+
+> Where do I find the packages-split dir?
+
+In your build directory. For example for `libroxml`.
+
+        $ ls angstrom-dev/work/armv7a-angstrom-linux-gnueabi/libroxml-2.1.0=
+-r0/
+        image           package         staging-pkg      temp
+        libroxml-2.1.0  packages-split  sysroot-destdir
+
+If you have `INHERIT +=3D "rm_work"` in you `local.conf` those directories
+are removed after a successful build. So you should comment that line
+out.
 
 
+Thanks and good luck,
+
+Paul
+
+
+[1] http://gumstix.org/software-development/open-embedded/161-openembedded-=
+directory-layout.html
+
+--=-/IXUUNVjm/sXaXx6Blte
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk5O8kkACgkQPX1aK2wOHVgOzwCfZxrXKZK53fEltvQYgElRNFeV
+YNYAn2lcmagpnTqC71GX8pV+NcXH3eBD
+=He5V
+-----END PGP SIGNATURE-----
+
+--=-/IXUUNVjm/sXaXx6Blte--
