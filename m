@@ -1,28 +1,33 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <fabian-buettner@gmx.de>) id 1QuWOj-0000sN-FZ
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <martin.jansa@gmail.com>) id 1QuWxs-0001dB-Ul
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Aug 2011 23:14:37 +0200
-Received: (qmail invoked by alias); 19 Aug 2011 21:03:16 -0000
-Received: from lak-29-31.wohnheime.ruhr-uni-bochum.de (EHLO localhost)
-	[134.147.29.31]
-	by mail.gmx.net (mp059) with SMTP; 19 Aug 2011 23:03:16 +0200
-X-Authenticated: #4787129
-X-Provags-ID: V01U2FsdGVkX19x2Fo0g5txQKYv1EbKDLs4FSBpeRgKo13gwLz+OS
-	MWGM7rh8HS9pxB
-Date: Fri, 19 Aug 2011 23:03:16 +0200
-From: fabian =?iso-8859-15?Q?b=FCttner?= <fabian-buettner@gmx.de>
+	Fri, 19 Aug 2011 23:50:56 +0200
+Received: by fxg11 with SMTP id 11so2450105fxg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Aug 2011 14:46:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=N/WRJwoTmChW+O+YlMr4n50caM2KCrmYFvz5w/txg/I=;
+	b=VajnuftBzGEhA3lIBiG3DwpkreAOHDG1CYmGyxooTMDt3KMGYkV3+F0KGpnCu793RG
+	QiZNywI4ABVgN7TH/myl3WDKni9oKzOwykNZf+/CROx7P8OMyZxQ7MW6tkx+70/1PcRq
+	V71ryvDdqMF8ImGA52IT/Vb90OeeEz4yX4iBI=
+Received: by 10.223.28.10 with SMTP id k10mr252949fac.128.1313790375318;
+	Fri, 19 Aug 2011 14:46:15 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id r11sm2168745faa.0.2011.08.19.14.46.13
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 19 Aug 2011 14:46:13 -0700 (PDT)
+Date: Fri, 19 Aug 2011 23:46:07 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110819210316.GB3730@golden>
-References: <20110818131043.GC26690@golden>
-	<1313689684.7918.2.camel@eng-phousel-ubuntu>
-	<4E4E2DFB.5050106@cit-ec.uni-bielefeld.de>
-	<4E4E62AB.1050603@balister.org> <4E4E7416.1070105@gmail.com>
+Message-ID: <20110819214607.GC22251@jama.jama.net>
+References: <1313774135-24525-1-git-send-email-sylvain.pare@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <4E4E7416.1070105@gmail.com>
+In-Reply-To: <1313774135-24525-1-git-send-email-sylvain.pare@gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Y-GMX-Trusted: 0
-Subject: Re: [beagleboard] Unable to build Angstrom meta-toolchain
+Subject: Re: [PATCH] shr : initscripts-shr, changed mountdevsubfs.sh init level from 04 to 05 S to fix issue for machines using udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,76 +41,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2011 21:14:37 -0000
-Content-Type: text/plain; charset=iso-8859-15
+X-List-Received-Date: Fri, 19 Aug 2011 21:50:57 -0000
+X-Groupsio-MsgNum: 33733
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="hOcCNbCCxyk/YU74"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 
-On 07:32 Fri 19 Aug     , Khem Raj wrote:
-> On 8/19/2011 6:18 AM, Philip Balister wrote:
-> > On 08/19/2011 02:33 AM, Stefan Herbrechtsmeier wrote:
-> >> Am 18.08.2011 19:48, schrieb Peter Housel:
-> >>> On Thu, 2011-08-18 at 15:10 +0200, fabian büttner wrote:
-> >>>> Hi,
-> >>>>
-> >>>> I am having troubles compiling the Angstrom SDK.
-> >>>>
-> >>>> I used the angstrom-setup-scripts to configure OE, sourced the
-> >>>> environment settings and built the base-image/console-image with
-> >>>> bitbake.
-> >>>>
-> >>>> While trying to compile the meta-toolchain, just when bitmake finishes
-> >>>> downloading task-sdk-bare_1.0-r2.6_armv7a.ipk, I am getting an error
-> >>>> output like this:
-> >>>>
-> >>>> http://pastie.org/2390409
-> >>>>
-> >>>> After that, I tried building the meta-toolchain(i did a bitmake clean
-> >>>> meta-toolchain) without '-j2' but the error I receive is ultimately
-> >>>> the same:
-> >>>> * satisfy_dependencies_for: Cannot satisfy the following dependencies
-> >>>> * for task-sdk-bare:
-> >>>> * libstdc++-dev *
-> >>>> * opkg_install_cmd: Cannot install package task-sdk-bare.
-> >>>>
-> >>>> Unfortunately I am too unexperienced with OE/Angstrom to fix bugs
-> >>>> like that.
-> >>>> Maybe someone could give me a hint how to get around this show-stopper?
-> >>> I can confirm that I've been seeing this as well on recent
-> >>> 2011.03-maintenance, but haven't had a chance to troubleshoot the root
-> >>> cause yet.
-> >>>
-> >> It was inbtroduced with commit 105d881227d06f31c180dffb777ee63361b2f2b8
-> >> "gcc: Package libstdc++ gdb python helpers into dev package".
-> >> If no helpers exist the empty package will not be generated.
-> >> I have try to add
-> >> ALLOW_EMPTY_libstdc++-dev = "1"
-> >> to gcc-package-cross.inc but this breaks meta-toolchain as the files in
-> >> ${prefix}/${TARGET_SYS}/usr/include/c++ are missing.
-> >>
-> >> Only removing libstdc++-dev package from gcc-package-cross.inc fix the
-> >> problem.
-> >
-> > Does anyone know if dv has the same problem? I can't check easily at the
-> > moment.
-> 
-> what happens if you remove  libstdc++-dev libgcc-dev from PACKAGES in 
-> recipes/gcc/gcc-package-cross.inc ?
-> I will see if I can reproduce it here
-> >
-> > Philip
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+--hOcCNbCCxyk/YU74
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Hi Khem,
+On Fri, Aug 19, 2011 at 07:15:35PM +0200, Sylvain 'GarthPS' Par=E9 wrote:
+>  * since this commit http://git.openembedded.org/cgit.cgi/openembedded/co=
+mmit/?id=3D974dfb87778a26b80983b44c94922d0acb257e33 machines using udev and=
+ mountdevsubfs.sh had issue of pts not mounted
+>  because both were at init level S04 despite mountdevsubfs.sh was dependi=
+ng on udev..
 
-I removed libstdc++-dev and I was able to build meta-toolchain.
+Thanks, applied and PR bumped after that (normally I can do it in the
+same patch but beer level makes me slower to bump PR then type git push)
 
-regards,
-fabian
+Regards,
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--hOcCNbCCxyk/YU74
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
+
+iEYEARECAAYFAk5O2Z8ACgkQN1Ujt2V2gBxhDQCeNlBU4tzzYL2/oT20WfBZ3Qlr
+M1YAn2+tc7jCEjyPGTXDgG358jFIJr46
+=qBN5
+-----END PGP SIGNATURE-----
+
+--hOcCNbCCxyk/YU74--
