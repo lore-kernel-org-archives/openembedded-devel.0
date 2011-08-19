@@ -1,31 +1,37 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-iy0-f171.google.com ([209.85.210.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QuRka-00006i-TL
+	(envelope-from <raj.khem@gmail.com>) id 1QuS2r-0000jb-7W
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Aug 2011 18:16:53 +0200
-Received: by fxg11 with SMTP id 11so2265272fxg.6
+	Fri, 19 Aug 2011 18:35:45 +0200
+Received: by iyf13 with SMTP id 13so5953092iyf.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2011 09:12:12 -0700 (PDT)
+	Fri, 19 Aug 2011 09:31:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=WqS3Lg2lmo0PN3vQrm+lQZ+aVU1jRr8xWkuHSZTOhA8=;
-	b=S/jUIl+iqHTKI6mg9AT30PKG66wFYwMh9/PuMZAKjhVxYMOj6HB3b0fJsk+Nk/AweJ
-	IvEOyVSpf6qlHjpVzOmRIfBYz5uy+bJXkbBFd8uEeK8aVyQfEM1i3s3aal4iwiaYrwny
-	AMan1OwM1SK8mKvvj5rTRxzYqpIvHRfaU0Tko=
-Received: by 10.223.16.210 with SMTP id p18mr3112339faa.71.1313770332301;
-	Fri, 19 Aug 2011 09:12:12 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b13sm818067fak.40.2011.08.19.09.12.10
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 19 Aug 2011 09:12:11 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Aug 2011 18:12:02 +0200
-Message-Id: <1313770322-22830-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.6
-In-Reply-To: <cover.1313655217.git.Martin.Jansa@gmail.com>
-References: <cover.1313655217.git.Martin.Jansa@gmail.com>
-Subject: [PATCH] bluez4: remove from meta-oe, fixed version is now in oe-core
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=pOrjDjtF9dH6pWH+HFPJpdy4xesQ1syroxIz6b1Yh7Q=;
+	b=G15sflMeux5M5CGjae/fd2DyFXv7GbRHoF/JrnK7cLWdwO7dDkbmQdfji97DwIXw5n
+	jIdIzX4GbzrP6tCgxNBWX+rprK7vPQ4URHeaH9iSne2IwAcSewslgjCjNCooZT8BFuyB
+	ig1QOWDjlbDv/Trt9aIuniZcHYEa4qrpNZnaE=
+Received: by 10.142.234.5 with SMTP id g5mr1137824wfh.347.1313771462060; Fri,
+	19 Aug 2011 09:31:02 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.68.40.168 with HTTP; Fri, 19 Aug 2011 09:29:56 -0700 (PDT)
+In-Reply-To: <CAGDS+n=Fx-YYC6TbwWsM_xZEw4u0H1n5d8a0jMFwf1q+UZj+XA@mail.gmail.com>
+References: <4E3A3C4B.8040208@dresearch-fe.de>
+	<4E40FCA9.7060204@dresearch-fe.de>
+	<4E439289.3050005@dresearch-fe.de> <1615282.kebj4eQ1MV@perseus>
+	<4E44C076.90407@dresearch-fe.de> <4E4E28AB.8010806@dresearch-fe.de>
+	<4E4E717C.2040506@gmail.com>
+	<CAGDS+nm0mLkVnv3EKRYYA8d-uMwoedPq+N2Q1iXP_eyf8OUOVw@mail.gmail.com>
+	<4E4E8152.5030500@gmail.com>
+	<CAGDS+n=Fx-YYC6TbwWsM_xZEw4u0H1n5d8a0jMFwf1q+UZj+XA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 19 Aug 2011 09:29:56 -0700
+Message-ID: <CAMKF1sqqFkovwwLkjQ4pkndKgtmm-VdZupuubWSAURsmx3ArDg@mail.gmail.com>
+To: Steve Sakoman <sakoman@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [2011.03-maintenance] unsatisfied dependencies to libgcc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,143 +45,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2011 16:16:53 -0000
+X-List-Received-Date: Fri, 19 Aug 2011 16:35:45 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../bluez/bluez4/bluetooth.conf                    |   16 -----
- .../fix-dfutool-usb-declaration-mismatch.patch     |   20 ------
- meta-oe/recipes-connectivity/bluez/bluez4_4.96.bb  |   69 --------------------
- 3 files changed, 0 insertions(+), 105 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/bluez/bluez4/bluetooth.conf
- delete mode 100644 meta-oe/recipes-connectivity/bluez/bluez4/fix-dfutool-usb-declaration-mismatch.patch
- delete mode 100644 meta-oe/recipes-connectivity/bluez/bluez4_4.96.bb
+On Fri, Aug 19, 2011 at 8:32 AM, Steve Sakoman <sakoman@gmail.com> wrote:
+>
+> Which do you think should be disabled?
+>
+>
 
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4/bluetooth.conf b/meta-oe/recipes-connectivity/bluez/bluez4/bluetooth.conf
-deleted file mode 100644
-index ca5e9e4..0000000
---- a/meta-oe/recipes-connectivity/bluez/bluez4/bluetooth.conf
-+++ /dev/null
-@@ -1,16 +0,0 @@
--<!-- This configuration file specifies the required security policies
--     for Bluetooth core daemon to work. -->
--
--<!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
-- "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
--<busconfig>
--
--  <!-- ../system.conf have denied everything, so we just punch some holes -->
--
--  <policy context="default">
--    <allow own="org.bluez"/>
--    <allow send_destination="org.bluez"/>
--    <allow send_interface="org.bluez.Agent"/>
--  </policy>
--
--</busconfig>
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4/fix-dfutool-usb-declaration-mismatch.patch b/meta-oe/recipes-connectivity/bluez/bluez4/fix-dfutool-usb-declaration-mismatch.patch
-deleted file mode 100644
-index 27dead0..0000000
---- a/meta-oe/recipes-connectivity/bluez/bluez4/fix-dfutool-usb-declaration-mismatch.patch
-+++ /dev/null
-@@ -1,20 +0,0 @@
--# bluez4: add compile patch fixing some usb declaration mismatch
--# Author: Michael 'Mickey' Lauer <mickey@vanille-media.de>
--# Date:   Thu Jan 29 16:52:21 2009 +0000
--#
--# Acquired from OpenEmbedded
--Upstream-Status: Pending
--
--Index: bluez-4.27/tools/dfutool.c
--===================================================================
----- bluez-4.27.orig/tools/dfutool.c
--+++ bluez-4.27/tools/dfutool.c
--@@ -59,7 +59,7 @@
-- #endif
-- 
-- #ifdef NEED_USB_GET_BUSSES
---static inline struct usb_bus *usb_get_busses(void)
--+inline struct usb_bus *usb_get_busses(void)
-- {
-- 	return usb_busses;
-- }
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4_4.96.bb b/meta-oe/recipes-connectivity/bluez/bluez4_4.96.bb
-deleted file mode 100644
-index 211e910..0000000
---- a/meta-oe/recipes-connectivity/bluez/bluez4_4.96.bb
-+++ /dev/null
-@@ -1,69 +0,0 @@
--SUMMARY = "Linux Bluetooth Stack Userland V4"
--DESCRIPTION = "Linux Bluetooth stack V4 userland components.  These include a system configurations, daemons, tools and system libraries."
--HOMEPAGE = "http://www.bluez.org"
--SECTION = "libs"
--LICENSE = "GPLv2+ & LGPLv2.1+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e \
--                    file://COPYING.LIB;md5=fb504b67c50331fc78734fed90fb0e09 \
--                    file://src/main.c;beginline=1;endline=24;md5=9bc54b93cd7e17bf03f52513f39f926e \
--                    file://sbc/sbc.c;beginline=1;endline=25;md5=1a40781ed30d50d8639323a184aeb191"
--DEPENDS = "udev gst-plugins-base alsa-lib libusb dbus-glib usbpath"
--RDEPENDS_${PN}-dev = "bluez-hcidump"
--
--ASNEEDED = ""
--
--PR = "r0"
--
--SRC_URI = "\
--  ${KERNELORG_MIRROR}/linux/bluetooth/bluez-${PV}.tar.gz \
--  file://fix-dfutool-usb-declaration-mismatch.patch \
--  file://bluetooth.conf \
--"
--
--SRC_URI[md5sum] = "296111afac49e3f9035085ac14daf518"
--SRC_URI[sha256sum] = "c06fd50fd77909cad55e3181a42c6bce7cfcf7abb8cd87871c13d0d70f87fa99"
--
--S = "${WORKDIR}/bluez-${PV}"
--
--inherit autotools
--
--EXTRA_OECONF = "\
--  --enable-gstreamer \
--  --enable-alsa \
--  --enable-usb \
--  --enable-tools \
--  --enable-bccmd \
--  --enable-hid2hci \
--  --enable-dfutool \
--  --enable-hidd \
--  --enable-pand \
--  --enable-dund \
--  --disable-cups \
--  --enable-test \
--  --enable-configfiles \
--"
--
--do_install_append() {
--	install -m 0644 ${S}/audio/audio.conf ${D}/${sysconfdir}/bluetooth/
--	install -m 0644 ${S}/network/network.conf ${D}/${sysconfdir}/bluetooth/
--	install -m 0644 ${S}/input/input.conf ${D}/${sysconfdir}/bluetooth/
--	# at_console doesn't really work with the current state of OE, so punch some more holes so people can actually use BT
--	install -m 0644 ${WORKDIR}/bluetooth.conf ${D}/${sysconfdir}/dbus-1/system.d/
--}
--
--PACKAGES =+ "gst-plugin-bluez libasound-module-bluez"
--
--FILES_gst-plugin-bluez = "${libdir}/gstreamer-0.10/lib*.so"
--FILES_libasound-module-bluez = "${libdir}/alsa-lib/lib*.so ${datadir}/alsa"
--FILES_${PN} += "${libdir}/bluetooth/plugins/*.so ${base_libdir}/udev/ ${base_libdir}/systemd/"
--FILES_${PN}-dev += "\
--  ${libdir}/bluetooth/plugins/*.la \
--  ${libdir}/alsa-lib/*.la \
--  ${libdir}/gstreamer-0.10/*.la \
--"
--
--FILES_${PN}-dbg += "\
--  ${libdir}/bluetooth/plugins/.debug \
--  ${libdir}/*/.debug \
--  ${base_libdir}/udev/.debug \
--"
--- 
-1.7.6
-
+libgcc-dev
 
 
