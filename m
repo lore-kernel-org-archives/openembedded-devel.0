@@ -1,26 +1,33 @@
-Received: from smarthost.techfak.uni-bielefeld.de ([129.70.137.17])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sherbrec@cit-ec.uni-bielefeld.de>)
-	id 1QuSTk-00027b-6D for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Aug 2011 19:03:32 +0200
-Received: from [192.168.1.122] (blfd-4db18788.pool.mediaWays.net
-	[77.177.135.136])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: sherbrec)
-	by smarthost.TechFak.Uni-Bielefeld.DE (Postfix) with ESMTPSA id 148059A
+	(envelope-from <sylvain.pare@gmail.com>) id 1QuSk2-0002VY-2H
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Aug 2011 19:20:22 +0200
+Received: by fxg11 with SMTP id 11so2308322fxg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2011 18:58:51 +0200 (CEST)
-Message-ID: <4E4E964A.6090607@cit-ec.uni-bielefeld.de>
-Date: Fri, 19 Aug 2011 18:58:50 +0200
-From: Stefan Herbrechtsmeier <sherbrec@cit-ec.uni-bielefeld.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.18) Gecko/20110617 Thunderbird/3.1.11
-MIME-Version: 1.0
+	Fri, 19 Aug 2011 10:15:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:mime-version
+	:content-type:content-transfer-encoding;
+	bh=7075HaibBf98wjCRWr97ihmgpGMqkE1NXbH0whuFq1g=;
+	b=G+GDk6zw0WtqhIzl8hXqy8yDG0M4GnEdxaDyEvMx87RiJKxlfwLYIR05nci/KXGQ4p
+	Xw1NlUGXoJ5bTq71RsZQdi+Lo2jjZzPdxCWv6znZiNYlnA4QqkX7quFrdg70UYFBM1DJ
+	kMYRRVdiWZFSEL4hvH2S7fsWLm5pLL64wk7Vw=
+Received: by 10.223.16.194 with SMTP id p2mr3208622faa.58.1313774141396;
+	Fri, 19 Aug 2011 10:15:41 -0700 (PDT)
+Received: from Hellboy (qrc29-1-82-245-206-103.fbx.proxad.net [82.245.206.103])
+	by mx.google.com with ESMTPS id i16sm2717927faa.45.2011.08.19.10.15.38
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 19 Aug 2011 10:15:40 -0700 (PDT)
+Received: by Hellboy (sSMTP sendmail emulation);
+	Fri, 19 Aug 2011 19:15:37 +0200
+From: =?UTF-8?q?Sylvain=20=27GarthPS=27=20Par=C3=A9?= <sylvain.pare@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20110818131043.GC26690@golden>	<1313689684.7918.2.camel@eng-phousel-ubuntu>	<4E4E2DFB.5050106@cit-ec.uni-bielefeld.de>	<4E4E62AB.1050603@balister.org>
-	<4E4E7416.1070105@gmail.com>
-In-Reply-To: <4E4E7416.1070105@gmail.com>
-Subject: Re: [beagleboard] Unable to build Angstrom meta-toolchain
+Date: Fri, 19 Aug 2011 19:15:35 +0200
+Message-Id: <1313774135-24525-1-git-send-email-sylvain.pare@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+MIME-Version: 1.0
+Subject: [PATCH] shr : initscripts-shr, changed mountdevsubfs.sh init level from 04 to 05 S to fix issue for machines using udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,75 +41,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2011 17:03:33 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 19 Aug 2011 17:20:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Am 19.08.2011 16:32, schrieb Khem Raj:
-> On 8/19/2011 6:18 AM, Philip Balister wrote:
->> On 08/19/2011 02:33 AM, Stefan Herbrechtsmeier wrote:
->>> Am 18.08.2011 19:48, schrieb Peter Housel:
->>>> On Thu, 2011-08-18 at 15:10 +0200, fabian b=C3=BCttner wrote:
->>>>> Hi,
->>>>>
->>>>> I am having troubles compiling the Angstrom SDK.
->>>>>
->>>>> I used the angstrom-setup-scripts to configure OE, sourced the
->>>>> environment settings and built the base-image/console-image with
->>>>> bitbake.
->>>>>
->>>>> While trying to compile the meta-toolchain, just when bitmake=20
->>>>> finishes
->>>>> downloading task-sdk-bare_1.0-r2.6_armv7a.ipk, I am getting an erro=
-r
->>>>> output like this:
->>>>>
->>>>> http://pastie.org/2390409
->>>>>
->>>>> After that, I tried building the meta-toolchain(i did a bitmake cle=
-an
->>>>> meta-toolchain) without '-j2' but the error I receive is ultimately
->>>>> the same:
->>>>> * satisfy_dependencies_for: Cannot satisfy the following dependenci=
-es
->>>>> * for task-sdk-bare:
->>>>> * libstdc++-dev *
->>>>> * opkg_install_cmd: Cannot install package task-sdk-bare.
->>>>>
->>>>> Unfortunately I am too unexperienced with OE/Angstrom to fix bugs
->>>>> like that.
->>>>> Maybe someone could give me a hint how to get around this=20
->>>>> show-stopper?
->>>> I can confirm that I've been seeing this as well on recent
->>>> 2011.03-maintenance, but haven't had a chance to troubleshoot the ro=
-ot
->>>> cause yet.
->>>>
->>> It was inbtroduced with commit 105d881227d06f31c180dffb777ee63361b2f2=
-b8
->>> "gcc: Package libstdc++ gdb python helpers into dev package".
->>> If no helpers exist the empty package will not be generated.
->>> I have try to add
->>> ALLOW_EMPTY_libstdc++-dev =3D "1"
->>> to gcc-package-cross.inc but this breaks meta-toolchain as the files =
-in
->>> ${prefix}/${TARGET_SYS}/usr/include/c++ are missing.
->>>
->>> Only removing libstdc++-dev package from gcc-package-cross.inc fix th=
-e
->>> problem.
->>
->> Does anyone know if dv has the same problem? I can't check easily at t=
-he
->> moment.
->
-> what happens if you remove  libstdc++-dev libgcc-dev from PACKAGES in=20
-> recipes/gcc/gcc-package-cross.inc ?
-Maybe I was not precise enough above, but removing libstdc++-dev from=20
-PACKAGES
-in recipes/gcc/gcc-package-cross.inc and bump INC_PR in gcc-4.3.3.inc=20
-fix the problems.
+ * since this commit http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=974dfb87778a26b80983b44c94922d0acb257e33 machines using udev and mountdevsubfs.sh had issue of pts not mounted
+ because both were at init level S04 despite mountdevsubfs.sh was depending on udev..
 
+Signed-off-by: Sylvain 'GarthPS' Paré <sylvain.pare@gmail.com>
+---
+ recipes/shr/initscripts-shr_0.0.1.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/recipes/shr/initscripts-shr_0.0.1.bb b/recipes/shr/initscripts-shr_0.0.1.bb
+index 02e2205..803bcdf 100644
+--- a/recipes/shr/initscripts-shr_0.0.1.bb
++++ b/recipes/shr/initscripts-shr_0.0.1.bb
+@@ -97,7 +97,7 @@ do_install () {
+ 	ln -sf		../init.d/mountkernfs.sh	${D}${sysconfdir}/rcS.d/S01mountkernfs.sh
+ 	ln -sf		../init.d/hostname.sh		${D}${sysconfdir}/rcS.d/S02hostname.sh
+ 	ln -sf		../init.d/checkroot.sh		${D}${sysconfdir}/rcS.d/S02checkroot.sh
+-	ln -sf		../init.d/mountdevsubfs.sh	${D}${sysconfdir}/rcS.d/S04mountdevsubfs.sh
++	ln -sf		../init.d/mountdevsubfs.sh	${D}${sysconfdir}/rcS.d/S05mountdevsubfs.sh
+ 	ln -sf		../init.d/alignment.sh		${D}${sysconfdir}/rcS.d/S06alignment.sh
+ 	ln -sf		../init.d/mountall.sh		${D}${sysconfdir}/rcS.d/S35mountall.sh
+ 	ln -sf		../init.d/populate-volatile.sh	${D}${sysconfdir}/rcS.d/S37populate-volatile.sh
+-- 
+1.7.4.1
 
 
 
