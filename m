@@ -1,33 +1,30 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QuQ6t-00048T-7w
+	(envelope-from <sledz@dresearch-fe.de>) id 1QuQAL-0004Mc-CZ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Aug 2011 16:31:47 +0200
-Received: by bkbzu17 with SMTP id zu17so2515454bkb.6
+	Fri, 19 Aug 2011 16:35:21 +0200
+Received: by bkbzu17 with SMTP id zu17so2518503bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2011 07:27:06 -0700 (PDT)
-Received: by 10.204.135.132 with SMTP id n4mr431495bkt.130.1313764026538;
-	Fri, 19 Aug 2011 07:27:06 -0700 (PDT)
+	Fri, 19 Aug 2011 07:30:40 -0700 (PDT)
+Received: by 10.204.145.68 with SMTP id c4mr324402bkv.370.1313764240590;
+	Fri, 19 Aug 2011 07:30:40 -0700 (PDT)
 Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
 	[217.92.177.116])
-	by mx.google.com with ESMTPS id f9sm1068028bkt.3.2011.08.19.07.27.04
-	(version=SSLv3 cipher=OTHER); Fri, 19 Aug 2011 07:27:05 -0700 (PDT)
-Message-ID: <4E4E72B8.4090602@dresearch-fe.de>
-Date: Fri, 19 Aug 2011 16:27:04 +0200
+	by mx.google.com with ESMTPS id v1sm199460bkd.55.2011.08.19.07.30.37
+	(version=SSLv3 cipher=OTHER); Fri, 19 Aug 2011 07:30:38 -0700 (PDT)
+Message-ID: <4E4E738C.70109@dresearch-fe.de>
+Date: Fri, 19 Aug 2011 16:30:36 +0200
 From: Steffen Sledz <sledz@dresearch-fe.de>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:6.0) Gecko/20110812 Thunderbird/6.0
 MIME-Version: 1.0
-To: Khem Raj <raj.khem@gmail.com>
-References: <4E3A3C4B.8040208@dresearch-fe.de>
-	<4E40FCA9.7060204@dresearch-fe.de>
-	<4E439289.3050005@dresearch-fe.de> <1615282.kebj4eQ1MV@perseus>
-	<4E44C076.90407@dresearch-fe.de>
-	<4E4E28AB.8010806@dresearch-fe.de> <4E4E717C.2040506@gmail.com>
-In-Reply-To: <4E4E717C.2040506@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Tom Rini <tom.rini@gmail.com>, Robert Schuster <thebohemian@gmx.net>, 
+	Robert Schuster <robert.schuster@tarent.de>
+References: <4E4E536D.7010103@dresearch-fe.de>
+In-Reply-To: <4E4E536D.7010103@dresearch-fe.de>
 X-Enigmail-Version: 1.3
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance] unsatisfied dependencies to libgcc
+Subject: Re: [2011.03-maintenance] do_compile failed for cacao_0.99.3.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,22 +38,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2011 14:31:47 -0000
+X-List-Received-Date: Fri, 19 Aug 2011 14:35:21 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 19.08.2011 16:21, Khem Raj wrote:
-> On 8/19/2011 2:11 AM, Steffen Sledz wrote:
->> Regards,
->> Steffen
->>
->> PS: I'm i bit disappointed in the weak help from the maintainers in solving the problem. :( But i do not bear grudges[1]. ;-)
->>
->> [1] Hope that's correct english.
+On 19.08.2011 14:13, Steffen Sledz wrote:
+> Executing: MACHINE=beagleboard bitbake cacao
+> ...
+> Build Configuration:
+> BB_VERSION        = "1.12.0"
+> METADATA_BRANCH   = "2011.03-maintenance"
+> METADATA_REVISION = "f9c0bce"
+> TARGET_ARCH       = "arm"
+> TARGET_OS         = "linux-gnueabi"
+> MACHINE           = "beagleboard"
+> DISTRO            = "angstrom"
+> DISTRO_VERSION    = "2011.03"
+> TARGET_FPU        = "hard"
+> ...
+> NOTE: package cacao-0.99.3-r11: task do_compile: Started
+> ERROR: Logfile of failure stored in: /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/temp/log.do_compile.21957
+> Log data follows:
+> | + do_compile
+> | + base_do_compile
+> | + '[' -e Makefile -o -e makefile -o -e GNUmakefile ']'
+> | + oe_runmake
+> | + oenote make
+> | + echo NOTE: make
+> | NOTE: make
+> | + make
+> | make  all-recursive
+> | make[1]: Entering directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3'
+> ...
+> | Making all in native
+> | make[3]: Entering directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src/native'
+> | Making all in include
+> | make[4]: Entering directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src/native/include'
+> | /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/bin/cacaoh-0.99.3/cacaoh -bootclasspath ../../../src/classes/classes:/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/classpath/glibj.zip -d . java.lang.Class
+> | java.lang.ClassNotFoundException: java/lang/Object
+> | /bin/sh: line 2: 22021 Aborted                 /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/bin/cacaoh-0.99.3/cacaoh -bootclasspath ../../../src/classes/classes:/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/classpath/glibj.zip -d . $class
+> | make[4]: *** [java_lang_Class.h] Error 134
+> | make[4]: Leaving directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src/native/include'
+> | make[3]: *** [all-recursive] Error 1
+> | make[3]: Leaving directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src/native'
+> | make[2]: *** [all-recursive] Error 1
+> | make[2]: Leaving directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src'
+> | make[1]: *** [all-recursive] Error 1
+> | make[1]: Leaving directory `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3'
+> | make: *** [all] Error 2
+> | + die 'oe_runmake failed'
+> | + oefatal 'oe_runmake failed'
+> | + echo FATAL: 'oe_runmake failed'
+> | FATAL: oe_runmake failed
+> | + exit 1
+> NOTE: package cacao-0.99.3-r11: task do_compile: Failed
+> ERROR: Function 'do_compile' failed (see /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/temp/log.do_compile.21957 for further information)
+> ERROR: Task 13 (/home/sledz/work/angstrom-setup-scripts/sources/openembedded/recipes/cacao/cacao_0.99.3.bb, do_compile) failed with exit code '1'
+> ERROR: '/home/sledz/work/angstrom-setup-scripts/sources/openembedded/recipes/cacao/cacao_0.99.3.bb' failed
 > 
-> personally I would have liked to help more but was short on time and since I could not reproduce the problem at my end. It was not obvious to me what the problem was.
+> Standard angstrom-2008.1 setup without any changes.
+> 
+> Logfiles are saved and available for inspection.
 
-Never mind. It's OK.
+I'm not a java expert, but could this be related to <http://icedtea.classpath.org/bugzilla/show_bug.cgi?id=344>?
+
+Steffen
 
 -- 
 DResearch Fahrzeugelektronik GmbH
