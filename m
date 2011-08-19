@@ -1,29 +1,30 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1QuXSH-00031k-IT
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <fabian-buettner@gmx.de>) id 1QuXjo-0003Vh-Ay
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Aug 2011 00:22:21 +0200
-Received: by pzk2 with SMTP id 2so7691217pzk.34
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2011 15:17:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=hpPdSBiCjRzIkovGXB/l/oBHJU4jBH0KiVYi6tdUNe4=;
-	b=bzC5Qe27f6qTQKVbnBUtFlX92D6KSG9MvRznPUFeSidwcLNW0NZfJTYcCur87RiI4E
-	JvwnKdjNsgwOjA2nYieP0cFW0nOOpwzd8U7tKQPr9+yuB3Cyftcl5aTgORRunfjaEUfw
-	Jjd8DeB3x3ZgntZ2JfNy+yy1Wa0wePNZXODEw=
-MIME-Version: 1.0
-Received: by 10.142.135.8 with SMTP id i8mr120381wfd.322.1313792259701; Fri,
-	19 Aug 2011 15:17:39 -0700 (PDT)
-Received: by 10.143.39.7 with HTTP; Fri, 19 Aug 2011 15:17:39 -0700 (PDT)
-In-Reply-To: <alpine.DEB.2.02.1108191219001.4904@localhost6.localdomain6>
-References: <alpine.DEB.2.02.1108191219001.4904@localhost6.localdomain6>
-Date: Sat, 20 Aug 2011 00:17:39 +0200
-Message-ID: <CAAQYJAt7z+xYSpAodtXjs2nTEvAz4J62neh35oXqR7rZHCy+xw@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Sat, 20 Aug 2011 00:40:28 +0200
+Received: (qmail invoked by alias); 19 Aug 2011 22:35:47 -0000
+Received: from lak-29-31.wohnheime.ruhr-uni-bochum.de (EHLO localhost)
+	[134.147.29.31]
+	by mail.gmx.net (mp006) with SMTP; 20 Aug 2011 00:35:47 +0200
+X-Authenticated: #4787129
+X-Provags-ID: V01U2FsdGVkX1/gIkpkPnTgZv2j8hnxrQ0ll39XYSBy8u7wrYOVJJ
+	jH4QJ2NaWtf1nf
+Date: Sat, 20 Aug 2011 00:35:46 +0200
+From: fabian =?iso-8859-15?Q?b=FCttner?= <fabian-buettner@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: numerous broken links at openembedded.org
+Message-ID: <20110819223546.GA10255@golden>
+References: <20110818131043.GC26690@golden>
+	<1313689684.7918.2.camel@eng-phousel-ubuntu>
+	<4E4E2DFB.5050106@cit-ec.uni-bielefeld.de>
+	<4E4E62AB.1050603@balister.org> <4E4E7416.1070105@gmail.com>
+	<20110819210316.GB3730@golden>
+	<CAMKF1squXK1aVRy7pHtL_X9niEn6_pJiuTMao8Dd_32o042YEA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1squXK1aVRy7pHtL_X9niEn6_pJiuTMao8Dd_32o042YEA@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Y-GMX-Trusted: 0
+Subject: Re: [beagleboard] Unable to build Angstrom meta-toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,40 +38,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2011 22:22:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 19 Aug 2011 22:40:28 -0000
+Content-Type: text/plain; charset=iso-8859-15
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Fri, Aug 19, 2011 at 6:22 PM, Robert P. J. Day <rpjday@crashcourse.ca>wrote:
+On 15:05 Fri 19 Aug     , Khem Raj wrote:
+> On Fri, Aug 19, 2011 at 2:03 PM, fabian büttner <fabian-buettner@gmx.de> wrote:
+> > On 07:32 Fri 19 Aug     , Khem Raj wrote:
+> >> On 8/19/2011 6:18 AM, Philip Balister wrote:
+> >> > On 08/19/2011 02:33 AM, Stefan Herbrechtsmeier wrote:
+> >> >> Am 18.08.2011 19:48, schrieb Peter Housel:
+> >> >>> On Thu, 2011-08-18 at 15:10 +0200, fabian büttner wrote:
+> >> >>>> Hi,
+> >> >>>>
+> >> >>>> I am having troubles compiling the Angstrom SDK.
+> >> >>>>
+> >> >>>> I used the angstrom-setup-scripts to configure OE, sourced the
+> >> >>>> environment settings and built the base-image/console-image with
+> >> >>>> bitbake.
+> >> >>>>
+> >> >>>> While trying to compile the meta-toolchain, just when bitmake finishes
+> >> >>>> downloading task-sdk-bare_1.0-r2.6_armv7a.ipk, I am getting an error
+> >> >>>> output like this:
+> >> >>>>
+> >> >>>> http://pastie.org/2390409
+> >> >>>>
+> >> >>>> After that, I tried building the meta-toolchain(i did a bitmake clean
+> >> >>>> meta-toolchain) without '-j2' but the error I receive is ultimately
+> >> >>>> the same:
+> >> >>>> * satisfy_dependencies_for: Cannot satisfy the following dependencies
+> >> >>>> * for task-sdk-bare:
+> >> >>>> * libstdc++-dev *
+> >> >>>> * opkg_install_cmd: Cannot install package task-sdk-bare.
+> >> >>>>
+> >> >>>> Unfortunately I am too unexperienced with OE/Angstrom to fix bugs
+> >> >>>> like that.
+> >> >>>> Maybe someone could give me a hint how to get around this show-stopper?
+> >> >>> I can confirm that I've been seeing this as well on recent
+> >> >>> 2011.03-maintenance, but haven't had a chance to troubleshoot the root
+> >> >>> cause yet.
+> >> >>>
+> >> >> It was inbtroduced with commit 105d881227d06f31c180dffb777ee63361b2f2b8
+> >> >> "gcc: Package libstdc++ gdb python helpers into dev package".
+> >> >> If no helpers exist the empty package will not be generated.
+> >> >> I have try to add
+> >> >> ALLOW_EMPTY_libstdc++-dev = "1"
+> >> >> to gcc-package-cross.inc but this breaks meta-toolchain as the files in
+> >> >> ${prefix}/${TARGET_SYS}/usr/include/c++ are missing.
+> >> >>
+> >> >> Only removing libstdc++-dev package from gcc-package-cross.inc fix the
+> >> >> problem.
+> >> >
+> >> > Does anyone know if dv has the same problem? I can't check easily at the
+> >> > moment.
+> >>
+> >> what happens if you remove  libstdc++-dev libgcc-dev from PACKAGES in
+> >> recipes/gcc/gcc-package-cross.inc ?
+> >> I will see if I can reproduce it here
+> >> >
+> >> > Philip
+> >> >
+> >> > _______________________________________________
+> >> > Openembedded-devel mailing list
+> >> > Openembedded-devel@lists.openembedded.org
+> >> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >>
+> >
+> > Hi Khem,
+> >
+> > I removed libstdc++-dev and I was able to build meta-toolchain.
+> >
+> 
+> OK now can you send me list of files you have in
+> packages-split dir in gcc-cross build tree do
+> 
+> $ find
+> 
+> and send the output please
 
->
->  just an observation that there are numerous (mostly wiki-related)
-> broken links at http://openembedded.org/index.php/Main_Page.  just try
-> anything in the Users or Community or Developers boxes and you'll see
-> what i mean.
->
-> rday
->
-> --
->
-> ========================================================================
-> Robert P. J. Day                                 Ottawa, Ontario, CANADA
->                        http://crashcourse.ca
->
-> Twitter:                                       http://twitter.com/rpjday
-> LinkedIn:                               http://ca.linkedin.com/in/rpjday
-> ========================================================================
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Could you be more specific, I am new here.
+Where do I find the packages-split dir?
 
+regards,
+fabian
 
-Unfortunately, you are 100% right.
-Sadly, OE forces are concentrate on the merge OE/Yocto.
-
-Thanks in advance for your help
-
-Andrea
 
