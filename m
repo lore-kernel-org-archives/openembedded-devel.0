@@ -1,37 +1,31 @@
-Received: from mail-iy0-f171.google.com ([209.85.210.171])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1QuS2r-0000jb-7W
+	(envelope-from <sylvain.pare@gmail.com>) id 1QuS4M-0000sQ-HB
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Aug 2011 18:35:45 +0200
-Received: by iyf13 with SMTP id 13so5953092iyf.16
+	Fri, 19 Aug 2011 18:37:18 +0200
+Received: by qwh5 with SMTP id 5so2207050qwh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2011 09:31:02 -0700 (PDT)
+	Fri, 19 Aug 2011 09:32:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=pOrjDjtF9dH6pWH+HFPJpdy4xesQ1syroxIz6b1Yh7Q=;
-	b=G15sflMeux5M5CGjae/fd2DyFXv7GbRHoF/JrnK7cLWdwO7dDkbmQdfji97DwIXw5n
-	jIdIzX4GbzrP6tCgxNBWX+rprK7vPQ4URHeaH9iSne2IwAcSewslgjCjNCooZT8BFuyB
-	ig1QOWDjlbDv/Trt9aIuniZcHYEa4qrpNZnaE=
-Received: by 10.142.234.5 with SMTP id g5mr1137824wfh.347.1313771462060; Fri,
-	19 Aug 2011 09:31:02 -0700 (PDT)
+	:content-type; bh=jHpjPm2FVD1H9QqhaMYdvY0kxM3xs4DL+24do61qSOM=;
+	b=jyxe7L0260oigBk8yQtDfntu2qFGipFC5wrW/3Shh2FUcpvo59j6mFfhflCiAXoYBW
+	Ed/lDoAmTFAJCgam8fm4EST/nJtm64A5qWuIThyvCyESqhanyhjhR/LqgdvAD+lxpx/2
+	ZAdwqlYsapIrF3GBuyEui8WSWx/Qjcy6FmCwo=
+Received: by 10.224.206.66 with SMTP id ft2mr2254170qab.379.1313771557057;
+	Fri, 19 Aug 2011 09:32:37 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.68.40.168 with HTTP; Fri, 19 Aug 2011 09:29:56 -0700 (PDT)
-In-Reply-To: <CAGDS+n=Fx-YYC6TbwWsM_xZEw4u0H1n5d8a0jMFwf1q+UZj+XA@mail.gmail.com>
-References: <4E3A3C4B.8040208@dresearch-fe.de>
-	<4E40FCA9.7060204@dresearch-fe.de>
-	<4E439289.3050005@dresearch-fe.de> <1615282.kebj4eQ1MV@perseus>
-	<4E44C076.90407@dresearch-fe.de> <4E4E28AB.8010806@dresearch-fe.de>
-	<4E4E717C.2040506@gmail.com>
-	<CAGDS+nm0mLkVnv3EKRYYA8d-uMwoedPq+N2Q1iXP_eyf8OUOVw@mail.gmail.com>
-	<4E4E8152.5030500@gmail.com>
-	<CAGDS+n=Fx-YYC6TbwWsM_xZEw4u0H1n5d8a0jMFwf1q+UZj+XA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 19 Aug 2011 09:29:56 -0700
-Message-ID: <CAMKF1sqqFkovwwLkjQ4pkndKgtmm-VdZupuubWSAURsmx3ArDg@mail.gmail.com>
-To: Steve Sakoman <sakoman@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance] unsatisfied dependencies to libgcc
+Received: by 10.229.239.76 with HTTP; Fri, 19 Aug 2011 09:32:16 -0700 (PDT)
+In-Reply-To: <1313768459.3673.48.camel@mattotaupa>
+References: <CACrTVg+OATbFizVqggezkfyM_k0i-JVfuBv3FNj0f59JthmvQQ@mail.gmail.com>
+	<CACrTVgLU_=OHhepbGWM-m5U_siu_wBjci9-__xSO9ryhYdDh5Q@mail.gmail.com>
+	<1313768459.3673.48.camel@mattotaupa>
+From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
+Date: Fri, 19 Aug 2011 18:32:16 +0200
+Message-ID: <CACrTVgLZ-7ZmBQv=GyjH30i-ESqrTm-=-mTPxaet9bZygv_jQQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] libpng: upgrade to 1.2.46
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,15 +39,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2011 16:35:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 19 Aug 2011 16:37:18 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 19, 2011 at 8:32 AM, Steve Sakoman <sakoman@gmail.com> wrote:
->
-> Which do you think should be disabled?
->
->
+Thanks Paul.
+Yeah sorry about that.. I am about doing this for an other patch
 
-libgcc-dev
 
+2011/8/19 Paul Menzel <paulepanter@users.sourceforge.net>
+
+> Dear Sylvain,
+>
+>
+> Am Freitag, den 19.08.2011, 16:11 +0200 schrieb Sylvain Par=E9:
+>
+> > I have modified my patch to remove the old filepatch too. patch below :
+>
+> [=85]
+>
+> thank you for your patch. I applied after trying to fix up Google Mail=92=
+s
+> line wrapping, but I failed and therefore had to most of the stuff
+> manually. Please try to avoid such issues in the future by using `git
+> send-mail` or a =93good=94 mail program.
+>
+> The commit is b557ba57 [1].
+>
+>
+> Thanks,
+>
+> Paul
+>
+>
+> [1]
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Db557ba574=
+5aa39bb9f0a6a9b3aaca5692bf21339
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
