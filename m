@@ -1,31 +1,24 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from smarthost.techfak.uni-bielefeld.de ([129.70.137.17])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QuLBD-0003Vx-QX
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Aug 2011 11:15:55 +0200
-Received: by bkbzu17 with SMTP id zu17so2318151bkb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2011 02:11:15 -0700 (PDT)
-Received: by 10.204.130.92 with SMTP id r28mr276997bks.108.1313745074864;
-	Fri, 19 Aug 2011 02:11:14 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116])
-	by mx.google.com with ESMTPS id j16sm485559bke.11.2011.08.19.02.11.08
-	(version=SSLv3 cipher=OTHER); Fri, 19 Aug 2011 02:11:09 -0700 (PDT)
-Message-ID: <4E4E28AB.8010806@dresearch-fe.de>
-Date: Fri, 19 Aug 2011 11:11:07 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	(envelope-from <sherbrec@cit-ec.uni-bielefeld.de>)
+	id 1QuLh3-0004KX-Uz for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Aug 2011 11:48:50 +0200
+Received: from [129.70.144.11] (hooge.TechFak.Uni-Bielefeld.DE [129.70.144.11])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: sherbrec)
+	by smarthost.TechFak.Uni-Bielefeld.DE (Postfix) with ESMTPSA id 243E59E;
+	Fri, 19 Aug 2011 11:34:38 +0200 (CEST)
+Message-ID: <4E4E2DFB.5050106@cit-ec.uni-bielefeld.de>
+Date: Fri, 19 Aug 2011 11:33:47 +0200
+From: Stefan Herbrechtsmeier <sherbrec@cit-ec.uni-bielefeld.de>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
 	rv:6.0) Gecko/20110812 Thunderbird/6.0
 MIME-Version: 1.0
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-References: <4E3A3C4B.8040208@dresearch-fe.de>
-	<4E40FCA9.7060204@dresearch-fe.de>
-	<4E439289.3050005@dresearch-fe.de> <1615282.kebj4eQ1MV@perseus>
-	<4E44C076.90407@dresearch-fe.de>
-In-Reply-To: <4E44C076.90407@dresearch-fe.de>
-X-Enigmail-Version: 1.3
-Subject: Re: [2011.03-maintenance] unsatisfied dependencies to libgcc
+To: openembedded-devel@lists.openembedded.org
+References: <20110818131043.GC26690@golden>
+	<1313689684.7918.2.camel@eng-phousel-ubuntu>
+In-Reply-To: <1313689684.7918.2.camel@eng-phousel-ubuntu>
+Subject: Re: [beagleboard] Unable to build Angstrom meta-toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,185 +32,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2011 09:15:55 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 19 Aug 2011 09:48:50 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-On 12.08.2011 07:56, Steffen Sledz wrote:
-> On 11.08.2011 16:30, Khem Raj wrote:
->> On Thursday, August 11, 2011 10:27:53 AM Steffen Sledz wrote:
->>> On 09.08.2011 11:23, Steffen Sledz wrote:
->>>> On 07.08.2011 22:46, Tom Rini wrote:
->>>>> On Sun, Aug 7, 2011 at 10:37 AM, Steffen Sledz <sledz@dresearch-fe.de> 
->> wrote:
->>>>>> Am 05.08.2011 09:13, schrieb Steffen Sledz:
->>>>>>> On 04.08.2011 08:29, Steffen Sledz wrote:
->>>>>>>> In the last days we switched our local development from an older
->>>>>>>> oe-dev master to 2011.03-maintenance branch and hit an annoying
->>>>>>>> problem.
->>>>>>>>
->>>>>>>> The test builds on various developer machines were successful
->>>>>>>> but the build on our continuous integration server (with
->>>>>>>> exactly the same scripting) ended up with a lot of>>>>> 
->>>>>>>> |  * satisfy_dependencies_for: Cannot satisfy the following
->>>>>>>> |  dependencies for lighttpd: *    libstdc++6 (>= 4.3.3) *  
->>>>>>>> |        libgcc1 (>= 4.3.3) *    libgcc1 (>= 4.3.3) * *
->>>>>>>> |  opkg_install_cmd: Cannot install package lighttpd.
->>>>>>>>
->>>>>>>> errors.
->>>>>>>>
->>>>>>>> After some searching we found that there was no
->>>>>>>> libgcc1_4.3.3-r24.2.6_armv5te.ipk in the deploy area.
->>>>>>>>
->>>>>>>> I'm not sure which package should produce this but i guess it
->>>>>>>> should come from gcc-cross-4.3.3 (because its recipe version is
->>>>>>>> r24.2.6 in opposite to gcc-4.3.3 r24.1.6).
->>>>>>>>
->>>>>>>> Looking into the log i hit the fact that the do_rootfs stage for
->>>>>>>> the image was started *before* the do_package_stage of
->>>>>>>> gcc-cross_4.3.3.bb was succeeded.
->>>>>>>>
->>>>>>>> Any ideas?
->>>>>>>>
->>>>>>>> PS: Bitbaking gcc-cross explicitly before bitbaking the image
->>>>>>>> wors as a workaround for us at the moment.>>>> 
->>>>>>> I made some research in this and there is something i do not
->>>>>>> understand.
->>>>>>>
->>>>>>> The task-depends.dot generated by bitbake -g (says
->>>>>>>
->>>>>>>   "console-image.do_rootfs" [label="console-image
->>>>>>>   do_rootfs\n0:1.0-r0\n/home/sledz/work/angstrom-setup-scripts/
->>>>>>>   sources/openembedded/recipes/images/console-image.bb"]
->>>>>>>   "console-image.do_rootfs" -> "lzo-native.do_populate_sysroot"
->>>>>>>   "console-image.do_rootfs" -> "bluez4.do_populate_sysroot"
->>>>>>>   ...
->>>>>>>
->>>>>>> So do_rootfs depends only on do_populate_sysroot stages. But the
->>>>>>> do_rootfs stage itself uses opkg to install the packages into the
->>>>>>> image.
->>>>>>>
->>>>>>> In my understanding this means that all the ipk files need to be
->>>>>>> available. But this is not guaranteed by the reported
->>>>>>> dependencies.
->>>>>>>
->>>>>>> A misunderstanding of mine? Or a bug?
->>>>>>
->>>>>> Ping!
->>>>>>
->>>>>> Did everyone read my message?
->>>>>>
->>>>>> If it really is a misunderstanding of mine, please let me know. But
->>>>>> if i'm right this seems to be a critical problem.>> 
->>>>> It sounds both strange and a correct reading of the task lists, iirc.
->>>>> Did we fix this in oe.dev perhaps and just need to pull a change over?
->>>>
->>>> The mentioned dependency problem was a misinterpretation of the
->>>> task-depends.dot.> 
->>>> Aside from the do_populate_sysroot there are the following additional 
->> dependencies:
->>>>  "console-image.do_rootfs" ->
->>>>  "console-image.do_package_update_index_ipk"
->>>>  ...
->>>>  "console-image.do_package_update_index_ipk" ->
->>>>  "gcc-cross.do_package_write_ipk" ...
->>>>  "gcc-cross.do_package_write_ipk" -> "gcc-cross.do_package"
->>>>
->>>> The problem seems to be located more likely somewhere inside the
->>>> gcc-4.3.3-r24.1/gcc-cross-4.3.3-r24.2 recipes. There seems to be a
->>>> confusion between those which leads to undetermined results.
->>>>
->>>> E.g. the content of
->>>> tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.3.3-r24.2/temp/lo
->>>> g.do_package_write_ipk.22477 is:
->>>> ------------------------>snip<------------------------
->>>> Packaged contents of libstdc++-dev into
->>>> /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/libstdc++-de
->>>> v_4.3.3-r24.1.6_armv5te.ipk Packaged contents of libgcc-dev into
->>>> /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/libgcc-dev_4
->>>> .3.3-r24.1.6_armv5te.ipk
->>>> ------------------------>snip<------------------------
->>>>
->>>> The do_package_write_ipk generates ipk-file with *r24.1.6* (which is the
->>>> PR of gcc) and not *r24.2.6* (which is the PR of gcc).
->>>>
->>>> BTW: Which of the two recipes (gcc/gcc-cross) should provide the libgcc
->>>> ipk (in my case none of it did)?
+Am 18.08.2011 19:48, schrieb Peter Housel:
+> On Thu, 2011-08-18 at 15:10 +0200, fabian b=C3=BCttner wrote:
+>> Hi,
 >>
+>> I am having troubles compiling the Angstrom SDK.
 >>
->> It should be probided by both. We provide it in gcc-cross so that people dont
->> have to build target gcc just for libgcc.
-> 
-> But it isn't provided. :(
-> 
-> Here are related log files of both from a clean build (HEAD of 2011.03-maintenance branch, no modification to the gcc recipes):
-> 
-> ----------------------->snip<----------------------
->> cat tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r24.1/temp/log.do_package_write_ipk.4930
-> Packaged contents of gcc into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/gcc_4.3.3-r24.1.6_armv5te.ipk
-> Packaged contents of gcc-symlinks into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/gcc-symlinks_4.3.3-r24.1.6_armv5te.ipk
-> Packaged contents of g++ into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/g++_4.3.3-r24.1.6_armv5te.ipk
-> Packaged contents of g++-symlinks into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/g++-symlinks_4.3.3-r24.1.6_armv5te.ipk
-> Packaged contents of cpp into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/cpp_4.3.3-r24.1.6_armv5te.ipk
-> Packaged contents of cpp-symlinks into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/cpp-symlinks_4.3.3-r24.1.6_armv5te.ipk
-> Packaged contents of g77-symlinks into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/g77-symlinks_4.3.3-r24.1.6_armv5te.ipk
-> Packaged contents of gfortran into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/gfortran_4.3.3-r24.1.6_armv5te.ipk
-> Packaged contents of gfortran-symlinks into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/gfortran-symlinks_4.3.3-r24.1.6_armv5te.ipk
-> Packaged contents of gcov into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/gcov_4.3.3-r24.1.6_armv5te.ipk
-> Packaged contents of libgcc-dev into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/libgcc-dev_4.3.3-r24.1.6_armv5te.ipk
-> Packaged contents of libstdc++-dev into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/libstdc++-dev_4.3.3-r24.1.6_armv5te.ipk
-> Packaged contents of libgfortran-dev into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/libgfortran-dev_4.3.3-r24.1.6_armv5te.ipk
-> Packaged contents of gcc-doc into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/gcc-doc_4.3.3-r24.1.6_armv5te.ipk
-> 
->> cat tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.3.3-r24.2/temp/log.do_package_write_ipk.22477
-> Packaged contents of libstdc++-dev into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/libstdc++-dev_4.3.3-r24.1.6_armv5te.ipk
-> Packaged contents of libgcc-dev into /home/sledz/work/HydraIP/OE/tmp.6/deploy/glibc/ipk/armv5te/libgcc-dev_4.3.3-r24.1.6_armv5te.ipk
-> ----------------------->snip<----------------------
-> 
-> I've frozen this build and can provide additional info if you need more.
-
-I can give an all clear at least for this problem.
-
-We found that it only occurred in conjunction with using libunwind (which we used to have a working backtrace). After eliminating it none of the mentioned problems was seens again.
-
->>> After some bb recipe updates there is a new error of this type.
->>>
->>> |  * check_data_file_clashes: Package libgcc-s-dev wants to install file
->>> |  /CACHE/hudson/jobs/HydraIP_Linux_release_image/workspace/OE/tmp.6/roo
->>> |  tfs/hydraip-hipox-devimage/usr/lib/libgcc_s.so|  
->>> | 	But that file is already provided by package  * libgcc-dev
->>> | 	
->>> |  * opkg_install_cmd: Cannot install package libsqlite3-dev.
->>> :
-
-This problems seems to be different (see Steve Sakomans mails).
-
->> what changes did you do ?
-> 
-> Only updated the version of sqlite3 by removing DP="-1" from the sqlite3_3.7.5.bb recipe.
-> 
->> libgcc dependencies get encoded into ipks
->> so you might have to regenerate all ipks for best results.
+>> I used the angstrom-setup-scripts to configure OE, sourced the
+>> environment settings and built the base-image/console-image with bitba=
+ke.
 >>
->> I dont know yet what the problem you are seeing could be. I do not see it here
->> locally
-> 
-> Just a guess. Could it be a problem with tasks running in parallel.
+>> While trying to compile the meta-toolchain, just when bitmake finishes
+>> downloading task-sdk-bare_1.0-r2.6_armv7a.ipk, I am getting an error
+>> output like this:
+>>
+>> http://pastie.org/2390409
+>>
+>> After that, I tried building the meta-toolchain(i did a bitmake clean
+>> meta-toolchain) without '-j2' but the error I receive is ultimately th=
+e same:
+>> * satisfy_dependencies_for: Cannot satisfy the following dependencies
+>> * for task-sdk-bare:
+>> *   libstdc++-dev *
+>> * opkg_install_cmd: Cannot install package task-sdk-bare.
+>>
+>> Unfortunately I am too unexperienced with OE/Angstrom to fix bugs like=
+ that.
+>> Maybe someone could give me a hint how to get around this show-stopper=
+?
+> I can confirm that I've been seeing this as well on recent
+> 2011.03-maintenance, but haven't had a chance to troubleshoot the root
+> cause yet.
+>
+It was inbtroduced with commit 105d881227d06f31c180dffb777ee63361b2f2b8
+"gcc: Package libstdc++ gdb python helpers into dev package".
+If no helpers exist the empty package will not be generated.
+I have try to add
+ALLOW_EMPTY_libstdc++-dev =3D "1"
+to gcc-package-cross.inc but this breaks meta-toolchain as the files in
+${prefix}/${TARGET_SYS}/usr/include/c++ are missing.
+
+Only removing libstdc++-dev package from gcc-package-cross.inc fix the=20
+problem.
 
 Regards,
-Steffen
+      Stefan
 
-PS: I'm i bit disappointed in the weak help from the maintainers in solving the problem. :( But i do not bear grudges[1]. ;-)
-
-[1] Hope that's correct english.
-
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
 
 
