@@ -1,35 +1,32 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Qudtu-0004dh-Eq
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <fabian-buettner@gmx.de>) id 1QuiLL-00069P-D4
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Aug 2011 07:15:18 +0200
-Received: by yia28 with SMTP id 28so2547544yia.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2011 22:10:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=aknWwdoRtDv9eOwSEJOACGc4JMsObHDn7HQy4vE1r+Q=;
-	b=FVrcoiASfyOktV3RXDTk2Txt7A9HugqbFa3gHpSROJDBV+7nXTLEv/nRZi4QRqxnEl
-	BwKle9gdIBcQVXmHQGqW562QtA4DAs6fdrKt70/KWu4uSjvFevqRZ50CU5cflpzkWMw1
-	CByRMIEMs7HyVvvhFu5egflWtUGWceuM0dVSk=
-Received: by 10.151.8.17 with SMTP id l17mr194271ybi.16.1313817036802;
-	Fri, 19 Aug 2011 22:10:36 -0700 (PDT)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id k17sm772692yba.29.2011.08.19.22.10.34
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 19 Aug 2011 22:10:36 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Sat, 20 Aug 2011 11:59:55 +0200
+Received: (qmail invoked by alias); 20 Aug 2011 09:55:13 -0000
+Received: from lak-67-86.wohnheime.ruhr-uni-bochum.de (EHLO localhost)
+	[134.147.67.86]
+	by mail.gmx.net (mp017) with SMTP; 20 Aug 2011 11:55:13 +0200
+X-Authenticated: #4787129
+X-Provags-ID: V01U2FsdGVkX1+IRQ9wFJOIndLUZawTkie81aXDqY7vyRn2+60tCR
+	bF1XG+uyPLHsvp
+Date: Sat, 20 Aug 2011 11:55:13 +0200
+From: fabian =?iso-8859-15?Q?b=FCttner?= <fabian-buettner@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 20 Aug 2011 05:10:20 +0000
-Message-Id: <286345e7b08a0a73ad6363bfcc17e422bc35f4d1.1313816970.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1313816970.git.otavio@ossystems.com.br>
-References: <cover.1313816970.git.otavio@ossystems.com.br>
-In-Reply-To: <cover.1313816970.git.otavio@ossystems.com.br>
-References: <cover.1313816970.git.otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 2/3] kernel.bbclass: fix spacing to reduce delta between oe-core and meta-oe
+Message-ID: <20110820095513.GA3409@golden>
+References: <20110818131043.GC26690@golden>
+	<1313689684.7918.2.camel@eng-phousel-ubuntu>
+	<4E4E2DFB.5050106@cit-ec.uni-bielefeld.de>
+	<4E4E62AB.1050603@balister.org> <4E4E7416.1070105@gmail.com>
+	<20110819210316.GB3730@golden>
+	<CAMKF1squXK1aVRy7pHtL_X9niEn6_pJiuTMao8Dd_32o042YEA@mail.gmail.com>
+	<20110819223546.GA10255@golden>
+	<1313796846.3651.13.camel@mattotaupa>
+MIME-Version: 1.0
+In-Reply-To: <1313796846.3651.13.camel@mattotaupa>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Y-GMX-Trusted: 0
+Subject: Re: [beagleboard] Unable to build Angstrom meta-toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,48 +40,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Aug 2011 05:15:18 -0000
+X-List-Received-Date: Sat, 20 Aug 2011 09:59:55 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- meta-oe/classes/kernel.bbclass |    9 ++++-----
- 1 files changed, 4 insertions(+), 5 deletions(-)
+On 01:34 Sat 20 Aug     , Paul Menzel wrote:
+> Am Samstag, den 20.08.2011, 00:35 +0200 schrieb fabian büttner:
+> > On 15:05 Fri 19 Aug     , Khem Raj wrote:
+> > > On Fri, Aug 19, 2011 at 2:03 PM, fabian büttner <fabian-buettner@gmx.de> wrote:
+> 
+> […]
+> 
+> > > > I removed libstdc++-dev and I was able to build meta-toolchain.
+> > > 
+> > > OK now can you send me list of files you have in
+> > > packages-split dir in gcc-cross build tree do
+> > > 
+> > > $ find
+> > > 
+> > > and send the output please
+> > 
+> > Could you be more specific, I am new here.
+> 
+> Adding a please would be nice next time.
+> 
+> > Where do I find the packages-split dir?
+> 
+> In your build directory [1]. For example for `libroxml`.
+> 
+>         $ ls angstrom-dev/work/armv7a-angstrom-linux-gnueabi/libroxml-2.1.0-r0/
+>         image           package         staging-pkg      temp
+>         libroxml-2.1.0  packages-split  sysroot-destdir
+> 
+> If you have `INHERIT += "rm_work"` in you `local.conf` those directories
+> are removed after a successful build. So you should comment that line
+> out.
+> 
+> 
+> Thanks and good luck,
+> 
+> Paul
+> 
+> 
+> [1] http://gumstix.org/software-development/open-embedded/161-openembedded-directory-layout.html
 
-diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
-index 8629133..f67503a 100644
---- a/meta-oe/classes/kernel.bbclass
-+++ b/meta-oe/classes/kernel.bbclass
-@@ -19,12 +19,12 @@ python __anonymous () {
- 
-     image = bb.data.getVar('INITRAMFS_IMAGE', d, True)
-     if image:
--        bb.data.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs', d)
-+    	bb.data.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs', d)
- 
-     machine_kernel_pr = bb.data.getVar('MACHINE_KERNEL_PR', d, True)
- 
-     if machine_kernel_pr:
--       bb.data.setVar('PR', machine_kernel_pr, d)
-+    	bb.data.setVar('PR', machine_kernel_pr, d)
- }
- 
- inherit kernel-arch deploy
-@@ -189,11 +189,10 @@ kernel_do_configure() {
- 	if [ -f "${WORKDIR}/defconfig" ] && [ ! -f "${B}/.config" ]; then
- 		cp "${WORKDIR}/defconfig" "${B}/.config"
- 	fi
--
--	yes '' | oe_runmake oldconfig
-+        yes '' | oe_runmake oldconfig
- 
- 	if [ ! -z "${INITRAMFS_IMAGE}" ]; then
--		for img in cpio.gz cpio.lzo cpio.lzma cpio.xz ; do
-+		for img in cpio.gz cpio.lzo cpio.lzma cpio.xz; do
- 		if [ -e "${DEPLOY_DIR_IMAGE}/${INITRAMFS_IMAGE}-${MACHINE}.$img" ]; then
- 			cp "${DEPLOY_DIR_IMAGE}/${INITRAMFS_IMAGE}-${MACHINE}.$img" initramfs.$img
- 		fi
--- 
-1.7.2.5
+Hi Paul,
 
+Thank you for your answer.
+Like you suggested I commented the INHERIT line in my config and did a 
+bitbake -c clean gcc-cross. After that i tried building the
+meta-toolchain again, which failed, with the following error:
+[...]
+| cp: cannot stat
+`/home/fab/git/angstrom-setup-scripts/build/tmp-angstrom_2010_x/pkgdata/armv7a-angstrom-linux-gnueabi/runtime/libstdc++-dev':
+No such file or directory
+NOTE: package meta-toolchain-1.0-r0: task do_populate_sdk: Failed
+ERROR: Function 'do_populate_sdk' failed (see
+/home/fab/git/angstrom-setup-scripts/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/meta-toolchain-1.0-r0/temp/log.do_populate_sdk.23348
+for further information)
+ERROR: Task 14
+(/home/fab/git/angstrom-setup-scripts/sources/openembedded/recipes/meta/meta-toolchain.bb,
+do_populate_sdk) failed with exit code '1'
+ERROR:
+'/home/fab/git/angstrom-setup-scripts/sources/openembedded/recipes/meta/meta-toolchain.bb'
+failed
+
+The requested file list in packages-split
+work/armv7a-angstrom-linux-gnueabi/gcc-cross-4.5-r37.1+svnr170443/packages-split:
+./libssp
+./libssp/usr
+./libssp/usr/lib
+./libssp/usr/lib/libssp.so.0.0.0
+./libssp/usr/lib/libssp.so.0
+./libstdc++.shlibdeps
+./libssp.shlibdeps
+./libgcc-dev
+./libgcc-dev/usr
+./libgcc-dev/usr/lib
+./libgcc-dev/usr/lib/libgcc_s.so
+./libg2c
+./libgfortran
+./libstdc++
+./libstdc++/usr
+./libstdc++/usr/lib
+./libstdc++/usr/lib/libstdc++.so.6.0.14
+./libstdc++/usr/lib/libstdc++.so.6
+./libgcc
+./libgcc/lib
+./libgcc/lib/libgcc_s.so.1
+./libgcc.shlibdeps
+
+regards,
+fabian
 
 
