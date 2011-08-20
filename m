@@ -1,29 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QuYgc-0005VS-2N for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Aug 2011 01:41:14 +0200
-Received: from e178250247.adsl.alicedsl.de ([85.178.250.247]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QuYcI-0004Qy-AF for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Aug 2011 23:36:46 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <otavio.salvador@gmail.com>) id 1Qudtq-0004dO-Ge
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 20 Aug 2011 07:15:14 +0200
+Received: by gxk3 with SMTP id 3so2538389gxk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Aug 2011 22:10:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=MNp8xCa+r/nTtniaBrcd6DeBuwicqPHWmwSDYSVdVbA=;
+	b=Nvnmrb4m9TpXtKqWvYCBUXOyIWENnpoG8OOoggScsprh4PX5Y1TTYSiQ5JiIN1a6C6
+	qtCdbm7itv1LbkJZzbTOiF8TfILmOUtdNb2+Xt6iHFT6T8UMkurpOtEEq4K6DMtJKDpR
+	P3Kp5b5DR/t/blKTl6szpjs16oLr5gVQ476x4=
+Received: by 10.150.194.14 with SMTP id r14mr181455ybf.43.1313817032812;
+	Fri, 19 Aug 2011 22:10:32 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id k17sm772692yba.29.2011.08.19.22.10.31
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 19 Aug 2011 22:10:32 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20110819223546.GA10255@golden>
-References: <20110818131043.GC26690@golden>
-	<1313689684.7918.2.camel@eng-phousel-ubuntu>
-	<4E4E2DFB.5050106@cit-ec.uni-bielefeld.de>
-	<4E4E62AB.1050603@balister.org>
-	<4E4E7416.1070105@gmail.com> <20110819210316.GB3730@golden>
-	<CAMKF1squXK1aVRy7pHtL_X9niEn6_pJiuTMao8Dd_32o042YEA@mail.gmail.com>
-	<20110819223546.GA10255@golden>
-Date: Sat, 20 Aug 2011 01:34:06 +0200
-Message-ID: <1313796846.3651.13.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-Subject: Re: [beagleboard] Unable to build Angstrom meta-toolchain
+Date: Sat, 20 Aug 2011 05:10:18 +0000
+Message-Id: <cover.1313816970.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [meta-oe][PATCH 0/3] Pending patches from O.S. Systems tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,68 +38,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2011 23:41:14 -0000
-X-Groupsio-MsgNum: 33739
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-L6yCkZQixOe5Fjml9sLQ"
+X-List-Received-Date: Sat, 20 Aug 2011 05:15:14 -0000
 
---=-L6yCkZQixOe5Fjml9sLQ
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit 3d0b866967529a14268541b85e79cb35981e1aed:
 
-Am Samstag, den 20.08.2011, 00:35 +0200 schrieb fabian b=C3=BCttner:
-> On 15:05 Fri 19 Aug     , Khem Raj wrote:
-> > On Fri, Aug 19, 2011 at 2:03 PM, fabian b=C3=BCttner <fabian-buettner@g=
-mx.de> wrote:
+  xdotool: import from OE rev 5350bbef01b8979617e3d0fd38939f94f1fa5315 (2011-08-17 23:11:55 +0200)
 
-[=E2=80=A6]
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe master
+  https://github.com/OSSystems/meta-oe/tree/master
 
-> > > I removed libstdc++-dev and I was able to build meta-toolchain.
-> >=20
-> > OK now can you send me list of files you have in
-> > packages-split dir in gcc-cross build tree do
-> >=20
-> > $ find
-> >=20
-> > and send the output please
->=20
-> Could you be more specific, I am new here.
+Otavio Salvador (3):
+  freerdp: bump SRCREV to gather major RemoteFX improvements
+  kernel.bbclass: fix spacing to reduce delta between oe-core and
+    meta-oe
+  kernel.bbclass: save kernel image name into $kerneldir
 
-Adding a please would be nice next time.
+ meta-oe/classes/kernel.bbclass                 |   15 ++++++++++-----
+ meta-oe/recipes-support/freerdp/freerdp_git.bb |    2 +-
+ 2 files changed, 11 insertions(+), 6 deletions(-)
 
-> Where do I find the packages-split dir?
-
-In your build directory [1]. For example for `libroxml`.
-
-        $ ls angstrom-dev/work/armv7a-angstrom-linux-gnueabi/libroxml-2.1.0=
--r0/
-        image           package         staging-pkg      temp
-        libroxml-2.1.0  packages-split  sysroot-destdir
-
-If you have `INHERIT +=3D "rm_work"` in you `local.conf` those directories
-are removed after a successful build. So you should comment that line
-out.
+-- 
+1.7.2.5
 
 
-Thanks and good luck,
 
-Paul
-
-
-[1] http://gumstix.org/software-development/open-embedded/161-openembedded-=
-directory-layout.html
-
---=-L6yCkZQixOe5Fjml9sLQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk5O8u4ACgkQPX1aK2wOHViiKwCfZ6aY+sDOQQXWm7kFjdL0By64
-2nkAn0hJHuCWN2Xr8kG0ssZZ29NK0UNX
-=5zXr
------END PGP SIGNATURE-----
-
---=-L6yCkZQixOe5Fjml9sLQ--
