@@ -1,32 +1,30 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <fabian-buettner@gmx.de>) id 1QuiLL-00069P-D4
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <dbaryshkov@gmail.com>) id 1Qv328-0006af-03
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Aug 2011 11:59:55 +0200
-Received: (qmail invoked by alias); 20 Aug 2011 09:55:13 -0000
-Received: from lak-67-86.wohnheime.ruhr-uni-bochum.de (EHLO localhost)
-	[134.147.67.86]
-	by mail.gmx.net (mp017) with SMTP; 20 Aug 2011 11:55:13 +0200
-X-Authenticated: #4787129
-X-Provags-ID: V01U2FsdGVkX1+IRQ9wFJOIndLUZawTkie81aXDqY7vyRn2+60tCR
-	bF1XG+uyPLHsvp
-Date: Sat, 20 Aug 2011 11:55:13 +0200
-From: fabian =?iso-8859-15?Q?b=FCttner?= <fabian-buettner@gmx.de>
+	Sun, 21 Aug 2011 10:05:28 +0200
+Received: by ewy5 with SMTP id 5so1533717ewy.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 21 Aug 2011 01:00:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=EhJTJXxy3spkIr58lHvZNmyKG9c2724MmejKASGidCs=;
+	b=YAN89BXl/5kFEt7rMK863YLPO9z1/HZbJw4Xpd4qTj6GNaFJZRY++i+xEuOof5oprb
+	x9JW1Yu+HwT9+T2GvC/4DuxasdiQ219nuD7YtMXQ/P92LdrwskQbG9AxZpKiHioPcMDv
+	oP+3KPEh4eww9RYzsnG7BmvlJQZQGNZwxyB+E=
+Received: by 10.213.15.138 with SMTP id k10mr264473eba.84.1313913642528;
+	Sun, 21 Aug 2011 01:00:42 -0700 (PDT)
+Received: from localhost.localdomain ([194.85.238.22])
+	by mx.google.com with ESMTPS id v20sm2168441eeh.46.2011.08.21.01.00.40
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 21 Aug 2011 01:00:41 -0700 (PDT)
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110820095513.GA3409@golden>
-References: <20110818131043.GC26690@golden>
-	<1313689684.7918.2.camel@eng-phousel-ubuntu>
-	<4E4E2DFB.5050106@cit-ec.uni-bielefeld.de>
-	<4E4E62AB.1050603@balister.org> <4E4E7416.1070105@gmail.com>
-	<20110819210316.GB3730@golden>
-	<CAMKF1squXK1aVRy7pHtL_X9niEn6_pJiuTMao8Dd_32o042YEA@mail.gmail.com>
-	<20110819223546.GA10255@golden>
-	<1313796846.3651.13.camel@mattotaupa>
-MIME-Version: 1.0
-In-Reply-To: <1313796846.3651.13.camel@mattotaupa>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Y-GMX-Trusted: 0
-Subject: Re: [beagleboard] Unable to build Angstrom meta-toolchain
+Date: Sun, 21 Aug 2011 12:00:35 +0400
+Message-Id: <1313913636-31667-1-git-send-email-dbaryshkov@gmail.com>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+Subject: [meta-gnome 1/2] gnome-disk-utility: disable scrollkeeper
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,98 +38,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Aug 2011 09:59:55 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 21 Aug 2011 08:05:28 -0000
 
-On 01:34 Sat 20 Aug     , Paul Menzel wrote:
-> Am Samstag, den 20.08.2011, 00:35 +0200 schrieb fabian büttner:
-> > On 15:05 Fri 19 Aug     , Khem Raj wrote:
-> > > On Fri, Aug 19, 2011 at 2:03 PM, fabian büttner <fabian-buettner@gmx.de> wrote:
-> 
-> […]
-> 
-> > > > I removed libstdc++-dev and I was able to build meta-toolchain.
-> > > 
-> > > OK now can you send me list of files you have in
-> > > packages-split dir in gcc-cross build tree do
-> > > 
-> > > $ find
-> > > 
-> > > and send the output please
-> > 
-> > Could you be more specific, I am new here.
-> 
-> Adding a please would be nice next time.
-> 
-> > Where do I find the packages-split dir?
-> 
-> In your build directory [1]. For example for `libroxml`.
-> 
->         $ ls angstrom-dev/work/armv7a-angstrom-linux-gnueabi/libroxml-2.1.0-r0/
->         image           package         staging-pkg      temp
->         libroxml-2.1.0  packages-split  sysroot-destdir
-> 
-> If you have `INHERIT += "rm_work"` in you `local.conf` those directories
-> are removed after a successful build. So you should comment that line
-> out.
-> 
-> 
-> Thanks and good luck,
-> 
-> Paul
-> 
-> 
-> [1] http://gumstix.org/software-development/open-embedded/161-openembedded-directory-layout.html
+scrollkeeper isn't packaged neither in oe.dev, nor in any oe-core based
+layer. Disable scrollkeeper in gnome-disk-utils.
 
-Hi Paul,
+Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+---
+ .../gnome-disk-utility/disable-scrollkeeper.patch  |   27 ++++++++++++++++++++
+ .../gnome-disk-utility_2.32.0.bb                   |    6 ++++
+ 2 files changed, 33 insertions(+), 0 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/disable-scrollkeeper.patch
 
-Thank you for your answer.
-Like you suggested I commented the INHERIT line in my config and did a 
-bitbake -c clean gcc-cross. After that i tried building the
-meta-toolchain again, which failed, with the following error:
-[...]
-| cp: cannot stat
-`/home/fab/git/angstrom-setup-scripts/build/tmp-angstrom_2010_x/pkgdata/armv7a-angstrom-linux-gnueabi/runtime/libstdc++-dev':
-No such file or directory
-NOTE: package meta-toolchain-1.0-r0: task do_populate_sdk: Failed
-ERROR: Function 'do_populate_sdk' failed (see
-/home/fab/git/angstrom-setup-scripts/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/meta-toolchain-1.0-r0/temp/log.do_populate_sdk.23348
-for further information)
-ERROR: Task 14
-(/home/fab/git/angstrom-setup-scripts/sources/openembedded/recipes/meta/meta-toolchain.bb,
-do_populate_sdk) failed with exit code '1'
-ERROR:
-'/home/fab/git/angstrom-setup-scripts/sources/openembedded/recipes/meta/meta-toolchain.bb'
-failed
+diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/disable-scrollkeeper.patch b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/disable-scrollkeeper.patch
+new file mode 100644
+index 0000000..ccc6f6a
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/disable-scrollkeeper.patch
+@@ -0,0 +1,27 @@
++From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
++Subject: Disable scrollkeeper-config not found message
++Upstream-Status: Not-Applicable
++
++If scrollkeeper-config isn't found, configure fails with an error.
++Fix that by commenting out the check.
++
++Signed-Off-By: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
++
++
++Index: gnome-disk-utility-2.32.0/configure.ac
++===================================================================
++--- gnome-disk-utility-2.32.0.orig/configure.ac	2010-09-15 19:07:25.000000000 +0400
+++++ gnome-disk-utility-2.32.0/configure.ac	2011-08-20 01:29:48.000000000 +0400
++@@ -188,9 +188,9 @@
++ # *************
++ 
++ AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
++-if test x$SCROLLKEEPER_CONFIG = xno; then
++-  AC_MSG_ERROR(Couldn't find scrollkeeper-config, please install the scrollkeeper package)
++-fi
+++dnl if test x$SCROLLKEEPER_CONFIG = xno; then
+++dnl  AC_MSG_ERROR([Couldn't find scrollkeeper-config, please install the scrollkeeper package])
+++dnl fi
++ 
++ # ********************
++ # Internationalization
+diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
+index e8069e9..f7945c5 100644
+--- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
+@@ -9,5 +9,11 @@ inherit gnome
+ SRC_URI[archive.md5sum] = "f0366c8baebca0404d190b2d78f3582d"
+ SRC_URI[archive.sha256sum] = "03e461b6bda7f773f8018d25fa3213d3073d4dc83a76e6b39d962652f4de6a98"
+ 
++SRC_URI += "\
++     file://disable-scrollkeeper.patch \
++     "
++
++EXTRA_OECONF += "--disable-scrollkeeper"
++
+ PACKAGES =+ "${PN}-nautilus-extension"
+ FILES_${PN}-nautilus-extension += "${libdir}/nautilus/extensions-2.0/*.so"
+-- 
+1.7.2.5
 
-The requested file list in packages-split
-work/armv7a-angstrom-linux-gnueabi/gcc-cross-4.5-r37.1+svnr170443/packages-split:
-./libssp
-./libssp/usr
-./libssp/usr/lib
-./libssp/usr/lib/libssp.so.0.0.0
-./libssp/usr/lib/libssp.so.0
-./libstdc++.shlibdeps
-./libssp.shlibdeps
-./libgcc-dev
-./libgcc-dev/usr
-./libgcc-dev/usr/lib
-./libgcc-dev/usr/lib/libgcc_s.so
-./libg2c
-./libgfortran
-./libstdc++
-./libstdc++/usr
-./libstdc++/usr/lib
-./libstdc++/usr/lib/libstdc++.so.6.0.14
-./libstdc++/usr/lib/libstdc++.so.6
-./libgcc
-./libgcc/lib
-./libgcc/lib/libgcc_s.so.1
-./libgcc.shlibdeps
-
-regards,
-fabian
 
 
