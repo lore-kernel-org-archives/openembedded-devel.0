@@ -1,32 +1,24 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pespin.shar@gmail.com>) id 1QvbSP-0004n9-9d
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Aug 2011 22:50:53 +0200
-Received: by mail-wy0-f175.google.com with SMTP id 19so4033077wyf.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Aug 2011 13:46:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=+lnDBGDQA2HANZx7SitNafTnuO6lsnKPsbq+ETIMKbA=;
-	b=Q5WZNTo3csdDiEAB+sxjPIDyzjimScFqnpSSf3uz2hDL2GtrRFML3BkG8KNxsCJ/EX
-	watFofPtNZHBi4flBFyLiTztdOFuGjl39oJpo7rJ08C0kcsRWSK6GzjclkQzOShXoYFP
-	NOyAE7iE7Jui0f08ZVlMtpPUUkuPznYBrhbNo=
-Received: by 10.216.4.132 with SMTP id 4mr2456399wej.49.1314045971177;
-	Mon, 22 Aug 2011 13:46:11 -0700 (PDT)
-Received: from localhost.localdomain (169.pool85-50-86.dynamic.orange.es
-	[85.50.86.169])
-	by mx.google.com with ESMTPS id j11sm4192267wed.18.2011.08.22.13.46.09
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 22 Aug 2011 13:46:10 -0700 (PDT)
-From: Pau Espin Pedrol <pespin.shar@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qvba9-0005Fr-09 for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Aug 2011 22:58:53 +0200
+Received: from f053036249.adsl.alicedsl.de ([78.53.36.249]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QvbVc-0006a7-9C for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Aug 2011 20:54:12 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Aug 2011 22:45:08 +0200
-Message-Id: <1314045908-21970-4-git-send-email-pespin.shar@gmail.com>
-X-Mailer: git-send-email 1.7.6
-In-Reply-To: <1314045908-21970-1-git-send-email-pespin.shar@gmail.com>
-References: <1314045908-21970-1-git-send-email-pespin.shar@gmail.com>
-Subject: [meta-efl][PATCH 4/4] enjoy: Add gst-plugins-good-autodetect to RDEPENDS
+Date: Mon, 22 Aug 2011 22:53:57 +0200
+In-Reply-To: <22ec18224f7a7c64850c76b14017dff2ff4345f2.1314044687.git.Martin.Jansa@gmail.com>
+References: <f2d4302d43765f25c2fca5a78959300dd5fc5371.1314044687.git.Martin.Jansa@gmail.com>
+	<22ec18224f7a7c64850c76b14017dff2ff4345f2.1314044687.git.Martin.Jansa@gmail.com>
+X-Mailer: Evolution 3.0.2- 
+Message-ID: <1314046450.28437.0.camel@mattotaupa>
+Mime-Version: 1.0
+Subject: Re: [meta-efl][PATCH 4/4] elfe: Add LIC_FILES_CHKSUM to recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,30 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Aug 2011 20:50:53 -0000
+X-List-Received-Date: Mon, 22 Aug 2011 20:58:53 -0000
+X-Groupsio-MsgNum: 33780
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-3xQ9dqPXzuanPu3878V+"
 
-* This plugin is needed in newer versions of enjoy. The app won't play any sound files without this plugin.
+--=-3xQ9dqPXzuanPu3878V+
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com>
----
- meta-efl/recipes-efl/e17/enjoy_svn.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Am Montag, den 22.08.2011, 22:26 +0200 schrieb Martin Jansa:
+> From: pespin <pespin.shar@gmail.com>
 
-diff --git a/meta-efl/recipes-efl/e17/enjoy_svn.bb b/meta-efl/recipes-efl/e17/enjoy_svn.bb
-index d2f6b03..8c4d4c2 100644
---- a/meta-efl/recipes-efl/e17/enjoy_svn.bb
-+++ b/meta-efl/recipes-efl/e17/enjoy_svn.bb
-@@ -14,7 +14,7 @@ DEPENDS += "gst-plugins-good ${@base_conditional('ENTERPRISE_DISTRO', '1', '', '
- #4th needed for flac playback
- #5th needed binary to create db
- RDEPENDS += "\
--       gst-plugins-base-typefindfunctions gst-plugins-base-playbin gst-plugins-base-volume gst-plugins-base-decodebin2 \
-+       gst-plugins-base-typefindfunctions gst-plugins-base-playbin gst-plugins-base-volume gst-plugins-base-decodebin2 gst-plugins-good-autodetect \
-        ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'gst-plugins-ugly-mad gst-plugins-good-id3demux', d)} \
-        gst-plugins-base-ogg gst-plugins-base-ivorbisdec \
-        gst-plugins-good-flac \
--- 
-1.7.6
+Koen, please fix up the name before merging it.
 
+> Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-efl/recipes-efl/e17/elfe_svn.bb |    1 +
+>  1 files changed, 1 insertions(+), 0 deletions(-)
+>=20
+> diff --git a/meta-efl/recipes-efl/e17/elfe_svn.bb b/meta-efl/recipes-efl/=
+e17/elfe_svn.bb
+> index 8b8f09d..b5126f9 100644
+> --- a/meta-efl/recipes-efl/e17/elfe_svn.bb
+> +++ b/meta-efl/recipes-efl/e17/elfe_svn.bb
+> @@ -1,4 +1,5 @@
+>  LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D344895f253c32f38e182dcaf30fe8=
+a35"
+>  PV =3D "0.0.1+svnr${SRCPV}"
+>  PR =3D "${INC_PR}.0"
 
+--=-3xQ9dqPXzuanPu3878V+
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk5SweUACgkQPX1aK2wOHVhcqQCeKC5CyWzdtDUGe6QDC5OkWOma
+qv8An3eXuj+Q8sbDANKylEaU1mKawzQC
+=GzCA
+-----END PGP SIGNATURE-----
+
+--=-3xQ9dqPXzuanPu3878V+--
