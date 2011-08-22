@@ -1,25 +1,24 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QvQUK-0006TS-7t for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Aug 2011 11:08:08 +0200
-Received: from f053036249.adsl.alicedsl.de ([78.53.36.249]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QvQPm-0004c0-BJ for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Aug 2011 09:03:26 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1QvVd8-0008Oc-UX
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Aug 2011 16:37:35 +0200
+Received: from nat-dem.mentorg.com ([195.212.93.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1QvVYY-0001p8-Bf from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Aug 2011 07:32:50 -0700
+Received: from localhost.localdomain ([137.202.156.152]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
+	Mon, 22 Aug 2011 16:32:49 +0200
+From: "Noor, Ahsan" <noor_ahsan@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Aug 2011 11:03:24 +0200
-In-Reply-To: <989A078976CDAD4CB2DC976EEF70E2A5068A53EB@eu2-mail.mgc.mentorg.com>
-References: <201101310012.51498.schnitzeltony@gmx.de>
-	<1296461709.3922.4.camel@mattotaupa> <20110131090826.149890@gmx.net>
-	<989A078976CDAD4CB2DC976EEF70E2A5068A53EB@eu2-mail.mgc.mentorg.com>
-X-Mailer: Evolution 3.0.2- 
-Message-ID: <1314003805.12202.14.camel@mattotaupa>
-Mime-Version: 1.0
-Subject: Re: [meta-oe] need to add some verfication package recipes
+Date: Mon, 22 Aug 2011 19:32:39 +0500
+Message-Id: <1314023559-15827-1-git-send-email-noor_ahsan@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+X-OriginalArrivalTime: 22 Aug 2011 14:32:49.0687 (UTC)
+	FILETIME=[5E389270:01CC60D8]
+Subject: [PATCH][meta-oe] lmbench: Added 3.0-a9 version recipe files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,65 +32,262 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Aug 2011 09:08:08 -0000
-X-Groupsio-MsgNum: 33755
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-f2mFTi9LQKavIgEPbNdX"
+X-List-Received-Date: Mon, 22 Aug 2011 14:37:35 -0000
 
---=-f2mFTi9LQKavIgEPbNdX
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Noor Ahsan <noor_ahsan@mentor.com>
 
-Dear Noor,
+* Added recipe file to build 3.0-a9 version.
+
+Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+---
+ .../lmbench-3.0-a9/update-results-script.patch     |  155 ++++++++++++++++++++
+ meta-oe/recipes-support/lmbench/lmbench_3.0-a9.bb  |   75 ++++++++++
+ 2 files changed, 230 insertions(+), 0 deletions(-)
+
+diff --git a/meta-oe/recipes-support/lmbench/lmbench-3.0-a9/update-results-script.patch b/meta-oe/recipes-support/lmbench/lmbench-3.0-a9/update-results-script.patch
+new file mode 100644
+index 0000000..3feb657
+--- /dev/null
++++ b/meta-oe/recipes-support/lmbench/lmbench-3.0-a9/update-results-script.patch
+@@ -0,0 +1,155 @@
++Now that we have our binaries in /usr/bin rather than the normal
++lmbench hierarchy we need to update the scripts as well to bave well here.
++Index: lmbench-3.0-a9/scripts/results
++===================================================================
++--- lmbench-3.0-a9.orig/scripts/results
+++++ lmbench-3.0-a9/scripts/results
++@@ -8,11 +8,11 @@ RESULTS=results/$OS
++ BASE=../$RESULTS/`uname -n`
++ EXT=0
++ 
++-if [ ! -f "../bin/$OS/$CONFIG" ]
+++if [ ! -f "$CONFIG" ]
++ then	echo "No config file?"
++ 	exit 1
++ fi
++-. ../bin/$OS/$CONFIG
+++. $CONFIG
++ 
++ if [ ! -d ../$RESULTS ]
++ then	mkdir -p ../$RESULTS
++@@ -23,11 +23,9 @@ do      EXT=`expr $EXT + 1`
++ 	RESULTS=$BASE.$EXT
++ done
++ 
++-cd ../bin/$OS 
++-PATH=.:${PATH}; export PATH
++ export SYNC_MAX
++ export OUTPUT
++-lmbench $CONFIG 2>../${RESULTS}
+++lmbench $CONFIG 2>${RESULTS}
++ 
++ if [ X$MAIL = Xyes ]
++ then	echo Mailing results
++Index: lmbench-3.0-a9/scripts/config-run
++===================================================================
++--- lmbench-3.0-a9.orig/scripts/config-run
+++++ lmbench-3.0-a9/scripts/config-run
++@@ -132,20 +132,20 @@ export LMBENCH_SCHED
++ ############################################################################
++ echo $L; echo "";
++ echo "Hang on, we are calculating your timing granularity."
++-../bin/$OS/msleep 250
++-ENOUGH=`../bin/$OS/enough`
+++msleep 250
+++ENOUGH=`enough`
++ export ENOUGH 
++ echo "OK, it looks like you can time stuff down to $ENOUGH usec resolution."
++ echo ""
++ echo "Hang on, we are calculating your timing overhead."
++-../bin/$OS/msleep 250
++-TIMING_O=`../bin/$OS/timing_o`
+++msleep 250
+++TIMING_O=`timing_o`
++ export TIMING_O
++ echo "OK, it looks like your gettimeofday() costs $TIMING_O usecs."
++ echo ""
++ echo "Hang on, we are calculating your loop overhead."
++-../bin/$OS/msleep 250
++-LOOP_O=`../bin/$OS/loop_o`
+++msleep 250
+++LOOP_O=`loop_o`
++ export LOOP_O
++ echo "OK, it looks like your benchmark loop costs $LOOP_O usecs."
++ echo ""
++@@ -177,7 +177,7 @@ then
++ fi
++ if [ X$MB = X ]
++ then	$ECHON "Probing system for available memory: $ECHOC"
++-	MB=`../bin/$OS/memsize 4096`
+++	MB=`memsize 4096`
++ fi
++ TOTAL_MEM=$MB
++ MB=`echo \( $MB \* 7 \) / 10 | bc 2>/dev/null`
++@@ -205,9 +205,9 @@ fi
++ # Certain machines tend to barf when you try and bcopy 8MB.
++ # Figure out how much we can use.
++ echo "Checking to see if you have $MB MB; please wait for a moment..."
++-MB=`../bin/$OS/memsize $MB`
++-MB=`../bin/$OS/memsize $MB`
++-MB=`../bin/$OS/memsize $MB`
+++MB=`memsize $MB`
+++MB=`memsize $MB`
+++MB=`memsize $MB`
++ if [ `expr $SYNC_MAX \* $MB` -gt `expr $TOTAL_MEM` ]
++ then
++ 	MB=`expr $TOTAL_MEM / $SYNC_MAX`
++@@ -223,8 +223,8 @@ then	echo Warning: you have only ${MB}MB
++ fi
++ 
++ echo "Hang on, we are calculating your cache line size."
++-../bin/$OS/msleep 250
++-LINE_SIZE=`../bin/$OS/lm_line -M ${MB}M`
+++msleep 250
+++LINE_SIZE=`lm_line -M ${MB}M`
++ export LINE_SIZE
++ echo "OK, it looks like your cache line is $LINE_SIZE bytes."
++ echo ""
++@@ -479,7 +479,7 @@ EOF
++ 	then	
++ 		for i in $disks
++ 		do	if [ -r $i ]
++-			then	../bin/$OS/flushdisk $i
+++			then	flushdisk $i
++ 				if [ $? -eq 1 ]
++ 				then	echo "Must be root to run disk benchmarks."
++ 					echo "Root is needed to flush the buffer cache"
++@@ -584,7 +584,7 @@ fi
++ echo $L
++ echo ""
++ echo "Calculating mhz, please wait for a moment..."
++-MHZ=`../bin/$OS/mhz`
+++MHZ=`mhz`
++ cat<<EOF
++ I think your CPU mhz is 
++ 
++@@ -689,9 +689,9 @@ esac
++ 
++ INFO=`../scripts/info`
++ if [ $MAIL = yes ]
++-then	if [ ! -f ../bin/$OS/$INFO ]
++-	then	cp ../scripts/info-template ../bin/$OS/$INFO
++-		chmod +w ../bin/$OS/$INFO
+++then	if [ ! -f $INFO ]
+++	then	cp ../scripts/info-template $INFO
+++		chmod +w $INFO
++ 		REUSE=no
++ 	else	
++ 		REUSE=view
++@@ -705,7 +705,7 @@ then	if [ ! -f ../bin/$OS/$INFO ]
++ 				;;
++ 			[Vv]*)	REUSE=view
++ 				echo $L
++-				more ../bin/$OS/$INFO
+++				more $INFO
++ 				echo $L
++ 				;;
++ 	    		*)	REUSE=yes
++@@ -733,7 +733,7 @@ EOF
++ 		then	EDITOR=$TMP
++ 		fi
++ 		if [ X$EDITOR != "none" ]
++-		then	$EDITOR ../bin/$OS/`../scripts/info`
+++		then	$EDITOR `../scripts/info`
++ 		fi
++ 	fi
++ fi
++@@ -750,7 +750,7 @@ EOF
++ 
++ VERSION=`../scripts/version`
++ 
++-C=../bin/$OS/`../scripts/config`
+++C=`../scripts/config`
++ echo DISKS=\"$DISKS\" > $C
++ echo DISK_DESC=\"$DISK_DESC\" >> $C
++ echo OUTPUT=$OUTPUT >> $C
+diff --git a/meta-oe/recipes-support/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-support/lmbench/lmbench_3.0-a9.bb
+new file mode 100644
+index 0000000..1076eeb
+--- /dev/null
++++ b/meta-oe/recipes-support/lmbench/lmbench_3.0-a9.bb
+@@ -0,0 +1,75 @@
++SECTION = "console/utils"
++DESCRIPTION = "Tools for performance analysis."
++LICENSE = "GPL"
++LICENSE = "GPLv2+ & LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
++                    file://COPYING-2;md5=8e9aee2ccc75d61d107e43794a25cdf9"
++RDEPENDS_${PN} = "debianutils"
++
++PR = "r0"
++
++inherit autotools
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/lmbench/lmbench-${PV}.tgz \
++	   file://lmbench-run \
++	   file://rename-line-binary.patch \
++	   file://update-results-script.patch \
++	   file://obey-ranlib.patch"
++SRC_URI[md5sum] = "b3351a3294db66a72e2864a199d37cbf"
++SRC_URI[sha256sum] = "cbd5777d15f44eab7666dcac418054c3c09df99826961a397d9acf43d8a2a551"
++
++S = "${WORKDIR}/lmbench-${PV}"
++
++EXTRA_OEMAKE = 'CC="${CC}" AR="${AR}" RANLIB="${RANLIB}" CFLAGS="${CFLAGS}" \
++		LDFLAGS="${LDFLAGS}" LD="${LD}" OS="${TARGET_SYS}" \
++		TARGET="${TARGET_OS}" BASE="${prefix}"'
++
++
++python do_unpack () {
++	bb.build.exec_func('base_do_unpack', d)
++	bb.build.exec_func('byebk_do_unpack', d)
++}
++
++byebk_do_unpack () {
++	find ${S}/.. -name BitKeeper -o -name SCCS | xargs rm -rf
++}
++
++do_configure() {
++	:
++}
++
++do_compile () {
++	. ${CONFIG_SITE}
++	if [ X"$ac_cv_uint" = X"yes" ]; then
++		CFLAGS="${CFLAGS} -DHAVE_uint"
++	fi
++	install -d ${S}/bin/${TARGET_SYS}
++	oe_runmake -C src
++}
++
++do_install () {
++	install -d ${D}${localstatedir}/run/lmbench \
++		   ${D}${bindir} ${D}${mandir} ${D}${libdir}/lmbench \
++		   ${D}${datadir}/lmbench/scripts
++	oe_runmake 'BASE=${D}${prefix}' \
++		    -C src install
++	mv ${D}${bindir}/line ${D}${bindir}/lm_line
++	mv ${D}${prefix}/man/* ${D}${mandir}/
++	install -m 0755 ${WORKDIR}/lmbench-run ${D}${bindir}/
++	sed -i -e 's,^SHAREDIR=.*$,SHAREDIR=${datadir}/${PN},;' \
++	       -e 's,^BINDIR=.*$,BINDIR=${libdir}/${PN},;' \
++	       -e 's,^CONFIG=.*$,CONFIG=$SHAREDIR/`$SCRIPTSDIR/config`,;' \
++	       ${D}${bindir}/lmbench-run
++	install -m 0755 ${S}/scripts/lmbench ${D}${bindir}
++	install -m 0755 ${S}/scripts/* ${D}${datadir}/lmbench/scripts
++
++        if [ -f ${WORKDIR}/CONFIG.${MACHINE} ]; then
++                install -d ${D}${localstatedir}/lib/lmbench/config
++                mkdir -p ${D}/${datadir}/lmbench/bin/${TARGET_PREFIX}  
++                install -m 0644 ${WORKDIR}/CONFIG.${MACHINE} \
++			${D}/${datadir}/lmbench/bin/${TARGET_PREFIX}/CONFIG.${MACHINE}
++        fi
++
++}
++
++FILES_${PN} += "${datadir}/lmbench"
+-- 
+1.7.0.4
 
 
-Am Montag, den 22.08.2011, 09:53 +0200 schrieb Ahsan, Noor:
 
-> I need to add some packages in meta-oe which are related to verification =
-and benchmark. The packages are as follows. I just need to know in which di=
-rectories the recipes of these package should go.
->=20
-> 1. lmbench (Tools for performance analysis)
-> 2. netperf (benchmark the performance of different type of networks)
-> 3. iperf (measure maximum TCP and UDP bandwitdth)
-> 4. bonie++ (filesystem benchmark tool)
-> 5. izone3 (filesystem and disk benchmar)
-> 6. dbench (used to stress the filesystem or a server to see which workloa=
-d it become stuarated)
-> 7. tbench (filesystem benchmark which generates load patterns)
-> 8. toibench (multithreaded I.O benchmark)
-
-there are some typos in the names above.
-
-> Kindly suggest me to which recipes dir the recipes for these package shou=
-ld go thanks.
-
-I could not find a category specifically for performance tools. Just put
-them into `meta-oe/recipes-support/` and submit the patches. The
-developers will tell you then, if they have objections. I think you will
-always get more responses when sending in ready-to-be-applied patch.
-Although it might be more time for you. :(
-
-It would be nice if the oe-core folks can comment too in case these
-recipes should go into oe-core some day.
-
-
-Thanks,
-
-Paul
-
---=-f2mFTi9LQKavIgEPbNdX
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk5SG1wACgkQPX1aK2wOHVjtfgCdEIWPWYEZ4lDdVRLzQaBQiSBe
-vUMAniCorY7vXYGRBQC8fMrhLtLa6vdw
-=z9he
------END PGP SIGNATURE-----
-
---=-f2mFTi9LQKavIgEPbNdX--
