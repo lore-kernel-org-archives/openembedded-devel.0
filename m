@@ -1,34 +1,34 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QvaqB-0000Z0-Ql
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Aug 2011 22:11:23 +0200
-Received: by fxg11 with SMTP id 11so3789486fxg.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QvatX-0000hL-C8 for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Aug 2011 22:14:51 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Qvaoy-0005MV-2Q for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Aug 2011 22:10:08 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Aug 2011 22:10:08 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Aug 2011 13:06:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=tddx/c3xp5dXoccPGnP7NS/NTmbcYDYOdEnQBYLEZtY=;
-	b=WzCgI9i2TGJafXX02ogau90gyElYGpVIBbzDyQcvLFNkJzHW/5YRqj97wQ+j8EaJhs
-	uusfenUO9cmjYU8z+/TEASyme4YD/mHG1ZIXy0/sj6/sQaEQShV6lb5DKt7nMyY5u1WL
-	LYWmryp2yd3IF8+90ppAhOsuzOfScS/0DQszM=
-Received: by 10.223.88.83 with SMTP id z19mr4202256fal.11.1314043599385;
-	Mon, 22 Aug 2011 13:06:39 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id e5sm4431072fah.35.2011.08.22.13.06.37
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 22 Aug 2011 13:06:38 -0700 (PDT)
-Date: Mon, 22 Aug 2011 22:06:31 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 22 Aug 2011 22:10:08 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110822200630.GD3751@jama.jama.net>
-References: <cover.1313655444.git.Martin.Jansa@gmail.com>
-	<j2uc13$fdd$2@dough.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <j2uc13$fdd$2@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-efl][PATCH 0/2] Pull request #8
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 22 Aug 2011 21:53:23 +0200
+Message-ID: <j2uc3j$fdd$3@dough.gmane.org>
+References: <cover.1313655217.git.Martin.Jansa@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:6.0) Gecko/20110812 Thunderbird/6.0
+In-Reply-To: <cover.1313655217.git.Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.3
+Subject: Re: [meta-oe][PATCH 0/3] Pull request #20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,68 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Aug 2011 20:11:23 -0000
-X-Groupsio-MsgNum: 33767
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="MAH+hnPXVZWQ5cD/"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 22 Aug 2011 20:14:51 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---MAH+hnPXVZWQ5cD/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Mon, Aug 22, 2011 at 09:52:03PM +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 18-08-11 10:17, Martin Jansa schreef:
-> > The following changes since commit 3d0b866967529a14268541b85e79cb35981e=
-1aed:
-> >=20
-> > xdotool: import from OE rev 5350bbef01b8979617e3d0fd38939f94f1fa5315 (2=
-011-08-17 23:11:55 +0200)
-> >=20
-> > are available in the git repository at: git://git.openembedded.org/meta=
--openembedded-contrib jansa/meta-efl http://cgit.openembedded.org/cgit.cgi/=
-meta-openembedded-contrib/log/?h=3Djansa/meta-efl
-> >=20
-> > Martin Jansa (2): e-base: bump EFL_SRCREV e-wm: remove SHR specific pat=
-ch
->=20
-> merged, thanks!
+Op 18-08-11 10:14, Martin Jansa schreef:
+> The following changes since commit 3d0b866967529a14268541b85e79cb35981e1aed:
+> 
+> xdotool: import from OE rev 5350bbef01b8979617e3d0fd38939f94f1fa5315 (2011-08-17 23:11:55 +0200)
+> 
+> are available in the git repository at: git://git.openembedded.org/meta-openembedded-contrib jansa/meta-oe http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/meta-oe
+> 
+> Martin Jansa (3): kexec-tools-klibc: import from meta-zaurus layer kexec-tools: add bbappend to keep old packaging with separate kexec and kdump bluez-hcidump: remove older 2.0
 
-Thanks, I've another small EFL_SRCREV bump (for efreet changes) and 2
-packaging fixes if you don't want to rebuild efl twice I'll send it in
-pull request now, otherwise keep it for few more days for testing.
-
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->=20
-> iD8DBQFOUrNjMkyGM64RGpERAjk0AJ9lxX/L8jwv9MPki3b1yJ4AmGQixQCgkVYM
-> CPLMkEJWWdimqnJzcZYOwGg=3D
-> =3D7EkT
-> -----END PGP SIGNATURE-----
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---MAH+hnPXVZWQ5cD/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
+merged, thanks!
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEARECAAYFAk5StsYACgkQN1Ujt2V2gBylngCfSXR7/mdf4sv/3Ft89EAOJUKx
-5McAoLJDxV+X0WstXd8wgbJPId5m5Omc
-=ds9E
+iD8DBQFOUrOzMkyGM64RGpERAmb0AKCgpe9fJVdlCZCcE36ZHMZ1DZL99QCbBRSr
+EYoTnuFGoUjm0drv8Q+jqlE=
+=YTqq
 -----END PGP SIGNATURE-----
 
---MAH+hnPXVZWQ5cD/--
+
+
