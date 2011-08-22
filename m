@@ -1,27 +1,34 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <shanevolpe@gmail.com>) id 1QvZoW-0006vc-7O
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Aug 2011 21:05:36 +0200
-Received: by ewy5 with SMTP id 5so1947999ewy.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Qvaex-0008CE-K4 for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Aug 2011 21:59:47 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QvaaP-0007TY-7G for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Aug 2011 21:55:05 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Aug 2011 21:55:05 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Aug 2011 12:00:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=+q89ET51pQpAYrfcyeoRJ602M3CNAaUuCqbenME+cRY=;
-	b=uuVlrn3095klFNfKrNuB0rhYoZ7hAmNnVA+34XXcjN39+mA/XDguujH8DFL9xGMNYm
-	oKHjTD0LXgylk0yua+TPbfDNEO/xkRPAZ/OeebR2Jz72gOKI/RXGAbO4gKk5MeTYd1tg
-	vsqMSyzrygaZK5xhZfb/+18rgQ5MXH3Qnqlt8=
-Received: by 10.14.147.143 with SMTP id t15mr639264eej.76.1314039651241; Mon,
-	22 Aug 2011 12:00:51 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.14.98.129 with HTTP; Mon, 22 Aug 2011 11:55:10 -0700 (PDT)
-From: Shane Volpe <shanevolpe@gmail.com>
-Date: Mon, 22 Aug 2011 14:55:10 -0400
-Message-ID: <CAMgc3zPd-dAKAkhb=r5Uys52ohM5-9rANSz_hkSDiEQzPS0eWg@mail.gmail.com>
+	Mon, 22 Aug 2011 21:55:05 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: enabling c6run custom app recipes patch
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 22 Aug 2011 21:52:03 +0200
+Message-ID: <j2uc13$fdd$2@dough.gmane.org>
+References: <cover.1313655444.git.Martin.Jansa@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:6.0) Gecko/20110812 Thunderbird/6.0
+In-Reply-To: <cover.1313655444.git.Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.3
+Subject: Re: [meta-efl][PATCH 0/2] Pull request #8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,59 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Aug 2011 19:05:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 22 Aug 2011 19:59:47 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-I've been putting together some custom bitbake recipes to build dsp
-apps using c6run. =A0The ti-c6run generates its own compiler to compile
-the dsp code and I was able to greatly simplify my recipe if I applied
-the following patch to the ti-paths.inc file in oe.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-**************************************************************************
-diff --git a/recipes/ti/ti-paths.inc b/recipes/ti/ti-paths.inc
-index 755fcf1..bab2c7e 100644
---- a/recipes/ti/ti-paths.inc
-+++ b/recipes/ti/ti-paths.inc
-@@ -1,6 +1,7 @@
-=A0installdir =3D "${datadir}/ti"
+Op 18-08-11 10:17, Martin Jansa schreef:
+> The following changes since commit 3d0b866967529a14268541b85e79cb35981e1aed:
+> 
+> xdotool: import from OE rev 5350bbef01b8979617e3d0fd38939f94f1fa5315 (2011-08-17 23:11:55 +0200)
+> 
+> are available in the git repository at: git://git.openembedded.org/meta-openembedded-contrib jansa/meta-efl http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/meta-efl
+> 
+> Martin Jansa (2): e-base: bump EFL_SRCREV e-wm: remove SHR specific patch
 
-=A0# This is where do_install will put it
-+export C6RUN_INSTALL_DIR_RECIPE =A0 =A0 =A0=3D "${installdir}/ti-c6run-tre=
-e"
-=A0export CODEGEN_INSTALL_DIR_RECIPE =A0 =A0=3D "${installdir}/ti-cgt6x-tre=
-e"
-=A0export XDC_INSTALL_DIR_RECIPE =A0 =A0 =A0 =A0=3D "${installdir}/ti-xdcto=
-ols-tree"
-=A0export XDAIS_INSTALL_DIR_RECIPE =A0 =A0 =A0=3D "${installdir}/ti-xdais-t=
-ree"
-@@ -27,6 +28,7 @@ export AUDIO_SOC_INSTALL_DIR_RECIPE =A0=3D
-"${installdir}/ti-audio-soc-example-tree"
-=A0export C6ACCEL_INSTALL_DIR_RECIPE =A0 =A0=3D "${installdir}/ti-c6accel-t=
-ree"
+merged, thanks!
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-=A0# This is where the tools will end up in staging provided
-PACKAGE_ARCH =3D ${MACHINE_ARCH} is set
-+export C6RUN_INSTALL_DIR =3D
-"${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${C6RUN_INSTALL_DIR_RECIPE}"
-=A0export CODEGEN_INSTALL_DIR =A0 =A0=3D
-"${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${CODEGEN_INSTALL_DIR_RECIPE}"
-=A0export XDC_INSTALL_DIR =A0 =A0 =A0 =A0=3D
-"${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${XDC_INSTALL_DIR_RECIPE}"
-=A0export XDAIS_INSTALL_DIR =A0 =A0 =A0=3D
-"${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${XDAIS_INSTALL_DIR_RECIPE}"
-***************************************************************************=
-*
+iD8DBQFOUrNjMkyGM64RGpERAjk0AJ9lxX/L8jwv9MPki3b1yJ4AmGQixQCgkVYM
+CPLMkEJWWdimqnJzcZYOwGg=
+=7EkT
+-----END PGP SIGNATURE-----
 
-This causes all of the native compiling bin tools for the c6run to be
-installed with all the ti related tools.  It also provides a global
-variable "C6RUN_INSTALL_DIR" that can be used in a custom bitbake
-recipe to access those tools.  The interesting thing is the current
-ti-c6run recipe file in OE already uses "C6RUN_INSTALL_DIR_RECIPE" if
-it exists so the ti-path.inc is really the only file that needs to be
-modified for this all to work.
-
-Regards,
-Shane
 
 
