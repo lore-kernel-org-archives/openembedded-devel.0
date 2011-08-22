@@ -1,31 +1,29 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <openembedded@rkmorris.us>) id 1QvG6Q-0000O3-0r
+	(envelope-from <sledz@dresearch-fe.de>) id 1QvNwl-0001DT-DO
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Aug 2011 00:02:46 +0200
-Received: from server ([unknown] [173.74.34.213]) by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LQA00JFCT0CQW00@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sun,
-	21 Aug 2011 16:57:51 -0500 (CDT)
-Received: from server (127.0.0.1) by server (Axigen)
-	with ESMTPSA id 18602C; Sun, 21 Aug 2011 16:57:45 -0500
-Received: from [192.168.254.252] by rkmorris.us with HTTP; Sun,
-	21 Aug 2011 16:57:44 -0500
-From: Russell Morris <openembedded@rkmorris.us>
-Date: Sun, 21 Aug 2011 16:57:44 -0500
-X-Mailer: Axigen WebMail
+	Mon, 22 Aug 2011 08:25:19 +0200
+Received: by bkbzu17 with SMTP id zu17so3700641bkb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 21 Aug 2011 23:20:35 -0700 (PDT)
+Received: by 10.204.134.68 with SMTP id i4mr298813bkt.325.1313994035434;
+	Sun, 21 Aug 2011 23:20:35 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id z7sm1420856bkj.38.2011.08.21.23.20.28
+	(version=SSLv3 cipher=OTHER); Sun, 21 Aug 2011 23:20:29 -0700 (PDT)
+Message-ID: <4E51F52B.4040304@dresearch-fe.de>
+Date: Mon, 22 Aug 2011 08:20:27 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:6.0) Gecko/20110812 Thunderbird/6.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <1313963864481038500@rkmorris.us>
-In-reply-to: <1312936952840869500@rkmorris.us>
-References: <1312858153686306500@rkmorris.us> <4E40AF8B.4080103@gmail.com>
-	<1312936952840869500@rkmorris.us>
-Importance: Normal
-MIME-version: 1.0
-X-AxigenVirus-Level: 1
-X-AxigenSpam-Level: 1
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: ISO-Codes Build Failing
+References: <4E4AA7B7.7020006@dresearch-fe.de>
+	<CA+M6bX=9E0c-hRCnyZ-7+WWX+NP_MeE_zLP8xtLH9EYqMVRDjA@mail.gmail.com>
+In-Reply-To: <CA+M6bX=9E0c-hRCnyZ-7+WWX+NP_MeE_zLP8xtLH9EYqMVRDjA@mail.gmail.com>
+X-Enigmail-Version: 1.3
+Subject: [2011.03-maintenance] Pull request (live555 update)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,101 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Aug 2011 22:02:46 -0000
-X-Groupsio-MsgNum: 33750
-Content-type: multipart/mixed;
-	boundary="===axigen=5304494647412630120572599974113219895573=axigen==="
+X-List-Received-Date: Mon, 22 Aug 2011 06:25:19 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---===axigen=5304494647412630120572599974113219895573=axigen===
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+Hi Tom,
 
-Hi,
+Please pull one commits from here:
 
-Sorry, I still can't figure out the new structure (and there doesn't seem t=
-o be any info on the website / Wiki of how to use the new structure), but a=
-t least here's the recipe I used with "old" OE (attached) - and it seems to=
- work.
+URI: git://git.openembedded.org/openembedded
+Branch: sledz/maintenance
 
-If someone could add this to the new structure it will hopefully help folks=
- out.
+Andrea Adami (1):
+      live555: catch up with upstream habits of upgrading and removing tarballs
 
-Thanks
-... Russell
+This updates the live555 version and is already in oe-dev master.
+
+Thx,
+Steffen
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
-On Tue, 08/09/2011 07:42 PM, Russell Morris <openembedded@rkmorris.us> wrot=
-e:
-> Hi,
-> I'd be more than happy to - but I admit, I'm a bit lost in meta-openembed=
-ded. I'm working off OpenEmbedded ... and don't understand the new meta- it=
-ems, and also can't find this recipe there ... :-(.
-> Thanks,... Russell
->=20
->=20
-> On Mon, 08/08/2011 10:54 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> On 08/08/2011 07:49 PM, Russell Morris wrote:
-> > Hi,
-> >=20
-> > I have been trying to build angstrom-x-image, but it fails - at
-> > iso-codes. The issue may be because Verizon FIOS is now blocking FTP
-> > (as more and more ISP's are), but in any case I created a new recipe
-> > to correct this (and it works). How do I get this change in to the
-> > official OpenEmbedded build (or can I even?)?
-> >=20
-> > Also ... what is the official OE path? I admit, now with
-> > OpenEmbedded, core, etc. - it's getting a bit confusing ... :-(. It
-> > really seems like (base?) OpenEmbedded is getting quite out of date,
-> > but I could be wrong.
-> >=20
->=20
-> send patches for meta-openembedded to add the recipe that will make it
-> into the new layered metadata based distros.
->=20
->=20
-> > On to gs next (which seems to be failing during the do_configure
-> > stage).
-> >=20
-> > Thanks, ... Russell
-> >=20
-> > _______________________________________________ Openembedded-devel
-> > mailing list Openembedded-devel@lists.openembedded.org=20
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
->=20
-> - --
-> >=20
-> - -Khem
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.11 (GNU/Linux)
->=20
-> iEYEARECAAYFAk5Ar4sACgkQuwUzVZGdMxQEYgCffYNw/R3mvw8XZQ8NkOxqKKgO
-> Nv0An0g0n9S6r/vW/vKG0HrZ5ktvEgQu
-> =3DHSTm
-> -----END PGP SIGNATURE-----
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-
---===axigen=5304494647412630120572599974113219895573=axigen===
-Content-Type: application/octet-stream;
-	name="=?utf-8?Q?iso-codes=5F3.27.1.bb?="
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment;
-	filename="=?utf-8?Q?iso-codes=5F3.27.1.bb?="
-
-TElDRU5TRSA9ICJMR1BMIgpQQUNLQUdFX0FSQ0ggPSAiYWxsIgpTUkNfVVJJID0gImh0dHA6Ly9m
-dHAuZGUuZGViaWFuLm9yZy9kZWJpYW4vcG9vbC9tYWluL2kvaXNvLWNvZGVzL2lzby1jb2Rlc18k
-e1BWfS5vcmlnLnRhci5iejIiClBSID0gInIxIgoKaW5oZXJpdCBhdXRvdG9vbHMKCkZJTEVTXyR7
-UE59ICs9ICIke2RhdGFkaXJ9L3htbC8iCgpTUkNfVVJJW21kNXN1bV0gPSAiMDZmMGI3YWVkNzll
-ZDBmNDEyOWI2N2QxZmVhOWNhZTMiClNSQ19VUklbc2hhMjU2c3VtXSA9ICI4N2U1MGMxMmQwYjYw
-OGM1Nzk2YWMyZTI0YTFhMjhjODU3NzkwMTRkZTgwMzczMzAxMGI2MjUzM2YzMDYwZDdiIgo=
-
---===axigen=5304494647412630120572599974113219895573=axigen===--
