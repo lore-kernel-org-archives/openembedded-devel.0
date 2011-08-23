@@ -1,28 +1,24 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1QvnCl-00051l-4L
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Aug 2011 11:23:31 +0200
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1Qvn8B-0002Xp-Fz from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Aug 2011 02:18:47 -0700
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Tue, 23 Aug 2011 11:18:44 +0200
-Message-ID: <989A078976CDAD4CB2DC976EEF70E2A5068A54FA@eu2-mail.mgc.mentorg.com>
-In-Reply-To: <1314090730.3688.9.camel@mattotaupa>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [PATCH v2][meta-oe] lmbench: Added new recipe for 3.0-a9
-	version
-Thread-Index: AcxhdNN3OZK/cl61S/mIW3K42Ks53wAALK/w
-References: <1314088478-8681-1-git-send-email-noor_ahsan@mentor.com>
-	<1314090730.3688.9.camel@mattotaupa>
-From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2][meta-oe] lmbench: Added new recipe for 3.0-a9 version
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qvsg3-0008W2-FU for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Aug 2011 17:14:07 +0200
+Received: from f053042082.adsl.alicedsl.de ([78.53.42.82]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QvsbX-00023L-L5 for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Aug 2011 15:09:27 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 23 Aug 2011 17:09:23 +0200
+In-Reply-To: <1314033226.12202.25.camel@mattotaupa>
+References: <1314023559-15827-1-git-send-email-noor_ahsan@mentor.com>
+	<1314033226.12202.25.camel@mattotaupa>
+X-Mailer: Evolution 3.0.2- 
+Message-ID: <1314112164.3688.17.camel@mattotaupa>
+Mime-Version: 1.0
+Subject: Re: [PATCH][meta-oe] lmbench: Added 3.0-a9 version recipe files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,34 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Aug 2011 09:23:31 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 23 Aug 2011 15:14:07 -0000
+X-Groupsio-MsgNum: 33791
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-aShWS3FhGmf7BHekV/Zv"
 
-SGksDQoNClNvcnJ5IEkgZGlkIG5vdCBzZWUgeW91ciBjb21tZW50IG9uIG15IHByZXZpb3VzIHBh
-dGNoLiBJJ2xsIGluY29ycG9yYXRlIHRoZW0gaW4gbmV4dCB2ZXJzaW9uLiBUaGFua3MuDQoNClJl
-Z2FyZHMsDQpOb29yIA0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IG9w
-ZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gW21haWx0
-bzpvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnXSBPbiBC
-ZWhhbGYgT2YNCj4gUGF1bCBNZW56ZWwNCj4gU2VudDogVHVlc2RheSwgQXVndXN0IDIzLCAyMDEx
-IDI6MTIgUE0NCj4gVG86IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3Jn
-DQo+IFN1YmplY3Q6IFJlOiBbb2VdIFtQQVRDSCB2Ml1bbWV0YS1vZV0gbG1iZW5jaDogQWRkZWQg
-bmV3IHJlY2lwZSBmb3INCj4gMy4wLWE5IHZlcnNpb24NCj4gDQo+IERlYXIgTm9vciwNCj4gDQo+
-IA0KPiBBbSBEaWVuc3RhZywgZGVuIDIzLjA4LjIwMTEsIDEzOjM0ICswNTAwIHNjaHJpZWIgTm9v
-ciwgQWhzYW46DQo+ID4gRnJvbTogTm9vciBBaHNhbiA8bm9vcl9haHNhbkBtZW50b3IuY29tPg0K
-PiA+DQo+ID4gKiBBZGRlZCBuZXcgcmVjaXBlIGZvciAzLjAtYTkgdmVyc2lvbi4NCj4gPg0KPiA+
-IFNpZ25lZC1vZmYtYnk6IE5vb3IgQWhzYW4gPG5vb3JfYWhzYW5AbWVudG9yLmNvbT4NCj4gPiAt
-LS0NCj4gPiAgLi4uL2xtYmVuY2gvbG1iZW5jaC0zLjAtYTkvbG1iZW5jaC1ydW4gICAgICAgICAg
-ICAgfCAgIDIzICsrKw0KPiA+ICAuLi4vbG1iZW5jaC9sbWJlbmNoLTMuMC1hOS9vYmV5LXJhbmxp
-Yi5wYXRjaCAgICAgICB8ICAgMjUgKysrDQo+ID4gIC4uLi9sbWJlbmNoLTMuMC1hOS9yZW5hbWUt
-bGluZS1iaW5hcnkucGF0Y2ggICAgICAgIHwgICAxMSArKw0KPiA+ICAuLi4vbG1iZW5jaC0zLjAt
-YTkvdXBkYXRlLXJlc3VsdHMtc2NyaXB0LnBhdGNoICAgICB8ICAxNTUNCj4gKysrKysrKysrKysr
-KysrKysrKysNCj4gPiAgLi4uL3JlY2lwZXMtYmVuY2htYXJrL2xtYmVuY2gvbG1iZW5jaF8zLjAt
-YTkuYmIgICAgfCAgIDc1ICsrKysrKysrKysNCj4gPiAgNSBmaWxlcyBjaGFuZ2VkLCAyODkgaW5z
-ZXJ0aW9ucygrKSwgMCBkZWxldGlvbnMoLSkNCj4gDQo+IFvigKZdDQo+IA0KPiBOQUNLLiBJIGFt
-IHNvcnJ5LCBidXQgbmVpdGhlciBUb23igJlzIG5vciBtaW5lIHJldmlldyBjb21tZW50cyBhcmUN
-Cj4gaW5jbHVkZWQuDQo+IA0KPiANCj4gVGhhbmtzLA0KPiANCj4gUGF1bA0K
+--=-aShWS3FhGmf7BHekV/Zv
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Am Montag, den 22.08.2011, 19:13 +0200 schrieb Paul Menzel:
+
+> Am Montag, den 22.08.2011, 19:32 +0500 schrieb Noor, Ahsan:
+
+> > +SRC_URI =3D "${SOURCEFORGE_MIRROR}/lmbench/lmbench-${PV}.tgz \
+> > +	   file://lmbench-run \
+> > +	   file://rename-line-binary.patch \
+> > +	   file://update-results-script.patch \
+> > +	   file://obey-ranlib.patch"
+>=20
+> Please add `\` at the end and put " on the new line.
+
+As to your question on IRC why this is useful. My reasoning is, that in
+the future patch diffs will be smaller when adding a new line to the end
+of `SRC_URI`. But in the end it is just taste and no hard rule.
+
+[=E2=80=A6]
 
 
+Thanks,
+
+Paul
+
+--=-aShWS3FhGmf7BHekV/Zv
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk5TwqMACgkQPX1aK2wOHVgHQgCeLbazoEMvYRozlU1W/eEGPXSX
+QTsAmgImYJJo1HFovvwIU0dHeZ8hkQd/
+=0+Us
+-----END PGP SIGNATURE-----
+
+--=-aShWS3FhGmf7BHekV/Zv--
