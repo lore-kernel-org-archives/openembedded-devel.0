@@ -1,24 +1,23 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1QvmWE-0003Ti-Bq
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Aug 2011 10:39:34 +0200
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1QvmRd-00065h-Uv from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Aug 2011 01:34:50 -0700
-Received: from localhost.localdomain ([137.202.156.152]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Tue, 23 Aug 2011 10:34:48 +0200
-From: "Noor, Ahsan" <noor_ahsan@mentor.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qvn6L-0004p5-6a for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Aug 2011 11:16:53 +0200
+Received: from f053042082.adsl.alicedsl.de ([78.53.42.82]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qvn1p-0000Dz-5I for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Aug 2011 09:12:13 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Aug 2011 13:34:38 +0500
-Message-Id: <1314088478-8681-1-git-send-email-noor_ahsan@mentor.com>
-X-Mailer: git-send-email 1.7.0.4
-X-OriginalArrivalTime: 23 Aug 2011 08:34:49.0177 (UTC)
-	FILETIME=[85409C90:01CC616F]
-Subject: [PATCH v2][meta-oe] lmbench: Added new recipe for 3.0-a9 version
+Date: Tue, 23 Aug 2011 11:12:08 +0200
+In-Reply-To: <1314088478-8681-1-git-send-email-noor_ahsan@mentor.com>
+References: <1314088478-8681-1-git-send-email-noor_ahsan@mentor.com>
+X-Mailer: Evolution 3.0.2- 
+Message-ID: <1314090730.3688.9.camel@mattotaupa>
+Mime-Version: 1.0
+Subject: Re: [PATCH v2][meta-oe] lmbench: Added new recipe for 3.0-a9 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,342 +31,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Aug 2011 08:39:34 -0000
+X-List-Received-Date: Tue, 23 Aug 2011 09:16:53 -0000
+X-Groupsio-MsgNum: 33789
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-/qQWV3Bu/tkaXyudC8SF"
 
-From: Noor Ahsan <noor_ahsan@mentor.com>
+--=-/qQWV3Bu/tkaXyudC8SF
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-* Added new recipe for 3.0-a9 version.
-
-Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
----
- .../lmbench/lmbench-3.0-a9/lmbench-run             |   23 +++
- .../lmbench/lmbench-3.0-a9/obey-ranlib.patch       |   25 +++
- .../lmbench-3.0-a9/rename-line-binary.patch        |   11 ++
- .../lmbench-3.0-a9/update-results-script.patch     |  155 ++++++++++++++++++++
- .../recipes-benchmark/lmbench/lmbench_3.0-a9.bb    |   75 ++++++++++
- 5 files changed, 289 insertions(+), 0 deletions(-)
-
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/lmbench-run b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/lmbench-run
-new file mode 100644
-index 0000000..e904c75
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/lmbench-run
-@@ -0,0 +1,23 @@
-+#!/bin/sh
-+# Wrapper script for lmbench written for the 
-+# Debian GNU/Linux distribution by 
-+# Javier Fernandez-Sanguino.
-+# Distributed under the GPL
-+SHAREDIR=/usr/share/lmbench/
-+BINDIR=/usr/lib/lmbench/
-+SCRIPTSDIR=$SHAREDIR/scripts
-+RESULTSDIR=$SHAREDIR/results
-+CONFIG=/var/lib/lmbench/config/`$SCRIPTSDIR/config`
-+runuid=`id -u`
-+
-+[ $runuid -gt 0 ] && {
-+	echo "You must run this as the root user"
-+	exit 0
-+}
-+cd $SCRIPTSDIR 
-+[ ! -f $CONFIG ] && ./config-run
-+./results
-+
-+echo "Benchmark run finished...."
-+echo "Remember you can find the results of the benchmark "
-+echo "under $RESULTSDIR"
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/obey-ranlib.patch b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/obey-ranlib.patch
-new file mode 100644
-index 0000000..5ce6e15
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/obey-ranlib.patch
-@@ -0,0 +1,25 @@
-+---
-+ src/Makefile |    3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+Index: lmbench-3.0-a9/src/Makefile
-+===================================================================
-+--- lmbench-3.0-a9.orig/src/Makefile
-++++ lmbench-3.0-a9/src/Makefile
-+@@ -38,6 +38,7 @@ CC=`../scripts/compiler`
-+ MAKE=`../scripts/make`
-+ AR=ar
-+ ARCREATE=cr
-++RANLIB=ranlib
-+ 
-+ # base of installation location
-+ BASE=/usr/local
-+@@ -217,7 +218,7 @@ $O/lmbench : ../scripts/lmbench version.
-+ $O/lmbench.a: $(LIBOBJS)
-+ 	/bin/rm -f $O/lmbench.a
-+ 	$(AR) $(ARCREATE) $O/lmbench.a $(LIBOBJS)
-+-	-ranlib $O/lmbench.a
-++	-$(RANLIB) $O/lmbench.a
-+ 
-+ $O/lib_timing.o : lib_timing.c $(INCS)
-+ 	$(COMPILE) -c lib_timing.c -o $O/lib_timing.o
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/rename-line-binary.patch b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/rename-line-binary.patch
-new file mode 100644
-index 0000000..997143b
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/rename-line-binary.patch
-@@ -0,0 +1,11 @@
-+--- patches/scripts/config-run	2006-11-26 15:11:04.000000000 -0500
-++++ patches/scripts/config-run	2011-04-01 09:35:50.000000000 -0400
-+@@ -224,7 +224,7 @@ fi
-+ 
-+ echo "Hang on, we are calculating your cache line size."
-+ ../bin/$OS/msleep 250
-+-LINE_SIZE=`../bin/$OS/line -M ${MB}M`
-++LINE_SIZE=`../bin/$OS/lm_line -M ${MB}M`
-+ export LINE_SIZE
-+ echo "OK, it looks like your cache line is $LINE_SIZE bytes."
-+ echo ""
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/update-results-script.patch b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/update-results-script.patch
-new file mode 100644
-index 0000000..3feb657
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/update-results-script.patch
-@@ -0,0 +1,155 @@
-+Now that we have our binaries in /usr/bin rather than the normal
-+lmbench hierarchy we need to update the scripts as well to bave well here.
-+Index: lmbench-3.0-a9/scripts/results
-+===================================================================
-+--- lmbench-3.0-a9.orig/scripts/results
-++++ lmbench-3.0-a9/scripts/results
-+@@ -8,11 +8,11 @@ RESULTS=results/$OS
-+ BASE=../$RESULTS/`uname -n`
-+ EXT=0
-+ 
-+-if [ ! -f "../bin/$OS/$CONFIG" ]
-++if [ ! -f "$CONFIG" ]
-+ then	echo "No config file?"
-+ 	exit 1
-+ fi
-+-. ../bin/$OS/$CONFIG
-++. $CONFIG
-+ 
-+ if [ ! -d ../$RESULTS ]
-+ then	mkdir -p ../$RESULTS
-+@@ -23,11 +23,9 @@ do      EXT=`expr $EXT + 1`
-+ 	RESULTS=$BASE.$EXT
-+ done
-+ 
-+-cd ../bin/$OS 
-+-PATH=.:${PATH}; export PATH
-+ export SYNC_MAX
-+ export OUTPUT
-+-lmbench $CONFIG 2>../${RESULTS}
-++lmbench $CONFIG 2>${RESULTS}
-+ 
-+ if [ X$MAIL = Xyes ]
-+ then	echo Mailing results
-+Index: lmbench-3.0-a9/scripts/config-run
-+===================================================================
-+--- lmbench-3.0-a9.orig/scripts/config-run
-++++ lmbench-3.0-a9/scripts/config-run
-+@@ -132,20 +132,20 @@ export LMBENCH_SCHED
-+ ############################################################################
-+ echo $L; echo "";
-+ echo "Hang on, we are calculating your timing granularity."
-+-../bin/$OS/msleep 250
-+-ENOUGH=`../bin/$OS/enough`
-++msleep 250
-++ENOUGH=`enough`
-+ export ENOUGH 
-+ echo "OK, it looks like you can time stuff down to $ENOUGH usec resolution."
-+ echo ""
-+ echo "Hang on, we are calculating your timing overhead."
-+-../bin/$OS/msleep 250
-+-TIMING_O=`../bin/$OS/timing_o`
-++msleep 250
-++TIMING_O=`timing_o`
-+ export TIMING_O
-+ echo "OK, it looks like your gettimeofday() costs $TIMING_O usecs."
-+ echo ""
-+ echo "Hang on, we are calculating your loop overhead."
-+-../bin/$OS/msleep 250
-+-LOOP_O=`../bin/$OS/loop_o`
-++msleep 250
-++LOOP_O=`loop_o`
-+ export LOOP_O
-+ echo "OK, it looks like your benchmark loop costs $LOOP_O usecs."
-+ echo ""
-+@@ -177,7 +177,7 @@ then
-+ fi
-+ if [ X$MB = X ]
-+ then	$ECHON "Probing system for available memory: $ECHOC"
-+-	MB=`../bin/$OS/memsize 4096`
-++	MB=`memsize 4096`
-+ fi
-+ TOTAL_MEM=$MB
-+ MB=`echo \( $MB \* 7 \) / 10 | bc 2>/dev/null`
-+@@ -205,9 +205,9 @@ fi
-+ # Certain machines tend to barf when you try and bcopy 8MB.
-+ # Figure out how much we can use.
-+ echo "Checking to see if you have $MB MB; please wait for a moment..."
-+-MB=`../bin/$OS/memsize $MB`
-+-MB=`../bin/$OS/memsize $MB`
-+-MB=`../bin/$OS/memsize $MB`
-++MB=`memsize $MB`
-++MB=`memsize $MB`
-++MB=`memsize $MB`
-+ if [ `expr $SYNC_MAX \* $MB` -gt `expr $TOTAL_MEM` ]
-+ then
-+ 	MB=`expr $TOTAL_MEM / $SYNC_MAX`
-+@@ -223,8 +223,8 @@ then	echo Warning: you have only ${MB}MB
-+ fi
-+ 
-+ echo "Hang on, we are calculating your cache line size."
-+-../bin/$OS/msleep 250
-+-LINE_SIZE=`../bin/$OS/lm_line -M ${MB}M`
-++msleep 250
-++LINE_SIZE=`lm_line -M ${MB}M`
-+ export LINE_SIZE
-+ echo "OK, it looks like your cache line is $LINE_SIZE bytes."
-+ echo ""
-+@@ -479,7 +479,7 @@ EOF
-+ 	then	
-+ 		for i in $disks
-+ 		do	if [ -r $i ]
-+-			then	../bin/$OS/flushdisk $i
-++			then	flushdisk $i
-+ 				if [ $? -eq 1 ]
-+ 				then	echo "Must be root to run disk benchmarks."
-+ 					echo "Root is needed to flush the buffer cache"
-+@@ -584,7 +584,7 @@ fi
-+ echo $L
-+ echo ""
-+ echo "Calculating mhz, please wait for a moment..."
-+-MHZ=`../bin/$OS/mhz`
-++MHZ=`mhz`
-+ cat<<EOF
-+ I think your CPU mhz is 
-+ 
-+@@ -689,9 +689,9 @@ esac
-+ 
-+ INFO=`../scripts/info`
-+ if [ $MAIL = yes ]
-+-then	if [ ! -f ../bin/$OS/$INFO ]
-+-	then	cp ../scripts/info-template ../bin/$OS/$INFO
-+-		chmod +w ../bin/$OS/$INFO
-++then	if [ ! -f $INFO ]
-++	then	cp ../scripts/info-template $INFO
-++		chmod +w $INFO
-+ 		REUSE=no
-+ 	else	
-+ 		REUSE=view
-+@@ -705,7 +705,7 @@ then	if [ ! -f ../bin/$OS/$INFO ]
-+ 				;;
-+ 			[Vv]*)	REUSE=view
-+ 				echo $L
-+-				more ../bin/$OS/$INFO
-++				more $INFO
-+ 				echo $L
-+ 				;;
-+ 	    		*)	REUSE=yes
-+@@ -733,7 +733,7 @@ EOF
-+ 		then	EDITOR=$TMP
-+ 		fi
-+ 		if [ X$EDITOR != "none" ]
-+-		then	$EDITOR ../bin/$OS/`../scripts/info`
-++		then	$EDITOR `../scripts/info`
-+ 		fi
-+ 	fi
-+ fi
-+@@ -750,7 +750,7 @@ EOF
-+ 
-+ VERSION=`../scripts/version`
-+ 
-+-C=../bin/$OS/`../scripts/config`
-++C=`../scripts/config`
-+ echo DISKS=\"$DISKS\" > $C
-+ echo DISK_DESC=\"$DISK_DESC\" >> $C
-+ echo OUTPUT=$OUTPUT >> $C
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-new file mode 100644
-index 0000000..1076eeb
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-@@ -0,0 +1,75 @@
-+SECTION = "console/utils"
-+DESCRIPTION = "Tools for performance analysis."
-+LICENSE = "GPL"
-+LICENSE = "GPLv2+ & LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
-+                    file://COPYING-2;md5=8e9aee2ccc75d61d107e43794a25cdf9"
-+RDEPENDS_${PN} = "debianutils"
-+
-+PR = "r0"
-+
-+inherit autotools
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/lmbench/lmbench-${PV}.tgz \
-+	   file://lmbench-run \
-+	   file://rename-line-binary.patch \
-+	   file://update-results-script.patch \
-+	   file://obey-ranlib.patch"
-+SRC_URI[md5sum] = "b3351a3294db66a72e2864a199d37cbf"
-+SRC_URI[sha256sum] = "cbd5777d15f44eab7666dcac418054c3c09df99826961a397d9acf43d8a2a551"
-+
-+S = "${WORKDIR}/lmbench-${PV}"
-+
-+EXTRA_OEMAKE = 'CC="${CC}" AR="${AR}" RANLIB="${RANLIB}" CFLAGS="${CFLAGS}" \
-+		LDFLAGS="${LDFLAGS}" LD="${LD}" OS="${TARGET_SYS}" \
-+		TARGET="${TARGET_OS}" BASE="${prefix}"'
-+
-+
-+python do_unpack () {
-+	bb.build.exec_func('base_do_unpack', d)
-+	bb.build.exec_func('byebk_do_unpack', d)
-+}
-+
-+byebk_do_unpack () {
-+	find ${S}/.. -name BitKeeper -o -name SCCS | xargs rm -rf
-+}
-+
-+do_configure() {
-+	:
-+}
-+
-+do_compile () {
-+	. ${CONFIG_SITE}
-+	if [ X"$ac_cv_uint" = X"yes" ]; then
-+		CFLAGS="${CFLAGS} -DHAVE_uint"
-+	fi
-+	install -d ${S}/bin/${TARGET_SYS}
-+	oe_runmake -C src
-+}
-+
-+do_install () {
-+	install -d ${D}${localstatedir}/run/lmbench \
-+		   ${D}${bindir} ${D}${mandir} ${D}${libdir}/lmbench \
-+		   ${D}${datadir}/lmbench/scripts
-+	oe_runmake 'BASE=${D}${prefix}' \
-+		    -C src install
-+	mv ${D}${bindir}/line ${D}${bindir}/lm_line
-+	mv ${D}${prefix}/man/* ${D}${mandir}/
-+	install -m 0755 ${WORKDIR}/lmbench-run ${D}${bindir}/
-+	sed -i -e 's,^SHAREDIR=.*$,SHAREDIR=${datadir}/${PN},;' \
-+	       -e 's,^BINDIR=.*$,BINDIR=${libdir}/${PN},;' \
-+	       -e 's,^CONFIG=.*$,CONFIG=$SHAREDIR/`$SCRIPTSDIR/config`,;' \
-+	       ${D}${bindir}/lmbench-run
-+	install -m 0755 ${S}/scripts/lmbench ${D}${bindir}
-+	install -m 0755 ${S}/scripts/* ${D}${datadir}/lmbench/scripts
-+
-+        if [ -f ${WORKDIR}/CONFIG.${MACHINE} ]; then
-+                install -d ${D}${localstatedir}/lib/lmbench/config
-+                mkdir -p ${D}/${datadir}/lmbench/bin/${TARGET_PREFIX}  
-+                install -m 0644 ${WORKDIR}/CONFIG.${MACHINE} \
-+			${D}/${datadir}/lmbench/bin/${TARGET_PREFIX}/CONFIG.${MACHINE}
-+        fi
-+
-+}
-+
-+FILES_${PN} += "${datadir}/lmbench"
--- 
-1.7.0.4
+Dear Noor,
 
 
+Am Dienstag, den 23.08.2011, 13:34 +0500 schrieb Noor, Ahsan:
+> From: Noor Ahsan <noor_ahsan@mentor.com>
+>=20
+> * Added new recipe for 3.0-a9 version.
+>=20
+> Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+> ---
+>  .../lmbench/lmbench-3.0-a9/lmbench-run             |   23 +++
+>  .../lmbench/lmbench-3.0-a9/obey-ranlib.patch       |   25 +++
+>  .../lmbench-3.0-a9/rename-line-binary.patch        |   11 ++
+>  .../lmbench-3.0-a9/update-results-script.patch     |  155 ++++++++++++++=
+++++++
+>  .../recipes-benchmark/lmbench/lmbench_3.0-a9.bb    |   75 ++++++++++
+>  5 files changed, 289 insertions(+), 0 deletions(-)
 
+[=E2=80=A6]
+
+NACK. I am sorry, but neither Tom=E2=80=99s nor mine review comments are
+included.
+
+
+Thanks,
+
+Paul
+
+--=-/qQWV3Bu/tkaXyudC8SF
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk5TbukACgkQPX1aK2wOHVg7UwCfQAAxX37dOXxN2y8b5/sA9ZXi
+OLMAn1J+7AyvAHAwsNE1UL/eztHQmGZH
+=lwRC
+-----END PGP SIGNATURE-----
+
+--=-/qQWV3Bu/tkaXyudC8SF--
