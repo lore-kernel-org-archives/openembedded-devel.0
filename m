@@ -1,31 +1,27 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <george.huntingtoniii@gmail.com>) id 1Qvuf7-0005C1-QG
+	(envelope-from <philippe.corbes@gmail.com>) id 1QvyI5-0002bV-6t
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Aug 2011 19:21:18 +0200
-Received: by gyg4 with SMTP id 4so254665gyg.6
+	Tue, 23 Aug 2011 23:13:45 +0200
+Received: by yia28 with SMTP id 28so419655yia.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Aug 2011 10:16:32 -0700 (PDT)
+	Tue, 23 Aug 2011 14:08:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=cX/8OjgHH+3X8wbzrmIbB/y+FYJDGgjU9GR4EDdGKyg=;
-	b=e7BE3X4Cm/jy+zbElbvCVJ7lwQ8nhAhCdjuEIfyg3hiT7OxFWdGGQGK+e3RULAY7oz
-	HzPdguW9yjjC+KtjA73m5gvUP2fd6QQAAQDrE+JQcWrAqKh/QYoAVw6K/ECaZQr2/osv
-	MPxnZ8RkoXfW29r88s9qpAhBslD5PKSalWO74=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=0jWQAcTjo7Zbt/LiH9DqIGCF3K8L2/n0+mX9ru/yEWU=;
+	b=P444Hi7kwZj+ddK4/4W971BS5jQpnHcpiDX9QbtkXyVX6aoEcHIj8aNRk1jajSaeeE
+	+edbA72DXS8X7UkxbxDmnB0//JSi4a08B3idIMISwsPtyppqmWnYHZtGamTncPQ61dli
+	q0vNQnCGuBhgUi9TbOmBo1Tj15gVYQerro7wo=
 MIME-Version: 1.0
-Received: by 10.236.180.130 with SMTP id j2mr3673744yhm.88.1314119789493; Tue,
-	23 Aug 2011 10:16:29 -0700 (PDT)
-Received: by 10.236.110.3 with HTTP; Tue, 23 Aug 2011 10:16:29 -0700 (PDT)
-In-Reply-To: <4E535B83.9080508@dresearch-fe.de>
-References: <4E4E536D.7010103@dresearch-fe.de> <4E4E738C.70109@dresearch-fe.de>
-	<4E5356B2.3060908@dresearch-fe.de> <4E53583A.3030405@gmx.net>
-	<4E535B83.9080508@dresearch-fe.de>
-Date: Tue, 23 Aug 2011 13:16:29 -0400
-Message-ID: <CAFu+nvEh9tUGzQM1PFo1ErtOq+a+0yg94pZBO6Ohr92GNZoKBg@mail.gmail.com>
-From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
+Received: by 10.43.49.193 with SMTP id vb1mr501508icb.321.1314133738836; Tue,
+	23 Aug 2011 14:08:58 -0700 (PDT)
+Received: by 10.42.225.136 with HTTP; Tue, 23 Aug 2011 14:08:58 -0700 (PDT)
+Date: Tue, 23 Aug 2011 23:08:58 +0200
+Message-ID: <CAGHsZCP03Kc_pJanwztMQxST4o4yrHVr3XbVNphevrhtFUmWwQ@mail.gmail.com>
+From: Philippe Corbes <philippe.corbes@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [2011.03-maintenance] do_compile failed for cacao_0.99.3.bb
+Subject: Update tzcode and tzdata to last code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,69 +35,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Aug 2011 17:21:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 23 Aug 2011 21:13:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-I suspect that the problem is happening earlier, classpath isn't building.
- the javac wrapper eats the return code from a java compile.
+Hello,
 
-On Tue, Aug 23, 2011 at 3:49 AM, Steffen Sledz <sledz@dresearch-fe.de>wrote=
-:
+I send you today in this mail an update to solve error on the timezone
+packet.
 
-> On 23.08.2011 09:35, Robert Schuster wrote:
-> > Hi,
-> >
-> > Am 23.08.2011 09:28, schrieb Steffen Sledz:
-> >>>> | Making all in native
-> >>>> | make[3]: Entering directory
-> `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/a=
-rmv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src/native'
-> >>>> | Making all in include
-> >>>> | make[4]: Entering directory
-> `/home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/a=
-rmv7a-angstrom-linux-gnueabi/cacao-0.99.3-r11/cacao-0.99.3/src/native/inclu=
-de'
-> >>>> |
-> /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroot=
-s/x86_64-linux/usr/bin/cacaoh-0.99.3/cacaoh
-> -bootclasspath
-> ../../../src/classes/classes:/home/sledz/work/angstrom-setup-scripts/buil=
-d/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/clas=
-spath/glibj.zip
-> -d . java.lang.Class
-> >>>> | java.lang.ClassNotFoundException: java/lang/Object
-> > Can you check the mentioned glibj.zip file whether it really contains a
-> > java/lang/Object.class file and whether the path is right, etc.?
->
-> The path seems to be right, but glibj.zip does not contain the mentioned
-> classes. For complete content see attached output of
->
-> zipinfo
-> /home/sledz/work/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroot=
-s/armv7a-angstrom-linux-gnueabi/usr/share/classpath/glibj.zip
->
-> >>> I'm not a java expert, but could this be related to <
-> http://icedtea.classpath.org/bugzilla/show_bug.cgi?id=3D344>?
-> > Quickly looking at it I'd say its not related as it is about building
-> > cacao as part of icedtea7.
->
-> Regards,
-> Steffen
->
-> --
-> DResearch Fahrzeugelektronik GmbH
-> Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-> Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-> Fax: +49 30 515932-299
-> Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-> Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-> Ust.-IDNr. DE273952058
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+Have a nice day,
+Philippe Corbes
+------------------------------------------------------------------------------------------------------------
+
+commit 36b84c5b1ef5d261986cfd60685967a71a72d318
+Author: Philippe Corbes <philippe.corbes@gmail.com>
+Date:   Tue Aug 23 22:47:07 2011 +0200
+
+    Update to use last tzcode and tzdata from ftp://elsie.nci.nih.gov/pub/
+
+diff --git a/recipes/tzcode/tzcode-native_2011e.bb b/recipes/tzcode/
+tzcode-native_2011e.bb
+deleted file mode 100644
+index 280840c..0000000
+--- a/recipes/tzcode/tzcode-native_2011e.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-require tzcode-native.inc
+-
+-LICENSE = "PD"
+-LIC_FILES_CHKSUM = "file://README;md5=3ae8198f82258417ce29066d3b034035"
+-
+-# Note that elsie.nci.nih.gov removes old versions when new is coming out
+-# So if this doesn't build for you because of missing source file, just
+-# bump it to the latest available version, removing old one
+-# Also, tzdata (and it is needed to build tzcode) version can differ from
+-# tzcode version, thus this variable
+-
+-TZDATA_PV = "2011e"
+-
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[tzcode-2011e.md5sum] = "fbfc05dbf9ebcfe7c4bba18549870173"
+-SRC_URI[tzcode-2011e.sha256sum] =
+"8fb00f8763aa51d83d6f3190d144124bb7176ca829fc08823d6205297bf0426b"
+-SRC_URI[tzdata-2011e.md5sum] = "044a07072300a0ee72b046e5a9a4ec90"
+-SRC_URI[tzdata-2011e.sha256sum] =
+"44fef01de4589a4979eb6b5fdbbfd21a3b135852af1ecbfb9e0368ae47392c79"
+diff --git a/recipes/tzcode/tzcode-native_2011g.bb b/recipes/tzcode/
+tzcode-native_2011g.bb
+new file mode 100644
+index 0000000..d4ac755
+--- /dev/null
++++ b/recipes/tzcode/tzcode-native_2011g.bb
+@@ -0,0 +1,19 @@
++require tzcode-native.inc
++
++LICENSE = "PD"
++LIC_FILES_CHKSUM = "file://README;md5=3ae8198f82258417ce29066d3b034035"
++
++# Note that elsie.nci.nih.gov removes old versions when new is coming out
++# So if this doesn't build for you because of missing source file, just
++# bump it to the latest available version, removing old one
++# Also, tzdata (and it is needed to build tzcode) version can differ from
++# tzcode version, thus this variable
++
++TZDATA_PV = "2011h"
++
++PR = "${INC_PR}.0"
++
++SRC_URI[tzcode-2011g.md5sum] = "ecb564279b28c5b184421c525d997d6c"
++SRC_URI[tzcode-2011g.sha256sum] =
+"636c735d8df1276cc8ab88bc31bb36a21f91ed34e26d181303ecd8fe48021bc2"
++SRC_URI[tzdata-2011h.md5sum] = "546d27b6c1e5e1097bd512651815017f"
++SRC_URI[tzdata-2011h.sha256sum] =
+"c098786d053736dd18d4f1fbebdf41554c6fd702a36f75c18f1c66712d2abc24"
+diff --git a/recipes/tzdata/tzdata_2011e.bb b/recipes/tzdata/tzdata_2011e.bb
+deleted file mode 100644
+index c0f5291..0000000
+--- a/recipes/tzdata/tzdata_2011e.bb
++++ /dev/null
+@@ -1,13 +0,0 @@
+-require tzdata.inc
+-
+-LICENSE = "PD"
+-LIC_FILES_CHKSUM =
+"file://asia;beginline=2;endline=3;md5=06468c0e84ef4d4c97045a4a29b08234"
+-
+-# Note that elsie.nci.nih.gov removes old archives after a new one is
+-# released. So if this doesn't build for you because of missing source file
+-# just bump it to the latest available version, removing the old one
+-
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[md5sum] = "044a07072300a0ee72b046e5a9a4ec90"
+-SRC_URI[sha256sum] =
+"44fef01de4589a4979eb6b5fdbbfd21a3b135852af1ecbfb9e0368ae47392c79"
+diff --git a/recipes/tzdata/tzdata_2011h.bb b/recipes/tzdata/tzdata_2011h.bb
+new file mode 100644
+index 0000000..23d1549
+--- /dev/null
++++ b/recipes/tzdata/tzdata_2011h.bb
+@@ -0,0 +1,13 @@
++require tzdata.inc
++
++LICENSE = "PD"
++LIC_FILES_CHKSUM =
+"file://asia;beginline=2;endline=3;md5=06468c0e84ef4d4c97045a4a29b08234"
++
++# Note that elsie.nci.nih.gov removes old archives after a new one is
++# released. So if this doesn't build for you because of missing source file
++# just bump it to the latest available version, removing the old one
++
++PR = "${INC_PR}.0"
++
++SRC_URI[md5sum] = "546d27b6c1e5e1097bd512651815017f"
++SRC_URI[sha256sum] =
+"c098786d053736dd18d4f1fbebdf41554c6fd702a36f75c18f1c66712d2abc24"
 
