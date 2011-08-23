@@ -1,27 +1,36 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from out3.smtp.messagingengine.com ([66.111.4.27])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philippe.corbes@gmail.com>) id 1QvyI5-0002bV-6t
+	(envelope-from <vjensen@gmx.de>) id 1QvzGP-0004D8-8O
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Aug 2011 23:13:45 +0200
-Received: by yia28 with SMTP id 28so419655yia.6
+	Wed, 24 Aug 2011 00:16:05 +0200
+Received: from compute4.internal (compute4.nyi.mail.srv.osa [10.202.2.44])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id 355F420B2B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Aug 2011 14:08:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=0jWQAcTjo7Zbt/LiH9DqIGCF3K8L2/n0+mX9ru/yEWU=;
-	b=P444Hi7kwZj+ddK4/4W971BS5jQpnHcpiDX9QbtkXyVX6aoEcHIj8aNRk1jajSaeeE
-	+edbA72DXS8X7UkxbxDmnB0//JSi4a08B3idIMISwsPtyppqmWnYHZtGamTncPQ61dli
-	q0vNQnCGuBhgUi9TbOmBo1Tj15gVYQerro7wo=
-MIME-Version: 1.0
-Received: by 10.43.49.193 with SMTP id vb1mr501508icb.321.1314133738836; Tue,
-	23 Aug 2011 14:08:58 -0700 (PDT)
-Received: by 10.42.225.136 with HTTP; Tue, 23 Aug 2011 14:08:58 -0700 (PDT)
-Date: Tue, 23 Aug 2011 23:08:58 +0200
-Message-ID: <CAGHsZCP03Kc_pJanwztMQxST4o4yrHVr3XbVNphevrhtFUmWwQ@mail.gmail.com>
-From: Philippe Corbes <philippe.corbes@gmail.com>
+	Tue, 23 Aug 2011 18:05:42 -0400 (EDT)
+Received: from frontend1.messagingengine.com ([10.202.2.160])
+	by compute4.internal (MEProxy); Tue, 23 Aug 2011 18:05:42 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=
+	messagingengine.com; h=date:from:to:subject:message-id
+	:mime-version:content-type; s=smtpout; bh=MpGHNgxhnUWuXELDhDB2aW
+	4ter4=; b=cSfPtLKeP42FYPdSg2ll0SAaXLw+jAKOJ3eaTo6XcgHnv41623PG02
+	t99vP6zcurTiX80m9RjlW3emktYB8ksuN1NZFoXo3s6QlfnYjeZaBzVOZtn60YhY
+	8NNAqRY/GM8MBQFnaZxyuQSUI+Pi+PtNya4bWMTFoyy6QaP2TnbAg=
+X-Sasl-enc: DVTZbdu7SO9Zv1bEcNiIoEhxEWMIAoE7qHbRIyxpI/7Q 1314137141
+Received: from newslug (hnvr-4dbb2273.pool.mediaWays.net [77.187.34.115])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id A44AD41F49A
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Aug 2011 18:05:41 -0400 (EDT)
+Date: Wed, 24 Aug 2011 00:11:39 +0200 (CEST)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Update tzcode and tzdata to last code
+Message-ID: <alpine.LNX.2.00.1108232320390.6141@asterix.crazy-teaparty.dyndns.org>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
+MIME-Version: 1.0
+Subject: bitbaking aufs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,120 +44,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Aug 2011 21:13:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 23 Aug 2011 22:16:05 -0000
+Content-Type: TEXT/PLAIN; format=flowed; charset=US-ASCII
 
-Hello,
+Hej!
 
-I send you today in this mail an update to solve error on the timezone
-packet.
+I would like to use a layered filesystem in our ppc603e-based machine: the 
+rootfs built from openembedded would be read-only, any customizations go 
+to a writable filesystem and should the need occur to start fresh all I 
+need is a mechanism to remove the contents of the writable filesystem.
 
-Have a nice day,
-Philippe Corbes
-------------------------------------------------------------------------------------------------------------
+In openembedded (2011.03) there is unionfs and aufs 
+(http://aufs.sourceforge.net/), aufs is more actively developed so I would 
+like to use that.  Unfortunately the recipe in oe uses aufs1 which does 
+not support current kernels.  Could change that to aufs2.2 but 
+aufs2 now has two seperated repos (patched kernel or source plus patches = 
+"standalone") and I'm in doubt how to proceed.  Especially as aufs_cvs.bb 
+contains some CONFIG_xxx voodo.
 
-commit 36b84c5b1ef5d261986cfd60685967a71a72d318
-Author: Philippe Corbes <philippe.corbes@gmail.com>
-Date:   Tue Aug 23 22:47:07 2011 +0200
+My intention is to use the "standalone" repo and "inherit module" from oe 
+but how do I apply kernel patches in this case?  The kernel resides in 
+${TMPDIR}/sysroots, do I patch that???  Or do I have to apply those 
+patches during kernel build?  I could extract them from git and add them 
+to the kernel recipe for my machine but this doesn't feel right,
 
-    Update to use last tzcode and tzdata from ftp://elsie.nci.nih.gov/pub/
+I think, I need some advice how to best get aufs2.2 building.  And a good 
+example for a "inherit module" recipe using sysroot kernel source might 
+help.  Which should I use as example for aufs?
 
-diff --git a/recipes/tzcode/tzcode-native_2011e.bb b/recipes/tzcode/
-tzcode-native_2011e.bb
-deleted file mode 100644
-index 280840c..0000000
---- a/recipes/tzcode/tzcode-native_2011e.bb
-+++ /dev/null
-@@ -1,19 +0,0 @@
--require tzcode-native.inc
--
--LICENSE = "PD"
--LIC_FILES_CHKSUM = "file://README;md5=3ae8198f82258417ce29066d3b034035"
--
--# Note that elsie.nci.nih.gov removes old versions when new is coming out
--# So if this doesn't build for you because of missing source file, just
--# bump it to the latest available version, removing old one
--# Also, tzdata (and it is needed to build tzcode) version can differ from
--# tzcode version, thus this variable
--
--TZDATA_PV = "2011e"
--
--PR = "${INC_PR}.0"
--
--SRC_URI[tzcode-2011e.md5sum] = "fbfc05dbf9ebcfe7c4bba18549870173"
--SRC_URI[tzcode-2011e.sha256sum] =
-"8fb00f8763aa51d83d6f3190d144124bb7176ca829fc08823d6205297bf0426b"
--SRC_URI[tzdata-2011e.md5sum] = "044a07072300a0ee72b046e5a9a4ec90"
--SRC_URI[tzdata-2011e.sha256sum] =
-"44fef01de4589a4979eb6b5fdbbfd21a3b135852af1ecbfb9e0368ae47392c79"
-diff --git a/recipes/tzcode/tzcode-native_2011g.bb b/recipes/tzcode/
-tzcode-native_2011g.bb
-new file mode 100644
-index 0000000..d4ac755
---- /dev/null
-+++ b/recipes/tzcode/tzcode-native_2011g.bb
-@@ -0,0 +1,19 @@
-+require tzcode-native.inc
-+
-+LICENSE = "PD"
-+LIC_FILES_CHKSUM = "file://README;md5=3ae8198f82258417ce29066d3b034035"
-+
-+# Note that elsie.nci.nih.gov removes old versions when new is coming out
-+# So if this doesn't build for you because of missing source file, just
-+# bump it to the latest available version, removing old one
-+# Also, tzdata (and it is needed to build tzcode) version can differ from
-+# tzcode version, thus this variable
-+
-+TZDATA_PV = "2011h"
-+
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[tzcode-2011g.md5sum] = "ecb564279b28c5b184421c525d997d6c"
-+SRC_URI[tzcode-2011g.sha256sum] =
-"636c735d8df1276cc8ab88bc31bb36a21f91ed34e26d181303ecd8fe48021bc2"
-+SRC_URI[tzdata-2011h.md5sum] = "546d27b6c1e5e1097bd512651815017f"
-+SRC_URI[tzdata-2011h.sha256sum] =
-"c098786d053736dd18d4f1fbebdf41554c6fd702a36f75c18f1c66712d2abc24"
-diff --git a/recipes/tzdata/tzdata_2011e.bb b/recipes/tzdata/tzdata_2011e.bb
-deleted file mode 100644
-index c0f5291..0000000
---- a/recipes/tzdata/tzdata_2011e.bb
-+++ /dev/null
-@@ -1,13 +0,0 @@
--require tzdata.inc
--
--LICENSE = "PD"
--LIC_FILES_CHKSUM =
-"file://asia;beginline=2;endline=3;md5=06468c0e84ef4d4c97045a4a29b08234"
--
--# Note that elsie.nci.nih.gov removes old archives after a new one is
--# released. So if this doesn't build for you because of missing source file
--# just bump it to the latest available version, removing the old one
--
--PR = "${INC_PR}.0"
--
--SRC_URI[md5sum] = "044a07072300a0ee72b046e5a9a4ec90"
--SRC_URI[sha256sum] =
-"44fef01de4589a4979eb6b5fdbbfd21a3b135852af1ecbfb9e0368ae47392c79"
-diff --git a/recipes/tzdata/tzdata_2011h.bb b/recipes/tzdata/tzdata_2011h.bb
-new file mode 100644
-index 0000000..23d1549
---- /dev/null
-+++ b/recipes/tzdata/tzdata_2011h.bb
-@@ -0,0 +1,13 @@
-+require tzdata.inc
-+
-+LICENSE = "PD"
-+LIC_FILES_CHKSUM =
-"file://asia;beginline=2;endline=3;md5=06468c0e84ef4d4c97045a4a29b08234"
-+
-+# Note that elsie.nci.nih.gov removes old archives after a new one is
-+# released. So if this doesn't build for you because of missing source file
-+# just bump it to the latest available version, removing the old one
-+
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[md5sum] = "546d27b6c1e5e1097bd512651815017f"
-+SRC_URI[sha256sum] =
-"c098786d053736dd18d4f1fbebdf41554c6fd702a36f75c18f1c66712d2abc24"
+Best regards,
+    Vitus
+
+-- 
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
+
 
