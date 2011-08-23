@@ -1,20 +1,35 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1QvcCo-0006YA-3t
+	(envelope-from <kergoth@gmail.com>) id 1QvfPc-0004Dk-99
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Aug 2011 23:38:50 +0200
-Received: (qmail 32576 invoked by uid 1003); 22 Aug 2011 21:33:53 -0000
-Received: from unknown (HELO ?192.168.1.148?) (philip@opensdr.com@157.22.28.13)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	22 Aug 2011 21:33:53 -0000
-Message-ID: <4E52CB4B.8090803@balister.org>
-Date: Mon, 22 Aug 2011 14:34:03 -0700
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.18) Gecko/20110621 Fedora/3.1.11-1.fc14 Thunderbird/3.1.11
+	Tue, 23 Aug 2011 03:04:25 +0200
+Received: by vxj14 with SMTP id 14so4956619vxj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Aug 2011 17:59:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	bh=0URQ3Gu4n9+cN9uf6c4HtCxPaiUOkCqmoFn49CUULJg=;
+	b=amAKqB2iwg/zLqdoPdvP1oDcsKTCIqtFNlvsB8SbA6n+w6JbrEt6EOZ1U+4YhIx73y
+	ldfOl3AH447GymWFPfH9v836OJsUIJXYqswrBF3IHStDyuwNx/nMhYdMnRCEd5gNo4rB
+	SMoug7oxmcuqDIT9eoDKt+64YqewYUjuv8AXM=
+Received: by 10.52.95.229 with SMTP id dn5mr2614295vdb.431.1314061171063; Mon,
+	22 Aug 2011 17:59:31 -0700 (PDT)
 MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.52.108.229 with HTTP; Mon, 22 Aug 2011 17:59:11 -0700 (PDT)
+In-Reply-To: <j2ucb2$fdd$4@dough.gmane.org>
+References: <201101310012.51498.schnitzeltony@gmx.de>
+	<1296461709.3922.4.camel@mattotaupa>
+	<20110131090826.149890@gmx.net>
+	<989A078976CDAD4CB2DC976EEF70E2A5068A53EB@eu2-mail.mgc.mentorg.com>
+	<1314003805.12202.14.camel@mattotaupa> <j2ucb2$fdd$4@dough.gmane.org>
+From: Chris Larson <clarson@kergoth.com>
+Date: Mon, 22 Aug 2011 17:59:11 -0700
+X-Google-Sender-Auth: 63_WIxXF39zztWNbz262sDAmr0s
+Message-ID: <CABcZANne7vwE+OnP4hEkkvCHo=3mo0g8egWe2_S-vPV5PFd-hA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: OSUOSL story
+Subject: Re: [meta-oe] need to add some verfication package recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,14 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Aug 2011 21:38:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Aug 2011 01:04:25 -0000
+Content-Type: text/plain; charset=UTF-8
 
-OSUOSL is hosting the servers we use.
+On Mon, Aug 22, 2011 at 12:57 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> Op 22-08-11 11:03, Paul Menzel schreef:
+>
+>> It would be nice if the oe-core folks can comment too in case these recipes should go into oe-core some day.
+>
+> OE-core needs to get smaller, not bigger.
 
-http://www.linux.com/news/enterprise/biz-enterprise/486133-a-look-at-oregon-state-universitys-open-source-lab
-
-Philip
+Regarding where recipes go, am I the only one that finds the
+recipes-*/ directories just annoying for day to day use? The breakdown
+might make sense from a categorical viewpoint, but as someone looking
+to modify a recipe, it's a crapshoot trying to find anything. I resort
+to shell globbing or find commands, every time.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
