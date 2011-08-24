@@ -1,38 +1,28 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from moutng.kundenserver.de ([212.227.126.186])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1QwJY7-0007DI-Hg
+	(envelope-from <eng1@koblersystems.de>) id 1QwJoN-0000Jc-Bp
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Aug 2011 21:55:43 +0200
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id AEA2C110011B
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2011 21:50:58 +0200 (CEST)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id E0A751100118
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2011 21:50:57 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (f052239047.adsl.alicedsl.de
-	[78.52.239.47]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2011 21:50:57 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 356663C158; Wed, 24 Aug 2011 21:49:24 +0200 (CEST)
-Date: Wed, 24 Aug 2011 21:49:24 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110824194923.GC4258@rhein.zuhause.netz>
-References: <4E554AD9.90607@balister.org>
+	Wed, 24 Aug 2011 22:12:31 +0200
+Received: from [192.168.1.34] (p57B415EC.dip0.t-ipconnect.de [87.180.21.236])
+	by mrelayeu.kundenserver.de (node=mreu4) with ESMTP (Nemesis)
+	id 0LmRkt-1RVvQb3RPX-00aBEx; Wed, 24 Aug 2011 21:43:43 +0200
+Message-ID: <4E555468.6070201@koblersystems.de>
+Date: Wed, 24 Aug 2011 21:43:36 +0200
+From: Jan Kobler <eng1@koblersystems.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20110120 Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
-In-Reply-To: <4E554AD9.90607@balister.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: Build failure for openjade in dev
+To: openembedded-devel@lists.openembedded.org
+References: <1309803629.20865.8.camel@BTW1>	<CA+2YH7uyJUNWuvcNEC5jnsqkZs9Hnri7sxq0aZXWf1r88tU_qw@mail.gmail.com>	<1309850758.24550.19.camel@BTW1>	<CAG4_upTf2tNbusXcBs91dwf9TE+C9yxSmDM-nXc7wHsSHYDhyQ@mail.gmail.com>
+	<1309860631.20533.4.camel@BTW1>
+In-Reply-To: <1309860631.20533.4.camel@BTW1>
+X-Provags-ID: V02:K0:1MY+b0NEsU4ZRWbFMGR/U95cvRzlC6hRBzU+yc/tr4I
+	QyJzeXIspKg39QJztzg+DuXBlq/Z4bdF9PVBjGv8Rskhe4uw4Q
+	4iufBI2zjZVMkvJdK2WNvQvtUu3l7qXg2GvDDpOkFDzxJHk9c/
+	fvz2l3/0lIkamHoQ+HAmc0qqgWp66qYXpdP/bxqh7Ask6bX5w5
+	E3ZfjcnT+HuGAf/wW54vQ==
+Cc: Alessandro Sappia <a.sappia@biotechware.com>
+Subject: Re: Cannot compile helloworld-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,23 +36,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Aug 2011 19:55:43 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 24 Aug 2011 20:12:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Wed, Aug 24, 2011 at 12:02:49PM -0700, Philip Balister wrote:
-> I am seeing this building openjade. As near as I can see, there
-> haven't been any changes to cause this. It does build in
-> release-2011.3-maintenance.
+Hi,
+
+I have encountered the problem with the missing gl_GLIBC21 too.
+
+This is what solved the problem for me:
+
+bitbake -c clean gettext-native
+bitbake gettext-native
+
+Afterwards the string "GLIBC21" appears in
+sysroots/x86_64-linux/usr/share/aclocal/glibc21.m4 and
+sysroots/x86_64-linux/usr/share/aclocal/intl.m4
+
+Best regards,
+
+Jan
+
+
+on 05.07.2011 12:10 Alessandro Sappia said the following:
 > 
-> Anyone have any clues?
+> but compilation fails on bison-native.
 > 
-> Philip
-> | + install-catalog --add /home/balister/oe/tmp/sysroots/x86_64-linux/etc/sgml/openjade-1.3.2.cat /home/balister/oe/tmp/sysroots/x86_64-linux/usr/share/sgml/openjade-1.3.2/catalog
-> | install-catalog: unable to write in /etc/sgml.
-
-hm maybee you need to traint install-catalog not to write at /etc/sgml
-
-Bye Henning
+> Seem solved by using the host bison ASSUME_PROVIDED += "bison-native"
+> instead of let bitbake compile
+> (bison from recipes complains about a "perhaps missing m4 macro
+> gl_GLIBC21").
+> 
 
 
