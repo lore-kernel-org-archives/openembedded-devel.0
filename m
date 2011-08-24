@@ -1,20 +1,38 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1QwInb-00062K-Cj
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1QwJY7-0007DI-Hg
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Aug 2011 21:07:39 +0200
-Received: (qmail 24115 invoked by uid 1003); 24 Aug 2011 19:02:50 -0000
-Received: from unknown (HELO ?192.168.1.148?) (philip@opensdr.com@157.22.28.13)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	24 Aug 2011 19:02:50 -0000
-Message-ID: <4E554AD9.90607@balister.org>
-Date: Wed, 24 Aug 2011 12:02:49 -0700
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.18) Gecko/20110621 Fedora/3.1.11-1.fc14 Thunderbird/3.1.11
-MIME-Version: 1.0
+	Wed, 24 Aug 2011 21:55:43 +0200
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id AEA2C110011B
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Aug 2011 21:50:58 +0200 (CEST)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id E0A751100118
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Aug 2011 21:50:57 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from rhein.familie-heinold.de (f052239047.adsl.alicedsl.de
+	[78.52.239.47]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Aug 2011 21:50:57 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 356663C158; Wed, 24 Aug 2011 21:49:24 +0200 (CEST)
+Date: Wed, 24 Aug 2011 21:49:24 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Build failure for openjade in dev
+Message-ID: <20110824194923.GC4258@rhein.zuhause.netz>
+References: <4E554AD9.90607@balister.org>
+MIME-Version: 1.0
+In-Reply-To: <4E554AD9.90607@balister.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: Build failure for openjade in dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,55 +46,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Aug 2011 19:07:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 24 Aug 2011 19:55:43 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I am seeing this building openjade. As near as I can see, there haven't 
-been any changes to cause this. It does build in release-2011.3-maintenance.
+On Wed, Aug 24, 2011 at 12:02:49PM -0700, Philip Balister wrote:
+> I am seeing this building openjade. As near as I can see, there
+> haven't been any changes to cause this. It does build in
+> release-2011.3-maintenance.
+> 
+> Anyone have any clues?
+> 
+> Philip
+> | + install-catalog --add /home/balister/oe/tmp/sysroots/x86_64-linux/etc/sgml/openjade-1.3.2.cat /home/balister/oe/tmp/sysroots/x86_64-linux/usr/share/sgml/openjade-1.3.2/catalog
+> | install-catalog: unable to write in /etc/sgml.
 
-Anyone have any clues?
+hm maybee you need to traint install-catalog not to write at /etc/sgml
 
-Philip
-
-| oe_libinstall: cp -P libogrove.so 
-/home/balister/oe/tmp/work/x86_64-linux/openjade-native-1.3.2-r5/image/home/balister/oe/tmp/sysroots/x86_64-linux/usr/lib/
-| + cp -P libogrove.so 
-/home/balister/oe/tmp/work/x86_64-linux/openjade-native-1.3.2-r5/image/home/balister/oe/tmp/sysroots/x86_64-linux/usr/lib/
-| + '[' -z libogrove.so.0.0.1 ']'
-| + '[' -z 1 ']'
-| + __runcmd cd 
-/home/balister/oe/tmp/work/x86_64-linux/openjade-native-1.3.2-r5/openjade-1.3.2
-| + '[' -z '' ']'
-| + echo 'oe_libinstall: cd 
-/home/balister/oe/tmp/work/x86_64-linux/openjade-native-1.3.2-r5/openjade-1.3.2'
-| oe_libinstall: cd 
-/home/balister/oe/tmp/work/x86_64-linux/openjade-native-1.3.2-r5/openjade-1.3.2
-| + cd 
-/home/balister/oe/tmp/work/x86_64-linux/openjade-native-1.3.2-r5/openjade-1.3.2
-| + install -d 
-/home/balister/oe/tmp/work/x86_64-linux/openjade-native-1.3.2-r5/image/home/balister/oe/tmp/sysroots/x86_64-linux/usr/share/sgml/openjade-1.3.2
-| + install -m 644 dsssl/catalog 
-/home/balister/oe/tmp/work/x86_64-linux/openjade-native-1.3.2-r5/image/home/balister/oe/tmp/sysroots/x86_64-linux/usr/share/sgml/openjade-1.3.2
-| + install -m 644 dsssl/dsssl.dtd dsssl/fot.dtd dsssl/style-sheet.dtd 
-dsssl/builtins.dsl dsssl/demo.dsl dsssl/extensions.dsl dsssl/demo.sgm 
-/home/balister/oe/tmp/work/x86_64-linux/openjade-native-1.3.2-r5/image/home/balister/oe/tmp/sysroots/x86_64-linux/usr/share/sgml/openjade-1.3.2
-| + install -d 
-/home/balister/oe/tmp/sysroots/x86_64-linux/usr/share/sgmERROR: Function 
-'do_install' failed (see 
-/home/balister/oe/tmp/work/x86_64-linux/openjade-native-1.3.2-r5/temp/log.do_install.31853 
-for further information)
-| l/openjade-1.3.2
-| + install -m 644 dsssl/catalog 
-/home/balister/oe/tmp/sysroots/x86_64-linux/usr/share/sgml/openjade-1.3.2/catalog
-| + install-catalog --add 
-/home/balister/oe/tmp/sysroots/x86_64-linux/etc/sgml/openjade-1.3.2.cat 
-/home/balister/oe/tmp/sysroots/x86_64-linux/usr/share/sgml/openjade-1.3.2/catalog
-| install-catalog: unable to write in /etc/sgml.
-NOTE: package openjade-native-1.3.2-r5: task do_install: Failed
-ERROR: Task 2 
-(virtual:native:/home/balister/oe/openembedded/recipes/openjade/openjade_1.3.2.bb, 
-do_install) failed with exit code '1'
-Waiting for 3 active tasks to finish:
+Bye Henning
 
 
