@@ -1,23 +1,33 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from relay4-d.mail.gandi.net ([217.70.183.196])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1QwKNr-00037u-Gh
+	(envelope-from <a.sappia@biotechware.com>) id 1QwKfk-000412-2u
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Aug 2011 22:49:11 +0200
-Received: (qmail 2600 invoked by uid 1003); 24 Aug 2011 20:44:24 -0000
-Received: from unknown (HELO ?192.168.1.148?) (philip@opensdr.com@157.22.28.13)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	24 Aug 2011 20:44:24 -0000
-Message-ID: <4E5562A6.1080705@balister.org>
-Date: Wed, 24 Aug 2011 13:44:22 -0700
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.18) Gecko/20110621 Fedora/3.1.11-1.fc14 Thunderbird/3.1.11
+	Wed, 24 Aug 2011 23:07:40 +0200
+X-Originating-IP: 217.70.178.137
+Received: from mfilter8-d.gandi.net (mfilter8-d.gandi.net [217.70.178.137])
+	by relay4-d.mail.gandi.net (Postfix) with ESMTP id 669CD17208B;
+	Wed, 24 Aug 2011 23:02:55 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mfilter8-d.gandi.net
+Received: from relay4-d.mail.gandi.net ([217.70.183.196])
+	by mfilter8-d.gandi.net (mfilter8-d.gandi.net [10.0.15.180])
+	(amavisd-new, port 10024)
+	with ESMTP id HHgqGj5Kplnu; Wed, 24 Aug 2011 23:02:54 +0200 (CEST)
+X-Originating-IP: 82.58.178.196
+Received: from [127.0.0.1] (host196-178-dynamic.58-82-r.retail.telecomitalia.it
+	[82.58.178.196]) (Authenticated sender: a.sappia@biotechware.com)
+	by relay4-d.mail.gandi.net (Postfix) with ESMTPSA id 29FE2172076;
+	Wed, 24 Aug 2011 23:02:50 +0200 (CEST)
+Message-ID: <4E5566F8.6080306@biotechware.com>
+Date: Wed, 24 Aug 2011 23:02:48 +0200
+From: Alessandro Sappia <a.sappia@biotechware.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; rv:6.0) Gecko/20110812 Thunderbird/6.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4E554AD9.90607@balister.org>
-	<20110824194923.GC4258@rhein.zuhause.netz>
-In-Reply-To: <20110824194923.GC4258@rhein.zuhause.netz>
-Subject: Re: Build failure for openjade in dev
+To: Jan Kobler <eng1@koblersystems.de>
+References: <1309803629.20865.8.camel@BTW1>	<CA+2YH7uyJUNWuvcNEC5jnsqkZs9Hnri7sxq0aZXWf1r88tU_qw@mail.gmail.com>	<1309850758.24550.19.camel@BTW1>	<CAG4_upTf2tNbusXcBs91dwf9TE+C9yxSmDM-nXc7wHsSHYDhyQ@mail.gmail.com>
+	<1309860631.20533.4.camel@BTW1> <4E555468.6070201@koblersystems.de>
+In-Reply-To: <4E555468.6070201@koblersystems.de>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Cannot compile helloworld-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,26 +41,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Aug 2011 20:49:11 -0000
+X-List-Received-Date: Wed, 24 Aug 2011 21:07:40 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 08/24/2011 12:49 PM, Henning Heinold wrote:
-> On Wed, Aug 24, 2011 at 12:02:49PM -0700, Philip Balister wrote:
->> I am seeing this building openjade. As near as I can see, there
->> haven't been any changes to cause this. It does build in
->> release-2011.3-maintenance.
->>
->> Anyone have any clues?
->>
->> Philip
->> | + install-catalog --add /home/balister/oe/tmp/sysroots/x86_64-linux/etc/sgml/openjade-1.3.2.cat /home/balister/oe/tmp/sysroots/x86_64-linux/usr/share/sgml/openjade-1.3.2/catalog
->> | install-catalog: unable to write in /etc/sgml.
+On 24/08/2011 21:43, Jan Kobler wrote:
+> Hi,
 >
-> hm maybee you need to traint install-catalog not to write at /etc/sgml
+> I have encountered the problem with the missing gl_GLIBC21 too.
+>
+> This is what solved the problem for me:
+>
+> bitbake -c clean gettext-native
+> bitbake gettext-native
+>
+> Afterwards the string "GLIBC21" appears in
+> sysroots/x86_64-linux/usr/share/aclocal/glibc21.m4 and
+> sysroots/x86_64-linux/usr/share/aclocal/intl.m4
 
-The weird bit it this worked recently, and does work in the release branch.
+The problem is something in master branch of bitbake. using .12 let a 
+fresh enviroment
+build everything.
 
-Philip
+> Best regards,
+>
+> Jan
+>
+>
+> on 05.07.2011 12:10 Alessandro Sappia said the following:
+>> but compilation fails on bison-native.
+>>
+>> Seem solved by using the host bison ASSUME_PROVIDED += "bison-native"
+>> instead of let bitbake compile
+>> (bison from recipes complains about a "perhaps missing m4 macro
+>> gl_GLIBC21").
+>>
+
 
 
