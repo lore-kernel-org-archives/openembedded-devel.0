@@ -1,34 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail2.multitech.net ([65.126.90.254] helo=mail2.multitech.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QwFK4-0007XX-1I for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Aug 2011 17:24:56 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QwFFS-0006LT-Kb for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Aug 2011 17:20:10 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2011 17:20:10 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2011 17:20:10 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <jgilles@multitech.com>) id 1QwFMj-0007gC-3g
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Aug 2011 17:27:41 +0200
+Received: from mail2.multitech.com (localhost.localdomain [127.0.0.1])
+	by localhost (Email Security Appliance) with SMTP id
+	B66E358BD7D_E55174DB for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Aug 2011 15:22:53 +0000 (GMT)
+Received: from mail.multitech.com (unknown [192.168.11.244])
+	by mail2.multitech.com (Sophos Email Appliance) with ESMTP id
+	9855C58BCFB_E55174DF for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Aug 2011 15:22:53 +0000 (GMT)
+X-Ninja-PIM: Scanned by Ninja
+X-Ninja-AttachmentFiltering: (no action)
+Received: from [192.168.52.113] ([192.168.52.113]) by mail.multitech.com with
+	Microsoft SMTPSVC(5.0.2195.7381); Wed, 24 Aug 2011 10:22:06 -0500
+From: Jesse Gilles <jgilles@multitech.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 24 Aug 2011 17:19:57 +0200
-Message-ID: <j334qt$t65$1@dough.gmane.org>
-References: <4E54DA89.2080105@dresearch-fe.de>
+In-Reply-To: <CAFu+nvEh9tUGzQM1PFo1ErtOq+a+0yg94pZBO6Ohr92GNZoKBg@mail.gmail.com>
+References: <4E4E536D.7010103@dresearch-fe.de>
+	<4E4E738C.70109@dresearch-fe.de> <4E5356B2.3060908@dresearch-fe.de>
+	<4E53583A.3030405@gmx.net> <4E535B83.9080508@dresearch-fe.de>
+	<CAFu+nvEh9tUGzQM1PFo1ErtOq+a+0yg94pZBO6Ohr92GNZoKBg@mail.gmail.com>
+Date: Wed, 24 Aug 2011 10:22:52 -0500
+Message-ID: <1314199372.21496.12.camel@jjg-linux>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:6.0) Gecko/20110812 Thunderbird/6.0
-In-Reply-To: <4E54DA89.2080105@dresearch-fe.de>
-X-Enigmail-Version: 1.3
-Subject: Re: upstart vs. task-proper-tools
+X-Mailer: Evolution 2.28.3 
+X-OriginalArrivalTime: 24 Aug 2011 15:22:06.0326 (UTC)
+	FILETIME=[95576160:01CC6271]
+Subject: Re: [2011.03-maintenance] do_compile failed for cacao_0.99.3.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,35 +42,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Aug 2011 15:24:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 24 Aug 2011 15:27:41 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, 2011-08-23 at 13:16 -0400, George C. Huntington, III wrote:
+> I suspect that the problem is happening earlier, classpath isn't building.
+>  the javac wrapper eats the return code from a java compile.
 
-Op 24-08-11 13:03, Steffen Sledz schreef:
-> We like to create an upstart based image. Therefor we use
-> 
-> IMAGE_INIT_MANAGER = "upstart upstart-sysvcompat sysvinit-utils"
-> 
-> inside our image recipe.
-> 
-> Unfortunately our image somehow inherits task-proper-tools which contains an RDEPEND for sysvinit. This results in
-> 
-> -------------------------->snip<------------------------- |  * check_data_file_clashes: Package upstart-sysvcompat wants to install file /home/sledz/work/HydraIP/OE/tmp.6/rootfs/hydraip-hipox-devimage/sbin/runlevel |       But that file is already provided by package  * sysvinit |  *
-> check_data_file_clashes: Package upstart-sysvcompat wants to install file /home/sledz/work/HydraIP/OE/tmp.6/rootfs/hydraip-hipox-devimage/etc/init.d/rcS |       But that file is already provided by package  * sysvinit |  * check_data_file_clashes: Package upstart-sysvcompat wants to install
-> file /home/sledz/work/HydraIP/OE/tmp.6/rootfs/hydraip-hipox-devimage/etc/init.d/rc |       But that file is already provided by package  * sysvinit |  * check_data_file_clashes: Package upstart-sysvcompat wants to install file
-> /home/sledz/work/HydraIP/OE/tmp.6/rootfs/hydraip-hipox-devimage/etc/default/rcS |       But that file is already provided by package  * sysvinit |  * opkg_install_cmd: Cannot install package upstart. -------------------------->snip<-------------------------
+If George is right, then the following patch to the javac wrapper script
+may fix the issue.  It fixes building classpath as well as returns the
+error code if all javac attempts fail.
 
-Why not change those into u-a entries?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+http://patches.openembedded.org/patch/9521/
 
-iD8DBQFOVRadMkyGM64RGpERAkPdAJ4q2GZbqk9Bk9xI3/EJ+6puyDr0OgCgjgeI
-GPHe/PbojFKSuh4RqeXDKGY=
-=aCHU
------END PGP SIGNATURE-----
+Jesse
+
 
 
 
