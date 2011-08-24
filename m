@@ -1,27 +1,21 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <vjensen@gmx.de>) id 1QwA5T-0001Oc-U7
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Aug 2011 11:49:32 +0200
-Received: (qmail 23153 invoked by uid 0); 24 Aug 2011 09:38:04 -0000
-Received: from 145.253.169.210 by www050.gmx.net with HTTP;
-	Wed, 24 Aug 2011 11:38:02 +0200 (CEST)
-Date: Wed, 24 Aug 2011 11:38:02 +0200
-From: "Vitus Jensen" <vjensen@gmx.de>
-In-Reply-To: <201108241102.05565.ml@vdm-design.de>
-Message-ID: <20110824093802.194230@gmx.net>
+Received: from smarthost.techfak.uni-bielefeld.de ([129.70.137.17])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <sherbrec@cit-ec.uni-bielefeld.de>)
+	id 1QwAOs-0002UM-2i for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Aug 2011 12:09:34 +0200
+Received: from [129.70.144.11] (hooge.TechFak.Uni-Bielefeld.DE [129.70.144.11])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: sherbrec)
+	by smarthost.TechFak.Uni-Bielefeld.DE (Postfix) with ESMTPSA id 14DFF99;
+	Wed, 24 Aug 2011 12:04:47 +0200 (CEST)
+Message-ID: <4E54CC8A.3080507@cit-ec.uni-bielefeld.de>
+Date: Wed, 24 Aug 2011 12:03:54 +0200
+From: Stefan Herbrechtsmeier <sherbrec@cit-ec.uni-bielefeld.de>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:6.0) Gecko/20110812 Thunderbird/6.0
 MIME-Version: 1.0
-References: <alpine.LNX.2.00.1108232320390.6141@asterix.crazy-teaparty.dyndns.org>
-	<201108241102.05565.ml@vdm-design.de>
-To: openembedded-devel@lists.openembedded.org
-X-Authenticated: #705530
-X-Flags: 0001
-X-Mailer: WWW-Mail 6100 (Global Message Exchange)
-X-Priority: 3
-X-Provags-ID: V01U2FsdGVkX19I6NQuIRRINAAfcZ8e8YOa+106q34gDGE+tSS9Bs
-	WZeIVdi6UxcXEM0h1GHVrqeGZMRHW2ZE6Bvg== 
-X-GMX-UID: H7c9Ia1zMydhAK2WYGplv+tjaGRhZpoG
-Subject: Re: bitbaking aufs
+To: openembedded-devel@lists.openembedded.org, tom.rini@gmail.com
+Subject: [2011.03-maintenance] Unable to build meta-toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,53 +29,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Aug 2011 09:49:32 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 24 Aug 2011 10:09:34 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, 24 Aug 2011 11:02:05 +0200 Thomas Zimmermann wrote:
-> On Wednesday, August 24, 2011 00:11:39 Vitus Jensen wrote:
-> > Hej!
-> > 
-> > I would like to use a layered filesystem in our ppc603e-based machine:
-> > the rootfs built from openembedded would be read-only, any
-> > customizations go to a writable filesystem and should the need
-> > occur to start fresh all I
-> > need is a mechanism to remove the contents of the writable filesystem.
-> > 
-> > In openembedded (2011.03) there is unionfs and aufs
-> > (http://aufs.sourceforge.net/), aufs is more actively developed so
-> > I would like to use that.  Unfortunately the recipe in oe uses
-> > aufs1 which does
-> > not support current kernels.  Could change that to aufs2.2 but
-> > aufs2 now has two seperated repos (patched kernel or source plus
-> > patches = "standalone") and I'm in doubt how to proceed.
-> > Especially as aufs_cvs.bb contains some CONFIG_xxx voodo.
-> > 
-> > My intention is to use the "standalone" repo and "inherit module"
-> > from oe
-> > but how do I apply kernel patches in this case?  The kernel resides in
-> > ${TMPDIR}/sysroots, do I patch that???  Or do I have to apply those
-> > patches during kernel build?  I could extract them from git and add
-> > them to the kernel recipe for my machine but this doesn't feel right,
-...
+Hi,
 
-> You have to patch the kernel to export a lot of symbols for aufs2.
-> So you have  to rebuild the kernel anyway. And then i think it
-> would be the easiest way if you integrate it into your kernel
-> directly. Like described in the README section 3.1.
-> 
-> In my opinion a standalone aufs recipe is not possible, because the
-> kernel needs to be patched and you have to use the specific branch
-> for your kernel version.
+commit 105d881227d06f31c180dffb777ee63361b2f2b8
+  'gcc: Package libstdc++ gdb python helpers into dev package'
+breaks meta-toolchain generation. See also [1]
 
-In this case (and in the meantime I came to the same conclusion) it is easiest to use the already patched kernel tree from aufs.sourceforge, create a linux-aufs_2.6.36.bb and use that for my device.  Or have a second look to union-mount (http://valerieaurora.org/union/) and build a recipe for that tree.
+This commit adds dev packages (libstdc++-dev libgcc-dev) to
+gcc-cross (gcc-package-cross.inc) which are already part of
+gcc. The libgcc-dev package both include the libgcc_s.so file
+which triggers a 'file is already provided by package' error on
+incremental builds. The libstdc++-dev package have different
+content and triggers a 'Cannot satisfy the following
+dependencies for task-sdk-bare' error. If an empty
+libstdc++-dev package is generated it triggers a
+'..../usr/include/c++ not exist' error as this is part of the
+package from gcc but not gcc-cross.
 
-Thank you for your viewpoints, they helped.
-  Vitus
+For me the gcc-package-cross.inc part of the patch looks wrong
+as the dev packages are already part of the gcc recipe and the
+python helpers should only be removed from libstdc++ package.
 
--- 
-NEU: FreePhone - 0ct/min Handyspartarif mit Geld-zurück-Garantie!		
-Jetzt informieren: http://www.gmx.net/de/go/freephone
+I have the problems with my own machines (armv5te, armv7a)
+as well as with a fresh beagleboard build for angstrom-2008.1.
+
+Regards,
+     Stefan
+
+[1] 
+http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg20425.html
+
 
 
