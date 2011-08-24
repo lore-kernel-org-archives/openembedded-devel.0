@@ -1,25 +1,24 @@
-Received: from host4.kei.pl ([94.152.8.4] helo=smtp.host4.kei.pl)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1QwCrq-0007cV-Ed
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1QwDD3-0008Pj-8t
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Aug 2011 14:47:38 +0200
-Received: (qmail 16962 invoked by uid 2404007); 24 Aug 2011 12:36:14 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 87-206-60-144.dynamic.chello.pl (HELO ?192.168.1.112?)
-	(marcin@juszkiewicz.com.pl@87.206.60.144)
-	by host4.kei.pl with ESMTPA; 24 Aug 2011 12:36:14 -0000
-Message-ID: <4E54F03E.3040806@juszkiewicz.com.pl>
-Date: Wed, 24 Aug 2011 14:36:14 +0200
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:6.0) Gecko/20110809 Thunderbird/6.0
-MIME-Version: 1.0
+	Wed, 24 Aug 2011 15:09:33 +0200
+Received: from nat-dem.mentorg.com ([195.212.93.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1QwD8S-0000ke-7I from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Aug 2011 06:04:48 -0700
+Received: from localhost.localdomain ([137.202.156.152]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
+	Wed, 24 Aug 2011 15:04:46 +0200
+From: "Noor, Ahsan" <noor_ahsan@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4E54DA89.2080105@dresearch-fe.de>
-	<4E54EF12.2010100@dresearch-fe.de>
-In-Reply-To: <4E54EF12.2010100@dresearch-fe.de>
-X-Enigmail-Version: 1.2.1
-Subject: Re: upstart vs. task-proper-tools
+Date: Wed, 24 Aug 2011 18:04:35 +0500
+Message-Id: <1314191075-8229-1-git-send-email-noor_ahsan@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+X-OriginalArrivalTime: 24 Aug 2011 13:04:47.0111 (UTC)
+	FILETIME=[6662F170:01CC625E]
+Subject: [meta-oe][PATCH] tiobench: Add version 0.3.3 (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,20 +32,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Aug 2011 12:47:38 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 24 Aug 2011 13:09:33 -0000
 
-W dniu 24.08.2011 14:31, Steffen Sledz pisze:
-> BTW:
-> What is the exact meaning/purpose/use of task-proper-tools?
+From: Noor Ahsan <noor_ahsan@mentor.com>
 
-Replace busybox components by full versions. Was made years ago and then
-updated by several people. While working for BugLabs company I used it
-to create rootfs without busybox.
+* Imported from oe.dev commit id 821f47e170dddabaef3925fd62c5423210dcb363.
 
-> The list contains a lot of tools with existing alternatives (e.g. syslog-ng vs. rsyslog or pump vs. dhcpcd).
+Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+---
+ .../tiobench-0.3.3/tiobench-makefile.patch         |   47 ++++++++++++++++++++
+ .../recipes-benchmark/tiobench/tiobench_0.3.3.bb   |   25 ++++++++++
+ 2 files changed, 72 insertions(+), 0 deletions(-)
 
-Then propose change which will allow to install one of them only at time?
+diff --git a/meta-oe/recipes-benchmark/tiobench/tiobench-0.3.3/tiobench-makefile.patch b/meta-oe/recipes-benchmark/tiobench/tiobench-0.3.3/tiobench-makefile.patch
+new file mode 100644
+index 0000000..66f5a7d
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/tiobench/tiobench-0.3.3/tiobench-makefile.patch
+@@ -0,0 +1,47 @@
++Author: Ludovic Desroches <ludovic.desroches@atmel.com>
++
++Adapt tiobench to OE
++Index: Makefile
++===================================================================
++--- a/Makefile	2011-05-26 07:48:46.341400974 +0200
+++++ b/Makefile	2011-05-30 06:32:38.091401358 +0200
++@@ -1,8 +1,9 @@
++ # Makefile for tiotest
++ 
++-CC=gcc
+++CC?=gcc
++ #CFLAGS=-O3 -fomit-frame-pointer -Wall
++ CFLAGS=-O2 -Wall
+++LDFLAGS?=
++ 
++ #DEFINES=-DUSE_MMAP 
++ #-DUSE_MADVISE
++@@ -14,16 +15,16 @@
++ 
++ #DEFINES=
++ 
++-LINK=gcc
+++LINK?=$(CC)
++ EXE=tiotest
++ PROJECT=tiobench
++ # do it once instead of each time referenced
++ VERSION=$(shell egrep "tiotest v[0-9]+.[0-9]+" tiotest.c | cut -d " " -f 7 | sed "s/v//g")
++ DISTNAME=$(PROJECT)-$(VERSION)
++ INSTALL=install
++-PREFIX=/usr/local
+++PREFIX?=/usr/local
++ BINDIR=$(PREFIX)/bin
++-DOCDIR=/usr/local/doc/$(DISTNAME)
+++DOCDIR=$(PREFIX)/share/doc/$(DISTNAME)
++ 
++ all: $(EXE)
++ 
++@@ -34,7 +35,7 @@
++ 	$(CC) -c $(CFLAGS) $(DEFINES) tiotest.c -o tiotest.o
++ 
++ $(EXE): tiotest.o crc32.o
++-	$(LINK) -o $(EXE) tiotest.o crc32.o -lpthread
+++	$(LINK) -o $(EXE) tiotest.o crc32.o -lpthread $(LDFLAGS)
++ 	@echo
++ 	@echo "./tiobench.pl --help for usage options"
++ 	@echo
+diff --git a/meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb b/meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb
+new file mode 100644
+index 0000000..636e2d1
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb
+@@ -0,0 +1,25 @@
++DESCRIPTION = "Threaded I/O tester"
++HOMEPAGE = "http://sourceforge.net/projects/tiobench/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b"
++RDEPENDS = "\
++    perl \
++    perl-module-exporter-heavy \
++    perl-module-getopt-long \
++    perl-module-overload \
++    perl-module-strict \
++    "
++PR = "r0"
++
++SRC_URI = "\
++    http://sourceforge.net/projects/tiobench/files/tiobench/${PV}/${P}.tar.gz \
++    file://tiobench-makefile.patch \
++    "
++SRC_URI[md5sum] = "bf485bf820e693c79e6bd2a38702a128"
++SRC_URI[sha256sum] = "8ad011059a35ac70cdb5e3d3999ceee44a8e8e9078926844b0685b7ea9db2bcc"
++
++EXTRA_OEMAKE = "PREFIX=${D}/usr"
++
++do_install() {
++    oe_runmake install
++}
+-- 
+1.7.0.4
+
 
 
