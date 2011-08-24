@@ -1,29 +1,29 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QwEZR-00027j-CB
+	(envelope-from <sledz@dresearch-fe.de>) id 1QwEbY-0002G5-Um
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Aug 2011 16:36:45 +0200
-Received: by bkbzu17 with SMTP id zu17so1010060bkb.6
+	Wed, 24 Aug 2011 16:38:56 +0200
+Received: by bkbzu17 with SMTP id zu17so1012183bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2011 07:31:58 -0700 (PDT)
-Received: by 10.204.130.19 with SMTP id q19mr2241860bks.88.1314196318515;
-	Wed, 24 Aug 2011 07:31:58 -0700 (PDT)
+	Wed, 24 Aug 2011 07:34:10 -0700 (PDT)
+Received: by 10.204.141.25 with SMTP id k25mr2273872bku.44.1314196450401;
+	Wed, 24 Aug 2011 07:34:10 -0700 (PDT)
 Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
 	[217.92.177.116])
-	by mx.google.com with ESMTPS id s10sm301627bka.64.2011.08.24.07.31.57
-	(version=SSLv3 cipher=OTHER); Wed, 24 Aug 2011 07:31:57 -0700 (PDT)
-Message-ID: <4E550B5C.2050100@dresearch-fe.de>
-Date: Wed, 24 Aug 2011 16:31:56 +0200
+	by mx.google.com with ESMTPS id n9sm304834bkd.40.2011.08.24.07.34.07
+	(version=SSLv3 cipher=OTHER); Wed, 24 Aug 2011 07:34:07 -0700 (PDT)
+Message-ID: <4E550BDE.6010401@dresearch-fe.de>
+Date: Wed, 24 Aug 2011 16:34:06 +0200
 From: Steffen Sledz <sledz@dresearch-fe.de>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:6.0) Gecko/20110812 Thunderbird/6.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <4E54DA89.2080105@dresearch-fe.de>
-	<CAOd_LFy7_ij=gFeadkovP8EkVwM+dCksv0vcimGmQC9JQRD-DQ@mail.gmail.com>
-In-Reply-To: <CAOd_LFy7_ij=gFeadkovP8EkVwM+dCksv0vcimGmQC9JQRD-DQ@mail.gmail.com>
+	<4E54EF12.2010100@dresearch-fe.de>
+	<4E54F03E.3040806@juszkiewicz.com.pl>
+In-Reply-To: <4E54F03E.3040806@juszkiewicz.com.pl>
 X-Enigmail-Version: 1.3.1
-Cc: Michael Lauer <mickey@vanille-media.de>
 Subject: Re: upstart vs. task-proper-tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,23 +38,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Aug 2011 14:36:45 -0000
+X-List-Received-Date: Wed, 24 Aug 2011 14:38:57 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 24.08.2011 16:26, Cliff Brake wrote:
-> On Wed, Aug 24, 2011 at 7:03 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
->> We like to create an upstart based image. Therefor we use
+On 24.08.2011 14:36, Marcin Juszkiewicz wrote:
+> W dniu 24.08.2011 14:31, Steffen Sledz pisze:
+>> BTW:
+>> What is the exact meaning/purpose/use of task-proper-tools?
 > 
-> Steffen, what are your thoughts on upstart vs systemd?  I am moving
-> toward systemd for one project, but I'm interested in what others are
-> choosing and why.
+> Replace busybox components by full versions. Was made years ago and then
+> updated by several people. While working for BugLabs company I used it
+> to create rootfs without busybox.
+> 
+>> The list contains a lot of tools with existing alternatives (e.g. syslog-ng vs. rsyslog or pump vs. dhcpcd).
+> 
+> Then propose change which will allow to install one of them only at time?
 
-We're like to use systemd in the next major version of our images.
+Sorry, but my knowledge is not sufficient to do this. I've no idea how to reference u-a related tools here.
 
-But currently we are bound to the runlevel model. We only want to use some additional upstart features.
-
-Steffen
+Who can help?
 
 -- 
 DResearch Fahrzeugelektronik GmbH
