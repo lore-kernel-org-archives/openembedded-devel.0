@@ -1,32 +1,23 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1Qwbx3-0004ZU-CN
+	(envelope-from <philip@balister.org>) id 1QwdLG-0000zp-Rn
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Aug 2011 17:34:41 +0200
-Received: by pzk2 with SMTP id 2so3842142pzk.34
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Aug 2011 08:29:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=subject:from:content-type:message-id:date:to
-	:content-transfer-encoding:mime-version:x-pgp-agent:x-mailer;
-	bh=10a8Kz9s5gJqVT5zEU4d0xm/cw+x7a9DeLdtebjPrZ4=;
-	b=gK2DHF70tnwTh0xULmvf5amTo8avBjXvdfQKeo0GcmSSJ1lMHkDvJtalxvTpIjIDrw
-	ZsfmcXcpSQA7mpXU22lVreBnX3gKJtJNSdTlo0Q7U6GqkcZhG01WiA9xfxa15lqnFlcD
-	buppZhQfh/coFOJ2kY6NwXWbbdYFSDojxeUIA=
-Received: by 10.142.43.16 with SMTP id q16mr315886wfq.208.1314286192928;
-	Thu, 25 Aug 2011 08:29:52 -0700 (PDT)
-Received: from [192.168.0.5] (ip68-230-54-74.ph.ph.cox.net [68.230.54.74])
-	by mx.google.com with ESMTPS id s8sm614552wff.5.2011.08.25.08.29.26
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 25 Aug 2011 08:29:38 -0700 (PDT)
-From: Tom Rini <tom.rini@gmail.com>
-Message-Id: <B2DD4A87-6DF0-43C3-BCB6-5B82BC92160B@gmail.com>
-Date: Thu, 25 Aug 2011 08:29:13 -0700
+	Thu, 25 Aug 2011 19:03:47 +0200
+Received: (qmail 29791 invoked by uid 1003); 25 Aug 2011 16:58:49 -0000
+Received: from unknown (HELO ?192.168.1.148?) (philip@opensdr.com@157.22.28.13)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	25 Aug 2011 16:58:49 -0000
+Message-ID: <4E567F50.7080407@balister.org>
+Date: Thu, 25 Aug 2011 09:58:56 -0700
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.18) Gecko/20110621 Fedora/3.1.11-1.fc14 Thunderbird/3.1.11
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0 (Apple Message framework v1084)
-X-Pgp-Agent: GPGMail 1.3.3
-X-Mailer: Apple Mail (2.1084)
-Subject: [2011.03-maintenance] Vacation
+References: <4E554AD9.90607@balister.org>	<20110824194923.GC4258@rhein.zuhause.netz>	<4E55A72B.7070008@balister.org>
+	<1314263137.4186.4.camel@mattotaupa>
+In-Reply-To: <1314263137.4186.4.camel@mattotaupa>
+Subject: Re: Build failure for openjade in dev: `libtool: link: cannot find the library `=/usr/lib/libstdc++.la'`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,30 +31,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Aug 2011 15:34:41 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 25 Aug 2011 17:03:47 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 08/25/2011 02:05 AM, Paul Menzel wrote:
+> Am Mittwoch, den 24.08.2011, 18:36 -0700 schrieb Philip Balister:
+>> On 08/24/2011 12:49 PM, Henning Heinold wrote:
+>>> On Wed, Aug 24, 2011 at 12:02:49PM -0700, Philip Balister wrote:
+>>>> I am seeing this building openjade. As near as I can see, there
+>>>> haven't been any changes to cause this. It does build in
+>>>> release-2011.3-maintenance.
+>>>>
+>>>> Anyone have any clues?
+>>>>
+>>>> Philip
+>>>> | + install-catalog --add /home/balister/oe/tmp/sysroots/x86_64-linux/etc/sgml/openjade-1.3.2.cat /home/balister/oe/tmp/sysroots/x86_64-linux/usr/share/sgml/openjade-1.3.2/catalog
+>>>> | install-catalog: unable to write in /etc/sgml.
+>>>
+>>> hm maybee you need to traint install-catalog not to write at /etc/sgml
+>>
+>> It's beginning to look like bitbake master does not work with dev. Back
+>> on 1.12.0 bitbake and things seem sane again.
+>
+> Well, it still fails for me. What build configuration do you use? I
+> tested `angstrom-2010.x`, `minimal{,-uclibc}` for `MACHINE =
+> "beagleboard"`. (Please always add that to the commit message.)
+>
+>          mkdir .libs
+>          libtool: link: warning: library `/oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux-gnueabi/usr/lib/libosp.la' was moved.
+>          libtool: link: warning: library `/oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux-gnueabi/usr/lib/libosp.la' was moved.
+>          libtool: link: cannot find the library `=/usr/lib/libstdc++.la'
+>          make[2]: *** [openjade] Error 1
 
-Hey all,
+I am building Angstrom 2010 for the usrp-e1xx (in overlay, but it should 
+be very close to the overo).
 
-I'm going to be on vacation from computers August 28th returning =
-September 6th.  During this time I won't be doing any merge requests and =
-since this is a maintenance branch I think we'll all survive.  Thanks =
-all!
+Philip
 
-- --=20
-Tom
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG/MacGPG2 v2.0.17 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk5WakkACgkQdZngf2G4WwPSeACbBQjk6EEIS1TRC3vTqispzCbY
-S4gAnjpyFu+3vq+2trRxBKIhNnbMMt6T
-=3DW9+S
------END PGP SIGNATURE-----
+>
+>
+>
+> Thanks,
+>
+> Paul
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
