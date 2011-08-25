@@ -1,37 +1,32 @@
-Received: from mail-ey0-f173.google.com ([209.85.215.173])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1QwbvC-0004AZ-Mj
+	(envelope-from <tom.rini@gmail.com>) id 1Qwbx3-0004ZU-CN
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Aug 2011 17:32:47 +0200
-Received: by eyb7 with SMTP id 7so1685242eyb.18
+	Thu, 25 Aug 2011 17:34:41 +0200
+Received: by pzk2 with SMTP id 2so3842142pzk.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Aug 2011 08:27:59 -0700 (PDT)
+	Thu, 25 Aug 2011 08:29:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=references:in-reply-to:mime-version:content-type:message-id
-	:content-transfer-encoding:cc:from:subject:date:to:x-pgp-agent
-	:x-mailer; bh=v8BXMuffcMIWS3JpAdIve5XQ9Mm2CVKmnQS6yP5d9vE=;
-	b=upNMXJnkBFtSI9R8YeJYvKSOYzrJqM2JyS4T00if/mVlaLuMKgywngBsy6NiOkx2kw
-	zPMYfnwZF4KKsEE3dFtq0pQoejIe8K+GerBFpE8gkiXZPDItabo3p+6TgMQPB4/Zm9uI
-	2fhraun3H+jb7TwAzRCy7tQ5VM84eQo9RW5lM=
-Received: by 10.142.135.10 with SMTP id i10mr1655460wfd.134.1314286078495;
-	Thu, 25 Aug 2011 08:27:58 -0700 (PDT)
-Received: from [192.168.0.5] (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
-	by mx.google.com with ESMTPS id z1sm292921pbz.6.2011.08.25.08.27.29
+	h=subject:from:content-type:message-id:date:to
+	:content-transfer-encoding:mime-version:x-pgp-agent:x-mailer;
+	bh=10a8Kz9s5gJqVT5zEU4d0xm/cw+x7a9DeLdtebjPrZ4=;
+	b=gK2DHF70tnwTh0xULmvf5amTo8avBjXvdfQKeo0GcmSSJ1lMHkDvJtalxvTpIjIDrw
+	ZsfmcXcpSQA7mpXU22lVreBnX3gKJtJNSdTlo0Q7U6GqkcZhG01WiA9xfxa15lqnFlcD
+	buppZhQfh/coFOJ2kY6NwXWbbdYFSDojxeUIA=
+Received: by 10.142.43.16 with SMTP id q16mr315886wfq.208.1314286192928;
+	Thu, 25 Aug 2011 08:29:52 -0700 (PDT)
+Received: from [192.168.0.5] (ip68-230-54-74.ph.ph.cox.net [68.230.54.74])
+	by mx.google.com with ESMTPS id s8sm614552wff.5.2011.08.25.08.29.26
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 25 Aug 2011 08:27:37 -0700 (PDT)
-References: <4E4AA7B7.7020006@dresearch-fe.de>
-	<CA+M6bX=9E0c-hRCnyZ-7+WWX+NP_MeE_zLP8xtLH9EYqMVRDjA@mail.gmail.com>
-	<4E51F52B.4040304@dresearch-fe.de>
-In-Reply-To: <4E51F52B.4040304@dresearch-fe.de>
-Mime-Version: 1.0 (Apple Message framework v1084)
-Message-Id: <ED92F4F3-FAEF-4537-97A6-D5654BEA8DD8@gmail.com>
+	Thu, 25 Aug 2011 08:29:38 -0700 (PDT)
 From: Tom Rini <tom.rini@gmail.com>
-Date: Thu, 25 Aug 2011 08:27:15 -0700
-To: Steffen Sledz <sledz@dresearch-fe.de>
+Message-Id: <B2DD4A87-6DF0-43C3-BCB6-5B82BC92160B@gmail.com>
+Date: Thu, 25 Aug 2011 08:29:13 -0700
+To: openembedded-devel@lists.openembedded.org
+Mime-Version: 1.0 (Apple Message framework v1084)
 X-Pgp-Agent: GPGMail 1.3.3
 X-Mailer: Apple Mail (2.1084)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance] Pull request (live555 update)
+Subject: [2011.03-maintenance] Vacation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,30 +40,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Aug 2011 15:32:48 -0000
+X-List-Received-Date: Thu, 25 Aug 2011 15:34:41 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On Aug 21, 2011, at 11:20 PM, Steffen Sledz wrote:
+Hey all,
 
-> Hi Tom,
->=20
-> Please pull one commits from here:
->=20
-> URI: git://git.openembedded.org/openembedded
-> Branch: sledz/maintenance
->=20
-> Andrea Adami (1):
->      live555: catch up with upstream habits of upgrading and removing =
-tarballs
->=20
-> This updates the live555 version and is already in oe-dev master.
->=20
-
-This is now applied, thanks!  And sorry for the delay.
+I'm going to be on vacation from computers August 28th returning =
+September 6th.  During this time I won't be doing any merge requests and =
+since this is a maintenance branch I think we'll all survive.  Thanks =
+all!
 
 - --=20
 Tom
@@ -77,9 +61,9 @@ Tom
 Version: GnuPG/MacGPG2 v2.0.17 (Darwin)
 Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAk5WadMACgkQdZngf2G4WwMQawCfUXmo0UGh3Q4PAstp5nnvYt9M
-THIAnjA1o8z6HEDUx5JjtHLQJNj1fsIQ
-=3DD5eR
+iEYEARECAAYFAk5WakkACgkQdZngf2G4WwPSeACbBQjk6EEIS1TRC3vTqispzCbY
+S4gAnjpyFu+3vq+2trRxBKIhNnbMMt6T
+=3DW9+S
 -----END PGP SIGNATURE-----
 
 
