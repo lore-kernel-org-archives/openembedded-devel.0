@@ -1,26 +1,27 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <fabian-buettner@gmx.de>) id 1QxlCN-00088G-PD
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Aug 2011 21:39:15 +0200
-Received: (qmail invoked by alias); 28 Aug 2011 19:34:24 -0000
-Received: from lak-175-63.wohnheime.ruhr-uni-bochum.de (EHLO localhost)
-	[134.147.175.63]
-	by mail.gmx.net (mp061) with SMTP; 28 Aug 2011 21:34:24 +0200
-X-Authenticated: #4787129
-X-Provags-ID: V01U2FsdGVkX18gbGwHH80g7FwNMbEmqzpdWCcp6u1dO3ZC8Z9pH4
-	6PERm3FATwO/au
-Date: Sun, 28 Aug 2011 21:34:13 +0200
-From: fabian =?iso-8859-15?Q?b=FCttner?= <fabian-buettner@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110828193413.GA30897@golden>
-References: <4E5A6817.50308@mlbassoc.com> <j3e0rh$oou$1@dough.gmane.org>
-	<4E5A9702.20604@mlbassoc.com>
+Received: from mail-ey0-f173.google.com ([209.85.215.173])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <agnel.joel@gmail.com>)
+	id 1Qxli8-0000Tg-FH; Sun, 28 Aug 2011 22:12:04 +0200
+Received: by eyb7 with SMTP id 7so3485448eyb.18
+	for <multiple recipients>; Sun, 28 Aug 2011 13:07:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:cc:content-type;
+	bh=FOAUrM4LmHhKXdycX3bdjGv/D09YyKjLpu1OwefObzk=;
+	b=i4SsJJ2+gP0suahb2eBu3FMF8y87U+yQVt8f08SmrXObP5ozemruaUq0oUmtIQfBn9
+	Cug9yMY2TYIN7wgOiacNKCAxincJj/CNvFKbvIjDCW8m2F96VUYqBu9miHONu5DuFzXD
+	IR9mKUz04TXWhUlJdEyAEcb5pCo7wmyUJkrao=
 MIME-Version: 1.0
-In-Reply-To: <4E5A9702.20604@mlbassoc.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Y-GMX-Trusted: 0
-Subject: Re: [2011,03 maintenance] updates?
+Received: by 10.213.26.17 with SMTP id b17mr1150804ebc.2.1314562033083; Sun,
+	28 Aug 2011 13:07:13 -0700 (PDT)
+Received: by 10.213.106.8 with HTTP; Sun, 28 Aug 2011 13:07:13 -0700 (PDT)
+Date: Sun, 28 Aug 2011 15:07:13 -0500
+Message-ID: <CAD=GYpaZeb18B+wtGM5Wpv+8zNx+r=462K7Yx7+hK4z=dZrG5Q@mail.gmail.com>
+From: Joel A Fernandes <agnel.joel@gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Cc: "Kridner, Jason" <jdk@ti.com>, "Kooi, Koen" <k-kooi@ti.com>
+Subject: How do we get programs into sysroots?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,34 +35,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Aug 2011 19:39:15 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 28 Aug 2011 20:12:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 13:29 Sun 28 Aug     , Gary Thomas wrote:
-> On 2011-08-28 12:19, Koen Kooi wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> >
-> > Op 28-08-11 18:08, Gary Thomas schreef:
-> >> When I pull the head of this branch, the latest rev I see is from April 23??  I'm sure I've seen merges since then.
-> >>
-> >
-> > Tried cgit? http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=2011.03-maintenance
-> 
-> Ah, the difference is that the oebb.sh script from http://www.angstrom-distribution.org/building-angstrom
-> is checking out from git://github.com/openembedded/openembedded.git!
+I have added a recipe for mkcard script to oe-core/meta/meta-devtools
+as follows:
 
-Hi,
+DESCRIPTION = "A tool to format SD Cards correctly"
+LICENSE = "GPLv2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
+SECTION = "base"
+SRC_URI = "file://mkcard.txt \
+           file://COPYING.patch"
+PR = "r3"
 
-At first i was confused too, but it seems like the patch from april
-was not commited until now.
+do_configure() {
+        install -m 0644 ${WORKDIR}/mkcard.txt ${S}/
+}
 
-By comparing the commit message on the cgit website and on your machine
-you'll see that you are (hopefully) up to date.
-(i am using the angstrom setup scripts too)
+do_install() {
+        install -d ${D}${base_sbindir}
+        install -m 0755 ${S}/mkcard.txt ${D}${base_sbindir}/mkcard
+}
 
-regards,
-fabian
+BBCLASSEXTEND = "native"
+---
+
+Everything works fine, but I don't see 'mkcard' in /sbin in sysroots
+directory. I'd like to install it there. I tried looking at other
+scripts to see the right way to do it but I'm not sure of a clean way
+to do so. I looked at the staging.bbclass and it seems to only pickup
+libs and headers.
+
+Appreciate any help or pointers to posts/documentation
+
+Thanks,
+Joel
 
 
