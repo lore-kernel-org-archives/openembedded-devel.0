@@ -1,28 +1,25 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1Qxl7O-00080d-74
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <fabian-buettner@gmx.de>) id 1QxlCN-00088G-PD
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Aug 2011 21:34:06 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 01D0D16601D6; Sun, 28 Aug 2011 13:29:15 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 3C40B16601C7;
-	Sun, 28 Aug 2011 13:29:06 -0600 (MDT)
-Message-ID: <4E5A9702.20604@mlbassoc.com>
-Date: Sun, 28 Aug 2011 13:29:06 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:5.0) Gecko/20110707 Thunderbird/5.0
-MIME-Version: 1.0
+	Sun, 28 Aug 2011 21:39:15 +0200
+Received: (qmail invoked by alias); 28 Aug 2011 19:34:24 -0000
+Received: from lak-175-63.wohnheime.ruhr-uni-bochum.de (EHLO localhost)
+	[134.147.175.63]
+	by mail.gmx.net (mp061) with SMTP; 28 Aug 2011 21:34:24 +0200
+X-Authenticated: #4787129
+X-Provags-ID: V01U2FsdGVkX18gbGwHH80g7FwNMbEmqzpdWCcp6u1dO3ZC8Z9pH4
+	6PERm3FATwO/au
+Date: Sun, 28 Aug 2011 21:34:13 +0200
+From: fabian =?iso-8859-15?Q?b=FCttner?= <fabian-buettner@gmx.de>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110828193413.GA30897@golden>
 References: <4E5A6817.50308@mlbassoc.com> <j3e0rh$oou$1@dough.gmane.org>
-In-Reply-To: <j3e0rh$oou$1@dough.gmane.org>
-Cc: Koen Kooi <koen@dominion.thruhere.net>
+	<4E5A9702.20604@mlbassoc.com>
+MIME-Version: 1.0
+In-Reply-To: <4E5A9702.20604@mlbassoc.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Y-GMX-Trusted: 0
 Subject: Re: [2011,03 maintenance] updates?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -37,27 +34,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Aug 2011 19:34:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 28 Aug 2011 19:39:15 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 2011-08-28 12:19, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 28-08-11 18:08, Gary Thomas schreef:
->> When I pull the head of this branch, the latest rev I see is from April 23??  I'm sure I've seen merges since then.
->>
->
-> Tried cgit? http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=2011.03-maintenance
+On 13:29 Sun 28 Aug     , Gary Thomas wrote:
+> On 2011-08-28 12:19, Koen Kooi wrote:
+> > -----BEGIN PGP SIGNED MESSAGE-----
+> > Hash: SHA1
+> >
+> > Op 28-08-11 18:08, Gary Thomas schreef:
+> >> When I pull the head of this branch, the latest rev I see is from April 23??  I'm sure I've seen merges since then.
+> >>
+> >
+> > Tried cgit? http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=2011.03-maintenance
+> 
+> Ah, the difference is that the oebb.sh script from http://www.angstrom-distribution.org/building-angstrom
+> is checking out from git://github.com/openembedded/openembedded.git!
 
-Ah, the difference is that the oebb.sh script from http://www.angstrom-distribution.org/building-angstrom
-is checking out from git://github.com/openembedded/openembedded.git!
+Hi,
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+At first i was confused too, but it seems like the patch from april
+was not commited until now.
+
+By comparing the commit message on the cgit website and on your machine
+you'll see that you are (hopefully) up to date.
+(i am using the angstrom setup scripts too)
+
+regards,
+fabian
 
 
