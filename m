@@ -1,26 +1,23 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1QxzVR-0005by-C6
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Aug 2011 12:55:53 +0200
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1QxzQk-0001I7-QP from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Aug 2011 03:51:03 -0700
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Mon, 29 Aug 2011 12:51:00 +0200
-Message-ID: <989A078976CDAD4CB2DC976EEF70E2A5068A589E@eu2-mail.mgc.mentorg.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: benefits of sending full request against sending individual
-	patches
-Thread-Index: AcxmOYpSjjGBN8ebSI+WPnlOIIjgyA==
-From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: benefits of sending full request against sending individual patches
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qxzjz-0006EE-W1 for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Aug 2011 13:10:56 +0200
+Received: from f053042163.adsl.alicedsl.de ([78.53.42.163]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QxzfL-00076J-3y for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Aug 2011 11:06:07 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 29 Aug 2011 13:06:04 +0200
+In-Reply-To: <989A078976CDAD4CB2DC976EEF70E2A5068A589E@eu2-mail.mgc.mentorg.com>
+References: <989A078976CDAD4CB2DC976EEF70E2A5068A589E@eu2-mail.mgc.mentorg.com>
+X-Mailer: Evolution 3.0.2- 
+Message-ID: <1314615966.6949.19.camel@mattotaupa>
+Mime-Version: 1.0
+Subject: Re: benefits of sending full request against sending individual patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,52 +31,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Aug 2011 10:55:53 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Mon, 29 Aug 2011 11:10:56 -0000
+X-Groupsio-MsgNum: 33867
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-rruUAn1BQnjkOZOb/aY7"
+
+--=-rruUAn1BQnjkOZOb/aY7
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
-
-=20
-
-I was just wondering that what added benefit we get by sending pull
-request instead of sending patches. As I observed patches are still
-being sent on the mailing list along the pull request.
-
-=20
-
-Regards,
-
-Noor
-
-=20
-
-Noor Ahsan | Sr. Technical Lead System Builder
-
-Mentor Embedded <http://www.mentor.com/embedded> (tm) |1-2-3 OSN Center
-Cavalry Ground Lahore
-
-P +92 42 36099196 | M +92 307 4448444
-
-Nucleus <http://www.mentor.com/embedded-software/nucleus/> (r) | Linux
-<http://www.mentor.com/embedded-software/linux/> (r) | Android
-<http://www.mentor.com/embedded-software/android/> (tm) | Services
-<http://www.mentor.com/embedded-software/services/>  | UI
-<http://www.mentor.com/embedded-software/inflexion/>  | Multi-OS
-<http://www.mentor.com/embedded-software/multicore-multi-os>=20
-
-=20
-
-Android is a trademark of Google Inc. Use of this trademark is subject
-to Google Permissions.=20
-
-Linux is the registered trademark of Linus Torvalds in the U.S. and
-other countries.
-
-=20
-
-=20
+Dear Noor,
 
 
+Am Montag, den 29.08.2011, 12:51 +0200 schrieb Ahsan, Noor:
+
+> I was just wondering that what added benefit we get by sending pull
+> request instead of sending patches. As I observed patches are still
+> being sent on the mailing list along the pull request.
+
+others will have more to say, but I guess it easier to apply them.
+Instead of saving each patch and use `git am` to apply them, you can
+just pull them at once.
+
+
+Thanks,
+
+Paul
+
+--=-rruUAn1BQnjkOZOb/aY7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk5bcp0ACgkQPX1aK2wOHVixCACeIguq3cXQ1ykyhXt8CknxPbGZ
+334An0lEfySdKcpfPNvkz8Qfac/pdKkC
+=Si2b
+-----END PGP SIGNATURE-----
+
+--=-rruUAn1BQnjkOZOb/aY7--
