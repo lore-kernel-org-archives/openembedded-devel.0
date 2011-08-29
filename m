@@ -1,25 +1,31 @@
-Received: from host4.kei.pl ([94.152.8.4] helo=smtp.host4.kei.pl)
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Qy3ZK-0003ww-Ei
+	(envelope-from <kergoth@gmail.com>) id 1Qy4lQ-0005Pg-7Z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Aug 2011 17:16:10 +0200
-Received: (qmail 21907 invoked by uid 2404007); 29 Aug 2011 15:11:14 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 87-206-60-144.dynamic.chello.pl (HELO ?192.168.1.112?)
-	(marcin@juszkiewicz.com.pl@87.206.60.144)
-	by host4.kei.pl with ESMTPA; 29 Aug 2011 15:11:14 -0000
-Message-ID: <4E5BAC16.7000605@juszkiewicz.com.pl>
-Date: Mon, 29 Aug 2011 17:11:18 +0200
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:7.0) Gecko/20110828 Thunderbird/7.0
-MIME-Version: 1.0
+	Mon, 29 Aug 2011 18:32:44 +0200
+Received: by gxk3 with SMTP id 3so328527gxk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Aug 2011 09:27:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=Es40vw6nKbev+oJI9CvklfvzGZnJQcd2UUyY6XmmfX0=;
+	b=F6SJzaIAIVH0+6dM64lIopxbuvygpUsUZcrtjniTrMkAp8i1yKHXKHQDkYuk6vUEjW
+	EC2o6rpguDCwEk4GOn3q5d1rv3yL5ktCBWpVe56tNeEDUwyEan3YKA1+rfklgU1vAuFM
+	uPfGAbjXV89FjIB/ocwvFebJdvmauztpqBsEg=
+Received: by 10.236.181.135 with SMTP id l7mr27338543yhm.85.1314635271761;
+	Mon, 29 Aug 2011 09:27:51 -0700 (PDT)
+Received: from localhost.localdomain (ip24-251-173-232.ph.ph.cox.net
+	[24.251.173.232])
+	by mx.google.com with ESMTPS id r28sm2657976yhm.66.2011.08.29.09.27.50
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 29 Aug 2011 09:27:51 -0700 (PDT)
+From: Christopher Larson <kergoth@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1314621621-26512-1-git-send-email-yauhen.kharuzhy@promwad.com>
-	<1314621621-26512-2-git-send-email-yauhen.kharuzhy@promwad.com>
-In-Reply-To: <1314621621-26512-2-git-send-email-yauhen.kharuzhy@promwad.com>
-X-Enigmail-Version: 1.2.1
-Subject: Re: [PATCH 1/3] Add linux kernel recipe and patches for mycable's Jade Evaluation Board
+Date: Mon, 29 Aug 2011 09:27:43 -0700
+Message-Id: <1314635263-10209-1-git-send-email-kergoth@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Cc: Chris Larson <chris_larson@mentor.com>
+Subject: [PATCH] [meta-oe] binutils: use TARGET_PREFIX for the convenience links
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,19 +39,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Aug 2011 15:16:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 29 Aug 2011 16:32:44 -0000
 
-W dniu 29.08.2011 14:40, Yauhen Kharuzhy pisze:
-> diff --git a/recipes/linux/linux-jade_2.6.27.bb b/recipes/linux/linux-jade_2.6.27.bb
-> new file mode 100644
-> index 0000000..cc8bc60
-> --- /dev/null
-> +++ b/recipes/linux/linux-jade_2.6.27.bb
+From: Chris Larson <chris_larson@mentor.com>
 
-NACK
+This ensures it works even if TARGET_PREFIX != ${TARGET_SYS}-
 
-Please use recipes/linux/linux_2.6.27.bb as a base of your kernel.
+Signed-off-by: Chris Larson <chris_larson@mentor.com>
+---
+ meta-oe/recipes-devtools/binutils/binutils.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-devtools/binutils/binutils.inc b/meta-oe/recipes-devtools/binutils/binutils.inc
+index d9e859e..f8fc7b8 100644
+--- a/meta-oe/recipes-devtools/binutils/binutils.inc
++++ b/meta-oe/recipes-devtools/binutils/binutils.inc
+@@ -109,8 +109,8 @@ do_install () {
+ 	cd ${D}${bindir}
+ 
+ 	# Symlinks for ease of running these on the native target
+-	for p in ${TARGET_SYS}-* ; do
+-		ln -sf $p `echo $p | sed -e s,${TARGET_SYS}-,,`
++	for p in ${TARGET_PREFIX}* ; do
++		ln -sf $p `echo $p | sed -e s,${TARGET_PREFIX},,`
+ 	done
+ 
+ 	rm ${D}${bindir}/ar ${D}${bindir}/strings
+-- 
+1.7.3.2.430.g208247
+
 
 
