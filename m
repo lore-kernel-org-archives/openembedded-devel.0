@@ -1,33 +1,27 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <agnel.joel@gmail.com>)
-	id 1QxoQW-00046Y-DG; Mon, 29 Aug 2011 01:06:05 +0200
-Received: by fxg11 with SMTP id 11so4108569fxg.6
-	for <multiple recipients>; Sun, 28 Aug 2011 16:01:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=Gj4OHgx1FSiZnPAwesK4i1eKzVNpCrmc5YRgFcvsLMM=;
-	b=nmHw9EHZPWhz20Q/z3Iecf6eMTdtku2z6oUS65emYU1dXlnwe9J9KT6dwhXsk9h+72
-	D5q/LFe0DjN5iydfTYif3Xa9a2l/AJ3MPbm4go+ClYR3A1f+PcN21uKjcdB8/Ww3yTya
-	B/Vab32V30CuWTinMqPicQRrfZj2+a+ZKmkQE=
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1QxwfR-0001MI-Dl
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Aug 2011 09:54:01 +0200
+Received: from nat-dem.mentorg.com ([195.212.93.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1Qxwai-0005tm-MR from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Aug 2011 00:49:08 -0700
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Received: by 10.223.21.141 with SMTP id j13mr5897659fab.79.1314572473212; Sun,
-	28 Aug 2011 16:01:13 -0700 (PDT)
-Received: by 10.223.159.143 with HTTP; Sun, 28 Aug 2011 16:01:13 -0700 (PDT)
-Received: by 10.223.159.143 with HTTP; Sun, 28 Aug 2011 16:01:13 -0700 (PDT)
-In-Reply-To: <CABcZANm_0g3gSdxkE7-br1Ds2GMb0vENmGst7cdU--tOPDgw2A@mail.gmail.com>
-References: <CAD=GYpaZeb18B+wtGM5Wpv+8zNx+r=462K7Yx7+hK4z=dZrG5Q@mail.gmail.com>
-	<CABcZANm_0g3gSdxkE7-br1Ds2GMb0vENmGst7cdU--tOPDgw2A@mail.gmail.com>
-Date: Sun, 28 Aug 2011 18:01:13 -0500
-Message-ID: <CAD=GYpYUhqjQ9_Dtq9szXd-Q=-ZF6gP9KuoxiX6fOiH3SUDvmw@mail.gmail.com>
-From: Joel A Fernandes <agnel.joel@gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-devel@lists.openembedded.org, "Kridner, Jason" <jdk@ti.com>,
-	"Kooi, Koen" <k-kooi@ti.com>
-Subject: Re: [OE-core] How do we get programs into sysroots?
+Date: Mon, 29 Aug 2011 09:49:05 +0200
+Message-ID: <989A078976CDAD4CB2DC976EEF70E2A5068A585F@eu2-mail.mgc.mentorg.com>
+In-Reply-To: <j3a5n5$g9m$1@dough.gmane.org>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] [meta-oe][PATCH 0/4] pull request #1 for bechmark recipes
+Thread-Index: AcxkiZPJomzvQkdsSvCHofJtDasxMgBlmC7g
+References: <cover.1314370503.git.noor_ahsan__19880.832944955$1314376843$gmane$org@mentor.com>
+	<j3a5n5$g9m$1@dough.gmane.org>
+From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 0/4] pull request #1 for bechmark recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,31 +35,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Aug 2011 23:06:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 29 Aug 2011 07:54:01 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Thanks a lot, i'll try this.
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf
+Of
+> Koen Kooi
+> Sent: Saturday, August 27, 2011 12:18 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH 0/4] pull request #1 for bechmark
+> recipes
+>=20
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> Op 26-08-11 18:40, Noor, Ahsan schreef:
+> > From: Noor Ahsan <noor_ahsan@mentor.com>
+> >
+> > *** BLURB HERE *** The following changes since commit
+> 22ec18224f7a7c64850c76b14017dff2ff4345f2: pespin (1): elfe: Add
+> LIC_FILES_CHKSUM to recipe
+> >
+> > are available in the git repository at:
+> >
+> > git://github.com/Noor-Ahsan/meta-oe master https://github.com/Noor-
+> Ahsan/meta-oe/tree/master
+> >
+> > Noor Ahsan (4): dbench: Add version 4.0 (initial recipe) lmbench:
+Add
+> version 3.0-a9 (initial recipe) iperf: Add version 2.0.4 (initial
+> recipe) tiobench: Add version 0.3.3 (initial recipe)
+>=20
+> It doesn't address any of the feedback I gave on your pull-request on
+> the OE-core ml (PR, RDEPENDS_*). Please address that for the next spin
+I have addressed that feedback but could not understand you following
+comment. Kindly elaborate it.
 
-Regards,
-Joel
+Op 26 aug. 2011, om 18:31 heeft Noor, Ahsan het volgende geschreven:
 
-On Aug 28, 2011 3:46 PM, "Chris Larson" <clarson@kergoth.com> wrote:
+> From: Noor Ahsan <noor_ahsan@mentor.com>
+>=20
+> *** BLURB HERE ***
 
-On Sun, Aug 28, 2011 at 1:07 PM, Joel A Fernandes <agnel.joel@gmail.com>
-wrote:
-> DESCRIPTION = "A t...
-When using a custom do_install, with BBCLASSEXTEND, afaik you need to
-set NATIVE_INSTALL_WORKS = "1" to get its files into the sysroot for
-the native version.
---
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+where?
 
+What do you mean by where?
 
-_______________________________________________
-Openembedded-core mailing list
-Openembedded-core@li...
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>=20
+> iD8DBQFOWJolMkyGM64RGpERAlYaAJ0bZhoMM9lwtwgrSHEuHROvN7JOtgCaAmfp
+> 9tXTVl0h+rTsBCAutmcmJQI=3D
+> =3D/dIY
+> -----END PGP SIGNATURE-----
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
