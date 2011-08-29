@@ -1,28 +1,28 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1Qxx7C-0002Ou-Ay
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1QxxRh-00032z-4C
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Aug 2011 10:22:42 +0200
+	Mon, 29 Aug 2011 10:43:53 +0200
 Received: from nat-dem.mentorg.com ([195.212.93.2]
 	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1Qxx2U-0007jr-3E from Noor_Ahsan@mentor.com 
+	id 1QxxN0-0001C1-J3 from Noor_Ahsan@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Aug 2011 01:17:50 -0700
-Received: from localhost.localdomain ([137.202.156.152]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Mon, 29 Aug 2011 10:17:49 +0200
-From: "Noor, Ahsan" <noor_ahsan@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Aug 2011 13:17:52 +0500
-Message-Id: <eeb0e7ce1e3cf7be787eae20a6ed4e15faa55e35.1314603785.git.noor_ahsan@mentor.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <cover.1314603785.git.noor_ahsan@mentor.com>
-References: <cover.1314603785.git.noor_ahsan@mentor.com>
-In-Reply-To: <noor_ahsan@mentor.com>
-References: <noor_ahsan@mentor.com>
-X-OriginalArrivalTime: 29 Aug 2011 08:17:49.0307 (UTC)
-	FILETIME=[23D74CB0:01CC6624]
-Subject: [meta-oe][PATCH v2 4/4] tiobench: Add version 0.3.3 (initial recipe)
+	Mon, 29 Aug 2011 01:39:02 -0700
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Mon, 29 Aug 2011 10:38:59 +0200
+Message-ID: <989A078976CDAD4CB2DC976EEF70E2A5068A586E@eu2-mail.mgc.mentorg.com>
+In-Reply-To: <1313665760-21930-1-git-send-email-noor_ahsan@mentor.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [PATCH][meta-oe] python-lxml: Added new recipe in meta-oe for
+	2.2.8 version
+Thread-Index: Acxdl0y9M2Rq/ls8QW+EEEBw5ENdEAIj7Yfw
+References: <1313665760-21930-1-git-send-email-noor_ahsan@mentor.com>
+From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
+To: "Ahsan, Noor" <Noor_Ahsan@mentor.com>,
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-oe] python-lxml: Added new recipe in meta-oe for 2.2.8 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,108 +36,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Aug 2011 08:22:42 -0000
+X-List-Received-Date: Mon, 29 Aug 2011 08:43:53 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Noor Ahsan <noor_ahsan@mentor.com>
+> -----Original Message-----
+> From: Ahsan, Noor
+> Sent: Thursday, August 18, 2011 4:09 PM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Ahsan, Noor
+> Subject: [PATCH][meta-oe] python-lxml: Added new recipe in meta-oe for
+> 2.2.8 version
+>=20
+> From: Noor Ahsan <noor_ahsan@mentor.com>
+>=20
+> * Added new recipe in meta-oe for 2.2.8 version
+>=20
+> Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+> ---
+>  .../recipes-devtools/python/python-lxml_2.2.8.bb   |   32
+> ++++++++++++++++++++
+>  1 files changed, 32 insertions(+), 0 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-devtools/python/python-lxml_2.2.8.bb
+> b/meta-oe/recipes-devtools/python/python-lxml_2.2.8.bb
+> new file mode 100644
+> index 0000000..b1aac3f
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/python/python-lxml_2.2.8.bb
+> @@ -0,0 +1,32 @@
+> +DESCRIPTION =3D "Powerful and Pythonic XML processing library =
+combining
+> \
+> +libxml2/libxslt with the ElementTree API."
+> +HOMEPAGE =3D "http://codespeak.net/lxml"
+> +LICENSE =3D "BSD"
+> +LIC_FILES_CHKSUM =3D
+> "file://LICENSES.txt;md5=3D7de92baeb3b7bfaebe72404155fdb346"
+> +SRCNAME =3D "lxml"
+> +
+> +DEPENDS =3D "libxml2 libxslt"
+> +RDEPENDS_${PN} +=3D "libxml2 libxslt python-compression"
+> +
+> +SRC_URI =3D
+> "http://pypi.python.org/packages/source/l/${SRCNAME}/${SRCNAME}-
+> ${PV}.tar.gz;name=3Dlxml"
+> +SRC_URI[lxml.md5sum] =3D "d6c612d63a84d79440912a1b29d3b981"
+> +SRC_URI[lxml.sha256sum] =3D
+> "89b73925b5e3295dcf4675cb948007a20eb029fe35c9a162ae19ec11f1abafe5"
+> +
+> +S =3D "${WORKDIR}/${SRCNAME}-${PV}"
+> +
+> +inherit setuptools
+> +
+> +DISTUTILS_BUILD_ARGS +=3D " \
+> +
+--with-xslt-config=3D'${STAGING_BINDIR_NATIVE}/pkg-
+> config libxslt' \
+> +                     --with-xml2-
+> config=3D'${STAGING_BINDIR_NATIVE}/xml2-config' \
+> +"
+> +
+> +DISTUTILS_INSTALL_ARGS +=3D " \
+> +
+--with-xslt-config=3D'${STAGING_BINDIR_NATIVE}/pkg-
+> config libxslt' \
+> +                     --with-xml2-
+> config=3D'${STAGING_BINDIR_NATIVE}/xml2-config' \
+> +"
+> +
+> +BBCLASSEXTEND =3D "native nativesdk"
+> +RDEPENDS_${PN}_virtclass-native =3D "libxml2-native libxslt-native"
+> +
+> +
+> --
+> 1.7.0.4
+Hi,
 
-* Imported from oe.dev commit id 821f47e170dddabaef3925fd62c5423210dcb363.
+Kindly pull this patch. Thanks
 
-Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
----
- .../tiobench-0.3.3/tiobench-makefile.patch         |   49 ++++++++++++++++++++
- .../recipes-benchmark/tiobench/tiobench_0.3.3.bb   |   25 ++++++++++
- 2 files changed, 74 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-benchmark/tiobench/tiobench-0.3.3/tiobench-makefile.patch
- create mode 100644 meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb
-
-diff --git a/meta-oe/recipes-benchmark/tiobench/tiobench-0.3.3/tiobench-makefile.patch b/meta-oe/recipes-benchmark/tiobench/tiobench-0.3.3/tiobench-makefile.patch
-new file mode 100644
-index 0000000..f820c7e
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/tiobench/tiobench-0.3.3/tiobench-makefile.patch
-@@ -0,0 +1,49 @@
-+Adapt tiobench to OE
-+Author: Ludovic Desroches <ludovic.desroches@atmel.com>
-+
-+Upstream-Status: Inappropriate [not author]
-+
-+Index: Makefile
-+===================================================================
-+--- a/Makefile	2011-05-26 07:48:46.341400974 +0200
-++++ b/Makefile	2011-05-30 06:32:38.091401358 +0200
-+@@ -1,8 +1,9 @@
-+ # Makefile for tiotest
-+ 
-+-CC=gcc
-++CC?=gcc
-+ #CFLAGS=-O3 -fomit-frame-pointer -Wall
-+ CFLAGS=-O2 -Wall
-++LDFLAGS?=
-+ 
-+ #DEFINES=-DUSE_MMAP 
-+ #-DUSE_MADVISE
-+@@ -14,16 +15,16 @@
-+ 
-+ #DEFINES=
-+ 
-+-LINK=gcc
-++LINK?=$(CC)
-+ EXE=tiotest
-+ PROJECT=tiobench
-+ # do it once instead of each time referenced
-+ VERSION=$(shell egrep "tiotest v[0-9]+.[0-9]+" tiotest.c | cut -d " " -f 7 | sed "s/v//g")
-+ DISTNAME=$(PROJECT)-$(VERSION)
-+ INSTALL=install
-+-PREFIX=/usr/local
-++PREFIX?=/usr/local
-+ BINDIR=$(PREFIX)/bin
-+-DOCDIR=/usr/local/doc/$(DISTNAME)
-++DOCDIR=$(PREFIX)/share/doc/$(DISTNAME)
-+ 
-+ all: $(EXE)
-+ 
-+@@ -34,7 +35,7 @@
-+ 	$(CC) -c $(CFLAGS) $(DEFINES) tiotest.c -o tiotest.o
-+ 
-+ $(EXE): tiotest.o crc32.o
-+-	$(LINK) -o $(EXE) tiotest.o crc32.o -lpthread
-++	$(LINK) -o $(EXE) tiotest.o crc32.o -lpthread $(LDFLAGS)
-+ 	@echo
-+ 	@echo "./tiobench.pl --help for usage options"
-+ 	@echo
-diff --git a/meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb b/meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb
-new file mode 100644
-index 0000000..3b77b38
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb
-@@ -0,0 +1,25 @@
-+DESCRIPTION = "Threaded I/O tester"
-+HOMEPAGE = "http://sourceforge.net/projects/tiobench/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b"
-+
-+SRC_URI = "\
-+    http://sourceforge.net/projects/tiobench/files/tiobench/${PV}/${P}.tar.gz \
-+    file://tiobench-makefile.patch \
-+    "
-+SRC_URI[md5sum] = "bf485bf820e693c79e6bd2a38702a128"
-+SRC_URI[sha256sum] = "8ad011059a35ac70cdb5e3d3999ceee44a8e8e9078926844b0685b7ea9db2bcc"
-+
-+EXTRA_OEMAKE = "PREFIX=${D}/usr"
-+
-+do_install() {
-+    oe_runmake install
-+}
-+
-+RDEPENDS = "\
-+    perl \
-+    perl-module-exporter-heavy \
-+    perl-module-getopt-long \
-+    perl-module-overload \
-+    perl-module-strict \
-+    "
--- 
-1.7.0.4
-
+Regards,
+Noor
 
 
