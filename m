@@ -1,31 +1,23 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <seba.dos1@gmail.com>) id 1Qy1q1-0001P5-5G
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Aug 2011 15:25:17 +0200
-Received: by fxg11 with SMTP id 11so4563500fxg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Aug 2011 06:20:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=7wp8snOQjzd2dOZQQhtopGyWsPh09emooE3Detm+KJU=;
-	b=Fx/8+2d272LlOfVEqINpGTl8LT6rESIpa/elmke9MlZUwFAkb5Y+Eu0/UzGe3/gear
-	0PkHMJ1VnlltaqJ8LcWf7+86iFqg74laXE0Y4e0SpwLjMU+fjvn01UMlze1TWZAHiQJw
-	uNJxu+29J3b+xHyLByPW8RxVpcnfNpCDe6ePA=
-Received: by 10.223.97.210 with SMTP id m18mr1706435fan.127.1314624025328;
-	Mon, 29 Aug 2011 06:20:25 -0700 (PDT)
-Received: from localhost.localdomain (esq70.neoplus.adsl.tpnet.pl
-	[83.20.136.70])
-	by mx.google.com with ESMTPS id b14sm3756189fak.29.2011.08.29.06.20.23
-	(version=SSLv3 cipher=OTHER); Mon, 29 Aug 2011 06:20:24 -0700 (PDT)
-Sender: Sebastian Krzyszkowiak <seba.dos1@gmail.com>
-From: Sebastian Krzyszkowiak <dos@dosowisko.net>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qy1tm-0001Wf-Rw for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Aug 2011 15:29:10 +0200
+Received: from f053042163.adsl.alicedsl.de ([78.53.42.163]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qy1p8-0007vU-1B for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Aug 2011 13:24:22 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Aug 2011 15:20:17 +0200
-Message-Id: <1314624017-17974-1-git-send-email-dos@dosowisko.net>
-X-Mailer: git-send-email 1.7.5.4
-Cc: Sebastian Krzyszkowiak <dos@dosowisko.net>
-Subject: [PATCH][meta-oe] ltrace: upgrade Debian patchset from -2 to -2.1
+Date: Mon, 29 Aug 2011 15:24:19 +0200
+In-Reply-To: <1314621621-26512-1-git-send-email-yauhen.kharuzhy@promwad.com>
+References: <1314621621-26512-1-git-send-email-yauhen.kharuzhy@promwad.com>
+X-Mailer: Evolution 3.0.2- 
+Message-ID: <1314624260.6949.42.camel@mattotaupa>
+Mime-Version: 1.0
+Subject: Re: Add mycable's Fujitsu Jade Evaluation Board support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,46 +31,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Aug 2011 13:25:17 -0000
+X-List-Received-Date: Mon, 29 Aug 2011 13:29:10 -0000
+X-Groupsio-MsgNum: 33873
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-Q+U+oLmqBFichZmPg6u6"
 
-* because -2 is not fetchable anymore
+--=-Q+U+oLmqBFichZmPg6u6
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Sebastian Krzyszkowiak <dos@dosowisko.net>
----
- meta-oe/recipes-devtools/ltrace/ltrace_0.5.3.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_0.5.3.bb b/meta-oe/recipes-devtools/ltrace/ltrace_0.5.3.bb
-index 7625dd8..9555c48 100644
---- a/meta-oe/recipes-devtools/ltrace/ltrace_0.5.3.bb
-+++ b/meta-oe/recipes-devtools/ltrace/ltrace_0.5.3.bb
-@@ -5,14 +5,14 @@ DEPENDS = "elfutils binutils"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
- 
--PR = "r3"
-+PR = "r4"
- 
- # ltrace is not ported to sh3/sh4 targets at this time
- COMPATIBLE_TARGET_SYS = (?!sh[34])
- 
- SRC_URI = "\
-   ${DEBIAN_MIRROR}/main/l/ltrace/ltrace_${PV}.orig.tar.gz;name=archive \
--  ${DEBIAN_MIRROR}/main/l/ltrace/ltrace_${PV}-2.diff.gz;name=patch \
-+  ${DEBIAN_MIRROR}/main/l/ltrace/ltrace_${PV}-2.1.diff.gz;name=patch \
-   file://add-sysdep.patch \
-   file://ltrace-compile.patch \
-   file://ltrace-mips-remove-CP.patch \
-@@ -77,5 +77,5 @@ do_install() {
- 
- SRC_URI[archive.md5sum] = "3fa7fe715ab879db08bd06d1d59fd90f"
- SRC_URI[archive.sha256sum] = "5c6627d6d5a98a92ca4661cfc16378b182cc46a9ec479ebf7e6121ee3fe2be32"
--SRC_URI[patch.md5sum] = "969baa0900646c0262b2d505b9fef154"
--SRC_URI[patch.sha256sum] = "f647d7c2f2b0d1dbddd632f3a17fef670aed3ebf5fbe6c1633337acac1eba8e3"
-+SRC_URI[patch.md5sum] = "38bc944c53ab602a7854aa4fa71c1f46"
-+SRC_URI[patch.sha256sum] = "4c57df94020f2bed90d948f757ca7786796ca9218274764b24f61c502d9ef4f6"
--- 
-1.7.5.4
+Dear Yauhen,
 
 
+Am Montag, den 29.08.2011, 15:40 +0300 schrieb Yauhen Kharuzhy:
+> This patch series adds machine configuration, kernel and uboot patches fo=
+r mycable's Fujitsu MB68R01 'Jade' SoC
+> (http://www.fujitsu.com/emea/services/microelectronics/gdc/gdcdevices/mb8=
+6r01-jade.html).
+> Kernel and u-boot patches were picked from XXSVideo project on SourceForg=
+e.
 
+thank you for your patches. Unfortunately you will need to resend them,
+since they contain some =E2=80=9Cstyle=E2=80=9D issues.
+
+0. Please look at our commit policy [0] on how to format the commit
+summary.
+
+1. Please add to the commit message of the machine addition what
+distribution you tested your machine with and what works and what not.
+
+2. Always start with `PR =3D "r0"` please.
+
+3. It would be nice if you could add patch headers to the patches [1].
+Like where did you get them from and what is the upstream status.
+
+I know a lot of things in oe.dev do not adhere to that requirement but
+since some time new contributions should follow them. So I am sorry to
+make that demand.
+
+4. Adding a new machine in the right way seems difficult. Checking out a
+branch after for example 2/3 one would not find the required machine.
+But I guess that is the only draw back and =E2=80=9Csmall=E2=80=9D patches =
+are a better
+benefit.
+
+5. More information regarding supporting OE and this board is also
+welcome. That means can we expect further contributions or is this a
+=E2=80=9Cone time code drop=E2=80=9D? Are there plans to move to oe-core/me=
+ta-oe [2]?
+
+6. Please add `[PATCH v2]` to the subject line [3] when resending the
+patches and update the state of your patches in our patch queue
+Patchwork [4].
+
+
+Thanks,
+
+Paul
+
+
+[0] http://openembedded.org/index.php/Commit_Policy
+[1] http://openembedded.org/index.php/Commit_Patch_Message_Guidelines
+[2] http://openembedded.org/index.php/OpenEmbedded-Core
+[3] http://openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmbedded=
+#Create_and_Commit_your_patch
+[4] http://openembedded.org/index.php/Patchwork
+
+--=-Q+U+oLmqBFichZmPg6u6
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk5bkwMACgkQPX1aK2wOHVg/kgCghwpdG/jD+ZkPTzGicBvLUugs
+8HYAnj6/xWO0hpNNvrUOLhjPn927WK91
+=U3Lh
+-----END PGP SIGNATURE-----
+
+--=-Q+U+oLmqBFichZmPg6u6--
