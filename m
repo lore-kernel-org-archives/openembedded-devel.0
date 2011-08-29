@@ -1,27 +1,24 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1QxwuS-00027n-U3
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1Qxx6v-0002Ng-J5
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Aug 2011 10:09:33 +0200
+	Mon, 29 Aug 2011 10:22:25 +0200
 Received: from nat-dem.mentorg.com ([195.212.93.2]
 	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1Qxwpj-0006tz-Tg from Noor_Ahsan@mentor.com 
+	id 1Qxx2F-0007j4-5e from Noor_Ahsan@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Aug 2011 01:04:40 -0700
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Mon, 29 Aug 2011 10:04:37 +0200
-Message-ID: <989A078976CDAD4CB2DC976EEF70E2A5068A5863@eu2-mail.mgc.mentorg.com>
-In-Reply-To: <j3fh0s$1ji$1@dough.gmane.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [meta-oe][PATCH 0/4] pull request #1 for bechmark recipes
-Thread-Index: AcxmIfJ4KfANKGYwShWZCBqUY5fSoAAAD3nQ
-References: <cover.1314370503.git.noor_ahsan__19880.832944955$1314376843$gmane$org@mentor.com><j3a5n5$g9m$1@dough.gmane.org><989A078976CDAD4CB2DC976EEF70E2A5068A585F@eu2-mail.mgc.mentorg.com>
-	<j3fh0s$1ji$1@dough.gmane.org>
-From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 0/4] pull request #1 for bechmark recipes
+	Mon, 29 Aug 2011 01:17:35 -0700
+Received: from localhost.localdomain ([137.202.156.152]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
+	Mon, 29 Aug 2011 10:17:33 +0200
+From: "Noor, Ahsan" <noor_ahsan@mentor.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 29 Aug 2011 13:17:48 +0500
+Message-Id: <cover.1314603785.git.noor_ahsan@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+X-OriginalArrivalTime: 29 Aug 2011 08:17:33.0901 (UTC)
+	FILETIME=[1AA887D0:01CC6624]
+Subject: [meta-oe][PATCH v2 0/4] pull request #1 for benchmark recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,89 +32,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Aug 2011 08:09:33 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 29 Aug 2011 08:22:25 -0000
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf
-Of
-> Koen Kooi
-> Sent: Monday, August 29, 2011 1:02 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH 0/4] pull request #1 for bechmark
-> recipes
->=20
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 29-08-11 09:49, Ahsan, Noor schreef:
-> >> -----Original Message----- From: openembedded-devel-
-> bounces@lists.openembedded.org [mailto:openembedded-devel-
-> bounces@lists.openembedded.org] On Behalf
-> > Of
-> >> Koen Kooi Sent: Saturday, August 27, 2011 12:18 PM To:
-openembedded-
-> devel@lists.openembedded.org Subject: Re: [oe] [meta-oe][PATCH 0/4]
-> pull request #1 for bechmark recipes
-> >>
-> > Op 26-08-11 18:40, Noor, Ahsan schreef:
-> >>>> From: Noor Ahsan <noor_ahsan@mentor.com>
-> >>>>
-> >>>> *** BLURB HERE *** The following changes since commit
-> > 22ec18224f7a7c64850c76b14017dff2ff4345f2: pespin (1): elfe: Add
-> LIC_FILES_CHKSUM to recipe
-> >>>>
-> >>>> are available in the git repository at:
-> >>>>
-> >>>> git://github.com/Noor-Ahsan/meta-oe master
-> https://github.com/Noor-
-> > Ahsan/meta-oe/tree/master
-> >>>>
-> >>>> Noor Ahsan (4): dbench: Add version 4.0 (initial recipe) lmbench:
-> >> Add
-> > version 3.0-a9 (initial recipe) iperf: Add version 2.0.4 (initial
-> recipe) tiobench: Add version 0.3.3 (initial recipe)
-> >
-> > It doesn't address any of the feedback I gave on your pull-request
-on
-> the OE-core ml (PR, RDEPENDS_*). Please address that for the next spin
-> >> I have addressed that feedback but could not understand you
-> following comment. Kindly elaborate it.
-> >
-> >> Op 26 aug. 2011, om 18:31 heeft Noor, Ahsan het volgende
-geschreven:
-> >
-> > From: Noor Ahsan <noor_ahsan@mentor.com>
-> >
-> > *** BLURB HERE ***
-> >
-> >> where?
-> >
-> >> What do you mean by where?
->=20
-> It says "blurb here" but the blurb is nowhere to be found, so I ask
-> where the blurb is.
+From: Noor Ahsan <noor_ahsan@mentor.com>
 
+The following changes since commit 3ebc55d38c82430d7275d457107dd3490b6c967d:
+  Koen Kooi (1):
+        connman: update to 0.77
 
-Thanks. I used the pull request format for the first time so did not
-know what needs to go here.
+are available in the git repository at:
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->=20
-> iD8DBQFOW0dcMkyGM64RGpERAkZ/AJ4i135gq9PuAt3CD63E+S4JumEbZgCgnz2I
-> R9p1/K9T459r7DTs8aYzcOI=3D
-> =3Di5aT
-> -----END PGP SIGNATURE-----
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+  git://github.com/Noor-Ahsan/meta-oe master
+  https://github.com/Noor-Ahsan/meta-oe/tree/master
+
+Noor Ahsan (4):
+  dbench: Add version 4.0 (initial recipe)
+  iperf: Add version 2.0.4 (initial recipe)
+  lmbench: Add version 3.0-a9 (initial recipe)
+  tiobench: Add version 0.3.3 (initial recipe)
+
+ meta-oe/recipes-benchmark/dbench/dbench_4.0.bb     |   25 +++
+ .../recipes-benchmark/dbench/files/destdir.patch   |   28 +++
+ .../recipes-benchmark/dbench/files/makefile.patch  |   18 ++
+ .../iperf/iperf-2.0.4/000-Iperf_Fix-CPU-Usage.diff |  164 ++++++++++++++++++
+ .../001-cast-to-max_size_t-instead-of-int.patch    |   14 ++
+ .../003-fix-hyphen-used-as-minus-sign.patch        |  178 ++++++++++++++++++++
+ .../iperf/iperf-2.0.4/004-svn-r43-ro.patch         |  117 +++++++++++++
+ .../iperf-2.0.4/005-iperf-die-on-bind-fail.patch   |   15 ++
+ .../006-iperf-die-on-connect-fail.patch            |   15 ++
+ .../iperf-2.0.4/007-iperf-reporter-deadlock.patch  |   68 ++++++++
+ .../iperf/iperf-2.0.4/008-numofreport.patch        |   15 ++
+ .../iperf/iperf-2.0.4/009-delayloop.patch          |   22 +++
+ meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb     |   46 +++++
+ .../lmbench/lmbench-3.0-a9/obey-ranlib.patch       |   30 ++++
+ .../lmbench-3.0-a9/update-results-script.patch     |  160 ++++++++++++++++++
+ .../recipes-benchmark/lmbench/lmbench/lmbench-run  |   23 +++
+ .../lmbench/lmbench/rename-line-binary.patch       |   19 ++
+ .../recipes-benchmark/lmbench/lmbench_3.0-a9.bb    |   54 ++++++
+ .../tiobench-0.3.3/tiobench-makefile.patch         |   49 ++++++
+ .../recipes-benchmark/tiobench/tiobench_0.3.3.bb   |   25 +++
+ 20 files changed, 1085 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-benchmark/dbench/dbench_4.0.bb
+ create mode 100644 meta-oe/recipes-benchmark/dbench/files/destdir.patch
+ create mode 100644 meta-oe/recipes-benchmark/dbench/files/makefile.patch
+ create mode 100644 meta-oe/recipes-benchmark/iperf/iperf-2.0.4/000-Iperf_Fix-CPU-Usage.diff
+ create mode 100644 meta-oe/recipes-benchmark/iperf/iperf-2.0.4/001-cast-to-max_size_t-instead-of-int.patch
+ create mode 100644 meta-oe/recipes-benchmark/iperf/iperf-2.0.4/003-fix-hyphen-used-as-minus-sign.patch
+ create mode 100644 meta-oe/recipes-benchmark/iperf/iperf-2.0.4/004-svn-r43-ro.patch
+ create mode 100644 meta-oe/recipes-benchmark/iperf/iperf-2.0.4/005-iperf-die-on-bind-fail.patch
+ create mode 100644 meta-oe/recipes-benchmark/iperf/iperf-2.0.4/006-iperf-die-on-connect-fail.patch
+ create mode 100644 meta-oe/recipes-benchmark/iperf/iperf-2.0.4/007-iperf-reporter-deadlock.patch
+ create mode 100644 meta-oe/recipes-benchmark/iperf/iperf-2.0.4/008-numofreport.patch
+ create mode 100644 meta-oe/recipes-benchmark/iperf/iperf-2.0.4/009-delayloop.patch
+ create mode 100644 meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb
+ create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/obey-ranlib.patch
+ create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/update-results-script.patch
+ create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench/lmbench-run
+ create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench/rename-line-binary.patch
+ create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+ create mode 100644 meta-oe/recipes-benchmark/tiobench/tiobench-0.3.3/tiobench-makefile.patch
+ create mode 100644 meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb
+
 
 
