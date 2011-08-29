@@ -1,27 +1,22 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1QxxRh-00032z-4C
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Aug 2011 10:43:53 +0200
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1QxxN0-0001C1-J3 from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Aug 2011 01:39:02 -0700
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Mon, 29 Aug 2011 10:38:59 +0200
-Message-ID: <989A078976CDAD4CB2DC976EEF70E2A5068A586E@eu2-mail.mgc.mentorg.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qxz7P-00056t-E2 for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Aug 2011 12:31:03 +0200
+Received: from f053042163.adsl.alicedsl.de ([78.53.42.163]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qxz2k-0006gw-1p for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Aug 2011 10:26:14 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 29 Aug 2011 12:26:02 +0200
 In-Reply-To: <1313665760-21930-1-git-send-email-noor_ahsan@mentor.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [PATCH][meta-oe] python-lxml: Added new recipe in meta-oe for
-	2.2.8 version
-Thread-Index: Acxdl0y9M2Rq/ls8QW+EEEBw5ENdEAIj7Yfw
 References: <1313665760-21930-1-git-send-email-noor_ahsan@mentor.com>
-From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
-To: "Ahsan, Noor" <Noor_Ahsan@mentor.com>,
-	<openembedded-devel@lists.openembedded.org>
+X-Mailer: Evolution 3.0.2- 
+Message-ID: <1314613573.6949.13.camel@mattotaupa>
+Mime-Version: 1.0
 Subject: Re: [PATCH][meta-oe] python-lxml: Added new recipe in meta-oe for 2.2.8 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,88 +31,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Aug 2011 08:43:53 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Mon, 29 Aug 2011 10:31:03 -0000
+X-Groupsio-MsgNum: 33864
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-MU2WLlijicwWmp+n6zT3"
+
+--=-MU2WLlijicwWmp+n6zT3
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-> -----Original Message-----
-> From: Ahsan, Noor
-> Sent: Thursday, August 18, 2011 4:09 PM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Ahsan, Noor
-> Subject: [PATCH][meta-oe] python-lxml: Added new recipe in meta-oe for
-> 2.2.8 version
->=20
+Dear Noor,
+
+
+Am Donnerstag, den 18.08.2011, 16:09 +0500 schrieb Noor, Ahsan:
 > From: Noor Ahsan <noor_ahsan@mentor.com>
 >=20
 > * Added new recipe in meta-oe for 2.2.8 version
->=20
+
+I am sorry your patch has not gotten any review and has not been pushed
+to meta-oe. It would be nice though, if you could take general comments
+to your other patches and apply those to for example this patch.
+
+1. Please update the commit summary.
+2. Please remove the redundant line from the commit message=E2=80=99s body.
+3. Please note that you got the recipe from oe.dev. I guess you did, did
+not you?
+(4. Include what build and run time environment you used for testing.)
+5. Now that you have got the set up to send pull requests you can then
+send that a version v2 with a pull request.
+
 > Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
-> ---
->  .../recipes-devtools/python/python-lxml_2.2.8.bb   |   32
-> ++++++++++++++++++++
->  1 files changed, 32 insertions(+), 0 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-devtools/python/python-lxml_2.2.8.bb
-> b/meta-oe/recipes-devtools/python/python-lxml_2.2.8.bb
-> new file mode 100644
-> index 0000000..b1aac3f
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/python/python-lxml_2.2.8.bb
-> @@ -0,0 +1,32 @@
-> +DESCRIPTION =3D "Powerful and Pythonic XML processing library =
-combining
-> \
-> +libxml2/libxslt with the ElementTree API."
-> +HOMEPAGE =3D "http://codespeak.net/lxml"
-> +LICENSE =3D "BSD"
-> +LIC_FILES_CHKSUM =3D
-> "file://LICENSES.txt;md5=3D7de92baeb3b7bfaebe72404155fdb346"
-> +SRCNAME =3D "lxml"
-> +
-> +DEPENDS =3D "libxml2 libxslt"
-> +RDEPENDS_${PN} +=3D "libxml2 libxslt python-compression"
-> +
-> +SRC_URI =3D
-> "http://pypi.python.org/packages/source/l/${SRCNAME}/${SRCNAME}-
-> ${PV}.tar.gz;name=3Dlxml"
-> +SRC_URI[lxml.md5sum] =3D "d6c612d63a84d79440912a1b29d3b981"
-> +SRC_URI[lxml.sha256sum] =3D
-> "89b73925b5e3295dcf4675cb948007a20eb029fe35c9a162ae19ec11f1abafe5"
-> +
-> +S =3D "${WORKDIR}/${SRCNAME}-${PV}"
-> +
-> +inherit setuptools
-> +
-> +DISTUTILS_BUILD_ARGS +=3D " \
-> +
---with-xslt-config=3D'${STAGING_BINDIR_NATIVE}/pkg-
-> config libxslt' \
-> +                     --with-xml2-
-> config=3D'${STAGING_BINDIR_NATIVE}/xml2-config' \
-> +"
-> +
-> +DISTUTILS_INSTALL_ARGS +=3D " \
-> +
---with-xslt-config=3D'${STAGING_BINDIR_NATIVE}/pkg-
-> config libxslt' \
-> +                     --with-xml2-
-> config=3D'${STAGING_BINDIR_NATIVE}/xml2-config' \
-> +"
-> +
-> +BBCLASSEXTEND =3D "native nativesdk"
-> +RDEPENDS_${PN}_virtclass-native =3D "libxml2-native libxslt-native"
-> +
-> +
-> --
-> 1.7.0.4
-Hi,
 
-Kindly pull this patch. Thanks
+With my comments addressed you can add
 
-Regards,
-Noor
+	Reviewed-by: Paul Menzel <paulepanter@users.sourceforge.net>
+
+to the commit message.
+
+I am sorry that you have to resend it, but reviewing and writing
+comments also takes a lot of time, people tend to not have a lot of.
+Luckily Git (`git commit --amend` or `git rebase -i =E2=80=A6`) makes it ea=
+sy
+for you to improve patches, so it only should take a few minutes.
 
 
+Thanks,
+
+Paul
+
+--=-MU2WLlijicwWmp+n6zT3
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk5baTsACgkQPX1aK2wOHVh1VwCfQrzzQuwkslwWLp40Dv6bdHw5
+uHUAnRF7mEnv5F36CKkh3xTcYPwhOwJw
+=eNs9
+-----END PGP SIGNATURE-----
+
+--=-MU2WLlijicwWmp+n6zT3--
