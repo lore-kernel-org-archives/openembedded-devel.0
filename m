@@ -1,33 +1,28 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1QyOsF-0006AJ-AJ
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1QyPGx-0006ke-Nz
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 16:01:07 +0200
-Received: by bkbzu17 with SMTP id zu17so4989329bkb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2011 06:56:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=PmjrJlTlWO5iPTAxqxP2ENR584br7rnH81o97SYhaKg=;
-	b=J9LScTXWS3JC90e5wxfaEaC31Zo+KRhwnrj5wdTN74o5ZF3getFMvz8aIcoIXUFysI
-	V+10HHQsK+m+Dn35qfKA4erPvA9/3FuuKksHxkku/zfHql/qOGGmoP+/fRQhfzddsu6u
-	OWQdGmC5X2VSsGeLgtaEAwLj9sCsBy4VMOThM=
+	Tue, 30 Aug 2011 16:26:39 +0200
+Received: from nat-dem.mentorg.com ([195.212.93.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1QyPCF-000471-9S from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 07:21:47 -0700
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Received: by 10.204.146.137 with SMTP id h9mr93487bkv.316.1314712574173; Tue,
-	30 Aug 2011 06:56:14 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.156.217 with HTTP; Tue, 30 Aug 2011 06:56:14 -0700 (PDT)
-In-Reply-To: <j3ipqj$ib6$1@dough.gmane.org>
-References: <cover.1314710525.git.otavio@ossystems.com.br>
-	<j3ipqj$ib6$1@dough.gmane.org>
-Date: Tue, 30 Aug 2011 10:56:14 -0300
-X-Google-Sender-Auth: WrJEFozPwBP7UECuDRJ5h7uj0l0
-Message-ID: <CAP9ODKpaJAfkqxUwcBq=TO6Ye68s88EY12k_M=qgy08ZP5r6QQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 0/2] Remove recipes from meta-oe
+Date: Tue, 30 Aug 2011 16:21:44 +0200
+Message-ID: <989A078976CDAD4CB2DC976EEF70E2A5068A5992@eu2-mail.mgc.mentorg.com>
+In-Reply-To: <j3ip7m$dn9$1@dough.gmane.org>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] [meta-oe][PATCH 1/1] debianutils: Add version 2.30 (initial
+	recipe)
+Thread-Index: AcxnGmt99Dfp0yVzSEGwYcP4iOBi5wABaf2A
+References: <cover.1314710438.git.noor_ahsan@mentor.com><6fd3391284356229f914262016ff77276d88f054.1314710438.git.noor_ahsan@mentor.com>
+	<j3ip7m$dn9$1@dough.gmane.org>
+From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/1] debianutils: Add version 2.30 (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,21 +36,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2011 14:01:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 30 Aug 2011 14:26:40 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 30, 2011 at 10:50, Koen Kooi <koen@dominion.thruhere.net> wrote=
-:
-> NAK on the second, there's no binutils 2.20 in OE-core
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf
+Of
+> Koen Kooi
+> Sent: Tuesday, August 30, 2011 6:40 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH 1/1] debianutils: Add version 2.30
+> (initial recipe)
+>=20
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> Op 30-08-11 15:24, Noor, Ahsan schreef:
+> > From: Noor Ahsan <noor_ahsan@mentor.com>
+> >
+> > * Imported from oe.dev commit id
+> 280a17bc1d8132f97cf6a89b8bc08a32380fa357. * Merged .bb and .inc file
+> >
+> > Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com> ---
+> .../debianutils/debianutils_2.30.bb                |   49
+> ++++++++++++++++++++
+>=20
+> > +pkg_prerm_${PN} () { +for app in add-shell  installkernel  mkboot
+> remove-shell run-parts  savelog  sensible-browser  sensible-editor
+> sensible-pager  tempfile  which ; do +   update-alternatives --remove
+> $app $app.${PN} +done +} + +pkg_postinst_${PN} () { +#!/bin/sh +for
+app
+> in add-shell
+> > installkernel  mkboot  remove-shell ; do +    update-alternatives --
+> install ${sbindir}/$app $app $app.${PN} 100 +done +for app in savelog
+> sensible-browser  sensible-editor  sensible-pager  which ; do +
+> update-alternatives --install ${bindir}/$app $app $app.${PN} 100 +done
+> +for app in
+> > run-parts  tempfile ; do +    update-alternatives --install
+> ${base_bindir}/$app $app $app.${PN} 100 +done +}
+>=20
+> The *insts are inconsistent, one has a shebang, the other doesn't and
+> neither are safe to use in a cross environment.
 
-It has 2.21.1a; what the problem?
+Koen BTW this is directly coming from oe.dev.
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>=20
+> iD8DBQFOXOg2MkyGM64RGpERAjJ9AJ49QdImds18J3+35yKjLGJnKq/WzQCeJmGa
+> U0+Ri3DkNyu52JW5LJ9+QcU=3D
+> =3Dl6E5
+> -----END PGP SIGNATURE-----
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
