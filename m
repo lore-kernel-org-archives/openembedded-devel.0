@@ -1,23 +1,29 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from tritech.se ([91.191.137.61])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mickey@vanille-media.de>) id 1QyKBd-0004li-6t
+	(envelope-from <Mats.Karrman@tritech.se>) id 1QyKDQ-0004tZ-UA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 11:00:49 +0200
-Received: from [192.168.1.16] (business-092-079-168-007.static.arcor-ip.net
-	[92.79.168.7])
-	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id 86BA0584076
+	Tue, 30 Aug 2011 11:02:41 +0200
+Received: from post.tritech.se (post.tritech.se [10.75.60.100])
+	by tritech.se (8.14.3/8.14.3) with ESMTP id p7U8vg2R003841
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2011 11:31:01 +0200 (CEST)
-Mime-Version: 1.0 (Apple Message framework v1244.3)
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-In-Reply-To: <1313447032.4058.58.camel@mattotaupa>
-Date: Tue, 30 Aug 2011 10:55:58 +0200
-Message-Id: <8339DDC7-E1E8-442B-A183-CD1F327AEC4D@vanille-media.de>
-References: <1313447032.4058.58.camel@mattotaupa>
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1244.3)
-Subject: Re: request for branch in OpenEmbedded Git repository
+	Tue, 30 Aug 2011 10:57:47 +0200
+Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
+	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
+	14.01.0270.001; Tue, 30 Aug 2011 10:57:42 +0200
+From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: Creating static device nodes with udev
+Thread-Index: Acxm8Y+OZx1IhKaQTkqkN2Ucp6Nxng==
+Date: Tue, 30 Aug 2011 08:57:41 +0000
+Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C40040669@post.tritech.se>
+Accept-Language: en-US, sv-SE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [194.132.137.34]
+MIME-Version: 1.0
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Creating static device nodes with udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,19 +37,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2011 09:00:49 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 30 Aug 2011 09:02:41 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Paul,
+Hi,
 
-we have always allowed custom branches for developers with
-write access. Feel free to create as many as you need, please
-prefix them with your nickname.
+I'm using OE-classic and udev 151 on a PPC target.
 
-Cheers,
+I have some devices not supporting sysfs, eg ppp, so I need to create stati=
+c device nodes for these.
+Previously I have used scripts linked via rcS.d that runs mknod after udev =
+has been loaded but this feels sort of sub-optimal.
 
-Mickey.
+I found the "udev-static-devices" recipe but I can't make it work.
+What I've done is:
+- I manually created a directory 'devices' with the device nodes I need usi=
+ng mknod.
+- I tar'ed this into 'udev_static_devices_tarball'.
+- I ran bitbake to put them into a package and installed this package on my=
+ target using opkg.
+- I verified that my device nodes now exist in /lib/udev/devices
+- I rebooted the target.
+... Still, my device nodes does not exist in /dev.
 
+Any clue on what I have forgotten? Must the "static" feature be enabled in =
+some way?
+
+Do anyone have a better approach to creating static device nodes? E.g. usin=
+g makedevs or...
+
+Thanks a bunch for your support!
+// Mats
 
 
