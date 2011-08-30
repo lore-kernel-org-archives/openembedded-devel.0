@@ -1,37 +1,24 @@
-Received: from mailbackup.inode.at ([213.229.60.24])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Bernhard.Guillon@hale.at>) id 1QyNZl-0002sp-NF
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1QyO7f-00042q-GA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 14:37:57 +0200
-Received: from [62.99.145.6] (port=7954 helo=mx.inode.at)
-	by mailbackup.inode.at with esmtp (Exim 4.76)
-	(envelope-from <Bernhard.Guillon@hale.at>) id 1QyNL3-0001Xq-IL
+	Tue, 30 Aug 2011 15:12:59 +0200
+Received: from nat-dem.mentorg.com ([195.212.93.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1QyO2x-0006BG-9D from Noor_Ahsan@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 14:22:45 +0200
-Received: from [83.64.51.210] (port=15864 helo=gateway1.hale)
-	by smartmx-06.inode.at with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <Bernhard.Guillon@hale.at>)
-	id 1QyNL1-0000ML-DP for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 14:22:43 +0200
-Received: from mail1.hale.at (mail2.hale [192.168.100.12])
-	by gateway1.hale (8.13.8/8.13.7) with ESMTP id p7UCMYFa031384
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2011 14:22:34 +0200
-Received: from localhost.localdomain ([192.168.100.138]) by hale.at with
-	MailEnable ESMTP; Tue, 30 Aug 2011 14:22:29 +0200
-From: Bernhard Guillon <Bernhard.Guillon@hale.at>
+	Tue, 30 Aug 2011 06:08:07 -0700
+Received: from localhost.localdomain ([137.202.156.152]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
+	Tue, 30 Aug 2011 15:08:06 +0200
+From: "Noor, Ahsan" <noor_ahsan@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Aug 2011 14:21:53 +0200
-Message-Id: <1314706913-10583-1-git-send-email-Bernhard.Guillon@hale.at>
+Date: Tue, 30 Aug 2011 18:08:31 +0500
+Message-Id: <cover.1314709432.git.noor_ahsan@mentor.com>
 X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-X-HALE-MailScanner-Information: Please contact the ISP for more information
-X-MailScanner-ID: p7UCMYFa031384
-X-HALE-MailScanner: Found to be clean
-X-HALE-MailScanner-From: bernhard.guillon@hale.at
-MailScanner-NULL-Check: 1315311756.24194@4OInHhvVe3pvM/2gHpmf3g
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH] dbus-c++: use openembedded-core versions
+X-OriginalArrivalTime: 30 Aug 2011 13:08:06.0582 (UTC)
+	FILETIME=[DBC24D60:01CC6715]
+Subject: [meta-oe][PATCH v2 0/3] pull request #2 for benchmark recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,99 +32,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2011 12:37:57 -0000
+X-List-Received-Date: Tue, 30 Aug 2011 13:12:59 -0000
 
-Remove non working recipes because openembedded-core provides better
-ones.
-
-Signed-off-by: Bernhard Guillon <Bernhard.Guillon@hale.at>
----
- meta-oe/recipes-core/dbus/dbus-c++-native_git.bb   |   17 --------------
- .../recipes-core/dbus/dbus-c++/fix-linking.patch   |   13 -----------
- meta-oe/recipes-core/dbus/dbus-c++_git.bb          |   23 --------------------
- 3 files changed, 0 insertions(+), 53 deletions(-)
- delete mode 100644 meta-oe/recipes-core/dbus/dbus-c++-native_git.bb
- delete mode 100644 meta-oe/recipes-core/dbus/dbus-c++/fix-linking.patch
- delete mode 100644 meta-oe/recipes-core/dbus/dbus-c++_git.bb
-
-diff --git a/meta-oe/recipes-core/dbus/dbus-c++-native_git.bb b/meta-oe/recipes-core/dbus/dbus-c++-native_git.bb
-deleted file mode 100644
-index eba80b2..0000000
---- a/meta-oe/recipes-core/dbus/dbus-c++-native_git.bb
-+++ /dev/null
-@@ -1,17 +0,0 @@
--require dbus-c++_git.bb
--inherit native
--
--FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/dbus-c++"
--# actually dbus-native and expat-native, but even the bearest build machine should have that nowadays...
--DEPENDS = ""
--
--do_compile() {
--	oe_runmake -C src libdbus-c++-1.la
--	oe_runmake -C tools dbusxx-xml2cpp
--	install -m 0755 tools/dbusxx-xml2cpp ${STAGING_BINDIR_NATIVE}
--}
--
--do_install() {
--	:
--}
--
-diff --git a/meta-oe/recipes-core/dbus/dbus-c++/fix-linking.patch b/meta-oe/recipes-core/dbus/dbus-c++/fix-linking.patch
-deleted file mode 100644
-index 8222169..0000000
---- a/meta-oe/recipes-core/dbus/dbus-c++/fix-linking.patch
-+++ /dev/null
-@@ -1,13 +0,0 @@
--Index: dbus/tools/Makefile.am
--===================================================================
----- dbus.orig/tools/Makefile.am
--+++ dbus/tools/Makefile.am
--@@ -16,7 +16,7 @@ endif
-- bin_PROGRAMS = dbusxx-xml2cpp dbusxx-introspect
-- 
-- dbusxx_xml2cpp_SOURCES = xml.h xml.cpp xml2cpp.h xml2cpp.cpp
---dbusxx_xml2cpp_LDADD = $(libdbus_cxx_la)
--+dbusxx_xml2cpp_LDADD = $(libdbus_cxx_la) -lexpat
-- 
-- dbusxx_introspect_SOURCES = introspect.h introspect.cpp
-- dbusxx_introspect_LDADD = $(libdbus_cxx_la)
-diff --git a/meta-oe/recipes-core/dbus/dbus-c++_git.bb b/meta-oe/recipes-core/dbus/dbus-c++_git.bb
-deleted file mode 100644
-index 6459823..0000000
---- a/meta-oe/recipes-core/dbus/dbus-c++_git.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--DESCRIPTION = "C++ bindings for dbus"
--LICENSE = "LGPLv2.1+"
--SECTION = "libs"
--DEPENDS = "dbus dbus-c++-native expat"
--SRCREV = "530a887913d3b0dd7091eabb8eef8e3c279e3bb8"
--
--PE = "1"
--PV = "0.5.0+gitr${SRCPV}"
--
--SRC_URI = "git://gitorious.org/dbus-cplusplus/mainline.git;protocol=git"
--#           file://fix-linking.patch"
--S = "${WORKDIR}/git"
--
--inherit autotools pkgconfig
--
--do_compile_prepend() {
--	find . -name "Makefile.am" |xargs sed -i -e 's,$(top_builddir)/tools/dbusxx-xml2cpp,dbusxx-xml2cpp,'
--}
--
--FILES_${PN}-dbg += "${bindir}/dbusxx-xml2cpp ${bindir}/dbusxx-introspect"
--FILES_${PN}-dev += "${bindir}/.dev"
--FILES_${PN} = "${libdir}/*.so.*"
--
--- 
-1.7.0.4
+From: Noor Ahsan <noor_ahsan@mentor.com>
 
 
+The following changes since commit eeb0e7ce1e3cf7be787eae20a6ed4e15faa55e35:
+  Noor Ahsan (1):
+        tiobench: Add version 0.3.3 (initial recipe)
 
---
-Scanned by MailScanner.
+are available in the git repository at:
+
+  git://github.com/Noor-Ahsan/meta-oe master
+  https://github.com/Noor-Ahsan/meta-oe/tree/master
+
+Noor Ahsan (3):
+  bonnie++: Add version 1.03c (initial recipe)
+  netperf: Add version 2.4.4 (initial recipe)
+  iozone3: Add version 263 (initial recipe)
+
+ meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb |   32 ++++++
+ .../bonnie/files/gcc-4.3-fixes.patch               |   19 ++++
+ .../iozone3/iozone3/copyright.txt                  |   62 +++++++++++
+ .../iozone3/iozone3/fileop-arm.patch               |   32 ++++++
+ meta-oe/recipes-benchmark/iozone3/iozone3_263.bb   |  111 ++++++++++++++++++++
+ .../recipes-benchmark/netperf/files/cpu_set.patch  |   27 +++++
+ meta-oe/recipes-benchmark/netperf/files/init       |   51 +++++++++
+ .../recipes-benchmark/netperf/files/vfork.patch    |   29 +++++
+ meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb |   53 +++++++++
+ 9 files changed, 416 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb
+ create mode 100644 meta-oe/recipes-benchmark/bonnie/files/gcc-4.3-fixes.patch
+ create mode 100644 meta-oe/recipes-benchmark/iozone3/iozone3/copyright.txt
+ create mode 100644 meta-oe/recipes-benchmark/iozone3/iozone3/fileop-arm.patch
+ create mode 100644 meta-oe/recipes-benchmark/iozone3/iozone3_263.bb
+ create mode 100644 meta-oe/recipes-benchmark/netperf/files/cpu_set.patch
+ create mode 100644 meta-oe/recipes-benchmark/netperf/files/init
+ create mode 100755 meta-oe/recipes-benchmark/netperf/files/vfork.patch
+ create mode 100644 meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb
 
 
 
