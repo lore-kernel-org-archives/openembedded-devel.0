@@ -1,35 +1,24 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QyLz3-0007ra-SU
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1QyM5x-0008S6-Od
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 12:55:57 +0200
-Received: by bkbzu17 with SMTP id zu17so4862334bkb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2011 03:51:04 -0700 (PDT)
-Received: by 10.204.135.2 with SMTP id l2mr2759281bkt.124.1314701464523;
-	Tue, 30 Aug 2011 03:51:04 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116])
-	by mx.google.com with ESMTPS id z6sm1472652bks.57.2011.08.30.03.51.01
-	(version=SSLv3 cipher=OTHER); Tue, 30 Aug 2011 03:51:02 -0700 (PDT)
-Message-ID: <4E5CC094.2020500@dresearch-fe.de>
-Date: Tue, 30 Aug 2011 12:51:00 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:6.0) Gecko/20110812 Thunderbird/6.0
-MIME-Version: 1.0
+	Tue, 30 Aug 2011 13:03:05 +0200
+Received: from nat-dem.mentorg.com ([195.212.93.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1QyM1F-0003PV-7i from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 03:58:13 -0700
+Received: from localhost.localdomain ([137.202.156.152]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
+	Tue, 30 Aug 2011 12:58:11 +0200
+From: "Noor, Ahsan" <noor_ahsan@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4E4E536D.7010103@dresearch-fe.de> <4E4E738C.70109@dresearch-fe.de>
-	<4E5356B2.3060908@dresearch-fe.de> <4E53583A.3030405@gmx.net>
-	<4E535B83.9080508@dresearch-fe.de>
-	<CAFu+nvEh9tUGzQM1PFo1ErtOq+a+0yg94pZBO6Ohr92GNZoKBg@mail.gmail.com>
-	<1314199372.21496.12.camel@jjg-linux>
-	<4E562AFF.7090004@dresearch-fe.de>
-	<4E56579C.7080207@dresearch-fe.de>
-In-Reply-To: <4E56579C.7080207@dresearch-fe.de>
-X-Enigmail-Version: 1.3.1
-Cc: Robert Schuster <robert.schuster@tarent.de>, george.huntingtoniii@gmail.com
-Subject: Re: [2011.03-maintenance] do_compile failed for cacao_0.99.3.bb
+Date: Tue, 30 Aug 2011 15:58:39 +0500
+Message-Id: <cover.1314691875.git.noor_ahsan@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+X-OriginalArrivalTime: 30 Aug 2011 10:58:11.0570 (UTC)
+	FILETIME=[B591DD20:01CC6703]
+Subject: [meta-oe][PATCH 0/3] pull request #2 for benchmark recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,38 +32,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2011 10:55:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 30 Aug 2011 11:03:06 -0000
 
-On 25.08.2011 16:09, Steffen Sledz wrote:
-> On 25.08.2011 12:59, Steffen Sledz wrote:
->> On 24.08.2011 17:22, Jesse Gilles wrote:
->>> On Tue, 2011-08-23 at 13:16 -0400, George C. Huntington, III wrote:
->>>> I suspect that the problem is happening earlier, classpath isn't building.
->>>>  the javac wrapper eats the return code from a java compile.
->>>
->>> If George is right, then the following patch to the javac wrapper script
->>> may fix the issue.  It fixes building classpath as well as returns the
->>> error code if all javac attempts fail.
->>>
->>> http://patches.openembedded.org/patch/9521/
->>
->> In our case this patch helps.
->>
->> If nobody has objections i will commit this patch to oe-dev master and request a pull to 2011.03-maintenance.
-> 
-> It would be still better if we can get some Acks from a java maintainer.
+From: Noor Ahsan <noor_ahsan@mentor.com>
 
-No NACKs after another week. So i pushed the patch do oe-dev master.
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+The following changes since commit eeb0e7ce1e3cf7be787eae20a6ed4e15faa55e35:
+  Noor Ahsan (1):
+        tiobench: Add version 0.3.3 (initial recipe)
+
+are available in the git repository at:
+
+  git://github.com/Noor-Ahsan/meta-oe master
+  https://github.com/Noor-Ahsan/meta-oe/tree/master
+
+Noor Ahsan (3):
+  bonnie++: Add version 1.03c (initial recipe)
+  netperf: Add version 2.4.4 (initial recipe)
+  iozone3: Add version 263 (initial recipe)
+
+ meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb |   30 ++++++
+ .../bonnie/files/gcc-4.3-fixes.patch               |   19 ++++
+ .../iozone3/iozone3/copyright.txt                  |   62 +++++++++++
+ .../iozone3/iozone3/fileop-arm.patch               |   32 ++++++
+ meta-oe/recipes-benchmark/iozone3/iozone3_263.bb   |  111 ++++++++++++++++++++
+ .../recipes-benchmark/netperf/files/cpu_set.patch  |   27 +++++
+ meta-oe/recipes-benchmark/netperf/files/init       |   51 +++++++++
+ .../recipes-benchmark/netperf/files/vfork.patch    |   29 +++++
+ meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb |   53 +++++++++
+ 9 files changed, 414 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb
+ create mode 100644 meta-oe/recipes-benchmark/bonnie/files/gcc-4.3-fixes.patch
+ create mode 100644 meta-oe/recipes-benchmark/iozone3/iozone3/copyright.txt
+ create mode 100644 meta-oe/recipes-benchmark/iozone3/iozone3/fileop-arm.patch
+ create mode 100644 meta-oe/recipes-benchmark/iozone3/iozone3_263.bb
+ create mode 100644 meta-oe/recipes-benchmark/netperf/files/cpu_set.patch
+ create mode 100644 meta-oe/recipes-benchmark/netperf/files/init
+ create mode 100755 meta-oe/recipes-benchmark/netperf/files/vfork.patch
+ create mode 100644 meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb
+
 
 
