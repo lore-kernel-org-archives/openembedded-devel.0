@@ -1,23 +1,23 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QyV67-0001Ck-NT for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 22:39:51 +0200
-Received: from f053039119.adsl.alicedsl.de ([78.53.39.119]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QyV1T-0006Zt-EX for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 20:35:03 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1QyXP5-0003hn-HW
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 31 Aug 2011 01:07:35 +0200
+Received: (qmail invoked by alias); 30 Aug 2011 23:02:41 -0000
+Received: from p5B0A1BE9.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.27.233]
+	by mail.gmx.net (mp013) with SMTP; 31 Aug 2011 01:02:41 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1+7xq8t5Au77iWIO5f92fwtD8/jvhFIac0vTn7XFX
+	WjOrMiFcUtKNiq
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Aug 2011 22:34:58 +0200
-In-Reply-To: <1314714550-29390-1-git-send-email-sherbrec@cit-ec.uni-bielefeld.de>
-References: <1314714550-29390-1-git-send-email-sherbrec@cit-ec.uni-bielefeld.de>
-X-Mailer: Evolution 3.0.2- 
-Message-ID: <1314736499.3942.2.camel@mattotaupa>
-Mime-Version: 1.0
-Subject: Re: [PATCH] gcc: Remove package libstdc++-dev and libgcc-dev from gcc-cross
+Date: Wed, 31 Aug 2011 01:06:04 +0200
+Message-Id: <1314745564-3331-1-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+X-Y-GMX-Trusted: 0
+Subject: [meta-xfce] thunar-volman: Add initial recipe with version 0.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,61 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2011 20:39:51 -0000
-X-Groupsio-MsgNum: 33916
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-pijdgitZmRtfCIGLNj91"
+X-List-Received-Date: Tue, 30 Aug 2011 23:07:35 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---=-pijdgitZmRtfCIGLNj91
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+* build & partially run tested on overo
 
-Dear Stefan,
+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+---
+ .../thunar-volman/thunar-volman_0.6.0.bb           |   12 ++++++++++++
+ 1 files changed, 12 insertions(+), 0 deletions(-)
+ create mode 100644 meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb
 
-
-thank you very much for the patch.
-
-Am Dienstag, den 30.08.2011, 16:29 +0200 schrieb Stefan Herbrechtsmeier:
-> Remove package libstdc++-dev and libgcc-dev from gcc-cross as they
-> already provided by gcc.
->=20
-> Commit 8c42351519ece9ed60659a103e624d2e154b3641 add dev packages
-> (libstdc++-dev libgcc-dev) to gcc-cross (gcc-package-cross.inc)
-> which are already part of gcc. The libgcc-dev package both include
-> the libgcc_s.so file which triggers a 'file is already provided by
-> package' error on incremental builds. The libstdc++-dev package have
-> different content and is empty on some archs (armv5te, armv7e).
-> The empty package triggers a 'Cannot satisfy the following
-> dependencies for task-sdk-bare' error. If an empty libstdc++-dev
-> package is generated it triggers a '..../usr/include/c++ not exist'
-> error as this is part of the package from gcc but not gcc-cross.
->=20
-> Signed-off-by: Stefan Herbrechtsmeier <sherbrec@cit-ec.uni-bielefeld.de>
-> ---
->  recipes/gcc/gcc-4.3.3.inc         |    2 +-
->  recipes/gcc/gcc-4.5.inc           |    2 +-
->  recipes/gcc/gcc-package-cross.inc |    4 +---
->  3 files changed, 3 insertions(+), 5 deletions(-)
-
-So does that patch revert commit 8c423515?
+diff --git a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb
+new file mode 100644
+index 0000000..ad11d84
+--- /dev/null
++++ b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION = "Automatic management of removable drives and media for thunar"
++SECTION = "x11"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++DEPENDS = "exo gtk+ libxfce4ui libxfce4util xfconf libnotify"
++
++PR = "r0"
++
++inherit xfce
++
++SRC_URI[md5sum] = "2f166662dd100d5195da238af417f305"
++SRC_URI[sha256sum] = "b1afd2b3b285cfcf07c11caa3d37fa5ff1fc06f7dc68fcca07f9a0d70daa694f"
+-- 
+1.7.4.4
 
 
-Thanks,
 
-Paul
-
---=-pijdgitZmRtfCIGLNj91
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk5dSXIACgkQPX1aK2wOHVgcoQCfSA6TK2SKHfOFntQHeZ5v8Dr+
-OUIAniZRApB7ulsRQDZEbMjpFLSHYbWP
-=UCw/
------END PGP SIGNATURE-----
-
---=-pijdgitZmRtfCIGLNj91--
