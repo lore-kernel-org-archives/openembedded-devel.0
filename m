@@ -1,28 +1,29 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1QyNVw-0002eM-Bv
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 14:34:00 +0200
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1QyNRE-0003G3-95 from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 05:29:08 -0700
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Tue, 30 Aug 2011 14:29:05 +0200
-Message-ID: <989A078976CDAD4CB2DC976EEF70E2A5068A595D@eu2-mail.mgc.mentorg.com>
-In-Reply-To: <j3iio6$u5s$1@dough.gmane.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [meta-oe][PATCH 1/3] bonnie++: Add version 1.03c (initial
-	recipe)
-Thread-Index: AcxnCw2CZcF8HwU+Qmq6fgycRGjR7QABNGog
-References: <cover.1314691875.git.noor_ahsan@mentor.com><ef49be97f8e75115c1b001694f676f52a53a70c6.1314691875.git.noor_ahsan@mentor.com>
-	<j3iio6$u5s$1@dough.gmane.org>
-From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/3] bonnie++: Add version 1.03c (initial recipe)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QyNXg-0002ks-Cd for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 14:35:48 +0200
+Received: from f053039119.adsl.alicedsl.de ([78.53.39.119]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QyNT1-00051M-SF for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 12:31:00 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 30 Aug 2011 14:30:56 +0200
+In-Reply-To: <4E5CC094.2020500@dresearch-fe.de>
+References: <4E4E536D.7010103@dresearch-fe.de>
+	<4E4E738C.70109@dresearch-fe.de> <4E5356B2.3060908@dresearch-fe.de>
+	<4E53583A.3030405@gmx.net> <4E535B83.9080508@dresearch-fe.de>
+	<CAFu+nvEh9tUGzQM1PFo1ErtOq+a+0yg94pZBO6Ohr92GNZoKBg@mail.gmail.com>
+	<1314199372.21496.12.camel@jjg-linux>
+	<4E562AFF.7090004@dresearch-fe.de>
+	<4E56579C.7080207@dresearch-fe.de> <4E5CC094.2020500@dresearch-fe.de>
+X-Mailer: Evolution 3.0.2- 
+Message-ID: <1314707457.3796.19.camel@mattotaupa>
+Mime-Version: 1.0
+Subject: Re: [2011.03-maintenance] do_compile failed for cacao_0.99.3.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,88 +37,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2011 12:34:00 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Tue, 30 Aug 2011 12:35:48 -0000
+X-Groupsio-MsgNum: 33894
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-Nvh72+KLyjdad9724q4r"
+
+--=-Nvh72+KLyjdad9724q4r
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf
-Of
-> Koen Kooi
-> Sent: Tuesday, August 30, 2011 4:49 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH 1/3] bonnie++: Add version 1.03c
-> (initial recipe)
+Am Dienstag, den 30.08.2011, 12:51 +0200 schrieb Steffen Sledz:
+> On 25.08.2011 16:09, Steffen Sledz wrote:
+> > On 25.08.2011 12:59, Steffen Sledz wrote:
+> >> On 24.08.2011 17:22, Jesse Gilles wrote:
+> >>> On Tue, 2011-08-23 at 13:16 -0400, George C. Huntington, III wrote:
+> >>>> I suspect that the problem is happening earlier, classpath isn't bui=
+lding.
+> >>>>  the javac wrapper eats the return code from a java compile.
+> >>>
+> >>> If George is right, then the following patch to the javac wrapper scr=
+ipt
+> >>> may fix the issue.  It fixes building classpath as well as returns th=
+e
+> >>> error code if all javac attempts fail.
+> >>>
+> >>> http://patches.openembedded.org/patch/9521/
+> >>
+> >> In our case this patch helps.
+> >>
+> >> If nobody has objections i will commit this patch to oe-dev master and=
+ request a pull to 2011.03-maintenance.
+> >=20
+> > It would be still better if we can get some Acks from a java maintainer=
+.
 >=20
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 30-08-11 12:58, Noor, Ahsan schreef:
-> > From: Noor Ahsan <noor_ahsan@mentor.com>
-> >
-> > * Imported from oe.dev commit id
-> 44985d56bc556786812a0a02d6219afd31a7381d. * Merge .bb and .inc file.
-> >
-> > Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com> --- meta-
-> oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb |   30
-> ++++++++++++++++++++ .../bonnie/files/gcc-4.3-fixes.patch
-> |   19 ++++++++++++ 2 files changed, 49 insertions(+), 0 deletions(-)
-> create mode 100644
-> > meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb create mode
-100644
-> meta-oe/recipes-benchmark/bonnie/files/gcc-4.3-fixes.patch
-> >
-> > diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb
-> b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb new file mode
-> 100644 index 0000000..2067307 --- /dev/null +++ b/meta-oe/recipes-
-> benchmark/bonnie/bonnie++_1.03c.bb @@ -0,0 +1,30 @@ +DESCRIPTION =3D
-> "Tests large file IO and
-> > creation/deletion of small files." +HOMEPAGE =3D
-> "http://www.coker.com.au/bonnie++/" +LICENSE =3D "GPL v2"
->=20
-> without spaces please
->=20
-> > +LIC_FILES_CHKSUM =3D
-> "file://copyright.txt;md5=3Dcd4dde95a6b9d122f0a9150ae9cc3ee0" + =
-+SRC_URI
-> =3D "http://www.coker.com.au/bonnie++/bonnie++-${PV}.tgz \ +
-> file://gcc-4.3-fixes.patch \ +           " +SRC_URI[md5sum] =3D
-> "77a1ba78f37bdd7f024b67e1e36ad151" +SRC_URI[sha256sum] =3D
-> > "c674f1182f4c20f1e6d038feceb0a6617fc3e7658dfbbac89396043b49612a26" +
-> +SCRIPTS =3D "bon_csv2html bon_csv2txt" +EXES =3D "bonnie++ zcav"
->=20
-> And move those 2 below the inherit line please.
->=20
-> > + +inherit autotools + +do_install () { +        install -d ${D}/bin
-> +        install -d ${D}/sbin +        install -m 0755 ${EXES}
-> ${D}/sbin +        install -m 0755 ${SCRIPTS} ${D}/bin +} + +PACKAGES
-> +=3D "bonnie-scripts" + +FILES_${PN} =3D "/sbin" +FILES_bonnie-
-> scripts=3D"/bin" + +TARGET_CC_ARCH
-> > +=3D "${LDFLAGS}"
->=20
-> and move this one above do_install please. The general idea is to
-group
-> them by usage and TARGET_CC_ARCH is a configure/compile thing.
->=20
->=20
-> regards,
->=20
-> Koen
+> No NACKs after another week. So i pushed the patch do oe-dev master.
+
+Next time it would be better to resend the patch with a appropriate
+subject line.
+
+Unfortunately the commit message [1] does not conform to our commit
+policy [2].
+
+Please make sure to check those things next time. I feel uncomfortable
+to ask new contributors to comply every time but when they look at the
+commit history they see that the policies are often not cared about.
 
 
-Hi,
+Thanks,
 
-The recipe is verified on oe-styliz.py script and the formatting is done
-by that script. Your recommendations are conflicting with oe-stylize.
-Kindly update oe-stylize according to your recommendation so that it
-give output according to your expectations.
-
-Thanks.
-
-Regards,
-Noor
+Paul
 
 
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D16a8a1e=
+9175035b55d91a141d5302c38d63c16f1
+[2] http://openembedded.org/index.php/Category:Policy
+
+--=-Nvh72+KLyjdad9724q4r
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk5c2AAACgkQPX1aK2wOHVjaMwCeMju4MSVGh5PoejOyseqRMQR2
+vLgAnRfhte1DFPxGc/s/+yF2f9UC3Nhl
+=qnvb
+-----END PGP SIGNATURE-----
+
+--=-Nvh72+KLyjdad9724q4r--
