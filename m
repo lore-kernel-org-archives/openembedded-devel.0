@@ -1,28 +1,28 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tasskjapp@gmail.com>) id 1QyN5D-0001zA-Db
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1QyNVw-0002eM-Bv
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 14:06:23 +0200
-Received: by ywa12 with SMTP id 12so5047320ywa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2011 05:01:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=UmP2Gnxt24LAt2C3VRRV2tjEEjKGzR+MOdnZZRWfNUQ=;
-	b=KJL44vil4sC6LjSDR/fb8dwXjlSEx0kn8vz4lIw6mkONU84ZkWYvwN751LF20yClHy
-	2ExufRpQdAEN6E4VcaUKIAH67P7v2vkC1HyxB1Sj01Fn8jNay9pJ9pW08cKJ715chZw+
-	O7f53dI/Sep0xFplG86bAEynAdAivDImjXv50=
+	Tue, 30 Aug 2011 14:34:00 +0200
+Received: from nat-dem.mentorg.com ([195.212.93.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1QyNRE-0003G3-95 from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 05:29:08 -0700
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Received: by 10.42.145.131 with SMTP id f3mr5973790icv.504.1314705689740; Tue,
-	30 Aug 2011 05:01:29 -0700 (PDT)
-Received: by 10.42.166.132 with HTTP; Tue, 30 Aug 2011 05:01:29 -0700 (PDT)
-In-Reply-To: <mailman.3.1314698402.24288.openembedded-devel@lists.openembedded.org>
-References: <mailman.3.1314698402.24288.openembedded-devel@lists.openembedded.org>
-Date: Tue, 30 Aug 2011 14:01:29 +0200
-Message-ID: <CAJJ=G6-fiaRfo10wiyi0Armq00H78gauu3z8qm_NnkwrKAFhkg@mail.gmail.com>
-From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: Openembedded-devel Digest, Vol 61, Issue 80
+Date: Tue, 30 Aug 2011 14:29:05 +0200
+Message-ID: <989A078976CDAD4CB2DC976EEF70E2A5068A595D@eu2-mail.mgc.mentorg.com>
+In-Reply-To: <j3iio6$u5s$1@dough.gmane.org>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] [meta-oe][PATCH 1/3] bonnie++: Add version 1.03c (initial
+	recipe)
+Thread-Index: AcxnCw2CZcF8HwU+Qmq6fgycRGjR7QABNGog
+References: <cover.1314691875.git.noor_ahsan@mentor.com><ef49be97f8e75115c1b001694f676f52a53a70c6.1314691875.git.noor_ahsan@mentor.com>
+	<j3iio6$u5s$1@dough.gmane.org>
+From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/3] bonnie++: Add version 1.03c (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,17 +36,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2011 12:06:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 30 Aug 2011 12:34:00 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
->> I run Angstrom 2010.8 with a 2.6.39 kernel. To get better power management I want to use the 2.6.39 pm-branch from sakoman.
->
-> What makes you think that has better PM? If you look at the actual patchsets, you'll see that sakoman-pm is actually the angstrom .39 kernel :)
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf
+Of
+> Koen Kooi
+> Sent: Tuesday, August 30, 2011 4:49 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH 1/3] bonnie++: Add version 1.03c
+> (initial recipe)
+>=20
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> Op 30-08-11 12:58, Noor, Ahsan schreef:
+> > From: Noor Ahsan <noor_ahsan@mentor.com>
+> >
+> > * Imported from oe.dev commit id
+> 44985d56bc556786812a0a02d6219afd31a7381d. * Merge .bb and .inc file.
+> >
+> > Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com> --- meta-
+> oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb |   30
+> ++++++++++++++++++++ .../bonnie/files/gcc-4.3-fixes.patch
+> |   19 ++++++++++++ 2 files changed, 49 insertions(+), 0 deletions(-)
+> create mode 100644
+> > meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb create mode
+100644
+> meta-oe/recipes-benchmark/bonnie/files/gcc-4.3-fixes.patch
+> >
+> > diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb
+> b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb new file mode
+> 100644 index 0000000..2067307 --- /dev/null +++ b/meta-oe/recipes-
+> benchmark/bonnie/bonnie++_1.03c.bb @@ -0,0 +1,30 @@ +DESCRIPTION =3D
+> "Tests large file IO and
+> > creation/deletion of small files." +HOMEPAGE =3D
+> "http://www.coker.com.au/bonnie++/" +LICENSE =3D "GPL v2"
+>=20
+> without spaces please
+>=20
+> > +LIC_FILES_CHKSUM =3D
+> "file://copyright.txt;md5=3Dcd4dde95a6b9d122f0a9150ae9cc3ee0" + =
++SRC_URI
+> =3D "http://www.coker.com.au/bonnie++/bonnie++-${PV}.tgz \ +
+> file://gcc-4.3-fixes.patch \ +           " +SRC_URI[md5sum] =3D
+> "77a1ba78f37bdd7f024b67e1e36ad151" +SRC_URI[sha256sum] =3D
+> > "c674f1182f4c20f1e6d038feceb0a6617fc3e7658dfbbac89396043b49612a26" +
+> +SCRIPTS =3D "bon_csv2html bon_csv2txt" +EXES =3D "bonnie++ zcav"
+>=20
+> And move those 2 below the inherit line please.
+>=20
+> > + +inherit autotools + +do_install () { +        install -d ${D}/bin
+> +        install -d ${D}/sbin +        install -m 0755 ${EXES}
+> ${D}/sbin +        install -m 0755 ${SCRIPTS} ${D}/bin +} + +PACKAGES
+> +=3D "bonnie-scripts" + +FILES_${PN} =3D "/sbin" +FILES_bonnie-
+> scripts=3D"/bin" + +TARGET_CC_ARCH
+> > +=3D "${LDFLAGS}"
+>=20
+> and move this one above do_install please. The general idea is to
+group
+> them by usage and TARGET_CC_ARCH is a configure/compile thing.
+>=20
+>=20
+> regards,
+>=20
+> Koen
 
-My board doesn't wake from suspend when I use .39 from
-org.openembedded.dev. Neither using a timer nor from console input.
-sakoman-pm wakes, so in my case it has better PM for atm. :)
 
-- Tasslehoff
+Hi,
+
+The recipe is verified on oe-styliz.py script and the formatting is done
+by that script. Your recommendations are conflicting with oe-stylize.
+Kindly update oe-stylize according to your recommendation so that it
+give output according to your expectations.
+
+Thanks.
+
+Regards,
+Noor
 
 
