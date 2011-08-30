@@ -1,26 +1,23 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tasskjapp@gmail.com>) id 1QyJk8-0003pT-0K
+	(envelope-from <mickey@vanille-media.de>) id 1QyKBd-0004li-6t
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 10:32:24 +0200
-Received: by gxk3 with SMTP id 3so815894gxk.6
+	Tue, 30 Aug 2011 11:00:49 +0200
+Received: from [192.168.1.16] (business-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id 86BA0584076
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2011 01:27:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=yzxrBSmWGrTqX7F72SFGKyS5mY9OhiezxisFxUECd9M=;
-	b=mph0dTvEwSmsWi7SzSobOC+pX4TDxHtrvFWsXbrjx9JO/4vgdWEkZlJacSFxZEIs7L
-	MphMD7/Ja7ujqfexJssTf+oP1XVXz8REH6kjyOzbopZScjbgtzszk0r8IAl5b+krA2D/
-	gGegNlsLhXkaJ8w9U4c0EcYp36br0s7tNfM8Y=
-MIME-Version: 1.0
-Received: by 10.42.145.131 with SMTP id f3mr5779807icv.504.1314692850480; Tue,
-	30 Aug 2011 01:27:30 -0700 (PDT)
-Received: by 10.42.166.132 with HTTP; Tue, 30 Aug 2011 01:27:30 -0700 (PDT)
-Date: Tue, 30 Aug 2011 10:27:30 +0200
-Message-ID: <CAJJ=G6_X2B5wJG822Sqhqwzz9cAmjsG_YNXmYZ6XzkapnUzE3Q@mail.gmail.com>
-From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+	Tue, 30 Aug 2011 11:31:01 +0200 (CEST)
+Mime-Version: 1.0 (Apple Message framework v1244.3)
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+In-Reply-To: <1313447032.4058.58.camel@mattotaupa>
+Date: Tue, 30 Aug 2011 10:55:58 +0200
+Message-Id: <8339DDC7-E1E8-442B-A183-CD1F327AEC4D@vanille-media.de>
+References: <1313447032.4058.58.camel@mattotaupa>
 To: openembedded-devel@lists.openembedded.org
-Subject: Changing kernel for Angstrom @ beagleboard.
+X-Mailer: Apple Mail (2.1244.3)
+Subject: Re: request for branch in OpenEmbedded Git repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,25 +31,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2011 08:32:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 30 Aug 2011 09:00:49 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-I run Angstrom 2010.8 with a 2.6.39 kernel. To get better power
-management I want to use the 2.6.39 pm-branch from sakoman.
+Paul,
 
-I've created a recipe called linux-sakoman-pm_2.6.39.bb and tried
-setting some preferred providers.
+we have always allowed custom branches for developers with
+write access. Feel free to create as many as you need, please
+prefix them with your nickname.
 
-PREFERRED_PROVIDER_virtual/kernel_beagleboard = "linux-sakoman-pm"
-PREFERRED_PROVIDER_virtual/kernel = "linux-sakoman-pm"
+Cheers,
 
-I also set DEFAULT_PREFERENCE = "-1" in linux-omap_2.6.39.bb.
+Mickey.
 
-This made it compile linux-sakoman-pm_2.6.39.bb when I bitbake my
-rootfs, but packaged in /boot in my rootfs is still the old kernel.
-
-What's missing?
-
-- Tasslehoff
 
 
