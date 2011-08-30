@@ -1,20 +1,37 @@
-Received: from smarthost.techfak.uni-bielefeld.de ([129.70.137.17])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sherbrec@cit-ec.uni-bielefeld.de>)
-	id 1QyPOK-000705-Dn for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 16:34:16 +0200
-Received: from localhost.localdomain (hanuta.TechFak.Uni-Bielefeld.DE
-	[129.70.129.229])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: sherbrec)
-	by smarthost.TechFak.Uni-Bielefeld.DE (Postfix) with ESMTPSA id B6687A2;
-	Tue, 30 Aug 2011 16:29:21 +0200 (CEST)
-From: Stefan Herbrechtsmeier <sherbrec@cit-ec.uni-bielefeld.de>
+	(envelope-from <george.huntingtoniii@gmail.com>) id 1QyQHS-0001yN-Fw
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 17:31:14 +0200
+Received: by gxk3 with SMTP id 3so1073022gxk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Aug 2011 08:26:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=npdAhQUAjd4RbsUyq62yGG9gvQbAETBstnwyhrLefpM=;
+	b=DqwSIcMoNOGsidVbLy1fo0PtZcG7D52SPl/EmGFBnXJ3jIK80mFkbUVKltUKnt7DUb
+	J4ln4+X5s3Y/h0soxNuwZb/W+LGWPbXCtoJi/qb6pLErnPvSj08sMKLHBi/cbLHva+zv
+	xNqx0LXHAQulQpnua9ediqPyu1pg0PLILCNgc=
+MIME-Version: 1.0
+Received: by 10.236.75.136 with SMTP id z8mr4178834yhd.37.1314717945866; Tue,
+	30 Aug 2011 08:25:45 -0700 (PDT)
+Received: by 10.236.109.33 with HTTP; Tue, 30 Aug 2011 08:25:45 -0700 (PDT)
+In-Reply-To: <1314707457.3796.19.camel@mattotaupa>
+References: <4E4E536D.7010103@dresearch-fe.de> <4E4E738C.70109@dresearch-fe.de>
+	<4E5356B2.3060908@dresearch-fe.de> <4E53583A.3030405@gmx.net>
+	<4E535B83.9080508@dresearch-fe.de>
+	<CAFu+nvEh9tUGzQM1PFo1ErtOq+a+0yg94pZBO6Ohr92GNZoKBg@mail.gmail.com>
+	<1314199372.21496.12.camel@jjg-linux>
+	<4E562AFF.7090004@dresearch-fe.de>
+	<4E56579C.7080207@dresearch-fe.de>
+	<4E5CC094.2020500@dresearch-fe.de>
+	<1314707457.3796.19.camel@mattotaupa>
+Date: Tue, 30 Aug 2011 11:25:45 -0400
+Message-ID: <CAFu+nvGj96aCyZdphiDL6Rw+VdY8Kpzbd_29Y4G-hLNuwYzTWQ@mail.gmail.com>
+From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Aug 2011 16:29:10 +0200
-Message-Id: <1314714550-29390-1-git-send-email-sherbrec@cit-ec.uni-bielefeld.de>
-X-Mailer: git-send-email 1.7.0.4
-Subject: [PATCH] gcc: Remove package libstdc++-dev and libgcc-dev from gcc-cross
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [2011.03-maintenance] do_compile failed for cacao_0.99.3.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,82 +45,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2011 14:34:16 -0000
+X-List-Received-Date: Tue, 30 Aug 2011 15:31:14 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Remove package libstdc++-dev and libgcc-dev from gcc-cross as they
-already provided by gcc.
+sorry about the format of the patch, I had not yet read the commit policy
+when I wrote this.  actually when I wrote this I would have needed a pretty
+detailed step-by-step, enter these commands, sort of guide.
 
-Commit 8c42351519ece9ed60659a103e624d2e154b3641 add dev packages
-(libstdc++-dev libgcc-dev) to gcc-cross (gcc-package-cross.inc)
-which are already part of gcc. The libgcc-dev package both include
-the libgcc_s.so file which triggers a 'file is already provided by
-package' error on incremental builds. The libstdc++-dev package have
-different content and is empty on some archs (armv5te, armv7e).
-The empty package triggers a 'Cannot satisfy the following
-dependencies for task-sdk-bare' error. If an empty libstdc++-dev
-package is generated it triggers a '..../usr/include/c++ not exist'
-error as this is part of the package from gcc but not gcc-cross.
+On Tue, Aug 30, 2011 at 8:30 AM, Paul Menzel <
+paulepanter@users.sourceforge.net> wrote:
 
-Signed-off-by: Stefan Herbrechtsmeier <sherbrec@cit-ec.uni-bielefeld.de>
----
- recipes/gcc/gcc-4.3.3.inc         |    2 +-
- recipes/gcc/gcc-4.5.inc           |    2 +-
- recipes/gcc/gcc-package-cross.inc |    4 +---
- 3 files changed, 3 insertions(+), 5 deletions(-)
-
-diff --git a/recipes/gcc/gcc-4.3.3.inc b/recipes/gcc/gcc-4.3.3.inc
-index 649fdfe..8b6ffe5 100644
---- a/recipes/gcc/gcc-4.3.3.inc
-+++ b/recipes/gcc/gcc-4.3.3.inc
-@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
- DEPENDS = "mpfr gmp"
- NATIVEDEPS = "mpfr-native gmp-native"
- 
--INC_PR = "r23"
-+INC_PR = "r24"
- 
- SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
- 	file://fedora/gcc43-c++-builtin-redecl.patch;striplevel=0 \
-diff --git a/recipes/gcc/gcc-4.5.inc b/recipes/gcc/gcc-4.5.inc
-index 69229ef..2777dca 100644
---- a/recipes/gcc/gcc-4.5.inc
-+++ b/recipes/gcc/gcc-4.5.inc
-@@ -8,7 +8,7 @@ DEPENDS = "mpfr gmp libmpc libelf"
- NATIVEDEPS = "mpfr-native gmp-native libmpc-native"
- 
- 
--INC_PR = "r37"
-+INC_PR = "r38"
- 
- SRCREV = "170880"
- PV = "4.5"
-diff --git a/recipes/gcc/gcc-package-cross.inc b/recipes/gcc/gcc-package-cross.inc
-index 1533069..8d52b6f 100644
---- a/recipes/gcc/gcc-package-cross.inc
-+++ b/recipes/gcc/gcc-package-cross.inc
-@@ -4,7 +4,7 @@ PACKAGE_STRIP = "no"
- 
- SHLIBSDIR = "${STAGING_DIR_TARGET}/shlibs"
- 
--PACKAGES = "libgcc libssp libstdc++ libg2c libgfortran libstdc++-dev libgcc-dev"
-+PACKAGES = "libgcc libssp libstdc++ libg2c libgfortran"
- 
- # Called from within gcc-cross, so libdir is set wrong
- FILES_libg2c = "${target_libdir}/libg2c.so.*"
-@@ -14,11 +14,9 @@ FILES_libssp = "${target_libdir}/libssp.so.*"
- FILES_libgfortran = "${target_libdir}/libgfortran.so.*"
- 
- FILES_libgcc = "${target_base_libdir}/libgcc_s.so.1"
--FILES_libgcc-dev = "${target_libdir}/libgcc_s.so"
- 
- FILES_libstdc++ = "${target_libdir}/libstdc++.so.*"
- 
--FILES_libstdc++-dev = "${target_datadir}/gdb/auto-load/${libdir}/libstdc++.so.*-gdb.py*"
- do_install () {
- 	oe_runmake 'DESTDIR=${D}' install
- 	install -d ${D}${target_base_libdir}
--- 
-1.7.0.4
-
-
+> Am Dienstag, den 30.08.2011, 12:51 +0200 schrieb Steffen Sledz:
+> > On 25.08.2011 16:09, Steffen Sledz wrote:
+> > > On 25.08.2011 12:59, Steffen Sledz wrote:
+> > >> On 24.08.2011 17:22, Jesse Gilles wrote:
+> > >>> On Tue, 2011-08-23 at 13:16 -0400, George C. Huntington, III wrote:
+> > >>>> I suspect that the problem is happening earlier, classpath isn't
+> building.
+> > >>>>  the javac wrapper eats the return code from a java compile.
+> > >>>
+> > >>> If George is right, then the following patch to the javac wrapper
+> script
+> > >>> may fix the issue.  It fixes building classpath as well as returns
+> the
+> > >>> error code if all javac attempts fail.
+> > >>>
+> > >>> http://patches.openembedded.org/patch/9521/
+> > >>
+> > >> In our case this patch helps.
+> > >>
+> > >> If nobody has objections i will commit this patch to oe-dev master and
+> request a pull to 2011.03-maintenance.
+> > >
+> > > It would be still better if we can get some Acks from a java
+> maintainer.
+> >
+> > No NACKs after another week. So i pushed the patch do oe-dev master.
+>
+> Next time it would be better to resend the patch with a appropriate
+> subject line.
+>
+> Unfortunately the commit message [1] does not conform to our commit
+> policy [2].
+>
+> Please make sure to check those things next time. I feel uncomfortable
+> to ask new contributors to comply every time but when they look at the
+> commit history they see that the policies are often not cared about.
+>
+>
+> Thanks,
+>
+> Paul
+>
+>
+> [1]
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=16a8a1e9175035b55d91a141d5302c38d63c16f1
+> [2] http://openembedded.org/index.php/Category:Policy
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
