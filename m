@@ -1,34 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QyIgs-000256-IG for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 09:24:58 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QyIcB-0001TU-2X for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 09:20:07 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2011 09:20:07 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <tasskjapp@gmail.com>) id 1QyJk8-0003pT-0K
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 10:32:24 +0200
+Received: by gxk3 with SMTP id 3so815894gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2011 09:20:07 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 30 Aug 2011 01:27:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=yzxrBSmWGrTqX7F72SFGKyS5mY9OhiezxisFxUECd9M=;
+	b=mph0dTvEwSmsWi7SzSobOC+pX4TDxHtrvFWsXbrjx9JO/4vgdWEkZlJacSFxZEIs7L
+	MphMD7/Ja7ujqfexJssTf+oP1XVXz8REH6kjyOzbopZScjbgtzszk0r8IAl5b+krA2D/
+	gGegNlsLhXkaJ8w9U4c0EcYp36br0s7tNfM8Y=
+MIME-Version: 1.0
+Received: by 10.42.145.131 with SMTP id f3mr5779807icv.504.1314692850480; Tue,
+	30 Aug 2011 01:27:30 -0700 (PDT)
+Received: by 10.42.166.132 with HTTP; Tue, 30 Aug 2011 01:27:30 -0700 (PDT)
+Date: Tue, 30 Aug 2011 10:27:30 +0200
+Message-ID: <CAJJ=G6_X2B5wJG822Sqhqwzz9cAmjsG_YNXmYZ6XzkapnUzE3Q@mail.gmail.com>
+From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 30 Aug 2011 09:00:55 +0200
-Message-ID: <j3i1r7$epr$2@dough.gmane.org>
-References: <1314624017-17974-1-git-send-email-dos@dosowisko.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:6.0) Gecko/20110812 Thunderbird/6.0
-In-Reply-To: <1314624017-17974-1-git-send-email-dos@dosowisko.net>
-X-Enigmail-Version: 1.3
-Subject: Re: [PATCH][meta-oe] ltrace: upgrade Debian patchset from -2 to -2.1
+Subject: Changing kernel for Angstrom @ beagleboard.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,26 +34,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2011 07:24:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 30 Aug 2011 08:32:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+I run Angstrom 2010.8 with a 2.6.39 kernel. To get better power
+management I want to use the 2.6.39 pm-branch from sakoman.
 
-Op 29-08-11 15:20, Sebastian Krzyszkowiak schreef:
-> * because -2 is not fetchable anymore
-> 
-> Signed-off-by: Sebastian Krzyszkowiak <dos@dosowisko.net>
+I've created a recipe called linux-sakoman-pm_2.6.39.bb and tried
+setting some preferred providers.
 
-merged, thanks
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+PREFERRED_PROVIDER_virtual/kernel_beagleboard = "linux-sakoman-pm"
+PREFERRED_PROVIDER_virtual/kernel = "linux-sakoman-pm"
 
-iD8DBQFOXIqnMkyGM64RGpERAicTAJ47DjZxgqrj886yT8kfmy7TNvc9eQCgh1RE
-IzvDSAgCdhBbKJncaKnobdc=
-=MD26
------END PGP SIGNATURE-----
+I also set DEFAULT_PREFERENCE = "-1" in linux-omap_2.6.39.bb.
 
+This made it compile linux-sakoman-pm_2.6.39.bb when I bitbake my
+rootfs, but packaged in /boot in my rootfs is still the old kernel.
+
+What's missing?
+
+- Tasslehoff
 
 
