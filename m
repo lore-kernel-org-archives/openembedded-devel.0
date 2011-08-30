@@ -1,29 +1,34 @@
-Received: from tritech.se ([91.191.137.61])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Mats.Karrman@tritech.se>) id 1QyKDQ-0004tZ-UA
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 11:02:41 +0200
-Received: from post.tritech.se (post.tritech.se [10.75.60.100])
-	by tritech.se (8.14.3/8.14.3) with ESMTP id p7U8vg2R003841
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QyKFt-000532-Vk for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 11:05:14 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QyKBB-0007mX-2x for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 11:00:21 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Aug 2011 11:00:21 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2011 10:57:47 +0200
-Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
-	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
-	14.01.0270.001; Tue, 30 Aug 2011 10:57:42 +0200
-From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: Creating static device nodes with udev
-Thread-Index: Acxm8Y+OZx1IhKaQTkqkN2Ucp6Nxng==
-Date: Tue, 30 Aug 2011 08:57:41 +0000
-Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C40040669@post.tritech.se>
-Accept-Language: en-US, sv-SE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [194.132.137.34]
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Creating static device nodes with udev
+	Tue, 30 Aug 2011 11:00:21 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 30 Aug 2011 11:00:03 +0200
+Message-ID: <j3i8qj$rv7$1@dough.gmane.org>
+References: <CAJJ=G6_X2B5wJG822Sqhqwzz9cAmjsG_YNXmYZ6XzkapnUzE3Q@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:6.0) Gecko/20110812 Thunderbird/6.0
+In-Reply-To: <CAJJ=G6_X2B5wJG822Sqhqwzz9cAmjsG_YNXmYZ6XzkapnUzE3Q@mail.gmail.com>
+X-Enigmail-Version: 1.3
+Subject: Re: Changing kernel for Angstrom @ beagleboard.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,38 +42,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2011 09:02:41 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 30 Aug 2011 09:05:14 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I'm using OE-classic and udev 151 on a PPC target.
+Op 30-08-11 10:27, Tasslehoff Kjappfot schreef:
+> I run Angstrom 2010.8 with a 2.6.39 kernel. To get better power management I want to use the 2.6.39 pm-branch from sakoman.
 
-I have some devices not supporting sysfs, eg ppp, so I need to create stati=
-c device nodes for these.
-Previously I have used scripts linked via rcS.d that runs mknod after udev =
-has been loaded but this feels sort of sub-optimal.
+What makes you think that has better PM? If you look at the actual patchsets, you'll see that sakoman-pm is actually the angstrom .39 kernel :)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-I found the "udev-static-devices" recipe but I can't make it work.
-What I've done is:
-- I manually created a directory 'devices' with the device nodes I need usi=
-ng mknod.
-- I tar'ed this into 'udev_static_devices_tarball'.
-- I ran bitbake to put them into a package and installed this package on my=
- target using opkg.
-- I verified that my device nodes now exist in /lib/udev/devices
-- I rebooted the target.
-... Still, my device nodes does not exist in /dev.
+iD8DBQFOXKaTMkyGM64RGpERAmLcAKCgEkz5J3V1X2mWqE2FbtujoY/GCgCgr50j
+zhmpf6ysCHv1nsttlbDqZu0=
+=Ctwh
+-----END PGP SIGNATURE-----
 
-Any clue on what I have forgotten? Must the "static" feature be enabled in =
-some way?
-
-Do anyone have a better approach to creating static device nodes? E.g. usin=
-g makedevs or...
-
-Thanks a bunch for your support!
-// Mats
 
 
