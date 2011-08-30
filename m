@@ -1,34 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QyKFt-000532-Vk for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 11:05:14 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QyKBB-0007mX-2x for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 11:00:21 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2011 11:00:21 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <sledz@dresearch-fe.de>) id 1QyLz3-0007ra-SU
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 12:55:57 +0200
+Received: by bkbzu17 with SMTP id zu17so4862334bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2011 11:00:21 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 30 Aug 2011 11:00:03 +0200
-Message-ID: <j3i8qj$rv7$1@dough.gmane.org>
-References: <CAJJ=G6_X2B5wJG822Sqhqwzz9cAmjsG_YNXmYZ6XzkapnUzE3Q@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	Tue, 30 Aug 2011 03:51:04 -0700 (PDT)
+Received: by 10.204.135.2 with SMTP id l2mr2759281bkt.124.1314701464523;
+	Tue, 30 Aug 2011 03:51:04 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id z6sm1472652bks.57.2011.08.30.03.51.01
+	(version=SSLv3 cipher=OTHER); Tue, 30 Aug 2011 03:51:02 -0700 (PDT)
+Message-ID: <4E5CC094.2020500@dresearch-fe.de>
+Date: Tue, 30 Aug 2011 12:51:00 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:6.0) Gecko/20110812 Thunderbird/6.0
-In-Reply-To: <CAJJ=G6_X2B5wJG822Sqhqwzz9cAmjsG_YNXmYZ6XzkapnUzE3Q@mail.gmail.com>
-X-Enigmail-Version: 1.3
-Subject: Re: Changing kernel for Angstrom @ beagleboard.
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <4E4E536D.7010103@dresearch-fe.de> <4E4E738C.70109@dresearch-fe.de>
+	<4E5356B2.3060908@dresearch-fe.de> <4E53583A.3030405@gmx.net>
+	<4E535B83.9080508@dresearch-fe.de>
+	<CAFu+nvEh9tUGzQM1PFo1ErtOq+a+0yg94pZBO6Ohr92GNZoKBg@mail.gmail.com>
+	<1314199372.21496.12.camel@jjg-linux>
+	<4E562AFF.7090004@dresearch-fe.de>
+	<4E56579C.7080207@dresearch-fe.de>
+In-Reply-To: <4E56579C.7080207@dresearch-fe.de>
+X-Enigmail-Version: 1.3.1
+Cc: Robert Schuster <robert.schuster@tarent.de>, george.huntingtoniii@gmail.com
+Subject: Re: [2011.03-maintenance] do_compile failed for cacao_0.99.3.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,24 +43,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2011 09:05:14 -0000
+X-List-Received-Date: Tue, 30 Aug 2011 10:55:58 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 25.08.2011 16:09, Steffen Sledz wrote:
+> On 25.08.2011 12:59, Steffen Sledz wrote:
+>> On 24.08.2011 17:22, Jesse Gilles wrote:
+>>> On Tue, 2011-08-23 at 13:16 -0400, George C. Huntington, III wrote:
+>>>> I suspect that the problem is happening earlier, classpath isn't building.
+>>>>  the javac wrapper eats the return code from a java compile.
+>>>
+>>> If George is right, then the following patch to the javac wrapper script
+>>> may fix the issue.  It fixes building classpath as well as returns the
+>>> error code if all javac attempts fail.
+>>>
+>>> http://patches.openembedded.org/patch/9521/
+>>
+>> In our case this patch helps.
+>>
+>> If nobody has objections i will commit this patch to oe-dev master and request a pull to 2011.03-maintenance.
+> 
+> It would be still better if we can get some Acks from a java maintainer.
 
-Op 30-08-11 10:27, Tasslehoff Kjappfot schreef:
-> I run Angstrom 2010.8 with a 2.6.39 kernel. To get better power management I want to use the 2.6.39 pm-branch from sakoman.
+No NACKs after another week. So i pushed the patch do oe-dev master.
 
-What makes you think that has better PM? If you look at the actual patchsets, you'll see that sakoman-pm is actually the angstrom .39 kernel :)
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFOXKaTMkyGM64RGpERAmLcAKCgEkz5J3V1X2mWqE2FbtujoY/GCgCgr50j
-zhmpf6ysCHv1nsttlbDqZu0=
-=Ctwh
------END PGP SIGNATURE-----
-
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
