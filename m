@@ -1,32 +1,34 @@
-Received: from bee.rz.hs-augsburg.de ([141.82.25.26])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <michael.morscher@hs-augsburg.de>) id 1Qy8tU-0002RD-BD
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Aug 2011 22:57:20 +0200
-Received: from [127.0.0.1] (ppp-188-174-27-188.dynamic.mnet-online.de
-	[188.174.27.188]) (authenticated bits=0)
-	by bee.RZ.HS-Augsburg.DE (8.14.3/8.14.3) with ESMTP id p7TKidIG027994
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QyIOH-0001Cx-FN for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 09:05:45 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QyIJY-0002mE-IQ for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 09:00:52 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Aug 2011 09:00:52 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Aug 2011 22:44:39 +0200 (MEST)
-Message-ID: <4E5BFA36.1080002@hs-augsburg.de>
-Date: Mon, 29 Aug 2011 22:44:38 +0200
-From: Michael Morscher <michael.morscher@hs-augsburg.de>
-Organization: HS Augsburg
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:6.0) Gecko/20110812 Thunderbird/6.0
-MIME-Version: 1.0
+	Tue, 30 Aug 2011 09:00:52 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.0
-	(bee.RZ.HS-Augsburg.DE [141.82.16.16]);
-	Mon, 29 Aug 2011 22:44:39 +0200 (MEST)
-X-HSA-RZ-MailScanner-Information: Please contact the ISP for more information
-X-HSA-RZ-MailScanner-ID: p7TKidIG027994
-X-HSA-RZ-MailScanner: Found to be clean
-X-HSA-RZ-MailScanner-From: michael.morscher@hs-augsburg.de
-X-HSA-RZ-MailScanner-Watermark: 1315255481.20264@JkGdWUapSZv5wZzW3AFwbQ
-X-Spam-Status: No
-Subject: Still broken images due to gtk-icon-cache/scrollkeeper
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 30 Aug 2011 09:00:40 +0200
+Message-ID: <j3i1qo$epr$1@dough.gmane.org>
+References: <1314635263-10209-1-git-send-email-kergoth@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:6.0) Gecko/20110812 Thunderbird/6.0
+In-Reply-To: <1314635263-10209-1-git-send-email-kergoth@gmail.com>
+X-Enigmail-Version: 1.3
+Subject: Re: [PATCH] [meta-oe] binutils: use TARGET_PREFIX for the convenience links
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,56 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Aug 2011 20:57:20 -0000
-Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+X-List-Received-Date: Tue, 30 Aug 2011 07:05:45 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hey guys,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I'm using the latest git release and checked out all patches which Koen 
-posted the last 4 weeks. But in my case, the image is still broken.
-It looks like a Loop to me ...
+Op 29-08-11 18:27, Christopher Larson schreef:
+> From: Chris Larson <chris_larson@mentor.com>
+> 
+> This ensures it works even if TARGET_PREFIX != ${TARGET_SYS}-
+> 
+> Signed-off-by: Chris Larson <chris_larson@mentor.com> --- meta-oe/recipes-devtools/binutils/binutils.inc |    4 ++-- 1 files changed, 2 insertions(+), 2 deletions(-)
 
-|  * satisfy_dependencies_for: Cannot satisfy the following dependencies 
-for task-xfce46-base:
-|  *    
-hicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-theme 
-*    
-hicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-theme 
-*   
-hicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-theme 
-*   
-hicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-theme 
-*    
-hicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-theme 
-*   
-hicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-theme 
-*   
-hicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-theme 
-*    
-hicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-theme 
-*   
-hicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-theme 
-*   
-hicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-theme 
-*    
-hicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-theme 
-*
-|  * opkg_install_cmd: Cannot install package task-xfce46-base.
-|  * resolve_conffiles: Existing conffile 
-/build/OE/tmp/rootfs/xfce46-image/etc/device_table is different from the 
-conffile in the new package. The new conffile will be placed at 
-/build/OE/tmp/rootfs/xfce46-image/etc/device_table-opkg.
-NOTE: package xfce46-image-1.0-r1: task do_rootfs: Failed
-ERROR: Task 14 (/build/OE/openembedded/recipes/images/xfce46-image.bb, 
-do_rootfs) failed with exit code '1'
-ERROR: '/build/OE/openembedded/recipes/images/xfce46-image.bb' failed
+merged, thanks
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD4DBQFOXIqYMkyGM64RGpERArq+AJdv22NzIKRCxZ53vZ9gFhbXEQDQAJkBqVJM
+5UEU4IR7d8qIUZtxcA0y0Q==
+=9/50
+-----END PGP SIGNATURE-----
 
-A complete log is available here: http://pastebin.de/18528
-System is Ubuntu 10.04 x86 / bitbake 1.13.3
-
-Thanks!
-Bye
 
 
