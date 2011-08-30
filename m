@@ -1,29 +1,37 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mailbackup.inode.at ([213.229.60.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QyNXg-0002ks-Cd for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 14:35:48 +0200
-Received: from f053039119.adsl.alicedsl.de ([78.53.39.119]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QyNT1-00051M-SF for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 12:31:00 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <Bernhard.Guillon@hale.at>) id 1QyNZl-0002sp-NF
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 14:37:57 +0200
+Received: from [62.99.145.6] (port=7954 helo=mx.inode.at)
+	by mailbackup.inode.at with esmtp (Exim 4.76)
+	(envelope-from <Bernhard.Guillon@hale.at>) id 1QyNL3-0001Xq-IL
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 14:22:45 +0200
+Received: from [83.64.51.210] (port=15864 helo=gateway1.hale)
+	by smartmx-06.inode.at with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <Bernhard.Guillon@hale.at>)
+	id 1QyNL1-0000ML-DP for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 14:22:43 +0200
+Received: from mail1.hale.at (mail2.hale [192.168.100.12])
+	by gateway1.hale (8.13.8/8.13.7) with ESMTP id p7UCMYFa031384
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Aug 2011 14:22:34 +0200
+Received: from localhost.localdomain ([192.168.100.138]) by hale.at with
+	MailEnable ESMTP; Tue, 30 Aug 2011 14:22:29 +0200
+From: Bernhard Guillon <Bernhard.Guillon@hale.at>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Aug 2011 14:30:56 +0200
-In-Reply-To: <4E5CC094.2020500@dresearch-fe.de>
-References: <4E4E536D.7010103@dresearch-fe.de>
-	<4E4E738C.70109@dresearch-fe.de> <4E5356B2.3060908@dresearch-fe.de>
-	<4E53583A.3030405@gmx.net> <4E535B83.9080508@dresearch-fe.de>
-	<CAFu+nvEh9tUGzQM1PFo1ErtOq+a+0yg94pZBO6Ohr92GNZoKBg@mail.gmail.com>
-	<1314199372.21496.12.camel@jjg-linux>
-	<4E562AFF.7090004@dresearch-fe.de>
-	<4E56579C.7080207@dresearch-fe.de> <4E5CC094.2020500@dresearch-fe.de>
-X-Mailer: Evolution 3.0.2- 
-Message-ID: <1314707457.3796.19.camel@mattotaupa>
-Mime-Version: 1.0
-Subject: Re: [2011.03-maintenance] do_compile failed for cacao_0.99.3.bb
+Date: Tue, 30 Aug 2011 14:21:53 +0200
+Message-Id: <1314706913-10583-1-git-send-email-Bernhard.Guillon@hale.at>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+X-HALE-MailScanner-Information: Please contact the ISP for more information
+X-MailScanner-ID: p7UCMYFa031384
+X-HALE-MailScanner: Found to be clean
+X-HALE-MailScanner-From: bernhard.guillon@hale.at
+MailScanner-NULL-Check: 1315311756.24194@4OInHhvVe3pvM/2gHpmf3g
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH] dbus-c++: use openembedded-core versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,74 +45,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2011 12:35:48 -0000
-X-Groupsio-MsgNum: 33894
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-Nvh72+KLyjdad9724q4r"
+X-List-Received-Date: Tue, 30 Aug 2011 12:37:57 -0000
 
---=-Nvh72+KLyjdad9724q4r
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Remove non working recipes because openembedded-core provides better
+ones.
 
-Am Dienstag, den 30.08.2011, 12:51 +0200 schrieb Steffen Sledz:
-> On 25.08.2011 16:09, Steffen Sledz wrote:
-> > On 25.08.2011 12:59, Steffen Sledz wrote:
-> >> On 24.08.2011 17:22, Jesse Gilles wrote:
-> >>> On Tue, 2011-08-23 at 13:16 -0400, George C. Huntington, III wrote:
-> >>>> I suspect that the problem is happening earlier, classpath isn't bui=
-lding.
-> >>>>  the javac wrapper eats the return code from a java compile.
-> >>>
-> >>> If George is right, then the following patch to the javac wrapper scr=
-ipt
-> >>> may fix the issue.  It fixes building classpath as well as returns th=
-e
-> >>> error code if all javac attempts fail.
-> >>>
-> >>> http://patches.openembedded.org/patch/9521/
-> >>
-> >> In our case this patch helps.
-> >>
-> >> If nobody has objections i will commit this patch to oe-dev master and=
- request a pull to 2011.03-maintenance.
-> >=20
-> > It would be still better if we can get some Acks from a java maintainer=
-.
->=20
-> No NACKs after another week. So i pushed the patch do oe-dev master.
+Signed-off-by: Bernhard Guillon <Bernhard.Guillon@hale.at>
+---
+ meta-oe/recipes-core/dbus/dbus-c++-native_git.bb   |   17 --------------
+ .../recipes-core/dbus/dbus-c++/fix-linking.patch   |   13 -----------
+ meta-oe/recipes-core/dbus/dbus-c++_git.bb          |   23 --------------------
+ 3 files changed, 0 insertions(+), 53 deletions(-)
+ delete mode 100644 meta-oe/recipes-core/dbus/dbus-c++-native_git.bb
+ delete mode 100644 meta-oe/recipes-core/dbus/dbus-c++/fix-linking.patch
+ delete mode 100644 meta-oe/recipes-core/dbus/dbus-c++_git.bb
 
-Next time it would be better to resend the patch with a appropriate
-subject line.
+diff --git a/meta-oe/recipes-core/dbus/dbus-c++-native_git.bb b/meta-oe/recipes-core/dbus/dbus-c++-native_git.bb
+deleted file mode 100644
+index eba80b2..0000000
+--- a/meta-oe/recipes-core/dbus/dbus-c++-native_git.bb
++++ /dev/null
+@@ -1,17 +0,0 @@
+-require dbus-c++_git.bb
+-inherit native
+-
+-FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/dbus-c++"
+-# actually dbus-native and expat-native, but even the bearest build machine should have that nowadays...
+-DEPENDS = ""
+-
+-do_compile() {
+-	oe_runmake -C src libdbus-c++-1.la
+-	oe_runmake -C tools dbusxx-xml2cpp
+-	install -m 0755 tools/dbusxx-xml2cpp ${STAGING_BINDIR_NATIVE}
+-}
+-
+-do_install() {
+-	:
+-}
+-
+diff --git a/meta-oe/recipes-core/dbus/dbus-c++/fix-linking.patch b/meta-oe/recipes-core/dbus/dbus-c++/fix-linking.patch
+deleted file mode 100644
+index 8222169..0000000
+--- a/meta-oe/recipes-core/dbus/dbus-c++/fix-linking.patch
++++ /dev/null
+@@ -1,13 +0,0 @@
+-Index: dbus/tools/Makefile.am
+-===================================================================
+---- dbus.orig/tools/Makefile.am
+-+++ dbus/tools/Makefile.am
+-@@ -16,7 +16,7 @@ endif
+- bin_PROGRAMS = dbusxx-xml2cpp dbusxx-introspect
+- 
+- dbusxx_xml2cpp_SOURCES = xml.h xml.cpp xml2cpp.h xml2cpp.cpp
+--dbusxx_xml2cpp_LDADD = $(libdbus_cxx_la)
+-+dbusxx_xml2cpp_LDADD = $(libdbus_cxx_la) -lexpat
+- 
+- dbusxx_introspect_SOURCES = introspect.h introspect.cpp
+- dbusxx_introspect_LDADD = $(libdbus_cxx_la)
+diff --git a/meta-oe/recipes-core/dbus/dbus-c++_git.bb b/meta-oe/recipes-core/dbus/dbus-c++_git.bb
+deleted file mode 100644
+index 6459823..0000000
+--- a/meta-oe/recipes-core/dbus/dbus-c++_git.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-DESCRIPTION = "C++ bindings for dbus"
+-LICENSE = "LGPLv2.1+"
+-SECTION = "libs"
+-DEPENDS = "dbus dbus-c++-native expat"
+-SRCREV = "530a887913d3b0dd7091eabb8eef8e3c279e3bb8"
+-
+-PE = "1"
+-PV = "0.5.0+gitr${SRCPV}"
+-
+-SRC_URI = "git://gitorious.org/dbus-cplusplus/mainline.git;protocol=git"
+-#           file://fix-linking.patch"
+-S = "${WORKDIR}/git"
+-
+-inherit autotools pkgconfig
+-
+-do_compile_prepend() {
+-	find . -name "Makefile.am" |xargs sed -i -e 's,$(top_builddir)/tools/dbusxx-xml2cpp,dbusxx-xml2cpp,'
+-}
+-
+-FILES_${PN}-dbg += "${bindir}/dbusxx-xml2cpp ${bindir}/dbusxx-introspect"
+-FILES_${PN}-dev += "${bindir}/.dev"
+-FILES_${PN} = "${libdir}/*.so.*"
+-
+-- 
+1.7.0.4
 
-Unfortunately the commit message [1] does not conform to our commit
-policy [2].
-
-Please make sure to check those things next time. I feel uncomfortable
-to ask new contributors to comply every time but when they look at the
-commit history they see that the policies are often not cared about.
 
 
-Thanks,
+--
+Scanned by MailScanner.
 
-Paul
 
 
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D16a8a1e=
-9175035b55d91a141d5302c38d63c16f1
-[2] http://openembedded.org/index.php/Category:Policy
-
---=-Nvh72+KLyjdad9724q4r
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk5c2AAACgkQPX1aK2wOHVjaMwCeMju4MSVGh5PoejOyseqRMQR2
-vLgAnRfhte1DFPxGc/s/+yF2f9UC3Nhl
-=qnvb
------END PGP SIGNATURE-----
-
---=-Nvh72+KLyjdad9724q4r--
