@@ -1,35 +1,28 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QyMti-0001Ks-Nq for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 13:54:30 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QyMoz-0000K1-J3 for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 13:49:37 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2011 13:49:37 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <tasskjapp@gmail.com>) id 1QyN5D-0001zA-Db
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 14:06:23 +0200
+Received: by ywa12 with SMTP id 12so5047320ywa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2011 13:49:37 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 30 Aug 2011 05:01:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=UmP2Gnxt24LAt2C3VRRV2tjEEjKGzR+MOdnZZRWfNUQ=;
+	b=KJL44vil4sC6LjSDR/fb8dwXjlSEx0kn8vz4lIw6mkONU84ZkWYvwN751LF20yClHy
+	2ExufRpQdAEN6E4VcaUKIAH67P7v2vkC1HyxB1Sj01Fn8jNay9pJ9pW08cKJ715chZw+
+	O7f53dI/Sep0xFplG86bAEynAdAivDImjXv50=
+MIME-Version: 1.0
+Received: by 10.42.145.131 with SMTP id f3mr5973790icv.504.1314705689740; Tue,
+	30 Aug 2011 05:01:29 -0700 (PDT)
+Received: by 10.42.166.132 with HTTP; Tue, 30 Aug 2011 05:01:29 -0700 (PDT)
+In-Reply-To: <mailman.3.1314698402.24288.openembedded-devel@lists.openembedded.org>
+References: <mailman.3.1314698402.24288.openembedded-devel@lists.openembedded.org>
+Date: Tue, 30 Aug 2011 14:01:29 +0200
+Message-ID: <CAJJ=G6-fiaRfo10wiyi0Armq00H78gauu3z8qm_NnkwrKAFhkg@mail.gmail.com>
+From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 30 Aug 2011 13:49:26 +0200
-Message-ID: <j3iio6$u5s$1@dough.gmane.org>
-References: <cover.1314691875.git.noor_ahsan@mentor.com>
-	<ef49be97f8e75115c1b001694f676f52a53a70c6.1314691875.git.noor_ahsan@mentor.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:6.0) Gecko/20110812 Thunderbird/6.0
-In-Reply-To: <ef49be97f8e75115c1b001694f676f52a53a70c6.1314691875.git.noor_ahsan@mentor.com>
-X-Enigmail-Version: 1.3
-Subject: Re: [meta-oe][PATCH 1/3] bonnie++: Add version 1.03c (initial recipe)
+Subject: Re: Openembedded-devel Digest, Vol 61, Issue 80
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,47 +36,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2011 11:54:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 30 Aug 2011 12:06:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+>> I run Angstrom 2010.8 with a 2.6.39 kernel. To get better power management I want to use the 2.6.39 pm-branch from sakoman.
+>
+> What makes you think that has better PM? If you look at the actual patchsets, you'll see that sakoman-pm is actually the angstrom .39 kernel :)
 
-Op 30-08-11 12:58, Noor, Ahsan schreef:
-> From: Noor Ahsan <noor_ahsan@mentor.com>
-> 
-> * Imported from oe.dev commit id 44985d56bc556786812a0a02d6219afd31a7381d. * Merge .bb and .inc file.
-> 
-> Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com> --- meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb |   30 ++++++++++++++++++++ .../bonnie/files/gcc-4.3-fixes.patch               |   19 ++++++++++++ 2 files changed, 49 insertions(+), 0 deletions(-) create mode 100644
-> meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb create mode 100644 meta-oe/recipes-benchmark/bonnie/files/gcc-4.3-fixes.patch
-> 
-> diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb new file mode 100644 index 0000000..2067307 --- /dev/null +++ b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb @@ -0,0 +1,30 @@ +DESCRIPTION = "Tests large file IO and
-> creation/deletion of small files." +HOMEPAGE = "http://www.coker.com.au/bonnie++/" +LICENSE = "GPL v2"
+My board doesn't wake from suspend when I use .39 from
+org.openembedded.dev. Neither using a timer nor from console input.
+sakoman-pm wakes, so in my case it has better PM for atm. :)
 
-without spaces please
-
-> +LIC_FILES_CHKSUM = "file://copyright.txt;md5=cd4dde95a6b9d122f0a9150ae9cc3ee0" + +SRC_URI = "http://www.coker.com.au/bonnie++/bonnie++-${PV}.tgz \ +           file://gcc-4.3-fixes.patch \ +           " +SRC_URI[md5sum] = "77a1ba78f37bdd7f024b67e1e36ad151" +SRC_URI[sha256sum] =
-> "c674f1182f4c20f1e6d038feceb0a6617fc3e7658dfbbac89396043b49612a26" + +SCRIPTS = "bon_csv2html bon_csv2txt" +EXES = "bonnie++ zcav"
-
-And move those 2 below the inherit line please.
-
-> + +inherit autotools + +do_install () { +        install -d ${D}/bin +        install -d ${D}/sbin +        install -m 0755 ${EXES} ${D}/sbin +        install -m 0755 ${SCRIPTS} ${D}/bin +} + +PACKAGES += "bonnie-scripts" + +FILES_${PN} = "/sbin" +FILES_bonnie-scripts="/bin" + +TARGET_CC_ARCH
-> += "${LDFLAGS}"
-
-and move this one above do_install please. The general idea is to group them by usage and TARGET_CC_ARCH is a configure/compile thing.
-
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFOXM5GMkyGM64RGpERAsl1AKClQMALBYl1u1e67wpOM9+Sp3L1rgCeN/tw
-jieEZYOfqBAgQFkgDaqmfko=
-=mlKS
------END PGP SIGNATURE-----
-
+- Tasslehoff
 
 
