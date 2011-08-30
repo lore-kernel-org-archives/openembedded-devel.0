@@ -1,33 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QyOma-0005co-E1 for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 15:55:16 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QyOhs-0004qI-RB for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Aug 2011 15:50:24 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2011 15:50:24 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1QyOsF-0006AJ-AJ
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Aug 2011 16:01:07 +0200
+Received: by bkbzu17 with SMTP id zu17so4989329bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2011 15:50:24 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 30 Aug 2011 15:50:11 +0200
-Message-ID: <j3ipqj$ib6$1@dough.gmane.org>
+	Tue, 30 Aug 2011 06:56:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=PmjrJlTlWO5iPTAxqxP2ENR584br7rnH81o97SYhaKg=;
+	b=J9LScTXWS3JC90e5wxfaEaC31Zo+KRhwnrj5wdTN74o5ZF3getFMvz8aIcoIXUFysI
+	V+10HHQsK+m+Dn35qfKA4erPvA9/3FuuKksHxkku/zfHql/qOGGmoP+/fRQhfzddsu6u
+	OWQdGmC5X2VSsGeLgtaEAwLj9sCsBy4VMOThM=
+MIME-Version: 1.0
+Received: by 10.204.146.137 with SMTP id h9mr93487bkv.316.1314712574173; Tue,
+	30 Aug 2011 06:56:14 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.156.217 with HTTP; Tue, 30 Aug 2011 06:56:14 -0700 (PDT)
+In-Reply-To: <j3ipqj$ib6$1@dough.gmane.org>
 References: <cover.1314710525.git.otavio@ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:6.0) Gecko/20110812 Thunderbird/6.0
-In-Reply-To: <cover.1314710525.git.otavio@ossystems.com.br>
-X-Enigmail-Version: 1.3
+	<j3ipqj$ib6$1@dough.gmane.org>
+Date: Tue, 30 Aug 2011 10:56:14 -0300
+X-Google-Sender-Auth: WrJEFozPwBP7UECuDRJ5h7uj0l0
+Message-ID: <CAP9ODKpaJAfkqxUwcBq=TO6Ye68s88EY12k_M=qgy08ZP5r6QQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH 0/2] Remove recipes from meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,30 +41,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2011 13:55:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 30 Aug 2011 14:01:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, Aug 30, 2011 at 10:50, Koen Kooi <koen@dominion.thruhere.net> wrote=
+:
+> NAK on the second, there's no binutils 2.20 in OE-core
 
-Op 30-08-11 15:42, Otavio Salvador schreef:
-> The following changes since commit 3ebc55d38c82430d7275d457107dd3490b6c967d:
-> 
-> connman: update to 0.77 (2011-08-26 13:19:40 +0200)
-> 
-> are available in the git repository at: git://github.com/OSSystems/meta-oe master https://github.com/OSSystems/meta-oe/tree/master
-> 
-> Otavio Salvador (2): json-glib: drop specific recipe to use OpenEmbedded-Core binutils: drop specific recipe to use OpenEmbedded-Core
+It has 2.21.1a; what the problem?
 
-NAK on the second, there's no binutils 2.20 in OE-core
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFOXOqTMkyGM64RGpERAqBVAJ9h0kTHO/btIBXVxtO/a6Ans6zJ+wCgiKRe
-wEwQObMGLdgPUa0uCDI19co=
-=ru4X
------END PGP SIGNATURE-----
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
