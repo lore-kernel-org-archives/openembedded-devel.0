@@ -1,20 +1,32 @@
-Received: from stoexhub01.domain01.net ([83.145.59.142]
-	helo=stoexhub02.domain01.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1Qyk2T-0008Uz-UY
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Qyk3l-000094-Bx
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Aug 2011 14:37:06 +0200
-Received: from localhost (193.235.91.228) by stoexhub02.domain01.net
-	(10.12.10.2) with Microsoft SMTP Server id 8.3.137.0; Wed, 31 Aug 2011
-	14:32:11 +0200
-From: Anders Darander <anders@chargestorm.se>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 31 Aug 2011 14:32:22 +0200
-Message-ID: <1314793942-19857-1-git-send-email-anders@chargestorm.se>
-X-Mailer: git-send-email 1.7.5.4
+	Wed, 31 Aug 2011 14:38:25 +0200
+Received: by vwe42 with SMTP id 42so512230vwe.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Aug 2011 05:33:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=oSvQZxebwhq0R84IjbMYbAt6iK960c5vGndkWZVqCsg=;
+	b=MmDlDwXzfLyBbuHEHZK3x+sn9VBDnIEewRF89gSFmTwjXv/k+rlIEOFAAeh3tK1mkV
+	REFnfDBC9sp3FIrkY3ChejqHvdAVQ72p54P2jBwgQziKbRCKO1SyPaYoKCin8oG9VaNd
+	31YNei/zH6oyaw+vLTemwC90UKHYlsDHC3Hik=
 MIME-Version: 1.0
-X-GFI-SMTP-Submission: 1
-Cc: Anders Darander <anders@chargestorm.se>
-Subject: [meta-oe][PATCH v3] connman: fix typo with -test package
+Received: by 10.220.172.7 with SMTP id j7mr78587vcz.246.1314794010476; Wed, 31
+	Aug 2011 05:33:30 -0700 (PDT)
+Received: by 10.220.188.65 with HTTP; Wed, 31 Aug 2011 05:33:30 -0700 (PDT)
+In-Reply-To: <201108311327.01907.paul.eggleton@linux.intel.com>
+References: <1314745564-3331-1-git-send-email-schnitzeltony@gmx.de>
+	<20110831115548.GB3273@chargestorm.se>
+	<j3l8ni$kr3$1@dough.gmane.org>
+	<201108311327.01907.paul.eggleton@linux.intel.com>
+Date: Wed, 31 Aug 2011 14:33:30 +0200
+Message-ID: <CACW_hTZ2KnH_zYD0bqELyFQm70GxguJ2cByOBJF5AC78cyfYtg@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: `PR = "r0"`: Add or not to add?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,46 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2011 12:37:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 31 Aug 2011 12:38:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-The typo prohibited the connman-tests package from being populated.
+2011/8/31 Paul Eggleton <paul.eggleton@linux.intel.com>
 
-Signed-off-by: Anders Darander <anders@chargestorm.se>
----
-V3: Bump PR in .bb instead of .inc
+> On Wednesday 31 August 2011 13:16:50 Koen Kooi wrote:
+> > Op 31-08-11 13:55, Anders Darander schreef:
+> > > To sad. It's a lot easier to remember to bump the PR, when PR actually
+> is
+> > > in the recipe. Thus, including PR=0 will often remove one issue with
+> > > patches.
+> >
+> > That's what review is for, no?
+>
+> Surely you'd rather people have a better chance of getting it right the
+> first
+> time rather than you having to remind them for every patch? The almost
+> insignificant burden of a PR = "r0" in each recipe seems worthwhile to me
+> if it
+> even helps a single person remember.
+>
 
-V2: Bump PR.
+Nah, no good, as it reduces the opportunities for Koen to send nasty
+remarks.
 
- meta-oe/recipes-connectivity/connman/connman.inc   |    2 +-
- .../recipes-connectivity/connman/connman_0.77.bb   |    1 +
- 2 files changed, 2 insertions(+), 1 deletions(-)
-
-diff --git a/meta-oe/recipes-connectivity/connman/connman.inc b/meta-oe/recipes-connectivity/connman/connman.inc
-index eeccf50..8209502 100644
---- a/meta-oe/recipes-connectivity/connman/connman.inc
-+++ b/meta-oe/recipes-connectivity/connman/connman.inc
-@@ -72,7 +72,7 @@ PACKAGES_DYNAMIC = "${PN}-plugin-*"
- PACKAGES =+ "${PN}-scripts ${PN}-tools ${PN}-tests"
- 
- FILES_${PN}-tools = "${bindir}/wispr"
--FILES_${PN{-tests = "${bindir}/*-test"
-+FILES_${PN}-tests = "${bindir}/*-test"
- FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*.so.* \
-             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
-             ${base_bindir}/* ${base_sbindir}/* ${base_libdir}/*.so* ${datadir}/${PN} \
-diff --git a/meta-oe/recipes-connectivity/connman/connman_0.77.bb b/meta-oe/recipes-connectivity/connman/connman_0.77.bb
-index 6c7b5f8..b132f4b 100644
---- a/meta-oe/recipes-connectivity/connman/connman_0.77.bb
-+++ b/meta-oe/recipes-connectivity/connman/connman_0.77.bb
-@@ -1,4 +1,5 @@
- require connman.inc
-+PR = "r1"
- 
- EXTRA_OECONF += "\
-   --disable-gtk-doc \
--- 
-1.7.5.4
-
-
+Frans.
 
