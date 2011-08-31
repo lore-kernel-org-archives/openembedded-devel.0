@@ -1,28 +1,24 @@
-Received: from tritech.se ([91.191.137.61])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Mats.Karrman@tritech.se>) id 1Qyh53-0002r1-QB
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Aug 2011 11:27:34 +0200
-Received: from post.tritech.se (post.tritech.se [10.75.60.100])
-	by tritech.se (8.14.3/8.14.3) with ESMTP id p7V9MXG1007948
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2011 11:22:39 +0200
-Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
-	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
-	14.01.0270.001; Wed, 31 Aug 2011 11:22:34 +0200
-From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] Creating static device nodes with udev
-Thread-Index: AQHMZ7+CV6I14qODjkam1U616XMVRw==
-Date: Wed, 31 Aug 2011 09:22:31 +0000
-Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C400408CF@post.tritech.se>
-Accept-Language: en-US, sv-SE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [194.132.137.34]
-MIME-Version: 1.0
-Subject: Re: Creating static device nodes with udev
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QyhlK-00048Z-FV for openembedded-devel@lists.openembedded.org;
+	Wed, 31 Aug 2011 12:11:14 +0200
+Received: from f053046058.adsl.alicedsl.de ([78.53.46.58]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Qyhgh-0001sv-IM for openembedded-devel@lists.openembedded.org;
+	Wed, 31 Aug 2011 10:06:27 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 31 Aug 2011 12:06:22 +0200
+In-Reply-To: <j3kn1n$tqr$1@dough.gmane.org>
+References: <1314745564-3331-1-git-send-email-schnitzeltony@gmx.de>
+	<j3kn1n$tqr$1@dough.gmane.org>
+X-Mailer: Evolution 3.0.2- 
+Message-ID: <1314785183.3769.22.camel@mattotaupa>
+Mime-Version: 1.0
+Subject: `PR = "r0"`: Add or not to add? (was: thunar-volman: Add initial recipe with version 0.6.0)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,59 +32,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2011 09:27:34 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Wed, 31 Aug 2011 10:11:14 -0000
+X-Groupsio-MsgNum: 33925
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-G4dgfn0vIyk5xjjrenIs"
+
+--=-G4dgfn0vIyk5xjjrenIs
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi again,=0A=
-=0A=
-In case anybody wonders, the reason for my trouble was that prior to udev 1=
-55, the init script starting udev must itself copy the contents of /lib/ude=
-v/devices to /dev after mounting the tmpfs on /dev and the OE init scripts =
-I were using didn't do that. Upgrading to udev 162 solved the problem.=0A=
-=0A=
-// Mats=0A=
-________________________________________=0A=
-From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
--bounces@lists.openembedded.org] on behalf of Mats K=E4rrman [Mats.Karrman@=
-tritech.se]=0A=
-Sent: Tuesday, August 30, 2011 10:57 AM=0A=
-To: openembedded-devel@lists.openembedded.org=0A=
-Subject: [oe] Creating static device nodes with udev=0A=
-=0A=
-Hi,=0A=
-=0A=
-I'm using OE-classic and udev 151 on a PPC target.=0A=
-=0A=
-I have some devices not supporting sysfs, eg ppp, so I need to create stati=
-c device nodes for these.=0A=
-Previously I have used scripts linked via rcS.d that runs mknod after udev =
-has been loaded but this feels sort of sub-optimal.=0A=
-=0A=
-I found the "udev-static-devices" recipe but I can't make it work.=0A=
-What I've done is:=0A=
-- I manually created a directory 'devices' with the device nodes I need usi=
-ng mknod.=0A=
-- I tar'ed this into 'udev_static_devices_tarball'.=0A=
-- I ran bitbake to put them into a package and installed this package on my=
- target using opkg.=0A=
-- I verified that my device nodes now exist in /lib/udev/devices=0A=
-- I rebooted the target.=0A=
-.... Still, my device nodes does not exist in /dev.=0A=
-=0A=
-Any clue on what I have forgotten? Must the "static" feature be enabled in =
-some way?=0A=
-=0A=
-Do anyone have a better approach to creating static device nodes? E.g. usin=
-g makedevs or...=0A=
-=0A=
-Thanks a bunch for your support!=0A=
-// Mats=0A=
-=0A=
-_______________________________________________=0A=
-Openembedded-devel mailing list=0A=
-Openembedded-devel@lists.openembedded.org=0A=
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=0A=
+Am Mittwoch, den 31.08.2011, 09:15 +0200 schrieb Koen Kooi:
+> Op 31-08-11 01:06, Andreas M=C3=BCller schreef:
+> > * build & partially run tested on overo
+> >=20
+> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmx.de> --- .../thuna=
+r-volman/thunar-volman_0.6.0.bb           |   12 ++++++++++++ 1 files chang=
+ed, 12 insertions(+), 0 deletions(-) create mode 100644 meta-xfce/recipes-x=
+fce/thunar-volman/thunar-volman_0.6.0.bb
+> >=20
+> > diff --git a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.b=
+b b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb new file mo=
+de 100644 index 0000000..ad11d84 --- /dev/null +++ b/meta-xfce/recipes-xfce=
+/thunar-volman/thunar-volman_0.6.0.bb @@ -0,0 +1,12 @@ +DESCRIPTION =3D
+> > "Automatic management of removable drives and media for thunar" +SECTIO=
+N =3D "x11" +LICENSE =3D "GPLv2" +LIC_FILES_CHKSUM =3D "file://COPYING;md5=
+=3D94d55d512a9ba36caa9b7df079bae19f" +DEPENDS =3D "exo gtk+ libxfce4ui libx=
+fce4util xfconf libnotify" + +PR =3D "r0"
+
+(Koen, your messages are still not displayed correctly. The line breaks
+are missing. Could you check your setup? Your messages are the only ones
+displaying that problem [1].)
+
+> please remove PR in new recipes
+
+Actually I would favor to leave them in. The manual also advises to do
+this. To change that policy, I would favor a survey/poll so that not
+every developers says something different as s/he sees best fit.
 
 
+Thanks,
+
+Paul
+
+
+[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-August/034=
+698.html
+
+--=-G4dgfn0vIyk5xjjrenIs
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk5eB54ACgkQPX1aK2wOHViVzgCeNZmBC/D3UN9vBeDw78aPL1m0
+iGkAnjdNCgMt+5Mw9jCit+Y/QsHCv9Dy
+=EfRz
+-----END PGP SIGNATURE-----
+
+--=-G4dgfn0vIyk5xjjrenIs--
