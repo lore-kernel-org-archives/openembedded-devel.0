@@ -1,32 +1,41 @@
-Received: from stoexhubfe02.domain01.net ([83.145.59.141])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1Qykls-00029n-9T
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Aug 2011 15:24:00 +0200
-Received: from localhost (193.235.91.228) by stoexhubfe02.domain01.net
-	(10.12.10.7) with Microsoft SMTP Server id 8.3.137.0; Wed, 31 Aug 2011
-	15:18:55 +0200
-Date: Wed, 31 Aug 2011 15:19:08 +0200
-From: Anders Darander <anders@chargestorm.se>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20110831131908.GB19917@chargestorm.se>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Qykx2-0002WT-DR for openembedded-devel@lists.openembedded.org;
+	Wed, 31 Aug 2011 15:35:32 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QyksJ-0008Iz-LO for openembedded-devel@lists.openembedded.org;
+	Wed, 31 Aug 2011 15:30:39 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Aug 2011 15:30:39 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Aug 2011 15:30:39 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 31 Aug 2011 15:30:26 +0200
+Message-ID: <j3ld1i$l0g$1@dough.gmane.org>
 References: <1314745564-3331-1-git-send-email-schnitzeltony@gmx.de>
+	<j3kn1n$tqr$1@dough.gmane.org>
+	<1314785183.3769.22.camel@mattotaupa>
+	<j3l22l$5ti$1@dough.gmane.org>
 	<20110831115548.GB3273@chargestorm.se>
 	<j3l8ni$kr3$1@dough.gmane.org>
-	<201108311327.01907.paul.eggleton@linux.intel.com>
-	<62BBB5B2-363D-49EA-AD5D-B67123C0F908@dominion.thruhere.net>
-	<20110831124339.GA19917@chargestorm.se>
-	<j3lba3$7a9$1@dough.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <j3lba3$7a9$1@dough.gmane.org>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-GFI-SMTP-Submission: 1
+	<CAP9ODKrs1WvLOpHNKsJu0Uf7_8zFQ_GPrPz=+ttdy5tces2gjw@mail.gmail.com>
+	<j3lad2$v75$2@dough.gmane.org>
+	<CAP9ODKrOqJ12xba98J=2PAdk7p+pK=gGO0e01wuy_xTMZjsRcg@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
+In-Reply-To: <CAP9ODKrOqJ12xba98J=2PAdk7p+pK=gGO0e01wuy_xTMZjsRcg@mail.gmail.com>
+X-Enigmail-Version: 1.3.1
 Subject: Re: `PR = "r0"`: Add or not to add?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,39 +50,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2011 13:24:00 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 31 Aug 2011 13:35:32 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-* Koen Kooi <koen@dominion.thruhere.net> [110831 15:01]:
-> Op 31-08-11 14:43, Anders Darander schreef:
-> > Just curious (and it might convince me and others) what issues have PR = 
-> > "r0" caused in .dev?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> The most recent one in .dev was xorg .inc files. Some recipes had PR, some
-> didn't, and some had INC_PR. In this specific case there should have been
-> only one PR (or INC_PR) in the .inc.
+Op 31-08-11 15:02, Otavio Salvador schreef:
+> On Wed, Aug 31, 2011 at 09:45, Koen Kooi <koen@dominion.thruhere.net>
+> wrote:
+>>> Please accept PR = "r0" on new recipes since it makes it more
+>>> consistent and easy to new users.
+>> 
+>> Consistent in what way? If you want to be consistent you need to add
+>> *all* variables to the recipe and set it to their default.
+> 
+> Not really; consistency has nothing to do with verboseness. PR is 
+> something we will need to change ofthen so makes sense to be in recipes.
+> 
+> Besides, this is also on the policy
 
-> And of course the good old "add PR=r0 to the .inc, making older recipes go
-> backwards" thing.
+The OE classic policy maybe, not on the meta-oe policy[1].
 
-> In OE-core/meta-oe the most recent annoyance were the gcc recipes, which now
-> finally have a centrally managed PR.
+> so or you change the policy or you follow it. Otherwise makes no sense to
+> have a policy if the person who merge the patches do not follow it.
 
-> No situation is perfect, but my *personal* experience is that not adding
-> PR=r0 is *less* annoying than adding it.
+- From http://wiki.openembedded.org/index.php/Category:Policy I read:
 
-Thanks for the sum up.
+http://wiki.openembedded.org/index.php/Commit_Patch_Message_Guidelines
+http://wiki.openembedded.org/index.php/Commit_Policy
+http://wiki.openembedded.org/index.php/Commit_log_example
+http://wiki.openembedded.org/index.php/Styleguide
+http://wiki.openembedded.org/index.php/Versioning_Policy
 
-At least I have a lot better understanding of your position now. (And
-I'll have to ponder a little bit, to see if my opion should change or
-not).
+And none of those say PR = r0 is wanted behaviour. OTOH it doesn't say it's
+unwanted either.
 
-Thanks!
-Anders
+regards,
 
--- 
-Anders Darander
-ChargeStorm AB
+Koen
+
+[1] There is no such thing yet, what I'm doing now is following the OE-core
+policies where it makes sense. If someone wants to make a draft policy for
+the meta-oe layers, please do so.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFOXjdyMkyGM64RGpERAoitAJ98GgMcmfgZqg0va9wQ7zMksseSsgCfS76f
+f3oPFRWC3aD+EuB6AO+C1QQ=
+=ahhZ
+-----END PGP SIGNATURE-----
+
 
 
