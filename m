@@ -1,23 +1,24 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
+Received: from mailout-de.gmx.net ([213.165.64.22])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1QyXP5-0003hn-HW
+	(envelope-from <schnitzeltony@gmx.de>) id 1QyeG4-0006QV-MD
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Aug 2011 01:07:35 +0200
-Received: (qmail invoked by alias); 30 Aug 2011 23:02:41 -0000
-Received: from p5B0A1BE9.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.27.233]
-	by mail.gmx.net (mp013) with SMTP; 31 Aug 2011 01:02:41 +0200
+	Wed, 31 Aug 2011 08:26:44 +0200
+Received: (qmail invoked by alias); 31 Aug 2011 06:21:50 -0000
+Received: from p5B0A22AC.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.34.172]
+	by mail.gmx.net (mp060) with SMTP; 31 Aug 2011 08:21:50 +0200
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1+7xq8t5Au77iWIO5f92fwtD8/jvhFIac0vTn7XFX
-	WjOrMiFcUtKNiq
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
+X-Provags-ID: V01U2FsdGVkX19SAAgrdd1S/J6o5k3Kzhs+pUz2KEmGrA2ZtHFq5J
+	MKa5p+bCnPT3l5
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 31 Aug 2011 01:06:04 +0200
-Message-Id: <1314745564-3331-1-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.4.4
+Date: Wed, 31 Aug 2011 08:25:16 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-95.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
 MIME-Version: 1.0
+Message-Id: <201108310825.16407.schnitzeltony@gmx.de>
 X-Y-GMX-Trusted: 0
-Subject: [meta-xfce] thunar-volman: Add initial recipe with version 0.6.0
+Subject: meta-oe: midori build fails with linker error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,38 +32,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2011 23:07:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 31 Aug 2011 06:26:44 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-* build & partially run tested on overo
+Hi,
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
----
- .../thunar-volman/thunar-volman_0.6.0.bb           |   12 ++++++++++++
- 1 files changed, 12 insertions(+), 0 deletions(-)
- create mode 100644 meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb
+last night I tried to build midori and get complaining linker:
 
-diff --git a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb
-new file mode 100644
-index 0000000..ad11d84
---- /dev/null
-+++ b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION = "Automatic management of removable drives and media for thunar"
-+SECTION = "x11"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+DEPENDS = "exo gtk+ libxfce4ui libxfce4util xfconf libnotify"
-+
-+PR = "r0"
-+
-+inherit xfce
-+
-+SRC_URI[md5sum] = "2f166662dd100d5195da238af417f305"
-+SRC_URI[sha256sum] = "b1afd2b3b285cfcf07c11caa3d37fa5ff1fc06f7dc68fcca07f9a0d70daa694f"
--- 
-1.7.4.4
+| [ 72/114] cc_link: _build_/default/extensions/history-list_13.o -> 
+_build_/default/extensions/libhistory-list.so
+| [ 73/114] cc_link: _build_/default/extensions/statusbar-features_14.o -> 
+_build_/default/extensions/libstatusbar-features.so
+| [ 74/114] cc_link: _build_/default/extensions/feed-panel/main_15.o 
+_build_/default/extensions/feed-panel/feed-rss_15.o 
+_build_/default/extensions/feed-panel/feed-atom_15.o 
+_build_/default/extensions/feed-panel/feed-parse_15.o 
+_build_/default/extensions/feed-panel/feed-panel_15.o -> 
+_build_/default/extensions/libfeed-panel.so
+| [ 75/114] cc_link: _build_/default/extensions/colorful-tabs_16.o -> 
+_build_/default/extensions/libcolorful-tabs.so
+| /home/Superandy/tmp/oe-core-eglibc/sysroots/x86_64-linux/usr/libexec/armv7a-
+angstrom-linux-gnueabi/gcc/arm-angstrom-linux-gnueabi/4.5.4/ld: 
+default/midori/libmidori-core.a(sokoke_1.o): undefined reference to symbol 
+'JSContextGetGlobalObject'
+| /home/Superandy/tmp/oe-core-eglibc/sysroots/x86_64-linux/usr/libexec/armv7a-
+angstrom-linux-gnueabi/gcc/arm-angstrom-linux-gnueabi/4.5.4/ld: note: 
+'JSContextGetGlobalObject' is defined in DSO /home/Superandy/tmp/oe-core-
+eglibc/sysroots/overo/usr/lib/libjavascriptcoregtk-1.0.so.0 so try adding it to 
+the linker command line
+| /home/Superandy/tmp/oe-core-
+eglibc/sysroots/overo/usr/lib/libjavascriptcoregtk-1.0.so.0: could not read 
+symbols: Invalid operation
+| collect2: ld returned 1 exit status
+| Waf: Leaving directory `/home/Superandy/tmp/oe-core-eglibc/work/armv7a-
+angstrom-linux-gnueabi/midori-0.3.6-r1/midori-0.3.6/_build_'
+| Build failed:  -> task failed (err #1):
+| 	{task: cc_link main_2.o -> midori}
+| make: *** [all] Error 1
+| + die 'oe_runmake failed'
+| + bbfatal 'oe_runmake failed'
+| + echo 'ERROR: oe_runmake failed'
+| ERROR: oe_runmake failed
+| + exit 1
+| ERROR: Function 'do_compile' failed (see /home/Superandy/tmp/oe-core-
+eglibc/work/armv7a-angstrom-linux-gnueabi/midori-0.3.6-
+r1/temp/log.do_compile.18897 for further information)
+NOTE: package midori-0.3.6-r1: task do_compile: Failed
+ERROR: Task 393 (/home/Superandy/data/oe-core/sources/meta-openembedded/meta-
+oe/recipes-connectivity/midori/midori_0.3.6.bb, do_compile) failed with exit 
+code '1'
 
+Right now I haven't much time to take care - any ideas / volunteers?
+
+Andreas
 
 
