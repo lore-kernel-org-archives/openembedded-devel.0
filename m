@@ -1,35 +1,40 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail2.multitech.net ([65.126.90.254] helo=mail2.multitech.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1QylZh-000475-Mr
+	(envelope-from <jgilles@multitech.com>) id 1QyloN-0004Xj-Ol
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Aug 2011 16:15:31 +0200
-Received: by vwe42 with SMTP id 42so596401vwe.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2011 07:10:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=sfm/VmyDMM/NF1j6DPJEGEyg6QkOVOHBXlb7ky3JY/Q=;
-	b=NP4PTQXCLPk/WFqoc8P3IUDIm7ktmf7EQkMRLEViij0CUyH4rpeFeyo4TjUd/GUckC
-	fFWvMnZqm/ZB7KjCdrNfOoz5qt13QkF6rdhJa8zxMtBeiXmBrGdlptUTl2crECtgOTxZ
-	BBAbXjAq1jyjR7fQMJKd5VquSzAyrA++iLb54=
-MIME-Version: 1.0
-Received: by 10.220.107.5 with SMTP id z5mr68613vco.176.1314799831842; Wed, 31
-	Aug 2011 07:10:31 -0700 (PDT)
-Received: by 10.220.188.65 with HTTP; Wed, 31 Aug 2011 07:10:31 -0700 (PDT)
-In-Reply-To: <j3lba3$7a9$1@dough.gmane.org>
-References: <1314745564-3331-1-git-send-email-schnitzeltony@gmx.de>
-	<20110831115548.GB3273@chargestorm.se>
-	<j3l8ni$kr3$1@dough.gmane.org>
-	<201108311327.01907.paul.eggleton@linux.intel.com>
-	<62BBB5B2-363D-49EA-AD5D-B67123C0F908@dominion.thruhere.net>
-	<20110831124339.GA19917@chargestorm.se>
-	<j3lba3$7a9$1@dough.gmane.org>
-Date: Wed, 31 Aug 2011 16:10:31 +0200
-Message-ID: <CACW_hTZ1TVELWXaD3SnnMixMud-4MD85L1RmhpwBuV3LQR=V1g@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 31 Aug 2011 16:30:39 +0200
+Received: from mail2.multitech.com (localhost.localdomain [127.0.0.1])
+	by localhost (Email Security Appliance) with SMTP id
+	516E35981F6_E5E4468B for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Aug 2011 14:25:44 +0000 (GMT)
+Received: from mail.multitech.com (unknown [192.168.11.244])
+	by mail2.multitech.com (Sophos Email Appliance) with ESMTP id
+	1024D598013_E5E4468F for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Aug 2011 14:25:44 +0000 (GMT)
+X-Ninja-PIM: Scanned by Ninja
+X-Ninja-AttachmentFiltering: (no action)
+Received: from [192.168.52.113] ([192.168.52.113]) by mail.multitech.com with
+	Microsoft SMTPSVC(5.0.2195.7381); Wed, 31 Aug 2011 09:24:51 -0500
+From: Jesse Gilles <jgilles@multitech.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: `PR = "r0"`: Add or not to add?
+In-Reply-To: <4E5DDBBE.4050007@dresearch-fe.de>
+References: <4E4E536D.7010103@dresearch-fe.de>
+	<4E4E738C.70109@dresearch-fe.de> <4E5356B2.3060908@dresearch-fe.de>
+	<4E53583A.3030405@gmx.net> <4E535B83.9080508@dresearch-fe.de>
+	<CAFu+nvEh9tUGzQM1PFo1ErtOq+a+0yg94pZBO6Ohr92GNZoKBg@mail.gmail.com>
+	<1314199372.21496.12.camel@jjg-linux>
+	<4E562AFF.7090004@dresearch-fe.de>
+	<4E56579C.7080207@dresearch-fe.de> <4E5CC094.2020500@dresearch-fe.de>
+	<1314707457.3796.19.camel@mattotaupa>
+	<4E5DDBBE.4050007@dresearch-fe.de>
+Date: Wed, 31 Aug 2011 09:25:41 -0500
+Message-ID: <1314800741.17073.7.camel@jjg-linux>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-OriginalArrivalTime: 31 Aug 2011 14:24:51.0475 (UTC)
+	FILETIME=[BEE6F630:01CC67E9]
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: [2011.03-maintenance] do_compile failed for cacao_0.99.3.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,59 +48,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2011 14:15:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 31 Aug 2011 14:30:40 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-2011/8/31 Koen Kooi <koen@dominion.thruhere.net>
+On Wed, 2011-08-31 at 08:59 +0200, Steffen Sledz wrote:
+> Mea culpa. I should have asked the contributor to resend the patch
+> with a policy conforming comment. Sorry.
+> 
+> Do we still have a chance to change the comment if the patch was
+> already pushed?
+> 
+> Steffen
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 31-08-11 14:43, Anders Darander schreef:
->
+Yes, sorry about this, I wasn't aware that discussing a patch on the
+list and having it in the body of an email would automatically pull it
+into patchwork when I did it.  I didn't really intend for it to get
+committed as-is (comments-wise anyway) since I was more trying to
+discuss the patch rather than submit it with proper comments, etc.
 
-[...]
+Thanks Steffen for taking initiative though :)
 
->
-> Just curious (and it might convince me and others) what issues have PR =
-> "r0" caused in .dev?
+I don't think you can change the comment once it is in the shared OE
+repo (and therefore in repos on other peoples machines).  You could
+revert it and resubmit with a better comment though.  Please correct me
+if I'm wrong on this...
 
-The most recent one in .dev was xorg .inc files. Some recipes had PR, some
-> didn't, and some had INC_PR. In this specific case there should have been
-> only one PR (or INC_PR) in the .inc.
->
-> And of course the good old "add PR=r0 to the .inc, making older recipes go
-> backwards" thing.
->
-> In OE-core/meta-oe the most recent annoyance were the gcc recipes, which
-> now
-> finally have a centrally managed PR.
->
-> No situation is perfect, but my *personal* experience is that not adding
-> PR=r0 is *less* annoying than adding it.
->
-> The big difference between classic OE and the OE-core way is that things
-> are
-> a lot cleaner to start with, so PR=r0 might be safer to use, but I'd like
-> to
-> err on the side of caution.
->
-> If you all feel really strongly about PR=r0 I'd advice you to send patches
-> to add it to recipes that need it in OE-core and after those get accepted
-> send patches for the recipes in meta-oe.
->
->
-inc files are to some extend evil. If an .inc file changes all recipes
-depending on it should be rebuild and retested. In an ideal world this
-happens, in a real world not.
-Also if there is only one version of a recipe .inc does not really bring
-much. It mostly complicates things as one now has two places to look at.
-(apart from the fact that they allow introducing errors like the PR=r0 in
-inc file).
-Of course there are places where inc files have their merits. Excellent
-example is gcc. However on quite some places they are not too useful (if I
-recall the oe-core policy is to   (ideally) have only one or at most two
-versions of a recipe)
+Jesse
 
-Frans
+
 
