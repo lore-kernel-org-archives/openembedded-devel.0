@@ -1,31 +1,28 @@
-Received: from mail-ey0-f173.google.com ([209.85.215.173])
+Received: from tritech.se ([91.191.137.61])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tasskjapp@gmail.com>) id 1QyfdR-0000G1-Pj
+	(envelope-from <Mats.Karrman@tritech.se>) id 1Qyh53-0002r1-QB
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Aug 2011 09:54:57 +0200
-Received: by eyb7 with SMTP id 7so335687eyb.18
+	Wed, 31 Aug 2011 11:27:34 +0200
+Received: from post.tritech.se (post.tritech.se [10.75.60.100])
+	by tritech.se (8.14.3/8.14.3) with ESMTP id p7V9MXG1007948
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2011 00:50:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=EPsjv9fbI9vQmeVq332900zLt46YIiMbiWjYp5HBXxE=;
-	b=VD9vCQyZWJupzIOe2yF0YanmBO34WiAvjJvbk/jbZpgk0mVmPy2ZZw5rtlFtteSE12
-	6zgBlTfSOrwn54Yw3LoN3FlZHOpF43SmsKLZX2UXI5oNFYUhiHZsAC26O1k7xg13slkg
-	etpukhiz+OYIBXkK/4HtXVkWH5yPXfDLGVzi0=
-Received: by 10.213.108.129 with SMTP id f1mr49027ebp.137.1314777003375;
-	Wed, 31 Aug 2011 00:50:03 -0700 (PDT)
-Received: from localhost.localdomain (147.84-49-231.nextgentel.com
-	[84.49.231.147])
-	by mx.google.com with ESMTPS id w9sm4365058eej.19.2011.08.31.00.50.01
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 31 Aug 2011 00:50:02 -0700 (PDT)
-From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 31 Aug 2011 09:49:53 +0200
-Message-Id: <1314776993-9258-1-git-send-email-tasskjapp@gmail.com>
-X-Mailer: git-send-email 1.7.6
-Cc: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-Subject: [PATCH] Removed patch that prevented board from waking after suspend
+	Wed, 31 Aug 2011 11:22:39 +0200
+Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
+	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
+	14.01.0270.001; Wed, 31 Aug 2011 11:22:34 +0200
+From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] Creating static device nodes with udev
+Thread-Index: AQHMZ7+CV6I14qODjkam1U616XMVRw==
+Date: Wed, 31 Aug 2011 09:22:31 +0000
+Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C400408CF@post.tritech.se>
+Accept-Language: en-US, sv-SE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [194.132.137.34]
+MIME-Version: 1.0
+Subject: Re: Creating static device nodes with udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,28 +36,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2011 07:54:57 -0000
+X-List-Received-Date: Wed, 31 Aug 2011 09:27:34 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-
-Signed-off-by: Tasslehoff Kjappfot <tasskjapp@gmail.com>
----
- recipes/linux/linux-omap_2.6.39.bb |    1 -
- 1 files changed, 0 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/linux/linux-omap_2.6.39.bb b/recipes/linux/linux-omap_2.6.39.bb
-index 8370e58..3880aa1 100644
---- a/recipes/linux/linux-omap_2.6.39.bb
-+++ b/recipes/linux/linux-omap_2.6.39.bb
-@@ -27,7 +27,6 @@ SRC_URI_append = " \
-            file://sakoman/0010-Revert-omap2_mcspi-Flush-posted-writes.patch \
-            file://sakoman/0011-Revert-omap_hsmmc-improve-interrupt-synchronisation.patch \
-            file://sakoman/0012-Don-t-turn-SDIO-cards-off-to-save-power.-Doing-so-wi.patch \
--           file://sakoman/0013-Enable-the-use-of-SDIO-card-interrupts.patch \
-            file://sakoman/0014-soc-codecs-Enable-audio-capture-by-default-for-twl40.patch \
-            file://sakoman/0015-soc-codecs-twl4030-Turn-on-mic-bias-by-default.patch \
-            file://sakoman/0016-RTC-add-support-for-backup-battery-recharge.patch \
--- 
-1.7.6
-
+Hi again,=0A=
+=0A=
+In case anybody wonders, the reason for my trouble was that prior to udev 1=
+55, the init script starting udev must itself copy the contents of /lib/ude=
+v/devices to /dev after mounting the tmpfs on /dev and the OE init scripts =
+I were using didn't do that. Upgrading to udev 162 solved the problem.=0A=
+=0A=
+// Mats=0A=
+________________________________________=0A=
+From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
+-bounces@lists.openembedded.org] on behalf of Mats K=E4rrman [Mats.Karrman@=
+tritech.se]=0A=
+Sent: Tuesday, August 30, 2011 10:57 AM=0A=
+To: openembedded-devel@lists.openembedded.org=0A=
+Subject: [oe] Creating static device nodes with udev=0A=
+=0A=
+Hi,=0A=
+=0A=
+I'm using OE-classic and udev 151 on a PPC target.=0A=
+=0A=
+I have some devices not supporting sysfs, eg ppp, so I need to create stati=
+c device nodes for these.=0A=
+Previously I have used scripts linked via rcS.d that runs mknod after udev =
+has been loaded but this feels sort of sub-optimal.=0A=
+=0A=
+I found the "udev-static-devices" recipe but I can't make it work.=0A=
+What I've done is:=0A=
+- I manually created a directory 'devices' with the device nodes I need usi=
+ng mknod.=0A=
+- I tar'ed this into 'udev_static_devices_tarball'.=0A=
+- I ran bitbake to put them into a package and installed this package on my=
+ target using opkg.=0A=
+- I verified that my device nodes now exist in /lib/udev/devices=0A=
+- I rebooted the target.=0A=
+.... Still, my device nodes does not exist in /dev.=0A=
+=0A=
+Any clue on what I have forgotten? Must the "static" feature be enabled in =
+some way?=0A=
+=0A=
+Do anyone have a better approach to creating static device nodes? E.g. usin=
+g makedevs or...=0A=
+=0A=
+Thanks a bunch for your support!=0A=
+// Mats=0A=
+=0A=
+_______________________________________________=0A=
+Openembedded-devel mailing list=0A=
+Openembedded-devel@lists.openembedded.org=0A=
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=0A=
 
 
