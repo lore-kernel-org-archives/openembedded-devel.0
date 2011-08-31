@@ -1,32 +1,36 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <thebohemian@gmx.net>) id 1QyepC-0007Vg-5p
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <sledz@dresearch-fe.de>) id 1QyeqF-0007b8-50
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Aug 2011 09:03:02 +0200
-Received: (qmail invoked by alias); 31 Aug 2011 06:51:28 -0000
-Received: from 11.118.101.84.rev.sfr.net (EHLO [192.168.42.71]) [84.101.118.11]
-	by mail.gmx.net (mp056) with SMTP; 31 Aug 2011 08:51:28 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+bUd1fj36bZf5J5SXV9kPPz7bSrjSUhmOK6C15gD
-	cROezagOm/ZR4H
-Message-ID: <4E5DD9EF.1070301@gmx.net>
-Date: Wed, 31 Aug 2011 08:51:27 +0200
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.20) Gecko/20110805 Thunderbird/3.1.12
+	Wed, 31 Aug 2011 09:04:07 +0200
+Received: by bkbzu17 with SMTP id zu17so487799bkb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Aug 2011 23:59:13 -0700 (PDT)
+Received: by 10.204.133.11 with SMTP id d11mr28371bkt.291.1314773952940;
+	Tue, 30 Aug 2011 23:59:12 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id a15sm234755bkg.17.2011.08.30.23.59.10
+	(version=SSLv3 cipher=OTHER); Tue, 30 Aug 2011 23:59:11 -0700 (PDT)
+Message-ID: <4E5DDBBE.4050007@dresearch-fe.de>
+Date: Wed, 31 Aug 2011 08:59:10 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:6.0) Gecko/20110812 Thunderbird/6.0
 MIME-Version: 1.0
-To: Steffen Sledz <sledz@dresearch-fe.de>
+To: openembedded-devel@lists.openembedded.org
 References: <4E4E536D.7010103@dresearch-fe.de> <4E4E738C.70109@dresearch-fe.de>
 	<4E5356B2.3060908@dresearch-fe.de> <4E53583A.3030405@gmx.net>
 	<4E535B83.9080508@dresearch-fe.de>
 	<CAFu+nvEh9tUGzQM1PFo1ErtOq+a+0yg94pZBO6Ohr92GNZoKBg@mail.gmail.com>
 	<1314199372.21496.12.camel@jjg-linux>
 	<4E562AFF.7090004@dresearch-fe.de>
-In-Reply-To: <4E562AFF.7090004@dresearch-fe.de>
-X-Enigmail-Version: 1.1.2
-X-Y-GMX-Trusted: 0
-Cc: openembedded-devel@lists.openembedded.org,
-	Henning Heinold <h.heinold@tarent.de>
+	<4E56579C.7080207@dresearch-fe.de>
+	<4E5CC094.2020500@dresearch-fe.de>
+	<1314707457.3796.19.camel@mattotaupa>
+In-Reply-To: <1314707457.3796.19.camel@mattotaupa>
+X-Enigmail-Version: 1.3.1
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
 Subject: Re: [2011.03-maintenance] do_compile failed for cacao_0.99.3.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,47 +45,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2011 07:03:02 -0000
-X-Groupsio-MsgNum: 33919
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig0A67BAA2757BEE85835C11AC"
-
---------------enig0A67BAA2757BEE85835C11AC
+X-List-Received-Date: Wed, 31 Aug 2011 07:04:07 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hi Steffen and the others,
-sorry. I've little time lately.
+On 30.08.2011 14:30, Paul Menzel wrote:
+> Am Dienstag, den 30.08.2011, 12:51 +0200 schrieb Steffen Sledz:
+>> On 25.08.2011 16:09, Steffen Sledz wrote:
+>>> On 25.08.2011 12:59, Steffen Sledz wrote:
+>>>> On 24.08.2011 17:22, Jesse Gilles wrote:
+>>>>> On Tue, 2011-08-23 at 13:16 -0400, George C. Huntington, III wrote:
+>>>>>> I suspect that the problem is happening earlier, classpath isn't building.
+>>>>>>  the javac wrapper eats the return code from a java compile.
+>>>>>
+>>>>> If George is right, then the following patch to the javac wrapper script
+>>>>> may fix the issue.  It fixes building classpath as well as returns the
+>>>>> error code if all javac attempts fail.
+>>>>>
+>>>>> http://patches.openembedded.org/patch/9521/
+>>>>
+>>>> In our case this patch helps.
+>>>>
+>>>> If nobody has objections i will commit this patch to oe-dev master and request a pull to 2011.03-maintenance.
+>>>
+>>> It would be still better if we can get some Acks from a java maintainer.
+>>
+>> No NACKs after another week. So i pushed the patch do oe-dev master.
+> 
+> Next time it would be better to resend the patch with a appropriate
+> subject line.
+> 
+> Unfortunately the commit message [1] does not conform to our commit
+> policy [2].
+> 
+> Please make sure to check those things next time. I feel uncomfortable
+> to ask new contributors to comply every time but when they look at the
+> commit history they see that the policies are often not cared about.
 
-Am 25.08.2011 12:59, schrieb Steffen Sledz:
->> http://patches.openembedded.org/patch/9521/
->=20
-> In our case this patch helps.
->=20
-> If nobody has objections i will commit this patch to oe-dev master and =
-request a pull to 2011.03-maintenance.
->=20
-> OK?
-I looked at the patch and think it is good. Please go ahead applying
-where you see fit!
+Mea culpa. I should have asked the contributor to resend the patch with a policy conforming comment. Sorry.
 
-Regards,
-Robert
+Do we still have a chance to change the comment if the patch was already pushed?
+
+Steffen
+
+> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=16a8a1e9175035b55d91a141d5302c38d63c16f1
+> [2] http://openembedded.org/index.php/Category:Policy
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
---------------enig0A67BAA2757BEE85835C11AC
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iEYEARECAAYFAk5d2e8ACgkQG9cfwmwwEtpweACfYWDJH4Ypwi8bOUSBgVN8G4MV
-fGsAn0ny0eNByauBwvSG7X5zu5tfBNrI
-=PqNe
------END PGP SIGNATURE-----
-
---------------enig0A67BAA2757BEE85835C11AC--
