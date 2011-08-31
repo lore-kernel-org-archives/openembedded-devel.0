@@ -1,24 +1,27 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from smtp.cardinalpeak.com ([208.43.163.138])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1QytSW-0003nD-RG
+	(envelope-from <dbeal@cardinalpeak.com>) id 1QytZZ-00041l-4L
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Sep 2011 00:40:37 +0200
-Received: (qmail 17985 invoked by uid 1003); 31 Aug 2011 22:35:28 -0000
-Received: from unknown (HELO ?192.168.1.148?) (philip@opensdr.com@157.22.28.13)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	31 Aug 2011 22:35:28 -0000
-Message-ID: <4E5EB734.7070802@balister.org>
-Date: Wed, 31 Aug 2011 15:35:32 -0700
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.20) Gecko/20110817 Fedora/3.1.12-1.fc14 Thunderbird/3.1.12
-MIME-Version: 1.0
+	Thu, 01 Sep 2011 00:47:54 +0200
+X-Footer: Y2FyZGluYWxwZWFrLmNvbQ==
+Received: from [192.168.0.128] ([75.145.125.125])
+	(authenticated user dbeal@cardinalpeak.com) by smtp.cardinalpeak.com
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 31 Aug 2011 16:42:54 -0600
+From: Dave Beal <dbeal@cardinalpeak.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1314745564-3331-1-git-send-email-schnitzeltony@gmx.de>	<j3kn1n$tqr$1@dough.gmane.org>	<1314785183.3769.22.camel@mattotaupa>	<j3l22l$5ti$1@dough.gmane.org>	<20110831115548.GB3273@chargestorm.se>	<j3l8ni$kr3$1@dough.gmane.org>	<CAP9ODKrs1WvLOpHNKsJu0Uf7_8zFQ_GPrPz=+ttdy5tces2gjw@mail.gmail.com>	<j3lad2$v75$2@dough.gmane.org>	<CAP9ODKrOqJ12xba98J=2PAdk7p+pK=gGO0e01wuy_xTMZjsRcg@mail.gmail.com>	<j3ld1i$l0g$1@dough.gmane.org>
-	<CAP9ODKpupMXbfao42zScW4aJB2X0FHwEzBBDyMH_mdCyqYAJaw@mail.gmail.com>
-In-Reply-To: <CAP9ODKpupMXbfao42zScW4aJB2X0FHwEzBBDyMH_mdCyqYAJaw@mail.gmail.com>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: `PR = "r0"`: Add or not to add?
+In-Reply-To: <1314829829.2284.12.camel@scimitar>
+References: <1314811518.1457.10.camel@DaveBeal-Ubuntu-laptop>
+	<1314819305.2284.2.camel@scimitar>
+	<1314825521.1457.12.camel@DaveBeal-Ubuntu-laptop>
+	<1314829829.2284.12.camel@scimitar>
+Organization: Cardinal Peak, LLC
+Date: Wed, 31 Aug 2011 16:39:04 -0600
+Message-ID: <1314830344.1457.22.camel@DaveBeal-Ubuntu-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: How to prevent fetching?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,44 +35,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2011 22:40:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 31 Aug 2011 22:47:54 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On 08/31/2011 06:43 AM, Otavio Salvador wrote:
-> On Wed, Aug 31, 2011 at 10:30, Koen Kooi<koen@dominion.thruhere.net>  wrote:
->>> Besides, this is also on the policy
->>
->> The OE classic policy maybe, not on the meta-oe policy[1].
->
-> ETOOMANYPOLICIES
->
->>> so or you change the policy or you follow it. Otherwise makes no sense to
->>> have a policy if the person who merge the patches do not follow it.
->>
->> - From http://wiki.openembedded.org/index.php/Category:Policy I read:
->>
->> http://wiki.openembedded.org/index.php/Commit_Patch_Message_Guidelines
->> http://wiki.openembedded.org/index.php/Commit_Policy
->> http://wiki.openembedded.org/index.php/Commit_log_example
->> http://wiki.openembedded.org/index.php/Styleguide
->> http://wiki.openembedded.org/index.php/Versioning_Policy
->>
->> And none of those say PR = r0 is wanted behaviour. OTOH it doesn't say it's
->> unwanted either.
->
-> So until it is explicit we might keep PR = r0 as it seems most people
-> prefer this way.
+Thanks again, Joshua.  I found my base.bbclass (in
+sources/openembedded/classes), and sadly, my base_do_fetch() uses
+bb.fetch, not bb.fetch2.
 
-As long as we are all chiming in, I would like to see all of us decide 
-once and for all what to do.
+- Dave
 
-I also prefer the explicitly setting PR = "r0". Can we work out the 
-troublesome cases and see if we can get them fixed? Also, what is the 
-oe-core view on this?
 
-Let's work out what the technical answer is and go from there.
+-----Original Message-----
+From: Joshua Lock <josh@linux.intel.com>
+Reply-to: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] How to prevent fetching?
+Date: Wed, 31 Aug 2011 15:30:24 -0700
 
-Philip
+
+On Wed, 2011-08-31 at 15:18 -0600, Dave Beal wrote:
+> Thank you, Joshua.  I don't know what you mean by "if your metadata uses
+> fetch2".  Is fetch2 some python function?  How would I know if I'm using
+> it?
+
+Fetch2 is a Python module that's part of BitBake. It's used from the
+base_do_fetch() method of base.bbclass.
+
+You can see that OE.dev isn't using  fetch2[1] but OE-Core is[2].
+
+Joshua
+
+1.
+http://git.openembedded.org/cgit.cgi/openembedded/tree/classes/base.bbclass#n99
+2.
+http://git.openembedded.org/cgit.cgi/openembedded-core/tree/meta/classes/base.bbclass#n80
+
+
+Dave Beal 
+Cardinal Peak
+(303) 665-3962 x124 | Email | vCard
+| Web | Company Blog | LinkedIn 
+
+ 
+
+ 
+
 
 
