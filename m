@@ -1,24 +1,23 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QyhlK-00048Z-FV for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Aug 2011 12:11:14 +0200
+	id 1QyhrH-0004NQ-T8 for openembedded-devel@lists.openembedded.org;
+	Wed, 31 Aug 2011 12:17:23 +0200
 Received: from f053046058.adsl.alicedsl.de ([78.53.46.58]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Qyhgh-0001sv-IM for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Aug 2011 10:06:27 +0000
+	id 1Qyhmd-0001vo-Ox; Wed, 31 Aug 2011 10:12:36 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 31 Aug 2011 12:06:22 +0200
-In-Reply-To: <j3kn1n$tqr$1@dough.gmane.org>
-References: <1314745564-3331-1-git-send-email-schnitzeltony@gmx.de>
-	<j3kn1n$tqr$1@dough.gmane.org>
+Date: Wed, 31 Aug 2011 12:12:30 +0200
+In-Reply-To: <1314776993-9258-1-git-send-email-tasskjapp@gmail.com>
+References: <1314776993-9258-1-git-send-email-tasskjapp@gmail.com>
 X-Mailer: Evolution 3.0.2- 
-Message-ID: <1314785183.3769.22.camel@mattotaupa>
+Message-ID: <1314785551.3769.28.camel@mattotaupa>
 Mime-Version: 1.0
-Subject: `PR = "r0"`: Add or not to add? (was: thunar-volman: Add initial recipe with version 0.6.0)
+Cc: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+Subject: Re: [PATCH] Removed patch that prevented board from waking after suspend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,43 +31,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2011 10:11:14 -0000
-X-Groupsio-MsgNum: 33925
+X-List-Received-Date: Wed, 31 Aug 2011 10:17:24 -0000
+X-Groupsio-MsgNum: 33926
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature"; 
-	boundary="=-G4dgfn0vIyk5xjjrenIs"
+	boundary="=-sQX8US+z6qVJttD/cZ8p"
 
---=-G4dgfn0vIyk5xjjrenIs
+--=-sQX8US+z6qVJttD/cZ8p
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Am Mittwoch, den 31.08.2011, 09:15 +0200 schrieb Koen Kooi:
-> Op 31-08-11 01:06, Andreas M=C3=BCller schreef:
-> > * build & partially run tested on overo
-> >=20
-> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmx.de> --- .../thuna=
-r-volman/thunar-volman_0.6.0.bb           |   12 ++++++++++++ 1 files chang=
-ed, 12 insertions(+), 0 deletions(-) create mode 100644 meta-xfce/recipes-x=
-fce/thunar-volman/thunar-volman_0.6.0.bb
-> >=20
-> > diff --git a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.b=
-b b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb new file mo=
-de 100644 index 0000000..ad11d84 --- /dev/null +++ b/meta-xfce/recipes-xfce=
-/thunar-volman/thunar-volman_0.6.0.bb @@ -0,0 +1,12 @@ +DESCRIPTION =3D
-> > "Automatic management of removable drives and media for thunar" +SECTIO=
-N =3D "x11" +LICENSE =3D "GPLv2" +LIC_FILES_CHKSUM =3D "file://COPYING;md5=
-=3D94d55d512a9ba36caa9b7df079bae19f" +DEPENDS =3D "exo gtk+ libxfce4ui libx=
-fce4util xfconf libnotify" + +PR =3D "r0"
+Dear Tasslehoff,
 
-(Koen, your messages are still not displayed correctly. The line breaks
-are missing. Could you check your setup? Your messages are the only ones
-displaying that problem [1].)
 
-> please remove PR in new recipes
+(I am CCing you so you can keep the threading if you still get the daily
+digest.)
 
-Actually I would favor to leave them in. The manual also advises to do
-this. To change that policy, I would favor a survey/poll so that not
-every developers says something different as s/he sees best fit.
+Thank you for your patch.
+
+Am Mittwoch, den 31.08.2011, 09:49 +0200 schrieb Tasslehoff Kjappfot:
+
+Please read our policies [1]. The commit summary should be
+
+        linux-omap_2.6.39: Remove patch that prevented board from waking up=
+ after suspend
+
+(=C2=BBresume=C2=AB would be even a better word.)
+
+Additionally could you please add more information about the issue. Did
+you get any error message. Do you know the cause, why the patch prevents
+to resume correctly?
+
+Please resend the patch as described in our Wiki [2].
+
+> Signed-off-by: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+> ---
+>  recipes/linux/linux-omap_2.6.39.bb |    1 -
+>  1 files changed, 0 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/recipes/linux/linux-omap_2.6.39.bb b/recipes/linux/linux-oma=
+p_2.6.39.bb
+> index 8370e58..3880aa1 100644
+> --- a/recipes/linux/linux-omap_2.6.39.bb
+> +++ b/recipes/linux/linux-omap_2.6.39.bb
+> @@ -27,7 +27,6 @@ SRC_URI_append =3D " \
+>             file://sakoman/0010-Revert-omap2_mcspi-Flush-posted-writes.pa=
+tch \
+>             file://sakoman/0011-Revert-omap_hsmmc-improve-interrupt-synch=
+ronisation.patch \
+>             file://sakoman/0012-Don-t-turn-SDIO-cards-off-to-save-power.-=
+Doing-so-wi.patch \
+> -           file://sakoman/0013-Enable-the-use-of-SDIO-card-interrupts.pa=
+tch \
+>             file://sakoman/0014-soc-codecs-Enable-audio-capture-by-defaul=
+t-for-twl40.patch \
+>             file://sakoman/0015-soc-codecs-twl4030-Turn-on-mic-bias-by-de=
+fault.patch \
+>             file://sakoman/0016-RTC-add-support-for-backup-battery-rechar=
+ge.patch \
 
 
 Thanks,
@@ -76,10 +96,10 @@ Thanks,
 Paul
 
 
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-August/034=
-698.html
+[1] http://openembedded.org/index.php/Category:Policy
+[2] http://openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmbedded
 
---=-G4dgfn0vIyk5xjjrenIs
+--=-sQX8US+z6qVJttD/cZ8p
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
@@ -87,9 +107,9 @@ Content-Transfer-Encoding: 7bit
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk5eB54ACgkQPX1aK2wOHViVzgCeNZmBC/D3UN9vBeDw78aPL1m0
-iGkAnjdNCgMt+5Mw9jCit+Y/QsHCv9Dy
-=EfRz
+iEYEABECAAYFAk5eCQ4ACgkQPX1aK2wOHViEuACfQdDeDPXFzLZHR0G9sct/yWSy
+WeQAnAnajtyzeASuSRqAFOONiKMeCOYO
+=NPWf
 -----END PGP SIGNATURE-----
 
---=-G4dgfn0vIyk5xjjrenIs--
+--=-sQX8US+z6qVJttD/cZ8p--
