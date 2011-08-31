@@ -1,34 +1,25 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smarthost.techfak.uni-bielefeld.de ([129.70.137.17])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Qyf5v-0007yr-Fq for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Aug 2011 09:20:19 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Qyf16-0000zo-Gc for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Aug 2011 09:15:20 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2011 09:15:20 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2011 09:15:20 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 31 Aug 2011 09:15:03 +0200
-Message-ID: <j3kn1n$tqr$1@dough.gmane.org>
-References: <1314745564-3331-1-git-send-email-schnitzeltony@gmx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	(envelope-from <sherbrec@cit-ec.uni-bielefeld.de>)
+	id 1QyfWU-0008Vc-Nt for openembedded-devel@lists.openembedded.org;
+	Wed, 31 Aug 2011 09:47:46 +0200
+Received: from [129.70.144.11] (hooge.TechFak.Uni-Bielefeld.DE [129.70.144.11])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: sherbrec)
+	by smarthost.TechFak.Uni-Bielefeld.DE (Postfix) with ESMTPSA id F3A57BB;
+	Wed, 31 Aug 2011 09:42:51 +0200 (CEST)
+Message-ID: <4E5DE5C1.4000706@cit-ec.uni-bielefeld.de>
+Date: Wed, 31 Aug 2011 09:41:53 +0200
+From: Stefan Herbrechtsmeier <sherbrec@cit-ec.uni-bielefeld.de>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
 	rv:6.0) Gecko/20110812 Thunderbird/6.0
-In-Reply-To: <1314745564-3331-1-git-send-email-schnitzeltony@gmx.de>
-X-Enigmail-Version: 1.3.1
-Subject: Re: [meta-xfce] thunar-volman: Add initial recipe with version 0.6.0
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <1314714550-29390-1-git-send-email-sherbrec@cit-ec.uni-bielefeld.de>
+	<1314736499.3942.2.camel@mattotaupa>
+In-Reply-To: <1314736499.3942.2.camel@mattotaupa>
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: [PATCH] gcc: Remove package libstdc++-dev and libgcc-dev from gcc-cross
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,29 +33,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2011 07:20:19 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 31 Aug 2011 07:47:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Op 31-08-11 01:06, Andreas Müller schreef:
-> * build & partially run tested on overo
-> 
-> Signed-off-by: Andreas Müller <schnitzeltony@gmx.de> --- .../thunar-volman/thunar-volman_0.6.0.bb           |   12 ++++++++++++ 1 files changed, 12 insertions(+), 0 deletions(-) create mode 100644 meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb
-> 
-> diff --git a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb new file mode 100644 index 0000000..ad11d84 --- /dev/null +++ b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb @@ -0,0 +1,12 @@ +DESCRIPTION =
-> "Automatic management of removable drives and media for thunar" +SECTION = "x11" +LICENSE = "GPLv2" +LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f" +DEPENDS = "exo gtk+ libxfce4ui libxfce4util xfconf libnotify" + +PR = "r0"
-
-please remove PR in new recipes
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFOXd93MkyGM64RGpERAkUGAJ46wom0rFseqaFM70VY/N+2k2oN/ACfUX8U
-Y5VegGQ0zBN2aQCwuik9LeQ=
-=70Pp
------END PGP SIGNATURE-----
+Am 30.08.2011 22:34, schrieb Paul Menzel:
+> Am Dienstag, den 30.08.2011, 16:29 +0200 schrieb Stefan Herbrechtsmeier:
+>> Remove package libstdc++-dev and libgcc-dev from gcc-cross as they
+>> already provided by gcc.
+>>
+>> Commit 8c42351519ece9ed60659a103e624d2e154b3641 add dev packages
+>> (libstdc++-dev libgcc-dev) to gcc-cross (gcc-package-cross.inc)
+>> which are already part of gcc. The libgcc-dev package both include
+>> the libgcc_s.so file which triggers a 'file is already provided by
+>> package' error on incremental builds. The libstdc++-dev package have
+>> different content and is empty on some archs (armv5te, armv7e).
+>> The empty package triggers a 'Cannot satisfy the following
+>> dependencies for task-sdk-bare' error. If an empty libstdc++-dev
+>> package is generated it triggers a '..../usr/include/c++ not exist'
+>> error as this is part of the package from gcc but not gcc-cross.
+>>
+>> Signed-off-by: Stefan Herbrechtsmeier<sherbrec@cit-ec.uni-bielefeld.de>
+>> ---
+>>   recipes/gcc/gcc-4.3.3.inc         |    2 +-
+>>   recipes/gcc/gcc-4.5.inc           |    2 +-
+>>   recipes/gcc/gcc-package-cross.inc |    4 +---
+>>   3 files changed, 3 insertions(+), 5 deletions(-)
+> So does that patch revert commit 8c423515?
+Not complete, it leaves the gcc change in gcc-package-target.inc 
+untouched and
+although keeps the move of the gdb python helpers in gcc-package-cross.inc
+but don't ship them in any package. This keeps the intention of the commit
+and only fix the fault of adding dev packages to gcc-cross.
 
 
 
