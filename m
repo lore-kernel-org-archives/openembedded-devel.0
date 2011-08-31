@@ -1,36 +1,35 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QypE7-0002RP-EI for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Aug 2011 20:09:28 +0200
+	id 1QypJU-0002g6-JU for openembedded-devel@lists.openembedded.org;
+	Wed, 31 Aug 2011 20:15:00 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Qyp9O-00012M-Fq for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Aug 2011 20:04:34 +0200
+	id 1QypEk-0003nd-Ve for openembedded-devel@lists.openembedded.org;
+	Wed, 31 Aug 2011 20:10:06 +0200
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2011 20:04:34 +0200
+	Wed, 31 Aug 2011 20:10:06 +0200
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2011 20:04:34 +0200
+	Wed, 31 Aug 2011 20:10:06 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 31 Aug 2011 20:04:21 +0200
-Message-ID: <j3lt35$gb3$1@dough.gmane.org>
-References: <cover.1314710525.git.otavio@ossystems.com.br>
-	<04a735b690f58a4b9f0eaf0b1e243f0b806a4500.1314710525.git.otavio@ossystems.com.br>
-	<CAP9ODKpc5dXL5kcOGHjEFRmgrcWq81n0wgpofxG_No8HwC8FuA@mail.gmail.com>
+Date: Wed, 31 Aug 2011 20:05:18 +0200
+Message-ID: <j3lt4u$gb3$2@dough.gmane.org>
+References: <1314807853-3174-1-git-send-email-schnitzeltony@gmx.de>
+	<1314807853-3174-2-git-send-email-schnitzeltony@gmx.de>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
 	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
-In-Reply-To: <CAP9ODKpc5dXL5kcOGHjEFRmgrcWq81n0wgpofxG_No8HwC8FuA@mail.gmail.com>
+In-Reply-To: <1314807853-3174-2-git-send-email-schnitzeltony@gmx.de>
 X-Enigmail-Version: 1.3.1
-Subject: Re: [meta-oe][PATCH 1/2] json-glib: drop specific recipe to use OpenEmbedded-Core
+Subject: Re: [meta-xfce][PATCH v2 1/1] thunar-volman: Add initial recipe with version 0.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,56 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2011 18:09:28 -0000
+X-List-Received-Date: Wed, 31 Aug 2011 18:15:00 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Op 31-08-11 18:40, Otavio Salvador schreef:
-> Ping?
+Op 31-08-11 18:24, Andreas Müller schreef:
+> * build & partially run tested on overo
 
-applied, thanks
+applied, thanks!
 
 > 
-> On Tue, Aug 30, 2011 at 10:42, Otavio Salvador <otavio@ossystems.com.br>
-> wrote:
->> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br> --- 
->> .../recipes-devtools/json-glib/json-glib_0.10.4.bb |   14
->> -------------- 1 files changed, 0 insertions(+), 14 deletions(-) delete
->> mode 100644 meta-oe/recipes-devtools/json-glib/json-glib_0.10.4.bb
->> 
->> diff --git a/meta-oe/recipes-devtools/json-glib/json-glib_0.10.4.bb
->> b/meta-oe/recipes-devtools/json-glib/json-glib_0.10.4.bb deleted file
->> mode 100644 index 87c60cb..0000000 ---
->> a/meta-oe/recipes-devtools/json-glib/json-glib_0.10.4.bb +++ /dev/null 
->> @@ -1,14 +0,0 @@ -DESCRIPTION = "JSON-GLib is a library providing
->> serialization and deserialization support for the JavaScript Object
->> Notation (JSON) format" -LICENSE = "LGPLv2.1" -LIC_FILES_CHKSUM =
->> "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34" -DEPENDS =
->> "glib-2.0" - -PR = "r1" - -EXTRA_OECONF = "--enable-introspection=no" 
->> - -inherit autotools -SRC_URI =
->> "http://ftp.gnome.org/pub/GNOME/sources/json-glib/0.10/json-glib-0.10.4.tar.gz"
->>
->> 
-- -
->> -SRC_URI[md5sum] = "87677e939a4b3d42e1c56b2a3046b9bb" 
->> -SRC_URI[sha256sum] =
->> "9561b3c58b350c89333d154f1e8669b8ece611c9c724252aed0e6273cda9cc6f" -- 
->> 1.7.2.5
->> 
->> 
+> Signed-off-by: Andreas Müller <schnitzeltony@gmx.de> --- 
+> .../thunar-volman/thunar-volman_0.6.0.bb           |   10 ++++++++++ 1
+> files changed, 10 insertions(+), 0 deletions(-) create mode 100644
+> meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb
 > 
-> 
-> 
+> diff --git a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb
+> b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb new file
+> mode 100644 index 0000000..377561c --- /dev/null +++
+> b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb @@ -0,0
+> +1,10 @@ +DESCRIPTION = "Automatic management of removable drives and
+> media for thunar" +SECTION = "x11" +LICENSE = "GPLv2" +LIC_FILES_CHKSUM =
+> "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f" +DEPENDS = "exo
+> gtk+ libxfce4ui libxfce4util xfconf libnotify" + +inherit xfce + 
+> +SRC_URI[md5sum] = "2f166662dd100d5195da238af417f305" +SRC_URI[sha256sum]
+> = "b1afd2b3b285cfcf07c11caa3d37fa5ff1fc06f7dc68fcca07f9a0d70daa694f"
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFOXnelMkyGM64RGpERAiXEAKCBEppl6F68OHMqWvfQf2Wm70NFFQCfbXmD
-ladXLSZar8tJcVbv5n0BkD4=
-=0H/+
+iD8DBQFOXnfeMkyGM64RGpERAl94AJ4raJIgDgg6TCbxZaHVsoD6eKPEvACglMGy
+7LUxQX5t2Z875mYPCwbywAE=
+=Ejcr
 -----END PGP SIGNATURE-----
 
 
