@@ -1,23 +1,31 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <josh@linux.intel.com>) id 1Qyqem-0005aR-8s
+	(envelope-from <gvaxon@gmail.com>) id 1Qyrq0-00019u-G2
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Aug 2011 21:41:04 +0200
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 31 Aug 2011 12:35:05 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="44113066"
-Received: from unknown (HELO [10.255.14.75]) ([10.255.14.75])
-	by orsmga001.jf.intel.com with ESMTP; 31 Aug 2011 12:35:05 -0700
-From: Joshua Lock <josh@linux.intel.com>
+	Wed, 31 Aug 2011 22:56:44 +0200
+Received: by bkbzu17 with SMTP id zu17so1181624bkb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Aug 2011 13:51:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	bh=0pegnq3jl9lyQPgDEnQaJ9TIktn7+cu7fdso3KbQIsw=;
+	b=VSJ/la5rMsbj2/yWf64pL5bzGCz+QLKLwQaSB7gofnXH68hs/pRddF+tOHQ+y/aKYU
+	XzASEjt9LLM1OvQjeGLD2sNFL/KlnlUejnPkIqc2r4De7uzLLuhcFLwggWbyjA0ef+tY
+	2DKQOEa4544BZNUTmYn8aAlkN+I3pwsM/qGuY=
+Received: by 10.204.150.87 with SMTP id x23mr523756bkv.118.1314823909971;
+	Wed, 31 Aug 2011 13:51:49 -0700 (PDT)
+Received: from black.localdomain ([93.100.122.208])
+	by mx.google.com with ESMTPS id zz10sm503895bkb.61.2011.08.31.13.51.48
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 31 Aug 2011 13:51:48 -0700 (PDT)
+Message-ID: <4E5EA05D.9040001@gmail.com>
+Date: Thu, 01 Sep 2011 00:58:05 +0400
+From: vaxon <gvaxon@gmail.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090825)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 31 Aug 2011 12:35:00 -0700
-In-Reply-To: <1314811518.1457.10.camel@DaveBeal-Ubuntu-laptop>
-References: <1314811518.1457.10.camel@DaveBeal-Ubuntu-laptop>
-X-Mailer: Evolution 3.0.2 (3.0.2-3.fc15) 
-Message-ID: <1314819305.2284.2.camel@scimitar>
-Mime-Version: 1.0
-Subject: Re: How to prevent fetching?
+Subject: Changing SRCREV in amend.inc doesn't work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,32 +39,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2011 19:41:04 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 31 Aug 2011 20:56:44 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2011-08-31 at 11:25 -0600, Dave Beal wrote:
-> My company is using OE to develop the embedded Linux infrastructure of a
-> medical device.  The US government agency that approves such devices
-> (FDA) requires that its source code be strictly controlled.  We would
-> like to configure our OE installation to prevent the fetching of new
-> source code except when we explicitly allow it.
-> 
-> Is there a way to accomplish this that doesn't require modifying all the
-> individual .bb files?  Is there a global configuration option that would
-> prevent fetching?  I've looked through the OE and Bitbake User Manuals,
-> but haven't found an answer.
+Hi
+I'm having problems amending uclibc recipe. I've included INHERIT += 
+"amend" to my distro config and created amend.inc in 
+recipes/uclibc/uclibc-git/ for the uclibc_git.bb recipe, that's supposed 
+to set new SRCREV.
 
-If you're using relatively recent BitBake and your metadata uses fetch2
-(I don't know if oe.dev does, but oe-core is using fetch2) you can set
-BB_NO_NETWORK="1" in a conf file somewhere.
+The amend.inc is included now and bitbake -e uclibc shows the amended 
+SRCREV, however do_fetch task still uses the old one. Also SRCPV uses 
+the old SRCREV value too.
 
-Regards,
-Joshua
--- 
-Joshua Lock
-        Yocto Project "Johannes factotum"
-        Intel Open Source Technology Centre
+I can successfully change SRC_URI in my amend.inc file, but changing 
+SRCREV doesn't work for me. I'm using the latest oe git (
 
+Any pointers are greatly appreciated.
+
+TIA,
+Val.
 
 
