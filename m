@@ -1,35 +1,24 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QzB0k-0004Pp-SK for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Sep 2011 19:25:07 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1QzAvz-00011Y-Tx for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Sep 2011 19:20:11 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Sep 2011 19:20:11 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Sep 2011 19:20:11 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1QzEcw-0003T8-DQ
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Sep 2011 23:16:46 +0200
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 01 Sep 2011 14:11:49 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.68,315,1312182000"; d="scan'208";a="47372782"
+Received: from unknown (HELO helios.localnet) ([10.255.18.182])
+	by fmsmga001.fm.intel.com with ESMTP; 01 Sep 2011 14:11:46 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 01 Sep 2011 19:18:42 +0200
-Message-ID: <j3oepi$f6u$1@dough.gmane.org>
-References: <d5fa6ed7bc46990f2652da9019d9531de1cd443d.1314891222.git.Martin.Jansa@gmail.com>
-	<af2d01f1621c1372d43cd0a1296c80e375202fee.1314891222.git.Martin.Jansa@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
-In-Reply-To: <af2d01f1621c1372d43cd0a1296c80e375202fee.1314891222.git.Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.3.1
-Subject: Re: [meta-handheld][PATCH 09/10] spitz, akita: add iwmmxt to PACKAGE_EXTRA_ARCHS_tune-xscale not PACKAGE_EXTRA_ARCHS
+Date: Thu, 1 Sep 2011 22:11:45 +0100
+User-Agent: KMail/1.13.6 (Linux/2.6.38-10-generic-pae; KDE/4.6.2; i686; ; )
+References: <cover.1314891222.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1314891222.git.Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+Message-Id: <201109012211.45707.paul.eggleton@linux.intel.com>
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [meta-handheld][PATCH 00/10] Pull request #1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,30 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Sep 2011 17:25:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 01 Sep 2011 21:16:46 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thursday 01 September 2011 16:38:56 Martin Jansa wrote:
+> please merge following changes, they are mostly from meta-zaurus and are
+> needed even to parse recipes when MACHINE=spitz.
 
-Op 01-09-11 17:39, Martin Jansa schreef:
-> * otherwise fails with: ERROR:  Poky's config sanity checker detected a
-> potential misconfiguration. Either fix the cause of this error or at your
-> own risk disable the checker (see sanity.conf). Following is the list of
-> potential problems / advisories:
-> 
-> Error, the PACKAGE_ARCHS variable does not contain TUNE_PKGARCH
-> (armv5te).
+Thanks Martin, will review and apply these hopefully either tomorrow or over 
+the weekend.
 
-Speaking of iwmmxt, any volunteers to add the pixman iwmmxt patches to meta-oe?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+In case anyone is wondering, the repo these patches are to be applied to is 
+temporarily here:
 
-iD8DBQFOX75xMkyGM64RGpERAujsAJ96zq03L6VQigOp57pgAEj1DfWuPwCfWzdW
-iSyIDpTbMQQrLiFSes95H2k=
-=2Kaf
------END PGP SIGNATURE-----
+  https://github.com/bluelightning/meta-handheld/
 
+I'm currently waiting on the final repositories for this and meta-opie to be 
+created, when they are I will properly announce them.
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
