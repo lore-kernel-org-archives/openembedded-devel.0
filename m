@@ -1,24 +1,36 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1Qz22B-0007UM-6g
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Sep 2011 09:49:59 +0200
-Received: by wyf19 with SMTP id 19so1141423wyf.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Qz2BT-0007oW-De for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Sep 2011 09:59:35 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Qz26h-0004pv-Qa for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Sep 2011 09:54:39 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Sep 2011 09:54:39 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Sep 2011 00:45:04 -0700 (PDT)
-Received: by 10.227.174.140 with SMTP id t12mr1287828wbz.79.1314863104024;
-	Thu, 01 Sep 2011 00:45:04 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id eo6sm273039wbb.31.2011.09.01.00.45.01
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 01 Sep 2011 00:45:02 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Thu, 01 Sep 2011 09:54:39 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Sep 2011 09:44:51 +0200
-Message-Id: <1314863091-17113-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.6.6.1
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-xfce] task-xfce-base: add thunar-volman
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 01 Sep 2011 09:54:27 +0200
+Message-ID: <j3ndnj$jgp$1@dough.gmane.org>
+References: <201108310825.16407.schnitzeltony@gmx.de>
+	<201109010055.14620.schnitzeltony@gmx.de>
+	<alpine.DEB.2.00.1109010849170.15634@entw48>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
+In-Reply-To: <alpine.DEB.2.00.1109010849170.15634@entw48>
+X-Enigmail-Version: 1.3.1
+Subject: Re: meta-oe: midori build fails with linker error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,40 +44,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Sep 2011 07:49:59 -0000
+X-List-Received-Date: Thu, 01 Sep 2011 07:59:35 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-This fixes:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-ERROR: There is a comment on line 34 of file /OE/tentacle/sources/meta-openembedded/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb (#    thunar-volman \) which is in the middle of a multiline expression.
-Bitbake used to ignore these but no longer does so, please fix your metadata as errors are likely as a result of this change.
+Op 01-09-11 08:50, Bernhard Guillon schreef:
+> 
+> 
+> On Wed, 31 Aug 2011, Andreas Müller wrote:
+> 
+>> On Wednesday, August 31, 2011 08:25:16 AM Andreas Müller wrote: [...]
+>>> angstrom-linux-gnueabi/gcc/arm-angstrom-linux-gnueabi/4.5.4/ld:
+>>> note: 'JSContextGetGlobalObject' is defined in DSO
+>>> /home/Superandy/tmp/oe-core- 
+>>> eglibc/sysroots/overo/usr/lib/libjavascriptcoregtk-1.0.so.0 so try
+>>> adding it to the linker command line
+>>> 
+>>> | /home/Superandy/tmp/oe-core-
+>>> 
+>>> eglibc/sysroots/overo/usr/lib/libjavascriptcoregtk-1.0.so.0: could
+>>> not read symbols: Invalid operation
+>>> 
+>>> | collect2: ld returned 1 exit status
+>> we are not alone [1]...
+>> 
+>> Andreas
+>> 
+>> [1] https://bugs.launchpad.net/midori/+bug/799196
+>> 
+> 
+> Hi,
+> 
+> LDFLAGS_append = " -ljavascriptcoregtk-1.0 "
+> 
+> should do the work.
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-xfce/recipes-xfce/tasks/task-xfce-base.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+That leads to |
+/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/midori-0.3.6-r1/midori-0.3.6/_build_/../midori/midori-view.c:4503:
+undefined reference to `webkit_web_view_get_selected_text'
 
-diff --git a/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb b/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
-index 8a87203..7589f6d 100644
---- a/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
-+++ b/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "All packages required for a base installation of XFCE"
- SECTION = "x11/wm"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
--PR = "r0"
-+PR = "r1"
- 
- inherit task
- 
-@@ -31,5 +31,5 @@ RDEPENDS_${PN} = " \
-     xfce4-settings \
-     xfce-terminal \
-     thunar \
--#    thunar-volman \
-+    thunar-volman \
- "
--- 
-1.6.6.1
+Same with 0.4.0, so midori needs to get updated for a more recent webkit.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFOXzozMkyGM64RGpERAhN3AJ4zqyuRWbHgbSMcXJ3zfIuee16JlgCfWH4x
+Rjk2Pl1cSAM3NT5TeQkmsco=
+=NtME
+-----END PGP SIGNATURE-----
 
 
 
