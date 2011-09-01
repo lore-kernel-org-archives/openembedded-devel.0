@@ -1,32 +1,42 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mailbackup.inode.at ([213.229.60.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1QyuZ3-0005xB-K9
+	(envelope-from <Bernhard.Guillon@hale.at>) id 1Qz1CD-0005eB-20
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Sep 2011 01:51:27 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 7E61816601BA; Wed, 31 Aug 2011 17:46:31 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 33FCB16600B8;
-	Wed, 31 Aug 2011 17:46:30 -0600 (MDT)
-Message-ID: <4E5EC7D6.7060204@mlbassoc.com>
-Date: Wed, 31 Aug 2011 17:46:30 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:6.0) Gecko/20110816 Thunderbird/6.0
+	Thu, 01 Sep 2011 08:56:17 +0200
+Received: from [62.99.145.7] (port=23367 helo=mx.inode.at)
+	by mailbackup.inode.at with esmtp (Exim 4.76)
+	(envelope-from <Bernhard.Guillon@hale.at>) id 1Qz17U-0007Q1-8q
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Sep 2011 08:51:24 +0200
+Received: from [83.64.51.210] (port=12140 helo=gateway1.hale)
+	by smartmx-07.inode.at with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <Bernhard.Guillon@hale.at>)
+	id 1Qz17R-0001zY-OH for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Sep 2011 08:51:21 +0200
+Received: from mail1.hale.at (mail2.hale [192.168.100.12])
+	by gateway1.hale (8.13.8/8.13.7) with ESMTP id p816pFmF020538
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 1 Sep 2011 08:51:15 +0200
+Received: from entw48 ([192.168.100.138]) by hale.at with MailEnable ESMTP;
+	Thu, 1 Sep 2011 08:51:09 +0200
+Date: Thu, 1 Sep 2011 08:50:37 +0200 (CEST)
+From: Bernhard Guillon <Bernhard.Guillon@hale.at>
+X-X-Sender: guib@entw48
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <201109010055.14620.schnitzeltony@gmx.de>
+Message-ID: <alpine.DEB.2.00.1109010849170.15634@entw48>
+References: <201108310825.16407.schnitzeltony@gmx.de>
+	<201109010055.14620.schnitzeltony@gmx.de>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1314811518.1457.10.camel@DaveBeal-Ubuntu-laptop>
-	<1314819305.2284.2.camel@scimitar>
-	<1314825521.1457.12.camel@DaveBeal-Ubuntu-laptop>
-	<1314829829.2284.12.camel@scimitar>
-	<1314830344.1457.22.camel@DaveBeal-Ubuntu-laptop>
-In-Reply-To: <1314830344.1457.22.camel@DaveBeal-Ubuntu-laptop>
-Subject: Re: How to prevent fetching?
+X-HALE-MailScanner-Information: Please contact the ISP for more information
+X-MailScanner-ID: p816pFmF020538
+X-HALE-MailScanner: Found to be clean
+X-HALE-MailScanner-From: bernhard.guillon@hale.at
+MailScanner-NULL-Check: 1315464675.46174@7wch/aehhJ1PfRWevyBmGA
+X-Spam-Status: No
+Subject: Re: meta-oe: midori build fails with linker error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,63 +50,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2011 23:51:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 01 Sep 2011 06:56:17 -0000
+Content-Type: MULTIPART/MIXED;
+	BOUNDARY="-1463776668-1051676167-1314859837=:15634"
 
-On 2011-08-31 16:39, Dave Beal wrote:
-> Thanks again, Joshua.  I found my base.bbclass (in
-> sources/openembedded/classes), and sadly, my base_do_fetch() uses
-> bb.fetch, not bb.fetch2.
-
-Depending on your system requirements, you may be able to transition to
-oe-core or yocto, both of which support fetch2.
-
-> -----Original Message-----
-> From: Joshua Lock<josh@linux.intel.com>
-> Reply-to: openembedded-devel@lists.openembedded.org
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] How to prevent fetching?
-> Date: Wed, 31 Aug 2011 15:30:24 -0700
->
->
-> On Wed, 2011-08-31 at 15:18 -0600, Dave Beal wrote:
->> Thank you, Joshua.  I don't know what you mean by "if your metadata uses
->> fetch2".  Is fetch2 some python function?  How would I know if I'm using
->> it?
->
-> Fetch2 is a Python module that's part of BitBake. It's used from the
-> base_do_fetch() method of base.bbclass.
->
-> You can see that OE.dev isn't using  fetch2[1] but OE-Core is[2].
->
-> Joshua
->
-> 1.
-> http://git.openembedded.org/cgit.cgi/openembedded/tree/classes/base.bbclass#n99
-> 2.
-> http://git.openembedded.org/cgit.cgi/openembedded-core/tree/meta/classes/base.bbclass#n80
->
->
-> Dave Beal
-> Cardinal Peak
-> (303) 665-3962 x124 | Email | vCard
-> | Web | Company Blog | LinkedIn
->
->
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+---1463776668-1051676167-1314859837=:15634
+Content-Type: TEXT/PLAIN; charset=iso-8859-1; format=flowed
+Content-Transfer-Encoding: QUOTED-PRINTABLE
 
 
+
+On Wed, 31 Aug 2011, Andreas M=FCller wrote:
+
+> On Wednesday, August 31, 2011 08:25:16 AM Andreas M=FCller wrote:
+> [...]
+>> angstrom-linux-gnueabi/gcc/arm-angstrom-linux-gnueabi/4.5.4/ld: note:
+>> 'JSContextGetGlobalObject' is defined in DSO /home/Superandy/tmp/oe-core-
+>> eglibc/sysroots/overo/usr/lib/libjavascriptcoregtk-1.0.so.0 so try adding
+>> it to the linker command line
+>>
+>> | /home/Superandy/tmp/oe-core-
+>>
+>> eglibc/sysroots/overo/usr/lib/libjavascriptcoregtk-1.0.so.0: could not r=
+ead
+>> symbols: Invalid operation
+>>
+>> | collect2: ld returned 1 exit status
+> we are not alone [1]...
+>
+> Andreas
+>
+> [1] https://bugs.launchpad.net/midori/+bug/799196
+>
+
+Hi,
+
+LDFLAGS_append =3D " -ljavascriptcoregtk-1.0 "
+
+should do the work.
+
+Best regards,
+Bernhard
+--
+Scanned by MailScanner.
+
+
+---1463776668-1051676167-1314859837=:15634--
