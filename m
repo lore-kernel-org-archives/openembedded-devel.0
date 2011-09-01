@@ -1,28 +1,35 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1QzAx3-0004Ci-Gx
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Sep 2011 19:21:17 +0200
-Received: by wyf19 with SMTP id 19so1579672wyf.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QzB0k-0004Pp-SK for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Sep 2011 19:25:07 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1QzAvz-00011Y-Tx for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Sep 2011 19:20:11 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Sep 2011 19:20:11 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Sep 2011 10:16:22 -0700 (PDT)
-Received: by 10.227.5.136 with SMTP id 8mr86390wbv.46.1314897381815;
-	Thu, 01 Sep 2011 10:16:21 -0700 (PDT)
-Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id eo6sm199443wbb.31.2011.09.01.10.16.17
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 01 Sep 2011 10:16:18 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1244.3)
+	Thu, 01 Sep 2011 19:20:11 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <201109011906.43131.schnitzeltony@gmx.de>
-Date: Thu, 1 Sep 2011 19:16:14 +0200
-Message-Id: <40821C64-BCFD-40FD-9A08-D44B3B8288D2@dominion.thruhere.net>
-References: <1314863091-17113-1-git-send-email-koen@dominion.thruhere.net>
-	<201109011906.43131.schnitzeltony@gmx.de>
-To: =?iso-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@gmx.de>
-X-Mailer: Apple Mail (2.1244.3)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-xfce] task-xfce-base: add thunar-volman
+Date: Thu, 01 Sep 2011 19:18:42 +0200
+Message-ID: <j3oepi$f6u$1@dough.gmane.org>
+References: <d5fa6ed7bc46990f2652da9019d9531de1cd443d.1314891222.git.Martin.Jansa@gmail.com>
+	<af2d01f1621c1372d43cd0a1296c80e375202fee.1314891222.git.Martin.Jansa@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
+In-Reply-To: <af2d01f1621c1372d43cd0a1296c80e375202fee.1314891222.git.Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.3.1
+Subject: Re: [meta-handheld][PATCH 09/10] spitz, akita: add iwmmxt to PACKAGE_EXTRA_ARCHS_tune-xscale not PACKAGE_EXTRA_ARCHS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,78 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Sep 2011 17:21:17 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 01 Sep 2011 17:25:07 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Op 1 sep. 2011, om 19:06 heeft Andreas M=FCller het volgende geschreven:
+Op 01-09-11 17:39, Martin Jansa schreef:
+> * otherwise fails with: ERROR:  Poky's config sanity checker detected a
+> potential misconfiguration. Either fix the cause of this error or at your
+> own risk disable the checker (see sanity.conf). Following is the list of
+> potential problems / advisories:
+> 
+> Error, the PACKAGE_ARCHS variable does not contain TUNE_PKGARCH
+> (armv5te).
 
-> On Thursday, September 01, 2011 09:44:51 AM you wrote:
->> This fixes:
->>=20
->> ERROR: There is a comment on line 34 of file
->> =
-/OE/tentacle/sources/meta-openembedded/meta-xfce/recipes-xfce/tasks/task-x=
+Speaking of iwmmxt, any volunteers to add the pixman iwmmxt patches to meta-oe?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
->> fce-base.bb (#    thunar-volman \) which is in the middle of a =
-multiline
->> expression. Bitbake used to ignore these but no longer does so, =
-please fix
->> your metadata as errors are likely as a result of this change.
->>=20
->> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->> ---
->> meta-xfce/recipes-xfce/tasks/task-xfce-base.bb |    4 ++--
->> 1 files changed, 2 insertions(+), 2 deletions(-)
->>=20
->> diff --git a/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
->> b/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb index =
-8a87203..7589f6d
->> 100644
->> --- a/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
->> +++ b/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
->> @@ -2,7 +2,7 @@ DESCRIPTION =3D "All packages required for a base
->> installation of XFCE" SECTION =3D "x11/wm"
->> LICENSE =3D "MIT"
->> LIC_FILES_CHKSUM =3D
->> "file://${COREBASE}/LICENSE;md5=3D3f40d7994397109285ec7b81fdeb3b58" =
--PR =3D
->> "r0"
->> +PR =3D "r1"
->>=20
->> inherit task
->>=20
->> @@ -31,5 +31,5 @@ RDEPENDS_${PN} =3D " \
->>     xfce4-settings \
->>     xfce-terminal \
->>     thunar \
->> -#    thunar-volman \
->> +    thunar-volman \
->> "
-> Acked-by: Andreas M=FCller <schnitzeltony@gmx.de>
->=20
-> By the way: what is the automated / correct workflow to=20
->=20
-> * apply a patch ( wget from patchwork & 'git am'? )=20
-> * generate 'acked by' / 'tested by' / .. messages=20
-
-What I do when applying a patch:
-
-$ /OE/org.openembedded.dev/contrib/patchwork/pw-am.sh 10827
-$ git show
-$ git push
-
-patchwork will have gathered all acked-by/signed-off-by from the =
-followup emails.
-
-When replying to a patch I type up the acked-by stuff manually.
-
-Not sure how correct and/or optimal this is, but this is how I do it :)
-
-regards,
-
-Koen
+iD8DBQFOX75xMkyGM64RGpERAujsAJ96zq03L6VQigOp57pgAEj1DfWuPwCfWzdW
+iSyIDpTbMQQrLiFSes95H2k=
+=2Kaf
+-----END PGP SIGNATURE-----
 
 
 
