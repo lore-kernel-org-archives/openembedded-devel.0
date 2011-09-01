@@ -1,27 +1,24 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <bugraaydogar@gmail.com>) id 1Qz1H3-0006B4-1a
+	(envelope-from <koen@dominion.thruhere.net>) id 1Qz22B-0007UM-6g
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Sep 2011 09:01:17 +0200
-Received: by gxk3 with SMTP id 3so1095648gxk.6
+	Thu, 01 Sep 2011 09:49:59 +0200
+Received: by wyf19 with SMTP id 19so1141423wyf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2011 23:56:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=I9aZgkjRI38ELI+kies3kZMfL/+S+tVphPGKX2XTpnk=;
-	b=oUJJgIktCmy3R/5iGpYxAJo57zpev5UcbowYrRSeRBkWus9O6PZg7NAy9qsSXFYfm6
-	ztV0fOaqtCDHYp79Qnw56CP5w6Uh/+CmnJAPyBPShLiiGYhfWN8O/lVkUzMwX43m/pK3
-	9DxhmrMNLxtmHRS3SQzzIWrDOgpjOb8pIKs6g=
-MIME-Version: 1.0
-Received: by 10.42.142.70 with SMTP id r6mr1157093icu.123.1314860179726; Wed,
-	31 Aug 2011 23:56:19 -0700 (PDT)
-Received: by 10.42.176.197 with HTTP; Wed, 31 Aug 2011 23:56:19 -0700 (PDT)
-Date: Thu, 1 Sep 2011 09:56:19 +0300
-Message-ID: <CAA1NafFmfiBzDCU2EOmECyaedVFsoH-4L+DHsq4cQ26jvnZ_qQ@mail.gmail.com>
-From: =?ISO-8859-9?Q?Bu=F0ra_Aydo=F0ar?= <bugraaydogar@gmail.com>
+	Thu, 01 Sep 2011 00:45:04 -0700 (PDT)
+Received: by 10.227.174.140 with SMTP id t12mr1287828wbz.79.1314863104024;
+	Thu, 01 Sep 2011 00:45:04 -0700 (PDT)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
+	by mx.google.com with ESMTPS id eo6sm273039wbb.31.2011.09.01.00.45.01
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 01 Sep 2011 00:45:02 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: How to customize Angstrom using OE?
+Date: Thu,  1 Sep 2011 09:44:51 +0200
+Message-Id: <1314863091-17113-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.6.6.1
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-xfce] task-xfce-base: add thunar-volman
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,50 +32,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Sep 2011 07:01:17 -0000
-Content-Type: text/plain; charset=ISO-8859-9
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 01 Sep 2011 07:49:59 -0000
 
-Hi,
+This fixes:
 
-I'm not a OE expert.I want to have deep understanding of OE's conf files.My
-board is craneboard and i did standart distro and machine
-configuration.(D=FDstro=3Dangstrom-2010.x,Machine=3Dam3517-crane)
+ERROR: There is a comment on line 34 of file /OE/tentacle/sources/meta-openembedded/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb (#    thunar-volman \) which is in the middle of a multiline expression.
+Bitbake used to ignore these but no longer does so, please fix your metadata as errors are likely as a result of this change.
 
-I have two question for you.
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-xfce/recipes-xfce/tasks/task-xfce-base.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-1=3D>
-
-I want to edit Angstrom and customize it for me.(Sth like own rootfs but
-editing Angstrom for example i dont want qt thins in my rootfs ).When i dig
-x11-gpe-image.bb, i couldnt find what they consist of.I thought i can be
-angstrom-2010.x-preferred-versions but im not sure.As a result i want to
-have a rootfs which doesn't consist qt libraries, how can i do it using OE
-and Angstrom?
-
-2=3D>
-
-When i dig angstrom-2010.x.conf, i couldnt find any configuration  settings
-about which linux kernel it will compile.It just tell
-MACHINE_KERNEL_VERSION  2.6 and at bottom of angstrom-2010.x.conf  i saw
-
-PREFERRED_PROVIDER_virtual/kernel_beagleboard =3D "linux-omap"
-PREFERRED_VERSION_linux-omap_beagleboard =3D "2.6.39"
-when i go linux-omap directory which is in recipes/linux, linux-omap  doesn=
-t
-contain craneboard.I made a search in /recipes/linux for craneboard,i found
-it at /recipes/linux/linux-omap-psp-2.6.32, and images  which i created
-realy use 2.6.32 linux kernel.But it writes nowhere in config files.Where i=
-s
-it? How oe goes there and takes that config file?
-Confused....
+diff --git a/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb b/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
+index 8a87203..7589f6d 100644
+--- a/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
++++ b/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "All packages required for a base installation of XFCE"
+ SECTION = "x11/wm"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+-PR = "r0"
++PR = "r1"
+ 
+ inherit task
+ 
+@@ -31,5 +31,5 @@ RDEPENDS_${PN} = " \
+     xfce4-settings \
+     xfce-terminal \
+     thunar \
+-#    thunar-volman \
++    thunar-volman \
+ "
+-- 
+1.6.6.1
 
 
-Thanks
---=20
-Bu=F0ra AYDO=D0AR
-Kocaeli University
-Electronic&Telecommunication Engineering
-E-Mail:bugra.aydogar1.08@kocaeli.edu.tr
-Phone: +905327306640
 
