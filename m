@@ -1,34 +1,27 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Qz9ej-0008VC-Pe
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1QzAkZ-0003vS-8b
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Sep 2011 17:58:17 +0200
-Received: by mail-fx0-f47.google.com with SMTP id 11so881914fxg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Sep 2011 08:53:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=2zW/BX1KGAwPmCO2ng9ntoOdPQ+VHlo8QmBgEkE2pUA=;
-	b=ADTTgmxOdVRBYficgo+WcgcYpHcU3cToVl7PAy3ht7+42cnjTRBsPGjKTjUTqEilV0
-	W6IGqfjy/HsU40dSXwJGvaoBAp1PSJ6jaD3YPFr8rt/vLnsmwqd+j+L+J5YhcSosB/mW
-	QKt0/JwJ3zBNEdP862DslY0eQpqkJwZCEsRvU=
-Received: by 10.223.45.18 with SMTP id c18mr520561faf.86.1314892404323;
-	Thu, 01 Sep 2011 08:53:24 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id l18sm136340fam.17.2011.09.01.08.53.22
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 01 Sep 2011 08:53:23 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 01 Sep 2011 19:08:23 +0200
+Received: (qmail invoked by alias); 01 Sep 2011 17:03:21 -0000
+Received: from p4FDF1E49.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.223.30.73]
+	by mail.gmx.net (mp067) with SMTP; 01 Sep 2011 19:03:21 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/fYWtoTJ/fGagq2OYB/taRsaHcKyUMxsH8j8RRSu
+	T0ZUk1dKWamg2L
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Sep 2011 17:53:08 +0200
-Message-Id: <bd93a3112ecaf6f5e28e05e39ea45928a847e714.1314892354.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.6.1
-In-Reply-To: <f25cc3380d321eae88a0566d20d2b2248258eb79.1314892354.git.Martin.Jansa@gmail.com>
-References: <f25cc3380d321eae88a0566d20d2b2248258eb79.1314892354.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1314892354.git.Martin.Jansa@gmail.com>
-References: <cover.1314892354.git.Martin.Jansa@gmail.com>
-Subject: [meta-efl][PATCH 2/2] e-base: EFL_SRCREV bump
+Date: Thu, 1 Sep 2011 19:06:42 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-95.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <1314863091-17113-1-git-send-email-koen@dominion.thruhere.net>
+In-Reply-To: <1314863091-17113-1-git-send-email-koen@dominion.thruhere.net>
+MIME-Version: 1.0
+Message-Id: <201109011906.43131.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-xfce] task-xfce-base: add thunar-volman
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,28 +35,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Sep 2011 15:58:18 -0000
+X-List-Received-Date: Thu, 01 Sep 2011 17:08:23 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/classes/e-base.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+On Thursday, September 01, 2011 09:44:51 AM you wrote:
+> This fixes:
+>=20
+> ERROR: There is a comment on line 34 of file
+> /OE/tentacle/sources/meta-openembedded/meta-xfce/recipes-xfce/tasks/task-x
+> fce-base.bb (#    thunar-volman \) which is in the middle of a multiline
+> expression. Bitbake used to ignore these but no longer does so, please fix
+> your metadata as errors are likely as a result of this change.
+>=20
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>  meta-xfce/recipes-xfce/tasks/task-xfce-base.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
+> b/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb index 8a87203..7589f6d
+> 100644
+> --- a/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
+> +++ b/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
+> @@ -2,7 +2,7 @@ DESCRIPTION =3D "All packages required for a base
+> installation of XFCE" SECTION =3D "x11/wm"
+>  LICENSE =3D "MIT"
+>  LIC_FILES_CHKSUM =3D
+> "file://${COREBASE}/LICENSE;md5=3D3f40d7994397109285ec7b81fdeb3b58" -PR =
+=3D
+> "r0"
+> +PR =3D "r1"
+>=20
+>  inherit task
+>=20
+> @@ -31,5 +31,5 @@ RDEPENDS_${PN} =3D " \
+>      xfce4-settings \
+>      xfce-terminal \
+>      thunar \
+> -#    thunar-volman \
+> +    thunar-volman \
+>  "
+Acked-by: Andreas M=FCller <schnitzeltony@gmx.de>
 
-diff --git a/meta-efl/classes/e-base.bbclass b/meta-efl/classes/e-base.bbclass
-index 6e8713d..b4b91f4 100644
---- a/meta-efl/classes/e-base.bbclass
-+++ b/meta-efl/classes/e-base.bbclass
-@@ -2,7 +2,7 @@ HOMEPAGE = "http://www.enlightenment.org"
- SRCNAME ?= "${BPN}"
- 
- # usually tracks svn trunk HEAD
--EFL_SRCREV ?= "62690"
-+EFL_SRCREV ?= "63052"
- # revision when 1.0.0 was released, for recipes which don't need rebuild so often
- EFL_SRCREV_1.0.0 ?= "56356"
- 
--- 
-1.7.6.1
+By the way: what is the automated / correct workflow to=20
 
+* apply a patch ( wget from patchwork & 'git am'? )=20
+* generate 'acked by' / 'tested by' / .. messages=20
+
+Andreas
 
 
