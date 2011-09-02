@@ -1,35 +1,37 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <richard.purdie@linuxfoundation.org>)
-	id 1QzWyj-0005ON-8i; Fri, 02 Sep 2011 18:52:29 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p82GlWpv027479;
-	Fri, 2 Sep 2011 17:47:32 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 27043-03; Fri,  2 Sep 2011 17:47:28 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p82GlO0w027473
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Fri, 2 Sep 2011 17:47:26 +0100
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-In-Reply-To: <CAP9ODKq2-xj2v1EN461+Lzon2oXCw4g+swE1T62teuxK9TzfvA@mail.gmail.com>
-References: <1314962732.3526.32.camel@mattotaupa>
-	<CAP9ODKpMU3yr==7+qyBvTyW3ikoSXtZqurKwsCn3Nn_54E0k7Q@mail.gmail.com>
-	<1314969543.5939.586.camel@rex>
-	<CAP9ODKoDFrgfTXeCw-dtGn4s_V+Uxh4U4HfbWe-0OOBAC385=g@mail.gmail.com>
-	<89FA71E7-9402-4458-BC9E-42655707B091@dominion.thruhere.net>
-	<CAP9ODKq2-xj2v1EN461+Lzon2oXCw4g+swE1T62teuxK9TzfvA@mail.gmail.com>
-Date: Fri, 02 Sep 2011 17:47:06 +0100
-Message-ID: <1314982026.5939.607.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] Please merge lists openembedded-devel and openembedded-core again.
+Received: from 2.mo1.mail-out.ovh.net ([178.32.119.250]
+	helo=mo1.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1QzX2l-0005XA-AH
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Sep 2011 18:56:39 +0200
+Received: from mail194.ha.ovh.net (b9.ovh.net [213.186.33.59])
+	by mo1.mail-out.ovh.net (Postfix) with SMTP id 2D311100C6D3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Sep 2011 09:22:25 +0200 (CEST)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 2 Sep 2011 09:22:06 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 2 Sep 2011 09:22:05 +0200
+Message-ID: <4E60841C.6030002@eukrea.com>
+Date: Fri, 02 Sep 2011 09:22:04 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+X-Ovh-Mailout: 178.32.228.1 (mo1.mail-out.ovh.net)
+References: <4d660e0531b72769b0bf04e0288cca6d52cb083f.1314892207.git.Martin.Jansa@gmail.com>
+	<49f18160290338d81c35a56f12fb5edaababe78b.1314892207.git.Martin.Jansa@gmail.com>
+	<4E5FD679.1000606@eukrea.com> <20110902071644.GJ3634@jama.jama.net>
+In-Reply-To: <20110902071644.GJ3634@jama.jama.net>
+X-Ovh-Tracer-Id: 9519765187583192393
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeeftddrudefucetggdotefuucfrrhhofhhilhgvmecuqfggjfenuceurghilhhouhhtmecufedttdenucculddquddttddm
+Subject: Re: [meta-oe][PATCH 4/4] xf86-video-omapfb: add patch for fixing segfault on starting X when using VRFB
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,27 +45,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Sep 2011 16:52:29 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 02 Sep 2011 16:56:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2011-09-02 at 10:53 -0300, Otavio Salvador wrote:
-> On Fri, Sep 2, 2011 at 10:33, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> > That sounds like people should just subscribe to oe-core if they want to be aware of changes instead of merging the 2 lists.
-> 
-> Many times changes are related to meta-oe and oe-core and we'd need to
-> cross-post and seems wrong.
+Le 02/09/2011 09:16, Martin Jansa a =E9crit :
+> On Thu, Sep 01, 2011 at 09:01:13PM +0200, Eric B=E9nard wrote:
+>> Hi,
+>>
+>> Le 01/09/2011 17:50, Martin Jansa a =E9crit :
+>>> From: Sebastian Krzyszkowiak<dos@dosowisko.net>
+>>>
+>>> Signed-off-by: Martin Jansa<Martin.Jansa@gmail.com>
+>>> ---
+>>>    .../0004-Attempt-to-fix-VRFB.patch                 |  320 ++++++++=
+++++++++++++
+>>>    .../xorg-driver/xf86-video-omapfb_git.bb           |    3 +-
+>>>    2 files changed, 322 insertions(+), 1 deletions(-)
+>>>    create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video=
+-omapfb/0004-Attempt-to-fix-VRFB.patch
+>>>
+>> why does this driver is inside meta-oe layer instead of the TI layer ?
+>
+> mostly because N900 also using xf86-video-omapfb is not built by TI :)
+>
+>> btw, as we are starting porting our bsp against meta-oc, is there a do=
+cument
+>> describing how the layers are splitted ?
+>>
+OK, I was thinking that the ti layer was the base layer for products usin=
+g TI=20
+cpu and not only the layer of products built by TI ;-)
 
-I don't think this is actually true and its reasonable to assume
-discussion on OE-Core is seen by everyone.
-
-You therefore need an OE-Core subscription or both with the latter
-recommended. The benefit is the two lists give some kind of filtering of
-the email topics.
-
-Cheers,
-
-Richard
+Eric
 
 
 
