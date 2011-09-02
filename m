@@ -1,29 +1,24 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <wckong@gmail.com>) id 1QzOip-0002AX-UW
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Sep 2011 10:03:32 +0200
-Received: by iagz35 with SMTP id z35so2880041iag.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Sep 2011 00:58:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=GTjls8/7A7z+y/XqHPaRtvFj67oA9JVf2Jj0zvNrDo8=;
-	b=q9q4JWRF+qVagxUA0/Z8M+75e8W6gVyue4sYjxU2tj8YqtJgkxjGwto3z1gup5luDQ
-	YBfl+/e4TvVozbel9aKg/7pE7AvBmH0L4GMckeUYlqThqhr95zB7SQ0GjwApNLcZpLXH
-	lxeAU/sfUjIog+YoHp99yhgq8K0jI69EoooPQ=
-Received: by 10.42.137.70 with SMTP id x6mr686876ict.388.1314950314075; Fri,
-	02 Sep 2011 00:58:34 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.9.197 with HTTP; Fri, 2 Sep 2011 00:58:14 -0700 (PDT)
-In-Reply-To: <1314949058.3526.17.camel@mattotaupa>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QzQHx-00045D-Ot for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Sep 2011 11:43:53 +0200
+Received: from f053042120.adsl.alicedsl.de ([78.53.42.120]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1QzQDM-0003jU-Pw for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Sep 2011 09:39:09 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 02 Sep 2011 11:38:57 +0200
+In-Reply-To: <CAJR9bDK9z_vSNAON2VMkPebsyWGD6vAcrKkCkcSQvU8bRZt4Ww@mail.gmail.com>
 References: <CAJR9bDJehg1CPqTBDyn12nFa048Vb1JwfPF7W96pj6ZfA-aHQQ@mail.gmail.com>
 	<1314949058.3526.17.camel@mattotaupa>
-From: Wei Kong <wckong@gmail.com>
-Date: Fri, 2 Sep 2011 17:58:14 +1000
-Message-ID: <CAJR9bDK9z_vSNAON2VMkPebsyWGD6vAcrKkCkcSQvU8bRZt4Ww@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+	<CAJR9bDK9z_vSNAON2VMkPebsyWGD6vAcrKkCkcSQvU8bRZt4Ww@mail.gmail.com>
+X-Mailer: Evolution 3.0.2- 
+Message-ID: <1314956338.3526.23.camel@mattotaupa>
+Mime-Version: 1.0
 Subject: Re: package trying to link to /usr/lib/.lib instead of /usr/lib during staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,56 +33,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Sep 2011 08:03:32 -0000
-Content-Type: text/plain; charset=windows-1252
+X-List-Received-Date: Fri, 02 Sep 2011 09:43:53 -0000
+X-Groupsio-MsgNum: 34012
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-ofRY6zCZEGSA1b0QrJpq"
+
+--=-ofRY6zCZEGSA1b0QrJpq
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Paul,
+Dear Wei,
 
-Apologies, but I am not sure how to proceed as I am new to posting on
-mailing lists. I don't really want to commit this change, I was just seeing
-if anyone knows how to make openembedded look into the correct staging
-library folder, and the recipe was there just for reference.
 
-But if I need to submit a patch to get some insight, please let me know.
+Am Freitag, den 02.09.2011, 17:58 +1000 schrieb Wei Kong:
 
-Thanks
+> Apologies, but I am not sure how to proceed as I am new to posting on
+> mailing lists.
 
-Wei
+please read the netiquette [1], for example please use interleaved style
+when replying.
 
-On Fri, Sep 2, 2011 at 5:37 PM, Paul Menzel <
-paulepanter@users.sourceforge.net> wrote:
+> I don't really want to commit this change,
 
-> Dear Wei,
->
->
-> Am Freitag, den 02.09.2011, 17:17 +1000 schrieb Wei Kong:
->
-> > During compilation, for some reason, the linker attempts to look for
-> > libraries in the wrong directory.
->
-> [=85]
->
-> please send your recipe without having Google Mail line wrap things, so
-> people can test it themselves.
->
-> Use `git commit =85` and `git format-patch =85` (and `git send-email`). T=
-his
-> is also documented in our Wiki (for example [1] and other pages).
->
->
-> Thanks,
->
-> Paul
->
->
-> [1]
-> http://openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmbedded
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+In my opinion it is always good to contribute and try to get things
+upstream. We are always looking forward to contributions.
 
+> I was just seeing if anyone knows how to make openembedded look into
+> the correct staging library folder, and the recipe was there just for
+> reference.
+
+I am not sure, but you are overwriting the tasks configure and compile.
+Why do you have to do that? Is your package using autotools? Anyway, you
+have to make sure that the correct paths are used when you call
+`configure` and `make`. Normally OpenEmbedded uses `oe_runconf` and
+`oe_runmake` and makes sure to path the correct things.
+
+> But if I need to submit a patch to get some insight, please let me know.
+
+I cannot promise anything but it would make helping easier.
+
+
+Thanks,
+
+Paul
+
+
+[1] http://en.opensuse.org/openSUSE:Mailing_list_netiquette
+
+--=-ofRY6zCZEGSA1b0QrJpq
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk5gpDEACgkQPX1aK2wOHViczACfT0rKKuqO+HR9GydfrrTce9IH
+tf4An2PMHQ+LQ4eySdtAx7/vmD7JBN9/
+=3aU7
+-----END PGP SIGNATURE-----
+
+--=-ofRY6zCZEGSA1b0QrJpq--
