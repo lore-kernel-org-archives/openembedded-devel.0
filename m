@@ -1,23 +1,34 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QzVdl-0001eC-R2; Fri, 02 Sep 2011 17:26:45 +0200
-Received: from f053042120.adsl.alicedsl.de ([78.53.42.120]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1QzVZB-00056X-89; Fri, 02 Sep 2011 15:22:01 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 02 Sep 2011 17:21:49 +0200
-In-Reply-To: <1314969543.5939.586.camel@rex>
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <richard.purdie@linuxfoundation.org>)
+	id 1QzWyj-0005ON-8i; Fri, 02 Sep 2011 18:52:29 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p82GlWpv027479;
+	Fri, 2 Sep 2011 17:47:32 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 27043-03; Fri,  2 Sep 2011 17:47:28 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p82GlO0w027473
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Fri, 2 Sep 2011 17:47:26 +0100
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+In-Reply-To: <CAP9ODKq2-xj2v1EN461+Lzon2oXCw4g+swE1T62teuxK9TzfvA@mail.gmail.com>
 References: <1314962732.3526.32.camel@mattotaupa>
 	<CAP9ODKpMU3yr==7+qyBvTyW3ikoSXtZqurKwsCn3Nn_54E0k7Q@mail.gmail.com>
 	<1314969543.5939.586.camel@rex>
-X-Mailer: Evolution 3.0.2- 
-Message-ID: <1314976910.3526.36.camel@mattotaupa>
+	<CAP9ODKoDFrgfTXeCw-dtGn4s_V+Uxh4U4HfbWe-0OOBAC385=g@mail.gmail.com>
+	<89FA71E7-9402-4458-BC9E-42655707B091@dominion.thruhere.net>
+	<CAP9ODKq2-xj2v1EN461+Lzon2oXCw4g+swE1T62teuxK9TzfvA@mail.gmail.com>
+Date: Fri, 02 Sep 2011 17:47:06 +0100
+Message-ID: <1314982026.5939.607.camel@rex>
 Mime-Version: 1.0
-Cc: openembedded-core@lists.openembedded.org
+X-Mailer: Evolution 2.32.2 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [OE-core] Please merge lists openembedded-devel and openembedded-core again.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,71 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Sep 2011 15:26:45 -0000
-X-Groupsio-MsgNum: 34020
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-y9fBCtBBPJbH2SsaL5y6"
-
---=-y9fBCtBBPJbH2SsaL5y6
+X-List-Received-Date: Fri, 02 Sep 2011 16:52:29 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Am Freitag, den 02.09.2011, 14:19 +0100 schrieb Richard Purdie:
-> On Fri, 2011-09-02 at 10:05 -0300, Otavio Salvador wrote:
-> > On Fri, Sep 2, 2011 at 08:25, Paul Menzel wrote:
-
-> > > it would be great if we could join the lists oe-devel and oe-core aga=
-in.
-> > > As far as I know the only reason the list oe-core was created was to
-> > > discuss the initial setup and the creation of oe-core. Now that it ha=
-s
-> > > been setup I do not see any reason to have two separate lists.
-> > >
-> > > I suggest to abandon/archive openembedded-core and use
-> > > openembedded-devel.
-> >=20
-> > I fully support this merge.
->=20
-> I'm not so sure rushing into this is a great idea.
-
-I interpret your answer that the merge is planned. What is the right
-time then?
-
-> Speaking as someone who has problems trying to figure out where
-> patches are intended for
-
-Also now you have to decide to what list to send them to. Now you just
-add a prefix/tag as is done on oe-devel already to differentiate between
-oe.dev and meta-oe.
-
-> and who tracks whether they've been applied,
-
-Well, the list is not a patch tracker. The patch queue is [1].
-
-> I do find the split useful...
-
-Hmm, could you please elaborate?
-
-
-Thanks,
-
-Paul
-
-
-[1] http://patches.openembedded.org/
-
---=-y9fBCtBBPJbH2SsaL5y6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+On Fri, 2011-09-02 at 10:53 -0300, Otavio Salvador wrote:
+> On Fri, Sep 2, 2011 at 10:33, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> > That sounds like people should just subscribe to oe-core if they want to be aware of changes instead of merging the 2 lists.
+> 
+> Many times changes are related to meta-oe and oe-core and we'd need to
+> cross-post and seems wrong.
 
-iEYEABECAAYFAk5g9I0ACgkQPX1aK2wOHVj0ewCbBWYOA8nSSd2pANJJspD6TEaL
-znUAnR3N5K7VQ+3LUjymPuWGEglrm7Ld
-=SqjJ
------END PGP SIGNATURE-----
+I don't think this is actually true and its reasonable to assume
+discussion on OE-Core is seen by everyone.
 
---=-y9fBCtBBPJbH2SsaL5y6--
+You therefore need an OE-Core subscription or both with the latter
+recommended. The benefit is the two lists give some kind of filtering of
+the email topics.
+
+Cheers,
+
+Richard
+
+
+
