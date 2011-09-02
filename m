@@ -1,31 +1,23 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1QzN9q-00087v-5h
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1QzNAr-0008DA-5h
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Sep 2011 08:23:18 +0200
-Received: by bkbzu17 with SMTP id zu17so2349671bkb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Sep 2011 23:18:21 -0700 (PDT)
-Received: by 10.204.142.152 with SMTP id q24mr313363bku.207.1314944300963;
-	Thu, 01 Sep 2011 23:18:20 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116])
-	by mx.google.com with ESMTPS id zw12sm258134bkb.10.2011.09.01.23.18.19
-	(version=SSLv3 cipher=OTHER); Thu, 01 Sep 2011 23:18:19 -0700 (PDT)
-Message-ID: <4E60752A.6080204@dresearch-fe.de>
-Date: Fri, 02 Sep 2011 08:18:18 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:6.0) Gecko/20110812 Thunderbird/6.0
-MIME-Version: 1.0
+	Fri, 02 Sep 2011 08:24:21 +0200
+Received: (qmail invoked by alias); 02 Sep 2011 06:19:24 -0000
+Received: from p5B0A1B3B.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.27.59]
+	by mail.gmx.net (mp058) with SMTP; 02 Sep 2011 08:19:24 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX18unRkGO30uPW6kL2gTmPW7w+6yjfpr0FxD+2I3Wu
+	ZEzkLUy5p7eZAy
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1314714550-29390-1-git-send-email-sherbrec@cit-ec.uni-bielefeld.de>
-	<1314736499.3942.2.camel@mattotaupa>
-	<4E5DE5C1.4000706@cit-ec.uni-bielefeld.de>
-In-Reply-To: <4E5DE5C1.4000706@cit-ec.uni-bielefeld.de>
-X-Enigmail-Version: 1.3.1
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
-Subject: Re: [PATCH] gcc: Remove package libstdc++-dev and libgcc-dev from gcc-cross
+Date: Fri,  2 Sep 2011 08:22:45 +0200
+Message-Id: <1314944565-24545-1-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+X-Y-GMX-Trusted: 0
+Subject: [meta-xfce] thunar-volman: Add udev to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,52 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Sep 2011 06:23:18 -0000
+X-List-Received-Date: Fri, 02 Sep 2011 06:24:21 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 31.08.2011 09:41, Stefan Herbrechtsmeier wrote:
-> Am 30.08.2011 22:34, schrieb Paul Menzel:
->> Am Dienstag, den 30.08.2011, 16:29 +0200 schrieb Stefan Herbrechtsmeier:
->>> Remove package libstdc++-dev and libgcc-dev from gcc-cross as they
->>> already provided by gcc.
->>>
->>> Commit 8c42351519ece9ed60659a103e624d2e154b3641 add dev packages
->>> (libstdc++-dev libgcc-dev) to gcc-cross (gcc-package-cross.inc)
->>> which are already part of gcc. The libgcc-dev package both include
->>> the libgcc_s.so file which triggers a 'file is already provided by
->>> package' error on incremental builds. The libstdc++-dev package have
->>> different content and is empty on some archs (armv5te, armv7e).
->>> The empty package triggers a 'Cannot satisfy the following
->>> dependencies for task-sdk-bare' error. If an empty libstdc++-dev
->>> package is generated it triggers a '..../usr/include/c++ not exist'
->>> error as this is part of the package from gcc but not gcc-cross.
->>>
->>> Signed-off-by: Stefan Herbrechtsmeier<sherbrec@cit-ec.uni-bielefeld.de>
->>> ---
->>>   recipes/gcc/gcc-4.3.3.inc         |    2 +-
->>>   recipes/gcc/gcc-4.5.inc           |    2 +-
->>>   recipes/gcc/gcc-package-cross.inc |    4 +---
->>>   3 files changed, 3 insertions(+), 5 deletions(-)
->> So does that patch revert commit 8c423515?
-> Not complete, it leaves the gcc change in gcc-package-target.inc untouched and
-> although keeps the move of the gdb python helpers in gcc-package-cross.inc
-> but don't ship them in any package. This keeps the intention of the commit
-> and only fix the fault of adding dev packages to gcc-cross.
+With fresh tmp-dir bitbake thunar-volman failed with
 
-Thanx for the patch.
+| checking for gudev-1.0 >= 145... not found
+| *** The required package gudev-1.0 was not found on your system.
+| *** Please install gudev-1.0 (atleast version 145) or adjust
+| *** the PKG_CONFIG_PATH environment variable if you
+| *** installed the package in a nonstandard prefix so that
+| *** pkg-config is able to find it.
+| + bbfatal 'oe_runconf failed'
 
-It's pushed to oe-dev master now and will make a pull request for 2011.03-maintenance branch too.
+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+---
+ .../thunar-volman/thunar-volman_0.6.0.bb           |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Steffen
-
+diff --git a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb
+index 377561c..c581d78 100644
+--- a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb
++++ b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "Automatic management of removable drives and media for thunar"
+ SECTION = "x11"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+-DEPENDS = "exo gtk+ libxfce4ui libxfce4util xfconf libnotify"
++DEPENDS = "exo gtk+ libxfce4ui libxfce4util xfconf libnotify udev"
+ 
+ inherit xfce
+ 
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+1.7.4.4
+
 
 
