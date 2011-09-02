@@ -1,31 +1,37 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rpurdie@rpsys.net>) id 1QzXOp-0006El-Oq
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Sep 2011 19:19:27 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p82H0dRS027625;
-	Fri, 2 Sep 2011 18:00:39 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 27097-04; Fri,  2 Sep 2011 18:00:35 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p82H0YSN027619
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Fri, 2 Sep 2011 18:00:35 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1314976910.3526.36.camel@mattotaupa>
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <otavio.salvador@gmail.com>)
+	id 1QzXig-0006vw-I7; Fri, 02 Sep 2011 19:39:58 +0200
+Received: by wyf19 with SMTP id 19so2550124wyf.6
+	for <multiple recipients>; Fri, 02 Sep 2011 10:35:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=f8z/9ZaSmOUwr6DK1NBFA7xwHMR3EPi3EpqhIuRwkQE=;
+	b=bRUDOuFkjtfc+2h3JwSfkZJNxxZX6tr5JalFUP5h09O66LjYDraY48aRbc5tp2AGmz
+	E6llBi/O8PazP+Ln8H0JnNiKPVeYbaQioKfcupQg3seuPSjKG7vrqxViGwT54OZTAi2F
+	fpZGAv4U+y1BN+svG/aJDI/HehZOYgse3Va7k=
+MIME-Version: 1.0
+Received: by 10.216.229.200 with SMTP id h50mr1626057weq.32.1314984901092;
+	Fri, 02 Sep 2011 10:35:01 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.216.61.208 with HTTP; Fri, 2 Sep 2011 10:35:01 -0700 (PDT)
+In-Reply-To: <1314982026.5939.607.camel@rex>
 References: <1314962732.3526.32.camel@mattotaupa>
 	<CAP9ODKpMU3yr==7+qyBvTyW3ikoSXtZqurKwsCn3Nn_54E0k7Q@mail.gmail.com>
-	<1314969543.5939.586.camel@rex> <1314976910.3526.36.camel@mattotaupa>
-Date: Fri, 02 Sep 2011 18:00:16 +0100
-Message-ID: <1314982816.5939.616.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.2 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-core@lists.openembedded.org
+	<1314969543.5939.586.camel@rex>
+	<CAP9ODKoDFrgfTXeCw-dtGn4s_V+Uxh4U4HfbWe-0OOBAC385=g@mail.gmail.com>
+	<89FA71E7-9402-4458-BC9E-42655707B091@dominion.thruhere.net>
+	<CAP9ODKq2-xj2v1EN461+Lzon2oXCw4g+swE1T62teuxK9TzfvA@mail.gmail.com>
+	<1314982026.5939.607.camel@rex>
+Date: Fri, 2 Sep 2011 14:35:01 -0300
+X-Google-Sender-Auth: mcSTZOxJV-xnnhGrs_hl6ff4Wfg
+Message-ID: <CAP9ODKq17NP3E8BZOm-P41W4s_y+1z7iTre7bML-_D0WofeQWw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [OE-core] Please merge lists openembedded-devel and openembedded-core again.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,68 +46,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Sep 2011 17:19:28 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 02 Sep 2011 17:39:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2011-09-02 at 17:21 +0200, Paul Menzel wrote:
-> Am Freitag, den 02.09.2011, 14:19 +0100 schrieb Richard Purdie:
-> > On Fri, 2011-09-02 at 10:05 -0300, Otavio Salvador wrote:
-> > > On Fri, Sep 2, 2011 at 08:25, Paul Menzel wrote:
-> 
-> > > > it would be great if we could join the lists oe-devel and oe-core again.
-> > > > As far as I know the only reason the list oe-core was created was to
-> > > > discuss the initial setup and the creation of oe-core. Now that it has
-> > > > been setup I do not see any reason to have two separate lists.
-> > > >
-> > > > I suggest to abandon/archive openembedded-core and use
-> > > > openembedded-devel.
-> > > 
-> > > I fully support this merge.
-> > 
-> > I'm not so sure rushing into this is a great idea.
-> 
-> I interpret your answer that the merge is planned. What is the right
-> time then?
+On Fri, Sep 2, 2011 at 13:47, Richard Purdie
+<richard.purdie@linuxfoundation.org> wrote:
+> On Fri, 2011-09-02 at 10:53 -0300, Otavio Salvador wrote:
+>> On Fri, Sep 2, 2011 at 10:33, Koen Kooi <koen@dominion.thruhere.net> wro=
+te:
+>> > That sounds like people should just subscribe to oe-core if they want =
+to be aware of changes instead of merging the 2 lists.
+>>
+>> Many times changes are related to meta-oe and oe-core and we'd need to
+>> cross-post and seems wrong.
+>
+> I don't think this is actually true and its reasonable to assume
+> discussion on OE-Core is seen by everyone.
+>
+> You therefore need an OE-Core subscription or both with the latter
+> recommended. The benefit is the two lists give some kind of filtering of
+> the email topics.
 
-Not planned, it has been talked about, particularly by the TSC members.
+I am sorry but I disagree. All those affect the layers and thus
+changes on oe-core are important to meta-oe so they are all related.
+Besides not everyone follow both.
 
-> > Speaking as someone who has problems trying to figure out where
-> > patches are intended for
-> 
-> Also now you have to decide to what list to send them to. Now you just
-> add a prefix/tag as is done on oe-devel already to differentiate between
-> oe.dev and meta-oe.
+Personally I've been following mostly oe-core and skipped oe and
+someone might be doing the other way around; patch management has
+nothing to do with mailing list topic and this we can assume this is
+easy to fix using patchwork and proper subject on patches.
 
-Well, its relatively simple to decide if an email is appropriate for
-oe-core or not.
-
-Sure we could start asking people to use tags/prefixes but I fail to see
-the advantage of putting more email in one place when a reasonable and
-logical separate exists which actively helps people.
-
-> > and who tracks whether they've been applied,
-> 
-> Well, the list is not a patch tracker. The patch queue is [1].
-
-For various reasons its not how I track patches for OE-Core.
-
-> > I do find the split useful...
-> 
-> Hmm, could you please elaborate?
-
-We all try to find ways to make our workflows more efficient and to do
-the best job we can at the things we attempt. The mailing list
-separation actively helps me notice the most important things I need to
-deal with. Now yes, I could use mail filters, I could do a variety of
-things. Even with those I believe my response to various things would be
-adversely impacted if we do merge the lists as with the best will in the
-world, people sometimes don't do things like tags/prefixes/whatever and
-its easier for anyone new to OE to get confused.
-
-Cheers,
-
-Richard
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
