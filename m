@@ -1,23 +1,27 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1QzNAr-0008DA-5h
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <sledz@dresearch-fe.de>) id 1QzNEo-0008Lt-Uk
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Sep 2011 08:24:21 +0200
-Received: (qmail invoked by alias); 02 Sep 2011 06:19:24 -0000
-Received: from p5B0A1B3B.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.27.59]
-	by mail.gmx.net (mp058) with SMTP; 02 Sep 2011 08:19:24 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18unRkGO30uPW6kL2gTmPW7w+6yjfpr0FxD+2I3Wu
-	ZEzkLUy5p7eZAy
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Sep 2011 08:22:45 +0200
-Message-Id: <1314944565-24545-1-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.4.4
+	Fri, 02 Sep 2011 08:28:27 +0200
+Received: by bkbzu17 with SMTP id zu17so2351418bkb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Sep 2011 23:23:30 -0700 (PDT)
+Received: by 10.204.157.8 with SMTP id z8mr344343bkw.145.1314944550120;
+	Thu, 01 Sep 2011 23:22:30 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id zw12sm264193bkb.10.2011.09.01.23.22.28
+	(version=SSLv3 cipher=OTHER); Thu, 01 Sep 2011 23:22:29 -0700 (PDT)
+Message-ID: <4E607624.8010300@dresearch-fe.de>
+Date: Fri, 02 Sep 2011 08:22:28 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:6.0) Gecko/20110812 Thunderbird/6.0
 MIME-Version: 1.0
-X-Y-GMX-Trusted: 0
-Subject: [meta-xfce] thunar-volman: Add udev to DEPENDS
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Tom Rini <tom_rini@mentor.com>
+X-Enigmail-Version: 1.3.1
+Subject: [2011.03-maintenance] pull request (gcc/java)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,40 +35,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Sep 2011 06:24:21 -0000
+X-List-Received-Date: Fri, 02 Sep 2011 06:28:27 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-With fresh tmp-dir bitbake thunar-volman failed with
+Hi Tom,
 
-| checking for gudev-1.0 >= 145... not found
-| *** The required package gudev-1.0 was not found on your system.
-| *** Please install gudev-1.0 (atleast version 145) or adjust
-| *** the PKG_CONFIG_PATH environment variable if you
-| *** installed the package in a nonstandard prefix so that
-| *** pkg-config is able to find it.
-| + bbfatal 'oe_runconf failed'
+please pull these 2 commits from here:
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
----
- .../thunar-volman/thunar-volman_0.6.0.bb           |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+URI: git://git.openembedded.org/openembedded
+Branch: sledz/maintenance
 
-diff --git a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb
-index 377561c..c581d78 100644
---- a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb
-+++ b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Automatic management of removable drives and media for thunar"
- SECTION = "x11"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
--DEPENDS = "exo gtk+ libxfce4ui libxfce4util xfconf libnotify"
-+DEPENDS = "exo gtk+ libxfce4ui libxfce4util xfconf libnotify udev"
- 
- inherit xfce
- 
+Jesse Gilles (1):
+      classpath in 2011.03-maintenance
+
+Stefan Herbrechtsmeier (1):
+      gcc: Remove package libstdc++-dev and libgcc-dev from gcc-cross
+
+Both are bugfixes and already in oe-dev master.
+
+Thx,
+Steffen
+
 -- 
-1.7.4.4
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
