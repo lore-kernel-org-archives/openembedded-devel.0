@@ -1,37 +1,39 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1QzkQ2-0005kI-8l
+Received: from 6.mo4.mail-out.ovh.net ([188.165.36.253]
+	helo=mo4.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1Qzlw3-0007Rt-3L
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Sep 2011 09:13:34 +0200
-Received: by fxg11 with SMTP id 11so2413932fxg.6
+	Sat, 03 Sep 2011 10:50:43 +0200
+Received: from mail92.ha.ovh.net (b6.ovh.net [213.186.33.56])
+	by mo4.mail-out.ovh.net (Postfix) with SMTP id EA669FFA51A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Sep 2011 00:08:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=AIy3qMZ36jvlXbBMkW02kpzM0QBdylexJfpyLIImDOk=;
-	b=BpNXoePeNlUWJzcDMacTCV8fmxwh8U/EpmF1dGZTJeYkcSFQzFP3INqW3NOudUibw9
-	DYMcjgcQFBA/qW3hgqdtmKhgPf86RA4Yso7gKJIbshfoTSZYrvDB/HhtmZx8odjsqrh4
-	XvzbQ4tkoEklT+nJayiOjRGLrhNX3MZq8oAY8=
-Received: by 10.223.91.75 with SMTP id l11mr3175990fam.66.1315033716565;
-	Sat, 03 Sep 2011 00:08:36 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id l21sm753920fac.8.2011.09.03.00.08.34
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 03 Sep 2011 00:08:35 -0700 (PDT)
-Date: Sat, 3 Sep 2011 09:08:28 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sat,  3 Sep 2011 09:30:30 +0200 (CEST)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 3 Sep 2011 09:30:28 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.9?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 3 Sep 2011 09:30:28 +0200
+Message-ID: <4E61D794.9050602@eukrea.com>
+Date: Sat, 03 Sep 2011 09:30:28 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110903070828.GL3634@jama.jama.net>
+X-Ovh-Mailout: 178.32.228.4 (mo4.mail-out.ovh.net)
 References: <1314962732.3526.32.camel@mattotaupa>
 	<1314976910.3526.36.camel@mattotaupa>
 	<1314989318.17121.11.camel@lenovo.internal.reciva.com>
 	<201109022129.26555.schnitzeltony@gmx.de>
 	<j3ri5g$dal$1@dough.gmane.org>
 	<1315000152.6109.14.camel@mattotaupa>
-MIME-Version: 1.0
 In-Reply-To: <1315000152.6109.14.camel@mattotaupa>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Ovh-Tracer-Id: 15534041015159467337
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.500011/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeeftddrudeiucetggdotefuucfrrhhofhhilhgvmecuqfggjfenuceurghilhhouhhtmecufedttdenuc
 Subject: Re: Please merge lists openembedded-devel and openembedded-core again.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,64 +48,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Sep 2011 07:13:34 -0000
-X-Groupsio-MsgNum: 34033
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Mit9XoPEfICDqq/V"
-Content-Disposition: inline
-
---Mit9XoPEfICDqq/V
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Sat, 03 Sep 2011 08:50:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 02, 2011 at 11:49:10PM +0200, Paul Menzel wrote:
+Le 02/09/2011 23:49, Paul Menzel a =E9crit :
 > Am Freitag, den 02.09.2011, 23:34 +0200 schrieb Koen Kooi:
-> > Op 02-09-11 21:29, Andreas M=FCller schreef:
-> > > On Friday, September 02, 2011 08:48:38 PM Phil Blundell wrote:
-> > >> On Fri, 2011-09-02 at 17:21 +0200, Paul Menzel wrote:
-> > >>> Am Freitag, den 02.09.2011, 14:19 +0100 schrieb Richard Purdie:
-> > >>>> I do find the split useful...
-> > >>>=20
-> > >>> Hmm, could you please elaborate?
-> > >>=20
-> > >> Not that I'm Richard, but I do find the split useful as well.=20
-> > >> Personally I am much less interested in the traffic on the oe-devel
-> > >> list and I often ignore that one; I've been somewhat tempted to just=
+>> Op 02-09-11 21:29, Andreas M=FCller schreef:
+>>> I would even prefer having additional meta-oe list separated from
+>>> oe-dev.
+>>
+>> If there's enough need for it, that can get arranged.
+>
+> Why should that be needed? Maybe proposals could be explained and backe=
+d up
+> with arguments for a discussion.
+>
+having a list for legacy oe and a list for new oe seems reasonnable : tha=
+t's
+not the same thing and legacy oe development is no more active (and activ=
+ity=20
+on the mailing list doesn't really show that oe legacy is dead).
+
+And when a user has understood were to find layers, how to work with all =
+these
+layers, where are the recipes he needs in all the layers' directory tree,=
+ what=20
+is the logic (or its absence) to classify recipes, how to customize them =
+to=20
+its need, and how to find in all that mess what broke something which was=
 =20
-> > >> unsubscribe altogether since there doesn't appear to be all that much
-> > >> of value (to me) going on there.
-> >=20
-> > > I would even prefer having additional meta-oe list separated from
-> > > oe-dev.
-> >=20
-> > If there's enough need for it, that can get arranged.
->=20
-> Why should that be needed? Maybe proposals could be explained and backed
-> up with arguments for a discussion.
+working before the last pull, I'm sure he has the knowledge to subscribe =
+to=20
+the list of the layers he is using in order to follow their development ;=
+-)
 
-I don't care if it's all in one list or N > 2 separate lists because
-I'll be subscribed to all and filter will merge all those e-mails to one
-folder anyways..
+Eric
 
-But I see your point that it's harder to decide to which list(s) someone
-should send his question..
 
-Regards,
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---Mit9XoPEfICDqq/V
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk5h0mwACgkQN1Ujt2V2gBzQJgCeNDTwgLFmB1GZVZeM6R2T3qLG
-S7UAnjD6tfrAN8QNNJGduOzqDghFXRk5
-=slt/
------END PGP SIGNATURE-----
-
---Mit9XoPEfICDqq/V--
