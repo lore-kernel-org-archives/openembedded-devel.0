@@ -1,26 +1,37 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Qzbgd-0004ez-8N for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Sep 2011 23:54:07 +0200
-Received: from f053042120.adsl.alicedsl.de ([78.53.42.120]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Qzbc3-0006M1-65 for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Sep 2011 21:49:23 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <martin.jansa@gmail.com>) id 1QzkQ2-0005kI-8l
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 03 Sep 2011 09:13:34 +0200
+Received: by fxg11 with SMTP id 11so2413932fxg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 03 Sep 2011 00:08:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=AIy3qMZ36jvlXbBMkW02kpzM0QBdylexJfpyLIImDOk=;
+	b=BpNXoePeNlUWJzcDMacTCV8fmxwh8U/EpmF1dGZTJeYkcSFQzFP3INqW3NOudUibw9
+	DYMcjgcQFBA/qW3hgqdtmKhgPf86RA4Yso7gKJIbshfoTSZYrvDB/HhtmZx8odjsqrh4
+	XvzbQ4tkoEklT+nJayiOjRGLrhNX3MZq8oAY8=
+Received: by 10.223.91.75 with SMTP id l11mr3175990fam.66.1315033716565;
+	Sat, 03 Sep 2011 00:08:36 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id l21sm753920fac.8.2011.09.03.00.08.34
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 03 Sep 2011 00:08:35 -0700 (PDT)
+Date: Sat, 3 Sep 2011 09:08:28 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 02 Sep 2011 23:49:10 +0200
-In-Reply-To: <j3ri5g$dal$1@dough.gmane.org>
+Message-ID: <20110903070828.GL3634@jama.jama.net>
 References: <1314962732.3526.32.camel@mattotaupa>
 	<1314976910.3526.36.camel@mattotaupa>
 	<1314989318.17121.11.camel@lenovo.internal.reciva.com>
 	<201109022129.26555.schnitzeltony@gmx.de>
 	<j3ri5g$dal$1@dough.gmane.org>
-X-Mailer: Evolution 3.0.2- 
-Message-ID: <1315000152.6109.14.camel@mattotaupa>
-Mime-Version: 1.0
+	<1315000152.6109.14.camel@mattotaupa>
+MIME-Version: 1.0
+In-Reply-To: <1315000152.6109.14.camel@mattotaupa>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: Please merge lists openembedded-devel and openembedded-core again.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,56 +46,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Sep 2011 21:54:07 -0000
-X-Groupsio-MsgNum: 34032
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-2VOMmQUxg1UFHBMHc84z"
+X-List-Received-Date: Sat, 03 Sep 2011 07:13:34 -0000
+X-Groupsio-MsgNum: 34033
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Mit9XoPEfICDqq/V"
+Content-Disposition: inline
 
---=-2VOMmQUxg1UFHBMHc84z
-Content-Type: text/plain; charset="UTF-8"
+--Mit9XoPEfICDqq/V
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Am Freitag, den 02.09.2011, 23:34 +0200 schrieb Koen Kooi:
-> Op 02-09-11 21:29, Andreas M=C3=BCller schreef:
-> > On Friday, September 02, 2011 08:48:38 PM Phil Blundell wrote:
-> >> On Fri, 2011-09-02 at 17:21 +0200, Paul Menzel wrote:
-> >>> Am Freitag, den 02.09.2011, 14:19 +0100 schrieb Richard Purdie:
-> >>>> I do find the split useful...
-> >>>=20
-> >>> Hmm, could you please elaborate?
-> >>=20
-> >> Not that I'm Richard, but I do find the split useful as well.=20
-> >> Personally I am much less interested in the traffic on the oe-devel
-> >> list and I often ignore that one; I've been somewhat tempted to just=
+On Fri, Sep 02, 2011 at 11:49:10PM +0200, Paul Menzel wrote:
+> Am Freitag, den 02.09.2011, 23:34 +0200 schrieb Koen Kooi:
+> > Op 02-09-11 21:29, Andreas M=FCller schreef:
+> > > On Friday, September 02, 2011 08:48:38 PM Phil Blundell wrote:
+> > >> On Fri, 2011-09-02 at 17:21 +0200, Paul Menzel wrote:
+> > >>> Am Freitag, den 02.09.2011, 14:19 +0100 schrieb Richard Purdie:
+> > >>>> I do find the split useful...
+> > >>>=20
+> > >>> Hmm, could you please elaborate?
+> > >>=20
+> > >> Not that I'm Richard, but I do find the split useful as well.=20
+> > >> Personally I am much less interested in the traffic on the oe-devel
+> > >> list and I often ignore that one; I've been somewhat tempted to just=
 =20
-> >> unsubscribe altogether since there doesn't appear to be all that much
-> >> of value (to me) going on there.
+> > >> unsubscribe altogether since there doesn't appear to be all that much
+> > >> of value (to me) going on there.
+> >=20
+> > > I would even prefer having additional meta-oe list separated from
+> > > oe-dev.
+> >=20
+> > If there's enough need for it, that can get arranged.
 >=20
-> > I would even prefer having additional meta-oe list separated from
-> > oe-dev.
->=20
-> If there's enough need for it, that can get arranged.
+> Why should that be needed? Maybe proposals could be explained and backed
+> up with arguments for a discussion.
 
-Why should that be needed? Maybe proposals could be explained and backed
-up with arguments for a discussion.
+I don't care if it's all in one list or N > 2 separate lists because
+I'll be subscribed to all and filter will merge all those e-mails to one
+folder anyways..
 
+But I see your point that it's harder to decide to which list(s) someone
+should send his question..
 
-Thanks,
+Regards,
 
-Paul
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---=-2VOMmQUxg1UFHBMHc84z
+--Mit9XoPEfICDqq/V
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEABECAAYFAk5hT1YACgkQPX1aK2wOHVjVFACfZUjBu7oGbFeiM4bdGds1v1HI
-q6UAn1qUyCKaT+IVQtvba71AL5POWTNo
-=0PdW
+iEYEARECAAYFAk5h0mwACgkQN1Ujt2V2gBzQJgCeNDTwgLFmB1GZVZeM6R2T3qLG
+S7UAnjD6tfrAN8QNNJGduOzqDghFXRk5
+=slt/
 -----END PGP SIGNATURE-----
 
---=-2VOMmQUxg1UFHBMHc84z--
+--Mit9XoPEfICDqq/V--
