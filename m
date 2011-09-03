@@ -1,26 +1,30 @@
-Received: from mailrelay04.sunrise.ch ([194.158.229.47]
-	helo=smtp-be-02.be08.sunrise.ch)
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dv@vollmann.ch>) id 1QzuDE-00036f-Si
+	(envelope-from <dbaryshkov@gmail.com>) id 1Qzv01-0004ML-5H
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Sep 2011 19:41:00 +0200
-Received: from [192.168.26.14] (212-98-43-140.static.adslpremium.ch
-	[212.98.43.140])
-	by smtp-be-02.be08.sunrise.ch (8.13.1/8.12.10) with ESMTP id
-	p83HaIUh006180; Sat, 3 Sep 2011 19:36:18 +0200
-Message-ID: <4E626583.3060302@vollmann.ch>
-Date: Sat, 03 Sep 2011 19:36:03 +0200
-From: Detlef Vollmann <dv@vollmann.ch>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.20) Gecko/20110805 Thunderbird/3.1.12
-MIME-Version: 1.0
+	Sat, 03 Sep 2011 20:31:25 +0200
+Received: by bkbzu17 with SMTP id zu17so3342562bkb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 03 Sep 2011 11:26:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=D931QbPwAV0+QRoozyw1Q6Qk9OLJ547XOjfsikOtqkQ=;
+	b=aRVXtI9YtkGSf6ylj71B0+vcvfDxCLBYM9GBso7p//4k8nNAbn1hMCTvqHbd2FGk16
+	0k8QxfmT8v6zmWZG6Q4kLZ+oIBOqVyzg0Zqb2JVuggNr4iyFGsa8CPMHsrFkVUAIdSYk
+	zrFm6UPH+wA+cA9NTZjhkhSXvvDcCKnCF+prs=
+Received: by 10.204.154.68 with SMTP id n4mr1205956bkw.78.1315074386513;
+	Sat, 03 Sep 2011 11:26:26 -0700 (PDT)
+Received: from localhost.localdomain ([194.85.238.22])
+	by mx.google.com with ESMTPS id z7sm1089936bkt.5.2011.09.03.11.26.24
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 03 Sep 2011 11:26:25 -0700 (PDT)
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1314962732.3526.32.camel@mattotaupa>	<CAP9ODKpMU3yr==7+qyBvTyW3ikoSXtZqurKwsCn3Nn_54E0k7Q@mail.gmail.com>	<1314969543.5939.586.camel@rex>	<CAP9ODKoDFrgfTXeCw-dtGn4s_V+Uxh4U4HfbWe-0OOBAC385=g@mail.gmail.com>	<89FA71E7-9402-4458-BC9E-42655707B091@dominion.thruhere.net>	<CAP9ODKq2-xj2v1EN461+Lzon2oXCw4g+swE1T62teuxK9TzfvA@mail.gmail.com>
-	<1314982026.5939.607.camel@rex>
-In-Reply-To: <1314982026.5939.607.camel@rex>
-Cc: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Please merge lists openembedded-devel and openembedded-core again.
+Date: Sat,  3 Sep 2011 22:26:17 +0400
+Message-Id: <1315074378-3291-1-git-send-email-dbaryshkov@gmail.com>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+Subject: [meta-oe 1/2] openssl: fix parallel builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,48 +38,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Sep 2011 17:41:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 03 Sep 2011 18:31:25 -0000
 
-On 09/02/11 18:47, Richard Purdie wrote:
-> On Fri, 2011-09-02 at 10:53 -0300, Otavio Salvador wrote:
->> On Fri, Sep 2, 2011 at 10:33, Koen Kooi<koen@dominion.thruhere.net>  wrote:
->>> That sounds like people should just subscribe to oe-core if they want to be aware of changes instead of merging the 2 lists.
->>
->> Many times changes are related to meta-oe and oe-core and we'd need to
->> cross-post and seems wrong.
->
-> I don't think this is actually true and its reasonable to assume
-> discussion on OE-Core is seen by everyone.
-Currently, the list descriptions read:
-"openembedded-devel@lists.openembedded.org
-Purpose: General discussion & patch submission
+Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+---
+ .../openssl/openssl-1.0.0d/openssl-fix-link.patch  |   22 ++++++++++++++++++++
+ .../recipes-connectivity/openssl/openssl_1.0.0d.bb |    3 +-
+ 2 files changed, 24 insertions(+), 1 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/openssl/openssl-1.0.0d/openssl-fix-link.patch
 
-openembedded-core@lists.openembedded.org
-Purpose: Discussions and patches for OE-Core"
+diff --git a/meta-oe/recipes-connectivity/openssl/openssl-1.0.0d/openssl-fix-link.patch b/meta-oe/recipes-connectivity/openssl/openssl-1.0.0d/openssl-fix-link.patch
+new file mode 100644
+index 0000000..b319c62
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/openssl/openssl-1.0.0d/openssl-fix-link.patch
+@@ -0,0 +1,22 @@
++Upstream-Status: Pending
++
++fix the parallel build regarding shared libraries.
++
++Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
++
++Index: openssl-1.0.0d/Makefile.org
++===================================================================
++--- openssl-1.0.0d.orig/Makefile.org	2011-09-01 17:03:59.000000000 +0400
+++++ openssl-1.0.0d/Makefile.org	2011-09-01 17:12:24.000000000 +0400
++@@ -246,9 +246,9 @@
++	@dir=crypto; target=all; $(BUILD_ONE_CMD)
++ build_ssl:
++	@dir=ssl; target=all; $(BUILD_ONE_CMD)
++-build_engines:
+++build_engines: build_crypto
++	@dir=engines; target=all; $(BUILD_ONE_CMD)
++-build_apps:
+++build_apps: build_crypto
++	@dir=apps; target=all; $(BUILD_ONE_CMD)
++ build_tests:
++	@dir=test; target=all; $(BUILD_ONE_CMD)
+diff --git a/meta-oe/recipes-connectivity/openssl/openssl_1.0.0d.bb b/meta-oe/recipes-connectivity/openssl/openssl_1.0.0d.bb
+index 73c8df5..89b8615 100644
+--- a/meta-oe/recipes-connectivity/openssl/openssl_1.0.0d.bb
++++ b/meta-oe/recipes-connectivity/openssl/openssl_1.0.0d.bb
+@@ -6,7 +6,7 @@ DEPENDS += "ocf-linux"
+ 
+ CFLAG += "-DHAVE_CRYPTODEV -DUSE_CRYPTODEV_DIGESTS"
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f9a8f968107345e0b75aa8c2ecaa7ec8"
+ 
+@@ -22,6 +22,7 @@ SRC_URI += "file://configure-targets.patch \
+             file://shared-libs.patch \
+             file://oe-ldflags.patch \
+             file://engines-install-in-libdir-ssl.patch \
++            file://openssl-fix-link.patch \
+             file://debian/version-script.patch \
+             file://debian/pic.patch \
+             file://debian/c_rehash-compat.patch \
+-- 
+1.7.2.5
 
-Given this description I see hardly any post to openembedded-core
-that shouldn't go to openembedded-devel as well.
-But cross-posts are bad.
-
-I'm not against two separate lists, but it should be clear what
-should go to which list.  If the separation line is such that
-there are more than 10% cross posts, then the lists should be joined.
-
-BTW, some seem to think that openembedded-devel is for OE-Classic,
-while openembedded-core should be for the new system (i.e. includes
-oe-core and meta-oe).
-That might be a better separation line to avoid cross posts, but
-if that's what people want, this should be clearly said.
-
-Another separation line would be the old -devel and -users separation.
-
-Personally I could live with clearly separated lists, but I think
-that just merging everything into openembedded-devel would be the
-approach that serves all best, as everybody has his own separation
-line anyway.
-
-   Detlef
 
 
