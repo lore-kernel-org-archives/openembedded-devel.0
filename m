@@ -1,30 +1,32 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dbaryshkov@gmail.com>) id 1R0Ghy-0001NK-1F
+	(envelope-from <dbaryshkov@gmail.com>) id 1R0Ghz-0001NL-Qe
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Sep 2011 19:42:14 +0200
-Received: by bkbzu17 with SMTP id zu17so3716895bkb.6
+	Sun, 04 Sep 2011 19:42:16 +0200
+Received: by bkbzu17 with SMTP id zu17so3716930bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Sep 2011 10:37:12 -0700 (PDT)
+	Sun, 04 Sep 2011 10:37:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=Ol07/OUVmRvA86riKyJtyV0A3W5WghG52ROn+ixBRYQ=;
-	b=F2zequ8M9N8wou5hHZI02YtWSpr8llLLQiWaafRNJiTv+4JejeGvOWfhvjSCreds8x
-	g19WGryw9YD64QgXr2xjMYy7ZpTw/rr4dkNbLUiA4jeGXy0CE3fkdopy2/Kxt//MClV2
-	NYVpuJg11R5/n/mQ/HWKpLjGVl0CA2eBgGTU4=
-Received: by 10.204.134.140 with SMTP id j12mr1753164bkt.53.1315157831574;
-	Sun, 04 Sep 2011 10:37:11 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=qh7pj3TGK7nVCrQ2CsP7JAzDJbBODVIDp23oaqWS+t4=;
+	b=m6sBfhrafbUaNDu4tIZLmTfYeXjgXvKZ4YUyhAOf06NGcif8qyiLARCVIx0v3OHsmq
+	LsnvfLfu+a5RBg3xPcj9nQ6Ot94oKU+Fh1LYbjEB8gt2qQXhD3LvBH2szlfqswFpASQ+
+	SjndOTIkWuOpejQpJE9FvMd9wBqFuzSiylm4E=
+Received: by 10.204.137.77 with SMTP id v13mr1693023bkt.344.1315157833081;
+	Sun, 04 Sep 2011 10:37:13 -0700 (PDT)
 Received: from localhost.localdomain ([194.85.238.22])
-	by mx.google.com with ESMTPS id v16sm396213bkd.6.2011.09.04.10.37.09
+	by mx.google.com with ESMTPS id v16sm396213bkd.6.2011.09.04.10.37.11
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 04 Sep 2011 10:37:10 -0700 (PDT)
+	Sun, 04 Sep 2011 10:37:12 -0700 (PDT)
 From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  4 Sep 2011 21:37:03 +0400
-Message-Id: <1315157824-29946-1-git-send-email-dbaryshkov@gmail.com>
+Date: Sun,  4 Sep 2011 21:37:04 +0400
+Message-Id: <1315157824-29946-2-git-send-email-dbaryshkov@gmail.com>
 X-Mailer: git-send-email 1.7.2.5
+In-Reply-To: <1315157824-29946-1-git-send-email-dbaryshkov@gmail.com>
+References: <1315157824-29946-1-git-send-email-dbaryshkov@gmail.com>
 Cc: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-Subject: [meta-oe 1/2] openssl: fully fix parallel builds
+Subject: [meta-oe 2/2] tcp-wrappers: drop emptying PARALLEL_MAKE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,68 +40,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Sep 2011 17:42:14 -0000
+X-List-Received-Date: Sun, 04 Sep 2011 17:42:16 -0000
 
-Add a patch from oe-core to fix parallel builds in openssl 0.9.8m.
-Then drop PARALLEL_MAKE settings in both of recipes.
+As tcp-wrappers are now fixed regarding parallel builds, stop recipe
+from emptying PARALLEL_MAKE.
 
 Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 ---
- .../openssl/openssl-0.9.8m/parallel-make-fix.patch |   20 ++++++++++++++++++++
- .../recipes-connectivity/openssl/openssl_0.9.8m.bb |    3 +--
- .../recipes-connectivity/openssl/openssl_1.0.0d.bb |    1 -
- 3 files changed, 21 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/openssl/openssl-0.9.8m/parallel-make-fix.patch
+ .../tcp-wrappers/tcp-wrappers_7.6.bb               |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/openssl/openssl-0.9.8m/parallel-make-fix.patch b/meta-oe/recipes-connectivity/openssl/openssl-0.9.8m/parallel-make-fix.patch
-new file mode 100644
-index 0000000..82857f5
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/openssl/openssl-0.9.8m/parallel-make-fix.patch
-@@ -0,0 +1,20 @@
-+Upstream-Status: Submitted
-+
-+fix the parallel build regarding shared libraries.
-+
-+Signed-off-by: Qing He <qing.he@intel.com>
-+
-+diff --git a/Makefile.org b/Makefile.org
-+index 2fb0309..8bec3d0 100644
-+--- a/Makefile.org
-++++ b/Makefile.org
-+@@ -352,6 +352,9 @@ all_testapps: build_libs build_testapps
-+ build_testapps:
-+ 	@dir=crypto; target=testapps; $(BUILD_ONE_CMD)
-+ 
-++libcrypto.a: build_crypto
-++libssl.a: build_ssl
-++
-+ build_shared:	$(SHARED_LIBS)
-+ libcrypto$(SHLIB_EXT): libcrypto.a $(SHARED_FIPS)
-+ 	@if [ "$(SHLIB_TARGET)" != "" ]; then \
-diff --git a/meta-oe/recipes-connectivity/openssl/openssl_0.9.8m.bb b/meta-oe/recipes-connectivity/openssl/openssl_0.9.8m.bb
-index a7eb332..1091bf2 100644
---- a/meta-oe/recipes-connectivity/openssl/openssl_0.9.8m.bb
-+++ b/meta-oe/recipes-connectivity/openssl/openssl_0.9.8m.bb
-@@ -11,6 +11,5 @@ export OE_LDFLAGS="${LDFLAGS}"
- SRC_URI += "file://configure-targets.patch \
-             file://shared-libs.patch \
-             file://debian.patch \
-+            file://parallel-make-fix.patch \
-             file://oe-ldflags.patch"
--
--PARALLEL_MAKE = ""
-diff --git a/meta-oe/recipes-connectivity/openssl/openssl_1.0.0d.bb b/meta-oe/recipes-connectivity/openssl/openssl_1.0.0d.bb
-index 89b8615..63b5460 100644
---- a/meta-oe/recipes-connectivity/openssl/openssl_1.0.0d.bb
-+++ b/meta-oe/recipes-connectivity/openssl/openssl_1.0.0d.bb
-@@ -41,6 +41,5 @@ PACKAGES += " \
- 	${PN}-engines-dbg \
- 	"
+diff --git a/meta-oe/recipes-support/tcp-wrappers/tcp-wrappers_7.6.bb b/meta-oe/recipes-support/tcp-wrappers/tcp-wrappers_7.6.bb
+index 96448a9..b8081f1 100644
+--- a/meta-oe/recipes-support/tcp-wrappers/tcp-wrappers_7.6.bb
++++ b/meta-oe/recipes-support/tcp-wrappers/tcp-wrappers_7.6.bb
+@@ -39,7 +39,6 @@ SRC_URI[sha256sum] = "9543d7adedf78a6de0b221ccbbd1952e08b5138717f4ade814039bb489
+ 
+ S = "${WORKDIR}/tcp_wrappers_${PV}"
  
 -PARALLEL_MAKE = ""
- FILES_${PN}-engines = "${libdir}/ssl/engines/*.so"
- FILES_${PN}-engines-dbg = "${libdir}/ssl/engines/.debug"
+ EXTRA_OEMAKE = "'CC=${CC}' \
+ 		'AR=${AR}' \
+ 		'RANLIB=${RANLIB}' \
 -- 
 1.7.2.5
 
