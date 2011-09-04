@@ -1,21 +1,30 @@
-Received: from mailrelay04.sunrise.ch ([194.158.229.47]
-	helo=smtp-be-02.be08.sunrise.ch)
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dv@vollmann.ch>) id 1R0COk-0004gH-8R
+	(envelope-from <dbaryshkov@gmail.com>) id 1R0Fqp-0000OQ-3T
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Sep 2011 15:06:06 +0200
-Received: from [192.168.26.14] (212-98-43-140.static.adslpremium.ch
-	[212.98.43.140])
-	by smtp-be-02.be08.sunrise.ch (8.13.1/8.12.10) with ESMTP id
-	p84D1Khf009764; Sun, 4 Sep 2011 15:01:23 +0200
-Message-ID: <4E637692.2080402@vollmann.ch>
-Date: Sun, 04 Sep 2011 15:01:06 +0200
-From: Detlef Vollmann <dv@vollmann.ch>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.20) Gecko/20110805 Thunderbird/3.1.12
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: filename restrictions for packaged staging
+	Sun, 04 Sep 2011 18:47:19 +0200
+Received: by bkbzu17 with SMTP id zu17so3697770bkb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 04 Sep 2011 09:42:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=w4+GT7jSdACJy0blLuMPXorPboPcLsb2GtQOxVYyrvk=;
+	b=gGd+tr2/JdgzswI9/Np2o1aPZMbdXR+J11siY65+AKh0eiRAbR0qcf5Zmz/hdaTdta
+	piWh9SRY57OnRaBV7ce8dT1+FGpx1fG9rIaRTyuy2DIdlN7vhw1SpswNsoI9ttgkjKPQ
+	XtBRkjBBjQ7OvNdMxKrC50cSC1GHb4HkiA7wE=
+Received: by 10.204.154.150 with SMTP id o22mr1649697bkw.363.1315154539359;
+	Sun, 04 Sep 2011 09:42:19 -0700 (PDT)
+Received: from localhost.localdomain ([194.85.238.22])
+	by mx.google.com with ESMTPS id zw12sm2257104bkb.10.2011.09.04.09.42.17
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 04 Sep 2011 09:42:18 -0700 (PDT)
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  4 Sep 2011 20:42:09 +0400
+Message-Id: <1315154529-19023-1-git-send-email-dbaryshkov@gmail.com>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+Subject: [meta-opie] libopie2: also use gcc45_opiemm_include.patch for git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,30 +38,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Sep 2011 13:06:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 04 Sep 2011 16:47:19 -0000
 
-Some of my recipes fail with
-ERROR: Function 'staging_packager' failed (see /dev/null for further 
-information)
+Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+---
+ recipes-opie/libopie/libopie2_git.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-Unfortunately /dev/null didn't give much information ;-(
+diff --git a/recipes-opie/libopie/libopie2_git.bb b/recipes-opie/libopie/libopie2_git.bb
+index 8ffefe0..ab866d3 100644
+--- a/recipes-opie/libopie/libopie2_git.bb
++++ b/recipes-opie/libopie/libopie2_git.bb
+@@ -6,6 +6,7 @@ PR = "r14"
+ DEFAULT_PREFERENCE = "-1"
+ 
+ SRC_URI = "${OPIE_GIT};protocol=git;subpath=libopie2 \
++           file://gcc45_opiemm_include.patch \
+            file://include.pro"
+ 
+ # FIXME remove this!
+-- 
+1.7.2.5
 
-But eventually (with -vvvvv -D -D -D -D) I got a real error message:
-*** Error: Package name  contains illegal characters, (other than 
-[a-z0-9.+-])
-
-While the '' between 'name' and 'contains' isn't of much help
-either (it's a bug in stage-manager-ipkg-build, I'll file a patch
-for that later), it turned out that my machine name contained
-upper case letters, which stage-manager-ipkg-build doesn't like.
-
-Now without packaged staging everything runs fine, i.e. packages
-in deploy are created with those upper case letters in it.
-So is there a reason why packaged staging is more picky about
-filenames than normal opkg packaging?
-
-   Detlef
 
 
