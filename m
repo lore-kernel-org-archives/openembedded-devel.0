@@ -1,32 +1,19 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mailrelay04.sunrise.ch ([194.158.229.47]
+	helo=smtp-be-02.be08.sunrise.ch)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dbaryshkov@gmail.com>) id 1R0Ghz-0001NL-Qe
+	(envelope-from <dv@vollmann.ch>) id 1R0KDc-0008BE-6n
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Sep 2011 19:42:16 +0200
-Received: by bkbzu17 with SMTP id zu17so3716930bkb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Sep 2011 10:37:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=qh7pj3TGK7nVCrQ2CsP7JAzDJbBODVIDp23oaqWS+t4=;
-	b=m6sBfhrafbUaNDu4tIZLmTfYeXjgXvKZ4YUyhAOf06NGcif8qyiLARCVIx0v3OHsmq
-	LsnvfLfu+a5RBg3xPcj9nQ6Ot94oKU+Fh1LYbjEB8gt2qQXhD3LvBH2szlfqswFpASQ+
-	SjndOTIkWuOpejQpJE9FvMd9wBqFuzSiylm4E=
-Received: by 10.204.137.77 with SMTP id v13mr1693023bkt.344.1315157833081;
-	Sun, 04 Sep 2011 10:37:13 -0700 (PDT)
-Received: from localhost.localdomain ([194.85.238.22])
-	by mx.google.com with ESMTPS id v16sm396213bkd.6.2011.09.04.10.37.11
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 04 Sep 2011 10:37:12 -0700 (PDT)
-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+	Sun, 04 Sep 2011 23:27:09 +0200
+Received: from localhost.localdomain (212-98-43-140.static.adslpremium.ch
+	[212.98.43.140])
+	by smtp-be-02.be08.sunrise.ch (8.13.1/8.12.10) with ESMTP id
+	p84LMOdk004136; Sun, 4 Sep 2011 23:22:24 +0200
+From: "Detlef Vollmann" <dv@vollmann.ch>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  4 Sep 2011 21:37:04 +0400
-Message-Id: <1315157824-29946-2-git-send-email-dbaryshkov@gmail.com>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <1315157824-29946-1-git-send-email-dbaryshkov@gmail.com>
-References: <1315157824-29946-1-git-send-email-dbaryshkov@gmail.com>
-Cc: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-Subject: [meta-oe 2/2] tcp-wrappers: drop emptying PARALLEL_MAKE
+Date: Sun,  4 Sep 2011 23:21:31 +0200
+Message-Id: <1315171293-11256-1-git-send-email-dv@vollmann.ch>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH 0/2] Re: filename restrictions for packaged staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,30 +27,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Sep 2011 17:42:16 -0000
+X-List-Received-Date: Sun, 04 Sep 2011 21:27:09 -0000
 
-As tcp-wrappers are now fixed regarding parallel builds, stop recipe
-from emptying PARALLEL_MAKE.
+From: Detlef Vollmann <dv@vollmann.ch>
 
-Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
----
- .../tcp-wrappers/tcp-wrappers_7.6.bb               |    1 -
- 1 files changed, 0 insertions(+), 1 deletions(-)
+On 09/04/11 15:01, Detlef Vollmann wrote:
+> Some of my recipes fail with
+> ERROR: Function 'staging_packager' failed (see /dev/null for further 
+> information)
+> 
+> Unfortunately /dev/null didn't give much information ;-(
+This was fixed by bitbake commit 90fc09ee050a24095a488d8ce98c7945bf282f6d.
 
-diff --git a/meta-oe/recipes-support/tcp-wrappers/tcp-wrappers_7.6.bb b/meta-oe/recipes-support/tcp-wrappers/tcp-wrappers_7.6.bb
-index 96448a9..b8081f1 100644
---- a/meta-oe/recipes-support/tcp-wrappers/tcp-wrappers_7.6.bb
-+++ b/meta-oe/recipes-support/tcp-wrappers/tcp-wrappers_7.6.bb
-@@ -39,7 +39,6 @@ SRC_URI[sha256sum] = "9543d7adedf78a6de0b221ccbbd1952e08b5138717f4ade814039bb489
- 
- S = "${WORKDIR}/tcp_wrappers_${PV}"
- 
--PARALLEL_MAKE = ""
- EXTRA_OEMAKE = "'CC=${CC}' \
- 		'AR=${AR}' \
- 		'RANLIB=${RANLIB}' \
--- 
-1.7.2.5
+> 
+> But eventually (with -vvvvv -D -D -D -D) I got a real error message:
+> *** Error: Package name contains illegal characters, (other than 
+> [a-z0-9.+-])
+> 
+> While the '' between 'name' and 'contains' isn't of much help
+> either (it's a bug in stage-manager-ipkg-build, I'll file a patch
+> for that later),
+This is a no-brainer.
+
+> it turned out that my machine name contained
+> upper case letters, which stage-manager-ipkg-build doesn't like.
+The second patch also allows uppercase letters, but I have no idea
+what consequences this has...
+
+
+Detlef Vollmann (2):
+  stage-manager: fix typo in error message
+  stage-manager: allow for upper case in package names
+
+ bin/stage-manager-opkg-build |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
 
 
