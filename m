@@ -1,27 +1,31 @@
-Received: from snvl-smtp1.trimble.com ([155.63.64.31])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Bernard_Mentink@trimble.com>) id 1R0eqD-00026l-Rn
+	(envelope-from <dbaryshkov@gmail.com>) id 1R0gBt-0003ut-20
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Sep 2011 21:28:22 +0200
-Received: (qmail 7860 invoked by uid 502); 5 Sep 2011 12:23:19 -0700
-Received: from 10.3.0.166 by snvl-smtp1.trimble.com (envelope-from
-	<Bernard_Mentink@trimble.com>, uid 487) with qmail-scanner-2.08 
-	(clamdscan: 0.97.2/13552. avast: v3.2.1/110904-1. sophie:
-	3.06/3.23.2/4.69. spamassassin: 3.3.1. Clear:RC:1(10.3.0.166):. 
-	Processed in 0.034591 secs); 05 Sep 2011 19:23:19 -0000
-Received: from unknown (HELO nzc-ap-xch-02.ap.trimblecorp.net) (10.3.0.166)
-	by snvl-smtp1.trimble.com with SMTP; 5 Sep 2011 12:23:19 -0700
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Mon, 05 Sep 2011 22:54:49 +0200
+Received: by vwe42 with SMTP id 42so4304005vwe.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 05 Sep 2011 13:49:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=cYWvQaVAtG6p5kheqVvqIqCKlxczzt0dw+1VxcCdlaQ=;
+	b=X+ikEHSOyiY877AYPaGu85ydr7DRTcT5YION3ncuB5ruMEU7gRvPRtRpPx35vrRiYl
+	/Ci3RlFGBszo5fERLg+O90hMLmD3LKRJgwIEbiYx1PGHfrrR0KmwGSCy9hsDbYgvX6rf
+	eo4MBxCiMdhi+Vk6WY0TQgPeIvUbxsEIW1VF8=
 MIME-Version: 1.0
-Date: Tue, 6 Sep 2011 07:23:17 +1200
-Message-ID: <F7C0AA5DD1508F4789E10B6CC9BB75DB04CE2F5D@nzc-ap-xch-02.ap.trimblecorp.net>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: Error building gnome image ... xsltproc
-Thread-Index: AcxsAUPc+JKQqR95Ql+Rwt2hyPyGZA==
-From: "Bernard Mentink" <Bernard_Mentink@trimble.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Error building gnome image ... xsltproc
+Received: by 10.52.178.164 with SMTP id cz4mr4242198vdc.467.1315255787997;
+	Mon, 05 Sep 2011 13:49:47 -0700 (PDT)
+Received: by 10.52.183.37 with HTTP; Mon, 5 Sep 2011 13:49:47 -0700 (PDT)
+In-Reply-To: <201109050122.02940.paul.eggleton@linux.intel.com>
+References: <1315181107-26857-1-git-send-email-dbaryshkov@gmail.com>
+	<201109050122.02940.paul.eggleton@linux.intel.com>
+Date: Tue, 6 Sep 2011 00:49:47 +0400
+Message-ID: <CALT56yMNhEBc3J_e-KD1kA2ZZtY9w-E+zqFVC30zKooGgxV9TA@mail.gmail.com>
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] nandlogical: corect oobblock/writesize patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,36 +39,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Sep 2011 19:28:22 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 05 Sep 2011 20:54:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+
+On 9/5/11, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
+> On Monday 05 September 2011 01:05:07 Dmitry Eremin-Solenikov wrote:
+>> Somehow the oobblock-to-writesize.patch patch got damaged. Correct it.
+>
+> I guess this is for meta-handheld?
+
+Yes.
+
+>
+> Cheers,
+> Paul
+>
+> --
+>
+> Paul Eggleton
+> Intel Open Source Technology Centre
+>
 
 
-Hi Guys,
-
-Am trying to build the systemd-gnome-image and I get a error when
-executing xsltproc on docbook.xsl, error is:
-
- xsltproc -nonet
-http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
-udisks-daemon.xml
-I/O error : Attempt to load network entity
-http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
-warning: failed to load external entity
-"http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
-"
-cannot parse
-http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
-
-I suspect this is a proxy issue: Anyone have a solution for this.
-
-Regards,
-Bernie
-
-
-
-
+-- 
+With best wishes
+Dmitry
 
 
