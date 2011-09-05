@@ -1,27 +1,23 @@
-Received: from mail-qw0-f43.google.com ([209.85.216.43])
+Received: from smtpfb2-g21.free.fr ([212.27.42.10])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sylvain.pare@gmail.com>) id 1R0Tk8-000618-HX
+	(envelope-from <denis@eukrea.com>) id 1R0TrV-0006Aj-6X
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Sep 2011 09:37:20 +0200
-Received: by qwm42 with SMTP id 42so4490650qwm.16
+	Mon, 05 Sep 2011 09:44:57 +0200
+Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
+	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 377EAD1AAA5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Sep 2011 00:32:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=JN3PFbPDGmp758eiPtO8lDXoHxxPQC0HWwqQm/kSUoY=;
-	b=AeTnWSX3Yglb38MHo3z6tzohmxyCN56Pzae5L5h/VtitqW0kKt52zjs4NHRemUl5ba
-	BCklnE/bkRQ4aRq4T0ItrgoJJBlSHgK1Zee7O6FSqJ2IMXoaxb9QOShrskZR2f99r/Dw
-	k4K/2/rFjo3eSRIkRtrbDCmIZiTXFRP8bGQ0M=
-Received: by 10.229.21.20 with SMTP id h20mr1225943qcb.265.1315207940256; Mon,
-	05 Sep 2011 00:32:20 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.229.88.144 with HTTP; Mon, 5 Sep 2011 00:32:00 -0700 (PDT)
-From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
-Date: Mon, 5 Sep 2011 09:32:00 +0200
-Message-ID: <CACrTVgKqqmT4VwbLbn29c4DF3f2kN7T8kbncxts1f+1R5MniAQ@mail.gmail.com>
+	Mon,  5 Sep 2011 09:32:46 +0200 (CEST)
+Received: from PCDEV1.lan (unknown [82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 891544B00C6;
+	Mon,  5 Sep 2011 09:32:41 +0200 (CEST)
+From: Denis Carikli <denis@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: [PATCH] aurora.conf: set default locale for images
+Date: Mon,  5 Sep 2011 09:32:37 +0200
+Message-Id: <1315207957-3663-1-git-send-email-denis@eukrea.com>
+X-Mailer: git-send-email 1.7.4.1
+In-Reply-To: <1314972452-26629-1-git-send-email-denis@eukrea.com>
+References: <1314972452-26629-1-git-send-email-denis@eukrea.com>
+Subject: [PATCH v4] mtd-utils: update to version to 1.4.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,34 +31,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Sep 2011 07:37:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 05 Sep 2011 07:44:57 -0000
 
-    * permit to use GLIBC_GENERATE_LOCALES =3D.. and avoid
+mtd-utils 1.4.6 is the lastest release of mtd-utils
+  at this time.
 
-    opkg_install_cmd: Cannot install package locale-base-.. message during
-do_rootfs
-
-Signed-off-by: Sylvain 'GarthPS' Par=E9 <sylvain.pare@gmail.com>
+Signed-off-by: Denis Carikli <denis@eukrea.com>
 ---
- conf/distro/aurora.conf |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+ .../add-exclusion-to-mkfs-jffs2-git-2.patch        |    0
+ .../mtd/{mtd-utils_1.4.1.bb => mtd-utils_1.4.6.bb} |    7 ++-----
+ 2 files changed, 2 insertions(+), 5 deletions(-)
+ rename meta/recipes-devtools/mtd/{mtd-utils-1.4.1 => mtd-utils-1.4.6}/add-exclusion-to-mkfs-jffs2-git-2.patch (100%)
+ rename meta/recipes-devtools/mtd/{mtd-utils_1.4.1.bb => mtd-utils_1.4.6.bb} (81%)
 
-diff --git a/conf/distro/aurora.conf b/conf/distro/aurora.conf
-index 1ea1691..976d8a2 100644
---- a/conf/distro/aurora.conf
-+++ b/conf/distro/aurora.conf
-@@ -11,6 +11,9 @@
-
- require conf/distro/minimal.conf
-
-+# set default locale for images
-+IMAGE_LINGUAS ?=3D "en-us"
-+
- #
- # Header
- #
---=20
+diff --git a/meta/recipes-devtools/mtd/mtd-utils-1.4.1/add-exclusion-to-mkfs-jffs2-git-2.patch b/meta/recipes-devtools/mtd/mtd-utils-1.4.6/add-exclusion-to-mkfs-jffs2-git-2.patch
+similarity index 100%
+rename from meta/recipes-devtools/mtd/mtd-utils-1.4.1/add-exclusion-to-mkfs-jffs2-git-2.patch
+rename to meta/recipes-devtools/mtd/mtd-utils-1.4.6/add-exclusion-to-mkfs-jffs2-git-2.patch
+diff --git a/meta/recipes-devtools/mtd/mtd-utils_1.4.1.bb b/meta/recipes-devtools/mtd/mtd-utils_1.4.6.bb
+similarity index 81%
+rename from meta/recipes-devtools/mtd/mtd-utils_1.4.1.bb
+rename to meta/recipes-devtools/mtd/mtd-utils_1.4.6.bb
+index c05149d..79f4f15 100644
+--- a/meta/recipes-devtools/mtd/mtd-utils_1.4.1.bb
++++ b/meta/recipes-devtools/mtd/mtd-utils_1.4.6.bb
+@@ -6,12 +6,12 @@ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
+                     file://include/common.h;beginline=1;endline=17;md5=ba05b07912a44ea2bf81ce409380049c"
+ 
+-SRC_URI = "git://git.infradead.org/mtd-utils.git;protocol=git;tag=3c3674a6e1d3f59554b0ff68ca59be2fd4134e0c \
++SRC_URI = "git://git.infradead.org/mtd-utils.git;protocol=git;tag=baafd8ace3301e9d2ba314a376bad008314b34ff \
+ 		file://add-exclusion-to-mkfs-jffs2-git-2.patch"
+ 
+ S = "${WORKDIR}/git/"
+ 
+-PR = "r1"
++PR = "r0"
+ 
+ EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/include -DWITHOUT_XATTR' 'BUILDDIR=${S}'"
+ 
+@@ -26,6 +26,3 @@ do_install () {
+ PARALLEL_MAKE = ""
+ 
+ BBCLASSEXTEND = "native"
+-
+-SRC_URI[md5sum] = "645519b753b364d52c4b941dcee3dd7e"
+-SRC_URI[sha256sum] = "51d6a77c7e673219bb89c4b119f336d9f2f5a5e065a12ecf9636c5348d099a0e"
+-- 
 1.7.4.1
+
+
 
