@@ -1,24 +1,29 @@
-Received: from mailrelay04.sunrise.ch ([194.158.229.47]
-	helo=smtp-be-02.be08.sunrise.ch)
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dv@vollmann.ch>) id 1R0b9F-0005xQ-TF
+	(envelope-from <sledz@dresearch-fe.de>) id 1R0bRV-0006HD-BA
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Sep 2011 17:31:45 +0200
-Received: from [192.168.26.14] (212-98-43-140.static.adslpremium.ch
-	[212.98.43.140])
-	by smtp-be-02.be08.sunrise.ch (8.13.1/8.12.10) with ESMTP id
-	p85FQxdm000661; Mon, 5 Sep 2011 17:26:59 +0200
-Message-ID: <4E64EA36.4090505@vollmann.ch>
-Date: Mon, 05 Sep 2011 17:26:46 +0200
-From: Detlef Vollmann <dv@vollmann.ch>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.21) Gecko/20110831 Thunderbird/3.1.13
+	Mon, 05 Sep 2011 17:50:37 +0200
+Received: by ewy5 with SMTP id 5so2264245ewy.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 05 Sep 2011 08:45:37 -0700 (PDT)
+Received: by 10.213.26.151 with SMTP id e23mr1432886ebc.62.1315237536939;
+	Mon, 05 Sep 2011 08:45:36 -0700 (PDT)
+Received: from mobil-400-586.intern.dresearch.de
+	(pd95cbf07.dip0.t-ipconnect.de [217.92.191.7])
+	by mx.google.com with ESMTPS id w19sm10471360eeh.6.2011.09.05.08.45.35
+	(version=SSLv3 cipher=OTHER); Mon, 05 Sep 2011 08:45:35 -0700 (PDT)
+Message-ID: <4E64EE9D.6090909@dresearch-fe.de>
+Date: Mon, 05 Sep 2011 17:45:33 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:6.0) Gecko/20110812 Thunderbird/6.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <loom.20110905T160251-647@post.gmane.org>
-	<09D9BE2AC4AA764DABAA8C91E48D819E02DBCEC1DE@DEMCHP99E35MSX.ww902.siemens.net>
-In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819E02DBCEC1DE@DEMCHP99E35MSX.ww902.siemens.net>
-Subject: Re: Open Embedded and Gumstix
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Tom Rini <tom.rini@gmail.com>
+References: <4E607624.8010300@dresearch-fe.de>
+In-Reply-To: <4E607624.8010300@dresearch-fe.de>
+X-Enigmail-Version: 1.3.1
+Subject: Re: [2011.03-maintenance] pull request (gcc/java/binutils) - Update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,26 +37,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Sep 2011 15:31:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 05 Sep 2011 15:50:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 09/05/11 16:39, Aeschbacher, Fabrice wrote:
-> We do this kind of thing by using 'packaged-staging':
->
-> - compile the toolchain once on one computer (e.g. 'bitbake meta-toolchain')
-> - copy the resulting staging dir ( ${PSTAGE_DIR} )
->   somewhere ( e.g. http://server/pstage )
-> - Set PSTAGE_MIRROR in your local.conf (e.g. PSTAGE_MIRROR = http://server/pstage/ )
->
-> When then  building on another computer, pre-built packages will be fetched from PSTAGE_MIRROR and not rebuilt. This will drastically speed up build times.
-Be aware though that if those machines are not identical
-(32/64-bit, different Ubuntu versions, different library versions),
-this might break silently.
-So it's safer to pre-build and save your packages once for each
-machine separately.
-But then this will only speed up subsequent builds on the same machine.
+Hi Tom,
 
-   Detlef
+please pull these 3 commits from here:
+
+URI: git://git.openembedded.org/openembedded
+Branch: sledz/maintenance
+
+Jesse Gilles (1):
+      classpath in 2011.03-maintenance
+
+Stefan Herbrechtsmeier (1):
+      gcc: Remove package libstdc++-dev and libgcc-dev from gcc-cross
+
+Steffen Sledz (1):
+      binutils-2.18: fix checksums
+
+All are bugfixes and already in oe-dev master.
+
+Thx,
+Steffen
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
