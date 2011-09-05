@@ -1,23 +1,27 @@
-Received: from smtpfb2-g21.free.fr ([212.27.42.10])
+Received: from mail-qw0-f43.google.com ([209.85.216.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@eukrea.com>) id 1R0TrV-0006Aj-6X
+	(envelope-from <sylvain.pare@gmail.com>) id 1R0Tu8-0006GO-56
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Sep 2011 09:44:57 +0200
-Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
-	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 377EAD1AAA5
+	Mon, 05 Sep 2011 09:47:40 +0200
+Received: by qwm42 with SMTP id 42so4500972qwm.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Sep 2011 09:32:46 +0200 (CEST)
-Received: from PCDEV1.lan (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 891544B00C6;
-	Mon,  5 Sep 2011 09:32:41 +0200 (CEST)
-From: Denis Carikli <denis@eukrea.com>
+	Mon, 05 Sep 2011 00:42:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=rYbkpajqXBl58wtv/2BfqlvtXGwLSJx/0UTizSQ86wk=;
+	b=TJgYZveWewDeoXpux85GziRyV/sDOkk45cRBFLlc6Br6pLYDfQ5MpKeoWYVwoQ8g0H
+	F4cVlUQmYId57B7XGppd/HvXV+qTBD2gyC0TthqmyLUqZEUdy8kqoVP8O6N9sxSoVoFv
+	IA+dniWwfFzl8I9GKgwO0B0xHe29o/LHbxacw=
+Received: by 10.229.21.20 with SMTP id h20mr1232260qcb.265.1315208559686; Mon,
+	05 Sep 2011 00:42:39 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.229.88.144 with HTTP; Mon, 5 Sep 2011 00:42:19 -0700 (PDT)
+From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
+Date: Mon, 5 Sep 2011 09:42:19 +0200
+Message-ID: <CACrTVgKPJz=TzZP1qpArdaScCrTV=tba=XzEJ_urCs6b-v_CzQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 Sep 2011 09:32:37 +0200
-Message-Id: <1315207957-3663-1-git-send-email-denis@eukrea.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <1314972452-26629-1-git-send-email-denis@eukrea.com>
-References: <1314972452-26629-1-git-send-email-denis@eukrea.com>
-Subject: [PATCH v4] mtd-utils: update to version to 1.4.6
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: [PATCH] initscripts-shr: add a palmpre specific umountfs script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,54 +35,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Sep 2011 07:44:57 -0000
+X-List-Received-Date: Mon, 05 Sep 2011 07:47:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-mtd-utils 1.4.6 is the lastest release of mtd-utils
-  at this time.
-
-Signed-off-by: Denis Carikli <denis@eukrea.com>
+Signed-off-by: Sylvain 'GarthPS' Par=E9 <sylvain.pare@gmail.com>
 ---
- .../add-exclusion-to-mkfs-jffs2-git-2.patch        |    0
- .../mtd/{mtd-utils_1.4.1.bb => mtd-utils_1.4.6.bb} |    7 ++-----
- 2 files changed, 2 insertions(+), 5 deletions(-)
- rename meta/recipes-devtools/mtd/{mtd-utils-1.4.1 => mtd-utils-1.4.6}/add-exclusion-to-mkfs-jffs2-git-2.patch (100%)
- rename meta/recipes-devtools/mtd/{mtd-utils_1.4.1.bb => mtd-utils_1.4.6.bb} (81%)
+ recipes/shr/initscripts-shr/palmpre/umountfs |   14 ++++++++++++++
+ recipes/shr/initscripts-shr_0.0.1.bb         |    2 +-
+ 2 files changed, 15 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/shr/initscripts-shr/palmpre/umountfs
 
-diff --git a/meta/recipes-devtools/mtd/mtd-utils-1.4.1/add-exclusion-to-mkfs-jffs2-git-2.patch b/meta/recipes-devtools/mtd/mtd-utils-1.4.6/add-exclusion-to-mkfs-jffs2-git-2.patch
-similarity index 100%
-rename from meta/recipes-devtools/mtd/mtd-utils-1.4.1/add-exclusion-to-mkfs-jffs2-git-2.patch
-rename to meta/recipes-devtools/mtd/mtd-utils-1.4.6/add-exclusion-to-mkfs-jffs2-git-2.patch
-diff --git a/meta/recipes-devtools/mtd/mtd-utils_1.4.1.bb b/meta/recipes-devtools/mtd/mtd-utils_1.4.6.bb
-similarity index 81%
-rename from meta/recipes-devtools/mtd/mtd-utils_1.4.1.bb
-rename to meta/recipes-devtools/mtd/mtd-utils_1.4.6.bb
-index c05149d..79f4f15 100644
---- a/meta/recipes-devtools/mtd/mtd-utils_1.4.1.bb
-+++ b/meta/recipes-devtools/mtd/mtd-utils_1.4.6.bb
-@@ -6,12 +6,12 @@ LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
-                     file://include/common.h;beginline=1;endline=17;md5=ba05b07912a44ea2bf81ce409380049c"
- 
--SRC_URI = "git://git.infradead.org/mtd-utils.git;protocol=git;tag=3c3674a6e1d3f59554b0ff68ca59be2fd4134e0c \
-+SRC_URI = "git://git.infradead.org/mtd-utils.git;protocol=git;tag=baafd8ace3301e9d2ba314a376bad008314b34ff \
- 		file://add-exclusion-to-mkfs-jffs2-git-2.patch"
- 
- S = "${WORKDIR}/git/"
- 
--PR = "r1"
-+PR = "r0"
- 
- EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/include -DWITHOUT_XATTR' 'BUILDDIR=${S}'"
- 
-@@ -26,6 +26,3 @@ do_install () {
- PARALLEL_MAKE = ""
- 
- BBCLASSEXTEND = "native"
--
--SRC_URI[md5sum] = "645519b753b364d52c4b941dcee3dd7e"
--SRC_URI[sha256sum] = "51d6a77c7e673219bb89c4b119f336d9f2f5a5e065a12ecf9636c5348d099a0e"
--- 
+diff --git a/recipes/shr/initscripts-shr/palmpre/umountfs
+b/recipes/shr/initscripts-shr/palmpre/umountfs
+new file mode 100644
+index 0000000..98ac3c2
+--- /dev/null
++++ b/recipes/shr/initscripts-shr/palmpre/umountfs
+@@ -0,0 +1,14 @@
++#! /bin/sh
++#
++# umountfs    Turn off swap and unmount all local filesystems.
++#
++
++PATH=3D/sbin:/bin:/usr/sbin:/usr/bin
++
++# We leave /proc mounted.
++echo "Unmounting local filesystems..."
++grep -q /mnt/ram /proc/mounts && mount -o remount,ro /mnt/ram
++
++mount -o remount,ro /
++
++: exit 0
+\ No newline at end of file
+diff --git a/recipes/shr/initscripts-shr_0.0.1.bb b/recipes/shr/
+initscripts-shr_0.0.1.bb
+index 02e2205..b45296a 100644
+--- a/recipes/shr/initscripts-shr_0.0.1.bb
++++ b/recipes/shr/initscripts-shr_0.0.1.bb
+@@ -8,7 +8,7 @@ RDEPENDS_${PN} =3D "procps ${EXTRA_DEPS}"
+ LICENSE =3D "MIT"
+ LIC_FILES_CHKSUM =3D
+"file://${COREBASE}/meta/COPYING.MIT;md5=3D3da9cfbcb788c80a0384361b4de20420=
+"
+ PV =3D "0.0.1"
+-PR =3D "r29"
++PR =3D "r30"
+
+ RCONFLICTS_${PN} =3D "initscripts"
+
+--=20
 1.7.4.1
-
-
 
