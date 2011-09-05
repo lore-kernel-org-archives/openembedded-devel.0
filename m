@@ -1,29 +1,24 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from [93.100.122.208] (helo=localhost.localdomain)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1R0bRV-0006HD-BA
+	(envelope-from <gvaxon@gmail.com>) id 1R0eBV-00012U-Nw
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Sep 2011 17:50:37 +0200
-Received: by ewy5 with SMTP id 5so2264245ewy.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Sep 2011 08:45:37 -0700 (PDT)
-Received: by 10.213.26.151 with SMTP id e23mr1432886ebc.62.1315237536939;
-	Mon, 05 Sep 2011 08:45:36 -0700 (PDT)
-Received: from mobil-400-586.intern.dresearch.de
-	(pd95cbf07.dip0.t-ipconnect.de [217.92.191.7])
-	by mx.google.com with ESMTPS id w19sm10471360eeh.6.2011.09.05.08.45.35
-	(version=SSLv3 cipher=OTHER); Mon, 05 Sep 2011 08:45:35 -0700 (PDT)
-Message-ID: <4E64EE9D.6090909@dresearch-fe.de>
-Date: Mon, 05 Sep 2011 17:45:33 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:6.0) Gecko/20110812 Thunderbird/6.0
+	Mon, 05 Sep 2011 20:46:18 +0200
+Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
+	by localhost.localdomain (8.14.3/8.14.3) with ESMTP id p85IlUw1005004; 
+	Mon, 5 Sep 2011 22:47:30 +0400
+Received: (from vaxon@localhost)
+	by localhost.localdomain (8.14.3/8.14.3/Submit) id p85IlSPS005002;
+	Mon, 5 Sep 2011 22:47:28 +0400
+X-Authentication-Warning: localhost.localdomain: vaxon set sender to
+	gvaxon@gmail.com using -f
+Date: Mon, 5 Sep 2011 22:47:28 +0400
+From: Valentine Barshak <gvaxon@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110905184728.GA4961@gmail.com>
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Tom Rini <tom.rini@gmail.com>
-References: <4E607624.8010300@dresearch-fe.de>
-In-Reply-To: <4E607624.8010300@dresearch-fe.de>
-X-Enigmail-Version: 1.3.1
-Subject: Re: [2011.03-maintenance] pull request (gcc/java/binutils) - Update
+In-Reply-To: <20110831230317.GA6388@gmail.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Changing SRCREV in amend.inc doesn't work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,38 +32,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Sep 2011 15:50:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 05 Sep 2011 18:46:18 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi Tom,
+bump
 
-please pull these 3 commits from here:
+Could anybody help here?
+Did I miss anything or is there a problem amending uclibc SRCREV?
 
-URI: git://git.openembedded.org/openembedded
-Branch: sledz/maintenance
+Even though bitbake -e uclibc shows the amended SRCREV,
+SRCPV is set using the old value, and do_fetch task uses the old
+SRVREV as well.
 
-Jesse Gilles (1):
-      classpath in 2011.03-maintenance
-
-Stefan Herbrechtsmeier (1):
-      gcc: Remove package libstdc++-dev and libgcc-dev from gcc-cross
-
-Steffen Sledz (1):
-      binutils-2.18: fix checksums
-
-All are bugfixes and already in oe-dev master.
-
-Thx,
-Steffen
-
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+TIA,
+Val.
 
 
