@@ -1,31 +1,23 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dbaryshkov@gmail.com>) id 1R0gBt-0003ut-20
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Sep 2011 22:54:49 +0200
-Received: by vwe42 with SMTP id 42so4304005vwe.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Sep 2011 13:49:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=cYWvQaVAtG6p5kheqVvqIqCKlxczzt0dw+1VxcCdlaQ=;
-	b=X+ikEHSOyiY877AYPaGu85ydr7DRTcT5YION3ncuB5ruMEU7gRvPRtRpPx35vrRiYl
-	/Ci3RlFGBszo5fERLg+O90hMLmD3LKRJgwIEbiYx1PGHfrrR0KmwGSCy9hsDbYgvX6rf
-	eo4MBxCiMdhi+Vk6WY0TQgPeIvUbxsEIW1VF8=
-MIME-Version: 1.0
-Received: by 10.52.178.164 with SMTP id cz4mr4242198vdc.467.1315255787997;
-	Mon, 05 Sep 2011 13:49:47 -0700 (PDT)
-Received: by 10.52.183.37 with HTTP; Mon, 5 Sep 2011 13:49:47 -0700 (PDT)
-In-Reply-To: <201109050122.02940.paul.eggleton@linux.intel.com>
-References: <1315181107-26857-1-git-send-email-dbaryshkov@gmail.com>
-	<201109050122.02940.paul.eggleton@linux.intel.com>
-Date: Tue, 6 Sep 2011 00:49:47 +0400
-Message-ID: <CALT56yMNhEBc3J_e-KD1kA2ZZtY9w-E+zqFVC30zKooGgxV9TA@mail.gmail.com>
-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] nandlogical: corect oobblock/writesize patch
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1R0ggq-0004kY-BT for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Sep 2011 23:26:48 +0200
+Received: from f053041232.adsl.alicedsl.de ([78.53.41.232]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1R0gc3-0004sd-Qs for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Sep 2011 21:21:52 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 05 Sep 2011 23:21:48 +0200
+In-Reply-To: <F7C0AA5DD1508F4789E10B6CC9BB75DB04CE2F5D@nzc-ap-xch-02.ap.trimblecorp.net>
+References: <F7C0AA5DD1508F4789E10B6CC9BB75DB04CE2F5D@nzc-ap-xch-02.ap.trimblecorp.net>
+X-Mailer: Evolution 3.0.3- 
+Message-ID: <1315257709.16863.59.camel@mattotaupa>
+Mime-Version: 1.0
+Subject: Re: Error building gnome image ... xsltproc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,30 +31,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Sep 2011 20:54:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 05 Sep 2011 21:26:48 -0000
+X-Groupsio-MsgNum: 34070
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-Cq1UB5taXgen6U1FaZuv"
 
-On 9/5/11, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
-> On Monday 05 September 2011 01:05:07 Dmitry Eremin-Solenikov wrote:
->> Somehow the oobblock-to-writesize.patch patch got damaged. Correct it.
->
-> I guess this is for meta-handheld?
+--=-Cq1UB5taXgen6U1FaZuv
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Yes.
-
->
-> Cheers,
-> Paul
->
-> --
->
-> Paul Eggleton
-> Intel Open Source Technology Centre
->
+Dear Bernard,
 
 
--- 
-With best wishes
-Dmitry
+Am Dienstag, den 06.09.2011, 07:23 +1200 schrieb Bernard Mentink:
+> Hi Guys,
+>=20
+> Am trying to build the systemd-gnome-image and I get a error when
+> executing xsltproc on docbook.xsl, error is:
+>=20
+>  xsltproc -nonet
+> http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
+> udisks-daemon.xml
+> I/O error : Attempt to load network entity
+> http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
+> warning: failed to load external entity
+> "http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
+> "
+> cannot parse
+> http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
+>=20
+> I suspect this is a proxy issue: Anyone have a solution for this.
+
+I do not know if you use oe-core/meta-oe or oe.dev/oe-classic. For
+oe.dev you have to install it on the build host.
+
+	$ sudo aptitude install docbook-xsl
 
 
+Thanks,
+
+Paul
+
+--=-Cq1UB5taXgen6U1FaZuv
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk5lPWwACgkQPX1aK2wOHViZkgCfaIbS1TqPmOlSiyhaabrymnWc
+a1YAn2FJSUV7cKcRfDPV7GykLTkW5va1
+=uTUB
+-----END PGP SIGNATURE-----
+
+--=-Cq1UB5taXgen6U1FaZuv--
