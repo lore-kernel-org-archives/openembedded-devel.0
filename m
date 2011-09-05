@@ -1,30 +1,24 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dbaryshkov@gmail.com>) id 1R0MlX-0003Gu-0t
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1R0N1l-0003XO-Me
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Sep 2011 02:10:19 +0200
-Received: by bkbzu17 with SMTP id zu17so3838609bkb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Sep 2011 17:05:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=5iXMqvRhDQLFIL4RctNtjGtPcttUuc+NocODL+JydSo=;
-	b=lyqvTlVl+Nss6kszuA3mXpxp+HN+CAOt7ZECODP9GRADYEZ3Z4v69zPac2crCo+W1r
-	/mG8FaJFPgz2IiVZrrILLkafJAZc81zTuX1WYrgbfC+aOqaIewxP3ClFOZ09Cn0iFbCf
-	zpS63il6M6qWnUL4ESN26NxEzkYH6KVoHdJRg=
-Received: by 10.204.13.81 with SMTP id b17mr1794441bka.278.1315181118775;
-	Sun, 04 Sep 2011 17:05:18 -0700 (PDT)
-Received: from localhost.localdomain ([194.85.238.22])
-	by mx.google.com with ESMTPS id j1sm2734275bks.3.2011.09.04.17.05.16
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 04 Sep 2011 17:05:17 -0700 (PDT)
-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 Sep 2011 04:05:07 +0400
-Message-Id: <1315181107-26857-1-git-send-email-dbaryshkov@gmail.com>
-X-Mailer: git-send-email 1.7.2.5
-Cc: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-Subject: [PATCH] nandlogical: corect oobblock/writesize patch
+	Mon, 05 Sep 2011 02:27:05 +0200
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 04 Sep 2011 17:22:05 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="45215842"
+Received: from unknown (HELO helios.localnet) ([10.255.18.155])
+	by orsmga001.jf.intel.com with ESMTP; 04 Sep 2011 17:22:04 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: "Dmitry Eremin-Solenikov" <dbaryshkov@gmail.com>
+Date: Mon, 5 Sep 2011 01:22:02 +0100
+User-Agent: KMail/1.13.6 (Linux/2.6.38-10-generic-pae; KDE/4.6.2; i686; ; )
+References: <1315181107-26857-1-git-send-email-dbaryshkov@gmail.com>
+In-Reply-To: <1315181107-26857-1-git-send-email-dbaryshkov@gmail.com>
+MIME-Version: 1.0
+Message-Id: <201109050122.02940.paul.eggleton@linux.intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] nandlogical: corect oobblock/writesize patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,99 +32,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Sep 2011 00:10:19 -0000
+X-List-Received-Date: Mon, 05 Sep 2011 00:27:05 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Somehow the oobblock-to-writesize.patch patch got damaged. Correct it.
+On Monday 05 September 2011 01:05:07 Dmitry Eremin-Solenikov wrote:
+> Somehow the oobblock-to-writesize.patch patch got damaged. Correct it.
 
-Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
----
- .../nandlogical/oobblock-to-writesize.patch        |   74 +++++++++++++-------
- 1 files changed, 48 insertions(+), 26 deletions(-)
+I guess this is for meta-handheld?
 
-diff --git a/recipes-bsp/zaurus-utils/nandlogical/oobblock-to-writesize.patch b/recipes-bsp/zaurus-utils/nandlogical/oobblock-to-writesize.patch
-index 23d011e..2d5aba8 100644
---- a/recipes-bsp/zaurus-utils/nandlogical/oobblock-to-writesize.patch
-+++ b/recipes-bsp/zaurus-utils/nandlogical/oobblock-to-writesize.patch
-@@ -6,29 +6,51 @@ Fix build against 2.6.24 kernel.
- Signed off by Stanislav Brabec <utx@penguin.cz>
- Signed off by Andrea Adami <andrea.adami@gmail.com>
- 
----- a/nandlogical.c	2006-06-09 17:06:48.000000000 +0200
--+++ b/nandlogical.c	2011-08-05 11:17:28.000000000 +0200
--138c138
--< 	//ret = nand_read_raw(nand, oobuf, offset, nand->oobblock, nand->oobsize);
-----
--> 	//ret = nand_read_raw(nand, oobuf, offset, nand->writesize, nand->oobsize);
--279,281c279,281
--< 	if (!(meminfo.oobsize == 64 && meminfo.oobblock == 2048) &&
--< 	    !(meminfo.oobsize == 16 && meminfo.oobblock == 512) &&
--< 	    !(meminfo.oobsize == 8 && meminfo.oobblock == 256)) {
-----
--> 	if (!(meminfo.oobsize == 64 && meminfo.writesize == 2048) &&
--> 	    !(meminfo.oobsize == 16 && meminfo.writesize == 512) &&
--> 	    !(meminfo.oobsize == 8 && meminfo.writesize == 256)) {
--287c287
--< 	//printf("erasesize %x\noobblock %x\noobsize %x\nsize %x\n", meminfo.erasesize, meminfo.oobblock, meminfo.oobsize, meminfo.size);
-----
--> 	//printf("erasesize %x\nwritesize %x\noobsize %x\nsize %x\n", meminfo.erasesize, meminfo.writesize, meminfo.oobsize, meminfo.size);
--292c292
--< 	oobbuf = (char *)malloc(meminfo.oobblock);
-----
--> 	oobbuf = (char *)malloc(meminfo.writesize);
--300c300
--< 	bs = meminfo.oobblock;
-----
--> 	bs = meminfo.writesize;
-+Index: survive-1.1.0/nandlogical.c
-+===================================================================
-+--- survive-1.1.0.orig/nandlogical.c	2006-06-09 19:06:48.000000000 +0400
-++++ survive-1.1.0/nandlogical.c	2011-09-05 04:00:37.000000000 +0400
-+@@ -135,7 +135,7 @@
-+ 	oob.start = offset;
-+ 	ret = ioctl(fd, MEMREADOOB, &oob);
-+ 
-+-	//ret = nand_read_raw(nand, oobuf, offset, nand->oobblock, nand->oobsize);
-++	//ret = nand_read_raw(nand, oobuf, offset, nand->writesize, nand->oobsize);
-+ 	if (!ret) {
-+     	    int log_no = nand_get_logical_no(oobbuf);
-+ 	    if (((int)log_no >= 0) && (log_no < blocks)) {
-+@@ -276,20 +276,20 @@
-+ 	}
-+ 
-+ 	/* Make sure device page sizes are valid */
-+-	if (!(meminfo.oobsize == 64 && meminfo.oobblock == 2048) &&
-+-	    !(meminfo.oobsize == 16 && meminfo.oobblock == 512) &&
-+-	    !(meminfo.oobsize == 8 && meminfo.oobblock == 256)) {
-++	if (!(meminfo.oobsize == 64 && meminfo.writesize == 2048) &&
-++	    !(meminfo.oobsize == 16 && meminfo.writesize == 512) &&
-++	    !(meminfo.oobsize == 8 && meminfo.writesize == 256)) {
-+ 	    fprintf(stderr, "Unknown flash (not normal NAND)\n");
-+ 	    close(fd);
-+ 	    exit(1);
-+ 	}
-+ 
-+-	//printf("erasesize %x\noobblock %x\noobsize %x\nsize %x\n", meminfo.erasesize, meminfo.oobblock, meminfo.oobsize, meminfo.size);
-++	//printf("erasesize %x\nwritesize %x\noobsize %x\nsize %x\n", meminfo.erasesize, meminfo.writesize, meminfo.oobsize, meminfo.size);
-+ 	
-+ 	blocks = NAND_LOGICAL_SIZE / meminfo.erasesize;
-+ 	log2phy = (unsigned long *) malloc(blocks * sizeof(unsigned long));
-+ 	readbuf = (char *)malloc(meminfo.erasesize);
-+-	oobbuf = (char *)malloc(meminfo.oobblock);	
-++	oobbuf = (char *)malloc(meminfo.writesize);
-+ 	oob.ptr = oobbuf;
-+ 
-+ 	scan_logical(blocks, meminfo.erasesize);
-+@@ -297,7 +297,7 @@
-+ 	//printf("Start: %x\nEnd: %x\n", start_addr, length);
-+ 	
-+ 	end_addr = start_addr + length;
-+-	bs = meminfo.oobblock;
-++	bs = meminfo.writesize;
-+ 
-+ 	for (ofs = start_addr; ofs < end_addr ; ofs+=bs) {
-+ 	    int new_logical_added = 0;
+Cheers,
+Paul
+
 -- 
-1.7.2.5
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
