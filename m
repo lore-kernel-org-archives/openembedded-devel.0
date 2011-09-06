@@ -1,23 +1,36 @@
-Received: from smtpfb1-g21.free.fr ([212.27.42.9])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1R14pE-00020F-4o
+Received: from 15.mo1.mail-out.ovh.net ([188.165.38.232]
+	helo=mo1.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <denis@eukrea.com>) id 1R16Hg-0003er-0Q
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Sep 2011 01:13:04 +0200
-Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
-	by smtpfb1-g21.free.fr (Postfix) with ESMTP id 508862CD7A
+	Wed, 07 Sep 2011 02:46:32 +0200
+Received: from mail179.ha.ovh.net (b9.ovh.net [213.186.33.59])
+	by mo1.mail-out.ovh.net (Postfix) with SMTP id AD4D4100C544
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Sep 2011 00:58:16 +0200 (CEST)
-Received: from localhost.localdomain (unknown [82.233.81.124])
-	by smtp3-g21.free.fr (Postfix) with ESMTP id 2C359A6192;
-	Wed,  7 Sep 2011 00:58:10 +0200 (CEST)
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+	Tue,  6 Sep 2011 09:04:48 +0200 (CEST)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 6 Sep 2011 09:04:22 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.100?)
+	(denis%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 6 Sep 2011 09:04:20 +0200
+X-Ovh-Mailout: 178.32.228.1 (mo1.mail-out.ovh.net)
+From: Denis Carikli <denis@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Sep 2011 00:58:07 +0200
-Message-Id: <1315349887-328-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.6
-MIME-Version: 1.0
-Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [PATCH] tzcode-native: switch to 2011i as 2011g is no more fetchable
+In-Reply-To: <1315207957-3663-1-git-send-email-denis@eukrea.com>
+References: <1314972452-26629-1-git-send-email-denis@eukrea.com>
+	<1315207957-3663-1-git-send-email-denis@eukrea.com>
+Organization: eukrea
+Date: Tue, 06 Sep 2011 09:04:19 +0200
+Message-ID: <1315292659.1866.0.camel@PCDEV1>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+X-Ovh-Tracer-Id: 14264025920759864649
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.500023/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeeftddrudelucetggdotefuucfrrhhofhhilhgvmecuqfggjfenuceurghilhhouhhtmecufedttdenuc
+Subject: Re: [PATCH v4] mtd-utils: update to version to 1.4.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,52 +44,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Sep 2011 23:13:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 07 Sep 2011 00:46:32 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
----
- ...code-native_2011g.bb =3D> tzcode-native_2011i.bb} |   12 ++++++------
- 1 files changed, 6 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-extended/tzcode/{tzcode-native_2011g.bb =3D> tzco=
-de-native_2011i.bb} (54%)
+Sorry,wrong list.
+I'll re-send on the right list.
 
-diff --git a/meta-oe/recipes-extended/tzcode/tzcode-native_2011g.bb b/met=
-a-oe/recipes-extended/tzcode/tzcode-native_2011i.bb
-similarity index 54%
-rename from meta-oe/recipes-extended/tzcode/tzcode-native_2011g.bb
-rename to meta-oe/recipes-extended/tzcode/tzcode-native_2011i.bb
-index 651d1dd..8ab4504 100644
---- a/meta-oe/recipes-extended/tzcode/tzcode-native_2011g.bb
-+++ b/meta-oe/recipes-extended/tzcode/tzcode-native_2011i.bb
-@@ -9,12 +9,12 @@ LIC_FILES_CHKSUM =3D "file://README;md5=3D3ae8198f82258=
-417ce29066d3b034035"
- # Also, tzdata (and it is needed to build tzcode) version can differ fro=
-m
- # tzcode version, thus this variable
-=20
--TZDATA_PV =3D "2011h"
-+TZDATA_PV =3D "2011i"
-=20
--PR =3D "${INC_PR}.1"
-+PR =3D "${INC_PR}.2"
-=20
--SRC_URI[tzcode-2011g.md5sum] =3D "ecb564279b28c5b184421c525d997d6c"
--SRC_URI[tzcode-2011g.sha256sum] =3D "636c735d8df1276cc8ab88bc31bb36a21f9=
-1ed34e26d181303ecd8fe48021bc2"
--SRC_URI[tzdata-2011h.md5sum] =3D "546d27b6c1e5e1097bd512651815017f"
--SRC_URI[tzdata-2011h.sha256sum] =3D "c098786d053736dd18d4f1fbebdf41554c6=
-fd702a36f75c18f1c66712d2abc24"
-+SRC_URI[tzcode-2011i.md5sum] =3D "cf7f4335b7c8682899fa2814e711c1b2"
-+SRC_URI[tzcode-2011i.sha256sum] =3D "f0dd991de3f8d6c599c104e294377c9befa=
-1ef40aa5a1d09e2e295a453f3c1ec"
-+SRC_URI[tzdata-2011i.md5sum] =3D "c7a86ec34f30f8d6aa77ef94902a3047"
-+SRC_URI[tzdata-2011i.sha256sum] =3D "f8dde7ca5e61f21ac34c8cdbef5568d00c8=
-29981211098f059d8104964c81ffa"
-=20
---=20
-1.7.6
+Denis.
+
 
 
 
