@@ -1,21 +1,24 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1R0tiX-0001Zd-VE
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1R0ueb-0002lK-OY
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Sep 2011 13:21:26 +0200
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 06 Sep 2011 04:16:23 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="45435354"
-Received: from unknown (HELO helios.localnet) ([10.252.120.54])
-	by orsmga002.jf.intel.com with ESMTP; 06 Sep 2011 04:16:23 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Tue, 06 Sep 2011 14:21:26 +0200
+Received: from nat-dem.mentorg.com ([195.212.93.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1R0uZk-000240-Ni from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 06 Sep 2011 05:16:24 -0700
+Received: from localhost.localdomain ([137.202.156.152]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
+	Tue, 6 Sep 2011 14:16:23 +0200
+From: "Noor, Ahsan" <noor_ahsan@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 6 Sep 2011 12:16:22 +0100
-User-Agent: KMail/1.13.6 (Linux/2.6.38-10-generic-pae; KDE/4.6.2; i686; ; )
-MIME-Version: 1.0
-Message-Id: <201109061216.22531.paul.eggleton@linux.intel.com>
-Subject: New meta layers: meta-handheld and meta-opie
+Date: Tue,  6 Sep 2011 17:17:57 +0500
+Message-Id: <cover.1315311355.git.noor_ahsan@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+X-OriginalArrivalTime: 06 Sep 2011 12:16:23.0773 (UTC)
+	FILETIME=[CB3B78D0:01CC6C8E]
+Subject: [meta-oe][PATCH v3 0/1] Pull request for python-lxml
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,56 +32,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Sep 2011 11:21:26 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 06 Sep 2011 12:21:26 -0000
 
-Hi all,
-
-I'd like to announce the availability of two new metadata layers to be used on 
-top of OpenEmbedded-Core [1]. Note that both layers also need meta-oe, a layer 
-that is part of the meta-openembedded repository [2]. 
-
-I'm working on these layers in my spare time and have already had some help 
-from the community (thanks!), further help would be appreciated :)
+From: Noor Ahsan <noor_ahsan@mentor.com>
 
 
-meta-handheld
------------------
+The following changes since commit 6f1aa8626f859accef89c633aadaf13359bb1899:
+  Noor Ahsan (1):
+        Merge remote branch 'upstream/master'
 
-Machine support layer for older handheld devices such as the Sharp Zaurus and 
-HP iPAQ series. Many machines need testing and probably fixes here; there is 
-active work on some machines (e.g. most Zaurus devices, hx4700).
+are available in the git repository at:
 
-Repository: http://cgit.openembedded.org/cgit.cgi/meta-handheld/
-Issues: http://www.linuxtogo.org/gowiki/meta-handheld
+  git://github.com/Noor-Ahsan/meta-oe master
+  https://github.com/Noor-Ahsan/meta-oe/tree/master
 
+Noor Ahsan (1):
+  python-lxml: Add version  2.2.8 (initial recipe)
 
-meta-opie
-------------
+ .../recipes-devtools/python/python-lxml_2.2.8.bb   |   33 ++++++++++++++++++++
+ 1 files changed, 33 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/python/python-lxml_2.2.8.bb
 
-Recipes and associated metadata for building the Opie GUI environment[3] as 
-well as associated Qtopia applications. Some recipes still need some cleanup 
-but most are ready to be built with OE-core.
-
-Repository: http://cgit.openembedded.org/cgit.cgi/meta-opie/
-Issues: http://www.linuxtogo.org/gowiki/meta-opie
-
-
-For more information either check out the "issues" pages above or the README 
-document in each layer.
-
-Cheers,
-Paul
-
-[1] http://www.openembedded.org/wiki/OpenEmbedded-Core
-[2] http://cgit.openembedded.org/cgit.cgi/meta-openembedded
-[3] http://opie.sourceforge.net
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
