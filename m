@@ -1,34 +1,34 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-ey0-f173.google.com ([209.85.215.173])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1R0qS6-0000AJ-JG
+	(envelope-from <martin.jansa@gmail.com>) id 1R0qSG-0000Xc-Tx
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Sep 2011 09:52:14 +0200
-Received: by mail-ew0-f47.google.com with SMTP id 5so2463833ewy.6
+	Tue, 06 Sep 2011 09:52:25 +0200
+Received: by eyb7 with SMTP id 7so4079380eyb.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Sep 2011 00:47:16 -0700 (PDT)
+	Tue, 06 Sep 2011 00:47:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=ZlkA60vgviToa0QoO5puyR7/UC4sGFhY2ldiGc524Zo=;
-	b=Qr4rsDV30rRSUn225BvlvCcf45uBzNjwEPqnAw/4J6jN3annvewVF9Bl7AnSDaDObq
-	qCTw5xAkUj5fRFQus1Ge3EzXXLt84AHK62kdKeKpjWO2TcFt5pHeUarXbCHlBi0K5yKv
-	/GAetB0kEQ0IL6tpYhshk7grEa0vab5PoH+7o=
-Received: by 10.14.3.195 with SMTP id 43mr1569187eeh.28.1315295235957;
-	Tue, 06 Sep 2011 00:47:15 -0700 (PDT)
+	bh=bJMU77Tq1nFPqWU99CQSPNOzxiwYo0oilz8fMZpgcoM=;
+	b=RLXkcvV22wqAWMpb8Yr8L9GJE5xi9Z9wr9pQLcp7e4rYwOi32Ez6+9GkCtJ/TsmMQq
+	RkAlFwkjA3coGm6ifvCkrqt259kpEosfYIvWdb+U8ATGqVcak5FZZ3fvBUk61xyzPOFU
+	pJ6fxmcWAkUuiXLBvMmKEEN3T/da5hmyPYVx4=
+Received: by 10.213.25.201 with SMTP id a9mr1694635ebc.70.1315295243957;
+	Tue, 06 Sep 2011 00:47:23 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b3sm13147424eec.7.2011.09.06.00.47.14
+	by mx.google.com with ESMTPS id g65sm13131470eeg.12.2011.09.06.00.47.22
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 06 Sep 2011 00:47:14 -0700 (PDT)
+	Tue, 06 Sep 2011 00:47:23 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  6 Sep 2011 09:46:41 +0200
-Message-Id: <79f9b3bba4d5fbc588cd98a9241a1c3a0a40e558.1315295094.git.Martin.Jansa@gmail.com>
+Date: Tue,  6 Sep 2011 09:46:42 +0200
+Message-Id: <21665f6b0289bdaacab8210670736e88eb12e175.1315295094.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.6.1
 In-Reply-To: <d8844ea29a966dcba6a0bf1c0c9827ba24b00861.1315295093.git.Martin.Jansa@gmail.com>
 References: <d8844ea29a966dcba6a0bf1c0c9827ba24b00861.1315295093.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1315295093.git.Martin.Jansa@gmail.com>
 References: <cover.1315295093.git.Martin.Jansa@gmail.com>
-Subject: [meta-efl][PATCH 4/6] e-wm: ignore autopoint errors
+Subject: [meta-efl][PATCH 5/6] ecore: add ie /usr/lib/ecore/immodules/xim.so to ${PN}-dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,31 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Sep 2011 07:52:14 -0000
+X-List-Received-Date: Tue, 06 Sep 2011 07:52:25 -0000
 
-| autopoint: File config.rpath has been locally modified.
-| autopoint: warning: File mkinstalldirs has been locally modified.
-| autopoint: *** Some files have been locally modified. Not overwriting
-  them because --force has not been specified. For your convenience, you
-  find the local modifications in the file '/tmp/gtAHz0tp/autopoint.diff'.
-| autopoint: *** Stop.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/e17/e-wm_svn.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ meta-efl/recipes-efl/efl/ecore.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/meta-efl/recipes-efl/e17/e-wm_svn.bb b/meta-efl/recipes-efl/e17/e-wm_svn.bb
-index 38257b5..cb7f445 100644
---- a/meta-efl/recipes-efl/e17/e-wm_svn.bb
-+++ b/meta-efl/recipes-efl/e17/e-wm_svn.bb
-@@ -25,7 +25,7 @@ EXTRA_OECONF = "\
- "
+diff --git a/meta-efl/recipes-efl/efl/ecore.inc b/meta-efl/recipes-efl/efl/ecore.inc
+index 89e578e..9f3d1a4 100644
+--- a/meta-efl/recipes-efl/efl/ecore.inc
++++ b/meta-efl/recipes-efl/efl/ecore.inc
+@@ -73,6 +73,7 @@ FILES_${PN}-job = "${libdir}/libecore_job*.so.*"
+ FILES_${PN}-txt = "${libdir}/libecore_txt*.so.*"
+ FILES_${PN}-x = "${libdir}/libecore_x*.so.*"
+ FILES_${PN}-input = "${libdir}/libecore_input*.so.*"
++FILES_${PN}-dev += "${libdir}/ecore/immodules/*.so"
  
- do_configure_prepend() {
--	autopoint
-+	autopoint || true
- }
- 
- do_install_append() {
+ ECORE_OECONF = "\
+   --x-includes=${STAGING_INCDIR}/X11 \
 -- 
 1.7.6.1
 
