@@ -1,25 +1,24 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1R1HFx-0006w9-VR
+	(envelope-from <patda293@student.liu.se>) id 1R1Haa-0007ME-7Z
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Sep 2011 14:29:30 +0200
-Received: from [192.168.1.15] (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id DFAA14B01C1
+	Wed, 07 Sep 2011 14:50:48 +0200
+Received: by bkbzu17 with SMTP id zu17so148273bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Sep 2011 14:24:25 +0200 (CEST)
-Message-ID: <4E676278.5090803@eukrea.com>
-Date: Wed, 07 Sep 2011 14:24:24 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:6.0.2) Gecko/20110902 Thunderbird/6.0.2
-MIME-Version: 1.0
+	Wed, 07 Sep 2011 05:45:46 -0700 (PDT)
+Received: by 10.204.135.18 with SMTP id l18mr423755bkt.341.1315399545648;
+	Wed, 07 Sep 2011 05:45:45 -0700 (PDT)
+Received: from localhost.localdomain ([130.236.124.167])
+	by mx.google.com with ESMTPS id d12sm238439bke.9.2011.09.07.05.45.44
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 07 Sep 2011 05:45:45 -0700 (PDT)
+From: =?UTF-8?q?Patrik=20Dahlstr=C3=B6m?= <patda293@student.liu.se>
 To: openembedded-devel@lists.openembedded.org
-References: <1315349980-6611-1-git-send-email-eric@eukrea.com>
-	<1315387357-21355-1-git-send-email-eric@eukrea.com>
-	<CAAQYJAtpPps4s7Y5FYEmOYCUX3ynwY+_Hn=37KD2xbDD2k3hrg@mail.gmail.com>
-	<20110907103848.GB19221@jama.jama.net>
-In-Reply-To: <20110907103848.GB19221@jama.jama.net>
-Subject: Re: [meta-oe v2] tzdata & tzcode: update to 2011i
+Date: Wed,  7 Sep 2011 14:45:47 +0200
+Message-Id: <1315399547-13969-1-git-send-email-patda293@student.liu.se>
+X-Mailer: git-send-email 1.7.6
+MIME-Version: 1.0
+Subject: [PATCH] ti-dsplink: added patch to allow use of make_3.82
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,26 +32,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Sep 2011 12:29:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 07 Sep 2011 12:50:48 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Le 07/09/2011 12:38, Martin Jansa a =E9crit :
-> On Wed, Sep 07, 2011 at 12:25:44PM +0200, Andrea Adami wrote:
->> tzdata and tzcode 2011i are already in oe-core.
->> Why do we keep another version here? Maybe because the different do_in=
-stall?
->
-> I've imported 2011e from meta-shr to meta-oe on Sun, 10 Apr 2011, just
-> because oe-core had 2010o in that time and I didn't want to downgrade.
-> Now with newer version in oe-core already I'm fine with dropping it fro=
-m
-> meta-oe.
->
-ok I was asking myself the same question while doing the patch ;-)
-I'll update the patch to drop it from meta-oe
+dsplink compiles and  works fine on beagleboard with make 3.82.
+I do not own any other board to test with.
 
-Eric
+Signed-off-by: Patrik Dahlström <patda293@student.liu.se>
+---
+ .../dsplink_1_65_enable_gnu_make_3.82.patch        |   13 +++++++++++++
+ recipes/ti/ti-dsplink_1.65.00.03.bb                |    1 +
+ 2 files changed, 14 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/ti/ti-dsplink/dsplink_1_65_enable_gnu_make_3.82.patch
+
+diff --git a/recipes/ti/ti-dsplink/dsplink_1_65_enable_gnu_make_3.82.patch b/recipes/ti/ti-dsplink/dsplink_1_65_enable_gnu_make_3.82.patch
+new file mode 100644
+index 0000000..377b2db
+--- /dev/null
++++ b/recipes/ti/ti-dsplink/dsplink_1_65_enable_gnu_make_3.82.patch
+@@ -0,0 +1,13 @@
++--- a/dsplink/make/start.mk.orig	2011-09-01 15:45:23.000000000 +0200
+++++ b/dsplink/make/start.mk	2011-09-01 15:45:40.000000000 +0200
++@@ -41,8 +41,8 @@
++ 
++ 
++ # Check for MAKE version
++-$(if $(filter $(MAKE_VERSION), 3.81 3.81beta1 3.90 3.92),,\
++-$(error This makefile requires one of GNU make version 3.81 3.81beta1 3.90 3.92))
+++$(if $(filter $(MAKE_VERSION), 3.81 3.81beta1 3.82 3.90 3.92),,\
+++$(error This makefile requires one of GNU make version 3.81 3.81beta1 3.82 3.90 3.92))
++ #   ============================================================================
++ #   Export the directory separator
++ #   ============================================================================
+diff --git a/recipes/ti/ti-dsplink_1.65.00.03.bb b/recipes/ti/ti-dsplink_1.65.00.03.bb
+index c2ca5d9..7ff272b 100644
+--- a/recipes/ti/ti-dsplink_1.65.00.03.bb
++++ b/recipes/ti/ti-dsplink_1.65.00.03.bb
+@@ -8,6 +8,7 @@ PV_major = "1_65"
+ PV_DL_PATH = "DSPLink/${PV_major}/${PV}/${PV_dot}"
+ 
+ SRC_URI += "file://dsplink-BKL-fix.patch"
++SRC_URI += "file://dsplink_1_65_enable_gnu_make_3.82.patch"
+ 
+ SRC_URI[dsplinktarball.md5sum] = "1bda596b631bd2f517edc70f6be4f2ca"
+ SRC_URI[dsplinktarball.sha256sum] = "4b1bda89bd8465b887f5bcdf7b95018bc1d1f8968c0c44f8cbad2a9e1c52bcb7"
+-- 
+1.7.6
 
 
 
