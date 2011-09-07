@@ -1,41 +1,34 @@
-Received: from out4.smtp.messagingengine.com ([66.111.4.28])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vjensen@gmx.de>) id 1R1A7T-0004rU-Hn
+	(envelope-from <sylvain.pare@gmail.com>) id 1R1CRg-0003mu-Qo
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Sep 2011 06:52:15 +0200
-Received: from compute3.internal (compute3.nyi.mail.srv.osa [10.202.2.43])
-	by gateway1.nyi.mail.srv.osa (Postfix) with ESMTP id B716824E0B
+	Wed, 07 Sep 2011 09:21:17 +0200
+Received: by qyk9 with SMTP id 9so4496051qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Sep 2011 00:39:41 -0400 (EDT)
-Received: from frontend1.nyi.mail.srv.osa ([10.202.2.160])
-	by compute3.internal (MEProxy); Wed, 07 Sep 2011 00:39:41 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=
-	messagingengine.com; h=date:from:to:subject:in-reply-to
-	:message-id:references:mime-version:content-type; s=smtpout; bh=
-	7IqblISyFxtXwtm32V9RYp73nQk=; b=P9ogHrERcD91ofuIzfTNGV5PNyh3waBk
-	nqPzG+0+xsGVOKbwajqhj2jf79BUiryNzgKyfr5UxkmiTBJamW1uccINeKQPgHvB
-	nEZLThK9x4uPiIWEO0RgcRTXtSnZQ6QVswHmTQbQr98RfuOKSpNLsuPHC9K/W59b
-	44Flbv1vvbw=
-X-Sasl-enc: RSZuGXOKuE+y/JGdiCw1jGLr0Ax4AwGN9IxbBNdHG8A+ 1315370380
-Received: from newslug (hnvr-4dbd1593.pool.mediaWays.net [77.189.21.147])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 0C496B60F4D
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Sep 2011 00:39:39 -0400 (EDT)
-Date: Wed, 7 Sep 2011 06:45:42 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20110824093802.194230@gmx.net>
-Message-ID: <alpine.LNX.2.00.1109070637200.6141@asterix.crazy-teaparty.dyndns.org>
-References: <alpine.LNX.2.00.1108232320390.6141@asterix.crazy-teaparty.dyndns.org>
-	<201108241102.05565.ml@vdm-design.de>
-	<20110824093802.194230@gmx.net>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
+	Wed, 07 Sep 2011 00:16:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=4Av5USrjsH3kkpS7ijyb1BIfSyLvPlPuxwcvKdSDOkw=;
+	b=XuKt7kyMAsaSys0VvqmI3R0Jg/YwXdjWMhCRyFen1smSx0b5K4QDw5P8yGPg0763dS
+	PvSqh3H53bPVvv3aLAeln8IR6ZDJORh5iw+3iMANdBLon1xGTtRIeb/723MZBJ5U5NH0
+	+zt+QOGvH1B7Oz3hcPqcyYhiiBVOkxcFSus9k=
+Received: by 10.229.67.95 with SMTP id q31mr2544903qci.228.1315379772223; Wed,
+	07 Sep 2011 00:16:12 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: bitbaking aufs
+Received: by 10.229.88.144 with HTTP; Wed, 7 Sep 2011 00:15:52 -0700 (PDT)
+In-Reply-To: <CACrTVg+Zig-sAR=gUR2yt+8pRtzx_+gSBYLUnL4qro=A8t9L-Q@mail.gmail.com>
+References: <CACrTVgL3To0AH5H35aBYSuhVif8EK69eAaf2DeB+-7z-y8hDVA@mail.gmail.com>
+	<1315304074.4717.6.camel@mattotaupa>
+	<CACrTVgJnDNks+eJhBP4Pj8o6PLqaZi2sVR62Nw67jKz=Sqj4iA@mail.gmail.com>
+	<1315305904.4717.9.camel@mattotaupa>
+	<CACrTVg+Zig-sAR=gUR2yt+8pRtzx_+gSBYLUnL4qro=A8t9L-Q@mail.gmail.com>
+From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
+Date: Wed, 7 Sep 2011 09:15:52 +0200
+Message-ID: <CACrTVgJv6yroaXzacnXL2Uo1yNvb1wc6YndSufS9iVF78MdkBA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	Paul Menzel <paulepanter@users.sourceforge.net>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] binutils_2.21: recipes updates to new version 2.21.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,53 +42,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Sep 2011 04:52:15 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Wed, 07 Sep 2011 07:21:17 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 24 Aug 2011, Vitus Jensen wrote:
+Hi Paul,
 
-> On Wed, 24 Aug 2011 11:02:05 +0200 Thomas Zimmermann wrote:
->> On Wednesday, August 24, 2011 00:11:39 Vitus Jensen wrote:
->>>
->>> I would like to use a layered filesystem in our ppc603e-based machine:
->>> the rootfs built from openembedded would be read-only, any
->>> customizations go to a writable filesystem and should the need
->>> occur to start fresh all I
->>> need is a mechanism to remove the contents of the writable filesystem.
->>>
->>> In openembedded (2011.03) there is unionfs and aufs
->>> (http://aufs.sourceforge.net/), aufs is more actively developed so
->>> I would like to use that.
-...
+There is a mistake in my last patch.
+As I changed the version of binutils ( + '.1') then patches are not good
+fetched, they are looked for in files/ and not in binutils-2.21/
+What is the best way to fix this ?
+copy binutils-2.21/ into binutils-2.21.1/ with all its patches or update th=
+e
+binutils-2.21.1.bb recipe to point to binutils-2.21/ ?
 
->> In my opinion a standalone aufs recipe is not possible, because the
->> kernel needs to be patched and you have to use the specific branch
->> for your kernel version.
+I will then push propose a new version of my patch.
+Thanks.
+regards,
+
+Sylvain
+
+
+2011/9/6 Sylvain Par=E9 <sylvain.pare@gmail.com>
+
+> Paul,
+> I had already resent my patch with proper -M -C option.
+> Sorry for the noise. It is missing the v2 thing. is it ok?
+> Thanks again. and next I hope it will be good from the start.
+> Greetings,
+> Sylvain
 >
-> In this case (and in the meantime I came to the same conclusion) it is 
-> easiest to use the already patched kernel tree from aufs.sourceforge, 
-> create a linux-aufs_2.6.36.bb and use that for my device.  Or have a 
-> second look to union-mount (http://valerieaurora.org/union/) and build a 
-> recipe for that tree.
-
-FYI:
-
-Built a linux-unionmount 2.6.35 kernel recipe plus 
-initramfs-module-unionmount and installed that.  I did encounter problems 
-to mount the upper-half (filesystems ext2 and jffs2 weren't accepted) and 
-when googling for help I found that the race for kernel tree acceptance is 
-still open: it might be overlayfs and not union-mount.  Let's wait some 
-years and see :-(
-
-As I need a working solution now and aufs2 is actively developed 
-(ready-to-be-made kernel trees up to 3.0.0) I will now create a 
-linux-aufs2 bb.
-
-Bye,
-    Vitus
-
--- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
-
+>
+>
+> 2011/9/6 Paul Menzel <paulepanter@users.sourceforge.net>
+>
+>> Am Dienstag, den 06.09.2011, 12:22 +0200 schrieb Sylvain Par=E9:
+>>
+>> > thank you. I was just seing these *@# line breaks..
+>> > So yes I will use git-send.
+>> >
+>> > So about my patch I re-send a new one right?
+>>
+>> Yeah, fix the commit message with `git commit -s --amend` or `git rebase
+>> -i =85`, create a new file with
+>>
+>>        git format-patch -s -1 -M -M -C -C -C --subject-prefix=3D"PATCH
+>>        v2"
+>>
+>> and use `git send-email =85`.
+>>
+>>
+>> Thanks,
+>>
+>> Paul
+>>
+>>
+>> [1]
+>> http://openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmbedded
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>>
+>
 
