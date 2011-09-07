@@ -1,33 +1,41 @@
-Received: from 16.mo3.mail-out.ovh.net ([188.165.56.217]
-	helo=mo3.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1R17zW-0005fv-52
+Received: from out4.smtp.messagingengine.com ([66.111.4.28])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <vjensen@gmx.de>) id 1R1A7T-0004rU-Hn
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Sep 2011 04:35:54 +0200
-Received: from mail33.ha.ovh.net (b9.ovh.net [213.186.33.59])
-	by mo3.mail-out.ovh.net (Postfix) with SMTP id 7085FFFB5B3
+	Wed, 07 Sep 2011 06:52:15 +0200
+Received: from compute3.internal (compute3.nyi.mail.srv.osa [10.202.2.43])
+	by gateway1.nyi.mail.srv.osa (Postfix) with ESMTP id B716824E0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Sep 2011 22:33:25 +0200 (CEST)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 6 Sep 2011 22:32:19 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 6 Sep 2011 22:32:19 +0200
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+	Wed,  7 Sep 2011 00:39:41 -0400 (EDT)
+Received: from frontend1.nyi.mail.srv.osa ([10.202.2.160])
+	by compute3.internal (MEProxy); Wed, 07 Sep 2011 00:39:41 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=
+	messagingengine.com; h=date:from:to:subject:in-reply-to
+	:message-id:references:mime-version:content-type; s=smtpout; bh=
+	7IqblISyFxtXwtm32V9RYp73nQk=; b=P9ogHrERcD91ofuIzfTNGV5PNyh3waBk
+	nqPzG+0+xsGVOKbwajqhj2jf79BUiryNzgKyfr5UxkmiTBJamW1uccINeKQPgHvB
+	nEZLThK9x4uPiIWEO0RgcRTXtSnZQ6QVswHmTQbQr98RfuOKSpNLsuPHC9K/W59b
+	44Flbv1vvbw=
+X-Sasl-enc: RSZuGXOKuE+y/JGdiCw1jGLr0Ax4AwGN9IxbBNdHG8A+ 1315370380
+Received: from newslug (hnvr-4dbd1593.pool.mediaWays.net [77.189.21.147])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 0C496B60F4D
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  7 Sep 2011 00:39:39 -0400 (EDT)
+Date: Wed, 7 Sep 2011 06:45:42 +0200 (CEST)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-Ovh-Mailout: 178.32.228.3 (mo3.mail-out.ovh.net)
-Date: Tue,  6 Sep 2011 22:32:16 +0200
-Message-Id: <1315341136-25548-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.6
+In-Reply-To: <20110824093802.194230@gmx.net>
+Message-ID: <alpine.LNX.2.00.1109070637200.6141@asterix.crazy-teaparty.dyndns.org>
+References: <alpine.LNX.2.00.1108232320390.6141@asterix.crazy-teaparty.dyndns.org>
+	<201108241102.05565.ml@vdm-design.de>
+	<20110824093802.194230@gmx.net>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 9462907242802752841
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfedvkedrtdduucetggdotefuucfrrhhofhhilhgvmecuqfggjfenuceurghilhhouhhtmecufedttdenuc
-Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [meta-oe] bianutils-2.20.1: fix checksums
+Subject: Re: bitbaking aufs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,37 +49,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Sep 2011 02:35:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 07 Sep 2011 04:52:15 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-the source archive seems to have changed on the 26 aug 2011, thus
-the checksums have to be updated.
+On Wed, 24 Aug 2011, Vitus Jensen wrote:
 
-Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
----
- .../recipes-devtools/binutils/binutils_2.20.1.bb   |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+> On Wed, 24 Aug 2011 11:02:05 +0200 Thomas Zimmermann wrote:
+>> On Wednesday, August 24, 2011 00:11:39 Vitus Jensen wrote:
+>>>
+>>> I would like to use a layered filesystem in our ppc603e-based machine:
+>>> the rootfs built from openembedded would be read-only, any
+>>> customizations go to a writable filesystem and should the need
+>>> occur to start fresh all I
+>>> need is a mechanism to remove the contents of the writable filesystem.
+>>>
+>>> In openembedded (2011.03) there is unionfs and aufs
+>>> (http://aufs.sourceforge.net/), aufs is more actively developed so
+>>> I would like to use that.
+...
 
-diff --git a/meta-oe/recipes-devtools/binutils/binutils_2.20.1.bb b/meta-=
-oe/recipes-devtools/binutils/binutils_2.20.1.bb
-index 2558bda..cfceab3 100644
---- a/meta-oe/recipes-devtools/binutils/binutils_2.20.1.bb
-+++ b/meta-oe/recipes-devtools/binutils/binutils_2.20.1.bb
-@@ -36,7 +36,7 @@ SRC_URI =3D "\
-      file://202_elflink_noaddneeded_vs_weak.patch \
-      "
-=20
--SRC_URI[md5sum] =3D "9cdfb9d6ec0578c166d3beae5e15c4e5"
--SRC_URI[sha256sum] =3D "228b84722d87e88e7fdd36869e590e649ab523a0800a7d53=
-df906498afe6f6f8"
-+SRC_URI[md5sum] =3D "2b9dc8f2b7dbd5ec5992c6e29de0b764"
-+SRC_URI[sha256sum] =3D "71d37c96451333c5c0b84b170169fdcb138bbb27397dc062=
-81905d9717c8ed64"
-=20
- BBCLASSEXTEND =3D "native"
---=20
-1.7.6
+>> In my opinion a standalone aufs recipe is not possible, because the
+>> kernel needs to be patched and you have to use the specific branch
+>> for your kernel version.
+>
+> In this case (and in the meantime I came to the same conclusion) it is 
+> easiest to use the already patched kernel tree from aufs.sourceforge, 
+> create a linux-aufs_2.6.36.bb and use that for my device.  Or have a 
+> second look to union-mount (http://valerieaurora.org/union/) and build a 
+> recipe for that tree.
 
+FYI:
+
+Built a linux-unionmount 2.6.35 kernel recipe plus 
+initramfs-module-unionmount and installed that.  I did encounter problems 
+to mount the upper-half (filesystems ext2 and jffs2 weren't accepted) and 
+when googling for help I found that the race for kernel tree acceptance is 
+still open: it might be overlayfs and not union-mount.  Let's wait some 
+years and see :-(
+
+As I need a working solution now and aufs2 is actively developed 
+(ready-to-be-made kernel trees up to 3.0.0) I will now create a 
+linux-aufs2 bb.
+
+Bye,
+    Vitus
+
+-- 
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
 
