@@ -1,32 +1,32 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dbaryshkov@gmail.com>) id 1R1Ink-0004r1-GV
+	(envelope-from <dbaryshkov@gmail.com>) id 1R1Inm-0004qz-4G
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Sep 2011 16:08:28 +0200
-Received: by mail-bw0-f47.google.com with SMTP id zu17so214337bkb.6
+	Wed, 07 Sep 2011 16:08:30 +0200
+Received: by mail-bw0-f47.google.com with SMTP id zu17so214309bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Sep 2011 07:03:28 -0700 (PDT)
+	Wed, 07 Sep 2011 07:03:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=gwYlmTF0862CetREoSY5q866nykKLPl92GZzpDo67ng=;
-	b=YNm6HugRdEazLnL02tIPwRfBzRJQhn3tFOgTyn08YrU1jaiCejlokm07Op/SRYqAgJ
-	hBYKdmRTOLi81FmBFuxCkyYdbR90rMcTlXyVT3v+oJIQbLyAwep0+oc5f+rlzmsp7Me/
-	kXfVNa/7fDtX99A+7PWD5GxAv5P0Nqu1gM75Q=
-Received: by 10.204.149.2 with SMTP id r2mr3758890bkv.379.1315404208393;
-	Wed, 07 Sep 2011 07:03:28 -0700 (PDT)
+	bh=nRVS2nYtYRRO8gVBSrs5QL/3P2hlNJnA73U638dhrUs=;
+	b=Ybq4GMhFWP0r4zZKIHPXDBaV2eBiVDLhRkRJ5IHRdz0jtDOYWOvp8HmTapbmgnfl/G
+	cQY5qbEZlayTKJXTjb9GpL/Af6VNtN+oM3VLfha7ls/vfTfhUnEbRcUMPCjsqHc9EwNT
+	nEX/tOndqdbtcu6si6MlyW4ju4bw7QbauXC2I=
+Received: by 10.204.129.194 with SMTP id p2mr3746055bks.233.1315404210030;
+	Wed, 07 Sep 2011 07:03:30 -0700 (PDT)
 Received: from localhost.localdomain ([194.85.238.22])
-	by mx.google.com with ESMTPS id l11sm440069bkb.1.2011.09.07.07.03.26
+	by mx.google.com with ESMTPS id l11sm440069bkb.1.2011.09.07.07.03.28
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 07 Sep 2011 07:03:27 -0700 (PDT)
+	Wed, 07 Sep 2011 07:03:29 -0700 (PDT)
 From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Sep 2011 18:03:03 +0400
-Message-Id: <1315404187-18176-9-git-send-email-dbaryshkov@gmail.com>
+Date: Wed,  7 Sep 2011 18:03:04 +0400
+Message-Id: <1315404187-18176-10-git-send-email-dbaryshkov@gmail.com>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <1315404187-18176-1-git-send-email-dbaryshkov@gmail.com>
 References: <1315404187-18176-1-git-send-email-dbaryshkov@gmail.com>
 Cc: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-Subject: [meta-handheld 08/12] linux.inc: drop old udev check
+Subject: [meta-handheld 09/12] linux.inc: drop OABI-only support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,81 +40,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Sep 2011 14:08:28 -0000
+X-List-Received-Date: Wed, 07 Sep 2011 14:08:30 -0000
 
-We have udev 145, 164, 173 in oe-core/meta-oe and the check was
-for udev < 141.
+It's not logical to support OABI-only config with current kernel/userspace. Drop support
+for OABI configurations. If necessary one can enable OABI compat.
 
 Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 ---
- recipes-kernel/linux/linux.inc |   39 +++++++++++++++------------------------
- 1 files changed, 15 insertions(+), 24 deletions(-)
+ recipes-kernel/linux/linux.inc |   17 ++++++-----------
+ 1 files changed, 6 insertions(+), 11 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux.inc b/recipes-kernel/linux/linux.inc
-index 51231db..03b9811 100644
+index 03b9811..a31669f 100644
 --- a/recipes-kernel/linux/linux.inc
 +++ b/recipes-kernel/linux/linux.inc
-@@ -9,9 +9,6 @@ inherit kernel siteinfo
- # Enable OABI compat for people stuck with obsolete userspace
- ARM_KEEP_OABI ?= "1"
- 
--# Quirk for udev greater or equal 141
--UDEV_GE_141 ?= "0"
--
- # Set the verbosity of kernel messages during runtime
- # You can define CMDLINE_DEBUG in your local.conf or distro.conf to override this behaviour
- CMDLINE_DEBUG ?= '${@base_contains("IMAGE_FEATURES", "debug-tweaks", "debug", "loglevel=3", d)}'
-@@ -87,13 +84,8 @@ do_configure_prepend() {
-         echo 'CONFIG_LOCALVERSION="${LOCALVERSION}"' >>${S}/.config
-         echo '# CONFIG_LOCALVERSION_AUTO is not set' >>${S}/.config
- 
--        #
--        # Udev quirks
--        #
--
-         # Newer versions of udev mandate that sysfs doesn't have deprecated entries
--        if [ "${UDEV_GE_141}" = "1" ] ; then
--            sed -e /CONFIG_SYSFS_DEPRECATED/d \
-+        sed -e /CONFIG_SYSFS_DEPRECATED/d \
-                 -e /CONFIG_SYSFS_DEPRECATED_V2/d \
-                 -e /CONFIG_HOTPLUG/d \
-                 -e /CONFIG_UEVENT_HELPER_PATH/d \
-@@ -107,21 +99,20 @@ do_configure_prepend() {
-                 -e /CONFIG_BLK_DEV_BSG/d \
-                 -i '${S}/.config'
- 
--            echo '# CONFIG_SYSFS_DEPRECATED is not set' >> ${S}/.config
--            echo '# CONFIG_SYSFS_DEPRECATED_V2 is not set' >> ${S}/.config
--            echo 'CONFIG_HOTPLUG=y' >> ${S}/.config
--            echo 'CONFIG_UEVENT_HELPER_PATH=""' >> ${S}/.config
--            echo 'CONFIG_UNIX=y' >> ${S}/.config
--            echo 'CONFIG_SYSFS=y' >> ${S}/.config
--            echo 'CONFIG_PROC_FS=y' >> ${S}/.config
--            echo 'CONFIG_TMPFS=y' >> ${S}/.config
--            echo 'CONFIG_INOTIFY_USER=y' >> ${S}/.config
--            echo 'CONFIG_SIGNALFD=y' >> ${S}/.config
--            echo 'CONFIG_TMPFS_POSIX_ACL=y' >> ${S}/.config
--            echo 'CONFIG_BLK_DEV_BSG=y' >> ${S}/.config
--            echo 'CONFIG_DEVTMPFS=y' >> ${S}/.config
--            echo 'CONFIG_DEVTMPFS_MOUNT=y' >> ${S}/.config
+@@ -38,17 +38,12 @@ do_configure_prepend() {
+         #
+         # oabi / eabi support
+         #
+-        if [ "${TARGET_OS}" = "linux-gnueabi" -o  "${TARGET_OS}" = "linux-uclibceabi" ]; then
+-                echo "CONFIG_AEABI=y"                   >> ${S}/.config
+-                if [ "${ARM_KEEP_OABI}" = "1" ] ; then
+-                        echo "CONFIG_OABI_COMPAT=y"             >> ${S}/.config
+-                else
+-                        echo "# CONFIG_OABI_COMPAT is not set"  >> ${S}/.config
+-                fi
+-        else
+-                echo "# CONFIG_AEABI is not set"        >> ${S}/.config
+-                echo "# CONFIG_OABI_COMPAT is not set"  >> ${S}/.config
 -        fi
-+        echo '# CONFIG_SYSFS_DEPRECATED is not set' >> ${S}/.config
-+        echo '# CONFIG_SYSFS_DEPRECATED_V2 is not set' >> ${S}/.config
-+        echo 'CONFIG_HOTPLUG=y' >> ${S}/.config
-+        echo 'CONFIG_UEVENT_HELPER_PATH=""' >> ${S}/.config
-+        echo 'CONFIG_UNIX=y' >> ${S}/.config
-+        echo 'CONFIG_SYSFS=y' >> ${S}/.config
-+        echo 'CONFIG_PROC_FS=y' >> ${S}/.config
-+        echo 'CONFIG_TMPFS=y' >> ${S}/.config
-+        echo 'CONFIG_INOTIFY_USER=y' >> ${S}/.config
-+        echo 'CONFIG_SIGNALFD=y' >> ${S}/.config
-+        echo 'CONFIG_TMPFS_POSIX_ACL=y' >> ${S}/.config
-+        echo 'CONFIG_BLK_DEV_BSG=y' >> ${S}/.config
-+        echo 'CONFIG_DEVTMPFS=y' >> ${S}/.config
-+        echo 'CONFIG_DEVTMPFS_MOUNT=y' >> ${S}/.config
++	echo "CONFIG_AEABI=y"                   >> ${S}/.config
++	if [ "${ARM_KEEP_OABI}" = "1" ] ; then
++		echo "CONFIG_OABI_COMPAT=y"             >> ${S}/.config
++	else
++		echo "# CONFIG_OABI_COMPAT is not set"  >> ${S}/.config
++	fi
  
-         # Newer inits like systemd need cgroup support
-         if [ "${KERNEL_ENABLE_CGROUPS}" = "1" ] ; then
+         # When enabling thumb for userspace we also need thumb support in the kernel
+         if [ "${ARM_INSTRUCTION_SET}" = "thumb" ] ; then
 -- 
 1.7.2.5
 
