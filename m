@@ -1,27 +1,30 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mikhailboiko85@gmail.com>) id 1R1O7R-0006vi-Fg
+	(envelope-from <errordeveloper@gmail.com>) id 1R1Puj-0000qw-Dm
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Sep 2011 21:49:11 +0200
-Received: by qyk4 with SMTP id 4so1710895qyk.6
+	Wed, 07 Sep 2011 23:44:09 +0200
+Received: by wyf19 with SMTP id 19so98139wyf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Sep 2011 12:44:06 -0700 (PDT)
+	Wed, 07 Sep 2011 14:39:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=38y5h1bnZj/IYpv94/70fK9Ef2hE1jpiw/oKjitudKA=;
-	b=jrIrQqb64OTxc8gmDFLQvUq3kHvF6YocPoTTQUZADWoJi0umEktQ7MCDNnSyQRnAlD
-	hAuK5taGLRhdefhmZTdMmiUrbTkeP1fTuP6bZdwGR1BHuymCd023DvVHMZlzsduL7hD5
-	2/JsBpi56j+jeZoghhquwRYsBzf75CWHrrrH8=
-MIME-Version: 1.0
-Received: by 10.229.248.139 with SMTP id mg11mr3508022qcb.13.1315424646332;
-	Wed, 07 Sep 2011 12:44:06 -0700 (PDT)
-Received: by 10.229.11.67 with HTTP; Wed, 7 Sep 2011 12:44:06 -0700 (PDT)
-Date: Wed, 7 Sep 2011 22:44:06 +0300
-Message-ID: <CAOWBBJyQ=b+zkOgFmn8GaWVVBKyXHcGS3h_ZqXSsG-WYjkgsgA@mail.gmail.com>
-From: Mikhail Boiko <mikhailboiko85@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=utVQz/UvGDFd51gP8qBisj4HaSMDB10k4bCP1/qAtXU=;
+	b=Oz90qMTAVufxi2tTDbT6p5bH7IiMS+gsexxiJll2na8wInumsM1IyyrTLMmMlc/6+N
+	4UrOXBtJm2txwhvV5f2og0vVOpi49Oo3hnTKrGUytlYBuHpvdpyYQqo090mXB+U4tnD1
+	PqNNr4jGW1LlBl2iixSe+ZhcnQl2YxkOqfCuQ=
+Received: by 10.227.7.7 with SMTP id b7mr6941273wbb.63.1315431541393;
+	Wed, 07 Sep 2011 14:39:01 -0700 (PDT)
+Received: from localhost.localdomain
+	(host86-185-41-205.range86-185.btcentralplus.com [86.185.41.205])
+	by mx.google.com with ESMTPS id fa3sm2014223wbb.3.2011.09.07.14.38.59
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 07 Sep 2011 14:39:00 -0700 (PDT)
+From: Ilya Dmitrichenko <errordeveloper@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Some issues with compiling xbmc
+Date: Wed,  7 Sep 2011 23:38:57 +0100
+Message-Id: <1315435137-5591-1-git-send-email-errordeveloper@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [PATCH] binutils-2.20.1: fix checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,32 +38,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Sep 2011 19:49:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 07 Sep 2011 21:44:09 -0000
 
-Hi
+Signed-off-by: Ilya Dmitrichenko <errordeveloper@gmail.com>
+---
+ recipes/binutils/binutils_2.20.1.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-Had some issues with compiling xbmc for "babbage" machine and I managed to
-solve them, but in a very, very strange way.
-When compiling xbmc, i had error because build system was trying to link
-libraries from my host system. Typical error message looked like this:
->>> /usr/lib/libz.so: file not recognized: File format not recognized
->>> collect2: ld returned 1 exit status
-That was pretty odd, because when I built xbmc for beagleboard, I had no
-such errors. I traced that libtool try to link packages from my host system,
-if in apropriate *.la file, "installed" parametr set to "yes". When I
-changed value for "installed" from "yes" to "no", this probles disappeared.
-It was done for libz.la and libexpat.la, the only libraries I had problem
-with.
-But what is strange to me, when I compiled angstrom 2008 for beagleboard,
-value of "installed" parametr in libz.la and libexpat.la files were set to
-"no" by default. So, for different distro versions, libtool generete *.la
-files with different meanings. Don't know who to blame, angstrom or oe.
-Also, this issue can be solved by removing zlib-dev and libexpat-dev
-packages from my host machine (thanks to guys from irc),
+diff --git a/recipes/binutils/binutils_2.20.1.bb b/recipes/binutils/binutils_2.20.1.bb
+index 5154e2d..f40b676 100644
+--- a/recipes/binutils/binutils_2.20.1.bb
++++ b/recipes/binutils/binutils_2.20.1.bb
+@@ -24,8 +24,8 @@ SRC_URI_append_nios2 =" \
+ 	file://binutils-nios2.patch \
+ 	"
+ 
+-SRC_URI[tarball.sha256sum] = "228b84722d87e88e7fdd36869e590e649ab523a0800a7d53df906498afe6f6f8"
+-SRC_URI[tarball.md5sum] = "9cdfb9d6ec0578c166d3beae5e15c4e5"
++SRC_URI[tarball.sha256sum] = "71d37c96451333c5c0b84b170169fdcb138bbb27397dc06281905d9717c8ed64"
++SRC_URI[tarball.md5sum] = "2b9dc8f2b7dbd5ec5992c6e29de0b764"
+ 
+ # powerpc patches
+ SRC_URI += "\
+-- 
+1.7.3.4
 
-I'm not sure that it is critical issue, but al least, people should be
-warned about it.
 
-Thanks
 
