@@ -1,24 +1,29 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <patda293@student.liu.se>) id 1R1Haa-0007ME-7Z
+	(envelope-from <dbaryshkov@gmail.com>) id 1R1InZ-0004qz-Bg
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Sep 2011 14:50:48 +0200
-Received: by bkbzu17 with SMTP id zu17so148273bkb.6
+	Wed, 07 Sep 2011 16:08:17 +0200
+Received: by bkbzu17 with SMTP id zu17so214309bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Sep 2011 05:45:46 -0700 (PDT)
-Received: by 10.204.135.18 with SMTP id l18mr423755bkt.341.1315399545648;
-	Wed, 07 Sep 2011 05:45:45 -0700 (PDT)
-Received: from localhost.localdomain ([130.236.124.167])
-	by mx.google.com with ESMTPS id d12sm238439bke.9.2011.09.07.05.45.44
+	Wed, 07 Sep 2011 07:03:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer;
+	bh=zmeBMwzDOtDB7V5Ylg8+6lNa9TBLnJeIU373Jmp06dI=;
+	b=x0qnkGCcR9qfvRQ5JyUfPxsCHth4RlHZqZxHaB+C3u/ED/eJx2hqeGBbbvfpy3DHK7
+	rvllqMBRAhHOr3bA2wCPAKEtBGUjHcAPywAjUxi/q1o+u7naufBWvpGrTFSDH1Dd4Fc2
+	gUi6gppHTliubJNiY/l3qVk15RikavaxdbfY0=
+Received: by 10.204.140.13 with SMTP id g13mr3436326bku.208.1315404194814;
+	Wed, 07 Sep 2011 07:03:14 -0700 (PDT)
+Received: from localhost.localdomain ([194.85.238.22])
+	by mx.google.com with ESMTPS id l11sm440069bkb.1.2011.09.07.07.03.13
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 07 Sep 2011 05:45:45 -0700 (PDT)
-From: =?UTF-8?q?Patrik=20Dahlstr=C3=B6m?= <patda293@student.liu.se>
+	Wed, 07 Sep 2011 07:03:13 -0700 (PDT)
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Sep 2011 14:45:47 +0200
-Message-Id: <1315399547-13969-1-git-send-email-patda293@student.liu.se>
-X-Mailer: git-send-email 1.7.6
-MIME-Version: 1.0
-Subject: [PATCH] ti-dsplink: added patch to allow use of make_3.82
+Date: Wed,  7 Sep 2011 18:02:55 +0400
+Message-Id: <1315404187-18176-1-git-send-email-dbaryshkov@gmail.com>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [meta-handheld 00/12] linux.inc cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,53 +37,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Sep 2011 12:50:48 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 07 Sep 2011 14:08:17 -0000
 
-dsplink compiles and  works fine on beagleboard with make 3.82.
-I do not own any other board to test with.
+The following changes since commit 6d2d70e158e70952e78ef8ff574fb2d53ed62a50:
 
-Signed-off-by: Patrik Dahlström <patda293@student.liu.se>
----
- .../dsplink_1_65_enable_gnu_make_3.82.patch        |   13 +++++++++++++
- recipes/ti/ti-dsplink_1.65.00.03.bb                |    1 +
- 2 files changed, 14 insertions(+), 0 deletions(-)
- create mode 100644 recipes/ti/ti-dsplink/dsplink_1_65_enable_gnu_make_3.82.patch
+  linux.inc: set debug level according to oe-core (2011-09-06 00:33:32 +0100)
 
-diff --git a/recipes/ti/ti-dsplink/dsplink_1_65_enable_gnu_make_3.82.patch b/recipes/ti/ti-dsplink/dsplink_1_65_enable_gnu_make_3.82.patch
-new file mode 100644
-index 0000000..377b2db
---- /dev/null
-+++ b/recipes/ti/ti-dsplink/dsplink_1_65_enable_gnu_make_3.82.patch
-@@ -0,0 +1,13 @@
-+--- a/dsplink/make/start.mk.orig	2011-09-01 15:45:23.000000000 +0200
-++++ b/dsplink/make/start.mk	2011-09-01 15:45:40.000000000 +0200
-+@@ -41,8 +41,8 @@
-+ 
-+ 
-+ # Check for MAKE version
-+-$(if $(filter $(MAKE_VERSION), 3.81 3.81beta1 3.90 3.92),,\
-+-$(error This makefile requires one of GNU make version 3.81 3.81beta1 3.90 3.92))
-++$(if $(filter $(MAKE_VERSION), 3.81 3.81beta1 3.82 3.90 3.92),,\
-++$(error This makefile requires one of GNU make version 3.81 3.81beta1 3.82 3.90 3.92))
-+ #   ============================================================================
-+ #   Export the directory separator
-+ #   ============================================================================
-diff --git a/recipes/ti/ti-dsplink_1.65.00.03.bb b/recipes/ti/ti-dsplink_1.65.00.03.bb
-index c2ca5d9..7ff272b 100644
---- a/recipes/ti/ti-dsplink_1.65.00.03.bb
-+++ b/recipes/ti/ti-dsplink_1.65.00.03.bb
-@@ -8,6 +8,7 @@ PV_major = "1_65"
- PV_DL_PATH = "DSPLink/${PV_major}/${PV}/${PV_dot}"
- 
- SRC_URI += "file://dsplink-BKL-fix.patch"
-+SRC_URI += "file://dsplink_1_65_enable_gnu_make_3.82.patch"
- 
- SRC_URI[dsplinktarball.md5sum] = "1bda596b631bd2f517edc70f6be4f2ca"
- SRC_URI[dsplinktarball.sha256sum] = "4b1bda89bd8465b887f5bcdf7b95018bc1d1f8968c0c44f8cbad2a9e1c52bcb7"
--- 
-1.7.6
+are available in the git repository at:
+  git://github.com/lumag/meta-handheld.git linux-inc
+
+Dmitry Eremin-Solenikov (12):
+      linux.inc: drop a part of the file for the devices we don't care about
+      linux.inc: drop a hack for kernels <= 2.6.29
+      linux.inc: drop at91sam9263ek cmdline setting
+      linux.inc: drop RPSRC - it's unused now
+      linux.inc: drop devicetree settings
+      linux.inc: devicetree is used on hh boxes, drop dt handling
+      linux.inc: drop savedefconfig, it is provided by kernel.bbclass
+      linux.inc: drop old udev check
+      linux.inc: drop OABI-only support
+      linux.inc: drop cortex-a8 fixup, none of meta-hh machines uses A8
+      linux.inc: drop bigendian support
+      linux.inc: clean up handling of config variables
+
+ recipes-kernel/linux/linux.inc |  265 +++++++++-------------------------------
+ 1 files changed, 60 insertions(+), 205 deletions(-)
 
 
 
