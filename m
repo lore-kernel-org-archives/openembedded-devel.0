@@ -1,37 +1,30 @@
-Received: from mail-qw0-f43.google.com ([209.85.216.43])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sylvain.pare@gmail.com>) id 1R1Ca5-00017g-Oq
+	(envelope-from <martin.jansa@gmail.com>) id 1R1D69-0001XZ-KO
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Sep 2011 09:30:24 +0200
-Received: by qwm42 with SMTP id 42so6934097qwm.16
+	Wed, 07 Sep 2011 10:03:05 +0200
+Received: by pzk2 with SMTP id 2so13655953pzk.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Sep 2011 00:24:55 -0700 (PDT)
+	Wed, 07 Sep 2011 00:58:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=w+q5B7hfx3ez9vlAw/4j9crIBsC79Y8aIF/Fy744yCA=;
-	b=swnoDyDMzpMDPcNsMrr4t4Akut/bAgJyiGBQkb+pfwZM3PrVwAb0bkeObqHoFv0To9
-	sFVbroYv149OWRWlnt+xWrBcra9zcDEoEeNJaBFfNiNmeF88y0wat/MA0R8CSKPXZGo/
-	VEq/XrBQOX5yCvuBQdqJC/mEeYnoxbiZCfG7A=
-Received: by 10.229.72.162 with SMTP id m34mr4693711qcj.189.1315380293239;
-	Wed, 07 Sep 2011 00:24:53 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=D7QPbfAw0E0xbmsbyPW/rI+0HZXHyZv8FHIBjaZbjgE=;
+	b=sjqMtZJV1DsuRjvckGBrlUqqaW4oczthsiLWvhnwixaNzvGoo9Ho+zVGb7XABF6jn/
+	PHUh9SpNITLfJrhj+nd/0PqFTU2QNrD+oA3VcKV/6d7RIYqnNCISuWVe3KurVF61eWNx
+	93HTx6NHNcbIOqktZcQGPOlqx++OGNnFm5cvE=
 MIME-Version: 1.0
-Received: by 10.229.88.144 with HTTP; Wed, 7 Sep 2011 00:24:33 -0700 (PDT)
-In-Reply-To: <20110907072125.GC20853@jama.jama.net>
-References: <CACrTVgL3To0AH5H35aBYSuhVif8EK69eAaf2DeB+-7z-y8hDVA@mail.gmail.com>
-	<1315304074.4717.6.camel@mattotaupa>
-	<CACrTVgJnDNks+eJhBP4Pj8o6PLqaZi2sVR62Nw67jKz=Sqj4iA@mail.gmail.com>
-	<1315305904.4717.9.camel@mattotaupa>
-	<CACrTVg+Zig-sAR=gUR2yt+8pRtzx_+gSBYLUnL4qro=A8t9L-Q@mail.gmail.com>
-	<CACrTVgJv6yroaXzacnXL2Uo1yNvb1wc6YndSufS9iVF78MdkBA@mail.gmail.com>
-	<20110907072125.GC20853@jama.jama.net>
-From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
-Date: Wed, 7 Sep 2011 09:24:33 +0200
-Message-ID: <CACrTVgL7jKMiXctiJMV22bhOHAtTw8ODbYLiV4NQQXoG--wD5w@mail.gmail.com>
+Received: by 10.68.7.36 with SMTP id g4mr7932563pba.109.1315382282596; Wed, 07
+	Sep 2011 00:58:02 -0700 (PDT)
+Received: by 10.142.223.1 with HTTP; Wed, 7 Sep 2011 00:58:02 -0700 (PDT)
+In-Reply-To: <1315341136-25548-1-git-send-email-eric@eukrea.com>
+References: <1315341136-25548-1-git-send-email-eric@eukrea.com>
+Date: Wed, 7 Sep 2011 09:58:02 +0200
+Message-ID: <CA+chaQdYjN2tEhr6NXa0Qvix-1MoRPrG3iVMnD6ueLsSvXL+9g@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
-Subject: Re: [PATCH] binutils_2.21: recipes updates to new version 2.21.1
+Cc: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+Subject: Re: [meta-oe] bianutils-2.20.1: fix checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,107 +38,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Sep 2011 07:31:01 -0000
-Content-Type: text/plain; charset=windows-1252
+X-List-Received-Date: Wed, 07 Sep 2011 08:03:05 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi JaMa,
+This is probably caused by replacing 2.20.1 tarballs with links to 2.20.1a.
 
-yes right thank you! (I could figured it out myself.. :/. to early for me)
+IMHO would be better to change recipes to say 2.20.1a and force
+everybody to redownload it with new name (otherwise breaks checksums
+for everybody with old 2.20.1 in downloads dir)
 
-Sylvain
+Also please provide at least "diff -rq" when sending fix checksums
+patches, otherwise checksums are quite useless.
 
-2011/9/7 Martin Jansa <martin.jansa@gmail.com>
+The same applies to "fix checksums for binutils-2.18"..
 
-> On Wed, Sep 07, 2011 at 09:15:52AM +0200, Sylvain Par=E9 wrote:
-> > Hi Paul,
-> >
-> > There is a mistake in my last patch.
-> > As I changed the version of binutils ( + '.1') then patches are not goo=
-d
-> > fetched, they are looked for in files/ and not in binutils-2.21/
-> > What is the best way to fix this ?
-> > copy binutils-2.21/ into binutils-2.21.1/ with all its patches or updat=
-e
-> the
-> > binutils-2.21.1.bb recipe to point to binutils-2.21/ ?
-> >
-> > I will then push propose a new version of my patch.
+Regards,
+
+2011/9/6 Eric B=C3=A9nard <eric@eukrea.com>:
+> the source archive seems to have changed on the 26 aug 2011, thus
+> the checksums have to be updated.
 >
-> git mv binutils-2.21 binutils-2.21.1
-> as no recipe using binutils-2.21 directory is left
+> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+> ---
+> =C2=A0.../recipes-devtools/binutils/binutils_2.20.1.bb =C2=A0 | =C2=A0 =
+=C2=A04 ++--
+> =C2=A01 files changed, 2 insertions(+), 2 deletions(-)
 >
-> don't forget to update preferred version in sane-toolchain.inc as I said
-> yesterday on IRC
+> diff --git a/meta-oe/recipes-devtools/binutils/binutils_2.20.1.bb b/meta-=
+oe/recipes-devtools/binutils/binutils_2.20.1.bb
+> index 2558bda..cfceab3 100644
+> --- a/meta-oe/recipes-devtools/binutils/binutils_2.20.1.bb
+> +++ b/meta-oe/recipes-devtools/binutils/binutils_2.20.1.bb
+> @@ -36,7 +36,7 @@ SRC_URI =3D "\
+> =C2=A0 =C2=A0 =C2=A0file://202_elflink_noaddneeded_vs_weak.patch \
+> =C2=A0 =C2=A0 =C2=A0"
 >
-> Regards,
+> -SRC_URI[md5sum] =3D "9cdfb9d6ec0578c166d3beae5e15c4e5"
+> -SRC_URI[sha256sum] =3D "228b84722d87e88e7fdd36869e590e649ab523a0800a7d53=
+df906498afe6f6f8"
+> +SRC_URI[md5sum] =3D "2b9dc8f2b7dbd5ec5992c6e29de0b764"
+> +SRC_URI[sha256sum] =3D "71d37c96451333c5c0b84b170169fdcb138bbb27397dc062=
+81905d9717c8ed64"
 >
-> > Thanks.
-> > regards,
-> >
-> > Sylvain
-> >
-> >
-> > 2011/9/6 Sylvain Par=E9 <sylvain.pare@gmail.com>
-> >
-> > > Paul,
-> > > I had already resent my patch with proper -M -C option.
-> > > Sorry for the noise. It is missing the v2 thing. is it ok?
-> > > Thanks again. and next I hope it will be good from the start.
-> > > Greetings,
-> > > Sylvain
-> > >
-> > >
-> > >
-> > > 2011/9/6 Paul Menzel <paulepanter@users.sourceforge.net>
-> > >
-> > >> Am Dienstag, den 06.09.2011, 12:22 +0200 schrieb Sylvain Par=E9:
-> > >>
-> > >> > thank you. I was just seing these *@# line breaks..
-> > >> > So yes I will use git-send.
-> > >> >
-> > >> > So about my patch I re-send a new one right?
-> > >>
-> > >> Yeah, fix the commit message with `git commit -s --amend` or `git
-> rebase
-> > >> -i =85`, create a new file with
-> > >>
-> > >>        git format-patch -s -1 -M -M -C -C -C --subject-prefix=3D"PAT=
-CH
-> > >>        v2"
-> > >>
-> > >> and use `git send-email =85`.
-> > >>
-> > >>
-> > >> Thanks,
-> > >>
-> > >> Paul
-> > >>
-> > >>
-> > >> [1]
-> > >>
-> http://openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmbedded
-> > >>
-> > >> _______________________________________________
-> > >> Openembedded-devel mailing list
-> > >> Openembedded-devel@lists.openembedded.org
-> > >>
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> > >>
-> > >>
-> > >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> =C2=A0BBCLASSEXTEND =3D "native"
 > --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> 1.7.6
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
->
+
 
