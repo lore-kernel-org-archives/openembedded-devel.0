@@ -1,16 +1,29 @@
-Received: from smtp206.alice.it ([82.57.200.102])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1R1mjJ-0003qw-F5
+	(envelope-from <errordeveloper@gmail.com>) id 1R1nF3-0004a3-PS
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Sep 2011 00:05:53 +0200
-Received: from mizar.localdomain (87.14.251.43) by smtp206.alice.it
-	(8.5.124.08) id 4E4BBF7701BD12DC; Fri, 9 Sep 2011 00:00:49 +0200
-From: Andrea Adami <andrea.adami@gmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri,  9 Sep 2011 00:00:41 +0200
-Message-Id: <1315519241-2950-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-Subject: [meta-handheld][PATCH] linux-kexecboot.inc: hardcode loglevel=3 to keep bootlogo intact
+	Fri, 09 Sep 2011 00:38:41 +0200
+Received: by vxj12 with SMTP id 12so1162857vxj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 Sep 2011 15:33:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=lW35LkmA0tuxGOdoX0VUlB6VhpXgh+P3NhjspIl3668=;
+	b=Cwawb/7EjKQF571XDYJkfox0S1eA4orOaJrko0YbIi3ixDTe+jBEWlvYK+GOCE9+8u
+	DO1lyjpnJBxcmcUh5lDaayBMqgTFKBQIaN7yUxrZ5xwmrdiZrOV6WGHQIcDsOEm6VL0x
+	hGr5ZNpGvriMM7EMqWGagiV3H/6jtMXfaz8Dk=
+MIME-Version: 1.0
+Received: by 10.52.94.6 with SMTP id cy6mr1464957vdb.153.1315521217327; Thu,
+	08 Sep 2011 15:33:37 -0700 (PDT)
+Received: by 10.52.167.72 with HTTP; Thu, 8 Sep 2011 15:33:37 -0700 (PDT)
+In-Reply-To: <1315473897.17658.42.camel@mattotaupa>
+References: <1315435137-5591-1-git-send-email-errordeveloper@gmail.com>
+	<1315473897.17658.42.camel@mattotaupa>
+Date: Thu, 8 Sep 2011 23:33:37 +0100
+Message-ID: <CAPhDKbGVg+ysR6L9EBHo8KopFCpE7R53YiU4Qaq7rfKH08OF=Q@mail.gmail.com>
+From: Ilya Dmitrichenko <errordeveloper@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] binutils-2.20.1: fix checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,54 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2011 22:05:53 -0000
+X-List-Received-Date: Thu, 08 Sep 2011 22:38:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* debug must be enabled explicitely as it is necessary to add
-* more arguments e.g. earlyprintk and even enable PRINTK and debug
-* in Zaurus defconfigs
+On 8 September 2011 10:24, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> thank you for your patch. Unfortunately we cannot apply it as is. Please
+> read [1] for the reason.
+>
+> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-September/034885.html
+>
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- recipes-kernel/linux/linux-kexecboot.inc |   19 ++++++++-----------
- 1 files changed, 8 insertions(+), 11 deletions(-)
+The only work around that I see is to write a new bb recipe file for
+2.20.1a, and update the old
+recipe with SRC_URI to point to a mirror which holds that old tarball.
+Please advise on how
+you usually would handle these issues, cause the above solution is not
+reliable either.
 
-diff --git a/recipes-kernel/linux/linux-kexecboot.inc b/recipes-kernel/linux/linux-kexecboot.inc
-index fb9760a..ea0bbd6 100644
---- a/recipes-kernel/linux/linux-kexecboot.inc
-+++ b/recipes-kernel/linux/linux-kexecboot.inc
-@@ -1,5 +1,5 @@
- # We set INC_PR here, since a change in the kexecboot recipe will need to get picked up by *all* the kernels:
--INC_PR = "r43"
-+INC_PR = "r44"
- 
- inherit kernel siteinfo
- 
-@@ -19,16 +19,13 @@ DEPENDS += "xz-native"
- LOGO_SIZE ?= "."
- SRC_URI = "file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2"
- 
--# Set the verbosity of kernel messages during runtime
--CMDLINE_DEBUG ?= '${@base_contains("IMAGE_FEATURES", "debug-tweaks", "debug", "loglevel=3", d)}'
--
--# Note how we set master console on serial to protect bootlogo.
--CMDLINE_c7x0 = "console=tty1 console=ttyS0,115200n8 ${CMDLINE_DEBUG}"
--CMDLINE_tosa = "console=tty1 console=ttyS0,115200n8 ${CMDLINE_DEBUG}"
--CMDLINE_poodle = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 ${CMDLINE_DEBUG}"
--CMDLINE_akita = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 ${CMDLINE_DEBUG}"
--CMDLINE_collie = "console=tty1 console=ttySA0,115200n8 fbcon=rotate:1 mem=64M ${CMDLINE_DEBUG}"
--CMDLINE_spitz = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 ${CMDLINE_DEBUG}"
-+# Note how we set loglevel=3 and master console on serial to protect bootlogo.
-+CMDLINE_c7x0 = "console=tty1 console=ttyS0,115200n8 loglevel=3"
-+CMDLINE_tosa = "console=tty1 console=ttyS0,115200n8 loglevel=3"
-+CMDLINE_poodle = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 loglevel=3"
-+CMDLINE_akita = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 loglevel=3"
-+CMDLINE_collie = "console=tty1 console=ttySA0,115200n8 fbcon=rotate:1 mem=64M loglevel=3"
-+CMDLINE_spitz = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 loglevel=3"
- 
- PACKAGES = ""
- PROVIDES = ""
+I agree that it's a bit tricky, though if bitbake been told that 1.2.3
+and 1.2.3a are equivalents,
+it would be quite nice :) Of course different projects have their own
+versioning schemes, and
+often  it implies kaos, however I presume that gnu toolchain team has
+a very clear pattern
+and that could be relied upon and implemented in the .inc files.
+Something like VERSION_SUFFIX_IGNORE=$regex ...
+
+Cheers,
 -- 
-1.7.3.4
-
+Ilya
 
 
