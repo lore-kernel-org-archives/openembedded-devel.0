@@ -1,29 +1,27 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Imran_Mehmood@mentor.com>) id 1R1g58-0002Gm-DW
+	(envelope-from <andywilco@gmail.com>) id 1R1grA-0003jE-NC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Sep 2011 16:59:58 +0200
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1R1fg7-0005Rh-JJ from Imran_Mehmood@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Sep 2011 07:34:07 -0700
-Received: from localhost.localdomain ([137.202.157.139]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 8 Sep 2011 16:34:06 +0200
-From: "Mehmood, Imran" <Imran_Mehmood@mentor.com>
+	Thu, 08 Sep 2011 17:49:36 +0200
+Received: by fxg11 with SMTP id 11so1729924fxg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 Sep 2011 08:44:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=itHT4iVm4A5eYC/KMAN4O5WlG9GqZPgQROvf9p6B+NA=;
+	b=yCWC5vUbDngqaHya1JKYTiX8ESzuwlfyppJ5yD/wR4mxbrkyxsZFH0fsXbX2B1m34U
+	c6C3u8sMoEuJXtwg2iSflT7aqdJnq4n2GuxhbVYEvGod/ZajlTMrDizxRD0zAR6BcwKn
+	0MgNACk3zA/9apNBdOyojNDRdGm0wxxwkvM6M=
+MIME-Version: 1.0
+Received: by 10.223.53.84 with SMTP id l20mr1311691fag.89.1315496673159; Thu,
+	08 Sep 2011 08:44:33 -0700 (PDT)
+Received: by 10.223.102.135 with HTTP; Thu, 8 Sep 2011 08:44:33 -0700 (PDT)
+Date: Thu, 8 Sep 2011 08:44:33 -0700
+Message-ID: <CAMhe87HdJAxac5vQqLsMn-Pao8ACkmqofz32ap+JAar6nriXLg@mail.gmail.com>
+From: Andy Wilcox <andywilco@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Sep 2011 19:32:41 +0500
-Message-Id: <94a25d92b4d0e9379caaab127ccac1a94e9e4d28.1315491183.git.Imran_Mehmood@mentor.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <cover.1315491183.git.Imran_Mehmood@mentor.com>
-References: <cover.1315491183.git.Imran_Mehmood@mentor.com>
-In-Reply-To: <Imran_Mehmood@mentor.com>
-References: <Imran_Mehmood@mentor.com>
-X-OriginalArrivalTime: 08 Sep 2011 14:34:06.0741 (UTC)
-	FILETIME=[5D2BD450:01CC6E34]
-Cc: Imran Mehmood <Imran_Mehmood@mentor.com>
-Subject: [meta-oe][PATCH 1/1] cramfs: Adds cvs version recipe (initial recipe)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: GTK+ 3.0?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,56 +35,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2011 14:59:58 -0000
+X-List-Received-Date: Thu, 08 Sep 2011 15:49:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Imran Mehmood <Imran_Mehmood@mentor.com>
-
-* Imported from oe.dev commit id e0728e428367d5534d6a56e452487529c5ec4918
-* Added do_compile_prepend to make symbolic link named Makefile pointing to GNUmakefile to resolve missing Makefile error.
-
-Signed-off-by: Imran Mehmood <Imran_Mehmood@mentor.com>
----
- meta-oe/recipes-support/cramfs/cramfs_cvs.bb |   29 ++++++++++++++++++++++++++
- 1 files changed, 29 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-support/cramfs/cramfs_cvs.bb
-
-diff --git a/meta-oe/recipes-support/cramfs/cramfs_cvs.bb b/meta-oe/recipes-support/cramfs/cramfs_cvs.bb
-new file mode 100644
-index 0000000..667097c
---- /dev/null
-+++ b/meta-oe/recipes-support/cramfs/cramfs_cvs.bb
-@@ -0,0 +1,29 @@
-+DESCRIPTION = "Builds cramfs filesystems for embedded systems"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/linux/COPYING;md5=9579385572eb40eded61dcb07e0038a4"
-+DEPENDS = "zlib"
-+SRCDATE = "20110110"
-+PV = "1.1+cvs${SRCDATE}"
-+
-+SRC_URI = "cvs://anonymous@cramfs.cvs.sourceforge.net/cvsroot/cramfs;module=linux"
-+S = "${WORKDIR}/linux/scripts/cramfs"
-+
-+EXTRA_OEMAKE = "\
-+    'CC=${CC}' \
-+    'CFLAGS=${CFLAGS}' \
-+    'LDFLAGS=${LDFLAGS}' \
-+"
-+
-+
-+do_compile_prepend() {
-+        ln -s GNUmakefile Makefile
-+}
-+
-+do_install() {
-+	install -d ${D}${bindir}
-+	install mkcramfs ${D}${bindir}
-+	install cramfsck ${D}${bindir}
-+}
-+
-+BBCLASSEXTEND = "native"
-+
--- 
-1.7.0.4
-
-
+Has anybody started work on this?  Anybody want to collaborate?
+Just drop an email, thanks.
 
