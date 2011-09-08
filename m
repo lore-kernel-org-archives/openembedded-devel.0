@@ -1,32 +1,28 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sagasolauyeoldum@gmail.com>) id 1R1ioi-0006nr-PS
+	(envelope-from <errordeveloper@gmail.com>) id 1R1jJY-00036f-Sq
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Sep 2011 19:55:12 +0200
-Received: by bkbzu17 with SMTP id zu17so848598bkb.6
+	Thu, 08 Sep 2011 20:27:05 +0200
+Received: by vxj12 with SMTP id 12so941561vxj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Sep 2011 10:50:08 -0700 (PDT)
+	Thu, 08 Sep 2011 11:21:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:x-enigmail-version:content-type:content-transfer-encoding;
-	bh=ehUrvQlE3LXvRdjVlC3xFB0zGkDY1kbe72KJl7AhdFk=;
-	b=k6BH7Fjs2kc2YQqVCK9+RChf+jnvgU7OWi+LHJvpHBgBeWZbJOQQ+M4XPCOwwlvEBi
-	sCXUoSdLXJMMGszjvPmbuJQVTUhgPObrwMPQc7HahjlhpuiU4AHoBzqc+wHNGMf8gA0N
-	oQMsPP7BNLNdHubg+XztKYLEr8JHio48GYN2s=
-Received: by 10.204.140.88 with SMTP id h24mr753351bku.170.1315504208854;
-	Thu, 08 Sep 2011 10:50:08 -0700 (PDT)
-Received: from [192.168.1.105] ([88.243.5.169])
-	by mx.google.com with ESMTPS id p9sm920655fah.1.2011.09.08.10.50.07
-	(version=SSLv3 cipher=OTHER); Thu, 08 Sep 2011 10:50:07 -0700 (PDT)
-Message-ID: <4E69004E.30701@gmail.com>
-Date: Thu, 08 Sep 2011 20:50:06 +0300
-From: Jim Qode <sagasolauyeoldum@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.21) Gecko/20110831 Thunderbird/3.1.13
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=wSRwAlAy+YA4UfU4yzuh4uorgu287TROfxT+X55maNU=;
+	b=nyvHiwlHjX9XSaoKuTMr3a+6cTokEjMRVLFumsDR+RkrNG2ZJpH7H7voZN60oI5xuR
+	UMm97QMUg+XE+eLecZlodbM3sxAAjhuOWafSqF/Qev2NvGlIuXTOyAqx8R4BNy28ngLM
+	IEgwx7j3h4ERFdX+ujYottmuc++2GbvR5helA=
 MIME-Version: 1.0
+Received: by 10.52.65.65 with SMTP id v1mr1164188vds.19.1315506116905; Thu, 08
+	Sep 2011 11:21:56 -0700 (PDT)
+Received: by 10.52.167.72 with HTTP; Thu, 8 Sep 2011 11:21:56 -0700 (PDT)
+In-Reply-To: <4E69004E.30701@gmail.com>
+References: <4E69004E.30701@gmail.com>
+Date: Thu, 8 Sep 2011 19:21:56 +0100
+Message-ID: <CAPhDKbFyvpi-HrwM0QJ6=amZ=q68PA8eqsyCHi55zZ9h5r_Kiw@mail.gmail.com>
+From: Ilya Dmitrichenko <errordeveloper@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 1.1.2
-Subject: bitbake -b workaround
+Subject: Re: bitbake -b workaround
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,51 +36,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2011 17:55:12 -0000
+X-List-Received-Date: Thu, 08 Sep 2011 18:27:05 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-Hello,
+On 8 September 2011 18:50, Jim Qode <sagasolauyeoldum@gmail.com> wrote:
+> Hello,
+>
+> I updated my build environment today. Now bitbake -b fails with the
+> following errors. Is there any workaround I can use to continue working
+> on my project before a patch is issued?
 
-I updated my build environment today. Now bitbake -b fails with the
-following errors. Is there any workaround I can use to continue working
-on my project before a patch is issued?
-
-ERROR: Command execution failed: Traceback (most recent call last):
-  File
-"/home/jimqode/Werk/oe/setup-scripts/sources/bitbake/lib/bb/command.py",
-line 102, in runAsyncCommand
-    commandmethod(self.cmds_async, self, options)
-  File
-"/home/jimqode/Werk/oe/setup-scripts/sources/bitbake/lib/bb/command.py",
-line 190, in buildFile
-    command.cooker.buildFile(bfile, task)
-  File
-"/home/jimqode/Werk/oe/setup-scripts/sources/bitbake/lib/bb/cooker.py",
-line 627, in buildFile
-    buildfile = self.matchFile(fn)
-  File
-"/home/jimqode/Werk/oe/setup-scripts/sources/bitbake/lib/bb/cooker.py",
-line 604, in matchFile
-    matches = self.matchFiles(buildfile)
-  File
-"/home/jimqode/Werk/oe/setup-scripts/sources/bitbake/lib/bb/cooker.py",
-line 586, in matchFiles
-    filelist, masked = self.collect_bbfiles()
-  File
-"/home/jimqode/Werk/oe/setup-scripts/sources/bitbake/lib/bb/cooker.py",
-line 853, in collect_bbfiles
-    files.sort( key=lambda fileitem: self.calc_bbfile_priority(fileitem) )
-  File
-"/home/jimqode/Werk/oe/setup-scripts/sources/bitbake/lib/bb/cooker.py",
-line 853, in <lambda>
-    files.sort( key=lambda fileitem: self.calc_bbfile_priority(fileitem) )
-  File
-"/home/jimqode/Werk/oe/setup-scripts/sources/bitbake/lib/bb/cooker.py",
-line 397, in calc_bbfile_priority
-    for _, _, regex, pri in self.status.bbfile_config_priorities:
-AttributeError: 'NoneType' object has no attribute
-'bbfile_config_priorities'
-
+Have you by any chance updated python ?
 
 
