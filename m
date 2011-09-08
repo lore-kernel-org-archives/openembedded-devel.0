@@ -1,30 +1,29 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-vw0-f41.google.com ([209.85.212.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <errordeveloper@gmail.com>) id 1R1SBZ-0004v8-1H
+	(envelope-from <errordeveloper@gmail.com>) id 1R1SHf-000544-HE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Sep 2011 02:09:41 +0200
-Received: by wwe32 with SMTP id 32so168557wwe.24
+	Thu, 08 Sep 2011 02:15:59 +0200
+Received: by vwm42 with SMTP id 42so253228vwm.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Sep 2011 17:04:38 -0700 (PDT)
+	Wed, 07 Sep 2011 17:10:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=TF0eahZPhw1fL95ymHVpFJ4fyYX2CSZSBDeE0ufPZLs=;
-	b=orto7UcGFTFJzEceXhAsTN0+diA/gllecR7A0JUSRDK1GjBBRI9k3myHuaMcxPU+y/
-	c6dCrsori5/m02EKKeRzZcOnRfltksz477ZnbuqfHe2RjzQk2hCUOFqNXldz9jYVMg5c
-	zII8LP/L5luTtUGwEccMSGvyCuYrH+S4hrn98=
-Received: by 10.227.3.4 with SMTP id 4mr35537wbl.35.1315440275821;
-	Wed, 07 Sep 2011 17:04:35 -0700 (PDT)
-Received: from localhost.localdomain
-	(host86-185-41-205.range86-185.btcentralplus.com [86.185.41.205])
-	by mx.google.com with ESMTPS id ek13sm2296390wbb.23.2011.09.07.17.04.34
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 07 Sep 2011 17:04:35 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=L8V+912pBAHVYJhV57RfucjuMSk2F0Zy4vQdlJDPB1M=;
+	b=RHE8LqodWGBcdNS0CFFS43qZZ5iRxKDyLzfzQukY2MU8xemZ1A0XjGz2ViJd99gaN1
+	hhHlWYj7Uky1m8mOQuEbHLUI5m1/wOtDpzefJa3iwwbsjyPlHgD5duhmgxVpsopaHTjT
+	icNvNmxN7dVupwwU+J3sIjhYlhEHirAmP6+H4=
+MIME-Version: 1.0
+Received: by 10.52.65.65 with SMTP id v1mr51373vds.19.1315440649117; Wed, 07
+	Sep 2011 17:10:49 -0700 (PDT)
+Received: by 10.52.160.7 with HTTP; Wed, 7 Sep 2011 17:10:49 -0700 (PDT)
+In-Reply-To: <1315443807-16046-1-git-send-email-errordeveloper@gmail.com>
+References: <1315443807-16046-1-git-send-email-errordeveloper@gmail.com>
+Date: Thu, 8 Sep 2011 01:10:49 +0100
+Message-ID: <CAPhDKbFj1uwo_tM0AUqawAJtRjMAYrFa1yROnRzJAdAPFxLnQA@mail.gmail.com>
 From: Ilya Dmitrichenko <errordeveloper@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Sep 2011 02:04:33 +0100
-Message-Id: <1315443873-16271-1-git-send-email-errordeveloper@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-Subject: [PATCH] zeromq: added version 2.1.9 zeromq.inc
+Subject: Re: [PATCH] binutils-2.20.1: fix checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,103 +37,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2011 00:09:41 -0000
+X-List-Received-Date: Thu, 08 Sep 2011 00:15:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Ilya Dmitrichenko <errordeveloper@gmail.com>
----
- recipes/zeromq/zeromq.inc      |   22 ++++++++++++++++++++++
- recipes/zeromq/zeromq_2.1.6.bb |   17 ++---------------
- recipes/zeromq/zeromq_2.1.7.bb |    8 ++++++++
- recipes/zeromq/zeromq_2.1.9.bb |    6 ++++++
- 4 files changed, 38 insertions(+), 15 deletions(-)
- create mode 100644 recipes/zeromq/zeromq.inc
- create mode 100644 recipes/zeromq/zeromq_2.1.7.bb
- create mode 100644 recipes/zeromq/zeromq_2.1.9.bb
+sorry for the duplicate, I'm to tired and should go to sleep!
 
-diff --git a/recipes/zeromq/zeromq.inc b/recipes/zeromq/zeromq.inc
-new file mode 100644
-index 0000000..e23bf76
---- /dev/null
-+++ b/recipes/zeromq/zeromq.inc
-@@ -0,0 +1,22 @@
-+DESCRIPTION = "ZeroMQ looks like an embeddable networking library but acts like a concurrency framework"
-+HOMEPAGE = "http://www.zeromq.org"
-+LICENSE = "LGPLv3+"
-+LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=66ea8704398d7996daeacd2fbd2b9dbd"
-+
-+INC_PR = "r0"
-+
-+DEPENDS += "util-linux-ng"
-+
-+S = "${WORKDIR}/zeromq-${PV}"
-+
-+## All current releases are kept here:
-+SRC_URI = "http://download.zeromq.org/zeromq-${PV}.tar.gz"
-+## obsolete release are being move to:
-+#SRC_URI = "http://download.zeromq.org/historic/zeromq-${PV}.tar.gz"
-+## Perhaps we should use git tags instead.
-+
-+inherit autotools
-+
-+do_configure_prepend() {
-+	./autogen.sh
-+}
-diff --git a/recipes/zeromq/zeromq_2.1.6.bb b/recipes/zeromq/zeromq_2.1.6.bb
-index ec291f5..8b06571 100644
---- a/recipes/zeromq/zeromq_2.1.6.bb
-+++ b/recipes/zeromq/zeromq_2.1.6.bb
-@@ -1,21 +1,8 @@
--DESCRIPTION = "ZeroMQ looks like an embeddable networking library but acts like a concurrency framework"
--HOMEPAGE = "http://www.zeromq.org"
--LICENSE = "LGPLv3+"
--LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=66ea8704398d7996daeacd2fbd2b9dbd"
-+require zeromq.inc
- 
- PR = "r0"
- 
--DEPENDS += "util-linux-ng"
--
--S = "${WORKDIR}/zeromq-${PV}"
--
--SRC_URI = "http://download.zeromq.org/zeromq-${PV}.tar.gz"
--
--inherit autotools
--
--do_configure_prepend() {
--	./autogen.sh
--}
-+SRC_URI = "http://download.zeromq.org/historic/zeromq-${PV}.tar.gz"
- 
- SRC_URI[md5sum] = "77b9ca20e8f2426874022080f41d7b0b"
- SRC_URI[sha256sum] = "a1bbb352a9dbf34b18a3999b22a8db2d51e4a52508d098528d771811533f9fd0"
-diff --git a/recipes/zeromq/zeromq_2.1.7.bb b/recipes/zeromq/zeromq_2.1.7.bb
-new file mode 100644
-index 0000000..1be6002
---- /dev/null
-+++ b/recipes/zeromq/zeromq_2.1.7.bb
-@@ -0,0 +1,8 @@
-+require zeromq.inc
-+
-+PR = "r0"
-+
-+SRC_URI = "http://download.zeromq.org/historic/zeromq-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "7d3120f8a8fb913a7e55c57c6eb024f3"
-+SRC_URI[sha256sum] = "2a1416d0a3ea55ae17d43417fd9bd193412cc9101e144bc8d3bd19fe36816e0d"
-diff --git a/recipes/zeromq/zeromq_2.1.9.bb b/recipes/zeromq/zeromq_2.1.9.bb
-new file mode 100644
-index 0000000..7028891
---- /dev/null
-+++ b/recipes/zeromq/zeromq_2.1.9.bb
-@@ -0,0 +1,6 @@
-+require zeromq.inc
-+
-+PR = "r0"
-+
-+SRC_URI[md5sum] = "94c5e0262a79c5f82bc0b178c1f8a33d"
-+SRC_URI[sha256sum] = "f3542f756687e622beef3a75c8e027fe2d95d4654350cbca4c070ffc58d9ace0"
--- 
-1.7.3.4
-
+On 8 September 2011 02:03, Ilya Dmitrichenko <errordeveloper@gmail.com> wro=
+te:
+> Signed-off-by: Ilya Dmitrichenko <errordeveloper@gmail.com>
+> ---
+> =A0recipes/binutils/binutils_2.20.1.bb | =A0 =A04 ++--
+> =A01 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/recipes/binutils/binutils_2.20.1.bb b/recipes/binutils/binut=
+ils_2.20.1.bb
+> index 5154e2d..f40b676 100644
+> --- a/recipes/binutils/binutils_2.20.1.bb
+> +++ b/recipes/binutils/binutils_2.20.1.bb
+> @@ -24,8 +24,8 @@ SRC_URI_append_nios2 =3D" \
+> =A0 =A0 =A0 =A0file://binutils-nios2.patch \
+> =A0 =A0 =A0 =A0"
+>
+> -SRC_URI[tarball.sha256sum] =3D "228b84722d87e88e7fdd36869e590e649ab523a0=
+800a7d53df906498afe6f6f8"
+> -SRC_URI[tarball.md5sum] =3D "9cdfb9d6ec0578c166d3beae5e15c4e5"
+> +SRC_URI[tarball.sha256sum] =3D "71d37c96451333c5c0b84b170169fdcb138bbb27=
+397dc06281905d9717c8ed64"
+> +SRC_URI[tarball.md5sum] =3D "2b9dc8f2b7dbd5ec5992c6e29de0b764"
+>
+> =A0# powerpc patches
+> =A0SRC_URI +=3D "\
+> --
+> 1.7.3.4
+>
+>
 
 
