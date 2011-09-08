@@ -1,36 +1,35 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sagasolauyeoldum@gmail.com>) id 1R1jSk-0000kq-Hr
+	(envelope-from <denys@ti.com>) id 1R1lJS-0000iD-9Z
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Sep 2011 20:36:34 +0200
-Received: by fxg11 with SMTP id 11so1887585fxg.6
+	Thu, 08 Sep 2011 22:35:06 +0200
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id p88KR640016014
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Sep 2011 11:31:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:x-enigmail-version:content-type
-	:content-transfer-encoding;
-	bh=wmy68mL9fuWTWR7wD3r8ikVilJm8xWxbxPA3JVvNCSw=;
-	b=dEBDdU5CCxMFMdWMrokuf00FZTsXzYEcOEMd8T5QIOw90KGCLPW0iutit5rxOEKXpn
-	7B7W0pRh1ZBtihNe1TCtP+GICT3v3HPlx72RxMD6q27h5dQTJzGG3xcp8tBt7x8knAyX
-	o2KUAyWeCMZw2jjhDTavMoGGx5F1Yq+nTZDXY=
-Received: by 10.223.54.66 with SMTP id p2mr444859fag.143.1315506690923;
-	Thu, 08 Sep 2011 11:31:30 -0700 (PDT)
-Received: from [192.168.1.105] ([88.243.5.169])
-	by mx.google.com with ESMTPS id a1sm1738366fae.23.2011.09.08.11.31.29
-	(version=SSLv3 cipher=OTHER); Thu, 08 Sep 2011 11:31:29 -0700 (PDT)
-Message-ID: <4E6909FE.9010809@gmail.com>
-Date: Thu, 08 Sep 2011 21:31:26 +0300
-From: Jim Qode <sagasolauyeoldum@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.21) Gecko/20110831 Thunderbird/3.1.13
+	Thu, 8 Sep 2011 15:27:07 -0500
+Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
+	by dlep34.itg.ti.com (8.13.7/8.13.8) with ESMTP id p88KR6oQ020640
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 8 Sep 2011 15:27:06 -0500 (CDT)
+Received: from DFLE71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p88KR6G2006342
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 8 Sep 2011 15:27:06 -0500 (CDT)
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle71.ent.ti.com
+	(128.247.5.62) with Microsoft SMTP Server id 14.1.323.3; Thu, 8 Sep 2011
+	15:27:06 -0500
+Received: from localhost (gtudedge.gt.design.ti.com [158.218.100.100])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id p88KR6HJ017549	for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu, 8 Sep 2011 15:27:06 -0500
+Date: Thu, 8 Sep 2011 16:27:05 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20110908202705.GA17405@edge>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4E69004E.30701@gmail.com>
-	<CAPhDKbFyvpi-HrwM0QJ6=amZ=q68PA8eqsyCHi55zZ9h5r_Kiw@mail.gmail.com>
-In-Reply-To: <CAPhDKbFyvpi-HrwM0QJ6=amZ=q68PA8eqsyCHi55zZ9h5r_Kiw@mail.gmail.com>
-X-Enigmail-Version: 1.1.2
-Subject: Re: bitbake -b workaround
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: [2011.03-maintenance] Pull request 20110908
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,14 +43,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2011 18:36:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 08 Sep 2011 20:35:06 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On 09/08/2011 09:21 PM, Ilya Dmitrichenko wrote:
+Tom,
 
-> Have you by any chance updated python ?
+Please pull the following commit for gcc-4.5 that fixes ICE on i586 and adds
+new Linaro patches, one of which fixes crash in Qt browser when rendering
+JavaScript pages. This commit is a direct cherry-pick from OE.dev.
 
-I may have updated, though I'm not sure. Current version is Python 2.7.1+
+
+Pull URL: git://arago-project.org/git/people/denix/openembedded.git
+  Branch: 2011.03-maintenance
+  Browse: http://arago-project.org/git/people/?p=denix/openembedded.git;a=shortlog;h=refs/heads/2011.03-maintenance
+
+Thanks,
+    Denys Dmytriyenko <denys@ti.com>
+---
+
+
+The following changes since commit bc8ddbf7944f82383936d88379619aa46c3954a2:
+  Steffen Sledz (1):
+        binutils-2.18: fix checksums
+
+are available in the git repository at:
+
+  git://arago-project.org/git/people/denix/openembedded 2011.03-maintenance
+
+Khem Raj (1):
+  gcc-4.5: Fix ICE on i586
+
+ recipes/gcc/gcc-4.5.inc                            |   13 +-
+ .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99350.patch |  184 --------------------
+ .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99351.patch |   20 +--
+ .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99352.patch |   11 +-
+ .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99478.patch |   74 ++++++++
+ .../gcc-4.5-linaro-r99479.patch}                   |   42 ++---
+ .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99480.patch |   64 +++++++
+ .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99481.patch |   40 +++++
+ .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99482.patch |   84 +++++++++
+ .../gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99483.patch |   63 +++++++
+ recipes/gcc/gcc-4.5/more-epilogues.patch           |   83 +++++++++
+ 11 files changed, 449 insertions(+), 229 deletions(-)
+ delete mode 100644 recipes/gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99350.patch
+ create mode 100644 recipes/gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99478.patch
+ rename recipes/gcc/gcc-4.5/{tune-xscale-infinite-loop-PR45177.patch => linaro/gcc-4.5-linaro-r99479.patch} (68%)
+ create mode 100644 recipes/gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99480.patch
+ create mode 100644 recipes/gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99481.patch
+ create mode 100644 recipes/gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99482.patch
+ create mode 100644 recipes/gcc/gcc-4.5/linaro/gcc-4.5-linaro-r99483.patch
+ create mode 100644 recipes/gcc/gcc-4.5/more-epilogues.patch
+
 
 
