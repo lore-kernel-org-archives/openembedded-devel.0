@@ -1,25 +1,24 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Imran_Mehmood@mentor.com>) id 1R1fx0-0001lW-WC
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1R1fys-0001uC-S3
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Sep 2011 16:51:35 +0200
+	Thu, 08 Sep 2011 16:53:31 +0200
 Received: from nat-dem.mentorg.com ([195.212.93.2]
 	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1R1ffv-0005QP-1K from Imran_Mehmood@mentor.com 
+	id 1R1fty-00009b-Qa from Noor_Ahsan@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Sep 2011 07:33:55 -0700
-Received: from localhost.localdomain ([137.202.157.139]) by
+	Thu, 08 Sep 2011 07:48:27 -0700
+Received: from localhost.localdomain ([137.202.156.152]) by
 	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 8 Sep 2011 16:33:54 +0200
-From: "Mehmood, Imran" <Imran_Mehmood@mentor.com>
+	Thu, 8 Sep 2011 16:48:25 +0200
+From: "Noor, Ahsan" <noor_ahsan@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Sep 2011 19:32:40 +0500
-Message-Id: <cover.1315491183.git.Imran_Mehmood@mentor.com>
+Date: Thu,  8 Sep 2011 19:50:16 +0500
+Message-Id: <cover.1315490338.git.noor_ahsan@mentor.com>
 X-Mailer: git-send-email 1.7.0.4
-X-OriginalArrivalTime: 08 Sep 2011 14:33:54.0225 (UTC)
-	FILETIME=[55B60A10:01CC6E34]
-Cc: Imran Mehmood <Imran_Mehmood@mentor.com>
-Subject: [meta-oe][PATCH 0/1] pull request for cramfs recipe
+X-OriginalArrivalTime: 08 Sep 2011 14:48:26.0060 (UTC)
+	FILETIME=[5D5D80C0:01CC6E36]
+Subject: [meta-oe][PATCH 0/1] pull request for strongswan
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,25 +32,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2011 14:51:35 -0000
+X-List-Received-Date: Thu, 08 Sep 2011 14:53:31 -0000
 
-From: Imran Mehmood <Imran_Mehmood@mentor.com>
+From: Noor Ahsan <noor_ahsan@mentor.com>
 
-The following changes since commit 9d3c8a9abc42b3ae7639f1226daf198ca04cd9bc:
-  lumag (1):
-        tcp-wrappers: drop emptying PARALLEL_MAKE
+
+The following changes since commit 63593868972de9f2c78299efac4d5e77889f23df:
+  Noor Ahsan (1):
+        python-lxml: Add version  2.2.8 (initial recipe)
 
 are available in the git repository at:
 
-  git://github.com/lawwama/meta-oe master
-  https://github.com/lawwama/meta-oe/tree/master
+  git://github.com/Noor-Ahsan/meta-oe master
+  https://github.com/Noor-Ahsan/meta-oe/tree/master
 
-Imran Mehmood (1):
-  cramfs: Adds cvs version recipe (initial recipe)
+Noor Ahsan (1):
+  strongswan: Add version 4.5.1 (initial recipe)
 
- meta-oe/recipes-support/cramfs/cramfs_cvs.bb |   29 ++++++++++++++++++++++++++
- 1 files changed, 29 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-support/cramfs/cramfs_cvs.bb
+ .../strongswan/strongswan_4.5.1.bb                 |   22 ++++++++++++++++++++
+ 1 files changed, 22 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/strongswan/strongswan_4.5.1.bb
 
 
 
