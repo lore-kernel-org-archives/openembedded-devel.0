@@ -1,31 +1,36 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1R1jMr-0000VB-AA
+	(envelope-from <sagasolauyeoldum@gmail.com>) id 1R1jSk-0000kq-Hr
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Sep 2011 20:30:30 +0200
-Received: by ywa12 with SMTP id 12so878850ywa.6
+	Thu, 08 Sep 2011 20:36:34 +0200
+Received: by fxg11 with SMTP id 11so1887585fxg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Sep 2011 11:25:25 -0700 (PDT)
+	Thu, 08 Sep 2011 11:31:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=8BehaOrGkvDGrKUEY+LmBsqu4VQEh6isH/fSI12+EmA=;
-	b=O5LDuhpTD69nEOBG8gXp572KxeQTXWscjmSU+sDSl0/gUWnPN6ckRxho2zywYVx2a0
-	g0T6gGfa8BZpjnBrX8s2dqPKKJuGV8XP6oeYIpvfOCTFB+4jjNzfxAxlTJo3Gn9/OR8+
-	RsM9eutYcz8WA9vlkH2Wln9GiAdM//Yv4iptQ=
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:x-enigmail-version:content-type
+	:content-transfer-encoding;
+	bh=wmy68mL9fuWTWR7wD3r8ikVilJm8xWxbxPA3JVvNCSw=;
+	b=dEBDdU5CCxMFMdWMrokuf00FZTsXzYEcOEMd8T5QIOw90KGCLPW0iutit5rxOEKXpn
+	7B7W0pRh1ZBtihNe1TCtP+GICT3v3HPlx72RxMD6q27h5dQTJzGG3xcp8tBt7x8knAyX
+	o2KUAyWeCMZw2jjhDTavMoGGx5F1Yq+nTZDXY=
+Received: by 10.223.54.66 with SMTP id p2mr444859fag.143.1315506690923;
+	Thu, 08 Sep 2011 11:31:30 -0700 (PDT)
+Received: from [192.168.1.105] ([88.243.5.169])
+	by mx.google.com with ESMTPS id a1sm1738366fae.23.2011.09.08.11.31.29
+	(version=SSLv3 cipher=OTHER); Thu, 08 Sep 2011 11:31:29 -0700 (PDT)
+Message-ID: <4E6909FE.9010809@gmail.com>
+Date: Thu, 08 Sep 2011 21:31:26 +0300
+From: Jim Qode <sagasolauyeoldum@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.21) Gecko/20110831 Thunderbird/3.1.13
 MIME-Version: 1.0
-Received: by 10.42.145.66 with SMTP id e2mr431508icv.262.1315506325139; Thu,
-	08 Sep 2011 11:25:25 -0700 (PDT)
-Received: by 10.42.213.197 with HTTP; Thu, 8 Sep 2011 11:25:25 -0700 (PDT)
-In-Reply-To: <4E64EE9D.6090909@dresearch-fe.de>
-References: <4E607624.8010300@dresearch-fe.de>
-	<4E64EE9D.6090909@dresearch-fe.de>
-Date: Thu, 8 Sep 2011 11:25:25 -0700
-Message-ID: <CA+M6bXkrdOVYWSNdEA469u6n34TUj_31=fnAUHcpGn2U_QiF6w@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [2011.03-maintenance] pull request (gcc/java/binutils) - Update
+To: openembedded-devel@lists.openembedded.org
+References: <4E69004E.30701@gmail.com>
+	<CAPhDKbFyvpi-HrwM0QJ6=amZ=q68PA8eqsyCHi55zZ9h5r_Kiw@mail.gmail.com>
+In-Reply-To: <CAPhDKbFyvpi-HrwM0QJ6=amZ=q68PA8eqsyCHi55zZ9h5r_Kiw@mail.gmail.com>
+X-Enigmail-Version: 1.1.2
+Subject: Re: bitbake -b workaround
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,34 +44,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2011 18:30:30 -0000
+X-List-Received-Date: Thu, 08 Sep 2011 18:36:34 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Mon, Sep 5, 2011 at 8:45 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote=
-:
-> Hi Tom,
->
-> please pull these 3 commits from here:
->
-> URI: git://git.openembedded.org/openembedded
-> Branch: sledz/maintenance
->
-> Jesse Gilles (1):
-> =A0 =A0 =A0classpath in 2011.03-maintenance
->
-> Stefan Herbrechtsmeier (1):
-> =A0 =A0 =A0gcc: Remove package libstdc++-dev and libgcc-dev from gcc-cros=
-s
->
-> Steffen Sledz (1):
-> =A0 =A0 =A0binutils-2.18: fix checksums
->
-> All are bugfixes and already in oe-dev master.
+On 09/08/2011 09:21 PM, Ilya Dmitrichenko wrote:
 
-Applied, thanks.
+> Have you by any chance updated python ?
 
---=20
-Tom
+I may have updated, though I'm not sure. Current version is Python 2.7.1+
 
 
