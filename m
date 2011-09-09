@@ -1,37 +1,33 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1R1z8K-0003YG-3Z
+	(envelope-from <errordeveloper@gmail.com>) id 1R20HS-0002Go-Iw
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Sep 2011 13:20:32 +0200
-Received: by fxi1 with SMTP id 1so13001fxi.6
+	Fri, 09 Sep 2011 14:34:02 +0200
+Received: by vxh2 with SMTP id 2so180114vxh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Sep 2011 04:15:27 -0700 (PDT)
+	Fri, 09 Sep 2011 05:28:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=b3L2JXZgQBFjROVCjqvTL4kQFJBYUXdfkw5i7yKULUQ=;
-	b=W0881OFfO8yuZ7n9O8xDcrMwJx5bFsLzNqbbzbd7jGHxe1eyrAQasL+B+SnMcx1Ddq
-	3Up7h5zu3f7s3TPDHK0huAI3I8pVNUb/lu8DID+158U2/ZAvugUss9TJGeWEz9KwmoPm
-	i16t/0agivIY8sf5u/1ObimVlPTZLUcyXRsMQ=
-Received: by 10.223.101.90 with SMTP id b26mr636012fao.15.1315566927766;
-	Fri, 09 Sep 2011 04:15:27 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id a1sm2718018fae.23.2011.09.09.04.15.25
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 09 Sep 2011 04:15:26 -0700 (PDT)
-Date: Fri, 9 Sep 2011 13:15:20 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110909111519.GG4124@jama.jama.net>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=AEkvOdCP1E+pfhRhKnxY7hbMvQjkyY/XrPKPkXlRhyk=;
+	b=KX8Arb809YA6s6LzKmpOmOAAk4uWywesNuWQZ2VybZUb7ynn0jy0IwR8UN+Z2SI332
+	nMtUBqS7Jm0mTSFdIO5dVPdWnXavAyJ36b3Z3kqYiNvpMHAKV0uCnrWXe998L48yWagz
+	4zupywbe4hqr25DYNSVm1oG/6OIZPdjw/+YnM=
+MIME-Version: 1.0
+Received: by 10.52.94.6 with SMTP id cy6mr2090924vdb.153.1315571337522; Fri,
+	09 Sep 2011 05:28:57 -0700 (PDT)
+Received: by 10.52.167.72 with HTTP; Fri, 9 Sep 2011 05:28:57 -0700 (PDT)
+In-Reply-To: <20110909111519.GG4124@jama.jama.net>
 References: <1315434958-5042-1-git-send-email-errordeveloper@gmail.com>
 	<1315539201-6902-1-git-send-email-errordeveloper@gmail.com>
 	<20110909065128.GA4124@jama.jama.net>
 	<CAPhDKbGcJ4sGEWPimfHqxkbZGNBf47uO7=D9RcgSjP9dCB69MQ@mail.gmail.com>
 	<20110909110614.GE4124@jama.jama.net>
 	<CAPhDKbHT0-HCfGeexqY05W-kd8xx8rMuRcwQRN-uZcM+K2JSUA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAPhDKbHT0-HCfGeexqY05W-kd8xx8rMuRcwQRN-uZcM+K2JSUA@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+	<20110909111519.GG4124@jama.jama.net>
+Date: Fri, 9 Sep 2011 13:28:57 +0100
+Message-ID: <CAPhDKbGgG_aYGT-oeUz1dqS3CC4h=Zo+L=KF-7+00n571r1PEw@mail.gmail.com>
+From: Ilya Dmitrichenko <errordeveloper@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH 2/2] binutils-2.20.1: fix checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,48 +42,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Sep 2011 11:20:32 -0000
-X-Groupsio-MsgNum: 34165
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="vJguvTgX93MxBIIe"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 09 Sep 2011 12:34:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---vJguvTgX93MxBIIe
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 9 September 2011 12:15, Martin Jansa <martin.jansa@gmail.com> wrote:
+> I see, I cannot reset it too for you.. so I will change status of those 4,
+> but please send updated patch as suggested.
 
-On Fri, Sep 09, 2011 at 12:09:53PM +0100, Ilya Dmitrichenko wrote:
-> On 9 September 2011 12:06, Martin Jansa <martin.jansa@gmail.com> wrote:
-> > you should be able to do it yourself if you register on patchwork with
-> > the same e-mail as used in your patches..
->=20
-> Well, I wish I could. It just doesn't let me with a error message:
-> * "This email address is already in use. Please supply a different
-> email address."
-> * "This username is already taken. Please choose another."
->=20
-> Perhaps it did register me by itself, but I just need the password to
-> be reset ...
+No need to, see  f4faecdbd0b7c83e5787735ef1495a34aca861e4.
 
-I see, I cannot reset it too for you.. so I will change status of those 4,
-but please send updated patch as suggested.
+Cheers,
+-- 
+Ilya
 
-Regards,
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---vJguvTgX93MxBIIe
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk5p9UcACgkQN1Ujt2V2gBysZgCgppim9IY+1LhGNFBribEwoOnz
-oGEAn37zp4Z9/1wPPXHVnfsK4/C69Y6U
-=mou4
------END PGP SIGNATURE-----
-
---vJguvTgX93MxBIIe--
