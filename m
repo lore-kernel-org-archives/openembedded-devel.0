@@ -1,29 +1,30 @@
-Received: from einhorn.in-berlin.de ([192.109.42.8] ident=root)
+Received: from mail-vw0-f41.google.com ([209.85.212.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1R1yfo-0001ZM-04
+	(envelope-from <errordeveloper@gmail.com>) id 1R1ywf-0002qy-5p
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Sep 2011 12:51:04 +0200
-X-Envelope-From: sledz@dresearch-fe.de
-X-Envelope-To: <openembedded-devel@lists.openembedded.org>
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116]) (authenticated bits=0)
-	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
-	p89AN0Ic025695
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	Fri, 09 Sep 2011 13:08:29 +0200
+Received: by vwm42 with SMTP id 42so1024895vwm.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 9 Sep 2011 12:23:01 +0200
-Message-ID: <4E69E904.6050109@dresearch-fe.de>
-Date: Fri, 09 Sep 2011 12:23:00 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:6.0) Gecko/20110812 Thunderbird/6.0
+	Fri, 09 Sep 2011 04:03:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=TwVFh+HESdX4XXL5Oujv47Rj46zGQbt7oYq/9BFBzI0=;
+	b=COag0x9s4i9neJR6rrZsT4Fe+0QmbRyebGnKEZvy7bNvPYFRMKRaUwl12V7NafI+HM
+	0azF1WUGeJ156cO0YGy6ej8G9a0esRKi7qjNeaxZGT4mjEb3pzBJIaue3HJ4EWELPaHd
+	10TBxWBX1Q5B51yDmLzrEOahFHG/eE1Grw4/c=
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Enigmail-Version: 1.3.1
-X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
-X-MIME-Autoconverted: from 8bit to quoted-printable by einhorn.in-berlin.de id
-	p89AN0Ic025695
-Subject: How to verify patches for oe-dev master?
+Received: by 10.52.94.6 with SMTP id cy6mr2012086vdb.153.1315566204059; Fri,
+	09 Sep 2011 04:03:24 -0700 (PDT)
+Received: by 10.52.167.72 with HTTP; Fri, 9 Sep 2011 04:03:24 -0700 (PDT)
+In-Reply-To: <20110909065128.GA4124@jama.jama.net>
+References: <1315434958-5042-1-git-send-email-errordeveloper@gmail.com>
+	<1315539201-6902-1-git-send-email-errordeveloper@gmail.com>
+	<20110909065128.GA4124@jama.jama.net>
+Date: Fri, 9 Sep 2011 12:03:24 +0100
+Message-ID: <CAPhDKbGcJ4sGEWPimfHqxkbZGNBf47uO7=D9RcgSjP9dCB69MQ@mail.gmail.com>
+From: Ilya Dmitrichenko <errordeveloper@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 2/2] binutils-2.20.1: fix checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,31 +38,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Sep 2011 10:51:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 09 Sep 2011 11:08:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-At the moment we're using the 2011.03-maintenance branch with angstrom-20=
-08.1, and we have a problem verifying patches.
+Hi,
 
-Assuming we've found a fix to a bug in 2011.03-maintenance. In my opinion=
- the fix should go to oe-dev master first and find it's way to 2011.03-ma=
-intenance by a pull request.
+I see what happens now.
 
-The problem is that oe-master does not support angstrom-2008.1 any more, =
-so it's hard to check if the patch compiles/runs well under oe-master.
+Ok, someone has committed the right
+changes, could you please delete or
+mark my patches invalid:
+http://patches.openembedded.org/patch/11247/
+http://patches.openembedded.org/patch/11245/
+http://patches.openembedded.org/patch/11219/
+http://patches.openembedded.org/patch/11217/
 
-Any suggestions?
-
-Steffen
-
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+Regards,
+-- 
+Ilya
 
 
