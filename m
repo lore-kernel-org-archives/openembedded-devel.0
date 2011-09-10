@@ -1,34 +1,19 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from smtp3-g21.free.fr ([212.27.42.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1R2KFi-00015A-0y
+	(envelope-from <eric@eukrea.com>) id 1R2Twh-0004zz-QZ
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 10 Sep 2011 11:53:34 +0200
-Received: by bke11 with SMTP id 11so1020299bke.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Sep 2011 02:48:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=LcwNwno2G9MEOSxD7W4glq1KjjLM1vBCYtO6yyl3plE=;
-	b=hcruJ42T6qfNeqmQ/oEZu7WAY9AV000p8/bKvQeiwYpUxQXYfoOOpThTCPOzsZpwEz
-	ShNjRwOkgxFbyP/q1c+FgC+YiIsB+PUqpCVVK60xaYhNnXqVLCaNwk3ZWAfOsF0l3RUF
-	4nHXMXOoggnZKlqwmWR6Fj24SO+nVlnH+zpKo=
+	Sat, 10 Sep 2011 22:14:36 +0200
+Received: from localhost.localdomain (unknown [82.233.81.124])
+	by smtp3-g21.free.fr (Postfix) with ESMTP id E42A7A6257;
+	Sat, 10 Sep 2011 22:09:25 +0200 (CEST)
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 10 Sep 2011 22:09:21 +0200
+Message-Id: <1315685361-18809-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.6
 MIME-Version: 1.0
-Received: by 10.204.3.23 with SMTP id 23mr480817bkl.301.1315648108299; Sat, 10
-	Sep 2011 02:48:28 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.65.194 with HTTP; Sat, 10 Sep 2011 02:48:28 -0700 (PDT)
-In-Reply-To: <20110910082657.GB5456@jama.jama.net>
-References: <CAP9ODKr25u3yPbnAsS8Suc2wngTtJhDbn9egMXZZpUtLQqbZTg@mail.gmail.com>
-	<20110910082657.GB5456@jama.jama.net>
-Date: Sat, 10 Sep 2011 06:48:28 -0300
-X-Google-Sender-Auth: fVC79Ou-k8SFmVxKCezm76f8Aqc
-Message-ID: <CAP9ODKpeZvpA4avwj4FpiBxHFs+FVjQn0XyJYU3-yzCCp6Wn2g@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] X randr-support.patch breaks geode
+Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+Subject: [meta-oe] qt4: update to 4.7.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,31 +27,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Sep 2011 09:53:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 10 Sep 2011 20:14:36 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Sep 10, 2011 at 05:26, Martin Jansa <martin.jansa@gmail.com> wrote:
->> Do someone has any clue WHY this patch breaks it and if we can drop
->> this from meta-oe repository? It seems to not be used on
->> OpenEmbedded-Core so seems to be quite specific to something related
->> from previous machine support. Maybe move it to the specific layer?
->
-> As I said on IRC, it's needed for xinput-calibrator to work properly.
+once oe-core has updated qt4 recipe
 
-In this case:
+Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+---
+ meta-oe/recipes-qt/qt4/qt4-embedded_4.7.3.bbappend |    5 -----
+ meta-oe/recipes-qt/qt4/qt4-embedded_4.7.4.bbappend |    5 +++++
+ meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.3.bbappend |    5 -----
+ meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.4.bbappend |    5 +++++
+ 4 files changed, 10 insertions(+), 10 deletions(-)
+ delete mode 100644 meta-oe/recipes-qt/qt4/qt4-embedded_4.7.3.bbappend
+ create mode 100644 meta-oe/recipes-qt/qt4/qt4-embedded_4.7.4.bbappend
+ delete mode 100644 meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.3.bbappend
+ create mode 100644 meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.4.bbappend
 
- - why this is on meta-oe only?
- - how we can make geode to work with this applied?
-
-Currently I've disabled this in our company layer but I'd like to have
-a more longterm solution and solve it properly.
-
+diff --git a/meta-oe/recipes-qt/qt4/qt4-embedded_4.7.3.bbappend b/meta-oe=
+/recipes-qt/qt4/qt4-embedded_4.7.3.bbappend
+deleted file mode 100644
+index 9b4ede4..0000000
+--- a/meta-oe/recipes-qt/qt4/qt4-embedded_4.7.3.bbappend
++++ /dev/null
+@@ -1,5 +0,0 @@
+-DEPENDS +=3D "mysql5 postgresql sqlite"
+-QT_SQL_DRIVER_FLAGS =3D "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -p=
+lugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
+-QT_CONFIG_FLAGS +=3D "-I${STAGING_INCDIR}/mysql \
+-                    -I${STAGING_INCDIR}/postgresql"
+-
+diff --git a/meta-oe/recipes-qt/qt4/qt4-embedded_4.7.4.bbappend b/meta-oe=
+/recipes-qt/qt4/qt4-embedded_4.7.4.bbappend
+new file mode 100644
+index 0000000..9b4ede4
+--- /dev/null
++++ b/meta-oe/recipes-qt/qt4/qt4-embedded_4.7.4.bbappend
+@@ -0,0 +1,5 @@
++DEPENDS +=3D "mysql5 postgresql sqlite"
++QT_SQL_DRIVER_FLAGS =3D "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -p=
+lugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
++QT_CONFIG_FLAGS +=3D "-I${STAGING_INCDIR}/mysql \
++                    -I${STAGING_INCDIR}/postgresql"
++
+diff --git a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.3.bbappend b/meta-oe=
+/recipes-qt/qt4/qt4-x11-free_4.7.3.bbappend
+deleted file mode 100644
+index 9b4ede4..0000000
+--- a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.3.bbappend
++++ /dev/null
+@@ -1,5 +0,0 @@
+-DEPENDS +=3D "mysql5 postgresql sqlite"
+-QT_SQL_DRIVER_FLAGS =3D "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -p=
+lugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
+-QT_CONFIG_FLAGS +=3D "-I${STAGING_INCDIR}/mysql \
+-                    -I${STAGING_INCDIR}/postgresql"
+-
+diff --git a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.4.bbappend b/meta-oe=
+/recipes-qt/qt4/qt4-x11-free_4.7.4.bbappend
+new file mode 100644
+index 0000000..9b4ede4
+--- /dev/null
++++ b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.4.bbappend
+@@ -0,0 +1,5 @@
++DEPENDS +=3D "mysql5 postgresql sqlite"
++QT_SQL_DRIVER_FLAGS =3D "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -p=
+lugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
++QT_CONFIG_FLAGS +=3D "-I${STAGING_INCDIR}/mysql \
++                    -I${STAGING_INCDIR}/postgresql"
++
 --=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+1.7.6
+
 
 
