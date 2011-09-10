@@ -1,34 +1,34 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1R289Y-00044a-IX
+	(envelope-from <martin.jansa@gmail.com>) id 1R2Iyx-0006e3-GJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Sep 2011 22:58:24 +0200
-Received: by mail-pz0-f47.google.com with SMTP id 2so3761021pzk.34
+	Sat, 10 Sep 2011 10:32:11 +0200
+Received: by fxi1 with SMTP id 1so817059fxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Sep 2011 13:53:21 -0700 (PDT)
+	Sat, 10 Sep 2011 01:27:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=references:in-reply-to:mime-version:content-type:message-id
-	:content-transfer-encoding:from:subject:date:to:x-pgp-agent:x-mailer;
-	bh=rChWY7CWsBmtEzgqbb1vkdPwwg7b7iGQwI/HuYgQobM=;
-	b=mbjuy4QZY/yO7LAcRztxqCXTF5f0/fpV2I1NasVe6aQeO8JJmUgFcCzIxWyEMUQlHb
-	D/MBSwR8qONKuBpNN0HERCs2Ww291CIzAw03NaDeev2tTyBsCu3Jpw7PFdToUmcXQ0SI
-	Wfk5kNqmQu/QySjwUk/ory34dKaELQdQq+jQI=
-Received: by 10.68.15.39 with SMTP id u7mr3076836pbc.476.1315601597899;
-	Fri, 09 Sep 2011 13:53:17 -0700 (PDT)
-Received: from [192.168.0.5] (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
-	by mx.google.com with ESMTPS id e8sm22323064pbc.8.2011.09.09.13.53.16
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=xTc/Rras6SXmfHycjOvFCcq5fO2eUgHexD49vznLWYk=;
+	b=xF97jigOSVqxLlgDpyeRrto7oY5bbN5n9zg0tfN05IQ00004DjfL2rQgepSzTqFV2N
+	1G9UQzgqHZLSuf5T6B+c15iVTbnzYu7NqANwkJ8vEO/EQsGAC19eX6Ed9xioPFQ+8kS0
+	3FwmkZ0nnNSMvEBx1Z7QVPKv6IPwpHYXoqz8E=
+Received: by 10.223.34.143 with SMTP id l15mr914237fad.46.1315643225989;
+	Sat, 10 Sep 2011 01:27:05 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id q23sm4098707fae.1.2011.09.10.01.27.04
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 09 Sep 2011 13:53:17 -0700 (PDT)
-References: <20110908202705.GA17405@edge>
-In-Reply-To: <20110908202705.GA17405@edge>
-Mime-Version: 1.0 (Apple Message framework v1084)
-Message-Id: <03C5E948-CDB2-4491-A9DC-FFE41B5A89F0@gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
-Date: Fri, 9 Sep 2011 13:53:16 -0700
-To: openembedded-devel@lists.openembedded.org
-X-Pgp-Agent: GPGMail 1.3.3
-X-Mailer: Apple Mail (2.1084)
-Subject: Re: [2011.03-maintenance] Pull request 20110908
+	Sat, 10 Sep 2011 01:27:04 -0700 (PDT)
+Date: Sat, 10 Sep 2011 10:26:58 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+Message-ID: <20110910082657.GB5456@jama.jama.net>
+References: <CAP9ODKr25u3yPbnAsS8Suc2wngTtJhDbn9egMXZZpUtLQqbZTg@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAP9ODKr25u3yPbnAsS8Suc2wngTtJhDbn9egMXZZpUtLQqbZTg@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe] X randr-support.patch breaks geode
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,45 +42,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Sep 2011 20:58:24 -0000
+X-List-Received-Date: Sat, 10 Sep 2011 08:32:11 -0000
+X-Groupsio-MsgNum: 34184
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="QKdGvSO+nmPlgiQ/"
+Content-Disposition: inline
+
+--QKdGvSO+nmPlgiQ/
 Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On Sep 8, 2011, at 1:27 PM, Denys Dmytriyenko wrote:
-
-> Tom,
+On Fri, Sep 09, 2011 at 05:45:51PM -0300, Otavio Salvador wrote:
+> Hello,
 >=20
-> Please pull the following commit for gcc-4.5 that fixes ICE on i586 =
-and adds
-> new Linaro patches, one of which fixes crash in Qt browser when =
-rendering
-> JavaScript pages. This commit is a direct cherry-pick from OE.dev.
+> I've been trying to figure out what XRandR stopped to work when we
+> updated our OpenEmbedded. After talking to Martin Jansa, on #oe, I
+> could find that reverting 'randr-support.patch' from X fixes this
+> issue.
 >=20
+> Basically, when we change the resolution it swaps the pointer axis.
+> This is wrong, as you all can bet ;-P
 >=20
-> Pull URL: git://arago-project.org/git/people/denix/openembedded.git
->  Branch: 2011.03-maintenance
->  Browse: =
-http://arago-project.org/git/people/?p=3Ddenix/openembedded.git;a=3Dshortl=
-og;h=3Drefs/heads/2011.03-maintenance
->=20
-> Thanks,
->    Denys Dmytriyenko <denys@ti.com>
+> Do someone has any clue WHY this patch breaks it and if we can drop
+> this from meta-oe repository? It seems to not be used on
+> OpenEmbedded-Core so seems to be quite specific to something related
+> from previous machine support. Maybe move it to the specific layer?
 
-Applied, thanks.
+As I said on IRC, it's needed for xinput-calibrator to work properly.
 
-- --=20
-Tom
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--QKdGvSO+nmPlgiQ/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG/MacGPG2 v2.0.17 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEARECAAYFAk5qfLwACgkQdZngf2G4WwOt9ACfbCh5uSTFYxY9PBTV9S9l2blE
-CCoAn0ba538gqBgXYdDqZ/jfXJ5bwuVV
-=3DO7vT
+iEYEARECAAYFAk5rH1EACgkQN1Ujt2V2gBwjPACeOLSZ7bnubHzZ2B7iupI1ylzs
+YRIAnRY06cYol8uwttmzzRxQh0/rFGOi
+=SK2F
 -----END PGP SIGNATURE-----
 
-
+--QKdGvSO+nmPlgiQ/--
