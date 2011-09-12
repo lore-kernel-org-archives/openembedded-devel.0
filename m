@@ -1,27 +1,26 @@
-Received: from einhorn.in-berlin.de ([192.109.42.8])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@mobil-400-586.intern.dresearch.de>)
-	id 1R38U5-0006S5-KQ for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Sep 2011 17:31:45 +0200
-X-Envelope-From: sledz@mobil-400-586.intern.dresearch.de
-Received: from mobil-400-586.intern.dresearch.de
-	(pd95cbf07.dip0.t-ipconnect.de [217.92.191.7]) (authenticated bits=0)
-	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
-	p8CFQWb5004817
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
-	Mon, 12 Sep 2011 17:26:32 +0200
-Received: by mobil-400-586.intern.dresearch.de (Postfix, from userid 1000)
-	id DAC5FC8291; Mon, 12 Sep 2011 17:26:31 +0200 (CEST)
-From: Steffen Sledz <sledz@dresearch-fe.de>
+	(envelope-from <ka6sox@gmail.com>) id 1R3CiA-00027u-UO
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Sep 2011 22:02:35 +0200
+Received: by gyg8 with SMTP id 8so476225gyg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Sep 2011 12:57:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=/+R9P+tpEToaGSL1uxN68qxx+lQJyLEX4NLtzfYaZCo=;
+	b=b+ylwSyo5roH7/aY2XZ/rHOZDlRN94q3Ay+DaWAcnJOxKD/NwbgMg39G9IvV03oNfg
+	r0U+CbBOD71/GMJHtfNx5CR2qpTth0hqaZmubA8QPUtCvbxe6eqGaaOS6LM1NY7aPhvr
+	0JxGU0is7zxlKm4jgnmOJxjPInjl6FceikMiA=
+MIME-Version: 1.0
+Received: by 10.42.158.7 with SMTP id f7mr218992icx.89.1315857445864; Mon, 12
+	Sep 2011 12:57:25 -0700 (PDT)
+Received: by 10.42.217.5 with HTTP; Mon, 12 Sep 2011 12:57:25 -0700 (PDT)
+Date: Mon, 12 Sep 2011 12:57:25 -0700
+Message-ID: <CAHQecY7NP1+syizepT0i5HF1pfgr1sM7hWsCWo7cGmSybjeSQw@mail.gmail.com>
+From: Tom King <ka6sox@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Sep 2011 17:26:24 +0200
-Message-Id: <1315841184-4706-1-git-send-email-sledz@dresearch-fe.de>
-X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <4E6E2161.3070004@juszkiewicz.com.pl>
-References: <4E6E2161.3070004@juszkiewicz.com.pl>
-X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
-Cc: paulepanter@users.sourceforge.net
-Subject: [PATCH v2] linux-libc-headers 2.6.24: backport arm/asm/hwcap.h from recent kernels
+Subject: Server Maintainence 0200-0600 UTC 13SEPT2011
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,71 +34,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Sep 2011 15:31:45 -0000
+X-List-Received-Date: Mon, 12 Sep 2011 20:02:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-This patch is similar to the one in linux-libc-headers 2.6.23 [1] and
-enables building of OpenJDK which uses HWCAP_THUMBEE which normally
-are not present in 2.6.24 headers.
+We will be doing server maintainence this evening from 0200-0600 UTC
+for some high priority items.
 
-[1] commit 41cd62ffbac7d272d46a4b39faf8a97c0850dd10
+all services including:
 
-Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
----
- .../arm-hwcap-add-new-entries.patch                |   21 ++++++++++++++++++++
- .../linux-libc-headers_2.6.24.bb                   |    5 ++-
- 2 files changed, 24 insertions(+), 2 deletions(-)
- create mode 100644 recipes/linux-libc-headers/linux-libc-headers-2.6.24/arm-hwcap-add-new-entries.patch
+git, cgit, web, patches, etc will be offline at any time or maybe up
+and down during that period.
 
-diff --git a/recipes/linux-libc-headers/linux-libc-headers-2.6.24/arm-hwcap-add-new-entries.patch b/recipes/linux-libc-headers/linux-libc-headers-2.6.24/arm-hwcap-add-new-entries.patch
-new file mode 100644
-index 0000000..6975317
---- /dev/null
-+++ b/recipes/linux-libc-headers/linux-libc-headers-2.6.24/arm-hwcap-add-new-entries.patch
-@@ -0,0 +1,21 @@
-+---
-+ include/asm-arm/hwcap.h |    4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+--- linux-2.6.24.orig/include/asm-arm/hwcap.h
-++++ linux-2.6.24/include/asm-arm/hwcap.h
-+@@ -13,10 +13,14 @@
-+ #define HWCAP_VFP	64
-+ #define HWCAP_EDSP	128
-+ #define HWCAP_JAVA	256
-+ #define HWCAP_IWMMXT	512
-+ #define HWCAP_CRUNCH	1024
-++#define HWCAP_THUMBEE	2048
-++#define HWCAP_NEON	4096
-++#define HWCAP_VFPv3	8192
-++#define HWCAP_VFPv3D16	16384
-+ 
-+ #if defined(__KERNEL__) && !defined(__ASSEMBLY__)
-+ /*
-+  * This yields a mask that user programs can use to figure out what
-+  * instruction set this cpu supports.
-diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
-index 148d03f..cec1835 100644
---- a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
-+++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
-@@ -2,13 +2,14 @@ require linux-libc-headers.inc
- 
- INHIBIT_DEFAULT_DEPS = "1"
- DEPENDS += "unifdef-native"
--PR = "r7"
-+PR = "r8"
- 
- SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
-            file://procinfo.h \
-            file://export_falloc_h.patch \
-            file://make-3.82.patch \
--           file://unifdef.patch"
-+           file://unifdef.patch \
-+           file://arm-hwcap-add-new-entries.patch"
- 
- SRC_URI_append_hipox = " \
- 	file://siocoutqsnd.patch \
--- 
-1.7.3.4
+Thanks
 
+ka6sox
+(for the openembedded.org infra team)
 
 
