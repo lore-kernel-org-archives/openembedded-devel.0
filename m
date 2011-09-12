@@ -1,35 +1,31 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1R36vG-0003ZA-Uj
+	(envelope-from <sledz@dresearch-fe.de>) id 1R37R5-0004U0-FT
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Sep 2011 15:51:43 +0200
-Received: by ywf7 with SMTP id 7so626027ywf.6
+	Mon, 12 Sep 2011 16:24:35 +0200
+Received: by bke11 with SMTP id 11so2343994bke.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Sep 2011 06:46:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=2/SqUZEqb24f5OZnkgsCYxuZx02a8dLJSTl4Lixe18M=;
-	b=L0iPKIAPMtK12lZ+7qbNYzPKVzT9JDQIM1bs9SqJWsoEZsvCWyBNABOUTXjw85h3IN
-	LE9ek3pnylW/kqiTAI3uhzRFc8sQlFjGYrk3r67KC9bwuRaRRYL+vTk576A/Hg72x1yX
-	Rz0HWQ/21O66GxHxWVjb73dFKMKQryYrBnTfE=
-Received: by 10.150.164.21 with SMTP id m21mr931534ybe.72.1315835192903;
-	Mon, 12 Sep 2011 06:46:32 -0700 (PDT)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id o39sm14214795ani.17.2011.09.12.06.46.30
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 12 Sep 2011 06:46:31 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Mon, 12 Sep 2011 07:19:27 -0700 (PDT)
+Received: by 10.204.152.201 with SMTP id h9mr76482bkw.147.1315837167163;
+	Mon, 12 Sep 2011 07:19:27 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id p8sm6314796bkk.3.2011.09.12.07.19.25
+	(version=SSLv3 cipher=OTHER); Mon, 12 Sep 2011 07:19:26 -0700 (PDT)
+Message-ID: <4E6E14EC.1000301@dresearch-fe.de>
+Date: Mon, 12 Sep 2011 16:19:24 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:6.0.2) Gecko/20110907 Thunderbird/6.0.2
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Sep 2011 13:46:18 +0000
-Message-Id: <639b0fcb526da33d082ce5d516ac4c928e6170b4.1315835148.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1315835148.git.otavio@ossystems.com.br>
-References: <cover.1315835148.git.otavio@ossystems.com.br>
-In-Reply-To: <cover.1315835148.git.otavio@ossystems.com.br>
-References: <cover.1315835148.git.otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 1/1] xf86-input-void: add 1.4.0 recipe
+References: <4E69E904.6050109@dresearch-fe.de>
+In-Reply-To: <4E69E904.6050109@dresearch-fe.de>
+X-Enigmail-Version: 1.3.1
+Cc: Martin Jansa <martin.jansa@gmail.com>,
+	Michael Lauer <mickey@vanille-media.de>, andy@protium.com,
+	skoroneos@digital-opsis.com, m.cavallini@koansoftware.com
+Subject: Re: How to verify patches for oe-dev master?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,30 +39,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Sep 2011 13:51:43 -0000
+X-List-Received-Date: Mon, 12 Sep 2011 14:24:35 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- .../xorg-driver/xf86-input-void_1.4.0.bb           |    8 ++++++++
- 1 files changed, 8 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-input-void_1.4.0.bb
+On 09.09.2011 12:23, Steffen Sledz wrote:
+> At the moment we're using the 2011.03-maintenance branch with angstrom-2008.1, and we have a problem verifying patches.
+> 
+> Assuming we've found a fix to a bug in 2011.03-maintenance. In my opinion the fix should go to oe-dev master first and find it's way to 2011.03-maintenance by a pull request.
+> 
+> The problem is that oe-master does not support angstrom-2008.1 any more, so it's hard to check if the patch compiles/runs well under oe-master.
 
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-input-void_1.4.0.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-input-void_1.4.0.bb
-new file mode 100644
-index 0000000..32ebbeb
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-input-void_1.4.0.bb
-@@ -0,0 +1,8 @@
-+require xorg-driver-input.inc
-+DESCRIPTION = "X.Org X server -- void input driver"
-+PR = "${INC_PR}.0"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4be6a915bfbf111cd88706fc6a6f141b"
-+
-+SRC_URI[archive.md5sum] = "3056bc7c57db8c5d56039648c0530c45"
-+SRC_URI[archive.sha256sum] = "aba69784ac83f5951af3e164312adb4b8b1c91a8f79ab35dc5165c534e14c674"
+Let me reword the question.
+
+Which "general purpose" distros are supported by oe-dev master at the moment and can be used to check if a patch applies, compiles, and runs?
+
 -- 
-1.7.2.5
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
