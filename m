@@ -1,23 +1,25 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from host4.kei.pl ([94.152.8.4] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1R38Dr-000653-2h for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Sep 2011 17:14:59 +0200
-Received: from f053042012.adsl.alicedsl.de ([78.53.42.12]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1R388v-0005hA-Uy for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Sep 2011 15:09:54 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Sep 2011 17:09:38 +0200
-In-Reply-To: <4E6E1E32.6010307@dresearch-fe.de>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1R38GR-0006Bl-K2
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Sep 2011 17:17:39 +0200
+Received: (qmail 3535 invoked by uid 2404007); 12 Sep 2011 15:12:33 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 87-206-60-144.dynamic.chello.pl (HELO ?192.168.1.112?)
+	(marcin@juszkiewicz.com.pl@87.206.60.144)
+	by host4.kei.pl with ESMTPA; 12 Sep 2011 15:12:33 -0000
+Message-ID: <4E6E2161.3070004@juszkiewicz.com.pl>
+Date: Mon, 12 Sep 2011 17:12:33 +0200
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:7.0) Gecko/20110906 Thunderbird/7.0
+MIME-Version: 1.0
+To: Steffen Sledz <sledz@dresearch-fe.de>, 
+	openembedded-devel@lists.openembedded.org
 References: <1315581753-7944-1-git-send-email-sledz@dresearch-fe.de>
 	<4E6E1E32.6010307@dresearch-fe.de>
-X-Mailer: Evolution 3.0.3- 
-Message-ID: <1315840192.4231.13.camel@mattotaupa>
-Mime-Version: 1.0
+In-Reply-To: <4E6E1E32.6010307@dresearch-fe.de>
+X-Enigmail-Version: 1.4a1pre
 Subject: Re: [PATCH] linux-libc-headers 2.6.24: backport arm/asm/hwcap.h from recent kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,48 +34,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Sep 2011 15:14:59 -0000
-X-Groupsio-MsgNum: 34197
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-ZL+L01q860nX90HcajQP"
-
---=-ZL+L01q860nX90HcajQP
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Am Montag, den 12.09.2011, 16:58 +0200 schrieb Steffen Sledz:
-> On 09.09.2011 17:22, Steffen Sledz wrote:
-> > This patch is similar to the one in linux-libc-headers 2.6.23.
->=20
-> No NACKs? Then i'll push this patch tomorrow to oe-dev master.
-
-To make acking easier, it would be nice to have more information in the
-commit message.
-
-1. Reference or URL to the ID of the commit to 2.6.23.
-2. What is the addition used for?
-3. Has it been tested? How?
-
-Otherwise the list seems to be pretty calm recently. I do not know how
-it could be revived.
-
-
-Thanks,
-
-Paul
-
---=-ZL+L01q860nX90HcajQP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+X-List-Received-Date: Mon, 12 Sep 2011 15:17:39 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+W dniu 12.09.2011 16:58, Steffen Sledz pisze:
+>  SRC_URI_append_hipox = " \
+>>  	file://siocoutqsnd.patch \
+>> +	file://drbcc-linedisc.patch \
+>>  	"
+>>  
 
-iEYEABECAAYFAk5uILMACgkQPX1aK2wOHVhJFgCcC8uFePmEgq7PWrmv/0doWhi7
-meEAn0sm53JwkkiwuHLdpOrwxr4viVTh
-=j/sz
------END PGP SIGNATURE-----
+This got added... so NACK.
 
---=-ZL+L01q860nX90HcajQP--
+
