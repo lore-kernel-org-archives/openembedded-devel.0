@@ -1,29 +1,30 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1R383L-0005f6-P6
+	(envelope-from <koansoftware@gmail.com>) id 1R38DE-0005yb-DD
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Sep 2011 17:04:07 +0200
-Received: by mail-bw0-f47.google.com with SMTP id 11so2381030bke.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Sep 2011 07:59:01 -0700 (PDT)
-Received: by 10.204.143.28 with SMTP id s28mr990020bku.119.1315839541694;
-	Mon, 12 Sep 2011 07:59:01 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (pd95cb174.dip0.t-ipconnect.de
-	[217.92.177.116])
-	by mx.google.com with ESMTPS id b17sm6403252bkd.8.2011.09.12.07.58.59
-	(version=SSLv3 cipher=OTHER); Mon, 12 Sep 2011 07:59:00 -0700 (PDT)
-Message-ID: <4E6E1E32.6010307@dresearch-fe.de>
-Date: Mon, 12 Sep 2011 16:58:58 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:6.0.2) Gecko/20110907 Thunderbird/6.0.2
+	Mon, 12 Sep 2011 17:14:20 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 20FCB2C7DA;
+	Mon, 12 Sep 2011 15:04:25 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id VN2FxZQiKEwu; Mon, 12 Sep 2011 15:04:21 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id A500C2C7D7;
+	Mon, 12 Sep 2011 15:04:20 +0000 (UTC)
+Message-ID: <4E6E2092.6060909@gmail.com>
+Date: Mon, 12 Sep 2011 17:09:06 +0200
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini
+User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
 MIME-Version: 1.0
 To: Steffen Sledz <sledz@dresearch-fe.de>
-References: <1315581753-7944-1-git-send-email-sledz@dresearch-fe.de>
-In-Reply-To: <1315581753-7944-1-git-send-email-sledz@dresearch-fe.de>
-X-Enigmail-Version: 1.3.1
+References: <4E69E904.6050109@dresearch-fe.de>
+	<4E6E14EC.1000301@dresearch-fe.de> <4E6E1B35.7040709@gmail.com>
+	<4E6E1CBB.3010702@dresearch-fe.de>
+In-Reply-To: <4E6E1CBB.3010702@dresearch-fe.de>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] linux-libc-headers 2.6.24: backport arm/asm/hwcap.h from recent kernels
+Subject: Re: How to verify patches for oe-dev master?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,82 +38,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Sep 2011 15:04:07 -0000
+X-List-Received-Date: Mon, 12 Sep 2011 15:14:20 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-On 09.09.2011 17:22, Steffen Sledz wrote:
-> This patch is similar to the one in linux-libc-headers 2.6.23.
+Steffen Sledz ha scritto, Il 12/09/2011 16:52:
+> On 12.09.2011 16:46, Marco Cavallini wrote:
+>> Steffen Sledz ha scritto, Il 12/09/2011 16:19:
+>>> On 09.09.2011 12:23, Steffen Sledz wrote:
+>>>> At the moment we're using the 2011.03-maintenance branch with angstr=
+om-2008.1, and we have a problem verifying patches.
+>>>>
+>>>> Assuming we've found a fix to a bug in 2011.03-maintenance. In my op=
+inion the fix should go to oe-dev master first and find it's way to 2011.=
+03-maintenance by a pull request.
+>>>>
+>>>> The problem is that oe-master does not support angstrom-2008.1 any m=
+ore, so it's hard to check if the patch compiles/runs well under oe-maste=
+r.
+>>> Let me reword the question.
+>>>
+>>> Which "general purpose" distros are supported by oe-dev master at the=
+ moment and can be used to check if a patch applies, compiles, and runs?
+>>>
+>> Hi Steffen,
+>> KaeilOS distro is working in oe-dev master at the moment, but I can't
+>> guarantee that all recipes will work properly with it.
+>>
+>> http://www.kaeilos.com/
+>>
+>> Feel free to test it if you want.
+>=20
+> Thanx for this info. Do you have an easy to use example setup for build=
+ing KaeilOS?
+>=20
 
-No NACKs? Then i'll push this patch tomorrow to oe-dev master.
+You can follow this step-by-step guide
+http://www.kaeilos.com/download
 
-> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
-> ---
->  .../arm-hwcap-add-new-entries.patch                |   21 ++++++++++++++++++++
->  .../linux-libc-headers_2.6.24.bb                   |    6 +++-
->  2 files changed, 25 insertions(+), 2 deletions(-)
->  create mode 100644 recipes/linux-libc-headers/linux-libc-headers-2.6.24/arm-hwcap-add-new-entries.patch
-> 
-> diff --git a/recipes/linux-libc-headers/linux-libc-headers-2.6.24/arm-hwcap-add-new-entries.patch b/recipes/linux-libc-headers/linux-libc-headers-2.6.24/arm-hwcap-add-new-entries.patch
-> new file mode 100644
-> index 0000000..6975317
-> --- /dev/null
-> +++ b/recipes/linux-libc-headers/linux-libc-headers-2.6.24/arm-hwcap-add-new-entries.patch
-> @@ -0,0 +1,21 @@
-> +---
-> + include/asm-arm/hwcap.h |    4 ++++
-> + 1 file changed, 4 insertions(+)
-> +
-> +--- linux-2.6.24.orig/include/asm-arm/hwcap.h
-> ++++ linux-2.6.24/include/asm-arm/hwcap.h
-> +@@ -13,10 +13,14 @@
-> + #define HWCAP_VFP	64
-> + #define HWCAP_EDSP	128
-> + #define HWCAP_JAVA	256
-> + #define HWCAP_IWMMXT	512
-> + #define HWCAP_CRUNCH	1024
-> ++#define HWCAP_THUMBEE	2048
-> ++#define HWCAP_NEON	4096
-> ++#define HWCAP_VFPv3	8192
-> ++#define HWCAP_VFPv3D16	16384
-> + 
-> + #if defined(__KERNEL__) && !defined(__ASSEMBLY__)
-> + /*
-> +  * This yields a mask that user programs can use to figure out what
-> +  * instruction set this cpu supports.
-> diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
-> index 148d03f..e321351 100644
-> --- a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
-> +++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
-> @@ -2,16 +2,18 @@ require linux-libc-headers.inc
->  
->  INHIBIT_DEFAULT_DEPS = "1"
->  DEPENDS += "unifdef-native"
-> -PR = "r7"
-> +PR = "r8"
->  
->  SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
->             file://procinfo.h \
->             file://export_falloc_h.patch \
->             file://make-3.82.patch \
-> -           file://unifdef.patch"
-> +           file://unifdef.patch \
-> +           file://arm-hwcap-add-new-entries.patch"
->  
->  SRC_URI_append_hipox = " \
->  	file://siocoutqsnd.patch \
-> +	file://drbcc-linedisc.patch \
->  	"
->  
->  S = "${WORKDIR}/linux-${PV}"
+HTH
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+   Atmel third party certified consultant
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
+        http://www.KaeilOS.com
 
 
