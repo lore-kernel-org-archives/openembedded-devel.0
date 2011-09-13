@@ -1,24 +1,24 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from einhorn.in-berlin.de ([192.109.42.8] ident=root)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1R3SrI-0005ks-FY for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Sep 2011 15:17:04 +0200
-Received: from f053041096.adsl.alicedsl.de ([78.53.41.96]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1R3SmO-0002DY-JN for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Sep 2011 13:12:00 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <sledz@mobil-400-586.intern.dresearch.de>)
+	id 1R3T8D-00063p-EB for openembedded-devel@lists.openembedded.org;
+	Tue, 13 Sep 2011 15:34:33 +0200
+X-Envelope-From: sledz@mobil-400-586.intern.dresearch.de
+Received: from mobil-400-586.intern.dresearch.de
+	(pd95cbf07.dip0.t-ipconnect.de [217.92.191.7]) (authenticated bits=0)
+	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
+	p8DDTMTY021053
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
+	Tue, 13 Sep 2011 15:29:22 +0200
+Received: by mobil-400-586.intern.dresearch.de (Postfix, from userid 1000)
+	id B540AC8434; Tue, 13 Sep 2011 15:29:21 +0200 (CEST)
+From: Steffen Sledz <sledz@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 Sep 2011 15:11:56 +0200
-In-Reply-To: <4f19ed0177ac717d462981b37219a062fa46dffd.1315914262.git.Imran_Mehmood@mentor.com>
-References: <cover.1315914262.git.Imran_Mehmood@mentor.com>
-	<4f19ed0177ac717d462981b37219a062fa46dffd.1315914262.git.Imran_Mehmood@mentor.com>
-X-Mailer: Evolution 3.0.3- 
-Message-ID: <1315919517.4195.37.camel@mattotaupa>
-Mime-Version: 1.0
-Subject: Re: [meta-oe][PATCH 1/1] twm: add recipe version 1.0.6 (initial recipe)
+Date: Tue, 13 Sep 2011 15:29:10 +0200
+Message-Id: <1315920550-3977-1-git-send-email-sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.3.4
+X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
+Subject: [PATCH] eglibc-2.9: allow building with newer GNU make
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,84 +32,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Sep 2011 13:17:04 -0000
-X-Groupsio-MsgNum: 34207
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-gZCMzm+2Me6MHVszmE+s"
+X-List-Received-Date: Tue, 13 Sep 2011 13:34:33 -0000
 
---=-gZCMzm+2Me6MHVszmE+s
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+GNU make >= 3.82 does not allow mixed implicit and normal rules
 
-Dear Imram,
+Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+---
+ recipes/eglibc/eglibc-2.9/make-3.82.patch |   16 ++++++++++++++++
+ recipes/eglibc/eglibc_2.9.bb              |    3 ++-
+ 2 files changed, 18 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/eglibc/eglibc-2.9/make-3.82.patch
 
-
-Am Dienstag, den 13.09.2011, 17:49 +0500 schrieb Mehmood, Imran:
-> From: Imran Mehmood <Imran_Mehmood@mentor.com>
-
-in the commit summary the word =C2=BBrecipe=C2=AB is useless in my opinion =
-since
-it is clear when prefixing the line with twm.
-
->  * Imported from oe.dev commit id d90ee2735e9aa9d1a8dd7d0eb6a5917030a233d=
-3
-
-How did you test this recipe?
-
-> Signed-off-by: Imran Mehmood <Imran_Mehmood@mentor.com>
-> ---
->  meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb |   18 ++++++++++++++++++
->  1 files changed, 18 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb
->=20
-> diff --git a/meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb b/meta-oe/rec=
-ipes-graphics/xorg-app/twm_1.0.6.bb
-> new file mode 100644
-> index 0000000..d5105c0
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb
-> @@ -0,0 +1,18 @@
-> +require xorg-app-common.inc
-> +DESCRIPTION =3D "tiny window manager"
-> +DEPENDS +=3D " libxext libxt libxmu"
-> +
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4c6d42ef60e8166aa26606524c0b9=
-586"
-> +
-> +PE =3D "1"
-
-`PE =3D "1"` is not needed anymore when importing the recipe.
-
-> +PR =3D "${INC_PR}.0"
-> +
-> +SRC_URI[archive.md5sum] =3D "952d06a0c2ec34687b536c7b619fc671"
-> +SRC_URI[archive.sha256sum] =3D "e7dccad7879a7570442f0cd9df0b9064e926466b=
-5a52b710fca8cfb167f294e9"
-> +
-> +FILES_${PN} +=3D "${datadir}/X11/twm/system.twmrc"
-> +ALTERNATIVE_NAME =3D "x-window-manager"
-> +ALTERNATIVE_PATH =3D "${bindir}/twm"
-> +ALTERNATIVE_LINK =3D "${bindir}/x-window-manager"
-> +ALTERNATIVE_PRIORITY =3D "1"
+diff --git a/recipes/eglibc/eglibc-2.9/make-3.82.patch b/recipes/eglibc/eglibc-2.9/make-3.82.patch
+new file mode 100644
+index 0000000..b0a45d9
+--- /dev/null
++++ b/recipes/eglibc/eglibc-2.9/make-3.82.patch
+@@ -0,0 +1,16 @@
++diff -Nurd libc.orig//manual/Makefile libc/manual/Makefile
++--- libc.orig//manual/Makefile	2011-09-13 14:49:57.428424088 +0200
+++++ libc/manual/Makefile	2011-09-13 14:50:47.009620484 +0200
++@@ -242,7 +242,11 @@
++ .PHONY: stubs
++ stubs: $(objpfx)stubs
++ endif
++-$(objpfx)stubs ../po/manual.pot $(objpfx)stamp%:
+++$(objpfx)stubs ../po/manual.pot:
+++	$(make-target-directory)
+++	touch $@
+++
+++$(objpfx)stamp%:
++ 	$(make-target-directory)
++ 	touch $@
++ 
+diff --git a/recipes/eglibc/eglibc_2.9.bb b/recipes/eglibc/eglibc_2.9.bb
+index be60ba7..7e0fa55 100644
+--- a/recipes/eglibc/eglibc_2.9.bb
++++ b/recipes/eglibc/eglibc_2.9.bb
+@@ -3,7 +3,7 @@ require eglibc.inc
+ DEPENDS += "gperf-native"
+ FILESPATHPKG =. "eglibc-svn:"
+ PV = "2.9"
+-PR = "${INC_PR}.10"
++PR = "${INC_PR}.11"
+ PR_append = "+svnr${SRCPV}"
+ SRCREV="10153"
+ EGLIBC_BRANCH="eglibc-2_9"
+@@ -14,6 +14,7 @@ SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
+            file://shorten-build-commands.patch \
+            file://sh4_set_fpscr.patch \
+            file://sh4_local-fpscr_values.patch \
++           file://make-3.82.patch \
+            file://etc/ld.so.conf \
+            file://generate-supported.mk"
+ S = "${WORKDIR}/${EGLIBC_BRANCH}/libc"
+-- 
+1.7.3.4
 
 
-Thanks,
 
-Paul
-
---=-gZCMzm+2Me6MHVszmE+s
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk5vVpwACgkQPX1aK2wOHVjOKQCffrS5Iy2a0sqk598dch6B0hwn
-MNgAn3MfKl+fozsh1Nbd2NQPv4+bm4lO
-=efjl
------END PGP SIGNATURE-----
-
---=-gZCMzm+2Me6MHVszmE+s--
