@@ -1,34 +1,31 @@
-Received: from mail-ew0-f51.google.com ([209.85.215.51])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1R3qY8-0002HQ-QC
+	(envelope-from <sledz@dresearch-fe.de>) id 1R3qYz-0002NU-AE
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Sep 2011 16:34:52 +0200
-Received: by ewy6 with SMTP id 6so1291682ewy.10
+	Wed, 14 Sep 2011 16:35:45 +0200
+Received: by bke11 with SMTP id 11so1528163bke.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Sep 2011 07:29:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=aPBF4RQpXpx2tOuBkU/7WL6Q4G0zt9Dw2Fq25otubc0=;
-	b=idUQpnH1M4CpRwdA1apZRJcQb5cfzI5ZshVZDAJF2EnhbADv5ZrH232rgt2oEqgANR
-	N3koS9fh4wkelKLmClOaGleq8VUJx/dlPr7dxiqv4b7JmZi55TyCXvrWlYsmhvGgTSck
-	0ZKKT9BltQCsQ6IdUNRsFvZbxRskC0dBtOV7w=
+	Wed, 14 Sep 2011 07:30:34 -0700 (PDT)
+Received: by 10.204.146.141 with SMTP id h13mr2873050bkv.244.1316010634623;
+	Wed, 14 Sep 2011 07:30:34 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id z7sm421855bkt.5.2011.09.14.07.30.32
+	(version=SSLv3 cipher=OTHER); Wed, 14 Sep 2011 07:30:32 -0700 (PDT)
+Message-ID: <4E70BA87.2010304@dresearch-fe.de>
+Date: Wed, 14 Sep 2011 16:30:31 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:6.0.2) Gecko/20110907 Thunderbird/6.0.2
 MIME-Version: 1.0
-Received: by 10.204.136.25 with SMTP id p25mr860055bkt.249.1316010581674; Wed,
-	14 Sep 2011 07:29:41 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.65.194 with HTTP; Wed, 14 Sep 2011 07:29:41 -0700 (PDT)
-In-Reply-To: <1316010273.6686.105.camel@mattotaupa>
-References: <cover.1316006259.git.otavio@ossystems.com.br>
-	<1eb2612347e83d9906021429768912fcd036951a.1316006259.git.otavio@ossystems.com.br>
-	<1316010273.6686.105.camel@mattotaupa>
-Date: Wed, 14 Sep 2011 11:29:41 -0300
-X-Google-Sender-Auth: IpwjfiU8-OpZ0gstJuWns07ajaU
-Message-ID: <CAP9ODKo3GK6uDaSOdZ=CgU73LVdspZnvJ+xFNizsMdubzKGW8A@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 1/1] xorg-xserver-common.inc: usr ${datadir} instead of /usr/share
+References: <1315920550-3977-1-git-send-email-sledz@dresearch-fe.de>
+	<1315925466.4195.58.camel@mattotaupa>
+	<4E6FB151.2030701@dresearch-fe.de>
+In-Reply-To: <4E6FB151.2030701@dresearch-fe.de>
+X-Enigmail-Version: 1.3.1
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: [PATCH] eglibc-2.9: allow building with newer GNU make
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,25 +39,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Sep 2011 14:34:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 14 Sep 2011 14:35:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, Sep 14, 2011 at 11:24, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> Am Mittwoch, den 14.09.2011, 13:18 +0000 schrieb Otavio Salvador:
->
-> There is a typo in the commit summary: s/usr/use/.
->
-> What distributions do not use `/usr/`?
+On 13.09.2011 21:38, Steffen Sledz wrote:
+> On 13.09.2011 16:51, Paul Menzel wrote:
+>> Am Dienstag, den 13.09.2011, 15:29 +0200 schrieb Steffen Sledz:
+>>> GNU make >= 3.82 does not allow mixed implicit and normal rules
+>>
+>> Did you update your build host?
+> 
+> No. It's a clean setup with oe master and Kaeilos at openSUSE 11.4.
+> 
+>> I think to circumvent such issues `make-native` 3.81 should be used?
+> 
+> So this assumption seems to be wrong.
+> 
+>>> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de> --- recipes/eglibc/eglibc-2.9/make-3.82.patch |   16 ++++++++++++++++ recipes/eglibc/eglibc_2.9.bb              |    3 ++- 2 files changed, 18 insertions(+), 1 deletions(-) create mode 100644 recipes/eglibc/eglibc-2.9/make-3.82.patch
+>>>
+>>> diff --git a/recipes/eglibc/eglibc-2.9/make-3.82.patch b/recipes/eglibc/eglibc-2.9/make-3.82.patch new file mode 100644 index 0000000..b0a45d9 --- /dev/null +++ b/recipes/eglibc/eglibc-2.9/make-3.82.patch @@ -0,0 +1,16 @@
+>>
+>> The patch header is missing [1].
+> 
+> Hmmm? After reading [1] i could not find what exactly is missing.
 
-We need it to build a local and reduced chroot of a product.
+Does the guidelines require that the patch files itself (make-3.82.patch in this case) need a header (in addition to the commit comment)?
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+If yes, how do i create such a header? Normally i create the patch with "diff -Nurd".
+
+If no, please enlighten me what is required?
+
+>>> +diff -Nurd libc.orig//manual/Makefile libc/manual/Makefile +--- libc.orig//manual/Makefile	2011-09-13 14:49:57.428424088 +0200 ++++ libc/manual/Makefile	2011-09-13 14:50:47.009620484 +0200 +@@ -242,7 +242,11 @@ + .PHONY: stubs + stubs: $(objpfx)stubs + endif +-$(objpfx)stubs ../po/manual.pot $(objpfx)stamp%: ++$(objpfx)stubs ../po/manual.pot: ++	$(make-target-directory) ++	touch $@ ++ ++$(objpfx)stamp%: + 	$(make-target-directory) + 	touch $@ + diff --git a/recipes/eglibc/eglibc_2.9.bb b/recipes/eglibc/eglibc_2.9.bb index be60ba7..7e0fa55 100644 --- a/recipes/eglibc/eglibc_2.9.bb +++ b/recipes/eglibc/eglibc_2.9.bb @@ -3,7 +3,7 @@ require eglibc.inc DEPENDS += "gperf-native" FILESPATHPKG =. "eglibc-svn:" PV = "2.9" -PR = "${INC_PR}.10" +PR = "${INC_PR}.11" PR_append = "+svnr${SRCPV}" SRCREV="10153" EGLIBC_BRANCH="eglibc-2_9" @@ -14,6 +14,7 @@ SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \ file://shorten-build-commands.patch \ 
+>>> file://sh4_set_fpscr.patch \ file://sh4_local-fpscr_values.patch \ +           file://make-3.82.patch \ file://etc/ld.so.conf \ file://generate-supported.mk" S = "${WORKDIR}/${EGLIBC_BRANCH}/libc"
+>>
+>>
+>> Thanks,
+>>
+>> Paul
+>>
+>>
+>> [1] http://openembedded.org/index.php?title=Commit_Patch_Message_Guidelines
+>>
+>>
+>>
+>> _______________________________________________ Openembedded-devel mailing list Openembedded-devel@lists.openembedded.org http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
+> 
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
