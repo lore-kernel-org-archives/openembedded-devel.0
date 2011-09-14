@@ -1,29 +1,33 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Imran_Mehmood@mentor.com>) id 1R3oVY-0007Lg-BP
+	(envelope-from <otavio.salvador@gmail.com>) id 1R3pAe-0008PI-LD
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Sep 2011 14:24:04 +0200
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1R3oQZ-0000d8-Am from Imran_Mehmood@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Sep 2011 05:18:55 -0700
-Received: from [137.202.157.139] ([137.202.157.139]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Wed, 14 Sep 2011 14:18:54 +0200
-Message-ID: <4E709B6D.2050307@mentor.com>
-Date: Wed, 14 Sep 2011 17:17:49 +0500
-From: Imran Mehmood <imran_mehmood@mentor.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.14) Gecko/20110223 Thunderbird/3.1.8
+	Wed, 14 Sep 2011 15:06:32 +0200
+Received: by bke11 with SMTP id 11so1446153bke.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Sep 2011 06:01:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=On4QoHzfxIDdQ7eZ+djO9fV0kEmbWuf410ctO0rhd0A=;
+	b=uNLiJyENpmkYZKhXoEUu1hGQ2MIo/AJxMVpaN0/QWqJce9bAJBlSimaQKiS0LQ8gtN
+	PlOJMFFDJyoWbkDk+EIrRIGLtssSciWCsKNfvqqophuAgdxt3rTcQG2E2IFtVKcu0D4r
+	s3qgjeueXKdiuj5L8PPXsUs5kQS+q2kOr961A=
 MIME-Version: 1.0
+Received: by 10.204.136.25 with SMTP id p25mr782366bkt.249.1316005282416; Wed,
+	14 Sep 2011 06:01:22 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.65.194 with HTTP; Wed, 14 Sep 2011 06:01:22 -0700 (PDT)
+In-Reply-To: <1315995214.6686.46.camel@mattotaupa>
+References: <CAL9MRrnBVWmZ06rYdp-PomBj=n_4OSMSRx9ejdSJnfn5V7Hokw@mail.gmail.com>
+	<1315995214.6686.46.camel@mattotaupa>
+Date: Wed, 14 Sep 2011 10:01:22 -0300
+X-Google-Sender-Auth: nIELlRjfA_iOWPnPpc1eZQRNjIE
+Message-ID: <CAP9ODKr6aknt7xpE+2HWhxYrUmztuHRQq-4H-wxcdfpAuGeC-Q@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-References: <cover.1315914262.git.Imran_Mehmood@mentor.com>
-	<j4q1sd$gfl$1@dough.gmane.org>
-In-Reply-To: <j4q1sd$gfl$1@dough.gmane.org>
-X-OriginalArrivalTime: 14 Sep 2011 12:18:54.0203 (UTC)
-	FILETIME=[783344B0:01CC72D8]
-Subject: Re: [meta-oe][PATCH 0/1] pull request for twm recipe
+Subject: Re: [PATCH] Add support for mini-box.com picoSAM9G45 board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,62 +41,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Sep 2011 12:24:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 14 Sep 2011 13:06:32 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Dear Koen,
+On Wed, Sep 14, 2011 at 07:13, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+...
+> 1. Unfortunately our policy [1] forbids out to commit your patch,
+> because you did not add your Signed-off-by line.
+>
+> 2. Also please add the information from your introduction to the commit
+> message.
+>
+> 3. The more information the better. Looking at your Wiki pages you seem
+> to use the =C8=A6ngstr=C3=B6m distribution. Please add that too and proba=
+bly it is
+> also good to know what you have tested (ports, graphics, =E2=80=A6).
 
-On 09/14/2011 04:06 PM, Koen Kooi wrote:
+Wouldn't be better to add this in meta-angstrom and use oe-core?
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 13-09-11 14:49, Mehmood, Imran schreef:
->> From: Imran Mehmood<Imran_Mehmood@mentor.com>
->>
->> The following changes since commit
->> 59b3d833fd24f44754e6e0804dae6993af286792: Imran Mehmood (1): xclock: Add
->> recipe version 1.0.5 (initial recipe)
->>
->> are available in the git repository at:
->>
->> git://github.com/lawwama/meta-oe master
->> https://github.com/lawwama/meta-oe/tree/master
->>
->> Imran Mehmood (1): twm: add recipe version 1.0.6 (initial recipe)
->>
->> meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb |   18 ++++++++++++++++++
->> 1 files changed, 18 insertions(+), 0 deletions(-) create mode 100644
->> meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb
-> Can you Mentor guys please bundle up pull requests? One pull request per
-> recipe is a bit too much :)
->
-> And apologies for the delay, the hospital wouldn't let me go till today and
-> they blocked port 22.
->
-> regards,
->
-> Koen
-At the time this was the last recipe we were working on but sure we will bundle up the recipes in future :)
+IMO we ought to try to move as much as possible to oe-core otherwise
+we will keep duplicating a lot of work.
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFOcIrNMkyGM64RGpERAkuqAJ9yGJ3uBdk5KyMEDcId1c8k2m1XtACfTNtd
-> Z1uw2MNukgSlCcrHAzJKeVc=
-> =fvSJ
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-Thanks and Regards,
-
-Imran Mehmood
-
+--=20
+Otavio Salvador=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0O.S. Systems
+E-mail: otavio@ossystems.com.br=C2=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0http://projetos.ossystems.com.br
 
 
