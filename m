@@ -1,33 +1,25 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1R3qlc-0002oh-J2
+	(envelope-from <philb@gnu.org>) id 1R3qvy-00033B-SK
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Sep 2011 16:48:48 +0200
-Received: by bke11 with SMTP id 11so1540066bke.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Sep 2011 07:43:38 -0700 (PDT)
-Received: by 10.204.156.4 with SMTP id u4mr3103639bkw.68.1316011418021;
-	Wed, 14 Sep 2011 07:43:38 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id b17sm449302bkd.8.2011.09.14.07.43.36
-	(version=SSLv3 cipher=OTHER); Wed, 14 Sep 2011 07:43:36 -0700 (PDT)
-Message-ID: <4E70BD97.4060401@dresearch-fe.de>
-Date: Wed, 14 Sep 2011 16:43:35 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:6.0.2) Gecko/20110907 Thunderbird/6.0.2
-MIME-Version: 1.0
+	Wed, 14 Sep 2011 16:59:30 +0200
+Received: from elite.brightsigndigital.co.uk ([81.142.160.137]
+	helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1R3qr0-0004ui-LR
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 14 Sep 2011 16:54:22 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1315920550-3977-1-git-send-email-sledz@dresearch-fe.de>
-	<1315925466.4195.58.camel@mattotaupa>
-	<4E6FB151.2030701@dresearch-fe.de>
-	<4E70BA87.2010304@dresearch-fe.de>
-	<1316010999.6686.108.camel@mattotaupa>
-In-Reply-To: <1316010999.6686.108.camel@mattotaupa>
-X-Enigmail-Version: 1.3.1
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
-Subject: Re: [PATCH] eglibc-2.9: allow building with newer GNU make
+Date: Wed, 14 Sep 2011 15:54:21 +0100
+In-Reply-To: <1316010273.6686.105.camel@mattotaupa>
+References: <cover.1316006259.git.otavio@ossystems.com.br>
+	<1eb2612347e83d9906021429768912fcd036951a.1316006259.git.otavio@ossystems.com.br>
+	<1316010273.6686.105.camel@mattotaupa>
+X-Mailer: Evolution 3.0.2- 
+Message-ID: <1316012062.27603.1.camel@phil-desktop>
+Mime-Version: 1.0
+Subject: Re: [meta-oe][PATCH 1/1] xorg-xserver-common.inc: usr ${datadir} instead of /usr/share
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,43 +33,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Sep 2011 14:48:48 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 14 Sep 2011 14:59:31 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On 14.09.2011 16:36, Paul Menzel wrote:
->>>> The patch header is missing [1].
->>>
->>> Hmmm? After reading [1] i could not find what exactly is missing.
->>
->> Does the guidelines require that the patch files itself (make-3.82.patch in this case) need a header (in addition to the commit comment)?
+On Wed, 2011-09-14 at 16:24 +0200, Paul Menzel wrote:
+> Am Mittwoch, den 14.09.2011, 13:18 +0000 schrieb Otavio Salvador:
 > 
-> Yes, that is correct.
-
-It would be very helpful if [1] could be modified in a way that makes clear that it talk about to separate things: the commit message *and* the patch header.
-
-This was totally unclear for me after reading it.
-
->> If yes, how do i create such a header? Normally i create the patch with "diff -Nurd".
->>
->> If no, please enlighten me what is required?
+> There is a typo in the commit summary: s/usr/use/.
 > 
-> You can add any text to a diff file above a `---` I think. `patch` can
-> handle that. But there should be some example in the repositories.
+> What distributions do not use `/usr/`?
 
-OK, i'll create a new version of the commit.
+Micro doesn't, for one.
 
-Steffen
+p.
 
-[1] http://openembedded.org/index.php?title=Commit_Patch_Message_Guidelines
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
 
 
