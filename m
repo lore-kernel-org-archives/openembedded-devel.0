@@ -1,26 +1,24 @@
-Received: from mail-ew0-f42.google.com ([209.85.215.42])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1R3rVf-0004LR-UP
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1R3zIz-0006AY-5V
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Sep 2011 17:36:25 +0200
-Received: by ewy2 with SMTP id 2so1332003ewy.29
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Sep 2011 08:31:09 -0700 (PDT)
-Received: by 10.204.0.66 with SMTP id 2mr3394890bka.328.1316014269377;
-	Wed, 14 Sep 2011 08:31:09 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id d1sm623195bku.1.2011.09.14.08.31.07
-	(version=SSLv3 cipher=OTHER); Wed, 14 Sep 2011 08:31:08 -0700 (PDT)
-Message-ID: <4E70C8BA.9030901@dresearch-fe.de>
-Date: Wed, 14 Sep 2011 17:31:06 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:6.0.2) Gecko/20110907 Thunderbird/6.0.2
+	Thu, 15 Sep 2011 01:55:50 +0200
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 14 Sep 2011 16:50:37 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="48533067"
+Received: from unknown (HELO helios.localnet) ([10.252.120.105])
+	by orsmga002.jf.intel.com with ESMTP; 14 Sep 2011 16:50:35 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 15 Sep 2011 00:50:33 +0100
+User-Agent: KMail/1.13.6 (Linux/2.6.38-10-generic-pae; KDE/4.6.2; i686; ; )
+References: <1315307566-15579-1-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1315307566-15579-1-git-send-email-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Enigmail-Version: 1.3.1
-Subject: guidelines for upstart in oe?
+Message-Id: <201109150050.33494.paul.eggleton@linux.intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-handheld][PATCH] linux-kexecboot: move defconfigs to linux-kexecboot-2.6.39
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,25 +32,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Sep 2011 15:36:25 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 14 Sep 2011 23:55:50 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-If i remember right there are some first experiments with using upstart as an sysvinit replacement in some oe based distros.
+On Tuesday 06 September 2011 12:12:46 Martin Jansa wrote:
+> * to make room in linux-kexecboot directory for 3.1.0-rc5 defconfigs I've
+> prepared 3.1.0-rc5 recipes are here:
+>   https://gitorious.org/shr/meta-handheld/commits/jansa/spitz
+>   will send them to after testing and when git.kernel.org is back online
 
-Do some guidelines or suggestions exist to make an application recipes upstart ready?
+I'm not taking this, for several reasons:
 
-Nowadays a recipe for a common service contains INITSCRIPT_NAME & Co and installs an init script for sysvinit.
+1)  I'm willing to be reasonably relaxed about commit messages for meta-
+handheld, but they should at least explain why the change is being made and 
+not contain extraneous information (e.g. the last part of your message above - 
+this ought to be in a cover letter or a reply if it's easier for you.)
 
-How should such a recipe be modified to be able to install the application in a native upstart image (without sysvinit compatible runlevels)?
+2) Please use the -M option to detect moves, so that renames with no changes 
+are obvious.
+
+3) This patch alone doesn't appear to do anything valuable; however, in a 
+series with your forthcoming patch it will, so I'll be more than happy to 
+apply it then assuming the previous items are tidied up.
+
+(Sorry it took so long to get back to you with this.)
+
+Cheers,
+Paul
 
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
