@@ -1,23 +1,33 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-ew0-f51.google.com ([209.85.215.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1R3qT7-00027E-Mz for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Sep 2011 16:29:41 +0200
-Received: from f053036201.adsl.alicedsl.de ([78.53.36.201]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1R3qOF-0008BO-3b for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Sep 2011 14:24:39 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 14 Sep 2011 16:24:32 +0200
-In-Reply-To: <1eb2612347e83d9906021429768912fcd036951a.1316006259.git.otavio@ossystems.com.br>
+	(envelope-from <otavio.salvador@gmail.com>) id 1R3qY8-0002HQ-QC
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 14 Sep 2011 16:34:52 +0200
+Received: by ewy6 with SMTP id 6so1291682ewy.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Sep 2011 07:29:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=aPBF4RQpXpx2tOuBkU/7WL6Q4G0zt9Dw2Fq25otubc0=;
+	b=idUQpnH1M4CpRwdA1apZRJcQb5cfzI5ZshVZDAJF2EnhbADv5ZrH232rgt2oEqgANR
+	N3koS9fh4wkelKLmClOaGleq8VUJx/dlPr7dxiqv4b7JmZi55TyCXvrWlYsmhvGgTSck
+	0ZKKT9BltQCsQ6IdUNRsFvZbxRskC0dBtOV7w=
+MIME-Version: 1.0
+Received: by 10.204.136.25 with SMTP id p25mr860055bkt.249.1316010581674; Wed,
+	14 Sep 2011 07:29:41 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.65.194 with HTTP; Wed, 14 Sep 2011 07:29:41 -0700 (PDT)
+In-Reply-To: <1316010273.6686.105.camel@mattotaupa>
 References: <cover.1316006259.git.otavio@ossystems.com.br>
 	<1eb2612347e83d9906021429768912fcd036951a.1316006259.git.otavio@ossystems.com.br>
-X-Mailer: Evolution 3.0.3- 
-Message-ID: <1316010273.6686.105.camel@mattotaupa>
-Mime-Version: 1.0
+	<1316010273.6686.105.camel@mattotaupa>
+Date: Wed, 14 Sep 2011 11:29:41 -0300
+X-Google-Sender-Auth: IpwjfiU8-OpZ0gstJuWns07ajaU
+Message-ID: <CAP9ODKo3GK6uDaSOdZ=CgU73LVdspZnvJ+xFNizsMdubzKGW8A@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH 1/1] xorg-xserver-common.inc: usr ${datadir} instead of /usr/share
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,46 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Sep 2011 14:29:41 -0000
-X-Groupsio-MsgNum: 34222
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-/oLzdQJsfclq7Ku//ULk"
-
---=-/oLzdQJsfclq7Ku//ULk
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 14 Sep 2011 14:34:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Am Mittwoch, den 14.09.2011, 13:18 +0000 schrieb Otavio Salvador:
-
-There is a typo in the commit summary: s/usr/use/.
-
-What distributions do not use `/usr/`?
-
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+On Wed, Sep 14, 2011 at 11:24, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Am Mittwoch, den 14.09.2011, 13:18 +0000 schrieb Otavio Salvador:
 >
-> ---
->  .../xorg-xserver/xorg-xserver-common.inc           |    6 +++---
->  1 files changed, 3 insertions(+), 3 deletions(-)
+> There is a typo in the commit summary: s/usr/use/.
+>
+> What distributions do not use `/usr/`?
 
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+We need it to build a local and reduced chroot of a product.
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
-Thanks,
-
-Paul
-
---=-/oLzdQJsfclq7Ku//ULk
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk5wuSAACgkQPX1aK2wOHVjo4QCfUHKy4aGVZynxG+Vz6r2oZ6g0
-kYYAn3OVWPnVuz3CQyE31EunkkIg7FT4
-=duu+
------END PGP SIGNATURE-----
-
---=-/oLzdQJsfclq7Ku//ULk--
