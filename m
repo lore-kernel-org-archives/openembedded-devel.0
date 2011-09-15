@@ -1,31 +1,31 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1R48Hi-0001wX-MV
+	(envelope-from <martin.jansa@gmail.com>) id 1R48IS-00024b-UI
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Sep 2011 11:31:06 +0200
-Received: by bke11 with SMTP id 11so2253417bke.6
+	Thu, 15 Sep 2011 11:31:52 +0200
+Received: by bke11 with SMTP id 11so2253934bke.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2011 02:25:55 -0700 (PDT)
+	Thu, 15 Sep 2011 02:26:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=ZuytPLjEZup1y/aYrkk8HZG5cmuEwPSKtK+/cqo07Vw=;
-	b=XVV9R99EN3+iwLdojDYqt7r1Rvfs5inRS1nsMTwI8u1vkxDk9/6eKw3RGdMqTF3s3f
-	681GlblcRnH9Px+G0WKhQ3dZDzQ2NNnyZ+vNZQXE9rNi5ORCH/qKebhysFN6Np+K7qW3
-	kCt1L8FCawRj/w2jG6AazUlZZPCtoWYbjUlXI=
-Received: by 10.204.7.206 with SMTP id e14mr596907bke.127.1316078755030;
-	Thu, 15 Sep 2011 02:25:55 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=o0JA5l3VOpRPzYGnkWMAaVgD41I3QKFTjphY+r8r5uA=;
+	b=RSVsJAkTJwm/vjt75Nz7Ao+Fir1S5a0Vq5Zw3uMJvqRCYFY8EQ4rY+DOTynVTF6YXw
+	rDKxzmfhlwzvW/0uTppZ3zLyfDZ15h+s9KlePf8KtF3U4ljzLfDFEAi2PHrFl1V9c4Zc
+	swOOJsKZNQUNZHaMNnJPw1x3EMropLHSaQCMI=
+Received: by 10.204.144.86 with SMTP id y22mr598706bku.160.1316078801730;
+	Thu, 15 Sep 2011 02:26:41 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id af16sm2474565bkc.10.2011.09.15.02.25.52
+	by mx.google.com with ESMTPS id f15sm2508389bke.2.2011.09.15.02.26.39
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 15 Sep 2011 02:25:53 -0700 (PDT)
+	Thu, 15 Sep 2011 02:26:40 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Sep 2011 11:25:44 +0200
-Message-Id: <cover.1316078712.git.Martin.Jansa@gmail.com>
+Date: Thu, 15 Sep 2011 11:26:30 +0200
+Message-Id: <6f97022ee7adf86a732e555279716791430880c4.1316078712.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.6.1
-In-Reply-To: <201109150050.33494.paul.eggleton@linux.intel.com>
-References: <201109150050.33494.paul.eggleton@linux.intel.com>
-Subject: [meta-handheld][PATCH 0/3] Pull request #2
+In-Reply-To: <cover.1316078712.git.Martin.Jansa@gmail.com>
+References: <cover.1316078712.git.Martin.Jansa@gmail.com>
+Subject: [meta-handheld][PATCH 1/3] linux-kexecboot: move defconfig to linux-kexecboot-2.6.39
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,43 +39,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2011 09:31:06 -0000
+X-List-Received-Date: Thu, 15 Sep 2011 09:31:53 -0000
 
-The following changes since commit 3dbd4d09733bde4f2029a7668dd5eb6ca34e6380:
+* linux-kexecboot directory will be used for defconfigs for git version
 
-  linux-kexecboot: move defconfigs to linux-kexecboot-2.6.39 (2011-09-15 11:24:58 +0200)
-
-are available in the git repository at:
-  git://gitorious.org/shr/meta-handheld jansa/linux-3.1
-
-Martin Jansa (3):
-  linux-kexecboot: move defconfig to linux-kexecboot-2.6.39
-  linux(-kexecboot): add recipes for git version 3.1.0-rc6
-  linux_git: set CMDLINE_DEBUG to debug for git version
-
- recipes-kernel/linux/linux-git.inc                 |   22 ++
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
  .../akita/defconfig                                |    0
  .../c7x0/defconfig                                 |    0
  .../collie/defconfig                               |    0
  .../poodle/defconfig                               |    0
- .../linux/linux-kexecboot-2.6.39/spitz/defconfig   |  133 +++++++
+ .../spitz/defconfig                                |    0
  .../tosa/defconfig                                 |    0
- .../linux/linux-kexecboot/spitz/defconfig          |    4 -
- recipes-kernel/linux/linux-kexecboot_git.bb        |    2 +
- recipes-kernel/linux/linux/spitz/defconfig         |  379 ++++++++++++++++++++
- recipes-kernel/linux/linux_git.bb                  |   10 +
- 11 files changed, 546 insertions(+), 4 deletions(-)
- create mode 100644 recipes-kernel/linux/linux-git.inc
+ 6 files changed, 0 insertions(+), 0 deletions(-)
  rename recipes-kernel/linux/{linux-kexecboot => linux-kexecboot-2.6.39}/akita/defconfig (100%)
  rename recipes-kernel/linux/{linux-kexecboot => linux-kexecboot-2.6.39}/c7x0/defconfig (100%)
  rename recipes-kernel/linux/{linux-kexecboot => linux-kexecboot-2.6.39}/collie/defconfig (100%)
  rename recipes-kernel/linux/{linux-kexecboot => linux-kexecboot-2.6.39}/poodle/defconfig (100%)
- create mode 100644 recipes-kernel/linux/linux-kexecboot-2.6.39/spitz/defconfig
+ rename recipes-kernel/linux/{linux-kexecboot => linux-kexecboot-2.6.39}/spitz/defconfig (100%)
  rename recipes-kernel/linux/{linux-kexecboot => linux-kexecboot-2.6.39}/tosa/defconfig (100%)
- create mode 100644 recipes-kernel/linux/linux-kexecboot_git.bb
- create mode 100644 recipes-kernel/linux/linux/spitz/defconfig
- create mode 100644 recipes-kernel/linux/linux_git.bb
 
+diff --git a/recipes-kernel/linux/linux-kexecboot/akita/defconfig b/recipes-kernel/linux/linux-kexecboot-2.6.39/akita/defconfig
+similarity index 100%
+rename from recipes-kernel/linux/linux-kexecboot/akita/defconfig
+rename to recipes-kernel/linux/linux-kexecboot-2.6.39/akita/defconfig
+diff --git a/recipes-kernel/linux/linux-kexecboot/c7x0/defconfig b/recipes-kernel/linux/linux-kexecboot-2.6.39/c7x0/defconfig
+similarity index 100%
+rename from recipes-kernel/linux/linux-kexecboot/c7x0/defconfig
+rename to recipes-kernel/linux/linux-kexecboot-2.6.39/c7x0/defconfig
+diff --git a/recipes-kernel/linux/linux-kexecboot/collie/defconfig b/recipes-kernel/linux/linux-kexecboot-2.6.39/collie/defconfig
+similarity index 100%
+rename from recipes-kernel/linux/linux-kexecboot/collie/defconfig
+rename to recipes-kernel/linux/linux-kexecboot-2.6.39/collie/defconfig
+diff --git a/recipes-kernel/linux/linux-kexecboot/poodle/defconfig b/recipes-kernel/linux/linux-kexecboot-2.6.39/poodle/defconfig
+similarity index 100%
+rename from recipes-kernel/linux/linux-kexecboot/poodle/defconfig
+rename to recipes-kernel/linux/linux-kexecboot-2.6.39/poodle/defconfig
+diff --git a/recipes-kernel/linux/linux-kexecboot/spitz/defconfig b/recipes-kernel/linux/linux-kexecboot-2.6.39/spitz/defconfig
+similarity index 100%
+rename from recipes-kernel/linux/linux-kexecboot/spitz/defconfig
+rename to recipes-kernel/linux/linux-kexecboot-2.6.39/spitz/defconfig
+diff --git a/recipes-kernel/linux/linux-kexecboot/tosa/defconfig b/recipes-kernel/linux/linux-kexecboot-2.6.39/tosa/defconfig
+similarity index 100%
+rename from recipes-kernel/linux/linux-kexecboot/tosa/defconfig
+rename to recipes-kernel/linux/linux-kexecboot-2.6.39/tosa/defconfig
 -- 
 1.7.6.1
 
