@@ -1,31 +1,27 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from einhorn.in-berlin.de ([192.109.42.8] ident=root)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1R4AbC-0003Yb-W5
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Sep 2011 13:59:24 +0200
-Received: by wyh5 with SMTP id 5so1018462wyh.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2011 04:54:11 -0700 (PDT)
-Received: by 10.227.199.16 with SMTP id eq16mr1116745wbb.48.1316087651127;
-	Thu, 15 Sep 2011 04:54:11 -0700 (PDT)
+	(envelope-from <sledz@mobil-400-586.intern.dresearch.de>)
+	id 1R4B96-00074q-KF for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Sep 2011 14:34:24 +0200
+X-Envelope-From: sledz@mobil-400-586.intern.dresearch.de
 Received: from mobil-400-586.intern.dresearch.de
-	(pd95cbf07.dip0.t-ipconnect.de. [217.92.191.7])
-	by mx.google.com with ESMTPS id fp5sm7561824wbb.2.2011.09.15.04.54.09
-	(version=SSLv3 cipher=OTHER); Thu, 15 Sep 2011 04:54:10 -0700 (PDT)
-Message-ID: <4E71E760.1090105@dresearch-fe.de>
-Date: Thu, 15 Sep 2011 13:54:08 +0200
+	(pd95cbf07.dip0.t-ipconnect.de [217.92.191.7]) (authenticated bits=0)
+	by einhorn.in-berlin.de (8.13.6/8.13.6/Debian-1) with ESMTP id
+	p8FCTD5F012292
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
+	Thu, 15 Sep 2011 14:29:14 +0200
+Received: by mobil-400-586.intern.dresearch.de (Postfix, from userid 1000)
+	id AE5E6C3967; Thu, 15 Sep 2011 14:29:13 +0200 (CEST)
 From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:6.0.2) Gecko/20110907 Thunderbird/6.0.2
-MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1316072892-27367-1-git-send-email-sledz@dresearch-fe.de>
-	<1316073352-27826-1-git-send-email-sledz@dresearch-fe.de>
-	<1316077506.4523.10.camel@mattotaupa>
+Date: Thu, 15 Sep 2011 14:29:02 +0200
+Message-Id: <1316089742-26495-1-git-send-email-sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.3.4
 In-Reply-To: <1316077506.4523.10.camel@mattotaupa>
-X-Enigmail-Version: 1.3.1
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
-Subject: Re: [PATCH v4] linux-libc-headers 2.6.24: backport arm/asm/hwcap.h from recent kernel
+References: <1316077506.4523.10.camel@mattotaupa>
+X-Scanned-By: MIMEDefang_at_IN-Berlin_e.V. on 192.109.42.8
+Cc: paulepanter@users.sourceforge.net
+Subject: [PATCH v5] linux-libc-headers 2.6.24: backport arm/asm/hwcap.h from linux 2.6.26
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,24 +35,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2011 11:59:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 15 Sep 2011 12:34:24 -0000
 
-On 15.09.2011 11:05, Paul Menzel wrote:
-> PS: It is hard for reviewers to see what changed in your patch iterations. For example between v3 and v4. Please add a short note below the commit message and separate that with an additional `---`. `git am` will not pick that comment up then.
+Enables building of OpenJDK which uses HWCAP_THUMBEE that is not present
+in 2.6.24 headers and was introduced with
 
-Is it possible to add such a comment while running "git format-patch" or "git send-email"?
+  commit d7f864be8323e5394040e2877594645b0e7da85d
+  Author: Catalin Marinas <catalin.marinas@arm.com>
+  Date:   Fri Apr 18 22:43:06 2008 +0100
 
-Or is it necessary to mix this into the commit comment itself?
+      ARMv7: Add support for the ThumbEE state saving/restoring
 
+      This patch adds the detection and handling of the ThumbEE extension on
+      ARMv7 CPUs.
+
+      Signed-off-by: Catalin Marinas <catalin.marinas@arm.com>
+
+Upstream-Status: Backport [2.6.26]
+
+Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+Reviewed-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+[PATCH v5] contains updates in commit comment and patch header as a result of
+Paul's review of [PATCH v4] especially the referenced linux commit.
+---
+ .../arm-hwcap-add-new-entries.patch                |   31 ++++++++++++++++++++
+ .../linux-libc-headers_2.6.24.bb                   |    6 ++-
+ 2 files changed, 35 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/linux-libc-headers/linux-libc-headers-2.6.24/arm-hwcap-add-new-entries.patch
+
+diff --git a/recipes/linux-libc-headers/linux-libc-headers-2.6.24/arm-hwcap-add-new-entries.patch b/recipes/linux-libc-headers/linux-libc-headers-2.6.24/arm-hwcap-add-new-entries.patch
+new file mode 100644
+index 0000000..80a7949
+--- /dev/null
++++ b/recipes/linux-libc-headers/linux-libc-headers-2.6.24/arm-hwcap-add-new-entries.patch
+@@ -0,0 +1,31 @@
++linux-libc-headers 2.6.24: backport arm/asm/hwcap.h from linux 2.6.26
++
++Enables building of OpenJDK which uses HWCAP_THUMBEE that is not present
++in 2.6.24 headers and was introduced with
++
++  commit d7f864be8323e5394040e2877594645b0e7da85d
++  Author: Catalin Marinas <catalin.marinas@arm.com>
++  Date:   Fri Apr 18 22:43:06 2008 +0100
++  
++      ARMv7: Add support for the ThumbEE state saving/restoring
++      
++      This patch adds the detection and handling of the ThumbEE extension on
++      ARMv7 CPUs.
++            
++      Signed-off-by: Catalin Marinas <catalin.marinas@arm.com>
++
++Upstream-Status: Backport [2.6.26]
++
++Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
++
++diff -Nurd linux-2.6.24.orig//include/asm-arm/hwcap.h linux-2.6.24/include/asm-arm/hwcap.h
++--- linux-2.6.24.orig//include/asm-arm/hwcap.h	2011-09-15 08:42:58.467307245 +0200
+++++ linux-2.6.24/include/asm-arm/hwcap.h	2011-09-15 08:43:46.004693497 +0200
++@@ -15,6 +15,7 @@
++ #define HWCAP_JAVA	256
++ #define HWCAP_IWMMXT	512
++ #define HWCAP_CRUNCH	1024
+++#define HWCAP_THUMBEE	2048
++ 
++ #if defined(__KERNEL__) && !defined(__ASSEMBLY__)
++ /*
+diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
+index 148d03f..d7f67ed 100644
+--- a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
++++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
+@@ -2,13 +2,15 @@ require linux-libc-headers.inc
+ 
+ INHIBIT_DEFAULT_DEPS = "1"
+ DEPENDS += "unifdef-native"
+-PR = "r7"
++PR = "r8"
+ 
+ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
+            file://procinfo.h \
+            file://export_falloc_h.patch \
+            file://make-3.82.patch \
+-           file://unifdef.patch"
++           file://unifdef.patch \
++           file://arm-hwcap-add-new-entries.patch \
++"
+ 
+ SRC_URI_append_hipox = " \
+ 	file://siocoutqsnd.patch \
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+1.7.3.4
+
 
 
