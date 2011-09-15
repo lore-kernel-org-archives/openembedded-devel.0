@@ -1,27 +1,21 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tracker.indexer@gmail.com>) id 1R49F4-0000nv-R1
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Sep 2011 12:32:26 +0200
-Received: by wwf10 with SMTP id 10so5170100wwf.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2011 03:27:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=D1Xj2fIoX6sISvQtVjQ1tQn5eqveIVl08ydBRD594FU=;
-	b=WAAblbwz9nvrgm7zjDf5tUP5asxYJ99l1HqR8oh7qtwTsyFKE5h1OjU5KT3Z6Aor/i
-	S/t+LLLsPQNcOaKBQNHqPGL2s2BZ3GHqrkxP2pPB2jOPqUdyHm25ucDTqA+d/9AV/DWk
-	FbA1jImK90e1G85U7LoL2vFc1lUaa43as7n10=
-MIME-Version: 1.0
-Received: by 10.227.154.66 with SMTP id n2mr1034374wbw.3.1316082435590; Thu,
-	15 Sep 2011 03:27:15 -0700 (PDT)
-Received: by 10.180.101.131 with HTTP; Thu, 15 Sep 2011 03:27:15 -0700 (PDT)
-Date: Thu, 15 Sep 2011 15:57:15 +0530
-Message-ID: <CA+QZjQMK8r8pwKAAmMbaxo0o+5YY3Fyn0vd6mZAFTxwOm4CP0A@mail.gmail.com>
-From: John stacy <tracker.indexer@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1R49Ji-00011H-Ms for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Sep 2011 12:37:14 +0200
+Received: from f053044184.adsl.alicedsl.de ([78.53.44.184]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1R49Er-0003dZ-5E for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Sep 2011 10:32:13 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: glib-2.0 iconv support configure error
+Date: Thu, 15 Sep 2011 12:32:04 +0200
+X-Mailer: Evolution 3.0.3- 
+Message-ID: <1316082725.4523.67.camel@mattotaupa>
+Mime-Version: 1.0
+Subject: Do we need a patch queue (Patchwork)?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,56 +29,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2011 10:32:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 15 Sep 2011 10:37:14 -0000
+X-Groupsio-MsgNum: 34259
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-RpSs04vqncBtXgGCwbEW"
 
-Hello Team,
+--=-RpSs04vqncBtXgGCwbEW
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I am using glib-2.0 using the bitbake file glib-2.0_2.28.0.bb
-
-I have the eglibc enabled with the ICONV support.
-
-Now if I add another EXTRA_CONF option "with-libiconv=native", I am getting
-configuration error.
-
-It says libc do not installed with ICONV option and I dont want to use the
-libiconv library as my eglibc already has the iconv support.
-
- checking for i686-pc-linux-gnu-pkg-config... no
-| checking for pkg-config...
-/home/prafulla/Perforce/tmp/sysroots/i686-linux/usr/bin/pkg-config
-| configure: WARNING: using cross tools not prefixed with host triplet
-| checking pkg-config is at least version 0.16... yes
-| checking for gawk... (cached) gawk
-| checking for perl5... no
-| checking for perl... perl
-| checking for indent... no
-| checking for perl...
-/home/prafulla/Perforce/tmp/sysroots/i686-linux/usr/bin/perl
-| checking for a Python interpreter with version >= 2.4... python
-| checking for python... /usr/bin/python
-| checking for python version... 2.6
-| checking for python platform... linux2
-| checking for python script directory...
-${prefix}/lib/python2.6/dist-packages
-| checking for python extension module directory...
-${exec_prefix}/lib/python2.6/dist-packages
-| checking for iconv_open in -liconv... no
-*| configure: error: *** No iconv() implementation found in C library or
-libiconv*
-NOTE: package glib-2.0-2.28.0-r1: task do_configure: Failed
-ERROR: Function 'do_configure' failed (see
-/home/prafulla/Perforce/tmp/work/i686-pc-linux-gnu/glib-2.0-2.28.0-r1/temp/log.do_configure.15989
-for further information)
-ERROR: Task 10 (/home/prafulla/Perforce/pkg-oss/glib-2.0/glib-2.0_2.28.0.bb,
-do_configure) failed with exit code '1'
-ERROR: '/home/prafulla/Perforce/pkg-oss/glib-2.0/glib-2.0_2.28.0.bb' failed
+Dear OE folks,
 
 
-To fetch this information correctly, Do I have to provide any extra options
-to bitbake?
-Could some throw some light on this one?
+(This is the last organizational message I will write today.)
+
+We currently have a patch queue/tracker called Patchwork [1][2] which
+should be used according to the documentation in the Wiki.
+
+The current situation though is that nobody seems to use it anymore, i.
+e. does not update the patch state. (Also because of some problems with
+registration.)
+
+Before the move to oe-core and meta-oe there were some people caring
+about Patchwork and going through the uncommitted each quarter or so.
+Currently this is not the case anymore.
+
+Should the system be shut down or do we still need it?
+
+### benefits ###
+
+1. Patches are easy to apply from Patchwork when not having access to
+the email program with the list inbox.
+2. Old patches are not forgotten.
+3. Patch state can be tracked and the thread representation is more
+concise then the list archive.
+4. Searching for patches on the Web most of the time the first hits
+point to the threads in Patchwork.
+
+### downsides ###
+
+1. It is a lot of work to update the patch state manually.
+2. A lot of people refuse to use it.
+
+
+We could also say that the current installation will stay at is and that
+it is only used to import patches easily and for getting the discussion
+overview. I am fine with that, but the documentation needs to be
+updated!
+
 
 Thanks,
-John
 
+Paul
+
+
+[1] http://patches.openembedded.org/project/oe/list/
+[2] http://openembedded.org/index.php?title=3DPatchwork
+
+--=-RpSs04vqncBtXgGCwbEW
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk5x1CQACgkQPX1aK2wOHVjTigCeJ9yPYS/youv0pa23MMCqI1Ft
+MuUAn15iOm88qNhpkdrQREl1B6q+Ocbr
+=+mnq
+-----END PGP SIGNATURE-----
+
+--=-RpSs04vqncBtXgGCwbEW--
