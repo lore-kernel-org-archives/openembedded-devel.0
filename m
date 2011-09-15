@@ -1,33 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1R49WM-0001V8-I1 for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Sep 2011 12:50:18 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1R49RK-0001hg-KA for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Sep 2011 12:45:06 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2011 12:45:06 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <seba.dos1@gmail.com>) id 1R49ai-0001hN-Cu
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Sep 2011 12:54:48 +0200
+Received: by qyk4 with SMTP id 4so3151695qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2011 12:45:06 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 15 Sep 2011 12:44:11 +0200
-Message-ID: <j4sktr$j8a$3@dough.gmane.org>
-References: <1316082725.4523.67.camel@mattotaupa>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
+	Thu, 15 Sep 2011 03:49:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	bh=SEQrtN7p97/8XTe2wiLLBOsjOUWZoSD88SURuobOQMU=;
+	b=wwsnzchC6OQN+HOsj1LfIHu4A86rZGeTChf5YX8Cpt0YgR037hsHOo5os29azOq5Hi
+	oHG1RguFFgrbp7TfbQVaNp+Vx/xn3lu4XWm/0leieqlOL/KJGHD0OPerH0ueE3zv6G4n
+	tKSf8lwSDVODCjzUeFpeAdvg3nd2okaIQVXZs=
+Received: by 10.229.62.103 with SMTP id w39mr746378qch.292.1316083776162; Thu,
+	15 Sep 2011 03:49:36 -0700 (PDT)
+MIME-Version: 1.0
+Sender: seba.dos1@gmail.com
+Received: by 10.229.232.207 with HTTP; Thu, 15 Sep 2011 03:49:16 -0700 (PDT)
 In-Reply-To: <1316082725.4523.67.camel@mattotaupa>
-X-Enigmail-Version: 1.3.1
+References: <1316082725.4523.67.camel@mattotaupa>
+From: Sebastian Krzyszkowiak <dos@dosowisko.net>
+Date: Thu, 15 Sep 2011 12:49:16 +0200
+X-Google-Sender-Auth: gxXWTJ6r_cYS5yXxHDT-kSFFYss
+Message-ID: <CAMkzfpYgJET8PDZ80NB6ARX5OQJSe+T6kZCRdM5cDdxDm8FxBg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: Do we need a patch queue (Patchwork)?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,36 +39,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2011 10:50:18 -0000
+X-List-Received-Date: Thu, 15 Sep 2011 10:54:48 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thu, Sep 15, 2011 at 12:32, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> 1. It is a lot of work to update the patch state manually.
+> 2. A lot of people refuse to use it.
 
-Op 15-09-11 12:32, Paul Menzel schreef:
-> Dear OE folks,
-> 
-> 
-> (This is the last organizational message I will write today.)
-> 
-> We currently have a patch queue/tracker called Patchwork [1][2] which 
-> should be used according to the documentation in the Wiki.
-> 
-> The current situation though is that nobody seems to use it anymore, i. 
-> e. does not update the patch state. (Also because of some problems with 
-> registration.)
+What about modyfiing patchwork so patches could be marked as accepted via email?
+For instance, when dev is sending message "Applied and pushed,
+thanks!" he could also insert some tag "#patchwork:done" or something
+like that at the beginning so it would be automatically marked as
+done.
 
-I do use it for meta-oe and if you have a look at
-http://patches.openembedded.org/project/oe/list/?q=meta-oe you'll see that
-it is quite up to date.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Something like that (but much more complex) is working on Debian
+maillists regarding bugtracker.
 
-iD8DBQFOcdb7MkyGM64RGpERAmk5AJsEVuE99T8PGGtJOLxlgHutrdadMgCfW2xS
-CW3FXF0uwPzDc1pwHn36hvQ=
-=2uis
------END PGP SIGNATURE-----
-
+-- 
+Sebastian Krzyszkowiak
+dos
 
 
