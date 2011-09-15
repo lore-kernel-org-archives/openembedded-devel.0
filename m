@@ -1,26 +1,36 @@
-Received: from vms173001pub.verizon.net ([206.46.173.1])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1R4EV2-0002H7-OU
+Received: from 18.mo5.mail-out.ovh.net ([178.33.45.10]
+	helo=mo5.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <denis@eukrea.com>) id 1R4EZ4-0002T3-JP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Sep 2011 18:09:16 +0200
-Received: from gandalf.denix.org ([unknown] [71.191.138.237])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LRK002ALNA5KPUB@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	15 Sep 2011 11:03:54 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id D795414AF5F; Thu,
-	15 Sep 2011 12:03:41 -0400 (EDT)
-Date: Thu, 15 Sep 2011 12:03:41 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 15 Sep 2011 18:13:26 +0200
+Received: from mail183.ha.ovh.net (b6.ovh.net [213.186.33.56])
+	by mo5.mail-out.ovh.net (Postfix) with SMTP id 4FA1F10088F9
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Sep 2011 15:22:49 +0200 (CEST)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 15 Sep 2011 15:22:24 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.18?)
+	(denis%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 15 Sep 2011 15:22:22 +0200
+X-Ovh-Mailout: 178.32.228.5 (mo5.mail-out.ovh.net)
+From: Denis Carikli <denis@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20110915160341.GA24402@denix.org>
-References: <1316081269.4523.54.camel@mattotaupa>
-	<201109151120.09382.paul.eggleton@linux.intel.com>
-MIME-version: 1.0
-In-reply-to: <201109151120.09382.paul.eggleton@linux.intel.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: How to call the old repository: oe.dev or OE classic?
+In-Reply-To: <j4sko7$j8a$1@dough.gmane.org>
+References: <1316079756-3038-1-git-send-email-denis@eukrea.com>
+	<j4sko7$j8a$1@dough.gmane.org>
+Organization: eukrea
+Date: Thu, 15 Sep 2011 15:22:21 +0200
+Message-ID: <1316092941.3849.2.camel@PCDEV1>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.32.2 
+X-Ovh-Tracer-Id: 18162454349347233097
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeeftddrvddtucetggdotefuucfrrhhofhhilhgvmecuqfggjfenuceurghilhhouhhtmecufedttdenuc
+Subject: Re: [PATCH] qwt: import from openembedded.dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,31 +44,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2011 16:09:16 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 15 Sep 2011 16:13:26 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Sep 15, 2011 at 11:20:09AM +0100, Paul Eggleton wrote:
-> On Thursday 15 September 2011 11:07:48 Paul Menzel wrote:
-> > it is confusing for outsiders if oe.dev and OE classic are referring to
-> > the same repository or not.
-> 
-> I can see how people could be confused, so yes we probably ought to have just 
-> one name.
->  
-> > So we need to make up an official name for the old repository. oe.dev or
-> > OE classic? I favor oe.dev, because it is shorter
-> 
-> oe-dev/oe.dev being a shortened "org.openembedded.dev" is kind of a relic of 
-> the old (was it bitkeeper or monotone?) days prior to git. The benefit of 
-> "classic" is it draws attention to the fact that it's deprecated, whereas to 
-> me, dev implies that's where development still occurs. So my personal vote is 
-> for OE-classic.
+> Do you have a patch q'd to update it to a newer version (e.g. 6.x)?
+No I didn't made one yet...
 
-Seems like "OE classic" is already becoming a de-facto standard among 
-developers...
+Denis.
 
--- 
-Denys
 
 
