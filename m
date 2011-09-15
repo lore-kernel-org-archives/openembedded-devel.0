@@ -1,31 +1,23 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1R492y-00005L-Q3
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1R498F-0000Hb-2z
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Sep 2011 12:19:56 +0200
-Received: by eya25 with SMTP id 25so1098675eya.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2011 03:14:45 -0700 (PDT)
-Received: by 10.213.20.211 with SMTP id g19mr1081939ebb.35.1316081685091;
-	Thu, 15 Sep 2011 03:14:45 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id e4sm7323540eec.10.2011.09.15.03.14.42
-	(version=SSLv3 cipher=OTHER); Thu, 15 Sep 2011 03:14:43 -0700 (PDT)
-Message-ID: <4E71D011.2020709@dresearch-fe.de>
-Date: Thu, 15 Sep 2011 12:14:41 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:6.0.2) Gecko/20110907 Thunderbird/6.0.2
-MIME-Version: 1.0
+	Thu, 15 Sep 2011 12:25:23 +0200
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 15 Sep 2011 03:20:10 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.68,386,1312182000"; d="scan'208";a="53831815"
+Received: from unknown (HELO helios.localnet) ([10.252.120.100])
+	by fmsmga002.fm.intel.com with ESMTP; 15 Sep 2011 03:20:10 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1316010999.6686.108.camel@mattotaupa>
-	<1316012106-10277-1-git-send-email-sledz@dresearch-fe.de>
-	<1316077683.4523.13.camel@mattotaupa>
-In-Reply-To: <1316077683.4523.13.camel@mattotaupa>
-X-Enigmail-Version: 1.3.1
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
-Subject: Re: [PATCH v2] eglibc-2.9: allow building with newer GNU make
+Date: Thu, 15 Sep 2011 11:20:09 +0100
+User-Agent: KMail/1.13.6 (Linux/2.6.38-10-generic-pae; KDE/4.6.2; i686; ; )
+References: <1316081269.4523.54.camel@mattotaupa>
+In-Reply-To: <1316081269.4523.54.camel@mattotaupa>
+MIME-Version: 1.0
+Message-Id: <201109151120.09382.paul.eggleton@linux.intel.com>
+Subject: Re: How to call the old repository: oe.dev or OE classic?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,65 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2011 10:19:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 15 Sep 2011 10:25:23 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
+Content-Transfer-Encoding: 7bit
 
-On 15.09.2011 11:08, Paul Menzel wrote:
-> Am Mittwoch, den 14.09.2011, 16:55 +0200 schrieb Steffen Sledz:
-> 
-> Please amend the commit before pushing to replace »newer« with »>= 3.82«
-> and the typo below.
-> 
->> GNU make >= 3.82 does not allow mixed implicit and normal rules
->>
->> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
->> Acked-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  recipes/eglibc/eglibc-2.9/make-3.82.patch |   27 +++++++++++++++++++++++++++
->>  recipes/eglibc/eglibc_2.9.bb              |    3 ++-
->>  2 files changed, 29 insertions(+), 1 deletions(-)
->>  create mode 100644 recipes/eglibc/eglibc-2.9/make-3.82.patch
->>
->> diff --git a/recipes/eglibc/eglibc-2.9/make-3.82.patch b/recipes/eglibc/eglibc-2.9/make-3.82.patch
->> new file mode 100644
->> index 0000000..64cb270
->> --- /dev/null
->> +++ b/recipes/eglibc/eglibc-2.9/make-3.82.patch
->> @@ -0,0 +1,27 @@
->> +eglibc-2.9: allow building with newer GNU make
->> +    
->> +GNU make >= 3.82 does not allow mixed implicit and normal rules
->> +
->> +Because eglibc-2.9 is superseeded by newer versions it makes no sense
-> 
-> s/superseeded/superseded/
-> 
-> (I always make the same mistake.)
-> 
->> +to submit this patch upstream.
->> +
->> +Upstream-Status: Inappropriate [other]
->> +
->> +Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
->> +
->> +diff -Nurd libc.orig//manual/Makefile libc/manual/Makefile
->> +--- libc.orig//manual/Makefile	2011-09-13 14:49:57.428424088 +0200
->> ++++ libc/manual/Makefile	2011-09-13 14:50:47.009620484 +0200
-> 
-> Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+On Thursday 15 September 2011 11:07:48 Paul Menzel wrote:
+> it is confusing for outsiders if oe.dev and OE classic are referring to
+> the same repository or not.
 
-Comment and patch header fixed and commit pushed.
+I can see how people could be confused, so yes we probably ought to have just 
+one name.
+ 
+> So we need to make up an official name for the old repository. oe.dev or
+> OE classic? I favor oe.dev, because it is shorter
 
-Steffen
+oe-dev/oe.dev being a shortened "org.openembedded.dev" is kind of a relic of 
+the old (was it bitkeeper or monotone?) days prior to git. The benefit of 
+"classic" is it draws attention to the fact that it's deprecated, whereas to 
+me, dev implies that's where development still occurs. So my personal vote is 
+for OE-classic.
+
+Cheers,
+Paul
 
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
