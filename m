@@ -1,23 +1,21 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1R498F-0000Hb-2z
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Sep 2011 12:25:23 +0200
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 15 Sep 2011 03:20:10 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.68,386,1312182000"; d="scan'208";a="53831815"
-Received: from unknown (HELO helios.localnet) ([10.252.120.100])
-	by fmsmga002.fm.intel.com with ESMTP; 15 Sep 2011 03:20:10 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1R499y-0000Ph-56 for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Sep 2011 12:27:10 +0200
+Received: from f053044184.adsl.alicedsl.de ([78.53.44.184]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1R4956-0003Xw-GM for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Sep 2011 10:22:08 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Sep 2011 11:20:09 +0100
-User-Agent: KMail/1.13.6 (Linux/2.6.38-10-generic-pae; KDE/4.6.2; i686; ; )
-References: <1316081269.4523.54.camel@mattotaupa>
-In-Reply-To: <1316081269.4523.54.camel@mattotaupa>
-MIME-Version: 1.0
-Message-Id: <201109151120.09382.paul.eggleton@linux.intel.com>
-Subject: Re: How to call the old repository: oe.dev or OE classic?
+Date: Thu, 15 Sep 2011 12:21:59 +0200
+X-Mailer: Evolution 3.0.3- 
+Message-ID: <1316082120.4523.58.camel@mattotaupa>
+Mime-Version: 1.0
+Subject: Patchwork issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,33 +29,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2011 10:25:23 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-15"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 15 Sep 2011 10:27:10 -0000
+X-Groupsio-MsgNum: 34257
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-P8j7sGCZBO6Q2TZr77+Y"
 
-On Thursday 15 September 2011 11:07:48 Paul Menzel wrote:
-> it is confusing for outsiders if oe.dev and OE classic are referring to
-> the same repository or not.
+--=-P8j7sGCZBO6Q2TZr77+Y
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I can see how people could be confused, so yes we probably ought to have just 
-one name.
- 
-> So we need to make up an official name for the old repository. oe.dev or
-> OE classic? I favor oe.dev, because it is shorter
+Dear Git and Patchwork admins,
 
-oe-dev/oe.dev being a shortened "org.openembedded.dev" is kind of a relic of 
-the old (was it bitkeeper or monotone?) days prior to git. The benefit of 
-"classic" is it draws attention to the fact that it's deprecated, whereas to 
-me, dev implies that's where development still occurs. So my personal vote is 
-for OE-classic.
 
-Cheers,
+could you please look into the following issues.
+
+1. People report, that they cannot register to Patchwork because their
+username is already registered. But they have never registered before.
+(Reported on the list and on IRC.)
+
+2. I am not allowed to update the state of other people patches. Could
+you give people this right automatically if they are OE devs (have
+commit access =E2=80=93 not feasible any more with the new structure?) or g=
+rant
+them these right after they have been registered for a months or so or
+reply to a certain message?
+
+3. Could you please install the example hooks of Patchwork to
+automatically update the patch state when it is committed.
+
+
+Thanks,
+
 Paul
 
--- 
+--=-P8j7sGCZBO6Q2TZr77+Y
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
 
-Paul Eggleton
-Intel Open Source Technology Centre
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
 
+iEYEABECAAYFAk5x0ccACgkQPX1aK2wOHViXNACfcbw4XPug1zrCVRmtTUM1Q8Ir
+mfwAn0XIb0H3v/KOR1ccQoMiX9brHyqm
+=59Ox
+-----END PGP SIGNATURE-----
 
+--=-P8j7sGCZBO6Q2TZr77+Y--
