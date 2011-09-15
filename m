@@ -1,24 +1,21 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtpfb2-g21.free.fr ([212.27.42.10])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1R48Ss-0002g4-Rb for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Sep 2011 11:42:39 +0200
-Received: from f053044184.adsl.alicedsl.de ([78.53.44.184]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1R48O1-0003EG-5d for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Sep 2011 09:37:37 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <denis@eukrea.com>) id 1R48Y4-0004qm-34
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Sep 2011 11:48:01 +0200
+Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
+	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 49CA9CA8FEE
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Sep 2011 11:42:43 +0200 (CEST)
+Received: from PCDEV1.lan (unknown [82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id DB7C34B0114;
+	Thu, 15 Sep 2011 11:42:38 +0200 (CEST)
+From: Denis Carikli <denis@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Sep 2011 11:37:28 +0200
-In-Reply-To: <1316077931-7737-3-git-send-email-npavel@mini-box.com>
-References: <1316077931-7737-1-git-send-email-npavel@mini-box.com>
-	<1316077931-7737-3-git-send-email-npavel@mini-box.com>
-X-Mailer: Evolution 3.0.3- 
-Message-ID: <1316079449.4523.34.camel@mattotaupa>
-Mime-Version: 1.0
-Subject: Re: [PATCH v2 2/2] Add machine configuration for picoSAM9G45 board
+Date: Thu, 15 Sep 2011 11:42:36 +0200
+Message-Id: <1316079756-3038-1-git-send-email-denis@eukrea.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [PATCH] qwt: import from openembedded.dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,80 +29,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2011 09:42:39 -0000
-X-Groupsio-MsgNum: 34250
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-hWq2mis4yHQRDZU6Z7+L"
+X-List-Received-Date: Thu, 15 Sep 2011 09:48:01 -0000
 
---=-hWq2mis4yHQRDZU6Z7+L
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The only change between openembedded.dev and meta-openembedded was
+  the addition of LIC_FILES_CHKSUM
 
-Am Donnerstag, den 15.09.2011, 12:12 +0300 schrieb Nicu Pavel:
-> Add machine configuration for picoSAM9G45 board[1].
-> More information about this board and software support can be found at [2=
-].
->=20
-> 1. http://www.mini-box.com/pico-SAM9G45-X
-> 2. http://arm.mini-box.com/index.php?title=3DMain_Page
->=20
-> Signed-off-by: Nicu Pavel <npavel@mini-box.com>
-> ---
->  conf/machine/picosam9.conf |   17 +++++++++++++++++
->  1 files changed, 17 insertions(+), 0 deletions(-)
->  create mode 100644 conf/machine/picosam9.conf
->=20
-> diff --git a/conf/machine/picosam9.conf b/conf/machine/picosam9.conf
-> new file mode 100644
-> index 0000000..3d75627
-> --- /dev/null
-> +++ b/conf/machine/picosam9.conf
-> @@ -0,0 +1,17 @@
-> +#@TYPE: Machine
-> +#@Name: pico-SAM9G45 (http://www.mini-box.com/pico-SAM9G45-X)
-> +#@DESCRIPTION: Machine configuration for the picoSAM9G45 board with a at=
-91sam9g45 processor
-> +
-> +# More information can be found here:=20
-> +# http://arm.mini-box.com/index.php?title=3DCompiling_Angstrom_for_pico-=
-SAM9G45
-> +# Images tested: base-image and x11-image
+Signed-off-by: Denis Carikli <denis@eukrea.com>
+---
+ meta-oe/recipes-qt/qwt/qwt-e_5.2.1.bb |    8 ++++++++
+ meta-oe/recipes-qt/qwt/qwt.inc        |   33 +++++++++++++++++++++++++++++++++
+ meta-oe/recipes-qt/qwt/qwt_5.2.1.bb   |    8 ++++++++
+ 3 files changed, 49 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-qt/qwt/qwt-e_5.2.1.bb
+ create mode 100644 meta-oe/recipes-qt/qwt/qwt.inc
+ create mode 100644 meta-oe/recipes-qt/qwt/qwt_5.2.1.bb
 
-=E2=80=A6 with `angstrom-2010.x` I guess.
+diff --git a/meta-oe/recipes-qt/qwt/qwt-e_5.2.1.bb b/meta-oe/recipes-qt/qwt/qwt-e_5.2.1.bb
+new file mode 100644
+index 0000000..2f55061
+--- /dev/null
++++ b/meta-oe/recipes-qt/qwt/qwt-e_5.2.1.bb
+@@ -0,0 +1,8 @@
++inherit qt4e
++
++require qwt.inc
++
++SRC_URI[qwt.md5sum] = "4a595b8db0ec3856b117836c1d60cb27"
++SRC_URI[qwt.sha256sum] = "e2b8bb755404cb3dc99e61f3e2d7262152193488f5fbe88524eb698e11ac569f"
++
++RPROVIDES_${PN}-dev = "libqwt-dev"
+\ No newline at end of file
+diff --git a/meta-oe/recipes-qt/qwt/qwt.inc b/meta-oe/recipes-qt/qwt/qwt.inc
+new file mode 100644
+index 0000000..da1ed11
+--- /dev/null
++++ b/meta-oe/recipes-qt/qwt/qwt.inc
+@@ -0,0 +1,33 @@
++DESCRIPTION = "Qt Widget Extension for Technical Applications"
++SECTION = "libs"
++PRIORITY = "optional"
++
++# LGPLv2.1 + some exceptions
++LICENSE = "QWTv1.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=dac2743472b0462ff3cfb4af42051c88"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/qwt/qwt-${PV}.tar.bz2;name=qwt"
++
++S = "${WORKDIR}/qwt-${PV}"
++
++do_configure_prepend() {
++	sed -i -e 's:RELEASE_SUFFIX      = :RELEASE_SUFFIX      = ${QT_LIBINFIX}:' *.pri
++	sed -i -e s:lqwt:lqwt${QT_LIBINFIX}:g -e s:/usr/local/qwt-$\${QwtVersion}:${prefix}:g *.prf
++	sed -e 's/#CONFIG     += QwtExamples/CONFIG     += QwtExamples/g' -i qwtconfig.pri
++	sed -i -e s:/usr/local/qwt-${PV}:${D}${prefix}:g ${S}/*.pri
++}
++
++do_install() {
++	oe_runmake -e install
++	install -d ${D}${datadir}/doc/${PN}
++	mv ${D}${prefix}/doc/* ${D}${datadir}/doc/${PN}/
++	cd ${S}/examples
++	install -d ${D}/${bindir}
++	cd bin${QT_LIBINFIX}/
++	for i in * ; do
++		cp -pPR ${i} ${D}/${bindir}/${i}${QT_LIBINFIX}
++	done
++}
++
++PACKAGES_prepend = "${PN}-examples "
++FILES_${PN}-examples = "${bindir}/*"
+diff --git a/meta-oe/recipes-qt/qwt/qwt_5.2.1.bb b/meta-oe/recipes-qt/qwt/qwt_5.2.1.bb
+new file mode 100644
+index 0000000..238a4fb
+--- /dev/null
++++ b/meta-oe/recipes-qt/qwt/qwt_5.2.1.bb
+@@ -0,0 +1,8 @@
++inherit qt4x11
++
++require qwt.inc
++
++SRC_URI[qwt.md5sum] = "4a595b8db0ec3856b117836c1d60cb27"
++SRC_URI[qwt.sha256sum] = "e2b8bb755404cb3dc99e61f3e2d7262152193488f5fbe88524eb698e11ac569f"
++
++RPROVIDES_${PN}-dev = "libqwt-dev"
+\ No newline at end of file
+-- 
+1.7.4.1
 
-> +
-> +TARGET_ARCH =3D "arm"
-> +
-> +PREFERRED_PROVIDER_virtual/kernel =3D "picosam9"
-> +
-> +PREFERRED_PROVIDER_xserver =3D "xserver-kdrive"
-> +
-> +MACHINE_FEATURES +=3D "usbhost kernel26 apm vfat screen touchscreen ethe=
-rnet wifi bluetooth"
-> +
-> +require conf/machine/include/tune-arm926ejs.inc
-
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
-
-I will commit your patches tomorrow if nobody has any objections.
 
 
-Thanks,
-
-Paul
-
---=-hWq2mis4yHQRDZU6Z7+L
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk5xx1gACgkQPX1aK2wOHViyFQCeNUDniGxlp1SsNtllewaDDmUI
-b8sAn1whY//2yqxdMO88SaISBAy9H384
-=P9m/
------END PGP SIGNATURE-----
-
---=-hWq2mis4yHQRDZU6Z7+L--
