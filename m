@@ -1,31 +1,34 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1R48IS-00024b-UI
+	(envelope-from <martin.jansa@gmail.com>) id 1R48IZ-00024b-F7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Sep 2011 11:31:52 +0200
-Received: by bke11 with SMTP id 11so2253934bke.6
+	Thu, 15 Sep 2011 11:31:59 +0200
+Received: by mail-bw0-f47.google.com with SMTP id 11so2253934bke.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2011 02:26:41 -0700 (PDT)
+	Thu, 15 Sep 2011 02:26:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=o0JA5l3VOpRPzYGnkWMAaVgD41I3QKFTjphY+r8r5uA=;
-	b=RSVsJAkTJwm/vjt75Nz7Ao+Fir1S5a0Vq5Zw3uMJvqRCYFY8EQ4rY+DOTynVTF6YXw
-	rDKxzmfhlwzvW/0uTppZ3zLyfDZ15h+s9KlePf8KtF3U4ljzLfDFEAi2PHrFl1V9c4Zc
-	swOOJsKZNQUNZHaMNnJPw1x3EMropLHSaQCMI=
-Received: by 10.204.144.86 with SMTP id y22mr598706bku.160.1316078801730;
-	Thu, 15 Sep 2011 02:26:41 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=7PYB1pSV3zTYTBEJ8UaQ0jfqeoyQfjpjGfbSA03gaIo=;
+	b=rzQNhU+h8HjxvcbsVRO1KHdV3WDcvSTS3fr/gc65NxJ5bERpaKU6tLINQIAnv3HVGf
+	CBJ/DhhdF5hn0jTdpufRzbn8M888RoCcDdUZhtcl28h4iizCjYAJ023jqfjpT5uMGuG/
+	2xDBVkAYIfbH5kpdmkK6J4EF3jXj7EkPJTRPU=
+Received: by 10.204.6.196 with SMTP id a4mr538384bka.300.1316078810362;
+	Thu, 15 Sep 2011 02:26:50 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id f15sm2508389bke.2.2011.09.15.02.26.39
+	by mx.google.com with ESMTPS id b17sm2485628bkd.8.2011.09.15.02.26.47
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 15 Sep 2011 02:26:40 -0700 (PDT)
+	Thu, 15 Sep 2011 02:26:49 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Sep 2011 11:26:30 +0200
-Message-Id: <6f97022ee7adf86a732e555279716791430880c4.1316078712.git.Martin.Jansa@gmail.com>
+Date: Thu, 15 Sep 2011 11:26:31 +0200
+Message-Id: <69a779eb674abe9dd1d8351aec93dbe7f6863f95.1316078712.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.6.1
+In-Reply-To: <6f97022ee7adf86a732e555279716791430880c4.1316078712.git.Martin.Jansa@gmail.com>
+References: <6f97022ee7adf86a732e555279716791430880c4.1316078712.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1316078712.git.Martin.Jansa@gmail.com>
 References: <cover.1316078712.git.Martin.Jansa@gmail.com>
-Subject: [meta-handheld][PATCH 1/3] linux-kexecboot: move defconfig to linux-kexecboot-2.6.39
+Subject: [meta-handheld][PATCH 2/3] linux(-kexecboot): add recipes for git version 3.1.0-rc6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,50 +42,593 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2011 09:31:53 -0000
-
-* linux-kexecboot directory will be used for defconfigs for git version
+X-List-Received-Date: Thu, 15 Sep 2011 09:31:59 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../akita/defconfig                                |    0
- .../c7x0/defconfig                                 |    0
- .../collie/defconfig                               |    0
- .../poodle/defconfig                               |    0
- .../spitz/defconfig                                |    0
- .../tosa/defconfig                                 |    0
- 6 files changed, 0 insertions(+), 0 deletions(-)
- rename recipes-kernel/linux/{linux-kexecboot => linux-kexecboot-2.6.39}/akita/defconfig (100%)
- rename recipes-kernel/linux/{linux-kexecboot => linux-kexecboot-2.6.39}/c7x0/defconfig (100%)
- rename recipes-kernel/linux/{linux-kexecboot => linux-kexecboot-2.6.39}/collie/defconfig (100%)
- rename recipes-kernel/linux/{linux-kexecboot => linux-kexecboot-2.6.39}/poodle/defconfig (100%)
- rename recipes-kernel/linux/{linux-kexecboot => linux-kexecboot-2.6.39}/spitz/defconfig (100%)
- rename recipes-kernel/linux/{linux-kexecboot => linux-kexecboot-2.6.39}/tosa/defconfig (100%)
+ recipes-kernel/linux/linux-git.inc                 |   22 ++
+ .../linux/linux-kexecboot/spitz/defconfig          |  129 +++++++
+ recipes-kernel/linux/linux-kexecboot_git.bb        |    2 +
+ recipes-kernel/linux/linux/spitz/defconfig         |  379 ++++++++++++++++++++
+ recipes-kernel/linux/linux_git.bb                  |    9 +
+ 5 files changed, 541 insertions(+), 0 deletions(-)
+ create mode 100644 recipes-kernel/linux/linux-git.inc
+ create mode 100644 recipes-kernel/linux/linux-kexecboot/spitz/defconfig
+ create mode 100644 recipes-kernel/linux/linux-kexecboot_git.bb
+ create mode 100644 recipes-kernel/linux/linux/spitz/defconfig
+ create mode 100644 recipes-kernel/linux/linux_git.bb
 
-diff --git a/recipes-kernel/linux/linux-kexecboot/akita/defconfig b/recipes-kernel/linux/linux-kexecboot-2.6.39/akita/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-kexecboot/akita/defconfig
-rename to recipes-kernel/linux/linux-kexecboot-2.6.39/akita/defconfig
-diff --git a/recipes-kernel/linux/linux-kexecboot/c7x0/defconfig b/recipes-kernel/linux/linux-kexecboot-2.6.39/c7x0/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-kexecboot/c7x0/defconfig
-rename to recipes-kernel/linux/linux-kexecboot-2.6.39/c7x0/defconfig
-diff --git a/recipes-kernel/linux/linux-kexecboot/collie/defconfig b/recipes-kernel/linux/linux-kexecboot-2.6.39/collie/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-kexecboot/collie/defconfig
-rename to recipes-kernel/linux/linux-kexecboot-2.6.39/collie/defconfig
-diff --git a/recipes-kernel/linux/linux-kexecboot/poodle/defconfig b/recipes-kernel/linux/linux-kexecboot-2.6.39/poodle/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-kexecboot/poodle/defconfig
-rename to recipes-kernel/linux/linux-kexecboot-2.6.39/poodle/defconfig
-diff --git a/recipes-kernel/linux/linux-kexecboot/spitz/defconfig b/recipes-kernel/linux/linux-kexecboot-2.6.39/spitz/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-kexecboot/spitz/defconfig
-rename to recipes-kernel/linux/linux-kexecboot-2.6.39/spitz/defconfig
-diff --git a/recipes-kernel/linux/linux-kexecboot/tosa/defconfig b/recipes-kernel/linux/linux-kexecboot-2.6.39/tosa/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-kexecboot/tosa/defconfig
-rename to recipes-kernel/linux/linux-kexecboot-2.6.39/tosa/defconfig
+diff --git a/recipes-kernel/linux/linux-git.inc b/recipes-kernel/linux/linux-git.inc
+new file mode 100644
+index 0000000..91aeb7f
+--- /dev/null
++++ b/recipes-kernel/linux/linux-git.inc
+@@ -0,0 +1,22 @@
++KERNEL_RELEASE = "3.1.0-rc6"
++OLD_KERNEL_RELEASE = "3.0.99"
++PV = "${OLD_KERNEL_RELEASE}+${KERNEL_RELEASE}+gitr${SRCPV}"
++
++SRCREV = "b6fd41e29dea9c6753b1843a77e50433e6123bcb"
++
++#git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git
++SRC_URI = "git://github.com/torvalds/linux.git;protocol=git;branch=master \
++           file://defconfig"
++S = "${WORKDIR}/git"
++
++do_configure_prepend() {
++#otherwise it gets extra '+' "2.6.37+"
++#because:
++#$ scripts/setlocalversion . => +
++#$ make kernelversion => 2.6.37
++#$ make kernelrelease => 2.6.37+
++  rm -rf ${S}/.git
++}
++
++# Mark archs/machines that this kernel supports
++DEFAULT_PREFERENCE = "-2"
+diff --git a/recipes-kernel/linux/linux-kexecboot/spitz/defconfig b/recipes-kernel/linux/linux-kexecboot/spitz/defconfig
+new file mode 100644
+index 0000000..e62ab14
+--- /dev/null
++++ b/recipes-kernel/linux/linux-kexecboot/spitz/defconfig
+@@ -0,0 +1,129 @@
++CONFIG_EXPERIMENTAL=y
++# CONFIG_LOCALVERSION_AUTO is not set
++CONFIG_KERNEL_LZMA=y
++# CONFIG_SWAP is not set
++CONFIG_LOG_BUF_SHIFT=14
++CONFIG_BLK_DEV_INITRD=y
++CONFIG_INITRAMFS_SOURCE="initramfs.cpio.lzma"
++CONFIG_RD_LZMA=y
++CONFIG_INITRAMFS_COMPRESSION_LZMA=y
++# CONFIG_UID16 is not set
++# CONFIG_SYSCTL_SYSCALL is not set
++# CONFIG_KALLSYMS is not set
++# CONFIG_PRINTK is not set
++# CONFIG_BUG is not set
++# CONFIG_ELF_CORE is not set
++# CONFIG_BASE_FULL is not set
++CONFIG_EMBEDDED=y
++# CONFIG_VM_EVENT_COUNTERS is not set
++# CONFIG_COMPAT_BRK is not set
++CONFIG_SLOB=y
++# CONFIG_LBDAF is not set
++# CONFIG_IOSCHED_CFQ is not set
++CONFIG_ARCH_PXA=y
++CONFIG_PXA_SHARPSL=y
++CONFIG_PXA_SHARPSL_DETECT_MACH_ID=y
++CONFIG_MACH_AKITA=y
++CONFIG_MACH_BORZOI=y
++CONFIG_PCCARD=y
++# CONFIG_PCMCIA_LOAD_CIS is not set
++CONFIG_PCMCIA_PXA2XX=y
++CONFIG_NO_HZ=y
++CONFIG_AEABI=y
++# CONFIG_OABI_COMPAT is not set
++CONFIG_ZBOOT_ROM_TEXT=0x0
++CONFIG_ZBOOT_ROM_BSS=0x0
++CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 loglevel=3"
++CONFIG_KEXEC=y
++CONFIG_DEVTMPFS=y
++CONFIG_DEVTMPFS_MOUNT=y
++CONFIG_MTD=y
++CONFIG_MTD_CMDLINE_PARTS=y
++CONFIG_MTD_CHAR=y
++CONFIG_MTD_BLOCK=y
++CONFIG_MTD_ROM=y
++CONFIG_MTD_COMPLEX_MAPPINGS=y
++CONFIG_MTD_PHYSMAP=y
++CONFIG_MTD_NAND=y
++CONFIG_MTD_NAND_VERIFY_WRITE=y
++CONFIG_MTD_NAND_SHARPSL=y
++CONFIG_MTD_UBI=y
++CONFIG_BLK_DEV_LOOP=y
++CONFIG_BLK_DEV_SD=y
++CONFIG_ATA=y
++# CONFIG_ATA_VERBOSE_ERROR is not set
++# CONFIG_SATA_PMP is not set
++CONFIG_PATA_PXA=y
++CONFIG_PATA_PCMCIA=y
++# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
++CONFIG_INPUT_MOUSEDEV_SCREEN_X=640
++CONFIG_INPUT_MOUSEDEV_SCREEN_Y=480
++CONFIG_INPUT_EVDEV=y
++CONFIG_INPUT_APMPOWER=y
++# CONFIG_KEYBOARD_ATKBD is not set
++CONFIG_KEYBOARD_GPIO=y
++CONFIG_KEYBOARD_MATRIX=y
++# CONFIG_INPUT_MOUSE is not set
++CONFIG_INPUT_TOUCHSCREEN=y
++CONFIG_TOUCHSCREEN_ADS7846=y
++# CONFIG_SERIO is not set
++# CONFIG_LEGACY_PTYS is not set
++# CONFIG_DEVKMEM is not set
++CONFIG_SERIAL_PXA=y
++CONFIG_SERIAL_PXA_CONSOLE=y
++# CONFIG_HW_RANDOM is not set
++# CONFIG_I2C_COMPAT is not set
++CONFIG_SPI=y
++CONFIG_SPI_PXA2XX=y
++CONFIG_POWER_SUPPLY=y
++CONFIG_PDA_POWER=y
++CONFIG_APM_POWER=y
++# CONFIG_MFD_SUPPORT is not set
++CONFIG_FB=y
++CONFIG_FB_PXA=y
++CONFIG_BACKLIGHT_LCD_SUPPORT=y
++CONFIG_LCD_CORGI=y
++CONFIG_FRAMEBUFFER_CONSOLE=y
++CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
++CONFIG_FONTS=y
++CONFIG_FONT_8x16=y
++# CONFIG_HID_SUPPORT is not set
++# CONFIG_USB_SUPPORT is not set
++CONFIG_MMC=y
++CONFIG_MMC_PXA=y
++CONFIG_NEW_LEDS=y
++CONFIG_LEDS_CLASS=y
++CONFIG_LEDS_GPIO=y
++CONFIG_LEDS_TRIGGERS=y
++CONFIG_LEDS_TRIGGER_TIMER=y
++CONFIG_LEDS_TRIGGER_HEARTBEAT=y
++CONFIG_RTC_CLASS=y
++CONFIG_RTC_DRV_PXA=y
++CONFIG_EXT2_FS=y
++CONFIG_EXT3_FS=y
++# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
++# CONFIG_EXT3_FS_XATTR is not set
++CONFIG_EXT4_FS=y
++# CONFIG_EXT4_FS_XATTR is not set
++# CONFIG_FILE_LOCKING is not set
++# CONFIG_DNOTIFY is not set
++CONFIG_MSDOS_FS=y
++CONFIG_VFAT_FS=y
++# CONFIG_PROC_PAGE_MONITOR is not set
++CONFIG_TMPFS=y
++CONFIG_TMPFS_POSIX_ACL=y
++CONFIG_JFFS2_FS=y
++CONFIG_JFFS2_SUMMARY=y
++CONFIG_JFFS2_COMPRESSION_OPTIONS=y
++CONFIG_JFFS2_LZO=y
++CONFIG_JFFS2_RUBIN=y
++CONFIG_UBIFS_FS=y
++CONFIG_UBIFS_FS_ADVANCED_COMPR=y
++CONFIG_PARTITION_ADVANCED=y
++# CONFIG_ENABLE_WARN_DEPRECATED is not set
++# CONFIG_ENABLE_MUST_CHECK is not set
++CONFIG_FRAME_WARN=2048
++CONFIG_MAGIC_SYSRQ=y
++# CONFIG_ARM_UNWIND is not set
++# CONFIG_CRYPTO_ANSI_CPRNG is not set
++# CONFIG_CRYPTO_HW is not set
+diff --git a/recipes-kernel/linux/linux-kexecboot_git.bb b/recipes-kernel/linux/linux-kexecboot_git.bb
+new file mode 100644
+index 0000000..1e8c56f
+--- /dev/null
++++ b/recipes-kernel/linux/linux-kexecboot_git.bb
+@@ -0,0 +1,2 @@
++require linux-kexecboot.inc
++require linux-git.inc
+diff --git a/recipes-kernel/linux/linux/spitz/defconfig b/recipes-kernel/linux/linux/spitz/defconfig
+new file mode 100644
+index 0000000..65aed48
+--- /dev/null
++++ b/recipes-kernel/linux/linux/spitz/defconfig
+@@ -0,0 +1,379 @@
++CONFIG_EXPERIMENTAL=y
++# CONFIG_LOCALVERSION_AUTO is not set
++CONFIG_SYSVIPC=y
++CONFIG_BSD_PROCESS_ACCT=y
++CONFIG_BSD_PROCESS_ACCT_V3=y
++CONFIG_IKCONFIG=m
++CONFIG_IKCONFIG_PROC=y
++CONFIG_LOG_BUF_SHIFT=14
++CONFIG_BLK_DEV_INITRD=y
++CONFIG_RD_BZIP2=y
++CONFIG_RD_LZMA=y
++CONFIG_RD_LZO=y
++CONFIG_EMBEDDED=y
++CONFIG_SLOB=y
++CONFIG_PROFILING=y
++CONFIG_OPROFILE=m
++CONFIG_MODULES=y
++CONFIG_MODULE_UNLOAD=y
++CONFIG_MODULE_FORCE_UNLOAD=y
++# CONFIG_LBDAF is not set
++CONFIG_IOSCHED_DEADLINE=m
++CONFIG_IOSCHED_CFQ=m
++CONFIG_ARCH_PXA=y
++CONFIG_PXA_SHARPSL=y
++CONFIG_MACH_AKITA=y
++CONFIG_MACH_BORZOI=y
++CONFIG_PCCARD=y
++CONFIG_PCMCIA_PXA2XX=y
++CONFIG_NO_HZ=y
++CONFIG_HIGH_RES_TIMERS=y
++CONFIG_AEABI=y
++# CONFIG_OABI_COMPAT is not set
++CONFIG_ZBOOT_ROM_TEXT=0x0
++CONFIG_ZBOOT_ROM_BSS=0x0
++CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 fbcon=rotate:1 loglevel=3"
++CONFIG_KEXEC=y
++# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
++CONFIG_BINFMT_AOUT=m
++CONFIG_BINFMT_MISC=m
++CONFIG_PM_RUNTIME=y
++CONFIG_NET=y
++CONFIG_PACKET=m
++CONFIG_UNIX=y
++CONFIG_XFRM_USER=m
++CONFIG_INET=y
++CONFIG_INET_XFRM_MODE_TRANSPORT=m
++CONFIG_INET_XFRM_MODE_TUNNEL=m
++CONFIG_INET_XFRM_MODE_BEET=m
++# CONFIG_INET_LRO is not set
++CONFIG_INET_DIAG=m
++CONFIG_INET6_AH=m
++CONFIG_INET6_ESP=m
++CONFIG_INET6_IPCOMP=m
++CONFIG_IPV6_TUNNEL=m
++CONFIG_NETFILTER=y
++CONFIG_NF_CONNTRACK=m
++CONFIG_NF_CONNTRACK_FTP=m
++CONFIG_NF_CONNTRACK_H323=m
++CONFIG_NF_CONNTRACK_IRC=m
++CONFIG_NF_CONNTRACK_SIP=m
++CONFIG_NF_CONNTRACK_IPV4=m
++CONFIG_IP_NF_IPTABLES=m
++CONFIG_IP_NF_MATCH_AH=m
++CONFIG_IP_NF_MATCH_ECN=m
++CONFIG_IP_NF_MATCH_TTL=m
++CONFIG_IP_NF_FILTER=m
++CONFIG_IP_NF_TARGET_REJECT=m
++CONFIG_IP_NF_TARGET_LOG=m
++CONFIG_IP_NF_TARGET_ULOG=m
++CONFIG_NF_NAT=m
++CONFIG_IP_NF_TARGET_MASQUERADE=m
++CONFIG_IP_NF_TARGET_NETMAP=m
++CONFIG_IP_NF_TARGET_REDIRECT=m
++CONFIG_IP_NF_MANGLE=m
++CONFIG_IP_NF_TARGET_ECN=m
++CONFIG_IP_NF_TARGET_TTL=m
++CONFIG_IP_NF_RAW=m
++CONFIG_IP_NF_ARPTABLES=m
++CONFIG_IP_NF_ARPFILTER=m
++CONFIG_IP_NF_ARP_MANGLE=m
++CONFIG_IRDA=m
++CONFIG_IRLAN=m
++CONFIG_IRNET=m
++CONFIG_IRCOMM=m
++CONFIG_PXA_FICP=m
++CONFIG_BT=m
++CONFIG_BT_L2CAP=y
++CONFIG_BT_SCO=y
++CONFIG_BT_RFCOMM=m
++CONFIG_BT_RFCOMM_TTY=y
++CONFIG_BT_BNEP=m
++CONFIG_BT_BNEP_MC_FILTER=y
++CONFIG_BT_BNEP_PROTO_FILTER=y
++CONFIG_BT_HIDP=m
++CONFIG_BT_HCIBTUSB=m
++CONFIG_BT_HCIBTSDIO=m
++CONFIG_BT_HCIUART=m
++CONFIG_BT_HCIUART_H4=y
++CONFIG_BT_HCIUART_BCSP=y
++CONFIG_BT_HCIUART_ATH3K=y
++CONFIG_BT_HCIUART_LL=y
++CONFIG_BT_HCIBCM203X=m
++CONFIG_BT_HCIBPA10X=m
++CONFIG_BT_HCIBFUSB=m
++CONFIG_BT_HCIDTL1=m
++CONFIG_BT_HCIBT3C=m
++CONFIG_BT_HCIBLUECARD=m
++CONFIG_BT_HCIBTUART=m
++CONFIG_BT_HCIVHCI=m
++CONFIG_BT_MRVL=m
++CONFIG_BT_MRVL_SDIO=m
++CONFIG_BT_ATH3K=m
++CONFIG_CFG80211=m
++# CONFIG_CFG80211_DEFAULT_PS is not set
++CONFIG_MAC80211=m
++# CONFIG_MAC80211_RC_MINSTREL is not set
++CONFIG_DEVTMPFS=y
++CONFIG_DEVTMPFS_MOUNT=y
++CONFIG_MTD=y
++CONFIG_MTD_CMDLINE_PARTS=y
++CONFIG_MTD_CHAR=y
++CONFIG_MTD_BLOCK=y
++CONFIG_MTD_ROM=y
++CONFIG_MTD_COMPLEX_MAPPINGS=y
++CONFIG_MTD_PHYSMAP=y
++CONFIG_MTD_NAND=y
++CONFIG_MTD_NAND_VERIFY_WRITE=y
++CONFIG_MTD_NAND_SHARPSL=y
++CONFIG_MTD_UBI=y
++CONFIG_MTD_UBI_GLUEBI=m
++CONFIG_BLK_DEV_LOOP=y
++CONFIG_MISC_DEVICES=y
++CONFIG_BLK_DEV_SD=y
++CONFIG_BLK_DEV_SR=m
++CONFIG_CHR_DEV_SG=m
++CONFIG_SCSI_MULTI_LUN=y
++CONFIG_ATA=y
++CONFIG_PATA_PXA=y
++CONFIG_PATA_PCMCIA=y
++CONFIG_NETDEVICES=y
++CONFIG_TUN=m
++CONFIG_NET_ETHERNET=y
++# CONFIG_NETDEV_1000 is not set
++# CONFIG_NETDEV_10000 is not set
++CONFIG_AIRO_CS=m
++CONFIG_HOSTAP=m
++CONFIG_HOSTAP_FIRMWARE=y
++CONFIG_HOSTAP_CS=m
++CONFIG_USB_CATC=m
++CONFIG_USB_KAWETH=m
++CONFIG_USB_PEGASUS=m
++CONFIG_USB_RTL8150=m
++CONFIG_USB_USBNET=m
++CONFIG_USB_NET_DM9601=m
++# CONFIG_USB_NET_CDC_SUBSET is not set
++CONFIG_USB_SIERRA_NET=m
++CONFIG_NET_PCMCIA=y
++CONFIG_PCMCIA_PCNET=m
++CONFIG_PPP=m
++CONFIG_PPP_ASYNC=m
++CONFIG_PPP_DEFLATE=m
++CONFIG_PPP_BSDCOMP=m
++# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
++CONFIG_INPUT_MOUSEDEV_SCREEN_X=640
++CONFIG_INPUT_MOUSEDEV_SCREEN_Y=480
++CONFIG_INPUT_EVDEV=y
++CONFIG_INPUT_APMPOWER=y
++# CONFIG_KEYBOARD_ATKBD is not set
++CONFIG_KEYBOARD_GPIO=y
++CONFIG_KEYBOARD_MATRIX=y
++# CONFIG_INPUT_MOUSE is not set
++CONFIG_INPUT_TOUCHSCREEN=y
++CONFIG_TOUCHSCREEN_ADS7846=y
++CONFIG_INPUT_MISC=y
++CONFIG_INPUT_UINPUT=m
++# CONFIG_SERIO is not set
++# CONFIG_LEGACY_PTYS is not set
++CONFIG_SERIAL_8250=m
++CONFIG_SERIAL_8250_CS=m
++CONFIG_SERIAL_PXA=y
++CONFIG_SERIAL_PXA_CONSOLE=y
++CONFIG_RAMOOPS=y
++CONFIG_SPI=y
++CONFIG_SPI_PXA2XX=y
++CONFIG_GPIO_SYSFS=y
++CONFIG_POWER_SUPPLY=y
++CONFIG_POWER_SUPPLY_DEBUG=y
++CONFIG_PDA_POWER=y
++CONFIG_APM_POWER=y
++CONFIG_FB=y
++CONFIG_FB_PXA=y
++CONFIG_FB_PXA_OVERLAY=y
++CONFIG_FB_PXA_SMARTPANEL=y
++CONFIG_FB_PXA_PARAMETERS=y
++CONFIG_BACKLIGHT_LCD_SUPPORT=y
++CONFIG_LCD_CLASS_DEVICE=y
++CONFIG_LCD_CORGI=y
++CONFIG_BACKLIGHT_CLASS_DEVICE=y
++CONFIG_DISPLAY_SUPPORT=y
++CONFIG_FRAMEBUFFER_CONSOLE=y
++CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
++CONFIG_FONTS=y
++CONFIG_FONT_8x16=y
++CONFIG_LOGO=y
++# CONFIG_LOGO_LINUX_MONO is not set
++# CONFIG_LOGO_LINUX_VGA16 is not set
++CONFIG_SOUND=m
++CONFIG_SND=m
++CONFIG_SND_SEQUENCER=m
++CONFIG_SND_MIXER_OSS=m
++CONFIG_SND_PCM_OSS=m
++CONFIG_SND_PXA2XX_AC97=m
++CONFIG_SND_USB_AUDIO=m
++CONFIG_SND_SOC=m
++CONFIG_SND_PXA2XX_SOC=m
++CONFIG_SND_PXA2XX_SOC_SPITZ=m
++CONFIG_HID=m
++CONFIG_USB_KBD=m
++CONFIG_USB_MOUSE=m
++CONFIG_USB=m
++CONFIG_USB_DEBUG=y
++CONFIG_USB_ANNOUNCE_NEW_DEVICES=y
++CONFIG_USB_DEVICEFS=y
++CONFIG_USB_OTG_WHITELIST=y
++CONFIG_USB_MON=m
++CONFIG_USB_OHCI_HCD=m
++CONFIG_USB_SL811_HCD=m
++CONFIG_USB_SL811_CS=m
++CONFIG_USB_ACM=m
++CONFIG_USB_PRINTER=m
++CONFIG_USB_STORAGE=m
++CONFIG_USB_MDC800=m
++CONFIG_USB_MICROTEK=m
++CONFIG_USB_SERIAL=m
++CONFIG_USB_SERIAL_GENERIC=y
++CONFIG_USB_SERIAL_BELKIN=m
++CONFIG_USB_SERIAL_DIGI_ACCELEPORT=m
++CONFIG_USB_SERIAL_CYPRESS_M8=m
++CONFIG_USB_SERIAL_EMPEG=m
++CONFIG_USB_SERIAL_FTDI_SIO=m
++CONFIG_USB_SERIAL_VISOR=m
++CONFIG_USB_SERIAL_IPAQ=m
++CONFIG_USB_SERIAL_IR=m
++CONFIG_USB_SERIAL_EDGEPORT=m
++CONFIG_USB_SERIAL_EDGEPORT_TI=m
++CONFIG_USB_SERIAL_GARMIN=m
++CONFIG_USB_SERIAL_IPW=m
++CONFIG_USB_SERIAL_KEYSPAN_PDA=m
++CONFIG_USB_SERIAL_KEYSPAN=m
++CONFIG_USB_SERIAL_KLSI=m
++CONFIG_USB_SERIAL_KOBIL_SCT=m
++CONFIG_USB_SERIAL_MCT_U232=m
++CONFIG_USB_SERIAL_PL2303=m
++CONFIG_USB_SERIAL_SAFE=m
++CONFIG_USB_SERIAL_TI=m
++CONFIG_USB_SERIAL_CYBERJACK=m
++CONFIG_USB_SERIAL_XIRCOM=m
++CONFIG_USB_SERIAL_OMNINET=m
++CONFIG_USB_EMI62=m
++CONFIG_USB_EMI26=m
++CONFIG_USB_RIO500=m
++CONFIG_USB_LEGOTOWER=m
++CONFIG_USB_LCD=m
++CONFIG_USB_LED=m
++CONFIG_USB_CYTHERM=m
++CONFIG_USB_IDMOUSE=m
++CONFIG_USB_GADGET=m
++CONFIG_USB_GADGET_DEBUG_FILES=y
++CONFIG_USB_GADGET_DEBUG_FS=y
++CONFIG_USB_PXA27X=m
++CONFIG_USB_ZERO=m
++CONFIG_USB_ETH=m
++CONFIG_USB_ETH_EEM=y
++CONFIG_USB_GADGETFS=m
++CONFIG_USB_FILE_STORAGE=m
++CONFIG_USB_MASS_STORAGE=m
++CONFIG_USB_G_SERIAL=m
++CONFIG_USB_CDC_COMPOSITE=m
++CONFIG_USB_G_MULTI=m
++CONFIG_USB_G_MULTI_CDC=y
++CONFIG_USB_GPIO_VBUS=m
++CONFIG_USB_ULPI=y
++CONFIG_NOP_USB_XCEIV=m
++CONFIG_MMC=y
++CONFIG_MMC_UNSAFE_RESUME=y
++CONFIG_MMC_PXA=y
++CONFIG_MMC_SPI=y
++CONFIG_NEW_LEDS=y
++CONFIG_LEDS_CLASS=y
++CONFIG_LEDS_GPIO=y
++CONFIG_LEDS_TRIGGERS=y
++CONFIG_LEDS_TRIGGER_TIMER=y
++CONFIG_LEDS_TRIGGER_HEARTBEAT=y
++CONFIG_RTC_CLASS=y
++CONFIG_RTC_DRV_SA1100=m
++CONFIG_RTC_DRV_PXA=m
++CONFIG_EXT2_FS=y
++CONFIG_EXT3_FS=y
++# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
++# CONFIG_EXT3_FS_XATTR is not set
++CONFIG_EXT4_FS=y
++CONFIG_VFAT_FS=y
++CONFIG_TMPFS=y
++CONFIG_TMPFS_POSIX_ACL=y
++CONFIG_JFFS2_FS=y
++CONFIG_JFFS2_SUMMARY=y
++CONFIG_JFFS2_COMPRESSION_OPTIONS=y
++CONFIG_JFFS2_LZO=y
++CONFIG_JFFS2_RUBIN=y
++CONFIG_UBIFS_FS=y
++CONFIG_UBIFS_FS_ADVANCED_COMPR=y
++CONFIG_CRAMFS=m
++CONFIG_NFS_FS=m
++CONFIG_NFS_V3=y
++CONFIG_NFS_V4=y
++CONFIG_NFSD=m
++CONFIG_NFSD_V4=y
++CONFIG_CIFS=m
++CONFIG_PARTITION_ADVANCED=y
++CONFIG_NLS_DEFAULT="cp437"
++CONFIG_NLS_CODEPAGE_437=y
++CONFIG_NLS_CODEPAGE_737=m
++CONFIG_NLS_CODEPAGE_775=m
++CONFIG_NLS_CODEPAGE_850=m
++CONFIG_NLS_CODEPAGE_852=m
++CONFIG_NLS_CODEPAGE_855=m
++CONFIG_NLS_CODEPAGE_857=m
++CONFIG_NLS_CODEPAGE_860=m
++CONFIG_NLS_CODEPAGE_861=m
++CONFIG_NLS_CODEPAGE_862=m
++CONFIG_NLS_CODEPAGE_863=m
++CONFIG_NLS_CODEPAGE_864=m
++CONFIG_NLS_CODEPAGE_865=m
++CONFIG_NLS_CODEPAGE_866=m
++CONFIG_NLS_CODEPAGE_869=m
++CONFIG_NLS_CODEPAGE_936=m
++CONFIG_NLS_CODEPAGE_950=m
++CONFIG_NLS_CODEPAGE_932=m
++CONFIG_NLS_CODEPAGE_949=m
++CONFIG_NLS_CODEPAGE_874=m
++CONFIG_NLS_ISO8859_8=m
++CONFIG_NLS_CODEPAGE_1250=m
++CONFIG_NLS_CODEPAGE_1251=m
++CONFIG_NLS_ASCII=m
++CONFIG_NLS_ISO8859_1=y
++CONFIG_NLS_ISO8859_2=m
++CONFIG_NLS_ISO8859_3=m
++CONFIG_NLS_ISO8859_4=m
++CONFIG_NLS_ISO8859_5=m
++CONFIG_NLS_ISO8859_6=m
++CONFIG_NLS_ISO8859_7=m
++CONFIG_NLS_ISO8859_9=m
++CONFIG_NLS_ISO8859_13=m
++CONFIG_NLS_ISO8859_14=m
++CONFIG_NLS_ISO8859_15=m
++CONFIG_NLS_KOI8_R=m
++CONFIG_NLS_KOI8_U=m
++CONFIG_NLS_UTF8=y
++CONFIG_MAGIC_SYSRQ=y
++CONFIG_DEBUG_FS=y
++CONFIG_SYSCTL_SYSCALL_CHECK=y
++CONFIG_CRYPTO_NULL=m
++CONFIG_CRYPTO_TEST=m
++CONFIG_CRYPTO_PCBC=m
++CONFIG_CRYPTO_SHA256=m
++CONFIG_CRYPTO_SHA512=m
++CONFIG_CRYPTO_WP512=m
++CONFIG_CRYPTO_ANUBIS=m
++CONFIG_CRYPTO_BLOWFISH=m
++CONFIG_CRYPTO_CAMELLIA=m
++CONFIG_CRYPTO_CAST5=m
++CONFIG_CRYPTO_CAST6=m
++CONFIG_CRYPTO_KHAZAD=m
++CONFIG_CRYPTO_SERPENT=m
++CONFIG_CRYPTO_TEA=m
++CONFIG_CRYPTO_TWOFISH=m
++# CONFIG_CRYPTO_HW is not set
++CONFIG_CRC_CCITT=y
++CONFIG_LIBCRC32C=m
+diff --git a/recipes-kernel/linux/linux_git.bb b/recipes-kernel/linux/linux_git.bb
+new file mode 100644
+index 0000000..256ee0e
+--- /dev/null
++++ b/recipes-kernel/linux/linux_git.bb
+@@ -0,0 +1,9 @@
++require linux.inc
++require linux-git.inc
++
++SRC_URI_append_akita = " file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 "
++SRC_URI_append_c7x0 = " file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 "
++SRC_URI_append_collie = " file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 "
++SRC_URI_append_poodle = " file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 "
++SRC_URI_append_tosa = " file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 "
++SRC_URI_append_spitz = " file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 "
 -- 
 1.7.6.1
 
