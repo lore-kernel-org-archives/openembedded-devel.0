@@ -1,21 +1,23 @@
-Received: from dd20204.kasserver.com ([85.13.140.93])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1R4EOH-00022U-GI
+	(envelope-from <philb@gnu.org>) id 1R4ESC-0002Af-23
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Sep 2011 18:02:17 +0200
-Received: from myhost (178-27-162-208-dynip.superkabel.de [178.27.162.208])
-	by dd20204.kasserver.com (Postfix) with ESMTPSA id C67D112A00EB
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2011 17:50:48 +0200 (CEST)
-Date: Thu, 15 Sep 2011 17:51:30 +0200 (CEST)
-From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
-X-X-Sender: nice@myhost
+	Thu, 15 Sep 2011 18:06:20 +0200
+Received: from elite.brightsigndigital.co.uk ([81.142.160.137]
+	helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1R4ENC-0007Ge-KA
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Sep 2011 18:01:10 +0200
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1316081269.4523.54.camel@mattotaupa>
-Message-ID: <alpine.LNX.2.02.1109151750240.1214@myhost>
+Date: Thu, 15 Sep 2011 17:01:09 +0100
+In-Reply-To: <201109151120.09382.paul.eggleton@linux.intel.com>
 References: <1316081269.4523.54.camel@mattotaupa>
-User-Agent: Alpine 2.02 (LNX 1266 2009-07-14)
-MIME-Version: 1.0
+	<201109151120.09382.paul.eggleton@linux.intel.com>
+X-Mailer: Evolution 3.0.2- 
+Message-ID: <1316102470.3510.0.camel@phil-desktop>
+Mime-Version: 1.0
 Subject: Re: How to call the old repository: oe.dev or OE classic?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,20 +32,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2011 16:02:17 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Thu, 15 Sep 2011 16:06:20 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+On Thu, 2011-09-15 at 11:20 +0100, Paul Eggleton wrote:
+> oe-dev/oe.dev being a shortened "org.openembedded.dev" is kind of a relic of 
+> the old (was it bitkeeper or monotone?) days prior to git. The benefit of 
+> "classic" is it draws attention to the fact that it's deprecated, whereas to 
+> me, dev implies that's where development still occurs. So my personal vote is 
+> for OE-classic.
+
+Agreed.  Or even "OE-legacy" or something.
+
+p.
 
 
-
-On Thu, 15 Sep 2011, Paul Menzel wrote:
-
-> So we need to make up an official name for the old repository. oe.dev or
-> OE classic? I favor oe.dev, because it is shorter
->
-
-I vote for classic, because there is no more development at oe.dev
-
-regards,
-Bernhard
 
 
