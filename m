@@ -1,33 +1,35 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1R4ZHZ-0004kk-Dn
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Sep 2011 16:20:45 +0200
-Received: by fxi1 with SMTP id 1so1807907fxi.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1R4ZIr-0004qE-7y for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Sep 2011 16:22:06 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1R4ZDj-0000Y3-MO for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Sep 2011 16:16:47 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Sep 2011 16:16:47 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Sep 2011 07:15:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=iOSdHtOvL16PSy+d2RbLitX9aRlJZlSiLq/AvVUR0FU=;
-	b=kjpC5wkCpzS2HeinY/ZleKm2BchgtGZTEYmv7PSB8GMOkznHvkMsibGJv09/d3Ybkg
-	6fcBsOCM59kpASYCmnhoXMFmHUiNJIThHUzKgunBEDx/bQN/OX77UYpNEnzvAgB02Rlx
-	V2pHr7OM43ECZimQvLPRD4ddcQ/B7NkqqaVrk=
-Received: by 10.223.30.214 with SMTP id v22mr565072fac.108.1316182532959;
-	Fri, 16 Sep 2011 07:15:32 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id a7sm10670365fam.22.2011.09.16.07.15.31
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 16 Sep 2011 07:15:31 -0700 (PDT)
-Date: Fri, 16 Sep 2011 16:15:24 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 16 Sep 2011 16:16:47 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110916141524.GN7445@jama.jama.net>
-References: <cover.1316156827.git.Martin.Jansa@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <cover.1316156827.git.Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 0/4] Pull request #22
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 16 Sep 2011 16:16:34 +0200
+Message-ID: <j4vlo2$au4$1@dough.gmane.org>
+References: <6b5477acbb0bbaf15b13f6dbc2121ba0e2fe7100.1316181283.git.Martin.Jansa@gmail.com>
+	<443990646f24d1018edc048aff09230ebab2b94f.1316181283.git.Martin.Jansa@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
+In-Reply-To: <443990646f24d1018edc048aff09230ebab2b94f.1316181283.git.Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.3.1
+Subject: Re: [meta-oe][PATCH 03/10] xserver-xorg-conf: drop from meta-oe, update xorg-xserver-common.inc to RDEPENDS on xserver-xf86-config from oe-core and bsp layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,64 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Sep 2011 14:20:45 -0000
-X-Groupsio-MsgNum: 34307
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="JVu9XMG6uEpKCPDY"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 16 Sep 2011 14:22:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---JVu9XMG6uEpKCPDY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Fri, Sep 16, 2011 at 09:07:39AM +0200, Martin Jansa wrote:
-> The following changes since commit 9c4ff53d2fa688581d257eb7e045f9e6a20470=
-d3:
->=20
->   vlc: update to 1.1.11 and fix xml2 build (2011-09-15 15:59:26 +0200)
->=20
-> are available in the git repository at:
->   git://git.openembedded.org/meta-openembedded-contrib jansa/meta-efl
->   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
-=3Djansa/meta-oe
+Op 16-09-11 15:56, Martin Jansa schreef:
 
-sorry about this bogus pull request.. I've changed -b param of
-create-pull-request to jansa/meta-oe, but forget to git checkout
-jansa/meta-oe branch before it..
+> xserver-xorg-conf: drop from meta-oe, update xorg-xserver-common.inc to 
+> RDEPENDS on xserver-xf86-config from oe-core and bsp layers
 
-btw: is it easier for you to apply 2 pull requests or can I send pull
-requests with [meta-oe][meta-efl][meta-gnome] if I have changes to
-multiple sublayers?
-
-Regards,
-
-> pespin (4):
->   enjoy: Add var LIC_FILES_CHKSUM to recipe
->   enjoy: Add inherit gettext
->   enjoy: Update gstreamer package names in RDEPENDS
->   enjoy: Add gst-plugins-good-autodetect to RDEPENDS
->=20
->  meta-efl/recipes-efl/e17/enjoy_svn.bb |   15 ++++++++-------
->  1 files changed, 8 insertions(+), 7 deletions(-)
->=20
-> --=20
-> 1.7.6.1
->=20
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---JVu9XMG6uEpKCPDY
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
+Which BSP layers are that? Do you have an example on how to convert from
+xserver-xorg-conf to xserver-xf86-config while keeping upgrade paths sane?
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEARECAAYFAk5zWfwACgkQN1Ujt2V2gBz3EQCgl2WT6DbSpB2ZFVGRqwTAtHgI
-CasAoIFT9Ai/GKn3KW5gcWTpqWzeFA3u
-=3zeR
+iD8DBQFOc1pCMkyGM64RGpERAo9NAKCI2bHqJkOz8S/3iiclI7YmoYSOKgCdE+iq
+5/ncCRm2sMkS1Y+PnQN630k=
+=A1II
 -----END PGP SIGNATURE-----
 
---JVu9XMG6uEpKCPDY--
+
+
