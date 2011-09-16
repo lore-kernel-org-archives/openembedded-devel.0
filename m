@@ -1,34 +1,34 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1R4Scr-0000Wp-I7
+	(envelope-from <martin.jansa@gmail.com>) id 1R4Scz-0000Wp-7l
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Sep 2011 09:14:17 +0200
+	Fri, 16 Sep 2011 09:14:25 +0200
 Received: by mail-fx0-f47.google.com with SMTP id 1so1430885fxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Sep 2011 00:09:07 -0700 (PDT)
+	Fri, 16 Sep 2011 00:09:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=B22115No4Mgh1J4UtDGnzy78xx3/7CdWaGzYCMdKfaI=;
-	b=ZiGBHfh7jPF8SM/du6uuMEGZprxS2D5M6sfgnsuVRo3ASNqywS7UQMRoufFnEEE051
-	smpjva7DY9QLY0HnUB5fBQQQfY7hcJhjpImUrRiJ1BgaW0Stvs5v6DqdomG6Gfkse9Xq
-	EU9QE/UruMhwAkJbRtkgTxLtk++LjXTAK8MlQ=
-Received: by 10.223.88.83 with SMTP id z19mr1059150fal.11.1316156947489;
-	Fri, 16 Sep 2011 00:09:07 -0700 (PDT)
+	bh=6jR24+wjrQXpiyBsVP0eiJ/KD6ZJZSH96qk55Syqb8E=;
+	b=Gqg+/WHJKMwt+d6PcGXpmsfneS7Ap+r/CLiu7/hi9e06V7dy73Ck65kQaF+92+2Yxf
+	XHQHk+WtnTRbFkf8Si+71DUbDczDRoM2TC3s2M3bBHee5nPzVbkQ7puizccOCk09960t
+	vlY+q10a8uo2rb3YFT59fe2VetKVPumS58ZQg=
+Received: by 10.223.53.78 with SMTP id l14mr1177731fag.140.1316156955177;
+	Fri, 16 Sep 2011 00:09:15 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id n12sm6040825fan.9.2011.09.16.00.09.05
+	by mx.google.com with ESMTPS id i5sm589045fai.15.2011.09.16.00.09.13
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 16 Sep 2011 00:09:05 -0700 (PDT)
+	Fri, 16 Sep 2011 00:09:14 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Sep 2011 09:08:47 +0200
-Message-Id: <69b2aa946ad6eec475f28dad4cc02d399a4aad5f.1316156746.git.Martin.Jansa@gmail.com>
+Date: Fri, 16 Sep 2011 09:08:48 +0200
+Message-Id: <4660f71cdc38b0cd9563d28a8d56caef5536f0e3.1316156746.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.6.1
 In-Reply-To: <11e808e3b3307d12b7c6c8f02a9bd4d7a0a14da6.1316156746.git.Martin.Jansa@gmail.com>
 References: <11e808e3b3307d12b7c6c8f02a9bd4d7a0a14da6.1316156746.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1316156746.git.Martin.Jansa@gmail.com>
 References: <cover.1316156746.git.Martin.Jansa@gmail.com>
-Subject: [meta-efl][PATCH 2/4] enjoy: Add inherit gettext
+Subject: [meta-efl][PATCH 3/4] enjoy: Update gstreamer package names in RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,31 +42,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Sep 2011 07:14:17 -0000
+X-List-Received-Date: Fri, 16 Sep 2011 07:14:25 -0000
 
 From: pespin <pespin.shar@gmail.com>
 
-* Without this patch bitbake fails to build this recipe, and it says this line should be added to recipe
+* we'll update gstreamer package names again as soon as gstreamer
+  packaging is improved in oe-core
 
 Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/e17/enjoy_svn.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ meta-efl/recipes-efl/e17/enjoy_svn.bb |   12 ++++++------
+ 1 files changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/meta-efl/recipes-efl/e17/enjoy_svn.bb b/meta-efl/recipes-efl/e17/enjoy_svn.bb
-index d3fea32..90eb318 100644
+index 90eb318..d2f6b03 100644
 --- a/meta-efl/recipes-efl/e17/enjoy_svn.bb
 +++ b/meta-efl/recipes-efl/e17/enjoy_svn.bb
-@@ -21,7 +21,7 @@ RDEPENDS += "\
- 	lightmediascanner-test \
- 	"
+@@ -14,12 +14,12 @@ DEPENDS += "gst-plugins-good ${@base_conditional('ENTERPRISE_DISTRO', '1', '', '
+ #4th needed for flac playback
+ #5th needed binary to create db
+ RDEPENDS += "\
+-	gst-plugin-typefindfunctions gst-plugin-playbin gst-plugin-volume gst-plugin-decodebin2  \
+-	${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'gst-plugin-mad gst-plugin-id3demux', d)} \
+-	gst-plugin-ogg gst-plugin-ivorbisdec \
+-	gst-plugin-flac \
+-	lightmediascanner-test \
+-	"
++       gst-plugins-base-typefindfunctions gst-plugins-base-playbin gst-plugins-base-volume gst-plugins-base-decodebin2 \
++       ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'gst-plugins-ugly-mad gst-plugins-good-id3demux', d)} \
++       gst-plugins-base-ogg gst-plugins-base-ivorbisdec \
++       gst-plugins-good-flac \
++       lightmediascanner-test \
++       "
  
--inherit e
-+inherit e gettext
+ inherit e gettext
  SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};proto=http;scmdata=keep"
- S = "${WORKDIR}/${SRCNAME}"
- 
 -- 
 1.7.6.1
 
