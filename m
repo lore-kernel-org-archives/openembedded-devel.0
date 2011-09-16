@@ -1,35 +1,35 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1R4ZYe-0005JH-Vb
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Sep 2011 16:38:24 +0200
-Received: by fxi1 with SMTP id 1so1827360fxi.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1R4aOo-0006ii-BQ for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Sep 2011 17:32:18 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1R4aJn-0004DA-L4 for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Sep 2011 17:27:07 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Sep 2011 17:27:07 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Sep 2011 07:33:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=dgPiktmwmRqJ3JUoEA3pz+KfNkfkhnhawhWT5r9izAE=;
-	b=LG8UX6r6X99S4D8DGg6TwewvLkKMr0WOxB8PPmXkRwLcZ80Y+5Tw/FhGO/eoM17QRz
-	Y0PHX7hCEg9goWMDErQVbG4qO+5ESbt3w9aG7EWwybuBPu808LKLwzHvuUIDCz7Fyech
-	9gluObx+gXOa4bNFb/rEwzMUBeOG/SQKSge9o=
-Received: by 10.223.13.208 with SMTP id d16mr3115836faa.141.1316183591812;
-	Fri, 16 Sep 2011 07:33:11 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id x22sm10762407faa.5.2011.09.16.07.33.09
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 16 Sep 2011 07:33:10 -0700 (PDT)
-Date: Fri, 16 Sep 2011 16:33:03 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 16 Sep 2011 17:27:07 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110916143303.GP7445@jama.jama.net>
-References: <6b5477acbb0bbaf15b13f6dbc2121ba0e2fe7100.1316181283.git.Martin.Jansa@gmail.com>
-	<443990646f24d1018edc048aff09230ebab2b94f.1316181283.git.Martin.Jansa@gmail.com>
-	<j4vlo2$au4$1@dough.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <j4vlo2$au4$1@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 03/10] xserver-xorg-conf: drop from meta-oe, update xorg-xserver-common.inc to RDEPENDS on xserver-xf86-config from oe-core and bsp layers
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 16 Sep 2011 17:26:54 +0200
+Message-ID: <j4vpru$b55$1@dough.gmane.org>
+References: <cover.1316156827.git.Martin.Jansa@gmail.com>
+	<20110916141524.GN7445@jama.jama.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
+In-Reply-To: <20110916141524.GN7445@jama.jama.net>
+X-Enigmail-Version: 1.3.1
+Subject: Re: [meta-oe][PATCH 0/4] Pull request #22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,69 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Sep 2011 14:38:25 -0000
-X-Groupsio-MsgNum: 34310
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="PT0wT86ZVVq2zanE"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 16 Sep 2011 15:32:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---PT0wT86ZVVq2zanE
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Fri, Sep 16, 2011 at 04:16:34PM +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 16-09-11 15:56, Martin Jansa schreef:
->=20
-> > xserver-xorg-conf: drop from meta-oe, update xorg-xserver-common.inc to=
-=20
-> > RDEPENDS on xserver-xf86-config from oe-core and bsp layers
->=20
-> Which BSP layers are that? Do you have an example on how to convert from
-> xserver-xorg-conf to xserver-xf86-config while keeping upgrade paths sane?
+Op 16-09-11 16:15, Martin Jansa schreef:
+> On Fri, Sep 16, 2011 at 09:07:39AM +0200, Martin Jansa wrote:
+>> The following changes since commit
+>> 9c4ff53d2fa688581d257eb7e045f9e6a20470d3:
+>> 
+>> vlc: update to 1.1.11 and fix xml2 build (2011-09-15 15:59:26 +0200)
+>> 
+>> are available in the git repository at: 
+>> git://git.openembedded.org/meta-openembedded-contrib jansa/meta-efl 
+>> http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/meta-oe
+>
+>> 
+> sorry about this bogus pull request.. I've changed -b param of 
+> create-pull-request to jansa/meta-oe, but forget to git checkout 
+> jansa/meta-oe branch before it..
+> 
+> btw: is it easier for you to apply 2 pull requests or can I send pull 
+> requests with [meta-oe][meta-efl][meta-gnome] if I have changes to 
+> multiple sublayers?
 
-I've converted only meta-smartphone BSP layers:
-http://git.shr-project.org/git/?p=3Dmeta-smartphone.git;a=3Dcommit;h=3D50dc=
-a4e19704fcc4f43df97d616a04b648dfa703
-http://git.shr-project.org/git/?p=3Dmeta-smartphone.git;a=3Dcommit;h=3D97f6=
-3c45f744a5af13664f8e84167dc629fb6382
-
-But tested upgrade paths only together with switch from xorg-xserver to
-xserver-xf86 (on all 3 layers oe-core/meta-oe/meta-sp)
-
-xserver-xf86: upgrade to 1.11.0 and move shared definitions to .inc files
-  http://git.openembedded.org/cgit.cgi/openembedded-core-contrib/commit/?h=
-=3Djansa/x11&id=3D9ac74def4a67094ded2d27823ba87cd6c2cf3b5d
-task-x11: use xserver-xf86-lite as default XSERVER
-  http://git.openembedded.org/cgit.cgi/meta-openembedded-contrib/commit/?h=
-=3Djansa/x11&id=3D3788736bad0e2ede2530187b17997770cf4679e9
-BSPs: switch from xserver-xorg to xserver-xf86(-dri)-lite
-  http://git.shr-project.org/git/?p=3Dmeta-smartphone.git;a=3Dcommit;h=3D66=
-ce099bd0512eb56db61df25856612d7d89a8d0
-
-But if we ever want meta-x11 layer then we should at least use only one
-set of xserver recipes.. and as I know you've proposed to use xorg-*
-recipes from old oe.dev in oe-core few times and it always ended without
-warm welcome.. (if I remember tsc minutes right..)
-
-Regards,
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---PT0wT86ZVVq2zanE
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
+it makes no real difference to me, to be honest :)
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEARECAAYFAk5zXh8ACgkQN1Ujt2V2gBwytwCdGdS/RbU9/JZe2u4FE4HfSc4T
-p3UAnRytAekinP+TohPmwT592RgmpA36
-=lCN3
+iD8DBQFOc2q+MkyGM64RGpERAhT3AJ4jRBxO4uJ+6C8B769tKEMNINDvwwCfW0Ru
+Z+WwkvXdgXVTm47UymzcY30=
+=Mfw8
 -----END PGP SIGNATURE-----
 
---PT0wT86ZVVq2zanE--
+
+
