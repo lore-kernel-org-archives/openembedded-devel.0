@@ -1,27 +1,25 @@
-Received: from mail-wy0-f179.google.com ([74.125.82.179])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1R4WTg-0000UF-5O
+	(envelope-from <Imran_Mehmood@mentor.com>) id 1R4Ya0-0001yJ-Fz
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Sep 2011 13:21:04 +0200
-Received: by wyh21 with SMTP id 21so3667286wyh.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Sep 2011 04:15:48 -0700 (PDT)
-Received: by 10.227.41.198 with SMTP id p6mr1453609wbe.67.1316171748180;
-	Fri, 16 Sep 2011 04:15:48 -0700 (PDT)
-Received: from mobil-400-586.intern.dresearch.de
-	(pd95cbf07.dip0.t-ipconnect.de. [217.92.191.7])
-	by mx.google.com with ESMTPS id p26sm11961460wbm.16.2011.09.16.04.15.46
-	(version=SSLv3 cipher=OTHER); Fri, 16 Sep 2011 04:15:47 -0700 (PDT)
-Message-ID: <4E732FE1.6030202@dresearch-fe.de>
-Date: Fri, 16 Sep 2011 13:15:45 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:6.0.2) Gecko/20110907 Thunderbird/6.0.2
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Tom Rini <tom.rini@gmail.com>
-X-Enigmail-Version: 1.3.1
-Subject: [2011.03-maintenance] pull request
+	Fri, 16 Sep 2011 15:35:44 +0200
+Received: from nat-dem.mentorg.com ([195.212.93.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1R4YUy-0007Er-MJ from Imran_Mehmood@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Sep 2011 06:30:32 -0700
+Received: from localhost.localdomain ([137.202.157.139]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
+	Fri, 16 Sep 2011 15:30:31 +0200
+From: "Mehmood, Imran" <Imran_Mehmood@mentor.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 16 Sep 2011 18:29:14 +0500
+Message-Id: <cover.1316179051.git.Imran_Mehmood@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+X-OriginalArrivalTime: 16 Sep 2011 13:30:31.0909 (UTC)
+	FILETIME=[CEA8A950:01CC7474]
+Cc: Imran Mehmood <Imran_Mehmood@mentor.com>
+Subject: [meta-oe][PATCH v2 0/1] pull request for twm recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,33 +33,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Sep 2011 11:21:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 16 Sep 2011 13:35:44 -0000
 
-Hi Tom,
+From: Imran Mehmood <Imran_Mehmood@mentor.com>
 
-please pull these 2 commits from here:
+The following changes since commit 59b3d833fd24f44754e6e0804dae6993af286792:
+  Imran Mehmood (1):
+        xclock: Add recipe version 1.0.5 (initial recipe)
 
-URI: git://git.openembedded.org/openembedded
-Branch: sledz/maintenance
+are available in the git repository at:
 
-Steffen Sledz (2):
-      rsyslog: switch to new upstream version 5.8.4
-      linux-libc-headers 2.6.24: backport arm/asm/hwcap.h from linux 2.6.26
+  git://github.com/lawwama/meta-oe master
+  https://github.com/lawwama/meta-oe/tree/master
 
-Both are bugfixes and already in oe-dev (aka OE classic) master.
+Imran Mehmood (1):
+  twm: Add version 1.0.6 (initial recipe)
 
-Thx,
-Steffen
+ meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb |   17 +++++++++++++++++
+ 1 files changed, 17 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
 
 
