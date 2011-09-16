@@ -1,30 +1,23 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1R4aRU-0006qf-2r
+	(envelope-from <philb@gnu.org>) id 1R4aUG-0006yQ-Pz
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Sep 2011 17:35:04 +0200
-Received: by wwf27 with SMTP id 27so4198467wwf.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Sep 2011 08:29:51 -0700 (PDT)
-Received: by 10.227.20.85 with SMTP id e21mr1616964wbb.104.1316186991181;
-	Fri, 16 Sep 2011 08:29:51 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id gd6sm13000741wbb.1.2011.09.16.08.29.49
-	(version=SSLv3 cipher=OTHER); Fri, 16 Sep 2011 08:29:50 -0700 (PDT)
-Message-ID: <4E736B6C.9060906@dresearch-fe.de>
-Date: Fri, 16 Sep 2011 17:29:48 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:6.0.2) Gecko/20110907 Thunderbird/6.0.2
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Anatoly Shipitsin <norguhtar@gmail.com>,
-	Michael Lauer <mickey@vanille-media.de>, 
-	Richard Purdie <rpurdie@rpsys.net>, Thilo Fromm <fromm@dresearch-fe.de>
+	Fri, 16 Sep 2011 17:37:56 +0200
+Received: from elite.brightsigndigital.co.uk ([81.142.160.137]
+	helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.72) (envelope-from <philb@gnu.org>)
+	id 1R4aPF-0000Zr-Pn; Fri, 16 Sep 2011 17:32:45 +0200
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 16 Sep 2011 16:32:44 +0100
+In-Reply-To: <4E736B6C.9060906@dresearch-fe.de>
 References: <4E70C8BA.9030901@dresearch-fe.de>
-In-Reply-To: <4E70C8BA.9030901@dresearch-fe.de>
-X-Enigmail-Version: 1.3.1
+	<4E736B6C.9060906@dresearch-fe.de>
+X-Mailer: Evolution 3.0.2- 
+Message-ID: <1316187165.3510.37.camel@phil-desktop>
+Mime-Version: 1.0
+Cc: Michael Lauer <mickey@vanille-media.de>
 Subject: Re: guidelines for upstart in oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,59 +32,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Sep 2011 15:35:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 16 Sep 2011 15:37:56 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On 14.09.2011 17:31, Steffen Sledz wrote:
-> If i remember right there are some first experiments with using upstart as an sysvinit replacement in some oe based distros.
+On Fri, 2011-09-16 at 17:29 +0200, Steffen Sledz wrote:
+> On 14.09.2011 17:31, Steffen Sledz wrote:
+> > If i remember right there are some first experiments with using upstart as an sysvinit replacement in some oe based distros.
+> > 
+> > Do some guidelines or suggestions exist to make an application recipes upstart ready?
+> > 
+> > Nowadays a recipe for a common service contains INITSCRIPT_NAME & Co and installs an init script for sysvinit.
+> > 
+> > How should such a recipe be modified to be able to install the application in a native upstart image (without sysvinit compatible runlevels)?
 > 
-> Do some guidelines or suggestions exist to make an application recipes upstart ready?
+> Let me put it in concrete terms.
 > 
-> Nowadays a recipe for a common service contains INITSCRIPT_NAME & Co and installs an init script for sysvinit.
+> Is it possible to write a bb recipe in a way like this?
 > 
-> How should such a recipe be modified to be able to install the application in a native upstart image (without sysvinit compatible runlevels)?
+> ---------------------->snip<-------------------------
+> ...
+> IF IMAGE USES UPSTART AS INIT THEN
+> 
 
-Let me put it in concrete terms.
+Fundamentally no, since there is no way to know at the time the recipe
+is evaluated what images it will go into.
 
-Is it possible to write a bb recipe in a way like this?
+It would be possible to ship both sets of scripts and then have a
+postprocessing step to remove the ones that you don't need.  Or you
+could make upstart vs sysvinit be a DISTRO_FEATURE.  Or, in at least
+some cases, we could probably stop shipping the scripts as discrete
+files altogether and replace them with some symbolic representation from
+which the necessary scripts could be constructed dynamically at install
+time.
 
----------------------->snip<-------------------------
-...
-IF IMAGE USES UPSTART AS INIT THEN
+p.
 
-inherit autotools
 
-do_install_append() {
-    install -d ${D}${sysconfdir}/init
-    install -m 0644 ${S}/upstartscript ${D}${sysconfdir}/init/foo.conf
-}
-
-ELSE
-
-inherit autotools update-rc.d
-
-do_install_append() {
-    install -d ${D}${sysconfdir}/init.d
-    install -m 0755 ${WORKDIR}/initscript ${D}${sysconfdir}/init.d/foo
-}
-
-INITSCRIPT_NAME = "foo"
-
-FI
-...
----------------------->snip<-------------------------
-
-Regards
-Steffen
-
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
 
 
