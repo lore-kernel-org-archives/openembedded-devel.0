@@ -1,34 +1,29 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1R4Sc9-0000Wp-Sp
+	(envelope-from <martin.jansa@gmail.com>) id 1R4ScX-0000Wp-IE
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Sep 2011 09:13:34 +0200
+	Fri, 16 Sep 2011 09:13:57 +0200
 Received: by mail-fx0-f47.google.com with SMTP id 1so1430885fxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Sep 2011 00:08:23 -0700 (PDT)
+	Fri, 16 Sep 2011 00:08:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=TqiSK1SskILgUhP+3HznVocOkB0DOHFxAdr9I40q1vc=;
-	b=QxpLwunPG4zjWoQNdHYPDFjHZo7fkirrAc0tJ+7MvyMqFPXBdEfr+ArIB1nBPHSimM
-	79nkAGb1xaa644tkfALAk6HAh+jXWVAoh5pWpyiaU2r7Wloj39am3mbIEswoJtawj44Q
-	1STWRmpur9B3LN2IaNsPEco8uyV9BBSiZDCc0=
-Received: by 10.223.45.209 with SMTP id g17mr665157faf.96.1316156903829;
-	Fri, 16 Sep 2011 00:08:23 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=qx2RDSx7iltTSMuaiqPy1pZCrvNxxKa43Wg8o6PGTcc=;
+	b=g0Tuk0VAkJwAgg3ZP+JKt2heMD20t+hIs5ezbgiRW7FxJXVqPrWr3zl88W2wTNlUqM
+	+g4HA31ptIx5zGg6AKLoDjqM9rfo4x1/opSg4iX/MV4m9e9CG64c6wLYbP/qO1/3+8iZ
+	ajR1hBurAatOCILKLvhT3raX+Cg+O6aD9+dUI=
+Received: by 10.223.55.218 with SMTP id v26mr35385fag.82.1316156927504;
+	Fri, 16 Sep 2011 00:08:47 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id m26sm3021531fac.6.2011.09.16.00.08.22
+	by mx.google.com with ESMTPS id c5sm9505502fai.2.2011.09.16.00.08.45
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 16 Sep 2011 00:08:22 -0700 (PDT)
+	Fri, 16 Sep 2011 00:08:46 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Sep 2011 09:07:51 +0200
-Message-Id: <883d50c9ae48d25cb4b67550a33152dc98502240.1316156827.git.Martin.Jansa@gmail.com>
+Date: Fri, 16 Sep 2011 09:08:38 +0200
+Message-Id: <cover.1316156746.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.6.1
-In-Reply-To: <11e808e3b3307d12b7c6c8f02a9bd4d7a0a14da6.1316156827.git.Martin.Jansa@gmail.com>
-References: <11e808e3b3307d12b7c6c8f02a9bd4d7a0a14da6.1316156827.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1316156827.git.Martin.Jansa@gmail.com>
-References: <cover.1316156827.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 4/4] enjoy: Add gst-plugins-good-autodetect to RDEPENDS
+Subject: [meta-efl][PATCH 0/4] Pull request #12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,31 +37,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Sep 2011 07:13:34 -0000
+X-List-Received-Date: Fri, 16 Sep 2011 07:13:57 -0000
 
-From: pespin <pespin.shar@gmail.com>
+The following changes since commit 9c4ff53d2fa688581d257eb7e045f9e6a20470d3:
 
-* This plugin is needed in newer versions of enjoy. The app won't play any sound files without this plugin.
+  vlc: update to 1.1.11 and fix xml2 build (2011-09-15 15:59:26 +0200)
 
-Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/recipes-efl/e17/enjoy_svn.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/meta-efl
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/meta-efl
 
-diff --git a/meta-efl/recipes-efl/e17/enjoy_svn.bb b/meta-efl/recipes-efl/e17/enjoy_svn.bb
-index d2f6b03..8c4d4c2 100644
---- a/meta-efl/recipes-efl/e17/enjoy_svn.bb
-+++ b/meta-efl/recipes-efl/e17/enjoy_svn.bb
-@@ -14,7 +14,7 @@ DEPENDS += "gst-plugins-good ${@base_conditional('ENTERPRISE_DISTRO', '1', '', '
- #4th needed for flac playback
- #5th needed binary to create db
- RDEPENDS += "\
--       gst-plugins-base-typefindfunctions gst-plugins-base-playbin gst-plugins-base-volume gst-plugins-base-decodebin2 \
-+       gst-plugins-base-typefindfunctions gst-plugins-base-playbin gst-plugins-base-volume gst-plugins-base-decodebin2 gst-plugins-good-autodetect \
-        ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'gst-plugins-ugly-mad gst-plugins-good-id3demux', d)} \
-        gst-plugins-base-ogg gst-plugins-base-ivorbisdec \
-        gst-plugins-good-flac \
+pespin (4):
+  enjoy: Add var LIC_FILES_CHKSUM to recipe
+  enjoy: Add inherit gettext
+  enjoy: Update gstreamer package names in RDEPENDS
+  enjoy: Add gst-plugins-good-autodetect to RDEPENDS
+
+ meta-efl/recipes-efl/e17/enjoy_svn.bb |   15 ++++++++-------
+ 1 files changed, 8 insertions(+), 7 deletions(-)
+
 -- 
 1.7.6.1
 
