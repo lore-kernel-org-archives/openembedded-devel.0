@@ -1,34 +1,30 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1R4Z7e-00049M-Kn
+	(envelope-from <gary@mlbassoc.com>) id 1R4Z8g-0004FC-UY
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Sep 2011 16:10:30 +0200
-Received: by bke11 with SMTP id 11so5874249bke.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Sep 2011 07:05:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=FqekPAUeK2+j6C7tCbmzlv4qwCDfkLysJpXUm/+EqMU=;
-	b=cVqd1OabPRg4YwwMbJtf8GHrSBzOMPhR263XZo6tqy5ZTtfU/sbwiSUlioIIYcdvV0
-	HewUPbKPmqchOwljf65BWe6sQjP5J+Fr59GkMpUAFeO7NeyQWmB8G0xCUdif51UZKT8a
-	XVp4pQpYc/uAqxPOatBvjBEIfz2XPPXmSEFjc=
-Received: by 10.204.149.72 with SMTP id s8mr1120447bkv.126.1316181449626;
-	Fri, 16 Sep 2011 06:57:29 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id p9sm1602368fah.1.2011.09.16.06.57.27
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 16 Sep 2011 06:57:28 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 16 Sep 2011 16:11:35 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 681BC166096A; Fri, 16 Sep 2011 08:06:22 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id BBB291660960;
+	Fri, 16 Sep 2011 08:06:21 -0600 (MDT)
+Message-ID: <4E7357DD.60004@mlbassoc.com>
+Date: Fri, 16 Sep 2011 08:06:21 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:6.0) Gecko/20110816 Thunderbird/6.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Sep 2011 15:56:14 +0200
-Message-Id: <e385700f08328a74d40d2eb3630f912cd3c2e430.1316181283.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.6.1
-In-Reply-To: <6b5477acbb0bbaf15b13f6dbc2121ba0e2fe7100.1316181283.git.Martin.Jansa@gmail.com>
 References: <6b5477acbb0bbaf15b13f6dbc2121ba0e2fe7100.1316181283.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1316181282.git.Martin.Jansa@gmail.com>
-References: <cover.1316181282.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 09/10] task-x11: define better default XSERVER/XSERVER_COMMON values and make whole recipe MACHINE_ARCH
+	<e18a18842f027546d0a38396d498246513d338fa.1316181283.git.Martin.Jansa@gmail.com>
+In-Reply-To: <e18a18842f027546d0a38396d498246513d338fa.1316181283.git.Martin.Jansa@gmail.com>
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [meta-oe][PATCH 02/10] vlc: drop depends not yet in meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,44 +38,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Sep 2011 14:10:30 -0000
+X-List-Received-Date: Fri, 16 Sep 2011 14:11:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-core/tasks/task-x11.bb |   10 ++++------
- 1 files changed, 4 insertions(+), 6 deletions(-)
+On 2011-09-16 07:56, Martin Jansa wrote:
+> Signed-off-by: Martin Jansa<Martin.Jansa@gmail.com>
+> ---
+>   meta-oe/recipes-multimedia/vlc/vlc.inc |    3 ++-
+>   1 files changed, 2 insertions(+), 1 deletions(-)
+>
+> diff --git a/meta-oe/recipes-multimedia/vlc/vlc.inc b/meta-oe/recipes-multimedia/vlc/vlc.inc
+> index ce608dc..aecfb3a 100644
+> --- a/meta-oe/recipes-multimedia/vlc/vlc.inc
+> +++ b/meta-oe/recipes-multimedia/vlc/vlc.inc
+> @@ -4,7 +4,8 @@ LICENSE = "GPLv2"
+>   SECTION = "multimedia"
+>
+>   DEPENDS = "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl qt4-x11-free dbus libxml2 gnutls tremor faad2 ffmpeg flac \
+> -           ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad libid3tag liba52 mpeg2dec', d)}"
+> +"
+> +#           ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad libid3tag liba52 mpeg2dec', d)}"
+>
+>   SRC_URI = "http://download.videolan.org/pub/videolan/vlc/${PV}/vlc-${PV}.tar.bz2"
+>
 
-diff --git a/meta-oe/recipes-core/tasks/task-x11.bb b/meta-oe/recipes-core/tasks/task-x11.bb
-index 66af8bd..a7faa00 100644
---- a/meta-oe/recipes-core/tasks/task-x11.bb
-+++ b/meta-oe/recipes-core/tasks/task-x11.bb
-@@ -3,7 +3,7 @@ SECTION = "x11/server"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
- PV = "1.0"
--PR = "r7"
-+PR = "r8"
- 
- # WORK IN PROGRESS
- 
-@@ -21,12 +21,10 @@ RRECOMMENDS_${PN} = "\
- 
- # Some machines don't set a *runtime* provider for X, so default to Xfbdev here
- # virtual/xserver won't work, since the kdrive recipes will build multiple xserver packages
--XSERVER ?= "xserver-kdrive-fbdev"
--XSERVER_COMMON ?= "xserver-kdrive-common"
--XSERVER_COMMON_shr = "xserver-common"
-+XSERVER ?= "xserver-xorg"
-+XSERVER_COMMON ?= "xserver-common"
- 
--# This is also the reason why we have to make this package machine specific :/
--PACKAGE_ARCH_${PN}-server = "${MACHINE_ARCH}"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
- RDEPENDS_${PN}-server = "\
-   ${XSERVER} \
+Is this such a good idea, given that bitbake support for commented continuation lines is deprecated?
+
 -- 
-1.7.6.1
-
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
