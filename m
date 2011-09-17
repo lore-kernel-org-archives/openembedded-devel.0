@@ -1,29 +1,34 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1R4oPH-0004bk-Hc
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Sep 2011 08:29:43 +0200
-Received: by bke11 with SMTP id 11so9663188bke.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1R4rPv-0003Tt-EK for openembedded-devel@lists.openembedded.org;
+	Sat, 17 Sep 2011 11:42:35 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1R4rKt-000599-DF for openembedded-devel@lists.openembedded.org;
+	Sat, 17 Sep 2011 11:37:23 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 17 Sep 2011 11:37:23 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Sep 2011 23:24:30 -0700 (PDT)
-Received: by 10.204.145.209 with SMTP id e17mr137847bkv.221.1316240669467;
-	Fri, 16 Sep 2011 23:24:29 -0700 (PDT)
-Received: from [217.197.84.226] (recycler.in-berlin.de. [217.197.84.226])
-	by mx.google.com with ESMTPS id y8sm8181625bkb.4.2011.09.16.23.24.27
-	(version=SSLv3 cipher=OTHER); Fri, 16 Sep 2011 23:24:28 -0700 (PDT)
-Message-ID: <4E743D19.4020901@dresearch-fe.de>
-Date: Sat, 17 Sep 2011 08:24:25 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:6.0.2) Gecko/20110907 Thunderbird/6.0.2
-MIME-Version: 1.0
+	Sat, 17 Sep 2011 11:37:23 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4E70C8BA.9030901@dresearch-fe.de>
-	<4E736B6C.9060906@dresearch-fe.de>
-	<1316187165.3510.37.camel@phil-desktop>
-In-Reply-To: <1316187165.3510.37.camel@phil-desktop>
-Cc: Michael Lauer <mickey@vanille-media.de>
-Subject: Re: guidelines for upstart in oe?
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 17 Sep 2011 11:37:08 +0200
+Message-ID: <j51po4$gjh$1@dough.gmane.org>
+References: <1316187584-1972-1-git-send-email-dbaryshkov@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
+In-Reply-To: <1316187584-1972-1-git-send-email-dbaryshkov@gmail.com>
+X-Enigmail-Version: 1.3.1
+Subject: Re: [meta-oe] openssl: fixup the openssl-fix-link patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,91 +42,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Sep 2011 06:29:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 17 Sep 2011 09:42:35 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Am 16.09.2011 17:32, schrieb Phil Blundell:
-> On Fri, 2011-09-16 at 17:29 +0200, Steffen Sledz wrote:
->> On 14.09.2011 17:31, Steffen Sledz wrote:
->>> If i remember right there are some first experiments with using upstart as an sysvinit replacement in some oe based distros.
->>>
->>> Do some guidelines or suggestions exist to make an application recipes upstart ready?
->>>
->>> Nowadays a recipe for a common service contains INITSCRIPT_NAME & Co and installs an init script for sysvinit.
->>>
->>> How should such a recipe be modified to be able to install the application in a native upstart image (without sysvinit compatible runlevels)?
->>
->> Let me put it in concrete terms.
->>
->> Is it possible to write a bb recipe in a way like this?
->>
->> ---------------------->snip<-------------------------
->> ...
->> IF IMAGE USES UPSTART AS INIT THEN
->>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Op 16-09-11 17:39, Dmitry Eremin-Solenikov schreef:
+> Include more dependencies into openssl-fix-link.patch patch.
+
+After this patch:
+
+ NOTE: Applying patch 'openssl-fix-link.patch'
+(sources/meta-openembedded/meta-oe/recipes-connectivity/openssl/openssl-1.0.0e/openssl-fix-link.patch)
+| ERROR: ld.so: object 'libpseudo.so' from LD_PRELOAD cannot be preloaded:
+ignored.
+| xterm Xt error: Can't open display:
+| xterm:  DISPLAY is not set
+| ERROR: Error executing a python function in
+/OE/tentacle/sources/meta-openembedded/meta-oe/recipes-connectivity/openssl/openssl_1.0.0e.bb:
+| AttributeError: 'module' object has no attribute 'domain'
+|
+| ERROR: The stack trace of python calls that resulted in this
+exception/failure was:
+| ERROR:   File "patch_do_patch", line 136, in <module>
+| ERROR:
+| ERROR:   File "patch_do_patch", line 133, in patch_do_patch
+| ERROR:
+| ERROR:   File
+"/OE/tentacle/sources/openembedded-core/meta/lib/oe/patch.py", line 379, in
+Resolve
+| ERROR:     bb.msg.fatal(bb.msg.domain.Build, ("Cannot proceed with manual
+patch resolution - '%s' not found. " \
+| ERROR:
+| ERROR: The code that was being executed was:
+| ERROR:      0132:			raise bb.build.FuncFailed(str(sys.exc_value))
+| ERROR:      0133:		resolver.Resolve()
+| ERROR:      0134:
+| ERROR:      0135:
+| ERROR:  *** 0136:patch_do_patch(d)
+| ERROR:      0137:
+| ERROR: (file: 'patch_do_patch', lineno: 136, function: <module>)
+| ERROR:      0129:			patchset.Import({"file":local, "remote":url,
+"strippath": striplevel}, True)
+| ERROR:      0130:		except Exception:
+| ERROR:      0131:			import sys
+| ERROR:      0132:			raise bb.build.FuncFailed(str(sys.exc_value))
+| ERROR:  *** 0133:		resolver.Resolve()
+| ERROR:      0134:
+| ERROR:      0135:
+| ERROR:      0136:patch_do_patch(d)
+| ERROR:      0137:
+| ERROR: (file: 'patch_do_patch', lineno: 133, function: patch_do_patch)
+| ERROR: Function 'patch_do_patch' failed
+NOTE: package openssl-native-1.0.0e-r13.1: task do_patch: Failed
+ERROR: Task 1
+(virtual:native:/OE/tentacle/sources/meta-openembedded/meta-oe/recipes-connectivity/openssl/openssl_1.0.0e.bb,
+do_patch) failed with exit code '1'
+ERROR:
+'virtual:native:/OE/tentacle/sources/meta-openembedded/meta-oe/recipes-connectivity/openssl/openssl_1.0.0e.bb'
+failed
+koen@dominion:/OE/tentacle/sources/meta-texasinstruments/recipes-graphics/xorg-xserver$
+
+
+
+
+
 > 
-> Fundamentally no, since there is no way to know at the time the recipe
-> is evaluated what images it will go into.
+> Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com> --- 
+> .../openssl/openssl-1.0.0e/openssl-fix-link.patch  |   14 +++++++++----- 
+> 1 files changed, 9 insertions(+), 5 deletions(-)
 > 
-> It would be possible to ship both sets of scripts and then have a
-> postprocessing step to remove the ones that you don't need.  Or you
-> could make upstart vs sysvinit be a DISTRO_FEATURE.  Or, in at least
-> some cases, we could probably stop shipping the scripts as discrete
-> files altogether and replace them with some symbolic representation from
-> which the necessary scripts could be constructed dynamically at install
-> time.
+> diff --git
+> a/meta-oe/recipes-connectivity/openssl/openssl-1.0.0e/openssl-fix-link.patch
+> b/meta-oe/recipes-connectivity/openssl/openssl-1.0.0e/openssl-fix-link.patch
+>
+> 
+index b319c62..15762a7 100644
+> ---
+> a/meta-oe/recipes-connectivity/openssl/openssl-1.0.0e/openssl-fix-link.patch
+>
+> 
++++ b/meta-oe/recipes-connectivity/openssl/openssl-1.0.0e/openssl-fix-link.patch
+> @@ -8,15 +8,19 @@ Index: openssl-1.0.0d/Makefile.org 
+> =================================================================== ---
+> openssl-1.0.0d.orig/Makefile.org	2011-09-01 17:03:59.000000000 +0400 +++
+> openssl-1.0.0d/Makefile.org	2011-09-01 17:12:24.000000000 +0400 -@@
+> -246,9 +246,9 @@ +@@ -244,13 +244,13 @@ @dir=crypto; target=all;
+> $(BUILD_ONE_CMD) - build_ssl: +-build_ssl: ++build_ssl: build_crypto 
+> @dir=ssl; target=all; $(BUILD_ONE_CMD) -build_engines: +build_engines:
+> build_crypto @dir=engines; target=all; $(BUILD_ONE_CMD) -build_apps: 
+> -+build_apps: build_crypto ++build_apps: build_crypto build_ssl 
+> @dir=apps; target=all; $(BUILD_ONE_CMD) - build_tests: -	@dir=test;
+> target=all; $(BUILD_ONE_CMD) +-build_tests: ++build_tests: build_crypto
+> build_ssl + 	@dir=test; target=all; $(BUILD_ONE_CMD) + build_tools: +
+> @dir=tools; target=all; $(BUILD_ONE_CMD)
 
-Would it be an accepted solution to have two different packages in two recipes with common parts in an include like this?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFOdGpEMkyGM64RGpERAuBYAKC41lWUivezMZ21gOZ6RdG+QYh4ggCfZTGR
+pGvnn2Dj3rtuuKHNABsn0qY=
+=Zrkx
+-----END PGP SIGNATURE-----
 
-foo_x.y.bb:
------------------->snip<-------------------
-require foo-x.y.inc
-
-RCONFLICTS = "foo-upstart"
-
-inherit update-rc.d
-
-do_install_append() {
-    install -d ${D}${sysconfdir}/init.d
-    install -m 0755 ${WORKDIR}/initscript ${D}${sysconfdir}/init.d/foo
-}
-
-INITSCRIPT_NAME = "foo"
-...
------------------->snip<-------------------
-
-
-foo-upstart_x.y.bb:
------------------->snip<-------------------
-require foo-x.y.inc
-
-RCONFLICTS = "foo"
-
-do_install_append() {
-    install -d ${D}${sysconfdir}/init
-    install -m 0644 ${S}/upstartscript ${D}${sysconfdir}/init/foo.conf
-}
-...
------------------->snip<-------------------
-
-
-foo-x.y.inc:
------------------->snip<-------------------
-inherit autotools
-...
------------------->snip<-------------------
-
-Steffen
-
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
 
 
