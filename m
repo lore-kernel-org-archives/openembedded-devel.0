@@ -1,33 +1,23 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1R4rql-0005hW-B0 for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Sep 2011 12:10:20 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1R4rlj-0006Jq-9Y for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Sep 2011 12:05:07 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Sep 2011 12:05:07 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Sep 2011 12:05:07 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1R4ryx-0006wM-M7
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 17 Sep 2011 12:18:47 +0200
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 17 Sep 2011 03:13:33 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.68,397,1312182000"; d="scan'208";a="49828948"
+Received: from unknown (HELO helios.localnet) ([10.252.120.34])
+	by azsmga001.ch.intel.com with ESMTP; 17 Sep 2011 03:13:32 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 17 Sep 2011 11:56:04 +0200
-Message-ID: <j51qrk$kpi$2@dough.gmane.org>
+Date: Sat, 17 Sep 2011 11:13:29 +0100
+User-Agent: KMail/1.13.6 (Linux/2.6.38-10-generic-pae; KDE/4.6.2; i686; ; )
 References: <1316213951-31505-1-git-send-email-andrea.adami@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
-In-Reply-To: <1316213951-31505-1-git-send-email-andrea.adami@gmail.com>
-X-Enigmail-Version: 1.3.1
+	<j51qrk$kpi$2@dough.gmane.org>
+In-Reply-To: <j51qrk$kpi$2@dough.gmane.org>
+MIME-Version: 1.0
+Message-Id: <201109171113.30005.paul.eggleton@linux.intel.com>
 Subject: Re: [meta-oe][PATCH] tzcode-native, tzdata: remove recipes from meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,25 +32,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Sep 2011 10:10:20 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 17 Sep 2011 10:18:48 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Saturday 17 September 2011 10:56:04 Koen Kooi wrote:
+> Op 17-09-11 00:59, Andrea Adami schreef:
+> > * Up-to-date versions are maintained in oe-core.
+> 
+> Are they as good as the ones in meta-oe? There's a good reason for the
+> recipes to be present :)
 
-Op 17-09-11 00:59, Andrea Adami schreef:
-> * Up-to-date versions are maintained in oe-core.
+So if they are indeed better, would you mind submitting a patch to improve the 
+ones in oe-core instead?
 
-Are they as good as the ones in meta-oe? There's a good reason for the
-recipes to be present :)
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Cheers,
+Paul
 
-iD8DBQFOdG60MkyGM64RGpERAtQgAJ9HqhtYrnzvosSifKZwBcv9PMhYaQCffvbj
-9yKu+lS11DGC51qr/88uD2E=
-=jDwt
------END PGP SIGNATURE-----
+-- 
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
