@@ -1,30 +1,34 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dbaryshkov@gmail.com>) id 1R52cr-0001fo-CI
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Sep 2011 23:40:42 +0200
-Received: by fxi1 with SMTP id 1so3106590fxi.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1R5Axx-0007My-Ku for openembedded-devel@lists.openembedded.org;
+	Sun, 18 Sep 2011 08:35:01 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1R5Ast-0005j6-Ur for openembedded-devel@lists.openembedded.org;
+	Sun, 18 Sep 2011 08:29:47 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 Sep 2011 08:29:47 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Sep 2011 14:35:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=/yC2HJPeIJcLfiPuc5qez8oleWTdSp1zLgBoVaKGHNE=;
-	b=aiO+qGVkMpjm8gWCtZaQ6acUcSiW48T1yPk1q3uma3+89u+hCYJ/JXBLS0Cnx9I28v
-	q2EHpb0f+M5zYcoR97GWorQjZzMXCGk+fPACw99OAvWEbux5VEMx1lOy1s52gvuy7VvX
-	qAe1OvIYqiU/72QQJjNpiZsobkQR4UVjqzZQI=
-Received: by 10.223.30.27 with SMTP id s27mr1842099fac.129.1316295326948;
-	Sat, 17 Sep 2011 14:35:26 -0700 (PDT)
-Received: from localhost.localdomain ([194.85.238.22])
-	by mx.google.com with ESMTPS id b10sm15961192fam.1.2011.09.17.14.35.25
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 17 Sep 2011 14:35:26 -0700 (PDT)
-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+	Sun, 18 Sep 2011 08:29:47 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 Sep 2011 01:35:15 +0400
-Message-Id: <1316295315-7410-1-git-send-email-dbaryshkov@gmail.com>
-X-Mailer: git-send-email 1.7.2.5
-Cc: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-Subject: [meta-oe][V2] openssl: fixup the openssl-fix-link patch
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sun, 18 Sep 2011 08:29:35 +0200
+Message-ID: <j5434f$tvk$1@dough.gmane.org>
+References: <1316295315-7410-1-git-send-email-dbaryshkov@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
+In-Reply-To: <1316295315-7410-1-git-send-email-dbaryshkov@gmail.com>
+X-Enigmail-Version: 1.3.1
+Subject: Re: [meta-oe][V2] openssl: fixup the openssl-fix-link patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,50 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Sep 2011 21:40:42 -0000
+X-List-Received-Date: Sun, 18 Sep 2011 06:35:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Include more dependencies into openssl-fix-link.patch patch.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
----
- .../openssl/openssl-1.0.0e/openssl-fix-link.patch  |   22 +++++++++++--------
- 1 files changed, 13 insertions(+), 9 deletions(-)
+Op 17-09-11 23:35, Dmitry Eremin-Solenikov schreef:
+> Include more dependencies into openssl-fix-link.patch patch.
+> 
+> Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com> --- 
+> .../openssl/openssl-1.0.0e/openssl-fix-link.patch  |   22
+> +++++++++++-------- 1 files changed, 13 insertions(+), 9 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/openssl/openssl-1.0.0e/openssl-fix-link.patch b/meta-oe/recipes-connectivity/openssl/openssl-1.0.0e/openssl-fix-link.patch
-index b319c62..6522d83 100644
---- a/meta-oe/recipes-connectivity/openssl/openssl-1.0.0e/openssl-fix-link.patch
-+++ b/meta-oe/recipes-connectivity/openssl/openssl-1.0.0e/openssl-fix-link.patch
-@@ -8,15 +8,19 @@ Index: openssl-1.0.0d/Makefile.org
- ===================================================================
- --- openssl-1.0.0d.orig/Makefile.org	2011-09-01 17:03:59.000000000 +0400
- +++ openssl-1.0.0d/Makefile.org	2011-09-01 17:12:24.000000000 +0400
--@@ -246,9 +246,9 @@
--	@dir=crypto; target=all; $(BUILD_ONE_CMD)
-- build_ssl:
--	@dir=ssl; target=all; $(BUILD_ONE_CMD)
-+@@ -244,13 +244,13 @@
-+ 	@dir=crypto; target=all; $(BUILD_ONE_CMD)
-+-build_ssl:
-++build_ssl: build_crypto
-+ 	@dir=ssl; target=all; $(BUILD_ONE_CMD)
- -build_engines:
- +build_engines: build_crypto
--	@dir=engines; target=all; $(BUILD_ONE_CMD)
-+ 	@dir=engines; target=all; $(BUILD_ONE_CMD)
- -build_apps:
--+build_apps: build_crypto
--	@dir=apps; target=all; $(BUILD_ONE_CMD)
-- build_tests:
--	@dir=test; target=all; $(BUILD_ONE_CMD)
-++build_apps: build_crypto build_ssl
-+ 	@dir=apps; target=all; $(BUILD_ONE_CMD)
-+-build_tests:
-++build_tests: build_crypto build_ssl
-+ 	@dir=test; target=all; $(BUILD_ONE_CMD)
-+ build_tools:
-+ 	@dir=tools; target=all; $(BUILD_ONE_CMD)
--- 
-1.7.2.5
+You're missing a PR bump to the recipe
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFOdY/PMkyGM64RGpERAoxpAJ99tK2O0yxW2bAfeBqRgbFEjS778wCfesDH
+7+/z+mehoT7T+3uQC1U+FNg=
+=9syl
+-----END PGP SIGNATURE-----
 
 
 
