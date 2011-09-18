@@ -1,34 +1,22 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1R5Axx-0007My-Ku for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Sep 2011 08:35:01 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1R5Ast-0005j6-Ur for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Sep 2011 08:29:47 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Sep 2011 08:29:47 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Sep 2011 08:29:47 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1R5Eff-0002iO-Bf for openembedded-devel@lists.openembedded.org;
+	Sun, 18 Sep 2011 12:32:23 +0200
+Received: from f053043176.adsl.alicedsl.de ([78.53.43.176]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1R5Eaq-0001ME-Kx; Sun, 18 Sep 2011 10:27:24 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sun, 18 Sep 2011 08:29:35 +0200
-Message-ID: <j5434f$tvk$1@dough.gmane.org>
-References: <1316295315-7410-1-git-send-email-dbaryshkov@gmail.com>
+Date: Sun, 18 Sep 2011 12:26:53 +0200
+In-Reply-To: <1316012411-28874-1-git-send-email-tristan.lelong@blunderer.org>
+References: <1316012411-28874-1-git-send-email-tristan.lelong@blunderer.org>
+X-Mailer: Evolution 3.0.3- 
+Message-ID: <1316341630.7061.9.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
-In-Reply-To: <1316295315-7410-1-git-send-email-dbaryshkov@gmail.com>
-X-Enigmail-Version: 1.3.1
-Subject: Re: [meta-oe][V2] openssl: fixup the openssl-fix-link patch
+Subject: Re: [PATCH v2] libroxml: Add version 2.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,28 +30,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Sep 2011 06:35:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 18 Sep 2011 10:32:23 -0000
+X-Groupsio-MsgNum: 34330
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-Qk38Y5B8SKxektJS6b7o"
+
+--=-Qk38Y5B8SKxektJS6b7o
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Dear Tristan,
+
+
+thank you for updating the patch.
+
+Am Mittwoch, den 14.09.2011, 17:00 +0200 schrieb tristan.lelong@blunderer.o=
+rg:
+> From: Tristan Lelong <tristan.lelong@blunderer.org>
+>=20
+> libroxml is a small fast and powerful xml library
+
+Please add how you tested this package with.
+
+> Signed-off-by: Tristan Lelong <tristan.lelong@blunderer.org>
+> ---
+>  recipes/libroxml/libroxml.inc      |   19 +++++++++++++++++++
+>  recipes/libroxml/libroxml_2.1.0.bb |    6 ++++++
+>  2 files changed, 25 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/libroxml/libroxml.inc
+>  create mode 100644 recipes/libroxml/libroxml_2.1.0.bb
+>=20
+> diff --git a/recipes/libroxml/libroxml.inc b/recipes/libroxml/libroxml.in=
+c
+> new file mode 100644
+> index 0000000..06322fe
+> --- /dev/null
+> +++ b/recipes/libroxml/libroxml.inc
+> @@ -0,0 +1,19 @@
+> +DESCRIPTION =3D "Small, fast and powerful xml library"
+> +AUTHOR =3D "Tristan Lelong <tristan.lelong@libroxml.net>"
+> +HOMEPAGE =3D "http://www.libroxml.net"
+> +SECTION =3D "libs"
+> +PRIORITY =3D "optional"
+> +INC_PR =3D "r0"
+> +LICENSE =3D "LGPL"
+
+Please order according to the style guide [1].
+
+Additionally checking the license this contradicts itself. `LGPL.txt`
+actually says version 3 or later, but the header in the the source files
+like `roxml.c` says LGPL 2.1 or later.
+
+Please clarify that in the source as you are the upstream author.
+Additionally please never release a new source archive without changing
+the version number. This causes problems when checksums are used as in
+OE.
+
+> +
+> +SRC_URI =3D "http://libroxml.googlecode.com/files/libroxml-2.1.0.tar.gz"
+
+Please use `${P}` instead of `libroxml-2.1.0`.
+
+> +
+> +inherit pkgconfig
+
+You do not ship any pkg-config file.
+
+> +
+> +do_install() {
+> +        oe_runmake install DESTDIR=3D${D}
+> +}
+> +
+> +PACKAGES=3D ${PN} roxml
+> +FILES_${PN} =3D ${libdir}/libroxml.so.0
+> +FILES_roxml =3D ${bindir}/roxml
+
+Why do you need to define that manually?
+
+        NOTE: package libroxml-2.1.0-r0.0: task do_qa_staging: Started
+        WARNING: the following files were installed but not shipped in any =
+package:
+        WARNING:   /usr/lib/libroxml.so
+        WARNING:   /usr/lib/libroxml.a
+        WARNING:   /usr/lib/pkgconfig/libroxml.pc
+        WARNING:   /usr/lib/.debug/libroxml.so.0
+        WARNING:   /usr/include/roxml.h
+        WARNING:   /usr/share/man/man1/roxml.1
+        WARNING:   /usr/share/doc/libroxml/LGPL.txt =20
+        WARNING:   /usr/bin/.debug/roxml
+
+> diff --git a/recipes/libroxml/libroxml_2.1.0.bb b/recipes/libroxml/librox=
+ml_2.1.0.bb
+> new file mode 100644
+> index 0000000..b3669e1
+> --- /dev/null
+> +++ b/recipes/libroxml/libroxml_2.1.0.bb
+> @@ -0,0 +1,6 @@
+> +PR =3D "${INC_PR}.0"
+> +
+> +SRC_URI[md5sum] =3D "ad1903efa241914baec2fd432a176549"
+> +SRC_URI[sha256sum] =3D "bf2d908c330e28e5470fe9a841438b78025dc1406742fc54=
+aad6fa8db401229a"
+> +
+> +require libroxml.inc
+
+I think `require libroxml.inc` should go to the beginning.
+
+
+Thanks,
+
+Paul
+
+
+[1] http://openembedded.org/index.php?title=3DStyleguide
+
+--=-Qk38Y5B8SKxektJS6b7o
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Op 17-09-11 23:35, Dmitry Eremin-Solenikov schreef:
-> Include more dependencies into openssl-fix-link.patch patch.
-> 
-> Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com> --- 
-> .../openssl/openssl-1.0.0e/openssl-fix-link.patch  |   22
-> +++++++++++-------- 1 files changed, 13 insertions(+), 9 deletions(-)
-
-You're missing a PR bump to the recipe
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iD8DBQFOdY/PMkyGM64RGpERAoxpAJ99tK2O0yxW2bAfeBqRgbFEjS778wCfesDH
-7+/z+mehoT7T+3uQC1U+FNg=
-=9syl
+iEYEABECAAYFAk51x20ACgkQPX1aK2wOHViPrgCfU9e5I6qohdRcw2kfT0jr2dvZ
+NQoAn2Vhi4ZVGqBopefHqTO8sfaVjgQZ
+=Mzwp
 -----END PGP SIGNATURE-----
 
-
-
+--=-Qk38Y5B8SKxektJS6b7o--
