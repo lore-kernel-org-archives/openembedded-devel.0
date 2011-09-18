@@ -1,27 +1,30 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1R5KDM-0002L7-Im
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <dbaryshkov@gmail.com>) id 1R5PfI-0000nu-1S
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Sep 2011 18:27:32 +0200
-Received: (qmail invoked by alias); 18 Sep 2011 16:22:17 -0000
-Received: from p5B0A25AC.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.37.172]
-	by mail.gmx.net (mp062) with SMTP; 18 Sep 2011 18:22:17 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX195yDUIrOh5aNDWlvXEw2PD5eHuxkhGWL8uhAteaT
-	TrlpXnFR4sUugX
-From: Andreas =?utf-8?q?M=C3=BCller?= <schnitzeltony@gmx.de>
+	Mon, 19 Sep 2011 00:16:44 +0200
+Received: by fxi1 with SMTP id 1so4148693fxi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 Sep 2011 15:11:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=donMrJEvSIjQxybf/3x0nSCY5ktMws9auyfnxrzHpY4=;
+	b=C71iahjcQhXgtNFgrwM1qKgIzDLFmFXqCYdpIs674nJPdruOFSBzvHiT3aTVFEG3ag
+	YXUUmwzBe4TvBJIy5dP9YOaUhLNseD/QKR7MCnbfCUcC710RIPXZOJ9PtjPgbON2rEQ7
+	LYmOcotssdjFHNqheYE5e/FGmXVD4rOFxePpU=
+Received: by 10.223.37.26 with SMTP id v26mr3917321fad.100.1316383888618;
+	Sun, 18 Sep 2011 15:11:28 -0700 (PDT)
+Received: from localhost.localdomain ([194.85.238.22])
+	by mx.google.com with ESMTPS id t19sm19649075faj.23.2011.09.18.15.11.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 18 Sep 2011 15:11:27 -0700 (PDT)
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 Sep 2011 18:25:50 +0200
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-95.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-References: <201109181647.20828.schnitzeltony@gmx.de>
-	<j550uc$4s1$1@dough.gmane.org>
-In-Reply-To: <j550uc$4s1$1@dough.gmane.org>
-MIME-Version: 1.0
-Message-Id: <201109181825.51100.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: [meta-oe] xserver: default xorg.conf
+Date: Mon, 19 Sep 2011 02:11:16 +0400
+Message-Id: <1316383877-30796-1-git-send-email-dbaryshkov@gmail.com>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+Subject: [meta-oe][V2 1/2] gcc-4.5: include libgcov.a into libgcc-dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,22 +38,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Sep 2011 16:27:32 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 18 Sep 2011 22:16:44 -0000
 
-On Sunday, September 18, 2011 04:58:20 PM Koen Kooi wrote:
-> If you use angstrom + meta-ti you will get a working xorg.conf for omap3:
-> 
-> http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-texasinstruments
-> /commit/?id=f99ad0105b79186972415a4782b2be5cb869c939
-> 
-For the first time I manually pulled some layers (oe-core / meta-oe) without 
-using oebb.sh update - grrr...
+First, this lib is usefull for coverage analysis-enabled building.
+Second, this fixes the warning about unpackaged files in libgcc recipe.
 
-Thanks & sorry for the noise
+Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+---
+ meta-oe/recipes-devtools/gcc/gcc-4.5.inc   |    2 +-
+ meta-oe/recipes-devtools/gcc/libgcc_4.5.bb |    1 +
+ 2 files changed, 2 insertions(+), 1 deletions(-)
 
-Andreas
+diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.5.inc b/meta-oe/recipes-devtools/gcc/gcc-4.5.inc
+index aabc1cf..a7f9480 100644
+--- a/meta-oe/recipes-devtools/gcc/gcc-4.5.inc
++++ b/meta-oe/recipes-devtools/gcc/gcc-4.5.inc
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
+ 
+ 
+ PV = "4.5"
+-PR = "r40"
++PR = "r41"
+ 
+ # BINV should be incremented after updating to a revision
+ # after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
+diff --git a/meta-oe/recipes-devtools/gcc/libgcc_4.5.bb b/meta-oe/recipes-devtools/gcc/libgcc_4.5.bb
+index 8a6c96a..1579c8b 100644
+--- a/meta-oe/recipes-devtools/gcc/libgcc_4.5.bb
++++ b/meta-oe/recipes-devtools/gcc/libgcc_4.5.bb
+@@ -13,6 +13,7 @@ FILES_${PN} = "${base_libdir}/libgcc*.so.*"
+ FILES_${PN}-dev = " \
+   ${base_libdir}/libgcc*.so \
+   ${libdir}/${TARGET_SYS}/${BINV}/crt* \
++  ${libdir}/${TARGET_SYS}/${BINV}/libgcov.a \
+   ${libdir}/${TARGET_SYS}/${BINV}/libgcc*"
+ 
+ do_fetch[noexec] = "1"
+-- 
+1.7.2.5
+
 
 
