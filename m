@@ -1,24 +1,24 @@
-Received: from mga01.intel.com ([192.55.52.88])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1R5HL3-0007WM-3v
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1R5Ig2-0000Jy-IG
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Sep 2011 15:23:17 +0200
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 18 Sep 2011 06:16:56 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.68,400,1312182000"; d="scan'208";a="52912006"
-Received: from unknown (HELO helios.localnet) ([10.252.120.89])
-	by fmsmga001.fm.intel.com with ESMTP; 18 Sep 2011 06:16:55 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: "Dmitry Eremin-Solenikov" <dbaryshkov@gmail.com>
-Date: Sun, 18 Sep 2011 14:16:54 +0100
-User-Agent: KMail/1.13.6 (Linux/2.6.38-10-generic-pae; KDE/4.6.2; i686; ; )
-References: <1316344999-26642-1-git-send-email-dbaryshkov@gmail.com>
-In-Reply-To: <1316344999-26642-1-git-send-email-dbaryshkov@gmail.com>
+	Sun, 18 Sep 2011 16:49:03 +0200
+Received: (qmail invoked by alias); 18 Sep 2011 14:43:47 -0000
+Received: from p5B0A25AC.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.37.172]
+	by mail.gmx.net (mp026) with SMTP; 18 Sep 2011 16:43:47 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1+3Zd4GHm63Ed1k+OFxMyV/nD7QNhFTQCqFfbUL0b
+	w5rETKvv8H0jpW
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 18 Sep 2011 16:47:20 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-95.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
 MIME-Version: 1.0
-Message-Id: <201109181416.54157.paul.eggleton@linux.intel.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-opie 00/17] big opie pull
+Message-Id: <201109181647.20828.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: [meta-oe] xserver: default xorg.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,52 +32,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Sep 2011 13:23:17 -0000
+X-List-Received-Date: Sun, 18 Sep 2011 14:49:03 -0000
 Content-Type: Text/Plain;
-  charset="iso-8859-1"
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Sunday 18 September 2011 12:23:02 Dmitry Eremin-Solenikov wrote:
-> The following changes since commit
-> 963ac303ee49fd77d32d1edaaebf0358af4a6fd0:
-> 
->   libopieobex0: fix disable-bit-check patch for current git (2011-09-17
-> 14:43:22 +0100)
-> 
-> are available in the git repository at:
->   git@github.com:lumag/meta-opie.git master
-> 
-> Dmitry Eremin-Solenikov (17):
->       libopie2: also use gcc45_opiemm_include.patch for git version
->       libqpe-opie: fix LnkProperties desctructor visibility issues
->       opie-taskbar: fix linking issues
->       opie-taskbar: launcher also uses opiepim2 library, add it to LIBS
->       opie-today-addressbookplugin: add dependencies on opie-today and
-> libqtaux2 opie-libqrsync: package static library
->       libopieobex0: drop setting of FILES for -dbg package
->       task-opie: provide defaults for screen resolution
->       opie: drop MOC and UIC overrides on command line
->       uicmoc-native: install tools with suffix 2
->       qmake.bbclass: adapt for  {moc,uic} -> {moc,uic}2 change
->       qte-common: adapt for  {moc,uic} -> {moc,uic}2 change
->       qmake: do not try to regenerate moc
->       opie: fix GPLv2 plus license
->       opie: mass-correct licesnses for LGPL packages
->       opie: mass GPL->GPLv2 fixup
->       opie-icon-reload: for completeness add git version
+Hi,
 
-Merged all except #1 and #2, these fixes are already upstream.  I also 
-introduced INC_PR to libopie2, fixed it in libqtaux2_1.2.5.bb and bumped INC_PR 
-for all inc files changed in #9. 
+the last image for overo failed starting X. I checked xorg.conf and saw that 
+ther was intel driver selected - hmm.
 
-Thanks very much!
+So I copied manually the removerd xorg.conf which belongs to overo from the 
+patch
 
-Cheers,
-Paul
+commit 44c7cdefee88e22532dcc1269d3c148a20899b6a
+Author: Martin Jansa <Martin.Jansa@gmail.com>
+Date:   Wed Sep 7 15:21:38 2011 +0200
 
---
+    xserver-xorg: drop 1.9.4 and git version
+    
+    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-Paul Eggleton
-Intel Open Source Technology Centre
+and everything works fine.
+
+Now my question: Where is the intended place (where exactly in BSP) to put 
+xorg.conf now?
+
+Thanks in advance
+
+Andreas
 
 
