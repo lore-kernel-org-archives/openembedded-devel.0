@@ -1,32 +1,38 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1R5ZyJ-0000gb-5G
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Sep 2011 11:17:04 +0200
-Received: by wwf27 with SMTP id 27so6064494wwf.24
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1R5ZzF-0000mG-4L for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Sep 2011 11:18:01 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1R5ZuA-00087g-3M for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Sep 2011 11:12:46 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Sep 2011 11:12:46 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Sep 2011 02:11:47 -0700 (PDT)
-Received: by 10.216.1.200 with SMTP id 50mr2686239wed.33.1316423506820;
-	Mon, 19 Sep 2011 02:11:46 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id y10sm15944013wbm.14.2011.09.19.02.11.45
-	(version=SSLv3 cipher=OTHER); Mon, 19 Sep 2011 02:11:45 -0700 (PDT)
-Message-ID: <4E770750.2070708@dresearch-fe.de>
-Date: Mon, 19 Sep 2011 11:11:44 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:6.0.2) Gecko/20110907 Thunderbird/6.0.2
-MIME-Version: 1.0
+	Mon, 19 Sep 2011 11:12:46 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 19 Sep 2011 11:12:33 +0200
+Message-ID: <j57121$rkg$1@dough.gmane.org>
 References: <4E70C8BA.9030901@dresearch-fe.de>
 	<4E736B6C.9060906@dresearch-fe.de>
 	<1316187165.3510.37.camel@phil-desktop>
 	<4E73760B.6020605@dresearch-fe.de>
 	<20110919080621.GB3783@chargestorm.se>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
 In-Reply-To: <20110919080621.GB3783@chargestorm.se>
 X-Enigmail-Version: 1.3.1
-Subject: Re: guidelines for upstart in oe?
+Subject: Systemd sysv compat mode, was: Re: guidelines for upstart in oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,44 +46,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Sep 2011 09:17:04 -0000
+X-List-Received-Date: Mon, 19 Sep 2011 09:18:01 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 19.09.2011 10:06, Anders Darander wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Op 19-09-11 10:06, Anders Darander schreef:
 > * Steffen Sledz <sledz@dresearch-fe.de> [110916 18:15]:
->> I'm not sure if there exist upstart based oe distros/images. But it
->> seems that there are some systemd based ones
+>> I'm not sure if there exist upstart based oe distros/images. But it 
+>> seems that there are some systemd based ones 
 >> (recipes/images/angstrom-systemd-image.bb).
->  
->> Do they have a similar problem? How do these handle the sysvinit
->> config vs. systemd config for the different services?
 > 
-> It varies slightly. 
+>> Do they have a similar problem? How do these handle the sysvinit config
+>> vs. systemd config for the different services?
 > 
-> Some packages, e.g. dropbear, has an extra package dropbear-systemd in
-> meta-oe, that packages the systemd unit files for dropbear. The same is
+> It varies slightly.
+> 
+> Some packages, e.g. dropbear, has an extra package dropbear-systemd in 
+> meta-oe, that packages the systemd unit files for dropbear. The same is 
 > true for dbus in oe-core.
 > 
-> Other packages, like ofono in oe-core, pacakages the systemd unit files
+> Other packages, like ofono in oe-core, pacakages the systemd unit files 
 > directly in the ofono-package.
 > 
-> In all these cases, sysvinit files are supplied directly in the main
+> In all these cases, sysvinit files are supplied directly in the main 
 > package.
 
-Hmmmm? This seems to be suitable for systemd images but not for upstart. :(
+This works for systemd since it has a working sysv compat mode and override
+mechanism. Consider the following scenarios:
 
-If a package installs sysvinit files *and* upstart jobs both will be used (at least as long as upstart supports the sysvinit runlevels for a better migration). So there's a need to install one of them only.
+a) native mode
+/lib/systemd/system/foo.service
 
-Steffen
+native systemd unit will get used
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+b) dual mode
+/etc/init.d/foo
+/lib/systemd/system/foo.service
+
+native systemd unit will get used, sysv script gets ignored.
+
+c) sysv mode
+/lib/systemd/system/foo.service
+
+sysv script will run
+
+d) masking
+/etc/init.d/foo
+/lib/systemd/system/foo.service is a symlink to /dev/null
+
+sysv script will not run
+
+So in the systemd world we can control which system gets used quite well.
+And coming from an OE world writing systemd units is easy since they are
+conceptually the same as recipes (e.g. DEPENDS -> Requires:) and don't
+require a ton of boilerplate.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFOdweBMkyGM64RGpERAuuAAKCzWKuX6zVciC6VGoFv/udJlAgEmQCfRwx9
+JDOJJKugRiyamOx+S9RJthg=
+=bEGV
+-----END PGP SIGNATURE-----
+
 
 
