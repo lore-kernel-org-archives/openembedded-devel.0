@@ -1,19 +1,18 @@
 Received: from smtp207.alice.it ([82.57.200.103])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1R5luV-0002UN-R7
+	(envelope-from <andrea.adami@gmail.com>) id 1R5luW-0002UN-I4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Sep 2011 00:01:56 +0200
+	Tue, 20 Sep 2011 00:02:19 +0200
 Received: from mizar.localdomain (87.0.30.53) by smtp207.alice.it (8.5.124.08)
-	id 4DFA189A08554723; Mon, 19 Sep 2011 23:56:39 +0200
+	id 4DFA189A08554750; Mon, 19 Sep 2011 23:56:42 +0200
 From: Andrea Adami <andrea.adami@gmail.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 19 Sep 2011 23:56:30 +0200
-Message-Id: <1316469391-15036-2-git-send-email-andrea.adami@gmail.com>
+Date: Mon, 19 Sep 2011 23:56:31 +0200
+Message-Id: <1316469391-15036-3-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.7.3.4
 In-Reply-To: <1316469391-15036-1-git-send-email-andrea.adami@gmail.com>
 References: <1316469391-15036-1-git-send-email-andrea.adami@gmail.com>
-Cc: Tom Rini <tom_rini@mentor.com>
-Subject: [meta-oe][PATCH 2/3] udev: Fix cache problem
+Subject: [meta-oe][PATCH 3/3] udev: avoid udev stopping persistent ppd connections
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,60 +26,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Sep 2011 22:01:56 -0000
+X-List-Received-Date: Mon, 19 Sep 2011 22:02:20 -0000
 
-* When /dev/shm is re-mounted we need to re-create the files that end up
-* in /etc/udev/saved.*.  In addition, udev 124 wasn't making an initial
-* saved.uname file.
+* When a pppd session is disconnected it triggers the udev to ifdown the
+* ppp link which kills pppd and inhibits a reconnection.
+*
+* Now avoid udev stopping ppp connections.
+*
+* See also:
+*  https://bugs.launchpad.net/ubuntu/+source/ifupdown/+bug/396804
+*  https://bugs.launchpad.net/ubuntu/+source/ifupdown/+bug/78043
+*  http://ubuntuforums.org/showthread.php?t=1177021
+*
+*  http://rants.atmurray.net/2007/01/pppd-persist-not-so-persist-with-udev.html
 *
 * Patch was committed in the openembedded git server with commit id
-* b6838a476a9c448cd994634688ead0815226b9fe
+* 51cee0c4458d26660622197a0c897829625b0669
 
-Signed-off-by: Tom Rini <tom_rini@mentor.com>
+Signed-off-by: Mario Schuknecht <schuknecht@dresearch-fe.de>
+Acked-by: Steffen Sledz <sledz@dresearch-fe.de>
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-oe/recipes-core/udev/udev/cache  |   13 ++++---------
- meta-oe/recipes-core/udev/udev_173.bb |    2 +-
- 2 files changed, 5 insertions(+), 10 deletions(-)
+ .../recipes-core/udev/udev-extra-rules/network.sh  |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-diff --git a/meta-oe/recipes-core/udev/udev/cache b/meta-oe/recipes-core/udev/udev/cache
-index 62673ad..681651d 100644
---- a/meta-oe/recipes-core/udev/udev/cache
-+++ b/meta-oe/recipes-core/udev/udev/cache
-@@ -9,16 +9,11 @@ echo "Caching udev devnodes"
- if [ "$DEVCACHE" != "" ]; then
- 	echo -n "Populating dev cache"
- 	(cd /; tar cf $DEVCACHE dev)
--	mv /dev/shm/uname /etc/udev/saved.uname
--	mv /dev/shm/cmdline /etc/udev/saved.cmdline
--	mv /dev/shm/devices /etc/udev/saved.devices
--	mv /dev/shm/atags /etc/udev/saved.atags
-+	[ -x /bin/uname ] && /bin/uname -mrspv > /etc/udev/saved.uname || touch /etc/udev/saved.uname
-+	[ -r /proc/cmdline ] && cat /proc/cmdline > /etc/udev/saved.cmdline || touch /etc/udev/saved.cmdline
-+	[ -r /proc/devices ] && cat /proc/devices > /etc/udev/saved.devices || touch /etc/udev/saved.devices
-+	[ -r /proc/atags ] && cat /proc/atags > /etc/udev/saved.atags || touch /etc/udev/saved.atags
- 	echo
--else
--	rm -f /dev/shm/uname
--	rm -f /dev/shm/cmdline
--	rm -f /dev/shm/devices
--	rm -f /dev/shm/atags
- fi
+diff --git a/meta-oe/recipes-core/udev/udev-extra-rules/network.sh b/meta-oe/recipes-core/udev/udev-extra-rules/network.sh
+index 182c26d..d287855 100644
+--- a/meta-oe/recipes-core/udev/udev-extra-rules/network.sh
++++ b/meta-oe/recipes-core/udev/udev-extra-rules/network.sh
+@@ -9,6 +9,8 @@ test -x /sbin/cardctl && exit 0
+ # We get two "add" events for hostap cards due to wifi0
+ echo "$INTERFACE" | grep -q wifi && exit 0
  
- exit 0
-diff --git a/meta-oe/recipes-core/udev/udev_173.bb b/meta-oe/recipes-core/udev/udev_173.bb
-index 8ace629..d220395 100644
---- a/meta-oe/recipes-core/udev/udev_173.bb
-+++ b/meta-oe/recipes-core/udev/udev_173.bb
-@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
- # Needed for udev-extras
- DEPENDS = "gperf-native usbutils acl glib-2.0"
++# Avoid udev stopping persistent ppp connections
++echo "$INTERFACE" | grep -q ppp && exit 0
  
--PR = "r1"
-+PR = "r2"
- 
- # version specific SRC_URI
- SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
+ # Check if /etc/init.d/network has been run yet to see if we are 
+ # called by starting /etc/rcS.d/S03udev and not by hotplugging a device
 -- 
 1.7.3.4
 
