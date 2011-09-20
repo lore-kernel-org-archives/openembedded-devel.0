@@ -1,34 +1,24 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1R61fC-0008Qo-EG for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Sep 2011 16:51:10 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1R61a6-0005dP-Mz for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Sep 2011 16:45:54 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Sep 2011 16:45:54 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Sep 2011 16:45:54 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1R61fh-0008WG-CB for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Sep 2011 16:51:41 +0200
+Received: from f053044020.adsl.alicedsl.de ([78.53.44.20]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1R61af-0004Hg-Cb for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Sep 2011 14:46:29 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 20 Sep 2011 16:42:50 +0200
-Message-ID: <j5a8pa$49g$2@dough.gmane.org>
-References: <1316471428-12587-1-git-send-email-schnitzeltony@gmx.de>
+Date: Tue, 20 Sep 2011 16:46:24 +0200
+In-Reply-To: <4E78A4BA.1090807@blunderer.org>
+References: <1316012411-28874-1-git-send-email-tristan.lelong@blunderer.org>
+	<1316341630.7061.9.camel@mattotaupa> <4E78A4BA.1090807@blunderer.org>
+X-Mailer: Evolution 3.0.3- 
+Message-ID: <1316529985.3891.14.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
-In-Reply-To: <1316471428-12587-1-git-send-email-schnitzeltony@gmx.de>
-X-Enigmail-Version: 1.3.1
-Subject: Re: [meta-oe] gvfs: Fix paths in subpacks gvfsd-ftp / gvfsd-sftp / gvfsd-trash
+Subject: Re: [PATCH v2] libroxml: Add version 2.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,25 +32,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Sep 2011 14:51:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 20 Sep 2011 14:51:41 -0000
+X-Groupsio-MsgNum: 34387
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-xGmef080zKOq+B9jwPHr"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-xGmef080zKOq+B9jwPHr
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Op 20-09-11 00:30, Andreas Müller schreef:
-> 
-> Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+Dear Tristan,
 
-Thanks, doing a test build and will push it after that completes.
+
+Am Dienstag, den 20.09.2011, 16:35 +0200 schrieb Tristan Lelong:
+
+> I corrected the other problems with my recipe and I'm about to submit it
+> again.
+
+great! Thank you for following up!
+
+> There is only one point I don't understand:
+>=20
+> "Please add how you tested this package with."
+>=20
+> What do you mean by tested? you want the openembedded distro, toolchain,
+> version (git hash)? the full local.conf? the software internal tests?
+> anything else?
+
+The distribution and the machine should be fine. Additionally a note
+that you run tested this by using the tests is enough.
+
+[=E2=80=A6]
+
+
+Thanks,
+
+Paul
+
+
+PS: If you top post you do not need to cite anything. Otherwise normally
+interleaved style is used among free software projects [1].
+
+
+[1] http://en.opensuse.org/openSUSE:Mailing_list_netiquette
+
+--=-xGmef080zKOq+B9jwPHr
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iD8DBQFOeKZqMkyGM64RGpERAlKHAKCMP8bx5Ju17/qBaFBfayvF7V3ztACgu3M9
-WnXNcH0dXvgIC+QaK5l/Z00=
-=rG4M
+iEYEABECAAYFAk54p0AACgkQPX1aK2wOHVhzNACgjF4qNHArR7+XikpqjVw7let7
+3UIAn2oIeaHU0a1wAiORw48f18D8Ad9c
+=gXlK
 -----END PGP SIGNATURE-----
 
-
-
+--=-xGmef080zKOq+B9jwPHr--
