@@ -1,26 +1,34 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1R5mfI-00042e-GD
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Sep 2011 00:50:17 +0200
-Received: (qmail invoked by alias); 19 Sep 2011 22:44:59 -0000
-Received: from p5B0A3FB5.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.63.181]
-	by mail.gmx.net (mp061) with SMTP; 20 Sep 2011 00:44:59 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/KBvNgBqvKOsq3rC0cK7LZUENZF8oIlcNAuVfYU1
-	fJLbpY0gMp7Bf9
-From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1R5u3T-0005K9-8B for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Sep 2011 08:43:43 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1R5tyO-0000ZO-48 for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Sep 2011 08:38:28 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Sep 2011 08:38:28 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Sep 2011 08:38:28 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Sep 2011 00:48:35 +0200
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-95.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-References: <E1R5ctr-0006Nt-SM@garnet.openembedded.org>
-In-Reply-To: <E1R5ctr-0006Nt-SM@garnet.openembedded.org>
-MIME-Version: 1.0
-Message-Id: <201109200048.35316.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: [oe-commits] Koen Kooi : rfkill 0.4: import from OE .dev
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 20 Sep 2011 08:38:09 +0200
+Message-ID: <j59cch$2vn$1@dough.gmane.org>
+References: <1316469391-15036-1-git-send-email-andrea.adami@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
+In-Reply-To: <1316469391-15036-1-git-send-email-andrea.adami@gmail.com>
+X-Enigmail-Version: 1.3.1
+Subject: Re: [meta-oe][PATCH 1/3] udev: make the dev cache work with /dev/shm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,19 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Sep 2011 22:50:18 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 20 Sep 2011 06:43:43 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Monday, September 19, 2011 02:24:39 PM git version control wrote:
-Is that still required?
-> +do_compile() {
-> +        oe_runmake
-> +}
-> +do_install() {
-> +        oe_runmake DESTDIR=${D} install
-> +}
-Andreas
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Op 19-09-11 23:56, Andrea Adami schreef:
+> * At this point in the boot process we may not have a writable /tmp *
+> directory.  We will have a writable /dev/shm and the data we need * is
+> small enough that we use this directory. * * Patch was committed in the
+> openembedded git server with commit id *
+> ca688dd2de58dbec865ac7e70fab4d2c373ad822
+> 
+> Signed-off-by: Tom Rini <tom_rini@mentor.com> Signed-off-by: Andrea Adami
+> <andrea.adami@gmail.com>
+
+The caching isn't needed anymore, so I'll take a patch that removes it
+completely :)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFOeDTRMkyGM64RGpERAo1VAKC89mncrzEj0GhHFbGnxxC6wbEZMwCcDKWJ
+V5hYsvrURq1Ox4T681yVH48=
+=Dg5h
+-----END PGP SIGNATURE-----
+
 
 
