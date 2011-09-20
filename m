@@ -1,25 +1,25 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail-qw0-f43.google.com ([209.85.216.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1R61gI-0000BG-8t
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Sep 2011 16:52:18 +0200
-Received: from elite.brightsigndigital.co.uk ([81.142.160.137]
-	helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1R61bD-0007i2-4a
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Sep 2011 16:47:03 +0200
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Sep 2011 15:47:02 +0100
-In-Reply-To: <j5a8ob$49g$1@dough.gmane.org>
-References: <1316384457-23718-1-git-send-email-dbaryshkov@gmail.com>
-	<1316384457-23718-2-git-send-email-dbaryshkov@gmail.com>
-	<1316529245.3510.85.camel@phil-desktop> <j5a8ob$49g$1@dough.gmane.org>
-X-Mailer: Evolution 3.0.2- 
-Message-ID: <1316530023.3510.86.camel@phil-desktop>
-Mime-Version: 1.0
-Subject: Re: [meta-micro 2/2] sane-feed.inc: rework FEED_ARCH settings
+	(envelope-from <dbaryshkov@gmail.com>)
+	id 1R65hG-0007n9-Qo; Tue, 20 Sep 2011 21:09:34 +0200
+Received: by qwb7 with SMTP id 7so1364218qwb.2
+	for <multiple recipients>; Tue, 20 Sep 2011 12:04:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:cc:content-type;
+	bh=FHuYGLbeL8OWIkMK/pTq1s94odiN3uZncUPfSsO7vnU=;
+	b=wu/yVvpeeZwqUEnT3Aa+HuXyw7JpmAKuk2PNloyJEqWZI2bm5jeU++cbEzXA7/lSl6
+	yHbJk97VddB4q+dlAFvuCNMklE1tQvfO8Jtq63bq/Ac8XaVWB3LttjWweERU8NBW/ag7
+	2VHIvORAx5Oh3ihF03psb2TtbOblZt7wT26xI=
+MIME-Version: 1.0
+Received: by 10.52.175.229 with SMTP id cd5mr1132079vdc.363.1316545456507;
+	Tue, 20 Sep 2011 12:04:16 -0700 (PDT)
+Received: by 10.52.186.166 with HTTP; Tue, 20 Sep 2011 12:04:16 -0700 (PDT)
+Date: Tue, 20 Sep 2011 23:04:16 +0400
+Message-ID: <CALT56yOyp2VYEziGiZj4PLjYHFhTkxisKwWnP7_Uy69Cc1ufYw@mail.gmail.com>
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+To: openembedded-core <openembedded-core@lists.openembedded.org>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [RFC] policy proposal: INC_PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,31 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Sep 2011 14:52:18 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 20 Sep 2011 19:09:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, 2011-09-20 at 16:42 +0200, Koen Kooi wrote:
-> Op 20-09-11 16:34, Phil Blundell schreef:
-> > On Mon, 2011-09-19 at 02:20 +0400, Dmitry Eremin-Solenikov wrote:
-> >> Currently meta-micro's sane-feed.inc file is full of per-machine 
-> >> substitutions for FEED_ARCH. At best this is redundant (armv5te 
-> >> machines). Even worse, some settings are plain wrong (arm-oabi boxes 
-> >> come to mind). So instead of big per-machien table, use TUNE_PKGARCH
-> >> as it's done in meta-angstrom.
-> > 
-> > It's not actually obvious to me that this FEED_ARCH is serving any useful
-> > purpose here.  I'm inclined to just delete sane-feed.inc altogether
-> > unless you know a reason why it is useful to keep it.
-> 
-> sane-feed.inc was create by people copy/pasting from angstrom.conf without
-> knowing what they were doing. AFAIK, it is just dead weight nowadays,
-> especially in the oe-core universe.
+Hello, colleagues,
 
-Yeah, that's the impression I got too.  I think we should delete it.
+While debugging some stuff in oe-core & company I've noticed that
+lot's of packages
+either don't use INC_PR, or misuse it (e.g. .inc has INC_PR, but then
+.bb just defines PR = "rX").
 
-p.
+From my previous experience with oe-dev, I found INC_PR very usefull
+and error-prone feature.
+What about making usage of INC_PR a policy decision, demanding that
+all new packages should use INC_PR for their recipes, if .inc files
+are used. And then define a grace period
+during which all remaining packages should be converted to INC_PR (3
+months? Next release? I really don't know).
 
+I'm sorry if this issue was already discussed somewhere and I'm
+duplicating the efforts
+or proposing already discarded idea.
 
+-- 
+With best wishes
+Dmitry
 
 
