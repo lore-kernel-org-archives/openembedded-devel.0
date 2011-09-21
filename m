@@ -1,6 +1,6 @@
 Received: from mailout-de.gmx.net ([213.165.64.23])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1R6G47-0002hn-0O
+	(envelope-from <schnitzeltony@gmx.de>) id 1R6G47-0002hu-7S
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 21 Sep 2011 08:13:51 +0200
 Received: (qmail invoked by alias); 21 Sep 2011 06:08:32 -0000
@@ -12,14 +12,14 @@ X-Provags-ID: V01U2FsdGVkX19VRqQsv7ZVjgoSJhh/JG1+Pb/wx5avzWzNOzjLhu
 	IC3UIUBGIm4wzY
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Sep 2011 08:11:55 +0200
-Message-Id: <1316585520-18605-7-git-send-email-schnitzeltony@gmx.de>
+Date: Wed, 21 Sep 2011 08:11:54 +0200
+Message-Id: <1316585520-18605-6-git-send-email-schnitzeltony@gmx.de>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1316585520-18605-1-git-send-email-schnitzeltony@gmx.de>
 References: <1316585520-18605-1-git-send-email-schnitzeltony@gmx.de>
 MIME-Version: 1.0
 X-Y-GMX-Trusted: 0
-Subject: [meta-xfce 06/11] garcon: Bump to version 0.1.9
+Subject: [meta-xfce 05/11] xfce4-session: Bump to version 4.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,40 +37,62 @@ X-List-Received-Date: Wed, 21 Sep 2011 06:13:51 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Added libxfce4util to DEPENDS see [1]
+relative-symlinks-docs.patch is now mainline [1]
 
-[1] http://mail.xfce.org/pipermail/xfce/2011-September/029145.html
+[1] http://git.xfce.org/xfce/xfce4-session/commit/?id=00159a379b8b192615137e59b66d5317493f57f3
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
 ---
- .../garcon/{garcon_0.1.8.bb => garcon_0.1.9.bb}    |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-xfce/recipes-xfce/garcon/{garcon_0.1.8.bb => garcon_0.1.9.bb} (52%)
+ .../xfce4-session/relative-symlinks-docs.patch     |   11 -----------
+ ...ce4-session_4.8.1.bb => xfce4-session_4.8.2.bb} |    9 ++-------
+ 2 files changed, 2 insertions(+), 18 deletions(-)
+ delete mode 100644 meta-xfce/recipes-xfce/xfce4-session/xfce4-session/relative-symlinks-docs.patch
+ rename meta-xfce/recipes-xfce/xfce4-session/{xfce4-session_4.8.1.bb => xfce4-session_4.8.2.bb} (77%)
 
-diff --git a/meta-xfce/recipes-xfce/garcon/garcon_0.1.8.bb b/meta-xfce/recipes-xfce/garcon/garcon_0.1.9.bb
-similarity index 52%
-rename from meta-xfce/recipes-xfce/garcon/garcon_0.1.8.bb
-rename to meta-xfce/recipes-xfce/garcon/garcon_0.1.9.bb
-index 344f2d4..e99cb4d 100644
---- a/meta-xfce/recipes-xfce/garcon/garcon_0.1.8.bb
-+++ b/meta-xfce/recipes-xfce/garcon/garcon_0.1.9.bb
-@@ -2,7 +2,7 @@ DESCRIPTION="Xfce Menu Library"
- SECTION = "x11/libs"
- LICENSE = "LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=04a01abcbdabffae1ca26335a293276b"
--DEPENDS = "glib-2.0 xfce4-dev-tools-native"
-+DEPENDS = "glib-2.0 xfce4-dev-tools-native libxfce4util"
+diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session/relative-symlinks-docs.patch b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session/relative-symlinks-docs.patch
+deleted file mode 100644
+index fb78c57..0000000
+--- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session/relative-symlinks-docs.patch
++++ /dev/null
+@@ -1,11 +0,0 @@
+---- a/doc/manual/Makefile.am	2010-09-08 18:37:19.000000000 +0200
+-+++ b/doc/manual/Makefile.am	2011-07-17 23:17:28.602626999 +0200
+-@@ -20,7 +20,7 @@
+- 			done; \
+- 			if test x"$$lang" != x"C" -a ! -d $(srcdir)/images/$$lang; then \
+- 				echo "--- Creating symlink to C images for $$lang"; \
+--				ln -sf $(docdir)/html/C/images $(DESTDIR)$(docdir)/html/$$lang/images; \
+-+				ln -sf ../C/images $(DESTDIR)$(docdir)/html/$$lang/images; \
+- 			fi \
+- 		fi \
+- 	done;
+diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.1.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.2.bb
+similarity index 77%
+rename from meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.1.bb
+rename to meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.2.bb
+index bedd35f..65b1add 100644
+--- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.1.bb
++++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.2.bb
+@@ -9,11 +9,6 @@ PR = "r0"
  
- PR = "r0"
+ inherit xfce
  
-@@ -10,5 +10,5 @@ inherit xfce
+-# SRC_URI must follow inherited one
+-SRC_URI += " \
+-    file://relative-symlinks-docs.patch \
+-"
+-
+ # protect from frightening message that xfce might not work correctly
+ pkg_postinst_${PN} () {
+     echo 127.0.0.1    ${MACHINE} >> /etc/hosts
+@@ -28,5 +23,5 @@ FILES_${PN}-dbg += "${libdir}/xfce4/*/*/.debug"
  
- FILES_${PN} += " ${datadir}/desktop-directories"
+ FILES_${PN}-dev += "${libdir}/xfce4/*/*/*.*a"
  
--SRC_URI[md5sum] = "18fbf523ed2865dfaccdfb40b4b20b05"
--SRC_URI[sha256sum] = "955a05e72ebbadc8207bb7b2c7349e71830dbdd596dbba3ea3665f0ecfb9cf63"
-+SRC_URI[md5sum] = "a3ca1e54ad731c98f688900f6398fc20"
-+SRC_URI[sha256sum] = "485e23c8ec1af0d3af423aa244e05467dd2f96afbb66efc70ca7689222cf31d5"
+-SRC_URI[md5sum] = "478080ff666fdd36786a243829663efd"
+-SRC_URI[sha256sum] = "1df52a77d87ed4d27b4f40a2f03a0b6334422d64bdc4e31b9aac22e25e68b829"
++SRC_URI[md5sum] = "48780cbcf784ab64debc9312f17765f2"
++SRC_URI[sha256sum] = "31bca2a559e05a8a859f150394a901517e5842414ef171a85c5da234e344c0d0"
 -- 
 1.7.4.4
 
