@@ -1,25 +1,34 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1R6G4B-0002ig-9z
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Sep 2011 08:13:55 +0200
-Received: (qmail invoked by alias); 21 Sep 2011 06:08:36 -0000
-Received: from p4FDF1C6D.dip.t-dialin.net (EHLO localhost.localdomain)
-	[79.223.28.109]
-	by mail.gmx.net (mp011) with SMTP; 21 Sep 2011 08:08:36 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19MbD4ek6lMkMdoAfFdBy2lu89/nKQyJkS/rTYWr3
-	aCSY1VC/256HAk
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1R6Gt3-0004ob-Qr for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Sep 2011 09:06:29 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1R6Gnx-0006bL-Mw for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Sep 2011 09:01:13 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Sep 2011 09:01:13 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Sep 2011 09:01:13 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Sep 2011 08:12:00 +0200
-Message-Id: <1316585520-18605-12-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1316585520-18605-1-git-send-email-schnitzeltony@gmx.de>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 21 Sep 2011 09:01:00 +0200
+Message-ID: <j5c23c$k7e$1@dough.gmane.org>
 References: <1316585520-18605-1-git-send-email-schnitzeltony@gmx.de>
-MIME-Version: 1.0
-X-Y-GMX-Trusted: 0
-Subject: [meta-xfce 11/11] task-xfce-base: add xfce4-notifyd
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:6.0.1) Gecko/20110830 Thunderbird/6.0.1
+In-Reply-To: <1316585520-18605-1-git-send-email-schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.3.1
+Subject: Re: [meta-xfce 00/11] various updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,31 +42,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Sep 2011 06:13:55 -0000
+X-List-Received-Date: Wed, 21 Sep 2011 07:06:29 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
----
- meta-xfce/recipes-xfce/tasks/task-xfce-base.bb |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+Op 21-09-11 08:11, Andreas Müller schreef:
+> * xfce4-dev-tools mainly contain autoconf extensions -> native * bump to
+> latest mainline versions * xfce4-notifyd added
+> 
+> The recipes were build tested and run tested on overo.
+> 
+> Andreas Müller (11): xfce4-dev-tools: add native support garcon: DEPENDS
+> xfce4-dev-tools -> xfce4-dev-tools-native libxfce4util: DEPENDS
+> xfce4-dev-tools -> xfce4-dev-tools-native xfce-utils: add openssh-misc to
+> RDEPENDS_${PN} xfce4-session: Bump to version 4.8.2 garcon: Bump to
+> version 0.1.9 libxfce4util: Bump to version 4.8.2 gtk-xfce-engine: Bump
+> to version 2.9.0 & minor cleanup xfdesktop: Bump to version 4.8.3 &
+> recreate patch xfce4-notifyd: Add initial recipe with version 0.2.2 
+> task-xfce-base: add xfce4-notifyd
 
-diff --git a/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb b/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
-index 7589f6d..782f30c 100644
---- a/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
-+++ b/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
-@@ -29,6 +29,8 @@ RDEPENDS_${PN} = " \
-     xfce4-panel-plugin-tasklist \
-     xfce4-panel-plugin-windowmenu \   
-     xfce4-settings \
-+    \
-+    xfce4-notifyd \
-     xfce-terminal \
-     thunar \
-     thunar-volman \
--- 
-1.7.4.4
+Do you have a git repo were there can be pulled from?
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFOeYusMkyGM64RGpERAsJoAJ9rneOoFcu2WwjWRWlBnC3hBmPVVwCgj7j9
+YTeGg0rmZwI578nPmy2bSIM=
+=+x1d
+-----END PGP SIGNATURE-----
 
 
 
