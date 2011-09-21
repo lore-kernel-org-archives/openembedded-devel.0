@@ -1,28 +1,37 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1R6OR4-0002MG-Ai
+	(envelope-from <blunderer@gmail.com>) id 1R6OVF-0002Uj-68
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Sep 2011 17:10:06 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 10B891660321; Wed, 21 Sep 2011 09:04:46 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 4A2BF1660209;
-	Wed, 21 Sep 2011 09:04:44 -0600 (MDT)
-Message-ID: <4E79FD0C.4010502@mlbassoc.com>
-Date: Wed, 21 Sep 2011 09:04:44 -0600
-From: Gary Thomas <gary@mlbassoc.com>
+	Wed, 21 Sep 2011 17:14:25 +0200
+Received: by wyh5 with SMTP id 5so2314637wyh.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Sep 2011 08:09:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:message-id:date:from:reply-to:user-agent:mime-version:to
+	:subject:references:in-reply-to:x-enigmail-version:content-type
+	:content-transfer-encoding;
+	bh=ua3IGaCdPhcXL2/ZSe2POeg98ECAxvc8QnteWdRqUUA=;
+	b=sF4E7iKmjiVTDi9AWy6eRPc+gR1gOox5UuN+4vtpbzONCGtz/RDVk1M2PR4j+2KjC2
+	PHpvLC+M2GljV5KlnEXocNOVDpbsJwA/PxByif7mA8xBm79kI4dSZnzMSsOYlyNuAe0u
+	JGK/NrtxlU0AJZiUoKWaEvxfnl2FLjDIu+1Ew=
+Received: by 10.227.143.72 with SMTP id t8mr831382wbu.95.1316617746628;
+	Wed, 21 Sep 2011 08:09:06 -0700 (PDT)
+Received: from [10.1.20.51] ([92.103.82.100])
+	by mx.google.com with ESMTPS id k26sm4230573wbo.16.2011.09.21.08.09.04
+	(version=SSLv3 cipher=OTHER); Wed, 21 Sep 2011 08:09:05 -0700 (PDT)
+Sender: tristan <blunderer@gmail.com>
+Message-ID: <4E79FE10.4090506@blunderer.org>
+Date: Wed, 21 Sep 2011 17:09:04 +0200
+From: Tristan Lelong <tristan.lelong@blunderer.org>
 User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:6.0.2) Gecko/20110906 Thunderbird/6.0.2
+	rv:6.0.2) Gecko/20110902 Thunderbird/6.0.2
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1316615869.54346.YahooMailNeo@web121504.mail.ne1.yahoo.com>
-In-Reply-To: <1316615869.54346.YahooMailNeo@web121504.mail.ne1.yahoo.com>
-Subject: Re: ti_cgt_c6000_6.1.17_setup_linux_x86.bin error while installing ti-codec-engine
+References: <1316608829-30502-1-git-send-email-tristan.lelong@blunderer.org>
+	<1316616039.4045.22.camel@mattotaupa>
+In-Reply-To: <1316616039.4045.22.camel@mattotaupa>
+X-Enigmail-Version: 1.3.2
+Subject: Re: [PATCH v3] libroxml: Add version 2.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,31 +45,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Sep 2011 15:10:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 21 Sep 2011 15:14:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
 
-On 2011-09-21 08:37, ibrahim demir wrote:
-> Dear developers,
->
->
-> i have a problem at installing ti codec engine: http://pastebin.com/uU7etDYs . i downloaded ti_cgt_c6000_6.1.17_setup_linux_x86.bin and generated it's md5.
->
-> in recipes/ti/...6.1.17.bb says md5 is : 41ee41cc74800b06705804f7ef901447. But when i calculate its md5, i get this: 5ee5c8e573ab0a1ba1249511d4a06c27. I download again and again but the result of md5 was the same. Then i changed bb file to 5ee5c8e573ab0a1ba1249511d4a06c27. and run bitbake ti-codec-engine, but the result was: http://pastebin.com/1SCrtWvQ
->
-> so in this case what is my problem, what should i do?
 
-Your download is damaged.  How did you download it?  Make sure you download
-files in binary mode only.  Your file should match this:
-   $ md5sum ti_cgt_c6000_6.1.17_setup_linux_x86.bin
-   41ee41cc74800b06705804f7ef901447  ti_cgt_c6000_6.1.17_setup_linux_x86.bin
-   $ ls -l ti_cgt_c6000_6.1.17_setup_linux_x86.bin
-   -rw-rw-r-- 1 gthomas gthomas 77374699 Mar  3  2011 ti_cgt_c6000_6.1.17_setup_linux_x86.bin
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+
+Hi,
+
+I will correct those last problems, test it again, and I'll resbumit the
+patch.
+
+Le 21/09/2011 16:40, Paul Menzel a écrit :
+> Dear Tristan,
+>
+>
+> thank you for your patience.
+it should be me thanking you for your patience
+
+
+- -- 
+618FE3EF
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAk55/g8ACgkQFj9oxGGP4+/qrgCguZ6EfFmpZbXTe1QcANI90iro
+w2cAnRB31yw+oUFG+uxp3BUxgCz+Q1Wp
+=veWg
+-----END PGP SIGNATURE-----
+
 
 
