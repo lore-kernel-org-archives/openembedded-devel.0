@@ -1,31 +1,25 @@
-Received: from snvl-smtp1.trimble.com ([155.63.64.31])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Bernard_Mentink@trimble.com>) id 1R6B8O-000828-FR
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1R6G44-0002hY-2N
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Sep 2011 02:57:56 +0200
-Received: (qmail 15531 invoked by uid 502); 20 Sep 2011 17:52:36 -0700
-Received: from 10.3.0.166 by snvl-smtp1.trimble.com (envelope-from
-	<Bernard_Mentink@trimble.com>, uid 487) with qmail-scanner-2.08 
-	(clamdscan: 0.97.2/13641. avast: v3.2.1/110919-1. sophie:
-	3.06/3.23.2/4.69. spamassassin: 3.3.1. Clear:RC:1(10.3.0.166):. 
-	Processed in 0.016475 secs); 21 Sep 2011 00:52:36 -0000
-Received: from unknown (HELO nzc-ap-xch-02.ap.trimblecorp.net) (10.3.0.166)
-	by snvl-smtp1.trimble.com with SMTP; 20 Sep 2011 17:52:36 -0700
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Wed, 21 Sep 2011 08:13:48 +0200
+Received: (qmail invoked by alias); 21 Sep 2011 06:08:29 -0000
+Received: from p4FDF1C6D.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.223.28.109]
+	by mail.gmx.net (mp011) with SMTP; 21 Sep 2011 08:08:29 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/cpHRXoIDcDK+gpUc0b6R8ZVYBibMcmsHZi1BHzy
+	h3bDzEe9pWhZEI
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 21 Sep 2011 08:11:50 +0200
+Message-Id: <1316585520-18605-2-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1316585520-18605-1-git-send-email-schnitzeltony@gmx.de>
+References: <1316585520-18605-1-git-send-email-schnitzeltony@gmx.de>
 MIME-Version: 1.0
-Date: Wed, 21 Sep 2011 12:52:34 +1200
-Message-ID: <F7C0AA5DD1508F4789E10B6CC9BB75DB04D9B116@nzc-ap-xch-02.ap.trimblecorp.net>
-In-Reply-To: <1316530023.3510.86.camel@phil-desktop>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: Admin: Unsubscribe me please
-Thread-Index: Acx3pC/nY2T7hNuAS/S0iGF/wp7AiwAVE9cA
-References: <1316384457-23718-1-git-send-email-dbaryshkov@gmail.com><1316384457-23718-2-git-send-email-dbaryshkov@gmail.com><1316529245.3510.85.camel@phil-desktop>
-	<j5a8ob$49g$1@dough.gmane.org>
-	<1316530023.3510.86.camel@phil-desktop>
-From: "Bernard Mentink" <Bernard_Mentink@trimble.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Admin: Unsubscribe me please
+X-Y-GMX-Trusted: 0
+Subject: [meta-xfce 01/11] xfce4-dev-tools: add native support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,19 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Sep 2011 00:57:56 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 21 Sep 2011 06:13:48 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-=20
 
-Can someone please un-subscribe me from the list, my attempts at doing
-so from the unsubscribe page have met with failure ..
-(I never get the confirmation email ..)
+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+---
+ .../xfce4-dev-tools/xfce4-dev-tools_4.8.0.bb       |    7 ++++++-
+ 1 files changed, 6 insertions(+), 1 deletions(-)
 
-Thanks,
-Bernie
+diff --git a/meta-xfce/recipes-xfce/xfce4-dev-tools/xfce4-dev-tools_4.8.0.bb b/meta-xfce/recipes-xfce/xfce4-dev-tools/xfce4-dev-tools_4.8.0.bb
+index 3df67ee..3985a0e 100644
+--- a/meta-xfce/recipes-xfce/xfce4-dev-tools/xfce4-dev-tools_4.8.0.bb
++++ b/meta-xfce/recipes-xfce/xfce4-dev-tools/xfce4-dev-tools_4.8.0.bb
+@@ -3,10 +3,15 @@ SECTION = "x11/libs"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
+ 
+-PR = "r0"
++PR = "r1"
++
++BBCLASSEXTEND = "native"
+ 
+ inherit xfce
+ 
++# inherited SRC_URI does not work for native
++SRC_URI = "http://archive.xfce.org/src/xfce/xfce4-dev-tools/${@'${PV}'[0:3]}/xfce4-dev-tools-${PV}.tar.bz2"
++
+ do_install_append() {
+        install -d ${D}${datadir}/aclocal
+        install -m 644 m4macros/*.m4 ${D}${datadir}/aclocal/
+-- 
+1.7.4.4
+
 
 
