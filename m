@@ -1,31 +1,31 @@
-Received: from mail-ew0-f51.google.com ([209.85.215.51])
+Received: from www.dynamicdevices.co.uk ([89.200.136.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tasskjapp@gmail.com>) id 1R6JkS-0001CF-1h
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1R6LuP-00036l-CP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Sep 2011 12:09:48 +0200
-Received: by ewy5 with SMTP id 5so1200770ewy.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Sep 2011 03:04:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=+0YeR6plRfmFCx6Q2tYXovFqWL2gJyzubjzgPELwc4g=;
-	b=mNZCLrN7pW0+BWhKHV65vEOZ5OiGuhr0Qf9jUIJjG5iUgwAQ4yVmFQpOtVw+mGX5s5
-	O6yqMG3MHAQ++78+dqQFPHCsp2ovLaDQ6cSNvvrug1IL7ugQBNJp261iKnsX8h5lTGge
-	9SbgW03v4LTUSRzjW2jffBaZ1uiMXThogy6TQ=
-Received: by 10.14.16.168 with SMTP id h40mr196374eeh.92.1316599469761;
-	Wed, 21 Sep 2011 03:04:29 -0700 (PDT)
-Received: from localhost.localdomain (147.84-49-231.nextgentel.com.
-	[84.49.231.147])
-	by mx.google.com with ESMTPS id d59sm13085254eea.3.2011.09.21.03.04.28
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 21 Sep 2011 03:04:29 -0700 (PDT)
-From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+	Wed, 21 Sep 2011 14:28:13 +0200
+Received: from cpc9-live22-2-0-cust200.know.cable.virginmedia.com
+	([82.42.173.201] helo=[192.168.1.102])
+	by www.dynamicdevices.co.uk with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1R6LDK-0000x5-5S
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Sep 2011 11:43:42 +0000
+Message-ID: <4E79CDE2.1040501@dynamicdevices.co.uk>
+Date: Wed, 21 Sep 2011 12:43:30 +0100
+From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
+User-Agent: Mozilla/5.0 (Windows NT 6.1;
+	rv:6.0.2) Gecko/20110902 Thunderbird/6.0.2
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Sep 2011 12:04:18 +0200
-Message-Id: <1316599458-7433-1-git-send-email-tasskjapp@gmail.com>
-X-Mailer: git-send-email 1.7.7.rc0.72.g4b5ea
-Cc: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-Subject: [PATCH] Make sure grep runs without colorized output
+References: <1316367951-10858-1-git-send-email-jdk@ti.com>
+	<8C8866BE-2C89-4CDA-9FB1-94D0920ABCD0@dominion.thruhere.net>
+	<CA+T6QPnbhrWRq_JELkfGSXn_RdqzpfKL7TZ7W4QKK++GPev+Yg@mail.gmail.com>
+	<CAD=GYpYjWGaHWk0bsADxS6JE7TRbFCQU_Tixec3fSRLStdxtJg@mail.gmail.com>
+	<D66610DE-8119-4D54-BCEF-70D7A85122BF@beagleboard.org>
+	<CAD=GYpZo30VNWEQu7uD2JvegNv9u-NRrDn0fBEM-fKB=ZX9YiA@mail.gmail.com>
+	<CA+T6QPnT_5jKcghy3kT=8K0qbwq2fEtG51gJjnxq4GoVkkLAiw@mail.gmail.com>
+In-Reply-To: <CA+T6QPnT_5jKcghy3kT=8K0qbwq2fEtG51gJjnxq4GoVkkLAiw@mail.gmail.com>
+Subject: Python 2.7.1 support in OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,28 +39,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Sep 2011 10:09:48 -0000
+X-List-Received-Date: Wed, 21 Sep 2011 12:28:13 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-My .bashrc contained "export GREP_OPTIONS='--color=always'", and that caused the path in my pseudodone file to  be prefixed by "^[[m^[[K". Override by calling grep with --color=never.
----
- scripts/bitbake |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Hi all,
 
-diff --git a/scripts/bitbake b/scripts/bitbake
-index 587428c..9330d71 100755
---- a/scripts/bitbake
-+++ b/scripts/bitbake
-@@ -65,7 +65,7 @@ if [ $buildpseudo = "1" ]; then
-     if [ "$ret" != "0" ]; then
-         exit 1
-     fi
--    PSEUDOBINDIR=`bitbake -e | grep STAGING_BINDIR_NATIVE=\" | cut -d '=' -f2 | cut -d '"' -f2`
-+    PSEUDOBINDIR=`bitbake -e | grep --color=never STAGING_BINDIR_NATIVE=\" | cut -d '=' -f2 | cut -d '"' -f2`
-     ret=$?
-     if [ "$ret" != "0" ]; then
-         exit 1
--- 
-1.7.7.rc0.72.g4b5ea
+I've been trying to build the 2.7.1 Python recipe. The recipe
+seems to build and deploy successfully but when I run python
+on the target for test I see
+
+ImportError: No module named _weakrefset
+
+Given it is non-default, I'm wondering if the 2.7.1 recipe
+is not currently usable in which case I'll revert back to
+2.6.6?
+
+The two changes I made to python/python.inc were:
+
+DEFAULT_PREFERENCE = "-27"
+PYTHON_MAJMIN = "2.7"
+
+Thanks,
+
+Alex
+
+Dynamic Devices Ltd
+http://www.dynamicdevices.co.uk
 
 
 
