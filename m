@@ -1,25 +1,25 @@
 Received: from mailout-de.gmx.net ([213.165.64.23])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1R6ktF-0007IN-6z
+	(envelope-from <schnitzeltony@gmx.de>) id 1R6ktC-0007Ho-5C
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Sep 2011 17:08:41 +0200
-Received: (qmail invoked by alias); 22 Sep 2011 15:03:21 -0000
+	Thu, 22 Sep 2011 17:08:40 +0200
+Received: (qmail invoked by alias); 22 Sep 2011 15:03:18 -0000
 Received: from p5B0A1554.dip.t-dialin.net (EHLO localhost.localdomain)
 	[91.10.21.84]
-	by mail.gmx.net (mp069) with SMTP; 22 Sep 2011 17:03:21 +0200
+	by mail.gmx.net (mp069) with SMTP; 22 Sep 2011 17:03:18 +0200
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX195P75WLFJ5Y5V7ZAe+vGhPkRzz/qa2Jim/ycajjC
-	TLm078vBniRWUb
+X-Provags-ID: V01U2FsdGVkX18Ano4BDRwA4rQeGVCJaYuclQ0ike9u4ZbcY2lrfg
+	q2P7LBboFVwz2e
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Sep 2011 17:06:41 +0200
-Message-Id: <1316704004-19647-11-git-send-email-schnitzeltony@gmx.de>
+Date: Thu, 22 Sep 2011 17:06:38 +0200
+Message-Id: <1316704004-19647-8-git-send-email-schnitzeltony@gmx.de>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1316704004-19647-1-git-send-email-schnitzeltony@gmx.de>
 References: <1316704004-19647-1-git-send-email-schnitzeltony@gmx.de>
 MIME-Version: 1.0
 X-Y-GMX-Trusted: 0
-Subject: [meta-xfce V2 10/13] xfce4-notifyd: Add initial recipe with version 0.2.2
+Subject: [meta-xfce V2 07/13] libxfce4util: Bump to version 4.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,37 +40,25 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
 ---
- .../xfce4-notifyd/xfce4-notifyd_0.2.2.bb           |   21 ++++++++++++++++++++
- 1 files changed, 21 insertions(+), 0 deletions(-)
- create mode 100644 meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.2.2.bb
+ ...libxfce4util_4.8.1.bb => libxfce4util_4.8.2.bb} |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-xfce/libxfce4util/{libxfce4util_4.8.1.bb => libxfce4util_4.8.2.bb} (67%)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.2.2.bb b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.2.2.bb
-new file mode 100644
-index 0000000..4fea1de
---- /dev/null
-+++ b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.2.2.bb
-@@ -0,0 +1,21 @@
-+DESCRIPTION = "Easily themable notification daemon with transparency effects"
-+HOMEPAGE = "http://goodies.xfce.org/projects/applications/xfce4-notifyd"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+DEPENDS = "libxfce4util libxfce4ui xfconf gtk+ dbus dbus-glib"
-+
-+PR = "r0"
-+
-+inherit xfce
-+
-+# SRC_URI must follow inherited one
-+SRC_URI = "http://archive.xfce.org/src/apps/${PN}/${@'${PV}'[0:3]}/${PN}-${PV}.tar.bz2"
-+
-+FILES_${PN} += " \
-+    ${libdir}/xfce4/notifyd \
-+    ${datadir}/themes \
-+    ${datadir}/dbus-1 \
-+"
-+
-+SRC_URI[md5sum] = "8687fb7a0f270231ada265e363b6ffcc"
-+SRC_URI[sha256sum] = "b66e68dfc2164bcf479acd3c7e8b6f83065d23aef988535e2db3506d06a39168"
+diff --git a/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.8.1.bb b/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.8.2.bb
+similarity index 67%
+rename from meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.8.1.bb
+rename to meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.8.2.bb
+index bda79dd..a9819fb 100644
+--- a/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.8.1.bb
++++ b/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.8.2.bb
+@@ -10,5 +10,5 @@ inherit xfce
+ 
+ EXTRA_OECONF += "--with-broken-putenv=yes"
+ 
+-SRC_URI[md5sum] = "2be3af4c7db5ad293a7525e1021e6f0f"
+-SRC_URI[sha256sum] = "732aeb4f845fb92efb5487e49662f5b8544ea5feb9f1e4bd7629e726aaa70c81"
++SRC_URI[md5sum] = "3376a77637a4292a863027d595548ee2"
++SRC_URI[sha256sum] = "05a149841575cb961588742c8c9795c6f0d09f27d59546dd8a933b010d2ac816"
 -- 
 1.7.4.4
 
