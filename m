@@ -1,25 +1,25 @@
 Received: from mailout-de.gmx.net ([213.165.64.23])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1R6ktB-0007Hc-FP
+	(envelope-from <schnitzeltony@gmx.de>) id 1R6ktE-0007I6-FP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Sep 2011 17:08:40 +0200
-Received: (qmail invoked by alias); 22 Sep 2011 15:03:17 -0000
+	Thu, 22 Sep 2011 17:08:41 +0200
+Received: (qmail invoked by alias); 22 Sep 2011 15:03:19 -0000
 Received: from p5B0A1554.dip.t-dialin.net (EHLO localhost.localdomain)
 	[91.10.21.84]
-	by mail.gmx.net (mp069) with SMTP; 22 Sep 2011 17:03:17 +0200
+	by mail.gmx.net (mp069) with SMTP; 22 Sep 2011 17:03:19 +0200
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1+CFSRlWF+CYdADBHWsvQZXGBTY78id91198MPKMh
-	lqZLxsTzcTJIoc
+X-Provags-ID: V01U2FsdGVkX199Kvkdwth9YrnNXZuN6porxEE5R74MYFTDDDQHIm
+	3M7rJuIUJFByZB
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Sep 2011 17:06:36 +0200
-Message-Id: <1316704004-19647-6-git-send-email-schnitzeltony@gmx.de>
+Date: Thu, 22 Sep 2011 17:06:39 +0200
+Message-Id: <1316704004-19647-9-git-send-email-schnitzeltony@gmx.de>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1316704004-19647-1-git-send-email-schnitzeltony@gmx.de>
 References: <1316704004-19647-1-git-send-email-schnitzeltony@gmx.de>
 MIME-Version: 1.0
 X-Y-GMX-Trusted: 0
-Subject: [meta-xfce V2 05/13] xfce4-session: Bump to version 4.8.2
+Subject: [meta-xfce V2 08/13] gtk-xfce-engine: Bump to version 2.9.0 & minor cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,62 +37,40 @@ X-List-Received-Date: Thu, 22 Sep 2011 15:08:42 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-relative-symlinks-docs.patch is now mainline [1]
-
-[1] http://git.xfce.org/xfce/xfce4-session/commit/?id=00159a379b8b192615137e59b66d5317493f57f3
+* Added xfce4-dev-tools-native to DEPENDS error message was
+  | gtk-xfce-engine-2.9.0/configure: line 12041: syntax error near unexpected token `GTK,'
+  | gtk-xfce-engine-2.9.0/configure: line 12041: `XDT_CHECK_PACKAGE(GTK, gtk+-2.0, 2.20.0)'
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
 ---
- .../xfce4-session/relative-symlinks-docs.patch     |   11 -----------
- ...ce4-session_4.8.1.bb => xfce4-session_4.8.2.bb} |    9 ++-------
- 2 files changed, 2 insertions(+), 18 deletions(-)
- delete mode 100644 meta-xfce/recipes-xfce/xfce4-session/xfce4-session/relative-symlinks-docs.patch
- rename meta-xfce/recipes-xfce/xfce4-session/{xfce4-session_4.8.1.bb => xfce4-session_4.8.2.bb} (77%)
+ ...ce-engine_2.8.1.bb => gtk-xfce-engine_2.9.0.bb} |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-xfce/recipes-xfce/gtk-xfce-engine/{gtk-xfce-engine_2.8.1.bb => gtk-xfce-engine_2.9.0.bb} (63%)
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session/relative-symlinks-docs.patch b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session/relative-symlinks-docs.patch
-deleted file mode 100644
-index fb78c57..0000000
---- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session/relative-symlinks-docs.patch
-+++ /dev/null
-@@ -1,11 +0,0 @@
----- a/doc/manual/Makefile.am	2010-09-08 18:37:19.000000000 +0200
--+++ b/doc/manual/Makefile.am	2011-07-17 23:17:28.602626999 +0200
--@@ -20,7 +20,7 @@
-- 			done; \
-- 			if test x"$$lang" != x"C" -a ! -d $(srcdir)/images/$$lang; then \
-- 				echo "--- Creating symlink to C images for $$lang"; \
---				ln -sf $(docdir)/html/C/images $(DESTDIR)$(docdir)/html/$$lang/images; \
--+				ln -sf ../C/images $(DESTDIR)$(docdir)/html/$$lang/images; \
-- 			fi \
-- 		fi \
-- 	done;
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.1.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.2.bb
-similarity index 77%
-rename from meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.1.bb
-rename to meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.2.bb
-index bedd35f..65b1add 100644
---- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.1.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.2.bb
-@@ -9,11 +9,6 @@ PR = "r0"
+diff --git a/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_2.8.1.bb b/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_2.9.0.bb
+similarity index 63%
+rename from meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_2.8.1.bb
+rename to meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_2.9.0.bb
+index 91239bf..0ef9d8b 100644
+--- a/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_2.8.1.bb
++++ b/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_2.9.0.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "XFCE theme for GTK"
+ SECTION = "x11/libs"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+-DEPENDS += "gtk+"
++DEPENDS = "gtk+ xfce4-dev-tools-native"
  
- inherit xfce
+ PR = "r0"
  
--# SRC_URI must follow inherited one
--SRC_URI += " \
--    file://relative-symlinks-docs.patch \
--"
--
- # protect from frightening message that xfce might not work correctly
- pkg_postinst_${PN} () {
-     echo 127.0.0.1    ${MACHINE} >> /etc/hosts
-@@ -28,5 +23,5 @@ FILES_${PN}-dbg += "${libdir}/xfce4/*/*/.debug"
+@@ -12,5 +12,5 @@ FILES_${PN} += "${libdir}/gtk-2.0/*/engines \
+                 ${datadir}/themes/"
+ FILES_${PN}-dbg += "${libdir}/gtk-2.0/*/engines/.debug"
  
- FILES_${PN}-dev += "${libdir}/xfce4/*/*/*.*a"
- 
--SRC_URI[md5sum] = "478080ff666fdd36786a243829663efd"
--SRC_URI[sha256sum] = "1df52a77d87ed4d27b4f40a2f03a0b6334422d64bdc4e31b9aac22e25e68b829"
-+SRC_URI[md5sum] = "48780cbcf784ab64debc9312f17765f2"
-+SRC_URI[sha256sum] = "31bca2a559e05a8a859f150394a901517e5842414ef171a85c5da234e344c0d0"
+-SRC_URI[md5sum] = "8a6527b61b0554cda11d06f66a567314"
+-SRC_URI[sha256sum] = "7cb0a52d74cded5c6a86894babd214de723bcf68771195db6d94acf5161be617"
++SRC_URI[md5sum] = "e2bc76ab5093ff8472e728e6d6ad5da2"
++SRC_URI[sha256sum] = "55604002526c800539f2a8a79e7df3bf23717f45e4bfab31c154c8d01caf3af7"
 -- 
 1.7.4.4
 
