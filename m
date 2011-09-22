@@ -1,30 +1,24 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1R6oSI-0003FY-4y
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1R6qzD-00031I-BO
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Sep 2011 20:57:06 +0200
-Received: by yxj17 with SMTP id 17so3288457yxj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Sep 2011 11:51:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=ddO/BuHweFBl9VJurXLQDMxrE9ZwNQVf8ExMc6/ZRug=;
-	b=aIUwhTIvO0KeT7Gk1QjqRXLm3NWb1GGu/Uh4nl3Zxx1tzq5qvdHzK4A0mqweKa9YIb
-	+ZvxnURVjD3uTVH7D5d4pmqPpU2JgvMmfpF7UGIcIVMQHDD6obcCW5i46Vhwsx1dVjKK
-	BPGK0B/is5CaTVTfhuI39ka96fZDlHfCy0m9g=
-Received: by 10.236.182.66 with SMTP id n42mr15530501yhm.128.1316717505741;
-	Thu, 22 Sep 2011 11:51:45 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
-	by mx.google.com with ESMTPS id p68sm12650280yhj.16.2011.09.22.11.51.43
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 22 Sep 2011 11:51:43 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 22 Sep 2011 23:39:15 +0200
+Received: (qmail invoked by alias); 22 Sep 2011 21:33:55 -0000
+Received: from p5B0A1554.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.21.84]
+	by mail.gmx.net (mp066) with SMTP; 22 Sep 2011 23:33:55 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX19VaSADvmJVWVOP1NODBOR7R5+qiKElpUDUWdI6kk
+	vS9F6zrjVVEybD
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Sep 2011 11:51:31 -0700
-Message-Id: <1316717491-26716-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.5.4
-Subject: [meta-oe][PATCH] gcc-4.5: Fix cross-gcc build for 64 bit targets
+Date: Thu, 22 Sep 2011 23:37:30 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-96.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+MIME-Version: 1.0
+Message-Id: <201109222337.30836.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: do_rootfs fails with network-manager-applet included
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,115 +32,178 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Sep 2011 18:57:06 -0000
+X-List-Received-Date: Thu, 22 Sep 2011 21:39:15 -0000
+X-Groupsio-MsgNum: 34455
+Content-Type: Multipart/Mixed;
+  boundary="Boundary-00=_aq6eO9FSo3grcGk"
 
-Building gcc-cross-intermediate for x86_64
-failed since the notion of multlib has changed
-in oe-core. So we needed to sync 64bit hack
-patch from oe-core/gcc-4.6 into meta-oe 4.5
+--Boundary-00=_aq6eO9FSo3grcGk
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-devtools/gcc/gcc-4.5.inc           |    2 +-
- .../recipes-devtools/gcc/gcc-4.5/64bithack.patch   |   64 +++++++++++++++++---
- 2 files changed, 57 insertions(+), 9 deletions(-)
+Hi
 
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.5.inc b/meta-oe/recipes-devtools/gcc/gcc-4.5.inc
-index 59be317..579280f 100644
---- a/meta-oe/recipes-devtools/gcc/gcc-4.5.inc
-+++ b/meta-oe/recipes-devtools/gcc/gcc-4.5.inc
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
- 
- 
- PV = "4.5"
--PR = "r42"
-+PR = "r43"
- 
- # BINV should be incremented after updating to a revision
- # after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.5/64bithack.patch b/meta-oe/recipes-devtools/gcc/gcc-4.5/64bithack.patch
-index b5ba8a4..7033014 100644
---- a/meta-oe/recipes-devtools/gcc/gcc-4.5/64bithack.patch
-+++ b/meta-oe/recipes-devtools/gcc/gcc-4.5/64bithack.patch
-@@ -1,20 +1,68 @@
--By default gcc places 64 bit libs in a lib64 directory. This makes it use 
--"lib" instead.
-+Upstream-Status: Inappropriate [embedded specific]
- 
--RP 25/7/10
-+GCC has internal multilib handling code but it assumes a very specific rigid directory
-+layout. The build system implementation of multilib layout is very generic and allows
-+complete customisation of the library directories.
- 
--Index: gcc-4.5.0/gcc/config/i386/t-linux64
-+This patch is a partial solution to allow any custom directories to be passed into gcc
-+and handled correctly. It forces gcc to use the base_libdir (which is the current 
-+directory, "."). We need to do this for each multilib that is configured as we don't
-+know which compiler options may be being passed into the compiler. Since we have a compiler
-+per mulitlib at this point that isn't an issue.
-+
-+The one problem is the target compiler is only going to work for the default multlilib at
-+this point. Ideally we'd figure out which multilibs were being enabled with which paths
-+and be able to patch these entries with a complete set of correct paths but this we
-+don't have such code at this point. This is something the target gcc recipe should do 
-+and override these platform defaults in its build config.
-+
-+RP 15/8/11
-+
-+Index: gcc-4_5-branch/gcc/config/i386/t-linux64
- ===================================================================
----- gcc-4.5.0.orig/gcc/config/i386/t-linux64	2010-08-10 15:47:42.000000000 +0100
--+++ gcc-4.5.0/gcc/config/i386/t-linux64	2010-08-10 15:47:47.000000000 +0100
-+--- gcc-4_5-branch.orig/gcc/config/i386/t-linux64	2011-09-22 11:37:51.188913390 -0700
-++++ gcc-4_5-branch/gcc/config/i386/t-linux64	2011-09-22 11:37:56.818913303 -0700
- @@ -24,8 +24,8 @@
-  # MULTILIB_OSDIRNAMES according to what is found on the target.
-  
-  MULTILIB_OPTIONS = m64/m32
- -MULTILIB_DIRNAMES = 64 32 
- -MULTILIB_OSDIRNAMES = ../lib64 $(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib)
--+MULTILIB_DIRNAMES = . 32 
--+MULTILIB_OSDIRNAMES = . $(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib)
-++MULTILIB_DIRNAMES = . .
-++MULTILIB_OSDIRNAMES = ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir))
-  
-  LIBGCC = stmp-multilib
-  INSTALL_LIBGCC = install-multilib
-+Index: gcc-4_5-branch/gcc/config/mips/t-linux64
-+===================================================================
-+--- gcc-4_5-branch.orig/gcc/config/mips/t-linux64	2011-06-16 17:59:02.000000000 -0700
-++++ gcc-4_5-branch/gcc/config/mips/t-linux64	2011-09-22 11:37:56.838913302 -0700
-+@@ -17,8 +17,8 @@
-+ # <http://www.gnu.org/licenses/>.
-+ 
-+ MULTILIB_OPTIONS = mabi=n32/mabi=32/mabi=64
-+-MULTILIB_DIRNAMES = n32 32 64
-+-MULTILIB_OSDIRNAMES = ../lib32 ../lib ../lib64
-++MULTILIB_DIRNAMES = . . .
-++MULTILIB_OSDIRNAMES = ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir))
-+ 
-+ EXTRA_MULTILIB_PARTS=crtbegin.o crtend.o crtbeginS.o crtendS.o crtbeginT.o
-+ 
-+Index: gcc-4_5-branch/gcc/config/rs6000/t-linux64
-+===================================================================
-+--- gcc-4_5-branch.orig/gcc/config/rs6000/t-linux64	2011-06-16 17:58:58.000000000 -0700
-++++ gcc-4_5-branch/gcc/config/rs6000/t-linux64	2011-09-22 11:37:56.838913302 -0700
-+@@ -32,11 +32,11 @@ TARGET_LIBGCC2_CFLAGS += -mno-minimal-to
-+ # MULTILIB_OSDIRNAMES according to what is found on the target.
-+ 
-+ MULTILIB_OPTIONS        = m64/m32 msoft-float
-+-MULTILIB_DIRNAMES       = 64 32 nof
-++MULTILIB_DIRNAMES       = . . .
-+ MULTILIB_EXTRA_OPTS     = fPIC mstrict-align
-+ MULTILIB_EXCEPTIONS     = m64/msoft-float
-+ MULTILIB_EXCLUSIONS     = m64/!m32/msoft-float
-+-MULTILIB_OSDIRNAMES	= ../lib64 $(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib) nof
-++MULTILIB_OSDIRNAMES	= ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir))
-+ MULTILIB_MATCHES        = $(MULTILIB_MATCHES_FLOAT)
-+ 
-+ softfp_wrap_start := '\#ifndef __powerpc64__'
--- 
-1.7.5.4
+For my xfce-image ( lives in meta-angstrom/recipes-angstrom/images )  I want to make use of network-manager-applet which came in meta oe few days ago. 
+
+It seems that as soon as I add network-manager-applet do_rootfs fails with something like:
 
 
+| Setting flags for package xfwm4 to unpacked.
+| + false
+| + install -d /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce-base-image-1.0-r0/rootfs//etc
+| + echo Angstrom v2011.09-core
+| + rm -f /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce-base-image-1.0-r0/rootfs/var/lib/opkg/lists/oe /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce-base-image-1.0-r0/rootfs/var/lib/opkg/lists/oe-all /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce-base-image-1.0-r0/rootfs/var/lib/opkg/lists/oe-armv7a /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce-base-image-1.0-r0/rootfs/var/lib/opkg/lists/oe-overo
+| + true
+| + '[' 1 -eq 0 ']'
+| + set +x
+| log_check: Using /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce-base-image-1.0-r0/temp/log.do_rootfs.28313 as logfile
+| log_check: There were error messages in the logfile
+| log_check: Matched keyword: [Collected errors]
+| 
+| Configuring openssh-sftp.
+| Configuring xf86-input-evdev.
+| Configuring cpufrequtils.
+| Configuring systemd-compat-units.
+| Configuring gvfsd-ftp.
+| Collected errors:
+|  * extract_archive: Cannot create symlink from ./var/run to 'volatile/run': File exists.
+| + '[' '!' -z '' ']'
+| + package_tryout_install_multilib_ipk
+| + multilib_tryout_dirs=
+| + '[' '!' -z /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce-base-image-1.0-r0/multilib_check.py ']'
+| 
+| ERROR: Function 'do_rootfs' failed (see /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce-base-image-1.0-r0/temp/log.do_rootfs.28313 for further information)
+NOTE: package xfce-base-image-1.0-r0: task do_rootfs: Failed
+ERROR: Task 8 (/home/Superandy/data/oe-core/sources/meta-angstrom/recipes-angstrom/images/xfce-base-image.bb, do_rootfs) failed with exit code '1'
+ERROR: '/home/Superandy/data/oe-core/sources/meta-angstrom/recipes-angstrom/images/xfce-base-image.bb' failed
 
+
+Is there somebody with a hint on where to check for further information to fix this error?
+
+I add the two recipes I made tests with:
+
+1. xfce-base-image-ok-noconman.bb This removes conman stuff ( conman conflicts with network-manager ) and builds without issues
+2. xfce-base-image-err-network-manager-applet.bb: This recipe including network-manager instead of conman causes error above
+
+Thanks in advance
+
+Andreas
+
+--Boundary-00=_aq6eO9FSo3grcGk
+Content-Type: text/plain;
+  charset="UTF-8";
+  name="xfce-base-image-ok-noconman.bb"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename="xfce-base-image-ok-noconman.bb"
+
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+PR = "r0"
+
+require systemd-image.bb
+
+# conman conflicts with networkmanager
+CONMANPKGS = ""
+
+export IMAGE_BASENAME = "xfce-base-image"
+
+XSERVER ?= " \
+    xserver-xorg \
+    xf86-input-evdev \
+    xf86-input-mouse \
+    xf86-video-fbdev \
+    xf86-input-keyboard \
+"
+
+IMAGE_INSTALL += " \
+    ${XSERVER} \
+    task-base-extended \
+    task-xfce-base \
+    xfce4-appfinder \ 
+    \
+    gvfs \
+    gvfsd-ftp gvfsd-sftp gvfsd-trash \
+    udev-extra-rules \
+    \
+    kernel-module-fuse \
+    marvell-sdio-fw \
+    \
+    xserver-common \
+    ttf-dejavu-sans ttf-dejavu-sans-mono ttf-dejavu-common \
+    gnome-icon-theme \
+    \
+    xfce4-screenshooter \
+    \
+    gtk-xfce-engine \
+"
+
+#    orage
+#    network-manager-applet
+#    midori
+#    udisks
+#    xserver-nodm-init
+
+
+inherit image
+
+--Boundary-00=_aq6eO9FSo3grcGk
+Content-Type: text/plain;
+  charset="UTF-8";
+  name="xfce-base-image-err-network-manager-applet.bb"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename="xfce-base-image-err-network-manager-applet.bb"
+
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+PR = "r0"
+
+require systemd-image.bb
+
+# conman conflicts with networkmanager
+CONMANPKGS = "network-manager-applet"
+
+export IMAGE_BASENAME = "xfce-base-image"
+
+XSERVER ?= " \
+    xserver-xorg \
+    xf86-input-evdev \
+    xf86-input-mouse \
+    xf86-video-fbdev \
+    xf86-input-keyboard \
+"
+
+IMAGE_INSTALL += " \
+    ${XSERVER} \
+    task-base-extended \
+    task-xfce-base \
+    xfce4-appfinder \ 
+    \
+    gvfs \
+    gvfsd-ftp gvfsd-sftp gvfsd-trash \
+    udev-extra-rules \
+    \
+    kernel-module-fuse \
+    marvell-sdio-fw \
+    \
+    xserver-common \
+    ttf-dejavu-sans ttf-dejavu-sans-mono ttf-dejavu-common \
+    gnome-icon-theme \
+    \
+    xfce4-screenshooter \
+    \
+    gtk-xfce-engine \
+"
+
+#    orage
+#    network-manager-applet
+#    midori
+#    udisks
+#    xserver-nodm-init
+
+
+inherit image
+
+--Boundary-00=_aq6eO9FSo3grcGk--
