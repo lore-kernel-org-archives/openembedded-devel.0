@@ -1,25 +1,29 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Imran_Mehmood@mentor.com>) id 1R6cv4-0002LN-VJ
+	(envelope-from <Imran_Mehmood@mentor.com>) id 1R6cv7-0002LT-Q5
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Sep 2011 08:38:03 +0200
+	Thu, 22 Sep 2011 08:38:06 +0200
 Received: from nat-dem.mentorg.com ([195.212.93.2]
 	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1R6cpv-0005DL-Qy from Imran_Mehmood@mentor.com 
+	id 1R6cpz-0005E6-Su from Imran_Mehmood@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Sep 2011 23:32:44 -0700
+	Wed, 21 Sep 2011 23:32:48 -0700
 Received: from localhost.localdomain ([137.202.157.139]) by
 	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 22 Sep 2011 08:32:42 +0200
+	Thu, 22 Sep 2011 08:32:46 +0200
 From: "Mehmood, Imran" <Imran_Mehmood@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Sep 2011 11:31:08 +0500
-Message-Id: <cover.1316616945.git.Imran_Mehmood@mentor.com>
+Date: Thu, 22 Sep 2011 11:31:09 +0500
+Message-Id: <245bcda7789be7f516af94e15328e89a87a400f1.1316616945.git.Imran_Mehmood@mentor.com>
 X-Mailer: git-send-email 1.7.0.4
-X-OriginalArrivalTime: 22 Sep 2011 06:32:43.0157 (UTC)
-	FILETIME=[6EFF2C50:01CC78F1]
+In-Reply-To: <cover.1316616945.git.Imran_Mehmood@mentor.com>
+References: <cover.1316616945.git.Imran_Mehmood@mentor.com>
+In-Reply-To: <cover.1316616945.git.Imran_Mehmood@mentor.com>
+References: <cover.1316616945.git.Imran_Mehmood@mentor.com>
+X-OriginalArrivalTime: 22 Sep 2011 06:32:47.0142 (UTC)
+	FILETIME=[715F3C60:01CC78F1]
 Cc: Imran Mehmood <Imran_Mehmood@mentor.com>
-Subject: [meta-oe][PATCH v3 0/2] pull request for twm and xclock recipes
+Subject: [meta-oe][PATCH v2 1/2] xclock: Add version 1.0.5 (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,28 +37,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Sep 2011 06:38:03 -0000
+X-List-Received-Date: Thu, 22 Sep 2011 06:38:06 -0000
 
 From: Imran Mehmood <Imran_Mehmood@mentor.com>
 
-The following changes since commit 94a25d92b4d0e9379caaab127ccac1a94e9e4d28:
-  Imran Mehmood (1):
-        cramfs: Adds cvs version recipe (initial recipe)
+* Imported from oe.dev commit id 6e7e35679200cd55264fae308cd5dec7ef2d1d29
 
-are available in the git repository at:
-
-  git://github.com/lawwama/meta-oe master
-  https://github.com/lawwama/meta-oe/tree/master
-
-Imran Mehmood (2):
-  xclock: Add version 1.0.5 (initial recipe)
-  twm: Add version 1.0.6 (initial recipe)
-
- meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb    |   16 ++++++++++++++++
+Signed-off-by: Imran Mehmood <Imran_Mehmood@mentor.com>
+---
  meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb |   10 ++++++++++
- 2 files changed, 26 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb
+ 1 files changed, 10 insertions(+), 0 deletions(-)
  create mode 100644 meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb
+
+diff --git a/meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb b/meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb
+new file mode 100644
+index 0000000..751433b
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb
+@@ -0,0 +1,10 @@
++require recipes-graphics/xorg-app/xorg-app-common.inc
++
++DESCRIPTION = "analog / digital clock for X"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=857759ade8f2ddde5c7b32ef7356ea36"
++
++DEPENDS += " libxaw libxrender libxft libxkbfile libxt"
++
++SRC_URI[archive.md5sum] = "eaf124bbc9d13e1a12a29faaa2ed3612"
++SRC_URI[archive.sha256sum] = "53a9169e24f3814fbfcfee3ca0b98637840a3156ed7c7e36ae03940fabae4c9a"
+-- 
+1.7.0.4
 
 
 
