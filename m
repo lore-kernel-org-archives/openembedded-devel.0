@@ -1,29 +1,36 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Imran_Mehmood@mentor.com>) id 1R6cvN-0002MB-Ow
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Sep 2011 08:38:21 +0200
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1R6cqF-0005HJ-O9 from Imran_Mehmood@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Sep 2011 23:33:03 -0700
-Received: from localhost.localdomain ([137.202.157.139]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 22 Sep 2011 08:33:02 +0200
-From: "Mehmood, Imran" <Imran_Mehmood@mentor.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1R6d8V-0002o4-3M for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Sep 2011 08:51:55 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1R6d3N-0006aV-Ul for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Sep 2011 08:46:37 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Sep 2011 08:46:37 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Sep 2011 08:46:37 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Sep 2011 11:31:10 +0500
-Message-Id: <f6663b97bd1237d2d9ea77ed839c446cb3aaa63e.1316616945.git.Imran_Mehmood@mentor.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <cover.1316616945.git.Imran_Mehmood@mentor.com>
-References: <cover.1316616945.git.Imran_Mehmood@mentor.com>
-In-Reply-To: <cover.1316616945.git.Imran_Mehmood@mentor.com>
-References: <cover.1316616945.git.Imran_Mehmood@mentor.com>
-X-OriginalArrivalTime: 22 Sep 2011 06:33:03.0033 (UTC)
-	FILETIME=[7AD80290:01CC78F1]
-Cc: Imran Mehmood <Imran_Mehmood@mentor.com>
-Subject: [meta-oe][PATCH v3 2/2] twm: Add version 1.0.6 (initial recipe)
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 22 Sep 2011 08:46:23 +0200
+Message-ID: <j5eljv$ur4$1@dough.gmane.org>
+References: <1316384018-7651-1-git-send-email-dbaryshkov@gmail.com>	<j56n5t$s0d$2@dough.gmane.org>
+	<j57i4p$i51$1@dough.gmane.org>	<j57inn$mme$1@dough.gmane.org>
+	<20110919143959.GC19168@jama.jama.net> <4E7A309A.8060300@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:6.0.2) Gecko/20110902 Thunderbird/6.0.2
+In-Reply-To: <4E7A309A.8060300@gmail.com>
+X-Enigmail-Version: 1.3.2
+Subject: Re: [meta-oe][V3] openssl: fixup the openssl-fix-link patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,43 +44,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Sep 2011 06:38:22 -0000
+X-List-Received-Date: Thu, 22 Sep 2011 06:51:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Imran Mehmood <Imran_Mehmood@mentor.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
- * Imported from oe.dev commit id d90ee2735e9aa9d1a8dd7d0eb6a5917030a233d3
- * Added bison-native to DEPENDS because during configure it searches for yacc and Defaults to the first program found out of: `bison -y', `byacc', `yacc' otherwise raises error 'yacc not found'. We don't face this error if we have built any other package that made yacc available, before building twm.
+Op 21-09-11 20:44, Dmitry Eremin-Solenikov schreef:
+> Koen, please doublecheck your setup. Today I've just rebuilt
+> openssl-native with this patch and it worked. Did you clean/cleansstate
+> before rechecking the patch?
 
-Signed-off-by: Imran Mehmood <Imran_Mehmood@mentor.com>
----
- meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb |   16 ++++++++++++++++
- 1 files changed, 16 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb
+I did cleansstate in between, I'll try a build from scratch now.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb b/meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb
-new file mode 100644
-index 0000000..af27632
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb
-@@ -0,0 +1,16 @@
-+require recipes-graphics/xorg-app/xorg-app-common.inc
-+DESCRIPTION = "tiny window manager"
-+DEPENDS += " libxext libxt libxmu bison-native"
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4c6d42ef60e8166aa26606524c0b9586"
-+
-+
-+SRC_URI[archive.md5sum] = "952d06a0c2ec34687b536c7b619fc671"
-+SRC_URI[archive.sha256sum] = "e7dccad7879a7570442f0cd9df0b9064e926466b5a52b710fca8cfb167f294e9"
-+
-+FILES_${PN} += "${datadir}/X11/twm/system.twmrc"
-+ALTERNATIVE_NAME = "x-window-manager"
-+ALTERNATIVE_PATH = "${bindir}/twm"
-+ALTERNATIVE_LINK = "${bindir}/x-window-manager"
-+ALTERNATIVE_PRIORITY = "1"
--- 
-1.7.0.4
+iD8DBQFOetm/MkyGM64RGpERAidKAJ9EoLQ0hORkh388WddFS/jPNBp4IACgjH5u
+QwtVwfuzIMSwDwZFCQ2ZzG4=
+=XQnF
+-----END PGP SIGNATURE-----
 
 
 
