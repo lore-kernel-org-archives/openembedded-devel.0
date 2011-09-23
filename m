@@ -1,29 +1,29 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from tritech.se ([46.59.120.190])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1R6tJk-0002lo-2f
+	(envelope-from <Mats.Karrman@tritech.se>) id 1R70jh-0007bH-Fn
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Sep 2011 02:08:36 +0200
-Received: by qyk10 with SMTP id 10so18382995qyk.6
+	Fri, 23 Sep 2011 10:03:53 +0200
+Received: from post.tritech.se (post.tritech.se [10.75.60.100])
+	by tritech.se (8.14.3/8.14.3) with ESMTP id p8N7m5wC031374
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Sep 2011 17:03:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=Vknc+sNjds5NWZkVcjiWNoD+An4zpl2Z4tXqd0kKlfk=;
-	b=YOVG+AJlrix8Oolucksxr5q8xb23ULArrovGzOSs3KtF2N7D8yrC2snW44+0haWBXs
-	Kh2tqgHFC4SGlDaXfzfzInM1lBu/Lz8mxDYZ4S1/FHOzMajXs5BxotEtfEgTFPc4x3Rv
-	36y1UZqK74KxW4EhadkymJRGWaMn//e19yyXo=
+	Fri, 23 Sep 2011 09:48:10 +0200
+Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
+	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
+	14.01.0270.001; Fri, 23 Sep 2011 09:48:06 +0200
+From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: How to track custom packages during development?
+Thread-Index: Acx5xJktpO6UYXyJTAmSVuV3TjLD1Q==
+Date: Fri, 23 Sep 2011 07:48:06 +0000
+Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C40134FF1@post.tritech.se>
+Accept-Language: en-US, sv-SE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [194.132.137.34]
 MIME-Version: 1.0
-Received: by 10.224.70.138 with SMTP id d10mr2342488qaj.319.1316736195638;
-	Thu, 22 Sep 2011 17:03:15 -0700 (PDT)
-Received: by 10.229.43.228 with HTTP; Thu, 22 Sep 2011 17:03:15 -0700 (PDT)
-In-Reply-To: <20110921224702.GM26078@denix.org>
-References: <20110921224702.GM26078@denix.org>
-Date: Thu, 22 Sep 2011 17:03:15 -0700
-Message-ID: <CA+M6bXnUKee7JondGzuncwstktxW9gyMba=HZW-27P8HMMuPhw@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance] Pull request 20110921
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: How to track custom packages during development?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,31 +37,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Sep 2011 00:08:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 23 Sep 2011 08:03:53 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 21, 2011 at 3:47 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> Tom,
->
-> Please pull these 5 commits to gcc (4.5) that update the maintenance bran=
-ch
-> to match the mainline. Part of this update is to fix the ICE building new=
-er
-> kernels (2.6.39 - 3.0.x). All are cherry-picked from oe.dev.
->
->
-> Pull URL: git://arago-project.org/git/people/denix/openembedded.git
-> =A0Branch: 2011.03-maintenance
-> =A0Browse: http://arago-project.org/git/people/?p=3Ddenix/openembedded.gi=
-t;a=3Dshortlog;h=3Drefs/heads/2011.03-maintenance
->
-> Thanks,
-> =A0 =A0Denys Dmytriyenko <denys@ti.com>
+Hi!
 
-Applied, thanks.
+I'm using OE classic for a product I'm developing. Included in the product =
+are some proprietary software applications that I build using OE recipes. I=
+n an Agile development spirit :) these applications are frequently updated =
+and distributed to the customer using .ipk's. Now to the question:
 
---=20
-Tom
+How do I best manage versions of these packages without having to create a =
+new recipe for each?
 
+E.g. can I have a recipe xxxx-1.0 that has a variable that is included in t=
+he ipk filename and version?
+
+All suggestions are welcome!
+
+Thanks,
+Mats
 
