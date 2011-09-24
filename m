@@ -1,23 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1R7Mht-0005Dd-Ll for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Sep 2011 09:31:29 +0200
-Received: from g225080067.adsl.alicedsl.de ([92.225.80.67]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1R7Mcv-0004Xy-Li for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Sep 2011 07:26:21 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gary@mlbassoc.com>) id 1R7PpH-0008MS-F6
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 24 Sep 2011 12:51:19 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 7605F166095D; Sat, 24 Sep 2011 04:45:58 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id CFA4B16608EC;
+	Sat, 24 Sep 2011 04:45:56 -0600 (MDT)
+Message-ID: <4E7DB4E4.5090202@mlbassoc.com>
+Date: Sat, 24 Sep 2011 04:45:56 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:6.0.2) Gecko/20110906 Thunderbird/6.0.2
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 24 Sep 2011 09:25:44 +0200
-In-Reply-To: <1316848094-30368-1-git-send-email-jdk@ti.com>
-References: <1316848094-30368-1-git-send-email-jdk@ti.com>
-X-Mailer: Evolution 3.0.3- 
-Message-ID: <1316849170.4893.6.camel@mattotaupa>
-Mime-Version: 1.0
-Subject: Re: [meta-oe] WIP: cloud9: created
+References: <1316770597.99899.YahooMailNeo@web121512.mail.ne1.yahoo.com>
+	<4E7C63C8.3050900@mlbassoc.com>
+	<CAOU-OA+uKFYL4nJutdTHsUCYnGy9=NiYW65jGbRk76+GL6iocg@mail.gmail.com>
+In-Reply-To: <CAOU-OA+uKFYL4nJutdTHsUCYnGy9=NiYW65jGbRk76+GL6iocg@mail.gmail.com>
+Subject: Re: ti_cgt_c6000_6.1.17_setup_linux_x86.bin error while installing ti-codec-engine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,108 +38,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Sep 2011 07:31:29 -0000
-X-Groupsio-MsgNum: 34470
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-2v2RntruLnk1wQhxl46u"
-
---=-2v2RntruLnk1wQhxl46u
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Dear Jason,
-
-
-Am Samstag, den 24.09.2011, 03:08 -0400 schrieb Jason Kridner:
-> Cloud9 is a web-browser based IDE.  This application should support
-> multiple architectures as long as they have node.js and a build of
-> node-o3-xml that is dropped into this system.  Ideally, that library
-> would be added separately as a system-dependent portion, because
-> everything else should be ISA independent.
->=20
-> Advice on cleaning up this recipe is welcome.
-
-what problems to do you see?
-
-> I will continue to improve it as I understand how.  It is rather
-> useful as-is.
-> ---
->  meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb |   28 +++++++++++++++++=
-++++++
->  1 files changed, 28 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb
->=20
-> diff --git a/meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb b/meta-oe/re=
-cipes-devtools/cloud9/cloud9_0.5.1.bb
-> new file mode 100644
-> index 0000000..626332f
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb
-> @@ -0,0 +1,28 @@
-> +DESCRIPTION =3D "Meet Cloud9, development-as-a-service for Javascripters=
- and other developers"
-> +HOMEPAGE =3D "http://c9.io"
-> +RDEPENDS =3D "nodejs"
-
-This belongs further down too.
-
-> +
-> +SRC_URI =3D "git://github.com/jadonk/cloud9.git;protocol=3Dgit \
-> +"
-
-Please put that below the license stuff [1].
-
-> +
-> +LICENSE =3D "GPLv3"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4784c3bcff601fd8f9515f52a11e7=
-018"
-> +
-> +SRCREV =3D "08bae1d1cc2ba9f7f883a25afd07f0339a82fa8b"
-> +S =3D "${WORKDIR}/git"
-> +
-> +do_configure_prepend () {
-> + git submodule update --init --recursive
-> +}
-> +
-> +do_compile () {
-> +}
-
-Maybe add comments why the above overrides are needed.
-
-> +
-> +do_install () {
-> + install -m 0755 -d ${D}/usr/share/cloud9 ${D}${bindir}
-> + rsync -r --exclude=3D".*" ${S}/* ${D}/usr/share/cloud9
-
-Should `rsync` be put in `DEPENDS`?
-
-> + touch ${D}${bindir}/cloud9
-> + echo "#!/bin/sh" > ${D}${bindir}/cloud9
-> + echo "node /usr/share/cloud9/bin/cloud9.js -l 0.0.0.0 -w /home/root -p =
-3000" >> ${D}${bindir}/cloud9
-> + chmod 0755 ${D}${bindir}/cloud9
-> +}
-
-
-Thanks,
-
-Paul
-
-
-[1] http://openembedded.org/index.php?title=3DStyleguide
-
---=-2v2RntruLnk1wQhxl46u
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+X-List-Received-Date: Sat, 24 Sep 2011 10:51:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+On 2011-09-23 14:46, Michael Poole wrote:
+> On Fri, Sep 23, 2011 at 6:47 AM, Gary Thomas wrote:
+>> Check to make sure that you don't have write permission to /opt
+>> If you have write permission in the directory /opt, the installer
+>> fails to put the tools where they belong in your OE build.
+>
+> Is it generally known that this limitation is due to a bug in
+> ti-eula-unpack.inc?  (Python's print automatically adds a newline,
+> which the code's author apparently did not expect.)  My local repo has
+> these changes to allow in-tree installs by users with write access to
+> /opt; please pardon Gmail's mangling of leading whitespace:
 
-iEYEABECAAYFAk59hfgACgkQPX1aK2wOHViAQwCdGfebX1UKXBN7j0vaBVDZu8MD
-MQkAnAzA8yPrLCvxExjbbvTTFKoLAgCK
-=fEMW
------END PGP SIGNATURE-----
+I don't know if this is a generally known fact; it should be, I reported it to
+this list more than a year ago and was basically ignored [actually told I just
+shouldn't have write access to /opt so the issue was my own fault...]
 
---=-2v2RntruLnk1wQhxl46u--
+Does the unpack work with your patches if /opt is not writeable?
+
+>
+> diff --git a/recipes/powervr-drivers/libgles-omap3.inc b/recipes/powervr-driv
+> index ab4b248..5acc4da 100644
+> --- a/recipes/powervr-drivers/libgles-omap3.inc
+> +++ b/recipes/powervr-drivers/libgles-omap3.inc
+> @@ -19,7 +19,8 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sd
+>   S = "${WORKDIR}/OMAP35x_Graphics_SDK_${SGXPV}"
+>
+>   # Logic to unpack installjammer file
+> -TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
+> +TI_BIN_UNPK_CMDS="Y:workdir"
+> +TI_BIN_UNPK_WDEXT = "/Graphics_SDK_${SGXPV}"
+>   require ../ti/ti-eula-unpack.inc
+>
+>   BINLOCATION ?= "${S}/gfx_rel"
+> diff --git a/recipes/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb b/recip
+> index 216b3ae..be4b7a1 100644
+> --- a/recipes/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
+> +++ b/recipes/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
+> @@ -5,7 +5,8 @@ LICENSE = "GPLv2"
+>   # http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/
+>   # see libgles-omap3.inc for detailed installation instructions
+>
+> -TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
+> +TI_BIN_UNPK_CMDS="Y:workdir:"
+> +TI_BIN_UNPK_WDEXT = "/Graphics_SDK_${SGXPV}"
+>   require ../ti/ti-eula-unpack.inc
+>
+>   SGXPV = "4_03_00_02"
+> diff --git a/recipes/ti/ti-eula-unpack.inc b/recipes/ti/ti-eula-unpack.inc
+> index 3b79c24..82ea785 100644
+> --- a/recipes/ti/ti-eula-unpack.inc
+> +++ b/recipes/ti/ti-eula-unpack.inc
+> @@ -53,7 +53,7 @@ python ti_bin_do_unpack() {
+>               wdext = bb.data.getVar('TI_BIN_UNPK_WDEXT', localdata)
+>               wdext = bb.data.expand(wdext, localdata)
+>               cmd = workdir+wdext
+> -        print>>f, "%s\n" % cmd
+> +        print>>f, "%s" % cmd
+>       f.close()
+>
+>       # Expand the tarball that was created if required
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
+
+
