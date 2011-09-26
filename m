@@ -1,32 +1,30 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jkridner@beagleboard.org>) id 1R8E3o-0000zL-UG
+	(envelope-from <raj.khem@gmail.com>) id 1R8E4c-00014S-BO
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Sep 2011 18:29:40 +0200
-Received: by eya25 with SMTP id 25so4369697eya.6
+	Mon, 26 Sep 2011 18:30:30 +0200
+Received: by gyg8 with SMTP id 8so5421936gyg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Sep 2011 09:24:16 -0700 (PDT)
-Received: by 10.213.8.8 with SMTP id f8mr2200966ebf.18.1317054256328;
-	Mon, 26 Sep 2011 09:24:16 -0700 (PDT)
-Received: from mail-ey0-f175.google.com (mail-ey0-f175.google.com
-	[209.85.215.175])
-	by mx.google.com with ESMTPS id v60sm61696479eev.12.2011.09.26.09.24.12
-	(version=SSLv3 cipher=OTHER); Mon, 26 Sep 2011 09:24:12 -0700 (PDT)
-Received: by eya25 with SMTP id 25so4369630eya.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Sep 2011 09:24:11 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.213.105.73 with SMTP id s9mr294500ebo.25.1317054251493; Mon,
-	26 Sep 2011 09:24:11 -0700 (PDT)
-Received: by 10.213.10.129 with HTTP; Mon, 26 Sep 2011 09:24:11 -0700 (PDT)
-In-Reply-To: <1316849170.4893.6.camel@mattotaupa>
-References: <1316848094-30368-1-git-send-email-jdk@ti.com>
-	<1316849170.4893.6.camel@mattotaupa>
-Date: Mon, 26 Sep 2011 12:24:11 -0400
-Message-ID: <CA+T6QPn7hEB+7z6MSZooXZBUEiJXS+ktfPKq569GcfugSF8eSw@mail.gmail.com>
-From: Jason Kridner <jkridner@beagleboard.org>
+	Mon, 26 Sep 2011 09:25:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=69Fnt2iK2k51bMSQ0CJ1i2j7HAAGGcX3XyNT7Ge9uQs=;
+	b=Dn4R1QplvKds0YFpvMmzl4NTN+Tv9+o6Svr0Iv/hSjoDp2nNDD7A2uyltQrSP4b/kK
+	fvu9dlEuAwyrFZXGoqJgS+tEeQqtC57tDrfYQ+BDH/JBYjD/VDOXdwhI/zRpTCY4C2+S
+	EscSDmPF0WRkw8zBUUcijMyOCsYX4WfqqA5g4=
+Received: by 10.236.200.137 with SMTP id z9mr40930909yhn.27.1317054301372;
+	Mon, 26 Sep 2011 09:25:01 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
+	by mx.google.com with ESMTPS id s42sm29716124yhs.0.2011.09.26.09.24.57
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 26 Sep 2011 09:24:58 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe] WIP: cloud9: created
+Date: Mon, 26 Sep 2011 09:24:41 -0700
+Message-Id: <1317054285-19029-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [PATCH 1/5] fuse: Upgrade recipe to version 2.8.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,125 +38,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Sep 2011 16:29:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 26 Sep 2011 16:30:30 -0000
 
-On Sat, Sep 24, 2011 at 3:25 AM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> Dear Jason,
->
-> Am Samstag, den 24.09.2011, 03:08 -0400 schrieb Jason Kridner:
->> Cloud9 is a web-browser based IDE. =A0This application should support
->> multiple architectures as long as they have node.js and a build of
->> node-o3-xml that is dropped into this system. =A0Ideally, that library
->> would be added separately as a system-dependent portion, because
->> everything else should be ISA independent.
->>
->> Advice on cleaning up this recipe is welcome.
->
-> what problems to do you see?
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../fuse/fuse-2.8.6/define_GNU_SOURCE.patch        |   12 +++++++
+ meta-oe/recipes-support/fuse/fuse_2.8.6.bb         |   34 ++++++++++++++++++++
+ 2 files changed, 46 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/fuse/fuse-2.8.6/define_GNU_SOURCE.patch
+ create mode 100644 meta-oe/recipes-support/fuse/fuse_2.8.6.bb
 
-My main concern was the use of rsync and the process I was using to
-extract git submodules.  They both work fine.  Hopefully the fetcher
-will be improved in the future to solve the git submodules challenge,
-but I sure think there must be an easier way to simply copy all of the
-non-hidden files in a directory.
+diff --git a/meta-oe/recipes-support/fuse/fuse-2.8.6/define_GNU_SOURCE.patch b/meta-oe/recipes-support/fuse/fuse-2.8.6/define_GNU_SOURCE.patch
+new file mode 100644
+index 0000000..c673a4c
+--- /dev/null
++++ b/meta-oe/recipes-support/fuse/fuse-2.8.6/define_GNU_SOURCE.patch
+@@ -0,0 +1,12 @@
++Index: fuse-2.8.6/util/fusermount.c
++===================================================================
++--- fuse-2.8.6.orig/util/fusermount.c	2011-09-13 00:23:14.000000000 -0700
+++++ fuse-2.8.6/util/fusermount.c	2011-09-25 00:23:53.051019038 -0700
++@@ -7,6 +7,7 @@
++ */
++ /* This program does the mounting and unmounting of FUSE filesystems */
++ 
+++#define _GNU_SOURCE
++ #include <config.h>
++ 
++ #include "mount_util.h"
+diff --git a/meta-oe/recipes-support/fuse/fuse_2.8.6.bb b/meta-oe/recipes-support/fuse/fuse_2.8.6.bb
+new file mode 100644
+index 0000000..06eead1
+--- /dev/null
++++ b/meta-oe/recipes-support/fuse/fuse_2.8.6.bb
+@@ -0,0 +1,34 @@
++DESCRIPTION = "With FUSE it is possible to implement a fully functional filesystem in a userspace program"
++HOMEPAGE = "http://fuse.sf.net"
++SECTION = "libs"
++LICENSE = "GPLv2&LGPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
++                    file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
++
++PR = "r0"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "eaa32c8cef56a981656a786f258a002a"
++SRC_URI[sha256sum] = "1ec1913e38f09b2a9ec1579e1800805b5e2c747d1dce515e316dbb665ca139d6"
++
++inherit autotools pkgconfig
++
++EXTRA_OECONF = "--disable-kernel-module"
++
++PACKAGES =+ "fuse-utils-dbg fuse-utils libulockmgr libulockmgr-dev libulockmgr-dbg"
++
++RRECOMMENDS_${PN} = "kernel-module-fuse""
++
++FILES_${PN} += "${libdir}/libfuse.so.*"
++FILES_${PN}-dev += "${libdir}/libfuse*.la"
++
++FILES_libulockmgr = "${libdir}/libulockmgr.so.*"
++FILES_libulockmgr-dev += "${libdir}/libulock*.la"
++FILES_libulockmgr-dbg += "${libdir}/.debug/libulock*"
++
++# Forbid auto-renaming to libfuse-utils
++FILES_fuse-utils = "${bindir} ${base_sbindir}"
++FILES_fuse-utils-dbg = "${bindir}/.debug ${base_sbindir}/.debug"
++DEBIAN_NOAUTONAME_fuse-utils = "1"
++DEBIAN_NOAUTONAME_fuse-utils-dbg = "1"
+-- 
+1.7.5.4
 
->
->> I will continue to improve it as I understand how. =A0It is rather
->> useful as-is.
->> ---
->> =A0meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb | =A0 28 ++++++++++++=
-+++++++++++
->> =A01 files changed, 28 insertions(+), 0 deletions(-)
->> =A0create mode 100644 meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb
->>
->> diff --git a/meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb b/meta-oe/r=
-ecipes-devtools/cloud9/cloud9_0.5.1.bb
->> new file mode 100644
->> index 0000000..626332f
->> --- /dev/null
->> +++ b/meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb
->> @@ -0,0 +1,28 @@
->> +DESCRIPTION =3D "Meet Cloud9, development-as-a-service for Javascripter=
-s and other developers"
->> +HOMEPAGE =3D "http://c9.io"
->> +RDEPENDS =3D "nodejs"
->
-> This belongs further down too.
-
-oe-stylize places RDEPENDS above SRC_URI.
-
->
->> +
->> +SRC_URI =3D "git://github.com/jadonk/cloud9.git;protocol=3Dgit \
->> +"
->
-> Please put that below the license stuff [1].
->
->> +
->> +LICENSE =3D "GPLv3"
->> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4784c3bcff601fd8f9515f52a11e=
-7018"
-
-oe-stylize only moves LICENSE up higher, but doesn't understand
-LIC_FILES_CHKSUM.  I'll fix manually.
-
->> +
->> +SRCREV =3D "08bae1d1cc2ba9f7f883a25afd07f0339a82fa8b"
->> +S =3D "${WORKDIR}/git"
->> +
->> +do_configure_prepend () {
->> + git submodule update --init --recursive
->> +}
->> +
->> +do_compile () {
->> +}
->
-> Maybe add comments why the above overrides are needed.
-
-Will do.  Note that oe-sytlize removes the line breaks between the do_
-functions.  Is that really desired?
-
->
->> +
->> +do_install () {
->> + install -m 0755 -d ${D}/usr/share/cloud9 ${D}${bindir}
->> + rsync -r --exclude=3D".*" ${S}/* ${D}/usr/share/cloud9
->
-> Should `rsync` be put in `DEPENDS`?
-
-I'll put it there.
-
->
->> + touch ${D}${bindir}/cloud9
->> + echo "#!/bin/sh" > ${D}${bindir}/cloud9
->> + echo "node /usr/share/cloud9/bin/cloud9.js -l 0.0.0.0 -w /home/root -p=
- 3000" >> ${D}${bindir}/cloud9
->> + chmod 0755 ${D}${bindir}/cloud9
->> +}
->
->
-> Thanks,
->
-> Paul
->
->
-> [1] http://openembedded.org/index.php?title=3DStyleguide
-
-I believe that is only for classic OE.  I'm looking to submit to
-meta-oe.  I submitted to this list per [2].
-
-[2] http://git.openembedded.org/cgit.cgi/meta-openembedded/tree/meta-oe/REA=
-DME
-
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
 
 
