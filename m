@@ -1,30 +1,32 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eyalreizer@googlemail.com>) id 1R8B1c-0005aM-25
+	(envelope-from <jkridner@beagleboard.org>) id 1R8E3o-0000zL-UG
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Sep 2011 15:15:12 +0200
-Received: by yia27 with SMTP id 27so5322214yia.6
+	Mon, 26 Sep 2011 18:29:40 +0200
+Received: by eya25 with SMTP id 25so4369697eya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Sep 2011 06:09:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=Wu0a1uJtH/gEdrPnjN7uwFlPD57FQ7TZDIhYvkSR/no=;
-	b=A9nYTfpBhDEI03nOX4FWvtJniMjz2rUFxzRSJdRqCTboVZ1/geVexa/7fGWzWWdnzg
-	3ZdWQ08PLotXjqnzyKkuxWdZA78l+iW3OhTwm7ri/q6w6M9U0YWzJkqMT8timN/TOsxI
-	M7thewn8p5CcQwMAH0puOVtfvSByBDTD+aukE=
-Received: by 10.150.7.21 with SMTP id 21mr1129825ybg.444.1317042586574;
-	Mon, 26 Sep 2011 06:09:46 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
-	by mx.google.com with ESMTPS id u4sm32809659ane.21.2011.09.26.06.09.43
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 26 Sep 2011 06:09:45 -0700 (PDT)
-From: Eyal Reizer <eyalreizer@googlemail.com>
+	Mon, 26 Sep 2011 09:24:16 -0700 (PDT)
+Received: by 10.213.8.8 with SMTP id f8mr2200966ebf.18.1317054256328;
+	Mon, 26 Sep 2011 09:24:16 -0700 (PDT)
+Received: from mail-ey0-f175.google.com (mail-ey0-f175.google.com
+	[209.85.215.175])
+	by mx.google.com with ESMTPS id v60sm61696479eev.12.2011.09.26.09.24.12
+	(version=SSLv3 cipher=OTHER); Mon, 26 Sep 2011 09:24:12 -0700 (PDT)
+Received: by eya25 with SMTP id 25so4369630eya.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Sep 2011 09:24:11 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.213.105.73 with SMTP id s9mr294500ebo.25.1317054251493; Mon,
+	26 Sep 2011 09:24:11 -0700 (PDT)
+Received: by 10.213.10.129 with HTTP; Mon, 26 Sep 2011 09:24:11 -0700 (PDT)
+In-Reply-To: <1316849170.4893.6.camel@mattotaupa>
+References: <1316848094-30368-1-git-send-email-jdk@ti.com>
+	<1316849170.4893.6.camel@mattotaupa>
+Date: Mon, 26 Sep 2011 12:24:11 -0400
+Message-ID: <CA+T6QPn7hEB+7z6MSZooXZBUEiJXS+ktfPKq569GcfugSF8eSw@mail.gmail.com>
+From: Jason Kridner <jkridner@beagleboard.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Sep 2011 16:07:34 +0300
-Message-Id: <1317042454-30164-1-git-send-email-eyalr@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Subject: [PATCHv2] iw: build version 0.9.22 from git sources
+Subject: Re: [meta-oe] WIP: cloud9: created
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,51 +40,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Sep 2011 13:15:12 -0000
+X-List-Received-Date: Mon, 26 Sep 2011 16:29:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Builds a new version which adds wowlan support from public git source
+On Sat, Sep 24, 2011 at 3:25 AM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Dear Jason,
+>
+> Am Samstag, den 24.09.2011, 03:08 -0400 schrieb Jason Kridner:
+>> Cloud9 is a web-browser based IDE. =A0This application should support
+>> multiple architectures as long as they have node.js and a build of
+>> node-o3-xml that is dropped into this system. =A0Ideally, that library
+>> would be added separately as a system-dependent portion, because
+>> everything else should be ISA independent.
+>>
+>> Advice on cleaning up this recipe is welcome.
+>
+> what problems to do you see?
 
-Signed-off-by: Eyal Reizer <eyalr@ti.com>
----
- recipes/iw/iw_git.bb |   29 +++++++++++++++++++++++++++++
- 1 files changed, 29 insertions(+), 0 deletions(-)
- create mode 100644 recipes/iw/iw_git.bb
+My main concern was the use of rsync and the process I was using to
+extract git submodules.  They both work fine.  Hopefully the fetcher
+will be improved in the future to solve the git submodules challenge,
+but I sure think there must be an easier way to simply copy all of the
+non-hidden files in a directory.
 
-diff --git a/recipes/iw/iw_git.bb b/recipes/iw/iw_git.bb
-new file mode 100644
-index 0000000..e4d0cd5
---- /dev/null
-+++ b/recipes/iw/iw_git.bb
-@@ -0,0 +1,27 @@
-+DESCRIPTION = "nl80211 based CLI configuration utility for wireless devices"
-+HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/iw"
-+SECTION = "base"
-+PRIORITY = "optional"
-+LICENSE = "BSD"
-+
-+SRCREV = "0a236ef5f8e4ba7218aac7d0cdacf45673d5b35c"
-+PR = "r0"
-+PV = "0.9.22"
-+PR_append = "+gitr${SRCPV}"
-+
-+DEPENDS = "libnl pkgconfig"
-+
-+SRC_URI = " \
-+	git://git.sipsolutions.net/iw.git;protocol=git \
-+	"
-+CFLAGS += "-DCONFIG_LIBNL20"
-+
-+S = "${WORKDIR}/git/"
-+
-+do_compile() {
-+	oe_runmake
-+}
-+
-+do_install() {
-+	oe_runmake DESTDIR=${D} install
-+}
--- 
-1.7.0.4
+>
+>> I will continue to improve it as I understand how. =A0It is rather
+>> useful as-is.
+>> ---
+>> =A0meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb | =A0 28 ++++++++++++=
++++++++++++
+>> =A01 files changed, 28 insertions(+), 0 deletions(-)
+>> =A0create mode 100644 meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb
+>>
+>> diff --git a/meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb b/meta-oe/r=
+ecipes-devtools/cloud9/cloud9_0.5.1.bb
+>> new file mode 100644
+>> index 0000000..626332f
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb
+>> @@ -0,0 +1,28 @@
+>> +DESCRIPTION =3D "Meet Cloud9, development-as-a-service for Javascripter=
+s and other developers"
+>> +HOMEPAGE =3D "http://c9.io"
+>> +RDEPENDS =3D "nodejs"
+>
+> This belongs further down too.
 
+oe-stylize places RDEPENDS above SRC_URI.
+
+>
+>> +
+>> +SRC_URI =3D "git://github.com/jadonk/cloud9.git;protocol=3Dgit \
+>> +"
+>
+> Please put that below the license stuff [1].
+>
+>> +
+>> +LICENSE =3D "GPLv3"
+>> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4784c3bcff601fd8f9515f52a11e=
+7018"
+
+oe-stylize only moves LICENSE up higher, but doesn't understand
+LIC_FILES_CHKSUM.  I'll fix manually.
+
+>> +
+>> +SRCREV =3D "08bae1d1cc2ba9f7f883a25afd07f0339a82fa8b"
+>> +S =3D "${WORKDIR}/git"
+>> +
+>> +do_configure_prepend () {
+>> + git submodule update --init --recursive
+>> +}
+>> +
+>> +do_compile () {
+>> +}
+>
+> Maybe add comments why the above overrides are needed.
+
+Will do.  Note that oe-sytlize removes the line breaks between the do_
+functions.  Is that really desired?
+
+>
+>> +
+>> +do_install () {
+>> + install -m 0755 -d ${D}/usr/share/cloud9 ${D}${bindir}
+>> + rsync -r --exclude=3D".*" ${S}/* ${D}/usr/share/cloud9
+>
+> Should `rsync` be put in `DEPENDS`?
+
+I'll put it there.
+
+>
+>> + touch ${D}${bindir}/cloud9
+>> + echo "#!/bin/sh" > ${D}${bindir}/cloud9
+>> + echo "node /usr/share/cloud9/bin/cloud9.js -l 0.0.0.0 -w /home/root -p=
+ 3000" >> ${D}${bindir}/cloud9
+>> + chmod 0755 ${D}${bindir}/cloud9
+>> +}
+>
+>
+> Thanks,
+>
+> Paul
+>
+>
+> [1] http://openembedded.org/index.php?title=3DStyleguide
+
+I believe that is only for classic OE.  I'm looking to submit to
+meta-oe.  I submitted to this list per [2].
+
+[2] http://git.openembedded.org/cgit.cgi/meta-openembedded/tree/meta-oe/REA=
+DME
+
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
