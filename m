@@ -1,28 +1,28 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eyalreizer@googlemail.com>) id 1R8Aw2-0005RD-Dw
+	(envelope-from <eyalreizer@googlemail.com>) id 1R8B1c-0005aM-25
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Sep 2011 15:09:26 +0200
-Received: by yxj17 with SMTP id 17so5320403yxj.6
+	Mon, 26 Sep 2011 15:15:12 +0200
+Received: by yia27 with SMTP id 27so5322214yia.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Sep 2011 06:04:01 -0700 (PDT)
+	Mon, 26 Sep 2011 06:09:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=G8ISptf22rY+QReIMSCsqikIXR2TaK6ujA4Syq076Ps=;
-	b=wWfhdi3ll1Jrk+ILinE6WkUf4vY2xXsLk23yb8b67PkDUZ5V4cxuYWze+ooq+zOTDR
-	FXhCsuUUmcqKsEWBUtbbdOyVmgdKuKs2iZzB+/P0CseK4GZrZ3XYwy7IOKFBKcoafIi+
-	xWRqjkXh8E8jNDsShUpVfQ2P70SHQwSLKembY=
-Received: by 10.236.191.71 with SMTP id f47mr38932834yhn.125.1317042241777;
-	Mon, 26 Sep 2011 06:04:01 -0700 (PDT)
+	bh=Wu0a1uJtH/gEdrPnjN7uwFlPD57FQ7TZDIhYvkSR/no=;
+	b=A9nYTfpBhDEI03nOX4FWvtJniMjz2rUFxzRSJdRqCTboVZ1/geVexa/7fGWzWWdnzg
+	3ZdWQ08PLotXjqnzyKkuxWdZA78l+iW3OhTwm7ri/q6w6M9U0YWzJkqMT8timN/TOsxI
+	M7thewn8p5CcQwMAH0puOVtfvSByBDTD+aukE=
+Received: by 10.150.7.21 with SMTP id 21mr1129825ybg.444.1317042586574;
+	Mon, 26 Sep 2011 06:09:46 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
-	by mx.google.com with ESMTPS id h20sm68770650ann.7.2011.09.26.06.03.59
+	by mx.google.com with ESMTPS id u4sm32809659ane.21.2011.09.26.06.09.43
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 26 Sep 2011 06:04:00 -0700 (PDT)
+	Mon, 26 Sep 2011 06:09:45 -0700 (PDT)
 From: Eyal Reizer <eyalreizer@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Sep 2011 16:01:46 +0300
-Message-Id: <1317042106-14111-1-git-send-email-eyalr@ti.com>
+Date: Mon, 26 Sep 2011 16:07:34 +0300
+Message-Id: <1317042454-30164-1-git-send-email-eyalr@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 Subject: [PATCHv2] iw: build version 0.9.22 from git sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -38,7 +38,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Sep 2011 13:09:27 -0000
+X-List-Received-Date: Mon, 26 Sep 2011 13:15:12 -0000
 
 Builds a new version which adds wowlan support from public git source
 
@@ -53,7 +53,7 @@ new file mode 100644
 index 0000000..e4d0cd5
 --- /dev/null
 +++ b/recipes/iw/iw_git.bb
-@@ -0,0 +1,29 @@
+@@ -0,0 +1,27 @@
 +DESCRIPTION = "nl80211 based CLI configuration utility for wireless devices"
 +HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/iw"
 +SECTION = "base"
