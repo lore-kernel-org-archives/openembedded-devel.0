@@ -1,25 +1,27 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from vms173019pub.verizon.net ([206.46.173.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1R8ItY-0007W0-VE for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Sep 2011 23:39:25 +0200
-Received: from f053036041.adsl.alicedsl.de ([78.53.36.41]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1R8IoO-0008C3-6N for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Sep 2011 21:34:04 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <denis@denix.org>) id 1R8KSH-0001Cv-7M
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Sep 2011 01:19:21 +0200
+Received: from gandalf.denix.org ([unknown] [71.191.138.237])
+	by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LS5005PNKIX75W0@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	26 Sep 2011 18:13:50 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 254A914AF64; Mon,
+	26 Sep 2011 19:13:45 -0400 (EDT)
+Date: Mon, 26 Sep 2011 19:13:45 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Sep 2011 23:34:00 +0200
-In-Reply-To: <20110926195736.GB24402@denix.org>
-References: <BAY168-W73BC4907A15BF1630143379D0F0@phx.gbl>
-	<BAY168-W1105B78F9D2BC795FE21E909DF30@phx.gbl>
-	<20110926195736.GB24402@denix.org>
-X-Mailer: Evolution 3.0.3- 
-Message-ID: <1317072842.8065.38.camel@mattotaupa>
-Mime-Version: 1.0
-Subject: Re: do_patch failure ltp_20101031.bb as file not uncompressed propely
+Message-id: <20110926231345.GC24402@denix.org>
+References: <1316848094-30368-1-git-send-email-jdk@ti.com>
+	<1316849170.4893.6.camel@mattotaupa>
+	<CA+T6QPn7hEB+7z6MSZooXZBUEiJXS+ktfPKq569GcfugSF8eSw@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <CA+T6QPn7hEB+7z6MSZooXZBUEiJXS+ktfPKq569GcfugSF8eSw@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [meta-oe] WIP: cloud9: created
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,76 +35,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Sep 2011 21:39:25 -0000
-X-Groupsio-MsgNum: 34489
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-d4n6uLc1S03x0BMbNzrg"
+X-List-Received-Date: Mon, 26 Sep 2011 23:19:21 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
---=-d4n6uLc1S03x0BMbNzrg
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Mon, Sep 26, 2011 at 12:24:11PM -0400, Jason Kridner wrote:
+> 
+> >> +SRCREV = "08bae1d1cc2ba9f7f883a25afd07f0339a82fa8b"
+> >> +S = "${WORKDIR}/git"
+> >> +
+> >> +do_configure_prepend () {
+> >> + git submodule update --init --recursive
+> >> +}
+> >> +
+> >> +do_compile () {
+> >> +}
+> >
+> > Maybe add comments why the above overrides are needed.
+> 
+> Will do.  Note that oe-sytlize removes the line breaks between the do_
+> functions.  Is that really desired?
 
-Dear Ali, dear Denys,
+Not sure about the lack of empty lines between do_ functions - probably an 
+unintended behavior of oe-stylize...
 
+But I believe empty do_ functions need to have a single ':' character, which 
+is a NOP in shell, to prevent bitbake from discarding the function altogether, 
+if I'm not mistaken for the proper reason.
 
-Am Montag, den 26.09.2011, 15:57 -0400 schrieb Denys Dmytriyenko:
-> On Tue, Sep 27, 2011 at 12:39:23AM +0500, ali anwar wrote:
-> >=20
-> > > From: ali_3k1@hotmail.com
-> > > To: openembedded-devel@lists.openembedded.org
-> > > Date: Fri, 23 Sep 2011 18:36:55 +0500
-> > > Subject: Re: [oe] do_patch failure ltp_20101031.bb as file not uncomp=
-ressed propely
-> > >=20
-> > >=20
-> > > To elaborate manually "tar -xf" untar as well as uncompressd the=20
-> > > tp-full-20101031.bz2 file. Where as OE only uncompressed it and did N=
-OT=20
-> > > untar so I recieved following:
-> > > ERROR: Error executing a python function in=20
-> > > /home/qatools/ali/trunk/meta-oe/meta-oe/recipes-benchmark/ltp/ltp_201=
-01031.bb:OSError:=20
-> > > [Errno 20] Not a directory: '/home/qatools/ali/trunk/build_release_lt=
-p/work/ppce500mc-linux/ltp-20101031-r0/ltp-full-20101031'
-
-> Please contact upstream and request they fix their filename - the way the=
-y=20
-> named it clearly indicates it's bz2 compressed, but not a tar archive. It=
-=20
-> should be either .tar.bz2 or at least .tbz2 extension and not just .bz2
-
-That would indeed be the best solution.
-
-I still could not figure out though what has changed since
-decompressing/unpacking the archive must have worked some time back. I
-tried BitBake 1.8 but it also failed with the same error.
-
-Is there a way to specify the file name the downloaded file should be
-saved as?
+-- 
+Denys
 
 
-Thanks,
-
-Paul
-
-
-PS: Ali, please adhere to the netiquette [1].
-
-
-[1] http://en.opensuse.org/openSUSE:Mailing_list_netiquette
-
---=-d4n6uLc1S03x0BMbNzrg
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk6A78kACgkQPX1aK2wOHVgLzACeJsL0nGLoq/q5xV4vKDGhcbmb
-vAUAnilBmcMzCOuuzn/XLzbrUM4q1bOw
-=IyMB
------END PGP SIGNATURE-----
-
---=-d4n6uLc1S03x0BMbNzrg--
