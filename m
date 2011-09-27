@@ -1,20 +1,22 @@
-Received: from mailfront1.rz.tu-bs.de ([134.169.12.132] helo=tu-bs.de)
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <c.keck@tu-braunschweig.de>) id 1R8Whd-0004lc-D0
+	(envelope-from <holger+oe@freyther.de>) id 1R8ZOn-00018u-Rc
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Sep 2011 14:24:01 +0200
-Received: from [134.169.55.7] (account chrkeck@tu-braunschweig.de
-	[134.169.55.7] verified) by rz.tu-bs.de (CommuniGate Pro SMTP 5.3.13)
-	with ESMTPSA id 12568858 for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Sep 2011 13:18:33 +0200
-Message-ID: <4E81B106.8040801@tu-braunschweig.de>
-Date: Tue, 27 Sep 2011 13:18:30 +0200
-From: Christian Keck <c.keck@tu-braunschweig.de>
-User-Agent: Mozilla/5.0 (Windows NT 5.1;
-	rv:6.0.2) Gecko/20110902 Thunderbird/6.0.2
+	Tue, 27 Sep 2011 17:16:45 +0200
+Received: from [192.168.0.101] (91-64-80-26-dynip.superkabel.de [91.64.80.26])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 611B61B10C03
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Sep 2011 15:05:46 +0000 (UTC)
+Message-ID: <4E81E5F5.8080603@freyther.de>
+Date: Tue, 27 Sep 2011 17:04:21 +0200
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.21) Gecko/20110831 Lightning/1.0b2 Thunderbird/3.1.13
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: Debugging OpenEmbedded Builds
+References: <4E81B106.8040801@tu-braunschweig.de>
+In-Reply-To: <4E81B106.8040801@tu-braunschweig.de>
+Subject: Re: Debugging OpenEmbedded Builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,26 +30,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Sep 2011 12:24:01 -0000
-Content-Type: text/plain; charset=ISO-8859-15; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 27 Sep 2011 15:16:45 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: 7bit
 
-How can debug an OpenEmbedded build? I have made some changes to a board 
-file, but it seems that my changes have no effect. Is there a 
-opportunity to look into source code just before they are compiled?
+On 09/27/2011 01:18 PM, Christian Keck wrote:
+> How can debug an OpenEmbedded build? I have made some changes to a board file,
+> but it seems that my changes have no effect. Is there a opportunity to look
+> into source code just before they are compiled?
 
-Thanks, Christian
-
--- 
-Dipl.-Ing. Christian Keck
-Institut für Produktionsmesstechnik
-Technische Universität Braunschweig
-Schleinitzstraße 20
-D-38106 Braunschweig
-Telefon: (0531) 391-7026
-Telefax: (0531) 391-5837
-
-Mail: mailto://c.keck@tu-braunschweig.de
-Internet: http://www.iprom.tu-bs.de
+you can use bitbake -e recipe, to see how variables and scripts that will be
+executed look like. also it generates scripts in the temp/ dir in WORKDIR that
+can be inspected, also bitbake -c devshell NAME gets you into such an environment.
 
 
