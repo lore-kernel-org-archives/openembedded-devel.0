@@ -1,25 +1,24 @@
-Received: from vms173001pub.verizon.net ([206.46.173.1])
+Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1R8oDq-0003tq-JX
+	(envelope-from <jaap.dejong@nedap.com>) id 1R8tqI-0005OL-3R
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Sep 2011 09:06:26 +0200
-Received: from gandalf.denix.org ([unknown] [71.191.138.237])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LS800F0Q0T5504J@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	28 Sep 2011 02:00:42 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 7C46814AF5F; Wed,
-	28 Sep 2011 03:00:41 -0400 (EDT)
-Date: Wed, 28 Sep 2011 03:00:41 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20110928070041.GA31765@denix.org>
-References: <4E82B6B7.10904@dresearch-fe.de>
-MIME-version: 1.0
-In-reply-to: <4E82B6B7.10904@dresearch-fe.de>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: pull request script
+	Wed, 28 Sep 2011 15:06:30 +0200
+Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
+	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Wed, 28 Sep 2011
+	15:01:02 +0200
+X-TM-IMSS-Message-ID: <050de4740006b4dc@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 050de4740006b4dc ;
+	Wed, 28 Sep 2011 14:58:12 +0200
+Message-ID: <4E831A8E.5020903@nedap.com>
+Date: Wed, 28 Sep 2011 15:01:02 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.21) Gecko/20110831 Lightning/1.0b2 Thunderbird/3.1.13
+MIME-Version: 1.0
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: CONFFILES question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,28 +32,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Sep 2011 07:06:26 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 28 Sep 2011 13:06:30 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Sep 28, 2011 at 07:55:03AM +0200, Steffen Sledz wrote:
-> On 27.09.2011 22:54, Tom Rini wrote:
-> > On Tue, Sep 27, 2011 at 12:26 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
-> >> > On 23.09.2011 02:01, Tom Rini wrote:
-> >>> >> Applied, thanks.  And for the future, I think it's possible to use the
-> >>> >> normal pull request script and point it at github or whatever :)
-> >> >
-> >> > Where can this mentioned "normal pull request script" be found?
-> >
-> > I think Koen and Denys both use the oe-core script.
-> 
-> Is this script available somewhere for the community?
+Hi,
 
-There are few variants around, this is the one from oe-core:
+I would really like to use some wildcards in a CONFFILES_${PN}.
 
-http://cgit.openembedded.org/cgit.cgi/openembedded-core/tree/scripts/create-pull-request
+CONFFILES_${PN} = "/var/lib/myproject/*"
+Compiling this works, but installing ends with a error message.
 
--- 
-Denys
+How should I accomplish this? Or is specifying all the files the only 
+way to go?
+
+Jaap
 
 
