@@ -1,31 +1,20 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1R9D10-0005cl-82
+Received: from cpe.ge-0-2-0-951.faaqnqu1.customer.tele.dk ([93.167.193.22]
+	helo=mail.mikrofyn.com) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <sgh@sgh.dk>) id 1R9GcL-000149-Tw
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Sep 2011 11:34:50 +0200
-Received: by bke11 with SMTP id 11so463149bke.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Sep 2011 02:29:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=tnfoBJnnF0+E2agpl3BTRq6KMlR6A/2dFWMj7dECQ5w=;
-	b=cGXwq3pLvGbM5nHBb04cW30FEfB6QASQZfMJcsdeF7Nn774V/sVqBK88IHTSprvT8s
-	6A/zaZ8RNNN4D3VHpL7y7YSleKHg6xSrzyl9XufRM+ObKlRpt7gxAlnL2i162yA9suv/
-	tJnb7LtDtp9Pk1+nEt7UhT32Wzk7pDLVZRpkQ=
-Received: by 10.204.13.156 with SMTP id c28mr1080967bka.243.1317288548186;
-	Thu, 29 Sep 2011 02:29:08 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id ex8sm1069688bkc.2.2011.09.29.02.29.06
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 29 Sep 2011 02:29:07 -0700 (PDT)
-Date: Thu, 29 Sep 2011 11:28:59 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 29 Sep 2011 15:25:37 +0200
+Received: from koontz.dkode.lgs-net.com ([10.115.0.215]) by mail.mikrofyn.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 29 Sep 2011 15:25:17 +0200
+From: =?UTF-8?q?A=C3=B8ren=20Holm?= <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110929092859.GB5030@jama.jama.net>
+Date: Thu, 29 Sep 2011 15:19:10 +0200
+Message-Id: <1317302350-8193-1-git-send-email-sgh@sgh.dk>
+X-Mailer: git-send-email 1.7.4.1
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: gcc-4.6 patches in meta-oe need to be rebased on new oe-core revision
+X-OriginalArrivalTime: 29 Sep 2011 13:25:17.0750 (UTC)
+	FILETIME=[3AC68D60:01CC7EAB]
+Subject: [PATCH] wpa-supplicant: Fix wpa-supplicant not exiting.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,106 +28,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Sep 2011 09:34:50 -0000
-X-Groupsio-MsgNum: 34500
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="oC1+HKm2/end4ao3"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 29 Sep 2011 13:25:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---oC1+HKm2/end4ao3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Søren Holm <sgh@sgh.dk>
 
-Hi,
+woa-supplicant keps running if conenction to a network fails
+getting an ip. ifup will then not call the post-down-script.
 
-oe-core recipe was upgraded yesterday:
-http://git.openembedded.org/cgit.cgi/openembedded-core/commit/?id=3Ded7deec=
-b9503420fbf8071445e077c32beda8dc4
+The solution is to add the script to down-sripts.
+---
+ recipes/wpa-supplicant/wpa-supplicant-0.7.inc |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-and
-ie Patch gcc-4.6-linaro-r106741.patch does not apply anymore
+diff --git a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+index 722f5fa..9be28ba 100644
+--- a/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
++++ b/recipes/wpa-supplicant/wpa-supplicant-0.7.inc
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://../COPYING;md5=c54ce9345727175ff66d17b67ff51f58 \
+                     file://wpa_supplicant.c;beginline=1;endline=17;md5=acdc5a4b0d6345f21f136eace747260e"
+ DEPENDS = "gnutls dbus libnl openssl ${@base_contains("COMBINED_FEATURES", "madwifi", "madwifi-ng", "",d)}"
+ RRECOMMENDS_${PN} = "wpa-supplicant-passphrase wpa-supplicant-cli"
+-INC_PR = "r7"
++INC_PR = "r8"
+ 
+ SRC_URI = "http://hostap.epitest.fi/releases/wpa_supplicant-${PV}.tar.gz \
+            file://defconfig \
+@@ -71,6 +71,7 @@ do_install () {
+ 	install -m 755 ${WORKDIR}/wpa-supplicant.sh ${D}${sysconfdir}/network/if-pre-up.d/wpa-supplicant
+ 	cd ${D}${sysconfdir}/network/ && \
+ 	ln -sf ../if-pre-up.d/wpa-supplicant if-post-down.d/wpa-supplicant
++	ln -sf ../if-pre-up.d/wpa-supplicant if-down.d/wpa-supplicant
+ 
+ 	install -d ${D}/etc/default/volatiles
+ 	install -m 0644 ${WORKDIR}/99_wpa_supplicant ${D}/etc/default/volatiles
+-- 
+1.7.4.1
 
-ERROR: Error executing a python function in /OE/shr-core/openembedded-core/=
-meta/recipes-devtools/gcc/gcc-runtime_4.6.bb:
-CmdError: Command Error: exit status: 1  Output:
-Applying patch gcc-4.6-linaro-r106741.patch
-patching file gcc/combine.c
-Hunk #2 succeeded at 3112 (offset 26 lines).
-Hunk #3 succeeded at 3129 (offset 26 lines).
-Hunk #4 succeeded at 3168 (offset 26 lines).
-Hunk #5 succeeded at 3198 (offset 26 lines).
-Hunk #6 succeeded at 3260 (offset 26 lines).
-Hunk #7 succeeded at 3268 (offset 26 lines).
-Hunk #8 succeeded at 4943 (offset 29 lines).
-Hunk #9 succeeded at 5010 (offset 29 lines).
-Hunk #10 succeeded at 5027 (offset 29 lines).
-Hunk #11 succeeded at 5073 (offset 29 lines).
-Hunk #12 succeeded at 5151 (offset 29 lines).
-Hunk #13 succeeded at 5210 (offset 29 lines).
-Hunk #14 succeeded at 5230 (offset 29 lines).
-Hunk #15 succeeded at 5290 (offset 29 lines).
-Hunk #16 FAILED at 5606.
-| NOTE: Applying patch 'gcc-4.6-linaro-r106720.patch' (meta-openembedded/me=
-ta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106720.patch)
-| NOTE: Applying patch 'gcc-4.6-linaro-r106723.patch' (meta-openembedded/me=
-ta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106723.patch)
-| NOTE: Applying patch 'gcc-4.6-linaro-r106729.patch' (meta-openembedded/me=
-ta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106729.patch)
-| NOTE: Applying patch 'gcc-4.6-linaro-r106733.patch' (meta-openembedded/me=
-ta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106733.patch)
-| NOTE: Applying patch 'gcc-4.6-linaro-r106737.patch' (meta-openembedded/me=
-ta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106737.patch)
-| NOTE: Applying patch 'gcc-4.6-linaro-r106738.patch' (meta-openembedded/me=
-ta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106738.patch)
-| NOTE: Applying patch 'gcc-4.6-linaro-r106739.patch' (meta-openembedded/me=
-ta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106739.patch)
-| NOTE: Applying patch 'gcc-4.6-linaro-r106740.patch' (meta-openembedded/me=
-ta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106740.patch)
-| NOTE: Applying patch 'gcc-4.6-linaro-r106741.patch' (meta-openembedded/me=
-ta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106741.patch)
-| ERROR: Error executing a python function in /OE/shr-core/openembedded-cor=
-e/meta/recipes-devtools/gcc/gcc-runtime_4.6.bb:
-| CmdError: Command Error: exit status: 1  Output:
-| Applying patch gcc-4.6-linaro-r106741.patch
-| patching file gcc/combine.c
-| Hunk #2 succeeded at 3112 (offset 26 lines).
-| Hunk #3 succeeded at 3129 (offset 26 lines).
-| Hunk #4 succeeded at 3168 (offset 26 lines).
-| Hunk #5 succeeded at 3198 (offset 26 lines).
-| Hunk #6 succeeded at 3260 (offset 26 lines).
-| Hunk #7 succeeded at 3268 (offset 26 lines).
-| Hunk #8 succeeded at 4943 (offset 29 lines).
-| Hunk #9 succeeded at 5010 (offset 29 lines).
-| Hunk #10 succeeded at 5027 (offset 29 lines).
-| Hunk #11 succeeded at 5073 (offset 29 lines).
-| Hunk #12 succeeded at 5151 (offset 29 lines).
-| Hunk #13 succeeded at 5210 (offset 29 lines).
-| Hunk #14 succeeded at 5230 (offset 29 lines).
-| Hunk #15 succeeded at 5290 (offset 29 lines).
-| Hunk #16 FAILED at 5606.
-| Hunk #17 succeeded at 5728 (offset 29 lines).
-| Hunk #18 succeeded at 5783 (offset 29 lines).
-| Hunk #19 succeeded at 5984 (offset 29 lines).
-| Hunk #20 succeeded at 6205 (offset 29 lines).
-| 1 out of 20 hunks FAILED -- rejects in file gcc/combine.c
-| Patch gcc-4.6-linaro-r106741.patch does not apply (enforce with -f)
 
-I've pinged khem on IRC yesterday.. but posting also here just for record.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---oC1+HKm2/end4ao3
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk6EOlsACgkQN1Ujt2V2gBw99ACfRUAbTMjwsV0+Z/RL7rjA3rwS
-tw0AoK1Dc2TGbAPpIjpPjXuXDzKMX0wB
-=Y4yL
------END PGP SIGNATURE-----
-
---oC1+HKm2/end4ao3--
