@@ -1,34 +1,29 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1R9clK-0007eY-NR
+	(envelope-from <martin.jansa@gmail.com>) id 1R9fS1-0004Gl-Pk
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Sep 2011 15:04:23 +0200
-Received: by mail-bw0-f47.google.com with SMTP id 11so1747506bke.6
+	Fri, 30 Sep 2011 17:56:38 +0200
+Received: by fxi1 with SMTP id 1so3209477fxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Sep 2011 05:58:56 -0700 (PDT)
+	Fri, 30 Sep 2011 08:51:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=gAVN25l0Tktckz7FcHBLgFTtlxSV4iwh87lvG1KM/yM=;
-	b=nJArXhcnMchMFEC1HMkXPXeLWhwCTr6hGgLfsJfT8ao3xxnvjrbOZcOH5LHx021hyZ
-	n2oTsUmxx8GqGjpGksq2+2xwhXHE4lYCqL59BPLdrSfeEKp+Y2Ts4bRejzDszzQ+HODz
-	wku3HgBwOhkjaPVXrYZjeS/76Cxhf3qqWHc8U=
-Received: by 10.204.144.67 with SMTP id y3mr2072891bku.322.1317387532945;
-	Fri, 30 Sep 2011 05:58:52 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=7PKwy0iMi62EPrRq10tlmU5BLJJ8pcnPlqV4WvujH5I=;
+	b=b3W9XE9gIDlHMhzQvvK1uBJUrXfLoRmgVxDgPLZxqkGXX9c16EWd5eeONXiq+cTb45
+	uH/aDtjnsV2Bi1JWyc0ALO9wxb1R/cfumKMgQS2+d2weT4yx3n24loxCZZdW7QCdPSfB
+	sukTH/XcZbGAYNPgPQClnA9rl5CbYL396ClxA=
+Received: by 10.223.98.146 with SMTP id q18mr1900686fan.57.1317397868684;
+	Fri, 30 Sep 2011 08:51:08 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id j16sm4899693bks.3.2011.09.30.05.58.51
+	by mx.google.com with ESMTPS id t19sm7185282faj.23.2011.09.30.08.51.06
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 30 Sep 2011 05:58:52 -0700 (PDT)
+	Fri, 30 Sep 2011 08:51:07 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Sep 2011 14:56:50 +0200
-Message-Id: <7a2d65fd6991953d7529740c35295b9835bbb41b.1317387144.git.Martin.Jansa@gmail.com>
+Date: Fri, 30 Sep 2011 17:50:59 +0200
+Message-Id: <cover.1317397769.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.6.1
-In-Reply-To: <7a73a24c82f9d721c3342a14097cb105ba82a3ca.1317387144.git.Martin.Jansa@gmail.com>
-References: <7a73a24c82f9d721c3342a14097cb105ba82a3ca.1317387144.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1317387144.git.Martin.Jansa@gmail.com>
-References: <cover.1317387144.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 14/15] talloc: drop from meta-oe, no longer needed by mesa
+Subject: [meta-oe][PATCH 0/6] Glib related changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,47 +37,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Sep 2011 13:07:00 -0000
+X-List-Received-Date: Fri, 30 Sep 2011 15:56:38 -0000
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-support/talloc/talloc_2.0.1.bb |   27 ------------------------
- 1 files changed, 0 insertions(+), 27 deletions(-)
- delete mode 100644 meta-oe/recipes-support/talloc/talloc_2.0.1.bb
+We were using 2.29.3+git% from meta-oe and after upgrade to 2.30.0 I was hit
+by few G_CONST_RETURN and other issues due to newer glib. Here is what I have
+now to build shr images OK again, but probably there is more recipes which need
+upgrade/fix to cope with glib-2.30.0.
 
-diff --git a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb b/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-deleted file mode 100644
-index a69bd40..0000000
---- a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-+++ /dev/null
-@@ -1,27 +0,0 @@
--DESCRIPTION = "Hierarchical, reference counted memory pool system with destructors"
--HOMEPAGE = "http://talloc.samba.org"
--LICENSE = "LGPL"
--LIC_FILES_CHKSUM = "file://NEWS;md5=5fe776b23a711c9153ee94bc87e47334"
--
--inherit autotools pkgconfig
--
--SRC_URI = "http://samba.org/ftp/${BPN}/${BPN}-${PV}.tar.gz"
--SRC_URI[md5sum] = "c6e736540145ca58cb3dcb42f91cf57b"
--SRC_URI[sha256sum] = "5b810527405f29d54f50efd78bf2c89e318f2cd8bed001f22f2a1412fd27c9b4"
--
--TARGET_CC_ARCH += "${LDFLAGS}"
--
--PR = "r1"
--
--# autoreconf doesn't work well while reconfiguring included libreplace
--do_configure () {
--       gnu-configize
--       oe_runconf
--}
--
--do_install_append() {
--       install -d ${D}${libdir}
--       ln -s libtalloc.so.2.0.1 ${D}${libdir}/libtalloc.so.2.0
--       ln -s libtalloc.so.2.0 ${D}${libdir}/libtalloc.so.2
--       ln -s libtalloc.so.2 ${D}${libdir}/libtalloc.so
--}
+Someone who cares about gnome should continue from this, but IMHO this is good start :).
+
+See http://lists.linuxtogo.org/pipermail/openembedded-core/2011-September/010447.html
+to check if glib was already included in oe-core
+
+The following changes since commit 6786f3118988e625b7ad8d7758c94e302789693f:
+
+  tcp-wrappers: Use the recipe from oe-core (2011-09-27 17:40:02 -0700)
+
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/glib
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/glib
+
+Martin Jansa (6):
+  glib-2.0: drop 2.29.3+git from meta-oe, there should be 2.30.0 in
+    oe-core
+  pango: upgrade to 1.29.4
+  poppler-data: upgrade from 0.4.0 to 0.4.5
+  poppler: upgrade from 0.12.3 to 0.18.0
+  python-cython: upgrade to 0.15.1 because 0.13 doesn't work with
+    python-2.7.2
+  gdbus-binding-tool: drop from meta-oe, superseeded by glib-2.30.0
+    where it's included
+
+ meta-oe/recipes-core/glib-2.0/glib-2.0.inc         |    6 -
+ ...003-gatomic-proper-pointer-get-cast.patch.patch |   28 --
+ .../0005-glib-mkenums-interpreter.patch.patch      |   25 -
+ .../60_wait-longer-for-threads-to-die.patch        |   33 --
+ .../glib-2.0/glib-2.0/configure-libtool.patch      |   38 --
+ .../glib-2.0/glib-2.0/g_once_init_enter.patch      |   24 -
+ .../glib-2.0/glib-2.0/glib-gettextize-dir.patch    |   24 -
+ .../recipes-core/glib-2.0/glib-2.0/no-iconv.patch  |  104 -----
+ .../glib-2.0/remove.test.for.qsort_r.patch         |   54 ---
+ meta-oe/recipes-core/glib-2.0/glib-2.0_git.bb      |   32 --
+ meta-oe/recipes-core/glib-2.0/glib.inc             |   38 --
+ .../gdbus-binding-tool/gdbus-binding-tool/COPYING  |  482 --------------------
+ .../gdbus-binding-tool/gdbus-binding-tool_git.bb   |   37 --
+ ...thon-cython_0.13.bb => python-cython_0.15.1.bb} |    6 +-
+ .../pango/pango-1.28.3/no-tests.patch              |   10 -
+ .../pango/pango-1.29.4/no-tests.patch              |   11 +
+ meta-oe/recipes-graphics/pango/pango_1.28.3.bb     |    9 -
+ meta-oe/recipes-graphics/pango/pango_1.29.4.bb     |    9 +
+ ...poppler-data_0.4.0.bb => poppler-data_0.4.5.bb} |    6 +-
+ meta-oe/recipes-support/poppler/poppler_0.12.3.bb  |   10 -
+ meta-oe/recipes-support/poppler/poppler_0.18.0.bb  |   10 +
+ 21 files changed, 34 insertions(+), 962 deletions(-)
+ delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0.inc
+ delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/0003-gatomic-proper-pointer-get-cast.patch.patch
+ delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/0005-glib-mkenums-interpreter.patch.patch
+ delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/60_wait-longer-for-threads-to-die.patch
+ delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/configure-libtool.patch
+ delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/g_once_init_enter.patch
+ delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/glib-gettextize-dir.patch
+ delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/no-iconv.patch
+ delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/remove.test.for.qsort_r.patch
+ delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0_git.bb
+ delete mode 100644 meta-oe/recipes-core/glib-2.0/glib.inc
+ delete mode 100644 meta-oe/recipes-devtools/gdbus-binding-tool/gdbus-binding-tool/COPYING
+ delete mode 100644 meta-oe/recipes-devtools/gdbus-binding-tool/gdbus-binding-tool_git.bb
+ rename meta-oe/recipes-devtools/python/{python-cython_0.13.bb => python-cython_0.15.1.bb} (73%)
+ delete mode 100644 meta-oe/recipes-graphics/pango/pango-1.28.3/no-tests.patch
+ create mode 100644 meta-oe/recipes-graphics/pango/pango-1.29.4/no-tests.patch
+ delete mode 100644 meta-oe/recipes-graphics/pango/pango_1.28.3.bb
+ create mode 100644 meta-oe/recipes-graphics/pango/pango_1.29.4.bb
+ rename meta-oe/recipes-support/poppler/{poppler-data_0.4.0.bb => poppler-data_0.4.5.bb} (77%)
+ delete mode 100644 meta-oe/recipes-support/poppler/poppler_0.12.3.bb
+ create mode 100644 meta-oe/recipes-support/poppler/poppler_0.18.0.bb
+
 -- 
 1.7.6.1
 
