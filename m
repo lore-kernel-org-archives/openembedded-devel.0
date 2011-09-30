@@ -1,34 +1,27 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1R9fU2-0004M7-HE
+	(envelope-from <bluelotus256@gmail.com>) id 1R9fmN-0005ZO-Vg
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Sep 2011 17:58:42 +0200
-Received: by mail-fx0-f47.google.com with SMTP id 1so3210360fxi.6
+	Fri, 30 Sep 2011 18:17:40 +0200
+Received: by bke11 with SMTP id 11so1947715bke.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Sep 2011 08:53:15 -0700 (PDT)
+	Fri, 30 Sep 2011 09:12:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=G7+qLXJKNQ57lKlimt7dU9qEDR8tr5217Cq1Jz19fz4=;
-	b=ib9OIYLia/R56/WEdLMBOBe/DAAzLUFd/ZuK11NjimPMpOPdOVoPmFX3+EyV9od8tT
-	Yc7eudN2XUzSTk1XCgqRJSoxn4DyZjnVY6ZzfG3oza9s1Vegpcf6dV0S3BYzTtIsWJw1
-	PHHh9MHv7TAUweu1141wZ7e6m4jE8vMxtY3zs=
-Received: by 10.223.17.215 with SMTP id t23mr1595632faa.11.1317397950469;
-	Fri, 30 Sep 2011 08:52:30 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id n12sm7217073fan.9.2011.09.30.08.52.28
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 30 Sep 2011 08:52:29 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=80dUylF2KQxSzyPiPsgqb8PuUd94Rk5LufuNL3xjDf0=;
+	b=DsmjSRYpBOe3RVP6tn+hc5wcoKIwMqVes8xhqqu8qGSq2OMUKeuzutasmKt9n6mGpw
+	GvhpdKQk234tg5BWYRg2waYtZp8S/1L3eCZQLLMdfYYN82mH+42/OUFWlkDyugNlcyyR
+	Fu5SRGRJcnqQdH5Nc14Xf6lgyG6jgMwzxo3tI=
+MIME-Version: 1.0
+Received: by 10.204.131.198 with SMTP id y6mr8183985bks.330.1317399130823;
+	Fri, 30 Sep 2011 09:12:10 -0700 (PDT)
+Received: by 10.205.83.6 with HTTP; Fri, 30 Sep 2011 09:12:10 -0700 (PDT)
+Date: Fri, 30 Sep 2011 10:12:10 -0600
+Message-ID: <CAFkhdsekLmcser0W9K5Rj+Q4sLx_1sxWGikYZ+XJUW+h9uYO0g@mail.gmail.com>
+From: asdfasdf asdfasdf <bluelotus256@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Sep 2011 17:52:02 +0200
-Message-Id: <739e5d4f2d083e9f1f93aeeed99a79018d08ae61.1317397769.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.6.1
-In-Reply-To: <d949b79e20616add7118dcc7cb4f5ee08b4fed3b.1317397769.git.Martin.Jansa@gmail.com>
-References: <d949b79e20616add7118dcc7cb4f5ee08b4fed3b.1317397769.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1317397769.git.Martin.Jansa@gmail.com>
-References: <cover.1317397769.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/6] poppler-data: upgrade from 0.4.0 to 0.4.5
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Question regarding a bitbake recipe for libmodbus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,40 +35,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Sep 2011 15:58:42 -0000
+X-List-Received-Date: Fri, 30 Sep 2011 16:17:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- ...poppler-data_0.4.0.bb => poppler-data_0.4.5.bb} |    6 ++----
- 1 files changed, 2 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-support/poppler/{poppler-data_0.4.0.bb => poppler-data_0.4.5.bb} (77%)
+Hi
+     hope you are doing well. I  am using a ARM based development
+platform.I would appreciate it if you could answer a question I have
+with regard to a
+bitbake recipe for libmodbus:
 
-diff --git a/meta-oe/recipes-support/poppler/poppler-data_0.4.0.bb b/meta-oe/recipes-support/poppler/poppler-data_0.4.5.bb
-similarity index 77%
-rename from meta-oe/recipes-support/poppler/poppler-data_0.4.0.bb
-rename to meta-oe/recipes-support/poppler/poppler-data_0.4.5.bb
-index c59cc73..cbb02b4 100644
---- a/meta-oe/recipes-support/poppler/poppler-data_0.4.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler-data_0.4.5.bb
-@@ -5,8 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4870b98343f0bbb25fa43b9d2ba59448 \
-                     file://COPYING.gpl2;md5=751419260aa954499f7abaabaa882bbe \
- "
- 
--PR = "r2"
--
- SRC_URI = "http://poppler.freedesktop.org/${PN}-${PV}.tar.gz"
- 
- do_compile() {
-@@ -19,5 +17,5 @@ do_install() {
- FILES_${PN} += "${datadir}"
- inherit allarch
- 
--SRC_URI[md5sum] = "6975bf8e9ea2cfb42b9ecdbcc257cf57"
--SRC_URI[sha256sum] = "5caf7e10b7b0c6a4e1e753af09be52224e88bb8fbcb47794ad72b99b9e24b109"
-+SRC_URI[md5sum] = "448dd7c5077570e340340706cef931aa"
-+SRC_URI[sha256sum] = "3190bc457bafe4b158f79a08e8a3f1824031ec12acefc359e68e0f04da0f70fd"
--- 
-1.7.6.1
+I am trying to communicate with a plc which is a modbus slave through a C
+program. The program just opens and closes the connection as I basically
+wanted to test this function first before I proceeded any further:
+
+# include "stdio.h"
+# include "stdlib.h"
+# include "modbus/modbus.h"
+
+#define plc 0x01
+
+int main(void)
+{
+modbus_param_t mb_param;
+
+modbus_init_rtu(&mb_param,"/dev/ttyS2","none",8,1);
+
+if (modbus_connect(&mb_param) == -1) {
+printf("Not connected\n");
+exit(1);
+}
+
+modbus_close(&mb_param);
+
+}
 
 
+My bitbake recipe is as follows:
+
+DESCRIPTION = "modbuscomm"
+SECTION = "examples"
+LICENSE = "GPL"
+PR = "r12"
+
+SRC_URI = "file://mymodbuscomm.c \
+file://modbus.c \
+file://modbus.h \
+file://modbus-data.c \
+file://modbus-rtu.c \
+file://modbus-rtu.h \
+file://modbus-tcp.c \
+file://modbus-tcp.h"
+
+S = "${WORKDIR}"
+
+do_compile() {
+${CC} ${CFLAGS} ${LDFLAGS} mymodbuscomm.c -o mymodbuscomm
+${CC} ${CFLAGS} ${LDFLAGS} modbus.c -o modbus
+${CC} ${CFLAGS} ${LDFLAGS} modbus-data.c -o modbus-data
+${CC} ${CFLAGS} ${LDFLAGS} modbus-rtu.c -o modbus-rtu
+${CC} ${CFLAGS} ${LDFLAGS} modbus-tcp.c -o modbus-tcp
+
+}
+
+do_install() {
+install -d ${D}${bindir}
+install -m 0755 mymodbuscomm ${D}${bindir}
+install -m 0755 modbus ${D}${bindir}
+install -m 0755 modbus-data ${D}${bindir}
+install -m 0755 modbus-rtu ${D}${bindir}
+install -m 0755 modbus-tcp ${D}${bindir}
+}
+
+
+I am faced with these errors when I bitbake my application:
+
+Log data follows:
+| mymodbuscomm.c: In function 'main':
+| mymodbuscomm.c:11: error: 'modbus_param_t' undeclared (first use in this
+function)
+| mymodbuscomm.c:11: error: (Each undeclared identifier is reported only
+once
+| mymodbuscomm.c:11: error: for each function it appears in.)
+| mymodbuscomm.c:11: error: expected ';' before 'mb_param'
+| mymodbuscomm.c:14: error: 'mb_param' undeclared (first use in this
+function)
+| ERROR: Function do_compile failed
+
+
+I would very much appreciate it if you could let me know if there is
+something wrong with my bitbake recipe or suggest any changes to the recipe.
+Thank you and have a great day.
+
+                              Best Regards,
+                               JM
 
