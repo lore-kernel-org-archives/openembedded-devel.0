@@ -1,29 +1,31 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1R9cjM-0007eY-1E
+	(envelope-from <martin.jansa@gmail.com>) id 1R9cjU-0007eY-Fo
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Sep 2011 15:02:20 +0200
-Received: by bke11 with SMTP id 11so1747506bke.6
+	Fri, 30 Sep 2011 15:02:28 +0200
+Received: by mail-bw0-f47.google.com with SMTP id 11so1747506bke.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Sep 2011 05:56:48 -0700 (PDT)
+	Fri, 30 Sep 2011 05:57:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=Ij3ZxGV1l08fLxQEjiib6cgfbP9A4kE1NL4gtcTU3t4=;
-	b=KdMWcWTzAYppr4TtphaUCFjNTuW4d9Iiy9vgVlUbh5pw+2cNrMonBcuZCSjVoNHu6O
-	Oay4WTv50LJFvvGoJkl5x9iB+K/x56OJSY/HU/MvpJq+bLZHe3CcCZZ+8uBDiEzZeH7H
-	9NRNm6wQcKMrBF0EEWST3tH5JB78tq4pGoGn4=
-Received: by 10.204.157.132 with SMTP id b4mr7684959bkx.164.1317387407816;
-	Fri, 30 Sep 2011 05:56:47 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=GhbuZpEtKo0uUU0C9LS5J8TXtRIOxIAL17LeVdq6ii8=;
+	b=kihsqtwWR8JhGIypagjXC7rq58/locW3tOO2skGh9meOlJfG9ed1KXcsG6a+BDiT4J
+	k9rPFDUnAwIrP9MCBVh5Dbx1vbJLSlv135EkG1T5VQR+Ygc0znxzyFNCzr5erYBKwsKB
+	PcDcmvvxZGZgbWxrsz7ZIn3cS+CcpThBxHcTQ=
+Received: by 10.204.138.130 with SMTP id a2mr3896054bku.367.1317387419285;
+	Fri, 30 Sep 2011 05:56:59 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id v16sm4886917bkd.6.2011.09.30.05.56.45
+	by mx.google.com with ESMTPS id b17sm4881942bkd.8.2011.09.30.05.56.57
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 30 Sep 2011 05:56:46 -0700 (PDT)
+	Fri, 30 Sep 2011 05:56:58 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Sep 2011 14:56:39 +0200
-Message-Id: <cover.1317387144.git.Martin.Jansa@gmail.com>
+Date: Fri, 30 Sep 2011 14:56:37 +0200
+Message-Id: <7a73a24c82f9d721c3342a14097cb105ba82a3ca.1317387144.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.6.1
-Subject: [meta-oe][meta-efl][PATCH 00/15] Pull request #23
+In-Reply-To: <cover.1317387144.git.Martin.Jansa@gmail.com>
+References: <cover.1317387144.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][meta-efl][PATCH 01/15] glib-2.0: upgrade from 2.29.3+git to 2.30.0 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,144 +39,272 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Sep 2011 13:02:20 -0000
+X-List-Received-Date: Fri, 30 Sep 2011 13:02:28 -0000
 
-Hi,
-
-this patchset depends on oe-core changes from:
-http://lists.linuxtogo.org/pipermail/openembedded-core/2011-September/010393.html
-but first few patches from that patchset are already in master-next and we need to 
-be ready to adapt.
-
-Patch 2 will be needed as soon as 
-http://lists.linuxtogo.org/pipermail/openembedded-core/2011-September/010401.html
-is applied
-
-and patches 9-15 depends on xserver-xf86, libx11 and mesa patches in oe-core
-
-The following changes since commit 6786f3118988e625b7ad8d7758c94e302789693f:
-
-  tcp-wrappers: Use the recipe from oe-core (2011-09-27 17:40:02 -0700)
-
-are available in the git repository at:
-  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
-
-Martin Jansa (15):
-  glib-2.0: upgrade from 2.29.3+git to 2.30.0 release
-  xorg-driver: use renamed .inc from oe-core
-  libxft, libxrender, renderproto: move native BBCLASSEXTENDs to
-    oe-core
-  xf86-video-omapfb: merged to oe-core
-  recipes: use allarch instead of PACKAGE_ARCH = all
-  e-base: bump EFL_SRCREV
-  e-wm: include /usr/lib/enlightenment/modules/wizard/favorites/.order
-    in FILES+${PN}
-  e-wm-theme-illume-efenniht, exquisite-theme-illume,
-    elementary-theme-efenniht: add LIC_FILES_CHKSUM
-  xserver-xorg: drop 1.10.2 and use xserver-xf86-lite-1.11.0 from
-    oe-core instead
-  libx11: drop here, 1.4.4 should be in oe-core
-  task-x11: use xserver-xf86-lite as default XSERVER
-  xf86-video-glamo: change RDEPENDS for xserver-xf86-dri-lite
-  mesa: drop, there should be mesa-7.11 in oe-core
-  talloc: drop from meta-oe, no longer needed by mesa
-  glx-use-tls: moved to oe-core with mesa recipes
-
- meta-efl/classes/e-base.bbclass                    |    2 +-
- .../e17/e-wm-theme-illume-efenniht/LICENSE         |   25 +
- .../e17/e-wm-theme-illume-efenniht_svn.bb          |   11 +-
- meta-efl/recipes-efl/e17/e-wm_svn.bb               |   23 +-
- meta-efl/recipes-efl/e17/exquisite-theme-illume.bb |   12 +-
- .../recipes-efl/e17/exquisite-theme-illume/LICENSE |   25 +
- .../efl/elementary-theme-efenniht/LICENSE          |   25 +
- .../efl/elementary-theme-efenniht_svn.bb           |    9 +-
- .../hicolor-icon-theme/hicolor-icon-theme_0.12.bb  |    6 +-
- .../recipes-gnome/themes/gnome-themes_2.32.1.bb    |    5 +-
- meta-oe/classes/glx-use-tls.bbclass                |    7 -
- ...003-gatomic-proper-pointer-get-cast.patch.patch |   28 -
- .../0005-glib-mkenums-interpreter.patch.patch      |   25 -
- .../60_wait-longer-for-threads-to-die.patch        |   24 +-
- .../glib-2.0/remove.test.for.qsort_r.patch         |   77 +-
- .../{glib-2.0_git.bb => glib-2.0_2.30.0.bb}        |   21 +-
- meta-oe/recipes-core/tasks/task-x11.bb             |    4 +-
- meta-oe/recipes-core/udev/udev-extra-rules.bb      |    6 +-
- meta-oe/recipes-graphics/mesa/README               |   12 -
- meta-oe/recipes-graphics/mesa/mesa-7.10.2.inc      |   19 -
- .../recipes-graphics/mesa/mesa-7.10.2/glamo.patch  | 2425 --------------------
- .../recipes-graphics/mesa/mesa-7.10.2/uclibc.patch |   26 -
- meta-oe/recipes-graphics/mesa/mesa-common.inc      |   49 -
- meta-oe/recipes-graphics/mesa/mesa-dri.inc         |   27 -
- meta-oe/recipes-graphics/mesa/mesa-dri_7.10.2.bb   |    4 -
- meta-oe/recipes-graphics/mesa/mesa-xlib.inc        |    5 -
- meta-oe/recipes-graphics/mesa/mesa-xlib_7.10.2.bb  |    4 -
- meta-oe/recipes-graphics/mesa/mesa_7.10.2.bb       |    6 -
- .../xorg-driver/xf86-input-tslib_0.0.6.bb          |    2 +-
- .../xorg-driver/xf86-input-void_1.4.0.bb           |    2 +-
- .../xorg-driver/xf86-video-fbdev_0.4.2.bb          |    2 +-
- .../xorg-driver/xf86-video-geode_2.11.12.bb        |    2 +-
- .../xorg-driver/xf86-video-glamo_git.bb            |    4 +-
- .../xf86-video-omapfb/0001-blacklist-tv-out.patch  |   28 -
- ...virtual-size-when-configuring-framebuffer.patch |   26 -
- .../xf86-video-omapfb/0003-force-plain-mode.patch  |   26 -
- .../0004-Attempt-to-fix-VRFB.patch                 |  320 ---
- .../xorg-driver/xf86-video-omapfb_git.bb           |   27 -
- .../xorg-lib/libx11-1.4.3/keysymdef_include.patch  |   19 -
- .../libx11-1.4.3/x11_disable_makekeys.patch        |   29 -
- meta-oe/recipes-graphics/xorg-lib/libx11.inc       |   52 -
- meta-oe/recipes-graphics/xorg-lib/libx11_1.4.3.bb  |   11 -
- .../xorg-lib/libxft_2.2.0.bbappend                 |    1 -
- .../xorg-lib/libxrender_0.9.6.bbappend             |    1 -
- .../xorg-proto/renderproto_0.11.1.bbappend         |    1 -
- .../xorg-xserver/xorg-xserver-common.inc           |  126 -
- .../50b9d3142ff90af2f7fa35b7b1bf9e5a07723dbd.patch |   61 -
- ...ack-assume-pixman-supports-overlapped-blt.patch |   14 -
- .../hack-fbdev-ignore-return-mode.patch            |   39 -
- .../xserver-xorg-1.10.2/randr-support.patch        |  102 -
- .../replace-pkgconfig-sdkdir-poking.patch          |   33 -
- .../xorg-xserver/xserver-xorg_1.10.2.bb            |   33 -
- .../recipes-navigation/navit/navit-icons_svn.bb    |    7 +-
- meta-oe/recipes-support/iso-codes/iso-codes_1.4.bb |    7 +-
- meta-oe/recipes-support/talloc/talloc_2.0.1.bb     |   27 -
- 55 files changed, 182 insertions(+), 3732 deletions(-)
- create mode 100644 meta-efl/recipes-efl/e17/e-wm-theme-illume-efenniht/LICENSE
- create mode 100644 meta-efl/recipes-efl/e17/exquisite-theme-illume/LICENSE
- create mode 100644 meta-efl/recipes-efl/efl/elementary-theme-efenniht/LICENSE
- delete mode 100644 meta-oe/classes/glx-use-tls.bbclass
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ ...003-gatomic-proper-pointer-get-cast.patch.patch |   28 -------
+ .../0005-glib-mkenums-interpreter.patch.patch      |   25 -------
+ .../60_wait-longer-for-threads-to-die.patch        |   24 +++---
+ .../glib-2.0/remove.test.for.qsort_r.patch         |   77 ++++++++++----------
+ .../{glib-2.0_git.bb => glib-2.0_2.30.0.bb}        |   21 ++++--
+ 5 files changed, 65 insertions(+), 110 deletions(-)
  delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/0003-gatomic-proper-pointer-get-cast.patch.patch
  delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/0005-glib-mkenums-interpreter.patch.patch
  rename meta-oe/recipes-core/glib-2.0/{glib-2.0_git.bb => glib-2.0_2.30.0.bb} (61%)
- delete mode 100644 meta-oe/recipes-graphics/mesa/README
- delete mode 100644 meta-oe/recipes-graphics/mesa/mesa-7.10.2.inc
- delete mode 100644 meta-oe/recipes-graphics/mesa/mesa-7.10.2/glamo.patch
- delete mode 100644 meta-oe/recipes-graphics/mesa/mesa-7.10.2/uclibc.patch
- delete mode 100644 meta-oe/recipes-graphics/mesa/mesa-common.inc
- delete mode 100644 meta-oe/recipes-graphics/mesa/mesa-dri.inc
- delete mode 100644 meta-oe/recipes-graphics/mesa/mesa-dri_7.10.2.bb
- delete mode 100644 meta-oe/recipes-graphics/mesa/mesa-xlib.inc
- delete mode 100644 meta-oe/recipes-graphics/mesa/mesa-xlib_7.10.2.bb
- delete mode 100644 meta-oe/recipes-graphics/mesa/mesa_7.10.2.bb
- delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0001-blacklist-tv-out.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0002-Revert-Set-virtual-size-when-configuring-framebuffer.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0003-force-plain-mode.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0004-Attempt-to-fix-VRFB.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb_git.bb
- delete mode 100644 meta-oe/recipes-graphics/xorg-lib/libx11-1.4.3/keysymdef_include.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-lib/libx11-1.4.3/x11_disable_makekeys.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-lib/libx11.inc
- delete mode 100644 meta-oe/recipes-graphics/xorg-lib/libx11_1.4.3.bb
- delete mode 100644 meta-oe/recipes-graphics/xorg-lib/libxft_2.2.0.bbappend
- delete mode 100644 meta-oe/recipes-graphics/xorg-lib/libxrender_0.9.6.bbappend
- delete mode 100644 meta-oe/recipes-graphics/xorg-proto/renderproto_0.11.1.bbappend
- delete mode 100644 meta-oe/recipes-graphics/xorg-xserver/xorg-xserver-common.inc
- delete mode 100644 meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/50b9d3142ff90af2f7fa35b7b1bf9e5a07723dbd.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/hack-assume-pixman-supports-overlapped-blt.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/hack-fbdev-ignore-return-mode.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/randr-support.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/replace-pkgconfig-sdkdir-poking.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-xserver/xserver-xorg_1.10.2.bb
- delete mode 100644 meta-oe/recipes-support/talloc/talloc_2.0.1.bb
 
+diff --git a/meta-oe/recipes-core/glib-2.0/glib-2.0/0003-gatomic-proper-pointer-get-cast.patch.patch b/meta-oe/recipes-core/glib-2.0/glib-2.0/0003-gatomic-proper-pointer-get-cast.patch.patch
+deleted file mode 100644
+index ad1ca12..0000000
+--- a/meta-oe/recipes-core/glib-2.0/glib-2.0/0003-gatomic-proper-pointer-get-cast.patch.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-From 3d371334d5668bcd02a38ff99884bd343c244d68 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Sat, 18 Jun 2011 23:51:35 +0200
+-Subject: [PATCH 3/7] gatomic-proper-pointer-get-cast.patch
+-
+-Upstream-Status: Unknown
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- glib/gatomic.h |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/glib/gatomic.h b/glib/gatomic.h
+-index ddd39b8..b758142 100644
+---- a/glib/gatomic.h
+-+++ b/glib/gatomic.h
+-@@ -70,7 +70,7 @@ void     g_atomic_pointer_set                  (volatile gpointer G_GNUC_MAY_ALI
+-   (g_atomic_int_set) ((volatile gint G_GNUC_MAY_ALIAS *) (volatile void *) (atomic), (newval)))
+- # define g_atomic_pointer_get(atomic) \
+-  ((void) sizeof (gchar [sizeof (*(atomic)) == sizeof (gpointer) ? 1 : -1]), \
+--  (g_atomic_pointer_get) ((volatile gpointer G_GNUC_MAY_ALIAS *) (volatile void *) (atomic)))
+-+  (g_atomic_pointer_get) ((volatile gpointer G_GNUC_MAY_ALIAS *) (volatile void G_GNUC_MAY_ALIAS *) (atomic)))
+- # define g_atomic_pointer_set(atomic, newval) \
+-  ((void) sizeof (gchar [sizeof (*(atomic)) == sizeof (gpointer) ? 1 : -1]), \
+-   (g_atomic_pointer_set) ((volatile gpointer G_GNUC_MAY_ALIAS *) (volatile void *) (atomic), (newval)))
+--- 
+-1.6.6.1
+-
+diff --git a/meta-oe/recipes-core/glib-2.0/glib-2.0/0005-glib-mkenums-interpreter.patch.patch b/meta-oe/recipes-core/glib-2.0/glib-2.0/0005-glib-mkenums-interpreter.patch.patch
+deleted file mode 100644
+index 6780330..0000000
+--- a/meta-oe/recipes-core/glib-2.0/glib-2.0/0005-glib-mkenums-interpreter.patch.patch
++++ /dev/null
+@@ -1,25 +0,0 @@
+-From a8e5c4a808e7f8572bd5023645a6cb4386b9aff8 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Sat, 18 Jun 2011 23:52:17 +0200
+-Subject: [PATCH 5/7] don't leak buildpaths into perl hashbang
+-
+-Upstream-Status: Unknown
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- gobject/glib-mkenums.in |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/gobject/glib-mkenums.in b/gobject/glib-mkenums.in
+-index 6372245..b486fe9 100755
+---- a/gobject/glib-mkenums.in
+-+++ b/gobject/glib-mkenums.in
+-@@ -1,4 +1,4 @@
+--#! @PERL_PATH@
+-+#! /usr/bin/env perl
+- 
+- use warnings;
+- use File::Basename;
+--- 
+-1.6.6.1
+-
+diff --git a/meta-oe/recipes-core/glib-2.0/glib-2.0/60_wait-longer-for-threads-to-die.patch b/meta-oe/recipes-core/glib-2.0/glib-2.0/60_wait-longer-for-threads-to-die.patch
+index b65a474..4ff7b80 100644
+--- a/meta-oe/recipes-core/glib-2.0/glib-2.0/60_wait-longer-for-threads-to-die.patch
++++ b/meta-oe/recipes-core/glib-2.0/glib-2.0/60_wait-longer-for-threads-to-die.patch
+@@ -4,9 +4,9 @@ Rebased for glib-2.27.3 by Dongxiao Xu <dongxiao.xu@intel.com>, 11/16/2010
+ 
+ Upstream-Status: Inappropriate [patches for test code]
+ 
+-diff -ruN glib-2.27.3-orig/tests/threadpool-test.c glib-2.27.3/tests/threadpool-test.c
+---- glib-2.27.3-orig/tests/threadpool-test.c	2009-04-01 07:04:21.000000000 +0800
+-+++ glib-2.27.3/tests/threadpool-test.c	2010-11-16 12:28:09.002172678 +0800
++diff -ruN glib-2.30.0-orig/tests/threadpool-test.c glib-2.30.0/tests/threadpool-test.c
++--- glib-2.30.0-orig/tests/threadpool-test.c	2009-04-01 07:04:21.000000000 +0800
+++++ glib-2.30.0/tests/threadpool-test.c	2010-11-16 12:28:09.002172678 +0800
+ @@ -5,8 +5,8 @@
+  
+  #include <glib.h>
+@@ -18,16 +18,16 @@ diff -ruN glib-2.27.3-orig/tests/threadpool-test.c glib-2.27.3/tests/threadpool-
+  
+  #define WAIT                5    /* seconds */
+  #define MAX_THREADS         10
+-@@ -124,10 +124,10 @@
+-    DEBUG_MSG (("[unused] stopping unused threads"));
+-    g_thread_pool_stop_unused_threads ();
++@@ -130,10 +130,10 @@
++            test_count_threads () == 0)
++          break;
+  
+--   DEBUG_MSG (("[unused] waiting ONE second for threads to die"));
+-+   DEBUG_MSG (("[unused] waiting FIVE second for threads to die"));
++-       DEBUG_MSG (("[unused] waiting ONE second for threads to die"));
+++       DEBUG_MSG (("[unused] waiting FIVE second for threads to die"));
+  
+-    /* Some time for threads to die. */
+--   g_usleep (G_USEC_PER_SEC);
+-+   g_usleep (5 * G_USEC_PER_SEC);
++        /* Some time for threads to die. */
++-       g_usleep (G_USEC_PER_SEC);
+++       g_usleep (5 * G_USEC_PER_SEC);
++      }
+  
+     DEBUG_MSG (("[unused] stopped idle threads, %d remain, %d threads still exist",
+- 	       g_thread_pool_get_num_unused_threads (),
+diff --git a/meta-oe/recipes-core/glib-2.0/glib-2.0/remove.test.for.qsort_r.patch b/meta-oe/recipes-core/glib-2.0/glib-2.0/remove.test.for.qsort_r.patch
+index 3300eb0..05805d0 100644
+--- a/meta-oe/recipes-core/glib-2.0/glib-2.0/remove.test.for.qsort_r.patch
++++ b/meta-oe/recipes-core/glib-2.0/glib-2.0/remove.test.for.qsort_r.patch
+@@ -1,52 +1,49 @@
+ while cross compiling we cannot execute run tests
+ 
+-diff --git a/configure.ac b/configure.ac
+-index 378b082..3f2a8d3 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -580,46 +580,7 @@ AC_FUNC_VPRINTF
+- AC_FUNC_ALLOCA
+- AC_CHECK_FUNCS(mmap posix_memalign memalign valloc fsync pipe2)
+- AC_CHECK_FUNCS(atexit on_exit timegm gmtime_r)
++--- glib-2.30.0.orig/configure.ac	2011-09-29 16:57:35.000000000 +0200
+++++ glib-2.30.0/configure.ac	2011-09-29 17:00:19.931493488 +0200
++@@ -586,45 +586,7 @@
++ dnl until we have checked this function is actually usable
++ AC_CHECK_FUNC([qsort_r])
++ 
+ -# BSD has a qsort_r with wrong argument order
+--AC_CACHE_CHECK([for qsort_r], glib_cv_have_qsort_r, [
+--AC_RUN_IFELSE([AC_LANG_SOURCE([[
+--#define _GNU_SOURCE
+--#include <stdlib.h>
++-if test x$ac_cv_func_qsort_r = xyes ; then
++-  AC_CACHE_CHECK([if qsort_r uses glibc compatible argument order], glib_cv_have_qsort_r, [
++-  AC_RUN_IFELSE([AC_LANG_SOURCE([[
++-  #define _GNU_SOURCE
++-  #include <stdlib.h>
+ -
+--static int
+--cmp (const void *a, const void *b, void *c)
+--{
+--  const int *ia = a;
+--  const int *ib = b;
++-  static int
++-  cmp (const void *a, const void *b, void *c)
++-  {
++-    const int *ia = a;
++-    const int *ib = b;
+ -
+--  if (*ia < *ib)
+--    return -1;
+--  else if (*ia > *ib)
+--    return 1;
+--  else
+--    return 0;
+--}
++-    if (*ia < *ib)
++-      return -1;
++-    else if (*ia > *ib)
++-      return 1;
++-    else
++-      return 0;
++-  }
+ -
+--int
+--main (int argc, char **argv)
+--{
+--  int arr[3] = { 1, 2, 0 };
+--  int d = 3;
++-  int
++-  main (int argc, char **argv)
++-  {
++-    int arr[3] = { 1, 2, 0 };
++-    int d = 3;
+ -
+--  qsort_r (arr, 3, sizeof (int), cmp, &d);
++-    qsort_r (arr, 3, sizeof (int), cmp, &d);
+ -
+--  if (arr[0] == 0 && arr[1] == 1 && arr[2] == 2)
+--    return 0;
+--  else
+--    return 1;
+--}]])],[glib_cv_have_qsort_r=yes],[glib_cv_have_qsort_r=no])])
++-    if (arr[0] == 0 && arr[1] == 1 && arr[2] == 2)
++-      return 0;
++-    else
++-      return 1;
++-  }]])],[glib_cv_have_qsort_r=yes],[glib_cv_have_qsort_r=no])])
++-fi
+ -
+--if test $glib_cv_have_qsort_r = yes ; then
+--  AC_MSG_RESULT([yes])
+--    AC_DEFINE(HAVE_QSORT_R, 1, [Define to 1 if you have the 'qsort_r' function])
+--else
+--  AC_MSG_RESULT([no])
++-if test x$glib_cv_have_qsort_r = xyes ; then
++-  AC_DEFINE(HAVE_QSORT_R, 1, [Define to 1 if you have the 'qsort_r' function])
+ -fi
+ +AC_DEFINE(HAVE_QSORT_R, 1, [Define to 1 if you have the 'qsort_r' function])
+  
+diff --git a/meta-oe/recipes-core/glib-2.0/glib-2.0_git.bb b/meta-oe/recipes-core/glib-2.0/glib-2.0_2.30.0.bb
+similarity index 61%
+rename from meta-oe/recipes-core/glib-2.0/glib-2.0_git.bb
+rename to meta-oe/recipes-core/glib-2.0/glib-2.0_2.30.0.bb
+index 34fcaf6..b4305b8 100644
+--- a/meta-oe/recipes-core/glib-2.0/glib-2.0_git.bb
++++ b/meta-oe/recipes-core/glib-2.0/glib-2.0_2.30.0.bb
+@@ -1,22 +1,22 @@
+ require glib.inc
+ 
+ PE = "1"
+-PR = "r1"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+ DEPENDS += "libffi python-argparse-native"
+ DEPENDS_virtclass-native += "libffi-native python-argparse-native"
+ 
+-SRC_URI = "git://git.gnome.org/glib;protocol=git;branch=master \
++SHRT_VER = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
++
++SRC_URI = "${GNOME_MIRROR}/glib/${SHRT_VER}/glib-${PV}.tar.bz2 \
+            file://configure-libtool.patch \
+            file://60_wait-longer-for-threads-to-die.patch \
+            file://g_once_init_enter.patch \
+            file://remove.test.for.qsort_r.patch \
+           "
+-SRCREV = "d97cbc6731deab137770bc0fe9c69b06f689f5b4"
+-PV = "2.29.3+gitr${SRCPV}"
+-S = "${WORKDIR}/git"
++SRC_URI[md5sum] = "fee101d9d7daa8ddfbae00325f307f3b"
++SRC_URI[sha256sum] = "ca9c731017ab370859e847f8b70079bc6dcf389dc0ccb0d0419925aff81b9687"
+ 
+ # Only apply this patch for target recipe on uclibc
+ SRC_URI_append_libc-uclibc = " ${@['', 'file://no-iconv.patch']['${PN}' == '${BPN}']}"
+@@ -30,3 +30,14 @@ do_configure_prepend() {
+   sed -i 's/SUBDIRS = . m4macros glib gmodule gthread gobject gio tests po docs/SUBDIRS = . m4macros glib gmodule gthread gobject gio tests po/g' ${S}/Makefile.am
+   sed -i -e "s:TEST_PROGS += gdbus-serialization::g"  ${S}/gio/tests/Makefile.am
+ }
++
++do_install_append() {
++  # remove some unpackaged files
++  rm -f ${D}${datadir}/glib-2.0/gettext/mkinstalldirs
++  rm -f ${D}${datadir}/glib-2.0/gettext/po/Makefile.in.in
++  rm -f ${D}${libdir}/gdbus-2.0/codegen/*.pyc
++  rm -f ${D}${libdir}/gdbus-2.0/codegen/*.pyo
++}
++
++PACKAGES += "${PN}-codegen"
++FILES_${PN}-codegen = "${libdir}/gdbus-2.0/codegen/*.py"
 -- 
 1.7.6.1
 
