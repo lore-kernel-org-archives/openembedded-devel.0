@@ -1,25 +1,29 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1R9jXj-0003DG-2s
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Sep 2011 22:18:47 +0200
-Received: (qmail invoked by alias); 30 Sep 2011 20:13:17 -0000
-Received: from p5B0A3E6C.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.62.108]
-	by mail.gmx.net (mp011) with SMTP; 30 Sep 2011 22:13:17 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19ez64aIBpeM0f9e1xyGCCGCKYLX2Cgajmo1s9nd8
-	fkpzKIWyHFAKI+
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Sep 2011 22:17:11 +0200
-Message-Id: <1317413831-3451-3-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1317413831-3451-1-git-send-email-schnitzeltony@gmx.de>
-References: <1317413831-3451-1-git-send-email-schnitzeltony@gmx.de>
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <jefro.net@gmail.com>)
+	id 1R9l0p-0004fD-Vr; Fri, 30 Sep 2011 23:52:56 +0200
+Received: by iadx2 with SMTP id x2so2397994iad.6
+	for <multiple recipients>; Fri, 30 Sep 2011 14:47:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=QtH5BNe4Oc80bDYbekTjmdFlBaGokJP4An3kywTLlaU=;
+	b=WAJ4PZ0vreuX+eD6bXe1jlDYerfwPG01G9P1BWxIzIrS/glo2FoVFjYw0Tk1prki1w
+	M+eOM7D3Mc/cu7l6p6oGg7yecfgrvUh3aEgCXlUE7i04joNKKNf743IMsKp4xlpKpftH
+	z0Dqu6lC+CEXW7vWwpGdL1s8HlS/wwdDhaqh0=
 MIME-Version: 1.0
-X-Y-GMX-Trusted: 0
-Subject: [meta-oe V2 2/2] midori: added RRECOMMENDS glib-networking
+Received: by 10.42.148.133 with SMTP id r5mr1635491icv.220.1317419244933; Fri,
+	30 Sep 2011 14:47:24 -0700 (PDT)
+Sender: jefro.net@gmail.com
+Received: by 10.42.240.8 with HTTP; Fri, 30 Sep 2011 14:47:24 -0700 (PDT)
+Date: Fri, 30 Sep 2011 14:47:24 -0700
+X-Google-Sender-Auth: SLCvjuq9HdG2dS8syyOYtK5LVb4
+Message-ID: <CA+YB3rbP8ZxQDG_SJEK6qb7OtEy1DsZRE1Rq74rg2Vu6AKgNqA@mail.gmail.com>
+From: Jeff Osier-Mixon <jefro@jefro.net>
+To: openembedded-core <openembedded-core@lists.openembedded.org>, 
+	openembedded-devel@lists.openembedded.org, tsc <tsc@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: TSC meeting minutes available on wiki
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,32 +37,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Sep 2011 20:18:47 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 30 Sep 2011 21:52:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-When trying to open https://.. midori complains with:
+I have updated the TSC wiki page to include all of the minutes since the
+interim TSC was announced by the board on Feb 10. Going forward, I will
+place new minutes on this page in date order.
 
-TLS/SSL support not available; install glib-networking
+http://www.openembedded.org/wiki/TSC
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
----
- meta-oe/recipes-connectivity/midori/midori.inc |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
-
-diff --git a/meta-oe/recipes-connectivity/midori/midori.inc b/meta-oe/recipes-connectivity/midori/midori.inc
-index 60fd03e..2221134 100644
---- a/meta-oe/recipes-connectivity/midori/midori.inc
-+++ b/meta-oe/recipes-connectivity/midori/midori.inc
-@@ -30,4 +30,6 @@ do_install() {
- 	oe_runmake DESTDIR=${D} install
- }
- 
-+RRECOMMENDS_${PN} += "glib-networking"
-+
- TARGET_CC_ARCH += "${LDFLAGS}"
+thanks,
 -- 
-1.7.4.4
-
-
+Jeff Osier-Mixon http://jefro.net/blog
+Yocto Project Community Manager @Intel http://yoctoproject.org
 
