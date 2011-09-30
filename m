@@ -1,34 +1,34 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1R9fTD-0004M7-Oq
+	(envelope-from <martin.jansa@gmail.com>) id 1R9fTX-0004b5-7x
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Sep 2011 17:57:51 +0200
-Received: by mail-fx0-f47.google.com with SMTP id 1so3210360fxi.6
+	Fri, 30 Sep 2011 17:58:11 +0200
+Received: by bke11 with SMTP id 11so1928176bke.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Sep 2011 08:52:25 -0700 (PDT)
+	Fri, 30 Sep 2011 08:52:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=Y7btcxzQx+UJDTVZQS6/oCLqjlUSAdKWnyd8FU6lLOc=;
-	b=ulPZCH5I4aONSrx8QMuOhK5BcUTF2Cua3gTLCR9bHGxO4frCZgu69cuCdGe5L1SSnv
-	/J6nIs0vaEv81CaT9wbwVa8163CLUtHpjIqlWLxqMnrcUY8o2hKLjlUnzdHIsZdA7Cvo
-	5a3zn38z4U0tu0LFXuLtKUx7avjZgK3uusBhI=
-Received: by 10.223.33.67 with SMTP id g3mr6039617fad.99.1317397942463;
-	Fri, 30 Sep 2011 08:52:22 -0700 (PDT)
+	bh=avWVk41fLXxBTVjVKAtvNCS91UHIyfTQjTlVOjjhhu4=;
+	b=OxnXciZnxnajxzy4BGgmvzaQ86kYzl8u21M1pvIYF6z0VQOlgfWItu+VTu/CbwL5PG
+	Wo/la9ADD7ctkQt16UzVYfv0aNyEoX3hEal2IM7h4JkFX0wfNr28hPXv1qJxrfsXuYXe
+	NSyMxMWPjaE4DJlrof4fIUlv0L4pX68DmeRxI=
+Received: by 10.204.139.219 with SMTP id f27mr8529629bku.288.1317397960076;
+	Fri, 30 Sep 2011 08:52:40 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id x22sm7225346faa.5.2011.09.30.08.52.20
+	by mx.google.com with ESMTPS id t13sm3619409fae.0.2011.09.30.08.52.38
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 30 Sep 2011 08:52:21 -0700 (PDT)
+	Fri, 30 Sep 2011 08:52:39 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Sep 2011 17:52:01 +0200
-Message-Id: <693bf233bfa29679ae342b8bcd7b018f3fb0a840.1317397769.git.Martin.Jansa@gmail.com>
+Date: Fri, 30 Sep 2011 17:52:03 +0200
+Message-Id: <effc9442b8cdb3258cbd84deb5314d841dd84cd2.1317397769.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.6.1
 In-Reply-To: <d949b79e20616add7118dcc7cb4f5ee08b4fed3b.1317397769.git.Martin.Jansa@gmail.com>
 References: <d949b79e20616add7118dcc7cb4f5ee08b4fed3b.1317397769.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1317397769.git.Martin.Jansa@gmail.com>
 References: <cover.1317397769.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/6] pango: upgrade to 1.29.4
+Subject: [meta-oe][PATCH 4/6] poppler: upgrade from 0.12.3 to 0.18.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,86 +42,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Sep 2011 15:57:51 -0000
-
-* pango older than 1.29.1 causes ie libglade build fail with
-  /usr/include/pango-1.0/pango/pango-script.h:132:12: error: unknown type name 'G_CONST_RETURN'
+X-List-Received-Date: Fri, 30 Sep 2011 15:58:11 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../pango/pango-1.28.3/no-tests.patch              |   10 ----------
- .../pango/pango-1.29.4/no-tests.patch              |   11 +++++++++++
- meta-oe/recipes-graphics/pango/pango_1.28.3.bb     |    9 ---------
- meta-oe/recipes-graphics/pango/pango_1.29.4.bb     |    9 +++++++++
- 4 files changed, 20 insertions(+), 19 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/pango/pango-1.28.3/no-tests.patch
- create mode 100644 meta-oe/recipes-graphics/pango/pango-1.29.4/no-tests.patch
- delete mode 100644 meta-oe/recipes-graphics/pango/pango_1.28.3.bb
- create mode 100644 meta-oe/recipes-graphics/pango/pango_1.29.4.bb
+ meta-oe/recipes-support/poppler/poppler_0.12.3.bb |   10 ----------
+ meta-oe/recipes-support/poppler/poppler_0.18.0.bb |   10 ++++++++++
+ 2 files changed, 10 insertions(+), 10 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/poppler/poppler_0.12.3.bb
+ create mode 100644 meta-oe/recipes-support/poppler/poppler_0.18.0.bb
 
-diff --git a/meta-oe/recipes-graphics/pango/pango-1.28.3/no-tests.patch b/meta-oe/recipes-graphics/pango/pango-1.28.3/no-tests.patch
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.12.3.bb b/meta-oe/recipes-support/poppler/poppler_0.12.3.bb
 deleted file mode 100644
-index dafcb20..0000000
---- a/meta-oe/recipes-graphics/pango/pango-1.28.3/no-tests.patch
+index ce1952e..0000000
+--- a/meta-oe/recipes-support/poppler/poppler_0.12.3.bb
 +++ /dev/null
 @@ -1,10 +0,0 @@
----- /tmp/Makefile.am	2007-03-01 13:29:37.000000000 +0100
--+++ pango-1.16.0/Makefile.am	2007-03-01 13:29:52.545251000 +0100
--@@ -1,6 +1,6 @@
-- ## Process this file with automake to create Makefile.in.
-- 
---SUBDIRS= pango modules pango-view examples docs tools tests
--+SUBDIRS= pango modules pango-view examples docs tools 
-- 
-- EXTRA_DIST = 			\
-- 	autogen.sh		\
-diff --git a/meta-oe/recipes-graphics/pango/pango-1.29.4/no-tests.patch b/meta-oe/recipes-graphics/pango/pango-1.29.4/no-tests.patch
+-require poppler.inc
+-
+-DEPENDS += "lcms"
+-
+-EXTRA_OECONF_append = " --disable-abiword-output "
+-
+-RDEPENDS_${PN} = "poppler-data"
+-
+-SRC_URI[md5sum] = "d0ca8344d8d94e27aaba6d432688365d"
+-SRC_URI[sha256sum] = "7a4ffe6d2950c446c285700d3b2dc399540a27ce635dd712aff646f02f8dfbcc"
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.18.0.bb b/meta-oe/recipes-support/poppler/poppler_0.18.0.bb
 new file mode 100644
-index 0000000..ce64db1
+index 0000000..463b544
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/pango/pango-1.29.4/no-tests.patch
-@@ -0,0 +1,11 @@
-+diff -uNr pango-1.29.4.orig/Makefile.am pango-1.29.4/Makefile.am
-+--- pango-1.29.4.orig/Makefile.am	2011-08-16 03:11:08.000000000 +0200
-++++ pango-1.29.4/Makefile.am	2011-09-30 16:11:53.792567952 +0200
-+@@ -1,6 +1,6 @@
-+ ## Process this file with automake to create Makefile.in.
-+ 
-+-SUBDIRS= pango modules pango-view examples docs tools tests build
-++SUBDIRS= pango modules pango-view examples docs tools build
-+ 
-+ EXTRA_DIST = 			\
-+ 	autogen.sh		\
-diff --git a/meta-oe/recipes-graphics/pango/pango_1.28.3.bb b/meta-oe/recipes-graphics/pango/pango_1.28.3.bb
-deleted file mode 100644
-index 4c875bf..0000000
---- a/meta-oe/recipes-graphics/pango/pango_1.28.3.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--require pango.inc
--
--LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
--
--SRC_URI[archive.md5sum] = "caa74baea47e7e16bc73c89f9089d522"
--SRC_URI[archive.sha256sum] = "5e278bc9430cc7bb00270f183360d262c5006b51248e8b537ea904573f200632"
--
--PR = "${INC_PR}.0"
--
-diff --git a/meta-oe/recipes-graphics/pango/pango_1.29.4.bb b/meta-oe/recipes-graphics/pango/pango_1.29.4.bb
-new file mode 100644
-index 0000000..0642bea
---- /dev/null
-+++ b/meta-oe/recipes-graphics/pango/pango_1.29.4.bb
-@@ -0,0 +1,9 @@
-+require pango.inc
++++ b/meta-oe/recipes-support/poppler/poppler_0.18.0.bb
+@@ -0,0 +1,10 @@
++require poppler.inc
 +
-+LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
++DEPENDS += "lcms"
 +
-+SRC_URI[archive.md5sum] = "a5ee785f4f31d6bdd8625a09ea3f8b4b"
-+SRC_URI[archive.sha256sum] = "f15deecaecf1e9dcb7db0e4947d12b5bcff112586434f8d30a5afd750747ff2b"
++EXTRA_OECONF_append = " --disable-abiword-output "
 +
-+PR = "${INC_PR}.0"
++RDEPENDS_${PN} = "poppler-data"
 +
++SRC_URI[md5sum] = "4cd3bf2a0a13fa8eaf00d31368915f77"
++SRC_URI[sha256sum] = "9019b15ef10a878e607e4088a27fb4967f61cdfada7806d0fee97954f76648e8"
 -- 
 1.7.6.1
 
