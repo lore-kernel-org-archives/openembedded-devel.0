@@ -1,27 +1,32 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <bluelotus256@gmail.com>) id 1R9fmN-0005ZO-Vg
+	(envelope-from <raj.khem@gmail.com>) id 1R9gzE-0007iU-0Z
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Sep 2011 18:17:40 +0200
-Received: by bke11 with SMTP id 11so1947715bke.6
+	Fri, 30 Sep 2011 19:35:00 +0200
+Received: by gyg8 with SMTP id 8so1702874gyg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Sep 2011 09:12:10 -0700 (PDT)
+	Fri, 30 Sep 2011 10:29:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=80dUylF2KQxSzyPiPsgqb8PuUd94Rk5LufuNL3xjDf0=;
-	b=DsmjSRYpBOe3RVP6tn+hc5wcoKIwMqVes8xhqqu8qGSq2OMUKeuzutasmKt9n6mGpw
-	GvhpdKQk234tg5BWYRg2waYtZp8S/1L3eCZQLLMdfYYN82mH+42/OUFWlkDyugNlcyyR
-	Fu5SRGRJcnqQdH5Nc14Xf6lgyG6jgMwzxo3tI=
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=OfnWiqLfwQ/HV5G7w2eugIgUm5uFFQW9c//XdMjDBfg=;
+	b=GHWyRTdp0hbAAJYNut17vCmhveOQZ/ILb8875lUMKBarzVDT7bOahwmiGuHM7ayiZi
+	Z0w5iCf56FCpPyjM2CnB6eY3e12Io+n+mHsoyf3x3dIlT+Dmvr0gmrqifyHggCQ63yTC
+	CUAIUI6scy6SIHbABDpsPI6MBGaKU6T7EcXaI=
+Received: by 10.146.181.25 with SMTP id d25mr11091826yaf.3.1317403770606;
+	Fri, 30 Sep 2011 10:29:30 -0700 (PDT)
+Received: from [172.23.2.133] (natint3.juniper.net. [66.129.224.36])
+	by mx.google.com with ESMTPS id k31sm15540462ann.15.2011.09.30.10.29.28
+	(version=SSLv3 cipher=OTHER); Fri, 30 Sep 2011 10:29:28 -0700 (PDT)
+Message-ID: <4E85FC71.7000905@gmail.com>
+Date: Fri, 30 Sep 2011 10:29:21 -0700
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; rv:7.0) Gecko/20110922 Thunderbird/7.0
 MIME-Version: 1.0
-Received: by 10.204.131.198 with SMTP id y6mr8183985bks.330.1317399130823;
-	Fri, 30 Sep 2011 09:12:10 -0700 (PDT)
-Received: by 10.205.83.6 with HTTP; Fri, 30 Sep 2011 09:12:10 -0700 (PDT)
-Date: Fri, 30 Sep 2011 10:12:10 -0600
-Message-ID: <CAFkhdsekLmcser0W9K5Rj+Q4sLx_1sxWGikYZ+XJUW+h9uYO0g@mail.gmail.com>
-From: asdfasdf asdfasdf <bluelotus256@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Question regarding a bitbake recipe for libmodbus
+References: <1314714550-29390-1-git-send-email-sherbrec@cit-ec.uni-bielefeld.de>
+In-Reply-To: <1314714550-29390-1-git-send-email-sherbrec@cit-ec.uni-bielefeld.de>
+Subject: Re: [PATCH] gcc: Remove package libstdc++-dev and libgcc-dev from gcc-cross
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,97 +40,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Sep 2011 16:17:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 30 Sep 2011 17:35:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi
-     hope you are doing well. I  am using a ARM based development
-platform.I would appreciate it if you could answer a question I have
-with regard to a
-bitbake recipe for libmodbus:
+On 8/30/2011 7:29 AM, Stefan Herbrechtsmeier wrote:
+> Remove package libstdc++-dev and libgcc-dev from gcc-cross as they
+> already provided by gcc.
+>
+> Commit 8c42351519ece9ed60659a103e624d2e154b3641 add dev packages
+> (libstdc++-dev libgcc-dev) to gcc-cross (gcc-package-cross.inc)
+> which are already part of gcc. The libgcc-dev package both include
+> the libgcc_s.so file which triggers a 'file is already provided by
+> package' error on incremental builds. The libstdc++-dev package have
+> different content and is empty on some archs (armv5te, armv7e).
+> The empty package triggers a 'Cannot satisfy the following
+> dependencies for task-sdk-bare' error. If an empty libstdc++-dev
+> package is generated it triggers a '..../usr/include/c++ not exist'
+> error as this is part of the package from gcc but not gcc-cross.
+>
+> Signed-off-by: Stefan Herbrechtsmeier<sherbrec@cit-ec.uni-bielefeld.de>
 
-I am trying to communicate with a plc which is a modbus slave through a C
-program. The program just opens and closes the connection as I basically
-wanted to test this function first before I proceeded any further:
+this would mean that if you need to use -dev files then you have to 
+build target gcc. Have you looked into possiblity of removing these 
+duplication from target gcc recipe instead ?
 
-# include "stdio.h"
-# include "stdlib.h"
-# include "modbus/modbus.h"
+We may not want to build target gcc. Right now the libstdc++ package
+will come from gcc-cross and dev packages will come from gcc target
+recipes.
 
-#define plc 0x01
+Look into why -dev file is not populated properly instead.
 
-int main(void)
-{
-modbus_param_t mb_param;
-
-modbus_init_rtu(&mb_param,"/dev/ttyS2","none",8,1);
-
-if (modbus_connect(&mb_param) == -1) {
-printf("Not connected\n");
-exit(1);
-}
-
-modbus_close(&mb_param);
-
-}
-
-
-My bitbake recipe is as follows:
-
-DESCRIPTION = "modbuscomm"
-SECTION = "examples"
-LICENSE = "GPL"
-PR = "r12"
-
-SRC_URI = "file://mymodbuscomm.c \
-file://modbus.c \
-file://modbus.h \
-file://modbus-data.c \
-file://modbus-rtu.c \
-file://modbus-rtu.h \
-file://modbus-tcp.c \
-file://modbus-tcp.h"
-
-S = "${WORKDIR}"
-
-do_compile() {
-${CC} ${CFLAGS} ${LDFLAGS} mymodbuscomm.c -o mymodbuscomm
-${CC} ${CFLAGS} ${LDFLAGS} modbus.c -o modbus
-${CC} ${CFLAGS} ${LDFLAGS} modbus-data.c -o modbus-data
-${CC} ${CFLAGS} ${LDFLAGS} modbus-rtu.c -o modbus-rtu
-${CC} ${CFLAGS} ${LDFLAGS} modbus-tcp.c -o modbus-tcp
-
-}
-
-do_install() {
-install -d ${D}${bindir}
-install -m 0755 mymodbuscomm ${D}${bindir}
-install -m 0755 modbus ${D}${bindir}
-install -m 0755 modbus-data ${D}${bindir}
-install -m 0755 modbus-rtu ${D}${bindir}
-install -m 0755 modbus-tcp ${D}${bindir}
-}
-
-
-I am faced with these errors when I bitbake my application:
-
-Log data follows:
-| mymodbuscomm.c: In function 'main':
-| mymodbuscomm.c:11: error: 'modbus_param_t' undeclared (first use in this
-function)
-| mymodbuscomm.c:11: error: (Each undeclared identifier is reported only
-once
-| mymodbuscomm.c:11: error: for each function it appears in.)
-| mymodbuscomm.c:11: error: expected ';' before 'mb_param'
-| mymodbuscomm.c:14: error: 'mb_param' undeclared (first use in this
-function)
-| ERROR: Function do_compile failed
+> ---
+>   recipes/gcc/gcc-4.3.3.inc         |    2 +-
+>   recipes/gcc/gcc-4.5.inc           |    2 +-
+>   recipes/gcc/gcc-package-cross.inc |    4 +---
+>   3 files changed, 3 insertions(+), 5 deletions(-)
+>
+> diff --git a/recipes/gcc/gcc-4.3.3.inc b/recipes/gcc/gcc-4.3.3.inc
+> index 649fdfe..8b6ffe5 100644
+> --- a/recipes/gcc/gcc-4.3.3.inc
+> +++ b/recipes/gcc/gcc-4.3.3.inc
+> @@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+>   DEPENDS = "mpfr gmp"
+>   NATIVEDEPS = "mpfr-native gmp-native"
+>
+> -INC_PR = "r23"
+> +INC_PR = "r24"
+>
+>   SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+>   	file://fedora/gcc43-c++-builtin-redecl.patch;striplevel=0 \
+> diff --git a/recipes/gcc/gcc-4.5.inc b/recipes/gcc/gcc-4.5.inc
+> index 69229ef..2777dca 100644
+> --- a/recipes/gcc/gcc-4.5.inc
+> +++ b/recipes/gcc/gcc-4.5.inc
+> @@ -8,7 +8,7 @@ DEPENDS = "mpfr gmp libmpc libelf"
+>   NATIVEDEPS = "mpfr-native gmp-native libmpc-native"
+>
+>
+> -INC_PR = "r37"
+> +INC_PR = "r38"
+>
+>   SRCREV = "170880"
+>   PV = "4.5"
+> diff --git a/recipes/gcc/gcc-package-cross.inc b/recipes/gcc/gcc-package-cross.inc
+> index 1533069..8d52b6f 100644
+> --- a/recipes/gcc/gcc-package-cross.inc
+> +++ b/recipes/gcc/gcc-package-cross.inc
+> @@ -4,7 +4,7 @@ PACKAGE_STRIP = "no"
+>
+>   SHLIBSDIR = "${STAGING_DIR_TARGET}/shlibs"
+>
+> -PACKAGES = "libgcc libssp libstdc++ libg2c libgfortran libstdc++-dev libgcc-dev"
+> +PACKAGES = "libgcc libssp libstdc++ libg2c libgfortran"
+>
+>   # Called from within gcc-cross, so libdir is set wrong
+>   FILES_libg2c = "${target_libdir}/libg2c.so.*"
+> @@ -14,11 +14,9 @@ FILES_libssp = "${target_libdir}/libssp.so.*"
+>   FILES_libgfortran = "${target_libdir}/libgfortran.so.*"
+>
+>   FILES_libgcc = "${target_base_libdir}/libgcc_s.so.1"
+> -FILES_libgcc-dev = "${target_libdir}/libgcc_s.so"
+>
+>   FILES_libstdc++ = "${target_libdir}/libstdc++.so.*"
+>
+> -FILES_libstdc++-dev = "${target_datadir}/gdb/auto-load/${libdir}/libstdc++.so.*-gdb.py*"
+>   do_install () {
+>   	oe_runmake 'DESTDIR=${D}' install
+>   	install -d ${D}${target_base_libdir}
 
 
-I would very much appreciate it if you could let me know if there is
-something wrong with my bitbake recipe or suggest any changes to the recipe.
-Thank you and have a great day.
-
-                              Best Regards,
-                               JM
 
