@@ -1,27 +1,33 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dbaryshkov@gmail.com>) id 1RAgMk-0001Kh-F6
+	(envelope-from <martin.jansa@gmail.com>) id 1RAh5F-0001xF-Vy
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Oct 2011 13:07:22 +0200
-Received: by vwe42 with SMTP id 42so2797299vwe.6
+	Mon, 03 Oct 2011 13:53:22 +0200
+Received: by bke11 with SMTP id 11so5256299bke.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Oct 2011 04:01:49 -0700 (PDT)
+	Mon, 03 Oct 2011 04:47:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=B2WEdL5qL+yBIb2X7ElMcpUi+mysumJnw7zfk0Bi/vM=;
-	b=GjlB0F3yseXq4aSwKCFL86whkMQ+D8vJxR52t0XTX/KKwWJyw2ZetmDH9icwKFtZlB
-	z/Che3npxkfMCHXQE6Xp/p2FWuk+Z/2i51EWJ5/anerhQJwKsHs3D0n/NsIjJnAjKIgF
-	sNOLocbMyrVWgna6fegN6DyUh+MvMU/O+bc0w=
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=GD76ywQaz/Jo1QQipx5bwnpkJeAvXW+Ts4uQ/lWEhTw=;
+	b=aHxmdnTHkPCKaIhdX9ckFXUkavGNJLo7SMYKXvTZtJtDQ62sDvwX+ySV0zFVvVGBzl
+	Flplaj4QV2G18AdYbnZo+tJYaeKDGMwsb/+xp20Y2sZB7eiDtT9spnI9x3UZEexWlPur
+	FfkwnmYhzNXn4NyHKOd/078sHnrXzyPj00GMs=
+Received: by 10.204.136.194 with SMTP id s2mr6719797bkt.23.1317642469102;
+	Mon, 03 Oct 2011 04:47:49 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id l3sm5292870bkv.12.2011.10.03.04.47.46
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 03 Oct 2011 04:47:47 -0700 (PDT)
+Date: Mon, 3 Oct 2011 13:47:41 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20111003114741.GO7364@jama.jama.net>
+References: <cover.1317387144.git.Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-Received: by 10.52.94.112 with SMTP id db16mr13563903vdb.497.1317639709315;
-	Mon, 03 Oct 2011 04:01:49 -0700 (PDT)
-Received: by 10.52.181.226 with HTTP; Mon, 3 Oct 2011 04:01:49 -0700 (PDT)
-Date: Mon, 3 Oct 2011 15:01:49 +0400
-Message-ID: <CALT56yPSLXF13FjunSPOYtMHNpgaXD1zQuHicmhiowR1rSGeow@mail.gmail.com>
-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-To: openembedded-core <openembedded-core@openembedded.org>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: oe-core/meta-oe PN clash
+In-Reply-To: <cover.1317387144.git.Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][meta-efl][PATCH 00/15] Pull request #23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,20 +41,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Oct 2011 11:07:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 03 Oct 2011 11:53:22 -0000
+X-Groupsio-MsgNum: 34545
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="GEn4szYucjS2InE7"
+Content-Disposition: inline
 
-Hello,
+--GEn4szYucjS2InE7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I've stumbled upon two different packages with same PN (screenshot):
-One is a sato-related screenshoter from oe-core,
-second is a e17 screenshot module from meta-efl.
+On Fri, Sep 30, 2011 at 02:56:39PM +0200, Martin Jansa wrote:
+> Hi,
+>=20
+> this patchset depends on oe-core changes from:
+> http://lists.linuxtogo.org/pipermail/openembedded-core/2011-September/010=
+393.html
+> but first few patches from that patchset are already in master-next and w=
+e need to=20
+> be ready to adapt.
 
-I'd propose to rename a sato screenshot package, since e17 one
-depends on PN being equal to internal module name in several places.
+I've sent another patchset to oe-core which renames xserver-xf86 to
+xserver-xorg as we're used to call it.. so I'll resend consolidated pull
+request with new xorg/glib/poppler changes.
 
--- 
-With best wishes
-Dmitry
+Regards,
 
+--GEn4szYucjS2InE7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
+
+iEYEARECAAYFAk6JoN0ACgkQN1Ujt2V2gBzDIgCffDZqtnlcKZKWFmLacYlru5bU
+/EkAoKYd7HAaz18kaTzNTFb/+TZEFe6n
+=+lAG
+-----END PGP SIGNATURE-----
+
+--GEn4szYucjS2InE7--
